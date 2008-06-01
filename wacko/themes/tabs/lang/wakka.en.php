@@ -1,0 +1,6 @@
+<?php
+$themeResource = array(
+  "" => "",
+
+);
+?>

@@ -1,0 +1,3 @@
+<IfModule mod_charset.c>
+    CharsetSourceEnc windows-1251
+</IfModule>
