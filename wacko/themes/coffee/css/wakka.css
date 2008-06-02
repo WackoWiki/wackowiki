@@ -4,7 +4,7 @@
 label {cursor:pointer; cursor:hand;}
 
 dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
-* html dfn { \background: url(javascript:DOTS) repeat-x bottom left; }
+* html dfn { background: url(javascript:DOTS) repeat-x bottom left; }
 
 /* Links */
 

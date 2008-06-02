@@ -98,7 +98,7 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
  this.addButton("help","Help & About","","document.getElementById('" + this.id + "')._owner.help");
  this.addButton("customhtml",'<td><div style="font:12px Arial;text-decoration:underline; padding:4px;" id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
             + 'onmouseout=\'this.className="btn-";\' class="btn-" '
-            + 'onclick="this.className=\'btn-pressed\';window.open(\'http://wackowiki.de/WackoDocEnglish/Formatting\');" '
+            + 'onclick="this.className=\'btn-pressed\';window.open(\'http://wackowiki.de/Archiv/DocEnglish/Formatting\');" '
             + ' title="Help on Wiki-formatting">Help'
             + '</div></td>');
 
