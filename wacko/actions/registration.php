@@ -5,7 +5,7 @@
 // is user trying to confirm email, login or register?
 if ($_REQUEST["confirm"])
 {
-	if ($this->LoadSingle("select * from ".$this->config["user_table"]." where email_confirm = '".
+	if ($this->LoadSingle("SELECT name, email, email_confirm FROM ".$this->config["user_table"]." WHERE email_confirm = '".
 	quote($this->dblink, $_REQUEST["confirm"])."'"))
 	{
 		$this->Query("UPDATE ".$this->config["user_table"]." SET email_confirm = '' WHERE email_confirm = '".
@@ -13,6 +13,7 @@ if ($_REQUEST["confirm"])
 		echo "<br /><br /><center>".$this->GetResourceValue("EmailConfirmed")."</center><br /><br />";
 	}
 	else
+	//TODO: add case "EmailAlreadyConfirmed" -> check for empty email_confirm field
 	echo "<br /><br /><center>".$this->GetResourceValue("EmailNotConfirmed")."</center><br /><br />";
 }
 else if ($_REQUEST["action"] == "login")
@@ -43,7 +44,7 @@ else if ($_REQUEST["action"] == "login")
 			$confirm = md5(rand().$email.rand());
 			$more = $this->ComposeOptions(array("send_watchmail"=>"Y",));
 
-			$this->Query("insert into ".$this->config["user_table"]." set ".
+			$this->Query("INSERT INTO ".$this->config["user_table"]." SET ".
           "signuptime = now(), ".
           "name = '".quote($this->dblink, $name)."', ".
           "email = '".quote($this->dblink, $email)."', ".
