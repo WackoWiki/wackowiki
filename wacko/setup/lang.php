@@ -1,24 +1,25 @@
-<form action="<?php echo myLocation() ?>?installAction=default" method="post">
-<table>
-
-  <tr><td></td><td><strong><?php echo $lang["title"];?></strong></td></tr>
-
-  <tr><td></td><td><br /><strong><?php echo $lang["langConf"];?></strong></td></tr>
-  <tr><td></td><td><?php echo $lang["langDesc"];?></td></tr>
-  <tr><td align="right" nowrap><?php echo $lang["lang"];?>:</td><td>
-  <select name="config[language]">
+         <form action="<?php echo myLocation() ?>?installAction=version-check" method="post">
+            <p><?php echo $lang["LangDesc"];?></p>
 <?php
-$handle=opendir("setup/lang");
-while (false!==($file = readdir($handle))) {
-  if ($file != "." && $file != ".." && !is_dir($file) && 1==preg_match("/^installer\.(.*?)\.php$/",$file,$match)) {
-   echo "<option value=\"".$match[1]."\" ".($wakkaConfig["language"]==$match[1]?"selected=\"selected\"":"").">".$match[1]."</option>\n";
-  }
-}
-closedir($handle);
-?>
-  </select>
-  </td></tr>
+   // http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+   $lang_codes = array();
+   $lang_codes["bg"] = "Bulgarian";
+   $lang_codes["bg"] = "Bulgarian";
+   $lang_codes["da"] = "Danish";
+   $lang_codes["de"] = "German";
+   $lang_codes["ee"] = "Ewe";
+   $lang_codes["en"] = "English";
+   $lang_codes["es"] = "Spanish";
+   $lang_codes["fr"] = "French";
+   $lang_codes["it"] = "Italian";
+   $lang_codes["nl"] = "Dutch";
+   $lang_codes["pl"] = "Polish";
+   $lang_codes["ru"] = "Russian";
 
-  <tr><td></td><td><input type="submit" value="<?php echo $lang["Continue"];?>" /></td></tr>
-</table>
-</form>
+   foreach($lang_codes as $key => $value)
+      {
+         echo "               <input type=\"radio\" id=\"lang_".$key."\" name=\"config[language]\" value=\"".$key."\"".($wakkaConfig["language"] == $key ? "checked=\"checked\"" : "")." class=\"input_lang\"><label for=\"lang_".$key."\" class=\"label_lang\">".$value." (".$key.")</label>\n<br />\n";
+      }
+?>
+            <input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />
+         </form>
