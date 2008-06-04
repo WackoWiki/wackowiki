@@ -435,17 +435,17 @@ class Wacko
 		if (!$page)
 		{
 			if ($supertagged) {
-				$page = $this->LoadSingle("select ".$what." from ".$this->config["table_prefix"]."pages where supertag='".quote($this->dblink, $tag)."' and latest = 'Y' limit 1");
+				$page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."pages WHERE supertag='".quote($this->dblink, $tag)."' AND latest = 'Y' LIMIT 1");
 				if ($time && $time!=$page["time"]) {
 					$this->CachePage($page, $metadataonly);
-					$page = $this->LoadSingle("select ".$what." from ".$this->config["table_prefix"]."revisions where supertag='".quote($this->dblink, $tag)."' and time = '".quote($this->dblink, $time)."' limit 1");
+					$page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."revisions WHERE supertag='".quote($this->dblink, $tag)."' AND time = '".quote($this->dblink, $time)."' limit 1");
 				}
 			}
 			else {
-				$page = $this->LoadSingle("select ".$what." from ".$this->config["table_prefix"]."pages where tag='".quote($this->dblink, $tag)."' and latest = 'Y' limit 1");
+				$page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."pages WHERE tag='".quote($this->dblink, $tag)."' AND latest = 'Y' LIMIT 1");
 				if ($time && $time!=$page["time"]) {
 					$this->CachePage($page, $metadataonly);
-					$page = $this->LoadSingle("select ".$what." from ".$this->config["table_prefix"]."revisions where tag='".quote($this->dblink, $tag)."' and time = '".quote($this->dblink, $time)."' limit 1");
+					$page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."revisions WHERE tag='".quote($this->dblink, $tag)."' AND time = '".quote($this->dblink, $time)."' LIMIT 1");
 				}
 			}
 		}// cache result
@@ -496,7 +496,7 @@ class Wacko
 
 	function CacheLinks()
 	{
-		if ($links = $this->LoadAll("select * from ".$this->config["table_prefix"]."links where from_tag='".quote($this->dblink, $this->GetPageTag())."'"))
+		if ($links = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."links WHERE from_tag='".quote($this->dblink, $this->GetPageTag())."'"))
 		{
 			$cl = count($links);
 			for ($i=0; $i<$cl; $i++)
@@ -525,7 +525,7 @@ class Wacko
 		$spages_str=substr($spages_str,0,strlen($spages_str)-2);
 		$pages_str=substr($pages_str,0,strlen($pages_str)-2);
 
-		if ($links = $this->LoadAll("select ".$this->pages_meta." from ".$this->config["table_prefix"]."pages where supertag in (".$spages_str.")"))
+		if ($links = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE supertag IN (".$spages_str.")"))
 		for ($i=0; $i<count($links); $i++)
 		{
 			$this->CachePage($links[$i], 1);
@@ -539,7 +539,7 @@ class Wacko
 		}
 
 		//   unset($exists);
-		if ($read_acls = $this->LoadAll("select * from ".$this->config["table_prefix"]."acls where BINARY page_tag in (".$pages_str.") and privilege = 'read'"))
+		if ($read_acls = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."acls WHERE BINARY page_tag IN (".$pages_str.") AND privilege = 'read'"))
 		for ($i=0; $i<count($read_acls); $i++)
 		{
 			$this->CacheACL($read_acls[$i]["supertag"], "read", 1, $read_acls[$i]);
@@ -577,49 +577,49 @@ class Wacko
 	function LoadPageById($id)
 	{
 		if ($id!="-1")
-		return $this->LoadSingle("select * from ".$this->config["table_prefix"]."revisions where id = '".quote($this->dblink, $id)."' limit 1");
+		return $this->LoadSingle("SELECT * FROM ".$this->config["table_prefix"]."revisions WHERE id = '".quote($this->dblink, $id)."' LIMIT 1");
 		else
-		return $this->LoadSingle("select * from ".$this->config["table_prefix"]."pages where tag='".quote($this->dblink, $this->GetPageTag())."' and latest='Y' limit 1");
+		return $this->LoadSingle("SELECT * FROM ".$this->config["table_prefix"]."pages WHERE tag='".quote($this->dblink, $this->GetPageTag())."' AND latest='Y' LIMIT 1");
 	}
 
 	function LoadRevisions($page)
 	{
-		$rev = $this->LoadAll("select ".$this->pages_meta." from ".$this->config["table_prefix"]."revisions where tag='".quote($this->dblink, $page)."' order by time desc");
-		if (is_array($rev)) array_unshift($rev, $this->LoadSingle("select ".$this->pages_meta." from ".$this->config["table_prefix"]."pages where tag='".quote($this->dblink, $page)."' order by time desc  limit 1"));
-		else $rev[] = $this->LoadSingle("select ".$this->pages_meta." from ".$this->config["table_prefix"]."pages where tag='".quote($this->dblink, $page)."' order by time desc  limit 1");
+		$rev = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."revisions WHERE tag='".quote($this->dblink, $page)."' ORDER BY time DESC");
+		if (is_array($rev)) array_unshift($rev, $this->LoadSingle("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE tag='".quote($this->dblink, $page)."' ORDER BY time DESC  LIMIT 1"));
+		else $rev[] = $this->LoadSingle("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE tag='".quote($this->dblink, $page)."' ORDER BY time DESC  LIMIT 1");
 		return $rev;
 	}
 
 	function LoadPagesLinkingTo($tag, $for="")
 	{
-		return $this->LoadAll("select from_tag as tag from ".$this->config["table_prefix"]."links where ".
-		($for?"from_tag like '".quote($this->dblink, $for)."/%' and ":"").
+		return $this->LoadAll("SELECT from_tag AS tag FROM ".$this->config["table_prefix"]."links WHERE ".
+		($for?"from_tag LIKE '".quote($this->dblink, $for)."/%' AND ":"").
    "((to_supertag='' AND to_tag='".quote($this->dblink, $tag)."') OR to_supertag='".quote($this->dblink, $this->NpJTranslit($tag))."')".
-   " order by tag");
+   " ORDER BY tag");
 	}
 
 	function LoadRecentlyChanged($limit=70, $for="", $from="")
 	{
 		$limit= (int) $limit;
 		if ($pages =
-		$this->LoadAll("select ".$this->pages_meta." from ".$this->config["table_prefix"]."pages ".
-       "where latest = 'Y' and comment_on = '' ".($from?"and time<='".quote($this->dblink, $from)." 23:59:59'":"").
-		($for?"and supertag like '".quote($this->dblink, $this->NpjTranslit($for))."/%' ":"").
-       "order by time desc  limit ".$limit))
+		$this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages ".
+       "WHERE latest = 'Y' AND comment_on = '' ".($from?"AND time<='".quote($this->dblink, $from)." 23:59:59'":"").
+		($for?"AND supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' ":"").
+       "ORDER BY time DESC  LIMIT ".$limit))
 		{
 			foreach ($pages as $page)
 			{
 				$this->CachePage($page, 1);
 			}
 
-			if ($read_acls = $this->LoadAll("select a.* "
-			."from ".$this->config["table_prefix"]."acls a, ".$this->config["table_prefix"]."pages p "
-			."where p.latest = 'Y' "
-			."and p.comment_on = '' "
-			."and a.supertag = p.supertag "
-			.($for?"and p.supertag like '".quote($this->dblink, $this->NpjTranslit($for))."/%' ":"")
-			."and privilege = 'read' "
-			."order by time desc limit ".$limit))
+			if ($read_acls = $this->LoadAll("SELECT a.* "
+			."FROM ".$this->config["table_prefix"]."acls a, ".$this->config["table_prefix"]."pages p "
+			."WHERE p.latest = 'Y' "
+			."AND p.comment_on = '' "
+			."AND a.supertag = p.supertag "
+			.($for?"AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' ":"")
+			."AND privilege = 'read' "
+			."ORDER BY time DESC LIMIT ".$limit))
 			for ($i=0; $i<count($read_acls); $i++) {
 				$this->CacheACL($read_acls[$i]["supertag"], "read", 1,$read_acls[$i]);
 			}
@@ -631,24 +631,24 @@ class Wacko
 	function LoadRecentlyComment($limit=70, $for="", $from="") {
 		$limit= (int) $limit;
 		if ($pages =
-		$this->LoadAll("select ".$this->pages_meta.",`body_r` from ".$this->config["table_prefix"]."pages ".
-       "where latest = 'Y' and comment_on != '' ".($from?"and time<='".quote($this->dblink, $from)." 23:59:59'":"").
-		($for?"and supertag like '".quote($this->dblink, $this->NpjTranslit($for))."/%' ":"").
-       "order by time desc  limit ".$limit))
+		$this->LoadAll("SELECT ".$this->pages_meta.",`body_r` FROM ".$this->config["table_prefix"]."pages ".
+       "WHERE latest = 'Y' AND comment_on != '' ".($from?"AND time<='".quote($this->dblink, $from)." 23:59:59'":"").
+		($for?"AND supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' ":"").
+       "ORDER BY time DESC  LIMIT ".$limit))
 		{
 			foreach ($pages as $page)
 			{
 				$this->CachePage($page, 1);
 			}
 
-			if ($read_acls = $this->LoadAll("select a.* "
-			."from ".$this->config["table_prefix"]."acls a, ".$this->config["table_prefix"]."pages p "
-			."where p.latest = 'Y' "
-			."and p.comment_on = '' "
-			."and a.supertag = p.supertag "
-			.($for?"and p.supertag like '".quote($this->dblink, $this->NpjTranslit($for))."/%' ":"")
-			."and privilege = 'read' "
-			."order by time desc limit ".$limit))
+			if ($read_acls = $this->LoadAll("SELECT a.* "
+			."FROM ".$this->config["table_prefix"]."acls a, ".$this->config["table_prefix"]."pages p "
+			."WHERE p.latest = 'Y' "
+			."AND p.comment_on = '' "
+			."AND a.supertag = p.supertag "
+			.($for?"AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' ":"")
+			."AND privilege = 'read' "
+			."ORDER BY time DESC LIMIT ".$limit))
 			for ($i=0; $i<count($read_acls); $i++) {
 				$this->CacheACL($read_acls[$i]["supertag"], "read", 1,$read_acls[$i]);
 			}
@@ -660,39 +660,39 @@ class Wacko
 	function LoadWantedPages($for="")
 	{
 		$pref = $this->config["table_prefix"];
-		$sql = "select distinct ".$pref."links.to_tag as tag,count(".$pref."links.from_tag) as count ".
-    "from ".$pref."links left join ".$pref."pages on ".
+		$sql = "SELECT DISTINCT ".$pref."links.to_tag AS tag,count(".$pref."links.from_tag) AS count ".
+    "FROM ".$pref."links LEFT JOIN ".$pref."pages ON ".
     "((".$pref."links.to_tag = ".$pref."pages.tag AND ".$pref."links.to_supertag='') ".
     " OR ".$pref."links.to_supertag=".$pref."pages.supertag) ".
-    "where ".($for?$pref."links.to_tag like '".quote($this->dblink, $for)."/%' and ":"").
-		$pref."pages.tag is NULL group by tag order by count desc, tag asc limit 200";
+    "WHERE ".($for?$pref."links.to_tag LIKE '".quote($this->dblink, $for)."/%' AND ":"").
+		$pref."pages.tag is NULL GROUP BY tag ORDER BY count DESC, tag asc LIMIT 200";
 		return $this->LoadAll($sql);
 	}
 
 	function LoadOrphanedPages($for="")
 	{
 		$pref = $this->config["table_prefix"];
-		$sql = "select distinct tag from ".$pref."pages left join ".$pref."links on ".
+		$sql = "SELECT DISTINCT tag FROM ".$pref."pages LEFT JOIN ".$pref."links ON ".
 		//     $pref."pages.tag = ".$pref."links.to_tag where ".
     "((".$pref."links.to_tag = ".$pref."pages.tag AND ".$pref."links.to_supertag='') ".
-    " OR ".$pref."links.to_supertag=".$pref."pages.supertag) where ".
-		($for?$pref."pages.tag like '".quote($this->dblink, $for)."/%' and ":"").
-		$pref."links.to_tag is NULL and ".$pref."pages.comment_on = '' ".
-    "order by tag limit 200";
+    " OR ".$pref."links.to_supertag=".$pref."pages.supertag) WHERE ".
+		($for?$pref."pages.tag LIKE '".quote($this->dblink, $for)."/%' AND ":"").
+		$pref."links.to_tag is NULL AND ".$pref."pages.comment_on = '' ".
+    "ORDER BY tag LIMIT 200";
 		return $this->LoadAll($sql);
 	}
 
-	function LoadPageTitles() { return $this->LoadAll("select distinct tag from ".$this->config["table_prefix"]."pages order by tag"); }
-	function LoadAllPages() { return $this->LoadAll("select ".$this->pages_meta." from ".$this->config["table_prefix"]."pages where latest = 'Y' and LEFT(supertag,7)!='comment' order by BINARY tag limit 1000"); }
+	function LoadPageTitles() { return $this->LoadAll("SELECT DISTINCT tag FROM ".$this->config["table_prefix"]."pages ORDER BY tag"); }
+	function LoadAllPages() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE latest = 'Y' AND LEFT(supertag,7)!='comment' ORDER BY BINARY tag LIMIT 1000"); }
 
 	function FullTextSearch($phrase,$filter)
 	{
-		return $this->LoadAll("select ".$this->pages_meta." from ".$this->config["table_prefix"].
-                        "pages where latest = 'Y' and (( match(body) against('".quote($this->dblink, $phrase)."') ".
-                        "or lower(tag) like lower('%".quote($this->dblink, $phrase)."%')) ".($filter?"and comment_on=''":"")." )");
+		return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"].
+                        "pages WHERE latest = 'Y' AND (( match(body) against('".quote($this->dblink, $phrase)."') ".
+                        "OR lower(tag) LIKE lower('%".quote($this->dblink, $phrase)."%')) ".($filter?"AND comment_on=''":"")." )");
 	}
 
-	function TagSearch($phrase) { return $this->LoadAll("select ".$this->pages_meta." from ".$this->config["table_prefix"]."pages where latest = 'Y' and lower(tag) like binary lower('%".quote($this->dblink, $phrase)."%') order by supertag"); }
+	function TagSearch($phrase) { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE latest = 'Y' AND lower(tag) LIKE binary lower('%".quote($this->dblink, $phrase)."%') ORDER BY supertag"); }
 
 	function SendMail($email,$subject, $message) {
 		$headers = "From: =?". $this->GetCharset() ."?B?". base64_encode($this->GetConfigValue("wakka_name")) ."?= <".$this->GetConfigValue("admin_email").">\r\n";
@@ -796,7 +796,7 @@ class Wacko
 				// current user is owner; if user is logged in! otherwise, no owner.
 				if ($this->GetUser()) $owner = $user;
 
-				$this->Query("insert into ".$this->config["table_prefix"]."pages set ".
+				$this->Query("INSERT INTO ".$this->config["table_prefix"]."pages SET ".
 				($comment_on ? "comment_on = '".quote($this->dblink, $comment_on)."', " : "").
 				($comment_on ? "super_comment_on = '".quote($this->dblink, $this->NpjTranslit($comment_on))."', " : "").
          "time = now(), ".
@@ -819,7 +819,7 @@ class Wacko
 
 				if ($comment_on) {
 					$username = $this->GetUserName();
-					$Watchers = $this->LoadAll("select distinct user from ".$this->config["table_prefix"]."pagewatches where tag = '".quote($this->dblink, $comment_on)."'");
+					$Watchers = $this->LoadAll("SELECT DISTINCT user FROM ".$this->config["table_prefix"]."pagewatches WHERE tag = '".quote($this->dblink, $comment_on)."'");
 					foreach ($Watchers as $Watcher)
 					if ($Watcher["user"] !=  $username)
 					{
@@ -829,7 +829,7 @@ class Wacko
 
 						if ($this->HasAccess("read", $comment_on, $Watcher["user"]))
 						{
-							$User = $this->LoadSingle("select email, lang, more, email_confirm from " .$this->config["user_table"]." where name = '".quote($this->dblink, $Watcher["user"])."'");
+							$User = $this->LoadSingle("SELECT email, lang, more, email_confirm FROM " .$this->config["user_table"]." WHERE name = '".quote($this->dblink, $Watcher["user"])."'");
 							$User["options"] = $this->DecomposeOptions($User["more"]);
 							if ($User["email_confirm"]=="" && $User["options"]["send_watchmail"]!="N")
 							{
@@ -861,11 +861,11 @@ class Wacko
 				if ($oldPage['body'] != $body)
 				{
 					// move revision
-					$this->Query("insert into ".$this->config["table_prefix"]."revisions (tag, time, body, owner, user, latest, handler, comment_on, supertag, keywords, description) ".
-            "select tag, time, body, owner, user, 'N', handler, comment_on, supertag, keywords, description from ".$this->config["table_prefix"]."pages WHERE tag = '".quote($this->dblink, $tag)."' and latest='Y' LIMIT 1");
+					$this->Query("INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, owner, user, latest, handler, comment_on, supertag, keywords, description) ".
+            "SELECT tag, time, body, owner, user, 'N', handler, comment_on, supertag, keywords, description FROM ".$this->config["table_prefix"]."pages WHERE tag = '".quote($this->dblink, $tag)."' AND latest='Y' LIMIT 1");
 
 					// add new revision
-					$this->Query("update ".$this->config["table_prefix"]."pages set ".
+					$this->Query("UPDATE ".$this->config["table_prefix"]."pages SET ".
 					($comment_on ? "comment_on = '".quote($this->dblink, $comment_on)."', " : "").
 					($comment_on ? "super_comment_on = '".quote($this->dblink, $this->NpjTranslit($comment_on))."', " : "").
           "time = now(), ".
@@ -875,11 +875,11 @@ class Wacko
           "body = '".quote($this->dblink, $body)."', ".
           "body_toc = '".quote($this->dblink, $body_toc)."', ".
           "body_r = '".quote($this->dblink, $body_r)."' ".
-          "where tag = '".quote($this->dblink, $tag)."' and latest='Y' LIMIT 1");
+          "WHERE tag = '".quote($this->dblink, $tag)."' AND latest='Y' LIMIT 1");
 				}
 
 				$username = $this->GetUserName();
-				$Watchers = $this->LoadAll("select distinct user from ".$this->config["table_prefix"]."pagewatches where tag = '".quote($this->dblink, $tag)."'");
+				$Watchers = $this->LoadAll("SELECT DISTINCT user FROM ".$this->config["table_prefix"]."pagewatches WHERE tag = '".quote($this->dblink, $tag)."'");
 				if ($Watchers)
 				{
 					foreach ($Watchers as $Watcher)
@@ -891,7 +891,7 @@ class Wacko
 						$lang = $Watcher["lang"];
 						if ($this->HasAccess("read", $tag, $Watcher["user"]))
 						{
-							$User = $this->LoadSingle("select email, lang, more, email_confirm from " .$this->config["user_table"]." where name = '".quote($this->dblink, $Watcher["user"])."'");
+							$User = $this->LoadSingle("SELECT email, lang, more, email_confirm FROM " .$this->config["user_table"]." WHERE name = '".quote($this->dblink, $Watcher["user"])."'");
 							$User["options"] = $this->DecomposeOptions($User["more"]);
 							if ($User["email_confirm"]=="" && $User["options"]["send_watchmail"]!="N")
 							{
@@ -903,7 +903,7 @@ class Wacko
 								$this->GetResourceValue("Someone changed this page:",$lang)."<br />  ";//* <a href=\"".$this->Href("",$tag,"")."\">".$this->Href("",$tag,"")."</a><br />";
 								$_GET["fastdiff"] = 1;
 								$_GET["a"] = -1;
-								$page = $this->LoadSingle("select ".$this->pages_meta." from ".$this->config["table_prefix"]."revisions where tag='".quote($this->dblink, $tag)."' order by time desc");
+								$page = $this->LoadSingle("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."revisions WHERE tag='".quote($this->dblink, $tag)."' ORDER BY time DESC");
 								$_GET["b"] = $page["id"];
 								$message .= "<hr />".$this->IncludeBuffered("handlers/page/diff.php", "oops")."<hr />";
 								$message .= "<br />".$this->GetResourceValue("MailGoodbye",$lang)." ".$this->GetConfigValue("wakka_name");
@@ -929,11 +929,11 @@ class Wacko
 		if ($this->UserIsOwner($tag))
 		{
 			// update
-			$this->Query("update ".$this->config["table_prefix"]."pages set ".
+			$this->Query("UPDATE ".$this->config["table_prefix"]."pages SET ".
         "lang = '".quote($this->dblink, $metadata["lang"])."', ".
         "keywords = '".quote($this->dblink, $metadata["keywords"])."', ".
         "description = '".quote($this->dblink, $metadata["description"])."' ".
-        "where tag = '".quote($this->dblink, $tag)."' and latest='Y' LIMIT 1");
+        "WHERE tag = '".quote($this->dblink, $tag)."' AND latest='Y' LIMIT 1");
 		}
 		return true;
 	}
@@ -1473,7 +1473,7 @@ class Wacko
 	function WriteLinkTable()
 	{
 		// delete old link table
-		$this->Query("delete from ".$this->config["table_prefix"]."links where from_tag = '".quote($this->dblink, $this->GetPageTag())."'");
+		$this->Query("DELETE FROM ".$this->config["table_prefix"]."links WHERE from_tag = '".quote($this->dblink, $this->GetPageTag())."'");
 		if ($linktable = $this->GetLinkTable())
 		{
 			$from_tag = quote($this->dblink, $this->GetPageTag());
@@ -1486,7 +1486,7 @@ class Wacko
 					$written[$lower_to_tag] = 1;
 				}
 			}
-			$this->Query("insert into ".$this->config["table_prefix"]."links (from_tag, to_tag, to_supertag) VALUES ".rtrim($query,","));
+			$this->Query("INSERT INTO ".$this->config["table_prefix"]."links (from_tag, to_tag, to_supertag) VALUES ".rtrim($query,","));
 		}
 	}
 
@@ -1611,7 +1611,7 @@ class Wacko
 		// check if it's coming from another site
 		if ($referrer && !preg_match("/^".preg_quote($this->GetConfigValue("base_url"), "/")."/", $referrer))
 		{
-			$this->Query("insert into ".$this->config["table_prefix"]."referrers set ".
+			$this->Query("INSERT INTO ".$this->config["table_prefix"]."referrers SET ".
        "page_tag = '".quote($this->dblink, $tag)."', ".
        "referrer = '".quote($this->dblink, $referrer)."', ".
        "time = now()");
@@ -1620,7 +1620,7 @@ class Wacko
 
 	function LoadReferrers($tag = "")
 	{
-		return $this->LoadAll("select referrer, count(referrer) as num from ".$this->config["table_prefix"]."referrers ".($tag = trim($tag) ? "where page_tag = '".quote($this->dblink, $tag)."'" : "")." group by referrer order by num desc");
+		return $this->LoadAll("SELECT referrer, count(referrer) AS num FROM ".$this->config["table_prefix"]."referrers ".($tag = trim($tag) ? "WHERE page_tag = '".quote($this->dblink, $tag)."'" : "")." GROUP BY referrer ORDER BY num DESC");
 	}
 
 	// PLUGINS
@@ -1660,13 +1660,13 @@ class Wacko
 	// USERS
 	function LoadUser($name, $password = 0)
 	{
-		$user = $this->LoadSingle("select * from ".$this->config["user_table"]." where name = '".
-		quote($this->dblink, $name)."' ".($password === 0 ? "" : "and password = '".quote($this->dblink, $password)."'")." limit 1");
+		$user = $this->LoadSingle("SELECT * FROM ".$this->config["user_table"]." WHERE name = '".
+		quote($this->dblink, $name)."' ".($password === 0 ? "" : "AND password = '".quote($this->dblink, $password)."'")." LIMIT 1");
 		if ($user) $user["options"] = $this->DecomposeOptions($user["more"]);
 		return $user;
 	}
 
-	function LoadUsers() { return $this->LoadAll("select * from ".$this->config["user_table"]." order by binary name"); }
+	function LoadUsers() { return $this->LoadAll("SELECT * FROM ".$this->config["user_table"]." ORDER BY binary name"); }
 
 	function GetUserName()
 	{
@@ -1730,7 +1730,7 @@ class Wacko
 	}
 
 	// COMMENTS
-	function LoadComments($tag) { return $this->LoadAll("select * from ".$this->config["table_prefix"]."pages where comment_on = '".quote($this->dblink, $tag)."' and latest = 'Y' order by time"); }
+	function LoadComments($tag) { return $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."pages WHERE comment_on = '".quote($this->dblink, $tag)."' AND latest = 'Y' ORDER BY time"); }
 
 	// ACCESS CONTROL
 	function IsAdmin()
@@ -1767,7 +1767,7 @@ class Wacko
 		if (!$this->LoadUser($user)) return;
 
 		// updated latest revision with new owner
-		$this->Query("update ".$this->config["table_prefix"]."pages set owner = '".quote($this->dblink, $user)."' where tag = '".quote($this->dblink, $tag)."' and latest = 'Y' limit 1");
+		$this->Query("UPDATE ".$this->config["table_prefix"]."pages SET owner = '".quote($this->dblink, $user)."' WHERE tag = '".quote($this->dblink, $tag)."' AND latest = 'Y' LIMIT 1");
 	}
 
 	function LoadAcl($tag, $privilege, $useDefaults = 1)
@@ -1781,14 +1781,14 @@ class Wacko
 			if (!$acl)
 			{
 
-				$acl = $this->LoadSingle("select * from ".$this->config["table_prefix"]."acls where ".
+				$acl = $this->LoadSingle("SELECT * FROM ".$this->config["table_prefix"]."acls WHERE ".
                                 "supertag = '".quote($this->dblink, $supertag)."' ".
-                                "and privilege = '".quote($this->dblink, $privilege)."' limit 1");
+                                "AND privilege = '".quote($this->dblink, $privilege)."' LIMIT 1");
 				if (!$acl)
 				{
-					$acl = $this->LoadSingle("select * from ".$this->config["table_prefix"]."acls where ".
+					$acl = $this->LoadSingle("SELECT * FROM ".$this->config["table_prefix"]."acls WHERE ".
                                   "page_tag = '".quote($this->dblink, $tag)."' ".
-                                  "and privilege = '".quote($this->dblink, $privilege)."' limit 1");
+                                  "AND privilege = '".quote($this->dblink, $privilege)."' LIMIT 1");
 					/*        if ($acl)
 					 {
 					 $this->Query( "update ".$this->config["table_prefix"]."acls ".
@@ -1815,10 +1815,10 @@ class Wacko
 
 		$supertag = $this->NpjTranslit($tag);
 		if ($this->LoadAcl($tag, $privilege, 0))
-		$this->Query("update ".$this->config["table_prefix"]."acls set list = '".
-		quote($this->dblink, trim(str_replace("\r", "", $list)))."' where supertag = '".quote($this->dblink, $supertag)."' and privilege = '".quote($this->dblink, $privilege)."' ");
+		$this->Query("UPDATE ".$this->config["table_prefix"]."acls SET list = '".
+		quote($this->dblink, trim(str_replace("\r", "", $list)))."' WHERE supertag = '".quote($this->dblink, $supertag)."' AND privilege = '".quote($this->dblink, $privilege)."' ");
 		else
-		$this->Query("insert into ".$this->config["table_prefix"]."acls set list = '".
+		$this->Query("INSERT INTO ".$this->config["table_prefix"]."acls SET list = '".
 		quote($this->dblink, trim(str_replace("\r", "", $list)))."', ".
          "supertag = '".quote($this->dblink, $supertag)."', ".
          "page_tag = '".quote($this->dblink, $tag)."', ".
@@ -1827,44 +1827,44 @@ class Wacko
 	}
 
 	function RemoveAcls($tag) {
-		return $this->Query("delete from ".$this->config["table_prefix"]."acls  where page_tag = '".quote($this->dblink, $tag)."' ");
+		return $this->Query("DELETE FROM ".$this->config["table_prefix"]."acls  WHERE page_tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RemovePage($tag) {
-		return $this->Query("delete from ".$this->config["table_prefix"]."revisions  where tag = '".quote($this->dblink, $tag)."' ") &&
-		$this->Query("delete from ".$this->config["table_prefix"]."pages  where tag = '".quote($this->dblink, $tag)."' ");
+		return $this->Query("DELETE FROM ".$this->config["table_prefix"]."revisions  WHERE tag = '".quote($this->dblink, $tag)."' ") &&
+		$this->Query("DELETE FROM ".$this->config["table_prefix"]."pages  WHERE tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RemoveComments($tag) {
-		return $this->Query("delete from ".$this->config["table_prefix"]."pages  where comment_on = '".quote($this->dblink, $tag)."' ");
+		return $this->Query("DELETE FROM ".$this->config["table_prefix"]."pages  WHERE comment_on = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RemoveWatches($tag) {
-		return $this->Query("delete from ".$this->config["table_prefix"]."pagewatches  where tag = '".quote($this->dblink, $tag)."' ");
+		return $this->Query("DELETE FROM ".$this->config["table_prefix"]."pagewatches  WHERE tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RemoveLinks($tag) {
-		return $this->Query("delete from ".$this->config["table_prefix"]."links  where from_tag = '".quote($this->dblink, $tag)."' ");
+		return $this->Query("DELETE FROM ".$this->config["table_prefix"]."links  WHERE from_tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RemoveReferrers($tag) {
-		return $this->Query("delete from ".$this->config["table_prefix"]."referrers where page_tag = '".quote($this->dblink, $tag)."' ");
+		return $this->Query("DELETE FROM ".$this->config["table_prefix"]."referrers WHERE page_tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	// WATCHES
 	function IsWatched($user, $tag) {
-		return $this->LoadSingle("select * from ".$this->config["table_prefix"]."pagewatches where user = '".quote($this->dblink, $user)."' and tag = '".quote($this->dblink, $tag)."'");
+		return $this->LoadSingle("SELECT * FROM ".$this->config["table_prefix"]."pagewatches WHERE user = '".quote($this->dblink, $user)."' AND tag = '".quote($this->dblink, $tag)."'");
 	}
 
 	function SetWatch($user, $tag) {
 		// Remove old watch first to avoid double watches
 		$this->ClearWatch($user, $tag);
-		return $this->Query( "insert into ".$this->config["table_prefix"]."pagewatches (user,tag) values ( '".quote($this->dblink, $user)."', '".quote($this->dblink, $tag)."')" );
+		return $this->Query( "INSERT INTO ".$this->config["table_prefix"]."pagewatches (user,tag) VALUES ( '".quote($this->dblink, $user)."', '".quote($this->dblink, $tag)."')" );
 		// TIMESTAMP type is filled automatically by MySQL
 	}
 
 	function ClearWatch($user, $tag){
-		return $this->Query( "delete from ".$this->config["table_prefix"]."pagewatches where user = '".quote($this->dblink, $user)."' and tag = '".quote($this->dblink, $tag)."'");
+		return $this->Query( "DELETE FROM ".$this->config["table_prefix"]."pagewatches WHERE user = '".quote($this->dblink, $user)."' AND tag = '".quote($this->dblink, $tag)."'");
 	}
 
 	//aliases stuff
@@ -2132,12 +2132,12 @@ class Wacko
 	{
 		// purge referrers
 		if ($days = $this->GetConfigValue("referrers_purge_time")) {
-			$this->Query("delete from ".$this->config["table_prefix"]."referrers where time < date_sub(now(), interval '".quote($this->dblink, $days)."' day)");
+			$this->Query("DELETE FROM ".$this->config["table_prefix"]."referrers WHERE time < date_sub(now(), interval '".quote($this->dblink, $days)."' day)");
 		}
 
 		// purge old page revisions
 		if ($days = $this->GetConfigValue("pages_purge_time")) {
-			$this->Query("delete from ".$this->config["table_prefix"]."revisions where time < date_sub(now(), interval '".quote($this->dblink, $days)."' day) and latest = 'N'");
+			$this->Query("DELETE FROM ".$this->config["table_prefix"]."revisions WHERE time < date_sub(now(), interval '".quote($this->dblink, $days)."' day) AND latest = 'N'");
 		}
 	}
 
@@ -2182,9 +2182,9 @@ class Wacko
 			{
 				$bookmarks[] = $bookmark;
 
-				$this->Query("update ".$this->config["user_table"]." set ".
+				$this->Query("UPDATE ".$this->config["user_table"]." SET ".
             "bookmarks = '".quote($this->dblink, implode("\n", $bookmarks))."' ".
-            "where name = '".quote($this->dblink, $user["name"])."' limit 1");
+            "WHERE name = '".quote($this->dblink, $user["name"])."' LIMIT 1");
 
 				$this->SetUser($this->LoadUser($user["name"]));
 			}
@@ -2209,9 +2209,9 @@ class Wacko
 				if ($this->GetPageSuperTag()!=$this->NpjTranslit($bml[0])) $newbm[] = $bm;
 			}
 			$bookmarks = $newbm;
-			$this->Query("update ".$this->config["user_table"]." set ".
+			$this->Query("UPDATE ".$this->config["user_table"]." SET ".
           "bookmarks = '".quote($this->dblink, implode("\n", $bookmarks))."' ".
-          "where name = '".quote($this->dblink, $user["name"])."' limit 1");
+          "WHERE name = '".quote($this->dblink, $user["name"])."' LIMIT 1");
 
 			$this->SetUser($this->LoadUser($user["name"]));
 			$_SESSION["bookmarks"] = $bookmarks;
@@ -2468,8 +2468,8 @@ class Wacko
 		if ($NewSuperTag=="")
 		$NewSuperTag = $this->NpjTranslit($NewTag);
 
-		return $this->Query("update ".$this->config["table_prefix"]."revisions set tag = '".quote($this->dblink, $NewTag)."', supertag = '".quote($this->dblink, $NewSuperTag)."' where tag = '".quote($this->dblink, $tag)."' ") &&
-		$this->Query("update ".$this->config["table_prefix"]."pages  set tag = '".quote($this->dblink, $NewTag)."', supertag = '".quote($this->dblink, $NewSuperTag)."' where tag = '".quote($this->dblink, $tag)."' ");
+		return $this->Query("UPDATE ".$this->config["table_prefix"]."revisions SET tag = '".quote($this->dblink, $NewTag)."', supertag = '".quote($this->dblink, $NewSuperTag)."' WHERE tag = '".quote($this->dblink, $tag)."' ") &&
+		$this->Query("UPDATE ".$this->config["table_prefix"]."pages  SET tag = '".quote($this->dblink, $NewTag)."', supertag = '".quote($this->dblink, $NewSuperTag)."' WHERE tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RenameFiles($tag, $NewTag, $NewSuperTag="")
@@ -2504,19 +2504,19 @@ class Wacko
 	function RenameAcls($tag, $NewTag, $NewSuperTag="") {
 		if ($NewSuperTag=="")
 		$NewSuperTag = $this->NpjTranslit($NewTag);
-		return $this->Query("update ".$this->config["table_prefix"]."acls set page_tag = '".quote($this->dblink, $NewTag)."', supertag = '".quote($this->dblink, $NewSuperTag)."' where page_tag = '".quote($this->dblink, $tag)."' ");
+		return $this->Query("UPDATE ".$this->config["table_prefix"]."acls SET page_tag = '".quote($this->dblink, $NewTag)."', supertag = '".quote($this->dblink, $NewSuperTag)."' WHERE page_tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RenameComments($tag, $NewTag, $NewSuperTag="") {
-		return $this->Query("update ".$this->config["table_prefix"]."pages set comment_on = '".quote($this->dblink, $NewTag)."'  where comment_on = '".quote($this->dblink, $tag)."' ");
+		return $this->Query("UPDATE ".$this->config["table_prefix"]."pages SET comment_on = '".quote($this->dblink, $NewTag)."'  WHERE comment_on = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RenameWatches($tag, $NewTag, $NewSuperTag="") {
-		return $this->Query("update ".$this->config["table_prefix"]."pagewatches set tag = '".quote($this->dblink, $NewTag)."' where tag = '".quote($this->dblink, $tag)."' ");
+		return $this->Query("UPDATE ".$this->config["table_prefix"]."pagewatches SET tag = '".quote($this->dblink, $NewTag)."' WHERE tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RenameLinks($tag) {
-		return $this->Query("update ".$this->config["table_prefix"]."links set from_tag = '".quote($this->dblink, $NewTag)."' where from_tag = '".quote($this->dblink, $tag)."' ");
+		return $this->Query("UPDATE ".$this->config["table_prefix"]."links SET from_tag = '".quote($this->dblink, $NewTag)."' WHERE from_tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function CheckFileExists( $filename, $unwrapped_tag = "" )
@@ -2529,8 +2529,8 @@ class Wacko
 		}
 		if (!($file = $this->filesCache[$page_id][$filename]))
 		{
-			$what = $this->LoadAll( "select id, filename, filesize, description, picture_w, picture_h, file_ext from ".$this->config["table_prefix"]."upload where ".
-                            "page_id = '".quote($this->dblink, $page_id)."' and filename='".quote($this->dblink, $filename)."'");
+			$what = $this->LoadAll( "SELECT id, filename, filesize, description, picture_w, picture_h, file_ext FROM ".$this->config["table_prefix"]."upload WHERE ".
+                            "page_id = '".quote($this->dblink, $page_id)."' AND filename='".quote($this->dblink, $filename)."'");
 			if (sizeof($what) == 0) return false;
 			$file = $what[0];
 			$this->filesCache[$page_id][$filename] = $file;
