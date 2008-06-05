@@ -1,0 +1,21 @@
+.header h1 { font-size:60%; font-family:verdana }
+P { margin: 0px 0px 3px 0px; padding:0px }
+
+/* for include */
+.name { text-align: right; font-size: 60%; padding:1px; border:1px dotted #cccccc; }
+.include { padding: 4px; }
+
+.Toc1 { margin-left:0px; padding-left:0px; list-style-type:none;  } 
+.Toc2, 
+.Toc3, 
+.Toc4, 
+.Toc5, 
+.Toc6 { margin-left:0px; padding-left:15px; list-style-type:none;  }
+
+.Toc1 A, .Toc2 A, .Toc3 A, .Toc4 A, .Toc5 A, .Toc6 A
+ { text-decoration:none; color:#000000 }
+
+.nobr {white-space: nowrap}
+
+div.action           { margin:2px; background: #eeeeee }
+div.action-content   { padding:10px 10px 25px 10px; } 

@@ -1,0 +1,198 @@
+/* colors */
+.left {
+	font-family: Tahoma, Verdana, Arial;
+	background-color: #E6EDF7;
+	border-right-style: solid;
+	border-right-color: #000000;
+	border-right-width: 1px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #000000;
+	border-bottom-color: #000000;
+	border-left-color: #000000;
+	
+}
+
+.navOpened,
+.navClosed {
+	background-color: #E6EDF7;
+}
+
+.navOpened .navTitle .titleText {
+	color: #F5F3F4;
+}
+
+.navOpened .navTitleOver .titleText {
+  color: #FFFFFF;
+}
+
+.navTitle .titleHandle {
+  background-color: #F5F3F4;
+}
+
+.navTitleOver .titleHandle {
+  background-color: #FFFFFF;
+}
+
+.navClosed .navTitle .titleText {
+  color: #F5F3F4;
+}
+
+.navClosed .navTitleOver .titleText {
+  color: #FFFFFF;
+}
+
+.left div.modulecontent {
+	background-color: #E6EDF7;
+	font-size: 12px;
+	font-family: Tahoma, Verdana, Arial;
+}
+
+.left a:link {
+  color: #000000;
+  text-decoration: none;
+}
+
+.left a:visited {
+  color: #000000;
+  text-decoration: none;
+}
+
+
+.left a:hover {
+	text-decoration: underline;
+}
+.left a:active {
+	color: #000000;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.left td {
+	color: #000000;
+}
+
+/*
+.left a,
+.left a:visited,
+.left a:active {
+  text-decoration: none;
+}
+*/
+
+/* common part */
+
+.left, {
+  padding: 0px 0px 60px 0px;
+  width: 185px;
+  margin: 0;
+}
+
+
+.left img {
+  margin: 0;
+  border: 0;
+}
+
+/* opened tab */
+
+.navOpened {
+  background-image: url(../images/nav_bg_o.jpg);
+  background-position: right top;
+  background-repeat: repeat-x;
+  width: 185px;
+  margin-bottom: 15px;
+}
+
+
+/* opened tab */
+
+.navClosed {
+  background-image: url(../images/nav_bg_c.jpg);
+  background-position: right top;
+  background-repeat: repeat-x;
+  width: 185px;
+  margin-bottom: 15px;
+}
+
+.navOpened th, .navClosed th {
+  background-position: top;
+  background-repeat: no-repeat;
+  height: 22px;
+  font-weight: bold;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.navOpened .titleHandle {
+  background-image: url(../images/navopened.gif);
+  background-position: left top;
+  background-repeat: no-repeat;
+  width: 20px;
+}
+
+.navClosed .navTitle,
+.navClosed .navTitleOver, 
+.navOpened .navTitle,
+.navOpened .navTitleOver{
+  height: 22px;
+  empty-cells: show;
+}
+
+.navTitle .titleHandle,
+.navTitleOver .titleHandle {
+  width: 20px;
+}
+
+.navTitle, .navTitle td, .navTitleOver, .navTitleOver td, .left th {
+  cursor: hand;
+  cursor: pointer;
+  font-weight: bold;
+  -moz-user-select: none;
+}
+
+.navClosed .titleLeft,
+.navOpened .titleLeft {
+  background-position: top;
+  background-repeat: no-repeat;
+  width: 14px;
+  vertical-align: top;
+}
+
+.navClosed .titleRight,
+.navOpened .titleRight {
+  background-image: url(../images/topright.gif);
+  background-position: top;
+  background-repeat: no-repeat;
+  width: 3px;
+  vertical-align: top;
+}
+
+.navClosed .titleHandle {
+  background-image: url(../images/navclosed.gif);
+  background-repeat: no-repeat;
+}
+
+.left div.modulecontent {
+  margin-left: 1px;
+  margin-right: 1px;
+  padding-left: 10px;
+  padding-top: 3px;
+  padding-bottom: 10px;
+}
+
+.left .navOpened div.modulecontent {
+  display: block;
+}
+
+.left .navClosed div.modulecontent {
+  display: none;
+}
+
+
+
+.left div.modulecontent td {
+  margin-top: 4px;
+  padding: 2px 0px;
+  vertical-align: middle;
+}

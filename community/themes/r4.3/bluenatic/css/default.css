@@ -1,0 +1,70 @@
+/**
+ * File content:
+ * Includes all styles that forces the look of the whole page
+ */
+
+
+/* Hyperlinks */
+a {
+	background-color:	transparent;
+	color:			#4a6188;/*#113c53;/*#a33;*/
+	text-decoration:	none;
+}
+a:hover {
+	color:			#113c53;
+}
+a:visited {
+	color:			#6a92a9;
+}
+
+/* Specifies basic rules */
+body {
+	background-color:	#6c83b0;
+	color:			#fff;
+	font-family:		Verdana, "Bitstream Vera Sans", sans, sans-serif;
+	font-size:		small;
+	margin:			0 auto;
+	padding:		0;
+}
+
+/* Forms: No space */
+form {
+	margin:			0;
+	padding:		0;
+}
+
+/* Hide elements */
+invisible {
+	visibility:		hidden;
+}
+
+/* Images: No border for linked images */
+img {
+	border:			none;
+	vertical-align: middle;
+}
+
+/* Paragraphs */
+p {
+	margin:			0;
+	padding:		0;
+}
+
+/* Table content: Content is always aligned to top */
+td, tr {
+	vertical-align:		top;
+}
+
+/* Textareas */
+textarea, input, select {
+	border:			solid 1px #999;
+	/*-moz-border-radius:	5px;		/* Mozilla only: Round etches */
+}
+textarea {
+	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
+	font-size:		0.9em;
+}
+/* Checkboxes fix (IE only) */
+input checkbox {
+	border:			1px solid #000;
+}
