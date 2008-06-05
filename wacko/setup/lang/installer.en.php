@@ -64,6 +64,7 @@ $lang = array(
 "ErrorAdminPasswordMismatch" => "The passwords do not match!.",
 "ErrorAdminPasswordShort" => "The admin password is too short, the minimum length is 5 characters!",
 "WarningRewriteMode" => "ATTENTION!\nYour base URL and rewrite-mode settings looks suspicious. Usually there is no ? mark in the base URL if rewrite-mode is set - but in your case there is one.\n\nTo continue with these settings click OK.\nTo return to the form and change your settings click CANCEL.\n\nIf you are about to proceed with these settings, please note that they COULD cause problems with your WackoWiki installation.",
+"ModRewriteStatusUnknown" => "The installer cannot veriry that mod_rewrite is enabled, however this does not mean it is disabled",
 
 /*
    Database Config Page
