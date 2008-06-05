@@ -30,7 +30,7 @@ else
    */
 ?>
             <h2><?php echo $lang["ModRewrite"]; ?></h2>
-            <p class="notop"><?php echo $lang["ModRewriteInstalled"]; ?> - <?php print output_image(in_array('mod_rewrite', apache_get_modules())); ?></p>
+            <p class="notop"><?php echo $lang["ModRewriteInstalled"]; ?> - <?php if(function_exists('apache_get_modules')) { print output_image(in_array('mod_rewrite', apache_get_modules())); } else { print($lang["ModRewriteStatusUnknown"]); } ?></p>
 <?php
    /*
       Check which database extensions are installed and what versions of the db are there
