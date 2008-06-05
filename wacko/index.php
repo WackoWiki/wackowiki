@@ -41,7 +41,7 @@ if (get_magic_quotes_gpc())
 
 if (strstr($_SERVER["SERVER_SOFTWARE"], "IIS")) $_SERVER["REQUEST_URI"] = $_SERVER["PATH_INFO"];
 
-$found_rewrite_extension = in_array('mod_rewrite', apache_get_modules());
+$found_rewrite_extension = function_exists('apache_get_modules') ? in_array('mod_rewrite', apache_get_modules()) : false;
 
 // default configuration values
 $wakkaDefaultConfig = array(
