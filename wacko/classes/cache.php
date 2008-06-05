@@ -61,7 +61,7 @@ class Cache
 		$fp = fopen ($filename, "w");
 		fputs ($fp, $data);
 		fclose ($fp);
-		if ($this->wacko) $this->wacko->Query("insert into ".$this->wacko->config["table_prefix"]."cache set ".
+		if ($this->wacko) $this->wacko->Query("INSERT INTO ".$this->wacko->config["table_prefix"]."cache SET ".
    "name  ='".quote($this->dblink, md5($page))."', ".
    "method='".quote($this->dblink, $method)."', ".
    "query ='".quote($this->dblink, $query)."'");
@@ -76,8 +76,8 @@ class Cache
 		{
 			$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", $page))));
 			$this->Log("CacheInvalidate page=".$page);
-			$this->Log("CacheInvalidate query="."SELECT * FROM ".$this->wacko->config["table_prefix"]."cache where name ='".quote($this->dblink, md5($page))."'");
-			$params = $this->wacko->LoadAll("SELECT * FROM ".$this->wacko->config["table_prefix"]."cache where name ='".quote($this->dblink, md5($page))."'");
+			$this->Log("CacheInvalidate query="."SELECT * FROM ".$this->wacko->config["table_prefix"]."cache WHERE name ='".quote($this->dblink, md5($page))."'");
+			$params = $this->wacko->LoadAll("SELECT * FROM ".$this->wacko->config["table_prefix"]."cache WHERE name ='".quote($this->dblink, md5($page))."'");
 			$this->Log("CacheInvalidate count params=".count($params));
 			foreach ($params as $param)
 			{
@@ -86,7 +86,7 @@ class Cache
 				if (@file_exists($filename))
 				@unlink($filename);
 			}
-			$this->wacko->Query("DELETE FROM ".$this->wacko->config["table_prefix"]."cache where name ='".quote($this->dblink, md5($page))."'");
+			$this->wacko->Query("DELETE FROM ".$this->wacko->config["table_prefix"]."cache WHERE name ='".quote($this->dblink, md5($page))."'");
 			$this->Log("CacheInvalidate end");
 			return true;
 		}
