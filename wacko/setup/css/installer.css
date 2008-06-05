@@ -1,0 +1,255 @@
+/*
+   Wacko Wiki Installer Cascading Stylesheet
+
+   Panel Theme v1.0 by Tann San 19.04.2008
+*/
+
+html
+   {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+   }
+
+body
+   {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background: #ccc url() no-repeat scroll 0% 0%;
+      font: normal normal normal 12px Arial, Helvetica, sans-serif;
+      color: #333333;
+      text-align: center;
+   }
+
+/*
+   BG Panel
+*/
+.installer
+   {
+      width: 993px;
+      margin: 25px auto;
+      padding: 0;
+      text-align: left;
+   }
+
+/*
+   Generic Text Elements
+*/
+h1
+   {
+      float: left;
+      position: relative;
+      left: 43px;
+      margin: 0;
+      padding: 0;
+      font: normal normal normal 24px Arial, Helvetica, sans-serif;
+      color: #333;
+   }
+
+h2
+   {
+      position: relative;
+      left: 43px;
+      margin: 20px 0px 0px 0px;
+      padding: 0;
+      font: normal normal 900 14px Arial, Helvetica, sans-serif;
+      color: #333;
+   }
+
+p
+   {
+      width: 907px;
+      margin: 10px 43px;
+      color: #000;
+   }
+
+label
+   {
+      font-size: 14px;
+      color: #333;
+   }
+
+.white
+   {
+      color: #fff;
+   }
+
+p.notop
+   {
+      margin-top: 0px;
+   }
+
+ul
+   {
+      position: relative;
+      left: 43px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+   }
+
+ul.install_error
+   {
+      color: #c00;
+   }
+
+li
+   {
+      width: 907px;
+   }
+
+/*
+   Handle hr across browsers
+*/
+
+hr
+   {
+      display: none;
+      color: #fff;
+      background-color: #fff;
+   }
+
+.fake_hr
+   {
+      clear: both;
+      height: 1px;
+      border-top: 1px dashed #fff;
+      margin: 0;
+   }
+
+.fake_hr_seperator
+   {
+      clear: both;
+      height: 1px;
+      border-top: 1px dashed #ddd;
+      margin: 10px 43px;
+   }
+
+/*
+   Main Menu
+*/
+
+.menu
+   {
+      left: 0px;
+      clear: both;
+      list-style: none;
+      margin: 0 auto;
+      padding: 4px 0px 8px 0px;
+      font-weight: 900;
+      color: #fff;
+      text-align: center;
+   }
+
+.menu li
+   {
+    /*  float: left;*/
+      display: inline;
+      width: auto;
+      margin: 0px 2px;
+   }
+
+.item
+   {
+      color: #333333;
+   }
+
+.current
+   {
+      color: #999999;
+   }
+
+/*
+   Language Selection Specific
+*/
+.input_lang
+   {
+      position: relative;
+      left: 90px;
+   }
+
+.label_lang
+   {
+      position: relative;
+      left: 90px;
+      margin: 10px 0px 0px 5px;
+   }
+
+/*
+   Version Check Specific
+*/
+.tickcross
+   {
+      vertical-align: middle;
+   }
+
+/*
+   Site Configuration Specific
+*/
+.indented_label
+   {
+      position: relative;
+      left: 43px;
+      width: 300px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #666;
+   }
+
+.label_password2
+   {
+      position: relative;
+      left: 43px;
+      margin: 0px 10px 0px 20px;
+      font-size: 12px;
+      font-weight: 900;
+      text-align: right;
+   }
+
+
+/*
+   Write Config Specific
+*/
+ul.security li
+   {
+      min-height: 23px;
+      padding: 3px 0px 0px 35px;
+      background: #ccc url(../images/Warning.png) no-repeat scroll 0% 0%;
+   }
+
+/*
+   Generic Stylings
+*/
+.text_input
+   {
+      position: relative;
+      left: 43px;
+      width: 300px;
+      margin-top: 0px;
+   }
+
+.checkbox_input
+   {
+      position: relative;
+      left: 43px;
+   }
+
+.next
+   {
+      position: relative;
+      left: 450px;
+      margin: 10px;
+   }
+
+.config_code
+   {
+      position: relative;
+      left: 43px;
+      width: 907px;
+      margin: 0px;
+      padding: 10px;
+      background-color: #EEEEEE;
+      overflow-x: scroll;
+   }
