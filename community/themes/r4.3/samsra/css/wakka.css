@@ -1,0 +1,396 @@
+@import "../../_common/X11ColorNames.css";
+/* basic -------------------------------------------------- */
+P, TD, LI, SELECT, TEXTAREA {
+  font-family: Verdana;
+  font-size: 13px;
+  line-height: 1.3em;
+}
+
+label {cursor:pointer; cursor:hand;}
+img {
+	border-width: 0px;
+	vertical-align: middle;
+	}
+.TEXTAREA {
+  width: 100%; 
+  height: 400px
+}
+
+BODY {
+  font-family: Verdana;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #000000;
+  background-color: #FFFFF2;
+}
+
+A  	{
+	font-family: Arial, Helvetica, sans-serif;
+	color: #003399;
+	text-decoration: none;
+}
+
+A:LINK {
+  color: #003399;
+  text-decoration: none;
+}
+A:Hover  {
+	color: #FF9900; 
+	text-decoration: underline  
+}
+A:VISITED {
+  color: #990000;
+}
+
+A:Active  {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FF9900;
+	text-decoration: underline;
+}
+
+UL, OL {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.time{ color:#999999; font-size: 9px; margin:5px 20px;}
+.debug { font-size: 11px; color: #888888;}
+
+/* paddings headers */
+FORM, H1, H2, H3, H4, H5, H6 {
+  margin: 0px;
+  padding: 0px;
+}
+
+.main {
+  font-size: 22px;
+}
+.print {
+  font-family: Verdana;
+  font-size: 12px;
+}
+
+.error {
+  color: #CC3333; font-weight: bold;
+}
+
+.header {
+  padding: 0px 10px 5px;
+  line-height: 22px;
+}
+
+.page {
+  background-color: #FFFFFF;
+  padding: 9px 10px 10px;
+  border: 1px inset;
+  border-top: none; 
+  border-bottom: none; 
+}
+.pageBefore { 
+  border: 1px inset;
+  border-bottom: none; 
+  height:1px
+}
+.pageedit {
+  background-color: #FFFFFF;
+  border: 1px inset;
+  border-bottom: none; 
+}
+.pageedit form textarea {
+  width: 100%;
+  height: 400px; 
+}
+.pagetitle {
+  font-size: 23px;
+  padding: 10px;
+  padding-top: 0px;
+  line-height: 22px;
+  color: #003399;
+}
+
+.footer {
+  background-color: #ECECFF;
+  padding: 5px 10px;
+  border: 1px inset;
+  border-top: none;
+  border-top: 1px solid #CCCCCC;
+}
+
+.filesheader, .commentsheader {
+  background-color: #ECECFF;
+  padding: 2px 10px;
+  border-left: 1px inset;
+  border-right: 1px inset;
+  border-top: 1px solid #CCCCCC;
+}
+
+.files, .comment {
+  background-color: #EEEEEE;
+  padding: 10px;
+  border-left: 1px inset;
+  border-right: 1px inset;
+  border-top: 1px solid #CCCCCC;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+.commentinfo {
+  color: #AAAAAA;
+}
+
+.filesform, .commentform {
+  background-color: #EEEEEE;
+  padding: 10px;
+  border-left: 1px inset;
+  border-right: 1px inset;
+  border-top: 1px solid #CCCCCC;
+}
+.commentform form {width:100%;}
+.commentform form textarea {width:100%; padding:0;}
+
+.revisioninfo {
+  color: #AAAAAA;
+  padding-bottom: 20px;
+}
+
+.copyright {
+  font-size: 11px;
+  color: #AAAAAA;
+  text-align: right;
+}
+
+.copyright A {
+  color: #AAAAAA;
+}
+
+.name {
+  text-align: right;
+  font-size: 11px;
+}
+
+.include {
+  background-color: #F5F5F5;
+  padding: 8px;
+}
+
+.outerlink { color: #990000;}
+
+FIELDSET {
+ padding: 10px;
+}
+
+form input.submitinput {
+ 	border-style:none;
+ 	background-color:transparent;
+ 	color:#000;
+ 	font-weight:bold;
+ 	padding:0;
+ 	font-size:14px;
+ }
+
+.missingpage
+{
+  border-bottom: 1px dashed orange;
+}
+.searchbar
+{
+  background-color: #ECECFF;
+  font-family: Verdana;
+  font-size: 13px;
+  line-height: 1.3em;
+}
+.logBtn {   height: 21px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10px;
+ }     
+
+#tooltip{
+background:#FFFFFF;
+border:1px solid #666666;
+color:#333333;
+font:menu;
+margin:0px;
+padding:3px 5px;
+position:absolute;
+visibility:hidden
+}
+
+table.upload td { padding: 2px 5px 2px 5px; vertical-align:bottom }
+table.upload td.dt-,   
+table.upload td.file- { white-space:nowrap; font-size: 80%; font-weight:bold; color:#000000 }
+table.upload td.dt-   { padding-right:0 }
+table.upload td.remove-   { padding-right:0 }
+table.upload td.size- { padding-right:0; text-align:right }
+table.upload td.desc- { font-size: 80%; color:#444444; width:100% }
+table.upload td.dt- .dt2-,
+table.upload td.remove- .remove2-,
+table.upload td.size- .size2- { font: 11px Tahoma; color:#666666;  }
+table.upload td.remove- A.remove2-:HOVER,
+table.upload td.remove- A.remove2-:ACTIVE { color:#ff0000 }
+
+ .preview {margin:2px;border:red 2px solid;}
+ .preview legend {color:red;font-weight:bold;}
+
+.buttonsspacer{width:10px;height:1px;}
+
+/* WikiEdit Toolbar -------------------------------------- */
+ .toolbar tr { background: ButtonFace; }
+ .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
+  background: ButtonFace;
+  color: ButtonText;
+  border: 1px solid ButtonFace;
+  padding: 1px;  margin: 0px;
+  cursor: pointer; cursor: hand; 
+ }
+ .toolbar img{
+  width: 20px;
+  height: 20px;
+ }
+ .toolbar .btn-hover {
+  border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+ }
+ .toolbar .btn-active,  .toolbar .btn-pressed {
+  border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+ }
+ .toolbar .btn-pressed {
+  background: ButtonHighlight;
+ }
+ .edname-w, .edname-r, .edname-s  
+            { font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
+ .edname-w  { background: #1E9905; }
+ .edname-r  { background: #2A45D0; } 
+ .edname-s  { background: #D08C2A; }
+
+
+/* Wiki Formatting ---------------------------------------- */
+dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
+* html dfn { \background: url(javascript:DOTS) repeat-x bottom left; }
+
+STRIKE, S { color:#999999 }    
+STRIKE A:VISITED, S A:LINK { color:#999999 }
+STRIKE A:VISITED, S A:VISITED { color:#999999 }
+cite {color:#888800;font-style:normal;}
+
+.add { font-weight: bold; color:#c00; text-decoration: underline; }
+.del { font-style: italic; color:#c00; text-decoration: line-through; }
+
+.nobr {white-space: nowrap}
+
+H1 { font-size: 23px; color: #ff8200; margin:0ex;
+	padding:0ex;
+	margin-top:0.3em;
+	margin-bottom:0.5em; }
+H2 { font-family: Verdana; font-size: 20px; margin-top:20px; margin-bottom:5px; 	border-bottom: 1px solid #ccc; }
+H3 { font-family: Verdana; font-size: 17px; margin-top:15px; margin-bottom:5px; border-bottom:0px #666666 solid }
+H4 { font-family: Arial;   font-size: 16px; margin-top:15px; margin-bottom:5px; border-bottom:0px #999999 solid }
+H5 { font-family: Arial;   font-size: 14px; margin-top:10px; margin-bottom:5px; border-bottom:0px #bbbbbb solid }
+H6 { font-family: Arial;   font-size: 12px; }
+
+.center{  text-align: center;}
+.indent {  margin-left: 40px;}
+
+.additions { color: #008800; }
+.deletions { color: #880000; }
+
+.code {
+  background: #FFFFFF;
+  border: solid #888888 2px;
+  font-family: "Courier New";
+  color: black;
+  font-size: 10pt;
+  width: 80%;
+  padding: 3px;
+}
+
+.notes {  color: #888800; }
+
+table.usertable {
+  border: 1px none;
+  border-collapse: collapse;
+}
+table.usertable tr td
+{
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  padding: 4px;
+  vertical-align: top;
+}
+table.dtable { width:100%; border: 0px none; border-collapse: collapse; }
+table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
+
+.toc1 { margin-left:0px; padding-left:0px; font-weight:bold; list-style-type:none;  } 
+.toc2 { margin-left:0px; padding-left:15px; list-style-type:none;  } 
+.toc3 { margin-left:0px; padding-left:30px; list-style-type:none;  } 
+.toc4 { margin-left:0px; padding-left:45px; list-style-type:none;  } 
+.toc5 { margin-left:0px; padding-left:60px; list-style-type:none;  } 
+.toc6 { margin-left:0px; padding-left:75px; list-style-type:none;  }
+
+.micq1 { padding:2px; vertical-align:top; font-weight: bold; }
+.micq2 { padding:2px; vertical-align:top; font:10px tahoma, arial }
+.micq3 { padding:2px; vertical-align:top; width:100% }
+
+.email1 {color:#800000}
+.email2 {color:#808000}
+.email-odd {color:#800000}
+.email-even {color:#808000}
+
+blockquote {  border-left:#cccccc 3px solid; padding:5px; color: #999999; }
+blockquote p {  padding:0px;  margin: 5px 0px; }
+
+
+p.auto { margin:0px; padding:0px; font-size:100%; }
+.pmark { color:#cccccc;font:10px Arial }
+.pmark A:LINK,
+.pmark A:VISITED { color:#cccccc }
+.pmark A:HOVER,
+.pmark A:ACTIVE  { color:#cc3300 }
+.pright {}
+.pright .p- { float:right; padding: 0 0 0 15px;  }
+.pright .pbody- { }
+
+.pleft { padding:0 }
+.pleft .p- { float:left; padding: 0 15px 0 0;  }
+.pleft .pbody- { padding:0 }
+
+/* Text_Highlighter  */
+.hl-main {font-family: monospace; font-size:13px;}
+.hl-gutter { background-color: #CCCCCC; padding-right: 10px; 
+             font-family: monospace; font-size:13px;}
+.hl-table {border: solid 1px #000000; }
+
+.hl-default { color: #000000; }
+.hl-code { color: #7f7f33; }
+.hl-brackets { color: #009966; }
+.hl-comment { color: #7F7F7F; }
+.hl-quotes { color: #00007F; }
+.hl-string { color: #7F0000; }
+.hl-identifier { color: #000000; }
+.hl-reserved { color: #7F007F; }
+.hl-inlinedoc { color: #0000FF; }
+.hl-var { color: #0066FF; }
+.hl-url { color: #FF0000; }
+.hl-special { color: #0000FF; }
+.hl-number { color: #007F00; }
+.hl-inlinetags { color: #FF0000; }
+.hl-builtin    { color:#996633; }
+/* /Text_Highlighter */
+
+div.action           {
+	margin:2px;
+	background: #f1f5f8;
+	border: 1px solid #cccdcf;/*#b8cbdb*/
+}
+div.action-content   { padding:10px 10px 25px 10px; } 
+
+.cl-red   {color: #CC0000;}
+.cl-green {color: #008000;}
+.cl-blue  {color: #0000CC;}
+
+tt { color:#666600; background:#ffffcc; padding: 0 2px } 
+
+.cite {color:#ff0000;font-style:normal;}
+/* .mark  { color: #008800;font-style:normal; } */
+.mark { color: #00000; background:#ffaaaa; }
+

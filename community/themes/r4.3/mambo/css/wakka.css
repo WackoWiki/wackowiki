@@ -1,0 +1,247 @@
+/* Layout */
+.topbody {
+  background: url(../images/head_XPblue_normal_wl.jpg) repeat-y right;
+  height: 50px;
+  margin: 0;
+}
+
+.topbody td {
+  padding-left: 10px;
+  color: #6e89dd;
+  font-size: 18px;
+  font-weight: bold;
+  /*text-transform: uppercase;*/
+  font-style: italic;
+  vertical-align: middle;
+}
+
+.topbody .searchArea {
+  font-size: 11px;
+  font-weight: normal;
+  text-transform: none;
+  font-style: normal;
+  padding-right: 15px;
+  color: white;
+  vertical-align: middle;
+}
+
+.bottom {
+  background-repeat: no-repeat;
+  background-position: right;
+  background-image: url(../images/head_XPblue_bottom.jpg);
+  height: 18px;
+}
+
+
+
+/* Kukutz */
+
+label {cursor:pointer; cursor:hand;}
+
+img {border-width: 0px;	vertical-align: middle;	}
+
+dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
+* html dfn { \background: url(javascript:DOTS) repeat-x bottom left; }
+
+/* Ссылки */
+
+a:link { color: #0000CD}
+a:visited { color: #0068CC }
+span.missingpage {background-color: #FFFACD;}
+
+/* Основы всех основ */
+
+body {color: black; background: white; font: 10pt Trebuchet MS }
+body, h1, h2, h3, h4, h5, h6 {padding: 0; margin: 0}
+p, td, li, select, textarea, legend { font: 10pt Trebuchet MS }
+td {vertical-align: top }
+
+/* Заголовок страницы */ 
+div.header {background-color: #FFEFD5; padding: 5px; font-size: 90%; text-align: right;}
+div.header div.title {font-size: 140%; padding-top: 10px}
+div.header div.user {float: right; text-align: right}
+div.bookmarks {padding: 5px 10px; font-size: 90%; border-bottom: 1px solid #ccc; background-color: #FFE4B5}
+
+/* Подвал страницы */
+
+div.filesheader, div.commentsheader, div.footer {padding: 5px 10px; background-color: #FFEFD5; border-top: 1px solid #ccc; font-size: 90%}
+div.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-color: #FFE4B5;}
+.copyright {clear: right; color: #eee; font-size: 11px; text-align: right}
+.commentform form { width: 100% }
+.commentform form textarea { width: 100%; padding: 0}
+.commentinfo, .copyright a { color: #AAAAAA }
+
+/* Заголовки в тексте */ 
+
+h1 { padding-top: 2px; padding-bottom: 7px; font: 18pt Trebuchet MS }
+h2 { padding-top: 20px; padding-bottom: 5px; font: italic normal 16pt Trebuchet MS }
+h3 { padding-top: 15px; padding-bottom: 5px; font: 14pt Trebuchet MS }
+h4 { padding-top: 15px; padding-bottom: 5px; font: italic bold 10pt Trebuchet MS }
+
+/* Формы */ 
+form { margin: 0px; padding: 0px }
+fieldset { padding: 10px; border: 1px solid black }
+legend {font-weight: normal; padding: 0 5px;}
+.textarea { width: 100%; height: 400px }
+
+/* Основное поле страницы */ 
+div.pagebefore { display: none}
+div.page {padding: 10px 10px;}
+
+/* Списки */ 
+ul, ol { margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px }
+
+/* Форматтеры */
+.code { border: solid #888888 2px; width: 80%; padding: 3px; background: #FFFFFF; color: black; font: 10pt Lucida Console }
+
+.email1 {color:#800000}
+.email2 {color:#808000}
+.email-odd {color:#800000}
+.email-even {color:#808000}
+
+td.micq1 {padding: 2px; font-weight: bold;}
+td.micq2 {padding: 2px; font: 10px Trebuchet MS, Tahoma, Arial;}
+td.micq3 {padding: 2px; width: 100%; }
+
+/* Tale of Contents */
+
+div.toc1 { margin-left: 0px; padding-left: 0px; list-style-type: none; font-weight: bold }
+div.toc2 { margin-left: 0px; padding-left: 15px; list-style-type: none }
+div.toc3 { margin-left: 0px; padding-left: 30px; list-style-type: none }
+div.toc4 { margin-left: 0px; padding-left: 45px; list-style-type: none }
+div.toc5 { margin-left: 0px; padding-left: 60px; list-style-type: none }
+div.toc6 { margin-left: 0px; padding-left: 75px; list-style-type: none }
+
+
+blockquote { border-left: #999 3px solid; padding: 5px }
+blockquote p { padding: 0px; margin: 5px 0px }
+
+
+cite, .cite { color: #888800; font-style: normal }
+
+
+
+
+
+p.auto { margin: 0px; padding: 0px; font-size: 100% }
+strike a:visited, s a:visited, strike, s, strike a:visited, s a:link { color: #999999 }
+table.dtable { width: 100%; border: 0px none; border-collapse: collapse }
+table.dtable tr td { border-width: 0px; border-color: #999999; border-style: none; padding: 4px; vertical-align: top }
+table.upload td { padding: 2px 5px 2px 5px; vertical-align: bottom }
+table.upload td.desc- { width: 100%; color: #444444; font-size: 80% }
+table.upload td.dt- .dt2-,
+table.upload td.remove- .remove2-,
+table.upload td.size- .size2- { color: #666666; font: 11px Tahoma }
+table.upload td.dt-,   
+table.upload td.file- { white-space: nowrap; color: #000000; font-size: 80%; font-weight: bold }
+table.upload td.dt-, table.upload td.remove- { padding-right: 0 }
+table.upload td.remove- a.remove2-:hover,
+table.upload td.remove- a.remove2-:active { color: #ff0000 }
+table.upload td.size- { padding-right: 0; text-align: right }
+table.usertable { border: 1px none; border-collapse: collapse }
+table.usertable tr td { border-width: 1px; border-color: black; border-style: solid; padding: 4px; vertical-align: top }
+
+
+
+.add { color: #c00; font-weight: bold; text-decoration: underline }
+.additions { color: #008800 }
+.center{ text-align: center }
+
+
+.codeold { border: solid #888888 2px; width: 100%; padding: 3px; background: #FFFFFF; color: black; font: 10pt Lucida Console; height: 400px; overflow: scroll }
+
+.del { color: #c00; font-style: italic; text-decoration: line-through }
+.deletions { color: #880000 }
+.error { color: #CC3333; font-weight: bold }
+.files, .comment { padding: 10px; border-left: 1px inset; border-right: 1px inset; border-top: 1px solid #CCCCCC; border-bottom: 1px solid #EEEEEE; background: #EEEEEE }
+.filesform, .commentform { padding: 10px; border-left: 1px inset; border-right: 1px inset; border-top: 1px solid #CCCCCC; background: #EEEEEE }
+.include { padding: 8px; background: #F5F5F5 }
+.indent { margin-left: 40px }
+.logbtn { font: 10px Trebuchet MS, Verdana, Arial, Helvetica, sans-serif; height: 21px }
+.main { font-size: 22px }
+.mark { color: #E20000; font-style: normal }
+
+
+.name { font-size: 11px; text-align: right }
+.notes { color: #888800 }
+.outerlink { color: #990000 }
+
+
+
+.pageedit { border: 1px inset; border-bottom: none; background: #FFFFFF }
+.pageedit form textarea {width: 100%;height: 400px; } 
+.pleft .p- { float: left; padding: 0 15px 0 0 }
+.pleft, .pleft .pbody- { padding: 0 }
+.pmark { color: #cccccc; font: 10px Arial }
+.pmark a:link,
+.pmark a:visited { color: #cccccc }
+.pmark a:hover,
+.pmark a:active { color: #cc3300 }
+.pright { }
+.pright .p- { float: right; padding: 0 0 0 15px }
+.pright .pbody- { }
+.print { font: 12px Trebuchet MS }
+.revisioninfo { padding-bottom: 20px; color: #AAAAAA }
+
+ .preview {margin:2px;border:red 2px solid;}
+ .preview legend {color:red;font-weight:bold;}
+
+.buttonsspacer{width:10px;height:1px;}
+
+.time{ color: #cccccc; font: 9px Trebuchet MS, Tahoma, Arial, Verdana }
+
+#tooltip{ border: 1px solid #666666; margin: 0px; padding: 3px 5px; background: #FFFFFF; color: #333333; font: menu; position: absolute; visibility: hidden }
+
+/* vseedit toolbar */
+ .toolbar tr { background: ButtonFace; }
+ .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
+  background: ButtonFace;
+  color: ButtonText;
+  border: 1px solid ButtonFace;
+  padding: 1px;  margin: 0px;
+  cursor: pointer; cursor: hand; 
+ }
+ .toolbar .btn- img{
+  width: 20px;
+  height: 20px;
+ }
+ .toolbar .btn-hover {
+  border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+ }
+ .toolbar .btn-active,  .toolbar .btn-pressed {
+  border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+ }
+ .toolbar .btn-pressed {
+  background: ButtonHighlight;
+ }
+ .edname-w, .edname-r, .edname-s  
+            { font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
+ .edname-w  { background: #1E9905; }
+ .edname-r  { background: #2A45D0; } 
+ .edname-s  { background: #D08C2A; }
+
+/* Text_Highlighter */
+.hl-main {font-family: monospace; font-size:13px;}
+.hl-gutter { background-color: #CCCCCC; padding-right: 10px; 
+             font-family: monospace; font-size:13px;}
+.hl-table {border: solid 1px #000000; }
+
+.hl-default { color: #000000; }
+.hl-code { color: #7f7f33; }
+.hl-brackets { color: #009966; }
+.hl-comment { color: #7F7F7F; }
+.hl-quotes { color: #00007F; }
+.hl-string { color: #7F0000; }
+.hl-identifier { color: #000000; }
+.hl-reserved { color: #7F007F; }
+.hl-inlinedoc { color: #0000FF; }
+.hl-var { color: #0066FF; }
+.hl-url { color: #FF0000; }
+.hl-special { color: #0000FF; }
+.hl-number { color: #007F00; }
+.hl-inlinetags { color: #FF0000; }
+
+.nobr {white-space: nowrap}
+
+div.action           { margin:2px; background: #eeeeee }
+div.action-content   { padding:10px 10px 25px 10px; } 

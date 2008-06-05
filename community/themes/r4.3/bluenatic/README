@@ -1,0 +1,47 @@
+CONTENT OF THIS DOCUMENT
+
+  1. Installation
+  2. Thank You
+  3. License
+
+---------------------------------------------------------------------------
+
+1. INSTALLATION
+Just copy the folder bluenatic to themes/ inside your WackoWiki
+installation. You are now able to choose the bluenatic theme from your
+settings menu. Enjoy!
+
+
+2. THANK YOU
+Gururaj for his open web template called NoProps I used as a basic
+template for this theme.
+> http://openwebdesign.org/userinfo.phtml?user=kpgururaja
+
+All the guys of the tango project for their wonderful icons I used
+in the QuickAction container.
+> http://www.tango-project.org
+
+TheBone for his help in developing this theme and sharing his
+webspace.
+
+Martin aka SkipPer for his beta-testing and great ideas for Bluenatic.
+
+The whole open source community for their work!
+
+
+3. LICENSE
+Copyright (C) 2006  Robert Vaeth
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
