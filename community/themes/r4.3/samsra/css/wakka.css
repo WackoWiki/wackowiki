@@ -6,7 +6,7 @@ P, TD, LI, SELECT, TEXTAREA {
   line-height: 1.3em;
 }
 
-label {cursor:pointer; cursor:hand;}
+label {cursor:pointer;}
 img {
 	border-width: 0px;
 	vertical-align: middle;
@@ -25,7 +25,6 @@ BODY {
 }
 
 A  	{
-	font-family: Arial, Helvetica, sans-serif;
 	color: #003399;
 	text-decoration: none;
 }
@@ -43,7 +42,6 @@ A:VISITED {
 }
 
 A:Active  {
-	font-family: Arial, Helvetica, sans-serif;
 	color: #FF9900;
 	text-decoration: underline;
 }
@@ -241,7 +239,7 @@ table.upload td.remove- A.remove2-:ACTIVE { color:#ff0000 }
   color: ButtonText;
   border: 1px solid ButtonFace;
   padding: 1px;  margin: 0px;
-  cursor: pointer; cursor: hand; 
+  cursor: pointer; 
  }
  .toolbar img{
   width: 20px;
@@ -265,7 +263,7 @@ table.upload td.remove- A.remove2-:ACTIVE { color:#ff0000 }
 
 /* Wiki Formatting ---------------------------------------- */
 dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
-* html dfn { \background: url(javascript:DOTS) repeat-x bottom left; }
+* html dfn { background: url(javascript:DOTS) repeat-x bottom left; }
 
 STRIKE, S { color:#999999 }    
 STRIKE A:VISITED, S A:LINK { color:#999999 }
@@ -392,5 +390,4 @@ tt { color:#666600; background:#ffffcc; padding: 0 2px }
 
 .cite {color:#ff0000;font-style:normal;}
 /* .mark  { color: #008800;font-style:normal; } */
-.mark { color: #00000; background:#ffaaaa; }
-
+.mark { color: #000; background:#ffaaaa; }
