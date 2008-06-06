@@ -49,29 +49,29 @@ require_once("setup/lang/installer.".$config["language"].".php");
       <title><?php echo $lang["Title"];?></title>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <link rel="stylesheet" href="<?php echo myLocation() ?>setup/css/installer.css" type="text/css" />
-      <link rel="shortcut icon" href="<?php echo myLocation() ?>setup/favicon.ico" type="image/vnd.microsoft.icon" />
+      <link rel="shortcut icon" href="<?php echo myLocation() ?>setup/favicon.ico" type="image/x-icon" />
    </head>
    <body>
       <div class="installer">
-         <h1><?php echo $lang["Title"];?></h1><h1 class="white">&nbsp;//&nbsp;</h1><h1><?php echo $lang[$installAction]; ?></h1>
+         <h1><?php echo $lang["Title"];?></h1><h1 class="white">&nbsp;:&nbsp;</h1><h1><?php echo $lang[$installAction]; ?></h1>
          <ul class="menu">
             <li class="<?php echo $installAction == 'lang' ? 'current' : 'item'; ?>"><?php echo $lang["lang"]; ?></li>
-            <li>//</li>
+            <li>></li>
             <li class="<?php echo $installAction == 'version-check' ? 'current' : 'item'; ?>"><?php echo $lang["version-check"]; ?></li>
-            <li>//</li>
+            <li>></li>
             <li class="<?php echo $installAction == 'site-config' ? 'current' : 'item'; ?>"><?php echo $lang["site-config"]; ?></li>
-            <li>//</li>
+            <li>></li>
 <?php
    if(!$wakkaConfig["wakka_version"])
       {
 ?>
             <li class="<?php echo $installAction == 'database-config' ? 'current' : 'item'; ?>"><?php echo $lang["database-config"]; ?></li>
-            <li>//</li>
+            <li>></li>
 <?php
          }
 ?>
             <li class="<?php echo $installAction == 'database-install' ? 'current' : 'item'; ?>"><?php echo $lang["database-install"]; ?></li>
-            <li>//</li>
+            <li>></li>
             <li class="<?php echo $installAction == 'write-config' ? 'current' : 'item'; ?>"><?php echo $lang["write-config"]; ?></li>
          </ul>
          <div class="fake_hr"><hr /></div>
