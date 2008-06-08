@@ -11,7 +11,7 @@ $lang = array(
 /*
    Language Selection Page
 */
-"lang" => "Language Configuration",
+"Lang" => "Language Configuration",
 "LangDesc" => "Please choose a language for the installation process. This language will also be used as the default language of your WackoWiki installation.",
 
 /*
@@ -42,15 +42,15 @@ $lang = array(
 */
 "site-config" => "Site Configuration",
 "Name" => "WackoWiki Name",
-"nameDesc" => "Please enter the name of your WackoWiki site, this should be a <a href=\"http://wackowiki.de/Archiv/DocEnglish/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
+"NameDesc" => "Please enter the name of your WackoWiki site, this should be a <a href=\"http://wackowiki.de/Archiv/DocEnglish/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
 "Home" => "Home Page",
 "HomeDesc" => "Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href=\"http://wackowiki.de/Archiv/DocEnglish/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
-"multilang" => "Multi Language Mode",
+"MultiLang" => "Multi Language Mode",
 "MultiLangDesc" => "Multi language mode allows to have pages with different language settings within single installation.  With this setting enabled you can have multiple versions of the same page, each with its own language.  With this setting disabled you can still create pages with different languages but these pages will be seperate from each other.",
 "Admin" => "Admin Name",
 "AdminDesc" => "Enter the admins username, this should be a <a href=\"http://wackowiki.de/Archiv/DocEnglish/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
 "Password" => "Admin Password",
-"PasswDesc" => "Choose a password for the admin with a minimum of 5 characters.",
+"PasswordDesc" => "Choose a password for the admin with a minimum of 5 characters.",
 "Password2" => "Repeat Password:",
 "Mail" => "Admin Email Address",
 "MailDesc" => "Enter the admins email address.",

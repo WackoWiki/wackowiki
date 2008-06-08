@@ -81,7 +81,7 @@ else
    if(!$wakkaConfig["wakka_version"])
       {
 ?>
-            <h2><?php echo $lang["multilang"];?></h2>
+            <h2><?php echo $lang["MultiLang"];?></h2>
             <p class="notop"><?php echo $lang["MultiLangDesc"];?></p>
             <label class="indented_label" for="wiki_multilanguage"><?php echo $lang["Enabled"];?></label><input type="checkbox" id="wiki_multilanguage" name="config[multilanguage]" <?php echo $wakkaConfig["multilanguage"] ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
             <br />
@@ -92,7 +92,7 @@ else
             <br />
             <div class="fake_hr_seperator"><hr /></div>
             <h2><?php echo $lang["Password"];?></h2>
-            <p class="notop"><?php echo $lang["PasswDesc"];?></p>
+            <p class="notop"><?php echo $lang["PasswordDesc"];?></p>
             <input type="password" maxlength="50" name="password" value="" class="text_input" />
             <label class="label_password2" for="wiki_admin_password2"><?php echo $lang["Password2"];?></label><input type="password" maxlength="50" id="wiki_admin_password2" name="password2" value="" class="text_input" />
             <br />
