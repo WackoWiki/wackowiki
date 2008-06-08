@@ -57,7 +57,7 @@ $wakkaDefaultConfig = array(
 
   "root_page" => "HomePage",
   "wakka_name" => "MyWackoSite",
-  "base_url" => "http://".$_SERVER["SERVER_NAME"].
+  "base_url" => ($_SERVER['SERVER_PORT'] == 443 ? 'https' : 'http').'://'.$_SERVER["SERVER_NAME"].
                        ($_SERVER["SERVER_PORT"] != 80 ? ":".$_SERVER["SERVER_PORT"] : "").
                        preg_replace("/(\?|&)installAction=site-config/","",$_SERVER["REQUEST_URI"]).
                        ($found_rewrite_extension ? "" : "?page="),
