@@ -36,12 +36,44 @@ else
       Check which database extensions are installed and what versions of the db are there
    */
    $database_result = extension_loaded("mysql") || extension_loaded("mysqli") || extension_loaded("pdo");
+
+   /*
+      With PDO it is not enough that we can just say "ok we've detected PDO".
+      We have to actually confirm that one of the specific database types is enabled.
+      Later when we support all the PDO types this can be removed but for now we
+      only support a subset of them.
+
+      This is a copy of the array from database-config.php
+   */
+
+   $accepted_pdo_drivers = array();
+   $accepted_pdo_drivers[] = "mysql";
+
+   $detected = 0;
+
+   if(extension_loaded("pdo"))
+      {
+         // mssql mysql sqlite
+         $drivers = PDO::getAvailableDrivers();
+
+         for($count = 0; $count < count($drivers); $count++)
+            {
+               // If you want to find the name out
+               // print $drivers[$count];
+
+               if(in_array($drivers[$count], $accepted_pdo_drivers))
+                  {
+                     $detected++;
+                     break;
+                  }
+            }
+      }
 ?>
             <h2><?php echo $lang["Database"]; ?></h2>
             <ul>
                <li>MySQL - <?php print output_image(extension_loaded("mysql")); ?></li>
                <li>MySQLi - <?php print output_image(extension_loaded("mysqli")); ?></li>
-               <li>PDO - <?php print output_image(extension_loaded("pdo")); ?></li>
+               <li>PDO - <?php print output_image($detected > 0); ?></li>
             </ul>
 <?php
    /*

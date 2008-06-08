@@ -9,6 +9,7 @@ function myLocation()
 // Draws a tick or cross next to a result
 function output_image($ok)
    {
+      GLOBAL $lang;
       return "<img src=\"".myLocation()."setup/images/".($ok ? "tick" : "cross").".png\" width=\"20\" height=\"20\" alt=\"".($ok ? $lang["OK"] : $lang["Problem"])."\" class=\"tickcross\" />";
    }
 
