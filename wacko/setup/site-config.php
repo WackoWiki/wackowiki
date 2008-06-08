@@ -36,7 +36,7 @@ if (!$wakkaConfig["wakka_version"])
                            return false;
                         }
 
-                     if (f.elements["config[base_url]"].value.indexOf( "?" ) != -1 && f.elements["config[rewrite_mode]"].value != 0)
+                     if (f.elements["config[base_url]"].value.indexOf( "?" ) != -1 && f.elements["config[rewrite_mode]"].value != 0 && f.elements["config[rewrite_mode]"].value != undefined)
                         {
                            if (!confirm('<?php echo addcslashes($lang["WarningRewriteMode"],"\n"); ?>'))
                               {
