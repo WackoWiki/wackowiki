@@ -6,7 +6,7 @@ Please do NEVER forget: Microsoft != standard
 Based on the NoProbs template from Gururaj:
 http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 -->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
 	<meta name="author" content="Theme for WackoWiki by Robert Vaeth" />
 	<meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
