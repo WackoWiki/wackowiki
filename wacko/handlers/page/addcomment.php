@@ -1,37 +1,91 @@
 <?php
 
 if ($this->HasAccess("comment"))
-{
-	// find number
-	if ($latestComment = $this->LoadSingle("select tag, id from ".$this->config["table_prefix"]."pages where comment_on != '' order by id desc limit 1"))
-	{
-		preg_match("/^Comment([0-9]+)$/", $latestComment["tag"], $matches);
-		$num = $matches[1] + 1;
-	}
-	else
-	{
-		$num = "1";
-	}
+   {
+      // find number
+      if($latestComment = $this->LoadSingle("select tag, id from ".$this->config["table_prefix"]."pages where comment_on != '' order by id desc limit 1"))
+         {
+            preg_match("/^Comment([0-9]+)$/", $latestComment["tag"], $matches);
+            $num = $matches[1] + 1;
+         }
+      else
+         {
+            $num = "1";
+         }
 
-	$body = str_replace("\r", "", $_POST["body"]);
-	$body = trim($_POST["body"]);
+      $body = str_replace("\r", "", $_POST["body"]);
+      $body = trim($_POST["body"]);
 
-	if (!$body)
-	{
-		$this->SetMessage($this->GetResourceValue("EmptyComment"));
-	}
-	else
-	{
-		// store new comment
-		$this->SavePage("Comment".$num, $body, $this->tag);
-	}
+      if(!$body)
+         {
+            $this->SetMessage($this->GetResourceValue("EmptyComment"));
+         }
+      else
+         {
+            // Start Comment Captcha
 
-	// redirect to page
-	$this->redirect($this->href());
-}
+            // Only show captcha if the admin enabled it in the config file
+            if($this->GetConfigValue("captcha_new_comment"))
+               {
+                  // Don't load the captcha at all if the GD extension isn't enabled
+                  if(extension_loaded('gd'))
+                     {
+                        //check whether anonymous user
+                        //anonymous user has the IP or host name as name
+                        //if name contains '.', we assume it's anonymous
+                        if(strpos($this->GetUserName(), '.'))
+                           {
+                              //anonymous user, check the captcha
+                              if(!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
+                                 {
+                                    if($_SESSION['hash_func'](strtolower($_POST['word']))==$_SESSION['freecap_word_hash'])
+                                       {
+                                          // reset freecap session vars
+                                          // cannot stress enough how important it is to do this
+                                          // defeats re-use of known image with spoofed session id
+                                          $_SESSION['freecap_attempts'] = 0;
+                                          $_SESSION['freecap_word_hash'] = false;
+                                          $_SESSION['freecap_old_comment'] = "";
+
+                                          // now process form
+                                          $word_ok = "yes";
+                                       }
+                                    else
+                                       {
+                                          $word_ok = "no";
+                                       }
+                                 }
+                              else
+                                 {
+                                    $word_ok = false;
+                                 }
+
+                              if($word_ok != "yes")
+                                 {
+                                    //not the right word
+                                    $error = $this->GetResourceValue("SpamAlert");
+                                    $_SESSION['freecap_old_comment'] = $body;
+                                 }
+                           }
+                     }
+               }
+
+            if(!$error)
+               {
+                  // store new comment
+                  $this->SavePage("Comment".$num, $body, $this->tag);
+               }
+
+            // End Comment Captcha
+         }
+
+
+      // redirect to page
+      $this->redirect($this->href());
+   }
 else
-{
-	print("<div class=\"page\">".$this->GetResourceValue("CommentAccessDenied")."</div>\n");
-}
+   {
+      print("<div class=\"page\">".$this->GetResourceValue("CommentAccessDenied")."</div>\n");
+   }
 
 ?>
