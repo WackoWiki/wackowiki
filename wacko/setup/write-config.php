@@ -68,7 +68,7 @@ function array_to_str ($arr, $name="")
 
          print("         </ul>\n");
 
-         print("         <p>".str_replace("%1", $config["base_url"], $lang["InstallationComplete"])."</p>\n");
+         print("         <br /><p>".str_replace("%1", $config["base_url"], $lang["InstallationComplete"])."</p>\n");
       }
    else
       {

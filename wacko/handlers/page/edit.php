@@ -100,7 +100,7 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
 			<?php
 
 			if ($this->GetConfigValue("edit_table_based"))
-			$output .= '<div class="pageBefore"><img src="'.$this->GetConfigValue("root_url").'images/z.gif" width="1" height="1" border="0" alt="" style="display:block" align="top" /></div><div class="page">';
+			$output .= '<div class="pageBefore"><img src="'.$this->GetConfigValue("root_url").'images/z.gif" width="1" height="1" alt="" style="border-width:0px; display: block; vertical-align:top" /></div><div class="page">';
 
 			$output = "<fieldset class=\"preview\"><legend>".$this->GetResourceValue("EditPreview")."</legend>\n";
 

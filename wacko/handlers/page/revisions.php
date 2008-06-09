@@ -1,7 +1,6 @@
 <div class="pageBefore"><img
 	src="<?php echo $this->GetConfigValue("root_url"); ?>images/z.gif"
-	width="1" height="1" border="0" alt="" style="display: block"
-	align="top" /></div>
+	width="1" height="1" alt="" style="border-width:0px; display: block; vertical-align:top" /></div>
 <div class="page"><?php
 if ($this->HasAccess("read")) {
 	// load revisions for this page
