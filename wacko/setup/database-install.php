@@ -489,6 +489,7 @@ if(!$fatal_error)
             <input type="hidden" name="config[admin_email]" value="<?php echo $config["admin_email"];?>" />
             <input type="hidden" name="config[base_url]" value="<?php echo $config["base_url"];?>" />
             <input type="hidden" name="config[rewrite_mode]" value="<?php echo $config["rewrite_mode"];?>" />
+            <input type="hidden" name="config[cache]" value="<?php echo $config["cache"];?>" />
             <input type="hidden" name="config_s" value="<?php echo htmlspecialchars(serialize($config)) ?>" />
             <input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />
          </form>

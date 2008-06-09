@@ -66,6 +66,7 @@ else
 ?>
          <form action="<?php echo myLocation() ?>?installAction=<?php print !$wakkaConfig["wakka_version"] ? "database-config" : "database-install" ?>" method="post" name="form1">
             <input type="hidden" name="config[language]" value="<?php echo $config["language"];?>" />
+            <input type="hidden" name="config[cache]" value="<?php echo $config["cache"];?>" />
             <h2><?php echo $lang["Name"];?></h2>
             <p class="notop"><?php echo $lang["NameDesc"];?></p>
             <input type="text" maxlength="250" name="config[wakka_name]" value="<?php echo $wakkaConfig["wakka_name"] ?>" class="text_input" />
@@ -83,7 +84,7 @@ else
 ?>
             <h2><?php echo $lang["MultiLang"];?></h2>
             <p class="notop"><?php echo $lang["MultiLangDesc"];?></p>
-            <label class="indented_label" for="wiki_multilanguage"><?php echo $lang["Enabled"];?></label><input type="checkbox" id="wiki_multilanguage" name="config[multilanguage]" <?php echo $wakkaConfig["multilanguage"] ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
+            <label class="indented_label" for="wiki_multilanguage"><?php echo $lang["Enabled"];?></label><input type="hidden" id="wiki_multilanguage" name="config[multilanguage]" value="0" /><input type="checkbox" name="config[multilanguage]" <?php echo $wakkaConfig["multilanguage"] ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
             <br />
             <div class="fake_hr_seperator"><hr /></div>
             <h2><?php echo $lang["Admin"];?></h2>
