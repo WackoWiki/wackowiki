@@ -149,7 +149,7 @@ echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $t
 	type="password" name="password" class="login" size="8" />&nbsp;<input
 	type="image"
 	src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif"
-	alt=">>>" align="top" /></span> <?php
+	alt=">>>" style="vertical-align:top" /></span> <?php
 }
 // End if
 ?></div>
