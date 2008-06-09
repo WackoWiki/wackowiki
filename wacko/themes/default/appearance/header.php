@@ -15,7 +15,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
 <title><?php // Echoes Title of the page.  
 echo $this->GetWakkaName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");?></title>
@@ -134,14 +134,16 @@ if ($this->GetUser())
 if ($this->GetUser()) { ?> <span class="nobr"><?php echo $this->GetResourceValue("YouAre")." ".$this->Link($this->GetUserName()) ?></span>
 <small>( <span class="nobr Tune"><?php
 echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?>
-| <a
+ | <a
 	onclick="return confirm('<?php echo $this->GetResourceValue("LogoutAreYouSure");?>');"
 	href="<?php echo $this->Href("",$this->GetResourceValue("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetResourceValue("LogoutLink"); ?></a></span>
 )</small> <?php
 // Else Wacko shows login's controls
 } else {
-	?> <span class="nobr"><input type="hidden" name="goback"
-	value="<?php echo $this->SlimUrl($this->tag);?>" /><strong><?php echo $this->GetResourceValue("LoginWelcome") ?>:&nbsp;</strong><input
+	?> <span class="nobr">
+<input type="hidden" name="goback"
+	value="<?php echo $this->SlimUrl($this->tag);?>" /><strong><strong><?php echo $this->GetResourceValue("LoginWelcome") ?></strong>:&nbsp;</strong>
+<input
 	type="text" name="name" size="18" class="login" />&nbsp;<?php
 	echo $this->GetResourceValue("LoginPassword") ?>:&nbsp;<input
 	type="password" name="password" class="login" size="8" />&nbsp;<input
