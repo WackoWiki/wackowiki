@@ -31,8 +31,8 @@ $wakkaResource = array(
   "TOCTitle" => "Contents ",
   "SearchButtonText" => "Search",
   "OuterLink2" => "Outgoing link (in new window)",
-  "FileLink" => "", 
-  "PDFLink" => "PDF Document (in new window)", 
+  "FileLink" => "",
+  "PDFLink" => "PDF Document (in new window)",
   "RDFLink" => "RDF Document",
   "MailLink" => "Write an email (mail client launch)",
   "ShowTip" => "Click to return in view mode",
@@ -371,13 +371,18 @@ $wakkaResource = array(
   "PageRevisionsXML" => "History/revisions of ",
   "ExportClusterXML" => "Export of entire cluster of ",
   "AccessDeniedXML" => "You're not allowed to access this information.",
- 
+
   "RecentChangesRSS" => "RecentChanges in RSS",
   "RecentCommentsRSS" => "RecentComments in RSS",
   "HistoryRevisionsRSS" => "History/revisions of ",
 
   "LastModification" => "Last Modification",
 
+  // Captcha
+  "Captcha" => 'Please type the word you read in the image',
+  "SpamAlert" => 'You have entered the word incorrectly',
+  "CaptchaReload" => "New Captcha",
+  "CaptchaReloadWarning" => "Sorry, cannot reload the captcha image, you will have to reload the page to do that",
 );
 
 ?>

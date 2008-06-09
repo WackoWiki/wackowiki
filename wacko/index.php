@@ -137,6 +137,10 @@ $wakkaDefaultConfig = array(
 
   "spam_filter" => 1,
 
+  "captcha_new_comment" => 1,
+  "captcha_new_page" => 1,
+  "captcha_edit_page" => 1,
+  "captcha_registration" => 1,
   );
 $wakkaDefaultConfig['aliases'] = array('Admins' => "",);
 
