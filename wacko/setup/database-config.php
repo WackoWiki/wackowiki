@@ -40,12 +40,13 @@
             <input type="hidden" name="config[wakka_name]" value="<?php echo $config["wakka_name"];?>" />
             <input type="hidden" name="config[root_page]" value="<?php echo $config["root_page"];?>" />
             <input type="hidden" name="config[language]" value="<?php echo $config["language"];?>" />
-            <input type="hidden" name="config[multilanguage]" value="<?php echo $config["multilanguage"];?>" />
+            <input type="hidden" name="config[multilanguage]" value="<?php echo $config["multilanguage"] == 'on' ? 1 : $config["multilanguage"]; ?>" />
             <input type="hidden" name="config[admin_name]" value="<?php echo $config["admin_name"];?>" />
             <input type="hidden" name="password" value="<?php echo $_POST["password"];?>" />
             <input type="hidden" name="config[admin_email]" value="<?php echo $config["admin_email"];?>" />
             <input type="hidden" name="config[base_url]" value="<?php echo $config["base_url"];?>" />
-            <input type="hidden" name="config[rewrite_mode]" value="<?php echo $config["rewrite_mode"];?>" />
+            <input type="hidden" name="config[rewrite_mode]" value="<?php echo $config["rewrite_mode"] == 'on' ? 1 : $config["rewrite_mode"]; ?>" />
+            <input type="hidden" name="config[cache]" value="<?php echo $config["cache"];?>" />
 <?php
    // If none of the PHP SQL extensions are loaded then let the user know there is a problem
    if(!extension_loaded("mysql") && !extension_loaded("mysqli") && !extension_loaded("pdo"))

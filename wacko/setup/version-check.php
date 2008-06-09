@@ -88,6 +88,9 @@ else
    @chmod ("sitemap.xml", 0777);
    @chmod ("wakka.config.php", 0777);
 
+   // If the cache directory is writable then we can enable caching as default
+   print("            <input type=\"hidden\" name=\"config[cache]\" value=\"".(is__writable('_cache/') ? "1" : $wakkaConfig["cache"])."\" />\n");
+
    $file_permissions_result = is__writable('wakka.config.php') && is__writable('_cache/') && is__writable('xml/') && is__writable('files/') && is__writable('files/perpage/') && is__writable('sitemap.xml');
 ?>
             <h2><?php echo $lang["Permissions"]; ?></h2>
