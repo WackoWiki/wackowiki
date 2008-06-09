@@ -2,13 +2,13 @@
 // contributed by Nekipelov Alex (mailto:nalex <AT> pisem.net)
 ?>
 <div class="pageBefore"><img
-	src="<?php echo $this->GetConfigValue("root_url"); ?>images/z.gif"
-	width="1" height="1" alt="" style="border-width:0px; display: block; vertical-align:top" /></div>
+   src="<?php echo $this->GetConfigValue("root_url"); ?>images/z.gif"
+   width="1" height="1" alt="" style="border-width:0px; display: block; vertical-align:top" /></div>
 <div class="page"><?php
 if ($user = $this->GetUser())
 {
-	$user = strtolower($this->GetUserName());
-	$registered = true;
+   $user = strtolower($this->GetUserName());
+   $registered = true;
 }
 else
 $user = "guest@wacko";
@@ -18,42 +18,42 @@ if ($registered
 ($this->CheckACL($user,$this->config["rename_globalacl"]) || strtolower($this->GetPageOwner($this->tag)) == $user)
 )
 {
-	if (!$this->page)
-	{
-		print(str_replace("%1",$this->href("edit"),$this->GetResourceValue("DoesNotExists")));
-	}
-	else
-	{
-		if ($_POST["newname"] && $_POST["rename"]=="1")
-		{
-			print "<p><b>".$this->GetResourceValue("MassRenaming")."</b><p>";   //!!!
-			RecursiveMove($this, $this->tag );
-		}
-		else
-		{
-			echo $this->GetResourceValue("MassNewName");
-			echo $this->FormOpen("massrename");
+   if (!$this->page)
+   {
+      print(str_replace("%1",$this->href("edit"),$this->GetResourceValue("DoesNotExists")));
+   }
+   else
+   {
+      if ($_POST["newname"] && $_POST["rename"]=="1")
+      {
+         print "<p><b>".$this->GetResourceValue("MassRenaming")."</b><p>";   //!!!
+         RecursiveMove($this, $this->tag );
+      }
+      else
+      {
+         echo $this->GetResourceValue("MassNewName");
+         echo $this->FormOpen("massrename");
 
-			?> <input type="hidden" name="rename" value="1" /> <input type="text"
-	name="newname" value="<?php echo $this->tag;?>" size="40" /><br />
-			<?php echo "<input type=\"checkbox\" id=\"ch1\" name=\"redirect\"  /> <label for=\"ch1\">".$this->GetResourceValue("MassNeedRedirect")."</label>"; ?>
+         ?> <input type="hidden" name="rename" value="1" /> <input type="text"
+   name="newname" value="<?php echo $this->tag;?>" size="40" /><br />
+         <?php echo "<input type=\"checkbox\" id=\"ch1\" name=\"redirect\"  /> <label for=\"ch1\">".$this->GetResourceValue("MassNeedRedirect")."</label>"; ?>
 <br />
 <br />
 
 <br />
 <input name="submit" class="OkBtn_Top"
-	onmouseover='this.className="OkBtn_Top_";'
-	onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
-	value="<?php echo $this->GetResourceValue("RenameButton"); ?>" /> <img
-	src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
-	width="100" height="1" alt="" border="0" /> <input
-	class="CancelBtn_Top" onmouseover='this.className="CancelBtn_Top_";'
-	onmouseout='this.className="CancelBtn_Top";' type="button" align="top"
-	value="<?php echo str_replace("\n"," ",$this->GetResourceValue("EditCancelButton")); ?>"
-	onclick="document.location='<?php echo addslashes($this->href(""))?>';" /><br />
+   onmouseover='this.className="OkBtn_Top_";'
+   onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
+   value="<?php echo $this->GetResourceValue("RenameButton"); ?>" /> <img
+   src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
+   width="100" height="1" alt="" border="0" /> <input
+   class="CancelBtn_Top" onmouseover='this.className="CancelBtn_Top_";'
+   onmouseout='this.className="CancelBtn_Top";' type="button" align="top"
+   value="<?php echo str_replace("\n"," ",$this->GetResourceValue("EditCancelButton")); ?>"
+   onclick="document.location='<?php echo addslashes($this->href(""))?>';" /><br />
 <br />
 [<a
-	href="<?php echo $this->href("rename" )."\">".$this->GetResourceValue("SettingsRename" ); ?></a>]<br />
+   href="<?php echo $this->href("rename" )."\">".$this->GetResourceValue("SettingsRename" ); ?></a>]<br />
 <?php echo $this->FormClose();
    }
   }
@@ -80,7 +80,8 @@ function RecursiveMove(&$parent, $root)
            " and comment_on = ''");
   foreach( $pages as $page )
   {
-    $new_name = str_replace( $root, $new_root, $page["tag"] );
+    // $new_name = str_replace( $root, $new_root, $page["tag"] );
+    $new_name = preg_replace('/'.preg_quote($root, '/').'/', preg_quote($new_root), $page["tag"], 1);
     Move( $parent, $page, $new_name );
   }
 }
