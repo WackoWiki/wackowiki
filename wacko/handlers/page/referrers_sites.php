@@ -1,7 +1,6 @@
-<div class="pageBefore"><img
-	src="<?php echo $this->GetConfigValue("root_url"); ?>images/z.gif"
-	width="1" height="1" alt="" style="border-width:0px; display: block; vertical-align:top" /></div>
-<div class="page"><?php
+<div class="pageBefore">&nbsp;</div>
+<div class="page">
+  <?php
 if ($global = $_GET["global"])
 {
 	$title = str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetResourceValue("Domains/SitesPages(Global)"));
@@ -41,16 +40,17 @@ if ($referrers)
 
 	array_multisort($referrer_sites, SORT_DESC, SORT_NUMERIC);
 	reset($referrer_sites);
-
-	print("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n");
+?>
+  <div class="cssform">
+    <?php
 	foreach ($referrer_sites as $site => $site_count)
-	{
-		print("<tr>");
-		print("<td width=\"30\" align=\"right\" valign=\"top\" style=\"padding-right: 10px\">$site_count</td>");
-		print("<td valign=\"top\">" . (($site != "unknown") ? "<a href=\"http://$site\">$site</a>" : $site) . "</td>");
-		print("</tr>\n");
+	{ ?>
+    <p><span class="site_count"><?php echo $site_count; ?></span><?php print((($site != "unknown") ? "<a href=\"http://$site\">$site</a>" : $site)); ?></p>
+    <?php
 	}
-	print("</table>\n");
+	?>
+  </div>
+  <?php
 }
 else
 {
@@ -66,4 +66,5 @@ else
 	print("<br />[".str_replace("%1",$this->href("referrers_sites", "", "global=1"),$this->GetResourceValue("ViewReferringSites(Global)")) ." | ".str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetResourceValue("ViewReferrersFor(Global)"))."]");
 }
 
-?></div>
+?>
+</div>

@@ -1,7 +1,6 @@
-<div class="pageBefore"><img
-	src="<?php echo $this->GetConfigValue("root_url"); ?>images/z.gif"
-	width="1" height="1" alt="" style="border-width:0px; display: block; vertical-align:top" /></div>
-<div class="page"><?php
+<div class="pageBefore">&nbsp;</div>
+<div class="page">
+  <?php
 
 if ($this->UserIsOwner())
 {
@@ -41,27 +40,27 @@ if ($this->UserIsOwner())
 
 		// show form
 		?>
-<h3><?php echo str_replace("%1",$this->Link("/".$this->GetPageTag()),$this->GetResourceValue("ACLForCluster")); ?></h3>
-<br />
-
-		<?php echo $this->FormOpen("massacls") ?>
-<table border="0" cellspacing="0" cellpadding="0">
-	<tr>
-		<td valign="top" style="padding-right: 20px"><?php echo $this->GetResourceValue("ACLRead"); ?><br />
-		<textarea name="read_acl" rows="4" cols="20"><?php echo $readACL["list"] ?></textarea>
-		</td>
-		<td valign="top" style="padding-right: 20px"><?php echo $this->GetResourceValue("ACLWrite"); ?><br />
-		<textarea name="write_acl" rows="4" cols="20"><?php echo $writeACL["list"] ?></textarea>
-		</td>
-		<td valign="top" style="padding-right: 20px"><?php echo $this->GetResourceValue("ACLComment"); ?><br />
-		<textarea name="comment_acl" rows="4" cols="20"><?php echo $commentACL["list"] ?></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="3"><?php echo $this->GetResourceValue("SetOwner"); ?><br />
-		<select name="newowner">
-			<option value=""><?php echo $this->GetResourceValue("OwnerDon'tChange"); ?></option>
-			<?php
+  <h3><?php echo str_replace("%1",$this->Link("/".$this->GetPageTag()),$this->GetResourceValue("ACLForCluster")); ?></h3>
+  <br />
+  <?php echo $this->FormOpen("massacls") ?>
+  <div class="cssform">
+    <p><label<?php echo $this->GetResourceValue("ACLRead"); ?>
+      </label>
+      <textarea name="read_acl" rows="4" cols="20"><?php echo $readACL["list"] ?></textarea>
+    </p>
+    <p>
+      <label><?php echo $this->GetResourceValue("ACLWrite"); ?></label>
+      <textarea name="write_acl" rows="4" cols="20"><?php echo $writeACL["list"] ?></textarea>
+    </p>
+    <p>
+      <label><?php echo $this->GetResourceValue("ACLComment"); ?></label>
+      <textarea name="comment_acl" rows="4" cols="20"><?php echo $commentACL["list"] ?></textarea>
+    </p>
+    <p>
+      <label><?php echo $this->GetResourceValue("SetOwner"); ?></label>
+      <select name="newowner">
+        <option value=""><?php echo $this->GetResourceValue("OwnerDon'tChange"); ?></option>
+        <?php
 			if ($users = $this->LoadUsers())
 			{
 				foreach($users as $user)
@@ -70,26 +69,24 @@ if ($this->UserIsOwner())
 				}
 			}
 			?>
-		</select></td>
-	</tr>
-	<tr>
-		<td colspan="3"><br />
-		<input class="OkBtn" onmouseover='this.className="OkBtn_";'
-			onmouseout='this.className="OkBtn";'
-			onclick='return confirm("<?php echo $this->GetResourceValue("ACLAreYouSure"); ?>")'
+      </select>
+    </p>
+    <p>
+      <input class="OkBtn" onmouseover='this.className=&quot;OkBtn_&quot;;'
+			onmouseout='this.className=&quot;OkBtn&quot;;'
+			onclick='return confirm(&quot;<?php echo $this->GetResourceValue("ACLAreYouSure"); ?>&quot;)'
 			type="submit" align="top"
 			value="<?php echo $this->GetResourceValue("ACLStoreButton"); ?>"
-			style="width: 120px" /> <img
-			src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
-			width="100" height="1" alt="" border="0" /> <input class="CancelBtn"
-			onmouseover='this.className="CancelBtn_";'
-			onmouseout='this.className="CancelBtn";' type="button" align="top"
+			style="width: 120px" />
+      <input class="CancelBtn"
+			onmouseover='this.className=&quot;CancelBtn_&quot;;'
+			onmouseout='this.className=&quot;CancelBtn&quot;;' type="button" align="top"
 			value="<?php echo $this->GetResourceValue("ACLCancelButton"); ?>"
 			onclick="document.location='<?php echo addslashes($this->href(""))?>';"
-			style="width: 120px" /></td>
-	</tr>
-</table>
-			<?php
+			style="width: 120px" />
+    </p>
+  </div>
+  <?php
 			print($this->FormClose());
 }
 }
@@ -97,7 +94,6 @@ else
 {
 	print($this->GetResourceValue("ACLAccessDenied"));
 }
-?> <br />
-[<a
-	href="<?php echo $this->href("acls" )."\">".$this->GetResourceValue("SettingsAcls" ); ?></a>]
-</div>
+?>
+  <br />
+  [<a	href="<?php echo $this->href("acls" );?>"><?php echo $this->GetResourceValue("SettingsAcls" ); ?></a>] </div>

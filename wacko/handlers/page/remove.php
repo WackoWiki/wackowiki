@@ -1,7 +1,6 @@
-<div class="pageBefore"><img
-	src="<?php echo $this->GetConfigValue("root_url"); ?>images/z.gif"
-	width="1" height="1" alt="" style="border-width:0px; display: block; vertical-align:top" /></div>
-<div class="page"><?php
+<div class="pageBefore">&nbsp;</div>
+<div class="page">
+  <?php
 
 if ($this->IsAdmin() ||
 (!$this->GetConfigValue("remove_onlyadmins") &&
@@ -74,19 +73,22 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 				echo "</fieldset>\n";
 			}
 
-			?> <br />
-<br />
-<input type="hidden" name="delete" value="1" /> <input name="submit"
-	class="OkBtn_Top" onmouseover='this.className="OkBtn_Top_";'
-	onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
-	value="<?php echo $this->GetResourceValue("RemoveButton"); ?>" /> <img
-	src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
-	width="100" height="1" alt="" border="0" /> <input
-	class="CancelBtn_Top" onmouseover='this.className="CancelBtn_Top_";'
-	onmouseout='this.className="CancelBtn_Top";' type="button" align="top"
+			?>
+  <br />
+  <br />
+  <input type="hidden" name="delete" value="1" />
+  <input name="submit"
+	class="OkBtn_Top" onmouseover='this.className=&quot;OkBtn_Top_&quot;;'
+	onmouseout='this.className=&quot;OkBtn_Top&quot;;' type="submit" align="top"
+	value="<?php echo $this->GetResourceValue("RemoveButton"); ?>" />
+  &nbsp;
+  <input
+	class="CancelBtn_Top" onmouseover='this.className=&quot;CancelBtn_Top_&quot;;'
+	onmouseout='this.className=&quot;CancelBtn_Top&quot;;' type="button" align="top"
 	value="<?php echo str_replace("\n"," ",$this->GetResourceValue("EditCancelButton")); ?>"
-	onclick="document.location='<?php echo addslashes($this->href(""))?>';" /><br />
-			<?php echo $this->FormClose();
+	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
+  <br />
+  <?php echo $this->FormClose();
 }
 }
 }

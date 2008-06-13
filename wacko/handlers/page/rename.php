@@ -1,7 +1,6 @@
-<div class="pageBefore"><img
-	src="<?php echo $this->GetConfigValue("root_url"); ?>images/z.gif"
-	width="1" height="1" alt="" style="border-width:0px; display: block; vertical-align:top" /></div>
-<div class="page"><?php
+<div class="pageBefore">&nbsp;</div>
+<div class="page">
+  <?php
 if ($user = $this->GetUser())
 {
 	$user = strtolower($this->GetUserName());
@@ -95,13 +94,15 @@ if ($registered
 			echo $this->GetResourceValue("NewName");
 			echo $this->FormOpen("rename");
 
-			?> <input type="hidden" name="rename" value="1" /> <input type="text"
-	name="newname" value="<?php echo $this->tag;?>" size="40" /><br />
-			<?php echo "<input type=\"checkbox\" id=\"ch1\" name=\"redirect\" "; if ($this->GetConfigValue("default_rename_redirect")==1){echo "checked ";}; echo " /> <label for=\"ch1\">".$this->GetResourceValue("NeedRedirect")."</label>"; ?>
-<br />
-<br />
-<br />
-			<?php
+			?>
+  <input type="hidden" name="rename" value="1" />
+  <input type="text"
+	name="newname" value="<?php echo $this->tag;?>" size="40" />
+  <br />
+  <?php echo "<input type=\"checkbox\" id=\"ch1\" name=\"redirect\" "; if ($this->GetConfigValue("default_rename_redirect")==1){echo "checked ";}; echo " /> <label for=\"ch1\">".$this->GetResourceValue("NeedRedirect")."</label>"; ?> <br />
+  <br />
+  <br />
+  <?php
 			if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
 			{
 				print("<fieldset><legend>".$this->GetResourceValue("AlertReferringPages").":</legend>\n");
@@ -111,22 +112,23 @@ if ($registered
 				}
 				echo "</fieldset>\n";
 			}
-			?> <br />
-<br />
-<input name="submit" class="OkBtn_Top"
-	onmouseover='this.className="OkBtn_Top_";'
-	onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
-	value="<?php echo $this->GetResourceValue("RenameButton"); ?>" /> <img
-	src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
-	width="100" height="1" alt="" border="0" /> <input
-	class="CancelBtn_Top" onmouseover='this.className="CancelBtn_Top_";'
-	onmouseout='this.className="CancelBtn_Top";' type="button" align="top"
+			?>
+  <br />
+  <br />
+  <input name="submit" class="OkBtn_Top"
+	onmouseover='this.className=&quot;OkBtn_Top_&quot;;'
+	onmouseout='this.className=&quot;OkBtn_Top&quot;;' type="submit" align="top"
+	value="<?php echo $this->GetResourceValue("RenameButton"); ?>" />
+  &nbsp;
+  <input
+	class="CancelBtn_Top" onmouseover='this.className=&quot;CancelBtn_Top_&quot;;'
+	onmouseout='this.className=&quot;CancelBtn_Top&quot;;' type="button" align="top"
 	value="<?php echo str_replace("\n"," ",$this->GetResourceValue("EditCancelButton")); ?>"
-	onclick="document.location='<?php echo addslashes($this->href(""))?>';" /><br />
-<br />
-[<a
-	href="<?php echo $this->href("massrename" )."\">".$this->GetResourceValue("SettingsMassRename" ); ?></a>]<br />
-<?php echo $this->FormClose();
+	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
+  <br />
+  <br />
+  [<a	href="<?php echo $this->href("massrename" );?>"><?php echo $this->GetResourceValue("SettingsMassRename" ); ?></a>]<br />
+  <?php echo $this->FormClose();
    }
   }
 }
@@ -134,5 +136,4 @@ else
 {
   print($this->GetResourceValue("NotOwnerAndCantRename"));
 }
-?>
-</div>
+?> </div>
