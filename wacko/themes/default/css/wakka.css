@@ -368,3 +368,43 @@ tt { color:#666600; background:#ffffcc; padding: 0 2px }
 .cite {color:#ff0000;font-style:normal;}
 /* .mark  { color: #008800;font-style:normal; } */
 .mark { color: #000; background:#ffaaaa; }
+
+/* CSS form formater */
+.cssform p{
+width: 300px;
+clear: left;
+margin: 0;
+padding: 5px 0 8px 0;
+padding-left: 155px; /*width of left column containing the label elements*/
+border-top: 1px dashed gray;
+height: 1%;
+}
+
+.cssform label{
+font-weight: bold;
+float: left;
+margin-left: -155px; /*width of left column*/
+width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/ }
+
+.cssform input[type="text"]{ /*width of text boxes. IE6 does not understand this attribute*/
+width: 180px;
+}
+
+.cssform textarea{
+width: 250px;
+height: 150px;
+}
+
+.cssform span.site_count{
+font-weight: normal;
+float: left;
+margin-left: -155px; /*width of left column*/
+width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/ }
+
+.BewareChangeLang{
+border: 1px solid red;
+width: 400px;
+background-color: #DDDDDD;
+margin: 10px;
+padding: 5px;
+}
