@@ -144,7 +144,7 @@ if ($this->GetConfigValue("footer_files")) {
   else
   {
     ?>
-    &lt;div class="filesheader="filesheader"">
+    <div class="filesheader">
 <?php
       if ($this->page["id"])
        $files = $this->LoadAll( "select id from ".$this->config["table_prefix"]."upload where ".
