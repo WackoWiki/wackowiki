@@ -1,6 +1,4 @@
-<div class="pageBefore"><img
-	src="<?php echo $this->GetConfigValue("root_url"); ?>images/z.gif"
-	width="1" height="1" alt="" style="border-width:0px; display: block; vertical-align:top" /></div>
+<div class="pageBefore">&nbsp;</div>
 <div class="page"><?php
 if ($user = $this->GetUser())
 {

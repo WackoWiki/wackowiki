@@ -1,8 +1,6 @@
-<div class="pageBefore"><img
-   src="<?php echo $this->GetConfigValue("root_url"); ?>images/z.gif"
-   width="1" height="1" alt="" style="border-width:0px; display: block; vertical-align:top"
-    /></div>
-<div class="page"><?php
+<div class="pageBefore">&nbsp;</div>
+<div class="page">
+  <?php
 if ($this->HasAccess("read"))
 {
    if (!$this->page)
@@ -52,22 +50,29 @@ if ($this->HasAccess("read"))
       $data = $this->NumerateToc( $data ); //  numerate toc if needed
       echo $data;
       $this->SetLanguage($this->userlang);
-      ?> <script language="JavaScript" type="text/javascript">
+      ?>
+  <script language="JavaScript" type="text/javascript">
    var dbclick = "page";
-  </script> <?php
+  </script>
+  <?php
 
   // if this is an old revision, display some buttons
   if ($this->HasAccess("write") && ($this->page["latest"] == "N"))
   {
    $latest = $this->LoadPage($this->tag);
-   ?> <br />
-   <?php echo $this->FormOpen("edit") ?> <input type="hidden"
-   name="previous" value="<?php echo $latest["time"] ?>" /> <input
+   ?>
+  <br />
+  <?php echo $this->FormOpen("edit") ?>
+  <input type="hidden"
+   name="previous" value="<?php echo $latest["time"] ?>" />
+  <input
    type="hidden" name="body"
-   value="<?php echo htmlspecialchars($this->page["body"]) ?>" /> <input
+   value="<?php echo htmlspecialchars($this->page["body"]) ?>" />
+  <input
    type="submit"
-   value="<?php echo $this->GetResourceValue("ReEditOldRevision") ?>" /> <?php echo $this->FormClose(); ?>
-   <?php
+   value="<?php echo $this->GetResourceValue("ReEditOldRevision") ?>" />
+  <?php echo $this->FormClose(); ?>
+  <?php
 }
 }
 }
@@ -76,8 +81,9 @@ else
    if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
    print($this->GetResourceValue("ReadAccessDenied"));
 }
-?> <br style="clear: both" />
-&nbsp;</div>
+?>
+  <br style="clear: both" />
+  &nbsp;</div>
 <?php
 if ($this->GetConfigValue("footer_files")) {
 
@@ -104,11 +110,12 @@ if ($this->GetConfigValue("footer_files")) {
       {
          // display files header
          ?>
-<a name="files"></a>
-<div class="filesheader"><?php echo $this->GetResourceValue("Files_all") ?>
-[<a
-   href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?></a>]
-    </div>
+<a name="files" id="files"></a>
+<div class="filesheader">
+<?php echo $this->GetResourceValue("Files_all") ?> [<a
+
+   href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?>&lt;/a&gt;]
+    &lt;/div&gt;
     <?php
 
     echo "<div class=\"files\">";
@@ -137,8 +144,8 @@ if ($this->GetConfigValue("footer_files")) {
   else
   {
     ?>
-    <div class="filesheader">
-    <?php
+    &lt;div class="filesheader="filesheader"">
+<?php
       if ($this->page["id"])
        $files = $this->LoadAll( "select id from ".$this->config["table_prefix"]."upload where ".
                              " page_id = '". quote($this->dblink, $this->page["id"]) ."'");
@@ -156,8 +163,7 @@ if ($this->GetConfigValue("footer_files")) {
         print(str_replace("%1",count($files), $this->GetResourceValue("Files_n")));
       }
     ?>
-
-    [<a href="<?php echo $this->href("", "", "show_files=1#files")."\">".$this->GetResourceValue("ShowFiles"); ?></a>]
+[<a href="<?php echo $this->href("", "", "show_files=1#files")."\">".$this->GetResourceValue("ShowFiles"); ?></a>]
 
     </div>
     <?php
@@ -194,9 +200,9 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     // display comments header
     ?>
     <a name="comments"></a>
-    <div class="commentsheader">
-      <?php echo $this->GetResourceValue("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetResourceValue("HideComments"); ?></a>]
-    </div>
+<div class="commentsheader">
+<?php echo $this->GetResourceValue("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetResourceValue("HideComments"); ?>&lt;/a&gt;]
+    &lt;/div&gt;
     <?php
 
     // display comments themselves
@@ -223,10 +229,11 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     if ($this->HasAccess("comment"))
     {
       ?>
-        <?php echo $this->GetResourceValue("AttachComment"); ?><br />
+        <?php echo $this->GetResourceValue("AttachComment"); ?>&lt;br /&gt;
         <?php echo $this->FormOpen("addcomment"); ?>
-          <textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION['freecap_old_comment']; ?></textarea>
-          <?php
+          &lt;textarea name="body="body"" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION['freecap_old_comment']; ?>
+</textarea>
+<?php
             // captcha code starts
 
             // Only show captcha if the admin enabled it in the config file
@@ -237,27 +244,27 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
                      {
                         if(strpos($this->GetUserName(), '.'))
                            {
-          ?>          <p><?php echo $this->GetResourceValue("Captcha");?></p>
-          <img src="<?php echo $this->GetConfigValue("root_url");?>captcha/freecap.php" id="freecap" alt="<?php echo $this->GetResourceValue("Captcha");?>" /> <a href="" onClick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetResourceValue("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("theme_url");?>icons/reload.png" width="18" height="17" alt="<?php echo $this->GetResourceValue("CaptchaReload"); ?>" /></a>
-          <br />
-          <br />
+          ?>
+<p><?php echo $this->GetResourceValue("Captcha");?></p>
+<img src="<?php echo $this->GetConfigValue("root_url");?>captcha/freecap.php" id="freecap" alt="<?php echo $this->GetResourceValue("Captcha");?>" /> <a href="" onClick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetResourceValue("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("theme_url");?>icons/reload.png" width="18" height="17" alt="<?php echo $this->GetResourceValue("CaptchaReload"); ?>" /></a> <br />
+<br />
 <?php
                            }
                      }
                }
             // end captcha
 ?>
-          <input type="submit" value="<?php echo $this->GetResourceValue("AttachCommentButton"); ?>" accesskey="s" />
-        <?php echo $this->FormClose(); ?>
-      <?php
+<input type="submit" value="<?php echo $this->GetResourceValue("AttachCommentButton"); ?>" accesskey="s" />
+<?php echo $this->FormClose(); ?>
+<?php
     }
     print("</div>\n");
   }
   else
   {
     ?>
-    <div class="commentsheader">
-    <?php
+<div class="commentsheader">
+  <?php
       switch (count($comments))
       {
       case 0:
@@ -270,11 +277,8 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
         print(str_replace("%1",count($comments), $this->GetResourceValue("Comments_n")));
       }
     ?>
-
-    [<a href="<?php echo $this->href("", "", "show_comments=1#comments")."\">".$this->GetResourceValue("ShowComments"); ?></a>]
-
-    </div>
-    <?php
+  [<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->GetResourceValue("ShowComments"); ?></a>] </div>
+<?php
   }
 }
 }

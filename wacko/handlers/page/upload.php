@@ -1,7 +1,6 @@
-<div class="pageBefore"><img
-	src="<?php echo $this->GetConfigValue("root_url"); ?>images/z.gif"
-	width="1" height="1" alt="" style="border-width:0px; display: block; vertical-align:top" /></div>
-<div class="page"><?php
+<div class="pageBefore">&nbsp;</div>
+<div class="page">
+  <?php
 if ($user = $this->GetUser())
 {
 	$user = strtolower($this->GetUserName());
@@ -39,25 +38,30 @@ if ($registered
 				echo "<h1>".$this->GetResourceValue("UploadRemoveConfirm")."</h1>";
 				echo $this->FormOpen("upload");
 				// !!!!! place here a reference to delete files
-				?> <br />
-<ul>
-	<li><?php echo $this->Link( "file:".(($_GET["remove"] == "global")?"":($this->tag."/")).$_GET["file"] ); ?></li>
-</ul>
-<br />
-<input type="hidden" name="remove" value="<?php echo $_GET["remove"]?>" />
-<input type="hidden" name="file" value="<?php echo $_GET["file"]?>" /> <input
+				?>
+  <br />
+  <ul>
+    <li><?php echo $this->Link( "file:".(($_GET["remove"] == "global")?"":($this->tag."/")).$_GET["file"] ); ?></li>
+  </ul>
+  <br />
+  <input type="hidden" name="remove" value="<?php echo $_GET["remove"]?>" />
+  <input type="hidden" name="file" value="<?php echo $_GET["file"]?>" />
+  <input
 	name="submit" class="OkBtn_Top"
-	onmouseover='this.className="OkBtn_Top_";'
-	onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
-	value="<?php echo $this->GetResourceValue("RemoveButton"); ?>" /> <img
+	onmouseover='this.className=&quot;OkBtn_Top_&quot;;'
+	onmouseout='this.className=&quot;OkBtn_Top&quot;;' type="submit" align="top"
+	value="<?php echo $this->GetResourceValue("RemoveButton"); ?>" />
+  <img
 	src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
-	width="100" height="1" alt="" border="0" /> <input
-	class="CancelBtn_Top" onmouseover='this.className="CancelBtn_Top_";'
-	onmouseout='this.className="CancelBtn_Top";' type="button" align="top"
+	width="100" height="1" alt="" border="0" />
+  <input
+	class="CancelBtn_Top" onmouseover='this.className=&quot;CancelBtn_Top_&quot;;'
+	onmouseout='this.className=&quot;CancelBtn_Top&quot;;' type="button" align="top"
 	value="<?php echo str_replace("\n"," ",$this->GetResourceValue("EditCancelButton")); ?>"
-	onclick="document.location='<?php echo addslashes($this->href(""))?>';" /><br />
-<br />
-				<?php   echo $this->FormClose();
+	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
+  <br />
+  <br />
+  <?php   echo $this->FormClose();
 } else
 print($this->GetResourceValue("UploadRemoveDenied"));
 } else
@@ -195,13 +199,14 @@ else
 					// 4. output link to file
 					// !!!!! write after providing filelink syntax
 					echo "<h1>".$this->GetResourceValue("UploadDone")."</h1>";
-					?> <br />
-<ul>
-	<li><?php echo $this->Link( "file:".(($is_global)?"":($this->tag."/")).$small_name ); ?></li>
-	<li>"<?php echo $description; ?>"</li>
-</ul>
-<br />
-					<?php
+					?>
+  <br />
+  <ul>
+    <li><?php echo $this->Link( "file:".(($is_global)?"":($this->tag."/")).$small_name ); ?></li>
+    <li>&quot;<?php echo $description; ?>&quot;</li>
+  </ul>
+  <br />
+  <?php
 
 }
 else //forbid
@@ -239,4 +244,5 @@ else
 	print($this->GetResourceValue("UploadForbidden"));
 }
 if (!$this->GetConfigValue("revisions_hide_cancel")) echo "<input type=\"button\" value=\"".$this->GetResourceValue("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
-?></div>
+?>
+</div>
