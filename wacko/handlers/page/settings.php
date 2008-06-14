@@ -58,7 +58,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 			print($this->FormClose());
 }
 ?>
-  <p><?php echo $this->GetResourceValue("SettingsPortal");?>
+  <p><?php echo $this->GetResourceValue("SettingsPortal");?></p>
   <ul>
     <li><a href="<?php echo $this->href("edit");?>"><?php echo $this->GetResourceValue("SettingsEdit"); ?></a></li>
     <li><a href="<?php echo $this->href("revisions");?>"><?php echo $this->GetResourceValue("SettingsRevisions"); ?></a></li>
@@ -86,5 +86,4 @@ else
    print($this->GetResourceValue("ReadAccessDenied"));
 }
 ?>
-  </li>
 </div>
