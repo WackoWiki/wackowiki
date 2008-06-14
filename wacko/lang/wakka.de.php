@@ -211,7 +211,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Baumansicht des Clusters %1",
   "Tree:SiteTitle" => "Baumansicht der Seite",
   "Tree:Empty" => "%1&nbsp;hat keine Unterseiten",
-  "search_title_help" => "",
+  "search_title_help" => "Klicke hier um alle Seiten zu zeigen, die diesen Seitentitel enthalten.",
 
   "RenameText" => "Umbenennen...",
   "NewName" => "Neuer Name für diese Seite",

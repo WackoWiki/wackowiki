@@ -210,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" =>"Træ for området %1",
   "Tree:SiteTitle" =>"Træ for ",
   "Tree:Empty" => "%1&nbsp;har ingen undersider",
-  "search_title_help" => "",
+  "search_title_help" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Omdøb...",
   "NewName" => "Skriv nyt navn for siden",

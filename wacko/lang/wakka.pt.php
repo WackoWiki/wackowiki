@@ -210,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Árvore do cluster %1",
   "Tree:SiteTitle" => "Árvore do Site",
   "Tree:Empty" => "%1&nbsp;não tem sub-páginas",
-  "search_title_help" => "",
+  "search_title_help" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Renomear...",
   "NewName" => "Insira um novo nome para esta página",
