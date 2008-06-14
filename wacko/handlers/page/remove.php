@@ -78,13 +78,13 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
   <br />
   <input type="hidden" name="delete" value="1" />
   <input name="submit"
-	class="OkBtn_Top" onmouseover='this.className=&quot;OkBtn_Top_&quot;;'
-	onmouseout='this.className=&quot;OkBtn_Top&quot;;' type="submit" align="top"
+	class="OkBtn_Top" onmouseover='this.className="OkBtn_Top_";'
+	onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
 	value="<?php echo $this->GetResourceValue("RemoveButton"); ?>" />
   &nbsp;
   <input
-	class="CancelBtn_Top" onmouseover='this.className=&quot;CancelBtn_Top_&quot;;'
-	onmouseout='this.className=&quot;CancelBtn_Top&quot;;' type="button" align="top"
+	class="CancelBtn_Top" onmouseover='this.className="CancelBtn_Top_";'
+	onmouseout='this.className="CancelBtn_Top";' type="button" align="top"
 	value="<?php echo str_replace("\n"," ",$this->GetResourceValue("EditCancelButton")); ?>"
 	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
   <br />
