@@ -45,10 +45,10 @@ if ($registered
 	?>
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr>
-		<td><?php echo $this->GetResourceValue("UploadFor");?>:&nbsp;</td>
+		<td><?php echo $this->GetResourceValue("UploadFor");?>:&nbsp;
 		<input type="hidden" name="MAX_FILE_SIZE"
-			value="<?php echo $maxfilesize;?>" />
-		<td nowrap="nowrap"><input name="file" type="file" />&nbsp;(<?php echo $this->GetResourceValue("UploadMax").$this->config["upload_max_size"].$this->GetResourceValue("UploadKB");?>)</td>
+			value="<?php echo $maxfilesize;?>" /></td>
+		<td style="white-space: nowrap;"><input name="file" type="file" />&nbsp;(<?php echo $this->GetResourceValue("UploadMax").$this->config["upload_max_size"].$this->GetResourceValue("UploadKB");?>)</td>
 	</tr>
 	<?php
 	if ($global)
@@ -74,7 +74,7 @@ if ($registered
 		<div><input type="radio" name="to" value="here" checked="checked"
 			id="toUploadHere" /> <label for="toUploadHere"><?php echo $this->GetResourceValue("UploadHereText"); ?></label>
 		</div>
-	
+	</td>
 	</tr>
 	<?php } ?>
 	<?php

@@ -21,12 +21,23 @@ BODY {
   background-color: #F8F8F8;
 }
 
+A  	{
+
+}
 A:LINK {
-  color: #993333;
+  color: #990000;
+}
+A:Hover  {
+	color: #990000; 
+	text-decoration: underline  
+}
+A:Active  {
+	color: #FF9900;
+	text-decoration: underline;
 }
 A:VISITED {
-  color: #993366;
-}
+  color: #666600;
+  }
 img {
 	border-width: 0px;
 	vertical-align: middle;
@@ -356,7 +367,11 @@ p.auto { margin:0px; padding:0px; font-size:100%; }
 .hl-builtin    { color:#996633; }
 /* /Text_Highlighter */
 
-div.action           { margin:2px; background: #eeeeee }
+div.action           {
+	margin:2px;
+	background: #f6f7ed;
+	border: 1px solid #CCCCCC;
+}
 div.action-content   { padding:10px 10px 25px 10px; }
 
 .cl-red   {color: #CC0000;}

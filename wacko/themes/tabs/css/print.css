@@ -16,7 +16,7 @@ H4 { font-family: Arial;   font-size: 16px; padding-top:15px; padding-bottom:5px
 H5 { font-family: Arial;   font-size: 14px; padding-top:10px; padding-bottom:5px }
 
 /* overrall design */
-.header H1 { margin:0px; padding:0px; color:#000000; font-family:Arial; font-size:15px }
+.header H1 { margin:0px; padding:0px; color:#000; font-family:Arial; font-size:15px }
 .page { background:#ffffff; padding:10px 10px 50px 10px;  }
 
 .Copyright {
@@ -32,7 +32,7 @@ BODY, TD, P, LI, .page { font-family: Georgia, Verdana; font-size:95% }
 
 cite {color:#888800;font-style:normal;}
 .cite {color:#ff0000;font-style:normal;}
-.mark { color: #00000; border:1px solid #000; background: #ddd; }
+.mark { color: #000; border:1px solid #000; background: #ddd; }
 .center { text-align: center; }
 .indent { margin-left: 40px; }
 
@@ -52,7 +52,7 @@ cite {color:#888800;font-style:normal;}
 
 
 .Toc1 A, .Toc2 A, .Toc3 A, .Toc4 A, .Toc5 A, .Toc6 A
- { text-decoration:none; color:#000000 }
+ { text-decoration:none; color:#000 }
 
 .nobr {white-space: nowrap}
 

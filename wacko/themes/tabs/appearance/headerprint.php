@@ -3,7 +3,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
 <title><?php echo $this->GetWakkaName()." : ".$this->GetPageTag(); ?></title>
 <?php if ($this->GetMethod() != 'show')
