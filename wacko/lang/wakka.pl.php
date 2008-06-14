@@ -210,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Drzewo klastra %1",
   "Tree:SiteTitle" => "Drzewo odno¶ników witryny",
   "Tree:Empty" => "%1 nie zawiera podstron",
-  "search_title_help" => "",
+  "search_title_help" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Zmieñ nazwê strony...",
   "NewName" => "Wprowad¼ now± nazwê strony",

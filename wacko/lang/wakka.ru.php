@@ -211,7 +211,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Дерево кластера %1",
   "Tree:SiteTitle" => "Дерево сайта",
   "Tree:Empty" => "%1&nbsp;не содержит подстраниц.",
-  "search_title_help" => "",
+  "search_title_help" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Переименовать...",
   "NewName" => "Введите новое имя для этой страницы",

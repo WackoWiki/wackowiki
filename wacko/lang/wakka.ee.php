@@ -210,7 +210,7 @@ $wakkaResource = array(
  "Tree:ClusterTitle" =>"Grupi %1 puu",
  "Tree:SiteTitle" =>"Saitide puu",
  "Tree:Empty" => "%1&nbsp;-el ei ole alamlehti",
- "search_title_help" => "",
+ "search_title_help" => "Click here to show all pages containing this page title.",
 
  "RenameText" => "Nimeta ümber...",
  "NewName" => "Anna lehele uus nimi",

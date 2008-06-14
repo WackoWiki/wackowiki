@@ -210,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Verwijzingenboom van cluster %1",
   "Tree:SiteTitle" => "Boom van alle pagina's",
   "Tree:Empty" => "%1&nbsp;heeft geen subpagina's",
-  "search_title_help" => "",
+  "search_title_help" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Hernoem...",
   "NewName" => "Geef een nieuwe naam voor deze pagina",
