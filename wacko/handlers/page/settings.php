@@ -49,9 +49,9 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
     </p>
     <div class="BewareChangeLang"> <?php echo $this->GetResourceValue("BewareChangeLang"); ?></div>
     <p>
-      <input class="OkBtn" onmouseover='this.className=&quot;OkBtn_&quot;;' onmouseout='this.className=&quot;OkBtn&quot;;' type="submit" align="top" value="<?php echo $this->GetResourceValue("MetaStoreButton"); ?>" style="width: 120px" accesskey="s" />
+      <input class="OkBtn" onmouseover='this.className="OkBtn_";' onmouseout='this.className="OkBtn";' type="submit" align="top" value="<?php echo $this->GetResourceValue("MetaStoreButton"); ?>" style="width: 120px" accesskey="s" />
       &nbsp;
-      <input class="CancelBtn" onmouseover='this.className=&quot;CancelBtn_&quot;;' onmouseout='this.className=&quot;CancelBtn&quot;;' type="button" align="top" value="<?php echo $this->GetResourceValue("MetaCancelButton"); ?>" onclick="history.back();" style="width: 120px" />
+      <input class="CancelBtn" onmouseover='this.className="CancelBtn_";' onmouseout='this.className="CancelBtn";' type="button" align="top" value="<?php echo $this->GetResourceValue("MetaCancelButton"); ?>" onclick="history.back();" style="width: 120px" />
     </p>
   </div>
   <?php
