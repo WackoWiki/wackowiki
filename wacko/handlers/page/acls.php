@@ -76,9 +76,9 @@ if ($this->UserIsOwner() || $this->IsAdmin())
       </select>
     </p>
     <p>
-      <input class="OkBtn" onmouseover='this.className=&quot;OkBtn_&quot;;' onmouseout='this.className=&quot;OkBtn&quot;;' type="submit" align="top" value="<?php echo $this->GetResourceValue("ACLStoreButton"); ?>" style="width: 120px" accesskey="s" />
+      <input class="OkBtn" onmouseover='this.className="OkBtn_";' onmouseout='this.className="OkBtn";' type="submit" align="top" value="<?php echo $this->GetResourceValue("ACLStoreButton"); ?>" style="width: 120px" accesskey="s" />
       &nbsp;
-      <input class="CancelBtn" onmouseover='this.className=&quot;CancelBtn_&quot;;' onmouseout='this.className=&quot;CancelBtn&quot;;' type="button" align="top" value="<?php echo $this->GetResourceValue("ACLCancelButton"); ?>" onclick="document.location='<?php echo addslashes($this->href(""))?>';" 	style="width: 120px" />
+      <input class="CancelBtn" onmouseover='this.className="CancelBtn_";' onmouseout='this.className="CancelBtn";' type="button" align="top" value="<?php echo $this->GetResourceValue("ACLCancelButton"); ?>" onclick="document.location='<?php echo addslashes($this->href(""))?>';" 	style="width: 120px" />
     </p>
   </div>
   <?php
