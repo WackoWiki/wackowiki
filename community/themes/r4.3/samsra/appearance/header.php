@@ -76,7 +76,7 @@ if ($user["doubleclickedit"] == "Y") {?>
 <!-- <h1>-->  
      <span class="main"><?php echo $this->config["wakka_name"] ?>:</span>
      <span class="pagetitle"><?php echo $this->GetPagePath(); ?></span>
-     <a class="Search" title="<?php echo $this->GetConfigValue("search_title_help")?>" 
+     <a class="Search" title="<?php echo $this->GetResourceValue("search_title_help")?>" 
      href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a><br />
 <!-- </h1> -->  
 </td><td>
