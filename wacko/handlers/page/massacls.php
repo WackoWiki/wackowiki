@@ -72,15 +72,15 @@ if ($this->UserIsOwner())
       </select>
     </p>
     <p>
-      <input class="OkBtn" onmouseover='this.className=&quot;OkBtn_&quot;;'
-			onmouseout='this.className=&quot;OkBtn&quot;;'
-			onclick='return confirm(&quot;<?php echo $this->GetResourceValue("ACLAreYouSure"); ?>&quot;)'
+      <input class="OkBtn" onmouseover='this.className="OkBtn_";'
+			onmouseout='this.className="OkBtn";'
+			onclick='return confirm("<?php echo $this->GetResourceValue("ACLAreYouSure"); ?>")'
 			type="submit" align="top"
 			value="<?php echo $this->GetResourceValue("ACLStoreButton"); ?>"
 			style="width: 120px" />
       <input class="CancelBtn"
-			onmouseover='this.className=&quot;CancelBtn_&quot;;'
-			onmouseout='this.className=&quot;CancelBtn&quot;;' type="button" align="top"
+			onmouseover='this.className="CancelBtn_";'
+			onmouseout='this.className="CancelBtn";' type="button" align="top"
 			value="<?php echo $this->GetResourceValue("ACLCancelButton"); ?>"
 			onclick="document.location='<?php echo addslashes($this->href(""))?>';"
 			style="width: 120px" />
