@@ -44,26 +44,10 @@ if ($user["doubleclickedit"] == "Y") {
                    var edit = "<?php echo $this->href("edit");?>";
   </script>
 	<?php }?>
-<script src="<?php echo $this->GetConfigValue("root_url");?>js/ufo.js"
-	type="text/javascript"></script>
-<script type="text/javascript">
-	  <![CDATA[
-         function cleanupFP9IELeaks()
-            {
-               __flash_unloadHandler = function() {};
-               __flash_savedUnloadHandler = function() {};
-            }
 
-         if (typeof window.attachEvent != "undefined" && UFO.uaHas("ieWin"))
-            {
-               window.attachEvent("onbeforeunload", cleanupFP9IELeaks);
-            }
-		]]>
-      </script>
 </head>
 
-<body
-	onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
+<body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
 
 	<?php echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
 <input type="hidden" name="action" value="login" />
@@ -85,7 +69,7 @@ if ($user["doubleclickedit"] == "Y") {
 	type="submit" value="Ok" /></span> <?php } ?></div>
 <div class="title"><?php echo $this->config["wakka_name"] ?>: <?php echo $this->GetPagePath(); ?>
 <a class="Search"
-	title="<?php echo $this->GetConfigValue("search_title_help")?>"
+	title="<?php echo $this->GetResourceValue("search_title_help")?>"
 	href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
 </div>
 

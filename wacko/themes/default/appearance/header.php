@@ -73,13 +73,13 @@ if ($user = $this->GetUser())
 //   * Smooth scrolling
 // Also, here we show message (see beginning of this file)
 ?>
-   <body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
+<body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
 <?php
 // Begin Login form
 echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
       <input type="hidden" name="action" value="login" />
       <div class="header">
-         <h1><span class="main"><?php echo $this->config["wakka_name"] ?>:</span><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetConfigValue("search_title_help")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></h1>
+         <h1><span class="main"><?php echo $this->config["wakka_name"] ?>:</span><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("search_title_help")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></h1>
 <?php
 // Outputs Bookmarks AKA QuickLinks
 // Main page
@@ -101,7 +101,7 @@ if($this->GetUser())
 
 // If user are logged, Wacko shows "You are UserName"
 if ($this->GetUser())
-   { ?> <span class="nobr"><?php echo $this->GetResourceValue("YouAre")." ".$this->Link($this->GetUserName()) ?></span><small>( <span class="nobr Tune"><?php
+   { ?> <span class="nobr"><?php echo $this->GetResourceValue("YouAre")." ".$this->Link($this->GetUserName()) ?></span><small> ( <span class="nobr Tune"><?php
 echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?>
  | <a onclick="return confirm('<?php echo $this->GetResourceValue("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetResourceValue("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetResourceValue("LogoutLink"); ?></a></span>
 )</small> <?php
