@@ -114,8 +114,8 @@ if ($this->GetConfigValue("footer_files")) {
 <div class="filesheader">
 <?php echo $this->GetResourceValue("Files_all") ?> [<a
 
-   href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?>&lt;/a&gt;]
-    &lt;/div&gt;
+   href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?></a>]
+    </div>
     <?php
 
     echo "<div class=\"files\">";
@@ -201,8 +201,8 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     ?>
     <a name="comments"></a>
 <div class="commentsheader">
-<?php echo $this->GetResourceValue("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetResourceValue("HideComments"); ?>&lt;/a&gt;]
-    &lt;/div&gt;
+<?php echo $this->GetResourceValue("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetResourceValue("HideComments"); ?></a>]
+    </div>
     <?php
 
     // display comments themselves
@@ -229,9 +229,9 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     if ($this->HasAccess("comment"))
     {
       ?>
-        <?php echo $this->GetResourceValue("AttachComment"); ?>&lt;br /&gt;
+        <?php echo $this->GetResourceValue("AttachComment"); ?><br />
         <?php echo $this->FormOpen("addcomment"); ?>
-          &lt;textarea name="body="body"" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION['freecap_old_comment']; ?>
+          <textarea name="body="body"" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION['freecap_old_comment']; ?>
 </textarea>
 <?php
             // captcha code starts
