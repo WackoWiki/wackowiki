@@ -76,134 +76,135 @@ else if ($user = $this->GetUser())
 	// user is logged in; display config form
 	print($this->FormOpen());
 	?>
+
 <input type="hidden"
 	name="action" value="update" />
-<table width="90%">
-	<tr>
-		<td colspan="2" align="center"><?php echo $this->GetResourceValue("Hello").", ".$this->ComposeLinkToPage($user["name"]) ?>!<br />
-		<br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" align="center"><a
-			href="<?php echo $this->href("", "Password")?>"><?php echo $this->GetResourceValue("YouWantChangePassword");?></a></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("YourEmail");?>:</td>
-		<td><input name="email"
-			value="<?php echo htmlentities($user["email"]) ?>" size="40" /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("DoubleclickEditing");?>:</td>
-		<td><input type="hidden" name="doubleclickedit" value="N" /><input
+<div class="cssform">
+  <h3><?php echo $this->GetResourceValue("Hello").", ".$this->ComposeLinkToPage($user["name"]) ?>!</h3>
+  <p><a
+			href="<?php echo $this->href("", "Password")?>"><?php echo $this->GetResourceValue("YouWantChangePassword");?></a></p>
+  <p>
+    <label><?php echo $this->GetResourceValue("YourEmail");?>:</label>
+    <input name="email"
+			value="<?php echo htmlentities($user["email"]) ?>" size="40" />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("DoubleclickEditing");?>:</label>
+    <input type="hidden" name="doubleclickedit" value="N" />
+    <input
 			type="checkbox" name="doubleclickedit" value="Y"
-			<?php echo $user["doubleclickedit"] == "Y" ? "checked=\"checked\"" : "" ?> /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("WikieditAutocomplete");?>:</td>
-		<td><input type="hidden" name="autocomplete" value="N" /><input
+			<?php echo $user["doubleclickedit"] == "Y" ? "checked=\"checked\"" : "" ?> />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("WikieditAutocomplete");?>:</label>
+    <input type="hidden" name="autocomplete" value="N" />
+    <input
 			type="checkbox" name="autocomplete" value="Y"
-			<?php echo $user["options"]["autocomplete"] == "Y" ? "checked=\"checked\"" : "" ?> /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("ShowDateTimeInLinks");?>:</td>
-		<td><input type="hidden" name="showdatetimeinlinks" value="N" /><input
+			<?php echo $user["options"]["autocomplete"] == "Y" ? "checked=\"checked\"" : "" ?> />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("ShowDateTimeInLinks");?>:</label>
+    <input type="hidden" name="showdatetimeinlinks" value="N" />
+    <input
 			type="checkbox" name="showdatetimeinlinks" value="Y"
-			<?php echo $user["showdatetime"] == "Y" ? "checked=\"checked\"" : "" ?> /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("ShowComments?");?>:</td>
-		<td><input type="hidden" name="show_comments" value="N" /><input
+			<?php echo $user["showdatetime"] == "Y" ? "checked=\"checked\"" : "" ?> />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("ShowComments?");?>:</label>
+    <input type="hidden" name="show_comments" value="N" />
+    <input
 			type="checkbox" name="show_comments" value="Y"
-			<?php echo $user["show_comments"] == "Y" ? "checked=\"checked\"" : "" ?> /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("ShowFiles?");?>:</td>
-		<td><input type="hidden" name="show_files" value="N" /><input
+			<?php echo $user["show_comments"] == "Y" ? "checked=\"checked\"" : "" ?> />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("ShowFiles?");?>:</label>
+    <input type="hidden" name="show_files" value="N" />
+    <input
 			type="checkbox" name="show_files" value="Y"
-			<?php echo $user["options"]["show_files"] == "Y" ? "checked=\"checked\"" : "" ?> /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("ShowSpaces");?>:</td>
-		<td><input type="hidden" name="show_spaces" value="N" /><input
+			<?php echo $user["options"]["show_files"] == "Y" ? "checked=\"checked\"" : "" ?> />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("ShowSpaces");?>:</label>
+    <input type="hidden" name="show_spaces" value="N" />
+    <input
 			type="checkbox" name="show_spaces" value="Y"
-			<?php echo $user["show_spaces"] == "Y" ? "checked=\"checked\"" : "" ?> /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("DontRedirect");?>:</td>
-		<td><input type="hidden" name="dont_redirect" value="N" /><input
+			<?php echo $user["show_spaces"] == "Y" ? "checked=\"checked\"" : "" ?> />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("DontRedirect");?>:</label>
+    <input type="hidden" name="dont_redirect" value="N" />
+    <input
 			type="checkbox" name="dont_redirect" value="Y"
-			<?php echo $user["options"]["dont_redirect"] == "Y" ? "checked=\"checked\"" : "" ?> /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("SendWatchMail");?>:</td>
-		<td><input type="hidden" name="send_watchmail" value="N" /><input
+			<?php echo $user["options"]["dont_redirect"] == "Y" ? "checked=\"checked\"" : "" ?> />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("SendWatchMail");?>:</label>
+    <input type="hidden" name="send_watchmail" value="N" />
+    <input
 			type="checkbox" name="send_watchmail" value="Y"
-			<?php echo $user["options"]["send_watchmail"] == "Y" ? "checked=\"checked\"" : "" ?> /></td>
-	</tr>
-	<!--tr>
-      <td align="right"><?php echo $this->GetResourceValue("Typografica");?>:</td>
-      <td><input type="hidden" name="typografica" value="N" /><input type="checkbox" name="typografica" value="Y" <?php echo $user["typografica"] == "Y" ? "checked=\"checked\"" : "" ?> /></td>
-    </tr-->
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("YourLanguage");?>:</td>
-		<td><select name="lang">
-			<option value=""></option>
-			<?php
+			<?php echo $user["options"]["send_watchmail"] == "Y" ? "checked=\"checked\"" : "" ?> />
+  </p>
+  <!--
+      <p><label><?php echo $this->GetResourceValue("Typografica");?>:</label><input type="hidden" name="typografica" value="N" /><input type="checkbox" name="typografica" value="Y" <?php echo $user["typografica"] == "Y" ? "checked=\"checked\"" : "" ?> /></p>
+    -->
+  <p>
+    <label><?php echo $this->GetResourceValue("YourLanguage");?>:</label>
+    <select name="lang">
+      <option value=""></option>
+      <?php
 			$langs = $this->AvailableLanguages();
 			for ($i=0;$i<count($langs);$i++) {
 				echo '<option value="'.$langs[$i].'" '.($user["lang"]==$langs[$i]?"selected=\"selected\"":"").'>'.$langs[$i].'</option>';
 			}
 			?>
-		</select></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("ChooseTheme");?>:</td>
-		<td><select name="theme">
-			<option value=""></option>
-			<?php
+    </select>
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("ChooseTheme");?>:</label>
+    <select name="theme">
+      <option value=""></option>
+      <?php
 			$themes = $this->AvailableThemes();
 			for ($i=0;$i<count($themes);$i++) {
 				echo '<option value="'.$themes[$i].'" '.($user["options"]["theme"]==$themes[$i]?"selected=\"selected\"":"").'>'.$themes[$i].'</option>';
 			}
 			?>
-		</select></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("RecentChangesLimit");?>:</td>
-		<td><input name="changescount"
-			value="<?php echo htmlentities($user["changescount"]) ?>" size="40" /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("RevisionListLimit");?>:</td>
-		<td><input name="revisioncount"
-			value="<?php echo htmlentities($user["revisioncount"]) ?>" size="40" /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("YourMotto");?>:</td>
-		<td><input name="motto"
-			value="<?php echo htmlspecialchars($user["motto"]) ?>" size="40" /></td>
-	</tr>
-	<tr>
-		<td align="right" valign="top"><?php echo $this->GetResourceValue("YourBookmarks");?>:</td>
-		<td><textarea name="bookmarks" cols="40" rows="10"><?php echo htmlspecialchars($user["bookmarks"]) ?></textarea></td>
-	</tr>
-	<tr>
-		<td colspan="2" align="center"><input class="OkBtn"
+    </select>
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("RecentChangesLimit");?>:</label>
+    <input name="changescount"
+			value="<?php echo htmlentities($user["changescount"]) ?>" size="40" />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("RevisionListLimit");?>:</label>
+    <input name="revisioncount"
+			value="<?php echo htmlentities($user["revisioncount"]) ?>" size="40" />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("YourMotto");?>:</label>
+    <input name="motto"
+			value="<?php echo htmlspecialchars($user["motto"]) ?>" size="40" />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("YourBookmarks");?>:</label>
+    <textarea name="bookmarks" cols="40" rows="10"><?php echo htmlspecialchars($user["bookmarks"]) ?></textarea>
+  </p>
+  <p>
+    <input class="OkBtn"
 			onmouseover='this.className="OkBtn_";'
 			onmouseout='this.className="OkBtn";' type="submit" align="top"
 			value="<?php echo $this->GetResourceValue("UpdateSettingsButton"); ?>" />
-		<img src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
-			width="10" height="1" alt="" border="0" /> <input class="CancelBtn"
+    &nbsp;
+    <input class="CancelBtn"
 			onmouseover='this.className="CancelBtn_";'
 			onmouseout='this.className="CancelBtn";' type="button" align="top"
 			value="<?php echo $this->GetResourceValue("LogoutButton"); ?>"
 			onclick="document.location='<?php echo $this->href("", "", "action=logout"); ?>'" />
-		</td>
-	</tr>
-</table>
+  </p>
+</div>
 <br />
-			<?php
+<?php
 			//  echo $this->FormatResourceValue("SeeListOfPages")."<br />";
 			print($this->FormClose());
 }

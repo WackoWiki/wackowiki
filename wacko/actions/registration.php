@@ -81,61 +81,57 @@ if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
 {
 	print($this->FormOpen());
 	?>
+
 <input type="hidden"
 	name="action" value="login" />
-<table border="0" align="center">
-	<tr>
-		<td colspan="2" align="center"><strong><?php echo $this->FormatResourceValue("RegistrationWelcome"); ?></strong><br />
-		<br />
-		</td>
-	</tr>
-	<?php
+<div class="cssform">
+  <h3><?php echo $this->FormatResourceValue("RegistrationWelcome"); ?></h3>
+  <?php
 	if ($error)
 	{
-		print("<tr><td colspan=\"2\" align=\"center\"><div class=\"error\">".$this->Format($error)."</div></td></tr>\n");
+		print("<div class=\"error\">".$this->Format($error)."</div>\n");
 	}
 	if ($this->GetConfigValue("multilanguage"))
 	{
 		?>
-	<tr>
-		<td align="right"><?php echo $this->FormatResourceValue("RegistrationLang");?>:</td>
-		<td><select name="lang">
-			<option value=""></option>
-			<?php
+  <p>
+    <label><?php echo $this->FormatResourceValue("RegistrationLang");?>:</label>
+    <select name="lang">
+      <option value=""></option>
+      <?php
 			$langs = $this->AvailableLanguages();
 			for ($i=0;$i<count($langs);$i++)
 			echo '<option value="'.$langs[$i].'">'.$langs[$i].'</option>';
 			?>
-		</select></td>
-	</tr>
-	<?php
+    </select>
+  </p>
+  <?php
 }
 ?>
-	<tr>
-		<td align="right"><?php echo $this->FormatResourceValue("RegistrationName");?>:</td>
-		<td><input name="name" size="27"
-			value="<?php echo htmlspecialchars($name); ?>" /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("RegistrationPassword");?>:</td>
-		<td><input type="password" name="password" size="24" /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("ConfirmPassword");?>:</td>
-		<td><input type="password" name="confpassword" size="24" /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("Email");?>:</td>
-		<td><input name="email" size="30"
-			value="<?php echo htmlspecialchars($email); ?>" /></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><input class="OkBtn" onmouseover='this.className="OkBtn_";'
+  <p>
+    <label><?php echo $this->FormatResourceValue("RegistrationName");?>:</label>
+    <input name="name" size="27"
+			value="<?php echo htmlspecialchars($name); ?>" />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("RegistrationPassword");?>:</label>
+    <input type="password" name="password" size="24" />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("ConfirmPassword");?>:</label>
+    <input type="password" name="confpassword" size="24" />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("Email");?>:</label>
+    <input name="email" size="30"
+			value="<?php echo htmlspecialchars($email); ?>" />
+  </p>
+  <p>
+    <input class="OkBtn" onmouseover='this.className="OkBtn_";'
 			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetResourceValue("RegistrationButton"); ?>" /></td>
-	</tr>
-</table>
+			value="<?php echo $this->GetResourceValue("RegistrationButton"); ?>" />
+  </p>
+</div>
 <?php
 print($this->FormClose());
 }
