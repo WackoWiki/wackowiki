@@ -15,21 +15,22 @@ if (!$_POST["_to"])
 	// show FORM
 	echo $this->FormOpen("", "", "post", "", " enctype='multipart/form-data' ");
 	?>
-<table class="action-import" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-		<td><?php echo $this->GetResourceValue("ImportTo"); ?>:&nbsp;</td>
-		<td><input type="text" name="_to" size="40" value="" /></td>
-	</tr>
-	<tr>
-		<td><?php echo $this->GetResourceValue("ImportWhat"); ?>:&nbsp;</td>
-		<td><input type="file" name="_import" /></td>
-	</tr>
-	<tr>
-		<td colspan="2"><input type="submit"
-			value="<?php echo $this->GetResourceValue("ImportButtonText"); ?>" /></td>
-	</tr>
-</table>
-	<?php
+
+<div class="cssform">
+  <p>
+    <label><?php echo $this->GetResourceValue("ImportTo"); ?>:</label>
+    <input type="text" name="_to" size="40" value="" />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("ImportWhat"); ?>:</label>
+    <input type="file" name="_import" />
+  </p>
+  <p>
+    <input type="submit"
+			value="<?php echo $this->GetResourceValue("ImportButtonText"); ?>" />
+  </p>
+</div>
+<?php
 	echo $this->FormClose();
 }
 else

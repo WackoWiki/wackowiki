@@ -34,28 +34,24 @@ if ($_REQUEST["secret_code"]){
 			print($this->FormOpen());
 			echo "<input type=\"hidden\" name=\"secret_code\" value=\"".$code."\" />";
 			?>
-<table border="0" align="center">
-	<tr>
-		<td colspan="2" align="center"><strong><?php echo $this->Format( str_replace('%1', $user["name"], $this->GetResourceValue("YouWantChangePasswordForUser"))); ?></strong><br />
-		<br />
-		</td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("NewPassword");?>:</td>
-		<td><input type="password" name="newpassword" size="24" /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("ConfirmPassword");?>:</td>
-		<td><input type="password" name="confpassword" size="24" /></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><input class="OkBtn" onmouseover='this.className="OkBtn_";'
+
+<div class="cssform">
+  <h3><?php echo $this->Format( str_replace('%1', $user["name"], $this->GetResourceValue("YouWantChangePasswordForUser"))); ?></h3>
+  <p>
+    <label><?php echo $this->GetResourceValue("NewPassword");?>:</label>
+    <input type="password" name="newpassword" size="24" />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("ConfirmPassword");?>:</label>
+    <input type="password" name="confpassword" size="24" />
+  </p>
+  <p>
+    <input class="OkBtn" onmouseover='this.className="OkBtn_";'
 			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetResourceValue("RegistrationButton"); ?>" /></td>
-	</tr>
-</table>
-			<?php
+			value="<?php echo $this->GetResourceValue("RegistrationButton"); ?>" />
+  </p>
+</div>
+<?php
 			print($this->FormClose());
 }
 }else{
@@ -96,38 +92,35 @@ if ($_REQUEST["secret_code"]){
 	?>
 <input type="hidden"
 	name="action" value="change" />
-<table border="0" align="center">
-	<tr>
-		<td colspan="2" align="center"><strong><?php echo $this->FormatResourceValue("YouWantChangePassword"); ?></strong><br />
-		<br />
-		</td>
-	</tr>
-	<?php
+<div class="cssform">
+  <h3><?php echo $this->FormatResourceValue("YouWantChangePassword"); ?></h3>
+  <?php
 	if ($error)
-	{
-		print("<tr><td colspan=\"2\" align=\"center\"><div class=\"error\">".$this->Format($error)."</div></td></tr>\n");
-	}
+	{ ?>
+  <p>
+  <div class="error"><?php print $this->Format($error); ?></div>
+  </p>
+  <?php	}
 	?>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("CurrentPassword");?>:</td>
-		<td><input type="password" name="password" size="24" /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("NewPassword");?>:</td>
-		<td><input type="password" name="newpassword" size="24" /></td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->GetResourceValue("ConfirmPassword");?>:</td>
-		<td><input type="password" name="confpassword" size="24" /></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><input class="OkBtn" onmouseover='this.className="OkBtn_";'
+  <p>
+    <label><?php echo $this->GetResourceValue("CurrentPassword");?>:</label>
+    <input type="password" name="password" size="24" />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("NewPassword");?>:</label>
+    <input type="password" name="newpassword" size="24" />
+  </p>
+  <p>
+    <label><?php echo $this->GetResourceValue("ConfirmPassword");?>:</label>
+    <input type="password" name="confpassword" size="24" />
+  </p>
+  <p>
+    <input class="OkBtn" onmouseover='this.className="OkBtn_";'
 			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetResourceValue("RegistrationButton"); ?>" /></td>
-	</tr>
-</table>
-	<?php
+			value="<?php echo $this->GetResourceValue("RegistrationButton"); ?>" />
+  </p>
+</div>
+<?php
 	print($this->FormClose());
 
 }else{
@@ -172,37 +165,27 @@ if ($_REQUEST["secret_code"]){
 		?>
 <input type="hidden"
 	name="action" value="send" />
-<table border="0" align="center">
-	<tr>
-		<td colspan="2" align="center"><strong><?php echo $this->FormatResourceValue("ForgotMain"); ?></strong><br />
-		</td>
-	</tr>
-	<?php
+<div class="cssform">
+  <h3><?php echo $this->FormatResourceValue("ForgotMain"); ?></h3>
+  <?php
 	if ($error) {
 		?>
-	<tr>
-		<td colspan="2" align="center"><?php echo $error; ?><br />
-		</td>
-	</tr>
-	<?php
+  <p><?php echo $error; ?></p>
+  <?php
 
 }
 ?>
-	<tr>
-		<td colspan="2"><?php echo $this->FormatResourceValue("ForgotComment"); ?><br />
-		</td>
-	</tr>
-	<tr>
-		<td align="right"><?php echo $this->FormatResourceValue("ForgotField"); ?>:</td>
-		<td><input type="text" name="loginormail" size="24" /></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><input class="OkBtn" onmouseover='this.className="OkBtn_";'
+  <p><?php echo $this->FormatResourceValue("ForgotComment"); ?></p>
+  <p>
+    <label><?php echo $this->FormatResourceValue("ForgotField"); ?>:</label>
+    <input type="text" name="loginormail" size="24" />
+  </p>
+  <p>
+    <input class="OkBtn" onmouseover='this.className="OkBtn_";'
 			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetResourceValue("SendButton"); ?>" /></td>
-	</tr>
-</table>
+			value="<?php echo $this->GetResourceValue("SendButton"); ?>" />
+  </p>
+</div>
 <?php
 print($this->FormClose());
 }
