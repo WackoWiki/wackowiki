@@ -231,8 +231,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
       ?>
         <?php echo $this->GetResourceValue("AttachComment"); ?><br />
         <?php echo $this->FormOpen("addcomment"); ?>
-          <textarea name="body="body"" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION['freecap_old_comment']; ?>
-</textarea>
+          <textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION['freecap_old_comment']; ?></textarea>
 <?php
             // captcha code starts
 
