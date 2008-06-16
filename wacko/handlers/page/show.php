@@ -1,6 +1,6 @@
 <div class="pageBefore">&nbsp;</div>
 <div class="page">
-  <?php
+<?php
 if ($this->HasAccess("read"))
 {
    if (!$this->page)
@@ -277,7 +277,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
         print(str_replace("%1",count($comments), $this->GetResourceValue("Comments_n")));
       }
     ?>
-  [<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->GetResourceValue("ShowComments"); ?></a>] </div>
+  [<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->GetResourceValue("ShowComments"); ?></a>]</div>
 <?php
   }
 }
