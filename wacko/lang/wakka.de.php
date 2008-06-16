@@ -306,9 +306,9 @@ $wakkaResource = array(
   "UploadRemoveDenied" => "Du hast keine Berechtigung, diese Datei zu löschen",
   "UploadMax" => "Nicht mehr als ",
 
-  "Files_0" => "Zu dieser Seite gibt es keine Dateien.",
-  "Files_1" => "Zu dieser Seite gibt es eine Datei.",
-  "Files_n" => "Zu dieser Seite gibt es %1 Dateien.",
+  "Files_0" => "Zu dieser Seite gibt es keine Dateien. ",
+  "Files_1" => "Zu dieser Seite gibt es eine Datei. ",
+  "Files_n" => "Zu dieser Seite gibt es %1 Dateien. ",
   "Files_all" => "Dateien",
   "ShowFiles" => "Zeige Dateien/Hochladen",
   "HideFiles" => "Verberge Dateien/Hochladen",

@@ -79,7 +79,7 @@ if ($user = $this->GetUser())
 echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
       <input type="hidden" name="action" value="login" />
       <div class="header">
-         <h1><span class="main"><?php echo $this->config["wakka_name"] ?>:</span><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("search_title_help")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></h1>
+         <h1><span class="main"><?php echo $this->config["wakka_name"] ?>: </span><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("search_title_help")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></h1>
 <?php
 // Outputs Bookmarks AKA QuickLinks
 // Main page

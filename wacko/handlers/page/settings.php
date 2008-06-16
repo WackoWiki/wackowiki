@@ -41,7 +41,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 		{
 			foreach ($langs as $lang)
 			{
-				print("<option value=\"".$lang."\" ".($clang==$lang?"selected=\"selected\"":"").">".$lang."</option>\n");
+				print("<option value=\"".$lang."\"".($clang==$lang?"selected=\"selected\"":"").">".$lang."</option>\n");
 			}
 		}
 		?>

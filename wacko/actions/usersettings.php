@@ -154,7 +154,7 @@ else if ($user = $this->GetUser())
       <?php
 			$langs = $this->AvailableLanguages();
 			for ($i=0;$i<count($langs);$i++) {
-				echo '<option value="'.$langs[$i].'" '.($user["lang"]==$langs[$i]?"selected=\"selected\"":"").'>'.$langs[$i].'</option>';
+				echo '<option value="'.$langs[$i].'"'.($user["lang"]==$langs[$i]?"selected=\"selected\"":"").'>'.$langs[$i].'</option>';
 			}
 			?>
     </select>
