@@ -85,7 +85,7 @@ else if ($user = $this->GetUser())
          href="<?php echo $this->href("", "Password")?>"><?php echo $this->GetResourceValue("YouWantChangePassword");?></a></p>
   <p>
     <label><?php echo $this->GetResourceValue("YourEmail");?>:</label>
-    <input name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />&nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("root_url").'images/tick.png" alt="'.$this->GetResourceValue("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("root_url").'images/warning.png" alt="'.$this->GetResourceValue("Mail.Confirm").'" width="20" height="23" />' ?>
+    <input name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />&nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("root_url").'images/tick.png" alt="'.$this->GetResourceValue("EmailConfirmed").'" title="'.$this->GetResourceValue("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("root_url").'images/warning.png" alt="'.$this->GetResourceValue("Mail.Confirm").'" title="'.$this->GetResourceValue("Mail.Confirm").'" width="20" height="23" />' ?>
   </p>
   <p>
     <label><?php echo $this->GetResourceValue("DoubleclickEditing");?>:</label>
