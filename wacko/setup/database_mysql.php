@@ -8,8 +8,8 @@ $table_pages = "CREATE TABLE ".$config2["table_prefix"]."pages (".
                  "tag varchar(250) character set latin1 collate latin1_swedish_ci NOT NULL default '',".
                  "supertag varchar(250) NOT NULL default '',".
                  "time datetime NOT NULL default '0000-00-00 00:00:00',".
-                 "body text NOT NULL,".
-                 "body_r text NOT NULL,".
+                 "body mediumtext NOT NULL,".
+                 "body_r mediumtext NOT NULL,".
                  "body_toc text NOT NULL,".
                  "owner varchar(50) NOT NULL default '',".
                  "user varchar(50) NOT NULL default '',".
@@ -36,8 +36,8 @@ $table_revisions = "CREATE TABLE ".$config2["table_prefix"]."revisions (".
                     "tag varchar(250) binary NOT NULL default '',".
                     "supertag varchar(250) binary NOT NULL default '',".
                     "time datetime NOT NULL default '0000-00-00 00:00:00',".
-                    "body text NOT NULL,".
-                    "body_r text NOT NULL,".
+                    "body mediumtext NOT NULL,".
+                    "body_r mediumtext NOT NULL,".
                     "owner varchar(50) NOT NULL default '',".
                     "user varchar(50) NOT NULL default '',".
                     "latest enum('Y','N') NOT NULL default 'N',".
