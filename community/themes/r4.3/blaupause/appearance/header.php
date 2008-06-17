@@ -82,7 +82,7 @@ if ($user["doubleclickedit"] == "Y") {?>
   <div id="infomenu">
     <div id="breadcrumb">
       <!-- <h1>-->
-      <span class="main"><a href="<?php echo $this->GetConfigValue("base_url"); ?>"><?php echo $this->config["wakka_name"] ?></a>:</span> <span class="pagetitle"><?php echo $this->GetPagePath(); ?></span> <a class="Search" title="<?php echo $this->GetResourceValue("search_title_help")?>" 
+      <span class="main"><a href="<?php echo $this->GetConfigValue("base_url"); ?>"><?php echo $this->config["wakka_name"] ?></a>:</span> <span class="pagetitle"><?php echo $this->GetPagePath(); ?></span> <a class="Search" title="<?php echo $this->GetResourceValue("SearchTitleHelp")?>" 
      href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a><br />
       <!-- </h1> -->
     </div>
