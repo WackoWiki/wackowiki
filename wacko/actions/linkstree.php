@@ -46,7 +46,7 @@ if (!$levels) $levels=3;
 else $levels=(int)$levels;
 if ($levels>4){
 	$levels = 4;
-	print("<em>".$this->GetResourceValue("LinksTree:Level>4 warning")."</em><br />");
+	print("<em>".$this->GetResourceValue("LinksTree:Level>4Warning")."</em><br />");
 }
 
 print($this->Link($root)."<br />\n");//<br/>

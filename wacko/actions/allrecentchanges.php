@@ -33,7 +33,7 @@ if ($pages = $this->LoadRecentlyChanged($max))
 
 			// print entry
 			print("&nbsp;&nbsp;&nbsp;<span class=\"dt\">".$time."</span> &mdash; (".
-			$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetResourceValue("history"), 0).") ".
+			$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetResourceValue("History"), 0).") ".
 			$this->Link( $page["tag"] )." . . . . . . . . . . . . . . . . <small>".
 			($this->IsWikiName($page["user"])?$this->Link($page["user"]):$page["user"])."</small><br />\n");
 		}

@@ -41,7 +41,7 @@ if ($user = $this->GetUser())
 				}
 
 				// print entry
-				print("&nbsp;&nbsp;&nbsp;($time) (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetResourceValue("history"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."<br />\n");
+				print("&nbsp;&nbsp;&nbsp;($time) (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetResourceValue("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."<br />\n");
 
 				$my_pages_count++;
 			}
@@ -77,7 +77,7 @@ if ($user = $this->GetUser())
 				}
 
 				// print entry
-				print("&nbsp;&nbsp;&nbsp;($time) (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetResourceValue("history"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."<br />\n");
+				print("&nbsp;&nbsp;&nbsp;($time) (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetResourceValue("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."<br />\n");
 
 				$my_pages_count++;
 			}

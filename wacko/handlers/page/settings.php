@@ -23,11 +23,11 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
   <?php echo $this->FormOpen("settings") ?>
   <div class="cssform">
     <p>
-      <label><?php echo $this->GetResourceValue("meta1"); ?></label>
+      <label><?php echo $this->GetResourceValue("Meta1"); ?></label>
       <textarea name="keywords" rows="4" cols="51"><?php echo $this->page["keywords"] ?></textarea>
     </p>
     <p>
-      <label><?php echo $this->GetResourceValue("meta2"); ?></label>
+      <label><?php echo $this->GetResourceValue("Meta2"); ?></label>
       <textarea name="description" rows="4" cols="51"><?php echo $this->page["description"] ?></textarea>
     </p>
     <p>
