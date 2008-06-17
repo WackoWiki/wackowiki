@@ -131,7 +131,7 @@ echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $t
 	alt="<?php echo $this->GetResourceValue("MsWordVersion") ?>" /></a></div>
 <div class="header">
   <h1><span class="Main"><?php echo $this->config["wakka_name"] ?>:</span> <?php echo $this->GetPagePath(); ?> <a class="Search"
-	title="<?php echo $this->GetResourceValue("search_title_help")?>"
+	title="<?php echo $this->GetResourceValue("SearchTitleHelp")?>"
 	href="<?php echo $this->config["base_url"] ?>TextSearch<?php echo ($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a> </h1>
   <?php if (($this->method != "edit") || !$this->HasAccess("write")) { ?>
   <div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>icons/shade2.gif);" class="Shade"><img

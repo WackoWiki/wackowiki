@@ -69,7 +69,7 @@ if ($user["doubleclickedit"] == "Y") {
 	type="submit" value="Ok" /></span> <?php } ?></div>
 <div class="title"><?php echo $this->config["wakka_name"] ?>: <?php echo $this->GetPagePath(); ?>
 <a class="Search"
-	title="<?php echo $this->GetResourceValue("search_title_help")?>"
+	title="<?php echo $this->GetResourceValue("SearchTitleHelp")?>"
 	href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
 </div>
 

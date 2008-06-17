@@ -63,7 +63,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
     <p>
       <label><?php echo $this->GetResourceValue("SetOwner"); ?></label>
       <select name="newowner">
-        <option value=""><?php echo $this->GetResourceValue("OwnerDon'tChange"); ?></option>
+        <option value=""><?php echo $this->GetResourceValue("OwnerDontChange"); ?></option>
         <?php
 			if ($users = $this->LoadUsers())
 			{

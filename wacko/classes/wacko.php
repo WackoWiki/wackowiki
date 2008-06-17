@@ -834,10 +834,10 @@ class Wacko
 							if ($User["email_confirm"]=="" && $User["options"]["send_watchmail"]!="N")
 							{
 								$lang = $User["lang"];
-								$subject = $this->GetResourceValue("Comment for watched page",$lang)."'".$comment_on."'";
+								$subject = $this->GetResourceValue("CommentForWatchedPage",$lang)."'".$comment_on."'";
 								$message = $this->GetResourceValue("MailHello",$lang). $Watcher["user"].".<br /> <br /> ";
 								$message .=   $username.
-								$this->GetResourceValue("Someone commented",$lang)."<br />  * <a href=\"".$this->Href("",$comment_on,"")."\">".$this->Href("",$comment_on,"")."</a><br />";
+								$this->GetResourceValue("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$comment_on,"")."\">".$this->Href("",$comment_on,"")."</a><br />";
 								$message .= "<hr />".$this->Format($body_r, "post_wacko")."<hr />";
 								$message .= "<br />".$this->GetResourceValue("MailGoodbye",$lang)." ".$this->GetConfigValue("wakka_name");
 								$this->SendMail($User["email"], $subject, $message);
@@ -896,11 +896,11 @@ class Wacko
 							if ($User["email_confirm"]=="" && $User["options"]["send_watchmail"]!="N")
 							{
 								$lang = $User["lang"];
-								$subject = $this->GetResourceValue("A watched Page changed!",$lang)."'".$tag."'";
+								$subject = $this->GetResourceValue("WatchedPageChanged",$lang)."'".$tag."'";
 								$message = "<style>.additions {color: #008800;}\n.deletions {color: #880000;}</style>";
 								$message .= $this->GetResourceValue("MailHello",$lang). $Watcher["user"].".<br /> <br /> ";
 								$message .=   $username.
-								$this->GetResourceValue("Someone changed this page:",$lang)."<br />  ";//* <a href=\"".$this->Href("",$tag,"")."\">".$this->Href("",$tag,"")."</a><br />";
+								$this->GetResourceValue("SomeoneChangedThisPage",$lang)."<br />  ";//* <a href=\"".$this->Href("",$tag,"")."\">".$this->Href("",$tag,"")."</a><br />";
 								$_GET["fastdiff"] = 1;
 								$_GET["a"] = -1;
 								$page = $this->LoadSingle("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."revisions WHERE tag='".quote($this->dblink, $tag)."' ORDER BY time DESC");

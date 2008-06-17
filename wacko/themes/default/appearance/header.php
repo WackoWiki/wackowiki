@@ -29,7 +29,7 @@ echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
    <link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/wacko.ico" type="image/x-icon" />
    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-   <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?> in RSS" href="<?php echo $this->href("revisions.xml");?>" />
+   <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // Three JS files.
 // default.js contains common procedures and should be included everywhere
@@ -79,7 +79,7 @@ if ($user = $this->GetUser())
 echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
       <input type="hidden" name="action" value="login" />
       <div class="header">
-         <h1><span class="main"><?php echo $this->config["wakka_name"] ?>: </span><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("search_title_help")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></h1>
+         <h1><span class="main"><?php echo $this->config["wakka_name"] ?>: </span><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("SearchTitleHelp")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></h1>
 <?php
 // Outputs Bookmarks AKA QuickLinks
 // Main page
