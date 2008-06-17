@@ -245,7 +245,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
                            {
           ?>
 <p><?php echo $this->GetResourceValue("Captcha");?></p>
-<img src="<?php echo $this->GetConfigValue("root_url");?>captcha/freecap.php" id="freecap" alt="<?php echo $this->GetResourceValue("Captcha");?>" /> <a href="" onClick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetResourceValue("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("theme_url");?>icons/reload.png" width="18" height="17" alt="<?php echo $this->GetResourceValue("CaptchaReload"); ?>" /></a> <br />
+<img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetResourceValue("Captcha");?>" /> <a href="" onClick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetResourceValue("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("theme_url");?>icons/reload.png" width="18" height="17" alt="<?php echo $this->GetResourceValue("CaptchaReload"); ?>" /></a> <br />
 <br />
 <?php
                            }
