@@ -44,7 +44,7 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
 			<b><?php echo $this->config["wakka_name"]; ?>:</b>
 			<?php echo $this->GetPagePath(); ?>
-			<a title="<?php echo $this->GetResourceValue("search_title_help"); ?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a> 
+			<a title="<?php echo $this->GetResourceValue("SearchTitleHelp"); ?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a> 
 		</div>
 		<div id="quicklinks">
 			<div class="bookmarks">

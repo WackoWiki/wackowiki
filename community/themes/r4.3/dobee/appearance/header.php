@@ -45,7 +45,7 @@
 	<tr>
   		<td>
 			<?php echo $this->config["wakka_name"] ?>: <?php echo $this->GetPagePath(); ?>
-			<a class="Search" title="<?php echo $this->GetResourceValue("search_title_help")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
+			<a class="Search" title="<?php echo $this->GetResourceValue("SearchTitleHelp")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
 		</td>
 	  	<td class="searchArea" align="right" valign="bottom">
 			<?php echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get"); ?>
