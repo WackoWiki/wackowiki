@@ -19,11 +19,13 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/wakka.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/left.css" />
 		<link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/wacko.ico" type="image/x-icon" />
-		<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
-		<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/protoedit.js"></script>
-		<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/wikiedit2.js"></script>
+			<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/default.js"></script>
+			<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/protoedit.js"></script>
+			<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/wikiedit2.js"></script>
+			<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/autocomplete.js"></script>
+			<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
 
-		<script language="javascript" type="text/javascript" src="<?php echo $this->GetConfigValue("theme_url") ?>js/leftframe.js"></script>
+			<script language="javascript" type="text/javascript" src="<?php echo $this->GetConfigValue("theme_url") ?>js/leftframe.js"></script>
 <?php
     if ($user = $this->GetUser()){
 		if ($user["doubleclickedit"] == "Y") {

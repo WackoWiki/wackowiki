@@ -25,6 +25,7 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/protoedit.js"></script>
 	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/wikiedit2.js"></script>
 	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/autocomplete.js"></script>
+	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
 	<?php if($user = $this->GetUser()) if($user["doubleclickedit"] == "Y") { ?>
 	<!-- Edit by doubleclick for logged in users -->
 	<script language="JavaScript" type="text/javascript">

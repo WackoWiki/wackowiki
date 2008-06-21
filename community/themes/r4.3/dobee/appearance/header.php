@@ -21,9 +21,11 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/left.css" />
 		<link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/wacko.ico" type="image/x-icon" />
 		<link rel="alternate" type="application/rss+xml" title="RecentChanges in RSS" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-		<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
-		<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/protoedit.js"></script>
-		<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/wikiedit2.js"></script>
+		<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/default.js"></script>
+		<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/protoedit.js"></script>
+		<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/wikiedit2.js"></script>
+		<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/autocomplete.js"></script>
+		<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
 
 		<script language="javascript" type="text/javascript" src="<?php echo $this->GetConfigValue("theme_url") ?>js/leftframe.js"></script>
 <?php

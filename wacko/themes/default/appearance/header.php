@@ -41,7 +41,6 @@ echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
    <script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/autocomplete.js"></script>
    <script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
    <script language="JavaScript" type="text/javascript">
-      // <![CDATA[
 <?php
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off.
@@ -49,7 +48,8 @@ if ($user = $this->GetUser())
    if($user["doubleclickedit"] == "Y") {?>
          var edit = "<?php echo $this->href("edit");?>";
 <?php }?>
-
+</script>
+<script language="JavaScript" type="text/javascript">
          function new_freecap()
             {
                if(document.getElementById)
@@ -63,7 +63,6 @@ if ($user = $this->GetUser())
                      alert('<?php echo $this->GetResourceValue("CaptchaReloadWarning");?>');
                   }
             }
-      // ]]>
    </script>
 </head>
 <?php
