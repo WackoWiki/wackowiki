@@ -1,9 +1,7 @@
 <?php
 /*
-Samsra theme.
-
+Blaupause theme.
 Common header file.
-
 Commented by Roman Ivanov.
 */
 
@@ -39,6 +37,7 @@ Commented by Roman Ivanov.
   <script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/protoedit.js"></script>
   <script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/wikiedit2.js"></script>
   <script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/autocomplete.js"></script>
+  <script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
 <?php 
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off.

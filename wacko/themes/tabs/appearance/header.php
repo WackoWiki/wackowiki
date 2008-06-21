@@ -36,6 +36,8 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 	src="<?php echo $this->GetConfigValue("root_url");?>js/wikiedit2.js"></script>
 <script language="JavaScript" type="text/javascript"
 	src="<?php echo $this->GetConfigValue("root_url");?>js/autocomplete.js"></script>
+<script language="JavaScript" type="text/javascript" 
+	src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
 <?php
 if ($user = $this->GetUser())
 if ($user["doubleclickedit"] == "Y") {?>

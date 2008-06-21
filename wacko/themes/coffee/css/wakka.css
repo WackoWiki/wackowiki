@@ -37,7 +37,8 @@ div.searchbar input { border: none; border-bottom: 1px solid #CCCCAA; padding: 0
 div.copyright {clear: right; padding: 10px; color: #AAAAAA; font-size: 11px; text-align: right}
 .commentform form { width: 100% }
 .commentform form textarea { width: 100%; padding: 0}
-.commentinfo, .copyright a { color: #AAAAAA }
+.commentinfo, .copyright a { color: #AAAAAA; padding-bottom: 20px; }
+.copyright a { color: #AAAAAA;}
 
 /* paddings headers */
 
@@ -221,3 +222,46 @@ tt { color:#666600; background:#ffffcc; padding: 0 2px }
 .cite {color:#ff0000;font-style:normal;}
 /* .mark  { color: #008800;font-style:normal; } */
 .mark { color: #00000; background:#ffaaaa; }
+
+/* CSS form formater */
+.cssform p{
+width: 300px;
+clear: left;
+margin: 0;
+padding: 5px 0 8px 0;
+padding-left: 155px; /*width of left column containing the label elements*/
+/*border-top: 1px dotted gray;*/
+height: 1%;
+}
+
+.cssform label{
+float: left;
+margin-left: -155px; /*width of left column*/
+width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/ }
+
+.cssform input[type="text"]{ /*width of text boxes. IE6 does not understand this attribute*/
+width: 180px;
+}
+
+.cssform textarea{
+width: 250px;
+height: 150px;
+}
+
+.cssform span.site_count{
+font-weight: normal;
+float: left;
+margin-left: -155px; /*width of left column*/
+width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/ }
+
+.BewareChangeLang{
+	border: 1px solid #ffee66;
+	width: 400px;
+	background-color: #ffffdd;
+	background-image: url(../../../images/warning.gif);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
+	margin: 10px;
+	padding: 5px 5px 5px 40px;
+}
