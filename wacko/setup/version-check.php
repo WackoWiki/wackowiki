@@ -20,7 +20,7 @@ else
       Check PHP Version
    */
 
-   $php_version_result = version_compare("4.0.7", PHP_VERSION, "<");
+   $php_version_result = version_compare("4.3.3", PHP_VERSION, "<");
 ?>
             <h2><?php echo $lang["PHPVersion"]; ?></h2>
             <p class="notop"><?php echo $lang["PHPDetected"]; ?> <?php print phpversion().' - '.output_image($php_version_result); ?></p>
