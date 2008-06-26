@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutAreYouSure" => "Do you really want to log out?",
 // registration panel
   "RegistrationWelcome" => "New user registration:",
-  "RegistrationName" => "Give yourself a ((WackoWiki:DocEnglish/WhatIsNameSurname NameSurname))",
+  "RegistrationName" => "Give yourself a ((WackoWiki:DocEnglish/WikiName NameSurname))",
   "RegistrationPassword" => "Password (5+ chars)",
   "RegistrationButton" => "Register me!",
   "RegistrationNameOwned" => "This username is already registered. Please choose another.",
 // login panel
   "LoginWelcome" => "Login",
   "LoginWelcome2" => " . . . . . . . . ((/Registration Register))",
-  "LoginName" => "((WackoWiki:DocEnglish/WhatIsNameSurname NameSurname))",
+  "LoginName" => "((WackoWiki:DocEnglish/WikiName NameSurname))",
   "LoginPassword" => "Password",
   "LoginButton" => "Login!",
 // other
@@ -244,7 +244,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Enter your login or email address,\nthen email with instructions will be send to you.",
   "ForgotMain" => "Forgot password?",
-  "ForgotField" => "((WackoWiki:DocEnglish/WhatIsNameSurname NameSurname)) or email",
+  "ForgotField" => "((WackoWiki:DocEnglish/WikiName NameSurname)) or email",
   "SendButton" => "Send!",
   "UserNotFound" => "<em>User with this name or email address was not found.</em>",
   "NotConfirmedMail" => "<em>Your email address is not confirmed.<br />Mail can't be send to non-confirmed address.</em>",
