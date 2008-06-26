@@ -19,7 +19,7 @@ $lang = array(
 */
 "version-check" => "System Anforderungen",
 "PHPVersion" => "PHP Version",
-"PHPDetected" => "Detected PHP",
+"PHPDetected" => "Erkannt PHP",
 "ModRewrite" => "Apache Rewrite Extension (Optional)",
 "ModRewriteInstalled" => "Rewrite Extension (mod_rewrite) Installiert?",
 "Database" => "Datenbank",
@@ -32,10 +32,10 @@ $lang = array(
 "Requirements" => "Dein Server muss den folgenden Anforderungen entsprechen.",
 "OK" => "OK",
 "Problem" => "Problem",
-"NotePermissions" => "ACHTUNG: Der Installer wird versuchen, die Einstellungen in die Datei <tt>wakka.config.php</tt> zu schreiben, diese Datei befindet sich im WackoWiki Verzeichnis. Damit das funktioniert, musst du sicherstellen, dass der Webserver Schreibrechte auf diese Datei hat! Falls du das nicht kannst, musst du die Datei später von Hand ändern (das Installationsskript sagt dir dann, was zu tun ist).<br/><br/>Lies <a href=\"http://wackowiki.de/DocDeutsch/Installation\" target=\"_blank\">WackoWiki:DocDeutsch/Installation</a> für weitere Einzelheiten.",
+"NotePermissions" => "ACHTUNG: Der Installer wird versuchen, die Einstellungen in die Datei <tt>wakka.config.php</tt> zu schreiben, diese Datei befindet sich im WackoWiki Verzeichnis. Damit das funktioniert, musst du sicherstellen, dass der Webserver Schreibrechte auf diese Datei hat! Falls du das nicht kannst, musst du die Datei später von Hand ändern (das Installationsskript sagt dir dann, was zu tun ist).<br/><br/>Lies <a href=\"http://wackowiki.de/Archiv/DocDeutsch/Installation\" target=\"_blank\">WackoWiki:DocDeutsch/Installation</a> für weitere Einzelheiten.",
 "ErrorPermissions" => "Es scheint das der Installer nicht automatisch die erforderlichen Zugriffsrechte für die Dateien setzen kann um work correctly.  You will be prompted later in the installation process to manually configure the required file permissions on your server.",
 "ErrorMinPHPVersion" => "Die PHP Version muss größer als <strong>4.3.3</strong> sein, dein Server scheint mit einer füheren Version zu laufen.  Du must auf eine aktuellere PHP Version upgraden damit WackoWiki korrekt funktioniert.",
-"Ready" => "Glückwünsch, dein Server scheint in der Lage WackoWiki ausführen zu können.  Die folgenden Seiten werden dich durch den Konfiguration Prozess führen.",
+"Ready" => "Glückwünsch, dein Server scheint fähig WackoWiki ausführen zu können.  Die folgenden Seiten werden dich durch den Konfigurationsprozess führen.",
 
 /*
    Site Config Page
@@ -64,7 +64,7 @@ $lang = array(
 "ErrorAdminPasswordMismatch" => "Die Passwörter stimmen nicht überein!",
 "ErrorAdminPasswordShort" => "Das Verwalter Passwort ist zu kurz, die Mindestlänge ist 5 Zeichen!",
 "WarningRewriteMode" => "ACHTUNG!\nDeine Basis-URL & die Umschreib-Rechte (rewrite-mode settings) schauen ungewöhnlich aus. Normalerweise ist da kein ? in der URL wenn Umschreibe-Rechte aktiviert sind - in deinem Fall ist da aber ein Fragezeichen.\n\nUm dennoch mit diesen Einstellungen fortzufahren drücke OK.\nZurück zu den Einstellungen (form & change settings) drücke ABBRECHEN.\n\nFalls du mit den Einstellungen fortfährst, kann diese Software-Installation zu unerwarteten Fehlern führen.",
-"ModRewriteStatusUnknown" => "Der Installer kann nicht ermitteln ob mod_rewrite aktiviert ist, however this does not mean it is disabled",
+"ModRewriteStatusUnknown" => "Der Installer kann nicht ermitteln ob mod_rewrite aktiviert ist, dies bedeutet jedoch nicht das es deaktiviert ist.",
 
 /*
    Database Config Page
