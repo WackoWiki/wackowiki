@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutAreYouSure"  => "Czy na pewno chcesz siê wylogowaæ?",
 // registration panel
   "RegistrationWelcome" => "Rejestracja nowego u¿ytkownika:",
-  "RegistrationName" => "Wprowad¼ swoje ((WackoWiki:DocEnglish/WhatIsNameSurname ImiêNazwisko))",
+  "RegistrationName" => "Wprowad¼ swoje ((WackoWiki:DocEnglish/WikiName ImiêNazwisko))",
   "RegistrationPassword" => "Has³o (min. 5 znaków)",
   "RegistrationButton" => "Zarejestruj!",
   "RegistrationNameOwned" => "Przepraszamy! Ta nazwa jest ju¿ zajêta. Prosimy o wybranie innej nazwy u¿ytkownika.",
 // login panel
   "LoginWelcome" => "Zaloguj siê",
   "LoginWelcome2" => " . . . . . . . . a mo¿e potrzebujesz siê [[/Rejestracja zarejestrowaæ]]?",
-  "LoginName" => "Twoje ((WackoWiki:DocEnglish/WhatIsNameSurname ImiêNazwisko))",
+  "LoginName" => "Twoje ((WackoWiki:DocEnglish/WikiName ImiêNazwisko))",
   "LoginPassword" => "Has³o",
   "LoginButton" => "Zaloguj!",
 // other
@@ -244,7 +244,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Wpisz swój login i adres e-mail,\naby zosta³ przes³any do ciebie e-mail z instrukcjami.",
   "ForgotMain" => "Zapomnia³e¶ has³a?",
-  "ForgotField" => "((WackoWiki:DocEnglish/WhatIsNameSurname NazwaWiki)) lub e-mail",
+  "ForgotField" => "((WackoWiki:DocEnglish/WikiName NazwaWiki)) lub e-mail",
   "SendButton" => "Wy¶lij!",
   "UserNotFound" => "<em>U¿ytkownik z t± nazw± lub adresem e-mail nie zosta³ znaleziony.</em>",
   "NotConfirmedMail" => "<em>Twój adres e-mail nie zosta³ potwierdzony.<br />Mail nie mo¿e byæ wysy³any na niepotwierdzony adres.</em>",
