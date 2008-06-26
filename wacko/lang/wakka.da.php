@@ -17,7 +17,7 @@ $wakkaResource = array(
 // login panel
   "LoginWelcome" => "Log ind",
   "LoginWelcome2" => " . . . . . . . . ((/Registrering Registrering))",
-  "LoginName" => "((WackoWiki:DocEnglish/WhatIsNameSurname NameSurname))",
+  "LoginName" => "((WackoWiki:DocEnglish/WikiName NameSurname))",
   "LoginPassword" => "Password",
   "LoginButton" => "Log ind!",
 // other
@@ -244,7 +244,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Oplys dit brugernavn eller din emailadresse,\nså sender vi en mail med instruktioner.",
   "ForgotMain" => "Glemt password?",
-  "ForgotField" => "((WackoWiki:DocEnglish/WhatIsNameSurname NameSurname)) eller e-mail",
+  "ForgotField" => "((WackoWiki:DocEnglish/WikiName NameSurname)) eller e-mail",
   "SendButton" => "Send!",
   "UserNotFound" => "<em>Ingen bruger med disse oplysninger.</em>",
   "NotConfirmedMail" => "<em>Din mailadresse er ikke bekræftet.<br />Vi kan derfor ikke sende dig en mail.</em>",

@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutAreYouSure" => "Estás seguro de querer desconectarte?",
 // registration panel
   "RegistrationWelcome" => "Nuevo usuario:",
-  "RegistrationName" => "Date un ((WackoWiki:DocEnglish/WhatIsNameSurname NombreDeUsuario))",
+  "RegistrationName" => "Date un ((WackoWiki:DocEnglish/WikiName NombreDeUsuario))",
   "RegistrationPassword" => "Contraseña (5+ letras)",
   "RegistrationButton" => "Regístrate",
   "RegistrationNameOwned" => "Este nombre ya existe. Escoge otro por favor.",
 // login panel
   "LoginWelcome" => "Conectar",
   "LoginWelcome2" => " . . . . . . . . [[/Registration Registrarse]]",
-  "LoginName" => "((WackoWiki:DocEnglish/WhatIsNameSurname NombreDeUsuario))",
+  "LoginName" => "((WackoWiki:DocEnglish/WikiName NombreDeUsuario))",
   "LoginPassword" => "Contraseña",
   "LoginButton" => "Conectar",
 // other
@@ -244,7 +244,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Introduce tu login o e-mail,\n y te enviaremos un e-mail con instrucciones.",
   "ForgotMain" => "Contraseña olvidada?",
-  "ForgotField" => "((WackoWiki:DocEnglish/WhatIsNameSurname NameUsuario)) o e-mail",
+  "ForgotField" => "((WackoWiki:DocEnglish/WikiName NameUsuario)) o e-mail",
   "SendButton" => "Enviar!",
   "UserNotFound" => "<em>No se ha encontrado ningún usuario con este nombre o e-mail.</em>",
   "NotConfirmedMail" => "<em>Tu e-mail no ha sido confirmado.<br />No se puede enviar e-mail a una direccion no confirmada.</em>",

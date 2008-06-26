@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutAreYouSure"  => "Είσαι σίγουρος;",
 // registration panel
   "RegistrationWelcome" => "Εγγραφή Νέου Χρήστη:",
-  "RegistrationName" => "Δώσε ένα ((WackoWiki:DocEnglish/WhatIsNameSurname NameSurname))",
+  "RegistrationName" => "Δώσε ένα ((WackoWiki:DocEnglish/WikiName NameSurname))",
   "RegistrationPassword" => "Συνθηματικό (5+ χαρακτήρες)",
   "RegistrationButton" => "Έγγραψέ με!",
   "RegistrationNameOwned" => "Αυτό το όνομα χρήστη είναι ήδη καταχωρημένο. Παρακαλώ επιλέξτε ένα διαφορετικό.",
 // login panel
   "LoginWelcome" => "Σύνδεση",
   "LoginWelcome2" => " . . . . . . . . ((/Registration Εγγραφή))",
-  "LoginName" => "((WackoWiki:DocEnglish/WhatIsNameSurname NameSurname))",
+  "LoginName" => "((WackoWiki:DocEnglish/WikiName NameSurname))",
   "LoginPassword" => "Συνθηματικό",
   "LoginButton" => "Σύνδεση!",
 // other
@@ -244,7 +244,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Πληκτρολόγησε το όνομα χρήσης σου ή την ηλεκτρονική σου διεύθυνση,\nκαι μετά ακολούθησε τις οδηγίες που θα σου σταλούν μέσω ηλεκτρονικού ταχυδρομείου ",
   "ForgotMain" => "Ξέχασες το συνθηματικό σου?",
-  "ForgotField" => "((WackoWiki:DocEnglish/WhatIsNameSurname Όνομα Χρήσης)) ή ηλεκτρονική διεύθυνση",
+  "ForgotField" => "((WackoWiki:DocEnglish/WikiName Όνομα Χρήσης)) ή ηλεκτρονική διεύθυνση",
   "SendButton" => "Αποστολή!",
   "UserNotFound" => "<em>Δεν υπάρχει χρήστης με αυτό το όνομα ή με αυτήν την ηλεκτρονική διεύθυνση.</em>",
   "NotConfirmedMail" => "<em>Your e-mail address is not confirmed.<br />Mail can't be send to non-confirmed address.</em>",

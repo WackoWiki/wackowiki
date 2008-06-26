@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutAreYouSure" => "Kas oled kindel, et tahad välja logida?",
 // registration panel
   "RegistrationWelcome" => "Uue kasutaja registreerimine:",
-  "RegistrationName" => "Omista ((WackoWiki:DocEnglish/WhatIsNameSurname WikiNimi))",
+  "RegistrationName" => "Omista ((WackoWiki:DocEnglish/WikiName WikiNimi))",
   "RegistrationPassword" => "Parool (vähemalt 5 tähemärki)",
   "RegistrationButton" => "Registreerun",
   "RegistrationNameOwned" => "Valitud kasutajanimi on juba kasutusel. Palun vali mõni teine.",
 // login panel
   "LoginWelcome" => "Logi sisse",
   "LoginWelcome2" => " . . . . . . . . [[/Registration Registereeri]]",
-  "LoginName" => "((WackoWiki:DocEnglish/WhatIsNameSurname WikiNimi))",
+  "LoginName" => "((WackoWiki:DocEnglish/WikiName WikiNimi))",
   "LoginPassword" => "Parool",
   "LoginButton" => "Sisse!",
 // other
@@ -244,7 +244,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Sisetage oma kasutajanimi või e-posti aadress,\n siis saadetakse sulle e-postiga instruktsioonid.",
   "ForgotMain" => "Unustasid parooli?",
-  "ForgotField" => "((WackoWiki:DocEnglish/WhatIsNameSurname WikiNimi)) või e-post",
+  "ForgotField" => "((WackoWiki:DocEnglish/WikiName WikiNimi)) või e-post",
   "SendButton" => "Saada!",
   "UserNotFound" => "<em>Sellist kasutajanimi või e-postii aadressi ei leitud.</em>",
   "NotConfirmedMail" => "<em>Sinu e-posti aadress ei leidnud kinnitust..<br />Kirja ei saa saata kinnitust leidmata aadressile.</em>",
