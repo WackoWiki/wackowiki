@@ -377,7 +377,7 @@ $wakkaResource = array(
 
   "LastModification" => "Last Modification",
 
-  // Captcha
+// Captcha
   "Captcha" => 'Please type the word you read in the image',
   "SpamAlert" => 'You have entered the word incorrectly',
   "CaptchaReload" => "New Captcha",
