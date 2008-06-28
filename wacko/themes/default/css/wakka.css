@@ -1,425 +1,688 @@
 @import "../../_common/X11ColorNames.css";
 /* basic -------------------------------------------------- */
 P, TD, LI, SELECT, TEXTAREA {
-  font-family: Verdana;
-  font-size: 13px;
-  line-height: 1.3em;
+	font-family: Verdana;
+	font-size: 13px;
+	line-height: 1.3em;
 }
-
-label {cursor:pointer;}
-
+label {
+	cursor:pointer;
+}
 /* Textareas */
 textarea {
 	background-color: #FFFFFF;
 }
-
 BODY {
-  font-family: Verdana;
-  font-size: 13px;
-  line-height: 1.3;
-  color: #000000;
-  background-color: #F8F8F8;
+	font-family: Verdana;
+	font-size: 13px;
+	line-height: 1.3;
+	color: #000000;
+	background-color: #F8F8F8;
 }
-
-A  	{
-
+A {
 }
 A:LINK {
-  color: #990000;
+	color: #990000;
 }
-A:Hover  {
-	color: #990000; 
-	text-decoration: underline  
+A:Hover {
+	color: #990000;
+	text-decoration: underline
 }
-A:Active  {
+A:Active {
 	color: #FF9900;
 	text-decoration: underline;
 }
 A:VISITED {
-  color: #666600;
-  }
+	color: #666600;
+}
 img {
 	border-width: 0px;
 	vertical-align: middle;
-	}
-
-UL, OL {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
 }
-
+UL, OL {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
 /* paddings headers */
 FORM, H1, H2, H3, H4, H5, H6 {
-  margin: 0px;
-  padding: 0px;
+	margin: 0px;
+	padding: 0px;
 }
-
 .main {
-  font-size: 22px;
+	font-size: 22px;
 }
 .print {
-  font-family: Verdana;
-  font-size: 12px;
+	font-family: Verdana;
+	font-size: 12px;
 }
-
 .error {
-  color: #CC3333; font-weight: bold;
+	color: #CC3333;
+	font-weight: bold;
 }
-.time{ color:#999999; font-size: 9px; margin:5px 20px;}
-.debug { font-size: 11px; color: #888888;}
-
+.time {
+	color:#999999;
+	font-size: 9px;
+	margin:5px 20px;
+}
+.debug {
+	font-size: 11px;
+	color: #888888;
+}
 .header {
-  padding: 10px;
-  padding-top: 0px;
-  line-height: 22px;
+	padding: 10px;
+	padding-top: 0px;
+	line-height: 22px;
 }
-
 .page {
-  background-color: #FFFFFF;
-  padding: 9px 10px 10px;
-  border: 1px inset;
-  border-top: none;
-  border-bottom: none;
+	background-color: #FFFFFF;
+	padding: 9px 10px 10px;
+	border: 1px inset;
+	border-top: none;
+	border-bottom: none;
 }
 .pageBefore {
-  border: 1px inset;
-  border-bottom: none;
-  height:1px
+	border: 1px inset;
+	border-bottom: none;
+	height:1px
 }
 .pageedit {
-  background-color: #FFFFFF;
-  border: 1px inset;
-  border-bottom: none;
+	background-color: #FFFFFF;
+	border: 1px inset;
+	border-bottom: none;
 }
-.pageedit form textarea {width: 100%;height: 400px; }
+.pageedit form textarea {
+	width: 100%;
+	height: 400px;
+}
 .footer {
-  background-color: #DDDDDD;
-  padding: 5px 10px;
-  border: 1px inset;
-  border-top: none;
-  border-top: 1px solid #CCCCCC;
+	background-color: #DDDDDD;
+	padding: 5px 10px;
+	border: 1px inset;
+	border-top: none;
+	border-top: 1px solid #CCCCCC;
 }
-
 .filesheader, .commentsheader {
-  background-color: #DDDDDD;
-  padding: 2px 10px;
-  border-left: 1px inset;
-  border-right: 1px inset;
-  border-top: 1px solid #CCCCCC;
+	background-color: #DDDDDD;
+	padding: 2px 10px;
+	border-left: 1px inset;
+	border-right: 1px inset;
+	border-top: 1px solid #CCCCCC;
 }
-
 .files, .comment {
-  background-color: #EEEEEE;
-  padding: 10px;
-  border-left: 1px inset;
-  border-right: 1px inset;
-  border-top: 1px solid #CCCCCC;
-  border-bottom: 1px solid #EEEEEE;
+	background-color: #EEEEEE;
+	padding: 10px;
+	border-left: 1px inset;
+	border-right: 1px inset;
+	border-top: 1px solid #CCCCCC;
+	border-bottom: 1px solid #EEEEEE;
 }
-
 .commentinfo {
-  color: #AAAAAA;
+	color: #AAAAAA;
 }
-
 .filesform, .commentform {
-  background-color: #EEEEEE;
-  padding: 10px;
-  border-left: 1px inset;
-  border-right: 1px inset;
-  border-top: 1px solid #CCCCCC;
+	background-color: #EEEEEE;
+	padding: 10px;
+	border-left: 1px inset;
+	border-right: 1px inset;
+	border-top: 1px solid #CCCCCC;
 }
-.commentform form {width:100%;}
-.commentform form textarea {width:100%; padding:0;}
-
+.commentform form {
+	width:100%;
+}
+.commentform form textarea {
+	width:100%;
+	padding:0;
+}
 .revisioninfo {
-  color: #AAAAAA;
-  padding-bottom: 20px;
+	color: #AAAAAA;
+	padding-bottom: 20px;
 }
-
 .copyright {
-  font-size: 11px;
-  color: #AAAAAA;
-  text-align: right;
+	font-size: 11px;
+	color: #AAAAAA;
+	text-align: right;
 }
-
 .copyright A {
-  color: #AAAAAA;
+	color: #AAAAAA;
 }
-
 .name {
-  text-align: right;
-  font-size: 11px;
+	text-align: right;
+	font-size: 11px;
 }
-
 .include {
-  background-color: #F5F5F5;
-  padding: 8px;
+	background-color: #F5F5F5;
+	padding: 8px;
 }
-
-.outerlink { color: #990000;}
-
+.outerlink {
+	color: #990000;
+}
 FIELDSET {
- padding: 10px;
+	padding: 10px;
 }
-
-.missingpage
-{
-  border-bottom: 1px dashed orange;
+.missingpage {
+	border-bottom: 1px dashed orange;
 }
-.searchbar
-{
-  background-color: #DDDDDD;
-  font-family: Verdana;
-  font-size: 13px;
-  line-height: 1.3em;
+.searchbar {
+	background-color: #DDDDDD;
+	font-family: Verdana;
+	font-size: 13px;
+	line-height: 1.3em;
 }
-.searchbar input{
-  border: none; 
-  border-bottom: 1px solid #CCCCAA; 
-  padding: 0px; margin: 0px;
-  }
-.logBtn {   height: 21px;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 10px;
- }
-
-#tooltip{
-background:#FFFFFF;
-border:1px solid #666666;
-color:#333333;
-font:menu;
-margin:0px;
-padding:3px 5px;
-position:absolute;
-visibility:hidden
+.searchbar input {
+	border: none;
+	border-bottom: 1px solid #CCCCAA;
+	padding: 0px;
+	margin: 0px;
 }
-
-table.upload td { padding: 2px 5px 2px 5px; vertical-align:bottom }
-table.upload td.dt-,
-table.upload td.file- { white-space:nowrap; font-size: 80%; font-weight:bold; color:#000000 }
-table.upload td.dt-   { padding-right:0 }
-table.upload td.remove-   { padding-right:0 }
-table.upload td.size- { padding-right:0; text-align:right }
-table.upload td.desc- { font-size: 80%; color:#444444; width:100% }
-table.upload td.dt- .dt2-,
-table.upload td.remove- .remove2-,
-table.upload td.size- .size2- { font: 11px Tahoma; color:#666666;  }
-table.upload td.remove- A.remove2-:HOVER,
-table.upload td.remove- A.remove2-:ACTIVE { color:#ff0000 }
-
- .preview {margin:2px;border:red 2px solid;}
- .preview legend {color:red;font-weight:bold;}
-
-.buttonsspacer{width:10px;height:1px;}
-
+.logBtn {
+	height: 21px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+#tooltip {
+	background:#FFFFFF;
+	border:1px solid #666666;
+	color:#333333;
+	font:menu;
+	margin:0px;
+	padding:3px 5px;
+	position:absolute;
+	visibility:hidden
+}
+table.upload td {
+	padding: 2px 5px 2px 5px;
+	vertical-align:bottom
+}
+table.upload td.dt-, table.upload td.file- {
+	white-space:nowrap;
+	font-size: 80%;
+	font-weight:bold;
+	color:#000000
+}
+table.upload td.dt- {
+	padding-right:0
+}
+table.upload td.remove- {
+	padding-right:0
+}
+table.upload td.size- {
+	padding-right:0;
+	text-align:right
+}
+table.upload td.desc- {
+	font-size: 80%;
+	color:#444444;
+	width:100%
+}
+table.upload td.dt- .dt2-, table.upload td.remove- .remove2-, table.upload td.size- .size2- {
+	font: 11px Tahoma;
+	color:#666666;
+}
+table.upload td.remove- A.remove2-:HOVER, table.upload td.remove- A.remove2-:ACTIVE {
+	color:#ff0000
+}
+.preview {
+	margin:2px;
+	border:red 2px solid;
+}
+.preview legend {
+	color:red;
+	font-weight:bold;
+}
+.buttonsspacer {
+	width:10px;
+	height:1px;
+}
 /* WikiEdit Toolbar -------------------------------------- */
- .toolbar tr { background: ButtonFace; }
- .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
-  background: ButtonFace;
-  color: ButtonText;
-  border: 1px solid ButtonFace;
-  padding: 1px;  margin: 0px;
-  cursor: pointer;
- }
- .toolbar img{
-  width: 20px;
-  height: 20px;
- }
- .toolbar .btn-hover {
-  border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
- }
- .toolbar .btn-active,  .toolbar .btn-pressed {
-  border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
- }
- .toolbar .btn-pressed {
-  background: ButtonHighlight;
- }
- .edname-w, .edname-r, .edname-s
-            { font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
- .edname-w  { background: #1E9905; }
- .edname-r  { background: #2A45D0; }
- .edname-s  { background: #D08C2A; }
- .autocomplete-inplace
- {
-   background: ButtonFace;
-   border: 1px solid ButtonShadow;
-   padding: 2px;
-   font: 12px Arial;
- }
- .autocomplete-inplace div          { padding: 2px 5px; cursor: pointer; }
- .autocomplete-inplace div.ac-over- { color:#ffffff; background: #1E9905; }
-
+ .toolbar tr {
+	background: ButtonFace;
+}
+.toolbar .btn-, .toolbar .btn-hover, .toolbar .btn-active, .toolbar .btn-pressed {
+	background: ButtonFace;
+	color: ButtonText;
+	border: 1px solid ButtonFace;
+	padding: 1px;
+	margin: 0px;
+	cursor: pointer;
+}
+.toolbar img {
+	width: 20px;
+	height: 20px;
+}
+.toolbar .btn-hover {
+	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+}
+.toolbar .btn-active, .toolbar .btn-pressed {
+	border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+}
+.toolbar .btn-pressed {
+	background: ButtonHighlight;
+}
+.edname-w, .edname-r, .edname-s {
+	font: bold 14px Arial;
+	border: 3px solid #D4D0C8;
+	padding: 0 7px;
+	color:#ffffff;
+	vertical-align: middle;
+}
+.edname-w {
+	background: #1E9905;
+}
+.edname-r {
+	background: #2A45D0;
+}
+.edname-s {
+	background: #D08C2A;
+}
+.autocomplete-inplace {
+	background: ButtonFace;
+	border: 1px solid ButtonShadow;
+	padding: 2px;
+	font: 12px Arial;
+}
+.autocomplete-inplace div {
+	padding: 2px 5px;
+	cursor: pointer;
+}
+.autocomplete-inplace div.ac-over- {
+	color:#ffffff;
+	background: #1E9905;
+}
 /* Wiki Formatting ---------------------------------------- */
-dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
-* html dfn { background: url(javascript:DOTS) repeat-x bottom left; }
-
-STRIKE, S { color:#999999 }
-STRIKE A:VISITED, S A:LINK { color:#999999 }
-STRIKE A:VISITED, S A:VISITED { color:#999999 }
-cite {color:#888800;font-style:normal;}
-
+dfn {
+	font-variant: small-caps;
+	letter-spacing: 0.1em;
+	font-style: normal;
+	cursor: help;
+	border-bottom: 1px dotted #000;
+}
+* html dfn {
+	background: url(javascript:DOTS) repeat-x bottom left;
+}
+STRIKE, S {
+	color:#999999
+}
+STRIKE A:VISITED, S A:LINK {
+	color:#999999
+}
+STRIKE A:VISITED, S A:VISITED {
+	color:#999999
+}
+cite {
+	color:#888800;
+	font-style:normal;
+}
 .add {
 	font-weight: bold;
 	color:#008800;
 	text-decoration: underline;
 	background-color: #efe;
 }
-.del { font-style: italic; color:#c00; text-decoration: line-through; }
-
-.nobr {white-space: nowrap}
-
-H1 { font-family: Verdana; font-size: 23px; padding-top:2px; padding-bottom:7px; line-height: 110% }
-H2 { font-family: Verdana; font-size: 20px; margin-top:20px; margin-bottom:5px; border-bottom:3px #444444 solid }
-H3 { font-family: Verdana; font-size: 17px; margin-top:15px; margin-bottom:5px; border-bottom:2px #666666 solid }
-H4 { font-family: Arial;   font-size: 16px; margin-top:15px; margin-bottom:5px; border-bottom:1px #999999 solid }
-H5 { font-family: Arial;   font-size: 14px; margin-top:10px; margin-bottom:5px; border-bottom:1px #bbbbbb solid }
-H6 { font-family: Arial;   font-size: 12px; }
-
-.center{  text-align: center;}
-.indent {  margin-left: 40px;}
-
-.additions { color: #008800; }
-.deletions { color: #880000; }
-
+.del {
+	font-style: italic;
+	color:#c00;
+	text-decoration: line-through;
+}
+.nobr {
+	white-space: nowrap
+}
+H1 {
+	font-family: Verdana;
+	font-size: 23px;
+	padding-top:2px;
+	padding-bottom:7px;
+	line-height: 110%
+}
+H2 {
+	font-family: Verdana;
+	font-size: 20px;
+	margin-top:20px;
+	margin-bottom:5px;
+	border-bottom:3px #444444 solid
+}
+H3 {
+	font-family: Verdana;
+	font-size: 17px;
+	margin-top:15px;
+	margin-bottom:5px;
+	border-bottom:2px #666666 solid
+}
+H4 {
+	font-family: Arial;
+	font-size: 16px;
+	margin-top:15px;
+	margin-bottom:5px;
+	border-bottom:1px #999999 solid
+}
+H5 {
+	font-family: Arial;
+	font-size: 14px;
+	margin-top:10px;
+	margin-bottom:5px;
+	border-bottom:1px #bbbbbb solid
+}
+H6 {
+	font-family: Arial;
+	font-size: 12px;
+}
+.center {
+	text-align: center;
+}
+.indent {
+	margin-left: 40px;
+}
+.additions {
+	color: #008800;
+}
+.deletions {
+	color: #880000;
+}
 .code {
-  background: #FFFFFF;
-  border: solid #888888 2px;
-  font-family: "Courier New";
-  color: black;
-  font-size: 10pt;
-  width: 80%;
-  padding: 3px;
+	background: #FFFFFF;
+	border: solid #888888 2px;
+	font-family: "Courier New";
+	color: black;
+	font-size: 10pt;
+	width: 80%;
+	padding: 3px;
 }
-
-.notes {  color: #888800; }
-
+.notes {
+	color: #888800;
+}
 table.usertable {
-  border: 1px none;
-  border-collapse: collapse;
+	border: 1px none;
+	border-collapse: collapse;
 }
-table.usertable tr td
-{
-  border-width: 1px;
-  border-color: black;
-  border-style: solid;
-  padding: 4px;
-  vertical-align: top;
+table.usertable tr td {
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+	padding: 4px;
+	vertical-align: top;
 }
-table.dtable { width:100%; border: 0px none; border-collapse: collapse; }
-table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
-
-.toc1 { margin-left:0px; padding-left:0px; font-weight:bold; list-style-type:none;  }
-.toc2 { margin-left:0px; padding-left:15px; list-style-type:none;  }
-.toc3 { margin-left:0px; padding-left:30px; list-style-type:none;  }
-.toc4 { margin-left:0px; padding-left:45px; list-style-type:none;  }
-.toc5 { margin-left:0px; padding-left:60px; list-style-type:none;  }
-.toc6 { margin-left:0px; padding-left:75px; list-style-type:none;  }
-
-.micq1 { padding:2px; vertical-align:top; font-weight: bold; }
-.micq2 { padding:2px; vertical-align:top; font:10px tahoma, arial }
-.micq3 { padding:2px; vertical-align:top; width:100% }
-
-.email1 {color:#800000}
-.email2 {color:#808000}
-.email-odd {color:#800000}
-.email-even {color:#808000}
-
-blockquote {  border-left:#cccccc 3px solid; padding:5px; color: #999999; }
-blockquote p {  padding:0px;  margin: 5px 0px; }
-
-
-p.auto { margin:0px; padding:0px; font-size:100%; }
-.pmark { color:#cccccc;font:10px Arial }
-.pmark A:LINK,
-.pmark A:VISITED { color:#cccccc }
-.pmark A:HOVER,
-.pmark A:ACTIVE  { color:#cc3300 }
-.pright {}
-.pright .p- { float:right; padding: 0 0 0 15px;  }
-.pright .pbody- { }
-
-.pleft { padding:0 }
-.pleft .p- { float:left; padding: 0 15px 0 0;  }
-.pleft .pbody- { padding:0 }
-
+table.dtable {
+	width:100%;
+	border: 0px none;
+	border-collapse: collapse;
+}
+table.dtable tr td {
+	vertical-align:top;
+	border-width: 0px;
+	border-color: #999999;
+	border-style: none;
+	padding: 4px;
+}
+.toc1 {
+	margin-left:0px;
+	padding-left:0px;
+	font-weight:bold;
+	list-style-type:none;
+}
+.toc2 {
+	margin-left:0px;
+	padding-left:15px;
+	list-style-type:none;
+}
+.toc3 {
+	margin-left:0px;
+	padding-left:30px;
+	list-style-type:none;
+}
+.toc4 {
+	margin-left:0px;
+	padding-left:45px;
+	list-style-type:none;
+}
+.toc5 {
+	margin-left:0px;
+	padding-left:60px;
+	list-style-type:none;
+}
+.toc6 {
+	margin-left:0px;
+	padding-left:75px;
+	list-style-type:none;
+}
+.micq1 {
+	padding:2px;
+	vertical-align:top;
+	font-weight: bold;
+}
+.micq2 {
+	padding:2px;
+	vertical-align:top;
+	font:10px tahoma, arial
+}
+.micq3 {
+	padding:2px;
+	vertical-align:top;
+	width:100%
+}
+.email1 {
+	color:#800000
+}
+.email2 {
+	color:#808000
+}
+.email-odd {
+	color:#800000
+}
+.email-even {
+	color:#808000
+}
+blockquote {
+	border-left:#cccccc 3px solid;
+	padding:5px;
+	color: #999999;
+}
+blockquote p {
+	padding:0px;
+	margin: 5px 0px;
+}
+p.auto {
+	margin:0px;
+	padding:0px;
+	font-size:100%;
+}
+.pmark {
+	color:#cccccc;
+	font:10px Arial
+}
+.pmark A:LINK, .pmark A:VISITED {
+	color:#cccccc
+}
+.pmark A:HOVER, .pmark A:ACTIVE {
+	color:#cc3300
+}
+.pright {
+}
+.pright .p- {
+	float:right;
+	padding: 0 0 0 15px;
+}
+.pright .pbody- {
+}
+.pleft {
+	padding:0
+}
+.pleft .p- {
+	float:left;
+	padding: 0 15px 0 0;
+}
+.pleft .pbody- {
+	padding:0
+}
 /* Text_Highlighter  */
-.hl-main {font-family: monospace; font-size:13px;}
-.hl-gutter { background-color: #CCCCCC; padding-right: 10px;
-             font-family: monospace; font-size:13px;}
-.hl-table {border: solid 1px #000000; }
-
-.hl-default { color: #000000; }
-.hl-code { color: #7f7f33; }
-.hl-brackets { color: #009966; }
-.hl-comment { color: #7F7F7F; }
-.hl-quotes { color: #00007F; }
-.hl-string { color: #7F0000; }
-.hl-identifier { color: #000000; }
-.hl-reserved { color: #7F007F; }
-.hl-inlinedoc { color: #0000FF; }
-.hl-var { color: #0066FF; }
-.hl-url { color: #FF0000; }
-.hl-special { color: #0000FF; }
-.hl-number { color: #007F00; }
-.hl-inlinetags { color: #FF0000; }
-.hl-builtin    { color:#996633; }
+.hl-main {
+	font-family: monospace;
+	font-size:13px;
+}
+.hl-gutter {
+	background-color: #CCCCCC;
+	padding-right: 10px;
+	font-family: monospace;
+	font-size:13px;
+}
+.hl-table {
+	border: solid 1px #000000;
+}
+.hl-default {
+	color: #000000;
+}
+.hl-code {
+	color: #7f7f33;
+}
+.hl-brackets {
+	color: #009966;
+}
+.hl-comment {
+	color: #7F7F7F;
+}
+.hl-quotes {
+	color: #00007F;
+}
+.hl-string {
+	color: #7F0000;
+}
+.hl-identifier {
+	color: #000000;
+}
+.hl-reserved {
+	color: #7F007F;
+}
+.hl-inlinedoc {
+	color: #0000FF;
+}
+.hl-var {
+	color: #0066FF;
+}
+.hl-url {
+	color: #FF0000;
+}
+.hl-special {
+	color: #0000FF;
+}
+.hl-number {
+	color: #007F00;
+}
+.hl-inlinetags {
+	color: #FF0000;
+}
+.hl-builtin {
+	color:#996633;
+}
 /* /Text_Highlighter */
 
-div.action           {
+div.action {
 	margin:2px;
 	background: #f6f7ed;
 	border: 1px solid #CCCCCC;
 }
-div.action-content   { padding:10px 10px 25px 10px; }
-
-.cl-red   {color: #CC0000;}
-.cl-green {color: #008000;}
-.cl-blue  {color: #0000CC;}
-
-tt { color:#666600; background:#ffffcc; padding: 0 2px }
-
-.cite {color:#ff0000;font-style:normal;}
+div.action-content {
+	padding:10px 10px 25px 10px;
+}
+.cl-red {
+	color: #CC0000;
+}
+.cl-green {
+	color: #008000;
+}
+.cl-blue {
+	color: #0000CC;
+}
+tt {
+	color:#666600;
+	background:#ffffcc;
+	padding: 0 2px
+}
+.cite {
+	color:#ff0000;
+	font-style:normal;
+}
 /* .mark  { color: #008800;font-style:normal; } */
-.mark { color: #000; background:#ffaaaa; }
-
+.mark {
+	color: #000;
+	background:#ffaaaa;
+}
 /* CSS form formater */
-.cssform p{
-width: 300px;
-clear: left;
-margin: 0;
-padding: 5px 0 8px 0;
-padding-left: 155px; /*width of left column containing the label elements*/
-border-top: 1px dashed gray;
-height: 1%;
+.cssform p {
+	width: 300px;
+	clear: left;
+	margin: 0;
+	padding: 5px 0 8px 0;
+	padding-left: 155px; /*width of left column containing the label elements*/
+	border-top: 1px dashed gray;
+	height: 1%;
+}
+.cssform label {
+	font-weight: bold;
+	float: left;
+	margin-left: -155px; /*width of left column*/
+	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+.cssform input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
+	width: 180px;
+}
+.cssform textarea {
+	width: 250px;
+	height: 150px;
+}
+.cssform span.site_count {
+	font-weight: normal;
+	float: left;
+	margin-left: -155px; /*width of left column*/
+	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+.BewareChangeLang {
+	border: 1px solid red;
+	width: 400px;
+	background-color: #DDDDDD;
+	margin: 10px;
+	padding: 5px;
 }
 
-.cssform label{
-font-weight: bold;
-float: left;
-margin-left: -155px; /*width of left column*/
-width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/ }
 
-.cssform input[type="text"]{ /*width of text boxes. IE6 does not understand this attribute*/
-width: 180px;
+/* cssform1 for actions */
+div#cssform1 {
+	width:50%;
+	padding:10px;
+	margin:0 auto;
+}
+div#cssform1 p {
+	clear: left;
+	margin: 0;
+	padding: 5px 0 8px 0;
+	padding-left: 20%; /*width of left column containing the label elements*/
+	border-top: 1px dashed gray;
+	height: 1%;
+}
+div#cssform1 label {
+	float: left;
+	margin-left: 0px; /*
+	margin-left: -155px; width of left column*/
+	width: 150px;/* width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+div#cssform1 input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
+	width: 180px;
+}
+div#cssform1 textarea {
+	width: 250px;
+	height: 150px;
+}
+div#cssform1 span.site_count {
+	font-weight: normal;
+	float: left;
+	margin-left: 0px; /*
+	margin-left: -155px; width of left column*/
+	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+.BewareChangeLang {
+	border: 1px solid red;
+	width: 400px;
+	background-color: #DDDDDD;
+	margin: 10px;
+	padding: 5px;
 }
 
-.cssform textarea{
-width: 250px;
-height: 150px;
-}
-
-.cssform span.site_count{
-font-weight: normal;
-float: left;
-margin-left: -155px; /*width of left column*/
-width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/ }
-
-.BewareChangeLang{
-border: 1px solid red;
-width: 400px;
-background-color: #DDDDDD;
-margin: 10px;
-padding: 5px;
-}
