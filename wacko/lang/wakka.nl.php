@@ -382,7 +382,7 @@ $wakkaResource = array(
 
 // Captcha
   "Captcha" => 'Please type the word you read in the image',
-  "SpamAlert" => 'You have entered the word incorrectly',
+  "SpamAlert" => 'You have entered the captcha word incorrectly',
   "CaptchaReload" => "New Captcha",
   "CaptchaReloadWarning" => "Sorry, cannot reload the captcha image, you will have to reload the page to do that",
 );
