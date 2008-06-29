@@ -244,8 +244,11 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
                         if(strpos($this->GetUserName(), '.'))
                            {
           ?>
-<p><?php echo $this->GetResourceValue("Captcha");?></p>
-<img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetResourceValue("Captcha");?>" /> <a href="" onClick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetResourceValue("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("theme_url");?>icons/reload.png" width="18" height="17" alt="<?php echo $this->GetResourceValue("CaptchaReload"); ?>" /></a> <br />
+<p><?php echo $this->GetResourceValue("Captcha");?>:</p>
+<img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetResourceValue("Captcha");?>" /> <a href="" onClick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetResourceValue("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("theme_url");?>icons/reload.png" width="18" height="17" alt="<?php echo $this->GetResourceValue("CaptchaReload"); ?>" /></a>
+<br />
+<input type="text" name="word" maxlength="6" style="width: 273px;" />
+<br />
 <br />
 <?php
                            }

@@ -48,11 +48,11 @@ if ($this->HasAccess("comment"))
                                           $_SESSION['freecap_old_comment'] = "";
 
                                           // now process form
-                                          $word_ok = "yes";
+                                          $word_ok = true;
                                        }
                                     else
                                        {
-                                          $word_ok = "no";
+                                          $word_ok = false;
                                        }
                                  }
                               else
@@ -60,10 +60,11 @@ if ($this->HasAccess("comment"))
                                     $word_ok = false;
                                  }
 
-                              if($word_ok != "yes")
+                              if(!$word_ok)
                                  {
                                     //not the right word
                                     $error = $this->GetResourceValue("SpamAlert");
+                                    $this->SetMessage($this->GetResourceValue("SpamAlert"));
                                     $_SESSION['freecap_old_comment'] = $body;
                                  }
                            }
