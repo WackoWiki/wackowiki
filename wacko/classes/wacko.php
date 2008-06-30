@@ -709,25 +709,20 @@ class Wacko
       // get current user
       $user = $this->GetUserName();
 
-      //ANTISPAM
-      $this->spam = array(".cn/", "shop263", "haishun", "qenset-sh", "7766888.com", "xsjby", "asp169.com", "fm360.net",
-    "garrywa.com", "funasia", "sec66.com", "xhhj.com", "cndevi.com", "sinostrategy.com", "hdfix.com",
-    "voip99", "zhiliaotuofa", "shuangchuang", "9li.", "agreatserver.", "how-to-make-valances.",
-    "pop-the-question.", "m-shopping.de", "vitabig.com", "komusumeya.net", "ryohin.kir", "kir.jp",
-    "haru-ulala", "buy-cheap-", ".uni.cc", ".6x.to", ".qn.com", ".go.ro", "wiki.t35.com", "junyuan.com",
-    "gad1ee.com", "0008888.com", "njlvtong.com", "shellbitumen.com", "njuyq.com", "searcher.cn",
-    "51asa.com", "sooyi.com", "dlctc.com", "ganzao.", "68l.com", "tt33tt.com", "99bbcc.com", "88aabb.com",
-    "5iu5iu.com", "tg123.net", "88118888.com", "dzdg007", "condyloma.net", "hpv.com", "17836.com", "hpv888.com",
-    "bxmm.com", "hpv120.com", "d9d.net", "chinaoo.com", "vipwww", "fengxiong.net", "13788888888.com",
-    "pc123.cn", "88558888.com", "3333888888.com", "your-onlinepharmacy.com", "vicodin", );
+      /*
+         ANTISPAM
+
+         We load in the external antispam.conf file and then search the entire body content for each of the
+         words defined as spam.  If we find any then we return from the function, not saving the changes.
+      */
+      $this->spam = file("antispam.conf", 1);
 
       if ($this->GetConfigValue("spam_filter") && is_array($this->spam))
       foreach ($this->spam as $spam)
       {
-         if (strpos($body, $spam)!==false) return "Error: couldn't connect to database.";
+         if (strpos($body, trim($spam))!==false) return 'Error: Identified Potential Spam: '.$spam;
       }
 
-      //   die ($this->userlang."|".$this->pagelang."|".$_REQUEST["lang"]."|".$_POST["tag"]."|".$this->tag."|".$this->supertag);
       if($_POST["tag"])
       {
          $this->tag = $tag = $_POST["tag"];
