@@ -106,8 +106,9 @@ $max_attempts = 200;
 $big_endian = false;
 $abyz = 0x6162797A;
 
-# Convert $abyz to a binary string containing 32 bits
-# Do the conversion the way that the system architecture wants to
+// Convert $abyz to a binary string containing 32 bits
+// Do the conversion the way that the system architecture wants to
+// Then compare that to the Big-Endian version
 if(pack('L', $abyz) == pack('N', $abyz))
    {
       $big_endian = true;
@@ -196,7 +197,14 @@ for($i=0 ; $i<sizeof($font_locations) ; $i++)
    $handle = fopen($font_locations[$i],"r");
    // read header of GD font, up to char width
    $c_wid = fread($handle, $header_length);
-   $font_widths[$i] = ord($c_wid{8})+ord($c_wid{9})+ord($c_wid{10});
+
+   $font_widths[$i] = ord($c_wid{8}) + ord($c_wid{9}) + ord($c_wid{10});
+
+   if($big_endian)
+      {
+         $font_widths[$i] += ord($c_wid{11});
+      }
+
    fclose($handle);
 }
 
