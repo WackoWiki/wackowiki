@@ -2268,6 +2268,19 @@ class Wacko
             $this->userlang = $this->GetConfigValue("language");
          }
 
+      if($this->GetConfigValue("debug") >= 2)
+         {
+            echo '<span class="debug">Multilanguage: '.$this->GetConfigValue("multilanguage").'<br/>';
+            echo 'HTTP_ACCEPT_LANGUAGE set: '.isset($_SERVER['HTTP_ACCEPT_LANGUAGE']).'<br />';
+            echo 'HTTP_ACCEPT_LANGUAGE value: '.$_SERVER['HTTP_ACCEPT_LANGUAGE'].'<br />';
+            echo 'HTTP_ACCEPT_LANGUAGE chopped value: '.strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2)).'<br />';
+            echo 'User language set: '.isset($user["lang"]).'<br />';
+            echo 'User language: '.$user["lang"].'<br />';
+            echo 'Config language: '.$this->GetConfigValue("language").'<br />';
+            echo 'Current language: '.$this->userlang.'<br />';
+            echo '</span>';
+         }
+
       if (is_array($user) && $user["options"]["theme"])
       {
          $this->config["theme"] = $user["options"]["theme"];
