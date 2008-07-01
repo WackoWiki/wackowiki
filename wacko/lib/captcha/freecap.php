@@ -96,6 +96,23 @@ $col_type = 1;
 // for the ultra-paranoid, setting it to <5 will still work for most users
 $max_attempts = 200;
 
+// If you are not successful in displaying an image (but the
+// background is displayed), it's likely you are on a Mac PowerPC,
+// Sun, or other machine that uses "big-endian" byte storage for
+// multi-byte data types.  Switch the flag below for an alternate font
+// set that uses big-endian byte format.
+// Auto-Detect system endian value
+// Modified from: http://www.phpdig.net/ref/rn45re877.html
+$big_endian = false;
+$abyz = 0x6162797A;
+
+# Convert $abyz to a binary string containing 32 bits
+# Do the conversion the way that the system architecture wants to
+if(pack('L', $abyz) == pack('N', $abyz))
+   {
+      $big_endian = true;
+   }
+
 // list of fonts to use
 // font size should be around 35 pixels wide for each character.
 // you can use my GD fontmaker script at www.puremango.co.uk to create your own fonts
@@ -107,7 +124,14 @@ $max_attempts = 200;
 // the fonts included with freeCap *only* include lowercase alphabetic characters
 // so are not suitable for most other uses
 // to increase security, you really should add other fonts
-$font_locations = Array("./.ht_freecap_font1.gdf","./.ht_freecap_font2.gdf","./.ht_freecap_font3.gdf","./.ht_freecap_font4.gdf","./.ht_freecap_font5.gdf");
+if($big_endian)
+   {
+      $font_locations = Array("./.ht_freecap_font1_big_e.gdf","./.ht_freecap_font2_big_e.gdf","./.ht_freecap_font3_big_e.gdf","./.ht_freecap_font4_big_e.gdf","./.ht_freecap_font5_big_e.gdf");
+   }
+else
+   {
+      $font_locations = Array("./.ht_freecap_font1.gdf","./.ht_freecap_font2.gdf","./.ht_freecap_font3.gdf","./.ht_freecap_font4.gdf","./.ht_freecap_font5.gdf");
+   }
 
 // background:
 // 0=transparent (if jpg, white)
@@ -163,14 +187,15 @@ switch($bg_type)
 // slightly randomise the bg fade
 $bg_fade_pct += $rand_func(-2,2);
 
+$header_length = $big_endian ? 12 : 11;
+
 // read each font and get font character widths
 $font_widths = Array();
 for($i=0 ; $i<sizeof($font_locations) ; $i++)
 {
    $handle = fopen($font_locations[$i],"r");
    // read header of GD font, up to char width
-   $c_wid = fread($handle,11);
-   // $font_widths[$i] = ord($c_wid{8})+ord($c_wid{9})+ord($c_wid{10})+ord($c_wid{11});
+   $c_wid = fread($handle, $header_length);
    $font_widths[$i] = ord($c_wid{8})+ord($c_wid{9})+ord($c_wid{10});
    fclose($handle);
 }
