@@ -32,8 +32,8 @@ $wakkaResource = array(
   "SearchButtonText" => "Rechercher",
   "OuterLink2" => "Lien externe (dans une nouvelle fenêtre)",
   "FileLink" => "", 
-  "PDFLink" => "PDF Document (dans une nouvelle fenêtre)", 
-  "RDFLink" => "RDF Document",
+  "PDFLink" => "Document PDF (dans une nouvelle fenêtre)", 
+  "RDFLink" => "Document RDF",
   "MailLink" => "Ecrivez un courriel (lancement du programme de courriel)",
   "ShowTip" => "Cliquez pour revenir au mode vue",
   "ShowText" => "Voir",
@@ -66,8 +66,8 @@ $wakkaResource = array(
   "EditText" => "Editer cette page" ,
   "RevisionTip" => "Cliquez ici pour voir les dernières révisions de cette page",
   "RevisionXMLTip" => "Cliquez ici pour voir les dernières révisions au format XML.",
-  "RecentCommentsXMLTip" => "Click to view recent comments in XML format.",
-  "RecentChangesXMLTip" => "Click to view recent changes in XML format.",
+  "RecentCommentsXMLTip" => "Cliquez ici pour voir les commentaires récents au format XML.",
+  "RecentChangesXMLTip" => "Cliquez ici pour voir les changements récents au format XML.",
   "ReferrersTip" => "Voir les URLs qui renvoient à cette page",
   "ReferrersText" => "Référents",
   "SearchText" => "Recherche&nbsp;: ",
@@ -209,7 +209,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Arbre du groupe %1",
   "Tree:SiteTitle" => "Arbre du site",
   "Tree:Empty" => "%1&nbsp;n&rsquo;a pas de pages subordonnées ou sous-pages",
-  "SearchTitleHelp" => "Click here to show all pages containing this page title.",
+  "SearchTitleHelp" => "Cliquez ici pour voir toutes les pages avec ce titre.",
 
   "RenameText" => "Cliquer ici pour renommer cette page",
   "NewName" => "Donner un nouveau nom à cette page",
@@ -343,11 +343,11 @@ $wakkaResource = array(
   "site_bookmarks" => "((Index)) / DernièresModifications / DerniersCommentaires",
 
 //icons
-  "outericon" => '<img src="{theme}icons/web.gif" alt="" />',
-  "fileicon" => '<img src="{theme}icons/file.gif" alt="" />',
-  "pdficon"  => '<img src="{theme}icons/pdf.gif" alt="PDF Document" />',
-  "rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',  
-  "mailicon" => '<img src="{theme}icons/mail.gif" alt="" />',
+  "outericon" => '<img src="{theme}icons/web.gif" alt="Document externe" />',
+  "fileicon" => '<img src="{theme}icons/file.gif" alt="Fichier" />',
+  "pdficon"  => '<img src="{theme}icons/pdf.gif" alt="Document PDF" />',
+  "rdficon"  => '<img src="{theme}icons/rdf.gif" alt="Document RDF" />',  
+  "mailicon" => '<img src="{theme}icons/mail.gif" alt="courriel" />',
   "lockicon" => '<img src="{theme}icons/lock.gif" alt="Access refusé" />',
   "keyicon" => '<img src="{theme}icons/key.gif" alt="Page à accès personnalisé" />',
   "wantedicon" => '?',
@@ -363,25 +363,25 @@ $wakkaResource = array(
   "CacheCleared" => "Le cache a été vidé.",
 
 // XML / RSS autodiscovery
-  "RecentChangesTitelXML" => " - RecentChanges",
-  "RecentChangesXML" => "Recent changes to the ",
-  "RecentCommentsTitelXML" => " - RecentComments",
-  "RecentCommentsXML" => "Recent comments to the ",
-  "PageRevisionsXML" => "History/revisions of ",
-  "ExportClusterXML" => "Export of entire cluster of ",
-  "AccessDeniedXML" => "You're not allowed to access this information.",
+  "RecentChangesTitelXML" => " - Changements récents",
+  "RecentChangesXML" => "Changements récents au ",
+  "RecentCommentsTitelXML" => " - Commentaires récents",
+  "RecentCommentsXML" => "Commentaires récents au ",
+  "PageRevisionsXML" => "Historique/révisions de ",
+  "ExportClusterXML" => "Export du groupe entier de ",
+  "AccessDeniedXML" => "Vous n&rsquo;êtes pas autorisé(e) à accéder à cette information.",
  
-  "RecentChangesRSS" => "RecentChanges in RSS",
-  "RecentCommentsRSS" => "RecentComments in RSS",
-  "HistoryRevisionsRSS" => "History/revisions of ",
+  "RecentChangesRSS" => "Changements récents en RSS",
+  "RecentCommentsRSS" => "Commentaires récents en RSS",
+  "HistoryRevisionsRSS" => "Historique/révisions de ",
 
-  "LastModification" => "Last Modification",
+  "LastModification" => "Dernière modification",
 
 // Captcha
-  "Captcha" => 'Please type the word you read in the image',
-  "SpamAlert" => 'You have entered the captcha word incorrectly',
-  "CaptchaReload" => "New Captcha",
-  "CaptchaReloadWarning" => "Sorry, cannot reload the captcha image, you will have to reload the page to do that",
+  "Captcha" => 'Merci de taper le mot que vous voyez dans l&rsquo;image',
+  "SpamAlert" => 'Le mot ue vous avez tapé n&rsquo; pas celui de l&rsquo;image',
+  "CaptchaReload" => "Nouveau mot dans une image",
+  "CaptchaReloadWarning" => "Désolé, je ne peux pas ré-afficher l&rsquo;image contenant le mot. Vous devez ré-afficher la page pour ce faire",
 );
 
 ?>
