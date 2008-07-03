@@ -2139,8 +2139,26 @@ class Wacko
    //BOOKMARKS
    function GetDefaultBookmarks($lang, $what="default")
    {
-      if (!$lang) $lang = $this->config["language"];
+      if($this->GetConfigValue("multilanguage"))
+         {
+            if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+               {
+                  $this->userlang = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
 
+                  // Check whether we have language files for this language
+                  if(!in_array($this->userlang, $this->AvailableLanguages()))
+                     {
+                        // The HTTP_ACCEPT_LANGUAGE language doesn't have any language files so use the admin set language instead
+                        $this->userlang = $this->GetConfigValue("language");
+                     }
+               }
+            else
+               {
+                  $this->userlang = $this->GetConfigValue("language");
+               }
+			}
+      else if (!$lang) $lang = $this->config["language"];
+			
       if (isset($this->config[$what."_bookmarks"]) && is_array($this->config[$what."_bookmarks"]) && isset($this->config[$what."_bookmarks"][$lang]))
       return $this->config[$what."_bookmarks"][$lang];
       else if (isset($this->config[$what."_bookmarks"]) && !is_array($this->config[$what."_bookmarks"]) && ($this->config["language"]==$lang))
