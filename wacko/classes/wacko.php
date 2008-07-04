@@ -2156,9 +2156,9 @@ class Wacko
                {
                   $this->userlang = $this->GetConfigValue("language");
                }
-			}
+         }
       else if (!$lang) $lang = $this->config["language"];
-			
+
       if (isset($this->config[$what."_bookmarks"]) && is_array($this->config[$what."_bookmarks"]) && isset($this->config[$what."_bookmarks"][$lang]))
       return $this->config[$what."_bookmarks"][$lang];
       else if (isset($this->config[$what."_bookmarks"]) && !is_array($this->config[$what."_bookmarks"]) && ($this->config["language"]==$lang))
@@ -2261,7 +2261,14 @@ class Wacko
 
       if(isset($user["lang"]))
          {
-            $this->userlang = $user["lang"];
+            if($user["lang"] == "")
+               {
+                  $this->userlang = $this->GetConfigValue("language");
+               }
+            else
+               {
+                  $this->userlang = $user["lang"];
+               }
          }
       else if($this->GetConfigValue("multilanguage"))
          {

@@ -31,7 +31,7 @@ function outputError($errorText = "")
 print("         <h2>".$lang["TestingConfiguration"]."</h2>\n");
 
 // Generic Default Inserts
-$insert_admin = "INSERT INTO ".$config2["table_prefix"]."users (name, password, email, signuptime) VALUES ('".$config["admin_name"]."', md5('".$_POST["password"]."'), '".$config["admin_email"]."', now())";
+$insert_admin = "INSERT INTO ".$config2["table_prefix"]."users (name, password, email, signuptime, lang) VALUES ('".$config["admin_name"]."', md5('".$_POST["password"]."'), '".$config["admin_email"]."', now(), '".$config["language"]."')";
 $insert_logo_image = "INSERT INTO ".$config2["table_prefix"]."upload (page_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext, user) VALUES ('0','wacko4.gif', 'WackoWiki', now(), '1580', '108', '50', 'gif', '".$config2["admin_name"]."')";
 
 /*
