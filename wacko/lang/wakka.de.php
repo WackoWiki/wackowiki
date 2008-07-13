@@ -340,8 +340,8 @@ $wakkaResource = array(
   "Next" => "weiter",
   "Prev" => "zurück", 
 
-  "default_bookmarks" => "((SeitenIndex))\n((LetzteAenderungen Änderungen))\n((LetzteKommentare Kommentare))\n((Benutzer))\n((Registrierung))",
-  "site_bookmarks" => "((SeitenIndex)) / ((LetzteAenderungen Änderungen)) / ((LetzteKommentare Kommentare))",
+  "default_bookmarks" => "((SeitenIndex Index))\n((LetzteAenderungen Änderungen))\n((LetzteKommentare Kommentare))\n((Benutzer))\n((Registrierung))",
+  "site_bookmarks" => "((SeitenIndex Index)) / ((LetzteAenderungen Änderungen)) / ((LetzteKommentare Kommentare))",
 
 //icons
   "outericon" => '<img src="{theme}icons/web.gif" alt="externer Link" />',
