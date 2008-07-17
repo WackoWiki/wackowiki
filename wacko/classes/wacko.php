@@ -1984,6 +1984,13 @@ class Wacko
       $xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
       $xml .= "<description>".$this->GetResourceValue("RecentChangesXML").$this->GetConfigValue("wakka_name")." </description>\n";
       $xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
+	  $xml .= "<image>\n";
+      $xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetResourceValue("RecentCommentsTitelXML")."</title>\n";
+      $xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
+      $xml .= "<url>".$this->GetConfigValue("root_url")."files/wacko4.gif"."</url>\n";
+      $xml .= "<width>108</width>\n";
+      $xml .= "<height>50</height>\n";
+      $xml .= "</image>\n";
       $xml .= "<language>en-us</language>\n";
       $xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
       $xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
