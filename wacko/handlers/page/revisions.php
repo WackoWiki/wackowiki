@@ -26,10 +26,10 @@ if ($this->HasAccess("read")) {
 			$c++;
 			if (($c <= $max) || !$max)
 			{
-				$output .= "<p><input type=\"radio\" name=\"a\" value=\"".($c==1?"-1":$page["id"])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";
+				$output .= "<input type=\"radio\" name=\"a\" value=\"".($c==1?"-1":$page["id"])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";
 				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"b\" value=\"".($c==1?"-1":$page["id"])."\" ".($c == 2 ? "checked=\"checked\"" : "")." />";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("show").($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."time=".urlencode($page["time"])."\">".$page["time"]."</a>";
-				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->GetResourceValue("By")." ".($this->IsWikiName($page["user"])?$this->Link($page["user"]):$page["user"])."</p>\n";
+				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->GetResourceValue("By")." ".($this->IsWikiName($page["user"])?$this->Link($page["user"]):$page["user"])."<br />\n";
 			}
 		}
 		$output .= "<br />\n";
