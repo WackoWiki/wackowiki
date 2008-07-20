@@ -44,7 +44,7 @@ if ($this->UserIsOwner())
   <br />
   <?php echo $this->FormOpen("massacls") ?>
   <div class="cssform">
-    <p><label<?php echo $this->GetResourceValue("ACLRead"); ?>
+    <p><label><?php echo $this->GetResourceValue("ACLRead"); ?>
       </label>
       <textarea name="read_acl" rows="4" cols="20"><?php echo $readACL["list"] ?></textarea>
     </p>
