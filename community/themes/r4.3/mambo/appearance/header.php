@@ -3,7 +3,6 @@
 	header( "Content-Type: text/html; charset=".$this->GetCharset() );
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
-<html>
 	<head>
   		<title>
 			<?php echo $this->GetWakkaName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?>
@@ -64,12 +63,12 @@
     				<th onclick="opentree('sw_n0')" valign="top">
 						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)" border="0" cellpadding="0" cellspacing="0" width="100%">
 							<tr>
-								<td class="titleLeft"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" valign="top" heigth="1" border="0" width="14"></td>
+								<td class="titleLeft"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" height="1" width="14"/></td>
 								<td class="titleText" width="100%">
 									<?php echo $this->GetResourceValue("YourBookmarks"); ?>
 								</td>
-								<td class="titleHandle"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" valign="top" heigth="1" border="0" width="20"></td>
-								<td class="titleRight"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" valign="top" heigth="1" border="0" width="3"></td>
+								<td class="titleHandle"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" height="1" width="20"/></td>
+								<td class="titleRight"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" height="1" width="3"/></td>
 							</tr>
 						</table>
 					</th>
@@ -105,10 +104,10 @@
     				<th onclick="opentree('sw_n1')" valign="top">
 						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)" border="0" cellpadding="0" cellspacing="0" width="100%">
 							<tr>
-								<td class="titleLeft"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" valign="top" heigth="1" border="0" width="14"></td>
+								<td class="titleLeft"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" height="1" border="0" width="14"/></td>
 								<td class="titleText" width="100%">This Page</td>
-								<td class="titleHandle"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" valign="top" heigth="1" border="0" width="20"></td>
-								<td class="titleRight"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" valign="top" heigth="1" border="0" width="3"></td>
+								<td class="titleHandle"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" height="1" width="20"/></td>
+								<td class="titleRight"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" height="1" width="3"/></td>
 							</tr>
 						</table>
 					</th>
@@ -210,10 +209,6 @@ echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".
 			</span>
     <?php } ?>
 
-                
-
 </div>
 
-
 <?php echo $this->FormClose(); ?>
-

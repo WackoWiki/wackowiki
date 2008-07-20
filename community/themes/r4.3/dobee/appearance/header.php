@@ -4,7 +4,6 @@
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 
-<html>
 	<head>
   		<title>
 			<?php echo $this->GetWakkaName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?>
@@ -190,7 +189,7 @@ echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".
 		if ($this->GetUser()) { ?>
             <span class="nobr">
 				<?php echo $this->GetResourceValue("YouAre"); ?>
-				<img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/user.gif" alt="" width="16" height="16" border="0" align="absmiddle" style="vertical-align: baseline; "/>
+				<img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/user.gif" alt="" width="16" height="16" border="0" align="middle" style="vertical-align: baseline; "/>
 				<?php echo $this->Link($this->GetUserName()) ?>			</span>
             <small>
 				(

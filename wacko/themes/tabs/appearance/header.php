@@ -64,12 +64,13 @@ echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $t
 	href="<?php echo $this->Href("","Login").($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetResourceValue("LogoutLink"); ?></a></span> )</small>
     <?php } else { ?>
     <table cellspacing="0" cellpadding="0" border="0">
-      <?php echo $this->FormOpen("", "Login", "post"); ?>
-      <input type="hidden" name="action" value="login" />
       <tr>
-        <td><img
-			src="<?php echo $this->GetConfigValue("theme_url") ?>icons/norole.gif"
-			hspace="5" vspace="5" width="9" height="15" alt="" /></td>
+        <td>
+        	<?php echo $this->FormOpen("", "Login", "post"); ?>
+      		<input type="hidden" name="action" value="login" />
+        	<img
+				src="<?php echo $this->GetConfigValue("theme_url") ?>icons/norole.gif"
+				hspace="5" vspace="5" width="9" height="15" alt="" /></td>
         <td><strong><?php echo $this->GetResourceValue("LoginWelcome") ?>:&nbsp;</strong> </td>
         <td><input type="text" name="name" size="18" /></td>
         <td>&nbsp;&nbsp;&nbsp;<?php echo $this->GetResourceValue("LoginPassword") ?>:&nbsp; </td>
@@ -81,14 +82,14 @@ echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $t
         <td><input class="OkBtn_Top"
 			onmouseover='this.className="OkBtn_Top_";'
 			onmouseout='this.className="OkBtn_Top";' style="font-size: 13px"
-			type="submit" value="&nbsp;&nbsp;&raquo;&nbsp;&nbsp;" /></td>
+			type="submit" value="&nbsp;&nbsp;&raquo;&nbsp;&nbsp;" />
         </td>
       </tr>
       <?php echo $this->FormClose(); ?>
     </table>
     <?php } ?>
   </div>
-  <br clear="all">
+  <br clear="all" />
   <img src="<?php echo $this->GetConfigValue("root_url") ?>images/z.gif"
 	width="1" height="1" alt="" /></div>
 <div class="TopDiv"><img
