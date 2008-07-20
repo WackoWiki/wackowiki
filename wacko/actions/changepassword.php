@@ -97,9 +97,7 @@ if ($_REQUEST["secret_code"]){
   <?php
 	if ($error)
 	{ ?>
-  <p>
   <div class="error"><?php print $this->Format($error); ?></div>
-  </p>
   <?php	}
 	?>
   <p>

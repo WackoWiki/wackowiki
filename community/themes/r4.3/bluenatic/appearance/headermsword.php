@@ -21,12 +21,12 @@ body {
 
 <body>
 
-<b>Ever heard of OpenOffice.org?</b><br>
-<br>
+<b>Ever heard of OpenOffice.org?</b><br />
+<br />
 OpenOffice.org is a multiplatform and multilingual office suite and an
 open-source project. Compatible with all other major office suites, the product
-is free to download, use, and distribute.<br>
-<br>
+is free to download, use, and distribute.<br />
+<br />
 Better use the <a href="http://www.openoffice.org/">OpenOffice Suite</a>
 instead of <a href="http://slashdot.org/articles/00/05/02/158204.shtml?tid=109">
 Microsoft Office</a>!

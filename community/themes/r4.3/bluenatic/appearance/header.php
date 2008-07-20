@@ -21,11 +21,11 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 	<?php if($this->GetMethod() != 'show' || $this->page["latest"] == "N") { ?><meta name="robots" content="noindex, nofollow" /><?php } ?>
 	<title><?php echo $this->GetWakkaName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?></title>
 	<!-- JavaScript used by WackoWiki -->
-	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/default.js"></script>
-	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/protoedit.js"></script>
-	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/wikiedit2.js"></script>
-	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/autocomplete.js"></script>
-	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
+	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
+  	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/protoedit.js"></script>
+  	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/wikiedit2.js"></script>
+  	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/autocomplete.js"></script>
+  	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
 	<?php if($user = $this->GetUser()) if($user["doubleclickedit"] == "Y") { ?>
 	<!-- Edit by doubleclick for logged in users -->
 	<script language="JavaScript" type="text/javascript">
@@ -39,7 +39,7 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 		<div id="header">
 			<?php // Insert search form ?> 
 			<?php echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get"); ?>
-			<input type="text" name="phrase" size="15" value="<?php echo $this->GetResourceValue("SearchButtonText"); ?>" class="search">
+			<input type="text" name="phrase" size="15" value="<?php echo $this->GetResourceValue("SearchButtonText"); ?>" class="search" />
 			<?php echo $this->FormClose(); ?> 
 			
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
