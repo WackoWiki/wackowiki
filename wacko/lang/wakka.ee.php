@@ -364,9 +364,9 @@ $wakkaResource = array(
   "CacheCleared" => "Cache cleared.",
 
 // XML / RSS autodiscovery
-  "RecentChangesTitelXML" => " - RecentChanges",
+  "RecentChangesTitleXML" => " - RecentChanges",
   "RecentChangesXML" => "Recent changes to the ",
-  "RecentCommentsTitelXML" => " - RecentComments",
+  "RecentCommentsTitleXML" => " - RecentComments",
   "RecentCommentsXML" => "Recent comments to the ",
   "PageRevisionsXML" => "History/revisions of ",
   "ExportClusterXML" => "Export of entire cluster of ",
