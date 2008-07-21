@@ -46,7 +46,7 @@ if ($user["doubleclickedit"] == "Y") {
                    var edit = "<?php echo $this->href("edit");?>";
   </script>
 	<?php }?>
-
+<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 </head>
 
 <body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">

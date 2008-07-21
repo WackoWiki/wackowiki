@@ -48,22 +48,8 @@ if ($user = $this->GetUser())
    if($user["doubleclickedit"] == "Y") {?>
          var edit = "<?php echo $this->href("edit");?>";
 <?php }?>
-</script>
-<script language="JavaScript" type="text/javascript">
-         function new_freecap()
-            {
-               if(document.getElementById)
-                  {
-                     thesrc = document.getElementById("freecap").src;
-                     thesrc = thesrc.substring(0, thesrc.lastIndexOf(".") + 4);
-                     document.getElementById("freecap").src = thesrc + "?" + Math.round(Math.random() * 100000);
-                  }
-               else
-                  {
-                     alert('<?php echo $this->GetResourceValue("CaptchaReloadWarning");?>');
-                  }
-            }
-   </script>
+	</script>
+	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 </head>
 <?php
 // all_init() initializes all js features:
