@@ -43,26 +43,26 @@ img {border-width: 0px;	vertical-align: middle;	}
 dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
 * html dfn { \background: url(javascript:DOTS) repeat-x bottom left; }
 
-/* Ссылки */
+/* Links */
 
 a:link { color: #0000CD}
 a:visited { color: #0068CC }
 span.missingpage {background-color: #FFFACD;}
 
-/* Основы всех основ */
+/* Basis fundamentals */
 
 body {color: black; background: white; font: 10pt Trebuchet MS }
 body, h1, h2, h3, h4, h5, h6 {padding: 0; margin: 0}
 p, td, li, select, textarea, legend { font: 10pt Trebuchet MS }
 td {vertical-align: top }
 
-/* Заголовок страницы */ 
+/* Page header */
 div.header {background-color: #FFEFD5; padding: 5px; font-size: 90%; text-align: right;}
 div.header div.title {font-size: 140%; padding-top: 10px}
 div.header div.user {float: right; text-align: right}
 div.bookmarks {padding: 5px 10px; font-size: 90%; border-bottom: 1px solid #ccc; background-color: #FFE4B5}
 
-/* Подвал страницы */
+/* Page footer */
 
 div.filesheader, div.commentsheader, div.footer {padding: 5px 10px; background-color: #FFEFD5; border-top: 1px solid #ccc; font-size: 90%}
 div.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-color: #FFE4B5;}
@@ -71,27 +71,27 @@ div.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-
 .commentform form textarea { width: 100%; padding: 0}
 .commentinfo, .copyright a { color: #AAAAAA }
 
-/* Заголовки в тексте */ 
+/* Text headings */
 
 h1 { padding-top: 2px; padding-bottom: 7px; font: 18pt Trebuchet MS }
 h2 { padding-top: 20px; padding-bottom: 5px; font: italic normal 16pt Trebuchet MS }
 h3 { padding-top: 15px; padding-bottom: 5px; font: 14pt Trebuchet MS }
 h4 { padding-top: 15px; padding-bottom: 5px; font: italic bold 10pt Trebuchet MS }
 
-/* Формы */ 
+/* Forms */
 form { margin: 0px; padding: 0px }
 fieldset { padding: 10px; border: 1px solid black }
 legend {font-weight: normal; padding: 0 5px;}
 .textarea { width: 100%; height: 400px }
 
-/* Основное поле страницы */ 
+/* Page main area */
 div.pagebefore { display: none}
 div.page {padding: 10px 10px;}
 
-/* Списки */ 
+/* Lists */
 ul, ol { margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px }
 
-/* Форматтеры */
+/* Formatters */
 .code { border: solid #888888 2px; width: 80%; padding: 3px; background: #FFFFFF; color: black; font: 10pt Lucida Console }
 
 .email1 {color:#800000}

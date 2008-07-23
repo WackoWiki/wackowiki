@@ -4,15 +4,15 @@ $lang = array(
 /*
    Generic Page Text
 */
-"Title" => "WackoWiki Installation",
-"Continue" => "Continue",
-"Back" => "Back",
+"Title" => "Установка WackoWiki",
+"Continue" => "Продолжить",
+"Back" => "Назад",
 
 /*
    Language Selection Page
 */
-"Lang" => "Language Configuration",
-"LangDesc" => "Please choose a language for the installation process. This language will also be used as the default language of your WackoWiki installation.",
+"Lang" => "Выбор языка",
+"LangDesc" => "Выберите язык Please choose a language for the installation process. This language will also be used as the default language of your WackoWiki installation.", // TODO
 
 /*
    System Requirements Page

@@ -16,15 +16,16 @@ All rights reserved.
 
 class paragrafica
 {
-	var $ignore = "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex, который игнорируется.
+	var $ignore = "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex, который игнорируется - regex to be ignored (by Freeman)
 	// абзац/параграф это такая хрень:   <t->text, text, fcuking text<-t>
+	// paragpaph is a chicken-feed like this: <t->text, text, fcuking text<-t> (by Freeman)
 	var $wacko;
-	var $t0 = array( // терминаторы вида <-t>$1<t->
+	var $t0 = array( // терминаторы вида <-t>$1<t-> - terminators like <-t>$1<t-> (by Freeman)
           "/(<br[^>]*>)(\s*<br[^>]*>)+/si", 
           "/(<hr[^>]*>)/si", 
 
 	);
-	var $t1 = array( // терминаторы вида <-t>$1
+	var $t1 = array( // терминаторы вида <-t>$1 - terminators like <-t>$1 (by Freeman)
 	array( // rightinators
           "!(<table)!si", 
           "!(<a[^>]*></a><h[1-9]>)!si", 
@@ -42,7 +43,7 @@ class paragrafica
           "!(</li>)!si", 
 	),
 	);
-	var $t2 = array( // терминаторы вида $1<t->
+	var $t2 = array( // терминаторы вида $1<t-> - terminators like $1<t-> (by Freeman)
 	array( // rightinators
           "!(</table>)!si", 
           "!(</h[1-9]>)!si", 
@@ -66,10 +67,15 @@ class paragrafica
 	var $mark2 = "\200<:t->"; // <t->
 	var $mark3 = "\200<:::>"; // (*) wronginator mark:
 	// в конструкциях вида <t->(*).....<-t>
-	// & vice versa -- параграфы ставятся
+	// & vice versa -- параграфы ставятся --
 	// а вот в <t->(*)....(*)<-t> -- не ставятся
+
+	// within constructions like <t->(*).....<-t>
+	// & vice versa -- paragraphs should be placed
+	// but within <t->(*)....(*)<-t> -- shouldn't
+	// (by Freeman)
 	var $mark4 = "\200<:-:>"; // (!) ultimate wronginator mark:
-	// параграфы не ставятся даже если <t->(!).....<-t>
+	// параграфы не ставятся даже если <t->(!).....<-t> - paragraphs shouldn't be placed regardless to <t->(!).....<-t> (by Freeman)
 
 	var $prefix1 = '<p class="auto" id="p';
 	var $prefix2 = '">';
@@ -80,7 +86,7 @@ class paragrafica
 
 	function correct( $what )
 	{
-		// -2. игнорируем ещё регексп
+		// -2. игнорируем ещё регексп - -2. ignoring a regexp (or ignoring next regexp) (by Freeman)
 		$ignored = array();
 		{
 			$total = preg_match_all($this->ignore, $what, $matches);
@@ -175,6 +181,7 @@ class paragrafica
 		// -. done with P
 
 		// БЕСКОНЕЧНОСТЬ-2. вставляем ещё сигнорированный регексп
+		// INFINITY-2. inserting a (or next?) ignored regexp (by Freeman)
 		{
 			$what .= " ";
 			$a = explode( "\202", $what );
