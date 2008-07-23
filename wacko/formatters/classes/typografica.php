@@ -24,8 +24,8 @@ class typografica
    var $Asoft = true;
    var $Indent1 = "images/z.gif width=25 height=1 border=0 alt=\'\' align=top />"; // <->
    var $Indent2 = "images/z.gif width=50 height=1 border=0 alt=\'\' align=top />"; // <-->
-   var $FixedSize = 80; // максимальная ширина
-   var $ignore = "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex, который игнорируется.
+   var $FixedSize = 80; // максимальная ширина - maximum width (by Freeman)
+   var $ignore = "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex, который игнорируется - regex to be ignored (by Freeman)
    var $de_nobr = true;
 
    var $phonemasks = array(
@@ -57,24 +57,24 @@ class typografica
    )
    );
 
-   var $glueleft = array( "рис\.", "табл\.", "см\.", "им\.", "ул\.", "пер\.", "кв\.", "офис", "оф\.", "г\." );
+   var $glueleft = array( "рис\.", "табл\.", "см\.", "им\.", "ул\.", "пер\.", "кв\.", "офис", "оф\.", "г\." ); // contains some Russian abberviations, also see below (by Freeman)
    var $glueright = array( "руб\.", "коп\.", "у\.е\.", "мин\." );
 
-   var $settings = array ( "inches" => 1, // преобразовывать дюймы в &quot;
-                          "apostroph" => 1, // преобразовывать апострофов
-                          "laquo" => 1,  // кавычки-ёлочки
-                          "farlaquo" => 0,  // кавычки-ёлочки для фара (знаки "больше-меньше")
-                          "quotes" => 1, // кавычки-английские лапки
-                          "dash" => 1,   // короткое тире (150)
-                          "emdash" => 1, // длинное тире двумя минусами (151)
-                          "(c)" => 1, "(r)" => 1, "(tm)" => 1, "(p)" => 1, "+-" => 1, // спецсимволы, какие - понятно
-                          "degrees" => 1, // знак градуса
-                          "<-->" => 1,    // отступы $Indent*
-                          "dashglue" => 1, "wordglue" => 1, // приклеивание предлогов и дефисов
-                          "spacing" => 1, // запятые и пробелы, перестановка
-                          "phones" => 1,  // обработка телефонов
-                          "fixed" => 0,   // подгон под фиксированную ширину
-                          "html" => 0     // запрет тагов html
+   var $settings = array ( "inches" => 1, // преобразовывать дюймы в &quot; - convert inches into &quot; (by Freeman)
+                          "apostroph" => 1, // преобразовывать апострофов - apostroph convertor (by Freeman)
+                          "laquo" => 1,  // кавычки-ёлочки - angle quotes (by Freeman)
+                          "farlaquo" => 0,  // кавычки-ёлочки для фара (знаки "больше-меньше") - angle quotes for FAR (greater&less characters) (by Freeman)
+                          "quotes" => 1, // кавычки-английские лапки - English quotes (by Freeman)
+                          "dash" => 1,   // короткое тире (150) - middle dash (by Freeman)
+                          "emdash" => 1, // длинное тире двумя минусами (151) - long dash by two minus (by Freeman)
+                          "(c)" => 1, "(r)" => 1, "(tm)" => 1, "(p)" => 1, "+-" => 1, // спецсимволы, какие - понятно - special characters, as you know (by Freeman)
+                          "degrees" => 1, // знак градуса - degree character (by Freeman)
+                          "<-->" => 1,    // отступы $Indent* - indents like $Indent* (by Freeman)
+                          "dashglue" => 1, "wordglue" => 1, // приклеивание предлогов и дефисов - dash and word glues (by Freeman)
+                          "spacing" => 1, // запятые и пробелы, перестановка - comma and spacing, exchange (by Freeman)
+                          "phones" => 1,  // обработка телефонов - phone number processing (by Freeman)
+                          "fixed" => 0,   // подгон под фиксированную ширину - fit to fixed width (by Freeman)
+                          "html" => 0     // запрет тагов html - HTML tags ban (by Freeman)
    );
 
    function typografica ( &$wacko )
@@ -88,7 +88,7 @@ class typografica
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
    function correct( $data, $noParagraph=false )
    {
-      // -2. игнорируем ещё регексп
+      // -2. игнорируем ещё регексп -- ignoring a (or next?) regexp (by Freeman)
       $ignored = array();
       {
          $total = preg_match_all($this->ignore, $data, $matches);
@@ -99,7 +99,7 @@ class typografica
          }
       }
 
-      // -1. запрет тагов html
+      // -1. запрет тагов html - HTML tags ban (by Freeman)
       if ($this->settings["html"])
       $data = str_replace( "&", "&amp;",  $data );
       // 0. Вырезаем таги
@@ -115,12 +115,27 @@ class typografica
       //    нам он ещё вопьётся =)
       //  заменим все таги на спец.символ, запоминая одновременно их в массив.
       //  и будем верить, что спец.символы в дикой природе не встречаются.
+      
+      // 0. Stripping tags
+      // actulally, tag similarity is a problem.
+      //   case 1, simple (ending tag) </abcz>
+      //   case 2, simple (just a tag) <abcz>
+      //   case 3, a bit difficult     <abcz href="abcz">
+      //   case 4, simple (just a tag) <abcz />
+      //   case 5, wakka               \xA2\xA2...==
+      //   most difficult case - tag parameter contains ">" character
+      //   it's here: <abcz href="abcz>">
+      //  how does stripping work? let's assume a special character. Yes-yes, special character
+      //    it would be stick (?like bee or mosquito?) within us =)
+      //  will change all tags with special character, simultaneously store them into an array.
+      //  and then beleive, there are no special characters in the wild world (unexplored wilderness?).
+      // (by Freeman)
       $tags = array();
       if ($this->skipTags)
       {
-         $re =  "/<\/?[a-z0-9]+(". // имя тага
-                               "\s+(". // повторяющая конструкция: хотя бы один разделитель и тельце
-                                      "[a-z]+(". // атрибут из букв, за которым может стоять знак равенства и потом
+         $re =  "/<\/?[a-z0-9]+(". // имя тага - tag name (by Freeman)
+                               "\s+(". // повторяющая конструкция: хотя бы один разделитель и тельце - repeatable statement: if only one delimiter and little body (by Freeman)
+                                      "[a-z]+(". // атрибут из букв, за которым может стоять знак равенства и потом - alpha-composed attribute, could be followed by equals character (by Freeman)
                                                "=((\'[^\']*\')|(\"[^\"]*\")|([0-9@\-_a-z:\/?&=\.]+))". //
                                             ")?".
                                    ")?".
@@ -136,7 +151,7 @@ class typografica
          }
       }
 
-      // 1. Запятые и пробелы
+      // 1. Запятые и пробелы - 1. Commas and spaces (by Freeman)
       if ($this->settings["spacing"])
       {
          $data = preg_replace( "/(\s*)([,]*)/i", "\\2\\1", $data );
@@ -146,11 +161,16 @@ class typografica
       // 2. Разбиение на строки длиной не более ХХ символов
       // --- для ваки не портировано ---
       // --- для ваки не портировано ---
+      
+      // 2. Splitting to strings with length no more than XX characters
+      // --- not ported to wacko ---
+      // --- not ported to wacko ---
+      // (by Freeman)
 
-      // 3. Спецсимволы
+      // 3. Спецсимволы - 3. Special characters (by Freeman)
       $data = $this->replaceSpecials( $data );
 
-      // 4. Короткие слова и &nbsp;
+      // 4. Короткие слова и &nbsp; - 4. Short words and &nbsp; (by Freeman)
       if ($this->settings["wordglue"])
       {
 
@@ -168,20 +188,25 @@ class typografica
          $data = preg_replace( "/([\\s]+)(".$i.")(\s+)/i", "&nbsp;\\2\\3", $data );
       }
 
-      // 5. Склейка ласт. Тьфу! дефисов.
+      // 5. Склейка ласт. Тьфу! дефисов. - 5. Sticking flippers together. Psaw! Concatenation of hyphens (by Freeman)
       if ($this->settings["dashglue"])
       {
          $data = preg_replace( "/([a-zа-яА-Я0-9]+(\-[a-zа-яА-Я0-9]+)+)/i", "<nobr>\\1</nobr>", $data );
       }
 
-      // 6. Макросы
+      // 6. Макросы -  6. Macros (by Freeman)
       $data = $this->replaceMacros( $data, $noParagraph );
 
       // 7. Переводы строк
       // --- для ваки не портировано ---
       // --- для ваки не портировано ---
+      
+      // 7. Line feeds
+      // --- not ported to wacko ---
+      // --- not ported to wacko ---
+      // (by Freeman)
 
-      // БЕСКОНЕЧНОСТЬ. Вставляем таги обратно.
+      // БЕСКОНЕЧНОСТЬ. Вставляем таги обратно. - INFINITY. Inserting tags back. (by Freeman)
       if ($this->skipTags)
       {
          $data .= " ";
@@ -197,7 +222,7 @@ class typografica
          }
       }
 
-      // БЕСКОНЕЧНОСТЬ-2. вставляем ещё сигнорированный регексп
+      // БЕСКОНЕЧНОСТЬ-2. вставляем ещё сигнорированный регексп - INFINITY-2. inserting a (next?) ignored regexp (by Freeman)
       {
          $data .= " ";
          $a = explode( "\201", $data );
@@ -216,14 +241,19 @@ class typografica
       // --- для ваки не портировано ---
       // --- для ваки не портировано ---
 
-      // фуф, закончили.
+      // BONUS: link scrolling via A(...)
+      // --- not ported to wacko ---
+      // --- not ported to wacko ---
+      // (by Freeman)
+
+      // фуф, закончили. - ooh, finished (by Freeman)
       if ($this->de_nobr) $data = str_replace( "<nobr>", "<span class=\"nobr\">", str_replace( "</nobr>", "</span>", $data ));
       return preg_replace( "/^(\s)+/", "",  preg_replace( "/(\s)+$/", "", $data));
    }
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
    // -----------------------------------------------------------------------------------
-   // Метод для внутреннего использования. Проверяет только спец.символы
+   // Метод для внутреннего использования. Проверяет только спец.символы - Method is only for internal use. Checks only special characters (by Freeman)
    function replaceSpecials( $data )
    {
       //print "(($data))";
@@ -231,11 +261,11 @@ class typografica
       if ($this->settings["inches"])
       $data = preg_replace( "/(?<=\s)(([0-9]{1,2}([\.,][0-9]{1,2})?))\"/i", "\\1&quot;", $data );
 
-      // 0a. апостроф
+      // 0a. апостроф - 0a. apostroph (by Freeman)
       if ($this->settings["apostroph"])
          $data = preg_replace( "/([\s\"][~0-9ёЁґҐєЄіІїЇ’'A-Za-zА-Яа-я\-:\/\.]+)'([~єЄіІїЇаАеЕиИоОуУюЮяЯ][~0-9ёЁґҐєЄіІїЇ’'A-Za-zА-Яа-я\-:\/\.]+[\s\.,:;\)<=\"])/i", "\\1’\\2", $data );
 
-      // 1. лапки
+      // 1. лапки - 1. English quotes (by Freeman)
       if ($this->settings["quotes"])
       {
          $data = preg_replace( "/\"\"/i", "&quot;&quot;", $data );
@@ -248,7 +278,7 @@ class typografica
             $data = preg_replace( "/(\&\#147\;([A-Za-z0-9\'\!\s\.\?\,\-\&\;\:\200\201\_]*).*[A-Za-z0-9][\200\201\?\.\!\,]*)\"/i", "\\1&#148;", $data );
          }
       }
-      // 2. ёлочки
+      // 2. ёлочки - 2. angle quotes (by Freeman)
       if ($this->settings["laquo"])
       {
          $data = preg_replace( "/\"\"/i", "&quot;&quot;", $data );
@@ -269,13 +299,19 @@ class typografica
       // --- для ваки не портировано ---
       // --- для ваки не портировано ---
       // 2b. одновременно ёлочки и лапки
+      
+      // 2a. angle quotes for FAR manager
+	  // --- not ported to wacko ---
+	  // --- not ported to wacko ---
+	  // 2b. angle and English quotes together
+	  // (by Freeman)
       if (($this->settings["quotes"]) && (($this->settings["laquo"]) || ($this->settings["farlaquo"])))
       $data = preg_replace( "/(\&\#147\;(([A-Za-z0-9'!\.?,\-&;:]|\s|\200|\201)*)&laquo;(.*)&raquo;)&raquo;/i",
                               "\\1&#148;", $data );
-      // 3. тире
+      // 3. тире - 3. dash (by Freeman)
       if ($this->settings["dash"])
       $data = preg_replace( "/(\s|;)\-(\s)/i", "\\1&ndash;\\2", $data );
-      // 3a. тире длинное
+      // 3a. тире длинное - 3a. long dash (by Freeman)
       if ($this->settings["emdash"])
       $data = preg_replace( "/(\s|;)\-\-(\s)/i", "\\1&mdash;\\2", $data );
 
@@ -303,7 +339,7 @@ class typografica
          $data = preg_replace( "/\^([FCС])/", "&#176\\1", $data );
       }
 
-      // 6. телефоны
+      // 6. телефоны - 6. phones (by Freeman)
       if ($this->settings["phones"])
       {
          foreach ($this->phonemasks[0] as $i => $v)
@@ -314,12 +350,17 @@ class typografica
    }
 
    // -----------------------------------------------------------------------------------
-   // Метод для внутреннего использования. Проверяет только макросы
+   // Метод для внутреннего использования. Проверяет только макросы - Method is only for internal use. Checks only macros (by Freeman)
    function replaceMacros( $data, $noParagraph )
    {
       // 1. Абзацы
       // --- для ваки не портировано ---
       // 2. Красная строка
+      
+      // 1. Paragraphs
+      // --- not ported to wacko ---
+      // 2. Paragpaph indent (indented line)
+      // (by Freeman)
       if ($this->settings["<-->"])
       {
          $data = preg_replace( "/<\->/i", $this->Indent1, $data );
@@ -329,6 +370,12 @@ class typografica
       // --- для ваки не портировано ---
       // 4. http://
       // --- для ваки не портировано ---
+      
+      // 3. mailto:
+      // --- not ported to wacko ---
+      // 4. http://
+      // --- not ported to wacko ---
+      // (by Freeman)
       return $data;
    }
 
