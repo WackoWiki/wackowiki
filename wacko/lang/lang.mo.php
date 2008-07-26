@@ -2,7 +2,7 @@
 
 $wackoLanguage = array(
   "name" => "Moldavian",
-  "code" => "md",
+  "code" => "mo",
   "charset" => "windows-1251",
   "UPPER_P"  => "A-Z\xc0-\xdf\xa8",
   "LOWER_P"  => "a-z\xe0-\xff\xb8\/\'",
