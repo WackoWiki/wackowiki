@@ -8,7 +8,7 @@ if ($this->HasAccess("read")) {
 		$output .= $this->FormOpen("diff", "", "get");
 		$output .= "<p>\n";
 		$output .= "<input type=\"submit\" value=\"".$this->GetResourceValue("ShowDifferencesButton")."\" />";
-		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" name=\"fastdiff\" />\n".$this->GetResourceValue("SimpleDiff");
+		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"fastdiff\" name=\"fastdiff\" />\n <label for=\"fastdiff\">".$this->GetResourceValue("SimpleDiff")."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("revisions.xml")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetResourceValue("RevisionXMLTip")."\" alt=\"XML\" /></a>";
 		$output .= "</p>\n";
 		if ($user = $this->GetUser())

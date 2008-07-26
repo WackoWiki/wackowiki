@@ -39,7 +39,7 @@ H5 { font-family: Arial;   font-size: 14px; padding-top:10px; padding-bottom:5px
 .Bookmarks A:HOVER { font-weight: bold; color: #ffb5b5 }
 
 .Wrapper { margin: 20px 20px 20px 20px }
-.header, { color:#444444; }
+.header { color:#444444; }
 .header .Main { color:#999999 }
 .header H1 { margin:0px; padding:0px; color:#000000; font-family:Arial; font-size: 100% }
 .Print { color:#999999; font-size:11px; float:right; }
@@ -379,7 +379,6 @@ tt { color:#666600; background:#ffffcc; padding: 0 2px }
 	padding: 5px;
 }
 
-
 /* cssform1 for actions */
 div#cssform1 {
 	width:50%;
@@ -414,11 +413,3 @@ div#cssform1 span.site_count {
 	margin-left: -155px; width of left column*/
 	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
-.BewareChangeLang {
-	border: 1px solid red;
-	width: 400px;
-	background-color: #DDDDDD;
-	margin: 10px;
-	padding: 5px;
-}
-

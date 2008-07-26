@@ -146,8 +146,8 @@ if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
    {
       ?>
   <p>
-    <label><?php echo $this->FormatResourceValue("RegistrationLang");?>:</label>
-    <select name="lang">
+    <label for="lang"><?php echo $this->FormatResourceValue("RegistrationLang");?>:</label>
+    <select id="lang" name="lang">
       <option value=""></option>
       <?php
          $langs = $this->AvailableLanguages();
@@ -160,21 +160,21 @@ if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
 }
 ?>
   <p>
-    <label><?php echo $this->FormatResourceValue("RegistrationName");?>:</label>
-    <input name="name" size="27"
+    <label for="name"><?php echo $this->FormatResourceValue("RegistrationName");?>:</label>
+    <input id="name" name="name" size="27"
          value="<?php echo htmlspecialchars($name); ?>" />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("RegistrationPassword");?>:</label>
-    <input type="password" name="password" size="24" value="<?php echo $password ?>" />
+    <label for="password"><?php echo $this->GetResourceValue("RegistrationPassword");?>:</label>
+    <input type="password" id="password" name="password" size="24" value="<?php echo $password ?>" />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("ConfirmPassword");?>:</label>
-    <input type="password" name="confpassword" size="24" value="<?php echo $confpassword ?>" />
+    <label for="confpassword"><?php echo $this->GetResourceValue("ConfirmPassword");?>:</label>
+    <input type="password" id="confpassword" name="confpassword" size="24" value="<?php echo $confpassword ?>" />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("Email");?>:</label>
-    <input name="email" size="30"
+    <label for="email"><?php echo $this->GetResourceValue("Email");?>:</label>
+    <input id="email" name="email" size="30"
          value="<?php echo htmlspecialchars($email); ?>" />
   </p>
 <?php

@@ -18,12 +18,12 @@ if (!$_POST["_to"])
 
 <div class="cssform">
   <p>
-    <label><?php echo $this->GetResourceValue("ImportTo"); ?>:</label>
-    <input type="text" name="_to" size="40" value="" />
+    <label for="importto"><?php echo $this->GetResourceValue("ImportTo"); ?>:</label>
+    <input type="text" id="importto" name="_to" size="40" value="" />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("ImportWhat"); ?>:</label>
-    <input type="file" name="_import" />
+    <label for="importwhat"><?php echo $this->GetResourceValue("ImportWhat"); ?>:</label>
+    <input type="file" id="importwhat" name="_import" />
   </p>
   <p>
     <input type="submit"

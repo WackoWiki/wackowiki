@@ -49,20 +49,20 @@ if ($this->UserIsOwner() || $this->IsAdmin())
   <?php echo $this->FormOpen("acls") ?>
   <div class="cssform">
     <p>
-      <label><?php echo $this->GetResourceValue("ACLRead"); ?></label>
-      <textarea name="read_acl" rows="4" cols="20"><?php echo $readACL["list"] ?></textarea>
+      <label for="read_acl"><?php echo $this->GetResourceValue("ACLRead"); ?></label>
+      <textarea id="read_acl" name="read_acl" rows="4" cols="20"><?php echo $readACL["list"] ?></textarea>
     </p>
     <p>
-      <label><?php echo $this->GetResourceValue("ACLWrite"); ?></label>
-      <textarea name="write_acl" rows="4" cols="20"><?php echo $writeACL["list"] ?></textarea>
+      <label for="write_acl"><?php echo $this->GetResourceValue("ACLWrite"); ?></label>
+      <textarea id="write_acl" name="write_acl" rows="4" cols="20"><?php echo $writeACL["list"] ?></textarea>
     </p>
     <p>
-      <label><?php echo $this->GetResourceValue("ACLComment"); ?></label>
-      <textarea name="comment_acl" rows="4" cols="20"><?php echo $commentACL["list"] ?></textarea>
+      <label for="comment_acl"><?php echo $this->GetResourceValue("ACLComment"); ?></label>
+      <textarea id="comment_acl" name="comment_acl" rows="4" cols="20"><?php echo $commentACL["list"] ?></textarea>
     </p>
     <p>
-      <label><?php echo $this->GetResourceValue("SetOwner"); ?></label>
-      <select name="newowner">
+      <label for="newowner"><?php echo $this->GetResourceValue("SetOwner"); ?></label>
+      <select id="newowner" name="newowner">
         <option value=""><?php echo $this->GetResourceValue("OwnerDontChange"); ?></option>
         <?php
 			if ($users = $this->LoadUsers())
