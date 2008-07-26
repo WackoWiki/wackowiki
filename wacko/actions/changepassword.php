@@ -38,12 +38,12 @@ if ($_REQUEST["secret_code"]){
 <div class="cssform">
   <h3><?php echo $this->Format( str_replace('%1', $user["name"], $this->GetResourceValue("YouWantChangePasswordForUser"))); ?></h3>
   <p>
-    <label><?php echo $this->GetResourceValue("NewPassword");?>:</label>
-    <input type="password" name="newpassword" size="24" />
+    <label for="newpassword"><?php echo $this->GetResourceValue("NewPassword");?>:</label>
+    <input type="password" id="newpassword" name="newpassword" size="24" />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("ConfirmPassword");?>:</label>
-    <input type="password" name="confpassword" size="24" />
+    <label for="confpassword"><?php echo $this->GetResourceValue("ConfirmPassword");?>:</label>
+    <input type="password" id="confpassword" name="confpassword" size="24" />
   </p>
   <p>
     <input class="OkBtn" onmouseover='this.className="OkBtn_";'
@@ -101,16 +101,16 @@ if ($_REQUEST["secret_code"]){
   <?php	}
 	?>
   <p>
-    <label><?php echo $this->GetResourceValue("CurrentPassword");?>:</label>
-    <input type="password" name="password" size="24" />
+    <label for="password"><?php echo $this->GetResourceValue("CurrentPassword");?>:</label>
+    <input type="password" id="password" name="password" size="24" />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("NewPassword");?>:</label>
-    <input type="password" name="newpassword" size="24" />
+    <label for="newpassword"><?php echo $this->GetResourceValue("NewPassword");?>:</label>
+    <input type="password" id="newpassword" name="newpassword" size="24" />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("ConfirmPassword");?>:</label>
-    <input type="password" name="confpassword" size="24" />
+    <label for="confpassword"><?php echo $this->GetResourceValue("ConfirmPassword");?>:</label>
+    <input type="password" id="confpassword" name="confpassword" size="24" />
   </p>
   <p>
     <input class="OkBtn" onmouseover='this.className="OkBtn_";'
@@ -175,8 +175,8 @@ if ($_REQUEST["secret_code"]){
 ?>
   <p><?php echo $this->FormatResourceValue("ForgotComment"); ?></p>
   <p>
-    <label><?php echo $this->FormatResourceValue("ForgotField"); ?>:</label>
-    <input type="text" name="loginormail" size="24" />
+    <label for="loginormail"><?php echo $this->FormatResourceValue("ForgotField"); ?>:</label>
+    <input type="text" id="loginormail" name="loginormail" size="24" />
   </p>
   <p>
     <input class="OkBtn" onmouseover='this.className="OkBtn_";'

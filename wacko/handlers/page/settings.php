@@ -23,16 +23,16 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
   <?php echo $this->FormOpen("settings") ?>
   <div class="cssform">
     <p>
-      <label><?php echo $this->GetResourceValue("Meta1"); ?></label>
-      <textarea name="keywords" rows="4" cols="51"><?php echo $this->page["keywords"] ?></textarea>
+      <label for="keywords"><?php echo $this->GetResourceValue("Meta1"); ?></label>
+      <textarea id="keywords" name="keywords" rows="4" cols="51"><?php echo $this->page["keywords"] ?></textarea>
     </p>
     <p>
-      <label><?php echo $this->GetResourceValue("Meta2"); ?></label>
-      <textarea name="description" rows="4" cols="51"><?php echo $this->page["description"] ?></textarea>
+      <label for="description"><?php echo $this->GetResourceValue("Meta2"); ?></label>
+      <textarea id="description" name="description" rows="4" cols="51"><?php echo $this->page["description"] ?></textarea>
     </p>
     <p>
-      <label> <?php echo $this->GetResourceValue("SetLang"); ?></label>
-      <select name="lang">
+      <label for="lang"><?php echo $this->GetResourceValue("SetLang"); ?></label>
+      <select id="lang" name="lang">
         <?php
 		if (!($clang = $this->page["lang"]))
 		$clang = $this->GetConfigValue("language");

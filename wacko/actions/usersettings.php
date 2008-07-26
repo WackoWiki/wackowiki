@@ -82,71 +82,71 @@ else if ($user = $this->GetUser())
   <h3><?php echo $this->GetResourceValue("Hello").", ".$this->ComposeLinkToPage($user["name"]) ?>!</h3>
   <p><a href="<?php echo $this->href("", "Password")?>"><?php echo $this->GetResourceValue("YouWantChangePassword");?></a></p>
   <p>
-    <label><?php echo $this->GetResourceValue("YourEmail");?>:</label>
-    <input name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />
+    <label for="email"><?php echo $this->GetResourceValue("YourEmail");?>:</label>
+    <input id="email" name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />
     &nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("root_url").'images/tick.png" alt="'.$this->GetResourceValue("EmailConfirmed").'" title="'.$this->GetResourceValue("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("root_url").'images/warning.png" alt="'.$this->GetResourceValue("Mail.Confirm").'" title="'.$this->GetResourceValue("Mail.Confirm").'" width="20" height="23" />' ?> </p>
   <p>
-    <label><?php echo $this->GetResourceValue("DoubleclickEditing");?>:</label>
+    <label for="doubleclickedit"><?php echo $this->GetResourceValue("DoubleclickEditing");?>:</label>
     <input type="hidden" name="doubleclickedit" value="N" />
     <input
-         type="checkbox" name="doubleclickedit" value="Y"
+         type="checkbox" id="doubleclickedit" name="doubleclickedit" value="Y"
          <?php echo $user["doubleclickedit"] == "Y" ? "checked=\"checked\"" : "" ?> />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("WikieditAutocomplete");?>:</label>
+    <label for="autocomplete"><?php echo $this->GetResourceValue("WikieditAutocomplete");?>:</label>
     <input type="hidden" name="autocomplete" value="N" />
     <input
-         type="checkbox" name="autocomplete" value="Y"
+         type="checkbox" id="autocomplete" name="autocomplete" value="Y"
          <?php echo $user["options"]["autocomplete"] == "Y" ? "checked=\"checked\"" : "" ?> />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("ShowDateTimeInLinks");?>:</label>
+    <label for="showdatetimeinlinks"><?php echo $this->GetResourceValue("ShowDateTimeInLinks");?>:</label>
     <input type="hidden" name="showdatetimeinlinks" value="N" />
     <input
-         type="checkbox" name="showdatetimeinlinks" value="Y"
+         type="checkbox" id="showdatetimeinlinks" name="showdatetimeinlinks" value="Y"
          <?php echo $user["showdatetime"] == "Y" ? "checked=\"checked\"" : "" ?> />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("ShowComments?");?>:</label>
+    <label for="show_comments"><?php echo $this->GetResourceValue("ShowComments?");?>:</label>
     <input type="hidden" name="show_comments" value="N" />
     <input
-         type="checkbox" name="show_comments" value="Y"
+         type="checkbox" id="show_comments" name="show_comments" value="Y"
          <?php echo $user["show_comments"] == "Y" ? "checked=\"checked\"" : "" ?> />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("ShowFiles?");?>:</label>
+    <label for="show_files"><?php echo $this->GetResourceValue("ShowFiles?");?>:</label>
     <input type="hidden" name="show_files" value="N" />
     <input
-         type="checkbox" name="show_files" value="Y"
+         type="checkbox" id="show_files" name="show_files" value="Y"
          <?php echo $user["options"]["show_files"] == "Y" ? "checked=\"checked\"" : "" ?> />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("ShowSpaces");?>:</label>
+    <label for="show_spaces"><?php echo $this->GetResourceValue("ShowSpaces");?>:</label>
     <input type="hidden" name="show_spaces" value="N" />
     <input
-         type="checkbox" name="show_spaces" value="Y"
+         type="checkbox" id="show_spaces" name="show_spaces" value="Y"
          <?php echo $user["show_spaces"] == "Y" ? "checked=\"checked\"" : "" ?> />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("DontRedirect");?>:</label>
+    <label for="dont_redirect"><?php echo $this->GetResourceValue("DontRedirect");?>:</label>
     <input type="hidden" name="dont_redirect" value="N" />
     <input
-         type="checkbox" name="dont_redirect" value="Y"
+         type="checkbox" id="dont_redirect" name="dont_redirect" value="Y"
          <?php echo $user["options"]["dont_redirect"] == "Y" ? "checked=\"checked\"" : "" ?> />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("SendWatchMail");?>:</label>
+    <label for="send_watchmail"><?php echo $this->GetResourceValue("SendWatchMail");?>:</label>
     <input type="hidden" name="send_watchmail" value="N" />
     <input
-         type="checkbox" name="send_watchmail" value="Y"
+         type="checkbox" id="send_watchmail" name="send_watchmail" value="Y"
          <?php echo $user["options"]["send_watchmail"] == "Y" ? "checked=\"checked\"" : "" ?> />
   </p>
   <!--
-      <p><label><?php echo $this->GetResourceValue("Typografica");?>:</label><input type="hidden" name="typografica" value="N" /><input type="checkbox" name="typografica" value="Y" <?php echo $user["typografica"] == "Y" ? "checked=\"checked\"" : "" ?> /></p>
+      <p><label for="typografica"><?php echo $this->GetResourceValue("Typografica");?>:</label><input type="hidden" name="typografica" value="N" /><input type="checkbox" id="typografica" name="typografica" value="Y" <?php echo $user["typografica"] == "Y" ? "checked=\"checked\"" : "" ?> /></p>
     -->
   <p>
-    <label><?php echo $this->GetResourceValue("YourLanguage");?>:</label>
-    <select name="lang">
+    <label for="lang"><?php echo $this->GetResourceValue("YourLanguage");?>:</label>
+    <select id="lang" name="lang">
       <option value=""></option>
       <?php
          $langs = $this->AvailableLanguages();
@@ -157,8 +157,8 @@ else if ($user = $this->GetUser())
     </select>
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("ChooseTheme");?>:</label>
-    <select name="theme">
+    <label for="theme"><?php echo $this->GetResourceValue("ChooseTheme");?>:</label>
+    <select id="theme" name="theme">
       <option value=""></option>
       <?php
          $themes = $this->AvailableThemes();
@@ -169,23 +169,23 @@ else if ($user = $this->GetUser())
     </select>
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("RecentChangesLimit");?>:</label>
-    <input name="changescount"
+    <label for="changescount"><?php echo $this->GetResourceValue("RecentChangesLimit");?>:</label>
+    <input id="changescount" name="changescount"
          value="<?php echo htmlentities($user["changescount"]) ?>" size="40" />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("RevisionListLimit");?>:</label>
-    <input name="revisioncount"
+    <label for="revisioncount"><?php echo $this->GetResourceValue("RevisionListLimit");?>:</label>
+    <input id="revisioncount" name="revisioncount"
          value="<?php echo htmlentities($user["revisioncount"]) ?>" size="40" />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("YourMotto");?>:</label>
-    <input name="motto"
+    <label for="motto"><?php echo $this->GetResourceValue("YourMotto");?>:</label>
+    <input id="motto" name="motto"
          value="<?php echo htmlspecialchars($user["motto"]) ?>" size="40" />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("YourBookmarks");?>:</label>
-    <textarea name="bookmarks" cols="40" rows="10"><?php echo htmlspecialchars($user["bookmarks"]) ?></textarea>
+    <label for="bookmarks"><?php echo $this->GetResourceValue("YourBookmarks");?>:</label>
+    <textarea id="bookmarks" name="bookmarks" cols="40" rows="10"><?php echo htmlspecialchars($user["bookmarks"]) ?></textarea>
   </p>
   <p>
     <input class="OkBtn"

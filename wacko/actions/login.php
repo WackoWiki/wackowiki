@@ -73,11 +73,11 @@ else
   <?php	}
 	?>
   <p>
-    <label><?php echo $this->FormatResourceValue("LoginName");?>:</label>
+    <label for="name"><?php echo $this->FormatResourceValue("LoginName");?>:</label>
     <input id="f0" name="name" size="27" value="<?php echo $name; ?>" />
   </p>
   <p>
-    <label><?php echo $this->GetResourceValue("LoginPassword");?>:</label>
+    <label for="password"><?php echo $this->GetResourceValue("LoginPassword");?>:</label>
     <input id="f1" type="password" name="password" size="24" />
   </p>
   <p>

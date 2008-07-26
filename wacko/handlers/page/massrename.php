@@ -39,7 +39,7 @@ if ($registered
   <input type="text"
    name="newname" value="<?php echo $this->tag;?>" size="40" />
   <br />
-  <?php echo "<input type=\"checkbox\" id=\"ch1\" name=\"redirect\"  /> <label for=\"ch1\">".$this->GetResourceValue("MassNeedRedirect")."</label>"; ?> <br />
+  <?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\"  /> <label for=\"redirect\">".$this->GetResourceValue("MassNeedRedirect")."</label>"; ?> <br />
   <br />
   <br />
   <input name="submit" class="OkBtn_Top"

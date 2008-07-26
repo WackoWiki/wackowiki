@@ -99,7 +99,7 @@ if ($registered
   <input type="text"
 	name="newname" value="<?php echo $this->tag;?>" size="40" />
   <br />
-  <?php echo "<input type=\"checkbox\" id=\"ch1\" name=\"redirect\" "; if ($this->GetConfigValue("default_rename_redirect")==1){echo "checked=\"checked\"";}; echo " /> <label for=\"ch1\">".$this->GetResourceValue("NeedRedirect")."</label>"; ?> <br />
+  <?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" "; if ($this->GetConfigValue("default_rename_redirect")==1){echo "checked=\"checked\"";}; echo " /> <label for=\"redirect\">".$this->GetResourceValue("NeedRedirect")."</label>"; ?> <br />
   <br />
   <br />
   <?php
