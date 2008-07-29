@@ -683,7 +683,8 @@ class Wacko
    }
 
    function LoadPageTitles() { return $this->LoadAll("SELECT DISTINCT tag FROM ".$this->config["table_prefix"]."pages ORDER BY tag"); }
-   function LoadAllPages() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE latest = 'Y' AND LEFT(supertag,7)!='comment' ORDER BY BINARY tag LIMIT 1000"); }
+   function LoadAllPages() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE latest = 'Y' AND comment_on = '' ORDER BY BINARY tag"); }
+   function LoadAllPagesByTime() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE latest = 'Y' AND comment_on = '' ORDER BY time DESC, BINARY tag"); }
 
    function FullTextSearch($phrase,$filter)
    {
@@ -1984,7 +1985,7 @@ class Wacko
       $xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
       $xml .= "<description>".$this->GetResourceValue("RecentChangesXML").$this->GetConfigValue("wakka_name")." </description>\n";
       $xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
-	  $xml .= "<image>\n";
+     $xml .= "<image>\n";
       $xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetResourceValue("RecentCommentsTitleXML")."</title>\n";
       $xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
       $xml .= "<url>".$this->GetConfigValue("root_url")."files/wacko4.gif"."</url>\n";
@@ -2083,14 +2084,12 @@ class Wacko
       $xml = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n";
       $xml .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 
-      if ($pages = $this->LoadRecentlyChanged())
+      if ($pages = $this->LoadAllPagesByTime())
       {
          foreach ($pages as $i => $page)
          {
-            if ($this->config["hide_locked"]) $access =$this->HasAccess("read",$page["tag"],"guest@wacko");
-            if ($access && ($count < 50000))
+            if ($this->config["hide_locked"] ? $this->HasAccess("read",$page["tag"],"guest@wacko") : true)
             {
-               $count++;
                $xml .= "<url>\n";
                $xml .= "<loc>".$this->href("", $page["tag"])."</loc>\n";
                $xml .= "<lastmod>". substr($page["time"], 0, 10) ."</lastmod>\n";
