@@ -2,6 +2,13 @@
 $lang = array(
 
 /*
+   Language Settings
+*/
+"Charset" => "windows-1251",
+"LangISO" => "ru",
+"LangName" => "Russian",
+
+/*
    Generic Page Text
 */
 "Title" => "Установка WackoWiki",
