@@ -2,6 +2,13 @@
 $lang = array(
 
 /*
+   Language Settings
+*/
+"Charset" => "iso-8859-2",
+"LangISO" => "pl",
+"LangName" => "Polski",
+
+/*
    Generic Page Text
 */
 "Title" => "WackoWiki Installation",
