@@ -3,11 +3,11 @@ $lng = "it";
 
 if ($config["language"]==$lng)
 {
- InsertPage($config["root_page"], "((file:wacko4.gif WackoWiki))\n**Benvenuto sul tuo sito ((WackoWiki:WackoWiki WackoWiki)) site!**\n\nPer cominciare clicca su \"Edita questa pagina\" nella pagina in basso.\n\nLa documentazione, in inglese, può essere trovata  in WackoWiki:DocEnglish.\n\nPagine utili: PagineOrfane, PagineRichieste, ((Ricerca)), MiePagine, MieModifiche.\n\n", $lng);
- InsertPage('PagineRichieste', '{{WantedPages}}', $lng);
- InsertPage('PagineOrfane', '{{OrphanedPages}}', $lng);
- InsertPage('MiePagine', '{{MyPages}}', $lng);
- InsertPage('MieModifiche', '{{MyChanges}}', $lng);
+ InsertPage($config["root_page"], "((file:wacko4.gif WackoWiki))\n**Benvenuto sul tuo sito ((WackoWiki:WackoWiki WackoWiki)) site!**\n\nPer cominciare clicca su \"Edita questa pagina\" nella pagina in basso.\n\nLa documentazione, in inglese, può essere trovata  in WackoWiki:DocEnglish.\n\nPagine utili: PagineOrfane, PagineRichieste, ((Ricerca)), MiePagine, MieModifiche.\n\n", $lng, "Admins", true);
+ InsertPage('PagineRichieste', '{{WantedPages}}', $lng, "Admins", true);
+ InsertPage('PagineOrfane', '{{OrphanedPages}}', $lng, "Admins", true);
+ InsertPage('MiePagine', '{{MyPages}}', $lng, "Admins", true);
+ InsertPage('MieModifiche', '{{MyChanges}}', $lng, "Admins", true);
 }
 
 InsertPage('UltimeModifiche', '{{RecentChanges}}', $lng);
