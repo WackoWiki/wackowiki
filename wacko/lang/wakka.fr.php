@@ -1,5 +1,4 @@
 <?php
-
 $wakkaResource = array(
 // logged in panel
   "YouAre" => "Vous êtes ",
@@ -34,7 +33,7 @@ $wakkaResource = array(
   "FileLink" => "", 
   "PDFLink" => "Document PDF (dans une nouvelle fenêtre)", 
   "RDFLink" => "Document RDF",
-  "MailLink" => "Ecrivez un courriel (lancement du programme de courriel)",
+  "MailLink" => "&Eacute;crivez un courriel (lancement du programme de courriel)",
   "ShowTip" => "Cliquez pour revenir au mode vue",
   "ShowText" => "Voir",
   "ShowDateTimeInLinks" => "Ajouter date et heure au lien",
@@ -63,7 +62,7 @@ $wakkaResource = array(
   "EditACLConfirm" => "Voulez-vous vraiment sortir sans sauvegarder&nbsp;?",
   "EditACLText" => "Changer les droits",
   "EditTip" => "Cliquez ici pour éditer cette page." ,
-  "EditText" => "Editer cette page" ,
+  "EditText" => "&Eacute;diter cette page" ,
   "RevisionTip" => "Cliquez ici pour voir les dernières révisions de cette page",
   "RevisionXMLTip" => "Cliquez ici pour voir les dernières révisions au format XML.",
   "RecentCommentsXMLTip" => "Cliquez ici pour voir les commentaires récents au format XML.",
@@ -105,7 +104,7 @@ $wakkaResource = array(
   "SimpleDiffDeletions" => "<b>Suppressions&nbsp;:</b>",
   "NoDifferences" => "Versions identiques.",
   "History" => "historique",
-  "ReEditOldRevision" => "Reéditer cette ancienne version",
+  "ReEditOldRevision" => "Rééditer cette ancienne version",
   "ExternalPages" => "Liens externes vers %1 (%2) (<a href=\"%3\" >Voir la liste des domaines</a>):",
   "ExternalPages(Global)" => "Sites ayant des liens vers ce Wiki (<a href=\"%1\">Voir la liste des domaines</a>):",
   "Last24Hours" => "Dernières 24 heures",
@@ -117,7 +116,7 @@ $wakkaResource = array(
   "ViewReferringSites(Global)" => "<a href=\"%1\">Voir les sites référents globaux</a>",
   "ViewReferrersFor(Global)" => "<a href=\"%1\">Voir les référents globaux</a>",
   "NoneReferrers" => "<em>Aucun référent</em>",
-  "NotOwnerAndCanDelete" => "<i>Vous n&rsquo;ètes pas le propriétaire de cette page et ne pouvez la supprimer</i>",
+  "NotOwnerAndCanDelete" => "<i>Vous n&rsquo;êtes pas le propriétaire de cette page et ne pouvez la supprimer</i>",
   "ReferrersRemoved" => "<i>Référents vers la page %1 enlevés.</i>",
   "LinksRemoved" => "<i>Liens depuis la page %1 enlevés.</i>",
   "AclsRemoved" => "<i>Droit de la page %1 enlevés.</i>",
@@ -159,10 +158,10 @@ $wakkaResource = array(
   "At" => "à",
   "To" => "to",
   "By" => "par",
-  "From" => "from",
-  "ReturnToCommented" => "Return to commented page",
+  "From" => "de",
+  "ReturnToCommented" => "Retour vers la page commentée",
 
-  "PagesLinkingTo" => "Pages ayants un lien vers",
+  "PagesLinkingTo" => "Pages ayant un lien vers",
   "NoPageLinkingTo" => "Aucune page n&rsquo;a de lien vers",
   "NoWantedPages" => "<em>Aucune page en attente de rédaction. Bien&nbsp;!</em>",
   "RemoveWatch" => "Cesser de surveiller cette page",
@@ -175,7 +174,7 @@ $wakkaResource = array(
   "RevisionListLimit" => "Nombre maximum de révisions affichées&nbsp;",
   "RecentChangesLimit" => "Nombre maximum de changements récents affichés&nbsp;",
   "ShowComments?" => "Montrer les commentaires par défaut&nbsp;",
-  "DoubleclickEditing" => "Editer par &ldquo;double clic&rdquo;&nbsp;",
+  "DoubleclickEditing" => "&Eacute;diter par &ldquo;double clic&rdquo;&nbsp;",
   "UpdateSettingsButton" => "Enregistrer vos préférences",
   "WrongPassword" => "Mot de passe incorrect&nbsp;!",
   "AlreadyRegistered" => "Si vous vous êtes déjà enregistré(e), connectez-vous ici&nbsp;!",
@@ -188,7 +187,7 @@ $wakkaResource = array(
   "SpecifyEmail" => "Vous devez indiquer une adresse de messagerie.",
   "NotAEmail" => "Ceci ne ressemble pas vraiment à une adresse de messagerie.",
   "PasswordsDidntMatch" => "Mots de passe non identiques.",
-  "SpacesArentAllowed" => "le caractère espace n&rsquo;est pas autorisé dans les mots de passe.",
+  "SpacesArentAllowed" => "Le caractère espace n&rsquo;est pas autorisé dans les mots de passe.",
   "PasswordTooShort" => "Mot de passe trop court.",
   "SeeListOfPages" => "Voir la liste des pages dont vous êtes le propriétaire (MesPages) et les pages que vous avez modifiées (MesModifications).",
   "AddToBookmarks" => "Ajouter la page courante aux LiensRapides",
@@ -221,7 +220,7 @@ $wakkaResource = array(
   "FilesRenamed" => "<em>Fichiers pour la page %1 renommés.</em>",
   "NewNameOfPage" => "Nouveau nom de cette page: ",
   "NotOwnerAndCantRename"  => "<em>Vous ne pouvez donc pas renommer cette page dont vous n&rsquo;étes pas le propriétaire</em>",
-  "NeedRedirect" => "Créér une redirection de l&rsquo;ancienne vers la nouvelle page",
+  "NeedRedirect" => "Créer une redirection de l&rsquo;ancienne vers la nouvelle page",
   "RedirectCreated" => "<em>Une redirection de la page %1 vers la nouvelle page a été mise en place</em>",
   "LinksRenamed" => "<em>Page de liens depuis %1 renommé.</em>",
   "ChooseTheme" => "Choisir un thème",
@@ -236,11 +235,11 @@ $wakkaResource = array(
   "YouWantChangePassword" => "Changement de mot de passe",
   "PasswordChanged" => "Le mot de passe a été changé",
   "Mail.Welcome" => "Bienvenue sur ",
-  "Mail.Registered" => "Votre enregistrement est confirmé sur %1.<br />Votre nom d&rsquo;utilisateur ou NomWiki est&nbsp;: %2<br />Nous vous conseillons de confirmer votre adresse de messagerie ; ceci vous permettra :<br /> - de recevoir des courriels pour vous informer de changements ou commentaires sur certaines pages,<br /> - et d'obtenir un nouveau mot de passe en cas de perte.<br /><br/>Pour confirmer votre adresse de messagerie suivez <a href=%3>ce lien</a>, ou copiez-le dans la barre d'adresses de votre navigateur.",
+  "Mail.Registered" => "Votre enregistrement est confirmé sur %1.<br />Votre nom d&rsquo;utilisateur ou NomWiki est&nbsp;: %2<br />Nous vous conseillons de confirmer votre adresse de messagerie ; ceci vous permettra :<br /> - de recevoir des courriels pour vous informer de changements ou commentaires sur certaines pages,<br /> - et d&rsquo;obtenir un nouveau mot de passe en cas de perte.<br /><br/>Pour confirmer votre adresse de messagerie suivez <a href=%3>ce lien</a>, ou copiez-le dans la barre d&rsquo;adresses de votre navigateur.",
   "Mail.Verify" => "Quelqu&rsquo;un (peut-être vous) a donné votre adresse de messagerie pour recevoir des notifications des modifications ou commentaires sur %1.<br />Votre nom d&rsquo;utilisateur (NomWiki)&nbsp;: %2<br />Si vous voulez recevoir des notifications, vous devez confirmer votre adresse de messagerie. Pour celà suivez <a href=%3>ce lien</a> .",
   "Mail.Confirm" => "Merci de vérifier votre adresse de messagerie",
   "EmailConfirmed" => "Adresse de messagerie confirmée. Merci&nbsp;!",
-  "EmailNotConfirmed" => "Adresse de messagerie non confirmée. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.",
+  "EmailNotConfirmed" => "Adresse de messagerie non confirmée. Ceci peut être dû à un code de confirmation erroné, mais ctte adresse peut aussi avoir été déjà confirmée. Identifiez-vous et vérifiez-le sur votre page %1.",
 
   "ForgotComment" => "Indiquez votre NomWiki ou votre adresse de messagerie,\nun courriel avec des instructions vous sera envoyé.",
   "ForgotMain" => "Avez-vous oublié votre mot de passe&nbsp;?",
@@ -266,7 +265,7 @@ $wakkaResource = array(
   "SettingsText" => "Réglages",
   "SettingsTip" => "Autres réglages et propriétés de cette page",
   "SettingsPortal" => "Autres réglages et propriétés pour cette page&nbsp;:",
-  "SettingsEdit" => "Edition",
+  "SettingsEdit" => "&Eacute;dition",
   "SettingsRevisions" => "Révisions",
   "SettingsRename" => "Renommer",
   "SettingsRemove" => "Supprimer",
@@ -281,7 +280,7 @@ $wakkaResource = array(
 
 // upload
   "UploadFor" => "Déposer un fichier&nbsp;",
-  "UploadButtonText" => "Effectuer le dépot",
+  "UploadButtonText" => "Effectuer le dépôt",
   "UploadGlobalText" => "pour accès public",
   "UploadHereText" => "seulement pour les utilisateurs autorisés à voir la présente page",
   "UploadDesc" => "description",
@@ -289,7 +288,7 @@ $wakkaResource = array(
   "UploadNoFile" => "Il n&rsquo;y avait pas de fichier joint au formulaire.",
   "UploadMaxSizeReached" => "La taille du fichier excède celle autorisée&nbsp;!",
   "UploadNotAPicture" => "Il est seulement permis de déposer des images, que tentez-vous de déposer&nbsp;?",
-  "UploadMaxFileCount" => "Comme vous avez atteint la taille limite de dépot permise, ce fichier ne peut être déposé.",
+  "UploadMaxFileCount" => "Comme vous avez atteint la taille limite de dépôt permise, ce fichier ne peut être déposé.",
   "UploadDone" => "Dépot du fichier réussi",
   "UploadKB" => "Ko",
   "UploadFileNotFound" => "Fichier non trouvé",
@@ -348,12 +347,12 @@ $wakkaResource = array(
   "pdficon"  => '<img src="{theme}icons/pdf.gif" alt="Document PDF" />',
   "rdficon"  => '<img src="{theme}icons/rdf.gif" alt="Document RDF" />',  
   "mailicon" => '<img src="{theme}icons/mail.gif" alt="courriel" />',
-  "lockicon" => '<img src="{theme}icons/lock.gif" alt="Access refusé" />',
+  "lockicon" => '<img src="{theme}icons/lock.gif" alt="Accès refusé" />',
   "keyicon" => '<img src="{theme}icons/key.gif" alt="Page à accès personnalisé" />',
   "wantedicon" => '?',
 
 // My Groups
-  "UserGroups" => "Groupes d'utilisateurs",
+  "UserGroups" => "Groupes d&rsquo;utilisateurs",
   "MyGroups" => "Groupes dont je suis membre",
   "Group" => "groupe",
   "Groups" => "groupes",
@@ -378,10 +377,10 @@ $wakkaResource = array(
   "LastModification" => "Dernière modification",
 
 // Captcha
-  "Captcha" => 'Merci de taper le mot que vous voyez dans l&rsquo;image',
-  "SpamAlert" => 'Le mot ue vous avez tapé n&rsquo; pas celui de l&rsquo;image',
+  "Captcha" => "Merci de taper le mot que vous voyez dans l&rsquo;image",
+  "SpamAlert" => "Le mot que vous avez tapé n&rsquo;est pas celui de l&rsquo;image",
   "CaptchaReload" => "Nouveau mot dans une image",
-  "CaptchaReloadWarning" => "Désolé, je ne peux pas ré-afficher l&rsquo;image contenant le mot. Vous devez ré-afficher la page pour ce faire",
+  "CaptchaReloadWarning" => "Désolé, je ne peux pas ré-afficher l&rsquo;image contenant le mot. Vous devez rafraîchir la page pour ce faire",
 );
 
 ?>
