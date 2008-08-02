@@ -47,18 +47,18 @@ function _unescapeCallback($p)
 	return $c;
 }
 
-// Получаем запрос. - Getting a query (by Freeman)
+// Getting a query
 _parseQueryString();
 $q     = $_GET["q"];
 $ta_id = $_GET["ta_id"];
 
 
-// 1. перевести адрес в супертаг и анврапнуть - 1. convert into supertag and unwrap (by Freeman)
+// 1. convert into supertag and unwrap
 $q = ltrim($q, "/");
 $supertag1 = $this->NpjTranslit( $this->UnwrapLink($q) );
 $supertag2 = $this->NpjTranslit( $q );
 
-// 2. ходим в БД два раза - 2. going to DB two times (by Freeman)
+// 2. going to DB two times
 $limit = 10;
 
 $pages1 = $this->LoadAll("select ".$this->pages_meta." from ".
@@ -68,7 +68,7 @@ $pages2 = $this->LoadAll("select ".$this->pages_meta." from ".
 $this->config["table_prefix"]."pages where ".
             " supertag like '".quote($this->dblink, $supertag2)."%' and comment_on = '' order by supertag asc limit $limit");
 
-// 3. обрезаем по правам - 3. stripping by rights (by Freeman)
+// 3. stripping by rights
 $pages = array();
 $cnt=0;
 if ($pages1)
@@ -103,7 +103,7 @@ foreach ($pages2 as $page)
 	if ($cnt >= $limit) break;
 }
 
-// считаем контекст - counting context (by Freeman)
+// counting context
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 $local_supertag_sliced = explode("/", $this->page["supertag"]);
 $local_supertag        = $this->page["supertag"]."/";
@@ -111,7 +111,7 @@ $local_context_sliced  = array_slice( $local_supertag_sliced, 0,
 sizeof($local_supertag_sliced)-1 );
 $local_context  = implode("/", $local_context_sliced )."/";
 
-// подготавливаем к выводу - preparing to output (by Freeman)
+// preparing to output
 $out = array();
 foreach( $pages as $page )
 {

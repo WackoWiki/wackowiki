@@ -363,16 +363,16 @@ $wakkaResource = array(
   "CacheCleared" => "Cache cleared.",
 
 // XML / RSS autodiscovery
-  "RecentChangesTitleXML" => " - RecentChanges",
+  "RecentChangesTitleXML" => " - Recent changes",
   "RecentChangesXML" => "Recent changes to the ",
-  "RecentCommentsTitleXML" => " - RecentComments",
+  "RecentCommentsTitleXML" => " - Recent comments",
   "RecentCommentsXML" => "Recent comments to the ",
   "PageRevisionsXML" => "History/revisions of ",
   "ExportClusterXML" => "Export of entire cluster of ",
   "AccessDeniedXML" => "You're not allowed to access this information.",
 
-  "RecentChangesRSS" => "RecentChanges in RSS",
-  "RecentCommentsRSS" => "RecentComments in RSS",
+  "RecentChangesRSS" => "Recent changes in RSS",
+  "RecentCommentsRSS" => "Recent comments in RSS",
   "HistoryRevisionsRSS" => "History/revisions of ",
 
   "LastModification" => "Last Modification",

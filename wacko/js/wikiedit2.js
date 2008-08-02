@@ -237,21 +237,14 @@ WikiEdit.prototype.MarkUp = function (Tag, Text, Tag2, onNewLine, expand, strip)
   }
 /*
  fIn &&
-  onNewLine==0 //добавляем таги. - adding tags (by Freeman)
-  onNewLine==1 //добавляем таги, если первая строка - adding tags if first line (by Freeman)
-  onNewLine==2 //добавляем таги, если первая_и_последняя строка, иначе
-   //добавляем первый таг, если первая либо добавляем последний, если последняя
- //иначе добавляем неизменный текст
- 
-  onNewLine==0 // adding tags (by Freeman)
-  onNewLine==1 // adding tags if first line (by Freeman)
+  onNewLine==0 // adding tags
+  onNewLine==1 // adding tags if first line
   onNewLine==2 // adding tags if first_and_last line, else
    // adding first tag if first or adding last one if last
  // else adding unchanged text
- // (by Freeman)
 */
   if (fIn && (onNewLine==0 | (onNewLine==1 && add==0) | (onNewLine==2 && (add==0 || fOut)))) {
-  //добавляем таги - adding tags (by Freeman)
+  //adding tags
     if (expand==1) {
       l = lines[i];
       if (add==0) l = this._LSum(Tag, l, skip);
@@ -261,18 +254,11 @@ WikiEdit.prototype.MarkUp = function (Tag, Text, Tag2, onNewLine, expand, strip)
       r += l;
     } else {
 /*
-  не экспанд. это значит, что
-  если первая строка, то добавляем реплейсом первый и суммой второй
-  если последняя, то добавляем суммой первый и реплейсом второй
-  если первая и последняя, то оба реплейсом
-  иначе суммой
-  
   don't expand. that means
   if first line, replacing first and concatenating second
   if last, concatenating first and replacing second
   if first and last, then replacing both
   else concatenating
-  (by Freeman)
 */
 //    alert(lines[i].replace(new RegExp("\n","g"),"|").replace(new RegExp(" ","g"),"_"));
 //    alert(lines[i+1].replace(new RegExp("\n","g"),"|").replace(new RegExp(" ","g"),"_"));
@@ -283,7 +269,7 @@ WikiEdit.prototype.MarkUp = function (Tag, Text, Tag2, onNewLine, expand, strip)
     }
     add++;
   } else {
-  //добавляем неизменный текст - adding unchanged text (by Freeman)
+  //adding unchanged text
     r += lines[i];
   }
   if (fOut)
