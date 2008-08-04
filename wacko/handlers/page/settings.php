@@ -7,7 +7,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 	if ($_POST)
 	{
 		$this->SaveMeta($this->GetPageTag(), array("lang"=>$_POST["lang"], "description"=>$_POST["description"], "keywords"=>$_POST["keywords"]));
-		$message = $this->GetResourceValue("ACLUpdated");
+		$message = $this->GetResourceValue("MetaUpdated");
 
 		// redirect back to page
 		$this->SetMessage($message."!");

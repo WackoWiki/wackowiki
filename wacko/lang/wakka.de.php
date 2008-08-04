@@ -85,6 +85,7 @@ $wakkaResource = array(
   "ACLCancelButton" => "Abbrechen",
   "ACLAccessDenied" => "<em>Du bist nicht der Besitzer dieser Seite.</em>",
 
+  "MetaUpdated" => "Metadaten aktualisiert",
   "MetaStoreButton" => "Speichern",
   "MetaCancelButton" => "Abbrechen",
 
@@ -118,12 +119,12 @@ $wakkaResource = array(
   "ViewReferringSites(Global)" => "<a href=\"%1\">zeige global referenzierende Seiten</a>",
   "ViewReferrersFor(Global)" => "<a href=\"%1\">zeige globale Referenzen</a>",
   "NoneReferrers" => "<em>keine Verweise</em>",
-  "NotOwnerAndCanDelete" => "<i>Du bist nicht Besitzer der Seite und kannst sie deshalb nicht löschen</i>",
+  "NotOwnerAndCanDelete" => "<i>Du bist nicht der Besitzer dieser Seite und kannst sie deshalb nicht löschen.</i>",
   "ReferrersRemoved" => "<i>Referenzen auf Seite %1 gelöscht.</i>",
   "LinksRemoved" => "<i>Verweise von Seite %1 gelöscht.</i>",
   "AclsRemoved" => "<i>Berechtigungen der Seite %1 gelöscht.</i>",
   "PageRemoved" => "<i>Seite %1 gelöscht.</i>",
-  "ThisActionHavenotUndo" => "<h3>!Diese Aktion kann nicht rückgängig gemacht werden, Viel Glück!</h3>",
+  "ThisActionHavenotUndo" => "<h3>!Diese Aktion kann nicht rückgängig gemacht werden. Viel Glück!</h3>",
   "PrintVersion" => "Druckversion",
   "ReferringPages" => "referenzierende Seiten",
   "NoReferringPages" => "<em>keine verweisenden Seiten</em>",
