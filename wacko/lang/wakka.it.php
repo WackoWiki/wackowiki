@@ -72,7 +72,7 @@ $wakkaResource = array(
   "ReferrersText" => "Riferimenti",
   "SearchText" => "Cerca: ",
 
-  "ACLUpdated" => " Liste controllo-accessi immessi",
+  "ACLUpdated" => "Liste controllo-accessi immessi",
   "ACLGaveOwnership" => " e proprietà assegnata a ",
   "ACLRead" => "<strong>Permesso di lettura:</strong>",
   "ACLWrite" => "<strong>Permesso di scrittura:</strong>",
@@ -84,6 +84,7 @@ $wakkaResource = array(
   "ACLCancelButton" => "Annulla",
   "ACLAccessDenied" => "<em>Non sei il proprietario di questa pagina.</em>",
 
+  "MetaUpdated" => "Meta data immessi",
   "MetaStoreButton" => "Registra",
   "MetaCancelButton" => "Annulla",
 

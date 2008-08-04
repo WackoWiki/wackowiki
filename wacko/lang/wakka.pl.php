@@ -84,6 +84,7 @@ $wakkaResource = array(
   "ACLCancelButton" => "Anuluj",
   "ACLAccessDenied" => "<em>Nie jeste¶ autorem tej strony.</em>",
 
+  "MetaUpdated" => "Zaktualizowano meta data",
   "MetaStoreButton" => "Zachowaj",
   "MetaCancelButton" => "Anuluj",
 

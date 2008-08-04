@@ -84,6 +84,7 @@ $wakkaResource = array(
   "ACLCancelButton" => "Отмени",
   "ACLAccessDenied" => "<em>Вие не сте собственик на тази страница.</em>",
 
+  "MetaUpdated" => "Meta data обновен",
   "MetaStoreButton" => "Запази",
   "MetaCancelButton" => "Отмени",
 

@@ -84,6 +84,7 @@ $wakkaResource = array(
   "ACLCancelButton" => "Loobun",
   "ACLAccessDenied" => "<em>Sa ei ole selle lehe omanik.</em>",
 
+  "MetaUpdated" => "Meta data uuendatud",
   "MetaStoreButton" => "Save",
   "MetaCancelButton" => "Cancel",
 
