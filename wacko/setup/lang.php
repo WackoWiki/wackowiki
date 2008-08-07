@@ -9,6 +9,7 @@
    $lang_codes["de"] = "German";
    $lang_codes["ee"] = "Ewe";
    $lang_codes["en"] = "English";
+   $lang_codes["el"] = "Greek";
    $lang_codes["es"] = "Spanish";
    $lang_codes["fr"] = "French";
    $lang_codes["it"] = "Italian";
