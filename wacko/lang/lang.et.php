@@ -1,7 +1,7 @@
 <?php
 $wackoLanguage = array(
   "name" => "Estonian",
-  "code" => "ee",
+  "code" => "et",
   "charset" => "windows-1257",
   "utfdecode" => array(),
   "UPPER_P"  => "A-Z\xc0-\xd6\xd8-\xdd",

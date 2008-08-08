@@ -38,7 +38,7 @@ if (!$style) $style = "before";
 		// now we need to set up a (small) flag, that's page source should be
 		// twisty-beasty changed in post-wacko and some dygits could be added
 		// (dygits -> digits, here is a misspell in Russian source - I don't know
-		// is it a typo or next joke :)
+		// is it a typo or next joke :) twisty-beasty™ change - Russian "êóðî÷èòü" :)
 		$this->post_wacko_toc = &$toc; $this->post_wacko_action["p"] = $style;
 		$this->post_wacko_maxp = $pnum;
 	} // --------------------------------------------------------------
