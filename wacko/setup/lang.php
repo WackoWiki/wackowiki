@@ -7,7 +7,7 @@
    $lang_codes["bg"] = "Bulgarian";
    $lang_codes["da"] = "Danish";
    $lang_codes["de"] = "German";
-   $lang_codes["ee"] = "Ewe";
+   $lang_codes["et"] = "Estonian";
    $lang_codes["en"] = "English";
    $lang_codes["el"] = "Greek";
    $lang_codes["es"] = "Spanish";
