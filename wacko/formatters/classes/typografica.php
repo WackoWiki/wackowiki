@@ -227,7 +227,7 @@ class typografica
    function replaceSpecials( $data )
    {
       //print "(($data))";
-      // 0. ה‏ילû ס צטפנאלט (to translate)
+      // 0. inches with digits
       if ($this->settings["inches"])
       $data = preg_replace( "/(?<=\s)(([0-9]{1,2}([\.,][0-9]{1,2})?))\"/i", "\\1&quot;", $data );
 
