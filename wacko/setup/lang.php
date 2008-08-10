@@ -3,19 +3,18 @@
 <?php
    // http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
    $lang_codes = array();
-   $lang_codes["bg"] = "Bulgarian";
-   $lang_codes["bg"] = "Bulgarian";
-   $lang_codes["da"] = "Danish";
-   $lang_codes["de"] = "German";
-   $lang_codes["et"] = "Estonian";
+   $lang_codes["bg"] = "&#1041;&#1098;&#1083;&#1075;&#1072;&#1088;&#1089;&#1082;&#1080;";
+   $lang_codes["da"] = "Dansk";
+   $lang_codes["de"] = "Deutsch";
+   $lang_codes["et"] = "Eesti";
    $lang_codes["en"] = "English";
-   $lang_codes["el"] = "Greek";
-   $lang_codes["es"] = "Spanish";
-   $lang_codes["fr"] = "French";
-   $lang_codes["it"] = "Italian";
-   $lang_codes["nl"] = "Dutch";
-   $lang_codes["pl"] = "Polish";
-   $lang_codes["ru"] = "Russian";
+   $lang_codes["el"] = "&Epsilon;&lambda;&lambda;&eta;&nu;&iota;&kappa;&#940;";
+   $lang_codes["es"] = "Espa&ntilde;ol";
+   $lang_codes["fr"] = "Fran&#231;ais";
+   $lang_codes["it"] = "Italiano";
+   $lang_codes["nl"] = "Nederlands";
+   $lang_codes["pl"] = "Polski";
+   $lang_codes["ru"] = "&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;";
 
    foreach($lang_codes as $key => $value)
       {
