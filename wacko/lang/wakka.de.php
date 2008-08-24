@@ -363,6 +363,11 @@ $wakkaResource = array(
 // Cache
   "ClearCache" => "Cache leeren",
   "CacheCleared" => "Cache geleert.",
+  
+// Feed
+  "FeedTitle" => "Feed Titel",
+  "FeedNoURL" => "Bitte gib einen Feed mit dem Parameter url an. (z.B. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
+  "FeedError" => "Kann Feed nicht laden oder parsen",  
 
 // XML / RSS autodiscovery
   "RecentChangesTitleXML" => " - Letzte Änderungen",
