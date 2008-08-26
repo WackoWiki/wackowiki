@@ -168,7 +168,7 @@ if ($_REQUEST["secret_code"]){
   <?php
 	if ($error) {
 		?>
-  <p><?php echo $error; ?></p>
+  <div class="error"><?php echo $error; ?></div>
   <?php
 
 }
