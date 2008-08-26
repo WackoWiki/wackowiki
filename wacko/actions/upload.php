@@ -55,7 +55,7 @@ if ($registered
 	{ ?>
 	<tr>
 		<td>&nbsp;</td>
-		<td style="font-size: 11px">
+		<td>
 		<div><input type="radio" name="_to" disabled="disabled"
 			checked="checked" value="global" id="toUploadGlobalDisabled" /> <input
 			type="hidden" name="to" value="global" /> <?php echo $this->GetResourceValue("UploadGlobalText"); ?>
@@ -67,7 +67,7 @@ if ($registered
 	{ ?>
 	<tr>
 		<td>&nbsp;</td>
-		<td style="font-size: 11px">
+		<td>
 		<div><input type="radio" name="to" value="global" id="toUploadGlobal" />
 		<label for="toUploadGlobal"><?php echo $this->GetResourceValue("UploadGlobalText"); ?></label>
 		</div>
@@ -80,7 +80,7 @@ if ($registered
 	<?php
 	if (!$hide_description) { ?>
 	<tr>
-		<td style="font-size: 11px; text-align: right"><?php echo $this->GetResourceValue("UploadDesc");?>:&nbsp;</td>
+		<td style="text-align: right"><?php echo $this->GetResourceValue("UploadDesc");?>:&nbsp;</td>
 		<td><input name="description" type="text" size="40" /></td>
 	</tr>
 	<?php } ?>
