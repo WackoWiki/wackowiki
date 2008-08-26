@@ -38,7 +38,7 @@ if ($registered
 			if ($this->IsAdmin() || ($page_id && ($this->GetPageOwner($this->tag) == $this->GetUserName()))
 			|| ($what[0]["user"] == $this->GetUserName()))
 			{
-				echo "<h1>".$this->GetResourceValue("UploadRemoveConfirm")."</h1>";
+				echo "<strong>".$this->GetResourceValue("UploadRemoveConfirm")."</strong>";
 				echo $this->FormOpen("upload");
 				// !!!!! place here a reference to delete files
 				?>
@@ -199,7 +199,7 @@ else
 
 					// 4. output link to file
 					// !!!!! write after providing filelink syntax
-					echo "<h1>".$this->GetResourceValue("UploadDone")."</h1>";
+					echo "<strong>".$this->GetResourceValue("UploadDone")."</strong>";
 					?>
   <br />
   <ul>

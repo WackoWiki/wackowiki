@@ -2,7 +2,7 @@
 /*
  Showing uploaded by {{upload}} files
 
- {{Files
+ {{files
  [param0="PageName" or global=1]
  [order="time|FILENAME|size|size_desc|ext"]
  [owner="UserName"]
