@@ -234,7 +234,7 @@ $error = $this->GetResourceValue("UploadMaxFileCount");
 }
 if ($error)
 {
-	echo $error."<br /><br />";
+	echo "<div class=\"error\">".$error."</div><br /><br />";
 }
 echo $this->Action("upload", array())."<br />";
 echo $this->Action("files", array());
