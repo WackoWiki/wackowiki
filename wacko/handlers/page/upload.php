@@ -1,6 +1,9 @@
 <div class="pageBefore">&nbsp;</div>
 <div class="page">
-  <?php
+<?php
+// redirect to show method if page don't exists
+if (!$this->page) $this->Redirect($this->href('show'));
+  
 if ($user = $this->GetUser())
 {
 	$user = strtolower($this->GetUserName());
@@ -92,7 +95,7 @@ if ($_POST["remove"]) // delete
 			if (@unlink($real_filename))
 			print("<div>".$this->GetResourceValue("UploadRemovedFromFS")."</div><br /><br /> ");
 			else
-			print("<div style=\"color:#ff0000\">".$this->GetResourceValue("UploadRemovedFromFSError")."</div><br /><br /> ");
+			print("<div class=\"error\">".$this->GetResourceValue("UploadRemovedFromFSError")."</div><br /><br /> ");
 		} else
 		print($this->GetResourceValue("UploadRemoveDenied"));
 	} else
@@ -166,7 +169,7 @@ else
 					// 3. save to permanent location
 					move_uploaded_file($_FILES["file"]['tmp_name'],
 					$dir.$result_name);
-					chmod( $dir.$result_name, 0744 );
+					chmod( $dir.$result_name, 0644 );
 
 					if ($is_global) $small_name = $result_name;
 					else {
