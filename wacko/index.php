@@ -104,7 +104,7 @@ $wakkaDefaultConfig = array(
   "owners_can_remove_comments" => 1,
   "allow_registration" => 1,
 
-  "standart_handlers" => "acls|addcomment|claim|diff|edit|msword|print|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|show|watch|settings",
+  "standard_handlers" => "acls|addcomment|claim|diff|edit|latex|msword|print|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|show|watch|settings",
 
   "edit_table_based" => 0,
   "revisions_hide_cancel" => 0,
@@ -225,7 +225,7 @@ if ($p === false) {
  {
   $page = $request;
   $method = "";
- } else if (preg_match( '/^(.*?)\/('.$wakkaConfig["standart_handlers"].')($|\/(.*)$)/i', $page, $match ))
+ } else if (preg_match( '/^(.*?)\/('.$wakkaConfig["standard_handlers"].')($|\/(.*)$)/i', $page, $match ))
  {//translit case
   $page = $match[1];
   $method = $match[2];

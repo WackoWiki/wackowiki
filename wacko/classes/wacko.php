@@ -1208,7 +1208,7 @@ class Wacko
          $tag = $otag = $matches[1];
          $untag = $unwtag = $this->UnwrapLink( $tag );
 
-         $regex_handlers = '/^(.*?)\/('.$this->GetConfigValue("standart_handlers").')\/(.*)$/i';
+         $regex_handlers = '/^(.*?)\/('.$this->GetConfigValue("standard_handlers").')\/(.*)$/i';
          $ptag = $this->NpjTranslit($unwtag);
          $handler = null;
          if (preg_match( $regex_handlers, "/".$ptag."/", $match ))
