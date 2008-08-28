@@ -209,7 +209,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Arbre du groupe %1",
   "Tree:SiteTitle" => "Arbre du site",
   "Tree:Empty" => "%1&nbsp;n&rsquo;a pas de pages subordonnées ou sous-pages",
-  "SearchTitleHelp" => "Cliquez ici pour voir toutes les pages avec ce titre.",
+  "SearchTitleTip" => "Cliquez ici pour voir toutes les pages avec ce titre.",
 
   "RenameText" => "Cliquer ici pour renommer cette page",
   "NewName" => "Donner un nouveau nom à cette page",
@@ -276,6 +276,7 @@ $wakkaResource = array(
   "SettingsWatch" => "Surveiller",
   "SettingsPrint" => "Version pour impression",
   "SettingsMsword" => "Version Microsoft Word",
+  "SettingsLatex" => "Version LaTeX",
   "BewareChangeLang" => "Ne changez pas la langue de cette page si vous n&rsquo;êtes pas sûr de ce que vous faites. Changer de langue conduira à renommer la page conformément aux règles de translittération de la langue choisie. Les caractères propres à la langue précédente deviendront illisibles. Vous pourrez cependant revenir au réglage de langue initial.",
   "SetLang" => "Langue de cette page",
 

@@ -210,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" =>"Grupi %1 puu",
   "Tree:SiteTitle" =>"Saitide puu",
   "Tree:Empty" => "%1&nbsp;-el ei ole alamlehti",
-  "SearchTitleHelp" => "Click here to show all pages containing this page title.",
+  "SearchTitleTip" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Nimeta ümber...",
   "NewName" => "Anna lehele uus nimi",
@@ -277,6 +277,7 @@ $wakkaResource = array(
   "SettingsWatch" => "Jälgi",
   "SettingsPrint" => "Printimise versioon",
   "SettingsMsword" => "MS Word versioon",
+  "SettingsLatex" => "LaTeX versioon",
   "SettingsMassAcls" => "Kogu grupi kasutaja õiguste loend",
   "BewareChangeLang" => "Ära muuda keelt, kui sa ei ole päris kindel selles, mida sa teed. Kogu mitte-inglisekeelne sisu võib muuta loetamatuks. Sa saad seda tegevust tagasi pöörata, kui muudad keeleseadistuse tagasi selle algolekusse. ",
   "SetLang" => "Selle lehe keel",

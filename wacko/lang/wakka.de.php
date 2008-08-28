@@ -66,7 +66,6 @@ $wakkaResource = array(
   "EditText" => "Editieren" ,
   "RevisionTip" => "Klicke hier um die Seitenversionen anzusehen",
   "RevisionXMLTip" => "Klicke hier um die Seitenversionen im XML-Format anzusehen.",
-  "RevisionXMLTip" => "Klicke hier um die Seitenversionen im XML-Format anzusehen.",
   "RecentCommentsXMLTip" => "Klicke hier um die Letzten Kommentare im XML-Format anzusehen.",
   "RecentChangesXMLTip" => "Klicke hier um die Letzten Änderungen im XML-Format anzusehen.",
   "ReferrersTip" => "Klicke hier für eine Liste von URLs, die auf diese Seite verweisen.",
@@ -211,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Baumansicht des Clusters %1",
   "Tree:SiteTitle" => "Baumansicht der Seite",
   "Tree:Empty" => "%1&nbsp;hat keine Unterseiten",
-  "SearchTitleHelp" => "Klicke hier um alle Seiten zu zeigen, die diesen Seitentitel enthalten.",
+  "SearchTitleTip" => "Klicke hier um alle Seiten zu zeigen, die diesen Seitentitel enthalten.",
 
   "RenameText" => "Umbenennen...",
   "NewName" => "Neuer Name für diese Seite",
@@ -278,6 +277,7 @@ $wakkaResource = array(
   "SettingsWatch" => "Beobachten",
   "SettingsPrint" => "Druckversion",
   "SettingsMsword" => "MS Word Version",
+  "SettingsLatex" => "LaTeX Version",
   "BewareChangeLang" => "Verändere nicht die Spracheinstellungen, wenn du dir nicht sicher bist, was du tust. Eine Änderung der Sprache kann zur Änderung des Namens der Seite führen, in Abhängigkeit von den sprachlichen Besonderheiten der neu gewählten Sprache. Möglicherweise wird der gesamte Inhalt nicht mehr lesbar sein. Du kannst diesen Schritt rückgängig machen, indem du die Spracheinstellungen wieder auf den Ursprungswert zurückstellst.",
   "SetLang" => "Sprache dieser Seite",
 
@@ -375,6 +375,7 @@ $wakkaResource = array(
   "RecentCommentsTitleXML" => " - Letzte Kommentare",
   "RecentCommentsXML" => "Letzte Kommentare im ",
   "PageRevisionsXML" => "Historie/Revisionen von ",
+  "ExportToXML" => "Export als XML",
   "ExportClusterXML" => "Export des ganzen Clusters von ",
   "AccessDeniedXML" => "Du hast keine Berechtigung für den Zugriff auf diese Seite.",
  

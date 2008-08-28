@@ -38,6 +38,7 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 	src="<?php echo $this->GetConfigValue("root_url");?>js/autocomplete.js"></script>
 <script language="JavaScript" type="text/javascript" 
 	src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
+<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 <?php
 if ($user = $this->GetUser())
 if ($user["doubleclickedit"] == "Y") {
@@ -46,7 +47,6 @@ if ($user["doubleclickedit"] == "Y") {
                    var edit = "<?php echo $this->href("edit");?>";
   </script>
 	<?php }?>
-<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 </head>
 
 <body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
@@ -71,7 +71,7 @@ if ($user["doubleclickedit"] == "Y") {
 	type="submit" value="Ok" /></span> <?php } ?></div>
 <div class="title"><?php echo $this->config["wakka_name"] ?>: <?php echo $this->GetPagePath(); ?>
 <a class="Search"
-	title="<?php echo $this->GetResourceValue("SearchTitleHelp")?>"
+	title="<?php echo $this->GetResourceValue("SearchTitleTip")?>"
 	href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
 </div>
 

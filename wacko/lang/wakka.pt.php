@@ -210,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Árvore do cluster %1",
   "Tree:SiteTitle" => "Árvore do Site",
   "Tree:Empty" => "%1&nbsp;não tem sub-páginas",
-  "SearchTitleHelp" => "Click here to show all pages containing this page title.",
+  "SearchTitleTip" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Renomear...",
   "NewName" => "Insira um novo nome para esta página",
@@ -277,6 +277,7 @@ $wakkaResource = array(
   "SettingsWatch" => "Acompanhe",
   "SettingsPrint" => "Versão Impressora",
   "SettingsMsword" => "versão MS Word",
+  "SettingsLatex" => "versão LaTeX",
   "SettingsMassAcls" => "ACLs para todo cluster",
   "BewareChangeLang" => "Não altere de Idioma, se não sabe exactamente o que está a fazer. Alterar o Idioma provocará o renomear da página de acordo com as regras de ortografia de cada idioma. Muito conteúdo poderá tornar-se ilegível. Se isso acontecer reverta a situação voltando a escolher o idioma anterior.",
   "SetLang" => "Idioma para esta página",

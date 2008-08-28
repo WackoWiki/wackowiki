@@ -210,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Tree of cluster %1",
   "Tree:SiteTitle" => "Site tree",
   "Tree:Empty" => "%1&nbsp;has not subpages",
-  "SearchTitleHelp" => "Click here to show all pages containing this page title.",
+  "SearchTitleTip" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Rename...",
   "NewName" => "Enter new name for this page",
@@ -277,6 +277,7 @@ $wakkaResource = array(
   "SettingsWatch" => "Watch",
   "SettingsPrint" => "Print version",
   "SettingsMsword" => "MS Word version",
+  "SettingsLatex" => "LaTeX version",
   "BewareChangeLang" => "Don't change language, if you don't know exactly, what are you doing. Change of language setting will lead to renaming of the page according to transliteration rules of selected language. All non-english content will become unreadable also. You could turn those effects backward by returning language setting to its initial value.",
   "SetLang" => "Language of this page",
 

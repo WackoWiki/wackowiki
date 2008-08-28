@@ -210,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Drzewo klastra %1",
   "Tree:SiteTitle" => "Drzewo odno¶ników witryny",
   "Tree:Empty" => "%1 nie zawiera podstron",
-  "SearchTitleHelp" => "Click here to show all pages containing this page title.",
+  "SearchTitleTip" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Zmieñ nazwê strony...",
   "NewName" => "Wprowad¼ now± nazwê strony",
@@ -277,6 +277,7 @@ $wakkaResource = array(
   "SettingsWatch" => "Obserwacja",
   "SettingsPrint" => "Wersja do druku",
   "SettingsMsword" => "Wersja MS Word",
+  "SettingsLatex" => "Wersja LaTeX",
   "BewareChangeLang" => "Nie zmieniaj jêzyka, je¿eli nie wiesz dok³adnie co robisz. Zmiana ustawieñ jêzykowych prowadzi do zmian nazw stron zgodnie z regu³ami transliteracji wybranego jêzyka. Ponadto ca³a nie-angielska zawarto¶æ stanie siê nieczytelna. Mo¿esz cofn±æ te zmiany powracaj±c do pierwotnych warto¶ci ustawieñ jêzykowych.",
   "SetLang" => "Jêzyk tej strony",
 

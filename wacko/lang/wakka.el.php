@@ -210,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" =>"Tree of cluster %1",
   "Tree:SiteTitle" =>"Site tree",
   "Tree:Empty" => "%1&nbsp;has not subpages",
-  "SearchTitleHelp" => "Click here to show all pages containing this page title.",
+  "SearchTitleTip" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Μετονομασία...",
   "NewName" => "Εισήγαγε ένα νέο όνομα σε αυτή την σελίδα",
@@ -278,6 +278,7 @@ $wakkaResource = array(
   "SettingsWatch" => "Παρακολούθηση",
   "SettingsPrint" => "Προς εκτύπωση",
   "SettingsMsword" => "Έκδοση MS Word",
+  "SettingsLatex" => "Έκδοση LaTeX",
   "BewareChangeLang" => "Μην αλλάζετε την γλώσσα, εάν δεν γνωρίζεται ακριβώς, τι κάνετε. Η αλλαγή της ρύθμισης της γλώσσας θα οδηγήσει στην μετονομασία της σελίδας ανάλογα με τους κανόνες μετάφρασης της επιλεγμένης γλώσσας. Όλα τα μη-αγγλικά περιεχόμενα θα γίνουν μη-αναγνώσιμα επίσης. Μπορείτε να γυρίσετε πίσω σε αυτές τις ιδιότητες με το επιλέγοντας την ρύθμιση της γλώσσας στον αρχική τιμή.",
   "SetLang" => "Η γλώσσα αυτής της σελίδας",
 

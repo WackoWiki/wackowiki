@@ -1,81 +1,373 @@
 
-UL, OL { margin-bottom: 3px; }
-LI { margin-bottom: 2px; }
+/**
+ * File content:
+ * Includes all styles that forces the look of the page for print out
+ */
 
-img {border-width: 0px;	vertical-align: middle;	}
+ /** Basic settings **********************************************************/
 
-/* paddings headers */
-FORM, H1, H2, H3, H4, H5 {
-  margin: 0px;
-  padding: 0px;
-}
-H1 { color:#20AA40; font-family: Verdana; padding-top:25px; padding-bottom:5px }
-H2 { color:#000080; font-family: Verdana; font-size: 20px; padding-top:20px; padding-bottom:5px }
-H3 { font-family: Verdana; font-size: 17px; padding-top:15px; padding-bottom:5px }
-H4 { font-family: Arial;   font-size: 16px; padding-top:15px; padding-bottom:5px }
-H5 { font-family: Arial;   font-size: 14px; padding-top:10px; padding-bottom:5px }
-
-/* overrall design */
-.ShHeader H1 { margin:0px; padding:0px; color:#000; font-family:Arial; font-size:15px }
-.ShPage { background:#ffffff; padding:10px 10px 50px 10px;  }
-
-.ShCopyright {
-  font-size: 11px;
-  color: #AAAAAA;
-  text-align: right;
-  padding:25px 5px 5px 5px
+/* Specifies basic rules */
+body {
+	background-color:	#fff;
+	color:			#000;
+	font-family:		Verdana, "Bitstream Vera Sans", sans, sans-serif;
+	font-size:		small;
+	margin:			0 auto;
+	padding:		10px;
 }
 
-
-/* fonts */
-BODY, TD, P, LI, .ShPage { font-family: Georgia, Verdana; font-size:95% }
-TEXTAREA { font-family: MonoCondensedCTT, Lucida Console, sans; color:#222222; line-height: 1.3em; }
-
-cite {color:#888800;font-style:normal;}
-.cite {color:#ff0000;font-style:normal;}
-.mark { color: #000; border:1px solid #000; background: #ddd; }
-
-.center { text-align: center; }
-.indent { margin-left: 40px; }
-
-.toc1 { margin-left:0px; padding-left:0px; font-weight:bold; list-style-type:none;  } 
-.toc2 { margin-left:0px; padding-left:15px; list-style-type:none;  } 
-.toc3 { margin-left:0px; padding-left:30px; list-style-type:none;  } 
-.toc4 { margin-left:0px; padding-left:45px; list-style-type:none;  } 
-.toc5 { margin-left:0px; padding-left:60px; list-style-type:none;  } 
-.toc6 { margin-left:0px; padding-left:75px; list-style-type:none;  }
-
-.Toc1 A, .Toc2 A, .Toc3 A, .Toc4 A, .Toc5 A, .Toc6 A
- { text-decoration:none; color:#000 }
-
-table.usertable {
-  border: 1px none;
-  border-collapse: collapse;
+/* Specifies the look of hyperlinks */
+a {
+	color:			#000;
+	text-decoration:	none;
 }
-table.usertable tr td
-{
-  border-width: 1px;
-  border-color: black;
-  border-style: solid;
-  padding: 4px;
-  vertical-align: top;
+
+a img {
+	display: none;
 }
-table.dtable { width:100%; border: 0px none; border-collapse: collapse; }
-table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
+
+/* Hide all buttons */
+input {
+	display:		none;
+}
+
+/* Display no images in print out */
+img {
+	/*display:		none;*/
+}
+
+/* Specifies the wikiname on top */
+.header {
+	border-bottom:		solid 1px #000;
+	font-size:		1.2em;
+	font-weight:		bold;
+	margin-bottom:		30px;
+}
+
+
+
+/** Styles for the main content in the page. *********************************/
+
+/* Useless, but we include it */
+.pageBefore {
+	height:			0;
+}
+
+/* Debugging informations (not shown) */
+.time {
+	display:		none;
+}
+
+
+
+/** Often used-related (belongs to too many codes) ***************************/
+
+/* No line break */
+.nobr {
+	white-space:		nowrap;
+}
+
+/* Monospaced code */
+pre {
+	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
+}
+
+
+
+/** Simple formating-related *************************************************/
+
+/* Quotes: CODE <[text]> */
+blockquote {
+	border-bottom:		solid 1px #000;
+	border-left:		solid 3px #000;
+	border-right:		solid 1px #000;
+	border-top:		solid 1px #000;
+	color:			#000;
+	font-family:		"Bitstream Vera Serif", "Times New Roman", sans-serif;
+	padding:		3px;
+}
+
+/* Centered text: CODE %%(wacko wrapper=text wrapper_align=center)text%% */
+.center {
+	text-align:		center;
+}
+
+/* Important text: CODE !!text!! */
+.cite {
+	font-weight:		900;
+}
+
+/* Definitions: CODE (?icq i seek you?) */
+dfn {
+	font-style:		normal;
+}
+
+/* Indent text: CODE "  ", "  1.", etc. */
+.indent {
+	margin-left:		40px;
+}
+
+/* Marked text: CODE ??text?? */
+.mark {
+	font-style:		italic;
+}
+
+/* Strike through text: CODE --text-- */
+s {
+	color:			#000;
+}
+
+/* Small text: CODE ++text++ */
+small {
+	font-size:		0.85em;
+}
+
+sub {
+	font-size:		0.85em;
+	margin:			0 2px;
+}
+
+/* Footprints: CODE [[#*]] */
+sup {
+	font-size:		0.85em;
+	margin:			0 2px;
+}
+sup a,
+sup a:hover {
+	border:			0;
+}
+
+/* Fixed width text: CODE ##monospace## */
+tt {
+	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
+	font-size:		0.9em;
+	padding:		2px 5px;
+}
+
+
+/** Advanced formating and action-related ************************************/
+
+/* Hyperlinks: CODE ((HomePage)) */
+
+/* Code areas: CODE %%code%% */
+code {
+	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
+	font-size:		0.9em;
+}
 .code {
-  background: #FFFFFF;
-  border: solid #888888 2px;
-  font-family: "Courier New";
-  color: black;
-  font-size: 10pt;
-  width: 98%;
-  padding: 3px;
+	border:			dashed 1px #000;
+	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
+	font-size:		0.9em;
+	padding:		5px;
 }
-.micq1 { padding:2px; vertical-align:top; font-weight: bold; }
-.micq2 { padding:2px; vertical-align:top; font:10px tahoma, arial }
-.micq3 { padding:2px; vertical-align:top; width:100% }
 
-.nobr {white-space: nowrap}
+/* Fieldsets: CODE {{toc}}, {{backlinks}} */
+.page fieldset,
+.preview fieldset {
+	border:			none;
+}
 
-div.action           { margin:2px; background: #eeeeee }
-div.action-content   { padding:10px 10px 25px 10px; } 
+/* Inside the table of content: CODE {{toc}} */
+fieldset .toc1 {
+	margin-left:		5px;
+}
+fieldset .toc2 {
+	margin-left:		20px;
+}
+fieldset .toc3 {
+	margin-left:		35px;
+}
+fieldset .toc4 {
+	margin-left:		50px;
+}
+fieldset .toc5 {
+	margin-left:		65px;
+}
+fieldset .toc6 {
+	margin-left:		80px;
+}
+
+
+/* Horizontal rulers: CODE --- */
+hr {
+	background-color:	#000; /* Mozilla 1.4 */
+	border:			#000; /* Opera 7.11 */
+	color:			#000; /* IE 6 */
+	height:			1px;
+}
+
+/* Included pages: CODE {{include file="xyz"}} */
+.include {
+	color:			#000;
+}
+.include .name {
+	font-size:		0.85em;
+	padding:		0 10px;
+}
+.include .name a {
+	border:			0;
+}
+.include .name a:hover {
+	border:			0;
+}
+
+
+
+/** Header related ***********************************************************/
+
+/* CODE ==, ===, ====, =====, ======, ======= */
+
+h1, h2, h3, h4, h5, h6 {
+	font-family:		Verdana, "Luxi Sans", "Trebuchet MS", sans, sans-serif;
+	font-weight:		900;
+	padding:		0;
+}
+h1 {
+	font-size:		1.6em;
+	margin-bottom:		0.4em;
+	margin-top:		0.3em;
+	padding-bottom:		0.2em;
+}
+h2 {
+	font-size:		1.45em;
+	margin-bottom:		0.4em;
+	margin-top:		1.1em;
+	padding:		2px 0px;
+}
+h3 {
+	font-size:		1.3em;
+	margin-bottom:		0.4em;
+	margin-top:		0.8em;
+}
+h4 {
+	font-size:		1.2em;
+	margin-bottom:		0.3em
+}
+h5 {
+	font-size:		1.1em;
+}
+h6 {
+	font-size:		1.0em;
+}
+
+
+
+/** Table-related ************************************************************/
+
+/* 100%-width tables: CODE #| || Here | there || |# */
+.dtable {
+	border-collapse:	collapse;
+	width:			100%;
+}
+.dtable tr td {
+	padding:		5px;
+}
+
+/* Bordered tables: CODE #|| || Here | there || ||# */
+.usertable {
+	border-collapse:	collapse;
+}
+.usertable tr td {
+	border:			solid 1px #000;
+	padding:		5px;
+}
+.usercell {	
+	vertical-align:	top;
+}
+
+
+/** List-related *************************************************************/
+
+/* CODE "  *", "  1.", etc. */
+/* List possibilites */
+ol, ul {
+	margin-bottom:		0;
+	margin-top:		0;
+	padding-bottom:		0;
+	padding-top:		0;
+}
+
+
+
+/** Wrapper-related **********************************************************/
+
+/* CODE %%(wrapper xyz)%% */
+
+div .action {
+	border:			1px dotted #000;
+	margin:			5px;
+	/*-moz-border-radius:	5px;		/* Mozilla, Firefox only */
+}
+div .action-content {
+	padding:		7px;
+}
+
+
+
+/** Text highlighter-related *************************************************/
+
+/* CODE %%(hl xyz)%% */
+
+.hl-main {
+}
+.hl-gutter {
+	padding-right:		10px; 
+}
+.hl-table {
+	border:			dashed 1px #000;
+}
+
+
+
+/** Email-related ************************************************************/
+
+/* Quoted message on new email */
+.email1, .email2 {
+	padding-left:		5px;
+}
+/* ????? Currently unknown ????? */
+.email-odd, .email-even {
+}
+
+
+
+/** Chat-related *************************************************************/
+
+/* CODE %%(micq)%%, %%(icq_l)%%, %%(icq_m)%% */
+
+.micq1, .micq2, .micq3 {
+	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
+	font-size:		0.85em;
+}
+/* Username */
+.micq1 {
+	font-weight:		900;
+}
+/* Time, Date */
+.micq2 {
+	font-size:		0.8em;
+}
+/* Message */
+.micq3 {
+	width:			100%;
+}
+
+
+
+/* Revisions-related *********************************************************/
+
+/* Displays text: "This is an old revision of..." */
+.revisioninfo {
+	border:			dashed 1px #000;
+	margin:			25px 0;
+	padding:		3px;
+	width:			auto;
+}
+
+/* Simple differences */
+.additions,
+.deletions {
+	border:			dashed 1px #000;
+	padding:		5px;
+}
+

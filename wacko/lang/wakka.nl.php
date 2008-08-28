@@ -210,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Verwijzingenboom van cluster %1",
   "Tree:SiteTitle" => "Boom van alle pagina's",
   "Tree:Empty" => "%1&nbsp;heeft geen subpagina's",
-  "SearchTitleHelp" => "Click here to show all pages containing this page title.",
+  "SearchTitleTip" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Hernoem...",
   "NewName" => "Geef een nieuwe naam voor deze pagina",
@@ -278,6 +278,7 @@ $wakkaResource = array(
   "SettingsWatch" => "Houd in de gaten",
   "SettingsPrint" => "Print-versie",
   "SettingsMsword" => "MS Word-versie",
+  "SettingsLatex" => "LaTeX-versie",
   "BewareChangeLang" => "Verander de taal van de pagina niet, tenzij u precies weet wat u aan het doen bent. Het hernoemen van deze pagina leidt ertoe dat links in de oorspronkelijke taal ongeldig worden. U kunt dit terugdraaien door de pagina in te stellen op de oorspronkelijke taal.",
   "SetLang" => "Taal van deze pagina",
 
