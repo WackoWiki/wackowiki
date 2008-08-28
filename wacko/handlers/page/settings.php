@@ -78,6 +78,9 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
     <li><a href="<?php echo $this->href("watch");?>"><?php echo $this->GetResourceValue("SettingsWatch"); ?></a></li>
     <li><a href="<?php echo $this->href("print");?>"><?php echo $this->GetResourceValue("SettingsPrint"); ?></a></li>
     <li><a href="<?php echo $this->href("msword");?>"><?php echo $this->GetResourceValue("SettingsMsword"); ?></a></li>
+	<li><a href="<?php echo $this->href("latex");?>"><?php echo $this->GetResourceValue("SettingsLatex"); ?></a></li>
+	<li><a href="<?php echo $this->href("export.xml");?>"><?php echo $this->GetResourceValue("ExportToXML"); ?></a></li>
+  </ul>
   </ul>
   <?php
 }
