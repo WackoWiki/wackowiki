@@ -12,7 +12,7 @@ if ($this->HasAccess("read"))
 		// comment header?
 		if ($this->page["comment_on"])
 		{
-			print("<div class=\"commentinfo\">This is a comment on ".$this->ComposeLinkToPage($this->page["comment_on"], "", "", 0).", posted by ".$this->Format($this->page["user"])." at ".$this->page["time"]."</div>");
+			print("<div class=\"commentinfo\">".$this->GetResourceValue("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->page["comment_on"], "", "", 0).", ".$this->GetResourceValue("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetResourceValue("At")." ".$this->page["time"]."</div>");
 		}
 
 		if ($this->page["latest"] == "N")
@@ -26,7 +26,6 @@ if ($this->HasAccess("read"))
 
 		// display page
 		$this->context[++$this->current_context] = $this->tag;
-
 		$text = preg_replace("/{{(tableofcontents|toc).*?}}/i", "", $this->page["body"]);
 		$data = $this->Format($text, "wakka");
 
