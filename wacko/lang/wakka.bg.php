@@ -210,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Дърво на СЕКТОР %1",
   "Tree:SiteTitle" => "Дърво на сайта",
   "Tree:Empty" => "%1&nbsp;няма подстраници",
-  "SearchTitleHelp" => "Click here to show all pages containing this page title.",
+  "SearchTitleTip" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Преименувай...",
   "NewName" => "Въведете ново име за тази страница",
@@ -277,6 +277,7 @@ $wakkaResource = array(
   "SettingsWatch" => "Наблюдение",
   "SettingsPrint" => "Версия за печат",
   "SettingsMsword" => "Версия за MS Word",
+  "SettingsLatex" => "Версия за LaTeX",
   "BewareChangeLang" => "Не променяйте езика. След подобна промяна е възможно да не разберете как да върнете нещата обратно.",
   "SetLang" => "Език на тази страница",
 

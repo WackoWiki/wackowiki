@@ -210,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Arbol de grupo %1",
   "Tree:SiteTitle" => "Arbol de web",
   "Tree:Empty" => "%1&nbsp;no tiene sub-páginas",
-  "SearchTitleHelp" => "Presione aquí para mostrar todas páginas que contienen este título de página.",
+  "SearchTitleTip" => "Presione aquí para mostrar todas páginas que contienen este título de página.",
 
   "RenameText" => "Cambiar nombre...",
   "NewName" => "Nuevo nombre de esta página",
@@ -277,6 +277,7 @@ $wakkaResource = array(
   "SettingsWatch" => "Vigilar",
   "SettingsPrint" => "Versión para impresora",
   "SettingsMsword" => "Versión MS Word",
+  "SettingsLatex" => "Versión LaTeX",
   "BewareChangeLang" => "No cambies el idioma, si no sabes exactamente lo que haces. El ajuste de cambio de idioma presupone cambiar el nombre de la página en acuerdo con las reglas de transliteración del idioma seleccionado. Todo contenido no-español será ilegible. Podrá anular esos efectos volviendo a ajustar el idioma original.",
   "SetLang" => "Idioma de esta página",
 

@@ -211,7 +211,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" => "Дерево кластера %1",
   "Tree:SiteTitle" => "Structura saitului",
   "Tree:Empty" => "%1&nbsp;не содержит подстраниц.",
-  "SearchTitleHelp" => "Click here to show all pages containing this page title.",
+  "SearchTitleTip" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Redenumeste...",
   "NewName" => "Introduceti nume nou pentru pagina data",
@@ -279,6 +279,7 @@ $wakkaResource = array(
   "SettingsWatch" => "Наблюдать",
   "SettingsPrint" => "Versiune pentru печати",
   "SettingsMsword" => "Versiune pentru MS Word",
+  "SettingsLatex" => "Versiune pentru LaTeX",
 
 // upload
   "UploadFor" => "Incarcarea fishierului",

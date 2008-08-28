@@ -31,7 +31,7 @@ echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
-// Three JS files.
+// JS files.
 // default.js contains common procedures and should be included everywhere
 // protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
 ?>
@@ -40,6 +40,7 @@ echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
    <script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/wikiedit2.js"></script>
    <script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/autocomplete.js"></script>
    <script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
+   <script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
    <script language="JavaScript" type="text/javascript">
 <?php
 // Doubleclick edit feature.
@@ -49,7 +50,6 @@ if ($user = $this->GetUser())
          var edit = "<?php echo $this->href("edit");?>";
 <?php }?>
 	</script>
-	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 </head>
 <?php
 // all_init() initializes all js features:
@@ -64,7 +64,7 @@ if ($user = $this->GetUser())
 echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
       <input type="hidden" name="action" value="login" />
       <div class="header">
-         <h1><span class="main"><?php echo $this->config["wakka_name"] ?>: </span><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("SearchTitleHelp")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></h1>
+         <h1><span class="main"><?php echo $this->config["wakka_name"] ?>: </span><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></h1>
 <?php
 // Outputs Bookmarks AKA QuickLinks
 // Main page

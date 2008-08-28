@@ -16,8 +16,9 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url"); ?>css/page.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url"); ?>css/wakka.css" media="screen" />
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->GetConfigValue("theme_url"); ?>icons/icon.gif" />
-	<link rel="alternate" type="application/rss+xml" title="RecentChanges in RSS" href="<?php echo $this->GetConfigValue("root_url"); ?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name"))); ?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="History/revisions of <?php echo $this->tag; ?> in RSS" href="<?php echo $this->href("revisions.xml");?>" /> 
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 	<?php if($this->GetMethod() != 'show' || $this->page["latest"] == "N") { ?><meta name="robots" content="noindex, nofollow" /><?php } ?>
 	<title><?php echo $this->GetWakkaName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?></title>
 	<!-- JavaScript used by WackoWiki -->
@@ -26,6 +27,7 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
   	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/wikiedit2.js"></script>
   	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/autocomplete.js"></script>
   	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
+	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 	<?php if($user = $this->GetUser()) if($user["doubleclickedit"] == "Y") { ?>
 	<!-- Edit by doubleclick for logged in users -->
 	<script language="JavaScript" type="text/javascript">
@@ -45,7 +47,7 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
 			<b><?php echo $this->config["wakka_name"]; ?>:</b>
 			<?php echo $this->GetPagePath(); ?>
-			<a title="<?php echo $this->GetResourceValue("SearchTitleHelp"); ?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a> 
+			<a title="<?php echo $this->GetResourceValue("SearchTitleTip"); ?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a> 
 		</div>
 		<div id="quicklinks">
 			<div class="bookmarks">

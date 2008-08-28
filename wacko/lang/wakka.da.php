@@ -210,7 +210,7 @@ $wakkaResource = array(
   "Tree:ClusterTitle" =>"Træ for området %1",
   "Tree:SiteTitle" =>"Træ for ",
   "Tree:Empty" => "%1&nbsp;har ingen undersider",
-  "SearchTitleHelp" => "Click here to show all pages containing this page title.",
+  "SearchTitleTip" => "Click here to show all pages containing this page title.",
 
   "RenameText" => "Omdøb...",
   "NewName" => "Skriv nyt navn for siden",
@@ -277,6 +277,7 @@ $wakkaResource = array(
   "SettingsWatch" => "Overvåg",
   "SettingsPrint" => "Printversion",
   "SettingsMsword" => "Teknsbehandlingsversion",
+  "SettingsLatex" => "LaTeX version",
   "BewareChangeLang" => "Vær opmærksom på at ændring af sidens sprog vil ændre sprogformatet og eventuelt kan betyde at eksisterende tekst bliver noget rod.",
   "SetLang" => "Sidens sprog",
 

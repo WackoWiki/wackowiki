@@ -30,8 +30,9 @@ Commented by Roman Ivanov.
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/wakka.css" />
 <link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/wacko.ico" type="image/x-icon" />
-<link rel="alternate" type="application/rss+xml" title="Letzte Änderungen als RSS" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="Letzte Änderung von <?php echo $this->tag; ?> als RSS" href="<?php echo $this->href("revisions.xml");?>" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php 
 // Three JS files.
 // default.js contains common procedures and should be included everywhere
@@ -42,6 +43,7 @@ Commented by Roman Ivanov.
 <script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/wikiedit2.js"></script>
 <script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url"); ?>js/autocomplete.js"></script>
 <script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
+<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 <?php 
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off.
@@ -100,7 +102,7 @@ echo $this->FormClose();
   <tr bgcolor="#85a43c">
     <td height="20" colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td><div class="navText"><strong><?php echo $this->ComposeLinkToPage($this->config["root_page"]);?>:</strong> <?php echo $this->GetPagePath(); ?> <a title="<?php echo $this->GetResourceValue("SearchTitleHelp")?>" 
+          <td><div class="navText"><strong><?php echo $this->ComposeLinkToPage($this->config["root_page"]);?>:</strong> <?php echo $this->GetPagePath(); ?> <a title="<?php echo $this->GetResourceValue("SearchTitleTip")?>" 
      href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></div></td>
           <td align="right"><?php 
 // If user are logged, Wacko shows "You are UserName" 
