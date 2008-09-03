@@ -20,5 +20,5 @@ InsertPage('Password', '{{ChangePassword}}', $lng);
 InsertPage('TextSearch', '{{Search}}', $lng);
 InsertPage('Login', '{{Login}}', $lng);
 InsertPage('InterWiki', '{{InterWikiList}}', $lng);
-InsertPage('Settings', '{{UserSettings}}', $lng);
+InsertPage('Настройки', '{{UserSettings}}', $lng);
 ?>
