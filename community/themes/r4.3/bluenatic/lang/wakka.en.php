@@ -4,4 +4,3 @@ $themeResource = array(
 "LoginPage" => "Login",
 );
 ?>
-

@@ -5,4 +5,3 @@ $themeResource = array(
 "SettingsPage" => "Préférences",
 );
 ?>
-
