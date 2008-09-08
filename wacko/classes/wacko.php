@@ -941,8 +941,8 @@ class Wacko
    function GetCookie($name) { return $_COOKIE[$this->config["cookie_prefix"].$name]; }
 
    // HTTP/REQUEST/LINK RELATED
-   function SetMessage($message) { $_SESSION["message"] = $message; }
-   function GetMessage() { $message = $_SESSION["message"]; $_SESSION["message"] = ""; return $message; }
+   function SetMessage($message) { $_SESSION[$this->config["wakka_name"] .'_'."message"] = $message; }
+   function GetMessage() { $message = $_SESSION[$this->config["wakka_name"] .'_'."message"]; $_SESSION[$this->config["wakka_name"] .'_'."message"] = ""; return $message; }
    function Redirect($url) { header("Location: $url"); exit; }
 
    function UnwrapLink( $tag )
@@ -1001,7 +1001,7 @@ class Wacko
    {
       if (!$text) $text = $this->AddSpaces($tag);
       //$text = htmlentities($text);
-      if ($_SESSION["linktracking"] && $track)
+      if ($_SESSION[$this->config["wakka_name"] .'_'."linktracking"] && $track)
       $this->TrackLinkTo($tag);
       return '<a href="'.$this->href($method, $tag).'">'.$text.'</a>';
    }
@@ -1012,7 +1012,7 @@ class Wacko
 
       if (preg_match("/^[\!\.".$this->language["ALPHANUM_P"]."]+$/", $tag))
       {// it's a Wiki link!
-         if ($_SESSION["linktracking"] && $track) $this->TrackLinkTo($this->UnwrapLink( $tag ));
+         if ($_SESSION[$this->config["wakka_name"] .'_'."linktracking"] && $track) $this->TrackLinkTo($this->UnwrapLink( $tag ));
       }
       return "\xA2\xA2".$tag." ==".($this->format_safe?str_replace(">", "&gt;", str_replace("<", "&lt;", $text)):$text)."\xAF\xAF";
    }
@@ -1291,7 +1291,7 @@ class Wacko
          $pagepath = substr($untag,0, strlen($untag) - strlen($page0));
          $anchor = isset( $matches[2] ) ? $matches[2] : '';
          $tag = $unwtag;
-         if ($_SESSION["linktracking"] && $track) $this->TrackLinkTo($tag);
+         if ($_SESSION[$this->config["wakka_name"] .'_'."linktracking"] && $track) $this->TrackLinkTo($tag);
 
          if (!isset( $this->first_inclusion[ $supertag ] )) $aname = "name=\"".$supertag."\"";
          $this->first_inclusion[ $supertag ] = 1;
@@ -1463,8 +1463,8 @@ class Wacko
    function TrackLinkTo($tag) { $this->linktable[] = $tag; }
    function GetLinkTable() { return $this->linktable; }
    function ClearLinkTable() { $this->linktable = array(); }
-   function StartLinkTracking() { $_SESSION["linktracking"] = 1; }
-   function StopLinkTracking() { $_SESSION["linktracking"] = 0; }
+   function StartLinkTracking() { $_SESSION[$this->config["wakka_name"] .'_'."linktracking"] = 1; }
+   function StopLinkTracking() { $_SESSION[$this->config["wakka_name"] .'_'."linktracking"] = 0; }
 
    function WriteLinkTable()
    {
@@ -1680,15 +1680,15 @@ class Wacko
    function _gethostbyaddr($ip) {if ($this->GetConfigValue("allow_gethostbyaddr")) return gethostbyaddr($ip); else return false;}
    function GetUser()
    {
-      if (isset( $_SESSION[$this->config["cookie_prefix"]."user"] ))
-      return $_SESSION[$this->config["cookie_prefix"]."user"];
+      if (isset( $_SESSION[$this->config["wakka_name"] .'_'.$this->config["cookie_prefix"]."user"] ))
+      return $_SESSION[$this->config["wakka_name"] .'_'.$this->config["cookie_prefix"]."user"];
       else
       return null;
    }
 
    function SetUser($user, $setcookie=1)
    {
-      $_SESSION[$this->config["cookie_prefix"]."user"] = $user;
+      $_SESSION[$this->config["wakka_name"] .'_'.$this->config["cookie_prefix"]."user"] = $user;
       if ($setcookie) $this->SetPersistentCookie("name", $user["name"], 1);
    }
 
@@ -1698,7 +1698,7 @@ class Wacko
       $this->SetPersistentCookie("password", $user["password"]);
    }
 
-   function LogoutUser() { $_SESSION[$this->config["cookie_prefix"]."user"] = ""; $this->DeleteCookie("name"); $this->DeleteCookie("password"); }
+   function LogoutUser() { $_SESSION[$this->config["wakka_name"] .'_'.$this->config["cookie_prefix"]."user"] = ""; $this->DeleteCookie("name"); $this->DeleteCookie("password"); }
    function UserWantsComments() { if (!$user = $this->GetUser()) return false; return ($user["show_comments"] == "Y"); }
    function UserWantsFiles()    { if (!$user = $this->GetUser()) return false; return ($user["options"]["show_files"] == "Y"); }
 
@@ -2189,9 +2189,9 @@ class Wacko
          $bmlinks = $this->GetLinkTable();
          $bookmarks = explode("\n", $bookmarks);
          for ($i=0;$i<count($bmlinks);$i++) $bmlinks[$i] = $this->NpjTranslit($bmlinks[$i]);
-         $_SESSION["bookmarks"] = $bookmarks;
-         $_SESSION["bookmarklinks"] = $bmlinks;
-         $_SESSION["bookmarksfmt"] = $this->Format(implode(" | ", $bookmarks), "wacko");
+         $_SESSION[$this->config["wakka_name"] .'_'."bookmarks"] = $bookmarks;
+         $_SESSION[$this->config["wakka_name"] .'_'."bookmarklinks"] = $bmlinks;
+         $_SESSION[$this->config["wakka_name"] .'_'."bookmarksfmt"] = $this->Format(implode(" | ", $bookmarks), "wacko");
       }
 
       if (!empty( $_REQUEST["addbookmark"] ) && $user)
@@ -2207,12 +2207,12 @@ class Wacko
 
             $this->SetUser($this->LoadUser($user["name"]));
          }
-         $_SESSION["bookmarks"] = $bookmarks;
-         //$_SESSION["bookmarksfmt"] = $this->Format($this->Format(implode(" | ", $bookmarks), "wacko"), "post_wacko");
-         $_SESSION["bookmarksfmt"] = $this->Format(implode(" | ", $bookmarks), "wacko");
+         $_SESSION[$this->config["wakka_name"] .'_'."bookmarks"] = $bookmarks;
+         //$_SESSION[$this->config["wakka_name"] .'_'."bookmarksfmt"] = $this->Format($this->Format(implode(" | ", $bookmarks), "wacko"), "post_wacko");
+         $_SESSION[$this->config["wakka_name"] .'_'."bookmarksfmt"] = $this->Format(implode(" | ", $bookmarks), "wacko");
          $bmlinks = $bookmarks;
          for ($i=0;$i<count($bmlinks);$i++) $bmlinks[$i] = trim($this->NpjTranslit($bmlinks[$i]),"()");
-         $_SESSION["bookmarklinks"] = $bmlinks;
+         $_SESSION[$this->config["wakka_name"] .'_'."bookmarklinks"] = $bmlinks;
       }
 
       if (!empty( $_REQUEST["removebookmark"] ) && $user)
@@ -2233,18 +2233,18 @@ class Wacko
           "WHERE name = '".quote($this->dblink, $user["name"])."' LIMIT 1");
 
          $this->SetUser($this->LoadUser($user["name"]));
-         $_SESSION["bookmarks"] = $bookmarks;
-         //    $_SESSION["bookmarksfmt"] = $this->Format($this->Format(implode(" | ", $bookmarks), "wacko"), "post_wacko");
-         $_SESSION["bookmarksfmt"] = $this->Format(implode(" | ", $bookmarks), "wacko");
+         $_SESSION[$this->config["wakka_name"] .'_'."bookmarks"] = $bookmarks;
+         //    $_SESSION[$this->config["wakka_name"] .'_'."bookmarksfmt"] = $this->Format($this->Format(implode(" | ", $bookmarks), "wacko"), "post_wacko");
+         $_SESSION[$this->config["wakka_name"] .'_'."bookmarksfmt"] = $this->Format(implode(" | ", $bookmarks), "wacko");
          $bmlinks = $bookmarks;
          for ($i=0;$i<count($bmlinks);$i++) $bmlinks[$i] = trim($this->NpjTranslit($bmlinks[$i]),"()");
-         $_SESSION["bookmarklinks"] = $bmlinks;
+         $_SESSION[$this->config["wakka_name"] .'_'."bookmarklinks"] = $bmlinks;
       }
    }
 
-   function GetBookmarks()  { return $_SESSION["bookmarks"]; }
-   function GetBookmarksFormatted() { return $_SESSION["bookmarksfmt"]; }
-   function GetBookmarkLinks()  { return $_SESSION["bookmarklinks"]; }
+   function GetBookmarks()  { return $_SESSION[$this->config["wakka_name"] .'_'."bookmarks"]; }
+   function GetBookmarksFormatted() { return $_SESSION[$this->config["wakka_name"] .'_'."bookmarksfmt"]; }
+   function GetBookmarkLinks()  { return $_SESSION[$this->config["wakka_name"] .'_'."bookmarklinks"]; }
 
    // THE BIG EVIL NASTY ONE!
    function Run($tag, $method = "")

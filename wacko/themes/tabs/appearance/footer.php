@@ -1,67 +1,67 @@
 <div class="Footer"><img
-	src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
-	width="5" height="1" alt="" align="left" border="0" /><img
-	src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
-	width="5" height="1" alt="" align="right" border="0" /> <?php $this->EchoTab( $this->href("show"),  $this->GetResourceValue("ShowTip"),
-	$this->HasAccess("read") ? $this->GetResourceValue("ShowText") : "",
-	$this->method != "show"
-	) ?> <?php $this->EchoTab( $this->href("edit"),  $this->GetResourceValue("EditTip"),
-	$this->HasAccess("write") ? $this->GetResourceValue("EditText") : "",
-	$this->method != "edit"
-	) ?> <?php $this->EchoTab( $this->href("revisions"),  $this->GetResourceValue("RevisionTip"),
-	$this->GetPageTime() ? $this->GetPageTime() : "",
-	$this->method != "revisions"
-	) ?> <?php
-	// if this page exists
-	if ($this->page)
-	{
-		if($this->HasAccess("write"))
-		{
-			$this->EchoTab( $this->href("settings"),  $this->GetResourceValue("SettingsTip"),
-			$this->GetResourceValue("SettingsText"),
-			$this->method != "settings"
-			);
-		}
+   src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
+   width="5" height="1" alt="" align="left" border="0" /><img
+   src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
+   width="5" height="1" alt="" align="right" border="0" /> <?php $this->EchoTab( $this->href("show"),  $this->GetResourceValue("ShowTip"),
+   $this->HasAccess("read") ? $this->GetResourceValue("ShowText") : "",
+   $this->method != "show"
+   ) ?> <?php $this->EchoTab( $this->href("edit"),  $this->GetResourceValue("EditTip"),
+   $this->HasAccess("write") ? $this->GetResourceValue("EditText") : "",
+   $this->method != "edit"
+   ) ?> <?php $this->EchoTab( $this->href("revisions"),  $this->GetResourceValue("RevisionTip"),
+   $this->GetPageTime() ? $this->GetPageTime() : "",
+   $this->method != "revisions"
+   ) ?> <?php
+   // if this page exists
+   if ($this->page)
+   {
+      if($this->HasAccess("write"))
+      {
+         $this->EchoTab( $this->href("settings"),  $this->GetResourceValue("SettingsTip"),
+         $this->GetResourceValue("SettingsText"),
+         $this->method != "settings"
+         );
+      }
 
-		// if owner is current user
-		if ($this->UserIsOwner())
-		{
-			$this->EchoTab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->GetResourceValue("EditACLConfirm")."\");":""),
-			$this->GetResourceValue("EditACLText"),
-			$this->method != "acls"
-			);
-		}
-		if ($this->IsAdmin() || (!$this->GetConfigValue("remove_onlyadmins") && $this->UserIsOwner()))
-		{
-			$this->EchoTab( $this->href("remove"),  $this->GetResourceValue("DeleteTip")."",
+      // if owner is current user
+      if ($this->UserIsOwner())
+      {
+         $this->EchoTab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->GetResourceValue("EditACLConfirm")."\");":""),
+         $this->GetResourceValue("EditACLText"),
+         $this->method != "acls"
+         );
+      }
+      if ($this->IsAdmin() || (!$this->GetConfigValue("remove_onlyadmins") && $this->UserIsOwner()))
+      {
+         $this->EchoTab( $this->href("remove"),  $this->GetResourceValue("DeleteTip")."",
                         '<img src="'.$this->GetConfigValue("theme_url").'icons/del'.($this->method != "remove"?"":"_").'.gif" width="14" height="15" alt="" />'.$this->GetResourceValue("DeleteText"),
-			$this->method != "remove",
+         $this->method != "remove",
                         "2a"
                         );
-		}
-	}
-	?> <?php
-	if ($this->GetUser())
-	{
-		$this->EchoTab( $this->href("referrers"),  $this->GetResourceValue("ReferrersTip"),
-		$this->GetResourceValue("ReferrersText"),
-		$this->method != "referrers",
+      }
+   }
+   ?> <?php
+   if ($this->GetUser())
+   {
+      $this->EchoTab( $this->href("referrers"),  $this->GetResourceValue("ReferrersTip"),
+      $this->GetResourceValue("ReferrersText"),
+      $this->method != "referrers",
          "2"
          );
-	}	?>
+   }  ?>
 <div class="TabSpace">
 <div class="TabText" style="padding-left: 10px"><?php
 // if this page exists
 if ($this->page)
 {
-	// if owner is current user
-	if ($this->UserIsOwner())
-	print($this->GetResourceValue("YouAreOwner"));
-	else
-	if ($owner = $this->GetPageOwner())
-	print($this->GetResourceValue("Owner").$this->Link($owner));
-	else if (!$this->page["comment_on"])
-	print($this->GetResourceValue("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetResourceValue("TakeOwnership")."</a>)" : ""));
+   // if owner is current user
+   if ($this->UserIsOwner())
+   print($this->GetResourceValue("YouAreOwner"));
+   else
+   if ($owner = $this->GetPageOwner())
+   print($this->GetResourceValue("Owner").$this->Link($owner));
+   else if (!$this->page["comment_on"])
+   print($this->GetResourceValue("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetResourceValue("TakeOwnership")."</a>)" : ""));
 }
 ?></div>
 </div>
@@ -70,34 +70,34 @@ if ($this->page)
 <!-- !! -->
 <?php
 if ($this->method == "show") {
-	?>
-	<?php
-	if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1 && ($this->GetConfigValue("hide_files") != 2 || $this->GetUser()))
-	{
-		// store files display in session
-		$tag = $this->GetPageTag();
-		if (!isset($_SESSION["show_files"][$tag]))
-		$_SESSION["show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
+   ?>
+   <?php
+   if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1 && ($this->GetConfigValue("hide_files") != 2 || $this->GetUser()))
+   {
+      // store files display in session
+      $tag = $this->GetPageTag();
+      if (!isset($_SESSION[$this->config["wakka_name"] .'_'."show_files"][$tag]))
+      $_SESSION[$this->config["wakka_name"] .'_'."show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
 
-		switch($_REQUEST["show_files"])
-		{
-			case "0":
-				$_SESSION["show_files"][$tag] = 0;
-				break;
-			case "1":
-				$_SESSION["show_files"][$tag] = 1;
-				break;
-		}
+      switch($_REQUEST["show_files"])
+      {
+         case "0":
+            $_SESSION[$this->config["wakka_name"] .'_'."show_files"][$tag] = 0;
+            break;
+         case "1":
+            $_SESSION[$this->config["wakka_name"] .'_'."show_files"][$tag] = 1;
+            break;
+      }
 
-		// display files!
-		if ($this->page && $_SESSION["show_files"][$tag])
-		{
-			// display files header
-			?>
+      // display files!
+      if ($this->page && $_SESSION[$this->config["wakka_name"] .'_'."show_files"][$tag])
+      {
+         // display files header
+         ?>
 <a name="files"></a>
 <div class="filesheader"><?php echo $this->GetResourceValue("Files_all") ?>
 [<a
-	href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?></a>]
+   href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?></a>]
     </div>
     <?php
 
@@ -162,21 +162,21 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
 
   // store comments display in session
   $tag = $this->GetPageTag();
-  if (!isset($_SESSION["show_comments"][$tag]))
-    $_SESSION["show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
+  if (!isset($_SESSION[$this->config["wakka_name"] .'_'."show_comments"][$tag]))
+    $_SESSION[$this->config["wakka_name"] .'_'."show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
 
   switch($_REQUEST["show_comments"])
   {
   case "0":
-    $_SESSION["show_comments"][$tag] = 0;
+    $_SESSION[$this->config["wakka_name"] .'_'."show_comments"][$tag] = 0;
     break;
   case "1":
-    $_SESSION["show_comments"][$tag] = 1;
+    $_SESSION[$this->config["wakka_name"] .'_'."show_comments"][$tag] = 1;
     break;
   }
 
   // display comments!
-  if ($this->page && $_SESSION["show_comments"][$tag])
+  if ($this->page && $_SESSION[$this->config["wakka_name"] .'_'."show_comments"][$tag])
   {
     // display comments header
     ?>
@@ -251,9 +251,9 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
 <!-- !!! -->
 
 <div class="Copyright">
-  <?php 
+  <?php
 if ($this->GetUser()){
-echo $this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion())." :: Redesign by Mendokusee"; 
+echo $this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion())." :: Redesign by Mendokusee";
 }
 ?>
 </div>
