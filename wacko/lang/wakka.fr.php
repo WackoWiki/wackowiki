@@ -83,7 +83,7 @@ $wakkaResource = array(
   "ACLCancelButton" => "Annuler",
   "ACLAccessDenied" => "<em>Vous n&rsquo;êtes pas le propriétaire de cette page.</em>",
 
-  "MetaUpdated" => "Meta data modifiés",
+  "MetaUpdated" => "Meta données modifiées",
   "MetaStoreButton" => "Enregistrer",
   "MetaCancelButton" => "Annuler",
 
@@ -364,9 +364,9 @@ $wakkaResource = array(
   "CacheCleared" => "Le cache a été vidé.",
 
 // Feed
-  "FeedTitle" => "Feed Title",
-  "FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
-  "FeedError" => "Could not load or parse feed",
+  "FeedTitle" => "Titre du flux",
+  "FeedNoURL" => "Merci de spécifier un flux avec l&rsquo;url en paramètre (i.e. {{flux url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
+  "FeedError" => "Impossible de charger ou d&rsquo;analyser le flux",
 
 // XML / RSS autodiscovery
   "RecentChangesTitleXML" => " - Changements récents",
