@@ -54,6 +54,7 @@ $wakkaDefaultConfig = array(
 
   "table_prefix" => "wacko_",
   "cookie_prefix" => "wacko_",
+  "session_prefix" => "wacko43_",
 
   "root_page" => "HomePage",
   "wakka_name" => "MyWackoSite",

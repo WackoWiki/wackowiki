@@ -1,7 +1,7 @@
 <?php
 $vars[0] = $this->UnwrapLink($vars[0]);
 
-if ($_SESSION[$this->config["wakka_name"] .'_'."linktracking"] && $track)
+if ($_SESSION[$this->config["session_prefix"].'_'."linktracking"] && $track)
 $this->TrackLinkTo($vars[0]);
 
 if (in_array($vars[0],$this->context)) return;
