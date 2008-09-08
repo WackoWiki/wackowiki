@@ -48,7 +48,7 @@ else if ($_REQUEST["action"] == "login")
                      //anonymous user, check the captcha
                      if(!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
                         {
-                           if($_SESSION['hash_func'](strtolower($_POST['word']))==$_SESSION['freecap_word_hash'])
+                           if($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
                               {
                                  // reset freecap session vars
                                  // cannot stress enough how important it is to do this
