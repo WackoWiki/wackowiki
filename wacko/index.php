@@ -56,6 +56,8 @@ $wakkaDefaultConfig = array(
   "cookie_prefix" => "wacko_",
   "session_prefix" => "wacko43_",
 
+  "xml_sitemap" => 0,
+
   "root_page" => "HomePage",
   "wakka_name" => "MyWackoSite",
   "base_url" => ($_SERVER['SERVER_PORT'] == 443 ? 'https' : 'http').'://'.$_SERVER["SERVER_NAME"].

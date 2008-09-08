@@ -915,7 +915,11 @@ class Wacko
 
       $this->WriteRecentChangesXML();
       $this->WriteRecentCommentsXML();
-      $this->WriteSiteMapXML();
+
+      if($this->config["xml_sitemap"])
+         {
+            $this->WriteSiteMapXML();
+         }
 
       return $body_r;
    }
