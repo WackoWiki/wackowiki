@@ -660,12 +660,12 @@ class Wacko
    function LoadWantedPages($for="")
    {
       $pref = $this->config["table_prefix"];
-      $sql = "SELECT DISTINCT ".$pref."links.to_tag AS tag,count(".$pref."links.from_tag) AS count ".
+      $sql = "SELECT DISTINCT ".$pref."links.to_tag AS wanted_tag,count(".$pref."links.from_tag) AS count ".
     "FROM ".$pref."links LEFT JOIN ".$pref."pages ON ".
     "((".$pref."links.to_tag = ".$pref."pages.tag AND ".$pref."links.to_supertag='') ".
     " OR ".$pref."links.to_supertag=".$pref."pages.supertag) ".
     "WHERE ".($for?$pref."links.to_tag LIKE '".quote($this->dblink, $for)."/%' AND ":"").
-      $pref."pages.tag is NULL GROUP BY tag ORDER BY count DESC, tag asc LIMIT 200";
+      $pref."pages.tag is NULL GROUP BY wanted_tag ORDER BY count DESC, tag asc LIMIT 200";
       return $this->LoadAll($sql);
    }
 
