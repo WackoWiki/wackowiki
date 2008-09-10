@@ -26,4 +26,4 @@ in the setup/ subdirectory. They're used by the web-based installer/updater, but
 should really just access the Wacko directory itself, and it will (or at least should)
 work perfectly.
 
-Detailed instructions are available at <http://www.wackowiki.org/Installation>.
+Detailed instructions are available at <http://www.wackowiki.org/Doc/English/Installation>.

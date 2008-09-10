@@ -6,7 +6,7 @@
   $this->config["footer_files"] = 0;
 // ============================
 $themeResource = array(
-  "EditIcon" => "<img src=\"".$this->GetConfigValue("theme_url")."icons/edit.gif\" align=\"absmiddle\" hspace=\"2\" alt=\"Edit included page\" border=\"0\" />",
+  "EditIcon" => "<img src=\"".$this->GetConfigValue("theme_url")."icons/edit.gif\" alt=\"Edit included page\" border=\"0\" />",
   "" => "",
 );
 ?>
