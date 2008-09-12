@@ -83,12 +83,12 @@ $lang = array(
 "DBHostDesc" => "The host your database server is running on. Usually \"localhost\" (ie, the same machine your WackoWiki site is on).",
 "DBPort" => "Port (Optional)",
 "DBPortDesc" => "The port number your database server is accessable through, leave it blank to use the default port number.",
-"DB" => "Database Name",
+"DB" => "andmebaas",
 "DBDesc" => "The database WackoWiki should use. This database needs to exist already once you continue!",
 "DBUserDesc" => "Name and password of the user used to connect to your database.",
-"DBUser" => "User Name",
+"DBUser" => "kasutajanimi",
 "DBPasswordDesc" => "Name and password of the user used to connect to your database.",
-"DBPassword" => "Password",
+"DBPassword" => "parool",
 "PrefixDesc" => "Kõikide tabelite eesliides, mida WackoWiki kasutab. See voimaldab käitada mitut WackoWikit korraga,  kasutades ära ühte ja sama  MySQL andmebaasi, konfigureerides neid kasutama erinevaid tabelite prefikseid.",
 "Prefix" => "Tabeli prefiks",
 "ErrorNoDbDriverDetected" => "No database driver has been detected, please enable either the mysql, mysqli or pdo extension in your php.ini file.",
@@ -123,7 +123,7 @@ $lang = array(
 "ErrorCreatingTable" => "Error creating %1 table, does it already exist?",
 "ErrorMovingRevisions" => "Error moving revision data",
 "MovingRevisions" => "Paigutan andmed ümber kontroll-tabelisse",
-"CleanupScript" => "If you'll use <a href=\"http://wackowiki.org/Archiv/DocEnglish/CleanupScript\" target=\"_blank\">WackoWiki:DocEnglish/CleanupScript</a>, you will speedup your Wacko.",
+"CleanupScript" => "Kui sa kasutad <a href=\"http://wackowiki.org/Archiv/DocEnglish/CleanupScript\" target=\"_blank\">WackoWiki:DocEnglish/CleanupScript</a>, siis sa kiirendad oma Wackot.",
 
 /*
    Write Config Page
@@ -154,12 +154,8 @@ $lang = array(
 "And table..." => "Ja %1 tabel (oota!)...",
 "return" => "naasta oma WackoWiki lehele",
 #"mysqlHostDesc" => "Masin kus sinu MySQL server asub. Enamasti \"localhost\" (ehk see sama kus asub ka sinu WackoWiki).",
-#"mysqlHost" => "MySQL host",
 #"dbDesc" => "MySQL andmebaas, mida WackoWiki peaks kasutama. See andmebaas peab eksisteerima, et jätkata!",
-#"db" => "MySQL andmebaas",
 #"mysqlPasswDesc" => "MySQL'i kasutaja nimi ja parool, mida kasutatakse andmebaasiga kontakteerumisel.",
-#"mysqlUser" => "MySQL kasutajanimi",
-#"mysqlPassw" => "MySQL parool",
 "homeDesc" => "Sinu WackoWiki kodulehe nimi. Peaks ka olema WikiNimi.",
 "baseDesc" => "Sinu WackoWiki saidi baas-URL. Lehtede nimed liidetakse sellele, see peaks sisaldama \"?page=\" parameetrit, kui sul ei tööta Apache serveris mod_rewrite moodulit.",
 "pleaseConfigure" => "Palun konfigureeri oma WackoWiki sait, kasutades allpool olevat vormi.",
@@ -167,7 +163,6 @@ $lang = array(
 "password" => "Sisesta parool",
 "mailDesc" => "Administraatori e-post.",
 "adding pages" => "Lisan mõned lehed...",
-"Doubles" => "Kui sa kasutad  <a href=\"http://wackowiki.org/DocEnglish/CleanupScript\" target=\"_blank\">WackoWiki:DocEnglish/CleanupScript</a>, siis sa kiirendad oma Wackot.",
 "newinstall" => "Kuna see on värske installatsioon, siis üritatakse aimata õiged vastused. Muuda neid ainult siis, kui sa oled kindel, et teed õigesti!",
 */
 

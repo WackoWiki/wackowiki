@@ -123,7 +123,7 @@ $lang = array(
 "ErrorCreatingTable" => "Error creating %1 table, does it already exist?",
 "ErrorMovingRevisions" => "Error moving revision data",
 "MovingRevisions" => "Перемещаем все старые версии в таблицу revisions",
-"CleanupScript" => "If you'll use <a href=\"http://wackowiki.org/Archiv/DocEnglish/CleanupScript\" target=\"_blank\">WackoWiki:DocEnglish/CleanupScript</a>, you will speedup your Wacko.",
+"CleanupScript" => "Попробуйте <a href=\"http://wackowiki.org/Archiv/DocEnglish/CleanupScript\" target=\"_blank\">WackoWiki:DocEnglish/CleanupScript</a>, это ускорит вашу Ваку.",
 
 /*
    Write Config Page
@@ -168,7 +168,6 @@ $lang = array(
 "password" => "Пароль",
 "mailDesc" => "Адрес электронной почты администратора.",
 "adding pages" => "Добавляем новые страницы...",
-"Doubles" => "Попробуйте <a href=\"http://wackowiki.org/WackoDokumentacija/CleanupScript\" target=\"_blank\">WackoWiki:WackoДокументация/CleanupScript</a>, это ускорит вашу Ваку.",
 "newinstall" => "Поскольку это новая установка, инсталлятор попробовал сам предположить необходимые значения. Изменяйте их, только если вы понимаете, что делаете!",
 "apply rights" => "Попытка установить права доступа на папку ",
 "apply rights yourself" => "Вы должны самостоятельно установить доступ на запись на папку ",

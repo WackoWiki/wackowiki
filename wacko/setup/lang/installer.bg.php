@@ -79,14 +79,14 @@ $lang = array(
 "database-config" => "Настройка на БД",
 "DBDriverDesc" => "The database driver you want to use.  You must choose a legacy driver if you do not have PHP5.1 (or greater) and <a href=\"http://de2.php.net/pdo\" target=\"_blank\">PDO</a> installed.",
 "DBDriver" => "Driver",
-"DBHost" => "Host",
+"DBHost" => "Име (hostname) на БД",
 "DBHostDesc" => "The host your database server is running on. Usually \"localhost\" (ie, the same machine your WackoWiki site is on).",
 "DBPort" => "Port (Optional)",
 "DBPortDesc" => "The port number your database server is accessable through, leave it blank to use the default port number.",
-"DB" => "Database Name",
+"DB" => "БД",
 "DBDesc" => "The database WackoWiki should use. This database needs to exist already once you continue!",
 "DBUserDesc" => "Name and password of the user used to connect to your database.",
-"DBUser" => "User Name",
+"DBUser" => "Име (username)",
 "DBPasswordDesc" => "Name and password of the user used to connect to your database.",
 "DBPassword" => "Паролa (password)",
 "PrefixDesc" => "Префикс на таблиците на Wacko. Това дава възможност за няколко WackoWiki на една БД, само чрез различни префикси.",
@@ -123,7 +123,7 @@ $lang = array(
 "ErrorCreatingTable" => "Error creating %1 table, does it already exist?",
 "ErrorMovingRevisions" => "Error moving revision data",
 "MovingRevisions" => "Преместваме старите версии в таблица revisions",
-"CleanupScript" => "If you'll use <a href=\"http://wackowiki.org/Archiv/DocEnglish/CleanupScript\" target=\"_blank\">WackoWiki:DocEnglish/CleanupScript</a>, you will speedup your Wacko.",
+"CleanupScript" => "Пробвайте <a href=\"http://wackowiki.org/Archiv/DocEnglish/CleanupScript\" target=\"_blank\">WackoWiki:DocEnglish/CleanupScript</a>, това ще ускори достъпа до вашия сайт.",
 
 /*
    Write Config Page
@@ -154,21 +154,16 @@ $lang = array(
 "And table..." => "И таблица %1 (почакайте малко!)...",
 "return" => "да се върнете на вашия Уики",
 #"mysqlHostDesc" => "Име (hostname), на MySQL сървъра. Обикновено \"localhost\".",
-#"mysqlHost" => "Име (hostname) на MySQL",
 #"dbDesc" => "База данни на MySQL,  за WackoWiki. Трябва да е създадена предварително!",
-#"db" => "БД MySQL",
 #"mysqlPasswDesc" => "Име и парола за БД MySQL.",
-#"mysqlUser" => "Име (username) MySQL",
 "homeDesc" => "Главна страница на WackoWiki.  Трябва да е  с УикиИме.",
 "baseDesc" => "Базов URL  на вашата инсталация на  WackoWiki. Имената на страниците се присъединяват към него с параметър \"?page=\", ако не може да се ползва mod_rewrite.",
 "AdminConf" => "Настройка на администраторския достъп",
 "mailDesc" => "Адрес на електронната поща (email) на администратора.",
 "adding pages" => "Добавяме нови страници...",
-"Doubles" => "Пробвайте <a href=\"http://wackowiki.org/WackoDokumentacija/CleanupScript\" target=\"_blank\">WackoWiki:WackoДокументация/CleanupScript</a>, това ще ускори достъпа до вашия сайт.",
 "newinstall" => "Инсталиращата програма е настроила параметрите. Променяйте ги, ако знаете какво правите!",
 "apply rights" => "Попытка установить права доступа на папку ",
 "apply rights yourself" => "Вы должны самостоятельно установить доступ на запись на папку ",
 */
-
 );
 ?>
