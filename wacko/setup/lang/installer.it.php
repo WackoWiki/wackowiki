@@ -86,7 +86,7 @@ $lang = array(
 "DB" => "Database Name",
 "DBDesc" => "The database WackoWiki should use. This database needs to exist already once you continue!",
 "DBUserDesc" => "Name and password of the user used to connect to your database.",
-"DBUser" => "User Name",
+"DBUser" => "Nome utente",
 "DBPasswordDesc" => "Name and password of the user used to connect to your database.",
 "DBPassword" => "Password",
 "PrefixDesc" => "Prefisso di tutte le tabelle usate da WackoWiki. Questo ti permette di disporre di più installazioni WackoWiki che utilizzano lo stesso database configurandolo all'impiego dei diversi prefissi di tabella.",
@@ -123,7 +123,7 @@ $lang = array(
 "ErrorCreatingTable" => "Error creating %1 table, does it already exist?",
 "ErrorMovingRevisions" => "Error moving revision data",
 "MovingRevisions" => "Trasferimento di dati alla tabella di revisione",
-"CleanupScript" => "If you'll use <a href=\"http://wackowiki.org/Archiv/DocEnglish/CleanupScript\" target=\"_blank\">WackoWiki:DocEnglish/CleanupScript</a>, you will speedup your Wacko.",
+"CleanupScript" => "Se utilizzi <a href=\"http://wackowiki.org/Archiv/DocEnglish/CleanupScript\" target=\"_blank\">WackoWiki:DocEnglish/CleanupScript</a>, renderai più veloce il tuo Wacko.",
 
 /*
    Write Config Page
@@ -154,12 +154,8 @@ $lang = array(
 "And table..." => "E %1 tabella (attendi!)...",
 "return" => "Ritorna al tuo sito WackoWiki",
 #"mysqlHostDesc" => "L'host su cui gira il tuo server MySQL funziona. Di solito \"localhost\" (p.e., la stessa macchina del tuo sito WackoWiki è attiva).",
-#"mysqlHost" => "Host MySQL",
 #"dbDesc" => "Il database MySQL utilizzerà WackoWiki. Il database deve già esistere, prima di continuare!",
-#"db" => "Database MySQL",
 #"mysqlPasswDesc" => "Nome e password dell'utente MySQL sono utizzati per connettersi  al tuo database.",
-#"mysqlUser" => "Nome utente MySQL",
-#"mysqlPassw" => "Password MySQL",
 "homeDesc" => "La tua homepage WackoWiki. Deve essere un NomeWiki.",
 "baseDesc" => "La tua URL di base per il sito WackoWiki. I nomi di pagina sono stati aggiunti, ora sarà incluso l'oggetto-parametro \"?page=\" se la modalità di riscrittura di URL non funziona sul tuo server.",
 "pleaseConfigure" => "Configura il tuo sito WackoWiki come di seguito.",
@@ -167,7 +163,6 @@ $lang = array(
 "password" => "Immetti password",
 "mailDesc" => "Email dell'amministratore.",
 "adding pages" => "Aggiungi alcune pagine...",
-"Doubles" => "Se utilizzi <a href=\"http://wackowiki.org/DocEnglish/CleanupScript\" target=\"_blank\">WackoWiki:DocEnglish/CleanupScript</a>, renderai più veloce il tuo Wacko.",
 "newinstall" => "Poiché si tratta di una nuova installazione, l'installatore ha ipotizzato i valori corretti. Modificali solo se sai quello che stai facendo!",
 */
 

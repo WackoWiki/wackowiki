@@ -83,12 +83,12 @@ $lang = array(
 "DBHostDesc" => "The host your database server is running on. Usually \"localhost\" (ie, the same machine your WackoWiki site is on).",
 "DBPort" => "Port (Optional)",
 "DBPortDesc" => "The port number your database server is accessable through, leave it blank to use the default port number.",
-"DB" => "Database Name",
+"DB" => "Baza danych",
 "DBDesc" => "The database WackoWiki should use. This database needs to exist already once you continue!",
 "DBUserDesc" => "Name and password of the user used to connect to your database.",
-"DBUser" => "User Name",
+"DBUser" => "Nazwa u&#380;ytkownika",
 "DBPasswordDesc" => "Name and password of the user used to connect to your database.",
-"DBPassword" => "Password",
+"DBPassword" => "Has&#322;o u&#380;ytkownika",
 "PrefixDesc" => "Przedrostek wszystkich tabeli u&#380;ytych przez WackoWiki. Pozwala to uruchamia&#263; r&#243;&#380;ne instalacje WackoWiki u&#380;ywaj&#261;c tej samej bazy danych poprzez konfiguracj&#281; ich, by u&#380;ywa&#322;y r&#243;&#380;nych przedrostk&#243;w tabeli.",
 "Prefix" => "Przedrostek tabeli",
 "ErrorNoDbDriverDetected" => "No database driver has been detected, please enable either the mysql, mysqli or pdo extension in your php.ini file.",
@@ -123,7 +123,7 @@ $lang = array(
 "ErrorCreatingTable" => "Error creating %1 table, does it already exist?",
 "ErrorMovingRevisions" => "Error moving revision data",
 "MovingRevisions" => "Przenosz&#281; dane to tabeli revisions",
-"CleanupScript" => "If you'll use <a href=\"http://wackowiki.org/Archiv/DocEnglish/CleanupScript\" target=\"_blank\">WackoWiki:DocEnglish/CleanupScript</a>, you will speedup your Wacko.",
+"CleanupScript" => "Je&#380;eli u&#380;yjesz <a href=\"http://wackowiki.org/Archiv/DocEnglish/CleanupScript\" target=\"_blank\">WackoWiki:DocEnglish/CleanupScript</a>, przyspieszysz swoje WackoWiki.",
 
 /*
    Write Config Page
@@ -155,18 +155,13 @@ $lang = array(
 "And table..." => "I tabela %1 (czekaj!)...",
 "return" => "wr&#243;ci&#263; do swojej strony WackoWiki",
 #"mysqlHostDesc" => "Host, na kt&#243;rym serwer MySQL jest uruchomiony. Przewa&#380;nie \"localhost\" (ta sama maszyna, na kt&#243;rej jest Twoja strona WackoWiki).",
-#"mysqlHost" => "Host MySQL",
 #"dbDesc" => "Baza danych MySQL, kt&#243;r&#261; WackoWiki powinna u&#380;y&#263;. Ta baza danych <b>musi</b> ju&#380; <b>istnie&#263;</b> aby kontynuowa&#263;!",
-#"db" => "Baza danych MySQL",
 #"mysqlPasswDesc" => "Nazwa i has&#322;o u&#380;ytkownika MySQL u&#380;yte do po&#322;&#261;czenia si&#281; z baz&#261; danych.",
-#"mysqlUser" => "Nazwa u&#380;ytkownika MySQL",
-#"mysqlPassw" => "Has&#322;o u&#380;ytkownika MySQL",
 "homeDesc" => "Nazwa Twojej strony g&#322;&#243;wnej WackoWiki. Powinna by&#263; Nazw&#261;Wiki.",
 "baseDesc" => "Podstawowy URL do Twojej strony WackoWiki. Nazwy stron dopisz&#261; si&#281; do niego, wi&#281;c powinien zawiera&#263; parametr \"?page=\" je&#380;eli URL rewriting nie dzia&#322;a na Twoim serwerze.",
 "AdminConf" => "Konfiguracja Konta Administratora",
 "mailDesc" => "Adres e-mail administratora",
 "adding pages" => "Dodaj&#281; par&#281; stron...",
-"Doubles" => "Je&#380;eli u&#380;yjesz <a href=\"http://wackowiki.org/DocEnglish/CleanupScript\" target=\"_blank\">WackoWiki:DocEnglish/CleanupScript</a>, przyspieszysz swoje WackoWiki.",
 "newinstall" => "Poniewa&#380; to jest pierwsza instalacja, instalator spr&#243;buje zgadn&#261;&#263; poprawne warto&#347;ci. Zmie&#324; je wy&#322;&#261;cznie, kiedy wiesz, co robisz!",
 */
 
