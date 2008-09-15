@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutAreYouSure" => "Kas oled kindel, et tahad välja logida?",
 // registration panel
   "RegistrationWelcome" => "Uue kasutaja registreerimine:",
-  "RegistrationName" => "Omista ((WackoWiki:DocEnglish/WikiName WikiNimi))",
+  "RegistrationName" => "Omista ((WackoWiki:Doc/English/WikiName WikiNimi))",
   "RegistrationPassword" => "Parool (vähemalt 5 tähemärki)",
   "RegistrationButton" => "Registreerun",
   "RegistrationNameOwned" => "Valitud kasutajanimi on juba kasutusel. Palun vali mõni teine.",
 // login panel
   "LoginWelcome" => "Logi sisse",
   "LoginWelcome2" => " . . . . . . . . [[/Registration Registereeri]]",
-  "LoginName" => "((WackoWiki:DocEnglish/WikiName WikiNimi))",
+  "LoginName" => "((WackoWiki:Doc/English/WikiName WikiNimi))",
   "LoginPassword" => "Parool",
   "LoginButton" => "Sisse!",
 // other
@@ -185,7 +185,7 @@ $wakkaResource = array(
   "StuffYouNeed" => "Asjad mis sa pead ära täitma, kui logid sisse esimest korda (seetõttu registreerud kui esmakordne kasutaja).",
   "ConfirmPassword" => "Korda parooli",
   "Email" => "E-posti aadress",
-  "MustBeWikiName" => "Kasutajanimi peab olema formaadis ((WackoWiki:DocEnglish/WikiName WikiNimi))!",
+  "MustBeWikiName" => "Kasutajanimi peab olema formaadis ((WackoWiki:Doc/English/WikiName WikiNimi))!",
   "SpecifyEmail" => "Sa pead täpsustama oma e-posti aadressi.",
   "NotAEmail" => "See ei tundu olema õige aadress.",
   "PasswordsDidntMatch" => "Parool ei klapi.",
@@ -245,7 +245,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Sisetage oma kasutajanimi või e-posti aadress,\n siis saadetakse sulle e-postiga instruktsioonid.",
   "ForgotMain" => "Unustasid parooli?",
-  "ForgotField" => "((WackoWiki:DocEnglish/WikiName WikiNimi)) või e-post",
+  "ForgotField" => "((WackoWiki:Doc/English/WikiName WikiNimi)) või e-post",
   "SendButton" => "Saada!",
   "UserNotFound" => "<em>Sellist kasutajanimi või e-postii aadressi ei leitud.</em>",
   "NotConfirmedMail" => "<em>Sinu e-posti aadress ei leidnud kinnitust..<br />Kirja ei saa saata kinnitust leidmata aadressile.</em>",

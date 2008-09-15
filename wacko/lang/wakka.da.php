@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutAreYouSure" => "Er du sikker på, at du vil logge af?",
 // registration panel
   "RegistrationWelcome" => "Ny bruger registrering:",
-  "RegistrationName" => "Vælg dit wikinavn ((WackoWiki:DocEnglish/WhatIsNameSurname NameSurname))",
+  "RegistrationName" => "Vælg dit wikinavn ((WackoWiki:Doc/English/WikiName NameSurname))",
   "RegistrationPassword" => "Password (5+ chars)",
   "RegistrationButton" => "Registrer mig!",
   "RegistrationNameOwned" => "Dette brugernavn er allerede i brug. Vælg et andet.",
 // login panel
   "LoginWelcome" => "Log ind",
   "LoginWelcome2" => " . . . . . . . . ((/Registrering Registrering))",
-  "LoginName" => "((WackoWiki:DocEnglish/WikiName NameSurname))",
+  "LoginName" => "((WackoWiki:Doc/English/WikiName NameSurname))",
   "LoginPassword" => "Password",
   "LoginButton" => "Log ind!",
 // other
@@ -185,7 +185,7 @@ $wakkaResource = array(
   "StuffYouNeed" => "Information som du skal angive når du logger ind første gang",
   "ConfirmPassword" => "Bekræft password",
   "Email" => "Emailadresse",
-  "MustBeWikiName" => "Brugernavn skal være ((WackoWiki:DocEnglish/WikiName WikiNavn)) formateret!",
+  "MustBeWikiName" => "Brugernavn skal være ((WackoWiki:Doc/English/WikiName WikiNavn)) formateret!",
   "SpecifyEmail" => "Du skal oplyse en emailadresse.",
   "NotAEmail" => "Det ligner ikke en rigtig adresse.",
   "PasswordsDidntMatch" => "Passwords stemmer ikke.",
@@ -245,7 +245,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Oplys dit brugernavn eller din emailadresse,\nså sender vi en mail med instruktioner.",
   "ForgotMain" => "Glemt password?",
-  "ForgotField" => "((WackoWiki:DocEnglish/WikiName NameSurname)) eller e-mail",
+  "ForgotField" => "((WackoWiki:Doc/English/WikiName NameSurname)) eller e-mail",
   "SendButton" => "Send!",
   "UserNotFound" => "<em>Ingen bruger med disse oplysninger.</em>",
   "NotConfirmedMail" => "<em>Din mailadresse er ikke bekræftet.<br />Vi kan derfor ikke sende dig en mail.</em>",

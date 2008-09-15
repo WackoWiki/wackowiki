@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutButton" => "Iesire din sistem",
 // registration panel
   "RegistrationWelcome" => "Registrarea utilizatorului nou:",
-  "RegistrationName" => "Alegeti NumePrenume ((WackoWiki:WackoДокументация/ЧтоТакоеИмяФамилия NumePrenume))",
+  "RegistrationName" => "Alegeti NumePrenume ((WackoWiki:Doc/Документация/ЧтоТакоеИмяФамилия NumePrenume))",
   "RegistrationPassword" => "Parola (nu mai putin de 5 simboluri)",
   "RegistrationButton" => "Inainte!",
   "RegistrationNameOwned" => "Numele deja este ocupat!",
 // login panel
   "LoginWelcome" => "Entrarea",
   "LoginWelcome2" => " . . . . . . . . [[/Registration Inregistrarea]]",
-  "LoginName" => "((WackoWiki:WackoДокументация/ЧтоТакоеИмяФамилия ИмяФамилия))",
+  "LoginName" => "((WackoWiki:Doc/Документация/ЧтоТакоеИмяФамилия ИмяФамилия))",
   "LoginPassword" => "Parola",
   "LoginButton" => "Intrarea in sistem!",
 // other
@@ -185,7 +185,7 @@ $wakkaResource = array(
   "StuffYouNeed" => "Aceste cimpuri trebuie de completat, numai daca va inregistrati pentru prima data (este creat un utilizator nou).",
   "ConfirmPassword" => "Confirarea parolei",
   "Email" => "E-mail",
-  "MustBeWikiName" => "Numele de utilizator trebuie sa fie ((WackoWiki:WackoДокументация/ВикиИмя ВикиИменем)) ",
+  "MustBeWikiName" => "Numele de utilizator trebuie sa fie ((WackoWiki:Doc/Документация/ВикиИмя ВикиИменем)) ",
   "SpecifyEmail" => "Trebuie sa indicati adresa e-mail.",
   "NotAEmail" => "Aceasta nu este o adresa e-mail.",
 
@@ -246,7 +246,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Introdu loginul sau e-mailul\n si vei primi scrisoarea cu instructiuni.",
   "ForgotMain" => "Ai uitat parola?",
-  "ForgotField" => "((WackoWiki:WackoДокументация/ЧтоТакоеИмяФамилия ИмяФамилия)) или адрес электронной почты",
+  "ForgotField" => "((WackoWiki:Doc/Документация/ЧтоТакоеИмяФамилия ИмяФамилия)) или адрес электронной почты",
   "SendButton" => "Trimite!",
   "UserNotFound" => "<em>Nu exista utilizator cu asa login sau e-mail.</em>",
   "NotConfirmedMail" => "<em>Ваш электронный адрес не подтверждён.<br/>Невозможно выслать код по неподтверждённому адресу.</em>",

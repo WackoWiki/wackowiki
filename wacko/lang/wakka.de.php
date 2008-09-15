@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutAreYouSure" => "Willst du dich wirklich abmelden?",
 // registration panel
   "RegistrationWelcome" => "Registrierung eines neuen Benutzers:",
-  "RegistrationName" => "((WackoWiki:DocDeutsch/WikiName Benutzername))",
+  "RegistrationName" => "((WackoWiki:Doc/Deutsch/WikiName Benutzername))",
   "RegistrationPassword" => "Passwort (5+ Zeichen)",
   "RegistrationButton" => "Benutzer registrieren",
   "RegistrationNameOwned" => "Dieser Name ist bereits vergeben. Bitte wähle einen anderen Namen.",
 // login panel
   "LoginWelcome" => "Anmeldung",
   "LoginWelcome2" => " . . . . . . . . ((Registrierung))",
-  "LoginName" => "((WackoWiki:DocDeutsch/WikiName Benutzer))",
+  "LoginName" => "((WackoWiki:Doc/Deutsch/WikiName Benutzer))",
   "LoginPassword" => "Passwort",
   "LoginButton" => "Benutzer anmelden!",
 // other
@@ -185,7 +185,7 @@ $wakkaResource = array(
   "StuffYouNeed" => "Dinge die du nur einmal einzutragen brauchst (wenn Du dich als neuer Nutzer anmeldest).",
   "ConfirmPassword" => "Passwort bestätigen",
   "Email" => "E-Mailadresse",
-  "MustBeWikiName" => "Benutzername muss im ((WackoWiki:DocDeutsch/WikiName WikiName))-Format sein!",
+  "MustBeWikiName" => "Benutzername muss im ((WackoWiki:Doc/Deutsch/WikiName WikiName))-Format sein!",
   "SpecifyEmail" => "Du musst eine E-Mailadresse angeben.",
   "NotAEmail" => "Das sieht nicht nach einer E-Mailadresse aus.",
   "PasswordsDidntMatch" => "Passwörter stimmen nicht überein.",
@@ -245,7 +245,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Benutzername oder E-Mailadresse angeben,\ndu bekommst dann eine E-Mail mit weiteren Anweisungen.",
   "ForgotMain" => "Passwort vergessen?",
-  "ForgotField" => "((WackoWiki:DocDeutsch/WikiName VorUndNachname)) oder E-Mail",
+  "ForgotField" => "((WackoWiki:Doc/Deutsch/WikiName VorUndNachname)) oder E-Mail",
   "SendButton" => "Senden!",
   "UserNotFound" => "<em>Ein Benutzer mit diesem Namen oder E-Mailadresse wurde nicht gefunden.</em>",
   "NotConfirmedMail" => "<em>Deine E-Mailadresse ist noch nicht bestätigt<br />E-Mails können nicht an unbestätigte E-Mailadressen verschickt werden.</em>",
