@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutAreYouSure" => "Vuoi davvero sconnetterti?",
 // registration panel
   "RegistrationWelcome" => "Nuovo utente:",
-  "RegistrationName" => " Assegnati un ((WackoWiki:DocEnglish/WikiName NomeCognome))",
+  "RegistrationName" => " Assegnati un ((WackoWiki:Doc/English/WikiName NomeCognome))",
   "RegistrationPassword" => " Password (almeno 6 caratteri)",
   "RegistrationButton" => "Registrami!",
   "RegistrationNameOwned" => "Il nome è già utilizzato, scegline un altro.",
 // login panel
   "LoginWelcome" => "Connessione",
   "LoginWelcome2" => " . . . . . . . . [[/Registration Registrazione]]",
-  "LoginName" => "((WackoWiki:DocEnglish/WikiName NomeCognome))",
+  "LoginName" => "((WackoWiki:Doc/English/WikiName NomeCognome))",
   "LoginPassword" => "Password",
   "LoginButton" => "Connessione!",
 // other
@@ -185,7 +185,7 @@ $wakkaResource = array(
   "StuffYouNeed" => "Se ti stai connettendo per la prima volta, compila solo quello che serve (e diventa un nuovo utente del sito).",
   "ConfirmPassword" => "Conferma password",
   "Email" => "Indirizzo email",
-  "MustBeWikiName" => "Il nome-utente deve essere ((WackoWiki:DocEnglish/WikiName NomeWiki)) configurato!",
+  "MustBeWikiName" => "Il nome-utente deve essere ((WackoWiki:Doc/English/WikiName NomeWiki)) configurato!",
   "SpecifyEmail" => " Specifica un indirizzo email.",
   "NotAEmail" => " L'indirizzo non ha la forma di un indirizzo email valido.",
   "PasswordsDidntMatch" => "Password non identiche.",
@@ -245,7 +245,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Enter your login or e-mail address,\nthen e-mail with instructions will be send to you.",
   "ForgotMain" => "Forgot password?",
-  "ForgotField" => "((WackoWiki:DocEnglish/WikiName NameSurname)) or e-mail",
+  "ForgotField" => "((WackoWiki:Doc/English/WikiName NameSurname)) or e-mail",
   "SendButton" => "Send!",
   "UserNotFound" => "<em>User with this name or e-mail address was not found.</em>",
   "NotConfirmedMail" => "<em>Your e-mail address is not confirmed.<br />Mail can't be send to non-confirmed address.</em>",

@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutAreYouSure"  => "Czy na pewno chcesz siê wylogowaæ?",
 // registration panel
   "RegistrationWelcome" => "Rejestracja nowego u¿ytkownika:",
-  "RegistrationName" => "Wprowad¼ swoje ((WackoWiki:DocEnglish/WikiName ImiêNazwisko))",
+  "RegistrationName" => "Wprowad¼ swoje ((WackoWiki:Doc/English/WikiName ImiêNazwisko))",
   "RegistrationPassword" => "Has³o (min. 5 znaków)",
   "RegistrationButton" => "Zarejestruj!",
   "RegistrationNameOwned" => "Przepraszamy! Ta nazwa jest ju¿ zajêta. Prosimy o wybranie innej nazwy u¿ytkownika.",
 // login panel
   "LoginWelcome" => "Zaloguj siê",
   "LoginWelcome2" => " . . . . . . . . a mo¿e potrzebujesz siê [[/Rejestracja zarejestrowaæ]]?",
-  "LoginName" => "Twoje ((WackoWiki:DocEnglish/WikiName ImiêNazwisko))",
+  "LoginName" => "Twoje ((WackoWiki:Doc/English/WikiName ImiêNazwisko))",
   "LoginPassword" => "Has³o",
   "LoginButton" => "Zaloguj!",
 // other
@@ -185,7 +185,7 @@ $wakkaResource = array(
   "StuffYouNeed" => "Musisz wype³niæ jedynie, kiedy logujesz siê za pierwszym razem (i w ten sposób zapisuj±c siê jako nowy u¿ytkownik na tej stronie).",
   "ConfirmPassword" => "Potwierd¼ has³o",
   "Email" => "Adres e-mail",
-  "MustBeWikiName" => "Nazwa u¿ytkownika musi byæ w formacie ((WackoWiki:DocPolish/NazwaWiki NazwyWiki))!",
+  "MustBeWikiName" => "Nazwa u¿ytkownika musi byæ w formacie ((WackoWiki:Doc/Polish/NazwaWiki NazwyWiki))!",
   "SpecifyEmail" => "Wprowadzenie adresu e-mail jest obowi±zkowe.",
   "NotAEmail" => "Wprowadzony adres e-mail jest nieprawid³owy.",
   "PasswordsDidntMatch" => "Wprowadzone has³a nie s± identyczne.",
@@ -245,7 +245,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Wpisz swój login i adres e-mail,\naby zosta³ przes³any do ciebie e-mail z instrukcjami.",
   "ForgotMain" => "Zapomnia³e¶ has³a?",
-  "ForgotField" => "((WackoWiki:DocEnglish/WikiName NazwaWiki)) lub e-mail",
+  "ForgotField" => "((WackoWiki:Doc/English/WikiName NazwaWiki)) lub e-mail",
   "SendButton" => "Wy¶lij!",
   "UserNotFound" => "<em>U¿ytkownik z t± nazw± lub adresem e-mail nie zosta³ znaleziony.</em>",
   "NotConfirmedMail" => "<em>Twój adres e-mail nie zosta³ potwierdzony.<br />Mail nie mo¿e byæ wysy³any na niepotwierdzony adres.</em>",

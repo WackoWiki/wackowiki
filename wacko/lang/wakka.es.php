@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutAreYouSure" => "Estás seguro de querer desconectarte?",
 // registration panel
   "RegistrationWelcome" => "Nuevo usuario:",
-  "RegistrationName" => "Date un ((WackoWiki:DocEnglish/WikiName NombreDeUsuario))",
+  "RegistrationName" => "Date un ((WackoWiki:Doc/English/WikiName NombreDeUsuario))",
   "RegistrationPassword" => "Contraseña (5+ letras)",
   "RegistrationButton" => "Regístrate",
   "RegistrationNameOwned" => "Este nombre ya existe. Escoge otro por favor.",
 // login panel
   "LoginWelcome" => "Conectar",
   "LoginWelcome2" => " . . . . . . . . [[/Registration Registrarse]]",
-  "LoginName" => "((WackoWiki:DocEnglish/WikiName NombreDeUsuario))",
+  "LoginName" => "((WackoWiki:Doc/English/WikiName NombreDeUsuario))",
   "LoginPassword" => "Contraseña",
   "LoginButton" => "Conectar",
 // other
@@ -185,7 +185,7 @@ $wakkaResource = array(
   "StuffYouNeed" => "Datos que tienes que introducir únicamente cuando te registras en este Wiki.",
   "ConfirmPassword" => "Confirmar contraseña",
   "Email" => "Email",
-  "MustBeWikiName" => "El usuario debe tener un formato ((WackoWiki:DocEnglish/WikiName WikiName))!",
+  "MustBeWikiName" => "El usuario debe tener un formato ((WackoWiki:Doc/English/WikiName WikiName))!",
   "SpecifyEmail" => "Introduce un e-mail.",
   "NotAEmail" => "Formato de e-mail incorrecto.",
   "PasswordsDidntMatch" => "Las contraseñas no coinciden.",
@@ -245,7 +245,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Introduce tu login o e-mail,\n y te enviaremos un e-mail con instrucciones.",
   "ForgotMain" => "Contraseña olvidada?",
-  "ForgotField" => "((WackoWiki:DocEnglish/WikiName NameUsuario)) o e-mail",
+  "ForgotField" => "((WackoWiki:Doc/English/WikiName NameUsuario)) o e-mail",
   "SendButton" => "Enviar!",
   "UserNotFound" => "<em>No se ha encontrado ningún usuario con este nombre o e-mail.</em>",
   "NotConfirmedMail" => "<em>Tu e-mail no ha sido confirmado.<br />No se puede enviar e-mail a una direccion no confirmada.</em>",

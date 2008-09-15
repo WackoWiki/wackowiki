@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutAreYouSure" => "Излизате ли от системата?",
 // registration panel
   "RegistrationWelcome" => "Регистрация на нов потребител:",
-  "RegistrationName" => "Задайте своето ((WackoWiki:DocEnglish/WikiName NameSurname))",
+  "RegistrationName" => "Задайте своето ((WackoWiki:Doc/English/WikiName NameSurname))",
   "RegistrationPassword" => "Парола (не по-къса от 5 символа)",
   "RegistrationButton" => "Карай нататък!",
   "RegistrationNameOwned" => "Желаното име е вече заето!",
 // login panel
   "LoginWelcome" => "Вход",
   "LoginWelcome2" => " . . . . . . . . [[/Регистрация Регистрация]]",
-  "LoginName" => "((WackoWiki:DocEnglish/WikiName NameSurname))",
+  "LoginName" => "((WackoWiki:Doc/English/WikiName NameSurname))",
   "LoginPassword" => "Парола",
   "LoginButton" => "Влез!",
 // other
@@ -245,7 +245,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Въведете вашия логин или e-mail,\nи ще ви бъде изпратено писмо с инструкции.",
   "ForgotMain" => "Забравена парола?",
-  "ForgotField" => "((WackoWiki:DocEnglish/WikiName NameSurname)) or e-mail",
+  "ForgotField" => "((WackoWiki:Doc/English/WikiName NameSurname)) or e-mail",
   "SendButton" => "Изпрати!",
   "UserNotFound" => "<em>Няма такъв потребител.</em>",
   "NotConfirmedMail" => "<em>Email адреса не е подтвърден.<br/>Не може да се изпрати поща.</em>",

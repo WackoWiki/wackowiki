@@ -10,14 +10,14 @@ $wakkaResource = array(
   "LogoutAreYouSure"  => "Είσαι σίγουρος;",
 // registration panel
   "RegistrationWelcome" => "Εγγραφή Νέου Χρήστη:",
-  "RegistrationName" => "Δώσε ένα ((WackoWiki:DocEnglish/WikiName NameSurname))",
+  "RegistrationName" => "Δώσε ένα ((WackoWiki:Doc/English/WikiName NameSurname))",
   "RegistrationPassword" => "Συνθηματικό (5+ χαρακτήρες)",
   "RegistrationButton" => "Έγγραψέ με!",
   "RegistrationNameOwned" => "Αυτό το όνομα χρήστη είναι ήδη καταχωρημένο. Παρακαλώ επιλέξτε ένα διαφορετικό.",
 // login panel
   "LoginWelcome" => "Σύνδεση",
   "LoginWelcome2" => " . . . . . . . . ((/Registration Εγγραφή))",
-  "LoginName" => "((WackoWiki:DocEnglish/WikiName NameSurname))",
+  "LoginName" => "((WackoWiki:Doc/English/WikiName NameSurname))",
   "LoginPassword" => "Συνθηματικό",
   "LoginButton" => "Σύνδεση!",
 // other
@@ -185,7 +185,7 @@ $wakkaResource = array(
   "StuffYouNeed" => "Stuff you only need to fill in when you're logging in for the first time (and thus signing up as a new user on this site).",
   "ConfirmPassword" => "Επιβεβαίωση συνθηματικού",
   "Email" => "Διεύθυνση Ηλεκτρονικού Ταχυδρομείου",
-  "MustBeWikiName" => "Το όνομα χρήστη πρέπει να είναι σε ((WackoWiki:DocEnglish/WikiName WikiName)) μορφή!",
+  "MustBeWikiName" => "Το όνομα χρήστη πρέπει να είναι σε ((WackoWiki:Doc/English/WikiName WikiName)) μορφή!",
   "SpecifyEmail" => "Πρέπει να ορίσετε μία συγκεκριμένη ηλεκτρονική διεύθυνση.",
   "NotAEmail" => "Δεν φαίνεται να είναι έγκυρη ηλεκτρονική διεύθυνση",
   "PasswordsDidntMatch" => "Τα συνθηματικά δεν ταιριάζουν.",
@@ -246,7 +246,7 @@ $wakkaResource = array(
 
   "ForgotComment" => "Πληκτρολόγησε το όνομα χρήσης σου ή την ηλεκτρονική σου διεύθυνση,\nκαι μετά ακολούθησε τις οδηγίες που θα σου σταλούν μέσω ηλεκτρονικού ταχυδρομείου ",
   "ForgotMain" => "Ξέχασες το συνθηματικό σου?",
-  "ForgotField" => "((WackoWiki:DocEnglish/WikiName Όνομα Χρήσης)) ή ηλεκτρονική διεύθυνση",
+  "ForgotField" => "((WackoWiki:Doc/English/WikiName Όνομα Χρήσης)) ή ηλεκτρονική διεύθυνση",
   "SendButton" => "Αποστολή!",
   "UserNotFound" => "<em>Δεν υπάρχει χρήστης με αυτό το όνομα ή με αυτήν την ηλεκτρονική διεύθυνση.</em>",
   "NotConfirmedMail" => "<em>Your e-mail address is not confirmed.<br />Mail can't be send to non-confirmed address.</em>",
