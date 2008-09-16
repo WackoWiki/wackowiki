@@ -41,11 +41,11 @@ if ($referrers)
 	array_multisort($referrer_sites, SORT_DESC, SORT_NUMERIC);
 	reset($referrer_sites);
 ?>
-  <div class="cssform">
+  <div class="cssform3">
     <?php
 	foreach ($referrer_sites as $site => $site_count)
 	{ ?>
-    <p><span class="site_count"><?php echo $site_count; ?></span><?php print((($site != "unknown") ? "<a href=\"http://$site\">$site</a>" : $site)); ?></p>
+    <span class="site_count"><?php echo $site_count; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;<?php print((($site != "unknown") ? "<a href=\"http://$site\">$site</a>" : $site)); ?><br />
     <?php
 	}
 	?>
