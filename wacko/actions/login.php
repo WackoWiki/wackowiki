@@ -87,7 +87,7 @@ else
   </p>
   <p><a href="<?php echo $this->Href("", "Password"); ?>"><?php echo $this->GetResourceValue("ForgotLink"); ?></a></p>
 </div>
-<script language="Javascript" type="text/javascript">
+<script type="text/javascript">
    document.getElementById("f<?php echo $focus;?>").focus();
   </script>
 <?php

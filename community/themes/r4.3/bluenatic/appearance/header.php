@@ -22,15 +22,15 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 	<?php if($this->GetMethod() != 'show' || $this->page["latest"] == "N") { ?><meta name="robots" content="noindex, nofollow" /><?php } ?>
 	<title><?php echo $this->GetWakkaName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?></title>
 	<!-- JavaScript used by WackoWiki -->
-	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
-  	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/protoedit.js"></script>
-  	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/wikiedit2.js"></script>
-  	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/autocomplete.js"></script>
-  	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
-	<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
+	<script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
+  	<script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/protoedit.js"></script>
+  	<script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/wikiedit2.js"></script>
+  	<script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/autocomplete.js"></script>
+  	<script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
+	<script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 	<?php if($user = $this->GetUser()) if($user["doubleclickedit"] == "Y") { ?>
 	<!-- Edit by doubleclick for logged in users -->
-	<script language="JavaScript" type="text/javascript">
+	<script type="text/javascript">
 		var edit = "<?php echo $this->href("edit");?>";
 	</script>
 	<?php } ?>
