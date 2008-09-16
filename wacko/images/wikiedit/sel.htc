@@ -2,7 +2,7 @@
  <public:property name="selectionStart" get="returnSS" />
  <public:property name="selectionEnd" get="returnSE" />
  <public:method name="setSelectionRange" />
- <script language="javascript">
+ <script type="text/javascript">
    var selectionStart = 0;
    var selectionEnd = 0;
 

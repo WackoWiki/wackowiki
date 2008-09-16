@@ -51,7 +51,7 @@ if ($this->HasAccess("read"))
       echo $data;
       $this->SetLanguage($this->userlang);
       ?>
-  <script language="JavaScript" type="text/javascript">
+  <script type="text/javascript">
    var dbclick = "page";
   </script>
   <?php

@@ -28,21 +28,21 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?> in RSS"
 	href="<?php echo $this->href("revisions.xml");?>" />
-<script language="JavaScript" type="text/javascript"
+<script type="text/javascript"
 	src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
-<script language="JavaScript" type="text/javascript"
+<script type="text/javascript"
 	src="<?php echo $this->GetConfigValue("root_url");?>js/protoedit.js"></script>
-<script language="JavaScript" type="text/javascript"
+<script type="text/javascript"
 	src="<?php echo $this->GetConfigValue("root_url");?>js/wikiedit2.js"></script>
-<script language="JavaScript" type="text/javascript"
+<script type="text/javascript"
 	src="<?php echo $this->GetConfigValue("root_url");?>js/autocomplete.js"></script>
-<script language="JavaScript" type="text/javascript" 
+<script type="text/javascript" 
 	src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
-<script language="JavaScript" type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
+<script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 <?php
 if ($user = $this->GetUser())
 if ($user["doubleclickedit"] == "Y") {?>
-<script language="JavaScript" type="text/javascript">
+<script type="text/javascript">
    var edit = "<?php echo $this->href("edit");?>";
   </script>
 <?php }?>

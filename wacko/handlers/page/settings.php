@@ -81,7 +81,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 	<li><a href="<?php echo $this->href("latex");?>"><?php echo $this->GetResourceValue("SettingsLatex"); ?></a></li>
 	<li><a href="<?php echo $this->href("export.xml");?>"><?php echo $this->GetResourceValue("ExportToXML"); ?></a></li>
   </ul>
-  </ul>
+
   <?php
 }
 else

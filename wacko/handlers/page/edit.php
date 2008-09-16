@@ -216,7 +216,7 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
   <?php
 }
 ?>
-  <script language="JavaScript" type="text/javascript">
+  <script type="text/javascript">
     wE = new WikiEdit();
     <?php
       if ($user = $this->GetUser())

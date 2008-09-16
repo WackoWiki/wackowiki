@@ -3,7 +3,7 @@
 if (!$wakkaConfig["wakka_version"])
    {
 ?>
-         <script language="JavaScript" type="text/javascript">
+         <script type="text/javascript">
             <!--
                function check()
                   {
@@ -53,7 +53,7 @@ if (!$wakkaConfig["wakka_version"])
 else
    {
 ?>
-<script language="JavaScript">
+<script type="text/javascript">
    <!--
    function check()
       {
