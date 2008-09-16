@@ -17,7 +17,7 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <link rel="stylesheet" type="text/css"
 	href="<?php echo $this->GetConfigValue("theme_url") ?>css/wakka.css" />
 <link rel="shortcut icon"
-	href="<?php echo $this->GetConfigValue("theme_url") ?>icons/wacko.ico"
+	href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico"
 	type="image/x-icon" />
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetResourceValue("RecentChangesRSS");?>"
