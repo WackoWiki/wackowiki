@@ -338,13 +338,11 @@ $wakkaResource = array(
   "SettingsMassAcls" => "for hele området",
   "SettingsMassRename" => "for hele området",
 
-
-
   "Next" => "Næste",
   "Prev" => "Forrige",
 
   "default_bookmarks" => "((Indhold))\n((Opdateringer))\n((Kommentarer))\n((Brugere))\n((Registrering))",
-  "site_bookmarks" => "Indhold / Opdateringer / Kommentarer",
+  "site_bookmarks" => "((Indhold)) / ((Opdateringer)) / ((Kommentarer))",
 
 //icons
   "outericon" => '<img src="{theme}icons/web.gif" alt="" border="0" />',
