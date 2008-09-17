@@ -253,7 +253,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
 <div class="Copyright">
   <?php
 if ($this->GetUser()){
-echo $this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion())." :: Redesign by Mendokusee";
+echo $this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion())." :: Redesign by Mendokusee";
 }
 ?>
 </div>

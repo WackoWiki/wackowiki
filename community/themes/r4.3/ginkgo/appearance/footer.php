@@ -84,7 +84,7 @@ Powered by <?php // echo $this->Link("WackoWiki:WackoDocDeutsch", "", "WackoWiki
 //Debug Querylog.
 ## if ($this->GetConfigValue("debug")>=2)
 ## {
-##  print("<span style=\"font-size: 11px; color: #888888\">");
+##  print("<span class=\"debug\">");
 ##  print("<strong>Query log:</strong><br />\n");
 ##  foreach ($this->queryLog as $query)
 ##  {

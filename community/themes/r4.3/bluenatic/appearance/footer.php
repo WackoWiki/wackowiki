@@ -38,13 +38,13 @@
 			</a>
 			&nbsp;|&nbsp;
 			<?php } // End of "Page exists" ?>
-			Powered by <?php echo $this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion()); ?></a>
+			Powered by <?php echo $this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion()); ?></a>
 		</div>
 	</div>
 <?php // Debug Querylog.
 if ($this->GetConfigValue("debug")>=2)
 {
-print("<span style=\"font-size: 11px; color: #888888\">");
+print("<span class=\"debug\">");
 print("<strong>Query log:</strong><br />\n");
 foreach ($this->queryLog as $query)
 {

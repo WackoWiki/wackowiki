@@ -92,7 +92,7 @@ echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->Ge
 //Debug Querylog.
 if ($this->GetConfigValue("debug")>=2)
 {
- print("<span style=\"font-size: 11px; color: #888888\">");
+ print("<span class=\"debug\">");
  print("<strong>Query log:</strong><br />\n");
  foreach ($this->queryLog as $query)
  {

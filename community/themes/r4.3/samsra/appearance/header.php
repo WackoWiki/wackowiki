@@ -170,6 +170,3 @@ src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" 
 echo $this->FormClose(); 
 ?>
 </div>
-
-
-
