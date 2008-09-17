@@ -17,6 +17,3 @@
 	</div>
 
 <!-- End of header //-->
-
-
-

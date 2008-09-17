@@ -22,4 +22,3 @@
   <a href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->GetPageTag()); ?>"><?php echo $this->GetPageTag(); ?></a> 
   </h1>
 </div>
-

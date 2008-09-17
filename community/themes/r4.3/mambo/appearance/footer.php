@@ -1,7 +1,7 @@
 <?php
   if ($this->GetConfigValue("debug")>=2)
   {
-    print("<span style=\"font-size: 11px; color: #888888\">");
+    print("<span class=\"debug\">");
     print("<strong>Query log:</strong><br />\n");
     foreach ($this->queryLog as $query)
     {
@@ -23,7 +23,7 @@
 <table class="bottom" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
  <td class="copyright">
-  		Powered by <?php echo $this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion()) ?>
+  		Powered by <?php echo $this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion()) ?>
    </td>
 </tr>
 
