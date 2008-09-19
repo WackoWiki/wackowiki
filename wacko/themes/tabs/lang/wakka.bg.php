@@ -5,7 +5,6 @@ $themeResource = array(
   "ACLCancelButton" => "Откажи \nи се върни",
   "ACLAccessDenied" => "<em>Не сте собственика на страницата.</em>",
   "EditStoreButton" => "Запази промените",
-  "EditRe-EditButton" => "Продължи редактиране",
   "EditCancelButton"  => "Откажи \nпромените",
   "EditPreviewButton" => "Преглед",
 

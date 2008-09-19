@@ -137,12 +137,12 @@ if ($_REQUEST["secret_code"]){
           "changepassword = '".quote($this->dblink, $code)."' ".
           "where name = '".quote($this->dblink, $user["name"])."' limit 1");
 
-				$subject = $this->GetResourceValue("Mail.ForgotSubject").$this->GetConfigValue("wakka_name");
+				$subject = $this->GetResourceValue("EmailForgotSubject").$this->GetConfigValue("wakka_name");
 				$message = $this->GetResourceValue("MailHello"). $name.".<br /> <br /> ";
 				$message.= str_replace('%1', $this->GetConfigValue("wakka_name"),
 				str_replace('%2', $user["name"],
 				str_replace('%3', $this->Href().($this->config["rewrite_mode"] ? "?" : "&amp;")."secret_code=".$code,
-				$this->GetResourceValue("Mail.ForgotMessage"))))."<br />  ";
+				$this->GetResourceValue("EmailForgotMessage"))))."<br />  ";
 				$message.= "<br />".$this->GetResourceValue("MailGoodbye")." ".$this->GetConfigValue("wakka_name");
 				$this->SendMail($user["email"], $subject, $message);
 
