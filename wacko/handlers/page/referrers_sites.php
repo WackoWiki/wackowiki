@@ -3,7 +3,7 @@
   <?php
 if ($global = $_GET["global"])
 {
-	$title = str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetResourceValue("Domains/SitesPages(Global)"));
+	$title = str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetResourceValue("DomainsSitesPagesGlobal"));
 	$referrers = $this->LoadReferrers();
 }
 else
@@ -15,7 +15,7 @@ else
 	$this->getResourceValue("Last24Hours") :
 	str_replace("%1",$this->GetConfigValue("referrers_purge_time"),
 	$this->GetResourceValue("LastDays"))): ""),
-	str_replace("%3",$this->href("referrers"),$this->GetResourceValue("Domains/SitesPages"))));
+	str_replace("%3",$this->href("referrers"),$this->GetResourceValue("DomainsSitesPages"))));
 
 	$referrers = $this->LoadReferrers($this->GetPageTag());
 }
@@ -63,7 +63,7 @@ if ($global)
 }
 else
 {
-	print("<br />[".str_replace("%1",$this->href("referrers_sites", "", "global=1"),$this->GetResourceValue("ViewReferringSites(Global)")) ." | ".str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetResourceValue("ViewReferrersFor(Global)"))."]");
+	print("<br />[".str_replace("%1",$this->href("referrers_sites", "", "global=1"),$this->GetResourceValue("ViewReferringSitesGlobal")) ." | ".str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetResourceValue("ViewReferrersForGlobal"))."]");
 }
 
 ?>

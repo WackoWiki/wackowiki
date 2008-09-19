@@ -4,7 +4,7 @@ if ($user = $this->GetUser())
 {
 	if ($global = $_GET["global"])
 	{
-		$title = str_replace("%1", $this->href("referrers_sites", "", "global=1"), $this->GetResourceValue("ExternalPages(Global)"));
+		$title = str_replace("%1", $this->href("referrers_sites", "", "global=1"), $this->GetResourceValue("ExternalPagesGlobal"));
 		$referrers = $this->LoadReferrers();
 	}
 	else
@@ -59,7 +59,7 @@ if ($user = $this->GetUser())
 	}
 	else
 	{
-		print("<br />[".str_replace("%1",$this->href("referrers_sites", "", "global=1"),$this->GetResourceValue("ViewReferringSites(Global)")) ." | ".str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetResourceValue("ViewReferrersFor(Global)"))."]");
+		print("<br />[".str_replace("%1",$this->href("referrers_sites", "", "global=1"),$this->GetResourceValue("ViewReferringSitesGlobal")) ." | ".str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetResourceValue("ViewReferrersForGlobal"))."]");
 	}
 }
 else

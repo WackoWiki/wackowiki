@@ -181,13 +181,13 @@ if (!in_array($style,array("br","ul","ol","indent"))) $style="indent";
 
 if ($root){
 	if (!$nomark){
-		$title = $this->GetResourceValue("Tree:ClusterTitle");
+		$title = $this->GetResourceValue("TreeClusterTitle");
 		$title = str_replace("%1",  $this->Link("/".$root,"",$root),  $title);
 		print("<fieldset><legend>".$title.":</legend>\n");
 	}
 	$query = "'".quote($this->dblink, $this->NpjTranslit($root))."/%'";
 }else{
-	if (!$nomark)  print("<fieldset><legend>".$this->GetResourceValue("Tree:SiteTitle")."</legend>\n");
+	if (!$nomark)  print("<fieldset><legend>".$this->GetResourceValue("TreeSiteTitle")."</legend>\n");
 	$query = "'%'";
 }
 
@@ -246,7 +246,7 @@ if ($pages)
 	print_cluster_tree($this, $tree, $style, 1, $abc, $filter);
 
 }else{
-	$empty_string = $this->GetResourceValue("Tree:Empty");
+	$empty_string = $this->GetResourceValue("TreeEmpty");
 	$empty_string = str_replace("%1",  $this->Link("/".$root,"",$root),  $empty_string);
 	print($empty_string."<br />");
 }

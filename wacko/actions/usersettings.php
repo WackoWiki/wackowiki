@@ -39,12 +39,12 @@ else if ($user = $this->GetUser())
       {
          $confirm = md5(rand().$_POST["email"].rand());
 
-         $subject = $this->GetResourceValue("Mail.Confirm");
+         $subject = $this->GetResourceValue("EmailConfirm");
          $message = $this->GetResourceValue("MailHello"). $user["name"].".<br /> <br /> ";
          $message.= str_replace('%1', $this->GetConfigValue("wakka_name"),
          str_replace('%2', $user["name"],
          str_replace('%3', $this->Href().($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
-         $this->GetResourceValue("Mail.Verify"))))."<br />  ";
+         $this->GetResourceValue("EmailVerify"))))."<br />  ";
          $message.= "<br />".$this->GetResourceValue("MailGoodbye")." ".$this->GetConfigValue("wakka_name");
          $this->SendMail($_POST["email"], $subject, $message);
       }
@@ -84,7 +84,7 @@ else if ($user = $this->GetUser())
   <p>
     <label for="email"><?php echo $this->GetResourceValue("YourEmail");?>:</label>
     <input id="email" name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />
-    &nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("root_url").'images/tick.png" alt="'.$this->GetResourceValue("EmailConfirmed").'" title="'.$this->GetResourceValue("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("root_url").'images/warning.png" alt="'.$this->GetResourceValue("Mail.Confirm").'" title="'.$this->GetResourceValue("Mail.Confirm").'" width="20" height="23" />' ?> </p>
+    &nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("root_url").'images/tick.png" alt="'.$this->GetResourceValue("EmailConfirmed").'" title="'.$this->GetResourceValue("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("root_url").'images/warning.png" alt="'.$this->GetResourceValue("EmailConfirm").'" title="'.$this->GetResourceValue("EmailConfirm").'" width="20" height="23" />' ?> </p>
   <p>
     <label for="doubleclickedit"><?php echo $this->GetResourceValue("DoubleclickEditing");?>:</label>
     <input type="hidden" name="doubleclickedit" value="N" />
