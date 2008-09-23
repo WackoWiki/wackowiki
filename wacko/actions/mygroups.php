@@ -1,7 +1,6 @@
 <?php
 
 // actions/mygroups.php
-// written by Adrian Walmsley
 
 function MyGroups($username, $al)
 {
