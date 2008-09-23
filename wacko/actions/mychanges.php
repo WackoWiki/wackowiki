@@ -1,10 +1,10 @@
 <?php
 
 // actions/mychanges.php
-// written by Carlo Zottmann
+// 
 
 if (!$max) $max = 50;
-$bydate = isset($bydate) ? $bydate == "true" ? true : false : false;
+$bydate = isset($bydate) ? $bydate == "true" ? true : false : true;
 
 echo "Here: ".$_GET["bydate"];
 

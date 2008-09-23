@@ -1,7 +1,7 @@
 <?php
 
 // actions/mypages.php
-// written by Carlo Zottmann
+// 
 
 if ($user = $this->GetUser())
 {

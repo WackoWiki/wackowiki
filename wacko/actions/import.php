@@ -1,10 +1,9 @@
 <?php
 /*
- {{import
- }}
+ {{import}}
 
- http://wackowiki.com/somecluster/import --> {{import}}, to = "Test".
- Will be imported at: http://wackowiki.com/Test/*
+ http://wackowiki.org/somecluster/import --> {{import}}, to = "Test".
+ Will be imported at: http://wackowiki.org/Test/*
 
  i.e. no relative addressing
  */
