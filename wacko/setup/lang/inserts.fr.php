@@ -10,8 +10,8 @@ if ($config["language"]==$lng)
 	InsertPage('MesModifications', '{{MyChanges}}', $lng, "Admins", true);
 }
 
-InsertPage('DernièresModifications', '{{RecentChanges}}', $lng);
-InsertPage('DerniersCommentaires', '{{RecentlyCommented}}', $lng);
+InsertPage('Modifications', '{{RecentChanges}}', $lng);
+InsertPage('Commentaires', '{{RecentlyCommented}}', $lng);
 InsertPage('Index', '{{PageIndex}}', $lng);
 InsertPage('Utilisateurs', '{{LastUsers}}', $lng);
 InsertPage('Enregistrement', '{{Registration}}', $lng);
