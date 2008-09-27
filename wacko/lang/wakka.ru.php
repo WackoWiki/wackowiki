@@ -363,9 +363,9 @@ $wakkaResource = array(
   "CacheCleared" => "Кэш очищен.",
 
 // Feed
-  "FeedTitle" => "Feed Title",
-  "FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
-  "FeedError" => "Could not load or parse feed",
+  "FeedTitle" => "Заголовок канала новостей",
+  "FeedNoURL" => "Пожалуйста, укажите канал новостей с параметром url, например, {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
+  "FeedError" => "Невозможно загрузить или распознать новости",
 
 // XML / RSS autodiscovery
   "RecentChangesTitleXML" => " - последние изменения",
