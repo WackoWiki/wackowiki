@@ -142,28 +142,5 @@ $lang = array(
 "DontChange" => "nie zmieniaj wakka_version r&#281;cznie!",
 "TryAgain" => "Spr&#243;buj ponownie",
 
-// O L D
-/*
-
-"pleaseConfigure" => "Prosz&#281; skonfiguruj Twoj&#261; stron&#281; WackoWiki korzystaj&#261;c z formularza poni&#380;ej.",
-"Installing Stuff" => "Instaluj&#281;",
-"Looking for database..." => "Szukam bazy danych...",
-"pages alter" => "Bardzo ma&#322;e zmiany w tabeli pages...",
-"useralter" => "Bardzo ma&#322;e zmiany tabeli users...",
-"Already exists?" => "Ju&#380; istnieje?",
-"Adding some pages..." => "Dodaj&#281; troch&#281; stron...",
-"And table..." => "I tabela %1 (czekaj!)...",
-"return" => "wr&#243;ci&#263; do swojej strony WackoWiki",
-#"mysqlHostDesc" => "Host, na kt&#243;rym serwer MySQL jest uruchomiony. Przewa&#380;nie \"localhost\" (ta sama maszyna, na kt&#243;rej jest Twoja strona WackoWiki).",
-#"dbDesc" => "Baza danych MySQL, kt&#243;r&#261; WackoWiki powinna u&#380;y&#263;. Ta baza danych <b>musi</b> ju&#380; <b>istnie&#263;</b> aby kontynuowa&#263;!",
-#"mysqlPasswDesc" => "Nazwa i has&#322;o u&#380;ytkownika MySQL u&#380;yte do po&#322;&#261;czenia si&#281; z baz&#261; danych.",
-"homeDesc" => "Nazwa Twojej strony g&#322;&#243;wnej WackoWiki. Powinna by&#263; Nazw&#261;Wiki.",
-"baseDesc" => "Podstawowy URL do Twojej strony WackoWiki. Nazwy stron dopisz&#261; si&#281; do niego, wi&#281;c powinien zawiera&#263; parametr \"?page=\" je&#380;eli URL rewriting nie dzia&#322;a na Twoim serwerze.",
-"AdminConf" => "Konfiguracja Konta Administratora",
-"mailDesc" => "Adres e-mail administratora",
-"adding pages" => "Dodaj&#281; par&#281; stron...",
-"newinstall" => "Poniewa&#380; to jest pierwsza instalacja, instalator spr&#243;buje zgadn&#261;&#263; poprawne warto&#347;ci. Zmie&#324; je wy&#322;&#261;cznie, kiedy wiesz, co robisz!",
-*/
-
 );
 ?>

@@ -142,29 +142,5 @@ $lang = array(
 "DontChange" => "Wijzig de wakka_version niet handmatig!",
 "TryAgain" => "Weer proberen",
 
-// O L D
-/*
-
-"Looking for database..." => "Zoeken naar de database...",
-"pages alter" => "Kleine aanpassingen van de pagina tabellen...",
-"useralter" => "Kleine aanpassing aan de gebruikers tabellen...",
-"Installing Stuff" => "Bezig met installeren",
-"Already exists?" => "Bestaat al?",
-"Adding some pages..." => "Voeg enkele pagina's toe...",
-"And table..." => "En %1 tabel (wacht!)...",
-"return" => "teruggaan naar uw WackoWiki site",
-#"mysqlHostDesc" => "De host waar uw MySQL server op draait. Meestal \"localhost\" (bijv., de zelfde machine waar u WackoWiki site draait).",
-#"dbDesc" => "De MySQL database die WackoWiki moet gebruiken. Deze database moet al bestaan voordat u verder kunt gaan!",
-#"mysqlPasswDesc" => "Naam en wachtwoord van de MySQL gebruiker die connectie maakt met de database.",
-"homeDesc" => "Uw WackoWiki site's home pagina. Moet een WikiName zijn.",
-"baseDesc" => "Uw WackoWiki site's basis URL. Pagina namen worden erachter gezet, dus dit moet inclusief de \"?page=\" parameter zijn.",
-"pleaseConfigure" => "Configureer uw WackoWiki site met onderstaand formulier, a.u.b.",
-"AdminConf" => "Administratieve account configuratie",
-"adding pages" => "Toevoegen enkele pagina's ...",
-"newinstall" => "Omdat dit een nieuwe installatie is, zal het installatieprogramma de juiste waarde proberen te raden. Verander deze alleen als u weet wat u doet!",
-"apply rights" => "Ik probeer schrijftoegang in te stellen voor de map",
-"apply rights yourself" => "Stel alstublieft zelf schrijftoegang in (chmod 0777) voor de map ",
-*/
-
 );
 ?>

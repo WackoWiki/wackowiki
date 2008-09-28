@@ -51,7 +51,7 @@ $lang = array(
 "Name" => "Tuo nome WackoWiki",
 "NameDesc" => "Il nome del tuo sito WackoWiki. È di norma un NomeWiki e somiglia a QualcosaComeQuesto. <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
 "Home" => "Home Page",
-"HomeDesc" => "Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
+"HomeDesc" => "La tua homepage WackoWiki. Deve essere un <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">NomeWiki</a>.",
 "MultiLang" => "Multi Language Mode",
 "MultiLangDesc" => "Multilanguage mode allows to have pages with different language settings within single installation. If this mode is enabled, installer will create initial pages for all languages available in distribution.",
 "Admin" => "Nome dell'amministratore",
@@ -59,10 +59,10 @@ $lang = array(
 "Password" => "Admin Password",
 "PasswordDesc" => "Scegli una password per amministratore (almeno 5 caratteri)",
 "Password2" => "Ripeti password:",
-"Mail" => "Admin Email Address",
+"Mail" => "Email dell'amministratore.",
 "MailDesc" => "Enter the admins email address.",
 "Base" => "URL di base",
-"BaseDesc" => "Your WackoWiki sites base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><b><i>http://www.wackowiki.org/</i></b></li><li><b><i>http://www.wackowiki.org/wiki/</i></b></li></ul><p class=\"no_top\">If you are not going to use mod_rewrite then the URL should end with \"?page=\" i.e.<ul><li><b><i>http://www.wackowiki.org/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/wiki/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/?page=</i></b></li><li><b><i>http://www.wackowiki.org?page=</i></b></li></ul>",
+"BaseDesc" => "La tua URL di base per il sito WackoWiki. I nomi di pagina sono stati aggiunti, ora sarà incluso l'oggetto-parametro \"?page=\" se la modalità di riscrittura di URL non funziona sul tuo server. <ul><li><b><i>http://www.wackowiki.org/</i></b></li><li><b><i>http://www.wackowiki.org/wiki/</i></b></li></ul><p class=\"no_top\">If you are not going to use mod_rewrite then the URL should end with \"?page=\" i.e.<ul><li><b><i>http://www.wackowiki.org/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/wiki/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/?page=</i></b></li><li><b><i>http://www.wackowiki.org?page=</i></b></li></ul>",
 "Rewrite" => "Modalità Rewrite",
 "RewriteDesc" => "La modalità Rewrite sarà attivata se si sta usando WackoWiki per la riscrittura d'URL.",
 "Enabled" => "Attivato:",
@@ -88,7 +88,7 @@ $lang = array(
 "DBUserDesc" => "Name of the user used to connect to your database.",
 "DBUser" => "Nome utente",
 "DBPasswordDesc" => "Password of the user used to connect to your database.",
-"DBPassword" => "Password",
+"DBPassword" => "Immetti password",
 "PrefixDesc" => "Prefisso di tutte le tabelle usate da WackoWiki. Questo ti permette di disporre di più installazioni WackoWiki che utilizzano lo stesso database configurandolo all'impiego dei diversi prefissi di tabella.",
 "Prefix" => "Prefisso di tabella",
 "ErrorNoDbDriverDetected" => "No database driver has been detected, please enable either the mysql, mysqli or pdo extension in your php.ini file.",
@@ -141,30 +141,6 @@ $lang = array(
 "WrittenAt" => "scritto a ",
 "DontChange" => "non modificare manualmente la Wakka_version!",
 "TryAgain" => "Riprova",
-
-// O L D
-/*
-
-"Looking for database..." => "Ricerca del database...",
-"pages alter" => "La tabella delle pagine è stata leggermente modificata...",
-"useralter" => " La tabella degli utenti è stata leggermente modificata...",
-"Installing Stuff" => "Installazione degli oggetti",
-"Already exists?" => "Esiste già?",
-"Adding some pages..." => "Aggiunta di pagina...",
-"And table..." => "E %1 tabella (attendi!)...",
-"return" => "Ritorna al tuo sito WackoWiki",
-#"mysqlHostDesc" => "L'host su cui gira il tuo server MySQL funziona. Di solito \"localhost\" (p.e., la stessa macchina del tuo sito WackoWiki è attiva).",
-#"dbDesc" => "Il database MySQL utilizzerà WackoWiki. Il database deve già esistere, prima di continuare!",
-#"mysqlPasswDesc" => "Nome e password dell'utente MySQL sono utizzati per connettersi  al tuo database.",
-"homeDesc" => "La tua homepage WackoWiki. Deve essere un NomeWiki.",
-"baseDesc" => "La tua URL di base per il sito WackoWiki. I nomi di pagina sono stati aggiunti, ora sarà incluso l'oggetto-parametro \"?page=\" se la modalità di riscrittura di URL non funziona sul tuo server.",
-"pleaseConfigure" => "Configura il tuo sito WackoWiki come di seguito.",
-"AdminConf" => "Configurazione dell'account di gestione",
-"password" => "Immetti password",
-"mailDesc" => "Email dell'amministratore.",
-"adding pages" => "Aggiungi alcune pagine...",
-"newinstall" => "Poiché si tratta di una nuova installazione, l'installatore ha ipotizzato i valori corretti. Modificali solo se sai quello che stai facendo!",
-*/
 
 );
 ?>
