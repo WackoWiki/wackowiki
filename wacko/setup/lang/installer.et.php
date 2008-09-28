@@ -51,15 +51,15 @@ $lang = array(
 "Name" => "Sinu WikiNimi",
 "NameDesc" => "Sinu WikiNimi. Tavaliselt see näeb valja NaguMidagiSellist või EesnimiPerekonnanimi. <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
 "Home" => "KoduLeht",
-"HomeDesc" => "Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
+"HomeDesc" => "Sinu WackoWiki kodulehe nimi. Peaks ka olema <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiNimi</a>.",
 "MultiLang" => "Mitmekeelne reþiim",
 "MultiLangDesc" => "Mitmekeelne reþiim võimaldab ühe installatsiooni sees kasutada erinevatel lehtedele erinevaid keelte määranguid. Kui see reþiim on lubatud, siis installeerimise käigus tekitatakse kõigi võimalike keelte jaoks, mis paketiga kaasas on, ühesugused lehed erinevates keeltes.",
 "Admin" => "Adminni nimi",
 "AdminDesc" => "Sisesta administraatori kasutajanimi. Peaks olema <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiNimi</a>.",
-"Password" => "Admin Password",
+"Password" => "Sisesta parool",
 "PasswordDesc" => "Vali administraatorile parool (vähemalt 5 tähemärki)",
 "Password2" => "Korda parooli:",
-"Mail" => "Admin E-post Address",
+"Mail" => "Administraatori e-post",
 "MailDesc" => "Enter the admins email address.",
 "Base" => "Baas-URL",
 "BaseDesc" => "Your WackoWiki sites base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><b><i>http://www.wackowiki.org/</i></b></li><li><b><i>http://www.wackowiki.org/wiki/</i></b></li></ul><p class=\"no_top\">If you are not going to use mod_rewrite then the URL should end with \"?page=\" i.e.<ul><li><b><i>http://www.wackowiki.org/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/wiki/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/?page=</i></b></li><li><b><i>http://www.wackowiki.org?page=</i></b></li></ul>",
@@ -141,29 +141,5 @@ $lang = array(
 "WrittenAt" => "kirjutan ",
 "DontChange" => "ära muuda käsitsi wakka_version versiooni!",
 "TryAgain" => "Proovi uuesti",
-
-// O L D
-/*
-
-"Looking for database..." => "Otsin andmebaasi...",
-"pages alter" => "Ainult õige pisut muudan lehtede tabelit...",
-"useralter" => "Ainult õige pisut muudan kasutajate tabelit...",
-"Installing Stuff" => "Installeerin",
-"Already exists?" => "Juba olemas?",
-"Adding some pages..." => "Lisan mõned lehed...",
-"And table..." => "Ja %1 tabel (oota!)...",
-"return" => "naasta oma WackoWiki lehele",
-#"mysqlHostDesc" => "Masin kus sinu MySQL server asub. Enamasti \"localhost\" (ehk see sama kus asub ka sinu WackoWiki).",
-#"dbDesc" => "MySQL andmebaas, mida WackoWiki peaks kasutama. See andmebaas peab eksisteerima, et jätkata!",
-#"mysqlPasswDesc" => "MySQL'i kasutaja nimi ja parool, mida kasutatakse andmebaasiga kontakteerumisel.",
-"homeDesc" => "Sinu WackoWiki kodulehe nimi. Peaks ka olema WikiNimi.",
-"baseDesc" => "Sinu WackoWiki saidi baas-URL. Lehtede nimed liidetakse sellele, see peaks sisaldama \"?page=\" parameetrit, kui sul ei tööta Apache serveris mod_rewrite moodulit.",
-"pleaseConfigure" => "Palun konfigureeri oma WackoWiki sait, kasutades allpool olevat vormi.",
-"AdminConf" => "Administraatori konto konfigureerimine",
-"password" => "Sisesta parool",
-"mailDesc" => "Administraatori e-post.",
-"adding pages" => "Lisan mõned lehed...",
-"newinstall" => "Kuna see on värske installatsioon, siis üritatakse aimata õiged vastused. Muuda neid ainult siis, kui sa oled kindel, et teed õigesti!",
-*/
 
 );?>

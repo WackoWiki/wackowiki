@@ -51,7 +51,7 @@ $lang = array(
 "Name" => "Посочете името на УакоУики",
 "NameDesc" => "Име на вашия WackoWiki. Трябва да е от типа УикиИме и изглежда ПримерноЕтоТака. <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
 "Home" => "Главна страница",
-"HomeDesc" => "Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
+"HomeDesc" => "Главна страница на WackoWiki.  Трябва да е  с <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">УикиИме</a>.",
 "MultiLang" => "&laquo;Многоезичен&raquo; режим",
 "MultiLangDesc" => "&laquo;Многоезичен&raquo; режим, позволяващ работа на няколко езика. Ако е включен, инсталаторът ще инициализира страници на няколко различни езика.",
 "Admin" => "Име",
@@ -60,9 +60,9 @@ $lang = array(
 "PasswordDesc" => "Изберете парола ( 5 и повече символа )",
 "Password2" => "Подтвърждение на паролата:",
 "Mail" => "Admin Email Address",
-"MailDesc" => "Enter the admins email address.",
+"MailDesc" => "Адрес на електронната поща (email) на администратора.",
 "Base" => "Базов URL",
-"BaseDesc" => "Your WackoWiki sites base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><b><i>http://www.wackowiki.org/</i></b></li><li><b><i>http://www.wackowiki.org/wiki/</i></b></li></ul><p class=\"no_top\">If you are not going to use mod_rewrite then the URL should end with \"?page=\" i.e.<ul><li><b><i>http://www.wackowiki.org/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/wiki/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/?page=</i></b></li><li><b><i>http://www.wackowiki.org?page=</i></b></li></ul>",
+"BaseDesc" => "Базов URL  на вашата инсталация на  WackoWiki. Имената на страниците се присъединяват към него с параметър \"?page=\", ако не може да се ползва mod_rewrite. Your WackoWiki sites base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><b><i>http://www.wackowiki.org/</i></b></li><li><b><i>http://www.wackowiki.org/wiki/</i></b></li></ul><p class=\"no_top\">If you are not going to use mod_rewrite then the URL should end with \"?page=\" i.e.<ul><li><b><i>http://www.wackowiki.org/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/wiki/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/?page=</i></b></li><li><b><i>http://www.wackowiki.org?page=</i></b></li></ul>",
 "Rewrite" => "Rewrite-режим",
 "RewriteDesc" => "Rewrite-режим трябва да е включен, ако ползвате mod_rewrite.",
 "Enabled" => "Включен:",
@@ -142,28 +142,5 @@ $lang = array(
 "DontChange" => "не променяйте wakka_version ръчно!",
 "TryAgain" => "Нов опит",
 
-// O L D
-/*
-
-"pleaseConfigure" => "Моля, настройте вашия WackoWiki .",
-"Looking for database..." => "Проверка на БД...",
-"pages alter" => "Малка промяна в структурата на таблица pages...",
-"useralter" => "Малка промяна в структурата на таблица  user...",
-"Already exists?" => "Вече я има?",
-"Adding some pages..." => "Добавяме първоначално...",
-"And table..." => "И таблица %1 (почакайте малко!)...",
-"return" => "да се върнете на вашия Уики",
-#"mysqlHostDesc" => "Име (hostname), на MySQL сървъра. Обикновено \"localhost\".",
-#"dbDesc" => "База данни на MySQL,  за WackoWiki. Трябва да е създадена предварително!",
-#"mysqlPasswDesc" => "Име и парола за БД MySQL.",
-"homeDesc" => "Главна страница на WackoWiki.  Трябва да е  с УикиИме.",
-"baseDesc" => "Базов URL  на вашата инсталация на  WackoWiki. Имената на страниците се присъединяват към него с параметър \"?page=\", ако не може да се ползва mod_rewrite.",
-"AdminConf" => "Настройка на администраторския достъп",
-"mailDesc" => "Адрес на електронната поща (email) на администратора.",
-"adding pages" => "Добавяме нови страници...",
-"newinstall" => "Инсталиращата програма е настроила параметрите. Променяйте ги, ако знаете какво правите!",
-"apply rights" => "Попытка установить права доступа на папку ",
-"apply rights yourself" => "Вы должны самостоятельно установить доступ на запись на папку ",
-*/
 );
 ?>
