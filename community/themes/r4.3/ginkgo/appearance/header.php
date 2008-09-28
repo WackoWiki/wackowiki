@@ -2,7 +2,6 @@
 /*
 Ginko theme.
 Common header file.
-Commented by Roman Ivanov.
 */
 
 // Wacko can show message (by javascript) 
