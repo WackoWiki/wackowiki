@@ -3,8 +3,6 @@
 Default theme.
 
 Common footer file.
-
-Commented by Roman Ivanov.
 */
 
 // Opens Search form

@@ -1,3 +1,5 @@
+@import "../../_common/X11ColorNames.css";
+
 /* Layout */
 .topbody {
 	background: url(../images/head_XPblue_normal_wl.jpg) repeat-y right;
@@ -273,3 +275,74 @@ tt { color:#666600; background:#ffffcc; padding: 0 2px }
 .newshead {	font-size: 12px; font-weight: bold; border-bottom-width: 1px; border-bottom-style: solid;	border-bottom-color: #C3C3C3; }
 .newsinfo {	font-size: x-small;	font-weight: normal; text-align: right; }
 
+/* CSS form formater */
+.cssform p {
+	width: 300px;
+	clear: left;
+	margin: 0;
+	padding: 5px 0 8px 0;
+	padding-left: 155px; /*width of left column containing the label elements*/
+	border-top: 1px dashed gray;
+	height: 1%;
+}
+.cssform label {
+	font-weight: bold;
+	float: left;
+	margin-left: -155px; /*width of left column*/
+	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+.cssform input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
+	width: 180px;
+}
+.cssform textarea {
+	width: 250px;
+	height: 150px;
+}
+.cssform span.site_count {
+	font-weight: normal;
+	float: left;
+	margin-left: -155px; /*width of left column*/
+	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+.BewareChangeLang {
+	border: 1px solid red;
+	width: 400px;
+	background-color: #DDDDDD;
+	margin: 10px;
+	padding: 5px;
+}
+
+/* cssform1 for actions */
+div#cssform1 {
+	width:50%;
+	padding:10px;
+	margin:0 auto;
+}
+div#cssform1 p {
+	clear: left;
+	margin: 0;
+	padding: 5px 0 8px 0;
+	padding-left: 20%; /*width of left column containing the label elements*/
+	border-top: 1px dashed gray;
+	height: 1%;
+}
+div#cssform1 label {
+	float: left;
+	margin-left: 0px; /*
+	margin-left: -155px; width of left column*/
+	width: 150px;/* width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+div#cssform1 input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
+	width: 180px;
+}
+div#cssform1 textarea {
+	width: 250px;
+	height: 150px;
+}
+div#cssform1 span.site_count {
+	font-weight: normal;
+	float: left;
+	margin-left: 0px; /*
+	margin-left: -155px; width of left column*/
+	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}

@@ -22,5 +22,4 @@ InsertPage('Connessione', '{{Login}}', $lng);
 InsertPage('Preferenze', '{{UserSettings}}', $lng);
 
 InsertPage('InterWiki', '{{InterWikiList}}', $lng);
-
 ?>
