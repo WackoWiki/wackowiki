@@ -156,6 +156,7 @@ $wakkaResource = array(
   "SearchFor" => "Искать",
   "TopicSearchResults" => "Результаты поиска в заголовках фразы ",
   "NotFoundInTopics" => "не встречается в заголовках",
+  "TextSearchPage" => "Поиск",
 
   "PostedBy"  => "отправлен",
   "ThisIsCommentOn" => "Комментарий к",

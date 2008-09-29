@@ -153,6 +153,7 @@ $wakkaResource = array(
   "SearchFor" => "Suche nach ",
   "TopicSearchResults" => "Suchergebnisse in Titeln für ",
   "NotFoundInTopics" => "nicht in Titeln gefunden",
+  "TextSearchPage" => "TextSuche",
 
   "PostedBy"  => "eingetragen von",
   "ThisIsCommentOn" => "Das ist ein Kommentar zu",
