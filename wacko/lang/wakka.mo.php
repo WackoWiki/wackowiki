@@ -155,6 +155,7 @@ $wakkaResource = array(
   "SearchFor" => "A cauta",
   "TopicSearchResults" => "Rezultatul cautarii in anteturi ",
   "NotFoundInTopics" => "nu se intalneste in anteturi",
+  "TextSearchPage" => "TextSearch",
 
   "PostedBy"  => "posted by",
   "ThisIsCommentOn" => "This is a comment on",

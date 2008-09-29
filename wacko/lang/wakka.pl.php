@@ -153,6 +153,7 @@ $wakkaResource = array(
   "SearchFor" => "Znajd¼ ",
   "TopicSearchResults" => "Tematy - wyniki wyszukiwania: ",
   "NotFoundInTopics" => "wyszukiwanego s³owa nie odnaleziono w tematach",
+  "TextSearchPage" => "TextSearch",
 
   "PostedBy"  => "posted by",
   "ThisIsCommentOn" => "This is a comment on",

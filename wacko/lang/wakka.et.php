@@ -153,6 +153,7 @@ $wakkaResource = array(
   "SearchFor" => "Otsi ",
   "TopicSearchResults" => "Otsingu tulemused ",
   "NotFoundInTopics" => "Ei leidunud",
+  "TextSearchPage" => "TekstOtsing",
 
   "PostedBy"  => "posted by",
   "ThisIsCommentOn" => "This is a comment on",
