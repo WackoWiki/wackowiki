@@ -353,7 +353,7 @@ $wakkaResource = array(
   "lockicon" => '<img src="{theme}icons/lock.gif" alt="Accès refusé" />',
   "keyicon" => '<img src="{theme}icons/key.gif" alt="Page à accès personnalisé" />',
   "wantedicon" => '?',
-a
+
 // My Groups
   "UserGroups" => "Groupes d&rsquo;utilisateurs",
   "MyGroups" => "Groupes dont je suis membre",
