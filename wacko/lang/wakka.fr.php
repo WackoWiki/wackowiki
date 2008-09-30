@@ -306,9 +306,9 @@ $wakkaResource = array(
   "UploadRemoveDenied" => "Vous n&rsquo;êtes pas autorisé à enlever ce fichier",
   "UploadMax" => "Pas plus de ",
 
-  "Files_0" => "Aucun fichier n&rsquo;est attaché à cette page. ",
-  "Files_1" => "Un seul fichier est attaché à cette page.",
-  "Files_n" => "%1 fichiers sont attachés à cette page.",
+  "Files_0" => "Aucun fichier n&rsquo;est joint à cette page. ",
+  "Files_1" => "Un seul fichier est joint à cette page.",
+  "Files_n" => "%1 fichiers sont joints à cette page.",
   "Files_all" => "Fichiers",
   "ShowFiles" => "Montrer les fichiers joints/le formulaire pour en joindre",
   "HideFiles" => "Cacher les fichiers/le formulaire",
@@ -353,7 +353,7 @@ $wakkaResource = array(
   "lockicon" => '<img src="{theme}icons/lock.gif" alt="Accès refusé" />',
   "keyicon" => '<img src="{theme}icons/key.gif" alt="Page à accès personnalisé" />',
   "wantedicon" => '?',
-
+a
 // My Groups
   "UserGroups" => "Groupes d&rsquo;utilisateurs",
   "MyGroups" => "Groupes dont je suis membre",
