@@ -20,6 +20,7 @@ $wakkaResource = array(
   "LoginName" => "((WackoWiki:Doc/English/WikiName NameSurname))",
   "LoginPassword" => "Password",
   "LoginButton" => "Log ind!",
+  "LoginPage" => "Login",
 // other
   "TopicSearchText" => "Søg i titler",
   "MsWordVersion" => "Kopieringsvenlig version",
