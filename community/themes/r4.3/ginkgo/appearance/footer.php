@@ -73,7 +73,11 @@ echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->Ge
 }
 ?>
 <!-- <div class="copyright"> 
-Powered by <?php // echo $this->Link("WackoWiki:WackoDocDeutsch", "", "WackoWiki ".$this->GetWackoVersion()) ?>
+<?php 
+if ($this->GetUser()){
+	echo //$this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion());
+}
+?>
 </div> -->
 
 <?php
