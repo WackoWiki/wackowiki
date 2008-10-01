@@ -23,7 +23,10 @@ if ($this->GetConfigValue("debug")>=2)
 <table class="bottom" align="center" border="0" cellpadding="0"
 	cellspacing="0" width="100%">
 	<tr>
-		<td class="copyright">Powered by <?php echo $this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion()) ?>
-		</td>
+		<td class="copyright"><?php 
+		if ($this->GetUser()){
+			echo $this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion());
+		}
+		?></td>
 	</tr>
 </table>
