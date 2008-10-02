@@ -343,8 +343,8 @@ $wakkaResource = array(
   "Next" => "Next",
   "Prev" => "Prev",
 
-  "default_bookmarks" => "SisuKord\nViimasedMuudatused\nViimatiKommenteeritud\n((Kasutajad))\n((Registration Registreerimine))",
-  "site_bookmarks" => "SisuKord / ViimasedMuudatused / ViimatiKommenteeritud",
+  "default_bookmarks" => "SisuKord\n((ViimasedMuudatused Muudatused))\n((ViimatiKommenteeritud Kommenteeritud))\n((Kasutajad))\n((Registration Registreerimine))",
+  "site_bookmarks" => "SisuKord / ((ViimasedMuudatused Muudatused)) / ((ViimatiKommenteeritud Kommenteeritud))",
 
 //icons
   "outericon" => '<img src="{theme}icons/web.gif" alt="" />',

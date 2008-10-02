@@ -342,8 +342,8 @@ $wakkaResource = array(
   "Next" => "Next",
   "Prev" => "Prev",
 
-  "default_bookmarks" => "IndiceDePaginas\nUltimasModificaciones\nUltimosCommentarios\n((Usuarios))\n((Registrarse))",
-  "site_bookmarks" => "IndiceDePaginas / UltimasModificaciones / UltimosCommentarios",
+  "default_bookmarks" => "((IndiceDePaginas Indice))\n((UltimasModificaciones Modificaciones))\n((UltimosCommentarios Commentarios))\n((Usuarios))\n((Registrarse))",
+  "site_bookmarks" => "((IndiceDePaginas Indice)) / ((UltimasModificaciones Modificaciones)) / ((UltimosCommentarios Commentarios))",
 
 //icons
   "outericon" => '<img src="{theme}icons/web.gif" alt="" />',
