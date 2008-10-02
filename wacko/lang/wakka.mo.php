@@ -341,8 +341,8 @@ $wakkaResource = array(
   "Next" => "Next",
   "Prev" => "Prev",
 
-  "default_bookmarks" => "PageIndex\nRecentChanges\nRecentlyCommented\n((Users))\n((Registration))",
-  "site_bookmarks" => "PageIndex / RecentChanges / RecentlyCommented",
+  "default_bookmarks" => "((PageIndex Index))\n((RecentChanges Changes))\n((RecentlyCommented Comments))\n((Users))\n((Registration))",
+  "site_bookmarks" => "((PageIndex Index)) / ((RecentChanges Changes)) / ((RecentlyCommented Comments))",
 
 //icons
   "outericon" => '<img src="{theme}icons/web.gif" alt="" />',

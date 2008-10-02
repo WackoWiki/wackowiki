@@ -342,8 +342,8 @@ $wakkaResource = array(
   "Next" => "Next",
   "Prev" => "Prev",
 
-  "default_bookmarks" => "IndexStron\nOstatnieZmiany\nOstatnioKomentowane\n((U¿ytkownicy))\n((Rejestracja))",
-  "site_bookmarks" => "IndexStron / OstatnieZmiany / OstatnioKomentowane",
+  "default_bookmarks" => "((IndexStron Index))\n((OstatnieZmiany Zmiany))\n((OstatnioKomentowane Komentowane))\n((U¿ytkownicy))\n((Rejestracja))",
+  "site_bookmarks" => "((IndexStron Index)) / ((OstatnieZmiany Zmiany)) / ((OstatnioKomentowane Komentowane))",
 
 //icons
   "outericon" => '<img src="{theme}icons/web.gif" alt="" />',
