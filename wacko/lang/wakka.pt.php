@@ -271,8 +271,10 @@ $wakkaResource = array(
   "SettingsEdit" => "Editar",
   "SettingsRevisions" => "Revisões",
   "SettingsRename" => "Renomear",
+  "SettingsMassRename" => "for entire cluster",
   "SettingsRemove" => "Remover",
   "SettingsAcls" => "ACLs",
+  "SettingsMassAcls" => "for entire cluster",
   "SettingsUpload" => "Upload",
   "SettingsReferrers" => "Referrers",
   "SettingsWatch" => "Acompanhe",
@@ -280,6 +282,7 @@ $wakkaResource = array(
   "SettingsMsword" => "versão MS Word",
   "SettingsLatex" => "versão LaTeX",
   "SettingsMassAcls" => "ACLs para todo cluster",
+  "SettingsXML" => "Export to XML",
   "BewareChangeLang" => "Não altere de Idioma, se não sabe exactamente o que está a fazer. Alterar o Idioma provocará o renomear da página de acordo com as regras de ortografia de cada idioma. Muito conteúdo poderá tornar-se ilegível. Se isso acontecer reverta a situação voltando a escolher o idioma anterior.",
   "SetLang" => "Idioma para esta página",
 
@@ -337,8 +340,6 @@ $wakkaResource = array(
   "MassRenaming" => "Rename all cluster",
   "MassNewName" => "Enter new name for this cluster",
   "MassNeedRedirect" => "Create redirect to the new pages on the old pages",
-  "SettingsMassAcls" => "for entire cluster",
-  "SettingsMassRename" => "for entire cluster",
 
   "Next" => "Next",
   "Prev" => "Prev",
