@@ -8,7 +8,7 @@ $wackoLanguage = array(
   "UPPER_P"  => "A-Z\xc0-\xd6\xd8-\xdd",
   "LOWER_P"  => "a-z\xdf-\xf6\xf8-\xfd\xff\/'",
   "ALPHA_P"  => "A-Za-z\xc0-\xd6\xd8-\xdd\xdf-\xf6\xf8-\xfd\xff\_\-\/'",
-  "locale" => "C",
+  "locale" => "nl_NL",
   "NpjLettersFrom" => "àáâãåçèéêëìíîïòóôõùúûıÀÁÂÃÅÇÈÉÊËÌÍÎÏÒÓÔÕÙÚÛİ",
   "NpjLettersTo"   => "aaaaaceeeeiiiioooouuuyAAAAACEEEEIIIIOOOOUUUY",
   "NpjBiLetters" => array("ä"=>"ae", "ñ"=>"ny", "ö"=>"oe", "ø"=>"oe", "ü"=>"ue", "æ"=>"ae", "Ä"=>"Ae",
