@@ -654,12 +654,16 @@ ul.leftNav { /* space at the bottom of the top left nav */
 	margin-left: -155px; /*width of left column*/
 	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
-.BewareChangeLang {
-	border: 1px solid red;
+.BewareChangeLang{
+	border: 1px solid #ffee66;
 	width: 400px;
-	background-color: #DDDDDD;
+	background-color: #ffffdd;
+	background-image: url(../../../images/warning.gif);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
 	margin: 10px;
-	padding: 5px;
+	padding: 5px 5px 5px 40px;
 }
 
 /* cssform1 for actions */
