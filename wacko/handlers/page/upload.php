@@ -183,7 +183,7 @@ else
 					// Make HTML in the description redundant ;¬)
 					$description = $this->Format($description, "preformat");
 					$description = $this->Format($description, "safehtml");
-					$description = htmlentities($description);
+					$description = htmlentities($description,ENT_COMPAT,$this->GetCharset());
 
 					// 5. insert line into DB
 					$this->Query("insert into ".$this->config["table_prefix"]."upload set ".
