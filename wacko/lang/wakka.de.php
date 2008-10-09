@@ -389,7 +389,7 @@ $wakkaResource = array(
   "LastModification" => "Letzte Änderung",
 
 // Captcha
-  "Captcha" => 'Bitte schreibe das Wort welches du im Bild lesen kannst.',
+  "Captcha" => 'Bitte schreibe das Wort welches du im Bild lesen kannst',
   "SpamAlert" => 'Du hast das Captcha-Wort nicht korrekt eingegeben.',
   "CaptchaReload" => "Neues Captcha",
   "CaptchaReloadWarning" => "Sorry, kann das Captcha Bild nicht neu laden, du musst die Seite neu laden um das zu tun.",
