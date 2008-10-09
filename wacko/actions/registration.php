@@ -189,10 +189,10 @@ if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
                         if(strpos($this->GetUserName(), '.'))
                            {
           ?>
-<p><label><?php echo $this->GetResourceValue("Captcha");?>:</label>
+<p><label for="captcha"><?php echo $this->GetResourceValue("Captcha");?>:</label>
 <img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetResourceValue("Captcha");?>" /> <a href="" onClick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetResourceValue("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("root_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetResourceValue("CaptchaReload"); ?>" /></a>
 <br />
-<input type="text" name="word" maxlength="6" style="width: 273px;" />
+<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
 </p>
 <?php
                            }
