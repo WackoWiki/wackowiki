@@ -15,10 +15,10 @@
    // if this page exists
    if ($this->page)
    {
-      if($this->HasAccess("write"))
+      if($this->HasAccess("write") || $this->IsAdmin())
       {
          $this->EchoTab( $this->href("settings"),  $this->GetResourceValue("SettingsTip"),
-         $this->GetResourceValue("SettingsText"),
+         $this->GetResourceValue("EditSettingsText"),
          $this->method != "settings"
          );
       }
