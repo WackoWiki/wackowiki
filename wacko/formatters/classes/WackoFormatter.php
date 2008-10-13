@@ -175,7 +175,7 @@ class WackoFormatter
 "\(\?(\S+?)([ \t]+([^\n]+?))?\?\)|".
 		($this->object->GetConfigValue("disable_bracketslinks")==1?"":
  "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)|"
-		).
+ ).
 "\^\^\S*?\^\^|vv\S*?vv|".
 "\n[ \t]*>+[^\n]*|".
 "<\[.*?\]>|".
@@ -191,20 +191,20 @@ class WackoFormatter
 "\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]|([0-9]{1,3}))[\.\)](\#[0-9]{1,3})?)?|".
 "\b[[:alnum:]]+[:][".$object->language["ALPHANUM_P"]."\!\.][".$object->language["ALPHANUM_P"]."\-\_\.\+\&\=\#]+|".
 "~([^ \t\n]+)|".
-		($this->object->GetConfigValue("disable_tikilinks")==1?
+ ($this->object->GetConfigValue("disable_tikilinks")==1?
  "":"\b(".$object->language["UPPER"].$object->language["LOWER"].$object->language["ALPHANUM"]."*\.".$object->language["ALPHA"].$object->language["ALPHANUM"]."+)\b|").
-		($this->object->GetConfigValue("disable_wikilinks")==1?
+ ($this->object->GetConfigValue("disable_wikilinks")==1?
  "":"(~?)(?<=[^\.".$object->language["ALPHANUM_P"]."]|^)(((\.\.|!)?\/)?".$object->language["UPPER"].$object->language["LOWER"]."+".$object->language["UPPERNUM"].$object->language["ALPHANUM"]."*)\b|").
-		($this->object->GetConfigValue("disable_npjlinks")==1?
+ ($this->object->GetConfigValue("disable_npjlinks")==1?
  "":"(~?)".$object->language["ALPHANUM"]."+\@".$object->language["ALPHA"]."*(?!".$object->language["ALPHANUM"]."*\.".$object->language["ALPHANUM"]."+)(\:".$object->language["ALPHANUM"]."*)?|".$object->language["ALPHANUM"]."+\:\:".$object->language["ALPHANUM"]."+|").
 "\n)/sm";
-		$this->NOTLONGREGEXP = "/(".($this->object->GetConfigValue("disable_formatters")==1?"":"\%\%.*?\%\%|").
+ $this->NOTLONGREGEXP = "/(".($this->object->GetConfigValue("disable_formatters")==1?"":"\%\%.*?\%\%|").
 "~([^ \t\n]+)|".
 "\"\".*?\"\"|".
 "\{\{[^\n]*?\}\}|".
 "\xa5\xa5.*?\xa5\xa5".
 ")/sm";
-		$this->MOREREGEXP = "/(>>.*?<<|".
+ $this->MOREREGEXP = "/(>>.*?<<|".
 "~([^ \t\n]+)|".
 "\xa5\xa5.*?\xa5\xa5".
 ")/sm";
