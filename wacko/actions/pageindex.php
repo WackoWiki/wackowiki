@@ -80,7 +80,7 @@ if(!$letter)
    {
       foreach($top_links_array as $link_data)
       {
-         $top_links.="<a href=\"?offset=".(floor($link_data["ind"] / $limit) * $limit)."#letter_".$link_data["link"]."\"><strong>".$link_data["char"]."</strong></a>\n";
+         $top_links.="<a href=\"".$this->href("", "", "offset=").(floor($link_data["ind"] / $limit) * $limit)."#letter_".$link_data["link"]."\"><strong>".$link_data["char"]."</strong></a>\n";
       }
    }
    else
@@ -103,7 +103,7 @@ if($page_links != "")
       // Prev
       if($offset + $total_visible > $limit)
       {
-         $prev_page_link = '<a href="?offset='.($offset - $limit > 0 ? $offset - $limit : 0).'">&lt; '.$this->GetResourceValue("Prev").'</a>';
+         $prev_page_link = '<a href="'.$this->href("", "", "offset=").($offset - $limit > 0 ? $offset - $limit : 0).'">&lt; '.$this->GetResourceValue("Prev").'</a>';
       }
       else
       {
@@ -113,7 +113,7 @@ if($page_links != "")
       // Next
       if($offset + $total_visible < $total)
       {
-         $next_page_link = '<a href="?offset='.($offset + $total_visible).'">'.$this->GetResourceValue("Next").' &gt;</a>';
+         $next_page_link = '<a href="'.$this->href("", "", "offset=").($offset + $total_visible).'">'.$this->GetResourceValue("Next").' &gt;</a>';
       }
       else
       {
