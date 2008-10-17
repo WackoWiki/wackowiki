@@ -80,7 +80,7 @@ else if ($_REQUEST["action"] == "login")
          }
       // End Comment Captcha
 
-      if($word_ok)
+      if (($word_ok) || $this->IsAdmin() || !$this->GetConfigValue("captcha_registration"))
          {
             // check if name is WikiName style
             if (!$this->IsWikiName($name)) $error = $this->GetResourceValue("MustBeWikiName");
