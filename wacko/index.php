@@ -13,7 +13,7 @@ define("WACKO_VERSION", "R4.3");
 define('XML_HTMLSAX3', dirname(__FILE__)."/lib/HTMLSax3/");
 
 // stupid version check
-if (!isset($_REQUEST)) die('$_REQUEST[] not found. WackoWiki requires PHP 4.1.0 or higher!');
+if (!isset($_REQUEST)) die('$_REQUEST[] not found. WackoWiki requires PHP 4.3.3 or higher!');
 
 // workaround for the amazingly annoying magic quotes.
 function magicQuotesSuck(&$a)
