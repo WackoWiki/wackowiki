@@ -4,7 +4,7 @@
 
 function quote($dblink, $string)
 {
- return mysql_escape_string($string);
+ return mysql_real_escape_string($string);
 }
 
 //All DBALs (mysql excluded) must replace LIMIT with some other instruction.

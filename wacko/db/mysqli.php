@@ -2,7 +2,7 @@
 
 function quote($dblink, $string)
    {
-      return mysqli_escape_string($dblink, $string);
+      return mysqli_real_escape_string($dblink, $string);
    }
 
 function query($dblink, $query)
