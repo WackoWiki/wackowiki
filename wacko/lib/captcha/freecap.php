@@ -94,7 +94,7 @@ $col_type = 1;
 // on the other hand, those attempting OCR will find the ability to request new images
 // very useful; if they can't crack one, just grab an easier target...
 // for the ultra-paranoid, setting it to <5 will still work for most users
-$max_attempts = 200;
+$max_attempts = 15;
 
 // If you are not successful in displaying an image (but the
 // background is displayed), it's likely you are on a Mac PowerPC,
