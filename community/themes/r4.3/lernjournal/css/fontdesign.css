@@ -1,0 +1,57 @@
+TEXTAREA {
+  font-family: Arial,Geneva,Verdana,Tahoma,Trebuchet MS,Helvetica,sans-serif;
+  font-size: 13px;
+    line-height: 1.3em;
+}
+
+body {
+font-family:Arial,Geneva,Verdana,Tahoma,Trebuchet MS,Helvetica,sans-serif;
+font-size:13px;
+}
+
+div#navi {
+font-weight:bolder;
+line-height:150%;
+color:#333;
+font-family:Arial,Geneva,Verdana,Tahoma,Trebuchet MS,Helvetica,sans-serif;
+font-size:12px;
+}
+
+div#navi a {
+font-weight:normal;
+line-height:150%;
+color:#333399;
+font-family:Arial,Geneva,Verdana,Tahoma,Trebuchet MS,Helvetica,sans-serif;
+font-size:12px;
+}
+
+div#navi a:hover {
+color:#000;
+}
+
+div#content loc {
+color:#607EBC;
+font-family:Arial,Geneva,Verdana,Tahoma,Trebuchet MS,Helvetica,sans-serif;
+font-size:11px;
+height:50px;
+letter-spacing:0.1em;
+word-spacing:0.4em;
+}
+
+div#footer {
+color:#333399;
+font-size:x-small;
+font-weight:bolder;
+letter-spacing:0.5em;
+text-align:right;
+}
+
+.loc {
+padding:10px;
+color:#607EBC;
+font-family:Arial,Geneva,Verdana,Tahoma,Trebuchet MS,Helvetica,sans-serif;
+font-size:11px;
+height:50px;
+letter-spacing:0.1em;
+word-spacing:0.4em;
+}

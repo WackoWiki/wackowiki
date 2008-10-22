@@ -1,0 +1,87 @@
+body {
+background-color:#d1d1d1;
+margin:0;
+}
+
+div#head {
+background-color:#607EBC;
+border-right-color:#435884;
+border-right-style:dashed;
+border-right-width:0px;
+height:54px;
+margin:0 auto;
+width:960px;
+}
+div#headb {
+background-color:#d1d1d1;
+height:54px;
+margin:0 auto;
+width:100%;
+}
+div#wikititle{
+width:200px;
+color:#fff;
+float:left;
+margin-top:26px;
+margin-left:10px;
+font-weight:bold;
+}
+
+div#search{
+color:#fff;
+margin-top:26px;
+margin-right:12px;
+float:right;}
+
+input#search {
+border:1;
+color:#333;
+float:right;
+font-family:Arial, Helvetica, sans-serif;
+font-size:0.95em;
+margin:14px 20px;
+
+width:160px;
+}
+
+div#container {
+background-color:#fff;
+margin:4px auto;
+width:960px;
+}
+
+div#navi {
+background-color:#fff;
+padding-top:20px;
+padding-bottom:20px;
+padding-right:8px;
+padding-left:8px;
+float:left;
+width:130px;
+}
+
+div#content {
+background-color:#fff;
+border-left-color:#607EBC;
+border-left-style:dashed;
+border-left-width:0px;
+border-right-color:#607EBC;
+border-right-style:dashed;
+border-right-width:0px;
+float:right;
+padding:5px;
+padding-bottom:10px;
+width:800px;
+}
+
+div#footer {
+background-image:url(../images/footer_back.gif);
+background-position:center;
+background-repeat:no-repeat;
+clear:both;
+margin:10px auto;
+padding-bottom:10px;
+padding-right:20px;
+padding-top:10px;
+width:960px;
+}

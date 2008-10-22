@@ -1,0 +1,101 @@
+/* sidenote.css */
+/* Contains css for tip, note and warn actions. */
+
+/* postit note-style information box */
+#note {
+        clear: both;
+        font-size: 10pt;
+        float: left;
+        width: 200px;
+        border: 1px solid #AAAAAA;
+        margin: 15px 10px 0px 0px;
+        padding: 0px;
+        background-color: #FFF900;
+        text-align: justify;
+        vertical-align: top;
+}
+
+#note hr {
+        height: 1px;
+        border: 1px solid #AAAAAA;
+        width: 100%;
+}
+
+#note .title {
+        text-align: center;
+        font-weight: bold;
+        background-color: #EEE800;
+        border-bottom: 1px solid #AAAAAA;
+        color: #000000;
+}
+
+#note #text {
+        padding: 4px;
+        color: #000000;
+}
+
+/* tip information box */
+#tip {
+        clear: both;
+        font-size: 10pt;
+        float: left;
+        width: 200px;
+        border: 1px solid #AAAAAA;
+        margin: 15px 10px 0px 0px;
+        padding: 0px;
+        background-color: #FFFFFF;
+        text-align: justify;
+        vertical-align: top;
+}
+
+#tip hr {
+        height: 1px;
+        border: 1px solid #AAAAAA;
+        width: 100%;
+}
+
+#tip .title {
+        text-align: center;
+        font-weight: bold;
+        background-color: #EFEFEF;
+        border-bottom: 1px solid #AAAAAA;
+        color: #000000;
+}
+
+#tip #text {
+        padding: 4px;
+        color: #000000;
+}
+
+/* warning information box */
+#warn {
+        clear: both;
+        font-size: 10pt;
+        float: left;
+        width: 200px;
+        border: 1px solid #AAAAAA;
+        margin: 15px 10px 0px 0px;
+        padding: 0px;
+        background-color: #FFAAAA;
+        text-align: justify;
+        vertical-align: top;
+}
+
+#warn hr {
+        height: 1px;
+        border: 1px solid #AAAAAA;
+        width: 100%;
+}
+
+#warn .title {
+        color: #FFFFFF;
+        text-align: center;
+        font-weight: bold;
+        background-color: #FF0000;
+        border-bottom: 1px solid #AAAAAA;
+}
+
+#warn #text {
+        padding: 4px;
+        color: #000000;
+}
