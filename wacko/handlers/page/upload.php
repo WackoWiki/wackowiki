@@ -44,7 +44,8 @@ if ($registered
 				?>
   <br />
   <ul>
-    <li><?php echo $this->Link( "file:".(($_GET["remove"] == "global")?"":($this->tag."/")).$_GET["file"] ); ?></li>
+    <li><?php echo $this->Link( "file:".$_GET["file"] ); ?></li>
+	<?php // place here file description too ?>
   </ul>
   <br />
   <input type="hidden" name="remove" value="<?php echo $_GET["remove"]?>" />
@@ -203,7 +204,7 @@ else
 					?>
   <br />
   <ul>
-    <li><?php echo $this->Link( "file:".(($is_global)?"":($this->tag."/")).$small_name ); ?></li>
+    <li><?php echo $this->Link("file:".$small_name); ?></li>
     <li>&quot;<?php echo $description; ?>&quot;</li>
   </ul>
   <br />
