@@ -111,7 +111,7 @@ if (!function_exists('print_cluster_tree'))
 
 			if ($style=="ul") print "<ul>";
 			if ($style=="ol") print "<ol>";
-			if ($style=="indent") print "<div class='indent'>";
+			if ($style=="indent") print "<div class=\"indent\">";
 			foreach ($tree as $sub_tag => $sub_tag_array )
 			{
 
