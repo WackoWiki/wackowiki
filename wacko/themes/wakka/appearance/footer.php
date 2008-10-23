@@ -11,12 +11,12 @@ echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get"); ?>
 // If User has rights to edit page, show Edit link
 echo $this->HasAccess("write") ? "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetResourceValue("EditTip")."\">".$this->GetResourceValue("EditText")."</a> |\n" : "";
 
-// Revisions link
-echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetResourceValue("RevisionTip")."\">".$this->GetPageTime()."</a> |\n" : "";
-
 // If this page exists
 if ($this->page)
 {
+	// Revisions link
+	echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetResourceValue("RevisionTip")."\">".$this->GetPageTime()."</a> |\n" : "";
+
 	// If owner is current user
 	if ($this->UserIsOwner())
 	{
@@ -56,7 +56,7 @@ if ($this->page)
 		print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1del.gif\" title=\"".$this->GetResourceValue("DeleteTip")."\" alt=\"".$this->GetResourceValue("DeleteText")."\" /></a>");
 	}
 
-	if($this->HasAccess("write") || $this->IsAdmin())
+	if($this->HasAccess("write") && $this->GetUser() || $this->IsAdmin())
 	{
 		// Page  settings link
 		print(" | <a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetResourceValue("EditSettingsConfirm")."');\"":"").">".$this->GetResourceValue("EditSettingsText")."</a> | ");
