@@ -1,128 +1,118 @@
 <div class="pageBefore">&nbsp;</div>
-<div class="page">
-<?php
+<div class="page"><?php
 if ($this->HasAccess("read"))
 {
-   if (!$this->page)
-   {
-      if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
-      print(str_replace("%1",$this->href("edit","","",1),$this->GetResourceValue("DoesNotExists")));
-   }
-   else
-   {
-      // comment header?
-      if ($this->page["comment_on"])
-      {
-         print("<div class=\"commentinfo\">".$this->GetResourceValue("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->page["comment_on"], "", "", 0).", ".$this->GetResourceValue("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetResourceValue("At")." ".$this->page["time"]."</div>");
-      }
+	if (!$this->page)
+	{
+		if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
+		print(str_replace("%1",$this->href("edit","","",1),$this->GetResourceValue("DoesNotExists")));
+	}
+	else
+	{
+		// comment header?
+		if ($this->page["comment_on"])
+		{
+			print("<div class=\"commentinfo\">".$this->GetResourceValue("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->page["comment_on"], "", "", 0).", ".$this->GetResourceValue("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetResourceValue("At")." ".$this->page["time"]."</div>");
+		}
 
-      if ($this->page["latest"] == "N")
-      {
-         print("<div class=\"revisioninfo\">".
-         str_replace("%1",$this->href(),
-         str_replace("%2",$this->GetPageTag(),
-         str_replace("%3",$this->page["time"],
-         $this->GetResourceValue("Revision")))).".</div>");
-      }
+		if ($this->page["latest"] == "N")
+		{
+			print("<div class=\"revisioninfo\">".
+			str_replace("%1",$this->href(),
+			str_replace("%2",$this->GetPageTag(),
+			str_replace("%3",$this->page["time"],
+			$this->GetResourceValue("Revision")))).".</div>");
+		}
 
-      $this->Query("UPDATE ".$this->config["table_prefix"]."pages SET hits=hits+1 WHERE supertag='".quote($this->dblink, $this->GetPageSuperTag())."'");
+		$this->Query("UPDATE ".$this->config["table_prefix"]."pages SET hits=hits+1 WHERE supertag='".quote($this->dblink, $this->GetPageSuperTag())."'");
 
-      $this->SetLanguage($this->pagelang);
-      if (($this->page["body_r"] == "") ||
-      (($this->page["body_toc"] == "") && $this->GetConfigValue("paragrafica")))
-      {
-         $this->page["body_r"] = $this->Format($this->page["body"], "wacko");
-         if ($this->GetConfigValue("paragrafica"))
-         {
-            $this->page["body_r"]   = $this->Format($this->page["body_r"], "paragrafica");
-            $this->page["body_toc"] = $this->body_toc;
-         }
-         // store to DB
-         if ($this->page["latest"] != "N")
-         $this->Query("update ".$this->config["table_prefix"]."pages set ".
+		$this->SetLanguage($this->pagelang);
+		if (($this->page["body_r"] == "") ||
+		(($this->page["body_toc"] == "") && $this->GetConfigValue("paragrafica")))
+		{
+			$this->page["body_r"] = $this->Format($this->page["body"], "wacko");
+			if ($this->GetConfigValue("paragrafica"))
+			{
+				$this->page["body_r"]   = $this->Format($this->page["body_r"], "paragrafica");
+				$this->page["body_toc"] = $this->body_toc;
+			}
+			// store to DB
+			if ($this->page["latest"] != "N")
+			$this->Query("update ".$this->config["table_prefix"]."pages set ".
          "body_r = '".quote($this->dblink, $this->page["body_r"])."', ".
          "body_toc = '".quote($this->dblink, $this->page["body_toc"])."' ".
          "where id = '".quote($this->dblink, $this->page["id"])."' LIMIT 1");
-      }
+		}
 
-      // display page
-      $data = $this->Format($this->page["body_r"], "post_wacko", array("bad"=>"good"));
-      $data = $this->NumerateToc( $data ); //  numerate toc if needed
-      echo $data;
-      $this->SetLanguage($this->userlang);
-      ?>
-  <script type="text/javascript">
+		// display page
+		$data = $this->Format($this->page["body_r"], "post_wacko", array("bad"=>"good"));
+		$data = $this->NumerateToc( $data ); //  numerate toc if needed
+		echo $data;
+		$this->SetLanguage($this->userlang);
+		?> <script type="text/javascript">
    var dbclick = "page";
-  </script>
-  <?php
+  </script> <?php
 
   // if this is an old revision, display some buttons
   if ($this->HasAccess("write") && ($this->page["latest"] == "N"))
   {
    $latest = $this->LoadPage($this->tag);
-   ?>
-  <br />
-  <?php echo $this->FormOpen("edit") ?>
-  <input type="hidden"
-   name="previous" value="<?php echo $latest["time"] ?>" />
-  <input
-   type="hidden" name="body"
-   value="<?php echo htmlspecialchars($this->page["body"]) ?>" />
-  <input
-   type="submit"
-   value="<?php echo $this->GetResourceValue("ReEditOldRevision") ?>" />
-  <?php echo $this->FormClose(); ?>
-  <?php
-}
-}
+   ?> <br />
+   <?php echo $this->FormOpen("edit") ?> <input type="hidden"
+	name="previous" value="<?php echo $latest["time"] ?>" /> <input
+	type="hidden" name="body"
+	value="<?php echo htmlspecialchars($this->page["body"]) ?>" /> <input
+	type="submit"
+	value="<?php echo $this->GetResourceValue("ReEditOldRevision") ?>" /> <?php echo $this->FormClose(); ?>
+   <?php
+  }
+	}
 }
 else
 {
-   if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
-   print($this->GetResourceValue("ReadAccessDenied"));
+	if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
+	print($this->GetResourceValue("ReadAccessDenied"));
 }
-?>
-  <br style="clear: both" />
-  &nbsp;</div>
+?> <br style="clear: both" />
+&nbsp;</div>
 <?php
+// files code starts
 if ($this->GetConfigValue("footer_files")) {
 
-   if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1 && ($this->GetConfigValue("hide_files") != 2 || $this->GetUser()))
-   {
+	if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1 && ($this->GetConfigValue("hide_files") != 2 || $this->GetUser()))
+	{
 
-      // store files display in session
-      $tag = $this->GetPageTag();
-      if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag]))
-      $_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
+		// store files display in session
+		$tag = $this->GetPageTag();
+		if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag]))
+		$_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
 
-      switch($_REQUEST["show_files"])
-      {
-         case "0":
-            $_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = 0;
-            break;
-         case "1":
-            $_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = 1;
-            break;
-      }
+		switch($_REQUEST["show_files"])
+		{
+			case "0":
+				$_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = 0;
+				break;
+			case "1":
+				$_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = 1;
+				break;
+		}
 
-      // display files!
-      if ($this->page && $_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag])
-      {
-         // display files header
-         ?>
+		// display files!
+		if ($this->page && $_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag])
+		{
+			// display files header
+			?>
 <a name="files" id="files"></a>
-<div class="filesheader">
-<?php echo $this->GetResourceValue("Files_all") ?> [<a
-
-   href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?></a>]
+<div class="filesheader"><?php echo $this->GetResourceValue("Files_all") ?>
+[<a
+	href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?></a>]
     </div>
+	
     <?php
-
     echo "<div class=\"files\">";
     echo $this->Action("files",array("nomark"=>1));
     echo "</div>";
     // display form
-    print("<div class=\"filesform\">\n");
     if ($user = $this->GetUser())
     {
       $user = strtolower($this->GetUserName());
@@ -138,8 +128,11 @@ if ($this->GetConfigValue("footer_files")) {
          ($this->CheckACL($user,$this->config["upload"]))
         )
        )
+	{
+	print("<div class=\"filesform\">\n");
     echo $this->Action("upload",array("nomark"=>1));
     print("</div>\n");
+	}
   }
   else
   {
@@ -170,6 +163,7 @@ if ($this->GetConfigValue("footer_files")) {
   }
 }
 }
+// end files
 ?>
 
 <?php
