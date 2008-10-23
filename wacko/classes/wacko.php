@@ -926,7 +926,7 @@ class Wacko
 
    function SaveMeta($tag, $metadata)
    {
-      if ($this->UserIsOwner($tag))
+      if ($this->UserIsOwner($tag) || $this->IsAdmin())
       {
          // update
          $this->Query("UPDATE ".$this->config["table_prefix"]."pages SET ".
