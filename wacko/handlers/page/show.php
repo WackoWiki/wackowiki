@@ -38,10 +38,10 @@ if ($this->HasAccess("read"))
 			}
 			// store to DB
 			if ($this->page["latest"] != "N")
-			$this->Query("update ".$this->config["table_prefix"]."pages set ".
+			$this->Query("UPDATE ".$this->config["table_prefix"]."pages SET ".
          "body_r = '".quote($this->dblink, $this->page["body_r"])."', ".
          "body_toc = '".quote($this->dblink, $this->page["body_toc"])."' ".
-         "where id = '".quote($this->dblink, $this->page["id"])."' LIMIT 1");
+         "WHERE id = '".quote($this->dblink, $this->page["id"])."' LIMIT 1");
 		}
 
 		// display page

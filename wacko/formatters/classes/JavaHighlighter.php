@@ -193,9 +193,9 @@ class JavaHighlighter{
 		return FALSE;
 	}
 
-	/******************************/
-	/* On traite les cas speciaux */
-	/******************************/
+	/****************************/
+	/* It handles special cases */
+	/****************************/
 	function parsearrays()
 	{
 		$haschanged = TRUE;

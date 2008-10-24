@@ -74,9 +74,9 @@ if ($_REQUEST["secret_code"]){
 		else if (strlen($newpassword) < 5) $error = $this->GetResourceValue("PasswordTooShort");
 		else
 		{
-			$this->Query("update ".$this->config["user_table"]." set ".
+			$this->Query("UPDATE ".$this->config["user_table"]." SET ".
        "password = '".quote($this->dblink, md5($newpassword))."' ".
-       "where name = '".quote($this->dblink, $user["name"])."' limit 1");
+       "WHERE name = '".quote($this->dblink, $user["name"])."' LIMIT 1");
 
 			$this->SetUser($user = $this->LoadUser($user["name"]));
 			$this->LogUserIn($user);
@@ -133,9 +133,9 @@ if ($_REQUEST["secret_code"]){
 
 				$code = md5(date("D d M Y H:i:s").$user["email"].rand());
 
-				$this->Query("update ".$this->config["user_table"]." set ".
+				$this->Query("UPDATE ".$this->config["user_table"]." SET ".
           "changepassword = '".quote($this->dblink, $code)."' ".
-          "where name = '".quote($this->dblink, $user["name"])."' limit 1");
+          "WHERE name = '".quote($this->dblink, $user["name"])."' LIMIT 1");
 
 				$subject = $this->GetResourceValue("EmailForgotSubject").$this->GetConfigValue("wakka_name");
 				$message = $this->GetResourceValue("MailHello"). $name.".<br /> <br /> ";
