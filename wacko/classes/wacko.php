@@ -413,8 +413,8 @@ class Wacko
       $page = $this->OldLoadPage($tag,$time,$cache, false, $metadataonly);
       /*      if ($page)                                     // 3. if found, update supertag
        {
-       $this->Query( "update ".$this->config["table_prefix"]."pages ".
-       "set supertag='".$supertag."' where tag = '".$tag."';" );
+       $this->Query( "UPDATE ".$this->config["table_prefix"]."pages ".
+       "SET supertag='".$supertag."' WHERE tag = '".$tag."';" );
        }
        }
        */
@@ -438,7 +438,7 @@ class Wacko
             $page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."pages WHERE supertag='".quote($this->dblink, $tag)."' AND latest = 'Y' LIMIT 1");
             if ($time && $time!=$page["time"]) {
                $this->CachePage($page, $metadataonly);
-               $page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."revisions WHERE supertag='".quote($this->dblink, $tag)."' AND time = '".quote($this->dblink, $time)."' limit 1");
+               $page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."revisions WHERE supertag='".quote($this->dblink, $tag)."' AND time = '".quote($this->dblink, $time)."' LIMIT 1");
             }
          }
          else {
@@ -1791,8 +1791,8 @@ class Wacko
                                   "AND privilege = '".quote($this->dblink, $privilege)."' LIMIT 1");
                /*        if ($acl)
                 {
-                $this->Query( "update ".$this->config["table_prefix"]."acls ".
-                "set supertag='".$supertag."' where page_tag = '".$tag."';" );
+                $this->Query( "UPDATE ".$this->config["table_prefix"]."acls ".
+                "SET supertag='".$supertag."' WHERE page_tag = '".$tag."';" );
                 $acl["supertag"]=$supertag;
                 }
                 */      }

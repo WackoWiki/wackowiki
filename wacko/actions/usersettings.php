@@ -49,7 +49,7 @@ else if ($user = $this->GetUser())
          $this->SendMail($_POST["email"], $subject, $message);
       }
 
-      $this->Query("update ".$this->config["user_table"]." set ".
+      $this->Query("UPDATE ".$this->config["user_table"]." SET ".
       "email = '".quote($this->dblink, $_POST["email"])."', ".
       ($confirm?"email_confirm = '".quote($this->dblink, $confirm)."', ":"").
       "doubleclickedit = '".quote($this->dblink, $_POST["doubleclickedit"])."', ".
@@ -63,7 +63,7 @@ else if ($user = $this->GetUser())
       "typografica = '".quote($this->dblink, $_POST["typografica"])."', ".
       "lang = '".quote($this->dblink, $_POST["lang"])."', ".
       "more = '".quote($this->dblink, $more)."' ".
-      "where name = '".quote($this->dblink, $user["name"])."' limit 1");
+      "WHERE name = '".quote($this->dblink, $user["name"])."' LIMIT 1");
 
       $this->SetUser($this->LoadUser($user["name"]));
       $this->SetBookmarks(BM_USER);

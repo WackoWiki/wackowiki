@@ -130,7 +130,7 @@ if ($this->method == "show") {
     <div class="filesheader">
 <?php
       if ($this->page["id"])
-       $files = $this->LoadAll( "select id from ".$this->config["table_prefix"]."upload where ".
+       $files = $this->LoadAll( "SELECT id FROM ".$this->config["table_prefix"]."upload WHERE ".
                              " page_id = '". quote($this->dblink, $this->page["id"]) ."'");
       else $files = array();
 
