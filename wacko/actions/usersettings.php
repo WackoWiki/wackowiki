@@ -2,7 +2,7 @@
 <?php
 if ($_REQUEST["confirm"])
 {
-   if ($this->LoadSingle("select * from ".$this->config["user_table"]." where email_confirm = '".
+   if ($this->LoadSingle("SELECT * FROM ".$this->config["user_table"]." WHERE email_confirm = '".
    quote($this->dblink, $_REQUEST["confirm"])."'"))
    {
       $this->Query("UPDATE ".$this->config["user_table"]." SET email_confirm = '' WHERE email_confirm = '".

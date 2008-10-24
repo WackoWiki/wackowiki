@@ -634,7 +634,7 @@ class Wacko
       $this->LoadAll("SELECT ".$this->pages_meta.",`body_r` FROM ".$this->config["table_prefix"]."pages ".
        "WHERE latest = 'Y' AND comment_on != '' ".($from?"AND time<='".quote($this->dblink, $from)." 23:59:59'":"").
       ($for?"AND supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' ":"").
-       "ORDER BY time DESC  LIMIT ".$limit))
+       "ORDER BY time DESC LIMIT ".$limit))
       {
          foreach ($pages as $page)
          {
@@ -665,7 +665,7 @@ class Wacko
     "((".$pref."links.to_tag = ".$pref."pages.tag AND ".$pref."links.to_supertag='') ".
     " OR ".$pref."links.to_supertag=".$pref."pages.supertag) ".
     "WHERE ".($for?$pref."links.to_tag LIKE '".quote($this->dblink, $for)."/%' AND ":"").
-      $pref."pages.tag is NULL GROUP BY wanted_tag ORDER BY wanted_tag asc";
+      $pref."pages.tag is NULL GROUP BY wanted_tag ORDER BY wanted_tag ASC";
       return $this->LoadAll($sql);
    }
 
@@ -673,7 +673,7 @@ class Wacko
    {
       $pref = $this->config["table_prefix"];
       $sql = "SELECT DISTINCT tag FROM ".$pref."pages LEFT JOIN ".$pref."links ON ".
-      //     $pref."pages.tag = ".$pref."links.to_tag where ".
+      //     $pref."pages.tag = ".$pref."links.to_tag WHERE ".
     "((".$pref."links.to_tag = ".$pref."pages.tag AND ".$pref."links.to_supertag='') ".
     " OR ".$pref."links.to_supertag=".$pref."pages.supertag) WHERE ".
       ($for?$pref."pages.tag LIKE '".quote($this->dblink, $for)."/%' AND ":"").

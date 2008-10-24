@@ -10,7 +10,7 @@ if (!function_exists('links_tree_view')){
 			if ($indent)
 			print((str_repeat("&nbsp;",$indent*7)).$wacko->Link("/".$node, "", $node)."<br/>\n");
 
-			$pages = $wacko->LoadAll("select to_tag from ".$wacko->config["table_prefix"]."links, ".$wacko->config["table_prefix"]."pages where from_tag='".quote($this->dblink, $node)."' AND ".$wacko->config["table_prefix"]."links.to_tag = ".$wacko->config["table_prefix"]."pages.tag order by to_tag asc");
+			$pages = $wacko->LoadAll("SELECT to_tag FROM ".$wacko->config["table_prefix"]."links, ".$wacko->config["table_prefix"]."pages WHERE from_tag='".quote($this->dblink, $node)."' AND ".$wacko->config["table_prefix"]."links.to_tag = ".$wacko->config["table_prefix"]."pages.tag ORDER BY to_tag ASC");
 
 			if (is_array($pages))
 			{

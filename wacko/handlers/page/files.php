@@ -10,8 +10,8 @@ if ($_GET["global"]) {
 	$page_id=$this->page["id"];
 }
 
-$what = $this->LoadAll("select user, id, filename, filesize, description from ".$this->config["table_prefix"]."upload where ".
-                         "page_id = '".quote($this->dblink, $page_id)."' and filename='".quote($this->dblink, $_GET["get"])."'");
+$what = $this->LoadAll("SELECT user, id, filename, filesize, description FROM ".$this->config["table_prefix"]."upload WHERE ".
+                         "page_id = '".quote($this->dblink, $page_id)."' AND filename='".quote($this->dblink, $_GET["get"])."'");
 if (sizeof($what) > 0) {
 	// 2. check rights
 	if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwner($this->tag) == $this->GetUserName())) ||

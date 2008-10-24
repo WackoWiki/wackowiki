@@ -4,9 +4,9 @@ if (!function_exists('LoadRecentComments')){
    function LoadRecentComments(&$wacko, $for = "", $limit = 50)
    {
       return
-      $wacko->LoadAll("select ".$wacko->pages_meta." from ".$wacko->config["table_prefix"]."pages where ".
-      ($for?"super_comment_on like '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' ":"comment_on != '' ").
-                    "AND latest = 'Y' order by time desc LIMIT ".(int)$limit);
+      $wacko->LoadAll("SELECT ".$wacko->pages_meta." FROM ".$wacko->config["table_prefix"]."pages WHERE ".
+      ($for?"super_comment_on LIKE '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' ":"comment_on != '' ").
+                    "AND latest = 'Y' ORDER BY time DESC LIMIT ".(int)$limit);
    }
 }
 

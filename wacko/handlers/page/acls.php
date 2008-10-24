@@ -20,7 +20,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		}
 
 		// Change read permission for all comments on this page
-		$comments = $this->LoadAll("select ".$this->pages_meta." from ".$this->config["table_prefix"]."pages where comment_on = '".$this->GetPageTag()."' AND owner='".quote($this->dblink, $this->GetUserName())."'");
+		$comments = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on = '".$this->GetPageTag()."' AND owner='".quote($this->dblink, $this->GetUserName())."'");
 		foreach ($comments as $num=>$page)
 		{
 			$this->SaveAcl($page["tag"], "read", $_POST["read_acl"]);

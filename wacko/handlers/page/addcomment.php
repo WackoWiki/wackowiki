@@ -3,7 +3,7 @@
 if ($this->HasAccess("comment"))
    {
       // find number
-      if($latestComment = $this->LoadSingle("select tag, id from ".$this->config["table_prefix"]."pages where comment_on != '' order by id desc limit 1"))
+      if($latestComment = $this->LoadSingle("SELECT tag, id FROM ".$this->config["table_prefix"]."pages WHERE comment_on != '' ORDER BY id DESC LIMIT 1"))
          {
             preg_match("/^Comment([0-9]+)$/", $latestComment["tag"], $matches);
             $num = $matches[1] + 1;

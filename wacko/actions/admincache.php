@@ -22,7 +22,7 @@ else
 		}
 	}
 	closedir($handle);
-	$this->Query("delete from ".$this->config["table_prefix"]."cache");
+	$this->Query("DELETE FROM ".$this->config["table_prefix"]."cache");
 
 	echo $this->GetResourceValue("CacheCleared");
 }

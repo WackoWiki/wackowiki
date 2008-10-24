@@ -13,7 +13,7 @@ if(!$limit) $limit = 50;
 if(isset($letter)) $letter = strtoupper(substr($letter, 0, 1));
 
 // Get tags for all the pages, even if they're not being displayed on this index page
-$sql = "select tag from ".$this->config["table_prefix"]."pages where latest = 'Y' and comment_on = '' order by tag";
+$sql = "SELECT tag FROM ".$this->config["table_prefix"]."pages WHERE latest = 'Y' AND comment_on = '' ORDER BY tag";
 $pages = $this->LoadAll($sql);
 
 $total = 0;

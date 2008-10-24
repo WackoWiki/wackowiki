@@ -42,7 +42,7 @@ if(!$nomark)
 
 if(!$for)
 {
-	$pages = $this->LoadAll("select tag ,hits from ".$this->config["table_prefix"]."pages order by hits desc limit ".$max);
+	$pages = $this->LoadAll("SELECT tag ,hits FROM ".$this->config["table_prefix"]."pages ORDER BY hits DESC LIMIT ".$max);
 }
 else
 {

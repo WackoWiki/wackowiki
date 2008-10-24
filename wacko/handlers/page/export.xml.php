@@ -17,10 +17,10 @@ if ($this->HasAccess("read"))
 
 	$numOfSlashes = substr_count($this->tag, "/");
 
-	$pages = $this->LoadAll("select * from ".
-	$this->config["table_prefix"]."pages where (supertag = '".quote($this->dblink, $this->supertag)."'".
-            " OR supertag like '".quote($this->dblink, $this->supertag."/%")."')".
-            " and comment_on = ''");
+	$pages = $this->LoadAll("SELECT * FROM ".
+	$this->config["table_prefix"]."pages WHERE (supertag = '".quote($this->dblink, $this->supertag)."'".
+            " OR supertag LIKE '".quote($this->dblink, $this->supertag."/%")."')".
+            " AND comment_on = ''");
 	foreach ($pages as $num=>$page)
 	{
 		// check ACLS

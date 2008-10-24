@@ -17,7 +17,6 @@ if ($pages = $this->LoadRecentlyChanged($max))
 {
 	print("<a href=\"".$this->GetConfigValue("root_url")."xml/recentchanges_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetResourceValue("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />");
 
-
 	foreach ($pages as $i => $page)
 	{
 		if (($i < $max) || !$max)
