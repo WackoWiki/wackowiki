@@ -73,10 +73,10 @@ function RecursiveMove(&$parent, $root)
   if($root == "/" )  exit; // who and where did intend to move root???
 
   $query = "'".quote($parent->dblink, $parent->NpjTranslit($root))."%'";
-  $pages = $parent->LoadAll("select ".$parent->pages_meta." from ".
-           $parent->config["table_prefix"]."pages where supertag like ".$query.
+  $pages = $parent->LoadAll("SELECT ".$parent->pages_meta." FROM ".
+           $parent->config["table_prefix"]."pages WHERE supertag LIKE ".$query.
            ($owner?" AND owner='".quote($parent->dblink, $owner)."'":"").
-           " and comment_on = ''");
+           " AND comment_on = ''");
   foreach( $pages as $page )
   {
     // $new_name = str_replace( $root, $new_root, $page["tag"] );

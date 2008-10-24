@@ -31,8 +31,8 @@ if ($registered
 	{
 		if ($_GET["remove"] == "global") $page_id=0;
 		else                             $page_id=$this->page["id"];
-		$what = $this->LoadAll( "select user, id, filename, filesize, description from ".$this->config["table_prefix"]."upload where ".
-                            "page_id = '".quote($this->dblink, $page_id)."' and filename='".quote($this->dblink, $_GET["file"])."'");
+		$what = $this->LoadAll( "SELECT user, id, filename, filesize, description FROM ".$this->config["table_prefix"]."upload WHERE ".
+                            "page_id = '".quote($this->dblink, $page_id)."' AND filename='".quote($this->dblink, $_GET["file"])."'");
 		if (sizeof($what) > 0)
 		{
 			if ($this->IsAdmin() || ($page_id && ($this->GetPageOwner($this->tag) == $this->GetUserName()))
@@ -77,15 +77,15 @@ if ($_POST["remove"]) // delete
 	// 1. where, existence
 	if ($_POST["remove"] == "global") $page_id=0;
 	else                              $page_id=$this->page["id"];
-	$what = $this->LoadAll( "select user, id, filename, filesize, description from ".$this->config["table_prefix"]."upload where ".
-                            "page_id = '".quote($this->dblink, $page_id)."' and filename='".quote($this->dblink, $_POST["file"])."'");
+	$what = $this->LoadAll( "SELECT user, id, filename, filesize, description FROM ".$this->config["table_prefix"]."upload WHERE ".
+                            "page_id = '".quote($this->dblink, $page_id)."' AND filename='".quote($this->dblink, $_POST["file"])."'");
 	if (sizeof($what) > 0)
 	{
 		if ($this->IsAdmin() || ($page_id && ($this->GetPageOwner($this->tag) == $this->GetUserName()))
 		|| ($what[0]["user"]                             == $this->GetUserName()))
 		{
 			// 2. remove from DB
-			$this->Query( "delete from ".$this->config["table_prefix"]."upload where ".
+			$this->Query( "DELETE FROM ".$this->config["table_prefix"]."upload WHERE ".
                      "id = '". quote($this->dblink, $what[0]["id"])."'" );
 			print("<div>".$this->GetResourceValue("UploadRemovedFromDB")."</div>");
 			// 3. remove from FS
@@ -105,7 +105,7 @@ if ($_POST["remove"]) // delete
 else
 {
 	$user = $this->GetUser();
-	$files = $this->LoadAll( "select id from ".$this->config["table_prefix"]."upload where ".
+	$files = $this->LoadAll( "SELECT id FROM ".$this->config["table_prefix"]."upload WHERE ".
                              " user = '".quote($this->dblink, $user["name"])."'");
 
 	if (!$this->config["upload_max_per_user"] || (sizeof($files) < $this->config["upload_max_per_user"]))

@@ -6,11 +6,11 @@ if ($this->UserIsOwner())
 {
 	if ($_POST)
 	{
-		$pages = $this->LoadAll("select ".$this->pages_meta." from ".
-		$this->config["table_prefix"]."pages where (supertag = '".quote($this->dblink, $this->tag)."'".
-            " OR supertag like '".quote($this->dblink, $this->tag."/%")."'".
+		$pages = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".
+		$this->config["table_prefix"]."pages WHERE (supertag = '".quote($this->dblink, $this->tag)."'".
+            " OR supertag LIKE '".quote($this->dblink, $this->tag."/%")."'".
             " OR comment_on = '".quote($this->dblink, $this->tag)."'".
-            " OR comment_on like '".quote($this->dblink, $this->tag."/%")."'".
+            " OR comment_on LIKE '".quote($this->dblink, $this->tag."/%")."'".
             ") AND owner='".quote($this->dblink, $this->GetUserName())."'");
 
 		foreach ($pages as $num=>$page)

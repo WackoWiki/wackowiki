@@ -62,7 +62,6 @@ else
 			$tag = trim($_POST["_to"]."/".$rel_tag, "/");
 
 			$this->SavePage($tag, $body);
-
 		}
 
 		echo $this->GetResourceValue("ImportSuccess");

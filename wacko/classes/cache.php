@@ -78,7 +78,7 @@ class Cache
 			$this->Log("CacheInvalidate page=".$page);
 			$this->Log("CacheInvalidate query="."SELECT * FROM ".$this->wacko->config["table_prefix"]."cache WHERE name ='".quote($this->dblink, md5($page))."'");
 			$params = $this->wacko->LoadAll("SELECT * FROM ".$this->wacko->config["table_prefix"]."cache WHERE name ='".quote($this->dblink, md5($page))."'");
-			$this->Log("CacheInvalidate count params=".count($params));
+			$this->Log("CacheInvalidate COUNT params=".count($params));
 			foreach ($params as $param)
 			{
 				$filename = $this->ConstructID($page, $param["method"], $param["query"]);

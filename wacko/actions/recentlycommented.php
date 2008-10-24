@@ -7,15 +7,15 @@ if (!function_exists('LoadRecentlyCommented')){
       //       all comment pages sorted by their first revision's (!) time. ugh!
 
       // load ids of the first revisions of latest comments. err, huh?
-      if ($ids = $wacko->LoadAll("select min(id) as id from ".$wacko->config["table_prefix"]."pages where ".
-      ($for?"super_comment_on like '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' ":"comment_on != '' ").
-                "group by tag order by id desc"));
+      if ($ids = $wacko->LoadAll("SELECT MIN(id) AS id FROM ".$wacko->config["table_prefix"]."pages WHERE ".
+      ($for?"super_comment_on LIKE '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' ":"comment_on != '' ").
+                "GROUP BY tag ORDER BY id DESC"));
       {
          // load complete comments
          if ($ids)
          foreach ($ids as $id)
          {
-            $comment = $wacko->LoadSingle("select * from ".$wacko->config["table_prefix"]."pages where id = '".$id["id"]."' limit 1");
+            $comment = $wacko->LoadSingle("SELECT * FROM ".$wacko->config["table_prefix"]."pages WHERE id = '".$id["id"]."' LIMIT 1");
             if (!$comments[$comment["comment_on"]] && $num < $limit)
             {
                $comments[$comment["comment_on"]] = $comment;

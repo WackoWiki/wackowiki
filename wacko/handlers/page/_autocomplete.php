@@ -61,12 +61,12 @@ $supertag2 = $this->NpjTranslit( $q );
 // 2. going to DB two times
 $limit = 10;
 
-$pages1 = $this->LoadAll("select ".$this->pages_meta." from ".
-$this->config["table_prefix"]."pages where ".
-            " supertag like '".quote($this->dblink, $supertag1)."%' and comment_on = '' order by supertag asc limit $limit");
+$pages1 = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".
+$this->config["table_prefix"]."pages WHERE ".
+            " supertag LIKE '".quote($this->dblink, $supertag1)."%' AND comment_on = '' ORDER BY supertag ASC LIMIT $limit");
 $pages2 = $this->LoadAll("select ".$this->pages_meta." from ".
 $this->config["table_prefix"]."pages where ".
-            " supertag like '".quote($this->dblink, $supertag2)."%' and comment_on = '' order by supertag asc limit $limit");
+            " supertag like '".quote($this->dblink, $supertag2)."%' AND comment_on = '' ORDER BY supertag ASC LIMIT $limit");
 
 // 3. stripping by rights
 $pages = array();

@@ -191,10 +191,10 @@ if ($root){
 	$query = "'%'";
 }
 
-$pages = $this->LoadAll("select ".$this->pages_meta." from ".
-$this->config["table_prefix"]."pages where supertag like ".$query.
+$pages = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".
+$this->config["table_prefix"]."pages WHERE supertag LIKE ".$query.
 ($owner?" AND owner='".quote($this->dblink, $owner)."'":"").
-           " and comment_on = ''");
+           " AND comment_on = ''");
 
 if ($pages)
 {
@@ -224,7 +224,7 @@ if ($pages)
 	$supertag_str=substr($supertag_str,0,strlen($supertag_str)-2);
 
 	//Cache access rights
-	if ( $read_acls = $this->LoadAll("select * from ".$this->config["table_prefix"]."acls where supertag in (".$supertag_str.") and privilege = 'read'")){
+	if ( $read_acls = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."acls WHERE supertag in (".$supertag_str.") AND privilege = 'read'")){
 		for ($i=0; $i<count($read_acls); $i++) {
 			$this->CacheACL($read_acls[$i]["supertag"], "read", 1,$read_acls[$i]);
 		}

@@ -45,10 +45,10 @@ if ($can_view)
 	if (!$global && !$filepage["id"]) return;
 
 	// load files list
-	$files = $this->LoadAll( "select id, page_id, filesize, picture_w, picture_h, filename, description, uploaded_dt, user from ".
-	$this->config["table_prefix"]."upload where ".
+	$files = $this->LoadAll( "SELECT id, page_id, filesize, picture_w, picture_h, filename, description, uploaded_dt, user FROM ".
+	$this->config["table_prefix"]."upload WHERE ".
                              " page_id = '". ($global?0:$filepage["id"])."' ".$user_add.
-                             " order by ".$orderby );
+                             " ORDER BY ".$orderby );
 	if (!is_array($files)) $files = array();
 
 	if (!$nomark){

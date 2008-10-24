@@ -3,7 +3,7 @@
 if ($_REQUEST["secret_code"]){
 	//Password forgotten. Provided secret code
 	$code = $_REQUEST["secret_code"];
-	$user = $this->LoadSingle("select * from ".$this->config["user_table"]." where changepassword='".quote($this->dblink, $code)."'");
+	$user = $this->LoadSingle("SELECT * FROM ".$this->config["user_table"]." WHERE changepassword='".quote($this->dblink, $code)."'");
 	if ($user){
 		if ($_REQUEST["newpassword"]){
 
@@ -17,9 +17,9 @@ if ($_REQUEST["secret_code"]){
 			else if (strlen($newpassword) < 5) $error = $this->GetResourceValue("PasswordTooShort");
 			else
 			{
-				$this->Query("update ".$this->config["user_table"]." set ".
+				$this->Query("UPDATE ".$this->config["user_table"]." SET ".
            "password = '".quote($this->dblink, md5($newpassword))."' ".
-           "where name = '".quote($this->dblink, $user["name"])."' limit 1");
+           "WHERE name = '".quote($this->dblink, $user["name"])."' LIMIT 1");
 
 				$this->SetUser($user = $this->LoadUser($user["name"]));
 				$this->LogUserIn($user);
@@ -127,7 +127,7 @@ if ($_REQUEST["secret_code"]){
 
 		//Password forgotten. Send mail
 		$name = str_replace(" ","", $_POST["loginormail"]);
-		$user = $this->LoadSingle("select * from ".$this->config["user_table"]." where  name='".quote($this->dblink, $name)."'  or  email='".quote($this->dblink, $name)."'");
+		$user = $this->LoadSingle("SELECT * FROM ".$this->config["user_table"]." WHERE  name='".quote($this->dblink, $name)."' OR email='".quote($this->dblink, $name)."'");
 		if ($user){
 			if ($user["email_confirm"]==""){
 
