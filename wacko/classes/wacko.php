@@ -362,6 +362,13 @@ class Wacko
 
    function NpjTranslit($tag, $strtolow = TRAN_LOWERCASE, $donotload=TRAN_LOAD)
    {
+      # Lookup transliteration result in the cache and return it if found
+      static $npj_cache;
+      $cach_key = $tag.$strtolow.$donotload;
+      if (isset($npj_cache[$cach_key])) {
+         return $npj_cache[$cach_key];
+      }
+     
       $_lang = null;
       if (!$this->GetConfigValue("multilanguage")) $donotload = 1;
       if (!$donotload)
@@ -394,7 +401,11 @@ class Wacko
 
       if ($_lang)
       $this->SetLanguage($_lang);
-      return rtrim($tag, "/");
+      $result =  rtrim($tag, "/");
+
+      # Put transliteration result in the cache
+      $npj_cache[$cach_key] = $result;
+      return $result;
    }
 
    function Translit($tag, $direction=1) { //deprecated
