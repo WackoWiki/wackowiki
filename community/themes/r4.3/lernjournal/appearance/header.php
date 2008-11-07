@@ -134,7 +134,7 @@ if ($this->page)
  {
    print($this->GetResourceValue("YouAreOwner")."<br /> \n");
 
-   // Rename link: Hinzugefügt: if ($this->IsAdmin())  {} (A. Heutschi)
+   // Rename link: Hinzugefügt: if ($this->IsAdmin())
  if ($this->IsAdmin())  {
  print(" <a href=\"".$this->href("rename")."\">".$this->GetResourceValue("RenameText")."</a><br /> \n");}
 
