@@ -60,7 +60,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 	  }
 		}
 		else {
-			echo "<h1>".$this->GetResourceValue("ReallyDelete".($this->page["comment_on"]?"Comment":""))."</h1>";
+			echo "<div class=\"warning\"><strong>".$this->GetResourceValue("ReallyDelete".($this->page["comment_on"]?"Comment":""))."</strong></div>";
 			echo $this->FormOpen("remove");
 
 			if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
