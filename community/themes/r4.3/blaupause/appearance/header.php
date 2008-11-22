@@ -13,7 +13,9 @@ Common header file.
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
-<title><?php // Echoes Title of the page.  echo $this->GetWakkaName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?></title>
+<title><?php // Echoes Title of the page.  
+echo $this->GetWakkaName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?>
+</title>
 <?php 
 // We don't need search robots to index subordinate pages
   if ($this->GetMethod() != 'show' || $this->page["latest"] == "N")
@@ -69,6 +71,7 @@ if ($user["doubleclickedit"] == "Y") {?>
     <ul id="accessmenu">
       <li><a href="#content">zum Seiteninhalt spingen</a></li>
       <li><a href="#navigation">zur Navigation springen</a></li>
+      <?php // Opens Search form ?>
       <li id="search"><?php echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get"); ?>
         <fieldset>
         <label for="phrase"><?php echo $this->GetResourceValue("SearchText"); ?></label>
@@ -86,16 +89,6 @@ if ($user["doubleclickedit"] == "Y") {?>
       <!-- </h1> -->
     </div>
     <div id="languages">
-      <?php 
-/*
-Samsra theme.
-
-Commented by Roman Ivanov.
-*/
-
-// Opens Search form
-
-?>
     </div>
     <?php 
 // Begin Login form
@@ -115,7 +108,7 @@ echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
 <?php
 			
 				echo '<div id="usermenu">';
-					echo "<ol><li>";
+					echo "<ul><li>";
 					// echo "<li><a href='".$base_url."Intern'>Interner Bereich</a></li><li>";
 
 
@@ -142,7 +135,7 @@ echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
 							.'icons/toolbar2.gif" alt="-" title="'.
 							$this->GetResourceValue("RemoveFromBookmarks") .'"/></a></li>';					
 					}
-				echo '</ol></div>';
+				echo '</ul></div>';
 			
 			?>
 			<!-- ENDE NAVIGATION-->

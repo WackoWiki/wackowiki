@@ -496,7 +496,7 @@ min-height:100%;
     margin-top:1em;
    }
    
-#usermenu ol         { list-style: none; margin: 0px; padding: 0px; border: none; }
+#usermenu ul         { list-style: none; margin: 0px; padding: 0px; border: none; }
 
 #usermenu li a       {
 	display: inline;
@@ -507,7 +507,7 @@ min-height:100%;
 #usermenu li  {
 	display: inline;
 	border-right-width: 1px;
-	border-right-style: solid;
+	border-right-style: dotted;
 	border-right-color: #dedede;
 	padding-right: 4px;
 	padding-left: 1px;
