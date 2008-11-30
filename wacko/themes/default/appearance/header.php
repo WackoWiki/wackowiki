@@ -2,7 +2,7 @@
 /*
  Default theme.
  Common header file.
- */
+*/
 
 // Wacko can show message (by javascript)
 $message = $this->GetMessage();
