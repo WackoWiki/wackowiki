@@ -4,8 +4,7 @@
  Common footer file.
  */
 
-// Opens Search form
-echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get"); ?>
+?>
 <div class="footer"><?php
 
 // If User has rights to edit page, show Edit link
@@ -61,7 +60,7 @@ if ($this->page)
 		// Page  settings link
 		print(" | <a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetResourceValue("EditSettingsConfirm")."');\"":"").">".$this->GetResourceValue("EditSettingsText")."</a> | ");
 // referrers icon
-print("<a href=\"".$this->href("referrers")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/referer.gif\" title=\"".$this->GetResourceValue("ReferrersTip")."\" alt=\"".$this->GetResourceValue("ReferrersText")."\" border=\"0\" align=\"middle\" /></a> |");
+print("<a href=\"".$this->href("referrers")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/referer.gif\" title=\"".$this->GetResourceValue("ReferrersTip")."\" alt=\"".$this->GetResourceValue("ReferrersText")."\" /></a> |");
 	}
 }
 ?> <?php
@@ -73,16 +72,19 @@ if ($this->GetUser()){
 // Print icon
 echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1print.gif\" title=\"".$this->GetResourceValue("PrintVersion")."\" alt=\"".$this->GetResourceValue("PrintVersion")."\" /></a>";
 
+// Opens Search form
+echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get");
 // Searchbar
 ?> | <span class="searchbar nobr"><?php echo $this->GetResourceValue("SearchText") ?><input
-	type="text" name="phrase" size="15" /></span></div>
+	type="text" name="phrase" size="15" /></span>
 <?php
-
 // Search form close
 echo $this->FormClose();
 ?>
 
-<div class="copyright"><?php 
+</div>
+<div class="copyright">
+<?php 
 if ($this->GetUser()){
 	echo $this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion());
 }
