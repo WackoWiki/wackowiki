@@ -85,7 +85,7 @@ form input.submitinput {
 .header {
   padding: 10px;
   padding-top: 0px;
-  line-height: 22px;
+  /*line-height: 22px;*/
 }
 
 .page {
@@ -537,6 +537,43 @@ div#cssform1 span.site_count {
 
 
 /*Handlers --------------------------------------------------*/
+#content {
+clear:both;
+}
+#navigation
+{padding: 0px 0px 15px 0px}
 
+#usermenu {
+float:left;
+text-align:left;
+width:auto;
+}
 
+#usermenu ol { list-style: none; margin: 0px; padding: 0px; border: none; }
 
+#usermenu li a {
+ display: inline;
+ border: none;
+ text-decoration: none;
+}
+
+#usermenu li {
+ display: inline;
+ border-right-width: 1px;
+ border-right-style: dotted;
+ border-right-color: #cccccc;
+ padding-right: 4px;
+ padding-left: 1px;
+}
+
+#usermenu li a:hover {
+ text-decoration: underline;
+}
+
+#login {
+ width:auto;
+ float:right;
+ text-align:right;
+}
+
+#login form {display:inline;}

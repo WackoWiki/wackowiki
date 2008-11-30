@@ -4,6 +4,7 @@ Default theme.
 Common footer file.
 */
 ?>
+</div>
 <div class="footer">
 <ul>
 <?php

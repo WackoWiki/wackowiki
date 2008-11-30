@@ -57,47 +57,69 @@ if ($user["doubleclickedit"] == "Y") {?>
 // Also, here we show message (see beginning of this file)
 ?>
 <body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
-<?php
-// Begin Login form
-echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
-      <input type="hidden" name="action" value="login" />
       <div class="header">
          <h1><span class="main"><?php echo $this->config["wakka_name"] ?>: </span><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></h1>
+<div id="navigation">
 <?php
-// Outputs Bookmarks AKA QuickLinks
-// Main page
-echo $this->ComposeLinkToPage($this->config["root_page"]); ?> | <?php
-// All user's Bookmarks
-echo $this->Format($this->GetBookmarksFormatted(), "post_wacko"); ?> | <?php
-// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
-if($this->GetUser())
-   {
-      if(!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks()))
-         {?> <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar1.gif" alt="+" title="<?php echo $this->GetResourceValue("AddToBookmarks") ?>" /></a>
-| <?php
-         }
-      else
-         { ?> <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar2.gif" alt="-" title="<?php echo $this->GetResourceValue("RemoveFromBookmarks") ?>" /></a>
-| <?php
-         }
-   }
+			
+				echo '<div id="usermenu">';
+					echo "<ol>";
+					echo "<li>".$this->ComposeLinkToPage($this->config["root_page"])."</li>\n";
+					echo "<li>";
+					// Bookmarks
+					$BMs = $this->GetBookmarks();
+					$formatedBMs =  $this->Format($this->Format(implode("| ", $BMs), "wacko"), "post_wacko");
+					$formatedBMs = str_replace ( "| ", "</li><li>\n", $formatedBMs );
+					//echo "<ol><li>".$formatedBMs."</li></ol>";
+					echo $formatedBMs;
 
+					echo "</li>\n";
+					
+					if ($this->GetUser())
+			{					
+// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
+					if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks()))
+						echo '<li><a href="'. $this->Href('', '', "addbookmark=yes")
+							.'"><img src="'. $this->GetConfigValue("theme_url")
+							.'icons/toolbar1.gif" alt="+" title="'.
+							$this->GetResourceValue("AddToBookmarks") .'"/></a></li>';
+					else
+						echo '<li><a href="'. $this->Href('', '', "removebookmark=yes")
+							.'"><img src="'. $this->GetConfigValue("theme_url")
+							.'icons/toolbar2.gif" alt="-" title="'.
+							$this->GetResourceValue("RemoveFromBookmarks") .'"/></a></li>';					
+					}
+				echo '</ol></div>';
+			
+			?>
+			
+<div id="login">
+<?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->GetUser())
    { ?> <span class="nobr"><?php echo $this->GetResourceValue("YouAre")." ".$this->Link($this->GetUserName()) ?></span><small> ( <span class="nobr Tune"><?php
 echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?>
  | <a onclick="return confirm('<?php echo $this->GetResourceValue("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetResourceValue("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetResourceValue("LogoutLink"); ?></a></span>
-)</small> <?php
+)</small>
+<?php
 // Else Wacko shows login's controls
    }
 else
    {
-   ?> <span class="nobr"><input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" /><strong><strong><?php echo $this->GetResourceValue("LoginWelcome") ?></strong>:&nbsp;</strong>
+   // Begin Login form
+	echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
+      <input type="hidden" name="action" value="login" />
+   <span class="nobr"><input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" /><strong><strong><?php echo $this->GetResourceValue("LoginWelcome") ?></strong>:&nbsp;</strong>
    <input type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->GetResourceValue("LoginPassword") ?>:&nbsp;<input type="password" name="password" class="login" size="8" />&nbsp;<input type="image" src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" style="vertical-align:top" /></span> <?php
+   
+   // Closing Login form
+	echo $this->FormClose();
    }
+
+
 // End if
 ?></div>
-<?php
-// Closing Login form
-echo $this->FormClose();
-?>
+<!-- ENDE NAVIGATION-->
+</div>
+</div>
+<div id="content">
