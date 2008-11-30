@@ -5,6 +5,7 @@
  */
 
 ?>
+
 <div class="footer"><?php
 
 // If User has rights to edit page, show Edit link
