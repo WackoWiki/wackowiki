@@ -103,11 +103,11 @@ if($page_links != "")
       // Prev
       if($offset + $total_visible > $limit)
       {
-         $prev_page_link = '<a href="'.$this->href("", "", "offset=").($offset - $limit > 0 ? $offset - $limit : 0).'">&lt; '.$this->GetResourceValue("Prev").'</a>';
+         $prev_page_link = '<a href="'.$this->href("", "", "offset=").($offset - $limit > 0 ? $offset - $limit : 0).'">&lt; '.$this->GetResourceValue("Prev").'</a> |';
       }
       else
       {
-         $prev_page_link = "&lt; ".$this->GetResourceValue("Prev");
+         $prev_page_link = "&lt; ".$this->GetResourceValue("Prev")." |";
       }
 
       // Next

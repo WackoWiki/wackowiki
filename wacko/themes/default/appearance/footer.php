@@ -11,8 +11,6 @@ Common footer file.
 // If User has rights to edit page, show Edit link
 echo $this->HasAccess("write") ? "<li><a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetResourceValue("EditTip")."\">".$this->GetResourceValue("EditText")."</a></li>\n" : "";
 
-# echo $this->HasAccess("write") && $this->page ? "| " : ""; (to delete)
-
 // If this page exists
 if ($this->page)
 {
