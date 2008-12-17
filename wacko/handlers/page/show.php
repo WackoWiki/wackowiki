@@ -219,11 +219,11 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     }
 
     // display comment form
-    print("<div class=\"commentform\">\n");
     if ($this->HasAccess("comment"))
     {
-      ?>
-        <?php echo $this->GetResourceValue("AttachComment"); ?><br />
+		print("<div class=\"commentform\">\n");
+		
+      	echo $this->GetResourceValue("AttachComment"); ?><br />
         <?php echo $this->FormOpen("addcomment"); ?>
           <textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
 <?php
@@ -253,8 +253,9 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
 <input type="submit" value="<?php echo $this->GetResourceValue("AttachCommentButton"); ?>" accesskey="s" />
 <?php echo $this->FormClose(); ?>
 <?php
+		print("</div>\n");
     }
-    print("</div>\n");
+	// end comment form
   }
   else
   {
