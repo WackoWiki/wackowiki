@@ -1,6 +1,14 @@
 <div class="pageBefore">&nbsp;</div>
 <div class="page">
-  <?php
+<?php
+
+// redirect to show method if page don't exists
+if (!$this->page) $this->Redirect($this->href('show'));
+
+// deny for comment
+if ($this->page['comment_on'])
+	$this->Redirect($this->href('', $this->page['comment_on'], 'show_comments=1').'#'.$this->page['tag']);
+
 if ($user = $this->GetUser())
 {
    $user = strtolower($this->GetUserName());
@@ -97,7 +105,7 @@ function Move(&$parent, $OldPage, $NewName )
 //     if ($OldPage["supertag"] == $supernewname)
      else if ($OldPage["tag"] == $NewName)
      {
-       print(str_replace("%1",$parent->Link($NewName),$parent->GetResourceValue("AlredyNamed"))."<br />\n");
+       print(str_replace("%1",$parent->Link($NewName),$parent->GetResourceValue("AlreadyNamed"))."<br />\n");
      }
      else
      {
