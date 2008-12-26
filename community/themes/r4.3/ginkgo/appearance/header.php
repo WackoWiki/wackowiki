@@ -66,27 +66,19 @@ if ($user["doubleclickedit"] == "Y") {?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="378" valign="bottom" nowrap="nowrap"><span class="main"><a href="<?php echo $this->GetConfigValue("root_url")?>"class="main"><?php echo $this->config["wakka_name"] ?></a></span></td>
-    <td width="100%"><?php 
-/*
-Samsra theme.
-
-Commented by Roman Ivanov.
-*/
-
+    <td width="100%"><div align="right"><?php
 // Opens Search form
-echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get"); ?>
-      <div align="right">
-        <?php 
+echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get");
+
 // Searchbar
 ?>
-        <span><?php echo $this->GetResourceValue("SearchText") ?>
-        <input type="text" name="phrase" size="15" style="border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;" />
-        </span></div>
-      <?php 
+<span class="searchbar nobr"><label for="phrase"><?php echo $this->GetResourceValue("SearchText"); ?></label><input
+	type="text" name="phrase" id="phrase" size="15" /><input class="submitinput" type="submit" title="<?php echo $this->GetResourceValue("SearchButtonText") ?>" alt="<?php echo $this->GetResourceValue("SearchButtonText") ?>" value="»"/></span>
+<?php
 
 // Search form close
-echo $this->FormClose(); 
-?></td>
+echo $this->FormClose();
+?></div></td>
   </tr>
   <tr>
     <td valign="top"><div class="tagline">Placeholder</div></td>
@@ -119,9 +111,9 @@ if ($this->GetUser()) {
         </tr>
         <?php 
 // Closing Login form, If user are logged
-if ($this->GetUser()) {
-echo $this->FormClose(); 
-} 
+# if ($this->GetUser()) {
+# echo $this->FormClose(); 
+# } 
 // End if  
 ?>
       </table></td>

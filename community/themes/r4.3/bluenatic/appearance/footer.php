@@ -34,26 +34,25 @@
 	alt="<?php echo $this->GetResourceValue("AddToBookmarks"); ?>"
 	title="<?php echo $this->GetResourceValue("AddToBookmarks"); ?>"
 	width="16" height="16" /> <?php } ?> </a> <?php } 
-		// End of "Page exists" ?>
-		<?php
-		if ($this->GetUser()){
-			echo "&nbsp;|&nbsp;".$this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion());
-		}
-		?></div>
+	// End of "Page exists" ?> <?php
+	if ($this->GetUser()){
+		echo "&nbsp;|&nbsp;".$this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion());
+	}
+	?></div>
 </div>
-		<?php // Debug Querylog.
-		if ($this->GetConfigValue("debug")>=2)
+	<?php // Debug Querylog.
+	if ($this->GetConfigValue("debug")>=2)
+	{
+		print("<span class=\"debug\">");
+		print("<strong>Query log:</strong><br />\n");
+		foreach ($this->queryLog as $query)
 		{
-			print("<span class=\"debug\">");
-			print("<strong>Query log:</strong><br />\n");
-			foreach ($this->queryLog as $query)
-			{
-				print($query["query"]." (".$query["time"].")<br />\n");
-				$zz++;
-			}
-			print("<b>total: $zz</b>");
-			print("</span>");
+			print($query["query"]." (".$query["time"].")<br />\n");
+			$zz++;
 		}
+		print("<b>total: $zz</b>");
+		print("</span>");
+	}
 
-		// Don't place final </body></html> here. Wacko closes HTML automatically.
-		?>
+	// Don't place final </body></html> here. Wacko closes HTML automatically.
+	?>

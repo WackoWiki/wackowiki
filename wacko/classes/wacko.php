@@ -362,7 +362,7 @@ class Wacko
 
    function NpjTranslit($tag, $strtolow = TRAN_LOWERCASE, $donotload=TRAN_LOAD)
    {
-      # Lookup transliteration result in the cache and return it if found
+      // Lookup transliteration result in the cache and return it if found
       static $npj_cache;
       $cach_key = $tag.$strtolow.$donotload;
       if (isset($npj_cache[$cach_key])) {
@@ -403,7 +403,7 @@ class Wacko
       $this->SetLanguage($_lang);
       $result =  rtrim($tag, "/");
 
-      # Put transliteration result in the cache
+      // Put transliteration result in the cache
       $npj_cache[$cach_key] = $result;
       return $result;
    }
@@ -2000,7 +2000,7 @@ class Wacko
       $xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
       $xml .= "<description>".$this->GetResourceValue("RecentChangesXML").$this->GetConfigValue("wakka_name")." </description>\n";
       $xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
-     $xml .= "<image>\n";
+      $xml .= "<image>\n";
       $xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetResourceValue("RecentCommentsTitleXML")."</title>\n";
       $xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
       $xml .= "<url>".$this->GetConfigValue("root_url")."files/wacko4.gif"."</url>\n";

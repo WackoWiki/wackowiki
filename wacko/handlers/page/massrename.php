@@ -1,7 +1,3 @@
-<?php
-// contributed by Nekipelov Alex (mailto:nalex <AT> pisem.net)
-?>
-
 <div class="pageBefore">&nbsp;</div>
 <div class="page">
   <?php
