@@ -223,15 +223,24 @@ FIELDSET {
 }
 .searchbar
 {
-  background-color: #ECECFF;
+  background-color: transparent;
   font-family: Verdana;
   font-size: 13px;
   line-height: 1.3em;
 }
+.searchbar input {border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;}
 .logBtn {   height: 21px;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 10px;
  }     
+
+form input.submitinput {
+  background-color:transparent;
+  border-style:none;
+  color:#000000;
+  padding:0;
+  padding-right: 10px;
+}
 
 /* ID Styles */
 #tooltip{

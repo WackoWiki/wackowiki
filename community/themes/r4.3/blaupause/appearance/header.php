@@ -90,10 +90,6 @@ if ($user["doubleclickedit"] == "Y") {?>
     </div>
     <div id="languages">
     </div>
-    <?php 
-// Begin Login form
-echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
-    <input type="hidden" name="action" value="login" />
     <div id="bookmarks">
       <?php 
 // Outputs Bookmarks AKA QuickLinks
@@ -106,78 +102,64 @@ echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
   ?>
   <div id="navigation">
 <?php
-			
-				echo '<div id="usermenu">';
-					echo "<ul><li>";
-					// echo "<li><a href='".$base_url."Intern'>Interner Bereich</a></li><li>";
+// Outputs Bookmarks AKA QuickLinks			
+	echo '<div id="usermenu">';
+		echo "<ol>\n";
+		// Main page
+		echo "<li>".$this->ComposeLinkToPage($this->config["root_page"])."</li>\n";
+		echo "<li>";
+		// Bookmarks
+		$BMs = $this->GetBookmarks();
+		$formatedBMs =  $this->Format($this->Format(implode("| ", $BMs), "wacko"), "post_wacko");
+		$formatedBMs = str_replace ( "| ", "</li>\n<li>", $formatedBMs );
+		//echo "<ol><li>".$formatedBMs."</li></ol>";
+		echo $formatedBMs;
 
-
-					// Bookmarks
-					$BMs = $this->GetBookmarks();
-					$formatedBMs =  $this->Format($this->Format(implode("| ", $BMs), "wacko"), "post_wacko");
-					$formatedBMs = str_replace ( "| ", "</li><li>\n", $formatedBMs );
-					//echo "<ol><li>".$formatedBMs."</li></ol>";
-					echo $formatedBMs;
-
-					echo "</li>";
+		echo "</li>\n";
 					
-					if ($this->GetUser())
-			{					
-// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
-					if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks()))
-						echo '<li><a href="'. $this->Href('', '', "addbookmark=yes")
-							.'"><img src="'. $this->GetConfigValue("theme_url")
-							.'icons/toolbar1.gif" alt="+" title="'.
-							$this->GetResourceValue("AddToBookmarks") .'"/></a></li>';
-					else
-						echo '<li><a href="'. $this->Href('', '', "removebookmark=yes")
-							.'"><img src="'. $this->GetConfigValue("theme_url")
-							.'icons/toolbar2.gif" alt="-" title="'.
-							$this->GetResourceValue("RemoveFromBookmarks") .'"/></a></li>';					
-					}
-				echo '</ul></div>';
-			
-			?>
-			<!-- ENDE NAVIGATION-->
-	  </div>
-    </div>
-    <div id="login">
-      <?php 
-// If user are logged, Wacko shows "You are UserName" 
-if ($this->GetUser()) { ?>
-      <span class="nobr"><?php echo $this->GetResourceValue("YouAre")." ".$this->Link($this->GetUserName()) ?></span> <small>( <span class="nobr Tune">
-      <?php 
-      echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?>
-      | <a onclick="return confirm('<?php echo $this->GetResourceValue("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetResourceValue("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetResourceValue("LogoutLink"); ?></a></span> )</small>
-      <?php 
+		if ($this->GetUser())
+		{					
+			// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
+			if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks()))
+				echo '<li><a href="'. $this->Href('', '', "addbookmark=yes")
+					.'"><img src="'. $this->GetConfigValue("theme_url")
+					.'icons/toolbar1.gif" alt="+" title="'.
+					$this->GetResourceValue("AddToBookmarks") .'"/></a></li>';
+			else
+				echo '<li><a href="'. $this->Href('', '', "removebookmark=yes")
+					.'"><img src="'. $this->GetConfigValue("theme_url")
+					.'icons/toolbar2.gif" alt="-" title="'.
+					$this->GetResourceValue("RemoveFromBookmarks") .'"/></a></li>';					
+			}
+	echo "\n</ol></div>";
+?>
+
+<div id="login">
+<?php
+// If user are logged, Wacko shows "You are UserName"
+if ($this->GetUser())
+   { ?> <span class="nobr"><?php echo $this->GetResourceValue("YouAre")." ".$this->Link($this->GetUserName()) ?></span><small> ( <span class="nobr Tune"><?php
+echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?>
+ | <a onclick="return confirm('<?php echo $this->GetResourceValue("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetResourceValue("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetResourceValue("LogoutLink"); ?></a></span>
+)</small>
+<?php
 // Else Wacko shows login's controls
-} else { 
-?>
-      <span class="nobr">
-      <input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" 
-/>
-      <strong><?php echo $this->GetResourceValue("LoginWelcome") ?>:&nbsp;</strong>
-      <input 
-type="text" name="name" size="18" class="login" />
-      &nbsp;
-      <?php 
-echo $this->GetResourceValue("LoginPassword") ?>
-      :&nbsp;
-      <input type="password" name="password"  
-class="login" size="8" />
-      &nbsp;
-      <input name="image" type="image" 
-src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" align="top" />
-      </span>
-      <?php 
-}
-// End if 
-?>
-    </div>  
-  <?php 
-// Closing Login form
-echo $this->FormClose(); 
-?>
+   }
+else
+   {
+   // Begin Login form
+	echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
+      <input type="hidden" name="action" value="login" />
+   <span class="nobr"><input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" /><strong><strong><?php echo $this->GetResourceValue("LoginWelcome") ?></strong>:&nbsp;</strong>
+   <input type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->GetResourceValue("LoginPassword") ?>:&nbsp;<input type="password" name="password" class="login" size="8" />&nbsp;<input type="image" src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" style="vertical-align:top" /></span> <?php
+   
+   // Closing Login form
+	echo $this->FormClose();
+   }
+
+// End if
+?></div>
+<!-- ENDE NAVIGATION-->
 </div>
 </div>
 <div id="content">

@@ -2,7 +2,7 @@
 /*
    Wacko Wiki MySQL Table Updates Script
 
-   These are all the updates that need to applied to earlier Wacko version to bring them up to 4.2 specs
+   These are all the updates that need to applied to earlier Wacko version to bring them up to 4.3 specs
 */
 
 $table_pagewatches_r0 = "CREATE TABLE ".$config2["table_prefix"]."pagewatches (".
