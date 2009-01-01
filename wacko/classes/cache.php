@@ -19,9 +19,11 @@ class Cache
 	{
 		$filename = $this->ConstructID($page, $method, $query);
 		if (!@file_exists($filename))
-		return false;
+			return false;
+
 		if ((time()-@filemtime($filename)) > $this->cache_ttl)
-		return false;
+			return false;
+
 		$fp = fopen ($filename, "r");
 		$contents = fread ($fp, filesize ($filename));
 		fclose ($fp);
@@ -31,8 +33,10 @@ class Cache
 	function ConstructID($page, $method, $query)
 	{
 		$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", $page))));
+
 		$this->Log("ConstructID page=".$page);
 		$this->Log("ConstructID md5=".md5($page));
+
 		$filename = $this->cache_dir.md5($page)."_".$method."_".$query;
 		return $filename;
 	}
@@ -58,14 +62,18 @@ class Cache
 		if (!$query)  $query  = $this->query;
 		$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", $page))));
 		$filename = $this->ConstructID($page, $method, $query);
+		
 		$fp = fopen ($filename, "w");
 		fputs ($fp, $data);
 		fclose ($fp);
-		if ($this->wacko) $this->wacko->Query("INSERT INTO ".$this->wacko->config["table_prefix"]."cache SET ".
-   "name  ='".quote($this->dblink, md5($page))."', ".
-   "method='".quote($this->dblink, $method)."', ".
-   "query ='".quote($this->dblink, $query)."'");
-		@chmod($newname, octdec('0777'));
+
+		if ($this->wacko) $this->wacko->Query(
+			"INSERT INTO ".$this->wacko->config["table_prefix"]."cache SET ".
+   			"name  ='".quote($this->dblink, md5($page))."', ".
+   			"method='".quote($this->dblink, $method)."', ".
+   			"query ='".quote($this->dblink, $query)."'");
+
+		@chmod($newname, octdec('0644'));
 		return true;
 	}
 
@@ -84,9 +92,12 @@ class Cache
 				$filename = $this->ConstructID($page, $param["method"], $param["query"]);
 				$this->Log("CacheInvalidate delete=".$filename);
 				if (@file_exists($filename))
-				@unlink($filename);
+					@unlink($filename);
 			}
-			$this->wacko->Query("DELETE FROM ".$this->wacko->config["table_prefix"]."cache WHERE name ='".quote($this->dblink, md5($page))."'");
+
+			$this->wacko->Query(
+				"DELETE FROM ".$this->wacko->config["table_prefix"]."cache WHERE name ='".quote($this->dblink, md5($page))."'");
+
 			$this->Log("CacheInvalidate end");
 			return true;
 		}
@@ -95,7 +106,7 @@ class Cache
 
 	function Log($msg)
 	{
-		if ($this->debug>1)
+		if ($this->debug > 1)
 		{
 			$fp = fopen ($this->cache_dir."log", "a");
 			fputs ($fp, $msg."\n");
@@ -111,7 +122,7 @@ class Cache
 
 		foreach ($_GET as $k => $v)
 		{
-			if ($k!="v" && $k!="page") $_query[$k]=$v;
+			if ($k != "v" && $k != "page") $_query[$k] = $v;
 		}
 		if ($_query)
 		{
@@ -119,7 +130,7 @@ class Cache
 			reset($_query);
 			foreach($_query as $k => $v)
 			{
-				$query.=urlencode($k)."=".urlencode($v)."&";
+				$query .= urlencode($k)."=".urlencode($v)."&";
 			}
 		}
 		$this->Log("CheckHttpRequest query=".$query);
@@ -127,22 +138,21 @@ class Cache
 		//check cache
 		if ($mtime = $this->GetCachedTime($page, $method, $query))
 		{
-
 			$this->Log("CheckHttpRequest incache mtime=".$mtime);
 
 			$gmt = gmdate('D, d M Y H:i:s \G\M\T', $mtime);
 			$etag = $_SERVER["HTTP_IF_NONE_MATCH"];
 			$lastm = $_SERVER["HTTP_IF_MODIFIED_SINCE"];
 
-			if ($p = strpos($lastm,";")) $lastm=substr($lastm,0,$p);
+			if ($p = strpos($lastm,";")) $lastm = substr($lastm,0,$p);
 
-			if ($_SERVER["REQUEST_METHOD"]=="GET") //may be we need HEAD support ???
+			if ($_SERVER["REQUEST_METHOD"] == "GET") //may be we need HEAD support ???
 			{
 				if (!$lastm && !$etag);
 				else
-				if ($lastm && $gmt!=$lastm);
+				if ($lastm && $gmt != $lastm);
 				else
-				if ($etag && $gmt!=trim($etag, '\"'));
+				if ($etag && $gmt != trim($etag, '\"'));
 				else
 				{
 					header ("HTTP/1.1 304 Not Modified");
@@ -159,13 +169,14 @@ class Cache
 				echo ($cached);
 
 				// how much time script take
-				if ($this->debug>=1 && strpos($method,".xml")===false)
+				if ($this->debug >= 1 && strpos($method,".xml") === false)
 				{
 					$ddd = $this->GetMicroTime();
 					echo ("<div class=\"debug\">cache time: ".(number_format(($ddd-$this->timer),3))." s<br />");
 					echo "</div>";
 				}
-				if (strpos($method,".xml")===false)
+
+				if (strpos($method,".xml") === false)
 				echo "</body></html>";
 
 				die();
@@ -193,12 +204,17 @@ class Cache
 			//header ("Content-Length: ".strlen($res));
 			//header ("Cache-Control: max-age=0");
 			//header ("Expires: ".gmdate('D, d M Y H:i:s \G\M\T', time()));
+
 			echo ($res);
 			die();
 		}
 	}
 
-	function GetMicroTime() { list($usec, $sec) = explode(" ",microtime()); return ((float)$usec + (float)$sec); }
+	function GetMicroTime()
+    { 
+		list($usec, $sec) = explode(" ",microtime()); 
+		return ((float)$usec + (float)$sec); 
+	}
 
 }
 

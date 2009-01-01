@@ -8,7 +8,7 @@ class Utility
 		$this->wacko = &$wacko;
 	}
 
-	function untag ($xml, $tag)
+	function untag($xml, $tag)
 	{
 		$z = strpos ($xml, "<$tag>");
 
@@ -21,10 +21,10 @@ class Utility
 			{
 				$final = substr ($xml, $z, $z2 - $z);
 
-				if (strpos($final, "<![CDATA[")===0)
+				if (strpos($final, "<![CDATA[") === 0)
 				{
 					$final = substr($final, 9);
-					$final = substr($final, 0, strlen($final)-3);
+					$final = substr($final, 0, strlen($final) - 3);
 				}
 
 				return $final;
