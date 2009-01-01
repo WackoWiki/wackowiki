@@ -1,6 +1,13 @@
 <div class="pageBefore">&nbsp;</div>
 <div class="page">
-  <?php
+<?php
+
+// redirect to show method if page don't exists
+if (!$this->page) $this->Redirect($this->href("show"));
+
+// deny for comment
+if ($this->page["comment_on"])
+	$this->Redirect($this->href("", $this->page["tag"]));
 
 if ($this->UserIsOwner())
 {
@@ -96,4 +103,5 @@ else
 }
 ?>
   <br />
-  [<a	href="<?php echo $this->href("acls" );?>"><?php echo $this->GetResourceValue("SettingsAcls" ); ?></a>] </div>
+  [<a	href="<?php echo $this->href("acls" );?>"><?php echo $this->GetResourceValue("SettingsAcls" ); ?></a>]
+</div>

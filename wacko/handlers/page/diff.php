@@ -1,5 +1,9 @@
 <div class="pageBefore">&nbsp;</div>
-<div class="page"><?php
+<div class="page">
+<?php
+
+// redirect to show method if page don't exists
+if (!$this->page) $this->Redirect($this->href("show"));
 
 $a = $_GET["a"];
 $b = $_GET["b"];
@@ -148,4 +152,5 @@ if ($this->HasAccess("read")) {
 } else {
 	print($this->GetResourceValue("ReadAccessDenied"));
 }
-?></div>
+?>
+</div>

@@ -1,5 +1,14 @@
 <div class="pageBefore">&nbsp;</div>
-<div class="page"><?php
+<div class="page">
+<?php
+
+// redirect to show method if page don't exists
+if (!$this->page) $this->Redirect($this->href("show"));
+
+// deny for comment
+if ($this->page["comment_on"])
+	$this->Redirect($this->href("", $this->page["comment_on"], "show_comments=1")."#".$this->page["tag"]);
+
 if ($user = $this->GetUser())
 {
 	if ($global = $_GET["global"])
@@ -66,4 +75,5 @@ else
 {
 	print($this->GetResourceValue("ReadAccessDenied"));
 }
-?></div>
+?>
+</div>

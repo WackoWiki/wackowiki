@@ -5,14 +5,16 @@ $file403 = "images/upload403.gif";
 
 // 1. check existence
 if ($_GET["global"]) {
-	$page_id=0;
-} else {
-	$page_id=$this->page["id"];
+	$page_id = 0;
+} 
+else 
+{
+	$page_id = $this->page["id"];
 }
-
 $what = $this->LoadAll("SELECT user, id, filename, filesize, description FROM ".$this->config["table_prefix"]."upload WHERE ".
                          "page_id = '".quote($this->dblink, $page_id)."' AND filename='".quote($this->dblink, $_GET["get"])."'");
-if (sizeof($what) > 0) {
+if (sizeof($what) > 0) 
+{
 	// 2. check rights
 	if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwner($this->tag) == $this->GetUserName())) ||
 	($this->HasAccess("read")) || ($desc["user"] == $this->GetUserName()) )
@@ -20,11 +22,15 @@ if (sizeof($what) > 0) {
 		$filepath = $this->config["upload_path".($page_id?"_per_page":"")]."/".
 		($page_id?("@".str_replace("/","@",$this->supertag)."@"):"").
 		$what[0]["filename"];
-	} else {
-		$error=403;
+	} 
+	else 
+	{
+		$error = 403;
 	}
-} else {
-	$error=404;
+} 
+else 
+{
+	$error = 404;
 }
 
 // 3. passthru
