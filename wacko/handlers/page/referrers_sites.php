@@ -1,6 +1,13 @@
 <div class="pageBefore">&nbsp;</div>
 <div class="page">
-  <?php
+<?php
+
+// redirect to show method if page don't exists
+if (!$this->page) $this->Redirect($this->href("show"));
+
+// deny for comment
+if ($this->page["comment_on"])
+	$this->Redirect($this->href("", $this->page["comment_on"], "show_comments=1")."#".$this->page["tag"]);
 if ($global = $_GET["global"])
 {
 	$title = str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetResourceValue("DomainsSitesPagesGlobal"));

@@ -1,6 +1,13 @@
 <div class="pageBefore">&nbsp;</div>
 <div class="page">
-  <?php
+<?php
+
+// redirect to show method if page don't exists
+if (!$this->page) $this->Redirect($this->href("show"));
+
+// deny for comment
+if ($this->page["comment_on"])
+	$this->Redirect($this->href("", $this->page["tag"]));
 
 if ($this->UserIsOwner() || $this->IsAdmin())
 {
@@ -34,7 +41,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 
 		// redirect back to page
 		$this->SetMessage($message."!");
-		$this->Redirect($this->Href());
+		$this->Redirect($this->href());
 	}
 	else
 	{
@@ -91,4 +98,5 @@ else
 }
 ?>
   <br />
-  [<a href="<?php echo $this->href("massacls");?>"><?php echo $this->GetResourceValue("SettingsMassAcls" ); ?></a>] </div>
+  [<a href="<?php echo $this->href("massacls");?>"><?php echo $this->GetResourceValue("SettingsMassAcls" ); ?></a>]
+</div>
