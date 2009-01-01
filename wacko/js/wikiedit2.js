@@ -70,7 +70,7 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
   this.area.addBehavior(this.imagesPath+"sel.htc");
  }
 
-// this.addButton("h1","h1","'==','==',0,1");
+ this.addButton("h1","h1","'==','==',0,1");
  this.addButton("h2","Heading 2","'===','===',0,1");
  this.addButton("h3","Heading 3","'====','====',0,1");
  this.addButton(" ");
