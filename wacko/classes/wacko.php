@@ -17,10 +17,12 @@ define("ACTIONS4DIFF", "a, anchor, toc"); //allowed actions in DIFF
 class Wacko
 {
    var $dblink;
+   var $config	= array();
    var $page;
    var $tag;
    var $queryLog = array();
    var $interWiki = array();
+   var $aclCache = array();
    var $VERSION;
    var $WVERSION; //Wacko version
    var $context = array("");
@@ -464,27 +466,31 @@ class Wacko
       return $page;
    }
 
-   function GetCachedPage($tag, $metadataonly=0) {
+   function GetCachedPage($tag, $metadataonly=0) 
+   {
       if (isset( $this->pageCache[$tag] ))
       if ($this->pageCache[$tag]["mdonly"]==0 || $metadataonly==$this->pageCache[$tag]["mdonly"])
       return $this->pageCache[$tag];
       return false;
    }
 
-   function CachePage($page, $metadataonly=0) {
+   function CachePage($page, $metadataonly=0) 
+   {
       $page["supertag"] = $this->NpjTranslit($page["supertag"], TRAN_LOWERCASE, TRAN_DONTLOAD);
       $this->pageCache[$page["supertag"]] = $page;
       $this->pageCache[$page["supertag"]]["mdonly"] = $metadataonly;
    }
 
-   function CacheWantedPage($tag, $check = 0) {
+   function CacheWantedPage($tag, $check = 0) 
+   {
       if ($check==0)
       $this->wantedCache[$this->language["code"]][$tag] = 1;
       else if ($this->OldLoadPage($tag, "", 1, false, 1)=="")
       $this->wantedCache[$this->language["code"]][$tag] = 1;
    }
 
-   function ClearCacheWantedPage($tag){
+   function ClearCacheWantedPage($tag)
+   {
       $this->wantedCache[$this->language["code"]][$tag] = 0;
    }
 
@@ -639,7 +645,8 @@ class Wacko
       }
    }
 
-   function LoadRecentlyComment($limit=70, $for="", $from="") {
+   function LoadRecentlyComment($limit=70, $for="", $from="") 
+   {
       $limit= (int) $limit;
       if ($pages =
       $this->LoadAll("SELECT ".$this->pages_meta.",`body_r` FROM ".$this->config["table_prefix"]."pages ".
@@ -706,7 +713,8 @@ class Wacko
 
    function TagSearch($phrase) { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE latest = 'Y' AND lower(tag) LIKE binary lower('%".quote($this->dblink, $phrase)."%') ORDER BY supertag"); }
 
-   function SendMail($email,$subject, $message) {
+   function SendMail($email,$subject, $message) 
+   {
       $headers = "From: =?". $this->GetCharset() ."?B?". base64_encode($this->GetConfigValue("wakka_name")) ."?= <".$this->GetConfigValue("admin_email").">\r\n";
       $headers .= "X-Mailer: PHP/".phpversion()."\r\n"; //mailer
       $headers .= "X-Priority: 3\r\n"; //1 UrgentMessage, 3 Normal
@@ -1421,7 +1429,8 @@ class Wacko
       } else return "";
    }
 
-   function crc16($string) {
+   function crc16($string) 
+   {
       $crc = 0xFFFF;
       for ($x = 0; $x < strlen ($string); $x++) {
          $crc = $crc ^ ord($string[$x]);
@@ -1501,14 +1510,16 @@ class Wacko
       }
    }
 
-   function Header($mod="") {
+   function Header($mod="") 
+   {
       //    $this->StopLinkTracking();
       $result = $this->IncludeBuffered("header".$mod.".php", "Theme is corrupt: ".$this->GetConfigValue("theme"), "", "themes/".$this->GetConfigValue("theme")."/appearance");
       //    $this->StartLinkTracking();
       return $result;
    }
 
-   function Footer($mod="") {
+   function Footer($mod="") 
+   {
       //    $this->StopLinkTracking();
       $result = $this->IncludeBuffered("footer".$mod.".php", "Theme is corrupt: ".$this->GetConfigValue("theme"), "", "themes/".$this->GetConfigValue("theme")."/appearance");
       //    $this->StartLinkTracking();
@@ -1822,7 +1833,8 @@ class Wacko
       return $acl;
    }
 
-   function SaveAcl($tag, $privilege, $list) {
+   function SaveAcl($tag, $privilege, $list) 
+   {
 
       $supertag = $this->NpjTranslit($tag);
       if ($this->LoadAcl($tag, $privilege, 0))
@@ -1834,47 +1846,62 @@ class Wacko
          "supertag = '".quote($this->dblink, $supertag)."', ".
          "page_tag = '".quote($this->dblink, $tag)."', ".
          "privilege = '".quote($this->dblink, $privilege)."'");
-
    }
-
-   function RemoveAcls($tag) {
+   
+// REMOVALS
+   function RemoveAcls($tag) 
+   {
+   	  if (!$tag) return false;
       return $this->Query("DELETE FROM ".$this->config["table_prefix"]."acls  WHERE page_tag = '".quote($this->dblink, $tag)."' ");
    }
 
-   function RemovePage($tag) {
+   function RemovePage($tag) 
+   {
+   	  if (!$tag) return false;
       return $this->Query("DELETE FROM ".$this->config["table_prefix"]."revisions  WHERE tag = '".quote($this->dblink, $tag)."' ") &&
       $this->Query("DELETE FROM ".$this->config["table_prefix"]."pages  WHERE tag = '".quote($this->dblink, $tag)."' ");
    }
 
-   function RemoveComments($tag) {
+   function RemoveComments($tag) 
+   {
+   	  if (!$tag) return false;
       return $this->Query("DELETE FROM ".$this->config["table_prefix"]."pages  WHERE comment_on = '".quote($this->dblink, $tag)."' ");
    }
 
-   function RemoveWatches($tag) {
+   function RemoveWatches($tag) 
+   {
+   	  if (!$tag) return false;
       return $this->Query("DELETE FROM ".$this->config["table_prefix"]."pagewatches  WHERE tag = '".quote($this->dblink, $tag)."' ");
    }
 
-   function RemoveLinks($tag) {
+   function RemoveLinks($tag) 
+   {
+   	  if (!$tag) return false;
       return $this->Query("DELETE FROM ".$this->config["table_prefix"]."links  WHERE from_tag = '".quote($this->dblink, $tag)."' ");
    }
 
-   function RemoveReferrers($tag) {
+   function RemoveReferrers($tag) 
+   {
+   	  if (!$tag) return false;
       return $this->Query("DELETE FROM ".$this->config["table_prefix"]."referrers WHERE page_tag = '".quote($this->dblink, $tag)."' ");
    }
 
    // WATCHES
-   function IsWatched($user, $tag) {
+   function IsWatched($user, $tag) 
+   {
       return $this->LoadSingle("SELECT * FROM ".$this->config["table_prefix"]."pagewatches WHERE user = '".quote($this->dblink, $user)."' AND tag = '".quote($this->dblink, $tag)."'");
    }
 
-   function SetWatch($user, $tag) {
+   function SetWatch($user, $tag) 
+   {
       // Remove old watch first to avoid double watches
       $this->ClearWatch($user, $tag);
       return $this->Query( "INSERT INTO ".$this->config["table_prefix"]."pagewatches (user,tag) VALUES ( '".quote($this->dblink, $user)."', '".quote($this->dblink, $tag)."')" );
       // TIMESTAMP type is filled automatically by MySQL
    }
 
-   function ClearWatch($user, $tag){
+   function ClearWatch($user, $tag)
+   {
       return $this->Query( "DELETE FROM ".$this->config["table_prefix"]."pagewatches WHERE user = '".quote($this->dblink, $user)."' AND tag = '".quote($this->dblink, $tag)."'");
    }
 
