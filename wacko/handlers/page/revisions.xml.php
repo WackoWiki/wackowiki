@@ -34,14 +34,19 @@ if ($this->HasAccess("read"))
 			$c++;
 			if (($c <= $max) && $c>1)
 			{
+				$etag = str_replace('%2F', '/', rawurlencode($page["tag"]));
+
 				$xml .= "<item>\n";
 				$xml .= "<title>".$page["time"]."</title>\n";
 				$xml .= "<link>".$this->href("show").($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."time=".urlencode($page["time"])."</link>\n";
+				$xml .= "<guid isPermaLink=\"true\">".$this->href("", $etag)."</guid>\n";
+
 				$_GET["a"] = $_GET["b"];
 				$_GET["b"] = $page["id"];
 				$diff = $this->IncludeBuffered("handlers/page/diff.php", "oops");
 
 				$xml .= "<description>".str_replace("<", "&lt;", str_replace("&", "&amp;", $diff))."</description>\n";
+				$xml .= "<pubDate>".date ("r", strtotime ($page["time"]))."</pubDate>\n";
 				$xml .= "</item>\n";
 			}
 		}
