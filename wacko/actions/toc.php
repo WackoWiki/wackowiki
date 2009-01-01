@@ -28,10 +28,15 @@ $start_depth = $from{1};
 $end_depth   = $to{1};
 
 // 3. output
-print "<fieldset>";
-print "<legend><strong> ".$this->GetResourceValue("TOCTitle")." ".$this->Link($ppage, "", $title)."  </strong></legend>";
+if (!$nomark) 
+{
+	print "<fieldset>";
+	print "<legend><strong> ".$this->GetResourceValue("TOCTitle")." ".$this->Link($ppage, "", $title)."  </strong></legend>";
+}
+
 if (!$this->HasAccess("read",$_page["tag"]))
-print $this->GetResourceValue("ReadAccessDenied");
+	print $this->GetResourceValue("ReadAccessDenied");
+
 else
 {
 	$toc = $this->BuildToc( $context, $start_depth, $end_depth, $numerate, $link );
@@ -75,6 +80,9 @@ else
 	}
 	//$this->tocRecursion( ($ppage?$this->Href("",$ppage):""), $toc_body, 2 );
 }
-print "</fieldset>";
+if (!$nomark) 
+{
+	print "</fieldset>";
+}
 
 ?>
