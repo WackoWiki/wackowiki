@@ -1,6 +1,6 @@
 <?php
 
-if ($this->HasAccess("comment"))
+if ($this->HasAccess("comment") && $this->HasAccess("read"))
    {
       // find number
       if($latestComment = $this->LoadSingle("SELECT tag, id FROM ".$this->config["table_prefix"]."pages WHERE comment_on != '' ORDER BY id DESC LIMIT 1"))

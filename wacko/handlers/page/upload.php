@@ -2,15 +2,21 @@
 <div class="page">
 <?php
 // redirect to show method if page don't exists
-if (!$this->page) $this->Redirect($this->href('show'));
-  
-if ($user = $this->GetUser())
+if (!$this->page) $this->Redirect($this->href("show"));
+
+// deny for comment
+if ($this->page["comment_on"])
+	$this->Redirect($this->href("", $this->page["comment_on"], "show_comments=1")."#".$this->page["tag"]);
+
+if ($user = $this->GetUser()) 
 {
 	$user = strtolower($this->GetUserName());
 	$registered = true;
 }
 else
-$user = "guest@wacko";
+{
+	$user = "guest@wacko";
+}
 
 if ($registered
 &&

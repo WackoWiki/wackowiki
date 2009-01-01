@@ -3,14 +3,14 @@ header("Content-type: text/xml");
 
 $xml = "<?xml version=\"1.0\" encoding=\"".$this->GetCharset()."\"?>\n";
 $xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
-$xml .= "<channel>\n";
-$xml .= "<title>".$this->tag."</title>\n";
-$xml .= "<link>".$this->GetConfigValue("base_url")."</link>\n";
-$xml .= "<description>".$this->GetResourceValue("ExportClusterXML").$this->GetConfigValue("wakka_name")."/".$this->tag."</description>\n";
-$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
-$xml .= "<language></language>\n";//!!!
-$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
+$xml .= "\t<channel>\n";
+$xml .= "\t\t<title>".$this->tag."</title>\n";
+$xml .= "\t\t<link>".$this->GetConfigValue("base_url")."</link>\n";
+$xml .= "\t\t<description>".$this->GetResourceValue("ExportClusterXML").$this->GetConfigValue("wakka_name")."/".$this->tag."</description>\n";
+$xml .= "\t\t<lastBuildDate>".date('r')."</lastBuildDate>\n";
+$xml .= "\t\t<language></language>\n";//!!!
+$xml .= "\t\t<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
+$xml .= "\t\t<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
 if ($this->HasAccess("read"))
 {
@@ -34,31 +34,31 @@ if ($this->HasAccess("read"))
 			$tag = "";
 			for ($i=0; $i<count($_tag); $i++)
 			{
-				if ($i>$numOfSlashes) $tag .= $_tag[$i]."/";
+				if ($i > $numOfSlashes) $tag .= $_tag[$i]."/";
 			}
 		}
 
-		$xml .= "<item>\n";
-		$xml .= "<guid>".rtrim($tag, "/")."</guid>\n";
-		$xml .= "<title></title>\n";
-		$xml .= "<link>".$this->GetConfigValue("base_url").$page["supertag"]."</link>\n";
-		$xml .= "<description><![CDATA[".str_replace("]]>","]]&gt;",$page["body"])."]]></description>\n";
-		$xml .= "<author>".$page["owner"]."</author>\n";
-		$xml .= "<pubDate>".gmdate('D, d M Y H:i:s \G\M\T', strtotime($page["time"]))."</pubDate>\n";
-		$xml .= "</item>\n";
+		$xml .= "\t\t<item>\n";
+		$xml .= "\t\t\t<guid>".rtrim($tag, "/")."</guid>\n";
+		$xml .= "\t\t\t<title></title>\n";
+		$xml .= "\t\t\t<link>".$this->GetConfigValue("base_url").$page["supertag"]."</link>\n";
+		$xml .= "\t\t\t<description><![CDATA[".str_replace("]]>","]]&gt;",$page["body"])."]]></description>\n";
+		$xml .= "\t\t\t<author>".$page["owner"]."</author>\n";
+		$xml .= "\t\t\t<pubDate>".gmdate('D, d M Y H:i:s \G\M\T', strtotime($page["time"]))."</pubDate>\n";
+		$xml .= "\t\t</item>\n";
 	}
 
 }
 else
 {
-	$xml .= "<item>\n";
-	$xml .= "<title>Error</title>\n";
-	$xml .= "<link>".$this->href("show")."</link>\n";
-	$xml .= "<description>".$this->GetResourceValue("AccessDeniedXML")."</description>\n";
-	$xml .= "</item>\n";
+	$xml .= "\t\t<item>\n";
+	$xml .= "\t\t\t<title>Error</title>\n";
+	$xml .= "\t\t\t<link>".$this->href("show")."</link>\n";
+	$xml .= "\t\t\t<description>".$this->GetResourceValue("AccessDeniedXML")."</description>\n";
+	$xml .= "\t\t</item>\n";
 }
 
-$xml .= "</channel>\n";
+$xml .= "\t</channel>\n";
 $xml .= "</rss>\n";
 
 print($xml);

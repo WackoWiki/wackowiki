@@ -1,9 +1,15 @@
 <?php
-if ($user = $this->GetUser()) {
-	if ($this->IsWatched($this->GetUserName(), $this->GetPageTag()))
-	$this->ClearWatch($this->GetUserName(), $this->GetPageTag());
+if ($this->GetUser() && $this->page)
+{
+	if ($this->IsWatched($this->GetUserName(), $this->tag))
+	{
+		$this->ClearWatch($this->GetUserName(), $this->tag);
+	}
 	else
-	$this->SetWatch($this->GetUserName(), $this->GetPageTag());
+	{
+		$this->SetWatch($this->GetUserName(), $this->tag);
+	}
 }
-header("Location: ".$this->Href() );
+$this->Redirect($this->href());
+
 ?>
