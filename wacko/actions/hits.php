@@ -1,6 +1,6 @@
 <?php
 
-if ($vars[0] && $vars[0]!=$vars["nomark"])
+if ($vars[0] && $vars[0] != $vars["nomark"])
 $tag = $this->UnwrapLink( $vars[0] );
 else
 $tag = $this->getPageTag();
