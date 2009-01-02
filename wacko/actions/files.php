@@ -9,6 +9,7 @@
  [pictures=1]
  }}
  */
+
 $orderby = "filename ASC";
 if ($order == "time") $orderby = "uploaded_dt DESC";
 if ($order == "size") $orderby = "filesize ASC";
@@ -58,6 +59,7 @@ if ($can_view)
 	// display
 	$kb  = $this->GetResourceValue("UploadKB");
 	$del = $this->GetResourceValue("UploadRemove");
+
 	if (!$global) $path = "@".str_replace("/", "@", $this->NpjTranslit($vars[0]))."@";
 	else          $path = "";
 
@@ -80,7 +82,9 @@ foreach( $files as $file )
 
 	$dt = $file["uploaded_dt"];
 	$desc = $this->Format( $file["description"], "typografica" );
+
 	if ($desc == "") $desc = "&nbsp;";
+
 	$filename = $file["filename"];
 	$filesize = ceil($file["filesize"]/1024);
 	$link = $this->Link($path2.$filename, "", $filename );

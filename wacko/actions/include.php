@@ -8,7 +8,7 @@ if (in_array($vars[0],$this->context)) return;
 if ($vars[0] == $this->tag) return;
 
 if (! $this->HasAccess("read",$vars[0])){
-   if ($nowarning!=1) echo $this->GetResourceValue("NoAccessToSourcePage");
+   if ($nowarning != 1) echo $this->GetResourceValue("NoAccessToSourcePage");
 }else{
    if (!$inc_page = $this->LoadPage($vars[0], $_GET["time"])){
       echo "<em> ".$this->GetResourceValue("SourcePageDoesntExist")."(".$this->Link("/".$vars[0]).")</em>";
