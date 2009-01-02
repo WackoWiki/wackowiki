@@ -19,10 +19,10 @@ class Cache
 	{
 		$filename = $this->ConstructID($page, $method, $query);
 		if (!@file_exists($filename))
-			return false;
+		return false;
 
 		if ((time()-@filemtime($filename)) > $this->cache_ttl)
-			return false;
+		return false;
 
 		$fp = fopen ($filename, "r");
 		$contents = fread ($fp, filesize ($filename));
@@ -62,7 +62,7 @@ class Cache
 		if (!$query)  $query  = $this->query;
 		$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", $page))));
 		$filename = $this->ConstructID($page, $method, $query);
-		
+
 		$fp = fopen ($filename, "w");
 		fputs ($fp, $data);
 		fclose ($fp);
@@ -92,7 +92,7 @@ class Cache
 				$filename = $this->ConstructID($page, $param["method"], $param["query"]);
 				$this->Log("CacheInvalidate delete=".$filename);
 				if (@file_exists($filename))
-					@unlink($filename);
+				@unlink($filename);
 			}
 
 			$this->wacko->Query(
@@ -211,9 +211,9 @@ class Cache
 	}
 
 	function GetMicroTime()
-    { 
-		list($usec, $sec) = explode(" ",microtime()); 
-		return ((float)$usec + (float)$sec); 
+	{
+		list($usec, $sec) = explode(" ",microtime());
+		return ((float)$usec + (float)$sec);
 	}
 
 }
