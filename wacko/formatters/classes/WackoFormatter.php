@@ -169,6 +169,7 @@ class WackoFormatter
 	function WackoFormatter( &$object )
 	{
 		$this->object = &$object;
+
 		$this->LONGREGEXP =
 "/(".
 "\xa5\xa5.*?\xa5\xa5|".($this->object->GetConfigValue("allow_rawhtml")==1?"\<\#.*?\#\>|":"").
@@ -198,12 +199,14 @@ class WackoFormatter
  ($this->object->GetConfigValue("disable_npjlinks")==1?
  "":"(~?)".$object->language["ALPHANUM"]."+\@".$object->language["ALPHA"]."*(?!".$object->language["ALPHANUM"]."*\.".$object->language["ALPHANUM"]."+)(\:".$object->language["ALPHANUM"]."*)?|".$object->language["ALPHANUM"]."+\:\:".$object->language["ALPHANUM"]."+|").
 "\n)/sm";
+
  $this->NOTLONGREGEXP = "/(".($this->object->GetConfigValue("disable_formatters")==1?"":"\%\%.*?\%\%|").
 "~([^ \t\n]+)|".
 "\"\".*?\"\"|".
 "\{\{[^\n]*?\}\}|".
 "\xa5\xa5.*?\xa5\xa5".
 ")/sm";
+
  $this->MOREREGEXP = "/(>>.*?<<|".
 "~([^ \t\n]+)|".
 "\xa5\xa5.*?\xa5\xa5".

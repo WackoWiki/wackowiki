@@ -1,10 +1,12 @@
 <?php
-class post_wacko {
+class post_wacko
+{
 	var $object;
+
 	function post_wacko( &$object, &$options )
 	{
 		$this->object  = &$object;
-		$this->options =  &$options;
+		$this->options = &$options;
 		$this->actions = explode(", ", ACTIONS4DIFF);
 	}
 

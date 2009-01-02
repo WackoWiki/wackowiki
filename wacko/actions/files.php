@@ -10,16 +10,25 @@
  }}
  */
 
+if (!isset($order)) $order = "";
+if (!isset($global)) $global = "";
+if (!isset($tag)) $tag = "";
+if (!isset($pictures)) $pictures = "";
+
 $orderby = "filename ASC";
+
 if ($order == "time") $orderby = "uploaded_dt DESC";
 if ($order == "size") $orderby = "filesize ASC";
 if ($order == "size_desc") $orderby = "filesize DESC";
 if ($order == "ext") $orderby = "file_ext ASC";
 
+if (!isset($owner)) $owner = "";
 if ($owner) $user_add = "and user='".quote($this->dblink, $owner)."' ";
 else        $user_add = "";
 
 // do we allowed to see?
+
+
 if (!$global)
 {
 	if ($vars[0] == "") $vars[0] = $this->tag;
@@ -40,7 +49,6 @@ if (!$global)
 
 if ($can_view)
 {
-
 	if ($global || ($tag == $vars[0])) $filepage = $this->page;
 	else $filepage = $this->LoadPage($vars[0]);
 	if (!$global && !$filepage["id"]) return;

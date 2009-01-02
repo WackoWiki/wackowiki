@@ -2,13 +2,15 @@
 
 if (!class_exists("preformatter"))
 {
-	class preformatter {
+	class preformatter 
+	{
 		var $object;
+
 		function preformatter( &$object )
 		{
 			$this->object = &$object;
 			$this->PREREGEXP = "/(\%\%.*?\%\%|\"\".*?\"\"|::(\S)?::".
-			($this->object->userlang!=$this->object->pagelang?
+			($this->object->userlang != $this->object->pagelang?
        "|\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)":
        "").
       ")/sm";
@@ -48,7 +50,7 @@ if (!class_exists("preformatter"))
 			(preg_match("/^(\(\()(.+)(\)\))$/", $thing, $matches)) )
 			{
 				list (, $b1, $cont, $b2) = $matches;
-				if (preg_match("/\&\#\d+;/",$cont,$matches))
+				if (preg_match("/\&\#\d+;/", $cont, $matches))
 				{
 					$thing = $b1.@strtr($cont, $this->object->unicode_entities)." @@".$this->object->userlang.$b2;
 				}
