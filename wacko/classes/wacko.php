@@ -14,10 +14,12 @@ define("BM_USER", "1");
 define("BM_DEFAULT", "2");
 define("ACTIONS4DIFF", "a, anchor, toc"); //allowed actions in DIFF
 
+// engine class
 class Wacko
 {
-   var $dblink;
+   // VARIABLES
    var $config	= array();
+   var $dblink;
    var $page;
    var $tag;
    var $queryLog = array();
@@ -46,7 +48,7 @@ class Wacko
    var $post_wacko_action = null;
    var $_userhost = null;
 
-   // constructor
+// CONSTRUCTOR
    function Wacko($config)
    {
       $this->timer = $this->GetMicroTime();
@@ -56,12 +58,12 @@ class Wacko
       $this->WVERSION = WACKO_VERSION;
    }
 
-   // DATABASE
-   function Query($query, $debug=0)
+// DATABASE
+   function Query($query, $debug = 0)
    {
-      if($this->GetConfigValue("debug")>=1) $start = $this->GetMicroTime();
+      if($this->GetConfigValue("debug") >= 1) $start = $this->GetMicroTime();
       $result = query($this->dblink, $query);
-      if($this->GetConfigValue("debug")>=1)
+      if($this->GetConfigValue("debug") >= 1)
       {
          $time = $this->GetMicroTime() - $start;
          $this->queryLog[] = array(
@@ -84,7 +86,7 @@ class Wacko
       return $data;
    }
 
-   // MISC
+// MISC
    function GetMicroTime() { list($usec, $sec) = explode(" ",microtime()); return ((float)$usec + (float)$sec); }
 
    function IncludeBuffered($filename, $notfoundText = "", $vars = "", $path = "")
@@ -230,7 +232,7 @@ class Wacko
    {
       $langlist = $this->AvailableLanguages();
       //!!!! wrong code, maybe!
-      if ($this->GetMethod()=="edit" && $_GET["add"]==1)
+      if ($this->GetMethod() == "edit" && $_GET["add"] == 1)
       if ($_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
       $lang = $_REQUEST["lang"];
       else
@@ -260,7 +262,7 @@ class Wacko
    {
       if (!$this->GetConfigValue("multilanguage")) return $string;
       $_lang = $this->DetermineLang();
-      if ($lang==$_lang) return $string;
+      if ($lang == $_lang) return $string;
 
       //    die("<h2>".$lang."<>".$_lang."</h2>");
 
@@ -1794,6 +1796,8 @@ class Wacko
 
    function LoadAcl($tag, $privilege, $useDefaults = 1)
    {
+   	  if (!isset($acl)) $acl = "";
+   
       $supertag = $this->NpjTranslit($tag);
       if ($cachedACL = $this->GetCachedACL($supertag, $privilege, $useDefaults)) $acl = $cachedACL;
       if (!$acl)
@@ -1832,7 +1836,7 @@ class Wacko
       }
       return $acl;
    }
-
+   
    function SaveAcl($tag, $privilege, $list) 
    {
 
