@@ -29,15 +29,15 @@ $text = preg_replace("#\002#s","<br />\n", $text );    // newline
 // Highlighting
 
 // String constants
-$text = preg_replace("#\".*?\"#s", '<font color="#006666">$0</font>', $text );
+$text = preg_replace("#\".*?\"#s", '<span style="color:#006666">$0</span>', $text );
 
 // Keywords & functions
-$text = preg_replace("#\001($functions)\001#si", '<font color="#770055">$1</font>', $text );
-$text = preg_replace("#\001($skipwords)\001#si", '<font color=green><b>$1</b></font>', $text );
-$text = preg_replace("#\001($keywords)\001#si" , '<font color=blue>$1</font>', $text );
+$text = preg_replace("#\001($functions)\001#si", '<span style="color:#770055">$1</span>', $text );
+$text = preg_replace("#\001($skipwords)\001#si", '<span style="color:green"><b>$1</b></span>', $text );
+$text = preg_replace("#\001($keywords)\001#si" , '<span style="color:blue">$1</span>', $text );
 
 // Comments
-$text = preg_replace('#(\-\-.*)$#m', "<font color=\"#888888\"><i>$1</i></font>", $text );
+$text = preg_replace('#(\-\-.*)$#m', "<span style=\"color:#888888\"><em>$1</em></span>", $text );
 
 // Remove lexeme delimiter
 $text = preg_replace("#\001#s",'', $text );

@@ -6,6 +6,10 @@
  [hide_description=1]
  }}
  */
+ 
+if (!isset($global)) $global = "";
+if (!isset($maxsize)) $maxsize = "";
+if (!isset($hide_description)) $hide_description = "";
 
 if ($global) $global = "global";
 
