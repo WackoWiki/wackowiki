@@ -65,7 +65,7 @@ $num = 0;
 print("<table>");
 foreach ($pages as $page)
 {
-	if ($num<$max)
+	if ($num < $max)
 	{
 		if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
 		else $access = true;

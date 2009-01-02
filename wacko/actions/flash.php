@@ -41,6 +41,7 @@
  }}
  */
 
+if (!$url) $url = $vars[0];
 $url = htmlspecialchars($url);
 
 if(!$width) $width = 550;
