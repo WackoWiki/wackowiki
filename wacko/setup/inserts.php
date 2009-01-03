@@ -161,26 +161,18 @@
 
    $error_inserting_pages = false;
 
-   if ($config2["multilanguage"])
-      {
+   require_once("setup/lang/inserts.".$config2["language"].".php");
+
+   if ($config2["multilanguage"]) {
          $handle = opendir("setup/lang");
-         while (false !== ($file = readdir($handle)))
-            {
+         while ( false !== ($file = readdir($handle)) ) {
                if(1 == preg_match("/^inserts\.(.*?)\.php$/",$file,$match))
-                  {
                      $langlist[] = $match[1];
-                  }
             }
 
          closedir($handle);
 
          foreach ($langlist as $_lang)
-            {
-               require("setup/lang/inserts.".$_lang.".php");
-            }
-      }
-   else
-      {
-         require("setup/lang/inserts.".$config2["language"].".php");
-      }
+               require_once("setup/lang/inserts.".$_lang.".php");
+    }
 ?>
