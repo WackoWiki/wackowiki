@@ -146,7 +146,7 @@
       {
          GLOBAL $config2, $language, $languages;
 
-         if (!$languages[$lng])
+         if ( !$languages[$lng] )
             {
                $resourcefile = "lang/lang.".$lng.".php";
                if (@file_exists($resourcefile)) include($resourcefile);
@@ -159,20 +159,22 @@
          return $language;
       }
 
-   $error_inserting_pages = false;
+      $error_inserting_pages = false;
 
-   require_once("setup/lang/inserts.".$config2["language"].".php");
-
-   if ($config2["multilanguage"]) {
-         $handle = opendir("setup/lang");
-         while ( false !== ($file = readdir($handle)) ) {
-               if(1 == preg_match("/^inserts\.(.*?)\.php$/",$file,$match))
-                     $langlist[] = $match[1];
-            }
-
-         closedir($handle);
-
-         foreach ($langlist as $_lang)
-               require_once("setup/lang/inserts.".$_lang.".php");
-    }
+      require_once("setup/lang/inserts.".$config2["language"].".php");
+      
+      if ( $config2["multilanguage"] ) {
+          $handle = opendir("setup/lang");
+          while (false !== ($file = readdir($handle)))
+                if(1 == preg_match("/^inserts\.(.*?)\.php$/",$file,$match))
+                      $langlist[] = $match[1];
+ 
+          closedir($handle);
+ 
+          foreach ($langlist as $_lang) {
+          		unset($lng);
+          		unset($languages);
+                require_once("setup/lang/inserts.".$_lang.".php");
+          }
+       }
 ?>

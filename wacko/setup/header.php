@@ -1,4 +1,9 @@
 <?php
+if ( !isset ( $_POST["config"] ) ) $_POST["config"] = "";
+if ( !isset ( $wakkaConfig["wakka_version"] ) ) $wakkaConfig["wakka_version"] 	= "";
+if ( !isset ( $wakkaConfig["wacko_version"] ) ) $wakkaConfig["wacko_version"] 	= "";
+if ( !isset ( $wakkaConfig["admin_name"] ) ) 	$wakkaConfig["admin_name"]	 	= "";
+if ( !isset ( $wakkaConfig["admin_email"] ) ) 	$wakkaConfig["admin_email"] 	= "";
 
 function myLocation()
    {
@@ -54,7 +59,9 @@ require_once("setup/lang/installer.".$config["language"].".php");
    </head>
    <body>
       <div class="installer">
-         <h1><?php echo $lang["Title"];?></h1><h1 class="white">&nbsp;:&nbsp;</h1><h1><?php echo $lang[$installAction]; ?></h1>
+         <h1><?php echo $lang["Title"];?></h1><h1 class="white">&nbsp;:&nbsp;</h1><h1><?php 
+         if ( $installAction == "lang" ) echo $lang["Lang"];
+         else echo $lang[$installAction]; ?></h1>
          <ul class="menu">
             <li class="<?php echo $installAction == 'lang' ? 'current' : 'item'; ?>"><?php echo $lang["Lang"]; ?></li>
             <li>&gt;</li>
