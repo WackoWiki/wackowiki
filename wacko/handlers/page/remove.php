@@ -1,7 +1,11 @@
 <div class="pageBefore">&nbsp;</div>
 <div class="page">
-  <?php
+<?php
 
+// obviously do not allow to remove non-existent pages
+if (!$this->page) $this->Redirect($this->href());
+
+// check user permissions to delete
 if ($this->IsAdmin() ||
 (!$this->GetConfigValue("remove_onlyadmins") &&
 (
@@ -35,20 +39,24 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 			{
 				print(str_replace("%1",$this->tag,$this->GetResourceValue("AclsRemoved"))."<br />\n");
 			}
+			if ($this->RemoveWatches($this->tag))
+			{
+				print(str_replace("%1",$this->tag,$this->GetResourceValue("WatchesRemoved"))."<br />\n");
+			}
+			if ($this->RemoveComments($this->tag))
+			{
+				$this->WriteRecentCommentsXML();
+				print(str_replace("%1",$this->tag,$this->GetResourceValue("CommentsRemoved"))."<br />\n");
+			}
+			if ($this->RemoveFiles($this->tag))
+			{
+				print(str_replace("%1",$this->tag,$this->GetResourceValue("FilesRemoved"))."<br />\n");
+			}
 			if ($this->RemovePage($this->tag))
 			{
 				$this->WriteRecentChangesXML();
 				$this->WriteRecentCommentsXML();
 				print(str_replace("%1",$this->tag,$this->GetResourceValue("PageRemoved"))."<br />\n");
-			}
-			if ($this->RemoveWatches($this->tag))
-			{
-				print("\n");
-			}
-			if ($this->RemoveComments($this->tag))
-			{
-				$this->WriteRecentCommentsXML();
-				print("\n");
 			}
 
 			print($this->GetResourceValue("ThisActionHavenotUndo")."\n");
@@ -96,4 +104,5 @@ else
 {
 	print($this->GetResourceValue("NotOwnerAndCanDelete"));
 }
-?></div>
+?>
+</div>

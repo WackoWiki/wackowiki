@@ -121,11 +121,18 @@ $wakkaResource = array(
   "ViewReferrersForGlobal" => "<a href=\"%1\">Bekijk globale verwijzingen</a>",
   "NoneReferrers" => "<em>None</em>",
   "NotOwnerAndCanDelete" => "<i>U ben niet de eigenaar van deze pagina en kunt deze niet verwijderen</i>",
+
+// remove
   "ReferrersRemoved" => "<i>Verwijzingen naar pagina %1 zijn verwijderd.</i>",
   "LinksRemoved" => "<i>Links van pagina %1 zijn verwijderd.</i>",
   "AclsRemoved" => "<i>Pagina's ACL's %1 zijn verwijderd.</i>",
+  "WatchesRemoved" => "<i>Watches from page %1 zijn verwijderd.</i>",
+  "CommentsRemoved" => "<i>Comments from page %1 zijn verwijderd.</i>",
+  "FilesRemoved" => "<i>Files from page %1 zijn verwijderd.</i>",
   "PageRemoved" => "<i>Pagina %1 is verwijderd.</i>",
+  "RevisionsRemoved" => "<i>Revisions from page %1 zijn verwijderd.</i>",
   "ThisActionHavenotUndo" => "<h3>Deze handeling kan niet ongedaan worden gemaakt. Veel sterkte ermee!</h3>",
+
   "PrintVersion" => "Print versie",
   "ReferringPages" => "Verwijzende pagina's",
   "NoReferringPages" => "<em>Er zijn geen verwijzende pagina's.</em>",

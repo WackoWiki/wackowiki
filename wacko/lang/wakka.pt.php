@@ -121,11 +121,18 @@ $wakkaResource = array(
   "ViewReferrersForGlobal" => "<a href=\"%1\">Ver referenciadores globais</a>",
   "NoneReferrers" => "<em>Nenhum</em>",
   "NotOwnerAndCanDelete" => "<i>Se não é o dono desta página não pode apagá-la</i>",
+
+// remove
   "ReferrersRemoved" => "<i>Referenciadores para a página %1 removidos.</i>",
   "LinksRemoved" => "<i>Ligações da página %1 removidas.</i>",
   "AclsRemoved" => "<i>Permissões da página %1 removidas.</i>",
+  "WatchesRemoved" => "<i>Watches from page %1 removidos.</i>",
+  "CommentsRemoved" => "<i>Comments from page %1 removidos.</i>",
+  "FilesRemoved" => "<i>Files from page %1 removidos.</i>",
   "PageRemoved" => "<i>Página %1 removida.</i>",
+  "RevisionsRemoved" => "<i>Revisions from page %1 removidos.</i>",
   "ThisActionHavenotUndo" => "<h3>!Esta acção não pode ser anulada. Boa Sorte!</h3>",
+
   "PrintVersion" => "Versão Impressora",
   "ReferringPages" => "Páginas Referenciadoras",
   "NoReferringPages" => "<em>Não existem Páginas Referenciadoras</em>",

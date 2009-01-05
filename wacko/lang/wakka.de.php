@@ -118,11 +118,18 @@ $wakkaResource = array(
   "ViewReferrersForGlobal" => "<a href=\"%1\">zeige globale Referenzen</a>",
   "NoneReferrers" => "<em>keine Verweise</em>",
   "NotOwnerAndCanDelete" => "<i>Du bist nicht der Besitzer dieser Seite und kannst sie deshalb nicht löschen.</i>",
+
+// remove
   "ReferrersRemoved" => "<i>Referenzen auf Seite %1 gelöscht.</i>",
   "LinksRemoved" => "<i>Verweise von Seite %1 gelöscht.</i>",
   "AclsRemoved" => "<i>Berechtigungen der Seite %1 gelöscht.</i>",
+  "WatchesRemoved" => "<i>Beobachter der Seite %1 gelöscht.</i>",
+  "CommentsRemoved" => "<i>Kommentare der Seite %1 gelöscht.</i>",
+  "FilesRemoved" => "<i>Dateien der Seite %1 gelöscht.</i>",
   "PageRemoved" => "<i>Seite %1 gelöscht.</i>",
+  "RevisionsRemoved" => "<i>Revisionen der Seite %1 gelöscht.</i>",
   "ThisActionHavenotUndo" => "<h3>Diese Aktion kann nicht rückgängig gemacht werden. Viel Glück!</h3>",
+  
   "PrintVersion" => "Druckversion",
   "ReferringPages" => "referenzierende Seiten",
   "NoReferringPages" => "<em>keine verweisenden Seiten</em>",
@@ -346,17 +353,24 @@ $wakkaResource = array(
   "Next" => "weiter",
   "Prev" => "zurück", 
 
-  "default_bookmarks" => "((SeitenIndex Index))\n((LetzteAenderungen Änderungen))\n((LetzteKommentare Kommentare))\n((Benutzer))\n((Registrierung))",
-  "site_bookmarks" => "((SeitenIndex Index)) / ((LetzteAenderungen Änderungen)) / ((LetzteKommentare Kommentare))",
+  "default_bookmarks" => "((SeitenIndex Index))\n".
+  						 "((LetzteAenderungen Änderungen))\n".
+						 "((LetzteKommentare Kommentare))\n".
+						 "((Benutzer))\n".
+						 "((Registrierung))",
+						
+  "site_bookmarks" => 	"((SeitenIndex Index))\n".
+  						"((LetzteAenderungen Änderungen))\n".
+						"((LetzteKommentare Kommentare))",
 
 //icons
   "outericon" => '<img src="{theme}icons/web.gif" alt="externer Link" />',
   "fileicon" => '<img src="{theme}icons/file.gif" alt="Datei" />',
-  "pdficon"  => '<img src="{theme}icons/pdf.gif" alt="PDF Dokument" />',
-  "rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF Dokument" />',  
+  "pdficon"  => '<img src="{theme}icons/pdf.gif" alt="PDF" />',
+  "rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF" />',  
   "mailicon" => '<img src="{theme}icons/mail.gif" alt="E-Mail" />',
   "lockicon" => '<img src="{theme}icons/lock.gif" alt="Zugriff verweigert" />',
-  "keyicon" => '<img src="{theme}icons/key.gif" alt="Seite mit benutzerdefiniertem Zugriff" />',
+  "keyicon" => '<img src="{theme}icons/key.gif" alt="Zugriff eingeschränkt" />',
   "wantedicon" => '?',
 
 // My Groups

@@ -120,11 +120,18 @@ $wakkaResource = array(
   "ViewReferrersForGlobal" => "<a href=\"%1\">Link-uri la ".$wakkaConfig["wakka_name"]."</a>",
   "NoneReferrers" => "<em>Nu</em>",
   "NotOwnerAndCanDelete" => "<em>Nu sunteti posesorul paginii date si nu o puteti sterge</em>",
+
+// remove
   "ReferrersRemoved" => "<em>Link-uri externe la pagina %1 sunt lichidate.</em>",
   "LinksRemoved" => "<em>Link-urile locale ñ %1 sunt lichidate.</em>",
   "AclsRemoved" => "<em>Drepturile de acces %1 sunt lichidate.</em>",
+  "WatchesRemoved" => "<i>Watches from page %1 sunt lichidate.</i>",
+  "CommentsRemoved" => "<i>Comments from page %1 sunt lichidate.</i>",
+  "FilesRemoved" => "<i>Files from page %1 sunt lichidate.</i>",
   "PageRemoved" => "<em>Pagina %1 este lichidata.</em>",
+  "RevisionsRemoved" => "<i>Revisions from page %1 sunt lichidate.</i>",
   "ThisActionHavenotUndo" => "<h3>Lichidarea nu poate fi oprita.</h3>",
+
   "PrintVersion" => "Versiune pentru imprimare",
   "ReferringPages" => "Paginile, ce se adreseaza la pagina data",
   "NoReferringPages" => "<em>Referinte la pagina data nu sunt</em>",
