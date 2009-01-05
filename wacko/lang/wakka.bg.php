@@ -121,11 +121,18 @@ $wakkaResource = array(
   "ViewReferrersForGlobal" => "<a href=\"%1\">Препратки на ".$wakkaConfig["wakka_name"]."</a>",
   "NoneReferrers" => "<em>Нет</em>",
   "NotOwnerAndCanDelete" => "<em>Вие не сте собственик на тази страница и затова не можете да я изтриете</em>",
+
+// remove
   "ReferrersRemoved" => "<em>Външните препратки на страница %1 изтрити.</em>",
   "LinksRemoved" => "<em>Локалните препратки от %1 изтрити.</em>",
   "AclsRemoved" => "<em>Правата за достъп %1 изтрити.</em>",
+  "WatchesRemoved" => "<i>Watches from page %1 изтрити.</i>",
+  "CommentsRemoved" => "<i>Comments from page %1 изтрити.</i>",
+  "FilesRemoved" => "<i>Files from page %1 изтрити.</i>",
   "PageRemoved" => "<em>Страница %1 изтрита.</em>",
+  "RevisionsRemoved" => "<i>Revisions from page %1 изтрити.</i>",
   "ThisActionHavenotUndo" =>"<h3>Изтриването не може да се отмени.</h3>",
+
   "PrintVersion" => "Версия за печат",
   "ReferringPages" => "Страници, препращащи на дадената",
   "NoReferringPages" => "<em>Няма препратки на тази страница</em>",

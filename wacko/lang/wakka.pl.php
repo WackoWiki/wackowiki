@@ -121,11 +121,18 @@ $wakkaResource = array(
   "ViewReferrersForGlobal" => "<a href=\"%1\">witryny</a>.",
   "NoneReferrers" => "<em>Brak</em>",
   "NotOwnerAndCanDelete" => "<i>Przepraszamy. Tê stronê mo¿e usun±æ tylko oryginalny autor.</i>",
+
+// remove
   "ReferrersRemoved" => "<i>Odsy³acze do strony %1 zosta³y usuniête.</i>",
   "LinksRemoved" => "<i>Odno¶niki ze strony %1 zosta³y usuniête.</i>",
   "AclsRemoved" => "<i>Listy praw dostêpu do strony %1 zosta³y usuniête.</i>",
+  "WatchesRemoved" => "<i>Watches from page %1 usuniête.</i>",
+  "CommentsRemoved" => "<i>Comments from page %1 usuniête.</i>",
+  "FilesRemoved" => "<i>Files from page %1 usuniête.</i>",
   "PageRemoved" => "<i>Strona %1 zosta³a usuniêta.</i>",
+  "RevisionsRemoved" => "<i>Revisions from page %1 usuniête.</i>",
   "ThisActionHavenotUndo" => "<h3>UWAGA: Ta czynno¶æ nie mo¿e zostaæ cofniêta!</h3>",
+
   "PrintVersion" => "Wersja do druku",
   "ReferringPages" => "Dokumenty Wiki, zawieraj±ce odno¶nik tej strony",
   "NoReferringPages" => "<em>W tej chwili ¿aden dokument nie zawiera odno¶nika do tej strony</em>",

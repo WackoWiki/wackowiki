@@ -121,11 +121,18 @@ $wakkaResource = array(
   "ViewReferrersForGlobal" => "<a href=\"%1\">Vis alle links</a>",
   "NoneReferrers" => "<em>Ingen</em>",
   "NotOwnerAndCanDelete" => "<i>Du ejer ikke denne side og kan ikke slette den.</i>",
+
+// remove
   "ReferrersRemoved" => "<i>Links til %1 er fjernet.</i>",
   "LinksRemoved" => "<i>Links fra siden %1 fjernet.</i>",
   "AclsRemoved" => "<i>Sidetilladelser for %1 fjernet.</i>",
+  "WatchesRemoved" => "<i>Watches from page %1 fjernet.</i>",
+  "CommentsRemoved" => "<i>Comments from page %1 fjernet.</i>",
+  "FilesRemoved" => "<i>Files from page %1 fjernet.</i>",
   "PageRemoved" => "<i>Siden %1 fjernet.</i>",
+  "RevisionsRemoved" => "<i>Revisions from page %1 fjernet.</i>",
   "ThisActionHavenotUndo" => "<h3>!Denne handling kan du ikke fortryde!</h3>",
+
   "PrintVersion" => "Udskrivningsversion",
   "ReferringPages" => "Henvisningssider",
   "NoReferringPages" => "<em>Der er ingen henvisninger.</em>",

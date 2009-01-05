@@ -1852,7 +1852,7 @@ class Wacko
          "privilege = '".quote($this->dblink, $privilege)."'");
 	}
 	 
-	// REMOVALS
+	// REMOVE
 	function RemoveAcls($tag)
 	{
 		if (!$tag) return false;
@@ -1889,6 +1889,39 @@ class Wacko
 		if (!$tag) return false;
 		return $this->Query("DELETE FROM ".$this->config["table_prefix"]."referrers WHERE page_tag = '".quote($this->dblink, $tag)."' ");
 	}
+
+	function RemoveFiles($tag, $cluster = false)
+	{
+		if (!$tag) return false;
+		
+		$pages = $this->LoadAll(
+			"SELECT id, supertag ".
+			"FROM {$this->config['table_prefix']}pages ".
+			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+
+		foreach ($pages as $page)
+		{
+			// get filenames
+			$files = $this->LoadAll(
+				"SELECT filename ".
+				"FROM {$this->config['table_prefix']}upload ".
+				"WHERE page_id = '".quote($this->dblink, $page['id'])."'");
+
+			foreach ($files as $file)
+			{
+				// remove from FS
+				$filename = $this->config['upload_path_per_page'].'/@'.
+					str_replace('/', '@', $page['supertag']).'@'.$file['filename'];
+				@unlink($filename);
+			}
+			// remove from DB
+			$this->Query(
+				"DELETE FROM {$this->config['table_prefix']}upload ".
+				"WHERE page_id = '".quote($this->dblink, $page['id'])."'");
+		}
+		return true;
+	}
+
 
 	// WATCHES
 	function IsWatched($user, $tag)

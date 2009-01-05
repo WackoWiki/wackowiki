@@ -121,11 +121,18 @@ $wakkaResource = array(
   "ViewReferrersForGlobal" => "<a href=\"%1\">Vaata globaalseid viiteid</a>",
   "NoneReferrers" => "<em>Ei</em>",
   "NotOwnerAndCanDelete" => "<i>Sa ei ole selle lehe omanik, seega ei saa ka kustutada</i>",
+
+// remove
   "ReferrersRemoved" => "<i>Lehe viited %1 kustutatud.</i>",
   "LinksRemoved" => "<i>Lehe lingid %1 eemaldatud.</i>",
   "AclsRemoved" => "<i>Lehe KÕL'id %1 eemaldatud.</i>",
+  "WatchesRemoved" => "<i>Watches from page %1 eemaldatud.</i>",
+  "CommentsRemoved" => "<i>Comments from page %1 eemaldatud.</i>",
+  "FilesRemoved" => "<i>Files from page %1 removed.</i>",
   "PageRemoved" => "<i>Leht %1 eemaldatud.</i>",
+  "RevisionsRemoved" => "<i>Revisions from page %1 eemaldatud.</i>",
   "ThisActionHavenotUndo" => "<h3>!See tegevus pole taastatav. Edu!</h3>",
+
   "PrintVersion" => "Prinditav versioon",
   "ReferringPages" => "Viidatud lehed",
   "NoReferringPages" => "<em>Viidatud lehti pole</em>",

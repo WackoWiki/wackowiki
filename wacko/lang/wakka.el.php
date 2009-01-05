@@ -121,11 +121,18 @@ $wakkaResource = array(
   "ViewReferrersForGlobal" => "<a href=\"%1\">View global referrers</a>",
   "NoneReferrers" => "<em>Καμία</em>",
   "NotOwnerAndCanDelete" => "<i>Δεν είσαι ο ιδιοκτήτης αυτής της σελίδας και δεν μπορείς να την διαγράψεις</i>",
+
+// remove
   "ReferrersRemoved" => "<i>Οι παραπομπές σε αυτήν την σελίδα %1 αφαιρέθηκαν.</i>",
   "LinksRemoved" => "<i>Οι σύνδεσμοι από αυτήν την σελίδα %1 αφαιρέθηκαν.</i>",
   "AclsRemoved" => "<i>Οι acls της σελίδας %1 αφαιρέθηκαν.</i>",
+  "WatchesRemoved" => "<i>Watches from page %1 αφαιρέθηκαν.</i>",
+  "CommentsRemoved" => "<i>Comments from page %1 αφαιρέθηκαν.</i>",
+  "FilesRemoved" => "<i>Files from page %1 αφαιρέθηκαν.</i>",
   "PageRemoved" => "<i>Η σελίδα %1 αφαιρέθηκε.</i>",
+  "RevisionsRemoved" => "<i>Revisions from page %1 αφαιρέθηκαν.</i>",
   "ThisActionHavenotUndo" => "<h3>!Αυτή η ενέργεια δεν μπορεί να αναιρεθεί. Καλή τύχη!</h3>",
+
   "PrintVersion" => "Έκδοση προς εκτύπωση",
   "ReferringPages" => "Σελίδες παραπομπών",
   "NoReferringPages" => "<em>Δεν υπάρχει καμία σελίδα παραπομπής</em>",

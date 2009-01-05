@@ -121,11 +121,18 @@ $wakkaResource = array(
   "ViewReferrersForGlobal" => "<a href=\"%1\">View global referrers</a>",
   "NoneReferrers" => "<em>None</em>",
   "NotOwnerAndCanDelete" => "<i>You aren't owner of this page and can't delete it</i>",
+
+// remove
   "ReferrersRemoved" => "<i>Referrers to page %1 removed.</i>",
   "LinksRemoved" => "<i>Links from page %1 removed.</i>",
   "AclsRemoved" => "<i>Page acls %1 removed.</i>",
+  "WatchesRemoved" => "<i>Watches from page %1 removed.</i>",
+  "CommentsRemoved" => "<i>Comments from page %1 removed.</i>",
+  "FilesRemoved" => "<i>Files from page %1 removed.</i>",
   "PageRemoved" => "<i>Page %1 removed.</i>",
+  "RevisionsRemoved" => "<i>Revisions from page %1 removed.</i>",
   "ThisActionHavenotUndo" => "<h3>!This action cannot be undone. Good luck!</h3>",
+
   "PrintVersion" => "Print version",
   "ReferringPages" => "Referring pages",
   "NoReferringPages" => "<em>There are no referring pages</em>",
@@ -349,13 +356,13 @@ $wakkaResource = array(
   "site_bookmarks" => "((PageIndex Index)) / ((RecentChanges Changes)) / ((RecentlyCommented Comments))",
 
 //icons
-  "outericon" => '<img src="{theme}icons/web.gif" alt="" />',
-  "fileicon" => '<img src="{theme}icons/file.gif" alt="" />',
-  "pdficon"  => '<img src="{theme}icons/pdf.gif" alt="PDF Document" />',
-  "rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',
-  "mailicon" => '<img src="{theme}icons/mail.gif" alt="" />',
-  "lockicon" => '<img src="{theme}icons/lock.gif" alt="Access denied" />',
-  "keyicon" => '<img src="{theme}icons/key.gif" alt="Page with custom access" />',
+  "outericon" => '<img src="{theme}icons/web.gif" alt="www" />',
+  "fileicon" => '<img src="{theme}icons/file.gif" alt="file" />',
+  "pdficon"  => '<img src="{theme}icons/pdf.gif" alt="PDF" />',
+  "rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF" />',
+  "mailicon" => '<img src="{theme}icons/mail.gif" alt="email" />',
+  "lockicon" => '<img src="{theme}icons/lock.gif" alt="denied" />',
+  "keyicon" => '<img src="{theme}icons/key.gif" alt="restricted" />',
   "wantedicon" => '?',
 
 // My Groups
