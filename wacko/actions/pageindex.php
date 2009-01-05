@@ -3,10 +3,12 @@
 /*
  Page Index Action
  {{pageindex
- [limit="50"] // optional - number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
+ [max="50"] // optional - number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
  [letter="a"] // optional - only display pages whose name starts with this letter
  }}
  */
+ 
+if ($max) $limit = $max;
 
 $offset = ( isset($_GET["offset"]) ) ? (int)$_GET["offset"] : 0;
 if(!$limit) $limit = 50;
