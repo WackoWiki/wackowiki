@@ -2,7 +2,7 @@
             <input type="hidden" name="config[language]" value="<?php echo $config["language"];?>" />
 <?php
 
-if ($wakkaConfig["wakka_version"])
+if ( isset ( $wakkaConfig["wakka_version"] ) )
    {
       // If this is an upgrade install
       print("            <p>".$lang["Installed"].($wakkaConfig["wacko_version"] ? $wakkaConfig["wacko_version"] : $wakkaConfig["wakka_version"]).". ".$lang["ToUpgrade"].WACKO_VERSION.".</p>\n");

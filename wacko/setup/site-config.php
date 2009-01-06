@@ -1,6 +1,6 @@
 <?php
 
-if (!$wakkaConfig["wakka_version"])
+if ( !isset ( $wakkaConfig["wakka_version"] ) )
    {
 ?>
          <script type="text/javascript">
@@ -64,7 +64,7 @@ else
 <?php
    }
 ?>
-         <form action="<?php echo myLocation() ?>?installAction=<?php print !$wakkaConfig["wakka_version"] ? "database-config" : "database-install" ?>" method="post" name="form1">
+         <form action="<?php echo myLocation() ?>?installAction=<?php !isset ( $wakkaConfig["wakka_version"] ) ? print "database-config" : print "database-install" ; ?>" method="post" name="form1">
             <input type="hidden" name="config[language]" value="<?php echo $config["language"];?>" />
             <input type="hidden" name="config[cache]" value="<?php echo $config["cache"];?>" />
             <h2><?php echo $lang["Name"];?></h2>
@@ -79,7 +79,7 @@ else
 <?php
 
    // Don't do the following if this is an upgrade install
-   if(!$wakkaConfig["wakka_version"])
+   if ( !isset ( $wakkaConfig["wakka_version"] ) )
       {
 ?>
             <h2><?php echo $lang["MultiLang"];?></h2>
@@ -89,7 +89,7 @@ else
             <div class="fake_hr_seperator"><hr /></div>
             <h2><?php echo $lang["Admin"];?></h2>
             <p class="notop"><?php echo $lang["AdminDesc"];?></p>
-            <input type="text" maxlength="80" name="config[admin_name]" value="<?php echo $wakkaConfig["admin_name"] ?>" class="text_input" />
+            <input type="text" maxlength="80" name="config[admin_name]" value="<?php if ( isset ( $wakkaConfig["admin_name"] ) ) echo $wakkaConfig["admin_name"]; ?>" class="text_input" />
             <br />
             <div class="fake_hr_seperator"><hr /></div>
             <h2><?php echo $lang["Password"];?></h2>
@@ -100,7 +100,7 @@ else
             <div class="fake_hr_seperator"><hr /></div>
             <h2><?php echo $lang["Mail"];?></h2>
             <p class="notop"><?php echo $lang["MailDesc"];?></p>
-            <input type="text" maxlength="320" name="config[admin_email]" value="<?php echo $wakkaConfig["admin_email"] ?>" class="text_input" />
+            <input type="text" maxlength="320" name="config[admin_email]" value="<?php if ( isset ( $wakkaConfig["admin_email"] ) ) echo $wakkaConfig["admin_email"]; ?>" class="text_input" />
             <br />
             <div class="fake_hr_seperator"><hr /></div>
 <?php

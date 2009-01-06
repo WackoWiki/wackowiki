@@ -83,8 +83,11 @@ switch($config2["database_driver"])
                print("         </ul>\n");
                print("         <br />\n");
 
-               if (!$version = trim($wakkaConfig["wakka_version"])) $version = "0";
-               if (trim($wakkaConfig["wacko_version"])) $version = trim($wakkaConfig["wacko_version"]);
+				if ( !isset ( $wakkaConfig["wakka_version"] ) ) $wakkaConfig["wakka_version"] = "";
+				if (!$version = trim($wakkaConfig["wakka_version"])) $version = "0";
+				if ( isset ( $wakkaConfig["wacko_version"] ) )
+					if ( trim ( $wakkaConfig["wacko_version"] ) ) $version = trim($wakkaConfig["wacko_version"]);
+
                switch ($version)
                   {
                      // new installation
