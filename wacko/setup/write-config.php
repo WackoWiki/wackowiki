@@ -25,9 +25,10 @@ function array_to_str ($arr, $name="")
    // fetch config
    $config = $config2 = unserialize($_POST["config_s"]);
 
-   if (!$wakkaConfig["wacko_version"]) $config["cookie_prefix"] = $config["table_prefix"];
-
-   if (!$wakkaConfig["wacko_version"]) $config["aliases"] = array("Admins" => $config["admin_name"]);
+	if ( !isset( $wakkaConfig["wacko_version"] ) ) {
+		$config["cookie_prefix"] = $config["table_prefix"];
+		$config["aliases"] = array("Admins" => $config["admin_name"]);
+	}
 
    // merge existing configuration with new one
    $config = array_merge((array)$wakkaConfig, (array)$config);

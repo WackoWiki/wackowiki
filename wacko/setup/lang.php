@@ -18,7 +18,18 @@
 
    foreach($lang_codes as $key => $value)
       {
-         echo "               <input type=\"radio\" id=\"lang_".$key."\" name=\"config[language]\" value=\"".$key."\"".($wakkaConfig["language"] == $key ? "checked=\"checked\"" : "")." class=\"input_lang\"><label for=\"lang_".$key."\" class=\"label_lang\">".$value." (".$key.")</label>\n<br />\n";
+		echo "\t<input type=\"radio\" id=\"lang_".$key."\" name=\"config[language]\" value=\"".$key."\"";
+// Default or Selected Language
+if ( isset ( $_POST["config"]["language"] ) ) {
+	if ( $_POST["config"]["language"] == $key ) {
+		echo " checked=\"checked\" ";
+	}
+} elseif ( $wakkaConfig["language"] == $key ) {
+	echo " checked=\"checked\" ";
+}
+//
+		echo " onClick=\"this.form.action='?installAction=lang'; submit(); \"";
+		echo " class=\"input_lang\"><label for=\"lang_".$key."\" class=\"label_lang\">".$value." (".$key.")</label><br>\n";
       }
 ?>
             <input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />

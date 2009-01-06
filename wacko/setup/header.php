@@ -1,9 +1,4 @@
 <?php
-if ( !isset ( $_POST["config"] ) ) $_POST["config"] = "";
-if ( !isset ( $wakkaConfig["wakka_version"] ) ) $wakkaConfig["wakka_version"] 	= "";
-if ( !isset ( $wakkaConfig["wacko_version"] ) ) $wakkaConfig["wacko_version"] 	= "";
-if ( !isset ( $wakkaConfig["admin_name"] ) ) 	$wakkaConfig["admin_name"]	 	= "";
-if ( !isset ( $wakkaConfig["admin_email"] ) ) 	$wakkaConfig["admin_email"] 	= "";
 
 function myLocation()
    {
@@ -43,8 +38,10 @@ function is__writable($path)
    }
 
 // Fetch Configuration
-$config = $_POST["config"];
-$config2 = array_merge((array)$wakkaConfig, (array)$_POST["config"]);
+if ( isset ( $_POST["config"] ) ) {
+	$config = $_POST["config"];
+	$config2 = array_merge((array)$wakkaConfig, (array)$_POST["config"]);
+}
 
 if (!isset($config["language"]) || !@file_exists("setup/lang/installer.".$config["language"].".php")) $config["language"] = "en";
 require_once("setup/lang/installer.".$config["language"].".php");
@@ -59,9 +56,7 @@ require_once("setup/lang/installer.".$config["language"].".php");
    </head>
    <body>
       <div class="installer">
-         <h1><?php echo $lang["Title"];?></h1><h1 class="white">&nbsp;:&nbsp;</h1><h1><?php 
-         if ( $installAction == "lang" ) echo $lang["Lang"];
-         else echo $lang[$installAction]; ?></h1>
+         <h1><?php echo $lang["Title"];?></h1><h1 class="white">&nbsp;:&nbsp;</h1><h1><?php $installAction == "lang" ? print $lang["Lang"] : print $lang[$installAction]; ?></h1>
          <ul class="menu">
             <li class="<?php echo $installAction == 'lang' ? 'current' : 'item'; ?>"><?php echo $lang["Lang"]; ?></li>
             <li>&gt;</li>
@@ -70,8 +65,7 @@ require_once("setup/lang/installer.".$config["language"].".php");
             <li class="<?php echo $installAction == 'site-config' ? 'current' : 'item'; ?>"><?php echo $lang["site-config"]; ?></li>
             <li>&gt;</li>
 <?php
-   if(!$wakkaConfig["wakka_version"])
-      {
+   if ( !isset ( $wakkaConfig["wakka_version"] ) ) {
 ?>
             <li class="<?php echo $installAction == 'database-config' ? 'current' : 'item'; ?>"><?php echo $lang["database-config"]; ?></li>
             <li>&gt;</li>
