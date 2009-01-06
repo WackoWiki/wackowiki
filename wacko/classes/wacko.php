@@ -1922,7 +1922,6 @@ class Wacko
 		return true;
 	}
 
-
 	// WATCHES
 	function IsWatched($user, $tag)
 	{
@@ -2589,16 +2588,16 @@ class Wacko
 		$steps = explode('/', $this->tag);
 		$result = '';
 
-		for ($i=0;$i<count($steps);$i++)
+		for ($i = 0; $i < count($steps); $i++)
 		{
 			$link = '';
-			for($j=0;$j<$i+1;$j++)
+			for($j = 0; $j < $i + 1; $j++)
 			$link .= '/'.$steps[$j];
 
 			# camel case'ing
 			$linktext = preg_replace('([A-Z][a-z])', ' ${0}', $steps[$i]);
 
-			if ($i == count($steps)-1)
+			if ($i == count($steps) - 1)
 			$result .= $linktext;
 			else
 			$result .= $this->Link($link, '', $linktext) . $separator;
@@ -2609,7 +2608,7 @@ class Wacko
 
 	function RenamePage($tag, $NewTag, $NewSuperTag="")
 	{
-		if ($NewSuperTag=="")
+		if ($NewSuperTag == "")
 		$NewSuperTag = $this->NpjTranslit($NewTag);
 
 		return $this->Query("UPDATE ".$this->config["table_prefix"]."revisions SET tag = '".quote($this->dblink, $NewTag)."', supertag = '".quote($this->dblink, $NewSuperTag)."' WHERE tag = '".quote($this->dblink, $tag)."' ") &&
@@ -2618,7 +2617,7 @@ class Wacko
 
 	function RenameFiles($tag, $NewTag, $NewSuperTag="")
 	{
-		if($NewSuperTag=="")
+		if($NewSuperTag == "")
 		$NewSuperTag = $this->NpjTranslit($NewTag);
 
 		$dir = $this->config["upload_path_per_page"]."/";
