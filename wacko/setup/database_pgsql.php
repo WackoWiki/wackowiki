@@ -1,7 +1,7 @@
 <?php
 /*
-   Wacko Wiki PostgreSQL Table Creation Script
-*/
+ Wacko Wiki PostgreSQL Table Creation Script
+ */
 
 $table_pages = "CREATE TABLE ".$config2["table_prefix"]."pages (".
                   "id serial,".
