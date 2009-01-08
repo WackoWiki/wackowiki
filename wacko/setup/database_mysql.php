@@ -1,7 +1,7 @@
 <?php
 /*
-   Wacko Wiki MySQL Table Creation Script
-*/
+ Wacko Wiki MySQL Table Creation Script
+ */
 
 $table_pages = "CREATE TABLE ".$config2["table_prefix"]."pages (".
                  "id int(10) unsigned NOT NULL auto_increment,".
