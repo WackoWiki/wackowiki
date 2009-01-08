@@ -228,8 +228,8 @@ switch($config2["database_driver"])
                         test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r4_3, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
                         test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r4_3_2, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
                         test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r4_3_3, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-                        test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r4_3_1, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
                         test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r4_3_2, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
+						test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r4_3_3, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
                         test($lang["InstallingLogoImage"], @mysql_query($insert_logo_image, $dblink), str_replace("%1","logo image",$lang["ErrorAlreadyExists"]));
                   }
                print("            </ul>\n");
