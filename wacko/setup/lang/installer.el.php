@@ -146,6 +146,7 @@ $lang = array(
 Ακόμα μία φορά, δείτε για λεπτομέρειες εδώ: <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a>.",
 "WrittenAt" => "εγγράψιμο στις ",
 "DontChange" => "μην αλλάξετε την έκδοση του wakka_version με το χέρι!",
+"ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Δοκιμάστε Πάλι",
 
 );

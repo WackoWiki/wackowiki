@@ -140,6 +140,7 @@ $lang = array(
 "NextStep" => "На следващата стъпка, инсталаторът ще опита да запише обновения конфигурационния файл, <tt>wakka.config.php</tt>. Кофигурационният файл <tt>wakka.config.php</tt> се  разполага в главната директория, където е WackoWiki. За да стане промяната, този файл трябва да е достъпен за запис чрез системата сървър/скрипт! За да няма проблеми, трябва сега временно да се променят правата за достъп до този файл. В противен случай ще трябва да допишете промените на ръка. Отново, погледнете за подробности, малко е на английски, но все пак <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a>.",
 "WrittenAt" => "записан ",
 "DontChange" => "не променяйте wakka_version ръчно!",
+"ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Нов опит",
 
 );

@@ -140,6 +140,7 @@ $lang = array(
 "NextStep" => "W nast&#281;pnym kroku, instalator b&#281;dzie pr&#243;bowa&#322; zapisa&#263; zaktualizowany plik konfiguracyjny, <tt>wakka.config.php</tt>.  Postaraj si&#281;, &#380;e serwer posiada prawo zapisu do pliku, w przeciwnym wypadku b&#281;dziesz musia&#322; edytowa&#263; go r&#281;cznie. Raz jeszcze, zagl&#261;dnij na  <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a> po wi&#281;cej informacji.",
 "WrittenAt" => "zapisano jako ",
 "DontChange" => "nie zmieniaj wakka_version r&#281;cznie!",
+"ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Spr&#243;buj ponownie",
 
 );

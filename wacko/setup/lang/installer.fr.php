@@ -140,6 +140,7 @@ $lang = array(
 "NextStep" => "Dans la prochaine étape, l'installeur va tenter d'écrire le fichier de configuration mis à jour, <tt>wakka.config.php</tt>.  Assurez-vous que le serveur a le droit d'écrire ce fichier, sinon vous devrez l'éditer manuellement. Encore une fois, voyez <a href=\"http://wackowiki.org/Doc/Francophone/InstallationEtMiseAJour\" target=\"_blank\">WackoWiki:Doc/Francophone/InstallationEtMiseAJour</a> pour les détails.",
 "WrittenAt" => "écrit à ",
 "DontChange" => "ne modifiez pas wakka_version !",
+"ConfigDescription" => "detailed description http://wackowiki.org/Doc/Francophone/Configuration",
 "TryAgain" => "Essayez encore",
 );
 ?>

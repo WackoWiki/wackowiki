@@ -140,6 +140,7 @@ $lang = array(
 "NextStep" => "Järgmisena üritatakse kirjutada täiendatud konfiguratsioonifaili, <tt>wakka.config.php</tt>. Palun veendu, et veebi serveril oleks faili kirjutamise õigused, vastasel korral pead sa seda käsitsi tegema. Uuesti, vaata täpsema info saamiseks siia: <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Dokumentatsioon/Installeerimine</a>.",
 "WrittenAt" => "kirjutan ",
 "DontChange" => "ära muuda käsitsi wakka_version versiooni!",
+"ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Proovi uuesti",
 
 );?>

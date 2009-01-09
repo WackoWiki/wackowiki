@@ -140,6 +140,7 @@ $lang = array(
 "NextStep" => "На следующем шаге программа установки попробует сохранить обновлённый конфигурационный файл, <tt>wakka.config.php</tt>. Пожалуйста, проверьте, что веб-сервер имеет достаточно прав для изменения файла; в противном случае вам придётся сохранить изменения вручную. Не побоимся повториться, см. <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:DocEnglish/Installation</a>.",
 "WrittenAt" => "сохранён ",
 "DontChange" => "не меняйте wakka_version вручную!",
+"ConfigDescription" => "detailed description http://wackowiki.org/Doc/Russian/FajjlKonfiguracii",
 "TryAgain" => "Попытаться снова",
 
 );
