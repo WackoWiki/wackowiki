@@ -38,7 +38,7 @@ $config["wakka_version"] = WAKKA_VERSION;
 $config["wacko_version"] = WACKO_VERSION;
 
 // convert config array into PHP code
-$configCode = "<?php\n// wakka.config.php ".$lang["WrittenAt"].strftime("%c")."\n// ".$lang["DontChange"]."\n\n";
+$configCode = "<?php\n// wakka.config.php ".$lang["WrittenAt"].strftime("%c")."\n// ".$lang["ConfigDescription"]."\n// ".$lang["DontChange"]."\n\n";
 $configCode .= array_to_str($config)."\n?>";
 
 // try to write configuration file

@@ -140,6 +140,7 @@ $lang = array(
 "NextStep" => "In de volgende stap probeert het installatieprogramma het actuele configuratie bestand weg te schrijven, <tt>wakka.config.php</tt>. Controleer of de web server schrijfrechten heeft op het bestand, anders moet u het handmatig aanpassen. Wederom, zie <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a> for details.",
 "WrittenAt" => "geschreven op ",
 "DontChange" => "Wijzig de wakka_version niet handmatig!",
+"ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Weer proberen",
 
 );

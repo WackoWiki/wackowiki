@@ -108,7 +108,7 @@ $lang = array(
 "AlterTable" => "Ändere %1 Tabelle",
 "AlterUsersTable" => "Ändere Users Tabelle",
 "InstallingDefaultData" => "Füge Default Daten hinzu",
-"InstallingPagesBegin" => "Füge Default Seiten hinzu",
+"InstallingPagesBegin" => "Füge Basis-Seiten hinzu",
 "InstallingPagesEnd" => "Die Basis-Seiten würden hinzugefügt",
 "InstallingAdmin" => "Füge Benutzerkonto für Verwalter hinzu",
 "InstallingLogoImage" => "Füge WackoWiki Logo hinzu",
@@ -137,9 +137,10 @@ $lang = array(
 "SecurityRisk" => "Es wird dringend empfohlen, das Schreibrecht auf die Datei <tt>wakka.config.php</tt> nach dem Schreiben der Konfiguration wieder mit <tt>chmod 644</tt> zu entfernen. Eine überschreibbare Konfigurationsdatei ist ein Sicherheitsrisiko!",
 "RemoveSetupDirectory" => "Du solltest den Ordner \"setup\" löschen nachdem die Installation beendet wurde.",
 "ErrorGivePrivileges" => "Die Konfigurationsdatei %1 konnte nicht geschrieben werden. Du musst dem Webserver vorübergehend Schreibrechte auf das WackoWiki Verzeichnis oder auf eine leere Datei <tt>wakka.config.php</tt> (<tt>touch wakka.config.php ; chmod 666 wakka.config.php</tt> geben; vergiss nicht, das Schreibrecht später wieder zu entziehen, z.B. mit <tt>chmod 644 wakka.config.php</tt>). Falls das aus irgendwelchen Gründen nicht möglich ist, kopiere den folgenden Text in eine neue Datei und speichere diese unter <tt>wakka.config.php</tt> in dem WackoWiki Verzeichnis ab. Danach sollte dein WackoWiki funktionieren. Falls nicht, gehe zu <a href=\"http://wackowiki.org/Doc/Deutsch/Installation\" target=\"_blank\">WackoWiki:Doc/Deutsch/Installation</a>",
-"NextStep" => "Im nächsten Schritt wird das Installationsprogramm versuchen, die aktualisierte Konfigurationsdatei zu schreiben, <tt>wakka.config.php</tt>. Bitte stelle sicher, dass der Webserver Schreibrechte auf die Datei besitzt oder du musst die Datei von Hand ändern.  Für die Einzelheiten besuche bitte <a href=\"http://wackowiki.org/Doc/Deutsch/Installation\" target=\"_blank\">WackoWiki:Doc/Deutsch/Installation</a>.",
+"NextStep" => "Im nächsten Schritt wird das Installationsprogramm versuchen, die aktualisierte Konfigurationsdatei, <tt>wakka.config.php</tt>, zu schreiben. Bitte stelle sicher, dass der Webserver Schreibrechte auf die Datei besitzt oder du musst die Datei von Hand ändern.  Für die Einzelheiten besuche bitte <a href=\"http://wackowiki.org/Doc/Deutsch/Installation\" target=\"_blank\">WackoWiki:Doc/Deutsch/Installation</a>.",
 "WrittenAt" => "eingetragen in ",
 "DontChange" => "Ändere wakka_version nicht von Hand!",
+"ConfigDescription" => "http://wackowiki.org/Doc/Deutsch/Konfiguration",
 "TryAgain" => "Versuche es erneut",
 
 );

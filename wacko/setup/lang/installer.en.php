@@ -140,6 +140,7 @@ $lang = array(
 "NextStep" => "In the next step, the installer will try to write the updated configuration file, <tt>wakka.config.php</tt>.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a> for details.",
 "WrittenAt" => "written at ",
 "DontChange" => "do not change wakka_version manually!",
+"ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Try Again",
 
 );

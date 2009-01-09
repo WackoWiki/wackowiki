@@ -140,6 +140,7 @@ $lang = array(
 "NextStep" => "Nel passo successivo, l'installatore tenterà di scrivere il nuovo file di configurazione, <tt>wakka.config.php</tt>. Verifica che il server del web abbia accesso alla scrittura sul file, o che tu possa editarlo manualmente.  Ancora una volta, consulta  <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a> per i dettagli.",
 "WrittenAt" => "scritto a ",
 "DontChange" => "non modificare manualmente la Wakka_version!",
+"ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Riprova",
 
 );
