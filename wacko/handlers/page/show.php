@@ -1,5 +1,6 @@
 <div class="pageBefore">&nbsp;</div>
-<div class="page"><?php
+<div class="page">
+<?php
 if ($this->HasAccess("read"))
 {
 	if (!$this->page)
@@ -24,34 +25,48 @@ if ($this->HasAccess("read"))
 			$this->GetResourceValue("Revision")))).".</div>");
 		}
 
-		$this->Query("UPDATE ".$this->config["table_prefix"]."pages SET hits=hits+1 WHERE supertag='".quote($this->dblink, $this->GetPageSuperTag())."'");
+		// count page hit
+		$this->Query(
+			"UPDATE ".$this->config["table_prefix"]."pages ".
+			"SET hits = hits + 1 ".
+			"WHERE supertag = '".quote($this->dblink, $this->GetPageSuperTag())."'");
 
 		$this->SetLanguage($this->pagelang);
+
+		// recompile if necessary
 		if (($this->page["body_r"] == "") ||
 		(($this->page["body_toc"] == "") && $this->GetConfigValue("paragrafica")))
 		{
 			$this->page["body_r"] = $this->Format($this->page["body"], "wacko");
+
+			// build toc
 			if ($this->GetConfigValue("paragrafica"))
 			{
 				$this->page["body_r"]   = $this->Format($this->page["body_r"], "paragrafica");
 				$this->page["body_toc"] = $this->body_toc;
 			}
+
 			// store to DB
 			if ($this->page["latest"] != "N")
-			$this->Query("UPDATE ".$this->config["table_prefix"]."pages SET ".
-         "body_r = '".quote($this->dblink, $this->page["body_r"])."', ".
-         "body_toc = '".quote($this->dblink, $this->page["body_toc"])."' ".
-         "WHERE id = '".quote($this->dblink, $this->page["id"])."' LIMIT 1");
+			$this->Query(
+				"UPDATE ".$this->config["table_prefix"]."pages SET ".
+         			"body_r = '".quote($this->dblink, $this->page["body_r"])."', ".
+         			"body_toc = '".quote($this->dblink, $this->page["body_toc"])."' ".
+         		"WHERE id = '".quote($this->dblink, $this->page["id"])."' ".
+				"LIMIT 1");
 		}
 
 		// display page
 		$data = $this->Format($this->page["body_r"], "post_wacko", array("bad"=>"good"));
 		$data = $this->NumerateToc( $data ); //  numerate toc if needed
 		echo $data;
+
 		$this->SetLanguage($this->userlang);
-		?> <script type="text/javascript">
+?> 
+<script type="text/javascript">
    var dbclick = "page";
-  </script> <?php
+</script> 
+<?php
 
   // if this is an old revision, display some buttons
   if ($this->HasAccess("write") && ($this->page["latest"] == "N"))
@@ -73,11 +88,13 @@ else
 	if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
 	print($this->GetResourceValue("ReadAccessDenied"));
 }
-?> <br style="clear: both" />
-&nbsp;</div>
+?>
+<br style="clear: both" />&nbsp;</div>
 <?php
+
 // files code starts
-if ($this->GetConfigValue("footer_files")) {
+if ($this->GetConfigValue("footer_files"))
+{
 
 	if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1 && ($this->GetConfigValue("hide_files") != 2 || $this->GetUser()))
 	{
@@ -139,12 +156,19 @@ if ($this->GetConfigValue("footer_files")) {
     ?>
     <div class="filesheader">
 <?php
-      if ($this->page["id"])
-       $files = $this->LoadAll( "SELECT id FROM ".$this->config["table_prefix"]."upload WHERE ".
-                             " page_id = '". quote($this->dblink, $this->page["id"]) ."'");
-      else $files = array();
+	if ($this->page["id"])
+	{
+		// load files for this page
+		$files = $this->LoadAll(
+		"SELECT id FROM ".$this->config["table_prefix"]."upload ".
+		"WHERE page_id = '". quote($this->dblink, $this->page["id"]) ."'");
+	}
+	else 
+	{	
+		$files = array();
+	}
 
-      switch (count($files))
+      switch ($c = count($files))
       {
       case 0:
         print($this->GetResourceValue("Files_0"));
@@ -153,7 +177,7 @@ if ($this->GetConfigValue("footer_files")) {
         print($this->GetResourceValue("Files_1"));
         break;
       default:
-        print(str_replace("%1",count($files), $this->GetResourceValue("Files_n")));
+        print(str_replace("%1", $c, $this->GetResourceValue("Files_n")));
       }
     ?>
 [<a href="<?php echo $this->href("", "", "show_files=1#files")."\">".$this->GetResourceValue("ShowFiles"); ?></a>]
@@ -209,7 +233,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
         print("<div class=\"comment\">\n");
         $del = "";
         if ($this->IsAdmin() || $this->UserIsOwner($comment["tag"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageTag())))
-          print("<a href=\"".$this->href("remove",$comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1del.gif\" hspace=4 vspace=4 title=\"".$this->GetResourceValue("DeleteTipComment")."\" alt=\"".$this->GetResourceValue("DeleteText")."\"  align=\"right\" border=\"0\" /></a>");
+          print("<a href=\"".$this->href("remove",$comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1del.gif\" title=\"".$this->GetResourceValue("DeleteTipComment")."\" alt=\"".$this->GetResourceValue("DeleteText")."\"  align=\"right\" border=\"0\" /></a>");
         if ($comment["body_r"]) $strings = $comment["body_r"];
         else $strings = $this->Format($comment["body"], "wacko");
         print($this->Format($strings,"post_wacko")."\n");
@@ -262,7 +286,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     ?>
 <div class="commentsheader">
   <?php
-      switch (count($comments))
+      switch ($c = count($comments))
       {
       case 0:
         print($this->GetResourceValue("Comments_0"));
@@ -271,8 +295,9 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
         print($this->GetResourceValue("Comments_1"));
         break;
       default:
-        print(str_replace("%1",count($comments), $this->GetResourceValue("Comments_n")));
+        print(str_replace("%1", $c, $this->GetResourceValue("Comments_n")));
       }
+	  //todo show link to show comment only if there is one or/and user has the right to add a new one 
     ?>
   [<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->GetResourceValue("ShowComments"); ?></a>]</div>
 <?php
