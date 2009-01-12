@@ -375,7 +375,7 @@ AutoComplete.prototype.getPattern = function ()
     var start = this.wikiedit.area.selectionStart;
     var end   = this.wikiedit.area.selectionEnd;
   }
-  // идём влево
+  // go left
   var f=1;
   while (f || 
     (isIE  && (Range.text.charAt(0)).match(this.regexp_LinkLetter))
