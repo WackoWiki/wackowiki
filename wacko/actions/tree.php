@@ -1,5 +1,22 @@
 <?php
 
+$root = $vars[0];
+
+// input
+if (!isset($root) && !isset($page)) 
+					$root = "/".$this->page["tag"];
+
+if ($page)			$root = $page;
+if ($root == "/") 	$root = "";
+if ($root) 			$root = $this->UnwrapLink($root);
+
+if (!$depth) $depth = 0;
+if (!is_numeric($depth)) $depth = 0;
+if ($depth == 0) $depth = 2147483647; //Which means unlimitedly
+
+if (!$style) $style="indent";
+if (!in_array($style,array("br","ul","ol","indent"))) $style = "indent";
+
 global $tree_pages_array;
 
 if (!function_exists('create_cluster_tree'))
@@ -22,7 +39,7 @@ if (!function_exists('create_cluster_tree'))
 				continue;
 			}
 
-			if ( $supertag <> "/" && !( strpos($page_supertag,$supertag."/")===0) ){
+			if ( $supertag <> "/" && !( strpos($page_supertag,$supertag."/") === 0) ){
 				//Ended “our” leaves.
 				break;
 			}
@@ -31,8 +48,10 @@ if (!function_exists('create_cluster_tree'))
 
 			//Relative
 			if ($supertag != "/"){
-				$rel_supertag = substr($page_supertag,strlen($supertag)+1);
-			}else{
+				$rel_supertag = substr($page_supertag,strlen($supertag) + 1);
+			}
+			else
+			{
 				$rel_supertag = substr($page_supertag,1);
 			}
 
@@ -40,7 +59,9 @@ if (!function_exists('create_cluster_tree'))
 			//And the absolute
 			if ($supertag != "/"){
 				$sub_supertag = $supertag."/".$rel_supertag;
-			}else{
+			}
+			else
+			{
 				$sub_supertag = "/".$rel_supertag;
 			}
 
@@ -53,15 +74,17 @@ if (!function_exists('create_cluster_tree'))
 					//This page is, take her tag.
 					$sub_tag = $tree_pages_array[$sub_supertag];
 					$exists = 1;
-				}else{
+				}
+				else
+				{
 					//This page does not have its sub. We will consider the likely tags.
 					$sub_sub_tag = $page_tag;
 
 					//Searches for backslashes so long as there is in supertag
 					$scount = substr_count($sub_supertag,"/");
-					for ($i = 0;$i < $scount-1;$i++){
-						$sub_tag = $sub_tag.substr($sub_sub_tag,0,strpos($sub_sub_tag,"/")+1);;
-						$sub_sub_tag = substr($sub_sub_tag,strpos($sub_sub_tag,"/")+1);
+					for ($i = 0;$i < $scount - 1;$i++){
+						$sub_tag = $sub_tag.substr($sub_sub_tag,0,strpos($sub_sub_tag,"/") + 1);;
+						$sub_sub_tag = substr($sub_sub_tag,strpos($sub_sub_tag,"/") + 1);
 					}
 					//Reject everything after the next slash.
 					$sub_tag = $sub_tag.substr($sub_sub_tag,0,strpos($sub_sub_tag,"/"));
@@ -71,7 +94,7 @@ if (!function_exists('create_cluster_tree'))
 				$sub_pages_tree[$sub_tag]["exists"] = $exists;
 			}
 
-			$sub_tree = create_cluster_tree($wacko,$sub_supertag,"",$depth-1);
+			$sub_tree = create_cluster_tree($wacko,$sub_supertag,"",$depth - 1);
 
 			if ($depth > 0){
 				$sub_pages_tree[$sub_tag]["subtree"] = $sub_tree;
@@ -81,6 +104,7 @@ if (!function_exists('create_cluster_tree'))
 		return $sub_pages_tree;
 	}
 }
+
 if (!function_exists('test_page_existance')){
 	function test_page_existance($page_array){
 		if ($page_array["exists"]) return true;
@@ -118,12 +142,11 @@ if (!function_exists('print_cluster_tree'))
 				$sub_supertag = $sub_tag_array["supertag"];
 				$sub_exists = $sub_tag_array["exists"];
 
-
 				$linktext = $sub_tag;
 				if ($style != "br" && (!strpos($linktext,"/") === false))
 				{
 					//Displaying only the last word
-					$linktext = substr($linktext,strrpos($linktext,"/")+1);
+					$linktext = substr($linktext,strrpos($linktext,"/") + 1);
 				}
 
 				if ($abc && ( $current_depth == 1 ))
@@ -140,7 +163,7 @@ if (!function_exists('print_cluster_tree'))
 				{
 					if ($need_letter == 1)
 					{ //Convenient case to print the letter
-						if (($style == "ul" || $style=="ol" ) && $letter ) print "<br />";
+						if (($style == "ul" || $style == "ol" ) && $letter ) print "<br />";
 						if ($letter) print "<br />";
 						$letter = $newletter;
 						print "<strong>".$letter."</strong><br />";
@@ -150,15 +173,18 @@ if (!function_exists('print_cluster_tree'))
 					if ($style == "ul" || $style == "ol") print "<li>";
 
 					$_page = $wacko->LoadPage(ltrim($sub_supertag, "/"));
-					if ($_page["tag"]) $_tag = $_page["tag"];
-					else $_tag = $sub_supertag;
+					if ($_page["tag"]) 
+					$_tag = $_page["tag"];
+					else 
+					$_tag = $sub_supertag;
 
 					print($wacko->Link("/".$_tag, "", $linktext)."\n");
 
-					if ($style == "indent" || $style == "br") print "<br />";
+					if ($style == "indent" || $style == "br") 
+					print "<br />";
 				}
 
-				print_cluster_tree($wacko, $sub_tag_array["subtree"],$style,$current_depth+1, $abc, $filter);
+				print_cluster_tree($wacko, $sub_tag_array["subtree"],$style,$current_depth + 1, $abc, $filter);
 
 			}
 			if ($style == "ul") print "</ul>";
@@ -168,17 +194,6 @@ if (!function_exists('print_cluster_tree'))
 	}
 }
 
-$root = $vars[0];
-if (!isset($root)) $root = "/".$this->page["tag"];
-if ($root == "/") $root = "";
-if ($root) $root = $this->UnwrapLink($root);
-
-if (!$depth) $depth = 0;
-if (!is_numeric($depth)) $depth = 0;
-if ($depth == 0) $depth = 2147483647; //Which means unlimitedly
-if (!$style) $style="indent";
-if (!in_array($style,array("br","ul","ol","indent"))) $style = "indent";
-
 if ($root){
 	if (!$nomark){
 		$title = $this->GetResourceValue("TreeClusterTitle");
@@ -186,7 +201,9 @@ if ($root){
 		print("<fieldset><legend>".$title.":</legend>\n");
 	}
 	$query = "'".quote($this->dblink, $this->NpjTranslit($root))."/%'";
-}else{
+}
+else
+{
 	if (!$nomark)  print("<fieldset><legend>".$this->GetResourceValue("TreeSiteTitle")."</legend>\n");
 	$query = "'%'";
 }
@@ -203,7 +220,7 @@ if ($pages)
 	$current_depth = count(explode("/", $query));
 	foreach($pages as $page) {
 		$page_depth = count(explode("/", $page["supertag"]));
-		if ($page_depth <= $depth+$current_depth-1) {
+		if ($page_depth <= $depth + $current_depth - 1) {
 			$new_pages[$i] = $page;
 			$i++;
 		}
@@ -221,7 +238,7 @@ if ($pages)
 	for ($i = 0; $i < count($supertag_list); $i++) {
 		$supertag_str .= "'".quote($this->dblink, $supertag_list[$i])."', ";
 	}
-	$supertag_str=substr($supertag_str,0,strlen($supertag_str)-2);
+	$supertag_str=substr($supertag_str,0,strlen($supertag_str) - 2);
 
 	//Cache access rights
 	if ( $read_acls = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."acls WHERE supertag in (".$supertag_str.") AND privilege = 'read'")){
@@ -245,7 +262,9 @@ if ($pages)
 
 	print_cluster_tree($this, $tree, $style, 1, $abc, $filter);
 
-}else{
+}
+else
+{
 	$empty_string = $this->GetResourceValue("TreeEmpty");
 	$empty_string = str_replace("%1",  $this->Link("/".$root,"",$root),  $empty_string);
 	print($empty_string."<br />");
