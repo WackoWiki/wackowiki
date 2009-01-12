@@ -117,24 +117,31 @@ form input.submitinput {
   border-top: 1px dotted #CCCCCC;
 }
 .footer {
-	clear:both;
+   margin: 0;
+   overflow: hidden;
+   clear:both;
 }
 
-.footer ul, .footer p {
+.footerlist{
+   margin: 0 auto 0;
+   overflow: hidden;
+}
+
+.footerlist ul {
 	margin:0;padding:0;
 	list-style:none;
 }
 
-.footer ul li {
-	display:inline;
-	/*margin-right:0.5em;*/
-	white-space:nowrap;
-	border-right-width: 1px;
-	border-right-style: dotted;
-	border-right-color: #cccccc;
-	padding-right: 4px;
+.footerlist li {
+border-left: 1px solid #ccc;
+border-left-style: dotted;
+float: left;
+line-height: 1.2em;
+margin: 0 .5em 0 -.5em;
+padding: 0 .5em 0 .5em;
+white-space: nowrap;
 }
-.footer ul li form {display:inline;}
+.footerlist ul li form {display:inline;}
 
 .filesheader, .commentsheader {
   background-color: #F0F4F5;
@@ -543,20 +550,25 @@ clear:both;
 {padding: 0px 0px 0px 0px; /*overflow:hidden;*/}
 
 #usermenu {
+margin: 0 auto 0;
+overflow: hidden;
 float:left;
 text-align:left;
 position:relative;
 }
 
-#usermenu ol { list-style: none; margin: 0px; padding: 0px; border: none; }
+#usermenu ol {    
+list-style: none;
+margin: 0;
+padding: 0; }
 
 #usermenu li {
- display: inline;
- border-right-width: 1px;
- border-right-style: solid;
- border-right-color: #AAAAAA;
- padding-right: 4px;
- padding-left: 1px;
+border-left: 1px solid #aaa;
+float: left;
+line-height: 1.2em;
+margin: 0 .5em 0 -.5em;
+padding: 0 .5em 0 .5em;
+white-space: nowrap;
 }
 #usermenu li a {
  display: inline;
