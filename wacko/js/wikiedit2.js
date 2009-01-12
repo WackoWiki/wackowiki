@@ -70,7 +70,7 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
   this.area.addBehavior(this.imagesPath+"sel.htc");
  }
 
- this.addButton("h1","h1","'==','==',0,1");
+ this.addButton("h1","Heading 1","'==','==',0,1");
  this.addButton("h2","Heading 2","'===','===',0,1");
  this.addButton("h3","Heading 3","'====','====',0,1");
  this.addButton(" ");
@@ -78,6 +78,7 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
  this.addButton("italic","Italic","'//','//'");
  this.addButton("underline","Underline","'__','__'");
  this.addButton("strike","Strikethrough","'--','--'");
+// this.addButton("fixed","Monospace","'##','##'");
  this.addButton(" ");
  this.addButton("ul","List","'  * ','',0,1,1");
  this.addButton("ol","Numbered list","'  1. ','',0,1,1");
@@ -85,7 +86,8 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
  this.addButton("outdent","Outdent","","document.getElementById('" + this.id + "')._owner.unindent");
  this.addButton("indent","Indent","'  ','',0,1");
  this.addButton(" ");
-// this.addButton("quote","quote","'\\n<[',']>\\n',2");
+ this.addButton("quote","Quote","'\\n<[',']>\\n',2");
+// this.addButton("code","Code","'%% ',' %%',2");
  this.addButton("hr","Line","'','\\n----\\n',2");
 // this.addButton("signature","Signature","'::@::',' ',1");
  this.addButton("textred","Marked text","'!!','!!',2");
