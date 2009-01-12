@@ -23,7 +23,9 @@ echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
   <meta name="description" content="<?php echo $this->GetDescription(); ?>" />
   <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
   <link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/wakka.css" />
+  <link media="print" rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/print.css" />
   <link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico" type="image/x-icon" />
+  <link title="<?php echo $this->GetConfigValue("root_page");?>" href="<?php echo $this->GetConfigValue("base_url");?>" rel="start"/>
   <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
   <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
   <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
