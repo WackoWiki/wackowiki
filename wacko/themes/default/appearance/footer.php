@@ -6,6 +6,7 @@ Common footer file.
 ?>
 </div>
 <div class="footer">
+<div class="footerlist">
 <ul>
 <?php
 // If User has rights to edit page, show Edit link
@@ -91,6 +92,7 @@ echo $this->FormClose();
 ?>
 </li>
 </ul>
+</div>
 </div>
 <div class="copyright"><?php 
 if ($this->GetUser()){
