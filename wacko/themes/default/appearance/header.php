@@ -21,6 +21,7 @@ echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 ?>
   <meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
   <meta name="description" content="<?php echo $this->GetDescription(); ?>" />
+  <meta name="language" content="<?php echo $this->page["lang"] ?>">
   <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
   <link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/wakka.css" />
   <link media="print" rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/print.css" />
@@ -38,7 +39,7 @@ echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/protoedit.js"></script>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/wikiedit2.js"></script>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/autocomplete.js"></script>
-   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
+  <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 <?php
 // Doubleclick edit feature.
@@ -111,8 +112,8 @@ else
    // Begin Login form
 	echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
       <input type="hidden" name="action" value="login" />
-   <span class="nobr"><input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" /><strong><strong><?php echo $this->GetResourceValue("LoginWelcome") ?></strong>:&nbsp;</strong>
-   <input type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->GetResourceValue("LoginPassword") ?>:&nbsp;<input type="password" name="password" class="login" size="8" />&nbsp;<input type="image" src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" style="vertical-align:top" /></span> <?php
+   <span class="nobr"><input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" /><strong><label for="loginname"><?php echo $this->GetResourceValue("LoginWelcome") ?>:&nbsp;</label></strong>
+   <input type="text" id="loginname" name="name" size="18" class="login" />&nbsp;<label for="loginpassword"><?php echo $this->GetResourceValue("LoginPassword") ?>:&nbsp;</label><input type="password" id="loginpassword" name="password" class="login" size="8" />&nbsp;<input type="image" src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" style="vertical-align:top" /></span> <?php
    
    // Closing Login form
 	echo $this->FormClose();

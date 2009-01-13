@@ -74,11 +74,11 @@ else
 	?>
   <p>
     <label for="name"><?php echo $this->FormatResourceValue("LoginName");?>:</label>
-    <input id="f0" name="name" size="27" value="<?php echo $name; ?>" />
+    <input id="name" name="name" size="27" value="<?php echo $name; ?>" />
   </p>
   <p>
     <label for="password"><?php echo $this->GetResourceValue("LoginPassword");?>:</label>
-    <input id="f1" type="password" name="password" size="24" />
+    <input id="password" type="password" name="password" size="24" />
   </p>
   <p>
     <input class="OkBtn" onmouseover='this.className="OkBtn_";'
