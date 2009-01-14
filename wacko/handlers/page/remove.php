@@ -62,26 +62,36 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 			print($this->GetResourceValue("ThisActionHavenotUndo")."\n");
 
 	  // return to commented page
-	  if ($comment_on)
-	  {
-	  	echo "<br />".$this->ComposeLinkToPage($comment_on."#comments", "", $this->GetResourceValue("ReturnToCommented"), 0);
-	  }
+		if ($comment_on)
+		{
+			echo "<br />".$this->ComposeLinkToPage($comment_on."#comments", "", $this->GetResourceValue("ReturnToCommented"), 0);
 		}
-		else {
+		}
+		else 
+		{
 			echo "<div class=\"warning\"><strong>".$this->GetResourceValue("ReallyDelete".($this->page["comment_on"]?"Comment":""))."</strong></div>";
 			echo $this->FormOpen("remove");
-
-			if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
+			
+		// show backlinks
+		if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
+		{
+			print("<br /><fieldset><legend>".$this->GetResourceValue("AlertReferringPages").":</legend>\n");
+			foreach ($pages as $page)
 			{
-				print("<fieldset><legend>".$this->GetResourceValue("AlertReferringPages").":</legend>\n");
-				foreach ($pages as $page)
+				if ($page["tag"])
 				{
-					echo($this->ComposeLinkToPage($page["tag"])."<br />\n");
+					if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
+					else $access = true;
+					if ($access)
+					{
+						echo($this->ComposeLinkToPage($page["tag"])."<br />\n");
+					}
 				}
-				echo "</fieldset>\n";
 			}
+			echo "</fieldset>\n";
+		}
 
-			?>
+?>
   <br />
   <br />
   <input type="hidden" name="delete" value="1" />
@@ -97,8 +107,8 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
   <br />
   <?php echo $this->FormClose();
-}
-}
+		}
+	}
 }
 else
 {
