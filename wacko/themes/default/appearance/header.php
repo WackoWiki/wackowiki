@@ -21,9 +21,9 @@ echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 ?>
   <meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
   <meta name="description" content="<?php echo $this->GetDescription(); ?>" />
-  <meta name="language" content="<?php echo $this->page["lang"] ?>">
+  <meta name="language" content="<?php echo $this->page["lang"] ?>" />
   <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
-  <link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/wakka.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/default.css" />
   <link media="print" rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/print.css" />
   <link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico" type="image/x-icon" />
   <link title="<?php echo $this->GetConfigValue("root_page");?>" href="<?php echo $this->GetConfigValue("base_url");?>" rel="start"/>
@@ -61,7 +61,29 @@ if ($user["doubleclickedit"] == "Y") {?>
 ?>
 <body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
       <div class="header">
+	  <style>
+#header-top{ width:100%;}
+.topnav {float:right;
+font-size:0.6875em;
+margin-top:0.9375em;}
+.topnav ul, .topnav li{list-style-type:none;
+margin:0;
+padding:0;}
+.topnav ul{display:block;}
+.topnav li {
+display:inline;
+margin-right:1.1em;
+}
+		 </style>
+	  <div id="header-top">
          <h1><span class="main"><?php echo $this->config["wakka_name"] ?>: </span><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></h1>
+		 
+		 <ul class="topnav">
+			<li><a href="">Hilfe</a></li>
+			<li><a href="">Kontakt</a></li>
+			<li><a href="">Impressum</a></li>
+		</ul>
+		</div>
 <div id="navigation">
 <?php
 // Outputs Bookmarks AKA QuickLinks			
