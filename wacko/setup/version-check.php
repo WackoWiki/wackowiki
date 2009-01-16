@@ -86,16 +86,16 @@
 	@chmod ("files", 0777);
 	@chmod ("files/perpage", 0777);
 	@chmod ("sitemap.xml", 0777);
-	@chmod ("wakka.config.php", 0777);
+	@chmod ("config.inc.php", 0777);
 
 	// If the cache directory is writable then we can enable caching as default
 	print("            <input type=\"hidden\" name=\"config[cache]\" value=\"".(is__writable('_cache/') ? "1" : $wakkaConfig["cache"])."\" />\n");
 
-	$file_permissions_result = is__writable('wakka.config.php') && is__writable('_cache/') && is__writable('xml/') && is__writable('files/') && is__writable('files/perpage/') && is__writable('sitemap.xml');
+	$file_permissions_result = is__writable('config.inc.php') && is__writable('_cache/') && is__writable('xml/') && is__writable('files/') && is__writable('files/perpage/') && is__writable('sitemap.xml');
 	?>
 <h2><?php echo $lang["Permissions"]; ?></h2>
 <ul>
-	<li>wakka.config.php - <?php print output_image(is__writable('wakka.config.php')); ?></li>
+	<li>config.inc.php - <?php print output_image(is__writable('config.inc.php')); ?></li>
 	<li>_cache - <?php print output_image(is__writable('_cache/')); ?></li>
 	<li>xml - <?php print output_image(is__writable('xml/')); ?></li>
 	<li>files - <?php print output_image(is__writable('files/')); ?></li>

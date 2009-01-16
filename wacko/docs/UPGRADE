@@ -2,8 +2,8 @@
 UPGRADING FROM AN EARLIER VERSION:
 
 Just unpack the new distribution archive wherever you need/want it; all you need from
-your old Wacko installation is wakka.config.php. You can also just copy the new files
-over the old ones, but be careful not to overwrite your old wakka.config.php or
+your old Wacko installation is config.inc.php. You can also just copy the new files
+over the old ones, but be careful not to overwrite your old config.inc.php or
 any customizations you may have applied to the source files.
 
 Once the files are in place, browse to your Wacko. The update script should show

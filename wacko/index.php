@@ -151,7 +151,7 @@ preg_replace("/(\?|&)installAction=site-config/","",$_SERVER["REQUEST_URI"]).
 $wakkaDefaultConfig['aliases'] = array('Admins' => "",);
 
 // load config
-if (!$configfile = GetEnv("WAKKA_CONFIG")) $configfile = "wakka.config.php";
+if (!$configfile = GetEnv("WAKKA_CONFIG")) $configfile = "config.inc.php";
 if (@file_exists($configfile)) include($configfile);
 $wakkaConfigLocation = $configfile;
 $wakkaConfig = array_merge($wakkaDefaultConfig, (array)$wakkaConfig);

@@ -38,7 +38,7 @@ $config["wakka_version"] = WAKKA_VERSION;
 $config["wacko_version"] = WACKO_VERSION;
 
 // convert config array into PHP code
-$configCode = "<?php\n// wakka.config.php ".$lang["WrittenAt"].strftime("%c")."\n// ".$lang["ConfigDescription"]."\n// ".$lang["DontChange"]."\n\n";
+$configCode = "<?php\n// config.inc.php ".$lang["WrittenAt"].strftime("%c")."\n// ".$lang["ConfigDescription"]."\n// ".$lang["DontChange"]."\n\n";
 $configCode .= array_to_str($config)."\n?>";
 
 // try to write configuration file
@@ -55,8 +55,8 @@ if ($fp)
 	fclose($fp);
 
 	// Try and make it non-writable
-	@chmod("wakka.config.php", 0644);
-	$perm_changed = !is__writable('wakka.config.php');
+	@chmod("config.inc.php", 0644);
+	$perm_changed = !is__writable('config.inc.php');
 
 	print(output_image(true)."</li>\n");
 	print("            <li>".$lang["RemovingWritePrivilege"]." - ".output_image($perm_changed))."</li>\n";
