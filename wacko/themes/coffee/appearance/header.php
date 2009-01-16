@@ -15,7 +15,7 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <meta http-equiv="content-type"
 	content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <link rel="stylesheet" type="text/css"
-	href="<?php echo $this->GetConfigValue("theme_url") ?>css/wakka.css" />
+	href="<?php echo $this->GetConfigValue("theme_url") ?>css/wacko.css" />
 <link rel="shortcut icon"
 	href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico"
 	type="image/x-icon" />
