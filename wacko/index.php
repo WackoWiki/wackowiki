@@ -323,6 +323,7 @@ if ($wacko->GetConfigValue("debug")>=1 && strpos($method,".xml") === false && $m
 	echo "</div>";
 }
 
+// closing tags
 if (strpos($method,".xml") === false)
-echo "</body></html>";
+echo "\n</body>\n</html>";
 ?>
