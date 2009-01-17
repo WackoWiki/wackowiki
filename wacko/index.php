@@ -180,7 +180,7 @@ if (@file_exists("locked"))
 	if ($ask)
 	{
 		header("WWW-Authenticate: Basic realm=\"".$wakkaConfig["wakka_name"]." Install/Upgrade Interface\"");
-		header("HTTP/1.0 401 Unauthorized");
+		header("HTTP/1.1 503 Service Temporarily Unavailable");
 		print("This site is currently being upgraded. Please try again later.");
 		exit;
 	}
@@ -192,7 +192,7 @@ if ($wakkaConfig["wacko_version"] != WACKO_VERSION)
 	if (!$_REQUEST["installAction"] && !strstr($_SERVER["SERVER_SOFTWARE"], "IIS"))
 	{
 		$req = $_SERVER["REQUEST_URI"];
-		if ($req{strlen($req)-1}!="/" && strstr($req, ".php")!=".php")
+		if ($req{strlen($req) - 1} != "/" && strstr($req, ".php") != ".php")
 		{
 			header("Location: http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]."/");
 			exit;
@@ -236,11 +236,10 @@ if ($p === false)
 {
 	$page = $request;
 }
-
 else
 {
 	$page = substr($request, 0, $p);
-	$m1 = $method = strtolower(substr($request, $p-strlen($request)+1));
+	$m1 = $method = strtolower(substr($request, $p - strlen($request) + 1));
 	if (!@file_exists($wakkaConfig["handler_path"]."/page/".$method.".php"))
 	{
 		$page = $request;
@@ -248,7 +247,8 @@ else
 	}
 
 	else if (preg_match( '/^(.*?)\/('.$wakkaConfig["standard_handlers"].')($|\/(.*)$)/i', $page, $match ))
-	{	//translit case
+	{
+		//translit case
 		$page = $match[1];
 		$method = $match[2];
 	}
@@ -278,7 +278,7 @@ require("classes/cache.php");
 $cache = &new Cache($wakkaConfig["cache_dir"], $wakkaConfig["cache_ttl"]);
 
 $iscache = null;
-if ($wakkaConfig["cache"] &&  $_SERVER["REQUEST_METHOD"]!="POST" && $method!="edit" && $method!="watch")
+if ($wakkaConfig["cache"] &&  $_SERVER["REQUEST_METHOD"] != "POST" && $method != "edit" && $method != "watch")
 {
 	// anonymous
 	if (!$_COOKIE[$wakkaConfig["cookie_prefix"]."name"])
@@ -309,11 +309,11 @@ if ($iscache)
 
 // how much time script take
 $ddd = $wacko->GetMicroTime();
-if ($wacko->GetConfigValue("debug")>=1 && strpos($method,".xml") === false && $method!="print")
+if ($wacko->GetConfigValue("debug") >= 1 && strpos($method,".xml") === false && $method != "print")
 {
-	echo ("<div class=\"time\">".$wacko->GetResourceValue("MeasuredTime").": ".(number_format(($ddd-$wacko->timer),3))." s<br />");
-	if ($mem = @memory_get_usage()) echo ($wacko->GetResourceValue("MeasuredMemory").": ".(number_format(($mem/(1024*1024)),3))." Mb");
-	if ($wacko->GetConfigValue("debug")>=2)
+	echo ("<div class=\"time\">".$wacko->GetResourceValue("MeasuredTime").": ".(number_format(($ddd-$wacko->timer), 3))." s<br />");
+	if ($mem = @memory_get_usage()) echo ($wacko->GetResourceValue("MeasuredMemory").": ".(number_format(($mem/(1024*1024)), 3))." Mb");
+	if ($wacko->GetConfigValue("debug") >= 2)
 	{
 		$sql_time = 0;
 		foreach($wacko->queryLog as $q)
