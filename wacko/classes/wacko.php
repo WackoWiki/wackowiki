@@ -2054,8 +2054,24 @@ class Wacko
 	}
 
 	// XML
+	function WriteFile($name, $body)
+	{
+		$filename = "xml/".$name."_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name"))).".xml";
+		
+		$fp = fopen($filename, "w");
+		if ($fp)
+		{
+			fwrite($fp, $body);
+			fclose($fp);
+		}
+
+		@chmod($filename, 0644);
+	}
+	
 	function WriteRecentChangesXML()
 	{
+		$name = "recentchanges";
+		
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->GetCharset()."\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
@@ -2096,17 +2112,13 @@ class Wacko
 		$xml .= "</channel>\n";
 		$xml .= "</rss>\n";
 
-		$filename = "xml/recentchanges_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name"))).".xml";
-
-		$fp = @fopen($filename, "w");
-		if ($fp)
-		{
-			fwrite($fp, $xml);
-			fclose($fp);
-		}
+		$this->WriteFile($name, $xml);
 	}
 
-	function WriteRecentCommentsXML() {
+	function WriteRecentCommentsXML() 
+	{
+		$name = "recentcomment";
+		
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->GetCharset()."\"?>\n";
 		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->GetConfigValue("theme_url")."css/wakka.css\" media=\"screen\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
@@ -2148,13 +2160,7 @@ class Wacko
 		$xml .= "</channel>\n";
 		$xml .= "</rss>\n";
 
-		$filename = "xml/recentcomment_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name"))).".xml";
-
-		$fp = @fopen($filename, "w");
-		if ($fp)  {
-			fwrite($fp, $xml);
-			fclose($fp);
-		}
+		$this->WriteFile($name, $xml);
 	}
 
 	function WriteSiteMapXML()
@@ -2692,6 +2698,5 @@ class Wacko
 		if ($this->page["description"]) return $this->page["description"];
 		else return $this->GetConfigValue("meta_description");
 	}
-
 }
 ?>

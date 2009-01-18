@@ -202,8 +202,13 @@ if ($wakkaConfig["wacko_version"] != WACKO_VERSION)
 	// start installer
 	if (!$installAction = trim($_REQUEST["installAction"])) $installAction = "lang";
 	include("setup/header.php");
-	if (@file_exists("setup/".$installAction.".php")) include("setup/".$installAction.".php"); else print("<em>Invalid action</em>");
+	
+	if (@file_exists("setup/".$installAction.".php")) 
+	include("setup/".$installAction.".php"); 
+	
+	else print("<em>Invalid action</em>");
 	include("setup/footer.php");
+	
 	exit;
 }
 
