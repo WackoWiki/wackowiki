@@ -33,12 +33,17 @@ echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
-// protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
 ?>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
-  <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/protoedit.js"></script>
-  <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/wikiedit2.js"></script>
-  <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/autocomplete.js"></script>
+<?php 
+// protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
+if ($this->method == 'edit') 
+{
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/wikiedit2.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/autocomplete.js\"></script>\n";
+}
+?>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 <?php
@@ -60,29 +65,36 @@ if ($user["doubleclickedit"] == "Y") {?>
 // Also, here we show message (see beginning of this file)
 ?>
 <body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
-      <div class="header">
-	  <style>
-#header-top{ width:100%;}
-.topnav {float:right;
-font-size:0.6875em;
-margin-top:0.9375em;}
-.topnav ul, .topnav li{list-style-type:none;
-margin:0;
-padding:0;}
-.topnav ul{display:block;}
-.topnav li {
-display:inline;
-margin-right:1.1em;
-}
-		 </style>
-	  <div id="header-top">
-         <h1><span class="main"><?php echo $this->config["wakka_name"] ?>: </span><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></h1>
+	<div class="header">
+		<div id="header-top">
+			<h1><span class="main"><?php echo $this->config["wakka_name"] ?>: </span><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></h1>
+
 		 
-		 <ul class="topnav">
-			<li><a href="">Hilfe</a></li>
-			<li><a href="">Kontakt</a></li>
-			<li><a href="">Impressum</a></li>
-		</ul>
+		<div id="login">
+<?php
+// If user are logged, Wacko shows "You are UserName"
+if ($this->GetUser())
+   { ?> <span class="nobr"><?php echo $this->GetResourceValue("YouAre")." ".$this->Link($this->GetUserName()) ?></span><small> ( <span class="nobr Tune"><?php
+echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?>
+ | <a onclick="return confirm('<?php echo $this->GetResourceValue("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetResourceValue("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetResourceValue("LogoutLink"); ?></a></span>
+)</small>
+<?php
+// Else Wacko shows login's controls
+   }
+else
+   {
+   // Begin Login form
+	echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
+      <input type="hidden" name="action" value="login" />
+   <span class="nobr"><input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" /><strong><label for="loginname"><?php echo $this->GetResourceValue("LoginWelcome") ?>:&nbsp;</label></strong>
+   <input type="text" id="loginname" name="name" size="18" class="login" />&nbsp;<label for="loginpassword"><?php echo $this->GetResourceValue("LoginPassword") ?>:&nbsp;</label><input type="password" id="loginpassword" name="password" class="login" size="8" />&nbsp;<input type="image" src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" style="vertical-align:top" /></span> <?php
+   
+   // Closing Login form
+	echo $this->FormClose();
+   }
+
+// End if
+?></div>
 		</div>
 <div id="navigation">
 <?php
@@ -118,32 +130,6 @@ margin-right:1.1em;
 	echo "\n</ol></div>";
 ?>
 
-<div id="login">
-<?php
-// If user are logged, Wacko shows "You are UserName"
-if ($this->GetUser())
-   { ?> <span class="nobr"><?php echo $this->GetResourceValue("YouAre")." ".$this->Link($this->GetUserName()) ?></span><small> ( <span class="nobr Tune"><?php
-echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?>
- | <a onclick="return confirm('<?php echo $this->GetResourceValue("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetResourceValue("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetResourceValue("LogoutLink"); ?></a></span>
-)</small>
-<?php
-// Else Wacko shows login's controls
-   }
-else
-   {
-   // Begin Login form
-	echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
-      <input type="hidden" name="action" value="login" />
-   <span class="nobr"><input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" /><strong><label for="loginname"><?php echo $this->GetResourceValue("LoginWelcome") ?>:&nbsp;</label></strong>
-   <input type="text" id="loginname" name="name" size="18" class="login" />&nbsp;<label for="loginpassword"><?php echo $this->GetResourceValue("LoginPassword") ?>:&nbsp;</label><input type="password" id="loginpassword" name="password" class="login" size="8" />&nbsp;<input type="image" src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" style="vertical-align:top" /></span> <?php
-   
-   // Closing Login form
-	echo $this->FormClose();
-   }
-
-// End if
-?></div>
-<!-- ENDE NAVIGATION-->
 </div>
 </div>
 <div id="content">

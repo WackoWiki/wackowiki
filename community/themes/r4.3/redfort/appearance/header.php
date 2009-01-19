@@ -38,12 +38,17 @@ by Pavel Fedotov (me@fedotov.org).
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
-// protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
 ?>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
-  <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/protoedit.js"></script>
-  <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/wikiedit2.js"></script>
-  <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/autocomplete.js"></script>
+<?php 
+// protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
+if ($this->method == 'edit') 
+{
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/wikiedit2.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/autocomplete.js\"></script>\n";
+}
+?>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 <?php

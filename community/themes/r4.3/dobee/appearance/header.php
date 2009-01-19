@@ -18,6 +18,7 @@ if ($this->GetMethod() != 'show' || $this->page["latest"] == "N") {
 <meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
 <meta name="description"
 	content="<?php echo $this->GetDescription(); ?>" />
+<meta name="language" content="<?php echo $this->page["lang"] ?>" />
 <meta http-equiv="content-type"
 	content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <link rel="stylesheet" type="text/css"
@@ -36,14 +37,20 @@ if ($this->GetMethod() != 'show' || $this->page["latest"] == "N") {
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?>"
 	href="<?php echo $this->href("revisions.xml");?>" />
-<script type="text/javascript"
-	src="<?php echo $this->GetConfigValue("root_url"); ?>js/default.js"></script>
-<script type="text/javascript"
-	src="<?php echo $this->GetConfigValue("root_url"); ?>js/protoedit.js"></script>
-<script type="text/javascript"
-	src="<?php echo $this->GetConfigValue("root_url"); ?>js/wikiedit2.js"></script>
-<script type="text/javascript"
-	src="<?php echo $this->GetConfigValue("root_url"); ?>js/autocomplete.js"></script>
+<?php
+// JS files.
+// default.js contains common procedures and should be included everywhere
+?>
+  <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
+<?php 
+// protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
+if ($this->method == 'edit') 
+{
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/wikiedit2.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/autocomplete.js\"></script>\n";
+}
+?>
 <script type="text/javascript"
 	src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
 <script type="text/javascript"

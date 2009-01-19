@@ -454,3 +454,23 @@ white-space: nowrap;
 
 #login form {display:inline;}
 
+
+/* temp */
+
+#header-top{ width:100%;}
+
+.topnav {float:right;
+font-size:0.6875em;
+margin-top:0.9375em;}
+
+.topnav ul, .topnav li{list-style-type:none;
+margin:0;
+padding:0;}
+
+.topnav ul{display:block;}
+
+.topnav li {
+display:inline;
+margin-right:1.1em;
+}
+
