@@ -968,7 +968,14 @@ class Wacko
 	// HTTP/REQUEST/LINK RELATED
 	function SetMessage($message) { $_SESSION[$this->config["session_prefix"].'_'."message"] = $message; }
 	function GetMessage() { $message = $_SESSION[$this->config["session_prefix"].'_'."message"]; $_SESSION[$this->config["session_prefix"].'_'."message"] = ""; return $message; }
-	function Redirect($url) { header("Location: $url"); exit; }
+	function Redirect($url, $permanent = false) 
+	{
+		if($permanent)
+		{
+			header('HTTP/1.1 301 Moved Permanently');
+		}
+		header("Location: $url"); exit; 
+	}
 
 	function UnwrapLink( $tag )
 	{
