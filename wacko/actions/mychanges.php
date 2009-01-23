@@ -1,7 +1,6 @@
 <?php
 
-// actions/mychanges.php
-// 
+// {{MyChanges [max="Number"] [bydate="1"]}}
 
 if (!$max) $max = 50;
 $bydate = isset($bydate) ? $bydate == "true" ? true : false : true;
