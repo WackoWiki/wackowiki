@@ -73,7 +73,8 @@ class Cache
    			"method='".quote($this->dblink, $method)."', ".
    			"query ='".quote($this->dblink, $query)."'");
 
-		@chmod($newname, octdec('0644'));
+		@chmod($filename, octdec('0644'));
+		
 		return true;
 	}
 
