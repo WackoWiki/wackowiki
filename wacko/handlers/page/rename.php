@@ -107,20 +107,28 @@ if ($registered
   <input type="text"
 	name="newname" value="<?php echo $this->tag;?>" size="40" />
   <br />
-  <?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" "; if ($this->GetConfigValue("default_rename_redirect")==1){echo "checked=\"checked\"";}; echo " /> <label for=\"redirect\">".$this->GetResourceValue("NeedRedirect")."</label>"; ?> <br />
+<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" "; if ($this->GetConfigValue("default_rename_redirect")==1){echo "checked=\"checked\"";}; echo " /> <label for=\"redirect\">".$this->GetResourceValue("NeedRedirect")."</label>"; ?> <br />
   <br />
-  <br />
-  <?php
-			if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
+<?php
+		// show backlinks
+		if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
+		{
+			print("<br /><fieldset><legend>".$this->GetResourceValue("AlertReferringPages").":</legend>\n");
+			foreach ($pages as $page)
 			{
-				print("<fieldset><legend>".$this->GetResourceValue("AlertReferringPages").":</legend>\n");
-				foreach ($pages as $page)
+				if ($page["tag"])
 				{
-					echo($this->ComposeLinkToPage($page["tag"])."<br />\n");
+					if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
+					else $access = true;
+					if ($access)
+					{
+						echo($this->ComposeLinkToPage($page["tag"])."<br />\n");
+					}
 				}
-				echo "</fieldset>\n";
 			}
-			?>
+			echo "</fieldset>\n";
+		}
+?>
   <br />
   <br />
   <input name="submit" class="OkBtn_Top"
