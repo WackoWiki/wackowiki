@@ -8,7 +8,7 @@ if ($page)
 	if ($this->LoadPage($page, "", LOAD_CACHE, LOAD_META)) 
 	{
 		$user = $this->GetUser();
-		if ($user["options"]["dont_redirect"]=="Y" || $_REQUEST["redirect"]=="no")
+		if ($user["options"]["dont_redirect"] == "Y")
 		{
 			print ("<br /><br /><br /><center>".$this->GetResourceValue("PageMoved")." ".$this->Link("/".$page)."</center><br /><br /><br />");
 		}
