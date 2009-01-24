@@ -21,7 +21,7 @@ class Cache
 		if (!@file_exists($filename))
 		return false;
 
-		if ((time()-@filemtime($filename)) > $this->cache_ttl)
+		if ((time() - @filemtime($filename)) > $this->cache_ttl)
 		return false;
 
 		$fp = fopen ($filename, "r");
@@ -48,7 +48,7 @@ class Cache
 		if (!@file_exists($filename))
 		return false;
 
-		if ((time()-@filemtime($filename)) > $this->cache_ttl)
+		if ((time() - @filemtime($filename)) > $this->cache_ttl)
 		return false;
 
 		return @filemtime($filename);
@@ -96,7 +96,8 @@ class Cache
 			}
 
 			$this->wacko->Query(
-				"DELETE FROM ".$this->wacko->config["table_prefix"]."cache WHERE name ='".quote($this->dblink, md5($page))."'");
+				"DELETE FROM ".$this->wacko->config["table_prefix"]."cache ".
+				"WHERE name ='".quote($this->dblink, md5($page))."'");
 
 			$this->Log("CacheInvalidate end");
 			return true;
@@ -122,7 +123,8 @@ class Cache
 
 		foreach ($_GET as $k => $v)
 		{
-			if ($k != "v" && $k != "page") $_query[$k] = $v;
+			if ($k != "v" && $k != "page") 
+				$_query[$k] = $v;
 		}
 		if ($_query)
 		{
@@ -144,7 +146,7 @@ class Cache
 			$etag = $_SERVER["HTTP_IF_NONE_MATCH"];
 			$lastm = $_SERVER["HTTP_IF_MODIFIED_SINCE"];
 
-			if ($p = strpos($lastm,";")) $lastm = substr($lastm,0,$p);
+			if ($p = strpos($lastm, ";")) $lastm = substr($lastm, 0, $p);
 
 			if ($_SERVER["REQUEST_METHOD"] == "GET") //may be we need HEAD support ???
 			{
