@@ -4,7 +4,7 @@ class Cache
 {
 	var $cache_ttl = 600;
 	var $cache_dir = "_cache/";
-	var $debug = 1;
+	var $debug = 0;
 
 	//Constructor
 	function Cache($cache_dir, $cache_ttl)

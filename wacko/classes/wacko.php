@@ -142,10 +142,10 @@ class Wacko
 	{
 		if (!$this->resources[$lang])
 		{
-			$resourcefile = "lang/wakka.".$lang.".php";
+			$resourcefile = "lang/wacko.".$lang.".php";
 			if (@file_exists($resourcefile)) include($resourcefile);
-			// wakka.all
-			$resourcefile = "lang/wakka.all.php";
+			// wacko.all
+			$resourcefile = "lang/wacko.all.php";
 			if (!$this->resources["all"])
 			{
 				if (@file_exists($resourcefile)) include($resourcefile);
@@ -153,11 +153,11 @@ class Wacko
 			}
 			$wackoResource = array_merge($wakkaResource, $this->resources["all"]);
 			// theme
-			$resourcefile = "themes/".$this->config["theme"]."/lang/wakka.".$lang.".php";
+			$resourcefile = "themes/".$this->config["theme"]."/lang/wacko.".$lang.".php";
 			if (@file_exists($resourcefile)) include($resourcefile);
 			$wackoResource = array_merge((array)$wackoResource, (array)$themeResource);
-			// wakka.all theme
-			$resourcefile = "themes/".$this->config["theme"]."/lang/wakka.all.php";
+			// wacko.all theme
+			$resourcefile = "themes/".$this->config["theme"]."/lang/wacko.all.php";
 			if (@file_exists($resourcefile)) include($resourcefile);
 			$wackoResource = array_merge((array)$wackoResource, (array)$themeResource);
 
@@ -194,7 +194,7 @@ class Wacko
 		{
 			$handle=opendir("lang");
 			while (false!==($file = readdir($handle))) {
-				if ($file != "." && $file != ".." && $file != "wakka.all.php" && !is_dir("lang/".$file) && 1==preg_match("/^wakka\.(.*?)\.php$/",$file,$match)) {
+				if ($file != "." && $file != ".." && $file != "wacko.all.php" && !is_dir("lang/".$file) && 1==preg_match("/^wacko\.(.*?)\.php$/",$file,$match)) {
 					$langlist[] = $match[1];
 				}
 			}
@@ -2127,7 +2127,7 @@ class Wacko
 		$name = "recentcomment";
 		
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->GetCharset()."\"?>\n";
-		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->GetConfigValue("theme_url")."css/wakka.css\" media=\"screen\"?>\n";
+		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->GetConfigValue("theme_url")."css/wacko.css\" media=\"screen\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
 		$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetResourceValue("RecentCommentsTitleXML")."</title>\n";
