@@ -219,7 +219,7 @@ $wakkaConfig["theme_url"]=$wakkaConfig["root_url"]."themes/".$wakkaConfig["theme
 //user-table
 if (!isset($wakkaConfig["user_table"]) && !$wakkaConfig["user_table"]) $wakkaConfig["user_table"] = $wakkaConfig["table_prefix"]."users";
 
-// fetch wakka location
+// fetch wacko location
 if (isset($_SERVER["PATH_INFO"]) && function_exists("virtual")) $request = $_SERVER["PATH_INFO"];
 else $request = @$_REQUEST["page"];
 
