@@ -95,7 +95,7 @@ if ($this->method == "show") {
          // display files header
          ?>
 <a name="files"></a>
-<div class="filesheader"><?php echo $this->GetResourceValue("Files_all") ?>
+<div id="filesheader"><?php echo $this->GetResourceValue("Files_all") ?>
 [<a
    href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?></a>]
     </div>
@@ -127,7 +127,7 @@ if ($this->method == "show") {
   else
   {
     ?>
-    <div class="filesheader">
+    <div id="filesheader">
 <?php
       if ($this->page["id"])
        $files = $this->LoadAll( "SELECT id FROM ".$this->config["table_prefix"]."upload WHERE ".
@@ -181,7 +181,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     // display comments header
     ?>
     <a name="comments"></a>
-<div class="commentsheader">
+<div id="commentsheader">
 <?php echo $this->GetResourceValue("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetResourceValue("HideComments"); ?></a>]
     </div>
     <?php
@@ -224,7 +224,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
   else
   {
     ?>
-<div class="commentsheader">
+<div id="commentsheader">
   <?php
       switch (count($comments))
       {

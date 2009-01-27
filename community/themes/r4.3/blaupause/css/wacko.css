@@ -136,7 +136,7 @@ FORM, H1, H2, H3, H4, H5, H6 {
 }
 .footer ul li form {display:inline;}
 
-.filesheader, .commentsheader {
+#filesheader, #commentsheader {
   background-color: #ECECFF;
   padding: 2px 10px;
   border-top: 1px solid #CCCCCC;

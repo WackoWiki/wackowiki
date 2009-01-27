@@ -1,4 +1,4 @@
-<div class="page"><?php
+<div id="page"><?php
 if ($this->HasAccess("read")) {
 	// load revisions for this page
 	if ($pages = $this->LoadRevisions($this->tag))

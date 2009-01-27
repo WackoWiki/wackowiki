@@ -1,4 +1,4 @@
-<div class="page">
+<div id="page">
   <?php
 if ($this->HasAccess("read"))
 {

@@ -149,7 +149,7 @@ a.main:visited {
   border-top: 1px solid #CCCCCC;
 }
 
-.filesheader, .commentsheader {
+#filesheader, #commentsheader {
   background-color: #D5EDB3;
   padding: 2px 10px;
   border-left: 1px inset;

@@ -139,7 +139,7 @@ white-space: nowrap;
 
 /* Headers (always visible) */
 
-.filesheader, .commentsheader {
+#filesheader, #commentsheader {
   background-color: #F0F4F5;
   padding: 2px 10px;
 /*  border-left: 1px inset;

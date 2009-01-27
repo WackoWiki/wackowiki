@@ -1,4 +1,4 @@
-<div class="page">
+<div id="page">
 <?php
 
 // obviously do not allow to remove non-existent pages

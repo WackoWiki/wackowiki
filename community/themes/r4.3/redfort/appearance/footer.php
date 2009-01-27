@@ -45,7 +45,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1)
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td height="29" bgcolor="#6E0000">
-    <div class="filesheader">
+    <div id="filesheader">
       <?php echo $this->GetResourceValue("Files_all") ?> [<a href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?></a>]
     </div>
 	</td>
@@ -85,7 +85,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1)
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td height="29" bgcolor="#6E0000">
-    <div class="filesheader">
+    <div id="filesheader">
     <?php
       if ($this->page["id"])
        $files = $this->LoadAll( "select id from ".$this->config["table_prefix"]."upload where ".
@@ -147,7 +147,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
     <a name="comments"></a>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td height="29" bgcolor="#6E0000">    <div class="commentsheader">
+          <td height="29" bgcolor="#6E0000">    <div id="commentsheader">
       <?php echo $this->GetResourceValue("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetResourceValue("HideComments"); ?></a>]
     </div></td>
         </tr>
@@ -195,7 +195,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
     ?>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td height="29" bgcolor="#6E0000">    <div class="commentsheader">
+          <td height="29" bgcolor="#6E0000">    <div id="commentsheader">
     <?php
       switch (count($comments))
       {
