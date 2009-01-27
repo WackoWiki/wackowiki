@@ -1,4 +1,3 @@
-<div class="pageBefore">&nbsp;</div>
 <div class="page">
 <?php
 // redirect to show method if page don't exists

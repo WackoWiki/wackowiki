@@ -1,4 +1,3 @@
-<div class="pageBefore">&nbsp;</div>
 <div class="page"><?php
 if ($this->HasAccess("read")) {
 	// load revisions for this page

@@ -29,11 +29,6 @@
 	font-weight:		900;
 }
 
-/* Useless, but we include it */
-.pageBefore {
-	height:			0;
-}
-
 /* Debugging informations */
 .time{ color:#CCCCCC; font-size: 9px; margin:5px 20px;}
 .debug { font-size: 11px; color: 888888;}
