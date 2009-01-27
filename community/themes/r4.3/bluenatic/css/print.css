@@ -152,7 +152,7 @@ code {
 }
 
 /* Fieldsets: CODE {{toc}}, {{backlinks}} */
-.page fieldset,
+#page fieldset,
 .preview fieldset {
 	border:			none;
 }

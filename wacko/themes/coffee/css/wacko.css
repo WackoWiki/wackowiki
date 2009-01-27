@@ -35,11 +35,11 @@ span.small {font-size: 80%}
 div#filesheader, div#commentsheader, div.footer {padding: 5px 10px; background-color: #FFEFD5; border-top: 1px solid #ccc; font-size: 90%}
 div.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-color: #FFE4B5;}
 div.searchbar input { border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;}
-div.copyright {clear: right; padding: 10px; color: #AAAAAA; font-size: 11px; text-align: right}
+div#copyright {clear: right; padding: 10px; color: #AAAAAA; font-size: 11px; text-align: right}
 .commentform form { width: 100% }
 .commentform form textarea { width: 100%; padding: 0}
-.commentinfo, .copyright a { color: #AAAAAA; padding-bottom: 20px; }
-.copyright a { color: #AAAAAA;}
+.commentinfo, #copyright a { color: #AAAAAA; padding-bottom: 20px; }
+#copyright a { color: #AAAAAA;}
 
 /* paddings headers */
 
@@ -55,7 +55,7 @@ legend {font-weight: normal; padding: 0 5px;}
 .textarea { width: 100%; height: 400px }
 
 /* Page main area */
-div.page {padding: 10px 10px;}
+div#page {padding: 10px 10px;}
 
 /* Lists */
 ul, ol { margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px }
@@ -126,8 +126,8 @@ table.usertable tr td { border-width: 1px; border-color: black; border-style: so
 .notes { color: #888800 }
 .outerlink { color: #990000 }
 
-.pageedit { border: 1px inset; border-bottom: none; background: #FFFFFF }
-.pageedit form textarea {width: 100%;height: 400px; }
+#pageedit { border: 1px inset; border-bottom: none; background: #FFFFFF }
+#pageedit form textarea {width: 100%;height: 400px; }
 .pleft .p- { float: left; padding: 0 15px 0 0 }
 .pleft, .pleft .pbody- { padding: 0 }
 .pmark { color: #cccccc; font: 10px Arial }

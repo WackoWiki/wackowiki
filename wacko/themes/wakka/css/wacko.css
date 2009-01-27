@@ -76,19 +76,19 @@ FORM, H1, H2, H3, H4, H5, H6 {
 	padding-top: 0px;
 	line-height: 22px;
 }
-.page {
+#page {
 	background-color: #FFFFFF;
 	padding: 9px 10px 10px;
 	border: 1px inset;
 	border-top: none;
 	border-bottom: none;
 }
-.pageedit {
+#pageedit {
 	background-color: #FFFFFF;
 	border: 1px inset;
 	border-bottom: none;
 }
-.pageedit form textarea {
+#pageedit form textarea {
 	width: 100%;
 	height: 400px;
 }
@@ -135,12 +135,12 @@ FORM, H1, H2, H3, H4, H5, H6 {
 	color: #AAAAAA;
 	padding-bottom: 20px;
 }
-.copyright {
+#copyright {
 	font-size: 11px;
 	color: #AAAAAA;
 	text-align: right;
 }
-.copyright A {
+#copyright A {
 	color: #AAAAAA;
 }
 .name {

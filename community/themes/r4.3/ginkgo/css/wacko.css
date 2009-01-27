@@ -115,7 +115,7 @@ a.main:visited {
   line-height: 22px;
 }
 
-.page {
+#page {
 	background-color: #FFFFFF;
 	padding: 9px 10px 10px;
 	/*   border: 1px inset;*/
@@ -123,12 +123,12 @@ a.main:visited {
 	border-bottom: none;
 	min-height:100%;
 }
-.pageedit {
+#pageedit {
   background-color: #FFFFFF;
   border: 1px inset;
   border-bottom: none; 
 }
-.pageedit form textarea {
+#pageedit form textarea {
   width: 100%;
   height: 400px; 
 }
@@ -185,14 +185,14 @@ a.main:visited {
   padding-bottom: 20px;
 }
 
-.copyright {
+#copyright {
   font-size: 10px;
   color: #AAAAAA;
   text-align: left;
   margin-left: 5px;	
 }
 
-.copyright A {
+#copyright A {
   color: #AAAAAA;
 }
 

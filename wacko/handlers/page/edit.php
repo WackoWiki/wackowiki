@@ -10,7 +10,7 @@ if ($_GET["_autocomplete"])
 ?>
 <?php if (!$this->GetConfigValue("edit_table_based")) { ?>
 
-<div class="pageedit">
+<div id="pageedit">
   <?php } ?>
   <?php
 if ($this->HasAccess("write") && $this->HasAccess("read"))
@@ -249,7 +249,7 @@ print ( $this->FormClose() );
 }
 else
 {
-   print("<div class=\"page\">");
+   print("<div id=\"page\">");
    print($this->GetResourceValue("WriteAccessDenied"));
    print("</div>");
 }
