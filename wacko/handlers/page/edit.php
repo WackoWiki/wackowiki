@@ -149,7 +149,7 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
       <?php
 
          if ($this->GetConfigValue("edit_table_based"))
-         $output .= '<div class="pageBefore">&nbsp;</div><div class="page">';
+         $output .= '<div class="page">';
 
          $output = "<fieldset class=\"preview\"><legend>".$this->GetResourceValue("EditPreview")."</legend>\n";
 

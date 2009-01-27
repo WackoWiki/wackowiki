@@ -45,11 +45,6 @@ H5 { font-family: Arial;   font-size: 14px; padding-top:10px; padding-bottom:5px
 .Print { color:#999999; font-size:11px; float:right; }
 
 .Shade, .page { border-left: 1px solid #444444; border-right: 1px solid #444444; }
-.pageBefore {
-    border-left: 1px solid #444444; border-right: 1px solid #444444; height: 1px;
-    background:#ffffff
-
-}
 
 .Shade {  clear:all; background:#ffffff;
           height:6px; border-top: 1px solid #444444; }

@@ -93,14 +93,7 @@ form input.submitinput {
   border-top: none;
   border-bottom: none;*/
 }
-.pageBefore {
-	border-top-width: 1px;
-	border-top-style: dotted;  /*border: 1px inset #CCCCCC;
-  border-bottom: none;
-  */
-	height:1px;
-	border-top-color: #CCCCCC;
-}
+
 .pageedit {
   background-color: #FFFFFF;
   border: 1px inset;

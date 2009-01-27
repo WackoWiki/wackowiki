@@ -100,10 +100,6 @@ FORM, H1, H2, H3, H4, H5, H6 {
 	border-right: none;
 	border-left: none;
 }
-.pageBefore {
-	height:1px;
-	border-top: 1px solid #ccc;
-}
 .pageedit {
   background-color: #FFFFFF;
   border: 1px inset;

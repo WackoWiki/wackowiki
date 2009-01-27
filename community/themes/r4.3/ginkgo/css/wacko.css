@@ -123,11 +123,6 @@ a.main:visited {
 	border-bottom: none;
 	min-height:100%;
 }
-.pageBefore { 
-/*  border: 1px inset;*/
-  border-bottom: none; 
-  height:1px
-}
 .pageedit {
   background-color: #FFFFFF;
   border: 1px inset;

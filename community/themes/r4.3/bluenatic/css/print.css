@@ -43,11 +43,6 @@ img {
 
 /** Styles for the main content in the page. *********************************/
 
-/* Useless, but we include it */
-.pageBefore {
-	height:			0;
-}
-
 /* Debugging informations (not shown) */
 .time {
 	display:		none;
