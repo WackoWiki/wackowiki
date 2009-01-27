@@ -86,7 +86,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
    }
 else
    {
-      print("<div class=\"page\">".$this->GetResourceValue("CommentAccessDenied")."</div>\n");
+      print("<div id=\"page\">".$this->GetResourceValue("CommentAccessDenied")."</div>\n");
    }
 
 ?>
