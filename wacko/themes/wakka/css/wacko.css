@@ -99,7 +99,7 @@ FORM, H1, H2, H3, H4, H5, H6 {
 	border-top: none;
 	border-top: 1px solid #CCCCCC;
 }
-.filesheader, .commentsheader {
+#filesheader, #commentsheader {
 	background-color: #DDDDDD;
 	padding: 2px 10px;
 	border-left: 1px inset;

@@ -36,10 +36,10 @@ A:VISITED {
 .footer A:VISITED {
   color: #EEEEEE;
 }
-.filesheader A:LINK {
+#filesheader A:LINK {
   color: #EEEEEE;
 }
-.filesheader A:VISITED {
+#filesheader A:VISITED {
   color: #EEEEEE;
 }
 .commentsheader A:LINK {
@@ -134,14 +134,14 @@ FORM, H1, H2, H3, H4, H5, H6 {
 	color: #EEEEEE;
 }
 
-.filesheader, .commentsheader {
+#filesheader, #commentsheader {
 	padding: 2px 10px;
 	color: #EEEEEE;
 }
-.commentsheader A {
+#commentsheader A {
 	color: #EEEEEE;
 }
-.filesheader A {
+#filesheader A {
 	color: #EEEEEE;
 }
 

@@ -149,7 +149,7 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
       <?php
 
          if ($this->GetConfigValue("edit_table_based"))
-         $output .= '<div class="page">';
+         $output .= '<div id="page">';
 
          $output = "<fieldset class=\"preview\"><legend>".$this->GetResourceValue("EditPreview")."</legend>\n";
 
@@ -212,7 +212,7 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
   </tr>
 </table>
 <div class="Wrapper" style='margin-top: 0px; padding-top: 0px'>
-<div class="page" style='margin-top: 0px; padding-top: 0px'><br />
+<div id="page" style='margin-top: 0px; padding-top: 0px'><br />
   <?php
 }
 ?>

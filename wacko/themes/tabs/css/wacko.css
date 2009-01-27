@@ -114,7 +114,7 @@ cite {color:#888800;font-style:normal;}
 .time{ color:#999999; font-size: 9px; margin:5px 20px;}
 .debug { font-size: 11px; color: #888888;}
 
-.commentsheader, .filesheader {
+#commentsheader, #filesheader {
   background-color: #eeeeee;
   padding: 2px 50px;
 }
@@ -204,8 +204,8 @@ A.denied:HOVER { color:#cc3300 }
 a.Search:link, a.Search:visited { color:#0000ff }
 a.Search:hover { color:#cc3300 }
 
-.commentsheader a:link, .commentsheader a:visited { color:#0000ff }
-.commentsheader a:hover { color:#cc3300 }
+#commentsheader a:link, #commentsheader a:visited { color:#0000ff }
+#commentsheader a:hover { color:#cc3300 }
 
 
 .toc1 { margin-left:0px; padding-left:0px; font-weight:bold; list-style-type:none;  }

@@ -133,7 +133,7 @@ background-color:#EEE;
 padding:10px;
 }
 
-.filesheader,.commentsheader {
+#filesheader,#commentsheader {
 background-color:#F0F0F0;
 padding:2px 10px;
 }

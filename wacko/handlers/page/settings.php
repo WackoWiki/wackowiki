@@ -1,4 +1,4 @@
-<div class="page">
+<div id="page">
   <?php
 
 if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))

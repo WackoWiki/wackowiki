@@ -1,4 +1,4 @@
-<div class="page">
+<div id="page">
 <?php
 if ($this->HasAccess("read"))
 {
@@ -119,7 +119,7 @@ if ($this->GetConfigValue("footer_files"))
 			// display files header
 			?>
 <a name="files" id="files"></a>
-<div class="filesheader"><?php echo $this->GetResourceValue("Files_all") ?>
+<div id="filesheader"><?php echo $this->GetResourceValue("Files_all") ?>
 [<a
 	href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?></a>]
     </div>
@@ -153,7 +153,7 @@ if ($this->GetConfigValue("footer_files"))
   else
   {
     ?>
-    <div class="filesheader">
+    <div id="filesheader">
 <?php
 	if ($this->page["id"])
 	{
@@ -217,7 +217,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     // display comments header
     ?>
     <a name="comments"></a>
-<div class="commentsheader">
+<div id="commentsheader">
 <?php echo $this->GetResourceValue("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetResourceValue("HideComments"); ?></a>]
     </div>
     <?php
@@ -283,7 +283,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
   else
   {
     ?>
-<div class="commentsheader">
+<div id="commentsheader">
   <?php
       switch ($c = count($comments))
       {

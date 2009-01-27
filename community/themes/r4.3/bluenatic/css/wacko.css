@@ -614,7 +614,7 @@ div .action-content {
 /** File and comment-related *************************************************/
 
 /* Headers (always visible) */
-.commentsheader, .filesheader {
+#commentsheader, #filesheader {
 	background-color:	#ddd;
 	/*border-top:		solid 1px #bbb;*/
 	border-bottom:		none;
@@ -661,7 +661,7 @@ div .action-content {
 	/*-moz-border-radius:	3px;		/* Mozilla, Firefox only */
 }
 /* Hyperlinks in header: "Show comments(files)/form" */
-.filesheader a, .commentsheader a {
+#filesheader a, #commentsheader a {
 	background-color:	transparent;
 	color:			#000;
 }
