@@ -7,7 +7,7 @@
 /** Styles for the main content in the page. *********************************/
 
 /* Default settings */
-.page {
+#page {
 	background-color:	#fff;
 	color:			#000;
 	line-height:		1.5em;
@@ -137,12 +137,12 @@ sup {
 	font-size:		0.85em;
 	margin:			0 2px;
 }
-.page sup a {
+#page sup a {
 	background-color:	transparent;
 	border:			none;
 	color:			#999;
 }
-.page sup a:hover {
+#page sup a:hover {
 	background-color:	transparent;
 	border:			none;
 	color:			#000;
@@ -161,11 +161,11 @@ tt {
 /** Advanced formating and action-related ************************************/
 
 /* Hyperlinks: CODE ((HomePage)) */
-.page a,
+#page a,
 .preview a {
 	text-decoration:	none;
 }
-.page a:hover,
+#page a:hover,
 .preview a:hover {
 	text-decoration:	underline;
 }
@@ -187,14 +187,14 @@ code {
 }
 
 /* Fieldsets: CODE {{toc}}, {{backlinks}} */
-.page fieldset,
+#page fieldset,
 .preview fieldset {
 	border:			1px solid #ccc;
 	font-weight:		900;
 	/*-moz-border-radius:	5px;		/* Mozilla, Firefox only */
 }
-.page fieldset a,
-.page fieldset a:visited,
+#page fieldset a,
+#page fieldset a:visited,
 .preview fieldset a,
 .preview fieldset a:visited {
 	background-color:	transparent;
@@ -202,12 +202,12 @@ code {
 	color:			#000;
 	font-weight:		400;
 }
-.page fieldset a:hover,
+#page fieldset a:hover,
 .preview fieldset a:hover {
 	text-decoration:	none;
 }
 /* Legend of the fieldset */
-.page fieldset legend,
+#page fieldset legend,
 .preview fieldset legend {
 	/*-moz-border-radius:	3px;		/* Mozilla, Firefox only */
 }
@@ -261,15 +261,15 @@ hr {
 }
 
 /* Outgoing hyperlinks: CODE ((http://slashdot.org nerds)) */
-.page .outerlink,
+#page .outerlink,
 .preview .outerlink {
 	text-decoration:	none;
 }
-.page .outerlink:hover,
+#page .outerlink:hover,
 .preview .outerlink:hover {
 	text-decoration:	underlined;
 }
-.page .outerlink img,
+#page .outerlink img,
 .preview .outerlink img {
 	vertical-align:		middle;
 }
@@ -429,7 +429,7 @@ div .action-content {
 	background-color:	transparent;
 	color:			#7f007f;
 }
-.hl-inlinedoc, .page .hl-special {
+.hl-inlinedoc, #page .hl-special {
 	background-color:	transparent;
 	color:			#00f;
 }
@@ -437,7 +437,7 @@ div .action-content {
 	background-color:	transparent;
 	color:			#06f;
 }
-.hl-inlinetags, .page .hl-url {
+.hl-inlinetags, #page .hl-url {
 	background-color:	transparent;
 	color:			#f00;
 }
@@ -491,23 +491,23 @@ div .action-content {
 
 /** Edit-related *************************************************************/
 
-.pageedit {
+#pageedit {
 	margin-bottom:		10px;
 	margin-left:		10px;
 	margin-right:		25px;
 	margin-top:		10px;
 }
 /* Buttons */
-.pageedit input {
+#pageedit input {
 	border:			solid 1px #999;
 	margin:			10px;
 	/*-moz-border-radius:	3px;	/* Mozilla, Firefox only */
 }
 /* Textarea */
-.pageedit .TextArea {
+#pageedit .TextArea {
 	padding:		2px;
 }
-.pageedit form textarea {width: 100%;height: 400px; }
+#pageedit form textarea {width: 100%;height: 400px; }
 
 /* Fieldset (preview) */
 .preview {

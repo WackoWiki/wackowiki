@@ -86,7 +86,7 @@ form input.submitinput {
 /** Styles for the main content in the page. *********************************/
 
 /* Default settings */
-.page {
+#page {
   background-color: #FFFFFF;
   padding: 9px 10px 10px;
   /*border: 1px inset #f0f0f0;
@@ -94,12 +94,12 @@ form input.submitinput {
   border-bottom: none;*/
 }
 
-.pageedit {
+#pageedit {
   background-color: #FFFFFF;
   border: 1px inset;
   border-bottom: none;
 }
-.pageedit form textarea {width: 100%;height: 400px; }
+#pageedit form textarea {width: 100%;height: 400px; }
 
 .footer {
   background-color: #F0F4F5;
@@ -174,17 +174,17 @@ white-space: nowrap;
 
 
 
-.copyright {
+#copyright {
   font-size: 11px;
   color: #AAAAAA;
   text-align: right;
 }
 
-.copyright a {
+#copyright a {
   color: #AAAAAA;
 }
 
-.copyright a:active {
+#copyright a:active {
   color: #FF0000;
 }
 

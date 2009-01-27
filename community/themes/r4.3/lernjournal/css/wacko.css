@@ -67,11 +67,11 @@ padding:0;
 width:100%;
 }
 
-.commentinfo,.copyright a {
+.commentinfo,#copyright a {
 color:#AAA;
 }
 
-.copyright {
+#copyright {
 color:#AAA;
 font-size:11px;
 text-align:right;
@@ -276,15 +276,15 @@ color:#900;
 background-color:#F66;
 }
 
-.page {
+#page {
 padding:9px 10px 10px;
 }
 
-.pageedit {
+#pageedit {
 background-color:#FFF;
 border-bottom:none;
 }
-.pageedit form textarea {width: 100%;height: 400px; } 
+#pageedit form textarea {width: 100%;height: 400px; } 
 
 .pleft .p- {
 float:left;

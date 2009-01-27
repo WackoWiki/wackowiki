@@ -84,7 +84,7 @@ echo $this->FormClose();
 ?>
 
 </div>
-<div class="copyright">
+<div id="copyright">
 <?php 
 if ($this->GetUser()){
 	echo $this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion());

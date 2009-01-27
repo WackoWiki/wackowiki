@@ -299,7 +299,7 @@ echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->Ge
 echo $this->FormClose();
 ?>
 </div>
-<div class="copyright"><?php 
+<div id="copyright"><?php 
 if ($this->GetUser()){
 	echo $this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion());
 }

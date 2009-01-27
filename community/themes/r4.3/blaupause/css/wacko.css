@@ -92,7 +92,7 @@ FORM, H1, H2, H3, H4, H5, H6 {
   line-height: 22px;
 }
 
-.page {
+#page {
 	background-color: #FFFFFF;
 	padding: 9px 10px 10px;
 	border-top: none;
@@ -100,12 +100,12 @@ FORM, H1, H2, H3, H4, H5, H6 {
 	border-right: none;
 	border-left: none;
 }
-.pageedit {
+#pageedit {
   background-color: #FFFFFF;
   border: 1px inset;
   border-bottom: none; 
 }
-.pageedit form textarea {width: 100%;height: 400px; }
+#pageedit form textarea {width: 100%;height: 400px; }
 .pagetitle {
   font-size: 23px;
   padding-top: 0px;
@@ -167,13 +167,13 @@ FORM, H1, H2, H3, H4, H5, H6 {
   padding-bottom: 20px;
 }
 
-.copyright {
+#copyright {
   font-size: 11px;
   color: #AAAAAA;
   text-align: right;
 }
 
-.copyright A {
+#copyright A {
   color: #AAAAAA;
 }
 
