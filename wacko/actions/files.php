@@ -83,7 +83,7 @@ if ($can_view)
 	if (count($files))
 	{
 ?>
-<table class="upload" cellspacing="0" cellpadding="0" border="0">
+<p class="upload">
 <?php
 	}
 
@@ -112,35 +112,32 @@ if ($can_view)
 
 		$remove_href = $this->Href("upload", $vars[0], "remove=".($global?"global":"local")."&amp;file=".$filename);
 ?>
-	<tr>
-		<td class="dt-" nowrap="nowrap"><span class="dt2-"><?php echo $dt ?></span>&nbsp;</td>
+<span class="dt2-"><?php echo $dt ?></span>&nbsp;|
 <?php
 		if ($remove_mode)
 		{
 ?>
-		<td class="remove-"><a href="<?php echo $remove_href; ?>"
-			class="remove2-"><?php echo $del; ?></a>&nbsp;</td>
+		<a href="<?php echo $remove_href; ?>" class="remove2-"><?php echo $del; ?></a>&nbsp;|
 <?php
 		}
 		else
 		{
 ?>
-		<td class="remove-">&nbsp;</td>
+		&nbsp;
 <?php
 		}
 ?>
-		<td class="size-"><span class="size2-">(<?php echo $filesize; ?>&nbsp;<?php
-		echo $kb; ?>)</span>&nbsp;</td>
-		<td class="file-" nowrap="nowrap"><?php echo $link; ?></td>
-		<td class="desc-"><?php echo $desc ?></td>
-	</tr>
+		<span class="size2-">(<?php echo $filesize; ?>&nbsp;<?php
+		echo $kb; ?>)</span>&nbsp;|
+		<span class="file-"><?php echo $link; ?></span>
+		<span class="desc-"><?php echo $desc ?></span>
 <?php
 	}
 
 	if (count($files))
 	{
 ?>
-</table>
+</p>
 <?php
 	}
 	if (!$nomark) echo "</fieldset>\n";
