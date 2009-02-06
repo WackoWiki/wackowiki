@@ -395,7 +395,9 @@ div#cssform1 span.site_count {
 	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
 /*Actions --------------------------------------------------*/
-
+.smaller {
+	font-size: 0.8em;
+}
 
 /*Handlers --------------------------------------------------*/
 #content {
