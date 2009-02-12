@@ -12,31 +12,65 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 {
 	if ($_POST)
 	{
-		// store lists
-		$this->SaveAcl($this->GetPageTag(), "read", $_POST["read_acl"]);
-		$this->SaveAcl($this->GetPageTag(), "write", $_POST["write_acl"]);
-		$this->SaveAcl($this->GetPageTag(), "comment", $_POST["comment_acl"]);
-		$message = $this->GetResourceValue("ACLUpdated");
+		// acls for page or entire cluster
+		$need_massacls = 0;
+		if ($_POST["massacls"] == "on")  $need_massacls = 1;
 
-		// change owner?
-		if ($newowner = $_POST["newowner"])
-		{
-			$this->SetPageOwner($this->GetPageTag(), $newowner);
-			$message .= $this->GetResourceValue("ACLGaveOwnership").$newowner;
-		}
+			// acls page
+			if ($need_massacls == 0)
+			{
+				// store lists
+				$this->SaveAcl($this->GetPageTag(), "read", $_POST["read_acl"]);
+				$this->SaveAcl($this->GetPageTag(), "write", $_POST["write_acl"]);
+				$this->SaveAcl($this->GetPageTag(), "comment", $_POST["comment_acl"]);
+				$message = $this->GetResourceValue("ACLUpdated");
+		
+				// change owner?
+				if ($newowner = $_POST["newowner"])
+				{
+					$this->SetPageOwner($this->GetPageTag(), $newowner);
+					$message .= $this->GetResourceValue("ACLGaveOwnership").$newowner;
+				}
+		
+				// Change read permission for all comments on this page
+				$comments = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on = '".$this->GetPageTag()."' AND owner='".quote($this->dblink, $this->GetUserName())."'");
+				foreach ($comments as $num=>$page)
+				{
+		
+					$this->SaveAcl($page["tag"], "read", $_POST["read_acl"]);
+					// $this->SaveAcl($page["tag"], "write", $page["comment_on"] == '' ? $_POST["write_acl"] : '');
+					// $this->SaveAcl($page["tag"], "comment", $page["comment_on"] == '' ? $_POST["comment_acl"] : '');
+		
+					// change owner?
+					if ($newowner = $_POST["newowner"])
+					$this->SetPageOwner($page["tag"], $newowner);
+				}
+			}
 
-		// Change read permission for all comments on this page
-		$comments = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on = '".$this->GetPageTag()."' AND owner='".quote($this->dblink, $this->GetUserName())."'");
-		foreach ($comments as $num=>$page)
-		{
-			$this->SaveAcl($page["tag"], "read", $_POST["read_acl"]);
-			// $this->SaveAcl($page["tag"], "write", $page["comment_on"] == '' ? $_POST["write_acl"] : '');
-			// $this->SaveAcl($page["tag"], "comment", $page["comment_on"] == '' ? $_POST["comment_acl"] : '');
-
-			// change owner?
-			if ($newowner = $_POST["newowner"])
-			$this->SetPageOwner($page["tag"], $newowner);
-		}
+			// acls for entire cluster
+			if ($need_massacls == 1)
+			{
+				$pages = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".
+				$this->config["table_prefix"]."pages WHERE (supertag = '".quote($this->dblink, $this->tag)."'".
+		            " OR supertag LIKE '".quote($this->dblink, $this->tag."/%")."'".
+		            " OR comment_on = '".quote($this->dblink, $this->tag)."'".
+		            " OR comment_on LIKE '".quote($this->dblink, $this->tag."/%")."'".
+		            ") AND owner='".quote($this->dblink, $this->GetUserName())."'");
+		
+				foreach ($pages as $num=>$page)
+				{
+					// store lists
+					$this->SaveAcl($page["tag"], "read", $_POST["read_acl"]);
+					$this->SaveAcl($page["tag"], "write", $page["comment_on"] == '' ? $_POST["write_acl"] : '');
+					$this->SaveAcl($page["tag"], "comment", $page["comment_on"] == '' ? $_POST["comment_acl"] : '');
+					// change owner?
+					if ($newowner = $_POST["newowner"])
+					$this->SetPageOwner($page["tag"], $newowner);
+				}
+				$message = $this->GetResourceValue("ACLUpdated");
+				if ($newowner = $_POST["newowner"])
+				$message .= $this->GetResourceValue("ACLGaveOwnership").$newowner;
+			}
 
 		// redirect back to page
 		$this->SetMessage($message."!");
@@ -53,6 +87,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		?>
   <h3><?php echo str_replace("%1",$this->Link("/".$this->GetPageTag()),$this->GetResourceValue("ACLFor")); ?></h3>
   <?php echo $this->FormOpen("acls") ?>
+<?php echo "<input type=\"checkbox\" id=\"massacls\" name=\"massacls\" "; echo " /> <label for=\"massacls\">".$this->GetResourceValue("SettingsMassAcls")."</label>"; ?> <br />
   <div class="cssform">
     <p>
       <label for="read_acl"><?php echo $this->GetResourceValue("ACLRead"); ?></label>
@@ -97,5 +132,4 @@ else
 }
 ?>
   <br />
-  [<a href="<?php echo $this->href("massacls");?>"><?php echo $this->GetResourceValue("SettingsMassAcls" ); ?></a>]
 </div>

@@ -63,11 +63,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
     <li><a href="<?php echo $this->href("revisions");?>"><?php echo $this->GetResourceValue("SettingsRevisions"); ?></a></li>
     <li><a href="<?php echo $this->href("rename");?>"><?php echo $this->GetResourceValue("SettingsRename"); ?></a></li>
     <li><a href="<?php echo $this->href("remove");?>"><?php echo $this->GetResourceValue("SettingsRemove"); ?></a></li>
-    <li><a href="<?php echo $this->href("acls");?>"><?php echo $this->GetResourceValue("SettingsAcls"); ?></a>
-      <ul>
-        <li><a href="<?php echo $this->href("massacls" );?>"><?php echo $this->GetResourceValue("SettingsMassAcls" ); ?></a></li>
-      </ul>
-    </li>
+    <li><a href="<?php echo $this->href("acls");?>"><?php echo $this->GetResourceValue("SettingsAcls"); ?></a></li>
     <li><a href="<?php echo $this->href("upload");?>"><?php echo $this->GetResourceValue("SettingsUpload"); ?></a></li>
     <li><a href="<?php echo $this->href("referrers");?>"><?php echo $this->GetResourceValue("SettingsReferrers"); ?></a></li>
     <li><a href="<?php echo $this->href("watch");?>"><?php echo $this->GetResourceValue("SettingsWatch"); ?></a></li>

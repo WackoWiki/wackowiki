@@ -335,7 +335,7 @@ $wakkaResource = array(
   "ReallyDeleteComment" => "Willst du den Kommentar wirklich löschen?<br />Diese Aktion kann nicht rückgängig gemacht werden!",
   "ForgotLink" => "Passwort vergessen?",
   "RegistrationClosed" => "Registrierung ist nicht verfügbar. Kontaktiere bei Interesse den Administrator.",
-  "ACLForCluster" => "Access Control Lists für gesamten Cluster %1",
+  "ACLForCluster" => "Berechtigungen für gesamten Cluster %1",
   "ACLAreYouSure" => "Du bist dabei die ACLs von dieser Seite und aller ihrer Unterseiten zu ändern. Fortfahren?",
 
   "MeasuredTime" => "Zeit",
@@ -407,7 +407,7 @@ $wakkaResource = array(
   "Captcha" => "Bitte schreibe das Wort welches du im Bild lesen kannst",
   "SpamAlert" => "Du hast das Captcha-Wort nicht korrekt eingegeben.",
   "CaptchaReload" => "Neues Captcha",
-  "CaptchaReloadWarning" => "Sorry, kann das Captcha Bild nicht neu laden, du musst die Seite neu laden um das zu tun.",
+  "CaptchaReloadWarning" => "Kann das Captcha Bild nicht neu laden, du musst die Seite neu laden um das zu tun.",
 );
 
 ?>
