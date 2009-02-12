@@ -61,11 +61,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
   <ul>
     <li><a href="<?php echo $this->href("edit");?>"><?php echo $this->GetResourceValue("SettingsEdit"); ?></a></li>
     <li><a href="<?php echo $this->href("revisions");?>"><?php echo $this->GetResourceValue("SettingsRevisions"); ?></a></li>
-    <li><a href="<?php echo $this->href("rename");?>"><?php echo $this->GetResourceValue("SettingsRename"); ?></a>
-      <ul>
-        <li><a href="<?php echo $this->href("massrename");?>"><?php echo $this->GetResourceValue("SettingsMassRename"); ?></a></li>
-      </ul>
-    </li>
+    <li><a href="<?php echo $this->href("rename");?>"><?php echo $this->GetResourceValue("SettingsRename"); ?></a></li>
     <li><a href="<?php echo $this->href("remove");?>"><?php echo $this->GetResourceValue("SettingsRemove"); ?></a></li>
     <li><a href="<?php echo $this->href("acls");?>"><?php echo $this->GetResourceValue("SettingsAcls"); ?></a>
       <ul>
