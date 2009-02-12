@@ -5,6 +5,7 @@ Common footer file.
 */
 ?>
 </div>
+<div id="footer">
 <div class="footer">
 <div class="footerlist">
 <ul>
@@ -76,21 +77,6 @@ echo"<li><a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this
 
 }
 ?>
-<li>
-<?php
-// Opens Search form
-echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get");
-
-// Searchbar
-?>
-<span class="searchbar nobr"><label for="phrase"><?php echo $this->GetResourceValue("SearchText"); ?></label><input
-	type="text" name="phrase" id="phrase" size="15" /><input class="submitinput" type="submit" title="<?php echo $this->GetResourceValue("SearchButtonText") ?>" alt="<?php echo $this->GetResourceValue("SearchButtonText") ?>" value="»"/></span>
-<?php
-
-// Search form close
-echo $this->FormClose();
-?>
-</li>
 </ul>
 </div>
 </div>
@@ -99,6 +85,8 @@ if ($this->GetUser()){
 	echo $this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion());
 }
 ?>
+</div>
+</div>
 </div>
 <?php
 

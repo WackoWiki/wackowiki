@@ -1,4 +1,4 @@
-@import "../../_common/X11ColorNames.css";
+/*@import "../../_common/X11ColorNames.css";*/
 @import "wacko.css";
 
 
@@ -76,20 +76,26 @@ form input.submitinput {
 .time{ color:#999999; font-size: 9px; margin:5px 20px;}
 .debug { font-size: 11px; color: #888888;}
 
-.header {
+#header {
 	padding-top: 0px;
 	padding-right: 10px;
 	padding-bottom: 5px;
 	padding-left: 10px;  /*line-height: 22px;*/
 }
 
+#header-main {clear:both;
+overflow:hidden;
+padding:10px 0px;}
+
 /** Styles for the main content in the page. *********************************/
 
 /* Default settings */
 #page {
-  background-color: #FFFFFF;
-  padding: 9px 10px 10px;
-  /*border: 1px inset #f0f0f0;
+	background-color: #FFFFFF;
+	padding: 9px 10px 10px;
+	border-top-width: 1px;
+	border-top-style: dotted;
+	border-top-color: #CCCCCC;  /*border: 1px inset #f0f0f0;
   border-top: none;
   border-bottom: none;*/
 }
@@ -303,7 +309,6 @@ table.upload td.remove- a.remove2-:active { color:#ff0000 }
 .warning {
 	color:red;
 	font-weight:bold;
-	border: 1px dotted #d893a1;
 	/*background-color: #fbe6f2;*/
 	background-color: #fcfcfc;
 	background-image: url(../../../images/warning.gif);
@@ -312,6 +317,18 @@ table.upload td.remove- a.remove2-:active { color:#ff0000 }
 	background-position: 10px 10px;
 	margin: 10px;
 	padding: 10px 10px 10px 40px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: dotted;
+	border-right-style: none;
+	border-bottom-style: dotted;
+	border-left-style: none;
+	border-top-color: #d893a1;
+	border-right-color: #d893a1;
+	border-bottom-color: #d893a1;
+	border-left-color: #d893a1;
 }
 
 /* CSS form formater */
@@ -443,8 +460,29 @@ white-space: nowrap;
 	color: #FF0000;
 }
 
+#search {
+margin: 0 auto 0;
+overflow: hidden;
+float:right;
+text-align:left;
+position:relative;
+}
+
+
+#header-top{margin: 0 auto 0;
+overflow: hidden;
+float:left;
+text-align:left;
+position:relative;
+font-size:1.3em;
+}
+
 #login {
- text-align:right;
+margin: 0 auto 0;
+overflow: hidden;
+float:right;
+text-align:left;
+position:relative;
 }
 
 #login form {display:inline;}
@@ -452,7 +490,6 @@ white-space: nowrap;
 
 /* temp */
 
-#header-top{ width:100%;}
 
 .topnav {float:right;
 font-size:0.6875em;
