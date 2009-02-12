@@ -44,7 +44,6 @@ if ($this->method == 'edit')
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/autocomplete.js\"></script>\n";
 }
 ?>
-  <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 <?php
 // Doubleclick edit feature.
@@ -65,11 +64,12 @@ if ($user["doubleclickedit"] == "Y") {?>
 // Also, here we show message (see beginning of this file)
 ?>
 <body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
-	<div class="header">
-		<div id="header-top">
-			<h1><span class="main"><?php echo $this->config["wakka_name"] ?>: </span><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></h1>
-
-		 
+<div id="mainwrapper">
+	<div id="header">
+		<div id="header-main">
+			<div id="header-top">
+			<strong><?php echo $this->config["wakka_name"] ?>: </strong><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
+		</div>
 		<div id="login">
 <?php
 // If user are logged, Wacko shows "You are UserName"
@@ -129,7 +129,21 @@ else
 			}
 	echo "\n</ol></div>";
 ?>
+<div id="search">
+<?php
+// Opens Search form
+echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get");
 
+// Searchbar
+?>
+<span class="search nobr"><label for="phrase"><?php echo $this->GetResourceValue("SearchText"); ?></label><input
+	type="text" name="phrase" id="phrase" size="15" /><input class="submitinput" type="submit" title="<?php echo $this->GetResourceValue("SearchButtonText") ?>" alt="<?php echo $this->GetResourceValue("SearchButtonText") ?>" value="»"/></span>
+<?php
+
+// Search form close
+echo $this->FormClose();
+?>
+</div>
 </div>
 </div>
 <div id="content">
