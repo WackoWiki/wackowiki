@@ -13,7 +13,7 @@ if (!function_exists('links_tree_view'))
 
 			if (is_array($pages))
 			{
-				$head=split(" :: ",str_replace("]]", "", str_replace("[[", "", $wacko->GetConfigValue("navigation_links"))));
+				$head=split(" / ",str_replace("))", "", str_replace("((", "", $wacko->GetConfigValue("default_bookmarks"))));
 
 				foreach ($pages as $page)
 				{
