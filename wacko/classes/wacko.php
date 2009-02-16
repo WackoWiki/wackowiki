@@ -199,6 +199,7 @@ class Wacko
 				}
 			}
 			closedir($handle);
+			sort($langlist, SORT_STRING);
 			$this->_langlist = $langlist;
 		}
 		return $this->_langlist;
@@ -2473,6 +2474,7 @@ class Wacko
 			$themelist[] = $file;
 		}
 		closedir($handle);
+		sort($themelist, SORT_STRING);
 		if ($allow = $this->GetConfigValue("allow_themes"))
 		{
 			$ath = explode(",",$allow);
