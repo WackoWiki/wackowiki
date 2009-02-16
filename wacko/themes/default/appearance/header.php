@@ -84,8 +84,8 @@ echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $t
 else
    {
    // Show Register / Login link
-	echo "<ul>\n<li>".$this->ComposeLinkToPage($this->GetResourceValue("RegistrationPage"), "", $this->GetResourceValue("RegistrationPage"), 0)."</li>\n";
-	echo "<li>".$this->ComposeLinkToPage($this->GetResourceValue("LoginPage").($this->config["rewrite_mode"] ? "?" : "&amp;")."goback=".$this->SlimUrl($this->tag), "", $this->GetResourceValue("LoginPage"), 0)."</li>\n</ul>"; 
+	echo "<ul>\n<li>".$this->ComposeLinkToPage($this->GetResourceValue("LoginPage").($this->config["rewrite_mode"] ? "?" : "&amp;")."goback=".$this->SlimUrl($this->tag), "", $this->GetResourceValue("LoginPage"), 0)."</li>\n";
+	echo "<li>".$this->ComposeLinkToPage($this->GetResourceValue("RegistrationPage"), "", $this->GetResourceValue("RegistrationPage"), 0)."</li>\n</ul>"; 
    }
 
 // End if

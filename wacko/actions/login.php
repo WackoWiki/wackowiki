@@ -63,7 +63,7 @@ else
 	print($this->FormOpen());
 	?>
 <input type="hidden" name="action" value="login" />
-<input type="hidden" name="goback" value="<?php echo $_REQUEST["goback"];?>" />
+<input type="hidden" name="goback" value="<?php echo stripslashes($_REQUEST["goback"]);?>" />
 <div class="cssform">
   <h3><?php echo $this->GetResourceValue("LoginWelcome"); ?>&nbsp; <small><?php echo $this->FormatResourceValue("LoginWelcome2"); ?></small> </h3>
   <?php
