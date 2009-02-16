@@ -14,9 +14,10 @@ $wakkaResource = array(
   "RegistrationPassword" => "Wachtwoord (>=5 tekens)",
   "RegistrationButton" => "Registreer mij!",
   "RegistrationNameOwned" => "Deze naam is al geregistreerd, Kies a.u.b. een andere.",
+  "RegistrationPage" => "Registratie",
 // login panel
   "LoginWelcome" => "Inloggen",
-  "LoginWelcome2" => " . . . . . . . . [[/Registration Registreren]]",
+  "LoginWelcome2" => " . . . . . . . . [[/Registratie Registreren]]",
   "LoginName" => "((WackoWiki:Doc/English/WikiName Gebruikersnaam))",
   "LoginPassword" => "Wachtwoord",
   "LoginButton" => "Login!",
@@ -355,7 +356,7 @@ $wakkaResource = array(
   "Next" => "Next",
   "Prev" => "Prev",
 
-  "default_bookmarks" => "((PaginaIndex Index))\n((LaatsteWijzigingen Wijzigingen))\n((LaatsteOpmerkingen Opmerkingen))\n((Gebruikers))\n((Registratie))",
+  "default_bookmarks" => "((PaginaIndex Index))\n((LaatsteWijzigingen Wijzigingen))\n((LaatsteOpmerkingen Opmerkingen))\n((Gebruikers))",
   "site_bookmarks" => "((PaginaIndex Index)) / ((LaatsteWijzigingen Wijzigingen)) / ((LaatsteOpmerkingen Opmerkingen))",
 
 //icons

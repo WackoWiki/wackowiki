@@ -14,6 +14,7 @@ $wakkaResource = array(
   "RegistrationPassword" => "Has³o (min. 5 znaków)",
   "RegistrationButton" => "Zarejestruj!",
   "RegistrationNameOwned" => "Przepraszamy! Ta nazwa jest ju¿ zajêta. Prosimy o wybranie innej nazwy u¿ytkownika.",
+  "RegistrationPage" => "Rejestracja",
 // login panel
   "LoginWelcome" => "Zaloguj siê",
   "LoginWelcome2" => " . . . . . . . . a mo¿e potrzebujesz siê [[/Rejestracja zarejestrowaæ]]?",
@@ -352,7 +353,7 @@ $wakkaResource = array(
   "Next" => "Next",
   "Prev" => "Prev",
 
-  "default_bookmarks" => "((IndexStron Index))\n((OstatnieZmiany Zmiany))\n((OstatnioKomentowane Komentowane))\n((U¿ytkownicy))\n((Rejestracja))",
+  "default_bookmarks" => "((IndexStron Index))\n((OstatnieZmiany Zmiany))\n((OstatnioKomentowane Komentowane))\n((U¿ytkownicy))",
   "site_bookmarks" => "((IndexStron Index)) / ((OstatnieZmiany Zmiany)) / ((OstatnioKomentowane Komentowane))",
 
 //icons

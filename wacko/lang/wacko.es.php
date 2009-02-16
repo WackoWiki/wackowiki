@@ -14,9 +14,10 @@ $wakkaResource = array(
   "RegistrationPassword" => "Contraseña (5+ letras)",
   "RegistrationButton" => "Regístrate",
   "RegistrationNameOwned" => "Este nombre ya existe. Escoge otro por favor.",
+  "RegistrationPage" => "Registrarse",
 // login panel
   "LoginWelcome" => "Conectar",
-  "LoginWelcome2" => " . . . . . . . . [[/Registration Registrarse]]",
+  "LoginWelcome2" => " . . . . . . . . [[/Registrarse Registrarse]]",
   "LoginName" => "((WackoWiki:Doc/English/WikiName NombreDeUsuario))",
   "LoginPassword" => "Contraseña",
   "LoginButton" => "Conectar",
@@ -352,7 +353,7 @@ $wakkaResource = array(
   "Next" => "Next",
   "Prev" => "Prev",
 
-  "default_bookmarks" => "((IndiceDePaginas Indice))\n((UltimasModificaciones Modificaciones))\n((UltimosCommentarios Commentarios))\n((Usuarios))\n((Registrarse))",
+  "default_bookmarks" => "((IndiceDePaginas Indice))\n((UltimasModificaciones Modificaciones))\n((UltimosCommentarios Commentarios))\n((Usuarios))",
   "site_bookmarks" => "((IndiceDePaginas Indice)) / ((UltimasModificaciones Modificaciones)) / ((UltimosCommentarios Commentarios))",
 
 //icons

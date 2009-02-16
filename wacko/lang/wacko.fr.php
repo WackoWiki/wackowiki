@@ -13,9 +13,10 @@ $wakkaResource = array(
   "RegistrationPassword" => "Mot de Passe (au moins 5 caractères)&nbsp;",
   "RegistrationButton" => "Enregistrez-moi&nbsp;!",
   "RegistrationNameOwned" => "Ce nom est déjà utilisé. Merci d&rsquo;en choisir un autre.",
+  "RegistrationPage" => "Enregistrement",
 // login panel
   "LoginWelcome" => "Connexion",
-  "LoginWelcome2" => " . . . . . . . . [[/Registration Enregistrement]]",
+  "LoginWelcome2" => " . . . . . . . . [[/Enregistrement Enregistrement]]",
   "LoginName" => "((WackoWiki:Doc/Francophone/PrenomNom PrénomNom))",
   "LoginPassword" => "Mot de Passe&nbsp;",
   "LoginButton" => "Connexion",
@@ -351,7 +352,7 @@ $wakkaResource = array(
   "Next" => "Suivant",
   "Prev" => "Précédent",
 
-  "default_bookmarks" => "((Index))\n((Modifications))\n((Commentaires))\n((Utilisateurs))\n((Enregistrement))",
+  "default_bookmarks" => "((Index))\n((Modifications))\n((Commentaires))\n((Utilisateurs))",
   "site_bookmarks" => "((Index)) / ((Modifications)) / ((Commentaires))",
 
 //icons

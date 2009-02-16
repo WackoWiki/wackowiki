@@ -14,6 +14,7 @@ $wakkaResource = array(
   "RegistrationPassword" => "Parool (vähemalt 5 tähemärki)",
   "RegistrationButton" => "Registreerun",
   "RegistrationNameOwned" => "Valitud kasutajanimi on juba kasutusel. Palun vali mõni teine.",
+  "RegistrationPage" => "Registration",
 // login panel
   "LoginWelcome" => "Logi sisse",
   "LoginWelcome2" => " . . . . . . . . [[/Registration Registereeri]]",
@@ -353,7 +354,7 @@ $wakkaResource = array(
   "Next" => "Next",
   "Prev" => "Prev",
 
-  "default_bookmarks" => "SisuKord\n((ViimasedMuudatused Muudatused))\n((ViimatiKommenteeritud Kommenteeritud))\n((Kasutajad))\n((Registration Registreerimine))",
+  "default_bookmarks" => "SisuKord\n((ViimasedMuudatused Muudatused))\n((ViimatiKommenteeritud Kommenteeritud))\n((Kasutajad))",
   "site_bookmarks" => "SisuKord / ((ViimasedMuudatused Muudatused)) / ((ViimatiKommenteeritud Kommenteeritud))",
 
 //icons

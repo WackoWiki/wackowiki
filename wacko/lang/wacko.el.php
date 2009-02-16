@@ -14,6 +14,7 @@ $wakkaResource = array(
   "RegistrationPassword" => "Συνθηματικό (5+ χαρακτήρες)",
   "RegistrationButton" => "Έγγραψέ με!",
   "RegistrationNameOwned" => "Αυτό το όνομα χρήστη είναι ήδη καταχωρημένο. Παρακαλώ επιλέξτε ένα διαφορετικό.",
+  "RegistrationPage" => "Registration",
 // login panel
   "LoginWelcome" => "Σύνδεση",
   "LoginWelcome2" => " . . . . . . . . ((/Registration Εγγραφή))",
@@ -353,7 +354,7 @@ $wakkaResource = array(
   "Next" => "Επόμενο",
   "Prev" => "Προηγούμενο",
 
-  "default_bookmarks" => "((PageIndex Index))\n((RecentChanges Changes))\n((RecentlyCommented Comments))\n((Users))\n((Registration))",
+  "default_bookmarks" => "((PageIndex Index))\n((RecentChanges Changes))\n((RecentlyCommented Comments))\n((Users))",
   "site_bookmarks" => "((PageIndex Index)) / ((RecentChanges Changes)) / ((RecentlyCommented Comments))",
 
 //icons

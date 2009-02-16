@@ -14,6 +14,7 @@ $wakkaResource = array(
   "RegistrationPassword" => "Passwort (5+ Zeichen)",
   "RegistrationButton" => "Benutzer registrieren",
   "RegistrationNameOwned" => "Dieser Name ist bereits vergeben. Bitte wähle einen anderen Namen.",
+  "RegistrationPage" => "Registrierung",
 // login panel
   "LoginWelcome" => "Anmeldung",
   "LoginWelcome2" => " . . . . . . . . ((Registrierung))",
@@ -356,8 +357,7 @@ $wakkaResource = array(
   "default_bookmarks" => "((SeitenIndex Index))\n".
   						 "((LetzteAenderungen Änderungen))\n".
 						 "((LetzteKommentare Kommentare))\n".
-						 "((Benutzer))\n".
-						 "((Registrierung))",
+						 "((Benutzer))",
 						
   "site_bookmarks" => 	"((SeitenIndex Index))\n".
   						"((LetzteAenderungen Änderungen))\n".

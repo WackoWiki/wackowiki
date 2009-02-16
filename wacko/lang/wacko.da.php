@@ -14,6 +14,7 @@ $wakkaResource = array(
   "RegistrationPassword" => "Password (5+ chars)",
   "RegistrationButton" => "Registrer mig!",
   "RegistrationNameOwned" => "Dette brugernavn er allerede i brug. Vælg et andet.",
+  "RegistrationPage" => "Registrering",
 // login panel
   "LoginWelcome" => "Log ind",
   "LoginWelcome2" => " . . . . . . . . ((/Registrering Registrering))",
@@ -352,7 +353,7 @@ $wakkaResource = array(
   "Next" => "Næste",
   "Prev" => "Forrige",
 
-  "default_bookmarks" => "((Indhold))\n((Opdateringer))\n((Kommentarer))\n((Brugere))\n((Registrering))",
+  "default_bookmarks" => "((Indhold))\n((Opdateringer))\n((Kommentarer))\n((Brugere))",
   "site_bookmarks" => "((Indhold)) / ((Opdateringer)) / ((Kommentarer))",
 
 //icons
