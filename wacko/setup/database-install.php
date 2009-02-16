@@ -238,6 +238,9 @@ switch($config2["database_driver"])
 				case "mysqli_legacy":
 					require_once("setup/database_mysql.php");
 					require_once("setup/database_mysql_updates.php");
+					
+					if ( !isset ( $wakkaConfig["database_port"] ) ) $wakkaConfig["database_port"] = "3306";
+					if (!$port = trim($wakkaConfig["database_port"])) $port = "3306";
 
 					print("         <ul>\n");
 
