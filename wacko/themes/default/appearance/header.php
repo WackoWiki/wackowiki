@@ -36,7 +36,7 @@ echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 ?>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
 <?php 
-// protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
+// autocomplete.js, protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages.
 if ($this->method == 'edit') 
 {
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
@@ -47,7 +47,7 @@ if ($this->method == 'edit')
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 <?php
 // Doubleclick edit feature.
-// Enabled only for registered users who don't swith it off.
+// Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->GetUser())
 if ($user["doubleclickedit"] == "Y") {?>
   <script type="text/javascript">
@@ -83,14 +83,9 @@ echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $t
    }
 else
    {
-   // Begin Login form
-	echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
-      <input type="hidden" name="action" value="login" />
-   <span class="nobr"><input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" /><strong><label for="loginname"><?php echo $this->GetResourceValue("LoginWelcome") ?>:&nbsp;</label></strong>
-   <input type="text" id="loginname" name="name" size="18" class="login" />&nbsp;<label for="loginpassword"><?php echo $this->GetResourceValue("LoginPassword") ?>:&nbsp;</label><input type="password" id="loginpassword" name="password" class="login" size="8" />&nbsp;<input type="image" src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" style="vertical-align:top" /></span> <?php
-   
-   // Closing Login form
-	echo $this->FormClose();
+   // Show Register / Login link
+	echo "<ul>\n<li>".$this->ComposeLinkToPage($this->GetResourceValue("RegistrationPage"), "", $this->GetResourceValue("RegistrationPage"), 0)."</li>\n";
+	echo "<li>".$this->ComposeLinkToPage($this->GetResourceValue("LoginPage").($this->config["rewrite_mode"] ? "?" : "&amp;")."goback=".$this->SlimUrl($this->tag), "", $this->GetResourceValue("LoginPage"), 0)."</li>\n</ul>"; 
    }
 
 // End if

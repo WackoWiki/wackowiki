@@ -14,6 +14,7 @@ $wakkaResource = array(
   "RegistrationPassword" => "Parola (nu mai putin de 5 simboluri)",
   "RegistrationButton" => "Inainte!",
   "RegistrationNameOwned" => "Numele deja este ocupat!",
+  "RegistrationPage" => "Registration",
 // login panel
   "LoginWelcome" => "Entrarea",
   "LoginWelcome2" => " . . . . . . . . [[/Registration Inregistrarea]]",
@@ -352,7 +353,7 @@ $wakkaResource = array(
   "Next" => "Next",
   "Prev" => "Prev",
 
-  "default_bookmarks" => "((PageIndex Index))\n((RecentChanges Changes))\n((RecentlyCommented Comments))\n((Users))\n((Registration))",
+  "default_bookmarks" => "((PageIndex Index))\n((RecentChanges Changes))\n((RecentlyCommented Comments))\n((Users))",
   "site_bookmarks" => "((PageIndex Index)) / ((RecentChanges Changes)) / ((RecentlyCommented Comments))",
 
 //icons

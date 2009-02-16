@@ -487,7 +487,34 @@ position:relative;
 
 #login form {display:inline;}
 
+#login ul {    
+list-style: none;
+margin: 0;
+padding: 0; }
 
+#login li {
+border-left: 1px solid #aaa;
+float: left;
+line-height: 1.2em;
+margin: 0 .5em 0 -.5em;
+padding: 0 .5em 0 .5em;
+white-space: nowrap;
+}
+#login li a {
+ display: inline;
+ border: none;
+ text-decoration: none;
+}
+#login li a:visited {
+ color: #003399;
+}
+#login li a:hover {
+ color: #B90022;
+ text-decoration: underline;
+}
+#login li a:active  {
+	color: #FF0000;
+}
 /* temp */
 
 

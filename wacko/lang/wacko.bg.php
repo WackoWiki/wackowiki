@@ -14,6 +14,7 @@ $wakkaResource = array(
   "RegistrationPassword" => "Парола (не по-къса от 5 символа)",
   "RegistrationButton" => "Карай нататък!",
   "RegistrationNameOwned" => "Желаното име е вече заето!",
+  "RegistrationPage" => "Регистрация",
 // login panel
   "LoginWelcome" => "Вход",
   "LoginWelcome2" => " . . . . . . . . [[/Регистрация Регистрация]]",
@@ -352,7 +353,7 @@ $wakkaResource = array(
   "Next" => "Вперед",
   "Prev" => "Назад",
 
-  "default_bookmarks" => "((Каталог))\n((ПоследниПромени Промени))\n((НовиКоментари Коментари))\n((Потребители))\n((Регистрация))",
+  "default_bookmarks" => "((Каталог))\n((ПоследниПромени Промени))\n((НовиКоментари Коментари))\n((Потребители))",
   "site_bookmarks" => "((Каталог)) / ((ПоследниПромени Промени)) / ((НовиКоментари Коментари))",
 //icons
   "outericon" => '<img src="{theme}icons/web.gif" alt="" />',

@@ -14,7 +14,7 @@ InsertPage('Opdateringer', '{{RecentChanges}}', $lng);
 InsertPage('Kommentarer', '{{RecentlyCommented}}', $lng);
 InsertPage('Indhold', '{{PageIndex}}', $lng);
 InsertPage('Brugere', '{{LastUsers}}', $lng);
-InsertPage('Registration', '{{Registration}}', $lng);
+InsertPage('Registrering', '{{Registration}}', $lng);
 
 InsertPage('Password', '{{ChangePassword}}', $lng);
 InsertPage('Søgning', '{{Search}}', $lng);
