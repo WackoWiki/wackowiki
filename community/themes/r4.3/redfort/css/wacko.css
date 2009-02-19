@@ -268,6 +268,14 @@ table.upload td.remove- A.remove2-:ACTIVE { color:#ff0000 }
  .toolbar .btn-pressed {
   background: ButtonHighlight;
  }
+ .toolbar .btn-separator {
+border-left:1px solid buttonshadow;
+border-right:1px solid buttonhighlight;
+height:18px;
+margin:3px;
+padding:0;
+width:0;
+}
  .edname-w, .edname-r, .edname-s  
             { font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
  .edname-w  { background: #1E9905; }

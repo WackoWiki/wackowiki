@@ -549,6 +549,14 @@ div .action-content {
 	background-color:ButtonHighlight;
 	color:		#000;
 }
+.toolbar .btn-separator {
+border-left:1px solid buttonshadow;
+border-right:1px solid buttonhighlight;
+height:18px;
+margin:3px;
+padding:0;
+width:0;
+}
 .edname-w, .edname-r, .edname-s {
 	background-color:	transparent;
 	border:			3px solid #d4d0c8;

@@ -407,6 +407,15 @@ border-color:ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
 background:ButtonHighlight;
 }
 
+.toolbar .btn-separator {
+border-left:1px solid buttonshadow;
+border-right:1px solid buttonhighlight;
+height:18px;
+margin:3px;
+padding:0;
+width:0;
+}
+
 .toolbar img {
 height:20px;
 width:20px;

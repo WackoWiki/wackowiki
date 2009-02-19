@@ -73,19 +73,19 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
  this.addButton("h1","Heading 1","'==','==',0,1");
  this.addButton("h2","Heading 2","'===','===',0,1");
  this.addButton("h3","Heading 3","'====','====',0,1");
- this.addButton(" ");
+ this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
  this.addButton("bold","Bold","'**','**'");
  this.addButton("italic","Italic","'//','//'");
  this.addButton("underline","Underline","'__','__'");
  this.addButton("strike","Strikethrough","'--','--'");
 // this.addButton("fixed","Monospace","'##','##'");
- this.addButton(" ");
+ this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
  this.addButton("ul","List","'  * ','',0,1,1");
  this.addButton("ol","Numbered list","'  1. ','',0,1,1");
- this.addButton(" ");
+ this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
  this.addButton("outdent","Outdent","","document.getElementById('" + this.id + "')._owner.unindent");
  this.addButton("indent","Indent","'  ','',0,1");
- this.addButton(" ");
+ this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
 // this.addButton("code","Code","'%% ',' %%',2");
  this.addButton("hr","Line","'','\\n----\\n',2");
 // this.addButton("signature","Signature","'::@::',' ',1");
@@ -96,7 +96,7 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
  if (this.autocomplete) this.autocomplete.addButton();
 
  this.addButton("createtable","Insert Table","'','\\n#|\\n|| | ||\\n|| | ||\\n|#\\n',2");
- this.addButton(" ");
+ this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
  this.addButton("help","Help & About","","document.getElementById('" + this.id + "')._owner.help");
  this.addButton("customhtml",'<td><div style="font:12px Arial;text-decoration:underline; padding:4px;" id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
             + 'onmouseout=\'this.className="btn-";\' class="btn-" '
