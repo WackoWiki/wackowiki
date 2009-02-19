@@ -212,9 +212,31 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
       ?>
         <?php echo $this->GetResourceValue("AttachComment"); ?><br />
         <?php echo $this->FormOpen("addcomment"); ?>
-          <textarea name="body" rows="6" style="width: 95%">
-</textarea>
+          <textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
+<?php
+            // captcha code starts
+
+            // Only show captcha if the admin enabled it in the config file
+            if($this->GetConfigValue("captcha_new_comment"))
+               {
+                  // Don't load the captcha at all if the GD extension isn't enabled
+                  if(extension_loaded('gd'))
+                     {
+                        if(strpos($this->GetUserName(), '.'))
+                           {
+          ?>
+<p><?php echo $this->GetResourceValue("Captcha");?>:</p>
+<img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetResourceValue("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetResourceValue("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("root_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetResourceValue("CaptchaReload"); ?>" /></a>
 <br />
+<input type="text" name="word" maxlength="6" style="width: 273px;" />
+<br />
+<br />
+<?php
+                           }
+                     }
+               }
+            // end captcha
+?>
 <input type="submit" value="<?php echo $this->GetResourceValue("AttachCommentButton"); ?>" accesskey="s" />
 <?php echo $this->FormClose(); ?>
 <?php
