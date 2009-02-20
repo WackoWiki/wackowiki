@@ -77,7 +77,7 @@ H5 { font-family: Arial;   font-size: 14px; padding-top:10px; padding-bottom:5px
 .CancelBtn_Top { color:#666666; cursor:hand; font-size:10px; background:#cccccc; }
 .CancelBtn_Top_ { color:#666666; cursor:hand; font-size:10px; background:#dddddd; }
 
-#copyright {
+#credits {
   font-size: 11px;
   color: #AAAAAA;
   text-align: right;
@@ -182,8 +182,8 @@ A.denied:LINK, A.denied:VISITED { color: #666666; }
 A.denied:HOVER { color:#cc3300 }
 
 
-#copyright A:LINK, #copyright A:VISITED { color: #AAAAAA; }
-#copyright A:HOVER { color:#cc3300 }
+#credits A:LINK, #credits A:VISITED { color: #AAAAAA; }
+#credits A:HOVER { color:#cc3300 }
 
 .outerlink:LINK, .outerlink:VISITED { font-size:90%; font-family:Verdana; color:#000080 }
 .outerlink:HOVER { color:#cc3300 }

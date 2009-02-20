@@ -72,7 +72,7 @@ echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->Ge
 <?php 
 }
 ?>
-<div id="copyright"> 
+<div id="credits"> 
 <?php 
 /*
 if ($this->GetUser()){
