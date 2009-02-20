@@ -174,7 +174,7 @@ FORM, H1, H2, H3, H4, H5, H6 {
   padding-bottom: 20px;
 }
 
-#copyright {
+#credits {
 	font-size: 11px;
 	color: #EEEEEE;
 	text-align: center;
@@ -182,7 +182,7 @@ FORM, H1, H2, H3, H4, H5, H6 {
 	padding-bottom: 5px;
 }
 
-#copyright A {
+#credits A {
   color: #EEEEEE;
 }
 

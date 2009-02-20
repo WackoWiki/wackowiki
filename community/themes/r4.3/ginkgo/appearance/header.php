@@ -158,7 +158,7 @@ echo "</li></ul></div>";
             <?php 
 }
 echo "<hr noshade=\"noshade\" size=\"1\" />";	
-echo "<div class=\"copyright\">";
+echo "<div class=\"credits\">";
 print $this->Format( '{{hits}} Aufrufe' );
 echo "</div>";
 }

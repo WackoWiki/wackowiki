@@ -135,12 +135,12 @@ FORM, H1, H2, H3, H4, H5, H6 {
 	color: #AAAAAA;
 	padding-bottom: 20px;
 }
-#copyright {
+#credits {
 	font-size: 11px;
 	color: #AAAAAA;
 	text-align: right;
 }
-#copyright A {
+#credits A {
 	color: #AAAAAA;
 }
 .name {

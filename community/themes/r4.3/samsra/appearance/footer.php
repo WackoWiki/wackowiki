@@ -70,7 +70,7 @@ echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->Ge
 
 </div>
 
-<div id="copyright">
+<div id="credits">
 <?php 
 if ($this->GetUser()){
 	echo $this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion());

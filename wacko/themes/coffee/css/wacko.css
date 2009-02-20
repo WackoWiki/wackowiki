@@ -35,11 +35,11 @@ span.small {font-size: 80%}
 div#filesheader, div#commentsheader, div.footer {padding: 5px 10px; background-color: #FFEFD5; border-top: 1px solid #ccc; font-size: 90%}
 div.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-color: #FFE4B5;}
 div.searchbar input { border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;}
-div#copyright {clear: right; padding: 10px; color: #AAAAAA; font-size: 11px; text-align: right}
+div#credits {clear: right; padding: 10px; color: #AAAAAA; font-size: 11px; text-align: right}
 .commentform form { width: 100% }
 .commentform form textarea { width: 100%; padding: 0}
-.commentinfo, #copyright a { color: #AAAAAA; padding-bottom: 20px; }
-#copyright a { color: #AAAAAA;}
+.commentinfo, #credits a { color: #AAAAAA; padding-bottom: 20px; }
+#credits a { color: #AAAAAA;}
 
 /* paddings headers */
 

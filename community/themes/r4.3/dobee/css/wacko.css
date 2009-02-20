@@ -80,11 +80,11 @@ div.bookmarks {padding: 5px 10px; font-size: 90%; border-bottom: 1px solid #ccc;
 
 div#filesheader, div#commentsheader, div.footer {padding: 5px 10px; background-color: #DADADA; border-top: 1px solid #ccc; font-size: 90%}
 div.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-color: #FFE4B5;}
-#copyright {clear: right; color: #4C4749; font-size: 11px; text-align: right}
+#credits {clear: right; color: #4C4749; font-size: 11px; text-align: right}
 .commentform form { width: 100% }
 .commentform form textarea { width: 100%; padding: 0}
 .commentinfo, { color: #AAAAAA }
-#copyright a { color: #4C4749 }
+#credits a { color: #4C4749 }
 
 /* Text headings */
 

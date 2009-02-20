@@ -180,17 +180,17 @@ white-space: nowrap;
 
 
 
-#copyright {
+#credits {
   font-size: 11px;
   color: #AAAAAA;
   text-align: right;
 }
 
-#copyright a {
+#credits a {
   color: #AAAAAA;
 }
 
-#copyright a:active {
+#credits a:active {
   color: #FF0000;
 }
 
