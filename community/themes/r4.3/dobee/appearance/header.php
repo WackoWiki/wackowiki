@@ -117,9 +117,9 @@ if ($user = $this->GetUser()){
 						<td class="modulecontent">
 						<div class="modulecontent"><?php
 						echo $this->ComposeLinkToPage($this->config["root_page"]);
-						echo "<HR color=#CCCCCC noshade size=1 />";
+						echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 						echo $this->Format(implode( "\n", $this->GetBookmarks()));
-						echo "<HR color=#CCCCCC noshade size=1 />";
+						echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 
 						if ($this->GetUser()) {
 							if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>
@@ -165,7 +165,7 @@ if ($user = $this->GetUser()){
 						<td class="modulecontent">
 						<div class="modulecontent"><?php
 						echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetResourceValue("RevisionTip")."\">".$this->GetPageTime()."</a>\n" : "";
-						echo "<HR color=#CCCCCC noshade size=1 />";
+						echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 
 						if ($this->HasAccess("write")) {
 							echo "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetResourceValue("EditTip")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/edit.gif\""."style=\"vertical-align: middle\""."\">".$this->GetResourceValue("EditText")."</a>\n";
@@ -204,10 +204,10 @@ if ($user = $this->GetUser()){
 							//print $this->Format( '{{TOC}}' );
 
 							if ($this->UserIsOwner()) {
-								echo "<HR color=#CCCCCC noshade size=1 />";
+								echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 								print($this->GetResourceValue("YouAreOwner"));
 							} else {
-								echo "<HR color=#CCCCCC noshade size=1 />";
+								echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 								if ($owner = $this->GetPageOwner()) {
 									print($this->GetResourceValue("Owner").$this->Link($owner));
 								} else if (!$this->page["comment_on"]) {

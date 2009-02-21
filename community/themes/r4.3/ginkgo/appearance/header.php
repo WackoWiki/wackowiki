@@ -166,7 +166,7 @@ echo "</div>";
             <div>
               <?php 
         					#    if ($this->UserIsOwner()) {
-		                    #   		echo "<hr color=#CCCCCC noshade size=1 />";
+		                    #   		echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 							#		print($this->GetResourceValue("YouAreOwner"));
 							#    } else {
 		                    #  		echo "<hr noshade=\"noshade\" size=\"1\" />";
