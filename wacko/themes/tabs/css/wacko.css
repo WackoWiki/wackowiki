@@ -48,7 +48,7 @@ H5 { font-family: Arial;   font-size: 14px; padding-top:10px; padding-bottom:5px
 
 .Shade {  clear:all; background:#ffffff;
           height:6px; border-top: 1px solid #444444; }
-#page, .ShPage { background:#ffffff; padding:9px 10px 30px 10px; }
+#page { background:#ffffff; padding:9px 10px 30px 10px; }
 .TextArea { width:100%; height:450px; border: 3px ridge; }
 
 .TabText { padding:1px 5px 1px 5px; font-size:12px; }
