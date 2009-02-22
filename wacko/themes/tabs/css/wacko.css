@@ -91,13 +91,13 @@ BODY, TD, P, LI, #page { font-family: Georgia, Verdana; font-size:95% }
 
 /* colors */
 #page { color:#444444 }
-STRIKE, S { color:#999999 }
-STRIKE, S A:LINK { color:#999999 }
-STRIKE, S A:VISITED { color:#999999 }
-STRIKE, S A:HOVER { color:#cc3300 }
-STRIKE, S A.outerlink:LINK { color:#999999 }
-STRIKE, S A.outerlink:VISITED { color:#999999 }
-STRIKE, S A.outerlink:HOVER { color:#cc3300 }
+del { color:#999999 }
+del A:LINK { color:#999999 }
+del A:VISITED { color:#999999 }
+del A:HOVER { color:#cc3300 }
+del A.outerlink:LINK { color:#999999 }
+del A.outerlink:VISITED { color:#999999 }
+del A.outerlink:HOVER { color:#cc3300 }
 
 cite {color:#888800;font-style:normal;}
 .center { text-align: center; }
@@ -107,8 +107,8 @@ cite {color:#888800;font-style:normal;}
 /* diffs */
 .additions { color: #008800; }
 .deletions { color: #880000; }
-.add { font-weight: bold; color:#c00; text-decoration: underline; }
-.del { font-style: italic; color:#c00; text-decoration: line-through; }
+ins.diff { font-weight: bold; color:#c00; text-decoration: underline; }
+del.diff { font-style: italic; color:#c00; text-decoration: line-through; }
 .error { color: #CC3333; font-weight: bold; }
 
 .time{ color:#999999; font-size: 9px; margin:5px 20px;}

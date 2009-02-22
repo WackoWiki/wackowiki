@@ -113,11 +113,11 @@ dfn {
 }
 
 /* Strike through text: CODE --text-- */
-s {
+del {
 	background-color:	transparent;
 	color:			#999;
 }
-s a {
+del a {
 	background-color:	transparent;
 	color:			#999;
 }
@@ -597,11 +597,11 @@ width:0;
 }
 
 /* Default differences */
-.add {
+ins.diff {
 	background-color:	#efe;
 	color:			#3c3;
 }
-.del {
+del.diff {
 	background-color:	#fee;
 	color:			#c33;
 }
