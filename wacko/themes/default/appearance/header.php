@@ -132,7 +132,7 @@ echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get");
 // Searchbar
 ?>
 <span class="search nobr"><label for="phrase"><?php echo $this->GetResourceValue("SearchText"); ?></label><input
-	type="text" name="phrase" id="phrase" size="15" /><input class="submitinput" type="submit" title="<?php echo $this->GetResourceValue("SearchButtonText") ?>" alt="<?php echo $this->GetResourceValue("SearchButtonText") ?>" value="»"/></span>
+	type="text" name="phrase" id="phrase" size="15" /><input class="submitinput" type="submit" title="<?php echo $this->GetResourceValue("SearchButtonText") ?>" alt="<?php echo $this->GetResourceValue("SearchButtonText") ?>" value="<?php echo $this->GetResourceValue("SearchButtonText") ?>"/></span>
 <?php
 
 // Search form close
