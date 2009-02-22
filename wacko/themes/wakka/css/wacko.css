@@ -305,26 +305,24 @@ dfn {
 * html dfn {
 	background: url(javascript:DOTS) repeat-x bottom left;
 }
-STRIKE, S {
+del {
 	color:#999999
 }
-STRIKE A:VISITED, S A:LINK {
+del A:VISITED, del A:LINK {
 	color:#999999
 }
-STRIKE A:VISITED, S A:VISITED {
-	color:#999999
-}
+
 cite {
 	color:#888800;
 	font-style:normal;
 }
-.add {
+ins.diff {
 	font-weight: bold;
 	color:#008800;
 	text-decoration: underline;
 	background-color: #efe;
 }
-.del {
+del.diff {
 	font-style: italic;
 	color:#c00;
 	text-decoration: line-through;

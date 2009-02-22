@@ -300,14 +300,13 @@ width:0;
 dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
 * html dfn { \background: url(javascript:DOTS) repeat-x bottom left; }
 
-STRIKE, S { color:#999999 }    
-STRIKE A:VISITED, S A:LINK { color:#999999 }
-STRIKE A:VISITED, S A:VISITED { color:#999999 }
-STRIKE IMG, S IMG { filter:Gray } 
+del { color:#999999 }    
+del A:VISITED, del A:LINK { color:#999999 }
+
 cite {color:#888800;font-style:normal;}
 
-.add { font-weight: bold; color:#c00; text-decoration: underline; }
-.del { font-style: italic; color:#c00; text-decoration: line-through; }
+ins.diff { font-weight: bold; color:#c00; text-decoration: underline; }
+del.diff { font-style: italic; color:#c00; text-decoration: line-through; }
 
 .nobr {white-space: nowrap}
 

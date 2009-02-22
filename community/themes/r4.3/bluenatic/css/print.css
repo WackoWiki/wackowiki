@@ -103,7 +103,7 @@ dfn {
 }
 
 /* Strike through text: CODE --text-- */
-s {
+del {
 	color:			#000;
 }
 

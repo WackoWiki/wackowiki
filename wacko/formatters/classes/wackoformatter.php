@@ -436,13 +436,13 @@ class WackoFormatter
 		else if (preg_match("/^\xA4\xA4((\S.*?\S)|(\S))\xA4\xA4$/s", $thing, $matches))
 		{
 			$this->br = 0;
-			return "<span class=\"del\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</span>";
+			return "<del class=\"diff\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</del>";
 		}
 		// Inserted
 		else if (preg_match("/^\xA3\xA3((\S.*?\S)|(\S))\xA3\xA3$/s", $thing, $matches))
 		{
 			$this->br = 0;
-			return "<span class=\"add\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</span>";
+			return "<ins class=\"diff\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</ins>";
 		}
 		// bold
 		else if (preg_match("/^\*\*(.*?)\*\*$/", $thing, $matches))
@@ -578,7 +578,7 @@ class WackoFormatter
 		// strike
 		else if (preg_match("/^--((\S.*?\S)|(\S))--$/s", $thing, $matches))    //NB: wrong
 		{
-			return "<s>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</s>";
+			return "<del>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</del>";
 		}
 		// definitions
 		else if ((preg_match("/^\(\?(.+?)(==|\|\|)(.*)\?\)$/", $thing, $matches)) ||
