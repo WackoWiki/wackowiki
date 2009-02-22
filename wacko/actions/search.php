@@ -12,22 +12,17 @@ if ($vars[0] != "") $phrase = $vars[0]; else { $phrase=""; $form=1; }
 if ($form)
 {
 	echo $this->FormOpen("", "", "get") ?>
-<table border="0" cellspacing="0" cellpadding="0">
-	<tr>
-		<td><?php echo $this->GetResourceValue("SearchFor");?>:&nbsp;</td>
-		<td><input name="phrase" size="40"
+
+<label for="searchfor"><?php echo $this->GetResourceValue("SearchFor");?></label>:&nbsp;<br />
+<input name="phrase" id="searchfor" size="40"
 			value="<?php echo htmlspecialchars($_REQUEST["phrase"]) ?>" /> <input
 			type="submit"
-			value="<?php echo $this->GetResourceValue("SearchButtonText"); ?>" /></td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<td><input type="checkbox" name="topic"
+			value="<?php echo $this->GetResourceValue("SearchButtonText"); ?>" />
+			<br />
+	<input type="checkbox" name="topic"
 		<?php if ($mode == "topic") echo "CHECKED"; ?> id="checkboxSearch" />
 		<label for="checkboxSearch"><?php echo $this->GetResourceValue("TopicSearchText"); ?></label>
-		</td>
-	</tr>
-</table>
+		
 		<?php
 		echo $this->FormClose();
 }
