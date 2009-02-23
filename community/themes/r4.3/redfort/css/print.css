@@ -20,6 +20,10 @@ TEXTAREA { font-family: MonoCondensedCTT, Lucida Console, sans; color:#222222; l
 
 cite {color:#888800;font-style:normal;}
 .cite {color:#ff0000;font-style:normal;}
+
+/* underline text: CODE __text__ */
+.underline { text-decoration:underline; }
+
 .mark { color: #00000; border:1px solid #000; background: #ddd; }
 
 .center { text-align: center; }

@@ -603,6 +603,9 @@ tt {
 	color:#ff0000;
 	font-style:normal;
 }
+
+.underline { text-decoration:underline; }
+
 /* .mark  { color: #008800;font-style:normal; } */
 .mark {
 	color: #000;

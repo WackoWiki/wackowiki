@@ -454,10 +454,10 @@ class WackoFormatter
 		{
 			return "<em>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</em>";
 		}
-		// underlinue
+		// underline
 		else if (preg_match("/^__(.*?)__$/", $thing, $matches))
 		{
-			return "<u>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</u>";
+			return "<span class=\"underline\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</span>";
 		}
 		// monospace
 		else if (preg_match("/^\#\#(.*?)\#\#$/", $thing, $matches) ||
