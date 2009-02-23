@@ -158,8 +158,6 @@ del.diff { font-style: italic; color:#c00; text-decoration: line-through; }
 .notes { color: #888800; }
 .revisioninfo { color: #AAAAAA;  padding-bottom: 20px; }
 
-
-
 /* for include */
 .name { text-align: right; font-size: 10px; }
 .include { background-color: #f8f8f8; padding: 8px; }
@@ -171,8 +169,6 @@ table.dtable { width:100%; border: 0px none; border-collapse: collapse; }
 table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
 .missingpage { border-bottom: 1px dashed orange; }
 
-
-
 /* anchors */
 A:LINK { color: #0020cc; }
 A:VISITED { color: #8020cc; }
@@ -180,7 +176,6 @@ A:HOVER { color:#cc3300 }
 A:ACTIVE { color:#ff0000; }
 A.denied:LINK, A.denied:VISITED { color: #666666; }
 A.denied:HOVER { color:#cc3300 }
-
 
 #credits A:LINK, #credits A:VISITED { color: #AAAAAA; }
 #credits A:HOVER { color:#cc3300 }
@@ -191,7 +186,6 @@ A.denied:HOVER { color:#cc3300 }
 .Top a, .Top a:visited { font-weight:bold; color:#336699 }
 .Tune a, .Tune a:visited { font-weight:normal; color:#336699 }
 .Top a:hover, .Tune a:hover { color:#cc3300 }
-
 
 .Print a:visited, .TopRight a:link { font-weight:normal; color:#0000ff }
 .TopRight a:visited { font-weight:normal; color:#800080 }
@@ -207,14 +201,12 @@ a.Search:hover { color:#cc3300 }
 #commentsheader a:link, #commentsheader a:visited { color:#0000ff }
 #commentsheader a:hover { color:#cc3300 }
 
-
 .toc1 { margin-left:0px; padding-left:0px; font-weight:bold; list-style-type:none;  }
 .toc2 { margin-left:0px; padding-left:15px; list-style-type:none;  }
 .toc3 { margin-left:0px; padding-left:30px; list-style-type:none;  }
 .toc4 { margin-left:0px; padding-left:45px; list-style-type:none;  }
 .toc5 { margin-left:0px; padding-left:60px; list-style-type:none;  }
 .toc6 { margin-left:0px; padding-left:75px; list-style-type:none;  }
-
 
 .micq1 { padding:2px; vertical-align:top; font-weight: bold; }
 .micq2 { padding:2px; vertical-align:top; font:10px tahoma, arial }
@@ -227,7 +219,6 @@ a.Search:hover { color:#cc3300 }
 
 blockquote {  border-left:#999 3px solid; padding:5px; }
 blockquote p {  padding:0px;  margin: 5px 0px; }
-
 
 P.auto { margin:0px; padding:0px; font-size:100%; }
 .pmark { color:#cccccc;font:10px Arial }
@@ -242,7 +233,6 @@ P.auto { margin:0px; padding:0px; font-size:100%; }
 .pleft {}
 .pleft .p- { float:left; padding: 0 15px 0 0;  }
 .pleft .pbody- { }
-
 
   table.upload td { padding: 2px 5px 2px 5px; vertical-align:top }
   table.upload td.dt-,
@@ -342,7 +332,10 @@ div.action-content   { padding:10px 10px 25px 10px; }
 tt { color:#666600; background:#ffffcc; padding: 0 2px }
 
 .cite {color:#ff0000;font-style:normal;}
-/* .mark  { color: #008800;font-style:normal; } */
+
+/* underline text: CODE __text__ */
+.underline { text-decoration:underline; }
+
 .mark { color: #00000; background:#ffaaaa; }
 
 /* CSS form formater */

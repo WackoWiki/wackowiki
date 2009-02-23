@@ -549,7 +549,8 @@ div.action-content   { padding:10px 10px 25px 10px; }
 tt { color:#666600; background:#ffffcc; padding: 0 2px } 
 
 .cite {color:#ff0000;font-style:normal;}
-/* .mark  { color: #008800;font-style:normal; } */
+/* underline text: CODE __text__ */
+.underline { text-decoration:underline; }
 .mark { color: #00000; background:#ffaaaa; }
 
 /* The left navigation is based on a simple unordered list. */

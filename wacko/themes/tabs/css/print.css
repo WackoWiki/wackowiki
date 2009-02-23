@@ -26,18 +26,20 @@ H5 { font-family: Arial;   font-size: 14px; padding-top:10px; padding-bottom:5px
   padding:25px 5px 5px 5px
 }
 
-
 /* fonts */
 BODY, TD, P, LI, #page { font-family: Georgia, Verdana; font-size:95% }
 
 cite {color:#888800;font-style:normal;}
 .cite {color:#ff0000;font-style:normal;}
+
+/* underline text: CODE __text__ */
+.underline { text-decoration:underline; }
+
 .mark { color: #000; border:1px solid #000; background: #ddd; }
 .center { text-align: center; }
 .indent { margin-left: 40px; }
 
 .codeold, .code { width:90%; line-height: 1.2em;}
-
 
 /* for include */
 .name { text-align: right; font-size: 60%; border-top:1px dotted #cccccc; border-bottom:1px dotted #cccccc }
@@ -49,7 +51,6 @@ cite {color:#888800;font-style:normal;}
 .toc4 { margin-left:0px; padding-left:45px; list-style-type:none;  } 
 .toc5 { margin-left:0px; padding-left:60px; list-style-type:none;  } 
 .toc6 { margin-left:0px; padding-left:75px; list-style-type:none;  }
-
 
 .Toc1 A, .Toc2 A, .Toc3 A, .Toc4 A, .Toc5 A, .Toc6 A
  { text-decoration:none; color:#000 }

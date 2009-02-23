@@ -92,6 +92,9 @@ blockquote {
 	font-weight:		900;
 }
 
+/* underline text: CODE __text__ */
+.underline { text-decoration:underline; }
+
 /* Definitions: CODE (?icq i seek you?) */
 dfn {
 	font-style:		normal;
