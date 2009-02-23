@@ -11,9 +11,7 @@ if ($options["_default"])
 	else
 	{
 		echo "<!--no"."typo-->";
-		echo "<div class=\"code\">";
-		echo "<pre>".$hl->highlight($text)."</pre>";
-		echo "</div>";
+		echo "<pre class=\"code\">".$hl->highlight($text)."</pre>";
 		echo "<!--/no"."typo-->";
 	}
 }

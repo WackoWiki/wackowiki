@@ -1,7 +1,7 @@
 <?php
 echo "<!--no"."typo-->";
-echo "<div class=\"code\">";
+echo "<pre class=\"code\">";
 highlight_string($text);
-echo "</div>";
+echo "</pre>";
 echo "<!--/no"."typo-->";
 ?>
