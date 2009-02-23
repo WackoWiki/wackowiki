@@ -42,5 +42,5 @@ $text = preg_replace('#(\-\-.*)$#m', "<span style=\"color:#888888\"><em>$1</em><
 // Remove lexeme delimiter
 $text = preg_replace("#\001#s",'', $text );
 
-print("<!--no"."typo--><div class=\"code\"><code>".$text."</code></div><!--/no"."typo-->");
+print("<!--no"."typo--><pre class=\"code\">".$text."</pre><!--/no"."typo-->");
 ?>

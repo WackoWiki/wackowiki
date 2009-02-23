@@ -191,9 +191,9 @@ $special_keywords = array(  'color',
   }
 
   if ($options["notypo"]) echo "<!--no"."typo-->";
-  if (!$options["nopre"]) echo "<div class=\"code\"><pre>";
+  if (!$options["nopre"]) echo "<pre class=\"code\">";
   echo preg_replace("/\&nbsp\;/", "", str_replace("\t","  ",$css), 1);
-  if (!$options["nopre"]) echo "</pre></div>";
+  if (!$options["nopre"]) echo "</pre>";
   if ($options["notypo"]) echo "<!--/no"."typo-->";
 
   ?>

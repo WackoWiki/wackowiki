@@ -49,5 +49,5 @@ foreach( $names as $name=>$v )
 
 $text = str_replace( $endstr, "", $text );
 
-print "<div><table>".$text."</table></div>";
+print "<pre class=\"code\"><table>".$text."</table></pre>";
 ?>
