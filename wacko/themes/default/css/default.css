@@ -473,6 +473,8 @@ text-align:left;
 position:relative;
 }
 
+#search label {display:none;}
+
 
 #header-top{margin: 0 auto 0;
 overflow: hidden;
@@ -483,6 +485,7 @@ font-size:1.3em;
 }
 
 #login {
+font-size: 12px;
 margin: 0 auto 0;
 overflow: hidden;
 float:right;
