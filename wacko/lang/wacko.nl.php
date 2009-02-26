@@ -3,8 +3,8 @@
 $wakkaResource = array(
 // logged in panel
   "YouAre" => "Jij bent ",
-  "YouArePanelLink" => "Settings",
-  "YouArePanelName" => "Settings",
+  "YouArePanelLink" => "Instellingen",
+  "YouArePanelName" => "Instellingen",
   "LogoutLink" => "Uitloggen",
   "LogoutButton" => "Log uit",
   "LogoutAreYouSure" => "Weet u zeker dat u wilt uitloggen ?",
