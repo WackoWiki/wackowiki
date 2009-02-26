@@ -97,12 +97,12 @@ del.diff {
 
 /** Table-related ************************************************************/
 
-/* 100%-width tables: CODE #| || Here | there || |# */
+/* Bordered tables: CODE #|| || Here | there || ||# */
 table.usertable {
   border: 1px none;
   border-collapse: collapse;
 }
-table.usertable tr td
+table.usertable tr td, table.usertable tr th
 {
   border-width: 1px;
   border-color: black;
@@ -110,7 +110,7 @@ table.usertable tr td
   padding: 4px;
   vertical-align: top;
 }
-/* Bordered tables: CODE #|| || Here | there || ||# */
+/* 100%-width tables: CODE #| || Here | there || |# */
 table.dtable { width:100%; border: 0px none; border-collapse: collapse; }
 table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
 

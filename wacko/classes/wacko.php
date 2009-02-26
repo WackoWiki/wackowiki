@@ -451,8 +451,25 @@ class Wacko
 		return $result;
 	}
 
-	function Translit($tag, $direction = 1) { //deprecated
+	function Translit($tag, $direction = 1) 
+	{ //deprecated
 		return $tag;
+	}
+
+	function GetKeywords()
+	{
+		if ($this->page["keywords"]) 
+			return $this->page["keywords"];
+		else
+			return $this->GetConfigValue("meta_keywords");
+	}
+
+	function GetDescription()
+	{
+		if ($this->page["description"]) 
+			return $this->page["description"];
+		else 
+			return $this->GetConfigValue("meta_description");
 	}
 
 	function LoadPage($tag, $time = "", $cache = LOAD_CACHE, $metadataonly = LOAD_ALL)
@@ -2819,16 +2836,5 @@ class Wacko
 		return $file;
 	}
 
-	function GetKeywords()
-	{
-		if ($this->page["keywords"]) return $this->page["keywords"];
-		else return $this->GetConfigValue("meta_keywords");
-	}
-
-	function GetDescription()
-	{
-		if ($this->page["description"]) return $this->page["description"];
-		else return $this->GetConfigValue("meta_description");
-	}
 }
 ?>
