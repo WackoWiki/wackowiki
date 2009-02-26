@@ -61,14 +61,17 @@ class Wacko
 	// DATABASE
 	function Query($query, $debug = 0)
 	{
-		if($this->GetConfigValue("debug") >= 1) $start = $this->GetMicroTime();
+		if ($this->GetConfigValue("debug") >= 1)
+			$start = $this->GetMicroTime();
+
 		$result = query($this->dblink, $query);
+
 		if($this->GetConfigValue("debug") >= 1)
 		{
 			$time = $this->GetMicroTime() - $start;
 			$this->queryLog[] = array(
-       "query"   => $query,
-       "time"    => $time);
+      			"query"   => $query,
+				"time"    => $time);
 		}
 		return $result;
 	}
@@ -87,7 +90,11 @@ class Wacko
 	}
 
 	// MISC
-	function GetMicroTime() { list($usec, $sec) = explode(" ",microtime()); return ((float)$usec + (float)$sec); }
+	function GetMicroTime()
+	{
+		list($usec, $sec) = explode(" ",microtime());
+		return ((float)$usec + (float)$sec);
+	}
 
 	function IncludeBuffered($filename, $notfoundText = "", $vars = "", $path = "")
 	{
@@ -193,8 +200,14 @@ class Wacko
 		if (!$this->_langlist)
 		{
 			$handle=opendir("lang");
-			while (false!==($file = readdir($handle))) {
-				if ($file != "." && $file != ".." && $file != "wacko.all.php" && !is_dir("lang/".$file) && 1==preg_match("/^wacko\.(.*?)\.php$/",$file,$match)) {
+			while (false !== ($file = readdir($handle)))
+			{
+				if ($file != "."
+				&& $file != ".."
+				&& $file != "wacko.all.php"
+				&& !is_dir("lang/".$file)
+				&& 1 == preg_match("/^wacko\.(.*?)\.php$/", $file, $match))
+				{
 					$langlist[] = $match[1];
 				}
 			}
@@ -207,15 +220,18 @@ class Wacko
 
 	function GetResourceValue($name, $lang="", $dounicode=true)
 	{
-		if (!$this->GetConfigValue("multilanguage")) return $this->resource[$name];
+		if (!$this->GetConfigValue("multilanguage"))
+			return $this->resource[$name];
 
 		//echo "<b>GetResourceValue:</b> $lang + $name + $this->userlang + $this->pagelang<br />";
 
-		if (!$lang && $this->userlang!=$this->pagelang) $lang = $this->userlang;
-		if ($lang!="")
+		if (!$lang && $this->userlang != $this->pagelang)
+			$lang = $this->userlang;
+
+		if ($lang != "")
 		{
 			$this->LoadResource($lang);
-			return (is_array($this->resources[$lang][$name]))?$this->resources[$lang][$name]:($dounicode?$this->DoUnicodeEntities($this->resources[$lang][$name], $lang):$this->resources[$lang][$name]);
+			return (is_array($this->resources[$lang][$name])) ? $this->resources[$lang][$name] : ($dounicode?$this->DoUnicodeEntities($this->resources[$lang][$name], $lang) : $this->resources[$lang][$name]);
 		}
 		return $this->resource[$name];
 	}
@@ -234,12 +250,12 @@ class Wacko
 		$langlist = $this->AvailableLanguages();
 		//!!!! wrong code, maybe!
 		if ($this->GetMethod() == "edit" && $_GET["add"] == 1)
-		if ($_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
-		$lang = $_REQUEST["lang"];
-		else
-		$lang = $this->userlang;
-		else
-		$lang = $this->pagelang;
+			if ($_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
+				$lang = $_REQUEST["lang"];
+			else
+				$lang = $this->userlang;
+			else
+				$lang = $this->pagelang;
 
 		return $lang;
 	}
@@ -263,16 +279,19 @@ class Wacko
 	{
 		if (!$this->GetConfigValue("multilanguage")) return $string;
 		$_lang = $this->DetermineLang();
+
 		if ($lang == $_lang) return $string;
 
 		//    die("<h2>".$lang."<>".$_lang."</h2>");
 
 		$this->LoadResource($lang);
+
 		if (is_array($this->languages[$lang]["unicode_entities"]))
 		{
 			return @strtr($string, $this->languages[$lang]["unicode_entities"]);
 		}
-		else return $string;
+		else
+			return $string;
 	}
 
 	function tryUtfDecode ($string)
@@ -328,7 +347,7 @@ class Wacko
 
 			// process the string representing the letter to a unicode entity
 			$thisLen = strlen ($thisLetter);
-			if ($thisLen>1)
+			if ($thisLen > 1)
 			{
 				$thisPos = 0;
 				$decimalCode = 0;
@@ -350,8 +369,8 @@ class Wacko
 				$encodedLetter = "&#". $decimalCode . ';';
 			}
 			else
-			$encodedLetter = $thisLetter;
-			$encodedString .= $encodedLetter;
+				$encodedLetter = $thisLetter;
+				$encodedString .= $encodedLetter;
 		}
 		return $encodedString;
 	}
@@ -365,25 +384,33 @@ class Wacko
 	var $NpjMacros = array( "вики" => "wiki", "вака" => "wacko", "веб" => "web"
 	);
 
-	function NpjTranslit($tag, $strtolow = TRAN_LOWERCASE, $donotload=TRAN_LOAD)
+	function NpjTranslit($tag, $strtolow = TRAN_LOWERCASE, $donotload = TRAN_LOAD)
 	{
 		// Lookup transliteration result in the cache and return it if found
 		static $npj_cache;
 		$cach_key = $tag.$strtolow.$donotload;
-		if (isset($npj_cache[$cach_key])) {
+		if (isset($npj_cache[$cach_key])) 
+		{
 			return $npj_cache[$cach_key];
 		}
-		 
-		$_lang = null;
-		if (!$this->GetConfigValue("multilanguage")) $donotload = 1;
-		if (!$donotload)
-		if ($page = $this->LoadPage($tag, "", LOAD_CACHE, LOAD_META))
-		{
-			$_lang = $this->language["code"];
-			if ($page["lang"]) $lang = $page["lang"];
-			else $lang = $this->GetConfigValue("language");
 
-			$this->SetLanguage($lang);
+		$_lang = null;
+
+		if (!$this->GetConfigValue("multilanguage")) $donotload = 1;
+
+		if (!$donotload)
+		{
+			if ($page = $this->LoadPage($tag, "", LOAD_CACHE, LOAD_META))
+			{
+				$_lang = $this->language["code"];
+
+				if ($page["lang"]) 
+					$lang = $page["lang"];
+				else 
+					$lang = $this->GetConfigValue("language");
+
+				$this->SetLanguage($lang);
+			}
 		}
 
 		$tag = str_replace( "//", "/", $tag );
@@ -391,29 +418,40 @@ class Wacko
 		$tag = str_replace( " ", "", $tag );
 		$tag = str_replace( "'", "_", $tag );
 		$_tag = strtolower( $tag );
-		if ($strtolow) $tag = @strtr( $_tag, $this->NpjMacros );
-		else
-		foreach( $this->NpjMacros as $macro=>$value )
-		while (($pos = strpos($_tag, $macro)) !== false)
+
+		if ($strtolow) 
 		{
-			$_tag = substr_replace( $_tag, $value, $pos, strlen($macro) );
-			$tag = substr_replace( $tag, ucfirst($value), $pos, strlen($macro) );
+			$tag = @strtr( $_tag, $this->NpjMacros );
+		}
+		else
+		{
+			foreach( $this->NpjMacros as $macro => $value )
+			{
+				while (($pos = strpos($_tag, $macro)) !== false)
+				{
+					$_tag = substr_replace( $_tag, $value, $pos, strlen($macro) );
+					$tag = substr_replace( $tag, ucfirst($value), $pos, strlen($macro) );
+				}
+			}
 		}
 
 		$tag = @strtr( $tag, $this->language["NpjLettersFrom"], $this->language["NpjLettersTo"] );
 		$tag = @strtr( $tag, $this->language["NpjBiLetters"] );
+
 		if ($strtolow) $tag = strtolower( $tag );
 
 		if ($_lang)
 		$this->SetLanguage($_lang);
+
 		$result =  rtrim($tag, "/");
 
 		// Put transliteration result in the cache
 		$npj_cache[$cach_key] = $result;
+
 		return $result;
 	}
 
-	function Translit($tag, $direction=1) { //deprecated
+	function Translit($tag, $direction = 1) { //deprecated
 		return $tag;
 	}
 
@@ -440,26 +478,38 @@ class Wacko
 
 	function OldLoadPage($tag, $time = "", $cache = 1, $supertagged = false, $metadataonly = 0)
 	{
+		if ($tag == "") return "";
+
 		$page = null;
-		if (!$supertagged) $supertag = $this->NpjTranslit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD);
-		else $supertag=$tag;
+
+		if (!$supertagged) 
+			$supertag = $this->NpjTranslit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD);
+		else 
+			$supertag=$tag;
+
 		// retrieve from cache
-		if (!$time && $cache && ($cachedPage = $this->GetCachedPage($supertag, $metadataonly))) $page = $cachedPage;
+		if (!$time && $cache && ($cachedPage = $this->GetCachedPage($supertag, $metadataonly)))
+			$page = $cachedPage;
+
 		// load page
-		if ($metadataonly) $what = $this->pages_meta;
-		else $what = "*";
+		if ($metadataonly)
+			$what = $this->pages_meta;
+		else
+			$what = "*";
+
 		if (!$page)
 		{
-			if ($supertagged) {
+			if ($supertagged)
+			{
 				$page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."pages WHERE supertag='".quote($this->dblink, $tag)."' AND latest = 'Y' LIMIT 1");
-				if ($time && $time!=$page["time"]) {
+				if ($time && $time != $page["time"]) {
 					$this->CachePage($page, $metadataonly);
 					$page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."revisions WHERE supertag='".quote($this->dblink, $tag)."' AND time = '".quote($this->dblink, $time)."' LIMIT 1");
 				}
 			}
 			else {
 				$page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."pages WHERE tag='".quote($this->dblink, $tag)."' AND latest = 'Y' LIMIT 1");
-				if ($time && $time!=$page["time"]) {
+				if ($time && $time != $page["time"]) {
 					$this->CachePage($page, $metadataonly);
 					$page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."revisions WHERE tag='".quote($this->dblink, $tag)."' AND time = '".quote($this->dblink, $time)."' LIMIT 1");
 				}
@@ -469,27 +519,32 @@ class Wacko
 		return $page;
 	}
 
-	function GetCachedPage($tag, $metadataonly=0)
+	function GetCachedPage($tag, $metadataonly = 0)
 	{
 		if (isset( $this->pageCache[$tag] ))
-		if ($this->pageCache[$tag]["mdonly"]==0 || $metadataonly==$this->pageCache[$tag]["mdonly"])
-		return $this->pageCache[$tag];
-		return false;
+		{
+			if ($this->pageCache[$tag]["mdonly"] == 0 || $metadataonly==$this->pageCache[$tag]["mdonly"])
+			{
+				return $this->pageCache[$tag];
+			}
+		}
+		else return false;
 	}
 
-	function CachePage($page, $metadataonly=0)
+	function CachePage($page, $metadataonly = 0)
 	{
 		$page["supertag"] = $this->NpjTranslit($page["supertag"], TRAN_LOWERCASE, TRAN_DONTLOAD);
+
 		$this->pageCache[$page["supertag"]] = $page;
 		$this->pageCache[$page["supertag"]]["mdonly"] = $metadataonly;
 	}
 
 	function CacheWantedPage($tag, $check = 0)
 	{
-		if ($check==0)
-		$this->wantedCache[$this->language["code"]][$tag] = 1;
-		else if ($this->OldLoadPage($tag, "", 1, false, 1)=="")
-		$this->wantedCache[$this->language["code"]][$tag] = 1;
+		if ($check == 0)
+			$this->wantedCache[$this->language["code"]][$tag] = 1;
+		else if ($this->OldLoadPage($tag, "", 1, false, 1) == "")
+			$this->wantedCache[$this->language["code"]][$tag] = 1;
 	}
 
 	function ClearCacheWantedPage($tag)
@@ -500,9 +555,9 @@ class Wacko
 	function GetCachedWantedPage($tag)
 	{
 		if (isset( $this->wantedCache[$this->language["code"]][$tag] ))
-		return $this->wantedCache[$this->language["code"]][$tag];
+			return $this->wantedCache[$this->language["code"]][$tag];
 		else
-		return '';
+			return '';
 	}
 
 	function GetCachedACL($tag, $privilege, $useDefaults)
@@ -520,12 +575,13 @@ class Wacko
 		{
 			$cl = count($links);
 			for ($i=0; $i<$cl; $i++)
-			$pages[$i] = $links[$i]["to_tag"];
+			{
+				$pages[$i] = $links[$i]["to_tag"];
+			}
 		}
 
 		$user = $this->GetUser();
 		$pages[$cl] = $user["name"];
-
 
 		$bookm = $this->GetDefaultBookmarks($user["lang"], "site")."\n".($user["bookmarks"] ? $user["bookmarks"] : $this->GetDefaultBookmarks($user["lang"]));
 		$bookmarks = explode("\n", $bookm);
@@ -554,12 +610,13 @@ class Wacko
 		$notexists = @array_values(@array_diff($spages, $exists));
 		for ($i=0; $i<count($notexists); $i++)
 		{
-			$this->CacheWantedPage($pages[array_search($notexists[$i],$spages)], 1);
+			$this->CacheWantedPage($pages[array_search($notexists[$i], $spages)], 1);
 			$this->CacheACL($notexists[$i], "read", 1, $acl);
 		}
 
 		//   unset($exists);
-		if ($read_acls = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."acls WHERE BINARY page_tag IN (".$pages_str.") AND privilege = 'read'"))
+		if ($read_acls = $this->LoadAll(
+		"SELECT * FROM ".$this->config["table_prefix"]."acls WHERE BINARY page_tag IN (".$pages_str.") AND privilege = 'read'"))
 		for ($i=0; $i<count($read_acls); $i++)
 		{
 			$this->CacheACL($read_acls[$i]["supertag"], "read", 1, $read_acls[$i]);
@@ -583,15 +640,18 @@ class Wacko
 	{
 		$langlist = $this->AvailableLanguages();
 		$this->page = $page;
-		if ($this->page["tag"]) $this->tag = $this->page["tag"];
+
+		if ($this->page["tag"])
+			$this->tag = $this->page["tag"];
+
 		if ($page["lang"])
-		$this->pagelang = $page["lang"];
+			$this->pagelang = $page["lang"];
 		else if ($_REQUEST["add"] && $_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
-		$this->pagelang = $_REQUEST["lang"];
+			$this->pagelang = $_REQUEST["lang"];
 		else if ($_REQUEST["add"])
-		$this->pagelang = $this->userlang;
+			$this->pagelang = $this->userlang;
 		else
-		$this->pagelang = $this->GetConfigValue("language");
+			$this->pagelang = $this->GetConfigValue("language");
 	}
 
 	function LoadPageById($id)
@@ -604,7 +664,8 @@ class Wacko
 
 	function LoadRevisions($page)
 	{
-		$rev = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."revisions WHERE tag='".quote($this->dblink, $page)."' ORDER BY time DESC");
+		$rev = $this->LoadAll(
+		"SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."revisions WHERE tag='".quote($this->dblink, $page)."' ORDER BY time DESC");
 		if (is_array($rev)) array_unshift($rev, $this->LoadSingle("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE tag='".quote($this->dblink, $page)."' ORDER BY time DESC  LIMIT 1"));
 		else $rev[] = $this->LoadSingle("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE tag='".quote($this->dblink, $page)."' ORDER BY time DESC  LIMIT 1");
 		return $rev;
@@ -743,7 +804,7 @@ class Wacko
 		if ($this->GetConfigValue("spam_filter") && is_array($this->spam))
 		foreach ($this->spam as $spam)
 		{
-			if (strpos($body, trim($spam))!==false) return 'Error: Identified Potential Spam: '.$spam;
+			if (strpos($body, trim($spam))!== false) return 'Error: Identified Potential Spam: '.$spam;
 		}
 
 		if($_POST["tag"])
@@ -769,12 +830,14 @@ class Wacko
 			if (!$oldPage = $this->LoadPage($tag))
 			{
 				$langlist = $this->AvailableLanguages();
-				if ($_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
-				$lang = $_REQUEST["lang"];
-				else
-				$lang = $this->userlang;
 
-				if (!$lang) $lang = $this->GetConfigValue["language"];
+				if ($_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
+					$lang = $_REQUEST["lang"];
+				else
+					$lang = $this->userlang;
+
+				if (!$lang)
+					$lang = $this->GetConfigValue["language"];
 
 				$this->SetLanguage($lang);
 
@@ -961,35 +1024,73 @@ class Wacko
 	}
 
 	// COOKIES
-	function SetSessionCookie($name, $value) { SetCookie($this->config["cookie_prefix"].$name, $value, 0, "/"); $_COOKIE[$this->config["cookie_prefix"].$name] = $value; }
-	function SetPersistentCookie($name, $value, $remember = 1) { SetCookie($this->config["cookie_prefix"].$name, $value, time() + ($remember ? 90*24*60*60 : 60 * 60), "/"); $_COOKIE[$this->config["cookie_prefix"].$name] = $value; }
-	function DeleteCookie($name) { SetCookie($this->config["cookie_prefix"].$name, "", 1, "/"); $_COOKIE[$this->config["cookie_prefix"].$name] = ""; }
-	function GetCookie($name) { return $_COOKIE[$this->config["cookie_prefix"].$name]; }
+	function SetSessionCookie($name, $value) 
+	{
+		SetCookie($this->config["cookie_prefix"].$name, $value, 0, "/"); 
+		$_COOKIE[$this->config["cookie_prefix"].$name] = $value;
+	}
+
+	function SetPersistentCookie($name, $value, $remember = 1)
+	{
+		SetCookie($this->config["cookie_prefix"].$name, $value, time() + ($remember ? 90*24*60*60 : 60 * 60), "/");
+		$_COOKIE[$this->config["cookie_prefix"].$name] = $value;
+	}
+
+	function DeleteCookie($name)
+	{
+		SetCookie($this->config["cookie_prefix"].$name, "", 1, "/");
+		$_COOKIE[$this->config["cookie_prefix"].$name] = "";
+	}
+
+	function GetCookie($name)
+	{
+		return $_COOKIE[$this->config["cookie_prefix"].$name];
+	}
 
 	// HTTP/REQUEST/LINK RELATED
-	function SetMessage($message) { $_SESSION[$this->config["session_prefix"].'_'."message"] = $message; }
-	function GetMessage() { $message = $_SESSION[$this->config["session_prefix"].'_'."message"]; $_SESSION[$this->config["session_prefix"].'_'."message"] = ""; return $message; }
+	function SetMessage($message)
+	{
+		$_SESSION[$this->config["session_prefix"].'_'."message"] = $message;
+	}
+
+	function GetMessage()
+	{
+		$message = $_SESSION[$this->config["session_prefix"].'_'."message"]; 
+		$_SESSION[$this->config["session_prefix"].'_'."message"] = "";
+		return $message;
+	}
+
 	function Redirect($url, $permanent = false) 
 	{
 		if($permanent)
 		{
 			header('HTTP/1.1 301 Moved Permanently');
 		}
-		header("Location: $url"); exit; 
+		header("Location: $url");
+		exit;
 	}
 
 	function UnwrapLink( $tag )
 	{
-		if ($tag=="/") return "";
-		if ($tag=="!") return $this->tag;
+		if ($tag == "/") return "";
+		if ($tag == "!") return $this->tag;
 
 		$newtag = $tag;
 
 		if (strstr($this->context[$this->current_context], "/"))
-		$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $this->context[$this->current_context] );
-		else $root = "";
-		if (preg_match("/^\.\/(.*)$/", $tag, $matches)) { $root=""; }
-		else if (preg_match("/^\/(.*)$/", $tag, $matches)) { $root = ""; $newtag = $matches[1]; }
+			$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $this->context[$this->current_context] );
+		else 
+			$root = "";
+
+		if (preg_match("/^\.\/(.*)$/", $tag, $matches))
+		{
+			$root="";
+		}
+		else if (preg_match("/^\/(.*)$/", $tag, $matches))
+		{
+			$root = "";
+			$newtag = $matches[1];
+		}
 		else if (preg_match("/^\!\/(.*)$/", $tag, $matches))
 		{
 			$root = $this->context[$this->current_context];
@@ -998,13 +1099,18 @@ class Wacko
 		else if (preg_match("/^\.\.\/(.*)$/", $tag, $matches))
 		{
 			$newtag = $matches[1];
+
 			if (strstr($root, "/"))
-			$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $root );
-			else $root = "";
+				$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $root );
+			else
+				$root = "";
 		}
+
 		if ($root != "") $newtag= "/".$newtag;
+
 		$tag = $root.$newtag;
 		$tag = str_replace( "//", "/", $tag );
+
 		return $tag;
 	}
 
@@ -1012,17 +1118,19 @@ class Wacko
 	function MiniHref($method = "", $tag = "", $addpage = "")
 	{
 		if (!$tag = trim($tag)) $tag = $this->tag;
-		if (!$addpage) $tag=$this->SlimUrl($tag);
+		if (!$addpage) $tag = $this->SlimUrl($tag);
 		//$tag = $this->Translit($tag, 0);
+
 		$tag = trim( $tag, "/." );
+
 		return $tag.($method ? "/".$method : "");
 	}
 
 	// returns the full url to a page/method.
-	function Href($method = "", $tag = "", $params = "", $addpage=0)
+	function Href($method = "", $tag = "", $params = "", $addpage = 0)
 	{
 		$href = $this->config["base_url"].$this->MiniHref($method, $tag, $addpage);
-		if ($addpage) $params="add=1".($params?"&amp;".$params:"");
+		if ($addpage) $params = "add=1".($params ? "&amp;".$params : "");
 		if ($params)
 		{
 			$href .= ($this->config["rewrite_mode"] ? "?" : "&amp;").$params;
@@ -1045,55 +1153,65 @@ class Wacko
 
 		if (preg_match("/^[\!\.".$this->language["ALPHANUM_P"]."]+$/", $tag))
 		{// it's a Wiki link!
-			if ($_SESSION[$this->config["session_prefix"].'_'."linktracking"] && $track) $this->TrackLinkTo($this->UnwrapLink( $tag ));
+			if ($_SESSION[$this->config["session_prefix"].'_'."linktracking"] && $track)
+				$this->TrackLinkTo($this->UnwrapLink( $tag ));
 		}
 		return "\xA2\xA2".$tag." ==".($this->format_safe?str_replace(">", "&gt;", str_replace("<", "&lt;", $text)):$text)."\xAF\xAF";
 	}
 
-	// <?
 	function Link($tag, $method = "", $text = "", $track = 1, $safe=0, $linklang="")
 	{
-		$class = '';   $title = '';  $lang = '';
-
+		$class = '';
+		$title = '';
+		$lang = '';
+		$url = '';
+		$imlink = false;
 		$text = str_replace('"', "&quot;", $text);
 
 		if (!$safe)
-		$text = htmlspecialchars($text, ENT_NOQUOTES);
+			$text = htmlspecialchars($text, ENT_NOQUOTES);
 
 		if ($linklang)
-		$this->SetLanguage($linklang);
+			$this->SetLanguage($linklang);
 
-		$imlink = false;
 		if (preg_match("/^[\.\-".$this->language["ALPHANUM_P"]."]+\.(gif|jpg|jpe|jpeg|png)$/i", $text))
-		$imlink = $this->GetConfigValue("root_url")."/images/".$text;
+		{
+			$imlink = $this->GetConfigValue("root_url")."/images/".$text;
+		}
 		else if (preg_match("/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i", preg_replace("/<\/?nobr>/", "" ,$text)))
-		$imlink = $text = preg_replace("/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/", "" ,$text);
-		$url = '';
+		{
+			$imlink = $text = preg_replace("/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/", "" ,$text);
+		}
 
 		if (preg_match("/^(mailto[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/", $tag, $matches))
-		{// this is a valid Email
+		{
+			// this is a valid Email
 			$url = ($matches[1]=="mailto:" ? $tag : "mailto:".$tag);
 			$title = $this->GetResourceValue("MailLink");
 			$icon = $this->GetResourceValue("mailicon");
 			$tpl = "email";
 		}
 		else if (preg_match("/^#/", $tag))
-		{// html-anchor
+		{
+			// html-anchor
 			$url = $tag;
 			$tpl = "anchor";
 		}
 		else if (preg_match("/^[\.\-".$this->language["ALPHANUM_P"]."]+\.(gif|jpg|jpe|jpeg|png)$/i", $tag))
-		{// image
+		{
+			// image
 			$text = preg_replace("/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/", "" ,$text);
 			return "<img src=\"".$this->GetConfigValue("root_url")."/images/".$tag."\" ".($text?"alt=\"".$text."\" title=\"".$text."\"":"")." />";
 		}
 		else if (preg_match("/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i", $tag))
-		{// external image
+		{
+			// external image
 			$text = preg_replace("/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/", "" ,$text);
 			return "<img src=\"".str_replace("&", "&amp;", str_replace("&amp;", "&", $tag))."\" ".($text?"alt=\"".$text."\" title=\"".$text."\"":"")." />";
 		}
 		else if (preg_match("/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rpm|gz|tgz|zip|rar|exe|doc|xls|ppt|tgz|bz2|7z)$/", $tag))
-		{// this is a file link
+		{
+			// this is a file link
 			$url = str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
 			$title= $this->GetResourceValue("FileLink");
 			$icon = $this->GetResourceValue("fileicon");
@@ -1114,7 +1232,8 @@ class Wacko
 			$tpl = "file";
 		}
 		else if (preg_match("/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/", $tag))
-		{// this is a valid external URL
+		{
+			// this is a valid external URL
 			$url = str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
 			if (!stristr($tag,$this->config["base_url"]))
 			{
@@ -1124,12 +1243,13 @@ class Wacko
 			$tpl = "outerlink";
 		}
 		else if (preg_match("/^(_?)file:([^\\s\"<>\(\)]+)$/", $tag, $matches))
-		{// this is a file:
+		{
+			// this is a file:
 			$noimg = $matches[1];
 			$thing = $matches[2];
 			$arr = explode("/", $thing);
 			//echo($thing."<br />");
-			if (count($arr)==1)                // file:shit.zip
+			if (count($arr) == 1)                // file:shit.zip
 			{
 				//    echo ($thing."<br />");
 				//try to find in global storage and return if success
@@ -1138,33 +1258,34 @@ class Wacko
 				if (is_array($desc))
 				{
 					$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetResourceValue("UploadKB").")";
-					if ($desc["picture_w"] && !$noimg)
-					{
-						if (!$text) $text = $title;
-						return "<img src=\"".$this->GetConfigValue("root_url").$this->config["upload_path"]."/".$thing."\" ".($text?"alt=\"".$text."\" title=\"".$text."\"":"")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
-					}
 					$url = $this->GetConfigValue("root_url").$this->config["upload_path"]."/".$thing;
 					$icon = $this->GetResourceValue("fileicon");
 					$imlink = false;
 					$tpl = "localfile";
+					if ($desc["picture_w"] && !$noimg)
+					{
+						if (!$text) $text = $title;
+						return "<img src=\"".$this->GetConfigValue("root_url").$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
+					}
 				}
 			}
-			if (count($arr)==2 && $arr[0]=="") // file:/shit.zip
+
+			if (count($arr) == 2 && $arr[0] == "") // file:/shit.zip
 			{
 				//try to find in global storage and return if success
 				$desc = $this->CheckFileExists($arr[1]);
 				if (is_array($desc))
 				{
-					$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetResourceValue("UploadKB").")";
+					$title = $desc["description"]." (".ceil($desc["filesize"] / 1024)."&nbsp;".$this->GetResourceValue("UploadKB").")";
+					$url = $this->GetConfigValue("root_url").$this->config["upload_path"].$thing;
+					$icon = $this->GetResourceValue("fileicon");
+					$imlink = false;
+					$tpl = "localfile";
 					if ($desc["picture_w"] && !$noimg)
 					{
 						if (!$text) $text = $title;
-						return "<img src=\"".$this->GetConfigValue("root_url").$this->config["upload_path"]."/".$thing."\" ".($text?"alt=\"".$text."\" title=\"".$text."\"":"")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
+						return "<img src=\"".$this->GetConfigValue("root_url").$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
 					}
-					$url = $this->GetConfigValue("root_url").$this->config["upload_path"].$thing;
-					$imlink = false;
-					$icon = $this->GetResourceValue("fileicon");
-					$tpl = "localfile";
 				}
 				else //404
 				{
@@ -1172,14 +1293,16 @@ class Wacko
 					$title = "404: /".$this->config["upload_path"].$thing;
 					$url = "404";
 				}
-
 			}
+
 			if (!$url)
 			{
-				$file = $arr[count($arr)-1];
-				unset($arr[count($arr)-1]);
+				$file = $arr[count($arr) - 1];
+				unset($arr[count($arr) - 1]);
 				$_pagetag = implode("/", $arr);
-				if ($_pagetag=="") $_pagetag = "!/";
+
+				if ($_pagetag == "") $_pagetag = "!/";
+
 				//unwrap tag (check !/, ../ cases)
 				$pagetag = $this->UnwrapLink( $_pagetag );
 				//try to find in local $tag storage
