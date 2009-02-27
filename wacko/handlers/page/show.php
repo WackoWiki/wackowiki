@@ -5,7 +5,8 @@ if ($this->HasAccess("read"))
 	if (!$this->page)
 	{
 		if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
-		print(str_replace("%1",$this->href("edit","","",1),$this->GetResourceValue("DoesNotExists")));
+
+		print(str_replace("%1", $this->href("edit", "", "", 1), $this->GetResourceValue("DoesNotExists")));
 	}
 	else
 	{
@@ -47,16 +48,16 @@ if ($this->HasAccess("read"))
 
 			// store to DB
 			if ($this->page["latest"] != "N")
-			$this->Query(
-				"UPDATE ".$this->config["table_prefix"]."pages SET ".
-         			"body_r = '".quote($this->dblink, $this->page["body_r"])."', ".
-         			"body_toc = '".quote($this->dblink, $this->page["body_toc"])."' ".
-         		"WHERE id = '".quote($this->dblink, $this->page["id"])."' ".
-				"LIMIT 1");
+				$this->Query(
+					"UPDATE ".$this->config["table_prefix"]."pages SET ".
+         				"body_r = '".quote($this->dblink, $this->page["body_r"])."', ".
+         				"body_toc = '".quote($this->dblink, $this->page["body_toc"])."' ".
+         			"WHERE id = '".quote($this->dblink, $this->page["id"])."' ".
+					"LIMIT 1");
 		}
 
 		// display page
-		$data = $this->Format($this->page["body_r"], "post_wacko", array("bad"=>"good"));
+		$data = $this->Format($this->page["body_r"], "post_wacko", array("bad" => "good"));
 		$data = $this->NumerateToc( $data ); //  numerate toc if needed
 		echo $data;
 
@@ -71,14 +72,14 @@ if ($this->HasAccess("read"))
   if ($this->HasAccess("write") && ($this->page["latest"] == "N"))
   {
    $latest = $this->LoadPage($this->tag);
-   ?> <br />
-   <?php echo $this->FormOpen("edit") ?> <input type="hidden"
-	name="previous" value="<?php echo $latest["time"] ?>" /> <input
-	type="hidden" name="body"
-	value="<?php echo htmlspecialchars($this->page["body"]) ?>" /> <input
-	type="submit"
-	value="<?php echo $this->GetResourceValue("ReEditOldRevision") ?>" /> <?php echo $this->FormClose(); ?>
-   <?php
+?>
+	<br />
+	<?php echo $this->FormOpen("edit") ?>
+	<input type="hidden" name="previous" value="<?php echo $latest["time"] ?>" />
+	<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page["body"]) ?>" />
+	<input type="submit" value="<?php echo $this->GetResourceValue("ReEditOldRevision") ?>" />
+	<?php echo $this->FormClose(); ?>
+<?php
   }
 	}
 }
@@ -296,7 +297,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
       default:
         print(str_replace("%1", $c, $this->GetResourceValue("Comments_n")));
       }
-	  //todo show link to show comment only if there is one or/and user has the right to add a new one 
+	  //TODO: show link to show comment only if there is one or/and user has the right to add a new one 
     ?>
   [<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->GetResourceValue("ShowComments"); ?></a>]</div>
 <?php
