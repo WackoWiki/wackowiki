@@ -208,8 +208,8 @@ a.Search:hover { color:#cc3300 }
 .toc5 { margin-left:0px; padding-left:60px; list-style-type:none;  }
 .toc6 { margin-left:0px; padding-left:75px; list-style-type:none;  }
 
-.micq1 { padding:2px; vertical-align:top; font-weight: bold; }
-.micq2 { padding:2px; vertical-align:top; font:10px tahoma, arial }
+.micq1 { padding:2px; vertical-align:top; white-space: nowrap; font-weight: bold; }
+.micq2 { padding:2px; vertical-align:top; white-space: nowrap; font:10px tahoma, arial }
 .micq3 { padding:2px; vertical-align:top; width:100% }
 
 .email1 {color:#800000}

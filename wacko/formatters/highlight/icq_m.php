@@ -27,7 +27,7 @@ $text = preg_replace( "/".
              "^([0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4} [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})\s*(.*?)\s*wrote:".
              "(\s*(.*?)\s*)".
              "(?=^([0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4} [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}[^\n]*))/ims", 
-             "<tr style='$2'><td class='micq1' nowrap>$2</td><td class='micq3'>$4</td><td class='micq2' nowrap>$1</td></tr>", $text );
+             "<tr style='$2'><td class='micq1'>$2</td><td class='micq3'>$4</td><td class='micq2'>$1</td></tr>", $text );
 $text = str_replace( "\n", "<br />", $text );
 
 

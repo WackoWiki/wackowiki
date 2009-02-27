@@ -333,10 +333,12 @@ div .action-content {
 /* Username */
 .micq1 {
 	font-weight:		900;
+	white-space: 		nowrap;
 }
 /* Time, Date */
 .micq2 {
 	font-size:		0.8em;
+	white-space: 	nowrap;
 }
 /* Message */
 .micq3 {

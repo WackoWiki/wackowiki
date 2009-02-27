@@ -91,7 +91,7 @@ if ($user = $this->GetUser()){
 <table align="center" border="0" cellpadding="0" cellspacing="0"
 	width="100%">
 	<tr>
-		<td valign="top" class="left" width="185" nowrap="nowrap">
+		<td valign="top" class="left" width="185" style="white-space: nowrap;">
 		<table width="185" border="0" align="left" cellpadding="0"
 			cellspacing="0">
 			<tr align="left">

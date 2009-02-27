@@ -126,8 +126,8 @@ table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #9999
 
 /* CODE %%(micq)%%, %%(icq_l)%%, %%(icq_m)%% */
 
-.micq1 { padding:2px; vertical-align:top; font-weight: bold; }
-.micq2 { padding:2px; vertical-align:top; font:10px tahoma, arial }
+.micq1 { padding:2px; vertical-align:top; white-space: nowrap; font-weight: bold  }
+.micq2 { padding:2px; vertical-align:top; white-space: nowrap; font:10px tahoma, arial }
 .micq3 { padding:2px; vertical-align:top; width:100% }
 
 /** Email-related ************************************************************/

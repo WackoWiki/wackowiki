@@ -240,12 +240,14 @@ color:#000000;
 font-weight:700;
 padding:2px;
 vertical-align:top;
+white-space: nowrap;
 }
 
 .micq2 {
 font:10px tahoma, arial;
 padding:2px;
 vertical-align:top;
+white-space: nowrap;
 }
 
 .micq3 {

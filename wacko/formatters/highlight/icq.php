@@ -22,7 +22,7 @@ $text = preg_replace( "/".
              "^([^\n]*?)\,?[ \t]*([0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4} [0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2})?)\s*\:?\s*".
              "(\s*(.*?)\s*)".
              "(?=^(([^\n]*?)\,?[ \t]*([0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4} [0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2})?)\s*\:?[^\n]*))/ims", 
-             "<tr style='$1'><td class='micq1' nowrap>$1</td><td class='micq3'>$5</td><td class='micq2' nowrap>$2</td></tr>", $text );
+             "<tr style='$1'><td class='micq1'>$1</td><td class='micq3'>$5</td><td class='micq2'>$2</td></tr>", $text );
 $text = str_replace( "\n", "<br />", $text );
 
 
