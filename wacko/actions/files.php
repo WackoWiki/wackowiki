@@ -1,13 +1,13 @@
 <?php
 /*
- Showing uploaded by {{upload}} files
+	Showing uploaded by {{upload}} files
 
- {{files
- [param0="PageName" or global=1]
- [order="time|FILENAME|size|size_desc|ext"]
- [owner="UserName"]
- [pictures=1]
- }}
+	{{files
+		[param0="PageName" or global=1]
+		[order="time|FILENAME|size|size_desc|ext"]
+		[owner="UserName"]
+		[pictures=1]
+	}}
  */
 
 if (!isset($order)) $order = "";
@@ -23,58 +23,54 @@ if ($order == "size") $orderby = "filesize ASC";
 if ($order == "size_desc") $orderby = "filesize DESC";
 if ($order == "ext") $orderby = "file_ext ASC";
 
-if ($owner) $user_add = "and user='".quote($this->dblink, $owner)."' ";
+if ($owner) $user_add = "AND user='".quote($this->dblink, $owner)."' ";
 else        $user_add = "";
 
 // do we allowed to see?
-
 if (!$global)
 {
-	if ($vars[0] == "") $vars[0] = $this->tag;
-	else
-	{
-		$showpagename = $vars[0];
-		$vars[0] = $this->UnwrapLink($vars[0]);
-		$page_href = $this->Href("", $vars[0]);
-		$showpageandpath = '<a href="'.$page_href.'">'.$showpagename.'</a>';
-	}
-	$can_view   = $this->HasAccess("read",$vars[0]) || $this->IsAdmin() || $this->UserIsOwner($vars[0]);
-	$can_delete = $this->IsAdmin() || $this->UserIsOwner($vars[0]);
+	if ($page == "")	$page = $this->tag;
+	else				$page = $this->UnwrapLink($page);
+	
+	$can_view   = $this->HasAccess("read", $page) || $this->IsAdmin() || $this->UserIsOwner($page);
+	$can_delete = $this->IsAdmin() || $this->UserIsOwner($page);
 }
 else
 {
 	$can_view = 1;
-	$vars[0] = $this->tag;
+	$page = $this->tag;
 }
 
 if ($can_view)
 {
-	if ($global || ($tag == $vars[0])) $filepage = $this->page;
-	else $filepage = $this->LoadPage($vars[0]);
+	if ($global || ($tag == $page)) $filepage = $this->page;
+	else $filepage = $this->LoadPage($page);
+
 	if (!$global && !$filepage["id"]) return;
 
 	// load files list
 	$files = $this->LoadAll(
-		"SELECT id, page_id, filesize, picture_w, picture_h, filename, description, uploaded_dt, user FROM ".
-	$this->config["table_prefix"]."upload WHERE ".
-		" page_id = '". ($global?0:$filepage["id"])."' ".$user_add.
+		"SELECT id, page_id, filesize, picture_w, picture_h, filename, description, uploaded_dt, user ".
+		"FROM ".$this->config["table_prefix"]."upload ".
+		"WHERE page_id = '". ($global ? 0 : $filepage["id"])."' ".$user_add.
 		" ORDER BY ".$orderby );
 
 	if (!is_array($files)) $files = array();
 
 	if (!$nomark)
 	{
-		$title = $this->GetResourceValue("UploadTitle".($global?"Global":""));
+		$title = $this->GetResourceValue("UploadTitle".($global ? "Global" : ""));
 		print("<fieldset><legend>".$title.": ".$showpageandpath."</legend>\n");
 	}
+
 	// display
 	$kb  = $this->GetResourceValue("UploadKB");
 	$del = $this->GetResourceValue("UploadRemove");
 
-	if (!$global) $path = "@".str_replace("/", "@", $this->NpjTranslit($vars[0]))."@";
+	if (!$global) $path = "@".str_replace("/", "@", $this->NpjTranslit($page))."@";
 	else          $path = "";
 
-	if (!$global) $path2 = "file:/".($this->SlimUrl($vars[0]))."/";
+	if (!$global) $path2 = "file:/".($this->SlimUrl($page))."/";
 	else          $path2 = "file:";
 
 	// !!!!! patch link not to show pictures when not needed
@@ -83,7 +79,7 @@ if ($can_view)
 	if (count($files))
 	{
 ?>
-<p class="upload">
+		<table class="upload" cellspacing="0" cellpadding="0" border="0">
 <?php
 	}
 
@@ -98,10 +94,11 @@ if ($can_view)
 
 		$filename = $file["filename"];
 		$filesize = ceil($file["filesize"] / 1024);
-		$link = $this->Link($path2.$filename, "", $filename );
+		$link = $this->Link($path2.$filename, "", $filename);
 
-		if ($this->IsAdmin() || (!$is_global && ($this->GetPageOwner($vars[0]) == $this->GetUserName()))
-		|| ($file["user"] == $this->GetUserName()))
+		if ($this->IsAdmin() || (!$is_global &&
+		($this->GetPageOwner($page) == $this->GetUserName())) ||
+		($file["user"] == $this->GetUserName()))
 		{
 			$remove_mode = 1;
 		}
@@ -110,34 +107,35 @@ if ($can_view)
 			$remove_mode = 0;
 		}
 
-		$remove_href = $this->Href("upload", $vars[0], "remove=".($global?"global":"local")."&amp;file=".$filename);
+		$remove_href = $this->Href("upload", $page, "remove=".($global ? "global" : "local")."&amp;file=".$filename);
 ?>
-<span class="dt2-"><?php echo $dt ?></span>&nbsp;|
+		<tr>
+			<td class="dt-"><span class="dt2-"><?php echo $dt ?></span>&nbsp;</td>
 <?php
 		if ($remove_mode)
 		{
 ?>
-		<a href="<?php echo $remove_href; ?>" class="remove2-"><?php echo $del; ?></a>&nbsp;|
+			<td class="remove-"><a href="<?php echo $remove_href; ?>" class="remove2-"><?php echo $del; ?></a>&nbsp;</td>
 <?php
 		}
 		else
 		{
 ?>
-		&nbsp;
+			<td class="remove-">&nbsp;</td>
 <?php
 		}
 ?>
-		<span class="size2-">(<?php echo $filesize; ?>&nbsp;<?php
-		echo $kb; ?>)</span>&nbsp;|
-		<span class="file-"><?php echo $link; ?></span>
-		<span class="desc-"><?php echo $desc ?></span>
+		<td class="size-"><span class="size2-">(<?php echo $filesize; ?>&nbsp;<?php	echo $kb; ?>)</span>&nbsp;</td>
+		<td class="file-"><?php echo $link; ?></td>
+		<td class="desc-"><?php echo $desc ?></td>
+	</tr>
 <?php
 	}
 
 	if (count($files))
 	{
 ?>
-</p>
+		</table>
 <?php
 	}
 	if (!$nomark) echo "</fieldset>\n";
