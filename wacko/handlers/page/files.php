@@ -7,75 +7,86 @@ $file403 = "images/upload403.gif";
 if ($_GET["global"]) {
 	$page_id = 0;
 } 
-else 
+else
 {
 	$page_id = $this->page["id"];
 }
-$what = $this->LoadAll("SELECT user, id, filename, filesize, description FROM ".$this->config["table_prefix"]."upload WHERE ".
-                         "page_id = '".quote($this->dblink, $page_id)."' AND filename='".quote($this->dblink, $_GET["get"])."'");
-if (sizeof($what) > 0) 
+$what = $this->LoadAll(
+	"SELECT user, id, filename, file_ext, filesize, description ".
+	"FROM ".$this->config["table_prefix"]."upload ".
+	"WHERE page_id = '".quote($this->dblink, $page_id)."'".
+    "AND filename='".quote($this->dblink, $_GET["get"])."'");
+
+if (sizeof($what) > 0)
 {
 	// 2. check rights
 	if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwner($this->tag) == $this->GetUserName())) ||
 	($this->HasAccess("read")) || ($desc["user"] == $this->GetUserName()) )
 	{
-		$filepath = $this->config["upload_path".($page_id?"_per_page":"")]."/".
-		($page_id?("@".str_replace("/","@",$this->supertag)."@"):"").
+		$filepath = $this->config["upload_path".($page_id?"_per_page" : "")]."/".
+		($page_id ? ("@".str_replace("/", "@", $this->supertag)."@") : "").
 		$what[0]["filename"];
-	} 
-	else 
+	}
+	else
 	{
 		$error = 403;
 	}
-} 
-else 
+}
+else
 {
 	$error = 404;
 }
 
 // 3. passthru
-$ext_array = explode(".", $filepath?$filepath:$_GET["get"]);
-$extension = strtolower($ext_array[count($ext_array)-1]);
+$extension = strtolower($what[0]["file_ext"]);
 
-if ($extension == "gif") {
+if (($extension == "gif") || ($extension == "jpg") || ($extension == "jpeg") || ($extension == "png"))
+{
 	$isimage = true;
-	header("Content-Type: image/gif");
-}
+	header("Content-Type: image/".$extension);
 
-if ($extension == "jpg") {
-	$isimage = true;
-	header("Content-Type: image/jpeg");
+	if ($error)
+	{
+		$filepath = "images/upload".$error.".gif";
+		header("HTTP/1.0 404 Not Found");
+	}
 }
-
-if ($extension == "png") {
-	$isimage = true;
-	header("Content-Type: image/png");
+else if ($extension == "txt")
+{
+	$isplain = true;
+	header("Content-Type: text/plain");
 }
-
-if ($isimage && $error) {
-	$filepath = "images/upload".$error.".gif";
-	header("HTTP/1.0 404 Not Found");
+else if ($extension == "pdf")
+{
+	header("Cache-control: private");
+	header("Content-Type: application/pdf");
+}
+else
+{
+	header("Cache-control: private");
+	header("Content-Type: application/download");
 }
 
 if ($filepath)
 {
+	header("Content-Disposition:".( $isimage || $isplain ? "" : " attachment;" )." filename=".$what[0]["filename"]);
+
 	if (!$isimage)
 	{
-		header("Cache-control: private");
-		header("Content-Type: application/download");
-		header("Content-Disposition: attachment; filename=".$what[0]["filename"]);
 	}
 	$f = @fopen( $filepath, "rb" );
 	@fpassthru ($f);
 }
-else if ($error==404)
+else if ($error == 404)
 {
 	if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
+
 	print($this->GetResourceValue("UploadFileNotFound"));
 }
 else
 {
 	if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
+
 	print($this->GetResourceValue("UploadFileForbidden"));
 }
 
