@@ -51,47 +51,59 @@ if ($registered
 
 	$maxfilesize *= 1024;
 	?>
-
-<div class="cssform">
-  <p>
-    <label><?php echo $this->GetResourceValue("UploadFor");?>:</label>
-    <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize;?>" />
-    <input name="file" type="file" />
-    &nbsp;(<?php echo $this->GetResourceValue("UploadMax").$this->config["upload_max_size"].$this->GetResourceValue("UploadKB");?>)</p>
-  <?php
+<table border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td><label for="FileUpload"><?php echo $this->GetResourceValue("UploadFor");?>:&nbsp;</label>
+		<input type="hidden" name="MAX_FILE_SIZE"
+			value="<?php echo $maxfilesize;?>" /></td>
+		<td style="white-space: nowrap;"><input name="file" id="FileUpload" type="file" />&nbsp;(<?php echo $this->GetResourceValue("UploadMax").$this->config["upload_max_size"].$this->GetResourceValue("UploadKB");?>)</td>
+	</tr>
+	<?php
 	if ($global)
 	{ ?>
-  <p>
-  <div>
-    <input type="radio" name="_to" disabled="disabled" checked="checked" value="global" id="toUploadGlobalDisabled" />
-    <input type="hidden" name="to" value="global" />
-    <?php echo $this->GetResourceValue("UploadGlobalText"); ?> </div>
-  </p>
-  <?php }
+	<tr>
+		<td>&nbsp;</td>
+		<td>
+		<div>
+		<input type="radio" name="_to" disabled="disabled" checked="checked" value="global" id="toUploadGlobalDisabled" /> 
+		<input type="hidden" name="to" value="global" /> <?php echo $this->GetResourceValue("UploadGlobalText"); ?>
+		</div>
+	
+	</tr>
+	<?php }
 	else
 	{ ?>
-  <p>
-  <label for="toUploadGlobal" class="smaller"><?php echo $this->GetResourceValue("UploadGlobalText"); ?></label>
-  <input type="radio" name="to" value="global" id="toUploadGlobal" />
-  </p>
-  <p><label for="toUploadHere" class="smaller"><?php echo $this->GetResourceValue("UploadHereText"); ?></label>
-  <input type="radio" name="to" value="here" checked="checked" id="toUploadHere" />
-    </p>
-  <?php } ?>
-  <?php
+	<tr>
+		<td>&nbsp;</td>
+		<td>
+		<div>
+		<input type="radio" name="to" value="global" id="toUploadGlobal" />
+		<label for="toUploadGlobal"><?php echo $this->GetResourceValue("UploadGlobalText"); ?></label>
+		</div>
+		<div>
+		<input type="radio" name="to" value="here" checked="checked" id="toUploadHere" />
+		<label for="toUploadHere"><?php echo $this->GetResourceValue("UploadHereText"); ?></label>
+		</div>
+	</td>
+	</tr>
+	<?php } ?>
+	<?php
 	if (!$hide_description) { ?>
-  <p>
-    <label><?php echo $this->GetResourceValue("UploadDesc");?>:&nbsp;</label>
-    <input name="description" type="text" size="40" />
-  </p>
-  <?php } ?>
-  <p>
-  <div style="padding-top: 5px">
-    <input type="submit" value="<?php echo $this->GetResourceValue("UploadButtonText"); ?>" />
-  </div>
-  </p>
-</div>
-<?php
+	<tr>
+		<td style="text-align: right"><label for="UploadDesc"><?php echo $this->GetResourceValue("UploadDesc");?>:&nbsp;</label></td>
+		<td><input name="description" id="UploadDesc" type="text" size="40" /></td>
+	</tr>
+	<?php } ?>
+	<tr>
+		<td>&nbsp;</td>
+		<td>
+			<div style="padding-top: 5px">
+			<input type="submit" value="<?php echo $this->GetResourceValue("UploadButtonText"); ?>" />
+			</div>
+		</td>
+	</tr>
+</table>
+	<?php
 	echo $this->FormClose();
 }
 else
