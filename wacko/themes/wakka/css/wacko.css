@@ -450,11 +450,13 @@ table.dtable tr td {
 .micq1 {
 	padding:2px;
 	vertical-align:top;
+	white-space: nowrap;
 	font-weight: bold;
 }
 .micq2 {
 	padding:2px;
 	vertical-align:top;
+	white-space: nowrap;
 	font:10px tahoma, arial
 }
 .micq3 {

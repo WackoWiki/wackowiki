@@ -68,8 +68,8 @@ ul, ol { margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 
 .email-odd {color:#800000}
 .email-even {color:#808000}
 
-td.micq1 {padding: 2px; font-weight: bold;}
-td.micq2 {padding: 2px; font: 10px Trebuchet MS, Tahoma, Arial;}
+td.micq1 {padding: 2px; white-space: nowrap; font-weight: bold;}
+td.micq2 {padding: 2px; white-space: nowrap; font: 10px Trebuchet MS, Tahoma, Arial;}
 td.micq3 {padding: 2px; width: 100%; }
 
 /* Tale of Contents */

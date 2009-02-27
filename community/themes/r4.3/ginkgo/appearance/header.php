@@ -71,7 +71,7 @@ if ($user["doubleclickedit"] == "Y") {?>
 <body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="378" valign="bottom" nowrap="nowrap"><span class="main"><a href="<?php echo $this->GetConfigValue("root_url")?>"class="main"><?php echo $this->config["wakka_name"] ?></a></span></td>
+    <td width="378" valign="bottom" style="white-space: nowrap;"><span class="main"><a href="<?php echo $this->GetConfigValue("root_url")?>"class="main"><?php echo $this->config["wakka_name"] ?></a></span></td>
     <td width="100%"><div align="right"><?php
 // Opens Search form
 echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get");
@@ -133,7 +133,7 @@ if ($this->GetUser()) {
 </table>
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
-  <td valign="top" class="left" width="185" nowrap="nowrap"><table width="185" border="0" align="left" cellpadding="0" cellspacing="0">
+  <td valign="top" class="left" width="185" style="white-space: nowrap;"><table width="185" border="0" align="left" cellpadding="0" cellspacing="0">
       <tr align="left">
         <td><div>
             <?php
