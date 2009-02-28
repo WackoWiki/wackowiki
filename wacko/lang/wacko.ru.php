@@ -17,7 +17,7 @@ $wakkaResource = array(
   "RegistrationPage" => "Регистрация",
 // login panel
   "LoginWelcome" => "Вход",
-  "LoginWelcome2" => " . . . . . . . . [[/Регистрация Регистрация]]",
+  "LoginWelcome2" => "[[/Регистрация Регистрация]]",
   "LoginName" => "((WackoWiki:Doc/Russian/ЧтоТакоеИмяФамилия ИмяФамилия @@ru))",
   "LoginPassword" => "Пароль",
   "LoginButton" => "Войти в систему!",

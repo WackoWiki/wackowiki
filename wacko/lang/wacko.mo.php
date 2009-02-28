@@ -17,7 +17,7 @@ $wakkaResource = array(
   "RegistrationPage" => "Registration",
 // login panel
   "LoginWelcome" => "Entrarea",
-  "LoginWelcome2" => " . . . . . . . . [[/Registration Inregistrarea]]",
+  "LoginWelcome2" => "[[/Registration Inregistrarea]]",
   "LoginName" => "((WackoWiki:Doc/Äîêóìåíòàöèÿ/×òîÒàêîåÈìÿÔàìèëèÿ ÈìÿÔàìèëèÿ))",
   "LoginPassword" => "Parola",
   "LoginButton" => "Intrarea in sistem!",
