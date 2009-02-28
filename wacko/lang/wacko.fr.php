@@ -16,7 +16,7 @@ $wakkaResource = array(
   "RegistrationPage" => "Enregistrement",
 // login panel
   "LoginWelcome" => "Connexion",
-  "LoginWelcome2" => " . . . . . . . . [[/Enregistrement Enregistrement]]",
+  "LoginWelcome2" => "[[/Enregistrement Enregistrement]]",
   "LoginName" => "((WackoWiki:Doc/Francophone/PrenomNom PrénomNom))",
   "LoginPassword" => "Mot de Passe&nbsp;",
   "LoginButton" => "Connexion",

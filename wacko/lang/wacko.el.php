@@ -17,7 +17,7 @@ $wakkaResource = array(
   "RegistrationPage" => "Registration",
 // login panel
   "LoginWelcome" => "Σύνδεση",
-  "LoginWelcome2" => " . . . . . . . . ((/Registration Εγγραφή))",
+  "LoginWelcome2" => "((/Registration Εγγραφή))",
   "LoginName" => "((WackoWiki:Doc/English/WikiName NameSurname))",
   "LoginPassword" => "Συνθηματικό",
   "LoginButton" => "Σύνδεση!",

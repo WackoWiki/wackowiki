@@ -65,7 +65,7 @@ else
 <input type="hidden" name="action" value="login" />
 <input type="hidden" name="goback" value="<?php echo stripslashes($_REQUEST["goback"]);?>" />
 <div class="cssform">
-  <h3><?php echo $this->GetResourceValue("LoginWelcome"); ?>&nbsp; <small><?php echo $this->FormatResourceValue("LoginWelcome2"); ?></small> </h3>
+  <h3><?php echo $this->GetResourceValue("LoginWelcome"); ?></h3>
   <?php
 	if ($error)
 	{ ?>
@@ -86,6 +86,7 @@ else
 			value="<?php echo $this->GetResourceValue("LoginButton"); ?>" />
   </p>
   <p><a href="<?php echo $this->Href("", "Password"); ?>"><?php echo $this->GetResourceValue("ForgotLink"); ?></a></p>
+  <p><?php echo $this->FormatResourceValue("LoginWelcome2"); ?></p>
 </div>
 <script type="text/javascript">
    document.getElementById("f<?php echo $focus;?>").focus();
