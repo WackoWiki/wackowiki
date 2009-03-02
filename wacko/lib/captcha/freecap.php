@@ -353,7 +353,7 @@ if($use_dict==1)
    $words = @file($dict_location);
    $word = strtolower($words[$rand_func(0,sizeof($words)-1)]);
    // cut off line endings/other possible odd chars
-   $word = ereg_replace("[^a-z]","",$word);
+   $word = preg_replace("/[^a-z]/","",$word);
    // might be large file so forget it now (frees memory)
    $words = "";
    unset($words);
