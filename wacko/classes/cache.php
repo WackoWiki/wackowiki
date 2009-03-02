@@ -14,19 +14,21 @@ class Cache
 		$this->timer = $this->GetMicroTime();
 	}
 
-	//Get content from cache
+	//Get page content from cache
 	function GetCached($page, $method, $query)
 	{
 		$filename = $this->ConstructID($page, $method, $query);
+
 		if (!@file_exists($filename))
-		return false;
+			return false;
 
 		if ((time() - @filemtime($filename)) > $this->cache_ttl)
-		return false;
+			return false;
 
 		$fp = fopen ($filename, "r");
 		$contents = fread ($fp, filesize ($filename));
 		fclose ($fp);
+
 		return $contents;
 	}
 
@@ -45,21 +47,23 @@ class Cache
 	function GetCachedTime($page, $method, $query)
 	{
 		$filename = $this->ConstructID($page, $method, $query);
+
 		if (!@file_exists($filename))
-		return false;
+			return false;
 
 		if ((time() - @filemtime($filename)) > $this->cache_ttl)
-		return false;
+			return false;
 
 		return @filemtime($filename);
 	}
 
 	//Store content to cache
-	function StoreToCache($data, $page=false, $method=false, $query=false)
+	function StoreToCache($data, $page = false, $method = false, $query = false)
 	{
 		if (!$page)   $page   = $this->page;
 		if (!$method) $method = $this->method;
 		if (!$query)  $query  = $this->query;
+
 		$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", $page))));
 		$filename = $this->ConstructID($page, $method, $query);
 
@@ -85,15 +89,26 @@ class Cache
 		{
 			$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", $page))));
 			$this->Log("CacheInvalidate page=".$page);
-			$this->Log("CacheInvalidate query="."SELECT * FROM ".$this->wacko->config["table_prefix"]."cache WHERE name ='".quote($this->dblink, md5($page))."'");
-			$params = $this->wacko->LoadAll("SELECT * FROM ".$this->wacko->config["table_prefix"]."cache WHERE name ='".quote($this->dblink, md5($page))."'");
+			$this->Log("CacheInvalidate query=".
+				"SELECT * ".
+				"FROM ".$this->wacko->config["table_prefix"]."cache ".
+				"WHERE name ='".quote($this->dblink, md5($page))."'");
+
+			$params = $this->wacko->LoadAll(
+				"SELECT * ".
+				"FROM ".$this->wacko->config["table_prefix"]."cache ".
+				"WHERE name ='".quote($this->dblink, md5($page))."'");
+
 			$this->Log("CacheInvalidate COUNT params=".count($params));
+
 			foreach ($params as $param)
 			{
 				$filename = $this->ConstructID($page, $param["method"], $param["query"]);
+
 				$this->Log("CacheInvalidate delete=".$filename);
+
 				if (@file_exists($filename))
-				@unlink($filename);
+					@unlink($filename);
 			}
 
 			$this->wacko->Query(
@@ -101,9 +116,10 @@ class Cache
 				"WHERE name ='".quote($this->dblink, md5($page))."'");
 
 			$this->Log("CacheInvalidate end");
+
 			return true;
 		}
-		return false;
+		else return false;
 	}
 
 	function Log($msg)
@@ -119,7 +135,6 @@ class Cache
 	//Check http-request. May be, output cached version.
 	function CheckHttpRequest($page, $method)
 	{
-
 		if (!$page) return false;
 
 		foreach ($_GET as $k => $v)
@@ -131,11 +146,13 @@ class Cache
 		{
 			ksort($_query);
 			reset($_query);
+
 			foreach($_query as $k => $v)
 			{
 				$query .= urlencode($k)."=".urlencode($v)."&";
 			}
 		}
+
 		$this->Log("CheckHttpRequest query=".$query);
 
 		//check cache
@@ -152,10 +169,8 @@ class Cache
 			if ($_SERVER["REQUEST_METHOD"] == "GET") //may be we need HEAD support ???
 			{
 				if (!$lastm && !$etag);
-				else
-				if ($lastm && $gmt != $lastm);
-				else
-				if ($etag && $gmt != trim($etag, '\"'));
+				else if ($lastm && $gmt != $lastm);
+				else if ($etag && $gmt != trim($etag, '\"'));
 				else
 				{
 					header ("HTTP/1.1 304 Not Modified");
@@ -180,7 +195,7 @@ class Cache
 				}
 
 				if (strpos($method,".xml") === false)
-				echo "</body></html>";
+					echo "</body></html>";
 
 				die();
 			}
@@ -196,8 +211,9 @@ class Cache
 	function Output()
 	{
 		clearstatcache();
+
 		if (!($mtime = $this->GetCachedTime($this->page, $this->method, $this->query)))
-		$mtime = time();
+			$mtime = time();
 		{
 			$gmt = gmdate('D, d M Y H:i:s \G\M\T', $mtime);
 			$res = &$this->result;
