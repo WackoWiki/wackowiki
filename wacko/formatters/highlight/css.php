@@ -157,13 +157,13 @@ $special_keywords = array(  'color',
   }
 
   foreach($special_keyword2 as $i) {
-   $css = ereg_replace('[^-y]' . $i,'<span style="color: ##oct##;">' .$i. '</span>',$css);
+   $css = preg_replace(
+   '/[^-y]' . $i . '/',
+   '<span style="color: ##oct##;">' .$i. '</span>',
+   $css);
   }
 
-  $css = preg_replace(
-         '/(\.?)(.*)(\s?\{?)/s',
-         "&nbsp;<span style=\"color: ##ocv##;\">$1$2</span>$3",
-  $css);
+  $css = preg_replace('/(\.?)(.*)(\s?\{?)/s', "&nbsp;<span style=\"color: ##ocv##;\">$1$2</span>$3", $css);
 
   $css = preg_replace("/(\#[0-9a-fA-F]+|\d+(px))/", "<span style=\"color: ".$options['color']['digits'].";\">$1</span>",$css);
 
