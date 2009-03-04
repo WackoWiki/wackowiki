@@ -187,7 +187,7 @@ class WackoFormatter
 			"\\\\\\\\[".$object->language["ALPHANUM_P"]."\-\_\\\!\.]+|".
 			"\*\*[^\n]*?\*\*|\#\#[^\n]*?\#\#|\¹\¹[^\n]*?\¹\¹|\'\'.*?\'\'|\!\!\S\!\!|\!\!(\S.*?\S)\!\!|__[^\n]*?__|".
 			"\xA4\xA4\S\xA4\xA4|\xA3\xA3\S\xA3\xA3|\xA4\xA4(\S.*?\S)\xA4\xA4|\xA3\xA3(\S.*?\S)\xA3\xA3|".
-			"\#\|\||\#\||\|\|\#|\|\#|\|\|.*?\|\||".
+			"\#\|\||\#\||\|\|\#|\|\#|\|\|.*?\|\||\*\|.*?\|\*|".
 			"<|>|\/\/[^\n]*?(?<!http:|https:|ftp:|file:|nntp:)\/\/|".
 			"\n[ \t]*=======.*?={2,7}|\n[ \t]*======.*?={2,7}|\n[ \t]*=====.*?={2,7}|\n[ \t]*====.*?={2,7}|\n[ \t]*===.*?={2,7}|\n[ \t]*==.*?={2,7}|".
 			"[-]{4,}|---\n?\s*|--\S--|--(\S.*?[^- \t\n\r])--|".
@@ -395,6 +395,64 @@ class WackoFormatter
 			$this->intablebr = false;
 			$this->tableScope = false;
 			return "</table>";
+		}
+		//table head
+		else if (preg_match("/^\*\|(.*?)\|\*$/s", $thing, $matches) && $this->tableScope)
+		{
+			$this->br			= 1;
+			$this->intable		= true;
+			$this->intablebr	= false;
+			
+			$output		= "<tr class=\"userrow\">";
+			$cells		= split("\|", $matches[1]);
+			$count		= count($cells);
+			$count--;
+			
+			for ($i = 0; $i < $count; $i++)
+			{
+				$this->tdoldIndentLevel	= 0;
+				$this->tdindentClosers	= array();
+				
+				if ($cells[$i]{0} == "\n")
+					$cells[$i] = substr($cells[$i], 1);
+				
+				$output	.= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<th class=\"userhead\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$i])));
+				$output	.= $this->IndentClose();                                                   
+				$output	.= "</th>";
+			}
+			if (($this->cols <> 0) and ($count < $this->cols))
+			{
+				$this->tdoldIndentLevel	= 0;
+				$this->tdindentClosers	= array();
+				
+				if ($cells[$i]{0} == "\n")
+					$cells[$count] = substr($cells[$count], 1);
+				
+				$output	.= str_replace("\177", '', str_replace("\177"."<br />\n", "", "<th class=\"userhead\" colspan=\"".($this->cols-$count + 1)."\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
+				$output	.= $this->IndentClose();
+				$output	.= "</th>";
+			}
+			else
+			{ 
+				$this->tdoldIndentLevel	= 0;
+				$this->tdindentClosers	= array();
+				
+				if ($cells[$i]{0} == "\n")
+					$cells[$count] = substr($cells[$count], 1);
+				
+				$output	.= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<th class=\"userhead\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
+				$output	.= $this->IndentClose();
+				$output	.= "</th>";
+			}
+			$output .= "</tr>";
+			
+			if ($this->cols	== 0)
+				$this->cols	= $count;
+			
+			$this->intablebr	= true;
+			$this->intable		= false;
+			
+			return $output;
 		}
 		//table row and cells
 		else if (preg_match("/^\|\|(.*?)\|\|$/s", $thing, $matches) && $this->tableScope)
