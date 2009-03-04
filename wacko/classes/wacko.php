@@ -229,12 +229,12 @@ class Wacko
 		return $this->_langlist;
 	}
 
-	function GetResourceValue($name, $lang = "", $dounicode = true)
+	function GetTranslation($name, $lang = "", $dounicode = true)
 	{
 		if (!$this->GetConfigValue("multilanguage"))
 			return $this->resource[$name];
 
-		//echo "<b>GetResourceValue:</b> $lang + $name + $this->userlang + $this->pagelang<br />";
+		//echo "<b>GetTranslation:</b> $lang + $name + $this->userlang + $this->pagelang<br />";
 
 		if (!$lang && $this->userlang != $this->pagelang)
 			$lang = $this->userlang;
@@ -253,7 +253,7 @@ class Wacko
 
 	function FormatResourceValue($name, $lang = "")
 	{
-		$string = $this->GetResourceValue($name, $lang, false);
+		$string = $this->GetTranslation($name, $lang, false);
 		$this->format_safe = false;
 		$string = $this->Format($string);
 		$this->format_safe = true;
@@ -660,7 +660,7 @@ class Wacko
 		$ddd = $this->GetMicroTime();
 		$this->queryLog[] = array(
     "query"   => "<b>end caching links</b>",
-    "time"    => $this->GetResourceValue("MeasuredTime").": ".(number_format(($ddd-$this->timer),3))." s");
+    "time"    => $this->GetTranslation("MeasuredTime").": ".(number_format(($ddd-$this->timer),3))." s");
 	}
 
 	function SetPage($page)
@@ -971,12 +971,12 @@ class Wacko
 							if ($User["email_confirm"]=="" && $User["options"]["send_watchmail"]!="N")
 							{
 								$lang = $User["lang"];
-								$subject = $this->GetResourceValue("CommentForWatchedPage",$lang)."'".$comment_on."'";
-								$message = $this->GetResourceValue("MailHello",$lang). $Watcher["user"].".<br /> <br /> ";
+								$subject = $this->GetTranslation("CommentForWatchedPage",$lang)."'".$comment_on."'";
+								$message = $this->GetTranslation("MailHello",$lang). $Watcher["user"].".<br /> <br /> ";
 								$message .=   $username.
-								$this->GetResourceValue("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$comment_on,"")."\">".$this->Href("",$comment_on,"")."</a><br />";
+								$this->GetTranslation("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$comment_on,"")."\">".$this->Href("",$comment_on,"")."</a><br />";
 								$message .= "<hr />".$this->Format($body_r, "post_wacko")."<hr />";
-								$message .= "<br />".$this->GetResourceValue("MailGoodbye",$lang)." ".$this->GetConfigValue("wakka_name");
+								$message .= "<br />".$this->GetTranslation("MailGoodbye",$lang)." ".$this->GetConfigValue("wakka_name");
 								$this->SendMail($User["email"], $subject, $message);
 							}
 						}
@@ -1043,17 +1043,17 @@ class Wacko
 							if ($User["email_confirm"] == "" && $User["options"]["send_watchmail"] != "N")
 							{
 								$lang = $User["lang"];
-								$subject = $this->GetResourceValue("WatchedPageChanged",$lang)."'".$tag."'";
+								$subject = $this->GetTranslation("WatchedPageChanged",$lang)."'".$tag."'";
 								$message = "<style>.additions {color: #008800;}\n.deletions {color: #880000;}</style>";
-								$message .= $this->GetResourceValue("MailHello",$lang). $Watcher["user"].".<br /> <br /> ";
+								$message .= $this->GetTranslation("MailHello",$lang). $Watcher["user"].".<br /> <br /> ";
 								$message .=   $username.
-								$this->GetResourceValue("SomeoneChangedThisPage",$lang)."<br />  ";//* <a href=\"".$this->Href("",$tag,"")."\">".$this->Href("",$tag,"")."</a><br />";
+								$this->GetTranslation("SomeoneChangedThisPage",$lang)."<br />  ";//* <a href=\"".$this->Href("",$tag,"")."\">".$this->Href("",$tag,"")."</a><br />";
 								$_GET["fastdiff"] = 1;
 								$_GET["a"] = -1;
 								$page = $this->LoadSingle("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."revisions WHERE tag='".quote($this->dblink, $tag)."' ORDER BY time DESC");
 								$_GET["b"] = $page["id"];
 								$message .= "<hr />".$this->IncludeBuffered("handlers/page/diff.php", "oops")."<hr />";
-								$message .= "<br />".$this->GetResourceValue("MailGoodbye",$lang)." ".$this->GetConfigValue("wakka_name");
+								$message .= "<br />".$this->GetTranslation("MailGoodbye",$lang)." ".$this->GetConfigValue("wakka_name");
 								$this->SendMail($User["email"], $subject, $message);
 							}
 						}
@@ -1272,8 +1272,8 @@ class Wacko
 		{
 			// this is a valid Email
 			$url = ($matches[1] == "mailto:" ? $tag : "mailto:".$tag);
-			$title = $this->GetResourceValue("MailLink");
-			$icon = $this->GetResourceValue("mailicon");
+			$title = $this->GetTranslation("MailLink");
+			$icon = $this->GetTranslation("mailicon");
 			$tpl = "email";
 		}
 		else if (preg_match("/^#/", $tag))
@@ -1298,22 +1298,22 @@ class Wacko
 		{
 			// this is a file link
 			$url = str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
-			$title= $this->GetResourceValue("FileLink");
-			$icon = $this->GetResourceValue("fileicon");
+			$title= $this->GetTranslation("FileLink");
+			$icon = $this->GetTranslation("fileicon");
 			$tpl = "file";
 		}
 		else if (preg_match("/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/", $tag)) {
 			// this is a PDF link
 			$url = str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
-			$title= $this->GetResourceValue("PDFLink");
-			$icon = $this->GetResourceValue("pdficon");
+			$title= $this->GetTranslation("PDFLink");
+			$icon = $this->GetTranslation("pdficon");
 			$tpl = "file";
 		}
 		else if (preg_match("/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rdf)$/", $tag)) {
 			// this is a RDF link
 			$url = str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
-			$title= $this->GetResourceValue("RDFLink");
-			$icon = $this->GetResourceValue("rdficon");
+			$title= $this->GetTranslation("RDFLink");
+			$icon = $this->GetTranslation("rdficon");
 			$tpl = "file";
 		}
 		else if (preg_match("/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/", $tag))
@@ -1322,8 +1322,8 @@ class Wacko
 			$url = str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
 			if (!stristr($tag,$this->config["base_url"]))
 			{
-				$title= $this->GetResourceValue("OuterLink2");
-				$icon = $this->GetResourceValue("outericon");
+				$title= $this->GetTranslation("OuterLink2");
+				$icon = $this->GetTranslation("outericon");
 			}
 			$tpl = "outerlink";
 		}
@@ -1342,9 +1342,9 @@ class Wacko
 				//    print_r($desc);
 				if (is_array($desc))
 				{
-					$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetResourceValue("UploadKB").")";
+					$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
 					$url = $this->GetConfigValue("root_url").$this->config["upload_path"]."/".$thing;
-					$icon = $this->GetResourceValue("fileicon");
+					$icon = $this->GetTranslation("fileicon");
 					$imlink = false;
 					$tpl = "localfile";
 					if ($desc["picture_w"] && !$noimg)
@@ -1361,9 +1361,9 @@ class Wacko
 				$desc = $this->CheckFileExists($arr[1]);
 				if (is_array($desc))
 				{
-					$title = $desc["description"]." (".ceil($desc["filesize"] / 1024)."&nbsp;".$this->GetResourceValue("UploadKB").")";
+					$title = $desc["description"]." (".ceil($desc["filesize"] / 1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
 					$url = $this->GetConfigValue("root_url").$this->config["upload_path"].$thing;
-					$icon = $this->GetResourceValue("fileicon");
+					$icon = $this->GetTranslation("fileicon");
 					$imlink = false;
 					$tpl = "localfile";
 					if ($desc["picture_w"] && !$noimg)
@@ -1400,7 +1400,7 @@ class Wacko
 					if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwner($this->tag) == $this->GetUserName())) ||
 					($this->HasAccess("read", $pagetag)) || ($desc["user"] == $this->GetUserName()) )
 					{
-						$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetResourceValue("UploadKB").")";
+						$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
 						if ($desc["picture_w"] && !$noimg)
 						{
 							if (!$text) 
@@ -1409,13 +1409,13 @@ class Wacko
 						}
 						$url = $this->config["base_url"].trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file;
 						$imlink = false;
-						$icon = $this->GetResourceValue("fileicon");
+						$icon = $this->GetTranslation("fileicon");
 						$tpl = "localfile";
 					}
 					else //403
 					{
 						$url = $this->config["base_url"].trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file;
-						$icon = $this->GetResourceValue("lockicon");
+						$icon = $this->GetTranslation("lockicon");
 						$imlink = false;
 						$tpl = "localfile";
 						$class = "denied";
@@ -1449,7 +1449,7 @@ class Wacko
 				$text = $this->DoUnicodeEntities($text, $linklang);
 
 			$url = $this->GetInterWikiUrl($matches[1], implode("/",$parts));
-			$icon = $this->GetResourceValue("iwicon");
+			$icon = $this->GetTranslation("iwicon");
 			$tpl = "interwiki";
 		}
 		else if (preg_match("/^([\!\.".$this->language["ALPHANUM_P"]."]+)(\#[".$this->language["ALPHANUM_P"]."\_\-]+)?$/", $tag, $matches))
@@ -1521,28 +1521,28 @@ class Wacko
 
 			if (substr($tag, 0, 2) == "!/")
 			{
-				$icon = $this->GetResourceValue("childicon");
+				$icon = $this->GetTranslation("childicon");
 				$page0 = substr($tag, 2);
 				$page = $this->AddSpaces($page0);
 				$tpl = "childpage";
 			}
 			else if (substr($tag, 0, 3) == "../")
 			{
-				$icon = $this->GetResourceValue("parenticon");
+				$icon = $this->GetTranslation("parenticon");
 				$page0 = substr($tag, 3);
 				$page = $this->AddSpaces($page0);
 				$tpl = "parentpage";
 			}
 			else if (substr($tag, 0, 1) == "/")
 			{
-				$icon = $this->GetResourceValue("rooticon");
+				$icon = $this->GetTranslation("rooticon");
 				$page0 = substr($tag, 1);
 				$page = $this->AddSpaces($page0);
 				$tpl = "rootpage";
 			}
 			else
 			{
-				$icon = $this->GetResourceValue("equalicon");
+				$icon = $this->GetTranslation("equalicon");
 				$page0 = $tag;
 				$page = $this->AddSpaces($page0);
 				$tpl = "equalpage";
@@ -1583,7 +1583,7 @@ class Wacko
 				if (!$access)
 				{
 					$class = "denied";
-					$accicon = $this->GetResourceValue("lockicon");
+					$accicon = $this->GetTranslation("lockicon");
 				}
 				else if ($this->_acl["list"] == "*")
 				{
@@ -1593,7 +1593,7 @@ class Wacko
 				else
 				{
 					$class = "customsec";
-					$accicon = $this->GetResourceValue("keyicon");
+					$accicon = $this->GetTranslation("keyicon");
 				}
 
 				// language
@@ -1611,8 +1611,8 @@ class Wacko
 			{
 				$tpl = ($this->method == "print" || $this->method == "msword" ? "p" : "") . "w" . $tpl;
 				$pagelink = $this->href("edit", $tag, $lang ? "lang=".$lang : "", 1);
-				$accicon = $this->GetResourceValue("wantedicon");
-				$title = $this->GetResourceValue("CreatePage");
+				$accicon = $this->GetTranslation("wantedicon");
+				$title = $this->GetTranslation("CreatePage");
 
 				if ($linklang)
 				{
@@ -1623,7 +1623,7 @@ class Wacko
 
 			$icon = str_replace("{theme}", $this->GetConfigValue("theme_url"), $icon);
 			$accicon = str_replace("{theme}", $this->GetConfigValue("theme_url"), $accicon);
-			$res = $this->GetResourceValue("tpl.".$tpl);
+			$res = $this->GetTranslation("tpl.".$tpl);
 			$text = trim($text);
 
 			if ($res)
@@ -1661,7 +1661,7 @@ class Wacko
 				$text = "<img src=\"$imlink\" border=\"0\" title=\"$text\" />";
 
 			$icon = str_replace("{theme}", $this->GetConfigValue("theme_url"), $icon);
-			$res = $this->GetResourceValue("tpl.".$tpl);
+			$res = $this->GetTranslation("tpl.".$tpl);
 
 			if ($res)
 			{
@@ -1728,9 +1728,9 @@ class Wacko
 			$text = preg_replace("/([0-9])&nbsp;(?=[0-9])/","\\1",$text);
 		}
 
-		if (strpos($text, "/") === 0) $text = $this->GetResourceValue("RootLinkIcon").substr($text, 1);
-		if (strpos($text, "!/") === 0) $text = $this->GetResourceValue("SubLinkIcon").substr($text, 2);
-		if (strpos($text, "../") === 0) $text = $this->GetResourceValue("UpLinkIcon").substr($text, 3);
+		if (strpos($text, "/") === 0) $text = $this->GetTranslation("RootLinkIcon").substr($text, 1);
+		if (strpos($text, "!/") === 0) $text = $this->GetTranslation("SubLinkIcon").substr($text, 2);
+		if (strpos($text, "../") === 0) $text = $this->GetTranslation("UpLinkIcon").substr($text, 3);
 
 		return $text;
 	}
@@ -1932,7 +1932,7 @@ class Wacko
 		$action = trim($action);
 
 		if (!$forceLinkTracking) $this->StopLinkTracking();
-		$result = $this->IncludeBuffered(strtolower($action).".php", "<i>".$this->GetResourceValue("UnknownAction")." \"$action\"</i>", $params, $this->config["action_path"]);
+		$result = $this->IncludeBuffered(strtolower($action).".php", "<i>".$this->GetTranslation("UnknownAction")." \"$action\"</i>", $params, $this->config["action_path"]);
 		$this->StartLinkTracking();
 		$this->NoCache();
 		return $result;
@@ -2354,12 +2354,12 @@ class Wacko
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->GetCharset()."\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
-		$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetResourceValue("RecentChangesTitleXML")."</title>\n";
+		$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetTranslation("RecentChangesTitleXML")."</title>\n";
 		$xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
-		$xml .= "<description>".$this->GetResourceValue("RecentChangesXML").$this->GetConfigValue("wakka_name")." </description>\n";
+		$xml .= "<description>".$this->GetTranslation("RecentChangesXML").$this->GetConfigValue("wakka_name")." </description>\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetResourceValue("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
 		$xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
 		$xml .= "<url>".$this->GetConfigValue("root_url")."files/wacko4.gif"."</url>\n";
 		$xml .= "<width>108</width>\n";
@@ -2402,12 +2402,12 @@ class Wacko
 		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->GetConfigValue("theme_url")."css/wacko.css\" media=\"screen\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
-		$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetResourceValue("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
 		$xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
-		$xml .= "<description>".$this->GetResourceValue("RecentCommentsXML").$this->GetConfigValue("wakka_name")." </description>\n";
+		$xml .= "<description>".$this->GetTranslation("RecentCommentsXML").$this->GetConfigValue("wakka_name")." </description>\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetResourceValue("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
 		$xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
 		$xml .= "<url>".$this->GetConfigValue("root_url")."files/wacko4.gif"."</url>\n";
 		$xml .= "<width>108</width>\n";
@@ -2423,7 +2423,7 @@ class Wacko
 				if ( $access && ($count < 30) ) {
 					$count++;
 					$xml .= "<item>\n";
-					$xml .= "<title>".$page["tag"]." ".$this->GetResourceValue("To")." ".$page["comment_on"]." ".$this->GetResourceValue("From")." ".$page["user"]."</title>\n";
+					$xml .= "<title>".$page["tag"]." ".$this->GetTranslation("To")." ".$page["comment_on"]." ".$this->GetTranslation("From")." ".$page["user"]."</title>\n";
 					$xml .= "<link>".$this->href("show", $page["tag"], "time=".urlencode($page["time"]))."</link>\n";
 					$xml .= "<guid>".$this->href("show", $page["tag"], "time=".urlencode($page["time"]))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['time']))."</pubDate>\n";
@@ -2533,7 +2533,7 @@ class Wacko
 		else if (isset($this->config[$what."_bookmarks"]) && !is_array($this->config[$what."_bookmarks"]) && ($this->config["language"]==$lang))
 		return $this->config[$what."_bookmarks"];
 		else
-		return $this->GetResourceValue($what."_bookmarks", $lang, false);
+		return $this->GetTranslation($what."_bookmarks", $lang, false);
 	}
 
 	function SetBookmarks($set=BM_AUTO)

@@ -8,7 +8,7 @@ if($user = $this->GetUser())
 	if (is_array($this->config['aliases']))
 	{
 		if (!$nomark)
-		print('<fieldset><legend>'.$this->GetResourceValue("UserGroups").':</legend>');
+		print('<fieldset><legend>'.$this->GetTranslation("UserGroups").':</legend>');
 
 		print ('<table border="0" cellspacing="5" cellpadding="5"><tr>');
 

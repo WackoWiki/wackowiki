@@ -16,7 +16,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 {
 	if (!$this->page)
 	{
-		print(str_replace("%1",$this->href("edit"),$this->GetResourceValue("DoesNotExists")));
+		print(str_replace("%1",$this->href("edit"),$this->GetTranslation("DoesNotExists")));
 	}
 	else
 	{
@@ -28,53 +28,53 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 			// Remove page
 			if ($this->RemoveReferrers($this->tag))
 			{
-				print(str_replace("%1",$this->tag,$this->GetResourceValue("ReferrersRemoved"))."<br />\n");
+				print(str_replace("%1",$this->tag,$this->GetTranslation("ReferrersRemoved"))."<br />\n");
 			}
 			if ($this->RemoveLinks($this->tag))
 			{
-				print(str_replace("%1",$this->tag,$this->GetResourceValue("LinksRemoved"))."<br />\n");
+				print(str_replace("%1",$this->tag,$this->GetTranslation("LinksRemoved"))."<br />\n");
 			}
 			if ($this->RemoveAcls($this->tag))
 			{
-				print(str_replace("%1",$this->tag,$this->GetResourceValue("AclsRemoved"))."<br />\n");
+				print(str_replace("%1",$this->tag,$this->GetTranslation("AclsRemoved"))."<br />\n");
 			}
 			if ($this->RemoveWatches($this->tag))
 			{
-				print(str_replace("%1",$this->tag,$this->GetResourceValue("WatchesRemoved"))."<br />\n");
+				print(str_replace("%1",$this->tag,$this->GetTranslation("WatchesRemoved"))."<br />\n");
 			}
 			if ($this->RemoveComments($this->tag))
 			{
 				$this->WriteRecentCommentsXML();
-				print(str_replace("%1",$this->tag,$this->GetResourceValue("CommentsRemoved"))."<br />\n");
+				print(str_replace("%1",$this->tag,$this->GetTranslation("CommentsRemoved"))."<br />\n");
 			}
 			if ($this->RemoveFiles($this->tag))
 			{
-				print(str_replace("%1",$this->tag,$this->GetResourceValue("FilesRemoved"))."<br />\n");
+				print(str_replace("%1",$this->tag,$this->GetTranslation("FilesRemoved"))."<br />\n");
 			}
 			if ($this->RemovePage($this->tag))
 			{
 				$this->WriteRecentChangesXML();
 				$this->WriteRecentCommentsXML();
-				print(str_replace("%1",$this->tag,$this->GetResourceValue("PageRemoved"))."<br />\n");
+				print(str_replace("%1",$this->tag,$this->GetTranslation("PageRemoved"))."<br />\n");
 			}
 
-			print($this->GetResourceValue("ThisActionHavenotUndo")."\n");
+			print($this->GetTranslation("ThisActionHavenotUndo")."\n");
 
 	  // return to commented page
 		if ($comment_on)
 		{
-			echo "<br />".$this->ComposeLinkToPage($comment_on."#comments", "", $this->GetResourceValue("ReturnToCommented"), 0);
+			echo "<br />".$this->ComposeLinkToPage($comment_on."#comments", "", $this->GetTranslation("ReturnToCommented"), 0);
 		}
 		}
 		else 
 		{
-			echo "<div class=\"warning\"><strong>".$this->GetResourceValue("ReallyDelete".($this->page["comment_on"]?"Comment":""))."</strong></div>";
+			echo "<div class=\"warning\"><strong>".$this->GetTranslation("ReallyDelete".($this->page["comment_on"]?"Comment":""))."</strong></div>";
 			echo $this->FormOpen("remove");
 			
 		// show backlinks
 		if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
 		{
-			print("<br /><fieldset><legend>".$this->GetResourceValue("AlertReferringPages").":</legend>\n");
+			print("<br /><fieldset><legend>".$this->GetTranslation("AlertReferringPages").":</legend>\n");
 			foreach ($pages as $page)
 			{
 				if ($page["tag"])
@@ -97,12 +97,12 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
   <input name="submit"
 	class="OkBtn_Top" onmouseover='this.className="OkBtn_Top_";'
 	onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
-	value="<?php echo $this->GetResourceValue("RemoveButton"); ?>" />
+	value="<?php echo $this->GetTranslation("RemoveButton"); ?>" />
   &nbsp;
   <input
 	class="CancelBtn_Top" onmouseover='this.className="CancelBtn_Top_";'
 	onmouseout='this.className="CancelBtn_Top";' type="button" align="top"
-	value="<?php echo str_replace("\n"," ",$this->GetResourceValue("EditCancelButton")); ?>"
+	value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
 	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
   <br />
   <?php echo $this->FormClose();
@@ -111,7 +111,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 }
 else
 {
-	print($this->GetResourceValue("NotOwnerAndCanDelete"));
+	print($this->GetTranslation("NotOwnerAndCanDelete"));
 }
 ?>
 </div>

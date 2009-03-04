@@ -6,14 +6,14 @@ if ($this->HasAccess("read"))
 	{
 		if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
 
-		print(str_replace("%1", $this->href("edit", "", "", 1), $this->GetResourceValue("DoesNotExists")));
+		print(str_replace("%1", $this->href("edit", "", "", 1), $this->GetTranslation("DoesNotExists")));
 	}
 	else
 	{
 		// comment header?
 		if ($this->page["comment_on"])
 		{
-			print("<div class=\"commentinfo\">".$this->GetResourceValue("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->page["comment_on"], "", "", 0).", ".$this->GetResourceValue("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetResourceValue("At")." ".$this->page["time"]."</div>");
+			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->page["comment_on"], "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["time"]."</div>");
 		}
 
 		if ($this->page["latest"] == "N")
@@ -22,7 +22,7 @@ if ($this->HasAccess("read"))
 			str_replace("%1",$this->href(),
 			str_replace("%2",$this->GetPageTag(),
 			str_replace("%3",$this->page["time"],
-			$this->GetResourceValue("Revision")))).".</div>");
+			$this->GetTranslation("Revision")))).".</div>");
 		}
 
 		// count page hit
@@ -77,7 +77,7 @@ if ($this->HasAccess("read"))
 	<?php echo $this->FormOpen("edit") ?>
 	<input type="hidden" name="previous" value="<?php echo $latest["time"] ?>" />
 	<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page["body"]) ?>" />
-	<input type="submit" value="<?php echo $this->GetResourceValue("ReEditOldRevision") ?>" />
+	<input type="submit" value="<?php echo $this->GetTranslation("ReEditOldRevision") ?>" />
 	<?php echo $this->FormClose(); ?>
 <?php
   }
@@ -86,7 +86,7 @@ if ($this->HasAccess("read"))
 else
 {
 	if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
-	print($this->GetResourceValue("ReadAccessDenied"));
+	print($this->GetTranslation("ReadAccessDenied"));
 }
 ?>
 <br style="clear: both" />&nbsp;</div>
@@ -120,9 +120,9 @@ if ($this->GetConfigValue("footer_files"))
 			// display files header
 			?>
 <a name="files" id="files"></a>
-<div id="filesheader"><?php echo $this->GetResourceValue("Files_all") ?>
+<div id="filesheader"><?php echo $this->GetTranslation("Files_all") ?>
 [<a
-	href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?></a>]
+	href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetTranslation("HideFiles"); ?></a>]
     </div>
 	
     <?php
@@ -171,16 +171,16 @@ if ($this->GetConfigValue("footer_files"))
       switch ($c = count($files))
       {
       case 0:
-        print($this->GetResourceValue("Files_0"));
+        print($this->GetTranslation("Files_0"));
         break;
       case 1:
-        print($this->GetResourceValue("Files_1"));
+        print($this->GetTranslation("Files_1"));
         break;
       default:
-        print(str_replace("%1", $c, $this->GetResourceValue("Files_n")));
+        print(str_replace("%1", $c, $this->GetTranslation("Files_n")));
       }
     ?>
-[<a href="<?php echo $this->href("", "", "show_files=1#files")."\">".$this->GetResourceValue("ShowFiles"); ?></a>]
+[<a href="<?php echo $this->href("", "", "show_files=1#files")."\">".$this->GetTranslation("ShowFiles"); ?></a>]
 
     </div>
     <?php
@@ -219,7 +219,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     ?>
     <a name="comments"></a>
 <div id="commentsheader">
-<?php echo $this->GetResourceValue("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetResourceValue("HideComments"); ?></a>]
+<?php echo $this->GetTranslation("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetTranslation("HideComments"); ?></a>]
     </div>
     <?php
 
@@ -233,7 +233,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
         print("<div class=\"comment\">\n");
         $del = "";
         if ($this->IsAdmin() || $this->UserIsOwner($comment["tag"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageTag())))
-          print("<a href=\"".$this->href("remove",$comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1del.gif\" title=\"".$this->GetResourceValue("DeleteTipComment")."\" alt=\"".$this->GetResourceValue("DeleteText")."\"  align=\"right\" border=\"0\" /></a>");
+          print("<a href=\"".$this->href("remove",$comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1del.gif\" title=\"".$this->GetTranslation("DeleteTipComment")."\" alt=\"".$this->GetTranslation("DeleteText")."\"  align=\"right\" border=\"0\" /></a>");
         if ($comment["body_r"]) $strings = $comment["body_r"];
         else $strings = $this->Format($comment["body"], "wacko");
         print($this->Format($strings,"post_wacko")."\n");
@@ -247,7 +247,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     {
 		print("<div class=\"commentform\">\n");
 		
-      	echo $this->GetResourceValue("AttachComment"); ?><br />
+      	echo $this->GetTranslation("AttachComment"); ?><br />
         <?php echo $this->FormOpen("addcomment"); ?>
           <textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
 <?php
@@ -262,8 +262,8 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
                         if(strpos($this->GetUserName(), '.'))
                            {
           ?>
-<p><?php echo $this->GetResourceValue("Captcha");?>:</p>
-<img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetResourceValue("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetResourceValue("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("root_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetResourceValue("CaptchaReload"); ?>" /></a>
+<p><?php echo $this->GetTranslation("Captcha");?>:</p>
+<img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("root_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
 <br />
 <input type="text" name="word" maxlength="6" style="width: 273px;" />
 <br />
@@ -274,7 +274,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
                }
             // end captcha
 ?>
-<input type="submit" value="<?php echo $this->GetResourceValue("AttachCommentButton"); ?>" accesskey="s" />
+<input type="submit" value="<?php echo $this->GetTranslation("AttachCommentButton"); ?>" accesskey="s" />
 <?php echo $this->FormClose(); ?>
 <?php
 		print("</div>\n");
@@ -289,17 +289,17 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
       switch ($c = count($comments))
       {
       case 0:
-        print($this->GetResourceValue("Comments_0"));
+        print($this->GetTranslation("Comments_0"));
         break;
       case 1:
-        print($this->GetResourceValue("Comments_1"));
+        print($this->GetTranslation("Comments_1"));
         break;
       default:
-        print(str_replace("%1", $c, $this->GetResourceValue("Comments_n")));
+        print(str_replace("%1", $c, $this->GetTranslation("Comments_n")));
       }
 	  //TODO: show link to show comment only if there is one or/and user has the right to add a new one 
     ?>
-  [<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->GetResourceValue("ShowComments"); ?></a>]</div>
+  [<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->GetTranslation("ShowComments"); ?></a>]</div>
 <?php
   }
 }

@@ -35,9 +35,9 @@ lernjournal theme.
 <link href="<?php echo $this->GetConfigValue("theme_url") ?>css/fontdesign.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $this->GetConfigValue("theme_url") ?>css/sidenote.css" rel="stylesheet" type="text/css" />
 <link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/wacko.ico" type="image/x-icon" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -70,8 +70,8 @@ if ($user["doubleclickedit"] == "Y") {?>
   <div id="wikititle"><?php echo $this->config["wakka_name"] ?></div>
   <?php
 // Searchbar
-echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get"); ?>
-  <div id="search"><?php echo $this->GetResourceValue("SearchText") ?><input name="phrase" type="text" size="12" style="border: none; padding: 0px; margin: 0px;" /></div>
+echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?>
+  <div id="search"><?php echo $this->GetTranslation("SearchText") ?><input name="phrase" type="text" size="12" style="border: none; padding: 0px; margin: 0px;" /></div>
   <?php
 // Search form close
 echo $this->FormClose();
@@ -92,10 +92,10 @@ if ($this->GetUser())
 {
  if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks()))
  {?>
-  <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar1.gif" alt="+" title="<?php echo $this->GetResourceValue("AddToBookmarks") ?>" border="0" align="middle" /></a><br />
+  <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar1.gif" alt="+" title="<?php echo $this->GetTranslation("AddToBookmarks") ?>" border="0" align="middle" /></a><br />
   <?php 
  } else { ?>
-  <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar2.gif" alt="-" title="<?php echo $this->GetResourceValue("RemoveFromBookmarks") ?>" border="0" align="middle" /></a><br />
+  <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar2.gif" alt="-" title="<?php echo $this->GetTranslation("RemoveFromBookmarks") ?>" border="0" align="middle" /></a><br />
   <?php 
  }
 } 
@@ -104,23 +104,23 @@ if ($this->GetUser())
   <?php
 // If user are logged, Wacko shows "You are UserName" 
 if ($this->GetUser()) { ?>
-  <?php echo $this->GetResourceValue("YouAre")." ".$this->Link($this->GetUserName()) ?><br />
+  <?php echo $this->GetTranslation("YouAre")." ".$this->Link($this->GetUserName()) ?><br />
   <small>
   <?php 
-      echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?><br />
-  <a onclick="return confirm('<?php echo $this->GetResourceValue("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetResourceValue("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetResourceValue("LogoutLink"); ?></a></small>
+      echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?><br />
+  <a onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a></small>
   <?php 
 // Else Wacko shows login's controls
 } else { 
 ?><br />
   <?php 
 // Begin Login form
-echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
+echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
   <input type="hidden" name="action" value="login" />
   <input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" />
-  <?php echo $this->GetResourceValue("LoginWelcome") ?>:<br />
+  <?php echo $this->GetTranslation("LoginWelcome") ?>:<br />
   <input type="text" name="name" size="12" class="login" alt="username" /><br />
-  <?php echo $this->GetResourceValue("LoginPassword") ?>:<br />
+  <?php echo $this->GetTranslation("LoginPassword") ?>:<br />
   <input type="password" name="password" class="login" size="8" alt="password" />
   <input type="image" src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" align="top" />
   <?php // Closing Login form
@@ -138,14 +138,14 @@ if ($this->page)
  // If owner is current user
  if ($this->UserIsOwner())
  {
-   print($this->GetResourceValue("YouAreOwner")."<br /> \n");
+   print($this->GetTranslation("YouAreOwner")."<br /> \n");
 
    // Rename link: Hinzugefügt: if ($this->IsAdmin())
  if ($this->IsAdmin())  {
- print(" <a href=\"".$this->href("rename")."\">".$this->GetResourceValue("RenameText")."</a><br /> \n");}
+ print(" <a href=\"".$this->href("rename")."\">".$this->GetTranslation("RenameText")."</a><br /> \n");}
 
    //Edit ACLs link
-   print("<a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetResourceValue("EditACLConfirm")."');\"":"").">".$this->GetResourceValue("EditACLText")."</a>");
+   print("<a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"").">".$this->GetTranslation("EditACLText")."</a>");
  }
  // If owner is NOT current user
  else
@@ -153,45 +153,45 @@ if ($this->page)
    // Show Owner of this page
    if ($owner = $this->GetPageOwner())
    {
-     print($this->GetResourceValue("Owner").$this->Link($owner));
+     print($this->GetTranslation("Owner").$this->Link($owner));
    } else if (!$this->page["comment_on"]) {
-     print($this->GetResourceValue("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetResourceValue("TakeOwnership")."</a>)" : ""));
+     print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
    }
  }
 // If User has rights to edit page, show Edit link
-echo $this->HasAccess("write") ? "<br /><a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetResourceValue("EditTip")."\"><strong>".$this->GetResourceValue("EditText")."</strong></a>" : "";
+echo $this->HasAccess("write") ? "<br /><a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetTranslation("EditTip")."\"><strong>".$this->GetTranslation("EditText")."</strong></a>" : "";
 ?><br />
   <?php
 // Watch/Unwatch icon
-echo ($this->IsWatched($this->GetUserName(), $this->GetPageTag()) ? "<a href=\"".$this->href("watch")."\">".$this->GetResourceValue("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\">".$this->GetResourceValue("SetWatch")."</a>" );
+echo ($this->IsWatched($this->GetUserName(), $this->GetPageTag()) ? "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("SetWatch")."</a>" );
 ?><br />
   <?php 
  // Rename link
  if ($this->CheckACL($this->GetUserName(),$this->config["rename_globalacl"]) && !$this->UserIsOwner())
  {
-   print("<a href=\"".$this->href("rename")."\">".$this->GetResourceValue("RenameText")."</a><br />");
+   print("<a href=\"".$this->href("rename")."\">".$this->GetTranslation("RenameText")."</a><br />");
  }
  // Page  settings link
- print("<a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetResourceValue("EditACLConfirm")."');\"":"").">".$this->GetResourceValue("SettingsText")."</a><br />");
+ print("<a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"").">".$this->GetTranslation("SettingsText")."</a><br />");
 }
 // Remove link (shows only for Admins)
 if ($this->IsAdmin()){
-	print("<a href=\"".$this->href("remove")."\">".$this->GetResourceValue("DeleteTip")."</a><br />");
+	print("<a href=\"".$this->href("remove")."\">".$this->GetTranslation("DeleteTip")."</a><br />");
 }
 ?>
 <?php 
 // Print icon
-echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1print.gif\" title=\"".$this->GetResourceValue("PrintVersion")."\" alt=\"".$this->GetResourceValue("PrintVersion")."\"  align=\"middle\" border=\"0\" /></a>";
+echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"middle\" border=\"0\" /></a>";
 
 ?>
 
 <hr noshade="noshade" />
 <?php
 // Revisions link
-echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetResourceValue("RevisionTip")."\">".$this->GetPageTime()."</a>\n" : "";
+echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTime()."</a>\n" : "";
 ?>
 </div>
 <div id="content">
-<span class="loc"><strong><?php echo $this->config["wakka_name"] ?>:</strong> <?php echo $this->GetPagePath(); ?><a title="<?php echo $this->GetResourceValue("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></span> <?php # if (mysql_num_rows(mysql_query("SELECT status FROM ".$this->config["table_prefix"]."mail where UserTo='".$this->GetUserName()."' and folder='inbox' and status='nicht gelesen' and viewrecipient='Y' LIMIT 1"))!=0) {echo "&nbsp;&nbsp;&nbsp;<img src=\"images/newmessage1.gif\" alt=\"Neue Nachricht\" width=\"18\" height=\"18\" /> <a href='wakka.php?wakka=WikiMessenger' title='Du hast mindestens eine neue Nachricht erhalten.'><font color=orangered><strong>&nbsp;Neue Nachricht</strong></font></a>";} ?>
+<span class="loc"><strong><?php echo $this->config["wakka_name"] ?>:</strong> <?php echo $this->GetPagePath(); ?><a title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></span> <?php # if (mysql_num_rows(mysql_query("SELECT status FROM ".$this->config["table_prefix"]."mail where UserTo='".$this->GetUserName()."' and folder='inbox' and status='nicht gelesen' and viewrecipient='Y' LIMIT 1"))!=0) {echo "&nbsp;&nbsp;&nbsp;<img src=\"images/newmessage1.gif\" alt=\"Neue Nachricht\" width=\"18\" height=\"18\" /> <a href='wakka.php?wakka=WikiMessenger' title='Du hast mindestens eine neue Nachricht erhalten.'><font color=orangered><strong>&nbsp;Neue Nachricht</strong></font></a>";} ?>
 
 <?php # if ($user = $this->GetUser()) { include("actions/popupchat.php"); } ?>

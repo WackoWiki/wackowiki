@@ -23,7 +23,7 @@ if ($registered
 {
 	if (!$this->page)
 	{
-		print(str_replace("%1",$this->href("edit"),$this->GetResourceValue("DoesNotExists")));
+		print(str_replace("%1",$this->href("edit"),$this->GetTranslation("DoesNotExists")));
 	}
 	else
 	{
@@ -44,17 +44,17 @@ if ($registered
 
 				if (!preg_match("/^([\_\.\-".$this->language["ALPHANUM_P"]."]+)$/", $NewName))
 				{
-					print($this->GetResourceValue("BadName")."<br />\n");
+					print($this->GetTranslation("BadName")."<br />\n");
 				}
 				//     if ($this->supertag == $supernewname)
 				else if ($this->tag == $NewName)
 				{
-					print(str_replace("%1",$this->Link($NewName),$this->GetResourceValue("AlreadyNamed"))."<br />\n");
+					print(str_replace("%1",$this->Link($NewName),$this->GetTranslation("AlreadyNamed"))."<br />\n");
 				}
 				else
 				{
 					if ($this->supertag != $supernewname && $page=$this->LoadPage($supernewname, "", LOAD_CACHE, LOAD_META)){
-						print(str_replace("%1",$this->Link($NewName),$this->GetResourceValue("AlredyExists"))."<br />\n");
+						print(str_replace("%1",$this->Link($NewName),$this->GetTranslation("AlredyExists"))."<br />\n");
 					}
 					else
 					{// Rename page
@@ -64,19 +64,19 @@ if ($registered
 
 						if ($need_redirect==0)
 						if ($this->RemoveReferrers($this->tag))
-						print(str_replace("%1",$this->tag,$this->GetResourceValue("ReferrersRemoved"))."<br />\n");
+						print(str_replace("%1",$this->tag,$this->GetTranslation("ReferrersRemoved"))."<br />\n");
 
 						if ($this->RenameLinks($this->tag))
-						print(str_replace("%1",$this->tag,$this->GetResourceValue("LinksRenamed"))."<br />\n");
+						print(str_replace("%1",$this->tag,$this->GetTranslation("LinksRenamed"))."<br />\n");
 
 						if ($this->RenamePage($this->tag, $NewName, $supernewname))
-						print(str_replace("%1",$this->tag,$this->GetResourceValue("PageRenamed"))."<br />\n");
+						print(str_replace("%1",$this->tag,$this->GetTranslation("PageRenamed"))."<br />\n");
 
 						if ($this->RenameAcls($this->tag, $NewName, $supernewname))
-						print(str_replace("%1",$this->tag,$this->GetResourceValue("AclsRenamed"))."<br />\n");
+						print(str_replace("%1",$this->tag,$this->GetTranslation("AclsRenamed"))."<br />\n");
 
 						if ($this->RenameFiles($this->tag, $NewName, $supernewname))
-						print(str_replace("%1",$this->tag,$this->GetResourceValue("FilesRenamed"))."<br />\n");
+						print(str_replace("%1",$this->tag,$this->GetTranslation("FilesRenamed"))."<br />\n");
 
 						if ($this->RenameWatches($this->tag, $NewName, $supernewname))
 						print("\n");
@@ -93,13 +93,13 @@ if ($registered
 							$this->CacheWantedPage($this->supertag);
 
 							if ($this->SavePage($this->tag, "{{Redirect page=\"/".$NewName."\"}}"))
-							print(str_replace("%1",$this->tag,$this->GetResourceValue("RedirectCreated"))."<br />\n");
+							print(str_replace("%1",$this->tag,$this->GetTranslation("RedirectCreated"))."<br />\n");
 
 							$this->ClearCacheWantedPage($this->tag);
 							$this->ClearCacheWantedPage($this->supertag);
 						}
 
-						print("<br />".$this->GetResourceValue("NewNameOfPage").$this->Link("/".$NewName));
+						print("<br />".$this->GetTranslation("NewNameOfPage").$this->Link("/".$NewName));
 
 					}
 				}
@@ -108,13 +108,13 @@ if ($registered
 			//massrename
 			if ($need_massrename == 1)
 			{
-				print "<p><b>".$this->GetResourceValue("MassRenaming")."</b><p>";   //!!!
+				print "<p><b>".$this->GetTranslation("MassRenaming")."</b><p>";   //!!!
 				RecursiveMove($this, $this->tag );
 			}
 		}
 		else
 		{
-			echo $this->GetResourceValue("NewName");
+			echo $this->GetTranslation("NewName");
 			echo $this->FormOpen("rename");
 
 			?>
@@ -122,10 +122,10 @@ if ($registered
   <input type="text"
 	name="newname" value="<?php echo $this->tag;?>" size="40" />
   <br /><br />
-<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" "; if ($this->GetConfigValue("default_rename_redirect")==1){echo "checked=\"checked\"";}; echo " /> <label for=\"redirect\">".$this->GetResourceValue("NeedRedirect")."</label>"; ?> <br />
+<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" "; if ($this->GetConfigValue("default_rename_redirect")==1){echo "checked=\"checked\"";}; echo " /> <label for=\"redirect\">".$this->GetTranslation("NeedRedirect")."</label>"; ?> <br />
 <?php if ($this->CheckACL($user,$this->config["rename_globalacl"]))
 		{
-			echo "<input type=\"checkbox\" id=\"massrename\" name=\"massrename\" "; echo " /> <label for=\"massrename\">".$this->GetResourceValue("SettingsMassRename")."</label>"; 
+			echo "<input type=\"checkbox\" id=\"massrename\" name=\"massrename\" "; echo " /> <label for=\"massrename\">".$this->GetTranslation("SettingsMassRename")."</label>"; 
 		}
 ?> 
 <br />
@@ -135,7 +135,7 @@ if ($registered
 		// show backlinks
 		if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
 		{
-			print("<br /><fieldset><legend>".$this->GetResourceValue("AlertReferringPages").":</legend>\n");
+			print("<br /><fieldset><legend>".$this->GetTranslation("AlertReferringPages").":</legend>\n");
 			foreach ($pages as $page)
 			{
 				if ($page["tag"])
@@ -156,12 +156,12 @@ if ($registered
   <input name="submit" class="OkBtn_Top"
 	onmouseover='this.className=&quot;OkBtn_Top_&quot;;'
 	onmouseout='this.className=&quot;OkBtn_Top&quot;;' type="submit" align="top"
-	value="<?php echo $this->GetResourceValue("RenameButton"); ?>" />
+	value="<?php echo $this->GetTranslation("RenameButton"); ?>" />
   &nbsp;
   <input
 	class="CancelBtn_Top" onmouseover='this.className=&quot;CancelBtn_Top_&quot;;'
 	onmouseout='this.className=&quot;CancelBtn_Top&quot;;' type="button" align="top"
-	value="<?php echo str_replace("\n"," ",$this->GetResourceValue("EditCancelButton")); ?>"
+	value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
 	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
   <br />
   <br />
@@ -171,7 +171,7 @@ if ($registered
 }
 else
 {
-  print($this->GetResourceValue("NotOwnerAndCantRename"));
+  print($this->GetTranslation("NotOwnerAndCantRename"));
 }
 ?> </div>
 <?php
@@ -206,17 +206,17 @@ function Move(&$parent, $OldPage, $NewName )
 
      if (!preg_match("/^([\_\.\-".$parent->language["ALPHANUM_P"]."]+)$/", $NewName))
      {
-       print($parent->GetResourceValue("BadName")."<br />\n");
+       print($parent->GetTranslation("BadName")."<br />\n");
      }
 //     if ($OldPage["supertag"] == $supernewname)
      else if ($OldPage["tag"] == $NewName)
      {
-       print(str_replace("%1",$parent->Link($NewName),$parent->GetResourceValue("AlreadyNamed"))."<br />\n");
+       print(str_replace("%1",$parent->Link($NewName),$parent->GetTranslation("AlreadyNamed"))."<br />\n");
      }
      else
      {
       if ($OldPage["supertag"] != $supernewname && $page=$parent->LoadPage($supernewname, "", LOAD_CACHE, LOAD_META)){
-       print(str_replace("%1",$parent->Link($NewName),$parent->GetResourceValue("AlredyExists"))."<br />\n");
+       print(str_replace("%1",$parent->Link($NewName),$parent->GetTranslation("AlredyExists"))."<br />\n");
       }
       else
       {// Rename page
@@ -226,19 +226,19 @@ function Move(&$parent, $OldPage, $NewName )
 
         if ($need_redirect==0)
           if ($parent->RemoveReferrers($OldPage["tag"]))
-            print("<br />".str_replace("%1",$OldPage["tag"],$parent->GetResourceValue("ReferrersRemoved"))."<br />\n");
+            print("<br />".str_replace("%1",$OldPage["tag"],$parent->GetTranslation("ReferrersRemoved"))."<br />\n");
 
         if ($parent->RenameLinks($OldPage["tag"]))
-          print(str_replace("%1",$OldPage["tag"],$parent->GetResourceValue("LinksRenamed"))."<br />\n");
+          print(str_replace("%1",$OldPage["tag"],$parent->GetTranslation("LinksRenamed"))."<br />\n");
 
         if ($parent->RenamePage($OldPage["tag"], $NewName, $supernewname))
-          print(str_replace("%1",$OldPage["tag"],$parent->GetResourceValue("PageRenamed"))."<br />\n");
+          print(str_replace("%1",$OldPage["tag"],$parent->GetTranslation("PageRenamed"))."<br />\n");
 
         if ($parent->RenameAcls($OldPage["tag"], $NewName, $supernewname))
-          print(str_replace("%1",$OldPage["tag"],$parent->GetResourceValue("AclsRenamed"))."<br />\n");
+          print(str_replace("%1",$OldPage["tag"],$parent->GetTranslation("AclsRenamed"))."<br />\n");
 
        if ($parent->RenameFiles($OldPage["tag"], $NewName, $supernewname))
-          print(str_replace("%1",$OldPage["tag"],$parent->GetResourceValue("FilesRenamed"))."<br />\n");
+          print(str_replace("%1",$OldPage["tag"],$parent->GetTranslation("FilesRenamed"))."<br />\n");
 
         if ($parent->RenameWatches($OldPage["tag"], $NewName, $supernewname))
           print("\n");
@@ -255,13 +255,13 @@ function Move(&$parent, $OldPage, $NewName )
           $parent->CacheWantedPage($OldPage["supertag"]);
 
           if ($parent->SavePage($OldPage["tag"], "{{Redirect page=\"/".$NewName."\"}}"))
-           print(str_replace("%1",$OldPage["tag"],$parent->GetResourceValue("RedirectCreated"))."<br />\n");
+           print(str_replace("%1",$OldPage["tag"],$parent->GetTranslation("RedirectCreated"))."<br />\n");
 
           $parent->ClearCacheWantedPage($OldPage["tag"]);
           $parent->ClearCacheWantedPage($OldPage["supertag"]);
         }
 
-        print("<br />".$parent->GetResourceValue("NewNameOfPage").$parent->Link("/".$NewName));
+        print("<br />".$parent->GetTranslation("NewNameOfPage").$parent->Link("/".$NewName));
 
        }
      }

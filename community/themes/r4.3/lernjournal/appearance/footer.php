@@ -8,7 +8,7 @@ lernjournal theme.
 
   <div id="footer"><?php 
 if ($this->GetUser()){
-	echo $this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion());
+	echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion());
 }
 ?></div>
   </div>

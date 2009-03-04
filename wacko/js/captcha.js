@@ -8,6 +8,6 @@ function new_freecap()
       }
    else
       {
-         alert('<?php echo $this->GetResourceValue("CaptchaReloadWarning");?>');
+         alert('<?php echo $this->GetTranslation("CaptchaReloadWarning");?>');
       }
 }

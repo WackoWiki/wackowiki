@@ -9,7 +9,7 @@ if ($this->UserIsOwner($tag)){
 	$watchers = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."pagewatches WHERE tag = '".quote($this->dblink, $tag)."'");
 	if ($watchers){
 
-		$title = $this->GetResourceValue("Watchers");
+		$title = $this->GetTranslation("Watchers");
 		$title = str_replace("%1",  $this->Link("/".$tag,"",$tag),  $title);
 		if (!$nomark)
 		echo "<fieldset><legend>".$title.":</legend>\n";
@@ -25,10 +25,10 @@ if ($this->UserIsOwner($tag)){
 	else
 	{
 		if (!$nomark)
-		echo str_replace("%1",  $this->Link("/".$tag,"",$tag), $this->GetResourceValue("NoWatchers"));
+		echo str_replace("%1",  $this->Link("/".$tag,"",$tag), $this->GetTranslation("NoWatchers"));
 	}
 }else{
 	if (!$nomark)
-	echo str_replace("%1",  $this->Link("/".$tag,"",$tag), $this->GetResourceValue("NotOwnerAndViewWatchers"));
+	echo str_replace("%1",  $this->Link("/".$tag,"",$tag), $this->GetTranslation("NotOwnerAndViewWatchers"));
 }
 ?>

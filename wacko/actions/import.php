@@ -17,16 +17,16 @@ if (!$_POST["_to"])
 
 <div class="cssform">
   <p>
-    <label for="importto"><?php echo $this->GetResourceValue("ImportTo"); ?>:</label>
+    <label for="importto"><?php echo $this->GetTranslation("ImportTo"); ?>:</label>
     <input type="text" id="importto" name="_to" size="40" value="" />
   </p>
   <p>
-    <label for="importwhat"><?php echo $this->GetResourceValue("ImportWhat"); ?>:</label>
+    <label for="importwhat"><?php echo $this->GetTranslation("ImportWhat"); ?>:</label>
     <input type="file" id="importwhat" name="_import" />
   </p>
   <p>
     <input type="submit"
-			value="<?php echo $this->GetResourceValue("ImportButtonText"); ?>" />
+			value="<?php echo $this->GetTranslation("ImportButtonText"); ?>" />
   </p>
 </div>
 <?php
@@ -64,7 +64,7 @@ else
 			$this->SavePage($tag, $body);
 		}
 
-		echo $this->GetResourceValue("ImportSuccess");
+		echo $this->GetTranslation("ImportSuccess");
 	}
 	else
 	{

@@ -4,7 +4,7 @@
 if ($this->page && !$this->GetPageOwner() && $this->GetUser() && !$this->page["comment_on"])
 {
 	$this->SetPageOwner($this->GetPageTag(), $this->GetUserName());
-	$this->SetMessage($this->GetResourceValue("YouAreNowTheOwner"));
+	$this->SetMessage($this->GetTranslation("YouAreNowTheOwner"));
 }
 
 $this->Redirect($this->href());

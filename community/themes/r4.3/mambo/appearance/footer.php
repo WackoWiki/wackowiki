@@ -25,7 +25,7 @@ if ($this->GetConfigValue("debug")>=2)
 	<tr>
 		<td id="credits"><?php 
 		if ($this->GetUser()){
-			echo $this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion());
+			echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion());
 		}
 		?></td>
 	</tr>

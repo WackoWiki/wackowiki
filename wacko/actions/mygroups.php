@@ -22,10 +22,10 @@ if($user = $this->GetUser())
 	$al = $this->config['aliases'];
 
 	if (!$nomark)
-	print("<fieldset><legend>".$user["name"].": ".$this->GetResourceValue("MyGroups")."</legend>\n");
+	print("<fieldset><legend>".$user["name"].": ".$this->GetTranslation("MyGroups")."</legend>\n");
 
 	$groups_count = MyGroups($user["name"],$al);
-	echo "<i>".$groups_count." ".($groups_count == 1 ? $this->GetResourceValue("Group") : $this->GetResourceValue("Groups"))."</i><br />\n";
+	echo "<i>".$groups_count." ".($groups_count == 1 ? $this->GetTranslation("Group") : $this->GetTranslation("Groups"))."</i><br />\n";
 
 	if (!$nomark)
 	echo "</fieldset>\n";

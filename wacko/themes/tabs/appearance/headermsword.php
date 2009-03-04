@@ -22,5 +22,5 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 
 <div class="header">
 <h1><?php echo $this->config["wakka_name"] ?>: <?php echo $this->ComposeLinkToPage($this->NpjTranslit($this->GetPageTag()), "", $this->GetPageTag()); ?>
-(<?php echo $this->GetResourceValue("MsWordVersion");?>)</h1>
+(<?php echo $this->GetTranslation("MsWordVersion");?>)</h1>
 </div>

@@ -29,13 +29,13 @@ if ($this->GetMethod() != 'show' || $this->page["latest"] == "N") {
 	href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico"
 	type="image/x-icon" />
 <link rel="alternate" type="application/rss+xml"
-	title="<?php echo $this->GetResourceValue("RecentChangesRSS");?>"
+	title="<?php echo $this->GetTranslation("RecentChangesRSS");?>"
 	href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
 <link rel="alternate" type="application/rss+xml"
-	title="<?php echo $this->GetResourceValue("RecentCommentsRSS");?>"
+	title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>"
 	href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
 <link rel="alternate" type="application/rss+xml"
-	title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?>"
+	title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>"
 	href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
@@ -78,10 +78,10 @@ if ($user = $this->GetUser()){
 	<tr>
 		<td><?php echo $this->config["wakka_name"] ?>: <?php echo $this->GetPagePath(); ?>
 		<a class="Search"
-			title="<?php echo $this->GetResourceValue("SearchTitleTip")?>"
-			href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
+			title="<?php echo $this->GetTranslation("SearchTitleTip")?>"
+			href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
 		</td>
-		<td class="searchArea" align="right" valign="bottom"><?php echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get"); ?>
+		<td class="searchArea" align="right" valign="bottom"><?php echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?>
 		<input name="phrase" type="text"
 			style="border: none; border-bottom: 1px solid #FFFFFF; padding: 0px; margin: 0px; background-color: #FFFFFF;"
 			size="21" /> <?php echo $this->FormClose(); ?></td>
@@ -107,7 +107,7 @@ if ($user = $this->GetUser()){
 								<td class="titleLeft"><img
 									src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif"
 									width="14" /></td>
-								<td class="titleText" width="100%"><?php echo $this->GetResourceValue("YourBookmarks"); ?>
+								<td class="titleText" width="100%"><?php echo $this->GetTranslation("YourBookmarks"); ?>
 								</td>
 							</tr>
 						</table>
@@ -124,16 +124,16 @@ if ($user = $this->GetUser()){
 						if ($this->GetUser()) {
 							if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>
 						<a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"
-							title="<?php echo $this->GetResourceValue("AddToBookmarks"); ?>">
+							title="<?php echo $this->GetTranslation("AddToBookmarks"); ?>">
 						<img
 							src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar1.gif"
-							border="0" align="bottom" style="vertical-align: middle;" /> <?php echo $this->GetResourceValue("Bookmarks"); ?>
+							border="0" align="bottom" style="vertical-align: middle;" /> <?php echo $this->GetTranslation("Bookmarks"); ?>
 						</a> <?php } else { ?> <a
 							href="<?php echo $this->Href('', '', "removebookmark=yes")?>"
-							title="<?php echo $this->GetResourceValue("RemoveFromBookmarks"); ?>">
+							title="<?php echo $this->GetTranslation("RemoveFromBookmarks"); ?>">
 						<img
 							src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar2.gif"
-							style="vertical-align: middle;" /> <?php echo $this->GetResourceValue("Bookmarks"); ?>
+							style="vertical-align: middle;" /> <?php echo $this->GetTranslation("Bookmarks"); ?>
 						</a> <?php }
 						}
 						?></div>
@@ -155,7 +155,7 @@ if ($user = $this->GetUser()){
 								<td class="titleLeft"><img
 									src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif"
 									width="14" /></td>
-								<td class="titleText" width="100%"><?php echo $this->GetResourceValue("ThisPage"); ?>
+								<td class="titleText" width="100%"><?php echo $this->GetTranslation("ThisPage"); ?>
 								</td>
 							</tr>
 						</table>
@@ -164,54 +164,54 @@ if ($user = $this->GetUser()){
 					<tr>
 						<td class="modulecontent">
 						<div class="modulecontent"><?php
-						echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetResourceValue("RevisionTip")."\">".$this->GetPageTime()."</a>\n" : "";
+						echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTime()."</a>\n" : "";
 						echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 
 						if ($this->HasAccess("write")) {
-							echo "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetResourceValue("EditTip")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/edit.gif\""."style=\"vertical-align: middle\""."\">".$this->GetResourceValue("EditText")."</a>\n";
+							echo "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetTranslation("EditTip")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/edit.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("EditText")."</a>\n";
 
 						}
 						echo '<br />';
 						if ($this->GetPageTime()) {
-							echo "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetResourceValue("RevisionTip")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/vers.gif\""."style=\"vertical-align: middle\""."\">".$this->GetResourceValue('SettingsRevisions')."</a>\n";
+							echo "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/vers.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation('SettingsRevisions')."</a>\n";
 						}
 						// if this page exists
 						if ($this->page) {
 							// if owner is current user
 							if ($this->UserIsOwner()) {
 								echo '<br />';
-								print(" <a href=\"".$this->href("rename")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/ren.gif\""."style=\"vertical-align: middle\""."\">".$this->GetResourceValue("RenameText")."</a>");
+								print(" <a href=\"".$this->href("rename")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/ren.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("RenameText")."</a>");
 								echo '<br />';
-								print("<a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetResourceValue("EditACLConfirm")."');\"":"")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/access.gif\""."style=\"vertical-align: middle\"".">".$this->GetResourceValue("EditACLText")."</a>");
+								print("<a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/access.gif\""."style=\"vertical-align: middle\"".">".$this->GetTranslation("EditACLText")."</a>");
 							}
 
 							if ($this->CheckACL($this->GetUserName(),$this->config["rename_globalacl"]) && !$this->UserIsOwner()) {
 								echo '<br />';
-								print(" <a href=\"".$this->href("rename")."\">".$this->GetResourceValue("RenameText")."</a>");
+								print(" <a href=\"".$this->href("rename")."\">".$this->GetTranslation("RenameText")."</a>");
 							}
 
 							if ($this->IsAdmin()) {
 								echo '<br />';
-								print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1del.gif\""."style=\"vertical-align: middle\""."\">".$this->GetResourceValue("DeleteText")."</a>");
+								print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1del.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("DeleteText")."</a>");
 							}
 
 							echo '<br />';
-							print("<a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetResourceValue("EditACLConfirm")."');\"":"")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/prop.gif\""."style=\"vertical-align: middle\"".">".$this->GetResourceValue("SettingsText")."</a>");
+							print("<a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/prop.gif\""."style=\"vertical-align: middle\"".">".$this->GetTranslation("SettingsText")."</a>");
 
 							echo '<br />';
-							print "<a href=\"".$this->href("export.xml")."\" title=\"".$this->GetResourceValue("RevisionXMLTip")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1xml.gif\""."style=\"vertical-align: middle\""."\" target=\"_blank\">".$this->GetResourceValue("ExportToXML")."</a>\n";
+							print "<a href=\"".$this->href("export.xml")."\" title=\"".$this->GetTranslation("RevisionXMLTip")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1xml.gif\""."style=\"vertical-align: middle\""."\" target=\"_blank\">".$this->GetTranslation("ExportToXML")."</a>\n";
 
 							//print $this->Format( '{{TOC}}' );
 
 							if ($this->UserIsOwner()) {
 								echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
-								print($this->GetResourceValue("YouAreOwner"));
+								print($this->GetTranslation("YouAreOwner"));
 							} else {
 								echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 								if ($owner = $this->GetPageOwner()) {
-									print($this->GetResourceValue("Owner").$this->Link($owner));
+									print($this->GetTranslation("Owner").$this->Link($owner));
 								} else if (!$this->page["comment_on"]) {
-									print($this->GetResourceValue("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetResourceValue("TakeOwnership")."</a>)" : ""));
+									print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
 								}
 							}
 						}
@@ -223,28 +223,28 @@ if ($user = $this->GetUser()){
 			</tr>
 		</table>
 		</td>
-		<td><!-- wrapper --> <?php echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
+		<td><!-- wrapper --> <?php echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
 		<input type="hidden" name="action" value="login" />
 
 		<div class="header"><?php echo ($this->IsWatched($this->GetUserName(), $this->GetPageTag())
-		? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1unvisibl.gif\" title=\"".$this->GetResourceValue("RemoveWatch")."\" alt=\"".$this->GetResourceValue("RemoveWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>"
-		: "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/visibl.gif\" title=\"".$this->GetResourceValue("SetWatch")."\" alt=\"".$this->GetResourceValue("SetWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?>
-		| <?php echo "<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1print.gif\" title=\"".$this->GetResourceValue("PrintVersion")."\" alt=\"".$this->GetResourceValue("PrintVersion")."\"  align=\"absmiddle\" border=\"0\" /></a>";?>
+		? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1unvisibl.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>"
+		: "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/visibl.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?>
+		| <?php echo "<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"absmiddle\" border=\"0\" /></a>";?>
 		| <?php
-		if ($this->GetUser()) { ?> <span class="nobr"> <?php echo $this->GetResourceValue("YouAre"); ?>
+		if ($this->GetUser()) { ?> <span class="nobr"> <?php echo $this->GetTranslation("YouAre"); ?>
 		<img
 			src="<?php echo $this->GetConfigValue("theme_url") ?>icons/user.gif"
 			alt="" width="16" height="16" border="0" align="middle"
 			style="vertical-align: baseline;" /> <?php echo $this->Link($this->GetUserName()) ?>
-		</span> <small> ( <span class="nobr Tune"> <?php echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?>
+		</span> <small> ( <span class="nobr Tune"> <?php echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?>
 		| <a
-			onclick="return confirm('<?php echo $this->GetResourceValue("LogoutAreYouSure");?>');"
-			href="<?php echo $this->Href("",$this->GetResourceValue("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>">
-			<?php echo $this->GetResourceValue("LogoutLink"); ?> </a> </span> ) </small>
+			onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');"
+			href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>">
+			<?php echo $this->GetTranslation("LogoutLink"); ?> </a> </span> ) </small>
 
 			<?php } else { ?> <span class="nobr"> <input type="hidden"
-			name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" /> <strong><?php echo $this->GetResourceValue("LoginWelcome") ?>:&nbsp;</strong>
-		<input type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->GetResourceValue("LoginPassword") ?>:&nbsp;<input
+			name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" /> <strong><?php echo $this->GetTranslation("LoginWelcome") ?>:&nbsp;</strong>
+		<input type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->GetTranslation("LoginPassword") ?>:&nbsp;<input
 			type="password" name="password" class="login" size="8" />&nbsp;<input
 			type="submit" value="Ok" /> </span> <?php } ?></div>
 

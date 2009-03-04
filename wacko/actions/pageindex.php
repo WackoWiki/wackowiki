@@ -105,21 +105,21 @@ if($page_links != "")
       // Prev
       if($offset + $total_visible > $limit)
       {
-         $prev_page_link = '<a href="'.$this->href("", "", "offset=").($offset - $limit > 0 ? $offset - $limit : 0).'">&lt; '.$this->GetResourceValue("Prev").'</a> |';
+         $prev_page_link = '<a href="'.$this->href("", "", "offset=").($offset - $limit > 0 ? $offset - $limit : 0).'">&lt; '.$this->GetTranslation("Prev").'</a> |';
       }
       else
       {
-         $prev_page_link = "&lt; ".$this->GetResourceValue("Prev")." |";
+         $prev_page_link = "&lt; ".$this->GetTranslation("Prev")." |";
       }
 
       // Next
       if($offset + $total_visible < $total)
       {
-         $next_page_link = '<a href="'.$this->href("", "", "offset=").($offset + $total_visible).'">'.$this->GetResourceValue("Next").' &gt;</a>';
+         $next_page_link = '<a href="'.$this->href("", "", "offset=").($offset + $total_visible).'">'.$this->GetTranslation("Next").' &gt;</a>';
       }
       else
       {
-         $next_page_link = $this->GetResourceValue("Next")." &gt;";
+         $next_page_link = $this->GetTranslation("Next")." &gt;";
       }
 
       print "<p class='logBtn'>$prev_page_link $next_page_link</p>\n";
@@ -127,7 +127,7 @@ if($page_links != "")
 }
 else
 {
-   print $this->GetResourceValue("NoPagesFound");
+   print $this->GetTranslation("NoPagesFound");
 }
 
 ?>

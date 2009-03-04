@@ -8,10 +8,10 @@ if (in_array($vars[0],$this->context)) return;
 if ($vars[0] == $this->tag) return;
 
 if (! $this->HasAccess("read",$vars[0])){
-   if ($nowarning != 1) echo $this->GetResourceValue("NoAccessToSourcePage");
+   if ($nowarning != 1) echo $this->GetTranslation("NoAccessToSourcePage");
 }else{
    if (!$inc_page = $this->LoadPage($vars[0], $_GET["time"])){
-      echo "<em> ".$this->GetResourceValue("SourcePageDoesntExist")."(".$this->Link("/".$vars[0]).")</em>";
+      echo "<em> ".$this->GetTranslation("SourcePageDoesntExist")."(".$this->Link("/".$vars[0]).")</em>";
    }else{
       if ($inc_page["body_r"]) $strings = $inc_page["body_r"];
       else $strings = $this->Format($inc_page["body"], "wacko");
@@ -24,7 +24,7 @@ if (! $this->HasAccess("read",$vars[0])){
 
       if (($this->GetMethod() != "print") && ($nomark!=1) && ($nomark!=2 || $this->HasAccess("write", $vars[0])))
       print "<div class=\"include\">"."<div class=\"name\">".$this->Link("/".$vars[0])."&nbsp;&nbsp;::&nbsp;".
-                          "<a href=\"".$this->Href("edit", $vars[0])."\">".$this->GetResourceValue("EditIcon")."</a></div>";
+                          "<a href=\"".$this->Href("edit", $vars[0])."\">".$this->GetTranslation("EditIcon")."</a></div>";
 
       $this->context[++$this->current_context] = $vars[0];
       print $this->Format($strings, "post_wacko");
@@ -33,7 +33,7 @@ if (! $this->HasAccess("read",$vars[0])){
 
       if (($this->GetMethod() != "print") && ($nomark!=1) && ($nomark!=2 || $this->HasAccess("write", $vars[0])))
       print "<div class=\"name\">".$this->Link("/".$vars[0])."&nbsp;&nbsp;::&nbsp;".
-                          "<a href=\"".$this->Href("edit", $vars[0])."\">".$this->GetResourceValue("EditIcon")."</a></div></div>";
+                          "<a href=\"".$this->Href("edit", $vars[0])."\">".$this->GetTranslation("EditIcon")."</a></div></div>";
    };
 }
 

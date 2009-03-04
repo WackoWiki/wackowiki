@@ -38,7 +38,7 @@ $root = $this->UnwrapLink($root);
 
 if (!$nomark)
 {
-	print("<fieldset><legend>".$this->GetResourceValue("LinksTreeTitle")."</legend>\n");
+	print("<fieldset><legend>".$this->GetTranslation("LinksTreeTitle")."</legend>\n");
 }
 
 if (!$levels) $levels = 3;
@@ -46,7 +46,7 @@ else $levels = (int)$levels;
 if ($levels > 4)
 {
 	$levels = 4;
-	print("<em>".$this->GetResourceValue("LinksTreeLevel4Warning")."</em><br />");
+	print("<em>".$this->GetTranslation("LinksTreeLevel4Warning")."</em><br />");
 }
 
 print($this->Link("/".$root, "", $root)."<br />\n");//<br/>

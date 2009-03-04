@@ -2,13 +2,13 @@
    src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
    width="5" height="1" alt="" align="left" border="0" /><img
    src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
-   width="5" height="1" alt="" align="right" border="0" /> <?php $this->EchoTab( $this->href("show"),  $this->GetResourceValue("ShowTip"),
-   $this->HasAccess("read") ? $this->GetResourceValue("ShowText") : "",
+   width="5" height="1" alt="" align="right" border="0" /> <?php $this->EchoTab( $this->href("show"),  $this->GetTranslation("ShowTip"),
+   $this->HasAccess("read") ? $this->GetTranslation("ShowText") : "",
    $this->method != "show"
-   ) ?> <?php $this->EchoTab( $this->href("edit"),  $this->GetResourceValue("EditTip"),
-   $this->HasAccess("write") ? $this->GetResourceValue("EditText") : "",
+   ) ?> <?php $this->EchoTab( $this->href("edit"),  $this->GetTranslation("EditTip"),
+   $this->HasAccess("write") ? $this->GetTranslation("EditText") : "",
    $this->method != "edit"
-   ) ?> <?php $this->EchoTab( $this->href("revisions"),  $this->GetResourceValue("RevisionTip"),
+   ) ?> <?php $this->EchoTab( $this->href("revisions"),  $this->GetTranslation("RevisionTip"),
    $this->GetPageTime() ? $this->GetPageTime() : "",
    $this->method != "revisions"
    ) ?> <?php
@@ -17,8 +17,8 @@
    {
       if($this->HasAccess("write") && $this->GetUser() || $this->IsAdmin())
       {
-         $this->EchoTab( $this->href("settings"),  $this->GetResourceValue("SettingsTip"),
-         $this->GetResourceValue("EditSettingsText"),
+         $this->EchoTab( $this->href("settings"),  $this->GetTranslation("SettingsTip"),
+         $this->GetTranslation("EditSettingsText"),
          $this->method != "settings"
          );
       }
@@ -26,15 +26,15 @@
       // if owner is current user
       if ($this->UserIsOwner())
       {
-         $this->EchoTab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->GetResourceValue("EditACLConfirm")."\");":""),
-         $this->GetResourceValue("EditACLText"),
+         $this->EchoTab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->GetTranslation("EditACLConfirm")."\");":""),
+         $this->GetTranslation("EditACLText"),
          $this->method != "acls"
          );
       }
       if ($this->IsAdmin() || (!$this->GetConfigValue("remove_onlyadmins") && $this->UserIsOwner()))
       {
-         $this->EchoTab( $this->href("remove"),  $this->GetResourceValue("DeleteTip")."",
-                        '<img src="'.$this->GetConfigValue("theme_url").'icons/del'.($this->method != "remove"?"":"_").'.gif" width="14" height="15" alt="" />'.$this->GetResourceValue("DeleteText"),
+         $this->EchoTab( $this->href("remove"),  $this->GetTranslation("DeleteTip")."",
+                        '<img src="'.$this->GetConfigValue("theme_url").'icons/del'.($this->method != "remove"?"":"_").'.gif" width="14" height="15" alt="" />'.$this->GetTranslation("DeleteText"),
          $this->method != "remove",
                         "2a"
                         );
@@ -43,8 +43,8 @@
    ?> <?php
    if ($this->GetUser())
    {
-      $this->EchoTab( $this->href("referrers"),  $this->GetResourceValue("ReferrersTip"),
-      $this->GetResourceValue("ReferrersText"),
+      $this->EchoTab( $this->href("referrers"),  $this->GetTranslation("ReferrersTip"),
+      $this->GetTranslation("ReferrersText"),
       $this->method != "referrers",
          "2"
          );
@@ -56,12 +56,12 @@ if ($this->page)
 {
    // if owner is current user
    if ($this->UserIsOwner())
-   print($this->GetResourceValue("YouAreOwner"));
+   print($this->GetTranslation("YouAreOwner"));
    else
    if ($owner = $this->GetPageOwner())
-   print($this->GetResourceValue("Owner").$this->Link($owner));
+   print($this->GetTranslation("Owner").$this->Link($owner));
    else if (!$this->page["comment_on"])
-   print($this->GetResourceValue("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetResourceValue("TakeOwnership")."</a>)" : ""));
+   print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
 }
 ?></div>
 </div>
@@ -95,9 +95,9 @@ if ($this->method == "show") {
          // display files header
          ?>
 <a name="files"></a>
-<div id="filesheader"><?php echo $this->GetResourceValue("Files_all") ?>
+<div id="filesheader"><?php echo $this->GetTranslation("Files_all") ?>
 [<a
-   href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?></a>]
+   href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetTranslation("HideFiles"); ?></a>]
     </div>
     <?php
 
@@ -137,16 +137,16 @@ if ($this->method == "show") {
       switch (count($files))
       {
       case 0:
-        print($this->GetResourceValue("Files_0"));
+        print($this->GetTranslation("Files_0"));
         break;
       case 1:
-        print($this->GetResourceValue("Files_1"));
+        print($this->GetTranslation("Files_1"));
         break;
       default:
-        print(str_replace("%1",count($files), $this->GetResourceValue("Files_n")));
+        print(str_replace("%1",count($files), $this->GetTranslation("Files_n")));
       }
     ?>
-[<a href="<?php echo $this->href("", "", "show_files=1#files")."\">".$this->GetResourceValue("ShowFiles"); ?></a>]
+[<a href="<?php echo $this->href("", "", "show_files=1#files")."\">".$this->GetTranslation("ShowFiles"); ?></a>]
 
     </div>
     <?php
@@ -182,7 +182,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     ?>
     <a name="comments"></a>
 <div id="commentsheader">
-<?php echo $this->GetResourceValue("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetResourceValue("HideComments"); ?></a>]
+<?php echo $this->GetTranslation("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetTranslation("HideComments"); ?></a>]
     </div>
     <?php
 
@@ -196,8 +196,8 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
         $del = "";
         if ($this->IsAdmin() || $this->UserIsOwner($comment["tag"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageTag())))
           print("<div style=\"float:right;\" style='background:#ffcfa8; border: solid 1px; border-color:#cccccc'>".
-          "<a href=\"".$this->href("remove",$comment["tag"])."\" title=\"".$this->GetResourceValue("DeleteTip")."\">".
-          "<img src=\"".$this->GetConfigValue("theme_url")."icons/del.gif\" hspace=4 vspace=4 title=\"".$this->GetResourceValue("DeleteText")."\" /></a>".
+          "<a href=\"".$this->href("remove",$comment["tag"])."\" title=\"".$this->GetTranslation("DeleteTip")."\">".
+          "<img src=\"".$this->GetConfigValue("theme_url")."icons/del.gif\" hspace=4 vspace=4 title=\"".$this->GetTranslation("DeleteText")."\" /></a>".
           "</div>");
         print($this->Format($comment["body"])."\n");
         print("<div class=\"commentinfo\">\n-- ".($this->IsWikiName($comment["user"])?$this->Link("/".$comment["user"],"",$comment["user"]):$comment["user"])." (".$comment["time"].")\n</div>\n");
@@ -210,7 +210,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     if ($this->HasAccess("comment"))
     {
       ?>
-        <?php echo $this->GetResourceValue("AttachComment"); ?><br />
+        <?php echo $this->GetTranslation("AttachComment"); ?><br />
         <?php echo $this->FormOpen("addcomment"); ?>
           <textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
 <?php
@@ -225,8 +225,8 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
                         if(strpos($this->GetUserName(), '.'))
                            {
           ?>
-<p><?php echo $this->GetResourceValue("Captcha");?>:</p>
-<img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetResourceValue("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetResourceValue("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("root_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetResourceValue("CaptchaReload"); ?>" /></a>
+<p><?php echo $this->GetTranslation("Captcha");?>:</p>
+<img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("root_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
 <br />
 <input type="text" name="word" maxlength="6" style="width: 273px;" />
 <br />
@@ -237,7 +237,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
                }
             // end captcha
 ?>
-<input type="submit" value="<?php echo $this->GetResourceValue("AttachCommentButton"); ?>" accesskey="s" />
+<input type="submit" value="<?php echo $this->GetTranslation("AttachCommentButton"); ?>" accesskey="s" />
 <?php echo $this->FormClose(); ?>
 <?php
     }
@@ -251,16 +251,16 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
       switch (count($comments))
       {
       case 0:
-        print($this->GetResourceValue("Comments_0"));
+        print($this->GetTranslation("Comments_0"));
         break;
       case 1:
-        print($this->GetResourceValue("Comments_1"));
+        print($this->GetTranslation("Comments_1"));
         break;
       default:
-        print(str_replace("%1",count($comments), $this->GetResourceValue("Comments_n")));
+        print(str_replace("%1",count($comments), $this->GetTranslation("Comments_n")));
       }
     ?>
-  [<a href="<?php echo $this->href("", "", "show_comments=1#comments")."\">".$this->GetResourceValue("ShowComments"); ?></a>]
+  [<a href="<?php echo $this->href("", "", "show_comments=1#comments")."\">".$this->GetTranslation("ShowComments"); ?></a>]
 
     </div>
     <?php
@@ -275,7 +275,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
 <div id="credits">
   <?php
 if ($this->GetUser()){
-echo $this->GetResourceValue("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion())." :: Redesign by Mendokusee";
+echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion())." :: Redesign by Mendokusee";
 }
 ?>
 </div>

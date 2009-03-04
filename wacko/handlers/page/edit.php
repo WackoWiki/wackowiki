@@ -30,7 +30,7 @@ if ($_POST)
       // check for overwriting
       if ($this->page)
          if ($this->page["time"] != $_POST["previous"])
-            $error = $this->GetResourceValue("OverwriteAlert");
+            $error = $this->GetTranslation("OverwriteAlert");
 
       if(($this->page && $this->GetConfigValue("captcha_edit_page")) || (!$this->page && $this->GetConfigValue("captcha_new_page")))
          {
@@ -69,8 +69,8 @@ if ($_POST)
                         if(!$word_ok)
                            {
                               //not the right word
-                              $error = $this->GetResourceValue("SpamAlert");
-                              $this->SetMessage($this->GetResourceValue("SpamAlert"));
+                              $error = $this->GetTranslation("SpamAlert");
+                              $this->SetMessage($this->GetTranslation("SpamAlert"));
                            }
                      }
                }
@@ -134,24 +134,24 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
       <input name="save" class="OkBtn"
          onmouseover='this.className="OkBtn_";'
          onmouseout='this.className="OkBtn";' type="submit" align="top"
-         value="<?php echo $this->GetResourceValue("EditStoreButton"); ?>" />
+         value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
       &nbsp;
       <input name="preview"
          class="OkBtn" onmouseover='this.className="OkBtn_";'
          onmouseout='this.className="OkBtn";' type="submit" align="top"
-         value="<?php echo $this->GetResourceValue("EditPreviewButton"); ?>" />
+         value="<?php echo $this->GetTranslation("EditPreviewButton"); ?>" />
       &nbsp;
       <input class="CancelBtn"
          onmouseover='this.className="CancelBtn_";'
          onmouseout='this.className="CancelBtn";' type="button" align="top"
-         value="<?php echo $this->GetResourceValue("EditCancelButton"); ?>"
+         value="<?php echo $this->GetTranslation("EditCancelButton"); ?>"
          onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
       <?php
 
          if ($this->GetConfigValue("edit_table_based"))
          $output .= '<div id="page">';
 
-         $output = "<fieldset class=\"preview\"><legend>".$this->GetResourceValue("EditPreview")."</legend>\n";
+         $output = "<fieldset class=\"preview\"><legend>".$this->GetTranslation("EditPreview")."</legend>\n";
 
          $output .= $this->Format($body);
          $output .= "</fieldset><br />\n";
@@ -164,18 +164,18 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
       <input name="save" class="OkBtn_Top"
          onmouseover='this.className="OkBtn_Top_";'
          onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
-         value="<?php echo $this->GetResourceValue("EditStoreButton"); ?>" />
+         value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
       &nbsp;
       <input name="preview"
          class="OkBtn_Top" onmouseover='this.className="OkBtn_Top_";'
          onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
-         value="<?php echo $this->GetResourceValue("EditPreviewButton"); ?>" />
+         value="<?php echo $this->GetTranslation("EditPreviewButton"); ?>" />
       &nbsp;
       <input
          class="CancelBtn_Top" onmouseover='this.className="CancelBtn_Top_";'
          onmouseout='this.className="CancelBtn_Top";' type="button"
          align="top"
-         value="<?php echo str_replace("\n"," ",$this->GetResourceValue("EditCancelButton")); ?>"
+         value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
          onclick="document.location='<?php echo addslashes($this->href("", "", "", 1))?>';" />
       <br />
       <?php
@@ -195,8 +195,8 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
                      if(strpos($this->GetUserName(), '.'))
                         {
        ?>
-<p><?php echo $this->GetResourceValue("Captcha");?>:</p>
-<img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetResourceValue("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetResourceValue("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("root_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetResourceValue("CaptchaReload"); ?>" /></a>
+<p><?php echo $this->GetTranslation("Captcha");?>:</p>
+<img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("root_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
 <br />
 <input type="text" name="word" maxlength="6" style="width: 273px;" />
 <br />
@@ -230,17 +230,17 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
   <input name="save" class="OkBtn"
    onmouseover='this.className="OkBtn_";'
    onmouseout='this.className="OkBtn";' type="submit" align="top"
-   value="<?php echo $this->GetResourceValue("EditStoreButton"); ?>" />
+   value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
   &nbsp;
   <input name="preview"
    class="OkBtn" onmouseover='this.className="OkBtn_";'
    onmouseout='this.className="OkBtn";' type="submit" align="top"
-   value="<?php echo $this->GetResourceValue("EditPreviewButton"); ?>" />
+   value="<?php echo $this->GetTranslation("EditPreviewButton"); ?>" />
   &nbsp;
   <input class="CancelBtn"
    onmouseover='this.className="CancelBtn_";'
    onmouseout='this.className="CancelBtn";' type="button" align="top"
-   value="<?php echo $this->GetResourceValue("EditCancelButton"); ?>"
+   value="<?php echo $this->GetTranslation("EditCancelButton"); ?>"
    onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
   <?php
 }
@@ -250,7 +250,7 @@ print ( $this->FormClose() );
 else
 {
    print("<div id=\"page\">");
-   print($this->GetResourceValue("WriteAccessDenied"));
+   print($this->GetTranslation("WriteAccessDenied"));
    print("</div>");
 }
 ?>

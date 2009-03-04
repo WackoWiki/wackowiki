@@ -27,9 +27,9 @@ echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
   <link media="print" rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/print.css" />
   <link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico" type="image/x-icon" />
   <link title="<?php echo $this->GetConfigValue("root_page");?>" href="<?php echo $this->GetConfigValue("base_url");?>" rel="start"/>
-  <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-  <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-  <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
+  <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+  <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+  <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -68,15 +68,15 @@ if ($user["doubleclickedit"] == "Y") {?>
 	<div id="header">
 		<div id="header-main">
 			<div id="header-top">
-			<strong><?php echo $this->config["wakka_name"] ?>: </strong><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetResourceValue("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
+			<strong><?php echo $this->config["wakka_name"] ?>: </strong><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
 		</div>
 		<div id="login">
 <?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->GetUser())
-   { ?> <span class="nobr"><?php echo $this->GetResourceValue("YouAre")." ".$this->Link($this->GetUserName()) ?></span><small> ( <span class="nobr Tune"><?php
-echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?>
- | <a onclick="return confirm('<?php echo $this->GetResourceValue("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetResourceValue("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetResourceValue("LogoutLink"); ?></a></span>
+   { ?> <span class="nobr"><?php echo $this->GetTranslation("YouAre")." ".$this->Link($this->GetUserName()) ?></span><small> ( <span class="nobr Tune"><?php
+echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?>
+ | <a onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a></span>
 )</small>
 <?php
 // Else Wacko shows login's controls
@@ -84,8 +84,8 @@ echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $t
 else
    {
    // Show Register / Login link
-	echo "<ul>\n<li>".$this->ComposeLinkToPage($this->GetResourceValue("LoginPage").($this->config["rewrite_mode"] ? "?" : "&amp;")."goback=".$this->SlimUrl($this->tag), "", $this->GetResourceValue("LoginPage"), 0)."</li>\n";
-	echo "<li>".$this->ComposeLinkToPage($this->GetResourceValue("RegistrationPage"), "", $this->GetResourceValue("RegistrationPage"), 0)."</li>\n</ul>"; 
+	echo "<ul>\n<li>".$this->ComposeLinkToPage($this->GetTranslation("LoginPage").($this->config["rewrite_mode"] ? "?" : "&amp;")."goback=".$this->SlimUrl($this->tag), "", $this->GetTranslation("LoginPage"), 0)."</li>\n";
+	echo "<li>".$this->ComposeLinkToPage($this->GetTranslation("RegistrationPage"), "", $this->GetTranslation("RegistrationPage"), 0)."</li>\n</ul>"; 
    }
 
 // End if
@@ -115,24 +115,24 @@ else
 				echo '<li><a href="'. $this->Href('', '', "addbookmark=yes")
 					.'"><img src="'. $this->GetConfigValue("theme_url")
 					.'icons/toolbar1.gif" alt="+" title="'.
-					$this->GetResourceValue("AddToBookmarks") .'"/></a></li>';
+					$this->GetTranslation("AddToBookmarks") .'"/></a></li>';
 			else
 				echo '<li><a href="'. $this->Href('', '', "removebookmark=yes")
 					.'"><img src="'. $this->GetConfigValue("theme_url")
 					.'icons/toolbar2.gif" alt="-" title="'.
-					$this->GetResourceValue("RemoveFromBookmarks") .'"/></a></li>';					
+					$this->GetTranslation("RemoveFromBookmarks") .'"/></a></li>';					
 			}
 	echo "\n</ol></div>";
 ?>
 <div id="search">
 <?php
 // Opens Search form
-echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get");
+echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get");
 
 // Searchbar
 ?>
-<span class="search nobr"><label for="phrase"><?php echo $this->GetResourceValue("SearchText"); ?></label><input
-	type="text" name="phrase" id="phrase" size="20" /><input class="submitinput" type="submit" title="<?php echo $this->GetResourceValue("SearchButtonText") ?>" alt="<?php echo $this->GetResourceValue("SearchButtonText") ?>" value="<?php echo $this->GetResourceValue("SearchButtonText") ?>"/></span>
+<span class="search nobr"><label for="phrase"><?php echo $this->GetTranslation("SearchText"); ?></label><input
+	type="text" name="phrase" id="phrase" size="20" /><input class="submitinput" type="submit" title="<?php echo $this->GetTranslation("SearchButtonText") ?>" alt="<?php echo $this->GetTranslation("SearchButtonText") ?>" value="<?php echo $this->GetTranslation("SearchButtonText") ?>"/></span>
 <?php
 
 // Search form close

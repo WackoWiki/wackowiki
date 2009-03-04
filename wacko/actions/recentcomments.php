@@ -40,7 +40,7 @@ if ($comments = LoadRecentComments($this, $root, (int)$max))
 }
 else
 {
-   echo $this->GetResourceValue("NoRecentComments");
+   echo $this->GetTranslation("NoRecentComments");
 }
 
 ?>

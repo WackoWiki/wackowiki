@@ -8,7 +8,7 @@ if ($this->IsAdmin())
 		?>
 <input
 	type="submit" name="clear"
-	value="<?php echo $this->GetResourceValue("ClearCache");?>" />
+	value="<?php echo $this->GetTranslation("ClearCache");?>" />
 		<?php
 		echo $this->FormClose();
 }
@@ -24,7 +24,7 @@ else
 	closedir($handle);
 	$this->Query("DELETE FROM ".$this->config["table_prefix"]."cache");
 
-	echo $this->GetResourceValue("CacheCleared");
+	echo $this->GetTranslation("CacheCleared");
 }
 }
 

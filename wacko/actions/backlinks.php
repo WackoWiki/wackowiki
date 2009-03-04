@@ -9,7 +9,7 @@ if ($pages = $this->LoadPagesLinkingTo($tag))
 {
 	if(!$nomark)
 	{
-		print("<fieldset><legend>".$this->GetResourceValue("ReferringPages").":</legend>\n");
+		print("<fieldset><legend>".$this->GetTranslation("ReferringPages").":</legend>\n");
 	}
 
 	foreach ($pages as $page)
@@ -34,6 +34,6 @@ if ($pages = $this->LoadPagesLinkingTo($tag))
 }
 else
 {
-	echo $this->GetResourceValue("NoReferringPages");
+	echo $this->GetTranslation("NoReferringPages");
 }
 ?>

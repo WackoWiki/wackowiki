@@ -2,7 +2,7 @@
 
 if ($this->NpjTranslit($this->config["allpageindex_page"]) != $this->NpjTranslit($this->tag))
 {
-	echo "<em>".$this->GetResourceValue("ActionDenied")."</em> ";
+	echo "<em>".$this->GetTranslation("ActionDenied")."</em> ";
 }
 else
 if ($pages = $this->LoadAllPages())
@@ -27,7 +27,7 @@ if ($pages = $this->LoadAllPages())
 }
 else
 {
-	echo $this->GetResourceValue("NoPagesFound");
+	echo $this->GetTranslation("NoPagesFound");
 }
 
 ?>

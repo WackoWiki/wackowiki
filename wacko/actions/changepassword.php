@@ -12,9 +12,9 @@ if ($_REQUEST["secret_code"]){
 			$confpassword = $_POST["confpassword"];
 
 			// check all conditions
-			if ($confpassword != $newpassword) $error = $this->GetResourceValue("PasswordsDidntMatch");
-			else if (preg_match("/ /", $newpassword)) $error = $this->GetResourceValue("SpacesArentAllowed");
-			else if (strlen($newpassword) < 5) $error = $this->GetResourceValue("PasswordTooShort");
+			if ($confpassword != $newpassword) $error = $this->GetTranslation("PasswordsDidntMatch");
+			else if (preg_match("/ /", $newpassword)) $error = $this->GetTranslation("SpacesArentAllowed");
+			else if (strlen($newpassword) < 5) $error = $this->GetTranslation("PasswordTooShort");
 			else
 			{
 				$this->Query("UPDATE ".$this->config["user_table"]." SET ".
@@ -25,7 +25,7 @@ if ($_REQUEST["secret_code"]){
 				$this->LogUserIn($user);
 
 				// forward
-				$this->SetMessage($this->GetResourceValue("PasswordChanged"));
+				$this->SetMessage($this->GetTranslation("PasswordChanged"));
 				$this->Redirect($this->href());
 			}
 			if ($error) echo $error;
@@ -36,26 +36,26 @@ if ($_REQUEST["secret_code"]){
 			?>
 
 <div class="cssform">
-  <h3><?php echo $this->Format( str_replace('%1', $user["name"], $this->GetResourceValue("YouWantChangePasswordForUser"))); ?></h3>
+  <h3><?php echo $this->Format( str_replace('%1', $user["name"], $this->GetTranslation("YouWantChangePasswordForUser"))); ?></h3>
   <p>
-    <label for="newpassword"><?php echo $this->GetResourceValue("NewPassword");?>:</label>
+    <label for="newpassword"><?php echo $this->GetTranslation("NewPassword");?>:</label>
     <input type="password" id="newpassword" name="newpassword" size="24" />
   </p>
   <p>
-    <label for="confpassword"><?php echo $this->GetResourceValue("ConfirmPassword");?>:</label>
+    <label for="confpassword"><?php echo $this->GetTranslation("ConfirmPassword");?>:</label>
     <input type="password" id="confpassword" name="confpassword" size="24" />
   </p>
   <p>
     <input class="OkBtn" onmouseover='this.className="OkBtn_";'
 			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetResourceValue("RegistrationButton"); ?>" />
+			value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" />
   </p>
 </div>
 <?php
 			print($this->FormClose());
 }
 }else{
-	echo $this->GetResourceValue("WrongCode");
+	echo $this->GetTranslation("WrongCode");
 }
 }else if (!$forgot && $user = $this->GetUser())
 {
@@ -68,10 +68,10 @@ if ($_REQUEST["secret_code"]){
 		$confpassword = $_POST["confpassword"];
 
 		// check all conditions
-		if (md5($password)!=$user["password"]) $error = $this->GetResourceValue("WrongPassword");
-		else if ($confpassword != $newpassword) $error = $this->GetResourceValue("PasswordsDidntMatch");
-		else if (preg_match("/ /", $newpassword)) $error = $this->GetResourceValue("SpacesArentAllowed");
-		else if (strlen($newpassword) < 5) $error = $this->GetResourceValue("PasswordTooShort");
+		if (md5($password)!=$user["password"]) $error = $this->GetTranslation("WrongPassword");
+		else if ($confpassword != $newpassword) $error = $this->GetTranslation("PasswordsDidntMatch");
+		else if (preg_match("/ /", $newpassword)) $error = $this->GetTranslation("SpacesArentAllowed");
+		else if (strlen($newpassword) < 5) $error = $this->GetTranslation("PasswordTooShort");
 		else
 		{
 			$this->Query("UPDATE ".$this->config["user_table"]." SET ".
@@ -82,7 +82,7 @@ if ($_REQUEST["secret_code"]){
 			$this->LogUserIn($user);
 
 			// forward
-			$this->SetMessage($this->GetResourceValue("PasswordChanged"));
+			$this->SetMessage($this->GetTranslation("PasswordChanged"));
 
 			$this->Redirect($this->href());
 		}
@@ -101,21 +101,21 @@ if ($_REQUEST["secret_code"]){
   <?php	}
 	?>
   <p>
-    <label for="password"><?php echo $this->GetResourceValue("CurrentPassword");?>:</label>
+    <label for="password"><?php echo $this->GetTranslation("CurrentPassword");?>:</label>
     <input type="password" id="password" name="password" size="24" />
   </p>
   <p>
-    <label for="newpassword"><?php echo $this->GetResourceValue("NewPassword");?>:</label>
+    <label for="newpassword"><?php echo $this->GetTranslation("NewPassword");?>:</label>
     <input type="password" id="newpassword" name="newpassword" size="24" />
   </p>
   <p>
-    <label for="confpassword"><?php echo $this->GetResourceValue("ConfirmPassword");?>:</label>
+    <label for="confpassword"><?php echo $this->GetTranslation("ConfirmPassword");?>:</label>
     <input type="password" id="confpassword" name="confpassword" size="24" />
   </p>
   <p>
     <input class="OkBtn" onmouseover='this.className="OkBtn_";'
 			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetResourceValue("RegistrationButton"); ?>" />
+			value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" />
   </p>
 </div>
 <?php
@@ -137,23 +137,23 @@ if ($_REQUEST["secret_code"]){
           "changepassword = '".quote($this->dblink, $code)."' ".
           "WHERE name = '".quote($this->dblink, $user["name"])."' LIMIT 1");
 
-				$subject = $this->GetResourceValue("EmailForgotSubject").$this->GetConfigValue("wakka_name");
-				$message = $this->GetResourceValue("MailHello"). $name.".<br /> <br /> ";
+				$subject = $this->GetTranslation("EmailForgotSubject").$this->GetConfigValue("wakka_name");
+				$message = $this->GetTranslation("MailHello"). $name.".<br /> <br /> ";
 				$message.= str_replace('%1', $this->GetConfigValue("wakka_name"),
 				str_replace('%2', $user["name"],
 				str_replace('%3', $this->Href().($this->config["rewrite_mode"] ? "?" : "&amp;")."secret_code=".$code,
-				$this->GetResourceValue("EmailForgotMessage"))))."<br />  ";
-				$message.= "<br />".$this->GetResourceValue("MailGoodbye")." ".$this->GetConfigValue("wakka_name");
+				$this->GetTranslation("EmailForgotMessage"))))."<br />  ";
+				$message.= "<br />".$this->GetTranslation("MailGoodbye")." ".$this->GetConfigValue("wakka_name");
 				$this->SendMail($user["email"], $subject, $message);
 
-				$this->SetMessage($this->GetResourceValue("CodeWasSent"));
+				$this->SetMessage($this->GetTranslation("CodeWasSent"));
 				$this->Redirect($this->href());
 
 			}else{
-				$error = $this->GetResourceValue("NotConfirmedMail");
+				$error = $this->GetTranslation("NotConfirmedMail");
 			}
 		}else{
-			$error = $this->GetResourceValue("UserNotFound");
+			$error = $this->GetTranslation("UserNotFound");
 		}
 	}
 	if ($error || $_REQUEST["action"] != "send")
@@ -181,7 +181,7 @@ if ($_REQUEST["secret_code"]){
   <p>
     <input class="OkBtn" onmouseover='this.className="OkBtn_";'
 			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetResourceValue("SendButton"); ?>" />
+			value="<?php echo $this->GetTranslation("SendButton"); ?>" />
   </p>
 </div>
 <?php

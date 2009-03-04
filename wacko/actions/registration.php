@@ -10,17 +10,17 @@ if ($_REQUEST["confirm"])
    {
       $this->Query("UPDATE ".$this->config["user_table"]." SET email_confirm = '' WHERE email_confirm = '".
       quote($this->dblink, $_REQUEST["confirm"])."'");
-      echo "<br /><br /><center>".$this->GetResourceValue("EmailConfirmed")."</center><br /><br />";
+      echo "<br /><br /><center>".$this->GetTranslation("EmailConfirmed")."</center><br /><br />";
    }
    else
-      echo "<br /><br /><center>".str_replace('%1', $this->ComposeLinkToPage('Settings', '', $this->GetResourceValue("SettingsText"), 0), $this->GetResourceValue("EmailNotConfirmed"))."</center><br /><br />";
+      echo "<br /><br /><center>".str_replace('%1', $this->ComposeLinkToPage('Settings', '', $this->GetTranslation("SettingsText"), 0), $this->GetTranslation("EmailNotConfirmed"))."</center><br /><br />";
 }
 else if ($_REQUEST["action"] == "login")
 {
    // if user name already exists, check password
    if ($existingUser = $this->LoadUser($_POST["name"]))
    {
-      $error = $this->GetResourceValue("RegistrationNameOwned");
+      $error = $this->GetTranslation("RegistrationNameOwned");
    }
    // otherwise, create new account
    else if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
@@ -72,8 +72,8 @@ else if ($_REQUEST["action"] == "login")
                      if(!$word_ok)
                         {
                            //not the right word
-                           $error = $this->GetResourceValue("SpamAlert");
-                           $this->SetMessage($this->GetResourceValue("SpamAlert"));
+                           $error = $this->GetTranslation("SpamAlert");
+                           $this->SetMessage($this->GetTranslation("SpamAlert"));
                         }
                   }
             }
@@ -83,12 +83,12 @@ else if ($_REQUEST["action"] == "login")
       if (($word_ok) || $this->IsAdmin() || !$this->GetConfigValue("captcha_registration"))
          {
             // check if name is WikiName style
-            if (!$this->IsWikiName($name)) $error = $this->GetResourceValue("MustBeWikiName");
-            else if (!$email) $error = $this->GetResourceValue("SpecifyEmail");
-            else if (!preg_match("/^.+?\@.+$/", $email)) $error = $this->GetResourceValue("NotAEmail");
-            else if ($confpassword != $password) $error = $this->GetResourceValue("PasswordsDidntMatch");
-            else if (preg_match("/ /", $password)) $error = $this->GetResourceValue("SpacesArentAllowed");
-            else if (strlen($password) < 5) $error = $this->GetResourceValue("PasswordTooShort");
+            if (!$this->IsWikiName($name)) $error = $this->GetTranslation("MustBeWikiName");
+            else if (!$email) $error = $this->GetTranslation("SpecifyEmail");
+            else if (!preg_match("/^.+?\@.+$/", $email)) $error = $this->GetTranslation("NotAEmail");
+            else if ($confpassword != $password) $error = $this->GetTranslation("PasswordsDidntMatch");
+            else if (preg_match("/ /", $password)) $error = $this->GetTranslation("SpacesArentAllowed");
+            else if (strlen($password) < 5) $error = $this->GetTranslation("PasswordTooShort");
             else
             {
                $confirm = md5(rand().$email.rand());
@@ -106,13 +106,13 @@ else if ($_REQUEST["action"] == "login")
                ($lang?"lang = '".quote($this->dblink, $lang)."', ":"").
                 "password = md5('".quote($this->dblink, $_POST["password"])."')");
 
-               $subject = $this->GetResourceValue("EmailWelcome").$this->GetConfigValue("wakka_name");
-               $message = $this->GetResourceValue("MailHello"). $name.".<br /> <br /> ";
+               $subject = $this->GetTranslation("EmailWelcome").$this->GetConfigValue("wakka_name");
+               $message = $this->GetTranslation("MailHello"). $name.".<br /> <br /> ";
                $message.= str_replace('%1', $this->GetConfigValue("wakka_name"),
                str_replace('%2', $name,
                str_replace('%3', $this->Href().($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
-               $this->GetResourceValue("EmailRegistered"))))."<br />  ";
-               $message.= "<br />".$this->GetResourceValue("MailGoodbye")." ".$this->GetConfigValue("wakka_name");
+               $this->GetTranslation("EmailRegistered"))))."<br />  ";
+               $message.= "<br />".$this->GetTranslation("MailGoodbye")." ".$this->GetConfigValue("wakka_name");
                $this->SendMail($email, $subject, $message);
 
                // log in
@@ -165,16 +165,16 @@ if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
          value="<?php echo htmlspecialchars($name); ?>" />
   </p>
   <p>
-    <label for="password"><?php echo $this->GetResourceValue("RegistrationPassword");?>:</label>
+    <label for="password"><?php echo $this->GetTranslation("RegistrationPassword");?>:</label>
     <input type="password" id="password" name="password" size="24" value="<?php echo $password ?>" />
   </p>
   <p>
-    <label for="confpassword"><?php echo $this->GetResourceValue("ConfirmPassword");?>:</label>
+    <label for="confpassword"><?php echo $this->GetTranslation("ConfirmPassword");?>:</label>
     <input type="password" id="confpassword" name="confpassword" size="24" value="<?php echo $confpassword ?>" />
   </p>
   <p>
   	<?php /* TODO: add message -> A valid e-mail address. All e-mails from the system will be sent to this address. The e-mail address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by e-mail. */?>
-    <label for="email"><?php echo $this->GetResourceValue("Email");?>:</label>
+    <label for="email"><?php echo $this->GetTranslation("Email");?>:</label>
     <input id="email" name="email" size="30"
          value="<?php echo htmlspecialchars($email); ?>" />
   </p>
@@ -190,8 +190,8 @@ if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
                         if(strpos($this->GetUserName(), '.'))
                            {
           ?>
-<p><label for="captcha"><?php echo $this->GetResourceValue("Captcha");?>:</label>
-<img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetResourceValue("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetResourceValue("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("root_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetResourceValue("CaptchaReload"); ?>" /></a>
+<p><label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
+<img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("root_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
 <br />
 <input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
 </p>
@@ -204,13 +204,13 @@ if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
   <p>
     <input class="OkBtn" onmouseover='this.className="OkBtn_";'
          onmouseout='this.className="OkBtn";' type="submit" align="top"
-         value="<?php echo $this->GetResourceValue("RegistrationButton"); ?>" />
+         value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" />
   </p>
 </div>
 <?php
 print($this->FormClose());
 }
 else
-echo($this->GetResourceValue("RegistrationClosed"));
+echo($this->GetTranslation("RegistrationClosed"));
 ?>
 <!--/notypo-->

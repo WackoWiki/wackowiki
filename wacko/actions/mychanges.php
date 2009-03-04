@@ -13,7 +13,7 @@ if ($user = $this->GetUser())
 
    if($_GET["bydate"] == "true" || ($bydate && !isset($_GET["bydate"])))
    {
-      print("<strong>".$this->GetResourceValue("MyChangesTitle1")." (<a href=\"".$this->href("", $tag).($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bydate=false\">".$this->GetResourceValue("OrderABC")."</a>).</strong><br /><br />\n");
+      print("<strong>".$this->GetTranslation("MyChangesTitle1")." (<a href=\"".$this->href("", $tag).($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bydate=false\">".$this->GetTranslation("OrderABC")."</a>).</strong><br /><br />\n");
 
       if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE user = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY time ASC, tag ASC"))
       {
@@ -36,7 +36,7 @@ if ($user = $this->GetUser())
             }
 
             // print entry
-            print("&nbsp;&nbsp;&nbsp;($time) (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetResourceValue("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."<br />\n");
+            print("&nbsp;&nbsp;&nbsp;($time) (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."<br />\n");
 
             $my_edits_count++;
 
@@ -45,17 +45,17 @@ if ($user = $this->GetUser())
 
          if ($my_edits_count == 0)
          {
-            echo $this->GetResourceValue("DidntEditAnyPage");
+            echo $this->GetTranslation("DidntEditAnyPage");
          }
       }
       else
       {
-         echo $this->GetResourceValue("NoPagesFound");
+         echo $this->GetTranslation("NoPagesFound");
       }
    }
    else
    {
-      print("<strong>".$this->GetResourceValue("MyChangesTitle2")." (<a href=\"".$this->href("", $tag).($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bydate=true\">".$this->GetResourceValue("OrderChange")."</a>).</strong><br /><br />\n");
+      print("<strong>".$this->GetTranslation("MyChangesTitle2")." (<a href=\"".$this->href("", $tag).($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bydate=true\">".$this->GetTranslation("OrderChange")."</a>).</strong><br /><br />\n");
 
       if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE user = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY tag ASC, time DESC"))
       {
@@ -75,7 +75,7 @@ if ($user = $this->GetUser())
                }
 
                // print entry
-               print("&nbsp;&nbsp;&nbsp;(".$page["time"].") (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetResourceValue("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."<br />\n");
+               print("&nbsp;&nbsp;&nbsp;(".$page["time"].") (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."<br />\n");
 
                $my_edits_count++;
                if ($my_edits_count>=(int)$max) break;
@@ -84,18 +84,18 @@ if ($user = $this->GetUser())
 
          if ($my_edits_count == 0)
          {
-            echo $this->GetResourceValue("DidntEditAnyPage");
+            echo $this->GetTranslation("DidntEditAnyPage");
          }
       }
       else
       {
-         echo $this->GetResourceValue("NoPagesFound");
+         echo $this->GetTranslation("NoPagesFound");
       }
    }
 }
 else
 {
-   echo $this->GetResourceValue("NotLoggedInThusEdited");
+   echo $this->GetTranslation("NotLoggedInThusEdited");
 }
 
 ?>

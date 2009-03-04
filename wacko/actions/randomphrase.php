@@ -1,10 +1,10 @@
 <?php
 $vars[0] = $this->UnwrapLink($vars[0]);
 if (! $this->HasAccess("read",$vars[0])){
-	echo $this->GetResourceValue("NoAccessToSourcePage");
+	echo $this->GetTranslation("NoAccessToSourcePage");
 }else{
 	if (!$phrase_page = $this->LoadPage($vars[0], $_GET["time"])){
-		echo "<em> ".$this->GetResourceValue("SourcePageDoesntExist")."(".$vars[0].")</em>";
+		echo "<em> ".$this->GetTranslation("SourcePageDoesntExist")."(".$vars[0].")</em>";
 	}else{
 		$strings = preg_replace("/\{\{[^\}]+\}\}/","",$phrase_page["body"]);
 		$strings = $this->Format($strings);
