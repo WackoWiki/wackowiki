@@ -1,16 +1,18 @@
 <?php
 
-if (!isset($root)) $root = $this->UnwrapLink($vars[0]);
-if (!isset($root)) $root = $this->page["tag"];
+if (!isset($root))
+	$root = $this->page["tag"];
+else
+	$root = $this->UnwrapLink($root);
 
-if ($linking_to = $_REQUEST["linking_to"])
+if ($linking_to = $_GET["linking_to"])
 {
 	if ($pages = $this->LoadPagesLinkingTo($linking_to,$root))
 	{
 		echo $this->GetResourceValue("PagesLinkingTo")." ".$this->Link($linking_to).":<br />\n";
 		foreach ($pages as $page)
 		{
-			if(!$this->config["hide_locked"] || $this->HasAccess("read", $page["tag"]))
+			if (!$this->config["hide_locked"] || $this->HasAccess("read", $page["tag"]))
 			{
 				print($this->Link("/".$page["tag"],"","/".$page["tag"])."<br />\n");
 			}
