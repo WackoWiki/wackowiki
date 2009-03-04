@@ -1021,7 +1021,7 @@ class Wacko
 				$username = $this->GetUserName();
 				$Watchers = $this->LoadAll(
 					"SELECT DISTINCT user ".
-					"FROM ".$this->config["table_prefix"]."pagewatches".
+					"FROM ".$this->config["table_prefix"]."pagewatches"." ".
 					"WHERE tag = '".quote($this->dblink, $tag)."'");
 
 				if ($Watchers)
