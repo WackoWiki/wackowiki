@@ -13,7 +13,7 @@ if ($pages = $this->LoadAll($str))
 		$s = $this->Link("/".$page["tag"],"",$page["tag"]);
 
 		if ($s != '')
-		print $s.". . . . . . . . . . . . . . . . <small>".$this->ComposeLinkToPage("/".$page["tag"],"watch",$this->GetResourceValue("RemoveWatch"))."</small><br />\n";
+		print $s.". . . . . . . . . . . . . . . . <small>".$this->ComposeLinkToPage("/".$page["tag"],"watch",$this->GetTranslation("RemoveWatch"))."</small><br />\n";
 	}
 }
 ?>

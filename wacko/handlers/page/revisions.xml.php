@@ -6,10 +6,10 @@ $xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 $xml .= "<channel>\n";
 $xml .= "<title>".$this->GetConfigValue("wakka_name")." - ".$this->tag."</title>\n";
 $xml .= "<link>".$this->GetConfigValue("base_url").$this->tag."</link>\n";
-$xml .= "<description>".$this->GetResourceValue("PageRevisionsXML").$this->GetConfigValue("wakka_name")."/".$this->tag."</description>\n";
+$xml .= "<description>".$this->GetTranslation("PageRevisionsXML").$this->GetConfigValue("wakka_name")."/".$this->tag."</description>\n";
 $xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 $xml .= "<image>\n";
-$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetResourceValue("RecentCommentsTitleXML")."</title>\n";
+$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
 $xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
 $xml .= "<url>".$this->GetConfigValue("root_url")."files/wacko4.gif"."</url>\n";
 $xml .= "<width>108</width>\n";
@@ -57,7 +57,7 @@ else
 	$xml .= "<item>\n";
 	$xml .= "<title>Error</title>\n";
 	$xml .= "<link>".$this->href("show")."</link>\n";
-	$xml .= "<description>".$this->GetResourceValue("AccessDeniedXML")."</description>\n";
+	$xml .= "<description>".$this->GetTranslation("AccessDeniedXML")."</description>\n";
 	$xml .= "</item>\n";
 }
 

@@ -8,14 +8,14 @@ if ($this->HasAccess("read"))
 {
 	if (!$this->page)
 	{
-		print(str_replace("%1",$this->href("edit"),$this->GetResourceValue("DoesNotExists")));
+		print(str_replace("%1",$this->href("edit"),$this->GetTranslation("DoesNotExists")));
 	}
 	else
 	{
 		// comment header?
 		if ($this->page["comment_on"])
 		{
-			print("<div class=\"commentinfo\">".$this->GetResourceValue("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->page["comment_on"], "", "", 0).", ".$this->GetResourceValue("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetResourceValue("At")." ".$this->page["time"]."</div>");
+			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->page["comment_on"], "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["time"]."</div>");
 		}
 
 		if ($this->page["latest"] == "N")
@@ -24,7 +24,7 @@ if ($this->HasAccess("read"))
 			str_replace("%1",$this->href(),
 			str_replace("%2",$this->GetPageTag(),
 			str_replace("%3",$this->page["time"],
-			$this->GetResourceValue("Revision")))).".</div>");
+			$this->GetTranslation("Revision")))).".</div>");
 		}
 
 		// display page
@@ -38,7 +38,7 @@ if ($this->HasAccess("read"))
 }
 else
 {
-	print($this->GetResourceValue("ReadAccessDenied"));
+	print($this->GetTranslation("ReadAccessDenied"));
 }
 ?>
 </div>

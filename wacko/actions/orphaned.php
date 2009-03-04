@@ -15,7 +15,7 @@ if ($pages = $this->LoadOrphanedPages($root))
 }
 else
 {
-	echo $this->GetResourceValue("NoOrphaned");
+	echo $this->GetTranslation("NoOrphaned");
 }
 
 ?>

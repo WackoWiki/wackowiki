@@ -18,7 +18,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 
       if(!$body)
          {
-            $this->SetMessage($this->GetResourceValue("EmptyComment"));
+            $this->SetMessage($this->GetTranslation("EmptyComment"));
          }
       else
          {
@@ -63,8 +63,8 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
                               if(!$word_ok)
                                  {
                                     //not the right word
-                                    $error = $this->GetResourceValue("SpamAlert");
-                                    $this->SetMessage($this->GetResourceValue("SpamAlert"));
+                                    $error = $this->GetTranslation("SpamAlert");
+                                    $this->SetMessage($this->GetTranslation("SpamAlert"));
                                     $_SESSION['freecap_old_comment'] = $body;
                                  }
                            }
@@ -86,7 +86,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
    }
 else
    {
-      print("<div id=\"page\">".$this->GetResourceValue("CommentAccessDenied")."</div>\n");
+      print("<div id=\"page\">".$this->GetTranslation("CommentAccessDenied")."</div>\n");
    }
 
 ?>

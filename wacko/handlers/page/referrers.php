@@ -12,12 +12,12 @@ if ($user = $this->GetUser())
 {
 	if ($global = $_GET["global"])
 	{
-		$title = str_replace("%1", $this->href("referrers_sites", "", "global=1"), $this->GetResourceValue("ExternalPagesGlobal"));
+		$title = str_replace("%1", $this->href("referrers_sites", "", "global=1"), $this->GetTranslation("ExternalPagesGlobal"));
 		$referrers = $this->LoadReferrers();
 	}
 	else
 	{
-		$title = $this->getResourceValue("ReferringPages").":";
+		$title = $this->GetTranslation("ReferringPages").":";
 		print("<strong>$title</strong><br /><br />\n");
 
 		if ($pages = $this->LoadPagesLinkingTo($this->getPageTag())) {
@@ -26,17 +26,17 @@ if ($user = $this->GetUser())
 			}
 			print(implode("<br />\n", $links)."<p></p>");
 		} else {
-			print($this->getResourceValue("NoReferringPages")."<p></p>");
+			print($this->GetTranslation("NoReferringPages")."<p></p>");
 		}
 
 		$title = str_replace("%1", $this->ComposeLinkToPage($this->GetPageTag()),
 		str_replace("%2",
 		($this->GetConfigValue("referrers_purge_time") ?
 		($this->GetConfigValue("referrers_purge_time") == 1 ?
-		$this->getResourceValue("Last24Hours") :
+		$this->GetTranslation("Last24Hours") :
 		str_replace("%1",$this->GetConfigValue("referrers_purge_time"),
-		$this->GetResourceValue("LastDays"))): ""),
-		str_replace("%3",$this->href("referrers_sites"),$this->GetResourceValue("ExternalPages"))));
+		$this->GetTranslation("LastDays"))): ""),
+		str_replace("%3",$this->href("referrers_sites"),$this->GetTranslation("ExternalPages"))));
 
 		$referrers = $this->LoadReferrers($this->GetPageTag());
 	}
@@ -58,21 +58,21 @@ if ($user = $this->GetUser())
 	}
 	else
 	{
-		print($this->GetResourceValue("NoneReferrers")."<br />\n");
+		print($this->GetTranslation("NoneReferrers")."<br />\n");
 	}
 
 	if ($global)
 	{
-		print("<br />[".str_replace("%1",$this->href("referrers_sites"),str_replace("%2",$this->GetPageTag(),$this->GetResourceValue("ViewReferringSites")))." | ".str_replace("%1",$this->href("referrers"),str_replace("%2",$this->GetPageTag(),$this->GetResourceValue("ViewReferrersFor")))."]");
+		print("<br />[".str_replace("%1",$this->href("referrers_sites"),str_replace("%2",$this->GetPageTag(),$this->GetTranslation("ViewReferringSites")))." | ".str_replace("%1",$this->href("referrers"),str_replace("%2",$this->GetPageTag(),$this->GetTranslation("ViewReferrersFor")))."]");
 	}
 	else
 	{
-		print("<br />[".str_replace("%1",$this->href("referrers_sites", "", "global=1"),$this->GetResourceValue("ViewReferringSitesGlobal")) ." | ".str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetResourceValue("ViewReferrersForGlobal"))."]");
+		print("<br />[".str_replace("%1",$this->href("referrers_sites", "", "global=1"),$this->GetTranslation("ViewReferringSitesGlobal")) ." | ".str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetTranslation("ViewReferrersForGlobal"))."]");
 	}
 }
 else
 {
-	print($this->GetResourceValue("ReadAccessDenied"));
+	print($this->GetTranslation("ReadAccessDenied"));
 }
 ?>
 </div>

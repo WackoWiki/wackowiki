@@ -196,7 +196,7 @@ if (!function_exists('print_cluster_tree'))
 
 if ($root){
 	if (!$nomark){
-		$title = $this->GetResourceValue("TreeClusterTitle");
+		$title = $this->GetTranslation("TreeClusterTitle");
 		$title = str_replace("%1",  $this->Link("/".$root,"",$root),  $title);
 		print("<fieldset><legend>".$title.":</legend>\n");
 	}
@@ -204,7 +204,7 @@ if ($root){
 }
 else
 {
-	if (!$nomark)  print("<fieldset><legend>".$this->GetResourceValue("TreeSiteTitle")."</legend>\n");
+	if (!$nomark)  print("<fieldset><legend>".$this->GetTranslation("TreeSiteTitle")."</legend>\n");
 	$query = "'%'";
 }
 
@@ -265,7 +265,7 @@ if ($pages)
 }
 else
 {
-	$empty_string = $this->GetResourceValue("TreeEmpty");
+	$empty_string = $this->GetTranslation("TreeEmpty");
 	$empty_string = str_replace("%1",  $this->Link("/".$root,"",$root),  $empty_string);
 	print($empty_string."<br />");
 }

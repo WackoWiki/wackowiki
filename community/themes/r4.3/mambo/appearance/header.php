@@ -19,9 +19,9 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/wacko.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/left.css" />
 		<link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico" type="image/x-icon" />
-		<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-		<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-		<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
+		<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+		<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+		<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -58,11 +58,11 @@ if ($this->method == 'edit')
 	<tr>
   		<td>
 			<?php echo $this->config["wakka_name"] ?>: <?php echo $this->GetPagePath(); ?>
-			<a class="Search" title="<?php echo $this->GetResourceValue("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
+			<a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
 		</td>
 	  	<td class="searchArea" align="right" valign="bottom">
-			<?php echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get"); ?>
-			<?php echo $this->GetResourceValue("SearchText") ?>
+			<?php echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?>
+			<?php echo $this->GetTranslation("SearchText") ?>
 			<input type="text" name="phrase" size="15" style="border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;" />
 			<?php echo $this->FormClose(); ?>
 		</td>
@@ -79,7 +79,7 @@ if ($this->method == 'edit')
 							<tr>
 								<td class="titleLeft"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" height="1" width="14"/></td>
 								<td class="titleText" width="100%">
-									<?php echo $this->GetResourceValue("YourBookmarks"); ?>
+									<?php echo $this->GetTranslation("YourBookmarks"); ?>
 								</td>
 								<td class="titleHandle"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" height="1" width="20"/></td>
 								<td class="titleRight"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif" alt="" height="1" width="3"/></td>
@@ -99,11 +99,11 @@ if ($this->method == 'edit')
         if ($this->GetUser()) {
 			if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>
 				<a href="<?php echo $this->Href('', '', "addbookmark=yes")?>">
-					<?php echo $this->GetResourceValue("AddToBookmarks"); ?>
+					<?php echo $this->GetTranslation("AddToBookmarks"); ?>
 				</a>
 	<?php } else { ?>
 			<a href="<?php echo $this->Href('', '', "removebookmark=yes")?>">
-			<?php echo $this->GetResourceValue("RemoveFromBookmarks"); ?>
+			<?php echo $this->GetTranslation("RemoveFromBookmarks"); ?>
 			</a>
 	<?php }
         }
@@ -130,38 +130,38 @@ if ($this->method == 'edit')
     				<td class="modulecontent">
 						<div class="modulecontent">
 						<?php
-echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetResourceValue("RevisionTip")."\">".$this->GetPageTime()."</a>\n" : "";
+echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTime()."</a>\n" : "";
         					echo "<hr />";
 
                             if ($this->HasAccess("write")) {
-								echo "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetResourceValue("EditTip")."\">".$this->GetResourceValue("EditText")."</a>\n";
+								echo "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetTranslation("EditTip")."\">".$this->GetTranslation("EditText")."</a>\n";
 							}
 							echo '<br />';
                             if ($this->GetPageTime()) {
-								echo "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetResourceValue("RevisionTip")."\">".$this->GetResourceValue('SettingsRevisions')."</a>\n";
+								echo "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetTranslation('SettingsRevisions')."</a>\n";
                             }
 							// if this page exists
 							if ($this->page) {
 								// if owner is current user
 							    if ($this->UserIsOwner()) {
 									echo '<br />';
-							    	print(" <a href=\"".$this->href("rename")."\">".$this->GetResourceValue("RenameText")."</a>");
+							    	print(" <a href=\"".$this->href("rename")."\">".$this->GetTranslation("RenameText")."</a>");
 									echo '<br />';
-							    	print("<a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetResourceValue("EditACLConfirm")."');\"":"").">".$this->GetResourceValue("EditACLText")."</a>");
+							    	print("<a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"").">".$this->GetTranslation("EditACLText")."</a>");
 							    }
 
 							    if ($this->CheckACL($this->GetUserName(),$this->config["rename_globalacl"]) && !$this->UserIsOwner()) {
 									echo '<br />';
-							    	print(" <a href=\"".$this->href("rename")."\">".$this->GetResourceValue("RenameText")."</a>");
+							    	print(" <a href=\"".$this->href("rename")."\">".$this->GetTranslation("RenameText")."</a>");
 							    }
 
 							    if ($this->IsAdmin()) {
 									echo '<br />';
-									print(" <a href=\"".$this->href("remove")."\">".$this->GetResourceValue("DeleteText")."</a>");
+									print(" <a href=\"".$this->href("remove")."\">".$this->GetTranslation("DeleteText")."</a>");
 							    }
 
 								echo '<br />';
-							    print("<a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetResourceValue("EditACLConfirm")."');\"":"").">".$this->GetResourceValue("SettingsText")."</a>");
+							    print("<a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"").">".$this->GetTranslation("SettingsText")."</a>");
 
 								echo '<br />';
 								print "<a href=\"".$this->href("export.xml")."\" title=\"Click to view recent page revisions in XML format.\" target=\"_blank\">Export to XML</a>\n";
@@ -170,13 +170,13 @@ echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".
 
 							    if ($this->UserIsOwner()) {
 		                       		echo "<hr />";
-									print($this->GetResourceValue("YouAreOwner"));
+									print($this->GetTranslation("YouAreOwner"));
 							    } else {
 		                       		echo "<hr />";
 							    	if ($owner = $this->GetPageOwner()) {
-							        print($this->GetResourceValue("Owner").$this->Link($owner));
+							        print($this->GetTranslation("Owner").$this->Link($owner));
 							      } else if (!$this->page["comment_on"]) {
-							        print($this->GetResourceValue("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetResourceValue("TakeOwnership")."</a>)" : ""));
+							        print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
 							      }
 								}
 							}
@@ -189,27 +189,27 @@ echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".
 		<td>
 <!-- wrapper -->
 
-<?php echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
+<?php echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
 <input type="hidden" name="action" value="login" />
 
 <div class="header">
 	<?php echo ($this->IsWatched($this->GetUserName(), $this->GetPageTag())
-			? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1unvisibl.gif\" title=\"".$this->GetResourceValue("RemoveWatch")."\" alt=\"".$this->GetResourceValue("RemoveWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>"
-			: "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/visibl.gif\" title=\"".$this->GetResourceValue("SetWatch")."\" alt=\"".$this->GetResourceValue("SetWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?> |
-  	<?php echo "<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1print.gif\" title=\"".$this->GetResourceValue("PrintVersion")."\" alt=\"".$this->GetResourceValue("PrintVersion")."\"  align=\"absmiddle\" border=\"0\" /></a>";?> |
+			? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1unvisibl.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>"
+			: "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/visibl.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?> |
+  	<?php echo "<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"absmiddle\" border=\"0\" /></a>";?> |
     <?php
 		if ($this->GetUser()) { ?>
             <span class="nobr">
-				<?php echo $this->GetResourceValue("YouAre"); ?>
+				<?php echo $this->GetTranslation("YouAre"); ?>
 				<img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/user.gif" width="12" height="12" border="0" style="vertical-align: baseline; " alt=""/>
 				<?php echo $this->Link($this->GetUserName()) ?>
 			</span>
             <small>
 				(
 				<span class="nobr Tune">
-					<?php echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?> |
-					<a onclick="return confirm('<?php echo $this->GetResourceValue("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetResourceValue("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>">
-						<?php echo $this->GetResourceValue("LogoutLink"); ?>
+					<?php echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?> |
+					<a onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>">
+						<?php echo $this->GetTranslation("LogoutLink"); ?>
 					</a>
 				</span>
 				)
@@ -218,8 +218,8 @@ echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".
     <?php } else { ?>
             <span class="nobr">
 				<input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" />
-				<strong><?php echo $this->GetResourceValue("LoginWelcome") ?>:&nbsp;</strong>
-				<input type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->GetResourceValue("LoginPassword") ?>:&nbsp;<input type="password" name="password" class="login" size="8" />&nbsp;<input type="submit" value="Ok" />
+				<strong><?php echo $this->GetTranslation("LoginWelcome") ?>:&nbsp;</strong>
+				<input type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->GetTranslation("LoginPassword") ?>:&nbsp;<input type="password" name="password" class="login" size="8" />&nbsp;<input type="submit" value="Ok" />
 			</span>
     <?php } ?>
 

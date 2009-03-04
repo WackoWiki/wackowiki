@@ -47,7 +47,7 @@ if (!$max)  $max = 50;
 
 if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
 {
-   if ($root=="" && !(int)$noxml)  print("<a href=\"".$this->GetConfigValue("root_url")."xml/recentcomment_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetResourceValue("RecentCommentsXMLTip")."\" alt=\"XML\" /></a><br /><br />");
+   if ($root=="" && !(int)$noxml)  print("<a href=\"".$this->GetConfigValue("root_url")."xml/recentcomment_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentCommentsXMLTip")."\" alt=\"XML\" /></a><br /><br />");
    foreach ($pages as $page)
    {
       if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
@@ -66,14 +66,14 @@ if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
          // print entry
          print("&nbsp;&nbsp;&nbsp;<span class=\"dt\">".$time."</span> &mdash; (<a href=\"".
          $this->href("", $page["tag"], "show_comments=1")."#comments\">".$page["tag"]."</a>".
-              ") . . . . . . . . . . . . . . . . <small>".$this->GetResourceValue("LatestCommentBy")." ".
+              ") . . . . . . . . . . . . . . . . <small>".$this->GetTranslation("LatestCommentBy")." ".
          ($this->IsWikiName($page["comment_user"])?$this->Link("/".$page["comment_user"],"",$page["comment_user"] ):$page["comment_user"])."</small><br />\n");
       }
    }
 }
 else
 {
-   echo $this->GetResourceValue("NoRecentlyCommented");
+   echo $this->GetTranslation("NoRecentlyCommented");
 }
 
 ?>

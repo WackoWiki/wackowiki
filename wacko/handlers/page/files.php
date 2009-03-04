@@ -81,13 +81,13 @@ else if ($error == 404)
 {
 	if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
 
-	print($this->GetResourceValue("UploadFileNotFound"));
+	print($this->GetTranslation("UploadFileNotFound"));
 }
 else
 {
 	if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
 
-	print($this->GetResourceValue("UploadFileForbidden"));
+	print($this->GetTranslation("UploadFileForbidden"));
 }
 
 // 4. die

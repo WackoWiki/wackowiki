@@ -30,24 +30,24 @@ if ($this->HasAccess("read")) {
 			str_replace("%1", "<a href=\"".$this->href("", "", ($b!=-1?"time=".urlencode($pageA["time"]):""))."\">".$pageA["time"]."</a>",
 			str_replace("%2", "<a href=\"".$this->href("", "", ($a!=-1?"time=".urlencode($pageB["time"]):""))."\">".$pageB["time"]."</a>",
 			str_replace("%3", $this->Link("/".$this->tag),
-			$this->GetResourceValue("Comparison"))))."<br />\n";
+			$this->GetTranslation("Comparison"))))."<br />\n";
 
 			if ($added)
 			{
 				// remove blank lines
-				$output .= "<br />\n".$this->GetResourceValue("SimpleDiffAdditions")."<br />\n";
+				$output .= "<br />\n".$this->GetTranslation("SimpleDiffAdditions")."<br />\n";
 				$output .= "<div class=\"additions\">".$this->Format(implode("\n", $added), "wakka", array("diff"=>1))."</div>";
 			}
 
 			if ($deleted)
 			{
-				$output .= "<br />\n".$this->GetResourceValue("SimpleDiffDeletions")."<br />\n";
+				$output .= "<br />\n".$this->GetTranslation("SimpleDiffDeletions")."<br />\n";
 				$output .= "<div class=\"deletions\">".$this->Format(implode("\n", $deleted), "wakka", array("diff"=>1))."</div>";
 			}
 
 			if (!$added && !$deleted)
 			{
-				$output .= "<br />\n".$this->GetResourceValue("NoDifferences");
+				$output .= "<br />\n".$this->GetTranslation("NoDifferences");
 			}
 			print($output);
 
@@ -141,15 +141,15 @@ if ($this->HasAccess("read")) {
 			$out = str_replace("%1", "<a href=\"".$this->href("", "", "time=".urlencode($pageB["time"]))."\">".$pageB["time"]."</a>",
 			str_replace("%2", "<a href=\"".$this->href("", "", "time=".urlencode($pageA["time"]))."\">".$pageA["time"]."</a>",
 			str_replace("%3", $this->Link("/".$this->tag),
-			$this->GetResourceValue("Comparison"))))."<br />\n<br />\n".$out;
+			$this->GetTranslation("Comparison"))))."<br />\n<br />\n".$out;
 			print $out;
 
 		}
 	} else {
-		print($this->GetResourceValue("ReadAccessDenied"));
+		print($this->GetTranslation("ReadAccessDenied"));
 	}
 } else {
-	print($this->GetResourceValue("ReadAccessDenied"));
+	print($this->GetTranslation("ReadAccessDenied"));
 }
 ?>
 </div>

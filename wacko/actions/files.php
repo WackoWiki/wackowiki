@@ -59,13 +59,13 @@ if ($can_view)
 
 	if (!$nomark)
 	{
-		$title = $this->GetResourceValue("UploadTitle".($global ? "Global" : ""));
+		$title = $this->GetTranslation("UploadTitle".($global ? "Global" : ""));
 		print("<fieldset><legend>".$title.": ".$showpageandpath."</legend>\n");
 	}
 
 	// display
-	$kb  = $this->GetResourceValue("UploadKB");
-	$del = $this->GetResourceValue("UploadRemove");
+	$kb  = $this->GetTranslation("UploadKB");
+	$del = $this->GetTranslation("UploadRemove");
 
 	if (!$global) $path = "@".str_replace("/", "@", $this->NpjTranslit($page))."@";
 	else          $path = "";
@@ -142,7 +142,7 @@ if ($can_view)
 }
 else
 {
-	echo "<em>".$this->GetResourceValue("ActionDenied")."</em> ";
+	echo "<em>".$this->GetTranslation("ActionDenied")."</em> ";
 }
 
 ?>

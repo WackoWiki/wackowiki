@@ -16,9 +16,9 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url"); ?>css/page.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url"); ?>css/wacko.css" media="screen" />
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->GetConfigValue("theme_url"); ?>icons/icon.gif" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 	<?php if($this->GetMethod() != 'show' || $this->page["latest"] == "N") { ?><meta name="robots" content="noindex, nofollow" /><?php } ?>
 	<title><?php echo $this->GetWakkaName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?></title>
 	<!-- JavaScript used by WackoWiki -->
@@ -50,14 +50,14 @@ if ($this->method == 'edit')
 	<div id="mainwrapper">
 		<div id="header">
 			<?php // Insert search form ?> 
-			<?php echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get"); ?>
-			<input type="text" name="phrase" size="15" value="<?php echo $this->GetResourceValue("SearchButtonText"); ?>" class="search" />
+			<?php echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?>
+			<input type="text" name="phrase" size="15" value="<?php echo $this->GetTranslation("SearchButtonText"); ?>" class="search" />
 			<?php echo $this->FormClose(); ?> 
 			
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
 			<b><?php echo $this->config["wakka_name"]; ?>:</b>
 			<?php echo $this->GetPagePath(); ?>
-			<a title="<?php echo $this->GetResourceValue("SearchTitleTip"); ?>" href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a> 
+			<a title="<?php echo $this->GetTranslation("SearchTitleTip"); ?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a> 
 		</div>
 		<div id="quicklinks">
 			<div class="bookmarks">
@@ -69,8 +69,8 @@ if ($this->method == 'edit')
 			<?php if($user = $this->GetUser()) { ?>
 			<div class="user">
 				<?php echo $this->Link($this->GetUserName()); ?>
-				<small>( <?php echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?> |
-				<a href="<?php echo $this->Href("",$this->GetResourceValue("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetResourceValue("LogoutLink"); ?></a> )</small>
+				<small>( <?php echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?> |
+				<a href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a> )</small>
 			</div>
 			<?php } ?>
 		</div>
@@ -80,28 +80,28 @@ if ($this->method == 'edit')
 			<?php // Show edit button only if user has privileges ?>
 			<?php if($this->HasAccess("write")) { ?>
 			<a href="<?php echo $this->href("edit"); ?>" accesskey="E">
-				<img src="<?php echo $this->GetConfigValue("theme_url"); ?>images/qa-edit.gif" alt="<?php echo $this->GetResourceValue("EditTip"); ?>" title="<?php echo $this->GetResourceValue("EditTip"); ?>" />
+				<img src="<?php echo $this->GetConfigValue("theme_url"); ?>images/qa-edit.gif" alt="<?php echo $this->GetTranslation("EditTip"); ?>" title="<?php echo $this->GetTranslation("EditTip"); ?>" />
 			</a>&nbsp;&nbsp;&nbsp;
 			<?php } ?>
 			<?php // Show ACL button only if user has privileges (or is admin) and if the page exists ?>
 			<?php if($this->page) if($this->UserIsOwner() || $this->IsAdmin()) { ?>
 			<a href="<?php echo $this->href("acls"); ?>">
-				<img src="<?php echo $this->GetConfigValue("theme_url"); ?>images/qa-acl.gif" alt="<?php echo $this->GetResourceValue("EditACLText"); ?>" title="<?php echo $this->GetResourceValue("EditACLText"); ?>" />
+				<img src="<?php echo $this->GetConfigValue("theme_url"); ?>images/qa-acl.gif" alt="<?php echo $this->GetTranslation("EditACLText"); ?>" title="<?php echo $this->GetTranslation("EditACLText"); ?>" />
 			</a>
 			<?php } ?>
 			<a href="<?php echo $this->href("print"); ?>">
-				<img src="<?php echo $this->GetConfigValue("theme_url"); ?>images/qa-print.gif" alt="<?php echo $this->GetResourceValue("PrintVersion"); ?>" title="<?php echo $this->GetResourceValue("PrintVersion"); ?>" />
+				<img src="<?php echo $this->GetConfigValue("theme_url"); ?>images/qa-print.gif" alt="<?php echo $this->GetTranslation("PrintVersion"); ?>" title="<?php echo $this->GetTranslation("PrintVersion"); ?>" />
 			</a>
 			<?php } else { ?>
 			<div class="loginbox">
-				<?php echo $this->FormOpen("", $this->GetResourceValue("LoginPage"), "post"); ?>
+				<?php echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
 				<input type="hidden" name="action" value="login" /> 
 				<input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag); ?>" />
-				<?php echo $this->GetResourceValue("LoginWelcome"); ?>
+				<?php echo $this->GetTranslation("LoginWelcome"); ?>
 				<input type="text" name="name" size="15" class="login" />
-				<?php echo $this->GetResourceValue("LoginPassword"); ?>
+				<?php echo $this->GetTranslation("LoginPassword"); ?>
 				<input type="password" name="password" size="10" class="login" />
-				<input type="image" src="<?php echo $this->GetConfigValue("theme_url"); ?>icons/login.gif" alt="<?php echo $this->GetResourceValue("LoginWelcome"); ?>" class="login" />
+				<input type="image" src="<?php echo $this->GetConfigValue("theme_url"); ?>icons/login.gif" alt="<?php echo $this->GetTranslation("LoginWelcome"); ?>" class="login" />
 				<?php echo $this->FormClose(); ?>
 			</div>
 			<?php } ?>

@@ -30,9 +30,9 @@ Common header file.
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/wacko.css" />
 <link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico" type="image/x-icon" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -74,12 +74,12 @@ if ($user["doubleclickedit"] == "Y") {?>
     <td width="378" valign="bottom" style="white-space: nowrap;"><span class="main"><a href="<?php echo $this->GetConfigValue("root_url")?>"class="main"><?php echo $this->config["wakka_name"] ?></a></span></td>
     <td width="100%"><div align="right"><?php
 // Opens Search form
-echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get");
+echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get");
 
 // Searchbar
 ?>
-<span class="searchbar nobr"><label for="phrase"><?php echo $this->GetResourceValue("SearchText"); ?></label><input
-	type="text" name="phrase" id="phrase" size="15" /><input class="submitinput" type="submit" title="<?php echo $this->GetResourceValue("SearchButtonText") ?>" alt="<?php echo $this->GetResourceValue("SearchButtonText") ?>" value="»"/></span>
+<span class="searchbar nobr"><label for="phrase"><?php echo $this->GetTranslation("SearchText"); ?></label><input
+	type="text" name="phrase" id="phrase" size="15" /><input class="submitinput" type="submit" title="<?php echo $this->GetTranslation("SearchButtonText") ?>" alt="<?php echo $this->GetTranslation("SearchButtonText") ?>" value="»"/></span>
 <?php
 
 // Search form close
@@ -99,16 +99,16 @@ echo $this->FormClose();
   <tr bgcolor="#85a43c">
     <td height="20" colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td><div class="navText"><strong><?php echo $this->ComposeLinkToPage($this->config["root_page"]);?>:</strong> <?php echo $this->GetPagePath(); ?> <a title="<?php echo $this->GetResourceValue("SearchTitleTip")?>" 
-     href="<?php echo $this->config["base_url"].$this->GetResourceValue("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></div></td>
+          <td><div class="navText"><strong><?php echo $this->ComposeLinkToPage($this->config["root_page"]);?>:</strong> <?php echo $this->GetPagePath(); ?> <a title="<?php echo $this->GetTranslation("SearchTitleTip")?>" 
+     href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></div></td>
           <td align="right"><?php 
 // If user are logged, Wacko shows "You are UserName" 
 if ($this->GetUser()) {
 ?>
-            <span class="nobr"><?php echo $this->GetResourceValue("YouAre")." ".$this->Link($this->GetUserName()) ?></span> <small>( <span class="nobr Tune">
+            <span class="nobr"><?php echo $this->GetTranslation("YouAre")." ".$this->Link($this->GetUserName()) ?></span> <small>( <span class="nobr Tune">
             <?php 
-      echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?>
-            | <a onclick="return confirm('<?php echo $this->GetResourceValue("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetResourceValue("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetResourceValue("LogoutLink"); ?></a></span> )</small>
+      echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?>
+            | <a onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a></span> )</small>
             <?php 
 // Else Wacko shows login's controls
 } 
@@ -151,9 +151,9 @@ echo "</li></ul></div>";
 		echo '<br />';	
        if ($this->GetUser()) {
 			if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>
-            <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"> <img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar1.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->GetResourceValue("Bookmarks"); ?> </a>
+            <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"> <img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar1.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->GetTranslation("Bookmarks"); ?> </a>
             <?php } else { ?>
-            <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"> <img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar2.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->GetResourceValue("Bookmarks"); 
+            <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"> <img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar2.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->GetTranslation("Bookmarks"); 
 ?> </a>
             <?php 
 }
@@ -167,13 +167,13 @@ echo "</div>";
               <?php 
         					#    if ($this->UserIsOwner()) {
 		                    #   		echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
-							#		print($this->GetResourceValue("YouAreOwner"));
+							#		print($this->GetTranslation("YouAreOwner"));
 							#    } else {
 		                    #  		echo "<hr noshade=\"noshade\" size=\"1\" />";
 							#    	if ($owner = $this->GetPageOwner()) {
-							#        print($this->GetResourceValue("Owner").$this->Link($owner));
+							#        print($this->GetTranslation("Owner").$this->Link($owner));
 							#      } else if (!$this->page["comment_on"]) {
-							#        print($this->GetResourceValue("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetResourceValue("TakeOwnership")."</a>)" : ""));
+							#        print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
 							#      }
 								
 							# }

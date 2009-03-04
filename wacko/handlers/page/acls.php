@@ -23,13 +23,13 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				$this->SaveAcl($this->GetPageTag(), "read", $_POST["read_acl"]);
 				$this->SaveAcl($this->GetPageTag(), "write", $_POST["write_acl"]);
 				$this->SaveAcl($this->GetPageTag(), "comment", $_POST["comment_acl"]);
-				$message = $this->GetResourceValue("ACLUpdated");
+				$message = $this->GetTranslation("ACLUpdated");
 		
 				// change owner?
 				if ($newowner = $_POST["newowner"])
 				{
 					$this->SetPageOwner($this->GetPageTag(), $newowner);
-					$message .= $this->GetResourceValue("ACLGaveOwnership").$newowner;
+					$message .= $this->GetTranslation("ACLGaveOwnership").$newowner;
 				}
 		
 				// Change read permission for all comments on this page
@@ -67,9 +67,9 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					if ($newowner = $_POST["newowner"])
 					$this->SetPageOwner($page["tag"], $newowner);
 				}
-				$message = $this->GetResourceValue("ACLUpdated");
+				$message = $this->GetTranslation("ACLUpdated");
 				if ($newowner = $_POST["newowner"])
-				$message .= $this->GetResourceValue("ACLGaveOwnership").$newowner;
+				$message .= $this->GetTranslation("ACLGaveOwnership").$newowner;
 			}
 
 		// redirect back to page
@@ -85,26 +85,26 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 
 		// show form
 		?>
-  <h3><?php echo str_replace("%1",$this->Link("/".$this->GetPageTag()),$this->GetResourceValue("ACLFor")); ?></h3>
+  <h3><?php echo str_replace("%1",$this->Link("/".$this->GetPageTag()),$this->GetTranslation("ACLFor")); ?></h3>
   <?php echo $this->FormOpen("acls") ?>
-<?php echo "<input type=\"checkbox\" id=\"massacls\" name=\"massacls\" "; echo " /> <label for=\"massacls\">".$this->GetResourceValue("SettingsMassAcls")."</label>"; ?> <br />
+<?php echo "<input type=\"checkbox\" id=\"massacls\" name=\"massacls\" "; echo " /> <label for=\"massacls\">".$this->GetTranslation("SettingsMassAcls")."</label>"; ?> <br />
   <div class="cssform">
     <p>
-      <label for="read_acl"><?php echo $this->GetResourceValue("ACLRead"); ?></label>
+      <label for="read_acl"><?php echo $this->GetTranslation("ACLRead"); ?></label>
       <textarea id="read_acl" name="read_acl" rows="4" cols="20"><?php echo $readACL["list"] ?></textarea>
     </p>
     <p>
-      <label for="write_acl"><?php echo $this->GetResourceValue("ACLWrite"); ?></label>
+      <label for="write_acl"><?php echo $this->GetTranslation("ACLWrite"); ?></label>
       <textarea id="write_acl" name="write_acl" rows="4" cols="20"><?php echo $writeACL["list"] ?></textarea>
     </p>
     <p>
-      <label for="comment_acl"><?php echo $this->GetResourceValue("ACLComment"); ?></label>
+      <label for="comment_acl"><?php echo $this->GetTranslation("ACLComment"); ?></label>
       <textarea id="comment_acl" name="comment_acl" rows="4" cols="20"><?php echo $commentACL["list"] ?></textarea>
     </p>
     <p>
-      <label for="newowner"><?php echo $this->GetResourceValue("SetOwner"); ?></label>
+      <label for="newowner"><?php echo $this->GetTranslation("SetOwner"); ?></label>
       <select id="newowner" name="newowner">
-        <option value=""><?php echo $this->GetResourceValue("OwnerDontChange"); ?></option>
+        <option value=""><?php echo $this->GetTranslation("OwnerDontChange"); ?></option>
         <?php
 			if ($users = $this->LoadUsers())
 			{
@@ -117,9 +117,9 @@ if ($this->UserIsOwner() || $this->IsAdmin())
       </select>
     </p>
     <p>
-      <input class="OkBtn" onmouseover='this.className="OkBtn_";' onmouseout='this.className="OkBtn";' type="submit" align="top" value="<?php echo $this->GetResourceValue("ACLStoreButton"); ?>" style="width: 120px" accesskey="s" />
+      <input class="OkBtn" onmouseover='this.className="OkBtn_";' onmouseout='this.className="OkBtn";' type="submit" align="top" value="<?php echo $this->GetTranslation("ACLStoreButton"); ?>" style="width: 120px" accesskey="s" />
       &nbsp;
-      <input class="CancelBtn" onmouseover='this.className="CancelBtn_";' onmouseout='this.className="CancelBtn";' type="button" align="top" value="<?php echo $this->GetResourceValue("ACLCancelButton"); ?>" onclick="document.location='<?php echo addslashes($this->href(""))?>';" 	style="width: 120px" />
+      <input class="CancelBtn" onmouseover='this.className="CancelBtn_";' onmouseout='this.className="CancelBtn";' type="button" align="top" value="<?php echo $this->GetTranslation("ACLCancelButton"); ?>" onclick="document.location='<?php echo addslashes($this->href(""))?>';" 	style="width: 120px" />
     </p>
   </div>
   <?php
@@ -128,7 +128,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 }
 else
 {
-	print($this->GetResourceValue("ACLAccessDenied"));
+	print($this->GetTranslation("ACLAccessDenied"));
 }
 ?>
   <br />

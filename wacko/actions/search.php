@@ -13,15 +13,15 @@ if ($form)
 {
 	echo $this->FormOpen("", "", "get") ?>
 
-<label for="searchfor"><?php echo $this->GetResourceValue("SearchFor");?></label>:&nbsp;<br />
+<label for="searchfor"><?php echo $this->GetTranslation("SearchFor");?></label>:&nbsp;<br />
 <input name="phrase" id="searchfor" size="40"
 			value="<?php echo htmlspecialchars($_REQUEST["phrase"]) ?>" /> <input
 			type="submit"
-			value="<?php echo $this->GetResourceValue("SearchButtonText"); ?>" />
+			value="<?php echo $this->GetTranslation("SearchButtonText"); ?>" />
 			<br />
 	<input type="checkbox" name="topic"
 		<?php if ($mode == "topic") echo "CHECKED"; ?> id="checkboxSearch" />
-		<label for="checkboxSearch"><?php echo $this->GetResourceValue("TopicSearchText"); ?></label>
+		<label for="checkboxSearch"><?php echo $this->GetTranslation("TopicSearchText"); ?></label>
 		
 		<?php
 		echo $this->FormClose();
@@ -41,7 +41,7 @@ if ($phrase)
 		if ($results)
 		{
 			if (!$nomark) print(  "<fieldset><legend><strong>".
-			$this->GetResourceValue(($mode=="topic"?"Topic":"")."SearchResults").
+			$this->GetTranslation(($mode=="topic"?"Topic":"")."SearchResults").
               " \"$phrase\":</strong></legend>");
 			if ($style=="ul") print "<ul class=\"SearchResults\">\n";
 			if ($style=="ol") print "<ol class=\"SearchResults\">\n";
@@ -68,10 +68,10 @@ if ($phrase)
 			if (!$nomark) print("</fieldset>");
 		}
 		else
-		if (!$nomark) echo $this->GetResourceValue("NoResultsFor")."\"$phrase\".";
+		if (!$nomark) echo $this->GetTranslation("NoResultsFor")."\"$phrase\".";
 	}
 	else
-	if (!$nomark) echo $this->GetResourceValue("NoResultsFor")."\"$phrase\".";
+	if (!$nomark) echo $this->GetTranslation("NoResultsFor")."\"$phrase\".";
 }
 
 ?>

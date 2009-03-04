@@ -47,7 +47,7 @@ if ($registered
 				$this->GetPageOwner($this->tag) == $this->GetUserName())) || (
 				$what[0]["user"] == $this->GetUserName()))
 			{
-				echo "<strong>".$this->GetResourceValue("UploadRemoveConfirm")."</strong>";
+				echo "<strong>".$this->GetTranslation("UploadRemoveConfirm")."</strong>";
 				echo $this->FormOpen("upload");
 				// !!!!! place here a reference to delete files
 ?>
@@ -63,12 +63,12 @@ if ($registered
 		name="submit" class="OkBtn_Top"
 		onmouseover='this.className="OkBtn_Top_";'
 		onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
-		value="<?php echo $this->GetResourceValue("RemoveButton"); ?>" />
+		value="<?php echo $this->GetTranslation("RemoveButton"); ?>" />
 	&nbsp;
 	<input
 		class="CancelBtn_Top" onmouseover='this.className="CancelBtn_Top_";'
 		onmouseout='this.className="CancelBtn_Top";' type="button" align="top"
-		value="<?php echo str_replace("\n"," ",$this->GetResourceValue("EditCancelButton")); ?>"
+		value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
 		onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
 	<br />
 	<br />
@@ -76,10 +76,10 @@ if ($registered
 				echo $this->FormClose();
 			}
 			else
-				print($this->GetResourceValue("UploadRemoveDenied"));
+				print($this->GetTranslation("UploadRemoveDenied"));
 		}
 		else
-			print($this->GetResourceValue("UploadFileNotFound"));
+			print($this->GetTranslation("UploadFileNotFound"));
 
 		echo "</div>";
 		return true;
@@ -112,7 +112,7 @@ if ($registered
 					"DELETE FROM ".$this->config["table_prefix"]."upload ".
 					"WHERE id = '". quote($this->dblink, $what[0]["id"])."'" );
 
-				print("<div>".$this->GetResourceValue("UploadRemovedFromDB")."</div>");
+				print("<div>".$this->GetTranslation("UploadRemovedFromDB")."</div>");
 
 				// 3. remove from FS
 				$real_filename = ($page_id
@@ -121,18 +121,18 @@ if ($registered
 					$what[0]["filename"];
 
 				if (@unlink($real_filename))
-					print("<div>".$this->GetResourceValue("UploadRemovedFromFS")."</div><br /><br /> ");
+					print("<div>".$this->GetTranslation("UploadRemovedFromFS")."</div><br /><br /> ");
 				else
-					print("<div class=\"error\">".$this->GetResourceValue("UploadRemovedFromFSError")."</div><br /><br /> ");
+					print("<div class=\"error\">".$this->GetTranslation("UploadRemovedFromFSError")."</div><br /><br /> ");
 			}
 			else
 			{
-				print($this->GetResourceValue("UploadRemoveDenied"));
+				print($this->GetTranslation("UploadRemoveDenied"));
 			}
 		}
 		else
 		{
-			print($this->GetResourceValue("UploadRemoveNotFound"));
+			print($this->GetTranslation("UploadRemoveNotFound"));
 		}
 
 	}
@@ -245,7 +245,7 @@ if ($registered
 
 						// 4. output link to file
 						// !!!!! write after providing filelink syntax
-						echo "<strong>".$this->GetResourceValue("UploadDone")."</strong>";
+						echo "<strong>".$this->GetTranslation("UploadDone")."</strong>";
 						?>
 	<br />
 	<ul>
@@ -257,25 +257,25 @@ if ($registered
 
 					}
 					else //forbid
-						$error = $this->GetResourceValue("UploadNotAPicture");
+						$error = $this->GetTranslation("UploadNotAPicture");
 
 				}
 				else //maxsize
-					$error = $this->GetResourceValue("UploadMaxSizeReached");
+					$error = $this->GetTranslation("UploadMaxSizeReached");
 
 			} //!is_uploaded_file
 			else
 			{
 				if ($_FILES["file"]['error']==UPLOAD_ERR_INI_SIZE || $_FILES["file"]['error']==UPLOAD_ERR_FORM_SIZE)
-					$error = $this->GetResourceValue("UploadMaxSizeReached");
+					$error = $this->GetTranslation("UploadMaxSizeReached");
 				else if ($_FILES["file"]['error']==UPLOAD_ERR_PARTIAL || $_FILES["file"]['error']==UPLOAD_ERR_NO_FILE)
-					$error = $this->GetResourceValue("UploadNoFile");
+					$error = $this->GetTranslation("UploadNoFile");
 				else
 					$error = " ";
 			}
 		}
 		else
-			$error = $this->GetResourceValue("UploadMaxFileCount");
+			$error = $this->GetTranslation("UploadMaxFileCount");
 	}
 	if ($error)
 	{
@@ -287,9 +287,9 @@ if ($registered
 }
 else
 {
-	print($this->GetResourceValue("UploadForbidden"));
+	print($this->GetTranslation("UploadForbidden"));
 }
 if (!$this->GetConfigValue("revisions_hide_cancel"))
-	echo "<input type=\"button\" value=\"".$this->GetResourceValue("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
+	echo "<input type=\"button\" value=\"".$this->GetTranslation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
 ?>
 </div>

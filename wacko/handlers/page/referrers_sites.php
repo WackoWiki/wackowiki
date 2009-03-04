@@ -9,7 +9,7 @@ if ($this->page["comment_on"])
 	$this->Redirect($this->href("", $this->page["comment_on"], "show_comments=1")."#".$this->page["tag"]);
 if ($global = $_GET["global"])
 {
-	$title = str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetResourceValue("DomainsSitesPagesGlobal"));
+	$title = str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetTranslation("DomainsSitesPagesGlobal"));
 	$referrers = $this->LoadReferrers();
 }
 else
@@ -18,10 +18,10 @@ else
 	str_replace("%2",
 	($this->GetConfigValue("referrers_purge_time") ?
 	($this->GetConfigValue("referrers_purge_time") == 1 ?
-	$this->getResourceValue("Last24Hours") :
+	$this->GetTranslation("Last24Hours") :
 	str_replace("%1",$this->GetConfigValue("referrers_purge_time"),
-	$this->GetResourceValue("LastDays"))): ""),
-	str_replace("%3",$this->href("referrers"),$this->GetResourceValue("DomainsSitesPages"))));
+	$this->GetTranslation("LastDays"))): ""),
+	str_replace("%3",$this->href("referrers"),$this->GetTranslation("DomainsSitesPages"))));
 
 	$referrers = $this->LoadReferrers($this->GetPageTag());
 }
@@ -60,16 +60,16 @@ if ($referrers)
 }
 else
 {
-	print($this->GetResourceValue("NoneReferrers")."<br />\n");
+	print($this->GetTranslation("NoneReferrers")."<br />\n");
 }
 
 if ($global)
 {
-	print("<br />[".str_replace("%1",$this->href("referrers_sites"),str_replace("%2",$this->GetPageTag(),$this->GetResourceValue("ViewReferringSites")))." | ".str_replace("%1",$this->href("referrers"),str_replace("%2",$this->GetPageTag(),$this->GetResourceValue("ViewReferrersFor")))."]");
+	print("<br />[".str_replace("%1",$this->href("referrers_sites"),str_replace("%2",$this->GetPageTag(),$this->GetTranslation("ViewReferringSites")))." | ".str_replace("%1",$this->href("referrers"),str_replace("%2",$this->GetPageTag(),$this->GetTranslation("ViewReferrersFor")))."]");
 }
 else
 {
-	print("<br />[".str_replace("%1",$this->href("referrers_sites", "", "global=1"),$this->GetResourceValue("ViewReferringSitesGlobal")) ." | ".str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetResourceValue("ViewReferrersForGlobal"))."]");
+	print("<br />[".str_replace("%1",$this->href("referrers_sites", "", "global=1"),$this->GetTranslation("ViewReferringSitesGlobal")) ." | ".str_replace("%1",$this->href("referrers", "", "global=1"),$this->GetTranslation("ViewReferrersForGlobal"))."]");
 }
 
 ?>

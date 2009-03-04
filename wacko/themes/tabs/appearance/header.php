@@ -21,13 +21,13 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 	href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico"
 	type="image/x-icon" />
 <link rel="alternate" type="application/rss+xml"
-	title="<?php echo $this->GetResourceValue("RecentChangesRSS");?>"
+	title="<?php echo $this->GetTranslation("RecentChangesRSS");?>"
 	href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
 <link rel="alternate" type="application/rss+xml"
-	title="<?php echo $this->GetResourceValue("RecentCommentsRSS");?>"
+	title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>"
 	href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
 <link rel="alternate" type="application/rss+xml"
-	title="<?php echo $this->GetResourceValue("HistoryRevisionsRSS");?><?php echo $this->tag; ?> in RSS"
+	title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?> in RSS"
 	href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
@@ -56,7 +56,7 @@ if ($user["doubleclickedit"] == "Y") {?>
 </head>
 <body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
 <div class="Top<?php if (!$this->GetUser()) echo "LoggedOut";?>">
-  <div class="TopRight"><?php echo $this->FormOpen("", $this->GetResourceValue("TextSearchPage"), "get"); ?> <span class="nobr"> <?php echo $this->ComposeLinkToPage($this->GetConfigValue("root_page")) ?>&nbsp;|&nbsp; <?php echo $this->Format($this->GetDefaultBookmarks($this->userlang, "site")) ?></span> | <?php echo $this->GetResourceValue("SearchText") ?>
+  <div class="TopRight"><?php echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?> <span class="nobr"> <?php echo $this->ComposeLinkToPage($this->GetConfigValue("root_page")) ?>&nbsp;|&nbsp; <?php echo $this->Format($this->GetDefaultBookmarks($this->userlang, "site")) ?></span> | <?php echo $this->GetTranslation("SearchText") ?>
     <input
 	name="phrase" size="15" class="ShSearch" />
     <?php echo $this->FormClose(); ?> </div>
@@ -64,12 +64,12 @@ if ($user["doubleclickedit"] == "Y") {?>
     <?php if ($this->GetUser()) { ?>
     <img
 	src="<?php echo $this->GetConfigValue("theme_url") ?>icons/role.gif"
-	hspace="5" vspace="5" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->GetResourceValue("YouAre")." ".$this->Link($this->GetUserName()) ?></span> <small>( <span class="nobr Tune">
+	hspace="5" vspace="5" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->GetTranslation("YouAre")." ".$this->Link($this->GetUserName()) ?></span> <small>( <span class="nobr Tune">
     <?php
-echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $this->GetResourceValue("YouArePanelName"), 0); ?>
+echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?>
     | <a
-	onclick="return confirm('<?php echo $this->GetResourceValue("LogoutAreYouSure");?>');"
-	href="<?php echo $this->Href("","Login").($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetResourceValue("LogoutLink"); ?></a></span> )</small>
+	onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');"
+	href="<?php echo $this->Href("","Login").($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a></span> )</small>
     <?php } else { ?>
     <table cellspacing="0" cellpadding="0" border="0">
       <tr>
@@ -79,9 +79,9 @@ echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $t
         	<img
 				src="<?php echo $this->GetConfigValue("theme_url") ?>icons/norole.gif"
 				hspace="5" vspace="5" width="9" height="15" alt="" /></td>
-        <td><strong><?php echo $this->GetResourceValue("LoginWelcome") ?>:&nbsp;</strong> </td>
+        <td><strong><?php echo $this->GetTranslation("LoginWelcome") ?>:&nbsp;</strong> </td>
         <td><input type="text" name="name" size="18" /></td>
-        <td>&nbsp;&nbsp;&nbsp;<?php echo $this->GetResourceValue("LoginPassword") ?>:&nbsp; </td>
+        <td>&nbsp;&nbsp;&nbsp;<?php echo $this->GetTranslation("LoginPassword") ?>:&nbsp; </td>
         <td><input type="hidden" name="goback"
 			value="<?php echo $this->SlimUrl($this->tag);?>" />
           <input
@@ -105,7 +105,7 @@ echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $t
 	width="1" height="1" alt="" /></div>
 <table cellspacing="0" cellpadding="0" border="0" width="100%">
   <tr>
-    <td valign="top" class="Bookmarks">&nbsp;&nbsp;<strong><?php echo $this->GetResourceValue("Bookmarks") ?>:</strong>&nbsp;&nbsp;</td>
+    <td valign="top" class="Bookmarks">&nbsp;&nbsp;<strong><?php echo $this->GetTranslation("Bookmarks") ?>:</strong>&nbsp;&nbsp;</td>
     <td width="100%" class="Bookmarks"><?php //echo $this->GetBookmarksFormatted(); ?>
       <?php echo $this->Format(implode(" | ", $this->GetBookmarks())); ?>&nbsp;&nbsp;</td>
   </tr>
@@ -118,31 +118,31 @@ echo $this->ComposeLinkToPage($this->GetResourceValue("YouArePanelLink"), "", $t
 <div class="Print">
   <?php if ($this->GetUser()) { ?>
   <?php echo ($this->IsWatched($this->GetUserName(), $this->GetPageTag()) ?
-      "<a href=\"".$this->href("watch")."\">".$this->GetResourceValue("RemoveWatch")."</a>" :
-      "<a href=\"".$this->href("watch")."\">".$this->GetResourceValue("SetWatch")."</a>" ) ?> ::
+      "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("RemoveWatch")."</a>" :
+      "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("SetWatch")."</a>" ) ?> ::
   <?php if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>
   <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img
 	src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark.gif"
 	width="12" height="12"
-	alt="<?php echo $this->GetResourceValue("AddToBookmarks") ?>" /></a> ::
+	alt="<?php echo $this->GetTranslation("AddToBookmarks") ?>" /></a> ::
   <?php } else { ?>
   <a
 	href="<?php echo $this->Href('', '', "removebookmark=yes")?>"><img
 	src="<?php echo $this->GetConfigValue("theme_url") ?>icons/unbookmark.gif"
 	width="12" height="12"
-	alt="<?php echo $this->GetResourceValue("RemoveFromBookmarks") ?>" /></a> ::
+	alt="<?php echo $this->GetTranslation("RemoveFromBookmarks") ?>" /></a> ::
   <?php } }
 ?>
   <?php echo"<a href=\"".$this->href("print")."\" target=\"_blank\">" ?><img
 	src="<?php echo $this->GetConfigValue("theme_url") ?>icons/print.gif"
 	width="21" height="20"
-	alt="<?php echo $this->GetResourceValue("PrintVersion") ?>" /></a> :: <?php echo"<a href=\"".$this->href("msword")."\" target=\"_blank\">" ?><img
+	alt="<?php echo $this->GetTranslation("PrintVersion") ?>" /></a> :: <?php echo"<a href=\"".$this->href("msword")."\" target=\"_blank\">" ?><img
 	src="<?php echo $this->GetConfigValue("theme_url") ?>icons/msword.gif"
 	width="16" height="16"
-	alt="<?php echo $this->GetResourceValue("MsWordVersion") ?>" /></a></div>
+	alt="<?php echo $this->GetTranslation("MsWordVersion") ?>" /></a></div>
 <div class="header">
   <h1><span class="Main"><?php echo $this->config["wakka_name"] ?>:</span> <?php echo $this->GetPagePath(); ?> <a class="Search"
-	title="<?php echo $this->GetResourceValue("SearchTitleTip")?>"
+	title="<?php echo $this->GetTranslation("SearchTitleTip")?>"
 	href="<?php echo $this->config["base_url"] ?>TextSearch<?php echo ($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a> </h1>
   <?php if (($this->method != "edit") || !$this->HasAccess("write")) { ?>
   <div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>icons/shade2.gif);" class="Shade"><img

@@ -31,11 +31,11 @@ $end_depth   = $to{1};
 if (!$nomark) 
 {
 	print "<fieldset>";
-	print "<legend><strong> ".$this->GetResourceValue("TOCTitle")." ".$this->Link($ppage, "", $title)."  </strong></legend>";
+	print "<legend><strong> ".$this->GetTranslation("TOCTitle")." ".$this->Link($ppage, "", $title)."  </strong></legend>";
 }
 
 if (!$this->HasAccess("read",$_page["tag"]))
-	print $this->GetResourceValue("ReadAccessDenied");
+	print $this->GetTranslation("ReadAccessDenied");
 
 else
 {

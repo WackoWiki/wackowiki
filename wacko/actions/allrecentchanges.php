@@ -10,12 +10,12 @@ else
 
 if ($this->NpjTranslit($this->config["allrecentchanges_page"]) != $this->NpjTranslit($this->tag))
 {
-	echo "<em>".$this->GetResourceValue("ActionDenied")."</em> ";
+	echo "<em>".$this->GetTranslation("ActionDenied")."</em> ";
 }
 else
 if ($pages = $this->LoadRecentlyChanged($max))
 {
-	print("<a href=\"".$this->GetConfigValue("root_url")."xml/recentchanges_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetResourceValue("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />");
+	print("<a href=\"".$this->GetConfigValue("root_url")."xml/recentchanges_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />");
 
 	foreach ($pages as $i => $page)
 	{
@@ -32,7 +32,7 @@ if ($pages = $this->LoadRecentlyChanged($max))
 
 			// print entry
 			print("&nbsp;&nbsp;&nbsp;<span class=\"dt\">".$time."</span> &mdash; (".
-			$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetResourceValue("History"), 0).") ".
+			$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".
 			$this->Link( $page["tag"] )." . . . . . . . . . . . . . . . . <small>".
 			($this->IsWikiName($page["user"])?$this->Link($page["user"]):$page["user"])."</small><br />\n");
 		}

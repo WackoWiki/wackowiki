@@ -37,7 +37,7 @@ else
 
 if(!$nomark)
 {
-	print("<fieldset><legend>".$this->GetResourceValue("MostPopularPages").": ".$this->Link($ppage, "", $title)."</legend>\n");
+	print("<fieldset><legend>".$this->GetTranslation("MostPopularPages").": ".$this->Link($ppage, "", $title)."</legend>\n");
 }
 
 if(!$for)
@@ -74,7 +74,7 @@ foreach ($pages as $page)
 			// print entry
 			$num++;
 			print("<tr><td>&nbsp;&nbsp;".$num.".&nbsp;".$this->Link("/".$page["tag"],"",$page["tag"])."</td><td>".
-			$this->GetResourceValue("Shown")."</td><td>".
+			$this->GetTranslation("Shown")."</td><td>".
 			$page["hits"]."</td></tr>\n");
 		}
 	}

@@ -4,7 +4,7 @@ if ($_REQUEST["action"] == "logout")
 {
 	$this->LogoutUser();
 	$this->SetBookmarks(BM_DEFAULT);
-	//$this->SetMessage($this->GetResourceValue("LoggedOut"));
+	//$this->SetMessage($this->GetTranslation("LoggedOut"));
 	$this->context[++$this->current_context] = "";
 	if ($_REQUEST["goback"] != "") $this->Redirect($this->Href("", stripslashes($_REQUEST["goback"])));
 	else $this->Redirect($this->href());
@@ -19,12 +19,12 @@ else if ($user = $this->GetUser())
 <input type="hidden"
 	name="action" value="update" />
 <div class="cssform">
-  <h3><?php echo $this->GetResourceValue("Hello").", ".$this->ComposeLinkToPage($user["name"]) ?>!</h3>
+  <h3><?php echo $this->GetTranslation("Hello").", ".$this->ComposeLinkToPage($user["name"]) ?>!</h3>
   <p>
     <input class="CancelBtn"
 			onmouseover='this.className="CancelBtn_";'
 			onmouseout='this.className="CancelBtn";' type="button" align="top"
-			value="<?php echo $this->GetResourceValue("LogoutButton"); ?>"
+			value="<?php echo $this->GetTranslation("LogoutButton"); ?>"
 			onclick="document.location='<?php echo $this->href("", "", "action=logout"); ?>'" />
   </p>
 </div>
@@ -54,7 +54,7 @@ else
 			}
 			else
 			{
-				$error = $this->GetResourceValue("WrongPassword");
+				$error = $this->GetTranslation("WrongPassword");
 				$name = $_POST["name"];
 				$focus = 1;
 			}
@@ -65,7 +65,7 @@ else
 <input type="hidden" name="action" value="login" />
 <input type="hidden" name="goback" value="<?php echo stripslashes($_REQUEST["goback"]);?>" />
 <div class="cssform">
-  <h3><?php echo $this->GetResourceValue("LoginWelcome"); ?></h3>
+  <h3><?php echo $this->GetTranslation("LoginWelcome"); ?></h3>
   <?php
 	if ($error)
 	{ ?>
@@ -77,15 +77,15 @@ else
     <input id="name" name="name" size="27" value="<?php echo $name; ?>" />
   </p>
   <p>
-    <label for="password"><?php echo $this->GetResourceValue("LoginPassword");?>:</label>
+    <label for="password"><?php echo $this->GetTranslation("LoginPassword");?>:</label>
     <input id="password" type="password" name="password" size="24" />
   </p>
   <p>
     <input class="OkBtn" onmouseover='this.className="OkBtn_";'
 			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetResourceValue("LoginButton"); ?>" />
+			value="<?php echo $this->GetTranslation("LoginButton"); ?>" />
   </p>
-  <p><a href="<?php echo $this->Href("", "Password"); ?>"><?php echo $this->GetResourceValue("ForgotLink"); ?></a></p>
+  <p><a href="<?php echo $this->Href("", "Password"); ?>"><?php echo $this->GetTranslation("ForgotLink"); ?></a></p>
   <p><?php echo $this->FormatResourceValue("LoginWelcome2"); ?></p>
 </div>
 <script type="text/javascript">

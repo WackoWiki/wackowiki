@@ -53,10 +53,10 @@ if ($registered
 	?>
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr>
-		<td><label for="FileUpload"><?php echo $this->GetResourceValue("UploadFor");?>:&nbsp;</label>
+		<td><label for="FileUpload"><?php echo $this->GetTranslation("UploadFor");?>:&nbsp;</label>
 		<input type="hidden" name="MAX_FILE_SIZE"
 			value="<?php echo $maxfilesize;?>" /></td>
-		<td style="white-space: nowrap;"><input name="file" id="FileUpload" type="file" />&nbsp;(<?php echo $this->GetResourceValue("UploadMax").$this->config["upload_max_size"].$this->GetResourceValue("UploadKB");?>)</td>
+		<td style="white-space: nowrap;"><input name="file" id="FileUpload" type="file" />&nbsp;(<?php echo $this->GetTranslation("UploadMax").$this->config["upload_max_size"].$this->GetTranslation("UploadKB");?>)</td>
 	</tr>
 	<?php
 	if ($global)
@@ -66,7 +66,7 @@ if ($registered
 		<td>
 		<div>
 		<input type="radio" name="_to" disabled="disabled" checked="checked" value="global" id="toUploadGlobalDisabled" /> 
-		<input type="hidden" name="to" value="global" /> <?php echo $this->GetResourceValue("UploadGlobalText"); ?>
+		<input type="hidden" name="to" value="global" /> <?php echo $this->GetTranslation("UploadGlobalText"); ?>
 		</div>
 	
 	</tr>
@@ -78,11 +78,11 @@ if ($registered
 		<td>
 		<div>
 		<input type="radio" name="to" value="global" id="toUploadGlobal" />
-		<label for="toUploadGlobal"><?php echo $this->GetResourceValue("UploadGlobalText"); ?></label>
+		<label for="toUploadGlobal"><?php echo $this->GetTranslation("UploadGlobalText"); ?></label>
 		</div>
 		<div>
 		<input type="radio" name="to" value="here" checked="checked" id="toUploadHere" />
-		<label for="toUploadHere"><?php echo $this->GetResourceValue("UploadHereText"); ?></label>
+		<label for="toUploadHere"><?php echo $this->GetTranslation("UploadHereText"); ?></label>
 		</div>
 	</td>
 	</tr>
@@ -90,7 +90,7 @@ if ($registered
 	<?php
 	if (!$hide_description) { ?>
 	<tr>
-		<td style="text-align: right"><label for="UploadDesc"><?php echo $this->GetResourceValue("UploadDesc");?>:&nbsp;</label></td>
+		<td style="text-align: right"><label for="UploadDesc"><?php echo $this->GetTranslation("UploadDesc");?>:&nbsp;</label></td>
 		<td><input name="description" id="UploadDesc" type="text" size="40" /></td>
 	</tr>
 	<?php } ?>
@@ -98,7 +98,7 @@ if ($registered
 		<td>&nbsp;</td>
 		<td>
 			<div style="padding-top: 5px">
-			<input type="submit" value="<?php echo $this->GetResourceValue("UploadButtonText"); ?>" />
+			<input type="submit" value="<?php echo $this->GetTranslation("UploadButtonText"); ?>" />
 			</div>
 		</td>
 	</tr>
@@ -108,7 +108,7 @@ if ($registered
 }
 else
 {
-	echo "<em>".$this->GetResourceValue("ActionDenied")."</em> ";
+	echo "<em>".$this->GetTranslation("ActionDenied")."</em> ";
 }
 
 ?>

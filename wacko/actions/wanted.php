@@ -9,7 +9,7 @@ if ($linking_to = $_GET["linking_to"])
 {
 	if ($pages = $this->LoadPagesLinkingTo($linking_to,$root))
 	{
-		echo $this->GetResourceValue("PagesLinkingTo")." ".$this->Link($linking_to).":<br />\n";
+		echo $this->GetTranslation("PagesLinkingTo")." ".$this->Link($linking_to).":<br />\n";
 		foreach ($pages as $page)
 		{
 			if (!$this->config["hide_locked"] || $this->HasAccess("read", $page["tag"]))
@@ -20,7 +20,7 @@ if ($linking_to = $_GET["linking_to"])
 	}
 	else
 	{
-		echo "<em>".$this->GetResourceValue("NoPageLinkingTo")." ".$this->Link($linking_to).".</em>";
+		echo "<em>".$this->GetTranslation("NoPageLinkingTo")." ".$this->Link($linking_to).".</em>";
 	}
 }
 else
@@ -60,7 +60,7 @@ else
 	}
 	else
 	{
-		echo $this->GetResourceValue("NoWantedPages");
+		echo $this->GetTranslation("NoWantedPages");
 	}
 }
 
