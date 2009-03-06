@@ -25,19 +25,19 @@ class Cache
 		if ((time() - @filemtime($filename)) > $this->cache_ttl)
 			return false;
 
-		$fp = fopen ($filename, "r");
-		$contents = fread ($fp, filesize ($filename));
-		fclose ($fp);
+		$fp = fopen($filename, "r");
+		$contents = fread($fp, filesize($filename));
+		fclose($fp);
 
 		return $contents;
 	}
 
 	function ConstructID($page, $method, $query)
 	{
-		$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", $page))));
+		$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", rawurldecode($page)))));
 
 		$this->Log("ConstructID page=".$page);
-		$this->Log("ConstructID md5=".md5($page));
+		$this->Log("ConstructID md5=".md5($page."_".$method."_".$query));
 
 		$filename = $this->cache_dir.md5($page)."_".$method."_".$query;
 		return $filename;
@@ -68,8 +68,8 @@ class Cache
 		$filename = $this->ConstructID($page, $method, $query);
 
 		$fp = fopen ($filename, "w");
-		fputs ($fp, $data);
-		fclose ($fp);
+		fputs($fp, $data);
+		fclose($fp);
 
 		if ($this->wacko) $this->wacko->Query(
 			"INSERT INTO ".$this->wacko->config["table_prefix"]."cache SET ".
@@ -127,8 +127,8 @@ class Cache
 		if ($this->debug > 1)
 		{
 			$fp = fopen ($this->cache_dir."log", "a");
-			fputs ($fp, $msg."\n");
-			fclose ($fp);
+			fputs($fp, $msg."\n");
+			fclose($fp);
 		}
 	}
 
@@ -224,7 +224,7 @@ class Cache
 			//header ("Cache-Control: max-age=0");
 			//header ("Expires: ".gmdate('D, d M Y H:i:s \G\M\T', time()));
 
-			echo ($res);
+			echo $res;
 			die();
 		}
 	}
