@@ -84,6 +84,7 @@ class Wacko
 		if ($r = $this->Query($query))
 		{
 			while ($row = fetch_assoc($r)) $data[] = $row;
+
 			free_result($r);
 		}
 		return $data;
@@ -528,21 +529,49 @@ class Wacko
 		{
 			if ($supertagged)
 			{
-				$page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."pages WHERE supertag='".quote($this->dblink, $tag)."' AND latest = 'Y' LIMIT 1");
-				if ($time && $time != $page["time"]) {
+				$page = $this->LoadSingle(
+					"SELECT ".$what." ".
+					"FROM ".$this->config["table_prefix"]."pages ".
+					"WHERE supertag='".quote($this->dblink, $tag)."' ".
+					"AND latest = 'Y' LIMIT 1");
+
+				if ($time && $time != $page["time"])
+				{
 					$this->CachePage($page, $metadataonly);
-					$page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."revisions WHERE supertag='".quote($this->dblink, $tag)."' AND time = '".quote($this->dblink, $time)."' LIMIT 1");
+
+					$page = $this->LoadSingle(
+						"SELECT ".$what." ".
+						"FROM ".$this->config["table_prefix"]."revisions ".
+						"WHERE supertag='".quote($this->dblink, $tag)."' ".
+							"AND time = '".quote($this->dblink, $time)."' ".
+						"LIMIT 1");
 				}
 			}
-			else {
-				$page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."pages WHERE tag='".quote($this->dblink, $tag)."' AND latest = 'Y' LIMIT 1");
-				if ($time && $time != $page["time"]) {
+			else
+			{
+				$page = $this->LoadSingle(
+					"SELECT ".$what." ".
+					"FROM ".$this->config["table_prefix"]."pages ".
+					"WHERE tag='".quote($this->dblink, $tag)."' AND latest = 'Y' ".
+					"LIMIT 1");
+
+				if ($time && $time != $page["time"])
+				{
 					$this->CachePage($page, $metadataonly);
-					$page = $this->LoadSingle("SELECT ".$what." FROM ".$this->config["table_prefix"]."revisions WHERE tag='".quote($this->dblink, $tag)."' AND time = '".quote($this->dblink, $time)."' LIMIT 1");
+
+					$page = $this->LoadSingle(
+						"SELECT ".$what." ".
+						"FROM ".$this->config["table_prefix"]."revisions ".
+						"WHERE tag='".quote($this->dblink, $tag)."' ".
+							"AND time = '".quote($this->dblink, $time)."' ".
+						"LIMIT 1");
+
 				}
 			}
-		}// cache result
+		}
+		// cache result
 		if (!$time && !$cachedPage) $this->CachePage($page, $metadataonly);
+
 		return $page;
 	}
 
@@ -598,10 +627,13 @@ class Wacko
 
 	function CacheLinks()
 	{
-		if ($links = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."links WHERE from_tag='".quote($this->dblink, $this->GetPageTag())."'"))
+		if ($links = $this->LoadAll(
+		"SELECT * FROM ".$this->config["table_prefix"]."links ".
+		"WHERE from_tag='".quote($this->dblink, $this->GetPageTag())."'"))
 		{
 			$cl = count($links);
-			for ($i=0; $i<$cl; $i++)
+
+			for ($i = 0; $i < $cl; $i++)
 			{
 				$pages[$i] = $links[$i]["to_tag"];
 			}
@@ -609,15 +641,19 @@ class Wacko
 
 		$user = $this->GetUser();
 		$pages[$cl] = $user["name"];
-
-		$bookm = $this->GetDefaultBookmarks($user["lang"], "site")."\n".($user["bookmarks"] ? $user["bookmarks"] : $this->GetDefaultBookmarks($user["lang"]));
+		$bookm = $this->GetDefaultBookmarks($user["lang"], "site")."\n".
+				( $user["bookmarks"]
+				? $user["bookmarks"]
+				: $this->GetDefaultBookmarks($user["lang"]));
 		$bookmarks = explode("\n", $bookm);
-		for ($i=0; $i<=count($bookmarks); $i++)
+
+		for ($i = 0; $i<=count($bookmarks); $i++)
 		$pages[$cl+$i] = preg_replace("/^(.*?)\s.*$/","\\1",preg_replace("/[\[\]\(\)]/","",$bookmarks[$i]));
 
-		$pages[]=$this->GetPageTag();
+		$pages[] = $this->GetPageTag();
+		$spages_str = '';
+		$pages_str = '';
 
-		$spages_str = ''; $pages_str = '';
 		for ($i=0; $i<count($pages); $i++)
 		{
 			$spages[$i] = $this->NpjTranslit($pages[$i], TRAN_LOWERCASE, TRAN_DONTLOAD);
@@ -625,16 +661,23 @@ class Wacko
 			$pages_str .= "'".quote($this->dblink, $pages[$i])."', ";
 		}
 
-		$spages_str=substr($spages_str,0,strlen($spages_str)-2);
-		$pages_str=substr($pages_str,0,strlen($pages_str)-2);
+		$spages_str=substr($spages_str, 0, strlen($spages_str) - 2);
+		$pages_str=substr($pages_str, 0, strlen($pages_str) - 2);
 
-		if ($links = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE supertag IN (".$spages_str.")"))
-		for ($i=0; $i<count($links); $i++)
+		if ($links = $this->LoadAll(
+		"SELECT ".$this->pages_meta." ".
+		"FROM ".$this->config["table_prefix"]."pages ".
+		"WHERE supertag IN (".$spages_str.")"))
 		{
-			$this->CachePage($links[$i], 1);
-			$exists[] = $links[$i]["supertag"];
+			for ($i=0; $i<count($links); $i++)
+			{
+				$this->CachePage($links[$i], 1);
+				$exists[] = $links[$i]["supertag"];
+			}
 		}
+
 		$notexists = @array_values(@array_diff($spages, $exists));
+
 		for ($i=0; $i<count($notexists); $i++)
 		{
 			$this->CacheWantedPage($pages[array_search($notexists[$i], $spages)], 1);
@@ -643,11 +686,14 @@ class Wacko
 
 		//   unset($exists);
 		if ($read_acls = $this->LoadAll(
-		"SELECT * FROM ".$this->config["table_prefix"]."acls WHERE BINARY page_tag IN (".$pages_str.") AND privilege = 'read'"))
-		for ($i=0; $i<count($read_acls); $i++)
+		"SELECT * FROM ".$this->config["table_prefix"]."acls ".
+		"WHERE BINARY page_tag IN (".$pages_str.") AND privilege = 'read'"))
 		{
-			$this->CacheACL($read_acls[$i]["supertag"], "read", 1, $read_acls[$i]);
-			//       $exists[] = $read_acls[$i]["tag"];
+			for ($i=0; $i<count($read_acls); $i++)
+			{
+				$this->CacheACL($read_acls[$i]["supertag"], "read", 1, $read_acls[$i]);
+				//       $exists[] = $read_acls[$i]["tag"];
+			}
 		}
 		/*
 		 $notexists = @array_values(@array_diff($pages, $exists));
@@ -2115,7 +2161,7 @@ class Wacko
 		}
 		return $acl;
 	}
-	 
+
 	function SaveAcl($tag, $privilege, $list)
 	{
 
@@ -2130,43 +2176,61 @@ class Wacko
          "page_tag = '".quote($this->dblink, $tag)."', ".
          "privilege = '".quote($this->dblink, $privilege)."'");
 	}
-	 
-	// REMOVE
+
+	// REMOVALS
+
 	function RemoveAcls($tag)
 	{
 		if (!$tag) return false;
-		return $this->Query("DELETE FROM ".$this->config["table_prefix"]."acls  WHERE page_tag = '".quote($this->dblink, $tag)."' ");
+
+		return $this->Query(
+			"DELETE FROM ".$this->config["table_prefix"]."acls ".
+			"WHERE page_tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RemovePage($tag)
 	{
 		if (!$tag) return false;
-		return $this->Query("DELETE FROM ".$this->config["table_prefix"]."revisions  WHERE tag = '".quote($this->dblink, $tag)."' ") &&
-		$this->Query("DELETE FROM ".$this->config["table_prefix"]."pages  WHERE tag = '".quote($this->dblink, $tag)."' ");
+
+		return $this->Query(
+			"DELETE FROM ".$this->config["table_prefix"]."revisions  WHERE tag = '".quote($this->dblink, $tag)."' ") &&
+			$this->Query("DELETE FROM ".$this->config["table_prefix"]."pages  WHERE tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RemoveComments($tag)
 	{
 		if (!$tag) return false;
-		return $this->Query("DELETE FROM ".$this->config["table_prefix"]."pages  WHERE comment_on = '".quote($this->dblink, $tag)."' ");
+
+		return $this->Query(
+			"DELETE FROM ".$this->config["table_prefix"]."pages ".
+			"WHERE comment_on = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RemoveWatches($tag)
 	{
 		if (!$tag) return false;
-		return $this->Query("DELETE FROM ".$this->config["table_prefix"]."pagewatches  WHERE tag = '".quote($this->dblink, $tag)."' ");
+
+		return $this->Query(
+			"DELETE FROM ".$this->config["table_prefix"]."pagewatches ".
+			"WHERE tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RemoveLinks($tag)
 	{
 		if (!$tag) return false;
-		return $this->Query("DELETE FROM ".$this->config["table_prefix"]."links  WHERE from_tag = '".quote($this->dblink, $tag)."' ");
+
+		return $this->Query(
+			"DELETE FROM ".$this->config["table_prefix"]."links ".
+			"WHERE from_tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RemoveReferrers($tag)
 	{
 		if (!$tag) return false;
-		return $this->Query("DELETE FROM ".$this->config["table_prefix"]."referrers WHERE page_tag = '".quote($this->dblink, $tag)."' ");
+
+		return $this->Query(
+			"DELETE FROM ".$this->config["table_prefix"]."referrers ".
+			"WHERE page_tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RemoveFiles($tag, $cluster = false)

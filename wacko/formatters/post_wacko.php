@@ -1,4 +1,5 @@
 <?php
+
 $this->UseClass("post_wacko", "formatters/classes/");
 
 $parser = &new post_wacko( $this, $options );
@@ -14,4 +15,5 @@ if ( $options["stripnotypo"] ) {
 }
 
 print($text);
+
 ?>
