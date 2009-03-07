@@ -174,11 +174,14 @@ class WackoFormatter
 
 		$this->LONGREGEXP =
 			"/(".
-			"\xa5\xa5.*?\xa5\xa5|".($this->object->GetConfigValue("allow_rawhtml") == 1 ? "\<\#.*?\#\>|" : "").
+			"\xa5\xa5.*?\xa5\xa5|".($this->object->GetConfigValue("allow_rawhtml") == 1
+				? "\<\#.*?\#\>|"
+				: "").
 			"\(\?(\S+?)([ \t]+([^\n]+?))?\?\)|".
-			($this->object->GetConfigValue("disable_bracketslinks") == 1 ? "" :
-			 "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)|"
-			 ).
+			($this->object->GetConfigValue("disable_bracketslinks") == 1
+				? ""
+				: "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)|"
+			).
 			"\^\^\S*?\^\^|vv\S*?vv|".
 			"\n[ \t]*>+[^\n]*|".
 			"<\[.*?\]>|".
@@ -194,16 +197,21 @@ class WackoFormatter
 			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]|([0-9]{1,3}))[\.\)](\#[0-9]{1,3})?)?|".
 			"\b[[:alnum:]]+[:][".$object->language["ALPHANUM_P"]."\!\.][".$object->language["ALPHANUM_P"]."\-\_\.\+\&\=\#]+|".
 			"~([^ \t\n]+)|".
-			 ($this->object->GetConfigValue("disable_tikilinks") == 1 ?
-			 "" : "\b(".$object->language["UPPER"].$object->language["LOWER"].$object->language["ALPHANUM"]."*\.".$object->language["ALPHA"].$object->language["ALPHANUM"]."+)\b|").
-			 ($this->object->GetConfigValue("disable_wikilinks") == 1 ?
-			 "" : "(~?)(?<=[^\.".$object->language["ALPHANUM_P"]."]|^)(((\.\.|!)?\/)?".$object->language["UPPER"].$object->language["LOWER"]."+".$object->language["UPPERNUM"].$object->language["ALPHANUM"]."*)\b|").
-			 ($this->object->GetConfigValue("disable_npjlinks") == 1 ?
-			 "" : "(~?)".$object->language["ALPHANUM"]."+\@".$object->language["ALPHA"]."*(?!".$object->language["ALPHANUM"]."*\.".$object->language["ALPHANUM"]."+)(\:".$object->language["ALPHANUM"]."*)?|".$object->language["ALPHANUM"]."+\:\:".$object->language["ALPHANUM"]."+|").
+			 ($this->object->GetConfigValue("disable_tikilinks") == 1
+				? ""
+				: "\b(".$object->language["UPPER"].$object->language["LOWER"].$object->language["ALPHANUM"]."*\.".$object->language["ALPHA"].$object->language["ALPHANUM"]."+)\b|").
+			 ($this->object->GetConfigValue("disable_wikilinks") == 1
+				? ""
+				: "(~?)(?<=[^\.".$object->language["ALPHANUM_P"]."]|^)(((\.\.|!)?\/)?".$object->language["UPPER"].$object->language["LOWER"]."+".$object->language["UPPERNUM"].$object->language["ALPHANUM"]."*)\b|").
+			 ($this->object->GetConfigValue("disable_npjlinks") == 1
+				? ""
+				: "(~?)".$object->language["ALPHANUM"]."+\@".$object->language["ALPHA"]."*(?!".$object->language["ALPHANUM"]."*\.".$object->language["ALPHANUM"]."+)(\:".$object->language["ALPHANUM"]."*)?|".$object->language["ALPHANUM"]."+\:\:".$object->language["ALPHANUM"]."+|").
 			"\n)/sm";
 
 		$this->NOTLONGREGEXP =
-			"/(".($this->object->GetConfigValue("disable_formatters") == 1 ? "" : "\%\%.*?\%\%|").
+			"/(".($this->object->GetConfigValue("disable_formatters") == 1
+				? ""
+				: "\%\%.*?\%\%|").
 			"~([^ \t\n]+)|".
 			"\"\".*?\"\"|".
 			"\{\{[^\n]*?\}\}|".
@@ -223,10 +231,13 @@ class WackoFormatter
 		if ($this->intable) $Closers = &$this->tdindentClosers;
 		else $Closers = &$this->indentClosers;
 		$c = count($Closers);
+
 		for ($i = 0; $i < $c; $i++)
 			$result .= array_pop($Closers);
+
 		if ($this->intable) $this->tdoldIndentLevel = 0;
 		else $this->oldIndentLevel = 0;
+
 		return $result;
 	}
 
@@ -237,7 +248,8 @@ class WackoFormatter
 		$callback = array( &$this, "wackoPreprocess");
 
 		if ($thing{0} == "~")
-		if ($thing{1} == "~") return "~~".$this->WackoPreprocess( array(0,substr($thing,2)) );
+			if ($thing{1} == "~") 
+				return "~~".$this->WackoPreprocess(array(0,substr($thing,2)));
 
 		// escaped text
 		if (preg_match("/^\xa5\xa5(.*)\xa5\xa5$/s", $thing, $matches))
@@ -257,6 +269,7 @@ class WackoFormatter
 			if (preg_match("/^\(([^\n]+?)\)(.*)$/s", $code, $matches))
 			{
 				$code = $matches[2];
+
 				if ($matches[1])
 				{
 					// check for formatter parameters
@@ -275,7 +288,7 @@ class WackoFormatter
 						$params = array();
 						$c = 0;
 
-						foreach( $matches as $m )
+						foreach($matches as $m)
 						{
 							$value = $m[3] ? ($m[5] ? $m[6] : $m[7]) : "1";
 							$params[$c] = $value;
@@ -288,6 +301,7 @@ class WackoFormatter
 				}
 			}
 			$formatter = strtolower($formatter);
+
 			if ($formatter=="\xF1") $formatter="c";
 			if ($formatter=="c") $formatter="comments";
 			if ($formatter=="") $formatter="code";
@@ -297,7 +311,7 @@ class WackoFormatter
 			if ($params["wrapper"] && ($params["wrapper"] != "none"))
 			{
 				$wrapper = "wrapper_".$params["wrapper"];
-				$params["wrapper"]=""; // no recursion
+				$params["wrapper"] = ""; // no recursion
 				$res = $wacko->_Format(trim($res), "highlight/".$wrapper, $params);
 			}
 
@@ -307,11 +321,12 @@ class WackoFormatter
 		}
 		// actions
 		else if (preg_match("/^\{\{(.*?)\}\}$/s", $thing, $matches))
-		{ // used in paragrafica, too
+		{
+			// used in paragrafica, too
 			return "\xa5\xa5<!--notypo-->\xA1\xA1".$matches[1]."\xA1\xA1<!--/notypo-->\xa5\xa5";
 		}
 
-		// if we reach this point, it must have been an accident.
+		// if we reach this point, it must have been an accident
 		return $thing;
 	}
 
@@ -592,7 +607,7 @@ class WackoFormatter
 			}
 		}
 		// lan path
-		else if (preg_match("/^\\\\\\\\([".$wacko->language["ALPHANUM_P"]."\\\!\.\-\_]+)$/", $thing, $matches)) 
+		else if (preg_match("/^\\\\\\\\([".$wacko->language["ALPHANUM_P"]."\\\!\.\-\_]+)$/", $thing, $matches))
 		{
 			//[[:alnum:]\\\!\.\_\-]+\\
 			return "<a href=\"file://///".str_replace("\\","/",$matches[1])."\">\\\\".$matches[1]."</a>";
@@ -609,8 +624,10 @@ class WackoFormatter
 			$result = preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]);
 			$result = preg_replace( "/^(<br \/>)+/i", "", $result );
 			$result = preg_replace( "/(<br \/>)+$/i", "", $result );
+
 			// These regexp needed for workaround MSIE bug (</ul></blockquote>)
 			if (preg_match( "/<\/ul>[\s\r\t\n]*$/i", $result)) $result.= $this->z_gif;
+
 			return "<blockquote>".$result."</blockquote>";
 		}
 		// super
@@ -692,7 +709,7 @@ class WackoFormatter
 				if ($text == "")
 					$text = $def;
 
-					$text=preg_replace("/\xA4\xA4|__|\[\[|\(\(/","",$text);
+				$text = preg_replace("/\xA4\xA4|__|\[\[|\(\(/","",$text);
 
 				return "<dfn title=\"".htmlspecialchars($text)."\">".$def."</dfn>";
 			}
@@ -741,7 +758,7 @@ class WackoFormatter
 					{
 						$ahref = "ftn".strlen($anchor);
 					}
-					else if (preg_match("/^\d+$/", $anchor)) 
+					else if (preg_match("/^\d+$/", $anchor))
 					{
 						$ahref = "ftnd".$anchor;
 					}
@@ -764,13 +781,13 @@ class WackoFormatter
 
 					if ($url{0} == "(")
 					{
-						$url = substr($url,1); 
+						$url = substr($url, 1); 
 						$result .= "(";
 					}
 
 					if ($url{0} == "[")
 					{
-						$url = substr($url,1);
+						$url = substr($url, 1);
 						$result .= "[";
 					}
 
@@ -815,6 +832,7 @@ class WackoFormatter
 
 			// find out which indent type we want
 			$newIndentType = $matches[3][0];
+
 			if (!$newIndentType)
 			{
 				$opener = "<div class=\"indent\">";
@@ -826,15 +844,17 @@ class WackoFormatter
 			{
 				$opener = "<ul><li>";
 				$closer = "</li></ul>";
-				$li = 1;
 				$newtype = "*";
+				$li = 1;
 			}
 			else
 			{
-				$opener = "<ol type=\"".$newIndentType."\"><li".($start?" value=\"".$start."\"" : "").">";
+				$opener = "<ol type=\"".$newIndentType."\"><li".
+							($start ? " value=\"".$start."\"" : "").">";
 				$closer = "</li></ol>";
+				$newtype = "1";
 				$li = 1;
-				$newtype = "1";}
+			}
 
 			// get new indent level
 			if ($matches[2][0] == " ")

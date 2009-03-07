@@ -2,18 +2,18 @@
 
 if (!class_exists("preformatter"))
 {
-	class preformatter 
+	class preformatter
 	{
 		var $object;
 
-		function preformatter( &$object )
+		function preformatter(&$object)
 		{
 			$this->object = &$object;
 			$this->PREREGEXP = "/(\%\%.*?\%\%|\"\".*?\"\"|::(\S)?::".
-			($this->object->userlang != $this->object->pagelang?
-       "|\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)":
-       "").
-      ")/sm";
+				($this->object->userlang != $this->object->pagelang
+					? "|\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)"
+					: "").
+				")/sm";
 		}
 
 		function precallback($things)
@@ -63,7 +63,7 @@ if (!class_exists("preformatter"))
 
 $parser = &new preformatter($this);
 
-$text = preg_replace_callback($parser->PREREGEXP, array( &$parser, "precallback"), $text);
+$text = preg_replace_callback($parser->PREREGEXP, array(&$parser, "precallback"), $text);
 
 print($text);
 
