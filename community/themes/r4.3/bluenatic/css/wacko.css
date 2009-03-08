@@ -520,7 +520,7 @@ div .action-content {
 	border:			dashed 1px #999;
 	/*-moz-border-radius:	5px;	/* Mozilla, Firefox only */
 }
-.preview legend {
+.preview p {
 	font-weight:		900;
 }
 
