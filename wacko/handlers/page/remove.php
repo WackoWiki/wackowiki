@@ -20,57 +20,57 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 	}
 	else
 	{
-		if ($_POST["delete"]==1) {
-
+		if ($_POST["delete"] == 1)
+		{
 			if ($this->page["comment_on"])
 			$comment_on = $this->page["comment_on"];
 
 			// Remove page
 			if ($this->RemoveReferrers($this->tag))
 			{
-				print(str_replace("%1",$this->tag,$this->GetTranslation("ReferrersRemoved"))."<br />\n");
+				print(str_replace("%1", $this->tag, $this->GetTranslation("ReferrersRemoved"))."<br />\n");
 			}
 			if ($this->RemoveLinks($this->tag))
 			{
-				print(str_replace("%1",$this->tag,$this->GetTranslation("LinksRemoved"))."<br />\n");
+				print(str_replace("%1", $this->tag, $this->GetTranslation("LinksRemoved"))."<br />\n");
 			}
 			if ($this->RemoveAcls($this->tag))
 			{
-				print(str_replace("%1",$this->tag,$this->GetTranslation("AclsRemoved"))."<br />\n");
+				print(str_replace("%1", $this->tag, $this->GetTranslation("AclsRemoved"))."<br />\n");
 			}
 			if ($this->RemoveWatches($this->tag))
 			{
-				print(str_replace("%1",$this->tag,$this->GetTranslation("WatchesRemoved"))."<br />\n");
+				print(str_replace("%1", $this->tag, $this->GetTranslation("WatchesRemoved"))."<br />\n");
 			}
 			if ($this->RemoveComments($this->tag))
 			{
 				$this->WriteRecentCommentsXML();
-				print(str_replace("%1",$this->tag,$this->GetTranslation("CommentsRemoved"))."<br />\n");
+				print(str_replace("%1", $this->tag, $this->GetTranslation("CommentsRemoved"))."<br />\n");
 			}
 			if ($this->RemoveFiles($this->tag))
 			{
-				print(str_replace("%1",$this->tag,$this->GetTranslation("FilesRemoved"))."<br />\n");
+				print(str_replace("%1", $this->tag, $this->GetTranslation("FilesRemoved"))."<br />\n");
 			}
 			if ($this->RemovePage($this->tag))
 			{
 				$this->WriteRecentChangesXML();
 				$this->WriteRecentCommentsXML();
-				print(str_replace("%1",$this->tag,$this->GetTranslation("PageRemoved"))."<br />\n");
+				print(str_replace("%1", $this->tag, $this->GetTranslation("PageRemoved"))."<br />\n");
 			}
 
 			print($this->GetTranslation("ThisActionHavenotUndo")."\n");
 
-	  // return to commented page
-		if ($comment_on)
-		{
-			echo "<br />".$this->ComposeLinkToPage($comment_on."#comments", "", $this->GetTranslation("ReturnToCommented"), 0);
+			// return to commented page
+			if ($comment_on)
+			{
+				echo "<br />".$this->ComposeLinkToPage($comment_on."#comments", "", $this->GetTranslation("ReturnToCommented"), 0);
+			}
 		}
-		}
-		else 
+		else
 		{
 			echo "<div class=\"warning\"><strong>".$this->GetTranslation("ReallyDelete".($this->page["comment_on"]?"Comment":""))."</strong></div>";
 			echo $this->FormOpen("remove");
-			
+
 		// show backlinks
 		if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
 		{
