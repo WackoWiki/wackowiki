@@ -151,10 +151,10 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
          if ($this->GetConfigValue("edit_table_based"))
          $output .= '<div id="page">';
 
-         $output = "<fieldset class=\"preview\"><legend>".$this->GetTranslation("EditPreview")."</legend>\n";
+         $output = "<div class=\"preview\"><p class=\"preview\"><span>".$this->GetTranslation("EditPreview")."</span></p>\n";
 
          $output .= $this->Format($body);
-         $output .= "</fieldset><br />\n";
+         $output .= "</div><br />\n";
 
          print($output);
          $output = "";
