@@ -93,7 +93,7 @@ if ($_REQUEST["secret_code"]){
 <input type="hidden"
 	name="action" value="change" />
 <div class="cssform">
-  <h3><?php echo $this->FormatResourceValue("YouWantChangePassword"); ?></h3>
+  <h3><?php echo $this->FormatTranslation("YouWantChangePassword"); ?></h3>
   <?php
 	if ($error)
 	{ ?>
@@ -164,7 +164,7 @@ if ($_REQUEST["secret_code"]){
 <input type="hidden"
 	name="action" value="send" />
 <div class="cssform">
-  <h3><?php echo $this->FormatResourceValue("ForgotMain"); ?></h3>
+  <h3><?php echo $this->FormatTranslation("ForgotMain"); ?></h3>
   <?php
 	if ($error) {
 		?>
@@ -173,9 +173,9 @@ if ($_REQUEST["secret_code"]){
 
 }
 ?>
-  <p><?php echo $this->FormatResourceValue("ForgotComment"); ?></p>
+  <p><?php echo $this->FormatTranslation("ForgotComment"); ?></p>
   <p>
-    <label for="loginormail"><?php echo $this->FormatResourceValue("ForgotField"); ?>:</label>
+    <label for="loginormail"><?php echo $this->FormatTranslation("ForgotField"); ?>:</label>
     <input type="text" id="loginormail" name="loginormail" size="24" />
   </p>
   <p>
