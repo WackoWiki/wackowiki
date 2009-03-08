@@ -6,22 +6,14 @@ if ($_GET["_autocomplete"])
    include( dirname(__FILE__)."/_autocomplete.php" );
    return;
 }
-
 ?>
-<?php if (!$this->GetConfigValue("edit_table_based")) { ?>
 
 <div id="pageedit">
-  <?php } ?>
-  <?php
+
+<?php
 if ($this->HasAccess("write") && $this->HasAccess("read"))
 {
-   if ($this->GetConfigValue("edit_table_based")) {
-      ?>
-</div>
-<table cellspacing="0" cellpadding="0" border="0" width="100%">
-  <tr>
-    <td style='padding: 0px 20px' width="100%"><?php
-}
+
 if ($_POST)
 {
    // only if saving:
@@ -120,9 +112,10 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
    // "cf" attribute: it is for so called "critical fields" in the form. It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog "You are going to leave this page, but there are some changes you made but not saved yet." Is used by this script to determine which changes it need to monitor.
    $output .= $this->FormOpen("edit", "", "post", "edit", " cf='true' ");
 
-   if ($_REQUEST["add"]) $output .= '<input name="lang" type="hidden" value="'.$this->pagelang.'" />';
-   if ($_REQUEST["add"]) $output .= '<input name="tag" type="hidden" value="'.$this->tag.'" />';
-   if ($_REQUEST["add"]) $output .= '<input name="add" type="hidden" value="1" />';
+   if ($_REQUEST["add"])
+		$output .=	'<input name="lang" type="hidden" value="'.$this->pagelang.'" />'.
+   					'<input name="tag" type="hidden" value="'.$this->tag.'" />'.
+					'<input name="add" type="hidden" value="1" />';
 
    print($output);
    $output = "";
@@ -147,9 +140,6 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
          value="<?php echo $this->GetTranslation("EditCancelButton"); ?>"
          onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
       <?php
-
-         if ($this->GetConfigValue("edit_table_based"))
-         $output .= '<div id="page">';
 
          $output = "<div class=\"preview\"><p class=\"preview\"><span>".$this->GetTranslation("EditPreview")."</span></p>\n";
 
@@ -207,14 +197,6 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
             }
          // end captcha
 
-         if ($this->GetConfigValue("edit_table_based")) {
-            ?></td>
-  </tr>
-</table>
-<div class="Wrapper" style='margin-top: 0px; padding-top: 0px'>
-<div id="page" style='margin-top: 0px; padding-top: 0px'><br />
-  <?php
-}
 ?>
   <script type="text/javascript">
     wE = new WikiEdit();
@@ -249,9 +231,9 @@ print ( $this->FormClose() );
 }
 else
 {
-   print("<div id=\"page\">");
-   print($this->GetTranslation("WriteAccessDenied"));
-   print("</div>");
+   echo "<div id=\"page\">";
+   echo $this->GetTranslation("WriteAccessDenied");
+   echo "</div>";
 }
 ?>
 </div>

@@ -111,7 +111,6 @@ preg_replace("/(\?|&)installAction=site-config/","",$_SERVER["REQUEST_URI"]).
 
   "standard_handlers" => "acls|addcomment|claim|diff|edit|latex|msword|print|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|show|watch|settings",
 
-  "edit_table_based" => 0,
   "revisions_hide_cancel" => 0,
   "footer_comments" => 1,
   "footer_files" => 1,
