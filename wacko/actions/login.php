@@ -73,7 +73,7 @@ else
   <?php	}
 	?>
   <p>
-    <label for="name"><?php echo $this->FormatResourceValue("LoginName");?>:</label>
+    <label for="name"><?php echo $this->FormatTranslation("LoginName");?>:</label>
     <input id="name" name="name" size="27" value="<?php echo $name; ?>" />
   </p>
   <p>
@@ -86,7 +86,7 @@ else
 			value="<?php echo $this->GetTranslation("LoginButton"); ?>" />
   </p>
   <p><a href="<?php echo $this->Href("", "Password"); ?>"><?php echo $this->GetTranslation("ForgotLink"); ?></a></p>
-  <p><?php echo $this->FormatResourceValue("LoginWelcome2"); ?></p>
+  <p><?php echo $this->FormatTranslation("LoginWelcome2"); ?></p>
 </div>
 <script type="text/javascript">
    document.getElementById("f<?php echo $focus;?>").focus();

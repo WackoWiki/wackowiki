@@ -252,7 +252,7 @@ class Wacko
 		return $this->resource[$name];
 	}
 
-	function FormatResourceValue($name, $lang = "")
+	function FormatTranslation($name, $lang = "")
 	{
 		$string = $this->GetTranslation($name, $lang, false);
 		$this->format_safe = false;

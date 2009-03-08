@@ -202,7 +202,7 @@ else if ($user = $this->GetUser())
 </div>
 <br />
 <?php
-         //  echo $this->FormatResourceValue("SeeListOfPages")."<br />";
+         //  echo $this->FormatTranslation("SeeListOfPages")."<br />";
          print($this->FormClose());
 }
 else

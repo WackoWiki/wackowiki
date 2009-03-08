@@ -136,7 +136,7 @@ if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
 <input type="hidden"
    name="action" value="login" />
 <div class="cssform">
-  <h3><?php echo $this->FormatResourceValue("RegistrationWelcome"); ?></h3>
+  <h3><?php echo $this->FormatTranslation("RegistrationWelcome"); ?></h3>
   <?php
    if ($error)
    {
@@ -146,7 +146,7 @@ if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
    {
       ?>
   <p>
-    <label for="lang"><?php echo $this->FormatResourceValue("RegistrationLang");?>:</label>
+    <label for="lang"><?php echo $this->FormatTranslation("RegistrationLang");?>:</label>
     <select id="lang" name="lang">
       <option value=""></option>
       <?php
@@ -160,7 +160,7 @@ if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
 }
 ?>
   <p>
-    <label for="name"><?php echo $this->FormatResourceValue("RegistrationName");?>:</label>
+    <label for="name"><?php echo $this->FormatTranslation("RegistrationName");?>:</label>
     <input id="name" name="name" size="27"
          value="<?php echo htmlspecialchars($name); ?>" />
   </p>
