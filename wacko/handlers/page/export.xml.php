@@ -14,24 +14,30 @@ $xml .= "\t\t<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
 if ($this->HasAccess("read"))
 {
-
 	$numOfSlashes = substr_count($this->tag, "/");
 
-	$pages = $this->LoadAll("SELECT * FROM ".
-	$this->config["table_prefix"]."pages WHERE (supertag = '".quote($this->dblink, $this->supertag)."'".
-            " OR supertag LIKE '".quote($this->dblink, $this->supertag."/%")."')".
-            " AND comment_on = ''");
-	foreach ($pages as $num=>$page)
+	$pages = $this->LoadAll(
+		"SELECT * FROM ".$this->config["table_prefix"]."pages ".
+		"WHERE (supertag = '".quote($this->dblink, $this->supertag)."'".
+		" OR supertag LIKE '".quote($this->dblink, $this->supertag."/%")."')".
+		" AND comment_on = ''");
+
+	foreach ($pages as $num => $page)
 	{
 		// check ACLS
 		if (!$this->HasAccess("write", $page["tag"])) continue;
 		// output page
 		$tag = $page["tag"];
-		if ($numOfSlashes == substr_count($tag, "/")) $tag = "";
+
+		if ($numOfSlashes == substr_count($tag, "/"))
+		{
+			$tag = "";
+		{
 		else
 		{
 			$_tag = explode("/", $tag);
 			$tag = "";
+
 			for ($i=0; $i<count($_tag); $i++)
 			{
 				if ($i > $numOfSlashes) $tag .= $_tag[$i]."/";
