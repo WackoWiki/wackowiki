@@ -27,8 +27,8 @@ echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->m
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/wacko.css" />
 <link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico" type="image/x-icon" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
@@ -90,7 +90,7 @@ if ($user["doubleclickedit"] == "Y") {?>
   <div id="infomenu">
     <div id="breadcrumb">
       <!-- <h1>-->
-      <span class="main"><a href="<?php echo $this->GetConfigValue("base_url"); ?>"><?php echo $this->config["wakka_name"] ?></a>:</span> <span class="pagetitle"><?php echo $this->GetPagePath(); ?></span> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" 
+      <span class="main"><a href="<?php echo $this->GetConfigValue("base_url"); ?>"><?php echo $this->config["wacko_name"] ?></a>:</span> <span class="pagetitle"><?php echo $this->GetPagePath(); ?></span> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" 
      href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a><br />
       <!-- </h1> -->
     </div>

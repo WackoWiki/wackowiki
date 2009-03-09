@@ -22,10 +22,10 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 	type="image/x-icon" />
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetTranslation("RecentChangesRSS");?>"
-	href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+	href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>"
-	href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+	href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?> in RSS"
 	href="<?php echo $this->href("revisions.xml");?>" />
@@ -141,7 +141,7 @@ echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $thi
 	width="16" height="16"
 	alt="<?php echo $this->GetTranslation("MsWordVersion") ?>" /></a></div>
 <div class="header">
-  <h1><span class="Main"><?php echo $this->config["wakka_name"] ?>:</span> <?php echo $this->GetPagePath(); ?> <a class="Search"
+  <h1><span class="Main"><?php echo $this->config["wacko_name"] ?>:</span> <?php echo $this->GetPagePath(); ?> <a class="Search"
 	title="<?php echo $this->GetTranslation("SearchTitleTip")?>"
 	href="<?php echo $this->config["base_url"] ?>TextSearch<?php echo ($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a> </h1>
   <?php if (($this->method != "edit") || !$this->HasAccess("write")) { ?>

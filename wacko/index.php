@@ -60,7 +60,7 @@ $wackoDefaultConfig = array(
   "xml_sitemap" => 0,
 
   "root_page" => "HomePage",
-  "wakka_name" => "MyWackoSite",
+  "wacko_name" => "MyWackoSite",
   "base_url" => ($_SERVER['SERVER_PORT'] == 443 ? 'https' : 'http').'://'.$_SERVER["SERVER_NAME"].
 ($_SERVER["SERVER_PORT"] != 80 ? ":".$_SERVER["SERVER_PORT"] : "").
 preg_replace("/(\?|&)installAction=site-config/","",$_SERVER["REQUEST_URI"]).
@@ -178,7 +178,7 @@ if (@file_exists("locked"))
 
 	if ($ask)
 	{
-		header("WWW-Authenticate: Basic realm=\"".$wackoConfig["wakka_name"]." Install/Upgrade Interface\"");
+		header("WWW-Authenticate: Basic realm=\"".$wackoConfig["wacko_name"]." Install/Upgrade Interface\"");
 		header("HTTP/1.1 503 Service Temporarily Unavailable");
 		print("This site is currently being upgraded. Please try again later.");
 		exit;

@@ -6,7 +6,7 @@ $xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 $xml .= "\t<channel>\n";
 $xml .= "\t\t<title>".$this->tag."</title>\n";
 $xml .= "\t\t<link>".$this->GetConfigValue("base_url")."</link>\n";
-$xml .= "\t\t<description>".$this->GetTranslation("ExportClusterXML").$this->GetConfigValue("wakka_name")."/".$this->tag."</description>\n";
+$xml .= "\t\t<description>".$this->GetTranslation("ExportClusterXML").$this->GetConfigValue("wacko_name")."/".$this->tag."</description>\n";
 $xml .= "\t\t<lastBuildDate>".date('r')."</lastBuildDate>\n";
 $xml .= "\t\t<language></language>\n";//!!!
 $xml .= "\t\t<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";

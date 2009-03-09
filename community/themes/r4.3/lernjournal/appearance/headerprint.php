@@ -18,7 +18,7 @@
 
 <div class="header">
   <h5>
-  <?php echo file_exists("images/".$this->config["wakka_name"].".png")?"<img src='/images/".$this->config["wakka_name"].".png' alt='".$this->config["wakka_name"]."' />":$this->config["wakka_name"] ?> : <a href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->GetPageTag()); ?>"><?php echo $this->GetPageTag(); ?></a> 
+  <?php echo file_exists("images/".$this->config["wacko_name"].".png")?"<img src='/images/".$this->config["wacko_name"].".png' alt='".$this->config["wacko_name"]."' />":$this->config["wacko_name"] ?> : <a href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->GetPageTag()); ?>"><?php echo $this->GetPageTag(); ?></a> 
   </h5>
 </div>
 
