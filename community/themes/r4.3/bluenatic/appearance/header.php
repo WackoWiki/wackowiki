@@ -16,8 +16,8 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url"); ?>css/page.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url"); ?>css/wacko.css" media="screen" />
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->GetConfigValue("theme_url"); ?>icons/icon.gif" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
     <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 	<?php if($this->GetMethod() != 'show' || $this->page["latest"] == "N") { ?><meta name="robots" content="noindex, nofollow" /><?php } ?>
 	<title><?php echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?></title>
@@ -55,7 +55,7 @@ if ($this->method == 'edit')
 			<?php echo $this->FormClose(); ?> 
 			
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
-			<b><?php echo $this->config["wakka_name"]; ?>:</b>
+			<b><?php echo $this->config["wacko_name"]; ?>:</b>
 			<?php echo $this->GetPagePath(); ?>
 			<a title="<?php echo $this->GetTranslation("SearchTitleTip"); ?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a> 
 		</div>

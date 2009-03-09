@@ -391,7 +391,7 @@ class Wacko
 		return $encodedString;
 	}
 
-	function GetWackoName() { return $this->GetConfigValue("wakka_name"); }
+	function GetWackoName() { return $this->GetConfigValue("wacko_name"); }
 	function GetWakkaVersion() { return $this->VERSION; }
 	function GetWackoVersion() { return $this->WVERSION; }
 
@@ -861,7 +861,7 @@ class Wacko
 	{
 		if (!$email) return;
 
-		$headers = "From: =?". $this->GetCharset() ."?B?". base64_encode($this->GetConfigValue("wakka_name")) ."?= <".$this->GetConfigValue("admin_email").">\r\n";
+		$headers = "From: =?". $this->GetCharset() ."?B?". base64_encode($this->GetConfigValue("wacko_name")) ."?= <".$this->GetConfigValue("admin_email").">\r\n";
 		$headers .= "X-Mailer: PHP/".phpversion()."\r\n"; //mailer
 		$headers .= "X-Priority: 3\r\n"; //1 UrgentMessage, 3 Normal
 		$headers .= "X-Wacko: ".$this->GetConfigValue("base_url")."\r\n";
@@ -1022,7 +1022,7 @@ class Wacko
 								$message .=   $username.
 								$this->GetTranslation("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$comment_on,"")."\">".$this->Href("",$comment_on,"")."</a><br />";
 								$message .= "<hr />".$this->Format($body_r, "post_wacko")."<hr />";
-								$message .= "<br />".$this->GetTranslation("MailGoodbye",$lang)." ".$this->GetConfigValue("wakka_name");
+								$message .= "<br />".$this->GetTranslation("MailGoodbye",$lang)." ".$this->GetConfigValue("wacko_name");
 								$this->SendMail($User["email"], $subject, $message);
 							}
 						}
@@ -1099,7 +1099,7 @@ class Wacko
 								$page = $this->LoadSingle("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."revisions WHERE tag='".quote($this->dblink, $tag)."' ORDER BY time DESC");
 								$_GET["b"] = $page["id"];
 								$message .= "<hr />".$this->IncludeBuffered("handlers/page/diff.php", "oops")."<hr />";
-								$message .= "<br />".$this->GetTranslation("MailGoodbye",$lang)." ".$this->GetConfigValue("wakka_name");
+								$message .= "<br />".$this->GetTranslation("MailGoodbye",$lang)." ".$this->GetConfigValue("wacko_name");
 								$this->SendMail($User["email"], $subject, $message);
 							}
 						}
@@ -2399,7 +2399,7 @@ class Wacko
 	// XML
 	function WriteFile($name, $body)
 	{
-		$filename = "xml/".$name."_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name"))).".xml";
+		$filename = "xml/".$name."_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml";
 		
 		$fp = fopen($filename, "w");
 		if ($fp)
@@ -2418,12 +2418,12 @@ class Wacko
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->GetCharset()."\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
-		$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetTranslation("RecentChangesTitleXML")."</title>\n";
+		$xml .= "<title>".$this->GetConfigValue("wacko_name").$this->GetTranslation("RecentChangesTitleXML")."</title>\n";
 		$xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
-		$xml .= "<description>".$this->GetTranslation("RecentChangesXML").$this->GetConfigValue("wakka_name")." </description>\n";
+		$xml .= "<description>".$this->GetTranslation("RecentChangesXML").$this->GetConfigValue("wacko_name")." </description>\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<title>".$this->GetConfigValue("wacko_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
 		$xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
 		$xml .= "<url>".$this->GetConfigValue("root_url")."files/wacko4.gif"."</url>\n";
 		$xml .= "<width>108</width>\n";
@@ -2466,12 +2466,12 @@ class Wacko
 		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->GetConfigValue("theme_url")."css/wacko.css\" media=\"screen\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
-		$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<title>".$this->GetConfigValue("wacko_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
 		$xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
-		$xml .= "<description>".$this->GetTranslation("RecentCommentsXML").$this->GetConfigValue("wakka_name")." </description>\n";
+		$xml .= "<description>".$this->GetTranslation("RecentCommentsXML").$this->GetConfigValue("wacko_name")." </description>\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->GetConfigValue("wakka_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<title>".$this->GetConfigValue("wacko_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
 		$xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
 		$xml .= "<url>".$this->GetConfigValue("root_url")."files/wacko4.gif"."</url>\n";
 		$xml .= "<width>108</width>\n";

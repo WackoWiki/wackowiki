@@ -21,7 +21,7 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <body>
 
 <div class="header">
-<h1><?php echo $this->config["wakka_name"] ?>: <a
+<h1><?php echo $this->config["wacko_name"] ?>: <a
 	href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->GetPageTag()); ?>"><?php echo $this->GetPageTag(); ?></a>
 </h1>
 </div>

@@ -106,13 +106,13 @@ else if ($_REQUEST["action"] == "login")
                ($lang?"lang = '".quote($this->dblink, $lang)."', ":"").
                 "password = md5('".quote($this->dblink, $_POST["password"])."')");
 
-               $subject = $this->GetTranslation("EmailWelcome").$this->GetConfigValue("wakka_name");
+               $subject = $this->GetTranslation("EmailWelcome").$this->GetConfigValue("wacko_name");
                $message = $this->GetTranslation("MailHello"). $name.".<br /> <br /> ";
-               $message.= str_replace('%1', $this->GetConfigValue("wakka_name"),
+               $message.= str_replace('%1', $this->GetConfigValue("wacko_name"),
                str_replace('%2', $name,
                str_replace('%3', $this->Href().($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
                $this->GetTranslation("EmailRegistered"))))."<br />  ";
-               $message.= "<br />".$this->GetTranslation("MailGoodbye")." ".$this->GetConfigValue("wakka_name");
+               $message.= "<br />".$this->GetTranslation("MailGoodbye")." ".$this->GetConfigValue("wacko_name");
                $this->SendMail($email, $subject, $message);
 
                // log in

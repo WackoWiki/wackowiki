@@ -30,8 +30,8 @@ Common header file.
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/wacko.css" />
 <link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico" type="image/x-icon" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wakka_name")));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
@@ -71,7 +71,7 @@ if ($user["doubleclickedit"] == "Y") {?>
 <body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="378" valign="bottom" style="white-space: nowrap;"><span class="main"><a href="<?php echo $this->GetConfigValue("root_url")?>"class="main"><?php echo $this->config["wakka_name"] ?></a></span></td>
+    <td width="378" valign="bottom" style="white-space: nowrap;"><span class="main"><a href="<?php echo $this->GetConfigValue("root_url")?>"class="main"><?php echo $this->config["wacko_name"] ?></a></span></td>
     <td width="100%"><div align="right"><?php
 // Opens Search form
 echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get");

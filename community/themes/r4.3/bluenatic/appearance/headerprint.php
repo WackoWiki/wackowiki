@@ -12,7 +12,7 @@
 <body>
 	<div class="header">
 		<?php // Print wackoname and wackopath ?>
-		<?php echo $this->config["wakka_name"]; ?>:
+		<?php echo $this->config["wacko_name"]; ?>:
 		<?php echo $this->GetPagePath(); ?>
 	</div>
 

@@ -41,11 +41,11 @@ else if ($user = $this->GetUser())
 
          $subject = $this->GetTranslation("EmailConfirm");
          $message = $this->GetTranslation("MailHello"). $user["name"].".<br /> <br /> ";
-         $message.= str_replace('%1', $this->GetConfigValue("wakka_name"),
+         $message.= str_replace('%1', $this->GetConfigValue("wacko_name"),
          str_replace('%2', $user["name"],
          str_replace('%3', $this->Href().($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
          $this->GetTranslation("EmailVerify"))))."<br />  ";
-         $message.= "<br />".$this->GetTranslation("MailGoodbye")." ".$this->GetConfigValue("wakka_name");
+         $message.= "<br />".$this->GetTranslation("MailGoodbye")." ".$this->GetConfigValue("wacko_name");
          $this->SendMail($_POST["email"], $subject, $message);
       }
 

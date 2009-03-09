@@ -38,7 +38,7 @@
          </script>
 <form action="<?php echo myLocation() ?>?installAction=database-install"
 	method="post" name="form1"><input type="hidden"
-	name="config[wakka_name]" value="<?php echo $config["wakka_name"];?>" />
+	name="config[wacko_name]" value="<?php echo $config["wacko_name"];?>" />
 <input type="hidden" name="config[root_page]"
 	value="<?php echo $config["root_page"];?>" /> <input type="hidden"
 	name="config[language]" value="<?php echo $config["language"];?>" /> <input
