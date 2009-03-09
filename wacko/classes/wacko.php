@@ -391,7 +391,7 @@ class Wacko
 		return $encodedString;
 	}
 
-	function GetWakkaName() { return $this->GetConfigValue("wakka_name"); }
+	function GetWackoName() { return $this->GetConfigValue("wakka_name"); }
 	function GetWakkaVersion() { return $this->VERSION; }
 	function GetWackoVersion() { return $this->WVERSION; }
 
