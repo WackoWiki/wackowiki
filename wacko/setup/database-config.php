@@ -103,7 +103,7 @@ for($count = 0; $count < count($drivers); $count++)
 <h2><?php echo $lang["DBHost"];?></h2>
 <p class="notop"><?php print $lang["DBHostDesc"]; ?></p>
 <input type="text" maxlength="1000" name="config[database_host]"
-	value="<?php echo $wakkaConfig["database_host"] ?>" class="text_input" />
+	value="<?php echo $wackoConfig["database_host"] ?>" class="text_input" />
 <br />
 <div class="fake_hr_seperator">
 <hr />
@@ -111,7 +111,7 @@ for($count = 0; $count < count($drivers); $count++)
 <h2><?php echo $lang["DBPort"];?></h2>
 <p class="notop"><?php print $lang["DBPortDesc"]; ?></p>
 <input type="text" maxlength="10" name="config[database_port]"
-	value="<?php echo $wakkaConfig["database_port"] ?>" class="text_input"
+	value="<?php echo $wackoConfig["database_port"] ?>" class="text_input"
 	style="width: 100px;" /> <br />
 <div class="fake_hr_seperator">
 <hr />
@@ -119,7 +119,7 @@ for($count = 0; $count < count($drivers); $count++)
 <h2><?php echo $lang["DB"];?></h2>
 <p class="notop"><?php print $lang["DBDesc"]; ?></p>
 <input type="text" maxlength="64" name="config[database_database]"
-	value="<?php echo $wakkaConfig["database_database"] ?>"
+	value="<?php echo $wackoConfig["database_database"] ?>"
 	class="text_input" /> <br />
 <div class="fake_hr_seperator">
 <hr />
@@ -127,7 +127,7 @@ for($count = 0; $count < count($drivers); $count++)
 <h2><?php echo $lang["DBUser"];?></h2>
 <p class="notop"><?php print $lang["DBUserDesc"]; ?></p>
 <input type="text" maxlength="50" name="config[database_user]"
-	value="<?php echo $wakkaConfig["database_user"] ?>" class="text_input" />
+	value="<?php echo $wackoConfig["database_user"] ?>" class="text_input" />
 <br />
 <div class="fake_hr_seperator">
 <hr />
@@ -135,7 +135,7 @@ for($count = 0; $count < count($drivers); $count++)
 <h2><?php echo $lang["DBPassword"];?></h2>
 <p class="notop"><?php print $lang["DBPasswordDesc"]; ?></p>
 <input type="password" maxlength="50" name="config[database_password]"
-	value="<?php echo $wakkaConfig["database_password"] ?>"
+	value="<?php echo $wackoConfig["database_password"] ?>"
 	class="text_input" /> <br />
 <div class="fake_hr_seperator">
 <hr />
@@ -143,7 +143,7 @@ for($count = 0; $count < count($drivers); $count++)
 <h2><?php echo $lang["Prefix"];?></h2>
 <p class="notop"><?php print $lang["PrefixDesc"]; ?></p>
 <input type="text" maxlength="64" name="config[table_prefix]"
-	value="<?php echo $wakkaConfig["table_prefix"] ?>" class="text_input" />
+	value="<?php echo $wackoConfig["table_prefix"] ?>" class="text_input" />
 <br />
 <div class="fake_hr_seperator">
 <hr />

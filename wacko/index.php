@@ -45,7 +45,7 @@ if (strstr($_SERVER["SERVER_SOFTWARE"], "IIS")) $_SERVER["REQUEST_URI"] = $_SERV
 $found_rewrite_extension = function_exists('apache_get_modules') ? in_array('mod_rewrite', apache_get_modules()) : false;
 
 // default configuration values
-$wakkaDefaultConfig = array(
+$wackoDefaultConfig = array(
   "database_driver" => "",
   "database_host" => "localhost",
   "database_port" => "",
@@ -147,13 +147,13 @@ preg_replace("/(\?|&)installAction=site-config/","",$_SERVER["REQUEST_URI"]).
   "captcha_registration" => 1,
 );
 
-$wakkaDefaultConfig['aliases'] = array('Admins' => "",);
+$wackoDefaultConfig['aliases'] = array('Admins' => "",);
 
 // load config
 if (!$configfile = GetEnv("WAKKA_CONFIG")) $configfile = "config.inc.php";
 if (@file_exists($configfile)) include($configfile);
-$wakkaConfigLocation = $configfile;
-$wakkaConfig = array_merge($wakkaDefaultConfig, (array)$wakkaConfig);
+$wackoConfigLocation = $configfile;
+$wackoConfig = array_merge($wackoDefaultConfig, (array)$wackoConfig);
 
 // check for locking
 if (@file_exists("locked"))
@@ -178,7 +178,7 @@ if (@file_exists("locked"))
 
 	if ($ask)
 	{
-		header("WWW-Authenticate: Basic realm=\"".$wakkaConfig["wakka_name"]." Install/Upgrade Interface\"");
+		header("WWW-Authenticate: Basic realm=\"".$wackoConfig["wakka_name"]." Install/Upgrade Interface\"");
 		header("HTTP/1.1 503 Service Temporarily Unavailable");
 		print("This site is currently being upgraded. Please try again later.");
 		exit;
@@ -186,7 +186,7 @@ if (@file_exists("locked"))
 }
 
 // compare versions, start installer if necessary
-if ($wakkaConfig["wacko_version"] != WACKO_VERSION)
+if ($wackoConfig["wacko_version"] != WACKO_VERSION)
 {
 	if (!$_REQUEST["installAction"] && !strstr($_SERVER["SERVER_SOFTWARE"], "IIS"))
 	{
@@ -212,20 +212,20 @@ if ($wakkaConfig["wacko_version"] != WACKO_VERSION)
 }
 
 // set root_url & theme_url
-if (!isset($wakkaConfig["root_url"])) $wakkaConfig["root_url"]=preg_replace("#/[^/]*$#","/",$wakkaConfig["base_url"]);
-$wakkaConfig["theme_url"]=$wakkaConfig["root_url"]."themes/".$wakkaConfig["theme"]."/";
+if (!isset($wackoConfig["root_url"])) $wackoConfig["root_url"]=preg_replace("#/[^/]*$#","/",$wackoConfig["base_url"]);
+$wackoConfig["theme_url"]=$wackoConfig["root_url"]."themes/".$wackoConfig["theme"]."/";
 
 //user-table
-if (!isset($wakkaConfig["user_table"]) && !$wakkaConfig["user_table"]) $wakkaConfig["user_table"] = $wakkaConfig["table_prefix"]."users";
+if (!isset($wackoConfig["user_table"]) && !$wackoConfig["user_table"]) $wackoConfig["user_table"] = $wackoConfig["table_prefix"]."users";
 
 // fetch wacko location
 if (isset($_SERVER["PATH_INFO"]) && function_exists("virtual")) $request = $_SERVER["PATH_INFO"];
 else $request = @$_REQUEST["page"];
 
 // fix win32 apache 1 bug
-if (stristr($_SERVER["SERVER_SOFTWARE"], "Apache/1") && stristr($_SERVER["SERVER_SOFTWARE"], "Win32") && $wakkaConfig["rewrite_mode"])
+if (stristr($_SERVER["SERVER_SOFTWARE"], "Apache/1") && stristr($_SERVER["SERVER_SOFTWARE"], "Win32") && $wackoConfig["rewrite_mode"])
 {
-	$dir = str_replace("http://".$_SERVER["SERVER_NAME"].($_SERVER["SERVER_PORT"] != 80 ? ":".$_SERVER["SERVER_PORT"] : ""),"",$wakkaConfig["base_url"]);
+	$dir = str_replace("http://".$_SERVER["SERVER_NAME"].($_SERVER["SERVER_PORT"] != 80 ? ":".$_SERVER["SERVER_PORT"] : ""),"",$wackoConfig["base_url"]);
 	$request = preg_replace("+^".preg_quote(rtrim($dir,"/"))."+i","",$_SERVER["REDIRECT_URL"]);//$request);
 }
 
@@ -244,13 +244,13 @@ else
 {
 	$page = substr($request, 0, $p);
 	$m1 = $method = strtolower(substr($request, $p - strlen($request) + 1));
-	if (!@file_exists($wakkaConfig["handler_path"]."/page/".$method.".php"))
+	if (!@file_exists($wackoConfig["handler_path"]."/page/".$method.".php"))
 	{
 		$page = $request;
 		$method = "";
 	}
 
-	else if (preg_match( '/^(.*?)\/('.$wakkaConfig["standard_handlers"].')($|\/(.*)$)/i', $page, $match ))
+	else if (preg_match( '/^(.*?)\/('.$wackoConfig["standard_handlers"].')($|\/(.*)$)/i', $page, $match ))
 	{
 		//translit case
 		$page = $match[1];
@@ -259,9 +259,9 @@ else
 }
 
 // Load the correct database connector
-if (!isset( $wakkaConfig["database_driver"] )) $wakkaConfig["database_driver"] = "mysql";
+if (!isset( $wackoConfig["database_driver"] )) $wackoConfig["database_driver"] = "mysql";
 
-switch($wakkaConfig["database_driver"])
+switch($wackoConfig["database_driver"])
 {
 	case "mysql_legacy":
 		$dbfile = "db/mysql.php";
@@ -279,13 +279,13 @@ else die("Error loading Database Connector.");
 
 // cache!
 require("classes/cache.php");
-$cache = &new Cache($wakkaConfig["cache_dir"], $wakkaConfig["cache_ttl"]);
+$cache = &new Cache($wackoConfig["cache_dir"], $wackoConfig["cache_ttl"]);
 
 $iscache = null;
-if ($wakkaConfig["cache"] &&  $_SERVER["REQUEST_METHOD"] != "POST" && $method != "edit" && $method != "watch")
+if ($wackoConfig["cache"] &&  $_SERVER["REQUEST_METHOD"] != "POST" && $method != "edit" && $method != "watch")
 {
 	// anonymous
-	if (!$_COOKIE[$wakkaConfig["cookie_prefix"]."name"])
+	if (!$_COOKIE[$wackoConfig["cookie_prefix"]."name"])
 	{
 		$iscache = $cache->CheckHttpRequest($page, $method);
 	}
@@ -296,7 +296,7 @@ session_start();
 
 // create wacko object
 require("classes/wacko.php");
-$wacko = &new Wacko($wakkaConfig);
+$wacko = &new Wacko($wackoConfig);
 $wacko->headerCount = 0;
 $cache->wacko = &$wacko;
 $wacko->cache = &$cache;

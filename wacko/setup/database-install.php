@@ -83,10 +83,10 @@ switch($config2["database_driver"])
 			print("         </ul>\n");
 			print("         <br />\n");
 
-			if ( !isset ( $wakkaConfig["wakka_version"] ) ) $wakkaConfig["wakka_version"] = "";
-			if (!$version = trim($wakkaConfig["wakka_version"])) $version = "0";
-			if ( isset ( $wakkaConfig["wacko_version"] ) )
-			if ( trim ( $wakkaConfig["wacko_version"] ) ) $version = trim($wakkaConfig["wacko_version"]);
+			if ( !isset ( $wackoConfig["wakka_version"] ) ) $wackoConfig["wakka_version"] = "";
+			if (!$version = trim($wackoConfig["wakka_version"])) $version = "0";
+			if ( isset ( $wackoConfig["wacko_version"] ) )
+			if ( trim ( $wackoConfig["wacko_version"] ) ) $version = trim($wackoConfig["wacko_version"]);
 
 			switch ($version)
 			{
@@ -239,8 +239,8 @@ switch($config2["database_driver"])
 					require_once("setup/database_mysql.php");
 					require_once("setup/database_mysql_updates.php");
 					
-					if ( !isset ( $wakkaConfig["database_port"] ) ) $wakkaConfig["database_port"] = "3306";
-					if (!$port = trim($wakkaConfig["database_port"])) $port = "3306";
+					if ( !isset ( $wackoConfig["database_port"] ) ) $wackoConfig["database_port"] = "3306";
+					if (!$port = trim($wackoConfig["database_port"])) $port = "3306";
 
 					print("         <ul>\n");
 
@@ -274,8 +274,8 @@ switch($config2["database_driver"])
 						print("         </ul>\n");
 						print("         <br />\n");
 
-						if (!$version = trim($wakkaConfig["wakka_version"])) $version = "0";
-						if (trim($wakkaConfig["wacko_version"])) $version = trim($wakkaConfig["wacko_version"]);
+						if (!$version = trim($wackoConfig["wakka_version"])) $version = "0";
+						if (trim($wackoConfig["wacko_version"])) $version = trim($wackoConfig["wacko_version"]);
 						switch ($version)
 						{
 							// new installation
