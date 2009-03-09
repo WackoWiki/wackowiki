@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-	<title><?php echo $this->GetWakkaName()." : ".$this->GetPageTag(); ?></title>
+	<title><?php echo $this->GetWackoName()." : ".$this->GetPageTag(); ?></title>
 	<?php if ($this->GetMethod() != 'show')
 		echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />

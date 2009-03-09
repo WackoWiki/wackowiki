@@ -18,7 +18,7 @@ lernjournal theme.
 <title>
 <?php
 // Echoes Title of the page.
-  echo $this->GetWakkaName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
+  echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
 ?>
 </title>
 <?php 

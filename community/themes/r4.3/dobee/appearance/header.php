@@ -8,7 +8,7 @@ header( "Content-Type: text/html; charset=".$this->GetCharset() );
 	lang="<?php echo $this->page["lang"] ?>">
 
 <head>
-<title><?php echo $this->GetWakkaName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?>
+<title><?php echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?>
 </title>
 <?php
 if ($this->GetMethod() != 'show' || $this->page["latest"] == "N") {
