@@ -2,10 +2,10 @@
 	method="post"><input type="hidden" name="config[language]"
 	value="<?php echo $config["language"];?>" /> <?php
 
-	if ( isset ( $wakkaConfig["wakka_version"] ) )
+	if ( isset ( $wackoConfig["wakka_version"] ) )
 	{
 		// If this is an upgrade install
-		print("            <p>".$lang["Installed"].($wakkaConfig["wacko_version"] ? $wakkaConfig["wacko_version"] : $wakkaConfig["wakka_version"]).". ".$lang["ToUpgrade"].WACKO_VERSION.".</p>\n");
+		print("            <p>".$lang["Installed"].($wackoConfig["wacko_version"] ? $wackoConfig["wacko_version"] : $wackoConfig["wakka_version"]).". ".$lang["ToUpgrade"].WACKO_VERSION.".</p>\n");
 		print("            <p>".$lang["PleaseBackup"]."</p>\n");
 	}
 	else
@@ -89,7 +89,7 @@
 	@chmod ("config.inc.php", 0777);
 
 	// If the cache directory is writable then we can enable caching as default
-	print("            <input type=\"hidden\" name=\"config[cache]\" value=\"".(is__writable('_cache/') ? "1" : $wakkaConfig["cache"])."\" />\n");
+	print("            <input type=\"hidden\" name=\"config[cache]\" value=\"".(is__writable('_cache/') ? "1" : $wackoConfig["cache"])."\" />\n");
 
 	$file_permissions_result = is__writable('config.inc.php') && is__writable('_cache/') && is__writable('xml/') && is__writable('files/') && is__writable('files/perpage/') && is__writable('sitemap.xml');
 	?>

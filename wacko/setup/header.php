@@ -40,7 +40,7 @@ function is__writable($path)
 // Fetch Configuration
 if ( isset ( $_POST["config"] ) ) {
 	$config = $_POST["config"];
-	$config2 = array_merge((array)$wakkaConfig, (array)$_POST["config"]);
+	$config2 = array_merge((array)$wackoConfig, (array)$_POST["config"]);
 }
 
 if (!isset($config["language"]) || !@file_exists("setup/lang/installer.".$config["language"].".php")) $config["language"] = "en";
@@ -76,7 +76,7 @@ require_once("setup/lang/installer.".$config["language"].".php");
 		class="<?php echo $installAction == 'site-config' ? 'current' : 'item'; ?>"><?php echo $lang["site-config"]; ?></li>
 	<li>&gt;</li>
 	<?php
-	if ( !isset ( $wakkaConfig["wakka_version"] ) ) {
+	if ( !isset ( $wackoConfig["wakka_version"] ) ) {
 		?>
 	<li
 		class="<?php echo $installAction == 'database-config' ? 'current' : 'item'; ?>"><?php echo $lang["database-config"]; ?></li>

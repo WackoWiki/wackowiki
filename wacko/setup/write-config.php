@@ -7,7 +7,7 @@ function array_to_str ($arr, $name="")
 	if ( !isset( $arrays  ) ) $arrays = "";
 
 
-	$str = "\$wakkaConfig".($name?"[\"".$name."\"]":"")." = array(\n";
+	$str = "\$wackoConfig".($name?"[\"".$name."\"]":"")." = array(\n";
 
 	foreach ($arr as $k => $v)
 	{
@@ -25,13 +25,13 @@ function array_to_str ($arr, $name="")
 // fetch config
 $config = $config2 = unserialize($_POST["config_s"]);
 
-if ( !isset( $wakkaConfig["wacko_version"] ) ) {
+if ( !isset( $wackoConfig["wacko_version"] ) ) {
 	$config["cookie_prefix"] = $config["table_prefix"];
 	$config["aliases"] = array("Admins" => $config["admin_name"]);
 }
 
 // merge existing configuration with new one
-$config = array_merge((array)$wakkaConfig, (array)$config);
+$config = array_merge((array)$wackoConfig, (array)$config);
 
 // set version to current version, yay!
 $config["wakka_version"] = WAKKA_VERSION;
@@ -44,9 +44,9 @@ $configCode .= array_to_str($config)."\n?>";
 // try to write configuration file
 print("         <h2>".$lang["Writing"]."</h2>\n");
 print("         <ul>\n");
-print("            <li>".$lang["Writing2"]." <tt>".$wakkaConfigLocation."</tt> - ");
+print("            <li>".$lang["Writing2"]." <tt>".$wackoConfigLocation."</tt> - ");
 
-$fp = @fopen($wakkaConfigLocation, "w");
+$fp = @fopen($wackoConfigLocation, "w");
 
 if ($fp)
 {
@@ -84,7 +84,7 @@ else
 
 	print("         <h2>".$lang["SecurityConsiderations"]."</h2>\n");
 	print("         <ul class=\"security\">\n");
-	print("            <li>".str_replace("%1", $wakkaConfigLocation, $lang["ErrorGivePrivileges"])."</li>\n");
+	print("            <li>".str_replace("%1", $wackoConfigLocation, $lang["ErrorGivePrivileges"])."</li>\n");
 	print("            <li>".$lang["RemoveSetupDirectory"]."</li>\n");
 	print("         </ul>\n");
 	?>
