@@ -24,7 +24,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				$this->SaveAcl($this->GetPageTag(), "write", $_POST["write_acl"]);
 				$this->SaveAcl($this->GetPageTag(), "comment", $_POST["comment_acl"]);
 				$message = $this->GetTranslation("ACLUpdated");
-		
+
 				// change owner?
 				if ($newowner = $_POST["newowner"])
 				{
@@ -33,14 +33,15 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				}
 		
 				// Change read permission for all comments on this page
-				$comments = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on = '".$this->GetPageTag()."' AND owner='".quote($this->dblink, $this->GetUserName())."'");
+				$comments = $this->LoadAll(
+					"SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on = '".$this->GetPageTag()."' AND owner='".quote($this->dblink, $this->GetUserName())."'");
 				foreach ($comments as $num=>$page)
 				{
-		
+
 					$this->SaveAcl($page["tag"], "read", $_POST["read_acl"]);
 					// $this->SaveAcl($page["tag"], "write", $page["comment_on"] == '' ? $_POST["write_acl"] : '');
 					// $this->SaveAcl($page["tag"], "comment", $page["comment_on"] == '' ? $_POST["comment_acl"] : '');
-		
+
 					// change owner?
 					if ($newowner = $_POST["newowner"])
 					$this->SetPageOwner($page["tag"], $newowner);
@@ -130,6 +131,6 @@ else
 {
 	print($this->GetTranslation("ACLAccessDenied"));
 }
+
 ?>
-  <br />
 </div>

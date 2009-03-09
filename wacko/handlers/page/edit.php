@@ -16,13 +16,13 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 
 if ($_POST)
 {
+
 	// only if saving:
-	if ($_POST["save"])
+	if ($_POST["save"] && $_POST["body"] != "")
 	{
 		// check for overwriting
-		if ($this->page)
-			if ($this->page["time"] != $_POST["previous"])
-				$error = $this->GetTranslation("OverwriteAlert");
+		if ($this->page && $this->page["time"] != $_POST["previous"])
+			$error = $this->GetTranslation("OverwriteAlert");
 
 		if(($this->page && $this->GetConfigValue("captcha_edit_page")) || (!$this->page && $this->GetConfigValue("captcha_new_page")))
 		{
@@ -89,15 +89,21 @@ if ($_POST)
 			$this->Redirect($this->href("", $this->tag).$this->AddDateTime($this->tag));
 		}
 	}
+	
+	// saving blank document
+	else if ($_POST["body"] == "")
+	{
+		$this->Redirect($this->href("", $this->tag).$this->AddDateTime($this->tag));
+	}
 }
 
-$this->NoCache();
+	$this->NoCache();
 
-// fetch fields
-if (!$previous = $_POST["previous"]) $previous = $this->page["time"];
-if (!$body = $_POST["body"]) $body = $this->page["body"];
+	// fetch fields
+	if (!$previous = 	$_POST["previous"]) $previous 	= $this->page["time"];
+	if (!$body = 		$_POST["body"]) 	$body 		= $this->page["body"];
 
-{
+	{
 	// display form
 	if ($error)
 	{
@@ -118,7 +124,9 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
 					'<input name="add" type="hidden" value="1" />';
 
 	print($output);
+
 	$output = "";
+	$preview = "";
 
 	// preview?
 	if ($_POST["preview"])
@@ -140,15 +148,17 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
 			value="<?php echo $this->GetTranslation("EditCancelButton"); ?>"
 			onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
 <?php
+		$preview = $this->Format($body, "preformat");
+		$preview = $this->Format($preview, "wacko");
+		$preview = $this->Format($preview, "post_wacko");
 
 		$output = "<div class=\"preview\"><p class=\"preview\"><span>".$this->GetTranslation("EditPreview")."</span></p>\n";
-
-		$output .= $this->Format($body);
+		$output .= $preview;
 		$output .= "</div><br />\n";
 
 		print($output);
-		$output = "";
 
+		$output = "";
 }
 ?>
 		<input name="save" class="OkBtn_Top"
@@ -227,7 +237,7 @@ if (!$body = $_POST["body"]) $body = $this->page["body"];
 <?php
 }
 
-print ( $this->FormClose() );
+	print ($this->FormClose());
 }
 else
 {
