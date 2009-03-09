@@ -1,5 +1,5 @@
 <?php
-$wakkaResource = array(
+$wackoTranslation = array(
 // logged in panel
   "YouAre" => "Vous êtes ",
   "YouArePanelLink" => "Préférences",

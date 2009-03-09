@@ -166,7 +166,7 @@ class Wacko
 				if (@file_exists($resourcefile)) include($resourcefile);
 				$this->resources["all"] = & $wackoAllResource;
 			}
-			$wackoResource = array_merge($wakkaResource, $this->resources["all"]);
+			$wackoResource = array_merge($wackoTranslation, $this->resources["all"]);
 
 			// theme
 			$resourcefile = "themes/".$this->config["theme"]."/lang/wacko.".$lang.".php";

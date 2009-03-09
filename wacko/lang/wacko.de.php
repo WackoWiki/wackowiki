@@ -1,6 +1,6 @@
 <?php
 
-$wakkaResource = array(
+$wackoTranslation = array(
 // logged in panel
   "YouAre" => "Du bist ",
   "YouArePanelLink" => "Einstellungen",
