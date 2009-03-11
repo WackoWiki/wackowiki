@@ -228,8 +228,10 @@ class WackoFormatter
 	function IndentClose()
 	{
 		$result = '';
+
 		if ($this->intable) $Closers = &$this->tdindentClosers;
 		else $Closers = &$this->indentClosers;
+
 		$c = count($Closers);
 
 		for ($i = 0; $i < $c; $i++)
@@ -781,7 +783,7 @@ class WackoFormatter
 
 					if ($url{0} == "(")
 					{
-						$url = substr($url, 1); 
+						$url = substr($url, 1);
 						$result .= "(";
 					}
 
