@@ -1,7 +1,7 @@
 <?php
 /*
  {{P style="BEFORE|after|left|right"                 // table-type "left/right" don't implemented yet
- // styles can be found in /classes/wakka.php
+ // styles can be found in /classes/wacko.php
  name="absolute|toc-relative|DOCUMENT-RELATIVE"  // "toc-relative" don't implemented yet
  }}
  */
