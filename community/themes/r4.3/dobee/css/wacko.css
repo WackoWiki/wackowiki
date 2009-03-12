@@ -161,9 +161,6 @@ ins.diff { color: #c00; font-weight: bold; text-decoration: underline }
 .additions { color: #008800 }
 .center{ text-align: center }
 
-
-.codeold { border: solid #888888 2px; width: 100%; padding: 3px; background: #FFFFFF; color: black; font: 10pt Lucida Console; height: 400px; overflow: scroll }
-
 del.diff { color: #c00; font-style: italic; text-decoration: line-through }
 .deletions { color: #880000 }
 .error { color: #CC3333; font-weight: bold }

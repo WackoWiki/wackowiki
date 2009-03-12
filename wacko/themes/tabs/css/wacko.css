@@ -137,22 +137,13 @@ del.diff { font-style: italic; color:#c00; text-decoration: line-through; }
 
 .code {
   background: #FFFFFF;
-  border: solid #888888 2px;
+  border: 1px #888888 solid;
   font-family: "Courier New";
-  color: black;
   font-size: 10pt;
-  width: 90%;
+  margin:1em 1.75em;
+  overflow:auto;
+  padding:0.25em;
   line-height: 1.2em;
-}
-.codeold {
-  background: #FFFFFF;
-  border: solid #888888 2px;
-  font-family: "Courier New";
-  color: black;
-  font-size: 10pt;
-  width: 100%;
-  height: 400px;
-  overflow: scroll;
 }
 
 .notes { color: #888800; }
