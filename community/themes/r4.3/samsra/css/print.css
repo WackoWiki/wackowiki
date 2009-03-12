@@ -22,7 +22,7 @@ TEXTAREA { font-family: MonoCondensedCTT, Lucida Console, sans; color:#222222; l
 cite {color:#888800;font-style:normal;}
 .cite {color:#888800;font-style:normal;}
 
-/* underline text: CODE __text__ */
+/* underline text: SYNTAX __text__ */
 .underline { text-decoration:underline; }
 
 .center { text-align: center; }

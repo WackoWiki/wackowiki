@@ -117,7 +117,7 @@ blockquote p { padding: 0px; margin: 5px 0px }
 
 cite, .cite { color: #888800; font-style: normal }
 
-/* underline text: CODE __text__ */
+/* underline text: SYNTAX __text__ */
 .underline { text-decoration:underline; }
 
 

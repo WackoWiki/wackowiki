@@ -395,7 +395,7 @@ tt { color:#666600; background:#ffffcc; padding: 0 2px }
 
 .cite {color:#ff0000;font-style:normal;}
 
-/* underline text: CODE __text__ */
+/* underline text: SYNTAX __text__ */
 .underline { text-decoration:underline; }
 
 .mark { color: #000; background:#ffaaaa; }
