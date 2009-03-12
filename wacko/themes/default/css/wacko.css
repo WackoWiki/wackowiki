@@ -1,11 +1,11 @@
 
 /* Wiki Formatting ---------------------------------------- */
 
-/* Definitions: CODE (?icq i seek you?) */
+/* Definitions: SYNTAX (?icq i seek you?) */
 dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
 * html dfn { background: url(javascript:DOTS) repeat-x bottom left; }
 
-/* Strike through text: CODE --text-- */
+/* Strike through text: SYNTAX --text-- */
 del { color:#999999 }
 del a:visited, del a:link { color:#999999 }
 
@@ -17,7 +17,7 @@ cite {color:#888800;font-style:normal;}
 
 /** List-related *************************************************************/
 
-/* CODE "  *", "  1.", etc. */
+/* SYNTAX "  *", "  1.", etc. */
 
 ul, ol {
   margin-top: 0px;
@@ -28,7 +28,7 @@ ul, ol {
 
 /** Header related ***********************************************************/
 
-/* CODE ==, ===, ====, =====, ======, ======= */
+/* SYNTAX ==, ===, ====, =====, ======, ======= */
 
 FORM, H1, H2, H3, H4, H5, H6 {
   margin: 0px;
@@ -49,10 +49,10 @@ H4 { font-family: Arial;   font-size: 16px; margin-top:15px; margin-bottom:5px; 
 H5 { font-family: Arial;   font-size: 14px; margin-top:10px; margin-bottom:5px; border-bottom:1px #bbbbbb solid }
 H6 { font-family: Arial;   font-size: 12px; }
 
-/* Centered text: CODE %%(wacko wrapper=text wrapper_align=center)text%% */
+/* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
 .center{  text-align: center;}
 
-/* Indent text: CODE "  ", "  1.", etc. */
+/* Indent text: SYNTAX "  ", "  1.", etc. */
 .indent {  margin-left: 40px;}
 
 /** Revisions-related *********************************************************/
@@ -81,7 +81,7 @@ del.diff {
 	background-color: #fee;
 }
 
-/* Code areas: CODE %%code%% */
+/* Code areas: SYNTAX %%code%% */
 
 .code {
   background: #FFFFFF;
@@ -97,7 +97,7 @@ del.diff {
 
 /** Table-related ************************************************************/
 
-/* Bordered tables: CODE #|| || Here | there || ||# */
+/* Bordered tables: SYNTAX #|| || Here | there || ||# */
 table.usertable {
   border: 1px none;
   border-collapse: collapse;
@@ -110,11 +110,11 @@ table.usertable tr td, table.usertable tr th
   padding: 4px;
   vertical-align: top;
 }
-/* 100%-width tables: CODE #| || Here | there || |# */
+/* 100%-width tables: SYNTAX #| || Here | there || |# */
 table.dtable { width:100%; border: 0px none; border-collapse: collapse; }
 table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
 
-/* Inside the table of content: CODE {{toc}} */
+/* Inside the table of content: SYNTAX {{toc}} */
 .toc1 { margin-left:0px; padding-left:0px; font-weight:bold; list-style-type:none;  }
 .toc2 { margin-left:0px; padding-left:15px; list-style-type:none;  }
 .toc3 { margin-left:0px; padding-left:30px; list-style-type:none;  }
@@ -124,7 +124,7 @@ table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #9999
 
 /** Chat-related *************************************************************/
 
-/* CODE %%(micq)%%, %%(icq_l)%%, %%(icq_m)%% */
+/* SYNTAX %%(micq)%%, %%(icq_l)%%, %%(icq_m)%% */
 
 .micq1 { padding:2px; vertical-align:top; white-space: nowrap; font-weight: bold  }
 .micq2 { padding:2px; vertical-align:top; white-space: nowrap; font:10px tahoma, arial }
@@ -139,7 +139,7 @@ table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #9999
 .email-odd {color:#800000}
 .email-even {color:#808000}
 
-/* Quotes: CODE <[text]> */
+/* Quotes: SYNTAX <[text]> */
 blockquote {  border-left:#cccccc 3px solid; padding:5px; color: #999999; }
 blockquote p {  padding:0px;  margin: 5px 0px; }
 
@@ -160,7 +160,7 @@ p.auto { margin:0px; padding:0px; font-size:100%; }
 
 /** Text highlighter-related *************************************************/
 
-/* CODE %%(hl xyz)%% */
+/* SYNTAX %%(hl xyz)%% */
 
 .hl-main {font-family: monospace; font-size:13px;}
 .hl-gutter { background-color: #CCCCCC; padding-right: 10px;
@@ -185,7 +185,7 @@ p.auto { margin:0px; padding:0px; font-size:100%; }
 
 /** Wrapper-related **********************************************************/
 
-/* CODE %%(wrapper xyz)%% */
+/* SYNTAX %%(wrapper xyz)%% */
 
 div.action           {
 	margin:2px;
@@ -194,20 +194,20 @@ div.action           {
 }
 div.action-content   { padding:10px 10px 25px 10px; }
 
-/* Important colored text: CODE !!(red)text!! */
+/* Important colored text: SYNTAX !!(red)text!! */
 .cl-red   {color: #CC0000;}
 .cl-green {color: #008000;}
 .cl-blue  {color: #0000CC;}
 
-/* Fixed width text: CODE ##monospace## */
+/* Fixed width text: SYNTAX ##monospace## */
 tt { color:#666600; background:#ffffcc; padding: 0 2px }
 
-/* Important text: CODE !!text!! */
+/* Important text: SYNTAX !!text!! */
 .cite {color:#ff0000;font-style:normal;}
 
-/* underline text: CODE __text__ */
+/* underline text: SYNTAX __text__ */
 .underline { text-decoration:underline; }
 
-/* Marked text: CODE ??text?? */
+/* Marked text: SYNTAX ??text?? */
 .mark { color: #000; background:#ffaaaa; }
 

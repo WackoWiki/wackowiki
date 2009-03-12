@@ -196,13 +196,13 @@ white-space: nowrap;
   font-size: 11px;
 }
 
-/* Included pages: CODE {{include file="xyz"}} */
+/* Included pages: SYNTAX {{include file="xyz"}} */
 .include {
   background-color: #FCFCFC;
   padding: 8px;
 }
 
-/* Outgoing hyperlinks: CODE ((http://slashdot.org nerds)) */
+/* Outgoing hyperlinks: SYNTAX ((http://slashdot.org nerds)) */
 
 .outerlink { color: #990000;}
 

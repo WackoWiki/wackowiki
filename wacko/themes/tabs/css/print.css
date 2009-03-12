@@ -32,7 +32,7 @@ BODY, TD, P, LI, #page { font-family: Georgia, Verdana; font-size:95% }
 cite {color:#888800;font-style:normal;}
 .cite {color:#ff0000;font-style:normal;}
 
-/* underline text: CODE __text__ */
+/* underline text: SYNTAX __text__ */
 .underline { text-decoration:underline; }
 
 .mark { color: #000; border:1px solid #000; background: #ddd; }

@@ -71,7 +71,7 @@ pre {
 
 /** Simple formating-related *************************************************/
 
-/* Quotes: CODE <[text]> */
+/* Quotes: SYNTAX <[text]> */
 blockquote {
 	border-bottom:		solid 1px #000;
 	border-left:		solid 3px #000;
@@ -82,40 +82,40 @@ blockquote {
 	padding:		3px;
 }
 
-/* Centered text: CODE %%(wacko wrapper=text wrapper_align=center)text%% */
+/* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
 .center {
 	text-align:		center;
 }
 
-/* Important text: CODE !!text!! */
+/* Important text: SYNTAX !!text!! */
 .cite {
 	font-weight:		900;
 }
 
-/* underline text: CODE __text__ */
+/* underline text: SYNTAX __text__ */
 .underline { text-decoration:underline; }
 
-/* Definitions: CODE (?icq i seek you?) */
+/* Definitions: SYNTAX (?icq i seek you?) */
 dfn {
 	font-style:		normal;
 }
 
-/* Indent text: CODE "  ", "  1.", etc. */
+/* Indent text: SYNTAX "  ", "  1.", etc. */
 .indent {
 	margin-left:		40px;
 }
 
-/* Marked text: CODE ??text?? */
+/* Marked text: SYNTAX ??text?? */
 .mark {
 	font-style:		italic;
 }
 
-/* Strike through text: CODE --text-- */
+/* Strike through text: SYNTAX --text-- */
 del {
 	color:			#000;
 }
 
-/* Small text: CODE ++text++ */
+/* Small text: SYNTAX ++text++ */
 small {
 	font-size:		0.85em;
 }
@@ -125,7 +125,7 @@ sub {
 	margin:			0 2px;
 }
 
-/* Footprints: CODE [[#*]] */
+/* Footprints: SYNTAX [[#*]] */
 sup {
 	font-size:		0.85em;
 	margin:			0 2px;
@@ -135,7 +135,7 @@ sup a:hover {
 	border:			0;
 }
 
-/* Fixed width text: CODE ##monospace## */
+/* Fixed width text: SYNTAX ##monospace## */
 tt {
 	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
 	font-size:		0.9em;
@@ -145,9 +145,9 @@ tt {
 
 /** Advanced formating and action-related ************************************/
 
-/* Hyperlinks: CODE ((HomePage)) */
+/* Hyperlinks: SYNTAX ((HomePage)) */
 
-/* Code areas: CODE %%code%% */
+/* Code areas: SYNTAX %%code%% */
 code {
 	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
 	font-size:		0.9em;
@@ -159,13 +159,13 @@ code {
 	padding:		5px;
 }
 
-/* Fieldsets: CODE {{toc}}, {{backlinks}} */
+/* Fieldsets: SYNTAX {{toc}}, {{backlinks}} */
 #page fieldset,
 .preview fieldset {
 	border:			none;
 }
 
-/* Inside the table of content: CODE {{toc}} */
+/* Inside the table of content: SYNTAX {{toc}} */
 fieldset .toc1 {
 	margin-left:		5px;
 }
@@ -186,7 +186,7 @@ fieldset .toc6 {
 }
 
 
-/* Horizontal rulers: CODE --- */
+/* Horizontal rulers: SYNTAX --- */
 hr {
 	background-color:	#000; /* Mozilla 1.4 */
 	border:			#000; /* Opera 7.11 */
@@ -194,7 +194,7 @@ hr {
 	height:			1px;
 }
 
-/* Included pages: CODE {{include file="xyz"}} */
+/* Included pages: SYNTAX {{include file="xyz"}} */
 .include {
 	color:			#000;
 }
@@ -213,7 +213,7 @@ hr {
 
 /** Header related ***********************************************************/
 
-/* CODE ==, ===, ====, =====, ======, ======= */
+/* SYNTAX ==, ===, ====, =====, ======, ======= */
 
 h1, h2, h3, h4, h5, h6 {
 	font-family:		Verdana, "Luxi Sans", "Trebuchet MS", sans, sans-serif;
@@ -252,7 +252,7 @@ h6 {
 
 /** Table-related ************************************************************/
 
-/* 100%-width tables: CODE #| || Here | there || |# */
+/* 100%-width tables: SYNTAX #| || Here | there || |# */
 .dtable {
 	border-collapse:	collapse;
 	width:			100%;
@@ -261,7 +261,7 @@ h6 {
 	padding:		5px;
 }
 
-/* Bordered tables: CODE #|| || Here | there || ||# */
+/* Bordered tables: SYNTAX #|| || Here | there || ||# */
 .usertable {
 	border-collapse:	collapse;
 }
@@ -276,7 +276,7 @@ h6 {
 
 /** List-related *************************************************************/
 
-/* CODE "  *", "  1.", etc. */
+/* SYNTAX "  *", "  1.", etc. */
 /* List possibilites */
 ol, ul {
 	margin-bottom:		0;
@@ -289,7 +289,7 @@ ol, ul {
 
 /** Wrapper-related **********************************************************/
 
-/* CODE %%(wrapper xyz)%% */
+/* SYNTAX %%(wrapper xyz)%% */
 
 div .action {
 	border:			1px dotted #000;
@@ -304,7 +304,7 @@ div .action-content {
 
 /** Text highlighter-related *************************************************/
 
-/* CODE %%(hl xyz)%% */
+/* SYNTAX %%(hl xyz)%% */
 
 .hl-main {
 }
@@ -331,7 +331,7 @@ div .action-content {
 
 /** Chat-related *************************************************************/
 
-/* CODE %%(micq)%%, %%(icq_l)%%, %%(icq_m)%% */
+/* SYNTAX %%(micq)%%, %%(icq_l)%%, %%(icq_m)%% */
 
 .micq1, .micq2, .micq3 {
 	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
