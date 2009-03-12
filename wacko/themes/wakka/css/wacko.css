@@ -378,13 +378,13 @@ H6 {
 	color: #880000;
 }
 .code {
-	background: #FFFFFF;
-	border: solid #888888 2px;
-	font-family: "Courier New";
-	color: black;
-	font-size: 10pt;
-	width: 80%;
-	padding: 3px;
+  background: #FFFFFF;
+  border: 1px #888888 solid;
+  font-family: "Courier New";
+  font-size: 10pt;
+  margin:1em 1.75em;
+  overflow:auto;
+  padding:0.25em;
 }
 .notes {
 	color: #888800;

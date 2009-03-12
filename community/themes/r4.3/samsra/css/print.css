@@ -54,12 +54,12 @@ table.dtable { width:100%; border: 0px none; border-collapse: collapse; }
 table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
 .code {
   background: #FFFFFF;
-  border: solid #888888 2px;
+  border: 1px #888888 solid;
   font-family: "Courier New";
-  color: black;
   font-size: 10pt;
-  width: 98%;
-  padding: 3px;
+  margin:1em 1.75em;
+  overflow:auto;
+  padding:0.25em;
 }
 .micq1 { padding:2px; vertical-align:top; white-space: nowrap; font-weight: bold; }
 .micq2 { padding:2px; vertical-align:top; white-space: nowrap; font:10px tahoma, arial }

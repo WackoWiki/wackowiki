@@ -52,13 +52,13 @@ color:#C00;
 }
 
 .code {
-background:#FFF;
-border:solid #888 2px;
-color:#000;
-font-family:"Courier New", Courier, mono;
-font-size:10pt;
-padding:3px;
-width:80%;
+  background: #FFFFFF;
+  border: 1px #888888 solid;
+  font-family: "Courier New";
+  font-size: 10pt;
+  margin:1em 1.75em;
+  overflow:auto;
+  padding:0.25em;
 }
 
 .commentform form {

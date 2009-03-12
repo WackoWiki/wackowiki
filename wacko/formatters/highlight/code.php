@@ -8,5 +8,5 @@ if ($this->method != "print")
 else
 	$wrap = "on";
 
-print("<!--notypo--><textarea class=\"code\" rows=\"".$num."\" wrap=\"".$wrap."\" readonly=\"readonly\">".htmlspecialchars($text)."</textarea><!--/notypo-->");
+print("<!--notypo--><pre class=\"code\">".htmlspecialchars($text)."</pre><!--/notypo-->");
 ?>
