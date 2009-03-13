@@ -119,18 +119,18 @@ if ($this->HasAccess("read")) {
 
 					if ($letter=='d' || $letter=='c') {// deleted word
 						$sideA->copy_whitespace($output);
-						$output .="¤¤";
+						$output .="<!--markup:1:begin-->";
 						$sideA->copy_word($output);
 						$sideA->copy_until_ordinal($argument[1],$output);
-						$output .="¤¤";
+						$output .="<!--markup:1:end-->";
 					}
 
 					if ($letter == 'a' || $letter == 'c') {// inserted word
 						$sideB->copy_whitespace($output);
-						$output .="££";
+						$output .="<!--markup:2:begin-->";
 						$sideB->copy_word($output);
 						$sideB->copy_until_ordinal($argument[3],$output);
-						$output .="££";
+						$output .="<!--markup:2:end-->";
 					}
 				}
 			}
