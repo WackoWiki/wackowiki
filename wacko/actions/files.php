@@ -83,7 +83,7 @@ if ($can_view)
 <?php
 	}
 
-	foreach( $files as $file )
+	foreach($files as $file)
 	{
 		$this->filesCache[$file["page_id"]][$file["filename"]] = &$file;
 
@@ -138,6 +138,7 @@ if ($can_view)
 		</table>
 <?php
 	}
+
 	if (!$nomark) echo "</fieldset>\n";
 }
 else

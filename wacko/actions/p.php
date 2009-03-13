@@ -1,10 +1,10 @@
 <?php
 /*
- {{P style="BEFORE|after|left|right"                 // table-type "left/right" don't implemented yet
- // styles can be found in /classes/wacko.php
- name="absolute|toc-relative|DOCUMENT-RELATIVE"  // "toc-relative" don't implemented yet
- }}
- */
+	{{P style="BEFORE|after|left|right"                 // table-type "left/right" don't implemented yet
+	// styles can be found in /classes/wacko.php
+	name="absolute|toc-relative|DOCUMENT-RELATIVE"  // "toc-relative" don't implemented yet
+	}}
+*/
 $page = ""; $ppage="";
 $context = $this->tag;
 $_page = $this->page;
@@ -25,7 +25,8 @@ if (!$style) $style = "before";
 		$numbers = array(); $depth = 0; $pnum=0;
 		for($i=0;$i<$toc_len;$i++)
 		if ($toc[$i][2] > 66666)
-		{ // normalizing submersion depth
+		{ 
+			// normalizing submersion depth
 			$pnum++;
 			if ($name == "document-relative") $num = $pnum;
 			else                              $num = str_replace("-", "&#0150;&sect;",
