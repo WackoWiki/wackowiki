@@ -10,7 +10,7 @@ $parser = &new WackoFormatter( $this );
 $this->headerCount = 0;
 
 $text = preg_replace_callback($parser->NOTLONGREGEXP, array( &$parser, "WackoPreprocess"), $text);
-$texts = explode("\xa5\xa5", $text);
+$texts = explode("<!--escaped-->", $text);
 $wtext = $texts[0];
 
 for ($i = 2; $i < count($texts); $i = $i + 2)

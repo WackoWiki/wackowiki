@@ -108,7 +108,7 @@ class typografica
 		//   case 2, simple (just a tag) <abcz>
 		//   case 3, a bit difficult     <abcz href="abcz">
 		//   case 4, simple (just a tag) <abcz />
-		//   case 5, wakka               \xA2\xA2...==
+		//   case 5, wakka               <!--link:begin--> (was: \xA2\xA2)...==
 		//   most difficult case - tag parameter contains ">" character
 		//   it's here: <abcz href="abcz>">
 		//  how does stripping work? let's assume a special character. Yes-yes, special character
@@ -124,7 +124,7 @@ class typografica
 											"=((\'[^\']*\')|(\"[^\"]*\")|([0-9@\-_a-z:\/?&=\.]+))". //
 											")?".
 										")?".
-									")*\/?>|\xA2\xA2[^\n]*?==/i";
+									")*\/?>|<\!--link:begin-->[^\n]*?==/i";
 			$total = preg_match_all($re, $data, $matches);
 			$data = preg_replace($re, "\200", $data);
 

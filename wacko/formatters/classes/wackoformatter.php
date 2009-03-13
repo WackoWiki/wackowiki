@@ -174,7 +174,7 @@ class WackoFormatter
 
 		$this->LONGREGEXP =
 			"/(".
-			"\xa5\xa5.*?\xa5\xa5|".($this->object->GetConfigValue("allow_rawhtml") == 1
+			"<!--escaped-->.*?<!--escaped-->|".($this->object->GetConfigValue("allow_rawhtml") == 1
 				? "\<\#.*?\#\>|"
 				: "").
 			"\(\?(\S+?)([ \t]+([^\n]+?))?\?\)|".
@@ -189,7 +189,7 @@ class WackoFormatter
 			"\b[[:alpha:]]+:\/\/\S+|mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\_\.]+|\?\?\S\?\?|\?\?(\S.*?\S)\?\?|".
 			"\\\\\\\\[".$object->language["ALPHANUM_P"]."\-\_\\\!\.]+|".
 			"\*\*[^\n]*?\*\*|\#\#[^\n]*?\#\#|\¹\¹[^\n]*?\¹\¹|\'\'.*?\'\'|\!\!\S\!\!|\!\!(\S.*?\S)\!\!|__[^\n]*?__|".
-			"\xA4\xA4\S\xA4\xA4|\xA3\xA3\S\xA3\xA3|\xA4\xA4(\S.*?\S)\xA4\xA4|\xA3\xA3(\S.*?\S)\xA3\xA3|".
+			"<!--markup:1:begin-->\S<!--markup:1:end-->|<!--markup:2:begin-->\S<!--markup:2:end-->|<!--markup:1:begin-->(\S.*?\S)<!--markup:1:end-->|<!--markup:2:begin-->(\S.*?\S)<!--markup:2:end-->|".
 			"\#\|\||\#\||\|\|\#|\|\#|\|\|.*?\|\||\*\|.*?\|\*|".
 			"<|>|\/\/[^\n]*?(?<!http:|https:|ftp:|file:|nntp:)\/\/|".
 			"\n[ \t]*=======.*?={2,7}|\n[ \t]*======.*?={2,7}|\n[ \t]*=====.*?={2,7}|\n[ \t]*====.*?={2,7}|\n[ \t]*===.*?={2,7}|\n[ \t]*==.*?={2,7}|".
@@ -215,13 +215,13 @@ class WackoFormatter
 			"~([^ \t\n]+)|".
 			"\"\".*?\"\"|".
 			"\{\{[^\n]*?\}\}|".
-			"\xa5\xa5.*?\xa5\xa5".
+			"<!--escaped-->.*?<!--escaped-->".
 			")/sm";
 
 		$this->MOREREGEXP =
 			"/(>>.*?<<|".
 			"~([^ \t\n]+)|".
-			"\xa5\xa5.*?\xa5\xa5".
+			"<!--escaped-->.*?<!--escaped-->".
 			")/sm";
 	}
 
@@ -254,14 +254,14 @@ class WackoFormatter
 				return "~~".$this->WackoPreprocess(array(0,substr($thing,2)));
 
 		// escaped text
-		if (preg_match("/^\xa5\xa5(.*)\xa5\xa5$/s", $thing, $matches))
+		if (preg_match("/^<!--escaped-->(.*)<!--escaped-->$/s", $thing, $matches))
 		{
 			return $matches[1];
 		}
 		// escaped text
 		else if (preg_match("/^\"\"(.*)\"\"$/s", $thing, $matches))
 		{
-			return "\xa5\xa5<!--notypo-->".str_replace("\n","<br />",htmlspecialchars($matches[1]))."<!--/notypo-->\xa5\xa5";
+			return "<!--escaped--><!--notypo-->".str_replace("\n","<br />",htmlspecialchars($matches[1]))."<!--/notypo--><!--escaped-->";
 		}
 		// code text
 		else if (preg_match("/^\%\%(.*)\%\%$/s", $thing, $matches))
@@ -319,13 +319,13 @@ class WackoFormatter
 
 			$output .= $res;
 
-			return "\xa5\xa5".$output."\xa5\xa5";
+			return "<!--escaped-->".$output."<!--escaped-->";
 		}
 		// actions
 		else if (preg_match("/^\{\{(.*?)\}\}$/s", $thing, $matches))
 		{
 			// used in paragrafica, too
-			return "\xa5\xa5<!--notypo-->\xA1\xA1".$matches[1]."\xA1\xA1<!--/notypo-->\xa5\xa5";
+			return "<!--escaped--><!--notypo--><!--action:begin-->".$matches[1]."<!--action:end--><!--/notypo--><!--escaped-->";
 		}
 
 		// if we reach this point, it must have been an accident
@@ -342,14 +342,14 @@ class WackoFormatter
 		if ($thing{1} == "~") return "~~".$this->WackoMiddleprocess( array(0,substr($thing,2)) );
 
 		// escaped text
-		if (preg_match("/^\xa5\xa5(.*)\xa5\xa5$/s", $thing, $matches))
+		if (preg_match("/^<!--escaped-->(.*)<!--escaped-->$/s", $thing, $matches))
 		{
 			return $matches[1];
 		}
 		// centered text
 		else if (preg_match("/^>>(.*)<<$/s", $thing, $matches))
 		{
-			return "\xa5\xa5<div class=\"center\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</div>\xa5\xa5";
+			return "<!--escaped--><div class=\"center\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</div><!--escaped-->";
 		}
 
 		return $thing;
@@ -376,7 +376,7 @@ class WackoFormatter
 			return "&gt;";
 		}
 		// escaped text
-		else if (preg_match("/^\xa5\xa5(.*)\xa5\xa5$/s", $thing, $matches))
+		else if (preg_match("/^<!--escaped-->(.*)<!--escaped-->$/s", $thing, $matches))
 		{
 			return $matches[1];
 		}
@@ -532,13 +532,13 @@ class WackoFormatter
 			return $output;
 		}
 		// Deleted
-		else if (preg_match("/^\xA4\xA4((\S.*?\S)|(\S))\xA4\xA4$/s", $thing, $matches))
+		else if (preg_match("/^<!--markup:1:begin-->((\S.*?\S)|(\S))<!--markup:1:end-->$/s", $thing, $matches))
 		{
 			$this->br = 0;
 			return "<del class=\"diff\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</del>";
 		}
 		// Inserted
-		else if (preg_match("/^\xA3\xA3((\S.*?\S)|(\S))\xA3\xA3$/s", $thing, $matches))
+		else if (preg_match("/^<!--markup:2:begin-->((\S.*?\S)|(\S))<!--markup:2:end-->$/s", $thing, $matches))
 		{
 			$this->br = 0;
 			return "<ins class=\"diff\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</ins>";
@@ -711,7 +711,7 @@ class WackoFormatter
 				if ($text == "")
 					$text = $def;
 
-				$text = preg_replace("/\xA4\xA4|__|\[\[|\(\(/","",$text);
+				$text = preg_replace("/<!--markup:1:[\w]+-->|__|\[\[|\(\(/","",$text);
 
 				return "<dfn title=\"".htmlspecialchars($text)."\">".$def."</dfn>";
 			}
@@ -776,7 +776,7 @@ class WackoFormatter
 				}
 				else
 				{
-					if ($url != ($url = (preg_replace("/\xA4\xA4|\xA3\xA3|\[\[|\(\(/", "", $url))))
+					if ($url != ($url = (preg_replace("/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/", "", $url))))
 					{
 						$result = "</span>";
 					}
@@ -796,7 +796,7 @@ class WackoFormatter
 					if (!$text) $text = $url;
 
 					$url = str_replace( " ", "", $url );
-					$text = preg_replace("/\xA4\xA4|\xA3\xA3|\[\[|\(\(/", "", $text);
+					$text = preg_replace("/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/", "", $text);
 
 					return $result.$wacko->PreLink($url, $text);
 				}
