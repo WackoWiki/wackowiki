@@ -194,6 +194,7 @@ if (!function_exists('print_cluster_tree'))
 	}
 }
 
+// header
 if ($root){
 	if (!$nomark){
 		$title = $this->GetTranslation("TreeClusterTitle");
@@ -270,6 +271,7 @@ else
 	print($empty_string."<br />");
 }
 
+// footer
 if (!$nomark) echo "</fieldset>\n";
 
 ?>

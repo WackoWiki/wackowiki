@@ -6,7 +6,7 @@ else
 $tag = $this->getPageTag();
 if ($this->UserIsOwner($tag)){
 
-	$watchers = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."pagewatches WHERE tag = '".quote($this->dblink, $tag)."'");
+	$watchers = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."pagewatches WHERE tag = '".quote($this->dblink, $tag)."' GROUP BY tag");
 	if ($watchers){
 
 		$title = $this->GetTranslation("Watchers");

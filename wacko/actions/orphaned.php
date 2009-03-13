@@ -1,7 +1,7 @@
 <?php
 
-if (!isset($root)) $root = $this->UnwrapLink($vars[0]);
 if (!isset($root)) $root = $this->page["tag"];
+else $root = $this->UnwrapLink($root);
 
 if ($pages = $this->LoadOrphanedPages($root))
 {

@@ -1,9 +1,9 @@
 <?php
 
-if ($vars[0])
-$tag = $this->UnwrapLink( $vars[0] );
+if ($page)
+	$tag = $this->UnwrapLink($page);
 else
-$tag = $this->getPageTag();
+	$tag = $this->getPageTag();
 
 if ($pages = $this->LoadPagesLinkingTo($tag))
 {
