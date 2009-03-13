@@ -18,13 +18,13 @@ class post_wacko
 		$wacko = &$this->object;
 
 		// forced links ((link link == desc desc))
-		if (preg_match("/^\xA2\xA2([^\n]+)==([^\n]*)\xAF\xAF$/", $thing, $matches))
+		if (preg_match("/^<!--link:begin-->([^\n]+)==([^\n]*)<!--link:end-->$/", $thing, $matches))
 		{
 			list (, $url, $text) = $matches;
 			if ($url)
 			{
 				$url = str_replace(" ", "", $url);
-				$text=trim(preg_replace("/\xA4\xA4|__|\[\[|\(\(/","",$text));
+				$text=trim(preg_replace("/<!--markup:1:[\w]+-->|__|\[\[|\(\(/","",$text));
 				if (stristr($text,"@@"))
 				{
 					$t = explode("@@", $text);
@@ -37,7 +37,7 @@ class post_wacko
 			return "";
 		}
 		// actions
-		else if (preg_match("/^\xA1\xA1\s*([^\n]+?)\xA1\xA1$/s", $thing, $matches))
+		else if (preg_match("/^<!--action:begin-->\s*([^\n]+?)<!--action:end-->$/s", $thing, $matches))
 		{
 			if ($matches[1] && (!$this->options["diff"] || in_array(strtolower($matches[1]),$this->actions)))
 			{

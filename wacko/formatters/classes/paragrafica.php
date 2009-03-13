@@ -201,7 +201,7 @@ class paragrafica
                                     "|".
          "(<a name=\"(p[0-9]+-[0-9]+)\"></a>)".                       // 6=id
                                     "|".
-         "\xA1\xA1include\s+[^=]+=([^\xA1 ]+)(\s+notoc=\"?[^0]\"?)?.*?\xA1\xA1". 
+         "<\!--action:begin-->include\s+[^=]+=([^\xA1 ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->". 
 		// {{include xxxx="TAG" notoc="1"}}
                                     "!si", array( &$this, "add_toc_entry" ), $what );
 

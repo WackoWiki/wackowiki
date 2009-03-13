@@ -1287,7 +1287,7 @@ class Wacko
 			if ($_SESSION[$this->config["session_prefix"].'_'."linktracking"] && $track)
 				$this->TrackLinkTo($this->UnwrapLink( $tag ));
 		}
-		return "\xA2\xA2".$tag." ==".($this->format_safe?str_replace(">", "&gt;", str_replace("<", "&lt;", $text)):$text)."\xAF\xAF";
+		return "<!--link:begin-->".$tag." ==".($this->format_safe?str_replace(">", "&gt;", str_replace("<", "&lt;", $text)):$text)."<!--link:end-->";
 	}
 
 	function Link($tag, $method = "", $text = "", $track = 1, $safe=0, $linklang="")
