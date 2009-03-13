@@ -32,12 +32,12 @@ else
 		}
 
 		// cleaning up
-		$strings = preg_replace("/\¡\¡toc[^\¡]*\¡\¡/i","",$strings);
-		$strings = preg_replace("/\¡\¡tableofcontents[^\¡]*\¡\¡/i","",$strings);
-		$strings = preg_replace("/\¡\¡p[^\¡]*\¡\¡/i","",$strings);
-		$strings = preg_replace("/\¡\¡showparagraphs[^\¡]*\¡\¡/i","",$strings);
-		$strings = preg_replace("/\¡\¡redirect[^\¡]*\¡\¡/i","",$strings);
-		$strings = preg_replace("/.*\¡\¡a name=\"?$first_anchor\"?\¡\¡(.*)\¡\¡a name=\"?$last_anchor\"?\¡\¡.*$/is","\$1",$strings);
+		$strings = preg_replace("/<!--action:begin-->toc<!--action:end-->/i", "", $strings);
+		$strings = preg_replace("/<!--action:begin-->tableofcontents<!--action:end-->/i", "", $strings);
+		$strings = preg_replace("/<!--action:begin-->p<!--action:end-->/i", "", $strings);
+		$strings = preg_replace("/<!--action:begin-->showparagraphs<!--action:end-->/i", "", $strings);
+		$strings = preg_replace("/<!--action:begin-->redirect<!--action:end-->/i", "", $strings);
+		$strings = preg_replace("/.*<!--action:begin-->a name=\"?$first_anchor\"?<!--action:end-->(.*)<!--action:begin-->a name=\"?$last_anchor\"?<!--action:end-->.*$/is", "\$1", $strings);
 
 		// header
 		if (($this->GetMethod() != "print") && ($nomark != 1) && ($nomark != 2 || $this->HasAccess("write", $page)))
@@ -60,7 +60,7 @@ else
 			echo "<div class=\"name\">".$this->Link("/".$inc_page['tag'])."&nbsp;&nbsp;::&nbsp;".
                           "<a href=\"".$this->Href("edit", $inc_page['tag'])."\">".$this->GetTranslation("EditIcon")."</a></div></div>";
 		}
-	};
+	}
 }
 
 ?>
