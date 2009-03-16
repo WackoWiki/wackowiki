@@ -4,8 +4,8 @@
 // redirect to show method if page don't exists
 if (!$this->page) $this->Redirect($this->href("show"));
 
-$a = $_GET["a"];
-$b = $_GET["b"];
+	$a = $_GET["a"];
+	$b = $_GET["b"];
 
 // If asked, call original diff
 if ($this->HasAccess("read")) {
@@ -29,7 +29,7 @@ if ($this->HasAccess("read")) {
 			$output .=
 			str_replace("%1", "<a href=\"".$this->href("", "", ($b!=-1?"time=".urlencode($pageA["time"]):""))."\">".$pageA["time"]."</a>",
 			str_replace("%2", "<a href=\"".$this->href("", "", ($a!=-1?"time=".urlencode($pageB["time"]):""))."\">".$pageB["time"]."</a>",
-			str_replace("%3", $this->Link("/".$this->tag),
+			str_replace("%3", $this->ComposeLinkToPage($this->tag, "", "", 0),
 			$this->GetTranslation("Comparison"))))."<br />\n";
 
 			if ($added)
@@ -140,7 +140,7 @@ if ($this->HasAccess("read")) {
 			$out=$this->Format($output);
 			$out = str_replace("%1", "<a href=\"".$this->href("", "", "time=".urlencode($pageB["time"]))."\">".$pageB["time"]."</a>",
 			str_replace("%2", "<a href=\"".$this->href("", "", "time=".urlencode($pageA["time"]))."\">".$pageA["time"]."</a>",
-			str_replace("%3", $this->Link("/".$this->tag),
+			str_replace("%3", $this->ComposeLinkToPage($this->tag, "", "", 0),
 			$this->GetTranslation("Comparison"))))."<br />\n<br />\n".$out;
 			print $out;
 
