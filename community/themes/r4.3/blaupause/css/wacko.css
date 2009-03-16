@@ -297,13 +297,6 @@ border-style:solid none none;
 border-width:1px 0 0;
 }
 
-/* Horizontal rule: SYNTAX ---- */
-hr {
-border-color:#CCCCCC;
-border-style:solid none none;
-border-width:1px 0 0;
-}
-
 .nobr {white-space: nowrap}
 
 H1 { font-size: 23px; color: #ff8200; margin:0ex;
