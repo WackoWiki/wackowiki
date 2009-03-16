@@ -50,9 +50,9 @@ $alter_pages_r3_9 = "ALTER TABLE ".$config2["table_prefix"]."pages ADD lang VARC
 $alter_pages_r3_10 = "ALTER TABLE ".$config2["table_prefix"]."pages ADD description varchar(250) NOT NULL default ''";
 $alter_pages_r3_11 = "ALTER TABLE ".$config2["table_prefix"]."pages ADD keywords varchar(250) BINARY NOT NULL default ''";
 $alter_pages_r3_12 = "ALTER TABLE ".$config2["table_prefix"]."pages ADD body_toc text NOT NULL default '' AFTER body_r";
-$alter_pages_r4_3 = "ALTER TABLE ".$config2["table_prefix"]."pages MODIFY COLUMN tag VARCHAR(250) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
-$alter_pages_r4_3_2 = "ALTER TABLE ".$config2["table_prefix"]."pages MODIFY COLUMN body MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
-$alter_pages_r4_3_3 = "ALTER TABLE ".$config2["table_prefix"]."pages MODIFY COLUMN body_r MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
+$alter_pages_r4_2 = "ALTER TABLE ".$config2["table_prefix"]."pages MODIFY COLUMN tag VARCHAR(250) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
+$alter_pages_r4_2_2 = "ALTER TABLE ".$config2["table_prefix"]."pages MODIFY COLUMN body MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
+$alter_pages_r4_2_3 = "ALTER TABLE ".$config2["table_prefix"]."pages MODIFY COLUMN body_r MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 
 
 $update_pages_r3_1 = "UPDATE ".$config2["table_prefix"]."pages SET body_r=''";
@@ -84,7 +84,7 @@ $alter_revisions_r3_3 = "ALTER TABLE ".$config2["table_prefix"]."revisions ADD s
 $alter_revisions_r3_4 = "ALTER TABLE ".$config2["table_prefix"]."revisions ADD lang VARCHAR(10) NOT NULL";
 $alter_revisions_r3_5 = "ALTER TABLE ".$config2["table_prefix"]."revisions ADD description VARCHAR(250) NOT NULL default ''";
 $alter_revisions_r3_6 = "ALTER TABLE ".$config2["table_prefix"]."revisions ADD keywords VARCHAR(250) BINARY NOT NULL default ''";
-$alter_revisions_r4_3_2 = "ALTER TABLE ".$config2["table_prefix"]."revisions MODIFY COLUMN body MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
-$alter_revisions_r4_3_3 = "ALTER TABLE ".$config2["table_prefix"]."revisions MODIFY COLUMN body_r MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
+$alter_revisions_r4_2_2 = "ALTER TABLE ".$config2["table_prefix"]."revisions MODIFY COLUMN body MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
+$alter_revisions_r4_2_3 = "ALTER TABLE ".$config2["table_prefix"]."revisions MODIFY COLUMN body_r MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 
 ?>
