@@ -15,6 +15,13 @@ P { margin: 0px 0px 3px 0px; padding:0px }
 .Toc1 A, .Toc2 A, .Toc3 A, .Toc4 A, .Toc5 A, .Toc6 A
  { text-decoration:none; color:#000000 }
 
+/* Horizontal rule: SYNTAX ---- */
+hr {
+border-color:#CCCCCC;
+border-style:solid none none;
+border-width:1px 0 0;
+}
+
 .nobr {white-space: nowrap}
 
 div.action           { margin:2px; background: #eeeeee }

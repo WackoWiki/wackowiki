@@ -323,6 +323,14 @@ del.diff {
 	color:#c00;
 	text-decoration: line-through;
 }
+
+/* Horizontal rule: SYNTAX ---- */
+hr {
+border-color:#CCCCCC;
+border-style:solid none none;
+border-width:1px 0 0;
+}
+
 .nobr {
 	white-space: nowrap
 }

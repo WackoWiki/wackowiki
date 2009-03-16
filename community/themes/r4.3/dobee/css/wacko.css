@@ -260,6 +260,13 @@ width:0;
 .hl-number { color: #007F00; }
 .hl-inlinetags { color: #FF0000; }
 
+/* Horizontal rule: SYNTAX ---- */
+hr {
+border-color:#CCCCCC;
+border-style:solid none none;
+border-width:1px 0 0;
+}
+
 .nobr {white-space: nowrap}
 
 div.action           { margin:2px; background: #eeeeee }

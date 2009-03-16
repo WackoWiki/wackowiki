@@ -62,6 +62,13 @@ table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #9999
 .micq2 { padding:2px; vertical-align:top; white-space: nowrap; font:10px tahoma, arial }
 .micq3 { padding:2px; vertical-align:top; width:100% }
 
+/* Horizontal rule: SYNTAX ---- */
+hr {
+border-color:#CCCCCC;
+border-style:solid none none;
+border-width:1px 0 0;
+}
+
 .nobr {white-space: nowrap}
 
 div.action           { margin:2px; background: #eeeeee }
