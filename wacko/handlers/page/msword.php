@@ -1,5 +1,5 @@
 <div id="page">
-  <?php
+<?php
 if ($this->HasAccess("read"))
 {
 	if (!$this->page)

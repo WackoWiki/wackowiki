@@ -285,7 +285,7 @@ WikiEdit.prototype.keyDown = function (e) {
   if (!this.enabled) return;
 
   if (!e) var e = window.event;
-  
+
   var l, q, l1, re, tr, str, t, tr2, tr1, r1, re, q, e;
   var justenter = false;
   var wasEvent = remundo = res = false;
@@ -506,7 +506,7 @@ WikiEdit.prototype.keyDown = function (e) {
 
   if (res)
   {
-    
+
     this.area.focus();
     if (isMZ || isO8) {
      this.undotext=undotext;
@@ -554,12 +554,12 @@ WikiEdit.prototype.setAreaContent = function (str)
   l = q[1].length;
 
   if (isO8) l = l + q[1].split('\n').length - 1;
-    
+
   q = str.match(new RegExp(this.begin+"((.|\n)*)"+this.end));
   l1 = q[1].length;
 
   if (isO8) l1 = l1 + q[1].split('\n').length - 1;  
-  
+
   str = str.replace(this.rbegin, "");
   str = str.replace(this.rend, "");
   t.value = str;
