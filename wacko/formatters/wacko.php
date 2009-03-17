@@ -5,7 +5,7 @@ $this->UseClass("wackoformatter", "formatters/classes/");
 $text = str_replace("\r", "", $text);
 $text = "\177\n".$text."\n";
 
-$parser = &new WackoFormatter( $this );
+$parser = &new WackoFormatter($this);
 
 $this->headerCount = 0;
 

@@ -24,7 +24,7 @@ class post_wacko
 			if ($url)
 			{
 				$url = str_replace(" ", "", $url);
-				$text=trim(preg_replace("/<!--markup:1:[\w]+-->|__|\[\[|\(\(/","",$text));
+				$text = trim(preg_replace("/<!--markup:1:[\w]+-->|__|\[\[|\(\(/","",$text));
 				if (stristr($text,"@@"))
 				{
 					$t = explode("@@", $text);
@@ -33,8 +33,26 @@ class post_wacko
 				}
 				return $wacko->Link($url, "", $text, 1, 1, $lang);
 			}
+			else return '';
+		}
+
+		// image link
+		else if (preg_match("/^<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->$/", $thing, $matches))
+		{
+			list ( , $url, $img) = $matches;
+			if ($url && $img)
+			{
+				$url	= str_replace(' ', '', $url);
+				$url	= $wacko->Link($url, '', '', 1, 1);
+				if (!$url = preg_replace('/.*href="(.*?)".*|.*src="(.*?)".*/', '\\1\\2', $url)) return $url;
+				$img	= str_replace(' ', '', $img);
+				$img	= trim(preg_replace("/<!--imgprelink:[\w]+-->|__|\[\*\[|\(\*\(/", '', $img));
+				$img	= $wacko->Link($img, '', '', 1, 1);
+				
+				return '<a href="'.$url.'">'.$img.'</a>';
+			}
 			else
-			return "";
+				return "";
 		}
 		// actions
 		else if (preg_match("/^<!--action:begin-->\s*([^\n]+?)<!--action:end-->$/s", $thing, $matches))
@@ -52,12 +70,13 @@ class post_wacko
 				{
 					$action = substr( $matches[1], 0, $sep );
 					$p = " ".substr( $matches[1], $sep )." ";
-					$paramcount = preg_match_all( "/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/", $p,
-					$matches, PREG_SET_ORDER );
-					$params = array();  $c=0;
+					$paramcount = preg_match_all( "/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/", $p, $matches, PREG_SET_ORDER );
+					$params = array();
+					$c = 0;
+
 					foreach( $matches as $m )
 					{
-						$value = $m[3]?($m[5]?$m[6]:$m[7]):"1";
+						$value = $m[3] ? ($m[5] ? $m[6] : $m[7]) : "1";
 						$params[$c] = $value;
 						$params[ $m[2] ] = $value;
 						$c++;
@@ -66,9 +85,9 @@ class post_wacko
 				return $wacko->Action($action, $params);
 			}
 			else if ($this->options["diff"])
-			return "{{".$matches[1]."}}";
+				return "{{".$matches[1]."}}";
 			else
-			return "{{}}";
+				return "{{}}";
 		}
 		// if we reach this point, it must have been an accident.
 		return $thing;

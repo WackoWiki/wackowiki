@@ -180,15 +180,14 @@ class WackoFormatter
 			"\(\?(\S+?)([ \t]+([^\n]+?))?\?\)|".
 			($this->object->GetConfigValue("disable_bracketslinks") == 1
 				? ""
-				: "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)|"
-			).
-			"\^\^\S*?\^\^|vv\S*?vv|".
+				: "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)|\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]|\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)|").
 			"\n[ \t]*>+[^\n]*|".
 			"<\[.*?\]>|".
 			"\+\+\S\+\+|\+\+(\S[^\n]*?\S)\+\+|".
 			"\b[[:alpha:]]+:\/\/\S+|mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\_\.]+|\?\?\S\?\?|\?\?(\S.*?\S)\?\?|".
 			"\\\\\\\\[".$object->language["ALPHANUM_P"]."\-\_\\\!\.]+|".
 			"\*\*[^\n]*?\*\*|\#\#[^\n]*?\#\#|\¹\¹[^\n]*?\¹\¹|\'\'.*?\'\'|\!\!\S\!\!|\!\!(\S.*?\S)\!\!|__[^\n]*?__|".
+			"\^\^\S*?\^\^|vv\S*?vv|".
 			"<!--markup:1:begin-->\S<!--markup:1:end-->|<!--markup:2:begin-->\S<!--markup:2:end-->|<!--markup:1:begin-->(\S.*?\S)<!--markup:1:end-->|<!--markup:2:begin-->(\S.*?\S)<!--markup:2:end-->|".
 			"\#\|\||\#\||\|\|\#|\|\#|\|\|.*?\|\||\*\|.*?\|\*|".
 			"<|>|\/\/[^\n]*?(?<!http:|https:|ftp:|file:|nntp:)\/\/|".
@@ -251,7 +250,7 @@ class WackoFormatter
 
 		if ($thing{0} == "~")
 			if ($thing{1} == "~") 
-				return "~~".$this->WackoPreprocess(array(0,substr($thing,2)));
+				return "~~".$this->WackoPreprocess(array(0, substr($thing, 2)));
 
 		// escaped text
 		if (preg_match("/^<!--escaped-->(.*)<!--escaped-->$/s", $thing, $matches))
@@ -284,9 +283,9 @@ class WackoFormatter
 					}
 					else
 					{
-						$formatter = substr( $matches[1], 0, $sep );
-						$p = " ".substr( $matches[1], $sep )." ";
-						$paramcount = preg_match_all( "/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/", $p, $matches, PREG_SET_ORDER );
+						$formatter = substr($matches[1], 0, $sep);
+						$p = " ".substr($matches[1], $sep)." ";
+						$paramcount = preg_match_all("/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/", $p, $matches, PREG_SET_ORDER);
 						$params = array();
 						$c = 0;
 
@@ -295,7 +294,7 @@ class WackoFormatter
 							$value = $m[3] ? ($m[5] ? $m[6] : $m[7]) : "1";
 							$params[$c] = $value;
 							$params[ $m[2] ] = $value;
-							if ($c == 0) 
+							if ($c == 0)
 								$params["_default"] = $m[2];
 							$c++;
 						}
@@ -304,9 +303,9 @@ class WackoFormatter
 			}
 			$formatter = strtolower($formatter);
 
-			if ($formatter=="\xF1") $formatter="c";
-			if ($formatter=="c") $formatter="comments";
-			if ($formatter=="") $formatter="code";
+			if ($formatter == "\xF1") $formatter = "c";
+			if ($formatter == "c") $formatter = "comments";
+			if ($formatter == "") $formatter = "code";
 
 			$res = $wacko->_Format(trim($code), "highlight/".$formatter, $params);
 
@@ -359,8 +358,8 @@ class WackoFormatter
 	{
 		$result = null;
 		$thing = $things[1];
-		$wacko = &$this->object;
-		$callback = array( &$this, "WackoCallback");
+		$wacko = & $this->object;
+		$callback = array(&$this, "WackoCallback");
 
 		$this->page_id = $wacko->page["id"];
 		if (!$this->page_id)
@@ -711,7 +710,7 @@ class WackoFormatter
 				if ($text == "")
 					$text = $def;
 
-				$text = preg_replace("/<!--markup:1:[\w]+-->|__|\[\[|\(\(/","",$text);
+				$text = preg_replace("/<!--markup:1:[\w]+-->|__|\[\[|\(\(/", "", $text);
 
 				return "<dfn title=\"".htmlspecialchars($text)."\">".$def."</dfn>";
 			}
@@ -795,13 +794,38 @@ class WackoFormatter
 
 					if (!$text) $text = $url;
 
-					$url = str_replace( " ", "", $url );
+					$url = str_replace(" ", "", $url);
 					$text = preg_replace("/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/", "", $text);
 
 					return $result.$wacko->PreLink($url, $text);
 				}
 			}
 			return "";
+		}
+		// image link
+		else if (preg_match("/^\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]$/", $thing, $matches) ||
+				 preg_match("/^\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)$/", $thing, $matches))
+		{
+			$url	= isset($matches[1]) ? $matches[1] : "";
+			$img	= isset($matches[3]) ? $matches[3] : "";
+			if ($url && $img)
+			{
+				if ($url != ($url = (preg_replace("/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(/", "", $url))))
+					$result	= "</span>";
+				if ($url{0} == "(")
+				{
+					$url	= substr($url, 1);
+					$result.= "(";
+				}
+				if ($url{0} == "[")
+				{
+					$url=substr($url, 1);
+					$result.= "[";
+				}
+				$img = preg_replace("/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(|/", "", $img);
+				return $result.$wacko->PreLink($url, $img, 1, 1);
+			}
+			else return "";
 		}
 		// indented text
 		else if (preg_match("/(\n)(\t+|(?:[ ]{2})+)(-|\*|([a-zA-Z]|[0-9]{1,3})[\.\)](\#[0-9]{1,3})?)?(\n|$)/s", $thing, $matches))
@@ -947,6 +971,7 @@ class WackoFormatter
 		// if we reach this point, it must have been an accident.
 		return htmlspecialchars($thing);
 	}
+
 }
 
 ?>
