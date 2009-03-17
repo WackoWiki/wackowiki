@@ -47,7 +47,7 @@ if (!class_exists("preformatter"))
 				return date("d.m.Y H:i");
 			}
 			else if ((preg_match("/^(\[\[)(.+)(\]\])$/", $thing, $matches)) ||
-			(preg_match("/^(\(\()(.+)(\)\))$/", $thing, $matches)))
+					(preg_match("/^(\(\()(.+)(\)\))$/", $thing, $matches)))
 			{
 				list (, $b1, $cont, $b2) = $matches;
 				if (preg_match("/\&\#\d+;/", $cont, $matches))

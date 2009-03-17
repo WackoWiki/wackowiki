@@ -2,8 +2,8 @@
 /*
 
 Typografica library: typografica class.
-v.2.5
-20 February 2005.
+v.2.6
+23 February 2005.
 
 ---------
 
@@ -92,8 +92,8 @@ class typografica
 		$ignored = array();
 		{
 			$total = preg_match_all($this->ignore, $data, $matches);
-			$data = preg_replace($this->ignore, "\201", $data);
-			for ($i=0; $i < $total; $i++)
+			$data = preg_replace($this->ignore, "{:typo:markup:2:}", $data);
+			for ($i = 0; $i < $total; $i++)
 			{
 				$ignored[] = $matches[0][$i];
 			}
@@ -126,7 +126,7 @@ class typografica
 										")?".
 									")*\/?>|<\!--link:begin-->[^\n]*?==/i";
 			$total = preg_match_all($re, $data, $matches);
-			$data = preg_replace($re, "\200", $data);
+			$data = preg_replace($re, "{:typo:markup:1:}", $data);
 
 			for ($i = 0; $i < $total; $i++)
 			{
@@ -185,7 +185,7 @@ class typografica
 		if ($this->skipTags)
 		{
 			$data .= " ";
-			$a = explode( "\200", $data );
+			$a = explode( "{:typo:markup:1:}", $data );
 			if ($a)
 			{
 				$data = $a[0];
@@ -200,7 +200,7 @@ class typografica
 		// INFINITY-2. inserting a (next?) ignored regexp
 		{
 			$data .= " ";
-			$a = explode( "\201", $data );
+			$a = explode( "{:typo:markup:2:}", $data );
 			if ($a)
 			{
 				$data = $a[0];
@@ -238,70 +238,74 @@ class typografica
 		// 1. English quotes
 		if ($this->settings["quotes"])
 		{
-			$data = preg_replace( "/\"\"/i", "&quot;&quot;", $data );
-			$data = preg_replace( "/\"\.\"/i", "&quot;.&quot;", $data );
+			$data = preg_replace("/\"\"/i", "&quot;&quot;", $data);
+			$data = preg_replace("/\"\.\"/i", "&quot;.&quot;", $data);
 			$_data = "\"\"";
 			while ($_data != $data)
 			{
 				$_data = $data;
-				$data = preg_replace( "/(^|\s|\201|\200|>)\"([0-9A-Za-z\'\!\s\.\?\,\-\&\;\:\_\200\201]+(\"|&#148;))/i", "\\1&#147;\\2", $data );
-				$data = preg_replace( "/(\&\#147\;([A-Za-z0-9\'\!\s\.\?\,\-\&\;\:\200\201\_]*).*[A-Za-z0-9][\200\201\?\.\!\,]*)\"/i", "\\1&#148;", $data );
+				$data = preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>)\"([0-9A-Za-z\'\!\s\.\?\,\-\&\;\:\_{:typo:markup:1:}{:typo:markup:2:}]+(\"|&#148;))/i", "\\1&#147;\\2", $data);
+				$data = preg_replace("/(\&\#147\;([A-Za-z0-9\'\!\s\.\?\,\-\&\;\:{:typo:markup:1:}{:typo:markup:2:}\_]*).*[A-Za-z0-9][{:typo:markup:1:}{:typo:markup:2:}\?\.\!\,]*)\"/i", "\\1&#148;", $data);
 			}
 		}
+
 		// 2. angle quotes
 		if ($this->settings["laquo"])
 		{
-			$data = preg_replace( "/\"\"/i", "&quot;&quot;", $data );
-			$data = preg_replace( "/(^|\s|\201|\200|>|\()\"((\201|\200)*[~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data );
+			$data = preg_replace("/\"\"/i", "&quot;&quot;", $data );
+			$data = preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
 			// nb: wacko only regexp follows:
-			$data = preg_replace( "/(^|\s|\201|\200|>|\()\"((\201|\200|\/&nbsp;|\/|\!)*[~0-9¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data );
+			$data = preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/&nbsp;|\/|\!)*[~0-9¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
 			$_data = "\"\"";
 			while ($_data != $data)
 			{
 				$_data = $data;
-				$data = preg_replace( "/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\201|\200)*)\"/si", "\\1&raquo;", $data );
+				$data = preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*)\"/si", "\\1&raquo;", $data);
 				// nb: wacko only regexps follows:
-				$data = preg_replace( "/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\201|\200)*\?(\201|\200)*)\"/si", "\\1&raquo;", $data );
-				$data = preg_replace( "/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\201|\200|\/|\!)*)\"/si", "\\1&raquo;", $data );
+				$data = preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*\?({:typo:markup:2:}|{:typo:markup:1:})*)\"/si", "\\1&raquo;", $data);
+				$data = preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:}|\/|\!)*)\"/si", "\\1&raquo;", $data);
 			}
 		}
 
 		// 2a. angle quotes for FAR manager
 		// --- not ported to wacko ---
 		// --- not ported to wacko ---
+
 		// 2b. angle and English quotes together
 		if (($this->settings["quotes"]) && (($this->settings["laquo"]) || ($this->settings["farlaquo"])))
-			$data = preg_replace( "/(\&\#147\;(([A-Za-z0-9'!\.?,\-&;:]|\s|\200|\201)*)&laquo;(.*)&raquo;)&raquo;/i",
-								"\\1&#148;", $data );
+		{
+			$data = preg_replace("/(\&\#147\;(([A-Za-z0-9'!\.?,\-&;:]|\s|{:typo:markup:1:}|{:typo:markup:2:})*)&laquo;(.*)&raquo;)&raquo;/i", "\\1&#148;", $data);
+		}
+
 		// 3. dash
 		if ($this->settings["dash"])
-			$data = preg_replace( "/(\s|;)\-(\s)/i", "\\1&ndash;\\2", $data );
+			$data = preg_replace("/(\s|;)\-(\s)/i", "\\1&ndash;\\2", $data);
 		// 3a. long dash
 		if ($this->settings["emdash"])
-			$data = preg_replace( "/(\s|;)\-\-(\s)/i", "\\1&mdash;\\2", $data );
+			$data = preg_replace("/(\s|;)\-\-(\s)/i", "\\1&mdash;\\2", $data);
 
 		// 4. (ñ)
 		if ($this->settings["(c)"])
-			$data = preg_replace( "/\([cCñÑ]\)((?=\w)|(?=\s[0-9]+))/i", "&copy;", $data );
+			$data = preg_replace("/\([cCñÑ]\)((?=\w)|(?=\s[0-9]+))/i", "&copy;", $data);
 		// 4a. (r)
 		if ($this->settings["(r)"])
-			$data = preg_replace( "/\(r\)/i", "<sup>&#174;</sup>", $data );
+			$data = preg_replace("/\(r\)/i", "<sup>&#174;</sup>", $data);
 		// 4b. (tm)
 		if ($this->settings["(tm)"])
-			$data = preg_replace( "/\(tm\)|\(òì\)/i", "&#153;", $data );
+			$data = preg_replace("/\(tm\)|\(òì\)/i", "&#153;", $data);
 		// 4c. (p)
 		if ($this->settings["(p)"])
-			$data = preg_replace( "/\(p\)/i", "&#167;", $data );
+			$data = preg_replace("/\(p\)/i", "&#167;", $data);
 
 		// 5. +/-
 		if ($this->settings["+-"])
-			$data = preg_replace( "/\+\-/i", "&#177;", $data );
+			$data = preg_replace("/\+\-/i", "&#177;", $data);
 		// 5a. 12^C
 		if ($this->settings["degrees"])
 		{
-			$data = preg_replace( "/-([0-9])+\^([FCÑ])/", "&ndash;\\1&#176\\2", $data );
-			$data = preg_replace( "/\+([0-9])+\^([FCÑ])/", "+\\1&#176\\2", $data );
-			$data = preg_replace( "/\^([FCÑ])/", "&#176\\1", $data );
+			$data = preg_replace("/-([0-9])+\^([FCÑ])/", "&ndash;\\1&#176\\2", $data);
+			$data = preg_replace("/\+([0-9])+\^([FCÑ])/", "+\\1&#176\\2", $data);
+			$data = preg_replace("/\^([FCÑ])/", "&#176\\1", $data);
 		}
 
 		// 6. phones

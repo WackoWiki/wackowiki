@@ -61,15 +61,15 @@ class paragrafica
 	),
 	);
 
-	var $mark_prefix = "\200";
-	var $mark1 = "\200<:-t>"; // <-t>
-	var $mark2 = "\200<:t->"; // <t->
-	var $mark3 = "\200<:::>"; // (*) wronginator mark:
+	var $mark_prefix = "{:typo:markup:1:}";
+	var $mark1 = "{:typo:markup:1:}<:-t>"; // <-t>
+	var $mark2 = "{:typo:markup:1:}<:t->"; // <t->
+	var $mark3 = "{:typo:markup:1:}<:::>"; // (*) wronginator mark:
 
 	// within constructions like <t->(*).....<-t>
 	// & vice versa -- paragraphs should be placed
 	// but within <t->(*)....(*)<-t> -- shouldn't
-	var $mark4 = "\200<:-:>"; // (!) ultimate wronginator mark:
+	var $mark4 = "{:typo:markup:1:}<:-:>"; // (!) ultimate wronginator mark:
 	// paragraphs shouldn't be placed regardless to <t->(!).....<-t>
 
 	var $prefix1 = '<p class="auto" id="p';
@@ -85,7 +85,7 @@ class paragrafica
 		$ignored = array();
 		{
 			$total = preg_match_all($this->ignore, $what, $matches);
-			$what = preg_replace($this->ignore, "\202", $what);
+			$what = preg_replace($this->ignore, "{:typo:markup:3:}", $what);
 			for ($i=0;$i<$total;$i++)
 			{
 				$ignored[] = $matches[0][$i];
@@ -158,11 +158,11 @@ class paragrafica
 				{
 					$pcount++;
 					$pieces[$k] = '<a name="p'.$page_id.'-'.$pcount.'"></a>'.
-					$this->prefix1.
-					$page_id.'-'.$pcount.
-					$this->prefix2.
-					$inside.
-					$this->postfix.substr($v,$pos+$sizeof_mark1);
+								$this->prefix1.
+								$page_id.'-'.$pcount.
+								$this->prefix2.
+								$inside.
+								$this->postfix.substr($v,$pos+$sizeof_mark1);
 				}
 			}
 		}
@@ -178,7 +178,7 @@ class paragrafica
 		// INFINITY-2. inserting a (or next?) ignored regexp
 		{
 			$what .= " ";
-			$a = explode( "\202", $what );
+			$a = explode( "{:typo:markup:3:}", $what );
 			if ($a)
 			{
 				$what = $a[0];
