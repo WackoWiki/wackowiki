@@ -132,7 +132,7 @@ $wackoTranslation = array(
   "FilesRemoved" => "<i>Files from page %1 αφαιρέθηκαν.</i>",
   "PageRemoved" => "<i>Η σελίδα %1 αφαιρέθηκε.</i>",
   "RevisionsRemoved" => "<i>Revisions from page %1 αφαιρέθηκαν.</i>",
-  "ThisActionHavenotUndo" => "<h3>!Αυτή η ενέργεια δεν μπορεί να αναιρεθεί. Καλή τύχη!</h3>",
+  "ThisActionHavenotUndo" => "Αυτή η ενέργεια δεν μπορεί να αναιρεθεί. Καλή τύχη!",
 
   "PrintVersion" => "Έκδοση προς εκτύπωση",
   "ReferringPages" => "Σελίδες παραπομπών",

@@ -132,7 +132,7 @@ $wackoTranslation = array(
   "FilesRemoved" => "<i>Files from page %1 removed.</i>",
   "PageRemoved" => "<i>Leht %1 eemaldatud.</i>",
   "RevisionsRemoved" => "<i>Revisions from page %1 eemaldatud.</i>",
-  "ThisActionHavenotUndo" => "<h3>!See tegevus pole taastatav. Edu!</h3>",
+  "ThisActionHavenotUndo" => "See tegevus pole taastatav. Edu!",
 
   "PrintVersion" => "Prinditav versioon",
   "ReferringPages" => "Viidatud lehed",

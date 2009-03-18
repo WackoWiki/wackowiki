@@ -132,7 +132,7 @@ $wackoTranslation = array(
   "FilesRemoved" => "<i>Files from page %1 zijn verwijderd.</i>",
   "PageRemoved" => "<i>Pagina %1 is verwijderd.</i>",
   "RevisionsRemoved" => "<i>Revisions from page %1 zijn verwijderd.</i>",
-  "ThisActionHavenotUndo" => "<h3>Deze handeling kan niet ongedaan worden gemaakt. Veel sterkte ermee!</h3>",
+  "ThisActionHavenotUndo" => "Deze handeling kan niet ongedaan worden gemaakt. Veel sterkte ermee!",
 
   "PrintVersion" => "Print versie",
   "ReferringPages" => "Verwijzende pagina's",

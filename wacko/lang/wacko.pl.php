@@ -132,7 +132,7 @@ $wackoTranslation = array(
   "FilesRemoved" => "<i>Files from page %1 usuniête.</i>",
   "PageRemoved" => "<i>Strona %1 zosta³a usuniêta.</i>",
   "RevisionsRemoved" => "<i>Revisions from page %1 usuniête.</i>",
-  "ThisActionHavenotUndo" => "<h3>UWAGA: Ta czynno¶æ nie mo¿e zostaæ cofniêta!</h3>",
+  "ThisActionHavenotUndo" => "UWAGA: Ta czynno¶æ nie mo¿e zostaæ cofniêta!",
 
   "PrintVersion" => "Wersja do druku",
   "ReferringPages" => "Dokumenty Wiki, zawieraj±ce odno¶nik tej strony",
