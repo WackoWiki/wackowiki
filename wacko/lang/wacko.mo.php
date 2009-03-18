@@ -131,7 +131,7 @@ $wackoTranslation = array(
   "FilesRemoved" => "<i>Files from page %1 sunt lichidate.</i>",
   "PageRemoved" => "<em>Pagina %1 este lichidata.</em>",
   "RevisionsRemoved" => "<i>Revisions from page %1 sunt lichidate.</i>",
-  "ThisActionHavenotUndo" => "<h3>Lichidarea nu poate fi oprita.</h3>",
+  "ThisActionHavenotUndo" => "Lichidarea nu poate fi oprita!",
 
   "PrintVersion" => "Versiune pentru imprimare",
   "ReferringPages" => "Paginile, ce se adreseaza la pagina data",

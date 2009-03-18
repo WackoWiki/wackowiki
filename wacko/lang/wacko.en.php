@@ -132,7 +132,7 @@ $wackoTranslation = array(
   "FilesRemoved" => "<i>Files from page %1 removed.</i>",
   "PageRemoved" => "<i>Page %1 removed.</i>",
   "RevisionsRemoved" => "<i>Revisions from page %1 removed.</i>",
-  "ThisActionHavenotUndo" => "<h3>!This action cannot be undone. Good luck!</h3>",
+  "ThisActionHavenotUndo" => "This action cannot be undone. Good luck!",
 
   "PrintVersion" => "Print version",
   "ReferringPages" => "Referring pages",
