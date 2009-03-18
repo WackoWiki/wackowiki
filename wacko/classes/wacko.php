@@ -822,7 +822,7 @@ class Wacko
 		}
 		else
 		{
-			$rev = $this->LoadSingle(
+			$rev = $this->LoadAll(
 				"SELECT ".$this->pages_meta." ".
 				"FROM ".$this->config["table_prefix"]."pages ".
 				"WHERE tag='".quote($this->dblink, $page)."' ".
