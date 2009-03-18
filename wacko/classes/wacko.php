@@ -29,10 +29,10 @@ class Wacko
 	var $WVERSION; //Wacko version
 	var $context = array("");
 	var $current_context = 0;
-	var $pages_meta = "id, tag, time, owner, user, latest, handler, comment_on, super_comment_on, supertag, lang, keywords, description";
+	var $pages_meta = "id, tag, time, owner, user, latest, handler, comment_on, 
+						super_comment_on, supertag, lang, keywords, description";
 	var $first_inclusion = array(); // for backlinks
-	// if you change this two symbols, settings for all users will be lost.
-	var $optionSplitter = "\n";
+	var $optionSplitter = "\n"; // if you change this two symbols, settings for all users will be lost.
 	var $valueSplitter  = "=";
 	var $format_safe = true; //for htmlspecialchars() in PreLink
 	var $unicode_entities = array(); //common unicode array
@@ -108,11 +108,10 @@ class Wacko
 		return $result;
 	}
 
-	function LoadSingle($query) { if ($data = $this->LoadAll($query)) return $data[0]; }
-
 	function LoadAll($query)
 	{
 		$data = array();
+		// retrieving from db
 		if ($r = $this->Query($query))
 		{
 			while ($row = fetch_assoc($r)) $data[] = $row;
@@ -122,6 +121,11 @@ class Wacko
 		return $data;
 	}
 
+	function LoadSingle($query)
+	{
+		if ($data = $this->LoadAll($query)) return $data[0];
+	}
+
 	// MISC
 	function GetMicroTime()
 	{
@@ -129,7 +133,6 @@ class Wacko
 		return ((float)$usec + (float)$sec);
 	}
 
-	// VARIABLES
 	function GetPageTag() { return $this->tag; }
 	function GetPageSuperTag() { return $this->supertag; }
 	function GetPageTime() { return $this->page["time"]; }
@@ -249,7 +252,7 @@ class Wacko
 
 	function LoadLang($lang)
 	{
-		if (!isset( $this->languages[$lang] ))
+		if (!isset($this->languages[$lang]))
 		{
 			$resourcefile = "lang/lang.".$lang.".php";
 			if (@file_exists($resourcefile)) include($resourcefile);
@@ -291,6 +294,31 @@ class Wacko
 			$this->_langlist = $langlist;
 		}
 		return $this->_langlist;
+	}
+
+	function UserAgentLanguage()
+	{
+		if ($this->GetConfigValue("multilanguage"))
+		{
+			if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+			{
+				$this->userlang = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
+
+				// Check whether we have language files for this language
+				if(!in_array($this->userlang, $this->AvailableLanguages()))
+				{
+					// The HTTP_ACCEPT_LANGUAGE language doesn't have any language files so use the admin set language instead
+					$this->userlang = $this->GetConfigValue("language");
+				}
+			}
+			else
+			{
+				$this->userlang = $this->GetConfigValue("language");
+			}
+		}
+		else if (!$lang) $lang = $this->config["language"];
+		
+		return $lang;
 	}
 
 	function GetTranslation($name, $lang = "", $dounicode = true)
@@ -363,8 +391,6 @@ class Wacko
 
 		if ($lang == $_lang) return $string;
 
-		//    die("<h2>".$lang."<>".$_lang."</h2>");
-
 		$this->LoadResource($lang);
 
 		if (is_array($this->languages[$lang]["unicode_entities"]))
@@ -379,7 +405,8 @@ class Wacko
 		$t2 = @strtr($t1, $this->unicode_entities);
 		//echo "<pre><h1>".$string."|".$t1."|".$t2."</h1></pre>";
 		if (!preg_match("/\&\#[0-9]+\;/", $t2))
-		$string = $t2;
+			$string = $t2;
+
 		return $string;
 	}
 
@@ -404,22 +431,26 @@ class Wacko
 		{
 			$asciiPos = ord (substr ($source, $pos, 1));
 			if (($asciiPos >= 240) && ($asciiPos <= 255))
-			{// 4 chars representing one unicode character
+			{
+				// 4 chars representing one unicode character
 				$thisLetter = substr ($source, $pos, 4);
 				$pos += 4;
 			}
 			else if (($asciiPos >= 224) && ($asciiPos <= 239))
-			{// 3 chars representing one unicode character
+			{
+				// 3 chars representing one unicode character
 				$thisLetter = substr ($source, $pos, 3);
 				$pos += 3;
 			}
 			else if (($asciiPos >= 192) && ($asciiPos <= 223))
-			{// 2 chars representing one unicode character
+			{
+				// 2 chars representing one unicode character
 				$thisLetter = substr ($source, $pos, 2);
 				$pos += 2;
 			}
 			else
-			{// 1 char (lower ascii)
+			{
+				// 1 char (lower ascii)
 				$thisLetter = substr ($source, $pos, 1);
 				$pos += 1;
 			}
@@ -513,7 +544,7 @@ class Wacko
 		if ($strtolow) $tag = strtolower($tag);
 
 		if ($_lang)
-		$this->SetLanguage($_lang);
+			$this->SetLanguage($_lang);
 
 		$result =  rtrim($tag, "/");
 
@@ -539,6 +570,23 @@ class Wacko
 			return $this->GetConfigValue("meta_description");
 	}
 
+	function LoadPageById($id)
+	{
+		if ($id != "-1")
+			return $this->LoadSingle(
+				"SELECT * ".
+				"FROM ".$this->config["table_prefix"]."revisions ".
+				"WHERE id = '".quote($this->dblink, $id)."' ".
+				"LIMIT 1");
+		else
+			return $this->LoadSingle(
+				"SELECT * ".
+				"FROM ".$this->config["table_prefix"]."pages ".
+				"WHERE tag='".quote($this->dblink, $this->GetPageTag())."' ".
+					"AND latest='Y' ".
+				"LIMIT 1");
+	}
+
 	// wrapper for OldLoadPage
 	function LoadPage($tag, $time = "", $cache = LOAD_CACHE, $metadataonly = LOAD_ALL)
 	{
@@ -552,16 +600,17 @@ class Wacko
 		// 2. if not found, search for tag
 		if (!$page)
 		//	{
-		$page = $this->OldLoadPage($tag, $time, $cache, false, $metadataonly);
+			$page = $this->OldLoadPage($tag, $time, $cache, false, $metadataonly);
 		/*
 		// 3. if found, update supertag
 		if ($page)
-		 {
-		 $this->Query( "UPDATE ".$this->config["table_prefix"]."pages ".
-		 "SET supertag='".$supertag."' WHERE tag = '".$tag."';" );
-		 }
-		 }
-		 */
+		{
+			$this->Query(
+				"UPDATE ".$this->config["table_prefix"]."pages ".
+				"SET supertag='".$supertag."' WHERE tag = '".$tag."';" );
+		}
+		}
+		*/
 
 		// 3. still nothing? file under wanted
 		if (!$page) $this->CacheWantedPage($supertag);
@@ -782,21 +831,6 @@ class Wacko
 			$this->pagelang = $this->userlang;
 		else
 			$this->pagelang = $this->GetConfigValue("language");
-	}
-
-	function LoadPageById($id)
-	{
-		if ($id != "-1")
-		return $this->LoadSingle(
-			"SELECT * FROM ".$this->config["table_prefix"]."revisions ".
-			"WHERE id = '".quote($this->dblink, $id)."' ".
-			"LIMIT 1");
-		else
-		return $this->LoadSingle(
-			"SELECT * FROM ".$this->config["table_prefix"]."pages ".
-			"WHERE tag='".quote($this->dblink, $this->GetPageTag())."' ".
-				"AND latest='Y' ".
-			"LIMIT 1");
 	}
 
 	// STANDARD QUERIES	
@@ -2418,7 +2452,7 @@ class Wacko
 	{
 		if (!$tag = trim($tag))
 		{
-			if (!$time) return $this->$page['owner'];
+			if (!$time) return $this->page['owner'];
 			else $tag = $this->GetPageTag();
 		}
 
@@ -2853,26 +2887,8 @@ class Wacko
 	// BOOKMARKS
 	function GetDefaultBookmarks($lang, $what = "default")
 	{
-		if ($this->GetConfigValue("multilanguage"))
-		{
-			if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
-			{
-				$this->userlang = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
-
-				// Check whether we have language files for this language
-				if(!in_array($this->userlang, $this->AvailableLanguages()))
-				{
-					// The HTTP_ACCEPT_LANGUAGE language doesn't have any language files so use the admin set language instead
-					$this->userlang = $this->GetConfigValue("language");
-				}
-			}
-			else
-			{
-				$this->userlang = $this->GetConfigValue("language");
-			}
-		}
-		else if (!$lang) $lang = $this->config["language"];
-
+		$this->UserAgentLanguage();
+		
 		if (isset($this->config[$what."_bookmarks"]) &&
 		is_array($this->config[$what."_bookmarks"]) &&
 		isset($this->config[$what."_bookmarks"][$lang]))
@@ -3081,28 +3097,7 @@ class Wacko
 				$this->userlang = $user["lang"];
 			}
 		}
-		else if($this->GetConfigValue("multilanguage"))
-		{
-			if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
-			{
-				$this->userlang = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
-
-				// Check whether we have language files for this language
-				if(!in_array($this->userlang, $this->AvailableLanguages()))
-				{
-					// The HTTP_ACCEPT_LANGUAGE language doesn't have any language files so use the admin set language instead
-					$this->userlang = $this->GetConfigValue("language");
-				}
-			}
-			else
-			{
-				$this->userlang = $this->GetConfigValue("language");
-			}
-		}
-		else
-		{
-			$this->userlang = $this->GetConfigValue("language");
-		}
+		$this->UserAgentLanguage();
 
 		if($this->GetConfigValue("debug") >= 2)
 		{

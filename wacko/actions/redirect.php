@@ -10,7 +10,7 @@ if ($page)
 		$user = $this->GetUser();
 		if ($user["options"]["dont_redirect"] == "Y" || $_REQUEST["redirect"] == "no")
 		{
-			print ("<br /><br /><br /><center>".$this->GetTranslation("PageMoved")." ".$this->Link("/".$page)."</center><br /><br /><br />");
+			print ("<br /><br /><br />".$this->GetTranslation("PageMoved")." ".$this->Link("/".$page)."<br /><br /><br />");
 		}
 		else
 		$this->Redirect($this->href("", $page));

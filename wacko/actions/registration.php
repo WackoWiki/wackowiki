@@ -10,10 +10,10 @@ if ($_REQUEST["confirm"])
    {
       $this->Query("UPDATE ".$this->config["user_table"]." SET email_confirm = '' WHERE email_confirm = '".
       quote($this->dblink, $_REQUEST["confirm"])."'");
-      echo "<br /><br /><center>".$this->GetTranslation("EmailConfirmed")."</center><br /><br />";
+      echo "<br /><br />".$this->GetTranslation("EmailConfirmed")."<br /><br />";
    }
    else
-      echo "<br /><br /><center>".str_replace('%1', $this->ComposeLinkToPage('Settings', '', $this->GetTranslation("SettingsText"), 0), $this->GetTranslation("EmailNotConfirmed"))."</center><br /><br />";
+      echo "<br /><br />".str_replace('%1', $this->ComposeLinkToPage('Settings', '', $this->GetTranslation("SettingsText"), 0), $this->GetTranslation("EmailNotConfirmed"))."<br /><br />";
 }
 else if ($_REQUEST["action"] == "login")
 {
@@ -95,7 +95,7 @@ else if ($_REQUEST["action"] == "login")
                $more = $this->ComposeOptions(array("send_watchmail"=>"Y",));
 
                $this->Query("INSERT INTO ".$this->config["user_table"]." SET ".
-                "signuptime = now(), ".
+                "signuptime = NOW(), ".
                 "name = '".quote($this->dblink, $name)."', ".
                 "email = '".quote($this->dblink, $email)."', ".
                 "email_confirm = '".quote($this->dblink, $confirm)."', ".
@@ -121,7 +121,7 @@ else if ($_REQUEST["action"] == "login")
 
                // forward
                $this->context[++$this->current_context] = "";
-               $this->Redirect($this->Href("",$name,"",1));
+               $this->Redirect($this->Href("", $name, "", 1));
             }
          }
       }
@@ -150,8 +150,9 @@ if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
     <select id="lang" name="lang">
       <option value=""></option>
       <?php
+	  	# $this->UserAgentLanguage();
          $langs = $this->AvailableLanguages();
-         for ($i=0;$i<count($langs);$i++)
+         for ($i = 0; $i < count($langs); $i++)
          echo '<option value="'.$langs[$i].'"'.($lang == $langs[$i] ? 'selected="selected"' : '').'>'.$langs[$i].'</option>';
          ?>
     </select>
