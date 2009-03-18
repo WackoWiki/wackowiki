@@ -34,4 +34,5 @@ class Utility
 		return '';
 	}
 }
+
 ?>
