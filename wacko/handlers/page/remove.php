@@ -58,7 +58,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 				print(str_replace("%1", $this->tag, $this->GetTranslation("PageRemoved"))."<br />\n");
 			}
 
-			print($this->GetTranslation("ThisActionHavenotUndo")."\n");
+			echo "<br />".$this->GetTranslation("ThisActionHavenotUndo")."<br />\n";
 
 			// return to commented page
 			if ($comment_on)
@@ -68,7 +68,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 		}
 		else
 		{
-			echo "<div class=\"warning\"><strong>".$this->GetTranslation("ReallyDelete".($this->page["comment_on"]?"Comment":""))."</strong></div>";
+			echo "<div class=\"warning\"><strong>".$this->GetTranslation("ReallyDelete".($this->page["comment_on"] ? "Comment" : ""))."</strong></div>";
 			echo $this->FormOpen("remove");
 
 		// show backlinks
