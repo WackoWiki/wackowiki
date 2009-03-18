@@ -1,8 +1,8 @@
 <?php
 
-function quote($dblink, $string)
-{
-	return mysqli_real_escape_string($dblink, $string);
+function quote( $dblink, $string ) {
+	if ( !empty ( $dblink ) )
+		return mysqli_real_escape_string($dblink, $string);
 }
 
 function query($dblink, $query)
