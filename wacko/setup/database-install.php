@@ -274,6 +274,9 @@ switch($config2["database_driver"])
 						print("         </ul>\n");
 						print("         <br />\n");
 
+if ( !isset( $wackoConfig["wakka_version"] ) ) $wackoConfig["wakka_version"] = "0";
+if ( !isset( $wackoConfig["wacko_version"] ) ) $wackoConfig["wacko_version"] = "0";
+	
 						if (!$version = trim($wackoConfig["wakka_version"])) $version = "0";
 						if (trim($wackoConfig["wacko_version"])) $version = trim($wackoConfig["wacko_version"]);
 						switch ($version)

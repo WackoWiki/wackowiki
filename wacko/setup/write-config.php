@@ -25,7 +25,7 @@ function array_to_str ($arr, $name="")
 // fetch config
 $config = $config2 = unserialize($_POST["config_s"]);
 
-if ( ( $config["database_driver"] == mysqli_legacy ) && empty( $config["database_port"] ) )
+if ( ( $config["database_driver"] == "mysqli_legacy" ) && empty( $config["database_port"] ) )
 	$config["database_port"] = $config2["database_port"] = "3306";
 
 if ( !isset( $wackoConfig["wacko_version"] ) ) {
