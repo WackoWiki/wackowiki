@@ -252,7 +252,7 @@ $wackoTranslation = array(
   "EmailVerify" => "Κάποιος (πιθανόν εσείς) έχει ενεργοποιήσει την ειδοποίηση της ηλεκτρονικής αλληλογραφίας
 στο %1.<br />Το όνομα χρήστη: %2<br />Αν θέλετε να αποδέχεστε ειδοποιήσεις, πρέπει να αποδεχθείτε το email. Παρακαλώ ακολουθήστε <a href=%3>τον σύνδεσμο</a> για να το κάνετε αυτό.",
   "EmailConfirm" => "Παρακαλώ επιβεβαιώστε το ηλεκτρονικό σας ταχυδρομείο",
-  "EmailConfirmed" => "Το ηλεκτρονικό σας ταχυδρομείο επιβεβαιώθηκε. Ευχαριστούμε!",
+  "EmailConfirmed" => "Το ηλεκτρονικό σας ταχυδρομείο επιβεβαιώθηκε.",
   "EmailNotConfirmed" => "Το ηλεκτρονικό σας ταχυδρομείο ΔΕΝ επιβεβαιώθηκε. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.",
 
   "ForgotComment" => "Πληκτρολόγησε το όνομα χρήσης σου ή την ηλεκτρονική σου διεύθυνση,\nκαι μετά ακολούθησε τις οδηγίες που θα σου σταλούν μέσω ηλεκτρονικού ταχυδρομείου ",

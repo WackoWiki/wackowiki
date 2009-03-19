@@ -250,7 +250,7 @@ $wackoTranslation = array(
   "EmailRegistered" => "Votre enregistrement est confirmé sur %1.<br />Votre nom d&rsquo;utilisateur ou NomWiki est&nbsp;: %2<br />Nous vous conseillons de confirmer votre adresse de messagerie ; ceci vous permettra :<br /> - de recevoir des courriels pour vous informer de changements ou commentaires sur certaines pages,<br /> - et d&rsquo;obtenir un nouveau mot de passe en cas de perte.<br /><br/>Pour confirmer votre adresse de messagerie suivez <a href=%3>ce lien</a>, ou copiez-le dans la barre d&rsquo;adresses de votre navigateur.",
   "EmailVerify" => "Quelqu&rsquo;un (peut-être vous) a donné votre adresse de messagerie pour recevoir des notifications des modifications ou commentaires sur %1.<br />Votre nom d&rsquo;utilisateur (NomWiki)&nbsp;: %2<br />Si vous voulez recevoir des notifications, vous devez confirmer votre adresse de messagerie. Pour celà suivez <a href=%3>ce lien</a> .",
   "EmailConfirm" => "Merci de vérifier votre adresse de messagerie",
-  "EmailConfirmed" => "Adresse de messagerie confirmée. Merci&nbsp;!",
+  "EmailConfirmed" => "Adresse de messagerie confirmée.",
   "EmailNotConfirmed" => "Adresse de messagerie non confirmée. Ceci peut être dû à un code de confirmation erroné, mais cette adresse peut aussi avoir été déjà confirmée. Identifiez-vous et vérifiez-le sur votre page %1.",
 
   "ForgotComment" => "Indiquez votre NomWiki ou votre adresse de messagerie,\nun courriel avec des instructions vous sera envoyé.",
