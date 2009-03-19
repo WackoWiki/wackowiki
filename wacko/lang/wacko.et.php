@@ -251,7 +251,7 @@ $wackoTranslation = array(
   "EmailRegistered" => "sa oled edukalt registreerunud %1.<br />Sinu kasutajanimi on: %2<br />Kui sa tahad märguandeid, siis sa pead näitama oma e-posti aadressi. Järgi <a href=%3>seda linki</a>, et seda teha.",
   "EmailVerify" => "Keegi (võib-olla sa ise) on edastanud su e-posti aadressi, et saada sellele teateid %1.<br />Sinu kasutajanimi: %2<br />Kui sa tahad saada teateid, pead sa lubama selleks oma e-posti aadressi. Vaata <a href=%3>seda</a>, et seda teha.",
   "EmailConfirm" => "Palun kontrolli oma e-posti aadressi",
-  "EmailConfirmed" => "E-posti aadressi õigsus on kinnitust leidnud. Täname!",
+  "EmailConfirmed" => "E-posti aadressi õigsus on kinnitust leidnud.",
   "EmailNotConfirmed" => "E-posti aadress ei leidnud kinnitust. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.",
 
   "ForgotComment" => "Sisetage oma kasutajanimi või e-posti aadress,\n siis saadetakse sulle e-postiga instruktsioonid.",

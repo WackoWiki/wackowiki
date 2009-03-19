@@ -251,7 +251,7 @@ $wackoTranslation = array(
   "EmailRegistered" => "Du er nu registreret i %1.<br />Dit brugernavn: %2<br />Hvis du vil modtage notifikationer, skal du godkende din mail. Følg <a href=%3>dette link</a> for at godkende din mail.",
   "EmailVerify" => "Du er nu registreret i %1.<br />Dit brugernavn: %2<br />Hvis du vil modtage notifikationer, skal du godkende din mail. Følg <a href=%3>dette link</a> for at godkende din mail.",
   "EmailConfirm" => "Bekræft din mail",
-  "EmailConfirmed" => "Din mail er bekræftet. Tak!",
+  "EmailConfirmed" => "Din mail er bekræftet.",
   "EmailNotConfirmed" => "Kan ikke bekræfte din mail. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.",
 
   "ForgotComment" => "Oplys dit brugernavn eller din emailadresse,\nså sender vi en mail med instruktioner.",

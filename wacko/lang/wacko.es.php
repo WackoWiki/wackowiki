@@ -251,7 +251,7 @@ $wackoTranslation = array(
   "EmailRegistered" => "Te has registrado con éxito en %1.<br />Tu nombre de usuario: %2<br />Si quieres recibir notificaciones, tienes que confirmar tu email. Sigue <a href=%3>el link</a> para hacer eso.",
   "EmailVerify" => "Alguien (quizas tu) ha sometido tu email como dirección de notificación en %1.<br />Tu nombre de usuario: %2<br />Si quieres recibir notificaciones, tienes que confirmar tu email. Sigue <a href=%3>este link</a> para hacerlo.",
   "EmailConfirm" => "Verifica tu email",
-  "EmailConfirmed" => "Email confirmado con éxito. Gracias!",
+  "EmailConfirmed" => "Email confirmado con éxito.",
   "EmailNotConfirmed" => "El Email no se ha podido confirmar. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.",
 
   "ForgotComment" => "Introduce tu login o e-mail,\n y te enviaremos un e-mail con instrucciones.",
