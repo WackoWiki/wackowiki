@@ -924,11 +924,11 @@ class Wacko
 		}
 	}
 
-	function LoadRecentlyComment($limit=70, $for="", $from="")
+	function LoadRecentlyComment($limit = 70, $for="", $from="")
 	{
 		$limit= (int) $limit;
 		if ($pages =
-		$this->LoadAll("SELECT ".$this->pages_meta.",`body_r` FROM ".$this->config["table_prefix"]."pages ".
+		$this->LoadAll("SELECT ".$this->pages_meta.", body_r FROM ".$this->config["table_prefix"]."pages ".
 		"WHERE latest = 'Y' AND comment_on != '' ".($from?"AND time<='".quote($this->dblink, $from)." 23:59:59'":"").
 		($for?"AND supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' ":"").
 		"ORDER BY time DESC LIMIT ".$limit))
@@ -943,10 +943,10 @@ class Wacko
 			."WHERE p.latest = 'Y' "
 			."AND p.comment_on = '' "
 			."AND a.supertag = p.supertag "
-			.($for?"AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' ":"")
+			.($for ? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' " : "")
 			."AND privilege = 'read' "
 			."ORDER BY time DESC LIMIT ".$limit))
-			for ($i=0; $i<count($read_acls); $i++) {
+			for ($i = 0; $i < count($read_acls); $i++) {
 				$this->CacheACL($read_acls[$i]["supertag"], "read", 1,$read_acls[$i]);
 			}
 
@@ -961,7 +961,7 @@ class Wacko
 		"FROM ".$pref."links LEFT JOIN ".$pref."pages ON ".
 		"((".$pref."links.to_tag = ".$pref."pages.tag AND ".$pref."links.to_supertag='') ".
 		" OR ".$pref."links.to_supertag=".$pref."pages.supertag) ".
-		"WHERE ".($for?$pref."links.to_tag LIKE '".quote($this->dblink, $for)."/%' AND ":"").
+		"WHERE ".($for ? $pref."links.to_tag LIKE '".quote($this->dblink, $for)."/%' AND " : "").
 		$pref."pages.tag is NULL GROUP BY wanted_tag ORDER BY wanted_tag ASC";
 		return $this->LoadAll($sql);
 	}
@@ -973,7 +973,7 @@ class Wacko
 		//     $pref."pages.tag = ".$pref."links.to_tag WHERE ".
 		"((".$pref."links.to_tag = ".$pref."pages.tag AND ".$pref."links.to_supertag='') ".
 		" OR ".$pref."links.to_supertag=".$pref."pages.supertag) WHERE ".
-		($for?$pref."pages.tag LIKE '".quote($this->dblink, $for)."/%' AND ":"").
+		($for ? $pref."pages.tag LIKE '".quote($this->dblink, $for)."/%' AND " : "").
 		$pref."links.to_tag is NULL AND ".$pref."pages.comment_on = '' ".
 		"ORDER BY tag LIMIT 200";
 		return $this->LoadAll($sql);
@@ -1118,7 +1118,7 @@ class Wacko
 					"INSERT INTO ".$this->config["table_prefix"]."pages SET ".
 						($comment_on ? "comment_on = '".quote($this->dblink, $comment_on)."', " : "").
 						($comment_on ? "super_comment_on = '".quote($this->dblink, $this->NpjTranslit($comment_on))."', " : "").
-						"time = now(), ".
+						"time = NOW(), ".
 						"owner = '".quote($this->dblink, $owner)."', ".
 						"user = '".quote($this->dblink, $user)."', ".
 						"latest = 'Y', ".
@@ -1133,7 +1133,7 @@ class Wacko
 				$this->SaveAcl($tag, "write", ($comment_on ? "" : $write_acl));
 				$this->SaveAcl($tag, "read", $read_acl);
 				$this->SaveAcl($tag, "comment", ($comment_on ? "" : $comment_acl));
-
+				// set watch
 				if ($this->GetUser() && !$this->GetConfigValue("disable_autosubscribe"))
 				$this->SetWatch($this->GetUserName(), $this->GetPageTag());
 
@@ -1165,13 +1165,18 @@ class Wacko
 							if ($User["email_confirm"] == "" && $User["options"]["send_watchmail"] != "N")
 							{
 								$lang = $User["lang"];
+								$this->LoadResource($lang);
+								$this->SetResource ($lang);
+								$this->SetLanguage ($lang);
 
 								$subject = $this->GetTranslation("CommentForWatchedPage",$lang)."'".$comment_on."'";
-								$message = $this->GetTranslation("MailHello",$lang). $Watcher["user"].".<br /> <br /> ";
-								$message .=   $username.
-								$this->GetTranslation("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$comment_on,"")."\">".$this->Href("",$comment_on,"")."</a><br />";
-								$message .= "<hr />".$this->Format($body_r, "post_wacko")."<hr />";
-								$message .= "<br />".$this->GetTranslation("MailGoodbye",$lang)." ".$this->GetConfigValue("wacko_name");
+								$message = $this->GetTranslation("MailHello",$lang). $Watcher["user"].".\n\n".
+											$username.
+											$this->GetTranslation("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$comment_on,"")."\">".$this->Href("",$comment_on,"")."</a><br /><hr />".
+											$this->Format($body_r, "post_wacko")."<hr /><br />".
+											$this->GetTranslation("MailGoodbye",$lang)."\n".
+											$this->GetConfigValue("wacko_name")."\n".
+											$this->config["base_url"];
 
 								$this->SendMail($User["email"], $subject, $message);
 							}
@@ -1190,6 +1195,7 @@ class Wacko
 					$body_r = $this->Format($body_r, "paragrafica");
 					$body_toc = $this->body_toc;
 				}
+
 				// aha! page isn't new. keep owner!
 				$owner = $oldPage["owner"];
 
@@ -1208,15 +1214,27 @@ class Wacko
 						"UPDATE ".$this->config["table_prefix"]."pages SET ".
 							($comment_on ? "comment_on = '".quote($this->dblink, $comment_on)."', " : "").
 							($comment_on ? "super_comment_on = '".quote($this->dblink, $this->NpjTranslit($comment_on))."', " : "").
-							"time = now(), ".
+							"time = NOW(), ".
 							"owner = '".quote($this->dblink, $owner)."', ".
 							"user = '".quote($this->dblink, $user)."', ".
 							"supertag = '".$this->NpjTranslit($tag)."', ".
 							"body = '".quote($this->dblink, $body)."', ".
 							"body_toc = '".quote($this->dblink, $body_toc)."', ".
 							"body_r = '".quote($this->dblink, $body_r)."' ".
-							"WHERE tag = '".quote($this->dblink, $tag)."' AND latest='Y' LIMIT 1");
+						"WHERE tag = '".quote($this->dblink, $tag)."' AND latest='Y' ".
+						"LIMIT 1");
 				}
+
+				// revisions diff
+				$page = $this->LoadSingle(
+					"SELECT ".$this->pages_meta." ".
+					"FROM ".$this->config["table_prefix"]."revisions ".
+					"WHERE tag='".quote($this->dblink, $tag)."' ".
+					"ORDER BY time DESC");
+				$_GET["a"] = -1;
+				$_GET["b"] = $page["id"];
+				$_GET["fastdiff"] = 1;
+				$diff = $this->IncludeBuffered("handlers/page/diff.php", "oops");
 
 				// notifying watchers
 				$username = $this->GetUserName();
@@ -1241,30 +1259,25 @@ class Wacko
 								"SELECT email, lang, more, email_confirm ".
 								"FROM " .$this->config["user_table"]." ".
 								"WHERE name = '".quote($this->dblink, $Watcher["user"])."'");
+
 							$User["options"] = $this->DecomposeOptions($User["more"]);
 
 							if ($User["email_confirm"] == "" && $User["options"]["send_watchmail"] != "N")
 							{
 								$lang = $User["lang"];
+								$this->LoadResource($lang);
+								$this->SetResource ($lang);
+								$this->SetLanguage ($lang);
 
 								$subject = $this->GetTranslation("WatchedPageChanged",$lang)."'".$tag."'";
-								$message = "<style>.additions {color: #008800;}\n.deletions {color: #880000;}</style>";
-								$message .= $this->GetTranslation("MailHello",$lang). $Watcher["user"].".<br /> <br /> ";
-								$message .=   $username.
-								$this->GetTranslation("SomeoneChangedThisPage",$lang)."<br />  ";//* <a href=\"".$this->Href("",$tag,"")."\">".$this->Href("",$tag,"")."</a><br />";
-
-								// revisions diff
-								$page = $this->LoadSingle(
-									"SELECT ".$this->pages_meta." ".
-									"FROM ".$this->config["table_prefix"]."revisions ".
-									"WHERE tag='".quote($this->dblink, $tag)."' ".
-									"ORDER BY time DESC");
-								$_GET["a"] = -1;
-								$_GET["b"] = $page["id"];
-								$_GET["fastdiff"] = 1;
-
-								$message .= "<hr />".$this->IncludeBuffered("handlers/page/diff.php", "oops")."<hr />";
-								$message .= "<br />".$this->GetTranslation("MailGoodbye",$lang)." ".$this->GetConfigValue("wacko_name");
+								$message = "<style>.additions {color: #008800;}\n.deletions {color: #880000;}</style>".
+											$this->GetTranslation("MailHello",$lang). $Watcher["user"]."\n\n".
+											$username.
+											$this->GetTranslation("SomeoneChangedThisPage",$lang)."\n". //* <a href=\"".$this->Href("",$tag,"")."\">".$this->Href("",$tag,"")."</a><br />";
+											"<hr />".$diff."<hr />".
+											"<br />".$this->GetTranslation("MailGoodbye",$lang)."\n".
+											$this->GetConfigValue("wacko_name")."\n".
+											$this->config["base_url"];
 
 								$this->SendMail($User["email"], $subject, $message);
 							}
@@ -1272,10 +1285,13 @@ class Wacko
 						$this->SetUser($_user, 0);
 					}
 				}
-				$this->SetLanguage($this->userlang);
+				$this->LoadResource($this->userlang);
+				$this->SetResource ($this->userlang);
+				$this->SetLanguage ($this->userlang);
 			}
 		}
 
+		// writing xmls
 		$this->WriteRecentChangesXML();
 		$this->WriteRecentCommentsXML();
 
@@ -1408,10 +1424,10 @@ class Wacko
 	{
 		if (!$tag = trim($tag)) $tag = $this->tag;
 		if (!$addpage) $tag = $this->SlimUrl($tag);
-		if (!$addpage) $tag = $this->NpjTranslit($tag);
+		// if (!$addpage) $tag = $this->NpjTranslit($tag);
 
 		$tag = trim($tag, "/.");
-		$tag = str_replace(array("%2F", "%3F", "%3D"), array("/", "?", "="), rawurlencode($tag));
+		// $tag = str_replace(array("%2F", "%3F", "%3D"), array("/", "?", "="), rawurlencode($tag));
 
 		return $tag.($method ? "/".$method : "");
 	}
@@ -2061,31 +2077,6 @@ class Wacko
 					"(from_tag, to_tag, to_supertag) ".
 				"VALUES ".rtrim($query,","));
 		}
-	}
-
-	// tabbed theme output routine
-	function EchoTab( $link, $hint, $text, $selected=false, $bonus="" )
-	{
-		$xsize = $selected?7:8;
-		$ysize = $selected?25:30;
-		if ($text == "") return; // no tab;
-		if ($selected) $text = "<a href=\"$link\" title=\"$hint\">".$text."</a>";
-		if (!$selected) echo "<div class='TabSelected$bonus' style='background-image:url(".$this->GetConfigValue("theme_url")."icons/tabbg.gif);' >";
-		else echo "<div class='Tab$bonus' style='background-image:url(".$this->GetConfigValue("theme_url")."icons/tabbg".($bonus=="2a"?"del":"1").".gif);'>";
-		$bonus2 = $bonus=="2a"?"del":"";
-
-		echo '<table cellspacing="0" cellpadding="0" border="0" ><tr>';
-		echo "<td><img src='".
-		$this->GetConfigValue("theme_url").
-			"icons/tabr$selected".$bonus2.".gif' width='$xsize' align='top' hspace='0' vspace='0' height='$ysize' alt='' border='0' /></td>";
-		if (!$selected) echo "<td>"; else echo "<td valign='top'>";
-		echo "<div class='TabText'>".$text."</div>";
-		echo "</td>";
-		echo "<td><img src='".
-		$this->GetConfigValue("theme_url").
-			"icons/tabl$selected".$bonus2.".gif' width='$xsize' align='top' hspace='0' vspace='0' height='$ysize' alt='' border='0' /></td>";
-		echo '</tr></table>';
-		echo "</div>";
 	}
 
 	// INTERWIKI STUFF
@@ -3541,9 +3532,6 @@ class Wacko
 		}
 		return true;
 	}
-
-
-
 
 }
 
