@@ -1,14 +1,44 @@
+<?php
+
+// tabbed theme output routine
+function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
+{
+	$this->wacko = & $wacko;
+	
+	$xsize = $selected?7:8;
+	$ysize = $selected?25:30;
+	if ($text == "") return; // no tab;
+	if ($selected) $text = "<a href=\"$link\" title=\"$hint\">".$text."</a>";
+	if (!$selected) echo "<div class='TabSelected$bonus' style='background-image:url(".$this->wacko->GetConfigValue("theme_url")."icons/tabbg.gif);' >";
+	else echo "<div class='Tab$bonus' style='background-image:url(".$this->wacko->GetConfigValue("theme_url")."icons/tabbg".($bonus=="2a"?"del":"1").".gif);'>";
+	$bonus2 = $bonus=="2a"?"del":"";
+
+	echo '<table cellspacing="0" cellpadding="0" border="0" ><tr>';
+	echo "<td><img src='".
+	$this->wacko->GetConfigValue("theme_url").
+		"icons/tabr$selected".$bonus2.".gif' width='$xsize' align='top' hspace='0' vspace='0' height='$ysize' alt='' border='0' /></td>";
+	if (!$selected) echo "<td>"; else echo "<td valign='top'>";
+	echo "<div class='TabText'>".$text."</div>";
+	echo "</td>";
+	echo "<td><img src='".
+	$this->wacko->GetConfigValue("theme_url").
+		"icons/tabl$selected".$bonus2.".gif' width='$xsize' align='top' hspace='0' vspace='0' height='$ysize' alt='' border='0' /></td>";
+	echo '</tr></table>';
+	echo "</div>";
+}
+
+?>
 <div class="Footer"><img
    src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
    width="5" height="1" alt="" align="left" border="0" /><img
    src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
-   width="5" height="1" alt="" align="right" border="0" /> <?php $this->EchoTab( $this->href("show"),  $this->GetTranslation("ShowTip"),
+   width="5" height="1" alt="" align="right" border="0" /> <?php EchoTab( $this->href("show"),  $this->GetTranslation("ShowTip"),
    $this->HasAccess("read") ? $this->GetTranslation("ShowText") : "",
    $this->method != "show"
-   ) ?> <?php $this->EchoTab( $this->href("edit"),  $this->GetTranslation("EditTip"),
+   ) ?> <?php EchoTab( $this->href("edit"),  $this->GetTranslation("EditTip"),
    $this->HasAccess("write") ? $this->GetTranslation("EditText") : "",
    $this->method != "edit"
-   ) ?> <?php $this->EchoTab( $this->href("revisions"),  $this->GetTranslation("RevisionTip"),
+   ) ?> <?php EchoTab( $this->href("revisions"),  $this->GetTranslation("RevisionTip"),
    $this->GetPageTime() ? $this->GetPageTime() : "",
    $this->method != "revisions"
    ) ?> <?php
@@ -17,7 +47,7 @@
    {
       if($this->HasAccess("write") && $this->GetUser() || $this->IsAdmin())
       {
-         $this->EchoTab( $this->href("settings"),  $this->GetTranslation("SettingsTip"),
+         $EchoTab( $this->href("settings"),  $this->GetTranslation("SettingsTip"),
          $this->GetTranslation("EditSettingsText"),
          $this->method != "settings"
          );
@@ -26,14 +56,14 @@
       // if owner is current user
       if ($this->UserIsOwner())
       {
-         $this->EchoTab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->GetTranslation("EditACLConfirm")."\");":""),
+         EchoTab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->GetTranslation("EditACLConfirm")."\");":""),
          $this->GetTranslation("EditACLText"),
          $this->method != "acls"
          );
       }
       if ($this->IsAdmin() || (!$this->GetConfigValue("remove_onlyadmins") && $this->UserIsOwner()))
       {
-         $this->EchoTab( $this->href("remove"),  $this->GetTranslation("DeleteTip")."",
+         EchoTab( $this->href("remove"),  $this->GetTranslation("DeleteTip")."",
                         '<img src="'.$this->GetConfigValue("theme_url").'icons/del'.($this->method != "remove"?"":"_").'.gif" width="14" height="15" alt="" />'.$this->GetTranslation("DeleteText"),
          $this->method != "remove",
                         "2a"
@@ -43,7 +73,7 @@
    ?> <?php
    if ($this->GetUser())
    {
-      $this->EchoTab( $this->href("referrers"),  $this->GetTranslation("ReferrersTip"),
+      EchoTab( $this->href("referrers"),  $this->GetTranslation("ReferrersTip"),
       $this->GetTranslation("ReferrersText"),
       $this->method != "referrers",
          "2"
