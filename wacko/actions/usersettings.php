@@ -2,213 +2,221 @@
 <?php
 if ($_REQUEST["confirm"])
 {
-   if ($this->LoadSingle("SELECT * FROM ".$this->config["user_table"]." WHERE email_confirm = '".
-   quote($this->dblink, $_REQUEST["confirm"])."'"))
-   {
-      $this->Query("UPDATE ".$this->config["user_table"]." SET email_confirm = '' WHERE email_confirm = '".
-      quote($this->dblink, $_REQUEST["confirm"])."'");
-      echo "<br /><br />".$this->GetTranslation("EmailConfirmed")."<br /><br />";
-   }
-   else
-      echo "<br /><br />".str_replace('%1', $this->ComposeLinkToPage('Settings', '', $this->GetTranslation("SettingsText"), 0), $this->GetTranslation("EmailNotConfirmed"))."<br /><br />";
+	if ($this->LoadSingle(
+			"SELECT * FROM ".$this->config["user_table"]." ".
+			"WHERE email_confirm = '".
+			quote($this->dblink, $_REQUEST["confirm"])."'"))
+	{
+		$this->Query(
+			"UPDATE ".$this->config["user_table"]." ".
+			"SET email_confirm = '' ".
+			"WHERE email_confirm = '".
+			quote($this->dblink, $_REQUEST["confirm"])."'");
+		echo "<br /><br />".$this->GetTranslation("EmailConfirmed")."<br /><br />";
+	}
+	else
+		echo "<br /><br />".str_replace('%1', $this->ComposeLinkToPage('Settings', '', $this->GetTranslation("SettingsText"), 0), $this->GetTranslation("EmailNotConfirmed"))."<br /><br />";
 }
 else if ($_REQUEST["action"] == "logout")
 {
-   $this->LogoutUser();
-   $this->SetMessage($this->GetTranslation("LoggedOut"));
-   $this->Redirect($this->href());
+	$this->LogoutUser();
+	$this->SetMessage($this->GetTranslation("LoggedOut"));
+	$this->Redirect($this->href());
 }
 else if ($user = $this->GetUser())
 {
-   $this->SetPageLang($this->userlang);
+	$this->SetPageLang($this->userlang);
 
-   // is user trying to update?
-   if ($_REQUEST["action"] == "update")
-   {
-      $bookmarks = str_replace("\r", "", $_POST["bookmarks"]);
+	// is user trying to update?
+	if ($_REQUEST["action"] == "update")
+	{
+		$bookmarks = str_replace("\r", "", $_POST["bookmarks"]);
 
-      $more = $this->ComposeOptions(array(
-     "theme"=>$_POST["theme"],
-     "autocomplete"=>$_POST["autocomplete"],
-     "dont_redirect"=>$_POST["dont_redirect"],
-     "send_watchmail"=>$_POST["send_watchmail"],
-     "show_files"=>$_POST["show_files"],
-      ));
+		$more = $this->ComposeOptions(array(
+		"theme" => $_POST["theme"],
+		"autocomplete" => $_POST["autocomplete"],
+		"dont_redirect" => $_POST["dont_redirect"],
+		"send_watchmail" => $_POST["send_watchmail"],
+		"show_files" => $_POST["show_files"],
+		));
 
-      if ($user["email"]!=$_POST["email"])
-      {
-         $confirm = md5(rand().$_POST["email"].rand());
+		if ($user["email"] != $_POST["email"])
+		{
+			$confirm = md5(rand().$_POST["email"].rand());
 
-         $subject = $this->GetTranslation("EmailConfirm");
-         $message = $this->GetTranslation("MailHello"). $user["name"].".<br /> <br /> ";
-         $message.= str_replace('%1', $this->GetConfigValue("wacko_name"),
-         str_replace('%2', $user["name"],
-         str_replace('%3', $this->Href().($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
-         $this->GetTranslation("EmailVerify"))))."<br />  ";
-         $message.= "<br />".$this->GetTranslation("MailGoodbye")." ".$this->GetConfigValue("wacko_name");
-         $this->SendMail($_POST["email"], $subject, $message);
-      }
+			$subject = $this->GetTranslation("EmailConfirm");
+			$message = $this->GetTranslation("MailHello"). $user["name"].".<br /> <br /> ";
+			$message.= str_replace('%1', $this->GetConfigValue("wacko_name"),
+			str_replace('%2', $user["name"],
+			str_replace('%3', $this->Href().($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
+			$this->GetTranslation("EmailVerify"))))."<br />  ";
+			$message.= "<br />".$this->GetTranslation("MailGoodbye")." ".$this->GetConfigValue("wacko_name");
+			$this->SendMail($_POST["email"], $subject, $message);
+		}
 
-      $this->Query("UPDATE ".$this->config["user_table"]." SET ".
-      "email = '".quote($this->dblink, $_POST["email"])."', ".
-      ($confirm?"email_confirm = '".quote($this->dblink, $confirm)."', ":"").
-      "doubleclickedit = '".quote($this->dblink, $_POST["doubleclickedit"])."', ".
-      "showdatetime = '".quote($this->dblink, $_POST["showdatetimeinlinks"])."', ".
-      "show_comments = '".quote($this->dblink, $_POST["show_comments"])."', ".
-      "revisioncount = '".quote($this->dblink, $_POST["revisioncount"])."', ".
-      "changescount = '".quote($this->dblink, $_POST["changescount"])."', ".
-      "motto = '".quote($this->dblink, $_POST["motto"])."', ".
-      "bookmarks = '".quote($this->dblink, $bookmarks)."', ".
-      "show_spaces = '".quote($this->dblink, $_POST["show_spaces"])."', ".
-      "typografica = '".quote($this->dblink, $_POST["typografica"])."', ".
-      "lang = '".quote($this->dblink, $_POST["lang"])."', ".
-      "more = '".quote($this->dblink, $more)."' ".
-      "WHERE name = '".quote($this->dblink, $user["name"])."' LIMIT 1");
+		$this->Query(
+			"UPDATE ".$this->config["user_table"]." SET ".
+				"email = '".quote($this->dblink, $_POST["email"])."', ".
+				($confirm ? "email_confirm = '".quote($this->dblink, $confirm)."', " : "").
+				"doubleclickedit = '".quote($this->dblink, $_POST["doubleclickedit"])."', ".
+				"showdatetime = '".quote($this->dblink, $_POST["showdatetimeinlinks"])."', ".
+				"show_comments = '".quote($this->dblink, $_POST["show_comments"])."', ".
+				"revisioncount = '".quote($this->dblink, $_POST["revisioncount"])."', ".
+				"changescount = '".quote($this->dblink, $_POST["changescount"])."', ".
+				"motto = '".quote($this->dblink, $_POST["motto"])."', ".
+				"bookmarks = '".quote($this->dblink, $bookmarks)."', ".
+				"show_spaces = '".quote($this->dblink, $_POST["show_spaces"])."', ".
+				"typografica = '".quote($this->dblink, $_POST["typografica"])."', ".
+				"lang = '".quote($this->dblink, $_POST["lang"])."', ".
+				"more = '".quote($this->dblink, $more)."' ".
+			"WHERE name = '".quote($this->dblink, $user["name"])."' LIMIT 1");
 
-      $this->SetUser($this->LoadUser($user["name"]));
-      $this->SetBookmarks(BM_USER);
+		$this->SetUser($this->LoadUser($user["name"]));
+		$this->SetBookmarks(BM_USER);
 
-      // forward
-      $this->SetMessage($this->GetTranslation("SettingsStored",$_POST["lang"]));
+		// forward
+		$this->SetMessage($this->GetTranslation("SettingsStored",$_POST["lang"]));
 
-      $this->Redirect($this->href());
-   }
-   // user is logged in; display config form
-   print($this->FormOpen());
-   ?>
+		$this->Redirect($this->href());
+	}
+	// user is logged in; display config form
+	print($this->FormOpen());
+?>
 
 <input type="hidden" name="action" value="update" />
 <div id="cssform1">
-  <h3><?php echo $this->GetTranslation("Hello").", ".$this->ComposeLinkToPage($user["name"]) ?>!</h3>
-  <p><a href="<?php echo $this->href("", "Password")?>"><?php echo $this->GetTranslation("YouWantChangePassword");?></a></p>
-  <p>
-    <label for="email"><?php echo $this->GetTranslation("YourEmail");?>:</label>
-    <input id="email" name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />
-    &nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("root_url").'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("root_url").'images/warning.png" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="20" height="23" />' ?> </p>
-  <p>
-    <label for="doubleclickedit"><?php echo $this->GetTranslation("DoubleclickEditing");?>:</label>
-    <input type="hidden" name="doubleclickedit" value="N" />
-    <input
-         type="checkbox" id="doubleclickedit" name="doubleclickedit" value="Y"
-         <?php echo $user["doubleclickedit"] == "Y" ? "checked=\"checked\"" : "" ?> />
-  </p>
-  <p>
-    <label for="autocomplete"><?php echo $this->GetTranslation("WikieditAutocomplete");?>:</label>
-    <input type="hidden" name="autocomplete" value="N" />
-    <input
-         type="checkbox" id="autocomplete" name="autocomplete" value="Y"
-         <?php echo $user["options"]["autocomplete"] == "Y" ? "checked=\"checked\"" : "" ?> />
-  </p>
-  <p>
-    <label for="showdatetimeinlinks"><?php echo $this->GetTranslation("ShowDateTimeInLinks");?>:</label>
-    <input type="hidden" name="showdatetimeinlinks" value="N" />
-    <input
-         type="checkbox" id="showdatetimeinlinks" name="showdatetimeinlinks" value="Y"
-         <?php echo $user["showdatetime"] == "Y" ? "checked=\"checked\"" : "" ?> />
-  </p>
-  <p>
-    <label for="show_comments"><?php echo $this->GetTranslation("ShowComments?");?>:</label>
-    <input type="hidden" name="show_comments" value="N" />
-    <input
-         type="checkbox" id="show_comments" name="show_comments" value="Y"
-         <?php echo $user["show_comments"] == "Y" ? "checked=\"checked\"" : "" ?> />
-  </p>
-  <p>
-    <label for="show_files"><?php echo $this->GetTranslation("ShowFiles?");?>:</label>
-    <input type="hidden" name="show_files" value="N" />
-    <input
-         type="checkbox" id="show_files" name="show_files" value="Y"
-         <?php echo $user["options"]["show_files"] == "Y" ? "checked=\"checked\"" : "" ?> />
-  </p>
-  <p>
-    <label for="show_spaces"><?php echo $this->GetTranslation("ShowSpaces");?>:</label>
-    <input type="hidden" name="show_spaces" value="N" />
-    <input
-         type="checkbox" id="show_spaces" name="show_spaces" value="Y"
-         <?php echo $user["show_spaces"] == "Y" ? "checked=\"checked\"" : "" ?> />
-  </p>
-  <p>
-    <label for="dont_redirect"><?php echo $this->GetTranslation("DontRedirect");?>:</label>
-    <input type="hidden" name="dont_redirect" value="N" />
-    <input
-         type="checkbox" id="dont_redirect" name="dont_redirect" value="Y"
-         <?php echo $user["options"]["dont_redirect"] == "Y" ? "checked=\"checked\"" : "" ?> />
-  </p>
-  <p>
-    <label for="send_watchmail"><?php echo $this->GetTranslation("SendWatchMail");?>:</label>
-    <input type="hidden" name="send_watchmail" value="N" />
-    <input
-         type="checkbox" id="send_watchmail" name="send_watchmail" value="Y"
-         <?php echo $user["options"]["send_watchmail"] == "Y" ? "checked=\"checked\"" : "" ?> />
-  </p>
-  <!--
-      <p><label for="typografica"><?php echo $this->GetTranslation("Typografica");?>:</label><input type="hidden" name="typografica" value="N" /><input type="checkbox" id="typografica" name="typografica" value="Y" <?php echo $user["typografica"] == "Y" ? "checked=\"checked\"" : "" ?> /></p>
-    -->
-  <p>
-    <label for="lang"><?php echo $this->GetTranslation("YourLanguage");?>:</label>
-    <select id="lang" name="lang">
-      <option value=""></option>
-      <?php
-         $langs = $this->AvailableLanguages();
-         for ($i=0;$i<count($langs);$i++) {
-            echo '<option value="'.$langs[$i].'"'.($user["lang"]==$langs[$i]?"selected=\"selected\"":"").'>'.$langs[$i].'</option>';
-         }
-         ?>
-    </select>
-  </p>
-  <p>
-    <label for="theme"><?php echo $this->GetTranslation("ChooseTheme");?>:</label>
-    <select id="theme" name="theme">
-      <option value=""></option>
-      <?php
-         $themes = $this->AvailableThemes();
-         for ($i=0;$i<count($themes);$i++) {
-            echo '<option value="'.$themes[$i].'" '.($user["options"]["theme"]==$themes[$i]?"selected=\"selected\"":"").'>'.$themes[$i].'</option>';
-         }
-         ?>
-    </select>
-  </p>
-  <p>
-    <label for="changescount"><?php echo $this->GetTranslation("RecentChangesLimit");?>:</label>
-    <input id="changescount" name="changescount"
-         value="<?php echo htmlentities($user["changescount"]) ?>" size="40" />
-  </p>
-  <p>
-    <label for="revisioncount"><?php echo $this->GetTranslation("RevisionListLimit");?>:</label>
-    <input id="revisioncount" name="revisioncount"
-         value="<?php echo htmlentities($user["revisioncount"]) ?>" size="40" />
-  </p>
-  <p>
-    <label for="motto"><?php echo $this->GetTranslation("YourMotto");?>:</label>
-    <input id="motto" name="motto"
-         value="<?php echo htmlspecialchars($user["motto"]) ?>" size="40" />
-  </p>
-  <p>
-    <label for="bookmarks"><?php echo $this->GetTranslation("YourBookmarks");?>:</label>
-    <textarea id="bookmarks" name="bookmarks" cols="40" rows="10"><?php echo htmlspecialchars($user["bookmarks"]) ?></textarea>
-  </p>
-  <p>
-    <input class="OkBtn"
-         onmouseover='this.className="OkBtn_";'
-         onmouseout='this.className="OkBtn";' type="submit" align="top"
-         value="<?php echo $this->GetTranslation("UpdateSettingsButton"); ?>" />
-    &nbsp;
-    <input class="CancelBtn"
-         onmouseover='this.className="CancelBtn_";'
-         onmouseout='this.className="CancelBtn";' type="button" align="top"
-         value="<?php echo $this->GetTranslation("LogoutButton"); ?>"
-         onclick="document.location='<?php echo $this->href("", "", "action=logout"); ?>'" />
-  </p>
+	<h3><?php echo $this->GetTranslation("Hello").", ".$this->ComposeLinkToPage($user["name"]) ?>!</h3>
+	<p><a href="<?php echo $this->href("", "Password")?>"><?php echo $this->GetTranslation("YouWantChangePassword");?></a></p>
+	<p>
+		<label for="email"><?php echo $this->GetTranslation("YourEmail");?>:</label>
+		<input id="email" name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />
+		&nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("root_url").'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("root_url").'images/warning.png" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="20" height="23" />' ?> </p>
+	<p>
+		<label for="doubleclickedit"><?php echo $this->GetTranslation("DoubleclickEditing");?>:</label>
+		<input type="hidden" name="doubleclickedit" value="N" />
+		<input
+			type="checkbox" id="doubleclickedit" name="doubleclickedit" value="Y"
+			<?php echo $user["doubleclickedit"] == "Y" ? "checked=\"checked\"" : "" ?> />
+	</p>
+	<p>
+		<label for="autocomplete"><?php echo $this->GetTranslation("WikieditAutocomplete");?>:</label>
+		<input type="hidden" name="autocomplete" value="N" />
+		<input
+			type="checkbox" id="autocomplete" name="autocomplete" value="Y"
+			<?php echo $user["options"]["autocomplete"] == "Y" ? "checked=\"checked\"" : "" ?> />
+	</p>
+	<p>
+		<label for="showdatetimeinlinks"><?php echo $this->GetTranslation("ShowDateTimeInLinks");?>:</label>
+		<input type="hidden" name="showdatetimeinlinks" value="N" />
+		<input
+			type="checkbox" id="showdatetimeinlinks" name="showdatetimeinlinks" value="Y"
+			<?php echo $user["showdatetime"] == "Y" ? "checked=\"checked\"" : "" ?> />
+	</p>
+	<p>
+		<label for="show_comments"><?php echo $this->GetTranslation("ShowComments?");?>:</label>
+		<input type="hidden" name="show_comments" value="N" />
+		<input
+			type="checkbox" id="show_comments" name="show_comments" value="Y"
+			<?php echo $user["show_comments"] == "Y" ? "checked=\"checked\"" : "" ?> />
+	</p>
+	<p>
+		<label for="show_files"><?php echo $this->GetTranslation("ShowFiles?");?>:</label>
+		<input type="hidden" name="show_files" value="N" />
+		<input
+			type="checkbox" id="show_files" name="show_files" value="Y"
+			<?php echo $user["options"]["show_files"] == "Y" ? "checked=\"checked\"" : "" ?> />
+	</p>
+	<p>
+		<label for="show_spaces"><?php echo $this->GetTranslation("ShowSpaces");?>:</label>
+		<input type="hidden" name="show_spaces" value="N" />
+		<input
+			type="checkbox" id="show_spaces" name="show_spaces" value="Y"
+			<?php echo $user["show_spaces"] == "Y" ? "checked=\"checked\"" : "" ?> />
+	</p>
+	<p>
+		<label for="dont_redirect"><?php echo $this->GetTranslation("DontRedirect");?>:</label>
+		<input type="hidden" name="dont_redirect" value="N" />
+		<input
+			type="checkbox" id="dont_redirect" name="dont_redirect" value="Y"
+			<?php echo $user["options"]["dont_redirect"] == "Y" ? "checked=\"checked\"" : "" ?> />
+	</p>
+	<p>
+		<label for="send_watchmail"><?php echo $this->GetTranslation("SendWatchMail");?>:</label>
+		<input type="hidden" name="send_watchmail" value="N" />
+		<input
+			type="checkbox" id="send_watchmail" name="send_watchmail" value="Y"
+			<?php echo $user["options"]["send_watchmail"] == "Y" ? "checked=\"checked\"" : "" ?> />
+	</p>
+	<!--
+	<p><label for="typografica"><?php echo $this->GetTranslation("Typografica");?>:</label><input type="hidden" name="typografica" value="N" /><input type="checkbox" id="typografica" name="typografica" value="Y" <?php echo $user["typografica"] == "Y" ? "checked=\"checked\"" : "" ?> /></p>
+	-->
+	<p>
+		<label for="lang"><?php echo $this->GetTranslation("YourLanguage");?>:</label>
+		<select id="lang" name="lang">
+		<option value=""></option>
+<?php
+			$langs = $this->AvailableLanguages();
+			for ($i = 0; $i < count($langs); $i++)
+			{
+				echo '<option value="'.$langs[$i].'"'.($user["lang"] == $langs[$i] ? "selected=\"selected\"" : "").'>'.$langs[$i].'</option>';
+			}
+?>
+		</select>
+	</p>
+	<p>
+		<label for="theme"><?php echo $this->GetTranslation("ChooseTheme");?>:</label>
+		<select id="theme" name="theme">
+		<option value=""></option>
+<?php
+			$themes = $this->AvailableThemes();
+			for ($i = 0; $i < count($themes); $i++)
+			{
+				echo '<option value="'.$themes[$i].'" '.($user["options"]["theme"] == $themes[$i] ? "selected=\"selected\"" : "").'>'.$themes[$i].'</option>';
+			}
+?>
+		</select>
+	</p>
+	<p>
+		<label for="changescount"><?php echo $this->GetTranslation("RecentChangesLimit");?>:</label>
+		<input id="changescount" name="changescount"
+			value="<?php echo htmlentities($user["changescount"]) ?>" size="40" />
+	</p>
+	<p>
+		<label for="revisioncount"><?php echo $this->GetTranslation("RevisionListLimit");?>:</label>
+		<input id="revisioncount" name="revisioncount"
+			value="<?php echo htmlentities($user["revisioncount"]) ?>" size="40" />
+	</p>
+	<p>
+		<label for="motto"><?php echo $this->GetTranslation("YourMotto");?>:</label>
+		<input id="motto" name="motto"
+			value="<?php echo htmlspecialchars($user["motto"]) ?>" size="40" />
+	</p>
+	<p>
+		<label for="bookmarks"><?php echo $this->GetTranslation("YourBookmarks");?>:</label>
+		<textarea id="bookmarks" name="bookmarks" cols="40" rows="10"><?php echo htmlspecialchars($user["bookmarks"]) ?></textarea>
+	</p>
+	<p>
+		<input class="OkBtn"
+			onmouseover='this.className="OkBtn_";'
+			onmouseout='this.className="OkBtn";' type="submit" align="top"
+			value="<?php echo $this->GetTranslation("UpdateSettingsButton"); ?>" />
+			&nbsp;
+		<input class="CancelBtn"
+			onmouseover='this.className="CancelBtn_";'
+			onmouseout='this.className="CancelBtn";' type="button" align="top"
+			value="<?php echo $this->GetTranslation("LogoutButton"); ?>"
+			onclick="document.location='<?php echo $this->href("", "", "action=logout"); ?>'" />
+	</p>
 </div>
 <br />
 <?php
-         //  echo $this->FormatTranslation("SeeListOfPages")."<br />";
-         print($this->FormClose());
+		//  echo $this->FormatTranslation("SeeListOfPages")."<br />";
+		print($this->FormClose());
 }
 else
 {
-   // user is not logged in
-   echo $this->Action("login", array());
+	// user is not logged in
+	echo $this->Action("login", array());
 }
 ?>
 <!--/notypo-->
