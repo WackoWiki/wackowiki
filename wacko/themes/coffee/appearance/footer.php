@@ -64,18 +64,6 @@ if ($this->GetUser()){
 ?></div>
 
 <?php
-if ($this->GetConfigValue("debug")>=2)
-{
-	print("<span class=\"debug\">");
-	print("<strong>Query log:</strong><br />\n");
-	foreach ($this->queryLog as $query)
-	{
-		print($query["query"]." (".$query["time"].")<br />\n");
-		$zz++;
-	}
-	print("<b>total: $zz</b>");
-	print("</span>");
-}
 
 //don't place final </body></html> here. Wacko closes HTML automatically.
 ?>

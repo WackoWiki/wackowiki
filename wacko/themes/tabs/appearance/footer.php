@@ -310,14 +310,6 @@ echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:HomePage", ""
 ?>
 </div>
 <?php
-  if ($this->GetConfigValue("debug")>=2)
-  {
-    print("<span class=\"debug\"><strong>Query log:</strong><br />\n");
-    foreach ($this->queryLog as $query)
-    {
-      print($query["query"]." (".$query["time"].")<br />\n");
-    }
-    print("</span>");
-  }
+
 //don't place final </body></html> here. Wacko closes HTML automatically.
 ?>
