@@ -12,6 +12,45 @@ class Cache
 		$this->cache_dir = $cache_dir;
 		$this->cache_ttl = $cache_ttl;
 		$this->timer = $this->GetMicroTime();
+
+		if ($this->wacko->config['debug']) $this->debug = $this->wacko->config['debug'];
+	}
+	
+	// save serialized sql results
+	function SaveSQL($query, $data)
+	{
+		$filename	= $this->SQLCacheID($query);
+		$sqldata	= serialize($data);
+		
+		$fp	= fopen($filename, 'w');
+		fwrite($fp, $sqldata);
+		fclose($fp);
+		chmod($filename, 0644);
+		
+		return true;
+	}
+	
+	// retrieve and unserialize cached sql data
+	function LoadSQL($query)
+	{
+		$filename = $this->SQLCacheID($query);
+		
+		if (!@file_exists($filename))
+			return false;
+		
+		if ((time() - @filemtime($filename)) > $this->wacko->config['cache_sql_ttl'])
+			return false;
+		
+		$fp		= fopen($filename, 'r');
+		$data	= fread($fp, filesize($filename));
+		fclose($fp); 
+		
+		return unserialize($data);
+	}
+	
+	function SQLCacheID($query)
+	{
+		return $this->cache_dir.CACHE_SQL_DIR.md5($query);
 	}
 
 	//Get page content from cache
