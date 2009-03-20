@@ -1,19 +1,5 @@
 <?php
 
-// constants
-define("TRAN_DONTCHANGE", "0");
-define("TRAN_LOWERCASE", "1");
-define("TRAN_LOAD", "0");
-define("TRAN_DONTLOAD", "1");
-define("LOAD_NOCACHE", "0");
-define("LOAD_CACHE", "1");
-define("LOAD_ALL", "0");
-define("LOAD_META", "1");
-define("BM_AUTO", "0");
-define("BM_USER", "1");
-define("BM_DEFAULT", "2");
-define("ACTIONS4DIFF", "a, anchor, toc"); //allowed actions in DIFF
-
 // engine class
 class Wacko
 {
@@ -22,6 +8,7 @@ class Wacko
 	var $dblink;
 	var $page;
 	var $tag;
+	var $queryTime;
 	var $queryLog = array();
 	var $interWiki = array();
 	var $aclCache = array();
@@ -80,11 +67,11 @@ class Wacko
 	);
 
 	// CONSTRUCTOR
-	function Wacko($config)
+	function Wacko($config, $dblink)
 	{
 		$this->timer = $this->GetMicroTime();
 		$this->config = $config;
-		$this->dblink = connect($this->config["database_host"], $this->config["database_user"], $this->config["database_password"], $this->config["database_database"], $this->config["db_collation"], $this->config["database_driver"], $this->config["database_port"]);
+		$this->dblink 	= $dblink;
 		$this->VERSION = WAKKA_VERSION;
 		$this->WVERSION = WACKO_VERSION;
 	}
@@ -92,25 +79,40 @@ class Wacko
 	// DATABASE
 	function Query($query, $debug = 0)
 	{
-		if ($this->GetConfigValue("debug") >= 1)
+		if ($debug) echo "((QUERY: $query))";
+
+		if ($this->config['debug'] >= 1)
 			$start = $this->GetMicroTime();
 
 		$result = query($this->dblink, $query);
 
-		if($this->GetConfigValue("debug") >= 1)
+		if($this->config['debug'] >= 2)
 		{
 			$time = $this->GetMicroTime() - $start;
-			$this->queryLog[] = array(
-				"query"   => $query,
-				"time"    => $time);
+			$this->queryTime += $time;
+			
+			if ($this->config['debug'] >= 3)
+			{
+				$this->queryLog[] = array(
+					'query'   => $query,
+					'time'    => $time
+				);
+			}
 		}
 
 		return $result;
 	}
 
-	function LoadAll($query)
+	function LoadAll($query, $docache = 0)
 	{
 		$data = array();
+
+		// retrieving from cache
+		if ($this->config['cache_sql'] && $docache)
+		{
+			if ($data = $this->cache->LoadSQL($query)) return $data;
+		}
+
 		// retrieving from db
 		if ($r = $this->Query($query))
 		{
@@ -118,12 +120,19 @@ class Wacko
 
 			free_result($r);
 		}
+
+		// saving to cache
+		if ($this->config['cache_sql'] && $docache)
+		{
+			$this->cache->SaveSQL($query, $data);
+		}
+
 		return $data;
 	}
 
-	function LoadSingle($query)
+	function LoadSingle($query, $docache = 0)
 	{
-		if ($data = $this->LoadAll($query)) return $data[0];
+		if ($data = $this->LoadAll($query, $docache)) return $data[0];
 	}
 
 	// MISC
@@ -203,7 +212,6 @@ class Wacko
 
 	function SetLanguage($lang)
 	{
-		//   echo "<b>SetLanguage:</b> ".$lang."<br />";
 		$this->LoadResource($lang);
 		$this->language = &$this->languages[$lang];
 
@@ -326,8 +334,6 @@ class Wacko
 		if (!$this->GetConfigValue("multilanguage"))
 			return $this->resource[$name];
 
-		//echo "<b>GetTranslation:</b> $lang + $name + $this->userlang + $this->pagelang<br />";
-
 		if (!$lang && $this->userlang != $this->pagelang)
 			$lang = $this->userlang;
 
@@ -403,7 +409,6 @@ class Wacko
 	{
 		$t1 = $this->utf8ToUnicodeEntities($string);
 		$t2 = @strtr($t1, $this->unicode_entities);
-		//echo "<pre><h1>".$string."|".$t1."|".$t2."</h1></pre>";
 		if (!preg_match("/\&\#[0-9]+\;/", $t2))
 			$string = $t2;
 
@@ -509,7 +514,7 @@ class Wacko
 
 				if ($page["lang"]) 
 					$lang = $page["lang"];
-				else 
+				else
 					$lang = $this->GetConfigValue("language");
 
 				$this->SetLanguage($lang);
@@ -748,15 +753,19 @@ class Wacko
 		$user = $this->GetUser();
 		$pages[$cl] = $user["name"];
 		$bookm = $this->GetDefaultBookmarks($user["lang"], "site")."\n".
-				( $user["bookmarks"]
-				? $user["bookmarks"]
-				: $this->GetDefaultBookmarks($user["lang"]));
+					( $user["bookmarks"]
+					? $user["bookmarks"]
+					: $this->GetDefaultBookmarks($user["lang"]));
 		$bookmarks = explode("\n", $bookm);
 
 		for ($i = 0; $i <= count($bookmarks); $i++)
-		$pages[$cl+$i] = preg_replace("/^(.*?)\s.*$/","\\1",preg_replace("/[\[\]\(\)]/","",$bookmarks[$i]));
+		{
+			if (preg_match("/^[\(\[]/", $bookmarks[$i]))
+				$pages[$cl+$i] = preg_replace("/^(.*?)\s.*$/","\\1",preg_replace("/[\[\]\(\)]/","",$bookmarks[$i]));
+		}
 
 		$pages[] = $this->GetPageTag();
+		$spages	= $pages;
 		$spages_str = '';
 		$pages_str = '';
 
@@ -795,12 +804,13 @@ class Wacko
 		"SELECT * FROM ".$this->config["table_prefix"]."acls ".
 		"WHERE BINARY page_tag IN (".$pages_str.") AND privilege = 'read'"))
 		{
-			for ($i=0; $i<count($read_acls); $i++)
+			for ($i = 0; $i < count($read_acls); $i++)
 			{
 				$this->CacheACL($read_acls[$i]["supertag"], "read", 1, $read_acls[$i]);
 				//       $exists[] = $read_acls[$i]["tag"];
 			}
 		}
+
 		/*
 		 $notexists = @array_values(@array_diff($pages, $exists));
 		 for ($i=0; $i<count($notexists); $i++)
@@ -809,10 +819,11 @@ class Wacko
 		 $this->CacheACL($notexists[$i], "read", 1, $acl);
 		 }
 		 */
+
 		$ddd = $this->GetMicroTime();
 		$this->queryLog[] = array(
-	"query"   => "<b>end caching links</b>",
-	"time"    => $this->GetTranslation("MeasuredTime").": ".(number_format(($ddd-$this->timer),3))." s");
+			"query"   => "<b>end caching links</b>",
+			"time"    => $this->GetTranslation("MeasuredTime").": ".(number_format(($ddd-$this->timer),3))." s");
 	}
 
 	function SetPage($page)
@@ -924,7 +935,7 @@ class Wacko
 		}
 	}
 
-	function LoadRecentlyComment($limit = 70, $for="", $from="")
+	function LoadRecentlyComment($limit = 100, $for="", $from="")
 	{
 		$limit= (int) $limit;
 		if ($pages =
@@ -1135,7 +1146,7 @@ class Wacko
 				$this->SaveAcl($tag, "comment", ($comment_on ? "" : $comment_acl));
 				// set watch
 				if ($this->GetUser() && !$this->GetConfigValue("disable_autosubscribe"))
-				$this->SetWatch($this->GetUserName(), $this->GetPageTag());
+					$this->SetWatch($this->GetUserName(), $this->GetPageTag());
 
 				if ($comment_on)
 				{
@@ -1587,13 +1598,12 @@ class Wacko
 			$noimg = $matches[1];
 			$thing = $matches[2];
 			$arr = explode("/", $thing);
-			//echo($thing."<br />");
+
 			if (count($arr) == 1)                // file:some.zip
 			{
-				//    echo ($thing."<br />");
 				//try to find in global storage and return if success
 				$desc = $this->CheckFileExists($thing);
-				//    print_r($desc);
+
 				if (is_array($desc))
 				{
 					$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
@@ -1662,8 +1672,14 @@ class Wacko
 						if ($desc["picture_w"] && !$noimg)
 						{
 							if (!$text)
-							$text = $title;
-							return "<img src=\"".$this->config["base_url"].trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file."\" ".($text?"alt=\"".$text."\" title=\"".$text."\"":"")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
+							{
+								$text = $title;
+								return "<img src=\"".$this->config["base_url"].trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
+							}
+							else
+							{
+								return "<a href=\"".$this->config["base_url"].trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file."\" title=\"".$title."\">".$text."</a>";
+							}
 						}
 					}
 					else //403
@@ -1764,7 +1780,6 @@ class Wacko
 
 				$this->SetLanguage($lang);
 				$supertag = $this->NpjTranslit($tag);
-				//       echo "<h1>".$_lang."|".$lang."|".$supertag."</h1>";
 			}
 			else
 			{
@@ -1853,15 +1868,11 @@ class Wacko
 					$accicon = $this->GetTranslation("keyicon");
 				}
 
-				// language
-				//        echo "<< ".$lang.":".$_lang.":".$otag."|$linklang >>";
-				//        if ($lang != $this->pagelang)
-				//        {
 				if ($text == trim($otag, "/") || $linklang)
 					$text = $this->DoUnicodeEntities($text, $lang);
-				//         echo "< ".$text.":".$otag." >";
+
 				$page = $this->DoUnicodeEntities($page, $lang);
-				//        }
+
 				if (isset($_lang)) $this->SetLanguage($_lang);
 			}
 			else
@@ -1961,8 +1972,6 @@ class Wacko
 				return $res;
 			}
 		}
-		//echo ("<br>".$tag."<br>");
-		//die("^([[:alnum:]]+)[:]([".$this->language["ALPHANUM_P"]."\-\_\.\+\&\=]*)$");
 		return $text;
 	}
 
@@ -2203,17 +2212,13 @@ class Wacko
 
 	function Header($mod = "")
 	{
-		//    $this->StopLinkTracking();
 		$result = $this->IncludeBuffered("header".$mod.".php", "Theme is corrupt: ".$this->GetConfigValue("theme"), "", "themes/".$this->GetConfigValue("theme")."/appearance");
-		//    $this->StartLinkTracking();
 		return $result;
 	}
 
 	function Footer($mod = "")
 	{
-		//    $this->StopLinkTracking();
 		$result = $this->IncludeBuffered("footer".$mod.".php", "Theme is corrupt: ".$this->GetConfigValue("theme"), "", "themes/".$this->GetConfigValue("theme")."/appearance");
-		//    $this->StartLinkTracking();
 		return $result;
 	}
 
@@ -3061,8 +3066,10 @@ class Wacko
 
 				//"Maintenance: cached pages purged";
 			}
+
 			$this->Query("UPDATE {$this->config['table_prefix']}config SET maint_last_cache = '".time()."'");
-			*/
+		}
+		*/
 	}
 
 	// MAIN EXECUTION ROUTINE
@@ -3137,7 +3144,6 @@ class Wacko
 		// normalizing tag name
 		if (!preg_match("/^[".$this->language["ALPHANUM_P"]."\!]+$/", $tag))
 			$tag = $this->tryUtfDecode($tag);
-		//    if (!$_REQUEST["add"] == "1" || $this->method=="watch" )
 
 		$tag = str_replace("'", "_", str_replace("\\", "", str_replace("_", "", $tag)));
 		$tag = preg_replace("/[^".$this->language["ALPHANUM_P"]."\_\-\.]/", "", $tag);
