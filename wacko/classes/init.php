@@ -16,13 +16,14 @@
 	6.  DBAL()*			- establish DBAL for database operations and connect to DB (required by Engine())
 	7.  Session()			- start user session
 	8.  IsLocked()		- check website for locking
-	9.  GetMicroTime()		- return precise timer
-	10. Cache()			- initialize caching engine
-	11. Cache('check')		- process request for caching purposes (required by Cache('store'))
-	12. Engine()*		- initialize Wacko engine
-	13. Engine('run')		- execute script and open start page (requires Engine())
-	14. Cache('store')		- cache page (requires Engine())
-	15. Debug()			- print debugging information
+	9. Installer()		- start installer if necessary
+	10.  GetMicroTime()	- return precise timer
+	11. Cache()			- initialize caching engine
+	12. Cache('check')		- process request for caching purposes (required by Cache('store'))
+	13. Engine()*		- initialize Wacko engine
+	14. Engine('run')		- execute script and open start page (requires Engine())
+	15. Cache('store')		- cache page (requires Engine())
+	16. Debug()			- print debugging information
 	
 	Additional information can be found in class methods' comments.
 	
@@ -428,9 +429,9 @@ class Init
 		}
 	}
 	
+	// INSTALLER
 	function Installer()
 	{
-		// TODO: broken -> Fixme
 		// compare versions, start installer if necessary
 		if ($this->config["wacko_version"] != WACKO_VERSION)
 		{
