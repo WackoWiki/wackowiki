@@ -246,7 +246,8 @@ class Init
 				if (@file_exists('config.inc.php'))
 					require('config.inc.php');
 				else
-					die('Error loading WackoWiki config data: config.inc.php not found in base directory.');
+					// die('Error loading WackoWiki config data: config.inc.php not found in base directory.');
+					return $this->Installer();
 				
 				// if (!$wackoConfig['system_seed'] || strlen($wackoConfig['system_seed']) < 20)
 				// 	die('WackoWiki fatal error: system_seed in config.inc.php is empty or too short. Please, use 20+ *random* characters to define this variable.');
@@ -431,7 +432,7 @@ class Init
 	{
 		// TODO: broken -> Fixme
 		// compare versions, start installer if necessary
-		if ($wackoConfig["wacko_version"] != WACKO_VERSION)
+		if ($this->config["wacko_version"] != WACKO_VERSION)
 		{
 			if (!$_REQUEST["installAction"] && !strstr($_SERVER["SERVER_SOFTWARE"], "IIS"))
 			{
