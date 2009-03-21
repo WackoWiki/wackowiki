@@ -248,11 +248,11 @@ class Init
 				else
 					die('Error loading WackoWiki config data: config.inc.php not found in base directory.');
 				
-				#	if (!$wackoConfig['system_seed'] || strlen($wackoConfig['system_seed']) < 20)
-				#		die('WackoWiki fatal error: system_seed in config.inc.php is empty or too short. Please, use 20+ *random* characters to define this variable.');
+				// if (!$wackoConfig['system_seed'] || strlen($wackoConfig['system_seed']) < 20)
+				// 	die('WackoWiki fatal error: system_seed in config.inc.php is empty or too short. Please, use 20+ *random* characters to define this variable.');
 				
 				$wackoConfig['root_url']	= $wackoConfig['base_url'];
-				$wackoConfig['system_seed']	= md5($wackoConfig['system_seed']);
+				// $wackoConfig['system_seed']	= md5($wackoConfig['system_seed']);
 
 				return $this->config = array_merge($wackoDefaultConfig, (array)$wackoConfig);
 				
@@ -379,12 +379,12 @@ class Init
 	// SESSION HANDLING
 	function Session()
 	{
-		if ($this->config['ssl'] == true) session_set_cookie_params(0, '/', '', true);
+		// if ($this->config['ssl'] == true) session_set_cookie_params(0, '/', '', true);
 		
-		session_name(SESSION_HANDLER_ID);
-		session_save_path(SESSION_HANDLER_PATH);
+		// session_name(SESSION_HANDLER_ID);
+		// session_save_path(SESSION_HANDLER_PATH);
 		session_start();
-		return session_id();
+		// return session_id();
 	}
 	
 	// DATABASE ABSTRACT LAYER
@@ -556,40 +556,41 @@ class Init
 				$overall_time = $this->GetMicroTime() - $this->timer;
 				
 				echo "<div class=\"debug\">".
-					"<p class=\"debug\"><span>Program execution statistics</span></p>\n";
+					 "<p class=\"debug\"><span>Program execution statistics</span></p>\n".
+					 "<ul>";
 				
 				if (function_exists('memory_get_usage')) if ($execmem = memory_get_usage())
-					echo 'Memory allocated: '.(number_format(($execmem / (1024*1024)), 3))." MB &nbsp; \n";
+					echo '<li>Memory allocated: '.(number_format(($execmem / (1024*1024)), 3))." MB </li>";
 				
-				echo 'Overall time taken: '.(number_format(($overall_time), 3))." sec.\n";
+				echo '<li>Overall time taken: '.(number_format(($overall_time), 3))." sec. </li>";
 				
 				if ($this->config['debug'] >= 2)
 				{
-					echo ' &nbsp; Execution time: '.number_format($overall_time - $this->engine->queryTime, 3)." sec.\n";
-					echo ' &nbsp; SQL time: '.number_format($this->engine->queryTime, 3)." sec.\n";
+					echo '<li>Execution time: '.number_format($overall_time - $this->engine->queryTime, 3)." sec. </li>";
+					echo '<li>SQL time: '.number_format($this->engine->queryTime, 3)." sec. </li>";
 				}
 				
 				if ($this->config['debug'] >= 3)
 				{
-					echo ' &nbsp; SQL queries: '.count($this->engine->queryLog)."\n";
-					echo '<br /><br />SQL queries dump follows'.( $this->config['debug_sql_threshold'] > 0 ? ' (&gt;'.$this->config['debug_sql_threshold'].' sec.)' : '' ).":<hr />\n";
+					echo '<li>SQL queries: '.count($this->engine->queryLog)."</li>";
+					echo '<li>SQL queries dump follows'.( $this->config['debug_sql_threshold'] > 0 ? ' (&gt;'.$this->config['debug_sql_threshold'].' sec.)' : '' ).":<ol>";
 					
 					foreach ($this->engine->queryLog as $query)
 					{
 						if ($query['time'] < $this->config['debug_sql_threshold']) continue;
 						
+						echo "<li>\n";
 						echo str_replace(array('<', '>'), array('&lt;', '&gt;'), $query['query']).'<br />';
 						echo '['.number_format($query['time'], 4).' sec.]';
-						echo "<hr />\n";
+						echo "<hr />\n</li>\n";
 					}
 				}
-				echo "</div>\n";
+				echo "</ol></li></ul></div>\n";
 			}
 			else return;
 		}
 		else return;
 	}
 }
-
 
 ?>
