@@ -16,6 +16,9 @@ if ($init->IsLocked() === true)
 	exit;
 }
 
+// start installer if necessary
+$init->Installer();
+
 // misc
 $init->Request();
 $init->Session();

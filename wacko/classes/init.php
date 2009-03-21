@@ -255,33 +255,6 @@ class Init
 				// $wackoConfig['system_seed']	= md5($wackoConfig['system_seed']);
 
 				return $this->config = array_merge($wackoDefaultConfig, (array)$wackoConfig);
-				
-				// TODO: broken -> Fixme
-				// compare versions, start installer if necessary
-				if ($wackoConfig["wacko_version"] != WACKO_VERSION)
-				{
-					if (!$_REQUEST["installAction"] && !strstr($_SERVER["SERVER_SOFTWARE"], "IIS"))
-					{
-						$req = $_SERVER["REQUEST_URI"];
-						if ($req{strlen($req) - 1} != "/" && strstr($req, ".php") != ".php")
-						{
-							header("Location: http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]."/");
-							exit;
-						}
-					}
-
-					// start installer
-					if (!$installAction = trim($_REQUEST["installAction"])) $installAction = "lang";
-					include("setup/header.php");
-					
-					if (@file_exists("setup/".$installAction.".php")) 
-					include("setup/".$installAction.".php"); 
-					
-					else print("<em>Invalid action</em>");
-					include("setup/footer.php");
-					
-					exit;
-				}
 			}
 			// secondary settings
 			else if ($this->config == true && !isset($this->dblink))
@@ -451,6 +424,36 @@ class Init
 		else
 		{
 			return false;
+		}
+	}
+	
+	function Installer()
+	{
+		// TODO: broken -> Fixme
+		// compare versions, start installer if necessary
+		if ($wackoConfig["wacko_version"] != WACKO_VERSION)
+		{
+			if (!$_REQUEST["installAction"] && !strstr($_SERVER["SERVER_SOFTWARE"], "IIS"))
+			{
+				$req = $_SERVER["REQUEST_URI"];
+				if ($req{strlen($req) - 1} != "/" && strstr($req, ".php") != ".php")
+				{
+					header("Location: http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]."/");
+					exit;
+				}
+			}
+
+			// start installer
+			if (!$installAction = trim($_REQUEST["installAction"])) $installAction = "lang";
+			include("setup/header.php");
+			
+			if (@file_exists("setup/".$installAction.".php")) 
+			include("setup/".$installAction.".php"); 
+			
+			else print("<em>Invalid action</em>");
+			include("setup/footer.php");
+			
+			exit;
 		}
 	}
 	
