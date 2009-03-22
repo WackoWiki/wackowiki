@@ -16,7 +16,7 @@
 	6.  DBAL()*			- establish DBAL for database operations and connect to DB (required by Engine())
 	7.  Session()			- start user session
 	8.  IsLocked()		- check website for locking
-	9. Installer()		- start installer if necessary
+	9.  Installer()		- start installer if necessary
 	10.  GetMicroTime()	- return precise timer
 	11. Cache()			- initialize caching engine
 	12. Cache('check')		- process request for caching purposes (required by Cache('store'))
@@ -261,7 +261,6 @@ class Init
 			// secondary settings
 			else if ($this->config == true && !isset($this->dblink))
 			{
-				
 				// connecting to db
 				$this->DBAL();
 				/*
@@ -372,11 +371,7 @@ class Init
 		
 		// check config data
 		if ($this->config == false) die('Error loading WackoWiki DBAL: config data must be initialized.');
-		
-		#if (!isset($this->config['db_layer'])) $this->Settings('db_layer', 'mysql');
-		
-		#$dbfile = 'db/'.$this->config['db_layer'].'.php';
-		
+						
 		// Load the correct database connector
 		if (!isset( $this->config["database_driver"] )) $this->Settings("database_driver", "mysql");
 
