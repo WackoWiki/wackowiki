@@ -3027,7 +3027,7 @@ class Wacko
 		{
 			$this->Query(
 				"DELETE FROM ".$this->config["table_prefix"]."referrers ".
-				"WHERE time < date_sub(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
+				"WHERE time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 		}
 
 		// purge old page revisions
@@ -3035,7 +3035,7 @@ class Wacko
 		{
 			$this->Query(
 				"DELETE FROM ".$this->config["table_prefix"]."revisions ".
-				"WHERE time < date_sub(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY) AND latest = 'N'");
+				"WHERE time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY) AND latest = 'N'");
 		}
 
 		// remove outdated pages cache
