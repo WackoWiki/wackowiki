@@ -377,14 +377,14 @@ class Init
 
 		switch($this->config["database_driver"])
 		{
-			case "mysql_legacy":
-				$dbfile = "db/mysql.php";
+			case "pdo":
+				$dbfile = "db/pdo.php";
 				break;
 			case "mysqli_legacy":
 				$dbfile = "db/mysqli.php";
 				break;
 			default:
-				$dbfile = "db/pdo.php";
+				$dbfile = "db/mysql.php";
 				break;
 		}
 		
