@@ -62,7 +62,7 @@ class typografica
 
 	var $settings = array ( "inches" => 1, // convert inches into &quot;
 							"apostroph" => 1, // apostroph convertor
-							"laquo" => 1,  // angle quotes
+							"laquo" => 0,  // angle quotes
 							"farlaquo" => 0,  // angle quotes for FAR (greater&less characters)
 							"quotes" => 1, // English quotes
 							"dash" => 1,   // (150) - middle dash
