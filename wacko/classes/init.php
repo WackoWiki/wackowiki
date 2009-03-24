@@ -35,24 +35,24 @@ define('BM_DEFAULT', 					2);
 define('CACHE_PAGE_DIR',				'pages/');
 define('CACHE_SQL_DIR',					'queries/');
 define('GUEST',							'guest@wacko');
-define('INTERCOM_MAX_SIZE',				262144);
+// define('INTERCOM_MAX_SIZE',				262144);
 define('LOAD_NOCACHE', 					0);
 define('LOAD_CACHE', 					1);
 define('LOAD_ALL', 						0);
 define('LOAD_META', 					1);
-define('SESSION_HANDLER_ID',			'sid');
-define('SESSION_HANDLER_PATH',			NULL);	// if you are using specific path (instead of system default /tmp) for session variables storing, define it here
-define('SQL_NULLDATE',					'0000-00-00 00:00:00');
-define('SQL_DATE_FORMAT',				'Y-m-d H:i:s');
+// define('SESSION_HANDLER_ID',			'sid');
+// define('SESSION_HANDLER_PATH',			NULL);	// if you are using specific path (instead of system default /tmp) for session variables storing, define it here
+// define('SQL_NULLDATE',					'0000-00-00 00:00:00');
+// define('SQL_DATE_FORMAT',				'Y-m-d H:i:s');
 define('TRAN_DONTCHANGE', 				0);
 define('TRAN_LOWERCASE', 				1);
 define('TRAN_LOAD', 					0);
 define('TRAN_DONTLOAD', 				1);
-// do not change this two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
 
+// do not change this two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
 define('WAKKA_VERSION',					'0.1.2');
 define('WACKO_VERSION',					'R4.3');
-define('XML_HTMLSAX3',					'lib/HTMLSax3/');
+define('XML_HTMLSAX3',					dirname(__FILE__).'lib/HTMLSax3/');
 define("ACTIONS4DIFF", "a, anchor, toc"); //allowed actions in DIFF
 
 class Init
@@ -142,6 +142,8 @@ class Init
 			// primary settings
 			if ($this->config == false && !isset($this->dblink))
 			{
+				$found_rewrite_extension = function_exists('apache_get_modules') ? in_array('mod_rewrite', apache_get_modules()) : false;
+								
 				// default configuration values
 				$wackoDefaultConfig 			= array(
 					"database_driver" => "",
@@ -230,6 +232,9 @@ class Init
 					"cache" => 0,
 					"cache_dir" => "_cache/",
 					"cache_ttl" => 600,
+						
+					"cache_sql" => 0,
+					"cache_sql_ttl" => 600,
 
 					"db_collation" => 0,
 					"rename_globalacl" => "Admins",
