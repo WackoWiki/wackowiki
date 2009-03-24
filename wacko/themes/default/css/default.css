@@ -71,7 +71,8 @@ form input.submitinput {
 
 /* Debugging informations */
 .time{ color:#999999; font-size: 9px; margin:5px 20px;}
-.debug { font-size: 11px; color: #888888;}
+.debug, .debug li { font-size: 11px; color: #888888;}
+
 
 #header {
 	padding-top: 0px;
@@ -542,3 +543,15 @@ display:inline;
 margin-right:1.1em;
 }
 
+/*temp search*/
+
+.highlight{
+        background-color: #FFFEA1;
+}
+#search_results li {margin: 1em 0;}
+#search_results li div {/*padding-left: 20px;*/}
+#search_results h3 {
+	font-size:14px;
+	border-bottom-width: 0px;
+	border-bottom-style: none;
+}
