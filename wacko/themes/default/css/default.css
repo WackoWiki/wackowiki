@@ -69,6 +69,14 @@ form input.submitinput {
   color: #CC3333; font-weight: bold;
 }
 
+.info {
+	background: #F4FBFF;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+	border:1px solid #D5D9E6;
+	color: #CC3333; font-weight: bold;
+}
+
 /* Debugging informations */
 .time{ color:#999999; font-size: 9px; margin:5px 20px;}
 .debug, .debug li { font-size: 11px; color: #888888;}
@@ -88,14 +96,22 @@ padding:10px 0px;}
 /** Styles for the main content in the page. *********************************/
 
 /* Default settings */
-#page {
+
+#content {
 	background-color: #FFFFFF;
-	padding: 9px 10px 10px;
+	padding: 9px 0px 0px;
 	border-top-width: 1px;
 	border-top-style: dotted;
-	border-top-color: #CCCCCC;  /*border: 1px inset #f0f0f0;
-  border-top: none;
+	border-top-color: #CCCCCC;  /*border: 1px inset #f0f0f0;border-top: none;
   border-bottom: none;*/
+	}
+
+#page {
+	background-color: #FFFFFF;
+	padding-top: 5px;
+	padding-right: 10px;
+	padding-bottom: 20px;
+	padding-left: 10px;  
 }
 
 #pageedit {
