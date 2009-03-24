@@ -5,7 +5,7 @@
 */
 
 // Wacko can show message (by javascript)
-$message = $this->GetMessage();
+#$message = $this->GetMessage();
 
 // HTTP header with right Charset settings
 header("Content-Type: text/html; charset=".$this->GetCharset());
@@ -61,9 +61,9 @@ if ($user["doubleclickedit"] == "Y") {?>
 //   * WikiEdit
 //   * Doubleclick editing
 //   * Smooth scrolling
-// Also, here we show message (see beginning of this file)
+
 ?>
-<body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
+<body onload="all_init();">
 <div id="mainwrapper">
 	<div id="header">
 		<div id="header-main">
@@ -142,3 +142,7 @@ echo $this->FormClose();
 </div>
 </div>
 <div id="content">
+<?php 
+	// here we show messages (see beginning of this file)
+	if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+?>
