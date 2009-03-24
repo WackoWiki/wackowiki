@@ -78,7 +78,7 @@ class Cache
 		$this->Log("ConstructID page=".$page);
 		$this->Log("ConstructID md5=".md5($page."_".$method."_".$query));
 
-		$filename = $this->cache_dir.md5($page)."_".$method."_".$query;
+		$filename = $this->cache_dir.CACHE_PAGE_DIR.md5($page)."_".$method."_".$query;
 		return $filename;
 	}
 
