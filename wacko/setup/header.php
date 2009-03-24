@@ -1,4 +1,7 @@
 <?php
+// Fetch Configuration
+if ( isset ( $_POST["config"] ) ) 
+	$config = array_merge( (array)$this->config, (array)$_POST["config"] );
 
 function myLocation()
 {
@@ -35,12 +38,6 @@ function is__writable($path)
 	if(!$rm)
 	unlink($path);
 	return true;
-}
-
-// Fetch Configuration
-if ( isset ( $_POST["config"] ) ) {
-	$config = $_POST["config"];
-	$config2 = array_merge((array)$wackoConfig, (array)$_POST["config"]);
 }
 
 if (!isset($config["language"]) || !@file_exists("setup/lang/installer.".$config["language"].".php")) $config["language"] = "en";

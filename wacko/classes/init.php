@@ -249,11 +249,13 @@ class Init
 				$wackoDefaultConfig['aliases']	= array('Admins' => '');
 				
 				// load primary config
-				if (@file_exists('config.inc.php'))
+				if ( @file_exists('config.inc.php') )
 					require('config.inc.php');
-				else
+				else {
 					// die('Error loading WackoWiki config data: config.inc.php not found in base directory.');
+					$this->config = $wackoDefaultConfig;
 					return $this->Installer();
+				}
 				
 				// if (!$wackoConfig['system_seed'] || strlen($wackoConfig['system_seed']) < 20)
 				// 	die('WackoWiki fatal error: system_seed in config.inc.php is empty or too short. Please, use 20+ *random* characters to define this variable.');
@@ -261,7 +263,7 @@ class Init
 				$wackoConfig['root_url']	= $wackoConfig['base_url'];
 				// $wackoConfig['system_seed']	= md5($wackoConfig['system_seed']);
 
-				return $this->config = array_merge($wackoDefaultConfig, (array)$wackoConfig);
+				return $this->config = array_merge($wackoDefaultConfig, (array)$config);
 			}
 			// secondary settings
 			else if ($this->config == true && !isset($this->dblink))

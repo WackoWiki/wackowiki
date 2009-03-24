@@ -1,9 +1,7 @@
 <?php
-
 function InsertPage($tag, $body, $lng, $rights = "Admins", $critical = false)
 {
-	GLOBAL $config, $dblink, $lang;
-
+	GLOBAL $config, $dblink;
 	$page_select = "SELECT * FROM ".$config["table_prefix"]."pages WHERE tag='".$tag."'";
 	$page_insert = "INSERT INTO ".$config["table_prefix"]."pages (tag, supertag, body, user, owner, time, latest, lang) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$body."', 'WackoInstaller', '".$config["admin_name"]."', now(), 'Y', '".$lng."')";
 	$perm_read_insert = "INSERT INTO ".$config["table_prefix"]."acls (page_tag, supertag, privilege, list) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', 'read', '*')";
@@ -144,7 +142,7 @@ function NpjTranslit($tag, $lng)
 
 function SetLanguage($lng)
 {
-	GLOBAL $config2, $language, $languages;
+		GLOBAL $languages;
 
 	if ( !$languages[$lng] )
 	{
@@ -161,9 +159,9 @@ function SetLanguage($lng)
 
 $error_inserting_pages = false;
 
-require_once("setup/lang/inserts.".$config2["language"].".php");
+require_once("setup/lang/inserts.".$config["language"].".php");
 
-if ( $config2["multilanguage"] ) {
+if ( $config["multilanguage"] ) {
 	$handle = opendir("setup/lang");
 	while (false !== ($file = readdir($handle)))
 	if(1 == preg_match("/^inserts\.(.*?)\.php$/",$file,$match))
