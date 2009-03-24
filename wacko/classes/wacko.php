@@ -324,7 +324,7 @@ class Wacko
 				$this->userlang = $this->GetConfigValue("language");
 			}
 		}
-		else if (!$lang) $lang = $this->config["language"];
+		else if (!$lang) $this->userlang = $lang = $this->config["language"];
 		
 		return $lang;
 	}
