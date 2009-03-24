@@ -64,7 +64,7 @@ class typografica
 							"apostroph" => 1, // apostroph convertor
 							"laquo" => 0,  // angle quotes
 							"farlaquo" => 0,  // angle quotes for FAR (greater&less characters)
-							"quotes" => 1, // English quotes
+							"quotes" => 0, // English quotes
 							"dash" => 1,   // (150) - middle dash
 							"emdash" => 1, // (151) - long dash by two minus
 							"(c)" => 1, "(r)" => 1, "(tm)" => 1, "(p)" => 1, "+-" => 1, // special characters, as you know
@@ -72,7 +72,7 @@ class typografica
 							"<-->" => 1,    // indents like $Indent*
 							"dashglue" => 1, "wordglue" => 1, // dash and word glues
 							"spacing" => 1, // comma and spacing, exchange
-							"phones" => 1,  // phone number processing
+							"phones" => 0,  // phone number processing
 							"fixed" => 0,   // fit to fixed width
 							"html" => 0     // HTML tags ban
 	);

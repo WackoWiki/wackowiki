@@ -29,8 +29,8 @@ for ($i = 0; $i < count($wtexts); $i++)
 }
 
 //$text = implode("", $texts);
-$text = str_replace("\177"."<br />\n","",$text);
-$text = str_replace("\177"."","",$text);
+$text = str_replace("\177"."<br />\n", "", $text);
+$text = str_replace("\177"."", "", $text);
 
 // we're cutting the last <br />
 $text = preg_replace("/<br \/>$/", "", $text); //trim($text));
