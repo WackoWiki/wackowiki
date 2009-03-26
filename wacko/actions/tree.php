@@ -199,13 +199,13 @@ if ($root){
 	if (!$nomark){
 		$title = $this->GetTranslation("TreeClusterTitle");
 		$title = str_replace("%1",  $this->Link("/".$root,"",$root),  $title);
-		print("<fieldset><legend>".$title.":</legend>\n");
+		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.":</span></p>\n");
 	}
 	$query = "'".quote($this->dblink, $this->NpjTranslit($root))."/%'";
 }
 else
 {
-	if (!$nomark)  print("<fieldset><legend>".$this->GetTranslation("TreeSiteTitle")."</legend>\n");
+	if (!$nomark)  print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("TreeSiteTitle")."</span></p>\n");
 	$query = "'%'";
 }
 
@@ -272,6 +272,6 @@ else
 }
 
 // footer
-if (!$nomark) echo "</fieldset>\n";
+if (!$nomark) echo "</div>\n";
 
 ?>

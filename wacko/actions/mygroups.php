@@ -22,12 +22,12 @@ if($user = $this->GetUser())
 	$al = $this->config['aliases'];
 
 	if (!$nomark)
-	print("<fieldset><legend>".$user["name"].": ".$this->GetTranslation("MyGroups")."</legend>\n");
+	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$user["name"].": ".$this->GetTranslation("MyGroups")."</span></p>\n");
 
 	$groups_count = MyGroups($user["name"],$al);
 	echo "<i>".$groups_count." ".($groups_count == 1 ? $this->GetTranslation("Group") : $this->GetTranslation("Groups"))."</i><br />\n";
 
 	if (!$nomark)
-	echo "</fieldset>\n";
+	echo "</div>\n";
 }
 ?>

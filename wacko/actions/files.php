@@ -60,7 +60,7 @@ if ($can_view)
 	if (!$nomark)
 	{
 		$title = $this->GetTranslation("UploadTitle".($global ? "Global" : ""));
-		print("<fieldset><legend>".$title.": ".$showpageandpath."</legend>\n");
+		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.": ".$showpageandpath."</span></p>\n");
 	}
 
 	// display
@@ -139,7 +139,7 @@ if ($can_view)
 <?php
 	}
 
-	if (!$nomark) echo "</fieldset>\n";
+	if (!$nomark) echo "</div>\n";
 }
 else
 {

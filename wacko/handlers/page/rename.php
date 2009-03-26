@@ -135,7 +135,7 @@ if ($registered
 		// show backlinks
 		if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
 		{
-			print("<br /><fieldset><legend>".$this->GetTranslation("AlertReferringPages").":</legend>\n");
+			print("<br /><div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("AlertReferringPages").":</span></p>\n");
 			foreach ($pages as $page)
 			{
 				if ($page["tag"])
@@ -148,7 +148,7 @@ if ($registered
 					}
 				}
 			}
-			echo "</fieldset>\n";
+			echo "</div>\n";
 		}
 ?>
   <br />

@@ -38,7 +38,7 @@ $root = $this->UnwrapLink($root);
 
 if (!$nomark)
 {
-	print("<fieldset><legend>".$this->GetTranslation("LinksTreeTitle")."</legend>\n");
+	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("LinksTreeTitle")."</span></p>\n");
 }
 
 if (!$levels) $levels = 3;
@@ -55,7 +55,7 @@ links_tree_view($this,$root,$levels,0);
 
 if (!$nomark)
 {
-	print("</fieldset>\n");
+	print("</div>\n");
 }
 
 ?>

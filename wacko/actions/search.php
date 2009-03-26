@@ -40,9 +40,9 @@ if ($phrase)
 		$phrase = htmlspecialchars($phrase);
 		if ($results)
 		{
-			if (!$nomark) print(  "<fieldset><legend><strong>".
+			if (!$nomark) print(  "<div class=\"layout-box\"><p class=\"layout-box\"><span>".
 			$this->GetTranslation(($mode=="topic"?"Topic":"")."SearchResults").
-              " \"$phrase\":</strong></legend>");
+              " \"$phrase\":</span></p>");
 			if ($style=="ul") print "<ul class=\"SearchResults\">\n";
 			if ($style=="ol") print "<ol class=\"SearchResults\">\n";
 
@@ -65,7 +65,7 @@ if ($phrase)
 
 			if ($style=="ul") print "</ul>";
 			if ($style=="ol") print "</ol>";
-			if (!$nomark) print("</fieldset>");
+			if (!$nomark) print("</div>");
 		}
 		else
 		if (!$nomark) echo $this->GetTranslation("NoResultsFor")."\"$phrase\".";

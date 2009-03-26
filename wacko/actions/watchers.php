@@ -12,7 +12,7 @@ if ($this->UserIsOwner($tag)){
 		$title = $this->GetTranslation("Watchers");
 		$title = str_replace("%1",  $this->Link("/".$tag,"",$tag),  $title);
 		if (!$nomark)
-		echo "<fieldset><legend>".$title.":</legend>\n";
+		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.":</span></p>\n";
 
 		foreach ($watchers as $watcher)
 		{
@@ -20,7 +20,7 @@ if ($this->UserIsOwner($tag)){
 			echo $this->Link("/".$user, "", $user)."<br />";
 		}
 		if (!$nomark)
-		echo "</fieldset>\n";
+		echo "</div>\n";
 	}
 	else
 	{
