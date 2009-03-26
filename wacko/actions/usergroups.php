@@ -8,7 +8,7 @@ if($user = $this->GetUser())
 	if (is_array($this->config['aliases']))
 	{
 		if (!$nomark)
-		print('<fieldset><legend>'.$this->GetTranslation("UserGroups").':</legend>');
+		print('<div class=\"layout-box\"><p class=\"layout-box\"><span>'.$this->GetTranslation("UserGroups").':</span></p>');
 
 		print ('<table border="0" cellspacing="5" cellpadding="5"><tr>');
 
@@ -53,7 +53,7 @@ if($user = $this->GetUser())
 		print ('</tr></table>');
 
 		if(!$nomark)
-		print ('</fieldset>');
+		print ('</div>');
 	}
 }
 ?>

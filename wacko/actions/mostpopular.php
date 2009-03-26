@@ -37,7 +37,7 @@ else
 
 if(!$nomark)
 {
-	print("<fieldset><legend>".$this->GetTranslation("MostPopularPages").": ".$this->Link($ppage, "", $title)."</legend>\n");
+	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("MostPopularPages").": ".$this->Link($ppage, "", $title)."</span></p>\n");
 }
 
 if(!$for)
@@ -83,7 +83,7 @@ print("</table>");
 
 if(!$nomark)
 {
-	echo "</fieldset>\n";
+	echo "</div>\n";
 }
 
 ?>

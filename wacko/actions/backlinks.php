@@ -9,7 +9,7 @@ if ($pages = $this->LoadPagesLinkingTo($tag))
 {
 	if(!$nomark)
 	{
-		print("<fieldset><legend>".$this->GetTranslation("ReferringPages").":</legend>\n");
+		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("ReferringPages").":</span></p>\n");
 	}
 
 	foreach ($pages as $page)
@@ -29,7 +29,7 @@ if ($pages = $this->LoadPagesLinkingTo($tag))
 
 	if(!$nomark)
 	{
-		echo "</fieldset>\n";
+		echo "</div>\n";
 	}
 }
 else

@@ -30,8 +30,7 @@ $end_depth   = $to{1};
 // 3. output
 if (!$nomark) 
 {
-	print "<fieldset>";
-	print "<legend><strong> ".$this->GetTranslation("TOCTitle")." ".$this->Link($ppage, "", $title)."  </strong></legend>";
+	print "<div class=\"layout-box\"><p class=\"layout-box\"><span> ".$this->GetTranslation("TOCTitle")." ".$this->Link($ppage, "", $title)."  </span></p>";
 }
 
 if (!$this->HasAccess("read",$_page["tag"]))
@@ -82,7 +81,7 @@ else
 }
 if (!$nomark) 
 {
-	print "</fieldset>";
+	print "</div>";
 }
 
 ?>

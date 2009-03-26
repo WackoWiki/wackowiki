@@ -143,6 +143,10 @@ del.diff { color: #c00; font-style: italic; text-decoration: line-through }
 .preview p {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
 .preview p span {background:#FFF; padding:0 1px;}
 
+.layout-box {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:#CCCCCC 1px solid;}
+.layout-box p {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
+.layout-box p span {background:#FFF; padding:0 1px;}
+
 .buttonsspacer{width:10px;height:1px;}
 
 #tooltip{ border: 1px solid #666666; margin: 0px; padding: 3px 5px; background: #FFFFFF; color: #333333; font: menu; position: absolute; visibility: hidden }

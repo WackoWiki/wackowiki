@@ -74,7 +74,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 		// show backlinks
 		if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
 		{
-			print("<br /><fieldset><legend>".$this->GetTranslation("AlertReferringPages").":</legend>\n");
+			print("<br /><div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("AlertReferringPages").":</span></p>\n");
 			foreach ($pages as $page)
 			{
 				if ($page["tag"])
@@ -87,7 +87,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 					}
 				}
 			}
-			echo "</fieldset>\n";
+			echo "</div>\n";
 		}
 
 ?>

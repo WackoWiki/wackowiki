@@ -6,11 +6,11 @@ if ($_GET["_autocomplete"])
 	include( dirname(__FILE__)."/_autocomplete.php" );
 	return;
 }
+
 ?>
-
 <div id="pageedit">
-
 <?php
+
 if ($this->HasAccess("write") && $this->HasAccess("read"))
 {
 
