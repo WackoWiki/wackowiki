@@ -57,6 +57,7 @@ $alter_pages_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."pages MODIFY COLUM
 
 $update_pages_r3_1 = "UPDATE ".$config["table_prefix"]."pages SET body_r=''";
 $update_pages_r3_2 = "UPDATE ".$config["table_prefix"]."pages SET body_toc=''";
+$update_pages_r4_2 = "UPDATE ".$config["table_prefix"]."pages SET body_r=''";
 
 $alter_users_r0_1 = "ALTER TABLE ".$config["table_prefix"]."users ADD bookmarks text NOT NULL default '', ADD lang VARCHAR(20) NOT NULL default '', ADD show_spaces enum('Y','N') NOT NULL default 'Y'";
 $alter_users_r2_1 = "ALTER TABLE ".$config["table_prefix"]."users ADD showdatetime enum('Y','N') NOT NULL default 'Y', add typografica enum('Y','N') NOT NULL default 'Y'";
