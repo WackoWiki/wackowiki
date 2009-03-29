@@ -62,7 +62,7 @@ $lang = array(
 "Mail" => "Email dell'amministratore.",
 "MailDesc" => "Enter the admins email address.",
 "Base" => "URL di base",
-"BaseDesc" => "La tua URL di base per il sito WackoWiki. I nomi di pagina sono stati aggiunti, ora sarà incluso l'oggetto-parametro \"?page=\" se la modalità di riscrittura di URL non funziona sul tuo server. <ul><li><b><i>http://www.wackowiki.org/</i></b></li><li><b><i>http://www.wackowiki.org/wiki/</i></b></li></ul><p class=\"no_top\">If you are not going to use mod_rewrite then the URL should end with \"?page=\" i.e.<ul><li><b><i>http://www.wackowiki.org/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/wiki/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/?page=</i></b></li><li><b><i>http://www.wackowiki.org?page=</i></b></li></ul>",
+"BaseDesc" => "La tua URL di base per il sito WackoWiki. I nomi di pagina sono stati aggiunti, ora sarà incluso l'oggetto-parametro \"?page=\" se la modalità di riscrittura di URL non funziona sul tuo server. <ul><li><b><i>http://www.wackowiki.org/</i></b></li><li><b><i>http://www.wackowiki.org/wiki/</i></b></li></ul><p class=\"no_top\">If you are not going to use mod_rewrite then the URL should end with \"?page=\" i.e.<ul><li><b><i>http://www.wackowiki.org/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/wiki/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/?page=</i></b></li></ul>",
 "Rewrite" => "Modalità Rewrite",
 "RewriteDesc" => "La modalità Rewrite sarà attivata se si sta usando WackoWiki per la riscrittura d'URL.",
 "Enabled" => "Attivato:",
