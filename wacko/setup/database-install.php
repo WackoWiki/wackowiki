@@ -2,10 +2,9 @@
 @set_time_limit(0);
 @ignore_user_abort(true);
 
-GLOBAL $dblink;
-
 function test($text, $condition, $errorText = "")
 {
+	GLOBAL $lang;
 	print("            <li>".$text." - ".output_image($condition));
 
 	if(!$condition)
@@ -32,8 +31,8 @@ function outputError($errorText = "")
 print("         <h2>".$lang["TestingConfiguration"]."</h2>\n");
 
 // Generic Default Inserts
-$insert_admin = "INSERT INTO ".$config["table_prefix"]."users (name, password, email, signuptime, lang) VALUES ('".$config["admin_name"]."', md5('".$_POST["password"]."'), '".$config["admin_email"]."', now(), '".$config["language"]."')";
-$insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext, user) VALUES ('0','wacko4.gif', 'WackoWiki', now(), '1580', '108', '50', 'gif', '".$config["admin_name"]."')";
+$insert_admin = "INSERT INTO ".$config2["table_prefix"]."users (name, password, email, signuptime, lang) VALUES ('".$config["admin_name"]."', md5('".$_POST["password"]."'), '".$config["admin_email"]."', now(), '".$config["language"]."')";
+$insert_logo_image = "INSERT INTO ".$config2["table_prefix"]."upload (page_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext, user) VALUES ('0','wacko4.gif', 'WackoWiki', now(), '1580', '108', '50', 'gif', '".$config2["admin_name"]."')";
 
 /*
  Setup the tables depending on which database we selected
@@ -42,11 +41,11 @@ $insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, fi
  mysqli_legacy
  or pdo which is the default clause
  */
-$port = trim($config["database_port"]);
+$port = trim($config2["database_port"]);
 
 $fatal_error = false;
 
-switch($config["database_driver"])
+switch($config2["database_driver"])
 {
 	case "mysql_legacy":
 		require_once("setup/database_mysql.php");
@@ -54,7 +53,7 @@ switch($config["database_driver"])
 
 		print("         <ul>\n");
 
-		if(!test($lang["TestConnectionString"], $dblink = @mysql_connect($config["database_host"].($port == "" ? '' : ':'.$port), $config["database_user"], $config["database_password"]), $lang["ErrorDBConnection"]))
+		if(!test($lang["TestConnectionString"], $dblink = @mysql_connect($config2["database_host"].($port == "" ? '' : ':'.$port), $config2["database_user"], $config2["database_password"]), $lang["ErrorDBConnection"]))
 		{
 			/*
 			 There was a problem with the connection string
@@ -65,7 +64,7 @@ switch($config["database_driver"])
 
 			$fatal_error = true;
 		}
-		else if(!test($lang["TestDatabaseExists"], @mysql_select_db($config["database_database"], $dblink), $lang["ErrorDBExists"]))
+		else if(!test($lang["TestDatabaseExists"], @mysql_select_db($config2["database_database"], $dblink), $lang["ErrorDBExists"]))
 		{
 			/*
 			 There was a problem with the specified database name
@@ -232,7 +231,7 @@ switch($config["database_driver"])
 					test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r4_2_2, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r4_2_3, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
 					test($lang["InstallingLogoImage"], @mysql_query($insert_logo_image, $dblink), str_replace("%1","logo image",$lang["ErrorAlreadyExists"]));
-					
+
 					test("", @mysql_query($update_pages_r4_2, $dblink), "");
 			}
 			print("            </ul>\n");
@@ -247,7 +246,7 @@ switch($config["database_driver"])
 
 					print("         <ul>\n");
 
-					if(!test($lang["TestConnectionString"], $dblink = @mysqli_connect($config["database_host"], $config["database_user"], $config["database_password"], null, $port), $lang["ErrorDBConnection"]))
+					if(!test($lang["TestConnectionString"], $dblink = @mysqli_connect($config2["database_host"], $config2["database_user"], $config2["database_password"], null, $port), $lang["ErrorDBConnection"]))
 					{
 						/*
 						 There was a problem with the connection string
@@ -258,7 +257,7 @@ switch($config["database_driver"])
 
 						$fatal_error = true;
 					}
-					else if(!test($lang["TestDatabaseExists"], @mysqli_select_db($dblink, $config["database_database"]), $lang["ErrorDBExists"]))
+					else if(!test($lang["TestDatabaseExists"], @mysqli_select_db($dblink, $config2["database_database"]), $lang["ErrorDBExists"]))
 					{
 						/*
 						 There was a problem with the specified database name
@@ -433,34 +432,34 @@ if ( !isset( $wackoConfig["wacko_version"] ) ) $wackoConfig["wacko_version"] = "
 					break;
 							default:
 								$dsn = "";
-								switch($config["database_driver"])
+								switch($config2["database_driver"])
 								{
 									case "firebird":
-										$dsn = $config["database_driver"].":dbname=".$config["database_host"].":".$config["database_database"].($config["database_port"] != "" ? ";port=".$config["database_port"] : "");
+										$dsn = $config2["database_driver"].":dbname=".$config2["database_host"].":".$config2["database_database"].($config2["database_port"] != "" ? ";port=".$config2["database_port"] : "");
 										break;
 									case "ibm":
-										$dsn = $config["database_driver"].":DATABASE=".$config["database_host"].";HOSTNAME=".$config["database_database"].($config["database_port"] != "" ? ";PORT=".$config["database_port"] : "");
+										$dsn = $config2["database_driver"].":DATABASE=".$config2["database_host"].";HOSTNAME=".$config2["database_database"].($config2["database_port"] != "" ? ";PORT=".$config2["database_port"] : "");
 										break;
 									case "informix":
-										$dsn = $config["database_driver"].":database=".$config["database_host"].";host=".$config["database_database"].($config["database_port"] != "" ? ";service=".$config["database_port"] : "");
+										$dsn = $config2["database_driver"].":database=".$config2["database_host"].";host=".$config2["database_database"].($config2["database_port"] != "" ? ";service=".$config2["database_port"] : "");
 										break;
 									case "oci":
-										$dsn = $config["database_driver"].":dbname=//".$config["database_host"].($config["database_port"] != "" ? ":".$config["database_port"] : "")."/".$config["database_database"];
+										$dsn = $config2["database_driver"].":dbname=//".$config2["database_host"].($config2["database_port"] != "" ? ":".$config2["database_port"] : "")."/".$config2["database_database"];
 										break;
 									case "sqlite":
 									case "sqlite2":
 									case "mysql":
 										require_once("setup/database_mysql.php");
-										$dsn = $config["database_driver"].":dbname=".$config["database_database"].";host=".$config["database_host"].($config["database_port"] != "" ? ";port=".$config["database_port"] : "");
+										$dsn = $config2["database_driver"].":dbname=".$config2["database_database"].";host=".$config2["database_host"].($config2["database_port"] != "" ? ";port=".$config2["database_port"] : "");
 										break;
 									case "mssql":
 										require_once("setup/database_mysql.php");
-										$dsn = $config["database_driver"].":host=".$config["database_host"].($config["database_port"] != "" ? ",".$config["database_port"] : "").";dbname=".$config["database_database"];
+										$dsn = $config2["database_driver"].":host=".$config2["database_host"].($config2["database_port"] != "" ? ",".$config2["database_port"] : "").";dbname=".$config2["database_database"];
 										print($dsn);
 										break;
 									case "pgsql":
 										require_once("setup/database_pgsql.php");
-										$dsn = $config["database_driver"].":dbname=".$config["database_database"].";host=".$config["database_host"].($config["database_port"] != "" ? ";port=".$config["database_port"] : "");
+										$dsn = $config2["database_driver"].":dbname=".$config2["database_database"].";host=".$config2["database_host"].($config2["database_port"] != "" ? ";port=".$config2["database_port"] : "");
 										break;
 								}
 
