@@ -1,6 +1,6 @@
 <?php
 
-if ( !isset ( $config["wakka_version"] ) )
+if ( !isset ( $wackoConfig["wakka_version"] ) )
 {
 	?>
 <script type="text/javascript">
@@ -65,28 +65,28 @@ else
 }
 ?>
 <form
-	action="<?php echo myLocation() ?>?installAction=<?php !isset ( $config["wakka_version"] ) ? print "database-config" : print "database-install" ; ?>"
+	action="<?php echo myLocation() ?>?installAction=<?php !isset ( $wackoConfig["wakka_version"] ) ? print "database-config" : print "database-install" ; ?>"
 	method="post" name="form1"><input type="hidden" name="config[language]"
 	value="<?php echo $config["language"];?>" /> <input type="hidden"
 	name="config[cache]" value="<?php echo $config["cache"];?>" />
 <h2><?php echo $lang["Name"];?></h2>
 <p class="notop"><?php echo $lang["NameDesc"];?></p>
 <input type="text" maxlength="250" name="config[wacko_name]"
-	value="<?php echo $config["wacko_name"] ?>" class="text_input" />
+	value="<?php echo $wackoConfig["wacko_name"] ?>" class="text_input" />
 <div class="fake_hr_seperator">
 <hr />
 </div>
 <h2><?php echo $lang["Home"];?></h2>
 <p class="notop"><?php echo $lang["HomeDesc"];?></p>
 <input type="text" maxlength="250" name="config[root_page]"
-	value="<?php echo $config["root_page"] ?>" class="text_input" /> <br />
+	value="<?php echo $wackoConfig["root_page"] ?>" class="text_input" /> <br />
 <div class="fake_hr_seperator">
 <hr />
 </div>
 <?php
 
 // Don't do the following if this is an upgrade install
-if ( !isset ( $config["wakka_version"] ) )
+if ( !isset ( $wackoConfig["wakka_version"] ) )
 {
 	?>
 <h2><?php echo $lang["MultiLang"];?></h2>
@@ -94,7 +94,7 @@ if ( !isset ( $config["wakka_version"] ) )
 <label class="indented_label" for="wiki_multilanguage"><?php echo $lang["Enabled"];?></label><input
 	type="hidden" id="wiki_multilanguage" name="config[multilanguage]"
 	value="0" /><input type="checkbox" name="config[multilanguage]"
-	<?php echo $config["multilanguage"] ? "checked=\"checked\"" : "" ?>
+	<?php echo $wackoConfig["multilanguage"] ? "checked=\"checked\"" : "" ?>
 	class="checkbox_input" /> <br />
 <div class="fake_hr_seperator">
 <hr />
@@ -102,7 +102,7 @@ if ( !isset ( $config["wakka_version"] ) )
 <h2><?php echo $lang["Admin"];?></h2>
 <p class="notop"><?php echo $lang["AdminDesc"];?></p>
 <input type="text" maxlength="80" name="config[admin_name]"
-	value="<?php if ( isset ( $config["admin_name"] ) ) echo $config["admin_name"]; ?>"
+	value="<?php if ( isset ( $wackoConfig["admin_name"] ) ) echo $wackoConfig["admin_name"]; ?>"
 	class="text_input" /> <br />
 <div class="fake_hr_seperator">
 <hr />
@@ -120,7 +120,7 @@ if ( !isset ( $config["wakka_version"] ) )
 <h2><?php echo $lang["Mail"];?></h2>
 <p class="notop"><?php echo $lang["MailDesc"];?></p>
 <input type="text" maxlength="320" name="config[admin_email]"
-	value="<?php if ( isset ( $config["admin_email"] ) ) echo $config["admin_email"]; ?>"
+	value="<?php if ( isset ( $wackoConfig["admin_email"] ) ) echo $wackoConfig["admin_email"]; ?>"
 	class="text_input" /> <br />
 <div class="fake_hr_seperator">
 <hr />
@@ -131,7 +131,7 @@ if ( !isset ( $config["wakka_version"] ) )
 <h2><?php echo $lang["Base"];?></h2>
 <p class="notop"><?php echo $lang["BaseDesc"];?></p>
 <input type="text" maxlength="1000" name="config[base_url]"
-	value="<?php echo $config["base_url"] ?>" class="text_input"
+	value="<?php echo $wackoConfig["base_url"] ?>" class="text_input"
 	style="width: 907px;" /> <br />
 <div class="fake_hr_seperator">
 <hr />
@@ -141,7 +141,7 @@ if ( !isset ( $config["wakka_version"] ) )
 <label class="indented_label" for="wiki_rewrite"><?php echo $lang["Enabled"];?></label><input
 	type="hidden" id="wiki_rewrite" name="config[rewrite_mode]" value="0" /><input
 	type="checkbox" name="config[rewrite_mode]"
-	<?php echo $config["rewrite_mode"] ? "checked=\"checked\"" : "" ?>
+	<?php echo $wackoConfig["rewrite_mode"] ? "checked=\"checked\"" : "" ?>
 	class="checkbox_input" /> <br />
 <div class="fake_hr_seperator">
 <hr />

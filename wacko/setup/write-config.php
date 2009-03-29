@@ -7,7 +7,7 @@ function array_to_str ($arr, $name="")
 	if ( !isset( $arrays  ) ) $arrays = "";
 
 
-	$str = "\$config".($name?"[\"".$name."\"]":"")." = array(\n";
+	$str = "\$wackoConfig".($name?"[\"".$name."\"]":"")." = array(\n";
 
 	foreach ($arr as $k => $v)
 	{
@@ -23,18 +23,18 @@ function array_to_str ($arr, $name="")
 }
 
 // fetch config
-$config = unserialize($_POST["config_s"]);
+$config = $config2 = unserialize($_POST["config_s"]);
 
 if ( ( $config["database_driver"] == "mysqli_legacy" ) && empty( $config["database_port"] ) )
-	$config["database_port"] = "3306";
+	$config["database_port"] = $config2["database_port"] = "3306";
 
-if ( !isset( $config["wacko_version"] ) ) {
+if ( !isset( $wackoConfig["wacko_version"] ) ) {
 	$config["cookie_prefix"] = $config["table_prefix"];
 	$config["aliases"] = array("Admins" => $config["admin_name"]);
 }
 
 // merge existing configuration with new one
-$config = array_merge((array)$config, (array)$config);
+$config = array_merge((array)$wackoConfig, (array)$config);
 
 // set version to current version, yay!
 $config["wakka_version"] = WAKKA_VERSION;
@@ -47,9 +47,9 @@ $configCode .= array_to_str($config)."\n?>";
 // try to write configuration file
 print("         <h2>".$lang["Writing"]."</h2>\n");
 print("         <ul>\n");
-print("            <li>".$lang["Writing2"]." <tt>config.inc.php</tt> - ");
+print("            <li>".$lang["Writing2"]." <tt>".$wackoConfigLocation."</tt> - ");
 
-$fp = @fopen("config.inc.php", "w");
+$fp = @fopen($wackoConfigLocation, "w");
 
 if ($fp)
 {
@@ -87,13 +87,13 @@ else
 
 	print("         <h2>".$lang["SecurityConsiderations"]."</h2>\n");
 	print("         <ul class=\"security\">\n");
-	print("            <li>".str_replace("%1", "config.inc.php", $lang["ErrorGivePrivileges"])."</li>\n");
+	print("            <li>".str_replace("%1", $wackoConfigLocation, $lang["ErrorGivePrivileges"])."</li>\n");
 	print("            <li>".$lang["RemoveSetupDirectory"]."</li>\n");
 	print("         </ul>\n");
 	?>
 <form action="<?php echo myLocation() ?>?installAction=write-config"
 	method="post"><input type="hidden" name="config_s"
-	value="<?php echo htmlspecialchars(serialize($config)) ?>" /> <input
+	value="<?php echo htmlspecialchars(serialize($config2)) ?>" /> <input
 	type="hidden" name="config[language]"
 	value="<?php echo $config["language"]; ?>" /> <input type="submit"
 	value="<?php echo $lang["TryAgain"];?>" class="next" /></form>

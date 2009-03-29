@@ -25,7 +25,7 @@ foreach($lang_codes as $key => $value)
 		if ( $_POST["config"]["language"] == $key ) {
 			echo " checked=\"checked\" ";
 		}
-	} elseif ( $config["language"] == $key ) {
+	} elseif ( $wackoConfig["language"] == $key ) {
 		echo " checked=\"checked\" ";
 	}
 	//
