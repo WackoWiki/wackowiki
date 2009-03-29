@@ -206,7 +206,7 @@ class Init
 					"owners_can_remove_comments" => 1,
 					"allow_registration" => 1,
 
-					"standard_handlers" => "acls|addcomment|claim|diff|edit|latex|msword|print|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|show|watch|settings",
+					"standard_handlers" => "acls|addcomment|claim|diff|edit|latex|msword|new|print|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|settings|show|watch",
 
 					"revisions_hide_cancel" => 0,
 					"footer_comments" => 1,
@@ -263,7 +263,7 @@ class Init
 				$wackoConfig['root_url']	= $wackoConfig['base_url'];
 				// $wackoConfig['system_seed']	= md5($wackoConfig['system_seed']);
 
-				return $this->config = array_merge($wackoDefaultConfig, (array)$config);
+				return $this->config = array_merge($wackoDefaultConfig, (array)$wackoConfig);
 			}
 			// secondary settings
 			else if ($this->config == true && !isset($this->dblink))
@@ -380,11 +380,11 @@ class Init
 		if ($this->config == false) die('Error loading WackoWiki DBAL: config data must be initialized.');
 						
 		// Load the correct database connector
-		if (!isset( $this->config["database_driver"] )) $this->Settings("database_driver", "mysql");
+		if (!isset( $this->config["database_driver"] )) $this->Settings("database_driver", "mysql_legacy");
 
 		switch($this->config["database_driver"])
 		{
-			case "pdo":
+			case "mysql":
 				$dbfile = "db/pdo.php";
 				break;
 			case "mysqli_legacy":
