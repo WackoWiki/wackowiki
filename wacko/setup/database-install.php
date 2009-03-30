@@ -96,7 +96,7 @@ switch($config2["database_driver"])
 					print("            <ul>\n");
 					test(str_replace("%1","page",$lang["CreatingTable"]), @mysql_query($table_pages, $dblink), str_replace("%1","page",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","revision",$lang["CreatingTable"]), @mysql_query($table_revisions, $dblink), str_replace("%1","revision",$lang["ErrorCreatingTable"]));
-					test(str_replace("%1","acl",$lang["CreatingTable"]), @mysql_query($table_acls, $dblink), str_replace("%1","ACL",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","acl",$lang["CreatingTable"]), @mysql_query($table_acls, $dblink), str_replace("%1","acl",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","link tracking",$lang["CreatingTable"]), @mysql_query($table_links, $dblink), str_replace("%1","link",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","referrer",$lang["CreatingTable"]), @mysql_query($table_referrers, $dblink), str_replace("%1","referrer",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","user",$lang["CreatingTable"]), @mysql_query($table_users, $dblink), str_replace("%1","user",$lang["ErrorCreatingTable"]));
@@ -289,7 +289,7 @@ if ( !isset( $wackoConfig["wacko_version"] ) ) $wackoConfig["wacko_version"] = "
 								print("         <ul>\n");
 								test(str_replace("%1","page",$lang["CreatingTable"]), @mysqli_query($dblink, $table_pages), str_replace("%1","page",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","revision",$lang["CreatingTable"]), @mysqli_query($dblink, $table_revisions), str_replace("%1","revision",$lang["ErrorCreatingTable"]));
-								test(str_replace("%1","acl",$lang["CreatingTable"]), @mysqli_query($dblink, $table_acls), str_replace("%1","ACL",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","acl",$lang["CreatingTable"]), @mysqli_query($dblink, $table_acls), str_replace("%1","acl",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","link tracking",$lang["CreatingTable"]), @mysqli_query($dblink, $table_links), str_replace("%1","link",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","referrer",$lang["CreatingTable"]), @mysqli_query($dblink, $table_referrers), str_replace("%1","referrer",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","user",$lang["CreatingTable"]), @mysqli_query($dblink, $table_users), str_replace("%1","user",$lang["ErrorCreatingTable"]));
@@ -476,7 +476,7 @@ if ( !isset( $wackoConfig["wacko_version"] ) ) $wackoConfig["wacko_version"] = "
 									print("         <ul>\n");
 									test(str_replace("%1","page",$lang["CreatingTable"]), @$dblink->query($table_pages), str_replace("%1","page",$lang["ErrorCreatingTable"]));
 									test(str_replace("%1","revision",$lang["CreatingTable"]), @$dblink->query($table_revisions), str_replace("%1","revision",$lang["ErrorCreatingTable"]));
-									test(str_replace("%1","acl",$lang["CreatingTable"]), @$dblink->query($table_acls), str_replace("%1","ACL",$lang["ErrorCreatingTable"]));
+									test(str_replace("%1","acl",$lang["CreatingTable"]), @$dblink->query($table_acls), str_replace("%1","acl",$lang["ErrorCreatingTable"]));
 									test(str_replace("%1","link tracking",$lang["CreatingTable"]), @$dblink->query($table_links), str_replace("%1","link",$lang["ErrorCreatingTable"]));
 									test(str_replace("%1","referrer",$lang["CreatingTable"]), @$dblink->query($table_referrers), str_replace("%1","referrer",$lang["ErrorCreatingTable"]));
 									test(str_replace("%1","user",$lang["CreatingTable"]), @$dblink->query($table_users), str_replace("%1","user",$lang["ErrorCreatingTable"]));
