@@ -353,7 +353,7 @@ $wackoTranslation = array(
   "Next" => "Næste",
   "Prev" => "Forrige",
 
-  "default_bookmarks" => "((Indhold))\n((Opdateringer))\n((Kommentarer))\n((Brugere))",
+  "default_bookmarks" => "((Indhold))\n((Opdateringer))\n((Kommentarer))",
   "site_bookmarks" => "((Indhold)) / ((Opdateringer)) / ((Kommentarer))",
 
 //icons

@@ -356,7 +356,7 @@ $wackoTranslation = array(
   "Next" => "Next",
   "Prev" => "Prev",
 
-  "default_bookmarks" => "((PaginaIndex Index))\n((LaatsteWijzigingen Wijzigingen))\n((LaatsteOpmerkingen Opmerkingen))\n((Gebruikers))",
+  "default_bookmarks" => "((PaginaIndex Index))\n((LaatsteWijzigingen Wijzigingen))\n((LaatsteOpmerkingen Opmerkingen))",
   "site_bookmarks" => "((PaginaIndex Index)) / ((LaatsteWijzigingen Wijzigingen)) / ((LaatsteOpmerkingen Opmerkingen))",
 
 //icons

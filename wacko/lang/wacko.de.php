@@ -356,8 +356,7 @@ $wackoTranslation = array(
 
   "default_bookmarks" => "((SeitenIndex Index))\n".
   						 "((LetzteAenderungen Änderungen))\n".
-						 "((LetzteKommentare Kommentare))\n".
-						 "((Benutzer))",
+						 "((LetzteKommentare Kommentare))",
 						
   "site_bookmarks" => 	"((SeitenIndex Index))\n".
   						"((LetzteAenderungen Änderungen))\n".

@@ -352,7 +352,7 @@ $wackoTranslation = array(
   "Next" => "Suivant",
   "Prev" => "Précédent",
 
-  "default_bookmarks" => "((Index))\n((Modifications))\n((Commentaires))\n((Utilisateurs))",
+  "default_bookmarks" => "((Index))\n((Modifications))\n((Commentaires))",
   "site_bookmarks" => "((Index)) / ((Modifications)) / ((Commentaires))",
 
 //icons
