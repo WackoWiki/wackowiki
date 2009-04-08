@@ -1,28 +1,34 @@
 <?php
 
+//  Needed (for some reason) to allow config variables to be accessed within InsertPages.
+global $config_global, $dblink_global, $lang_global;
+$config_global = $config;
+$dblink_global = $dblink;
+$lang_global = $lang;
+
 function InsertPage($tag, $body, $lng, $rights = "Admins", $critical = false)
 {
-	GLOBAL $config, $dblink, $lang;
+	global $config_global, $dblink_global, $lang_global;
 
-	$page_select = "SELECT * FROM ".$config["table_prefix"]."pages WHERE tag='".$tag."'";
-	$page_insert = "INSERT INTO ".$config["table_prefix"]."pages (tag, supertag, body, user, owner, time, latest, lang) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$body."', 'WackoInstaller', '".$config["admin_name"]."', now(), 'Y', '".$lng."')";
-	$perm_read_insert = "INSERT INTO ".$config["table_prefix"]."acls (page_tag, supertag, privilege, list) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', 'read', '*')";
-	$perm_write_insert = "INSERT INTO ".$config["table_prefix"]."acls (page_tag, supertag, privilege, list) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', 'write', '".$rights."')";
-	$perm_comment_insert = "INSERT INTO ".$config["table_prefix"]."acls (page_tag, supertag, privilege, list) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', 'comment', '$')";
+	$page_select = "SELECT * FROM ".$config_global["table_prefix"]."pages WHERE tag='".$tag."'";
+	$page_insert = "INSERT INTO ".$config_global["table_prefix"]."pages (tag, supertag, body, user, owner, time, latest, lang) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$body."', 'WackoInstaller', '".$config_global["admin_name"]."', now(), 'Y', '".$lng."')";
+	$perm_read_insert = "INSERT INTO ".$config_global["table_prefix"]."acls (page_tag, supertag, privilege, list) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', 'read', '*')";
+	$perm_write_insert = "INSERT INTO ".$config_global["table_prefix"]."acls (page_tag, supertag, privilege, list) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', 'write', '".$rights."')";
+	$perm_comment_insert = "INSERT INTO ".$config_global["table_prefix"]."acls (page_tag, supertag, privilege, list) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', 'comment', '$')";
 
-	switch($config["database_driver"])
+	switch($config_global["database_driver"])
 	{
 		case "mysql_legacy":
-			if (0 == mysql_num_rows(mysql_query($page_select, $dblink)))
+			if (0 == mysql_num_rows(mysql_query($page_select, $dblink_global)))
 			{
-				mysql_query($page_insert, $dblink);
-				mysql_query($perm_read_insert, $dblink);
-				mysql_query($perm_write_insert, $dblink);
-				mysql_query($perm_comment_insert, $dblink);
+				mysql_query($page_insert, $dblink_global);
+				mysql_query($perm_read_insert, $dblink_global);
+				mysql_query($perm_write_insert, $dblink_global);
+				mysql_query($perm_comment_insert, $dblink_global);
 			}
 			break;
 		case "mysqli_legacy":
-			if (0 == mysqli_num_rows(mysqli_query($dblink, $page_select)))
+			if (0 == mysqli_num_rows(mysqli_query($dblink_global, $page_select)))
 			{
 				/*
 				 We flag some pages as critical in the insert.**.php file, if these don't get inserted then we have a
@@ -31,52 +37,52 @@ function InsertPage($tag, $body, $lng, $rights = "Admins", $critical = false)
 
 				if($critical)
 				{
-					mysqli_query($dblink, $page_insert);
-					if(mysqli_errno($dblink) != 0)
+					mysqli_query($dblink_global, $page_insert);
+					if(mysqli_errno($dblink_global) != 0)
 					{
-						outputError(str_replace("%1", $tag, $lang["ErrorInsertingPage"])." - ".mysqli_error($dblink));
+						outputError(str_replace("%1", $tag, $lang_global["ErrorInsertingPage"])." - ".mysqli_error($dblink_global));
 					}
 
-					mysqli_query($dblink, $perm_read_insert);
-					if(mysqli_errno($dblink) != 0)
+					mysqli_query($dblink_global, $perm_read_insert);
+					if(mysqli_errno($dblink_global) != 0)
 					{
-						outputError(str_replace("%1", $tag, $lang["ErrorInsertingPageReadPermission"])." - ".mysqli_error($dblink));
+						outputError(str_replace("%1", $tag, $lang_global["ErrorInsertingPageReadPermission"])." - ".mysqli_error($dblink_global));
 					}
 
-					mysqli_query($dblink, $perm_write_insert);
-					if(mysqli_errno($dblink) != 0)
+					mysqli_query($dblink_global, $perm_write_insert);
+					if(mysqli_errno($dblink_global) != 0)
 					{
-						outputError(str_replace("%1", $tag, $lang["ErrorInsertingPageWritePermission"])." - ".mysqli_error($dblink));
+						outputError(str_replace("%1", $tag, $lang_global["ErrorInsertingPageWritePermission"])." - ".mysqli_error($dblink_global));
 					}
 
-					mysqli_query($dblink, $perm_comment_insert);
-					if(mysqli_errno($dblink) != 0)
+					mysqli_query($dblink_global, $perm_comment_insert);
+					if(mysqli_errno($dblink_global) != 0)
 					{
-						outputError(str_replace("%1", $tag, $lang["ErrorInsertingPageCommentPermission"])." - ".mysqli_error($dblink));
+						outputError(str_replace("%1", $tag, $lang_global["ErrorInsertingPageCommentPermission"])." - ".mysqli_error($dblink_global));
 					}
 				}
 				else
 				{
-					mysqli_query($dblink, $page_insert);
-					mysqli_query($dblink, $perm_read_insert);
-					mysqli_query($dblink, $perm_write_insert);
-					mysqli_query($dblink, $perm_comment_insert);
+					mysqli_query($dblink_global, $page_insert);
+					mysqli_query($dblink_global, $perm_read_insert);
+					mysqli_query($dblink_global, $perm_write_insert);
+					mysqli_query($dblink_global, $perm_comment_insert);
 				}
 			}
 			else if($critical)
 			{
-				outputError(str_replace("%1", $tag, $lang["ErrorPageAlreadyExists"]));
+				outputError(str_replace("%1", $tag, $lang_global["ErrorPageAlreadyExists"]));
 			}
 			break;
 		default:
 			$page_exists = false;
 
-			if($result = @$dblink->query($page_select))
+			if($result = @$dblink_global->query($page_select))
 			{
 				if ($result->fetchColumn() > 0)
 				{
 					$page_exists = true;
-					outputError(str_replace("%1", $tag, $lang["ErrorPageAlreadyExists"]));
+					outputError(str_replace("%1", $tag, $lang_global["ErrorPageAlreadyExists"]));
 				}
 
 				$result->closeCursor();
@@ -86,40 +92,40 @@ function InsertPage($tag, $body, $lng, $rights = "Admins", $critical = false)
 			{
 				if($critical)
 				{
-					@$dblink->query($page_insert);
-					$error = $dblink->errorInfo();
+					@$dblink_global->query($page_insert);
+					$error = $dblink_global->errorInfo();
 					if($error[0] != "00000")
 					{
-						outputError(str_replace("%1", $tag, $lang["ErrorInsertingPage"])." - ".($error[2]));
+						outputError(str_replace("%1", $tag, $lang_global["ErrorInsertingPage"])." - ".($error[2]));
 					}
 
-					@$dblink->query($perm_read_insert);
-					$error = $dblink->errorInfo();
+					@$dblink_global->query($perm_read_insert);
+					$error = $dblink_global->errorInfo();
 					if($error[0] != "00000")
 					{
-						outputError(str_replace("%1", $tag, $lang["ErrorInsertingPageReadPermission"])." - ".($error[2]));
+						outputError(str_replace("%1", $tag, $lang_global["ErrorInsertingPageReadPermission"])." - ".($error[2]));
 					}
 
-					@$dblink->query($perm_write_insert);
-					$error = $dblink->errorInfo();
+					@$dblink_global->query($perm_write_insert);
+					$error = $dblink_global->errorInfo();
 					if($error[0] != "00000")
 					{
-						outputError(str_replace("%1", $tag, $lang["ErrorInsertingPageWritePermission"])." - ".($error[2]));
+						outputError(str_replace("%1", $tag, $lang_global["ErrorInsertingPageWritePermission"])." - ".($error[2]));
 					}
 
-					@$dblink->query($perm_comment_insert);
-					$error = $dblink->errorInfo();
+					@$dblink_global->query($perm_comment_insert);
+					$error = $dblink_global->errorInfo();
 					if($error[0] != "00000")
 					{
-						outputError(str_replace("%1", $tag, $lang["ErrorInsertingPageCommentPermission"])." - ".($error[2]));
+						outputError(str_replace("%1", $tag, $lang_global["ErrorInsertingPageCommentPermission"])." - ".($error[2]));
 					}
 				}
 				else
 				{
-					@$dblink->query($page_insert);
-					@$dblink->query($perm_read_insert);
-					@$dblink->query($perm_write_insert);
-					@$dblink->query($perm_comment_insert);
+					@$dblink_global->query($page_insert);
+					@$dblink_global->query($perm_read_insert);
+					@$dblink_global->query($perm_write_insert);
+					@$dblink_global->query($perm_comment_insert);
 				}
 			}
 			break;
@@ -144,7 +150,7 @@ function NpjTranslit($tag, $lng)
 
 function SetLanguage($lng)
 {
-	GLOBAL $config2, $language, $languages;
+	global $config, $language, $languages;
 
 	if ( !$languages[$lng] )
 	{
@@ -160,10 +166,10 @@ function SetLanguage($lng)
 }
 
 $error_inserting_pages = false;
+	
+require_once("setup/lang/inserts.".$config["language"].".php");
 
-require_once("setup/lang/inserts.".$config2["language"].".php");
-
-if ( $config2["multilanguage"] ) {
+if ( $config["multilanguage"] ) {
 	$handle = opendir("setup/lang");
 	while (false !== ($file = readdir($handle)))
 	if(1 == preg_match("/^inserts\.(.*?)\.php$/",$file,$match))

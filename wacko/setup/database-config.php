@@ -36,37 +36,23 @@
                   }
             // -->
          </script>
-<form action="<?php echo myLocation() ?>?installAction=database-install"
-	method="post" name="form1"><input type="hidden"
-	name="config[wacko_name]" value="<?php echo $config["wacko_name"];?>" />
-<input type="hidden" name="config[root_page]"
-	value="<?php echo $config["root_page"];?>" /> <input type="hidden"
-	name="config[language]" value="<?php echo $config["language"];?>" /> <input
-	type="hidden" name="config[multilanguage]"
-	value="<?php echo $config["multilanguage"] == 'on' ? 1 : $config["multilanguage"]; ?>" />
-<input type="hidden" name="config[admin_name]"
-	value="<?php echo $config["admin_name"];?>" /> <input type="hidden"
-	name="password" value="<?php echo $_POST["password"];?>" /> <input
-	type="hidden" name="config[admin_email]"
-	value="<?php echo $config["admin_email"];?>" /> <input type="hidden"
-	name="config[base_url]" value="<?php echo $config["base_url"];?>" /> <input
-	type="hidden" name="config[rewrite_mode]"
-	value="<?php echo $config["rewrite_mode"] == 'on' ? 1 : $config["rewrite_mode"]; ?>" />
-<input type="hidden" name="config[cache]"
-	value="<?php echo $config["cache"];?>" /> <?php
+<form action="<?php echo myLocation() ?>?installAction=database-install" method="post" name="form1">
+<?php
+   writeConfigHiddenNodes(array('database_driver' => '', 'database_host' => '', 'database_port' => '', 'database_database' => '', 'database_user' => '', 'database_password' => '', 'table_prefix' => ''));
+
 	// If none of the PHP SQL extensions are loaded then let the user know there is a problem
 	if(!extension_loaded("mysql") && !extension_loaded("mysqli") && !extension_loaded("pdo"))
 	{
-		?>
-<p class="notop"><?php print $lang["ErrorNoDbDriverDetected"]; ?></p>
-		<?php
+?>
+   <p class="notop"><?php print $lang["ErrorNoDbDriverDetected"]; ?></p>
+<?php
 	}
 	else
 	{
-		?>
-<h2><?php echo $lang["DBDriver"];?></h2>
-<p class="notop"><?php print $lang["DBDriverDesc"]; ?></p>
-<ul>
+?>
+   <h2><?php echo $lang["DBDriver"];?></h2>
+   <p class="notop"><?php print $lang["DBDriverDesc"]; ?></p>
+   <ul>
 <?php
 /*
  Each time a new database type is supported it needs to be added to this list
@@ -87,68 +73,62 @@ $drivers[] = array("pdo", "mysql", "PDO MySQL");
 
 $detected = 0;
 for($count = 0; $count < count($drivers); $count++)
-{
-	if(extension_loaded($drivers[$count][0]))
-	{
-		echo "               <li><input type=\"radio\" id=\"db_driver_".$drivers[$count][0]."\" name=\"config[database_driver]\" value=\"".$drivers[$count][1]."\"".($detected == 0 ? "checked=\"checked\"" : "")."><label for=\"db_driver_".$drivers[$count][1]."\">".$drivers[$count][2]."</label></li>\n";
-		$detected++;
-	}
-}
+   {
+      if(extension_loaded($drivers[$count][0]))
+         {
+            echo "      <li><input type=\"radio\" id=\"db_driver_".$drivers[$count][0]."\" name=\"config[database_driver]\" value=\"".$drivers[$count][1]."\"".($detected == 0 ? "checked=\"checked\"" : "")."><label for=\"db_driver_".$drivers[$count][1]."\">".$drivers[$count][2]."</label></li>\n";
+            $detected++;
+         }
+   }
 ?>
-</ul>
-<br />
-<div class="fake_hr_seperator">
-<hr />
-</div>
-<h2><?php echo $lang["DBHost"];?></h2>
-<p class="notop"><?php print $lang["DBHostDesc"]; ?></p>
-<input type="text" maxlength="1000" name="config[database_host]"
-	value="<?php echo $wackoConfig["database_host"] ?>" class="text_input" />
-<br />
-<div class="fake_hr_seperator">
-<hr />
-</div>
-<h2><?php echo $lang["DBPort"];?></h2>
-<p class="notop"><?php print $lang["DBPortDesc"]; ?></p>
-<input type="text" maxlength="10" name="config[database_port]"
-	value="<?php echo $wackoConfig["database_port"] ?>" class="text_input"
-	style="width: 100px;" /> <br />
-<div class="fake_hr_seperator">
-<hr />
-</div>
-<h2><?php echo $lang["DB"];?></h2>
-<p class="notop"><?php print $lang["DBDesc"]; ?></p>
-<input type="text" maxlength="64" name="config[database_database]"
-	value="<?php echo $wackoConfig["database_database"] ?>"
-	class="text_input" /> <br />
-<div class="fake_hr_seperator">
-<hr />
-</div>
-<h2><?php echo $lang["DBUser"];?></h2>
-<p class="notop"><?php print $lang["DBUserDesc"]; ?></p>
-<input type="text" maxlength="50" name="config[database_user]"
-	value="<?php echo $wackoConfig["database_user"] ?>" class="text_input" />
-<br />
-<div class="fake_hr_seperator">
-<hr />
-</div>
-<h2><?php echo $lang["DBPassword"];?></h2>
-<p class="notop"><?php print $lang["DBPasswordDesc"]; ?></p>
-<input type="password" maxlength="50" name="config[database_password]"
-	value="<?php echo $wackoConfig["database_password"] ?>"
-	class="text_input" /> <br />
-<div class="fake_hr_seperator">
-<hr />
-</div>
-<h2><?php echo $lang["Prefix"];?></h2>
-<p class="notop"><?php print $lang["PrefixDesc"]; ?></p>
-<input type="text" maxlength="64" name="config[table_prefix]"
-	value="<?php echo $wackoConfig["table_prefix"] ?>" class="text_input" />
-<br />
-<div class="fake_hr_seperator">
-<hr />
-</div>
-<input type="submit" value="<?php echo $lang["Continue"];?>"
-	class="next" onclick="return check();" /> <?php
+   </ul>
+   <br />
+   <div class="fake_hr_seperator">
+      <hr />
+   </div>
+   <h2><?php echo $lang["DBHost"];?></h2>
+   <p class="notop"><?php print $lang["DBHostDesc"]; ?></p>
+   <input type="text" maxlength="1000" name="config[database_host]" value="<?php echo $config["database_host"] ?>" class="text_input" />
+   <br />
+   <div class="fake_hr_seperator">
+      <hr />
+   </div>
+   <h2><?php echo $lang["DBPort"];?></h2>
+   <p class="notop"><?php print $lang["DBPortDesc"]; ?></p>
+   <input type="text" maxlength="10" name="config[database_port]" value="<?php echo $config["database_port"] ?>" class="text_input" style="width: 100px;" /> <br />
+   <div class="fake_hr_seperator">
+      <hr />
+   </div>
+   <h2><?php echo $lang["DB"];?></h2>
+   <p class="notop"><?php print $lang["DBDesc"]; ?></p>
+   <input type="text" maxlength="64" name="config[database_database]" value="<?php echo $config["database_database"] ?>" class="text_input" />
+   <br />
+   <div class="fake_hr_seperator">
+      <hr />
+   </div>
+   <h2><?php echo $lang["DBUser"];?></h2>
+   <p class="notop"><?php print $lang["DBUserDesc"]; ?></p>
+   <input type="text" maxlength="50" name="config[database_user]" value="<?php echo $config["database_user"] ?>" class="text_input" />
+   <br />
+   <div class="fake_hr_seperator">
+      <hr />
+   </div>
+   <h2><?php echo $lang["DBPassword"];?></h2>
+   <p class="notop"><?php print $lang["DBPasswordDesc"]; ?></p>
+   <input type="password" maxlength="50" name="config[database_password]" value="<?php echo $config["database_password"] ?>" class="text_input" />
+   <br />
+   <div class="fake_hr_seperator">
+      <hr />
+   </div>
+   <h2><?php echo $lang["Prefix"];?></h2>
+   <p class="notop"><?php print $lang["PrefixDesc"]; ?></p>
+   <input type="text" maxlength="64" name="config[table_prefix]" value="<?php echo $config["table_prefix"] ?>" class="text_input" />
+   <br />
+   <div class="fake_hr_seperator">
+      <hr />
+   </div>
+   <input type="submit" value="<?php echo $lang["Continue"];?>" class="next" onclick="return check();" />
+<?php
 	}
-	?></form>
+?>
+</form>

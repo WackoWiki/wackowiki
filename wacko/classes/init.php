@@ -144,8 +144,15 @@ class Init
 			{
 				$found_rewrite_extension = function_exists('apache_get_modules') ? in_array('mod_rewrite', apache_get_modules()) : false;
 								
-				// default configuration values
-				$wackoDefaultConfig 			= array(
+            /**
+               VERY IMPORTANT NOTE
+
+               The name of the array "wakkaConfig" is very important for backwards compatibility when we are upgrading an ancient wakka install.
+               For that reason this can never change although internally the config data is referred to as $this->config
+            */
+
+				// Default configuration values
+				$wakkaConfig = array(
 					"database_driver" => "",
 					"database_host" => "localhost",
 					"database_port" => "",
@@ -246,30 +253,27 @@ class Init
 					"captcha_edit_page" => 1,
 					"captcha_registration" => 1,
 				);
-				$wackoDefaultConfig['aliases']	= array('Admins' => '');
+				$wakkaConfig['aliases']	= array('Admins' => '');
 				
 				// load primary config
 				if ( @file_exists('config.inc.php') )
-               if( @filesize('config.inc.php') > 0)
-                  require('config.inc.php');
-               else {
-                  // die('Error loading WackoWiki config data: config.inc.php not found in base directory.');
-                  $this->config = $wackoDefaultConfig;
-                  return $this->Installer();
+               {
+                  if ( @filesize('config.inc.php') > 0)
+                     {
+                        require('config.inc.php');
+                        $this->config = $wakkaConfig;
+                     }
+                  else
+                     {
+                        $this->config = $wakkaConfig;
+                        $this->Installer();
+                     }
                }
-				else {
-					// die('Error loading WackoWiki config data: config.inc.php not found in base directory.');
-					$this->config = $wackoDefaultConfig;
-					return $this->Installer();
-				}
-				
-				// if (!$wackoConfig['system_seed'] || strlen($wackoConfig['system_seed']) < 20)
-				// 	die('WackoWiki fatal error: system_seed in config.inc.php is empty or too short. Please, use 20+ *random* characters to define this variable.');
-				
-				$wackoConfig['root_url']	= $wackoConfig['base_url'];
-				// $wackoConfig['system_seed']	= md5($wackoConfig['system_seed']);
-
-				return $this->config = array_merge($wackoDefaultConfig, (array)$wackoConfig);
+				else
+               {
+                  $this->config = $wakkaConfig;
+                  $this->Installer();
+               }
 			}
 			// secondary settings
 			else if ($this->config == true && !isset($this->dblink))
@@ -307,7 +311,7 @@ class Init
 					die('Error loading WackoWiki usergroups data: database `groups` table is empty.');
 				}
 				*/
-				return $this->config;
+				// return $this->config;
 			}
 		}
 	}
@@ -454,6 +458,9 @@ class Init
 			}
 
 			// start installer
+         global $config;
+         $config = $this->config;
+
 			if (!$installAction = trim($_REQUEST["installAction"])) $installAction = "lang";
 			include("setup/header.php");
 			

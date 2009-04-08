@@ -3,7 +3,7 @@
  Wacko Wiki PostgreSQL Table Creation Script
  */
 
-$table_pages = "CREATE TABLE ".$config2["table_prefix"]."pages (".
+$table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
                   "id serial,".
                   "tag character varying(250) NOT NULL DEFAULT '',".
                   "supertag character varying(250) NOT NULL DEFAULT '',".
@@ -25,7 +25,7 @@ $table_pages = "CREATE TABLE ".$config2["table_prefix"]."pages (".
                   "CONSTRAINT idx_pages_tag UNIQUE (tag)".
                ") WITH (OIDS=FALSE);";
 
-$table_revisions = "CREATE TABLE ".$config2["table_prefix"]."revisions (".
+$table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
                      "id serial,".
                      "tag character varying(250) NOT NULL DEFAULT '',".
                      "supertag character varying(250) NOT NULL DEFAULT '',".
@@ -45,7 +45,7 @@ $table_revisions = "CREATE TABLE ".$config2["table_prefix"]."revisions (".
                   ") WITH (OIDS=FALSE);";
 
 
-$table_acls = "CREATE TABLE ".$config2["table_prefix"]."acls (".
+$table_acls = "CREATE TABLE ".$config["table_prefix"]."acls (".
                      "page_tag character varying(250) NOT NULL DEFAULT '',".
                      "supertag character varying(250) NOT NULL DEFAULT '',".
                      "privilege character varying(20) NOT NULL DEFAULT '',".
@@ -53,20 +53,20 @@ $table_acls = "CREATE TABLE ".$config2["table_prefix"]."acls (".
                      "CONSTRAINT pk_acls_page_tag_privilege PRIMARY KEY (page_tag, privilege)".
                   ") WITH (OIDS=FALSE);";
 
-$table_links = "CREATE TABLE ".$config2["table_prefix"]."links (".
+$table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
                      "from_tag character varying(250) NOT NULL DEFAULT '',".
                      "to_tag character varying(250) NOT NULL DEFAULT '',".
                      "to_supertag character varying(250) NOT NULL DEFAULT ''".
                   ") WITH (OIDS=FALSE);";
 
 
-$table_referrers = "CREATE TABLE ".$config2["table_prefix"]."referrers (".
+$table_referrers = "CREATE TABLE ".$config["table_prefix"]."referrers (".
                      "page_tag character varying(250) NOT NULL DEFAULT '',".
                      "referrer character varying(150) NOT NULL DEFAULT '', ".
                      "\"time\" timestamp without time zone NOT NULL DEFAULT now()".
                   ") WITH (OIDS=FALSE);";
 
-$table_users = "CREATE TABLE ".$config2["table_prefix"]."users (".
+$table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
                      "name character varying(80) NOT NULL DEFAULT '',".
                      "\"password\" character varying(32) NOT NULL DEFAULT '',".
                      "email character varying(320) NOT NULL DEFAULT '',".
@@ -87,7 +87,7 @@ $table_users = "CREATE TABLE ".$config2["table_prefix"]."users (".
                      "CONSTRAINT pk_users_name PRIMARY KEY (name)".
                   ") WITH (OIDS=FALSE);";
 
-$table_pagewatches = "CREATE TABLE ".$config2["table_prefix"]."pagewatches (".
+$table_pagewatches = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
                      "id serial,".
                      "\"user\" character varying(80) NOT NULL DEFAULT '',".
                      "tag character varying(250) NOT NULL DEFAULT '',".
@@ -95,7 +95,7 @@ $table_pagewatches = "CREATE TABLE ".$config2["table_prefix"]."pagewatches (".
                      "CONSTRAINT pk_pagewatches_id PRIMARY KEY (id)".
                   ") WITH (OIDS=FALSE);";
 
-$table_upload = "CREATE TABLE ".$config2["table_prefix"]."upload (".
+$table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
                      "id serial,".
                      "page_id integer NOT NULL DEFAULT 0,".
                      "filename character varying(250) NOT NULL DEFAULT '',".
@@ -109,7 +109,7 @@ $table_upload = "CREATE TABLE ".$config2["table_prefix"]."upload (".
                      "CONSTRAINT pk_upload_id PRIMARY KEY (id)".
                   ") WITH (OIDS=FALSE);";
 
-$table_cache = "CREATE TABLE ".$config2["table_prefix"]."cache (".
+$table_cache = "CREATE TABLE ".$config["table_prefix"]."cache (".
                      "name character varying(32) NOT NULL DEFAULT '',".
                      "method character varying(20) NOT NULL DEFAULT '',".
                      "query character varying(100) NOT NULL DEFAULT '',".
