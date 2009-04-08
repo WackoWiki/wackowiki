@@ -250,7 +250,13 @@ class Init
 				
 				// load primary config
 				if ( @file_exists('config.inc.php') )
-					require('config.inc.php');
+               if( @filesize('config.inc.php') > 0)
+                  require('config.inc.php');
+               else {
+                  // die('Error loading WackoWiki config data: config.inc.php not found in base directory.');
+                  $this->config = $wackoDefaultConfig;
+                  return $this->Installer();
+               }
 				else {
 					// die('Error loading WackoWiki config data: config.inc.php not found in base directory.');
 					$this->config = $wackoDefaultConfig;
@@ -324,7 +330,7 @@ class Init
 		{
 			$dir			= str_replace('http://'.$_SERVER['SERVER_NAME'].($_SERVER['SERVER_PORT'] != 80 ? ':'.$_SERVER['SERVER_PORT'] : ''), '', $this->config['base_url']);
 			$this->request	= preg_replace('+^'.preg_quote(rtrim($dir,'/')).'+i', '', $_SERVER['REDIRECT_URL']);//$request);
-		} 
+		}
 		
 		// remove leading slash
 		$this->request	= preg_replace('/^\//', '', $this->request);
@@ -334,7 +340,7 @@ class Init
 		$p = strrpos($this->request, '/');
 		
 		if ($p === false)
-		{ 
+		{
 			$this->page = $this->request;
 		}
 		else
@@ -342,7 +348,7 @@ class Init
 			$this->page			= substr($this->request, 0, $p);
 			$m1	= $this->method = strtolower(substr($this->request, $p - strlen($this->request) + 1));
 		
-			if (!@file_exists($this->config['handler_path'].'/page/'.$this->method.'.php')) 
+			if (!@file_exists($this->config['handler_path'].'/page/'.$this->method.'.php'))
 			{
 				$this->page		= $this->request;
 				$this->method	= '';
@@ -451,8 +457,8 @@ class Init
 			if (!$installAction = trim($_REQUEST["installAction"])) $installAction = "lang";
 			include("setup/header.php");
 			
-			if (@file_exists("setup/".$installAction.".php")) 
-			include("setup/".$installAction.".php"); 
+			if (@file_exists("setup/".$installAction.".php"))
+			include("setup/".$installAction.".php");
 			
 			else print("<em>Invalid action</em>");
 			include("setup/footer.php");
@@ -490,7 +496,7 @@ class Init
 		}
 		else if ($this->cache == true && $op == 'store')
 		{
-			if ($this->cacheval == true) 
+			if ($this->cacheval == true)
 			{
 				$data = ob_get_contents();
 				return $this->cache->StoreToCache($data);
@@ -556,7 +562,7 @@ class Init
 	// DEBUG INFO
 	function Debug()
 	{
-		if ($this->config['debug'] >= 1 && strpos($this->method, '.xml') === false && $this->method != 'print') 
+		if ($this->config['debug'] >= 1 && strpos($this->method, '.xml') === false && $this->method != 'print')
 		{
 			if (($this->config['debug_admin_only'] == true && $this->engine->IsAdmin() === true) || $this->config['debug_admin_only'] == false)
 			{
