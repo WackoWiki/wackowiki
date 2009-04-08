@@ -1,7 +1,7 @@
 <?php
 try
 {
-	test($lang["TestConnectionString"], $dblink = @new PDO($dsn, $config2["database_user"], $config2["database_password"]), $lang["ErrorDBConnection"]);
+	test($lang["TestConnectionString"], $dblink = @new PDO($dsn, $config["database_user"], $config["database_password"]), $lang["ErrorDBConnection"]);
 	$dblink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch(PDOException $e)

@@ -1,6 +1,8 @@
-<form action="<?php echo myLocation() ?>?installAction=version-check"
-	method="post">
-<p><?php echo $lang["LangDesc"];?></p>
+<form action="<?php echo myLocation() ?>?installAction=version-check" method="post">
+<?php
+   writeConfigHiddenNodes(array('language' => 0));
+?>
+   <p><?php echo $lang["LangDesc"];?></p>
 <?php
 // http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 $lang_codes = array();
@@ -18,19 +20,25 @@ $lang_codes["pl"] = "Polski";
 $lang_codes["ru"] = "&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;";
 
 foreach($lang_codes as $key => $value)
-{
-	echo "\t<input type=\"radio\" id=\"lang_".$key."\" name=\"config[language]\" value=\"".$key."\"";
-	// Default or Selected Language
-	if ( isset ( $_POST["config"]["language"] ) ) {
-		if ( $_POST["config"]["language"] == $key ) {
-			echo " checked=\"checked\" ";
-		}
-	} elseif ( $wackoConfig["language"] == $key ) {
-		echo " checked=\"checked\" ";
-	}
-	//
-	echo " onClick=\"this.form.action='?installAction=lang'; submit(); \"";
-	echo " class=\"input_lang\"><label for=\"lang_".$key."\" class=\"label_lang\">".$value." (".$key.")</label><br>\n";
-}
-?> <input type="submit" value="<?php echo $lang["Continue"];?>"
-	class="next" /></form>
+   {
+      echo "   <input type=\"radio\" id=\"lang_".$key."\" name=\"config[language]\" value=\"".$key."\"";
+
+      // Default or Selected Language
+      if ( isset ( $_POST["config"]["language"] ) )
+         {
+            if ( $_POST["config"]["language"] == $key )
+               {
+                  echo " checked=\"checked\" ";
+               }
+         }
+      elseif ( $wackoDefaultConfig["language"] == $key )
+         {
+            echo " checked=\"checked\" ";
+         }
+
+      echo " onClick=\"this.form.action='?installAction=lang'; submit(); \"";
+      echo " class=\"input_lang\"><label for=\"lang_".$key."\" class=\"label_lang\">".$value." (".$key.")</label><br>\n";
+   }
+?>
+   <input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />
+</form>

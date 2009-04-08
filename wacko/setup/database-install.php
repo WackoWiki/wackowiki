@@ -3,36 +3,36 @@
 @ignore_user_abort(true);
 
 function test($text, $condition, $errorText = "")
-{
-	GLOBAL $lang;
-	print("            <li>".$text." - ".output_image($condition));
+   {
+      global $lang;
+      print("            <li>".$text." - ".output_image($condition));
 
-	if(!$condition)
-	{
-		if($errorText)
-		{
-			print("<ul class=\"install_error\"><li>".$errorText."</li></ul>");
-		}
+      if(!$condition)
+         {
+            if($errorText)
+               {
+                  print("<ul class=\"install_error\"><li>".$errorText."</li></ul>");
+               }
 
-		print("</li>\n");
-		return false;
-	}
+            print("</li>\n");
+            return false;
+         }
 
-	print("</li>\n");
-	return true;
-}
+      print("</li>\n");
+      return true;
+   }
 
 function outputError($errorText = "")
-{
-	print("<ul class=\"install_error\"><li>".$errorText."</li></ul>");
-}
+   {
+      print("<ul class=\"install_error\"><li>".$errorText."</li></ul>");
+   }
 
 // test configuration
 print("         <h2>".$lang["TestingConfiguration"]."</h2>\n");
 
 // Generic Default Inserts
-$insert_admin = "INSERT INTO ".$config2["table_prefix"]."users (name, password, email, signuptime, lang) VALUES ('".$config["admin_name"]."', md5('".$_POST["password"]."'), '".$config["admin_email"]."', now(), '".$config["language"]."')";
-$insert_logo_image = "INSERT INTO ".$config2["table_prefix"]."upload (page_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext, user) VALUES ('0','wacko4.gif', 'WackoWiki', now(), '1580', '108', '50', 'gif', '".$config2["admin_name"]."')";
+$insert_admin = "INSERT INTO ".$config["table_prefix"]."users (name, password, email, signuptime, lang) VALUES ('".$config["admin_name"]."', md5('".$_POST["password"]."'), '".$config["admin_email"]."', now(), '".$config["language"]."')";
+$insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext, user) VALUES ('0','wacko4.gif', 'WackoWiki', now(), '1580', '108', '50', 'gif', '".$config["admin_name"]."')";
 
 /*
  Setup the tables depending on which database we selected
@@ -41,11 +41,11 @@ $insert_logo_image = "INSERT INTO ".$config2["table_prefix"]."upload (page_id, f
  mysqli_legacy
  or pdo which is the default clause
  */
-$port = trim($config2["database_port"]);
+$port = trim($config["database_port"]);
 
 $fatal_error = false;
 
-switch($config2["database_driver"])
+switch($config["database_driver"])
 {
 	case "mysql_legacy":
 		require_once("setup/database_mysql.php");
@@ -53,7 +53,7 @@ switch($config2["database_driver"])
 
 		print("         <ul>\n");
 
-		if(!test($lang["TestConnectionString"], $dblink = @mysql_connect($config2["database_host"].($port == "" ? '' : ':'.$port), $config2["database_user"], $config2["database_password"]), $lang["ErrorDBConnection"]))
+		if(!test($lang["TestConnectionString"], $dblink = @mysql_connect($config["database_host"].($port == "" ? '' : ':'.$port), $config["database_user"], $config["database_password"]), $lang["ErrorDBConnection"]))
 		{
 			/*
 			 There was a problem with the connection string
@@ -64,7 +64,7 @@ switch($config2["database_driver"])
 
 			$fatal_error = true;
 		}
-		else if(!test($lang["TestDatabaseExists"], @mysql_select_db($config2["database_database"], $dblink), $lang["ErrorDBExists"]))
+		else if(!test($lang["TestDatabaseExists"], @mysql_select_db($config["database_database"], $dblink), $lang["ErrorDBExists"]))
 		{
 			/*
 			 There was a problem with the specified database name
@@ -83,10 +83,10 @@ switch($config2["database_driver"])
 			print("         </ul>\n");
 			print("         <br />\n");
 
-			if ( !isset ( $wackoConfig["wakka_version"] ) ) $wackoConfig["wakka_version"] = "";
-			if (!$version = trim($wackoConfig["wakka_version"])) $version = "0";
-			if ( isset ( $wackoConfig["wacko_version"] ) )
-			if ( trim ( $wackoConfig["wacko_version"] ) ) $version = trim($wackoConfig["wacko_version"]);
+			if ( !isset ( $config["wakka_version"] ) ) $config["wakka_version"] = "";
+			if (!$version = trim($config["wakka_version"])) $version = "0";
+			if ( isset ( $config["wacko_version"] ) )
+			if ( trim ( $config["wacko_version"] ) ) $version = trim($config["wacko_version"]);
 
 			switch ($version)
 			{
@@ -241,12 +241,12 @@ switch($config2["database_driver"])
 					require_once("setup/database_mysql.php");
 					require_once("setup/database_mysql_updates.php");
 					
-					if ( !isset ( $wackoConfig["database_port"] ) ) $wackoConfig["database_port"] = "3306";
-					if (!$port = trim($wackoConfig["database_port"])) $port = "3306";
+					if ( !isset ( $config["database_port"] ) ) $config["database_port"] = "3306";
+					if (!$port = trim($config["database_port"])) $port = "3306";
 
 					print("         <ul>\n");
 
-					if(!test($lang["TestConnectionString"], $dblink = @mysqli_connect($config2["database_host"], $config2["database_user"], $config2["database_password"], null, $port), $lang["ErrorDBConnection"]))
+					if(!test($lang["TestConnectionString"], $dblink = @mysqli_connect($config["database_host"], $config["database_user"], $config["database_password"], null, $port), $lang["ErrorDBConnection"]))
 					{
 						/*
 						 There was a problem with the connection string
@@ -257,7 +257,7 @@ switch($config2["database_driver"])
 
 						$fatal_error = true;
 					}
-					else if(!test($lang["TestDatabaseExists"], @mysqli_select_db($dblink, $config2["database_database"]), $lang["ErrorDBExists"]))
+					else if(!test($lang["TestDatabaseExists"], @mysqli_select_db($dblink, $config["database_database"]), $lang["ErrorDBExists"]))
 					{
 						/*
 						 There was a problem with the specified database name
@@ -276,11 +276,11 @@ switch($config2["database_driver"])
 						print("         </ul>\n");
 						print("         <br />\n");
 
-if ( !isset( $wackoConfig["wakka_version"] ) ) $wackoConfig["wakka_version"] = "0";
-if ( !isset( $wackoConfig["wacko_version"] ) ) $wackoConfig["wacko_version"] = "0";
+if ( !isset( $config["wakka_version"] ) ) $config["wakka_version"] = "0";
+if ( !isset( $config["wacko_version"] ) ) $config["wacko_version"] = "0";
 	
-						if (!$version = trim($wackoConfig["wakka_version"])) $version = "0";
-						if (trim($wackoConfig["wacko_version"])) $version = trim($wackoConfig["wacko_version"]);
+						if (!$version = trim($config["wakka_version"])) $version = "0";
+						if (trim($config["wacko_version"])) $version = trim($config["wacko_version"]);
 						switch ($version)
 						{
 							// new installation
@@ -432,34 +432,34 @@ if ( !isset( $wackoConfig["wacko_version"] ) ) $wackoConfig["wacko_version"] = "
 					break;
 							default:
 								$dsn = "";
-								switch($config2["database_driver"])
+								switch($config["database_driver"])
 								{
 									case "firebird":
-										$dsn = $config2["database_driver"].":dbname=".$config2["database_host"].":".$config2["database_database"].($config2["database_port"] != "" ? ";port=".$config2["database_port"] : "");
+										$dsn = $config["database_driver"].":dbname=".$config["database_host"].":".$config["database_database"].($config["database_port"] != "" ? ";port=".$config["database_port"] : "");
 										break;
 									case "ibm":
-										$dsn = $config2["database_driver"].":DATABASE=".$config2["database_host"].";HOSTNAME=".$config2["database_database"].($config2["database_port"] != "" ? ";PORT=".$config2["database_port"] : "");
+										$dsn = $config["database_driver"].":DATABASE=".$config["database_host"].";HOSTNAME=".$config["database_database"].($config["database_port"] != "" ? ";PORT=".$config["database_port"] : "");
 										break;
 									case "informix":
-										$dsn = $config2["database_driver"].":database=".$config2["database_host"].";host=".$config2["database_database"].($config2["database_port"] != "" ? ";service=".$config2["database_port"] : "");
+										$dsn = $config["database_driver"].":database=".$config["database_host"].";host=".$config["database_database"].($config["database_port"] != "" ? ";service=".$config["database_port"] : "");
 										break;
 									case "oci":
-										$dsn = $config2["database_driver"].":dbname=//".$config2["database_host"].($config2["database_port"] != "" ? ":".$config2["database_port"] : "")."/".$config2["database_database"];
+										$dsn = $config["database_driver"].":dbname=//".$config["database_host"].($config["database_port"] != "" ? ":".$config["database_port"] : "")."/".$config["database_database"];
 										break;
 									case "sqlite":
 									case "sqlite2":
 									case "mysql":
 										require_once("setup/database_mysql.php");
-										$dsn = $config2["database_driver"].":dbname=".$config2["database_database"].";host=".$config2["database_host"].($config2["database_port"] != "" ? ";port=".$config2["database_port"] : "");
+										$dsn = $config["database_driver"].":dbname=".$config["database_database"].";host=".$config["database_host"].($config["database_port"] != "" ? ";port=".$config["database_port"] : "");
 										break;
 									case "mssql":
 										require_once("setup/database_mysql.php");
-										$dsn = $config2["database_driver"].":host=".$config2["database_host"].($config2["database_port"] != "" ? ",".$config2["database_port"] : "").";dbname=".$config2["database_database"];
+										$dsn = $config["database_driver"].":host=".$config["database_host"].($config["database_port"] != "" ? ",".$config["database_port"] : "").";dbname=".$config["database_database"];
 										print($dsn);
 										break;
 									case "pgsql":
 										require_once("setup/database_pgsql.php");
-										$dsn = $config2["database_driver"].":dbname=".$config2["database_database"].";host=".$config2["database_host"].($config2["database_port"] != "" ? ";port=".$config2["database_port"] : "");
+										$dsn = $config["database_driver"].":dbname=".$config["database_database"].";host=".$config["database_host"].($config["database_port"] != "" ? ";port=".$config["database_port"] : "");
 										break;
 								}
 
@@ -499,34 +499,21 @@ if ( !isset( $wackoConfig["wacko_version"] ) ) $wackoConfig["wacko_version"] = "
 }
 
 if(!$fatal_error)
-{
-	?>
+   {
+?>
 <p><?php echo $lang["NextStep"];?></p>
-<form action="<?php echo myLocation(); ?>?installAction=write-config"
-	method="post"><input type="hidden" name="config[language]"
-	value="<?php echo $config["language"];?>" /> <input type="hidden"
-	name="config[multilanguage]"
-	value="<?php echo $config["multilanguage"];?>" /> <input type="hidden"
-	name="config[admin_name]" value="<?php echo $config["admin_name"];?>" />
-<input type="hidden" name="password"
-	value="<?php echo $_POST["password"];?>" /> <input type="hidden"
-	name="config[admin_email]" value="<?php echo $config["admin_email"];?>" />
-<input type="hidden" name="config[base_url]"
-	value="<?php echo $config["base_url"];?>" /> <input type="hidden"
-	name="config[rewrite_mode]"
-	value="<?php echo $config["rewrite_mode"];?>" /> <input type="hidden"
-	name="config[cache]" value="<?php echo $config["cache"];?>" /> <input
-	type="hidden" name="config_s"
-	value="<?php echo htmlspecialchars(serialize($config)) ?>" /> <input
-	type="submit" value="<?php echo $lang["Continue"];?>" class="next" /></form>
-	<?php
-}
+<form action="<?php echo myLocation(); ?>?installAction=write-config" method="post">
+<?php
+   writeConfigHiddenNodes(array());
+?>
+   <input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />
+</form>
+<?php
+   }
 else
-{
-	?>
-<input
-	type="submit" value="<?php echo $lang["Back"];?>" class="next"
-	onclick="javascript: history.go(-1);" />
-	<?php
-}
+   {
+?>
+<input type="submit" value="<?php echo $lang["Back"];?>" class="next" onclick="javascript: history.go(-1);" />
+<?php
+   }
 ?>
