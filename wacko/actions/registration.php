@@ -22,7 +22,7 @@ if ($_GET["confirm"])
 		echo "<div class=\"info\">".str_replace('%1', $this->ComposeLinkToPage('Settings', '', $this->GetTranslation("SettingsText"), 0), $this->GetTranslation("EmailNotConfirmed"))."</div><br />";
 	}
 }
-else if ($_REQUEST["action"] == "login")
+else if ($_POST["action"] == "login")
 {
 	// if user name already exists, check password
 	if ($existingUser = $this->LoadUser($_POST["name"]))
@@ -146,7 +146,7 @@ else if ($_REQUEST["action"] == "login")
 	}
 }
 
-if (!$_REQUEST["confirm"])
+if (!$_POST["confirm"])
 {
 	if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
 	{

@@ -1,7 +1,7 @@
 <?php
 
 if (($topic == 1) || ($title == 1)) $mode = "topic"; else $mode = "full";
-if ($_REQUEST["topic"] == "on") $mode = "topic";
+if ($_GET["topic"] == "on") $mode = "topic";
 //if (!$delim) $delim="---";
 if (!in_array($style,array("br","ul","ol","comma"))) $style="ol";
 $i = 0;
@@ -15,7 +15,7 @@ if ($form)
 
 <label for="searchfor"><?php echo $this->GetTranslation("SearchFor");?></label>:&nbsp;<br />
 <input name="phrase" id="searchfor" size="40"
-			value="<?php echo htmlspecialchars($_REQUEST["phrase"]) ?>" /> <input
+			value="<?php echo htmlspecialchars($_GET["phrase"]) ?>" /> <input
 			type="submit"
 			value="<?php echo $this->GetTranslation("SearchButtonText"); ?>" />
 			<br />
@@ -27,7 +27,7 @@ if ($form)
 		echo $this->FormClose();
 }
 
-if ($phrase == "") $phrase = $_REQUEST["phrase"];
+if ($phrase == "") $phrase = $_GET["phrase"];
 if ($phrase)
 {
 	if ($form) print "<br />";
