@@ -402,7 +402,6 @@ width: 150px; /*width of labels. Should be smaller than left column (155px) to c
 }
 /* cssform1 for actions */
 div#cssform1 {
-	width:80%;
 	padding:10px;
 	margin:0 auto;
 }
@@ -410,8 +409,7 @@ div#cssform1 p {
 	clear: left;
 	margin: 0;
 	padding: 5px 0 8px 0;
-	padding-left: 20%; /*width of left column containing the label elements*/
-	/*border-top: 1px dashed gray;*/
+	/*padding-left: 20%; width of left column containing the label elements*/
 	height: 1%;
 }
 div#cssform1 label {
@@ -419,7 +417,7 @@ div#cssform1 label {
 	margin-left: 0px; /*
 	margin-left: -155px; width of left column*/
 	width: 350px;/* width of labels. Should be smaller than left column (155px) to create some right margin*/
-	text-align: right;
+	text-align: left;
 	margin-right: 10px;
 }
 div#cssform1 input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
