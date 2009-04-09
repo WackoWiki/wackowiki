@@ -109,25 +109,34 @@
 	?>
 <h2><?php echo $lang["ReadyToInstall"]; ?></h2>
 	<?php
-	if($php_version_result && $database_result)
+	if($php_version_result && $database_result && $file_permissions_result)
 	{
 		?>
 <p><?php echo $lang["Ready"];?></p>
 <p><?php echo $lang["NotePermissions"];?></p>
-<input type="submit" value="<?php echo $lang["Continue"];?>"
-	class="next" /> <?php
+<input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />
+<?php
 	}
 	else if(!$php_version_result)
 	{
-		?>
+?>
 <p><?php echo $lang["ErrorMinPHPVersion"]; ?></p>
-		<?php
+<input type="button" value="<?php echo $lang["TryAgain"];?>" class="next" onClick="window.location.reload( true );" />
+<?php
+	}
+	else if(!$database_result)
+	{
+?>
+<p><?php echo $lang["ErrorNoDbDriverDetected"]; ?></p>
+<input type="button" value="<?php echo $lang["TryAgain"];?>" class="next" onClick="window.location.reload( true );" />
+<?php
 	}
 	else if(!$file_permissions_result)
 	{
-		?>
+?>
 <p><?php echo $lang["NotePermissions"]; ?></p>
 <p><?php echo $lang["ErrorPermissions"]; ?></p>
+<input type="button" value="<?php echo $lang["TryAgain"];?>" class="next" onClick="window.location.reload( true );" />
 <input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />
 <?php
 	}

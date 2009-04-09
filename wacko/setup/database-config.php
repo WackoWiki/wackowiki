@@ -31,6 +31,13 @@
                            alert('<?php echo $lang["ErrorNoDbDriverSelected"];?>');
                            db_driver_selected = false;
                         }
+                     else if(f.elements["config[DeleteTables]"].checked)
+                        {
+                           if(!confirm('<?php echo $lang["ConfirmTableDeletion"];?>'))
+                              {
+                                 db_driver_selected = false;
+                              }
+                        }
 
                      return db_driver_selected;
                   }
@@ -123,6 +130,14 @@ for($count = 0; $count < count($drivers); $count++)
    <h2><?php echo $lang["Prefix"];?></h2>
    <p class="notop"><?php print $lang["PrefixDesc"]; ?></p>
    <input type="text" maxlength="64" name="config[table_prefix]" value="<?php echo $config["table_prefix"] ?>" class="text_input" />
+   <br />
+   <div class="fake_hr_seperator">
+      <hr />
+   </div>
+   <h2><?php echo $lang["DeleteTables"];?></h2>
+   <p class="notop"><?php print $lang["DeleteTablesDesc"]; ?></p>
+   <label class="indented_label" for="wiki_delete_tables"><?php echo $lang["DeleteTables"];?></label>
+   <input type="checkbox" id="wiki_delete_tables" name="config[DeleteTables]" <?php echo $config["DeleteTables"] ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
    <br />
    <div class="fake_hr_seperator">
       <hr />
