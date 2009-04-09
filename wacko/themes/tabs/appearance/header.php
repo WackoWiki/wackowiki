@@ -22,10 +22,10 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 	type="image/x-icon" />
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetTranslation("RecentChangesRSS");?>"
-	href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+	href="<?php echo $this->GetConfigValue("base_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>"
-	href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+	href="<?php echo $this->GetConfigValue("base_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?> in RSS"
 	href="<?php echo $this->href("revisions.xml");?>" />
@@ -33,19 +33,19 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 // JS files.
 // default.js contains common procedures and should be included everywhere
 ?>
-  <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
-<?php 
+  <script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url");?>js/default.js"></script>
+<?php
 // protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
-if ($this->method == 'edit') 
+if ($this->method == 'edit')
 {
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/wikiedit2.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/autocomplete.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/protoedit.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/wikiedit2.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/autocomplete.js\"></script>\n";
 }
 ?>
-<script type="text/javascript" 
-	src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
-<script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
+<script type="text/javascript"
+	src="<?php echo $this->GetConfigValue("base_url");?>js/swfobject.js"></script>
+<script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url");?>js/captcha.js"></script>
 <?php
 if ($user = $this->GetUser())
 if ($user["doubleclickedit"] == "Y") {?>
@@ -98,10 +98,10 @@ echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $thi
     <?php } ?>
   </div>
   <br clear="all" />
-  <img src="<?php echo $this->GetConfigValue("root_url") ?>images/z.gif"
+  <img src="<?php echo $this->GetConfigValue("base_url") ?>images/z.gif"
 	width="1" height="1" alt="" /></div>
 <div class="TopDiv"><img
-	src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
+	src="<?php echo $this->GetConfigValue("base_url");?>images/z.gif"
 	width="1" height="1" alt="" /></div>
 <table cellspacing="0" cellpadding="0" border="0" width="100%">
   <tr>
@@ -111,7 +111,7 @@ echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $thi
   </tr>
 </table>
 <div class="TopDiv2"><img
-	src="<?php echo $this->GetConfigValue("root_url");?>images/z.gif"
+	src="<?php echo $this->GetConfigValue("base_url");?>images/z.gif"
 	width="1" height="1" alt="" /></div>
 <div class="Wrapper"
 <?php if ($this->method == "edit") echo "style=\"margin-bottom:0;padding-bottom:0\""?>>

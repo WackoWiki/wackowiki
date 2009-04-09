@@ -16,7 +16,7 @@ class Wacko
 	var $WVERSION; //Wacko version
 	var $context = array("");
 	var $current_context = 0;
-	var $pages_meta = "id, tag, time, owner, user, latest, handler, comment_on, 
+	var $pages_meta = "id, tag, time, owner, user, latest, handler, comment_on,
 						super_comment_on, supertag, lang, keywords, description";
 	var $first_inclusion = array(); // for backlinks
 	var $optionSplitter = "\n"; // if you change this two symbols, settings for all users will be lost.
@@ -154,7 +154,7 @@ class Wacko
 
 	function CheckFileExists($filename, $unwrapped_tag = "" )
 	{
-		if ($unwrapped_tag == "") 
+		if ($unwrapped_tag == "")
 		{
 			$page_id = 0;
 		}
@@ -497,7 +497,7 @@ class Wacko
 		static $npj_cache;
 		$cach_key = $tag.$strtolow.$donotload;
 
-		if (isset($npj_cache[$cach_key])) 
+		if (isset($npj_cache[$cach_key]))
 		{
 			return $npj_cache[$cach_key];
 		}
@@ -512,7 +512,7 @@ class Wacko
 			{
 				$_lang = $this->language["code"];
 
-				if ($page["lang"]) 
+				if ($page["lang"])
 					$lang = $page["lang"];
 				else
 					$lang = $this->GetConfigValue("language");
@@ -561,7 +561,7 @@ class Wacko
 
 	function GetKeywords()
 	{
-		if ($this->page["keywords"]) 
+		if ($this->page["keywords"])
 			return $this->page["keywords"];
 		else
 			return $this->GetConfigValue("meta_keywords");
@@ -569,7 +569,7 @@ class Wacko
 
 	function GetDescription()
 	{
-		if ($this->page["description"]) 
+		if ($this->page["description"])
 			return $this->page["description"];
 		else
 			return $this->GetConfigValue("meta_description");
@@ -599,7 +599,7 @@ class Wacko
 
 		if ($this->GetCachedWantedPage($supertag) == 1) return "";
 
-		// 1. search for supertag 
+		// 1. search for supertag
 		$page = $this->OldLoadPage($supertag, $time, $cache, true, $metadataonly);
 
 		// 2. if not found, search for tag
@@ -844,7 +844,7 @@ class Wacko
 			$this->pagelang = $this->GetConfigValue("language");
 	}
 
-	// STANDARD QUERIES	
+	// STANDARD QUERIES
 	function LoadRevisions($page)
 	{
 		$rev = $this->LoadAll(
@@ -1331,9 +1331,9 @@ class Wacko
 	}
 
 	// COOKIES
-	function SetSessionCookie($name, $value) 
+	function SetSessionCookie($name, $value)
 	{
-		SetCookie($this->config["cookie_prefix"].$name, $value, 0, "/"); 
+		SetCookie($this->config["cookie_prefix"].$name, $value, 0, "/");
 		$_COOKIE[$this->config["cookie_prefix"].$name] = $value;
 	}
 
@@ -1362,12 +1362,12 @@ class Wacko
 
 	function GetMessage()
 	{
-		$message = $_SESSION[$this->config["session_prefix"].'_'."message"]; 
+		$message = $_SESSION[$this->config["session_prefix"].'_'."message"];
 		$_SESSION[$this->config["session_prefix"].'_'."message"] = "";
 		return $message;
 	}
 
-	function Redirect($url, $permanent = false) 
+	function Redirect($url, $permanent = false)
 	{
 		if($permanent)
 		{
@@ -1516,7 +1516,7 @@ class Wacko
 
 		if (preg_match("/^[\.\-".$this->language["ALPHANUM_P"]."]+\.(gif|jpg|jpe|jpeg|png)$/i", $text))
 		{
-			$imlink = $this->GetConfigValue("root_url")."/images/".$text;
+			$imlink = $this->GetConfigValue("base_url")."/images/".$text;
 		}
 		else if (preg_match("/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i", preg_replace("/<\/?nobr>/", "" ,$text)))
 		{
@@ -1541,7 +1541,7 @@ class Wacko
 		{
 			// image
 			$text = preg_replace("/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/", "" ,$text);
-			return "<img src=\"".$this->GetConfigValue("root_url")."/images/".$tag."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." />";
+			return "<img src=\"".$this->GetConfigValue("base_url")."/images/".$tag."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." />";
 		}
 		else if (preg_match("/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i", $tag))
 		{
@@ -1607,14 +1607,14 @@ class Wacko
 				if (is_array($desc))
 				{
 					$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
-					$url = $this->GetConfigValue("root_url").$this->config["upload_path"]."/".$thing;
+					$url = $this->GetConfigValue("base_url").$this->config["upload_path"]."/".$thing;
 					$icon = $this->GetTranslation("fileicon");
 					$imlink = false;
 					$tpl = "localfile";
 					if ($desc["picture_w"] && !$noimg)
 					{
 						if (!$text) $text = $title;
-						return "<img src=\"".$this->GetConfigValue("root_url").$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
+						return "<img src=\"".$this->GetConfigValue("base_url").$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
 					}
 				}
 			}
@@ -1626,14 +1626,14 @@ class Wacko
 				if (is_array($desc))
 				{
 					$title = $desc["description"]." (".ceil($desc["filesize"] / 1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
-					$url = $this->GetConfigValue("root_url").$this->config["upload_path"].$thing;
+					$url = $this->GetConfigValue("base_url").$this->config["upload_path"].$thing;
 					$icon = $this->GetTranslation("fileicon");
 					$imlink = false;
 					$tpl = "localfile";
 					if ($desc["picture_w"] && !$noimg)
 					{
 						if (!$text) $text = $title;
-						return "<img src=\"".$this->GetConfigValue("root_url").$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
+						return "<img src=\"".$this->GetConfigValue("base_url").$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
 					}
 				}
 				else //404
@@ -1773,7 +1773,7 @@ class Wacko
 			{
 				$_lang = $this->language["code"];
 
-				if ($thispage["lang"]) 
+				if ($thispage["lang"])
 					$lang = $thispage["lang"];
 				else
 					$lang = $this->GetConfigValue("language");
@@ -2118,7 +2118,7 @@ class Wacko
 			}
 
 			// tagging
-			if (strpos($url, "%s")) 
+			if (strpos($url, "%s"))
 			{
 				return str_replace("%s", $tag, $url);
 			}
@@ -2311,9 +2311,9 @@ class Wacko
 
 	function _gethostbyaddr($ip)
 	{
-		if ($this->GetConfigValue("allow_gethostbyaddr")) 
+		if ($this->GetConfigValue("allow_gethostbyaddr"))
 		{
-			return gethostbyaddr($ip); 
+			return gethostbyaddr($ip);
 		}
 		else
 		{
@@ -2368,7 +2368,7 @@ class Wacko
 
 	// Returns boolean indicating if the current user is allowed to see comments at all
 	function UserAllowedComments()
-	{ 
+	{
 		return $this->GetConfigValue("hide_comments") != 1 && ($this->GetConfigValue("hide_comments") != 2 || $this->GetUser());
 	}
 
@@ -2438,7 +2438,7 @@ class Wacko
 
 	function GetPageOwnerFromComment()
 	{
-		if($this->page["comment_on"]) 
+		if($this->page["comment_on"])
 			return $this->GetPageOwner($this->page["comment_on"]);
 		else
 			return false;
@@ -2572,7 +2572,7 @@ class Wacko
 		{
 			if ($user = $this->GetUser()) $registered = true;
 				$user = strtolower($this->GetUserName());
-			if (!$registered) 
+			if (!$registered)
 				$user = "guest@wacko";
 		}
 
@@ -2583,7 +2583,7 @@ class Wacko
 		$this->_acl = $acl;
 
 		// if current user is owner, return true. owner can do anything!
-		if ($user != "guest@wacko") 
+		if ($user != "guest@wacko")
 			if ($this->UserIsOwner($tag))
 				return true;
 
@@ -2715,13 +2715,13 @@ class Wacko
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
 		$xml .= "<title>".$this->GetConfigValue("wacko_name").$this->GetTranslation("RecentChangesTitleXML")."</title>\n";
-		$xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
+		$xml .= "<link>".$this->GetConfigValue("base_url")."</link>\n";
 		$xml .= "<description>".$this->GetTranslation("RecentChangesXML").$this->GetConfigValue("wacko_name")." </description>\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
 		$xml .= "<title>".$this->GetConfigValue("wacko_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
-		$xml .= "<url>".$this->GetConfigValue("root_url")."files/wacko4.gif"."</url>\n";
+		$xml .= "<link>".$this->GetConfigValue("base_url")."</link>\n";
+		$xml .= "<url>".$this->GetConfigValue("base_url")."files/wacko4.gif"."</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
@@ -2754,7 +2754,7 @@ class Wacko
 		$this->WriteFile($name, $xml);
 	}
 
-	function WriteRecentCommentsXML() 
+	function WriteRecentCommentsXML()
 	{
 		$name = "recentcomment";
 		
@@ -2763,13 +2763,13 @@ class Wacko
 		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
 		$xml .= "<title>".$this->GetConfigValue("wacko_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
+		$xml .= "<link>".$this->GetConfigValue("base_url")."</link>\n";
 		$xml .= "<description>".$this->GetTranslation("RecentCommentsXML").$this->GetConfigValue("wacko_name")." </description>\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
 		$xml .= "<title>".$this->GetConfigValue("wacko_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->GetConfigValue("root_url")."</link>\n";
-		$xml .= "<url>".$this->GetConfigValue("root_url")."files/wacko4.gif"."</url>\n";
+		$xml .= "<link>".$this->GetConfigValue("base_url")."</link>\n";
+		$xml .= "<url>".$this->GetConfigValue("base_url")."files/wacko4.gif"."</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
@@ -2862,7 +2862,7 @@ class Wacko
 	function SetWatch($user, $tag)
 	{
 		// Remove old watch first to avoid double watches
-		$this->ClearWatch($user, $tag);		
+		$this->ClearWatch($user, $tag);
 
 		if ($this->HasAccess('read', $tag))
 			return $this->Query(
@@ -2910,7 +2910,7 @@ class Wacko
 		// initial bookmarks table construction
 		if ($set || !($bookmarks=$this->GetBookmarks()))
 		{
-			$bookmarks = $user["bookmarks"] 
+			$bookmarks = $user["bookmarks"]
 				? $user["bookmarks"]
 				: $this->GetDefaultBookmarks($user["lang"]);
 
@@ -3113,7 +3113,7 @@ class Wacko
 		if (is_array($user) && $user["options"]["theme"])
 		{
 			$this->config["theme"] = $user["options"]["theme"];
-			$this->config["theme_url"]=$this->config["root_url"]."themes/".$this->config["theme"]."/";
+			$this->config["theme_url"]=$this->config["base_url"]."themes/".$this->config["theme"]."/";
 		}
 
 		if (!$this->GetConfigValue("multilanguage"))

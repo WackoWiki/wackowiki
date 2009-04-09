@@ -7,7 +7,7 @@ $init = &new Init();
 // define settings
 $init->Settings();	// populate from config.php
 $init->DBAL();
-$init->Settings('theme_url',	$init->config['root_url'].'themes/'.$init->config['theme'].'/');
+$init->Settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
 $init->Settings('user_table',	$init->config['table_prefix'].'users');
 
 if ($init->IsLocked() === true)

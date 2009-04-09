@@ -27,24 +27,24 @@ echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
   <link media="print" rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/print.css" />
   <link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico" type="image/x-icon" />
   <link title="<?php echo $this->GetConfigValue("root_page");?>" href="<?php echo $this->GetConfigValue("base_url");?>" rel="start"/>
-  <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
-  <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+  <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("base_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+  <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("base_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
   <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
 ?>
-  <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
-<?php 
+  <script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url");?>js/default.js"></script>
+<?php
 // autocomplete.js, protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages.
-if ($this->method == 'edit') 
+if ($this->method == 'edit')
 {
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/wikiedit2.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/autocomplete.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/protoedit.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/wikiedit2.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/autocomplete.js\"></script>\n";
 }
 ?>
-  <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
+  <script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url");?>js/captcha.js"></script>
 <?php
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
@@ -85,7 +85,7 @@ else
    {
    // Show Register / Login link
 	echo "<ul>\n<li>".$this->ComposeLinkToPage($this->GetTranslation("LoginPage").($this->config["rewrite_mode"] ? "?" : "&amp;")."goback=".$this->SlimUrl($this->tag), "", $this->GetTranslation("LoginPage"), 0)."</li>\n";
-	echo "<li>".$this->ComposeLinkToPage($this->GetTranslation("RegistrationPage"), "", $this->GetTranslation("RegistrationPage"), 0)."</li>\n</ul>"; 
+	echo "<li>".$this->ComposeLinkToPage($this->GetTranslation("RegistrationPage"), "", $this->GetTranslation("RegistrationPage"), 0)."</li>\n</ul>";
    }
 
 // End if
@@ -93,7 +93,7 @@ else
 		</div>
 <div id="navigation">
 <?php
-// Outputs Bookmarks AKA QuickLinks			
+// Outputs Bookmarks AKA QuickLinks
 	echo '<div id="usermenu">';
 		echo "<ol>\n";
 		// Main page
@@ -109,7 +109,7 @@ else
 		echo "</li>\n";
 					
 		if ($this->GetUser())
-		{					
+		{
 			// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
 			if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks()))
 				echo '<li><a href="'. $this->Href('', '', "addbookmark=yes")
@@ -120,7 +120,7 @@ else
 				echo '<li><a href="'. $this->Href('', '', "removebookmark=yes")
 					.'"><img src="'. $this->GetConfigValue("theme_url")
 					.'icons/toolbar2.gif" alt="-" title="'.
-					$this->GetTranslation("RemoveFromBookmarks") .'"/></a></li>';					
+					$this->GetTranslation("RemoveFromBookmarks") .'"/></a></li>';
 			}
 	echo "\n</ol></div>";
 ?>
@@ -142,7 +142,7 @@ echo $this->FormClose();
 </div>
 </div>
 <div id="content">
-<?php 
+<?php
 	// here we show messages (see beginning of this file)
 	if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
 ?>
