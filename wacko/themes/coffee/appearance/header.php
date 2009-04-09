@@ -48,12 +48,25 @@ if ($this->method == 'edit')
 <script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url");?>js/captcha.js"></script>
 <?php
 if ($user = $this->GetUser())
-if ($user["doubleclickedit"] == "Y") {
-	?>
-<script type="text/javascript">
-                   var edit = "<?php echo $this->href("edit");?>";
-  </script>
-	<?php }?>
+   {
+      if ($user["doubleclickedit"] == "Y")
+         {
+?>
+   <script type="text/javascript">
+      var edit = "<?php echo $this->href("edit");?>";
+   </script>
+<?php
+         }
+   }
+else if ($this->HasAccess("write"))
+   {
+?>
+   <script type="text/javascript">
+      var edit = "<?php echo $this->href("edit");?>";
+   </script>
+<?php
+   }
+?>
 </head>
 
 <body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">

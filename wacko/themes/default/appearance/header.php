@@ -49,11 +49,25 @@ if ($this->method == 'edit')
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->GetUser())
-if ($user["doubleclickedit"] == "Y") {?>
+   {
+      if ($user["doubleclickedit"] == "Y")
+         {
+?>
   <script type="text/javascript">
    var edit = "<?php echo $this->href("edit");?>";
   </script>
-<?php }
+<?php
+         }
+   }
+else if($this->HasAccess("write"))
+   {
+?>
+
+      <script type="text/javascript">
+      var edit = "<?php echo $this->href("edit");?>";
+     </script>
+<?php
+   }
 ?>
 </head>
 <?php
