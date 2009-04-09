@@ -13,7 +13,7 @@ $max = $usermax;
 
 if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 {
-	if ($root == "" && !(int)$noxml)  print("<a href=\"".$this->GetConfigValue("root_url")."xml/recentchanges_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />");
+	if ($root == "" && !(int)$noxml)  print("<a href=\"".$this->GetConfigValue("base_url")."xml/recentchanges_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />");
 
 	$count = 0;
 	$access = true;

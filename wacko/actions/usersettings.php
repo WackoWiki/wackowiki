@@ -90,7 +90,7 @@ else if ($user = $this->GetUser())
 	<p>
 		<label for="email"><?php echo $this->GetTranslation("YourEmail");?>:</label>
 		<input id="email" name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />
-		&nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("root_url").'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("root_url").'images/warning.gif" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="16" height="16" />' ?> </p>
+		&nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("base_url").'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("base_url").'images/warning.gif" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="16" height="16" />' ?> </p>
 	<p>
 		<label for="doubleclickedit"><?php echo $this->GetTranslation("DoubleclickEditing");?>:</label>
 		<input type="hidden" name="doubleclickedit" value="N" />
