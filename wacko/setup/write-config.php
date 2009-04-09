@@ -86,7 +86,7 @@ else
 	?>
 <form action="<?php echo myLocation() ?>?installAction=write-config" method="post">
 <?php
-   writeConfigHiddenNodes();
+   writeConfigHiddenNodes(array('none' => ''));
 ?>
    <input type="submit" value="<?php echo $lang["TryAgain"];?>" class="next" />
 </form>
