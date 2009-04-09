@@ -1,6 +1,6 @@
 <form action="<?php echo myLocation() ?>?installAction=site-config" method="post">
 <?php
-   writeConfigHiddenNodes(array());
+   writeConfigHiddenNodes(array('none' => ''));
 
 	if ( isset ( $config["wakka_version"] ) )
 	{

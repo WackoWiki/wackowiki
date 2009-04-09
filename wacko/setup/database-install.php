@@ -502,7 +502,11 @@ switch($config["database_driver"])
 								}
 
 								print("         <ul>\n");
-								// PHP4 doesn't support try/catch blocks
+								/*
+                           PHP4 doesn't support try/catch blocks so we put the PDO code in a seperate file.
+                           Since we don't support PDO in PHP4 they can never come down this route without PHP5.
+                           i.e. they don't see this as a selection on the previous page.
+                        */
 								require_once("setup/database-install-pdo.php");
 								print("         </ul>\n");
 								print("         <br />\n");
@@ -513,15 +517,15 @@ switch($config["database_driver"])
                               {
                                  print("<h2>".$lang["DeletingTables"]."</h2>\n");
                                  print("            <ul>\n");
-                                 test(str_replace("%1", "page", $lang["DeletingTable"]), @$dblink->query($table_pages_drop), str_replace("%1", "page", $lang["ErrorDeletingTable"]));
-                                 test(str_replace("%1", "revision", $lang["DeletingTable"]), @$dblink->query($table_revisions_drop), str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
-                                 test(str_replace("%1", "acl", $lang["DeletingTable"]), @$dblink->query($table_acls_drop), str_replace("%1", "acl", $lang["ErrorDeletingTable"]));
-                                 test(str_replace("%1", "link tracking", $lang["DeletingTable"]), @$dblink->query($table_links_drop), str_replace("%1", "link", $lang["ErrorDeletingTable"]));
-                                 test(str_replace("%1", "referrer", $lang["DeletingTable"]), @$dblink->query($table_referrers_drop), str_replace("%1", "referrer", $lang["ErrorDeletingTable"]));
-                                 test(str_replace("%1", "user", $lang["DeletingTable"]), @$dblink->query($table_users_drop), str_replace("%1", "user", $lang["ErrorDeletingTable"]));
-                                 test(str_replace("%1", "watches", $lang["DeletingTable"]), @$dblink->query($table_pagewatches_drop), str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
-                                 test(str_replace("%1", "upload", $lang["DeletingTable"]), @$dblink->query($table_upload_drop), str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
-                                 test(str_replace("%1", "cache", $lang["DeletingTable"]), @$dblink->query($table_cache_drop), str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
+                                 testPDO(str_replace("%1", "page", $lang["DeletingTable"]), $table_pages_drop, str_replace("%1", "page", $lang["ErrorDeletingTable"]));
+                                 testPDO(str_replace("%1", "revision", $lang["DeletingTable"]), $table_revisions_drop, str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
+                                 testPDO(str_replace("%1", "acl", $lang["DeletingTable"]), $table_acls_drop, str_replace("%1", "acl", $lang["ErrorDeletingTable"]));
+                                 testPDO(str_replace("%1", "link tracking", $lang["DeletingTable"]), $table_links_drop, str_replace("%1", "link", $lang["ErrorDeletingTable"]));
+                                 testPDO(str_replace("%1", "referrer", $lang["DeletingTable"]), $table_referrers_drop, str_replace("%1", "referrer", $lang["ErrorDeletingTable"]));
+                                 testPDO(str_replace("%1", "user", $lang["DeletingTable"]), $table_users_drop, str_replace("%1", "user", $lang["ErrorDeletingTable"]));
+                                 testPDO(str_replace("%1", "watches", $lang["DeletingTable"]), $table_pagewatches_drop, str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
+                                 testPDO(str_replace("%1", "upload", $lang["DeletingTable"]), $table_upload_drop, str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
+                                 testPDO(str_replace("%1", "cache", $lang["DeletingTable"]), $table_cache_drop, str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
                                  print("            <li>".$lang["DeletingTablesEnd"]."</li>\n");
                                  print("         </ul>\n");
                                  print("         <br />\n");
@@ -530,15 +534,15 @@ switch($config["database_driver"])
 									// No need to check the past versions since PDO SQL is only officially supported in this release (v4.3)
 									print("         <h2>".$lang["InstallingTables"]."</h2>\n");
 									print("         <ul>\n");
-									test(str_replace("%1","page",$lang["CreatingTable"]), @$dblink->query($table_pages), str_replace("%1","page",$lang["ErrorCreatingTable"]));
-									test(str_replace("%1","revision",$lang["CreatingTable"]), @$dblink->query($table_revisions), str_replace("%1","revision",$lang["ErrorCreatingTable"]));
-									test(str_replace("%1","acl",$lang["CreatingTable"]), @$dblink->query($table_acls), str_replace("%1","acl",$lang["ErrorCreatingTable"]));
-									test(str_replace("%1","link tracking",$lang["CreatingTable"]), @$dblink->query($table_links), str_replace("%1","link",$lang["ErrorCreatingTable"]));
-									test(str_replace("%1","referrer",$lang["CreatingTable"]), @$dblink->query($table_referrers), str_replace("%1","referrer",$lang["ErrorCreatingTable"]));
-									test(str_replace("%1","user",$lang["CreatingTable"]), @$dblink->query($table_users), str_replace("%1","user",$lang["ErrorCreatingTable"]));
-									test(str_replace("%1","watches",$lang["CreatingTable"]), @$dblink->query($table_pagewatches), str_replace("%1","watches",$lang["ErrorCreatingTable"]));
-									test(str_replace("%1","upload",$lang["CreatingTable"]), @$dblink->query($table_upload), str_replace("%1","upload",$lang["ErrorCreatingTable"]));
-									test(str_replace("%1","cache",$lang["CreatingTable"]), @$dblink->query($table_cache), str_replace("%1","cache",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","page",$lang["CreatingTable"]), $table_pages, str_replace("%1","page",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","revision",$lang["CreatingTable"]), $table_revisions, str_replace("%1","revision",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","acl",$lang["CreatingTable"]), $table_acls, str_replace("%1","acl",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","link tracking",$lang["CreatingTable"]), $table_links, str_replace("%1","link",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","referrer",$lang["CreatingTable"]), $table_referrers, str_replace("%1","referrer",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","user",$lang["CreatingTable"]), $table_users, str_replace("%1","user",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","watches",$lang["CreatingTable"]), $table_pagewatches, str_replace("%1","watches",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","upload",$lang["CreatingTable"]), $table_upload, str_replace("%1","upload",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","cache",$lang["CreatingTable"]), $table_cache, str_replace("%1","cache",$lang["ErrorCreatingTable"]));
 									print("         </ul>\n");
 									print("         <br />\n");
 									print("         <h2>".$lang["InstallingDefaultData"]."</h2>\n");
@@ -547,8 +551,8 @@ switch($config["database_driver"])
 									require_once("setup/inserts.php");
 									print("</li>\n");
 									print("            <li>".$lang["InstallingPagesEnd"]."</li>\n");
-									test($lang["InstallingAdmin"], @$dblink->query($insert_admin), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
-									test($lang["InstallingLogoImage"], @$dblink->query($insert_logo_image), str_replace("%1","logo image",$lang["ErrorAlreadyExists"]));
+									testPDO($lang["InstallingAdmin"], $insert_admin, str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
+									testPDO($lang["InstallingLogoImage"], $insert_logo_image, str_replace("%1","logo image",$lang["ErrorAlreadyExists"]));
 									print("         </ul>\n");
 								}
 								break;
