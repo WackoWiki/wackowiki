@@ -4,7 +4,9 @@ if ($this->HasAccess("read"))
 {
 	if (!$this->page)
 	{
-		if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
+      // Not sure what the point of wrapping it in the conditional was
+		// if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
+      header("HTTP/1.0 404 Not Found");
 
 		print(str_replace("%1", $this->href("edit", "", "", 1), $this->GetTranslation("DoesNotExists")));
 	}
@@ -62,10 +64,10 @@ if ($this->HasAccess("read"))
 		echo $data;
 
 		$this->SetLanguage($this->userlang);
-?> 
+?>
 <script type="text/javascript">
    var dbclick = "page";
-</script> 
+</script>
 <?php
 
   // if this is an old revision, display some buttons
@@ -85,7 +87,10 @@ if ($this->HasAccess("read"))
 }
 else
 {
-	if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
+   // Not sure what the point of wrapping it in the conditional was
+	// if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
+   header("HTTP/1.0 403 Forbidden");
+
 	print($this->GetTranslation("ReadAccessDenied"));
 }
 ?>
@@ -163,8 +168,8 @@ if ($this->GetConfigValue("footer_files"))
 		"SELECT id FROM ".$this->config["table_prefix"]."upload ".
 		"WHERE page_id = '". quote($this->dblink, $this->page["id"]) ."'");
 	}
-	else 
-	{	
+	else
+	{
 		$files = array();
 	}
 
@@ -297,7 +302,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
       default:
         print(str_replace("%1", $c, $this->GetTranslation("Comments_n")));
       }
-	  //TODO: show link to show comment only if there is one or/and user has the right to add a new one 
+	  //TODO: show link to show comment only if there is one or/and user has the right to add a new one
     ?>
   [<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->GetTranslation("ShowComments"); ?></a>]</div>
 <?php
