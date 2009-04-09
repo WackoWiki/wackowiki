@@ -1095,9 +1095,9 @@ class Wacko
 					$body_r = $this->Format($body_r, "paragrafica");
 					$body_toc = $this->body_toc;
 				}
-				// create default write acl. store empty write ACL for comments.
-				// get default acl for root.
-				if (strstr($this->context[$this->current_context], "/") || $comment_on)
+				
+            // Manage ACLs
+				if (strstr($this->context[$this->current_context], "/") && !$comment_on)
 				{
 					$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $this->context[$this->current_context] );
 					$write_acl = $this->LoadAcl($root, "write");
@@ -1109,12 +1109,23 @@ class Wacko
 						$write_acl = $this->LoadAcl($root, "write");
 					}
 
-					$write_acl = $comment_on == "" ? $write_acl["list"] : '';
+					$write_acl = $write_acl["list"];
+               $write_acl = 'woos';
 					$read_acl = $this->LoadAcl($root, "read");
 					$read_acl = $read_acl["list"];
 					$comment_acl = $this->LoadAcl($root, "comment");
 					$comment_acl = $comment_acl["list"];
 				}
+            else if ($comment_on)
+            {
+               // Give comments the same rights as their parent page
+					$write_acl = $this->LoadAcl($comment_on, "write");
+					$write_acl = $write_acl["list"];
+					$read_acl = $this->LoadAcl($comment_on, "read");
+					$read_acl = $read_acl["list"];
+					$comment_acl = $this->LoadAcl($comment_on, "comment");
+					$comment_acl = $comment_acl["list"];
+            }
 				else
 				{
 					$write_acl = $this->GetConfigValue("default_write_acl");
@@ -1141,9 +1152,11 @@ class Wacko
 						"tag = '".quote($this->dblink, $tag)."'");
 
 				// saving acls
-				$this->SaveAcl($tag, "write", ($comment_on ? "" : $write_acl));
+				// $this->SaveAcl($tag, "write", ($comment_on ? "" : $write_acl));
+				$this->SaveAcl($tag, "write", $write_acl);
 				$this->SaveAcl($tag, "read", $read_acl);
-				$this->SaveAcl($tag, "comment", ($comment_on ? "" : $comment_acl));
+				// $this->SaveAcl($tag, "comment", ($comment_on ? "" : $comment_acl));
+				$this->SaveAcl($tag, "comment", $comment_acl);
 				// set watch
 				if ($this->GetUser() && !$this->GetConfigValue("disable_autosubscribe"))
 					$this->SetWatch($this->GetUserName(), $this->GetPageTag());

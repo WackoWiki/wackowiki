@@ -32,15 +32,15 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					$message .= $this->GetTranslation("ACLGaveOwnership").$newowner;
 				}
 		
-				// Change read permission for all comments on this page
+				// Change permissions for all comments on this page
 				$comments = $this->LoadAll(
 					"SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on = '".$this->GetPageTag()."' AND owner='".quote($this->dblink, $this->GetUserName())."'");
 				foreach ($comments as $num=>$page)
 				{
 
 					$this->SaveAcl($page["tag"], "read", $_POST["read_acl"]);
-					// $this->SaveAcl($page["tag"], "write", $page["comment_on"] == '' ? $_POST["write_acl"] : '');
-					// $this->SaveAcl($page["tag"], "comment", $page["comment_on"] == '' ? $_POST["comment_acl"] : '');
+					$this->SaveAcl($page["tag"], "write", $_POST["write_acl"]);
+					$this->SaveAcl($page["tag"], "comment", $_POST["comment_acl"]);
 
 					// change owner?
 					if ($newowner = $_POST["newowner"])
@@ -62,8 +62,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				{
 					// store lists
 					$this->SaveAcl($page["tag"], "read", $_POST["read_acl"]);
-					$this->SaveAcl($page["tag"], "write", $page["comment_on"] == '' ? $_POST["write_acl"] : '');
-					$this->SaveAcl($page["tag"], "comment", $page["comment_on"] == '' ? $_POST["comment_acl"] : '');
+					$this->SaveAcl($page["tag"], "write", $_POST["write_acl"]);
+					$this->SaveAcl($page["tag"], "comment", $_POST["comment_acl"]);
 					// change owner?
 					if ($newowner = $_POST["newowner"])
 					$this->SetPageOwner($page["tag"], $newowner);
