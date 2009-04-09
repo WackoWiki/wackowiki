@@ -1,11 +1,11 @@
 <!--notypo-->
 <?php
-if ($_REQUEST["secret_code"]){
+if ($_POST["secret_code"]){
 	//Password forgotten. Provided secret code
-	$code = $_REQUEST["secret_code"];
+	$code = $_POST["secret_code"];
 	$user = $this->LoadSingle("SELECT * FROM ".$this->config["user_table"]." WHERE changepassword='".quote($this->dblink, $code)."'");
 	if ($user){
-		if ($_REQUEST["newpassword"]){
+		if ($_POST["newpassword"]){
 
 			//Password forgotten. Provided secret code and new password. Change password.
 			$newpassword = $_POST["newpassword"];
@@ -60,7 +60,7 @@ if ($_REQUEST["secret_code"]){
 }else if (!$forgot && $user = $this->GetUser())
 {
 	// is user trying to update?
-	if ($_REQUEST["action"] == "change")
+	if ($_POST["action"] == "change")
 	{
 		//Simple change password
 		$password = $_POST["password"];
@@ -122,7 +122,7 @@ if ($_REQUEST["secret_code"]){
 	print($this->FormClose());
 
 }else{
-	if ($_REQUEST["action"] == "send")
+	if ($_POST["action"] == "send")
 	{
 
 		//Password forgotten. Send mail
@@ -156,7 +156,7 @@ if ($_REQUEST["secret_code"]){
 			$error = $this->GetTranslation("UserNotFound");
 		}
 	}
-	if ($error || $_REQUEST["action"] != "send")
+	if ($error || $_POST["action"] != "send")
 	{
 		//View password forgot form
 		print($this->FormOpen());

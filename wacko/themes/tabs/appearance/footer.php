@@ -109,7 +109,7 @@ if ($this->method == "show") {
       if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag]))
       $_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
 
-      switch($_REQUEST["show_files"])
+      switch($_POST["show_files"])
       {
          case "0":
             $_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = 0;
@@ -195,7 +195,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
   if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag]))
     $_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
 
-  switch($_REQUEST["show_comments"])
+  switch($_POST["show_comments"])
   {
   case "0":
     $_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = 0;

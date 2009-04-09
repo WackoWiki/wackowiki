@@ -1,12 +1,12 @@
 <!--notypo-->
 <?php
-if ($_REQUEST["action"] == "logout")
+if ($_POST["action"] == "logout")
 {
 	$this->LogoutUser();
 	$this->SetBookmarks(BM_DEFAULT);
 	//$this->SetMessage($this->GetTranslation("LoggedOut"));
 	$this->context[++$this->current_context] = "";
-	if ($_REQUEST["goback"] != "") $this->Redirect($this->Href("", stripslashes($_REQUEST["goback"])));
+	if ($_POST["goback"] != "") $this->Redirect($this->Href("", stripslashes($_POST["goback"])));
 	else $this->Redirect($this->href());
 }
 else if ($user = $this->GetUser())
@@ -37,7 +37,7 @@ else
 	$focus=0;
 
 	// is user trying to log in or register?
-	if ($_REQUEST["action"] == "login")
+	if ($_POST["action"] == "login")
 	{
 		// if user name already exists, check password
 		if ($existingUser = $this->LoadUser($_POST["name"]))
@@ -49,7 +49,7 @@ else
 				$this->SetUser($existingUser);
 				$this->SetBookmarks(BM_USER);
 				$this->context[++$this->current_context] = "";
-				if ($_REQUEST["goback"] != "") $this->Redirect($this->Href("", stripslashes($_REQUEST["goback"]), "cache=".rand(0,1000)));
+				if ($_POST["goback"] != "") $this->Redirect($this->Href("", stripslashes($_POST["goback"]), "cache=".rand(0,1000)));
 				$this->Redirect($this->href());
 			}
 			else
@@ -63,7 +63,7 @@ else
 	print($this->FormOpen());
 	?>
 <input type="hidden" name="action" value="login" />
-<input type="hidden" name="goback" value="<?php echo stripslashes($_REQUEST["goback"]);?>" />
+<input type="hidden" name="goback" value="<?php echo stripslashes($_POST["goback"]);?>" />
 <div class="cssform">
   <h3><?php echo $this->GetTranslation("LoginWelcome"); ?></h3>
   <?php

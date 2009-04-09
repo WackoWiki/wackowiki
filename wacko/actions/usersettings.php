@@ -1,23 +1,23 @@
 <!--notypo-->
 <?php
-if ($_REQUEST["confirm"])
+if ($_POST["confirm"])
 {
 	if ($this->LoadSingle(
 			"SELECT * FROM ".$this->config["user_table"]." ".
 			"WHERE email_confirm = '".
-			quote($this->dblink, $_REQUEST["confirm"])."'"))
+			quote($this->dblink, $_POST["confirm"])."'"))
 	{
 		$this->Query(
 			"UPDATE ".$this->config["user_table"]." ".
 			"SET email_confirm = '' ".
 			"WHERE email_confirm = '".
-			quote($this->dblink, $_REQUEST["confirm"])."'");
+			quote($this->dblink, $_POST["confirm"])."'");
 		echo "<br /><br />".$this->GetTranslation("EmailConfirmed")."<br /><br />";
 	}
 	else
 		echo "<br /><br />".str_replace('%1', $this->ComposeLinkToPage('Settings', '', $this->GetTranslation("SettingsText"), 0), $this->GetTranslation("EmailNotConfirmed"))."<br /><br />";
 }
-else if ($_REQUEST["action"] == "logout")
+else if ($_POST["action"] == "logout")
 {
 	$this->LogoutUser();
 	$this->SetMessage($this->GetTranslation("LoggedOut"));
@@ -28,7 +28,7 @@ else if ($user = $this->GetUser())
 	$this->SetPageLang($this->userlang);
 
 	// is user trying to update?
-	if ($_REQUEST["action"] == "update")
+	if ($_POST["action"] == "update")
 	{
 		$bookmarks = str_replace("\r", "", $_POST["bookmarks"]);
 
