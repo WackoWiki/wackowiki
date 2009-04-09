@@ -6,7 +6,7 @@ $file403 = "images/upload403.gif";
 // 1. check existence
 if ($_GET["global"]) {
 	$page_id = 0;
-} 
+}
 else
 {
 	$page_id = $this->page["id"];
@@ -79,13 +79,17 @@ if ($filepath)
 }
 else if ($error == 404)
 {
-	if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
+   // Not sure what the point of wrapping it in the conditional was
+	// if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
+   header("HTTP/1.0 404 Not Found");
 
 	print($this->GetTranslation("UploadFileNotFound"));
 }
 else
 {
-	if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
+	// Not sure what the point of wrapping it in the conditional was
+   // if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
+   header("HTTP/1.0 403 Forbidden");
 
 	print($this->GetTranslation("UploadFileForbidden"));
 }
