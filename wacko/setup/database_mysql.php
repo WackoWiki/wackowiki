@@ -135,4 +135,19 @@ $table_cache = "CREATE TABLE ".$config["table_prefix"]."cache (".
                   "query VARCHAR( 100 ) NOT NULL,".
                   "INDEX (name)".
                ") TYPE=MyISAM";
+
+/*
+ Wacko Wiki MySQL Table Deletion Script
+*/
+
+$table_pages_drop = "DROP TABLE ".$config["table_prefix"]."pages";
+$table_revisions_drop = "DROP TABLE ".$config["table_prefix"]."revisions";
+$table_acls_drop = "DROP TABLE ".$config["table_prefix"]."acls";
+$table_links_drop = "DROP TABLE ".$config["table_prefix"]."links";
+$table_referrers_drop = "DROP TABLE ".$config["table_prefix"]."referrers";
+$table_users_drop = "DROP TABLE ".$config["table_prefix"]."users";
+$table_pagewatches_drop = "DROP TABLE ".$config["table_prefix"]."pagewatches";
+$table_upload_drop = "DROP TABLE ".$config["table_prefix"]."upload";
+$table_cache_drop = "DROP TABLE ".$config["table_prefix"]."cache";
+
 ?>
