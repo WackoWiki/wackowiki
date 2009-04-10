@@ -1,3 +1,17 @@
+<?php
+if(array_key_exists("wacko_version", $config))
+   {
+      echo '<p>'.preg_replace(array("/%1/", "/%2/"), array($config["wacko_version"], WACKO_VERSION), $lang["UpgradeFromWacko"]).'</p>';
+   }
+else if(array_key_exists("wakka_version", $config))
+   {
+      echo '<p>'.preg_replace(array("/%1/", "/%2/"), array($config["wakka_version"], WACKO_VERSION), $lang["UpgradeFromWakka"]).'</p>';
+   }
+else
+   {
+      echo '<p>'.str_replace("%1", WACKO_VERSION, $lang["FreshInstall"]).'</p>';
+   }
+?>
 <form action="<?php echo myLocation() ?>?installAction=version-check" method="post">
 <?php
    writeConfigHiddenNodes(array('language' => 0));
@@ -31,7 +45,7 @@ foreach($lang_codes as $key => $value)
                   echo " checked=\"checked\" ";
                }
          }
-      elseif ( $wackoDefaultConfig["language"] == $key )
+      elseif ( $config["language"] == $key )
          {
             echo " checked=\"checked\" ";
          }

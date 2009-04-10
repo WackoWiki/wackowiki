@@ -258,7 +258,7 @@ class Init
 				// load primary config
 				if ( @file_exists('wakka.config.php') )
                {
-                  // It's an old install so load the data and start the installer
+                  // It's an old WackoWiki or WakkaWiki install so load the data and start the upgrader.
                   if ( @filesize('wakka.config.php') > 0)
                      {
                         require('wakka.config.php');
@@ -266,6 +266,7 @@ class Init
                      }
                   else
                      {
+                        // Else it's an empty file so use the default settings, this is quite unlikely to occur.
                         $this->config = $wackoConfig;
                      }
 
@@ -273,6 +274,7 @@ class Init
                }
 				else if ( @file_exists('config.inc.php') )
                {
+                  // If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R4.3
                   if ( @filesize('config.inc.php') > 0)
                      {
                         require('config.inc.php');
@@ -280,6 +282,7 @@ class Init
                      }
                   else
                      {
+                        // Else it's an empty file so use the default settings.  This is typical on a fresh install.
                         $this->config = $wackoConfig;
                      }
 
