@@ -239,6 +239,18 @@ $wackoTranslation = array(
 	"ChooseTheme" => "Vali teema",
 
 	"CreatePage" => "Loo leht",
+	"CreateNewPage" => "Create a new page",
+	"CreateRandomPage" => "Create a random page",
+	"CreatePageButton" => "Create",
+	"CreateSubPage" => "Create a sub page in the cluster",
+	"CreatePageParentCluster" => "Create a page in the parent cluster",
+	"CreatePageDenied" => "You do not have the necessary access rights.",
+	"CreatePageDeniedAddress" => "You do not have the right to create the page at this address.",
+	"PageAlreadyExists" => "According to the address provided the page already exists.",
+	"PageAlreadyExistsEdit" => "Do you want ",
+	"PageAlreadyExistsEdit2" => "edit it",
+	"PageAlreadyExistsEditDenied" => "You can't edit it.",
+
 	"RemoveFromBookmarks" => "Eemalda kiirvalikute hulgast",
 	"DontRedirect" => "Ära võimalda automaatset ümbersuunamist<br /> ",
 	"SendWatchMail" => "Saada e-postiga teade, kui keegi<br /> (väljaarvatud sa ise) muudab neid lehti mida sa vaatad",

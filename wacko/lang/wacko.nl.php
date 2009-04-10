@@ -239,6 +239,18 @@ $wackoTranslation = array(
 	"ChooseTheme" => "Kies thema",
 
 	"CreatePage" => "Maak deze pagina aan",
+	"CreateNewPage" => "Create a new page",
+	"CreateRandomPage" => "Create a random page",
+	"CreatePageButton" => "Create",
+	"CreateSubPage" => "Create a sub page in the cluster",
+	"CreatePageParentCluster" => "Create a page in the parent cluster",
+	"CreatePageDenied" => "You do not have the necessary access rights.",
+	"CreatePageDeniedAddress" => "You do not have the right to create the page at this address.",
+	"PageAlreadyExists" => "According to the address provided the page already exists.",
+	"PageAlreadyExistsEdit" => "Do you want ",
+	"PageAlreadyExistsEdit2" => "edit it",
+	"PageAlreadyExistsEditDenied" => "You can't edit it.",
+
 	"RemoveFromBookmarks" => "Verwijder uit bookmarks",
 	"DontRedirect" => "Sta automatische doorverwijzing niet toe.",
 	"SendWatchMail" => "Stuur een e-mail wanneer iemand (behalve uzelf) een pagina die u in de gaten houdt verandert.",
