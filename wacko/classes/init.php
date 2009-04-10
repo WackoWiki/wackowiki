@@ -152,7 +152,7 @@ class Init
             */
 
 				// Default configuration values
-				$wakkaConfig = array(
+				$wackoConfig = array(
 					"database_driver" => "",
 					"database_host" => "localhost",
 					"database_port" => "",
@@ -253,26 +253,41 @@ class Init
 					"captcha_edit_page" => 1,
 					"captcha_registration" => 1,
 				);
-				$wakkaConfig['aliases']	= array('Admins' => '');
+				$wackoConfig['aliases']	= array('Admins' => '');
 				
 				// load primary config
-				if ( @file_exists('config.inc.php') )
+				if ( @file_exists('wakka.config.php') )
                {
-                  if ( @filesize('config.inc.php') > 0)
+                  // It's an old install so load the data and start the installer
+                  if ( @filesize('wakka.config.php') > 0)
                      {
-                        require('config.inc.php');
+                        require('wakka.config.php');
                         $this->config = $wakkaConfig;
                      }
                   else
                      {
-                        $this->config = $wakkaConfig;
+                        $this->config = $wackoConfig;
+                     }
+
+                  $this->Installer();
+               }
+				else if ( @file_exists('config.inc.php') )
+               {
+                  if ( @filesize('config.inc.php') > 0)
+                     {
+                        require('config.inc.php');
+                        $this->config = $wackoConfig;
+                     }
+                  else
+                     {
+                        $this->config = $wackoConfig;
                      }
 
                   $this->Installer();
                }
 				else
                {
-                  $this->config = $wakkaConfig;
+                  $this->config = $wackoConfig;
                   $this->Installer();
                }
 			}
