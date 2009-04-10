@@ -81,7 +81,7 @@ class Wacko
 	{
 		if ($debug) echo "((QUERY: $query))";
 
-		if ($this->config['debug'] >= 1)
+		if ($this->config['debug'] >= 2)
 			$start = $this->GetMicroTime();
 
 		$result = query($this->dblink, $query);
@@ -3552,6 +3552,72 @@ class Wacko
 		return true;
 	}
 
+	// ADDITIONAL METHODS
+
+	// run checks of password complexity under current
+	// config settings; returned error codes (or a sum of):
+	//		1 = password contains login
+	//		2 = not enough chars
+	//		5 = too weak (chars classes requirement)
+	//		0 (false) = good password
+	function PasswordComplexity($login, $pwd)
+	{
+		$unlike_login	= $this->config['pwd_unlike_login'];
+		$char_classes	= $this->config['pwd_char_classes'];
+		$min_chars		= $this->config['pwd_min_chars'];
+		$error			= 0;
+
+		$l = strlen($login);
+		$p = strlen($pwd);
+		if ($l == 0 || $p == 0)
+			$r = 0;
+		else
+			$r = ($p > $l ? $p / $l : $l / $p);
+
+		// check if password is like a login or contains login string
+		switch ($unlike_login)
+		{
+			case 2:	// don't run this check if login is much shorter than password or vice versa
+				if (($l > 4 && $p > 4) && $r < 4)
+					if (stristr($login, $pwd) !== false || stristr($pwd, $login) !== false)
+					{
+						$error += 1;
+						break;
+					}
+			case 1:
+				if (strcasecmp($login, $pwd) === 0)
+					$error += 1;
+		}
+
+		// check password length
+		if ($p < $min_chars) $error += 2;
+
+		// check character classes requirements
+		switch ($char_classes)
+		{
+			case 1:
+				if (!preg_match('/[0-9]+/', $pwd) ||
+					!preg_match('/[a-zA-Zà-ÿÀ-ß]+/', $pwd))
+						$error += 5;
+				break;
+
+			case 2:
+				if (!preg_match('/[0-9]+/', $pwd) ||
+					!preg_match('/[A-ZÀ-ß]+/', $pwd) ||
+					!preg_match('/[a-zà-ÿ]+/', $pwd))
+						$error += 5;
+				break;
+
+			case 3:
+				if (!preg_match('/[0-9]+/', $pwd) ||
+					!preg_match('/[A-ZÀ-ß]+/', $pwd) ||
+					!preg_match('/[a-zà-ÿ]+/', $pwd) ||
+					!preg_match('/[\W]+/', $pwd))
+						$error += 5;
+				break;
+		}
+		return $error;
+	}
 }
 
 ?>
