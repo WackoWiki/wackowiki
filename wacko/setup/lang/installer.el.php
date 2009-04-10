@@ -97,6 +97,9 @@ $lang = array(
 "Prefix" => "Πρόθεμα Πίνακα",
 "ErrorNoDbDriverDetected" => "Δεν εντοπίστηκε οδηγός βάσεων δεδομένων, παρακαλώ είτε ενεργοποιήστε μία εκ των επεκτάσεων mysql, mysqli ή pdo στο php.ini αρχείο σας.",
 "ErrorNoDbDriverSelected" => "Δεν εντοπίστηκε οδηγός βάσεων δεδομένων, παρακαλώ επιλέξτε έναν από την λίστα.",
+"DeleteTables" => "Delete Existing Tables?",
+"DeleteTablesDesc" => "ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.",
+"ConfirmTableDeletion" => "Are you sure you want to delete all current wiki tables?",
 
 /*
    Database Installation Page
@@ -128,6 +131,10 @@ $lang = array(
 "ErrorMovingRevisions" => "Σφάλμα μετακίνησης δεδομένων έκδοσης",
 "MovingRevisions" => "Μετακίνηση δεδομένων σε πίνακα έκδοσης",
 "CleanupScript" => "Αν θα χρησιμοποιήσετε το <a href=\"http://wackowiki.org/Doc/English/CleanupScript\" target=\"_blank\">WackoWiki:Doc/English/CleanupScript</a>, θα επιταχύνετε το Wacko.",
+"DeletingTables" => "Deleting Tables",
+"DeletingTablesEnd" => "Finished Deleting Tables",
+"ErrorDeletingTable" => "Error deleting <tt>%1</tt> table, the most likely reason is that the table does not exist in which case you can ignore this warning.",
+"DeletingTable" => "Deleting <tt>%1</tt> table",
 
 /*
    Write Config Pageς

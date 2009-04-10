@@ -93,6 +93,9 @@ $lang = array(
 "Prefix" => "Prefijo de las tablas",
 "ErrorNoDbDriverDetected" => "No se detectó un controlador de base de datos, por favor habilite la extensión mysql, mysqli o pdo en php.ini.",
 "ErrorNoDbDriverSelected" => "Ningun controlador de base de datos seleccionado, por favor elija uno de la lista.",
+"DeleteTables" => "Delete Existing Tables?",
+"DeleteTablesDesc" => "ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.",
+"ConfirmTableDeletion" => "Are you sure you want to delete all current wiki tables?",
 
 /*
    Database Installation Page
@@ -124,6 +127,10 @@ $lang = array(
 "ErrorMovingRevisions" => "Error al mover datos de revisión",
 "MovingRevisions" => "Moviendo datos a tabla de revisión",
 "CleanupScript" => "Si utiliza <a href=\"http://wackowiki.org/Doc/English/CleanupScript\" target=\"_blank\">WackoWiki:Doc/English/CleanupScript</a>, aumentará la velocidad de Wacko.",
+"DeletingTables" => "Deleting Tables",
+"DeletingTablesEnd" => "Finished Deleting Tables",
+"ErrorDeletingTable" => "Error deleting <tt>%1</tt> table, the most likely reason is that the table does not exist in which case you can ignore this warning.",
+"DeletingTable" => "Deleting <tt>%1</tt> table",
 
 /*
    Write Config Page
