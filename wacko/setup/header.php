@@ -64,7 +64,7 @@ require_once("setup/lang/installer.".$config["language"].".php");
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $config["language"]; ?>" lang="<?php echo $config["language"]; ?>">
    <head>
-      <title><?php echo $lang["Title"];?></title>
+      <title><?php echo $lang["Title"];?> - v<?php echo WACKO_VERSION; ?></title>
       <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $lang["Charset"]; ?>" />
       <link rel="stylesheet" href="<?php echo myLocation() ?>setup/css/installer.css" type="text/css" />
       <link rel="shortcut icon" href="<?php echo myLocation() ?>setup/favicon.ico" type="image/x-icon" />
@@ -81,15 +81,8 @@ require_once("setup/lang/installer.".$config["language"].".php");
             <li>&gt;</li>
             <li class="<?php echo $installAction == 'site-config' ? 'current' : 'item'; ?>"><?php echo $lang["site-config"]; ?></li>
             <li>&gt;</li>
-<?php
-if ( !isset ( $config["wakka_version"] ) )
-   {
-?>
             <li class="<?php echo $installAction == 'database-config' ? 'current' : 'item'; ?>"><?php echo $lang["database-config"]; ?></li>
             <li>&gt;</li>
-<?php
-   }
-?>
             <li class="<?php echo $installAction == 'database-install' ? 'current' : 'item'; ?>"><?php echo $lang["database-install"]; ?></li>
             <li>&gt;</li>
             <li class="<?php echo $installAction == 'write-config' ? 'current' : 'item'; ?>"><?php echo $lang["write-config"]; ?></li>
