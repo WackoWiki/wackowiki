@@ -5,7 +5,7 @@ function array_to_str ($arr, $name="")
       if ( !isset( $entries ) ) $entries = "";
       if ( !isset( $arrays  ) ) $arrays = "";
 
-      $str = "\$wakkaConfig".($name?"[\"".$name."\"]":"")." = array(\n";
+      $str = "\$wackoConfig".($name?"[\"".$name."\"]":"")." = array(\n";
 
       foreach ($arr as $k => $v)
          {
