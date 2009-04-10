@@ -266,8 +266,9 @@ class Init
                   else
                      {
                         $this->config = $wakkaConfig;
-                        $this->Installer();
                      }
+
+                  $this->Installer();
                }
 				else
                {
@@ -276,10 +277,10 @@ class Init
                }
 			}
 			// secondary settings
-			else if ($this->config == true && !isset($this->dblink))
-			{
+			//else if ($this->config == true && !isset($this->dblink))
+			//{
 				// connecting to db
-				$this->DBAL();
+				// $this->DBAL();
 				/*
 				// retrieving configuration data
 				 $wackoDBQuery = "SELECT * FROM {$this->config['table_prefix']}config";
@@ -312,7 +313,7 @@ class Init
 				}
 				*/
 				// return $this->config;
-			}
+			//}
 		}
 	}
 	
