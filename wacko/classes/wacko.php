@@ -1110,7 +1110,6 @@ class Wacko
 					}
 
 					$write_acl = $write_acl["list"];
-               $write_acl = 'woos';
 					$read_acl = $this->LoadAcl($root, "read");
 					$read_acl = $read_acl["list"];
 					$comment_acl = $this->LoadAcl($root, "comment");
@@ -2560,14 +2559,29 @@ class Wacko
 					// if still no acl, use config defaults
 					if (!$acl && $useDefaults)
 					{
-						$acl = array(
-							"supertag" => $supertag,
-							"page_tag" => $tag,
-							"privilege" => $privilege,
-							"list" => $this->GetConfigValue("default_".$privilege."_acl"),
-							"time" => date("YmdHis"),
-							"default" => 1
-						);
+                  // First look for parent ACL, so that clusters/subpages
+                  // work correctly.
+                  if ( strstr($tag, "/") )
+                     {
+                        $parent = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $tag );
+
+                        // By letting it fetch defaults, it will automatically recurse
+                        // up the tree of parent pages... fetching the ACL on the root
+                        // page if necessary.
+                        $acl = $this->LoadAcl( $parent, $privilege, 1 );
+                     }
+
+                  if (!$acl)
+                     {
+                        $acl = array(
+                           "supertag" => $supertag,
+                           "page_tag" => $tag,
+                           "privilege" => $privilege,
+                           "list" => $this->GetConfigValue("default_".$privilege."_acl"),
+                           "time" => date("YmdHis"),
+                           "default" => 1
+                        );
+                     }
 					}
 
 					$this->CacheACL($supertag, $privilege, $useDefaults, $acl);
