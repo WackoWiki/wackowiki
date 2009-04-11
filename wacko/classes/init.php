@@ -269,8 +269,6 @@ class Init
                         // Else it's an empty file so use the default settings, this is quite unlikely to occur.
                         $this->config = $wackoConfig;
                      }
-
-                  $this->Installer();
                }
 				else if ( @file_exists('config.inc.php') )
                {
@@ -285,14 +283,13 @@ class Init
                         // Else it's an empty file so use the default settings.  This is typical on a fresh install.
                         $this->config = $wackoConfig;
                      }
-
-                  $this->Installer();
                }
 				else
                {
                   $this->config = $wackoConfig;
-                  $this->Installer();
                }
+
+            $this->Installer();
 			}
 			// secondary settings
 			//else if ($this->config == true && !isset($this->dblink))

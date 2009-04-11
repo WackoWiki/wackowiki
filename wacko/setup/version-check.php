@@ -2,18 +2,7 @@
 <?php
    writeConfigHiddenNodes(array('none' => ''));
 
-	if ( isset ( $config["wakka_version"] ) )
-	{
-		// If this is an upgrade install
-		print("            <p>".$lang["Installed"].($config["wacko_version"] ? $config["wacko_version"] : $config["wakka_version"]).". ".$lang["ToUpgrade"].WACKO_VERSION.".</p>\n");
-		print("            <p>".$lang["PleaseBackup"]."</p>\n");
-	}
-	else
-	{
-		// Else it is a fresh install
-		print("            <p>".$lang["Fresh"]."<strong>".WACKO_VERSION."</strong>.</p>\n");
-	}
-	?>
+?>
 <p><?php echo $lang["Requirements"]; ?></p>
 	<?php
 	/*

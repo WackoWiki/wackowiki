@@ -30,6 +30,7 @@ if ( !isset( $config["wacko_version"] ) )
    }
 
 // set version to current version, yay!
+$was_wakka_upgrade = array_key_exists("wakka_version", $config) && !array_key_exists("wacko_version", $config);
 $config["wakka_version"] = WAKKA_VERSION;
 $config["wacko_version"] = WACKO_VERSION;
 
@@ -38,11 +39,12 @@ $configCode = "<?php\n// config.inc.php ".$lang["WrittenAt"].strftime("%c")."\n/
 $configCode .= array_to_str($config)."\n?>";
 
 // try to write configuration file
-print("         <h2>".$lang["Writing"]."</h2>\n");
+print("         <h2>".$lang["FinalSteps"]."</h2>\n");
 print("         <ul>\n");
-print("            <li>".$lang["Writing2"]." <tt>".$wackoConfigLocation."</tt> - ");
+print("            <li>".$lang["Writing"]." - ");
 
-$fp = @fopen($wackoConfigLocation, "w");
+$perm_changed = true;
+$fp = @fopen('config.inc.php', "w");
 
 if ($fp)
    {
@@ -55,42 +57,70 @@ if ($fp)
       $perm_changed = !is__writable('config.inc.php');
 
       print(output_image(true)."</li>\n");
+
       print("            <li>".$lang["RemovingWritePrivilege"]." - ".output_image($perm_changed))."</li>\n";
-      print("         </ul>\n");
-
-      print("         <h2>".$lang["SecurityConsiderations"]."</h2>\n");
-      print("         <ul class=\"security\">\n");
-
-      if(!$perm_changed)
-         {
-            print("            <li>".$lang["SecurityRisk"]."</li>\n");
-         }
-
-      print("            <li>".$lang["RemoveSetupDirectory"]."</li>\n");
-
-      print("         </ul>\n");
-
-      print("         <br /><p>".str_replace("%1", $config["base_url"], $lang["InstallationComplete"])."</p>\n");
    }
 else
    {
       // Problem saving file
       print(output_image(false)."</li>\n");
-      print("         </ul>\n");
+   }
 
-      print("         <h2>".$lang["SecurityConsiderations"]."</h2>\n");
-      print("         <ul class=\"security\">\n");
-      print("            <li>".str_replace("%1", $wackoConfigLocation, $lang["ErrorGivePrivileges"])."</li>\n");
-      print("            <li>".$lang["RemoveSetupDirectory"]."</li>\n");
-      print("         </ul>\n");
-	?>
+// try to delete wakka config file
+$deleted_old_wakka_config_file = true;
+if($was_wakka_upgrade && is_file('wakka.config.php'))
+   {
+      @chown('wakka.config.php', 666);
+      $deleted_old_wakka_config_file = unlink('wakka.config.php');
+      print("            <li>".$lang["DeletingWakkaConfigFile"]." - ".output_image($deleted_old_wakka_config_file))."</li>\n";
+   }
+
+print("         </ul>\n");
+
+print("         <h2>".$lang["SecurityConsiderations"]."</h2>\n");
+print("         <ul class=\"security\">\n");
+
+if(!$perm_changed)
+   {
+      print("            <li>".$lang["SecurityRisk"]."</li>\n");
+   }
+
+print("            <li>".$lang["RemoveSetupDirectory"]."</li>\n");
+
+if(!$deleted_old_wakka_config_file)
+   {
+      print("            <li>".$lang["RemoveWakkaConfigFile"]."</li>\n");
+   }
+
+if(!$fp)
+   {
+      print("            <li>".$lang["ErrorGivePrivileges"]."</li>\n");
+   }
+
+print("         </ul>\n");
+
+?>
 <form action="<?php echo myLocation() ?>?installAction=write-config" method="post">
 <?php
-   writeConfigHiddenNodes(array('none' => ''));
+writeConfigHiddenNodes(array('none' => ''));
+
+// If there was a problem then show the "Try Again" button.
+if($fp)
+   {
+      print("         <h2>".$lang["InstallationComplete"]."</h2>\n");
+      print("         <p>".str_replace("%1", $config["base_url"], $lang["ThatsAll"])."</p>\n");
+   }
+else
+   {
 ?>
    <input type="submit" value="<?php echo $lang["TryAgain"];?>" class="next" />
+<?php
+   }
+?>
 </form>
 <?php
+if(!$fp)
+   {
       print("         <div class=\"config_code\"><pre>".htmlentities($configCode)."</pre></div>\n");
    }
 ?>
