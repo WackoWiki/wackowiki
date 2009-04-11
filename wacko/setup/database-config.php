@@ -83,7 +83,7 @@ for($count = 0; $count < count($drivers); $count++)
    {
       if(extension_loaded($drivers[$count][0]))
          {
-            echo "      <li><input type=\"radio\" id=\"db_driver_".$drivers[$count][0]."\" name=\"config[database_driver]\" value=\"".$drivers[$count][1]."\"".($detected == 0 ? "checked=\"checked\"" : "")."><label for=\"db_driver_".$drivers[$count][1]."\">".$drivers[$count][2]."</label></li>\n";
+            echo "      <li><input type=\"radio\" id=\"db_driver_".$drivers[$count][0]."\" name=\"config[database_driver]\" value=\"".$drivers[$count][1]."\"".($detected == 0 ? "checked=\"checked\"" : "")."><label for=\"db_driver_".$drivers[$count][0]."\">".$drivers[$count][2]."</label></li>\n";
             $detected++;
          }
    }
