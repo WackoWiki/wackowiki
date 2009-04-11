@@ -21,6 +21,7 @@ $lang = array(
 "UpgradeFromWacko" => "Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
 "UpgradeFromWakka" => "Welcome to WackoWiki, it appears that you are upgrading from WakkaWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
 "FreshInstall" => "Welcome to WackoWiki, you are about to install WackoWiki <tt>%1</tt>.  The next few pages will guide you through the installation process.",
+"PleaseBackup" => "Please, backup your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.",
 "Lang" => "Language Configuration",
 "LangDesc" => "Please choose a language for the installation process. This language will also be used as the default language of your WackoWiki installation.",
 
@@ -35,10 +36,6 @@ $lang = array(
 "Database" => "Database",
 "Permissions" => "Permissions",
 "ReadyToInstall" => "Ready to Install?",
-"Installed" => "Your installed WackoWiki is reporting itself as ",
-"ToUpgrade" => "You are about to <strong>upgrade</strong> to WackoWiki ",
-"PleaseBackup" => "Please, backup your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.",
-"Fresh" => "Since there is no existing WackoWiki configuration file, this is probably a fresh WackoWiki install. You are about to install WackoWiki ",
 "Requirements" => "Your server must meet the requirements listed below.",
 "OK" => "OK",
 "Problem" => "Problem",
@@ -139,19 +136,21 @@ $lang = array(
    Write Config Page
 */
 "write-config" => "Write Config File",
-"Writing" => "Writing Configuration",
-"Writing2" => "Writing Configuration File",
+"FinalSteps" => "Final Steps",
+"Writing" => "Writing Configuration File",
 "RemovingWritePrivilege" => "Removing Write Privilege",
-"InstallationComplete" => "That's all! You can now <a href=\"%1\">view your WackoWiki site</a>.",
+"InstallationComplete" => "Installation Complete",
+"ThatsAll" => "That's all! You can now <a href=\"%1\">view your WackoWiki site</a>.",
 "SecurityConsiderations" => "Security Considerations",
 "SecurityRisk" => "You are advised to remove write access to <tt>config.inc.php</tt> again now that it's been written. Leaving the file writable can be a security risk!",
 "RemoveSetupDirectory" => "You should delete the \"setup\" directory now that the installation process has been completed.",
-"ErrorGivePrivileges" => "The configuration file <tt>%1</tt> could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called <tt>config.inc.php</tt> (<tt>touch config.inc.php ; chmod 666 config.inc.php</tt>; don't forget to remove write access again later, ie <tt>chmod 644 config.inc.php</tt>). If, for any reason, you can't do this, you'll have to copy the text below into a new file and save/upload it as <tt>config.inc.php</tt> into the WackoWiki directory. Once you've done this, your WackoWiki site should work. If not, please visit <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a>",
+"ErrorGivePrivileges" => "The configuration file <tt>config.inc.php</tt> could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called <tt>config.inc.php</tt> (<tt>touch config.inc.php ; chmod 666 config.inc.php</tt>; don't forget to remove write access again later, ie <tt>chmod 644 config.inc.php</tt>). If, for any reason, you can't do this, you'll have to copy the text below into a new file and save/upload it as <tt>config.inc.php</tt> into the WackoWiki directory. Once you've done this, your WackoWiki site should work. If not, please visit <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a>",
 "NextStep" => "In the next step, the installer will try to write the updated configuration file, <tt>config.inc.php</tt>.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a> for details.",
 "WrittenAt" => "written at ",
 "DontChange" => "do not change wakka_version manually!",
 "ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Try Again",
-
+"RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",
+"DeletingWakkaConfigFile" => "Deleting Obsolete Wakka Configuration File",
 );
 ?>
