@@ -23,9 +23,13 @@ function array_to_str ($arr, $name="")
 if ( ( $config["database_driver"] == "mysqli_legacy" ) && empty( $config["database_port"] ) )
 	$config["database_port"] = $config["database_port"] = "3306";
 
-if ( !isset( $config["wacko_version"] ) )
+if(!array_key_exists("wacko_version", $config))
    {
       $config["cookie_prefix"] = $config["table_prefix"];
+   }
+
+if(!array_key_exists("aliases", $config))
+   {
       $config["aliases"] = array("Admins" => $config["admin_name"]);
    }
 
@@ -39,7 +43,7 @@ $configCode = "<?php\n// config.inc.php ".$lang["WrittenAt"].strftime("%c")."\n/
 $configCode .= array_to_str($config)."\n?>";
 
 // try to write configuration file
-print("         <h2>".$lang["FinalSteps"]."</h2>\n");
+print("         <h2>".$lang[$was_wakka_upgrade ? "FinalSteps" : "FinalStep"]."</h2>\n");
 print("         <ul>\n");
 print("            <li>".$lang["Writing"]." - ");
 
@@ -121,7 +125,7 @@ else
 <?php
 if(!$fp)
    {
-      print("         <div class=\"config_code\"><pre>".htmlentities($configCode)."</pre></div>\n");
+      print("         <div id=\"config_code\" class=\"config_code\"><pre>".htmlentities($configCode)."</pre></div>\n");
    }
 ?>
 <br />

@@ -137,6 +137,7 @@ $lang = array(
 */
 "write-config" => "Write Config File",
 "FinalSteps" => "Final Steps",
+"FinalStep" => "Final Step",
 "Writing" => "Writing Configuration File",
 "RemovingWritePrivilege" => "Removing Write Privilege",
 "InstallationComplete" => "Installation Complete",
