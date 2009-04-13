@@ -179,6 +179,8 @@ class Init
 
 					"language" => "en",
 					"theme" => "default",
+						
+					"allow_themes" => 1,
 
 					"header_action" => "header",
 					"footer_action" => "footer",
