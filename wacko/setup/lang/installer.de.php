@@ -21,7 +21,7 @@ $lang = array(
 "UpgradeFromWacko" => "Wilkommen bei WackoWiki, es scheint das du von WackoWiki <tt>%1</tt> auf <tt>%2</tt> aktualisierst.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.",
 "UpgradeFromWakka" => "Wilkommen bei WackoWiki, es scheint das du von WakkaWiki <tt>%1</tt> auf <tt>%2</tt> aktualisierst.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.",
 "FreshInstall" => "Wilkommen bei WackoWiki, du installierst gerade WackoWiki <tt>%1</tt>.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.",
-"PleaseBackup" => "Bitte, mache eine Sicherungskopie von deiner Datenbank, der config.inc.php-Datei und aller geänderter Dateien (ggf. auch Layouts) bevor du den Aktualisierungs-Vorgang startest. Das kann dir im Problemfall viel Ärger ersparen.",
+"PleaseBackup" => "Bitte, erstelle eine Sicherungskopie von deiner Datenbank, der Konfigurationsdatei config.inc.php und aller geänderter Dateien (ggf. auch Layouts) bevor du den Aktualisierungs-Vorgang beginnst. Das kann dir im Problemfall viel Ärger ersparen.",
 "Lang" => "Spracheinstellungen",
 "LangDesc" => "Wähle eine Sprache für die Installation aus. Das wird die Standardsprache für deine WackoWiki Installation.",
 
@@ -94,7 +94,7 @@ $lang = array(
 "ErrorNoDbDriverDetected" => "Es wurde kein Datenbanktreiber erkannt, bitte aktiviere entweder die mysql, mysqli oder pdo Erweiterung in deiner php.ini Datei.",
 "ErrorNoDbDriverSelected" => "Es wurde kein Datenbanktreiber ausgewählt, bitte suche den passenden Treiber aus der Liste aus.",
 "DeleteTables" => "Lösche bestehende Tabellen?",
-"DeleteTablesDesc" => "ACHTUNG! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.",
+"DeleteTablesDesc" => "ACHTUNG! Wenn du mit dieser Option fortfährst werden alle aktuellen Wiki-Daten aus deiner Datenbank gelöscht. Dies kann nicht rückgängig gemacht werden, es sei denn, du stellt die die Daten von Hand aus einem gesichert Backup wieder her.",
 "ConfirmTableDeletion" => "Bist du sicher das du alle bestehenden Wiki-Tabellen löschen willst?",
 
 /*
@@ -152,7 +152,7 @@ $lang = array(
 "ConfigDescription" => "http://wackowiki.org/Doc/Deutsch/Konfiguration",
 "TryAgain" => "Versuche es erneut",
 "RemoveWakkaConfigFile" => "WackoWiki verwendet eine neuere Konfigurationsdatei als deine frühere WakkaWiki Installation.  Die alte Datei konnte nicht automatisch durch das System gelöscht werden und so ist es ratsam die Datei <tt>wakka.config.php</tt> manuell zu löschen.",
-"DeletingWakkaConfigFile" => "Lösche hinfällige Wakka Konfigurations-Datei",
+"DeletingWakkaConfigFile" => "Lösche hinfällige Wakka Konfigurationsdatei",
 
 );
 ?>
