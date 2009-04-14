@@ -40,15 +40,28 @@ if ($this->method == 'edit')
 		<script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 		<script type="text/javascript" src="<?php echo $this->GetConfigValue("theme_url") ?>js/leftframe.js"></script>
 <?php
-    if ($user = $this->GetUser()){
-		if ($user["doubleclickedit"] == "Y") {
+// Doubleclick edit feature.
+// Enabled only for registered users who don't swith it off (requires class=page in show handler).
+if ($user = $this->GetUser())
+   {
+      if ($user["doubleclickedit"] == "Y")
+         {
 ?>
-		<script type="text/javascript">
-			var edit = "<?php echo $this->href("edit");?>";
-		</script>
+  <script type="text/javascript">
+   var edit = "<?php echo $this->href("edit");?>";
+  </script>
 <?php
-		}
-	}
+         }
+   }
+else if($this->HasAccess("write"))
+   {
+?>
+
+      <script type="text/javascript">
+      var edit = "<?php echo $this->href("edit");?>";
+     </script>
+<?php
+   }
 ?>
 </head>
 
