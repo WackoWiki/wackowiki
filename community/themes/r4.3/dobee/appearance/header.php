@@ -205,7 +205,7 @@ else if($this->HasAccess("write"))
 
 							if ($this->IsAdmin()) {
 								echo '<br />';
-								print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1del.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("DeleteText")."</a>");
+								print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/del.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("DeleteText")."</a>");
 							}
 
 							echo '<br />';
@@ -240,9 +240,9 @@ else if($this->HasAccess("write"))
 		<input type="hidden" name="action" value="login" />
 
 		<div class="header"><?php echo ($this->IsWatched($this->GetUserName(), $this->GetPageTag())
-		? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1unvisibl.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>"
+		? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/unvisibl.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>"
 		: "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/visibl.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?>
-		| <?php echo "<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"absmiddle\" border=\"0\" /></a>";?>
+		| <?php echo "<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->GetConfigValue("theme_url")."icons/print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"absmiddle\" border=\"0\" /></a>";?>
 		| <?php
 		if ($this->GetUser()) { ?> <span class="nobr"> <?php echo $this->GetTranslation("YouAre"); ?>
 		<img
