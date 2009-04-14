@@ -18,6 +18,10 @@ $lang = array(
 /*
    Language Selection Page
 */
+"UpgradeFromWacko" => "Wilkommen bei WackoWiki, es scheint das du von WackoWiki <tt>%1</tt> auf <tt>%2</tt> aktualisierst.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.",
+"UpgradeFromWakka" => "Wilkommen bei WackoWiki, es scheint das du von WakkaWiki <tt>%1</tt> auf <tt>%2</tt> aktualisierst.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.",
+"FreshInstall" => "Wilkommen bei WackoWiki, du installierst gerade WackoWiki <tt>%1</tt>.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.",
+"PleaseBackup" => "Bitte, mache eine Sicherungskopie von deiner Datenbank, der config.inc.php-Datei und aller geänderter Dateien (ggf. auch Layouts) bevor du den Aktualisierungs-Vorgang startest. Das kann dir im Problemfall viel Ärger ersparen.",
 "Lang" => "Spracheinstellungen",
 "LangDesc" => "Wähle eine Sprache für die Installation aus. Das wird die Standardsprache für deine WackoWiki Installation.",
 
@@ -32,10 +36,6 @@ $lang = array(
 "Database" => "Datenbank",
 "Permissions" => "Berechtigungen",
 "ReadyToInstall" => "Bereit zur Installation?",
-"Installed" => "Dein installiertes WackoWiki meldet sich selbst als  ",
-"ToUpgrade" => "Du <strong>aktualisierst</strong> gerade zu WackoWiki ",
-"PleaseBackup" => "Bitte, mache eine Sicherungskopie von deiner Datenbank, der config.inc.php-Datei und aller geänderter Dateien (ggf. auch Layouts) bevor du den Aktualisierungs-Vorgang startest. Das kann dir im Problemfall viel Ärger ersparen.",
-"Fresh" => "Weil keine WackoWiki-Konfigurationsdatei existiert, ist das möglicherweise eine Neuinstallation. Du installierst gerade WackoWiki ",
 "Requirements" => "Dein Server muss den folgenden Anforderungen entsprechen.",
 "OK" => "OK",
 "Problem" => "Problem",
@@ -53,7 +53,7 @@ $lang = array(
 "Home" => "Startseite",
 "HomeDesc" => "Der Name der Startseite deines WackoWikis. Sollte ein WikiName sein (z.B. StartSeite)., dies wird die Startseite sein deines Wikis und sollte ein <a href=\"http://wackowiki.org/Doc/Deutsch/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a> sein.",
 "MultiLang" => "Mehrsprachen-Modus",
-"MultiLangDesc" => "Der Mehrsprachen-Modus ermöglicht Seiten mit unterschiedlichen Spracheinstellungen innerhalb einer Installation. Wenn dieser Modus aktiviert ist, wird die Installations-Routine die Grundseiten in allen Sprachen erstellen, die in dieser Version verfügbar sind.",
+"MultiLangDesc" => "Der Mehrsprachen-Modus ermöglicht Seiten mit unterschiedlichen Spracheinstellungen innerhalb einer Installation. Wenn dieser Modus aktiviert ist, wird die Installations-Routine die Grundseiten für allen Sprachen erstellen, die in dieser Version verfügbar sind.",
 "Admin" => "Verwalter Name",
 "AdminDesc" => "Gib den Benutzernamen des Verwalters an. Sollte ein <a href=\"http://wackowiki.org/Doc/Deutsch/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a> sein (z.B. WikiAdmin).",
 "Password" => "Verwalter Passwort",
@@ -136,10 +136,12 @@ $lang = array(
    Write Config Page
 */
 "write-config" => "Schreibe Konfig-Datei",
-"Writing" => "Schreibe Konfiguration",
-"Writing2" => "Schreibe Konfigurationsdatei",
+"FinalStep" => "Letzter Schritt",
+"FinalSteps" => "Letzte Schritte",
+"Writing" => "Schreibe Konfigurationsdatei",
 "RemovingWritePrivilege" => "Entferne Schreibrechte",
-"InstallationComplete" => "Das wars! Du kannst nun <a href=\"%1\"> zu deinem WackoWiki zurückkehren</a>.",
+"InstallationComplete" => "Installation abgeschlossen",
+"ThatsAll" => "Das wars! Du kannst nun <a href=\"%1\"> zu deinem WackoWiki zurückkehren</a>.",
 "SecurityConsiderations" => "Sicherheitserwägungen",
 "SecurityRisk" => "Es wird dringend empfohlen, die Schreibrechte auf die Datei <tt>config.inc.php</tt> nach dem Schreiben der Konfiguration wieder mit <tt>chmod 644</tt> zu entfernen. Eine überschreibbare Konfigurationsdatei ist ein Sicherheitsrisiko!",
 "RemoveSetupDirectory" => "Du solltest den Ordner \"setup\" löschen nachdem die Installation beendet wurde.",
@@ -149,6 +151,8 @@ $lang = array(
 "DontChange" => "Ändere wakka_version nicht von Hand!",
 "ConfigDescription" => "http://wackowiki.org/Doc/Deutsch/Konfiguration",
 "TryAgain" => "Versuche es erneut",
+"RemoveWakkaConfigFile" => "WackoWiki verwendet eine neuere Konfigurationsdatei als deine frühere WakkaWiki Installation.  Die alte Datei konnte nicht automatisch durch das System gelöscht werden und so ist es ratsam die Datei <tt>wakka.config.php</tt> manuell zu löschen.",
+"DeletingWakkaConfigFile" => "Lösche hinfällige Wakka Konfigurations-Datei",
 
 );
 ?>

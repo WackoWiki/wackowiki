@@ -18,6 +18,10 @@ $lang = array(
 /*
    Language Selection Page
 */
+"UpgradeFromWacko" => "Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
+"UpgradeFromWakka" => "Welcome to WackoWiki, it appears that you are upgrading from WakkaWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
+"FreshInstall" => "Welcome to WackoWiki, you are about to install WackoWiki <tt>%1</tt>.  The next few pages will guide you through the installation process.",
+"PleaseBackup" => "Cделайте резервную копию базы данных, конфигурационного файла и других изменённых вами файлов (например, файлов темы) до начала процесса установки. Это может спасти вас от очень неприятных моментов.",
 "Lang" => "Настройки языка",
 "LangDesc" => "Пожалуйста, выберите язык. Он будет использоваться в процессе установки, а также станет языком по умолчанию установленной WackoWiki.",
 
@@ -32,10 +36,6 @@ $lang = array(
 "Database" => "База данных",
 "Permissions" => "Права доступа",
 "ReadyToInstall" => "Готовы к установке?",
-"Installed" => "Установлена WackoWiki версии ",
-"ToUpgrade" => "Приглашаем вас <strong>обновить</strong> вашу WackoWiki до ",
-"PleaseBackup" => "Cделайте резервную копию базы данных, конфигурационного файла и других изменённых вами файлов (например, файлов темы) до начала процесса установки. Это может спасти вас от очень неприятных моментов.",
-"Fresh" => "Поскольку программа установки не обнаружила существующего файла настроек WackoWiki, предполагается, что это установка с чистого листа. Будет установлена WackoWiki ",
 "Requirements" => "Ваш сервер должен соответстовать требованиям, перечисленным ниже.",
 "OK" => "OK",
 "Problem" => "Проблема",
@@ -136,10 +136,12 @@ $lang = array(
    Write Config Page
 */
 "write-config" => "Сохранение конфигурационного файла",
-"Writing" => "Сохранение настроек",
-"Writing2" => "Сохранение конфигурационного файла",
+"FinalStep" => "Final Step",
+"FinalSteps" => "Final Steps",
+"Writing" => "Сохранение конфигурационного файла",
 "RemovingWritePrivilege" => "Удаление привилегий на запись",
-"InstallationComplete" => "Ура! Всё прошло успешно. Теперь вы можете <a href=\"%1\">посмотреть свой сайт WackoWiki</a>.",
+"InstallationComplete" => "Installation Complete",
+"ThatsAll" => "Ура! Всё прошло успешно. Теперь вы можете <a href=\"%1\">посмотреть свой сайт WackoWiki</a>.",
 "SecurityConsiderations" => "Соображения безопасности",
 "SecurityRisk" => "Не забудьте убрать права на изменение файла <tt>config.inc.php</tt> веб-сервером. Если этого не сделать, вас смогут взломать!",
 "RemoveSetupDirectory" => "Сейчас вы должны удалить каталог \"setup\";&nbsp;&mdash;&nbsp;процесс установки завершён.",
@@ -149,6 +151,8 @@ $lang = array(
 "DontChange" => "не меняйте wakka_version вручную!",
 "ConfigDescription" => "detailed description http://wackowiki.org/Doc/Russian/FajjlKonfiguracii",
 "TryAgain" => "Попытаться снова",
+"RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",
+"DeletingWakkaConfigFile" => "Deleting Obsolete Wakka Configuration File",
 
 );
 ?>

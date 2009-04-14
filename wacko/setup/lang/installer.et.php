@@ -18,6 +18,10 @@ $lang = array(
 /*
    Language Selection Page
 */
+"UpgradeFromWacko" => "Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
+"UpgradeFromWakka" => "Welcome to WackoWiki, it appears that you are upgrading from WakkaWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
+"FreshInstall" => "Welcome to WackoWiki, you are about to install WackoWiki <tt>%1</tt>.  The next few pages will guide you through the installation process.",
+"PleaseBackup" => "Enne, kui alustad versioonitäienduse sisseviimist, tee tagavarakoopia oma andmebaasist, konfiguratsioonidefailist ja kõikidest muudetud failidest. See võib sind säästa suurest peavalust!",
 "Lang" => "Keele konfigureerimine",
 "LangDesc" => "Vali keel, mida installeerimise ajal kasutada. Seesama keel saab olema ka vaikimisi keeleks sinu WackoWiki installatsioonil.",
 
@@ -32,10 +36,6 @@ $lang = array(
 "Database" => "Database",
 "Permissions" => "Permissions",
 "ReadyToInstall" => "Ready to Install?",
-"Installed" => "Sinu installeeritud WackoWiki nimetab ennast kui ",
-"ToUpgrade" => "Sa viisid sisse WackoWikile <strong>töötetäienduse</strong> ",
-"PleaseBackup" => "Enne, kui alustad versioonitäienduse sisseviimist, tee tagavarakoopia oma andmebaasist, konfiguratsioonidefailist ja kõikidest muudetud failidest. See võib sind säästa suurest peavalust!",
-"Fresh" => "Kuna ei leita ühtegi olemasolevat WackoWiki konfiguratsiooni, siis tõenäoliselt on see uus WackoWiki installatsioon. Sa installeerid WackoWiki ",
 "Requirements" => "Your server must meet the requirements listed below.",
 "OK" => "OK",
 "Problem" => "Problem",
@@ -136,10 +136,12 @@ $lang = array(
    Write Config Page
 */
 "write-config" => "Write Config File",
-"Writing" => "Ootan konfiguratsiooni",
-"Writing2" => "Kirjutan konfiguratsioonifaili",
+"FinalStep" => "Final Step",
+"FinalSteps" => "Final Steps",
+"Writing" => "Kirjutan konfiguratsioonifaili",
 "RemovingWritePrivilege" => "Removing Write Privilege",
-"InstallationComplete" => "Ja ongi kõik! Nüüd võid sa <a href=\"%1\">view your WackoWiki site</a>.",
+"InstallationComplete" => "Installation Complete",
+"ThatsAll" => "Ja ongi kõik! Nüüd võid sa <a href=\"%1\">view your WackoWiki site</a>.",
 "SecurityConsiderations" => "Security Considerations",
 "SecurityRisk" => "Soovitan sul eemaldada kirjutamisõigus  <tt>config.inc.php</tt> failile. Kirjutamisõiguse allesjätmine on riskantne turvalisuse seisukohast!",
 "RemoveSetupDirectory" => "You should delete the \"setup\" directory now that the installation process has been completed.",
@@ -149,5 +151,7 @@ $lang = array(
 "DontChange" => "ära muuda käsitsi wakka_version versiooni!",
 "ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Proovi uuesti",
+"RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",
+"DeletingWakkaConfigFile" => "Deleting Obsolete Wakka Configuration File",
 
 );?>
