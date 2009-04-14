@@ -18,6 +18,10 @@ $lang = array(
 /*
    Language Selection Page
 */
+"UpgradeFromWacko" => "Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
+"UpgradeFromWakka" => "Welcome to WackoWiki, it appears that you are upgrading from WakkaWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
+"FreshInstall" => "Welcome to WackoWiki, you are about to install WackoWiki <tt>%1</tt>.  The next few pages will guide you through the installation process.",
+"PleaseBackup" => "Παρακαλώ, πάρτε αντίγραφο της βάσης, του αρχείου ρυθμίσεων και όλα τα τροποποιημένα αρχεία όπως αυτά που έχουν αλλαγές σε κώδικα και προσθήκες επιρραμάτων πριν την εκκίνηση της διαδικασίας ανάβάθμισης. Αυτό θα σας προτρέψει από έναν μεγάλο πονοκέφαλο.",
 "Lang" => "Ρυθμίσεις Γλώσσας",
 "LangDesc" => "Παρακαλώ επιλέξτε μια γλώσσα για την διαδικασία εγκατάστασης. Η γλώσσα αυτή θα χρησιμοποιηθεί επίσης και ως προκαθορισμένη γλώσσα για την εγκατάσταση του WackoWiki.",
 
@@ -32,10 +36,6 @@ $lang = array(
 "Database" => "Βάση Δεδομένων",
 "Permissions" => "Δικαιώματα",
 "ReadyToInstall" => "Έτοιμοι για εγκατάσταση;",
-"Installed" => "Το εγκατεστημένο WackoWiki αναφέρεται ως ",
-"ToUpgrade" => "Είστε έτοιμοι να <strong>αναβαθμίσετε</strong> το WackoWiki ",
-"PleaseBackup" => "Παρακαλώ, πάρτε αντίγραφο της βάσης, του αρχείου ρυθμίσεων και όλα τα τροποποιημένα αρχεία όπως αυτά που έχουν αλλαγές σε κώδικα και προσθήκες επιρραμάτων πριν την εκκίνηση της διαδικασίας ανάβάθμισης. Αυτό θα σας προτρέψει από έναν μεγάλο πονοκέφαλο.",
-"Fresh" => "Μιας και δεν βρέθηκε αρχείο ρυθμίσεων WackoWiki, προφανώς αυτή είναι μία νέα εγκατάσταση του WackoWiki.<br>Είστε έτοιμοι να εγκαταστήσετε το WackoWiki ",
 "Requirements" => "Ο διακομιστής πρέπει να έχει τις παρακάτω σε λίστα απαιτήσεις.",
 "OK" => "OK",
 "Problem" => "Πρόβλημα",
@@ -140,10 +140,12 @@ $lang = array(
    Write Config Pageς
 */
 "write-config" => "Εγγραφή Αρχείου Ρυθμίσεων",
-"Writing" => "Εγγραφή Ρυθμίσεων",
-"Writing2" => "Εγγραφή Αρχείου Ρυθμίσεων",
+"FinalStep" => "Final Step",
+"FinalSteps" => "Final Steps",
+"Writing" => "Εγγραφή Αρχείου Ρυθμίσεων",
 "RemovingWritePrivilege" => "Αφαίρεση Δικαιώματος Εγγραφής",
-"InstallationComplete" => "Αυτό ήταν όλο! Μπορείτε τώρα <a href=\"%1\"> να δείτε το WackoWiki site σας</a>.",
+"InstallationComplete" => "Installation Complete",
+"ThatsAll" => "Αυτό ήταν όλο! Μπορείτε τώρα <a href=\"%1\"> να δείτε το WackoWiki site σας</a>.",
 "SecurityConsiderations" => "Προτάσεις Ασφάλειας",
 "SecurityRisk" => "Σας προτείνεται να αφαιρέσετε το δικαίωμα εγγραφής στο <tt>config.inc.php</tt> τώρα που έχει γραφτεί. Αφήνοντάς το αρχείο εγγράψιμο μπορεί να αποτελεί ρίσκο ασφάλειας!",
 "RemoveSetupDirectory" => "Θα πρέπει να διαγράψετε τον κατάλογο \"setup\" τώρα που η διαδικασία εγκατάστασης έχει ολοκληρωθεί.",
@@ -155,6 +157,8 @@ $lang = array(
 "DontChange" => "μην αλλάξετε την έκδοση του wakka_version με το χέρι!",
 "ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Δοκιμάστε Πάλι",
+"RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",
+"DeletingWakkaConfigFile" => "Deleting Obsolete Wakka Configuration File",
 
 );
 ?>

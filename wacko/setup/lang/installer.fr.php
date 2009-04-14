@@ -18,6 +18,10 @@ $lang = array(
 /*
    Language Selection Page
 */
+"UpgradeFromWacko" => "Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
+"UpgradeFromWakka" => "Welcome to WackoWiki, it appears that you are upgrading from WakkaWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
+"FreshInstall" => "Welcome to WackoWiki, you are about to install WackoWiki <tt>%1</tt>.  The next few pages will guide you through the installation process.",
+"PleaseBackup" => "Merci de sauvegarder votre base de données, le fichier de configuration et tous les fichiers modifiés, tels que ceux qui auxquels des rustines auraient été appliquées, avant de commencer le processus de mise à jour. Cela peut vous éviter de forts maux de tête.",
 "Lang" => "Configuration de la langue",
 "LangDesc" => "Merci de choisir une langue pour le processus d'installation. Ce sera aussi la langue par défaut de votre installation WackoWiki.",
 
@@ -32,10 +36,6 @@ $lang = array(
 "Database" => "Base de données",
 "Permissions" => "Permissions",
 "ReadyToInstall" => "Prêt à installer&nbsp;?",
-"Installed" => "Votre WackoWiki déjà installé se déclare comme ",
-"ToUpgrade" => "Vous vous apprêtez à <strong>mettre à niveau</strong> WackoWiki ",
-"PleaseBackup" => "Merci de sauvegarder votre base de données, le fichier de configuration et tous les fichiers modifiés, tels que ceux qui auxquels des rustines auraient été appliquées, avant de commencer le processus de mise à jour. Cela peut vous éviter de forts maux de tête.",
-"Fresh" => "Comme aucun fichier de configuration de WackoWiki n'a été trouvé, il s'agit probablement d'une nouvelle installation. Vous vous apprêtez à installer WackoWiki ",
 "Requirements" => "Votre serveur doit satisfaire les exigences listées ci-dessous.",
 "OK" => "OK",
 "Problem" => "Problème",
@@ -136,10 +136,12 @@ $lang = array(
    Write Config Page
 */
 "write-config" => "Ecriture du fichier de configuration",
-"Writing" => "Ecriture de la configuration",
-"Writing2" => "Ecriture du fichier de configuration",
+"FinalStep" => "Final Step",
+"FinalSteps" => "Final Steps",
+"Writing" => "Ecriture du fichier de configuration",
 "RemovingWritePrivilege" => "Suppression du droits d'écrire",
-"InstallationComplete" => "C'est tout&nbsp;! Vous pouvez maintenenant <a href=\"%1\">accéder à votre site WackoWiki</a>.",
+"InstallationComplete" => "Installation terminée",
+"ThatsAll" => "C'est tout&nbsp;! Vous pouvez maintenenant <a href=\"%1\">accéder à votre site WackoWiki</a>.",
 "SecurityConsiderations" => "Considérations sur la sécurité",
 "SecurityRisk" => "Par sécurité, limitez maintenant le droit d'écrire le fichier <tt>config.inc.php</tt> maintenant, par exemple <tt>chmod 644 config.inc.php</tt>.",
 "RemoveSetupDirectory" => "Par sécurité, supprimez maintenant le répertoire \"setup\", devenu inutile.",
@@ -149,5 +151,8 @@ $lang = array(
 "DontChange" => "ne modifiez pas wakka_version !",
 "ConfigDescription" => "detailed description http://wackowiki.org/Doc/Francophone/Configuration",
 "TryAgain" => "Essayez encore",
+"RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",
+"DeletingWakkaConfigFile" => "Deleting Obsolete Wakka Configuration File",
+
 );
 ?>
