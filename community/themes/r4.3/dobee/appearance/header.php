@@ -22,7 +22,7 @@ if ($this->GetMethod() != 'show' || $this->page["latest"] == "N") {
 <meta http-equiv="content-type"
 	content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <link rel="stylesheet" type="text/css"
-	href="<?php echo $this->GetConfigValue("theme_url") ?>css/wacko.css" />
+	href="<?php echo $this->GetConfigValue("theme_url") ?>css/default.css" />
 <link rel="stylesheet" type="text/css"
 	href="<?php echo $this->GetConfigValue("theme_url") ?>css/left.css" />
 <link rel="shortcut icon"
