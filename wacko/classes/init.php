@@ -620,7 +620,7 @@ class Init
 						echo "<li>\n";
 						echo str_replace(array('<', '>'), array('&lt;', '&gt;'), $query['query']).'<br />';
 						echo '['.number_format($query['time'], 4).' sec.]';
-						echo "<hr />\n</li>\n";
+						echo "</li>\n";
 					}
 				}
 				echo "</ol></li></ul></div>\n";
