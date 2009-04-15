@@ -30,7 +30,7 @@ lernjournal theme.
 <meta name="Description" content="<?php echo $this->GetDescription(); ?>" />
 <meta name="language" content="<?php echo $this->page["lang"] ?>" />
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
-<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/wacko.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/default.css" />
 <link href="<?php echo $this->GetConfigValue("theme_url") ?>css/layout.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $this->GetConfigValue("theme_url") ?>css/fontdesign.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $this->GetConfigValue("theme_url") ?>css/sidenote.css" rel="stylesheet" type="text/css" />
