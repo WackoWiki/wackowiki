@@ -8,9 +8,9 @@ if($user = $this->GetUser())
 	if (is_array($this->config['aliases']))
 	{
 		if (!$nomark)
-		print('<div class=\"layout-box\"><p class=\"layout-box\"><span>'.$this->GetTranslation("UserGroups").':</span></p>');
+		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("UserGroups").":</span></p>");
 
-		print ('<table border="0" cellspacing="5" cellpadding="5"><tr>');
+		print ("<table border=\"0\" cellspacing=\"5\" cellpadding=\"5\"><tr>");
 
 		$i = 1;
 
@@ -18,7 +18,7 @@ if($user = $this->GetUser())
 		{
 			if($i == $cols + 1)
 			{
-				print '</tr><tr>';
+				print "</tr><tr>";
 				$i = 1;
 			}
 
@@ -33,7 +33,7 @@ if($user = $this->GetUser())
 			 */
 			if($this->IsAdmin() || in_array($user["name"], $arr))
 			{
-				print '<td valign="top">';
+				print "<td valign=\"top\">";
 
 				foreach ($arr as $k => $v)
 				$allowed_groups[] = $this->Link("/".$v,"",$v);
@@ -50,10 +50,10 @@ if($user = $this->GetUser())
 			}
 		}
 
-		print ('</tr></table>');
+		print ("</tr></table>");
 
 		if(!$nomark)
-		print ('</div>');
+		print ("</div>");
 	}
 }
 ?>
