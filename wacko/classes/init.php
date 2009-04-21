@@ -185,7 +185,7 @@ class Init
 					"header_action" => "header",
 					"footer_action" => "footer",
 
-					"show_datetime" => "Y",
+					"show_datetime" => "N",
 					"show_spaces" => "Y",
 
 					"default_typografica" => 1,
