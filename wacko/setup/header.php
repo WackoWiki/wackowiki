@@ -67,7 +67,7 @@ require_once("setup/lang/installer.".$config["language"].".php");
       <title><?php echo $lang["Title"];?> - <?php echo WACKO_VERSION; ?></title>
       <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $lang["Charset"]; ?>" />
       <link rel="stylesheet" href="<?php echo myLocation() ?>setup/css/installer.css" type="text/css" />
-      <link rel="shortcut icon" href="<?php echo myLocation() ?>setup/favicon.ico" type="image/x-icon" />
+      <link rel="shortcut icon" href="<?php echo myLocation() ?>setup/images/favicon.ico" type="image/x-icon" />
    </head>
    <body>
       <div class="installer">
