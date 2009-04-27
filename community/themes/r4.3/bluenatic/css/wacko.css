@@ -1,45 +1,15 @@
-/**
- * File content:
- * Includes all styles that forces the look of wacko-related parts
- * (I tried to categorize all classes)
- */
+/* Wiki Formatting ---------------------------------------- */
 
-/** Styles for the main content in the page. *********************************/
+/* Definitions: SYNTAX (?icq i seek you?) */
+dfn { border-bottom:	dotted 1px #ccc;cursor:	help;font-style:normal; }
+/* html dfn { } */
 
-/* Default settings */
-#page {
-	background-color:	#fff;
-	color:			#000;
-	line-height:		1.5em;
-	padding-bottom:		15px;
-	padding-left:		15px;
-	padding-right:		15px;
-	padding-top:		25px;
-}
+/* Strike through text: SYNTAX --text-- */
+del { background-color:transparent; color:#999; }
+del a { background-color:transparent; color:#999; }
 
-/* Space between buttons */
-.buttonspacer {
-	width:			10px;
-	height:			1px;
-}
 
-/* Errors */
-.error {
-	color:			#c33;
-	font-weight:		900;
-}
-
-/* Debugging informations */
-.time{ color:#CCCCCC; font-size: 9px; margin:5px 20px;}
-.debug { font-size: 11px; color: 888888;}
-
-/** Often used-related (belongs to too many codes) ***************************/
-
-/* Missing page */
-.missingpage {
-	color:			#b00;
-	font-style:		italic;
-}
+cite {  }
 
 /* Horizontal rule: SYNTAX ---- */
 hr {
@@ -47,144 +17,104 @@ border-color:#CCCCCC;
 border-style:solid none none;
 border-width:1px 0 0;
 }
-
+/* Horizontal rulers: SYNTAX --- */
+hr {
+	background-color:	#ccc; /* Mozilla 1.4 */
+	border:			#ccc; /* Opera 7.11 */
+	color:			#ccc; /* IE 6 */
+	height:			1px;
+}
 /* No line break */
-.nobr {
-	white-space:		nowrap;
+.nobr {white-space:nowrap;}
+
+/** List-related *************************************************************/
+
+/* SYNTAX "  *", "  1.", etc. */
+
+ul, ol {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
-/* Monospaced code */
-pre {
-	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
+/** Header related ***********************************************************/
+
+/* SYNTAX ==, ===, ====, =====, ======, ======= */
+
+h1, h2, h3, h4, h5, h6 {
+	font-family:		Verdana, "Luxi Sans", "Trebuchet MS", sans, sans-serif;
+	font-weight:		900;
+	padding:		0;
 }
-
-
-
-/** Simple formating-related *************************************************/
-
-/* Quotes: SYNTAX <[text]> */
-blockquote {
-	background-color:	#f9f9f9;
-	border-bottom:		solid 1px #eee;
-	border-left:		solid 3px #eee;
-	border-right:		solid 1px #eee;
-	border-top:		solid 1px #eee;
-	color:			#666;
-	font-family:		"Bitstream Vera Serif", "Times New Roman", sans-serif;
-	padding:		3px;
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+	border-bottom:		none;
 }
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+	border-bottom:		none;
+}
+h1 {font-size:1.8em; margin-bottom:0.4em; margin-top:0.2em;	padding-bottom:0.2em;}
+h2 {
+	background-color:	#ddd;
+	border:			solid 1px #ccc;
+	color:			#000;
+	font-size:		1.4em;
+	margin-bottom:		0.4em;
+	margin-top:		1.1em;
+	padding:		2px 5px;
+	/*-moz-border-radius:	3px;		/* Mozilla, Firefox only */
+}
+h3 {font-size:1.3em; margin-bottom:0.4em; margin-top:0.8em;}
+h4 {font-size:1.2em; margin-bottom:0.3em}
+h5 {font-size:1.1em;}
+h6 {font-size:1.0em;}
 
 /* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
-.center {
-	text-align:		center;
-}
-
-/* Important text: SYNTAX !!text!! */
-.cite {
-	background-color:	transparent;
-	color:			#c00;
-	font-weight:		900;
-}
-
-/* underline text: SYNTAX __text__ */
-.underline { text-decoration:underline; }
-
-/* Important colored text: SYNTAX !!(red)text!! */
-.cl-blue {
-	background-color:	transparent;
-	color:			#009;
-}
-.cl-green {
-	background-color:	transparent;
-	color:			#090;
-}
-.cl-red {
-	background-color:	transparent;
-	color:			#c00;
-}
-
-/* Definitions: SYNTAX (?icq i seek you?) */
-dfn {
-	border-bottom:		dotted 1px #ccc;
-	cursor:			help;
-	font-style:		normal;
-}
+.center{  text-align: center;}
 
 /* Indent text: SYNTAX "  ", "  1.", etc. */
-.indent {
-	margin-left:		40px;
-}
+.indent {  margin-left: 40px;}
 
-/* Marked text: SYNTAX ??text?? */
-.mark {
-	background-color:	#ffc;
-	border:			solid 1px #cc9;
+/** Revisions-related *********************************************************/
+
+/* Displays text: "This is an old revision of..." */
+.revisioninfo {
+	background-color:	#fee;
+	border:			dashed 1px #baa;
+	margin:			25px 0;
+	padding:		3px;
+	width:			auto;
+}
+.revisioninfo a,
+.revisioninfo a:hover {
 	color:			#000;
-}
-
-/* Strike through text: SYNTAX --text-- */
-del {
-	background-color:	transparent;
-	color:			#999;
-}
-del a {
-	background-color:	transparent;
-	color:			#999;
-}
-
-/* Small text: SYNTAX ++text++ */
-small {
-	font-size:		0.85em;
-}
-
-sub {
-	font-size:		0.85em;
-	margin:			0 2px;
-}
-
-/* Footprints: SYNTAX [[#*]] */
-sup {
-	font-size:		0.85em;
-	margin:			0 2px;
-}
-#page sup a {
-	background-color:	transparent;
 	border:			none;
-	color:			#999;
-}
-#page sup a:hover {
-	background-color:	transparent;
-	border:			none;
-	color:			#000;
 }
 
-/* Fixed width text: SYNTAX ##monospace## */
-tt {
-	background-color:	transparent;
-	color:			#006;
-	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
-	font-size:		0.9em;
-	padding:		0 5px;
+/* Simple differences */
+.additions {
+	background-color:	#efe;
+	border:			dashed 1px #aba;
+	padding:		5px;
+}
+.deletions {
+	background-color:	#fee;
+	border:			dashed 1px #baa;
+	padding:		5px;
 }
 
-
-/** Advanced formating and action-related ************************************/
-
-/* Hyperlinks: SYNTAX ((HomePage)) */
-#page a,
-.preview a {
-	text-decoration:	none;
+/* Default differences */
+ins.diff {
+	background-color:	#efe;
+	color:			#3c3;
 }
-#page a:hover,
-.preview a:hover {
-	text-decoration:	underline;
+del.diff {
+	background-color:	#fee;
+	color:			#c33;
 }
 
 /* Code areas: SYNTAX %%code%% */
-code {
-	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
-	font-size:		0.9em;
-}
+
 .code {
 	background-color:	#fafafa;
 	color:			#000;
@@ -196,31 +126,21 @@ code {
 	/*-moz-border-radius:	5px;		/* Mozilla, Firefox only */
 }
 
-/* Fieldsets: SYNTAX {{toc}}, {{backlinks}} */
-#page fieldset,
-.preview fieldset {
-	border:			1px solid #ccc;
-	font-weight:		900;
-	/*-moz-border-radius:	5px;		/* Mozilla, Firefox only */
+.notes {  }
+
+/** Table-related ************************************************************/
+
+/* Bordered tables: SYNTAX #|| || Here | there || ||# */
+.usertable {
+	border-collapse:	collapse;
 }
-#page fieldset a,
-#page fieldset a:visited,
-.preview fieldset a,
-.preview fieldset a:visited {
-	background-color:	transparent;
-	text-decoration:	none;
-	color:			#000;
-	font-weight:		400;
+.usertable tr td {
+	border:			solid 1px #999;
+	padding:		5px;
 }
-#page fieldset a:hover,
-.preview fieldset a:hover {
-	text-decoration:	none;
-}
-/* Legend of the fieldset */
-#page fieldset legend,
-.preview fieldset legend {
-	/*-moz-border-radius:	3px;		/* Mozilla, Firefox only */
-}
+/* 100%-width tables: SYNTAX #| || Here | there || |# */
+.dtable {width:	100%; border-collapse:collapse;}
+.dtable tr td {padding:5px;}
 
 /* Inside the table of content: SYNTAX {{toc}} */
 fieldset .toc1 {
@@ -242,168 +162,60 @@ fieldset .toc6 {
 	margin-left:		80px;
 }
 
+/** Chat-related *************************************************************/
 
-/* Horizontal rulers: SYNTAX --- */
-hr {
-	background-color:	#ccc; /* Mozilla 1.4 */
-	border:			#ccc; /* Opera 7.11 */
-	color:			#ccc; /* IE 6 */
-	height:			1px;
-}
+/* SYNTAX %%(micq)%%, %%(icq_l)%%, %%(icq_m)%% */
 
-/* Included pages: SYNTAX {{include file="xyz"}} */
-.include {
-	background-color:	#f9f9f9;
-	color:			#000;
-	border:			solid 1px #ccc;
-}
-.include .name {
-	background-color:	#eee;
-	color:			#000;
+.micq1, .micq2, .micq3 {
+	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
 	font-size:		0.85em;
-	padding:		0 10px;
 }
-.include .name a {
-	border:			0;
-}
-.include .name a:hover {
-	border:			0;
-}
-
-/* Outgoing hyperlinks: SYNTAX ((http://slashdot.org nerds)) */
-#page .outerlink,
-.preview .outerlink {
-	text-decoration:	none;
-}
-#page .outerlink:hover,
-.preview .outerlink:hover {
-	text-decoration:	underlined;
-}
-#page .outerlink img,
-.preview .outerlink img {
-	vertical-align:		middle;
-}
-
-
-
-/** Header related ***********************************************************/
-
-/* SYNTAX ==, ===, ====, =====, ======, ======= */
-
-h1, h2, h3, h4, h5, h6 {
-	font-family:		Verdana, "Luxi Sans", "Trebuchet MS", sans, sans-serif;
+/* Username */
+.micq1 {
 	font-weight:		900;
-	padding:		0;
+	white-space:		nowrap;
 }
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-	border-bottom:		none;
+/* Time, Date */
+.micq2 {
+	font-size:		0.8em;
+	white-space:	nowrap;
 }
-h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
-	border-bottom:		none;
-}
-h1 {
-	font-size:		1.8em;
-	margin-bottom:		0.4em;
-	margin-top:		0.2em;
-	padding-bottom:		0.2em;
-}
-h2 {
-	background-color:	#ddd;
-	border:			solid 1px #ccc;
-	color:			#000;
-	font-size:		1.4em;
-	margin-bottom:		0.4em;
-	margin-top:		1.1em;
-	padding:		2px 5px;
-	/*-moz-border-radius:	3px;		/* Mozilla, Firefox only */
-}
-h3 {
-	font-size:		1.3em;
-	margin-bottom:		0.4em;
-	margin-top:		0.8em;
-}
-h4 {
-	font-size:		1.2em;
-	margin-bottom:		0.3em
-}
-h5 {
-	font-size:		1.1em;
-}
-h6 {
-	font-size:		1.0em;
-}
-
-
-
-/** Table-related ************************************************************/
-
-/* 100%-width tables: SYNTAX #| || Here | there || |# */
-.dtable {
-	border-collapse:	collapse;
+/* Message */
+.micq3 {
 	width:			100%;
 }
-.dtable tr td {
-	padding:		5px;
+
+/** Email-related ************************************************************/
+
+/* Quoted message on new email */
+.email1, .email2 {
+	background-color:	transparent;
+	color:			#009;
+	padding-left:		5px;
 }
 
-/* Bordered tables: SYNTAX #|| || Here | there || ||# */
-.usertable {
-	border-collapse:	collapse;
-}
-.usertable tr td {
-	border:			solid 1px #999;
-	padding:		5px;
-}
+.email-odd, .email-even { }
 
-
-
-/** List-related *************************************************************/
-
-/* SYNTAX "  *", "  1.", etc. */
-
-/* Unordered list elements (this is a workaround of a bug inside Wacko) */
-li {
-	list-style-image:	url("../icons/list.gif"); /* Works not correct in IE */
-}
-/* Ordered list elements */
-ol li {
-	list-style-image:	none;
+/* Quotes: SYNTAX <[text]> */
+blockquote {
+	background-color:	#f9f9f9;
+	border-bottom:		solid 1px #eee;
+	border-left:		solid 3px #eee;
+	border-right:		solid 1px #eee;
+	border-top:		solid 1px #eee;
+	color:			#666;
+	font-family:		"Bitstream Vera Serif", "Times New Roman", sans-serif;
+	padding:		3px;
 }
 
-/* List possibilites */
-ol, ul {
-	margin-bottom:		0;
-	margin-top:		0;
-	padding-bottom:		0;
-	padding-top:		0;
-}
-
-
-
-/** Wrapper-related **********************************************************/
-
-/* SYNTAX %%(wrapper xyz)%% */
-
-div .action {
-	background-color:	#f3f3f3;
-	border:			solid 1px #ddd;
-	color:			#000;
-	margin:			5px;
-	/*-moz-border-radius:	5px;		/* Mozilla, Firefox only */
-}
-div .action-content {
-	padding:		7px;
-}
-
-
+/* Paragraphs */
 
 /** Text highlighter-related *************************************************/
 
 /* SYNTAX %%(hl xyz)%% */
 
-.hl-main {
-}
-.hl-gutter {
+.hl-main { }
+.hl-gutter { 
 	background-color:	#ccc;
 	color:			#000;
 	padding-right:		10px; 
@@ -459,356 +271,39 @@ div .action-content {
 	background-color:	transparent;
 	color:			#963;
 }
+/** Wrapper-related **********************************************************/
 
+/* SYNTAX %%(wrapper xyz)%% */
 
-
-/** Email-related ************************************************************/
-
-/* Quoted message on new email */
-.email1, .email2 {
-	background-color:	transparent;
-	color:			#009;
-	padding-left:		5px;
-}
-/* ????? Currently unknown ????? */
-.email-odd, .email-even {
-}
-
-
-
-/** Chat-related *************************************************************/
-
-/* SYNTAX %%(micq)%%, %%(icq_l)%%, %%(icq_m)%% */
-
-.micq1, .micq2, .micq3 {
-	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
-	font-size:		0.85em;
-}
-/* Username */
-.micq1 {
-	font-weight:		900;
-	white-space:		nowrap;
-}
-/* Time, Date */
-.micq2 {
-	font-size:		0.8em;
-	white-space:	nowrap;
-}
-/* Message */
-.micq3 {
-	width:			100%;
-}
-
-
-
-/** Edit-related *************************************************************/
-
-#pageedit {
-	margin-bottom:		10px;
-	margin-left:		10px;
-	margin-right:		25px;
-	margin-top:		10px;
-}
-/* Buttons */
-#pageedit input {
-	border:			solid 1px #999;
-	margin:			10px;
-	/*-moz-border-radius:	3px;	/* Mozilla, Firefox only */
-}
-/* Textarea */
-#pageedit .TextArea {
-	padding:		2px;
-}
-#pageedit form textarea {width: 100%;height: 400px; }
-
-/* Fieldset (preview) */
-.preview {
-	background-color:	#fafafa;
-	border:			dashed 1px #999;
-	/*-moz-border-radius:	5px;	/* Mozilla, Firefox only */
-}
-.preview p {
-	font-weight:		900;
-}
-
-
-
-/** Wikiedit-related (JavaScript) ********************************************/
-
-.toolbar tr {
-	background-color:	#eee;
-	color:			#000;
-}
-.toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
-	background-color:	#eee;
-	border:			1px solid #eee;
-	color:			#000;
-	cursor:			pointer;
-	margin:			0px;
-	padding:		1px;
-}
-.toolbar img {
-	height:			20px;
-	width:			20px;
-}
-.toolbar .btn-hover {
-	border-color:		ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
-}
-.toolbar .btn-active,  .toolbar .btn-pressed {
-	border-color:		ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
-}
-.toolbar .btn-pressed {
-	background-color:ButtonHighlight;
-	color:		#000;
-}
-.toolbar .btn-separator {
-border-left:1px solid buttonshadow;
-border-right:1px solid buttonhighlight;
-height:18px;
-margin:3px;
-padding:0;
-width:0;
-}
-.edname-w, .edname-r, .edname-s {
-	background-color:	transparent;
-	border:			3px solid #d4d0c8;
-	color:			#fff;
-	font:			bold 14px Arial, sans, sans-serif;
-	padding:		0 7px;
-	vertical-align:		middle;
-}
-.edname-w  {
-	background-color:	#1e9905;
-	color:			#000;
-}
-.edname-r  {
-	background-color:	#2a45d0;
-	color:			#000;
-} 
-.edname-s  {
-	background-color:	#d08c2a;
-	color:			#000;
-}
-
-
-
-/* Revisions-related *********************************************************/
-
-/* Displays text: "This is an old revision of..." */
-.revisioninfo {
-	background-color:	#fee;
-	border:			dashed 1px #baa;
-	margin:			25px 0;
-	padding:		3px;
-	width:			auto;
-}
-.revisioninfo a,
-.revisioninfo a:hover {
-	color:			#000;
-	border:			none;
-}
-
-/* Default differences */
-ins.diff {
-	background-color:	#efe;
-	color:			#3c3;
-}
-del.diff {
-	background-color:	#fee;
-	color:			#c33;
-}
-
-/* Simple differences */
-.additions {
-	background-color:	#efe;
-	border:			dashed 1px #aba;
-	padding:		5px;
-}
-.deletions {
-	background-color:	#fee;
-	border:			dashed 1px #baa;
-	padding:		5px;
-}
-
-
-/** File and comment-related *************************************************/
-
-/* Headers (always visible) */
-#commentsheader, #filesheader {
-	background-color:	#ddd;
-	/*border-top:		solid 1px #bbb;*/
-	border-bottom:		none;
-	border-left:		solid 1px #bbb;
-	border-right:		solid 1px #bbb;
-	border-top:		solid 1px #bbb;
-	color:			#000;
-	padding:		2px 5px;
-}
-/* Whole comment */
-.comment {
-	background-color:	#eee;
-	border-top:		solid 1px #ccc;
-	color:			#000;
-	padding:		5px 15px;
-}
-/* Comment author and date */
-.comment .commentinfo {
-	background-color:	#eee;
-	color:			#999;
-	padding:		5px 0;
-}
-/* User input form for comments */
-.commentform {
-	background-color:	#eee;
-	color:			#000;
-	border-top:		solid 1px #ccc;
-	padding:		15px 30px 5px 15px;
-}
-/* Texfield for a comment */
-.commentform textfield {
-	/* Sad but true, we don't have a chance to get rid of the annoying
-	 * horizontal scrollbar in Internet Explorer.
-         * Problem is the hardcoded phrase: <style=width:100%>
-	 */
-
-}
-/* Button: "Attach comment" */
-.commentform input {
-	background-color:	#ddd;
-	border:			solid 1px #999;
+div .action {
+	background-color:	#f3f3f3;
+	border:			solid 1px #ddd;
 	color:			#000;
 	margin:			5px;
-	/*-moz-border-radius:	3px;		/* Mozilla, Firefox only */
+	/*-moz-border-radius:	5px;		/* Mozilla, Firefox only */
 }
-/* Hyperlinks in header: "Show comments(files)/form" */
-#filesheader a, #commentsheader a {
+div .action-content {padding:7px;}
+
+/* Important colored text: SYNTAX !!(red)text!! */
+.cl-blue  {background-color:	transparent; color:#009;}
+.cl-green {background-color:transparent; color:#090;}
+.cl-red   {background-color:transparent; color:#c00;}
+
+
+/* Fixed width text: SYNTAX ##monospace## */
+tt {
 	background-color:	transparent;
-	color:			#000;
-}
-/* Whole file area */
-.files {
-	background-color:	#eee;
-	border-top:		solid 1px #ccc;
-	color:			#000;
-	padding:		5px 15px;
-	width:			auto;
-}
-/* File description */
-.files .desc- {
-	border-bottom:		solid 1px #eee;
-	padding-left:		3em;
-}
-/* File date */
-.files .dt- {
-	border-bottom:		solid 1px #eee;
-	color:			#999;
-	padding-top:		0.5em;
-	white-space:		nowrap;
-}
-/* Filename */
-.files .file- {
-	border-bottom:		solid 1px #eee;
-	white-space:		nowrap;
-}
-/* File hyperlinks */
-.files .file- .outerlink {
+	color:			#006;
 	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
-	font-weight:		900;
-}
-.files .file- .outerlink img {
-	margin-right:		0.2em;
-}
-/* File size */
-.files .size- {
-	border-bottom:		dotted 1px #eee;
-	font-size:		0.8em;
-	padding-left:		2em;
-	padding-right:		1em;
-}
-/* Alignment inside the files table */
-.files td {
-	vertical-align:		bottom;
-}
-/* Input form for attached files */
-.filesform {
-	background-color:	#eee;
-	color:			#000;
-	border-top:		solid 1px #ccc;
-	padding:		15px 30px 5px 15px;	
+	font-size:		0.9em;
+	padding:		0 5px;
 }
 
-/* CSS form formater */
-.cssform p {
-	width: 300px;
-	clear: left;
-	margin: 0;
-	padding: 5px 0 8px 0;
-	padding-left: 155px; /*width of left column containing the label elements*/
-	border-top: 1px dashed gray;
-	height: 1%;
-}
-.cssform label {
-	font-weight: bold;
-	float: left;
-	margin-left: -155px; /*width of left column*/
-	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-.cssform input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
-	width: 180px;
-}
-.cssform textarea {
-	width: 250px;
-	height: 150px;
-}
-.cssform span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: -155px; /*width of left column*/
-	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-.BewareChangeLang{
-	border: 1px solid #ffee66;
-	width: 400px;
-	background-color: #ffffdd;
-	background-image: url(../../../images/warning.gif);
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: 10px 10px;
-	margin: 10px;
-	padding: 5px 5px 5px 40px;
-}
+/* Important text: SYNTAX !!text!! */
+.cite {background-color:transparent; color:#c00; font-weight:900;}
 
-/* cssform1 for actions */
-div#cssform1 {
-	width:50%;
-	padding:10px;
-	margin:0 auto;
-}
-div#cssform1 p {
-	clear: left;
-	margin: 0;
-	padding: 5px 0 8px 0;
-	padding-left: 20%; /*width of left column containing the label elements*/
-	border-top: 1px dashed gray;
-	height: 1%;
-}
-div#cssform1 label {
-	float: left;
-	margin-left: 0px; /*
-	margin-left: -155px; width of left column*/
-	width: 150px;/* width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-div#cssform1 input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
-	width: 180px;
-}
-div#cssform1 textarea {
-	width: 250px;
-	height: 150px;
-}
-div#cssform1 span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: 0px; /*
-	margin-left: -155px; width of left column*/
-	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
+/* underline text: SYNTAX __text__ */
+.underline { text-decoration:underline; }
+
+/* Marked text: SYNTAX ??text?? */
+.mark {background-color:#ffc; border:solid 1px #cc9; color:#000;}

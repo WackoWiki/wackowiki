@@ -1,2 +1,267 @@
 /*@import "../../_common/X11ColorNames.css";*/
 @import "wacko.css";
+
+/* ??? */
+.Shade {  clear:all; background:#ffffff;
+          height:6px; border-top: 1px solid #444444; }
+#page { background:#ffffff; padding:9px 10px 30px 10px; }
+.TextArea { width:100%; height:450px; border: 3px ridge; }
+
+.TabText { padding:1px 5px 1px 5px; font-size:12px; }
+.TabSpace .TabText { padding:5px; }
+.Tab2, .Tab  { float:left; background: #fefbe6;
+                 background-repeat:repeat-x; background-position:bottom;
+                 color:#666666; border-top:1px solid #444444 }
+.TabSelected2, .TabSelected
+               { float:left; background: #ffffff;
+                 background-repeat:repeat-x; background-position:bottom;
+                 color:#666666 }
+.Tab2a       { float:left; background: #ffcfa8;
+                 background-repeat:repeat-x; background-position:bottom;
+                 color:#666666; border-top:1px solid #444444 }
+.TabSelected2a, .Tab2a, .TabSelected2, .Tab2         { float:right; }
+
+.TabSpace { color:#666666; border-top:1px solid #444444; }
+
+.OkBtn { color:#002000; cursor:hand; background:#c9e3f2; height:40px; }
+.OkBtn_ { color:#002000; cursor:hand; background:#fff6bc; height:40px; }
+.CancelBtn { color:#666666; cursor:hand; font-size:10px; background:#cccccc; }
+.CancelBtn_ { color:#666666; cursor:hand; font-size:10px; background:#dddddd; }
+
+.OkBtn_Top { color:#002000; cursor:hand; background:#c9e3f2;  }
+.OkBtn_Top_ { color:#002000; cursor:hand; background:#fff6bc;  }
+.CancelBtn_Top { color:#666666; cursor:hand; font-size:10px; background:#cccccc; }
+.CancelBtn_Top_ { color:#666666; cursor:hand; font-size:10px; background:#dddddd; }
+
+#credits {
+  font-size: 11px;
+  color: #AAAAAA;
+  text-align: right;
+  padding:25px 5px 5px 5px
+}
+
+
+/* fonts */
+BODY, TD, P, LI, #page { font-family: Georgia, Verdana; font-size:95% }
+.dt { font-family: Verdana; font-size:60% }
+
+/* colors */
+#page { color:#444444 }
+del A:HOVER { color:#cc3300 }
+del A.outerlink:LINK { color:#999999 }
+del A.outerlink:VISITED { color:#999999 }
+del A.outerlink:HOVER { color:#cc3300 }
+
+/* diffs */
+.error { color: #CC3333; font-weight: bold; }
+
+.time{ color:#999999; font-size: 9px; margin:5px 20px;}
+.debug { font-size: 11px; color: #888888;}
+
+#commentsheader, #filesheader {
+  background-color: #eeeeee;
+  padding: 2px 50px;
+}
+
+.comment, .files {
+  background-color: #EEEEEE;
+  padding: 10px 50px;
+  border-top: 1px solid #CCCCCC;
+}
+
+.commentinfo {
+  color: #AAAAAA;
+}
+
+.commentform, .filesform {
+  background-color: #EEEEEE;
+  padding: 10px 50px;
+  border-top: 1px solid #CCCCCC;
+}
+
+
+/* for include */
+.name { text-align: right; font-size: 10px; }
+.include { background-color: #f8f8f8; padding: 8px; }
+
+FIELDSET { padding: 10px; }
+.missingpage { border-bottom: 1px dashed orange; }
+
+/* anchors */
+A:LINK { color: #0020cc; }
+A:VISITED { color: #8020cc; }
+A:HOVER { color:#cc3300 }
+A:ACTIVE { color:#ff0000; }
+A.denied:LINK, A.denied:VISITED { color: #666666; }
+A.denied:HOVER { color:#cc3300 }
+
+#credits A:LINK, #credits A:VISITED { color: #AAAAAA; }
+#credits A:HOVER { color:#cc3300 }
+
+.outerlink:LINK, .outerlink:VISITED { font-size:90%; font-family:Verdana; color:#000080 }
+.outerlink:HOVER { color:#cc3300 }
+
+.Top a, .Top a:visited { font-weight:bold; color:#336699 }
+.Tune a, .Tune a:visited { font-weight:normal; color:#336699 }
+.Top a:hover, .Tune a:hover { color:#cc3300 }
+
+.Print a:visited, .TopRight a:link { font-weight:normal; color:#0000ff }
+.TopRight a:visited { font-weight:normal; color:#800080 }
+.TopRight a:hover { color:#cc3300 }
+
+.Tab2a a:visited, .Tab2 a:visited, .Tab a:visited,
+.Tab2a a, .Tab2 a, .Tab a { color:#0000ff; text-decoration:none }
+.Tab2a a:hover, .Tab2 a:hover, .Tab a:hover { color:#cc3300; text-decoration:underline }
+
+a.Search:link, a.Search:visited { color:#0000ff }
+a.Search:hover { color:#cc3300 }
+
+#commentsheader a:link, #commentsheader a:visited { color:#0000ff }
+#commentsheader a:hover { color:#cc3300 }
+
+
+  table.upload td { padding: 2px 5px 2px 5px; vertical-align:top }
+  table.upload td.dt-,
+  table.upload td.file- { white-space:nowrap; font-size: 80%; font-weight:bold; color:#000000 }
+  table.upload td.dt-   { padding-right:0 }
+  table.upload td.remove-   { padding-right:0 }
+  table.upload td.size- { padding-right:0; text-align:right }
+  table.upload td.desc- { font-size: 80%; color:#444444; width:100% }
+  table.upload td.dt- .dt2-,
+  table.upload td.remove- .remove2-,
+  table.upload td.size- .size2- { font: 11px Tahoma; color:#666666;  }
+  table.upload td.remove- A.remove2-:HOVER,
+  table.upload td.remove- A.remove2-:ACTIVE { color:#ff0000 }
+
+.preview {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:red 2px solid;}
+.preview p {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
+.preview p span {background:#FFF; padding:0 1px;}
+
+.layout-box {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:#CCCCCC 1px solid;}
+.layout-box p {background: transparent; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
+.layout-box p span {background:#FFF; padding:0 1px;}
+
+.buttonsspacer{width:100px;height:1px;}
+
+  /* vseedit toolbar */
+ .toolbar tr { background: ButtonFace; }
+ .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
+  background: ButtonFace;
+  color: ButtonText;
+  border: 1px solid ButtonFace;
+  padding: 1px;  margin: 0px;
+  cursor: pointer; cursor: hand;
+ }
+ .toolbar img {
+  width: 20px;
+  height: 20px;
+ }
+ .toolbar .btn-hover {
+  border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+ }
+ .toolbar .btn-active,  .toolbar .btn-pressed {
+  border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+ }
+ .toolbar .btn-pressed {
+  background: ButtonHighlight;
+ }
+ .toolbar .btn-separator {
+border-left:1px solid buttonshadow;
+border-right:1px solid buttonhighlight;
+height:18px;
+margin:3px;
+padding:0;
+width:0;
+}
+ .edname-w, .edname-r, .edname-s
+            { font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
+ .edname-w  { background: #1E9905; }
+ .edname-r  { background: #2A45D0; }
+ .edname-s  { background: #D08C2A; }
+
+ .autocomplete-inplace
+ {
+   background: ButtonFace;
+   border: 1px solid ButtonShadow;
+   padding: 2px;
+   font: 12px Arial;
+ }
+ .autocomplete-inplace div          { padding: 2px 5px; cursor: pointer; cursor: hand; }
+ .autocomplete-inplace div.ac-over- { color:#ffffff; background: #1E9905; }
+
+
+/* CSS form formater */
+.cssform p {
+	width: 300px;
+	clear: left;
+	margin: 0;
+	padding: 5px 0 8px 0;
+	padding-left: 155px; /*width of left column containing the label elements*/
+	border-top: 1px dashed gray;
+	height: 1%;
+}
+.cssform label {
+	font-weight: bold;
+	float: left;
+	margin-left: -155px; /*width of left column*/
+	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+.cssform input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
+	width: 180px;
+}
+.cssform textarea {
+	width: 250px;
+	height: 150px;
+}
+.cssform span.site_count {
+	font-weight: normal;
+	float: left;
+	margin-left: -155px; /*width of left column*/
+	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+.BewareChangeLang{
+	border: 1px solid #ffee66;
+	width: 400px;
+	background-color: #ffffdd;
+	background-image: url(../../../images/warning.gif);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
+	margin: 10px;
+	padding: 5px 5px 5px 40px;
+}
+
+/* cssform1 for actions */
+div#cssform1 {
+	width:50%;
+	padding:10px;
+	margin:0 auto;
+}
+div#cssform1 p {
+	clear: left;
+	margin: 0;
+	padding: 5px 0 8px 0;
+	padding-left: 20%; /*width of left column containing the label elements*/
+	border-top: 1px dashed gray;
+	height: 1%;
+}
+div#cssform1 label {
+	float: left;
+	margin-left: 0px; /*
+	margin-left: -155px; width of left column*/
+	width: 150px;/* width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+div#cssform1 input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
+	width: 180px;
+}
+div#cssform1 textarea {
+	width: 250px;
+	height: 150px;
+}
+div#cssform1 span.site_count {
+	font-weight: normal;
+	float: left;
+	margin-left: 0px; /*
+	margin-left: -155px; width of left column*/
+	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
