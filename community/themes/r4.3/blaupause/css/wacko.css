@@ -1,297 +1,15 @@
-
-/* basic -------------------------------------------------- */
-P, TD, LI, SELECT, TEXTAREA {
-  font-family: Verdana;
-  font-size: 13px;
-  line-height: 1.3em;
-}
-
-label {cursor:pointer;}
-
-.TEXTAREA {
-  width: 100%; 
-  height: 400px
-}
-
-BODY {
-  font-family: Verdana;
-  font-size: 13px;
-  line-height: 1.3;
-  color: #000000;
-  background-color: #FFFFF2;
-}
-
-A  	{
-	font-family: Arial, Helvetica, sans-serif;
-	color: #003399;
-	text-decoration: none;
-}
-
-A:LINK {
-  color: #003399;
-  text-decoration: none;
-}
-A:Hover  {
-	color: #FF9900; 
-	text-decoration: underline  
-}
-A:VISITED {
-  color: #990000;
-}
-
-A:Active  {
-	font-family: Arial, Helvetica, sans-serif;
-	color: #FF9900;
-	text-decoration: underline;
-}
-
-img {
-	border-width: 0px;
-	vertical-align: middle;
-	}
-
-UL, OL {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-.time{ font-family: Tahoma, Arial, Verdana; color: #cccccc; font-size: 9px;}
-.debug { font-size: 11px; color: #888888;}
-
-/* paddings headers */
-FORM, H1, H2, H3, H4, H5, H6 {
-  margin: 0px;
-  padding: 0px;
-}
-
-.main, .main a, .main a:visited {
-	font-size: 22px;
-	text-decoration: none;
-	color: #000000;
-}
-.main a:hover {
-	color: #FF3333;
-	text-decoration: blink;
-}
-
-.print {
-  font-family: Verdana;
-  font-size: 12px;
-}
-
-.error {
-  color: #CC3333; font-weight: bold;
-}
-
-.header {
-  padding: 10px;
-  padding-top: 0px;
-  line-height: 22px;
-}
-
-#page {
-	background-color: #FFFFFF;
-	padding: 9px 10px 10px;
-	border-top: none;
-	border-bottom: none;
-	border-right: none;
-	border-left: none;
-}
-#pageedit {
-  background-color: #FFFFFF;
-  border: 1px inset;
-  border-bottom: none; 
-}
-#pageedit form textarea {width: 100%;height: 400px; }
-.pagetitle {
-  font-size: 23px;
-  padding-top: 0px;
-  line-height: 22px;
-  color: #003399;
-}
-
-.footer {
-	background-color: #ECECFF;
-	padding: 5px 10px;
-	border-top: 1px solid #CCCCCC;
-	border-bottom: 1px solid #CCCCCC;
-}
-
-.footer ul, .footer p {
-	margin:0;padding:0;
-	list-style:none;
-}
-
-.footer ul li {
-	display:inline;
-	/*margin-right:0.5em;*/
-	white-space:nowrap;
-	border-right-width: 1px;
-	border-right-style: dotted;
-	border-right-color: #cccccc;
-	padding-right: 4px;
-}
-.footer ul li form {display:inline;}
-
-#filesheader, #commentsheader {
-  background-color: #ECECFF;
-  padding: 2px 10px;
-  border-top: 1px solid #CCCCCC;
-}
-
-.files, .comment {
-  background-color: #EEEEEE;
-  padding: 10px;
-  border-top: 1px solid #CCCCCC;
-  border-bottom: 1px solid #EEEEEE;
-}
-
-.commentinfo {
-	color: #AAAAAA;
-	padding-bottom: 20px;
-}
-
-.filesform, .commentform {
-  background-color: #EEEEEE;
-  padding: 10px;
-  border-top: 1px solid #CCCCCC;
-}
-.commentform form {width:100%;}
-.commentform form textarea {width:100%; padding:0;}
-
-.revisioninfo {
-  color: #AAAAAA;
-  padding-bottom: 20px;
-}
-
-#credits {
-  font-size: 11px;
-  color: #AAAAAA;
-  text-align: right;
-}
-
-#credits A {
-  color: #AAAAAA;
-}
-
-.name {
-  text-align: right;
-  font-size: 11px;
-}
-
-.include {
-  background-color: #F5F5F5;
-  padding: 8px;
-}
-
-.outerlink { color: #990000;}
-
-fieldset {
- padding: 10px;
- border: 1px solid #ccc;
-}
-
-.missingpage
-{
-  border-bottom: 1px dashed orange;
-}
-.searchbar
-{
-  background-color: #ECECFF;
-  font-family: Verdana;
-  font-size: 13px;
-  line-height: 1.3em;
-}
-.logBtn {   height: 21px;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 10px;
- }     
-
-#tooltip{
-background:#FFFFFF;
-border:1px solid #666666;
-color:#333333;
-font:menu;
-margin:0px;
-padding:3px 5px;
-position:absolute;
-visibility:hidden
-}
-
-table.upload td { padding: 2px 5px 2px 5px; vertical-align:bottom }
-table.upload td.dt-,   
-table.upload td.file- { white-space:nowrap; font-size: 80%; font-weight:bold; color:#000000 }
-table.upload td.dt-   { padding-right:0 }
-table.upload td.remove-   { padding-right:0 }
-table.upload td.size- { padding-right:0; text-align:right }
-table.upload td.desc- { font-size: 80%; color:#444444; width:100% }
-table.upload td.dt- .dt2-,
-table.upload td.remove- .remove2-,
-table.upload td.size- .size2- { font: 11px Tahoma; color:#666666;  }
-table.upload td.remove- A.remove2-:HOVER,
-table.upload td.remove- A.remove2-:ACTIVE { color:#ff0000 }
-
-.preview {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:red 2px solid;}
-.preview p {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
-.preview p span {background:#FFF; padding:0 1px;}
-
-.layout-box {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:#CCCCCC 1px solid;}
-.layout-box p {background: transparent; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
-.layout-box p span {background:#FFF; padding:0 1px;}
-
-.buttonsspacer{width:10px;height:1px;}
-
-/* WikiEdit Toolbar -------------------------------------- */
-
-.toolbar tr { background: ButtonFace; }
-.toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
-  background: ButtonFace;
-  color: ButtonText;
-  border: 1px solid ButtonFace;
-  padding: 1px;  margin: 0px;
-  cursor: pointer; 
- }
-.toolbar img{
-  width: 20px;
-  height: 20px;
- }
-.toolbar .btn-hover {
-  border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
- }
-.toolbar .btn-active,  .toolbar .btn-pressed {
-  border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
- }
-.toolbar .btn-pressed {
-  background: ButtonHighlight;
- }
-.toolbar .btn-separator {
-border-left:1px solid buttonshadow;
-border-right:1px solid buttonhighlight;
-height:18px;
-margin:3px;
-padding:0;
-width:0;
-}
-.edname-w, .edname-r, .edname-s  
-            { font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
-.edname-w  { background: #1E9905; }
-.edname-r  { background: #2A45D0; } 
-.edname-s  { background: #D08C2A; }
-
-
 /* Wiki Formatting ---------------------------------------- */
+
+/* Definitions: SYNTAX (?icq i seek you?) */
 dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
 * html dfn { background: url(javascript:DOTS) repeat-x bottom left; }
 
-del { color:#999999 }    
-del A:VISITED, del A:LINK { color:#999999 }
+/* Strike through text: SYNTAX --text-- */
+del { color:#999999 }
+del a:visited, del a:link { color:#999999 }
+
 
 cite {color:#888800;font-style:normal;}
-
-ins.diff { font-weight: bold; color:#c00; text-decoration: underline; }
-del.diff { font-style: italic; color:#c00; text-decoration: line-through; }
 
 /* Horizontal rule: SYNTAX ---- */
 hr {
@@ -300,23 +18,76 @@ border-style:solid none none;
 border-width:1px 0 0;
 }
 
+/* No line break */
 .nobr {white-space: nowrap}
 
-H1 { font-size: 23px; color: #ff8200; margin:0ex;
+/** List-related *************************************************************/
+
+/* SYNTAX "  *", "  1.", etc. */
+
+ul, ol {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+/** Header related ***********************************************************/
+
+/* SYNTAX ==, ===, ====, =====, ======, ======= */
+
+FORM, H1, H2, H3, H4, H5, H6 {
+  margin: 0px;
+  padding: 0px;
+}
+
+H1 { 
+	font-size: 23px; 
+	color: #ff8200; 
+	margin:0ex;
 	padding:0ex;
 	margin-top:0.3em;
-	margin-bottom:0.5em; }
-H2 { font-family: Verdana; font-size: 20px; margin-top:20px; margin-bottom:5px; 	border-bottom: 1px solid #ccc; }
+	margin-bottom:0.5em; 
+}
+H2 { font-family: Verdana; font-size: 20px; margin-top:20px; margin-bottom:5px; border-bottom:1px solid #ccc; }
 H3 { font-family: Verdana; font-size: 17px; margin-top:15px; margin-bottom:5px; border-bottom:0px #666666 solid }
 H4 { font-family: Arial;   font-size: 16px; margin-top:15px; margin-bottom:5px; border-bottom:0px #999999 solid }
 H5 { font-family: Arial;   font-size: 14px; margin-top:10px; margin-bottom:5px; border-bottom:0px #bbbbbb solid }
 H6 { font-family: Arial;   font-size: 12px; }
 
+/* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
 .center{  text-align: center;}
+
+/* Indent text: SYNTAX "  ", "  1.", etc. */
 .indent {  margin-left: 40px;}
 
+/** Revisions-related *********************************************************/
+
+/* Displays text: "This is an old revision of..." */
+.revisioninfo {
+  color: #AAAAAA;
+  padding-bottom: 20px;
+}
+
+/* Simple differences */
 .additions { color: #008800; }
 .deletions { color: #880000; }
+
+/* Default differences */
+ins.diff {
+	font-weight: bold;
+	color:#c00; 
+	text-decoration: underline;
+
+}
+del.diff {
+	font-style: italic;
+	color:#c00;
+	text-decoration: line-through;
+
+}
+
+/* Code areas: SYNTAX %%code%% */
 
 .code {
   background: #FFFFFF;
@@ -330,11 +101,19 @@ H6 { font-family: Arial;   font-size: 12px; }
 
 .notes {  color: #888800; }
 
+/** Table-related ************************************************************/
+
+/* Bordered tables: SYNTAX #|| || Here | there || ||# */
 table.usertable {
   border: 1px none;
   border-collapse: collapse;
 }
-table.usertable tr td
+
+table.usertable tr th {
+
+}
+
+table.usertable tr td, table.usertable tr th
 {
   border-width: 1px;
   border-color: black;
@@ -342,35 +121,46 @@ table.usertable tr td
   padding: 4px;
   vertical-align: top;
 }
+/* 100%-width tables: SYNTAX #| || Here | there || |# */
 table.dtable { width:100%; border: 0px none; border-collapse: collapse; }
 table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
 
-.toc1 { margin-left:0px; padding-left:0px; font-weight:bold; list-style-type:none;  } 
-.toc2 { margin-left:0px; padding-left:15px; list-style-type:none;  } 
-.toc3 { margin-left:0px; padding-left:30px; list-style-type:none;  } 
-.toc4 { margin-left:0px; padding-left:45px; list-style-type:none;  } 
-.toc5 { margin-left:0px; padding-left:60px; list-style-type:none;  } 
+/* Inside the table of content: SYNTAX {{toc}} */
+.toc1 { margin-left:0px; padding-left:0px; font-weight:bold; list-style-type:none;  }
+.toc2 { margin-left:0px; padding-left:15px; list-style-type:none;  }
+.toc3 { margin-left:0px; padding-left:30px; list-style-type:none;  }
+.toc4 { margin-left:0px; padding-left:45px; list-style-type:none;  }
+.toc5 { margin-left:0px; padding-left:60px; list-style-type:none;  }
 .toc6 { margin-left:0px; padding-left:75px; list-style-type:none;  }
+
+/** Chat-related *************************************************************/
+
+/* SYNTAX %%(micq)%%, %%(icq_l)%%, %%(icq_m)%% */
 
 .micq1 { padding:2px; vertical-align:top; white-space: nowrap; font-weight: bold; }
 .micq2 { padding:2px; vertical-align:top; white-space: nowrap; font:10px tahoma, arial }
 .micq3 { padding:2px; vertical-align:top; width:100% }
+
+/** Email-related ************************************************************/
+
+/* Quoted message on new email */
 
 .email1 {color:#800000}
 .email2 {color:#808000}
 .email-odd {color:#800000}
 .email-even {color:#808000}
 
+/* Quotes: SYNTAX <[text]> */
 blockquote {  border-left:#cccccc 3px solid; padding:5px; color: #999999; }
 blockquote p {  padding:0px;  margin: 5px 0px; }
 
-
+/* Paragraphs */
 p.auto { margin:0px; padding:0px; font-size:100%; }
 .pmark { color:#cccccc;font:10px Arial }
-.pmark A:LINK,
-.pmark A:VISITED { color:#cccccc }
-.pmark A:HOVER,
-.pmark A:ACTIVE  { color:#cc3300 }
+.pmark a:link,
+.pmark a:visited { color:#cccccc }
+.pmark a:hover,
+.pmark a:active  { color:#cc3300 }
 .pright {}
 .pright .p- { float:right; padding: 0 0 0 15px;  }
 .pright .pbody- { }
@@ -379,9 +169,12 @@ p.auto { margin:0px; padding:0px; font-size:100%; }
 .pleft .p- { float:left; padding: 0 15px 0 0;  }
 .pleft .pbody- { padding:0 }
 
-/* Text_Highlighter  */
+/** Text highlighter-related *************************************************/
+
+/* SYNTAX %%(hl xyz)%% */
+
 .hl-main {font-family: monospace; font-size:13px;}
-.hl-gutter { background-color: #CCCCCC; padding-right: 10px; 
+.hl-gutter { background-color: #CCCCCC; padding-right: 10px;
              font-family: monospace; font-size:13px;}
 .hl-table {border: solid 1px #000000; }
 
@@ -400,271 +193,31 @@ p.auto { margin:0px; padding:0px; font-size:100%; }
 .hl-number { color: #007F00; }
 .hl-inlinetags { color: #FF0000; }
 .hl-builtin    { color:#996633; }
-/* /Text_Highlighter */
 
-div.action           { margin:2px; background: #F5F3F1 }
-div.action-content   { padding:10px 10px 25px 10px; } 
+/** Wrapper-related **********************************************************/
 
+/* SYNTAX %%(wrapper xyz)%% */
+
+div.action           {
+	margin:2px;
+	background: #F5F3F1;
+
+}
+div.action-content   { padding:10px 10px 25px 10px; }
+
+/* Important colored text: SYNTAX !!(red)text!! */
 .cl-red   {color: #CC0000;}
 .cl-green {color: #008000;}
 .cl-blue  {color: #0000CC;}
 
-tt { color:#666600; background:#ffffcc; padding: 0 2px } 
+/* Fixed width text: SYNTAX ##monospace## */
+tt { color:#666600; background:#ffffcc; padding: 0 2px }
 
+/* Important text: SYNTAX !!text!! */
 .cite {color:#ff0000;font-style:normal;}
+
+/* underline text: SYNTAX __text__ */
 .underline { text-decoration:underline; }
+
+/* Marked text: SYNTAX ??text?? */
 .mark { color: #000000; background: #ffaaaa; }
-
-
-/* screen layout -------------------------------------------------- */
-
-#body, #sitewrapper, #borderleft, #borderright, #site, #content {
-min-height:100%;
- }
-
-#sitewrapper {
- 	/*max-width:80em;*/
- 	min-width:600px;
- 	margin:0 auto;
- 	position:relative;
- 	border-bottom:solid 1px #eee;
- }
-#site {
- 	background-color:#fff;
- 	color:#333;
- 	position:relative;
- 	padding-bottom:3em;
- }
- 
-#header #accessmenu {
- 	list-style:none;
- }
- 
-#header #accessmenu li {
- position:absolute;
- left:-5000em;
- }
- #header #accessmenu a:focus, #header #accessmenu a:hover, #header #accessmenu a:active {
- position:absolute;
- 	background-color:#000;
- 	color:#fff;
- 	font-weight:bold;
- 	left:5000em;
- 	top:0;
- 	padding:5px;
- 	text-decoration:underline;
- }
- 
-#header #accessmenu #search {
-	right:25px;
-	left:auto;
-	font-size:1.1em;
-	top: 0px;
-}
-#header #accessmenu #search form fieldset {
- 	text-align:right;
- 	line-height:1;
- 	margin:0;
- 	padding-bottom:0;
- }
-#header #accessmenu #search form fieldset {
- 	border-style:none;
- 	background-color:transparent;
- }
-#header #accessmenu #search form input.textinput {
- 	border:solid 1px #555;
- 	background-color:#f6f6f6;
- 	font-size:1em;
- 	font-weight:normal;
- 	color:#000;
- }
-#header #accessmenu #search form input.textinput:hover {
- 	border:solid 1px #000;
- 	background-color:#f6f6f6;
- }
-#header #accessmenu #search form input.textinput:focus, #header #accessmenu #search form input.textinput:active {
- 	border:solid 1px #000;
- 	background-color:#fff;
- }
-#header #accessmenu #search form input.submitinput {
- 	border-style:none;
- 	background-color:transparent;
- 	color:#000;
- 	font-weight:bold;
- 	padding:0;
- 	font-size:1em;
- }
- 
-#infomenu {
-	line-height:1;
-	padding-bottom: 1em;
- }
- 
-#infomenu a {
- 	font-weight:normal;
- }
- 
-#infomenu #languages, #infomenu #login {
- 	width:auto;
- 	float:right;
- 	text-align:right;
- }
-
-#infomenu #breadcrumb, #infomenu #bookmarks {
- 	width:75%;
- 	float:left;
- 	text-align:left;
- }
-
-#infomenu #breadcrumb abbr {
- 	border-style:none;
- }
- 
-#content {
- 	/*float:right;*/
- 	/*width:74%;*/
- 	/*padding-right:3%;*/
-	clear:both;
-    margin-top:1em;
-   }
-   
-#usermenu ul         { list-style: none; margin: 0px; padding: 0px; border: none; }
-
-#usermenu li a       {
-	display: inline;
-	border: none;
-	text-decoration: none;
-}
-
-#usermenu li  {
-	display: inline;
-	border-right-width: 1px;
-	border-right-style: dotted;
-	border-right-color: #dedede;
-	padding-right: 4px;
-	padding-left: 1px;
-}
-
-#usermenu  li a:hover {
-	text-decoration: underline;
-}
-
-/* CSS form formater */
-.cssform p {
-	width: 300px;
-	clear: left;
-	margin: 0;
-	padding: 5px 0 8px 0;
-	padding-left: 155px; /*width of left column containing the label elements*/
-	border-top: 1px dashed gray;
-	height: 1%;
-}
-.cssform label {
-	font-weight: bold;
-	float: left;
-	margin-left: -155px; /*width of left column*/
-	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-.cssform input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
-	width: 180px;
-}
-.cssform textarea {
-	width: 250px;
-	height: 150px;
-}
-.cssform span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: -155px; /*width of left column*/
-	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-.BewareChangeLang{
-	border: 1px solid #ffee66;
-	width: 400px;
-	background-color: #ffffdd;
-	background-image: url(../../../images/warning.gif);
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: 10px 10px;
-	margin: 10px;
-	padding: 5px 5px 5px 40px;
-}
-
-/* cssform1 for actions */
-div#cssform1 {
-	width:50%;
-	padding:10px;
-	margin:0 auto;
-}
-div#cssform1 p {
-	clear: left;
-	margin: 0;
-	padding: 5px 0 8px 0;
-	padding-left: 20%; /*width of left column containing the label elements*/
-	border-top: 1px dashed gray;
-	height: 1%;
-}
-div#cssform1 label {
-	float: left;
-	margin-left: 0px; /*
-	margin-left: -155px; width of left column*/
-	width: 150px;/* width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-div#cssform1 input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
-	width: 180px;
-}
-div#cssform1 textarea {
-	width: 250px;
-	height: 150px;
-}
-div#cssform1 span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: 0px; /*
-	margin-left: -155px; width of left column*/
-	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-
-
-
-
-#navigation
-{padding: 0px 0px 0px 0px; /*overflow:hidden;*/}
-
-#usermenu {
-float:left;
-text-align:left;
-position:relative;
-}
-
-#usermenu ol { list-style: none; margin: 0px; padding: 0px; border: none; }
-
-#usermenu li {
- display: inline;
- border-right-width: 1px;
- border-right-style: solid;
- border-right-color: #AAAAAA;
- padding-right: 4px;
- padding-left: 1px;
-}
-#usermenu li a {
- display: inline;
- border: none;
- text-decoration: none;
-}
-#usermenu li a:visited {
- color: #003399;
-}
-#usermenu li a:hover {
- color: #B90022;
- text-decoration: underline;
-}
-#usermenu li a:active  {
-	color: #FF0000;
-}
-
-#login {
- text-align:right;
-}
-
-#login form {display:inline;}

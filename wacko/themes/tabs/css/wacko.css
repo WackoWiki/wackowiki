@@ -1,138 +1,92 @@
+/* Wiki Formatting ---------------------------------------- */
 
-BODY { padding:0; margin:0; background:#eeeeee; line-height: 130%; }
-img {
-	border-width: 0px;
-	}
-UL, OL {  margin-top:0; margin-bottom: 3px; }
-LI { margin-bottom: 2px; }
-TEXTAREA { font-size:100%; font-family: Georgia, Courier New; color:#222222;   line-height: 1.5em;  }
-SMALL { font-size:80% }
-
-label {cursor:pointer; cursor:hand;}
-
+/* Definitions: SYNTAX (?icq i seek you?) */
 dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
+* html dfn {  }
 
-/* paddings headers */
-FORM, H1, H2, H3, H4, H5 {
+/* Strike through text: SYNTAX --text-- */
+del { color:#999999 }
+del a:visited, del a:link { color:#999999 }
+
+
+cite {color:#888800;font-style:normal;}
+
+/* Horizontal rule: SYNTAX ---- */
+hr {
+border-color:#CCCCCC;
+border-style:solid none none;
+border-width:1px 0 0;
+}
+
+/* No line break */
+.nobr {white-space: nowrap}
+
+/** List-related *************************************************************/
+
+/* SYNTAX "  *", "  1.", etc. */
+
+ul, ol {  margin-top:0; margin-bottom: 3px; }
+
+
+
+
+
+
+
+/** Header related ***********************************************************/
+
+/* SYNTAX ==, ===, ====, =====, ======, ======= */
+
+FORM, H1, H2, H3, H4, H5, H6 {
   margin: 0px;
   padding: 0px;
 }
-H1 { color:#20AA40; font-family: Verdana; padding-top:2px; padding-bottom:7px; line-height: 110%; }
-H2 { color:#000080; font-family: Verdana; font-size: 20px; padding-top:20px; padding-bottom:5px }
-H3 { font-family: Verdana; font-size: 17px; padding-top:15px; padding-bottom:5px }
-H4 { font-family: Arial;   font-size: 16px; padding-top:15px; padding-bottom:5px }
-H5 { font-family: Arial;   font-size: 14px; padding-top:10px; padding-bottom:5px }
 
-/* overrall design */
-.Top { background:#ffffff; font-size:13px; color:#000000; padding:5px 5px 5px 5px; vertical-align:center; font-size:70% }
-.TopLoggedOut { background:#ffcc66; font-size:13px; color:#000000; padding:5px 5px 5px 5px; vertical-align:center; font-size:70% }
-.TopDiv { clear:all; height:1px; background:#000000; margin:0; padding:0 }
-.TopDiv2 { clear:all; height:1px; background:#666666; margin:0; padding:0 }
-.TopRight { float:right; text-align:right; padding:0px; }
-.TopLeft { float:left; text-align:left; color:#444444 }
-.Bookmarks { background:#002080; color:#b5b5ff; padding:2px; font-size:75% }
+H1 {
+	font-family: Verdana;
+	padding-top:2px; 
+	padding-bottom:7px; 
+	line-height: 110%; 
+	color:#20AA40; 
+}
+H2 { font-family: Verdana;font-size: 20px; color:#000080;  padding-top:20px; padding-bottom:5px }
+H3 { font-family: Verdana;font-size: 17px; padding-top:15px; padding-bottom:5px }
+H4 { font-family: Arial;  font-size: 16px; padding-top:15px; padding-bottom:5px }
+H5 { font-family: Arial;  font-size: 14px; padding-top:10px; padding-bottom:5px }
 
 
-.Bookmarks A:LINK { font-weight: bold; color: #ffffff }
-.Bookmarks A:VISITED { font-weight: bold; color: #b5ffb5 }
-.Bookmarks A:HOVER { font-weight: bold; color: #ffb5b5 }
 
-.Wrapper { margin: 20px 20px 20px 20px }
-.header { color:#444444; }
-.header .Main { color:#999999 }
-.header H1 { margin:0px; padding:0px; color:#000000; font-family:Arial; font-size: 100% }
-.Print { color:#999999; font-size:11px; float:right; }
+/* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
+.center{  text-align: center;}
 
-.Shade, #page { border-left: 1px solid #444444; border-right: 1px solid #444444; }
+/* Indent text: SYNTAX "  ", "  1.", etc. */
+.indent {  margin-left: 40px; }
 
-.Shade {  clear:all; background:#ffffff;
-          height:6px; border-top: 1px solid #444444; }
-#page { background:#ffffff; padding:9px 10px 30px 10px; }
-.TextArea { width:100%; height:450px; border: 3px ridge; }
+/** Revisions-related *********************************************************/
 
-.TabText { padding:1px 5px 1px 5px; font-size:12px; }
-.TabSpace .TabText { padding:5px; }
-.Tab2, .Tab  { float:left; background: #fefbe6;
-                 background-repeat:repeat-x; background-position:bottom;
-                 color:#666666; border-top:1px solid #444444 }
-.TabSelected2, .TabSelected
-               { float:left; background: #ffffff;
-                 background-repeat:repeat-x; background-position:bottom;
-                 color:#666666 }
-.Tab2a       { float:left; background: #ffcfa8;
-                 background-repeat:repeat-x; background-position:bottom;
-                 color:#666666; border-top:1px solid #444444 }
-.TabSelected2a, .Tab2a, .TabSelected2, .Tab2         { float:right; }
-
-.TabSpace { color:#666666; border-top:1px solid #444444; }
-
-.OkBtn { color:#002000; cursor:hand; background:#c9e3f2; height:40px; }
-.OkBtn_ { color:#002000; cursor:hand; background:#fff6bc; height:40px; }
-.CancelBtn { color:#666666; cursor:hand; font-size:10px; background:#cccccc; }
-.CancelBtn_ { color:#666666; cursor:hand; font-size:10px; background:#dddddd; }
-
-.OkBtn_Top { color:#002000; cursor:hand; background:#c9e3f2;  }
-.OkBtn_Top_ { color:#002000; cursor:hand; background:#fff6bc;  }
-.CancelBtn_Top { color:#666666; cursor:hand; font-size:10px; background:#cccccc; }
-.CancelBtn_Top_ { color:#666666; cursor:hand; font-size:10px; background:#dddddd; }
-
-#credits {
-  font-size: 11px;
+/* Displays text: "This is an old revision of..." */
+.revisioninfo {
   color: #AAAAAA;
-  text-align: right;
-  padding:25px 5px 5px 5px
+  padding-bottom: 20px;
 }
 
-
-/* fonts */
-BODY, TD, P, LI, #page { font-family: Georgia, Verdana; font-size:95% }
-.dt { font-family: Verdana; font-size:60% }
-
-/* colors */
-#page { color:#444444 }
-del { color:#999999 }
-del A:LINK { color:#999999 }
-del A:VISITED { color:#999999 }
-del A:HOVER { color:#cc3300 }
-del A.outerlink:LINK { color:#999999 }
-del A.outerlink:VISITED { color:#999999 }
-del A.outerlink:HOVER { color:#cc3300 }
-
-cite {color:#888800;font-style:normal;}
-.center { text-align: center; }
-.indent { margin-left: 40px; }
-
-
-/* diffs */
+/* Simple differences */
 .additions { color: #008800; }
 .deletions { color: #880000; }
-ins.diff { font-weight: bold; color:#c00; text-decoration: underline; }
-del.diff { font-style: italic; color:#c00; text-decoration: line-through; }
-.error { color: #CC3333; font-weight: bold; }
 
-.time{ color:#999999; font-size: 9px; margin:5px 20px;}
-.debug { font-size: 11px; color: #888888;}
-
-#commentsheader, #filesheader {
-  background-color: #eeeeee;
-  padding: 2px 50px;
+/* Default differences */
+ins.diff {
+	font-weight: bold;
+	color:#c00; 
+	text-decoration: underline;
+}
+del.diff {
+	font-style: italic;
+	color:#c00;
+	text-decoration: line-through;
 }
 
-.comment, .files {
-  background-color: #EEEEEE;
-  padding: 10px 50px;
-  border-top: 1px solid #CCCCCC;
-}
-
-.commentinfo {
-  color: #AAAAAA;
-}
-
-.commentform, .filesform {
-  background-color: #EEEEEE;
-  padding: 10px 50px;
-  border-top: 1px solid #CCCCCC;
-}
+/* Code areas: SYNTAX %%code%% */
 
 .code {
   background: #FFFFFF;
@@ -145,52 +99,32 @@ del.diff { font-style: italic; color:#c00; text-decoration: line-through; }
   line-height: 1.2em;
 }
 
-.notes { color: #888800; }
-.revisioninfo { color: #AAAAAA;  padding-bottom: 20px; }
+.notes {  color: #888800; }
 
-/* for include */
-.name { text-align: right; font-size: 10px; }
-.include { background-color: #f8f8f8; padding: 8px; }
+/** Table-related ************************************************************/
 
-FIELDSET { padding: 10px; }
-table.usertable { border: 1px none; border-collapse: collapse; }
-table.usertable tr td { vertical-align:top; border-width: 1px;  border-color: #999999;  border-style: solid;  padding: 4px; }
+/* Bordered tables: SYNTAX #|| || Here | there || ||# */
+table.usertable {
+  border: 1px none;
+  border-collapse: collapse;
+}
+
+table.usertable tr th {
+}
+
+table.usertable tr td, table.usertable tr th
+{
+	border-width: 1px;
+	border-color: #999999;  
+	border-style: solid;  
+	padding: 4px;
+	vertical-align:top;  
+}
+/* 100%-width tables: SYNTAX #| || Here | there || |# */
 table.dtable { width:100%; border: 0px none; border-collapse: collapse; }
 table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
-.missingpage { border-bottom: 1px dashed orange; }
 
-/* anchors */
-A:LINK { color: #0020cc; }
-A:VISITED { color: #8020cc; }
-A:HOVER { color:#cc3300 }
-A:ACTIVE { color:#ff0000; }
-A.denied:LINK, A.denied:VISITED { color: #666666; }
-A.denied:HOVER { color:#cc3300 }
-
-#credits A:LINK, #credits A:VISITED { color: #AAAAAA; }
-#credits A:HOVER { color:#cc3300 }
-
-.outerlink:LINK, .outerlink:VISITED { font-size:90%; font-family:Verdana; color:#000080 }
-.outerlink:HOVER { color:#cc3300 }
-
-.Top a, .Top a:visited { font-weight:bold; color:#336699 }
-.Tune a, .Tune a:visited { font-weight:normal; color:#336699 }
-.Top a:hover, .Tune a:hover { color:#cc3300 }
-
-.Print a:visited, .TopRight a:link { font-weight:normal; color:#0000ff }
-.TopRight a:visited { font-weight:normal; color:#800080 }
-.TopRight a:hover { color:#cc3300 }
-
-.Tab2a a:visited, .Tab2 a:visited, .Tab a:visited,
-.Tab2a a, .Tab2 a, .Tab a { color:#0000ff; text-decoration:none }
-.Tab2a a:hover, .Tab2 a:hover, .Tab a:hover { color:#cc3300; text-decoration:underline }
-
-a.Search:link, a.Search:visited { color:#0000ff }
-a.Search:hover { color:#cc3300 }
-
-#commentsheader a:link, #commentsheader a:visited { color:#0000ff }
-#commentsheader a:hover { color:#cc3300 }
-
+/* Inside the table of content: SYNTAX {{toc}} */
 .toc1 { margin-left:0px; padding-left:0px; font-weight:bold; list-style-type:none;  }
 .toc2 { margin-left:0px; padding-left:15px; list-style-type:none;  }
 .toc3 { margin-left:0px; padding-left:30px; list-style-type:none;  }
@@ -198,24 +132,34 @@ a.Search:hover { color:#cc3300 }
 .toc5 { margin-left:0px; padding-left:60px; list-style-type:none;  }
 .toc6 { margin-left:0px; padding-left:75px; list-style-type:none;  }
 
-.micq1 { padding:2px; vertical-align:top; white-space: nowrap; font-weight: bold; }
+/** Chat-related *************************************************************/
+
+/* SYNTAX %%(micq)%%, %%(icq_l)%%, %%(icq_m)%% */
+
+.micq1 { padding:2px; vertical-align:top; white-space: nowrap; font-weight: bold  }
 .micq2 { padding:2px; vertical-align:top; white-space: nowrap; font:10px tahoma, arial }
 .micq3 { padding:2px; vertical-align:top; width:100% }
+
+/** Email-related ************************************************************/
+
+/* Quoted message on new email */
 
 .email1 {color:#800000}
 .email2 {color:#808000}
 .email-odd {color:#800000}
 .email-even {color:#808000}
 
+/* Quotes: SYNTAX <[text]> */
 blockquote {  border-left:#999 3px solid; padding:5px; }
 blockquote p {  padding:0px;  margin: 5px 0px; }
 
-P.auto { margin:0px; padding:0px; font-size:100%; }
-.pmark { color:#cccccc;font:10px Arial }
-.pmark A:LINK,
-.pmark A:VISITED { color:#cccccc }
-.pmark A:HOVER,
-.pmark A:ACTIVE  { color:#cc3300 }
+/* Paragraphs */
+p.auto { margin:0px; padding:0px; font-size:100%; }
+.pmark { color:#cccccc; font:10px Arial }
+.pmark a:link,
+.pmark a:visited { color:#cccccc }
+.pmark a:hover,
+.pmark a:active  { color:#cc3300 }
 .pright {}
 .pright .p- { float:right; padding: 0 0 0 15px;  }
 .pright .pbody- { }
@@ -224,76 +168,10 @@ P.auto { margin:0px; padding:0px; font-size:100%; }
 .pleft .p- { float:left; padding: 0 15px 0 0;  }
 .pleft .pbody- { }
 
-  table.upload td { padding: 2px 5px 2px 5px; vertical-align:top }
-  table.upload td.dt-,
-  table.upload td.file- { white-space:nowrap; font-size: 80%; font-weight:bold; color:#000000 }
-  table.upload td.dt-   { padding-right:0 }
-  table.upload td.remove-   { padding-right:0 }
-  table.upload td.size- { padding-right:0; text-align:right }
-  table.upload td.desc- { font-size: 80%; color:#444444; width:100% }
-  table.upload td.dt- .dt2-,
-  table.upload td.remove- .remove2-,
-  table.upload td.size- .size2- { font: 11px Tahoma; color:#666666;  }
-  table.upload td.remove- A.remove2-:HOVER,
-  table.upload td.remove- A.remove2-:ACTIVE { color:#ff0000 }
+/** Text highlighter-related *************************************************/
 
-.preview {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:red 2px solid;}
-.preview p {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
-.preview p span {background:#FFF; padding:0 1px;}
+/* SYNTAX %%(hl xyz)%% */
 
-.layout-box {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:#CCCCCC 1px solid;}
-.layout-box p {background: transparent; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
-.layout-box p span {background:#FFF; padding:0 1px;}
-
-.buttonsspacer{width:100px;height:1px;}
-
-  /* vseedit toolbar */
- .toolbar tr { background: ButtonFace; }
- .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
-  background: ButtonFace;
-  color: ButtonText;
-  border: 1px solid ButtonFace;
-  padding: 1px;  margin: 0px;
-  cursor: pointer; cursor: hand;
- }
- .toolbar img {
-  width: 20px;
-  height: 20px;
- }
- .toolbar .btn-hover {
-  border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
- }
- .toolbar .btn-active,  .toolbar .btn-pressed {
-  border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
- }
- .toolbar .btn-pressed {
-  background: ButtonHighlight;
- }
- .toolbar .btn-separator {
-border-left:1px solid buttonshadow;
-border-right:1px solid buttonhighlight;
-height:18px;
-margin:3px;
-padding:0;
-width:0;
-}
- .edname-w, .edname-r, .edname-s
-            { font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
- .edname-w  { background: #1E9905; }
- .edname-r  { background: #2A45D0; }
- .edname-s  { background: #D08C2A; }
-
- .autocomplete-inplace
- {
-   background: ButtonFace;
-   border: 1px solid ButtonShadow;
-   padding: 2px;
-   font: 12px Arial;
- }
- .autocomplete-inplace div          { padding: 2px 5px; cursor: pointer; cursor: hand; }
- .autocomplete-inplace div.ac-over- { color:#ffffff; background: #1E9905; }
-
-/* Text_Highlighter */
 .hl-main {font-family: monospace; font-size:13px;}
 .hl-gutter { background-color: #CCCCCC; padding-right: 10px;
              font-family: monospace; font-size:13px;}
@@ -315,103 +193,30 @@ width:0;
 .hl-inlinetags { color: #FF0000; }
 .hl-builtin    { color:#996633; }
 
-/* Horizontal rule: SYNTAX ---- */
-hr {
-border-color:#CCCCCC;
-border-style:solid none none;
-border-width:1px 0 0;
+/** Wrapper-related **********************************************************/
+
+/* SYNTAX %%(wrapper xyz)%% */
+
+div.action           {
+	margin:2px;
+	background: #eeeeee;
+
 }
-
-.nobr {white-space: nowrap}
-
-div.action           { margin:2px; background: #eeeeee }
 div.action-content   { padding:10px 10px 25px 10px; }
 
+/* Important colored text: SYNTAX !!(red)text!! */
 .cl-red   {color: #CC0000;}
 .cl-green {color: #008000;}
 .cl-blue  {color: #0000CC;}
 
+/* Fixed width text: SYNTAX ##monospace## */
 tt { color:#666600; background:#ffffcc; padding: 0 2px }
 
+/* Important text: SYNTAX !!text!! */
 .cite {color:#ff0000;font-style:normal;}
 
 /* underline text: SYNTAX __text__ */
 .underline { text-decoration:underline; }
 
+/* Marked text: SYNTAX ??text?? */
 .mark { color: #00000; background:#ffaaaa; }
-
-/* CSS form formater */
-.cssform p {
-	width: 300px;
-	clear: left;
-	margin: 0;
-	padding: 5px 0 8px 0;
-	padding-left: 155px; /*width of left column containing the label elements*/
-	border-top: 1px dashed gray;
-	height: 1%;
-}
-.cssform label {
-	font-weight: bold;
-	float: left;
-	margin-left: -155px; /*width of left column*/
-	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-.cssform input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
-	width: 180px;
-}
-.cssform textarea {
-	width: 250px;
-	height: 150px;
-}
-.cssform span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: -155px; /*width of left column*/
-	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-.BewareChangeLang{
-	border: 1px solid #ffee66;
-	width: 400px;
-	background-color: #ffffdd;
-	background-image: url(../../../images/warning.gif);
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: 10px 10px;
-	margin: 10px;
-	padding: 5px 5px 5px 40px;
-}
-
-/* cssform1 for actions */
-div#cssform1 {
-	width:50%;
-	padding:10px;
-	margin:0 auto;
-}
-div#cssform1 p {
-	clear: left;
-	margin: 0;
-	padding: 5px 0 8px 0;
-	padding-left: 20%; /*width of left column containing the label elements*/
-	border-top: 1px dashed gray;
-	height: 1%;
-}
-div#cssform1 label {
-	float: left;
-	margin-left: 0px; /*
-	margin-left: -155px; width of left column*/
-	width: 150px;/* width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-div#cssform1 input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
-	width: 180px;
-}
-div#cssform1 textarea {
-	width: 250px;
-	height: 150px;
-}
-div#cssform1 span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: 0px; /*
-	margin-left: -155px; width of left column*/
-	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}

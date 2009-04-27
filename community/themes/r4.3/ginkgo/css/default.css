@@ -1,2 +1,572 @@
 /*@import "../../_common/X11ColorNames.css";*/
 @import "wacko.css";
+
+/* basic -------------------------------------------------- */
+P, TD, LI, SELECT, TEXTAREA {
+  font-family: Verdana;
+  font-size: 13px;
+  line-height: 1.3em;
+}
+
+label {cursor:pointer; cursor:hand;}
+img {
+	border-width: 0px;
+	vertical-align: middle;
+	}
+.TEXTAREA {
+  width: 100%; 
+  height: 400px
+}
+
+BODY {
+  margin:0px;/* */
+  font-family: Verdana;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #000000;
+  background-color: #f5f5e9;
+}
+
+A  	{
+	font-family: Arial, Helvetica, sans-serif;
+	color: #993300;
+	text-decoration: none;
+}
+
+
+A:LINK {
+  color: #993300;
+  text-decoration: none;
+}
+A:Hover  {
+	color: #5C743D; 
+	text-decoration: underline  
+}
+A:VISITED {
+  color: #990000;
+}
+
+A:Active  {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #5C743D;
+	text-decoration: underline;
+}
+
+.time{ font-family: Tahoma, Arial, Verdana; color: #cccccc; font-size: 9px;}
+
+
+.main {
+	font:24px Arial, Helvetica, sans-serif;
+	color: #5C743D;
+	letter-spacing:.2em;
+	line-height:30px;
+	margin-left: 5px;	
+}
+
+a.main {
+  font-size: 24px;
+  color: #5C743D
+}
+
+a.main:link {
+  font-size: 24px;
+  color: #5C743D
+}
+a.main:active  {
+  font-size: 24px;
+  color: #5C743D
+	text-decoration: underline;
+}
+a.main:hover {
+  font-size: 24px;
+  color: #5C743D
+}
+a.main:visited {
+  font-size: 24px;
+  color: #5C743D
+}
+.print {
+  font-family: Verdana;
+  font-size: 12px;
+}
+
+.error {
+  color: #CC3333; font-weight: bold;
+}
+
+.header {
+  padding: 10px;
+  padding-top: 0px;
+  line-height: 22px;
+}
+
+#page {
+	background-color: #FFFFFF;
+	padding: 9px 10px 10px;
+	/*   border: 1px inset;*/
+  border-top: none;
+	border-bottom: none;
+	min-height:100%;
+}
+#pageedit {
+  background-color: #FFFFFF;
+  border: 1px inset;
+  border-bottom: none; 
+}
+#pageedit form textarea {
+  width: 100%;
+  height: 400px; 
+}
+.pagetitle {
+  font-size: 23px;
+  font-weight: bold
+  padding: 10px;
+  padding-top: 0px;
+  line-height: 22px;
+  color: #993300;
+}
+
+.footer {
+  background-color: #D5EDB3;
+  padding: 5px 10px;
+  border: 1px inset;
+  border-top: none;
+  border-top: 1px solid #CCCCCC;
+}
+
+#filesheader, #commentsheader {
+  background-color: #D5EDB3;
+  padding: 2px 10px;
+  border-left: 1px inset;
+  border-right: 1px inset;
+  border-top: 1px solid #CCCCCC;
+}
+
+.files, .comment {
+  background-color: #EEEEEE;
+  padding: 10px;
+  border-left: 1px inset;
+  border-right: 1px inset;
+  border-top: 1px solid #CCCCCC;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+.commentinfo {
+  color: #AAAAAA;
+}
+
+.filesform, .commentform {
+  background-color: #EEEEEE;
+  padding: 10px;
+  border-left: 1px inset;
+  border-right: 1px inset;
+  border-top: 1px solid #CCCCCC;
+}
+.commentform form {width:100%;}
+.commentform form textarea {width:100%; padding:0;}
+
+
+#credits {
+  font-size: 10px;
+  color: #AAAAAA;
+  text-align: left;
+  margin-left: 5px;	
+}
+
+#credits A {
+  color: #AAAAAA;
+}
+
+.name {
+  text-align: right;
+  font-size: 11px;
+}
+
+.include {
+  background-color: #F5F5F5;
+  padding: 8px;
+}
+
+.outerlink { color: #990000;}
+
+FIELDSET {
+ padding: 10px;
+}
+
+.missingpage
+{
+  border-bottom: 1px dashed orange;
+}
+.searchbar
+{
+  background-color: transparent;
+  font-family: Verdana;
+  font-size: 13px;
+  line-height: 1.3em;
+}
+.searchbar input {border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;}
+.logBtn {   height: 21px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10px;
+ }     
+
+form input.submitinput {
+  background-color:transparent;
+  border-style:none;
+  color:#000000;
+  padding:0;
+  padding-right: 10px;
+}
+
+/* ID Styles */
+#tooltip{
+background:#FFFFFF;
+border:1px solid #666666;
+color:#333333;
+font:menu;
+margin:0px;
+padding:3px 5px;
+position:absolute;
+visibility:hidden
+}
+
+
+#navigation td {
+	border-bottom: 1px solid #F4FFE4;
+	}
+	
+#navigation a {
+	font: bold 11px Arial, Helvetica, sans-serif;
+	color: #D5EDB3;
+	line-height:16px;
+	letter-spacing:.1em;
+	text-decoration: none;
+	display:block;
+	padding:8px 6px 10px 20px;
+	}
+	
+#navigation a:hover {
+	background: #99CC66;
+	color:#993300;
+	}
+	
+#logo 	{
+	font:24px Arial, Helvetica, sans-serif;
+	color: #5C743D;
+	letter-spacing:.2em;
+	line-height:30px;
+	}
+
+.tagline 	{
+	font:12px/18px Arial, Helvetica, sans-serif;
+	color: #000000;
+	letter-spacing:.4em;
+	margin-left: 10px;
+	}
+
+#monthformat {
+	border-bottom: 1px dashed #5C743D;
+	}
+		
+#dateformat {
+	font:11px Arial, Helvetica, sans-serif;
+	color: #993300;
+	letter-spacing:.2em;
+	}
+	
+#dateformat a {
+	font:11px Arial, Helvetica, sans-serif;
+	color: #993300;
+	font-weight:bold;
+	letter-spacing:.1em;
+	text-decoration:none;
+	}
+	
+#dateformat a:hover {
+	color: #F4FFE4;
+	letter-spacing:.1em;
+	}
+	
+/* Class Styles */
+	
+.bodyText {
+	font:11px Arial, Helvetica, sans-serif;
+	color:#666666;
+	line-height:20px;
+	margin-top:0px;
+	}
+	
+.pageName{
+	font: 18px Arial, Helvetica, sans-serif;
+	color: #99CC66;
+	line-height:26px;
+	letter-spacing:.21em;
+	}
+	
+.subHeader {
+	font:bold 11px Arial, Helvetica, sans-serif;
+	color: #993300;
+	line-height:22px;
+	letter-spacing:.2em;
+	}
+
+.quote {
+	font: 20px Arial, Helvetica, sans-serif;
+	color: #759DA1;
+	line-height:30px;
+	}
+	
+.smallText {
+	font: 10px Arial, Helvetica, sans-serif;
+	color: #666666;
+	line-height: 22px;
+	}
+	
+.navText, a.navText:link, a.navText:visited
+	{
+	display:block;
+	width:auto;
+	height:auto;
+	margin-top:1px;
+	text-decoration:none;
+	font-family:verdana, arial, sans-serif;
+	font-size:13px;
+	color:#FFFFFF;
+	line-height:25px;
+	overflow:hidden;
+	margin-left: 1px;
+	padding-left: 10px;
+}
+	
+.navText a{color:#fff;}	
+
+a.navText:hover {color:#fff; background:#764;}	
+
+a.navText:active {color:#fff; background:#c00;}	
+/*	font: bold 12px/16px Arial, Helvetica, sans-serif;
+	color: #003366;
+	text-decoration: none;
+	height: auto;
+	width: auto;
+	}*/
+
+table.upload td { padding: 2px 5px 2px 5px; vertical-align:bottom }
+table.upload td.dt-,   
+table.upload td.file- { white-space:nowrap; font-size: 80%; font-weight:bold; color:#000000 }
+table.upload td.dt-   { padding-right:0 }
+table.upload td.remove-   { padding-right:0 }
+table.upload td.size- { padding-right:0; text-align:right }
+table.upload td.desc- { font-size: 80%; color:#444444; width:100% }
+table.upload td.dt- .dt2-,
+table.upload td.remove- .remove2-,
+table.upload td.size- .size2- { font: 11px Tahoma; color:#666666;  }
+table.upload td.remove- A.remove2-:HOVER,
+table.upload td.remove- A.remove2-:ACTIVE { color:#ff0000 }
+
+.preview {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:red 2px solid;}
+.preview p {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
+.preview p span {background:#FFF; padding:0 1px;}
+
+.layout-box {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:#CCCCCC 1px solid;}
+.layout-box p {background: transparent; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
+.layout-box p span {background:#FFF; padding:0 1px;}
+
+.buttonsspacer{width:10px;height:1px;}
+
+/* WikiEdit Toolbar -------------------------------------- */
+ .toolbar tr { background: ButtonFace; }
+ .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
+  background: ButtonFace;
+  color: ButtonText;
+  border: 1px solid ButtonFace;
+  padding: 1px;  margin: 0px;
+  cursor: pointer; cursor: hand; 
+ }
+ .toolbar img{
+  width: 20px;
+  height: 20px;
+ }
+ .toolbar .btn-hover {
+  border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+ }
+ .toolbar .btn-active,  .toolbar .btn-pressed {
+  border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+ }
+ .toolbar .btn-pressed {
+  background: ButtonHighlight;
+ }
+ .toolbar .btn-separator {
+border-left:1px solid buttonshadow;
+border-right:1px solid buttonhighlight;
+height:18px;
+margin:3px;
+padding:0;
+width:0;
+}
+ .edname-w, .edname-r, .edname-s  
+            { font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
+ .edname-w  { background: #1E9905; }
+ .edname-r  { background: #2A45D0; } 
+ .edname-s  { background: #D08C2A; }
+
+
+/* The left navigation is based on a simple unordered list. */
+
+.leftNavColumn { /* for entire column. set left nav width here */
+	background-color:#e7ecce;
+	border-right: 1px solid #DBD9CA;
+	width: 145px;
+	font-size: 11px;
+	margin: 0;
+	padding: 0;
+}
+
+.leftNav {
+/* for part of left nav column that's the actual navigation */
+background: #e7ecce;
+display: block;
+margin-top: 0px;
+}
+
+ul.leftNav, .leftNav li, .leftNavColumn ul {
+	list-style-type: none;
+	display: inline;
+	padding: 0;
+	margin: 0;
+
+}
+
+.leftNav a {
+	color: #000000;
+	display: block;
+	border-bottom: 1px solid #cfcfcf;
+	border-top: 1px solid #fff;
+	text-decoration: none;
+	padding: 4px 4px 5px 12px;
+	font-weight: bold;
+}
+
+.leftNavActive { display: block; padding: 4px 4px 5px 12px;; 	border-bottom: 1px solid #cfcfcf;
+	border-top: 1px solid #fff; background-color: #FCFCFC; text-decoration: none; width: 100%; }
+
+.leftNav a:hover {
+	color: #FFFFFF;
+	background-color: #85a43c;
+	padding: 4px 4px 5px 10px;
+	border-left-width: 2px;
+	border-left-style: solid;
+	border-left-color: #8dc54c;
+}
+
+.leftNav a:active {
+	color: #FFFFFF;
+	background-color: #85a43c;
+	padding: 4px 4px 5px 10px;
+	border-right-width: 10px;
+	border-right-style: solid;
+	border-right-color: #FF8200;
+	border-left-width: 2px;
+	border-left-style: solid;
+	border-left-color: #8dc54c;
+}
+
+
+ul.leftNav { /* space at the bottom of the top left nav */
+	margin-bottom: 8px;
+}
+
+.leftNavItem { /* container for an item in the left nav, below the actual global navigation */
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+.leftNavItem h4 { /* the title of a left nav item */
+	color: #333;
+	font-weight:bold;
+	padding: 0px 8px 3px 12px;	
+}
+
+.leftNavSpacer { /* places space between nav items and store item */
+	height: 20px;
+}
+
+.leftNavColumn p {
+	margin: 3px 5px 3px 12px; 
+}
+
+/* CSS form formater */
+.cssform p {
+	width: 300px;
+	clear: left;
+	margin: 0;
+	padding: 5px 0 8px 0;
+	padding-left: 155px; /*width of left column containing the label elements*/
+	border-top: 1px dashed gray;
+	height: 1%;
+}
+.cssform label {
+	font-weight: bold;
+	float: left;
+	margin-left: -155px; /*width of left column*/
+	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+.cssform input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
+	width: 180px;
+}
+.cssform textarea {
+	width: 250px;
+	height: 150px;
+}
+.cssform span.site_count {
+	font-weight: normal;
+	float: left;
+	margin-left: -155px; /*width of left column*/
+	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+.BewareChangeLang{
+	border: 1px solid #ffee66;
+	width: 400px;
+	background-color: #ffffdd;
+	background-image: url(../../../images/warning.gif);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 10px 10px;
+	margin: 10px;
+	padding: 5px 5px 5px 40px;
+}
+
+/* cssform1 for actions */
+div#cssform1 {
+	width:50%;
+	padding:10px;
+	margin:0 auto;
+}
+div#cssform1 p {
+	clear: left;
+	margin: 0;
+	padding: 5px 0 8px 0;
+	padding-left: 20%; /*width of left column containing the label elements*/
+	border-top: 1px dashed gray;
+	height: 1%;
+}
+div#cssform1 label {
+	float: left;
+	margin-left: 0px; /*
+	margin-left: -155px; width of left column*/
+	width: 150px;/* width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+div#cssform1 input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
+	width: 180px;
+}
+div#cssform1 textarea {
+	width: 250px;
+	height: 150px;
+}
+div#cssform1 span.site_count {
+	font-weight: normal;
+	float: left;
+	margin-left: 0px; /*
+	margin-left: -155px; width of left column*/
+	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
