@@ -7,7 +7,7 @@ v2.2.2.
 
 */
 
-// TODO: for default use only red, yello, green, grey maybe blue .($this->object->GetConfigValue("allow_x11colors")==1?"x11_colors":"default_colors").
+// TODO: for default use only red, yello, green, grey maybe blue .($this->object->config["allow_x11colors"] == 1?"x11_colors":"default_colors").
 class WackoFormatter
 {
 	var $object;
@@ -174,11 +174,11 @@ class WackoFormatter
 
 		$this->LONGREGEXP =
 			"/(".
-			"<!--escaped-->.*?<!--escaped-->|".($this->object->GetConfigValue("allow_rawhtml") == 1
+			"<!--escaped-->.*?<!--escaped-->|".($this->object->config["allow_rawhtml"] == 1
 				? "\<\#.*?\#\>|"
 				: "").
 			"\(\?(\S+?)([ \t]+([^\n]+?))?\?\)|".
-			($this->object->GetConfigValue("disable_bracketslinks") == 1
+			($this->object->config["disable_bracketslinks"] == 1
 				? ""
 				: "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)|\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]|\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)|").
 			"\n[ \t]*>+[^\n]*|".
@@ -196,19 +196,19 @@ class WackoFormatter
 			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]|([0-9]{1,3}))[\.\)](\#[0-9]{1,3})?)?|".
 			"\b[[:alnum:]]+[:][".$object->language["ALPHANUM_P"]."\!\.][".$object->language["ALPHANUM_P"]."\-\_\.\+\&\=\#]+|".
 			"~([^ \t\n]+)|".
-			 ($this->object->GetConfigValue("disable_tikilinks") == 1
+			 ($this->object->config["disable_tikilinks"] == 1
 				? ""
 				: "\b(".$object->language["UPPER"].$object->language["LOWER"].$object->language["ALPHANUM"]."*\.".$object->language["ALPHA"].$object->language["ALPHANUM"]."+)\b|").
-			 ($this->object->GetConfigValue("disable_wikilinks") == 1
+			 ($this->object->config["disable_wikilinks"] == 1
 				? ""
 				: "(~?)(?<=[^\.".$object->language["ALPHANUM_P"]."]|^)(((\.\.|!)?\/)?".$object->language["UPPER"].$object->language["LOWER"]."+".$object->language["UPPERNUM"].$object->language["ALPHANUM"]."*)\b|").
-			 ($this->object->GetConfigValue("disable_npjlinks") == 1
+			 ($this->object->config["disable_npjlinks"] == 1
 				? ""
 				: "(~?)".$object->language["ALPHANUM"]."+\@".$object->language["ALPHA"]."*(?!".$object->language["ALPHANUM"]."*\.".$object->language["ALPHANUM"]."+)(\:".$object->language["ALPHANUM"]."*)?|".$object->language["ALPHANUM"]."+\:\:".$object->language["ALPHANUM"]."+|").
 			"\n)/sm";
 
 		$this->NOTLONGREGEXP =
-			"/(".($this->object->GetConfigValue("disable_formatters") == 1
+			"/(".($this->object->config["disable_formatters"] == 1
 				? ""
 				: "\%\%.*?\%\%|").
 			"~([^ \t\n]+)|".
@@ -382,7 +382,7 @@ class WackoFormatter
 		// escaped html
 		else if (preg_match("/^\<\#(.*)\#\>$/s", $thing, $matches))
 		{
-			if ($this->object->GetConfigValue("disable_safehtml"))
+			if ($this->object->config["disable_safehtml"])
 				return "<!--notypo-->".$matches[1]."<!--/notypo-->";
 			else
 				return "<!--notypo-->".$wacko->Format($matches[1], "safehtml")."<!--/notypo-->";
@@ -943,7 +943,7 @@ class WackoFormatter
 		}
 		// tikiwiki links
 		else if ((!$wacko->_formatter_noautolinks) &&
-				$wacko->GetConfigValue("disable_tikilinks")!= 1 &&
+				$wacko->config["disable_tikilinks"] != 1 &&
 				(preg_match("/^(".$wacko->language["UPPER"].$wacko->language["LOWER"].$wacko->language["ALPHANUM"]."*\.".$wacko->language["ALPHA"].$wacko->language["ALPHANUM"]."+)$/s", $thing, $matches)))
 		{
 			return $wacko->PreLink($thing);
