@@ -82,7 +82,7 @@ class Init
 		else
 			ob_start("ob_gzhandler");
 		
-		if (!isset($_REQUEST)) die("$_REQUEST[] not found. WackoWiki requires PHP 4.3.3 or higher!");
+		if (!isset($_REQUEST)) die('$_REQUEST[] not found. WackoWiki requires PHP 4.3.3 or higher!');
 		
 		set_magic_quotes_runtime(0);
 		
