@@ -217,7 +217,7 @@ class Wacko
 
 		setlocale(LC_CTYPE, $this->language["locale"]);
 
-		$this->language["locale"] = setlocale(LC_CTYPE,0);
+		$this->language["locale"] = setlocale(LC_CTYPE, 0);
 		$this->language["UPPER"]     = "[".$this->language["UPPER_P"]."]";
 		$this->language["UPPERNUM"]  = "[0-9".$this->language["UPPER_P"]."]";
 		$this->language["LOWER"]     = "[".$this->language["LOWER_P"]."]";
@@ -3631,6 +3631,148 @@ class Wacko
 				break;
 		}
 		return $error;
+	}
+
+	// pages listing/navigation for multipage lists.
+	// 		$total		= total elements in the list
+	// 		$perpage	= total elements on a page
+	// 		$name		= page number variable in $_GET
+	// 		$params		= $_GET parameters to be passed with the page link
+	// returns an array with 'text' (navigation) and 'offset' (offset value
+	// for SQL queries) elements.
+	function Pagination($total, $perpage = 100, $name = 'p', $params = '', $method = '', $tag = '')
+	{
+		$sep	= ', ';		// page links divider
+		$pages	= ceil($total / $perpage);
+		$page	= (	$_GET[$name] == true ?			// if page param = 'last' magic word,
+					(								// then open last page of the list
+						$_GET[$name] == 'last' ?
+						(
+							$pages > 0 ? $pages : 1
+						)
+						: (int)$_GET[$name]
+					)
+					: 1 );
+
+		$pagination['offset'] = $perpage * ($page - 1);
+
+		// display navigation if there are pages to navigate in
+		if ($pages > 1)
+		{
+			$pagination['text'] = $this->GetTranslation('ToThePage').': ';
+
+			// pages range links
+			if ($pages <= 10)	// not so many pages
+			{
+				for ($p=1; $p<=$pages; $p++)
+				{
+					if ($p != $page)
+						$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>'.( $p != $pages ? $sep : '' );
+					else	// don't make link for the current page
+						$pagination['text'] .= ' <strong>'.$p.'</strong>'.( $p != $pages ? $sep : '' );
+				}
+			}
+			else	// really many pages!
+			{
+				if ($page <= 4 || $page > ($pages - 4))	// current page is near the beginning or the end
+				{
+					// first pages
+					for ($p=1; $p<=5; $p++)
+					{
+						if ($p != $page)
+							$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>'.( $p != $pages ? $sep : '' );
+						else	// don't make link for the current page
+							$pagination['text'] .= ' <strong>'.$p.'</strong>'.( $p != $pages ? $sep : '' );
+					}
+
+					// middle skipped
+					$pagination['text'] .= ' ... ,';
+
+					// last pages
+					for ($p=($pages-4); $p<=$pages; $p++)
+					{
+						if ($p != $page)
+							$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>'.( $p != $pages ? $sep : '' );
+						else	// don't make link for the current page
+							$pagination['text'] .= ' <strong>'.$p.'</strong>'.( $p != $pages ? $sep : '' );
+					}
+				}
+				else	// current page is in the middle of the list
+				{
+					// first page
+					$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'=1'.( $params == true ? '&amp;'.$params : '' )).'">1</a>'.$sep.' ... '.$sep;
+
+					// middle pages
+					for ($p=($page-2); $p<=($page+2); $p++)
+					{
+						if ($p != $page)
+							$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>,';
+						else	// don't make link for the current page
+							$pagination['text'] .= ' <strong>'.$p.'</strong>'.$sep;
+					}
+
+					// last page
+					$pagination['text'] .= ' ... '.$sep.'<a href="'.$this->href($method, $tag, $name.'='.$pages.( $params == true ? '&amp;'.$params : '' )).'">'.$pages.'</a>';
+				}
+			}
+
+			// next page shortcut
+			if ($page >= $pages)
+			{
+				$pagination['text'] .= ' '.$this->GetTranslation('NextAcr');
+			}
+			else
+			{
+				$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.($page + 1).( $params == true ? '&amp;'.$params : '' )).'">'.$this->GetTranslation('NextAcr').'</a>';
+			}
+		}
+
+		return $pagination;
+	}
+
+	// log event into the system journal. $message may use wiki
+	// syntax, however if used before locale resources registration,
+	// will be saved in plain text only.
+	// $level denotes event priority with 1 = highest.
+	// event classes are:
+	//		1. critical	- admin action, object deletion, suspected
+	//					  hacking attempt
+	//		2. highest	- locking, acl change, unsuccessful user login
+	//		3. high		- page renaming/moving/splitting/merging,
+	//					  user password change/reminder, successful
+	//					  user login
+	//		4. medium	- page creation (settings change), poll action,
+	//					  file upload, pm sending, user registration and
+	//					  email activation, page ownership claim
+	//		5. low		- comment posting, user logout
+	//		6. lowest	- page edit, user settings update
+	//		7. debugging- everything, where logging is necessary
+	function Log($level, $message)
+	{
+		// check input
+		if (!is_numeric($level)) return false;
+		
+		// check event level: do we have to log it?
+		if ((int)$this->config['log_min_level'] === -1 ||
+		((int)$this->config['log_min_level'] !== 0 &&
+		$level > (int)$this->config['log_min_level']))
+		{
+			return true;
+		}
+		
+		$html = $this->config['allow_rawhtml'];
+		$this->config['allow_rawhtml'] = 0;
+		$message = ( $this->language ? $this->Format($message, 'wacko') : $message );
+		$user = $this->GetUserName();
+		$this->config['allow_rawhtml'] = $html;
+		
+		// current timestamp set automatically
+		return $this->Query(
+			"INSERT INTO {$this->config['table_prefix']}log SET ".
+				"level		= '".quote($level)."', ".
+				"user		= '".quote( $user ? $user : GUEST )."', ".
+				"ip			= '".quote($this->GetUserIP())."', ".
+				"message	= '".quote($message)."'");
 	}
 }
 
