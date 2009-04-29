@@ -32,6 +32,7 @@ class Wacko
 	var $wantedCache = null;
 	var $pageCache = null;
 	var $_formatter_noautolinks = null;
+	var $numerate_links	= null;
 	var $post_wacko_action = null;
 	var $_userhost = null;
 	var $paragrafica_styles = array(
