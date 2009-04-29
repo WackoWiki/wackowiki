@@ -148,7 +148,7 @@ class Wacko
 	function GetPageLastWriter() { return $this->page["user"]; }
 	function GetMethod() { return $this->method; }
 	function GetConfigValue($name) { return isset( $this->config[$name] ) ? $this->config[$name] : ''; }
-	function GetWackoName() { return $this->GetConfigValue("wacko_name"); }
+	function GetWackoName() { return $this->config["wacko_name"]; }
 	function GetWakkaVersion() { return $this->VERSION; }
 	function GetWackoVersion() { return $this->WVERSION; }
 
@@ -194,7 +194,7 @@ class Wacko
 		closedir($handle);
 		sort($themelist, SORT_STRING);
 
-		if ($allow = $this->GetConfigValue("allow_themes"))
+		if ($allow = $this->config["allow_themes"])
 		{
 			$ath = explode(",", $allow);
 
@@ -274,7 +274,7 @@ class Wacko
 
 	function LoadAllLanguages()
 	{
-		if (!$this->GetConfigValue("multilanguage")) return;
+		if (!$this->config["multilanguage"]) return;
 
 		$langs = $this->AvailableLanguages();
 		foreach ($langs as $lang)
@@ -306,7 +306,7 @@ class Wacko
 
 	function UserAgentLanguage()
 	{
-		if ($this->GetConfigValue("multilanguage"))
+		if ($this->config["multilanguage"])
 		{
 			if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
 			{
@@ -316,12 +316,12 @@ class Wacko
 				if(!in_array($this->userlang, $this->AvailableLanguages()))
 				{
 					// The HTTP_ACCEPT_LANGUAGE language doesn't have any language files so use the admin set language instead
-					$this->userlang = $this->GetConfigValue("language");
+					$this->userlang = $this->config["language"];
 				}
 			}
 			else
 			{
-				$this->userlang = $this->GetConfigValue("language");
+				$this->userlang = $this->config["language"];
 			}
 		}
 		else if (!$lang) $this->userlang = $lang = $this->config["language"];
@@ -331,7 +331,7 @@ class Wacko
 
 	function GetTranslation($name, $lang = "", $dounicode = true)
 	{
-		if (!$this->GetConfigValue("multilanguage"))
+		if (!$this->config["multilanguage"])
 			return $this->resource[$name];
 
 		if (!$lang && $this->userlang != $this->pagelang)
@@ -391,7 +391,7 @@ class Wacko
 
 	function DoUnicodeEntities($string, $lang)
 	{
-		if (!$this->GetConfigValue("multilanguage")) return $string;
+		if (!$this->config["multilanguage"]) return $string;
 
 		$_lang = $this->DetermineLang();
 
@@ -504,7 +504,7 @@ class Wacko
 
 		$_lang = NULL;
 
-		if (!$this->GetConfigValue("multilanguage")) $donotload = 1;
+		if (!$this->config["multilanguage"]) $donotload = 1;
 
 		if (!$donotload)
 		{
@@ -515,7 +515,7 @@ class Wacko
 				if ($page["lang"])
 					$lang = $page["lang"];
 				else
-					$lang = $this->GetConfigValue("language");
+					$lang = $this->config["language"];
 
 				$this->SetLanguage($lang);
 			}
@@ -564,7 +564,7 @@ class Wacko
 		if ($this->page["keywords"])
 			return $this->page["keywords"];
 		else
-			return $this->GetConfigValue("meta_keywords");
+			return $this->config["meta_keywords"];
 	}
 
 	function GetDescription()
@@ -572,7 +572,7 @@ class Wacko
 		if ($this->page["description"])
 			return $this->page["description"];
 		else
-			return $this->GetConfigValue("meta_description");
+			return $this->config["meta_description"];
 	}
 
 	function LoadPageById($id)
@@ -841,7 +841,7 @@ class Wacko
 		else if ($_REQUEST["add"])
 			$this->pagelang = $this->userlang;
 		else
-			$this->pagelang = $this->GetConfigValue("language");
+			$this->pagelang = $this->config["language"];
 	}
 
 	// STANDARD QUERIES
@@ -1014,10 +1014,10 @@ class Wacko
 	{
 		if (!$email) return;
 
-		$headers = "From: =?". $this->GetCharset() ."?B?". base64_encode($this->GetConfigValue("wacko_name")) ."?= <".$this->GetConfigValue("admin_email").">\r\n";
+		$headers = "From: =?". $this->GetCharset() ."?B?". base64_encode($this->config["wacko_name"]) ."?= <".$this->config["admin_email"].">\r\n";
 		$headers .= "X-Mailer: PHP/".phpversion()."\r\n"; //mailer
 		$headers .= "X-Priority: 3\r\n"; //1 UrgentMessage, 3 Normal
-		$headers .= "X-Wacko: ".$this->GetConfigValue("base_url")."\r\n";
+		$headers .= "X-Wacko: ".$this->config["base_url"]."\r\n";
 		$headers .= "Content-Type: text/html; charset=".$this->GetCharset()."\r\n";
 		$subject =  "=?".$this->GetCharset()."?B?" . base64_encode($subject) . "?=";
 		@mail($email, $subject, "<html><head></head><body>".$message."</body></html>", $headers);
@@ -1040,7 +1040,7 @@ class Wacko
 		 */
 		$this->spam = file("antispam.conf", 1);
 
-		if ($this->GetConfigValue("spam_filter") && is_array($this->spam))
+		if ($this->config["spam_filter"] && is_array($this->spam))
 		foreach ($this->spam as $spam)
 		{
 			if (strpos($body, trim($spam))!== false) return 'Error: Identified Potential Spam: '.$spam;
@@ -1056,7 +1056,7 @@ class Wacko
 		if (!$this->NpjTranslit($tag)) return;
 
 		// cache handling
-		if ($this->GetConfigValue("cache"))
+		if ($this->config["cache"])
 		{
 			if ($comment_on)
 			{
@@ -1085,12 +1085,12 @@ class Wacko
 					$lang = $this->userlang;
 
 				if (!$lang)
-					$lang = $this->GetConfigValue["language"];
+					$lang = $this->config["language"];
 
 				$this->SetLanguage($lang);
 
 				$body_r = $this->Format($body, "wacko");
-				if ($this->GetConfigValue("paragrafica") && !$comment_on)
+				if ($this->config["paragrafica"] && !$comment_on)
 				{
 					$body_r = $this->Format($body_r, "paragrafica");
 					$body_toc = $this->body_toc;
@@ -1127,9 +1127,9 @@ class Wacko
             }
 				else
 				{
-					$write_acl = $this->GetConfigValue("default_write_acl");
-					$read_acl  = $this->GetConfigValue("default_read_acl");
-					$comment_acl = $this->GetConfigValue("default_comment_acl");
+					$write_acl = $this->config["default_write_acl"];
+					$read_acl  = $this->config["default_read_acl"];
+					$comment_acl = $this->config["default_comment_acl"];
 				}
 
 				// current user is owner; if user is logged in! otherwise, no owner.
@@ -1157,7 +1157,7 @@ class Wacko
 				// $this->SaveAcl($tag, "comment", ($comment_on ? "" : $comment_acl));
 				$this->SaveAcl($tag, "comment", $comment_acl);
 				// set watch
-				if ($this->GetUser() && !$this->GetConfigValue("disable_autosubscribe"))
+				if ($this->GetUser() && !$this->config["disable_autosubscribe"])
 					$this->SetWatch($this->GetUserName(), $this->GetPageTag());
 
 				if ($comment_on)
@@ -1198,7 +1198,7 @@ class Wacko
 											$this->GetTranslation("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$comment_on,"")."\">".$this->Href("",$comment_on,"")."</a><br /><hr />".
 											$this->Format($body_r, "post_wacko")."<hr /><br />".
 											$this->GetTranslation("MailGoodbye",$lang)."\n".
-											$this->GetConfigValue("wacko_name")."\n".
+											$this->config["wacko_name"]."\n".
 											$this->config["base_url"];
 
 								$this->SendMail($User["email"], $subject, $message);
@@ -1213,7 +1213,7 @@ class Wacko
 			{
 				$this->SetLanguage($this->pagelang);
 				$body_r = $this->Format($body, "wacko");
-				if ($this->GetConfigValue("paragrafica"))
+				if ($this->config["paragrafica"])
 				{
 					$body_r = $this->Format($body_r, "paragrafica");
 					$body_toc = $this->body_toc;
@@ -1299,7 +1299,7 @@ class Wacko
 											$this->GetTranslation("SomeoneChangedThisPage",$lang)."\n". //* <a href=\"".$this->Href("",$tag,"")."\">".$this->Href("",$tag,"")."</a><br />";
 											"<hr />".$diff."<hr />".
 											"<br />".$this->GetTranslation("MailGoodbye",$lang)."\n".
-											$this->GetConfigValue("wacko_name")."\n".
+											$this->config["wacko_name"]."\n".
 											$this->config["base_url"];
 
 								$this->SendMail($User["email"], $subject, $message);
@@ -1528,7 +1528,7 @@ class Wacko
 
 		if (preg_match("/^[\.\-".$this->language["ALPHANUM_P"]."]+\.(gif|jpg|jpe|jpeg|png)$/i", $text))
 		{
-			$imlink = $this->GetConfigValue("base_url")."/images/".$text;
+			$imlink = $this->config["base_url"]."/images/".$text;
 		}
 		else if (preg_match("/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i", preg_replace("/<\/?nobr>/", "" ,$text)))
 		{
@@ -1553,7 +1553,7 @@ class Wacko
 		{
 			// image
 			$text = preg_replace("/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/", "" ,$text);
-			return "<img src=\"".$this->GetConfigValue("base_url")."/images/".$tag."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." />";
+			return "<img src=\"".$this->config["base_url"]."/images/".$tag."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." />";
 		}
 		else if (preg_match("/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i", $tag))
 		{
@@ -1619,14 +1619,14 @@ class Wacko
 				if (is_array($desc))
 				{
 					$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
-					$url = $this->GetConfigValue("base_url").$this->config["upload_path"]."/".$thing;
+					$url = $this->config["base_url"].$this->config["upload_path"]."/".$thing;
 					$icon = $this->GetTranslation("fileicon");
 					$imlink = false;
 					$tpl = "localfile";
 					if ($desc["picture_w"] && !$noimg)
 					{
 						if (!$text) $text = $title;
-						return "<img src=\"".$this->GetConfigValue("base_url").$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
+						return "<img src=\"".$this->config["base_url"].$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
 					}
 				}
 			}
@@ -1638,14 +1638,14 @@ class Wacko
 				if (is_array($desc))
 				{
 					$title = $desc["description"]." (".ceil($desc["filesize"] / 1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
-					$url = $this->GetConfigValue("base_url").$this->config["upload_path"].$thing;
+					$url = $this->config["base_url"].$this->config["upload_path"].$thing;
 					$icon = $this->GetTranslation("fileicon");
 					$imlink = false;
 					$tpl = "localfile";
 					if ($desc["picture_w"] && !$noimg)
 					{
 						if (!$text) $text = $title;
-						return "<img src=\"".$this->GetConfigValue("base_url").$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
+						return "<img src=\"".$this->config["base_url"].$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
 					}
 				}
 				else //404
@@ -1712,7 +1712,7 @@ class Wacko
 			}
 			//forgot 'bout 403
 		}
-		else if ($this->GetConfigValue("disable_tikilinks") != 1 && preg_match("/^(".$this->language["UPPER"].$this->language["LOWER"].$this->language["ALPHANUM"]."*)\.(".$this->language["ALPHA"].$this->language["ALPHANUM"]."+)$/s", $tag, $matches))
+		else if ($this->config["disable_tikilinks"] != 1 && preg_match("/^(".$this->language["UPPER"].$this->language["LOWER"].$this->language["ALPHANUM"]."*)\.(".$this->language["ALPHA"].$this->language["ALPHANUM"]."+)$/s", $tag, $matches))
 		{
 			// it`s a Tiki link!
 			$tag = "/".$matches[1]."/".$matches[2];
@@ -1740,7 +1740,7 @@ class Wacko
 			$tag = $otag = $matches[1];
 			$untag = $unwtag = $this->UnwrapLink($tag);
 
-			$regex_handlers = '/^(.*?)\/('.$this->GetConfigValue("standard_handlers").')\/(.*)$/i';
+			$regex_handlers = '/^(.*?)\/('.$this->config["standard_handlers"].')\/(.*)$/i';
 			$ptag = $this->NpjTranslit($unwtag);
 			$handler = null;
 
@@ -1788,7 +1788,7 @@ class Wacko
 				if ($thispage["lang"])
 					$lang = $thispage["lang"];
 				else
-					$lang = $this->GetConfigValue("language");
+					$lang = $this->config["language"];
 
 				$this->SetLanguage($lang);
 				$supertag = $this->NpjTranslit($tag);
@@ -1901,8 +1901,8 @@ class Wacko
 				}
 			}
 
-			$icon = str_replace("{theme}", $this->GetConfigValue("theme_url"), $icon);
-			$accicon = str_replace("{theme}", $this->GetConfigValue("theme_url"), $accicon);
+			$icon = str_replace("{theme}", $this->config["theme_url"], $icon);
+			$accicon = str_replace("{theme}", $this->config["theme_url"], $accicon);
 			$res = $this->GetTranslation("tpl.".$tpl);
 			$text = trim($text);
 
@@ -1927,9 +1927,9 @@ class Wacko
 				if (!$text)
 					$text = htmlspecialchars($tag, ENT_NOQUOTES);
 
-				if ($this->GetConfigValue("youarehere_text"))
+				if ($this->config["youarehere_text"])
 					if ($this->NpjTranslit($tag) == $this->NpjTranslit($this->context[$this->current_context]))
-						$res = str_replace("####", $text, $this->GetConfigValue("youarehere_text"));
+						$res = str_replace("####", $text, $this->config["youarehere_text"]);
 
 				// numerated wiki-links. initialize property as an array to make it work
 				if (is_array($this->numerate_links) && $pagelink != $text && $title != $this->GetTranslation("CreatePage"))
@@ -1954,7 +1954,7 @@ class Wacko
 			if ($imlink)
 				$text = "<img src=\"$imlink\" border=\"0\" title=\"$text\" />";
 
-			$icon = str_replace("{theme}", $this->GetConfigValue("theme_url"), $icon);
+			$icon = str_replace("{theme}", $this->config["theme_url"], $icon);
 			$res = $this->GetTranslation("tpl.".$tpl);
 
 			if ($res)
@@ -1990,7 +1990,7 @@ class Wacko
 	function AddDatetime($tag)
 	{
 		if ($user = $this->GetUser()) $show = $user["showdatetime"];
-		if (!$show) $show=$this->GetConfigValue("show_datetime");
+		if (!$show) $show=$this->config["show_datetime"];
 		if (!$show) $show = "Y";
 		if ($show != "N" && $show != "0")
 		{
@@ -2019,7 +2019,7 @@ class Wacko
 
 		$show = "Y";
 		if ($user = $this->GetUser()) $show = $user["show_spaces"];
-		if (!$show) $show = $this->GetConfigValue("show_spaces");
+		if (!$show) $show = $this->config["show_spaces"];
 		if ($show != "N") {
 			$text = preg_replace("/(".$this->language["ALPHANUM"].")(".$this->language["UPPERNUM"].")/","\\1&nbsp;\\2",$text);
 			$text = preg_replace("/(".$this->language["UPPERNUM"].")(".$this->language["UPPERNUM"].")/","\\1&nbsp;\\2",$text);
@@ -2170,7 +2170,7 @@ class Wacko
 			$referrer = isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '';
 
 		// check if it's coming from another site
-		if ($referrer && !preg_match("/^".preg_quote($this->GetConfigValue("base_url"), "/")."/", $referrer))
+		if ($referrer && !preg_match("/^".preg_quote($this->config["base_url"], "/")."/", $referrer))
 		{
 			$this->Query(
 				"INSERT INTO ".$this->config["table_prefix"]."referrers SET ".
@@ -2224,13 +2224,13 @@ class Wacko
 
 	function Header($mod = "")
 	{
-		$result = $this->IncludeBuffered("header".$mod.".php", "Theme is corrupt: ".$this->GetConfigValue("theme"), "", "themes/".$this->GetConfigValue("theme")."/appearance");
+		$result = $this->IncludeBuffered("header".$mod.".php", "Theme is corrupt: ".$this->config["theme"], "", "themes/".$this->config["theme"]."/appearance");
 		return $result;
 	}
 
 	function Footer($mod = "")
 	{
-		$result = $this->IncludeBuffered("footer".$mod.".php", "Theme is corrupt: ".$this->GetConfigValue("theme"), "", "themes/".$this->GetConfigValue("theme")."/appearance");
+		$result = $this->IncludeBuffered("footer".$mod.".php", "Theme is corrupt: ".$this->config["theme"], "", "themes/".$this->config["theme"]."/appearance");
 		return $result;
 	}
 
@@ -2285,7 +2285,7 @@ class Wacko
 	{
 		$text = $this->IncludeBuffered("formatters/".$formatter.".php", "<i>Formatter \"$formatter\" not found</i>", compact("text", "options"));
 
-		if ($formatter == "wacko" && $this->GetConfigValue("default_typografica"))
+		if ($formatter == "wacko" && $this->config["default_typografica"])
 			$text = $this->IncludeBuffered("formatters/typografica.php", "<i>Formatter \"$formatter\" not found</i>", compact("text"));
 
 		return $text;
@@ -2323,7 +2323,7 @@ class Wacko
 
 	function _gethostbyaddr($ip)
 	{
-		if ($this->GetConfigValue("allow_gethostbyaddr"))
+		if ($this->config["allow_gethostbyaddr"])
 		{
 			return gethostbyaddr($ip);
 		}
@@ -2381,7 +2381,7 @@ class Wacko
 	// Returns boolean indicating if the current user is allowed to see comments at all
 	function UserAllowedComments()
 	{
-		return $this->GetConfigValue("hide_comments") != 1 && ($this->GetConfigValue("hide_comments") != 2 || $this->GetUser());
+		return $this->config["hide_comments"] != 1 && ($this->config["hide_comments"] != 2 || $this->GetUser());
 	}
 
 	function DecomposeOptions($more)
@@ -2577,7 +2577,7 @@ class Wacko
                            "supertag" => $supertag,
                            "page_tag" => $tag,
                            "privilege" => $privilege,
-                           "list" => $this->GetConfigValue("default_".$privilege."_acl"),
+                           "list" => $this->config["default_".$privilege."_acl"],
                            "time" => date("YmdHis"),
                            "default" => 1
                         );
@@ -2722,7 +2722,7 @@ class Wacko
 	// XML
 	function WriteFile($name, $body)
 	{
-		$filename = "xml/".$name."_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml";
+		$filename = "xml/".$name."_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"])).".xml";
 		
 		$fp = fopen($filename, "w");
 		if ($fp)
@@ -2741,14 +2741,14 @@ class Wacko
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->GetCharset()."\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
-		$xml .= "<title>".$this->GetConfigValue("wacko_name").$this->GetTranslation("RecentChangesTitleXML")."</title>\n";
-		$xml .= "<link>".$this->GetConfigValue("base_url")."</link>\n";
-		$xml .= "<description>".$this->GetTranslation("RecentChangesXML").$this->GetConfigValue("wacko_name")." </description>\n";
+		$xml .= "<title>".$this->config["wacko_name"].$this->GetTranslation("RecentChangesTitleXML")."</title>\n";
+		$xml .= "<link>".$this->config["base_url"]."</link>\n";
+		$xml .= "<description>".$this->GetTranslation("RecentChangesXML").$this->config["wacko_name"]." </description>\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->GetConfigValue("wacko_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->GetConfigValue("base_url")."</link>\n";
-		$xml .= "<url>".$this->GetConfigValue("base_url")."files/wacko4.gif"."</url>\n";
+		$xml .= "<title>".$this->config["wacko_name"].$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<link>".$this->config["base_url"]."</link>\n";
+		$xml .= "<url>".$this->config["base_url"]."files/wacko4.gif"."</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
@@ -2786,17 +2786,17 @@ class Wacko
 		$name = "recentcomment";
 		
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->GetCharset()."\"?>\n";
-		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->GetConfigValue("theme_url")."css/wacko.css\" media=\"screen\"?>\n";
+		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->config["theme_url"]."css/wacko.css\" media=\"screen\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
-		$xml .= "<title>".$this->GetConfigValue("wacko_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->GetConfigValue("base_url")."</link>\n";
-		$xml .= "<description>".$this->GetTranslation("RecentCommentsXML").$this->GetConfigValue("wacko_name")." </description>\n";
+		$xml .= "<title>".$this->config["wacko_name"].$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<link>".$this->config["base_url"]."</link>\n";
+		$xml .= "<description>".$this->GetTranslation("RecentCommentsXML").$this->config["wacko_name"]." </description>\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->GetConfigValue("wacko_name").$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->GetConfigValue("base_url")."</link>\n";
-		$xml .= "<url>".$this->GetConfigValue("base_url")."files/wacko4.gif"."</url>\n";
+		$xml .= "<title>".$this->config["wacko_name"].$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<link>".$this->config["base_url"]."</link>\n";
+		$xml .= "<url>".$this->config["base_url"]."files/wacko4.gif"."</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
@@ -3050,7 +3050,7 @@ class Wacko
 	function Maintenance()
 	{
 		// purge referrers (once a day)
-		if ($days = $this->GetConfigValue("referrers_purge_time"))
+		if ($days = $this->config["referrers_purge_time"])
 		{
 			$this->Query(
 				"DELETE FROM ".$this->config["table_prefix"]."referrers ".
@@ -3058,7 +3058,7 @@ class Wacko
 		}
 
 		// purge old page revisions
-		if ($days = $this->GetConfigValue("pages_purge_time"))
+		if ($days = $this->config["pages_purge_time"])
 		{
 			$this->Query(
 				"DELETE FROM ".$this->config["table_prefix"]."revisions ".
@@ -3115,7 +3115,7 @@ class Wacko
 		{
 			if($user["lang"] == "")
 			{
-				$this->userlang = $this->GetConfigValue("language");
+				$this->userlang = $this->config["language"];
 			}
 			else
 			{
@@ -3124,15 +3124,15 @@ class Wacko
 		}
 		$this->UserAgentLanguage();
 
-		if($this->GetConfigValue("debug") >= 2)
+		if($this->config["debug"] >= 2)
 		{
-			echo '<span class="debug">Multilanguage: '.$this->GetConfigValue("multilanguage").'<br/>';
+			echo '<span class="debug">Multilanguage: '.$this->config["multilanguage"].'<br/>';
 			echo 'HTTP_ACCEPT_LANGUAGE set: '.isset($_SERVER['HTTP_ACCEPT_LANGUAGE']).'<br />';
 			echo 'HTTP_ACCEPT_LANGUAGE value: '.$_SERVER['HTTP_ACCEPT_LANGUAGE'].'<br />';
 			echo 'HTTP_ACCEPT_LANGUAGE chopped value: '.strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2)).'<br />';
 			echo 'User language set: '.isset($user["lang"]).'<br />';
 			echo 'User language: '.$user["lang"].'<br />';
-			echo 'Config language: '.$this->GetConfigValue("language").'<br />';
+			echo 'Config language: '.$this->config["language"].'<br />';
 			echo 'Current language: '.$this->userlang.'<br />';
 			echo '</span>';
 		}
@@ -3143,8 +3143,8 @@ class Wacko
 			$this->config["theme_url"]=$this->config["base_url"]."themes/".$this->config["theme"]."/";
 		}
 
-		if (!$this->GetConfigValue("multilanguage"))
-			$this->SetLanguage($this->GetConfigValue("language"));
+		if (!$this->config["multilanguage"])
+			$this->SetLanguage($this->config["language"]);
 
 		// registering resources
 		$this->LoadAllLanguages();
@@ -3183,7 +3183,7 @@ class Wacko
 
 		$page = $this->LoadPage($this->tag, $time);
 
-		if ($this->GetConfigValue("outlook_workaround") && !$page)
+		if ($this->config["outlook_workaround"] && !$page)
 		{
 			$page = $this->LoadPage($this->supertag."'", $time);
 		}
