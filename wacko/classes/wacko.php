@@ -36,25 +36,25 @@ class Wacko
 	var $_userhost = null;
 	var $paragrafica_styles = array(
 		"before"	=> array(
-						"_before"=>"",
-						"_after"=>"",
-						"before"=> "<span class='pmark'>[##]</span><br />",
-						"after"=>"" ),
+						"_before" => "",
+						"_after" => "",
+						"before" => "<span class='pmark'>[##]</span><br />",
+						"after" => ""),
 		"after"		=> array(
-						"_before"=>"",
-						"_after"=>"",
-						"before"=> "",
-						"after"=>" <span class='pmark'>[##]</span>" ),
+						"_before" => "",
+						"_after" => "",
+						"before" => "",
+						"after" => "<span class='pmark'>[##]</span>"),
 		"right"		=> array(
-						"_before"=>"<div class='pright'><div class='p-'>&nbsp;<span class='pmark'>[##]</span></div><div class='pbody-'>",
-						"_after"=>"</div></div>",
-						"before"=> "",
-						"after"=>"" ),
+						"_before" => "<div class='pright'><div class='p-'>&nbsp;<span class='pmark'>[##]</span></div><div class='pbody-'>",
+						"_after" => "</div></div>",
+						"before" => "",
+						"after" => ""),
 		"left"		=> array(
-						"_before"=>"<div class='pleft'><div class='p-'><span class='pmark'>[##]</span>&nbsp;</div><div class='pbody-'>",
-						"_after"=>"</div></div>",
-						"before"=> "",
-						"after"=>"" ),
+						"_before" => "<div class='pleft'><div class='p-'><span class='pmark'>[##]</span>&nbsp;</div><div class='pbody-'>",
+						"_after" => "</div></div>",
+						"before" => "",
+						"after" => ""),
 	);
 	var $paragrafica_patches = array(
 		"before" => array("before"),
