@@ -51,7 +51,7 @@ $alter_pages_r3_10 = "ALTER TABLE ".$config["table_prefix"]."pages ADD descripti
 $alter_pages_r3_11 = "ALTER TABLE ".$config["table_prefix"]."pages ADD keywords varchar(250) BINARY NOT NULL default ''";
 $alter_pages_r3_12 = "ALTER TABLE ".$config["table_prefix"]."pages ADD body_toc text NOT NULL default '' AFTER body_r";
 $alter_pages_r4_2 = "ALTER TABLE ".$config["table_prefix"]."pages MODIFY COLUMN tag VARCHAR(250) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
-$alter_pages_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."pages ADD created datetime NOT NULL default '0000-00-00 00:00:00' AFTER supertag, ADD INDEX(idx_created)";
+$alter_pages_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."pages ADD created datetime NOT NULL default '0000-00-00 00:00:00' AFTER supertag, ADD INDEX idx_created (created)";
 $alter_pages_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."pages MODIFY COLUMN body MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 $alter_pages_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."pages MODIFY COLUMN body_r MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 
