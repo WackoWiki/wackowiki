@@ -11,7 +11,7 @@ function InsertPage($tag, $body, $lng, $rights = "Admins", $critical = false)
 	global $config_global, $dblink_global, $lang_global;
 
 	$page_select = "SELECT * FROM ".$config_global["table_prefix"]."pages WHERE tag='".$tag."'";
-	$page_insert = "INSERT INTO ".$config_global["table_prefix"]."pages (tag, supertag, body, user, owner, time, latest, lang) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$body."', 'WackoInstaller', '".$config_global["admin_name"]."', now(), 'Y', '".$lng."')";
+	$page_insert = "INSERT INTO ".$config_global["table_prefix"]."pages (tag, supertag, body, user, owner, created, time, latest, lang) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$body."', 'WackoInstaller', '".$config_global["admin_name"]."', NOW(), NOW(), 'Y', '".$lng."')";
 	$perm_read_insert = "INSERT INTO ".$config_global["table_prefix"]."acls (page_tag, supertag, privilege, list) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', 'read', '*')";
 	$perm_write_insert = "INSERT INTO ".$config_global["table_prefix"]."acls (page_tag, supertag, privilege, list) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', 'write', '".$rights."')";
 	$perm_comment_insert = "INSERT INTO ".$config_global["table_prefix"]."acls (page_tag, supertag, privilege, list) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', 'comment', '$')";
