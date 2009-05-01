@@ -7,6 +7,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
                   "id serial,".
                   "tag character varying(250) NOT NULL DEFAULT '',".
                   "supertag character varying(250) NOT NULL DEFAULT '',".
+				  "\"created\" timestamp without time zone NOT NULL DEFAULT now(),".
                   "\"time\" timestamp without time zone NOT NULL DEFAULT now(),".
                   "body text NOT NULL,".
                   "body_r text NOT NULL,".

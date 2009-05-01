@@ -16,7 +16,7 @@ class Wacko
 	var $WVERSION; //Wacko version
 	var $context = array("");
 	var $current_context = 0;
-	var $pages_meta = "id, tag, time, owner, user, latest, handler, comment_on,
+	var $pages_meta = "id, tag, created, time, owner, user, latest, handler, comment_on,
 						super_comment_on, supertag, lang, keywords, description";
 	var $first_inclusion = array(); // for backlinks
 	var $optionSplitter = "\n"; // if you change this two symbols, settings for all users will be lost.
@@ -1102,7 +1102,7 @@ class Wacko
 				{
 					$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $this->context[$this->current_context] );
 					$write_acl = $this->LoadAcl($root, "write");
-					while ($write_acl["default"]==1)
+					while ($write_acl["default"] == 1)
 					{
 						$_root = $root;
 						$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $root );
@@ -1140,6 +1140,7 @@ class Wacko
 					"INSERT INTO ".$this->config["table_prefix"]."pages SET ".
 						($comment_on ? "comment_on = '".quote($this->dblink, $comment_on)."', " : "").
 						($comment_on ? "super_comment_on = '".quote($this->dblink, $this->NpjTranslit($comment_on))."', " : "").
+						"created = NOW(), ".
 						"time = NOW(), ".
 						"owner = '".quote($this->dblink, $owner)."', ".
 						"user = '".quote($this->dblink, $user)."', ".
