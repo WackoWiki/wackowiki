@@ -811,20 +811,6 @@ class Wacko
 				//       $exists[] = $read_acls[$i]["tag"];
 			}
 		}
-
-		/*
-		 $notexists = @array_values(@array_diff($pages, $exists));
-		 for ($i=0; $i<count($notexists); $i++)
-		 {
-		 $acl = array("supertag" => $notexists[$i], "page_tag" => $notexists[$i], "privilege" => "read", "list" => "*", "time" => date("YmdHis"));
-		 $this->CacheACL($notexists[$i], "read", 1, $acl);
-		 }
-		 */
-
-		$ddd = $this->GetMicroTime();
-		$this->queryLog[] = array(
-			"query"   => "<b>end caching links</b>",
-			"time"    => $this->GetTranslation("MeasuredTime").": ".(number_format(($ddd-$this->timer),3))." s");
 	}
 
 	function SetPage($page)
@@ -891,7 +877,7 @@ class Wacko
 			" ORDER BY tag");
 	}
 
-	function LoadRecentlyChanged($limit = 70, $for = "", $from = "")
+	function LoadRecentlyChanged($limit = 100, $for = "", $from = "")
 	{
 		$limit = (int)$limit;
 

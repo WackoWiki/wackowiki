@@ -138,7 +138,7 @@ class Cache
 				"FROM ".$this->wacko->config["table_prefix"]."cache ".
 				"WHERE name ='".quote($this->dblink, md5($page))."'");
 
-			$this->Log("CacheInvalidate COUNT params=".count($params));
+			$this->Log("CacheInvalidate count params=".count($params));
 
 			foreach ($params as $param)
 			{
