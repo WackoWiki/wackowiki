@@ -51,8 +51,16 @@ img {
 	border-width: 0px;
 	vertical-align: middle;
 	}
-
-
+.error {
+  color: #CC3333; font-weight: bold;
+}
+.info {
+	background: #F4FBFF;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+	border:1px solid #D5D9E6;
+	color: #CC3333; font-weight: bold;
+}
 .time{ font-family: Tahoma, Arial, Verdana; color: #cccccc; font-size: 9px;}
 .debug { font-size: 11px; color: #888888;}
 
@@ -72,10 +80,6 @@ img {
 .print {
   font-family: Verdana;
   font-size: 12px;
-}
-
-.error {
-  color: #CC3333; font-weight: bold;
 }
 
 .header {
@@ -519,4 +523,3 @@ position:relative;
 }
 
 #login form {display:inline;}
-

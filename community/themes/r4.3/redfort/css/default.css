@@ -66,8 +66,17 @@ A:VISITED {
 .menu-top A:VISITED {
   color: #EEEEEE;
 }
-
-
+.error {
+	color: #CC3333;
+	font-weight: bold;
+}
+.info {
+	background: #F4FBFF;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+	border:1px solid #D5D9E6;
+	color: #CC3333; font-weight: bold;
+}
 .time{ font-family: Tahoma, Arial, Verdana; color: #cccccc; font-size: 9px;}
 
 
@@ -77,11 +86,6 @@ A:VISITED {
 .print {
   font-family: Verdana;
   font-size: 12px;
-}
-
-.error {
-	color: #CC3333;
-	font-weight: bold;
 }
 
 .debug {
