@@ -85,6 +85,7 @@ $alter_revisions_r3_3 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD su
 $alter_revisions_r3_4 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD lang VARCHAR(10) NOT NULL";
 $alter_revisions_r3_5 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD description VARCHAR(250) NOT NULL default ''";
 $alter_revisions_r3_6 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD keywords VARCHAR(250) BINARY NOT NULL default ''";
+$alter_revisions_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD created datetime NOT NULL default '0000-00-00 00:00:00' AFTER supertag";
 $alter_revisions_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."revisions MODIFY COLUMN body MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 $alter_revisions_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."revisions MODIFY COLUMN body_r MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 
