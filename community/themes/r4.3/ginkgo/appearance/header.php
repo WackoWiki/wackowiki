@@ -4,9 +4,6 @@ Ginko theme.
 Common header file.
 */
 
-// Wacko can show message (by javascript) 
-  $message = $this->GetMessage();
-
 // HTTP header with right Charset settings
   header("Content-Type: text/html; charset=".$this->GetCharset());
 ?>
@@ -79,10 +76,8 @@ else if($this->HasAccess("write"))
 //   * WikiEdit
 //   * Doubleclick editing
 //   * Smooth scrolling
-// Also, here we show message (see beginning of this file)
-
 ?>
-<body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
+<body onload="all_init();">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="378" valign="bottom" style="white-space: nowrap;"><span class="main"><a href="<?php echo $this->GetConfigValue("root_url")?>"class="main"><?php echo $this->config["wacko_name"] ?></a></span></td>
@@ -201,3 +196,7 @@ echo "</div>";
       </tr>
     </table></td>
   <td>
+<?php
+// here we show messages
+if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+?>

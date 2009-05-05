@@ -1,5 +1,4 @@
 <?php
-$message = $this->GetMessage();
 header( "Content-Type: text/html; charset=".$this->GetCharset() );
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -84,7 +83,7 @@ else if($this->HasAccess("write"))
 </head>
 
 <body
-	onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
+	onload="all_init();">
 
 <table class="topbody" align="center" border="0" cellpadding="0"
 	cellspacing="0" width="100%">
@@ -262,3 +261,7 @@ else if($this->HasAccess("write"))
 			type="submit" value="Ok" /> </span> <?php } ?></div>
 
 			<?php echo $this->FormClose(); ?>
+<?php
+// here we show messages
+if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+?>

@@ -6,9 +6,6 @@ Common footer file.
 by Pavel Fedotov (me@fedotov.org).
 */
 
-// Wacko can show message (by javascript)
-  $message = $this->GetMessage();
-
 // HTTP header with right Charset settings
   header("Content-Type: text/html; charset=".$this->GetCharset());
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -81,9 +78,8 @@ else if($this->HasAccess("write"))
 //   * WikiEdit
 //   * Doubleclick editing
 //   * Smooth scrolling
-// Also, here we show message (see beginning of this file)
 ?>
-<body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<body onload="all_init();">
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr align="left" valign="top" bgcolor="#990000"> 
@@ -167,4 +163,7 @@ echo $this->FormClose();
     <td height="1" background="<?php echo $this->GetConfigValue("theme_url")."icons/top_line.gif"; ?>"><img src="<?php echo $this->GetConfigValue("theme_url")."icons/top_line.gif"; ?>" width="61" height="41"></td>
   </tr>
 </table>
-
+<?php
+// here we show messages
+if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+?>

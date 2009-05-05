@@ -64,7 +64,7 @@ else if($this->HasAccess("write"))
 ?>
 </head>
 
-<body onload="all_init();<?php if($message) echo "alert('".$message."');"; ?>">
+<body onload="all_init();">
 	<div id="mainwrapper">
 		<div id="header">
 			<?php // Insert search form ?> 
@@ -124,3 +124,7 @@ else if($this->HasAccess("write"))
 			</div>
 			<?php } ?>
 		</div>
+	<?php
+	// here we show messages
+	if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+	?>

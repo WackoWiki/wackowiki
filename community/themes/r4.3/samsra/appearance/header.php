@@ -4,9 +4,6 @@ Samsra theme.
 Common header file.
 */
 
-// Wacko can show message (by javascript) 
-  $message = $this->GetMessage();
-
 // HTTP header with right Charset settings
   header("Content-Type: text/html; charset=".$this->GetCharset());
 ?>
@@ -79,11 +76,9 @@ else if($this->HasAccess("write"))
 //   * WikiEdit
 //   * Doubleclick editing
 //   * Smooth scrolling
-// Also, here we show message (see beginning of this file)
 
 ?>
-<body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
-
+<body onload="all_init();">
 
 <div class="header">
 <?php
@@ -189,3 +184,7 @@ src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" 
 echo $this->FormClose(); 
 ?>
 </div>
+<?php
+// here we show messages
+if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+?>

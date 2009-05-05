@@ -1,11 +1,7 @@
 <?php
 /*
 lernjournal theme.
-
 */
-
-// Wacko can show message (by javascript) 
-  $message = $this->GetMessage();
 
 // HTTP header with right Charset settings
   header("Content-Type: text/html; charset=".$this->GetCharset());
@@ -79,7 +75,7 @@ else if($this->HasAccess("write"))
    }
 ?>
 </head>
-<body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
+<body onload="all_init();">
 <div id="head">
   <div id="wikititle"><?php echo $this->config["wacko_name"] ?></div>
   <?php
@@ -209,3 +205,7 @@ echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".
 <span class="loc"><strong><?php echo $this->config["wacko_name"] ?>:</strong> <?php echo $this->GetPagePath(); ?><a title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></span> <?php # if (mysql_num_rows(mysql_query("SELECT status FROM ".$this->config["table_prefix"]."mail where UserTo='".$this->GetUserName()."' and folder='inbox' and status='nicht gelesen' and viewrecipient='Y' LIMIT 1"))!=0) {echo "&nbsp;&nbsp;&nbsp;<img src=\"images/newmessage1.gif\" alt=\"Neue Nachricht\" width=\"18\" height=\"18\" /> <a href='wakka.php?wakka=WikiMessenger' title='Du hast mindestens eine neue Nachricht erhalten.'><font color=orangered><strong>&nbsp;Neue Nachricht</strong></font></a>";} ?>
 
 <?php # if ($user = $this->GetUser()) { include("actions/popupchat.php"); } ?>
+<?php
+// here we show messages
+if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+?>
