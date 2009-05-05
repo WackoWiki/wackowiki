@@ -55,6 +55,13 @@ img {
 	color: #CC3333;
 	font-weight: bold;
 }
+.info {
+	background: #F4FBFF;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+	border:1px solid #D5D9E6;
+	color: #CC3333; font-weight: bold;
+}
 .time {
 	color:#999999;
 	font-size: 9px;

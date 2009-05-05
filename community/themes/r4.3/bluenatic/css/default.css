@@ -101,7 +101,13 @@ input checkbox {
 	color:			#c33;
 	font-weight:		900;
 }
-
+.info {
+	background: #F4FBFF;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+	border:1px solid #D5D9E6;
+	color: #CC3333; font-weight: bold;
+}
 /* Debugging informations */
 .time{ color:#CCCCCC; font-size: 9px; margin:5px 20px;}
 .debug { font-size: 11px; color: 888888;}

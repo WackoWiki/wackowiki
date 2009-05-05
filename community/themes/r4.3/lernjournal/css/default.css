@@ -12,7 +12,6 @@ position:absolute;
 visibility:hidden;
 }
 
-
 .buttonsspacer {
 height:1px;
 width:10px;
@@ -37,9 +36,6 @@ font-size:11px;
 text-align:right;
 }
 
-
-
-
 .edname-r {
 background:#2A45D0;
 }
@@ -60,13 +56,26 @@ padding:0 7px;
 vertical-align:middle;
 }
 
-
-
 .error {
 color:#C33;
 font-weight:700;
 }
-
+.info {
+	background: #F4FBFF;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+	border:1px solid #D5D9E6;
+	color: #CC3333; font-weight: bold;
+}
+.time {
+color:#ccc;
+font-family:Tahoma, Arial, Verdana;
+font-size:9px;
+}
+.debug {
+	font-size: 11px;
+	color: #888888;
+}
 .files,.comment {
 background-color:#EEE;
 border-bottom-color:#607EBC;
@@ -97,15 +106,10 @@ line-height:22px;
 padding:0 10px 10px;
 }
 
-
-
-
 .include {
 background-color:#F0F0F0;
 padding:8px;
 }
-
-
 
 .logbtn {
 font-size:10px;
@@ -143,7 +147,6 @@ border-bottom:none;
 }
 #pageedit form textarea {width: 100%;height: 400px; } 
 
-
 .preview {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:red 2px solid;}
 .preview p {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
 .preview p span {background:#FFF; padding:0 1px;}
@@ -152,11 +155,9 @@ border-bottom:none;
 .layout-box p {background: transparent; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
 .layout-box p span {background:#FFF; padding:0 1px;}
 
-
 .print {
 font-size:12px;
 }
-
 
 .searchbar {
 background-color:#DDD;
@@ -168,13 +169,6 @@ line-height:1.3em;
 height:400px;
 width:100%;
 }
-
-.time {
-color:#ccc;
-font-family:Tahoma, Arial, Verdana;
-font-size:9px;
-}
-
 
 .toolbar .btn-,.toolbar .btn-hover,.toolbar .btn-active,.toolbar .btn-pressed {
 background:ButtonFace;
@@ -220,8 +214,6 @@ a:active { text-decoration: none; color: #333399; }
 A:VISITED { text-decoration: none;  color: #333399; }  /* 3366cc */
 a:hover { text-decoration: underline; color: #000000;}
 
-
-
 div.action-img           { margin:2px; background: #FFF }
 div.action-content-img   { padding:10px; border: none #999999 1px;}
 
@@ -229,7 +221,6 @@ fieldset {
 padding:10px;
 }
 img {border:none;vertical-align: middle;}
-
 
 label {
 cursor:hand;
@@ -239,7 +230,6 @@ p,td,li,select,textarea {
 font-size:13px;
 line-height:1.3em;
 }
-
 
 table.upload td {
 padding:2px 5px;
@@ -276,29 +266,6 @@ table.upload td.size- {
 padding-right:0;
 text-align:right;
 }
-
-
-/*table.usertable {
-border:1px none;
-border-collapse:collapse;
-}
-
-table.usertable tr td {
-border:1px solid #416bb8;
-padding:4px;
-vertical-align:top;
-} */
-
-
-
-/*Monospace ersetzt durch Webdings:
-tt {
-font-family:Webdings;
-font-size:36px;
- line-height: 100%;
-}}*/
-
-
 
 /* CSS form formater */
 .cssform p{

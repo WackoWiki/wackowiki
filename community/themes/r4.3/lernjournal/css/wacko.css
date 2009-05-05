@@ -1,4 +1,3 @@
-
 /* Wiki Formatting ---------------------------------------- */
 
 /* Definitions: SYNTAX (?icq i seek you?) */
@@ -267,17 +266,13 @@ padding-right:10px;
 /** Wrapper-related **********************************************************/
 
 /* SYNTAX %%(wrapper xyz)%% */
-
 div.action           { margin:2px; background: #FFF4B3 }
 div.action-content   { padding:10px 10px 25px 10px; border: solid #999999 1px;}
-
-
 
 /* Important colored text: SYNTAX !!(red)text!! */
 .cl-red {color:#C00;}
 .cl-green {color:green;}
 .cl-blue {color:#00C;}
-
 
 /* Fixed width text: SYNTAX ##monospace## */
 tt {background:#ffc;color:#660;padding:0 2px;}
