@@ -38,7 +38,7 @@ if ($this->HasAccess("read"))
 			$_tag = explode("/", $tag);
 			$tag = "";
 
-			for ($i=0; $i<count($_tag); $i++)
+			for ($i = 0; $i < count($_tag); $i++)
 			{
 				if ($i > $numOfSlashes) $tag .= $_tag[$i]."/";
 			}
