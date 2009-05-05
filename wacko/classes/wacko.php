@@ -1226,6 +1226,7 @@ class Wacko
 							($comment_on ? "comment_on = '".quote($this->dblink, $comment_on)."', " : "").
 							($comment_on ? "super_comment_on = '".quote($this->dblink, $this->NpjTranslit($comment_on))."', " : "").
 							"time = NOW(), ".
+							"created = '".quote($this->dblink, $oldPage['created'])."', ".
 							"owner = '".quote($this->dblink, $owner)."', ".
 							"user = '".quote($this->dblink, $user)."', ".
 							"supertag = '".$this->NpjTranslit($tag)."', ".
