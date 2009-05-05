@@ -37,6 +37,7 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
                     "id int(10) unsigned NOT NULL auto_increment,".
                     "tag varchar(250) binary NOT NULL DEFAULT '',".
                     "supertag varchar(250) binary NOT NULL DEFAULT '',".
+					"created datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
                     "time datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
                     "body mediumtext NOT NULL,".
                     "body_r mediumtext NOT NULL,".

@@ -30,6 +30,7 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
                      "id serial,".
                      "tag character varying(250) NOT NULL DEFAULT '',".
                      "supertag character varying(250) NOT NULL DEFAULT '',".
+					 "\"created\" timestamp without time zone NOT NULL DEFAULT now(),".
                      "\"time\" timestamp without time zone NOT NULL DEFAULT now(),".
                      "body text NOT NULL DEFAULT '',".
                      "body_r text NOT NULL DEFAULT '',".
