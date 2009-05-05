@@ -1,5 +1,4 @@
 <?php
-$message = $this->GetMessage();
 header("Content-Type: text/html; charset=".$this->GetCharset());
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -69,7 +68,7 @@ else if ($this->HasAccess("write"))
 ?>
 </head>
 
-<body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
+<body onload="all_init();">
 
 	<?php echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
 <input type="hidden" name="action" value="login" />
@@ -120,3 +119,7 @@ if ($this->GetUser()) {
 } ?></div>
 
 <?php echo $this->FormClose(); ?>
+<?php
+// here we show messages
+if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+?>

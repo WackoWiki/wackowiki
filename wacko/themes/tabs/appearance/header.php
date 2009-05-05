@@ -1,5 +1,4 @@
 <?php
-$message = $this->GetMessage();
 header("Content-Type: text/html; charset=".$this->GetCharset());
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -68,7 +67,7 @@ else if ($this->HasAccess("write"))
    }
 ?>
 </head>
-<body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
+<body onload="all_init();">
 <div class="Top<?php if (!$this->GetUser()) echo "LoggedOut";?>">
   <div class="TopRight"><?php echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?> <span class="nobr"> <?php echo $this->ComposeLinkToPage($this->GetConfigValue("root_page")) ?>&nbsp;|&nbsp; <?php echo $this->Format($this->GetDefaultBookmarks($this->userlang, "site")) ?></span> | <?php echo $this->GetTranslation("SearchText") ?>
     <input
@@ -164,3 +163,7 @@ echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $thi
 	width="106" height="6" alt="" /></div>
   <?php } ?>
 </div>
+<?php
+// here we show messages
+if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+?>

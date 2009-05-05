@@ -4,9 +4,6 @@
  Common header file.
  */
 
-// Wacko can show message (by javascript)
-$message = $this->GetMessage();
-
 // HTTP header with right Charset settings
 header("Content-Type: text/html; charset=".$this->GetCharset());
 ?>
@@ -71,9 +68,8 @@ else if($this->HasAccess("write"))
 //   * WikiEdit
 //   * Doubleclick editing
 //   * Smooth scrolling
-// Also, here we show message (see beginning of this file)
 ?>
-<body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
+<body onload="all_init();">
 <?php
 // Begin Login form
 echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
@@ -117,4 +113,8 @@ else
 <?php
 // Closing Login form
 echo $this->FormClose();
+?>
+<?php
+// here we show messages
+if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
 ?>

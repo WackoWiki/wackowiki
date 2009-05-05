@@ -1,5 +1,4 @@
 <?php
-	$message = $this->GetMessage();
 	header( "Content-Type: text/html; charset=".$this->GetCharset() );
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
@@ -65,7 +64,7 @@ else if($this->HasAccess("write"))
 ?>
 </head>
 
-<body onload="all_init();<?php if ($message) echo "alert('".$message."');";?>">
+<body onload="all_init();">
 
 <table class="topbody" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
 	<tr>
@@ -237,5 +236,8 @@ echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".
     <?php } ?>
 
 </div>
-
 <?php echo $this->FormClose(); ?>
+<?php
+// here we show messages
+if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+?>

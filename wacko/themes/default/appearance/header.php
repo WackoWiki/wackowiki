@@ -4,9 +4,6 @@
  Common header file.
 */
 
-// Wacko can show message (by javascript)
-#$message = $this->GetMessage();
-
 // HTTP header with right Charset settings
 header("Content-Type: text/html; charset=".$this->GetCharset());
 ?>
@@ -17,7 +14,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 <?php
 // We don't need search robots to index subordinate pages
 if ($this->GetMethod() != 'show' || $this->page["latest"] == "N")
-echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
+	echo "   <meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 ?>
   <meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
   <meta name="description" content="<?php echo $this->GetDescription(); ?>" />
@@ -157,6 +154,6 @@ echo $this->FormClose();
 </div>
 <div id="content">
 <?php
-	// here we show messages (see beginning of this file)
-	if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+// here we show messages
+if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
 ?>
