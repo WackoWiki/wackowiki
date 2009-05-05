@@ -589,7 +589,6 @@ class Wacko
 				"SELECT * ".
 				"FROM ".$this->config["table_prefix"]."pages ".
 				"WHERE tag='".quote($this->dblink, $this->GetPageTag())."' ".
-					"AND latest='Y' ".
 				"LIMIT 1");
 	}
 
@@ -653,7 +652,6 @@ class Wacko
 					"SELECT ".$what." ".
 					"FROM ".$this->config["table_prefix"]."pages ".
 					"WHERE supertag='".quote($this->dblink, $tag)."' ".
-						"AND latest = 'Y' ".
 					"LIMIT 1");
 
 				if ($time && $time != $page["time"])
@@ -673,7 +671,7 @@ class Wacko
 				$page = $this->LoadSingle(
 					"SELECT ".$what." ".
 					"FROM ".$this->config["table_prefix"]."pages ".
-					"WHERE tag='".quote($this->dblink, $tag)."' AND latest = 'Y' ".
+					"WHERE tag='".quote($this->dblink, $tag)."' ".
 					"LIMIT 1");
 
 				if ($time && $time != $page["time"])
@@ -884,7 +882,7 @@ class Wacko
 		if ($pages = $this->LoadAll(
 		"SELECT ".$this->pages_meta." ".
 		"FROM ".$this->config["table_prefix"]."pages ".
-		"WHERE latest = 'Y' AND comment_on = '' ".
+		"WHERE comment_on = '' ".
 			($from
 				? "AND time <= '".quote($this->dblink, $from)." 23:59:59'"
 				: "").
@@ -902,8 +900,7 @@ class Wacko
 			if ($read_acls = $this->LoadAll(
 			"SELECT a.* ".
 			"FROM ".$this->config["table_prefix"]."acls a, ".$this->config["table_prefix"]."pages p ".
-			"WHERE p.latest = 'Y' ".
-				"AND p.comment_on = '' ".
+			"WHERE p.comment_on = '' ".
 				"AND a.supertag = p.supertag ".
 				($for
 					? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
@@ -927,7 +924,7 @@ class Wacko
 		$limit= (int) $limit;
 		if ($pages =
 		$this->LoadAll("SELECT ".$this->pages_meta.", body_r FROM ".$this->config["table_prefix"]."pages ".
-		"WHERE latest = 'Y' AND comment_on != '' ".($from?"AND time<='".quote($this->dblink, $from)." 23:59:59'":"").
+		"WHERE comment_on != '' ".($from?"AND time<='".quote($this->dblink, $from)." 23:59:59'":"").
 		($for?"AND supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' ":"").
 		"ORDER BY time DESC LIMIT ".$limit))
 		{
@@ -938,8 +935,7 @@ class Wacko
 
 			if ($read_acls = $this->LoadAll("SELECT a.* "
 			."FROM ".$this->config["table_prefix"]."acls a, ".$this->config["table_prefix"]."pages p "
-			."WHERE p.latest = 'Y' "
-			."AND p.comment_on = '' "
+			."WHERE p.comment_on = '' "
 			."AND a.supertag = p.supertag "
 			.($for ? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' " : "")
 			."AND privilege = 'read' "
@@ -978,19 +974,19 @@ class Wacko
 	}
 
 	function LoadPageTitles() { return $this->LoadAll("SELECT DISTINCT tag FROM ".$this->config["table_prefix"]."pages ORDER BY tag"); }
-	function LoadAllPages() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE latest = 'Y' AND comment_on = '' ORDER BY BINARY tag"); }
-	function LoadAllPagesByTime() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE latest = 'Y' AND comment_on = '' ORDER BY time DESC, BINARY tag"); }
+	function LoadAllPages() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on = '' ORDER BY BINARY tag"); }
+	function LoadAllPagesByTime() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on = '' ORDER BY time DESC, BINARY tag"); }
 
 	function FullTextSearch($phrase,$filter)
 	{
-		return $this->LoadAll("SELECT ".$this->pages_meta.", body FROM ".$this->config["table_prefix"]."pages WHERE latest = 'Y' AND (( match(body) against('".quote($this->dblink, $phrase)."') OR lower(tag) LIKE lower('%".quote($this->dblink, $phrase)."%')) ".($filter?"AND comment_on=''":"")." )");
+		return $this->LoadAll("SELECT ".$this->pages_meta.", body FROM ".$this->config["table_prefix"]."pages WHERE (( match(body) against('".quote($this->dblink, $phrase)."') OR lower(tag) LIKE lower('%".quote($this->dblink, $phrase)."%')) ".($filter?"AND comment_on=''":"")." )");
 
 		/*return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"].
-						"pages WHERE latest = 'Y' AND (( match(body) against('".quote($this->dblink, $phrase)."') ".
+						"pages WHERE (( match(body) against('".quote($this->dblink, $phrase)."') ".
 						"OR lower(tag) LIKE lower('%".quote($this->dblink, $phrase)."%')) ".($filter?"AND comment_on=''":"")." )");*/
 	}
 
-	function TagSearch($phrase) { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE latest = 'Y' AND lower(tag) LIKE binary lower('%".quote($this->dblink, $phrase)."%') ORDER BY supertag"); }
+	function TagSearch($phrase) { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE lower(tag) LIKE binary lower('%".quote($this->dblink, $phrase)."%') ORDER BY supertag"); }
 
 	// MAILER
 	// $email				- recipient address
@@ -1218,7 +1214,7 @@ class Wacko
 							"INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, owner, user, latest, handler, comment_on, supertag, keywords, description) ".
 							"SELECT tag, time, body, owner, user, 'N', handler, comment_on, supertag, keywords, description ".
 							"FROM ".$this->config["table_prefix"]."pages ".
-							"WHERE tag = '".quote($this->dblink, $tag)."' AND latest='Y' LIMIT 1");
+							"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
 
 					// add new revision
 					$this->Query(
@@ -1233,7 +1229,7 @@ class Wacko
 							"body = '".quote($this->dblink, $body)."', ".
 							"body_toc = '".quote($this->dblink, $body_toc)."', ".
 							"body_r = '".quote($this->dblink, $body_r)."' ".
-						"WHERE tag = '".quote($this->dblink, $tag)."' AND latest='Y' ".
+						"WHERE tag = '".quote($this->dblink, $tag)."' ".
 						"LIMIT 1");
 				}
 
@@ -1325,7 +1321,7 @@ class Wacko
 					"lang = '".quote($this->dblink, $metadata["lang"])."', ".
 					"keywords = '".quote($this->dblink, $metadata["keywords"])."', ".
 					"description = '".quote($this->dblink, $metadata["description"])."' ".
-				"WHERE tag = '".quote($this->dblink, $tag)."' AND latest='Y' ".
+				"WHERE tag = '".quote($this->dblink, $tag)."' ".
 				"LIMIT 1");
 		}
 		return true;
@@ -2403,7 +2399,7 @@ class Wacko
 	{
 		return $this->LoadAll(
 				"SELECT * FROM ".$this->config["table_prefix"]."pages ".
-				"WHERE comment_on = '".quote($this->dblink, $tag)."' AND latest = 'Y' ".
+				"WHERE comment_on = '".quote($this->dblink, $tag)."' ".
 				"ORDER BY time");
 	}
 
@@ -2466,7 +2462,7 @@ class Wacko
 		$this->Query(
 			"UPDATE ".$this->config["table_prefix"]."pages ".
 			"SET owner = '".quote($this->dblink, $user)."' ".
-			"WHERE tag = '".quote($this->dblink, $tag)."' AND latest = 'Y' ".
+			"WHERE tag = '".quote($this->dblink, $tag)."' ".
 			"LIMIT 1");
 	}
 
@@ -3051,7 +3047,7 @@ class Wacko
 		{
 			$this->Query(
 				"DELETE FROM ".$this->config["table_prefix"]."revisions ".
-				"WHERE time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY) AND latest = 'N'");
+				"WHERE time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 		}
 
 		// remove outdated pages cache
