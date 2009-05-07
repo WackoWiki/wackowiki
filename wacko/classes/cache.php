@@ -115,6 +115,7 @@ class Cache
    			"name  ='".quote($this->dblink, md5($page))."', ".
    			"method='".quote($this->dblink, $method)."', ".
    			"query ='".quote($this->dblink, $query)."'");
+			// TIMESTAMP type is filled automatically by MySQL
 
 		@chmod($filename, octdec('0644'));
 		

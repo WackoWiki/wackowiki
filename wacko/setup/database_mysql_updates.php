@@ -89,4 +89,5 @@ $alter_revisions_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD 
 $alter_revisions_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."revisions MODIFY COLUMN body MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 $alter_revisions_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."revisions MODIFY COLUMN body_r MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 
+$alter_cache_r4_2 = "ALTER TABLE ".$config["table_prefix"]."cache ADD time TIMESTAMP NOT NULL, ADD INDEX timestamp (time)";
 ?>

@@ -115,6 +115,7 @@ $table_cache = "CREATE TABLE ".$config["table_prefix"]."cache (".
                      "name character varying(32) NOT NULL DEFAULT '',".
                      "method character varying(20) NOT NULL DEFAULT '',".
                      "query character varying(100) NOT NULL DEFAULT '',".
+					 "\"time\" timestamp without time zone NOT NULL DEFAULT now(),".
                      "CONSTRAINT pk_cache_name PRIMARY KEY (name)".
                   ") WITH (OIDS=FALSE);";
 
