@@ -15,7 +15,7 @@ class Cache
 
 		if ($this->wacko->config['debug']) $this->debug = $this->wacko->config['debug'];
 	}
-	
+
 	// save serialized sql results
 	function SaveSQL($query, $data)
 	{
@@ -112,9 +112,9 @@ class Cache
 
 		if ($this->wacko) $this->wacko->Query(
 			"INSERT INTO ".$this->wacko->config["table_prefix"]."cache SET ".
-   			"name  ='".quote($this->dblink, md5($page))."', ".
-   			"method='".quote($this->dblink, $method)."', ".
-   			"query ='".quote($this->dblink, $query)."'");
+   			"name  ='".quote($this->wacko->dblink, md5($page))."', ".
+   			"method='".quote($this->wacko->dblink, $method)."', ".
+   			"query ='".quote($this->wacko->dblink, $query)."'");
 			// TIMESTAMP type is filled automatically by MySQL
 
 		@chmod($filename, octdec('0644'));
@@ -132,12 +132,12 @@ class Cache
 			$this->Log("CacheInvalidate query=".
 				"SELECT * ".
 				"FROM ".$this->wacko->config["table_prefix"]."cache ".
-				"WHERE name ='".quote($this->dblink, md5($page))."'");
+				"WHERE name ='".quote($this->wacko->dblink, md5($page))."'");
 
 			$params = $this->wacko->LoadAll(
 				"SELECT * ".
 				"FROM ".$this->wacko->config["table_prefix"]."cache ".
-				"WHERE name ='".quote($this->dblink, md5($page))."'");
+				"WHERE name ='".quote($this->wacko->dblink, md5($page))."'");
 
 			$this->Log("CacheInvalidate count params=".count($params));
 
@@ -153,7 +153,7 @@ class Cache
 
 			$this->wacko->Query(
 				"DELETE FROM ".$this->wacko->config["table_prefix"]."cache ".
-				"WHERE name ='".quote($this->dblink, md5($page))."'");
+				"WHERE name ='".quote($this->wacko->dblink, md5($page))."'");
 
 			$this->Log("CacheInvalidate end");
 
