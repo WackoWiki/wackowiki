@@ -199,6 +199,8 @@ class Init
 					"hide_comments" => 0,
 
 					"debug" => 0,
+					"debug_admin_only" => 0,
+
 					"youarehere_text" => "",
 					"hide_locked" => 1,
 					"allow_rawhtml" => 1,
