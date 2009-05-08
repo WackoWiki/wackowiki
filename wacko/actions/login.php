@@ -1,12 +1,12 @@
 <!--notypo-->
 <?php
-if ($_POST["action"] == "logout")
+if ($_GET["action"] == "logout")
 {
 	$this->LogoutUser();
 	$this->SetBookmarks(BM_DEFAULT);
 	//$this->SetMessage($this->GetTranslation("LoggedOut"));
 	$this->context[++$this->current_context] = "";
-	if ($_POST["goback"] != "") $this->Redirect($this->Href("", stripslashes($_POST["goback"])));
+	if ($_GET["goback"] != "") $this->Redirect($this->Href("", stripslashes($_GET["goback"])));
 	else $this->Redirect($this->href());
 }
 else if ($user = $this->GetUser())
@@ -34,7 +34,7 @@ else if ($user = $this->GetUser())
 else
 {
 	// user is not logged in
-	$focus=0;
+	$focus = 0;
 
 	// is user trying to log in or register?
 	if ($_POST["action"] == "login")
