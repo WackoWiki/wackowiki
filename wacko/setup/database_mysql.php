@@ -137,7 +137,7 @@ $table_cache = "CREATE TABLE ".$config["table_prefix"]."cache (".
 					"method VARCHAR(20) NOT NULL,".
 					"query VARCHAR(100) NOT NULL,".
 					"time TIMESTAMP NOT NULL,".
-					"INDEX (name)".
+					"INDEX (name),".
 					"KEY timestamp (time)".
 				") TYPE=MyISAM";
 
