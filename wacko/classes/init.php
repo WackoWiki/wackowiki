@@ -11,18 +11,18 @@
 	1.  Init()*			- constructor, unescape magic quotes, version checks
 	2.  Settings()*		- load primary engine config from file: variables and constants
 	3.  Settings()*		- load secondary engine config from database (calls DBAL())
-	4.  Settings($p,$v)		- set additional config parameters if needed
-	5.  Request()			- parse request string if needed for wacko pages processing
+	4.  Settings($p,$v)	- set additional config parameters if needed
+	5.  Request()		- parse request string if needed for wacko pages processing
 	6.  DBAL()*			- establish DBAL for database operations and connect to DB (required by Engine())
-	7.  Session()			- start user session
+	7.  Session()		- start user session
 	8.  IsLocked()		- check website for locking
 	9.  Installer()		- start installer if necessary
-	10.  GetMicroTime()	- return precise timer
+	10. GetMicroTime()	- return precise timer
 	11. Cache()			- initialize caching engine
-	12. Cache('check')		- process request for caching purposes (required by Cache('store'))
+	12. Cache('check')	- process request for caching purposes (required by Cache('store'))
 	13. Engine()*		- initialize Wacko engine
-	14. Engine('run')		- execute script and open start page (requires Engine())
-	15. Cache('store')		- cache page (requires Engine())
+	14. Engine('run')	- execute script and open start page (requires Engine())
+	15. Cache('store')	- cache page (requires Engine())
 	16. Debug()			- print debugging information
 	
 	Additional information can be found in class methods' comments.

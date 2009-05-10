@@ -1975,7 +1975,7 @@ class Wacko
 	function AddDatetime($tag)
 	{
 		if ($user = $this->GetUser()) $show = $user["showdatetime"];
-		if (!$show) $show=$this->config["show_datetime"];
+		if (!$show) $show = $this->config["show_datetime"];
 		if (!$show) $show = "Y";
 		if ($show != "N" && $show != "0")
 		{
@@ -3111,17 +3111,20 @@ class Wacko
 
 		if($this->config["debug"] >= 2)
 		{
-			echo '<span class="debug">Multilanguage: '.$this->config["multilanguage"].'<br/>';
-			echo 'HTTP_ACCEPT_LANGUAGE set: '.isset($_SERVER['HTTP_ACCEPT_LANGUAGE']).'<br />';
-			echo 'HTTP_ACCEPT_LANGUAGE value: '.$_SERVER['HTTP_ACCEPT_LANGUAGE'].'<br />';
-			echo 'HTTP_ACCEPT_LANGUAGE chopped value: '.strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2)).'<br />';
-			echo 'User language set: '.isset($user["lang"]).'<br />';
-			echo 'User language: '.$user["lang"].'<br />';
-			echo 'Config language: '.$this->config["language"].'<br />';
-			echo 'Current language: '.$this->userlang.'<br />';
-			echo '</span>';
+			if (($this->config["debug_admin_only"] == true && $this->engine->IsAdmin() === true) || $this->config["debug_admin_only"] == false)
+			{
+				echo '<span class="debug">Multilanguage: '.$this->config["multilanguage"].'<br/>';
+				echo 'HTTP_ACCEPT_LANGUAGE set: '.isset($_SERVER['HTTP_ACCEPT_LANGUAGE']).'<br />';
+				echo 'HTTP_ACCEPT_LANGUAGE value: '.$_SERVER['HTTP_ACCEPT_LANGUAGE'].'<br />';
+				echo 'HTTP_ACCEPT_LANGUAGE chopped value: '.strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2)).'<br />';
+				echo 'User language set: '.isset($user["lang"]).'<br />';
+				echo 'User language: '.$user["lang"].'<br />';
+				echo 'Config language: '.$this->config["language"].'<br />';
+				echo 'Current language: '.$this->userlang.'<br />';
+				echo '</span>';
+			}
 		}
-
+			
 		if (is_array($user) && $user["options"]["theme"])
 		{
 			$this->config["theme"] = $user["options"]["theme"];
