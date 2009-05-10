@@ -85,9 +85,9 @@ class Wacko
 		if ($this->config['debug'] >= 2)
 			$start = $this->GetMicroTime();
 
-		$result = query($this->dblink, $query);
+		$result = query($this->dblink, $query, $this->config['debug']);
 
-		if($this->config['debug'] >= 2)
+		if ($this->config['debug'] >= 2)
 		{
 			$time = $this->GetMicroTime() - $start;
 			$this->queryTime += $time;
