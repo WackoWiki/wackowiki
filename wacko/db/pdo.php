@@ -18,7 +18,7 @@ function quote($dblink, $string)
                     ));
 }
 
-function query($dblink, $query)
+function query($dblink, $query, $debug)
 {
 	$result = $dblink->query($query);
 
@@ -27,7 +27,15 @@ function query($dblink, $query)
 		if ($result->errorCode() != '00000')
 		{
 			ob_end_clean();
-			die("Query failed: ".$query." (".$result->errorCode().": ".$result->errorInfo().")");
+			
+			if ($debug > 2)
+			{
+				die("Query failed: ".$query." (".$result->errorCode().": ".$result->errorInfo().")");
+			}
+			else
+			{
+				die("DBAL error: SQL query failed.");
+			}
 		}
 	}
 
@@ -75,8 +83,11 @@ function connect($host, $user, $password, $db, $collation = false, $driver, $por
 		die('PDO DSN Error: '.$e->getMessage());
 	}
 
-	if ($collation)  $dblink->query("SET NAMES '".$collation."'");
-	
+	if ($collation)
+	{
+		$dblink->query("SET NAMES '".$collation."'");
+	}
+
 	return $dblink;
 }
 ?>
