@@ -89,7 +89,7 @@ $alter_revisions_r3_6 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD ke
 $alter_revisions_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD created datetime NOT NULL default '0000-00-00 00:00:00' AFTER supertag";
 $alter_revisions_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."revisions MODIFY COLUMN body MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 $alter_revisions_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."revisions MODIFY COLUMN body_r MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
-$alter_revisions_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD title VARCHAR(100) NOT NULL default ''";
+$alter_revisions_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD title VARCHAR(100) NOT NULL default '' AFTER lang";
 
 $alter_cache_r4_2 = "ALTER TABLE ".$config["table_prefix"]."cache ADD time TIMESTAMP NOT NULL, ADD INDEX timestamp (time)";
 ?>
