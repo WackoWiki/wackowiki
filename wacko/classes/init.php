@@ -200,6 +200,7 @@ class Init
 
 					"debug" => 0,
 					"debug_admin_only" => 0,
+					"debug_sql_threshold" => 0,
 
 					"youarehere_text" => "",
 					"hide_locked" => 1,
