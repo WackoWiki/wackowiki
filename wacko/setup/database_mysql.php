@@ -20,6 +20,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"super_comment_on varchar(250) NOT NULL DEFAULT '',".
 					"hits int(11) NOT NULL DEFAULT '0',".
 					"lang varchar(20) NOT NULL DEFAULT '',".
+					"title varchar(100) NOT NULL DEFAULT '',".
 					"description varchar(250) NOT NULL DEFAULT '',".
 					"keywords varchar(250) binary NOT NULL DEFAULT '',".
 					"PRIMARY KEY  (id),".
@@ -30,7 +31,8 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"KEY idx_time (time),".
 					"KEY idx_latest (latest),".
 					"KEY idx_comment_on (comment_on),".
-					"KEY idx_super_comment_on (super_comment_on)".
+					"KEY idx_super_comment_on (super_comment_on),".
+					"KEY idx_title (title)".
 				") TYPE=MyISAM;";
 
 $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
