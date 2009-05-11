@@ -17,7 +17,7 @@ class Wacko
 	var $context = array("");
 	var $current_context = 0;
 	var $pages_meta = "id, tag, created, time, owner, user, latest, handler, comment_on,
-						super_comment_on, supertag, lang, keywords, description";
+						super_comment_on, supertag, lang, title, keywords, description";
 	var $first_inclusion = array(); // for backlinks
 	var $optionSplitter = "\n"; // if you change this two symbols, settings for all users will be lost.
 	var $valueSplitter  = "=";
@@ -1010,7 +1010,8 @@ class Wacko
 	// $tag			- page address
 	// $body		- page body (plain text)
 	// $comment_on	- commented page address
-	function SavePage($tag, $body, $comment_on = "")
+	// $title		- page name (metadata)
+	function SavePage($tag, $body, $comment_on = "", $title = "")
 	{
 		// get current user
 		$user = $this->GetUserName();
@@ -1197,6 +1198,7 @@ class Wacko
 			{
 				$this->SetLanguage($this->pagelang);
 				$body_r = $this->Format($body, "wacko");
+
 				if ($this->config["paragrafica"])
 				{
 					$body_r = $this->Format($body_r, "paragrafica");
@@ -1211,8 +1213,8 @@ class Wacko
 				{
 					// move revision
 					$this->Query(
-							"INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, owner, user, latest, handler, comment_on, supertag, keywords, description) ".
-							"SELECT tag, time, body, owner, user, 'N', handler, comment_on, supertag, keywords, description ".
+							"INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, owner, user, latest, handler, comment_on, supertag, title, keywords, description) ".
+							"SELECT tag, time, body, owner, user, 'N', handler, comment_on, supertag, title, keywords, description ".
 							"FROM ".$this->config["table_prefix"]."pages ".
 							"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
 
@@ -1319,6 +1321,7 @@ class Wacko
 			$this->Query(
 				"UPDATE ".$this->config["table_prefix"]."pages SET ".
 					"lang = '".quote($this->dblink, $metadata["lang"])."', ".
+					"title = '".quote($this->dblink, htmlspecialchars($metadata["title"]))."', ".
 					"keywords = '".quote($this->dblink, $metadata["keywords"])."', ".
 					"description = '".quote($this->dblink, $metadata["description"])."' ".
 				"WHERE tag = '".quote($this->dblink, $tag)."' ".
@@ -2291,7 +2294,11 @@ class Wacko
 		return $user;
 	}
 
-	function LoadUsers() { return $this->LoadAll("SELECT * FROM ".$this->config["user_table"]." ORDER BY binary name"); }
+	function LoadUsers() 
+	{ 
+		return $this->LoadAll(
+			"SELECT * FROM ".$this->config["user_table"]." ORDER BY binary name");
+	}
 
 	function GetUserName()
 	{
@@ -3076,7 +3083,28 @@ class Wacko
 
 				closedir($handle);
 
-				//"Maintenance: cached pages purged";
+				//$this->Log(7, 'Maintenance: cached pages purged');
+			}
+
+			// query results
+			if ($ttl = $this->config['cache_sql_ttl'])
+			{
+				// delete from fs
+				clearstatcache();
+				$handle = opendir(rtrim($this->config['cache_dir'].CACHE_SQL_DIR, '/'));
+
+				while (false !== ($file = readdir($handle)))
+				{
+					if (is_file($this->config['cache_dir'].CACHE_SQL_DIR.$file) &&
+					((time() - @filemtime($this->config['cache_dir'].CACHE_SQL_DIR.$file)) > $ttl))
+					{
+						@unlink($this->config['cache_dir'].CACHE_SQL_DIR.$file);
+					}
+				}
+
+				closedir($handle);
+
+				//$this->Log(7, 'Maintenance: cached sql results purged');
 			}
 
 			$this->Query("UPDATE {$this->config['table_prefix']}config SET maint_last_cache = '".time()."'");
@@ -3366,6 +3394,36 @@ class Wacko
 				$result .= $this->Link($link, '', $linktext) . $separator;
 		}
 		return $result;
+	}
+
+	// $id is preferred, $tag next
+	function GetPageTitle($tag = '', $id = 0)
+	{
+		if ($tag) $tag = trim($tag, '/');
+
+		if ($tag == true || $id != 0)
+		{
+			$page = $this->LoadSingle(
+				"SELECT title ".
+				"FROM {$this->config['table_prefix']}pages ".
+				"WHERE ".( $id != 0
+					? "id	= '".quote((int)$id)."' "
+					: "tag	= '".quote($tag)."' " ).
+				"LIMIT 1");
+
+			if ($page['title'] == true)
+				return $page['title'];
+			else
+				return $this->AddSpaces(trim(substr($tag, strrpos($tag, '/')), '/'));
+		}
+		else if ($tag == false && $this->page == true)
+		{
+			return $this->page['title'];
+		}
+		else if ($tag == false && $this->page == false)
+		{
+			return $this->AddSpaces(trim(substr($this->tag, strrpos($this->tag, '/')), '/'));
+		}
 	}
 
 	// RENAMING / MOVING

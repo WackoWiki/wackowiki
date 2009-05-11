@@ -12,11 +12,15 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 {
 	if ($_POST)
 	{
-		$this->SaveMeta($this->GetPageTag(), array("lang"=>$_POST["lang"], "description"=>$_POST["description"], "keywords"=>$_POST["keywords"]));
-		$message = $this->GetTranslation("MetaUpdated");
-
+		$this->SaveMeta($this->GetPageTag(), array(
+			"lang" => $_POST["lang"],
+			"title" => $_POST["title"],
+			"description" => $_POST["description"],
+			"keywords" => $_POST["keywords"]
+		));
+		
 		// redirect back to page
-		$this->SetMessage($message."!");
+		$this->SetMessage($this->GetTranslation("MetaUpdated")."!");
 		$this->Redirect($this->Href());
 	}
 	else
@@ -33,6 +37,10 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 ?>
 <?php echo $this->FormOpen("settings") ?>
 <div class="cssform">
+	<p>
+		<label for="title"><?php echo $this->GetTranslation("Meta0"); ?></label>
+		<input id="title" name="title" value="<?php echo $this->page["title"] ?>" size="60" maxlength="100" />
+	</p>
 	<p>
 		<label for="keywords"><?php echo $this->GetTranslation("Meta1"); ?></label>
 		<textarea id="keywords" name="keywords" rows="4" cols="51"><?php echo $this->page["keywords"] ?></textarea>
