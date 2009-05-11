@@ -285,9 +285,10 @@ $wackoTranslation = array(
 
 	//Settings
 	"SettingsFor" => "Einstellungen für %1",
-	"metaDesc" => "META Schlüsselwörter/Beschreibungen, die in den HTML-Kopf eingefügt werden.",
-	"Meta1" => "Meta Schlüsselwörter",
-	"Meta2" => "Meta Beschreibung",
+	"MetaInfo" => "META Schlüsselwörter/Beschreibungen, die in den HTML-Kopf eingefügt werden.",
+	"MetaTitle" => "Meta Titel",
+	"MetaKeywords" => "Meta Schlüsselwörter",
+	"MetaDescription" => "Meta Beschreibung",
 	"SettingsText" => "Einstellungen",
 	"SettingsTip" => "Andere Einstellungen und Eigenschaften dieser Seite:",
 	"SettingsPortal" => "Andere Einstellungen und Eigenschaften dieser Seite:",

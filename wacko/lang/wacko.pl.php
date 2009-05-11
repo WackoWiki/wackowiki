@@ -284,9 +284,10 @@ $wackoTranslation = array(
 
 	//Settings
 	"SettingsFor" => "Ustawienia dla %1",
-	"metaDesc" => "S³owa kluczowe/Opis META które zostan± dodane do nag³ówków HTML.",
-	"Meta1" => "S³owa kluczowe Meta",
-	"Meta2" => "Opis Meta",
+	"MetaInfo" => "S³owa kluczowe/Opis META które zostan± dodane do nag³ówków HTML.",
+	"MetaTitle" => "Meta Title",
+	"MetaKeywords" => "S³owa kluczowe Meta",
+	"MetaDescription" => "Opis Meta",
 	"SettingsText" => "Ustawienia",
 	"SettingsTip" => "Inne ustawienia i w³asno¶ci tej strony",
 	"SettingsPortal" => "Inne ustawienia i w³asno¶ci dla tej strony:",

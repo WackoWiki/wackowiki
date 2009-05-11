@@ -38,15 +38,15 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 <?php echo $this->FormOpen("settings") ?>
 <div class="cssform">
 	<p>
-		<label for="title"><?php echo $this->GetTranslation("Meta0"); ?></label>
+		<label for="title"><?php echo $this->GetTranslation("MetaTitle"); ?></label>
 		<input id="title" name="title" value="<?php echo $this->page["title"] ?>" size="60" maxlength="100" />
 	</p>
 	<p>
-		<label for="keywords"><?php echo $this->GetTranslation("Meta1"); ?></label>
+		<label for="keywords"><?php echo $this->GetTranslation("MetaKeywords"); ?></label>
 		<textarea id="keywords" name="keywords" rows="4" cols="51"><?php echo $this->page["keywords"] ?></textarea>
 	</p>
 	<p>
-		<label for="description"><?php echo $this->GetTranslation("Meta2"); ?></label>
+		<label for="description"><?php echo $this->GetTranslation("MetaDescription"); ?></label>
 		<textarea id="description" name="description" rows="4" cols="51"><?php echo $this->page["description"] ?></textarea>
 	</p>
 	<p>
@@ -78,8 +78,8 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 		}
 	else
 	{
-	echo ($this->GetTranslation("Meta1").": ".$this->page["keywords"]."<br />".
-	$this->GetTranslation("Meta2").": ".$this->page["description"]."<br />".
+	echo ($this->GetTranslation("MetaKeywords").": ".$this->page["keywords"]."<br />".
+	$this->GetTranslation("MetaDescription").": ".$this->page["description"]."<br />".
 	$this->GetTranslation("SetLang").": ".$this->page["lang"]);
 	}
 }

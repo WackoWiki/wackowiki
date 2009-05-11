@@ -284,9 +284,10 @@ $wackoTranslation = array(
 
 	//Settings
 	"SettingsFor" => " %1 seadistused.",
-	"metaDesc" => "META võtmesõnad/kirjeldus, mis lisatakse HTML-i päisesse.",
-	"Meta1" => "META võtmesõnad",
-	"Meta2" => "META kirjeldus",
+	"MetaInfo" => "META võtmesõnad/kirjeldus, mis lisatakse HTML-i päisesse.",
+	"MetaTitle" => "Meta Title",
+	"MetaKeywords" => "META võtmesõnad",
+	"MetaDescription" => "META kirjeldus",
 	"SettingsText" => "seadistused",
 	"SettingsTip" => "Selle lehe teised seadistused ja omadused",
 	"SettingsPortal" => "Selle lehe teised seadistused ja omadused:",
