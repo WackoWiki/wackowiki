@@ -284,9 +284,10 @@ $wackoTranslation = array(
 
 	//Settings
 	"SettingsFor" => "Настройки %1",
-	"metaDesc" => "Ключевые слова/Описание &ndash; поля, вставляемые в HTML-заголовок каждой страницы (META).",
-	"Meta1" => "Ключевые слова",
-	"Meta2" => "Описание",
+	"MetaInfo" => "Ключевые слова/Описание &ndash; поля, вставляемые в HTML-заголовок каждой страницы (META).",
+	"MetaTitle" => "Meta Title",
+	"MetaKeywords" => "Ключевые слова",
+	"MetaDescription" => "Описание",
 	"SettingsText" => "Свойства",
 	"SettingsTip" => "Прочие свойства и настройки данной страницы",
 	"SettingsPortal" => "Прочие настройки и действия над страницей:",
