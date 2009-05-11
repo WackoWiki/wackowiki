@@ -225,6 +225,11 @@ class Init
 					"footer_files" => 1,
 
 					"disable_tikilinks" => 0,
+					"disable_bracketslinks" => 0,
+					"disable_wikilinks" => 0,
+					"disable_npjlinks" => 0,
+					"disable_formatters" => 0,
+
 					"remove_onlyadmins" => 0,
 
 					"upload" => "admins",
