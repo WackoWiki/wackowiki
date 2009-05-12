@@ -7,7 +7,7 @@
 ########################################################
 
 	Calling order (* - mandatory for engine startup):
-	
+
 	1.  Init()*			- constructor, unescape magic quotes, version checks
 	2.  Settings()*		- load primary engine config from file: variables and constants
 	3.  Settings()*		- load secondary engine config from database (calls DBAL())
@@ -24,9 +24,9 @@
 	14. Engine('run')	- execute script and open start page (requires Engine())
 	15. Cache('store')	- cache page (requires Engine())
 	16. Debug()			- print debugging information
-	
+
 	Additional information can be found in class methods' comments.
-	
+
 */
 
 define("BM_AUTO", 						0);
@@ -67,25 +67,25 @@ class Init
 	var $request;
 	var $method;
 	var $timer;
-	
+
 	// CONSTRUCTOR
 	// Mandatory runs and checks.
 	function Init()
 	{
 		error_reporting (E_ALL ^ E_NOTICE);
-		
+
 		// start execution timer
 		$this->timer = $this->GetMicroTime();
-		
+
 		if (ini_get("zlib.output_compression"))
 			ob_start();
 		else
 			ob_start("ob_gzhandler");
-		
+
 		if (!isset($_REQUEST)) die('$_REQUEST[] not found. WackoWiki requires PHP 4.3.3 or higher!');
-		
+
 		set_magic_quotes_runtime(0);
-		
+
 		if (get_magic_quotes_gpc())
 		{
 			$this->ParseMQ($_POST);
@@ -94,17 +94,17 @@ class Init
 			$this->ParseMQ($_SERVER);
 			$this->ParseMQ($_REQUEST);
 		}
-		
+
 		if (strstr($_SERVER["SERVER_SOFTWARE"], "IIS")) $_SERVER["REQUEST_URI"] = $_SERVER["PATH_INFO"];
 	}
-	
+
 	// INT TIMER
 	function GetMicroTime()
 	{
 		list($usec, $sec) = explode(" ", microtime());
 		return ((float)$usec + (float)$sec);
 	}
-	
+
 	// Workaround for the amazingly annoying magic quotes.
 	function ParseMQ(&$a)
 	{
@@ -119,7 +119,7 @@ class Init
 			}
 		}
 	}
-	
+
 	// DEFINE WACKO SETTINGS
 	// First must be called without parameters to initialize default
 	// settings. Additional settings can be added afterwards.
@@ -143,7 +143,7 @@ class Init
 			if ($this->config == false && !isset($this->dblink))
 			{
 				$found_rewrite_extension = function_exists("apache_get_modules") ? in_array("mod_rewrite", apache_get_modules()) : false;
-								
+
             /**
                VERY IMPORTANT NOTE
 
@@ -179,7 +179,7 @@ class Init
 
 					"language" => "en",
 					"theme" => "default",
-						
+
 					"allow_themes" => 1,
 
 					"header_action" => "header",
@@ -249,7 +249,7 @@ class Init
 					"cache" => 0,
 					"cache_dir" => "_cache/",
 					"cache_ttl" => 600,
-						
+
 					"cache_sql" => 0,
 					"cache_sql_ttl" => 600,
 
@@ -264,42 +264,42 @@ class Init
 					"captcha_registration" => 1,
 				);
 				$wackoConfig["aliases"]	= array("Admins" => "");
-				
+
 				// load primary config
 				if ( @file_exists("wakka.config.php") )
-               {
-                  // It's an old WackoWiki or WakkaWiki install so load the data and start the upgrader.
-                  if ( @filesize("wakka.config.php") > 0)
-                     {
-                        require("wakka.config.php");
-                        $this->config = $wakkaConfig;
-                     }
-                  else
-                     {
-                        // Else it's an empty file so use the default settings, this is quite unlikely to occur.
-                        $this->config = $wackoConfig;
-                     }
-               }
+				{
+					// It's an old WackoWiki or WakkaWiki install so load the data and start the upgrader.
+					if ( @filesize("wakka.config.php") > 0)
+					{
+						require("wakka.config.php");
+						$this->config = $wakkaConfig;
+					}
+					else
+					{
+						// Else it's an empty file so use the default settings, this is quite unlikely to occur.
+						$this->config = $wackoConfig;
+					}
+				}
 				else if ( @file_exists("config.inc.php") )
-               {
-                  // If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R4.3
-                  if ( @filesize("config.inc.php") > 0)
-                     {
-                        require("config.inc.php");
-                        $this->config = $wackoConfig;
-                     }
-                  else
-                     {
-                        // Else it's an empty file so use the default settings.  This is typical on a fresh install.
-                        $this->config = $wackoConfig;
-                     }
-               }
+				{
+					// If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R4.3
+					if ( @filesize("config.inc.php") > 0)
+					{
+						require("config.inc.php");
+						$this->config = $wackoConfig;
+					}
+					else
+					{
+						// Else it's an empty file so use the default settings.  This is typical on a fresh install.
+						$this->config = $wackoConfig;
+					}
+				}
 				else
-               {
-                  $this->config = $wackoConfig;
-               }
+				{
+					$this->config = $wackoConfig;
+				}
 
-            $this->Installer();
+				$this->Installer();
 			}
 			// secondary settings
 			//else if ($this->config == true && !isset($this->dblink))
@@ -321,7 +321,7 @@ class Init
 				{
 					die("Error loading WackoWiki config data: database `config` table is empty.");
 				}
-				
+
 				// retrieving usergroups data
 				$wackoDBQuery = "SELECT name, members FROM {$this->config["table_prefix"]}groups";
 				if ($result = query($wackoDBQuery, $this->dblink, 0))
@@ -341,34 +341,34 @@ class Init
 			//}
 		}
 	}
-	
+
 	// REQUEST HANDLING
 	// Process request string, define $page and $method vars
 	function Request()
 	{
 		// check config data
 		if ($this->config == false) die("Error processing request: WackoWiki config data must be initialized.");
-		
+
 		// fetch wacko location
 		if (isset($_SERVER["PATH_INFO"]) && function_exists("virtual"))
 			$this->request = $_SERVER["PATH_INFO"];
 		else
 			$this->request = @$_REQUEST["page"];
-		
+
 		// fix win32 apache 1 bug
 		if (stristr($_SERVER["SERVER_SOFTWARE"], "Apache/1") && stristr($_SERVER["SERVER_SOFTWARE"], "Win32") && $this->config["rewrite_mode"])
 		{
 			$dir			= str_replace("http://".$_SERVER["SERVER_NAME"].($_SERVER["SERVER_PORT"] != 80 ? ":".$_SERVER["SERVER_PORT"] : ""), "", $this->config["base_url"]);
 			$this->request	= preg_replace("+^".preg_quote(rtrim($dir,"/"))."+i", "", $_SERVER["REDIRECT_URL"]);//$request);
 		}
-		
+
 		// remove leading slash
 		$this->request	= preg_replace("/^\//", "", $this->request);
 		$this->method	= "";
-		
+
 		// split into page/method
 		$p = strrpos($this->request, "/");
-		
+
 		if ($p === false)
 		{
 			$this->page = $this->request;
@@ -377,7 +377,7 @@ class Init
 		{
 			$this->page			= substr($this->request, 0, $p);
 			$m1	= $this->method = strtolower(substr($this->request, $p - strlen($this->request) + 1));
-		
+
 			if (!@file_exists($this->config["handler_path"]."/page/".$this->method.".php"))
 			{
 				$this->page		= $this->request;
@@ -392,18 +392,18 @@ class Init
 		}
 		return true;
 	}
-	
+
 	// SESSION HANDLING
 	function Session()
 	{
 		// if ($this->config["ssl"] == true) session_set_cookie_params(0, "/", "", true);
-		
+
 		// session_name(SESSION_HANDLER_ID);
 		// session_save_path(SESSION_HANDLER_PATH);
 		session_start();
 		// return session_id();
 	}
-	
+
 	// DATABASE ABSTRACT LAYER
 	// Initialize DBAL for basic DB operations and connect to selected DB.
 	// Default DB is 'mysql_database' config value, however any other value may
@@ -411,10 +411,10 @@ class Init
 	function DBAL($dbname = "")
 	{
 		if (isset($this->dblink)) return;
-		
+
 		// check config data
 		if ($this->config == false) die("Error loading WackoWiki DBAL: config data must be initialized.");
-						
+
 		// Load the correct database connector
 		if (!isset( $this->config["database_driver"] )) $this->Settings("database_driver", "mysql_legacy");
 
@@ -430,16 +430,16 @@ class Init
 				$dbfile = "db/mysql.php";
 				break;
 		}
-		
+
 		// load DBAL
 		if (@file_exists($dbfile))
 			require($dbfile);
 		else
 			die("Error loading WackoWiki DBAL: file ".$dbfile." not found.");
-		
+
 		// connect to DB
 		if ($dbname == false) $dbname = $this->config["database_database"];
-		
+
 		$this->dblink = connect($this->config["database_host"], $this->config["database_user"], $this->config["database_password"], $this->config["database_database"], $this->config["db_collation"], $this->config["database_driver"], $this->config["database_port"]);
 
 		if ($this->dblink)
@@ -447,7 +447,7 @@ class Init
 		else
 			die("Error loading WackoWiki DBAL: could not establish database connection.");
 	}
-	
+
 	// CHECK WEBSITE LOCKING
 	function IsLocked()
 	{
@@ -455,7 +455,7 @@ class Init
 		if (@file_exists("lock"))
 		{
 			$access = file("lock");
-			
+
 			if ($access[0] == "1")
 				return true;
 			else
@@ -466,7 +466,7 @@ class Init
 			return false;
 		}
 	}
-	
+
 	// INSTALLER
 	function Installer()
 	{
@@ -484,22 +484,22 @@ class Init
 			}
 
 			// start installer
-         global $config;
-         $config = $this->config;
+			global $config;
+			$config = $this->config;
 
 			if (!$installAction = trim($_REQUEST["installAction"])) $installAction = "lang";
 			include("setup/header.php");
-			
+
 			if (@file_exists("setup/".$installAction.".php"))
 			include("setup/".$installAction.".php");
-			
+
 			else print("<em>Invalid action</em>");
 			include("setup/footer.php");
-			
+
 			exit;
 		}
 	}
-	
+
 	// CACHING ENGINE
 	// First must be initialized without parameters. Then
 	// can be used with these values (for corresponding
@@ -511,7 +511,7 @@ class Init
 	{
 		// check config data
 		if ($this->config == false) die("Error starting WackoWiki cache engine: config data must be initialized.");
-		
+
 		if ($this->cache == false || $op == false)
 		{
 			require("classes/cache.php");
@@ -544,7 +544,7 @@ class Init
 			return false;
 		}
 	}
-	
+
 	// WACKOWIKI ENGINE
 	// First must be initialized without parameters. Then
 	// can be used with these values:
@@ -555,16 +555,16 @@ class Init
 	{
 		// check config data
 		if ($this->config == false)	die("Error starting WackoWiki engine: config data must be initialized.");
-		
+
 		if ($this->engine == false || $op == false)
 		{
 			// check DB connection
 			if ($this->dblink == false) die("Error starting WackoWiki engine: no database connection established.");
-			
+
 			require("classes/wacko.php");
 			$this->engine = &new Wacko($this->config, $this->dblink);
 			$this->engine->headerCount = 0;
-			
+
 			if ($this->cache == true)
 			{
 				$this->cache->wacko		= & $this->engine;
@@ -579,7 +579,7 @@ class Init
 		else if ($this->engine == true && $op == "res")
 		{
 			if ($lang == false) $lang = $this->config["language"];
-			
+
 			$this->engine->LoadAllLanguages();
 			$this->engine->LoadResource($lang);
 			$this->engine->SetResource ($lang);
@@ -591,7 +591,7 @@ class Init
 			return false;
 		}
 	}
-		
+
 	// DEBUG INFO
 	function Debug()
 	{
@@ -600,31 +600,31 @@ class Init
 			if (($this->config["debug_admin_only"] == true && $this->engine->IsAdmin() === true) || $this->config["debug_admin_only"] == false)
 			{
 				$overall_time = $this->GetMicroTime() - $this->timer;
-				
+
 				echo "<div class=\"debug\">".
 					 "<p class=\"debug\"><span>Program execution statistics</span></p>\n".
 					 "<ul>";
-				
+
 				if (function_exists("memory_get_usage")) if ($execmem = memory_get_usage())
 					echo "<li>Memory allocated: ".(number_format(($execmem / (1024*1024)), 3))." MB </li>";
-				
+
 				echo "<li>Overall time taken: ".(number_format(($overall_time), 3))." sec. </li>";
-				
+
 				if ($this->config["debug"] >= 2)
 				{
 					echo "<li>Execution time: ".number_format($overall_time - $this->engine->queryTime, 3)." sec. </li>";
 					echo "<li>SQL time: ".number_format($this->engine->queryTime, 3)." sec. </li>";
 				}
-				
+
 				if ($this->config["debug"] >= 3)
 				{
 					echo "<li>SQL queries: ".count($this->engine->queryLog)."</li>";
 					echo "<li>SQL queries dump follows".( $this->config["debug_sql_threshold"] > 0 ? " (&gt;".$this->config["debug_sql_threshold"]." sec.)" : "" ).":<ol>";
-					
+
 					foreach ($this->engine->queryLog as $query)
 					{
 						if ($query["time"] < $this->config["debug_sql_threshold"]) continue;
-						
+
 						echo "<li>\n";
 						echo str_replace(array("<", ">"), array("&lt;", "&gt;"), $query["query"])."<br />";
 						echo "[".number_format($query["time"], 4)." sec.]";
