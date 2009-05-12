@@ -79,10 +79,10 @@ $table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
 				") TYPE=MyISAM";
 
 $table_referrers = "CREATE TABLE ".$config["table_prefix"]."referrers (".
-						"page_tag char(250) binary NOT NULL DEFAULT '',".
+						"page_id int(10) NOT NULL DEFAULT '0',".
 						"referrer char(150) NOT NULL DEFAULT '',".
 						"time datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
-						"KEY idx_page_tag (page_tag),".
+						"KEY idx_page_id (page_id),".
 						"KEY idx_time (time)".
 					") TYPE=MyISAM";
 

@@ -2148,11 +2148,11 @@ class Wacko
 	}
 
 	// REFERRERS
-	function LogReferrer($tag = "", $referrer = "")
+	function LogReferrer($page_id = "", $referrer = "")
 	{
 		// fill values
-		if (!$tag = trim($tag))
-			$tag = $this->GetPageTag();
+		if (!$page_id = trim($page_id))
+			$page_id = $this->page["id"];
 
 		if (!$referrer = trim($referrer))
 			$referrer = isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '';
@@ -2162,19 +2162,19 @@ class Wacko
 		{
 			$this->Query(
 				"INSERT INTO ".$this->config["table_prefix"]."referrers SET ".
-					"page_tag = '".quote($this->dblink, $tag)."', ".
+					"page_id = '".quote($this->dblink, $page_id)."', ".
 					"referrer = '".quote($this->dblink, $referrer)."', ".
 					"time = NOW()");
 		}
 	}
 
-	function LoadReferrers($tag = "")
+	function LoadReferrers($page_id = "")
 	{
 		return $this->LoadAll(
 			"SELECT referrer, count(referrer) AS num ".
 			"FROM ".$this->config["table_prefix"]."referrers ".
-			($tag = trim($tag)
-				? "WHERE page_tag = '".quote($this->dblink, $tag)."'"
+			($page_id = trim($page_id)
+				? "WHERE page_id = '".quote($this->dblink, $page_id)."'"
 				: "").
 			"GROUP BY referrer ".
 			"ORDER BY num DESC");

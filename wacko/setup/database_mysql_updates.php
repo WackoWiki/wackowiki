@@ -77,6 +77,7 @@ $alter_links_r3_3 = "ALTER TABLE ".$config["table_prefix"]."links ADD to_superta
 
 $alter_referrers_r2_1 = "ALTER TABLE ".$config["table_prefix"]."referrers CHANGE page_tag page_tag VARCHAR(250) NOT NULL";
 $alter_referrers_r3_1 = "ALTER TABLE ".$config["table_prefix"]."referrers CHANGE page_tag page_tag CHAR(250) BINARY NOT NULL";
+$alter_referrers_r4_2 = "ALTER TABLE ".$config["table_prefix"]."referrers DROP INDEX idx_page_tag, CHANGE page_tag page_id INT(10) NOT NULL DEFAULT '0', ADD INDEX idx_page_id (page_id)";
 
 $alter_pagewatches_r2_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE tag tag VARCHAR(250) NOT NULL";
 $alter_pagewatches_r3_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE tag tag VARCHAR(250) BINARY NOT NULL";
