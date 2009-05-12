@@ -21,7 +21,7 @@ $table_revisions_r2 = "CREATE TABLE ".$config["table_prefix"]."revisions (".
                      "body_r text NOT NULL,".
                      "owner varchar(50) NOT NULL default '',".
                      "user varchar(50) NOT NULL default '',".
-                     "latest enum('Y','N') NOT NULL default 'N',".
+                     "latest ENUM('Y','N') NOT NULL default 'N',".
                      "handler varchar(30) NOT NULL default 'page',".
                      "comment_on varchar(50) NOT NULL default '',".
                      "PRIMARY KEY  (id),".
@@ -60,11 +60,12 @@ $update_pages_r3_1 = "UPDATE ".$config["table_prefix"]."pages SET body_r=''";
 $update_pages_r3_2 = "UPDATE ".$config["table_prefix"]."pages SET body_toc=''";
 $update_pages_r4_2 = "UPDATE ".$config["table_prefix"]."pages SET body_r=''";
 
-$alter_users_r0_1 = "ALTER TABLE ".$config["table_prefix"]."users ADD bookmarks text NOT NULL default '', ADD lang VARCHAR(20) NOT NULL default '', ADD show_spaces enum('Y','N') NOT NULL default 'Y'";
-$alter_users_r2_1 = "ALTER TABLE ".$config["table_prefix"]."users ADD showdatetime enum('Y','N') NOT NULL default 'Y', ADD typografica enum('Y','N') NOT NULL default 'Y'";
+$alter_users_r0_1 = "ALTER TABLE ".$config["table_prefix"]."users ADD bookmarks text NOT NULL default '', ADD lang VARCHAR(20) NOT NULL default '', ADD show_spaces ENUM('Y','N') NOT NULL default 'Y'";
+$alter_users_r2_1 = "ALTER TABLE ".$config["table_prefix"]."users ADD showdatetime ENUM('Y','N') NOT NULL default 'Y', ADD typografica ENUM('Y','N') NOT NULL default 'Y'";
 $alter_users_r3_1 = "ALTER TABLE ".$config["table_prefix"]."users ADD more TEXT NOT NULL";
 $alter_users_r3_2 = "ALTER TABLE ".$config["table_prefix"]."users ADD changepassword VARCHAR(100) NOT NULL";
 $alter_users_r3_3 = "ALTER TABLE ".$config["table_prefix"]."users ADD email_confirm VARCHAR(100) NOT NULL";
+$alter_users_r4_2 = "ALTER TABLE ".$config["table_prefix"]."users ADD id INT(10) NOT NULL auto_increment FIRST, DROP PRIMARY KEY, ADD PRIMARY KEY (id)";
 
 $alter_acls_r2_1 = "ALTER TABLE ".$config["table_prefix"]."acls ADD supertag VARCHAR(250) NOT NULL default '', CHANGE page_tag page_tag VARCHAR(250) NOT NULL, ADD INDEX(supertag)";
 $alter_acls_r3_1 = "ALTER TABLE ".$config["table_prefix"]."acls CHANGE page_tag page_tag VARCHAR(250) BINARY NOT NULL";

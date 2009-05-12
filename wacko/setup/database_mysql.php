@@ -23,7 +23,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"title varchar(100) NOT NULL DEFAULT '',".
 					"description varchar(250) NOT NULL DEFAULT '',".
 					"keywords varchar(250) binary NOT NULL DEFAULT '',".
-					"PRIMARY KEY  (id),".
+					"PRIMARY KEY (id),".
 					"FULLTEXT KEY body (body),".
 					"UNIQUE KEY idx_tag (tag),".
 					"KEY idx_supertag (supertag),".
@@ -52,7 +52,7 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"lang varchar(20) NOT NULL DEFAULT '',".
 						"description varchar(250) NOT NULL DEFAULT '',".
 						"keywords varchar(250) binary NOT NULL DEFAULT '',".
-						"PRIMARY KEY  (id),".
+						"PRIMARY KEY (id),".
 						"KEY idx_tag (tag),".
 						"KEY idx_supertag (supertag),".
 						"KEY idx_time (time),".
@@ -87,6 +87,7 @@ $table_referrers = "CREATE TABLE ".$config["table_prefix"]."referrers (".
 					") TYPE=MyISAM";
 
 $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
+					"id int(10) NOT NULL auto_increment,".
 					"name varchar(80) NOT NULL DEFAULT '',".
 					"password varchar(32) NOT NULL DEFAULT '',".
 					"email varchar(50) NOT NULL DEFAULT '',".
@@ -104,7 +105,7 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 					"more text NOT NULL,".
 					"changepassword VARCHAR(100) NOT NULL,".
 					"email_confirm varchar(40) NOT NULL DEFAULT '',".
-					"PRIMARY KEY  (name),".
+					"PRIMARY KEY (id),".
 					"KEY idx_name (name),".
 					"KEY idx_signuptime (signuptime)".
 				") TYPE=MyISAM";
@@ -114,7 +115,7 @@ $table_pagewatches = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
 						"user varchar(80) NOT NULL DEFAULT '',".
 						"tag varchar(250) binary NOT NULL DEFAULT '',".
 						"time timestamp(14) NOT NULL,".
-						"PRIMARY KEY  (id)".
+						"PRIMARY KEY (id)".
 					") TYPE=MyISAM";
 
 $table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
@@ -128,7 +129,7 @@ $table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
 					"picture_h int(11) NOT NULL DEFAULT '0',".
 					"file_ext varchar(10) NOT NULL DEFAULT '',".
 					"user varchar(80) NOT NULL DEFAULT '0',".
-					"PRIMARY KEY  (id),".
+					"PRIMARY KEY (id),".
 					"KEY page_id (page_id,filename),".
 					"KEY page_id_2 (page_id,uploaded_dt),".
 					"KEY user_id (user,page_id)".
