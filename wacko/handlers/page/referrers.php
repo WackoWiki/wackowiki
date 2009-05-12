@@ -20,12 +20,16 @@ if ($user = $this->GetUser())
 		$title = $this->GetTranslation("ReferringPages").":";
 		print("<strong>$title</strong><br /><br />\n");
 
-		if ($pages = $this->LoadPagesLinkingTo($this->getPageTag())) {
-			foreach ($pages as $page) {
+		if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
+		{
+			foreach ($pages as $page)
+			{
 				$links[] = $this->Link("/".$page["tag"]);
 			}
 			print(implode("<br />\n", $links)."<p></p>");
-		} else {
+		} 
+		else
+		{
 			print($this->GetTranslation("NoReferringPages")."<p></p>");
 		}
 
@@ -38,7 +42,7 @@ if ($user = $this->GetUser())
 		$this->GetTranslation("LastDays"))): ""),
 		str_replace("%3",$this->href("referrers_sites"),$this->GetTranslation("ExternalPages"))));
 
-		$referrers = $this->LoadReferrers($this->GetPageTag());
+		$referrers = $this->LoadReferrers($this->page["id"]);
 	}
 
 	print("<strong>$title</strong><br /><br />\n");

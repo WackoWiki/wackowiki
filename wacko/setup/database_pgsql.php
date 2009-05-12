@@ -65,7 +65,7 @@ $table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
 
 
 $table_referrers = "CREATE TABLE ".$config["table_prefix"]."referrers (".
-						"page_tag character varying(250) NOT NULL DEFAULT '',".
+						"page_id integer NOT NULL DEFAULT 0,".
 						"referrer character varying(150) NOT NULL DEFAULT '', ".
 						"\"time\" timestamp without time zone NOT NULL DEFAULT now()".
 					") WITH (OIDS=FALSE);";

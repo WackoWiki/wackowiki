@@ -178,8 +178,9 @@ class Init
 					"handler_path" => "handlers",
 
 					"language" => "en",
-					"theme" => "default",
+					"multilanguage" => 1,
 
+					"theme" => "default",
 					"allow_themes" => 1,
 
 					"header_action" => "header",
@@ -243,8 +244,6 @@ class Init
 					"outlook_workaround" => 1,
 					"disable_autosubscribe" => 0,
 					"allow_gethostbyaddr" => 1,
-
-					"multilanguage" => 1,
 
 					"cache" => 0,
 					"cache_dir" => "_cache/",
