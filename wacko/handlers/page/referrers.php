@@ -20,11 +20,20 @@ if ($user = $this->GetUser())
 		$title = $this->GetTranslation("ReferringPages").":";
 		print("<strong>$title</strong><br /><br />\n");
 
+		// show backlinks
 		if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
 		{
 			foreach ($pages as $page)
 			{
-				$links[] = $this->Link("/".$page["tag"]);
+				if ($page["tag"])
+				{
+					if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
+					else $access = true;
+					if ($access)
+					{
+						$links[] = $this->Link("/".$page["tag"]);
+					}
+				}
 			}
 			print(implode("<br />\n", $links)."<p></p>");
 		} 
