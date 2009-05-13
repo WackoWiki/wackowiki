@@ -4,25 +4,25 @@
  */
 
 $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
-					"id int(10) UNSIGNED NOT NULL auto_increment,".
-					"tag varchar(250) NOT NULL DEFAULT '',".
-					"supertag varchar(250) NOT NULL DEFAULT '',".
-					"created datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"time datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"body mediumtext NOT NULL,".
-					"body_r mediumtext NOT NULL,".
-					"body_toc text NOT NULL,".
-					"owner varchar(50) NOT NULL DEFAULT '',".
-					"user varchar(50) NOT NULL DEFAULT '',".
-					"latest enum('Y','N') NOT NULL DEFAULT 'N',".
-					"handler varchar(30) NOT NULL DEFAULT 'page',".
-					"comment_on varchar(250) binary NOT NULL DEFAULT '',".
-					"super_comment_on varchar(250) NOT NULL DEFAULT '',".
-					"hits int(11) UNSIGNED NOT NULL DEFAULT '0',".
-					"lang varchar(20) NOT NULL DEFAULT '',".
-					"title varchar(100) NOT NULL DEFAULT '',".
-					"description varchar(250) NOT NULL DEFAULT '',".
-					"keywords varchar(250) binary NOT NULL DEFAULT '',".
+					"id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"tag VARCHAR(250) NOT NULL DEFAULT '',".
+					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
+					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"body MEDIUMTEXT NOT NULL,".
+					"body_r MEDIUMTEXT NOT NULL,".
+					"body_toc TEXT NOT NULL,".
+					"owner VARCHAR(50) NOT NULL DEFAULT '',".
+					"user VARCHAR(50) NOT NULL DEFAULT '',".
+					"latest ENUM('Y','N') NOT NULL DEFAULT 'N',".
+					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
+					"comment_on VARCHAR(250) binary NOT NULL DEFAULT '',".
+					"super_comment_on VARCHAR(250) NOT NULL DEFAULT '',".
+					"hits INT(11) UNSIGNED NOT NULL DEFAULT '0',".
+					"lang VARCHAR(20) NOT NULL DEFAULT '',".
+					"title VARCHAR(100) NOT NULL DEFAULT '',".
+					"description VARCHAR(250) NOT NULL DEFAULT '',".
+					"keywords VARCHAR(250) binary NOT NULL DEFAULT '',".
 					"PRIMARY KEY (id),".
 					"FULLTEXT KEY body (body),".
 					"UNIQUE KEY idx_tag (tag),".
@@ -36,22 +36,23 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 				") TYPE=MyISAM;";
 
 $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
-						"id int(10) UNSIGNED NOT NULL auto_increment,".
-						"tag varchar(250) binary NOT NULL DEFAULT '',".
-						"supertag varchar(250) binary NOT NULL DEFAULT '',".
-						"created datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
-						"time datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
-						"body mediumtext NOT NULL,".
-						"body_r mediumtext NOT NULL,".
-						"owner varchar(50) NOT NULL DEFAULT '',".
-						"user varchar(50) NOT NULL DEFAULT '',".
-						"latest enum('Y','N') NOT NULL DEFAULT 'N',".
-						"handler varchar(30) NOT NULL DEFAULT 'page',".
-						"comment_on varchar(250) binary NOT NULL DEFAULT '',".
-						"super_comment_on varchar(250) NOT NULL DEFAULT '',".
-						"lang varchar(20) NOT NULL DEFAULT '',".
-						"description varchar(250) NOT NULL DEFAULT '',".
-						"keywords varchar(250) binary NOT NULL DEFAULT '',".
+						"id INT(10) UNSIGNED NOT NULL auto_increment,".
+						"tag VARCHAR(250) binary NOT NULL DEFAULT '',".
+						"supertag VARCHAR(250) binary NOT NULL DEFAULT '',".
+						"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+						"time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+						"body MEDIUMTEXT NOT NULL,".
+						"body_r MEDIUMTEXT NOT NULL,".
+						"owner VARCHAR(50) NOT NULL DEFAULT '',".
+						"user VARCHAR(50) NOT NULL DEFAULT '',".
+						"latest ENUM('Y','N') NOT NULL DEFAULT 'N',".
+						"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
+						"comment_on VARCHAR(250) binary NOT NULL DEFAULT '',".
+						"super_comment_on VARCHAR(250) NOT NULL DEFAULT '',".
+						"lang VARCHAR(20) NOT NULL DEFAULT '',".
+						"title VARCHAR(100) NOT NULL DEFAULT '',".
+						"description VARCHAR(250) NOT NULL DEFAULT '',".
+						"keywords VARCHAR(250) binary NOT NULL DEFAULT '',".
 						"PRIMARY KEY (id),".
 						"KEY idx_tag (tag),".
 						"KEY idx_supertag (supertag),".
@@ -61,17 +62,17 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 					") TYPE=MyISAM;";
 
 $table_acls = "CREATE TABLE ".$config["table_prefix"]."acls (".
-					"page_tag varchar(250) binary NOT NULL DEFAULT '',".
-					"supertag varchar(250) NOT NULL DEFAULT '',".
-					"privilege varchar(20) NOT NULL DEFAULT '',".
-					"list text NOT NULL,".
+					"page_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
+					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
+					"privilege VARCHAR(20) NOT NULL DEFAULT '',".
+					"list TEXT NOT NULL,".
 					"PRIMARY KEY  (page_tag,privilege),".
 					"KEY supertag (supertag)".
 				") TYPE=MyISAM";
 
 $table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
-					"from_tag varchar(250) binary NOT NULL DEFAULT '',".
-					"to_tag varchar(250) binary NOT NULL DEFAULT '',".
+					"from_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
+					"to_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
 					"to_supertag VARCHAR(250) NOT NULL,".
 					"KEY from_tag (from_tag,to_tag(78)),".
 					"KEY idx_from (from_tag),".
@@ -79,56 +80,56 @@ $table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
 				") TYPE=MyISAM";
 
 $table_referrers = "CREATE TABLE ".$config["table_prefix"]."referrers (".
-						"page_id int(10) UNSIGNED NOT NULL DEFAULT '0',".
-						"referrer char(150) NOT NULL DEFAULT '',".
-						"time datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
+						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+						"referrer CHAR(150) NOT NULL DEFAULT '',".
+						"time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 						"KEY idx_page_id (page_id),".
 						"KEY idx_time (time)".
 					") TYPE=MyISAM";
 
 $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
-					"id int(10) UNSIGNED NOT NULL auto_increment,".
-					"name varchar(80) NOT NULL DEFAULT '',".
-					"password varchar(32) NOT NULL DEFAULT '',".
-					"email varchar(50) NOT NULL DEFAULT '',".
-					"motto text NOT NULL,".
-					"revisioncount int(10) UNSIGNED NOT NULL DEFAULT '20',".
-					"changescount int(10) UNSIGNED NOT NULL DEFAULT '50',".
-					"doubleclickedit enum('Y','N') NOT NULL DEFAULT 'Y',".
-					"signuptime datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"show_comments enum('Y','N') NOT NULL DEFAULT 'N',".
-					"bookmarks text NOT NULL,".
-					"lang varchar(20) NOT NULL DEFAULT '',".
-					"show_spaces enum('Y','N') NOT NULL DEFAULT 'Y',".
-					"showdatetime enum('Y','N') NOT NULL DEFAULT 'Y',".
-					"typografica enum('Y','N') NOT NULL DEFAULT 'Y',".
-					"more text NOT NULL,".
+					"id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"name VARCHAR(80) NOT NULL DEFAULT '',".
+					"password VARCHAR(32) NOT NULL DEFAULT '',".
+					"email VARCHAR(50) NOT NULL DEFAULT '',".
+					"motto TEXT NOT NULL,".
+					"revisioncount INT(10) UNSIGNED NOT NULL DEFAULT '20',".
+					"changescount INT(10) UNSIGNED NOT NULL DEFAULT '50',".
+					"doubleclickedit ENUM('Y','N') NOT NULL DEFAULT 'Y',".
+					"signuptime DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"show_comments ENUM('Y','N') NOT NULL DEFAULT 'N',".
+					"bookmarks TEXT NOT NULL,".
+					"lang VARCHAR(20) NOT NULL DEFAULT '',".
+					"show_spaces ENUM('Y','N') NOT NULL DEFAULT 'Y',".
+					"showdatetime ENUM('Y','N') NOT NULL DEFAULT 'Y',".
+					"typografica ENUM('Y','N') NOT NULL DEFAULT 'Y',".
+					"more TEXT NOT NULL,".
 					"changepassword VARCHAR(100) NOT NULL,".
-					"email_confirm varchar(40) NOT NULL DEFAULT '',".
+					"email_confirm VARCHAR(40) NOT NULL DEFAULT '',".
 					"PRIMARY KEY (id),".
 					"KEY idx_name (name),".
 					"KEY idx_signuptime (signuptime)".
 				") TYPE=MyISAM";
 
 $table_pagewatches = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
-						"id int(10) UNSIGNED NOT NULL auto_increment,".
-						"user varchar(80) NOT NULL DEFAULT '',".
-						"tag varchar(250) binary NOT NULL DEFAULT '',".
-						"time timestamp(14) NOT NULL,".
+						"id INT(10) UNSIGNED NOT NULL auto_increment,".
+						"user VARCHAR(80) NOT NULL DEFAULT '',".
+						"tag VARCHAR(250) binary NOT NULL DEFAULT '',".
+						"time TIMESTAMP NOT NULL,".
 						"PRIMARY KEY (id)".
 					") TYPE=MyISAM";
 
 $table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
-					"id int(10) UNSIGNED NOT NULL auto_increment,".
-					"page_id int(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"filename varchar(250) NOT NULL DEFAULT '',".
-					"description varchar(250) NOT NULL DEFAULT '',".
-					"uploaded_dt datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"filesize int(11) UNSIGNED NOT NULL DEFAULT '0',".
-					"picture_w int(11) UNSIGNED NOT NULL DEFAULT '0',".
-					"picture_h int(11) UNSIGNED NOT NULL DEFAULT '0',".
-					"file_ext varchar(10) NOT NULL DEFAULT '',".
-					"user varchar(80) NOT NULL DEFAULT '0',".
+					"id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"filename VARCHAR(250) NOT NULL DEFAULT '',".
+					"description VARCHAR(250) NOT NULL DEFAULT '',".
+					"uploaded_dt DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"filesize INT(11) UNSIGNED NOT NULL DEFAULT '0',".
+					"picture_w INT(11) UNSIGNED NOT NULL DEFAULT '0',".
+					"picture_h INT(11) UNSIGNED NOT NULL DEFAULT '0',".
+					"file_ext VARCHAR(10) NOT NULL DEFAULT '',".
+					"user VARCHAR(80) NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (id),".
 					"KEY page_id (page_id,filename),".
 					"KEY page_id_2 (page_id,uploaded_dt),".
