@@ -4,7 +4,7 @@
  */
 
 $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
-					"id int(10) unsigned NOT NULL auto_increment,".
+					"id int(10) UNSIGNED NOT NULL auto_increment,".
 					"tag varchar(250) NOT NULL DEFAULT '',".
 					"supertag varchar(250) NOT NULL DEFAULT '',".
 					"created datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
@@ -18,7 +18,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"handler varchar(30) NOT NULL DEFAULT 'page',".
 					"comment_on varchar(250) binary NOT NULL DEFAULT '',".
 					"super_comment_on varchar(250) NOT NULL DEFAULT '',".
-					"hits int(11) NOT NULL DEFAULT '0',".
+					"hits int(11) UNSIGNED NOT NULL DEFAULT '0',".
 					"lang varchar(20) NOT NULL DEFAULT '',".
 					"title varchar(100) NOT NULL DEFAULT '',".
 					"description varchar(250) NOT NULL DEFAULT '',".
@@ -36,7 +36,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 				") TYPE=MyISAM;";
 
 $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
-						"id int(10) unsigned NOT NULL auto_increment,".
+						"id int(10) UNSIGNED NOT NULL auto_increment,".
 						"tag varchar(250) binary NOT NULL DEFAULT '',".
 						"supertag varchar(250) binary NOT NULL DEFAULT '',".
 						"created datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
@@ -79,7 +79,7 @@ $table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
 				") TYPE=MyISAM";
 
 $table_referrers = "CREATE TABLE ".$config["table_prefix"]."referrers (".
-						"page_id int(10) NOT NULL DEFAULT '0',".
+						"page_id int(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"referrer char(150) NOT NULL DEFAULT '',".
 						"time datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
 						"KEY idx_page_id (page_id),".
@@ -87,13 +87,13 @@ $table_referrers = "CREATE TABLE ".$config["table_prefix"]."referrers (".
 					") TYPE=MyISAM";
 
 $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
-					"id int(10) NOT NULL auto_increment,".
+					"id int(10) UNSIGNED NOT NULL auto_increment,".
 					"name varchar(80) NOT NULL DEFAULT '',".
 					"password varchar(32) NOT NULL DEFAULT '',".
 					"email varchar(50) NOT NULL DEFAULT '',".
 					"motto text NOT NULL,".
-					"revisioncount int(10) unsigned NOT NULL DEFAULT '20',".
-					"changescount int(10) unsigned NOT NULL DEFAULT '50',".
+					"revisioncount int(10) UNSIGNED NOT NULL DEFAULT '20',".
+					"changescount int(10) UNSIGNED NOT NULL DEFAULT '50',".
 					"doubleclickedit enum('Y','N') NOT NULL DEFAULT 'Y',".
 					"signuptime datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"show_comments enum('Y','N') NOT NULL DEFAULT 'N',".
@@ -111,7 +111,7 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 				") TYPE=MyISAM";
 
 $table_pagewatches = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
-						"id int(10) NOT NULL auto_increment,".
+						"id int(10) UNSIGNED NOT NULL auto_increment,".
 						"user varchar(80) NOT NULL DEFAULT '',".
 						"tag varchar(250) binary NOT NULL DEFAULT '',".
 						"time timestamp(14) NOT NULL,".
@@ -119,14 +119,14 @@ $table_pagewatches = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
 					") TYPE=MyISAM";
 
 $table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
-					"id int(11) NOT NULL auto_increment,".
-					"page_id int(11) NOT NULL DEFAULT '0',".
+					"id int(10) UNSIGNED NOT NULL auto_increment,".
+					"page_id int(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"filename varchar(250) NOT NULL DEFAULT '',".
 					"description varchar(250) NOT NULL DEFAULT '',".
 					"uploaded_dt datetime NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"filesize int(11) NOT NULL DEFAULT '0',".
-					"picture_w int(11) NOT NULL DEFAULT '0',".
-					"picture_h int(11) NOT NULL DEFAULT '0',".
+					"filesize int(11) UNSIGNED NOT NULL DEFAULT '0',".
+					"picture_w int(11) UNSIGNED NOT NULL DEFAULT '0',".
+					"picture_h int(11) UNSIGNED NOT NULL DEFAULT '0',".
 					"file_ext varchar(10) NOT NULL DEFAULT '',".
 					"user varchar(80) NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (id),".
