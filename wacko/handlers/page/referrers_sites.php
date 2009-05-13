@@ -7,7 +7,7 @@ if (!$this->page) $this->Redirect($this->href("show"));
 // deny for comment
 if ($this->page["comment_on"])
 	$this->Redirect($this->href("", $this->page["comment_on"], "show_comments=1")."#".$this->page["tag"]);
-	
+
 if ($user = $this->GetUser())
 {
 	if ($global = $_GET["global"])
@@ -25,8 +25,8 @@ if ($user = $this->GetUser())
 		str_replace("%1",$this->GetConfigValue("referrers_purge_time"),
 		$this->GetTranslation("LastDays"))): ""),
 		str_replace("%3",$this->href("referrers"),$this->GetTranslation("DomainsSitesPages"))));
-	
-		$referrers = $this->LoadReferrers($this->GetPageTag());
+
+		$referrers = $this->LoadReferrers($this->page["id"]);
 	}
 	
 	print("<strong>$title</strong><br /><br />\n");
@@ -65,7 +65,7 @@ if ($user = $this->GetUser())
 	{
 		print($this->GetTranslation("NoneReferrers")."<br />\n");
 	}
-	
+
 	if ($global)
 	{
 		print("<br />[".str_replace("%1",$this->href("referrers_sites"),str_replace("%2",$this->GetPageTag(),$this->GetTranslation("ViewReferringSites")))." | ".str_replace("%1",$this->href("referrers"),str_replace("%2",$this->GetPageTag(),$this->GetTranslation("ViewReferrersFor")))."]");
