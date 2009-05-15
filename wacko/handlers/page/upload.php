@@ -234,6 +234,7 @@ if ($registered
 						// 5. insert line into DB
 						$this->Query("insert into ".$this->config["table_prefix"]."upload SET ".
 							"page_id = '".quote($this->dblink, $is_global ? "0" : $this->page["id"])."', ".
+							"user_id = '".quote($this->dblink, $user["id"])."',".
 							"filename = '".quote($this->dblink, $small_name)."', ".
 							"description = '".quote($this->dblink, $description)."', ".
 							"filesize = '".quote($this->dblink, $file_size)."',".

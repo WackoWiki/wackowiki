@@ -13,7 +13,9 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"body_r MEDIUMTEXT NOT NULL,".
 					"body_toc TEXT NOT NULL,".
 					"owner VARCHAR(50) NOT NULL DEFAULT '',".
+					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user VARCHAR(50) NOT NULL DEFAULT '',".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"latest ENUM('Y','N') NOT NULL DEFAULT 'N',".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 					"comment_on VARCHAR(250) binary NOT NULL DEFAULT '',".
@@ -44,7 +46,9 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"body MEDIUMTEXT NOT NULL,".
 						"body_r MEDIUMTEXT NOT NULL,".
 						"owner VARCHAR(50) NOT NULL DEFAULT '',".
+						"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"user VARCHAR(50) NOT NULL DEFAULT '',".
+						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"latest ENUM('Y','N') NOT NULL DEFAULT 'N',".
 						"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 						"comment_on VARCHAR(250) binary NOT NULL DEFAULT '',".
@@ -63,6 +67,7 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 
 $table_acls = "CREATE TABLE ".$config["table_prefix"]."acls (".
 					"page_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
+					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
 					"privilege VARCHAR(20) NOT NULL DEFAULT '',".
 					"list TEXT NOT NULL,".
@@ -72,7 +77,9 @@ $table_acls = "CREATE TABLE ".$config["table_prefix"]."acls (".
 
 $table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
 					"from_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
+					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '',".
 					"to_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
+					"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '',".
 					"to_supertag VARCHAR(250) NOT NULL,".
 					"KEY from_tag (from_tag,to_tag(78)),".
 					"KEY idx_from (from_tag),".
@@ -114,7 +121,9 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 $table_pagewatches = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
 						"id INT(10) UNSIGNED NOT NULL auto_increment,".
 						"user VARCHAR(80) NOT NULL DEFAULT '',".
+						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"tag VARCHAR(250) binary NOT NULL DEFAULT '',".
+						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"time TIMESTAMP NOT NULL,".
 						"PRIMARY KEY (id)".
 					") TYPE=MyISAM";
@@ -122,6 +131,7 @@ $table_pagewatches = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
 $table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
 					"id INT(10) UNSIGNED NOT NULL auto_increment,".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"filename VARCHAR(250) NOT NULL DEFAULT '',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"uploaded_dt DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
