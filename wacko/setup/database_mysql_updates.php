@@ -56,6 +56,8 @@ $alter_pages_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."pages MODIFY COLUM
 $alter_pages_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."pages MODIFY COLUMN body_r MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 $alter_pages_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."pages ADD title VARCHAR(100) NOT NULL DEFAULT '' AFTER lang, ADD INDEX idx_title (title)";
 $alter_pages_r4_2_5 = "ALTER TABLE ".$config["table_prefix"]."pages CHANGE hits hits INT(11) UNSIGNED NOT NULL DEFAULT '0'";
+$alter_pages_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."pages ADD owner_id INT(10) UNSIGNED NOT NULL AFTER owner";
+$alter_pages_r4_2_7 = "ALTER TABLE ".$config["table_prefix"]."pages ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
 
 $update_pages_r3_1 = "UPDATE ".$config["table_prefix"]."pages SET body_r=''";
 $update_pages_r3_2 = "UPDATE ".$config["table_prefix"]."pages SET body_toc=''";
@@ -70,11 +72,14 @@ $alter_users_r4_2 = "ALTER TABLE ".$config["table_prefix"]."users ADD id INT(10)
 
 $alter_acls_r2_1 = "ALTER TABLE ".$config["table_prefix"]."acls ADD supertag VARCHAR(250) NOT NULL DEFAULT '', CHANGE page_tag page_tag VARCHAR(250) NOT NULL, ADD INDEX(supertag)";
 $alter_acls_r3_1 = "ALTER TABLE ".$config["table_prefix"]."acls CHANGE page_tag page_tag VARCHAR(250) BINARY NOT NULL";
+$alter_acls_r4_2 = "ALTER TABLE ".$config["table_prefix"]."acls ADD page_id INT(10) UNSIGNED NOT NULL AFTER page_tag";
 
 $alter_links_r2_1 = "ALTER TABLE ".$config["table_prefix"]."links CHANGE from_tag from_tag VARCHAR(250) NOT NULL, CHANGE to_tag to_tag VARCHAR(250) NOT NULL";
 $alter_links_r3_1 = "ALTER TABLE ".$config["table_prefix"]."links CHANGE from_tag from_tag CHAR(250) BINARY NOT NULL";
 $alter_links_r3_2 = "ALTER TABLE ".$config["table_prefix"]."links CHANGE to_tag to_tag CHAR(250) BINARY NOT NULL";
 $alter_links_r3_3 = "ALTER TABLE ".$config["table_prefix"]."links ADD to_supertag VARCHAR(250) NOT NULL";
+$alter_links_r4_2 = "ALTER TABLE ".$config["table_prefix"]."links ADD from_page_id INT(10) UNSIGNED NOT NULL AFTER from_tag";
+$alter_links_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."links ADD to_page_id INT(10) UNSIGNED NOT NULL AFTER to_tag";
 
 $alter_referrers_r2_1 = "ALTER TABLE ".$config["table_prefix"]."referrers CHANGE page_tag page_tag VARCHAR(250) NOT NULL";
 $alter_referrers_r3_1 = "ALTER TABLE ".$config["table_prefix"]."referrers CHANGE page_tag page_tag CHAR(250) BINARY NOT NULL";
@@ -83,6 +88,8 @@ $alter_referrers_r4_2 = "ALTER TABLE ".$config["table_prefix"]."referrers DROP I
 $alter_pagewatches_r2_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE tag tag VARCHAR(250) NOT NULL";
 $alter_pagewatches_r3_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE tag tag VARCHAR(250) BINARY NOT NULL";
 $alter_pagewatches_r4_2 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
+$alter_pagewatches_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
+$alter_pagewatches_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."pagewatches ADD page_id INT(10) UNSIGNED NOT NULL AFTER tag";
 
 $alter_revisions_r3_1 = "ALTER TABLE ".$config["table_prefix"]."revisions CHANGE tag tag VARCHAR(250) BINARY NOT NULL";
 $alter_revisions_r3_2 = "ALTER TABLE ".$config["table_prefix"]."revisions CHANGE comment_on comment_on VARCHAR(250) BINARY NOT NULL";
@@ -94,12 +101,17 @@ $alter_revisions_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD 
 $alter_revisions_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."revisions MODIFY COLUMN body MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 $alter_revisions_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."revisions MODIFY COLUMN body_r MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 $alter_revisions_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD title VARCHAR(100) NOT NULL DEFAULT '' AFTER lang";
+$alter_revisions_r4_2_5 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD owner_id INT(10) UNSIGNED NOT NULL AFTER owner";
+$alter_revisions_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
 
 $alter_cache_r4_2 = "ALTER TABLE ".$config["table_prefix"]."cache ADD time TIMESTAMP NOT NULL, ADD INDEX timestamp (time)";
 
 $alter_upload_r4_2 = "ALTER TABLE ".$config["table_prefix"]."upload CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, 
-																	CHANGE page_id page_id INT(10) UNSIGNED NOT NULL DEFAULT '0', 
-																	CHANGE filesize filesize INT(10) UNSIGNED NOT NULL DEFAULT '0', 
-																	CHANGE picture_w picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0', 
-																	CHANGE picture_h picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0'";
+																	CHANGE page_id page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
+																	CHANGE filesize filesize INT(10) UNSIGNED NOT NULL DEFAULT '0',
+																	CHANGE picture_w picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0',
+																	CHANGE picture_h picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0',
+																	ADD user_id INT(10) UNSIGNED NOT NULL AFTER page_id";
+
+$update_upload_r4_2 = "UPDATE ".$config["table_prefix"]."upload AS upload, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET upload.user_id = users.id WHERE upload.user = users.name";
 ?>
