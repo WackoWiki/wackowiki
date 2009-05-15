@@ -97,9 +97,9 @@ $alter_revisions_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD 
 
 $alter_cache_r4_2 = "ALTER TABLE ".$config["table_prefix"]."cache ADD time TIMESTAMP NOT NULL, ADD INDEX timestamp (time)";
 
-$alter_upload_r4_2 = "ALTER TABLE ".$config["table_prefix"]."upload CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
-$alter_upload_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."upload CHANGE page_id page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'";
-$alter_upload_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."upload CHANGE filesize filesize INT(10) UNSIGNED NOT NULL DEFAULT '0'";
-$alter_upload_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."upload CHANGE picture_w picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0'";
-$alter_upload_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."upload CHANGE picture_h picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0'";
+$alter_upload_r4_2 = "ALTER TABLE ".$config["table_prefix"]."upload CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, 
+																	CHANGE page_id page_id INT(10) UNSIGNED NOT NULL DEFAULT '0', 
+																	CHANGE filesize filesize INT(10) UNSIGNED NOT NULL DEFAULT '0', 
+																	CHANGE picture_w picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0', 
+																	CHANGE picture_h picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0'";
 ?>

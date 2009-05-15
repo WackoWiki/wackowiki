@@ -255,6 +255,7 @@ switch($config["database_driver"])
 					test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r4_2_2, $dblink), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r4_2_3, $dblink), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r4_2_4, $dblink), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
+					test(str_replace("%1","upload",$lang["AlterTable"]), @mysql_query($alter_upload_r4_2, $dblink), str_replace("%1", "upload", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r4_2, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 					test($lang["InstallingLogoImage"], @mysql_query($insert_logo_image, $dblink), str_replace("%1","logo image",$lang["ErrorAlreadyExists"]));
 
@@ -474,6 +475,7 @@ switch($config["database_driver"])
 								test(str_replace("%1","revisions",$lang["AlterTable"]), @mysqli_query($dblink, $alter_revisions_r4_2_2), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","revisions",$lang["AlterTable"]), @mysqli_query($dblink, $alter_revisions_r4_2_3), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","revisions",$lang["AlterTable"]), @mysqli_query($dblink, $alter_revisions_r4_2_4), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
+								test(str_replace("%1","upload",$lang["AlterTable"]), @mysqli_query($dblink, $alter_upload_r4_2), str_replace("%1", "upload", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r4_2), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 								test($lang["InstallingLogoImage"], @mysqli_query($dblink, $insert_logo_image), str_replace("%1","logo image",$lang["ErrorAlreadyExists"]));
 								
