@@ -62,6 +62,8 @@ $alter_pages_r4_2_7 = "ALTER TABLE ".$config["table_prefix"]."pages ADD user_id 
 $update_pages_r3_1 = "UPDATE ".$config["table_prefix"]."pages SET body_r=''";
 $update_pages_r3_2 = "UPDATE ".$config["table_prefix"]."pages SET body_toc=''";
 $update_pages_r4_2 = "UPDATE ".$config["table_prefix"]."pages SET body_r=''";
+$update_pages_r4_2_1 = "UPDATE ".$config["table_prefix"]."pages AS pages, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET pages.owner_id = users.id WHERE pages.owner = users.name";
+$update_pages_r4_2_2 = "UPDATE ".$config["table_prefix"]."pages AS pages, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET pages.user_id = users.id WHERE pages.user = users.name";
 
 $alter_users_r0_1 = "ALTER TABLE ".$config["table_prefix"]."users ADD bookmarks TEXT NOT NULL DEFAULT '', ADD lang VARCHAR(20) NOT NULL DEFAULT '', ADD show_spaces ENUM('Y','N') NOT NULL DEFAULT 'Y'";
 $alter_users_r2_1 = "ALTER TABLE ".$config["table_prefix"]."users ADD showdatetime ENUM('Y','N') NOT NULL DEFAULT 'Y', ADD typografica ENUM('Y','N') NOT NULL DEFAULT 'Y'";
@@ -74,12 +76,17 @@ $alter_acls_r2_1 = "ALTER TABLE ".$config["table_prefix"]."acls ADD supertag VAR
 $alter_acls_r3_1 = "ALTER TABLE ".$config["table_prefix"]."acls CHANGE page_tag page_tag VARCHAR(250) BINARY NOT NULL";
 $alter_acls_r4_2 = "ALTER TABLE ".$config["table_prefix"]."acls ADD page_id INT(10) UNSIGNED NOT NULL AFTER page_tag";
 
+$update_acls_r4_2 = "UPDATE ".$config["table_prefix"]."acls AS acls, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages SET acls.page_id = pages.id WHERE acls.page_tag = pages.tag";
+
 $alter_links_r2_1 = "ALTER TABLE ".$config["table_prefix"]."links CHANGE from_tag from_tag VARCHAR(250) NOT NULL, CHANGE to_tag to_tag VARCHAR(250) NOT NULL";
 $alter_links_r3_1 = "ALTER TABLE ".$config["table_prefix"]."links CHANGE from_tag from_tag CHAR(250) BINARY NOT NULL";
 $alter_links_r3_2 = "ALTER TABLE ".$config["table_prefix"]."links CHANGE to_tag to_tag CHAR(250) BINARY NOT NULL";
 $alter_links_r3_3 = "ALTER TABLE ".$config["table_prefix"]."links ADD to_supertag VARCHAR(250) NOT NULL";
 $alter_links_r4_2 = "ALTER TABLE ".$config["table_prefix"]."links ADD from_page_id INT(10) UNSIGNED NOT NULL AFTER from_tag";
 $alter_links_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."links ADD to_page_id INT(10) UNSIGNED NOT NULL AFTER to_tag";
+
+$update_links_r4_2 = "UPDATE ".$config["table_prefix"]."links AS links, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages SET links.from_page_id = pages.id WHERE links.from_tag = pages.tag";
+$update_links_r4_2_1 = "UPDATE ".$config["table_prefix"]."links AS links, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages SET links.to_page_id = pages.id WHERE links.to_tag = pages.tag";
 
 $alter_referrers_r2_1 = "ALTER TABLE ".$config["table_prefix"]."referrers CHANGE page_tag page_tag VARCHAR(250) NOT NULL";
 $alter_referrers_r3_1 = "ALTER TABLE ".$config["table_prefix"]."referrers CHANGE page_tag page_tag CHAR(250) BINARY NOT NULL";
@@ -90,6 +97,9 @@ $alter_pagewatches_r3_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CH
 $alter_pagewatches_r4_2 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
 $alter_pagewatches_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
 $alter_pagewatches_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."pagewatches ADD page_id INT(10) UNSIGNED NOT NULL AFTER tag";
+
+$update_pagewatches_r4_2 = "UPDATE ".$config["table_prefix"]."pagewatches AS pagewatches, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET pagewatches.user_id = users.id WHERE pagewatches.user = users.name";
+$update_pagewatches_r4_2_1 = "UPDATE ".$config["table_prefix"]."pagewatches AS pagewatches, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages SET pagewatches.page_id = pages.id WHERE pagewatches.tag = pages.tag";
 
 $alter_revisions_r3_1 = "ALTER TABLE ".$config["table_prefix"]."revisions CHANGE tag tag VARCHAR(250) BINARY NOT NULL";
 $alter_revisions_r3_2 = "ALTER TABLE ".$config["table_prefix"]."revisions CHANGE comment_on comment_on VARCHAR(250) BINARY NOT NULL";
@@ -103,6 +113,9 @@ $alter_revisions_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."revisions MODI
 $alter_revisions_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD title VARCHAR(100) NOT NULL DEFAULT '' AFTER lang";
 $alter_revisions_r4_2_5 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD owner_id INT(10) UNSIGNED NOT NULL AFTER owner";
 $alter_revisions_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
+
+$update_revisions_r4_2_1 = "UPDATE ".$config["table_prefix"]."revisions AS revisions, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET revisions.owner_id = users.id WHERE revisions.owner = users.name";
+$update_revisions_r4_2_2 = "UPDATE ".$config["table_prefix"]."revisions AS revisions, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET revisions.user_id = users.id WHERE revisions.user = users.name";
 
 $alter_cache_r4_2 = "ALTER TABLE ".$config["table_prefix"]."cache ADD time TIMESTAMP NOT NULL, ADD INDEX timestamp (time)";
 
