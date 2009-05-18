@@ -116,8 +116,8 @@ $alter_revisions_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD 
 
 $insert_revisions_r2_1 = "INSERT INTO ".$config["table_prefix"]."revisions ( id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on ) SELECT id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on FROM ".$config["table_prefix"]."pages WHERE latest='N';";
 
-$update_revisions_r4_2_1 = "UPDATE ".$config["table_prefix"]."revisions AS revisions, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET revisions.owner_id = users.id WHERE revisions.owner = users.name";
-$update_revisions_r4_2_2 = "UPDATE ".$config["table_prefix"]."revisions AS revisions, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET revisions.user_id = users.id WHERE revisions.user = users.name";
+$update_revisions_r4_2 = "UPDATE ".$config["table_prefix"]."revisions AS revisions, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET revisions.owner_id = users.id WHERE revisions.owner = users.name";
+$update_revisions_r4_2_1 = "UPDATE ".$config["table_prefix"]."revisions AS revisions, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET revisions.user_id = users.id WHERE revisions.user = users.name";
 
 // UPLOAD
 $alter_upload_r4_2 = "ALTER TABLE ".$config["table_prefix"]."upload CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, 
