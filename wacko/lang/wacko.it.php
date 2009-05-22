@@ -410,9 +410,9 @@ $wackoTranslation = array(
 	"LastModification" => "Last Modification",
 
 	// Captcha
-	"Captcha" => "Please type the word you read in the image",
-	"SpamAlert" => "You have entered the captcha word incorrectly",
-	"CaptchaReload" => "New Captcha",
+	"Captcha" => "Inserire la parola visibile nell'immagine",
+	"SpamAlert" => "La parola inserita non è corretta",
+	"CaptchaReload" => "Nuova Captcha",
 	"CaptchaReloadWarning" => "Sorry, cannot reload the captcha image, you will have to reload the page to do that",
 );
 
