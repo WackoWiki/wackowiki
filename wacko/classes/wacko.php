@@ -1496,7 +1496,7 @@ class Wacko
 		if ($imgurl == 1)
 			return "<!--imglink:begin-->".str_replace(' ', '+', urldecode($tag)).' =='.$text."<!--imglink:end-->";
 		else
-			return "<!--link:begin-->".$tag." ==".($this->format_safe?str_replace(">", "&gt;", str_replace("<", "&lt;", $text)):$text)."<!--link:end-->";
+			return "<!--link:begin-->".$tag." ==".($this->format_safe ? str_replace(">", "&gt;", str_replace("<", "&lt;", $text)) : $text)."<!--link:end-->";
 	}
 
 	function Link($tag, $method = "", $text = "", $track = 1, $safe = 0, $linklang = "", $anchorlink = 1)
@@ -3139,7 +3139,7 @@ class Wacko
 
 		if($this->config["debug"] >= 2)
 		{
-			if (($this->config["debug_admin_only"] == true && $this->engine->IsAdmin() === true) || $this->config["debug_admin_only"] == false)
+			if (($this->config["debug_admin_only"] == true && $this->IsAdmin() === true) || $this->config["debug_admin_only"] == false)
 			{
 				echo '<span class="debug">Multilanguage: '.$this->config["multilanguage"].'<br/>';
 				echo 'HTTP_ACCEPT_LANGUAGE set: '.isset($_SERVER['HTTP_ACCEPT_LANGUAGE']).'<br />';
