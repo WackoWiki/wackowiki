@@ -55,7 +55,7 @@ h4 { padding-top: 15px; padding-bottom: 5px; font: italic bold 10pt Trebuchet MS
 .revisioninfo { padding-bottom: 20px; color: #AAAAAA }
 
 /* Displays text: "Comparison for..." */
-.diffinfo { font-weight: bold; color: #AAAAAA; }
+.diffinfo { font-weight: bold; color: #555555; }
 
 /* Simple differences */
 .additions { color: #008800 }
