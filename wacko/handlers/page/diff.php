@@ -27,8 +27,8 @@ if ($this->HasAccess("read")) {
 			$deleted = array_diff($bodyB, $bodyA);
 
 			$output .=
-			str_replace("%1", "<a href=\"".$this->href("", "", ($b!=-1?"time=".urlencode($pageA["time"]):""))."\">".$pageA["time"]."</a>",
-			str_replace("%2", "<a href=\"".$this->href("", "", ($a!=-1?"time=".urlencode($pageB["time"]):""))."\">".$pageB["time"]."</a>",
+			str_replace("%1", "<a href=\"".$this->href("", "", ($b != -1 ? "time=".urlencode($pageA["time"]) : ""))."\">".$pageA["time"]."</a>",
+			str_replace("%2", "<a href=\"".$this->href("", "", ($a != -1 ? "time=".urlencode($pageB["time"]) : ""))."\">".$pageB["time"]."</a>",
 			str_replace("%3", $this->ComposeLinkToPage($this->tag, "", "", 0),
 			$this->GetTranslation("Comparison"))))."<br />\n";
 
@@ -36,13 +36,13 @@ if ($this->HasAccess("read")) {
 			{
 				// remove blank lines
 				$output .= "<br />\n".$this->GetTranslation("SimpleDiffAdditions")."<br />\n";
-				$output .= "<div class=\"additions\">".$this->Format(implode("\n", $added), "wakka", array("diff"=>1))."</div>";
+				$output .= "<div class=\"additions\">".$this->Format(implode("\n", $added), "wakka", array("diff" => 1))."</div>";
 			}
 
 			if ($deleted)
 			{
 				$output .= "<br />\n".$this->GetTranslation("SimpleDiffDeletions")."<br />\n";
-				$output .= "<div class=\"deletions\">".$this->Format(implode("\n", $deleted), "wakka", array("diff"=>1))."</div>";
+				$output .= "<div class=\"deletions\">".$this->Format(implode("\n", $deleted), "wakka", array("diff" => 1))."</div>";
 			}
 
 			if (!$added && !$deleted)
@@ -65,7 +65,7 @@ if ($this->HasAccess("read")) {
 			$sideA = new Side($textA);
 			$sideB = new Side($textB);
 
-			$bodyA='';
+			$bodyA = '';
 			$sideA->split_file_into_words($bodyA);
 
 			$bodyB='';
@@ -79,10 +79,10 @@ if ($this->HasAccess("read")) {
 
 			$sideO = new Side($fmt->format($diff));
 
-			$resync_left=0;
-			$resync_right=0;
+			$resync_left = 0;
+			$resync_right = 0;
 
-			$count_total_right=$sideB->getposition() ;
+			$count_total_right = $sideB->getposition() ;
 
 			$sideA->init();
 			$sideB->init();
@@ -117,20 +117,20 @@ if ($this->HasAccess("read")) {
 					$sideA->skip_until_ordinal($resync_left);
 					$sideB->copy_until_ordinal($resync_right,$output);
 
-					if ($letter=='d' || $letter=='c') {// deleted word
+					if ($letter == 'd' || $letter == 'c') {// deleted word
 						$sideA->copy_whitespace($output);
-						$output .="<!--markup:1:begin-->";
+						$output .= "<!--markup:1:begin-->";
 						$sideA->copy_word($output);
 						$sideA->copy_until_ordinal($argument[1],$output);
-						$output .="<!--markup:1:end-->";
+						$output .= "<!--markup:1:end-->";
 					}
 
 					if ($letter == 'a' || $letter == 'c') {// inserted word
 						$sideB->copy_whitespace($output);
-						$output .="<!--markup:2:begin-->";
+						$output .= "<!--markup:2:begin-->";
 						$sideB->copy_word($output);
 						$sideB->copy_until_ordinal($argument[3],$output);
-						$output .="<!--markup:2:end-->";
+						$output .= "<!--markup:2:end-->";
 					}
 				}
 			}
