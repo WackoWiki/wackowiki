@@ -369,6 +369,9 @@ div .action-content {
 	width:			auto;
 }
 
+/* Displays text: "Comparison for..." */
+.diffinfo { font-weight: bold; color: #AAAAAA; }
+
 /* Simple differences */
 .additions,
 .deletions {

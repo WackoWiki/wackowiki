@@ -62,6 +62,9 @@ h4 { padding-top: 15px; padding-bottom: 5px; font: italic bold 10pt Trebuchet MS
   padding-bottom: 20px;
 }
 
+/* Displays text: "Comparison for..." */
+.diffinfo { font-weight: bold; color: #AAAAAA; }
+
 /* Simple differences */
 .additions { color: #008800; }
 .deletions { color: #880000; }

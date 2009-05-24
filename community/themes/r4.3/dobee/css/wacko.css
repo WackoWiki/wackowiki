@@ -54,8 +54,8 @@ h4 { padding-top: 15px; padding-bottom: 5px; font: italic bold 10pt Trebuchet MS
 /* Displays text: "This is an old revision of..." */
 .revisioninfo { padding-bottom: 20px; color: #AAAAAA }
 
-
-
+/* Displays text: "Comparison for..." */
+.diffinfo { font-weight: bold; color: #AAAAAA; }
 
 /* Simple differences */
 .additions { color: #008800 }

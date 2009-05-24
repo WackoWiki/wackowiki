@@ -70,6 +70,9 @@ H5 { font-family: Arial;  font-size: 14px; padding-top:10px; padding-bottom:5px 
   padding-bottom: 20px;
 }
 
+/* Displays text: "Comparison for..." */
+.diffinfo { font-weight: bold; color: #AAAAAA; }
+
 /* Simple differences */
 .additions { color: #008800; }
 .deletions { color: #880000; }
