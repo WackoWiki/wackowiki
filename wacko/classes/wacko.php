@@ -1978,7 +1978,7 @@ class Wacko
 	function AddDatetime($tag)
 	{
 		if ($user = $this->GetUser()) $show = $user["showdatetime"];
-		if (!$show) $show = $this->config["show_datetime"];
+		if (!isset($show)) $show = $this->config["show_datetime"];
 		if (!$show) $show = "Y";
 		if ($show != "N" && $show != "0")
 		{
