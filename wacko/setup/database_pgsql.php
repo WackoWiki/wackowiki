@@ -14,6 +14,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"body_toc text NOT NULL,".
 					"\"owner\" character varying(80) NOT NULL DEFAULT '',".
 					"\"user\" character varying(80) NOT NULL DEFAULT '',".
+					"edit_note character varying(100) NOT NULL DEFAULT '',".
 					"latest character(1) NOT NULL DEFAULT 'N',".
 					"\"handler\" character varying(30) NOT NULL DEFAULT 'page',".
 					"comment_on character varying(250) NOT NULL DEFAULT '',".
@@ -37,6 +38,7 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"body_r text NOT NULL DEFAULT '',".
 						"\"owner\" character varying(80) NOT NULL DEFAULT '',".
 						"\"user\" character varying(80) NOT NULL DEFAULT '',".
+						"edit_note character varying(100) NOT NULL DEFAULT '',".
 						"latest character(1) NOT NULL DEFAULT 'N',".
 						"\"handler\" character varying(30) NOT NULL DEFAULT 'page',".
 						"comment_on character varying(250) NOT NULL DEFAULT '',".
