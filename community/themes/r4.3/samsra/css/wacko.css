@@ -72,7 +72,7 @@ H6 { font-family: Arial;   font-size: 12px; }
 }
 
 /* Displays text: "Comparison for..." */
-.diffinfo { font-weight: bold; color: #AAAAAA; }
+.diffinfo { font-weight: bold; color: #555555; }
 
 /* Simple differences */
 .additions { color: #008800; }

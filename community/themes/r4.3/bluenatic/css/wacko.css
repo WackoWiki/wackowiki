@@ -92,7 +92,7 @@ h6 {font-size:1.0em;}
 }
 
 /* Displays text: "Comparison for..." */
-.diffinfo { font-weight: bold; color: #AAAAAA; }
+.diffinfo { font-weight: bold; color: #555555; }
 
 /* Simple differences */
 .additions {
