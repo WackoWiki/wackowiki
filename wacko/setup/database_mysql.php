@@ -77,9 +77,9 @@ $table_acls = "CREATE TABLE ".$config["table_prefix"]."acls (".
 
 $table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
 					"from_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
-					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '',".
+					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"to_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
-					"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '',".
+					"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"to_supertag VARCHAR(250) NOT NULL,".
 					"KEY from_tag (from_tag,to_tag(78)),".
 					"KEY idx_from (from_tag),".
