@@ -69,6 +69,9 @@ H6 { font-family: Arial;   font-size: 12px; }
   padding-bottom: 20px;
 }
 
+/* Displays text: "Comparison for..." */
+.diffinfo { font-weight: bold; color: #AAAAAA; }
+
 /* Simple differences */
 .additions { color: #008800; }
 .deletions { color: #880000; }

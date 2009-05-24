@@ -67,6 +67,9 @@ H7 { font-family: Tahoma,Verdana, Arial,Geneva,Trebuchet MS,Helvetica,sans-serif
   padding-bottom: 20px;
 }
 
+/* Displays text: "Comparison for..." */
+.diffinfo { font-weight: bold; color: #AAAAAA; }
+
 /* Simple differences */
 .additions {color:#080;}
 .deletions {color:#800;}

@@ -91,6 +91,9 @@ h6 {font-size:1.0em;}
 	border:			none;
 }
 
+/* Displays text: "Comparison for..." */
+.diffinfo { font-weight: bold; color: #AAAAAA; }
+
 /* Simple differences */
 .additions {
 	background-color:	#efe;
