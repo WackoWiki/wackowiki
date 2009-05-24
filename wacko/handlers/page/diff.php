@@ -30,7 +30,7 @@ if ($this->HasAccess("read")) {
 			str_replace("%1", "<a href=\"".$this->href("", "", ($b != -1 ? "time=".urlencode($pageA["time"]) : ""))."\">".$pageA["time"]."</a>",
 			str_replace("%2", "<a href=\"".$this->href("", "", ($a != -1 ? "time=".urlencode($pageB["time"]) : ""))."\">".$pageB["time"]."</a>",
 			str_replace("%3", $this->ComposeLinkToPage($this->tag, "", "", 0),
-			$this->GetTranslation("Comparison"))))."<br />\n";
+			"<div class=\"diffinfo\">".$this->GetTranslation("Comparison"))))."</div><br />\n";
 
 			if ($added)
 			{
@@ -141,7 +141,7 @@ if ($this->HasAccess("read")) {
 			$out = str_replace("%1", "<a href=\"".$this->href("", "", "time=".urlencode($pageB["time"]))."\">".$pageB["time"]."</a>",
 			str_replace("%2", "<a href=\"".$this->href("", "", "time=".urlencode($pageA["time"]))."\">".$pageA["time"]."</a>",
 			str_replace("%3", $this->ComposeLinkToPage($this->tag, "", "", 0),
-			$this->GetTranslation("Comparison"))))."<br />\n<br />\n".$out;
+			"<div class=\"diffinfo\">".$this->GetTranslation("Comparison"))))."</div><br />\n<br />\n".$out;
 			print $out;
 
 		}
