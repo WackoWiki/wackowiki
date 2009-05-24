@@ -31,7 +31,6 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"KEY idx_supertag (supertag),".
 					"KEY idx_created (created),".
 					"KEY idx_time (time),".
-					"KEY idx_latest (latest),".
 					"KEY idx_comment_on (comment_on),".
 					"KEY idx_super_comment_on (super_comment_on),".
 					"KEY idx_title (title)".
@@ -61,7 +60,6 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"KEY idx_tag (tag),".
 						"KEY idx_supertag (supertag),".
 						"KEY idx_time (time),".
-						"KEY idx_latest (latest),".
 						"KEY idx_comment_on (comment_on)".
 					") TYPE=MyISAM;";
 
