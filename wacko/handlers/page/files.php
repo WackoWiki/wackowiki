@@ -12,10 +12,11 @@ else
 	$page_id = $this->page["id"];
 }
 $what = $this->LoadAll(
-	"SELECT user, id, filename, file_ext, filesize, description ".
+	"SELECT ".$this->config["table_prefix"]."users.name AS user, ".$this->config["table_prefix"]."upload.id, ".$this->config["table_prefix"]."upload.filename, ".$this->config["table_prefix"]."upload.file_ext, ".$this->config["table_prefix"]."upload.filesize, ".$this->config["table_prefix"]."upload.description ".
 	"FROM ".$this->config["table_prefix"]."upload ".
-	"WHERE page_id = '".quote($this->dblink, $page_id)."'".
-    "AND filename='".quote($this->dblink, $_GET["get"])."'");
+	"INNER JOIN ".$this->config["table_prefix"]."users ON (".$this->config["table_prefix"]."upload.user_id = ".$this->config["table_prefix"]."users.id) ".
+	"WHERE ".$this->config["table_prefix"]."upload.page_id = '".quote($this->dblink, $page_id)."'".
+    "AND ".$this->config["table_prefix"]."upload.filename='".quote($this->dblink, $_GET["get"])."'");
 
 if (sizeof($what) > 0)
 {
