@@ -139,11 +139,10 @@ $table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
 					"picture_w INT(11) UNSIGNED NOT NULL DEFAULT '0',".
 					"picture_h INT(11) UNSIGNED NOT NULL DEFAULT '0',".
 					"file_ext VARCHAR(10) NOT NULL DEFAULT '',".
-					"user VARCHAR(80) NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (id),".
 					"KEY page_id (page_id,filename),".
 					"KEY page_id_2 (page_id,uploaded_dt),".
-					"KEY user_id (user,page_id)".
+					"KEY user_id (user_id,page_id)".
 				") TYPE=MyISAM";
 
 $table_cache = "CREATE TABLE ".$config["table_prefix"]."cache (".
