@@ -105,6 +105,7 @@ $table_pagewatches = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
 $table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
 					"id serial,".
 					"page_id integer NOT NULL DEFAULT 0,".
+					"user_id integer NOT NULL DEFAULT 0,".
 					"filename character varying(250) NOT NULL DEFAULT '',".
 					"description character varying(250) NOT NULL DEFAULT '',".
 					"uploaded_dt timestamp without time zone NOT NULL DEFAULT now(),".
@@ -112,7 +113,6 @@ $table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
 					"picture_w integer NOT NULL DEFAULT 0,".
 					"picture_h integer NOT NULL DEFAULT 0,".
 					"file_ext character varying(10) NOT NULL DEFAULT '',".
-					"\"user\" character varying(80) NOT NULL DEFAULT '0',".
 					"CONSTRAINT pk_upload_id PRIMARY KEY (id)".
 				") WITH (OIDS=FALSE);";
 
