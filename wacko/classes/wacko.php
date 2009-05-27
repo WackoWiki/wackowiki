@@ -144,7 +144,6 @@ class Wacko
 	}
 
 	function GetPageTag() { return $this->tag; }
-	function GetPageId() { return $this->page["id"]; }
 	function GetPageSuperTag() { return $this->supertag; }
 	function GetPageTime() { return $this->page["time"]; }
 	function GetPageLastWriter() { return $this->page["user"]; }
@@ -860,7 +859,6 @@ class Wacko
 				"ORDER BY time DESC ".
 				"LIMIT 1");
 		}
-
 		return $rev;
 	}
 
@@ -915,36 +913,47 @@ class Wacko
 					$this->CacheACL($read_acls[$i]["supertag"], "read", 1,$read_acls[$i]);
 				}
 			}
-
 			return $pages;
 		}
 	}
 
 	function LoadRecentlyComment($limit = 100, $for="", $from="")
 	{
-		$limit= (int) $limit;
-		if ($pages =
-		$this->LoadAll("SELECT ".$this->pages_meta.", body_r FROM ".$this->config["table_prefix"]."pages ".
-		"WHERE comment_on != '' ".($from?"AND time<='".quote($this->dblink, $from)." 23:59:59'":"").
-		($for?"AND supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' ":"").
-		"ORDER BY time DESC LIMIT ".$limit))
+		$limit = (int) $limit;
+		
+		if ($pages = $this->LoadAll(
+		"SELECT ".$this->pages_meta.", body_r FROM ".$this->config["table_prefix"]."pages ".
+		"WHERE comment_on != '' ".
+			($from
+				? "AND time<='".quote($this->dblink, $from)." 23:59:59'"
+				: "").
+			($for
+				? "AND supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
+				: "").
+		"ORDER BY time DESC ".
+		"LIMIT ".$limit))
 		{
 			foreach ($pages as $page)
 			{
 				$this->CachePage($page, 1);
 			}
 
-			if ($read_acls = $this->LoadAll("SELECT a.* "
-			."FROM ".$this->config["table_prefix"]."acls a, ".$this->config["table_prefix"]."pages p "
-			."WHERE p.comment_on = '' "
-			."AND a.supertag = p.supertag "
-			.($for ? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' " : "")
-			."AND privilege = 'read' "
-			."ORDER BY time DESC LIMIT ".$limit))
-			for ($i = 0; $i < count($read_acls); $i++) {
-				$this->CacheACL($read_acls[$i]["supertag"], "read", 1,$read_acls[$i]);
+			if ($read_acls = $this->LoadAll(
+			"SELECT a.* ".
+			"FROM ".$this->config["table_prefix"]."acls a, ".$this->config["table_prefix"]."pages p ".
+			"WHERE p.comment_on = '' ".
+				"AND a.supertag = p.supertag ".
+					($for
+						? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
+						: "").
+			"AND privilege = 'read' ".
+			"ORDER BY time DESC ".
+			"LIMIT ".$limit))
+						
+			for ($i = 0; $i < count($read_acls); $i++)
+			{
+				$this->CacheACL($read_acls[$i]["supertag"], "read", 1, $read_acls[$i]);
 			}
-
 			return $pages;
 		}
 	}
@@ -953,24 +962,36 @@ class Wacko
 	{
 		$pref = $this->config["table_prefix"];
 		$sql = "SELECT DISTINCT ".$pref."links.to_tag AS wanted_tag ".
-		"FROM ".$pref."links LEFT JOIN ".$pref."pages ON ".
-		"((".$pref."links.to_tag = ".$pref."pages.tag AND ".$pref."links.to_supertag='') ".
-		" OR ".$pref."links.to_supertag=".$pref."pages.supertag) ".
-		"WHERE ".($for ? $pref."links.to_tag LIKE '".quote($this->dblink, $for)."/%' AND " : "").
-		$pref."pages.tag is NULL GROUP BY wanted_tag ORDER BY wanted_tag ASC";
+		"FROM ".$pref."links ".
+			"LEFT JOIN ".$pref."pages ON ".
+			"((".$pref."links.to_tag = ".$pref."pages.tag ".
+				"AND ".$pref."links.to_supertag='') ".
+				"OR ".$pref."links.to_supertag=".$pref."pages.supertag) ".
+		"WHERE ".
+			($for
+				? $pref."links.to_tag LIKE '".quote($this->dblink, $for)."/%' AND "
+				: "").
+		$pref."pages.tag is NULL GROUP BY wanted_tag ".
+		"ORDER BY wanted_tag ASC";
 		return $this->LoadAll($sql);
 	}
 
 	function LoadOrphanedPages($for = "")
 	{
 		$pref = $this->config["table_prefix"];
-		$sql = "SELECT DISTINCT tag FROM ".$pref."pages LEFT JOIN ".$pref."links ON ".
-		//     $pref."pages.tag = ".$pref."links.to_tag WHERE ".
-		"((".$pref."links.to_tag = ".$pref."pages.tag AND ".$pref."links.to_supertag='') ".
-		" OR ".$pref."links.to_supertag=".$pref."pages.supertag) WHERE ".
-		($for ? $pref."pages.tag LIKE '".quote($this->dblink, $for)."/%' AND " : "").
+		$sql = "SELECT DISTINCT tag FROM ".$pref."pages ".
+			"LEFT JOIN ".$pref."links ON ".
+			//     $pref."pages.tag = ".$pref."links.to_tag WHERE ".
+			"((".$pref."links.to_tag = ".$pref."pages.tag ".
+				"AND ".$pref."links.to_supertag='') ".
+				"OR ".$pref."links.to_supertag=".$pref."pages.supertag) ".
+		"WHERE ".
+			($for
+				? $pref."pages.tag LIKE '".quote($this->dblink, $for)."/%' AND "
+				: "").
 		$pref."links.to_tag is NULL AND ".$pref."pages.comment_on = '' ".
-		"ORDER BY tag LIMIT 200";
+		"ORDER BY tag ".
+		"LIMIT 200";
 		return $this->LoadAll($sql);
 	}
 
@@ -1016,7 +1037,7 @@ class Wacko
 	{
 		// get current user
 		$user = $this->GetUserName();
-		$user_id = $this->GetUserId();
+
 		/*
 		 ANTISPAM
 
@@ -1217,8 +1238,8 @@ class Wacko
 				{
 					// move revision
 					$this->Query(
-							"INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, owner, user, latest, handler, comment_on, supertag, title, keywords, description) ".
-							"SELECT tag, time, body, owner, user, 'N', handler, comment_on, supertag, title, keywords, description ".
+							"INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, owner, owner_id, user, user_id, latest, handler, comment_on, supertag, title, keywords, description) ".
+							"SELECT tag, time, body, owner, owner_id, user, user_id, 'N', handler, comment_on, supertag, title, keywords, description ".
 							"FROM ".$this->config["table_prefix"]."pages ".
 							"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
 
@@ -1230,7 +1251,9 @@ class Wacko
 							"time = NOW(), ".
 							"created = '".quote($this->dblink, $oldPage['created'])."', ".
 							"owner = '".quote($this->dblink, $owner)."', ".
+							"owner_id = '".quote($this->dblink, $owner_id)."', ".
 							"user = '".quote($this->dblink, $user)."', ".
+							"user_id = '".quote($this->dblink, $user_id)."', ".
 							"supertag = '".$this->NpjTranslit($tag)."', ".
 							"body = '".quote($this->dblink, $body)."', ".
 							"body_toc = '".quote($this->dblink, $body_toc)."', ".
@@ -2316,14 +2339,14 @@ class Wacko
 		}
 		return $name;
 	}
-	
+
 	function GetUserId()
 	{
 		if ($user = $this->GetUser()) $user_id = $user["id"];
 		
 		return $user_id;
 	}
-	
+
 	function _gethostbyaddr($ip)
 	{
 		if ($this->config["allow_gethostbyaddr"])
@@ -2486,6 +2509,7 @@ class Wacko
 
 	function SaveAcl($tag, $privilege, $list)
 	{
+		$page_id = $this->page["id"];
 		$supertag = $this->NpjTranslit($tag);
 
 		if ($this->LoadAcl($tag, $privilege, 0))
@@ -2493,7 +2517,8 @@ class Wacko
 			$this->Query(
 				"UPDATE ".$this->config["table_prefix"]."acls SET ".
 					"list = '".quote($this->dblink, trim(str_replace("\r", "", $list)))."' ".
-				"WHERE supertag = '".quote($this->dblink, $supertag)."' AND privilege = '".quote($this->dblink, $privilege)."' ");
+				"WHERE supertag = '".quote($this->dblink, $supertag)."' ".
+					"AND privilege = '".quote($this->dblink, $privilege)."' ");
 		}
 		else
 		{
@@ -2888,10 +2913,11 @@ class Wacko
 	{
 		return $this->LoadSingle(
 			"SELECT * FROM ".$this->config["table_prefix"]."pagewatches ".
-			"WHERE user = '".quote($this->dblink, $user)."' AND tag = '".quote($this->dblink, $tag)."'");
+			"WHERE user = '".quote($this->dblink, $user)."' ".
+				"AND tag = '".quote($this->dblink, $tag)."'");
 	}
 
-	function SetWatch($user, $user_id, $tag, $page_id)
+	function SetWatch($user, $tag)
 	{
 		// Remove old watch first to avoid double watches
 		$this->ClearWatch($user, $tag);
@@ -2909,7 +2935,8 @@ class Wacko
 	{
 		return $this->Query(
 			"DELETE FROM ".$this->config["table_prefix"]."pagewatches ".
-			"WHERE user = '".quote($this->dblink, $user)."' AND tag = '".quote($this->dblink, $tag)."'");
+			"WHERE user = '".quote($this->dblink, $user)."' ".
+				"AND tag = '".quote($this->dblink, $tag)."'");
 	}
 
 	// BOOKMARKS
