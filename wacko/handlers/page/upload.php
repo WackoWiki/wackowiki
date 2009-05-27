@@ -253,7 +253,7 @@ if ($registered
 	<br />
 	<ul>
 		<li><?php echo $this->Link("file:".$small_name); ?></li>
-		<li>&quot;<?php echo $description; ?>&quot;</li>
+		<li><?php echo $description; ?></li>
 	</ul>
 	<br />
 <?php
