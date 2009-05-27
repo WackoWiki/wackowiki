@@ -35,10 +35,11 @@ if ($registered
 			$page_id = $this->page["id"];
 
 		$what = $this->LoadAll(
-			"SELECT user, id, filename, filesize, description ".
+			"SELECT ".$this->config["table_prefix"]."users.name AS user, ".$this->config["table_prefix"]."upload.id, ".$this->config["table_prefix"]."upload.filename, ".$this->config["table_prefix"]."upload.filesize, ".$this->config["table_prefix"]."upload.description ".
 			"FROM ".$this->config["table_prefix"]."upload ".
-			"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
-			"AND filename='".quote($this->dblink, $_GET["file"])."'");
+				"INNER JOIN ".$this->config["table_prefix"]."users ON (".$this->config["table_prefix"]."upload.user_id = ".$this->config["table_prefix"]."users.id) ".
+			"WHERE ".$this->config["table_prefix"]."upload.page_id = '".quote($this->dblink, $page_id)."'".
+			"AND ".$this->config["table_prefix"]."upload.filename='".quote($this->dblink, $_GET["file"])."'");
 
 		if (sizeof($what) > 0)
 		{
@@ -92,13 +93,14 @@ if ($registered
 		if ($_POST["remove"] == "global")
 			$page_id = 0;
 		else
-			$page_id=$this->page["id"];
+			$page_id = $this->page["id"];
 
 		$what = $this->LoadAll(
-			"SELECT user, id, filename, filesize, description ".
+			"SELECT ".$this->config["table_prefix"]."users.name AS user, ".$this->config["table_prefix"]."upload.id, ".$this->config["table_prefix"]."upload.filename, ".$this->config["table_prefix"]."upload.filesize, ".$this->config["table_prefix"]."upload.description ".
 			"FROM ".$this->config["table_prefix"]."upload ".
-			"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
-			"AND filename='".quote($this->dblink, $_POST["file"])."'");
+				"INNER JOIN ".$this->config["table_prefix"]."users ON (".$this->config["table_prefix"]."upload.user_id = ".$this->config["table_prefix"]."users.id) ".
+			"WHERE ".$this->config["table_prefix"]."upload.page_id = '".quote($this->dblink, $page_id)."'".
+			"AND ".$this->config["table_prefix"]."upload.filename='".quote($this->dblink, $_POST["file"])."'");
 
 		if (sizeof($what) > 0)
 		{
@@ -140,9 +142,10 @@ if ($registered
 	{
 		$user = $this->GetUser();
 		$files = $this->LoadAll(
-			"SELECT id ".
+			"SELECT ".$this->config["table_prefix"]."upload.id ".
 			"FROM ".$this->config["table_prefix"]."upload ".
-			"WHERE user = '".quote($this->dblink, $user["name"])."'");
+				"INNER JOIN ".$this->config["table_prefix"]."users ON (".$this->config["table_prefix"]."upload.user_id = ".$this->config["table_prefix"]."users.id) ".
+			"WHERE ".$this->config["table_prefix"]."users.name = '".quote($this->dblink, $user["name"])."'");
 
 		if (!$this->config["upload_max_per_user"] || (sizeof($files) < $this->config["upload_max_per_user"]))
 		{
@@ -232,7 +235,7 @@ if ($registered
 						$description = htmlentities($description,ENT_COMPAT,$this->GetCharset());
 
 						// 5. insert line into DB
-						$this->Query("insert into ".$this->config["table_prefix"]."upload SET ".
+						$this->Query("INSERT INTO ".$this->config["table_prefix"]."upload SET ".
 							"page_id = '".quote($this->dblink, $is_global ? "0" : $this->page["id"])."', ".
 							"user_id = '".quote($this->dblink, $user["id"])."',".
 							"filename = '".quote($this->dblink, $small_name)."', ".
@@ -241,7 +244,6 @@ if ($registered
 							"picture_w = '".quote($this->dblink, $size[0])."',".
 							"picture_h = '".quote($this->dblink, $size[1])."',".
 							"file_ext = '".quote($this->dblink, substr($ext,0,10))."',".
-							"user = '".quote($this->dblink, $user["name"])."',".
 							"uploaded_dt= '".quote($this->dblink, date("Y-m-d H:i:s"))."' ");
 
 						// 4. output link to file
@@ -267,9 +269,9 @@ if ($registered
 			} //!is_uploaded_file
 			else
 			{
-				if ($_FILES["file"]['error']==UPLOAD_ERR_INI_SIZE || $_FILES["file"]['error']==UPLOAD_ERR_FORM_SIZE)
+				if ($_FILES["file"]['error'] == UPLOAD_ERR_INI_SIZE || $_FILES["file"]['error'] == UPLOAD_ERR_FORM_SIZE)
 					$error = $this->GetTranslation("UploadMaxSizeReached");
-				else if ($_FILES["file"]['error']==UPLOAD_ERR_PARTIAL || $_FILES["file"]['error']==UPLOAD_ERR_NO_FILE)
+				else if ($_FILES["file"]['error'] == UPLOAD_ERR_PARTIAL || $_FILES["file"]['error'] == UPLOAD_ERR_NO_FILE)
 					$error = $this->GetTranslation("UploadNoFile");
 				else
 					$error = " ";
