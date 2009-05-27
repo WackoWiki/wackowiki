@@ -50,11 +50,11 @@ if ($can_view)
 
 	// load files list
 	$files = $this->LoadAll(
-		"SELECT ".$this->config["table_prefix"]."upload.id, ".$this->config["table_prefix"]."upload.page_id, ".$this->config["table_prefix"]."upload.user_id, ".$this->config["table_prefix"]."upload.filesize, ".$this->config["table_prefix"]."upload.picture_w, ".$this->config["table_prefix"]."upload.picture_h, ".$this->config["table_prefix"]."upload.filename, ".$this->config["table_prefix"]."upload.description, ".$this->config["table_prefix"]."upload.uploaded_dt ".
+		"SELECT ".$this->config["table_prefix"]."upload.id, ".$this->config["table_prefix"]."upload.page_id, ".$this->config["table_prefix"]."upload.user_id, ".$this->config["table_prefix"]."upload.filesize, ".$this->config["table_prefix"]."upload.picture_w, ".$this->config["table_prefix"]."upload.picture_h, ".$this->config["table_prefix"]."upload.filename, ".$this->config["table_prefix"]."upload.description, ".$this->config["table_prefix"]."upload.uploaded_dt, ".$this->config["table_prefix"]."users.name AS user ".
 		"FROM ".$this->config["table_prefix"]."upload ".
-		"INNER JOIN ".$this->config["table_prefix"]."users ON (".$this->config["table_prefix"]."upload.user_id = ".$this->config["table_prefix"]."users.id)".
+			"INNER JOIN ".$this->config["table_prefix"]."users ON (".$this->config["table_prefix"]."upload.user_id = ".$this->config["table_prefix"]."users.id)".
 		"WHERE page_id = '". ($global ? 0 : $filepage["id"])."' ".$user_add.
-		" ORDER BY ".$orderby );
+		" ORDER BY ".$this->config["table_prefix"]."upload.".$orderby );
 
 	if (!is_array($files)) $files = array();
 
