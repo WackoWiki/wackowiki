@@ -144,6 +144,7 @@ class Wacko
 	}
 
 	function GetPageTag() { return $this->tag; }
+	function GetPageId() { return $this->page["id"]; }
 	function GetPageSuperTag() { return $this->supertag; }
 	function GetPageTime() { return $this->page["time"]; }
 	function GetPageLastWriter() { return $this->page["user"]; }
@@ -1015,7 +1016,7 @@ class Wacko
 	{
 		// get current user
 		$user = $this->GetUserName();
-
+		$user_id = $this->GetUserId();
 		/*
 		 ANTISPAM
 
@@ -1118,6 +1119,7 @@ class Wacko
 
 				// current user is owner; if user is logged in! otherwise, no owner.
 				if ($this->GetUser()) $owner = $user;
+				if ($this->GetUser()) $owner_id = $user_id;
 
 				$this->Query(
 					"INSERT INTO ".$this->config["table_prefix"]."pages SET ".
@@ -1126,7 +1128,9 @@ class Wacko
 						"created = NOW(), ".
 						"time = NOW(), ".
 						"owner = '".quote($this->dblink, $owner)."', ".
+						"owner_id = '".quote($this->dblink, $owner_id)."', ".
 						"user = '".quote($this->dblink, $user)."', ".
+						"user_id = '".quote($this->dblink, $user_id)."', ".
 						"latest = 'Y', ".
 						"supertag = '".quote($this->dblink, $this->NpjTranslit($tag))."', ".
 						"body = '".quote($this->dblink, $body)."', ".
@@ -1143,7 +1147,7 @@ class Wacko
 				$this->SaveAcl($tag, "comment", $comment_acl);
 				// set watch
 				if ($this->GetUser() && !$this->config["disable_autosubscribe"])
-					$this->SetWatch($this->GetUserName(), $this->GetPageTag());
+					$this->SetWatch($this->GetUserName(), $this->GetUserId(), $this->GetPageTag(), $this->GetPageId());
 
 				if ($comment_on)
 				{
@@ -2312,7 +2316,14 @@ class Wacko
 		}
 		return $name;
 	}
-
+	
+	function GetUserId()
+	{
+		if ($user = $this->GetUser()) $user_id = $user["id"];
+		
+		return $user_id;
+	}
+	
 	function _gethostbyaddr($ip)
 	{
 		if ($this->config["allow_gethostbyaddr"])
@@ -2475,7 +2486,6 @@ class Wacko
 
 	function SaveAcl($tag, $privilege, $list)
 	{
-
 		$supertag = $this->NpjTranslit($tag);
 
 		if ($this->LoadAcl($tag, $privilege, 0))
@@ -2492,6 +2502,7 @@ class Wacko
 					"list = '".quote($this->dblink, trim(str_replace("\r", "", $list)))."', ".
 					"supertag = '".quote($this->dblink, $supertag)."', ".
 					"page_tag = '".quote($this->dblink, $tag)."', ".
+					"page_id = '".quote($this->dblink, $this->page["id"])."', ".
 					"privilege = '".quote($this->dblink, $privilege)."'");
 		}
 	}
@@ -2535,9 +2546,10 @@ class Wacko
 				if (!$acl)
 				{
 					$acl = $this->LoadSingle(
-									"SELECT * FROM ".$this->config["table_prefix"]."acls WHERE ".
-									"page_tag = '".quote($this->dblink, $tag)."' ".
-									"AND privilege = '".quote($this->dblink, $privilege)."' LIMIT 1");
+									"SELECT * FROM ".$this->config["table_prefix"]."acls ".
+									"WHERE page_tag = '".quote($this->dblink, $tag)."' ".
+										"AND privilege = '".quote($this->dblink, $privilege)."' ".
+									"LIMIT 1");
 					/*        if ($acl)
 					 {
 					 $this->Query(
@@ -2546,37 +2558,38 @@ class Wacko
 						"WHERE page_tag = '".$tag."';" );
 						$acl["supertag"]=$supertag;
 					 }
-					 */      }
+					 */      
+				}
 
-					// if still no acl, use config defaults
-					if (!$acl && $useDefaults)
+				// if still no acl, use config defaults
+				if (!$acl && $useDefaults)
+				{
+					// First look for parent ACL, so that clusters/subpages
+					// work correctly.
+					if ( strstr($tag, "/") )
 					{
-                  // First look for parent ACL, so that clusters/subpages
-                  // work correctly.
-                  if ( strstr($tag, "/") )
-                     {
-                        $parent = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $tag );
+						$parent = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $tag );
 
-                        // By letting it fetch defaults, it will automatically recurse
-                        // up the tree of parent pages... fetching the ACL on the root
-                        // page if necessary.
-                        $acl = $this->LoadAcl( $parent, $privilege, 1 );
-                     }
-
-                  if (!$acl)
-                     {
-                        $acl = array(
-                           "supertag" => $supertag,
-                           "page_tag" => $tag,
-                           "privilege" => $privilege,
-                           "list" => $this->config["default_".$privilege."_acl"],
-                           "time" => date("YmdHis"),
-                           "default" => 1
-                        );
-                     }
+						// By letting it fetch defaults, it will automatically recurse
+						// up the tree of parent pages... fetching the ACL on the root
+						// page if necessary.
+						$acl = $this->LoadAcl( $parent, $privilege, 1 );
 					}
 
-					$this->CacheACL($supertag, $privilege, $useDefaults, $acl);
+					if (!$acl)
+					{
+						$acl = array(
+							"supertag" => $supertag,
+							"page_tag" => $tag,
+							"privilege" => $privilege,
+							"list" => $this->config["default_".$privilege."_acl"],
+							"time" => date("YmdHis"),
+							"default" => 1
+						);
+					}
+				}
+
+				$this->CacheACL($supertag, $privilege, $useDefaults, $acl);
 			}
 		}
 		return $acl;
@@ -2878,15 +2891,15 @@ class Wacko
 			"WHERE user = '".quote($this->dblink, $user)."' AND tag = '".quote($this->dblink, $tag)."'");
 	}
 
-	function SetWatch($user, $tag)
+	function SetWatch($user, $user_id, $tag, $page_id)
 	{
 		// Remove old watch first to avoid double watches
 		$this->ClearWatch($user, $tag);
 
 		if ($this->HasAccess('read', $tag))
 			return $this->Query(
-				"INSERT INTO ".$this->config["table_prefix"]."pagewatches (user, tag) ".
-				"VALUES ( '".quote($this->dblink, $user)."', '".quote($this->dblink, $tag)."')" );
+				"INSERT INTO ".$this->config["table_prefix"]."pagewatches (user, user_id, tag, page_id) ".
+				"VALUES ( '".quote($this->dblink, $user)."', '".quote($this->dblink, $user_id)."', '".quote($this->dblink, $tag)."', '".quote($this->dblink, $page_id)."')" );
 				// TIMESTAMP type is filled automatically by MySQL
 		else
 			return false;
