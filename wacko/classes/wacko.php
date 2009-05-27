@@ -144,6 +144,7 @@ class Wacko
 	}
 
 	function GetPageTag() { return $this->tag; }
+	function GetPageId() { return $this->page["id"]; }
 	function GetPageSuperTag() { return $this->supertag; }
 	function GetPageTime() { return $this->page["time"]; }
 	function GetPageLastWriter() { return $this->page["user"]; }

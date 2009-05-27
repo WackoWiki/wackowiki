@@ -129,6 +129,8 @@ $alter_upload_r4_2 = "ALTER TABLE ".$config["table_prefix"]."upload CHANGE id id
 																	DROP INDEX user_id,
 																	ADD INDEX idx_user_id (user_id,page_id)";
 
+$alter_upload_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."upload DROP user";
+
 $update_upload_r4_2 = "UPDATE ".$config["table_prefix"]."upload AS upload, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET upload.user_id = users.id WHERE upload.user = users.name";
 
 // USERS
