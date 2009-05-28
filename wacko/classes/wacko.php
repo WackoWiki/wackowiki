@@ -2512,7 +2512,7 @@ class Wacko
 
 	function SaveAcl($tag, $privilege, $list)
 	{
-		$page_id = GetPageId();
+		$page_id = $this->GetPageId();
 		$supertag = $this->NpjTranslit($tag);
 
 		if ($this->LoadAcl($tag, $privilege, 0))
