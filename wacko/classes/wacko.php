@@ -1234,6 +1234,7 @@ class Wacko
 
 				// aha! page isn't new. keep owner!
 				$owner = $oldPage["owner"];
+				$owner_id = $oldPage["owner_id"];
 
 				// only if page has been actually changed
 				if ($oldPage['body'] != $body)
@@ -2511,7 +2512,7 @@ class Wacko
 
 	function SaveAcl($tag, $privilege, $list)
 	{
-		$page_id = $this->page["id"];
+		$page_id = GetPageId();
 		$supertag = $this->NpjTranslit($tag);
 
 		if ($this->LoadAcl($tag, $privilege, 0))
@@ -2529,7 +2530,7 @@ class Wacko
 					"list = '".quote($this->dblink, trim(str_replace("\r", "", $list)))."', ".
 					"supertag = '".quote($this->dblink, $supertag)."', ".
 					"page_tag = '".quote($this->dblink, $tag)."', ".
-					"page_id = '".quote($this->dblink, $this->page["id"])."', ".
+					"page_id = '".quote($this->dblink, $page_id)."', ".
 					"privilege = '".quote($this->dblink, $privilege)."'");
 		}
 	}
