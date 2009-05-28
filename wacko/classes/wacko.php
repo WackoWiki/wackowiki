@@ -1038,6 +1038,7 @@ class Wacko
 	{
 		// get current user
 		$user = $this->GetUserName();
+		$user_id = $this->GetUserId();
 
 		/*
 		 ANTISPAM
@@ -2918,7 +2919,7 @@ class Wacko
 				"AND tag = '".quote($this->dblink, $tag)."'");
 	}
 
-	function SetWatch($user, $tag)
+	function SetWatch($user, $user_id, $tag, $page_id)
 	{
 		// Remove old watch first to avoid double watches
 		$this->ClearWatch($user, $tag);
