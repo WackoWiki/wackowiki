@@ -76,6 +76,7 @@ $table_acls = "CREATE TABLE ".$config["table_prefix"]."acls (".
 				") TYPE=MyISAM";
 
 $table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
+					"id INT(10) UNSIGNED NOT NULL auto_increment,".
 					"from_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
 					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"to_tag VARCHAR(250) binary NOT NULL DEFAULT '',".

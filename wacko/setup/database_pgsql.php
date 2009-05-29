@@ -60,6 +60,7 @@ $table_acls = "CREATE TABLE ".$config["table_prefix"]."acls (".
 				") WITH (OIDS=FALSE);";
 
 $table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
+					"id serial,".
 					"from_tag character varying(250) NOT NULL DEFAULT '',".
 					"to_tag character varying(250) NOT NULL DEFAULT '',".
 					"to_supertag character varying(250) NOT NULL DEFAULT ''".
