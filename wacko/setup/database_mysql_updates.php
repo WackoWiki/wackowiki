@@ -51,6 +51,7 @@ $alter_pages_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."pages ADD title VA
 $alter_pages_r4_2_5 = "ALTER TABLE ".$config["table_prefix"]."pages CHANGE hits hits INT(11) UNSIGNED NOT NULL DEFAULT '0'";
 $alter_pages_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."pages ADD owner_id INT(10) UNSIGNED NOT NULL AFTER owner";
 $alter_pages_r4_2_7 = "ALTER TABLE ".$config["table_prefix"]."pages ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
+$alter_pages_r4_2_8 = "ALTER TABLE ".$config["table_prefix"]."pages CHANGE latest latest ENUM('Y', 'N') NOT NULL DEFAULT 'Y'";
 
 $update_pages_r3_1 = "UPDATE ".$config["table_prefix"]."pages SET body_r=''";
 $update_pages_r3_2 = "UPDATE ".$config["table_prefix"]."pages SET body_toc=''";
