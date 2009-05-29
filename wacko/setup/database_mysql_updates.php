@@ -20,8 +20,9 @@ $alter_links_r2_1 = "ALTER TABLE ".$config["table_prefix"]."links CHANGE from_ta
 $alter_links_r3_1 = "ALTER TABLE ".$config["table_prefix"]."links CHANGE from_tag from_tag CHAR(250) BINARY NOT NULL";
 $alter_links_r3_2 = "ALTER TABLE ".$config["table_prefix"]."links CHANGE to_tag to_tag CHAR(250) BINARY NOT NULL";
 $alter_links_r3_3 = "ALTER TABLE ".$config["table_prefix"]."links ADD to_supertag VARCHAR(250) NOT NULL";
-$alter_links_r4_2 = "ALTER TABLE ".$config["table_prefix"]."links ADD from_page_id INT(10) UNSIGNED NOT NULL AFTER from_tag";
-$alter_links_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."links ADD to_page_id INT(10) UNSIGNED NOT NULL AFTER to_tag";
+$alter_links_r4_2 = "ALTER TABLE ".$config["table_prefix"]."links ADD id INT(10) UNSIGNED NOT NULL auto_increment FIRST, ADD PRIMARY KEY (id)";
+$alter_links_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."links ADD from_page_id INT(10) UNSIGNED NOT NULL AFTER from_tag";
+$alter_links_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."links ADD to_page_id INT(10) UNSIGNED NOT NULL AFTER to_tag";
 
 $update_links_r4_2 = "UPDATE ".$config["table_prefix"]."links AS links, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages SET links.from_page_id = pages.id WHERE links.from_tag = pages.tag";
 $update_links_r4_2_1 = "UPDATE ".$config["table_prefix"]."links AS links, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages SET links.to_page_id = pages.id WHERE links.to_tag = pages.tag";
