@@ -17,7 +17,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"user VARCHAR(50) NOT NULL DEFAULT '',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
-					"latest ENUM('Y','N') NOT NULL DEFAULT 'N',".
+					"latest ENUM('Y','N') NOT NULL DEFAULT 'Y',".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 					"comment_on VARCHAR(250) binary NOT NULL DEFAULT '',".
 					"super_comment_on VARCHAR(250) NOT NULL DEFAULT '',".

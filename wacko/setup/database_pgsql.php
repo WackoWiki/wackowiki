@@ -15,7 +15,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"\"owner\" character varying(80) NOT NULL DEFAULT '',".
 					"\"user\" character varying(80) NOT NULL DEFAULT '',".
 					"edit_note character varying(100) NOT NULL DEFAULT '',".
-					"latest character(1) NOT NULL DEFAULT 'N',".
+					"latest character(1) NOT NULL DEFAULT 'Y',".
 					"\"handler\" character varying(30) NOT NULL DEFAULT 'page',".
 					"comment_on character varying(250) NOT NULL DEFAULT '',".
 					"super_comment character varying(250) NOT NULL DEFAULT '',".
