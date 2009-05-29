@@ -143,7 +143,7 @@ $table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
 					"PRIMARY KEY (id),".
 					"KEY page_id (page_id,filename),".
 					"KEY page_id_2 (page_id,uploaded_dt),".
-					"KEY user_id (user_id,page_id)".
+					"KEY idx_user_id (user_id)".
 				") TYPE=MyISAM";
 
 $table_cache = "CREATE TABLE ".$config["table_prefix"]."cache (".
