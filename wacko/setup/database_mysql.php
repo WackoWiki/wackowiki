@@ -22,7 +22,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"comment_on VARCHAR(250) binary NOT NULL DEFAULT '',".
 					"super_comment_on VARCHAR(250) NOT NULL DEFAULT '',".
 					"hits INT(11) UNSIGNED NOT NULL DEFAULT '0',".
-					"lang VARCHAR(20) NOT NULL DEFAULT '',".
+					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) binary NOT NULL DEFAULT '',".
@@ -54,7 +54,7 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 						"comment_on VARCHAR(250) binary NOT NULL DEFAULT '',".
 						"super_comment_on VARCHAR(250) NOT NULL DEFAULT '',".
-						"lang VARCHAR(20) NOT NULL DEFAULT '',".
+						"lang VARCHAR(2) NOT NULL DEFAULT '',".
 						"title VARCHAR(100) NOT NULL DEFAULT '',".
 						"description VARCHAR(250) NOT NULL DEFAULT '',".
 						"keywords VARCHAR(250) binary NOT NULL DEFAULT '',".
@@ -69,7 +69,7 @@ $table_acls = "CREATE TABLE ".$config["table_prefix"]."acls (".
 					"page_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
-					"privilege VARCHAR(20) NOT NULL DEFAULT '',".
+					"privilege VARCHAR(10) NOT NULL DEFAULT '',".
 					"list TEXT NOT NULL,".
 					"PRIMARY KEY  (page_tag,privilege),".
 					"KEY supertag (supertag)".
@@ -107,7 +107,7 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 					"signuptime DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"show_comments ENUM('Y','N') NOT NULL DEFAULT 'N',".
 					"bookmarks TEXT NOT NULL,".
-					"lang VARCHAR(20) NOT NULL DEFAULT '',".
+					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"show_spaces ENUM('Y','N') NOT NULL DEFAULT 'Y',".
 					"showdatetime ENUM('Y','N') NOT NULL DEFAULT 'Y',".
 					"typografica ENUM('Y','N') NOT NULL DEFAULT 'Y',".
