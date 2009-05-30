@@ -32,7 +32,8 @@ print("         <h2>".$lang["TestingConfiguration"]."</h2>\n");
 
 // Generic Default Inserts
 $insert_admin = "INSERT INTO ".$config["table_prefix"]."users (name, password, email, signuptime, lang) VALUES ('".$config["admin_name"]."', md5('".$_POST["password"]."'), '".$config["admin_email"]."', NOW(), '".$config["language"]."')";
-$insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, user_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext, user) VALUES ('0', '1','wacko4.gif', 'WackoWiki', NOW(), '1580', '108', '50', 'gif', '".$config["admin_name"]."')";
+// TODO: user table lookup user_id WHERE name = '".$config["admin_name"]."'
+$insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, user_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext, user) VALUES ('0', '1','wacko4.gif', 'WackoWiki', NOW(), '1580', '108', '50', 'gif')";
 
 /*
  Setup the tables depending on which database we selected

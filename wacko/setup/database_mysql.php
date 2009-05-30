@@ -82,6 +82,7 @@ $table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
 					"to_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
 					"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"to_supertag VARCHAR(250) NOT NULL,".
+					"PRIMARY KEY (id),".
 					"KEY from_tag (from_tag,to_tag(78)),".
 					"KEY idx_from (from_tag),".
 					"KEY idx_to (to_tag)".
