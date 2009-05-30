@@ -9,6 +9,7 @@
 $alter_acls_r2_1 = "ALTER TABLE ".$config["table_prefix"]."acls ADD supertag VARCHAR(250) NOT NULL DEFAULT '', CHANGE page_tag page_tag VARCHAR(250) NOT NULL, ADD INDEX(supertag)";
 $alter_acls_r3_1 = "ALTER TABLE ".$config["table_prefix"]."acls CHANGE page_tag page_tag VARCHAR(250) BINARY NOT NULL";
 $alter_acls_r4_2 = "ALTER TABLE ".$config["table_prefix"]."acls ADD page_id INT(10) UNSIGNED NOT NULL AFTER page_tag";
+$alter_acls_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."acls CHANGE privilege privilege VARCHAR(10) NOT NULL";
 
 $update_acls_r4_2 = "UPDATE ".$config["table_prefix"]."acls AS acls, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages SET acls.page_id = pages.id WHERE acls.page_tag = pages.tag";
 
@@ -52,6 +53,7 @@ $alter_pages_r4_2_5 = "ALTER TABLE ".$config["table_prefix"]."pages CHANGE hits 
 $alter_pages_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."pages ADD owner_id INT(10) UNSIGNED NOT NULL AFTER owner";
 $alter_pages_r4_2_7 = "ALTER TABLE ".$config["table_prefix"]."pages ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
 $alter_pages_r4_2_8 = "ALTER TABLE ".$config["table_prefix"]."pages CHANGE latest latest ENUM('Y', 'N') NOT NULL DEFAULT 'Y'";
+$alter_pages_r4_2_9 = "ALTER TABLE ".$config["table_prefix"]."pages CHANGE lang lang VARCHAR(2) NOT NULL DEFAULT ''";
 
 $update_pages_r3_1 = "UPDATE ".$config["table_prefix"]."pages SET body_r=''";
 $update_pages_r3_2 = "UPDATE ".$config["table_prefix"]."pages SET body_toc=''";
@@ -115,6 +117,7 @@ $alter_revisions_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."revisions MODI
 $alter_revisions_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD title VARCHAR(100) NOT NULL DEFAULT '' AFTER lang, ADD edit_note VARCHAR(100) NOT NULL DEFAULT '' AFTER user";
 $alter_revisions_r4_2_5 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD owner_id INT(10) UNSIGNED NOT NULL AFTER owner";
 $alter_revisions_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
+$alter_revisions_r4_2_7 = "ALTER TABLE ".$config["table_prefix"]."revisions CHANGE lang lang VARCHAR(2) NOT NULL DEFAULT ''";
 
 $insert_revisions_r2_1 = "INSERT INTO ".$config["table_prefix"]."revisions ( id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on ) SELECT id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on FROM ".$config["table_prefix"]."pages WHERE latest='N';";
 
@@ -142,5 +145,6 @@ $alter_users_r3_1 = "ALTER TABLE ".$config["table_prefix"]."users ADD more TEXT 
 $alter_users_r3_2 = "ALTER TABLE ".$config["table_prefix"]."users ADD changepassword VARCHAR(100) NOT NULL";
 $alter_users_r3_3 = "ALTER TABLE ".$config["table_prefix"]."users ADD email_confirm VARCHAR(100) NOT NULL";
 $alter_users_r4_2 = "ALTER TABLE ".$config["table_prefix"]."users ADD id INT(10) UNSIGNED NOT NULL auto_increment FIRST, DROP PRIMARY KEY, ADD PRIMARY KEY (id)";
+$alter_users_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."users CHANGE lang lang VARCHAR(2) NOT NULL DEFAULT ''";
 
 ?>
