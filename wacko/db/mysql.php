@@ -58,4 +58,8 @@ function connect($host, $user, $passw, $db, $collation = false, $driver, $port =
 	return $dblink;
 }
 
+function last_insert_id($dblink)
+{
+   return mysql_insert_id($dblink);
+}
 ?>

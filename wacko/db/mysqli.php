@@ -47,4 +47,9 @@ function connect($host, $user, $passw, $db, $collation = false, $driver, $port =
 
 	return $dblink;
 }
+
+function last_insert_id($dblink)
+{
+   return mysqli_insert_id($dblink);
+}
 ?>
