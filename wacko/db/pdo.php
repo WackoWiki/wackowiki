@@ -90,4 +90,10 @@ function connect($host, $user, $password, $db, $collation = false, $driver, $por
 
 	return $dblink;
 }
+
+// Note on various DB implementions: http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter.write.lastinsertid
+function last_insert_id($dblink)
+{
+   return $dblink->lastInsertId();
+}
 ?>
