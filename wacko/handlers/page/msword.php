@@ -1,5 +1,9 @@
 <div id="page">
 <?php
+
+// redirect to show method if page don't exists
+if (!$this->page) $this->Redirect($this->href("show"));
+
 if ($this->HasAccess("read"))
 {
 	if (!$this->page)
