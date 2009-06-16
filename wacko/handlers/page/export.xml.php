@@ -32,7 +32,7 @@ if ($this->HasAccess("read"))
 		if ($numOfSlashes == substr_count($tag, "/"))
 		{
 			$tag = "";
-		{
+		}
 		else
 		{
 			$_tag = explode("/", $tag);
