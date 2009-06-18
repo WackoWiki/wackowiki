@@ -115,7 +115,6 @@ $lang = array(
 "To" => "στο",
 "AlterTable" => "Αλλαγή του <tt>%1</tt> Πίνακα",
 "UpdateTable" => "Updating <tt>%1</tt> Table",
-"AlterUsersTable" => "Αλλαγή Πίνακα Χρηστών",
 "InstallingDefaultData" => "Προσθήκη Προκαθορισμένων Δεδομένων",
 "InstallingPagesBegin" => "Προσθήκη Προκαθορισμένων Σελίδων",
 "InstallingPagesEnd" => "Ολοκλήρωση Προσθήκης Προκαθορισμένων Σελίδων",

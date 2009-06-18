@@ -111,7 +111,6 @@ $lang = array(
 "To" => "zu",
 "AlterTable" => "Ändere <tt>%1</tt> Tabelle",
 "UpdateTable" => "Aktualisiere <tt>%1</tt> Tabelle",
-"AlterUsersTable" => "Ändere Users Tabelle",
 "InstallingDefaultData" => "Füge Default Daten hinzu",
 "InstallingPagesBegin" => "Füge Basis-Seiten hinzu",
 "InstallingPagesEnd" => "Die Basis-Seiten wurden hinzugefügt",
