@@ -111,7 +111,6 @@ $lang = array(
 "To" => "->",
 "AlterTable" => "»зменение структуры таблицы <tt>%1</tt>",
 "UpdateTable" => "Updating <tt>%1</tt> Table",
-"AlterUsersTable" => "»зменение структуры таблицы пользователей",
 "InstallingDefaultData" => "ƒобавление данных по умолчанию",
 "InstallingPagesBegin" => "ƒобавление страниц по умолчанию",
 "InstallingPagesEnd" => "ƒобавление страниц по умолчанию завершено",
