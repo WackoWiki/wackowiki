@@ -52,6 +52,7 @@ $lang = array(
 "NameDesc" => "Име на вашия WackoWiki. Трябва да е от типа УикиИме и изглежда ПримерноЕтоТака. <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
 "Home" => "Главна страница",
 "HomeDesc" => "Главна страница на WackoWiki.  Трябва да е  с <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">УикиИме</a>.",
+"HomeDefault" => "HomePage",
 "MultiLang" => "&laquo;Многоезичен&raquo; режим",
 "MultiLangDesc" => "&laquo;Многоезичен&raquo; режим, позволяващ работа на няколко езика. Ако е включен, инсталаторът ще инициализира страници на няколко различни езика.",
 "Admin" => "Име",

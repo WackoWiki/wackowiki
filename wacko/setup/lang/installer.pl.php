@@ -52,6 +52,7 @@ $lang = array(
 "NameDesc" => "Nazwa Twojej strony WackoWiki. Przewa&#380;nie jest to NazwaWiki i wygl&#261;da JakCosTakiego. <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
 "Home" => "Strona g&#322;&#243;wna",
 "HomeDesc" => "Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
+"HomeDefault" => "HomePage",
 "MultiLang" => "Tryb Wieloj&#281;zyczny",
 "MultiLangDesc" => "Tryb Wieloj&#281;zyczny pozwala posiada&#263; strony z r&#243;&#380;nymi ustawieniami j&#281;zykowymi za pomoc&#261; jednej instalacji. Je&#380;eli ten tryb jest w&#322;&#261;czony, instalator stworzy strony pocz&#261;tkowe dla wszystkich j&#281;zyk&#243;w dost&#281;pnych w dystrybucji.",
 "Admin" => "Nazwa admina",

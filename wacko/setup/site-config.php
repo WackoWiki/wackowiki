@@ -76,7 +76,7 @@ else
    </div>
    <h2><?php echo $lang["Home"];?></h2>
    <p class="notop"><?php echo $lang["HomeDesc"];?></p>
-   <input type="text" maxlength="250" name="config[root_page]" value="<?php echo $config["root_page"] ?>" class="text_input" />
+   <input type="text" maxlength="250" name="config[root_page]" value="<?php isset ( $lang["HomeDefault"] ) ? print $lang["HomeDefault"] : print $config["root_page"] ; ?>" class="text_input" />
    <br />
    <div class="fake_hr_seperator">
       <hr />
