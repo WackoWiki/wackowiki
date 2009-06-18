@@ -52,6 +52,7 @@ $lang = array(
 "NameDesc" => "Sinu WikiNimi. Tavaliselt see näeb valja NaguMidagiSellist või EesnimiPerekonnanimi. <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a>.",
 "Home" => "KoduLeht",
 "HomeDesc" => "Sinu WackoWiki kodulehe nimi. Peaks ka olema <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiNimi</a>.",
+"HomeDefault" => "KoduLeht",
 "MultiLang" => "Mitmekeelne reþiim",
 "MultiLangDesc" => "Mitmekeelne reþiim võimaldab ühe installatsiooni sees kasutada erinevatel lehtedele erinevaid keelte määranguid. Kui see reþiim on lubatud, siis installeerimise käigus tekitatakse kõigi võimalike keelte jaoks, mis paketiga kaasas on, ühesugused lehed erinevates keeltes.",
 "Admin" => "Adminni nimi",

@@ -52,6 +52,7 @@ $lang = array(
 "NameDesc" => "ѕожалуйста, введите им€ вашего сайта WackoWiki, оно должно быть <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">¬ики»менем</a>.",
 "Home" => "√лавна€ страница",
 "HomeDesc" => "¬ведите им€ домашней страницы;&nbsp;&mdash;&nbsp;это будет страница по умолчанию, еЄ пользователи увид€т первой при посещении сайта; им€ должно <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">¬ики»менем</a>.",
+"HomeDefault" => "HomePage",
 "MultiLang" => "–ежим много€зычности",
 "MultiLangDesc" => "–ежим много€зычности, позвол€ющий работать со страницами на разных €зыках. ≈сли режим включен, то программа установки вставит начальный набор страниц дл€ всех известных ей €зыков.",
 "Admin" => "Admin Name",
