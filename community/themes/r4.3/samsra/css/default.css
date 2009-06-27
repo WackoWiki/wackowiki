@@ -217,8 +217,8 @@ table.upload td.remove- A.remove2-:ACTIVE { color:#ff0000 }
 .preview p span {background:#FFF; padding:0 1px;}
 
 .layout-box {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:#CCCCCC 1px solid;}
-.layout-box p {background: transparent; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
-.layout-box p span {background:#FFF; padding:0 1px;}
+p.layout-box {background: transparent; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
+p.layout-box span {background:#FFF; padding:0 1px;}
 
 .buttonsspacer{width:10px;height:1px;}
 
