@@ -1,7 +1,7 @@
 <?php
 $lng = "ru";
 
-if ($config["language"]==$lng)
+if ($config["language"] == $lng)
 {
 	InsertPage($config["root_page"], "((file:wacko4.gif WackoWiki))\n**Добро пожаловать в волшебный мир ((WackoWiki:Doc/English/WackoWiki WackoWiki)).**\n\nНажмите \"Правка\" внизу страницы, чтобы изменить её (между прочим, вы можете просто совершить двойной щелчок мышкой -- это приведёт к тому же результату).\n\nДокументация по WackoWiki доступна на WackoWiki:Wacko/Документация.\n\nПолезные страницы: ((WackoWiki:Doc/Russian/Sintaksis Форматирование)), ПропущенныеСтраницы, ЗабытыеСтраницы, TextSearch, МоиСтраницы, МоиИзменения.\n", $lng, "Admins", true);
 	InsertPage('ПропущенныеСтраницы', '{{WantedPages}}', $lng, "Admins", true);

@@ -1,7 +1,7 @@
 <?php
 $lng = "da";
 
-if ($config["language"]==$lng)
+if ($config["language"] == $lng)
 {
 	InsertPage($config["root_page"], "((file:wacko4.gif WackoWiki))\n**Velkommen til din ((WackoWiki:Doc/English/WackoWiki WackoWiki)) installation!**\n\nKlik på \"Rediger siden\" linket nederst for at rette denne side.\n\nDokumentation finder du på WackoWiki:Doc/English.\n\nSærlige wikisider: ((WackoWiki:Doc/English/Formatting Formatting)), OrphanedPages, WantedPages, ((Søgning)), MyPages, MyChanges.\n\n", $lng, "Admins", true);
 	InsertPage('WantedPages', '{{WantedPages}}', $lng, "Admins", true);
