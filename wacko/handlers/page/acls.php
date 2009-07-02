@@ -28,8 +28,49 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				// change owner?
 				if ($newowner = $_POST["newowner"])
 				{
-					$this->SetPageOwner($this->GetPageTag(), $newowner);
-					$message .= $this->GetTranslation("ACLGaveOwnership").$newowner;
+					// check user exists
+					$exists = $this->LoadSingle(
+						"SELECT name ".
+						"FROM {$this->config['user_table']} ".
+						"WHERE name = '".quote($this->dblink, $newowner)."' ".
+						"LIMIT 1");
+
+					if ($exists == true)
+					{
+						$newowner = $exists['name'];
+						$this->SetPageOwner($this->GetPageTag(), $newowner);
+
+						$User = $this->LoadSingle(
+							"SELECT email, more, email_confirm ".
+							"FROM {$this->config['user_table']} ".
+							"WHERE name = '".quote($this->dblink, $newowner)."'");
+		
+						$User['options'] = $this->DecomposeOptions($User['more']);
+		
+						if ($User['email_confirm'] == '')
+						{
+							$subject = $this->config['wacko_name'].'. '.$this->GetTranslation('NewPageOwnership');
+							$email  = $this->GetTranslation('MailHello').$newowner.".\n\n";
+							$email .= str_replace('%2', $this->config['wacko_name'], str_replace('%1', $this->GetUserName(), $this->GetTranslation('YouAreNewOwner')))."\n";
+							$email .= $this->Href('', $this->tag, '')."\n\n";
+							$email .= $this->GetTranslation('PageOwnershipInfo')."\n";
+							//$email .= $this->Href('', '', '')."\n\n";
+							$email .= $this->GetTranslation('MailGoodbye')."\n".$this->config['wacko_name']."\n".$this->config['base_url'];
+							$this->SendMail($User['email'], $subject, $email);
+						}
+		
+						// log event
+						$this->Log(2, str_replace('%2', $newowner, str_replace('%1', $this->page['tag'].' '.$this->page['title'], $this->GetTranslation('LogOwnershipChanged'))));
+						
+						$message .= $this->GetTranslation("ACLGaveOwnership").$newowner;
+					}
+					else
+					{
+						// new owner doesn't exists
+						$message .= str_replace('%1', $newowner, $this->GetTranslation('ACLNoNewOwner'));
+						$this->SetMessage($message);
+						$this->Redirect($this->Href('acls'));
+					}
 				}
 		
 				// Change permissions for all comments on this page
