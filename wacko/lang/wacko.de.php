@@ -75,6 +75,10 @@ $wackoTranslation = array(
 
 	"ACLUpdated" => "Berechtigungen aktualisiert",
 	"ACLGaveOwnership" => " und Besitzer geändert zu ",
+	"ACLNoNewOwner" => ", jedoch wurde der Besitz nicht übertragen, da der Nutzer %1 nicht exsistiert.",
+	"NewPageOwnership" => "Besitz übertragen",
+	"YouAreNewOwner" => "Der frühere Besitzer von 1% hat die folgende Seite \n auf dich übertragen %2",
+	"PageOwnershipInfo" => "Mit dem Besitz der Seite gehen auch eine Reihe von Verpflichtungen auf dich über wie \n(..write..here..).",
 	"ACLRead" => "<strong>Lesen:</strong>",
 	"ACLWrite" => "<strong>Schreiben:</strong>",
 	"ACLComment" => "<strong>Kommentare:</strong>",
