@@ -78,6 +78,10 @@ $wackoTranslation = array(
 
 	"ACLUpdated" => "ACL обновен",
 	"ACLGaveOwnership" => " и собствеността е променена",
+	"ACLNoNewOwner" => ", but ownership is not transferred, because the user %1 was not found.",
+	"NewPageOwnership" => "Transferred ownership",
+	"YouAreNewOwner" => "Former owner of 1% transferred ownership \nof following site to you %2",
+	"PageOwnershipInfo" => "The rights of ownership impose a number of obligations on you like \n(..write..here..).",
 	"ACLRead" => "<strong>Права за четене:</strong>",
 	"ACLWrite" => "<strong>Права за запис:</strong>",
 	"ACLComment" => "<strong>Права за коментар:</strong>",
