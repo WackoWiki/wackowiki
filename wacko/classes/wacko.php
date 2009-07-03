@@ -782,7 +782,7 @@ class Wacko
 		if ($links = $this->LoadAll(
 		"SELECT ".$this->pages_meta." ".
 		"FROM ".$this->config["table_prefix"]."pages ".
-		"WHERE supertag IN (".$spages_str.")"))
+		"WHERE supertag IN (".$spages_str.")", 1))
 		{
 			for ($i = 0; $i < count($links); $i++)
 			{
@@ -802,7 +802,7 @@ class Wacko
 		//   unset($exists);
 		if ($read_acls = $this->LoadAll(
 		"SELECT * FROM ".$this->config["table_prefix"]."acls ".
-		"WHERE BINARY page_tag IN (".$pages_str.") AND privilege = 'read'"))
+		"WHERE BINARY page_tag IN (".$pages_str.") AND privilege = 'read'", 1))
 		{
 			for ($i = 0; $i < count($read_acls); $i++)
 			{
@@ -872,7 +872,7 @@ class Wacko
 				? "from_tag LIKE '".quote($this->dblink, $for)."/%' AND "
 				: "").
 				"((to_supertag='' AND to_tag='".quote($this->dblink, $tag)."') OR to_supertag='".quote($this->dblink, $this->NpJTranslit($tag))."')".
-			" ORDER BY tag");
+			" ORDER BY tag", 1);
 	}
 
 	function LoadRecentlyChanged($limit = 100, $for = "", $from = "")
@@ -890,7 +890,7 @@ class Wacko
 				? "AND supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
 				: "").
 		"ORDER BY time DESC ".
-		"LIMIT ".$limit))
+		"LIMIT ".$limit, 1))
 		{
 			foreach ($pages as $page)
 			{
@@ -907,7 +907,7 @@ class Wacko
 					: "").
 			"AND privilege = 'read' ".
 			"ORDER BY time DESC ".
-			"LIMIT ".$limit))
+			"LIMIT ".$limit, 1))
 			{
 				for ($i = 0; $i < count($read_acls); $i++)
 				{
@@ -1159,9 +1159,10 @@ class Wacko
 						"body = '".quote($this->dblink, $body)."', ".
 						"body_r = '".quote($this->dblink, $body_r)."', ".
 						"body_toc = '".quote($this->dblink, $body_toc)."', ".
+						"edit_note = '".quote($this->dblink, $edit_note)."', ".
 						"lang = '".quote($this->dblink, $lang)."', ".
 						"tag = '".quote($this->dblink, $tag)."'");
-
+						
 				// saving acls
 				// $this->SaveAcl($tag, "write", ($comment_on ? "" : $write_acl));
 				$this->SaveAcl($tag, "write", $write_acl);
@@ -1241,8 +1242,8 @@ class Wacko
 				{
 					// move revision
 					$this->Query(
-							"INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, owner, owner_id, user, user_id, latest, handler, comment_on, supertag, title, keywords, description) ".
-							"SELECT tag, time, body, owner, owner_id, user, user_id, 'N', handler, comment_on, supertag, title, keywords, description ".
+							"INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, edit_note, owner, owner_id, user, user_id, latest, handler, comment_on, supertag, title, keywords, description) ".
+							"SELECT tag, time, body, edit_note, owner, owner_id, user, user_id, 'N', handler, comment_on, supertag, title, keywords, description ".
 							"FROM ".$this->config["table_prefix"]."pages ".
 							"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
 
@@ -1259,8 +1260,9 @@ class Wacko
 							"user_id = '".quote($this->dblink, $user_id)."', ".
 							"supertag = '".$this->NpjTranslit($tag)."', ".
 							"body = '".quote($this->dblink, $body)."', ".
+							"body_r = '".quote($this->dblink, $body_r)."', ".
 							"body_toc = '".quote($this->dblink, $body_toc)."', ".
-							"body_r = '".quote($this->dblink, $body_r)."' ".
+							"edit_note = '".quote($this->dblink, $edit_note)."' ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
 						"LIMIT 1");
 				}
