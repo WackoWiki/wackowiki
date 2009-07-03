@@ -15,7 +15,7 @@ if ($user = $this->GetUser())
    {
       print("<strong>".$this->GetTranslation("MyChangesTitle1")." (<a href=\"".$this->href("", $tag).($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bydate=false\">".$this->GetTranslation("OrderABC")."</a>).</strong><br /><br />\n");
 
-      if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE user = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY time ASC, tag ASC"))
+      if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE user = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY time ASC, tag ASC", 1))
       {
          foreach ($pages as $page)
          {
@@ -57,7 +57,7 @@ if ($user = $this->GetUser())
    {
       print("<strong>".$this->GetTranslation("MyChangesTitle2")." (<a href=\"".$this->href("", $tag).($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bydate=true\">".$this->GetTranslation("OrderChange")."</a>).</strong><br /><br />\n");
 
-      if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE user = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY tag ASC, time DESC"))
+      if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE user = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY tag ASC, time DESC", 1))
       {
          foreach ($pages as $page)
          {

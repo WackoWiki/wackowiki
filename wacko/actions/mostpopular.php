@@ -14,10 +14,10 @@
  */
 
 if (!$max)  $max = 25;
-if ($max>500) $max = 500;
+if ($max > 500) $max = 500;
 
 // check for first param (for what mostpopular is built)
-if ($for) $page=$for;
+if ($for) $page = $for;
 if ($page)
 {
 	$page = $this->UnwrapLink($page);
