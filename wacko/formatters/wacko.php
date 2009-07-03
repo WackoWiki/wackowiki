@@ -9,7 +9,7 @@ $parser = &new WackoFormatter($this);
 
 $this->headerCount = 0;
 
-$text = preg_replace_callback($parser->NOTLONGREGEXP, array( &$parser, "WackoPreprocess"), $text);
+$text = preg_replace_callback($parser->NOTLONGREGEXP, array(&$parser, "WackoPreprocess"), $text);
 $texts = explode("<!--escaped-->", $text);
 $wtext = $texts[0];
 
