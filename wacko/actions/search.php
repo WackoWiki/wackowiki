@@ -7,11 +7,11 @@ else $mode = "full";
 if ($_GET["topic"] == "on") $mode = "topic";
 
 //if (!$delim) $delim="---";
-if (!in_array($style,array("br","ul","ol","comma"))) $style="ol";
+if (!in_array($style, array("br","ul","ol","comma"))) $style = "ol";
 
 $i = 0;
 
-if ($filter!="pages") $filter = "all";
+if ($filter != "pages") $filter = "all";
 if (!isset($clean)) $clean = false;
 
 if ($vars[0] != "") $phrase = $vars[0]; else { $phrase=""; $form=1; }
@@ -69,8 +69,8 @@ if ($phrase)
 
 					print("<h3>".$this->Link("/".$page["tag"],"",$page["tag"])."</h3>");
 					$context = getLineWithPhrase($phrase, $page["body"], $clean);
-					$context = preview_text($TEXT=$context, $LIMIT=500, $TAGS = 0);
-					$context = highlight_this($text=$context, $words=$phrase, $the_place=0);
+					$context = preview_text($TEXT = $context, $LIMIT = 500, $TAGS = 0);
+					$context = highlight_this($text = $context, $words = $phrase, $the_place = 0);
 					print("<div>".str_replace("\n", '<br />', $context)."</div>");
 
 					// close item
