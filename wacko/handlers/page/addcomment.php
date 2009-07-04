@@ -74,7 +74,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
             if(!$error)
                {
                   // store new comment
-                  $this->SavePage("Comment".$num, $body, $this->tag);
+                  $this->SavePage("Comment".$num, $body, $edit_note="", $this->tag);
                }
 
             // End Comment Captcha

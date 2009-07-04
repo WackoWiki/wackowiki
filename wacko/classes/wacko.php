@@ -1032,9 +1032,10 @@ class Wacko
 	// PAGE SAVING ROUTINE
 	// $tag			- page address
 	// $body		- page body (plain text)
+	// $edit_note	- edit summary
 	// $comment_on	- commented page address
 	// $title		- page name (metadata)
-	function SavePage($tag, $body, $comment_on = "", $title = "")
+	function SavePage($tag, $body, $edit_note = "", $comment_on = "", $title = "")
 	{
 		// get current user
 		$user = $this->GetUserName();
