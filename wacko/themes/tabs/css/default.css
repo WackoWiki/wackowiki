@@ -78,7 +78,10 @@ del A.outerlink:HOVER { color:#cc3300 }
 .commentinfo {
   color: #AAAAAA;
 }
-
+/* Change summary */
+.editnote {
+  color: #555555;
+}
 .commentform, .filesform {
   background-color: #EEEEEE;
   padding: 10px 50px;

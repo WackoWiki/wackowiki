@@ -366,6 +366,10 @@ width:0;
 	color:			#999;
 	padding:		5px 0;
 }
+/* Change summary */
+.editnote {
+  color: #555555;
+}
 /* User input form for comments */
 .commentform {
 	background-color:	#eee;

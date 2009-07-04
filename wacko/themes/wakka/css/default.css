@@ -117,6 +117,10 @@ img {
 .commentinfo {
 	color: #AAAAAA;
 }
+/* Change summary */
+.editnote {
+  color: #555555;
+}
 .filesform, .commentform {
 	background-color: #EEEEEE;
 	padding: 10px;
