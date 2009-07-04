@@ -100,6 +100,7 @@ $wackoTranslation = array(
 	"EditCancelButton" => "Annulla",
 	"EditPreviewButton" => "Anteprima",
 	"EditPreview" => " Anteprima ",
+	"EditNote" => "Edit summary",
 	"OverwriteAlert" => "AVVISO DI SOVRASCRITTURA: Questa pagina è stata modificata da qualcun altro mentre la trattavate.<br />Copia le tue modifiche e ri-edita questa pagina.",
 	"WriteAccessDenied" => "<em> Non puoi scrivere su questa pagina.</em>",
 	"EmptyComment" => "Il corpo del commento è vuoto -- non salvarlo!",
