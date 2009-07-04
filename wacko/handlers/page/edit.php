@@ -20,15 +20,20 @@ if ($_POST)
 	// only if saving:
 	if ($_POST["save"] && $_POST["body"] != "")
 	{
-		// check for edit note
-		if(isset($_POST['edit_note']))
+		if(isset($_POST["edit_note"]))
         {
-            $edit_note = trim($_POST['edit_note']);
+            $edit_note = trim($_POST["edit_note"]);
         }
 		// check for overwriting
 		if ($this->page && $this->page["time"] != $_POST["previous"])
 			$error = $this->GetTranslation("OverwriteAlert");
 
+		// check for edit note
+		if (($this->GetConfigValue("edit_summary") == 2) && $_POST["edit_note"] == "")
+		{
+			$error .= $this->GetTranslation("EditNoteMissing");
+		}
+		
 		if(($this->page && $this->GetConfigValue("captcha_edit_page")) || (!$this->page && $this->GetConfigValue("captcha_new_page")))
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
@@ -166,9 +171,8 @@ if ($_POST)
 
 		print($output);
 
-		// Edit
+		// edit
 		$output = "";
-		#$edit_note = "";
 }
 ?>
 		<input name="save" class="OkBtn_Top"
@@ -193,10 +197,13 @@ if ($_POST)
 		$output .= "<textarea id=\"postText\" name=\"body\" rows=\"40\" cols=\"60\" class=\"TextArea\">";
 		$output .= htmlspecialchars($body)."</textarea><br />\n";
 		
-		// ToDo: add edit note for change summary
-		$output .= "<label>".$this->GetTranslation("EditNote").":</label>";
-		$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
-		$output .= "<br />";
+		// edit note
+		if ($this->GetConfigValue("edit_summary") != 0)
+		{
+			$output .= "<label for=\"edit_note\">".$this->GetTranslation("EditNote").":</label>";
+			$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
+			$output .= "<br />";
+		}
 		print($output);
 
 		// captcha code starts
