@@ -24,6 +24,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 		if ($access && ($count < $max))
 		{
 			$count++;
+			
 			// day header
 			list($day, $time) = explode(" ", $page["time"]);
 			if ($day != $curday)
@@ -32,12 +33,25 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 				print("<b>$day:</b><br />\n");
 				$curday = $day;
 			}
-
+			
+			if ($page["edit_note"])
+			{
+				$edit_note = " <span class=\".editnote\">[".$page["edit_note"]."]</span>";
+			}
+			else
+			{
+                $edit_note = "";
+            }
+			
 			// print entry
 			print("&nbsp;&nbsp;&nbsp;<span class=\"dt\">".$time."</span> &mdash; (".
 			$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".
 			$this->Link( "/".$page["tag"], "", $page["tag"] )." . . . . . . . . . . . . . . . . <small>".
-			($this->IsWikiName($page["user"])?$this->Link("/".$page["user"],"",$page["user"]):$page["user"])."</small><br />\n");
+			($this->IsWikiName($page["user"]) 
+				? $this->Link("/".$page["user"],"",$page["user"])
+				: $page["user"]).
+			$edit_note.
+			"</small><br />\n");
 		}
 	}
 }
