@@ -101,6 +101,7 @@ $wackoTranslation = array(
 	"EditPreviewButton" => "Предварителен преглед",
 	"EditPreview" => "Предварителен преглед",
 	"EditNote" => "Edit summary",
+	"EditNoteMissing" => "Edit summary missing",
 	"OverwriteAlert" => "СЪОБЩЕНИЕ ЗА ПРЕЗАПИС: Тази страница е била променена от някой, докато вие сте я редактирали.<br />Моля, копирайте Вашите промени и редактирайте страницата повторно.",
 	"WriteAccessDenied" => "<em>Вие нямате права за промяна на тази страница.</em>",
 	"EmptyComment" => "Коментарът е празен -- няма да бъде запазен!",

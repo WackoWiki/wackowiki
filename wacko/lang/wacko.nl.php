@@ -101,6 +101,7 @@ $wackoTranslation = array(
 	"EditPreviewButton" => "Preview",
 	"EditPreview" => "Preview",
 	"EditNote" => "Edit summary",
+	"EditNoteMissing" => "Edit summary missing",
 	"OverwriteAlert" => "OVERSCHRIJF-WAARSCHUWING: Deze pagina is gewijzigd door iemand anders terwijl u deze aan het wijzigen was.<br />Maak een kopie van uw wijzigingen en bewerk de pagina opnieuw.",
 	"WriteAccessDenied" => "<em>U heeft geen schrijf rechten op deze pagina.</em>",
 	"EmptyComment" => "Reactietekst was leeg en is dus niet bewaard!",

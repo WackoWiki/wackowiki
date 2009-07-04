@@ -98,6 +98,7 @@ $wackoTranslation = array(
 	"EditPreviewButton" => "Vorschau",
 	"EditPreview" => "Vorschau",
 	"EditNote" => "Kommentar",
+	"EditNoteMissing" => "Edit summary missing",
 	"OverwriteAlert" => "ACHTUNG: Diese Seite wurde von jemandem geändert während du Sie selbst geändert hast.<br />Bitte kopiere deine Änderungen und ändere diese Seite erneut.",
 	"WriteAccessDenied" => "<em>Du hast kein Schreibrecht auf diese Seite.</em>",
 	"EmptyComment" => "Der Kommentar ist leer -- nicht gespeichert!",
