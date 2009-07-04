@@ -33,8 +33,11 @@ div#credits {clear: right; padding: 10px; color: #AAAAAA; font-size: 11px; text-
 .commentform form { width: 100% }
 .commentform form textarea { width: 100%; padding: 0}
 .commentinfo, #credits a { color: #AAAAAA; padding-bottom: 20px; }
+/* Change summary */
+.editnote {
+  color: #555555;
+}
 #credits a { color: #AAAAAA;}
-
 
 /* form */
 fieldset { padding: 10px; border: 1px solid black }

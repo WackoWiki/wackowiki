@@ -149,7 +149,10 @@ A:VISITED {
 .commentinfo {
   color: #AAAAAA;
 }
-
+/* Change summary */
+.editnote {
+  color: #555555;
+}
 .filesform, .commentform {
 	background-color: #990000;
 	padding: 10px;

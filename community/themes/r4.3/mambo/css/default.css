@@ -68,7 +68,10 @@ div.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-
 .commentform form { width: 100% }
 .commentform form textarea { width: 100%; padding: 0}
 .commentinfo, #credits a { color: #AAAAAA }
-
+/* Change summary */
+.editnote {
+  color: #555555;
+}
 
 /* Forms */
 fieldset { padding: 10px; border: 1px solid black }
