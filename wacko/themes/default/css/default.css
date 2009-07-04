@@ -182,6 +182,10 @@ white-space: nowrap;
   padding-bottom: 20px;
 }
 
+.editnote {
+  color: #555555;
+}
+
 .filesform, .commentform {
   /*background-color: #EEEEEE;*/
   padding: 10px;

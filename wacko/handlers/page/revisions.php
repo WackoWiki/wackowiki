@@ -31,7 +31,7 @@ if ($this->HasAccess("read")) {
 			
 			if ($page["edit_note"])
 			{
-				$edit_note = " <span class=\".editnote\">[".$page["edit_note"]."]</span>";
+				$edit_note = " <span class=\"editnote\">[".$page["edit_note"]."]</span>";
 			}
 			else
 			{
