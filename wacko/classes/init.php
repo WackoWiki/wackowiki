@@ -197,6 +197,8 @@ class Init
 					"referrers_purge_time" => 1,
 					"pages_purge_time" => 0,
 
+					"edit_summary" => 0,
+
 					"hide_files" => 0,
 					"hide_comments" => 0,
 
