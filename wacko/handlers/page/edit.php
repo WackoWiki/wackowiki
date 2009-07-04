@@ -20,6 +20,11 @@ if ($_POST)
 	// only if saving:
 	if ($_POST["save"] && $_POST["body"] != "")
 	{
+		// check for edit note
+		if(isset($_POST['edit_note']))
+        {
+            $edit_note = trim($_POST['edit_note']);
+        }
 		// check for overwriting
 		if ($this->page && $this->page["time"] != $_POST["previous"])
 			$error = $this->GetTranslation("OverwriteAlert");
@@ -74,7 +79,7 @@ if ($_POST)
 			$body = str_replace("\r", "", $_POST["body"]);
 
 			// add page (revisions)
-			$body_r = $this->SavePage($this->tag, $body);
+			$body_r = $this->SavePage($this->tag, $body, $edit_note);
 
 			// now we render it internally so we can write the updated link table.
 			$this->ClearLinkTable();
@@ -102,6 +107,7 @@ if ($_POST)
 	// fetch fields
 	if (!$previous = 	$_POST["previous"]) $previous 	= $this->page["time"];
 	if (!$body = 		$_POST["body"]) 	$body 		= $this->page["body"];
+	if (isset($_POST['edit_note']))			$edit_note	= $_POST['edit_note'];
 
 	{
 	// display form
@@ -160,7 +166,9 @@ if ($_POST)
 
 		print($output);
 
+		// Edit
 		$output = "";
+		#$edit_note = "";
 }
 ?>
 		<input name="save" class="OkBtn_Top"
@@ -184,6 +192,11 @@ if ($_POST)
 		$output .= "<input type=\"hidden\" name=\"previous\" value=\"".htmlspecialchars($previous)."\" /><br />";
 		$output .= "<textarea id=\"postText\" name=\"body\" rows=\"40\" cols=\"60\" class=\"TextArea\">";
 		$output .= htmlspecialchars($body)."</textarea><br />\n";
+		
+		// ToDo: add edit note for change summary
+		$output .= "<label>".$this->GetTranslation("EditNote").":</label>";
+		$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
+		$output .= "<br />";
 		print($output);
 
 		// captcha code starts
@@ -208,7 +221,6 @@ if ($_POST)
 			}
 		}
 		// end captcha
-
 ?>
 	<script type="text/javascript">
 		wE = new WikiEdit();
@@ -238,7 +250,6 @@ if ($_POST)
 		onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
 <?php
 }
-
 	print ($this->FormClose());
 }
 else
@@ -247,5 +258,6 @@ else
 	echo $this->GetTranslation("WriteAccessDenied");
 	echo "</div>";
 }
+
 ?>
 </div>
