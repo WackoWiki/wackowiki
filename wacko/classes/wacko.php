@@ -16,7 +16,7 @@ class Wacko
 	var $WVERSION; //Wacko version
 	var $context = array("");
 	var $current_context = 0;
-	var $pages_meta = "id, tag, created, time, owner, user, latest, handler, comment_on,
+	var $pages_meta = "id, tag, created, time, edit_note, owner, user, latest, handler, comment_on,
 						super_comment_on, supertag, lang, title, keywords, description";
 	var $first_inclusion = array(); // for backlinks
 	var $optionSplitter = "\n"; // if you change this two symbols, settings for all users will be lost.

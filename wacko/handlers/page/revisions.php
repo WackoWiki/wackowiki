@@ -28,12 +28,22 @@ if ($this->HasAccess("read")) {
 		foreach ($pages as $page)
 		{
 			$c++;
+			
+			if ($page["edit_note"])
+			{
+				$edit_note = " <span class=\".editnote\">[".$page["edit_note"]."]</span>";
+			}
+			else
+			{
+                $edit_note = "";
+            }
+			
 			if (($c <= $max) || !$max)
 			{
-				$output .= "<input type=\"radio\" name=\"a\" value=\"".($c==1?"-1":$page["id"])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";
-				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"b\" value=\"".($c==1?"-1":$page["id"])."\" ".($c == 2 ? "checked=\"checked\"" : "")." />";
-				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("show").($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."time=".urlencode($page["time"])."\">".$page["time"]."</a>";
-				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->GetTranslation("By")." ".($this->IsWikiName($page["user"])?$this->Link($page["user"]):$page["user"])."<br />\n";
+				$output .= "<input type=\"radio\" name=\"a\" value=\"".($c == 1 ? "-1" : $page["id"])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";
+				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"b\" value=\"".($c == 1 ? "-1" : $page["id"])."\" ".($c == 2 ? "checked=\"checked\"" : "")." />";
+				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("show").($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."time=".urlencode($page["time"])."\">".$page["time"]."</a>";
+				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->GetTranslation("By")." ".($this->IsWikiName($page["user"]) ? $this->Link($page["user"]) : $page["user"]).$edit_note."<br />\n";
 			}
 		}
 		$output .= "<br />\n";
