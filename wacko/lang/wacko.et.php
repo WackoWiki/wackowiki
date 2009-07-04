@@ -101,6 +101,7 @@ $wackoTranslation = array(
 	"EditPreviewButton" => "Eelvaade",
 	"EditPreview" => "Eelvaade",
 	"EditNote" => "Edit summary",
+	"EditNoteMissing" => "Edit summary missing",
 	"OverwriteAlert" => "Ülekirjutuse hoiatus: kuni sina seda lehte muutsid, muutis seda lehte veel keegi teine.<br />Kopeeri oma muudatused ja nimeta leht ümber.",
 	"WriteAccessDenied" => "<em>Sul ei ole sellele lehe kirjutamise õigusi.</em>",
 	"EmptyComment" => "Kommentaar on tühi -- ei salvestatud!",

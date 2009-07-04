@@ -101,6 +101,7 @@ $wackoTranslation = array(
 	"EditPreviewButton" => "Forhåndsvisning",
 	"EditPreview" => "Forhåndsvisning",
 	"EditNote" => "Edit summary",
+	"EditNoteMissing" => "Edit summary missing",
 	"OverwriteAlert" => "OVERSKRIVNING ADVARSEL: Denne side blev ændret af en anden mens du redigerede den.<br />Kopier venligst dine ændringer, og rediger forfra.",
 	"WriteAccessDenied" => "<em>Du har ikke tilladelse til at skrive denne side.</em>",
 	"EmptyComment" => "Hov, den er tom - ikke gemt!",
