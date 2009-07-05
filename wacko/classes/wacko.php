@@ -2805,7 +2805,7 @@ class Wacko
 					$xml .= "<link>".$this->href("show", $page["tag"], "time=".urlencode($page["time"]))."</link>\n";
 					$xml .= "<guid>".$this->href("show", $page["tag"], "time=".urlencode($page["time"]))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['time']))."</pubDate>\n";
-					$xml .= "<description>".$page["time"]." by ".$page["user"]."</description>\n";
+					$xml .= "<description>".$page["time"]." ".$this->GetTranslation("By")." ".$page["user"].($page["edit_note"] ? " [".$page["edit_note"]."]" : "")."</description>\n";
 					$xml .= "</item>\n";
 				}
 			}
