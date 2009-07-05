@@ -21,8 +21,8 @@ $what = $this->LoadAll(
 if (sizeof($what) > 0)
 {
 	// 2. check rights
-	if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwner($this->tag) == $this->GetUserName())) ||
-	($this->HasAccess("read")) || ($desc["user"] == $this->GetUserName()) )
+	if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwnerId($this->tag) == $this->GetUserId())) ||
+	($this->HasAccess("read")) || ($desc["user_id"] == $this->GetUserId()) )
 	{
 		$filepath = $this->config["upload_path".($page_id?"_per_page" : "")]."/".
 		($page_id ? ("@".str_replace("/", "@", $this->supertag)."@") : "").
@@ -80,9 +80,9 @@ if ($filepath)
 }
 else if ($error == 404)
 {
-   // Not sure what the point of wrapping it in the conditional was
+	// Not sure what the point of wrapping it in the conditional was
 	// if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
-   header("HTTP/1.0 404 Not Found");
+	header("HTTP/1.0 404 Not Found");
 
 	print($this->GetTranslation("UploadFileNotFound"));
 }
