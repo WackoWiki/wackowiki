@@ -2500,6 +2500,18 @@ class Wacko
 			return $page["owner"];
 	}
 
+	function GetPageOwnerId($tag = "", $time = "")
+	{
+		if (!$tag = trim($tag))
+		{
+			if (!$time) return $this->page['owner_id'];
+			else $tag = $this->GetPageTag();
+		}
+
+		if ($page = $this->LoadPage($tag, $time, LOAD_CACHE, LOAD_META))
+			return $page["owner_id"];
+	}
+
 	function SetPageOwner($tag, $user)
 	{
 		// check if user exists
