@@ -3,7 +3,7 @@
 	{{TOC page|for="!/SubTag" from="h2" to="h4" numerate="0|1|..." }}
 */
 // 1. check for first param (for what TOC is built)
-if ($for) $page=$for;
+if ($for) $page = $for;
 if ($page)
 {
 	$page = $this->UnwrapLink($page);
@@ -43,10 +43,10 @@ else
 		// identify what size where faces
 		$toc_len = sizeof($toc);
 		$numbers = array(); $depth = 0;
-		for($i=0;$i<$toc_len;$i++)
+		for($i = 0; $i < $toc_len; $i++)
 		if ($toc[$i][2] < 66666)
 		{ // normalized depth immersion
-			$toc[$i][4] = $toc[$i][2]-$start_depth+1;
+			$toc[$i][4] = $toc[$i][2] - $start_depth + 1;
 			if ($numerate)
 			{
 				// if dive deeper, reset the meter for new depths
@@ -57,7 +57,7 @@ else
 				$numbers[ $depth ]++;
 				// collect numbering on the array of $ numbers from start to the current depth, allowing zero
 				$num="";
-				for($j=1;$j<=$depth; $j++)
+				for($j = 1; $j<=$depth; $j++)
 				if ($numbers[$j] > 0) $num.=$numbers[$j].".";
 				// Human content TOC
 				$toc[$i][1] = $num." ".$toc[$i][1];
