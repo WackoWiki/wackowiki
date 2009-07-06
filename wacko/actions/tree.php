@@ -15,23 +15,20 @@ if (!is_numeric($depth)) $depth = 0;
 if ($depth == 0) $depth = 2147483647; //Which means unlimitedly
 
 if (!$style) $style="indent";
-if (!in_array($style, array("br","ul","ol","indent"))) $style = "indent";
+if (!in_array($style, array("br", "ul", "ol", "indent"))) $style = "indent";
 
 global $tree_pages_array;
 
 if (!function_exists('create_cluster_tree'))
 {
-
 	function create_cluster_tree(&$wacko, $supertag, $tag, $depth)
 	{
-
 		global $tree_pages_array;
 
 		while (! ( current($tree_pages_array) === FALSE))
 		{
 			$page_supertag = key($tree_pages_array);
 			$page_tag = pos($tree_pages_array);
-
 
 			//Itself we do not sketch, the parent must care about this
 			if ($supertag == $page_supertag)
@@ -87,7 +84,7 @@ if (!function_exists('create_cluster_tree'))
 
 					//Searches for backslashes so long as there is in supertag
 					$scount = substr_count($sub_supertag,"/");
-					for ($i = 0;$i < $scount - 1;$i++)
+					for ($i = 0; $i < $scount - 1; $i++)
 					{
 						$sub_tag = $sub_tag.substr($sub_sub_tag, 0, strpos($sub_sub_tag, "/") + 1);;
 						$sub_sub_tag = substr($sub_sub_tag, strpos($sub_sub_tag, "/") + 1);
@@ -117,7 +114,7 @@ if (!function_exists('test_page_existance'))
 	function test_page_existance($page_array)
 	{
 		if ($page_array["exists"]) return true;
-		$sub_tree = $page_array["subtree"];
+			$sub_tree = $page_array["subtree"];
 		if (is_array($sub_tree))
 		{
 			foreach ( $sub_tree as $sub_tag => $sub_page_array )
@@ -133,22 +130,23 @@ if (!function_exists('print_cluster_tree'))
 {
 	function print_cluster_tree(&$wacko, $tree, $style, $current_depth, $abc, $filter)
 	{
-
 		if (is_array($tree))
 		{
-
 			ksort ( $tree, SORT_STRING );
 
 			static $letter = "";
 			static $need_letter = 0;
 			static $newletter = "!";
 
-			if ($style == "ul") print "<ul>";
-			if ($style == "ol") print "<ol>";
-			if ($style == "indent") print "<div class=\"indent\">";
+			if ($style == "ul") 
+				print "<ul>";
+			if ($style == "ol") 
+				print "<ol>";
+			if ($style == "indent") 
+				print "<div class=\"indent\">";
+			
 			foreach ($tree as $sub_tag => $sub_tag_array )
 			{
-
 				$sub_supertag = $sub_tag_array["supertag"];
 				$sub_exists = $sub_tag_array["exists"];
 
@@ -174,30 +172,33 @@ if (!function_exists('print_cluster_tree'))
 				{
 					if ($need_letter == 1)
 					{ //Convenient case to print the letter
-						if (($style == "ul" || $style == "ol" ) && $letter ) print "<br />";
-						if ($letter) print "<br />";
+						if (($style == "ul" || $style == "ol" ) && $letter ) 
+							print "<br />";
+						if ($letter) 
+							print "<br />";
 						$letter = $newletter;
 						print "<strong>".$letter."</strong><br />";
 						$need_letter = 0;
 					}
 
-					if ($style == "ul" || $style == "ol") print "<li>";
+					if ($style == "ul" || $style == "ol") 
+						print "<li>";
 
 					$_page = $wacko->LoadPage(ltrim($sub_supertag, "/"));
 					if ($_page["tag"]) 
-					$_tag = $_page["tag"];
+						$_tag = $_page["tag"];
 					else 
-					$_tag = $sub_supertag;
+						$_tag = $sub_supertag;
 
 					print($wacko->Link("/".$_tag, "", $linktext)."\n");
 
 					if ($style == "indent" || $style == "br") 
-					print "<br />";
+						print "<br />";
 				}
 
 				print_cluster_tree($wacko, $sub_tag_array["subtree"], $style, $current_depth + 1, $abc, $filter);
-
 			}
+
 			if ($style == "ul") print "</ul>";
 			if ($style == "ol") print "</ol>";
 			if ($style == "indent") print "</div>";
@@ -206,8 +207,10 @@ if (!function_exists('print_cluster_tree'))
 }
 
 // header
-if ($root){
-	if (!$nomark){
+if ($root)
+{
+	if (!$nomark)
+	{
 		$title = $this->GetTranslation("TreeClusterTitle");
 		$title = str_replace("%1",  $this->Link("/".$root, "", $root), $title);
 		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.":</span></p>\n");
