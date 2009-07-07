@@ -24,7 +24,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 		if ($access && ($count < $max))
 		{
 			$count++;
-			
+
 			// day header
 			list($day, $time) = explode(" ", $page["time"]);
 			if ($day != $curday)
@@ -40,9 +40,9 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 			}
 			else
 			{
-                $edit_note = "";
-            }
-			
+				$edit_note = "";
+			}
+
 			// print entry
 			print("&nbsp;&nbsp;&nbsp;<span class=\"dt\">".$time."</span> &mdash; (".
 			$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".

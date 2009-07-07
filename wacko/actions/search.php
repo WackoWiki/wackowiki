@@ -1,8 +1,9 @@
 <?php
 
-if (($topic == 1) || 
-	($title == 1)) $mode = "topic"; 
-else $mode = "full";
+if (($topic == 1) || ($title == 1))
+	$mode = "topic";
+else
+	$mode = "full";
 
 if ($_GET["topic"] == "on") $mode = "topic";
 
@@ -14,24 +15,34 @@ $i = 0;
 if ($filter != "pages") $filter = "all";
 if (!isset($clean)) $clean = false;
 
-if ($vars[0] != "") $phrase = $vars[0]; else { $phrase=""; $form=1; }
+if ($vars[0] != "") $phrase = $vars[0];
+else 
+{ 
+	$phrase = "";
+	$form = 1;
+}
 
 if ($form)
 {
 	echo $this->FormOpen("", "", "get") ?>
 
-<label for="searchfor"><?php echo $this->GetTranslation("SearchFor");?></label>:&nbsp;<br />
-<input name="phrase" id="searchfor" size="40"
-			value="<?php echo htmlspecialchars($_GET["phrase"]) ?>" /> <input
-			type="submit"
-			value="<?php echo $this->GetTranslation("SearchButtonText"); ?>" />
-			<br />
-	<input type="checkbox" name="topic"
-		<?php if ($mode == "topic") echo "CHECKED"; ?> id="checkboxSearch" />
-		<label for="checkboxSearch"><?php echo $this->GetTranslation("TopicSearchText"); ?></label>
-		
-		<?php
-		echo $this->FormClose();
+<label for="searchfor"><?php echo $this->GetTranslation("SearchFor");?></label>
+:&nbsp;
+<br />
+<input
+	name="phrase" id="searchfor" size="40"
+	value="<?php echo htmlspecialchars($_GET["phrase"]) ?>" />
+<input
+	type="submit"
+	value="<?php echo $this->GetTranslation("SearchButtonText"); ?>" />
+<br />
+<input
+	type="checkbox" name="topic"
+	<?php if ($mode == "topic") echo "CHECKED"; ?> id="checkboxSearch" />
+<label for="checkboxSearch"><?php echo $this->GetTranslation("TopicSearchText"); ?></label>
+
+	<?php
+	echo $this->FormClose();
 }
 
 if ($phrase == "") $phrase = $_GET["phrase"];
@@ -41,7 +52,6 @@ if ($phrase)
 
 	if (strlen($phrase) >= 3)
 	{
-
 		if ($mode == "topic") $results = $this->TagSearch($phrase);
 		else $results = $this->FullTextSearch($phrase, ($filter == "all" ? 0 : 1));
 		$phrase = htmlspecialchars($phrase);
@@ -67,16 +77,16 @@ if ($phrase)
 						if ($style == "ul" || $style == "ol") print "<li>";
 						if ($style == "comma" && $i > 0) print ",\n";
 
-					print("<h3>".$this->Link("/".$page["tag"],"",$page["tag"])."</h3>");
-					$context = getLineWithPhrase($phrase, $page["body"], $clean);
-					$context = preview_text($TEXT = $context, $LIMIT = 500, $TAGS = 0);
-					$context = highlight_this($text = $context, $words = $phrase, $the_place = 0);
-					print("<div>".str_replace("\n", '<br />', $context)."</div>");
+						print("<h3>".$this->Link("/".$page["tag"],"",$page["tag"])."</h3>");
+						$context = getLineWithPhrase($phrase, $page["body"], $clean);
+						$context = preview_text($TEXT = $context, $LIMIT = 500, $TAGS = 0);
+						$context = highlight_this($text = $context, $words = $phrase, $the_place = 0);
+						print("<div>".str_replace("\n", '<br />', $context)."</div>");
 
-					// close item
-					if ($style == "br") print "<br />\n";
-					if ($style == "ul" || $style == "ol") print "</li>\n";
-					$i++;
+						// close item
+						if ($style == "br") print "<br />\n";
+						if ($style == "ul" || $style == "ol") print "</li>\n";
+						$i++;
 					}
 				}
 			}
@@ -87,7 +97,7 @@ if ($phrase)
 			if (!$nomark) print("</div>");
 		}
 		else
-			if (!$nomark) echo $this->GetTranslation("NoResultsFor")."\"$phrase\".";
+		if (!$nomark) echo $this->GetTranslation("NoResultsFor")."\"$phrase\".";
 	}
 	else
 	{
@@ -97,78 +107,81 @@ if ($phrase)
 
 function getLineWithPhrase($phrase, $string, $cleanup)
 {
-    $lines = split("\n", $string);
-    $result = "";
-    foreach ($lines as $line)
-    {
-        if (strpos($line, $phrase))
-        {
-            if ($result) $result .= "<br/>\n";
-            $result .= $cleanup ? str_replace("$phrase", "", $line) : $line;
-        }
-    }
-    return $result;
+	$lines = split("\n", $string);
+	$result = "";
+	foreach ($lines as $line)
+	{
+		if (strpos($line, $phrase))
+		{
+			if ($result) $result .= "<br/>\n";
+			$result .= $cleanup ? str_replace("$phrase", "", $line) : $line;
+		}
+	}
+	return $result;
 }
 
-function preview_text($TEXT, $LIMIT, $TAGS = 0) {
+function preview_text($TEXT, $LIMIT, $TAGS = 0)
+{
+	// TRIM TEXT
+	$TEXT = trim($TEXT);
 
+	// STRIP TAGS IF PREVIEW IS WITHOUT HTML
+	if ($TAGS == 0) $TEXT = preg_replace('/\s\s+/', ' ', strip_tags($TEXT));
 
-    // TRIM TEXT
-    $TEXT = trim($TEXT);
+	// IF STRLEN IS SMALLER THAN LIMIT RETURN
+	if (strlen($TEXT) < $LIMIT) return $TEXT;
 
-    // STRIP TAGS IF PREVIEW IS WITHOUT HTML
-    if ($TAGS == 0) $TEXT = preg_replace('/\s\s+/', ' ', strip_tags($TEXT));
+	if ($TAGS == 0) return substr($TEXT, 0, $LIMIT) . " ...";
+	else
+	{
+		$COUNTER = 0;
+		for ($i = 0; $i<= strlen($TEXT); $i++)
+		{
+			if ($TEXT{$i} == "<") $STOP = 1;
 
-    // IF STRLEN IS SMALLER THAN LIMIT RETURN
-    if (strlen($TEXT) < $LIMIT) return $TEXT;
+			if ($STOP != 1)
+			{
+				$COUNTER++;
+			}
 
-    if ($TAGS == 0) return substr($TEXT, 0, $LIMIT) . " ...";
-    else {
+			if ($TEXT{$i} == ">") $STOP = 0;
+			$RETURN .= $TEXT{$i};
 
-        $COUNTER = 0;
-        for ($i = 0; $i<= strlen($TEXT); $i++) {
+			if ($COUNTER >= $LIMIT && $TEXT{$i} == " ") break;
+		}
 
-            if ($TEXT{$i} == "<") $STOP = 1;
-
-            if ($STOP != 1) {
-
-                $COUNTER++;
-            }
-
-            if ($TEXT{$i} == ">") $STOP = 0;
-            $RETURN .= $TEXT{$i};
-
-            if ($COUNTER >= $LIMIT && $TEXT{$i} == " ") break;
-
-        }
-
-        return $RETURN . "...";
-    }
-
+		return $RETURN . "...";
+	}
 }
 
-function highlight_this($text, $words, $the_place) {
-    $words = trim($words);
-    $the_count = 0;
-    $wordsArray = explode(' ', $words);
-        foreach($wordsArray as $word) {
-         if(strlen(trim($word)) != 0)
-        
-         //exclude these words from being replaced
-         $exclude_list = array("word1", "word2", "word3");
-        // Check if it's excluded
-        if ( in_array( strtolower($word), $exclude_list ) ) {
-   
-        } else {
-            $text = str_ireplace($word, "<span class=\"highlight\">".$word."</span>", $text, $count);
-            $the_count = $count + $the_count;
-            }
-           
-    }
-    //added to show how many keywords were found
-    #echo "<br><div class=\"emphasis\">A search for <strong>" . $words. "</strong> found <strong>" . $the_count . "</strong> matches within the " . $the_place. ".</div><br>";
-   
-    return $text;
-} 
+function highlight_this($text, $words, $the_place)
+{
+	$words = trim($words);
+	$the_count = 0;
+	$wordsArray = explode(' ', $words);
+	foreach($wordsArray as $word)
+	{
+		if(strlen(trim($word)) != 0)
+
+		//exclude these words from being replaced
+		$exclude_list = array("word1", "word2", "word3");
+
+		// Check if it's excluded
+		if ( in_array( strtolower($word), $exclude_list ) )
+		{
+
+		}
+		else
+		{
+			$text = str_ireplace($word, "<span class=\"highlight\">".$word."</span>", $text, $count);
+			$the_count = $count + $the_count;
+		}
+			
+	}
+	//added to show how many keywords were found
+	#echo "<br><div class=\"emphasis\">A search for <strong>" . $words. "</strong> found <strong>" . $the_count . "</strong> matches within the " . $the_place. ".</div><br>";
+
+	return $text;
+}
 
 ?>
