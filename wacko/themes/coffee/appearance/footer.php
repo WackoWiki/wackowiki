@@ -15,11 +15,15 @@ if ($this->page)
 		print(" <a href=\"".$this->href("rename")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" /></a>");
 		//      if (!$this->GetConfigValue("remove_onlyadmins") || $this->IsAdmin()) print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/del.gif\" title=\"".$this->GetTranslation("DeleteTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" /></a>");
 		print(" | <a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"").">".$this->GetTranslation("EditACLText")."</a>");
-	} else {
+	} 
+	else 
+	{
 		if ($owner = $this->GetPageOwner())
 		{
 			print($this->GetTranslation("Owner").$this->Link($owner));
-		} else if (!$this->page["comment_on"]) {
+		} 
+		else if (!$this->page["comment_on"]) 
+		{
 			print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
 		}
 	}
@@ -58,7 +62,8 @@ echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->Ge
 <?php echo $this->FormClose(); ?>
 
 <div id="credits"><?php 
-if ($this->GetUser()){
+if ($this->GetUser())
+{
 	echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion());
 }
 ?></div>

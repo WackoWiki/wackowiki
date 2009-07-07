@@ -4,7 +4,7 @@
 function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 {
 	$this->wacko = & $wacko;
-	
+
 	$xsize = $selected?7:8;
 	$ysize = $selected?25:30;
 	if ($text == "") return; // no tab;
@@ -29,69 +29,69 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 
 ?>
 <div class="Footer"><img
-   src="<?php echo $this->GetConfigValue("base_url");?>images/z.gif"
-   width="5" height="1" alt="" align="left" border="0" /><img
-   src="<?php echo $this->GetConfigValue("base_url");?>images/z.gif"
-   width="5" height="1" alt="" align="right" border="0" /> <?php EchoTab( $this->href("show"),  $this->GetTranslation("ShowTip"),
-   $this->HasAccess("read") ? $this->GetTranslation("ShowText") : "",
-   $this->method != "show"
-   ) ?> <?php EchoTab( $this->href("edit"),  $this->GetTranslation("EditTip"),
-   $this->HasAccess("write") ? $this->GetTranslation("EditText") : "",
-   $this->method != "edit"
-   ) ?> <?php EchoTab( $this->href("revisions"),  $this->GetTranslation("RevisionTip"),
-   $this->GetPageTime() ? $this->GetPageTime() : "",
-   $this->method != "revisions"
-   ) ?> <?php
-   // if this page exists
-   if ($this->page)
-   {
-      if($this->HasAccess("write") && $this->GetUser() || $this->IsAdmin())
-      {
-         $EchoTab( $this->href("settings"),  $this->GetTranslation("SettingsTip"),
-         $this->GetTranslation("EditSettingsText"),
-         $this->method != "settings"
-         );
-      }
+	src="<?php echo $this->GetConfigValue("base_url");?>images/z.gif"
+	width="5" height="1" alt="" align="left" border="0" /><img
+	src="<?php echo $this->GetConfigValue("base_url");?>images/z.gif"
+	width="5" height="1" alt="" align="right" border="0" /> <?php EchoTab( $this->href("show"),  $this->GetTranslation("ShowTip"),
+	$this->HasAccess("read") ? $this->GetTranslation("ShowText") : "",
+	$this->method != "show"
+	) ?> <?php EchoTab( $this->href("edit"),  $this->GetTranslation("EditTip"),
+	$this->HasAccess("write") ? $this->GetTranslation("EditText") : "",
+	$this->method != "edit"
+	) ?> <?php EchoTab( $this->href("revisions"),  $this->GetTranslation("RevisionTip"),
+	$this->GetPageTime() ? $this->GetPageTime() : "",
+	$this->method != "revisions"
+	) ?> <?php
+	// if this page exists
+	if ($this->page)
+	{
+		if($this->HasAccess("write") && $this->GetUser() || $this->IsAdmin())
+		{
+			$EchoTab( $this->href("settings"),  $this->GetTranslation("SettingsTip"),
+			$this->GetTranslation("EditSettingsText"),
+			$this->method != "settings"
+			);
+		}
 
-      // if owner is current user
-      if ($this->UserIsOwner())
-      {
-         EchoTab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->GetTranslation("EditACLConfirm")."\");":""),
-         $this->GetTranslation("EditACLText"),
-         $this->method != "acls"
-         );
-      }
-      if ($this->IsAdmin() || (!$this->GetConfigValue("remove_onlyadmins") && $this->UserIsOwner()))
-      {
-         EchoTab( $this->href("remove"),  $this->GetTranslation("DeleteTip")."",
+		// if owner is current user
+		if ($this->UserIsOwner())
+		{
+			EchoTab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->GetTranslation("EditACLConfirm")."\");":""),
+			$this->GetTranslation("EditACLText"),
+			$this->method != "acls"
+			);
+		}
+		if ($this->IsAdmin() || (!$this->GetConfigValue("remove_onlyadmins") && $this->UserIsOwner()))
+		{
+			EchoTab( $this->href("remove"),  $this->GetTranslation("DeleteTip")."",
                         '<img src="'.$this->GetConfigValue("theme_url").'icons/del'.($this->method != "remove"?"":"_").'.gif" width="14" height="15" alt="" />'.$this->GetTranslation("DeleteText"),
-         $this->method != "remove",
+			$this->method != "remove",
                         "2a"
                         );
-      }
-   }
-   ?> <?php
-   if ($this->GetUser())
-   {
-      EchoTab( $this->href("referrers"),  $this->GetTranslation("ReferrersTip"),
-      $this->GetTranslation("ReferrersText"),
-      $this->method != "referrers",
+		}
+	}
+	?> <?php
+	if ($this->GetUser())
+	{
+		EchoTab( $this->href("referrers"),  $this->GetTranslation("ReferrersTip"),
+		$this->GetTranslation("ReferrersText"),
+		$this->method != "referrers",
          "2"
          );
-   }  ?>
+	}  ?>
 <div class="TabSpace">
 <div class="TabText" style="padding-left: 10px"><?php
 // if this page exists
 if ($this->page)
 {
-   // if owner is current user
-   if ($this->UserIsOwner())
-   print($this->GetTranslation("YouAreOwner"));
-   else
-   if ($owner = $this->GetPageOwner())
-   print($this->GetTranslation("Owner").$this->Link($owner));
-   else if (!$this->page["comment_on"])
-   print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
+	// if owner is current user
+	if ($this->UserIsOwner())
+	print($this->GetTranslation("YouAreOwner"));
+	else
+	if ($owner = $this->GetPageOwner())
+	print($this->GetTranslation("Owner").$this->Link($owner));
+	else if (!$this->page["comment_on"])
+	print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
 }
 ?></div>
 </div>
@@ -100,34 +100,33 @@ if ($this->page)
 <!-- !! -->
 <?php
 if ($this->method == "show") {
-   ?>
-   <?php
-   if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1 && ($this->GetConfigValue("hide_files") != 2 || $this->GetUser()))
-   {
-      // store files display in session
-      $tag = $this->GetPageTag();
-      if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag]))
-      $_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
+	?>
+	<?php
+	if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1 && ($this->GetConfigValue("hide_files") != 2 || $this->GetUser()))
+	{
+		// store files display in session
+		$tag = $this->GetPageTag();
+		if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag]))
+		$_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
 
-      switch($_POST["show_files"])
-      {
-         case "0":
-            $_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = 0;
-            break;
-         case "1":
-            $_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = 1;
-            break;
-      }
+		switch($_POST["show_files"])
+		{
+			case "0":
+				$_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = 0;
+				break;
+			case "1":
+				$_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = 1;
+				break;
+		}
 
-      // display files!
-      if ($this->page && $_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag])
-      {
-         // display files header
-         ?>
+		// display files!
+		if ($this->page && $_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag])
+		{
+			// display files header
+			?>
 <a name="files"></a>
-<div id="filesheader"><?php echo $this->GetTranslation("Files_all") ?>
-[<a
-   href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetTranslation("HideFiles"); ?></a>]
+<div id="filesheader"><?php echo $this->GetTranslation("Files_all") ?> [<a
+	href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetTranslation("HideFiles"); ?></a>]
     </div>
     <?php
 
@@ -312,4 +311,5 @@ echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:HomePage", ""
 <?php
 
 //don't place final </body></html> here. Wacko closes HTML automatically.
+
 ?>

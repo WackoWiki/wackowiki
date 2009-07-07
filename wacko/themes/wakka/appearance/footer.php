@@ -60,8 +60,8 @@ if ($this->page)
 	{
 		// Page  settings link
 		print(" | <a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditSettingsConfirm")."');\"":"").">".$this->GetTranslation("EditSettingsText")."</a> | ");
-// referrers icon
-print("<a href=\"".$this->href("referrers")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/referer.gif\" title=\"".$this->GetTranslation("ReferrersTip")."\" alt=\"".$this->GetTranslation("ReferrersText")."\" /></a> |");
+		// referrers icon
+		print("<a href=\"".$this->href("referrers")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/referer.gif\" title=\"".$this->GetTranslation("ReferrersTip")."\" alt=\"".$this->GetTranslation("ReferrersText")."\" /></a> |");
 	}
 }
 ?> <?php
@@ -77,15 +77,11 @@ echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->Ge
 echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get");
 // Searchbar
 ?> | <span class="searchbar nobr"><?php echo $this->GetTranslation("SearchText") ?><input
-	type="text" name="phrase" size="15" /></span>
-<?php
-// Search form close
-echo $this->FormClose();
-?>
-
-</div>
-<div id="credits">
-<?php 
+	type="text" name="phrase" size="15" /></span> <?php
+	// Search form close
+	echo $this->FormClose();
+	?></div>
+<div id="credits"><?php 
 if ($this->GetUser()){
 	echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion());
 }
