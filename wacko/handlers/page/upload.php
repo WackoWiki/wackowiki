@@ -45,8 +45,8 @@ if ($registered
 		{
 			if ($this->IsAdmin() || (
 				$page_id && (
-				$this->GetPageOwner($this->tag) == $this->GetUserName())) || (
-				$what[0]["user"] == $this->GetUserName()))
+				$this->GetPageOwnerId($this->tag) == $this->GetUserId())) || (
+				$what[0]["user_id"] == $this->GetUserId()))
 			{
 				echo "<strong>".$this->GetTranslation("UploadRemoveConfirm")."</strong>";
 				echo $this->FormOpen("upload");
@@ -106,8 +106,8 @@ if ($registered
 		{
 			if ($this->IsAdmin() || (
 				$page_id && (
-				$this->GetPageOwner($this->tag) == $this->GetUserName())) || (
-				$what[0]["user"] == $this->GetUserName()))
+				$this->GetPageOwnerId($this->tag) == $this->GetUserId())) || (
+				$what[0]["user_id"] == $this->GetUserId()))
 			{
 				// 2. remove from DB
 				$this->Query(

@@ -24,7 +24,7 @@ if (sizeof($what) > 0)
 	if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwnerId($this->tag) == $this->GetUserId())) ||
 	($this->HasAccess("read")) || ($desc["user_id"] == $this->GetUserId()) )
 	{
-		$filepath = $this->config["upload_path".($page_id?"_per_page" : "")]."/".
+		$filepath = $this->config["upload_path".($page_id ? "_per_page" : "")]."/".
 		($page_id ? ("@".str_replace("/", "@", $this->supertag)."@") : "").
 		$what[0]["filename"];
 	}

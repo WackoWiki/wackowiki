@@ -1694,8 +1694,8 @@ class Wacko
 				if (is_array($desc))
 				{
 					//check 403 here!
-					if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwner($this->tag) == $this->GetUserName())) ||
-					($this->HasAccess("read", $pagetag)) || ($desc["user"] == $this->GetUserName()))
+					if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwnerId($this->tag) == $this->GetUserId())) ||
+					($this->HasAccess("read", $pagetag)) || ($desc["user_id"] == $this->GetUserId()))
 					{
 						$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
 						$url = $this->config["base_url"].trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file;

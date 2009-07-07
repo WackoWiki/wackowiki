@@ -98,8 +98,8 @@ if ($can_view)
 		$link = $this->Link($path2.$filename, "", $filename);
 
 		if ($this->IsAdmin() || (!$is_global &&
-		($this->GetPageOwner($page) == $this->GetUserName())) ||
-		($file["user"] == $this->GetUserName()))
+		($this->GetPageOwnerId($page) == $this->GetUserId())) ||
+		($file["user_id"] == $this->GetUserId()))
 		{
 			$remove_mode = 1;
 		}
