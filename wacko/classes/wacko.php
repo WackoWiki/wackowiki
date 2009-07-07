@@ -699,7 +699,7 @@ class Wacko
 	{
 		if (isset( $this->pageCache[$tag] ))
 		{
-			if ($this->pageCache[$tag]["mdonly"] == 0 || $metadataonly==$this->pageCache[$tag]["mdonly"])
+			if ($this->pageCache[$tag]["mdonly"] == 0 || $metadataonly == $this->pageCache[$tag]["mdonly"])
 			{
 				return $this->pageCache[$tag];
 			}
@@ -1506,14 +1506,14 @@ class Wacko
 		return $text;
 	}
 
-	function ComposeLinkToPage($tag, $method = "", $text = "", $track = 1)
+	function ComposeLinkToPage($tag, $method = "", $text = "", $track = 1, $title = "")
 	{
 		if (!$text) $text = $this->AddSpaces($tag);
 		//$text = htmlentities($text);
 		if ($_SESSION[$this->config["session_prefix"].'_'."linktracking"] && $track)
 			$this->TrackLinkTo($tag);
 
-		return '<a href="'.$this->href($method, $tag).'">'.$text.'</a>';
+		return '<a href="'.$this->href($method, $tag).'"'.($title ? ' title="'.$title.'"' : '').'>'.$text.'</a>';
 	}
 
 	function PreLink($tag, $text = "", $track = 1, $imgurl = 0)
@@ -1529,7 +1529,7 @@ class Wacko
 		if ($imgurl == 1)
 			return "<!--imglink:begin-->".str_replace(' ', '+', urldecode($tag)).' =='.$text."<!--imglink:end-->";
 		else
-			return "<!--link:begin-->".$tag." ==".($this->format_safe ? str_replace(">", "&gt;", str_replace("<", "&lt;", $text)) : $text)."<!--link:end-->";
+			return "<!--link:begin-->".str_replace(' ', '+', urldecode($tag))." ==".($this->format_safe ? str_replace(">", "&gt;", str_replace("<", "&lt;", $text)) : $text)."<!--link:end-->";
 	}
 
 	function Link($tag, $method = "", $text = "", $track = 1, $safe = 0, $linklang = "", $anchorlink = 1)
@@ -1755,7 +1755,7 @@ class Wacko
 			$icon = $this->GetTranslation("iwicon");
 			$tpl = "interwiki";
 		}
-		else if (preg_match("/^([\!\.".$this->language["ALPHANUM_P"]."]+)(\#[".$this->language["ALPHANUM_P"]."\_\-]+)?$/", $tag, $matches))
+		else if (preg_match("/^([\!\.\-".$this->language["ALPHANUM_P"]."]+)(\#[".$this->language["ALPHANUM_P"]."\_\-]+)?$/", $tag, $matches))
 		{
 			// it's a Wiki link!
 			$tag = $otag = $matches[1];
@@ -1780,18 +1780,17 @@ class Wacko
 					$opar = "/".$untag."/";
 
 					for ($i = 0; $i < substr_count($data, "/") + 2; $i++)
-						$opar = substr($opar, strpos($opar,"/") + 1);
+						$opar = substr($opar, strpos($opar, "/") + 1);
 
 					$params = explode("/", $opar); //there're good params
 				}
 			}
 
 			$unwtag = trim($unwtag, "/.");
-			$unwtag = str_replace( "_", "", $unwtag );
+			$unwtag = str_replace("_", "", $unwtag);
 
 			if ($handler)
 				$method = $handler;
-			//if ($tag=="!/edit") echo "{".$tag."|".$untag."|".$unwtag."|".$handler."}";
 
 			$thispage = $this->LoadPage($unwtag, "", LOAD_CACHE, LOAD_META);
 
@@ -1943,7 +1942,6 @@ class Wacko
 				$res = str_replace("{pagepath}", $pagepath, $res);
 				$res = str_replace("{page}",   $page,  $res);
 				$res = str_replace("{text}",   $text,  $res);
-				//      if ($linklang)  {echo("{aname}".  $aname);echo("{icon}".   $icon);echo("{accicon}".$accicon);echo("{class}".  $class);echo("{title}".  $title);echo("{pagelink}". $pagelink);echo("{pagepath}". $pagepath);echo("{page}".   $page);echo("{text}".   $text);}
 
 				if (!$text)
 					$text = htmlspecialchars($tag, ENT_NOQUOTES);
@@ -2117,7 +2115,7 @@ class Wacko
 			$this->Query(
 				"INSERT INTO ".$this->config["table_prefix"]."links ".
 					"(from_tag, to_tag, to_supertag) ".
-				"VALUES ".rtrim($query,","));
+				"VALUES ".rtrim($query, ","));
 		}
 	}
 
@@ -2191,7 +2189,7 @@ class Wacko
 			$referrer = isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '';
 
 		// check if it's coming from another site
-		if ($referrer && !preg_match("/^".preg_quote($this->config["base_url"], "/")."/", $referrer))
+		if ($referrer && !preg_match("/^".preg_quote($this->config["base_url"], "/")."/", $referrer) && isset($_GET["sid"]) === false)
 		{
 			$this->Query(
 				"INSERT INTO ".$this->config["table_prefix"]."referrers SET ".
@@ -3040,9 +3038,8 @@ class Wacko
 			$this->SetUser($this->LoadUser($user["name"]));
 
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarks"] = $bookmarks;
-			//$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"] = $this->Format($this->Format(implode(" | ", $bookmarks), "wacko"), "post_wacko");
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"] = $this->Format(implode(" | ", $bookmarks), "wacko");
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"] = $bmlinks;
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"] = $this->Format(implode(" | ", $bookmarks), "wacko");
 		}
 
 		// removing bookmark
@@ -3075,9 +3072,8 @@ class Wacko
 			$this->SetUser($this->LoadUser($user["name"]));
 
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarks"] = $bookmarks;
-			//    $_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"] = $this->Format($this->Format(implode(" | ", $bookmarks), "wacko"), "post_wacko");
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"] = $this->Format(implode(" | ", $bookmarks), "wacko");
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"] = $bmlinks;
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"] = $this->Format(implode(" | ", $bookmarks), "wacko");
 		}
 	}
 
@@ -3580,13 +3576,13 @@ class Wacko
 	}
 
 	// REMOVALS
-	function RemoveAcls($tag)
+	function RemoveAcls($tag $cluster = false)
 	{
 		if (!$tag) return false;
 
 		return $this->Query(
 			"DELETE FROM ".$this->config["table_prefix"]."acls ".
-			"WHERE page_tag = '".quote($this->dblink, $tag)."' ");
+			"WHERE page_tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
 	function RemovePage($tag)
@@ -3602,40 +3598,40 @@ class Wacko
 				"WHERE tag = '".quote($this->dblink, $tag)."' ");
 	}
 
-	function RemoveComments($tag)
+	function RemoveComments($tag, $cluster = false)
 	{
 		if (!$tag) return false;
 
 		return $this->Query(
 			"DELETE FROM ".$this->config["table_prefix"]."pages ".
-			"WHERE comment_on = '".quote($this->dblink, $tag)."' ");
+			"WHERE comment_on ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
-	function RemoveWatches($tag)
+	function RemoveWatches($tag, $cluster = false)
 	{
 		if (!$tag) return false;
 
 		return $this->Query(
 			"DELETE FROM ".$this->config["table_prefix"]."pagewatches ".
-			"WHERE tag = '".quote($this->dblink, $tag)."' ");
+			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
-	function RemoveLinks($tag)
+	function RemoveLinks($tag, $cluster = false)
 	{
 		if (!$tag) return false;
 
 		return $this->Query(
 			"DELETE FROM ".$this->config["table_prefix"]."links ".
-			"WHERE from_tag = '".quote($this->dblink, $tag)."' ");
+			"WHERE from_tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
-	function RemoveReferrers($tag)
+	function RemoveReferrers($tag, $cluster = false)
 	{
 		if (!$tag) return false;
 
 		return $this->Query(
 			"DELETE FROM ".$this->config["table_prefix"]."referrers ".
-			"WHERE page_tag = '".quote($this->dblink, $tag)."' ");
+			"WHERE page_tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
 	function RemoveFiles($tag, $cluster = false)
