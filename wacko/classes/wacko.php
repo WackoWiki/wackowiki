@@ -3576,7 +3576,7 @@ class Wacko
 	}
 
 	// REMOVALS
-	function RemoveAcls($tag $cluster = false)
+	function RemoveAcls($tag, $cluster = false)
 	{
 		if (!$tag) return false;
 
