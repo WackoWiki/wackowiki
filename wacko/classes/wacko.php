@@ -3598,6 +3598,15 @@ class Wacko
 				"WHERE tag = '".quote($this->dblink, $tag)."' ");
 	}
 
+	function RemoveRevisions($tag, $cluster = false)
+	{
+		if (!$tag) return false;
+
+		return $this->Query(
+			"DELETE FROM {$this->config['table_prefix']}revisions ".
+			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+	}
+
 	function RemoveComments($tag, $cluster = false)
 	{
 		if (!$tag) return false;
