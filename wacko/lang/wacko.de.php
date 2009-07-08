@@ -127,6 +127,9 @@ $wackoTranslation = array(
 	"NotOwnerAndCanDelete" => "<i>Du bist nicht der Besitzer dieser Seite und kannst sie deshalb nicht löschen.</i>",
 
 	// remove
+	"RemoveRevisions" => "Lösche alle Revisionen",
+	"RemoveCluster" => "Lösche alle Seiten des Clusters",
+	"RemoveDontKeep" => "Do not save a copy of a removed page and comments",
 	"ReferrersRemoved" => "<i>Referenzen auf Seite %1 gelöscht.</i>",
 	"LinksRemoved" => "<i>Verweise von Seite %1 gelöscht.</i>",
 	"AclsRemoved" => "<i>Berechtigungen der Seite %1 gelöscht.</i>",
@@ -134,6 +137,7 @@ $wackoTranslation = array(
 	"CommentsRemoved" => "<i>Kommentare der Seite %1 gelöscht.</i>",
 	"FilesRemoved" => "<i>Dateien der Seite %1 gelöscht.</i>",
 	"PageRemoved" => "<i>Seite %1 gelöscht.</i>",
+	"ClusterRemoved" => "Alle seiten des Cluster gelöscht.",
 	"RevisionsRemoved" => "<i>Revisionen der Seite %1 gelöscht.</i>",
 	"ThisActionHavenotUndo" => "Diese Aktion kann nicht rückgängig gemacht werden. Viel Glück!",
 

@@ -129,6 +129,9 @@ $wackoTranslation = array(
 	"NotOwnerAndCanDelete" => "<em>Nu sunteti posesorul paginii date si nu o puteti sterge</em>",
 
 	// remove
+	"RemoveRevisions" => "Remove all Revisions",
+	"RemoveCluster" => "Remove all pages of the cluster",
+	"RemoveDontKeep" => "Do not save a copy of a removed page and comments",
 	"ReferrersRemoved" => "<em>Link-uri externe la pagina %1 sunt lichidate.</em>",
 	"LinksRemoved" => "<em>Link-urile locale ñ %1 sunt lichidate.</em>",
 	"AclsRemoved" => "<em>Drepturile de acces %1 sunt lichidate.</em>",
@@ -136,6 +139,7 @@ $wackoTranslation = array(
 	"CommentsRemoved" => "<i>Comments from page %1 sunt lichidate.</i>",
 	"FilesRemoved" => "<i>Files from page %1 sunt lichidate.</i>",
 	"PageRemoved" => "<em>Pagina %1 este lichidata.</em>",
+	"ClusterRemoved" => "All pages of the cluster removed.",
 	"RevisionsRemoved" => "<i>Revisions from page %1 sunt lichidate.</i>",
 	"ThisActionHavenotUndo" => "Lichidarea nu poate fi oprita!",
 

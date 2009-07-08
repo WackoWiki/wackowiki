@@ -130,6 +130,9 @@ $wackoTranslation = array(
 	"NotOwnerAndCanDelete" => "<i>Du ejer ikke denne side og kan ikke slette den.</i>",
 
 	// remove
+	"RemoveRevisions" => "Remove all Revisions",
+	"RemoveCluster" => "Remove all pages of the cluster",
+	"RemoveDontKeep" => "Do not save a copy of a removed page and comments",
 	"ReferrersRemoved" => "<i>Links til %1 er fjernet.</i>",
 	"LinksRemoved" => "<i>Links fra siden %1 fjernet.</i>",
 	"AclsRemoved" => "<i>Sidetilladelser for %1 fjernet.</i>",
@@ -137,6 +140,7 @@ $wackoTranslation = array(
 	"CommentsRemoved" => "<i>Comments from page %1 fjernet.</i>",
 	"FilesRemoved" => "<i>Files from page %1 fjernet.</i>",
 	"PageRemoved" => "<i>Siden %1 fjernet.</i>",
+	"ClusterRemoved" => "All pages of the cluster removed.",
 	"RevisionsRemoved" => "<i>Revisions from page %1 fjernet.</i>",
 	"ThisActionHavenotUndo" => "Denne handling kan du ikke fortryde!",
 
