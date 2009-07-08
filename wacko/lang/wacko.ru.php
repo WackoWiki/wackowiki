@@ -130,6 +130,9 @@ $wackoTranslation = array(
 	"NotOwnerAndCanDelete" => "<em>Вы не владеете этой страницей и поэтому не можете удалить её</em>",
 
 	// remove
+	"RemoveRevisions" => "Удалить все редакции страницы",
+	"RemoveCluster" => "Удалить все страницы кластера",
+	"RemoveDontKeep" => "Не сохранять копию удаленной страницы и комментариев",
 	"ReferrersRemoved" => "<em>Внешние ссылки на страницу %1 удалены.</em>",
 	"LinksRemoved" => "<em>Локальные ссылки с %1 удалены.</em>",
 	"AclsRemoved" => "<em>Права доступа %1 удалены.</em>",
@@ -137,6 +140,7 @@ $wackoTranslation = array(
 	"CommentsRemoved" => "<i>Comments from page %1 удалены.</i>",
 	"FilesRemoved" => "<i>Files from page %1 удалены.</i>",
 	"PageRemoved" => "<em>Страница %1 удалена.</em>",
+	"ClusterRemoved" => "Все страницы кластера удалены.",
 	"RevisionsRemoved" => "<i>Revisions from page %1 удалены.</i>",
 	"ThisActionHavenotUndo" => "Удаление нельзя отменить.",
 

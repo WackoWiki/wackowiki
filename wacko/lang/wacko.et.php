@@ -130,6 +130,9 @@ $wackoTranslation = array(
 	"NotOwnerAndCanDelete" => "<i>Sa ei ole selle lehe omanik, seega ei saa ka kustutada</i>",
 
 	// remove
+	"RemoveRevisions" => "Remove all Revisions",
+	"RemoveCluster" => "Remove all pages of the cluster",
+	"RemoveDontKeep" => "Do not save a copy of a removed page and comments",
 	"ReferrersRemoved" => "<i>Lehe viited %1 kustutatud.</i>",
 	"LinksRemoved" => "<i>Lehe lingid %1 eemaldatud.</i>",
 	"AclsRemoved" => "<i>Lehe KÕL'id %1 eemaldatud.</i>",
@@ -137,6 +140,7 @@ $wackoTranslation = array(
 	"CommentsRemoved" => "<i>Comments from page %1 eemaldatud.</i>",
 	"FilesRemoved" => "<i>Files from page %1 removed.</i>",
 	"PageRemoved" => "<i>Leht %1 eemaldatud.</i>",
+	"ClusterRemoved" => "All pages of the cluster removed.",
 	"RevisionsRemoved" => "<i>Revisions from page %1 eemaldatud.</i>",
 	"ThisActionHavenotUndo" => "See tegevus pole taastatav. Edu!",
 

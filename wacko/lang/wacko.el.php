@@ -130,6 +130,9 @@ $wackoTranslation = array(
 	"NotOwnerAndCanDelete" => "<i>Δεν είσαι ο ιδιοκτήτης αυτής της σελίδας και δεν μπορείς να την διαγράψεις</i>",
 
 	// remove
+	"RemoveRevisions" => "Remove all Revisions",
+	"RemoveCluster" => "Remove all pages of the cluster",
+	"RemoveDontKeep" => "Do not save a copy of a removed page and comments",
 	"ReferrersRemoved" => "<i>Οι παραπομπές σε αυτήν την σελίδα %1 αφαιρέθηκαν.</i>",
 	"LinksRemoved" => "<i>Οι σύνδεσμοι από αυτήν την σελίδα %1 αφαιρέθηκαν.</i>",
 	"AclsRemoved" => "<i>Οι acls της σελίδας %1 αφαιρέθηκαν.</i>",
@@ -137,6 +140,7 @@ $wackoTranslation = array(
 	"CommentsRemoved" => "<i>Comments from page %1 αφαιρέθηκαν.</i>",
 	"FilesRemoved" => "<i>Files from page %1 αφαιρέθηκαν.</i>",
 	"PageRemoved" => "<i>Η σελίδα %1 αφαιρέθηκε.</i>",
+	"ClusterRemoved" => "All pages of the cluster removed.",
 	"RevisionsRemoved" => "<i>Revisions from page %1 αφαιρέθηκαν.</i>",
 	"ThisActionHavenotUndo" => "Αυτή η ενέργεια δεν μπορεί να αναιρεθεί. Καλή τύχη!",
 

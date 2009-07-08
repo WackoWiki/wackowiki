@@ -130,6 +130,9 @@ $wackoTranslation = array(
 	"NotOwnerAndCanDelete" => "<i>Przepraszamy. Tê stronê mo¿e usun±æ tylko oryginalny autor.</i>",
 
 	// remove
+	"RemoveRevisions" => "Remove all Revisions",
+	"RemoveCluster" => "Remove all pages of the cluster",
+	"RemoveDontKeep" => "Do not save a copy of a removed page and comments",
 	"ReferrersRemoved" => "<i>Odsy³acze do strony %1 zosta³y usuniête.</i>",
 	"LinksRemoved" => "<i>Odno¶niki ze strony %1 zosta³y usuniête.</i>",
 	"AclsRemoved" => "<i>Listy praw dostêpu do strony %1 zosta³y usuniête.</i>",
@@ -137,6 +140,7 @@ $wackoTranslation = array(
 	"CommentsRemoved" => "<i>Comments from page %1 usuniête.</i>",
 	"FilesRemoved" => "<i>Files from page %1 usuniête.</i>",
 	"PageRemoved" => "<i>Strona %1 zosta³a usuniêta.</i>",
+	"ClusterRemoved" => "All pages of the cluster removed.",
 	"RevisionsRemoved" => "<i>Revisions from page %1 usuniête.</i>",
 	"ThisActionHavenotUndo" => "UWAGA: Ta czynno¶æ nie mo¿e zostaæ cofniêta!",
 

@@ -130,6 +130,9 @@ $wackoTranslation = array(
 	"NotOwnerAndCanDelete" => "<i>U ben niet de eigenaar van deze pagina en kunt deze niet verwijderen</i>",
 
 	// remove
+	"RemoveRevisions" => "Remove all Revisions",
+	"RemoveCluster" => "Remove all pages of the cluster",
+	"RemoveDontKeep" => "Do not save a copy of a removed page and comments",
 	"ReferrersRemoved" => "<i>Verwijzingen naar pagina %1 zijn verwijderd.</i>",
 	"LinksRemoved" => "<i>Links van pagina %1 zijn verwijderd.</i>",
 	"AclsRemoved" => "<i>Pagina's ACL's %1 zijn verwijderd.</i>",
@@ -137,6 +140,7 @@ $wackoTranslation = array(
 	"CommentsRemoved" => "<i>Comments from page %1 zijn verwijderd.</i>",
 	"FilesRemoved" => "<i>Files from page %1 zijn verwijderd.</i>",
 	"PageRemoved" => "<i>Pagina %1 is verwijderd.</i>",
+	"ClusterRemoved" => "All pages of the cluster removed.",
 	"RevisionsRemoved" => "<i>Revisions from page %1 zijn verwijderd.</i>",
 	"ThisActionHavenotUndo" => "Deze handeling kan niet ongedaan worden gemaakt. Veel sterkte ermee!",
 
