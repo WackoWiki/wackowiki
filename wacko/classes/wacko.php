@@ -2363,6 +2363,18 @@ class Wacko
 		}
 	}
 
+	function GetUserIP() 
+	{
+		if ($this->_userhost)
+		{
+			return $this->_userhost; 
+		}
+		else
+		{
+			return $this->_userhost = $_SERVER['REMOTE_ADDR'];
+		}
+	}
+
 	// extract user data from the session array
 	function GetUser()
 	{
