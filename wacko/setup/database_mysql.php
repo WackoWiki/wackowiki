@@ -5,6 +5,8 @@
 
 $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
 					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
@@ -13,9 +15,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"body_r MEDIUMTEXT NOT NULL,".
 					"body_toc TEXT NOT NULL,".
 					"owner VARCHAR(50) NOT NULL DEFAULT '',".
-					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user VARCHAR(50) NOT NULL DEFAULT '',".
-					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"latest ENUM('Y','N') NOT NULL DEFAULT 'Y',".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
@@ -39,6 +39,8 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 
 $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"id INT(10) UNSIGNED NOT NULL auto_increment,".
+						"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"tag VARCHAR(250) binary NOT NULL DEFAULT '',".
 						"supertag VARCHAR(250) binary NOT NULL DEFAULT '',".
 						"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
@@ -46,9 +48,7 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"body MEDIUMTEXT NOT NULL,".
 						"body_r MEDIUMTEXT NOT NULL,".
 						"owner VARCHAR(50) NOT NULL DEFAULT '',".
-						"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"user VARCHAR(50) NOT NULL DEFAULT '',".
-						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 						"latest ENUM('Y','N') NOT NULL DEFAULT 'N',".
 						"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
@@ -156,6 +156,20 @@ $table_cache = "CREATE TABLE ".$config["table_prefix"]."cache (".
 					"KEY timestamp (time)".
 				") TYPE=MyISAM";
 
+$table_log = "CREATE TABLE ".$config["table_prefix"]."log (".
+				"id int(10) UNSIGNED NOT NULL auto_increment,".
+				"time timestamp NOT NULL,".
+				"level int(1) NOT NULL,".
+				"user varchar(100) NOT NULL,".
+				"ip varchar(15) NOT NULL,".
+				"message text NOT NULL,".
+				"PRIMARY KEY (id),".
+				"KEY idx_level (level),".
+				"KEY idx_user (user),".
+				"KEY idx_ip (ip),".
+				"KEY idx_time (time)".
+			") ENGINE=MyISAM";
+
 /*
  Wacko Wiki MySQL Table Deletion Script
 */
@@ -169,5 +183,5 @@ $table_users_drop = "DROP TABLE ".$config["table_prefix"]."users";
 $table_pagewatches_drop = "DROP TABLE ".$config["table_prefix"]."pagewatches";
 $table_upload_drop = "DROP TABLE ".$config["table_prefix"]."upload";
 $table_cache_drop = "DROP TABLE ".$config["table_prefix"]."cache";
-
+$table_log_drop = "DROP TABLE ".$config["table_prefix"]."log";
 ?>

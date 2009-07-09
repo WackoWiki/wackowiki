@@ -67,6 +67,15 @@ $table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
 					"to_supertag character varying(250) NOT NULL DEFAULT ''".
 				") WITH (OIDS=FALSE);";
 
+$table_log = "CREATE TABLE ".$config["table_prefix"]."log (".
+				"id serial,".
+				"\"time\" timestamp without time zone NOT NULL DEFAULT NOW(),".
+				"level int(1) NOT NULL,".
+				"user character varying(80) NOT NULL DEFAULT '',".
+				"ip character varying(15) NOT NULL DEFAULT '',".
+				"message text NOT NULL DEFAULT '',".
+				"CONSTRAINT pk_log_id PRIMARY KEY (id)".
+			") WITH (OIDS=FALSE);";
 
 $table_referrers = "CREATE TABLE ".$config["table_prefix"]."referrers (".
 						"page_id integer NOT NULL DEFAULT 0,".
@@ -78,7 +87,7 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 					"id serial,".
 					"name character varying(80) NOT NULL DEFAULT '',".
 					"\"password\" character varying(32) NOT NULL DEFAULT '',".
-					"email character varying(320) NOT NULL DEFAULT '',".
+					"email character varying(50) NOT NULL DEFAULT '',".
 					"motto text NOT NULL DEFAULT '',".
 					"revisioncount integer NOT NULL DEFAULT 20,".
 					"changescount integer NOT NULL DEFAULT 50,".
@@ -139,5 +148,5 @@ $table_users_drop = "DROP TABLE ".$config["table_prefix"]."users;";
 $table_pagewatches_drop = "DROP TABLE ".$config["table_prefix"]."pagewatches;";
 $table_upload_drop = "DROP TABLE ".$config["table_prefix"]."upload;";
 $table_cache_drop = "DROP TABLE ".$config["table_prefix"]."cache;";
-
+$table_log_drop = "DROP TABLE ".$config["table_prefix"]."log";
 ?>

@@ -28,6 +28,21 @@ $alter_links_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."links ADD to_page_
 $update_links_r4_2 = "UPDATE ".$config["table_prefix"]."links AS links, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages SET links.from_page_id = pages.id WHERE links.from_tag = pages.tag";
 $update_links_r4_2_1 = "UPDATE ".$config["table_prefix"]."links AS links, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages SET links.to_page_id = pages.id WHERE links.to_tag = pages.tag";
 
+// LOG
+$table_log_r4_2 = "CREATE TABLE ".$config["table_prefix"]."log (".
+				"id int(10) UNSIGNED NOT NULL auto_increment,".
+				"time timestamp NOT NULL,".
+				"level int(1) NOT NULL,".
+				"user varchar(100) NOT NULL,".
+				"ip varchar(15) NOT NULL,".
+				"message text NOT NULL,".
+				"PRIMARY KEY (id),".
+				"KEY idx_level (level),".
+				"KEY idx_user (user),".
+				"KEY idx_ip (ip),".
+				"KEY idx_time (time)".
+			") ENGINE=MyISAM";
+
 // PAGES
 $alter_pages_r0_1 = "ALTER TABLE ".$config["table_prefix"]."pages ADD body_r TEXT NOT NULL DEFAULT '' AFTER body";
 $alter_pages_r2_1 = "ALTER TABLE ".$config["table_prefix"]."pages ADD supertag VARCHAR(250) NOT NULL DEFAULT '' after tag, CHANGE tag tag VARCHAR(250) NOT NULL, ADD INDEX supertag (supertag)";
@@ -50,8 +65,8 @@ $alter_pages_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."pages MODIFY COLUM
 $alter_pages_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."pages MODIFY COLUMN body_r MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 $alter_pages_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."pages ADD title VARCHAR(100) NOT NULL DEFAULT '' AFTER lang, ADD INDEX idx_title (title), ADD edit_note VARCHAR(100) NOT NULL DEFAULT '' AFTER user";
 $alter_pages_r4_2_5 = "ALTER TABLE ".$config["table_prefix"]."pages CHANGE hits hits INT(11) UNSIGNED NOT NULL DEFAULT '0'";
-$alter_pages_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."pages ADD owner_id INT(10) UNSIGNED NOT NULL AFTER owner";
-$alter_pages_r4_2_7 = "ALTER TABLE ".$config["table_prefix"]."pages ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
+$alter_pages_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."pages ADD owner_id INT(10) UNSIGNED NOT NULL AFTER id";
+$alter_pages_r4_2_7 = "ALTER TABLE ".$config["table_prefix"]."pages ADD user_id INT(10) UNSIGNED NOT NULL AFTER owner_id";
 $alter_pages_r4_2_8 = "ALTER TABLE ".$config["table_prefix"]."pages CHANGE latest latest ENUM('Y', 'N') NOT NULL DEFAULT 'Y'";
 $alter_pages_r4_2_9 = "ALTER TABLE ".$config["table_prefix"]."pages CHANGE lang lang VARCHAR(2) NOT NULL DEFAULT ''";
 
@@ -115,8 +130,8 @@ $alter_revisions_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD 
 $alter_revisions_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."revisions MODIFY COLUMN body MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 $alter_revisions_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."revisions MODIFY COLUMN body_r MEDIUMTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL";
 $alter_revisions_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD title VARCHAR(100) NOT NULL DEFAULT '' AFTER lang, ADD edit_note VARCHAR(100) NOT NULL DEFAULT '' AFTER user";
-$alter_revisions_r4_2_5 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD owner_id INT(10) UNSIGNED NOT NULL AFTER owner";
-$alter_revisions_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
+$alter_revisions_r4_2_5 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD owner_id INT(10) UNSIGNED NOT NULL AFTER id";
+$alter_revisions_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD user_id INT(10) UNSIGNED NOT NULL AFTER owner_id";
 $alter_revisions_r4_2_7 = "ALTER TABLE ".$config["table_prefix"]."revisions CHANGE lang lang VARCHAR(2) NOT NULL DEFAULT ''";
 
 $insert_revisions_r2_1 = "INSERT INTO ".$config["table_prefix"]."revisions ( id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on ) SELECT id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on FROM ".$config["table_prefix"]."pages WHERE latest='N';";
