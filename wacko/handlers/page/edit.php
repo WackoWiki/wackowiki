@@ -85,6 +85,18 @@ if ($_POST)
 
 			// add page (revisions)
 			$body_r = $this->SavePage($this->tag, $body, $edit_note);
+			
+			// log event
+			if ($this->page == false)
+			{
+				// new page created
+				$this->Log(4, str_replace("%1", $this->tag." ".$_POST["title"], $this->GetTranslation("LogPageCreated")));
+			}
+			else
+			{
+				// old page modified
+				$this->Log(6, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogPageEdited")));
+			}
 
 			// now we render it internally so we can write the updated link table.
 			$this->ClearLinkTable();

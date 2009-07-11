@@ -5,14 +5,11 @@
 if (!$this->page) $this->Redirect($this->href());
 
 // check user permissions to delete
+// ToDo: config->owners_can_remove_comments ?
 if ($this->IsAdmin() ||
 (!$this->GetConfigValue("remove_onlyadmins") &&
-(
-$this->GetPageOwner($this->tag) == $this->GetUserName() ||
-$this->GetPageOwnerFromComment() == $this->GetUserName()
-)
-)
-)
+($this->GetPageOwner($this->tag) == $this->GetUserName() ||
+$this->GetPageOwnerFromComment() == $this->GetUserName())))
 {
 	if (!$this->page)
 	{
@@ -23,7 +20,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 		if ($_POST["delete"] == 1)
 		{
 			if ($this->page["comment_on"])
-			$comment_on = $this->page["comment_on"];
+				$comment_on = $this->page["comment_on"];
 
 			// Remove page
 			if ($this->RemoveReferrers($this->tag))
@@ -57,6 +54,46 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 				$this->WriteRecentCommentsXML();
 				print(str_replace("%1", $this->tag, $this->GetTranslation("PageRemoved"))."<br />\n");
 			}
+			if ($this->IsAdmin() && $_POST['revisions'] == 1 && !$comment_on)
+			{
+				$this->RemoveRevisions($this->tag);
+				echo $this->GetTranslation("RevisionsRemoved")."<br />\n";
+			}
+			if ($this->IsAdmin() && $_POST['cluster'] == 1)
+			{
+				$this->RemoveReferrers	($this->tag, true);
+				$this->RemoveLinks		($this->tag, true);
+				$this->RemoveAcls		($this->tag, true);
+				$this->RemoveWatches	($this->tag, true);
+				$this->RemoveComments	($this->tag, true, $dontkeep);
+				$this->RemoveFiles		($this->tag, true);
+				
+				// get list of pages in the cluster
+				if ($list = $this->LoadAll(
+				"SELECT tag ".
+				"FROM {$this->config['table_prefix']}pages ".
+				"WHERE tag LIKE '".quote($this->tag.'/%')."'"))
+				{
+					// remove by one page at a time
+					foreach ($list as $row) $this->RemovePage($row['tag'], '', $dontkeep);
+					unset($list, $row);
+				}
+				
+				if ($_POST['revisions'] == 1 || $comment_on)
+					$this->RemoveRevisions($this->tag, true);
+				
+				echo '<em>'.$this->GetTranslation("ClusterRemoved")."</em><br />\n";
+			}
+
+			// log event
+			if (!$comment_on)
+			{
+				$this->Log(1, str_replace('%2', $this->page['user'], str_replace('%1', $this->tag, ( $_POST['cluster'] == 1 ? $this->GetTranslation('LogRemovedCluster') : $this->GetTranslation('LogRemovedPage') ))));
+			}
+			else
+			{
+				$this->Log(1, str_replace('%3', $this->GetTimeStringFormatted($this->page['created']), str_replace('%2', $this->page['user'], str_replace('%1', $comment_on.' '.$this->GetPageTitle($comment_on), $this->GetTranslation('LogRemovedComment')))));
+			}
 
 			echo "<br />".$this->GetTranslation("ThisActionHavenotUndo")."<br />\n";
 
@@ -68,8 +105,23 @@ $this->GetPageOwnerFromComment() == $this->GetUserName()
 		}
 		else
 		{
-			echo "<div class=\"warning\"><strong>".$this->GetTranslation("ReallyDelete".($this->page["comment_on"] ? "Comment" : ""))."</strong></div>";
+			echo "<div class=\"warning\"><strong>".$this->GetTranslation("ReallyDelete".
+				($this->page["comment_on"] ? "Comment" : ""))."</strong></div>";
 			echo $this->FormOpen("remove");
+
+			// admin privileged removal options
+			if ($this->IsAdmin())
+			{
+				if (!$this->page['comment_on'])
+				{
+					echo '<input id="removerevisions" type="checkbox" name="revisions" value="1" />';
+					echo '<label for="removerevisions">'.$this->GetTranslation("RemoveRevisions").'</label><br />';
+					echo '<input id="removecluster" type="checkbox" name="cluster" value="1" />';
+					echo '<label for="removecluster">'.$this->GetTranslation("RemoveCluster").'</label><br />';
+					echo '<input id="dontkeep" type="checkbox" name="dontkeep" value="1" />';
+					echo '<label for="dontkeep">'.$this->GetTranslation("RemoveDontKeep").'</label><br />';
+				}
+			}
 
 		// show backlinks
 		if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
