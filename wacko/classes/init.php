@@ -206,6 +206,8 @@ class Init
 					"debug_admin_only" => 0,
 					"debug_sql_threshold" => 0,
 
+					"log_min_level" => 0,
+
 					"youarehere_text" => "",
 					"hide_locked" => 1,
 					"allow_rawhtml" => 1,
