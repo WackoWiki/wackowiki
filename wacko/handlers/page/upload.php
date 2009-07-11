@@ -126,6 +126,9 @@ if ($registered
 					print("<div>".$this->GetTranslation("UploadRemovedFromFS")."</div><br /><br /> ");
 				else
 					print("<div class=\"error\">".$this->GetTranslation("UploadRemovedFromFSError")."</div><br /><br /> ");
+
+				// log event
+				$this->Log(1, str_replace("%2", $what[0]["filename"], str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedFile"))));
 			}
 			else
 			{
@@ -249,6 +252,16 @@ if ($registered
 						// 4. output link to file
 						// !!!!! write after providing filelink syntax
 						echo "<strong>".$this->GetTranslation("UploadDone")."</strong>";
+						
+						// log event
+						if ($is_global)
+						{
+							$this->Log(4, str_replace("%3", ceil($file_size / 1024), str_replace("%2", $small_name, $this->GetTranslation("LogFileUploadedGlobal"))));
+						}
+						else
+						{
+							$this->Log(4, str_replace("%3", ceil($file_size / 1024), str_replace("%2", $small_name, str_replace("%1", $this->page["tag"]." ".$this->page["title"], $this->GetTranslation("LogFileUploadedLocal")))));
+						}
 						?>
 	<br />
 	<ul>

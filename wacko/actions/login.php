@@ -2,17 +2,20 @@
 <?php
 if ($_GET["action"] == "logout")
 {
+	$this->Log(5, str_replace("%1", $this->GetUserName(), $this->GetTranslation("LogUserLoggedOut")));
 	$this->LogoutUser();
 	$this->SetBookmarks(BM_DEFAULT);
 	//$this->SetMessage($this->GetTranslation("LoggedOut"));
 	$this->context[++$this->current_context] = "";
-	if ($_GET["goback"] != "") $this->Redirect($this->Href("", stripslashes($_GET["goback"])));
-	else $this->Redirect($this->href());
+	
+	if ($_GET["goback"] != "")
+		$this->Redirect($this->Href("", stripslashes($_GET["goback"])));
+	else 
+		$this->Redirect($this->href());
 }
 else if ($user = $this->GetUser())
 {
-
-	// user is logged in; display config form
+	// user is logged in; display logout form
 	print($this->FormOpen());
 	?>
 
@@ -49,14 +52,21 @@ else
 				$this->SetUser($existingUser);
 				$this->SetBookmarks(BM_USER);
 				$this->context[++$this->current_context] = "";
-				if ($_POST["goback"] != "") $this->Redirect($this->Href("", stripslashes($_POST["goback"]), "cache=".rand(0,1000)));
-				$this->Redirect($this->href());
+				$this->Log(3, str_replace("%1", $existingUser["name"], $this->GetTranslation("LogUserLoginOK")));
+
+				if ($_POST["goback"] != "") 
+					$this->Redirect($this->Href("", stripslashes($_POST["goback"]), "cache=".rand(0,1000)));
+				else
+					$this->Redirect($this->href());
 			}
 			else
 			{
 				$error = $this->GetTranslation("WrongPassword");
 				$name = $_POST["name"];
 				$focus = 1;
+				
+				// log failed attempt
+				$this->Log(2, str_replace("%1", $_POST["name"], $this->GetTranslation("LogUserLoginFailed")));
 			}
 		}
 	}

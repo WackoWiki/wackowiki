@@ -52,19 +52,45 @@ else
 			$base_addr = Utility::untag($contents, "title");
 
 			$items = explode("<item>", $contents);
+			
 			array_shift($items);
 
 			foreach ($items as $item)
 			{
-				$rel_tag = Utility::untag($item, "guid");
+				$root_tag	= trim($_POST["_to"], "/ ");
+				$rel_tag	= trim(Utility::untag($item, "guid"), "/ ");
+				$tag		= $root_tag.( $root_tag && $rel_tag ? "/" : "" ).$rel_tag;
+				$owner		= Utility::untag($item, "author");
 				$body = str_replace("]]&gt;", "]]>", Utility::untag($item, "description"));
+				$title		= html_entity_decode(Utility::untag($item, "title"));
 
-				$tag = trim($_POST["_to"]."/".$rel_tag, "/");
+				$body_r = $this->SavePage($tag, $body, '', $title);
+				$this->SetPageOwner($tag, $owner);
+				// now we render it internally in the context of imported
+				// page so we can write the updated link table
+				$this->context[++$this->current_context] = $tag;
+				$this->ClearLinkTable();
+				$this->StartLinkTracking();
+				$dummy = $this->Format($body_r, 'post_wacko');
+				$this->StopLinkTracking();
+				$this->WriteLinkTable($tag);
+				$this->ClearLinkTable();
+				$this->current_context--;
+				
+				// log import
+				$this->Log(4, str_replace("%1", $tag, $this->GetTranslation("LogPageImported")));
 
-				$this->SavePage($tag, $body);
+				// count page
+				$t++;
+				$pages[] = $tag;
 			}
 
-			echo $this->GetTranslation("ImportSuccess");
+			echo "<em>".str_replace('%1', $t, $this->GetTranslation("ImportSuccess"))."</em><br />";
+
+			foreach ($pages as $page)
+			{
+				echo $this->Link('/'.$page, '', '', 0).'<br />';
+			}
 		}
 		else
 		{

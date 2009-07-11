@@ -5,7 +5,7 @@
 // is user trying to confirm email, login or register?
 if ($_GET["confirm"])
 {
-	if ($this->LoadSingle(
+	if ($temp = $this->LoadSingle(
 		"SELECT name, email, email_confirm ".
 		"FROM ".$this->config["user_table"]." ".
 		"WHERE email_confirm = '".quote($this->dblink, $_GET["confirm"])."'"))
@@ -16,6 +16,11 @@ if ($_GET["confirm"])
 			"WHERE email_confirm = '".quote($this->dblink, $_GET["confirm"])."'");
 
 		echo "<div class=\"info\">".$this->GetTranslation("EmailConfirmed")."</div><br />";
+
+		// log event
+		$this->Log(4, str_replace("%2", $temp["name"], str_replace("%1", $temp["email"], $this->GetTranslation("LogUserEmailActivated"))));
+
+		unset($temp);
 	}
 	else
 	{
@@ -28,6 +33,9 @@ else if ($_POST["action"] == "login")
 	if ($existingUser = $this->LoadUser($_POST["name"]))
 	{
 		$error = $this->GetTranslation("RegistrationNameOwned");
+
+		// log event
+		$this->Log(2, str_replace("%1", $name, $this->GetTranslation("LogUserSimiliarName")));
 	}
 	// otherwise, create new account
 	else if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
@@ -39,7 +47,7 @@ else if ($_POST["action"] == "login")
 		$confpassword = $_POST["confpassword"];
 		$lang = $_POST["lang"];
 
-		// Start Comment Captcha
+		// Start Registration Captcha
 
 		// Only show captcha if the admin enabled it in the config file
 		if(!$this->IsAdmin() && $this->GetConfigValue("captcha_registration"))
@@ -122,17 +130,20 @@ else if ($_POST["action"] == "login")
 						"password = md5('".quote($this->dblink, $_POST["password"])."')");
 
 				$subject = 	$this->GetTranslation("EmailWelcome").
-							$this->GetConfigValue("wacko_name");
+				$this->GetConfigValue("wacko_name");
 				$message = 	$this->GetTranslation("MailHello"). $name.".\n\n";
 				$message.= 	str_replace('%1', $this->GetConfigValue("wacko_name"),
-							str_replace('%2', $name,
-							str_replace('%3', $this->Href().
-							($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
-							$this->GetTranslation("EmailRegistered"))))."\n\n".
-							$this->GetTranslation("MailGoodbye")."\n".
-							$this->GetConfigValue("wacko_name")."\n".
-							$this->config["base_url"];
+				str_replace('%2', $name,
+				str_replace('%3', $this->Href().
+				($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
+				$this->GetTranslation("EmailRegistered"))))."\n\n".
+				$this->GetTranslation("MailGoodbye")."\n".
+				$this->GetConfigValue("wacko_name")."\n".
+				$this->config["base_url"];
 				$this->SendMail($email, $subject, $message);
+
+				// log event
+				$this->Log(4, str_replace("%2", $email, str_replace("%1", $name, $this->GetTranslation("LogUserRegistered"))));
 
 				// log in
 				$this->SetUser($this->LoadUser($name));
@@ -151,86 +162,84 @@ if (!$_POST["confirm"])
 	if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
 	{
 		print($this->FormOpen());
-?>
-		<input type="hidden" name="action" value="login" />
-		<div class="cssform">
-		<h3><?php echo $this->FormatTranslation("RegistrationWelcome"); ?></h3>
+		?>
+<input type="hidden"
+	name="action" value="login" />
+<div class="cssform">
+<h3><?php echo $this->FormatTranslation("RegistrationWelcome"); ?></h3>
+		<?php
+		if ($error)
+		{
+			print("<div class=\"error\">".$this->Format($error)."</div>\n");
+		}
+		if ($this->GetConfigValue("multilanguage"))
+		{
+			?>
+<p><label for="lang"><?php echo $this->FormatTranslation("RegistrationLang");?>:</label>
+<select id="lang" name="lang">
+	<!--<option value=""></option>-->
 <?php
-	if ($error)
-	{
-		print("<div class=\"error\">".$this->Format($error)."</div>\n");
-	}
-	if ($this->GetConfigValue("multilanguage"))
-	{
-?>
-		<p>
-			<label for="lang"><?php echo $this->FormatTranslation("RegistrationLang");?>:</label>
-			<select id="lang" name="lang">
-			<!--<option value=""></option>-->
-<?php
-			#$lang = $this->UserAgentLanguage();
-			
-			$langs = $this->AvailableLanguages();
-			for ($i = 0; $i < count($langs); $i++)
-			{
-				echo "<option value=\"".$langs[$i]."\"".($lang == $langs[$i] ? "selected=\"selected\"" : "").">".$langs[$i]."</option>\n";
-				#echo '<option value="'.$langs[$i].'"'.($user["lang"] == $langs[$i] ? "selected=\"selected\"" : "").'>'.$langs[$i].'</option>';
-			}
-?>
-			</select>
-		</p>
-<?php
-	}
-?>
-		<p>
-			<label for="name"><?php echo $this->FormatTranslation("RegistrationName");?>:</label>
-			<input id="name" name="name" size="27"
-				value="<?php echo htmlspecialchars($name); ?>" />
-		</p>
-		<p>
-			<label for="password"><?php echo $this->GetTranslation("RegistrationPassword");?>:</label>
-			<input type="password" id="password" name="password" size="24" value="<?php echo $password ?>" />
-		</p>
-		<p>
-			<label for="confpassword"><?php echo $this->GetTranslation("ConfirmPassword");?>:</label>
-			<input type="password" id="confpassword" name="confpassword" size="24" value="<?php echo $confpassword ?>" />
-		</p>
-		<p>
-<?php /* TODO: add message -> A valid e-mail address. All e-mails from the system will be sent to this address. The e-mail address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by e-mail. */?>
-			<label for="email"><?php echo $this->GetTranslation("Email");?>:</label>
-			<input id="email" name="email" size="30"
-				value="<?php echo htmlspecialchars($email); ?>" />
-		</p>
-<?php
-			// captcha code starts
+#$lang = $this->UserAgentLanguage();
 
-			// Only show captcha if the admin enabled it in the config file
-			if($this->GetConfigValue("captcha_registration"))
-			{
-				// Don't load the captcha at all if the GD extension isn't enabled
-				if(extension_loaded('gd'))
-				{
-					if(strpos($this->GetUserName(), '.'))
-					{
+$langs = $this->AvailableLanguages();
+for ($i = 0; $i < count($langs); $i++)
+{
+	echo "<option value=\"".$langs[$i]."\"".($lang == $langs[$i] ? "selected=\"selected\"" : "").">".$langs[$i]."</option>\n";
+	#echo '<option value="'.$langs[$i].'"'.($user["lang"] == $langs[$i] ? "selected=\"selected\"" : "").'>'.$langs[$i].'</option>';
+}
 ?>
-		<p><label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
-		<img src="<?php echo $this->GetConfigValue("base_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("base_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
-		<br />
-			<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
-		</p>
+</select></p>
 <?php
-					}
+		}
+		?>
+<p><label for="name"><?php echo $this->FormatTranslation("RegistrationName");?>:</label>
+<input id="name" name="name" size="27"
+	value="<?php echo htmlspecialchars($name); ?>" /></p>
+<p><label for="password"><?php echo $this->GetTranslation("RegistrationPassword");?>:</label>
+<input type="password" id="password" name="password" size="24"
+	value="<?php echo $password ?>" /></p>
+<p><label for="confpassword"><?php echo $this->GetTranslation("ConfirmPassword");?>:</label>
+<input type="password" id="confpassword" name="confpassword" size="24"
+	value="<?php echo $confpassword ?>" /></p>
+<p>
+<?php /* TODO: add message -> A valid e-mail address. All e-mails from the system will be sent to this address. The e-mail address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by e-mail. */ ?>
+<label for="email"><?php echo $this->GetTranslation("Email");?>:</label>
+<input id="email" name="email" size="30"
+	value="<?php echo htmlspecialchars($email); ?>" /></p>
+		<?php
+		// captcha code starts
+
+		// Only show captcha if the admin enabled it in the config file
+		if($this->GetConfigValue("captcha_registration"))
+		{
+			// Don't load the captcha at all if the GD extension isn't enabled
+			if(extension_loaded('gd'))
+			{
+				if(strpos($this->GetUserName(), '.'))
+				{
+					?>
+<p><label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
+<img
+	src="<?php echo $this->GetConfigValue("base_url");?>lib/captcha/freecap.php"
+	id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a
+	href="" onclick="this.blur(); new_freecap(); return false;"
+	title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img
+	src="<?php echo $this->GetConfigValue("base_url");?>images/reload.png"
+	width="18" height="17"
+	alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a> <br />
+<input id="captcha" type="text" name="word" maxlength="6"
+	style="width: 273px;" /></p>
+					<?php
 				}
 			}
-			// end captcha
-?>
-		<p>
-		<input class="OkBtn" onmouseover='this.className="OkBtn_";'
-			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" />
-		</p>
-	</div>
-<?php
+		}
+		// end captcha
+		?>
+<p><input class="OkBtn" onmouseover='this.className="OkBtn_";'
+	onmouseout='this.className="OkBtn";' type="submit" align="top"
+	value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" /></p>
+</div>
+		<?php
 		print($this->FormClose());
 	}
 	else

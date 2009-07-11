@@ -19,6 +19,9 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 			"keywords" => $_POST["keywords"]
 		));
 		
+		// log event
+		$this->Log(4, str_replace("%1", $this->tag." ".$_POST["title"], $this->GetTranslation("LogPageMetaUpdated")));
+		
 		// redirect back to page
 		$this->SetMessage($this->GetTranslation("MetaUpdated")."!");
 		$this->Redirect($this->Href());
