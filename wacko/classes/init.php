@@ -32,6 +32,7 @@
 define("BM_AUTO", 						0);
 define("BM_USER", 						1);
 define("BM_DEFAULT", 					2);
+define("CACHE_FEED_DIR",				"feeds/");
 define("CACHE_PAGE_DIR",				"pages/");
 define("CACHE_SQL_DIR",					"queries/");
 define("GUEST",							"guest@wacko");
