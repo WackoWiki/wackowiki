@@ -61,7 +61,7 @@ $wackoTranslation = array(
 	"DeleteConfirm" => "Do you really want to DELETE page?\\nThere is no undo for this action!.",
 	"DeleteTip" => "Click here to delete page.",
 	"DeleteTipComment" => "Click here to delete comment.",
-	"DeleteText" => "(delete)",
+	"DeleteText" => "Delete",
 	"EditACLConfirm" => "Do you really want to leave without saving?",
 	"EditACLText" => "Edit ACLs",
 	"EditSettingsConfirm" => "Do you really want to leave without saving?",
@@ -246,7 +246,7 @@ $wackoTranslation = array(
 	"TreeEmpty" => "%1&nbsp;has not subpages",
 	"SearchTitleTip" => "Click here to show all pages containing this page title.",
 
-	"RenameText" => "Rename...",
+	"RenameText" => "Rename",
 	"NewName" => "Enter new name for this page",
 	"RenameButton" => "Rename!",
 	"AlredyExists" => "<em>Page <strong>%1</strong> already exists.</em>",

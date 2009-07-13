@@ -61,7 +61,7 @@ $wackoTranslation = array(
 	"DeleteConfirm" => "Επιθυμείτε την ΔΙΑΓΡΑΦΗ της σελίδας;\\nΔεν υπάρχει αναίρεση για αυτή την ενέργεια!.",
 	"DeleteTip" => "Πατήστε για να διαγράψετε την σελίδα.",
 	"DeleteTipComment" => "Πατήστε εδώ για την διαγραφή του σχόλιου.",
-	"DeleteText" => "(διαγραφή)",
+	"DeleteText" => "διαγραφή",
 	"EditACLConfirm" => "Θέλετε να φύγετε χωρίς να αποθηκεύσετε?",
 	"EditACLText" => "Επεξεργασία ACLs",
 	"EditSettingsConfirm" => "Θέλετε να φύγετε χωρίς να αποθηκεύσετε?",
@@ -246,7 +246,7 @@ $wackoTranslation = array(
 	"TreeEmpty" => "%1&nbsp;has not subpages",
 	"SearchTitleTip" => "Click here to show all pages containing this page title.",
 
-	"RenameText" => "Μετονομασία...",
+	"RenameText" => "Μετονομασία",
 	"NewName" => "Εισήγαγε ένα νέο όνομα σε αυτή την σελίδα",
 	"RenameButton" => "Μετονομασία!",
 	"AlredyExists" => "<em>Η σελίδα <strong>%1</strong> υπάρχει ήδη.</em>",

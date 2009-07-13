@@ -246,7 +246,7 @@ $wackoTranslation = array(
 	"TreeEmpty" => "%1&nbsp;няма подстраници",
 	"SearchTitleTip" => "Click here to show all pages containing this page title.",
 
-	"RenameText" => "Преименувай...",
+	"RenameText" => "Преименувай",
 	"NewName" => "Въведете ново име за тази страница",
 	"RenameButton" => "Преименувай!",
 	"AlredyExists" => "<em>Страница с име <strong>%1</strong> вече съществува.</em>",

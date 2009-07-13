@@ -59,7 +59,7 @@ $wackoTranslation = array(
 	"DeleteConfirm" => "Willst du wirklich diese Seite löschen?\\nDiese Aktion kann nicht rückgängig gemacht werden!",
 	"DeleteTip" => "Seite löschen.",
 	"DeleteTipComment" => "Kommentar löschen.",
-	"DeleteText" => "(löschen)",
+	"DeleteText" => "Löschen",
 	"EditACLConfirm" => "Änderungen wirklich nicht speichern?",
 	"EditACLText" => "Berechtigungen",
 	"EditSettingsConfirm" => "Änderungen wirklich nicht speichern?",
@@ -247,7 +247,7 @@ $wackoTranslation = array(
 	"TreeSiteTitle" => "Baumansicht der Seite",
 	"TreeEmpty" => "%1&nbsp;hat keine Unterseiten",
 
-	"RenameText" => "Umbenennen...",
+	"RenameText" => "Umbenennen",
 	"NewName" => "Neuer Name für diese Seite",
 	"RenameButton" => "Umbenennen!",
 	"AlredyExists" => "<em>Seite <strong>%1</strong> existiert bereits.</em>",
