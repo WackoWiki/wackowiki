@@ -61,7 +61,7 @@ $wackoTranslation = array(
 	"DeleteConfirm" => "Czy na pewno USUN¡Æ tê stronê?\\nTej czynno¶ci nie mo¿na cofn±æ!.",
 	"DeleteTip" => "Usuñ bie¿±c± stronê...",
 	"DeleteTipComment" => "Click here to delete comment.",
-	"DeleteText" => "(usuñ)",
+	"DeleteText" => "Usuñ",
 	"EditACLConfirm" => "Czy na pewno opu¶ciæ stronê bez zapisywania wprowadzonych zmian?",
 	"EditACLText" => "Prawa dostêpu",
 	"EditSettingsConfirm" => "Czy na pewno opu¶ciæ stronê bez zapisywania wprowadzonych zmian?",
@@ -246,7 +246,7 @@ $wackoTranslation = array(
 	"TreeEmpty" => "%1 nie zawiera podstron",
 	"SearchTitleTip" => "Click here to show all pages containing this page title.",
 
-	"RenameText" => "Zmieñ nazwê strony...",
+	"RenameText" => "Zmieñ nazwê strony",
 	"NewName" => "Wprowad¼ now± nazwê strony",
 	"RenameButton" => "Zmieñ nazwê!",
 	"AlredyExists" => "<em>Przepraszamy! Strona o nazwie <strong>%1</strong> ju¿ istnieje.</em>",

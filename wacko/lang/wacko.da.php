@@ -61,7 +61,7 @@ $wackoTranslation = array(
 	"DeleteConfirm" => "Er du sikker på, at du vil SLETTE denne side?\\nDen vil ikke kunne genskabes!.",
 	"DeleteTip" => "Klik her for at slette siden.",
 	"DeleteTipComment" => "Klik her for at slette kommentar.",
-	"DeleteText" => "(slet)",
+	"DeleteText" => "Slet",
 	"EditACLConfirm" => "Vil du ikke gemme ændringerne?",
 	"EditACLText" => "Rediger tilladelser",
 	"EditSettingsConfirm" => "Vil du ikke gemme ændringerne?",
@@ -246,7 +246,7 @@ $wackoTranslation = array(
 	"TreeEmpty" => "%1&nbsp;har ingen undersider",
 	"SearchTitleTip" => "Click here to show all pages containing this page title.",
 
-	"RenameText" => "Omdøb...",
+	"RenameText" => "Omdøb",
 	"NewName" => "Skriv nyt navn for siden",
 	"RenameButton" => "Omdøb!",
 	"AlredyExists" => "<em>Siden <strong>%1</strong> findes allerede.</em>",

@@ -61,7 +61,7 @@ $wackoTranslation = array(
 	"DeleteConfirm" => "Kas tõesti soovid selle lehe KUSTUTADA?\\nTaastamise võimalust enam pole!.",
 	"DeleteTip" => "Lehe kustutamiseks vajuta siia.",
 	"DeleteTipComment" => "Click here to delete comment.",
-	"DeleteText" => "(kustuta)",
+	"DeleteText" => "Kustuta",
 	"EditACLConfirm" => "Kas tõesti ei soovi muudatusi salvestada?",
 	"EditACLText" => "Muuda KÕL'id",
 	"EditSettingsConfirm" => "Kas tõesti ei soovi muudatusi salvestada?",
@@ -246,7 +246,7 @@ $wackoTranslation = array(
 	"TreeEmpty" => "%1&nbsp;-el ei ole alamlehti",
 	"SearchTitleTip" => "Click here to show all pages containing this page title.",
 
-	"RenameText" => "Nimeta ümber...",
+	"RenameText" => "Nimeta ümber",
 	"NewName" => "Anna lehele uus nimi",
 	"RenameButton" => "Nimeta ümber!",
 	"AlredyExists" => "<em>Lehekülg <strong>%1</strong> juba eksisteerib.</em>",

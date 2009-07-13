@@ -61,7 +61,7 @@ $wackoTranslation = array(
 	"DeleteConfirm" => "Wilt u deze pagina echt verwijderen?\\nU kunt deze handeling niet ongedaan maken!.",
 	"DeleteTip" => "Klik hier om deze pagina te verwijderen.",
 	"DeleteTipComment" => "Click here to delete comment.",
-	"DeleteText" => "(Verwijder)",
+	"DeleteText" => "Verwijder",
 	"EditACLConfirm" => "Wilt u afsluiten zonder te bewaren?",
 	"EditACLText" => "Bewerk ACL's (rechten)",
 	"EditSettingsConfirm" => "Wilt u afsluiten zonder te bewaren?",
@@ -246,7 +246,7 @@ $wackoTranslation = array(
 	"TreeEmpty" => "%1&nbsp;heeft geen subpagina's",
 	"SearchTitleTip" => "Click here to show all pages containing this page title.",
 
-	"RenameText" => "Hernoem...",
+	"RenameText" => "Hernoem",
 	"NewName" => "Geef een nieuwe naam voor deze pagina",
 	"RenameButton" => "Hernoem!",
 	"AlredyExists" => "<em>Pagina <strong>%1</strong> bestaat al.</em>",
