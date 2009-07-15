@@ -6,10 +6,10 @@ your old Wacko installation is config.inc.php. You can also just copy the new fi
 over the old ones, but be careful not to overwrite your old config.inc.php or
 any customizations you may have applied to the source files.
 
-Once the files are in place, browse to your Wacko. The update script should show
+Once the files are in place, browse to your WackoWiki. The update script should show
 up automatically.
 
-Note: before you complete the update script, everybody who will browse to your Wacko
+Note: before you complete the update script, everybody who will browse to your WackoWiki
 will see it, too. So if you run a relatively high traffic site, you may want to lock
 down your Wacko installation temporarily by placing a file called "locked" into your
 Wacko directory; once Wacko sees it, it will ask for a username ("admin") and a 
