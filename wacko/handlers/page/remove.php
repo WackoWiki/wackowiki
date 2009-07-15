@@ -105,8 +105,8 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 		}
 		else
 		{
-			echo "<div class=\"warning\"><strong>".$this->GetTranslation("ReallyDelete".
-				($this->page["comment_on"] ? "Comment" : ""))."</strong></div>";
+			echo "<div class=\"warning\">".$this->GetTranslation("ReallyDelete".
+				($this->page["comment_on"] ? "Comment" : ""))."</div>";
 			echo $this->FormOpen("remove");
 
 			// admin privileged removal options
