@@ -39,7 +39,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	}
 	else
 	{
-		echo '<h4>'.$this->GetTranslation("ReallyPurge").'</h4><br />';
+		echo "<div class=\"warning\">".$this->GetTranslation("ReallyPurge")."</div><br />";
 		echo $this->FormOpen("purge");
 ?>
 		
