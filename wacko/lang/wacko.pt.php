@@ -155,7 +155,7 @@ $wackoTranslation = array(
 	"PageRemoved" => "<i>Página %1 removida.</i>",
 	"ClusterRemoved" => "All pages of the cluster removed.",
 	"RevisionsRemoved" => "<i>Revisions from page %1 removidos.</i>",
-	"ThisActionHavenotUndo" => "Esta acção não pode ser anulada. Boa Sorte!",
+	"ThisActionHavenotUndo" => "Esta acção não pode ser anulada.",
 
 	"PrintVersion" => "Versão Impressora",
 	"ReferringPages" => "Páginas Referenciadoras",

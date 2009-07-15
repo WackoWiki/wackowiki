@@ -155,7 +155,7 @@ $wackoTranslation = array(
 	"PageRemoved" => "<i>Leht %1 eemaldatud.</i>",
 	"ClusterRemoved" => "All pages of the cluster removed.",
 	"RevisionsRemoved" => "<i>Revisions from page %1 eemaldatud.</i>",
-	"ThisActionHavenotUndo" => "See tegevus pole taastatav. Edu!",
+	"ThisActionHavenotUndo" => "See tegevus pole taastatav.",
 
 	"PrintVersion" => "Prinditav versioon",
 	"ReferringPages" => "Viidatud lehed",
