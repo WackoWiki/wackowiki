@@ -13,24 +13,37 @@ $max = $usermax;
 
 if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 {
-	if ($root == "" && !(int)$noxml)  print("<a href=\"".$this->GetConfigValue("base_url")."xml/recentchanges_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />");
-
 	$count = 0;
+	if ($root == "" && !(int)$noxml)
+	{
+		echo "<a href=\"".$this->GetConfigValue("base_url")."xml/recentchanges_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
+	}
+
+	echo "<ul>\n";
 	$access = true;
+
 	foreach ($pages as $i => $page)
 	{
-		if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
-		else $access = true;
+		if ($this->config["hide_locked"])
+			$access = $this->HasAccess("read",$page["tag"]);
+		else
+			$access = true;
+
 		if ($access && ($count < $max))
 		{
 			$count++;
 
 			// day header
 			list($day, $time) = explode(" ", $page["time"]);
+
 			if ($day != $curday)
 			{
-				if ($curday) print("<br />\n");
-				print("<b>$day:</b><br />\n");
+				if ($curday)
+				{	
+					print("</ul>\n<br /></li>\n");
+				}
+
+				print("<li><b>$day:</b>\n<ul>\n");
 				$curday = $day;
 			}
 			
@@ -44,15 +57,16 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 			}
 
 			// print entry
-			print("&nbsp;&nbsp;&nbsp;<span class=\"dt\">".$time."</span> &mdash; (".
+			print("<li>&nbsp;&nbsp;&nbsp;<span class=\"dt\">".$time."</span> &mdash; (".
 			$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".
 			$this->Link( "/".$page["tag"], "", $page["tag"] )." . . . . . . . . . . . . . . . . <small>".
 			($this->IsWikiName($page["user"]) 
 				? $this->Link("/".$page["user"],"",$page["user"])
 				: $page["user"]).
 			$edit_note.
-			"</small><br />\n");
+			"</small></li>\n");
 		}
 	}
+	echo "</ul>\n</li>\n</ul>\n";
 }
 ?>
