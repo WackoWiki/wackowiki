@@ -17,6 +17,8 @@ if ($user = $this->GetUser())
 
 		if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE user = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY time ASC, tag ASC", 1))
 		{
+			echo "<ul>\n";
+
 			foreach ($pages as $page)
 			{
 				$edited_pages[$page["tag"]] = $page["time"];
@@ -30,8 +32,11 @@ if ($user = $this->GetUser())
 				list($day, $time) = explode(" ", $page["time"]);
 				if ($day != $curday)
 				{
-					if ($curday) print("<br />\n");
-					print("<strong>$day:</strong><br />\n");
+					if ($curday)
+					{
+						print("</ul>\n<br /></li>\n");
+					}
+					print("<li><strong>$day:</strong><ul>\n");
 					$curday = $day;
 				}
 
@@ -45,13 +50,14 @@ if ($user = $this->GetUser())
 				}
 
 				// print entry
-				print("$time (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0).$edit_note."<br />\n");
+				print("<li>$time (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0).$edit_note."</li>\n");
 
 				$my_edits_count++;
 
 				if ($my_edits_count>=(int)$max) break;
 			}
-
+			echo "</ul>\n</li>\n</ul>\n";
+			
 			if ($my_edits_count == 0)
 			{
 				echo $this->GetTranslation("DidntEditAnyPage");
@@ -68,29 +74,40 @@ if ($user = $this->GetUser())
 
 		if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE user = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY tag ASC, time DESC", 1))
 		{
+			echo "<ul>\n";
+
 			foreach ($pages as $page)
 			{
-				if ($last_tag != $page["tag"]) {
+				if ($last_tag != $page["tag"])
+				{
 					$last_tag = $page["tag"];
 					$firstChar = strtoupper($page["tag"][0]);
-					if (!preg_match("/[".$this->language["ALPHA"]."]/", $firstChar)) {
+
+					if (!preg_match("/".$this->language["ALPHA"]."/", $firstChar))
+					{
 						$firstChar = "#";
 					}
 
-					if ($firstChar != $curChar) {
-						if ($curChar) print("<br />\n");
-						print("<strong>$firstChar</strong><br />\n");
+					if ($firstChar != $curChar)
+					{
+						if ($curChar)
+						{
+							print("</ul>\n<br /></li>\n");
+						}
+						print("<li><strong>$firstChar</strong><ul>\n");
 						$curChar = $firstChar;
 					}
 
 					// print entry
-					print("&nbsp;&nbsp;&nbsp;(".$page["time"].") (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."<br />\n");
+					print("<li>(".$page["time"].") (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."</li>\n");
 
 					$my_edits_count++;
-					if ($my_edits_count>=(int)$max) break;
+
+					if ($my_edits_count >= (int)$max) break;
 				}
 			}
-
+			echo "</ul>\n</li>\n</ul>\n";
+			
 			if ($my_edits_count == 0)
 			{
 				echo $this->GetTranslation("DidntEditAnyPage");
