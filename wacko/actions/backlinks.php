@@ -16,8 +16,11 @@ if ($pages = $this->LoadPagesLinkingTo($tag))
 	{
 		if ($page["tag"])
 		{
-			if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
-			else $access = true;
+			if ($this->config["hide_locked"]) 
+				$access = $this->HasAccess("read",$page["tag"]);
+			else 
+				$access = true;
+
 			if ($access)
 			{
 				$lnk = $this->Link("/".$page["tag"]."#".$this->NpjTranslit($tag), "", $page["tag"]);

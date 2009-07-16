@@ -27,6 +27,7 @@ else
 		}
 		else
 		{
+			// recompile body
 			// build html body
 			$strings = $this->Format($inc_page["body"], "wacko");
 		}
