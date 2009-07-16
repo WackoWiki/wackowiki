@@ -45,7 +45,7 @@ if ($user = $this->GetUser())
 				}
 
 				// print entry
-				print("&nbsp;&nbsp;&nbsp;($time) (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0).$edit_note."<br />\n");
+				print("$time (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0).$edit_note."<br />\n");
 
 				$my_edits_count++;
 

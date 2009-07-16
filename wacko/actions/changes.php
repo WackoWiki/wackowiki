@@ -57,7 +57,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 			}
 
 			// print entry
-			print("<li>&nbsp;&nbsp;&nbsp;<span class=\"dt\">".$time."</span> &mdash; (".
+			print("<li><span class=\"dt\">".$time."</span> &mdash; (".
 			$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".
 			$this->Link( "/".$page["tag"], "", $page["tag"] )." . . . . . . . . . . . . . . . . <small>".
 			($this->IsWikiName($page["user"]) 
