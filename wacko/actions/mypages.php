@@ -109,11 +109,14 @@ if ($user = $this->GetUser())
 			foreach ($pages as $page)
 			{
 				$firstChar = strtoupper($page["tag"][0]);
-				if (!preg_match("/".$this->language["ALPHA"]."/", $firstChar)) {
+
+				if (!preg_match("/".$this->language["ALPHA"]."/", $firstChar))
+				{
 					$firstChar = "#";
 				}
 
-				if ($firstChar != $curChar) {
+				if ($firstChar != $curChar)
+				{
 					if ($curChar)
 					{
 						print("</ul>\n<br /></li>\n");
@@ -138,7 +141,6 @@ if ($user = $this->GetUser())
 	{
 		echo $this->GetTranslation("YouDontOwn");
 	}
-
 }
 else
 {
