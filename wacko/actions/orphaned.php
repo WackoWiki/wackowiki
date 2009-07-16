@@ -5,13 +5,15 @@ else $root = $this->UnwrapLink($root);
 
 if ($pages = $this->LoadOrphanedPages($root))
 {
+	echo "<ol>\n";
 	//!!!! unoptimized
 	if (is_array($pages))
 	foreach ($pages as $page)
 	if (!$this->config["hide_locked"] || $this->HasAccess("read",$page["tag"]))
 	{
-		print($this->Link("/".$page["tag"], "", "", 0)."<br />\n");
+		print("<li>".$this->Link("/".$page["tag"], "", "", 0)."</li>\n");
 	}
+	echo "</ol>\n";
 }
 else
 {
