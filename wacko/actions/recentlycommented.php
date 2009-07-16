@@ -47,29 +47,39 @@ if (!$max)  $max = 50;
 
 if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
 {
-   if ($root=="" && !(int)$noxml)  print("<a href=\"".$this->GetConfigValue("base_url")."xml/recentcomment_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentCommentsXMLTip")."\" alt=\"XML\" /></a><br /><br />");
+   if ($root=="" && !(int)$noxml)  print("<a href=\"".$this->GetConfigValue("base_url")."xml/recentcomment_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentCommentsXMLTip")."\" alt=\"XML\" /></a><br /><br />\n");
+
+   echo "<ul>\n";
+
    foreach ($pages as $page)
    {
-      if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
-      else $access = true;
+      if ($this->config["hide_locked"])
+		$access = $this->HasAccess("read",$page["tag"]);
+      else 
+		$access = true;
+
       if ($access && $this->UserAllowedComments())
       {
          // day header
          list($day, $time) = explode(" ", $page["comment_time"]);
          if ($day != $curday)
          {
-            if ($curday) print("<br />\n");
-            print("<strong>$day:</strong><br />\n");
+            if ($curday)
+			{
+				print("</ul>\n<br /></li>\n");
+			}
+            print("<li><b>$day:</b>\n<ul>\n");
             $curday = $day;
          }
 
          // print entry
-         print("&nbsp;&nbsp;&nbsp;<span class=\"dt\">".$time."</span> &mdash; (<a href=\"".
+         print("<li>&nbsp;&nbsp;&nbsp;<span class=\"dt\">".$time."</span> &mdash; (<a href=\"".
          $this->href("", $page["tag"], "show_comments=1")."#comments\">".$page["tag"]."</a>".
               ") . . . . . . . . . . . . . . . . <small>".$this->GetTranslation("LatestCommentBy")." ".
-         ($this->IsWikiName($page["comment_user"])?$this->Link("/".$page["comment_user"],"",$page["comment_user"] ):$page["comment_user"])."</small><br />\n");
+         ($this->IsWikiName($page["comment_user"])?$this->Link("/".$page["comment_user"],"",$page["comment_user"] ):$page["comment_user"])."</small></li>\n");
       }
    }
+   echo "</ul>\n</li>\n</ul>\n";
 }
 else
 {
