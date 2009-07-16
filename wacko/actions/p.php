@@ -23,7 +23,7 @@ if (!$style) $style = "before";
 		// clarifying, what numbers where is placed
 		$toc_len = sizeof($toc);
 		$numbers = array(); $depth = 0; $pnum=0;
-		for($i=0;$i<$toc_len;$i++)
+		for($i = 0; $i < $toc_len; $i++)
 		if ($toc[$i][2] > 66666)
 		{ 
 			// normalizing submersion depth

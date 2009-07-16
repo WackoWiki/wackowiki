@@ -1,11 +1,11 @@
 <?php
 /*
- {{Upload
- [global=1]
- [maxsize="200"]
- [hide_description=1]
- }}
- */
+	{{Upload
+		[global=1]
+		[maxsize="200"]
+		[hide_description=1]
+	}}
+*/
  
 if (!isset($global)) $global = "";
 if (!isset($maxsize)) $maxsize = "";
@@ -22,7 +22,9 @@ if ($user = $this->GetUser())
 	$registered = true;
 }
 else
-$user = "guest@wacko";
+{
+	$user = "guest@wacko";
+}
 
 if ($registered
 &&
@@ -46,11 +48,11 @@ if ($registered
 	$maxfilesize = $this->config["upload_max_size"];
 
 	if ($maxsize)
-		if ($maxfilesize > 1 * $maxsize) 
+		if ($maxfilesize > 1 * $maxsize)
 			$maxfilesize = 1 * $maxsize;
 
 	$maxfilesize *= 1024;
-	?>
+?>
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td><label for="FileUpload"><?php echo $this->GetTranslation("UploadFor");?>:&nbsp;</label>
