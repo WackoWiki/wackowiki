@@ -14,6 +14,7 @@ if ($user = $this->GetUser())
 
 		if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."revisions WHERE owner = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY time DESC, tag ASC", 1))
 		{
+			echo "<ul>\n";
 
 			foreach ($pages as $page)
 			{
@@ -35,16 +36,20 @@ if ($user = $this->GetUser())
 				list($day, $time) = explode(" ", $page["time"]);
 				if ($day != $curday)
 				{
-					if ($curday) print("<br />\n");
-					print("<strong>$day:</strong><br />\n");
+					if ($curday) 
+					{
+						print("</ul>\n<br /></li>\n");
+					}
+					print("<li><strong>$day:</strong><ul>\n");
 					$curday = $day;
 				}
 
 				// print entry
-				print("&nbsp;&nbsp;&nbsp;($time) (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."<br />\n");
+				print("<li>$time (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."</li>\n");
 
 				$my_pages_count++;
 			}
+			echo "</ul>\n</li>\n</ul>\n";
 		}
 		else
 		{
@@ -58,6 +63,8 @@ if ($user = $this->GetUser())
 
 		if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE owner = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY time ASC, tag ASC", 1))
 		{
+			echo "<ul>\n";
+
 			foreach ($pages as $page)
 			{
 				$edited_pages[$page["tag"]] = $page["time"];
@@ -71,16 +78,20 @@ if ($user = $this->GetUser())
 				list($day, $time) = explode(" ", $page["time"]);
 				if ($day != $curday)
 				{
-					if ($curday) print("<br />\n");
-					print("<strong>$day:</strong><br />\n");
+					if ($curday)
+					{
+						print("</ul>\n<br /></li>\n");
+					}
+					print("<li><strong>$day:</strong><ul>\n");
 					$curday = $day;
 				}
 
 				// print entry
-				print("&nbsp;&nbsp;&nbsp;($time) (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."<br />\n");
+				print("<li>$time (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."</li>\n");
 
 				$my_pages_count++;
 			}
+			echo "</ul>\n</li>\n</ul>\n";
 		}
 		else
 		{
@@ -93,6 +104,8 @@ if ($user = $this->GetUser())
 
 		if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE owner = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY tag ASC", 1))
 		{
+			echo "<ul>\n";
+
 			foreach ($pages as $page)
 			{
 				$firstChar = strtoupper($page["tag"][0]);
@@ -101,15 +114,19 @@ if ($user = $this->GetUser())
 				}
 
 				if ($firstChar != $curChar) {
-					if ($curChar) print("<br />\n");
-					print("<strong>$firstChar</strong><br />\n");
+					if ($curChar)
+					{
+						print("</ul>\n<br /></li>\n");
+					}
+					print("<li><strong>$firstChar</strong><ul>\n");
 					$curChar = $firstChar;
 				}
 
-				print($this->ComposeLinkToPage($page["tag"])."<br />\n");
+				print("<li>".$this->ComposeLinkToPage($page["tag"])."</li>\n");
 
 				$my_pages_count++;
 			}
+			echo "</ul>\n</li>\n</ul>\n";
 		}
 		else
 		{
