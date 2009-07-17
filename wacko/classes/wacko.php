@@ -196,7 +196,7 @@ class Wacko
 		closedir($handle);
 		sort($themelist, SORT_STRING);
 
-		if ($allow = $this->config["allow_themes"])
+		if ($allow = trim($this->config["allow_themes"]))
 		{
 			$ath = explode(",", $allow);
 
@@ -3558,6 +3558,16 @@ class Wacko
 			"WHERE from_tag = '".quote($this->dblink, $tag)."' ");
 	}
 
+	function RenameKeywords($tag, $NewTag)
+	{
+		if (!$tag || !$NewTag) return false;
+
+		return $this->Query(
+			"UPDATE {$this->config['table_prefix']}keywordspages ".
+			"SET tag = '".quote($this->dblink, $NewTag)."' ".
+			"WHERE tag = '".quote($this->dblink, $tag)."' ");
+	}
+
 	function RenameFiles($tag, $NewTag, $NewSuperTag = "")
 	{
 		if($NewSuperTag == "")
@@ -3644,6 +3654,21 @@ class Wacko
 		return $this->Query(
 			"DELETE FROM ".$this->config["table_prefix"]."links ".
 			"WHERE from_tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+	}
+
+	function RemoveKeywords($tag, $cluster = false)
+	{
+		if (!$tag) return false;
+
+		$this->Query(
+			"UPDATE {$this->config['table_prefix']}pages ".
+			"SET keywords = '' ".
+			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+		$this->Query(
+			"DELETE FROM {$this->config['table_prefix']}keywordspages ".
+			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+
+		return true;
 	}
 
 	function RemoveReferrers($tag, $cluster = false)
@@ -3895,6 +3920,94 @@ class Wacko
 				"ip			= '".quote($this->dblink, $this->GetUserIP())."', ".
 				"message	= '".quote($this->dblink, $message)."'");
 	}
+
+	// load keywords for the page's particular language.
+	// if root string value is passed, returns number of
+	// pages under each category and below defined root
+	// page
+	function GetKeywordsList($lang, $cache = 1, $root = false)
+	{
+		if ($_keywords = $this->LoadAll(
+		"SELECT id, parent, name ".
+		"FROM {$this->config['table_prefix']}keywords ".
+		"WHERE lang = '".quote($this->dblink, $lang)."' ".
+		"ORDER BY parent ASC, name ASC", $cache))
+		{
+			// process pages count (if have to)
+			if ($root !== false)
+			{
+				if ($_counts = $this->LoadAll(
+				"SELECT keyword, COUNT( tag ) AS n ".
+				"FROM {$this->config['table_prefix']}keywords, ".
+					"{$this->config['table_prefix']}keywordspages ".
+				"WHERE lang = '".quote($this->dblink, $lang)."' AND keyword = id ".
+					( $root != '' ? "AND ( tag = '".quote($this->dblink, $root)."' OR tag LIKE '".quote($this->dblink, $root)."/%' ) " : '' ). 
+				"GROUP BY keyword", 1))
+				{
+					foreach ($_counts as $count) $counts[$count['keyword']] = $count['n'];
+				}
+			}
+			
+			// process categories names
+			foreach ($_keywords as $word)
+			{
+				$keywords[$word['id']] = array(
+					'parent'	=> $word['parent'],
+					'name'		=> $word['name'],
+					'n'			=> $counts[$word['id']]
+				);
+			}
+			
+			foreach ($keywords as $id => $word)
+			{
+				if ($keywords[$word['parent']])
+				{
+					$keywords[$word['parent']]['childs'][$id] = $word;
+					unset($keywords[$id]);
+				}
+			}
+			return $keywords;
+		}
+		else return false;
+	}
+	
+	// save keywords selected in webform. ids are
+	// passed through POST global array. returns:
+	//	true	- if something was saved
+	//	false	- if list was empty
+	function SaveKeywordsList($tag, $dryrun = 0)
+	{
+		// what's selected
+		foreach ($_POST as $key => $val)
+		{
+			if (preg_match('/^keyword([0-9]+)\|([0-9]+)$/', $key, $ids) && $val == 'set')
+			{
+				$set[] = $ids[1];
+				
+				if ($ids[2] != '0' && !in_array($ids[2], $set)) $set[] = $ids[2];
+			}
+		}
+		
+		// update list if any
+		if ($set)
+		{
+			if (!$dryrun)
+			{
+				foreach ($set as $id) $values[] = "(".quote($this->dblink, (int)$id).", '".quote($this->dblink, $tag)."')";
+				
+				$this->Query(
+					"INSERT INTO {$this->config['table_prefix']}keywordspages (keyword, tag) ".
+					"VALUES ".implode(', ', $values));
+				$this->Query(
+					"UPDATE {$this->config['table_prefix']}pages ".
+					"SET keywords = '".quote($this->dblink, implode(' ', $set))."' ".
+					"WHERE tag = '".quote($this->dblink, $tag)."' ");
+			}
+			return true;
+		}
+		else return false;
+	}
+
 }
 
 ?>
