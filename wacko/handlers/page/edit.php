@@ -130,7 +130,7 @@ if ($_POST)
 	// display form
 	if ($error)
 	{
-		$output .= "<div class=\"error\">$error</div>\n";
+		$this->SetMessage("<div class=\"error\">$error</div>\n");
 	}
 
 	// append a comment?
