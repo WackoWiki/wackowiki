@@ -1,9 +1,9 @@
 <?php
 
-if (isset($stat) && $stat==0) $limit = 1000;
+if (isset($stat) && $stat == 0) $limit = 1000;
 else $limit = 100;
 
-if (!$max || $limit<$max)
+if (!$max || $limit < $max)
 $max = $limit;
 
 $last_users = $this->LoadAll("SELECT name, signuptime FROM ".$this->config["user_table"]." ORDER BY signuptime DESC LIMIT ".(int)$max);
