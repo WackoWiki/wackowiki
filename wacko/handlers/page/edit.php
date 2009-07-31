@@ -90,7 +90,7 @@ if ($_POST)
 			$body = str_replace("\r", "", $_POST["body"]);
 
 			// add page (revisions)
-			$body_r = $this->SavePage($this->tag, $body, $edit_note);
+			$body_r = $this->SavePage($this->tag, $body, $edit_note, $minor_edit);
 			
 			// log event
 			if ($this->page == false)
@@ -131,7 +131,7 @@ if ($_POST)
 	if (!$previous = 	$_POST["previous"]) $previous 	= $this->page["time"];
 	if (!$body = 		$_POST["body"]) 	$body 		= $this->page["body"];
 	if (isset($_POST["edit_note"]))			$edit_note	= $_POST["edit_note"];
-	if (isset($_POST["minor_edit"]))			$minor_edit	= $_POST["minor_edit"];
+	if (isset($_POST["minor_edit"]))		$minor_edit	= $_POST["minor_edit"];
 
 	{
 	// display form
@@ -211,6 +211,7 @@ if ($_POST)
 			value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
 			onclick="document.location='<?php echo addslashes($this->href("", "", "", 1))?>';" />
 		<br />
+		<noscript><div class="errorbox_js"><?php echo $this->GetTranslation("WikiEditInactiveJs"); ?></div></noscript>
 <?php
 		$output .= "<input type=\"hidden\" name=\"previous\" value=\"".htmlspecialchars($previous)."\" /><br />";
 		$output .= "<textarea id=\"postText\" name=\"body\" rows=\"40\" cols=\"60\" class=\"TextArea\">";
@@ -223,13 +224,12 @@ if ($_POST)
 			$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
 			$output .= "<br />";
 		}
-		print($output);
-		
+
 		// minor edit
 		if ($this->GetConfigValue("minor_edit") != 0)
 		{
-			$output .= "<input id=\"minor_edit\" type=\"checkbox\" value=\"".$minor_edit."\" name=\"minor_edit\"/>";
-			$output .= "<label for=\"minor_edit\">".$this->GetTranslation("EditMinor").":</label>";
+			$output .= "<input id=\"minor_edit\" type=\"checkbox\" value=\"1\" name=\"minor_edit\"/>";
+			$output .= "<label for=\"minor_edit\">".$this->GetTranslation("EditMinor")."</label>";
 			$output .= "<br />";
 		}
 		print($output);

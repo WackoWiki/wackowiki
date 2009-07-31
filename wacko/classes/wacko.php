@@ -1035,7 +1035,7 @@ class Wacko
 	// $edit_note	- edit summary
 	// $comment_on	- commented page address
 	// $title		- page name (metadata)
-	function SavePage($tag, $body, $edit_note = "", $comment_on = "", $title = "")
+	function SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on = "", $title = "")
 	{
 		// get current user
 		$user = $this->GetUserName();
@@ -3560,16 +3560,6 @@ class Wacko
 			"WHERE from_tag = '".quote($this->dblink, $tag)."' ");
 	}
 
-	function RenameKeywords($tag, $NewTag)
-	{
-		if (!$tag || !$NewTag) return false;
-
-		return $this->Query(
-			"UPDATE {$this->config['table_prefix']}keywordspages ".
-			"SET tag = '".quote($this->dblink, $NewTag)."' ".
-			"WHERE tag = '".quote($this->dblink, $tag)."' ");
-	}
-
 	function RenameFiles($tag, $NewTag, $NewSuperTag = "")
 	{
 		if($NewSuperTag == "")
@@ -3667,7 +3657,7 @@ class Wacko
 			"SET keywords = '' ".
 			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 		$this->Query(
-			"DELETE FROM {$this->config['table_prefix']}keywordspages ".
+			"DELETE FROM {$this->config['table_prefix']}keywords_pages ".
 			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 
 		return true;
@@ -3941,8 +3931,8 @@ class Wacko
 				if ($_counts = $this->LoadAll(
 				"SELECT keyword, COUNT( tag ) AS n ".
 				"FROM {$this->config['table_prefix']}keywords, ".
-					"{$this->config['table_prefix']}keywordspages ".
-				"WHERE lang = '".quote($this->dblink, $lang)."' AND keyword = id ".
+					"{$this->config['table_prefix']}keywords_pages ".
+				"WHERE lang = '".quote($this->dblink, $lang)."' AND keyword_id = id ".
 					( $root != '' ? "AND ( tag = '".quote($this->dblink, $root)."' OR tag LIKE '".quote($this->dblink, $root)."/%' ) " : '' ). 
 				"GROUP BY keyword", 1))
 				{
@@ -3995,15 +3985,15 @@ class Wacko
 		{
 			if (!$dryrun)
 			{
-				foreach ($set as $id) $values[] = "(".quote($this->dblink, (int)$id).", '".quote($this->dblink, $tag)."')";
+				foreach ($set as $id) $values[] = "(".quote($this->dblink, (int)$id).", '".quote($this->dblink, $this->page["id"])."')";
 				
 				$this->Query(
-					"INSERT INTO {$this->config['table_prefix']}keywordspages (keyword, tag) ".
+					"INSERT INTO {$this->config['table_prefix']}keywords_pages (keyword_id, page_id) ".
 					"VALUES ".implode(', ', $values));
 				$this->Query(
 					"UPDATE {$this->config['table_prefix']}pages ".
 					"SET keywords = '".quote($this->dblink, implode(' ', $set))."' ".
-					"WHERE tag = '".quote($this->dblink, $tag)."' ");
+					"WHERE id = '".quote($this->dblink, $this->page["id"])."' ");
 			}
 			return true;
 		}
