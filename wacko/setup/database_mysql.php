@@ -17,6 +17,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"owner VARCHAR(50) NOT NULL DEFAULT '',".
 					"user VARCHAR(50) NOT NULL DEFAULT '',".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
+					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 					"latest ENUM('Y','N') NOT NULL DEFAULT 'Y',".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 					"comment_on VARCHAR(250) binary NOT NULL DEFAULT '',".
@@ -32,6 +33,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"KEY idx_supertag (supertag),".
 					"KEY idx_created (created),".
 					"KEY idx_time (time),".
+					"KEY idx_minor_edit (minor_edit),".
 					"KEY idx_comment_on (comment_on),".
 					"KEY idx_super_comment_on (super_comment_on),".
 					"KEY idx_title (title)".
@@ -50,6 +52,7 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"owner VARCHAR(50) NOT NULL DEFAULT '',".
 						"user VARCHAR(50) NOT NULL DEFAULT '',".
 						"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
+						"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 						"latest ENUM('Y','N') NOT NULL DEFAULT 'N',".
 						"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 						"comment_on VARCHAR(250) binary NOT NULL DEFAULT '',".
@@ -62,6 +65,7 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"KEY idx_tag (tag),".
 						"KEY idx_supertag (supertag),".
 						"KEY idx_time (time),".
+						"KEY idx_minor_edit (minor_edit),".
 						"KEY idx_comment_on (comment_on)".
 					") TYPE=MyISAM;";
 
