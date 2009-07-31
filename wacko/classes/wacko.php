@@ -16,7 +16,7 @@ class Wacko
 	var $WVERSION; //Wacko version
 	var $context = array("");
 	var $current_context = 0;
-	var $pages_meta = "id, tag, created, time, edit_note, owner, user, latest, handler, comment_on,
+	var $pages_meta = "id, tag, created, time, edit_note, minor_edit, owner, user, latest, handler, comment_on,
 						super_comment_on, supertag, lang, title, keywords, description";
 	var $first_inclusion = array(); // for backlinks
 	var $optionSplitter = "\n"; // if you change this two symbols, settings for all users will be lost.
@@ -1161,6 +1161,7 @@ class Wacko
 						"body_r = '".quote($this->dblink, $body_r)."', ".
 						"body_toc = '".quote($this->dblink, $body_toc)."', ".
 						"edit_note = '".quote($this->dblink, $edit_note)."', ".
+						"minor_edit = '".quote($this->dblink, $minor_edit)."', ".
 						"lang = '".quote($this->dblink, $lang)."', ".
 						"tag = '".quote($this->dblink, $tag)."'");
 						
@@ -1243,8 +1244,8 @@ class Wacko
 				{
 					// move revision
 					$this->Query(
-							"INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, edit_note, owner, owner_id, user, user_id, latest, handler, comment_on, supertag, title, keywords, description) ".
-							"SELECT tag, time, body, edit_note, owner, owner_id, user, user_id, 'N', handler, comment_on, supertag, title, keywords, description ".
+							"INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, latest, handler, comment_on, supertag, title, keywords, description) ".
+							"SELECT tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, 'N', handler, comment_on, supertag, title, keywords, description ".
 							"FROM ".$this->config["table_prefix"]."pages ".
 							"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
 
@@ -1263,7 +1264,8 @@ class Wacko
 							"body = '".quote($this->dblink, $body)."', ".
 							"body_r = '".quote($this->dblink, $body_r)."', ".
 							"body_toc = '".quote($this->dblink, $body_toc)."', ".
-							"edit_note = '".quote($this->dblink, $edit_note)."' ".
+							"edit_note = '".quote($this->dblink, $edit_note)."', ".
+							"minor_edit = '".quote($this->dblink, $minor_edit)."' ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
 						"LIMIT 1");
 				}

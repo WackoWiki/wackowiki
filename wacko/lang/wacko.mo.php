@@ -114,6 +114,7 @@ $wackoTranslation = array(
 	"EditPreview"  => "Vizualizare preventiva",
 	"EditNote" => "Edit summary",
 	"EditNoteMissing" => "Edit summary missing",
+	"EditMinor" => "Minor edit",
 	"OverwriteAlert" => "INSTIINTARE DESPRE REINSCRIERE: Pagina data a fost modificata de altcineva, in timp ce ati redactat-o.<br />Va rugam, sa copiati schimbarile Dvs. si redactati pagina din nou.",
 	"WriteAccessDenied" => "<em>Nu aveti dreptul de a modifica pagina data.</em>",
 	"EmptyComment" => "Comentariul este nul -- nu va fi pastrat!",
