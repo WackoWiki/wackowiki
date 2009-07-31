@@ -115,6 +115,7 @@ $wackoTranslation = array(
 	"EditPreview" => "Προβολή",
 	"EditNote" => "Edit summary",
 	"EditNoteMissing" => "Edit summary missing",
+	"EditMinor" => "Minor edit",
 	"OverwriteAlert" => "OVERWRITE ALERT: This page was modified by someone else while you were editing it.<br />Please copy your changes and re-edit this page.",
 	"WriteAccessDenied" => "<em>Δεν έχετε δικαιώματα εγγραφής σε αυτή την σελίδα.</em>",
 	"EmptyComment" => "Το κύριο μέρος του σχόλιου είναι κενό -- δεν αποθηκεύτηκε!",

@@ -115,6 +115,7 @@ $wackoTranslation = array(
 	"EditPreview" => "Предварительный просмотр",
 	"EditNote" => "Edit summary",
 	"EditNoteMissing" => "Edit summary missing",
+	"EditMinor" => "Minor edit",
 	"OverwriteAlert" => "УВЕДОМЛЕНИЕ О ПЕРЕЗАПИСИ: Эта страница была изменена кем-то ещё, пока вы редактировали её.<br/>Пожалуйста, скопируйте свои изменения и отредактируйте страницу повторно.",
 	"WriteAccessDenied" => "<em>У вас нет прав на изменение этой страницы.</em>",
 	"EmptyComment" => "Комментарий пуст -- он не будет сохранен!",

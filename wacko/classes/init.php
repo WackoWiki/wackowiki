@@ -199,6 +199,7 @@ class Init
 					"pages_purge_time" => 0,
 
 					"edit_summary" => 0,
+					"minor_edit" => 0,
 
 					"hide_files" => 0,
 					"hide_comments" => 0,

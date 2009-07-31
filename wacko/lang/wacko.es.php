@@ -115,6 +115,7 @@ $wackoTranslation = array(
 	"EditPreview" => "Previsualización",
 	"EditNote" => "Edit summary",
 	"EditNoteMissing" => "Edit summary missing",
+	"EditMinor" => "Minor edit",
 	"OverwriteAlert" => "ALERTA DE CAMBIO: Esta página ha sido modificada por otra persona cuando estuviste cambiándola.<br />Copia tus cambios y vuelve a editar la página.",
 	"WriteAccessDenied" => "<em>No tienes derecho de escribir en esta página.</em>",
 	"EmptyComment" => "El commentario está vacio -- no lo guarde!",

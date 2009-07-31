@@ -24,6 +24,12 @@ if ($_POST)
         {
             $edit_note = trim($_POST["edit_note"]);
         }
+
+		if(isset($_POST["minor_edit"]))
+        {
+            $minor_edit = $_POST["minor_edit"];
+        }
+        
 		// check for overwriting
 		if ($this->page && $this->page["time"] != $_POST["previous"])
 			$error = $this->GetTranslation("OverwriteAlert");
@@ -124,7 +130,8 @@ if ($_POST)
 	// fetch fields
 	if (!$previous = 	$_POST["previous"]) $previous 	= $this->page["time"];
 	if (!$body = 		$_POST["body"]) 	$body 		= $this->page["body"];
-	if (isset($_POST['edit_note']))			$edit_note	= $_POST['edit_note'];
+	if (isset($_POST["edit_note"]))			$edit_note	= $_POST["edit_note"];
+	if (isset($_POST["minor_edit"]))			$minor_edit	= $_POST["minor_edit"];
 
 	{
 	// display form
@@ -214,6 +221,15 @@ if ($_POST)
 		{
 			$output .= "<label for=\"edit_note\">".$this->GetTranslation("EditNote").":</label>";
 			$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
+			$output .= "<br />";
+		}
+		print($output);
+		
+		// minor edit
+		if ($this->GetConfigValue("minor_edit") != 0)
+		{
+			$output .= "<input id=\"minor_edit\" type=\"checkbox\" value=\"".$minor_edit."\" name=\"minor_edit\"/>";
+			$output .= "<label for=\"minor_edit\">".$this->GetTranslation("EditMinor").":</label>";
 			$output .= "<br />";
 		}
 		print($output);

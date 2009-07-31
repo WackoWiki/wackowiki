@@ -115,6 +115,7 @@ $wackoTranslation = array(
 	"EditPreview" => "Podgl±d",
 	"EditNote" => "Edit summary",
 	"EditNoteMissing" => "Edit summary missing",
+	"EditMinor" => "Minor edit",
 	"OverwriteAlert" => "UWAGA STRONA NADPISANA: Podczas wprowadzania zmian, zawarto¶æ strony zosta³a zmodyfikowana przez kogo¶ innego.<br />Nale¿y skopiowaæ wprowadzone zmiany do innego programu i ponownie rozpocz±æ edycjê strony.",
 	"WriteAccessDenied" => "<em>Przepraszamy. Nie masz prawa zapisu na tej stronie.</em>",
 	"EmptyComment" => "Komentarz nie zosta³ zachowany, poniewa¿ nie wprowadzono jego tre¶ci.",
