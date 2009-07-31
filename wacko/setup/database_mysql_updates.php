@@ -69,6 +69,7 @@ $alter_pages_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."pages ADD owner_id
 $alter_pages_r4_2_7 = "ALTER TABLE ".$config["table_prefix"]."pages ADD user_id INT(10) UNSIGNED NOT NULL AFTER owner_id";
 $alter_pages_r4_2_8 = "ALTER TABLE ".$config["table_prefix"]."pages CHANGE latest latest ENUM('Y', 'N') NOT NULL DEFAULT 'Y'";
 $alter_pages_r4_2_9 = "ALTER TABLE ".$config["table_prefix"]."pages CHANGE lang lang VARCHAR(2) NOT NULL DEFAULT ''";
+$alter_pages_r4_2_10 = "ALTER TABLE ".$config["table_prefix"]."pages ADD minor_edit TINYINT(1) UNSIGNED DEFAULT '0' AFTER edit_note, ADD INDEX idx_minor_edit (minor_edit)";
 
 $update_pages_r3_1 = "UPDATE ".$config["table_prefix"]."pages SET body_r=''";
 $update_pages_r3_2 = "UPDATE ".$config["table_prefix"]."pages SET body_toc=''";
@@ -133,6 +134,7 @@ $alter_revisions_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD 
 $alter_revisions_r4_2_5 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD owner_id INT(10) UNSIGNED NOT NULL AFTER id";
 $alter_revisions_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD user_id INT(10) UNSIGNED NOT NULL AFTER owner_id";
 $alter_revisions_r4_2_7 = "ALTER TABLE ".$config["table_prefix"]."revisions CHANGE lang lang VARCHAR(2) NOT NULL DEFAULT ''";
+$alter_revisions_r4_2_8 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD minor_edit TINYINT(1) UNSIGNED DEFAULT '0' AFTER edit_note, ADD INDEX idx_minor_edit (minor_edit)";
 
 $insert_revisions_r2_1 = "INSERT INTO ".$config["table_prefix"]."revisions ( id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on ) SELECT id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on FROM ".$config["table_prefix"]."pages WHERE latest='N';";
 
