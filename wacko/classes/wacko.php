@@ -1033,6 +1033,7 @@ class Wacko
 	// $tag			- page address
 	// $body		- page body (plain text)
 	// $edit_note	- edit summary
+	// $minor_edit	- minor edit
 	// $comment_on	- commented page address
 	// $title		- page name (metadata)
 	function SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on = "", $title = "")
