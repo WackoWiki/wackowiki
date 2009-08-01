@@ -41,6 +41,7 @@ $wackoTranslation = array(
 	"ShowText" => "Εμφάνιση",
 	"ShowDateTimeInLinks" => "Προσθήκη Ημερομηνίας-Ώρας στους συνδέσμους",
 	"WikieditAutocomplete" => "Ολοκλήρωση των wikilinks με Ctrl+Space",
+	"WikiEditInactiveJs" => "In order to be able to use WikiEdit, please enable JavaScript in your browser.",
 	"Typografica" => "Αυτόματη διόρθωση των τυπογραφικών κατά την προβολή",
 	"Comments_0" => "Δεν υπάρχουν σχόλια στην σελίδα.",
 	"Comments_1" => "Υπάρχει ένα σχόλιο στην σελίδα.",
