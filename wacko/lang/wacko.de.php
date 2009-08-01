@@ -39,6 +39,7 @@ $wackoTranslation = array(
 	"ShowText" => "Ansicht",
 	"ShowDateTimeInLinks" => "Füge Zeitstempel zu Verweisen hinzu",
 	"WikieditAutocomplete" => "Vervollständige Wikilinks mit Strg+Leertaste",
+	"WikiEditInactiveJs" => "Um WikiEdit nutzen zu können, aktiviere bitte JavaScript in deinem Browser.",
 	"Typografica" => "Autokorrektur im Ansichtsmodus",
 	"Comments_0" => "Kein Kommentar.",
 	"Comments_1" => "Ein Kommentar.",
