@@ -1,23 +1,12 @@
 
 WackoWiki
 
-Small, lightweight, handy, expandable Wiki-clone written in PHP5.
-
-This code was forked from WakkaWiki 0.1.2, with some patches from ChS,
-wikini.net, some new actions from WakkaWiki.
-and essential amount of our own sourcecode.
+Small, lightweight, handy, expandable Wiki written in PHP5.
 
 Please, subscribe to http://wackowiki.org/news/updates/revisions.xml feed
 in order to receive notices when WackoWiki will be updated.
 
-- RomanIvanov <thingol@mail.ru>, 2003-03-18
+Report every single bug that you encounter or know about into our bugs system:
+http://bugs.wackowiki.org/
 
-----
-Wakka
-
-A Wiki-esque website toolkit by Hendrik Mans.
-
-Not much to read here. For some quick installation instructions, please
-check out INSTALL.
-
-- Hendrik Mans <hendrik@mans.de>, 2002-09-04
+- WackoWiki Team <http://wackowiki.org>, 2009-08-08
