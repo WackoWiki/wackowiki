@@ -443,6 +443,18 @@ div#cssform1 span.site_count {
 	font-size: 0.8em;
 }
 
+/* feed action */
+.feed {
+    overflow:auto;
+}
+.feed .note {
+     font-size: 11px;
+     color: #777;
+}
+.feed .note a {
+     color: #777;
+}
+
 /*Handlers --------------------------------------------------*/
 #content {
 clear:both;

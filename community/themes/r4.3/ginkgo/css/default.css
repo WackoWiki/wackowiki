@@ -582,3 +582,15 @@ div#cssform1 span.site_count {
 	margin-left: -155px; width of left column*/
 	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
+
+/* feed action */
+.feed {
+    overflow:auto;
+}
+.feed .note {
+     font-size: 11px;
+     color: #777;
+}
+.feed .note a {
+     color: #777;
+}
