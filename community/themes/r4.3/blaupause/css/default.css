@@ -487,6 +487,17 @@ div#cssform1 span.site_count {
 	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
 
+/* feed action */
+.feed {
+    overflow:auto;
+}
+.feed .note {
+     font-size: 11px;
+     color: #777;
+}
+.feed .note a {
+     color: #777;
+}
 
 #navigation
 {padding: 0px 0px 0px 0px; /*overflow:hidden;*/}
