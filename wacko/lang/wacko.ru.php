@@ -394,8 +394,8 @@ $wackoTranslation = array(
 	"Next" => "Далее",
 	"Prev" => "Назад",
 
-	"default_bookmarks" => "((Каталог))\n((Изменения))\n((НовыеКомментарии Комментарии))",
-	"site_bookmarks" => "((Каталог)) / ((Изменения)) / ((НовыеКомментарии Комментарии))",
+	"default_bookmarks" => "((Каталог))\n((Изменения))\n((НовыеКомментарии Комментарии @@ru))",
+	"site_bookmarks" => "((Каталог)) / ((Изменения)) / ((НовыеКомментарии Комментарии @@ru))",
 	//icons
 	"outericon" => '<img src="{theme}icons/web.gif" alt="" />',
 	"fileicon" => '<img src="{theme}icons/file.gif" alt="" />',
