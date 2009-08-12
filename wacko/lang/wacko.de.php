@@ -426,7 +426,19 @@ $wackoTranslation = array(
 	// Feed
 	"FeedTitle" => "Feed Titel",
 	"FeedNoURL" => "Bitte gib einen Feed mit dem Parameter url an. (z.B. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
-	"FeedError" => "Kann Feed nicht laden oder parsen",  
+	"FeedError" => "Kann Feed nicht laden oder parsen",
+	"FeedSource" => "Quelle:",
+
+	"FeedMonthAgo" => " month ago",
+	"FeedMonthsAgo" => " months ago",
+	"FeedWeekAgo" => " week ago",
+	"FeedWeeksAgo" => " weeks ago",
+	"FeedDayAgo" => " day ago",
+	"FeedDaysAgo" => " days ago",
+	"FeedHourAgo" => " hour ago",
+	"FeedHoursAgo" => " hours ago",
+	"FeedMinuteAgo" => " minute ago",
+	"FeedMinutesAgo" => " minutes ago",
 
 	// XML / RSS autodiscovery
 	"RecentChangesTitleXML" => " - Letzte Änderungen",

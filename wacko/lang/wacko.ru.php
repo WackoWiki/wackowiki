@@ -420,6 +420,18 @@ $wackoTranslation = array(
 	"FeedTitle" => "«аголовок канала новостей",
 	"FeedNoURL" => "ѕожалуйста, укажите канал новостей с параметром url, например, {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
 	"FeedError" => "Ќевозможно загрузить или распознать новости",
+	"FeedSource" => "Source:",
+
+	"FeedMonthAgo" => " month ago",
+	"FeedMonthsAgo" => " months ago",
+	"FeedWeekAgo" => " week ago",
+	"FeedWeeksAgo" => " weeks ago",
+	"FeedDayAgo" => " day ago",
+	"FeedDaysAgo" => " days ago",
+	"FeedHourAgo" => " hour ago",
+	"FeedHoursAgo" => " hours ago",
+	"FeedMinuteAgo" => " minute ago",
+	"FeedMinutesAgo" => " minutes ago",
 
 	// XML / RSS autodiscovery
 	"RecentChangesTitleXML" => " - последние изменени€",

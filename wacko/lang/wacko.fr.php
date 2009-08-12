@@ -420,6 +420,18 @@ $wackoTranslation = array(
 	"FeedTitle" => "Titre du flux",
 	"FeedNoURL" => "Merci de spécifier un flux avec l&rsquo;url en paramètre (i.e. {{flux url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
 	"FeedError" => "Impossible de charger ou d&rsquo;analyser le flux",
+	"FeedSource" => "Source:",
+
+	"FeedMonthAgo" => " month ago",
+	"FeedMonthsAgo" => " months ago",
+	"FeedWeekAgo" => " week ago",
+	"FeedWeeksAgo" => " weeks ago",
+	"FeedDayAgo" => " day ago",
+	"FeedDaysAgo" => " days ago",
+	"FeedHourAgo" => " hour ago",
+	"FeedHoursAgo" => " hours ago",
+	"FeedMinuteAgo" => " minute ago",
+	"FeedMinutesAgo" => " minutes ago",
 
 	// XML / RSS autodiscovery
 	"RecentChangesTitleXML" => " - Changements récents",
