@@ -498,6 +498,13 @@ div#cssform1 span.site_count {
 .feed .note a {
      color: #777;
 }
+.feed_element_title {
+	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
+	background-color:transparent;
+	background-repeat:no-repeat;
+	background-position:0 1px;
+	padding-left:20px;
+}
 
 #navigation
 {padding: 0px 0px 0px 0px; /*overflow:hidden;*/}
