@@ -13,22 +13,20 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 	<meta name="robots" content="noindex, nofollow" /> <!-- do not index alternative print pages -->
- 	<link rel="stylesheet" type="text/css" href="<?php echo $this->conf->getValue("theme_url") ?>../default/css/default.css.php" />
-	<link media="screen,projection,print" rel="stylesheet" type="text/css" href="<?php echo $this->conf->getValue("theme_url") ?>layout/print.css" />
+ 	<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>../default/css/default.css.php" />
+	<link media="screen,projection,print" rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>layout/print.css" />
 	<style media="screen,projection,print">
 		body {margin:1.875cm 2.5cm 3.75cm 1.5cm}
 		br {display:inline;}
 	</style>
 	<link rel="start" href="<?php echo $this->GetConfigValue('base_url'); ?>" />
-	<title><?php echo $this->GetWakkaName() ?> : <?php echo $this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?></title>
+	<title><?php echo $this->GetWackoName() ?> : <?php echo $this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?></title>
 	<link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico" type="image/x-icon" />
-<?php
-	$this->GetGoogleAnalyticsScriptCode();
-?>
+
 <body>
 
 		<div class="printheader">
-			<a href="<?php echo $this->GetConfigValue("base_url") ?>" class="title"><?php echo $this->GetWakkaName(); ?></a>
+			<a href="<?php echo $this->GetConfigValue("base_url") ?>" class="title"><?php echo $this->GetWackoName(); ?></a>
 		</div>
 
 <div id="content" class="content">
