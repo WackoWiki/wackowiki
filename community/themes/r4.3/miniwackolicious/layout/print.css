@@ -1,0 +1,74 @@
+/* screen stylesheet */
+@import url(screen.css);
+
+/* -- Hide stuff from print ------------------------------------------------- */
+
+div.header div.nav-main,
+div.header div.nav-breadcrumb,
+div.floatbox,
+div.sitesuffix,
+div.bookmarks,
+div.footer,
+#backendrow, #backend #system_bookmarks,
+div.filesheader, div.commentsheader,
+.noprint, .onlyAural
+{
+	display:none;
+}
+
+/* -- Print layout ---------------------------------------------------------- */
+
+@page {
+	size:portrait;
+	padding:0;
+}
+@page:left {
+	margin:1.875cm 1.5cm 3.75cm 2.5cm;
+}
+@page:right {
+	margin:1.875cm 2.5cm 3.75cm 1.5cm;
+}
+
+body {
+	font-family:serif;
+	font-size:10pt;
+	line-height:1.5;
+	color:#000;
+	background-color:#fff;
+}
+
+div.sitewrapper
+{
+    width:auto; min-width:auto; max-width:auto;
+}
+
+#content p, #content ul, #content ol, #content blockquote, #content pre, #content table, #content .code, #content div.indent {
+	widows:4;
+	orphans:4;
+}
+
+a {
+    text-decoration:underline !important;
+}
+
+div.header h1,
+div.printheader a.title {
+	display:block;
+	text-decoration:none;
+	font-size:1.2em;
+	font-weight:bold;
+	font-family:sans-serif;
+	border-bottom:solid 2px #000;
+	color:#000;
+	text-align:center;
+	text-transform:uppercase;
+	padding-bottom:0.5em;
+	margin:0 0 1em 0;
+}
+
+div.printfooter
+{
+	border-top:solid 1px #999;
+	text-align:center;
+	padding:2em; margin-top:3em;
+}
