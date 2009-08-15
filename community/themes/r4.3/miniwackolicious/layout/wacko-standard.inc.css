@@ -25,17 +25,30 @@ width:100%;
 .commentsheader {display: none}
 .filesheader {display: none}
 
-.debug {
-	color: red;
-	background: yellow;
+/* Errors */
+.error {
+  color: #CC3333; font-weight: bold;
+}
+
+.info {
+	background: #F4FBFF;
+	margin: 10px;
+	padding: 10px 10px 10px 40px;
+	border:1px solid #D5D9E6;
+	color: #CC3333; font-weight: bold;
+}
+
+/* Debugging informations */
+div.debug {
+	background: #FFF3F3;
 	border-width: 0.2em;
 	border-style: solid;
-	border-color: black;
-	font-size: 60%;
+	border-color: #FFC9C9;
 	padding: 0.3em;
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 }
+.debug, .debug li { font-size: 11px; color: #888888;}
 
 .add, additions { text-decoration: none; color:#363; border-bottom:dotted 1px #0f0; }
 .del, .deletions { text-decoration: line-through; color:#633; border-bottom:dotted 1px #f00; }
@@ -163,3 +176,22 @@ width:0;
  }
  .autocomplete-inplace div          { padding: 2px 5px; cursor: pointer; cursor: hand; }
  .autocomplete-inplace div.ac-over- { color:#ffffff; background: #1E9905; }
+
+/* feed action */
+.feed {
+    overflow:auto;
+}
+.feed .note {
+     font-size: 11px;
+     color: #777;
+}
+.feed .note a {
+     color: #777;
+}
+.feed_element_title {
+	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
+	background-color:transparent;
+	background-repeat:no-repeat;
+	background-position:0 1px;
+	padding-left:20px;
+}
