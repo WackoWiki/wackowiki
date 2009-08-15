@@ -71,9 +71,11 @@
             <p><?php 
 if ($this->GetUser()){
 	echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion());
-}
-?> &amp; <a href="http://eye48.com/go/miniwackolicious">MiniWackoLicious Theme</a> |
-              <?php /*show user name and preferences*/ if ($this->GetUser()) {echo $this->GetTranslation("YouAre").' <span id="user_page">'.$this->ComposeLinkToPage($this->GetUserName(),'','<span class="backendbutton"></span>'.$this->AddSpaces($this->GetUserName()),0,$this->AddSpaces($this->GetUserName())).'</span> | <span id="user_preferences">'.$this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"),'','<span class="backendbutton"></span>'.$this->AddSpaces($this->GetTranslation("YouArePanelLink")),0,$this->AddSpaces($this->GetTranslation("YouArePanelLink"))).'</span> | ';} ?>
+	echo "&amp; <a href=\"http://eye48.com/go/miniwackolicious\">MiniWackoLicious Theme</a> |";
+
+	/*show user name and preferences*/ 
+	echo $this->GetTranslation("YouAre").' <span id="user_page">'.$this->ComposeLinkToPage($this->GetUserName(),'','<span class="backendbutton"></span>'.$this->AddSpaces($this->GetUserName()), 0, $this->AddSpaces($this->GetUserName())).'</span> | <span id="user_preferences">'.$this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"),'','<span class="backendbutton"></span>'.$this->AddSpaces($this->GetTranslation("YouArePanelLink")), 0, $this->AddSpaces($this->GetTranslation("YouArePanelLink"))).'</span> | ';
+} ?>
               <span id="system_logout"><?php /* login/logout */ echo ($this->GetUser()) ? '<a href="'.$this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;").'action=logout&amp;goback='.$this->SlimUrl($this->tag).'"><span class="backendbutton" title="'.$this->GetTranslation("LogoutLink").'"></span>'.$this->GetTranslation("LogoutLink").'</a>':'<a href="'.$this->Href("",$this->GetTranslation("LoginPage")).'">'.$this->GetTranslation("LoginPage").'</a>'; ?></span>
             </p>
         </div> <!-- /footer -->
