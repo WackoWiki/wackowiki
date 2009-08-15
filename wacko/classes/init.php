@@ -601,7 +601,7 @@ class Init
 	// DEBUG INFO
 	function Debug()
 	{
-		if ($this->config["debug"] >= 1 && strpos($this->method, ".xml") === false && $this->method != "print")
+		if ($this->config["debug"] >= 1 && strpos($this->method, ".xml") === false && $this->method != "print" && $this->method != "msword")
 		{
 			if (($this->config["debug_admin_only"] == true && $this->engine->IsAdmin() === true) || $this->config["debug_admin_only"] == false)
 			{
