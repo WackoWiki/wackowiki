@@ -2,13 +2,12 @@
 	# load main menu
 	include_once('mainmenu.inc.php');
 
-	// Wacko can show message (by javascript)
-	$message = $this->GetMessage();
 	$base_url = $this->GetConfigValue("base_url");
 
 	// HTTP header with right Charset settings
 	header("Content-Type: text/html; charset=".$this->GetCharset());
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->GetConfigValue("language"); ?>" lang="<?php echo $this->GetConfigValue("language"); ?>">
 <head>
     <meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
@@ -84,7 +83,7 @@ else if($this->HasAccess("write"))
 //   * WikiEdit
 //   * Doubleclick editing
 //   * Smooth scrolling
-// Also, here we show message (see beginning of this file)
+
 ?>
 <body onload="all_init();"<?php echo ($this->GetUser()) ? ' id="backend"':'';?>>
 <script type="text/javascript">
@@ -136,3 +135,7 @@ else if($this->HasAccess("write"))
 
         <div id="content" class="content">
 
+		<?php
+		// here we show messages
+		if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+		?>
