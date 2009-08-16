@@ -30,18 +30,18 @@ $update_links_r4_2_1 = "UPDATE ".$config["table_prefix"]."links AS links, (SELEC
 
 // LOG
 $table_log_r4_2 = "CREATE TABLE ".$config["table_prefix"]."log (".
-				"id int(10) UNSIGNED NOT NULL auto_increment,".
-				"time timestamp NOT NULL,".
-				"level int(1) NOT NULL,".
-				"user varchar(100) NOT NULL,".
-				"ip varchar(15) NOT NULL,".
-				"message text NOT NULL,".
+				"id INT(10) UNSIGNED NOT NULL auto_increment,".
+				"time TIMESTAMP NOT NULL,".
+				"level TINYINT(1) NOT NULL,".
+				"user VARCHAR(100) NOT NULL,".
+				"ip VARCHAR(15) NOT NULL,".
+				"message TEXT NOT NULL,".
 				"PRIMARY KEY (id),".
 				"KEY idx_level (level),".
 				"KEY idx_user (user),".
 				"KEY idx_ip (ip),".
 				"KEY idx_time (time)".
-			") ENGINE=MyISAM";
+			") TYPE=MyISAM";
 
 // PAGES
 $alter_pages_r0_1 = "ALTER TABLE ".$config["table_prefix"]."pages ADD body_r TEXT NOT NULL DEFAULT '' AFTER body";
@@ -142,7 +142,7 @@ $update_revisions_r4_2 = "UPDATE ".$config["table_prefix"]."revisions AS revisio
 $update_revisions_r4_2_1 = "UPDATE ".$config["table_prefix"]."revisions AS revisions, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET revisions.user_id = users.id WHERE revisions.user = users.name";
 
 // UPLOAD
-$alter_upload_r4_2 = "ALTER TABLE ".$config["table_prefix"]."upload CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, 
+$alter_upload_r4_2 = "ALTER TABLE ".$config["table_prefix"]."upload CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 																	CHANGE page_id page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
 																	CHANGE filesize filesize INT(10) UNSIGNED NOT NULL DEFAULT '0',
 																	CHANGE picture_w picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0',
