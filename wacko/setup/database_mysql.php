@@ -161,18 +161,18 @@ $table_cache = "CREATE TABLE ".$config["table_prefix"]."cache (".
 				") TYPE=MyISAM";
 
 $table_log = "CREATE TABLE ".$config["table_prefix"]."log (".
-				"id int(10) UNSIGNED NOT NULL auto_increment,".
-				"time timestamp NOT NULL,".
-				"level int(1) NOT NULL,".
-				"user varchar(100) NOT NULL,".
-				"ip varchar(15) NOT NULL,".
-				"message text NOT NULL,".
+				"id INT(10) UNSIGNED NOT NULL auto_increment,".
+				"time TIMESTAMP NOT NULL,".
+				"level TINYINT(1) NOT NULL,".
+				"user VARCHAR(100) NOT NULL,".
+				"ip VARCHAR(15) NOT NULL,".
+				"message TEXT NOT NULL,".
 				"PRIMARY KEY (id),".
 				"KEY idx_level (level),".
 				"KEY idx_user (user),".
 				"KEY idx_ip (ip),".
 				"KEY idx_time (time)".
-			") ENGINE=MyISAM";
+			") TYPE=MyISAM";
 
 /*
  Wacko Wiki MySQL Table Deletion Script
