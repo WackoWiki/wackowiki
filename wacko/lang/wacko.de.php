@@ -31,8 +31,8 @@ $wackoTranslation = array(
 	"ActionDenied" => "Diese Aktion ist hier nicht erlaubt.",
 	"TOCTitle" => "Inhalt ",
 	"OuterLink2" => "externer Verweis\n(in neuem Fenster)",
-	"FileLink" => "", 
-	"PDFLink" => "PDF Dokument (in neuem Fenster)", 
+	"FileLink" => "",
+	"PDFLink" => "PDF Dokument (in neuem Fenster)",
 	"RDFLink" => "RDF Dokument",
 	"MailLink" => "Schreibe E-Mail\n(E-Mailprogramm wird gestartet)",
 	"ShowTip" => "Klicke um in den Ansichtsmodus zurückzukehren",
@@ -393,7 +393,7 @@ $wackoTranslation = array(
 	"MassNeedRedirect" => "Weiterleitung von den alten zu den neuen Seiten einrichten.",
 
 	"Next" => "weiter",
-	"Prev" => "zurück", 
+	"Prev" => "zurück",
 
 	"default_bookmarks" => 	"((SeitenIndex Index))\n".
 							"((LetzteAenderungen Änderungen))\n".
@@ -407,14 +407,14 @@ $wackoTranslation = array(
 	"outericon" => '<img src="{theme}icons/web.gif" alt="externer Link" />',
 	"fileicon" => '<img src="{theme}icons/file.gif" alt="Datei" />',
 	"pdficon"  => '<img src="{theme}icons/pdf.gif" alt="PDF" />',
-	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF" />',  
+	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF" />',
 	"mailicon" => '<img src="{theme}icons/mail.gif" alt="E-Mail" />',
 	"lockicon" => '<img src="{theme}icons/lock.gif" alt="Zugriff verweigert" />',
 	"keyicon" => '<img src="{theme}icons/key.gif" alt="Zugriff eingeschränkt" />',
 	"wantedicon" => '?',
 
 	// My Groups
-	"UserGroups" => "Nutzergruppen", 
+	"UserGroups" => "Nutzergruppen",
 	"MyGroups" => "Gruppenzugehörigkeiten",
 	"Group" => "Gruppe",
 	"Groups" => "Gruppen",
@@ -425,6 +425,7 @@ $wackoTranslation = array(
 
 	// Feed
 	"FeedTitle" => "Feed Titel",
+	"FeedMulti" => "Multi-Feed",
 	"FeedNoURL" => "Bitte gib einen Feed mit dem Parameter url an. (z.B. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
 	"FeedError" => "Kann Feed nicht laden oder parsen",
 	"FeedSource" => "Quelle:",

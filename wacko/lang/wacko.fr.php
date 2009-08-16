@@ -32,8 +32,8 @@ $wackoTranslation = array(
 	"TOCTitle" => "Contenu ",
 	"SearchButtonText" => "Rechercher",
 	"OuterLink2" => "Lien externe (dans une nouvelle fenêtre)",
-	"FileLink" => "", 
-	"PDFLink" => "Document PDF (dans une nouvelle fenêtre)", 
+	"FileLink" => "",
+	"PDFLink" => "Document PDF (dans une nouvelle fenêtre)",
 	"RDFLink" => "Document RDF",
 	"MailLink" => "&Eacute;crire un courriel (lancement du programme de courriel)",
 	"ShowTip" => "Cliquez pour revenir au mode vue",
@@ -400,7 +400,7 @@ $wackoTranslation = array(
 	"outericon" => '<img src="{theme}icons/web.gif" alt="Document externe" />',
 	"fileicon" => '<img src="{theme}icons/file.gif" alt="Fichier" />',
 	"pdficon"  => '<img src="{theme}icons/pdf.gif" alt="Document PDF" />',
-	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="Document RDF" />',  
+	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="Document RDF" />',
 	"mailicon" => '<img src="{theme}icons/mail.gif" alt="courriel" />',
 	"lockicon" => '<img src="{theme}icons/lock.gif" alt="Accès refusé" />',
 	"keyicon" => '<img src="{theme}icons/key.gif" alt="Page à accès personnalisé" />',
@@ -418,6 +418,7 @@ $wackoTranslation = array(
 
 	// Feed
 	"FeedTitle" => "Titre du flux",
+	"FeedMulti" => "Multi-Feed",
 	"FeedNoURL" => "Merci de spécifier un flux avec l&rsquo;url en paramètre (i.e. {{flux url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
 	"FeedError" => "Impossible de charger ou d&rsquo;analyser le flux",
 	"FeedSource" => "Source:",

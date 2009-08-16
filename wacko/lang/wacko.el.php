@@ -33,8 +33,8 @@ $wackoTranslation = array(
 	"TOCTitle" => "Περιεχόμενα ",
 	"SearchButtonText" => "Αναζήτηση",
 	"OuterLink2" => "Εξωτερικός σύνδεσμος (σε νέο παράθυρο)",
-	"FileLink" => "", 
-	"PDFLink" => "Έγγραφο PDF (σε νέο παράθυρο)", 
+	"FileLink" => "",
+	"PDFLink" => "Έγγραφο PDF (σε νέο παράθυρο)",
 	"RDFLink" => "Έγγραφο RDF",
 	"MailLink" => "Συγγραφή ενός email (εκκίνηση mail εφαρμογής)",
 	"ShowTip" => "Πάτησε εδώ για να επιστρέψεις στην κατάσταση εμφάνισης",
@@ -128,7 +128,7 @@ $wackoTranslation = array(
 	"Comparison" => "Σύγκριση για %3 από τις %1 και %2",
 	"SimpleDiffAdditions" => "<b>Προσθήκες:</b>",
 	"SimpleDiffDeletions" => "<b>Διαγραφές:</b>",
-	"NoDifferences" => "Καμία διαφορά.",  
+	"NoDifferences" => "Καμία διαφορά.",
 	"History" => "Ιστορικό",
 	"ReEditOldRevision" => "Επανα-επεξεργασία της παλαιότερης έκδοσης",
 	"ExternalPages" => "Εξωτερικές σελίδες που συνδέουν την %1 (%2) (<a href=\"%3\" >δες μία λίστα των domains</a>):",
@@ -419,6 +419,7 @@ $wackoTranslation = array(
 
 	// Feed
 	"FeedTitle" => "Feed Title",
+	"FeedMulti" => "Multi-Feed",
 	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
 	"FeedError" => "Could not load or parse feed",
 	"FeedSource" => "Source:",

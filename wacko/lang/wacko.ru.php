@@ -418,6 +418,7 @@ $wackoTranslation = array(
 
 	// Feed
 	"FeedTitle" => "Заголовок канала новостей",
+	"FeedMulti" => "Multi-Feed",
 	"FeedNoURL" => "Пожалуйста, укажите канал новостей с параметром url, например, {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
 	"FeedError" => "Невозможно загрузить или распознать новости",
 	"FeedSource" => "Source:",

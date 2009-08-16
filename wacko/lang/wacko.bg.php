@@ -418,6 +418,7 @@ $wackoTranslation = array(
 
 	// Feed
 	"FeedTitle" => "Feed Title",
+	"FeedMulti" => "Multi-Feed",
 	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
 	"FeedError" => "Could not load or parse feed",
 	"FeedSource" => "Source:",

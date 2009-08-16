@@ -33,8 +33,8 @@ $wackoTranslation = array(
 	"TOCTitle" => "Contenido ",
 	"SearchButtonText" => "Buscar",
 	"OuterLink2" => "Vínculo externo (en nueva ventana)",
-	"FileLink" => "", 
-	"PDFLink" => "PDF Document (en nueva ventana)", 
+	"FileLink" => "",
+	"PDFLink" => "PDF Document (en nueva ventana)",
 	"RDFLink" => "RDF Document",
 	"MailLink" => "Escribe un email (programa de mail)",
 	"ShowTip" => "Pulsa para volver al modo de lectura",
@@ -408,7 +408,7 @@ $wackoTranslation = array(
 	"wantedicon" => '?',
 
 	// My Groups
-	"UserGroups" => "Grupos de usuarios", 
+	"UserGroups" => "Grupos de usuarios",
 	"MyGroups" => "Asociación a Grupos",
 	"Group" => "group",
 	"Groups" => "groups",
@@ -419,6 +419,7 @@ $wackoTranslation = array(
 
 	// Feed
 	"FeedTitle" => "Feed Title",
+	"FeedMulti" => "Multi-Feed",
 	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
 	"FeedError" => "Could not load or parse feed",
 	"FeedSource" => "Source:",

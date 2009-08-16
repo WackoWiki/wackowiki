@@ -33,8 +33,8 @@ $wackoTranslation = array(
 	"TOCTitle" => "Conteúdos ",
 	"SearchButtonText" => "Pesquisa",
 	"OuterLink2" => "Outgoing link\n(in new window)",
-	"FileLink" => "", 
-	"PDFLink" => "PDF Document\n(in new window)", 
+	"FileLink" => "",
+	"PDFLink" => "PDF Document\n(in new window)",
 	"RDFLink" => "RDF Document",
 	"MailLink" => "Escrever um Email\n(mail client launch)",
 	"ShowTip" => "Clique para voltar ao modo ver",
@@ -198,7 +198,7 @@ $wackoTranslation = array(
 	"To" => "to",
 	"By" => "by",
 	"From" => "from",
-	"ReturnToCommented" => "Return to commented page", 
+	"ReturnToCommented" => "Return to commented page",
 
 	"PagesLinkingTo" => "Páginas ligando a ",
 	"NoPageLinkingTo" => "Nenhuma página ligando a ",
@@ -402,7 +402,7 @@ $wackoTranslation = array(
 	"outericon" => '<img src="{theme}icons/web.gif" alt="" />',
 	"fileicon" => '<img src="{theme}icons/file.gif" alt="" />',
 	"pdficon"  => '<img src="{theme}icons/pdf.gif" alt="PDF Document" />',
-	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',  
+	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',
 	"mailicon" => '<img src="{theme}icons/mail.gif" alt="" />',
 	"lockicon" => '<img src="{theme}icons/lock.gif" alt="Access denied" />',
 	"keyicon" => '<img src="{theme}icons/key.gif" alt="Page with custom access" />',
@@ -420,6 +420,7 @@ $wackoTranslation = array(
 
 	// Feed
 	"FeedTitle" => "Feed Title",
+	"FeedMulti" => "Multi-Feed",
 	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
 	"FeedError" => "Could not load or parse feed",
 	"FeedSource" => "Source:",
