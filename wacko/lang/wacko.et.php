@@ -33,8 +33,8 @@ $wackoTranslation = array(
 	"TOCTitle" => "Sisukord ",
 	"SearchButtonText" => "Otsi",
 	"OuterLink2" => "Väline viide (avaneb uues aknas)",
-	"FileLink" => "", 
-	"PDFLink" => "PDF Document (avaneb uues aknas)", 
+	"FileLink" => "",
+	"PDFLink" => "PDF Document (avaneb uues aknas)",
 	"RDFLink" => "RDF Document",
 	"MailLink" => "Koosta e-kiri (mailiprogramm avaneb)",
 	"ShowTip" => "Kliki, et minna tagasi vaatereþiimi",
@@ -238,7 +238,7 @@ $wackoTranslation = array(
 	"RemoveButton" => "Jah, kustuta!",
 	"CommentForWatchedPage" => "Uus kommentaar jälgitud lehel",
 	"SomeoneCommented" => " kommenteeris seda lehte, mida sa praegu vaatad: ",
-	"AlertReferringPages" => "Sellele lehele viidavad järgmised lehed", 
+	"AlertReferringPages" => "Sellele lehele viidavad järgmised lehed",
 	"UnknownAction" => "Unknown action",
 
 	"EditIcon" => "(redigeeri)",
@@ -402,7 +402,7 @@ $wackoTranslation = array(
 	"outericon" => '<img src="{theme}icons/web.gif" alt="" />',
 	"fileicon" => '<img src="{theme}icons/file.gif" alt="" />',
 	"pdficon"  => '<img src="{theme}icons/pdf.gif" alt="PDF Document" />',
-	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',  
+	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',
 	"mailicon" => '<img src="{theme}icons/mail.gif" alt="" />',
 	"lockicon" => '<img src="{theme}icons/lock.gif" alt="Access denied" />',
 	"keyicon" => '<img src="{theme}icons/key.gif" alt="Page with custom access" />',
@@ -420,6 +420,7 @@ $wackoTranslation = array(
 
 	// Feed
 	"FeedTitle" => "Feed Title",
+	"FeedMulti" => "Multi-Feed",
 	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
 	"FeedError" => "Could not load or parse feed",
 	"FeedSource" => "Source:",

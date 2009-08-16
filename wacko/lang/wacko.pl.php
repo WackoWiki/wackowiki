@@ -33,8 +33,8 @@ $wackoTranslation = array(
 	"TOCTitle" => "Spis tre¶ci dokumentu: ",
 	"SearchButtonText" => "Znajd¼",
 	"OuterLink2" => "Odno¶nik do zewnêtrznej witryny",
-	"FileLink" => "", 
-	"PDFLink" => "PDF Document", 
+	"FileLink" => "",
+	"PDFLink" => "PDF Document",
 	"RDFLink" => "RDF Document",
 	"MailLink" => "Wy¶lij wiadomo¶æ",
 	"ShowTip" => "Powróæ do trybu podgl±du",
@@ -196,7 +196,7 @@ $wackoTranslation = array(
 	"ThisIsCommentOn" => "This is a comment on",
 	"At" => "at",
 	"To" => "to",
-	"By" => "by",  
+	"By" => "by",
 	"From" => "from",
 	"ReturnToCommented" => "Return to commented page",
 
@@ -401,7 +401,7 @@ $wackoTranslation = array(
 	"outericon" => '<img src="{theme}icons/web.gif" alt="" />',
 	"fileicon" => '<img src="{theme}icons/file.gif" alt="" />',
 	"pdficon"  => '<img src="{theme}icons/pdf.gif" alt="PDF Document" />',
-	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',  
+	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',
 	"mailicon" => '<img src="{theme}icons/mail.gif" alt="" />',
 	"lockicon" => '<img src="{theme}icons/lock.gif" alt="Dostêp zabroniony" />',
 	"keyicon" => '<img src="{theme}icons/key.gif" alt="Strona z niestandardowym dostêpem" />',
@@ -419,6 +419,7 @@ $wackoTranslation = array(
 
 	// Feed
 	"FeedTitle" => "Feed Title",
+	"FeedMulti" => "Multi-Feed",
 	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
 	"FeedError" => "Could not load or parse feed",
 	"FeedSource" => "Source:",

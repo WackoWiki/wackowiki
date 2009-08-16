@@ -33,8 +33,8 @@ $wackoTranslation = array(
 	"TOCTitle" => "Indhold ",
 	"SearchButtonText" => "Søg",
 	"OuterLink2" => "Udgående link (i nyt vindue)",
-	"FileLink" => "", 
-	"PDFLink" => "PDF Document (i nyt vindue)", 
+	"FileLink" => "",
+	"PDFLink" => "PDF Document (i nyt vindue)",
 	"RDFLink" => "RDF Document",
 	"MailLink" => "Skriv en email (mailprogram opstartes)",
 	"ShowTip" => "Klik for at vende tilbage til visning",
@@ -401,7 +401,7 @@ $wackoTranslation = array(
 	"outericon" => '<img src="{theme}icons/web.gif" alt="" border="0" />',
 	"fileicon" => '<img src="{theme}icons/file.gif" alt="" border="0" />',
 	"pdficon"  => '<img src="{theme}icons/pdf.gif" alt="PDF Document" />',
-	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',  
+	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',
 	"mailicon" => '<img src="{theme}icons/mail.gif" alt="" />',
 	"lockicon" => '<img src="{theme}icons/lock.gif" alt="Access denied" />',
 	"keyicon" => '<img src="{theme}icons/key.gif" alt="Page with custom access" />',
@@ -419,6 +419,7 @@ $wackoTranslation = array(
 
 	// Feed
 	"FeedTitle" => "Feed Title",
+	"FeedMulti" => "Multi-Feed",
 	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
 	"FeedError" => "Could not load or parse feed",
 	"FeedSource" => "Source:",
