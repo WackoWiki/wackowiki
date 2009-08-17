@@ -564,8 +564,8 @@ white-space: nowrap;
 #login li a:active  {
 	color: #FF0000;
 }
-/* temp */
 
+/* temp */
 
 .topnav {float:right;
 font-size:0.6875em;
@@ -582,7 +582,7 @@ display:inline;
 margin-right:1.1em;
 }
 
-/*temp search*/
+/*search*/
 
 .highlight{
         background-color: #FFFEA1;
