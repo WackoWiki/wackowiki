@@ -2,7 +2,7 @@
 $lang = array(
 
 /*
-   Language 
+   Language
 */
 "Charset" => "iso-8859-1",
 "LangISO" => "es",
@@ -56,7 +56,7 @@ $lang = array(
 "MultiLang" => "Modo Multi Idioma",
 "MultiLangDesc" => "Modo Multi-idioma permite con una sola instalación mantener páginas con diferentes preferencias de idioma. Al habilitar este modo, el instalador creará las páginas iniciales en todos los idiomas disponibles en la instalación.",
 "Admin" => "Nombre de Administrador",
-"AdminDesc" => "Ingrese el nombre de usuario del administrador, esto debería escrito de manera <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">NombreWiki</a>.",
+"AdminDesc" => "Ingrese el nombre de usuario del administrador, esto debería escrito de manera <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">NombreWiki</a> (e.g. WikiAdmin).",
 "Password" => "Contraseña del Administrador",
 "PasswordDesc" => "Elija una contraseña del administrador con un mínimo de 5 caracteres.",
 "Password2" => "Repita la Contraseña:",
@@ -90,7 +90,7 @@ $lang = array(
 "DBUser" => "Nombre de usuario",
 "DBPasswordDesc" => "Contraseña del usuario para la conexión con la base de datos.",
 "DBPassword" => "Contraseña",
-"PrefixDesc" => "Prefijo de todas las tablas de WackoWiki. Esto le permite realizar multiples instalaciones de WackoWiki usando una sola base de datos, pero con distintos prefijos de las tablas.",
+"PrefixDesc" => "Prefijo de todas las tablas de WackoWiki. Esto le permite realizar multiples instalaciones de WackoWiki usando una sola base de datos, pero con distintos prefijos de las tablas (e.g. wacko_).",
 "Prefix" => "Prefijo de las tablas",
 "ErrorNoDbDriverDetected" => "No se detectó un controlador de base de datos, por favor habilite la extensión mysql, mysqli o pdo en php.ini.",
 "ErrorNoDbDriverSelected" => "Ningun controlador de base de datos seleccionado, por favor elija uno de la lista.",
