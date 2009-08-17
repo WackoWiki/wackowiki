@@ -27,7 +27,7 @@
 				</ul>
 				<?php } ?>
 			</div> <!-- /pageinfo -->
-			
+
 			<div class="pagetools">
 				<h2><dfn><?php echo $this->GetTranslation("SiteTools") ; ?></dfn></h2>
 				<ul>
@@ -41,12 +41,12 @@
 					<?php /* Print icon */ echo '<li id="page_print"><a href="'.$this->href("print").'" title="'.$this->GetTranslation("PrintVersion").'"><span class="backendbutton"></span><img class="contexticon" src="'.$this->GetConfigValue("theme_url").'icons/printer.png" alt="" />'.$this->GetTranslation("PrintVersion").'</a></li>'."\n"; ?>
 				</ul>
 			</div> <!-- /pagetools -->
-			
+
 		</div> <!-- /sitesuffix -->
 		<?php } ?>
 
 		</div> <!-- /content -->
-		
+
 		<?php
 		if ($this->GetUser())
 		{
@@ -68,15 +68,15 @@
 		<hr class="onlyAural"/>
 
         <div class="footer">
-            <p><?php 
+            <p><?php
 if ($this->GetUser()){
 	echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion());
 	echo " &amp; <a href=\"http://eye48.com/go/miniwackolicious\">MiniWackoLicious Theme</a> | ";
 
-	/*show user name and preferences*/ 
+	/*show user name and preferences*/
 	echo $this->GetTranslation("YouAre")." <span id=\"user_page\">".$this->ComposeLinkToPage($this->GetUserName(), "", "<span class=\"backendbutton\"></span>".$this->AddSpaces($this->GetUserName()), 0, $this->AddSpaces($this->GetUserName()))."</span> | <span id=\"user_preferences\">".$this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"),'',"<span class=\"backendbutton\"></span>".$this->AddSpaces($this->GetTranslation("YouArePanelLink")), 0, $this->AddSpaces($this->GetTranslation("YouArePanelLink")))."</span> | ";
 } ?>
-              <span id="system_logout"><?php /* login/logout */ echo ($this->GetUser()) ? '<a href="'.$this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;").'action=logout&amp;goback='.$this->SlimUrl($this->tag).'"><span class="backendbutton" title="'.$this->GetTranslation("LogoutLink").'"></span>'.$this->GetTranslation("LogoutLink").'</a>':'<a href="'.$this->Href("",$this->GetTranslation("LoginPage")).'">'.$this->GetTranslation("LoginPage").'</a>'; ?></span>
+              <span id="system_logout"><?php /* login/logout */ echo ($this->GetUser()) ? '<a href="'.$this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;").'action=logout&amp;goback='.$this->SlimUrl($this->tag).'"><span class="backendbutton" title="'.$this->GetTranslation("LogoutLink").'"></span>'.$this->GetTranslation("LogoutLink").'</a>' : $this->ComposeLinkToPage($this->GetTranslation("LoginPage").($this->config["rewrite_mode"] ? "?" : "&amp;")."goback=".$this->SlimUrl($this->tag), "", $this->GetTranslation("LoginPage"), 0); ?></span>
             </p>
         </div> <!-- /footer -->
 
