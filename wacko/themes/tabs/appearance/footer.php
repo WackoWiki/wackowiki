@@ -3,29 +3,43 @@
 // tabbed theme output routine
 function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 {
-	$this->wacko = & $wacko;
+/*
+To avoid creation of new classes we remember that we've created
+$this->engine = &new Wacko($this->config, $this->dblink); -- at line 571 of init.php
+"$this" - was for class Init and its context
+for other functions declared outside class Init the class Wacko comes as var $engine
+so we can try to ue it (say try because tested only in PHP 5.2.4).
+
+Elar9000 (2009.08.16)
+*/
+	global $engine;
 
 	$xsize = $selected?7:8;
 	$ysize = $selected?25:30;
 	if ($text == "") return; // no tab;
 	if ($selected) $text = "<a href=\"$link\" title=\"$hint\">".$text."</a>";
-	if (!$selected) echo "<div class='TabSelected$bonus' style='background-image:url(".$this->wacko->GetConfigValue("theme_url")."icons/tabbg.gif);' >";
-	else echo "<div class='Tab$bonus' style='background-image:url(".$this->wacko->GetConfigValue("theme_url")."icons/tabbg".($bonus=="2a"?"del":"1").".gif);'>";
+	if (!$selected) echo "<div class='TabSelected$bonus' style='background-image:url(".$engine->GetConfigValue("theme_url")."icons/tabbg.gif);' >";
+	else echo "<div class='Tab$bonus' style='background-image:url(".$engine->GetConfigValue("theme_url")."icons/tabbg".($bonus=="2a"?"del":"1").".gif);'>";
 	$bonus2 = $bonus=="2a"?"del":"";
 
 	echo '<table cellspacing="0" cellpadding="0" border="0" ><tr>';
 	echo "<td><img src='".
-	$this->wacko->GetConfigValue("theme_url").
+	$engine->GetConfigValue("theme_url").
 		"icons/tabr$selected".$bonus2.".gif' width='$xsize' align='top' hspace='0' vspace='0' height='$ysize' alt='' border='0' /></td>";
 	if (!$selected) echo "<td>"; else echo "<td valign='top'>";
 	echo "<div class='TabText'>".$text."</div>";
 	echo "</td>";
 	echo "<td><img src='".
-	$this->wacko->GetConfigValue("theme_url").
+	$engine->GetConfigValue("theme_url").
 		"icons/tabl$selected".$bonus2.".gif' width='$xsize' align='top' hspace='0' vspace='0' height='$ysize' alt='' border='0' /></td>";
 	echo '</tr></table>';
 	echo "</div>";
 }
+/*
+Coming out of the function we can continue using "$this->" because we return to the main object context.
+
+Elar9000 (2009.08.16)
+*/
 
 ?>
 <div class="Footer"><img
@@ -47,7 +61,7 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 	{
 		if($this->HasAccess("write") && $this->GetUser() || $this->IsAdmin())
 		{
-			$EchoTab( $this->href("settings"),  $this->GetTranslation("SettingsTip"),
+			EchoTab( $this->href("settings"),  $this->GetTranslation("SettingsTip"),
 			$this->GetTranslation("EditSettingsText"),
 			$this->method != "settings"
 			);
@@ -100,8 +114,9 @@ if ($this->page)
 <!-- !! -->
 <?php
 if ($this->method == "show") {
-	?>
-	<?php
+
+
+// files code starts
 	if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1 && ($this->GetConfigValue("hide_files") != 2 || $this->GetUser()))
 	{
 		// store files display in session
@@ -109,7 +124,7 @@ if ($this->method == "show") {
 		if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag]))
 		$_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
 
-		switch($_POST["show_files"])
+		switch($_GET["show_files"])
 		{
 			case "0":
 				$_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = 0;
@@ -181,9 +196,8 @@ if ($this->method == "show") {
     <?php
   }
 }
-?>
-
-<?php
+// end files
+// comments code starts
 if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && ($this->GetConfigValue("hide_comments") != 2 || $this->GetUser()))
 {
   // load comments for this page
@@ -194,7 +208,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
   if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag]))
     $_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
 
-  switch($_POST["show_comments"])
+  switch($_GET["show_comments"])
   {
   case "0":
     $_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = 0;
@@ -235,11 +249,11 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     }
 
     // display comment form
-    print("<div class=\"commentform\">\n");
     if ($this->HasAccess("comment"))
     {
-      ?>
-        <?php echo $this->GetTranslation("AttachComment"); ?><br />
+		print("<div class=\"commentform\">\n");
+
+      	echo $this->GetTranslation("AttachComment"); ?><br />
         <?php echo $this->FormOpen("addcomment"); ?>
           <textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
 <?php
@@ -269,8 +283,9 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
 <input type="submit" value="<?php echo $this->GetTranslation("AttachCommentButton"); ?>" accesskey="s" />
 <?php echo $this->FormClose(); ?>
 <?php
+		print("</div>\n");
     }
-    print("</div>\n");
+	// end comment form
   }
   else
   {
@@ -295,9 +310,9 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     <?php
   }
 }
-?>
+// comments end
 
-<?php } //end of $this->method==show
+} //end of $this->method==show
 ?>
 <!-- !!! -->
 
