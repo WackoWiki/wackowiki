@@ -22,6 +22,7 @@
 // TODO:
 //   * pagination
 //   * local image cache
+//   * feed_acl
 
 // Include SimplePie
 require_once("lib/SimplePie/simplepie.inc");
@@ -221,7 +222,7 @@ if (!$nomark)
 			echo "<".$headertag.">".$this->Link($href, "", $title, 1, 1)."</".$headertag.">";
 
 			if (($time == "yes")&&($date != 0))
-				echo " (".intervalCalc($date).")";
+				echo "<p class=\"note\"> (".intervalCalc($date).")</p>";
 
 			echo "<p class=\"feed-content\">".$item->get_content()."</p>";
 
