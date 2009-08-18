@@ -228,15 +228,16 @@ body.js div.bookmarks h1 { position:absolute; left:-5000em; }
 
 #backend #system_bookmarks { left:5px; background:url(./../icons/star.png); }
 
-#backend #page_diff span.backendbutton { right:400px; background:url(./../icons/page_diff.png); }
-#backend #page_link span.backendbutton { right:380px; background:url(./../icons/page_link.png); }
-#backend #page_attach span.backendbutton { right:360px; background:url(./../icons/page_attach.png); }
+#backend #page_diff span.backendbutton { right:420px; background:url(./../icons/page_diff.png); }
+#backend #page_link span.backendbutton { right:400px; background:url(./../icons/page_link.png); }
+#backend #page_attach span.backendbutton { right:380px; background:url(./../icons/page_attach.png); }
 
-#backend #page_edit span.backendbutton { right:310px; background:url(./../icons/page_edit.png); }
-#backend #page_rename span.backendbutton { right:290px; background:url(./../icons/page_copy.png); }
-#backend #page_settings span.backendbutton { right:270px; background:url(./../icons/page_gear.png); }
-#backend #page_acls span.backendbutton { right:250px; background:url(./../icons/page_key.png); }
+#backend #page_edit span.backendbutton { right:330px; background:url(./../icons/page_edit.png); }
+#backend #page_rename span.backendbutton { right:310px; background:url(./../icons/page_copy.png); }
+#backend #page_settings span.backendbutton { right:290px; background:url(./../icons/page_gear.png); }
+#backend #page_acls span.backendbutton { right:270px; background:url(./../icons/page_key.png); }
 
+#backend #page_new span.backendbutton { right:220px; background:url(./../icons/page_new.png); }
 #backend #page_remove span.backendbutton { right:200px; background:url(./../icons/page_delete.png); }
 
 #backend #page_bookmarkon span.backendbutton { right:150px; background:url(./../icons/link_add.png); }
