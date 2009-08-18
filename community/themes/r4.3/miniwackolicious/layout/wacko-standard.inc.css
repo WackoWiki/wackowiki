@@ -50,8 +50,26 @@ div.debug {
 }
 .debug, .debug li { font-size: 11px; color: #888888;}
 
-.add, additions { text-decoration: none; color:#363; border-bottom:dotted 1px #0f0; }
-.del, .deletions { text-decoration: line-through; color:#633; border-bottom:dotted 1px #f00; }
+/* Displays text: "Comparison for..." */
+.diffinfo { font-weight: bold; color: #555555; }
+
+/* Simple differences */
+.additions { text-decoration: none; color:#363; border-bottom:dotted 1px #0f0; }
+.deletions { text-decoration: line-through; color:#633; border-bottom:dotted 1px #f00; }
+
+/* Default differences */
+ins.diff {
+	font-weight: bold;
+	color:#008800;
+	text-decoration: underline;
+	background-color: #efe;
+}
+del.diff {
+	font-style: italic;
+	color:#c00;
+	text-decoration: line-through;
+	background-color: #fee;
+}
 
 .nobr {white-space: nowrap}
 
