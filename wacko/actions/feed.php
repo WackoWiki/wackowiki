@@ -20,10 +20,8 @@
 
 */
 // TODO:
-//   * localize interval message  (fix $this->) 
 //   * pagination
 //   * local image cache
-//   * feed_acl
 
 // Include SimplePie
 require_once("lib/SimplePie/simplepie.inc");
@@ -33,43 +31,7 @@ if (!function_exists('intervalCalc'))
 {
 	function intervalCalc($postedtime)
 	{
-	/* 
-		$now = time();
-		$interval_secs = $now  - $postedtime;
-
-		if ($interval_secs > 2592000)
-		{
-			$interval = (($interval_secs - ($interval_secs%2592000))/2592000);
-			if ($interval == 1) $interval.= $this->GetTranslation("FeedMonthAgo");
-			else $interval.= $this->GetTranslation("FeedMonthsAgo");
-		}
-		elseif ($interval_secs > 604800)
-		{
-			$interval = (($interval_secs - ($interval_secs%604800))/604800);
-			if ($interval == 1) $interval.= $this->GetTranslation("FeedWeekAgo");
-			else $interval.= $this->GetTranslation("FeedWeeksAgo");
-		}
-		elseif ($interval_secs > 86400)
-		{
-			$interval = (($interval_secs - ($interval_secs%86400))/86400);
-			if ($interval == 1) $interval.= $this->GetTranslation("FeedDayAgo");
-			else $interval.= $this->GetTranslation("FeedDaysAgo");
-		}
-		elseif ($interval_secs > 3600)
-		{
-			$interval = (($interval_secs - ($interval_secs%3600))/3600);
-			if ($interval == 1) $interval.= $this->GetTranslation("FeedHourAgo");
-			else $interval.= $this->GetTranslation("FeedHoursAgo");
-		}
-		elseif ($interval_secs > 60)
-		{
-			$interval = (($interval_secs - ($interval_secs%60))/60);
-			if ($interval == 1) $interval.= $this->GetTranslation("FeedMinuteAgo");
-			else $interval.= $this->GetTranslation("FeedMinutesAgo");
-		}
-		return  $interval;
-
-*/
+	global $engine;
 
 		$now = time();
 		$interval_secs = $now  - $postedtime;
@@ -77,32 +39,32 @@ if (!function_exists('intervalCalc'))
 		if ($interval_secs > 2592000)
 		{
 			$interval = (($interval_secs - ($interval_secs%2592000))/2592000);
-			if ($interval == 1) $interval.= " month ago";
-			else $interval.= " months ago";
+			if ($interval == 1) $interval.= $engine->GetTranslation("FeedMonthAgo");
+			else $interval.= $engine->GetTranslation("FeedMonthsAgo");
 		}
 		elseif ($interval_secs > 604800)
 		{
 			$interval = (($interval_secs - ($interval_secs%604800))/604800);
-			if ($interval == 1) $interval.= " week ago";
-			else $interval.= " weeks ago";
+			if ($interval == 1) $interval.= $engine->GetTranslation("FeedWeekAgo");
+			else $interval.= $engine->GetTranslation("FeedWeeksAgo");
 		}
 		elseif ($interval_secs > 86400)
 		{
 			$interval = (($interval_secs - ($interval_secs%86400))/86400);
-			if ($interval == 1) $interval.= " day ago";
-			else $interval.= " days ago";
+			if ($interval == 1) $interval.= $engine->GetTranslation("FeedDayAgo");
+			else $interval.= $engine->GetTranslation("FeedDaysAgo");
 		}
 		elseif ($interval_secs > 3600)
 		{
 			$interval = (($interval_secs - ($interval_secs%3600))/3600);
-			if ($interval == 1) $interval.= " hour ago";
-			else $interval.= " hours ago";
+			if ($interval == 1) $interval.= $engine->GetTranslation("FeedHourAgo");
+			else $interval.= $engine->GetTranslation("FeedHoursAgo");
 		}
 		elseif ($interval_secs > 60)
 		{
 			$interval = (($interval_secs - ($interval_secs%60))/60);
-			if ($interval == 1) $interval.= " minute ago";
-			else $interval.= " minutes ago";
+			if ($interval == 1) $interval.= $engine->GetTranslation("FeedMinuteAgo");
+			else $interval.= $engine->GetTranslation("FeedMinutesAgo");
 		}
 		return  $interval;
 
@@ -259,7 +221,7 @@ if (!$nomark)
 			echo "<".$headertag.">".$this->Link($href, "", $title, 1, 1)."</".$headertag.">";
 
 			if (($time == "yes")&&($date != 0))
-				echo "<p class=\"note\"> (".intervalCalc($date).")</p>";
+				echo " (".intervalCalc($date).")";
 
 			echo "<p class=\"feed-content\">".$item->get_content()."</p>";
 
