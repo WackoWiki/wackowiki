@@ -267,6 +267,7 @@ $wackoTranslation = array(
 
 	"CreatePage" => "Crea questa pagina",
 	"CreateNewPage" => "Creare una nuova pagina",
+	"CreateNewPageTip" => "Click to create a new page.",
 	"CreateRandomPage" => "Creare una pagina casuale",
 	"CreatePageButton" => "Crea",
 	"CreateSubPage" => "Create a sub page in the cluster",
