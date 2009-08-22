@@ -3686,8 +3686,13 @@ class Wacko
 		if (!$tag) return false;
 
 		return $this->Query(
-			"DELETE FROM ".$this->config["table_prefix"]."referrers ".
-			"WHERE page_tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"DELETE ".
+				$this->config["table_prefix"]."referrers ".
+		 	"FROM ".
+				$this->config["table_prefix"]."referrers ".
+				"INNER JOIN ".$this->config["table_prefix"]."pages ON (".$this->config["table_prefix"]."referrers.page_id = ".$this->config["table_prefix"]."pages.id)".
+			"WHERE "
+				.$this->config["table_prefix"]."pages.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
 	function RemoveFiles($tag, $cluster = false)
