@@ -67,21 +67,21 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 				$this->RemoveWatches	($this->tag, true);
 				$this->RemoveComments	($this->tag, true, $dontkeep);
 				$this->RemoveFiles		($this->tag, true);
-				
+
 				// get list of pages in the cluster
 				if ($list = $this->LoadAll(
 				"SELECT tag ".
 				"FROM {$this->config['table_prefix']}pages ".
-				"WHERE tag LIKE '".quote($this->tag.'/%')."'"))
+				"WHERE tag LIKE '".quote($this->dblink, $this->tag.'/%')."'"))
 				{
 					// remove by one page at a time
 					foreach ($list as $row) $this->RemovePage($row["tag"], "", $dontkeep);
 					unset($list, $row);
 				}
-				
+
 				if ($_POST["revisions"] == 1 || $comment_on)
 					$this->RemoveRevisions($this->tag, true);
-				
+
 				echo "<em>".$this->GetTranslation("ClusterRemoved")."</em><br />\n";
 			}
 
