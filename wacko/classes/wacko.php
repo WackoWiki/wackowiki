@@ -91,7 +91,7 @@ class Wacko
 		{
 			$time = $this->GetMicroTime() - $start;
 			$this->queryTime += $time;
-			
+
 			if ($this->config['debug'] >= 3)
 			{
 				$this->queryLog[] = array(
@@ -204,6 +204,23 @@ class Wacko
 				$themelist = array_intersect ($ath, $themelist);
 		}
 		return $themelist;
+	}
+
+	function GetTimeStringFormatted($time)
+	{
+		return date($this->config["date_format"]." ".
+			$this->config["time_format_seconds"], strtotime($time));
+	}
+
+	function GetUnixTimeFormatted($time)
+	{
+		return date($this->config["date_format"]." ".
+			$this->config["time_format_seconds"], $time);
+	}
+
+	function GetPageTimeFormatted()
+	{
+		return $this->GetTimeStringFormatted($this->page["time"]);
 	}
 
 	// LANG FUNCTIONS
@@ -327,7 +344,7 @@ class Wacko
 			}
 		}
 		else if (!$lang) $this->userlang = $lang = $this->config["language"];
-		
+
 		return $lang;
 	}
 
@@ -921,7 +938,7 @@ class Wacko
 	function LoadRecentlyComment($limit = 100, $for="", $from="")
 	{
 		$limit = (int) $limit;
-		
+
 		if ($pages = $this->LoadAll(
 		"SELECT ".$this->pages_meta.", body_r FROM ".$this->config["table_prefix"]."pages ".
 		"WHERE comment_on != '' ".
@@ -950,7 +967,7 @@ class Wacko
 			"AND privilege = 'read' ".
 			"ORDER BY time DESC ".
 			"LIMIT ".$limit))
-						
+
 			for ($i = 0; $i < count($read_acls); $i++)
 			{
 				$this->CacheACL($read_acls[$i]["supertag"], "read", 1, $read_acls[$i]);
@@ -1105,7 +1122,7 @@ class Wacko
 					$body_r = $this->Format($body_r, "paragrafica");
 					$body_toc = $this->body_toc;
 				}
-				
+
             // Manage ACLs
 				if (strstr($this->context[$this->current_context], "/") && !$comment_on)
 				{
@@ -1165,7 +1182,7 @@ class Wacko
 						"minor_edit = '".quote($this->dblink, $minor_edit)."', ".
 						"lang = '".quote($this->dblink, $lang)."', ".
 						"tag = '".quote($this->dblink, $tag)."'");
-						
+
 				// saving acls
 				// $this->SaveAcl($tag, "write", ($comment_on ? "" : $write_acl));
 				$this->SaveAcl($tag, "write", $write_acl);
@@ -2002,7 +2019,7 @@ class Wacko
 					}
 					$res .= "<sup><strong>".$refnum."</strong></sup>";
 				}
-				
+
 				return $res;
 			}
 		}
@@ -2097,7 +2114,7 @@ class Wacko
 		// delete old link table
 		if ($from_tag == "")
 			$from_tag = $this->tag;
-		
+
 		$this->Query(
 			"DELETE FROM ".$this->config["table_prefix"]."links ".
 			"WHERE from_tag = '".quote($this->dblink, $from_tag)."'");
@@ -2328,8 +2345,8 @@ class Wacko
 		return $user;
 	}
 
-	function LoadUsers() 
-	{ 
+	function LoadUsers()
+	{
 		return $this->LoadAll(
 			"SELECT * FROM ".$this->config["user_table"]." ORDER BY binary name");
 	}
@@ -2350,7 +2367,7 @@ class Wacko
 	function GetUserId()
 	{
 		if ($user = $this->GetUser()) $user_id = $user["id"];
-		
+
 		return $user_id;
 	}
 
@@ -2366,11 +2383,11 @@ class Wacko
 		}
 	}
 
-	function GetUserIP() 
+	function GetUserIP()
 	{
 		if ($this->_userhost)
 		{
-			return $this->_userhost; 
+			return $this->_userhost;
 		}
 		else
 		{
@@ -2614,7 +2631,7 @@ class Wacko
 						"WHERE page_tag = '".$tag."';" );
 						$acl["supertag"]=$supertag;
 					 }
-					 */      
+					 */
 				}
 
 				// if still no acl, use config defaults
@@ -2784,7 +2801,7 @@ class Wacko
 	function WriteFile($name, $body)
 	{
 		$filename = "xml/".$name."_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"])).".xml";
-		
+
 		$fp = fopen($filename, "w");
 		if ($fp)
 		{
@@ -2794,11 +2811,11 @@ class Wacko
 
 		@chmod($filename, 0644);
 	}
-	
+
 	function WriteRecentChangesXML()
 	{
 		$name = "recentchanges";
-		
+
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->GetCharset()."\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
@@ -2845,7 +2862,7 @@ class Wacko
 	function WriteRecentCommentsXML()
 	{
 		$name = "recentcomment";
-		
+
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->GetCharset()."\"?>\n";
 		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->config["theme_url"]."css/wacko.css\" media=\"screen\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
@@ -2974,7 +2991,7 @@ class Wacko
 	function GetDefaultBookmarks($lang, $what = "default")
 	{
 		$this->UserAgentLanguage();
-		
+
 		if (isset($this->config[$what."_bookmarks"]) &&
 		is_array($this->config[$what."_bookmarks"]) &&
 		isset($this->config[$what."_bookmarks"][$lang]))
@@ -3221,7 +3238,7 @@ class Wacko
 				echo '</span>';
 			}
 		}
-			
+
 		if (is_array($user) && $user["options"]["theme"])
 		{
 			$this->config["theme"] = $user["options"]["theme"];
@@ -3890,7 +3907,7 @@ class Wacko
 	{
 		// check input
 		if (!is_numeric($level)) return false;
-		
+
 		// check event level: do we have to log it?
 		if ((int)$this->config['log_min_level'] === -1 ||
 		((int)$this->config['log_min_level'] !== 0 &&
@@ -3898,13 +3915,13 @@ class Wacko
 		{
 			return true;
 		}
-		
+
 		$html = $this->config['allow_rawhtml'];
 		$this->config['allow_rawhtml'] = 0;
 		$message = ( $this->language ? $this->Format($message, 'wacko') : $message );
 		$user = $this->GetUserName();
 		$this->config['allow_rawhtml'] = $html;
-		
+
 		// current timestamp set automatically
 		return $this->Query(
 			"INSERT INTO {$this->config['table_prefix']}log SET ".
@@ -3934,13 +3951,13 @@ class Wacko
 				"FROM {$this->config['table_prefix']}keywords, ".
 					"{$this->config['table_prefix']}keywords_pages ".
 				"WHERE lang = '".quote($this->dblink, $lang)."' AND keyword_id = id ".
-					( $root != '' ? "AND ( tag = '".quote($this->dblink, $root)."' OR tag LIKE '".quote($this->dblink, $root)."/%' ) " : '' ). 
+					( $root != '' ? "AND ( tag = '".quote($this->dblink, $root)."' OR tag LIKE '".quote($this->dblink, $root)."/%' ) " : '' ).
 				"GROUP BY keyword", 1))
 				{
 					foreach ($_counts as $count) $counts[$count['keyword']] = $count['n'];
 				}
 			}
-			
+
 			// process categories names
 			foreach ($_keywords as $word)
 			{
@@ -3950,7 +3967,7 @@ class Wacko
 					'n'			=> $counts[$word['id']]
 				);
 			}
-			
+
 			foreach ($keywords as $id => $word)
 			{
 				if ($keywords[$word['parent']])
@@ -3963,7 +3980,7 @@ class Wacko
 		}
 		else return false;
 	}
-	
+
 	// save keywords selected in webform. ids are
 	// passed through POST global array. returns:
 	//	true	- if something was saved
@@ -3976,18 +3993,18 @@ class Wacko
 			if (preg_match('/^keyword([0-9]+)\|([0-9]+)$/', $key, $ids) && $val == 'set')
 			{
 				$set[] = $ids[1];
-				
+
 				if ($ids[2] != '0' && !in_array($ids[2], $set)) $set[] = $ids[2];
 			}
 		}
-		
+
 		// update list if any
 		if ($set)
 		{
 			if (!$dryrun)
 			{
 				foreach ($set as $id) $values[] = "(".quote($this->dblink, (int)$id).", '".quote($this->dblink, $this->page["id"])."')";
-				
+
 				$this->Query(
 					"INSERT INTO {$this->config['table_prefix']}keywords_pages (keyword_id, page_id) ".
 					"VALUES ".implode(', ', $values));
