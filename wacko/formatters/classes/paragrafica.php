@@ -84,7 +84,7 @@ class paragrafica
 		{
 			$total = preg_match_all($this->ignore, $what, $matches);
 			$what = preg_replace($this->ignore, "{:typo:markup:3:}", $what);
-			for ($i=0;$i<$total;$i++)
+			for ($i = 0; $i < $total; $i++)
 			{
 				$ignored[] = $matches[0][$i];
 			}
@@ -181,7 +181,7 @@ class paragrafica
 			{
 				$what = $a[0];
 				$size = count($a);
-				for ($i=1; $i<$size; $i++)
+				for ($i = 1; $i < $size; $i++)
 				{
 					$what= $what.$ignored[$i-1].$a[$i];
 				}
