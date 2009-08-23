@@ -129,7 +129,7 @@ $wackoTranslation = array(
 	"SimpleDiffAdditions" => "<b>Добавлено:</b>",
 	"SimpleDiffDeletions" => "<b>Удалено:</b>",
 	"NoDifferences" => "Нет различий.",
-	"History" => "История изменений",
+	"History" => "История",
 	"ReEditOldRevision" => "Редактировать эту старую версию",
 	"ExternalPages" => "<strong>Внешние страницы, ссылающеся на&nbsp;%1</strong><br /><small> (%2) (<a href=\"%3\" >список сайтов</a>):</small>",
 	"ExternalPagesGlobal"=> "<strong>Внешние страницы, ссылающеся на&nbsp;".$wackoDefaultConfig["wacko_name"]."</strong><br /><small> (<a href=\"%1\">список сайтов</a>):</small>",
