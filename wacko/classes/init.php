@@ -609,35 +609,35 @@ class Init
 
 				echo "<div class=\"debug\">".
 					 "<p class=\"debug\"><span>Program execution statistics</span></p>\n".
-					 "<ul>";
+					 "<ul>\n";
 
 				if (function_exists("memory_get_usage")) if ($execmem = memory_get_usage())
-					echo "<li>Memory allocated: ".(number_format(($execmem / (1024*1024)), 3))." MB </li>";
+					echo "<li>Memory allocated: ".(number_format(($execmem / (1024*1024)), 3))." MB </li>\n";
 
-				echo "<li>Overall time taken: ".(number_format(($overall_time), 3))." sec. </li>";
+				echo "<li>Overall time taken: ".(number_format(($overall_time), 3))." sec. </li>\n";
 
 				if ($this->config["debug"] >= 2)
 				{
-					echo "<li>Execution time: ".number_format($overall_time - $this->engine->queryTime, 3)." sec. </li>";
-					echo "<li>SQL time: ".number_format($this->engine->queryTime, 3)." sec. </li>";
+					echo "<li>Execution time: ".number_format($overall_time - $this->engine->queryTime, 3)." sec. </li>\n";
+					echo "<li>SQL time: ".number_format($this->engine->queryTime, 3)." sec. </li>\n";
 				}
 
 				if ($this->config["debug"] >= 3)
 				{
-					echo "<li>SQL queries: ".count($this->engine->queryLog)."</li>";
-					echo "<li>SQL queries dump follows".( $this->config["debug_sql_threshold"] > 0 ? " (&gt;".$this->config["debug_sql_threshold"]." sec.)" : "" ).":<ol>";
+					echo "<li>SQL queries: ".count($this->engine->queryLog)."</li>\n";
+					echo "<li>SQL queries dump follows".( $this->config["debug_sql_threshold"] > 0 ? " (&gt;".$this->config["debug_sql_threshold"]." sec.)" : "" ).":<ol>\n";
 
 					foreach ($this->engine->queryLog as $query)
 					{
 						if ($query["time"] < $this->config["debug_sql_threshold"]) continue;
 
-						echo "<li>\n";
+						echo "<li>";
 						echo str_replace(array("<", ">"), array("&lt;", "&gt;"), $query["query"])."<br />";
 						echo "[".number_format($query["time"], 4)." sec.]";
 						echo "</li>\n";
 					}
 				}
-				echo "</ol></li></ul></div>\n";
+				echo "</ol></li>\n</ul></div>\n";
 			}
 			else return;
 		}
