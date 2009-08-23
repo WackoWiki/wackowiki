@@ -53,7 +53,7 @@ sup, sub { line-height:0; }
 sub { margin:0 -0.5ex; }
 
 /* indent, used as big marked block */
-div.indent { padding-left:1em; padding-right:1em; background-color:#ffc; color:#d00; }
+div.indent { padding-left:1em; padding-right:1em; background-color:#FFFFE6; color:#d00; }
 
 
 /* %%(codeblock)
