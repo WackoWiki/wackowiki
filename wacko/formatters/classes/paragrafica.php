@@ -7,8 +7,6 @@ v.2.6
 
 ---------
 
-http://www.pixel-apes.com/typografica
-
 Copyright (c) 2004, Kuso Mendokusee <mailto:mendokusee@yandex.ru>
 All rights reserved.
 
@@ -20,44 +18,44 @@ class paragrafica
 	// paragpaph is a chicken-feed like this: <t->text, text, fucking text<-t>
 	var $wacko;
 	var $t0 = array( // terminators like <-t>$1<t->
-          "/(<br[^>]*>)(\s*<br[^>]*>)+/si", 
-          "/(<hr[^>]*>)/si", 
+          "/(<br[^>]*>)(\s*<br[^>]*>)+/si",
+          "/(<hr[^>]*>)/si",
 
 	);
 	var $t1 = array( // terminators like <-t>$1
 	array( // rightinators
-          "!(<table)!si", 
-          "!(<a[^>]*></a><h[1-9]>)!si", 
-          "!(<(u|o)l)!si", 
-          "!(<div)!si", 
-          "!(<p)!si", 
-          "!(<form)!si", 
-          "!(<textarea)!si", 
-          "!(<blockquote)!si", 
+          "!(<table)!si",
+          "!(<a[^>]*></a><h[1-9]>)!si",
+          "!(<(u|o)l)!si",
+          "!(<div)!si",
+          "!(<p)!si",
+          "!(<form)!si",
+          "!(<textarea)!si",
+          "!(<blockquote)!si",
 	),
 	array( // wronginators
-          "!(</td>)!si", 
+          "!(</td>)!si",
 	),
 	array( // wronginators-2
-          "!(</li>)!si", 
+          "!(</li>)!si",
 	),
 	);
 	var $t2 = array( // terminators like $1<t->
 	array( // rightinators
-          "!(</table>)!si", 
-          "!(</h[1-9]>)!si", 
-          "!(</(u|o)l>)!si", 
-          "!(</div>)!si", 
-          "!(</p>)!si", 
-          "!(</form>)!si", 
-          "!(</textarea>)!si", 
-          "!(</blockquote>)!si", 
+          "!(</table>)!si",
+          "!(</h[1-9]>)!si",
+          "!(</(u|o)l>)!si",
+          "!(</div>)!si",
+          "!(</p>)!si",
+          "!(</form>)!si",
+          "!(</textarea>)!si",
+          "!(</blockquote>)!si",
 	),
 	array( // wronginators
-          "!(<td[^>]*>)!si", 
+          "!(<td[^>]*>)!si",
 	),
 	array( // wronginators-2
-          "!(<li[^>]*>)!is", 
+          "!(<li[^>]*>)!is",
 	),
 	);
 
@@ -201,7 +199,7 @@ class paragrafica
                                     "|".
          "(<a name=\"(p[0-9]+-[0-9]+)\"></a>)".                       // 6=id
                                     "|".
-         "<\!--action:begin-->include\s+[^=]+=([^\xA1 ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->". 
+         "<\!--action:begin-->include\s+[^=]+=([^\xA1 ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->".
 		// {{include xxxx="TAG" notoc="1"}}
                                     "!si", array( &$this, "add_toc_entry" ), $what );
 

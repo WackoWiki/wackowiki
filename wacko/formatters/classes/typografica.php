@@ -7,8 +7,6 @@ v.2.6
 
 ---------
 
-http://www.pixel-apes.com/typografica
-
 Copyright (c) 2004, Kuso Mendokusee <mailto:mendokusee@yandex.ru>
 All rights reserved.
 
