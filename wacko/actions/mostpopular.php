@@ -13,6 +13,8 @@
  }}
  */
 
+// TODO: should also work with parameter 'page', but didn't
+
 if (!$max)  $max = 25;
 if ($max > 500) $max = 500;
 
