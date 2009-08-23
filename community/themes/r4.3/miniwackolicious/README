@@ -1,10 +1,8 @@
 --------------------------------------------------------------------------------
-MiniWackoLicious Theme 0.9
+MiniWackoLicious Theme 0.9.1
 --------------------------------------------------------------------------------
 
-MiniWackoLicious is a theme (a.k.a. template) for WackoFork, a fork of
-WackoWiki. It may also work for WackoWiki or other Wakka forks, but this is not
-tested yet.
+MiniWackoLicious is a theme (a.k.a. template) for WackoWiki.
 
 
 DOWNLOAD AND INSTALLATION ------------------------------------------------------
@@ -12,7 +10,7 @@ DOWNLOAD AND INSTALLATION ------------------------------------------------------
 * Download MiniWackoLicious as ZIP- or TAR.GZ archive, unzip it and copy the
   miniwackolicious directory to your themes folder of the WackoFork
   installation.
-* Edit your wakka.config.php (or wakka.personal.config.php) and set
+* Edit your config.inc.php (or personal.config.inc.php) and set
   "theme" => "miniwackolicious".
 * Your wacko user may also select this theme on the Settings page.
 
@@ -63,8 +61,9 @@ LICENSE ------------------------------------------------------------------------
 The MiniWackoLicious Theme is released open-source under the Creative Commons
 Attribution-Share Alike 3.0 licence.
 
-Icons were taken from the Silk icons set by Mark James.
+Icons were taken from the Silk icons set by Mark James and Oxygen Icons .
 http://www.famfamfam.com/lab/icons/silk/
+http://www.oxygen-icons.org
 
 
 --------------------------------------------------------------------------------
