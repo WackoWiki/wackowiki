@@ -26,33 +26,28 @@ border-width:1px 0 0;
 /* SYNTAX "  *", "  1.", etc. */
 
 ul, ol {  margin-top:0; margin-bottom: 3px; }
-
-
-
-
-
-
+li { margin-bottom: 2px; }
 
 /** Header related ***********************************************************/
 
 /* SYNTAX ==, ===, ====, =====, ======, ======= */
 
-FORM, H1, H2, H3, H4, H5, H6 {
+form, h1, h2, h3, h4, h5, h6 {
   margin: 0px;
   padding: 0px;
 }
 
-H1 {
+h1 {
 	font-family: Verdana;
 	padding-top:2px; 
 	padding-bottom:7px; 
 	line-height: 110%; 
 	color:#20AA40; 
 }
-H2 { font-family: Verdana;font-size: 20px; color:#000080;  padding-top:20px; padding-bottom:5px }
-H3 { font-family: Verdana;font-size: 17px; padding-top:15px; padding-bottom:5px }
-H4 { font-family: Arial;  font-size: 16px; padding-top:15px; padding-bottom:5px }
-H5 { font-family: Arial;  font-size: 14px; padding-top:10px; padding-bottom:5px }
+h2 { font-family: Verdana;font-size: 20px; color:#000080;  padding-top:20px; padding-bottom:5px }
+h3 { font-family: Verdana;font-size: 17px; padding-top:15px; padding-bottom:5px }
+h4 { font-family: Arial;  font-size: 16px; padding-top:15px; padding-bottom:5px }
+h5 { font-family: Arial;  font-size: 14px; padding-top:10px; padding-bottom:5px }
 
 
 

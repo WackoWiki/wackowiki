@@ -1,6 +1,41 @@
 /*@import "../../_common/X11ColorNames.css";*/
 @import "wacko.css";
 
+body{ padding:0; margin:0; background:#eeeeee; line-height: 130%; }
+img {
+	border-width: 0px;
+	}
+/* Textareas */
+textarea { font-size:100%; font-family: Georgia, Courier New; color:#222222;   line-height: 1.5em;  }
+small { font-size:80% }
+
+label {cursor:pointer; cursor:hand;}
+
+dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
+
+
+/* overrall design */
+.Top { background:#ffffff; font-size:13px; color:#000000; padding:5px 5px 5px 5px; vertical-align:center; font-size:70% }
+.TopLoggedOut { background:#ffcc66; font-size:13px; color:#000000; padding:5px 5px 5px 5px; vertical-align:center; font-size:70% }
+.TopDiv { clear:all; height:1px; background:#000000; margin:0; padding:0 }
+.TopDiv2 { clear:all; height:1px; background:#666666; margin:0; padding:0 }
+.TopRight { float:right; text-align:right; padding:0px; }
+.TopLeft { float:left; text-align:left; color:#444444 }
+.Bookmarks { background:#002080; color:#b5b5ff; padding:2px; font-size:75% }
+
+
+.Bookmarks A:LINK { font-weight: bold; color: #ffffff }
+.Bookmarks A:VISITED { font-weight: bold; color: #b5ffb5 }
+.Bookmarks A:HOVER { font-weight: bold; color: #ffb5b5 }
+
+.Wrapper { margin: 20px 20px 20px 20px }
+.header { color:#444444; }
+.header .Main { color:#999999 }
+.header H1 { margin:0px; padding:0px; color:#000000; font-family:Arial; font-size: 100% }
+.Print { color:#999999; font-size:11px; float:right; }
+
+.Shade, #page { border-left: 1px solid #444444; border-right: 1px solid #444444; }
+
 /* ??? */
 .Shade {  clear:all; background:#ffffff;
           height:6px; border-top: 1px solid #444444; }
@@ -42,7 +77,7 @@
 
 
 /* fonts */
-BODY, TD, P, LI, #page { font-family: Georgia, Verdana; font-size:95% }
+body, td, p, li, #page { font-family: Georgia, Verdana; font-size:95% }
 .dt { font-family: Verdana; font-size:60% }
 
 /* colors */
@@ -93,22 +128,22 @@ del A.outerlink:HOVER { color:#cc3300 }
 .name { text-align: right; font-size: 10px; }
 .include { background-color: #f8f8f8; padding: 8px; }
 
-FIELDSET { padding: 10px; }
+fieldset { padding: 10px; }
 .missingpage { border-bottom: 1px dashed orange; }
 
 /* anchors */
-A:LINK { color: #0020cc; }
-A:VISITED { color: #8020cc; }
-A:HOVER { color:#cc3300 }
-A:ACTIVE { color:#ff0000; }
-A.denied:LINK, A.denied:VISITED { color: #666666; }
-A.denied:HOVER { color:#cc3300 }
+a:link { color: #0020cc; }
+a:visited { color: #8020cc; }
+a:hover { color:#cc3300 }
+a:ACTIVE { color:#ff0000; }
+a.denied:link, a.denied:visited { color: #666666; }
+a.denied:hover { color:#cc3300 }
 
-#credits A:LINK, #credits A:VISITED { color: #AAAAAA; }
-#credits A:HOVER { color:#cc3300 }
+#credits A:link, #credits A:visited { color: #AAAAAA; }
+#credits A:hover { color:#cc3300 }
 
-.outerlink:LINK, .outerlink:VISITED { font-size:90%; font-family:Verdana; color:#000080 }
-.outerlink:HOVER { color:#cc3300 }
+.outerlink:link, .outerlink:visited { font-size:90%; font-family:Verdana; color:#000080 }
+.outerlink:hover { color:#cc3300 }
 
 .Top a, .Top a:visited { font-weight:bold; color:#336699 }
 .Tune a, .Tune a:visited { font-weight:normal; color:#336699 }
@@ -139,8 +174,8 @@ a.Search:hover { color:#cc3300 }
   table.upload td.dt- .dt2-,
   table.upload td.remove- .remove2-,
   table.upload td.size- .size2- { font: 11px Tahoma; color:#666666;  }
-  table.upload td.remove- A.remove2-:HOVER,
-  table.upload td.remove- A.remove2-:ACTIVE { color:#ff0000 }
+  table.upload td.remove- a.remove2-:HOVER,
+  table.upload td.remove- a.remove2-:ACTIVE { color:#ff0000 }
 
 .preview {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:red 2px solid;}
 .preview p {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
