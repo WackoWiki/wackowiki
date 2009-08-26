@@ -37,12 +37,12 @@ ul, ol {
 
 /* SYNTAX ==, ===, ====, =====, ======, ======= */
 
-FORM, H1, H2, H3, H4, H5, H6 {
+form, h1, h2, h3, h4, h5, h6 {
   margin: 0px;
   padding: 0px;
 }
 
-H1 {
+h1 {
 	font-family: Verdana;
 	font-size: 23px;
 	padding-top:2px;
@@ -50,11 +50,11 @@ H1 {
 	line-height: 110%;
 	color: #333333;
 }
-H2 { font-family: Verdana; font-size: 20px; margin-top:20px; margin-bottom:5px; border-bottom:3px dotted #ddd}
-H3 { font-family: Verdana; font-size: 17px; margin-top:15px; margin-bottom:5px; border-bottom:2px dotted #ddd}
-H4 { font-family: Arial;   font-size: 16px; margin-top:15px; margin-bottom:5px; border-bottom:1px #999999 solid }
-H5 { font-family: Arial;   font-size: 14px; margin-top:10px; margin-bottom:5px; border-bottom:1px #bbbbbb solid }
-H6 { font-family: Arial;   font-size: 12px; }
+h2 { font-family: Verdana; font-size: 20px; margin-top:20px; margin-bottom:5px; border-bottom:3px dotted #ddd}
+h3 { font-family: Verdana; font-size: 17px; margin-top:15px; margin-bottom:5px; border-bottom:2px dotted #ddd}
+h4 { font-family: Arial;   font-size: 16px; margin-top:15px; margin-bottom:5px; border-bottom:1px #999999 solid }
+h5 { font-family: Arial;   font-size: 14px; margin-top:10px; margin-bottom:5px; border-bottom:1px #bbbbbb solid }
+h6 { font-family: Arial;   font-size: 12px; }
 
 /* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
 .center{  text-align: center;}

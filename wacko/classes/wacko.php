@@ -769,9 +769,9 @@ class Wacko
 		$user = $this->GetUser();
 		$pages[$cl] = $user["name"];
 		$bookm = $this->GetDefaultBookmarks($user["lang"], "site")."\n".
-					( $user["bookmarks"]
-					? $user["bookmarks"]
-					: $this->GetDefaultBookmarks($user["lang"]));
+					($user["bookmarks"]
+						? $user["bookmarks"]
+						: $this->GetDefaultBookmarks($user["lang"]));
 		$bookmarks = explode("\n", $bookm);
 
 		for ($i = 0; $i <= count($bookmarks); $i++)
