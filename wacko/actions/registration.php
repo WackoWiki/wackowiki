@@ -122,7 +122,7 @@ else if ($_POST["action"] == "login")
 						"email_confirm = '".quote($this->dblink, $confirm)."', ".
 						"bookmarks = '".quote($this->dblink, $this->GetDefaultBookmarks($lang))."', ".
 						"typografica = '".(($this->config["default_typografica"] == 1) ? "1" : "0")."', ".
-						"showdatetime = '".(($this->config["default_showdatetime"] == 1) ? "1" : "0")."', ".
+						"show_datetime = '".(($this->config["default_showdatetime"] == 1) ? "1" : "0")."', ".
 						"more = '".quote($this->dblink, $more)."', ".
 						($lang
 							? "lang = '".quote($this->dblink, $lang)."', "
