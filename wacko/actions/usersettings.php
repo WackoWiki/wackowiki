@@ -66,7 +66,7 @@ else if ($user = $this->GetUser())
 				"email = '".quote($this->dblink, $_POST["email"])."', ".
 		($confirm ? "email_confirm = '".quote($this->dblink, $confirm)."', " : "").
 				"doubleclickedit = '".quote($this->dblink, $_POST["doubleclickedit"])."', ".
-				"showdatetime = '".quote($this->dblink, $_POST["showdatetimeinlinks"])."', ".
+				"show_datetime = '".quote($this->dblink, $_POST["showdatetimeinlinks"])."', ".
 				"show_comments = '".quote($this->dblink, $_POST["show_comments"])."', ".
 				"revisioncount = '".quote($this->dblink, $_POST["revisioncount"])."', ".
 				"changescount = '".quote($this->dblink, $_POST["changescount"])."', ".
@@ -116,7 +116,7 @@ else if ($user = $this->GetUser())
 <input type="hidden" name="showdatetimeinlinks" value="0" /> <input
 	type="checkbox" id="showdatetimeinlinks" name="showdatetimeinlinks"
 	value="1"
-	<?php echo $user["showdatetime"] == "1" ? "checked=\"checked\"" : "0" ?> />
+	<?php echo $user["show_datetime"] == "1" ? "checked=\"checked\"" : "" ?> />
 </p>
 <p><label for="show_comments"><?php echo $this->GetTranslation("ShowComments?");?>:</label>
 <input type="hidden" name="show_comments" value="0" /> <input

@@ -2027,7 +2027,7 @@ class Wacko
 
 	function AddDatetime($tag)
 	{
-		if ($user = $this->GetUser()) $show = $user["showdatetime"];
+		if ($user = $this->GetUser()) $show = $user["show_datetime"];
 		if (!isset($show)) $show = $this->config["show_datetime"];
 		if (!$show) $show = "1";
 		// TODO: double?
