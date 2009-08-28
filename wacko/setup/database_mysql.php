@@ -18,7 +18,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"user VARCHAR(50) NOT NULL DEFAULT '',".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
-					"latest ENUM('Y','N') NOT NULL DEFAULT 'Y',".
+					"latest TINYINT(1) UNSIGNED DEFAULT '1',".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 					"comment_on VARCHAR(250) binary NOT NULL DEFAULT '',".
 					"super_comment_on VARCHAR(250) NOT NULL DEFAULT '',".
@@ -53,7 +53,7 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"user VARCHAR(50) NOT NULL DEFAULT '',".
 						"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 						"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
-						"latest ENUM('Y','N') NOT NULL DEFAULT 'N',".
+						"latest TINYINT(1) UNSIGNED DEFAULT '0',".
 						"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 						"comment_on VARCHAR(250) binary NOT NULL DEFAULT '',".
 						"super_comment_on VARCHAR(250) NOT NULL DEFAULT '',".

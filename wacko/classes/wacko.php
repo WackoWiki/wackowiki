@@ -1172,7 +1172,7 @@ class Wacko
 						"owner_id = '".quote($this->dblink, $owner_id)."', ".
 						"user = '".quote($this->dblink, $user)."', ".
 						"user_id = '".quote($this->dblink, $user_id)."', ".
-						"latest = 'Y', ".
+						"latest = '1', ".
 						"supertag = '".quote($this->dblink, $this->NpjTranslit($tag))."', ".
 						"body = '".quote($this->dblink, $body)."', ".
 						"body_r = '".quote($this->dblink, $body_r)."', ".

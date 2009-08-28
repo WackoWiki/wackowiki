@@ -18,7 +18,7 @@ if ($this->HasAccess("read"))
 			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->page["comment_on"], "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["time"]."</div>");
 		}
 
-		if ($this->page["latest"] == "N")
+		if ($this->page["latest"] == "0")
 		{
 			print("<div class=\"revisioninfo\">".
 			str_replace("%1",$this->href(),
@@ -49,7 +49,7 @@ if ($this->HasAccess("read"))
 			}
 
 			// store to DB
-			if ($this->page["latest"] != "N")
+			if ($this->page["latest"] != "0")
 				$this->Query(
 					"UPDATE ".$this->config["table_prefix"]."pages SET ".
          				"body_r = '".quote($this->dblink, $this->page["body_r"])."', ".
@@ -71,7 +71,7 @@ if ($this->HasAccess("read"))
 <?php
 
   // if this is an old revision, display some buttons
-  if ($this->HasAccess("write") && ($this->page["latest"] == "N"))
+  if ($this->HasAccess("write") && ($this->page["latest"] == "0"))
   {
    $latest = $this->LoadPage($this->tag);
 ?>
@@ -129,7 +129,7 @@ if ($this->GetConfigValue("footer_files"))
 [<a
 	href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetTranslation("HideFiles"); ?></a>]
     </div>
-	
+
     <?php
     echo "<div class=\"files\">";
     echo $this->Action("files",array("nomark"=>1));
@@ -251,7 +251,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     if ($this->HasAccess("comment"))
     {
 		print("<div class=\"commentform\">\n");
-		
+
       	echo $this->GetTranslation("AttachComment"); ?><br />
         <?php echo $this->FormOpen("addcomment"); ?>
           <textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
