@@ -110,12 +110,12 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 					"changescount INT(10) UNSIGNED NOT NULL DEFAULT '50',".
 					"doubleclickedit TINYINT(1) NOT NULL DEFAULT '1',".
 					"signuptime DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"show_comments ENUM('Y','N') NOT NULL DEFAULT 'N',".
+					"show_comments TINYINT(1) NOT NULL DEFAULT '1',".
 					"bookmarks TEXT NOT NULL,".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
-					"show_spaces ENUM('Y','N') NOT NULL DEFAULT 'Y',".
-					"showdatetime ENUM('Y','N') NOT NULL DEFAULT 'Y',".
-					"typografica ENUM('Y','N') NOT NULL DEFAULT 'Y',".
+					"show_spaces TINYINT(1) NOT NULL DEFAULT '1',".
+					"show_datetime TINYINT(1) NOT NULL DEFAULT '1',".
+					"typografica TINYINT(1) NOT NULL DEFAULT '1',".
 					"more TEXT NOT NULL,".
 					"changepassword VARCHAR(100) NOT NULL,".
 					"email_confirm VARCHAR(40) NOT NULL DEFAULT '',".

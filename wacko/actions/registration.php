@@ -121,8 +121,8 @@ else if ($_POST["action"] == "login")
 						"email = '".quote($this->dblink, $email)."', ".
 						"email_confirm = '".quote($this->dblink, $confirm)."', ".
 						"bookmarks = '".quote($this->dblink, $this->GetDefaultBookmarks($lang))."', ".
-						"typografica = '".(($this->config["default_typografica"] == 1) ? "Y" : "N")."', ".
-						"showdatetime = '".(($this->config["default_showdatetime"] == 1) ? "Y" : "N")."', ".
+						"typografica = '".(($this->config["default_typografica"] == 1) ? "1" : "0")."', ".
+						"showdatetime = '".(($this->config["default_showdatetime"] == 1) ? "1" : "0")."', ".
 						"more = '".quote($this->dblink, $more)."', ".
 						($lang
 							? "lang = '".quote($this->dblink, $lang)."', "
