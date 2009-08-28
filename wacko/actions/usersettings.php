@@ -103,9 +103,9 @@ else if ($user = $this->GetUser())
 	value="<?php echo htmlentities($user["email"]) ?>" size="40" /> &nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("base_url").'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("base_url").'images/warning.gif" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="16" height="16" />' ?>
 </p>
 <p><label for="doubleclickedit"><?php echo $this->GetTranslation("DoubleclickEditing");?>:</label>
-<input type="hidden" name="doubleclickedit" value="N" /> <input
-	type="checkbox" id="doubleclickedit" name="doubleclickedit" value="Y"
-	<?php echo $user["doubleclickedit"] == "Y" ? "checked=\"checked\"" : "" ?> />
+<input type="hidden" name="doubleclickedit" value="0" /> <input
+	type="checkbox" id="doubleclickedit" name="doubleclickedit" value="1"
+	<?php echo $user["doubleclickedit"] == "1" ? "checked=\"checked\"" : "" ?> />
 </p>
 <p><label for="autocomplete"><?php echo $this->GetTranslation("WikieditAutocomplete");?>:</label>
 <input type="hidden" name="autocomplete" value="N" /> <input

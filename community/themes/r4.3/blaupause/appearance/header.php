@@ -10,10 +10,10 @@ Common header file.
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
-<title><?php // Echoes Title of the page.  
+<title><?php // Echoes Title of the page.
 echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?>
 </title>
-<?php 
+<?php
 // We don't need search robots to index subordinate pages
   if ($this->GetMethod() != 'show' || $this->page["latest"] == "N")
      echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
@@ -32,9 +32,9 @@ echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->m
 // default.js contains common procedures and should be included everywhere
 ?>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
-<?php 
+<?php
 // protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
-if ($this->method == 'edit') 
+if ($this->method == 'edit')
 {
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/wikiedit2.js\"></script>\n";
@@ -48,7 +48,7 @@ if ($this->method == 'edit')
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->GetUser())
    {
-      if ($user["doubleclickedit"] == "Y")
+      if ($user["doubleclickedit"] == "1")
          {
 ?>
   <script type="text/javascript">
@@ -99,25 +99,25 @@ else if($this->HasAccess("write"))
   <div id="infomenu">
     <div id="breadcrumb">
       <!-- <h1>-->
-      <span class="main"><a href="<?php echo $this->GetConfigValue("base_url"); ?>"><?php echo $this->config["wacko_name"] ?></a>:</span> <span class="pagetitle"><?php echo $this->GetPagePath(); ?></span> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" 
+      <span class="main"><a href="<?php echo $this->GetConfigValue("base_url"); ?>"><?php echo $this->config["wacko_name"] ?></a>:</span> <span class="pagetitle"><?php echo $this->GetPagePath(); ?></span> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>"
      href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a><br />
       <!-- </h1> -->
     </div>
     <div id="languages">
     </div>
     <div id="bookmarks">
-      <?php 
+      <?php
 // Outputs Bookmarks AKA QuickLinks
   // Main page
   # echo $this->ComposeLinkToPage($this->config["root_page"]); ?>
       <!--|-->
-      <?php 
+      <?php
   // All user's Bookmarks
-  # echo $this->Format($this->GetBookmarksFormatted(), "post_wacko"); 
+  # echo $this->Format($this->GetBookmarksFormatted(), "post_wacko");
   ?>
   <div id="navigation">
 <?php
-// Outputs Bookmarks AKA QuickLinks			
+// Outputs Bookmarks AKA QuickLinks
 	echo '<div id="usermenu">';
 		echo "<ol>\n";
 		// Main page
@@ -131,9 +131,9 @@ else if($this->HasAccess("write"))
 		echo $formatedBMs;
 
 		echo "</li>\n";
-					
+
 		if ($this->GetUser())
-		{					
+		{
 			// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
 			if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks()))
 				echo '<li><a href="'. $this->Href('', '', "addbookmark=yes")
@@ -144,7 +144,7 @@ else if($this->HasAccess("write"))
 				echo '<li><a href="'. $this->Href('', '', "removebookmark=yes")
 					.'"><img src="'. $this->GetConfigValue("theme_url")
 					.'icons/toolbar2.gif" alt="-" title="'.
-					$this->GetTranslation("RemoveFromBookmarks") .'"/></a></li>';					
+					$this->GetTranslation("RemoveFromBookmarks") .'"/></a></li>';
 			}
 	echo "\n</ol></div>";
 ?>
@@ -167,7 +167,7 @@ else
       <input type="hidden" name="action" value="login" />
    <span class="nobr"><input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" /><strong><strong><?php echo $this->GetTranslation("LoginWelcome") ?></strong>:&nbsp;</strong>
    <input type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->GetTranslation("LoginPassword") ?>:&nbsp;<input type="password" name="password" class="login" size="8" />&nbsp;<input type="image" src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" style="vertical-align:top" /></span> <?php
-   
+
    // Closing Login form
 	echo $this->FormClose();
    }

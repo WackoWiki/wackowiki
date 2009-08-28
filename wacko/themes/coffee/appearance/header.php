@@ -48,7 +48,7 @@ if ($this->method == 'edit')
 <?php
 if ($user = $this->GetUser())
    {
-      if ($user["doubleclickedit"] == "Y")
+      if ($user["doubleclickedit"] == "1")
          {
 ?>
    <script type="text/javascript">

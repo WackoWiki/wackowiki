@@ -47,7 +47,7 @@ if ($this->method == 'edit')
 // Enabled only for registered users who don't swith it off.
 if ($user = $this->GetUser())
    {
-      if($user["doubleclickedit"] == "Y")
+      if($user["doubleclickedit"] == "1")
          {
 ?>
          var edit = "<?php echo $this->href("edit");?>";

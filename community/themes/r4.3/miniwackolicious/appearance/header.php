@@ -20,14 +20,14 @@
 ?>
  	<link href="<?php echo $this->GetConfigValue("theme_url") ?>../default/css/default.css.php" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->GetConfigValue("theme_url") ?>layout/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $this->GetConfigValue("theme_url") ?>layout/patches/opera.css" rel="stylesheet" type="text/opera" />  
+    <link href="<?php echo $this->GetConfigValue("theme_url") ?>layout/patches/opera.css" rel="stylesheet" type="text/opera" />
     <!--[if IE 5]><link href="<?php echo $this->GetConfigValue("theme_url") ?>layout/patches/ie5.css" rel="stylesheet" type="text/css" /><![endif]-->
     <!--[if IE 6]><link href="<?php echo $this->GetConfigValue("theme_url") ?>layout/patches/ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
     <!--[if IE 7]><link href="<?php echo $this->GetConfigValue("theme_url") ?>layout/patches/ie7.css" rel="stylesheet" type="text/css" /><![endif]-->
     <link href="<?php echo $this->GetConfigValue("theme_url") ?>layout/print.css" media="print" rel="stylesheet" type="text/css" />
 
     <!-- MiniWackoLicious Theme for WackoWiki, by eye48.com -->
-  
+
 <?php
 	echo '	<link rel="start" href="'.$base_url.'Homepage" />'."\n";
 	// Echoes Title of the page.
@@ -58,7 +58,7 @@ if ($this->method == 'edit')
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->GetUser())
    {
-      if ($user["doubleclickedit"] == "Y")
+      if ($user["doubleclickedit"] == "1")
          {
 ?>
   <script type="text/javascript">
@@ -114,7 +114,7 @@ else if($this->HasAccess("write"))
                 </div> <!-- /search -->
 
             </div> <!-- /nav-main -->
-            
+
             <?php if ($this->GetConfigValue("root_page") != $this->tag) { ?>
             <div class="nav-breadcrumb">
            		<hr class="onlyAural"/>
@@ -128,7 +128,7 @@ else if($this->HasAccess("write"))
                 </p>
             </div>
             <?php } ?>
-            
+
         </div> <!-- /header -->
 
 		<hr class="onlyAural"/>

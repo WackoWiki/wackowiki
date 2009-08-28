@@ -21,7 +21,7 @@ if (!function_exists('mainMenu'))
         $current_page = $wobj->tag;
 
         $menulist = null;
-        
+
         foreach($menu as $menutarget => $menuname)
         {
             $t_menutarget = $wobj->GetTranslation($menutarget);
@@ -32,16 +32,16 @@ if (!function_exists('mainMenu'))
             {
                 $menutarget = $base_url.$menutarget;
             }
-            
+
             $t_menuname = $wobj->GetTranslation($menuname);
             if ($t_menuname) $menuname = $t_menuname;
-            
+
             $link = '<li><a href="'.$menutarget.'">'.$menuname.'</a></li>';
 
             // check active path
             if (strpos($base_url.$current_page, $menutarget) !== false)
                 $link = str_replace('<li>', '<li class="active">', $link);
-            
+
             $menulist .= $link.PHP_EOL;
         }
 

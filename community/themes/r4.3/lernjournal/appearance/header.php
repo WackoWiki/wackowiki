@@ -17,7 +17,7 @@ lernjournal theme.
   echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
 ?>
 </title>
-<?php 
+<?php
 // We don't need search robots to index subordinate pages
   if ($this->GetMethod() != 'show' || $this->page["latest"] == "Y")
      echo "<meta name=\"robots\" content=\"index, follow\" />\n";
@@ -39,9 +39,9 @@ lernjournal theme.
 // default.js contains common procedures and should be included everywhere
 ?>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
-<?php 
+<?php
 // protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
-if ($this->method == 'edit') 
+if ($this->method == 'edit')
 {
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/wikiedit2.js\"></script>\n";
@@ -55,7 +55,7 @@ if ($this->method == 'edit')
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->GetUser())
    {
-      if ($user["doubleclickedit"] == "Y")
+      if ($user["doubleclickedit"] == "1")
          {
 ?>
   <script type="text/javascript">
@@ -89,41 +89,41 @@ echo $this->FormClose();
 </div>
 <div id="container">
 <div id="navi">
-  <?php 
+  <?php
 // Outputs Bookmarks AKA QuickLinks
   // Main page
   echo $this->ComposeLinkToPage($this->config["root_page"]); ?><br />
-  <?php 
+  <?php
   // All user's Bookmarks
   echo $this->Format(implode( "\n", $this->GetBookmarks())); ?><br />
-  <?php 
+  <?php
   // Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
-if ($this->GetUser()) 
+if ($this->GetUser())
 {
  if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks()))
  {?>
   <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar1.gif" alt="+" title="<?php echo $this->GetTranslation("AddToBookmarks") ?>" border="0" align="middle" /></a><br />
-  <?php 
+  <?php
  } else { ?>
   <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar2.gif" alt="-" title="<?php echo $this->GetTranslation("RemoveFromBookmarks") ?>" border="0" align="middle" /></a><br />
-  <?php 
+  <?php
  }
-} 
+}
 ?>
   <hr noshade="noshade" />
   <?php
-// If user are logged, Wacko shows "You are UserName" 
+// If user are logged, Wacko shows "You are UserName"
 if ($this->GetUser()) { ?>
   <?php echo $this->GetTranslation("YouAre")." ".$this->Link($this->GetUserName()) ?><br />
   <small>
-  <?php 
+  <?php
       echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?><br />
   <a onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a></small>
-  <?php 
+  <?php
 // Else Wacko shows login's controls
-} else { 
+} else {
 ?><br />
-  <?php 
+  <?php
 // Begin Login form
 echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
   <input type="hidden" name="action" value="login" />
@@ -134,14 +134,14 @@ echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
   <input type="password" name="password" class="login" size="8" alt="password" />
   <input type="image" src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" align="top" />
   <?php // Closing Login form
-echo $this->FormClose(); 
+echo $this->FormClose();
 ?>
-  <?php 
+  <?php
 }
-// End if 
+// End if
 ?>
   <hr noshade="noshade" /><br />
-  <?php 
+  <?php
 // If this page exists
 if ($this->page)
 {
@@ -175,7 +175,7 @@ echo $this->HasAccess("write") ? "<br /><a href=\"".$this->href("edit")."\" acce
 // Watch/Unwatch icon
 echo ($this->IsWatched($this->GetUserName(), $this->GetPageTag()) ? "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("SetWatch")."</a>" );
 ?><br />
-  <?php 
+  <?php
  // Rename link
  if ($this->CheckACL($this->GetUserName(),$this->config["rename_globalacl"]) && !$this->UserIsOwner())
  {
@@ -189,7 +189,7 @@ if ($this->IsAdmin()){
 	print("<a href=\"".$this->href("remove")."\">".$this->GetTranslation("DeleteTip")."</a><br />");
 }
 ?>
-<?php 
+<?php
 // Print icon
 echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->GetConfigValue("theme_url")."icons/print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"middle\" border=\"0\" /></a>";
 

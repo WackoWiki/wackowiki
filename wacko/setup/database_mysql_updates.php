@@ -163,5 +163,6 @@ $alter_users_r3_2 = "ALTER TABLE ".$config["table_prefix"]."users ADD changepass
 $alter_users_r3_3 = "ALTER TABLE ".$config["table_prefix"]."users ADD email_confirm VARCHAR(100) NOT NULL";
 $alter_users_r4_2 = "ALTER TABLE ".$config["table_prefix"]."users ADD id INT(10) UNSIGNED NOT NULL auto_increment FIRST, DROP PRIMARY KEY, ADD PRIMARY KEY (id)";
 $alter_users_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."users CHANGE lang lang VARCHAR(2) NOT NULL DEFAULT ''";
+$alter_users_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."users CHANGE doubleclickedit doubleclickedit TINYINT(1) NOT NULL DEFAULT '1'";
 
 ?>

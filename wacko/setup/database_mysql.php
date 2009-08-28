@@ -108,7 +108,7 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 					"motto TEXT NOT NULL,".
 					"revisioncount INT(10) UNSIGNED NOT NULL DEFAULT '20',".
 					"changescount INT(10) UNSIGNED NOT NULL DEFAULT '50',".
-					"doubleclickedit ENUM('Y','N') NOT NULL DEFAULT 'Y',".
+					"doubleclickedit TINYINT(1) NOT NULL DEFAULT '1',".
 					"signuptime DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"show_comments ENUM('Y','N') NOT NULL DEFAULT 'N',".
 					"bookmarks TEXT NOT NULL,".

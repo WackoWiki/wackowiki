@@ -93,7 +93,7 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 					"motto text NOT NULL DEFAULT '',".
 					"revisioncount integer NOT NULL DEFAULT 20,".
 					"changescount integer NOT NULL DEFAULT 50,".
-					"doubleclickedit character(1) NOT NULL DEFAULT 'Y',".
+					"doubleclickedit int(1) NOT NULL DEFAULT '1',".
 					"signuptime timestamp without time zone NOT NULL DEFAULT now(),".
 					"show_comments character(1) NOT NULL DEFAULT 'N',".
 					"bookmarks text NOT NULL DEFAULT '',".
