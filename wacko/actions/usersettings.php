@@ -113,15 +113,15 @@ else if ($user = $this->GetUser())
 	<?php echo $user["options"]["autocomplete"] == "Y" ? "checked=\"checked\"" : "" ?> />
 </p>
 <p><label for="showdatetimeinlinks"><?php echo $this->GetTranslation("ShowDateTimeInLinks");?>:</label>
-<input type="hidden" name="showdatetimeinlinks" value="N" /> <input
+<input type="hidden" name="showdatetimeinlinks" value="0" /> <input
 	type="checkbox" id="showdatetimeinlinks" name="showdatetimeinlinks"
-	value="Y"
-	<?php echo $user["showdatetime"] == "Y" ? "checked=\"checked\"" : "" ?> />
+	value="1"
+	<?php echo $user["showdatetime"] == "1" ? "checked=\"checked\"" : "0" ?> />
 </p>
 <p><label for="show_comments"><?php echo $this->GetTranslation("ShowComments?");?>:</label>
-<input type="hidden" name="show_comments" value="N" /> <input
-	type="checkbox" id="show_comments" name="show_comments" value="Y"
-	<?php echo $user["show_comments"] == "Y" ? "checked=\"checked\"" : "" ?> />
+<input type="hidden" name="show_comments" value="0" /> <input
+	type="checkbox" id="show_comments" name="show_comments" value="1"
+	<?php echo $user["show_comments"] == "1" ? "checked=\"checked\"" : "" ?> />
 </p>
 <p><label for="show_files"><?php echo $this->GetTranslation("ShowFiles?");?>:</label>
 <input type="hidden" name="show_files" value="N" /> <input
@@ -129,9 +129,9 @@ else if ($user = $this->GetUser())
 	<?php echo $user["options"]["show_files"] == "Y" ? "checked=\"checked\"" : "" ?> />
 </p>
 <p><label for="show_spaces"><?php echo $this->GetTranslation("ShowSpaces");?>:</label>
-<input type="hidden" name="show_spaces" value="N" /> <input
-	type="checkbox" id="show_spaces" name="show_spaces" value="Y"
-	<?php echo $user["show_spaces"] == "Y" ? "checked=\"checked\"" : "" ?> />
+<input type="hidden" name="show_spaces" value="0" /> <input
+	type="checkbox" id="show_spaces" name="show_spaces" value="1"
+	<?php echo $user["show_spaces"] == "1" ? "checked=\"checked\"" : "" ?> />
 </p>
 <p><label for="dont_redirect"><?php echo $this->GetTranslation("DontRedirect");?>:</label>
 <input type="hidden" name="dont_redirect" value="N" /> <input
@@ -144,7 +144,7 @@ else if ($user = $this->GetUser())
 	<?php echo $user["options"]["send_watchmail"] == "Y" ? "checked=\"checked\"" : "" ?> />
 </p>
 <!--
-	<p><label for="typografica"><?php echo $this->GetTranslation("Typografica");?>:</label><input type="hidden" name="typografica" value="N" /><input type="checkbox" id="typografica" name="typografica" value="Y" <?php echo $user["typografica"] == "Y" ? "checked=\"checked\"" : "" ?> /></p>
+	<p><label for="typografica"><?php echo $this->GetTranslation("Typografica");?>:</label><input type="hidden" name="typografica" value="0" /><input type="checkbox" id="typografica" name="typografica" value="1" <?php echo $user["typografica"] == "1" ? "checked=\"checked\"" : "" ?> /></p>
 	-->
 <p><label for="lang"><?php echo $this->GetTranslation("YourLanguage");?>:</label>
 <select id="lang" name="lang">

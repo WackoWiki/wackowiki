@@ -188,8 +188,8 @@ class Init
 					"header_action" => "header",
 					"footer_action" => "footer",
 
-					"show_datetime" => "N",
-					"show_spaces" => "Y",
+					"show_datetime" => 0,
+					"show_spaces" => 1,
 
 					"default_typografica" => 1,
 					"default_showdatetime" => 1,

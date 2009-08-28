@@ -2029,8 +2029,9 @@ class Wacko
 	{
 		if ($user = $this->GetUser()) $show = $user["showdatetime"];
 		if (!isset($show)) $show = $this->config["show_datetime"];
-		if (!$show) $show = "Y";
-		if ($show != "N" && $show != "0")
+		if (!$show) $show = "1";
+		// TODO: double?
+		if ($show != "0" && $show != "0")
 		{
 			$_page = $this->LoadPage($tag, "", LOAD_CACHE, LOAD_META);
 			return ($this->config["rewrite_mode"] ? "?" : "&amp;").
@@ -2055,10 +2056,10 @@ class Wacko
 	function AddSpaces($text)
 	{
 
-		$show = "Y";
+		$show = "1";
 		if ($user = $this->GetUser()) $show = $user["show_spaces"];
 		if (!$show) $show = $this->config["show_spaces"];
-		if ($show != "N") {
+		if ($show != "0") {
 			$text = preg_replace("/(".$this->language["ALPHANUM"].")(".$this->language["UPPERNUM"].")/","\\1&nbsp;\\2",$text);
 			$text = preg_replace("/(".$this->language["UPPERNUM"].")(".$this->language["UPPERNUM"].")/","\\1&nbsp;\\2",$text);
 			$text = preg_replace("/(".$this->language["ALPHANUM"].")\//","\\1&nbsp;/",$text);
@@ -2428,7 +2429,7 @@ class Wacko
 	{
 		if (!$user = $this->GetUser())
 			return false;
-		return ($user["show_comments"] == "Y");
+		return ($user["show_comments"] == "1");
 	}
 
 	function UserWantsFiles()
@@ -3259,7 +3260,7 @@ class Wacko
 			if (stristr($_SERVER["HTTP_USER_AGENT"], $engine))
 			{
 				$this->config["default_showdatetime"] = 0;
-				$this->config["show_datetime"] = "N";
+				$this->config["show_datetime"] = 0;
 			}
 		}
 

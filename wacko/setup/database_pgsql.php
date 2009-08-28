@@ -95,12 +95,12 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 					"changescount integer NOT NULL DEFAULT 50,".
 					"doubleclickedit int(1) NOT NULL DEFAULT '1',".
 					"signuptime timestamp without time zone NOT NULL DEFAULT now(),".
-					"show_comments character(1) NOT NULL DEFAULT 'N',".
+					"show_comments int(1) NOT NULL DEFAULT '1',".
 					"bookmarks text NOT NULL DEFAULT '',".
 					"lang character varying(2) NOT NULL DEFAULT '',".
-					"show_spaces character(1) NOT NULL DEFAULT 'Y',".
-					"showdatetime character(1) NOT NULL DEFAULT 'Y',".
-					"typografica character(1) NOT NULL DEFAULT 'Y',".
+					"show_spaces int(1) NOT NULL DEFAULT '1',".
+					"show_datetime int(1) NOT NULL DEFAULT '1',".
+					"typografica int(1) NOT NULL DEFAULT '1',".
 					"more text NOT NULL DEFAULT '',".
 					"changepassword character varying(100) NOT NULL DEFAULT '',".
 					"email_confirm character varying(40) NOT NULL DEFAULT '',".
