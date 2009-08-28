@@ -11,12 +11,12 @@ Common header file.
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
 <title>
-<?php 
+<?php
 // Echoes Title of the page.
-  echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); 
+  echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
 ?>
 </title>
-<?php 
+<?php
 // We don't need search robots to index subordinate pages
   if ($this->GetMethod() != 'show' || $this->page["latest"] == "N")
      echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
@@ -35,9 +35,9 @@ Common header file.
 // default.js contains common procedures and should be included everywhere
 ?>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
-<?php 
+<?php
 // protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
-if ($this->method == 'edit') 
+if ($this->method == 'edit')
 {
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/wikiedit2.js\"></script>\n";
@@ -51,7 +51,7 @@ if ($this->method == 'edit')
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->GetUser())
    {
-      if ($user["doubleclickedit"] == "Y")
+      if ($user["doubleclickedit"] == "1")
          {
 ?>
   <script type="text/javascript">
@@ -108,28 +108,28 @@ echo $this->FormClose();
   <tr bgcolor="#85a43c">
     <td height="20" colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td><div class="navText"><strong><?php echo $this->ComposeLinkToPage($this->config["root_page"]);?>:</strong> <?php echo $this->GetPagePath(); ?> <a title="<?php echo $this->GetTranslation("SearchTitleTip")?>" 
+          <td><div class="navText"><strong><?php echo $this->ComposeLinkToPage($this->config["root_page"]);?>:</strong> <?php echo $this->GetPagePath(); ?> <a title="<?php echo $this->GetTranslation("SearchTitleTip")?>"
      href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></div></td>
-          <td align="right"><?php 
-// If user are logged, Wacko shows "You are UserName" 
+          <td align="right"><?php
+// If user are logged, Wacko shows "You are UserName"
 if ($this->GetUser()) {
 ?>
             <span class="nobr"><?php echo $this->GetTranslation("YouAre")." ".$this->Link($this->GetUserName()) ?></span> <small>( <span class="nobr Tune">
-            <?php 
+            <?php
       echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?>
             | <a onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a></span> )</small>
-            <?php 
+            <?php
 // Else Wacko shows login's controls
-} 
-// End if  
+}
+// End if
 ?></td>
         </tr>
-        <?php 
+        <?php
 // Closing Login form, If user are logged
 # if ($this->GetUser()) {
-# echo $this->FormClose(); 
-# } 
-// End if  
+# echo $this->FormClose();
+# }
+// End if
 ?>
       </table></td>
   </tr>
@@ -146,9 +146,9 @@ if ($this->GetUser()) {
       <tr align="left">
         <td><div>
             <?php
-		# echo '<br />';				
+		# echo '<br />';
         # echo "<hr color=#CCCCCC noshade size=1 />";
-		echo '<div class="leftNav"><ul class="leftNav"><li>';  
+		echo '<div class="leftNav"><ul class="leftNav"><li>';
 
 // Bookmarks
 $BMs = $this->GetBookmarks();
@@ -157,23 +157,23 @@ $formatedBMs = str_replace ( "| ", "</li><li>\n", $formatedBMs );
 echo $formatedBMs;
 echo "</li></ul></div>";
         # echo "<hr color=#CCCCCC noshade size=1 />";
-		echo '<br />';	
+		echo '<br />';
        if ($this->GetUser()) {
 			if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>
             <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"> <img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar1.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->GetTranslation("Bookmarks"); ?> </a>
             <?php } else { ?>
-            <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"> <img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar2.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->GetTranslation("Bookmarks"); 
+            <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"> <img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar2.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->GetTranslation("Bookmarks");
 ?> </a>
-            <?php 
+            <?php
 }
-echo "<hr noshade=\"noshade\" size=\"1\" />";	
+echo "<hr noshade=\"noshade\" size=\"1\" />";
 echo "<div class=\"credits\">";
 print $this->Format( '{{hits}} Aufrufe' );
 echo "</div>";
 }
 ?>
             <div>
-              <?php 
+              <?php
         					#    if ($this->UserIsOwner()) {
 		                    #   		echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 							#		print($this->GetTranslation("YouAreOwner"));
@@ -184,7 +184,7 @@ echo "</div>";
 							#      } else if (!$this->page["comment_on"]) {
 							#        print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
 							#      }
-								
+
 							# }
 							# echo '<br />';
 							?>

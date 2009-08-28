@@ -11,11 +11,11 @@ Common header file.
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
-  <title><?php 
+  <title><?php
 // Echoes Title of the page.
-  echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); 
+  echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
 ?></title>
-<?php 
+<?php
 // We don't need search robots to index subordinate pages
   if ($this->GetMethod() != 'show' || $this->page["latest"] == "N")
      echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
@@ -34,9 +34,9 @@ Common header file.
 // default.js contains common procedures and should be included everywhere
 ?>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
-<?php 
+<?php
 // protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
-if ($this->method == 'edit') 
+if ($this->method == 'edit')
 {
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/wikiedit2.js\"></script>\n";
@@ -50,7 +50,7 @@ if ($this->method == 'edit')
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->GetUser())
    {
-      if ($user["doubleclickedit"] == "Y")
+      if ($user["doubleclickedit"] == "1")
          {
 ?>
   <script type="text/javascript">
@@ -87,14 +87,14 @@ else if($this->HasAccess("write"))
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
 	<tr>
   		<td>
-<!-- <h1>-->  
+<!-- <h1>-->
      <span class="main"><?php echo $this->config["wacko_name"] ?>:</span>
      <span class="pagetitle"><?php echo $this->GetPagePath(); ?></span>
-     <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" 
+     <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>"
      href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a><br />
-<!-- </h1> -->  
+<!-- </h1> -->
 </td><td>
-<?php 
+<?php
 /*
 Samsra theme.
 
@@ -104,84 +104,84 @@ Commented by Roman Ivanov.
 // Opens Search form
 echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?>
 <div align="right">
-<?php 
+<?php
 // Searchbar
 ?>
   <span><?php echo $this->GetTranslation("SearchText") ?><input type="text" name="phrase" size="15" style="border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;" /><input  class="submitinput" type="submit" value="&raquo;" alt="<?php echo $this->GetTranslation("SearchButtonText"); ?>!" title="<?php echo $this->GetTranslation("SearchButtonText"); ?>!" /></span>
 </div>
-<?php 
+<?php
 
 // Search form close
-echo $this->FormClose(); 
+echo $this->FormClose();
 ?>
 </td>
 	</tr>
 </table>
-<?php 
+<?php
 // Begin Login form
 echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
       <input type="hidden" name="action" value="login" />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td> 
-      <?php 
+    <td>
+      <?php
 // Outputs Bookmarks AKA QuickLinks
   // Main page
   echo $this->ComposeLinkToPage($this->config["root_page"]); ?>
 |
-<?php 
+<?php
   // All user's Bookmarks
   echo $this->Format($this->GetBookmarksFormatted(), "post_wacko"); ?>
 |
-<?php 
+<?php
   // Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
-if ($this->GetUser()) 
+if ($this->GetUser())
 {
  if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks()))
  {?>
 <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar1.gif" alt="+" title="<?php echo $this->GetTranslation("AddToBookmarks") ?>" /></a>
-<?php 
+<?php
  } else { ?>
 <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar2.gif" alt="-" title="<?php echo $this->GetTranslation("RemoveFromBookmarks") ?>" /></a><?php  }
 } ?></td>
-    <td align="right"><?php 
+    <td align="right"><?php
 
 
-// If user are logged, Wacko shows "You are UserName" 
+// If user are logged, Wacko shows "You are UserName"
 if ($this->GetUser()) { ?>
       <span class="nobr"><?php echo $this->GetTranslation("YouAre")." ".$this->Link($this->GetUserName()) ?></span> <small>( <span class="nobr Tune">
-      <?php 
+      <?php
       echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?>
 | <a onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a></span> )</small>
-      <?php 
+      <?php
 // Else Wacko shows login's controls
-} else { 
+} else {
 ?>
       <span class="nobr">
-      <input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>" 
+      <input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag);?>"
 />
       <strong><?php echo $this->GetTranslation("LoginWelcome") ?>:&nbsp;</strong>
-      <input 
+      <input
 type="text" name="name" size="18" class="login" />
       &nbsp;
-      <?php 
+      <?php
 echo $this->GetTranslation("LoginPassword") ?>
       :&nbsp;
-      <input type="password" name="password"  
+      <input type="password" name="password"
 class="login" size="8" />
       &nbsp;
-      <input name="image" type="image" 
+      <input name="image" type="image"
 src="<?php echo $this->GetConfigValue("theme_url") ?>icons/login.gif" alt=">>>" align="top" />
       </span>
-      <?php 
+      <?php
 }
-// End if 
+// End if
 ?></td>
   </tr>
 </table>
-<?php 
+<?php
 // Closing Login form
-echo $this->FormClose(); 
+echo $this->FormClose();
 ?>
 </div>
 <?php

@@ -27,9 +27,9 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 // default.js contains common procedures and should be included everywhere
 ?>
   <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
-<?php 
+<?php
 // protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
-if ($this->method == 'edit') 
+if ($this->method == 'edit')
 {
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/wikiedit2.js\"></script>\n";
@@ -43,7 +43,7 @@ if ($this->method == 'edit')
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->GetUser())
    {
-      if ($user["doubleclickedit"] == "Y")
+      if ($user["doubleclickedit"] == "1")
          {
 ?>
   <script type="text/javascript">
@@ -67,15 +67,15 @@ else if($this->HasAccess("write"))
 <body onload="all_init();">
 	<div id="mainwrapper">
 		<div id="header">
-			<?php // Insert search form ?> 
+			<?php // Insert search form ?>
 			<?php echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?>
 			<input type="text" name="phrase" size="15" value="<?php echo $this->GetTranslation("SearchButtonText"); ?>" class="search" />
-			<?php echo $this->FormClose(); ?> 
-			
+			<?php echo $this->FormClose(); ?>
+
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
 			<b><?php echo $this->config["wacko_name"]; ?>:</b>
 			<?php echo $this->GetPagePath(); ?>
-			<a title="<?php echo $this->GetTranslation("SearchTitleTip"); ?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a> 
+			<a title="<?php echo $this->GetTranslation("SearchTitleTip"); ?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
 		</div>
 		<div id="quicklinks">
 			<div class="bookmarks">
@@ -113,7 +113,7 @@ else if($this->HasAccess("write"))
 			<?php } else { ?>
 			<div class="loginbox">
 				<?php echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
-				<input type="hidden" name="action" value="login" /> 
+				<input type="hidden" name="action" value="login" />
 				<input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag); ?>" />
 				<?php echo $this->GetTranslation("LoginWelcome"); ?>
 				<input type="text" name="name" size="15" class="login" />

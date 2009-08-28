@@ -47,7 +47,7 @@ if ($this->method == 'edit')
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->GetUser())
    {
-      if ($user["doubleclickedit"] == "Y")
+      if ($user["doubleclickedit"] == "1")
          {
 ?>
   <script type="text/javascript">
@@ -118,7 +118,7 @@ else
 		echo $formatedBMs;
 
 		echo "</li>\n";
-					
+
 		if ($this->GetUser())
 		{
 			// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
