@@ -6,7 +6,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 <head>
 <title><?php echo $this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
 echo " (@".$this->GetWackoName().")" ?></title>
-<?php if ($this->GetMethod() != 'show' || $this->page["latest"] == "N")
+<?php if ($this->GetMethod() != 'show' || $this->page["latest"] == "0")
 echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
 <meta name="description"

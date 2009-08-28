@@ -6,7 +6,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
 <title><?php echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?></title>
-<?php if ($this->GetMethod() != 'show' || $this->page["latest"] == "N")
+<?php if ($this->GetMethod() != 'show' || $this->page["latest"] == "0")
 echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
 <meta name="description"

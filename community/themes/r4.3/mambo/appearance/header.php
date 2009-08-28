@@ -7,7 +7,7 @@
 			<?php echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?>
 		</title>
 <?php
-	if ($this->GetMethod() != 'show' || $this->page["latest"] == "N") {
+	if ($this->GetMethod() != 'show' || $this->page["latest"] == "0") {
 		echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 	}
 ?>

@@ -18,7 +18,7 @@ if ($this->HasAccess("read"))
 			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->page["comment_on"], "", "", 0).", ".$this->GetTranslation("PostedBy")." ".$this->Format($this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["time"]."</div>");
 		}
 
-		if ($this->page["latest"] == "N")
+		if ($this->page["latest"] == "0")
 		{
 			print("<div class=\"revisioninfo\">".
 			str_replace("%1",$this->href(),

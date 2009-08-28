@@ -19,7 +19,7 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
     <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
     <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
-	<?php if($this->GetMethod() != 'show' || $this->page["latest"] == "N") { ?><meta name="robots" content="noindex, nofollow" /><?php } ?>
+	<?php if($this->GetMethod() != 'show' || $this->page["latest"] == "0") { ?><meta name="robots" content="noindex, nofollow" /><?php } ?>
 	<title><?php echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?></title>
 	<!-- JavaScript used by WackoWiki -->
 	<?php
