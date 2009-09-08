@@ -52,7 +52,7 @@ define("TRAN_DONTLOAD", 				1);
 
 // do not change this two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
 define("WAKKA_VERSION",					"0.1.2");
-define("WACKO_VERSION",					"R4.3");
+define("WACKO_VERSION",					"R4.3.rc2");
 define("XML_HTMLSAX3",					"lib/HTMLSax3/");
 #define('XML_HTMLSAX3', 					dirname(__FILE__)."/lib/HTMLSax3/");
 define("ACTIONS4DIFF", "a, anchor, toc"); //allowed actions in DIFF
