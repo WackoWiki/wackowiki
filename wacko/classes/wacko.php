@@ -3238,15 +3238,16 @@ class Wacko
 		{
 			if (($this->config["debug_admin_only"] == true && $this->IsAdmin() === true) || $this->config["debug_admin_only"] == false)
 			{
-				echo '<span class="debug">Multilanguage: '.$this->config["multilanguage"].'<br/>';
-				echo 'HTTP_ACCEPT_LANGUAGE set: '.isset($_SERVER['HTTP_ACCEPT_LANGUAGE']).'<br />';
-				echo 'HTTP_ACCEPT_LANGUAGE value: '.$_SERVER['HTTP_ACCEPT_LANGUAGE'].'<br />';
-				echo 'HTTP_ACCEPT_LANGUAGE chopped value: '.strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2)).'<br />';
-				echo 'User language set: '.isset($user["lang"]).'<br />';
-				echo 'User language: '.$user["lang"].'<br />';
-				echo 'Config language: '.$this->config["language"].'<br />';
-				echo 'Current language: '.$this->userlang.'<br />';
-				echo '</span>';
+				$lang_debug = '<span class="debug">Multilanguage: '.$this->config["multilanguage"].'<br/>';
+				$lang_debug .= 'HTTP_ACCEPT_LANGUAGE set: '.isset($_SERVER['HTTP_ACCEPT_LANGUAGE']).'<br />';
+				$lang_debug .= 'HTTP_ACCEPT_LANGUAGE value: '.$_SERVER['HTTP_ACCEPT_LANGUAGE'].'<br />';
+				$lang_debug .= 'HTTP_ACCEPT_LANGUAGE chopped value: '.strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2)).'<br />';
+				$lang_debug .= 'User language set: '.isset($user["lang"]).'<br />';
+				$lang_debug .= 'User language: '.$user["lang"].'<br />';
+				$lang_debug .= 'Config language: '.$this->config["language"].'<br />';
+				$lang_debug .= 'Current language: '.$this->userlang.'<br />';
+				$lang_debug .= '</span>';
+				echo $lang_debug;
 			}
 		}
 
