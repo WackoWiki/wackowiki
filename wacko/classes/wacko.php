@@ -155,7 +155,7 @@ class Wacko
 			// Returns Array ( [id] => Value )
 			$get_page_ID = $this->LoadSingle(
 				"SELECT id ".
-				"FROM ".$this->config["table_prefix"]."pages "
+				"FROM ".$this->config["table_prefix"]."pages ".
 				"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
 			
 			// Get the_ID value
@@ -1208,9 +1208,10 @@ class Wacko
 				$this->SaveAcl($tag, "read", $read_acl);
 				// $this->SaveAcl($tag, "comment", ($comment_on ? "" : $comment_acl));
 				$this->SaveAcl($tag, "comment", $comment_acl);
+
 				// set watch
 				if ($this->GetUser() && !$this->config["disable_autosubscribe"])
-					$this->SetWatch($this->GetUserName(), $this->GetUserId(), $this->GetPageTag(), $this->GetPageId());
+					$this->SetWatch($this->GetUserName(), $this->GetUserId(), $this->GetPageTag(), $this->GetPageId($tag));
 
 				if ($comment_on)
 				{
