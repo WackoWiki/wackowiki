@@ -143,7 +143,27 @@ class Wacko
 	}
 
 	function GetPageTag() { return $this->tag; }
-	function GetPageId() { return $this->page["id"]; }
+	function GetPageId($tag = 0) 
+	{
+		if(!$tag)
+		{
+			return $this->page["id"];
+		} 
+		else
+		//Soon we'll need to have page ID when saving a new page to continue working with $ID instead of $tag
+		{
+			// Returns Array ( [id] => Value )
+			$get_page_ID = $this->LoadSingle(
+				"SELECT id ".
+				"FROM ".$this->config["table_prefix"]."pages "
+				"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
+			
+			// Get the_ID value
+			$new_page_id = $get_page_ID['id'];
+			
+			return $new_page_id;
+		}
+	}
 	function GetPageSuperTag() { return $this->supertag; }
 	function GetPageTime() { return $this->page["time"]; }
 	function GetPageLastWriter() { return $this->page["user"]; }
@@ -1181,17 +1201,6 @@ class Wacko
 						"minor_edit = '".quote($this->dblink, $minor_edit)."', ".
 						"lang = '".quote($this->dblink, $lang)."', ".
 						"tag = '".quote($this->dblink, $tag)."'");
-
-				//Soon we'll need to have page ID when saving a new page to continue working with $ID instead of $tag
-				//This can be done so:
-
-				// Returns Array ( [id] => Value )
-				$our_ID = $this->LoadSingle("SELECT id FROM ".$this->config["table_prefix"].
-				                            "pages WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
-				// Get the_ID value
-				$the_ID= $our_ID['id'];
-
-				// TODO: Change the naming of $our_ID and $the_ID, change the rest of functions to work with ID
 
                	// saving acls
 				// $this->SaveAcl($tag, "write", ($comment_on ? "" : $write_acl));
@@ -2568,7 +2577,7 @@ class Wacko
 
 	function SaveAcl($tag, $privilege, $list)
 	{
-		$page_id = $this->GetPageId();
+		$page_id = $this->GetPageId($tag);
 		$supertag = $this->NpjTranslit($tag);
 
 		if ($this->LoadAcl($tag, $privilege, 0))
