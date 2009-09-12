@@ -23,7 +23,7 @@ if ($this->page)
 
 		// Rename link
 		print("<li><a href=\"".$this->href("rename")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" /></a></li>\n");
-		
+
 		// Remove link (shows only for page owner if allowed)
 		if (!$this->GetConfigValue("remove_onlyadmins")) print("<li><a href=\"".$this->href("remove")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/del.gif\" title=\"".$this->GetTranslation("DeleteTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" /></a></li>\n");
 
@@ -46,16 +46,16 @@ if ($this->page)
 	if ($this->CheckACL($this->GetUserName(),$this->config["rename_globalacl"]) && !$this->UserIsOwner())
 	{
 		print("<li><a href=\"".$this->href("rename")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" /></a></li>\n");
-	}	
+	}
 	// Remove link (shows only for Admins)
 	if ($this->IsAdmin() && !$this->UserIsOwner())
 	{
 		print("<li><a href=\"".$this->href("remove")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/del.gif\" title=\"".$this->GetTranslation("DeleteTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" /></a></li>\n");
-		
+
 		// Edit ACLs link (shows also for Admins)
 		print("<li><a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"").">".$this->GetTranslation("EditACLText")."</a></li>\n");
 	}
-	
+
 	if($this->HasAccess("write") && $this->GetUser() || $this->IsAdmin())
 	{
 		// Page  settings link
@@ -66,7 +66,7 @@ print("<li><a href=\"".$this->href("referrers")."\"><img src=\"".$this->GetConfi
 
 if ($this->GetUser()){
 	// Watch/Unwatch icon
-	echo ($this->IsWatched($this->GetUserName(), $this->GetPageTag()) ? "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/unvisibl.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  /></a></li>\n" : "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/visibl.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\" /></a></li>\n");
+	echo ($this->IsWatched($this->GetUserId(), $this->GetPageId()) ? "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/unvisibl.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  /></a></li>\n" : "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/visibl.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\" /></a></li>\n");
 }
 
 // Print icon
@@ -77,7 +77,7 @@ echo"<li><a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this
 
 </ul>
 </div>
-<div id="credits"><?php 
+<div id="credits"><?php
 if ($this->GetUser()){
 	echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion());
 }

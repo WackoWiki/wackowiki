@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 Default theme.
 Common footer file.
@@ -25,7 +25,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1)
   $tag = $this->GetPageTag();
   if (!isset($_SESSION["show_files"][$tag]))
     $_SESSION["show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
-    
+
   switch($_REQUEST["show_files"])
   {
   case "0":
@@ -35,7 +35,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1)
     $_SESSION["show_files"][$tag] = 1;
     break;
   }
-  
+
   // display files!
   if ($this->page && $_SESSION["show_files"][$tag])
   {
@@ -55,27 +55,27 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1)
         </tr>
       </table>
     <?php
-    
+
     echo "<div class=\"files\">";
     echo $this->Action("files",array("nomark"=>1));
     echo "</div>";
     // display form
     print("<div class=\"filesform\">\n");
     if ($user = $this->GetUser())
-    { 
+    {
       $user = strtolower($this->GetUserName());
       $registered = true;
     }
     else
       $user = "guest@wacko";
 
-    if ($registered 
-        && 
+    if ($registered
+        &&
         (
          ($this->config["upload"] === true) || ($this->config["upload"] == "1") ||
          ($this->CheckACL($user,$this->config["upload"]))
         )
-       )  
+       )
     echo $this->Action("upload",array("nomark"=>1));
     print("</div>\n");
   }
@@ -95,7 +95,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1)
       switch (count($files))
       {
       case 0:
-        print($this->GetTranslation("Files_0"));       
+        print($this->GetTranslation("Files_0"));
         break;
       case 1:
         print($this->GetTranslation("Files_1"));
@@ -104,7 +104,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1)
         print(str_replace("%1",count($files), $this->GetTranslation("Files_n")));
       }
     ?>
-    
+
     [<a href="<?php echo $this->href("", "", "show_files=1#files")."\">".$this->GetTranslation("ShowFiles"); ?></a>]
 
     </div>	</td>
@@ -123,12 +123,12 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
 {
   // load comments for this page
   $comments = $this->LoadComments($this->tag);
-  
+
   // store comments display in session
   $tag = $this->GetPageTag();
   if (!isset($_SESSION["show_comments"][$tag]))
     $_SESSION["show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
-    
+
   switch($_REQUEST["show_comments"])
   {
   case "0":
@@ -138,7 +138,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
     $_SESSION["show_comments"][$tag] = 1;
     break;
   }
-  
+
   // display comments!
   if ($this->page && $_SESSION["show_comments"][$tag])
   {
@@ -156,7 +156,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
         </tr>
       </table>
     <?php
-    
+
     // display comments themselves
     if ($comments)
     {
@@ -165,7 +165,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
         print("<a name=\"".$comment["tag"]."\"></a>\n");
         print("<div class=\"comment\">\n");
         $del = "";
-        if ($this->IsAdmin() || $this->UserIsOwner($comment["tag"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageTag()))) 
+        if ($this->IsAdmin() || $this->UserIsOwner($comment["tag"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageTag())))
           print("<div style=\"float:right;\" style='background:#ffcfa8; border: solid 1px; border-color:#cccccc'>".
           "<a href=\"".$this->href("remove",$comment["tag"])."\" title=\"".$this->GetTranslation("DeleteTip")."\">".
           "<img src=\"".$this->GetConfigValue("theme_url")."icons/del.gif\" hspace=4 vspace=4 title=\"".$this->GetTranslation("DeleteText")."\"  align=\"absmiddle\" border=\"0\" /></a>".
@@ -175,7 +175,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
         print("</div>\n");
       }
     }
-    
+
     // display comment form
     print("<div class=\"commentform\">\n");
     if ($this->HasAccess("comment"))
@@ -200,7 +200,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
       switch (count($comments))
       {
       case 0:
-        print($this->GetTranslation("Comments_0"));       
+        print($this->GetTranslation("Comments_0"));
         break;
       case 1:
         print($this->GetTranslation("Comments_1"));
@@ -209,7 +209,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
         print(str_replace("%1",count($comments), $this->GetTranslation("Comments_n")));
       }
     ?>
-    
+
     [<a href="<?php echo $this->href("", "", "show_comments=1#comments")."\">".$this->GetTranslation("ShowComments"); ?></a>]
 
     </div></td>
@@ -226,7 +226,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
 <?php } //end of $this->method==show
 ?>
 <!-- !!! -->
-<?php 
+<?php
 // Opens Search form
 echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?>
 <div class="footer">
@@ -282,24 +282,24 @@ if ($this->page)
 // print("<a href=\"".$this->href("referrers")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/referer.gif\" title=\"".$this->GetTranslation("ReferrersTip")."\" alt=\"".$this->GetTranslation("ReferrersText")."\" border=\"0\" align=\"middle\" /></a> |");
 }
 ?>
-<?php 
+<?php
 // Watch/Unwatch icon
-echo ($this->IsWatched($this->GetUserName(), $this->GetPageTag()) ? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/unvisibl.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"middle\" border=\"0\" /></a>" : "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/visibl.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"middle\" border=\"0\" /></a>" ) 
-?> | 
-<?php 
+echo ($this->IsWatched($this->GetUserId(), $this->GetPageId()) ? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/unvisibl.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"middle\" border=\"0\" /></a>" : "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/visibl.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"middle\" border=\"0\" /></a>" )
+?> |
+<?php
 // Print icon
 echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->GetConfigValue("theme_url")."icons/print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"middle\" border=\"0\" /></a>";
 
 // Searchbar
-?> | 
+?> |
   <span class="searchbar nobr"><?php echo $this->GetTranslation("SearchText") ?><input type="text" name="phrase" size="15" style="border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;" /></span>
-<?php 
+<?php
 
 // Search form close
 echo $this->FormClose();
 ?>
 </div>
-<div id="credits"><?php 
+<div id="credits"><?php
 if ($this->GetUser()){
 	echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion());
 }
