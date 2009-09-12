@@ -1,13 +1,13 @@
 <?php
 if ($this->GetUser() && $this->page)
 {
-	if ($this->IsWatched($this->GetUserName(), $this->tag))
+	if ($this->IsWatched($this->GetUserId(), $this->GetPageId()))
 	{
-		$this->ClearWatch($this->GetUserName(), $this->tag);
+		$this->ClearWatch($this->GetUserId(), $this->GetPageId());
 	}
 	else
 	{
-		$this->SetWatch($this->GetUserName(), $this->tag);
+		$this->SetWatch($this->GetUserId(), $this->GetPageId());
 	}
 }
 $this->Redirect($this->href());

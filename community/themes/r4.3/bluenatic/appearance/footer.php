@@ -14,7 +14,7 @@
 		<?php } ?> &nbsp;|&nbsp; <a
 	href="<?php echo $this->href("settings"); ?>"><?php echo $this->GetTranslation("SettingsText"); ?></a>
 &nbsp;|&nbsp; <?php // Watch page ?> <a
-	href="<?php echo $this->href("watch"); ?>"> <?php if($this->IsWatched($this->GetUserName(), $this->GetPageTag())) { ?>
+	href="<?php echo $this->href("watch"); ?>"> <?php if($this->IsWatched($this->GetUserId(), $this->GetPageId())) { ?>
 <img
 	src="<?php echo $this->GetConfigValue("theme_url"); ?>images/watch-remove.gif"
 	alt="<?php echo $this->GetTranslation("RemoveWatch"); ?>"
@@ -33,7 +33,7 @@
 	src="<?php echo $this->GetConfigValue("theme_url"); ?>images/bookmark-add.gif"
 	alt="<?php echo $this->GetTranslation("AddToBookmarks"); ?>"
 	title="<?php echo $this->GetTranslation("AddToBookmarks"); ?>"
-	width="16" height="16" /> <?php } ?> </a> <?php } 
+	width="16" height="16" /> <?php } ?> </a> <?php }
 	// End of "Page exists" ?> <?php
 	if ($this->GetUser()){
 		echo "&nbsp;|&nbsp;".$this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion());

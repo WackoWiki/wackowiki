@@ -143,12 +143,12 @@ class Wacko
 	}
 
 	function GetPageTag() { return $this->tag; }
-	function GetPageId($tag = 0) 
+	function GetPageId($tag = 0)
 	{
 		if(!$tag)
 		{
 			return $this->page["id"];
-		} 
+		}
 		else
 		//Soon we'll need to have page ID when saving a new page to continue working with $ID instead of $tag
 		{
@@ -157,10 +157,10 @@ class Wacko
 				"SELECT id ".
 				"FROM ".$this->config["table_prefix"]."pages ".
 				"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
-			
+
 			// Get the_ID value
 			$new_page_id = $get_page_ID['id'];
-			
+
 			return $new_page_id;
 		}
 	}
@@ -1211,20 +1211,20 @@ class Wacko
 
 				// set watch
 				if ($this->GetUser() && !$this->config["disable_autosubscribe"])
-					$this->SetWatch($this->GetUserName(), $this->GetUserId(), $this->GetPageTag(), $this->GetPageId($tag));
+					$this->SetWatch($this->GetUserId(), $this->GetPageId($tag));
 
 				if ($comment_on)
 				{
 					// notifying watchers
-					$username = $this->GetUserName();
+					$user_id = $this->GetUserId();
 					$Watchers = $this->LoadAll(
-									"SELECT DISTINCT user ".
+									"SELECT DISTINCT user_id ".
 									"FROM ".$this->config["table_prefix"]."pagewatches ".
-									"WHERE tag = '".quote($this->dblink, $comment_on)."'");
+									"WHERE page_id = '".quote($this->dblink, $comment_on)."'");
 
 					foreach ($Watchers as $Watcher)
 
-					if ($Watcher["user"] !=  $username)
+					if ($Watcher["user_id"] !=  $user_id)
 					{
 						$_user = $this->GetUser();
 						$Watcher["name"] = $Watcher["user"];
@@ -2980,34 +2980,34 @@ class Wacko
 	}
 
 	// WATCHES
-	function IsWatched($user, $tag)
+	function IsWatched($user_id, $page_id)
 	{
 		return $this->LoadSingle(
 			"SELECT * FROM ".$this->config["table_prefix"]."pagewatches ".
-			"WHERE user = '".quote($this->dblink, $user)."' ".
-				"AND tag = '".quote($this->dblink, $tag)."'");
+			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+				"AND page_id = '".quote($this->dblink, $page_id)."'");
 	}
 
-	function SetWatch($user, $user_id, $tag, $page_id)
+	function SetWatch($user_id, $page_id)
 	{
 		// Remove old watch first to avoid double watches
-		$this->ClearWatch($user, $tag);
+		$this->ClearWatch($user_id, $page_id);
 
 		if ($this->HasAccess('read', $tag))
 			return $this->Query(
-				"INSERT INTO ".$this->config["table_prefix"]."pagewatches (user, user_id, tag, page_id) ".
-				"VALUES ( '".quote($this->dblink, $user)."', '".quote($this->dblink, $user_id)."', '".quote($this->dblink, $tag)."', '".quote($this->dblink, $page_id)."')" );
+				"INSERT INTO ".$this->config["table_prefix"]."pagewatches (user_id, page_id) ".
+				"VALUES ( '".quote($this->dblink, $user_id)."', '".quote($this->dblink, $page_id)."')" );
 				// TIMESTAMP type is filled automatically by MySQL
 		else
 			return false;
 	}
 
-	function ClearWatch($user, $tag)
+	function ClearWatch($user_id, $page_id)
 	{
 		return $this->Query(
 			"DELETE FROM ".$this->config["table_prefix"]."pagewatches ".
-			"WHERE user = '".quote($this->dblink, $user)."' ".
-				"AND tag = '".quote($this->dblink, $tag)."'");
+			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+				"AND page_id = '".quote($this->dblink, $page_id)."'");
 	}
 
 	// BOOKMARKS
