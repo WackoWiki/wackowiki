@@ -2132,6 +2132,8 @@ class Wacko
 
 	function WriteLinkTable($from_tag = "")
 	{
+		$page_id = $this->GetPageId($tag);
+
 		// delete old link table
 		if ($from_tag == "")
 			$from_tag = $this->tag;
@@ -2149,13 +2151,13 @@ class Wacko
 
 				if (!$written[$lower_to_tag])
 				{
-					$query .= "('".$from_tag."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->NpjTranslit($to_tag))."'),";
+					$query .= "('".$from_tag."','".$page_id."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->NpjTranslit($to_tag))."'),";
 					$written[$lower_to_tag] = 1;
 				}
 			}
 			$this->Query(
 				"INSERT INTO ".$this->config["table_prefix"]."links ".
-					"(from_tag, to_tag, to_supertag) ".
+					"(from_tag, from_page_id, to_tag, to_supertag) ".
 				"VALUES ".rtrim($query, ","));
 		}
 	}
