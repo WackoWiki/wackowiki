@@ -8,7 +8,7 @@
 	<?php if($owner = $this->GetPageOwner()) {
 		echo $this->GetTranslation("Owner");
 		echo $this->Link($owner);
-	} else if(!$this->page["comment_on"]) {
+	} else if(!$this->page["comment_on_id"]) {
 		echo $this->GetTranslation("Nobody"); ?> <a
 	href="<?php echo $this->href("claim"); ?>"><?php echo $this->GetTranslation("TakeOwnership"); ?></a>
 		<?php } ?> &nbsp;|&nbsp; <a

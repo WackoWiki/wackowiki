@@ -3,7 +3,7 @@
 $root = $vars[0];
 
 // input
-if (!isset($root) && !isset($page)) 
+if (!isset($root) && !isset($page))
 					$root = "/".$this->page["tag"];
 
 if ($page)			$root = $page;
@@ -138,13 +138,13 @@ if (!function_exists('print_cluster_tree'))
 			static $need_letter = 0;
 			static $newletter = "!";
 
-			if ($style == "ul") 
+			if ($style == "ul")
 				print "<ul>";
-			if ($style == "ol") 
+			if ($style == "ol")
 				print "<ol>";
-			if ($style == "indent") 
+			if ($style == "indent")
 				print "<div class=\"indent\">";
-			
+
 			foreach ($tree as $sub_tag => $sub_tag_array )
 			{
 				$sub_supertag = $sub_tag_array["supertag"];
@@ -172,27 +172,27 @@ if (!function_exists('print_cluster_tree'))
 				{
 					if ($need_letter == 1)
 					{ //Convenient case to print the letter
-						if (($style == "ul" || $style == "ol" ) && $letter ) 
+						if (($style == "ul" || $style == "ol" ) && $letter )
 							print "<br />";
-						if ($letter) 
+						if ($letter)
 							print "<br />";
 						$letter = $newletter;
 						print "<strong>".$letter."</strong><br />";
 						$need_letter = 0;
 					}
 
-					if ($style == "ul" || $style == "ol") 
+					if ($style == "ul" || $style == "ol")
 						print "<li>";
 
 					$_page = $wacko->LoadPage(ltrim($sub_supertag, "/"));
-					if ($_page["tag"]) 
+					if ($_page["tag"])
 						$_tag = $_page["tag"];
-					else 
+					else
 						$_tag = $sub_supertag;
 
 					print($wacko->Link("/".$_tag, "", $linktext)."\n");
 
-					if ($style == "indent" || $style == "br") 
+					if ($style == "indent" || $style == "br")
 						print "<br />";
 				}
 
@@ -226,7 +226,7 @@ else
 $pages = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".
 $this->config["table_prefix"]."pages WHERE supertag LIKE ".$query.
 ($owner ? " AND owner='".quote($this->dblink, $owner)."'" : "").
-           " AND comment_on = ''", 1);
+           " AND comment_on_id = '0'", 1);
 
 if ($pages)
 {
@@ -261,7 +261,7 @@ if ($pages)
 	//Cache access rights
 	if ( $read_acls = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."acls WHERE supertag in (".$supertag_str.") AND privilege = 'read'", 1))
 	{
-		for ($i = 0; $i < count($read_acls); $i++) 
+		for ($i = 0; $i < count($read_acls); $i++)
 		{
 			$this->CacheACL($read_acls[$i]["supertag"], "read", 1, $read_acls[$i]);
 		}
