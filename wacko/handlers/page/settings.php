@@ -5,8 +5,8 @@
 if (!$this->page) $this->Redirect($this->href('show'));
 
 // deny for comment
-if ($this->page['comment_on'])
-	$this->Redirect($this->href('', $this->page['comment_on'], 'show_comments=1').'#'.$this->page['tag']);
+if ($this->page['comment_on_id'])
+	$this->Redirect($this->href('', $this->page['comment_on_id'], 'show_comments=1').'#'.$this->page['tag']);
 
 if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 {
@@ -18,10 +18,10 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 			"description" => $_POST["description"],
 			"keywords" => $_POST["keywords"]
 		));
-		
+
 		// log event
 		$this->Log(4, str_replace("%1", $this->tag." ".$_POST["title"], $this->GetTranslation("LogPageMetaUpdated")));
-		
+
 		// redirect back to page
 		$this->SetMessage($this->GetTranslation("MetaUpdated")."!");
 		$this->Redirect($this->Href());
@@ -33,10 +33,10 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 		// show form
 		?>
   <h3><?php echo str_replace("%1",$this->Link("/".$this->GetPageTag()),$this->GetTranslation("SettingsFor")); ?></h3>
-<?php 
+<?php
 	// load settings (shows only if owner is current user or Admin)
 	if ($this->UserIsOwner() || $this->IsAdmin())
-	{ 
+	{
 ?>
 <?php echo $this->FormOpen("settings") ?>
 <div class="cssform">

@@ -16,7 +16,7 @@ class Wacko
 	var $WVERSION; //Wacko version
 	var $context = array("");
 	var $current_context = 0;
-	var $pages_meta = "id, tag, created, time, edit_note, minor_edit, owner, user, latest, handler, comment_on, super_comment_on, supertag, lang, title, keywords, description";
+	var $pages_meta = "id, tag, created, time, edit_note, minor_edit, owner, user, latest, handler, comment_on_id, supertag, lang, title, keywords, description";
 	var $first_inclusion = array(); // for backlinks
 	var $optionSplitter = "\n"; // if you change this two symbols, settings for all users will be lost.
 	var $valueSplitter  = "=";
@@ -918,7 +918,7 @@ class Wacko
 		if ($pages = $this->LoadAll(
 		"SELECT ".$this->pages_meta." ".
 		"FROM ".$this->config["table_prefix"]."pages ".
-		"WHERE comment_on = '' ".
+		"WHERE comment_on_id = '0' ".
 			($from
 				? "AND time <= '".quote($this->dblink, $from)." 23:59:59'"
 				: "").
@@ -936,7 +936,7 @@ class Wacko
 			if ($read_acls = $this->LoadAll(
 			"SELECT a.* ".
 			"FROM ".$this->config["table_prefix"]."acls a, ".$this->config["table_prefix"]."pages p ".
-			"WHERE p.comment_on = '' ".
+			"WHERE p.comment_on_id = '0' ".
 				"AND a.supertag = p.supertag ".
 				($for
 					? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
@@ -960,7 +960,7 @@ class Wacko
 
 		if ($pages = $this->LoadAll(
 		"SELECT ".$this->pages_meta.", body_r FROM ".$this->config["table_prefix"]."pages ".
-		"WHERE comment_on != '' ".
+		"WHERE comment_on_id != '0' ".
 			($from
 				? "AND time<='".quote($this->dblink, $from)." 23:59:59'"
 				: "").
@@ -978,7 +978,7 @@ class Wacko
 			if ($read_acls = $this->LoadAll(
 			"SELECT a.* ".
 			"FROM ".$this->config["table_prefix"]."acls a, ".$this->config["table_prefix"]."pages p ".
-			"WHERE p.comment_on = '' ".
+			"WHERE p.comment_on_id = '0' ".
 				"AND a.supertag = p.supertag ".
 					($for
 						? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
@@ -1026,23 +1026,23 @@ class Wacko
 			($for
 				? $pref."pages.tag LIKE '".quote($this->dblink, $for)."/%' AND "
 				: "").
-		$pref."links.to_tag is NULL AND ".$pref."pages.comment_on = '' ".
+		$pref."links.to_tag is NULL AND ".$pref."pages.comment_on_id = '0' ".
 		"ORDER BY tag ".
 		"LIMIT 200";
 		return $this->LoadAll($sql);
 	}
 
 	function LoadPageTitles() { return $this->LoadAll("SELECT DISTINCT tag FROM ".$this->config["table_prefix"]."pages ORDER BY tag"); }
-	function LoadAllPages() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on = '' ORDER BY BINARY tag"); }
-	function LoadAllPagesByTime() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on = '' ORDER BY time DESC, BINARY tag"); }
+	function LoadAllPages() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '0' ORDER BY BINARY tag"); }
+	function LoadAllPagesByTime() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '0' ORDER BY time DESC, BINARY tag"); }
 
 	function FullTextSearch($phrase,$filter)
 	{
-		return $this->LoadAll("SELECT ".$this->pages_meta.", body FROM ".$this->config["table_prefix"]."pages WHERE (( match(body) against('".quote($this->dblink, $phrase)."') OR lower(tag) LIKE lower('%".quote($this->dblink, $phrase)."%')) ".($filter?"AND comment_on=''":"")." )");
+		return $this->LoadAll("SELECT ".$this->pages_meta.", body FROM ".$this->config["table_prefix"]."pages WHERE (( match(body) against('".quote($this->dblink, $phrase)."') OR lower(tag) LIKE lower('%".quote($this->dblink, $phrase)."%')) ".($filter?"AND comment_on_id='0'":"")." )");
 
 		/*return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"].
 						"pages WHERE (( match(body) against('".quote($this->dblink, $phrase)."') ".
-						"OR lower(tag) LIKE lower('%".quote($this->dblink, $phrase)."%')) ".($filter?"AND comment_on=''":"")." )");*/
+						"OR lower(tag) LIKE lower('%".quote($this->dblink, $phrase)."%')) ".($filter?"AND comment_on_id='0'":"")." )");*/
 	}
 
 	function TagSearch($phrase) { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE lower(tag) LIKE binary lower('%".quote($this->dblink, $phrase)."%') ORDER BY supertag"); }
@@ -1072,7 +1072,7 @@ class Wacko
 	// $minor_edit	- minor edit
 	// $comment_on	- commented page address
 	// $title		- page name (metadata)
-	function SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on = "", $title = "")
+	function SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on = "0", $title = "")
 	{
 		// get current user
 		$user = $this->GetUserName();
@@ -1184,8 +1184,7 @@ class Wacko
 
 				$this->Query(
 					"INSERT INTO ".$this->config["table_prefix"]."pages SET ".
-						($comment_on ? "comment_on = '".quote($this->dblink, $comment_on)."', " : "").
-						($comment_on ? "super_comment_on = '".quote($this->dblink, $this->NpjTranslit($comment_on))."', " : "").
+						($comment_on ? "comment_on_id = '".quote($this->dblink, $comment_on)."', " : "0").
 						"created = NOW(), ".
 						"time = NOW(), ".
 						"owner = '".quote($this->dblink, $owner)."', ".
@@ -1282,16 +1281,15 @@ class Wacko
 				{
 					// move revision
 					$this->Query(
-							"INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, latest, handler, comment_on, supertag, title, keywords, description) ".
-							"SELECT tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, 'N', handler, comment_on, supertag, title, keywords, description ".
+							"INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
+							"SELECT tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, 'N', handler, comment_on_id, supertag, title, keywords, description ".
 							"FROM ".$this->config["table_prefix"]."pages ".
 							"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
 
 					// add new revision
 					$this->Query(
 						"UPDATE ".$this->config["table_prefix"]."pages SET ".
-							($comment_on ? "comment_on = '".quote($this->dblink, $comment_on)."', " : "").
-							($comment_on ? "super_comment_on = '".quote($this->dblink, $this->NpjTranslit($comment_on))."', " : "").
+							($comment_on ? "comment_on_id = '".quote($this->dblink, $comment_on)."', " : "0").
 							"time = NOW(), ".
 							"created = '".quote($this->dblink, $oldPage['created'])."', ".
 							"owner = '".quote($this->dblink, $owner)."', ".
@@ -2499,7 +2497,7 @@ class Wacko
 	{
 		return $this->LoadAll(
 				"SELECT * FROM ".$this->config["table_prefix"]."pages ".
-				"WHERE comment_on = '".quote($this->dblink, $tag)."' ".
+				"WHERE comment_on_id = '".quote($this->dblink, $tag)."' ".
 				"ORDER BY time");
 	}
 
@@ -2535,8 +2533,8 @@ class Wacko
 
 	function GetPageOwnerFromComment()
 	{
-		if($this->page["comment_on"])
-			return $this->GetPageOwner($this->page["comment_on"]);
+		if($this->page["comment_on_id"])
+			return $this->GetPageOwner($this->page["comment_on_id"]);
 		else
 			return false;
 	}
@@ -2911,7 +2909,7 @@ class Wacko
 				if ( $access && ($count < 30) ) {
 					$count++;
 					$xml .= "<item>\n";
-					$xml .= "<title>".$page["tag"]." ".$this->GetTranslation("To")." ".$page["comment_on"]." ".$this->GetTranslation("From")." ".$page["user"]."</title>\n";
+					$xml .= "<title>".$page["tag"]." ".$this->GetTranslation("To")." ".$page["comment_on_id"]." ".$this->GetTranslation("From")." ".$page["user"]."</title>\n";
 					$xml .= "<link>".$this->href("show", $page["tag"], "time=".urlencode($page["time"]))."</link>\n";
 					$xml .= "<guid>".$this->href("show", $page["tag"], "time=".urlencode($page["time"]))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['time']))."</pubDate>\n";
@@ -3570,36 +3568,6 @@ class Wacko
 				"page_tag = '".quote($this->dblink, $NewTag)."', ".
 				"supertag = '".quote($this->dblink, $NewSuperTag)."' ".
 			"WHERE page_tag = '".quote($this->dblink, $tag)."' ");
-	}
-
-	function RenameComments($tag, $NewTag, $NewSuperTag = "")
-	{
-		if (!$tag || !$NewTag) return false;
-
-		return $this->Query(
-			"UPDATE ".$this->config["table_prefix"]."pages ".
-			"SET comment_on = '".quote($this->dblink, $NewTag)."' ".
-			"WHERE comment_on = '".quote($this->dblink, $tag)."' ");
-	}
-
-	function RenameWatches($tag, $NewTag, $NewSuperTag = "")
-	{
-		if (!$tag || !$NewTag) return false;
-
-		return $this->Query(
-			"UPDATE ".$this->config["table_prefix"]."pagewatches ".
-			"SET tag = '".quote($this->dblink, $NewTag)."' ".
-			"WHERE tag = '".quote($this->dblink, $tag)."' ");
-	}
-
-	function RenameLinks($tag, $NewTag)
-	{
-		if (!$tag || !$NewTag) return false;
-
-		return $this->Query(
-			"UPDATE ".$this->config["table_prefix"]."links ".
-			"SET from_tag = '".quote($this->dblink, $NewTag)."' ".
-			"WHERE from_tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RenameFiles($tag, $NewTag, $NewSuperTag = "")

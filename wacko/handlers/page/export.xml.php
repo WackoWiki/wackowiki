@@ -20,7 +20,7 @@ if ($this->HasAccess("read"))
 		"SELECT * FROM ".$this->config["table_prefix"]."pages ".
 		"WHERE (supertag = '".quote($this->dblink, $this->supertag)."'".
 		" OR supertag LIKE '".quote($this->dblink, $this->supertag."/%")."')".
-		" AND comment_on = ''");
+		" AND comment_on_id = '0'");
 
 	foreach ($pages as $num => $page)
 	{

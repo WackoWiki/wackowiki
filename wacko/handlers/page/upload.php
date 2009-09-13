@@ -4,10 +4,10 @@
 if (!$this->page) $this->Redirect($this->href("show"));
 
 // deny for comment
-if ($this->page["comment_on"])
-	$this->Redirect($this->href("", $this->page["comment_on"], "show_comments=1")."#".$this->page["tag"]);
+if ($this->page["comment_on_id"])
+	$this->Redirect($this->href("", $this->page["comment_on_id"], "show_comments=1")."#".$this->page["tag"]);
 
-if ($user = $this->GetUser()) 
+if ($user = $this->GetUser())
 {
 	$user = strtolower($this->GetUserName());
 	$registered = true;
@@ -29,7 +29,7 @@ if ($registered
 {
 	if ($_GET["remove"]) // show the form
 	{
-		if ($_GET["remove"] == "global") 
+		if ($_GET["remove"] == "global")
 			$page_id = 0;
 		else
 			$page_id = $this->page["id"];
@@ -211,7 +211,7 @@ if ($registered
 
 					if ($this->config["upload_images_only"])
 					{
-						if ($size[0] == 0) 
+						if ($size[0] == 0)
 							$forbid = 1;
 					}
 					if (!$forbid)
@@ -252,7 +252,7 @@ if ($registered
 						// 4. output link to file
 						// !!!!! write after providing filelink syntax
 						echo "<strong>".$this->GetTranslation("UploadDone")."</strong>";
-						
+
 						// log event
 						if ($is_global)
 						{

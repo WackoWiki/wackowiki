@@ -19,8 +19,8 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 	{
 		if ($_POST["delete"] == 1)
 		{
-			if ($this->page["comment_on"])
-				$comment_on = $this->page["comment_on"];
+			if ($this->page["comment_on_id"])
+				$comment_on = $this->page["comment_on_id"];
 
 			// Remove page
 			if ($this->RemoveReferrers($this->tag))
@@ -106,13 +106,13 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 		else
 		{
 			echo "<div class=\"warning\">".$this->GetTranslation("ReallyDelete".
-				($this->page["comment_on"] ? "Comment" : ""))."</div>";
+				($this->page["comment_on_id"] ? "Comment" : ""))."</div>";
 			echo $this->FormOpen("remove");
 
 			// admin privileged removal options
 			if ($this->IsAdmin())
 			{
-				if (!$this->page["comment_on"])
+				if (!$this->page["comment_on_id"])
 				{
 					echo "<input id=\"removerevisions\" type=\"checkbox\" name=\"revisions\" value=\"1\" />";
 					echo "<label for=\"removerevisions\">".$this->GetTranslation("RemoveRevisions")."</label><br />";

@@ -6,8 +6,8 @@
 if (!$this->page) $this->Redirect($this->href("show"));
 
 // deny for comment
-if ($this->page["comment_on"])
-	$this->Redirect($this->href("", $this->page["comment_on"], "show_comments=1")."#".$this->page["tag"]);
+if ($this->page["comment_on_id"])
+	$this->Redirect($this->href("", $this->page["comment_on_id"], "show_comments=1")."#".$this->page["tag"]);
 
 // ToDo: config->owners_can_remove_comments ?
 if ($this->UserIsOwner() || $this->IsAdmin())
@@ -42,7 +42,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		echo "<div class=\"warning\">".$this->GetTranslation("ReallyPurge")."</div><br />";
 		echo $this->FormOpen("purge");
 ?>
-		
+
 		<strong><?php echo $this->GetTranslation("SelectPurgeOptions") ?></strong><br />
 		<input id="purgecomments" type="checkbox" name="comments" value="1" />
 		<label for="purgecomments"><?php echo $this->GetTranslation("PurgeComments") ?></label><br />

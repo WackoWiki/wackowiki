@@ -5,8 +5,8 @@
 if (!$this->page) $this->Redirect($this->href("show"));
 
 // deny for comment
-if ($this->page["comment_on"])
-	$this->Redirect($this->href("", $this->page["comment_on"], "show_comments=1")."#".$this->page["tag"]);
+if ($this->page["comment_on_id"])
+	$this->Redirect($this->href("", $this->page["comment_on_id"], "show_comments=1")."#".$this->page["tag"]);
 
 if ($user = $this->GetUser())
 {
@@ -28,7 +28,7 @@ if ($user = $this->GetUser())
 
 		$referrers = $this->LoadReferrers($this->page["id"]);
 	}
-	
+
 	print("<strong>$title</strong><br /><br />\n");
 	if ($referrers)
 	{
@@ -36,7 +36,7 @@ if ($user = $this->GetUser())
 		{
 			$temp_parse_url = parse_url($referrers[$a]["referrer"]);
 			$temp_parse_url = ($temp_parse_url["host"] != "") ? strtolower(preg_replace("/^www\./Ui", "", $temp_parse_url["host"])) : "unknown";
-	
+
 			if (isset($referrer_sites["$temp_parse_url"]))
 			{
 				$referrer_sites["$temp_parse_url"] += $referrers[$a]["num"];
@@ -46,7 +46,7 @@ if ($user = $this->GetUser())
 				$referrer_sites["$temp_parse_url"] = $referrers[$a]["num"];
 			}
 		}
-	
+
 		array_multisort($referrer_sites, SORT_DESC, SORT_NUMERIC);
 		reset($referrer_sites);
 	?>

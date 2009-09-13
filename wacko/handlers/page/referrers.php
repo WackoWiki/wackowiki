@@ -5,8 +5,8 @@
 if (!$this->page) $this->Redirect($this->href("show"));
 
 // deny for comment
-if ($this->page["comment_on"])
-	$this->Redirect($this->href("", $this->page["comment_on"], "show_comments=1")."#".$this->page["tag"]);
+if ($this->page["comment_on_id"])
+	$this->Redirect($this->href("", $this->page["comment_on_id"], "show_comments=1")."#".$this->page["tag"]);
 
 if ($user = $this->GetUser())
 {
@@ -36,7 +36,7 @@ if ($user = $this->GetUser())
 				}
 			}
 			print(implode("<br />\n", $links)."<p></p>");
-		} 
+		}
 		else
 		{
 			print($this->GetTranslation("NoReferringPages")."<p></p>");

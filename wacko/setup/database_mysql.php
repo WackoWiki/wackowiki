@@ -20,13 +20,12 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 					"latest TINYINT(1) UNSIGNED DEFAULT '1',".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
-					"comment_on VARCHAR(250) binary NOT NULL DEFAULT '',".
-					"super_comment_on VARCHAR(250) NOT NULL DEFAULT '',".
+					"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"hits INT(11) UNSIGNED NOT NULL DEFAULT '0',".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
-					"keywords VARCHAR(250) binary NOT NULL DEFAULT '',".
+					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"PRIMARY KEY (id),".
 					"FULLTEXT KEY body (body),".
 					"UNIQUE KEY idx_tag (tag),".
@@ -34,8 +33,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"KEY idx_created (created),".
 					"KEY idx_time (time),".
 					"KEY idx_minor_edit (minor_edit),".
-					"KEY idx_comment_on (comment_on),".
-					"KEY idx_super_comment_on (super_comment_on),".
+					"KEY idx_comment_on_id (comment_on_id),".
 					"KEY idx_title (title)".
 				") TYPE=MyISAM;";
 
@@ -43,8 +41,8 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"id INT(10) UNSIGNED NOT NULL auto_increment,".
 						"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-						"tag VARCHAR(250) binary NOT NULL DEFAULT '',".
-						"supertag VARCHAR(250) binary NOT NULL DEFAULT '',".
+						"tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
+						"supertag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 						"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 						"time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 						"body MEDIUMTEXT NOT NULL,".
@@ -55,22 +53,21 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 						"latest TINYINT(1) UNSIGNED DEFAULT '0',".
 						"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
-						"comment_on VARCHAR(250) binary NOT NULL DEFAULT '',".
-						"super_comment_on VARCHAR(250) NOT NULL DEFAULT '',".
+						"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"lang VARCHAR(2) NOT NULL DEFAULT '',".
 						"title VARCHAR(100) NOT NULL DEFAULT '',".
 						"description VARCHAR(250) NOT NULL DEFAULT '',".
-						"keywords VARCHAR(250) binary NOT NULL DEFAULT '',".
+						"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 						"PRIMARY KEY (id),".
 						"KEY idx_tag (tag),".
 						"KEY idx_supertag (supertag),".
 						"KEY idx_time (time),".
 						"KEY idx_minor_edit (minor_edit),".
-						"KEY idx_comment_on (comment_on)".
+						"KEY idx_comment_on_id (comment_on_id)".
 					") TYPE=MyISAM;";
 
 $table_acls = "CREATE TABLE ".$config["table_prefix"]."acls (".
-					"page_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
+					"page_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
 					"privilege VARCHAR(10) NOT NULL DEFAULT '',".
@@ -81,9 +78,9 @@ $table_acls = "CREATE TABLE ".$config["table_prefix"]."acls (".
 
 $table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
 					"id INT(10) UNSIGNED NOT NULL auto_increment,".
-					"from_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
+					"from_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"to_tag VARCHAR(250) binary NOT NULL DEFAULT '',".
+					"to_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"to_supertag VARCHAR(250) NOT NULL,".
 					"PRIMARY KEY (id),".
