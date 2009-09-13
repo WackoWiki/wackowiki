@@ -122,7 +122,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1)
 if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
 {
   // load comments for this page
-  $comments = $this->LoadComments($this->tag);
+  $comments = $this->LoadComments($this->GetPageId());
 
   // store comments display in session
   $tag = $this->GetPageTag();
