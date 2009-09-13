@@ -9,7 +9,7 @@ if (!function_exists('LoadRecentlyCommented')){
 		if ($ids = $wacko->LoadAll("SELECT MIN(id) AS id FROM ".$wacko->config["table_prefix"]."pages WHERE ".
 		($for
 			? "super_comment_on LIKE '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' "
-			: "comment_on != '' ").
+			: "comment_on_id != '0' ").
 		"GROUP BY tag ORDER BY id DESC", 1));
 		{
 			// load complete comments
@@ -17,9 +17,9 @@ if (!function_exists('LoadRecentlyCommented')){
 			foreach ($ids as $id)
 			{
 				$comment = $wacko->LoadSingle("SELECT * FROM ".$wacko->config["table_prefix"]."pages WHERE id = '".$id["id"]."' LIMIT 1");
-				if (!$comments[$comment["comment_on"]] && $num < $limit)
+				if (!$comments[$comment["comment_on_id"]] && $num < $limit)
 				{
-					$comments[$comment["comment_on"]] = $comment;
+					$comments[$comment["comment_on_id"]] = $comment;
 					$num++;
 				}
 			}
@@ -30,7 +30,7 @@ if (!function_exists('LoadRecentlyCommented')){
 				// now using these ids, load the actual pages
 				foreach ($comments as $comment)
 				{
-					$page = $wacko->LoadPage($comment["comment_on"]);
+					$page = $wacko->LoadPage($comment["comment_on_id"]);
 					$page["comment_user"] = $comment["user"];
 					$page["comment_time"] = $comment["time"];
 					$page["comment_tag"] = $comment["tag"];
@@ -56,7 +56,7 @@ if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
 	{
 		if ($this->config["hide_locked"])
 		$access = $this->HasAccess("read",$page["tag"]);
-		else 
+		else
 		$access = true;
 
 		if ($access && $this->UserAllowedComments())
