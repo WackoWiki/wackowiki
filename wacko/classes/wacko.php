@@ -1070,7 +1070,7 @@ class Wacko
 	// $body		- page body (plain text)
 	// $edit_note	- edit summary
 	// $minor_edit	- minor edit
-	// $comment_on	- commented page address
+	// $comment_on	- commented page id
 	// $title		- page name (metadata)
 	function SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on = "0", $title = "")
 	{
@@ -1184,7 +1184,7 @@ class Wacko
 
 				$this->Query(
 					"INSERT INTO ".$this->config["table_prefix"]."pages SET ".
-						($comment_on ? "comment_on_id = '".quote($this->dblink, $comment_on)."', " : "0").
+						"comment_on_id = ".($comment_on ? '".quote($this->dblink, $comment_on)."' : '"0"').", ".
 						"created = NOW(), ".
 						"time = NOW(), ".
 						"owner = '".quote($this->dblink, $owner)."', ".
@@ -1289,7 +1289,7 @@ class Wacko
 					// add new revision
 					$this->Query(
 						"UPDATE ".$this->config["table_prefix"]."pages SET ".
-							($comment_on ? "comment_on_id = '".quote($this->dblink, $comment_on)."', " : "0").
+							"comment_on_id = ".($comment_on ? '".quote($this->dblink, $comment_on)."' : '"0"').", ".
 							"time = NOW(), ".
 							"created = '".quote($this->dblink, $oldPage['created'])."', ".
 							"owner = '".quote($this->dblink, $owner)."', ".
