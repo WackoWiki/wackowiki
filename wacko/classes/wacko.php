@@ -3636,8 +3636,9 @@ class Wacko
 		if (!$tag) return false;
 
 		return $this->Query(
-			"DELETE FROM ".$this->config["table_prefix"]."pages ".
-			"WHERE comment_on ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"DELETE a.* FROM ".$this->config["table_prefix"]."pages a ".
+				"INNER JOIN ".$this->config["table_prefix"]."pages b ON (a.comment_on_id = b.id) ".
+			"WHERE b.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
 	function RemoveWatches($tag, $cluster = false)
