@@ -16,8 +16,8 @@ if ($filter != "pages") $filter = "all";
 if (!isset($clean)) $clean = false;
 
 if ($vars[0] != "") $phrase = $vars[0];
-else 
-{ 
+else
+{
 	$phrase = "";
 	$form = 1;
 }
@@ -71,7 +71,7 @@ if ($phrase)
 				if (!$this->config["hide_locked"] || $this->HasAccess("read",$page["tag"]) )
 				{
 					// Don't show it if it's a comment and we're hiding comments from this user
-					if($page["comment_on"] == '' || ($page["comment_on"] != '' && $this->UserAllowedComments()))
+					if($page["comment_on_id"] == '0' || ($page["comment_on_id"] != '0' && $this->UserAllowedComments()))
 					{
 						// open item
 						if ($style == "ul" || $style == "ol") print "<li>";
@@ -176,7 +176,7 @@ function highlight_this($text, $words, $the_place)
 			$text = str_ireplace($word, "<span class=\"highlight\">".$word."</span>", $text, $count);
 			$the_count = $count + $the_count;
 		}
-			
+
 	}
 	//added to show how many keywords were found
 	#echo "<br><div class=\"emphasis\">A search for <strong>" . $words. "</strong> found <strong>" . $the_count . "</strong> matches within the " . $the_place. ".</div><br>";

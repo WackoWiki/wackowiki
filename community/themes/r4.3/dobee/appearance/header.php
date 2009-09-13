@@ -222,7 +222,7 @@ else if($this->HasAccess("write"))
 								echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 								if ($owner = $this->GetPageOwner()) {
 									print($this->GetTranslation("Owner").$this->Link($owner));
-								} else if (!$this->page["comment_on"]) {
+								} else if (!$this->page["comment_on_id"]) {
 									print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
 								}
 							}

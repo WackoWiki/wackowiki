@@ -7,7 +7,7 @@
  [letter="a"] // optional - only display pages whose name starts with this letter
  }}
  */
- 
+
 if ($max) $limit = $max;
 
 $offset = ( isset($_GET["offset"]) ) ? (int)$_GET["offset"] : 0;
@@ -15,7 +15,7 @@ if(!$limit) $limit = 50;
 if(isset($letter)) $letter = strtoupper(substr($letter, 0, 1));
 
 // Get tags for all the pages, even if they're not being displayed on this index page
-$sql = "SELECT tag FROM ".$this->config["table_prefix"]."pages WHERE comment_on = '' ORDER BY tag";
+$sql = "SELECT tag FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '0' ORDER BY tag";
 $pages = $this->LoadAll($sql, 1);
 
 $total = 0;
