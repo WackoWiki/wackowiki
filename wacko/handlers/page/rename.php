@@ -4,8 +4,8 @@
 if (!$this->page) $this->Redirect($this->href('show'));
 
 // deny for comment
-if ($this->page['comment_on'])
-$this->Redirect($this->href('', $this->page['comment_on'], 'show_comments=1').'#'.$this->page['tag']);
+if ($this->page['comment_on_id'])
+$this->Redirect($this->href('', $this->page['comment_on_id'], 'show_comments=1').'#'.$this->page['tag']);
 
 if ($user = $this->GetUser())
 {
@@ -63,9 +63,6 @@ if ($registered
 						if ($this->RemoveReferrers($this->tag))
 						print(str_replace("%1",$this->tag,$this->GetTranslation("ReferrersRemoved"))."<br />\n");
 
-						if ($this->RenameLinks($this->tag))
-						print(str_replace("%1",$this->tag,$this->GetTranslation("LinksRenamed"))."<br />\n");
-
 						if ($this->RenamePage($this->tag, $NewName, $supernewname))
 						print(str_replace("%1",$this->tag,$this->GetTranslation("PageRenamed"))."<br />\n");
 
@@ -74,12 +71,6 @@ if ($registered
 
 						if ($this->RenameFiles($this->tag, $NewName, $supernewname))
 						print(str_replace("%1",$this->tag,$this->GetTranslation("FilesRenamed"))."<br />\n");
-
-						if ($this->RenameWatches($this->tag, $NewName, $supernewname))
-						print("\n");
-
-						if ($this->RenameComments($this->tag, $NewName, $supernewname))
-						print("\n");
 
 						$this->ClearCacheWantedPage($NewName);
 						$this->ClearCacheWantedPage($supernewname);
@@ -103,7 +94,7 @@ if ($registered
 					}
 				}
 			}
-				
+
 			//massrename
 			if ($need_massrename == 1)
 			{
@@ -182,7 +173,7 @@ function RecursiveMove(&$parent, $root)
 	$pages = $parent->LoadAll("SELECT ".$parent->pages_meta." FROM ".
 	$parent->config["table_prefix"]."pages WHERE supertag LIKE ".$query.
 	($owner?" AND owner='".quote($parent->dblink, $owner)."'":"").
-           " AND comment_on = ''");
+           " AND comment_on_id = '0'");
 	foreach( $pages as $page )
 	{
 		// $new_name = str_replace( $root, $new_root, $page["tag"] );
@@ -224,9 +215,6 @@ function Move(&$parent, $OldPage, $NewName )
 				if ($parent->RemoveReferrers($OldPage["tag"]))
 				print("<br />".str_replace("%1",$OldPage["tag"],$parent->GetTranslation("ReferrersRemoved"))."<br />\n");
 
-				if ($parent->RenameLinks($OldPage["tag"]))
-				print(str_replace("%1",$OldPage["tag"],$parent->GetTranslation("LinksRenamed"))."<br />\n");
-
 				if ($parent->RenamePage($OldPage["tag"], $NewName, $supernewname))
 				print(str_replace("%1",$OldPage["tag"],$parent->GetTranslation("PageRenamed"))."<br />\n");
 
@@ -235,12 +223,6 @@ function Move(&$parent, $OldPage, $NewName )
 
 				if ($parent->RenameFiles($OldPage["tag"], $NewName, $supernewname))
 				print(str_replace("%1",$OldPage["tag"],$parent->GetTranslation("FilesRenamed"))."<br />\n");
-
-				if ($parent->RenameWatches($OldPage["tag"], $NewName, $supernewname))
-				print("\n");
-
-				if ($parent->RenameComments($OldPage["tag"], $NewName, $supernewname))
-				print("\n");
 
 				$parent->ClearCacheWantedPage($NewName);
 				$parent->ClearCacheWantedPage($supernewname);

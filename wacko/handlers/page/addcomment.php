@@ -3,7 +3,7 @@
 if ($this->HasAccess("comment") && $this->HasAccess("read"))
 {
 	// find number
-	if($latestComment = $this->LoadSingle("SELECT tag, id FROM ".$this->config["table_prefix"]."pages WHERE comment_on != '' ORDER BY id DESC LIMIT 1"))
+	if($latestComment = $this->LoadSingle("SELECT tag, id FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id != '0' ORDER BY id DESC LIMIT 1"))
 	{
 		preg_match("/^Comment([0-9]+)$/", $latestComment["tag"], $matches);
 		$num = $matches[1] + 1;
@@ -74,8 +74,8 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 		if(!$error)
 		{
 			// store new comment
-			//     SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on = "", $title = ""
-			$this->SavePage("Comment".$num, $body, $edit_note="", $minor_edit = "0", $this->tag, $title = "");
+			//     SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on = "0", $title = ""
+			$this->SavePage("Comment".$num, $body, $edit_note="", $minor_edit = "0", $this->GetPageId(), $title = "");
 
 			// log event
 			$this->Log(5, str_replace("%2", $this->tag." ".$this->page["title"], str_replace("%1", "Comment".$num, $this->GetTranslation("LogCommentPosted"))));

@@ -13,9 +13,9 @@ if ($this->HasAccess("read"))
 	else
 	{
 		// comment header?
-		if ($this->page["comment_on"])
+		if ($this->page["comment_on_id"])
 		{
-			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->page["comment_on"], "", "", 0).", ".$this->GetTranslation("PostedBy")." ".$this->Format($this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["time"]."</div>");
+			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->page["comment_on_id"], "", "", 0).", ".$this->GetTranslation("PostedBy")." ".$this->Format($this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["time"]."</div>");
 		}
 
 		if ($this->page["latest"] == "0")

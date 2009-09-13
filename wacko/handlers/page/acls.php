@@ -4,7 +4,7 @@
 if (!$this->page) $this->Redirect($this->href("show"));
 
 // deny for comment
-if ($this->page["comment_on"])
+if ($this->page["comment_on_id"])
 $this->Redirect($this->href("", $this->page["tag"]));
 
 if ($this->UserIsOwner() || $this->IsAdmin())
@@ -78,7 +78,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 
 			// Change permissions for all comments on this page
 			$comments = $this->LoadAll(
-					"SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on = '".$this->GetPageTag()."' AND owner='".quote($this->dblink, $this->GetUserName())."'");
+					"SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '".$this->GetPageId()."' AND owner='".quote($this->dblink, $this->GetUserName())."'");
 			foreach ($comments as $num=>$page)
 			{
 				$this->SaveAcl($page["tag"], "read", $_POST["read_acl"]);
@@ -97,8 +97,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			$pages = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".
 			$this->config["table_prefix"]."pages WHERE (supertag = '".quote($this->dblink, $this->tag)."'".
 		            " OR supertag LIKE '".quote($this->dblink, $this->tag."/%")."'".
-		            " OR comment_on = '".quote($this->dblink, $this->tag)."'".
-		            " OR comment_on LIKE '".quote($this->dblink, $this->tag."/%")."'".
+		            " OR comment_on_id = '".quote($this->dblink, $this->GetPageId())."'".
+		            " OR comment_on_id LIKE '".quote($this->dblink, $this->tag."/%")."'".
 		            ") AND owner='".quote($this->dblink, $this->GetUserName())."'");
 
 			foreach ($pages as $num=>$page)
@@ -107,16 +107,16 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				$this->SaveAcl($page["tag"], "read", $_POST["read_acl"]);
 				$this->SaveAcl($page["tag"], "write", $_POST["write_acl"]);
 				$this->SaveAcl($page["tag"], "comment", $_POST["comment_acl"]);
-					
+
 				// log event
 				$this->Log(2, str_replace("%1", $page["tag"]." ".$page["title"], $this->GetTranslation("LogACLUpdated")));
-					
+
 				// change owner?
 				if ($newowner = $_POST["newowner"])
 				{
 					$this->SetPageOwner($page["tag"], $newowner);
 					$ownedpages .= $this->Href("", $page["tag"])."\n";
-						
+
 					// log event
 					$this->Log(2, str_replace("%2", $exists["name"], str_replace("%1", $page["tag"]." ".$page["title"], $this->GetTranslation("LogOwnershipChanged"))));
 				}
@@ -127,12 +127,12 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			if ($newowner = $_POST["newowner"])
 			{
 				$message .= $this->GetTranslation("ACLGaveOwnership").$newowner;
-				
+
 				$User = $this->LoadSingle(
 					"SELECT email, more, email_confirm ".
 					"FROM {$this->config['user_table']} ".
 					"WHERE name = '".quote($newowner)."'");
-				
+
 				$User['options'] = $this->DecomposeOptions($User['more']);
 
 				if ($User['email_confirm'] == '')
