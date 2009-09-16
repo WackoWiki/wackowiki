@@ -400,7 +400,7 @@ class Wacko
 	{
 		$langlist = $this->AvailableLanguages();
 		//!!!! wrong code, maybe!
-		if ($this->GetMethod() == "edit" && $_GET["add"] == 1)
+		if ($this->GetMethod() == "edit" && (isset($_GET["add"]) && $_GET["add"] == 1 ))
 			if ($_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
 				$lang = $_REQUEST["lang"];
 			else
