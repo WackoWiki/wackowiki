@@ -73,9 +73,10 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 
 		if(!$error)
 		{
+			$comment_on = $this->GetPageId();
 			// store new comment
 			//     SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on = "0", $title = ""
-			$this->SavePage("Comment".$num, $body, $edit_note="", $minor_edit = "0", $this->GetPageId(), $title = "");
+			$this->SavePage("Comment".$num, $body, $edit_note="", $minor_edit = "0", $comment_on, $title = "");
 
 			// log event
 			$this->Log(5, str_replace("%2", $this->tag." ".$this->page["title"], str_replace("%1", "Comment".$num, $this->GetTranslation("LogCommentPosted"))));
