@@ -22,6 +22,11 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			if ($this->page["comment_on_id"])
 				$comment_on = $this->page["comment_on_id"];
 
+				$comment_on_page = $this->LoadSingle( 
+					"SELECT tag FROM ".$this->config["table_prefix"]."pages WHERE id = '".$this->page["comment_on_id"]."' LIMIT 1");
+					// Get tag value
+					$comment_on_page = $comment_on_page['tag'];
+
 			// Remove page
 			if ($this->RemoveReferrers($this->tag))
 			{
@@ -100,7 +105,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			// return to commented page
 			if ($comment_on)
 			{
-				echo "<br />".$this->ComposeLinkToPage($comment_on."#comments", "", $this->GetTranslation("ReturnToCommented"), 0);
+				echo "<br />".$this->ComposeLinkToPage($comment_on_page."#comments", "", $this->GetTranslation("ReturnToCommented"), 0);
 			}
 		}
 		else
