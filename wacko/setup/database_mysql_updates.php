@@ -71,6 +71,8 @@ $alter_pages_r4_2_8 = "ALTER TABLE ".$config["table_prefix"]."pages CHANGE lates
 $alter_pages_r4_2_9 = "ALTER TABLE ".$config["table_prefix"]."pages CHANGE lang lang VARCHAR(2) NOT NULL DEFAULT ''";
 $alter_pages_r4_2_10 = "ALTER TABLE ".$config["table_prefix"]."pages ADD minor_edit TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER edit_note, ADD INDEX idx_minor_edit (minor_edit)";
 $alter_pages_r4_2_11 = "ALTER TABLE ".$config["table_prefix"]."pages ADD comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER super_comment_on, ADD INDEX idx_comment_on_id (comment_on_id)";
+$alter_pages_r4_2_12 = "ALTER TABLE ".$config["table_prefix"]."pages DROP comment_on";
+$alter_pages_r4_2_13 = "ALTER TABLE ".$config["table_prefix"]."pages DROP super_comment_on";
 
 $update_pages_r3_1 = "UPDATE ".$config["table_prefix"]."pages SET body_r=''";
 $update_pages_r3_2 = "UPDATE ".$config["table_prefix"]."pages SET body_toc=''";
@@ -139,6 +141,8 @@ $alter_revisions_r4_2_7 = "ALTER TABLE ".$config["table_prefix"]."revisions CHAN
 $alter_revisions_r4_2_8 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD minor_edit TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER edit_note, ADD INDEX idx_minor_edit (minor_edit)";
 $alter_revisions_r4_2_9 = "ALTER TABLE ".$config["table_prefix"]."revisions CHANGE latest latest TINYINT(1) NOT NULL DEFAULT '0'";
 $alter_revisions_r4_2_10 = "ALTER TABLE ".$config["table_prefix"]."revisions ADD comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER super_comment_on";
+$alter_revisions_r4_2_11 = "ALTER TABLE ".$config["table_prefix"]."revisions DROP comment_on";
+$alter_revisions_r4_2_12 = "ALTER TABLE ".$config["table_prefix"]."revisions DROP super_comment_on";
 
 $insert_revisions_r2_1 = "INSERT INTO ".$config["table_prefix"]."revisions ( id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on ) SELECT id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on FROM ".$config["table_prefix"]."pages WHERE latest='N';";
 
