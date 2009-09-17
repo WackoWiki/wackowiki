@@ -71,9 +71,9 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 	</p>
 	<div class="BewareChangeLang"> <?php echo $this->GetTranslation("BewareChangeLang"); ?></div>
 	<p>
-		<input class="OkBtn" onmouseover='this.className="OkBtn_";' onmouseout='this.className="OkBtn";' type="submit" align="top" value="<?php echo $this->GetTranslation("MetaStoreButton"); ?>" style="width: 120px" accesskey="s" />
+		<input type="submit" value="<?php echo $this->GetTranslation("MetaStoreButton"); ?>" style="width: 120px" accesskey="s" />
 		&nbsp;
-		<input class="CancelBtn" onmouseover='this.className="CancelBtn_";' onmouseout='this.className="CancelBtn";' type="button" align="top" value="<?php echo $this->GetTranslation("MetaCancelButton"); ?>" onclick="history.back();" style="width: 120px" />
+		<input type="button" value="<?php echo $this->GetTranslation("MetaCancelButton"); ?>" onclick="history.back();" style="width: 120px" />
 	</p>
 </div>
 <?php

@@ -187,15 +187,9 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	}
 	?>
 </select></p>
-<p><input class="OkBtn" onmouseover='this.className="OkBtn_";'
-	onmouseout='this.className="OkBtn";' type="submit" align="top"
-	value="<?php echo $this->GetTranslation("ACLStoreButton"); ?>"
-	style="width: 120px" accesskey="s" /> &nbsp; <input class="CancelBtn"
-	onmouseover='this.className="CancelBtn_";'
-	onmouseout='this.className="CancelBtn";' type="button" align="top"
-	value="<?php echo $this->GetTranslation("ACLCancelButton"); ?>"
-	onclick="document.location='<?php echo addslashes($this->href(""))?>';"
-	style="width: 120px" /></p>
+<p><input id="submit" type="submit" value="<?php echo $this->GetTranslation("ACLStoreButton"); ?>" accesskey="s" /> &nbsp;
+   <input id="button" type="button" value="<?php echo $this->GetTranslation("ACLCancelButton"); ?>" onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
+</p>
 </div>
 	<?php
 	print($this->FormClose());

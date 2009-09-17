@@ -182,13 +182,8 @@ else if ($user = $this->GetUser())
 <p><label for="bookmarks"><?php echo $this->GetTranslation("YourBookmarks");?>:</label>
 <textarea id="bookmarks" name="bookmarks" cols="40" rows="10"><?php echo htmlspecialchars($user["bookmarks"]) ?></textarea>
 </p>
-<p><input class="OkBtn" onmouseover='this.className="OkBtn_";'
-	onmouseout='this.className="OkBtn";' type="submit" align="top"
-	value="<?php echo $this->GetTranslation("UpdateSettingsButton"); ?>" />
-&nbsp; <input class="CancelBtn"
-	onmouseover='this.className="CancelBtn_";'
-	onmouseout='this.className="CancelBtn";' type="button" align="top"
-	value="<?php echo $this->GetTranslation("LogoutButton"); ?>"
+<p><input type="submit" value="<?php echo $this->GetTranslation("UpdateSettingsButton"); ?>" />
+&nbsp; <input type="button" value="<?php echo $this->GetTranslation("LogoutButton"); ?>"
 	onclick="document.location='<?php echo $this->href("", "", "action=logout"); ?>'" />
 </p>
 </div>

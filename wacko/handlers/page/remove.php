@@ -22,7 +22,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			if ($this->page["comment_on_id"])
 				$comment_on = $this->page["comment_on_id"];
 
-				$comment_on_page = $this->LoadSingle( 
+				$comment_on_page = $this->LoadSingle(
 					"SELECT tag FROM ".$this->config["table_prefix"]."pages WHERE id = '".$this->page["comment_on_id"]."' LIMIT 1");
 					// Get tag value
 					$comment_on_page = $comment_on_page['tag'];
@@ -151,14 +151,10 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
   <br />
   <br />
   <input type="hidden" name="delete" value="1" />
-  <input name="submit"
-	class="OkBtn_Top" onmouseover='this.className="OkBtn_Top_";'
-	onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
-	value="<?php echo $this->GetTranslation("RemoveButton"); ?>" />
+  <input name="submit" type="submit" value="<?php echo $this->GetTranslation("RemoveButton"); ?>" />
   &nbsp;
   <input
-	class="CancelBtn_Top" onmouseover='this.className="CancelBtn_Top_";'
-	onmouseout='this.className="CancelBtn_Top";' type="button" align="top"
+	type="button"
 	value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
 	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
   <br />

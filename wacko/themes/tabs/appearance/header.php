@@ -100,10 +100,7 @@ echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $thi
           <input
 			type="password" name="password" size="8" />
           &nbsp;</td>
-        <td><input class="OkBtn_Top"
-			onmouseover='this.className="OkBtn_Top_";'
-			onmouseout='this.className="OkBtn_Top";' style="font-size: 13px"
-			type="submit" value="&nbsp;&nbsp;&raquo;&nbsp;&nbsp;" />
+        <td><input type="submit" value="&nbsp;&nbsp;&raquo;&nbsp;&nbsp;" />
         </td>
       </tr>
       <?php echo $this->FormClose(); ?>
