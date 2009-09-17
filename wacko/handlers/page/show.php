@@ -15,7 +15,12 @@ if ($this->HasAccess("read"))
 		// comment header?
 		if ($this->page["comment_on_id"])
 		{
-			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->page["comment_on_id"], "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["time"]."</div>");
+			$comment_on_page = $this->LoadSingle( 
+					"SELECT tag FROM ".$this->config["table_prefix"]."pages WHERE id = '".$this->page["comment_on_id"]."' LIMIT 1");
+					// Get tag value
+					$comment_on_page = $comment_on_page['tag'];
+
+			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($comment_on_page, "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["time"]."</div>");
 		}
 
 		if ($this->page["latest"] == "0")
@@ -194,117 +199,117 @@ if ($this->GetConfigValue("footer_files"))
 }
 // end files
 ?>
-
 <?php
-if ($this->GetConfigValue("footer_comments")) {
-if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && ($this->GetConfigValue("hide_comments") != 2 || $this->GetUser()))
+if ($this->GetConfigValue("footer_comments"))
 {
-	// load comments for this page
-	$comments = $this->LoadComments($this->GetPageId());
-
-	// store comments display in session
-	$tag = $this->GetPageTag();
-	if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag]))
-	$_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
-
-	switch($_GET["show_comments"])
+	if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && ($this->GetConfigValue("hide_comments") != 2 || $this->GetUser()))
 	{
-	case "0":
-		$_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = 0;
-		break;
-	case "1":
-		$_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = 1;
-		break;
-	}
+		// load comments for this page
+		$comments = $this->LoadComments($this->GetPageId());
 
-	// display comments!
-	if ($this->page && $_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag])
-	{
-		// display comments header
-		?>
-	<a name="comments"></a>
-<div id="commentsheader">
-<?php echo $this->GetTranslation("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetTranslation("HideComments"); ?></a>]
-	</div>
-	<?php
+		// store comments display in session
+		$tag = $this->GetPageTag();
+		if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag]))
+		$_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
 
-	// display comments themselves
-	if ($comments)
-	{
-		foreach ($comments as $comment)
+		switch($_GET["show_comments"])
 		{
-			print("<div id=\"".$comment["tag"]."\" class=\"comment\">\n");
-			$del = "";
-			if ($this->IsAdmin() || $this->UserIsOwner($comment["tag"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageTag())))
-				print("<a href=\"".$this->href("remove",$comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/del.gif\" title=\"".$this->GetTranslation("DeleteTipComment")."\" alt=\"".$this->GetTranslation("DeleteText")."\"  align=\"right\" border=\"0\" /></a>");
-			if ($comment["body_r"]) $strings = $comment["body_r"];
-			else $strings = $this->Format($comment["body"], "wacko");
-			print($this->Format($strings,"post_wacko")."\n");
-			print("<div class=\"commentinfo\">\n-- ".($this->IsWikiName($comment["user"])?$this->Link("/".$comment["user"],"",$comment["user"]) : $comment["user"])." (".$comment["time"].")\n</div>\n");
-			print("</div>\n");
+		case "0":
+			$_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = 0;
+			break;
+		case "1":
+			$_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = 1;
+			break;
 		}
-	}
 
-	// display comment form
-	if ($this->HasAccess("comment"))
-	{
-		print("<div class=\"commentform\">\n");
+		// display comments!
+		if ($this->page && $_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag])
+		{
+			// display comments header
+			?>
+		<a name="comments"></a>
+	<div id="commentsheader">
+	<?php echo $this->GetTranslation("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetTranslation("HideComments"); ?></a>]
+		</div>
+		<?php
 
-		echo $this->GetTranslation("AttachComment"); ?><br />
-		<?php echo $this->FormOpen("addcomment"); ?>
-			<textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
-<?php
-			// captcha code starts
-
-			// Only show captcha if the admin enabled it in the config file
-			if($this->GetConfigValue("captcha_new_comment"))
+		// display comments themselves
+		if ($comments)
+		{
+			foreach ($comments as $comment)
 			{
-				// Don't load the captcha at all if the GD extension isn't enabled
-				if(extension_loaded('gd'))
+				print("<div id=\"".$comment["tag"]."\" class=\"comment\">\n");
+				$del = "";
+				if ($this->IsAdmin() || $this->UserIsOwner($comment["tag"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageTag())))
+					print("<a href=\"".$this->href("remove",$comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/del.gif\" title=\"".$this->GetTranslation("DeleteTipComment")."\" alt=\"".$this->GetTranslation("DeleteText")."\"  align=\"right\" border=\"0\" /></a>");
+				if ($comment["body_r"]) $strings = $comment["body_r"];
+				else $strings = $this->Format($comment["body"], "wacko");
+				print($this->Format($strings,"post_wacko")."\n");
+				print("<div class=\"commentinfo\">\n-- ".($this->IsWikiName($comment["user"])?$this->Link("/".$comment["user"],"",$comment["user"]) : $comment["user"])." (".$comment["time"].")\n</div>\n");
+				print("</div>\n");
+			}
+		}
+
+		// display comment form
+		if ($this->HasAccess("comment"))
+		{
+			print("<div class=\"commentform\">\n");
+
+			echo $this->GetTranslation("AttachComment"); ?><br />
+			<?php echo $this->FormOpen("addcomment"); ?>
+				<textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
+	<?php
+				// captcha code starts
+
+				// Only show captcha if the admin enabled it in the config file
+				if($this->GetConfigValue("captcha_new_comment"))
 				{
-					if(strpos($this->GetUserName(), '.'))
+					// Don't load the captcha at all if the GD extension isn't enabled
+					if(extension_loaded('gd'))
 					{
-?>
-<p><?php echo $this->GetTranslation("Captcha");?>:</p>
-<img src="<?php echo $this->GetConfigValue("base_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("base_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
-<br />
-<input type="text" name="word" maxlength="6" style="width: 273px;" />
-<br />
-<br />
-<?php
+						if(strpos($this->GetUserName(), '.'))
+						{
+	?>
+	<p><?php echo $this->GetTranslation("Captcha");?>:</p>
+	<img src="<?php echo $this->GetConfigValue("base_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("base_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
+	<br />
+	<input type="text" name="word" maxlength="6" style="width: 273px;" />
+	<br />
+	<br />
+	<?php
+						}
 					}
 				}
+				// end captcha
+	?>
+	<input type="submit" value="<?php echo $this->GetTranslation("AttachCommentButton"); ?>" accesskey="s" />
+	<?php echo $this->FormClose(); ?>
+	<?php
+			print("</div>\n");
 			}
-			// end captcha
-?>
-<input type="submit" value="<?php echo $this->GetTranslation("AttachCommentButton"); ?>" accesskey="s" />
-<?php echo $this->FormClose(); ?>
-<?php
-		print("</div>\n");
+		// end comment form
 		}
-	// end comment form
-	}
-	else
-	{
-?>
-<div id="commentsheader">
-<?php
-		switch ($c = count($comments))
+		else
 		{
-			case 0:
-				print($this->GetTranslation("Comments_0"));
-				break;
-			case 1:
-				print($this->GetTranslation("Comments_1"));
-				break;
-			default:
-				print(str_replace("%1", $c, $this->GetTranslation("Comments_n")));
+	?>
+	<div id="commentsheader">
+	<?php
+			switch ($c = count($comments))
+			{
+				case 0:
+					print($this->GetTranslation("Comments_0"));
+					break;
+				case 1:
+					print($this->GetTranslation("Comments_1"));
+					break;
+				default:
+					print(str_replace("%1", $c, $this->GetTranslation("Comments_n")));
+			}
+		//TODO: show link to show comment only if there is one or/and user has the right to add a new one
+	?>
+		[<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->GetTranslation("ShowComments"); ?></a>]</div>
+	<?php
 		}
-	//TODO: show link to show comment only if there is one or/and user has the right to add a new one
-?>
-	[<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->GetTranslation("ShowComments"); ?></a>]</div>
-<?php
-	}
 	}
 }
 ?>
