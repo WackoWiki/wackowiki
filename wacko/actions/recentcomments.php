@@ -5,7 +5,7 @@ if (!function_exists('LoadRecentComments')){
 	{
 		return
 		$wacko->LoadAll(
-			"SELECT b.tag as comment_on_page, b.supertag, a.user, a.time, a.comment_on_id ".
+			"SELECT b.tag as comment_on_page, a.tag, b.supertag, a.user, a.time, a.comment_on_id ".
 			"FROM ".$wacko->config["table_prefix"]."pages a ".
 				"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.id)".
 			"WHERE ".
