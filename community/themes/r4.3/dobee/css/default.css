@@ -112,6 +112,12 @@ table.upload td.size- { padding-right: 0; text-align: right }
 .time{ color: #cccccc; font: 9px Trebuchet MS, Tahoma, Arial, Verdana }
 .debug {font-size: 11px; color: #888888;}
 .files, .comment { padding: 10px; border-left: 1px inset; border-right: 1px inset; border-top: 1px solid #CCCCCC; border-bottom: 1px solid #EEEEEE; background: #EEEEEE }
+
+div.comment:target {
+	border:2px solid #FF6600;
+	padding:0.5em 0.5em 0.5em 25px;
+}
+
 .filesform, .commentform { padding: 10px; border-left: 1px inset; border-right: 1px inset; border-top: 1px solid #CCCCCC; background: #EEEEEE }
 .include { padding: 8px; background: #F5F5F5 }
 .logbtn { font: 10px Trebuchet MS, Verdana, Arial, Helvetica, sans-serif; height: 21px }
