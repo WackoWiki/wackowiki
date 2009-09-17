@@ -5,11 +5,14 @@ if (!function_exists('LoadRecentComments')){
 	{
 		return
 		$wacko->LoadAll(
-		"SELECT ".$wacko->pages_meta." FROM ".$wacko->config["table_prefix"]."pages WHERE ".
-		($for
-			? "super_comment_on LIKE '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' "
-			: "comment_on_id != '0' ").
-		"ORDER BY time DESC LIMIT ".(int)$limit);
+			"SELECT b.tag as comment_on_page, b.supertag, a.user, a.time, a.comment_on_id ".
+			"FROM ".$wacko->config["table_prefix"]."pages a ".
+				"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.id)".
+			"WHERE ".
+			($for
+				? "b.supertag LIKE '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' "
+				: "a.comment_on_id != '0' ").
+			"ORDER BY a.time DESC LIMIT ".(int)$limit);
 	}
 }
 
@@ -29,7 +32,7 @@ if ($comments = LoadRecentComments($this, $root, (int)$max))
 		if ($access && $this->UserAllowedComments())
 		{
 			// day header
-			list($day, $time) = explode(" ", $comment["time"]);
+			list($day, $time2) = explode(" ", $comment["time"]);
 			if ($day != $curday)
 			{
 				if ($curday)
@@ -41,7 +44,7 @@ if ($comments = LoadRecentComments($this, $root, (int)$max))
 			}
 
 			// print entry
-			print("<li>(".$comment["time"].") <a href=\"".$this->href("", $comment["comment_on_id"], "show_comments=1")."#".$comment["tag"]."\">".$comment["comment_on_id"]."</a> . . . . <small>".
+			print("<li><span class=\"dt\">".$time2."</span> &mdash; (<a href=\"".$this->href("", $comment["comment_on_page"], "show_comments=1")."#".$comment["tag"]."\">".$comment["comment_on_page"]."</a>) . . . . . . . . . . . . . . . . <small>".
 			($this->IsWikiName($comment["user"])?$this->Link("/".$comment["user"],"",$comment["user"]):$comment["user"])."</small></li>\n");
 		}
 	}
