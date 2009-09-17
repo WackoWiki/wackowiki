@@ -100,22 +100,27 @@ del A.outerlink:HOVER { color:#cc3300 }
 .debug { font-size: 11px; color: #888888;}
 
 #commentsheader, #filesheader {
-  background-color: #eeeeee;
-  padding: 2px 50px;
+	background-color: #eeeeee;
+	padding: 2px 50px;
 }
 
 .comment, .files {
-  background-color: #EEEEEE;
-  padding: 10px 50px;
-  border-top: 1px solid #CCCCCC;
+	background-color: #EEEEEE;
+	padding: 10px 50px;
+	border-top: 1px solid #CCCCCC;
+}
+
+div.comment:target {
+	border:2px solid #FF6600;
+	padding:0.5em 0.5em 0.5em 25px;
 }
 
 .commentinfo {
-  color: #AAAAAA;
+	color: #AAAAAA;
 }
 /* Change summary */
 .editnote {
-  color: #555555;
+	color: #555555;
 }
 .commentform, .filesform {
   background-color: #EEEEEE;

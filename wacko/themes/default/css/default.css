@@ -176,12 +176,18 @@ white-space: nowrap;
   border-bottom: 1px solid #EEEEEE;
 }
 
+div.comment:target {
+border:2px solid #FF6600;
+padding:0.5em 0.5em 0.5em 25px;
+}
+
 /* Comment author and date */
 .commentinfo {
   color: #AAAAAA;
   padding-bottom: 20px;
 }
 
+/* Change summary */
 .editnote {
   color: #555555;
 }
@@ -195,8 +201,6 @@ white-space: nowrap;
 }
 .commentform form {width:100%;}
 .commentform form textarea {width:100%; padding:0;}
-
-
 
 #credits {
   font-size: 11px;
