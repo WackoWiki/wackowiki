@@ -114,12 +114,18 @@ img {
 	border-top: 1px solid #CCCCCC;
 	border-bottom: 1px solid #EEEEEE;
 }
+
+div.comment:target {
+	border:2px solid #FF6600;
+	padding:0.5em 0.5em 0.5em 25px;
+}
+
 .commentinfo {
 	color: #AAAAAA;
 }
 /* Change summary */
 .editnote {
-  color: #555555;
+	color: #555555;
 }
 .filesform, .commentform {
 	background-color: #EEEEEE;
@@ -376,14 +382,14 @@ div#cssform1 span.site_count {
 
 /* feed action */
 .feed {
-    overflow:auto;
+	overflow:auto;
 }
 .feed .note {
-     font-size: 11px;
-     color: #777;
+	font-size: 11px;
+	color: #777;
 }
 .feed .note a {
-     color: #777;
+	color: #777;
 }
 .feed_element_title {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
