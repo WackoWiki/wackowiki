@@ -61,15 +61,10 @@ if ($registered
 	<input type="hidden" name="remove" value="<?php echo $_GET["remove"]?>" />
 	<input type="hidden" name="file" value="<?php echo $_GET["file"]?>" />
 	<input
-		name="submit" class="OkBtn_Top"
-		onmouseover='this.className="OkBtn_Top_";'
-		onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
-		value="<?php echo $this->GetTranslation("RemoveButton"); ?>" />
+		name="submit" type="submit" value="<?php echo $this->GetTranslation("RemoveButton"); ?>" />
 	&nbsp;
 	<input
-		class="CancelBtn_Top" onmouseover='this.className="CancelBtn_Top_";'
-		onmouseout='this.className="CancelBtn_Top";' type="button" align="top"
-		value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
+		type="button" value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
 		onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
 	<br />
 	<br />

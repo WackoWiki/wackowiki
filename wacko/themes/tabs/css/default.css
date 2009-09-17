@@ -58,16 +58,6 @@ dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; curso
 
 .TabSpace { color:#666666; border-top:1px solid #444444; }
 
-.OkBtn { color:#002000; cursor:hand; background:#c9e3f2; height:40px; }
-.OkBtn_ { color:#002000; cursor:hand; background:#fff6bc; height:40px; }
-.CancelBtn { color:#666666; cursor:hand; font-size:10px; background:#cccccc; }
-.CancelBtn_ { color:#666666; cursor:hand; font-size:10px; background:#dddddd; }
-
-.OkBtn_Top { color:#002000; cursor:hand; background:#c9e3f2;  }
-.OkBtn_Top_ { color:#002000; cursor:hand; background:#fff6bc;  }
-.CancelBtn_Top { color:#666666; cursor:hand; font-size:10px; background:#cccccc; }
-.CancelBtn_Top_ { color:#666666; cursor:hand; font-size:10px; background:#dddddd; }
-
 #credits {
   font-size: 11px;
   color: #AAAAAA;

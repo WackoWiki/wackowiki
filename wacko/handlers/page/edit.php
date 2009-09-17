@@ -29,7 +29,7 @@ if ($_POST)
         {
             $minor_edit = $_POST["minor_edit"];
         }
-        
+
 		// check for overwriting
 		if ($this->page && $this->page["time"] != $_POST["previous"])
 			$error = $this->GetTranslation("OverwriteAlert");
@@ -39,7 +39,7 @@ if ($_POST)
 		{
 			$error .= $this->GetTranslation("EditNoteMissing");
 		}
-		
+
 		if(($this->page && $this->GetConfigValue("captcha_edit_page")) || (!$this->page && $this->GetConfigValue("captcha_new_page")))
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
@@ -91,7 +91,7 @@ if ($_POST)
 
 			// add page (revisions)
 			$body_r = $this->SavePage($this->tag, $body, $edit_note, $minor_edit);
-			
+
 			// log event
 			if ($this->page == false)
 			{
@@ -117,7 +117,7 @@ if ($_POST)
 			$this->Redirect($this->href("", $this->tag).$this->AddDateTime($this->tag));
 		}
 	}
-	
+
 	// saving blank document
 	else if ($_POST["body"] == "")
 	{
@@ -164,20 +164,11 @@ if ($_POST)
 	if ($_POST["preview"])
 	{
 ?>
-		<input name="save" class="OkBtn"
-			onmouseover='this.className="OkBtn_";'
-			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
+		<input name="save" type="submit" value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
 		&nbsp;
-		<input name="preview"
-			class="OkBtn" onmouseover='this.className="OkBtn_";'
-			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetTranslation("EditPreviewButton"); ?>" />
+		<input name="preview" type="submit" value="<?php echo $this->GetTranslation("EditPreviewButton"); ?>" />
 		&nbsp;
-		<input class="CancelBtn"
-			onmouseover='this.className="CancelBtn_";'
-			onmouseout='this.className="CancelBtn";' type="button" align="top"
-			value="<?php echo $this->GetTranslation("EditCancelButton"); ?>"
+		<input type="button" value="<?php echo $this->GetTranslation("EditCancelButton"); ?>"
 			onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
 <?php
 		$preview = $this->Format($body, "preformat");
@@ -194,21 +185,11 @@ if ($_POST)
 		$output = "";
 }
 ?>
-		<input name="save" class="OkBtn_Top"
-			onmouseover='this.className="OkBtn_Top_";'
-			onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
-			value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
+		<input name="save" type="submit" value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
 		&nbsp;
-		<input name="preview"
-			class="OkBtn_Top" onmouseover='this.className="OkBtn_Top_";'
-			onmouseout='this.className="OkBtn_Top";' type="submit" align="top"
-			value="<?php echo $this->GetTranslation("EditPreviewButton"); ?>" />
+		<input name="preview" type="submit" value="<?php echo $this->GetTranslation("EditPreviewButton"); ?>" />
 		&nbsp;
-		<input
-			class="CancelBtn_Top" onmouseover='this.className="CancelBtn_Top_";'
-			onmouseout='this.className="CancelBtn_Top";' type="button"
-			align="top"
-			value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
+		<input type="button" value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
 			onclick="document.location='<?php echo addslashes($this->href("", "", "", 1))?>';" />
 		<br />
 		<noscript><div class="errorbox_js"><?php echo $this->GetTranslation("WikiEditInactiveJs"); ?></div></noscript>
@@ -216,7 +197,7 @@ if ($_POST)
 		$output .= "<input type=\"hidden\" name=\"previous\" value=\"".htmlspecialchars($previous)."\" /><br />";
 		$output .= "<textarea id=\"postText\" name=\"body\" rows=\"40\" cols=\"60\" class=\"TextArea\">";
 		$output .= htmlspecialchars($body)."</textarea><br />\n";
-		
+
 		// edit note
 		if ($this->GetConfigValue("edit_summary") != 0)
 		{
@@ -268,20 +249,11 @@ if ($_POST)
 ?>
 		wE.init('postText','WikiEdit','edname-w','<?php echo $this->GetConfigValue("base_url");?>images/wikiedit/');
 	</script>
-	<input name="save" class="OkBtn"
-		onmouseover='this.className="OkBtn_";'
-		onmouseout='this.className="OkBtn";' type="submit" align="top"
-		value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
+	<input name="save" type="submit" value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
 	&nbsp;
-	<input name="preview"
-		class="OkBtn" onmouseover='this.className="OkBtn_";'
-		onmouseout='this.className="OkBtn";' type="submit" align="top"
-		value="<?php echo $this->GetTranslation("EditPreviewButton"); ?>" />
+	<input name="preview" type="submit" value="<?php echo $this->GetTranslation("EditPreviewButton"); ?>" />
 	&nbsp;
-	<input class="CancelBtn"
-		onmouseover='this.className="CancelBtn_";'
-		onmouseout='this.className="CancelBtn";' type="button" align="top"
-		value="<?php echo $this->GetTranslation("EditCancelButton"); ?>"
+	<input type="button" value="<?php echo $this->GetTranslation("EditCancelButton"); ?>"
 		onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
 <?php
 }

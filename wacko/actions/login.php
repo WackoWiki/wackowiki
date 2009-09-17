@@ -7,10 +7,10 @@ if ($_GET["action"] == "logout")
 	$this->SetBookmarks(BM_DEFAULT);
 	//$this->SetMessage($this->GetTranslation("LoggedOut"));
 	$this->context[++$this->current_context] = "";
-	
+
 	if ($_GET["goback"] != "")
 		$this->Redirect($this->Href("", stripslashes($_GET["goback"])));
-	else 
+	else
 		$this->Redirect($this->href());
 }
 else if ($user = $this->GetUser())
@@ -24,10 +24,7 @@ else if ($user = $this->GetUser())
 <div class="cssform">
   <h3><?php echo $this->GetTranslation("Hello").", ".$this->ComposeLinkToPage($user["name"]) ?>!</h3>
   <p>
-    <input class="CancelBtn"
-			onmouseover='this.className="CancelBtn_";'
-			onmouseout='this.className="CancelBtn";' type="button" align="top"
-			value="<?php echo $this->GetTranslation("LogoutButton"); ?>"
+    <input type="button" value="<?php echo $this->GetTranslation("LogoutButton"); ?>"
 			onclick="document.location='<?php echo $this->href("", "", "action=logout"); ?>'" />
   </p>
 </div>
@@ -54,7 +51,7 @@ else
 				$this->context[++$this->current_context] = "";
 				$this->Log(3, str_replace("%1", $existingUser["name"], $this->GetTranslation("LogUserLoginOK")));
 
-				if ($_POST["goback"] != "") 
+				if ($_POST["goback"] != "")
 					$this->Redirect($this->Href("", stripslashes($_POST["goback"]), "cache=".rand(0,1000)));
 				else
 					$this->Redirect($this->href());
@@ -64,7 +61,7 @@ else
 				$error = $this->GetTranslation("WrongPassword");
 				$name = $_POST["name"];
 				$focus = 1;
-				
+
 				// log failed attempt
 				$this->Log(2, str_replace("%1", $_POST["name"], $this->GetTranslation("LogUserLoginFailed")));
 			}
@@ -91,9 +88,7 @@ else
     <input id="password" type="password" name="password" size="24" />
   </p>
   <p>
-    <input class="OkBtn" onmouseover='this.className="OkBtn_";'
-			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetTranslation("LoginButton"); ?>" />
+    <input type="submit" value="<?php echo $this->GetTranslation("LoginButton"); ?>" />
   </p>
   <p><a href="<?php echo $this->Href("", "Password"); ?>"><?php echo $this->GetTranslation("ForgotLink"); ?></a></p>
   <p><?php echo $this->FormatTranslation("LoginWelcome2"); ?></p>

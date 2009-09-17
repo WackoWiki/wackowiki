@@ -235,9 +235,7 @@ for ($i = 0; $i < count($langs); $i++)
 		}
 		// end captcha
 		?>
-<p><input class="OkBtn" onmouseover='this.className="OkBtn_";'
-	onmouseout='this.className="OkBtn";' type="submit" align="top"
-	value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" /></p>
+<p><input type="submit" value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" /></p>
 </div>
 		<?php
 		print($this->FormClose());

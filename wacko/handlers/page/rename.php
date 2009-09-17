@@ -139,16 +139,8 @@ if ($registered
 			}
 			?> <br />
 <br />
-<input name="submit" class="OkBtn_Top"
-	onmouseover='this.className=&quot;OkBtn_Top_&quot;;'
-	onmouseout='this.className=&quot;OkBtn_Top&quot;;' type="submit"
-	align="top"
-	value="<?php echo $this->GetTranslation("RenameButton"); ?>" /> &nbsp;
-<input class="CancelBtn_Top"
-	onmouseover='this.className=&quot;CancelBtn_Top_&quot;;'
-	onmouseout='this.className=&quot;CancelBtn_Top&quot;;' type="button"
-	align="top"
-	value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
+<input name="submit" type="submit" value="<?php echo $this->GetTranslation("RenameButton"); ?>" /> &nbsp;
+<input type="button" value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
 	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
 <br />
 <br />

@@ -46,9 +46,7 @@ if ($_POST["secret_code"]){
     <input type="password" id="confpassword" name="confpassword" size="24" />
   </p>
   <p>
-    <input class="OkBtn" onmouseover='this.className="OkBtn_";'
-			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" />
+    <input type="submit" value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" />
   </p>
 </div>
 <?php
@@ -113,9 +111,7 @@ if ($_POST["secret_code"]){
     <input type="password" id="confpassword" name="confpassword" size="24" />
   </p>
   <p>
-    <input class="OkBtn" onmouseover='this.className="OkBtn_";'
-			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" />
+    <input type="submit" value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" />
   </p>
 </div>
 <?php
@@ -179,9 +175,7 @@ if ($_POST["secret_code"]){
     <input type="text" id="loginormail" name="loginormail" size="24" />
   </p>
   <p>
-    <input class="OkBtn" onmouseover='this.className="OkBtn_";'
-			onmouseout='this.className="OkBtn";' type="submit" align="top"
-			value="<?php echo $this->GetTranslation("SendButton"); ?>" />
+    <input type="submit" value="<?php echo $this->GetTranslation("SendButton"); ?>" />
   </p>
 </div>
 <?php
