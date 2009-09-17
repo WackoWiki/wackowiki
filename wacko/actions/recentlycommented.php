@@ -6,23 +6,34 @@ if (!function_exists('LoadRecentlyCommented')){
 		// NOTE: this is really stupid. Maybe my SQL-Fu is too weak, but apparently there is no easier way to simply select
 		//  all comment pages sorted by their first revision's (!) time. ugh!
 		// load ids of the first revisions of latest comments. err, huh?
-		if ($ids = $wacko->LoadAll("SELECT MIN(id) AS id FROM ".$wacko->config["table_prefix"]."pages WHERE ".
-		($for
-			? "super_comment_on LIKE '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' "
-			: "comment_on_id != '0' ").
-		"GROUP BY tag ORDER BY id DESC", 1));
-		{
-			// load complete comments
-			if ($ids)
-			foreach ($ids as $id)
+		if ($ids = $wacko->LoadAll(
+			"SELECT a.id, MAX(a.created) as latest, a.comment_on_id ".
+			"FROM ".$wacko->config["table_prefix"]."pages a ".
+			($for
+				? 	"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.id) ".
+					"WHERE ".
+						"b.supertag LIKE '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' "
+				: 	"WHERE a.comment_on_id <> '0' ").
+			($for
+				? 	"GROUP BY b.supertag, a.id ORDER BY latest DESC"
+				:	"GROUP BY a.comment_on_id, a.id ORDER BY latest DESC")
+			, 1));
 			{
-				$comment = $wacko->LoadSingle("SELECT * FROM ".$wacko->config["table_prefix"]."pages WHERE id = '".$id["id"]."' LIMIT 1");
-				if (!$comments[$comment["comment_on_id"]] && $num < $limit)
+				// load complete comments
+				if ($ids)
+				foreach ($ids as $id)
 				{
-					$comments[$comment["comment_on_id"]] = $comment;
-					$num++;
+					$comment = $wacko->LoadSingle(
+						"SELECT b.tag as comment_on_page, b.supertag, a.tag, a.user, a.time ".
+						"FROM ".$wacko->config["table_prefix"]."pages a ".
+							"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.id)".
+						" WHERE a.id = '".$id["id"]."' LIMIT 1");
+					if (!$comments[$comment["comment_on_page"]] && $num < $limit)
+					{
+						$comments[$comment["comment_on_page"]] = $comment;
+						$num++;
+					}
 				}
-			}
 
 			// now load pages
 			if ($comments)
@@ -30,9 +41,10 @@ if (!function_exists('LoadRecentlyCommented')){
 				// now using these ids, load the actual pages
 				foreach ($comments as $comment)
 				{
-					$page = $wacko->LoadPage($comment["comment_on_id"]);
+					$page = $wacko->LoadPage($comment["comment_on_page"]);
 					$page["comment_user"] = $comment["user"];
 					$page["comment_time"] = $comment["time"];
+					$page["comment_on_tag"] = $comment["comment_on_page"];
 					$page["comment_tag"] = $comment["tag"];
 					$pages[] = $page;
 				}
@@ -75,7 +87,7 @@ if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
 
 			// print entry
 			print("<li><span class=\"dt\">".$time."</span> &mdash; (<a href=\"".
-			$this->href("", $page["tag"], "show_comments=1")."#comments\">".$page["tag"]."</a>".
+			$this->href("", $page["comment_on_tag"], "show_comments=1")."#".$page["comment_tag"]."\">".$page["comment_on_tag"]."</a>".
 			") . . . . . . . . . . . . . . . . <small>".$this->GetTranslation("LatestCommentBy")." ".
 			($this->IsWikiName($page["comment_user"])?$this->Link("/".$page["comment_user"],"",$page["comment_user"] ):$page["comment_user"])."</small></li>\n");
 		}
