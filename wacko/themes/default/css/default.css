@@ -177,8 +177,8 @@ white-space: nowrap;
 }
 
 div.comment:target {
-border:2px solid #FF6600;
-padding:0.5em 0.5em 0.5em 25px;
+	border:2px solid #FF6600;
+	padding:0.5em 0.5em 0.5em 25px;
 }
 
 /* Comment author and date */
@@ -460,11 +460,16 @@ div#cssform1 span.site_count {
 }
 .feed_element_title {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
-	background-color:transparent;
-	background-repeat:no-repeat;
-	background-position:0 1px;
-	padding-left:20px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: 0 1px;
+	padding-left: 20px;
 }
+.feed h4 {
+    font-size: 13px;
+	border-bottom: none;
+}
+
 
 /*Handlers --------------------------------------------------*/
 #content {
