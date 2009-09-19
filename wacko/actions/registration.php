@@ -1,6 +1,6 @@
 <!--notypo-->
 <?php
-// user is not logged in or logged in -- nomatter
+// user is not logged in or logged in -- no matter
 
 // is user trying to confirm email, login or register?
 if ($_GET["confirm"])
@@ -202,7 +202,8 @@ for ($i = 0; $i < count($langs); $i++)
 <input type="password" id="confpassword" name="confpassword" size="24"
 	value="<?php echo $confpassword ?>" /></p>
 <p>
-<?php /* TODO: add message -> A valid e-mail address. All e-mails from the system will be sent to this address. The e-mail address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by e-mail. */ ?>
+<?php
+/* TODO: add message -> A valid e-mail address. All e-mails from the system will be sent to this address. The e-mail address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by e-mail. */ ?>
 <label for="email"><?php echo $this->GetTranslation("Email");?>:</label>
 <input id="email" name="email" size="30"
 	value="<?php echo htmlspecialchars($email); ?>" /></p>
