@@ -256,7 +256,7 @@ if ($this->GetConfigValue("footer_comments"))
 			print("<div class=\"commentform\">\n");
 
 			echo $this->FormOpen("addcomment"); ?>
-				<label for="addcomment"><?php echo $this->GetTranslation("AttachComment");?>:</label><br />
+				<label for="addcomment"><?php echo $this->GetTranslation("AttachComment");?></label><br />
 				<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
 	<?php
 				// captcha code starts
@@ -270,6 +270,7 @@ if ($this->GetConfigValue("footer_comments"))
 						if(strpos($this->GetUserName(), '.'))
 						{
 	?>
+	<br />
 	<label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
 	<br />
 	<img src="<?php echo $this->GetConfigValue("base_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("base_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
