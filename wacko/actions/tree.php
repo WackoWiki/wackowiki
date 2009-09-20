@@ -1,6 +1,6 @@
 <?php
 
-$root = $vars[0];
+$root = $vars[$page];
 
 // input
 if (!isset($root) && !isset($page))
