@@ -103,7 +103,7 @@ del.diff { }
   border: 1px none;
   border-collapse: collapse;
 }
-.usertable tr td, .usertable tr th
+.usertable td, .usertable th
 {
   border-width: 1px;
   border-color: black;
@@ -113,7 +113,7 @@ del.diff { }
 }
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
 table.dtable { border: 0px none; border-collapse: collapse; }
-table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 8px; }
+table.dtable td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 8px; }
 
 /* Inside the table of content: SYNTAX {{toc}} */
 .toc1 {

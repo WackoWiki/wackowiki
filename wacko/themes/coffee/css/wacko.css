@@ -86,7 +86,7 @@ del.diff { color: #c00; font-style: italic; text-decoration: line-through }
 }
 
 
-.usertable tr td, .usertable tr th
+.usertable td, .usertable th
 {
   border-width: 1px;
   border-color: black;
@@ -96,7 +96,7 @@ del.diff { color: #c00; font-style: italic; text-decoration: line-through }
 }
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
 table.dtable { width:100%; border: 0px none; border-collapse: collapse; }
-table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
+table.dtable td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
 
 /* Inside the table of content: SYNTAX {{toc}} */
 div.toc1 { margin-left: 0px; padding-left: 0px; list-style-type: none; font-weight: bold }

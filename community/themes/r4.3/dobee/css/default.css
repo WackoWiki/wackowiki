@@ -89,17 +89,17 @@ div#page {padding: 10px 10px;}
 
 /* Formattets */
 
-table.upload td { padding: 2px 5px 2px 5px; vertical-align: bottom }
-table.upload td.desc- { width: 100%; color: #444444; font-size: 80% }
-table.upload td.dt- .dt2-,
-table.upload td.remove- .remove2-,
-table.upload td.size- .size2- { color: #666666; font: 11px Tahoma }
-table.upload td.dt-,   
-table.upload td.file- { white-space: nowrap; color: #000000; font-size: 80%; font-weight: bold }
-table.upload td.dt-, table.upload td.remove- { padding-right: 0 }
-table.upload td.remove- a.remove2-:hover,
-table.upload td.remove- a.remove2-:active { color: #ff0000 }
-table.upload td.size- { padding-right: 0; text-align: right }
+.upload td { padding: 2px 5px 2px 5px; vertical-align: bottom }
+.upload td.desc- { width: 100%; color: #444444; font-size: 80% }
+.upload td.dt- .dt2-,
+.upload td.remove- .remove2-,
+.upload td.size- .size2- { color: #666666; font: 11px Tahoma }
+.upload td.dt-,   
+.upload td.file- { white-space: nowrap; color: #000000; font-size: 80%; font-weight: bold }
+.upload td.dt-, .upload td.remove- { padding-right: 0 }
+.upload td.remove- a.remove2-:hover,
+.upload td.remove- a.remove2-:active { color: #ff0000 }
+.upload td.size- { padding-right: 0; text-align: right }
 
 .error { color: #CC3333; font-weight: bold }
 .info {

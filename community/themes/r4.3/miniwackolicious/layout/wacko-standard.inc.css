@@ -11,7 +11,7 @@ table.upload {
 	margin: 0.5em;
 }
 
-table.upload td {
+.upload td {
 	padding: 0.5em;
 	vertical-align: top;
 }
