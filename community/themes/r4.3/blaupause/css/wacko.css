@@ -107,16 +107,16 @@ del.diff {
 /** Table-related ************************************************************/
 
 /* Bordered tables: SYNTAX #|| || Here | there || ||# */
-table.usertable {
+.usertable {
   border: 1px none;
   border-collapse: collapse;
 }
 
-table.usertable tr th {
+.usertable tr th {
 
 }
 
-table.usertable tr td, table.usertable tr th
+.usertable tr td, .usertable tr th
 {
   border-width: 1px;
   border-color: black;

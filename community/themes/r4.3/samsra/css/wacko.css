@@ -99,11 +99,11 @@ del.diff { font-style: italic; color:#c00; text-decoration: line-through; }
 /** Table-related ************************************************************/
 
 /* Bordered tables: SYNTAX #|| || Here | there || ||# */
-table.usertable {
+.usertable {
   border: 1px none;
   border-collapse: collapse;
 }
-table.usertable tr td
+.usertable tr td
 {
   border-width: 1px;
   border-color: black;

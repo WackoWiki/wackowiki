@@ -83,7 +83,7 @@ pre pre, pre code, code code, code pre { padding:0; }
 
 /* -- Tables ---------------------------------------------------------------- */
 
-table, table.usertable, table.dtable
+table, .usertable, table.dtable
 {
     background-color:transparent;
     width:auto;
@@ -99,19 +99,19 @@ table, table.usertable, table.dtable
 
 table.dtable { width:100%; border:none; }
 
-table.usertable td, table.dtable td, table.usertable th, table.dtable th
+.usertable td, table.dtable td, .usertable th, table.dtable th
 { padding:0.1em 0.2em; text-align:left; vertical-align:top; }
 
 th { font-weight:bold; }
 td { font-weight:normal; }
 
-table.usertable tbody td, table.dtable tbody td
+.usertable tbody td, table.dtable tbody td
 { border-style:solid; border-width:1px; border-color:#ccc; }
 
 table.dtable tbody td
 { border-style:solid none; }
 
-table.usertable thead th, table.dtable thead th
+.usertable thead th, table.dtable thead th
 { background-color:#ccc; }
 
 table caption {

@@ -43,11 +43,11 @@ cite {color:#888800;font-style:normal;}
 .Toc1 A, .Toc2 A, .Toc3 A, .Toc4 A, .Toc5 A, .Toc6 A
  { text-decoration:none; color:#000 }
 
-table.usertable {
+.usertable {
         border: 1px none;
   border-collapse: collapse;
 }
-table.usertable tr td
+.usertable tr td
 {
   border-width: 1px;
   border-color: black;
