@@ -85,11 +85,11 @@ del.diff { color: #c00; font-style: italic; text-decoration: line-through }
 
 /* Bordered tables: SYNTAX #|| || Here | there || ||# */
 .usertable { border: 1px none; border-collapse: collapse }
-.usertable tr td, .usertable tr th { border-width: 1px; border-color: black; border-style: solid; padding: 4px; vertical-align: top }
+.usertable td, .usertable th { border-width: 1px; border-color: black; border-style: solid; padding: 4px; vertical-align: top }
 
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
 table.dtable { width: 100%; border: 0px none; border-collapse: collapse }
-table.dtable tr td { border-width: 0px; border-color: #999999; border-style: none; padding: 4px; vertical-align: top }
+table.dtable td { border-width: 0px; border-color: #999999; border-style: none; padding: 4px; vertical-align: top }
 
 /* Inside the table of content: SYNTAX {{toc}} */
 div.toc1 { margin-left: 0px; padding-left: 0px; list-style-type: none; font-weight: bold }

@@ -137,13 +137,13 @@ del.diff {
 .usertable {
 	border-collapse:	collapse;
 }
-.usertable tr td {
+.usertable td {
 	border:			solid 1px #999;
 	padding:		5px;
 }
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
 .dtable {width:	100%; border-collapse:collapse;}
-.dtable tr td {padding:5px;}
+.dtable td {padding:5px;}
 
 /* Inside the table of content: SYNTAX {{toc}} */
 fieldset .toc1 {

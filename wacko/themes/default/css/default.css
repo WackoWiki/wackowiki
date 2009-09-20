@@ -267,18 +267,18 @@ position:absolute;
 visibility:hidden
 }
 
-table.upload td { padding: 2px 5px 2px 5px; vertical-align:bottom }
-table.upload td.dt-,
-table.upload td.file- { white-space:nowrap; font-size: 80%; font-weight:bold; color:#000000 }
-table.upload td.dt-   { padding-right:0 }
-table.upload td.remove-   { padding-right:0 }
-table.upload td.size- { padding-right:0; text-align:right }
-table.upload td.desc- { font-size: 80%; color:#444444; width:100% }
-table.upload td.dt- .dt2-,
-table.upload td.remove- .remove2-,
-table.upload td.size- .size2- { font: 11px Tahoma; color:#666666;  }
-table.upload td.remove- a.remove2-:hover,
-table.upload td.remove- a.remove2-:active { color:#ff0000 }
+.upload td { padding: 2px 5px 2px 5px; vertical-align:bottom }
+.upload td.dt-,
+.upload td.file- { white-space:nowrap; font-size: 80%; font-weight:bold; color:#000000 }
+.upload td.dt-   { padding-right:0 }
+.upload td.remove-   { padding-right:0 }
+.upload td.size- { padding-right:0; text-align:right }
+.upload td.desc- { font-size: 80%; color:#444444; width:100% }
+.upload td.dt- .dt2-,
+.upload td.remove- .remove2-,
+.upload td.size- .size2- { font: 11px Tahoma; color:#666666;  }
+.upload td.remove- a.remove2-:hover,
+.upload td.remove- a.remove2-:active { color:#ff0000 }
 
 .preview {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:red 2px solid;}
 .preview p {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
