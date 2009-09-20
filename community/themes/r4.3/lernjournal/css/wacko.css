@@ -112,8 +112,8 @@ del.diff { }
   vertical-align: top;
 }
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
-table.dtable { border: 0px none; border-collapse: collapse; }
-table.dtable td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 8px; }
+.dtable { border: 0px none; border-collapse: collapse; }
+.dtable td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 8px; }
 
 /* Inside the table of content: SYNTAX {{toc}} */
 .toc1 {
