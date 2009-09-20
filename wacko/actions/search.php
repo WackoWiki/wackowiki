@@ -15,7 +15,7 @@ $i = 0;
 if ($filter != "pages") $filter = "all";
 if (!isset($clean)) $clean = false;
 
-if ($vars[0] != "") $phrase = $vars[0];
+if ($vars[$for] != "") $phrase = $vars[$for];
 else
 {
 	$phrase = "";
