@@ -143,7 +143,7 @@ class Wacko
 	}
 
 	function GetCommentOnTag($comment_on_id = 0)
-	{ 
+	{
 		$comment_on_tag = $this->LoadSingle(
 					"SELECT tag FROM ".$this->config["table_prefix"]."pages WHERE id = '".$comment_on_id."' LIMIT 1");
 					// Get tag value
@@ -964,16 +964,13 @@ class Wacko
 		}
 	}
 
-	function LoadRecentlyComment($limit = 100, $for="", $from="")
+	function LoadRecentlyComment($limit = 100, $for = "")
 	{
 		$limit = (int) $limit;
 
 		if ($pages = $this->LoadAll(
 		"SELECT ".$this->pages_meta.", body_r FROM ".$this->config["table_prefix"]."pages ".
 		"WHERE comment_on_id != '0' ".
-			($from
-				? "AND time<='".quote($this->dblink, $from)." 23:59:59'"
-				: "").
 			($for
 				? "AND supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
 				: "").
@@ -1116,7 +1113,9 @@ class Wacko
 		{
 			if ($comment_on)
 			{
-				$this->cache->CacheInvalidate($comment_on);
+				$comment_on_tag = $this->GetCommentOnTag($comment_on);
+
+				$this->cache->CacheInvalidate($comment_on_tag);
 			}
 			else
 			{
@@ -1126,7 +1125,7 @@ class Wacko
 		}
 
 		// check privileges
-		if ($this->HasAccess("write", $tag) || ($comment_on && $this->HasAccess("comment", $comment_on)))
+		if ($this->HasAccess("write", $tag) || ($comment_on && $this->HasAccess("comment", $this->GetCommentOnTag($comment_on))))
 		{
 			$body = $this->Format($body, "preformat");
 			// is page new?
@@ -1174,11 +1173,11 @@ class Wacko
             else if ($comment_on)
             {
                // Give comments the same rights as their parent page
-					$write_acl = $this->LoadAcl($comment_on, "write");
+					$write_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on), "write");
 					$write_acl = $write_acl["list"];
-					$read_acl = $this->LoadAcl($comment_on, "read");
+					$read_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on), "read");
 					$read_acl = $read_acl["list"];
-					$comment_acl = $this->LoadAcl($comment_on, "comment");
+					$comment_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on), "comment");
 					$comment_acl = $comment_acl["list"];
             }
 				else
@@ -1239,7 +1238,7 @@ class Wacko
 						$Watcher["name"] = $Watcher["user"];
 						$this->SetUser($Watcher, 0);
 
-						if ($this->HasAccess("read", $comment_on, $Watcher["user"]))
+						if ($this->HasAccess("read", $this->GetCommentOnTag($comment_on), $Watcher["user"]))
 						{
 							$User = $this->LoadSingle(
 								"SELECT email, lang, more, email_confirm ".
@@ -1254,10 +1253,10 @@ class Wacko
 								$this->SetResource ($lang);
 								$this->SetLanguage ($lang);
 
-								$subject = $this->GetTranslation("CommentForWatchedPage",$lang)."'".$comment_on."'";
+								$subject = $this->GetTranslation("CommentForWatchedPage",$lang)."'".$this->GetCommentOnTag($comment_on)."'";
 								$message = $this->GetTranslation("MailHello",$lang). $Watcher["user"].".\n\n".
 											$username.
-											$this->GetTranslation("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$comment_on,"")."\">".$this->Href("",$comment_on,"")."</a><br /><hr />".
+											$this->GetTranslation("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$this->GetCommentOnTag($comment_on),"")."\">".$this->Href("",$comment_on,"")."</a><br /><hr />".
 											$this->Format($body_r, "post_wacko")."<hr /><br />".
 											$this->GetTranslation("MailGoodbye",$lang)."\n".
 											$this->config["wacko_name"]."\n".
@@ -2240,7 +2239,7 @@ class Wacko
 			$referrer = isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '';
 
 		// check if it's coming from another site
-		if ($referrer && !preg_match("/^".preg_quote($this->config["base_url"], "/")."/", $referrer) && isset($_GET["sid"]) === false)
+		if ($referrer && !preg_match("/^".preg_quote($this->config["base_url"], "/")."/", $referrer) && isset($_GET["sid"]) === false) // TODO: isset($_GET["PHPSESSID"]) === false
 		{
 			$this->Query(
 				"INSERT INTO ".$this->config["table_prefix"]."referrers SET ".
@@ -2503,11 +2502,11 @@ class Wacko
 	}
 
 	// COMMENTS
-	function LoadComments($tag)
+	function LoadComments($page_id)
 	{
 		return $this->LoadAll(
 				"SELECT * FROM ".$this->config["table_prefix"]."pages ".
-				"WHERE comment_on_id = '".quote($this->dblink, $tag)."' ".
+				"WHERE comment_on_id = '".quote($this->dblink, $page_id)."' ".
 				"ORDER BY time");
 	}
 
@@ -2919,7 +2918,7 @@ class Wacko
 				if ( $access && ($count < 30) ) {
 					$count++;
 					$xml .= "<item>\n";
-					$xml .= "<title>".$page["tag"]." ".$this->GetTranslation("To")." ".$page["comment_on_id"]." ".$this->GetTranslation("From")." ".$page["user"]."</title>\n";
+					$xml .= "<title>".$page["tag"]." ".$this->GetTranslation("To")." ".$this->GetCommentOnTag($page["comment_on_id"])." ".$this->GetTranslation("From")." ".$page["user"]."</title>\n";
 					$xml .= "<link>".$this->href("show", $page["tag"], "time=".urlencode($page["time"]))."</link>\n";
 					$xml .= "<guid>".$this->href("show", $page["tag"], "time=".urlencode($page["time"]))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['time']))."</pubDate>\n";
