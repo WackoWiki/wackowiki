@@ -15,12 +15,9 @@ if ($this->HasAccess("read"))
 		// comment header?
 		if ($this->page["comment_on_id"])
 		{
-			$comment_on_page = $this->LoadSingle(
-					"SELECT tag FROM ".$this->config["table_prefix"]."pages WHERE id = '".$this->page["comment_on_id"]."' LIMIT 1");
-					// Get tag value
-					$comment_on_page = $comment_on_page['tag'];
+			$comment_on_tag = $this->GetCommentOnTag();
 
-			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($comment_on_page, "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["time"]."</div>");
+			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($comment_on_tag, "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["time"]."</div>");
 		}
 
 		if ($this->page["latest"] == "0")
@@ -270,6 +267,7 @@ if ($this->GetConfigValue("footer_comments"))
 						if(strpos($this->GetUserName(), '.'))
 						{
 	?>
+	<br />
 	<br />
 	<label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
 	<br />
