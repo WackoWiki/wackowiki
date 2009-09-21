@@ -142,6 +142,16 @@ class Wacko
 		return ((float)$usec + (float)$sec);
 	}
 
+	function GetCommentOnTag()
+	{ 
+		$this->LoadSingle(
+					"SELECT tag FROM ".$this->config["table_prefix"]."pages WHERE id = '".$this->page["comment_on_id"]."' LIMIT 1");
+					// Get tag value
+					$comment_on_page = $comment_on_page['tag'];
+
+					return $comment_on_tag;
+	}
+
 	function GetPageTag() { return $this->tag; }
 	function GetPageId($tag = 0)
 	{
