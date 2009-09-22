@@ -200,7 +200,7 @@ $wackoTranslation = array(
 	"To" => "zu",
 	"By" => "durch",
 	"From" => "von",
-	"ReturnToCommented" => "Zurück zur kommentierten Seite",
+	"ReturnToCommented" => "zurück zur kommentierten Seite",
 
 	"PagesLinkingTo" => "Seiten, die verweisen auf",
 	"NoPageLinkingTo" => "Keine Seite verweist auf",
@@ -407,6 +407,7 @@ $wackoTranslation = array(
 	//icons
 	"outericon" => '<img src="{theme}icons/web.gif" alt="externer Link" />',
 	"fileicon" => '<img src="{theme}icons/file.gif" alt="Datei" />',
+	"xmlicon" => '<img src="{theme}icons/xml.gif" alt="XML" />',
 	"pdficon"  => '<img src="{theme}icons/pdf.gif" alt="PDF" />',
 	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF" />',
 	"mailicon" => '<img src="{theme}icons/mail.gif" alt="E-Mail" />',
