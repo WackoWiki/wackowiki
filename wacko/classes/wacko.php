@@ -1077,9 +1077,9 @@ class Wacko
 	// $body		- page body (plain text)
 	// $edit_note	- edit summary
 	// $minor_edit	- minor edit
-	// $comment_on	- commented page id
+	// $comment_on_id	- commented page id
 	// $title		- page name (metadata)
-	function SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on = "0", $title = "")
+	function SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on_id = "0", $title = "")
 	{
 		// get current user
 		$user = $this->GetUserName();
@@ -1111,9 +1111,9 @@ class Wacko
 		// cache handling
 		if ($this->config["cache"])
 		{
-			if ($comment_on)
+			if ($comment_on_id)
 			{
-				$comment_on_tag = $this->GetCommentOnTag($comment_on);
+				$comment_on_tag = $this->GetCommentOnTag($comment_on_id);
 
 				$this->cache->CacheInvalidate($comment_on_tag);
 			}
@@ -1125,7 +1125,7 @@ class Wacko
 		}
 
 		// check privileges
-		if ($this->HasAccess("write", $tag) || ($comment_on && $this->HasAccess("comment", $this->GetCommentOnTag($comment_on))))
+		if ($this->HasAccess("write", $tag) || ($comment_on_id && $this->HasAccess("comment", $this->GetCommentOnTag($comment_on))))
 		{
 			$body = $this->Format($body, "preformat");
 			// is page new?
@@ -1145,14 +1145,14 @@ class Wacko
 				$this->SetLanguage($lang);
 
 				$body_r = $this->Format($body, "wacko");
-				if ($this->config["paragrafica"] && !$comment_on)
+				if ($this->config["paragrafica"] && !$comment_on_id)
 				{
 					$body_r = $this->Format($body_r, "paragrafica");
 					$body_toc = $this->body_toc;
 				}
 
             // Manage ACLs
-				if (strstr($this->context[$this->current_context], "/") && !$comment_on)
+				if (strstr($this->context[$this->current_context], "/") && !$comment_on_id)
 				{
 					$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $this->context[$this->current_context] );
 					$write_acl = $this->LoadAcl($root, "write");
@@ -1170,14 +1170,14 @@ class Wacko
 					$comment_acl = $this->LoadAcl($root, "comment");
 					$comment_acl = $comment_acl["list"];
 				}
-            else if ($comment_on)
+            else if ($comment_on_id)
             {
                // Give comments the same rights as their parent page
-					$write_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on), "write");
+					$write_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on_id), "write");
 					$write_acl = $write_acl["list"];
-					$read_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on), "read");
+					$read_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on_id), "read");
 					$read_acl = $read_acl["list"];
-					$comment_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on), "comment");
+					$comment_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on_id), "comment");
 					$comment_acl = $comment_acl["list"];
             }
 				else
@@ -1193,7 +1193,7 @@ class Wacko
 
 				$this->Query(
 					"INSERT INTO ".$this->config["table_prefix"]."pages SET ".
-						"comment_on_id = '".quote($this->dblink, $comment_on)."', ".
+						"comment_on_id = '".quote($this->dblink, $comment_on_id)."', ".
 						"created = NOW(), ".
 						"time = NOW(), ".
 						"owner = '".quote($this->dblink, $owner)."', ".
@@ -1211,24 +1211,24 @@ class Wacko
 						"tag = '".quote($this->dblink, $tag)."'");
 
                	// saving acls
-				// $this->SaveAcl($tag, "write", ($comment_on ? "" : $write_acl));
+				// $this->SaveAcl($tag, "write", ($comment_on_id ? "" : $write_acl));
 				$this->SaveAcl($tag, "write", $write_acl);
 				$this->SaveAcl($tag, "read", $read_acl);
-				// $this->SaveAcl($tag, "comment", ($comment_on ? "" : $comment_acl));
+				// $this->SaveAcl($tag, "comment", ($comment_on_id ? "" : $comment_acl));
 				$this->SaveAcl($tag, "comment", $comment_acl);
 
 				// set watch
 				if ($this->GetUser() && !$this->config["disable_autosubscribe"])
 					$this->SetWatch($this->GetUserId(), $this->GetPageId($tag));
 
-				if ($comment_on)
+				if ($comment_on_id)
 				{
 					// notifying watchers
 					$user_id = $this->GetUserId();
 					$Watchers = $this->LoadAll(
 									"SELECT DISTINCT user_id ".
 									"FROM ".$this->config["table_prefix"]."pagewatches ".
-									"WHERE page_id = '".quote($this->dblink, $comment_on)."'");
+									"WHERE page_id = '".quote($this->dblink, $comment_on_id)."'");
 
 					foreach ($Watchers as $Watcher)
 
@@ -1238,7 +1238,7 @@ class Wacko
 						$Watcher["name"] = $Watcher["user"];
 						$this->SetUser($Watcher, 0);
 
-						if ($this->HasAccess("read", $this->GetCommentOnTag($comment_on), $Watcher["user"]))
+						if ($this->HasAccess("read", $this->GetCommentOnTag($comment_on_id), $Watcher["user"]))
 						{
 							$User = $this->LoadSingle(
 								"SELECT email, lang, more, email_confirm ".
@@ -1253,10 +1253,10 @@ class Wacko
 								$this->SetResource ($lang);
 								$this->SetLanguage ($lang);
 
-								$subject = $this->GetTranslation("CommentForWatchedPage",$lang)."'".$this->GetCommentOnTag($comment_on)."'";
+								$subject = $this->GetTranslation("CommentForWatchedPage",$lang)."'".$this->GetCommentOnTag($comment_on_id)."'";
 								$message = $this->GetTranslation("MailHello",$lang). $Watcher["user"].".\n\n".
 											$username.
-											$this->GetTranslation("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$this->GetCommentOnTag($comment_on),"")."\">".$this->Href("",$comment_on,"")."</a><br /><hr />".
+											$this->GetTranslation("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."\">".$this->Href("",$comment_on,"")."</a><br /><hr />".
 											$this->Format($body_r, "post_wacko")."<hr /><br />".
 											$this->GetTranslation("MailGoodbye",$lang)."\n".
 											$this->config["wacko_name"]."\n".
@@ -1298,7 +1298,7 @@ class Wacko
 					// add new revision
 					$this->Query(
 						"UPDATE ".$this->config["table_prefix"]."pages SET ".
-							"comment_on_id = '".quote($this->dblink, $comment_on)."', ".
+							"comment_on_id = '".quote($this->dblink, $comment_on_id)."', ".
 							"time = NOW(), ".
 							"created = '".quote($this->dblink, $oldPage['created'])."', ".
 							"owner = '".quote($this->dblink, $owner)."', ".

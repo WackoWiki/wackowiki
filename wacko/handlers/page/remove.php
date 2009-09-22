@@ -20,7 +20,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 		if ($_POST["delete"] == 1)
 		{
 			if ($this->page["comment_on_id"])
-				$comment_on = $this->page["comment_on_id"];
+				$comment_on_id = $this->page["comment_on_id"];
 
 			// Remove page
 			if ($this->RemoveReferrers($this->tag))
@@ -54,7 +54,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 				$this->WriteRecentCommentsXML();
 				print(str_replace("%1", $this->tag, $this->GetTranslation("PageRemoved"))."<br />\n");
 			}
-			if ($this->IsAdmin() && $_POST["revisions"] == 1 && !$comment_on)
+			if ($this->IsAdmin() && $_POST["revisions"] == 1 && !$comment_on_id)
 			{
 				$this->RemoveRevisions($this->tag);
 				echo $this->GetTranslation("RevisionsRemoved")."<br />\n";
@@ -79,28 +79,28 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 					unset($list, $row);
 				}
 
-				if ($_POST["revisions"] == 1 || $comment_on)
+				if ($_POST["revisions"] == 1 || $comment_on_id)
 					$this->RemoveRevisions($this->tag, true);
 
 				echo "<em>".$this->GetTranslation("ClusterRemoved")."</em><br />\n";
 			}
 
 			// log event
-			if (!$comment_on)
+			if (!$comment_on_id)
 			{
 				$this->Log(1, str_replace("%2", $this->page["user"], str_replace("%1", $this->tag, ( $_POST["cluster"] == 1 ? $this->GetTranslation("LogRemovedCluster") : $this->GetTranslation("LogRemovedPage") ))));
 			}
 			else
 			{
-				$this->Log(1, str_replace("%3", $this->GetTimeStringFormatted($this->page["created"]), str_replace("%2", $this->page["user"], str_replace("%1", $comment_on." ".$this->GetPageTitle($comment_on), $this->GetTranslation("LogRemovedComment")))));
+				$this->Log(1, str_replace("%3", $this->GetTimeStringFormatted($this->page["created"]), str_replace("%2", $this->page["user"], str_replace("%1", $comment_on_id." ".$this->GetPageTitle($comment_on), $this->GetTranslation("LogRemovedComment")))));
 			}
 
 			echo "<br />".$this->GetTranslation("ThisActionHavenotUndo")."<br />\n";
 
 			// return to commented page
-			if ($comment_on)
+			if ($comment_on_id)
 			{
-				echo "<br />".$this->ComposeLinkToPage($this->GetCommentOnTag($comment_on)."#comments", "", "&laquo; ".$this->GetTranslation("ReturnToCommented"), 0);
+				echo "<br />".$this->ComposeLinkToPage($this->GetCommentOnTag($comment_on_id)."#comments", "", "&laquo; ".$this->GetTranslation("ReturnToCommented"), 0);
 			}
 		}
 		else
