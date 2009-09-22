@@ -25,7 +25,10 @@ if ($this->page)
 		print("<li>".$this->GetTranslation("YouAreOwner")."</li>\n");
 
 		// Add page link
-		print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/add.gif\" title=\"".$this->GetTranslation("CreateNewPage")."\" alt=\"".$this->GetTranslation("CreateNewPage")."\" /></a></li>\n");
+		if (!$this->method == 'new')
+		{
+			print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/add.gif\" title=\"".$this->GetTranslation("CreateNewPage")."\" alt=\"".$this->GetTranslation("CreateNewPage")."\" /></a></li>\n");
+		}
 
 		// Rename link
 		print("<li><a href=\"".$this->href("rename")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" /></a></li>\n");
@@ -50,8 +53,10 @@ if ($this->page)
 		}
 
 		// Add page link
-		print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/add.gif\" title=\"".$this->GetTranslation("CreateNewPage")."\" alt=\"".$this->GetTranslation("CreateNewPage")."\" /></a></li>\n");
-	}
+		if (!$this->method == 'new')
+		{
+			print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/add.gif\" title=\"".$this->GetTranslation("CreateNewPage")."\" alt=\"".$this->GetTranslation("CreateNewPage")."\" /></a></li>\n");
+		}
 
 	// Rename link
 	if ($this->CheckACL($this->GetUserName(),$this->config["rename_globalacl"]) && !$this->UserIsOwner())
