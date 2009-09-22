@@ -318,12 +318,12 @@ width: 150px; /*width of labels. Should be smaller than left column (155px) to c
 	padding: 5px 5px 5px 40px;
 }
 /* cssform1 for actions */
-div#cssform1 {
+#cssform1 {
 	width:90%;
 	padding:10px;
 	margin:0 auto;
 }
-div#cssform1 p {
+#cssform1 p {
 	clear: left;
 	margin: 0;
 	padding: 5px 0 8px 0;
@@ -331,7 +331,7 @@ div#cssform1 p {
 	/*border-top: 1px dashed gray;*/
 	height: 1%;
 }
-div#cssform1 label {
+#cssform1 label {
 	float: left;
 	margin-left: 0px; /*
 	margin-left: -155px; width of left column*/
@@ -339,14 +339,14 @@ div#cssform1 label {
 	text-align: right;
 	margin-right: 10px;
 }
-div#cssform1 input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
+#cssform1 input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
 	width: 180px;
 }
-div#cssform1 textarea {
+#cssform1 textarea {
 	width: 250px;
 	height: 150px;
 }
-div#cssform1 span.site_count {
+#cssform1 span.site_count {
 	font-weight: normal;
 	float: left;
 	margin-left: 0px; /*
