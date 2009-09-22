@@ -1125,7 +1125,7 @@ class Wacko
 		}
 
 		// check privileges
-		if ($this->HasAccess("write", $tag) || ($comment_on_id && $this->HasAccess("comment", $this->GetCommentOnTag($comment_on))))
+		if ($this->HasAccess("write", $tag) || ($comment_on_id && $this->HasAccess("comment", $this->GetCommentOnTag($comment_on_id))))
 		{
 			$body = $this->Format($body, "preformat");
 			// is page new?
@@ -1256,7 +1256,7 @@ class Wacko
 								$subject = $this->GetTranslation("CommentForWatchedPage",$lang)."'".$this->GetCommentOnTag($comment_on_id)."'";
 								$message = $this->GetTranslation("MailHello",$lang). $Watcher["user"].".\n\n".
 											$username.
-											$this->GetTranslation("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."\">".$this->Href("",$comment_on,"")."</a><br /><hr />".
+											$this->GetTranslation("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."\">".$this->Href("",$comment_on_id,"")."</a><br /><hr />".
 											$this->Format($body_r, "post_wacko")."<hr /><br />".
 											$this->GetTranslation("MailGoodbye",$lang)."\n".
 											$this->config["wacko_name"]."\n".
