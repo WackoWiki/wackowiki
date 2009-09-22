@@ -138,12 +138,12 @@ else if($this->HasAccess("write"))
 			if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks()))
 				echo '<li><a href="'. $this->Href('', '', "addbookmark=yes")
 					.'"><img src="'. $this->GetConfigValue("theme_url")
-					.'icons/toolbar1.gif" alt="+" title="'.
+					.'icons/bookmark1.gif" alt="+" title="'.
 					$this->GetTranslation("AddToBookmarks") .'"/></a></li>';
 			else
 				echo '<li><a href="'. $this->Href('', '', "removebookmark=yes")
 					.'"><img src="'. $this->GetConfigValue("theme_url")
-					.'icons/toolbar2.gif" alt="-" title="'.
+					.'icons/bookmark2.gif" alt="-" title="'.
 					$this->GetTranslation("RemoveFromBookmarks") .'"/></a></li>';
 			}
 	echo "\n</ol></div>";

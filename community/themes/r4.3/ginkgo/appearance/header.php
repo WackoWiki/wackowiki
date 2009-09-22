@@ -160,9 +160,9 @@ echo "</li></ul></div>";
 		echo '<br />';
        if ($this->GetUser()) {
 			if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>
-            <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"> <img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar1.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->GetTranslation("Bookmarks"); ?> </a>
+            <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"> <img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark1.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->GetTranslation("Bookmarks"); ?> </a>
             <?php } else { ?>
-            <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"> <img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar2.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->GetTranslation("Bookmarks");
+            <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"> <img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark2.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->GetTranslation("Bookmarks");
 ?> </a>
             <?php
 }
