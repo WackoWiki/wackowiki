@@ -31,7 +31,7 @@ if ($this->HasAccess("read"))
 		$this->Query(
 			"UPDATE ".$this->config["table_prefix"]."pages ".
 			"SET hits = hits + 1 ".
-			"WHERE supertag = '".quote($this->dblink, $this->GetPageSuperTag())."'");
+			"WHERE id = '".quote($this->dblink, $this->GetPageId())."'");
 
 		$this->SetLanguage($this->pagelang);
 
