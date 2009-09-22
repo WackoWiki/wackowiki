@@ -15,6 +15,7 @@ if ($this->HasAccess("read")) {
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"fastdiff\" name=\"fastdiff\" />\n <label for=\"fastdiff\">".$this->GetTranslation("SimpleDiff")."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("revisions.xml")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RevisionXMLTip")."\" alt=\"XML\" /></a>";
 		$output .= "</p>\n<ul>\n";
+
 		if ($user = $this->GetUser())
 		{
 			$max = $user["revisioncount"];
@@ -28,10 +29,8 @@ if ($this->HasAccess("read")) {
 
 		foreach ($pages as $page)
 		{
-			
-
 			$c++;
-			
+
 			if ($page["edit_note"])
 			{
 				$edit_note = " <span class=\"editnote\">[".$page["edit_note"]."]</span>";
@@ -40,7 +39,7 @@ if ($this->HasAccess("read")) {
 			{
                 $edit_note = "";
             }
-			
+
 			if (($c <= $max) || !$max)
 			{
 				$output .= "<li><input type=\"radio\" name=\"a\" value=\"".($c == 1 ? "-1" : $page["id"])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";

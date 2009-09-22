@@ -3,7 +3,7 @@
 if ($this->HasAccess("comment") && $this->HasAccess("read"))
 {
 	// find number
-	if($latestComment = $this->LoadSingle("SELECT tag, id FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id != '0' ORDER BY id DESC LIMIT 1"))
+	if ($latestComment = $this->LoadSingle("SELECT tag, id FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id != '0' ORDER BY id DESC LIMIT 1"))
 	{
 		preg_match("/^Comment([0-9]+)$/", $latestComment["tag"], $matches);
 		$num = $matches[1] + 1;
@@ -16,7 +16,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 	$body = str_replace("\r", "", $_POST["body"]);
 	$body = trim($_POST["body"]);
 
-	if(!$body)
+	if (!$body)
 	{
 		$this->SetMessage($this->GetTranslation("EmptyComment"));
 	}
@@ -25,20 +25,20 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 		// Start Comment Captcha
 
 		// Only show captcha if the admin enabled it in the config file
-		if($this->GetConfigValue("captcha_new_comment"))
+		if ($this->GetConfigValue("captcha_new_comment"))
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
-			if(extension_loaded('gd'))
+			if (extension_loaded('gd'))
 			{
 				//check whether anonymous user
 				//anonymous user has the IP or host name as name
 				//if name contains '.', we assume it's anonymous
-				if(strpos($this->GetUserName(), '.'))
+				if (strpos($this->GetUserName(), '.'))
 				{
 					//anonymous user, check the captcha
-					if(!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
+					if (!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
 					{
-						if($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
+						if ($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
 						{
 							// reset freecap session vars
 							// cannot stress enough how important it is to do this
@@ -60,7 +60,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 						$word_ok = false;
 					}
 
-					if(!$word_ok)
+					if (!$word_ok)
 					{
 						//not the right word
 						$error = $this->GetTranslation("SpamAlert");
@@ -71,11 +71,10 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 			}
 		}
 
-		if(!$error)
+		if (!$error)
 		{
 			$comment_on = $this->GetPageId();
 			// store new comment
-			//     SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on = "0", $title = ""
 			$this->SavePage("Comment".$num, $body, $edit_note="", $minor_edit = "0", $comment_on, $title = "");
 
 			// log event
