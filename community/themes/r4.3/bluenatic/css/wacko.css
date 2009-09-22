@@ -2,7 +2,6 @@
 
 /* Definitions: SYNTAX (?icq i seek you?) */
 dfn { border-bottom:	dotted 1px #ccc;cursor:	help;font-style:normal; }
-/* html dfn { } */
 
 /* Strike through text: SYNTAX --text-- */
 del { background-color:transparent; color:#999; }
