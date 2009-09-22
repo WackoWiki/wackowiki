@@ -57,6 +57,7 @@ if ($this->page)
 		{
 			print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/add.gif\" title=\"".$this->GetTranslation("CreateNewPage")."\" alt=\"".$this->GetTranslation("CreateNewPage")."\" /></a></li>\n");
 		}
+	}
 
 	// Rename link
 	if ($this->CheckACL($this->GetUserName(),$this->config["rename_globalacl"]) && !$this->UserIsOwner())
