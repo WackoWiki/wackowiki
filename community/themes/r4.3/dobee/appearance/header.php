@@ -138,13 +138,13 @@ else if($this->HasAccess("write"))
 						<a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"
 							title="<?php echo $this->GetTranslation("AddToBookmarks"); ?>">
 						<img
-							src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar1.gif"
+							src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark1.gif"
 							border="0" align="bottom" style="vertical-align: middle;" /> <?php echo $this->GetTranslation("Bookmarks"); ?>
 						</a> <?php } else { ?> <a
 							href="<?php echo $this->Href('', '', "removebookmark=yes")?>"
 							title="<?php echo $this->GetTranslation("RemoveFromBookmarks"); ?>">
 						<img
-							src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar2.gif"
+							src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark2.gif"
 							style="vertical-align: middle;" /> <?php echo $this->GetTranslation("Bookmarks"); ?>
 						</a> <?php }
 						}
