@@ -100,7 +100,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			// return to commented page
 			if ($comment_on)
 			{
-				echo "<br />".$this->ComposeLinkToPage($this->GetCommentOnTag($comment_on)."#comments", "", $this->GetTranslation("ReturnToCommented"), 0);
+				echo "<br />&laquo; ".$this->ComposeLinkToPage($this->GetCommentOnTag($comment_on)."#comments", "", $this->GetTranslation("ReturnToCommented"), 0);
 			}
 		}
 		else
