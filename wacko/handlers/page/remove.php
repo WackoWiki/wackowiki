@@ -92,7 +92,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			}
 			else
 			{
-				$this->Log(1, str_replace("%3", $this->GetTimeStringFormatted($this->page["created"]), str_replace("%2", $this->page["user"], str_replace("%1", $comment_on_id." ".$this->GetPageTitle($comment_on), $this->GetTranslation("LogRemovedComment")))));
+				$this->Log(1, str_replace("%3", $this->GetTimeStringFormatted($this->page["created"]), str_replace("%2", $this->page["user"], str_replace("%1", $comment_on_id." ".$this->GetPageTitle($comment_on_id), $this->GetTranslation("LogRemovedComment")))));
 			}
 
 			echo "<br />".$this->GetTranslation("ThisActionHavenotUndo")."<br />\n";
