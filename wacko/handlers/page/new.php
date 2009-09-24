@@ -17,12 +17,12 @@ if ($newtag = trim($_POST['tag'], '/ '))
 		default:
 			$prefix = '';
 	}
-	
+
 	// check target page existance
 	if ($page = $this->LoadPage($prefix.$newtag, '', LOAD_CACHE, LOAD_META))
 	{
 		$message = $this->GetTranslation("PageAlreadyExists")." &laquo;".$page['tag']."&raquo;. ";
-		
+
 		// check existing page write access
 		if ($this->HasAccess('write', $prefix.$newtag))
 		{
@@ -53,12 +53,12 @@ if ($newtag = trim($_POST['tag'], '/ '))
 // create a peer page
 echo $this->FormOpen('new');
 echo "<input type=\"hidden\" name=\"option\" value=\"1\" />";
-echo "<label>".$this->GetTranslation("CreateSubPage").":</label><br />";
+echo "<label for=\"create_subpage\">".$this->GetTranslation("CreateSubPage").":</label><br />";
 if ($this->HasAccess('write', $this->tag))
 {
 	echo "<tt>".( strlen($this->tag) > 50 ? "...".substr($this->tag, -50) : $this->tag )."/</tt>".
 		"<input name=\"tag\" value=\"".( $_POST['option'] === '1' ? htmlspecialchars($newtag) : "" )."\" size=\"20\" maxlength=\"255\" /> ".
-		"<input id=\"submit\" type=\"submit\" value=\"".$this->GetTranslation("CreatePageButton")."\" />";
+		"<input id=\"create_subpage\" type=\"submit\" value=\"".$this->GetTranslation("CreatePageButton")."\" />";
 }
 else
 {
@@ -72,15 +72,15 @@ echo "<br />";
 if (substr_count($this->tag, '/') > 0)
 {
 	$parent = substr($this->tag, 0, strrpos($this->tag, '/'));
-	
+
 	echo $this->FormOpen('new');
 	echo "<input type=\"hidden\" name=\"option\" value=\"2\" />";
-	echo "<label>".$this->GetTranslation("CreatePageParentCluster").":</label><br />";
+	echo "<label for=\"create_pageparentcluster\">".$this->GetTranslation("CreatePageParentCluster").":</label><br />";
 	if ($this->HasAccess('write', $parent))
 	{
 		echo "<tt>".( strlen($parent) > 50 ? "...".substr($parent, -50) : $parent )."/</tt>".
 			"<input name=\"tag\" value=\"".( $_POST['option'] === '2' ? htmlspecialchars($newtag) : "" )."\" size=\"20\" maxlength=\"255\" /> ".
-			"<input id=\"submit\" type=\"submit\" value=\"".$this->GetTranslation("CreatePageButton")."\" />";
+			"<input id=\"create_pageparentcluster\" type=\"submit\" value=\"".$this->GetTranslation("CreatePageButton")."\" />";
 	}
 	else
 	{
@@ -91,12 +91,12 @@ if (substr_count($this->tag, '/') > 0)
 	echo "<br />";
 }
 
-// 
+//
 echo $this->FormOpen('new');
 echo "<input type=\"hidden\" name=\"option\" value=\"3\" />";
-echo "<label>".$this->GetTranslation("CreateRandomPage").":</label><br />";
+echo "<label for=\"create_randompage\">".$this->GetTranslation("CreateRandomPage").":</label><br />";
 echo "<input name=\"tag\" value=\"".( $_POST['option'] === '3' ? htmlspecialchars($newtag) : "" )."\" size=\"60\" maxlength=\"255\" /> ".
-	"<input id=\"submit\" type=\"submit\" value=\"".$this->GetTranslation("CreatePageButton")."\" />";
+	"<input id=\"create_randompage\" type=\"submit\" value=\"".$this->GetTranslation("CreatePageButton")."\" />";
 echo "";
 echo $this->FormClose();
 
