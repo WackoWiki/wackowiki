@@ -57,8 +57,8 @@ echo "<label for=\"create_subpage\">".$this->GetTranslation("CreateSubPage").":<
 if ($this->HasAccess('write', $this->tag))
 {
 	echo "<tt>".( strlen($this->tag) > 50 ? "...".substr($this->tag, -50) : $this->tag )."/</tt>".
-		"<input name=\"tag\" value=\"".( $_POST['option'] === '1' ? htmlspecialchars($newtag) : "" )."\" size=\"20\" maxlength=\"255\" /> ".
-		"<input id=\"create_subpage\" type=\"submit\" value=\"".$this->GetTranslation("CreatePageButton")."\" />";
+		"<input id=\"create_subpage\" name=\"tag\" value=\"".( $_POST['option'] === '1' ? htmlspecialchars($newtag) : "" )."\" size=\"20\" maxlength=\"255\" /> ".
+		"<input id=\"submit_subpage\" type=\"submit\" value=\"".$this->GetTranslation("CreatePageButton")."\" />";
 }
 else
 {
@@ -79,8 +79,8 @@ if (substr_count($this->tag, '/') > 0)
 	if ($this->HasAccess('write', $parent))
 	{
 		echo "<tt>".( strlen($parent) > 50 ? "...".substr($parent, -50) : $parent )."/</tt>".
-			"<input name=\"tag\" value=\"".( $_POST['option'] === '2' ? htmlspecialchars($newtag) : "" )."\" size=\"20\" maxlength=\"255\" /> ".
-			"<input id=\"create_pageparentcluster\" type=\"submit\" value=\"".$this->GetTranslation("CreatePageButton")."\" />";
+			"<input id=\"create_pageparentcluster\" name=\"tag\" value=\"".( $_POST['option'] === '2' ? htmlspecialchars($newtag) : "" )."\" size=\"20\" maxlength=\"255\" /> ".
+			"<input id=\"submit_pageparentcluster\" type=\"submit\" value=\"".$this->GetTranslation("CreatePageButton")."\" />";
 	}
 	else
 	{
@@ -95,8 +95,8 @@ if (substr_count($this->tag, '/') > 0)
 echo $this->FormOpen('new');
 echo "<input type=\"hidden\" name=\"option\" value=\"3\" />";
 echo "<label for=\"create_randompage\">".$this->GetTranslation("CreateRandomPage").":</label><br />";
-echo "<input name=\"tag\" value=\"".( $_POST['option'] === '3' ? htmlspecialchars($newtag) : "" )."\" size=\"60\" maxlength=\"255\" /> ".
-	"<input id=\"create_randompage\" type=\"submit\" value=\"".$this->GetTranslation("CreatePageButton")."\" />";
+echo "<input id=\"create_randompage\" name=\"tag\" value=\"".( $_POST['option'] === '3' ? htmlspecialchars($newtag) : "" )."\" size=\"60\" maxlength=\"255\" /> ".
+	"<input id=\"submit_randompage\" type=\"submit\" value=\"".$this->GetTranslation("CreatePageButton")."\" />";
 echo "";
 echo $this->FormClose();
 
