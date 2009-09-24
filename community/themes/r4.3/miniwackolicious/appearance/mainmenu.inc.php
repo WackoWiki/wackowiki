@@ -20,7 +20,7 @@ if (!function_exists('mainMenu'))
 	    $base_url = $wobj->GetConfigValue("base_url");
         $current_page = $wobj->tag;
 
-        $menulist = null;
+        $menulist = NULL;
 
         foreach($menu as $menutarget => $menuname)
         {
