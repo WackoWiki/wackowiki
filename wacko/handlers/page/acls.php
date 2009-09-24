@@ -94,8 +94,10 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		// acls for entire cluster
 		if ($need_massacls == 1)
 		{
-			$pages = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".
-			$this->config["table_prefix"]."pages WHERE (supertag = '".quote($this->dblink, $this->tag)."'".
+			$pages = $this->LoadAll("
+				SELECT ".$this->pages_meta." ".
+				"FROM ".$this->config["table_prefix"]."pages ".
+				"WHERE (supertag = '".quote($this->dblink, $this->tag)."'".
 		            " OR supertag LIKE '".quote($this->dblink, $this->tag."/%")."'".
 		            " OR comment_on_id = '".quote($this->dblink, $this->GetPageId())."'".
 		            " OR comment_on_id LIKE '".quote($this->dblink, $this->tag."/%")."'".
