@@ -2,18 +2,23 @@
 
 if (!function_exists('links_tree_view'))
 {
-	function links_tree_view(&$wacko, $node,$level,$indent=0)
+	function links_tree_view(&$wacko, $node, $level, $indent = 0)
 	{
 		if ($level > 0)
 		{
 			if ($indent)
 			print((str_repeat("&nbsp;",$indent*7)).$wacko->Link("/".$node, "", $node)."<br/>\n");
 
-			$pages = $wacko->LoadAll("SELECT to_tag FROM ".$wacko->config["table_prefix"]."links, ".$wacko->config["table_prefix"]."pages WHERE from_tag='".quote($wacko->dblink, $node)."' AND ".$wacko->config["table_prefix"]."links.to_tag = ".$wacko->config["table_prefix"]."pages.tag ORDER BY to_tag ASC");
+			$pages = $wacko->LoadAll(
+				"SELECT to_tag ".
+				"FROM ".$wacko->config["table_prefix"]."links, ".$wacko->config["table_prefix"]."pages ".
+				"WHERE from_tag='".quote($wacko->dblink, $node)."' ".
+					"AND ".$wacko->config["table_prefix"]."links.to_tag = ".$wacko->config["table_prefix"]."pages.tag ".
+				"ORDER BY to_tag ASC");
 
 			if (is_array($pages))
 			{
-				$head=split(" / ",str_replace("))", "", str_replace("((", "", $wacko->GetConfigValue("default_bookmarks"))));
+				$head = split(" / ",str_replace("))", "", str_replace("((", "", $wacko->GetConfigValue("default_bookmarks"))));
 
 				foreach ($pages as $page)
 				{
@@ -22,8 +27,8 @@ if (!function_exists('links_tree_view'))
 					// we don't want page from the header. we don't want root_page (!!!!!!!)
 					if ((!in_array($node, $head, TRUE) && $wacko->GetConfigValue("root_page") != $node) || $indent == 0)
 					{
-						if ($wacko->HasAccess("read",$page["to_tag"]))
-						links_tree_view($wacko, $page["to_tag"], $level-1, $indent+1);
+						if ($wacko->HasAccess("read", $page["to_tag"]))
+						links_tree_view($wacko, $page["to_tag"], $level - 1, $indent + 1);
 					}
 				}
 			}
