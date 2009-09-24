@@ -37,7 +37,7 @@ session_start();
 //$site_tags[0] = "for use only on puremango.co.uk";
 // reword or add lines as you please
 // or if you don't want any text:
-$site_tags = null;
+$site_tags = NULL;
 
 // where to write the above:
 // 0=top

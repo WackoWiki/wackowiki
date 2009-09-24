@@ -25,15 +25,15 @@ class Wacko
 	var $timer;
 	var $toc_context = array();
 	var $search_engines = array("bot", "rambler", "yandex", "crawl", "search", "archiver", "slurp", "aport", "crawler", "google", "inktomi", "spider", );
-	var $_langlist = null;
-	var $languages = null;
-	var $resources = null;
-	var $wantedCache = null;
-	var $pageCache = null;
-	var $_formatter_noautolinks = null;
-	var $numerate_links	= null;
-	var $post_wacko_action = null;
-	var $_userhost = null;
+	var $_langlist = NULL;
+	var $languages = NULL;
+	var $resources = NULL;
+	var $wantedCache = NULL;
+	var $pageCache = NULL;
+	var $_formatter_noautolinks = NULL;
+	var $numerate_links	= NULL;
+	var $post_wacko_action = NULL;
+	var $_userhost = NULL;
 	var $paragrafica_styles = array(
 		"before"	=> array(
 						"_before" => "",
@@ -674,7 +674,7 @@ class Wacko
 	{
 		if ($tag == "") return "";
 
-		$page = null;
+		$page = NULL;
 
 		if (!$supertagged)
 			$supertag = $this->NpjTranslit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD);
@@ -1810,7 +1810,7 @@ class Wacko
 
 			$regex_handlers = '/^(.*?)\/('.$this->config["standard_handlers"].')\/(.*)$/i';
 			$ptag = $this->NpjTranslit($unwtag);
-			$handler = null;
+			$handler = NULL;
 
 			if (preg_match( $regex_handlers, "/".$ptag."/", $match ))
 			{
