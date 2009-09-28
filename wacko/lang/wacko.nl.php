@@ -49,8 +49,9 @@ $wackoTranslation = array(
 	"Comments_all" => "Reacties",
 	"ShowComments" => "Toon reacties",
 	"HideComments" => "Verberg reacties",
-	"AttachComment" => "Voeg een reactie toe aan deze pagina:",
-	"AttachCommentButton" => "Reactie toevoegen",
+	"AddComment" => "Voeg een reactie toe aan deze pagina:",
+	"AddCommentTitle" => "Title of the comment:",
+	"AddCommentButton" => "Reactie toevoegen",
 
 	"DoesNotExists" => "Deze pagina bestaat nog niet. Wil je deze <a href=\"%1\">aanmaken</a>?",
 	"Revision" => "Dit is een oude revisie van <a href=\"%1\">%2</a> from %3.",

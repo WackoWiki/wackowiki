@@ -49,8 +49,9 @@ $wackoTranslation = array(
 	"Comments_all" => "Kommentarer",
 	"ShowComments" => "Vis kommentarer",
 	"HideComments" => "Gem kommentarer",
-	"AttachComment" => "Skriv en kommentar til denne side:",
-	"AttachCommentButton" => "Post kommentar",
+	"AddComment" => "Skriv en kommentar til denne side:",
+	"AddCommentTitle" => "Title of the comment:",
+	"AddCommentButton" => "Post kommentar",
 
 	"DoesNotExists" => "Denne side eksisterer endnu ikke. Vil du <a href=\"%1\">oprette</a> den?",
 	"Revision" => "Dette er en ældre version af <a href=\"%1\">%2</a> fra %3.",

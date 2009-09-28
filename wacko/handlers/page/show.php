@@ -251,10 +251,10 @@ if ($this->GetConfigValue("footer_comments"))
 			print("<div class=\"commentform\">\n");
 
 			echo $this->FormOpen("addcomment"); ?>
-				<label for="addcomment"><?php echo $this->GetTranslation("AttachComment");?></label><br />
+				<label for="addcomment"><?php echo $this->GetTranslation("AddComment");?></label><br />
 				<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
 
-				<label for="addcomment_title"><?php echo $this->GetTranslation("AttachCommentTitle");?></label><br />
+				<label for="addcomment_title"><?php echo $this->GetTranslation("AddCommentTitle");?></label><br />
 				<input id="addcomment_title" name="title" style="width: 100%"></input>
 	<?php
 				// captcha code starts
@@ -283,7 +283,7 @@ if ($this->GetConfigValue("footer_comments"))
 				}
 				// end captcha
 	?>
-	<input type="submit" value="<?php echo $this->GetTranslation("AttachCommentButton"); ?>" accesskey="s" />
+	<input type="submit" value="<?php echo $this->GetTranslation("AddCommentButton"); ?>" accesskey="s" />
 	<?php echo $this->FormClose(); ?>
 	<?php
 			print("</div>\n");

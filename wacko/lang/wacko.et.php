@@ -49,8 +49,9 @@ $wackoTranslation = array(
 	"Comments_all" => "Kommentaarid",
 	"ShowComments" => "Näita kommentaare ja vastuse blanketti",
 	"HideComments" => "Varja kommentaar/vorm",
-	"AttachComment" => "Lisa kommentaar sellele leheküljele:",
-	"AttachCommentButton" => "Lisa kommentaar",
+	"AddComment" => "Lisa kommentaar sellele leheküljele:",
+	"AddCommentTitle" => "Title of the comment:",
+	"AddCommentButton" => "Lisa kommentaar",
 
 	"DoesNotExists" => "Seda lehte ei eksisteeri veel. Soovid sa seda <a href=\"%1\">luua</a>?",
 	"Revision" => "See on varasem redigeering <a href=\"%1\">%2</a> %3.",

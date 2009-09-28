@@ -49,8 +49,9 @@ $wackoTranslation = array(
 	"Comments_all" => "Коментари",
 	"ShowComments" => "Покажи коментарите/формата",
 	"HideComments" => "Скрий коментарите/формата",
-	"AttachComment" => "Добави комментар:",
-	"AttachCommentButton" => "Насочи",
+	"AddComment" => "Добави комментар:",
+	"AddCommentTitle" => "Title of the comment:",
+	"AddCommentButton" => "Насочи",
 
 	"DoesNotExists" => "Такава страница не съществува. Искате ли <a href=\"%1\">да я съзадете</a> ?",
 	"Revision" => "Това е стара версия на <a href=\"%1\">%2</a> от %3.",

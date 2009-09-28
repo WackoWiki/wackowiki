@@ -181,10 +181,10 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
     if ($this->HasAccess("comment"))
     {
       ?>
-        <?php echo $this->GetTranslation("AttachComment"); ?><br />
+        <?php echo $this->GetTranslation("AddComment"); ?><br />
         <?php echo $this->FormOpen("addcomment"); ?>
           <textarea name="body" rows="6" style="width: 95%"></textarea><br />
-          <input type="submit" value="<?php echo $this->GetTranslation("AttachCommentButton"); ?>" accesskey="s" />
+          <input type="submit" value="<?php echo $this->GetTranslation("AddCommentButton"); ?>" accesskey="s" />
         <?php echo $this->FormClose(); ?>
       <?php
     }
