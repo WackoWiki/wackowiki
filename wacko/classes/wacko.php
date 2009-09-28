@@ -1208,6 +1208,7 @@ class Wacko
 						"edit_note = '".quote($this->dblink, $edit_note)."', ".
 						"minor_edit = '".quote($this->dblink, $minor_edit)."', ".
 						"lang = '".quote($this->dblink, $lang)."', ".
+						"title = '".quote($this->dblink, $title)."', ".
 						"tag = '".quote($this->dblink, $tag)."'");
 
                	// saving acls

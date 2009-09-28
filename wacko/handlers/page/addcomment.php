@@ -16,6 +16,11 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 	$body = str_replace("\r", "", $_POST["body"]);
 	$body = trim($_POST["body"]);
 
+	if(isset($_POST["title"]))
+    {
+        $title = trim($_POST["title"]);
+    }
+
 	if (!$body)
 	{
 		$this->SetMessage($this->GetTranslation("EmptyComment"));
@@ -75,7 +80,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 		{
 			$comment_on_id = $this->GetPageId();
 			// store new comment
-			$this->SavePage("Comment".$num, $body, $edit_note="", $minor_edit = "0", $comment_on_id, $title = "");
+			$this->SavePage("Comment".$num, $body, $edit_note = "", $minor_edit = "0", $comment_on_id, $title);
 
 			// log event
 			$this->Log(5, str_replace("%2", $this->tag." ".$this->page["title"], str_replace("%1", "Comment".$num, $this->GetTranslation("LogCommentPosted"))));
