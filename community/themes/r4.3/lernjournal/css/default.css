@@ -87,7 +87,7 @@ border-bottom-width:thin;
 padding:10px;
 }
 
-div.comment:target {
+.comment:target {
 	border:2px solid #FF6600;
 	padding:0.5em 0.5em 0.5em 25px;
 }

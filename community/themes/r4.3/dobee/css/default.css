@@ -113,7 +113,7 @@ div#page {padding: 10px 10px;}
 .debug {font-size: 11px; color: #888888;}
 .files, .comment { padding: 10px; border-left: 1px inset; border-right: 1px inset; border-top: 1px solid #CCCCCC; border-bottom: 1px solid #EEEEEE; background: #EEEEEE }
 
-div.comment:target {
+.comment:target {
 	border:2px solid #FF6600;
 	padding:0.5em 0.5em 0.5em 25px;
 }
