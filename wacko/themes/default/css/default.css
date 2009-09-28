@@ -212,6 +212,13 @@ ol#comments{
 	padding: 0;
 }
 
+.commentinfo li {
+border:medium none;
+margin:0;
+padding:0;
+width:320px;
+}
+
 .commenttext {
 	float: left;
 	width: 800px;
@@ -230,6 +237,7 @@ ol#comments{
 .filesform,.commentform {
 	padding: 10px;
 	border-top: 1px solid #CCCCCC;
+	background-color: #FCFCFC;
 }
 
 .commentform form {
