@@ -126,8 +126,7 @@ if ($this->GetConfigValue("footer_files"))
 			?>
 <a name="files" id="files"></a>
 <div id="filesheader"><?php echo $this->GetTranslation("Files_all") ?>
-[<a
-	href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetTranslation("HideFiles"); ?></a>]
+[<a href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetTranslation("HideFiles"); ?></a>]
     </div>
 
 	<?php
@@ -231,19 +230,26 @@ if ($this->GetConfigValue("footer_comments"))
 		// display comments themselves
 		if ($comments)
 		{
+			echo "<ol>";
+
 			foreach ($comments as $comment)
 			{
-				print("<div id=\"".$comment["tag"]."\" class=\"comment\">\n");
+				echo "<li id=\"".$comment["tag"]."\" class=\"comment\">\n";
 				$del = "";
 				if ($this->IsAdmin() || $this->UserIsOwner($comment["tag"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageTag())))
 					print("<a href=\"".$this->href("remove",$comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/del.gif\" title=\"".$this->GetTranslation("DeleteTipComment")."\" alt=\"".$this->GetTranslation("DeleteText")."\"  align=\"right\" border=\"0\" /></a>");
 				if ($comment["body_r"]) $strings = $comment["body_r"];
+
 				else $strings = $this->Format($comment["body"], "wacko");
+				echo "<div class=\"commenttext\">\n";
 				print("<div class=\"commenttitle\">\n<a <a href=\"".$this->href("", "", "show_comments=1")."#".$comment["tag"]."\">".$comment["title"]."</a>\n</div>\n");
 				print($this->Format($strings,"post_wacko")."\n");
-				print("<div class=\"commentinfo\">\n-- ".($this->IsWikiName($comment["user"])?$this->Link("/".$comment["user"],"",$comment["user"]) : $comment["user"])." (".$comment["time"].")\n</div>\n");
-				print("</div>\n");
+				echo "</div>\n";
+				print("<ul class=\"commentinfo\">\n<li>".($this->IsWikiName($comment["user"]) ? $this->Link("/".$comment["user"],"",$comment["user"]) : $comment["user"])."</li>\n<li>".$comment["time"]."</li>\n</ul>\n");
+				echo "</li>";
 			}
+
+			echo "</ol>";
 		}
 
 		// display comment form
