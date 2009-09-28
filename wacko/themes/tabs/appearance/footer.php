@@ -253,7 +253,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
     {
 		print("<div class=\"commentform\">\n");
 
-      	echo $this->GetTranslation("AttachComment"); ?><br />
+      	echo $this->GetTranslation("AddComment"); ?><br />
         <?php echo $this->FormOpen("addcomment"); ?>
           <textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
 <?php
@@ -281,7 +281,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && (
                }
             // end captcha
 ?>
-<input type="submit" value="<?php echo $this->GetTranslation("AttachCommentButton"); ?>" accesskey="s" />
+<input type="submit" value="<?php echo $this->GetTranslation("AddCommentButton"); ?>" accesskey="s" />
 <?php echo $this->FormClose(); ?>
 <?php
 		print("</div>\n");

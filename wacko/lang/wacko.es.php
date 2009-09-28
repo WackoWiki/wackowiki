@@ -49,8 +49,9 @@ $wackoTranslation = array(
 	"Comments_all" => "Comentarios",
 	"ShowComments" => "Mostrar comentarios/formulario",
 	"HideComments" => "Ocultar comentarios/formulario",
-	"AttachComment" => "Añadir un comentario a esta página:",
-	"AttachCommentButton" => "Añadir comentario",
+	"AddComment" => "Añadir un comentario a esta página:",
+	"AddCommentTitle" => "Title of the comment:",
+	"AddCommentButton" => "Añadir comentario",
 
 	"DoesNotExists" => "Esta página aún no existe. Quieres <a href=\"%1\">añadirla</a>?",
 	"Revision" => "Esto es una version antigua de <a href=\"%1\">%2</a> de %3.",

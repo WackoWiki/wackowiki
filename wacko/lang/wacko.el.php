@@ -49,8 +49,9 @@ $wackoTranslation = array(
 	"Comments_all" => "Σχόλια",
 	"ShowComments" => "Εμφάνιση σχόλια/φόρμες",
 	"HideComments" => "Απόκρυψη σχόλια/φόρμες",
-	"AttachComment" => "Πρόσθεσε ένα σχόλιο σε αυτήν την σελίδα:",
-	"AttachCommentButton" => "Προσθήκη Σχολίου",
+	"AddComment" => "Πρόσθεσε ένα σχόλιο σε αυτήν την σελίδα:",
+	"AddCommentTitle" => "Title of the comment:",
+	"AddCommentButton" => "Προσθήκη Σχολίου",
 
 	"DoesNotExists" => "Αυτή η σελίδα δεν υπάρχει ακόμα. Ίσως θέλετε να την <a href=\"%1\">δημιουργήσετε</a> ?",
 	"Revision" => "Αυτή είναι μία παλαιότερη έκδοση της <a href=\"%1\">%2</a> από %3.",
