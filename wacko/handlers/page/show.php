@@ -239,6 +239,7 @@ if ($this->GetConfigValue("footer_comments"))
 					print("<a href=\"".$this->href("remove",$comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/del.gif\" title=\"".$this->GetTranslation("DeleteTipComment")."\" alt=\"".$this->GetTranslation("DeleteText")."\"  align=\"right\" border=\"0\" /></a>");
 				if ($comment["body_r"]) $strings = $comment["body_r"];
 				else $strings = $this->Format($comment["body"], "wacko");
+				print("<div class=\"commenttitle\">\n<a <a href=\"".$this->href("", "", "show_comments=1")."#".$comment["tag"]."\">".$comment["title"]."</a>\n</div>\n");
 				print($this->Format($strings,"post_wacko")."\n");
 				print("<div class=\"commentinfo\">\n-- ".($this->IsWikiName($comment["user"])?$this->Link("/".$comment["user"],"",$comment["user"]) : $comment["user"])." (".$comment["time"].")\n</div>\n");
 				print("</div>\n");

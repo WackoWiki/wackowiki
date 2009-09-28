@@ -187,6 +187,11 @@ div.comment:target {
   padding-bottom: 20px;
 }
 
+.commenttitle {
+  line-height:22px;
+  font-weight: bold;
+}
+
 /* Change summary */
 .editnote {
   color: #555555;
