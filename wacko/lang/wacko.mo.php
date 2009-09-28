@@ -282,8 +282,8 @@ $wackoTranslation = array(
 	"PageAlreadyExistsEditDenied" => "You can't edit it.",
 
 	"RemoveFromBookmarks" => "”далить из личного меню",
-	"DontRedirect" => "Ќе давать действию Redirect<br /> автоматически перенаправл€ть",
-	"SendWatchMail" => "ќтсылать уведомлени€<br /> при обновлении наблюдаемых ¬ами страниц",
+	"DontRedirect" => "Ќе давать действию Redirect автоматически перенаправл€ть",
+	"SendWatchMail" => "ќтсылать уведомлени€ при обновлении наблюдаемых ¬ами страниц",
 	"PageMoved" => "Ёта страница перенесена и доступна теперь по адресу",
 	"CurrentPassword" => "¬ведите текущий пароль",
 	"NewPassword" => "Ќовый пароль<br />(не короче 5 символов)",

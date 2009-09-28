@@ -281,8 +281,8 @@ $wackoTranslation = array(
 	"PageAlreadyExistsEditDenied" => "You can't edit it.",
 
 	"RemoveFromBookmarks" => "Eemalda kiirvalikute hulgast",
-	"DontRedirect" => "Ära võimalda automaatset ümbersuunamist<br /> ",
-	"SendWatchMail" => "Saada e-postiga teade, kui keegi<br /> (väljaarvatud sa ise) muudab neid lehti mida sa vaatad",
+	"DontRedirect" => "Ära võimalda automaatset ümbersuunamist",
+	"SendWatchMail" => "Saada e-postiga teade, kui keegi (väljaarvatud sa ise) muudab neid lehti mida sa vaatad",
 	"PageMoved" => "See leht on ümber paigutatud. Sa leiad selle",
 	"CurrentPassword" => "Praegune parool",
 	"NewPassword" => "Uus parool<br />(vähemalt 5 tähemärki)",

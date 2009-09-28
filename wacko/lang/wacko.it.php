@@ -281,8 +281,8 @@ $wackoTranslation = array(
 	"PageAlreadyExistsEditDenied" => "You can't edit it.",
 
 	"RemoveFromBookmarks" => "Rimuovere dai segnalibri",
-	"DontRedirect" => "Non consentire il reindirizzo automatico<br /> dall'azione di Reindirizzo.",
-	"SendWatchMail" => "Spedisci una mail di notifica quando qualcuno<br /> (tranne te) modifica una pagina da te  controllata",
+	"DontRedirect" => "Non consentire il reindirizzo automatico dall'azione di Reindirizzo.",
+	"SendWatchMail" => "Spedisci una mail di notifica quando qualcuno (tranne te) modifica una pagina da te  controllata",
 	"PageMoved" => "La pagina è stata spostata. Puoi trovarla qui",
 	"CurrentPassword" => "Password attuale",
 	"NewPassword" => "Nuova password<br />(almeno 6 caratteri)",

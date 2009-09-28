@@ -282,7 +282,7 @@ $wackoTranslation = array(
 
 	"RemoveFromBookmarks" => "Eliminar de los favoritos",
 	"DontRedirect" => "No autorizar la redirección automática.",
-	"SendWatchMail" => "Enviar un mail de notificación cuando alguien <br /> (excepto tu) cambie la página que vigilas",
+	"SendWatchMail" => "Enviar un mail de notificación cuando alguien (excepto tu) cambie la página que vigilas",
 	"PageMoved" => "Esta página ha sido movida. Puedes encontrarla en ",
 	"CurrentPassword" => "Contraseña actual",
 	"NewPassword" => "Nueva contraseña<br />(5+ letras)",
