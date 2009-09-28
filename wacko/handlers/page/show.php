@@ -262,7 +262,7 @@ if ($this->GetConfigValue("footer_comments"))
 				<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
 
 				<label for="addcomment_title"><?php echo $this->GetTranslation("AddCommentTitle");?></label><br />
-				<input id="addcomment_title" name="title" style="width: 100%"></input>
+				<input id="addcomment_title" name="title" size="60"></input><br />
 	<?php
 				// captcha code starts
 
