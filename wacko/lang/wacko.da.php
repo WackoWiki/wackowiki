@@ -281,8 +281,8 @@ $wackoTranslation = array(
 	"PageAlreadyExistsEditDenied" => "You can't edit it.",
 
 	"RemoveFromBookmarks" => "Fjern fra bookmarks",
-	"DontRedirect" => "Tillad ikke viderestilling<br /> ved handlingen Viderestil.",
-	"SendWatchMail" => "Send notifikationsmail når<br /> nogen ændrer en side du overvåger.",
+	"DontRedirect" => "Tillad ikke viderestilling ved handlingen Viderestil.",
+	"SendWatchMail" => "Send notifikationsmail når nogen ændrer en side du overvåger.",
 	"PageMoved" => "Denne side er flyttet. Du kan finde den på",
 	"CurrentPassword" => "Nuværende password",
 	"NewPassword" => "Nyt password<br />(5+ karakterer)",

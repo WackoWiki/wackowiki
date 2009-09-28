@@ -280,7 +280,7 @@ $wackoTranslation = array(
 	"PageAlreadyExistsEditDenied" => "You can't edit it.",
 
 	"RemoveFromBookmarks" => "Supprimer des signets",
-	"DontRedirect" => "Ne pas autoriser la redirection automatique<br /> par l&rsquo;action de redirection {{Redirect}}&nbsp;",
+	"DontRedirect" => "Ne pas autoriser la redirection automatique par l&rsquo;action de redirection {{Redirect}}&nbsp;",
 	"SendWatchMail" => "Envoyer un courriel de notification quand quelqu&rsquo;un<br /> (à part vous) a modifié une page que vous surveillez&nbsp;",
 	"PageMoved" => "Cette page a été déplacée ou a changé de nom. Vous pouvez la trouver ici&nbsp;: ",
 	"CurrentPassword" => "Mot de passe actuel&nbsp;",

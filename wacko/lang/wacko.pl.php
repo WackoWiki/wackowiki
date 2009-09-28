@@ -282,7 +282,7 @@ $wackoTranslation = array(
 
 	"RemoveFromBookmarks" => "Usuñ z listy szybkiego dostêpu",
 	"DontRedirect" => "Wy³±cz funkcjê automatycznego przekierowania.",
-	"SendWatchMail" => "Wy¶lij powiadomienie, gdy kto¶<br /> (poza Tob±) zmieni zawarto¶æ obserwowanych stron.",
+	"SendWatchMail" => "Wy¶lij powiadomienie, gdy kto¶ (poza Tob±) zmieni zawarto¶æ obserwowanych stron.",
 	"PageMoved" => "Ta strona zosta³a przeniesiona. Nowy adres strony:",
 	"CurrentPassword" => "Bie¿±ce has³o",
 	"NewPassword" => "Nowe has³o<br />(min 5 znaków)",

@@ -282,8 +282,8 @@ $wackoTranslation = array(
 	"PageAlreadyExistsEditDenied" => "Du kannst sie nicht editieren",
 
 	"RemoveFromBookmarks" => "Entferne aktuelle Seite aus den Lesezeichen",
-	"DontRedirect" => "Keine automatische Weiterleitung erlauben,<br /> obwohl eine gesetzt ist.",
-	"SendWatchMail" => "Bestätigunsmail senden, wenn jemand<br /> (außer dir) Seiten verändert, die du beobachtest",
+	"DontRedirect" => "Keine automatische Weiterleitung erlauben, obwohl eine gesetzt ist.",
+	"SendWatchMail" => "Bestätigunsmail senden, wenn jemand (außer dir) Seiten verändert, die du beobachtest",
 	"PageMoved" => "Diese Seite wurde verschoben. Sie ist jetzt zu finden unter",
 	"CurrentPassword" => "Derzeitiges Passwort",
 	"NewPassword" => "Neues Passwort<br />(5+ Zeichen)",
