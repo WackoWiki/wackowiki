@@ -201,9 +201,9 @@ if ($_POST)
 		// edit note
 		if ($this->GetConfigValue("edit_summary") != 0)
 		{
-			$output .= "<label for=\"edit_note\">".$this->GetTranslation("EditNote").":</label>";
+			$output .= "<label for=\"edit_note\">".$this->GetTranslation("EditNote").":</label><br />";
 			$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
-			$output .= "<br />";
+			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br />";
 		}
 
 		// minor edit
