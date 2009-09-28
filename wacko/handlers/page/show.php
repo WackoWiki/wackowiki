@@ -230,7 +230,7 @@ if ($this->GetConfigValue("footer_comments"))
 		// display comments themselves
 		if ($comments)
 		{
-			echo "<ol>";
+			echo "<ol id=\"comments\">\n";
 
 			foreach ($comments as $comment)
 			{

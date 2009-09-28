@@ -204,6 +204,13 @@ form input.submitinput {
 li.comment {
 	overflow: hidden;
 }
+ol#comments{
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+	margin: 10px 0 0;
+	padding: 0;
+}
 
 .commenttext {
 	float: left;
