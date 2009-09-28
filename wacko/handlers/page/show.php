@@ -242,7 +242,7 @@ if ($this->GetConfigValue("footer_comments"))
 
 				else $strings = $this->Format($comment["body"], "wacko");
 				echo "<div class=\"commenttext\">\n";
-				print("<div class=\"commenttitle\">\n<a <a href=\"".$this->href("", "", "show_comments=1")."#".$comment["tag"]."\">".$comment["title"]."</a>\n</div>\n");
+				print("<div class=\"commenttitle\">\n<a href=\"".$this->href("", "", "show_comments=1")."#".$comment["tag"]."\">".$comment["title"]."</a>\n</div>\n");
 				print($this->Format($strings,"post_wacko")."\n");
 				echo "</div>\n";
 				print("<ul class=\"commentinfo\">\n<li>".($this->IsWikiName($comment["user"]) ? $this->Link("/".$comment["user"],"",$comment["user"]) : $comment["user"])."</li>\n<li>".$comment["time"]."</li>\n</ul>\n");
