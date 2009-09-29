@@ -1,0 +1,31 @@
+body {
+font-family:Geneva, Arial, Helvetica, sans-serif;
+font-size:12px;
+}
+
+div#navi,div#navi a {
+color:#416bb8;
+font-family:Geneva, Arial, Helvetica, sans-serif;
+font-size:0.95em;
+}
+
+div#navi a:hover {
+color:#b84141;
+}
+
+div#content loc {
+color:#C00;
+font-family:Geneva, Arial, Helvetica, sans-serif;
+font-size:smaller;
+height:50px;
+letter-spacing:0.2em;
+word-spacing:0.4em;
+}
+
+div#footer {
+color:#E2E2E2;
+font-size:x-small;
+font-weight:bolder;
+letter-spacing:0.5em;
+text-align:right;
+}

@@ -1,0 +1,54 @@
+body {
+margin:0;
+}
+
+div#head {
+background-image:url(/themes/CoolBlue/images/head_back.gif);
+background-repeat:no-repeat;
+height:50px;
+margin:0 auto;
+width:960px;
+}
+
+input#search {
+background:url(/themes/CoolBlue/images/search.gif) no-repeat left top;
+border:0;
+color:#999;
+float:right;
+font-family:Arial, Helvetica, sans-serif;
+font-size:1em;
+margin:14px 20px;
+padding:3px 10px 4px 20px;
+width:180px;
+}
+
+div#container {
+margin:10px auto;
+width:960px;
+}
+
+div#navi {
+float:left;
+width:130px;
+}
+
+div#content {
+border-left-color:#06F;
+border-left-style:dashed;
+border-left-width:thin;
+float:right;
+padding:5px;
+width:800px;
+}
+
+div#footer {
+background-image:url(/themes/CoolBlue/images/footer_back.gif);
+background-position:center;
+background-repeat:no-repeat;
+clear:both;
+margin:10px auto;
+padding-bottom:10px;
+padding-right:20px;
+padding-top:10px;
+width:960px;
+}
