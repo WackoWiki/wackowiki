@@ -102,10 +102,10 @@ if ($this->GetUser())
 {
  if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks()))
  {?>
-  <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar1.gif" alt="+" title="<?php echo $this->GetTranslation("AddToBookmarks") ?>" border="0" align="middle" /></a> <br />
+  <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark1.gif" alt="+" title="<?php echo $this->GetTranslation("AddToBookmarks") ?>" border="0" align="middle" /></a> <br />
   <?php
  } else { ?>
-  <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/toolbar2.gif" alt="-" title="<?php echo $this->GetTranslation("RemoveFromBookmarks") ?>" border="0" align="middle" /></a> <br />
+  <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark2.gif" alt="-" title="<?php echo $this->GetTranslation("RemoveFromBookmarks") ?>" border="0" align="middle" /></a> <br />
   <?php
  }
 }
@@ -200,4 +200,8 @@ echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".
 ?>
 </div>
 <div id="content">
+<?php
+// here we show messages
+if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+?>
 <loc><?php echo $this->config["wakka_name"] ?>: <?php echo $this->GetPagePath(); ?><a title="<?php echo $this->GetConfigValue("search_title_help")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></loc>
