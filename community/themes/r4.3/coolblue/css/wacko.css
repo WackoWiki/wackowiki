@@ -1,3 +1,6 @@
+@import "fontdesign.css";
+@import "layout.css";
+
 #tooltip {
 background:#FFF;
 border:1px solid #666;
