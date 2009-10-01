@@ -50,12 +50,12 @@ if ($user = $this->GetUser())
 		array_multisort($referrer_sites, SORT_DESC, SORT_NUMERIC);
 		reset($referrer_sites);
 	?>
-	  <div class="cssform3">
-	    <?php
+	<div class="cssform3">
+		<?php
 		foreach ($referrer_sites as $site => $site_count)
 		{ ?>
-	    <span class="site_count"><?php echo $site_count; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;<?php print((($site != "unknown") ? "<a href=\"http://$site\">$site</a>" : $site)); ?><br />
-	    <?php
+		<span class="site_count"><?php echo $site_count; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;<?php print((($site != "unknown") ? "<a href=\"http://$site\">$site</a>" : $site)); ?><br />
+		<?php
 		}
 		?>
 	  </div>

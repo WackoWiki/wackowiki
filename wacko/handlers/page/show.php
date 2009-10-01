@@ -66,14 +66,14 @@ if ($this->HasAccess("read"))
 		$this->SetLanguage($this->userlang);
 ?>
 <script type="text/javascript">
-   var dbclick = "page";
+	var dbclick = "page";
 </script>
 <?php
 
-  // if this is an old revision, display some buttons
-  if ($this->HasAccess("write") && ($this->page["latest"] == "0"))
-  {
-   $latest = $this->LoadPage($this->tag);
+// if this is an old revision, display some buttons
+if ($this->HasAccess("write") && ($this->page["latest"] == "0"))
+{
+	$latest = $this->LoadPage($this->tag);
 ?>
 	<br />
 	<?php echo $this->FormOpen("edit") ?>
@@ -82,7 +82,7 @@ if ($this->HasAccess("read"))
 	<input type="submit" value="<?php echo $this->GetTranslation("ReEditOldRevision") ?>" />
 	<?php echo $this->FormClose(); ?>
 <?php
-  }
+}
 	}
 }
 else
@@ -127,7 +127,7 @@ if ($this->GetConfigValue("footer_files"))
 <a name="files" id="files"></a>
 <div id="filesheader"><?php echo $this->GetTranslation("Files_all") ?>
 [<a href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetTranslation("HideFiles"); ?></a>]
-    </div>
+</div>
 
 	<?php
 	echo "<div class=\"files\">";
@@ -158,7 +158,7 @@ if ($this->GetConfigValue("footer_files"))
 	else
 	{
 	?>
-    <div id="filesheader">
+	<div id="filesheader">
 <?php
 	if ($this->page["id"])
 	{

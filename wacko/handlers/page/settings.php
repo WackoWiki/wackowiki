@@ -96,13 +96,13 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 	if ($this->UserIsOwner() || $this->IsAdmin())
 	{
 	echo("<li><a href=\"".$this->href("rename")."\">".$this->GetTranslation("SettingsRename")."</a>
-    </li>");
+	</li>");
 	}
 	?>
 <?php // Remove link (shows only for page owner if allowed)
 	if ($this->UserIsOwner() && !$this->GetConfigValue("remove_onlyadmins") || $this->IsAdmin())
 	{
-    echo("<li><a href=\"".$this->href("remove")."\">".$this->GetTranslation("SettingsRemove")."</a></li>");
+		echo("<li><a href=\"".$this->href("remove")."\">".$this->GetTranslation("SettingsRemove")."</a></li>");
 	}
 	?>
 <?php

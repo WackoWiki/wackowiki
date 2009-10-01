@@ -143,17 +143,17 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 		}
 
 ?>
-  <br />
-  <br />
-  <input type="hidden" name="delete" value="1" />
-  <input name="submit" type="submit" value="<?php echo $this->GetTranslation("RemoveButton"); ?>" />
-  &nbsp;
-  <input
+<br />
+<br />
+<input type="hidden" name="delete" value="1" />
+<input name="submit" type="submit" value="<?php echo $this->GetTranslation("RemoveButton"); ?>" />
+&nbsp;
+<input
 	type="button"
 	value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
 	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
-  <br />
-  <?php echo $this->FormClose();
+<br />
+<?php echo $this->FormClose();
 		}
 	}
 }

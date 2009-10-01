@@ -294,7 +294,7 @@ if ($registered
 	}
 	echo $this->Action("upload", array())."<br />";
 	echo $this->Action("files", array());
-//  if (!$error) echo "<br /><hr />".$this->Action("upload", array())."<hr /><br />";
+// if (!$error) echo "<br /><hr />".$this->Action("upload", array())."<hr /><br />";
 }
 else
 {

@@ -1,8 +1,8 @@
 <?php
 
-$str  = "SELECT tag, user ";
-$str .= "FROM ".$this->config["table_prefix"]."pagewatches ";
-$str .= "WHERE user='".quote($this->dblink, $this->GetUserName())."'";
+$str = "SELECT tag, user ".
+		"FROM ".$this->config["table_prefix"]."pagewatches ".
+		"WHERE user='".quote($this->dblink, $this->GetUserName())."'";
 
 if ($pages = $this->LoadAll($str))
 {

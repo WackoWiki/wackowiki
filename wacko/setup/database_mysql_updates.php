@@ -83,11 +83,11 @@ $update_pages_r4_2_3 = "UPDATE ".$config["table_prefix"]."pages AS pages, (SELEC
 
 // PAGEWATCHES
 $table_pagewatches_r0 = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
-                        "id INT(10) NOT NULL auto_increment, ".
-                        "user VARCHAR(80) NOT NULL DEFAULT '', ".
-                        "tag VARCHAR(50) binary NOT NULL DEFAULT '', ".
-                        "time TIMESTAMP NOT NULL, ".
-                        "PRIMARY KEY (id)) TYPE=MyISAM";
+						"id INT(10) NOT NULL auto_increment, ".
+						"user VARCHAR(80) NOT NULL DEFAULT '', ".
+						"tag VARCHAR(50) binary NOT NULL DEFAULT '', ".
+						"time TIMESTAMP NOT NULL, ".
+						"PRIMARY KEY (id)) TYPE=MyISAM";
 
 $alter_pagewatches_r2_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE tag tag VARCHAR(250) NOT NULL";
 $alter_pagewatches_r3_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE tag tag VARCHAR(250) BINARY NOT NULL";
@@ -105,25 +105,25 @@ $alter_referrers_r4_2 = "ALTER TABLE ".$config["table_prefix"]."referrers DROP I
 
 // REVISIONS
 $table_revisions_r2 = "CREATE TABLE ".$config["table_prefix"]."revisions (".
-                     "id INT(10) UNSIGNED NOT NULL auto_increment,".
-                     "tag VARCHAR(250) NOT NULL DEFAULT '',".
-                     "supertag VARCHAR(250) NOT NULL DEFAULT '',".
-                     "time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-                     "body TEXT NOT NULL,".
-                     "body_r TEXT NOT NULL,".
-                     "owner VARCHAR(50) NOT NULL DEFAULT '',".
-                     "user VARCHAR(50) NOT NULL DEFAULT '',".
-                     "latest ENUM('Y','N') NOT NULL DEFAULT 'N',".
-                     "handler VARCHAR(30) NOT NULL DEFAULT 'page',".
-                     "comment_on VARCHAR(50) NOT NULL DEFAULT '',".
-                     "PRIMARY KEY (id),".
-                     "KEY idx_tag (tag),".
-                     "KEY idx_supertag (supertag),".
-                     "KEY idx_time (time),".
-                     "KEY idx_latest (latest),".
-                     "KEY idx_comment_on (comment_on),".
-                     "KEY supertag (supertag)".
-                     ") TYPE=MyISAM;";
+						"id INT(10) UNSIGNED NOT NULL auto_increment,".
+						"tag VARCHAR(250) NOT NULL DEFAULT '',".
+						"supertag VARCHAR(250) NOT NULL DEFAULT '',".
+						"time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+						"body TEXT NOT NULL,".
+						"body_r TEXT NOT NULL,".
+						"owner VARCHAR(50) NOT NULL DEFAULT '',".
+						"user VARCHAR(50) NOT NULL DEFAULT '',".
+						"latest ENUM('Y','N') NOT NULL DEFAULT 'N',".
+						"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
+						"comment_on VARCHAR(50) NOT NULL DEFAULT '',".
+						"PRIMARY KEY (id),".
+						"KEY idx_tag (tag),".
+						"KEY idx_supertag (supertag),".
+						"KEY idx_time (time),".
+						"KEY idx_latest (latest),".
+						"KEY idx_comment_on (comment_on),".
+						"KEY supertag (supertag)".
+						") TYPE=MyISAM;";
 
 $alter_revisions_r3_1 = "ALTER TABLE ".$config["table_prefix"]."revisions CHANGE tag tag VARCHAR(250) BINARY NOT NULL";
 $alter_revisions_r3_2 = "ALTER TABLE ".$config["table_prefix"]."revisions CHANGE comment_on comment_on VARCHAR(250) BINARY NOT NULL";

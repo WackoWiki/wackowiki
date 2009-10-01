@@ -8,14 +8,14 @@ function quote($dblink, $string)
 	// Got this from: http://www.gamedev.net/community/forums/topic.asp?topic_id=448909
 	// More reading: http://www.sitepoint.com/forums/showthread.php?t=337881
 	return strtr($string, array(
-                    "\x00" => '\x00',
-                    "\n" => '\n',
-                    "\r" => '\r',
-                    '\\' => '\\\\',
-                    "'" => "\'",
-                    '"' => '\"',
-                    "\x1a" => '\x1a'
-                    ));
+					"\x00" => '\x00',
+					"\n" => '\n',
+					"\r" => '\r',
+					'\\' => '\\\\',
+					"'" => "\'",
+					'"' => '\"',
+					"\x1a" => '\x1a'
+					));
 }
 
 function query($dblink, $query, $debug)
@@ -27,7 +27,7 @@ function query($dblink, $query, $debug)
 		if ($result->errorCode() != '00000')
 		{
 			ob_end_clean();
-			
+
 			if ($debug > 2)
 			{
 				die("Query failed: ".$query." (".$result->errorCode().": ".$result->errorInfo().")");
@@ -94,6 +94,6 @@ function connect($host, $user, $password, $db, $collation = false, $driver, $por
 // Note on various DB implementions: http://framework.zend.com/manual/en/zend.db.html#zend.db.adapter.write.lastinsertid
 function last_insert_id($dblink)
 {
-   return $dblink->lastInsertId();
+	return $dblink->lastInsertId();
 }
 ?>

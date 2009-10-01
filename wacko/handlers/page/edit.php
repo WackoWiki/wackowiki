@@ -21,14 +21,14 @@ if ($_POST)
 	if ($_POST["save"] && $_POST["body"] != "")
 	{
 		if(isset($_POST["edit_note"]))
-        {
-            $edit_note = trim($_POST["edit_note"]);
-        }
+		{
+			$edit_note = trim($_POST["edit_note"]);
+		}
 
 		if(isset($_POST["minor_edit"]))
-        {
-            $minor_edit = $_POST["minor_edit"];
-        }
+		{
+			$minor_edit = $_POST["minor_edit"];
+		}
 
 		// check for overwriting
 		if ($this->page && $this->page["time"] != $_POST["previous"])
@@ -141,12 +141,12 @@ if ($_POST)
 	}
 
 	// append a comment?
-   /*
+	/*
 	if ($_REQUEST["appendcomment"])
 	{
 		$body = trim($body)."\n\n----\n\n--".$this->GetUserName()." (".strftime("%c").")";
 	}
-   */
+	*/
 	// "cf" attribute: it is for so called "critical fields" in the form. It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog "You are going to leave this page, but there are some changes you made but not saved yet." Is used by this script to determine which changes it need to monitor.
 	$output .= $this->FormOpen("edit", "", "post", "edit", " cf='true' ");
 

@@ -356,7 +356,7 @@ class WackoFormatter
 
 	function WackoCallback($things)
 	{
-		$result = null;
+		$result = NULL;
 		$thing = $things[1];
 		$wacko = & $this->object;
 		$callback = array(&$this, "WackoCallback");

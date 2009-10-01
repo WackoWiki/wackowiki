@@ -21,33 +21,33 @@ class Cache
 	{
 		$filename	= $this->SQLCacheID($query);
 		$sqldata	= serialize($data);
-		
+
 		$fp	= fopen($filename, 'w');
 		fwrite($fp, $sqldata);
 		fclose($fp);
 		chmod($filename, 0644);
-		
+
 		return true;
 	}
-	
+
 	// retrieve and unserialize cached sql data
 	function LoadSQL($query)
 	{
 		$filename = $this->SQLCacheID($query);
-		
+
 		if (!@file_exists($filename))
 			return false;
-		
+
 		if ((time() - @filemtime($filename)) > $this->wacko->config['cache_sql_ttl'])
 			return false;
-		
+
 		$fp		= fopen($filename, 'r');
 		$data	= fread($fp, filesize($filename));
-		fclose($fp); 
-		
+		fclose($fp);
+
 		return unserialize($data);
 	}
-	
+
 	function SQLCacheID($query)
 	{
 		return $this->cache_dir.CACHE_SQL_DIR.md5($query);
@@ -112,13 +112,13 @@ class Cache
 
 		if ($this->wacko) $this->wacko->Query(
 			"INSERT INTO ".$this->wacko->config["table_prefix"]."cache SET ".
-   			"name  ='".quote($this->wacko->dblink, md5($page))."', ".
-   			"method='".quote($this->wacko->dblink, $method)."', ".
-   			"query ='".quote($this->wacko->dblink, $query)."'");
+			"name  ='".quote($this->wacko->dblink, md5($page))."', ".
+			"method='".quote($this->wacko->dblink, $method)."', ".
+			"query ='".quote($this->wacko->dblink, $query)."'");
 			// TIMESTAMP type is filled automatically by MySQL
 
 		@chmod($filename, octdec('0644'));
-		
+
 		return true;
 	}
 
@@ -179,7 +179,7 @@ class Cache
 
 		foreach ($_GET as $k => $v)
 		{
-			if ($k != "v" && $k != "page") 
+			if ($k != "v" && $k != "page")
 				$_query[$k] = $v;
 		}
 		if ($_query)

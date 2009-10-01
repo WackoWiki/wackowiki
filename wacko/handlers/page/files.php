@@ -89,8 +89,8 @@ else if ($error == 404)
 else
 {
 	// Not sure what the point of wrapping it in the conditional was
-   // if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
-   header("HTTP/1.0 403 Forbidden");
+	// if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
+	header("HTTP/1.0 403 Forbidden");
 
 	print($this->GetTranslation("UploadFileForbidden"));
 }

@@ -37,8 +37,8 @@ if ($this->HasAccess("read")) {
 			}
 			else
 			{
-                $edit_note = "";
-            }
+				$edit_note = "";
+			}
 
 			if (($c <= $max) || !$max)
 			{
