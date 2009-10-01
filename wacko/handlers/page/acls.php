@@ -5,7 +5,7 @@ if (!$this->page) $this->Redirect($this->href("show"));
 
 // deny for comment
 if ($this->page["comment_on_id"])
-	$this->Redirect($this->href('', $this->GetCommentOnTag($this->page["comment_on_id"]), 'show_comments=1').'#'.$this->page['tag']);
+$this->Redirect($this->href('', $this->GetCommentOnTag($this->page["comment_on_id"]), 'show_comments=1').'#'.$this->page['tag']);
 
 if ($this->UserIsOwner() || $this->IsAdmin())
 {
@@ -98,10 +98,10 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				SELECT ".$this->pages_meta." ".
 				"FROM ".$this->config["table_prefix"]."pages ".
 				"WHERE (supertag = '".quote($this->dblink, $this->tag)."'".
-		            " OR supertag LIKE '".quote($this->dblink, $this->tag."/%")."'".
-		            " OR comment_on_id = '".quote($this->dblink, $this->GetPageId())."'".
-		            " OR comment_on_id LIKE '".quote($this->dblink, $this->tag."/%")."'".
-		            ") AND owner='".quote($this->dblink, $this->GetUserName())."'");
+				" OR supertag LIKE '".quote($this->dblink, $this->tag."/%")."'".
+				" OR comment_on_id = '".quote($this->dblink, $this->GetPageId())."'".
+				" OR comment_on_id LIKE '".quote($this->dblink, $this->tag."/%")."'".
+					") AND owner = '".quote($this->dblink, $this->GetUserName())."'");
 
 			foreach ($pages as $num=>$page)
 			{
@@ -189,8 +189,11 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	}
 	?>
 </select></p>
-<p><input id="submit" type="submit" value="<?php echo $this->GetTranslation("ACLStoreButton"); ?>" accesskey="s" /> &nbsp;
-   <input id="button" type="button" value="<?php echo $this->GetTranslation("ACLCancelButton"); ?>" onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
+<p><input id="submit" type="submit"
+	value="<?php echo $this->GetTranslation("ACLStoreButton"); ?>"
+	accesskey="s" /> &nbsp; <input id="button" type="button"
+	value="<?php echo $this->GetTranslation("ACLCancelButton"); ?>"
+	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
 </p>
 </div>
 	<?php

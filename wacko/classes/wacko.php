@@ -1086,11 +1086,11 @@ class Wacko
 		$user_id = $this->GetUserId();
 
 		/*
-		 ANTISPAM
+			ANTISPAM
 
-		 We load in the external antispam.conf file and then search the entire body content for each of the
-		 words defined as spam.  If we find any then we return from the function, not saving the changes.
-		 */
+			We load in the external antispam.conf file and then search the entire body content for each of the
+			words defined as spam.  If we find any then we return from the function, not saving the changes.
+		*/
 		$this->spam = file("antispam.conf", 1);
 
 		if ($this->config["spam_filter"] && is_array($this->spam))
@@ -1151,7 +1151,7 @@ class Wacko
 					$body_toc = $this->body_toc;
 				}
 
-            // Manage ACLs
+				// Manage ACLs
 				if (strstr($this->context[$this->current_context], "/") && !$comment_on_id)
 				{
 					$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $this->context[$this->current_context] );
@@ -1170,16 +1170,16 @@ class Wacko
 					$comment_acl = $this->LoadAcl($root, "comment");
 					$comment_acl = $comment_acl["list"];
 				}
-            else if ($comment_on_id)
-            {
-               // Give comments the same rights as their parent page
+				else if ($comment_on_id)
+				{
+					// Give comments the same rights as their parent page
 					$write_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on_id), "write");
 					$write_acl = $write_acl["list"];
 					$read_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on_id), "read");
 					$read_acl = $read_acl["list"];
 					$comment_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on_id), "comment");
 					$comment_acl = $comment_acl["list"];
-            }
+				}
 				else
 				{
 					$write_acl = $this->config["default_write_acl"];
@@ -1211,7 +1211,7 @@ class Wacko
 						"title = '".quote($this->dblink, $title)."', ".
 						"tag = '".quote($this->dblink, $tag)."'");
 
-               	// saving acls
+				// saving acls
 				// $this->SaveAcl($tag, "write", ($comment_on_id ? "" : $write_acl));
 				$this->SaveAcl($tag, "write", $write_acl);
 				$this->SaveAcl($tag, "read", $read_acl);
@@ -3691,7 +3691,7 @@ class Wacko
 		return $this->Query(
 			"DELETE ".
 				$this->config["table_prefix"]."referrers ".
-		 	"FROM ".
+			"FROM ".
 				$this->config["table_prefix"]."referrers ".
 				"INNER JOIN ".$this->config["table_prefix"]."pages ON (".$this->config["table_prefix"]."referrers.page_id = ".$this->config["table_prefix"]."pages.id)".
 			"WHERE "
@@ -3828,7 +3828,7 @@ class Wacko
 			// pages range links
 			if ($pages <= 10)	// not so many pages
 			{
-				for ($p=1; $p<=$pages; $p++)
+				for ($p = 1; $p<=$pages; $p++)
 				{
 					if ($p != $page)
 						$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>'.( $p != $pages ? $sep : '' );

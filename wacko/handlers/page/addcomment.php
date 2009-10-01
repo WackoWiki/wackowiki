@@ -17,9 +17,9 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 	$body = trim($_POST["body"]);
 
 	if(isset($_POST["title"]))
-    {
-        $title = trim($_POST["title"]);
-    }
+	{
+		$title = trim($_POST["title"]);
+	}
 
 	if (!$body)
 	{

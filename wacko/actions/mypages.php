@@ -1,7 +1,7 @@
 <?php
 
 // actions/mypages.php
-// 
+//
 
 if ($user = $this->GetUser())
 {
@@ -27,7 +27,7 @@ if ($user = $this->GetUser())
 				if (!$edited_pages[$page["tag"]]) $edited_pages[$page["tag"]] = $page["time"];
 			}
 
-			//      $edited_pages = array_reverse($edited_pages);
+			// $edited_pages = array_reverse($edited_pages);
 			arsort($edited_pages);
 
 			foreach ($edited_pages as $page["tag"] => $page["time"])
@@ -36,7 +36,7 @@ if ($user = $this->GetUser())
 				list($day, $time) = explode(" ", $page["time"]);
 				if ($day != $curday)
 				{
-					if ($curday) 
+					if ($curday)
 					{
 						print("</ul>\n<br /></li>\n");
 					}

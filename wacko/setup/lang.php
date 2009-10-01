@@ -1,24 +1,24 @@
 <?php
 if(array_key_exists("wacko_version", $config))
-   {
-      echo '<p>'.preg_replace(array("/%1/", "/%2/"), array($config["wacko_version"], WACKO_VERSION), $lang["UpgradeFromWacko"])."</p>\n";
-      echo '<p>'.$lang["PleaseBackup"]."</p>\n";
-   }
+{
+	echo '<p>'.preg_replace(array("/%1/", "/%2/"), array($config["wacko_version"], WACKO_VERSION), $lang["UpgradeFromWacko"])."</p>\n";
+	echo '<p>'.$lang["PleaseBackup"]."</p>\n";
+}
 else if(array_key_exists("wakka_version", $config))
-   {
-      echo '<p>'.preg_replace(array("/%1/", "/%2/"), array($config["wakka_version"], WACKO_VERSION), $lang["UpgradeFromWakka"])."</p>\n";
-      echo '<p>'.$lang["PleaseBackup"]."</p>\n";
-   }
+{
+	echo '<p>'.preg_replace(array("/%1/", "/%2/"), array($config["wakka_version"], WACKO_VERSION), $lang["UpgradeFromWakka"])."</p>\n";
+	echo '<p>'.$lang["PleaseBackup"]."</p>\n";
+}
 else
-   {
-      echo '<p>'.str_replace("%1", WACKO_VERSION, $lang["FreshInstall"])."</p>\n";
-   }
+{
+	echo '<p>'.str_replace("%1", WACKO_VERSION, $lang["FreshInstall"])."</p>\n";
+}
 ?>
 <form action="<?php echo myLocation() ?>?installAction=version-check" method="post">
 <?php
-   writeConfigHiddenNodes(array('language' => 0));
+	writeConfigHiddenNodes(array('language' => 0));
 ?>
-   <p><?php echo $lang["LangDesc"];?></p>
+	<p><?php echo $lang["LangDesc"];?></p>
 <?php
 // http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 $lang_codes = array();
@@ -36,25 +36,25 @@ $lang_codes["pl"] = "Polski";
 $lang_codes["ru"] = "&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;";
 
 foreach($lang_codes as $key => $value)
-   {
-      echo "   <input type=\"radio\" id=\"lang_".$key."\" name=\"config[language]\" value=\"".$key."\"";
+{
+	echo "   <input type=\"radio\" id=\"lang_".$key."\" name=\"config[language]\" value=\"".$key."\"";
 
-      // Default or Selected Language
-      if ( isset ( $_POST["config"]["language"] ) )
-         {
-            if ( $_POST["config"]["language"] == $key )
-               {
-                  echo " checked=\"checked\" ";
-               }
-         }
-      elseif ( $config["language"] == $key )
-         {
-            echo " checked=\"checked\" ";
-         }
+	// Default or Selected Language
+	if ( isset ( $_POST["config"]["language"] ) )
+	{
+		if ( $_POST["config"]["language"] == $key )
+		{
+			echo " checked=\"checked\" ";
+		}
+	}
+	elseif ( $config["language"] == $key )
+	{
+		echo " checked=\"checked\" ";
+	}
 
-      echo " onClick=\"this.form.action='?installAction=lang'; submit(); \"";
-      echo " class=\"input_lang\"><label for=\"lang_".$key."\" class=\"label_lang\">".$value." (".$key.")</label><br>\n";
-   }
+	echo " onClick=\"this.form.action='?installAction=lang'; submit(); \"";
+	echo " class=\"input_lang\"><label for=\"lang_".$key."\" class=\"label_lang\">".$value." (".$key.")</label><br>\n";
+}
 ?>
-   <input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />
+	<input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />
 </form>

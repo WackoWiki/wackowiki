@@ -72,30 +72,30 @@ else
 <input type="hidden" name="action" value="login" />
 <input type="hidden" name="goback" value="<?php echo stripslashes($_POST["goback"]);?>" />
 <div class="cssform">
-  <h3><?php echo $this->GetTranslation("LoginWelcome"); ?></h3>
-  <?php
+	<h3><?php echo $this->GetTranslation("LoginWelcome"); ?></h3>
+	<?php
 	if ($error)
 	{ ?>
-  <div class="error"><?php print $this->Format($error); ?></div>
-  <?php	}
+	<div class="error"><?php print $this->Format($error); ?></div>
+	<?php	}
 	?>
-  <p>
-    <label for="name"><?php echo $this->FormatTranslation("LoginName");?>:</label>
-    <input id="name" name="name" size="27" value="<?php echo $name; ?>" />
-  </p>
-  <p>
-    <label for="password"><?php echo $this->GetTranslation("LoginPassword");?>:</label>
-    <input id="password" type="password" name="password" size="24" />
-  </p>
-  <p>
-    <input type="submit" value="<?php echo $this->GetTranslation("LoginButton"); ?>" />
-  </p>
-  <p><a href="<?php echo $this->Href("", "Password"); ?>"><?php echo $this->GetTranslation("ForgotLink"); ?></a></p>
-  <p><?php echo $this->FormatTranslation("LoginWelcome2"); ?></p>
+	<p>
+		<label for="name"><?php echo $this->FormatTranslation("LoginName");?>:</label>
+		<input id="name" name="name" size="27" value="<?php echo $name; ?>" />
+	</p>
+	<p>
+		<label for="password"><?php echo $this->GetTranslation("LoginPassword");?>:</label>
+		<input id="password" type="password" name="password" size="24" />
+	</p>
+	<p>
+		<input type="submit" value="<?php echo $this->GetTranslation("LoginButton"); ?>" />
+	</p>
+	<p><a href="<?php echo $this->Href("", "Password"); ?>"><?php echo $this->GetTranslation("ForgotLink"); ?></a></p>
+	<p><?php echo $this->FormatTranslation("LoginWelcome2"); ?></p>
 </div>
 <script type="text/javascript">
-   document.getElementById("f<?php echo $focus;?>").focus();
-  </script>
+	document.getElementById("f<?php echo $focus;?>").focus();
+</script>
 <?php
 	print($this->FormClose());
 }

@@ -3,29 +3,29 @@
 @ignore_user_abort(true);
 
 function test($text, $condition, $errorText = "")
-   {
-      global $lang;
-      print("            <li>".$text." - ".output_image($condition));
+{
+	global $lang;
+	print("            <li>".$text." - ".output_image($condition));
 
-      if(!$condition)
-         {
-            if($errorText)
-               {
-                  print("<ul class=\"install_error\"><li>".$errorText."</li></ul>");
-               }
+	if(!$condition)
+	{
+		if($errorText)
+		{
+			print("<ul class=\"install_error\"><li>".$errorText."</li></ul>");
+		}
 
-            print("</li>\n");
-            return false;
-         }
+		print("</li>\n");
+		return false;
+	}
 
-      print("</li>\n");
-      return true;
-   }
+	print("</li>\n");
+	return true;
+}
 
 function outputError($errorText = "")
-   {
-      print("<ul class=\"install_error\"><li>".$errorText."</li></ul>");
-   }
+{
+	print("<ul class=\"install_error\"><li>".$errorText."</li></ul>");
+}
 
 // test configuration
 print("         <h2>".$lang["TestingConfiguration"]."</h2>\n");
@@ -89,8 +89,8 @@ switch($config["database_driver"])
 			if ( isset ( $config["wacko_version"] ) )
 			if ( trim ( $config["wacko_version"] ) ) $version = trim($config["wacko_version"]);
 
-         if ($config["DeleteTables"] == "on")
-            {
+			if ($config["DeleteTables"] == "on")
+			{
 					print("<h2>".$lang["DeletingTables"]."</h2>\n");
 					print("            <ul>\n");
 					test(str_replace("%1", "page", $lang["DeletingTable"]), @mysql_query($table_pages_drop, $dblink), str_replace("%1", "page", $lang["ErrorDeletingTable"]));
@@ -106,8 +106,8 @@ switch($config["database_driver"])
 					print("            <li>".$lang["DeletingTablesEnd"]."</li>\n");
 					print("         </ul>\n");
 					print("         <br />\n");
-               $version = 0;
-            }
+					$version = 0;
+			}
 
 			switch ($version)
 			{
@@ -379,30 +379,30 @@ switch($config["database_driver"])
 						print("         </ul>\n");
 						print("         <br />\n");
 
-                  if ( !isset( $config["wakka_version"] ) ) $config["wakka_version"] = "0";
-                  if ( !isset( $config["wacko_version"] ) ) $config["wacko_version"] = "0";
+						if ( !isset( $config["wakka_version"] ) ) $config["wakka_version"] = "0";
+						if ( !isset( $config["wacko_version"] ) ) $config["wacko_version"] = "0";
 						if (!$version = trim($config["wakka_version"])) $version = "0";
 						if (trim($config["wacko_version"])) $version = trim($config["wacko_version"]);
 
-                  if ($config["DeleteTables"] == "on")
-                     {
-                        print("<h2>".$lang["DeletingTables"]."</h2>\n");
-                        print("            <ul>\n");
-                        test(str_replace("%1", "page", $lang["DeletingTable"]), @mysqli_query($dblink, $table_pages_drop), str_replace("%1", "page", $lang["ErrorDeletingTable"]));
-                        test(str_replace("%1", "revision", $lang["DeletingTable"]), @mysqli_query($dblink, $table_revisions_drop), str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
-                        test(str_replace("%1", "acl", $lang["DeletingTable"]), @mysqli_query($dblink, $table_acls_drop), str_replace("%1", "acl", $lang["ErrorDeletingTable"]));
-                        test(str_replace("%1", "link tracking", $lang["DeletingTable"]), @mysqli_query($dblink, $table_links_drop), str_replace("%1", "link", $lang["ErrorDeletingTable"]));
-                        test(str_replace("%1", "referrer", $lang["DeletingTable"]), @mysqli_query($dblink, $table_referrers_drop), str_replace("%1", "referrer", $lang["ErrorDeletingTable"]));
-                        test(str_replace("%1", "user", $lang["DeletingTable"]), @mysqli_query($dblink, $table_users_drop), str_replace("%1", "user", $lang["ErrorDeletingTable"]));
-                        test(str_replace("%1", "watches", $lang["DeletingTable"]), @mysqli_query($dblink, $table_pagewatches_drop), str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
-                        test(str_replace("%1", "upload", $lang["DeletingTable"]), @mysqli_query($dblink, $table_upload_drop), str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
-                        test(str_replace("%1", "cache", $lang["DeletingTable"]), @mysqli_query($dblink, $table_cache_drop), str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
-                        test(str_replace("%1", "log", $lang["DeletingTable"]), @mysqli_query($dblink, $table_log_drop), str_replace("%1", "log", $lang["ErrorDeletingTable"]));
-                        print("            <li>".$lang["DeletingTablesEnd"]."</li>\n");
-                        print("         </ul>\n");
-                        print("         <br />\n");
-                        $version = 0;
-                     }
+						if ($config["DeleteTables"] == "on")
+						{
+							print("<h2>".$lang["DeletingTables"]."</h2>\n");
+							print("            <ul>\n");
+							test(str_replace("%1", "page", $lang["DeletingTable"]), @mysqli_query($dblink, $table_pages_drop), str_replace("%1", "page", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "revision", $lang["DeletingTable"]), @mysqli_query($dblink, $table_revisions_drop), str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "acl", $lang["DeletingTable"]), @mysqli_query($dblink, $table_acls_drop), str_replace("%1", "acl", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "link tracking", $lang["DeletingTable"]), @mysqli_query($dblink, $table_links_drop), str_replace("%1", "link", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "referrer", $lang["DeletingTable"]), @mysqli_query($dblink, $table_referrers_drop), str_replace("%1", "referrer", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "user", $lang["DeletingTable"]), @mysqli_query($dblink, $table_users_drop), str_replace("%1", "user", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "watches", $lang["DeletingTable"]), @mysqli_query($dblink, $table_pagewatches_drop), str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "upload", $lang["DeletingTable"]), @mysqli_query($dblink, $table_upload_drop), str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "cache", $lang["DeletingTable"]), @mysqli_query($dblink, $table_cache_drop), str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "log", $lang["DeletingTable"]), @mysqli_query($dblink, $table_log_drop), str_replace("%1", "log", $lang["ErrorDeletingTable"]));
+							print("            <li>".$lang["DeletingTablesEnd"]."</li>\n");
+							print("         </ul>\n");
+							print("         <br />\n");
+							$version = 0;
+						}
 
 						switch ($version)
 						{
@@ -672,34 +672,34 @@ switch($config["database_driver"])
 
 								print("         <ul>\n");
 								/*
-                           PHP4 doesn't support try/catch blocks so we put the PDO code in a seperate file.
-                           Since we don't support PDO in PHP4 they can never come down this route without PHP5.
-                           i.e. they don't see this as a selection on the previous page.
-                        */
+									PHP4 doesn't support try/catch blocks so we put the PDO code in a seperate file.
+									Since we don't support PDO in PHP4 they can never come down this route without PHP5.
+									i.e. they don't see this as a selection on the previous page.
+								*/
 								require_once("setup/database-install-pdo.php");
 								print("         </ul>\n");
 								print("         <br />\n");
 
 								if(!$fatal_error)
 								{
-                           if ($config["DeleteTables"] == "on")
-                              {
-                                 print("<h2>".$lang["DeletingTables"]."</h2>\n");
-                                 print("            <ul>\n");
-                                 testPDO(str_replace("%1", "page", $lang["DeletingTable"]), $table_pages_drop, str_replace("%1", "page", $lang["ErrorDeletingTable"]));
-                                 testPDO(str_replace("%1", "revision", $lang["DeletingTable"]), $table_revisions_drop, str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
-                                 testPDO(str_replace("%1", "acl", $lang["DeletingTable"]), $table_acls_drop, str_replace("%1", "acl", $lang["ErrorDeletingTable"]));
-                                 testPDO(str_replace("%1", "link tracking", $lang["DeletingTable"]), $table_links_drop, str_replace("%1", "link", $lang["ErrorDeletingTable"]));
-                                 testPDO(str_replace("%1", "referrer", $lang["DeletingTable"]), $table_referrers_drop, str_replace("%1", "referrer", $lang["ErrorDeletingTable"]));
-                                 testPDO(str_replace("%1", "user", $lang["DeletingTable"]), $table_users_drop, str_replace("%1", "user", $lang["ErrorDeletingTable"]));
-                                 testPDO(str_replace("%1", "watches", $lang["DeletingTable"]), $table_pagewatches_drop, str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
-                                 testPDO(str_replace("%1", "upload", $lang["DeletingTable"]), $table_upload_drop, str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
-                                 testPDO(str_replace("%1", "cache", $lang["DeletingTable"]), $table_cache_drop, str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
-                                 testPDO(str_replace("%1", "log", $lang["DeletingTable"]), $table_log_drop, str_replace("%1", "log", $lang["ErrorDeletingTable"]));
-                                 print("            <li>".$lang["DeletingTablesEnd"]."</li>\n");
-                                 print("         </ul>\n");
-                                 print("         <br />\n");
-                              }
+									if ($config["DeleteTables"] == "on")
+									{
+										print("<h2>".$lang["DeletingTables"]."</h2>\n");
+										print("            <ul>\n");
+										testPDO(str_replace("%1", "page", $lang["DeletingTable"]), $table_pages_drop, str_replace("%1", "page", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "revision", $lang["DeletingTable"]), $table_revisions_drop, str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "acl", $lang["DeletingTable"]), $table_acls_drop, str_replace("%1", "acl", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "link tracking", $lang["DeletingTable"]), $table_links_drop, str_replace("%1", "link", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "referrer", $lang["DeletingTable"]), $table_referrers_drop, str_replace("%1", "referrer", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "user", $lang["DeletingTable"]), $table_users_drop, str_replace("%1", "user", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "watches", $lang["DeletingTable"]), $table_pagewatches_drop, str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "upload", $lang["DeletingTable"]), $table_upload_drop, str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "cache", $lang["DeletingTable"]), $table_cache_drop, str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "log", $lang["DeletingTable"]), $table_log_drop, str_replace("%1", "log", $lang["ErrorDeletingTable"]));
+										print("            <li>".$lang["DeletingTablesEnd"]."</li>\n");
+										print("         </ul>\n");
+										print("         <br />\n");
+									}
 
 									// No need to check the past versions since PDO SQL is only officially supported in this release (v4.3)
 									print("         <h2>".$lang["InstallingTables"]."</h2>\n");
@@ -730,22 +730,22 @@ switch($config["database_driver"])
 }
 
 if(!$fatal_error)
-   {
+{
 ?>
 <p><?php echo $lang["NextStep"];?></p>
 <form action="<?php echo myLocation(); ?>?installAction=write-config" method="post">
 <?php
-   writeConfigHiddenNodes(array('DeleteTables' => ''));
+	writeConfigHiddenNodes(array('DeleteTables' => ''));
 ?>
-   <input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />
+	<input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />
 </form>
 <?php
-   }
+}
 else
-   {
+{
 ?>
 <input type="submit" value="<?php echo $lang["Back"];?>" class="next" onclick="javascript: history.go(-1);" />
 <input type="button" value="<?php echo $lang["TryAgain"];?>" class="next" onClick="window.location.reload( true );" />
 <?php
-   }
+}
 ?>

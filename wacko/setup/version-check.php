@@ -1,13 +1,13 @@
 <form action="<?php echo myLocation() ?>?installAction=site-config" method="post">
 <?php
-   writeConfigHiddenNodes(array('none' => ''));
+writeConfigHiddenNodes(array('none' => ''));
 
 ?>
 <p><?php echo $lang["Requirements"]; ?></p>
 	<?php
 	/*
-	 Check PHP Version
-	 */
+		Check PHP Version
+	*/
 
 	$php_version_result = version_compare("4.3.3", PHP_VERSION, "<");
 	?>
@@ -15,8 +15,8 @@
 <p class="notop"><?php echo $lang["PHPDetected"]; ?> <?php print phpversion().' - '.output_image($php_version_result); ?></p>
 	<?php
 	/*
-	 Check if mod_rewrite is installed
-	 */
+		Check if mod_rewrite is installed
+	*/
 	?>
 <h2><?php echo $lang["ModRewrite"]; ?></h2>
 <p class="notop"><?php echo $lang["ModRewriteInstalled"]; ?> - <?php if(function_exists('apache_get_modules')) { print output_image(in_array('mod_rewrite', apache_get_modules())); } else { print($lang["ModRewriteStatusUnknown"]); } ?></p>
@@ -27,13 +27,13 @@
 	$database_result = extension_loaded("mysql") || extension_loaded("mysqli") || extension_loaded("pdo");
 
 	/*
-	 With PDO it is not enough that we can just say "ok we've detected PDO".
-	 We have to actually confirm that one of the specific database types is enabled.
-	 Later when we support all the PDO types this can be removed but for now we
-	 only support a subset of them.
+		With PDO it is not enough that we can just say "ok we've detected PDO".
+		We have to actually confirm that one of the specific database types is enabled.
+		Later when we support all the PDO types this can be removed but for now we
+		only support a subset of them.
 
-	 This is a copy of the array from database-config.php
-	 */
+		This is a copy of the array from database-config.php
+	*/
 
 	$accepted_pdo_drivers = array();
 	$accepted_pdo_drivers[] = "mysql";
@@ -93,8 +93,8 @@
 </ul>
 	<?php
 	/*
-	 End of checks, are we ready to install?
-	 */
+		End of checks, are we ready to install?
+	*/
 	?>
 <h2><?php echo $lang["ReadyToInstall"]; ?></h2>
 	<?php

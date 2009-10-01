@@ -61,7 +61,7 @@ if ($phrase)
 		{
 			if (!$nomark) print(  "<div class=\"layout-box\"><p class=\"layout-box\"><span>".
 			$this->GetTranslation(($mode == "topic" ? "Topic" : "")."SearchResults").
-              " \"$phrase\":</span></p>");
+			" \"$phrase\":</span></p>");
 			// open list
 			if ($style == "ul") print "<ul id=\"search_results\">\n";
 			if ($style == "ol") print "<ol id=\"search_results\">\n";

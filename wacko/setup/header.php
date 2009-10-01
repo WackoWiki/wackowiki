@@ -39,24 +39,24 @@ function is__writable($path)
 }
 
 function writeConfigHiddenNodes($skip_values)
-   {
-      global $config;
+{
+	global $config;
 
-      $config_parameters = array_diff_key($config, $skip_values, array('aliases' => ''));
+	$config_parameters = array_diff_key($config, $skip_values, array('aliases' => ''));
 
-      foreach($config_parameters as $key => $value)
-         {
-            echo '   <input type="hidden" name="config['.$key.']" value="'.$value.'" />' . "\n";
-         }
-   }
+	foreach($config_parameters as $key => $value)
+	{
+		echo '   <input type="hidden" name="config['.$key.']" value="'.$value.'" />' . "\n";
+	}
+}
 
 global $config;
 
 // If we have any config data in the _POST then it means they have somehow navigated backwards so we should preserve their updated values.
 if ( isset ( $_POST["config"] ) )
-   {
-      $config = $_POST["config"];
-   }
+{
+	$config = $_POST["config"];
+}
 
 if (!isset($config["language"]) || !@file_exists("setup/lang/installer.".$config["language"].".php")) $config["language"] = "en";
 require_once("setup/lang/installer.".$config["language"].".php");
