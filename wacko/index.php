@@ -2,7 +2,7 @@
 
 // initialize engine api
 require('classes/init.php');
-$init = &new Init();
+$init = new Init();
 
 // define settings
 $init->Settings();	// populate from config.php
