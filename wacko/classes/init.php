@@ -86,8 +86,11 @@ class Init
 
 		if (!isset($_REQUEST)) die('$_REQUEST[] not found. WackoWiki requires PHP 4.3.3 or higher!');
 
-		// DEPRECATED function
-		// set_magic_quotes_runtime(0);
+		// Check for function because it is deprecated in PHP 5.3 and removed in PHP 6
+		if (function_exists("set_magic_quotes_runtime"))
+		{
+			@set_magic_quotes_runtime(false);
+		}
 
 		if (get_magic_quotes_gpc())
 		{
