@@ -1443,9 +1443,16 @@ class Wacko
 
 	function GetMessage()
 	{
-		$message = $_SESSION[$this->config["session_prefix"].'_'."message"];
-		$_SESSION[$this->config["session_prefix"].'_'."message"] = "";
-		return $message;
+		if (isset($_SESSION[$this->config["session_prefix"].'_'."message"]))
+		{
+			$message = $_SESSION[$this->config["session_prefix"].'_'."message"];
+			$_SESSION[$this->config["session_prefix"].'_'."message"] = "";
+			return $message;
+		}
+		else
+		{
+			return NULL;
+		}
 	}
 
 	function Redirect($url, $permanent = false)
