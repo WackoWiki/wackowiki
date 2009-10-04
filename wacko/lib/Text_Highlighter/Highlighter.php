@@ -207,7 +207,7 @@ class Text_Highlighter
 			return PEAR::raiseError('Highlighter for ' . $lang . ' not found');
 		}
 
-		$obj =& new $classname($options);
+		$obj = new $classname($options);
 
 		return $obj;
 	}
@@ -361,7 +361,7 @@ class Text_Highlighter
 	{
 		if (!($this->_renderer)) {
 			include_once(dirname(__FILE__).'/Highlighter/Renderer/Html.php');
-			$this->_renderer =& new Text_Highlighter_Renderer_Html($this->_options);
+			$this->_renderer = new Text_Highlighter_Renderer_Html($this->_options);
 		}
 		$this->_state = -1;
 		$this->_pos = 0;

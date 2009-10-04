@@ -35,10 +35,10 @@ class SafeHTML
 	var $singleTags = array('area', 'br', 'img', 'input', 'hr', 'wbr', );
 
 	var $deleteTags = array(
-  'applet', 'base',   'basefont', 'bgsound', 'blink',  'body', 
-  'embed',  'frame',  'frameset', 'head', 'html',   'ilayer', 
-  'iframe', 'layer',  'link',  'meta', 'object', 'style', 
-  'title',  'script', 
+  'applet', 'base',   'basefont', 'bgsound', 'blink',  'body',
+  'embed',  'frame',  'frameset', 'head', 'html',   'ilayer',
+  'iframe', 'layer',  'link',  'meta', 'object', 'style',
+  'title',  'script',
 	);
 
 	var $deleteTagsContent = array('script', 'style', 'title', 'xml', );
@@ -46,41 +46,41 @@ class SafeHTML
 	var $protocolFiltering = 'white';
 
 	var $blackProtocols = array(
-  'about',   'chrome',  'data',    'disk',  'hcp',  
-  'help', 'javascript', 'livescript', 'lynxcgi',  'lynxexec', 
-  'ms-help', 'ms-its',  'mhtml',   'mocha', 'opera',   
-  'res',  'resource',   'shell',   'vbscript', 'view-source', 
-  'vnd.ms.radio',    'wysiwyg', 
+  'about',   'chrome',  'data',    'disk',  'hcp',
+  'help', 'javascript', 'livescript', 'lynxcgi',  'lynxexec',
+  'ms-help', 'ms-its',  'mhtml',   'mocha', 'opera',
+  'res',  'resource',   'shell',   'vbscript', 'view-source',
+  'vnd.ms.radio',    'wysiwyg',
 	);
 
 	var $whiteProtocols = array(
-  'ed2k',   'file', 'ftp',  'gopher', 'http',  'https', 
-  'irc',    'mailto', 'news', 'nntp', 'telnet', 'webcal', 
+  'ed2k',   'file', 'ftp',  'gopher', 'http',  'https',
+  'irc',    'mailto', 'news', 'nntp', 'telnet', 'webcal',
   'xmpp', 'callto',
 	);
 
 	var $protocolAttributes = array(
-  'action', 'background', 'codebase', 'dynsrc', 'href', 'lowsrc', 'src', 
+  'action', 'background', 'codebase', 'dynsrc', 'href', 'lowsrc', 'src',
 	);
 
 	var $cssKeywords = array(
-  'absolute', 'behavior',    'behaviour',   'content', 'expression', 
+  'absolute', 'behavior',    'behaviour',   'content', 'expression',
   'fixed', 'include-source', 'moz-binding',
 	);
 
 	var $noClose = array();
 
 	var $closeParagraph = array(
-  'address', 'blockquote', 'center', 'dd',   'dir',    'div', 
-  'dl',   'dt',   'h1',  'h2',   'h3',  'h4', 
-  'h5',   'h6',   'hr',  'isindex', 'listing',   'marquee', 
-  'menu', 'multicol',   'ol',  'p',    'plaintext', 'pre', 
-  'table',   'ul',   'xmp', 
+  'address', 'blockquote', 'center', 'dd',   'dir',    'div',
+  'dl',   'dt',   'h1',  'h2',   'h3',  'h4',
+  'h5',   'h6',   'hr',  'isindex', 'listing',   'marquee',
+  'menu', 'multicol',   'ol',  'p',    'plaintext', 'pre',
+  'table',   'ul',   'xmp',
 	);
 
 	var $tableTags = array(
-  'caption', 'col', 'colgroup', 'tbody', 'td', 'tfoot', 'th', 
-  'thead',   'tr', 
+  'caption', 'col', 'colgroup', 'tbody', 'td', 'tfoot', 'th',
+  'thead',   'tr',
 	);
 
 	var $listTags = array('dir', 'menu', 'ol', 'ul', 'dl', );
@@ -135,7 +135,7 @@ class SafeHTML
 				}
 
 				if ($name == 'style') {
-					 
+
 					// removes insignificant backslahes
 					$value = str_replace("\\", '', $value);
 
@@ -146,7 +146,7 @@ class SafeHTML
 						if ($_value == $value) break;
 						$value = $_value;
 					}
-					 
+
 					// replace all & to &amp;
 					$value = str_replace('&amp;', '&', $value);
 					$value = str_replace('&', '&amp;', $value);
@@ -245,7 +245,7 @@ class SafeHTML
 		if ($name == 'li') {
 			array_push($this->_liStack, $this->_listScope);
 		}
-		 
+
 		$this->_xhtml .= '<' . $name;
 		$this->_writeAttrs($attrs);
 		$this->_xhtml .= '>';
@@ -345,7 +345,7 @@ class SafeHTML
 		$doc = $this->repackUTF7($doc);
 
 		// Instantiate the parser
-		$parser=& new XML_HTMLSax3();
+		$parser= new XML_HTMLSax3();
 
 		// Set up the parser
 		$parser->set_object($this);
