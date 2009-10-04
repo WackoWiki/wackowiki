@@ -7,7 +7,7 @@
 $this->UseClass("paragrafica", "formatters/classes/");
 
 // we got pure HTML on input.
-$para = &new paragrafica( $this );
+$para = new paragrafica( $this );
 $result = $para->correct($text);
 $this->SetTocArray($para->toc);
 

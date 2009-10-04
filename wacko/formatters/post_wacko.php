@@ -2,7 +2,7 @@
 
 $this->UseClass("post_wacko", "formatters/classes/");
 
-$parser = &new post_wacko($this, $options);
+$parser = new post_wacko($this, $options);
 
 $text = preg_replace_callback("/(<!--link:begin-->(\S+?)([^\n]*?)==([^\n]*?)<!--link:end-->|".
 #							  "<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->|".

@@ -61,7 +61,7 @@ if (!class_exists("preformatter"))
 	}
 }
 
-$parser = &new preformatter($this);
+$parser = new preformatter($this);
 
 $text = preg_replace_callback($parser->PREREGEXP, array(&$parser, "precallback"), $text);
 

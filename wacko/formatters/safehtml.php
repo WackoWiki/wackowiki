@@ -2,7 +2,7 @@
 
 $this->UseClass("safehtml", "lib/safehtml/");
 
-$safehtml =& new safehtml();
+$safehtml = new safehtml();
 echo ($safehtml->parse($text));
 
 ?>
