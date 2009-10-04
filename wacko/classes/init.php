@@ -526,7 +526,7 @@ class Init
 		if ($this->cache == false || $op == false)
 		{
 			require("classes/cache.php");
-			return $this->cache = &new Cache($this->config["cache_dir"], $this->config["cache_ttl"]);
+			return $this->cache = new Cache($this->config["cache_dir"], $this->config["cache_ttl"]);
 		}
 		else if ($this->cache == true && $op == "check")
 		{
@@ -573,7 +573,7 @@ class Init
 			if ($this->dblink == false) die("Error starting WackoWiki engine: no database connection established.");
 
 			require("classes/wacko.php");
-			$this->engine = &new Wacko($this->config, $this->dblink);
+			$this->engine = new Wacko($this->config, $this->dblink);
 			$this->engine->headerCount = 0;
 
 			if ($this->cache == true)
