@@ -41,7 +41,7 @@ $lang = array(
 "Problem" => "Problem",
 "NotePermissions" => "Instalator spr&#243;buje zapisa&#263; dane z konfiguracji do pliku <tt>config.inc.php</tt>, umieszczonego w katalogu WackoWiki. Aby to si&#281; uda&#322;o, musisz mie&#263; pewno&#347;&#263;, &#380;e serwer posiada prawo zapisu do tego pliku! Je&#380;eli nie mo&#380;esz tego zrobi&#263;, b&#281;dziesz musia&#322; edytowa&#263; plik r&#281;cznie (instalator powie Ci jak).<br /><br />Zagl&#261;dnij na <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a> po wi&#281;cej informacji.",
 "ErrorPermissions" => "It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly.  You will be prompted later in the installation process to manually configure the required file permissions on your server.",
-"ErrorMinPHPVersion" => "The PHP Version must be greater than <strong>4.3.3</strong>, your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.",
+"ErrorMinPHPVersion" => "The PHP Version must be greater than <strong>5.1.0</strong>, your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.",
 "Ready" => "Congratulations, it appears that your server is capable of running WackoWiki.  The next few pages will take you through the configuration process.",
 
 /*
