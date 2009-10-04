@@ -56,6 +56,7 @@ define("WACKO_VERSION",					"R4.3.rc2");
 define("XML_HTMLSAX3",					"lib/HTMLSax3/");
 #define('XML_HTMLSAX3', 					dirname(__FILE__)."/lib/HTMLSax3/");
 define("ACTIONS4DIFF", "a, anchor, toc"); //allowed actions in DIFF
+define("PHP_MIN_VERSION", "5.1.0"); //minimum required PHP version
 
 class Init
 {
@@ -84,7 +85,7 @@ class Init
 		else
 			ob_start("ob_gzhandler");
 
-		if (!isset($_REQUEST)) die('$_REQUEST[] not found. WackoWiki requires PHP 4.3.3 or higher!');
+		if (!isset($_REQUEST)) die('$_REQUEST[] not found. WackoWiki requires PHP 5.1.0 or higher!');
 
 		// Check for function because it is deprecated in PHP 5.3 and removed in PHP 6
 		if (function_exists("set_magic_quotes_runtime"))

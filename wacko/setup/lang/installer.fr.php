@@ -41,7 +41,7 @@ $lang = array(
 "Problem" => "Problème",
 "NotePermissions" => "Cet installeur va tenter d'écrire les données de configuration dans le fichier <tt>config.inc.php</tt>, dans votre répertoire WackoWiki. Pour celà assurer-vous que le serveur http ait le droit d'écrire dans ce répertoire.  Sinon, vous devrez éditer ce fichier manuellement&nbsp;; l'installeur vous indiquera comment faire.<br /><br />Voir <a href=\"http://wackowiki.org/Doc/Francophone/InstallationEtMiseAJour\" target=\"_blank\">WackoWiki:Doc/Francophone/InstallationEtMiseAJour</a> pour les détails.",
 "ErrorPermissions" => "L'installeur ne semble pas autorisé à attribuer les droits sur les fichiers de manière à ce que  WackoWiki fonctionne correctement.  On vous demandera ultérieurement d'effectuer vous-même de le faire vous-même.",
-"ErrorMinPHPVersion" => "La version de PHP doit être supérieure à <strong>4.3.3</strong> et votre serveur semble fonctionner avec une version antérieure.  Vous devez mettre à niveau PHP pour que WackoWiki fonctionne correctement.",
+"ErrorMinPHPVersion" => "La version de PHP doit être supérieure à <strong>5.1.0</strong> et votre serveur semble fonctionner avec une version antérieure.  Vous devez mettre à niveau PHP pour que WackoWiki fonctionne correctement.",
 "Ready" => "Félicitations, votre serveur semble capable de faire fonctionner WackoWiki.  Les quelques pages qui suivent vous guideront dans le processus de configuration.",
 
 /*
