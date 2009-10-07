@@ -383,6 +383,11 @@ color:#AAA;
 padding-bottom:20px;
 }
 
+#pageedit form textarea {
+	width: 100%;
+	height: 400px;
+}
+
 .textarea {
 height:400px;
 width:100%;

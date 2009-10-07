@@ -1,0 +1,8 @@
+@import "wacko.css";
+@import "layout.css";
+@import "fontdesign.css";
+
+img {
+	border-width: 0px;
+	vertical-align: middle;
+}
