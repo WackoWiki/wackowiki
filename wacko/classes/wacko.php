@@ -2512,10 +2512,14 @@ class Wacko
 	// COMMENTS
 	function LoadComments($page_id)
 	{
-		return $this->LoadAll(
-				"SELECT * FROM ".$this->config["table_prefix"]."pages ".
-				"WHERE comment_on_id = '".quote($this->dblink, $page_id)."' ".
-				"ORDER BY time");
+		// avoid results if $page_id is 0 (page does not exists)
+		if ($page_id)
+		{
+			return $this->LoadAll(
+					"SELECT * FROM ".$this->config["table_prefix"]."pages ".
+					"WHERE comment_on_id = '".quote($this->dblink, $page_id)."' ".
+					"ORDER BY time");
+		}
 	}
 
 	// ACCESS CONTROL
