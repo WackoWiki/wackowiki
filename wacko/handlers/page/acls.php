@@ -97,8 +97,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			$pages = $this->LoadAll("
 				SELECT ".$this->pages_meta." ".
 				"FROM ".$this->config["table_prefix"]."pages ".
-				"WHERE (supertag = '".quote($this->dblink, $this->tag)."'".
-				" OR supertag LIKE '".quote($this->dblink, $this->tag."/%")."'".
+				"WHERE (supertag = '".quote($this->dblink, $this->supertag)."'".
+				" OR supertag LIKE '".quote($this->dblink, $this->supertag."/%")."'".
 				" OR comment_on_id = '".quote($this->dblink, $this->GetPageId())."'".
 				" OR comment_on_id LIKE '".quote($this->dblink, $this->tag."/%")."'".
 					") AND owner = '".quote($this->dblink, $this->GetUserName())."'");
