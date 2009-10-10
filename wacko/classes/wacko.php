@@ -743,7 +743,7 @@ class Wacko
 
 	function GetCachedPage($tag, $metadataonly = 0)
 	{
-		if (isset( $this->pageCache[$tag] ))
+		if (isset($this->pageCache[$tag]))
 		{
 			if ($this->pageCache[$tag]["mdonly"] == 0 || $metadataonly == $this->pageCache[$tag]["mdonly"])
 			{

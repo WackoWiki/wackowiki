@@ -61,11 +61,12 @@ class Cache
 		if (!@file_exists($filename))
 			return false;
 
-		if ((time() - @filemtime($filename)) > $this->cache_ttl)
+		if ((time() - ($timestamp = @filemtime($filename))) > $this->cache_ttl)
 			return false;
 
 		$fp = fopen($filename, "r");
 		$contents = fread($fp, filesize($filename));
+		$contents	= "<!-- WackoWiki Caching Engine: page cached at ".date('Y-m-d H:i:s', $timestamp).", contents follows -->\n".$contents;
 		fclose($fp);
 
 		return $contents;
@@ -78,7 +79,7 @@ class Cache
 		$this->Log("ConstructID page=".$page);
 		$this->Log("ConstructID md5=".md5($page."_".$method."_".$query));
 
-		$filename = $this->cache_dir.CACHE_PAGE_DIR.md5($page)."_".$method."_".$query;
+		$filename = $this->cache_dir.CACHE_PAGE_DIR.md5($page."_".$method."_".$query);
 		return $filename;
 	}
 
@@ -271,7 +272,7 @@ class Cache
 
 	function GetMicroTime()
 	{
-		list($usec, $sec) = explode(" ",microtime());
+		list($usec, $sec) = explode(" ", microtime());
 		return ((float)$usec + (float)$sec);
 	}
 
