@@ -1604,7 +1604,7 @@ class Wacko
 
 		if (preg_match("/^[\.\-".$this->language["ALPHANUM_P"]."]+\.(gif|jpg|jpe|jpeg|png)$/i", $text))
 		{
-			$imlink = $this->config["base_url"]."/images/".$text;
+			$imlink = $this->config["root_url"]."/images/".$text;
 		}
 		else if (preg_match("/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i", preg_replace("/<\/?nobr>/", "" ,$text)))
 		{
@@ -1629,7 +1629,7 @@ class Wacko
 		{
 			// image
 			$text = preg_replace("/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/", "" ,$text);
-			return "<img src=\"".$this->config["base_url"]."/images/".$tag."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." />";
+			return "<img src=\"".$this->config["root_url"]."/images/".$tag."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." />";
 		}
 		else if (preg_match("/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i", $tag))
 		{
@@ -1695,14 +1695,14 @@ class Wacko
 				if (is_array($desc))
 				{
 					$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
-					$url = $this->config["base_url"].$this->config["upload_path"]."/".$thing;
+					$url = $this->config["root_url"].$this->config["upload_path"]."/".$thing;
 					$icon = $this->GetTranslation("fileicon");
 					$imlink = false;
 					$tpl = "localfile";
 					if ($desc["picture_w"] && !$noimg)
 					{
 						if (!$text) $text = $title;
-						return "<img src=\"".$this->config["base_url"].$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
+						return "<img src=\"".$this->config["root_url"].$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
 					}
 				}
 			}
@@ -1714,14 +1714,14 @@ class Wacko
 				if (is_array($desc))
 				{
 					$title = $desc["description"]." (".ceil($desc["filesize"] / 1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
-					$url = $this->config["base_url"].$this->config["upload_path"].$thing;
+					$url = $this->config["root_url"].$this->config["upload_path"].$thing;
 					$icon = $this->GetTranslation("fileicon");
 					$imlink = false;
 					$tpl = "localfile";
 					if ($desc["picture_w"] && !$noimg)
 					{
 						if (!$text) $text = $title;
-						return "<img src=\"".$this->config["base_url"].$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
+						return "<img src=\"".$this->config["root_url"].$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
 					}
 				}
 				else //404
@@ -2863,13 +2863,13 @@ class Wacko
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
 		$xml .= "<title>".$this->config["wacko_name"].$this->GetTranslation("RecentChangesTitleXML")."</title>\n";
-		$xml .= "<link>".$this->config["base_url"]."</link>\n";
+		$xml .= "<link>".$this->config["root_url"]."</link>\n";
 		$xml .= "<description>".$this->GetTranslation("RecentChangesXML").$this->config["wacko_name"]." </description>\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
 		$xml .= "<title>".$this->config["wacko_name"].$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->config["base_url"]."</link>\n";
-		$xml .= "<url>".$this->config["base_url"]."files/wacko4.gif"."</url>\n";
+		$xml .= "<link>".$this->config["root_url"]."</link>\n";
+		$xml .= "<url>".$this->config["root_url"]."files/wacko4.gif"."</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
@@ -2911,13 +2911,13 @@ class Wacko
 		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
 		$xml .= "<title>".$this->config["wacko_name"].$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->config["base_url"]."</link>\n";
+		$xml .= "<link>".$this->config["root_url"]."</link>\n";
 		$xml .= "<description>".$this->GetTranslation("RecentCommentsXML").$this->config["wacko_name"]." </description>\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
 		$xml .= "<title>".$this->config["wacko_name"].$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->config["base_url"]."</link>\n";
-		$xml .= "<url>".$this->config["base_url"]."files/wacko4.gif"."</url>\n";
+		$xml .= "<link>".$this->config["root_url"]."</link>\n";
+		$xml .= "<url>".$this->config["root_url"]."files/wacko4.gif"."</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
@@ -3286,7 +3286,7 @@ class Wacko
 		if (is_array($user) && $user["options"]["theme"])
 		{
 			$this->config["theme"] = $user["options"]["theme"];
-			$this->config["theme_url"]=$this->config["base_url"]."themes/".$this->config["theme"]."/";
+			$this->config["theme_url"] = $this->config["root_url"]."themes/".$this->config["theme"]."/";
 		}
 
 		if (!$this->config["multilanguage"])

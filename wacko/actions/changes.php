@@ -16,7 +16,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 	$count = 0;
 	if ($root == "" && !(int)$noxml)
 	{
-		echo "<a href=\"".$this->GetConfigValue("base_url")."xml/recentchanges_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
+		echo "<a href=\"".$this->GetConfigValue("root_url")."xml/recentchanges_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
 	}
 
 	echo "<ul>\n";
@@ -39,14 +39,14 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 			if ($day != $curday)
 			{
 				if ($curday)
-				{	
+				{
 					print("</ul>\n<br /></li>\n");
 				}
 
 				print("<li><b>$day:</b>\n<ul>\n");
 				$curday = $day;
 			}
-			
+
 			if ($page["edit_note"])
 			{
 				$edit_note = " <span class=\"editnote\">[".$page["edit_note"]."]</span>";
@@ -60,7 +60,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 			print("<li><span class=\"dt\">".$time."</span> &mdash; (".
 			$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".
 			$this->Link( "/".$page["tag"], "", $page["tag"] )." . . . . . . . . . . . . . . . . <small>".
-			($this->IsWikiName($page["user"]) 
+			($this->IsWikiName($page["user"])
 				? $this->Link("/".$page["user"],"",$page["user"])
 				: $page["user"]).
 			$edit_note.

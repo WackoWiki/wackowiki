@@ -228,7 +228,7 @@ if ($_POST)
 ?>
 <label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
 <br />
-<img src="<?php echo $this->GetConfigValue("base_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("base_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
+<img src="<?php echo $this->GetConfigValue("root_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("root_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
 <br />
 <input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
 <br />
@@ -248,7 +248,7 @@ if ($_POST)
 		?>if (AutoComplete) { wEaC = new AutoComplete( wE, "<?php echo $this->href("edit");?>" ); }<?php
 		}
 ?>
-		wE.init('postText','WikiEdit','edname-w','<?php echo $this->GetConfigValue("base_url");?>images/wikiedit/');
+		wE.init('postText','WikiEdit','edname-w','<?php echo $this->GetConfigValue("root_url");?>images/wikiedit/');
 	</script>
 	<input name="save" type="submit" value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
 	&nbsp;
