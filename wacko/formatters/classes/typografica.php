@@ -78,8 +78,8 @@ class typografica
 	function typografica ( &$wacko )
 	{
 		$this->wacko = &$wacko;
-		$this->Indent1 = "<img src=".$wacko->config["base_url"].$this->Indent1;
-		$this->Indent2 = "<img src=".$wacko->config["base_url"].$this->Indent2;
+		$this->Indent1 = "<img src=".$wacko->config["root_url"].$this->Indent1;
+		$this->Indent2 = "<img src=".$wacko->config["root_url"].$this->Indent2;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
