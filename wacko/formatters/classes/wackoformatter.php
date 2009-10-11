@@ -21,151 +21,151 @@ class WackoFormatter
 	var $cols = 0;
 	var $z_gif = "&nbsp;";
 	var $colors = array(
-   "indianred" => "indianred" ,
-   "lightcoral" => "lightcoral" ,
-   "orangered" => "orangered" ,
-   "crimson" => "crimson" ,
-   "darkred" => "darkred" ,
-   "pink" => "pink" ,
-   "hotpink" => "hotpink" ,
-   "palevioletred" => "palevioletred" ,
-   "khaki" => "khaki" ,
-   "lightgoldenrodyellow" => "lightgoldenrodyellow" ,
-   "lemonchiffon" => "lemonchiffon" ,
-   "gold" => "gold" ,
-   "moccasin" => "moccasin" ,
-   "cyan" => "cyan" ,
-   "aquamarine" => "aquamarine" ,
-   "mediumturquoise" => "mediumturquoise" ,
-   "cadetblue" => "cadetblue" ,
-   "lightcyan" => "lightcyan" ,
-   "powderblue" => "powderblue" ,
-   "steelblue" => "steelblue" ,
-   "skyblue" => "skyblue" ,
-   "deepskyblue" => "deepskyblue" ,
-   "royalblue" => "royalblue" ,
-   "dodgerblue" => "dodgerblue" ,
-   "mediumblue" => "mediumblue" ,
-   "navy" => "navy" ,
-   "lightsalmon" => "lightsalmon" ,
-   "darkorange" => "darkorange" ,
-   "tomato" => "tomato" ,
-   "aquamarine" => "aquamarine" ,
-   "springgreen" => "springgreen" ,
-   "greenyellow" => "greenyellow" ,
-   "lawngreen" => "lawngreen" ,
-   "lightgreen" => "lightgreen" ,
-   "limegreen" => "limegreen" ,
-   "darkseagreen" => "darkseagreen" ,
-   "seagreen" => "seagreen" ,
-   "olivedrab" => "olivedrab" ,
-   "darkolivegreen" => "darkolivegreen" ,
-   "mediumaquamarine" => "mediumaquamarine" ,
-   "lightseagreen" => "lightseagreen" ,
-   "teal" => "teal" ,
-   "thistle" => "thistle" ,
-   "violet" => "violet" ,
-   "magenta" => "magenta" ,
-   "mediumorchid" => "mediumorchid" ,
-   "blueviolet" => "blueviolet" ,
-   "mediumpurple" => "mediumpurple" ,
-   "purple" => "purple" ,
-   "darkslateblue" => "darkslateblue" ,
-   "honeydew" => "honeydew" ,
-   "azure" => "azure" ,
-   "ghostwhite" => "ghostwhite" ,
-   "lavenderblush" => "lavenderblush" ,
-   "antiquewhite" => "antiquewhite" ,
-   "snow" => "snow" ,
-   "beige" => "beige" ,
-   "oldlace" => "oldlace" ,
-   "ivory" => "ivory" ,
-   "lightgrey" => "lightgrey" ,
-   "darkgray" => "darkgray" ,
-   "dimgray" => "dimgray" ,
-   "lightslategray" => "lightslategray" ,
-   "cornsilk" => "cornsilk" ,
-   "bisque" => "bisque" ,
-   "wheat" => "wheat" ,
-   "goldenrod" => "goldenrod" ,
-   "peru" => "peru" ,
-   "maroon" => "maroon" ,
-   "brown" => "brown" ,
-   "darkred" => "darkred" ,
-   "tan" => "tan" ,
-   "black" => "black" ,
-   "darksalmon" => "darksalmon" ,
-   "salmon" => "salmon" ,
-   "red" => "red" ,
-   "firebrick" => "firebrick" ,
-   "mediumvioletred" => "mediumvioletred" ,
-   "lightpink" => "lightpink" ,
-   "deeppink" => "deeppink" ,
-   "darkkhaki" => "darkkhaki" ,
-   "palegoldenrod" => "palegoldenrod" ,
-   "lightyellow" => "lightyellow" ,
-   "yellow" => "yellow" ,
-   "papayawhip" => "papayawhip" ,
-   "peachpuff" => "peachpuff" ,
-   "aqua" => "aqua" ,
-   "turquoise" => "turquoise" ,
-   "darkturquoise" => "darkturquoise" ,
-   "slategray" => "slategray" ,
-   "paleturquoise" => "paleturquoise" ,
-   "lightsteelblue" => "lightsteelblue" ,
-   "lightblue" => "lightblue" ,
-   "lightskyblue" => "lightskyblue" ,
-   "cornflowerblue" => "cornflowerblue" ,
-   "mediumslateblue" => "mediumslateblue" ,
-   "blue" => "blue" ,
-   "darkblue" => "darkblue" ,
-   "midnightblue" => "midnightblue" ,
-   "orange" => "orange" ,
-   "coral" => "coral" ,
-   "orangered" => "orangered" ,
-   "mediumspringgreen" => "mediumspringgreen" ,
-   "palegreen" => "palegreen" ,
-   "chartreuse" => "chartreuse" ,
-   "lime" => "lime" ,
-   "yellowgreen" => "yellowgreen" ,
-   "mediumseagreen" => "mediumseagreen" ,
-   "forestgreen" => "forestgreen" ,
-   "green" => "green" ,
-   "olive" => "olive" ,
-   "darkgreen" => "darkgreen" ,
-   "turquoise" => "turquoise" ,
-   "darkcyan" => "darkcyan" ,
-   "lavender" => "lavender" ,
-   "plum" => "plum" ,
-   "fuchsia" => "fuchsia" ,
-   "orchid" => "orchid" ,
-   "darkorchid" => "darkorchid" ,
-   "darkviolet" => "darkviolet" ,
-   "slateblue" => "slateblue" ,
-   "darkmagenta" => "darkmagenta" ,
-   "indigo" => "indigo" ,
-   "mintcream" => "mintcream" ,
-   "aliceblue" => "aliceblue" ,
-   "whitesmoke" => "whitesmoke" ,
-   "mistyrose" => "mistyrose" ,
-   "seashell" => "seashell" ,
-   "white" => "white" ,
-   "linen" => "linen" ,
-   "floralwhite" => "floralwhite" ,
-   "gainsboro" => "gainsboro" ,
-   "silver" => "silver" ,
-   "gray" => "gray" ,
-   "darkslategray" => "darkslategray" ,
-   "slategray" => "slategray" ,
-   "blanchedalmond" => "blanchedalmond" ,
-   "navajowhite" => "navajowhite" ,
-   "sandybrown" => "sandybrown" ,
-   "darkgoldenrod" => "darkgoldenrod" ,
-   "chocolate" => "chocolate" ,
-   "saddlebrown" => "saddlebrown" ,
-   "sienna" => "sienna" ,
-   "burlywood" => "burlywood" ,
-   "rosybrown" => "rosybrown" ,
+	"indianred" => "indianred" ,
+	"lightcoral" => "lightcoral" ,
+	"orangered" => "orangered" ,
+	"crimson" => "crimson" ,
+	"darkred" => "darkred" ,
+	"pink" => "pink" ,
+	"hotpink" => "hotpink" ,
+	"palevioletred" => "palevioletred" ,
+	"khaki" => "khaki" ,
+	"lightgoldenrodyellow" => "lightgoldenrodyellow" ,
+	"lemonchiffon" => "lemonchiffon" ,
+	"gold" => "gold" ,
+	"moccasin" => "moccasin" ,
+	"cyan" => "cyan" ,
+	"aquamarine" => "aquamarine" ,
+	"mediumturquoise" => "mediumturquoise" ,
+	"cadetblue" => "cadetblue" ,
+	"lightcyan" => "lightcyan" ,
+	"powderblue" => "powderblue" ,
+	"steelblue" => "steelblue" ,
+	"skyblue" => "skyblue" ,
+	"deepskyblue" => "deepskyblue" ,
+	"royalblue" => "royalblue" ,
+	"dodgerblue" => "dodgerblue" ,
+	"mediumblue" => "mediumblue" ,
+	"navy" => "navy" ,
+	"lightsalmon" => "lightsalmon" ,
+	"darkorange" => "darkorange" ,
+	"tomato" => "tomato" ,
+	"aquamarine" => "aquamarine" ,
+	"springgreen" => "springgreen" ,
+	"greenyellow" => "greenyellow" ,
+	"lawngreen" => "lawngreen" ,
+	"lightgreen" => "lightgreen" ,
+	"limegreen" => "limegreen" ,
+	"darkseagreen" => "darkseagreen" ,
+	"seagreen" => "seagreen" ,
+	"olivedrab" => "olivedrab" ,
+	"darkolivegreen" => "darkolivegreen" ,
+	"mediumaquamarine" => "mediumaquamarine" ,
+	"lightseagreen" => "lightseagreen" ,
+	"teal" => "teal" ,
+	"thistle" => "thistle" ,
+	"violet" => "violet" ,
+	"magenta" => "magenta" ,
+	"mediumorchid" => "mediumorchid" ,
+	"blueviolet" => "blueviolet" ,
+	"mediumpurple" => "mediumpurple" ,
+	"purple" => "purple" ,
+	"darkslateblue" => "darkslateblue" ,
+	"honeydew" => "honeydew" ,
+	"azure" => "azure" ,
+	"ghostwhite" => "ghostwhite" ,
+	"lavenderblush" => "lavenderblush" ,
+	"antiquewhite" => "antiquewhite" ,
+	"snow" => "snow" ,
+	"beige" => "beige" ,
+	"oldlace" => "oldlace" ,
+	"ivory" => "ivory" ,
+	"lightgrey" => "lightgrey" ,
+	"darkgray" => "darkgray" ,
+	"dimgray" => "dimgray" ,
+	"lightslategray" => "lightslategray" ,
+	"cornsilk" => "cornsilk" ,
+	"bisque" => "bisque" ,
+	"wheat" => "wheat" ,
+	"goldenrod" => "goldenrod" ,
+	"peru" => "peru" ,
+	"maroon" => "maroon" ,
+	"brown" => "brown" ,
+	"darkred" => "darkred" ,
+	"tan" => "tan" ,
+	"black" => "black" ,
+	"darksalmon" => "darksalmon" ,
+	"salmon" => "salmon" ,
+	"red" => "red" ,
+	"firebrick" => "firebrick" ,
+	"mediumvioletred" => "mediumvioletred" ,
+	"lightpink" => "lightpink" ,
+	"deeppink" => "deeppink" ,
+	"darkkhaki" => "darkkhaki" ,
+	"palegoldenrod" => "palegoldenrod" ,
+	"lightyellow" => "lightyellow" ,
+	"yellow" => "yellow" ,
+	"papayawhip" => "papayawhip" ,
+	"peachpuff" => "peachpuff" ,
+	"aqua" => "aqua" ,
+	"turquoise" => "turquoise" ,
+	"darkturquoise" => "darkturquoise" ,
+	"slategray" => "slategray" ,
+	"paleturquoise" => "paleturquoise" ,
+	"lightsteelblue" => "lightsteelblue" ,
+	"lightblue" => "lightblue" ,
+	"lightskyblue" => "lightskyblue" ,
+	"cornflowerblue" => "cornflowerblue" ,
+	"mediumslateblue" => "mediumslateblue" ,
+	"blue" => "blue" ,
+	"darkblue" => "darkblue" ,
+	"midnightblue" => "midnightblue" ,
+	"orange" => "orange" ,
+	"coral" => "coral" ,
+	"orangered" => "orangered" ,
+	"mediumspringgreen" => "mediumspringgreen" ,
+	"palegreen" => "palegreen" ,
+	"chartreuse" => "chartreuse" ,
+	"lime" => "lime" ,
+	"yellowgreen" => "yellowgreen" ,
+	"mediumseagreen" => "mediumseagreen" ,
+	"forestgreen" => "forestgreen" ,
+	"green" => "green" ,
+	"olive" => "olive" ,
+	"darkgreen" => "darkgreen" ,
+	"turquoise" => "turquoise" ,
+	"darkcyan" => "darkcyan" ,
+	"lavender" => "lavender" ,
+	"plum" => "plum" ,
+	"fuchsia" => "fuchsia" ,
+	"orchid" => "orchid" ,
+	"darkorchid" => "darkorchid" ,
+	"darkviolet" => "darkviolet" ,
+	"slateblue" => "slateblue" ,
+	"darkmagenta" => "darkmagenta" ,
+	"indigo" => "indigo" ,
+	"mintcream" => "mintcream" ,
+	"aliceblue" => "aliceblue" ,
+	"whitesmoke" => "whitesmoke" ,
+	"mistyrose" => "mistyrose" ,
+	"seashell" => "seashell" ,
+	"white" => "white" ,
+	"linen" => "linen" ,
+	"floralwhite" => "floralwhite" ,
+	"gainsboro" => "gainsboro" ,
+	"silver" => "silver" ,
+	"gray" => "gray" ,
+	"darkslategray" => "darkslategray" ,
+	"slategray" => "slategray" ,
+	"blanchedalmond" => "blanchedalmond" ,
+	"navajowhite" => "navajowhite" ,
+	"sandybrown" => "sandybrown" ,
+	"darkgoldenrod" => "darkgoldenrod" ,
+	"chocolate" => "chocolate" ,
+	"saddlebrown" => "saddlebrown" ,
+	"sienna" => "sienna" ,
+	"burlywood" => "burlywood" ,
+	"rosybrown" => "rosybrown" ,
 	);
 
 	function WackoFormatter( &$object )
@@ -249,7 +249,7 @@ class WackoFormatter
 		$callback = array( &$this, "wackoPreprocess");
 
 		if ($thing{0} == "~")
-			if ($thing{1} == "~") 
+			if ($thing{1} == "~")
 				return "~~".$this->WackoPreprocess(array(0, substr($thing, 2)));
 
 		// escaped text
@@ -418,56 +418,56 @@ class WackoFormatter
 			$this->br			= 1;
 			$this->intable		= true;
 			$this->intablebr	= false;
-			
+
 			$output		= "<tr class=\"userrow\">";
 			$cells		= split("\|", $matches[1]);
 			$count		= count($cells);
 			$count--;
-			
+
 			for ($i = 0; $i < $count; $i++)
 			{
 				$this->tdoldIndentLevel	= 0;
 				$this->tdindentClosers	= array();
-				
+
 				if ($cells[$i]{0} == "\n")
 					$cells[$i] = substr($cells[$i], 1);
-				
+
 				$output	.= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<th class=\"userhead\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$i])));
-				$output	.= $this->IndentClose();                                                   
+				$output	.= $this->IndentClose();
 				$output	.= "</th>";
 			}
 			if (($this->cols <> 0) and ($count < $this->cols))
 			{
 				$this->tdoldIndentLevel	= 0;
 				$this->tdindentClosers	= array();
-				
+
 				if ($cells[$i]{0} == "\n")
 					$cells[$count] = substr($cells[$count], 1);
-				
+
 				$output	.= str_replace("\177", '', str_replace("\177"."<br />\n", "", "<th class=\"userhead\" colspan=\"".($this->cols-$count + 1)."\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
 				$output	.= $this->IndentClose();
 				$output	.= "</th>";
 			}
 			else
-			{ 
+			{
 				$this->tdoldIndentLevel	= 0;
 				$this->tdindentClosers	= array();
-				
+
 				if ($cells[$i]{0} == "\n")
 					$cells[$count] = substr($cells[$count], 1);
-				
+
 				$output	.= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<th class=\"userhead\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
 				$output	.= $this->IndentClose();
 				$output	.= "</th>";
 			}
 			$output .= "</tr>";
-			
+
 			if ($this->cols	== 0)
 				$this->cols	= $count;
-			
+
 			$this->intablebr	= true;
 			$this->intable		= false;
-			
+
 			return $output;
 		}
 		//table row and cells
@@ -598,7 +598,7 @@ class WackoFormatter
 				substr($url, -4) == ".gif" ||
 				substr($url, -4) == ".png" ||
 				substr($url, -4) == ".jpe" ||
-				substr($url, -5) == ".jpeg") 
+				substr($url, -5) == ".jpeg")
 			{
 				return "<img src=\"".$matches[1]."\" />".$matches[2];
 			}
