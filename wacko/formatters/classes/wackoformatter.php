@@ -420,7 +420,7 @@ class WackoFormatter
 			$this->intablebr	= false;
 
 			$output		= "<tr class=\"userrow\">";
-			$cells		= split("\|", $matches[1]);
+			$cells		= preg_split("/\|/", $matches[1]);
 			$count		= count($cells);
 			$count--;
 
@@ -478,7 +478,7 @@ class WackoFormatter
 			$this->intablebr = false;
 
 			$output = "<tr class=\"userrow\">";
-			$cells = split("\|", $matches[1]);
+			$cells = preg_split("/\|/", $matches[1]);
 			$count = count($cells);
 			$count--;
 
