@@ -13,9 +13,14 @@ if ($user = $this->GetUser())
 
 	if($_GET["bydate"] == "true" || ($bydate && !isset($_GET["bydate"])))
 	{
-		print("<strong>".$this->GetTranslation("MyChangesTitle1")." (<a href=\"".$this->href("", $tag).($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bydate=false\">".$this->GetTranslation("OrderABC")."</a>).</strong><br /><br />\n");
+		print("<strong>".$this->GetTranslation("MyChangesTitle1")." (<a href=\"".$this->href("", $tag).($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."bydate=false\">".$this->GetTranslation("OrderABC")."</a>).</strong><br /><br />\n");
 
-		if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE user = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY time ASC, tag ASC", 1))
+		if ($pages = $this->LoadAll(
+		"SELECT tag, time ".
+		"FROM ".$this->config["table_prefix"]."pages ".
+		"WHERE user = '".quote($this->dblink, $this->GetUserName())."' ".
+			"AND tag NOT LIKE 'Comment%' ".
+		"ORDER BY time ASC, tag ASC", 1))
 		{
 			echo "<ul>\n";
 
@@ -57,7 +62,7 @@ if ($user = $this->GetUser())
 				if ($my_edits_count>=(int)$max) break;
 			}
 			echo "</ul>\n</li>\n</ul>\n";
-			
+
 			if ($my_edits_count == 0)
 			{
 				echo $this->GetTranslation("DidntEditAnyPage");
@@ -70,9 +75,14 @@ if ($user = $this->GetUser())
 	}
 	else
 	{
-		print("<strong>".$this->GetTranslation("MyChangesTitle2")." (<a href=\"".$this->href("", $tag).($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bydate=true\">".$this->GetTranslation("OrderChange")."</a>).</strong><br /><br />\n");
+		print("<strong>".$this->GetTranslation("MyChangesTitle2")." (<a href=\"".$this->href("", $tag).($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."bydate=true\">".$this->GetTranslation("OrderChange")."</a>).</strong><br /><br />\n");
 
-		if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE user = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY tag ASC, time DESC", 1))
+		if ($pages = $this->LoadAll(
+		"SELECT tag, time ".
+		"FROM ".$this->config["table_prefix"]."pages ".
+		"WHERE user = '".quote($this->dblink, $this->GetUserName())."' ".
+			"AND tag NOT LIKE 'Comment%' ".
+		"ORDER BY tag ASC, time DESC", 1))
 		{
 			echo "<ul>\n";
 
@@ -107,7 +117,7 @@ if ($user = $this->GetUser())
 				}
 			}
 			echo "</ul>\n</li>\n</ul>\n";
-			
+
 			if ($my_edits_count == 0)
 			{
 				echo $this->GetTranslation("DidntEditAnyPage");
