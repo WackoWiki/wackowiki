@@ -120,7 +120,7 @@ del.diff {
 .usertable td, .usertable th
 {
   border-width: 1px;
-  border-color: black;
+  border-color: #CCCCCC;
   border-style: solid;
   padding: 4px;
   vertical-align: top;
