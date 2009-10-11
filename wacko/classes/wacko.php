@@ -276,7 +276,7 @@ class Wacko
 
 	function LoadResource($lang)
 	{
-		if (!$this->resources[$lang])
+		if (!isset($this->resources[$lang]))
 		{
 			$resourcefile = "lang/wacko.".$lang.".php";
 			if (@file_exists($resourcefile)) include($resourcefile);
@@ -785,8 +785,9 @@ class Wacko
 	function CacheLinks()
 	{
 		if ($links = $this->LoadAll(
-		"SELECT * FROM ".$this->config["table_prefix"]."links ".
-		"WHERE from_tag='".quote($this->dblink, $this->GetPageTag())."'"))
+			"SELECT * ".
+			"FROM ".$this->config["table_prefix"]."links ".
+			"WHERE from_tag='".quote($this->dblink, $this->GetPageTag())."'"))
 		{
 			$cl = count($links);
 
