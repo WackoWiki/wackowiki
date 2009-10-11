@@ -70,7 +70,7 @@ else
 	print($this->FormOpen());
 	?>
 <input type="hidden" name="action" value="login" />
-<input type="hidden" name="goback" value="<?php echo stripslashes($_POST["goback"]);?>" />
+<input type="hidden" name="goback" value="<?php echo stripslashes($_GET["goback"]);?>" />
 <div class="cssform">
 	<h3><?php echo $this->GetTranslation("LoginWelcome"); ?></h3>
 	<?php
