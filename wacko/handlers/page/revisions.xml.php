@@ -38,7 +38,7 @@ if ($this->HasAccess("read"))
 
 				$xml .= "<item>\n";
 				$xml .= "<title>".$page["time"]."</title>\n";
-				$xml .= "<link>".$this->href("show").($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."time=".urlencode($page["time"])."</link>\n";
+				$xml .= "<link>".$this->href("show").($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."time=".urlencode($page["time"])."</link>\n";
 				$xml .= "<guid isPermaLink=\"true\">".$this->href("", $etag)."</guid>\n";
 
 				$_GET["a"] = $_GET["b"];

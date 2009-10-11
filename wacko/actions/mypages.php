@@ -10,9 +10,14 @@ if ($user = $this->GetUser())
 	if ($_GET["bydate"] == 1 || $bydate == 1)
 	{
 		print("<strong>".$this->GetTranslation("ListOwnedPages2").".</strong>");
-		print("<br /><small><strong>(<a href=\"".$this->href("", $tag)."\">".$this->GetTranslation("OrderABC")."</a>) (<a href=\"".$this->href("", $tag)."".($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bychange=1\">".$this->GetTranslation("OrderChange")."</a>) </strong></small><br /><br />\n");
+		print("<br /><small><strong>(<a href=\"".$this->href("", $tag)."\">".$this->GetTranslation("OrderABC")."</a>) (<a href=\"".$this->href("", $tag)."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."bychange=1\">".$this->GetTranslation("OrderChange")."</a>) </strong></small><br /><br />\n");
 
-		if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."revisions WHERE owner = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY time DESC, tag ASC", 1))
+		if ($pages = $this->LoadAll(
+		"SELECT tag, time ".
+		"FROM ".$this->config["table_prefix"]."revisions ".
+		"WHERE owner = '".quote($this->dblink, $this->GetUserName())."' ".
+			"AND tag NOT LIKE 'Comment%' ".
+		"ORDER BY time DESC, tag ASC", 1))
 		{
 			echo "<ul>\n";
 
@@ -59,9 +64,14 @@ if ($user = $this->GetUser())
 	else if ($_GET["bychange"] == 1 || $bychange==1)
 	{
 		print("<strong>".$this->GetTranslation("ListOwnedPages3")."</strong>.");
-		print("<br /><small><strong>(<a href=\"".$this->href("", $tag)."\">".$this->GetTranslation("OrderABC")."</a>) (<a href=\"".$this->href("", $tag)."".($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bydate=1\">".$this->GetTranslation("OrderDate")."</a>)</strong></small><br /><br />\n");
+		print("<br /><small><strong>(<a href=\"".$this->href("", $tag)."\">".$this->GetTranslation("OrderABC")."</a>) (<a href=\"".$this->href("", $tag)."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."bydate=1\">".$this->GetTranslation("OrderDate")."</a>)</strong></small><br /><br />\n");
 
-		if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE owner = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY time ASC, tag ASC", 1))
+		if ($pages = $this->LoadAll(
+		"SELECT tag, time ".
+		"FROM ".$this->config["table_prefix"]."pages ".
+		"WHERE owner = '".quote($this->dblink, $this->GetUserName())."' ".
+			"AND tag NOT LIKE 'Comment%' ".
+		"ORDER BY time ASC, tag ASC", 1))
 		{
 			echo "<ul>\n";
 
@@ -100,9 +110,14 @@ if ($user = $this->GetUser())
 	}
 	else {
 		print("<strong>".$this->GetTranslation("ListOwnedPages").".</strong>\n");
-		print("<br /><small><strong>(<a href=\"".$this->href("", $tag)."".($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bydate=1\">".$this->GetTranslation("OrderDate")."</a>) (<a href=\"".$this->href("", $tag)."".($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bychange=1\">".$this->GetTranslation("OrderChange")."</a>) </strong></small><br /><br />\n");
+		print("<br /><small><strong>(<a href=\"".$this->href("", $tag)."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."bydate=1\">".$this->GetTranslation("OrderDate")."</a>) (<a href=\"".$this->href("", $tag)."".($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bychange=1\">".$this->GetTranslation("OrderChange")."</a>) </strong></small><br /><br />\n");
 
-		if ($pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE owner = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY tag ASC", 1))
+		if ($pages = $this->LoadAll(
+		"SELECT tag, time ".
+		"FROM ".$this->config["table_prefix"]."pages ".
+		"WHERE owner = '".quote($this->dblink, $this->GetUserName())."' ".
+			"AND tag NOT LIKE 'Comment%' ".
+		"ORDER BY tag ASC", 1))
 		{
 			echo "<ul>\n";
 
