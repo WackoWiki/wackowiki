@@ -2065,14 +2065,15 @@ class Wacko
 	{
 		if ($user = $this->GetUser()) $show = $user["show_datetime"];
 		if (!isset($show)) $show = $this->config["show_datetime"];
-		if (!$show) $show = "1";
+		if (!isset($show)) $show = "1";
 		// TODO: double?
 		if ($show != "0" && $show != "0")
 		{
 			$_page = $this->LoadPage($tag, "", LOAD_CACHE, LOAD_META);
 			return ($this->config["rewrite_mode"] ? "?" : "&amp;").
 			"v=".base_convert($this->crc16(preg_replace("/[ :\-]/","",$_page["time"])),10,36);
-		} else return "";
+		}
+		else return "";
 	}
 
 	function crc16($string)
