@@ -107,7 +107,7 @@ if ($phrase)
 
 function getLineWithPhrase($phrase, $string, $cleanup)
 {
-	$lines = split("\n", $string);
+	$lines = explode("\n", $string);
 	$result = "";
 	foreach ($lines as $line)
 	{
