@@ -1,6 +1,6 @@
 <?php
 $themeResource = array(
-  "SettingsPage" => "Préférences",
+	"SettingsPage" => "Préférences",
 
 );
 ?>
