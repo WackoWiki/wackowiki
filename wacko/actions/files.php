@@ -14,6 +14,7 @@ if (!isset($order)) $order = "";
 if (!isset($global)) $global = "";
 if (!isset($tag)) $tag = "";
 if (!isset($owner)) $owner = "";
+if (!isset($page)) $page = "";
 if (!isset($pictures)) $pictures = "";
 
 $orderby = "filename ASC";
@@ -31,7 +32,7 @@ if (!$global)
 {
 	if ($page == "")	$page = $this->tag;
 	else				$page = $this->UnwrapLink($page);
-	
+
 	$can_view   = $this->HasAccess("read", $page) || $this->IsAdmin() || $this->UserIsOwner($page);
 	$can_delete = $this->IsAdmin() || $this->UserIsOwner($page);
 }
