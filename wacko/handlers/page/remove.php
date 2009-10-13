@@ -17,7 +17,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 	}
 	else
 	{
-		if ($_POST["delete"] == 1)
+		if (isset($_POST["delete"]) && $_POST["delete"] == 1)
 		{
 			if ($this->page["comment_on_id"])
 				$comment_on_id = $this->page["comment_on_id"];
