@@ -41,7 +41,9 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			}
 			if ($this->RemoveComments($this->tag))
 			{
-				$this->WriteRecentCommentsXML();
+				$this->UseClass('rss', 'classes/');
+				$xml = new RSS($this);
+				$xml->Comments();
 				print(str_replace("%1", $this->tag, $this->GetTranslation("CommentsRemoved"))."<br />\n");
 			}
 			if ($this->RemoveFiles($this->tag))
@@ -50,8 +52,10 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			}
 			if ($this->RemovePage($this->tag))
 			{
-				$this->WriteRecentChangesXML();
-				$this->WriteRecentCommentsXML();
+				$this->UseClass('rss', 'classes/');
+				$xml = new RSS($this);
+				$xml->Comments();
+				$xml->Changes();
 				print(str_replace("%1", $this->tag, $this->GetTranslation("PageRemoved"))."<br />\n");
 			}
 			if ($this->IsAdmin() && $_POST["revisions"] == 1 && !$comment_on_id)
