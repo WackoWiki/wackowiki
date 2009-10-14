@@ -16,9 +16,9 @@ function _parseQueryString()
 function _unescape($s)
 {
 	$s = preg_replace_callback(
-      '/% (?: u([A-F0-9]{1,4}) | ([A-F0-9]{1,2})) /sxi',
-      "_unescapeCallback",
-	$s
+		'/% (?: u([A-F0-9]{1,4}) | ([A-F0-9]{1,2})) /sxi',
+		"_unescapeCallback",
+		$s
 	);
 	return $s;
 }
@@ -49,8 +49,8 @@ function _unescapeCallback($p)
 
 // Getting a query
 _parseQueryString();
-$q     = $_GET["q"];
-$ta_id = $_GET["ta_id"];
+$q		= $_GET["q"];
+$ta_id	= $_GET["ta_id"];
 
 
 // 1. convert into supertag and unwrap
@@ -61,47 +61,54 @@ $supertag2 = $this->NpjTranslit( $q );
 // 2. going to DB two times
 $limit = 10;
 
-$pages1 = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".
-$this->config["table_prefix"]."pages WHERE ".
-            " supertag LIKE '".quote($this->dblink, $supertag1)."%' AND comment_on_id = '0' ORDER BY supertag ASC LIMIT $limit");
-$pages2 = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".
-$this->config["table_prefix"]."pages WHERE ".
-            " supertag LIKE '".quote($this->dblink, $supertag2)."%' AND comment_on_id = '0' ORDER BY supertag ASC LIMIT $limit");
+$pages1 = $this->LoadAll(
+	"SELECT ".$this->pages_meta." ".
+	"FROM ".$this->config["table_prefix"]."pages ".
+	"WHERE supertag LIKE '".quote($this->dblink, $supertag1)."%' ".
+		"AND comment_on_id = '0' ".
+	"ORDER BY supertag ASC LIMIT $limit");
+
+$pages2 = $this->LoadAll(
+	"SELECT ".$this->pages_meta." ".
+	"FROM ".$this->config["table_prefix"]."pages ".
+	"WHERE  supertag LIKE '".quote($this->dblink, $supertag2)."%' ".
+		"AND comment_on_id = '0' ".
+	"ORDER BY supertag ASC LIMIT $limit");
 
 // 3. stripping by rights
 $pages = array();
-$cnt=0;
+$cnt = 0;
 if ($pages1)
-foreach ($pages1 as $page)
-{
-	if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
-	else $access = true;
-	if ($access)
+	foreach ($pages1 as $page)
 	{
-		$pages[$page["tag"]] = $page;
-		$pages[$page["tag"]][">local"] = true;
-		$cnt++;
-	}
-
-	if ($cnt >= $limit) break;
-}
-if ($pages2)
-foreach ($pages2 as $page)
-{
-	if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
-	else $access = true;
-	if ($access)
-	{
-		if (!isset($pages[$page["tag"]]))
+		if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
+		else $access = true;
+		if ($access)
 		{
 			$pages[$page["tag"]] = $page;
-			$pages[$page["tag"]][">local"] = false;
+			$pages[$page["tag"]][">local"] = true;
 			$cnt++;
 		}
-	}
 
-	if ($cnt >= $limit) break;
-}
+		if ($cnt >= $limit) break;
+	}
+if ($pages2)
+	foreach ($pages2 as $page)
+	{
+		if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
+		else $access = true;
+		if ($access)
+		{
+			if (!isset($pages[$page["tag"]]))
+			{
+				$pages[$page["tag"]] = $page;
+				$pages[$page["tag"]][">local"] = false;
+				$cnt++;
+			}
+		}
+
+		if ($cnt >= $limit) break;
+	}
 
 // counting context
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
