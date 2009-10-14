@@ -78,7 +78,6 @@ if ($_POST)
 					{
 						//not the right word
 						$error = $this->GetTranslation("SpamAlert");
-						$this->SetMessage($this->GetTranslation("SpamAlert"));
 					}
 				}
 			}
@@ -88,36 +87,55 @@ if ($_POST)
 		if (!$error)
 		{
 			$body = str_replace("\r", "", $_POST["body"]);
+      }
 
-			// add page (revisions)
-			$body_r = $this->SavePage($this->tag, $body, $edit_note, $minor_edit);
+      // You're not allowed to have empty comments as they would be kinda pointless.
+      if (!$body && $this->page["comment_on_id"] != 0)
+      {
+         $error .= $this->GetTranslation("EmptyComment");
+      }
 
-			// log event
-			if ($this->page == false)
-			{
-				// new page created
-				$this->Log(4, str_replace("%1", $this->tag." ".$_POST["title"], $this->GetTranslation("LogPageCreated")));
-			}
-			else
-			{
-				// old page modified
-				$this->Log(6, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogPageEdited")));
-			}
+      $title = $this->page["title"];
+      if(isset($_POST["title"]))
+      {
+         $title = trim($_POST["title"]);
+      }
 
-			// now we render it internally so we can write the updated link table.
-			$this->ClearLinkTable();
-			$this->StartLinkTracking();
-			$dummy = $this->Format($body_r, "post_wacko");
-			$this->StopLinkTracking();
-			$this->WriteLinkTable();
-			$this->ClearLinkTable();
+      // add page (revisions)
+      $body_r = $this->SavePage($this->tag, $body, $edit_note, $minor_edit, $this->page["comment_on_id"], $title);
+
+      // log event
+      if ($this->page["comment_on_id"] != 0)
+         {
+            // comment modified
+            $this->Log(6, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogCommentEdited")));
+         }
+      else
+         {
+            if ($this->page == false)
+               {
+                  // new page created
+                  $this->Log(4, str_replace("%1", $this->tag." ".$_POST["title"], $this->GetTranslation("LogPageCreated")));
+               }
+            else
+               {
+                  // old page modified
+                  $this->Log(6, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogPageEdited")));
+               }
+
+            // now we render it internally so we can write the updated link table.
+            $this->ClearLinkTable();
+            $this->StartLinkTracking();
+            $dummy = $this->Format($body_r, "post_wacko");
+            $this->StopLinkTracking();
+            $this->WriteLinkTable();
+            $this->ClearLinkTable();
+         }
 
 			// forward
 			$this->pageCache[$this->supertag] = "";
 			$this->Redirect($this->href("", $this->tag).$this->AddDateTime($this->tag));
-		}
 	}
-
 	// saving blank document
 	else if ($_POST["body"] == "")
 	{
@@ -132,6 +150,7 @@ if ($_POST)
 	if (!$body = 		$_POST["body"]) 	$body 		= $this->page["body"];
 	if (isset($_POST["edit_note"]))			$edit_note	= $_POST["edit_note"];
 	if (isset($_POST["minor_edit"]))		$minor_edit	= $_POST["minor_edit"];
+	if (isset($_POST["title"]))		$title	= $_POST["title"];
 
 	{
 	// display form
@@ -198,21 +217,32 @@ if ($_POST)
 		$output .= "<textarea id=\"postText\" name=\"body\" rows=\"40\" cols=\"60\" class=\"TextArea\">";
 		$output .= htmlspecialchars($body)."</textarea><br />\n";
 
-		// edit note
-		if ($this->GetConfigValue("edit_summary") != 0)
+		// comment title
+		if ($this->page["comment_on_id"] != 0)
 		{
-			$output .= "<label for=\"edit_note\">".$this->GetTranslation("EditNote").":</label><br />";
-			$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
-			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br />";
-		}
-
-		// minor edit
-		if ($this->GetConfigValue("minor_edit") != 0)
-		{
-			$output .= "<input id=\"minor_edit\" type=\"checkbox\" value=\"1\" name=\"minor_edit\"/>";
-			$output .= "<label for=\"minor_edit\">".$this->GetTranslation("EditMinor")."</label>";
+			$output .= "<label for=\"addcomment_title\">".$this->GetTranslation("AddCommentTitle").":</label><br />";
+			$output .= "<input id=\"addcomment_title\" maxlength=\"100\" value=\"".htmlspecialchars($this->page["title"])."\" size=\"60\" name=\"title\" />";
 			$output .= "<br />";
 		}
+      else
+      {
+         // edit note
+         if ($this->GetConfigValue("edit_summary") != 0)
+         {
+            $output .= "<label for=\"edit_note\">".$this->GetTranslation("EditNote").":</label><br />";
+            $output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
+            $output .= "&nbsp;&nbsp;&nbsp;"; // "<br />";
+         }
+
+         // minor edit
+         if ($this->GetConfigValue("minor_edit") != 0)
+         {
+            $output .= "<input id=\"minor_edit\" type=\"checkbox\" value=\"1\" name=\"minor_edit\"/>";
+            $output .= "<label for=\"minor_edit\">".$this->GetTranslation("EditMinor")."</label>";
+            $output .= "<br />";
+         }
+      }
+
 		print($output);
 
 		// captcha code starts
