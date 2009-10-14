@@ -246,7 +246,7 @@ if ($this->page)
 					$del = "";
 					if ($this->IsAdmin() || $this->UserIsOwner($comment["tag"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageTag())))
 					{
-						print("<a href=\"".$this->href("remove", $comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/del.gif\" title=\"".$this->GetTranslation("DeleteCommentTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" align=\"right\" border=\"0\" /></a>");
+						print("<a href=\"".$this->href("remove", $comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/delete_comment.gif\" title=\"".$this->GetTranslation("DeleteCommentTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" align=\"right\" border=\"0\" /></a>");
 						print("<a href=\"".$this->href("edit", $comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/edit.gif\" title=\"".$this->GetTranslation("EditCommentTip")."\" alt=\"".$this->GetTranslation("EditComment")."\" align=\"right\" border=\"0\" /></a>");
 					}
 					if ($comment["body_r"]) $strings = $comment["body_r"];

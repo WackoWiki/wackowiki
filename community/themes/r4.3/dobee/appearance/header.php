@@ -204,7 +204,7 @@ else if($this->HasAccess("write"))
 
 							if ($this->IsAdmin()) {
 								echo '<br />';
-								print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/del.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("DeleteText")."</a>");
+								print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/delete.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("DeleteText")."</a>");
 							}
 
 							echo '<br />';
