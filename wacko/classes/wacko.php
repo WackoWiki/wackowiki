@@ -1288,14 +1288,18 @@ class Wacko
 				$owner_id = $oldPage["owner_id"];
 
 				// only if page has been actually changed
-				if ($oldPage['body'] != $body)
+				if ($oldPage['body'] != $body || $oldPage['title'] != $title)
 				{
-					// move revision
-					$this->Query(
-							"INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
-							"SELECT tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, 'N', handler, comment_on_id, supertag, title, keywords, description ".
-							"FROM ".$this->config["table_prefix"]."pages ".
-							"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
+               // Dont save revisions for comments.  Personally I think we should.
+               if (!$comment_on_id)
+                  {
+                     // move revision
+                     $this->Query(
+                           "INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
+                           "SELECT tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, 'N', handler, comment_on_id, supertag, title, keywords, description ".
+                           "FROM ".$this->config["table_prefix"]."pages ".
+                           "WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
+                  }
 
 					// add new revision
 					$this->Query(
@@ -1312,71 +1316,77 @@ class Wacko
 							"body_r = '".quote($this->dblink, $body_r)."', ".
 							"body_toc = '".quote($this->dblink, $body_toc)."', ".
 							"edit_note = '".quote($this->dblink, $edit_note)."', ".
-							"minor_edit = '".quote($this->dblink, $minor_edit)."' ".
+							"minor_edit = '".quote($this->dblink, $minor_edit)."', ".
+                     "title = '".quote($this->dblink, $title)."' ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
 						"LIMIT 1");
 				}
 
-				// revisions diff
-				$page = $this->LoadSingle(
-					"SELECT ".$this->pages_meta." ".
-					"FROM ".$this->config["table_prefix"]."revisions ".
-					"WHERE tag='".quote($this->dblink, $tag)."' ".
-					"ORDER BY time DESC");
-				$_GET["a"] = -1;
-				$_GET["b"] = $page["id"];
-				$_GET["fastdiff"] = 1;
-				$diff = $this->IncludeBuffered("handlers/page/diff.php", "oops");
+            // Since there's no revision history for comments it's pointless to do the following for them.
+            if (!$comment_on_id)
+               {
+                  // revisions diff
+                  $page = $this->LoadSingle(
+                     "SELECT ".$this->pages_meta." ".
+                     "FROM ".$this->config["table_prefix"]."revisions ".
+                     "WHERE tag='".quote($this->dblink, $tag)."' ".
+                     "ORDER BY time DESC");
+                  $_GET["a"] = -1;
+                  $_GET["b"] = $page["id"];
+                  $_GET["fastdiff"] = 1;
+                  $diff = $this->IncludeBuffered("handlers/page/diff.php", "oops");
 
-				// notifying watchers
-				$username = $this->GetUserName();
-				$Watchers = $this->LoadAll(
-					"SELECT DISTINCT user ".
-					"FROM ".$this->config["table_prefix"]."pagewatches"." ".
-					"WHERE tag = '".quote($this->dblink, $tag)."'");
+                  // notifying watchers
+                  $username = $this->GetUserName();
+                  $Watchers = $this->LoadAll(
+                     "SELECT DISTINCT user ".
+                     "FROM ".$this->config["table_prefix"]."pagewatches"." ".
+                     "WHERE tag = '".quote($this->dblink, $tag)."'");
 
-				if ($Watchers)
-				{
-					foreach ($Watchers as $Watcher)
-					if ($Watcher["user"] !=  $username)
-					{
-						$_user = $this->GetUser();
-						$Watcher["name"] = $Watcher["user"];
-						$this->SetUser($Watcher, 0);
-						$lang = $Watcher["lang"];
+                  if ($Watchers)
+                  {
+                     foreach ($Watchers as $Watcher)
+                     if ($Watcher["user"] !=  $username)
+                     {
+                        $_user = $this->GetUser();
+                        $Watcher["name"] = $Watcher["user"];
+                        $this->SetUser($Watcher, 0);
+                        $lang = $Watcher["lang"];
 
-						if ($this->HasAccess("read", $tag, $Watcher["user"]))
-						{
-							$User = $this->LoadSingle(
-								"SELECT email, lang, more, email_confirm ".
-								"FROM " .$this->config["user_table"]." ".
-								"WHERE name = '".quote($this->dblink, $Watcher["user"])."'");
+                        if ($this->HasAccess("read", $tag, $Watcher["user"]))
+                        {
+                           $User = $this->LoadSingle(
+                              "SELECT email, lang, more, email_confirm ".
+                              "FROM " .$this->config["user_table"]." ".
+                              "WHERE name = '".quote($this->dblink, $Watcher["user"])."'");
 
-							$User["options"] = $this->DecomposeOptions($User["more"]);
+                           $User["options"] = $this->DecomposeOptions($User["more"]);
 
-							if ($User["email_confirm"] == "" && $User["options"]["send_watchmail"] != "N")
-							{
-								$lang = $User["lang"];
-								$this->LoadResource($lang);
-								$this->SetResource ($lang);
-								$this->SetLanguage ($lang);
+                           if ($User["email_confirm"] == "" && $User["options"]["send_watchmail"] != "N")
+                           {
+                              $lang = $User["lang"];
+                              $this->LoadResource($lang);
+                              $this->SetResource ($lang);
+                              $this->SetLanguage ($lang);
 
-								$subject = $this->GetTranslation("WatchedPageChanged",$lang)."'".$tag."'";
-								$message = "<style>.additions {color: #008800;}\n.deletions {color: #880000;}</style>".
-											$this->GetTranslation("MailHello",$lang). $Watcher["user"]."\n\n".
-											$username.
-											$this->GetTranslation("SomeoneChangedThisPage",$lang)."\n". //* <a href=\"".$this->Href("",$tag,"")."\">".$this->Href("",$tag,"")."</a><br />";
-											"<hr />".$diff."<hr />".
-											"<br />".$this->GetTranslation("MailGoodbye",$lang)."\n".
-											$this->config["wacko_name"]."\n".
-											$this->config["base_url"];
+                              $subject = $this->GetTranslation("WatchedPageChanged",$lang)."'".$tag."'";
+                              $message = "<style>.additions {color: #008800;}\n.deletions {color: #880000;}</style>".
+                                       $this->GetTranslation("MailHello",$lang). $Watcher["user"]."\n\n".
+                                       $username.
+                                       $this->GetTranslation("SomeoneChangedThisPage",$lang)."\n". //* <a href=\"".$this->Href("",$tag,"")."\">".$this->Href("",$tag,"")."</a><br />";
+                                       "<hr />".$diff."<hr />".
+                                       "<br />".$this->GetTranslation("MailGoodbye",$lang)."\n".
+                                       $this->config["wacko_name"]."\n".
+                                       $this->config["base_url"];
 
-								$this->SendMail($User["email"], $subject, $message);
-							}
-						}
-						$this->SetUser($_user, 0);
-					}
-				}
+                              $this->SendMail($User["email"], $subject, $message);
+                           }
+                        }
+                        $this->SetUser($_user, 0);
+                     }
+                  }
+               }
+
 				$this->LoadResource($this->userlang);
 				$this->SetResource ($this->userlang);
 				$this->SetLanguage ($this->userlang);
@@ -2534,7 +2544,7 @@ class Wacko
 			return $this->LoadAll(
 					"SELECT * FROM ".$this->config["table_prefix"]."pages ".
 					"WHERE comment_on_id = '".quote($this->dblink, $page_id)."' ".
-					"ORDER BY time");
+					"ORDER BY created");
 		}
 	}
 

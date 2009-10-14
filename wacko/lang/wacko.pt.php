@@ -503,6 +503,7 @@ $wackoTranslation = array(
 	"LogUserSessionContinued"	=> "User ##%1## continued to suspend the session",
 	"LogUserSettingsUpdate"		=> "User ##%1## updated personal settings",
 	"LogPageEdited"				=> "Edited page [[/%1]]",
+   "LogCommentEdited"				=> "Edited comment [[/%1]]",
 );
 
 ?>
