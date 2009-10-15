@@ -321,12 +321,12 @@ $wackoTranslation = array(
 	"NoUnwatchedPages"		=> "You watch for changes in all pages.",
 	"ViewWatchedPages"		=> "Show watched pages",
 	"ViewUnwatchedPages"	=> "Show unwatched page",
-	"NotLoggedInWatches"	=> "You are not registered in the system, so your list of watches can not be found.",
+	"NotLoggedInWatches"	=> "You are not logged in, hence we couldn't identify so your list of watches.",
 
 	// mychangeswatches action
-	"MyChangesWatches"		=> "List of your watched content pages that were edited by others since then, as you are engaged in their editing",
+	"MyChangesWatches"		=> "List of all pages you watched that were edited by others since your last editing",
 	"ResetChangesWatches"	=> "reset the list of changes",
-	"NoChangesWatches"		=> "Among the pages are no watched changes..",
+	"NoChangesWatches"		=> "Among your watched pages are no changes...",
 
 	//Settings
 	"SettingsFor" => "Instellingen voor %1",

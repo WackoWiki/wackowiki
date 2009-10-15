@@ -315,18 +315,18 @@ $wackoTranslation = array(
 	"NotOwnerAndViewWatchers"  =>"<em>Du bist nicht der Besitzer dieser Seite und kannst die Liste der Beobachter nicht einsehen.</em>",
 
 	// mywatches action
-	"WatchedPages"			=> "List of all pages you follow for changes ",
-	"UnwatchedPages"		=> "List of all pages you do not watch",
+	"WatchedPages"			=> "Liste aller Seiten, die du auf Änderungen beobachtest",
+	"UnwatchedPages"		=> "Liste aller Seiten, die du nicht beobachtest",
 	"NoWatchedPages"		=> "You have no watched pages.",
 	"NoUnwatchedPages"		=> "You watch for changes in all pages.",
-	"ViewWatchedPages"		=> "Show watched pages",
-	"ViewUnwatchedPages"	=> "Show unwatched page",
-	"NotLoggedInWatches"	=> "You are not registered in the system, so your list of watches can not be found.",
+	"ViewWatchedPages"		=> "Zeige beobachtete Seiten",
+	"ViewUnwatchedPages"	=> "Zeige unbeobachtete Seiten",
+	"NotLoggedInWatches"	=> "Du bist nicht angemeldet, daher lässt sich die Liste deiner beobachteten Seiten nicht ermitteln.",
 
 	// mychangeswatches action
-	"MyChangesWatches"		=> "List of your watched content pages that were edited by others since then, as you are engaged in their editing",
-	"ResetChangesWatches"	=> "reset the list of changes",
-	"NoChangesWatches"		=> "Among the pages are no watched changes..",
+	"MyChangesWatches"		=> "Liste aller von dir beobachteten Seiten, welche seit deiner letzten Änderung zwischenzeitlich von anderen bearbeitet wurden",
+	"ResetChangesWatches"	=> "Liste der Änderungen zurücksetzen",
+	"NoChangesWatches"		=> "Unter deinen beobachteten Seiten sind keine Änderungen...",
 
 	//Settings
 	"SettingsFor" => "Einstellungen für %1",
