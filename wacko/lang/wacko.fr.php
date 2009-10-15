@@ -312,6 +312,20 @@ $wackoTranslation = array(
 	"NoWatchers" => "<em>Personne ne surveille %1</em>",
 	"NotOwnerAndViewWatchers"  =>"<em>N&rsquo;étant pas le propriétaire de cette page, vous ne pouvez pas voir la liste des utilisateurs qui la surveillent.</em>",
 
+	// mywatches action
+	"WatchedPages"			=> "List of all pages you follow for changes ",
+	"UnwatchedPages"		=> "List of all pages you do not watch",
+	"NoWatchedPages"		=> "You have no watched pages.",
+	"NoUnwatchedPages"		=> "You watch for changes in all pages.",
+	"ViewWatchedPages"		=> "Show watched pages",
+	"ViewUnwatchedPages"	=> "Show unwatched page",
+	"NotLoggedInWatches"	=> "You are not registered in the system, so your list of watches can not be found.",
+
+	// mychangeswatches action
+	"MyChangesWatches"		=> "List of your watched content pages that were edited by others since then, as you are engaged in their editing",
+	"ResetChangesWatches"	=> "reset the list of changes",
+	"NoChangesWatches"		=> "Among the pages are no watched changes..",
+
 	//Settings
 	"SettingsFor" => "Réglages pour %1",
 	"MetaInfo" => "META Mots-clés/Description insérée dans les en-têtes HTML.",
