@@ -1,4 +1,5 @@
 <?php
+
 /*
  No Files Action
 
@@ -10,4 +11,5 @@
  }}
  */
 $this->config["hide_files"] = !$allow_registered ? 1 : 2;
+
 ?>

@@ -1,4 +1,5 @@
 <?php
+
 /*
  No Comments Action
 
@@ -10,4 +11,5 @@
  }}
  */
 $this->config["hide_comments"] = !$allow_registered ? 1 : 2;
+
 ?>
