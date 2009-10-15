@@ -1,11 +1,11 @@
 <?php
 
-if ($user = $this->GetUserName())
+if ($user_id = $this->GetUserId())
 {
 	if ($_GET['unwatch'] != '')
-		$this->ClearWatch($this->GetUserId(), $_GET['unwatch']);
+		$this->ClearWatch($user_id, $_GET['unwatch']);
 	else if ($_GET['setwatch'] != '')
-		$this->SetWatch($this->GetUserId(), $_GET['setwatch']);
+		$this->SetWatch($user_id, $_GET['setwatch']);
 
 	$limit	= 100;
 	$prefix = $this->config["table_prefix"];
@@ -17,7 +17,7 @@ if ($user = $this->GetUserName())
 			"FROM {$prefix}pages AS p ".
 			"LEFT JOIN {$prefix}pagewatches AS w ".
 				"ON (p.id = w.page_id ".
-					"AND w.user_id = '".quote($this->dblink, $this->GetUserId())."') ".
+					"AND w.user_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND w.user_id IS NULL", 1);
 		
@@ -33,7 +33,7 @@ if ($user = $this->GetUserName())
 			"FROM {$prefix}pages AS p ".
 			"LEFT JOIN {$prefix}pagewatches AS w ".
 				"ON (p.id = w.page_id ".
-					"AND w.user_id = '".quote($this->dblink, $this->GetUserId())."') ".
+					"AND w.user_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND w.user_id IS NULL ".
 			"ORDER BY pagetag ASC ".
@@ -74,7 +74,7 @@ if ($user = $this->GetUserName())
 		$count	= $this->LoadSingle(
 			"SELECT COUNT( DISTINCT page_id ) as n ".
 			"FROM {$prefix}pagewatches ".
-			"WHERE user_id = '".quote($this->dblink, $this->GetUserId())."'", 1);
+			"WHERE user_id = '".quote($this->dblink, $user_id)."'", 1);
 
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mywatches#list');
 
@@ -88,7 +88,7 @@ if ($user = $this->GetUserName())
 			"FROM {$prefix}pagewatches AS w ".
 			"LEFT JOIN {$prefix}pages AS p ".
 				"ON (p.id = w.page_id) ".
-			"WHERE w.user_id = '".quote($this->dblink, $this->GetUserId())."' ".
+			"WHERE w.user_id = '".quote($this->dblink, $user_id)."' ".
 			"GROUP BY tag ".
 			"LIMIT {$pagination['offset']}, $limit"))
 		{
