@@ -59,7 +59,7 @@ else
 		if (($this->GetMethod() != "print") && ($nomark !=1 ) && ($nomark != 2 || $this->HasAccess("write", $page)))
 		{
 			echo "<div class=\"name\">".$this->Link("/".$inc_page['tag'])."&nbsp;&nbsp;::&nbsp;".
-                          "<a href=\"".$this->Href("edit", $inc_page['tag'])."\">".$this->GetTranslation("EditIcon")."</a></div></div>";
+				"<a href=\"".$this->Href("edit", $inc_page['tag'])."\">".$this->GetTranslation("EditIcon")."</a></div></div>";
 		}
 	}
 }
