@@ -123,9 +123,7 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 
 $table_pagewatches = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
 						"id INT(10) UNSIGNED NOT NULL auto_increment,".
-						"user VARCHAR(80) NOT NULL DEFAULT '',".
 						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-						"tag VARCHAR(250) binary NOT NULL DEFAULT '',".
 						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"time TIMESTAMP NOT NULL,".
 						"PRIMARY KEY (id)".

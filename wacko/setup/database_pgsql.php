@@ -107,8 +107,8 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 
 $table_pagewatches = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
 					"id serial,".
-					"\"user\" character varying(80) NOT NULL DEFAULT '',".
-					"tag character varying(250) NOT NULL DEFAULT '',".
+					"page_id integer NOT NULL DEFAULT 0,".
+					"user_id integer NOT NULL DEFAULT 0,".
 					"\"time\" timestamp without time zone NOT NULL DEFAULT now(),".
 					"CONSTRAINT pk_pagewatches_id PRIMARY KEY (id)".
 				") WITH (OIDS=FALSE);";
