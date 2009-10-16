@@ -497,28 +497,28 @@ $wackoTranslation = array(
 	"LogOwnershipChanged"		=> "Ownership of the page [[/%1]] transferred to the user ##%2##",
 	"LogUserLoginFailed"		=> "!!Unsuccessful attempts to log in with ##~%1##!!",
 	"LogRenamedPage"			=> "Page ##%1## renamed to [[/%2]]",
-	"LogRenamedPage2"			=> ". On the old page, a link to the new",
-	"LogUserPasswordReminded"	=> "User ##%1## asked for the password recovery process to address ##%2##",
-	"LogUserPasswordRecovered"	=> "User ##%1## successfully recover his forgotten password",
-	"LogUserPasswordChanged"	=> "User ##%1## successfully updated (changed) his password",
-	"LogUserPasswordMismatch"	=> "!!User ##%1## failed to change his password: Password mismatch with current!!",
-	"LogUserIPSwitched"			=> "Unauthorized switched IP-address of the user ##%1## frpm ##%2## to ##%3##",
+	"LogRenamedPage2"			=> ". The old page set as the link to the new one",  // please check
+	"LogUserPasswordReminded"	=> "User ##%1## asked for the password recovery process to address ##%2##", // no "process", no "address" (meaning e-mail)?
+	"LogUserPasswordRecovered"	=> "User ##%1## successfully recover his forgotten password",  // no "his" (Russian impersonal sentence alike)?
+	"LogUserPasswordChanged"	=> "User ##%1## successfully updated (changed) his password", // no "his"?
+	"LogUserPasswordMismatch"	=> "!!User ##%1## failed to change his password: current password mismatch!!", // "his" => "the"?
+	"LogUserIPSwitched"			=> "Unauthorized IP-address change of the user ##%1## from ##%2## to ##%3##",
 	"LogPageImported"			=> "Imported page [[/%1]]",
 	"LogPageCreated"			=> "Created new page [[/%1]]",
-	"LogPageMetaUpdated"		=> "Updated page meta data [[/%1]]",
-	"LogPageOwnershipClaimed"	=> "You claimed ownership of the page [[/%1]]",
-	"LogFileUploadedLocal"		=> "To page [[/%1]] uploaded new file ##%2## (size %3 Kb)",
-	"LogFileUploadedGlobal"		=> "Uploaded a new file to global folder ##%2## (size %3 Kb)",
-	"LogUserSimiliarName"		=> "There were attempts to register under the same user name: ##%1##",
-	"LogUserRegistered"			=> "Successfully registered a new user ##%1## (##%2##)",
-	"LogUserEmailActivated"		=> "Successfully activated email ##%1## of user ##%2##",
-	"LogCommentPosted"			=> "Added [[/%1 new comment]] to page [[/%2]]",
+	"LogPageMetaUpdated"		=> "Updated page meta data [[/%1]]",  // "meta data" => "properties"?
+	"LogPageOwnershipClaimed"	=> "The user got ownership of the page [[/%1]]", // please correct
+	"LogFileUploadedLocal"		=> "New file ##%2## uploaded to the page [[/%1]] (size %3 Kb)",  // Russian often use reverse word order regarding to English :)
+	"LogFileUploadedGlobal"		=> "New file ##%2## uploaded to the global folder (size %3 Kb)", // --"--"
+	"LogUserSimiliarName"		=> "There were attempts to register under the same user name: ##%1##", // "same" => "similar"
+	"LogUserRegistered"			=> "Successfully registered a new user ##%1## (##%2##)",  // reorder?
+	"LogUserEmailActivated"		=> "Successfully activated email ##%1## of user ##%2##",  // reorder?
+	"LogCommentPosted"			=> "Added [[/%1 new comment(s)]] to page [[/%2]]",
 	"LogUserLoginOK"			=> "User ##%1## successfully logged in the system",
 	"LogUserLoggedOut"			=> "User ##%1## successfully logged out the system",
-	"LogUserSessionContinued"	=> "User ##%1## continued to suspend the session",
+	"LogUserSessionContinued"	=> "User ##%1## continued the suspended session", // interrupted?
 	"LogUserSettingsUpdate"		=> "User ##%1## updated personal settings",
 	"LogPageEdited"				=> "Edited page [[/%1]]",
-   "LogCommentEdited"				=> "Edited comment [[/%1]]",
+	"LogCommentEdited"			=> "Edited comment [[/%1]]",
 );
 
 ?>
