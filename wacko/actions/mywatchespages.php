@@ -13,7 +13,7 @@ if ($user_id = $this->GetUserId())
 	if ($_GET['unwatched'] == 1)
 	{
 		$count	= $this->LoadSingle(
-			"SELECT COUNT({$prefix}p.tag) AS n ".
+			"SELECT COUNT(p.tag) AS n ".
 			"FROM {$prefix}pages AS p ".
 			"LEFT JOIN {$prefix}pagewatches AS w ".
 				"ON (p.id = w.page_id ".
