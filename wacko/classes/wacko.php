@@ -1269,7 +1269,7 @@ class Wacko
 								$this->SetResource ($lang);
 								$this->SetLanguage ($lang);
 
-								$subject = $this->GetTranslation("CommentForWatchedPage",$lang)."'".$this->GetCommentOnTag($comment_on_id)."'";
+								$subject = "[".$this->config["wacko_name"]."] ".$this->GetTranslation("CommentForWatchedPage",$lang)."'".$this->GetCommentOnTag($comment_on_id)."'";
 								$message = $this->GetTranslation("MailHello",$lang). $Watcher["user"].".\n\n".
 											$username.
 											$this->GetTranslation("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."\">".$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."</a><br /><hr />".
@@ -1386,7 +1386,7 @@ class Wacko
 									$this->SetResource ($lang);
 									$this->SetLanguage ($lang);
 
-									$subject = $this->GetTranslation("WatchedPageChanged",$lang)."'".$tag."'";
+									$subject = "[".$this->config["wacko_name"]."] ".$this->GetTranslation("WatchedPageChanged",$lang)."'".$tag."'";
 									$message = "<style>.additions {color: #008800;}\n.deletions {color: #880000;}</style>".
 										$this->GetTranslation("MailHello",$lang). $Watcher["user"]."\n\n".
 										$username.
