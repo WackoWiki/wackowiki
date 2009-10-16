@@ -1239,6 +1239,7 @@ class Wacko
 				{
 					// notifying watchers
 					$user_id = $this->GetUserId();
+					$username = $this->GetUserName();
 
 					$Watchers = $this->LoadAll(
 									"SELECT DISTINCT user_id ".
@@ -1350,19 +1351,22 @@ class Wacko
 					$diff = $this->IncludeBuffered("handlers/page/diff.php", "oops");
 
 					// notifying watchers
+					$user_id = $this->GetUserId();
+					$page_id = $this->GetPageId($tag);
 					$username = $this->GetUserName();
+
 					$Watchers = $this->LoadAll(
-						"SELECT DISTINCT user ".
+						"SELECT DISTINCT user_id ".
 						"FROM ".$this->config["table_prefix"]."pagewatches"." ".
-						"WHERE tag = '".quote($this->dblink, $tag)."'");
+						"WHERE page_id = '".quote($this->dblink, $page_id)."'");
 
 					if ($Watchers)
 					{
 						foreach ($Watchers as $Watcher)
-						if ($Watcher["user"] !=  $username)
+						if ($Watcher["user_id"] !=  $user_id)
 						{
 							$_user = $this->GetUser();
-							$Watcher["name"] = $Watcher["user"];
+							$Watcher["user"] = $this->GetUserNameById($Watcher["user_id"]);
 							$this->SetUser($Watcher, 0);
 							$lang = $Watcher["lang"];
 
@@ -1371,7 +1375,7 @@ class Wacko
 								$User = $this->LoadSingle(
 									"SELECT email, lang, more, email_confirm ".
 									"FROM " .$this->config["user_table"]." ".
-									"WHERE name = '".quote($this->dblink, $Watcher["user"])."'");
+									"WHERE id = '".quote($this->dblink, $Watcher["user_id"])."'");
 
 								$User["options"] = $this->DecomposeOptions($User["more"]);
 
