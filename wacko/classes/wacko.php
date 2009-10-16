@@ -1280,11 +1280,14 @@ class Wacko
 
 								$this->SendMail($User["email"], $subject, $message);
 							}
-						}
+						} // end of hasAccess
 						$this->SetUser($_user, 0);
-					}
-				}
-			}
+					} // end of watchers
+					$this->LoadResource($this->userlang);
+					$this->SetResource ($this->userlang);
+					$this->SetLanguage ($this->userlang);
+				} // end of comment_on
+			} // end of new page
 			// RESAVING AN OLD PAGE, CREATING REVISION
 			else
 			{
@@ -1398,15 +1401,14 @@ class Wacko
 
 									$this->SendMail($User["email"], $subject, $message);
 								}
-							}
+							} // end of hasaccess
 							$this->SetUser($_user, 0);
-						}
+						} // end of watchers
+						$this->LoadResource($this->userlang);
+						$this->SetResource ($this->userlang);
+						$this->SetLanguage ($this->userlang);
 					}
 				}
-
-				$this->LoadResource($this->userlang);
-				$this->SetResource ($this->userlang);
-				$this->SetLanguage ($this->userlang);
 			}
 		}
 
