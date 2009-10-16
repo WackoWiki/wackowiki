@@ -2901,7 +2901,7 @@ class Wacko
 	{
 		// Remove old watch first to avoid double watches
 		$this->ClearWatch($user_id, $page_id);
-		$tag = GetPageTagById($page_id);
+		$tag = $this->GetPageTagById($page_id);
 
 		if ($this->HasAccess('read', $tag))
 			return $this->Query(
@@ -3558,8 +3558,11 @@ class Wacko
 		if (!$tag) return false;
 
 		return $this->Query(
-			"DELETE FROM ".$this->config["table_prefix"]."pagewatches ".
-			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"DELETE w.* ".
+			"FROM ".$this->config["table_prefix"]."pagewatches w".
+				"LEFT JOIN ".$this->config["table_prefix"]."pages p".
+					"ON (w.page_id = p.id)". 
+			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
 	function RemoveLinks($tag, $cluster = false)
