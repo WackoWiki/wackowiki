@@ -1227,6 +1227,8 @@ class Wacko
 				{
 					// notifying watchers
 					$user_id = $this->GetUserId();
+
+
 					$Watchers = $this->LoadAll(
 									"SELECT DISTINCT user_id ".
 									"FROM ".$this->config["table_prefix"]."pagewatches ".
@@ -1234,10 +1236,10 @@ class Wacko
 
 					foreach ($Watchers as $Watcher)
 
-					if ($Watcher["user_id"] !=  $user_id)
+					if ($Watcher["user_id"] != $user_id)
 					{
 						$_user = $this->GetUser();
-						$Watcher["name"] = $Watcher["user"];
+						$Watcher["user"] = $this->GetUserNameById($Watcher["user_id"]);
 						$this->SetUser($Watcher, 0);
 
 						if ($this->HasAccess("read", $this->GetCommentOnTag($comment_on_id), $Watcher["user"]))
@@ -1245,7 +1247,7 @@ class Wacko
 							$User = $this->LoadSingle(
 								"SELECT email, lang, more, email_confirm ".
 								"FROM " .$this->config["user_table"]." ".
-								"WHERE name = '".quote($this->dblink, $Watcher["user"])."'");
+								"WHERE id = '".quote($this->dblink, $Watcher["user_id"])."'");
 							$User["options"] = $this->DecomposeOptions($User["more"]);
 
 							if ($User["email_confirm"] == "" && $User["options"]["send_watchmail"] != "N")
@@ -2426,6 +2428,16 @@ class Wacko
 			$this->_userhost = $name;
 		}
 		return $name;
+	}
+
+	function GetUserNameById($user_id = 0)
+	{
+		$user = $this->LoadSingle(
+					"SELECT name FROM ".$this->config["table_prefix"]."users WHERE id = '".$user_id."' LIMIT 1");
+					// Get user value
+					$user = $user['name'];
+
+					return $user;
 	}
 
 	function GetUserId()
