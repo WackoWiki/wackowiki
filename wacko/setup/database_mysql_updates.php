@@ -93,6 +93,8 @@ $alter_pagewatches_r3_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CH
 $alter_pagewatches_r4_2 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
 $alter_pagewatches_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
 $alter_pagewatches_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."pagewatches ADD page_id INT(10) UNSIGNED NOT NULL AFTER tag";
+$alter_pagewatches_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."pagewatches DROP user";
+$alter_pagewatches_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."pagewatches DROP tag";
 
 $update_pagewatches_r4_2 = "UPDATE ".$config["table_prefix"]."pagewatches AS pagewatches, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET pagewatches.user_id = users.id WHERE pagewatches.user = users.name";
 $update_pagewatches_r4_2_1 = "UPDATE ".$config["table_prefix"]."pagewatches AS pagewatches, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages SET pagewatches.page_id = pages.id WHERE pagewatches.tag = pages.tag";
