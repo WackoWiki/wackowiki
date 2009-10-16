@@ -153,6 +153,18 @@ class Wacko
 	}
 
 	function GetPageTag() { return $this->tag; }
+
+	// TODO: same as function GetCommentOnTag, but he use other variable names and this one will probably obsolete if we use page_id in acls table ( ? )
+	function GetPageTagById($page_id = 0)
+	{
+		$tag = $this->LoadSingle(
+					"SELECT tag FROM ".$this->config["table_prefix"]."pages WHERE id = '".$page_id."' LIMIT 1");
+					// Get tag value
+					$tag = $tag['tag'];
+
+					return $tag;
+	}
+
 	function GetPageId($tag = 0)
 	{
 		if(!$tag)
@@ -1227,7 +1239,6 @@ class Wacko
 				{
 					// notifying watchers
 					$user_id = $this->GetUserId();
-
 
 					$Watchers = $this->LoadAll(
 									"SELECT DISTINCT user_id ".
@@ -2890,6 +2901,7 @@ class Wacko
 	{
 		// Remove old watch first to avoid double watches
 		$this->ClearWatch($user_id, $page_id);
+		$tag = GetPageTagById($page_id);
 
 		if ($this->HasAccess('read', $tag))
 			return $this->Query(
