@@ -613,8 +613,7 @@ class Init
 				$overall_time = $this->GetMicroTime() - $this->timer;
 
 				echo "<div class=\"debug\">".
-					 "<p class=\"debug\"><span>Program execution statistics</span></p>\n".
-					 "<ul>\n";
+					 "<p class=\"debug\"><span>Program execution statistics</span></p>\n<ul>\n";
 
 				if (function_exists("memory_get_usage")) if ($execmem = memory_get_usage())
 					echo "<li>Memory allocated: ".(number_format(($execmem / (1024*1024)), 3))." MB </li>\n";
@@ -623,8 +622,8 @@ class Init
 
 				if ($this->config["debug"] >= 2)
 				{
-					echo "<li>Execution time: ".number_format($overall_time - $this->engine->queryTime, 3)." sec. </li>\n";
-					echo "<li>SQL time: ".number_format($this->engine->queryTime, 3)." sec. </li>\n";
+					echo "<li>Execution time: ".number_format($overall_time - $this->engine->queryTime, 3)." sec.</li>\n";
+					echo "<li>SQL time: ".number_format($this->engine->queryTime, 3)." sec.</li>\n";
 				}
 
 				if ($this->config["debug"] >= 3)
@@ -641,8 +640,25 @@ class Init
 						echo "[".number_format($query["time"], 4)." sec.]";
 						echo "</li>\n";
 					}
+
+               echo "</ol>\n</li>\n";
 				}
-				echo "</ol></li>\n</ul></div>\n";
+				echo "</ul>\n";
+
+				if ($this->config["debug"] >= 2)
+				{
+               echo "<p class=\"debug\"><span>Language data</span></p>\n<ul>\n";
+               echo "<li>Multilanguage: ".($this->config["multilanguage"] == 1 ? 'true' : 'false')."</li>\n";
+               echo "<li>HTTP_ACCEPT_LANGUAGE set: ".(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false')."</li>\n";
+               echo "<li>HTTP_ACCEPT_LANGUAGE value: ".$_SERVER['HTTP_ACCEPT_LANGUAGE']."</li>\n";
+               echo "<li>HTTP_ACCEPT_LANGUAGE chopped value: ".strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2))."</li>\n";
+               echo "<li>User language set: ".(isset($user["lang"]) ? 'true' : 'false')."</li>\n";
+               echo "<li>User language value: ".$user["lang"]."</li>\n";
+               echo "<li>Config language: ".$this->config["language"]."</li>\n";
+               echo "<li>User selected language: ".$this->userlang."</li>\n";
+               echo "</ul>\n";
+            }
+            echo "</div >\n";
 			}
 			else return;
 		}
