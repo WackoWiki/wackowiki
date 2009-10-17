@@ -15,7 +15,9 @@ if ($this->HasAccess("read")) {
 
 	if ($this->HasAccess("read", $pageA["tag"]) && $this->HasAccess("read", $pageB["tag"]) ) {
 
-		if ($_GET["fastdiff"]) {
+		if ($_GET["source"]) $source = 1;
+
+		if ($_GET["fastdiff"] || $source == 1) {
 
 			// This is a really cheap way to do it.
 
@@ -36,13 +38,19 @@ if ($this->HasAccess("read")) {
 			{
 				// remove blank lines
 				$output .= "<br />\n".$this->GetTranslation("SimpleDiffAdditions")."<br />\n";
-				$output .= "<div class=\"additions\">".$this->Format(implode("\n", $added), "wakka", array("diff" => 1))."</div>";
+				$output .= "<div class=\"additions\">".($source == 1
+															? '<pre>'.wordwrap(implode("\n", $added), 70, "\n", 1).'</pre>'
+															: $this->Format(implode("\n", $added))
+														)."</div>";
 			}
 
 			if ($deleted)
 			{
 				$output .= "<br />\n".$this->GetTranslation("SimpleDiffDeletions")."<br />\n";
-				$output .= "<div class=\"deletions\">".$this->Format(implode("\n", $deleted), "wakka", array("diff" => 1))."</div>";
+				$output .= "<div class=\"deletions\">".($source == 1 
+															? '<pre>'.wordwrap(implode("\n", $deleted), 70, "\n", 1).'</pre>' 
+															: $this->Format(implode("\n", $deleted))
+														)."</div>";
 			}
 
 			if (!$added && !$deleted)
@@ -82,7 +90,7 @@ if ($this->HasAccess("read")) {
 			$resync_left = 0;
 			$resync_right = 0;
 
-			$count_total_right = $sideB->getposition() ;
+			$count_total_right = $sideB->getposition();
 
 			$sideA->init();
 			$sideB->init();
@@ -145,10 +153,14 @@ if ($this->HasAccess("read")) {
 			print $out;
 
 		}
-	} else {
+	} 
+	else
+	{
 		print($this->GetTranslation("ReadAccessDenied"));
 	}
-} else {
+} 
+else
+{
 	print($this->GetTranslation("ReadAccessDenied"));
 }
 ?>
