@@ -409,8 +409,12 @@ $wackoTranslation = array(
 	"MassNewName" => "Введите новое имя для этого кластера",
 	"MassNeedRedirect" => "Поставить на старых страницых редирект на новые",
 
+	// pagination
+	"ToThePage" => "To page",
 	"Next" => "Вперед",
 	"Prev" => "Назад",
+	"NextAcr" => "Next.",
+	"PrevAcr" => "Prev.",
 
 	"default_bookmarks" => "((Каталог))\n((ПоследниПромени Промени))\n((НовиКоментари Коментари @@bg))",
 	"site_bookmarks" => "((Каталог)) / ((ПоследниПромени Промени)) / ((НовиКоментари Коментари @@bg))",

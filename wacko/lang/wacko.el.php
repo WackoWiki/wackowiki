@@ -409,8 +409,13 @@ $wackoTranslation = array(
 	"MassNewName" => "Εισάγεται νέο όνομα για το cluster",
 	"MassNeedRedirect" => "Δημιουργία ανακατεύθυνσης σε μία νέα σελίδα στις παλιές σελίδες",
 
+
+	// pagination
+	"ToThePage" => "To page",
 	"Next" => "Επόμενο",
 	"Prev" => "Προηγούμενο",
+	"NextAcr" => "Next.",
+	"PrevAcr" => "Prev.",
 
 	"default_bookmarks" => "((PageIndex Index))\n((RecentChanges Changes))\n((RecentlyCommented Comments))",
 	"site_bookmarks" => "((PageIndex Index)) / ((RecentChanges Changes)) / ((RecentlyCommented Comments))",

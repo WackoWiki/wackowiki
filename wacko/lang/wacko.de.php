@@ -410,8 +410,12 @@ $wackoTranslation = array(
 	"MassNewName" => "Einen neuen Namen für diesen Cluster eingeben",
 	"MassNeedRedirect" => "Weiterleitung von den alten zu den neuen Seiten einrichten.",
 
+	// pagination
+	"ToThePage" => "Zu Seite",
 	"Next" => "weiter",
 	"Prev" => "zurück",
+	"NextAcr" => "Next.",
+	"PrevAcr" => "Prev.",
 
 	"default_bookmarks" => 	"((SeitenIndex Index))\n".
 							"((LetzteAenderungen Änderungen))\n".
