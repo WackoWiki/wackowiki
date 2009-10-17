@@ -126,6 +126,8 @@ $wackoTranslation = array(
 	"CommentAccessDenied" => "!<em>Извините, у вас нет прав на коментирование этой страницы.</em>",
 	"YouAreNowTheOwner" => "Теперь вы владелец этой страницы."  ,
 	"SimpleDiff" => "Простое сравнение",
+	"SourceDiff" => "исходный текст",
+	"RevisionsShowAll" => "Показать все редакции...",
 	"ShowDifferencesButton" => "Сравнить",
 	"CancelDifferencesButton"=> "Вернуться / Отмена",
 	"Comparison" => "Сравнение версий %3 от %1 и %2",
@@ -408,7 +410,7 @@ $wackoTranslation = array(
 	"MassRenaming" => "Рекурсивное переименование",
 	"MassNewName" => "Введите новое имя кластера",
 	"MassNeedRedirect" => "Поставить на старых страницых перенаправление на новые",
-	
+
 	// pagination
 	"ToThePage"	=> "На страницу",
 	"Next" => "Далее",
