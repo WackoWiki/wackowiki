@@ -409,8 +409,12 @@ $wackoTranslation = array(
 	"MassNewName" => "Angiv nyt navn for dette område",
 	"MassNeedRedirect" => "Opret henvisning hertil på den gamle side",
 
+	// pagination
+	"ToThePage" => "To page",
 	"Next" => "Næste",
 	"Prev" => "Forrige",
+	"NextAcr" => "Next.",
+	"PrevAcr" => "Prev.",
 
 	"default_bookmarks" => "((Indhold))\n((Opdateringer))\n((Kommentarer))",
 	"site_bookmarks" => "((Indhold)) / ((Opdateringer)) / ((Kommentarer))",

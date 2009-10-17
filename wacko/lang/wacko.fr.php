@@ -408,8 +408,12 @@ $wackoTranslation = array(
 	"MassNewName" => "Indiquez un nouveau nom pour ce groupe",
 	"MassNeedRedirect" => "Rediriger des anciennes pages vers les nouvelles",
 
+	// pagination
+	"ToThePage" => "To page",
 	"Next" => "Suivant",
 	"Prev" => "Précédent",
+	"NextAcr" => "Next.",
+	"PrevAcr" => "Prev.",
 
 	"default_bookmarks" => "((Index))\n((Modifications))\n((Commentaires))",
 	"site_bookmarks" => "((Index)) / ((Modifications)) / ((Commentaires))",

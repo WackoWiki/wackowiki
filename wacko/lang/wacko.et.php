@@ -410,8 +410,12 @@ $wackoTranslation = array(
 	"MassNewName" => "Enter new name for this cluster",
 	"MassNeedRedirect" => "Create redirect to the new pages on the old pages",
 
+	// pagination
+	"ToThePage" => "To page",
 	"Next" => "Next",
 	"Prev" => "Prev",
+	"NextAcr" => "Next.",
+	"PrevAcr" => "Prev.",
 
 	"default_bookmarks" => "SisuKord\n((ViimasedMuudatused Muudatused))\n((ViimatiKommenteeritud Kommenteeritud))",
 	"site_bookmarks" => "SisuKord / ((ViimasedMuudatused Muudatused)) / ((ViimatiKommenteeritud Kommenteeritud))",
