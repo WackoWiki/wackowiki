@@ -1277,8 +1277,11 @@ class Wacko
 								$subject = "[".$this->config["wacko_name"]."] ".$this->GetTranslation("CommentForWatchedPage", $lang)."'".$this->GetCommentOnTag($comment_on_id)."'";
 								$message = $this->GetTranslation("MailHello", $lang). $Watcher["user"].".\n\n".
 											$username.
-											$this->GetTranslation("SomeoneCommented", $lang)."<br />  * <a href=\"".$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."\">".$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."</a><br /><hr />".
-											$this->Format($body_r, "post_wacko")."<hr /><br />".
+											$this->GetTranslation("SomeoneCommented", $lang)."\n".
+											$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."\n\n".
+											"----------------------------------------------------------------------\n\n".
+											$this->Format($body_r, "post_wacko")."\n\n".
+											"----------------------------------------------------------------------\n\n".
 											$this->GetTranslation("MailGoodbye", $lang)."\n".
 											$this->config["wacko_name"]."\n".
 											$this->config["base_url"];
