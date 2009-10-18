@@ -37,7 +37,7 @@ if ($this->HasAccess("read")) {
 			if ($added)
 			{
 				// remove blank lines
-				$output .= "<br />\n".$this->GetTranslation("SimpleDiffAdditions")."<br />\n";
+				$output .= "<br />\n".$this->GetTranslation("SimpleDiffAdditions")."<br />\n\n";
 				$output .= "<div class=\"additions\">".($source == 1
 															? '<pre>'.wordwrap(implode("\n", $added), 70, "\n", 1).'</pre>'
 															: $this->Format(implode("\n", $added))
@@ -46,9 +46,9 @@ if ($this->HasAccess("read")) {
 
 			if ($deleted)
 			{
-				$output .= "<br />\n".$this->GetTranslation("SimpleDiffDeletions")."<br />\n";
-				$output .= "<div class=\"deletions\">".($source == 1 
-															? '<pre>'.wordwrap(implode("\n", $deleted), 70, "\n", 1).'</pre>' 
+				$output .= "<br />\n\n".$this->GetTranslation("SimpleDiffDeletions")."<br />\n\n";
+				$output .= "<div class=\"deletions\">".($source == 1
+															? '<pre>'.wordwrap(implode("\n", $deleted), 70, "\n", 1).'</pre>'
 															: $this->Format(implode("\n", $deleted))
 														)."</div>";
 			}
@@ -153,12 +153,12 @@ if ($this->HasAccess("read")) {
 			print $out;
 
 		}
-	} 
+	}
 	else
 	{
 		print($this->GetTranslation("ReadAccessDenied"));
 	}
-} 
+}
 else
 {
 	print($this->GetTranslation("ReadAccessDenied"));
