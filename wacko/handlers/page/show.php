@@ -24,7 +24,23 @@ if ($this->HasAccess("read"))
 			str_replace("%1",$this->href(),
 			str_replace("%2",$this->GetPageTag(),
 			str_replace("%3",$this->page["time"],
-			$this->GetTranslation("Revision")))).".</div>");
+			$this->GetTranslation("Revision")))));
+
+			// if this is an old revision, display ReEdit button
+			if ($this->HasAccess("write"))
+			{
+				$latest = $this->LoadPage($this->tag);
+				?>
+				<br />
+				<?php echo $this->FormOpen("edit") ?>
+				<input type="hidden" name="previous" value="<?php echo $latest["time"] ?>" />
+				<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page["body"]) ?>" />
+				<input type="submit" value="<?php echo $this->GetTranslation("ReEditOldRevision") ?>" />
+				<?php echo $this->FormClose(); ?>
+				<?php
+			}
+
+			echo "</div>";
 		}
 
 		// count page hit
@@ -64,25 +80,12 @@ if ($this->HasAccess("read"))
 		echo $data;
 
 		$this->SetLanguage($this->userlang);
-?>
-<script type="text/javascript">
-	var dbclick = "page";
-</script>
-<?php
+		?>
+		<script type="text/javascript">
+			var dbclick = "page";
+		</script>
+		<?php
 
-// if this is an old revision, display some buttons
-if ($this->HasAccess("write") && ($this->page["latest"] == "0"))
-{
-	$latest = $this->LoadPage($this->tag);
-?>
-	<br />
-	<?php echo $this->FormOpen("edit") ?>
-	<input type="hidden" name="previous" value="<?php echo $latest["time"] ?>" />
-	<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page["body"]) ?>" />
-	<input type="submit" value="<?php echo $this->GetTranslation("ReEditOldRevision") ?>" />
-	<?php echo $this->FormClose(); ?>
-<?php
-}
 	}
 }
 else
@@ -131,7 +134,7 @@ if ($this->page)
 				?>
 	<a name="files" id="files"></a>
 	<div id="filesheader"><?php echo $this->GetTranslation("Files_all") ?>
-	[<a href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetTranslation("HideFiles"); ?></a>]
+	<?php echo "[<a href=\"".$this->href("", "", "show_files=0")."\">".$this->GetTranslation("HideFiles")."</a>]"; ?>
 	</div>
 
 		<?php
@@ -189,7 +192,7 @@ if ($this->page)
 					print(str_replace("%1", $c, $this->GetTranslation("Files_n")));
 			}
 		?>
-	[<a href="<?php echo $this->href("", "", "show_files=1#files")."\">".$this->GetTranslation("ShowFiles"); ?></a>]
+	<?php echo "[<a href=\"".$this->href("", "", "show_files=1#files")."\">".$this->GetTranslation("ShowFiles")."</a>]"; ?>
 
 		</div>
 		<?php
@@ -231,7 +234,7 @@ if ($this->page)
 				?>
 			<a name="comments"></a>
 		<div id="commentsheader">
-		<?php echo $this->GetTranslation("Comments_all") ?> [<a href="<?php echo $this->href("", "", "show_comments=0")."\">".$this->GetTranslation("HideComments"); ?></a>]
+		<?php echo $this->GetTranslation("Comments_all")." [<a href=\"".$this->href("", "", "show_comments=0")."\">".$this->GetTranslation("HideComments")."</a>]"; ?>
 			</div>
 			<?php
 
