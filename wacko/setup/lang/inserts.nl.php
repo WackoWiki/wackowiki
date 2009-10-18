@@ -16,7 +16,7 @@ InsertPage('Gebruikers', '{{LastUsers}}', $lng);
 InsertPage('LaatsteOpmerkingen', '{{RecentlyCommented}}', $lng);
 InsertPage('Registratie', '{{Registration}}', $lng);
 
-InsertPage('Password', '{{ChangePassword}}', $lng);
+InsertPage('Paswoord', '{{ChangePassword}}', $lng);
 InsertPage('TekstZoeken', '{{Search}}', $lng);
 InsertPage('Inloggen', '{{Login}}', $lng);
 InsertPage('Instellingen', '{{UserSettings}}', $lng);
