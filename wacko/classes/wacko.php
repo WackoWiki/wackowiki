@@ -1072,17 +1072,22 @@ class Wacko
 	// $subject, $message 	- self-explaining
 	// $from				- place specific address into the 'From:' field
 	// $charset				- send message in specific charset (w/o actual re-encoding)
-	function SendMail($email, $subject, $message)
+	function SendMail($email, $subject, $message, $charset = "")
 	{
 		if (!$email) return;
 
 		$headers = "From: =?". $this->GetCharset() ."?B?". base64_encode($this->config["wacko_name"]) ."?= <".$this->config["admin_email"].">\r\n";
+		#$headers = "From: ".( $from ? $from : '"'.$this->config['wacko_name'].'" <'.$this->config['admin_email'].'>' )."\n";
 		$headers .= "X-Mailer: PHP/".phpversion()."\r\n"; //mailer
 		$headers .= "X-Priority: 3\r\n"; //1 UrgentMessage, 3 Normal
 		$headers .= "X-Wacko: ".$this->config["base_url"]."\r\n";
-		$headers .= "Content-Type: text/html; charset=".$this->GetCharset()."\r\n";
-		$subject =  "=?".$this->GetCharset()."?B?" . base64_encode($subject) . "?=";
-		@mail($email, $subject, "<html><head></head><body>".$message."</body></html>", $headers);
+		$headers .= "Content-Type: text/plain; charset=".$this->GetCharset()."\r\n";
+		#$subject =  "=?".$this->GetCharset()."?B?" . base64_encode($subject) . "?=";
+		$subject = ( $subject ? "=?".( $charset ? $charset : $this->GetCharset() )."?B?" . base64_encode($subject) . "?=" : "" );
+		#@mail($email, $subject, "<html><head></head><body>".$message."</body></html>", $headers);
+
+		$message = wordwrap($message, 74, "\n", 0);
+		@mail($email, $subject, $message, $headers);
 	}
 
 	// PAGE SAVING ROUTINE
@@ -1221,7 +1226,7 @@ class Wacko
 						"edit_note = '".quote($this->dblink, $edit_note)."', ".
 						"minor_edit = '".quote($this->dblink, $minor_edit)."', ".
 						"lang = '".quote($this->dblink, $lang)."', ".
-						"title = '".quote($this->dblink, $title)."', ".
+						"title = '".quote($this->dblink, htmlspecialchars($title))."', ".
 						"tag = '".quote($this->dblink, $tag)."'");
 
 				// saving acls
@@ -1269,12 +1274,12 @@ class Wacko
 								$this->SetResource ($lang);
 								$this->SetLanguage ($lang);
 
-								$subject = "[".$this->config["wacko_name"]."] ".$this->GetTranslation("CommentForWatchedPage",$lang)."'".$this->GetCommentOnTag($comment_on_id)."'";
-								$message = $this->GetTranslation("MailHello",$lang). $Watcher["user"].".\n\n".
+								$subject = "[".$this->config["wacko_name"]."] ".$this->GetTranslation("CommentForWatchedPage", $lang)."'".$this->GetCommentOnTag($comment_on_id)."'";
+								$message = $this->GetTranslation("MailHello", $lang). $Watcher["user"].".\n\n".
 											$username.
-											$this->GetTranslation("SomeoneCommented",$lang)."<br />  * <a href=\"".$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."\">".$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."</a><br /><hr />".
+											$this->GetTranslation("SomeoneCommented", $lang)."<br />  * <a href=\"".$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."\">".$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."</a><br /><hr />".
 											$this->Format($body_r, "post_wacko")."<hr /><br />".
-											$this->GetTranslation("MailGoodbye",$lang)."\n".
+											$this->GetTranslation("MailGoodbye", $lang)."\n".
 											$this->config["wacko_name"]."\n".
 											$this->config["base_url"];
 
@@ -1334,7 +1339,7 @@ class Wacko
 							"body_toc = '".quote($this->dblink, $body_toc)."', ".
 							"edit_note = '".quote($this->dblink, $edit_note)."', ".
 							"minor_edit = '".quote($this->dblink, $minor_edit)."', ".
-							"title = '".quote($this->dblink, $title)."' ".
+							"title = '".quote($this->dblink, htmlspecialchars($title))."' ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
 						"LIMIT 1");
 				}
@@ -1351,7 +1356,7 @@ class Wacko
 					$_GET["a"] = -1;
 					$_GET["b"] = $page["id"];
 					$_GET["fastdiff"] = 1;
-					$diff = $this->IncludeBuffered("handlers/page/diff.php", "oops");
+					$diff = $this->IncludeBuffered("handlers/page/diff.php", "oops", array("source" => 1));
 
 					// notifying watchers
 					$user_id = $this->GetUserId();
@@ -1389,13 +1394,15 @@ class Wacko
 									$this->SetResource ($lang);
 									$this->SetLanguage ($lang);
 
-									$subject = "[".$this->config["wacko_name"]."] ".$this->GetTranslation("WatchedPageChanged",$lang)."'".$tag."'";
-									$message = "<style>.additions {color: #008800;}\n.deletions {color: #880000;}</style>".
-										$this->GetTranslation("MailHello",$lang). $Watcher["user"]."\n\n".
+									$subject = "[".$this->config["wacko_name"]."] ".$this->GetTranslation("WatchedPageChanged", $lang)."'".$tag."'";
+									$message = $this->GetTranslation("MailHello", $lang). $Watcher["user"]."\n\n".
 										$username.
-										$this->GetTranslation("SomeoneChangedThisPage",$lang)."\n". //* <a href=\"".$this->Href("",$tag,"")."\">".$this->Href("",$tag,"")."</a><br />";
-										"<hr />".$diff."<hr />".
-										"<br />".$this->GetTranslation("MailGoodbye",$lang)."\n".
+										$this->GetTranslation("SomeoneChangedThisPage", $lang)."\n".
+										$this->Href('', $tag)."\n\n".
+										"======================================================================".
+										$this->Format($diff, "html2mail").
+										"\n======================================================================\n\n".
+										$this->GetTranslation("MailGoodbye", $lang)."\n".
 										$this->config["wacko_name"]."\n".
 										$this->config["base_url"];
 
