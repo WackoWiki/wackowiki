@@ -17,7 +17,7 @@ $wackoTranslation = array(
 	"RegistrationPage" => "Регистрация",
 	// login panel
 	"LoginWelcome" => "Вход",
-	"LoginWelcome2" => "[[/Регистрация Регистрация]]",
+	"LoginWelcome2" => "((/Регистрация Регистрация))",
 	"LoginName" => "((WackoWiki:Doc/Russian/ЧтоТакоеИмяФамилия ИмяФамилия @@ru))",
 	"LoginPassword" => "Пароль",
 	"LoginButton" => "Войти в систему!",
@@ -394,7 +394,7 @@ $wackoTranslation = array(
 	"Bookmarks" => "Избранное",
 	"PleaseLogin" => "((Settings Введите имя пользователя и пароль))",
 	"ReallyDeleteComment" => "Вы действительно хотите УДАЛИТЬ комментарий? <br />Восстановить его потом не удастся.",
-	"ForgotLink" => "Забыли пароль?",
+	"ForgotLink" => "((/Пароль Забыли пароль?))",
 	"RegistrationClosed" => "Регистрация на данном сайте невозможна. Попробуйте связаться с админом.",
 	"ACLForCluster" => "Права доступа для КЛАСТЕРА %1",
 	"ACLAreYouSure" => "Вы собираетесь сменить права этой страницы и всех подстраниц. Продолжить?",

@@ -90,7 +90,7 @@ else
 	<p>
 		<input type="submit" value="<?php echo $this->GetTranslation("LoginButton"); ?>" />
 	</p>
-	<p><a href="<?php echo $this->Href("", "Password"); ?>"><?php echo $this->GetTranslation("ForgotLink"); ?></a></p>
+	<p><?php echo $this->FormatTranslation("ForgotLink"); ?></p>
 	<p><?php echo $this->FormatTranslation("LoginWelcome2"); ?></p>
 </div>
 <script type="text/javascript">
