@@ -17,11 +17,11 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 	}
 	else
 	{
+		if ($this->page["comment_on_id"])
+			$comment_on_id = $this->page["comment_on_id"];
+
 		if (isset($_POST["delete"]) && $_POST["delete"] == 1)
 		{
-			if ($this->page["comment_on_id"])
-				$comment_on_id = $this->page["comment_on_id"];
-
 			// Remove page
 			if ($this->RemoveReferrers($this->tag))
 			{
@@ -35,29 +35,33 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			{
 				print(str_replace("%1", $this->tag, $this->GetTranslation("AclsRemoved"))."<br />\n");
 			}
-			if ($this->RemoveWatches($this->tag))
+			if (!$comment_on_id)
 			{
-				print(str_replace("%1", $this->tag, $this->GetTranslation("WatchesRemoved"))."<br />\n");
-			}
-			if ($this->RemoveComments($this->tag))
-			{
-				$this->UseClass('rss', 'classes/');
-				$xml = new RSS($this);
-				$xml->Comments();
-				print(str_replace("%1", $this->tag, $this->GetTranslation("CommentsRemoved"))."<br />\n");
-			}
-			if ($this->RemoveFiles($this->tag))
-			{
-				print(str_replace("%1", $this->tag, $this->GetTranslation("FilesRemoved"))."<br />\n");
+				if ($this->RemoveWatches($this->tag))
+				{
+					print(str_replace("%1", $this->tag, $this->GetTranslation("WatchesRemoved"))."<br />\n");
+				}
+				if ($this->RemoveComments($this->tag))
+				{
+					print(str_replace("%1", $this->tag, $this->GetTranslation("CommentsRemoved"))."<br />\n");
+				}
+				if ($this->RemoveFiles($this->tag))
+				{
+					print(str_replace("%1", $this->tag, $this->GetTranslation("FilesRemoved"))."<br />\n");
+				}
 			}
 			if ($this->RemovePage($this->tag))
 			{
 				$this->UseClass('rss', 'classes/');
 				$xml = new RSS($this);
 				$xml->Comments();
-				$xml->Changes();
+				if (!$comment_on_id)
+				{
+					$xml->Changes();
+				}
 				print(str_replace("%1", $this->tag, $this->GetTranslation("PageRemoved"))."<br />\n");
 			}
+
 			if ($this->IsAdmin() && $_POST["revisions"] == 1 && !$comment_on_id)
 			{
 				$this->RemoveRevisions($this->tag);
@@ -109,14 +113,26 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 		}
 		else
 		{
-			echo "<div class=\"warning\">".$this->GetTranslation("ReallyDelete".
-				($this->page["comment_on_id"] ? "Comment" : ""))."</div>";
+			// show warning
+			echo "<div class=\"warning\">";
+
+			if ($comment_on_id)
+			{
+				echo $this->GetTranslation("ReallyDeleteComment");
+			}
+			else
+			{
+				echo $this->GetTranslation("ReallyDelete");
+			}
+
+			echo "</div>";
+
 			echo $this->FormOpen("remove");
 
 			// admin privileged removal options
 			if ($this->IsAdmin())
 			{
-				if (!$this->page["comment_on_id"])
+				if (!$comment_on_id)
 				{
 					echo "<input id=\"removerevisions\" type=\"checkbox\" name=\"revisions\" value=\"1\" />";
 					echo "<label for=\"removerevisions\">".$this->GetTranslation("RemoveRevisions")."</label><br />";
