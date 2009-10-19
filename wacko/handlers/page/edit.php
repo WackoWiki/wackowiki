@@ -236,6 +236,8 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				$output .= "<label for=\"minor_edit\">".$this->GetTranslation("EditMinor")."</label>";
 				$output .= "<br />";
 			}
+			else
+				$output .= "<br />";
 		}
 
 		print($output);
