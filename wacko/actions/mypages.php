@@ -1,44 +1,40 @@
 <?php
 
 // actions/mypages.php
-//
 
-if ($user = $this->GetUser())
+if ($user = $this->GetUserName())
 {
-	$my_pages_count = 0;
+	$limit	= 100;
+	$prefix = $this->config['table_prefix'];
 
 	if ($_GET["bydate"] == 1 || $bydate == 1)
 	{
-		print("<strong>".$this->GetTranslation("ListOwnedPages2").".</strong>");
-		print("<br /><small><strong>(<a href=\"".$this->href("", $tag)."\">".$this->GetTranslation("OrderABC")."</a>) (<a href=\"".$this->href("", $tag)."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."bychange=1\">".$this->GetTranslation("OrderChange")."</a>) </strong></small><br /><br />\n");
+		print($this->GetTranslation("ListOwnedPages2"));
+		print("<br />(<a href=\"".$this->href("", "", "mode=mypages")."#list"."\">".
+		$this->GetTranslation("OrderABC")."</a>) (<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."#list"."\">".
+		$this->GetTranslation("OrderChange")."</a>) <br /><br />\n");
+		$count	= $this->LoadSingle(
+			"SELECT COUNT(tag) AS n ".
+			"FROM {$prefix}pages ".
+			"WHERE owner = '".quote($this->dblink, $user)."' ".
+				"AND comment_on_id = '0'", 1);
+		
+		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bydate=1#list');
 
 		if ($pages = $this->LoadAll(
-		"SELECT tag, time ".
-		"FROM ".$this->config["table_prefix"]."revisions ".
-		"WHERE owner = '".quote($this->dblink, $this->GetUserName())."' ".
-			"AND tag NOT LIKE 'Comment%' ".
-		"ORDER BY time DESC, tag ASC", 1))
+		"SELECT tag, created ".
+		"FROM {$prefix}pages ".
+		"WHERE owner = '".quote($this->dblink, $user)."' ".
+			"AND comment_on_id = '0' ".
+		"ORDER BY created DESC, tag ASC ".
+		"LIMIT {$pagination['offset']}, $limit", 1))
 		{
 			echo "<ul>\n";
 
 			foreach ($pages as $page)
 			{
-				$edited_pages[$page["tag"]] = $page["time"];
-			}
-
-			$pages = $this->LoadAll("SELECT tag, time FROM ".$this->config["table_prefix"]."pages WHERE owner = '".quote($this->dblink, $this->GetUserName())."' AND tag NOT LIKE 'Comment%' ORDER BY time DESC, tag ASC", 1);
-			foreach ($pages as $page)
-			{
-				if (!$edited_pages[$page["tag"]]) $edited_pages[$page["tag"]] = $page["time"];
-			}
-
-			// $edited_pages = array_reverse($edited_pages);
-			arsort($edited_pages);
-
-			foreach ($edited_pages as $page["tag"] => $page["time"])
-			{
 				// day header
-				list($day, $time) = explode(" ", $page["time"]);
+				list($day, $time) = explode(" ", $page["created"]);
 				if ($day != $curday)
 				{
 					if ($curday)
@@ -52,9 +48,11 @@ if ($user = $this->GetUser())
 				// print entry
 				print("<li>$time (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."</li>\n");
 
-				$my_pages_count++;
+
 			}
 			echo "</ul>\n</li>\n</ul>\n";
+			// pagination
+			echo "<br /><small>{$pagination['text']}</small>\n";
 		}
 		else
 		{
@@ -63,26 +61,38 @@ if ($user = $this->GetUser())
 	}
 	else if ($_GET["bychange"] == 1 || $bychange==1)
 	{
-		print("<strong>".$this->GetTranslation("ListOwnedPages3")."</strong>.");
-		print("<br /><small><strong>(<a href=\"".$this->href("", $tag)."\">".$this->GetTranslation("OrderABC")."</a>) (<a href=\"".$this->href("", $tag)."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."bydate=1\">".$this->GetTranslation("OrderDate")."</a>)</strong></small><br /><br />\n");
+		$count	= $this->LoadSingle(
+			"SELECT COUNT( DISTINCT p.tag ) AS n ".
+			"FROM {$prefix}pages AS p ".
+			"LEFT JOIN {$prefix}revisions AS r ".
+				"ON (p.tag = r.tag ".
+					"AND p.owner = '".quote($this->dblink, $user)."') ".
+			"WHERE p.comment_on_id = '0' ".
+				"AND r.comment_on_id = '0'", 1);
+
+		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bychange=1#list');
+
+		print($this->GetTranslation('ListOwnedPages3').'.');  
+		print('<br />(<a href="'.
+			$this->href('', '', 'mode=mypages').'#list">'.$this->GetTranslation('OrderABC').
+			'</a>) (<a href="'.$this->href('', '', 'mode=mypages&amp;bydate=1').'#list">'.
+			$this->GetTranslation('OrderDate')."</a>)<br /><br />\n");  
 
 		if ($pages = $this->LoadAll(
-		"SELECT tag, time ".
-		"FROM ".$this->config["table_prefix"]."pages ".
-		"WHERE owner = '".quote($this->dblink, $this->GetUserName())."' ".
-			"AND tag NOT LIKE 'Comment%' ".
-		"ORDER BY time ASC, tag ASC", 1))
+			"SELECT p.tag AS tag, p.time AS time ".
+			"FROM {$prefix}pages AS p ".
+			"LEFT JOIN {$prefix}revisions AS r ".
+				"ON (p.tag = r.tag ".
+					"AND p.owner = '".quote($this->dblink, $user)."') ".
+			"WHERE p.comment_on_id = '0' ".
+				"AND r.comment_on_id = '0' ".
+			"GROUP BY tag ".
+			"ORDER BY time DESC, tag ASC ".
+			"LIMIT {$pagination['offset']}, $limit", 1))
 		{
 			echo "<ul>\n";
 
 			foreach ($pages as $page)
-			{
-				$edited_pages[$page["tag"]] = $page["time"];
-			}
-
-			$edited_pages = array_reverse($edited_pages);
-
-			foreach ($edited_pages as $page["tag"] => $page["time"])
 			{
 				// day header
 				list($day, $time) = explode(" ", $page["time"]);
@@ -99,25 +109,38 @@ if ($user = $this->GetUser())
 				// print entry
 				print("<li>$time (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."</li>\n");
 
-				$my_pages_count++;
 			}
 			echo "</ul>\n</li>\n</ul>\n";
+			// pagination
+			echo "<br /><small>{$pagination['text']}</small>\n";
 		}
 		else
 		{
 			echo $this->GetTranslation("NoPagesFound");
 		}
 	}
-	else {
-		print("<strong>".$this->GetTranslation("ListOwnedPages").".</strong>\n");
-		print("<br /><small><strong>(<a href=\"".$this->href("", $tag)."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."bydate=1\">".$this->GetTranslation("OrderDate")."</a>) (<a href=\"".$this->href("", $tag)."".($this->GetConfigValue("rewrite_mode")?"?":"&amp;")."bychange=1\">".$this->GetTranslation("OrderChange")."</a>) </strong></small><br /><br />\n");
+	else
+	{
+		$count	= $this->LoadSingle(
+			"SELECT COUNT(tag) AS n ".
+			"FROM {$prefix}pages ".
+			"WHERE owner = '".quote($this->dblink, $user)."' ".
+				"AND comment_on_id = '0'", 1);
+
+		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mypages#list');
+
+		print($this->GetTranslation("ListOwnedPages"));
+		print("<br />(<a href=\"".$this->href("", "", "mode=mypages&amp;bydate=1")."#list"."\">".
+		$this->GetTranslation("OrderDate")."</a>) (<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."#list"."\">".
+		$this->GetTranslation("OrderChange")."</a>) <br /><br />\n");
 
 		if ($pages = $this->LoadAll(
-		"SELECT tag, time ".
-		"FROM ".$this->config["table_prefix"]."pages ".
-		"WHERE owner = '".quote($this->dblink, $this->GetUserName())."' ".
-			"AND tag NOT LIKE 'Comment%' ".
-		"ORDER BY tag ASC", 1))
+			"SELECT tag, time ".
+			"FROM {$prefix}pages ".
+			"WHERE owner = '".quote($this->dblink, $user)."' ".
+				"AND comment_on_id = '0' ".
+			"ORDER BY tag ASC ".
+			"LIMIT {$pagination['offset']}, $limit", 1))
 		{
 			echo "<ul>\n";
 
@@ -141,10 +164,10 @@ if ($user = $this->GetUser())
 				}
 
 				print("<li>".$this->ComposeLinkToPage($page["tag"])."</li>\n");
-
-				$my_pages_count++;
 			}
 			echo "</ul>\n</li>\n</ul>\n";
+			// pagination
+			echo "<br /><small>{$pagination['text']}</small>\n";
 		}
 		else
 		{
@@ -152,7 +175,7 @@ if ($user = $this->GetUser())
 		}
 	}
 
-	if ($my_pages_count == 0)
+	if ($pages == false)
 	{
 		echo $this->GetTranslation("YouDontOwn");
 	}
