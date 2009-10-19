@@ -75,9 +75,9 @@ else
 	<h3><?php echo $this->GetTranslation("LoginWelcome"); ?></h3>
 	<?php
 	if ($error)
-	{ ?>
-	<div class="error"><?php print $this->Format($error); ?></div>
-	<?php	}
+	{
+		if ($error) $this->SetMessage($this->Format($error));
+	}
 	?>
 	<p>
 		<label for="name"><?php echo $this->FormatTranslation("LoginName");?>:</label>
