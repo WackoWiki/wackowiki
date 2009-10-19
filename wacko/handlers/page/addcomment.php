@@ -90,7 +90,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 	}
 
 	// redirect to page
-	$this->redirect($this->href());
+	$this->Redirect($this->href('', '', 'show_comments=1').'#Comment'.$num);
 }
 else
 {
