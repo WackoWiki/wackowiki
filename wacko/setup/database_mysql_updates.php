@@ -1,4 +1,5 @@
 <?php
+
 /*
  Wacko Wiki MySQL Table Updates Script
 
@@ -179,4 +180,7 @@ $alter_users_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."users CHANGE show_
 $alter_users_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."users CHANGE show_spaces show_spaces TINYINT(1) NOT NULL DEFAULT '1'";
 $alter_users_r4_2_5 = "ALTER TABLE ".$config["table_prefix"]."users CHANGE showdatetime show_datetime TINYINT(1) NOT NULL DEFAULT '1'";
 $alter_users_r4_2_6 = "ALTER TABLE ".$config["table_prefix"]."users CHANGE typografica typografica TINYINT(1) NOT NULL DEFAULT '1'";
+
+$update_users_r4_2 = "UPDATE ".$config["table_prefix"]."users SET show_comments = '0' WHERE show_comments = '2';";
+
 ?>
