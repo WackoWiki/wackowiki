@@ -4,7 +4,8 @@
 
 if ($user = $this->GetUserName())
 {
-	$limit	= 100;
+	if ($max) $limit = $max;
+	else $limit	= 100;
 	$prefix = $this->config['table_prefix'];
 
 	if ($_GET["bydate"] == 1 || $bydate == 1)

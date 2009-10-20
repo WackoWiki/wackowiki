@@ -7,7 +7,8 @@ if ($user_id = $this->GetUserId())
 	else if ($_GET['setwatch'] != '')
 		$this->SetWatch($user_id, $_GET['setwatch']);
 
-	$limit	= 100;
+	if ($max) $limit = $max;
+	else $limit	= 100;
 	$prefix = $this->config["table_prefix"];
 
 	if ($_GET['unwatched'] == 1)
