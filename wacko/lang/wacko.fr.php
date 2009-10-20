@@ -42,6 +42,7 @@ $wackoTranslation = array(
 	"WikieditAutocomplete" => "Confirmer les liens Wiki ou wikilinks par Ctrl+Espace",
 	"WikiEditInactiveJs" => "In order to be able to use WikiEdit, please enable JavaScript in your browser.",
 	"Typografica" => "Correction automatique de la typographie lors de l&rsquo;affichage",
+	"Comment" => "Commentaire",
 	"Comments_0" => "Cette page n&rsquo;a pas été commentée.",
 	"Comments_1" => "Cette page a suscité un commentaire.",
 	"Comments_n" => "Cette page a suscité %1 commentaires.",
