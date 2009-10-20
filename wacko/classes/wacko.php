@@ -2162,7 +2162,7 @@ class Wacko
 		return $text;
 	}
 
-	function AddSpacesTitel($text)
+	function AddSpacesTitle($text)
 	{
 		$text = preg_replace("/(".$this->language["ALPHANUM"].")(".$this->language["UPPERNUM"].")/", "\\1 \\2", $text);
 		$text = preg_replace("/(".$this->language["UPPERNUM"].")(".$this->language["UPPERNUM"].")/", "\\1 \\2", $text);
@@ -3445,7 +3445,7 @@ class Wacko
 			if ($page['title'] == true)
 				return $page['title'];
 			else
-				return $this->AddSpacesTitel(trim(substr($tag, strrpos($tag, '/')), '/'));
+				return $this->AddSpacesTitle(trim(substr($tag, strrpos($tag, '/')), '/'));
 		}
 		else if ($tag == false && $this->page == true)
 		{
@@ -3453,7 +3453,7 @@ class Wacko
 		}
 		else if ($tag == false && $this->page == false)
 		{
-			return $this->AddSpacesTitel(trim(substr($this->tag, strrpos($this->tag, '/')), '/'));
+			return $this->AddSpacesTitle(trim(substr($this->tag, strrpos($this->tag, '/')), '/'));
 		}
 	}
 
