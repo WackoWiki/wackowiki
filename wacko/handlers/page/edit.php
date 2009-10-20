@@ -36,97 +36,105 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			if ($this->page && $this->page["time"] != $_POST["previous"])
 				$error = $this->GetTranslation("OverwriteAlert");
 
-				// check for edit note
-				if (($this->GetConfigValue("edit_summary") == 2) && $_POST["edit_note"] == "" && $this->page["comment_on_id"] == 0)
-					$error .= $this->GetTranslation("EditNoteMissing");
+			// check for edit note
+			if (($this->GetConfigValue("edit_summary") == 2) && $_POST["edit_note"] == "" && $this->page["comment_on_id"] == 0)
+				$error .= $this->GetTranslation("EditNoteMissing");
 
-					if(($this->page && $this->GetConfigValue("captcha_edit_page")) || (!$this->page && $this->GetConfigValue("captcha_new_page")))
+			if(($this->page && $this->GetConfigValue("captcha_edit_page")) || (!$this->page && $this->GetConfigValue("captcha_new_page")))
+			{
+				// Don't load the captcha at all if the GD extension isn't enabled
+				if(extension_loaded('gd'))
+				{
+					//check whether anonymous user
+					//anonymous user has the IP or host name as name
+					//if name contains '.', we assume it's anonymous
+					if(strpos($this->GetUserName(), '.'))
 					{
-						// Don't load the captcha at all if the GD extension isn't enabled
-						if(extension_loaded('gd'))
+						//anonymous user, check the captcha
+						if(!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
 						{
-							//check whether anonymous user
-							//anonymous user has the IP or host name as name
-							//if name contains '.', we assume it's anonymous
-							if(strpos($this->GetUserName(), '.'))
+							if($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
 							{
-								//anonymous user, check the captcha
-								if(!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
-								{
-									if($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
-									{
-										// reset freecap session vars
-										// cannot stress enough how important it is to do this
-										// defeats re-use of known image with spoofed session id
-										$_SESSION['freecap_attempts'] = 0;
-										$_SESSION['freecap_word_hash'] = false;
+								// reset freecap session vars
+								// cannot stress enough how important it is to do this
+								// defeats re-use of known image with spoofed session id
+								$_SESSION['freecap_attempts'] = 0;
+								$_SESSION['freecap_word_hash'] = false;
 
-										// now process form
-										$word_ok = true;
-									}
-									else
-									{
-										$word_ok = false;
-									}
-								}
-								else
-								{
-									$word_ok = false;
-								}
-
-								if(!$word_ok)
-								{
-									//not the right word
-									$error = $this->GetTranslation("SpamAlert");
-								}
-							}
-						}
-					}
-
-					$body = str_replace("\r", "", $_POST["body"]);
-
-					// You're not allowed to have empty comments as they would be kinda pointless.
-					if (!$body && $this->page["comment_on_id"] != 0)
-					$error .= $this->GetTranslation("EmptyComment");
-
-					// store
-					if (!$error)
-					{
-						// add page (revisions)
-						$body_r = $this->SavePage($this->tag, $body, $edit_note, $minor_edit, $this->page["comment_on_id"], $title);
-
-						// log event
-						if ($this->page["comment_on_id"] != 0)
-						{
-							// comment modified
-							$this->Log(6, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogCommentEdited")));
-						}
-						else
-						{
-							if ($this->page == false)
-							{
-								// new page created
-								$this->Log(4, str_replace("%1", $this->tag." ".$_POST["title"], $this->GetTranslation("LogPageCreated")));
+								// now process form
+								$word_ok = true;
 							}
 							else
 							{
-								// old page modified
-								$this->Log(6, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogPageEdited")));
+								$word_ok = false;
 							}
-
-							// now we render it internally so we can write the updated link table.
-							$this->ClearLinkTable();
-							$this->StartLinkTracking();
-							$dummy = $this->Format($body_r, "post_wacko");
-							$this->StopLinkTracking();
-							$this->WriteLinkTable();
-							$this->ClearLinkTable();
+						}
+						else
+						{
+							$word_ok = false;
 						}
 
-						// forward
-						$this->pageCache[$this->supertag] = "";
-						$this->Redirect($this->href("", $this->tag).$this->AddDateTime($this->tag));
+						if(!$word_ok)
+						{
+							//not the right word
+							$error = $this->GetTranslation("SpamAlert");
+						}
 					}
+				}
+			}
+
+			$body = str_replace("\r", "", $_POST["body"]);
+
+			// You're not allowed to have empty comments as they would be kinda pointless.
+			if (!$body && $this->page["comment_on_id"] != 0)
+			$error .= $this->GetTranslation("EmptyComment");
+
+			// store
+			if (!$error)
+			{
+				// add page (revisions)
+				$body_r = $this->SavePage($this->tag, $body, $edit_note, $minor_edit, $this->page["comment_on_id"], $title);
+
+				// log event
+				if ($this->page["comment_on_id"] != 0)
+				{
+					// comment modified
+					$this->Log(6, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogCommentEdited")));
+				}
+				else
+				{
+					if ($this->page == false)
+					{
+						// new page created
+						$this->Log(4, str_replace("%1", $this->tag." ".$_POST["title"], $this->GetTranslation("LogPageCreated")));
+					}
+					else
+					{
+						// old page modified
+						$this->Log(6, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogPageEdited")));
+					}
+
+					// now we render it internally so we can write the updated link table.
+					$this->ClearLinkTable();
+					$this->StartLinkTracking();
+					$dummy = $this->Format($body_r, "post_wacko");
+					$this->StopLinkTracking();
+					$this->WriteLinkTable();
+					$this->ClearLinkTable();
+				}
+
+				// forward
+				$this->pageCache[$this->supertag] = "";
+
+				if ($this->page["comment_on_id"] != 0)
+				{
+					$this->Redirect($this->href("", $this->GetCommentOnTag($this->page["comment_on_id"]), "show_comments=1#".$this->page["tag"]));
+				}
+				else
+				{
+					$this->Redirect($this->href("", $this->tag).$this->AddDateTime($this->tag));
+				}
+			}
 		}
 		// saving blank document
 		else if ($_POST["body"] == "")
