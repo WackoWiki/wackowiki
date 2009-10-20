@@ -2,7 +2,8 @@
 
 if ($user_id = $this->GetUserId())
 {
-	$limit	= 100;
+	if ($max) $limit = $max;
+	else $limit	= 100;
 	$pref	= $this->config['table_prefix'];
 	
 	echo $this->GetTranslation('MyChangesWatches').
