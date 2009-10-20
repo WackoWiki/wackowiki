@@ -1,6 +1,30 @@
 <div id="page">
 <?php
 
+if (!function_exists('HandlerDiffLoadPageById'))
+{
+	function HandlerDiffLoadPageById($wacko, $id)
+	{
+		// extracting
+		if ($id != "-1")
+		{
+			return $wacko->LoadSingle(
+				"SELECT * ".
+				"FROM ".$wacko->config["table_prefix"]."revisions ".
+				"WHERE id = '".quote($wacko->dblink, $id)."' ".
+				"LIMIT 1");
+		}
+		else
+		{
+			return $wacko->LoadSingle(
+				"SELECT * ".
+				"FROM ".$wacko->config["table_prefix"]."pages ".
+				"WHERE tag='".quote($wacko->dblink, $wacko->GetPageTag())."' ".
+				"LIMIT 1");
+		}
+	}
+}
+
 // redirect to show method if page don't exists
 if (!$this->page) $this->Redirect($this->href("show"));
 
@@ -10,8 +34,8 @@ if (!$this->page) $this->Redirect($this->href("show"));
 // If asked, call original diff
 if ($this->HasAccess("read")) {
 
-	$pageA = $this->LoadPageById($b);
-	$pageB = $this->LoadPageById($a);
+	$pageA = HandlerDiffLoadPageById($this, $b);
+	$pageB = HandlerDiffLoadPageById($this, $a);
 
 	if ($this->HasAccess("read", $pageA["tag"]) && $this->HasAccess("read", $pageB["tag"]) ) {
 

@@ -635,22 +635,6 @@ class Wacko
 			return $this->config["meta_description"];
 	}
 
-	function LoadPageById($id)
-	{
-		if ($id != "-1")
-			return $this->LoadSingle(
-				"SELECT * ".
-				"FROM ".$this->config["table_prefix"]."revisions ".
-				"WHERE id = '".quote($this->dblink, $id)."' ".
-				"LIMIT 1");
-		else
-			return $this->LoadSingle(
-				"SELECT * ".
-				"FROM ".$this->config["table_prefix"]."pages ".
-				"WHERE tag='".quote($this->dblink, $this->GetPageTag())."' ".
-				"LIMIT 1");
-	}
-
 	// wrapper for OldLoadPage
 	function LoadPage($tag, $time = "", $cache = LOAD_CACHE, $metadataonly = LOAD_ALL)
 	{
