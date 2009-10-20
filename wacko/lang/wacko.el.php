@@ -43,6 +43,7 @@ $wackoTranslation = array(
 	"WikieditAutocomplete" => "Ολοκλήρωση των wikilinks με Ctrl+Space",
 	"WikiEditInactiveJs" => "In order to be able to use WikiEdit, please enable JavaScript in your browser.",
 	"Typografica" => "Αυτόματη διόρθωση των τυπογραφικών κατά την προβολή",
+	"Comment" => "Comment",
 	"Comments_0" => "Δεν υπάρχουν σχόλια στην σελίδα.",
 	"Comments_1" => "Υπάρχει ένα σχόλιο στην σελίδα.",
 	"Comments_n" => "Υπάρχουν %1 σχόλια στην σελίδα.",
