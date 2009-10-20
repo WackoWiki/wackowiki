@@ -89,7 +89,7 @@ if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
 			print("<li><span class=\"dt\">".$time."</span> &mdash; (<a href=\"".
 			$this->href("", $page["comment_on_tag"], "show_comments=1")."#".$page["comment_tag"]."\">".$page["comment_on_tag"]."</a>".
 			") . . . . . . . . . . . . . . . . <small>".$this->GetTranslation("LatestCommentBy")." ".
-			($this->IsWikiName($page["comment_user"])?$this->Link("/".$page["comment_user"],"",$page["comment_user"] ):$page["comment_user"])."</small></li>\n");
+			($this->IsWikiName($page["comment_user"]) ? $this->Link("/".$page["comment_user"],"",$page["comment_user"] ) : $page["comment_user"])."</small></li>\n");
 		}
 	}
 	echo "</ul>\n</li>\n</ul>\n";
