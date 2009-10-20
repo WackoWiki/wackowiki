@@ -1145,8 +1145,9 @@ class Wacko
 		// check privileges
 		if ($this->HasAccess("write", $tag) || ($comment_on_id && $this->HasAccess("comment", $this->GetCommentOnTag($comment_on_id))))
 		{
+			// preformatter (macros and such)
 			$body = $this->Format($body, "preformat");
-			// is page new?
+
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
 			if (!$oldPage = $this->LoadPage($tag))
 			{
@@ -1161,6 +1162,15 @@ class Wacko
 					$lang = $this->config["language"];
 
 				$this->SetLanguage($lang);
+
+				// getting title
+				if ($title == "")
+				{
+					if ($comment_on_id == true)
+						$title = $this->GetTranslation("Comment")." ".substr($tag, 7);
+					else
+						$title = $this->GetPageTitle($tag);
+				}
 
 				$body_r = $this->Format($body, "wacko");
 				if ($this->config["paragrafica"] && !$comment_on_id)
@@ -1226,14 +1236,12 @@ class Wacko
 						"edit_note = '".quote($this->dblink, $edit_note)."', ".
 						"minor_edit = '".quote($this->dblink, $minor_edit)."', ".
 						"lang = '".quote($this->dblink, $lang)."', ".
-						"title = '".quote($this->dblink, htmlspecialchars($title))."', ".
-						"tag = '".quote($this->dblink, $tag)."'");
+						"tag = '".quote($this->dblink, $tag)."', ".
+						"title = '".quote($this->dblink, htmlspecialchars($title))."'");
 
 				// saving acls
-				// $this->SaveAcl($tag, "write", ($comment_on_id ? "" : $write_acl));
 				$this->SaveAcl($tag, "write", $write_acl);
 				$this->SaveAcl($tag, "read", $read_acl);
-				// $this->SaveAcl($tag, "comment", ($comment_on_id ? "" : $comment_acl));
 				$this->SaveAcl($tag, "comment", $comment_acl);
 
 				// set watch
@@ -2146,11 +2154,11 @@ class Wacko
 
 	function AddSpaces($text)
 	{
-
 		$show = "1";
 		if ($user = $this->GetUser()) $show = $user["show_spaces"];
 		if (!$show) $show = $this->config["show_spaces"];
-		if ($show != "0") {
+		if ($show != "0")
+		{
 			$text = preg_replace("/(".$this->language["ALPHANUM"].")(".$this->language["UPPERNUM"].")/","\\1&nbsp;\\2",$text);
 			$text = preg_replace("/(".$this->language["UPPERNUM"].")(".$this->language["UPPERNUM"].")/","\\1&nbsp;\\2",$text);
 			$text = preg_replace("/(".$this->language["ALPHANUM"].")\//","\\1&nbsp;/",$text);
@@ -2162,6 +2170,26 @@ class Wacko
 			$text = preg_replace("/(".$this->language["ALPHA"].")([0-9])/","\\1&nbsp;\\2",$text);
 			$text = preg_replace("/([0-9])&nbsp;(?=[0-9])/","\\1",$text);
 		}
+
+		if (strpos($text, "/")   === 0) $text = $this->GetTranslation("RootLinkIcon").substr($text, 1);
+		if (strpos($text, "!/")  === 0) $text = $this->GetTranslation("SubLinkIcon").substr($text, 2);
+		if (strpos($text, "../") === 0) $text = $this->GetTranslation("UpLinkIcon").substr($text, 3);
+
+		return $text;
+	}
+
+	function AddSpacesTitel($text)
+	{
+		$text = preg_replace("/(".$this->language["ALPHANUM"].")(".$this->language["UPPERNUM"].")/", "\\1 \\2", $text);
+		$text = preg_replace("/(".$this->language["UPPERNUM"].")(".$this->language["UPPERNUM"].")/", "\\1 \\2", $text);
+		$text = preg_replace("/(".$this->language["ALPHANUM"].")\//", "\\1 /", $text);
+		$text = preg_replace("/(".$this->language["UPPER"].")&nbsp;(?=".$this->language["UPPER"]."&nbsp;".$this->language["UPPERNUM"].")/", "\\1", $text);
+		$text = preg_replace("/(".$this->language["UPPER"].")&nbsp;(?=".$this->language["UPPER"]."&nbsp;\/)/", "\\1", $text);
+		$text = preg_replace("/\/(".$this->language["ALPHANUM"].")/", "/&nbsp;\\1", $text);
+		$text = preg_replace("/(".$this->language["UPPERNUM"].")&nbsp;(".$this->language["UPPERNUM"].")($|\b)/", "\\1\\2", $text);
+		$text = preg_replace("/([0-9])(".$this->language["ALPHA"].")/", "\\1 \\2", $text);
+		$text = preg_replace("/(".$this->language["ALPHA"].")([0-9])/", "\\1 \\2", $text);
+		$text = preg_replace("/([0-9]) (?!".$this->language["ALPHA"].")/", "\\1", $text);
 
 		if (strpos($text, "/")   === 0) $text = $this->GetTranslation("RootLinkIcon").substr($text, 1);
 		if (strpos($text, "!/")  === 0) $text = $this->GetTranslation("SubLinkIcon").substr($text, 2);
@@ -2996,7 +3024,7 @@ class Wacko
 		if (!empty($_REQUEST["addbookmark"]) && $user)
 		{
 			// writing bookmark
-			$bookmark = "((".$this->GetPageTag().($user["lang"] != $this->pagelang ? " @@".$this->pagelang : "")."))";
+			$bookmark = "((".$this->GetPageTag()." ".$this->GetPageTitle().($user["lang"] != $this->pagelang ? " @@".$this->pagelang : "")."))";
 
 			if (!in_array($bookmark, $bookmarks))
 			{
@@ -3433,7 +3461,7 @@ class Wacko
 			if ($page['title'] == true)
 				return $page['title'];
 			else
-				return $this->AddSpaces(trim(substr($tag, strrpos($tag, '/')), '/'));
+				return $this->AddSpacesTitel(trim(substr($tag, strrpos($tag, '/')), '/'));
 		}
 		else if ($tag == false && $this->page == true)
 		{
@@ -3441,7 +3469,7 @@ class Wacko
 		}
 		else if ($tag == false && $this->page == false)
 		{
-			return $this->AddSpaces(trim(substr($this->tag, strrpos($this->tag, '/')), '/'));
+			return $this->AddSpacesTitel(trim(substr($this->tag, strrpos($this->tag, '/')), '/'));
 		}
 	}
 
@@ -3745,7 +3773,7 @@ class Wacko
 				if ($page <= 4 || $page > ($pages - 4))	// current page is near the beginning or the end
 				{
 					// first pages
-					for ($p=1; $p<=5; $p++)
+					for ($p = 1; $p <= 5; $p++)
 					{
 						if ($p != $page)
 							$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>'.( $p != $pages ? $sep : '' );
@@ -3757,7 +3785,7 @@ class Wacko
 					$pagination['text'] .= ' ... ,';
 
 					// last pages
-					for ($p=($pages-4); $p<=$pages; $p++)
+					for ($p =($pages - 4); $p <= $pages; $p++)
 					{
 						if ($p != $page)
 							$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>'.( $p != $pages ? $sep : '' );
