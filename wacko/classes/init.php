@@ -75,7 +75,8 @@ class Init
 	// Mandatory runs and checks.
 	function Init()
 	{
-		error_reporting (E_ALL ^ E_NOTICE);
+		#error_reporting (E_ALL ^ E_NOTICE);
+		error_reporting (E_ALL);
 
 		// start execution timer
 		$this->timer = $this->GetMicroTime();
@@ -313,14 +314,14 @@ class Init
 				$this->Installer();
 			}
 			// secondary settings
-			//else if ($this->config == true && !isset($this->dblink))
-			//{
+			else if ($this->config == true && !isset($this->dblink))
+			{
 				// connecting to db
-				// $this->DBAL();
-				/*
+				$this->DBAL();
+
 				// retrieving configuration data
 				 $wackoDBQuery = "SELECT * FROM {$this->config["table_prefix"]}config";
-				if ($result = query($wackoDBQuery, $this->dblink, 0))
+				if ($result = query($this->dblink, $wackoDBQuery , 0))
 				{
 					while ($row = fetch_assoc($result))
 					{
@@ -335,7 +336,7 @@ class Init
 
 				// retrieving usergroups data
 				$wackoDBQuery = "SELECT name, members FROM {$this->config["table_prefix"]}groups";
-				if ($result = query($wackoDBQuery, $this->dblink, 0))
+				if ($result = query($this->dblink, $wackoDBQuery, 0))
 				{
 					while ($row = fetch_assoc($result))
 					{
@@ -347,9 +348,9 @@ class Init
 				{
 					die("Error loading WackoWiki usergroups data: database `groups` table is empty.");
 				}
-				*/
-				// return $this->config;
-			//}
+
+				return $this->config;
+			}
 		}
 	}
 
@@ -641,24 +642,24 @@ class Init
 						echo "</li>\n";
 					}
 
-               echo "</ol>\n</li>\n";
+					echo "</ol>\n</li>\n";
 				}
 				echo "</ul>\n";
 
 				if ($this->config["debug"] >= 2)
 				{
-               echo "<p class=\"debug\"><span>Language data</span></p>\n<ul>\n";
-               echo "<li>Multilanguage: ".($this->config["multilanguage"] == 1 ? 'true' : 'false')."</li>\n";
-               echo "<li>HTTP_ACCEPT_LANGUAGE set: ".(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false')."</li>\n";
-               echo "<li>HTTP_ACCEPT_LANGUAGE value: ".$_SERVER['HTTP_ACCEPT_LANGUAGE']."</li>\n";
-               echo "<li>HTTP_ACCEPT_LANGUAGE chopped value: ".strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2))."</li>\n";
-               echo "<li>User language set: ".(isset($user["lang"]) ? 'true' : 'false')."</li>\n";
-               echo "<li>User language value: ".$user["lang"]."</li>\n";
-               echo "<li>Config language: ".$this->config["language"]."</li>\n";
-               echo "<li>User selected language: ".$this->userlang."</li>\n";
-               echo "</ul>\n";
-            }
-            echo "</div >\n";
+					echo "<p class=\"debug\"><span>Language data</span></p>\n<ul>\n";
+					echo "<li>Multilanguage: ".($this->config["multilanguage"] == 1 ? 'true' : 'false')."</li>\n";
+					echo "<li>HTTP_ACCEPT_LANGUAGE set: ".(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false')."</li>\n";
+					echo "<li>HTTP_ACCEPT_LANGUAGE value: ".$_SERVER['HTTP_ACCEPT_LANGUAGE']."</li>\n";
+					echo "<li>HTTP_ACCEPT_LANGUAGE chopped value: ".strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2))."</li>\n";
+					echo "<li>User language set: ".(isset($user["lang"]) ? 'true' : 'false')."</li>\n";
+					echo "<li>User language value: ".$user["lang"]."</li>\n";
+					echo "<li>Config language: ".$this->config["language"]."</li>\n";
+					echo "<li>User selected language: ".$this->userlang."</li>\n";
+					echo "</ul>\n";
+				}
+				echo "</div >\n";
 			}
 			else return;
 		}

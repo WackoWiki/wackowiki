@@ -3089,23 +3089,43 @@ class Wacko
 	function Maintenance()
 	{
 		// purge referrers (once a day)
-		if ($days = $this->config["referrers_purge_time"])
+		if (($days = $this->config["referrers_purge_time"]) && (time() > ($this->config["maint_last_refs"] + 1 * 86400)))
 		{
 			$this->Query(
 				"DELETE FROM ".$this->config["table_prefix"]."referrers ".
 				"WHERE time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
+
+			$this->Query("UPDATE {$this->config['table_prefix']}config SET maint_last_refs = '".time()."'");
+
+			$this->Log(7, 'Maintenance: referrers purged');
 		}
 
-		// purge old page revisions
-		if ($days = $this->config["pages_purge_time"])
+		// purge outdated pages revisions (once a week)
+		if (($days = $this->config["pages_purge_time"]) && (time() > ($this->config["maint_last_oldpages"] + 7 * 86400)))
 		{
 			$this->Query(
 				"DELETE FROM ".$this->config["table_prefix"]."revisions ".
 				"WHERE time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
+
+			$this->Query("UPDATE {$this->config['table_prefix']}config SET maint_last_oldpages = '".time()."'");
+
+			$this->Log(7, 'Maintenance: outdated pages revisions purged');
 		}
 
-		// remove outdated pages cache
-/*		if (time() > ($this->config['maint_last_cache'] + 3600))
+		// purge system log entries (once per 3 days)
+		if (($days = $this->config["log_purge_time"]) && (time() > ($this->config["maint_last_log"] + 3 * 86400)))
+		{
+			$this->Query(
+				"DELETE FROM {$this->config["table_prefix"]}log ".
+				"WHERE time < DATE_SUB( NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY )");
+
+			$this->Query("UPDATE {$this->config['table_prefix']}config SET maint_last_log = '".time()."'");
+
+			$this->Log(7, 'Maintenance: system log purged');
+		}
+
+		// remove outdated pages cache, purge sql cache,
+		if (time() > ($this->config['maint_last_cache'] + 3600))
 		{
 			// pages
 			if ($ttl = $this->config['cache_ttl'])
@@ -3156,7 +3176,6 @@ class Wacko
 
 			$this->Query("UPDATE {$this->config['table_prefix']}config SET maint_last_cache = '".time()."'");
 		}
-		*/
 	}
 
 	// MAIN EXECUTION ROUTINE
