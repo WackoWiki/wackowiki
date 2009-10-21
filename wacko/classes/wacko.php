@@ -3095,7 +3095,7 @@ class Wacko
 				"DELETE FROM ".$this->config["table_prefix"]."referrers ".
 				"WHERE time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
-			$this->Query("UPDATE {$this->config['table_prefix']}config SET maint_last_refs = '".time()."'");
+			$this->Query("UPDATE {$this->config['table_prefix']}config SET value = '".time()."' WHERE name = 'maint_last_refs'");
 
 			$this->Log(7, 'Maintenance: referrers purged');
 		}
@@ -3107,7 +3107,7 @@ class Wacko
 				"DELETE FROM ".$this->config["table_prefix"]."revisions ".
 				"WHERE time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
-			$this->Query("UPDATE {$this->config['table_prefix']}config SET maint_last_oldpages = '".time()."'");
+			$this->Query("UPDATE {$this->config['table_prefix']}config SET value = '".time()."' WHERE name = 'maint_last_oldpages'");
 
 			$this->Log(7, 'Maintenance: outdated pages revisions purged');
 		}
@@ -3119,7 +3119,7 @@ class Wacko
 				"DELETE FROM {$this->config["table_prefix"]}log ".
 				"WHERE time < DATE_SUB( NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY )");
 
-			$this->Query("UPDATE {$this->config['table_prefix']}config SET maint_last_log = '".time()."'");
+			$this->Query("UPDATE {$this->config['table_prefix']}config SET value = '".time()."' WHERE name = 'maint_last_log'");
 
 			$this->Log(7, 'Maintenance: system log purged');
 		}
@@ -3174,7 +3174,7 @@ class Wacko
 				//$this->Log(7, 'Maintenance: cached sql results purged');
 			}
 
-			$this->Query("UPDATE {$this->config['table_prefix']}config SET maint_last_cache = '".time()."'");
+			$this->Query("UPDATE {$this->config['table_prefix']}config SET value = '".time()."' WHERE name = 'maint_last_cache'");
 		}
 	}
 

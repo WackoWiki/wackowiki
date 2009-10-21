@@ -14,6 +14,16 @@ $alter_acls_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."acls CHANGE privile
 
 $update_acls_r4_2 = "UPDATE ".$config["table_prefix"]."acls AS acls, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages SET acls.page_id = pages.id WHERE acls.page_tag = pages.tag";
 
+// CONFIG
+$table_config_r4_2 = "CREATE TABLE ".$config["table_prefix"]."config (".
+					"id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"name VARCHAR(100) NOT NULL DEFAULT '',".
+					"value TEXT,".
+					// "updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,".
+					"PRIMARY KEY (id),".
+					"UNIQUE KEY name (name)".
+				") TYPE=MyISAM";
+
 // CACHE
 $alter_cache_r4_2 = "ALTER TABLE ".$config["table_prefix"]."cache ADD time TIMESTAMP NOT NULL, ADD INDEX timestamp (time)";
 
