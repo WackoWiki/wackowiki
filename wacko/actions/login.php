@@ -81,7 +81,7 @@ else
 	?>
 	<p>
 		<label for="name"><?php echo $this->FormatTranslation("LoginName");?>:</label>
-		<input id="name" name="name" size="27" value="<?php echo $name; ?>" />
+		<input id="name" name="name" size="27" value="<?php echo isset($name) ? $name : ""; ?>" />
 	</p>
 	<p>
 		<label for="password"><?php echo $this->GetTranslation("LoginPassword");?>:</label>
