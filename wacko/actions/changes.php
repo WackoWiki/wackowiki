@@ -2,7 +2,7 @@
 
 if (!isset($root)) $root = $this->UnwrapLink($vars[0]);
 if (!isset($root)) $root = $this->page["tag"];
-if (!$date) $date = $_GET["date"];
+if (!isset($date)) $date = $_GET["date"];
 
 if ($user = $this->GetUser())
 $usermax = $user["changescount"];
@@ -19,7 +19,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 		echo "<a href=\"".$this->GetConfigValue("root_url")."xml/recentchanges_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
 	}
 
-	echo "<ul>\n";
+	echo "<ul class=\"ul_list\">\n";
 	$access = true;
 
 	foreach ($pages as $i => $page)

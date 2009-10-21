@@ -3,6 +3,16 @@
 	{{TOC page|for="!/SubTag" from="h2" to="h4" numerate="0|1|..." }}
 */
 // 1. check for first param (for what TOC is built)
+
+if (!isset($nomark)) $nomark = "";
+if (!isset($for)) $for = "";
+if (!isset($from)) $from = "";
+if (!isset($page)) $page = "";
+if (!isset($numerate)) $numerate = "";
+if (!isset($to)) $to = "";
+if (!isset($title)) $title = "";
+
+
 if ($for) $page = $for;
 if ($page)
 {
@@ -28,7 +38,7 @@ $start_depth = $from{1};
 $end_depth   = $to{1};
 
 // 3. output
-if (!$nomark) 
+if (!$nomark)
 {
 	print "<div class=\"layout-box\"><p class=\"layout-box\"><span> ".$this->GetTranslation("TOCTitle")." ".$this->Link($ppage, "", $title)."  </span></p>";
 }
@@ -79,7 +89,7 @@ else
 	}
 	//$this->tocRecursion( ($ppage?$this->Href("",$ppage):""), $toc_body, 2 );
 }
-if (!$nomark) 
+if (!$nomark)
 {
 	print "</div>";
 }
