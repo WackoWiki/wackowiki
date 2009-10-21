@@ -146,7 +146,7 @@ $wackoTranslation = array(
 	"ViewReferringSites" => "<a href=\"%1\">Сайтове, препращащи на %2</a>",
 	"ViewReferrersFor" => "<a href=\"%1\">Препратки на %2</a>",
 	"ViewReferringSitesGlobal" => "<a href=\"%1\">Сайтове, препращащи</a>",
-	"ViewReferrersForGlobal" => "<a href=\"%1\">Препратки"</a>",
+	"ViewReferrersForGlobal" => "<a href=\"%1\">Препратки</a>",
 	"NoneReferrers" => "<em>Нет</em>",
 	"NotOwnerAndCanDelete" => "<em>Вие не сте собственик на тази страница и затова не можете да я изтриете</em>",
 
