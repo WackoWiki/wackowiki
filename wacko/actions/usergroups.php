@@ -1,5 +1,10 @@
 <?php
+
 // You have to be logged in to use this action
+
+if (!isset($nomark)) $nomark = "";
+if (!isset($cols)) $cols = "";
+
 if($user = $this->GetUser())
 {
 	if (!$cols) $cols = 4; //number of table columns
@@ -37,7 +42,7 @@ if($user = $this->GetUser())
 
 				foreach ($arr as $k => $v)
 				$allowed_groups[] = $this->Link("/".$v,"",$v);
-				 
+
 				sort($allowed_groups);
 
 				$gusers = implode("<br />", $allowed_groups);
@@ -56,4 +61,5 @@ if($user = $this->GetUser())
 		print ("</div>");
 	}
 }
+
 ?>
