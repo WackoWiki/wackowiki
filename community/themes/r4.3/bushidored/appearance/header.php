@@ -176,7 +176,7 @@ echo $this->HasAccess("write") ? "<br /><a href=\"".$this->href("edit")."\" acce
   <br />
   <?php
 // Watch/Unwatch icon
-echo ($this->IsWatched($this->GetUserName(), $this->GetPageTag()) ? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/unvisibl.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->GetTranslation("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/visibl.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->GetTranslation("SetWatch")."</a>" );
+echo ($this->IsWatched($this->GetUserName(), $this->GetPageTag()) ? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->GetTranslation("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->GetTranslation("SetWatch")."</a>" );
 ?>
   <br />
   <?php
