@@ -1,4 +1,5 @@
 <?php
+
 /*
  Wacko Wiki MySQL Table Creation Script
  */
@@ -169,6 +170,15 @@ $table_log = "CREATE TABLE ".$config["table_prefix"]."log (".
 				"KEY idx_time (time)".
 			") TYPE=MyISAM";
 
+$table_config = "CREATE TABLE ".$config["table_prefix"]."config (".
+				"id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+				"name VARCHAR(100) NOT NULL DEFAULT '',".
+				"value TEXT,".
+				// "updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,".
+				"PRIMARY KEY (id),".
+				"UNIQUE KEY name (name)".
+			") TYPE=MyISAM";
+
 /*
  Wacko Wiki MySQL Table Deletion Script
 */
@@ -183,4 +193,6 @@ $table_pagewatches_drop = "DROP TABLE ".$config["table_prefix"]."pagewatches";
 $table_upload_drop = "DROP TABLE ".$config["table_prefix"]."upload";
 $table_cache_drop = "DROP TABLE ".$config["table_prefix"]."cache";
 $table_log_drop = "DROP TABLE ".$config["table_prefix"]."log";
+$table_config_drop = "DROP TABLE ".$config["table_prefix"]."config";
+
 ?>
