@@ -6,7 +6,7 @@ $init = new Init();
 
 // define settings
 $init->Settings();	// populate from config.php
-// $init->Settings();	// initialize DBAL and populate from config table (TODO: required for config table, not yet implemented)
+$init->Settings();	// initialize DBAL and populate from config table (TODO: required for config table, not yet implemented)
 $init->DBAL();
 $init->Settings('root_url',		(preg_replace("#/[^/]*$#","/",$init->config['base_url'])));
 $init->Settings('theme_url',	$init->config['root_url'].'themes/'.$init->config['theme'].'/');
@@ -34,8 +34,8 @@ $init->Cache('store');
 $init->Debug();
 
 // closing tags
-if (strpos($init->method, '.xml') === false) 
-	echo "\n</body>\n</html>"; 
+if (strpos($init->method, '.xml') === false)
+	echo "\n</body>\n</html>";
 
 // out
 header('Cache-Control: public');
