@@ -10,6 +10,7 @@
 	}}
  */
 
+if (!isset($nomark)) $nomark = "";
 if (!isset($order)) $order = "";
 if (!isset($global)) $global = "";
 if (!isset($tag)) $tag = "";
@@ -25,7 +26,7 @@ if ($order == "size_desc") $orderby = "filesize DESC";
 if ($order == "ext") $orderby = "file_ext ASC";
 
 if ($owner) $user_add = "AND ".$this->config["table_prefix"]."users.name='".quote($this->dblink, $owner)."' ";
-else        $user_add = "";
+else		$user_add = "";
 
 // do we allowed to see?
 if (!$global)
@@ -69,11 +70,11 @@ if ($can_view)
 	$kb  = $this->GetTranslation("UploadKB");
 	$del = $this->GetTranslation("UploadRemove");
 
-	if (!$global) $path = "@".str_replace("/", "@", $this->NpjTranslit($page))."@";
-	else          $path = "";
+	if (!$global)	$path = "@".str_replace("/", "@", $this->NpjTranslit($page))."@";
+	else			$path = "";
 
-	if (!$global) $path2 = "file:/".($this->SlimUrl($page))."/";
-	else          $path2 = "file:";
+	if (!$global) 	$path2 = "file:/".($this->SlimUrl($page))."/";
+	else			$path2 = "file:";
 
 	// !!!!! patch link not to show pictures when not needed
 	if (!$pictures) $path2 = str_replace("file:", "_file:", $path2);

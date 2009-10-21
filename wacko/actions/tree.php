@@ -1,20 +1,22 @@
 <?php
-
+if (!isset($page)) $page = $this->page["tag"];
 $root = $vars[$page];
 
 // input
+if (!isset($owner)) $owner = "";
+if (!isset($nomark)) $nomark = "";
+if (!isset($abc)) $abc = "";
+if (!isset($filter)) $filter = "";
+if (!isset($style)) $style="indent";
 if (!isset($root) && !isset($page))
 					$root = "/".$this->page["tag"];
-
 if ($page)			$root = $page;
 if ($root == "/") 	$root = "";
 if ($root) 			$root = $this->UnwrapLink($root);
 
-if (!$depth) $depth = 0;
+if (!isset($depth)) $depth = 0;
 if (!is_numeric($depth)) $depth = 0;
 if ($depth == 0) $depth = 2147483647; //Which means unlimitedly
-
-if (!$style) $style="indent";
 if (!in_array($style, array("br", "ul", "ol", "indent"))) $style = "indent";
 
 global $tree_pages_array;
@@ -105,7 +107,10 @@ if (!function_exists('create_cluster_tree'))
 			}
 
 		}
-		return $sub_pages_tree;
+		if (isset($sub_pages_tree))
+			return $sub_pages_tree;
+		else
+			return NULL;
 	}
 }
 

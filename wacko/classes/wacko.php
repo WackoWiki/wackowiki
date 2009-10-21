@@ -105,7 +105,7 @@ class Wacko
 
 	function LoadAll($query, $docache = 0)
 	{
-		$data = array();
+			$data = array();
 
 		// retrieving from cache
 		if ($this->config['cache_sql'] && $docache)
@@ -126,13 +126,25 @@ class Wacko
 		{
 			$this->cache->SaveSQL($query, $data);
 		}
-
-		return $data;
+		if (isset($data))
+			return $data;
+		else
+			return NULL;
 	}
 
 	function LoadSingle($query, $docache = 0)
 	{
-		if ($data = $this->LoadAll($query, $docache)) return $data[0];
+		if ($data = $this->LoadAll($query, $docache))
+
+			if (isset($data))
+			{
+				return $data[0];
+			}
+			else
+			{
+				return NULL;
+			}
+
 	}
 
 	// MISC
@@ -370,18 +382,18 @@ class Wacko
 		{
 			if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
 			{
-				$this->userlang = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
+				$this->userlang = $lang = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
 
 				// Check whether we have language files for this language
 				if(!in_array($this->userlang, $this->AvailableLanguages()))
 				{
 					// The HTTP_ACCEPT_LANGUAGE language doesn't have any language files so use the admin set language instead
-					$this->userlang = $this->config["language"];
+					$this->userlang = $lang = $this->config["language"];
 				}
 			}
 			else
 			{
-				$this->userlang = $this->config["language"];
+				$this->userlang = $lang = $this->config["language"];
 			}
 		}
 		else if (!$lang) $this->userlang = $lang = $this->config["language"];
@@ -423,7 +435,7 @@ class Wacko
 		$langlist = $this->AvailableLanguages();
 		//!!!! wrong code, maybe!
 		if ($this->GetMethod() == "edit" && (isset($_GET["add"]) && $_GET["add"] == 1 ))
-			if (isset($_REQUEST["lang"]) && in_array(isset($_REQUEST["lang"]), $langlist))
+			if (isset($_REQUEST["lang"]) && $_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
 				$lang = $_REQUEST["lang"];
 			else
 				$lang = $this->userlang;
@@ -786,6 +798,7 @@ class Wacko
 			"WHERE from_tag='".quote($this->dblink, $this->GetPageTag())."'"))
 		{
 			$cl = count($links);
+			(isset($cl)) ? $cl : "";
 
 			for ($i = 0; $i < $cl; $i++)
 			{
@@ -835,6 +848,7 @@ class Wacko
 		}
 
 		$notexists = @array_values(@array_diff($spages, $exists));
+		if (!isset($acl)) $acl = "";
 
 		for ($i = 0; $i < count($notexists); $i++)
 		{
@@ -1869,6 +1883,8 @@ class Wacko
 			if (preg_match( $regex_handlers, "/".$ptag."/", $match ))
 			{
 				$handler = $match[2];
+				if (!isset($_ptag)) $_ptag = "";
+
 				$ptag = $match[1];
 				$unwtag = "/".$unwtag."/";
 				$co = substr_count($_ptag, "/") - substr_count($ptag, "/");
@@ -1878,6 +1894,7 @@ class Wacko
 
 				if ($handler)
 				{
+					if (!isset($data)) $data = "";
 					$opar = "/".$untag."/";
 
 					for ($i = 0; $i < substr_count($data, "/") + 2; $i++)
@@ -3278,6 +3295,8 @@ class Wacko
 		}
 		else
 		{
+			if (!isset($data)) $data = "";
+
 			$this->CacheLinks();
 			$this->current_context++;
 			$this->context[$this->current_context] = $this->tag;

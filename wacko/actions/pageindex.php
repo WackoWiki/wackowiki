@@ -25,6 +25,8 @@ $top_links = "";
 $top_links_array = array();
 $page_links = "";
 $letter_count = 0;
+
+$page_links .= "<ul>\n";
 foreach($pages as $page)
 {
 	$firstChar = strtoupper($page["tag"][0]);
@@ -41,28 +43,36 @@ foreach($pages as $page)
 	}
 
 	// Display the actual page link
-	if($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
-	else $access = true;
+	if($this->config["hide_locked"])
+		$access = $this->HasAccess("read",$page["tag"]);
+	else
+		$access = true;
 
 	if($access)
 	{
+
 		if($total >= $offset)
 		{
 			if($total < $offset + $limit)
 			{
 				if(!$letter || $firstChar == $letter)
 				{
+
 					if($firstChar != $oldChar)
 					{
-						if ($oldChar && !$letter) $page_links.="<br />\n";
-						$page_links.="<a name=\"letter_".($letter_count - 1)."\"></a><strong>".$firstChar."</strong><br />\n";
+						if ($oldChar && !$letter)
+						{
+							$page_links .= "</ul>\n<br /></li>\n";
+						}
+						$page_links .= "<li><a name=\"letter_".($letter_count - 1)."\"></a><strong>".$firstChar."</strong><ul>\n";
 						$oldChar = $firstChar;
 					}
 
-					$page_links.=$this->Link("/".$page["tag"],"",$page["tag"])."<br />\n";
+					$page_links .= "<li>".$this->Link("/".$page["tag"],"",$page["tag"])."</li>\n";
 
 					$total_visible++;
 				}
+
 			}
 		}
 
@@ -72,6 +82,8 @@ foreach($pages as $page)
 		}
 	}
 }
+$page_links .= "</ul>\n</li>\n";
+$page_links .= "</ul>\n";
 
 // Display prev/next navigation links?
 if ($limit >= $total) $no_arr = true;
@@ -90,7 +102,7 @@ if(!$letter)
 	{
 		foreach($top_links_array as $link_data)
 		{
-			$top_links.="<a href=\"#letter_".$link_data["link"]."\"><strong>".$link_data["char"]."</strong></a>\n";
+			$top_links.="<a href=\"#letter_".$link_data["link"]."\"><li><strong>".$link_data["char"]."</strong></a>\n";
 		}
 	}
 
