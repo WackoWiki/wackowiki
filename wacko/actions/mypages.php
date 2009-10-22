@@ -19,7 +19,7 @@ if ($user = $this->GetUserName())
 			"FROM {$prefix}pages ".
 			"WHERE owner = '".quote($this->dblink, $user)."' ".
 				"AND comment_on_id = '0'", 1);
-		
+
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bydate=1#list');
 
 		if ($pages = $this->LoadAll(
@@ -66,24 +66,24 @@ if ($user = $this->GetUserName())
 			"SELECT COUNT( DISTINCT p.tag ) AS n ".
 			"FROM {$prefix}pages AS p ".
 			"LEFT JOIN {$prefix}revisions AS r ".
-				"ON (p.tag = r.tag ".
+				"ON (p.id = r.page_id ".
 					"AND p.owner = '".quote($this->dblink, $user)."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND r.comment_on_id = '0'", 1);
 
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bychange=1#list');
 
-		print($this->GetTranslation('ListOwnedPages3').'.');  
+		print($this->GetTranslation('ListOwnedPages3').'.');
 		print('<br />(<a href="'.
 			$this->href('', '', 'mode=mypages').'#list">'.$this->GetTranslation('OrderABC').
 			'</a>) (<a href="'.$this->href('', '', 'mode=mypages&amp;bydate=1').'#list">'.
-			$this->GetTranslation('OrderDate')."</a>)<br /><br />\n");  
+			$this->GetTranslation('OrderDate')."</a>)<br /><br />\n");
 
 		if ($pages = $this->LoadAll(
 			"SELECT p.tag AS tag, p.time AS time ".
 			"FROM {$prefix}pages AS p ".
 			"LEFT JOIN {$prefix}revisions AS r ".
-				"ON (p.tag = r.tag ".
+				"ON (p.id = r.page_id ".
 					"AND p.owner = '".quote($this->dblink, $user)."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND r.comment_on_id = '0' ".

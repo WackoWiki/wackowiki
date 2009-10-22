@@ -19,7 +19,7 @@ if (!function_exists('HandlerDiffLoadPageById'))
 			return $wacko->LoadSingle(
 				"SELECT * ".
 				"FROM ".$wacko->config["table_prefix"]."pages ".
-				"WHERE tag='".quote($wacko->dblink, $wacko->GetPageTag())."' ".
+				"WHERE id='".quote($wacko->dblink, $wacko->GetPageId())."' ".
 				"LIMIT 1");
 		}
 	}
