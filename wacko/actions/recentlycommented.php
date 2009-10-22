@@ -56,7 +56,8 @@ if (!function_exists('LoadRecentlyCommented')){
 
 if (!isset($root)) $root = $this->UnwrapLink($vars[0]);
 if (!isset($root)) $root = $this->page["tag"];
-if (!$max) $max = 50;
+if (!isset($noxml)) $noxml = 0;
+if (!isset($max)) $max = 50;
 
 if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
 {
@@ -75,6 +76,7 @@ if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
 		{
 			// day header
 			list($day, $time) = explode(" ", $page["comment_time"]);
+			if (!isset($curday)) $curday = "";
 			if ($day != $curday)
 			{
 				if ($curday)

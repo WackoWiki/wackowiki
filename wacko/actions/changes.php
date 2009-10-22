@@ -3,12 +3,12 @@
 if (!isset($root)) $root = $this->UnwrapLink($vars[0]);
 if (!isset($root)) $root = $this->page["tag"];
 if (!isset($date)) $date = isset($_GET["date"]) ? $_GET["date"] :"";
-
+if (!isset($noxml)) $noxml = 0;
 if ($user = $this->GetUser())
 $usermax = $user["changescount"];
 else
 $usermax = 50;
-if (!$max || $usermax < $max)
+if (!isset($max) || $usermax < $max)
 $max = $usermax;
 
 if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
