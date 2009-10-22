@@ -1327,8 +1327,8 @@ class Wacko
 					{
 						// move revision
 						$this->Query(
-							"INSERT INTO ".$this->config["table_prefix"]."revisions (tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
-							"SELECT tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, 'N', handler, comment_on_id, supertag, title, keywords, description ".
+							"INSERT INTO ".$this->config["table_prefix"]."revisions (page_id, tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
+							"SELECT id, tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, 'N', handler, comment_on_id, supertag, title, keywords, description ".
 							"FROM ".$this->config["table_prefix"]."pages ".
 							"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
 					}
