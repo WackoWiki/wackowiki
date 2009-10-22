@@ -122,7 +122,7 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 					"KEY idx_signuptime (signuptime)".
 				") TYPE=MyISAM";
 
-$table_pagewatches = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
+$table_watches = "CREATE TABLE ".$config["table_prefix"]."watches (".
 						"id INT(10) UNSIGNED NOT NULL auto_increment,".
 						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -189,7 +189,7 @@ $table_acls_drop = "DROP TABLE ".$config["table_prefix"]."acls";
 $table_links_drop = "DROP TABLE ".$config["table_prefix"]."links";
 $table_referrers_drop = "DROP TABLE ".$config["table_prefix"]."referrers";
 $table_users_drop = "DROP TABLE ".$config["table_prefix"]."users";
-$table_pagewatches_drop = "DROP TABLE ".$config["table_prefix"]."pagewatches";
+$table_watches_drop = "DROP TABLE ".$config["table_prefix"]."watches";
 $table_upload_drop = "DROP TABLE ".$config["table_prefix"]."upload";
 $table_cache_drop = "DROP TABLE ".$config["table_prefix"]."cache";
 $table_log_drop = "DROP TABLE ".$config["table_prefix"]."log";

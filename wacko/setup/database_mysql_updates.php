@@ -91,24 +91,26 @@ $update_pages_r4_2_1 = "UPDATE ".$config["table_prefix"]."pages AS pages, (SELEC
 $update_pages_r4_2_2 = "UPDATE ".$config["table_prefix"]."pages AS pages, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET pages.user_id = users.id WHERE pages.user = users.name";
 $update_pages_r4_2_3 = "UPDATE ".$config["table_prefix"]."pages AS pages, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages2 SET pages.comment_on_id = pages2.id WHERE pages.comment_on = pages2.tag";
 
-// PAGEWATCHES
-$table_pagewatches_r0 = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
+// WATCHES
+$table_watches_r0 = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
 						"id INT(10) NOT NULL auto_increment, ".
 						"user VARCHAR(80) NOT NULL DEFAULT '', ".
 						"tag VARCHAR(50) binary NOT NULL DEFAULT '', ".
 						"time TIMESTAMP NOT NULL, ".
 						"PRIMARY KEY (id)) TYPE=MyISAM";
 
-$alter_pagewatches_r2_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE tag tag VARCHAR(250) NOT NULL";
-$alter_pagewatches_r3_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE tag tag VARCHAR(250) BINARY NOT NULL";
-$alter_pagewatches_r4_2 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
-$alter_pagewatches_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
-$alter_pagewatches_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."pagewatches ADD page_id INT(10) UNSIGNED NOT NULL AFTER tag";
-$alter_pagewatches_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."pagewatches DROP user";
-$alter_pagewatches_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."pagewatches DROP tag";
+$alter_watches_r2_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE tag tag VARCHAR(250) NOT NULL";
+$alter_watches_r3_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE tag tag VARCHAR(250) BINARY NOT NULL";
+$alter_watches_r4_2 = "ALTER TABLE ".$config["table_prefix"]."pagewatches CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
+$alter_watches_r4_2_1 = "ALTER TABLE ".$config["table_prefix"]."pagewatches ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
+$alter_watches_r4_2_2 = "ALTER TABLE ".$config["table_prefix"]."pagewatches ADD page_id INT(10) UNSIGNED NOT NULL AFTER tag";
+$alter_watches_r4_2_3 = "ALTER TABLE ".$config["table_prefix"]."pagewatches DROP user";
+$alter_watches_r4_2_4 = "ALTER TABLE ".$config["table_prefix"]."pagewatches DROP tag";
 
-$update_pagewatches_r4_2 = "UPDATE ".$config["table_prefix"]."pagewatches AS pagewatches, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET pagewatches.user_id = users.id WHERE pagewatches.user = users.name";
-$update_pagewatches_r4_2_1 = "UPDATE ".$config["table_prefix"]."pagewatches AS pagewatches, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages SET pagewatches.page_id = pages.id WHERE pagewatches.tag = pages.tag";
+$update_watches_r4_2 = "UPDATE ".$config["table_prefix"]."pagewatches AS pagewatches, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET pagewatches.user_id = users.id WHERE pagewatches.user = users.name";
+$update_watches_r4_2_1 = "UPDATE ".$config["table_prefix"]."pagewatches AS pagewatches, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages SET pagewatches.page_id = pages.id WHERE pagewatches.tag = pages.tag";
+
+$rename_watches_r4_2 = "RENAME TABLE ".$config["table_prefix"]."pagewatches TO ".$config["table_prefix"]."watches";
 
 // REFERRERS
 $alter_referrers_r2_1 = "ALTER TABLE ".$config["table_prefix"]."referrers CHANGE page_tag page_tag VARCHAR(250) NOT NULL";

@@ -16,7 +16,7 @@ if ($user_id = $this->GetUserId())
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(p.tag) AS n ".
 			"FROM {$prefix}pages AS p ".
-			"LEFT JOIN {$prefix}pagewatches AS w ".
+			"LEFT JOIN {$prefix}watches AS w ".
 				"ON (p.id = w.page_id ".
 					"AND w.user_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
@@ -32,7 +32,7 @@ if ($user_id = $this->GetUserId())
 		if ($pages = $this->LoadAll(
 			"SELECT p.tag AS pagetag, p.id AS page_id ".
 			"FROM {$prefix}pages AS p ".
-			"LEFT JOIN {$prefix}pagewatches AS w ".
+			"LEFT JOIN {$prefix}watches AS w ".
 				"ON (p.id = w.page_id ".
 					"AND w.user_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
@@ -56,7 +56,7 @@ if ($user_id = $this->GetUserId())
 					}
 			
 					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.$_GET['p'].'&amp;' : '').'mode=mywatches&amp;unwatched=1&amp;setwatch='.$page['page_id']).'#list">'.
-						"<img src=\"".$this->GetConfigValue("theme_url")."icons/visibl.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  />".'</a> '.$this->ComposeLinkToPage($page['pagetag'], '', '', 0)."<br />\n";
+						"<img src=\"".$this->GetConfigValue("theme_url")."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  />".'</a> '.$this->ComposeLinkToPage($page['pagetag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
 				if ($cnt >= $limit) break;
@@ -74,7 +74,7 @@ if ($user_id = $this->GetUserId())
 	{
 		$count	= $this->LoadSingle(
 			"SELECT COUNT( DISTINCT page_id ) as n ".
-			"FROM {$prefix}pagewatches ".
+			"FROM {$prefix}watches ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."'", 1);
 
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mywatches#list');
@@ -86,7 +86,7 @@ if ($user_id = $this->GetUserId())
 		$cnt = 0;
 		if ($pages = $this->LoadAll(
 			"SELECT w.page_id, p.tag as tag ".
-			"FROM {$prefix}pagewatches AS w ".
+			"FROM {$prefix}watches AS w ".
 			"LEFT JOIN {$prefix}pages AS p ".
 				"ON (p.id = w.page_id) ".
 			"WHERE w.user_id = '".quote($this->dblink, $user_id)."' ".
@@ -109,7 +109,7 @@ if ($user_id = $this->GetUserId())
 					}
 			
 					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.$_GET['p'].'&amp;' : '').'mode=mywatches&amp;unwatch='.$page['page_id']).'#list">'.
-						"<img src=\"".$this->GetConfigValue("theme_url")."icons/unvisibl.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  />".'</a> '.$this->ComposeLinkToPage($page['tag'], '', '', 0)."<br />\n";
+						"<img src=\"".$this->GetConfigValue("theme_url")."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  />".'</a> '.$this->ComposeLinkToPage($page['tag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
 				if ($cnt >= $limit) break;
