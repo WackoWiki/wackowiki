@@ -259,8 +259,10 @@ if ($pages)
 	//Constituent line request for acl
 	for ($i = 0; $i < count($supertag_list); $i++)
 	{
+
 		$supertag_str .= "'".quote($this->dblink, $supertag_list[$i])."', ";
 	}
+
 	$supertag_str = substr($supertag_str, 0, strlen($supertag_str) - 2);
 
 	//Cache access rights

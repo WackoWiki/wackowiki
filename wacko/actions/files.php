@@ -60,7 +60,7 @@ if ($can_view)
 
 	if (!is_array($files)) $files = array();
 
-	if (!$nomark)
+	if (!isset($nomark))
 	{
 		$title = $this->GetTranslation("UploadTitle".($global ? "Global" : ""));
 		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.": ".$showpageandpath."</span></p>\n");
@@ -77,7 +77,7 @@ if ($can_view)
 	else			$path2 = "file:";
 
 	// !!!!! patch link not to show pictures when not needed
-	if (!$pictures) $path2 = str_replace("file:", "_file:", $path2);
+	if (!isset($pictures)) $path2 = str_replace("file:", "_file:", $path2);
 
 	if (count($files))
 	{
@@ -99,7 +99,7 @@ if ($can_view)
 		$filesize = ceil($file["filesize"] / 1024);
 		$link = $this->Link($path2.$filename, "", $filename);
 
-		if ($this->IsAdmin() || (!$is_global &&
+		if ($this->IsAdmin() || (!isset($is_global) &&
 		($this->GetPageOwnerId($page) == $this->GetUserId())) ||
 		($file["user_id"] == $this->GetUserId()))
 		{
@@ -142,7 +142,7 @@ if ($can_view)
 <?php
 	}
 
-	if (!$nomark) echo "</div>\n";
+	if (!isset($nomark)) echo "</div>\n";
 }
 else
 {

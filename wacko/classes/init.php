@@ -533,7 +533,7 @@ class Init
 		{
 			if ($this->config["cache"] && $_SERVER["REQUEST_METHOD"] != "POST" && $this->method != "edit" && $this->method != "watch")
 			{
-				if (!$_COOKIE[$this->config["cookie_prefix"]."name"])	// anonymous user
+				if (!isset($_COOKIE[$this->config["cookie_prefix"]."name"]))	// anonymous user
 				{
 					return $this->cacheval = $this->cache->CheckHttpRequest($this->page, $this->method);
 				}

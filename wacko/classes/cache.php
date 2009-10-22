@@ -183,17 +183,19 @@ class Cache
 			if ($k != "v" && $k != "page")
 				$_query[$k] = $v;
 		}
-		if ($_query)
+
+		if (isset($_query))
 		{
 			ksort($_query);
 			reset($_query);
 
 			foreach($_query as $k => $v)
 			{
+				if (!isset($query)) $query = "";
 				$query .= urlencode($k)."=".urlencode($v)."&";
 			}
 		}
-
+		if (!isset($query)) $query = "";
 		$this->Log("CheckHttpRequest query=".$query);
 
 		//check cache
@@ -202,8 +204,8 @@ class Cache
 			$this->Log("CheckHttpRequest incache mtime=".$mtime);
 
 			$gmt = gmdate('D, d M Y H:i:s \G\M\T', $mtime);
-			$etag = $_SERVER["HTTP_IF_NONE_MATCH"];
-			$lastm = $_SERVER["HTTP_IF_MODIFIED_SINCE"];
+			$etag = (isset($_SERVER["HTTP_IF_NONE_MATCH"]) ? $_SERVER["HTTP_IF_NONE_MATCH"] : "");
+			$lastm = (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) ? $_SERVER["HTTP_IF_MODIFIED_SINCE"] : "");
 
 			if ($p = strpos($lastm, ";")) $lastm = substr($lastm, 0, $p);
 
@@ -255,19 +257,18 @@ class Cache
 
 		if (!($mtime = $this->GetCachedTime($this->page, $this->method, $this->query)))
 			$mtime = time();
-		{
-			$gmt = gmdate('D, d M Y H:i:s \G\M\T', $mtime);
-			$res = &$this->result;
-			header ("Last-Modified: ".$gmt);
-			header ("ETag: \"".$gmt."\"");
-			header ("Content-Type: text/xml");
-			//header ("Content-Length: ".strlen($res));
-			//header ("Cache-Control: max-age=0");
-			//header ("Expires: ".gmdate('D, d M Y H:i:s \G\M\T', time()));
 
-			echo $res;
-			die();
-		}
+		$gmt = gmdate('D, d M Y H:i:s \G\M\T', $mtime);
+		$res = &$this->result;
+		header ("Last-Modified: ".$gmt);
+		header ("ETag: \"".$gmt."\"");
+		header ("Content-Type: text/xml");
+		//header ("Content-Length: ".strlen($res));
+		//header ("Cache-Control: max-age=0");
+		//header ("Expires: ".gmdate('D, d M Y H:i:s \G\M\T', time()));
+
+		echo $res;
+		die();
 	}
 
 	function GetMicroTime()
