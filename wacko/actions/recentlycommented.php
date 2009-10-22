@@ -4,8 +4,6 @@ if (!function_exists('LoadRecentlyCommented')){
 	function LoadRecentlyCommented(&$wacko, $for = "", $limit = 50)
 	{
 		// NOTE: this is really stupid. Maybe my SQL-Fu is too weak, but apparently there is no easier way to simply select
-		//  all comment pages sorted by their first revision's (!) time. ugh!
-		// load ids of the first revisions of latest comments. err, huh?
 		if ($ids = $wacko->LoadAll(
 			"SELECT a.id, MAX(a.created) as latest, a.comment_on_id ".
 			"FROM ".$wacko->config["table_prefix"]."pages a ".
