@@ -22,7 +22,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"latest TINYINT(1) UNSIGNED DEFAULT '1',".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 					"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"hits INT(11) UNSIGNED NOT NULL DEFAULT '0',".
+					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
@@ -141,6 +141,7 @@ $table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
 					"picture_w INT(11) UNSIGNED NOT NULL DEFAULT '0',".
 					"picture_h INT(11) UNSIGNED NOT NULL DEFAULT '0',".
 					"file_ext VARCHAR(10) NOT NULL DEFAULT '',".
+					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (id),".
 					"KEY page_id (page_id,filename),".
 					"KEY page_id_2 (page_id,uploaded_dt),".
