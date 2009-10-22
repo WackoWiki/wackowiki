@@ -19,13 +19,12 @@ if (!isset($page)) $page = "";
 if (!isset($pictures)) $pictures = "";
 
 $orderby = "filename ASC";
-
 if ($order == "time") $orderby = "uploaded_dt DESC";
 if ($order == "size") $orderby = "filesize ASC";
 if ($order == "size_desc") $orderby = "filesize DESC";
 if ($order == "ext") $orderby = "file_ext ASC";
 
-if ($owner) $user_add = "AND ".$this->config["table_prefix"]."users.name='".quote($this->dblink, $owner)."' ";
+if ($owner) $user_add = "AND u.name='".quote($this->dblink, $owner)."' ";
 else		$user_add = "";
 
 // do we allowed to see?
@@ -52,15 +51,15 @@ if ($can_view)
 
 	// load files list
 	$files = $this->LoadAll(
-		"SELECT ".$this->config["table_prefix"]."upload.id, ".$this->config["table_prefix"]."upload.page_id, ".$this->config["table_prefix"]."upload.user_id, ".$this->config["table_prefix"]."upload.filesize, ".$this->config["table_prefix"]."upload.picture_w, ".$this->config["table_prefix"]."upload.picture_h, ".$this->config["table_prefix"]."upload.filename, ".$this->config["table_prefix"]."upload.description, ".$this->config["table_prefix"]."upload.uploaded_dt, ".$this->config["table_prefix"]."users.name AS user ".
-		"FROM ".$this->config["table_prefix"]."upload ".
-			"INNER JOIN ".$this->config["table_prefix"]."users ON (".$this->config["table_prefix"]."upload.user_id = ".$this->config["table_prefix"]."users.id)".
-		"WHERE page_id = '". ($global ? 0 : $filepage["id"])."' ".$user_add.
-		" ORDER BY ".$this->config["table_prefix"]."upload.".$orderby );
+		"SELECT f.id, f.page_id, f.user_id, f.filesize, f.picture_w, f.picture_h, f.filename, f.description, f.uploaded_dt, u.name AS user, f.hits ".
+		"FROM ".$this->config["table_prefix"]."upload f ".
+			"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.id) ".
+		"WHERE f.page_id = '". ($global ? 0 : $filepage["id"])."' ".$user_add.
+		" ORDER BY f.".$orderby );
 
 	if (!is_array($files)) $files = array();
 
-	if (!isset($nomark))
+	if (!$nomark)
 	{
 		$title = $this->GetTranslation("UploadTitle".($global ? "Global" : ""));
 		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.": ".$showpageandpath."</span></p>\n");
@@ -95,9 +94,19 @@ if ($can_view)
 
 		if ($desc == "") $desc = "&nbsp;";
 
-		$filename = $file["filename"];
-		$filesize = ceil($file["filesize"] / 1024);
-		$link = $this->Link($path2.$filename, "", $filename);
+		$filename	= $file["filename"];
+		$filesize	= ceil($file["filesize"] / 1024);
+		$fileext	= substr($filename, strrpos($filename, ".") + 1);
+		$link		= $this->Link($path2.$filename, "", $filename);
+
+		if ($fileext != "gif" && $fileext != "jpg" && $fileext != "png")
+		{
+			$hits	= ", ".$file["hits"]." ".( $file["hits"] === 1 ? "hit" : "hits" );
+		}
+		else
+		{
+			$hits	= "";
+		}
 
 		if ($this->IsAdmin() || (!isset($is_global) &&
 		($this->GetPageOwnerId($page) == $this->GetUserId())) ||
@@ -142,7 +151,7 @@ if ($can_view)
 <?php
 	}
 
-	if (!isset($nomark)) echo "</div>\n";
+	if (!$nomark) echo "</div>\n";
 }
 else
 {
