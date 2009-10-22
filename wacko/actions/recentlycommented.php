@@ -28,7 +28,7 @@ if (!function_exists('LoadRecentlyCommented')){
 						"FROM ".$wacko->config["table_prefix"]."pages a ".
 							"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.id)".
 						" WHERE a.id = '".$id["id"]."' LIMIT 1");
-					if (!$comments[$comment["comment_on_page"]] && $num < $limit)
+					if (!isset($comments[$comment["comment_on_page"]]) && $num < $limit)
 					{
 						$comments[$comment["comment_on_page"]] = $comment;
 						$num++;
