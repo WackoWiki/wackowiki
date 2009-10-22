@@ -124,6 +124,7 @@ $table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
 					"picture_w integer NOT NULL DEFAULT 0,".
 					"picture_h integer NOT NULL DEFAULT 0,".
 					"file_ext character varying(10) NOT NULL DEFAULT '',".
+					"hits integer NOT NULL DEFAULT 0,".
 					"CONSTRAINT pk_upload_id PRIMARY KEY (id)".
 				") WITH (OIDS=FALSE);";
 

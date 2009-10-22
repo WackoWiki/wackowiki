@@ -172,6 +172,7 @@ $alter_upload_r4_2 = "ALTER TABLE ".$config["table_prefix"]."upload CHANGE id id
 																	CHANGE picture_w picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0',
 																	CHANGE picture_h picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0',
 																	ADD user_id INT(10) UNSIGNED NOT NULL AFTER page_id,
+																	ADD hits INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER file_ext,
 																	DROP INDEX user_id,
 																	ADD INDEX idx_user_id (user_id)";
 
