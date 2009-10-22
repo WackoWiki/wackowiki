@@ -317,6 +317,7 @@ class Wacko
 			// theme
 			$resourcefile = "themes/".$this->config["theme"]."/lang/wacko.".$lang.".php";
 			if (@file_exists($resourcefile)) include($resourcefile);
+			if (!isset($themeResource)) $themeResource = "";
 			$wackoResource = array_merge((array)$wackoResource, (array)$themeResource);
 
 			// wacko.all theme
@@ -798,7 +799,7 @@ class Wacko
 			"WHERE from_tag='".quote($this->dblink, $this->GetPageTag())."'"))
 		{
 			$cl = count($links);
-			(isset($cl)) ? $cl : "";
+			if (!isset($cl))$cl = 0;
 
 			for ($i = 0; $i < $cl; $i++)
 			{
