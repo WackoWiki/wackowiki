@@ -2,7 +2,7 @@
 
 if (!isset($root)) $root = $this->UnwrapLink($vars[0]);
 if (!isset($root)) $root = $this->page["tag"];
-if (!isset($date)) $date = $_GET["date"];
+if (!isset($date)) $date = isset($_GET["date"]) ? $_GET["date"] :"";
 
 if ($user = $this->GetUser())
 $usermax = $user["changescount"];
@@ -35,6 +35,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 
 			// day header
 			list($day, $time) = explode(" ", $page["time"]);
+			if (!isset($curday)) $curday = "";
 
 			if ($day != $curday)
 			{

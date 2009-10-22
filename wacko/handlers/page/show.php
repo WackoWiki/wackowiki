@@ -150,7 +150,7 @@ if ($this->page)
 		else
 			$user = "guest@wacko";
 
-		if ($registered
+		if (isset($registered)
 			&&
 				(
 					($this->config["upload"] === true) || ($this->config["upload"] == "1") ||

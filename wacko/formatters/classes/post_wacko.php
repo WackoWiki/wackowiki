@@ -48,7 +48,7 @@ class post_wacko
 				$img	= str_replace(' ', '', $img);
 				$img	= trim(preg_replace("/<!--imgprelink:[\w]+-->|__|\[\*\[|\(\*\(/", '', $img));
 				$img	= $wacko->Link($img, '', '', 1, 1);
-				
+
 				return '<a href="'.$url.'">'.$img.'</a>';
 			}
 			else
@@ -57,7 +57,7 @@ class post_wacko
 		// actions
 		else if (preg_match("/^<!--action:begin-->\s*([^\n]+?)<!--action:end-->$/s", $thing, $matches))
 		{
-			if ($matches[1] && (!$this->options["diff"] || in_array(strtolower($matches[1]),$this->actions)))
+			if ($matches[1] && (!isset($this->options["diff"]) || in_array(strtolower($matches[1]),$this->actions)))
 			{
 				// check for action' parameters
 				$sep = strpos( $matches[1], " " );

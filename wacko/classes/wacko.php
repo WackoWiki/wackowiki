@@ -2500,7 +2500,10 @@ class Wacko
 	{
 		if ($user = $this->GetUser()) $user_id = $user["id"];
 
-		return $user_id;
+		if (isset($user_id))
+			return $user_id;
+		else
+			return NULL;
 	}
 
 	function _gethostbyaddr($ip)
