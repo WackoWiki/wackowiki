@@ -10,7 +10,7 @@ if ($this->UserIsOwner($tag))
 
 	$watchers = $this->LoadAll(
 		"SELECT * ".
-		"FROM ".$this->config["table_prefix"]."pagewatches ".
+		"FROM ".$this->config["table_prefix"]."watches ".
 		"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
 		"");
 

@@ -167,7 +167,7 @@ if (!function_exists('print_cluster_tree'))
 					$newletter = strtoupper(substr($linktext, 0, 1));
 					if (!preg_match("/[".$wacko->language["ALPHA_P"]."]/", $newletter)) { $newletter = "#"; }
 					if ($newletter == '') $newletter = $linktext{0};
-					if ( $letter <> $newletter)
+					if ($letter <> $newletter)
 					{
 						$need_letter = 1; //Print at the first opportunity
 					}
@@ -177,7 +177,7 @@ if (!function_exists('print_cluster_tree'))
 				{
 					if ($need_letter == 1)
 					{ //Convenient case to print the letter
-						if (($style == "ul" || $style == "ol" ) && $letter )
+						if (($style == "ul" || $style == "ol" ) && $letter)
 							print "<br />";
 						if ($letter)
 							print "<br />";
@@ -228,10 +228,14 @@ else
 	$query = "'%'";
 }
 
-$pages = $this->LoadAll("SELECT ".$this->pages_meta." FROM ".
-$this->config["table_prefix"]."pages WHERE supertag LIKE ".$query.
-($owner ? " AND owner='".quote($this->dblink, $owner)."'" : "").
-           " AND comment_on_id = '0'", 1);
+$pages = $this->LoadAll(
+	"SELECT ".$this->pages_meta." ".
+	"FROM ".$this->config["table_prefix"]."pages ".
+	"WHERE supertag LIKE ".$query.
+		($owner
+			? " AND owner='".quote($this->dblink, $owner)."'"
+			: "").
+		" AND comment_on_id = '0'", 1);
 
 if ($pages)
 {

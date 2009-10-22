@@ -105,12 +105,12 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 					"CONSTRAINT pk_users_name PRIMARY KEY (id)".
 				") WITH (OIDS=FALSE);";
 
-$table_pagewatches = "CREATE TABLE ".$config["table_prefix"]."pagewatches (".
+$table_watches = "CREATE TABLE ".$config["table_prefix"]."watches (".
 					"id serial,".
 					"page_id integer NOT NULL DEFAULT 0,".
 					"user_id integer NOT NULL DEFAULT 0,".
 					"\"time\" timestamp without time zone NOT NULL DEFAULT now(),".
-					"CONSTRAINT pk_pagewatches_id PRIMARY KEY (id)".
+					"CONSTRAINT pk_watches_id PRIMARY KEY (id)".
 				") WITH (OIDS=FALSE);";
 
 $table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
@@ -145,7 +145,7 @@ $table_acls_drop = "DROP TABLE ".$config["table_prefix"]."acls;";
 $table_links_drop = "DROP TABLE ".$config["table_prefix"]."links;";
 $table_referrers_drop = "DROP TABLE ".$config["table_prefix"]."referrers;";
 $table_users_drop = "DROP TABLE ".$config["table_prefix"]."users;";
-$table_pagewatches_drop = "DROP TABLE ".$config["table_prefix"]."pagewatches;";
+$table_watches_drop = "DROP TABLE ".$config["table_prefix"]."watches;";
 $table_upload_drop = "DROP TABLE ".$config["table_prefix"]."upload;";
 $table_cache_drop = "DROP TABLE ".$config["table_prefix"]."cache;";
 $table_log_drop = "DROP TABLE ".$config["table_prefix"]."log";

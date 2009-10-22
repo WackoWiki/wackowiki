@@ -1255,7 +1255,7 @@ class Wacko
 
 					$Watchers = $this->LoadAll(
 									"SELECT DISTINCT user_id ".
-									"FROM ".$this->config["table_prefix"]."pagewatches ".
+									"FROM ".$this->config["table_prefix"]."watches ".
 									"WHERE page_id = '".quote($this->dblink, $comment_on_id)."'");
 
 					foreach ($Watchers as $Watcher)
@@ -1375,7 +1375,7 @@ class Wacko
 
 					$Watchers = $this->LoadAll(
 						"SELECT DISTINCT user_id ".
-						"FROM ".$this->config["table_prefix"]."pagewatches"." ".
+						"FROM ".$this->config["table_prefix"]."watches"." ".
 						"WHERE page_id = '".quote($this->dblink, $page_id)."'");
 
 					if ($Watchers)
@@ -2941,7 +2941,7 @@ class Wacko
 	function IsWatched($user_id, $page_id)
 	{
 		return $this->LoadSingle(
-			"SELECT * FROM ".$this->config["table_prefix"]."pagewatches ".
+			"SELECT * FROM ".$this->config["table_prefix"]."watches ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND page_id = '".quote($this->dblink, $page_id)."'");
 	}
@@ -2954,7 +2954,7 @@ class Wacko
 
 		if ($this->HasAccess('read', $tag))
 			return $this->Query(
-				"INSERT INTO ".$this->config["table_prefix"]."pagewatches (user_id, page_id) ".
+				"INSERT INTO ".$this->config["table_prefix"]."watches (user_id, page_id) ".
 				"VALUES ( '".quote($this->dblink, $user_id)."', '".quote($this->dblink, $page_id)."')" );
 				// TIMESTAMP type is filled automatically by MySQL
 		else
@@ -2964,7 +2964,7 @@ class Wacko
 	function ClearWatch($user_id, $page_id)
 	{
 		return $this->Query(
-			"DELETE FROM ".$this->config["table_prefix"]."pagewatches ".
+			"DELETE FROM ".$this->config["table_prefix"]."watches ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND page_id = '".quote($this->dblink, $page_id)."'");
 	}
@@ -3612,7 +3612,7 @@ class Wacko
 
 		return $this->Query(
 			"DELETE w.* ".
-			"FROM ".$this->config["table_prefix"]."pagewatches w".
+			"FROM ".$this->config["table_prefix"]."watches w".
 				"LEFT JOIN ".$this->config["table_prefix"]."pages p".
 					"ON (w.page_id = p.id)".
 			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
