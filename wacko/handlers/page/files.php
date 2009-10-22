@@ -4,7 +4,8 @@ $file404 = "images/upload404.gif";
 $file403 = "images/upload403.gif";
 
 // 1. check existence
-if ($_GET["global"]) {
+if ($_GET["global"])
+{
 	$page_id = 0;
 }
 else
@@ -12,11 +13,11 @@ else
 	$page_id = $this->page["id"];
 }
 $what = $this->LoadAll(
-	"SELECT ".$this->config["table_prefix"]."users.name AS user, ".$this->config["table_prefix"]."upload.id, ".$this->config["table_prefix"]."upload.filename, ".$this->config["table_prefix"]."upload.file_ext, ".$this->config["table_prefix"]."upload.filesize, ".$this->config["table_prefix"]."upload.description ".
-	"FROM ".$this->config["table_prefix"]."upload ".
-		"INNER JOIN ".$this->config["table_prefix"]."users ON (".$this->config["table_prefix"]."upload.user_id = ".$this->config["table_prefix"]."users.id) ".
-	"WHERE ".$this->config["table_prefix"]."upload.page_id = '".quote($this->dblink, $page_id)."'".
-    "AND ".$this->config["table_prefix"]."upload.filename='".quote($this->dblink, $_GET["get"])."'");
+	"SELECT u.name AS user, f.id, f.filename, f.file_ext, f.filesize, f.description, f.hits ".
+	"FROM ".$this->config["table_prefix"]."upload f ".
+		"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.id) ".
+	"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
+    "AND f.filename='".quote($this->dblink, $_GET["get"])."'");
 
 if (sizeof($what) > 0)
 {
@@ -74,7 +75,13 @@ if ($filepath)
 
 	if (!$isimage)
 	{
+		// count file download
+		$this->Query(
+			"UPDATE {$this->config['table_prefix']}upload ".
+			"SET hits = '".quote($this->dblink, $what[0]['hits'] + 1)."' ".
+			"WHERE id = '".quote($this->dblink, $what[0]['id'])."'");
 	}
+
 	$f = @fopen( $filepath, "rb" );
 	@fpassthru ($f);
 }
