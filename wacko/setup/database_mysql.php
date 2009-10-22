@@ -40,6 +40,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 
 $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"id INT(10) UNSIGNED NOT NULL auto_increment,".
+						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
