@@ -21,13 +21,13 @@ if ($user_id = $this->GetUserId())
 					"AND w.user_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND w.user_id IS NULL", 1);
-		
+
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mywatches&amp;unwatched=1#list');
-		
+
 		echo $this->GetTranslation('UnwatchedPages').' (<a href="'.
 			$this->href('', '', 'mode='.$_GET['mode']).'#list">'.
 			$this->GetTranslation('ViewWatchedPages').'</a>).<br /><br />';
-	
+
 		$cnt = 0;
 		if ($pages = $this->LoadAll(
 			"SELECT p.tag AS pagetag, p.id AS page_id ".
@@ -47,23 +47,23 @@ if ($user_id = $this->GetUserId())
 					$firstChar = strtoupper($page['pagetag'][0]);
 					if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))
 						$firstChar = '#';
-					
+
 					if ($firstChar != $curChar)
 					{
 						if ($curChar) echo "<br />\n";
 						echo "<strong>$firstChar</strong><br />\n";
 						$curChar = $firstChar;
 					}
-			
+
 					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.$_GET['p'].'&amp;' : '').'mode=mywatches&amp;unwatched=1&amp;setwatch='.$page['page_id']).'#list">'.
 						"<img src=\"".$this->GetConfigValue("theme_url")."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  />".'</a> '.$this->ComposeLinkToPage($page['pagetag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
 				if ($cnt >= $limit) break;
 			}
-			
+
 			// pagination
-			echo "<br /><small>{$pagination['text']}</small>\n";
+			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else
 		{
@@ -82,7 +82,7 @@ if ($user_id = $this->GetUserId())
 		echo $this->GetTranslation('WatchedPages').' (<a href="'.
 			$this->href('', '', 'mode='.$_GET['mode'].'&amp;unwatched=1').'#list">'.
 			$this->GetTranslation('ViewUnwatchedPages').'</a>).<br /><br />';
-	
+
 		$cnt = 0;
 		if ($pages = $this->LoadAll(
 			"SELECT w.page_id, p.tag as tag ".
@@ -100,23 +100,23 @@ if ($user_id = $this->GetUserId())
 					$firstChar = strtoupper($page['tag'][0]);
 					if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))
 						$firstChar = '#';
-					
+
 					if ($firstChar != $curChar)
 					{
 						if ($curChar) echo "<br />\n";
 						echo "<strong>$firstChar</strong><br />\n";
 						$curChar = $firstChar;
 					}
-			
+
 					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.$_GET['p'].'&amp;' : '').'mode=mywatches&amp;unwatch='.$page['page_id']).'#list">'.
 						"<img src=\"".$this->GetConfigValue("theme_url")."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  />".'</a> '.$this->ComposeLinkToPage($page['tag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
 				if ($cnt >= $limit) break;
 			}
-			
+
 			// pagination
-			echo "<br /><small>{$pagination['text']}</small>\n";
+			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else
 		{

@@ -53,7 +53,7 @@ if ($user = $this->GetUserName())
 			}
 			echo "</ul>\n</li>\n</ul>\n";
 			// pagination
-			echo "<br /><small>{$pagination['text']}</small>\n";
+			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else
 		{
@@ -113,7 +113,7 @@ if ($user = $this->GetUserName())
 			}
 			echo "</ul>\n</li>\n</ul>\n";
 			// pagination
-			echo "<br /><small>{$pagination['text']}</small>\n";
+			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else
 		{
@@ -168,7 +168,7 @@ if ($user = $this->GetUserName())
 			}
 			echo "</ul>\n</li>\n</ul>\n";
 			// pagination
-			echo "<br /><small>{$pagination['text']}</small>\n";
+			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else
 		{
