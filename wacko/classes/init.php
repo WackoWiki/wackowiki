@@ -75,8 +75,8 @@ class Init
 	// Mandatory runs and checks.
 	function Init()
 	{
-		#error_reporting (E_ALL ^ E_NOTICE);
-		error_reporting (E_ALL);
+		error_reporting (E_ALL ^ E_NOTICE);
+		#error_reporting (E_ALL);
 
 		// start execution timer
 		$this->timer = $this->GetMicroTime();
@@ -335,6 +335,7 @@ class Init
 				}
 
 				// retrieving usergroups data
+				/*
 				$wackoDBQuery = "SELECT name, members FROM {$this->config["table_prefix"]}groups";
 				if ($result = query($this->dblink, $wackoDBQuery, 0))
 				{
@@ -348,6 +349,7 @@ class Init
 				{
 					die("Error loading WackoWiki usergroups data: database `groups` table is empty.");
 				}
+				*/
 
 				return $this->config;
 			}
