@@ -189,7 +189,7 @@ class Init
 					"multilanguage" => 1,
 
 					"theme" => "default",
-					"allow_themes" => 1,
+					"allow_themes" => 0,
 
 					"header_action" => "header",
 					"footer_action" => "footer",
