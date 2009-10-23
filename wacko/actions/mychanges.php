@@ -19,7 +19,7 @@ if ($user = $this->GetUserName())
 			"FROM {$prefix}pages ".
 			"WHERE user = '".quote($this->dblink, $user)."' ".
 				"AND comment_on_id = '0'", 1);
-		
+
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mychanges&amp;bydate=1#list');
 
 		if ($pages = $this->LoadAll(
@@ -63,7 +63,7 @@ if ($user = $this->GetUserName())
 			echo "</ul>\n</li>\n</ul>\n";
 
 			// pagination
-			echo "<br /><small>{$pagination['text']}</small>\n";
+			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else
 		{
@@ -121,7 +121,7 @@ if ($user = $this->GetUserName())
 			echo "</ul>\n</li>\n</ul>\n";
 
 			// pagination
-			echo "<br /><small>{$pagination['text']}</small>\n";
+			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else
 		{
