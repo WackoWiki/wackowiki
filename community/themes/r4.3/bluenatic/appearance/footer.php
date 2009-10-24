@@ -3,7 +3,7 @@
 
 <div id="footer"><?php // Show only if page exists ?> <?php if ($this->page) {
 	echo $this->GetTranslation("SettingsRevisions");
-	echo ":"; ?> <a href="<?php echo $this->href("revisions"); ?>"><?php echo $this->GetPageTime(); ?></a>
+	echo ":"; ?> <a href="<?php echo $this->href("revisions"); ?>"><?php echo $this->GetPageTimeFormatted(); ?></a>
 &nbsp;|&nbsp; <?php // Check if page has an owner - if not, add the claim text ?>
 	<?php if($owner = $this->GetPageOwner()) {
 		echo $this->GetTranslation("Owner");

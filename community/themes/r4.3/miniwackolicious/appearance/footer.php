@@ -17,7 +17,7 @@
 								print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
 						}
 					?>
-					<?php /* show last edit info */ echo ($this->HasAccess("read") && $this->GetPageTime()) ? $this->GetTranslation("LastModification").': <a href="'.$this->href("revisions").'" title="'.$this->GetTranslation("RevisionTip").'" id="page_diff"><span class="backendbutton"></span><img class="contexticon" src="'.$this->GetConfigValue("theme_url").'icons/page_diff.png" alt="" />'.$this->GetPageTime().'</a> '.$this->GetTranslation("by").' '.$this->Link($this->GetPageLastWriter()).".\n" : ''; ?>
+					<?php /* show last edit info */ echo ($this->HasAccess("read") && $this->GetPageTime()) ? $this->GetTranslation("LastModification").': <a href="'.$this->href("revisions").'" title="'.$this->GetTranslation("RevisionTip").'" id="page_diff"><span class="backendbutton"></span><img class="contexticon" src="'.$this->GetConfigValue("theme_url").'icons/page_diff.png" alt="" />'.$this->GetPageTimeFormatted().'</a> '.$this->GetTranslation("by").' '.$this->Link($this->GetPageLastWriter()).".\n" : ''; ?>
 				</p>
 				<?php if ($this->GetUser()) { ?>
 				<ul>

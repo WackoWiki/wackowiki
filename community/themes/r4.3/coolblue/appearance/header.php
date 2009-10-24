@@ -196,7 +196,7 @@ if ($this->IsAdmin()){
 ?><hr noshade="noshade" />
 <?php
 // Revisions link
-echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTime()."</a>\n" : "";
+echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTimeFormatted()."</a>\n" : "";
 ?>
 </div>
 <div id="content">

@@ -198,7 +198,7 @@ echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->Ge
 <hr noshade="noshade" />
 <?php
 // Revisions link
-echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTime()."</a>\n" : "";
+echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTimeFormatted()."</a>\n" : "";
 ?>
 </div>
 <div id="content">
