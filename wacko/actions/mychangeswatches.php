@@ -36,7 +36,7 @@ if ($user_id = $this->GetUserId())
 	{
 		foreach ($pages as $page)
 			if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['tag']))
-				echo '<small>('.$this->ComposeLinkToPage($page['tag'], 'revisions', $page['time'], 0, $this->GetTranslation("History")).
+				echo '<small>('.$this->ComposeLinkToPage($page['tag'], 'revisions', $this->GetTimeStringFormatted($page['time']), 0, $this->GetTranslation("History")).
 					')</small> '.$this->ComposeLinkToPage($page['tag'], '', '', 0)."<br />\n";
 	}
 	else

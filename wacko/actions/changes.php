@@ -44,7 +44,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 					print("</ul>\n<br /></li>\n");
 				}
 
-				print("<li><b>$day:</b>\n<ul>\n");
+				print("<li><b>".date($this->config["date_format"],strtotime($day)).":</b>\n<ul>\n");
 				$curday = $day;
 			}
 
@@ -58,7 +58,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 			}
 
 			// print entry
-			print("<li><span class=\"dt\">".$time."</span> &mdash; (".
+			print("<li><span class=\"dt\">".date($this->config["time_format_seconds"], strtotime( $time ))."</span> &mdash; (".
 			$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".
 			$this->Link( "/".$page["tag"], "", $page["tag"] )." . . . . . . . . . . . . . . . . <small>".
 			($this->IsWikiName($page["user"])

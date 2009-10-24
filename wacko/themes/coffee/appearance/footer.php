@@ -6,7 +6,7 @@ echo $this->HasAccess("write") ? "<a href=\"".$this->href("edit")."\" accesskey=
 if ($this->page)
 {
 	// Revisions link
-	echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTime()."</a> |\n" : "";
+	echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTimeFormatted()."</a> |\n" : "";
 
 	// if owner is current user
 	if ($this->UserIsOwner())
