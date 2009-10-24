@@ -81,12 +81,12 @@ if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
 				{
 					print("</ul>\n<br /></li>\n");
 				}
-				print("<li><b>$day:</b>\n<ul>\n");
+				print("<li><b>".date($this->config["date_format"],strtotime($day)).":</b>\n<ul>\n");
 				$curday = $day;
 			}
 
 			// print entry
-			print("<li><span class=\"dt\">".$time."</span> &mdash; (<a href=\"".
+			print("<li><span class=\"dt\">".date($this->config["time_format_seconds"], strtotime( $time ))."</span> &mdash; (<a href=\"".
 			$this->href("", $page["comment_on_tag"], "show_comments=1")."#".$page["comment_tag"]."\">".$page["comment_on_tag"]."</a>".
 			") . . . . . . . . . . . . . . . . <small>".$this->GetTranslation("LatestCommentBy")." ".
 			($this->IsWikiName($page["comment_user"]) ? $this->Link("/".$page["comment_user"],"",$page["comment_user"] ) : $page["comment_user"])."</small></li>\n");

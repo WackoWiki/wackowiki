@@ -53,7 +53,7 @@ Elar9000 (2009.08.16)
 	$this->HasAccess("write") ? $this->GetTranslation("EditText") : "",
 	$this->method != "edit"
 	) ?> <?php EchoTab( $this->href("revisions"),  $this->GetTranslation("RevisionTip"),
-	$this->GetPageTime() ? $this->GetPageTime() : "",
+	$this->GetPageTime() ? $this->GetPageTimeFormatted() : "",
 	$this->method != "revisions"
 	) ?> <?php
 	// if this page exists

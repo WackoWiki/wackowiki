@@ -37,7 +37,7 @@ if ($this->HasAccess("read"))
 				$etag = str_replace('%2F', '/', rawurlencode($page["tag"]));
 
 				$xml .= "<item>\n";
-				$xml .= "<title>".$page["time"]."</title>\n";
+				$xml .= "<title>".$this->GetTimeStringFormatted($page["time"])."</title>\n";
 				$xml .= "<link>".$this->href("show").($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."time=".urlencode($page["time"])."</link>\n";
 				$xml .= "<guid isPermaLink=\"true\">".$this->href("", $etag)."</guid>\n";
 

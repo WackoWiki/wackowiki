@@ -40,11 +40,11 @@ if (!class_exists("preformatter"))
 			}
 			else if ($thing == "::@::")
 			{
-				return "((/".$wacko->GetUserName()." ".$wacko->GetUserName()."))"." ".date("/d.m.Y H:i/");
+				return sprintf($wacko->config["name_date_macro"], "((/".$wacko->GetUserName()." ".$wacko->GetUserName()."))", date($wacko->config["date_macro_format"]));
 			}
 			else if ($thing == "::+::")
 			{
-				return date("d.m.Y H:i");
+				return date($wacko->config["date_macro_format"]);
 			}
 			else if ((preg_match("/^(\[\[)(.+)(\]\])$/", $thing, $matches)) ||
 					(preg_match("/^(\(\()(.+)(\)\))$/", $thing, $matches)))

@@ -11,9 +11,9 @@ if ($user = $this->GetUserName())
 	if ($_GET["bydate"] == 1 || $bydate == 1)
 	{
 		print($this->GetTranslation("ListOwnedPages2"));
-		print("<br />(<a href=\"".$this->href("", "", "mode=mypages")."#list"."\">".
-		$this->GetTranslation("OrderABC")."</a>) (<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."#list"."\">".
-		$this->GetTranslation("OrderChange")."</a>) <br /><br />\n");
+		print("<br />[<a href=\"".$this->href("", "", "mode=mypages")."#list"."\">".
+		$this->GetTranslation("OrderABC")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."#list"."\">".
+		$this->GetTranslation("OrderChange")."</a>] <br /><br />\n");
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}pages ".
@@ -74,10 +74,10 @@ if ($user = $this->GetUserName())
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bychange=1#list');
 
 		print($this->GetTranslation('ListOwnedPages3').'.');
-		print('<br />(<a href="'.
+		print('<br />[<a href="'.
 			$this->href('', '', 'mode=mypages').'#list">'.$this->GetTranslation('OrderABC').
-			'</a>) (<a href="'.$this->href('', '', 'mode=mypages&amp;bydate=1').'#list">'.
-			$this->GetTranslation('OrderDate')."</a>)<br /><br />\n");
+			'</a>] [<a href="'.$this->href('', '', 'mode=mypages&amp;bydate=1').'#list">'.
+			$this->GetTranslation('OrderDate')."</a>]<br /><br />\n");
 
 		if ($pages = $this->LoadAll(
 			"SELECT p.tag AS tag, p.time AS time ".
@@ -108,7 +108,7 @@ if ($user = $this->GetUserName())
 				}
 
 				// print entry
-				print("<li>$time (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."</li>\n");
+				print("<li>".$this->GetTimeStringFormatted($time)." (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."</li>\n");
 
 			}
 			echo "</ul>\n</li>\n</ul>\n";
@@ -131,9 +131,9 @@ if ($user = $this->GetUserName())
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mypages#list');
 
 		print($this->GetTranslation("ListOwnedPages"));
-		print("<br />(<a href=\"".$this->href("", "", "mode=mypages&amp;bydate=1")."#list"."\">".
-		$this->GetTranslation("OrderDate")."</a>) (<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."#list"."\">".
-		$this->GetTranslation("OrderChange")."</a>) <br /><br />\n");
+		print("<br />[<a href=\"".$this->href("", "", "mode=mypages&amp;bydate=1")."#list"."\">".
+		$this->GetTranslation("OrderDate")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."#list"."\">".
+		$this->GetTranslation("OrderChange")."</a>] <br /><br />\n");
 
 		if ($pages = $this->LoadAll(
 			"SELECT tag, time ".

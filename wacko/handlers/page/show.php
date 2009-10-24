@@ -15,7 +15,7 @@ if ($this->HasAccess("read"))
 		// comment header?
 		if ($this->page["comment_on_id"])
 		{
-			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->GetCommentOnTag($this->page["comment_on_id"]), "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["time"]."</div>");
+			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->GetCommentOnTag($this->page["comment_on_id"]), "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->GetTimeStringFormatted($this->page["time"])."</div>");
 		}
 
 		if ($this->page["latest"] == "0")
@@ -23,7 +23,7 @@ if ($this->HasAccess("read"))
 			print("<div class=\"revisioninfo\">".
 			str_replace("%1",$this->href(),
 			str_replace("%2",$this->GetPageTag(),
-			str_replace("%3",$this->page["time"],
+			str_replace("%3",$this->GetPageTimeFormatted(),
 			$this->GetTranslation("Revision")))));
 
 			// if this is an old revision, display ReEdit button
@@ -259,7 +259,7 @@ if ($this->page)
 					print("<div class=\"commenttitle\">\n<a href=\"".$this->href("", "", "show_comments=1")."#".$comment["tag"]."\">".$comment["title"]."</a>\n</div>\n");
 					print($this->Format($strings,"post_wacko")."\n");
 					echo "</div>\n";
-					print("<ul class=\"commentinfo\">\n<li>".($this->IsWikiName($comment["user"]) ? $this->Link("/".$comment["user"],"",$comment["user"]) : $comment["user"])."</li>\n<li>".$comment["time"]."</li>\n</ul>\n");
+					print("<ul class=\"commentinfo\">\n<li>".($this->IsWikiName($comment["user"]) ? $this->Link("/".$comment["user"],"",$comment["user"]) : $comment["user"])."</li>\n<li>".$this->GetTimeStringFormatted($comment["time"])."</li>\n</ul>\n");
 					echo "</li>";
 				}
 
