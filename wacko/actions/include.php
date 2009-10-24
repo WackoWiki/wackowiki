@@ -1,6 +1,9 @@
 <?php
 
 $page = $this->UnwrapLink($page);
+if (!isset($first_anchor))		$first_anchor = "";
+if (!isset($last_anchor))		$last_anchor = "";
+if (!isset($track))				$track = "";
 
 if ($_SESSION[$this->config["session_prefix"].'_'."linktracking"] && $track)
 	$this->TrackLinkTo($page);
@@ -15,7 +18,10 @@ if (! $this->HasAccess("read", $page))
 }
 else
 {
-	if (!$inc_page = $this->LoadPage($page, $_GET["time"]))
+	if (isset($_GET["time"])) $time = $_GET["time"];
+	else $time = "";
+
+	if (!$inc_page = $this->LoadPage($page, $time))
 	{
 		echo "<em> ".$this->GetTranslation("SourcePageDoesntExist")."(".$this->Link("/".$page).")</em>";
 	}
