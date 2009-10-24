@@ -268,12 +268,12 @@ class Init
 					"captcha_edit_page" => 1,
 					"captcha_registration" => 1,
 
-					"date_format" => "d/m/Y",
-					"time_format" => "H:i",
+					"date_format" => "d.m.Y",
+					"time_format" => "H:i:s",
 					"time_format_seconds" => "H:i",
 					"name_date_macro" => "%s (%s)",
-					"date_macro_format" => "d/m/Y H:i",
-					"date_precise_format" => "d/m/Y H:i:s",
+					"date_macro_format" => "d.m.Y H:i",
+					"date_precise_format" => "d.m.Y H:i:s",
 
 					"debug" => 0,
 					"debug_admin_only" => 0,
