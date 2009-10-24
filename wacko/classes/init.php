@@ -167,12 +167,11 @@ class Init
 					"database_database" => "wacko",
 					"database_user" => "",
 					"database_password" => "",
+					"db_collation" => 0,
 
 					"table_prefix" => "wacko_",
 					"cookie_prefix" => "wacko_",
 					"session_prefix" => "wacko43_",
-
-					"xml_sitemap" => 0,
 
 					"root_page" => "HomePage",
 					"wacko_name" => "MyWackoSite",
@@ -194,6 +193,17 @@ class Init
 					"header_action" => "header",
 					"footer_action" => "footer",
 
+					"edit_summary" => 0,
+					"minor_edit" => 0,
+
+					"hide_comments" => 0,
+					"hide_files" => 0,
+
+					"footer_comments" => 1,
+					"footer_files" => 1,
+
+					"revisions_hide_cancel" => 0,
+
 					"show_datetime" => 0,
 					"show_spaces" => 1,
 
@@ -201,20 +211,11 @@ class Init
 					"default_showdatetime" => 1,
 					"paragrafica" => 1,
 
-					"referrers_purge_time" => 1,
-					"pages_purge_time" => 0,
-
-					"edit_summary" => 0,
-					"minor_edit" => 0,
-
-					"hide_files" => 0,
-					"hide_comments" => 0,
-
-					"debug" => 0,
-					"debug_admin_only" => 0,
-					"debug_sql_threshold" => 0,
-
-					"log_min_level" => 0,
+					"disable_tikilinks" => 0,
+					"disable_bracketslinks" => 0,
+					"disable_wikilinks" => 0,
+					"disable_npjlinks" => 0,
+					"disable_formatters" => 0,
 
 					"youarehere_text" => "",
 					"hide_locked" => 1,
@@ -228,23 +229,17 @@ class Init
 					"default_write_acl" => "$",
 					"default_read_acl" => "*",
 					"default_comment_acl" => "$",
-					"default_rename_redirect" => 1,
+					"default_create_acl" => "$",
+
+					"rename_globalacl" => "Admins",
+					"remove_onlyadmins" => 0,
 					"owners_can_remove_comments" => 1,
+					"default_rename_redirect" => 1,
+
 					"allow_registration" => 1,
+					"disable_autosubscribe" => 0,
 
 					"standard_handlers" => "acls|addcomment|claim|diff|edit|latex|msword|new|print|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|settings|show|watch",
-
-					"revisions_hide_cancel" => 0,
-					"footer_comments" => 1,
-					"footer_files" => 1,
-
-					"disable_tikilinks" => 0,
-					"disable_bracketslinks" => 0,
-					"disable_wikilinks" => 0,
-					"disable_npjlinks" => 0,
-					"disable_formatters" => 0,
-
-					"remove_onlyadmins" => 0,
 
 					"upload" => "admins",
 					"upload_images_only" => 0,
@@ -255,8 +250,9 @@ class Init
 					"upload_banned_exts" => "php|cgi|js|php|php3|php4|php5|pl|ssi|jsp|phtm|phtml|shtm|shtml|xhtm|xht|asp|aspx|htw|ida|idq|cer|cdx|asa|htr|idc|stm|printer|asax|ascx|ashx|asmx|axd|vdisco|rem|soap|config|cs|csproj|vb|vbproj|webinfo|licx|resx|resources",
 
 					"outlook_workaround" => 1,
-					"disable_autosubscribe" => 0,
 					"allow_gethostbyaddr" => 1,
+
+					"xml_sitemap" => 0,
 
 					"cache" => 0,
 					"cache_dir" => "_cache/",
@@ -265,17 +261,34 @@ class Init
 					"cache_sql" => 0,
 					"cache_sql_ttl" => 600,
 
-					"db_collation" => 0,
-					"rename_globalacl" => "Admins",
-
 					"spam_filter" => 1,
 
 					"captcha_new_comment" => 1,
 					"captcha_new_page" => 1,
 					"captcha_edit_page" => 1,
 					"captcha_registration" => 1,
+
+					"date_format" => "d/m/Y",
+					"time_format" => "H:i",
+					"time_format_seconds" => "H:i",
+					"name_date_macro" => "%s (%s)",
+					"date_macro_format" => "d/m/Y H:i",
+					"date_precise_format" => "d/m/Y H:i:s",
+
+					"debug" => 0,
+					"debug_admin_only" => 0,
+					"debug_sql_threshold" => 0,
+
+					"log_min_level" => 0,
+					"log_purge_time" => 0,
+
+					"referrers_purge_time" => 1,
+					"pages_purge_time" => 0,
 				);
-				$wackoConfig["aliases"]	= array("Admins" => "");
+
+				$wackoConfig["aliases"]	= array(
+					"Admins" => ""
+				);
 
 				// load primary config
 				if ( @file_exists("wakka.config.php") )
