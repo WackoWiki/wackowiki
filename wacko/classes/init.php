@@ -75,8 +75,8 @@ class Init
 	// Mandatory runs and checks.
 	function Init()
 	{
-		#error_reporting (E_ALL ^ E_NOTICE);
-		error_reporting (E_ALL);
+		error_reporting (E_ALL ^ E_NOTICE);
+		#error_reporting (E_ALL);
 
 		// start execution timer
 		$this->timer = $this->GetMicroTime();
