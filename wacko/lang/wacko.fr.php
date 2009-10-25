@@ -415,8 +415,8 @@ $wackoTranslation = array(
 	"ToThePage" => "To page",
 	"Next" => "Suivant",
 	"Prev" => "Précédent",
-	"NextAcr" => "Next.",
-	"PrevAcr" => "Prev.",
+	"NextAcr" => "Next",
+	"PrevAcr" => "Prev",
 
 	"default_bookmarks" => "((Index))\n((Modifications))\n((Commentaires))",
 	"site_bookmarks" => "((Index)) / ((Modifications)) / ((Commentaires))",
@@ -444,7 +444,7 @@ $wackoTranslation = array(
 	// Feed
 	"FeedTitle" => "Titre du flux",
 	"FeedMulti" => "Multi-Feed",
-	"FeedNoURL" => "Merci de spécifier un flux avec l&rsquo;url en paramètre (i.e. {{flux url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
+	"FeedNoURL" => "Merci de spécifier un flux avec l&rsquo;url en paramètre (i.e. {{flux url=\"http://wackowiki.org/xml/comments_wackowiki.xml\"}}",
 	"FeedError" => "Impossible de charger ou d&rsquo;analyser le flux",
 	"FeedSource" => "Source:",
 
@@ -468,8 +468,9 @@ $wackoTranslation = array(
 	"ExportClusterXML" => "Export du groupe entier de ",
 	"AccessDeniedXML" => "Vous n&rsquo;êtes pas autorisé(e) à accéder à cette information.",
 
-	"RecentChangesRSS" => "Changements récents en RSS",
-	"RecentCommentsRSS" => "Commentaires récents en RSS",
+	"RecentChangesRSS" => "Changements récents",
+	"RecentCommentsRSS" => "Commentaires récents",
+	"RecentNewsRSS" => "Nouvelles récents",
 	"HistoryRevisionsRSS" => "Historique/révisions de ",
 
 	"LastModification" => "Dernière modification",
@@ -479,6 +480,14 @@ $wackoTranslation = array(
 	"SpamAlert" => "Le mot que vous avez tapé n&rsquo;est pas celui de l&rsquo;image",
 	"CaptchaReload" => "Nouveau mot dans une image",
 	"CaptchaReloadWarning" => "Désolé, je ne peux pas ré-afficher l&rsquo;image contenant le mot. Vous devez rafraîchir la page pour ce faire",
+
+	// news
+	"NewsName"		=> "Title",
+	"NewsSubmit"	=> "add",
+	"NewsNoName"	=> "You forgot to add news headline.",
+	"NewsNotAvailable"	=> "No News available.",
+	"NewsAddedFrom"	=> "added",
+	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log
 	"LogLevel1"					=> "critical",

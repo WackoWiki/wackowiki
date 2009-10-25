@@ -416,8 +416,8 @@ $wackoTranslation = array(
 	"ToThePage"	=> "На страницу",
 	"Next" => "Далее",
 	"Prev" => "Назад",
-	"NextAcr" => "След.",
-	"PrevAcr" => "Пред.",
+	"NextAcr" => "След",
+	"PrevAcr" => "Пред",
 
 	"default_bookmarks" => "((Каталог))\n((Изменения))\n((НовыеКомментарии Комментарии @@ru))",
 	"site_bookmarks" => "((Каталог)) / ((Изменения)) / ((НовыеКомментарии Комментарии @@ru))",
@@ -444,7 +444,7 @@ $wackoTranslation = array(
 	// Feed
 	"FeedTitle" => "Заголовок канала новостей",
 	"FeedMulti" => "Multi-Feed",
-	"FeedNoURL" => "Пожалуйста, укажите канал новостей с параметром url, например, {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
+	"FeedNoURL" => "Пожалуйста, укажите канал новостей с параметром url, например, {{feed url=\"http://wackowiki.org/xml/comments_wackowiki.xml\"}}",
 	"FeedError" => "Невозможно загрузить или распознать новости",
 	"FeedSource" => "Source:",
 
@@ -468,8 +468,9 @@ $wackoTranslation = array(
 	"ExportClusterXML" => "Экспорт кластера целиком ",
 	"AccessDeniedXML" => "У вас нет прав для доступа к данной информации.",
 
-	"RecentChangesRSS" => "Последние изменения в RSS",
-	"RecentCommentsRSS" => "Последние комментарии в RSS",
+	"RecentChangesRSS" => "Последние изменения",
+	"RecentCommentsRSS" => "Последние комментарии",
+	"RecentNewsRSS" => "Последние новости",
 	"HistoryRevisionsRSS" => "История изменений ",
 
 	"LastModification" => "Последнее изменение",
@@ -479,6 +480,14 @@ $wackoTranslation = array(
 	"SpamAlert" => "Контрольное слово введено неверно",
 	"CaptchaReload" => "Обновить картинку",
 	"CaptchaReloadWarning" => "К сожалению, невозможно загрузить новую картинку, попробуйте обновить страницу целиком",
+
+	// news
+	"NewsName"		=> "Заголовок",
+	"NewsSubmit"	=> "добавить",
+	"NewsNoName"	=> "Вы забыли указать заголовок добавляемой новости.",
+	"NewsNotAvailable"	=> "No News available.",
+	"NewsAddedFrom"	=> "Добавил",
+	"NewsDiscuss"	=> "Обсудить новость...",
 
 	// log
 	'LogLevel1'					=> 'Критический',

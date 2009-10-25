@@ -419,8 +419,8 @@ $wackoTranslation = array(
 	"ToThePage" => "To page",
 	"Next" => "Next",
 	"Prev" => "Prev",
-	"NextAcr" => "Next.",
-	"PrevAcr" => "Prev.",
+	"NextAcr" => "Next",
+	"PrevAcr" => "Prev",
 
 	"default_bookmarks" => "((PaginaIndex Index))\n((LaatsteWijzigingen Wijzigingen))\n((LaatsteOpmerkingen Opmerkingen))",
 	"site_bookmarks" => "((PaginaIndex Index)) / ((LaatsteWijzigingen Wijzigingen)) / ((LaatsteOpmerkingen Opmerkingen))",
@@ -448,7 +448,7 @@ $wackoTranslation = array(
 	// Feed
 	"FeedTitle" => "Feed Title",
 	"FeedMulti" => "Multi-Feed",
-	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
+	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/comments_wackowiki.xml\"}}",
 	"FeedError" => "Could not load or parse feed",
 	"FeedSource" => "Source:",
 
@@ -472,8 +472,9 @@ $wackoTranslation = array(
 	"ExportClusterXML" => "Export of entire cluster of ",
 	"AccessDeniedXML" => "You're not allowed to access this information.",
 
-	"RecentChangesRSS" => "Recent changes in RSS",
-	"RecentCommentsRSS" => "Recent comments in RSS",
+	"RecentChangesRSS" => "Recent changes",
+	"RecentCommentsRSS" => "Recent comments",
+	"RecentNewsRSS" => "Recent news",
 	"HistoryRevisionsRSS" => "History/revisions of ",
 
 	"LastModification" => "Last Modification",
@@ -483,6 +484,14 @@ $wackoTranslation = array(
 	"SpamAlert" => "You have entered the captcha word incorrectly",
 	"CaptchaReload" => "New Captcha",
 	"CaptchaReloadWarning" => "Sorry, cannot reload the captcha image, you will have to reload the page to do that",
+
+	// news
+	"NewsName"		=> "Title",
+	"NewsSubmit"	=> "add",
+	"NewsNoName"	=> "You forgot to add news headline.",
+	"NewsNotAvailable"	=> "No News available.",
+	"NewsAddedFrom"	=> "added",
+	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log
 	"LogLevel1"					=> "critical",

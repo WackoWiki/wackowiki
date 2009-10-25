@@ -417,8 +417,8 @@ $wackoTranslation = array(
 	"ToThePage" => "Zu Seite",
 	"Next" => "weiter",
 	"Prev" => "zurück",
-	"NextAcr" => "Next.",
-	"PrevAcr" => "Prev.",
+	"NextAcr" => "Next",
+	"PrevAcr" => "Prev",
 
 	"default_bookmarks" => 	"((SeitenIndex Index))\n".
 							"((LetzteAenderungen Änderungen))\n".
@@ -452,7 +452,7 @@ $wackoTranslation = array(
 	// Feed
 	"FeedTitle" => "Feed Titel",
 	"FeedMulti" => "Multi-Feed",
-	"FeedNoURL" => "Bitte gib einen Feed mit dem Parameter url an. (z.B. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
+	"FeedNoURL" => "Bitte gib einen Feed mit dem Parameter url an. (z.B. {{feed url=\"http://wackowiki.org/xml/comments_wackowiki.xml\"}}",
 	"FeedError" => "Kann Feed nicht laden oder parsen",
 	"FeedSource" => "Quelle:",
 
@@ -478,6 +478,7 @@ $wackoTranslation = array(
 
 	"RecentChangesRSS" => "Letzte Änderungen",
 	"RecentCommentsRSS" => "Letzte Kommentare",
+	"RecentNewsRSS" => "Letzte Nachrichten",
 	"HistoryRevisionsRSS" => "Versionen von ",
 
 	"LastModification" => "Letzte Änderung",
@@ -487,6 +488,14 @@ $wackoTranslation = array(
 	"SpamAlert" => "Du hast das Captcha-Wort nicht korrekt eingegeben.",
 	"CaptchaReload" => "Neues Captcha",
 	"CaptchaReloadWarning" => "Kann das Captcha Bild nicht neu laden, du musst die Seite neu laden um das zu tun.",
+
+	// news
+	"NewsName"		=> "Titel",
+	"NewsSubmit"	=> "hinzufügen",
+	"NewsNoName"	=> "Du habst vergessen eine Schlagzeile hinzuzufügen.",
+	"NewsNotAvailable"	=> "No News available.",
+	"NewsAddedFrom"	=> "added",
+	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log
 	"LogLevel1"					=> "critical",
