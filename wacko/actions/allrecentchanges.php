@@ -15,7 +15,7 @@ if ($this->NpjTranslit($this->config["allrecentchanges_page"]) != $this->NpjTran
 else
 if ($pages = $this->LoadRecentlyChanged($max))
 {
-	print("<a href=\"".$this->GetConfigValue("root_url")."xml/recentchanges_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />");
+	print("<a href=\"".$this->GetConfigValue("root_url")."xml/changes_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />");
 
 	foreach ($pages as $i => $page)
 	{

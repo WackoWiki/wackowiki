@@ -1440,8 +1440,11 @@ class Wacko
 				$xml->Changes();
 				$xml->Comments();
 
-				#if (substr($this->tag, 0, strlen($this->config['news_cluster'].'/')) == $this->config['news_cluster'].'/')
-				#	$xml->News();
+				if ($this->config["news_cluster"])
+				{
+					if (substr($this->tag, 0, strlen($this->config['news_cluster'].'/')) == $this->config['news_cluster'].'/')
+						$xml->News();
+				}
 
 				if($this->config["xml_sitemap"])
 				{
@@ -3845,7 +3848,7 @@ class Wacko
 			}
 			else
 			{
-				$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.($page + 1).( $params == true ? '&amp;'.$params : '' )).'">'.$this->GetTranslation('NextAcr').'</a>';
+				$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.($page + 1).( $params == true ? '&amp;'.$params : '' )).'">'.$this->GetTranslation('NextAcr').' &raquo;</a>';
 			}
 		}
 

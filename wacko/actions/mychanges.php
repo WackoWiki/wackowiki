@@ -114,7 +114,7 @@ if ($user = $this->GetUserName())
 				}
 
 				// print entry
-				print("<li>".$page["time"]." (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."</li>\n");
+				print("<li>".$this->GetTimeStringFormatted($page["time"])." (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."</li>\n");
 
 
 			}
