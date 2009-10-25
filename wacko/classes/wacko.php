@@ -2576,7 +2576,7 @@ class Wacko
 		if (!$user = $this->GetUser())
 			return false;
 
-		return ($user["options"]["show_files"] == "Y");
+		return ($user["options"]["show_files"] == "1");
 	}
 
 	// Returns boolean indicating if the current user is allowed to see comments at all
@@ -2610,7 +2610,81 @@ class Wacko
 		return implode($this->optionSplitter, $opts);
 	}
 
-	// COMMENTS
+	// COMMENTS AND COUNTS
+	// recount all user's comments
+	function CountUserComments($name)
+	{
+		$count = $this->LoadSingle(
+			"SELECT COUNT(tag) AS n ".
+			"FROM {$this->config['table_prefix']}pages ".
+			"WHERE owner = '".quote($this->dblink, $name)."' ".
+				"AND comment_on_id <> '0'");
+		return (int)$count['n'];
+	}
+
+	// recount all user's pages
+	function CountUserPages($name)
+	{
+		$count = $this->LoadSingle(
+			"SELECT COUNT(tag) AS n ".
+			"FROM {$this->config['table_prefix']}pages ".
+			"WHERE owner = '".quote($this->dblink, $name)."' ".
+				"AND comment_on_id = '0'");
+		return (int)$count['n'];
+	}
+
+	// recount all user's page revisions
+	function CountUserRevisions($name)
+	{
+		$count = $this->LoadSingle(
+			"SELECT COUNT(tag) AS n ".
+			"FROM {$this->config['table_prefix']}revisions ".
+			"WHERE owner = '".quote($this->dblink, $name)."' ".
+				"AND comment_on_id = '0'");
+		return (int)$count['n'];
+	}
+
+	// recount all comments for a given page
+	function CountComments($tag)
+	{
+		$count = $this->LoadSingle(
+			"SELECT COUNT(tag) AS n ".
+			"FROM {$this->config['table_prefix']}pages ".
+			"WHERE comment_on_id = '".quote($this->dblink, $tag)."'");
+		return (int)$count['n'];
+	}
+
+	// get current number of comments
+	function GetCommentsCount($tag = '')
+	{
+		if ($this->page && $tag == false)
+		{
+			return $this->page['comments'];
+		}
+		else
+		{
+			$count = $this->LoadSingle(
+				"SELECT comments ".
+				"FROM {$this->config['table_prefix']}pages ".
+				"WHERE tag = '".quote($this->dblink, $tag)."' ".
+				"LIMIT 1");
+			return $count['comments'];
+		}
+		return false;
+	}
+
+	// returns latest comment tag for a given page
+	function LatestComment($tag)
+	{
+		if ($tag) $latest = $this->LoadSingle(
+			"SELECT tag ".
+			"FROM {$this->config['table_prefix']}pages ".
+			"WHERE comment_on_id = '".quote($this->dblink, $tag)."' ".
+			"ORDER BY created DESC ".
+			"LIMIT 1");
+		return $latest['tag'];
+	}
+
 	function LoadComments($page_id)
 	{
 		// avoid results if $page_id is 0 (page does not exists)
