@@ -312,6 +312,7 @@ class Wacko
 				if (@file_exists($resourcefile)) include($resourcefile);
 				$this->resources["all"] = & $wackoAllResource;
 			}
+			if (!isset($wackoTranslation)) $wackoTranslation = array();
 			$wackoResource = array_merge($wackoTranslation, $this->resources["all"]);
 
 			// theme
@@ -340,6 +341,7 @@ class Wacko
 
 			$this->languages[$lang] = $wackoLanguage;
 			$ue = @array_flip($wackoLanguage["unicode_entities"]);
+			if (!isset($ue)) $ue = array();
 			$this->unicode_entities = array_merge($this->unicode_entities, $ue);
 			unset($this->unicode_entities[0]);
 		}
@@ -1242,6 +1244,34 @@ class Wacko
 				$this->SaveAcl($tag, "write", $write_acl);
 				$this->SaveAcl($tag, "read", $read_acl);
 				$this->SaveAcl($tag, "comment", $comment_acl);
+
+				// counters 
+				/*
+				if ($comment_on_id)
+				{
+					// updating comments count for commented page
+					$this->Query(
+						"UPDATE {$this->config['table_prefix']}pages SET ".
+							"comments	= '".(int)$this->CountComments($comment_on)."' ".
+						"WHERE tag = '".quote($this->dblink, $comment_on)."' ".
+						"LIMIT 1");
+
+					// update user comments count
+					$this->Query(
+						"UPDATE {$this->config['user_table']} ".
+						"SET total_comments = total_comments + 1 ".
+						"WHERE name = '".quote($this->dblink, $owner)."' ".
+						"LIMIT 1");
+				}
+				else
+				{
+					// update user pages count
+					$this->Query(
+						"UPDATE {$this->config['user_table']} ".
+						"SET total_pages = total_pages + 1 ".
+						"WHERE name = '".quote($this->dblink, $owner)."' ".
+						"LIMIT 1");
+				} */
 
 				// set watch
 				if ($this->GetUser() && !$this->config["disable_autosubscribe"])
