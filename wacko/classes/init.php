@@ -75,8 +75,8 @@ class Init
 	// Mandatory runs and checks.
 	function Init()
 	{
-		error_reporting (E_ALL ^ E_NOTICE);
-		#error_reporting (E_ALL);
+		#error_reporting (E_ALL ^ E_NOTICE);
+		error_reporting (E_ALL);
 
 		// start execution timer
 		$this->timer = $this->GetMicroTime();
@@ -251,6 +251,9 @@ class Init
 
 					"outlook_workaround" => 1,
 					"allow_gethostbyaddr" => 1,
+
+					"news_cluster" => "",
+					"news_levels" => "",
 
 					"xml_sitemap" => 0,
 

@@ -16,7 +16,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 	$count = 0;
 	if ($root == "" && !(int)$noxml)
 	{
-		echo "<a href=\"".$this->GetConfigValue("root_url")."xml/recentchanges_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
+		echo "<a href=\"".$this->GetConfigValue("root_url")."xml/changes_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
 	}
 
 	echo "<ul class=\"ul_list\">\n";

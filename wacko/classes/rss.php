@@ -39,7 +39,7 @@ class RSS
 	function Changes()
 	{
 		$limit	= 30;
-		$name = "recentchanges";
+		$name = "changes";
 
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->GetCharset()."\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
@@ -89,7 +89,7 @@ class RSS
 	function Comments()
 	{
 		$limit	= 20;
-		$name = "recentcomment";
+		$name = "comments";
 
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->GetCharset()."\"?>\n";
 		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->engine->config["theme_url"]."css/wacko.css\" media=\"screen\"?>\n";
@@ -116,7 +116,7 @@ class RSS
 				if ( $access && ($count < 30) ) {
 					$count++;
 					$xml .= "<item>\n";
-					$xml .= "<title>".$page["tag"]." ".$this->engine->GetTranslation("To")." ".$this->engine->GetCommentOnTag($page["comment_on_id"])." ".$this->engine->GetTranslation("From")." ".$page["user"]."</title>\n";
+					$xml .= "<title>".$page["title"]." ".$this->engine->GetTranslation("To")." ".$this->engine->GetCommentOnTag($page["comment_on_id"])." ".$this->engine->GetTranslation("From")." ".$page["user"]."</title>\n";
 					$xml .= "<link>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["time"]))."</link>\n";
 					$xml .= "<guid>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["time"]))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['time']))."</pubDate>\n";
@@ -132,6 +132,92 @@ class RSS
 		$xml .= "</channel>\n";
 		$xml .= "</rss>\n";
 
+		$this->WriteFile($name, $xml);
+	}
+
+	function News()
+	{
+		$limit			= 10;
+		$name			= 'news';
+		$newscluster	= $this->engine->config['news_cluster'];
+		$newslevels		= $this->engine->config['news_levels'];
+		
+		//  collect data
+		$pages = $this->engine->LoadAll(
+			"SELECT tag, title, created, body_r ".
+			"FROM {$this->engine->config['table_prefix']}pages ".
+			"WHERE comment_on_id = '0' ".
+				"AND tag REGEXP '^{$newscluster}{$newslevels}$' ".
+			"ORDER BY tag");
+		
+		// build an array
+		foreach ($pages as $page)
+		{
+			$news_pages[]	= array('tag' => $page['tag'], 'title' => $page['title'], 'time' => $page['created'],
+				'body_r' => $page['body_r'], 'date' => date('Y/m-d', strtotime($page['created'])));
+		}
+
+		// sorting function: sorts by dates
+		// in tag names in reverse order
+		$sort_dates = create_function(
+			'$a, $b',	// func params
+			'if ($a["date"] == $b["date"]) '.
+				'return 0;'.
+			'return ($a["date"] < $b["date"] ? 1 : -1);');
+		// sort pages array
+		usort($news_pages, $sort_dates);
+	
+		// build output
+		$xml = '<?xml version="1.0" encoding="'.$this->charset.'"?>'."\n".
+				'<?xml-stylesheet type="text/css" href="'.$this->engine->config['root_url'].'styles/atom.css" media="screen"?>'."\n".
+				'<rss version="2.0">'."\n".
+					'<channel>'."\n".
+						'<title>News "'.$this->engine->config['wacko_name'].'"</title>'."\n".
+						'<link>'.$this->engine->config['root_url'].str_replace('%2F', '/', rawurlencode($newscluster)).'</link>'."\n".
+						'<description>'.$this->engine->GetTranslation("RecentNewsXML").$this->engine->config["wacko_name"].'</description>'."\n".
+						'<language>'.$this->engine->config['language'].'</language>'."\n".
+						'<pubDate>'.date('r').'</pubDate>'."\n".
+						'<lastBuildDate>'.date('r').'</lastBuildDate>'."\n";
+		$xml .= "<image>\n";
+		$xml .= "<title>".$this->engine->config["wacko_name"].$this->engine->GetTranslation("NewsTitleXML")."</title>\n";
+		$xml .= "<link>".$this->engine->config["root_url"].str_replace('%2F', '/', rawurlencode($newscluster))."</link>\n";
+		$xml .= "<url>".$this->engine->config["root_url"]."files/wacko4.gif"."</url>\n";
+		$xml .= "<width>108</width>\n";
+		$xml .= "<height>50</height>\n";
+		$xml .= "</image>\n";
+	
+		$i = 0;
+		foreach ($news_pages as $page)
+		{
+			$i++;
+
+				// this is a news article
+				$title	= $page['title'];
+				$cat	= substr_replace ($page['tag'], '', 0, strlen ($newscluster) + 1); // removes news cluster name
+				$cat	= substr_replace ($cat, '', strpos ($cat, '/')); // removes news page name
+				$link	= $this->engine->href('', $page['tag']);
+				$pdate	= date("r", strtotime($page['time']));
+				$coms	= $link.'?show_comments=1#comments';
+				$body	= $this->engine->LoadPage($page['tag']);
+				$text	= $this->engine->Format($page['body_r'], 'post_wacko');
+
+
+			$xml .= '<item>'."\n".
+						'<title>'.$title.'</title>'."\n".
+						'<link>'.$link.'</link>'."\n".
+						'<guid isPermaLink="true">'.$link.'</guid>'."\n".
+						'<description><![CDATA['.str_replace(']]>', ']]&gt;', $text).']]></description>'."\n".
+						'<pubDate>'.$pdate.'</pubDate>'."\n".
+						'<category>'.str_replace(' ', '', $cat).'</category>'."\n".
+						( $coms != '' ? '<comments>'.$coms.'</comments>'."\n" : '' ).
+					'</item>'."\n";
+
+			if ($i >= $limit) break;
+		}
+   
+		$xml .= 	'</channel>'."\n".
+				'</rss>';
+		
 		$this->WriteFile($name, $xml);
 	}
 

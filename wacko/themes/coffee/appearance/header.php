@@ -21,10 +21,10 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 	type="image/x-icon" />
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetTranslation("RecentChangesRSS");?>"
-	href="<?php echo $this->GetConfigValue("root_url");?>xml/recentchanges_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+	href="<?php echo $this->GetConfigValue("root_url");?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>"
-	href="<?php echo $this->GetConfigValue("root_url");?>xml/recentcomment_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+	href="<?php echo $this->GetConfigValue("root_url");?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?> in RSS"
 	href="<?php echo $this->href("revisions.xml");?>" />
