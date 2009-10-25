@@ -110,7 +110,7 @@ else if ($_POST["action"] == "login")
 			{
 				$confirm = md5(rand().$email.rand());
 				$more = $this->ComposeOptions(array(
-					"send_watchmail" => "Y",
+					"send_watchmail" => "1",
 				));
 
 				$this->Query(

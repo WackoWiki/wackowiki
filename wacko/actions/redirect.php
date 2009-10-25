@@ -16,7 +16,7 @@ if ($page)
 	{
 		if ($user = $this->GetUser())
 		{
-			if ($user["options"]["dont_redirect"] == "Y" || $_POST["redirect"] == "no")
+			if ($user["options"]["dont_redirect"] == "1" || $_POST["redirect"] == "no")
 			{
 				print ("<br /><br /><br />".$this->GetTranslation("PageMoved")." ".$this->Link("/".$page)."<br /><br /><br />");
 			}
