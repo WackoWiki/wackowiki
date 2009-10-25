@@ -417,8 +417,8 @@ $wackoTranslation = array(
 	"ToThePage" => "To page",
 	"Next" => "Επόμενο",
 	"Prev" => "Προηγούμενο",
-	"NextAcr" => "Next.",
-	"PrevAcr" => "Prev.",
+	"NextAcr" => "Next",
+	"PrevAcr" => "Prev",
 
 	"default_bookmarks" => "((PageIndex Index))\n((RecentChanges Changes))\n((RecentlyCommented Comments))",
 	"site_bookmarks" => "((PageIndex Index)) / ((RecentChanges Changes)) / ((RecentlyCommented Comments))",
@@ -446,7 +446,7 @@ $wackoTranslation = array(
 	// Feed
 	"FeedTitle" => "Feed Title",
 	"FeedMulti" => "Multi-Feed",
-	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
+	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/comments_wackowiki.xml\"}}",
 	"FeedError" => "Could not load or parse feed",
 	"FeedSource" => "Source:",
 
@@ -470,8 +470,9 @@ $wackoTranslation = array(
 	"ExportClusterXML" => "Export of entire cluster of ",
 	"AccessDeniedXML" => "Δεν είναι επιτρεπτή η πρόσβαση σε αυτή την πληροφορία.",
 
-	"RecentChangesRSS" => "Πρόσφατες αλλαγές στο RSS",
-	"RecentCommentsRSS" => "Πρόσφατα σχόλια στο RSS",
+	"RecentChangesRSS" => "Πρόσφατες αλλαγές",
+	"RecentCommentsRSS" => "Πρόσφατα σχόλια",
+	"RecentNewsRSS" => "Recent news",
 	"HistoryRevisionsRSS" => "Ιστορικό/εκδόσεις του ",
 
 	"LastModification" => "Τελευταίες Τροποποιήσεις",
@@ -481,6 +482,14 @@ $wackoTranslation = array(
 	"SpamAlert" => "Έχετε πληκτρολογήσει λανθασμένη εικόνα captcha",
 	"CaptchaReload" => "Νέο Captcha",
 	"CaptchaReloadWarning" => "Λυπάμαι, δεν γίνεται να ανανεωθεί η εικόνα captcha, θα πρέπει να ανανεώσετε την σελίδα για να γίνει αυτό",
+
+	// news
+	"NewsName"		=> "Title",
+	"NewsSubmit"	=> "add",
+	"NewsNoName"	=> "You forgot to add news headline.",
+	"NewsNotAvailable"	=> "No News available.",
+	"NewsAddedFrom"	=> "added",
+	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log
 	"LogLevel1"					=> "critical",

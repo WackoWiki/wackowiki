@@ -416,8 +416,8 @@ $wackoTranslation = array(
 	"ToThePage" => "To page",
 	"Next" => "Next",
 	"Prev" => "Prev",
-	"NextAcr" => "Next.",
-	"PrevAcr" => "Prev.",
+	"NextAcr" => "Next",
+	"PrevAcr" => "Prev",
 
 	"default_bookmarks" => "((IndiceDePaginas Indice))\n((UltimasModificaciones Modificaciones))\n((UltimosCommentarios Commentarios))",
 	"site_bookmarks" => "((IndiceDePaginas Indice)) / ((UltimasModificaciones Modificaciones)) / ((UltimosCommentarios Commentarios))",
@@ -445,7 +445,7 @@ $wackoTranslation = array(
 	// Feed
 	"FeedTitle" => "Feed Title",
 	"FeedMulti" => "Multi-Feed",
-	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/recentcomment_wackowiki.xml\"}}",
+	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/comments_wackowiki.xml\"}}",
 	"FeedError" => "Could not load or parse feed",
 	"FeedSource" => "Source:",
 
@@ -469,8 +469,9 @@ $wackoTranslation = array(
 	"ExportClusterXML" => "Export de cluster entero de ",
 	"AccessDeniedXML" => "No tiene los permisos para acceder esta información.",
 
-	"RecentChangesRSS" => "Cambios recientes en RSS",
-	"RecentCommentsRSS" => "Comentarios recientes en RSS",
+	"RecentChangesRSS" => "Cambios recientes",
+	"RecentCommentsRSS" => "Comentarios recientes",
+	"RecentNewsRSS" => "Recent news",
 	"HistoryRevisionsRSS" => "Historial/revisiones de ",
 
 	"LastModification" => "Ultima Modificación",
@@ -480,6 +481,14 @@ $wackoTranslation = array(
 	"SpamAlert" => "Palabra captcha ingresado incorrecto",
 	"CaptchaReload" => "Nuevo Captcha",
 	"CaptchaReloadWarning" => "Disculpe, no puede recargar la imagen captcha, deberá recargar toda la página para hacer esto",
+
+	// news
+	"NewsName"		=> "Title",
+	"NewsSubmit"	=> "add",
+	"NewsNoName"	=> "You forgot to add news headline.",
+	"NewsNotAvailable"	=> "No News available.",
+	"NewsAddedFrom"	=> "added",
+	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log
 	"LogLevel1"					=> "critical",
