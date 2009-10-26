@@ -234,6 +234,7 @@ class Init
 					"rename_globalacl" => "Admins",
 					"remove_onlyadmins" => 0,
 					"owners_can_remove_comments" => 1,
+					"store_deleted_pages" => 0,
 					"default_rename_redirect" => 1,
 
 					"allow_registration" => 1,
