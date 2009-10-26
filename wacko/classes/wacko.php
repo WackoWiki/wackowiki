@@ -662,18 +662,7 @@ class Wacko
 
 		// 2. if not found, search for tag
 		if (!$page)
-		//	{
 			$page = $this->OldLoadPage($tag, $time, $cache, false, $metadataonly);
-		/*
-		// 3. if found, update supertag
-		if ($page)
-		{
-			$this->Query(
-				"UPDATE ".$this->config["table_prefix"]."pages ".
-				"SET supertag='".$supertag."' WHERE tag = '".$tag."';" );
-		}
-		}
-		*/
 
 		// 3. still nothing? file under wanted
 		if (!$page) $this->CacheWantedPage($supertag);
@@ -724,7 +713,7 @@ class Wacko
 						"LIMIT 1");
 				}
 			}
-			else
+			else if (!preg_match('/[^'.$this->language['ALPHANUM_P'].'\_\-]/', $tag))
 			{
 				$page = $this->LoadSingle(
 					"SELECT ".$what." ".
@@ -752,13 +741,13 @@ class Wacko
 		return $page;
 	}
 
-	function GetCachedPage($tag, $metadataonly = 0)
+	function GetCachedPage($supertag, $metadataonly = 0)
 	{
-		if (isset($this->pageCache[$tag]))
+		if (isset($this->pageCache[$supertag]))
 		{
-			if ($this->pageCache[$tag]["mdonly"] == 0 || $metadataonly == $this->pageCache[$tag]["mdonly"])
+			if ($this->pageCache[$supertag]["mdonly"] == 0 || $metadataonly == $this->pageCache[$supertag]["mdonly"])
 			{
-				return $this->pageCache[$tag];
+				return $this->pageCache[$supertag];
 			}
 		}
 		else return false;
@@ -867,7 +856,6 @@ class Wacko
 			for ($i = 0; $i < count($read_acls); $i++)
 			{
 				$this->CacheACL($read_acls[$i]["supertag"], "read", 1, $read_acls[$i]);
-				//       $exists[] = $read_acls[$i]["tag"];
 			}
 		}
 	}
@@ -920,6 +908,7 @@ class Wacko
 				"ORDER BY time DESC ".
 				"LIMIT 1");
 		}
+
 		return $rev;
 	}
 
@@ -931,7 +920,7 @@ class Wacko
 			"WHERE ".($for
 				? "from_tag LIKE '".quote($this->dblink, $for)."/%' AND "
 				: "").
-				"((to_supertag='' AND to_tag='".quote($this->dblink, $tag)."') OR to_supertag='".quote($this->dblink, $this->NpJTranslit($tag))."')".
+				"((to_supertag= '".quote($this->dblink, $this->NpJTranslit($tag))."')".
 			" ORDER BY tag", 1);
 	}
 
@@ -1067,6 +1056,23 @@ class Wacko
 	}
 
 	function TagSearch($phrase) { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE lower(tag) LIKE binary lower('%".quote($this->dblink, $phrase)."%') ORDER BY supertag"); }
+
+	function LoadRecentlyDeleted($limit = 1000, $cache = 1)
+	{
+		$_metaArr	= explode(',', $this->pages_meta);
+		foreach($_metaArr as $_metaStr) $meta[] = $this->config['table_prefix'].'revisions.'.trim($_metaStr);
+		$meta		= implode(', ', $meta);
+
+		return $this->LoadAll(
+			"SELECT DISTINCT $meta, MAX({$this->config['table_prefix']}revisions.`time`) AS `date` ".
+			"FROM {$this->config['table_prefix']}revisions ".
+			"LEFT JOIN {$this->config['table_prefix']}pages ON ".
+				"({$this->config['table_prefix']}revisions.tag = {$this->config['table_prefix']}pages.tag) ".
+			"WHERE {$this->config['table_prefix']}pages.tag IS NULL ".
+			"GROUP BY {$this->config['table_prefix']}revisions.tag ".
+			"ORDER BY `date` DESC, {$this->config['table_prefix']}revisions.tag ASC ".
+			( $limit > 0 ? "LIMIT $limit" : '' ), $cache);
+	}
 
 	// MAILER
 	// $email				- recipient address
@@ -1245,15 +1251,14 @@ class Wacko
 				$this->SaveAcl($tag, "read", $read_acl);
 				$this->SaveAcl($tag, "comment", $comment_acl);
 
-				// counters 
-				/*
+				// counters
 				if ($comment_on_id)
 				{
 					// updating comments count for commented page
 					$this->Query(
 						"UPDATE {$this->config['table_prefix']}pages SET ".
-							"comments	= '".(int)$this->CountComments($comment_on)."' ".
-						"WHERE tag = '".quote($this->dblink, $comment_on)."' ".
+							"comments	= '".(int)$this->CountComments($comment_on_id)."' ".
+						"WHERE tag = '".quote($this->dblink, $this->GetCommentOnTag($comment_on_id))."' ".
 						"LIMIT 1");
 
 					// update user comments count
@@ -1271,7 +1276,7 @@ class Wacko
 						"SET total_pages = total_pages + 1 ".
 						"WHERE name = '".quote($this->dblink, $owner)."' ".
 						"LIMIT 1");
-				} */
+				}
 
 				// set watch
 				if ($this->GetUser() && !$this->config["disable_autosubscribe"])
@@ -1353,14 +1358,9 @@ class Wacko
 				if ($oldPage['body'] != $body || $oldPage['title'] != $title)
 				{
 					// Dont save revisions for comments.  Personally I think we should.
-					if (!$comment_on_id)
+					if (!$oldPage[comment_on_id])
 					{
-						// move revision
-						$this->Query(
-							"INSERT INTO ".$this->config["table_prefix"]."revisions (page_id, tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
-							"SELECT id, tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, 'N', handler, comment_on_id, supertag, title, keywords, description ".
-							"FROM ".$this->config["table_prefix"]."pages ".
-							"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
+						$this->SaveRevision($oldPage);
 					}
 
 					// add new revision
@@ -1486,6 +1486,30 @@ class Wacko
 		#}
 
 		return $body_r;
+	}
+
+	// create revision of a given page
+	function SaveRevision($oldPage)
+	{
+		if (!$oldPage) return false;
+
+		// prepare input
+		foreach ($oldPage as $key => $val)
+		{
+			$oldPage[$key] = quote($this->dblink, $oldPage[$key]);
+		}
+
+		// move revision
+		$this->Query(
+			"INSERT INTO {$this->config['table_prefix']}revisions (page_id, tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
+			"VALUES ('{$oldPage['id']}','{$oldPage['tag']}', '{$oldPage['time']}', '{$oldPage['body']}', '{$oldPage['edit_note']}', '{$oldPage['minor_edit']}', '{$oldPage['owner']}', '{$oldPage['owner_id']}', '{$oldPage['user']}', '{$oldPage['user_id']}', '0', '{$oldPage['handler']}', '{$oldPage['comment_on_id']}', '{$oldPage['supertag']}', '{$oldPage['title']}', '{$oldPage['keywords']}', '{$oldPage['description']}')");
+
+		// update user statistics for revisions made
+		if ($user = $this->GetUser()) $this->Query(
+			"UPDATE {$this->config['user_table']} ".
+			"SET total_revisions = total_revisions + 1 ".
+			"WHERE name = '".quote($this->dblink, $user['name'])."' ".
+			"LIMIT 1");
 	}
 
 	// update metadata of a given page
@@ -2675,12 +2699,12 @@ class Wacko
 	}
 
 	// recount all comments for a given page
-	function CountComments($tag)
+	function CountComments($comment_on_id)
 	{
 		$count = $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$this->config['table_prefix']}pages ".
-			"WHERE comment_on_id = '".quote($this->dblink, $tag)."'");
+			"WHERE comment_on_id = '".quote($this->dblink, $comment_on_id)."'");
 		return (int)$count['n'];
 	}
 
@@ -2704,12 +2728,12 @@ class Wacko
 	}
 
 	// returns latest comment tag for a given page
-	function LatestComment($tag)
+	function LatestComment($comment_on_id)
 	{
 		if ($tag) $latest = $this->LoadSingle(
 			"SELECT tag ".
 			"FROM {$this->config['table_prefix']}pages ".
-			"WHERE comment_on_id = '".quote($this->dblink, $tag)."' ".
+			"WHERE comment_on_id = '".quote($this->dblink, $comment_on_id)."' ".
 			"ORDER BY created DESC ".
 			"LIMIT 1");
 		return $latest['tag'];
@@ -3681,17 +3705,46 @@ class Wacko
 			"WHERE page_tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
-	function RemovePage($tag)
+	function RemovePage($tag, $comment_on_id = '0', $dontkeep = 0)
 	{
 		if (!$tag) return false;
 
+		// store a copy in revisions
+		if ($this->config["store_deleted_pages"] && !$dontkeep)
+		{
+			// loading page
+			$page = $this->LoadPage($tag);
+
+			// unlink comment tag
+			if ($page['comment_on_id'] != '0')
+			{
+				$page['comment_on_id']	= '0';
+			}
+
+			// saving original
+			$this->SaveRevision($page);
+			// saving updated for the current user
+			$page['time']	= date(SQL_DATE_FORMAT);
+			$page['user']	= $this->GetUserName();
+			$this->SaveRevision($page);
+		}
+
 		// delete page
-		return $this->Query(
-			"DELETE FROM ".$this->config["table_prefix"]."revisions ".
-			"WHERE tag = '".quote($this->dblink, $tag)."' ") &&
+		$this->Query(
+			"DELETE FROM ".$this->config["table_prefix"]."pages ".
+			"WHERE tag = '".quote($this->dblink, $tag)."' ");
+
+		// for removed comment correct comments count on commented page
+		if ($comment_on_id)
+		{
 			$this->Query(
-				"DELETE FROM ".$this->config["table_prefix"]."pages ".
-				"WHERE tag = '".quote($this->dblink, $tag)."' ");
+				"UPDATE {$this->config['table_prefix']}pages SET ".
+					"comments	= '".(int)$this->CountComments($comment_on_id)."' ".
+				"WHERE tag = '".quote($this->dblink, $this->GetCommentOnTag($comment_on_id))."' ".
+				"LIMIT 1");
+		}
+
+		return true;
 	}
 
 	function RemoveRevisions($tag, $cluster = false)
@@ -3703,14 +3756,30 @@ class Wacko
 			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
-	function RemoveComments($tag, $cluster = false)
+	function RemoveComments($tag, $cluster = false, $dontkeep = 0)
 	{
 		if (!$tag) return false;
 
-		return $this->Query(
-			"DELETE a.* FROM ".$this->config["table_prefix"]."pages a ".
-				"INNER JOIN ".$this->config["table_prefix"]."pages b ON (a.comment_on_id = b.id) ".
-			"WHERE b.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+		if ($comments = $this->LoadAll(
+		"SELECT a.tag FROM ".$this->config["table_prefix"]."pages a ".
+			"INNER JOIN ".$this->config["table_prefix"]."pages b ON (a.comment_on_id = b.id) ".
+		"WHERE b.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' "))
+		{
+			foreach ($comments as $comment) $this->RemovePage($comment['tag'], '', $dontkeep);
+		}
+
+		// reset comments count
+		$this->Query(
+			"UPDATE {$this->config['table_prefix']}pages ".
+			"SET comments	= '0' ".
+			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+
+		return true;
+
+		#return $this->Query(
+		#	"DELETE a.* FROM ".$this->config["table_prefix"]."pages a ".
+		#		"INNER JOIN ".$this->config["table_prefix"]."pages b ON (a.comment_on_id = b.id) ".
+		#	"WHERE b.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
 	function RemoveWatches($tag, $cluster = false)
