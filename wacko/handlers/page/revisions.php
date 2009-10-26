@@ -2,7 +2,7 @@
 <?php
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->Redirect($this->href("show"));
+#if (!$this->page) $this->Redirect($this->href("show"));
 
 // deny for comment
 if ($this->page["comment_on_id"])
@@ -52,10 +52,11 @@ if ($this->HasAccess("read"))
 			if (++$c <= $max || !$max)
 			{
 				$output .= "<li>";
-				#$output .= "<strong>".($t--).".</strong>";
+				$output .= "<strong>".($t--).".</strong>";
 				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"a\" value=\"".($c == 1 ? "-1" : $page["id"])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";
 				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"b\" value=\"".($c == 1 ? "-1" : $page["id"])."\" ".($c == 2 ? "checked=\"checked\"" : "")." />";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("show").($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."time=".urlencode($page["time"])."\">".$this->GetTimeStringFormatted($page["time"])."</a>";
+				$output .= " — id ".$page["id"]." ";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->GetTranslation("By")." ".($this->IsWikiName($page["user"]) ? $this->Link($page["user"]) : $page["user"]).$edit_note."";
 				$output .= "</li>\n";
 			}

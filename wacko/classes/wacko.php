@@ -2745,7 +2745,7 @@ class Wacko
 		if ($page_id)
 		{
 			return $this->LoadAll(
-					"SELECT * FROM ".$this->config["table_prefix"]."pages ".
+					"SELECT id, tag, body, body_r, title, user, time FROM ".$this->config["table_prefix"]."pages ".
 					"WHERE comment_on_id = '".quote($this->dblink, $page_id)."' ".
 					"ORDER BY created");
 		}
@@ -3264,6 +3264,31 @@ class Wacko
 			$this->Log(7, 'Maintenance: outdated pages revisions purged');
 		}
 
+		// purge deleted pages (once per 3 days)
+		if (($days = $this->config["keep_deleted_time"]) && (time() > ($this->config["maint_last_delpages"] + 3 * 86400)) &&
+		($pages = $this->LoadRecentlyDeleted(1000, 0)))
+		{
+			// composing a list of candidates
+			if (is_array($pages)) foreach ($pages as $page)
+			{
+				// does the page has been deleted earlier than specified number of days ago?
+				if (strtotime($page["date"]) < (time() - (3600 * 24 * $days)))
+					$remove[] = "'".quote($this->dblink, $page['tag'])."'";
+			}
+
+			if ($remove)
+			{
+				$this->Query(
+					"DELETE FROM {$this->config['table_prefix']}revisions ".
+					"WHERE tag IN ( ".implode(', ', $remove)." )");
+				unset($remove);
+			}
+
+			$this->Query("UPDATE {$this->config['table_prefix']}config SET maint_last_delpages = '".time()."'");
+
+			$this->Log(7, 'Maintenance: deleted pages purged');
+		}
+
 		// purge system log entries (once per 3 days)
 		if (($days = $this->config["log_purge_time"]) && (time() > ($this->config["maint_last_log"] + 3 * 86400)))
 		{
@@ -3393,7 +3418,6 @@ class Wacko
 		$tag = str_replace("'", "_", str_replace("\\", "", str_replace("_", "", $tag)));
 		$tag = preg_replace("/[^".$this->language["ALPHANUM_P"]."\_\-\.]/", "", $tag);
 
-		//$this->tag=$this->Translit($tag, 1);
 		$this->tag = $tag;
 		$this->supertag = $this->NpjTranslit($tag);
 
@@ -3461,7 +3485,7 @@ class Wacko
 		$page = $this->LoadPage($tag);
 
 		if ($link === -1)
-			$_link = ($this->page["tag"] != $page["tag"])?$this->Href("",$page["tag"]):"";
+			$_link = ($this->page["tag"] != $page["tag"]) ? $this->Href("",$page["tag"]) : "";
 		else
 			$_link = $link;
 
@@ -3578,25 +3602,37 @@ class Wacko
 	}
 
 	// BREADCRUMBS -- additional navigation added with WackoClusters
-	function GetPagePath($separator='/')
+	function GetPagePath($titles = false, $separator = '/', $linking = true)
 	{
-		$steps = explode('/', $this->tag);
-		$result = '';
+		$steps		= explode('/', $this->tag);
+		$links		= array();
+		$result		= '';
 
-		for ($i = 0; $i < count($steps); $i++)
+		for ($i = 0; $i < count($steps) -1; $i++)
 		{
-			$link = '';
-			for($j = 0; $j < $i + 1; $j++)
-			$link .= '/'.$steps[$j];
+			if ($i == 0)	$prev = '';
+			else			$prev = $links[$i - 1].$separator;
+			$links[] = $prev.$steps[$i];
+		}
 
 			# camel case'ing
 			$linktext = preg_replace('([A-Z][a-z])', ' ${0}', $steps[$i]);
 
-			if ($i == count($steps) - 1)
-			$result .= $linktext;
+		for ($i = 0; $i < count($steps) -1; $i++)
+		{
+			if ($titles == false)
+				$result .= $this->Link($links[$i], '', $steps[$i]).$separator;
+			else if ($linking == true)
+				$result .= $this->Link($links[$i], '', $this->GetPageTitle($steps[$i])).$separator;
 			else
-				$result .= $this->Link($link, '', $linktext) . $separator;
+				$result .= $this->GetPageTitle($links[$i]).' '.$separator.' ';
 		}
+
+		if ($titles == false)
+			$result .= $steps[count($steps) - 1];
+		else
+			$result .= $this->GetPageTitle($this->tag);
+
 		return $result;
 	}
 
