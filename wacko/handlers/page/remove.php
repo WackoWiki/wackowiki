@@ -22,6 +22,12 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 
 		if (isset($_POST["delete"]) && $_POST["delete"] == 1)
 		{
+			if ($this->page["comment_on_id"])
+				$comment_on_id = $this->page["comment_on_id"];
+
+			if ($_POST["dontkeep"] && $this->IsAdmin())
+				$dontkeep = 1;
+
 			// Remove page
 			if ($this->RemoveReferrers($this->tag))
 			{
@@ -41,7 +47,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 				{
 					print(str_replace("%1", $this->tag, $this->GetTranslation("WatchesRemoved"))."<br />\n");
 				}
-				if ($this->RemoveComments($this->tag))
+				if ($this->RemoveComments($this->tag, false, $dontkeep))
 				{
 					print(str_replace("%1", $this->tag, $this->GetTranslation("CommentsRemoved"))."<br />\n");
 				}
@@ -50,7 +56,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 					print(str_replace("%1", $this->tag, $this->GetTranslation("FilesRemoved"))."<br />\n");
 				}
 			}
-			if ($this->RemovePage($this->tag))
+			if ($this->RemovePage($this->tag, $comment_on_id, $dontkeep))
 			{
 				$this->UseClass('rss', 'classes/');
 				$xml = new RSS($this);
@@ -93,6 +99,19 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 				echo "<em>".$this->GetTranslation("ClusterRemoved")."</em><br />\n";
 			}
 
+			// update user statistics
+			if ($owner = $this->page["owner"])
+			{
+				$this->Query(
+					"UPDATE {$this->config['user_table']} ".
+					( $comment_on_id
+					? "SET total_comments	= total_comments	- 1 "
+					: "SET total_pages		= total_pages		- 1 "
+					).
+					"WHERE name = '".quote($this->dblink, $owner)."' ".
+					"LIMIT 1");
+			}
+			
 			// log event
 			if (!$comment_on_id)
 			{
@@ -163,16 +182,11 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 		}
 
 ?>
-<br />
-<br />
-<input type="hidden" name="delete" value="1" />
-<input name="submit" type="submit" value="<?php echo $this->GetTranslation("RemoveButton"); ?>" />
-&nbsp;
-<input
-	type="button"
-	value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
-	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
-<br />
+		<br /><br />
+		<input type="hidden" name="delete" value="1" />
+		<input id="submit" name="submit" type="submit" value="<?php echo $this->GetTranslation("RemoveButton"); ?>" />&nbsp;
+		<input id="button" type="button" value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>" onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
+		<br />
 <?php echo $this->FormClose();
 		}
 	}
