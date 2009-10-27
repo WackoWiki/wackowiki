@@ -141,7 +141,7 @@ class RSS
 		$name			= 'news';
 		$newscluster	= $this->engine->config['news_cluster'];
 		$newslevels		= $this->engine->config['news_levels'];
-		
+
 		//  collect data
 		$pages = $this->engine->LoadAll(
 			"SELECT tag, title, created, body_r ".
@@ -149,7 +149,7 @@ class RSS
 			"WHERE comment_on_id = '0' ".
 				"AND tag REGEXP '^{$newscluster}{$newslevels}$' ".
 			"ORDER BY tag");
-		
+
 		// build an array
 		foreach ($pages as $page)
 		{
@@ -166,13 +166,14 @@ class RSS
 			'return ($a["date"] < $b["date"] ? 1 : -1);');
 		// sort pages array
 		usort($news_pages, $sort_dates);
-	
+
 		// build output
 		$xml = '<?xml version="1.0" encoding="'.$this->charset.'"?>'."\n".
-				'<?xml-stylesheet type="text/css" href="'.$this->engine->config['root_url'].'styles/atom.css" media="screen"?>'."\n".
+				"<?xml-stylesheet type=\"text/css\" href=\"".$this->engine->config["theme_url"]."css/wacko.css\" media=\"screen\"?>\n".
+				// TODO: atom.css
 				'<rss version="2.0">'."\n".
 					'<channel>'."\n".
-						'<title>News "'.$this->engine->config['wacko_name'].'"</title>'."\n".
+						'<title>'.$this->engine->config['wacko_name'].$this->engine->GetTranslation("RecentNewsTitleXML").'</title>'."\n".
 						'<link>'.$this->engine->config['root_url'].str_replace('%2F', '/', rawurlencode($newscluster)).'</link>'."\n".
 						'<description>'.$this->engine->GetTranslation("RecentNewsXML").$this->engine->config["wacko_name"].'</description>'."\n".
 						'<language>'.$this->engine->config['language'].'</language>'."\n".
@@ -185,7 +186,7 @@ class RSS
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
-	
+
 		$i = 0;
 		foreach ($news_pages as $page)
 		{
@@ -214,10 +215,10 @@ class RSS
 
 			if ($i >= $limit) break;
 		}
-   
+
 		$xml .= 	'</channel>'."\n".
 				'</rss>';
-		
+
 		$this->WriteFile($name, $xml);
 	}
 
