@@ -189,6 +189,8 @@ $wackoTranslation = array(
 	"NoRecentComments" => "<em>Viimaseid kommentaare pole.</em>",
 	"LatestCommentBy" => "viimati kommenteeris",
 	"NoRecentlyCommented" => "<em>Viimati kommenteeritud lehti pole.</em>",
+	"NoRecentlyDeleted"		=> "<em>No deleted pages found.</em>",
+
 	"SearchResults" => "Otsi tulemusi ",
 	"NotFound" => "ei leitud",
 	"NoResultsFor" => "Tulemusi ei leidunud ",
@@ -247,7 +249,7 @@ $wackoTranslation = array(
 	"AlertReferringPages" => "Sellele lehele viidavad järgmised lehed",
 	"UnknownAction" => "Unknown action",
 
-	"EditIcon" => "(redigeeri)",
+	"EditIcon" => "redigeeri",
 	"LinksTreeLevel4Warning" => "Ühenduste puus on võimalik maksimaalselt 4 taset",
 	"LinksTreeTitle" => "Ühenduste puu",
 	"TreeClusterTitle" =>"Grupi %1 puu",
@@ -488,7 +490,6 @@ $wackoTranslation = array(
 	"NewsSubmit"	=> "add",
 	"NewsNoName"	=> "You forgot to add news headline.",
 	"NewsNotAvailable"	=> "No News available.",
-	"NewsAddedFrom"	=> "added",
 	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log

@@ -189,6 +189,8 @@ $wackoTranslation = array(
 	"NoRecentComments" => "<em>No recent comments.</em>",
 	"LatestCommentBy" => "latest comment by",
 	"NoRecentlyCommented" => "<em>No recently commented page.</em>",
+	"NoRecentlyDeleted"		=> "<em>No deleted pages found.</em>",
+
 	"SearchResults" => "Search results for ",
 	"NotFound" => "not found",
 	"NoResultsFor" => "No results for ",
@@ -247,7 +249,7 @@ $wackoTranslation = array(
 	"AlertReferringPages" => "This page is referred to by these pages",
 	"UnknownAction" => "Unknown action",
 
-	"EditIcon" => "(edit)",
+	"EditIcon" => "edit",
 	"LinksTreeLevel4Warning" => "Links tree does not support more than 4 levels",
 	"LinksTreeTitle" => "Links tree",
 	"TreeClusterTitle" => "Tree of cluster %1",
@@ -487,7 +489,6 @@ $wackoTranslation = array(
 	"NewsSubmit"	=> "add",
 	"NewsNoName"	=> "You forgot to add news headline.",
 	"NewsNotAvailable"	=> "No News available.",
-	"NewsAddedFrom"	=> "added",
 	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log

@@ -192,6 +192,8 @@ $wackoTranslation = array(
 	"NoRecentComments" => "<em>Коментари отдавна не е имало.</em>",
 	"LatestCommentBy" => "последен коментирал",
 	"NoRecentlyCommented" => "<em>Коментари отдавна не е имало.</em>",
+	"NoRecentlyDeleted"		=> "<em>No deleted pages found.</em>",
+
 	"SearchResults" => "Резултати за търсената фраза ",
 	"NotFound" => "не е намерен",
 	"NoResultsFor" => "Не са намерени резултати за фразата ",
@@ -247,7 +249,7 @@ $wackoTranslation = array(
 	"AlertReferringPages" => "Препратка на дадената страница е на страница",
 	"UnknownAction" => "Unknown action",
 
-	"EditIcon" => "(редактиране)",
+	"EditIcon" => "редактиране",
 	"LinksTreeLevel4Warning" => "Линковете са макс. 4 нива",
 	"LinksTreeTitle" => "Дърво на линковете",
 	"TreeClusterTitle" => "Дърво на СЕКТОР %1",
@@ -486,7 +488,6 @@ $wackoTranslation = array(
 	"NewsSubmit"	=> "add",
 	"NewsNoName"	=> "You forgot to add news headline.",
 	"NewsNotAvailable"	=> "No News available.",
-	"NewsAddedFrom"	=> "added",
 	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log

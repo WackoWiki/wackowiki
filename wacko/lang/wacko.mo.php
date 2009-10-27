@@ -191,6 +191,8 @@ $wackoTranslation = array(
 	"NoRecentComments" => "<em>Comentarii nu sunt de demult.</em>",
 	"LatestCommentBy" => "ultimul a comentat",
 	"NoRecentlyCommented" => "<em>Comentarii nu sunt de demult.</em>",
+	"NoRecentlyDeleted"		=> "<em>No deleted pages found.</em>",
+
 	"SearchResults" => "Rezultatul cautarii frazei ",
 	"NotFound" => "nu este gasit",
 	"NoResultsFor" => "Nu sunt rezltate pentru fraza ",
@@ -248,7 +250,7 @@ $wackoTranslation = array(
 	"AlertReferringPages" => "Referintele la pagina data sunt pe paginile",
 	"UnknownAction" => "Unknown action",
 
-	"EditIcon" => "(editare)",
+	"EditIcon" => "editare",
 	"LinksTreeLevel4Warning" => "Дерево ссылок не может иметь больше 4 уровней",
 	"LinksTreeTitle" => "Lista de lincuri",
 	"TreeClusterTitle" => "Дерево кластера %1",
@@ -487,7 +489,6 @@ $wackoTranslation = array(
 	"NewsSubmit"	=> "add",
 	"NewsNoName"	=> "You forgot to add news headline.",
 	"NewsNotAvailable"	=> "No News available.",
-	"NewsAddedFrom"	=> "added",
 	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log

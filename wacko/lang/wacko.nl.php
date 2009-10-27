@@ -189,6 +189,8 @@ $wackoTranslation = array(
 	"NoRecentComments" => "<em>Geen recente reacties.</em>",
 	"LatestCommentBy" => "laatste reactie door",
 	"NoRecentlyCommented" => "<em>Geen pagina's met recente wijzigingen.</em>",
+	"NoRecentlyDeleted"		=> "<em>No deleted pages found.</em>",
+
 	"SearchResults" => "Zoekresultaten voor ",
 	"NotFound" => "Niet gevonden",
 	"NoResultsFor" => "Geen resultaten voor ",
@@ -247,7 +249,7 @@ $wackoTranslation = array(
 	"AlertReferringPages" => "Voor deze pagina zijn er verwijzingen vanaf de volgende pagina",
 	"UnknownAction" => "Unknown action",
 
-	"EditIcon" => "(Bewerk)",
+	"EditIcon" => "Bewerk",
 	"LinksTreeLevel4Warning" => "Verwijzingenboom ondersteunt niet meer dan 4 niveaus",
 	"LinksTreeTitle" => "Verwijzingenboom",
 	"TreeClusterTitle" => "Verwijzingenboom van cluster %1",
@@ -490,7 +492,6 @@ $wackoTranslation = array(
 	"NewsSubmit"	=> "add",
 	"NewsNoName"	=> "You forgot to add news headline.",
 	"NewsNotAvailable"	=> "No News available.",
-	"NewsAddedFrom"	=> "added",
 	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log

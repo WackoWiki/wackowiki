@@ -189,6 +189,8 @@ $wackoTranslation = array(
 	"NoRecentComments" => "<em>Μη πρόσφατα σχόλια.</em>",
 	"LatestCommentBy" => "τελευταία σχόλια από",
 	"NoRecentlyCommented" => "<em>Δεν υπάρχουν πρόσφατες σελίδες με σχόλια</em>",
+	"NoRecentlyDeleted"		=> "<em>No deleted pages found.</em>",
+
 	"SearchResults" => "Αποτελέσματα αναζήτησης για ",
 	"NotFound" => "δεν βρέθηκε",
 	"NoResultsFor" => "Κανένα αποτέλεσμα για ",
@@ -247,7 +249,7 @@ $wackoTranslation = array(
 	"AlertReferringPages" => "Αυτή η σελίδα αναφέρεται από αυτές τις σελίδες",
 	"UnknownAction" => "Άγνωστη ενέργεια",
 
-	"EditIcon" => "(edit)",
+	"EditIcon" => "edit",
 	"LinksTreeLevel4Warning" => "Links tree does not support more than 4 levels",
 	"LinksTreeTitle" => "Links tree",
 	"TreeClusterTitle" =>"Tree of cluster %1",
@@ -488,7 +490,6 @@ $wackoTranslation = array(
 	"NewsSubmit"	=> "add",
 	"NewsNoName"	=> "You forgot to add news headline.",
 	"NewsNotAvailable"	=> "No News available.",
-	"NewsAddedFrom"	=> "added",
 	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log

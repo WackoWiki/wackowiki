@@ -192,6 +192,8 @@ $wackoTranslation = array(
 	"NoRecentComments" => "<em>Комментариев давно не было.</em>",
 	"LatestCommentBy" => "автор последнего комментария",
 	"NoRecentlyCommented" => "<em>Комментариев давно не было.</em>",
+	"NoRecentlyDeleted"		=> "<em>Удаленных документов не найдено.</em>",
+
 	"SearchResults" => "Результаты поиска фразы ",
 	"NotFound" => "не найден",
 	"NoResultsFor" => "Не найдено результатов для фразы ",
@@ -247,7 +249,7 @@ $wackoTranslation = array(
 	"AlertReferringPages" => "Ссылки на данную страницу есть на страницах",
 	"UnknownAction" => "Неизвестное действие",
 
-	"EditIcon" => "(правка)",
+	"EditIcon" => "правка",
 	"LinksTreeLevel4Warning" => "Дерево ссылок не может иметь больше 4 уровней",
 	"LinksTreeTitle" => "Дерево ссылок",
 	"TreeClusterTitle" => "Дерево кластера %1",
@@ -486,7 +488,6 @@ $wackoTranslation = array(
 	"NewsSubmit"	=> "добавить",
 	"NewsNoName"	=> "Вы забыли указать заголовок добавляемой новости.",
 	"NewsNotAvailable"	=> "No News available.",
-	"NewsAddedFrom"	=> "Добавил",
 	"NewsDiscuss"	=> "Обсудить новость...",
 
 	// log

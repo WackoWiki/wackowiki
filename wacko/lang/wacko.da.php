@@ -189,6 +189,8 @@ $wackoTranslation = array(
 	"NoRecentComments" => "<em>Ingen nylige kommentarer.</em>",
 	"LatestCommentBy" => "seneste kommentar af ",
 	"NoRecentlyCommented" => "<em>Ingen sider med nye kommentarer.</em>",
+	"NoRecentlyDeleted"		=> "<em>No deleted pages found.</em>",
+
 	"SearchResults" => "Søgeresultater for ",
 	"NotFound" => "ikke fundet",
 	"NoResultsFor" => "Ingen resultater for ",
@@ -247,7 +249,7 @@ $wackoTranslation = array(
 	"AlertReferringPages" => "Følgende sider henviser til denne",
 	"UnknownAction" => "Unknown action",
 
-	"EditIcon" => "(ret)",
+	"EditIcon" => "ret",
 	"LinksTreeLevel4Warning" => "Vi kan kun klare fire niveauer",
 	"LinksTreeTitle" => "Henvisningstræ",
 	"TreeClusterTitle" =>"Træ for området %1",
@@ -487,7 +489,6 @@ $wackoTranslation = array(
 	"NewsSubmit"	=> "add",
 	"NewsNoName"	=> "You forgot to add news headline.",
 	"NewsNotAvailable"	=> "No News available.",
-	"NewsAddedFrom"	=> "added",
 	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log
