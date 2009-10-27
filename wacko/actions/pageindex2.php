@@ -63,9 +63,9 @@ foreach ($pages_to_display as $page)
 
 	echo "<li>";
 	if ($title == 1)
-		echo $this->ComposeLinkToPage($page['tag'], '', $page['title'], 0);
+		echo $this->ComposeLinkToPage($page["tag"], '', $page["title"], 0);
 	else
-		echo $this->ComposeLinkToPage($page['tag'], '', $page['tag'], 0);
+		echo $this->ComposeLinkToPage($page["tag"], '', $page["tag"], 0);
 	echo "</li>\n";
 
 }
@@ -75,6 +75,6 @@ if ($pages_to_display)
 
 	echo "</ul>\n<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 else
-	echo $this->GetTranslation('NoPagesFound');
+	echo $this->GetTranslation("NoPagesFound");
 
 ?>
