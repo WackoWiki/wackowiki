@@ -186,6 +186,7 @@ $wackoTranslation = array(
 	"NoRecentComments" => "<em>Keine neuen Kommentare.</em>",
 	"LatestCommentBy" => "zuletzt kommentiert von",
 	"NoRecentlyCommented" => "<em>Keine Seite kürzlich kommentiert.</em>",
+	"NoRecentlyDeleted"		=> "<em>No deleted pages found.</em>",
 
 	"SearchText" => "Suchen: ",
 	"SearchButtonText" => "Suche",
@@ -249,7 +250,7 @@ $wackoTranslation = array(
 	"AlertReferringPages" => "Auf diese Seite wird von folgenden Seiten verwiesen",
 	"UnknownAction" => "Unbekannte Aktion",
 
-	"EditIcon" => "(Editieren)",
+	"EditIcon" => "Editieren",
 	"LinksTreeLevel4Warning" => "die Baumansicht unterstützt nicht mehr als 4 Ebenen",
 	"LinksTreeTitle" => "Baumansicht",
 	"TreeClusterTitle" => "Baumansicht des Clusters %1",
@@ -494,7 +495,6 @@ $wackoTranslation = array(
 	"NewsSubmit"	=> "hinzufügen",
 	"NewsNoName"	=> "Du habst vergessen eine Schlagzeile hinzuzufügen.",
 	"NewsNotAvailable"	=> "No News available.",
-	"NewsAddedFrom"	=> "added",
 	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log
@@ -541,7 +541,7 @@ $wackoTranslation = array(
 	"LogUserSessionContinued"	=> "User ##%1## continued to suspend the session",
 	"LogUserSettingsUpdate"		=> "User ##%1## updated personal settings",
 	"LogPageEdited"				=> "Edited page [[/%1]]",
-   "LogCommentEdited"				=> "Edited comment [[/%1]]",
+	"LogCommentEdited"				=> "Edited comment [[/%1]]",
 );
 
 ?>

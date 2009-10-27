@@ -188,6 +188,8 @@ $wackoTranslation = array(
 	"NoRecentComments" => "<em>Aucun commentaire récent.</em>",
 	"LatestCommentBy" => "Dernier commentaire par",
 	"NoRecentlyCommented" => "<em>Aucune page commentée récemment.</em>",
+	"NoRecentlyDeleted"		=> "<em>No deleted pages found.</em>",
+
 	"SearchResults" => "Résultat de la recherche pour ",
 	"NotFound" => "non trouvé",
 	"NoResultsFor" => "Aucun résultat pour ",
@@ -246,7 +248,7 @@ $wackoTranslation = array(
 	"AlertReferringPages" => "Cette page est référencée depuis les pages suivantes ",
 	"UnknownAction" => "Action inconnue",
 
-	"EditIcon" => "(Edition)",
+	"EditIcon" => "Edition",
 	"LinksTreeLevel4Warning" => "L&rsquo;arbre des liens ne supporte que 4 niveaux",
 	"LinksTreeTitle" => "Arbre des liens",
 	"TreeClusterTitle" => "Arbre du groupe %1",
@@ -486,7 +488,6 @@ $wackoTranslation = array(
 	"NewsSubmit"	=> "add",
 	"NewsNoName"	=> "You forgot to add news headline.",
 	"NewsNotAvailable"	=> "No News available.",
-	"NewsAddedFrom"	=> "added",
 	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log

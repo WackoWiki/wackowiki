@@ -189,6 +189,8 @@ $wackoTranslation = array(
 	"NoRecentComments" => "<em>Nie zosta³y dodane ¿adne nowe komentarze.</em>",
 	"LatestCommentBy" => " ostatni komentarz u¿ytkownika ",
 	"NoRecentlyCommented" => "<em>¯adna ze stron nie zosta³a ostatnio skomentowana.</em>",
+	"NoRecentlyDeleted"		=> "<em>No deleted pages found.</em>",
+
 	"SearchResults" => "Wyniki wyszukiwania s³owa: ",
 	"NotFound" => "nie zosta³o odnalezione",
 	"NoResultsFor" => "Nie odnaleziono ¿adnych stron zawieraj±cych wyszukiwane s³owo: ",
@@ -247,7 +249,7 @@ $wackoTranslation = array(
 	"AlertReferringPages" => "Do tej strony odwo³uj± siê nastêpuj±ce dokumenty",
 	"UnknownAction" => "Unknown action",
 
-	"EditIcon" => "(edytuj)",
+	"EditIcon" => "edytuj",
 	"LinksTreeLevel4Warning" => "Drzewo odno¶ników nie obs³uguje zagnie¿d¿ania powy¿ej 4 poziomów",
 	"LinksTreeTitle" => "Drzewo odno¶ników",
 	"TreeClusterTitle" => "Drzewo klastra %1",
@@ -487,7 +489,6 @@ $wackoTranslation = array(
 	"NewsSubmit"	=> "add",
 	"NewsNoName"	=> "You forgot to add news headline.",
 	"NewsNotAvailable"	=> "No News available.",
-	"NewsAddedFrom"	=> "added",
 	"NewsDiscuss"	=> "Discuss this article...",
 
 	// log
