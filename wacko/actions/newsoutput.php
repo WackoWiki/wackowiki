@@ -13,7 +13,7 @@ $newslevels		= $this->config['news_levels'];
 if ($mode == 'latest')
 {
 	$pages	= $this->LoadAll(
-		"SELECT tag, title, owner, user, created ".
+		"SELECT tag, title, owner, user, created, comments ".
 		"FROM {$this->config['table_prefix']}pages ".
 		"WHERE comment_on_id = '0' ".
 			"AND tag REGEXP '^{$newscluster}{$newslevels}$' ".
@@ -23,7 +23,7 @@ if ($mode == 'latest')
 else if ($mode == 'week')
 {
 	$pages	= $this->LoadAll(
-		"SELECT tag, title, owner, user, created ".
+		"SELECT tag, title, owner, user, created, comments ".
 		"FROM {$this->config['table_prefix']}pages ".
 		"WHERE comment_on_id = '0' ".
 			"AND tag REGEXP '^{$newscluster}{$newslevels}$' ".
@@ -34,7 +34,7 @@ else if ($mode == 'from' && $date)
 {
 	$date	= date('Y-m-d H:i:s', strtotime($date));
 	$pages	= $this->LoadAll(
-		"SELECT tag, title, owner, user, created ".
+		"SELECT tag, title, owner, user, created, comments ".
 		"FROM {$this->config['table_prefix']}pages ".
 		"WHERE comment_on_id = '0' ".
 			"AND tag REGEXP '^{$newscluster}{$newslevels}$' ".
@@ -49,7 +49,7 @@ if ($pages != 0)
 	{
 		echo '<h2><a href="'.$this->href('', $page['tag'], '').'">'.$page['title'].'</a></h2>'.$page['created'].' '.$this->GetTranslation("By").' '.( $page['owner'] == '' ? '<em>'.$this->GetTranslation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['owner']).'">'.$page['owner'].'</a>' ).'';
 		echo $this->Action('include', array('page' => '/'.$page['tag'], 'notoc' => 0, 'nomark' => 1), 1);
-		echo '<span class="newsinfo">'.$this->GetTranslation('Comments_all').': '.(int)$page['comments'].' | '.
+		echo "<span class=\"newsinfo\">".$this->GetTranslation("Comments_all").": ".(int)$page["comments"]." | ".($this->HasAccess("write",$page["tag"]) ? $this->ComposeLinkToPage($page["tag"], "edit", $this->GetTranslation("EditText"), 0)." | " : "").
 			'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#comments">'.$this->GetTranslation("NewsDiscuss").'</a></span>';
 	}
 }
