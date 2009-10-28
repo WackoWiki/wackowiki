@@ -49,6 +49,7 @@ $wackoTranslation = array(
 	"Comments_n" => "Sellel lehel on %1 kommentaare.",
 	"Comments_all" => "Kommentaarid",
 	"Links" => "Links",
+	"Version" => "Version",
 	"ShowComments" => "Näita kommentaare ja vastuse blanketti",
 	"HideComments" => "Varja kommentaar/vorm",
 	"AddComment" => "Lisa kommentaar sellele leheküljele:",

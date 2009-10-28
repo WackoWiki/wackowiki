@@ -49,6 +49,7 @@ $wackoTranslation = array(
 	"Comments_n" => "Υπάρχουν %1 σχόλια στην σελίδα.",
 	"Comments_all" => "Σχόλια",
 	"Links" => "Links",
+	"Version" => "Version",
 	"ShowComments" => "Εμφάνιση σχόλια/φόρμες",
 	"HideComments" => "Απόκρυψη σχόλια/φόρμες",
 	"AddComment" => "Πρόσθεσε ένα σχόλιο σε αυτήν την σελίδα:",
