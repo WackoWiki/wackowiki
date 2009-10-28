@@ -48,6 +48,7 @@ $wackoTranslation = array(
 	"Comments_1" => "En kommentar til denne side.",
 	"Comments_n" => "Der er %1 kommentarer til denne side.",
 	"Comments_all" => "Kommentarer",
+	"Links" => "Links",
 	"ShowComments" => "Vis kommentarer",
 	"HideComments" => "Gem kommentarer",
 	"AddComment" => "Skriv en kommentar til denne side:",
