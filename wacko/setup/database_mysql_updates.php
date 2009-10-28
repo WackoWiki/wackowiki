@@ -91,6 +91,7 @@ $update_pages_r4_2 = "UPDATE ".$config["table_prefix"]."pages SET body_r=''";
 $update_pages_r4_2_1 = "UPDATE ".$config["table_prefix"]."pages AS pages, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET pages.owner_id = users.id WHERE pages.owner = users.name";
 $update_pages_r4_2_2 = "UPDATE ".$config["table_prefix"]."pages AS pages, (SELECT id, name FROM ".$config["table_prefix"]."users) AS users SET pages.user_id = users.id WHERE pages.user = users.name";
 $update_pages_r4_2_3 = "UPDATE ".$config["table_prefix"]."pages AS pages, (SELECT id, tag FROM ".$config["table_prefix"]."pages) AS pages2 SET pages.comment_on_id = pages2.id WHERE pages.comment_on = pages2.tag";
+$update_pages_r4_2_4 = "UPDATE ".$config["table_prefix"]."pages AS pages, (SELECT comment_on_id, COUNT(comment_on_id) as n FROM ".$config["table_prefix"]."pages WHERE comment_on_id != '0' GROUP BY comment_on_id) AS comments_on SET pages.comments = comments_on.n WHERE pages.id = comments_on.comment_on_id";
 
 // REFERRERS
 $alter_referrers_r2_1 = "ALTER TABLE ".$config["table_prefix"]."referrers CHANGE page_tag page_tag VARCHAR(250) NOT NULL";
