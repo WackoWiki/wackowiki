@@ -78,6 +78,7 @@ $wackoTranslation = array(
 	"ReferrersTip" => "Clique para ver uma lista de URLs que referenciam esta página",
 	"RecentCommentsXMLTip" => "Click to view recent comments in XML format.",
 	"RecentChangesXMLTip" => "Click to view recent changes in XML format.",
+	"RecentNewsXMLTip" => "Click to view recent news in XML format.",
 	"ReferrersText" => "Referenciadores",
 	"SearchText" => "Pesquisa: ",
 
