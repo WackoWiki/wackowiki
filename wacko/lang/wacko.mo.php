@@ -50,6 +50,7 @@ $wackoTranslation = array(
 	"Comments_all" => "Comentarii",
 	"Links" => "Links",
 	"Version" => "Version",
+	"StandardTerms" => "Standard Terms",
 	"ShowComments" => "Afiseaza comentarii/forma",
 	"HideComments" => "Ascunde comentarii/forma",
 	"AddComment" => "Adauga comentarii:",

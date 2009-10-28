@@ -48,6 +48,7 @@ $wackoTranslation = array(
 	"Comments_all" => "Kommentare",
 	"Links" => "Links",
 	"Version" => "Version",
+	"StandardTerms" => "Nutzungsbedingungen",
 	"ShowComments" => "Zeige Kommentare",
 	"HideComments" => "Verberge Kommentare",
 	"AddComment" => "Dieser Seite einen Kommentar hinzufügen:",
