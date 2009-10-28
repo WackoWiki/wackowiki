@@ -312,6 +312,7 @@ switch($config["database_driver"])
 					test(str_replace("%1","pages",$lang["UpdateTable"]), @mysql_query($update_pages_r4_2_1, $dblink), str_replace("%1", "pages", $lang["ErrorUpdatingTable"]));
 					test(str_replace("%1","pages",$lang["UpdateTable"]), @mysql_query($update_pages_r4_2_2, $dblink), str_replace("%1", "pages", $lang["ErrorUpdatingTable"]));
 					test(str_replace("%1","pages",$lang["UpdateTable"]), @mysql_query($update_pages_r4_2_3, $dblink), str_replace("%1", "pages", $lang["ErrorUpdatingTable"]));
+					test(str_replace("%1","pages",$lang["UpdateTable"]), @mysql_query($update_pages_r4_2_4, $dblink), str_replace("%1", "pages", $lang["ErrorUpdatingTable"]));
 
 					// drop last!
 					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r4_2_12, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
@@ -631,6 +632,7 @@ switch($config["database_driver"])
 								test(str_replace("%1","pages",$lang["UpdateTable"]), @mysqli_query($dblink, $update_pages_r4_2_1), str_replace("%1", "pages", $lang["ErrorUpdatingTable"]));
 								test(str_replace("%1","pages",$lang["UpdateTable"]), @mysqli_query($dblink, $update_pages_r4_2_2), str_replace("%1", "pages", $lang["ErrorUpdatingTable"]));
 								test(str_replace("%1","pages",$lang["UpdateTable"]), @mysqli_query($dblink, $update_pages_r4_2_3), str_replace("%1", "pages", $lang["ErrorUpdatingTable"]));
+								test(str_replace("%1","pages",$lang["UpdateTable"]), @mysqli_query($dblink, $update_pages_r4_2_4), str_replace("%1", "pages", $lang["ErrorUpdatingTable"]));
 
 								// drop last!
 								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r4_2_12), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
