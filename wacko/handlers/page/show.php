@@ -1,5 +1,27 @@
 <div id="page" class="page">
 <?php
+
+if (!isset ($this->config["comments_count"])) $this->config["comments_count"] = 15;
+
+// redirect from comment page to the commented one
+if ($this->page["comment_on_id"])
+{
+	// count previous comments
+	$count = $this->LoadSingle(
+		"SELECT COUNT(tag) AS n ".
+		"FROM {$this->config['table_prefix']}pages ".
+		"WHERE comment_on_id = '".quote($this->dblink, $this->page['comment_on_id'])."' ".
+			"AND created <= '".quote($this->dblink, $this->page['created'])."' ".
+		"GROUP BY comment_on_id ".
+		"LIMIT 1", 1);
+	
+	// determine comments page number where this comment is located
+	$p = ceil($count["n"] / $this->config["comments_count"]);
+	
+	// forcibly open page
+	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page["comment_on_id"]), 'show_comments=1&p='.$p).'#'.$this->page['tag']);
+}
+
 if ($this->HasAccess("read"))
 {
 	if (!$this->page)
@@ -137,31 +159,31 @@ if ($this->page)
 	<?php echo "[<a href=\"".$this->href("", "", "show_files=0")."\">".$this->GetTranslation("HideFiles")."</a>]"; ?>
 	</div>
 
-		<?php
-		echo "<div class=\"files\">";
-		echo $this->Action("files",array("nomark"=>1));
-		echo "</div>";
-		// display form
-		if ($user = $this->GetUser())
-		{
-			$user = strtolower($this->GetUserName());
-			$registered = true;
-		}
-		else
-			$user = "guest@wacko";
+			<?php
+			echo "<div class=\"files\">";
+			echo $this->Action("files",array("nomark"=>1));
+			echo "</div>";
+			// display form
+			if ($user = $this->GetUser())
+			{
+				$user = strtolower($this->GetUserName());
+				$registered = true;
+			}
+			else
+				$user = "guest@wacko";
 
-		if (isset($registered)
-			&&
-				(
-					($this->config["upload"] === true) || ($this->config["upload"] == "1") ||
-					($this->CheckACL($user,$this->config["upload"]))
+			if (isset($registered)
+				&&
+					(
+						($this->config["upload"] === true) || ($this->config["upload"] == "1") ||
+						($this->CheckACL($user,$this->config["upload"]))
+					)
 				)
-			)
-		{
-			print("<div class=\"filesform\">\n");
-			echo $this->Action("upload",array("nomark"=>1));
-			print("</div>\n");
-		}
+			{
+				print("<div class=\"filesform\">\n");
+				echo $this->Action("upload",array("nomark"=>1));
+				print("</div>\n");
+			}
 		}
 		else
 		{
@@ -204,10 +226,15 @@ if ($this->page)
 	<?php
 	if ($this->GetConfigValue("footer_comments"))
 	{
+	// pagination
+	$pagination = $this->Pagination($this->GetCommentsCount(), $this->config["comments_count"], 'p', 'show_comments=1#comments');
+
+	// comments form output begins
+	
 		if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && ($this->GetConfigValue("hide_comments") != 2 || $this->GetUser()))
 		{
 			// load comments for this page
-			$comments = $this->LoadComments($this->GetPageId());
+			$comments = $this->LoadComments($this->GetPageId(), $pagination['offset'], $this->config["comments_count"]);
 
 			// store comments display in session
 			$tag = $this->GetPageTag();
@@ -234,6 +261,7 @@ if ($this->page)
 				?>
 			<a name="comments"></a>
 		<div id="commentsheader">
+		<?php echo '<div style="float:right; letter-spacing:normal;"><small><small>'.$pagination['text'].'</small></small></div>'; ?>
 		<?php echo $this->GetTranslation("Comments_all")." [<a href=\"".$this->href("", "", "show_comments=0")."\">".$this->GetTranslation("HideComments")."</a>]"; ?>
 			</div>
 			<?php
@@ -259,12 +287,21 @@ if ($this->page)
 					print("<div class=\"commenttitle\">\n<a href=\"".$this->href("", "", "show_comments=1")."#".$comment["tag"]."\">".$comment["title"]."</a>\n</div>\n");
 					print($this->Format($strings,"post_wacko")."\n");
 					echo "</div>\n";
-					print("<ul class=\"commentinfo\">\n<li>".($this->IsWikiName($comment["user"]) ? $this->Link("/".$comment["user"],"",$comment["user"]) : $comment["user"])."</li>\n<li>".$this->GetTimeStringFormatted($comment["time"])."</li>\n</ul>\n");
+					print("<ul class=\"commentinfo\">\n".
+								"<li>".($this->IsWikiName($comment["user"]) ? $this->Link("/".$comment["user"],"",$comment["user"]) : $comment["user"])."</li>\n".
+								"<li>".$this->GetTimeStringFormatted($comment["created"])."</li>\n".
+								($comment["time"] != $comment["created"]
+									? "<li>".$this->GetTimeStringFormatted($comment["time"])." ".$this->GetTranslation("CommentEdited")."</li>\n"
+									: "").
+							"</ul>\n");
 					echo "</li>";
 				}
 
 				echo "</ol>";
 			}
+
+			if ($pagination['text'] == true)
+				echo '<div style="text-align:right;padding-right:10px;border-top:solid 1px #BABFC7;"><small><small>'.$pagination['text'].'</small></small></div>';
 
 			// display comment form
 			if ($this->HasAccess("comment"))
@@ -316,17 +353,12 @@ if ($this->page)
 		?>
 		<div id="commentsheader">
 		<?php
-				switch ($c = count($comments))
-				{
-					case 0:
-						print($this->GetTranslation("Comments_0"));
-						break;
-					case 1:
-						print($this->GetTranslation("Comments_1"));
-						break;
-					default:
-						print(str_replace("%1", $c, $this->GetTranslation("Comments_n")));
-				}
+				$c = (int)$this->page["comments"];
+
+				if		($c  <  1)	echo $this->GetTranslation('Comments_0');
+				else if	($c === 1)	echo $this->GetTranslation('Comments_1');
+				else if	($c  >  1)	echo str_replace('%1', $c, $this->GetTranslation('Comments_n'));
+
 			//TODO: show link to show comment only if there is one or/and user has the right to add a new one
 		?>
 			[<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->GetTranslation("ShowComments"); ?></a>]</div>
