@@ -2745,7 +2745,7 @@ class Wacko
 		if ($page_id)
 		{
 			return $this->LoadAll(
-					"SELECT id, tag, body, body_r, title, user, time FROM ".$this->config["table_prefix"]."pages ".
+					"SELECT id, tag, created, time, body, body_r, title, user FROM ".$this->config["table_prefix"]."pages ".
 					"WHERE comment_on_id = '".quote($this->dblink, $page_id)."' ".
 					"ORDER BY created");
 		}
@@ -3995,6 +3995,16 @@ class Wacko
 		{
 			$pagination['text'] = $this->GetTranslation('ToThePage').': ';
 
+			// prev page shortcut
+			if ($page < 2)
+			{
+				$pagination['text'] .= '';
+			}
+			else
+			{
+				$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.($page - 1).( $params == true ? '&amp;'.$params : '' )).'">&laquo; '.$this->GetTranslation('PrevAcr').'</a>';
+			}
+
 			// pages range links
 			if ($pages <= 10)	// not so many pages
 			{
@@ -4053,7 +4063,7 @@ class Wacko
 			// next page shortcut
 			if ($page >= $pages)
 			{
-				$pagination['text'] .= ' '.$this->GetTranslation('NextAcr');
+				$pagination['text'] .= '';
 			}
 			else
 			{
