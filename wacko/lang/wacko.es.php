@@ -48,6 +48,7 @@ $wackoTranslation = array(
 	"Comments_1" => "Hay un comentario en esta página.",
 	"Comments_n" => "Hay %1 comentarios en esta página.",
 	"Comments_all" => "Comentarios",
+	"CommentEdited" => "edited",
 	"Links" => "Links",
 	"Version" => "Version",
 	"StandardTerms" => "Standard Terms",
