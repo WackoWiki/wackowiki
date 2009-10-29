@@ -2739,15 +2739,17 @@ class Wacko
 		return $latest['tag'];
 	}
 
-	function LoadComments($page_id)
+	function LoadComments($page_id, $limit = 0, $count = 30)
 	{
 		// avoid results if $page_id is 0 (page does not exists)
 		if ($page_id)
 		{
 			return $this->LoadAll(
-					"SELECT id, tag, created, time, body, body_r, title, user FROM ".$this->config["table_prefix"]."pages ".
+					"SELECT id, tag, created, time, body, body_r, title, user ".
+					"FROM ".$this->config["table_prefix"]."pages ".
 					"WHERE comment_on_id = '".quote($this->dblink, $page_id)."' ".
-					"ORDER BY created");
+					"ORDER BY created ".
+					"LIMIT {$limit}, {$count}");
 		}
 	}
 
