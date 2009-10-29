@@ -69,6 +69,8 @@ foreach ($pages_to_display as $page)
 	echo "</li>\n";
 
 }
+// close list
+if ($curChar)	echo "</ul>\n</li>\n";
 
 //  display navigation
 if ($pages_to_display)
