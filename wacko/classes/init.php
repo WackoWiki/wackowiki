@@ -43,7 +43,7 @@ define("LOAD_ALL",						0);
 define("LOAD_META",						1);
 // define("SESSION_HANDLER_ID",			"sid");
 // define("SESSION_HANDLER_PATH",			NULL);	// if you are using specific path (instead of system default /tmp) for session variables storing, define it here
-// define("SQL_NULLDATE",					"0000-00-00 00:00:00");
+define("SQL_NULLDATE",					"0000-00-00 00:00:00");
 define("SQL_DATE_FORMAT",				"Y-m-d H:i:s");
 define("TRAN_DONTCHANGE",				0);
 define("TRAN_LOWERCASE",				1);
