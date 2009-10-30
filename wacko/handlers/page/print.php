@@ -4,6 +4,9 @@
 // redirect to show method if page don't exists
 if (!$this->page) $this->Redirect($this->href("show"));
 
+// deny for comment
+if ($this->page["comment_on_id"]) $this->Redirect($this->href("", $this->page["tag"]));
+
 if ($this->HasAccess("read"))
 {
 	if (!$this->page)
@@ -12,12 +15,7 @@ if ($this->HasAccess("read"))
 	}
 	else
 	{
-		// comment header?
-		if ($this->page["comment_on_id"])
-		{
-			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->GetCommentOnTag($this->page["comment_on_id"]), "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["time"]."</div>");
-		}
-
+		/* obsolete code - or do we need an ability to print old revisions?
 		if ($this->page["latest"] == "0")
 		{
 			print("<div class=\"revisioninfo\">".
@@ -25,15 +23,69 @@ if ($this->HasAccess("read"))
 			str_replace("%2",$this->GetPageTag(),
 			str_replace("%3",$this->page["time"],
 			$this->GetTranslation("Revision")))).".</div>");
-		}
+		}*/
+
+		// start enumerating links
+		$this->numerate_links = array();
+
+		// build html body
+		$data = $this->Format($this->page["body"], "wacko");
 
 		// display page
-		$this->context[++$this->current_context] = $this->tag;
-		$data = $this->Format($this->page["body"], "wakka");
-		if ($this->tocAutoNumerate == 1) $data = $this->tocEnumerate($data,2); // TOC, Automatic numeration of headings
-		print($data);
-		$this->current_context--;
+		$data = $this->Format($data, "post_wacko", array("bad" => "good"));
+		$data = $this->NumerateToc($data); //  numerate toc if needed
+		echo $data;
 
+		// display comments
+		if ($_SESSION[$this->config["session_prefix"].'_'."show_comments"][$this->tag])
+		{
+			if ($comments = $this->LoadComments($this->GetPageId()));
+			{
+				// display comments header
+				echo "<br /><br />";
+				echo "<div id=\"commentsfiles\">";
+				echo "<div class=\"commentsheader\">";
+				echo $this->GetTranslation("Comments_all");
+				echo "</div>\n";
+
+				foreach ($comments as $comment)
+				{
+					if (!$comment["body_r"]) $comment["body_r"] = $this->Format($comment["body"]);
+
+					echo "<div class=\"comment\">".
+							"<span class=\"commentinfo\">".
+								"<strong>&#8212; ".( $comment["user"] == GUEST ? "<em>".$this->GetTranslation("Guest")."</em>" : $comment["user"] )."</strong> (".$this->GetTimeStringFormatted($comment["created"]).
+								($comment["time"] != $comment["created"] ? ", ".$this->GetTranslation("CommentEdited")." ".$this->GetTimeStringFormatted($comment["time"]) : "").")".
+							"&nbsp;&nbsp;&nbsp;</span><br />".
+							$this->Format($comment["body_r"], "post_wacko").
+						"</div>\n";
+				}
+				echo "</div>\n";
+			}
+		}
+
+		// numerated links
+		if (($c = count($this->numerate_links)) > 0)
+		{
+			if (!$comments) echo "<br />";
+
+			echo "<br />";
+			echo "<div id=\"commentsfiles\">";
+			echo "<div class=\"linksheader\">";
+			echo $this->GetTranslation("Links");
+			echo "</div>\n";
+
+			foreach ($this->numerate_links as $l => $n)
+			{
+				echo "<small><strong><sup><a name=\"reflink\">$n</a></sup></strong> $l</small>\n";
+				if (++$i < $c) echo "<br /><br />\n";
+			}
+
+			echo "</div>\n";
+		}
+
+		// stop enumerating links
+		$this->numerate_links = NULL;
 	}
 }
 else
