@@ -4,31 +4,20 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
-<title><?php echo $this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
+	<title><?php echo $this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
 echo " (@".$this->GetWackoName().")" ?></title>
 <?php if ($this->GetMethod() != 'show' || $this->page["latest"] == "0")
 echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
-<meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
-<meta name="description"
-	content="<?php echo $this->GetDescription(); ?>" />
-<meta name="language" content="<?php echo $this->page["lang"] ?>" />
-<meta http-equiv="content-type"
-	content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
-<link rel="stylesheet" type="text/css"
-	href="<?php echo $this->GetConfigValue("theme_url") ?>css/default.css" />
-<link rel="shortcut icon"
-	href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico"
-	type="image/x-icon" />
-<link rel="alternate" type="application/rss+xml"
-	title="<?php echo $this->GetTranslation("RecentChangesRSS");?>"
-	href="<?php echo $this->GetConfigValue("root_url");?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
-<link rel="alternate" type="application/rss+xml"
-	title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>"
-	href="<?php echo $this->GetConfigValue("root_url");?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+	<meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
+	<meta name="description" content="<?php echo $this->GetDescription(); ?>" />
+	<meta name="language" content="<?php echo $this->page["lang"] ?>" />
+	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/default.css" />
+	<link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico" type="image/x-icon" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentNewsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/news_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
-<link rel="alternate" type="application/rss+xml"
-	title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?> in RSS"
-	href="<?php echo $this->href("revisions.xml");?>" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?> in RSS" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere

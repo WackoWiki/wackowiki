@@ -32,6 +32,7 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 
 $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"id serial,".
+						"page_id integer NOT NULL DEFAULT 0,".
 						"tag character varying(250) NOT NULL DEFAULT '',".
 						"supertag character varying(250) NOT NULL DEFAULT '',".
 						"\"created\" timestamp without time zone NOT NULL DEFAULT now(),".
