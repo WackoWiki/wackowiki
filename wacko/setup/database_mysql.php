@@ -2,7 +2,10 @@
 
 /*
  Wacko Wiki MySQL Table Creation Script
+
+ TODO: add COMMENT 'field description'
  */
+
 $pref = $config["table_prefix"];
 
 $table_acls = "CREATE TABLE {$pref}acls (".

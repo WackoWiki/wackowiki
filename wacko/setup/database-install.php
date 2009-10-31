@@ -34,6 +34,12 @@ print("         <h2>".$lang["TestingConfiguration"]."</h2>\n");
 $insert_admin = "INSERT INTO ".$config["table_prefix"]."users (name, password, email, signuptime, lang) VALUES ('".$config["admin_name"]."', md5('".$_POST["password"]."'), '".$config["admin_email"]."', NOW(), '".$config["language"]."')";
 // TODO: user table lookup user_id WHERE name = '".$config["admin_name"]."'
 $insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, user_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext) VALUES ('0', '1','wacko4.gif', 'WackoWiki', NOW(), '1580', '108', '50', 'gif')";
+$insert_config = "INSERT INTO ".$config["table_prefix"]."config (id, name, value) VALUES
+	(0, 'maint_last_cache', NULL),
+	(0, 'maint_last_log', NULL),
+	(0, 'maint_last_refs', NULL),
+	(0, 'maint_last_delpages', NULL),
+	(0, 'maint_last_oldpages', NULL);";
 
 /*
  Setup the tables depending on which database we selected
@@ -137,6 +143,8 @@ switch($config["database_driver"])
 					print("            <li>".$lang["InstallingPagesEnd"]."</li>\n");
 					test($lang["InstallingAdmin"], @mysql_query($insert_admin, $dblink), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 					test($lang["InstallingLogoImage"], @mysql_query($insert_logo_image, $dblink), str_replace("%1","logo image",$lang["ErrorAlreadyExists"]));
+					test($lang["InstallingConfigValues"], @mysql_query($insert_config, $dblink), str_replace("%1","config values",$lang["ErrorAlreadyExists"]));
+
 					break;
 
 					/*
@@ -360,6 +368,8 @@ switch($config["database_driver"])
 					// drop last!
 					test(str_replace("%1","upload",$lang["AlterTable"]), @mysql_query($alter_upload_r4_2_1, $dblink), str_replace("%1", "upload", $lang["ErrorAlteringTable"]));
 
+					// inserting config values
+					test($lang["InstallingConfigValues"], @mysql_query($insert_config, $dblink), str_replace("%1","config values",$lang["ErrorAlreadyExists"]));
 			}
 			print("            </ul>\n");
 		}
@@ -456,6 +466,7 @@ switch($config["database_driver"])
 								print("            <li>".$lang["InstallingPagesEnd"]."</li>\n");
 								test($lang["InstallingAdmin"], @mysqli_query($dblink, $insert_admin), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 								test($lang["InstallingLogoImage"], @mysqli_query($dblink, $insert_logo_image), str_replace("%1","logo image",$lang["ErrorAlreadyExists"]));
+								test($lang["InstallingConfigValues"], @mysqli_query($dblink, $insert_config), str_replace("%1","config values",$lang["ErrorAlreadyExists"]));
 								break;
 
 								/*
@@ -679,6 +690,8 @@ switch($config["database_driver"])
 								// drop last!
 								test(str_replace("%1","upload",$lang["AlterTable"]), @mysqli_query($dblink, $alter_upload_r4_2_1), str_replace("%1", "upload", $lang["ErrorAlteringTable"]));
 
+								// inserting config values
+								test($lang["InstallingConfigValues"], @mysqli_query($dblink, $insert_config), str_replace("%1","config values",$lang["ErrorAlreadyExists"]));
 
 						}
 						print("         </ul>\n");
@@ -773,6 +786,7 @@ switch($config["database_driver"])
 									print("            <li>".$lang["InstallingPagesEnd"]."</li>\n");
 									testPDO($lang["InstallingAdmin"], $insert_admin, str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 									testPDO($lang["InstallingLogoImage"], $insert_logo_image, str_replace("%1","logo image",$lang["ErrorAlreadyExists"]));
+									testPDO($lang["InstallingConfigValues"], $insert_config, str_replace("%1","config values",$lang["ErrorAlreadyExists"]));
 									print("         </ul>\n");
 								}
 								break;
