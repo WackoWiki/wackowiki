@@ -1585,11 +1585,11 @@ class Wacko
 
 	function NoCache()
 	{
-		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");    // Date in the past
+		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // always modified
-		header("Cache-Control: no-store, no-cache, must-revalidate");  // HTTP/1.1
+		header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1
 		header("Cache-Control: post-check=0, pre-check=0", false);
-		header("Pragma: no-cache");                          // HTTP/1.0
+		header("Pragma: no-cache"); // HTTP/1.0
 	}
 
 	function UnwrapLink($tag)
@@ -1691,7 +1691,7 @@ class Wacko
 
 	function PreLink($tag, $text = "", $track = 1, $imgurl = 0)
 	{
-		//    if (!$text) $text = $this->AddSpaces($tag);
+		// if (!$text) $text = $this->AddSpaces($tag);
 
 		if (preg_match("/^[\!\.".$this->language["ALPHANUM_P"]."]+$/", $tag))
 		{
@@ -1805,7 +1805,7 @@ class Wacko
 			$thing = $matches[2];
 			$arr = explode("/", $thing);
 
-			if (count($arr) == 1)                // file:some.zip
+			if (count($arr) == 1) // file:some.zip
 			{
 				//try to find in global storage and return if success
 				$desc = $this->CheckFileExists($thing);
@@ -2896,7 +2896,7 @@ class Wacko
 									"WHERE page_tag = '".quote($this->dblink, $tag)."' ".
 										"AND privilege = '".quote($this->dblink, $privilege)."' ".
 									"LIMIT 1");
-					/*        if ($acl)
+					/* if ($acl)
 					 {
 					 $this->Query(
 						"UPDATE ".$this->config["table_prefix"]."acls ".
