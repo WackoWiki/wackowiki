@@ -3,8 +3,9 @@
 /*
  Wacko Wiki MySQL Table Creation Script
  */
+$pref = $config["table_prefix"];
 
-$table_acls = "CREATE TABLE ".$config["table_prefix"]."acls (".
+$table_acls = "CREATE TABLE {$pref}acls (".
 					"page_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
@@ -14,7 +15,7 @@ $table_acls = "CREATE TABLE ".$config["table_prefix"]."acls (".
 					"KEY supertag (supertag)".
 				") TYPE=MyISAM";
 
-$table_cache = "CREATE TABLE ".$config["table_prefix"]."cache (".
+$table_cache = "CREATE TABLE {$pref}cache (".
 					"name VARCHAR(32) NOT NULL,".
 					"method VARCHAR(20) NOT NULL,".
 					"query VARCHAR(100) NOT NULL,".
@@ -23,7 +24,7 @@ $table_cache = "CREATE TABLE ".$config["table_prefix"]."cache (".
 					"KEY timestamp (time)".
 				") TYPE=MyISAM";
 
-$table_config = "CREATE TABLE ".$config["table_prefix"]."config (".
+$table_config = "CREATE TABLE {$pref}config (".
 				"id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 				"name VARCHAR(100) NOT NULL DEFAULT '',".
 				"value TEXT,".
@@ -32,7 +33,7 @@ $table_config = "CREATE TABLE ".$config["table_prefix"]."config (".
 				"UNIQUE KEY name (name)".
 			") TYPE=MyISAM";
 
-$table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
+$table_links = "CREATE TABLE {$pref}links (".
 					"id INT(10) UNSIGNED NOT NULL auto_increment,".
 					"from_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -45,7 +46,7 @@ $table_links = "CREATE TABLE ".$config["table_prefix"]."links (".
 					"KEY idx_to (to_tag)".
 				") TYPE=MyISAM";
 
-$table_log = "CREATE TABLE ".$config["table_prefix"]."log (".
+$table_log = "CREATE TABLE {$pref}log (".
 				"id INT(10) UNSIGNED NOT NULL auto_increment,".
 				"time TIMESTAMP NOT NULL,".
 				"level TINYINT(1) NOT NULL,".
@@ -59,7 +60,7 @@ $table_log = "CREATE TABLE ".$config["table_prefix"]."log (".
 				"KEY idx_time (time)".
 			") TYPE=MyISAM";
 
-$table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
+$table_pages = "CREATE TABLE {$pref}pages (".
 					"id INT(10) UNSIGNED NOT NULL auto_increment,".
 					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -94,7 +95,7 @@ $table_pages = "CREATE TABLE ".$config["table_prefix"]."pages (".
 					"KEY idx_title (title)".
 				") TYPE=MyISAM;";
 
-$table_referrers = "CREATE TABLE ".$config["table_prefix"]."referrers (".
+$table_referrers = "CREATE TABLE {$pref}referrers (".
 						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"referrer CHAR(150) NOT NULL DEFAULT '',".
 						"time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
@@ -102,7 +103,7 @@ $table_referrers = "CREATE TABLE ".$config["table_prefix"]."referrers (".
 						"KEY idx_time (time)".
 					") TYPE=MyISAM";
 
-$table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
+$table_revisions = "CREATE TABLE {$pref}revisions (".
 						"id INT(10) UNSIGNED NOT NULL auto_increment,".
 						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -132,7 +133,7 @@ $table_revisions = "CREATE TABLE ".$config["table_prefix"]."revisions (".
 						"KEY idx_comment_on_id (comment_on_id)".
 					") TYPE=MyISAM;";
 
-$table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
+$table_upload = "CREATE TABLE {$pref}upload (".
 					"id INT(10) UNSIGNED NOT NULL auto_increment,".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -150,7 +151,7 @@ $table_upload = "CREATE TABLE ".$config["table_prefix"]."upload (".
 					"KEY idx_user_id (user_id)".
 				") TYPE=MyISAM";
 
-$table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
+$table_users = "CREATE TABLE {$pref}users (".
 					"id INT(10) UNSIGNED NOT NULL auto_increment,".
 					"name VARCHAR(80) NOT NULL DEFAULT '',".
 					"password VARCHAR(32) NOT NULL DEFAULT '',".
@@ -177,7 +178,7 @@ $table_users = "CREATE TABLE ".$config["table_prefix"]."users (".
 					"KEY idx_signuptime (signuptime)".
 				") TYPE=MyISAM";
 
-$table_watches = "CREATE TABLE ".$config["table_prefix"]."watches (".
+$table_watches = "CREATE TABLE {$pref}watches (".
 						"id INT(10) UNSIGNED NOT NULL auto_increment,".
 						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -189,16 +190,16 @@ $table_watches = "CREATE TABLE ".$config["table_prefix"]."watches (".
  Wacko Wiki MySQL Table Deletion Script
 */
 
-$table_pages_drop = "DROP TABLE ".$config["table_prefix"]."pages";
-$table_revisions_drop = "DROP TABLE ".$config["table_prefix"]."revisions";
-$table_acls_drop = "DROP TABLE ".$config["table_prefix"]."acls";
-$table_links_drop = "DROP TABLE ".$config["table_prefix"]."links";
-$table_referrers_drop = "DROP TABLE ".$config["table_prefix"]."referrers";
-$table_users_drop = "DROP TABLE ".$config["table_prefix"]."users";
-$table_watches_drop = "DROP TABLE ".$config["table_prefix"]."watches";
-$table_upload_drop = "DROP TABLE ".$config["table_prefix"]."upload";
-$table_cache_drop = "DROP TABLE ".$config["table_prefix"]."cache";
-$table_log_drop = "DROP TABLE ".$config["table_prefix"]."log";
-$table_config_drop = "DROP TABLE ".$config["table_prefix"]."config";
+$table_pages_drop = "DROP TABLE {$pref}pages";
+$table_revisions_drop = "DROP TABLE {$pref}revisions";
+$table_acls_drop = "DROP TABLE {$pref}acls";
+$table_links_drop = "DROP TABLE {$pref}links";
+$table_referrers_drop = "DROP TABLE {$pref}referrers";
+$table_users_drop = "DROP TABLE {$pref}users";
+$table_watches_drop = "DROP TABLE {$pref}watches";
+$table_upload_drop = "DROP TABLE {$pref}upload";
+$table_cache_drop = "DROP TABLE {$pref}cache";
+$table_log_drop = "DROP TABLE {$pref}log";
+$table_config_drop = "DROP TABLE {$pref}config";
 
 ?>
