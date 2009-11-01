@@ -10,8 +10,8 @@ if ($user = $this->GetUserName())
 
 	if($_GET["bydate"] == 1)
 	{
-		print($this->GetTranslation("MyChangesTitle1")." (<a href=\"".
-			$this->href("", "", "mode=mychanges")."#list\">".$this->GetTranslation("OrderABC")."</a>).<br /><br />\n");
+		print($this->GetTranslation("MyChangesTitle1")." [<a href=\"".
+			$this->href("", "", "mode=mychanges")."#list\">".$this->GetTranslation("OrderABC")."</a>].<br /><br />\n");
 			#.($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;").
 
 		$count	= $this->LoadSingle(
@@ -72,9 +72,9 @@ if ($user = $this->GetUserName())
 	}
 	else
 	{
-		print($this->GetTranslation("MyChangesTitle2")." (<a href=\"".
+		print($this->GetTranslation("MyChangesTitle2")." [<a href=\"".
 			$this->href("", "", "mode=mychanges&amp;bydate=1")."#list\">". #($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."bydate=true\">".
-			$this->GetTranslation("OrderChange")."</a>).</strong><br /><br />\n");
+			$this->GetTranslation("OrderChange")."</a>].</strong><br /><br />\n");
 
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
