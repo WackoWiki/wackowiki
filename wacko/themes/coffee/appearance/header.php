@@ -1,30 +1,40 @@
 <?php
+/*
+ Coffee theme.
+ Common header file.
+*/
+
+// HTTP header with right Charset settings
 header("Content-Type: text/html; charset=".$this->GetCharset());
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
-<title><?php echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?></title>
-<?php if ($this->GetMethod() != 'show' || $this->page["latest"] == "0")
-echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
-<meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
-<meta name="description" content="<?php echo $this->GetDescription(); ?>" />
-<meta name="language" content="<?php echo $this->page["lang"] ?>" />
-<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
-<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/default.css" />
-<link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico" type="image/x-icon" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentNewsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/news_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?> in RSS" href="<?php echo $this->href("revisions.xml");?>" />
+	<title><?php echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method != "show" ? " (".$this->method.")" : "");?></title>
+<?php
+// We don't need search robots to index subordinate pages
+if ($this->GetMethod() != 'show' || $this->page["latest"] == "0")
+	echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
+?>
+	<meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
+	<meta name="description" content="<?php echo $this->GetDescription(); ?>" />
+	<meta name="language" content="<?php echo $this->page["lang"] ?>" />
+	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/default.css" />
+	<link media="print" rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/print.css" />
+	<link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico" type="image/x-icon" />
+	<link title="<?php echo $this->GetConfigValue("root_page");?>" href="<?php echo $this->GetConfigValue("base_url");?>" rel="start"/>
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentNewsRSS");?>" href="<?php echo $this->GetConfigValue("root_url");?>xml/news_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
 ?>
-  <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
+	<script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/default.js"></script>
 <?php
-// protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
+// autocomplete.js, protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages.
 if ($this->method == 'edit')
 {
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
@@ -32,32 +42,42 @@ if ($this->method == 'edit')
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/autocomplete.js\"></script>\n";
 }
 ?>
-<script type="text/javascript"
-	src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script>
+<?php 
+/* <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script> */
+?>
 <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
 <?php
+// Doubleclick edit feature.
+// Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->GetUser())
-   {
-      if ($user["doubleclickedit"] == "1")
-         {
+{
+	if ($user["doubleclickedit"] == "1")
+	{
 ?>
-   <script type="text/javascript">
-      var edit = "<?php echo $this->href("edit");?>";
-   </script>
+	<script type="text/javascript">
+	var edit = "<?php echo $this->href("edit");?>";
+	</script>
 <?php
-         }
-   }
+	}
+}
 else if ($this->HasAccess("write"))
-   {
+{
 ?>
-   <script type="text/javascript">
-      var edit = "<?php echo $this->href("edit");?>";
-   </script>
+
+	<script type="text/javascript">
+	var edit = "<?php echo $this->href("edit");?>";
+	</script>
 <?php
-   }
+}
 ?>
 </head>
+<?php
+// all_init() initializes all js features:
+//	* WikiEdit
+//	* Doubleclick editing
+//	* Smooth scrolling
 
+?>
 <body onload="all_init();">
 
 	<?php echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
@@ -83,7 +103,6 @@ else if ($this->HasAccess("write"))
 	title="<?php echo $this->GetTranslation("SearchTitleTip")?>"
 	href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
 </div>
-
 </div>
 
 <div class="bookmarks"><?php

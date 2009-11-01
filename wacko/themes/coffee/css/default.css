@@ -19,17 +19,17 @@ p, td, li, select, textarea, legend { font: 10pt Trebuchet MS }
 td {vertical-align: top }
 
 /*  Page title*/
-div.header {background-color: #FFEFD5; padding: 10px; font-size: 90%}
-div.header div.title {font-size: 140%; padding-top: 10px}
-div.header div.user {float: right; text-align: right}
-div.bookmarks {padding: 5px 10px; font-size: 90%; border-bottom: 1px solid #ccc; background-color: #FFE4B5}
+.header {background-color: #FFEFD5; padding: 10px; font-size: 90%}
+.header div.title {font-size: 140%; padding-top: 10px}
+.header div.user {float: right; text-align: right}
+.bookmarks {padding: 5px 10px; font-size: 90%; border-bottom: 1px solid #ccc; background-color: #FFE4B5}
 span.small {font-size: 80%}
 
 /* Page footer */
-div#filesheader, div#commentsheader, div.footer {padding: 5px 10px; background-color: #FFEFD5; border-top: 1px solid #ccc; font-size: 90%}
-div.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-color: #FFE4B5;}
-div.searchbar input { border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;}
-div#credits {clear: right; padding: 10px; color: #AAAAAA; font-size: 11px; text-align: right}
+#filesheader, #commentsheader, #footer {padding: 5px 10px; background-color: #FFEFD5; border-top: 1px solid #ccc; font-size: 90%}
+.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-color: #FFE4B5;}
+.searchbar input { border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;}
+#credits {clear: right; padding: 10px; color: #AAAAAA; font-size: 11px; text-align: right}
 .commentform form { width: 100% }
 .commentform form textarea { width: 100%; padding: 0}
 .commentinfo, #credits a { color: #AAAAAA; padding-bottom: 20px; }
@@ -45,7 +45,7 @@ legend {font-weight: normal; padding: 0 5px;}
 .textarea { width: 100%; height: 400px }
 
 /* Page main area */
-div#page {padding: 10px 10px;}
+#page {padding: 10px 10px;}
 
 
 
@@ -74,6 +74,53 @@ div#page {padding: 10px 10px;}
 .time{ color:#999999; font-size: 9px; margin:5px 20px;}
 .debug {font-size: 11px; color: #888888;}
 .files, .comment { padding: 10px; border-left: 1px inset; border-right: 1px inset; border-top: 1px solid #CCCCCC; border-bottom: 1px solid #EEEEEE; background: #EEEEEE }
+
+/* .footer {
+	background-color: #F0F4F5;
+	padding: 5px 10px;
+	border-top: none;
+	border-top: 1px dotted #CCCCCC; 
+} */
+
+.footer {
+	margin: 0;
+	overflow: hidden;
+	clear: both;
+}
+
+.footerlist {
+	margin: 0 auto 0;
+	overflow: hidden;
+}
+
+.footerlist ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.footerlist li {
+	border-left: 1px solid #ccc;
+	border-left-style: dotted;
+	float: left;
+	line-height: 1.2em;
+	margin: 0 .5em 0 -.5em;
+	padding: 0 .5em 0 .5em;
+	white-space: nowrap;
+}
+
+.footerlist ul li form {
+	display: inline;
+}
+
+/** File and comment-related *************************************************/
+	/* Headers (always visible) */
+
+.files,.comment {
+	background-color: #FFFFFF;
+	padding: 10px;
+	border-bottom: 1px solid #EEEEEE;
+}
 
 .comment:target {
 	border:2px solid #FF6600;
