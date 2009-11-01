@@ -2,7 +2,7 @@
 @import "wacko.css";
 
 /* basic -------------------------------------------------- */
-p,td,li,select,textarea {
+p, td, li, select, textarea {
 	font-family: Verdana;
 	font-size: 13px;
 	line-height: 1.3em;
@@ -89,7 +89,7 @@ form input.submitinput {
 	margin: 5px 20px;
 }
 
-.debug,.debug li {
+.debug, .debug li {
 	font-size: 11px;
 	color: #888888;
 }
@@ -323,7 +323,7 @@ fieldset {
 	vertical-align: bottom
 }
 
-.upload td.dt-,.upload td.file- {
+.upload td.dt-, .upload td.file- {
 	white-space: nowrap;
 	font-size: 80%;
 	font-weight: bold;
@@ -349,14 +349,12 @@ fieldset {
 	width: 100%
 }
 
-.upload td.dt- .dt2-,.upload td.remove- .remove2-,.upload td.size- .size2-
-	{
+.upload td.dt- .dt2-, .upload td.remove- .remove2-, .upload td.size- .size2- {
 	font: 11px Tahoma;
 	color: #666666;
 }
 
-.upload td.remove- a.remove2-:hover,.upload td.remove- a.remove2-:active
-	{
+.upload td.remove- a.remove2-:hover, .upload td.remove- a.remove2-:active {
 	color: #ff0000
 }
 
@@ -425,10 +423,10 @@ p.layout-box span {
 	cursor: pointer;
 }
 
-.toolbar img {
+/*.toolbar img {
 	width: 20px;
 	height: 20px;
-}
+}*/
 
 .toolbar .btn-hover {
 	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
@@ -823,3 +821,12 @@ p.layout-box span {
 	border-bottom-width: 0px;
 	border-bottom-style: none;
 }
+
+.ul_list , .ul_list ul, .revisions {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.revisions li:hover {background: #CCFFCC}
+/* #FCFCFC #FFCC99 #CCFFCC */

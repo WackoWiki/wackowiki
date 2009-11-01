@@ -2,96 +2,139 @@
 @import "wacko.css";
 
 /* basic -------------------------------------------------- */
-P, TD, LI, SELECT, TEXTAREA {
+p, td, li, select, textarea {
 	font-family: Verdana;
 	font-size: 13px;
 	line-height: 1.3em;
 }
+
 label {
-	cursor:pointer;
+	cursor: pointer;
 }
+
 /* Textareas */
 textarea {
 	background-color: #FFFFFF;
 }
-BODY {
+
+body {
 	font-family: Verdana;
 	font-size: 13px;
 	line-height: 1.3;
 	color: #000000;
 	background-color: #F8F8F8;
 }
-A {
+
+/* Hyperlinks */
+a {
 }
-A:LINK {
+a:link {
 	color: #990000;
 }
-A:Hover {
+
+a:visited {
+	color: #666600;
+}
+
+a:hover {
 	color: #990000;
 	text-decoration: underline
 }
-A:Active {
+a:active {
 	color: #FF9900;
 	text-decoration: underline;
 }
-A:VISITED {
-	color: #666600;
-}
+
 img {
 	border-width: 0px;
 	vertical-align: middle;
 }
 
-/* paddings headers */
+form input.submitinput {
+	color: #000;
+}
 
 .main {
 	font-size: 22px;
 }
+
 .print {
 	font-family: Verdana;
 	font-size: 12px;
 }
+
+/* Errors */
 .error {
 	color: #CC3333;
 	font-weight: bold;
 }
+
 .info {
 	background: #F4FBFF;
 	margin: 10px;
 	padding: 10px 10px 10px 40px;
-	border:1px solid #D5D9E6;
-	color: #CC3333; font-weight: bold;
+	border: 1px solid #D5D9E6;
+	color: #CC3333;
+	font-weight: bold;
 }
+
+/* Debugging informations */
 .time {
-	color:#999999;
+	color: #999999;
 	font-size: 9px;
-	margin:5px 20px;
+	margin: 5px 20px;
 }
-.debug {
+
+.debug, .debug li {
 	font-size: 11px;
 	color: #888888;
 }
-.header {
-	padding: 10px;
+
+#header {
 	padding-top: 0px;
-	line-height: 22px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+	padding-left: 10px; /*line-height: 22px;*/
 }
+
+#header-main {
+	clear: both;
+	overflow: hidden;
+	padding: 10px 0px;
+}
+
+/** Styles for the main content in the page. *********************************/
+	/* Default settings */
+#content {
+	background-color: #FFFFFF;
+	padding: 9px 0px 0px;
+	border-top-width: 1px;
+	border-top-style: solid;
+
+}
+
 #page {
 	background-color: #FFFFFF;
-	padding: 9px 10px 10px;
+	padding-top: 5px;
+	padding-right: 10px;
+	padding-bottom: 20px;
+	padding-left: 10px;
 	border: 1px inset;
 	border-top: none;
 	border-bottom: none;
 }
+
 #pageedit {
 	background-color: #FFFFFF;
 	border: 1px inset;
 	border-bottom: none;
 }
+
 #pageedit form textarea {
 	width: 100%;
 	height: 400px;
 }
+
 .footer {
 	background-color: #DDDDDD;
 	padding: 5px 10px;
@@ -99,6 +142,40 @@ img {
 	border-top: none;
 	border-top: 1px solid #CCCCCC;
 }
+
+.footer {
+	margin: 0;
+	overflow: hidden;
+	clear: both;
+}
+
+.footerlist {
+	margin: 0 auto 0;
+	overflow: hidden;
+}
+
+.footerlist ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.footerlist li {
+	border-left: 1px solid;
+	border-left-style: solid;
+	float: left;
+	line-height: 1.2em;
+	margin: 0 .5em 0 -.5em;
+	padding: 0 .5em 0 .5em;
+	white-space: nowrap;
+}
+
+.footerlist ul li form {
+	display: inline;
+}
+
+/** File and comment-related *************************************************/
+	/* Headers (always visible) */
 #filesheader, #commentsheader {
 	background-color: #DDDDDD;
 	padding: 2px 10px;
@@ -116,17 +193,51 @@ img {
 }
 
 .comment:target {
-	border:2px solid #FF6600;
-	padding:0.5em 0.5em 0.5em 25px;
+	border: 2px solid #FF6600;
+	padding: 0.5em 0.5em 0.5em 25px;
 }
 
+/* Comment author and date */
 .commentinfo {
 	color: #AAAAAA;
+	padding-bottom: 20px;
+	float: right;
+	list-style-type: none;
 }
+
+li.comment {
+	overflow: hidden;
+}
+ol#comments{
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+	margin: 10px 0 0;
+	padding: 0;
+}
+
+.commentinfo li {
+border:medium none;
+margin:0;
+padding:0;
+width:320px;
+}
+
+.commenttext {
+	float: left;
+	width: 800px;
+}
+
+.commenttitle {
+	line-height: 22px;
+	font-weight: bold;
+}
+
 /* Change summary */
 .editnote {
 	color: #555555;
 }
+
 .filesform, .commentform {
 	background-color: #EEEEEE;
 	padding: 10px;
@@ -134,12 +245,14 @@ img {
 	border-right: 1px inset;
 	border-top: 1px solid #CCCCCC;
 }
+
 .commentform form {
-	width:100%;
+	width: 100%;
 }
+
 .commentform form textarea {
-	width:100%;
-	padding:0;
+	width: 100%;
+	padding: 0;
 }
 
 #credits {
@@ -147,84 +260,108 @@ img {
 	color: #AAAAAA;
 	text-align: right;
 }
-#credits A {
+
+#credits a {
 	color: #AAAAAA;
 }
+
+#credits a:active {
+	color: #FF0000;
+}
+
 .name {
 	text-align: right;
 	font-size: 11px;
 }
+
+/* Included pages: SYNTAX {{include file="xyz"}} */
 .include {
 	background-color: #F5F5F5;
 	padding: 8px;
 }
+
+/* Outgoing hyperlinks: SYNTAX ((http://slashdot.org nerds)) */
 .outerlink {
 	color: #990000;
 }
-FIELDSET {
+
+fieldset {
 	padding: 10px;
 }
+
 .missingpage {
 	border-bottom: 1px dashed orange;
 }
+
 .searchbar {
 	background-color: #DDDDDD;
 	font-family: Verdana;
 	font-size: 13px;
 	line-height: 1.3em;
 }
+
 .searchbar input {
 	border: none;
 	border-bottom: 1px solid #CCCCAA;
 	padding: 0px;
 	margin: 0px;
 }
+
 .logBtn {
 	height: 21px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;
 }
+
 #tooltip {
-	background:#FFFFFF;
-	border:1px solid #666666;
-	color:#333333;
-	font:menu;
-	margin:0px;
-	padding:3px 5px;
-	position:absolute;
-	visibility:hidden
+	background: #FFFFFF;
+	border: 1px solid #666666;
+	color: #333333;
+	font: menu;
+	margin: 0px;
+	padding: 3px 5px;
+	position: absolute;
+	visibility: hidden
 }
+
 .upload td {
 	padding: 2px 5px 2px 5px;
-	vertical-align:bottom
+	vertical-align: bottom
 }
+
 .upload td.dt-, .upload td.file- {
-	white-space:nowrap;
+	white-space: nowrap;
 	font-size: 80%;
-	font-weight:bold;
-	color:#000000
+	font-weight: bold;
+	color: #000000
 }
+
 .upload td.dt- {
-	padding-right:0
+	padding-right: 0
 }
+
 .upload td.remove- {
-	padding-right:0
+	padding-right: 0
 }
+
 .upload td.size- {
-	padding-right:0;
-	text-align:right
+	padding-right: 0;
+	text-align: right
 }
+
 .upload td.desc- {
 	font-size: 80%;
-	color:#444444;
-	width:100%
+	color: #444444;
+	width: 100%
 }
+
 .upload td.dt- .dt2-, .upload td.remove- .remove2-, .upload td.size- .size2- {
 	font: 11px Tahoma;
-	color:#666666;
+	color: #666666;
 }
-.upload td.remove- A.remove2-:HOVER, .upload td.remove- A.remove2-:ACTIVE {
-	color:#ff0000
+
+.upload td.remove- a.remove2-:hover, .upload td.remove- a.remove2-:active {
+	color: #ff0000
 }
 .preview {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:red 2px solid;}
 .preview p {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
@@ -238,10 +375,12 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	width:10px;
 	height:1px;
 }
+
 /* WikiEdit Toolbar -------------------------------------- */
  .toolbar tr {
 	background: ButtonFace;
 }
+
 .toolbar .btn-, .toolbar .btn-hover, .toolbar .btn-active, .toolbar .btn-pressed {
 	background: ButtonFace;
 	color: ButtonText;
@@ -250,6 +389,7 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	margin: 0px;
 	cursor: pointer;
 }
+
 .toolbar img {
 	width: 20px;
 	height: 20px;
@@ -257,52 +397,60 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 .toolbar .btn-hover {
 	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
 }
+
 .toolbar .btn-active, .toolbar .btn-pressed {
 	border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
 }
+
 .toolbar .btn-pressed {
 	background: ButtonHighlight;
 }
+
 .toolbar .btn-separator {
-border-left:1px solid buttonshadow;
-border-right:1px solid buttonhighlight;
-height:18px;
-margin:3px;
-padding:0;
-width:0;
+border-left: 1px solid buttonshadow;
+border-right: 1px solid buttonhighlight;
+height: 18px;
+margin: 3px;
+padding: 0;
+width: 0;
 }
 .edname-w, .edname-r, .edname-s {
 	font: bold 14px Arial;
 	border: 3px solid #D4D0C8;
 	padding: 0 7px;
-	color:#ffffff;
+	color: #ffffff;
 	vertical-align: middle;
 }
+
 .edname-w {
 	background: #1E9905;
 }
+
 .edname-r {
 	background: #2A45D0;
 }
+
 .edname-s {
 	background: #D08C2A;
 }
+
 .autocomplete-inplace {
 	background: ButtonFace;
 	border: 1px solid ButtonShadow;
 	padding: 2px;
 	font: 12px Arial;
 }
+
 .autocomplete-inplace div {
 	padding: 2px 5px;
 	cursor: pointer;
 }
+
 .autocomplete-inplace div.ac-over- {
 	color:#ffffff;
 	background: #1E9905;
 }
 
-/* .mark  { color: #008800;font-style:normal; } */
 
 /* CSS form formater */
 .cssform p {
@@ -314,25 +462,30 @@ width:0;
 	border-top: 1px dashed gray;
 	height: 1%;
 }
+
 .cssform label {
 	font-weight: bold;
 	float: left;
 	margin-left: -155px; /*width of left column*/
 	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
+
 .cssform input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
 	width: 180px;
 }
+
 .cssform textarea {
 	width: 250px;
 	height: 150px;
 }
+
 .cssform span.site_count {
 	font-weight: normal;
 	float: left;
 	margin-left: -155px; /*width of left column*/
 	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
+
 .BewareChangeLang{
 	border: 1px solid #ffee66;
 	width: 400px;
@@ -351,6 +504,7 @@ width:0;
 	padding:10px;
 	margin:0 auto;
 }
+
 #cssform1 p {
 	clear: left;
 	margin: 0;
@@ -359,6 +513,7 @@ width:0;
 	border-top: 1px dashed gray;
 	height: 1%;
 }
+
 #cssform1 label {
 	float: left;
 	margin-left: 0px; /*
@@ -368,10 +523,12 @@ width:0;
 #cssform1 input[type="text"] { /*width of text boxes. IE6 does not understand this attribute*/
 	width: 180px;
 }
+
 #cssform1 textarea {
 	width: 250px;
 	height: 150px;
 }
+
 #cssform1 span.site_count {
 	font-weight: normal;
 	float: left;
@@ -384,17 +541,179 @@ width:0;
 .feed {
 	overflow:auto;
 }
+
 .feed .note {
 	font-size: 11px;
 	color: #777;
 }
+
 .feed .note a {
 	color: #777;
 }
+
 .feed_element_title {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
 	background-color:transparent;
 	background-repeat:no-repeat;
 	background-position:0 1px;
 	padding-left:20px;
+}
+/*Handlers --------------------------------------------------*/
+#content {
+	clear: both;
+}
+
+#navigation {
+	padding: 0px 0px 0px 0px; /*overflow:hidden;*/
+}
+
+#usermenu {
+	margin: 0 auto 0;
+	overflow: hidden;
+	float: left;
+	text-align: left;
+	position: relative;
+}
+
+#usermenu ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#usermenu li {
+	border-left: 1px solid;
+	float: left;
+	line-height: 1.2em;
+	margin: 0 .5em 0 -.5em;
+	padding: 0 .5em 0 .5em;
+	white-space: nowrap;
+}
+
+#usermenu li a {
+	display: inline;
+	border: none;
+	text-decoration: none;
+}
+
+#usermenu li a:visited {
+	color: #990000;
+}
+
+#usermenu li a:hover {
+	color: #B90022;
+	text-decoration: underline;
+}
+
+#usermenu li a:active {
+	color: #FF0000;
+}
+
+#search {
+	margin: 0 auto 0;
+	overflow: hidden;
+	float: right;
+	text-align: left;
+	position: relative;
+}
+
+#search label {
+	display: none;
+}
+
+#header-top {
+	margin: 0 auto 0;
+	overflow: hidden;
+	float: left;
+	text-align: left;
+	position: relative;
+	font-size: 1.3em;
+}
+
+#login {
+	font-size: 12px;
+	margin: 0 auto 0;
+	overflow: hidden;
+	float: right;
+	text-align: left;
+	position: relative;
+}
+
+#login form {
+	display: inline;
+}
+
+#login ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#login li {
+	border-left: 1px solid #aaa;
+	float: left;
+	line-height: 1.2em;
+	margin: 0 .5em 0 -.5em;
+	padding: 0 .5em 0 .5em;
+	white-space: nowrap;
+}
+
+#login li a {
+	display: inline;
+	border: none;
+	text-decoration: none;
+}
+
+#login li a:visited {
+	color: #003399;
+}
+
+#login li a:hover {
+	color: #B90022;
+	text-decoration: underline;
+}
+
+#login li a:active {
+	color: #FF0000;
+}
+
+/* temp */
+.topnav {
+	float: right;
+	font-size: 0.6875em;
+	margin-top: 0.9375em;
+}
+
+.topnav ul,.topnav li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.topnav ul {
+	display: block;
+}
+
+.topnav li {
+	display: inline;
+	margin-right: 1.1em;
+}
+
+/*search*/
+.highlight {
+	background-color: #FFFEA1;
+}
+
+#search_results li {
+	margin: 1em 0;
+}
+
+#search_results li div { /*padding-left: 20px;*/
+	
+}
+
+#search_results h3 {
+	font-size: 14px;
+	border-bottom-width: 0px;
+	border-bottom-style: none;
 }

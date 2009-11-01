@@ -1,8 +1,10 @@
 <?php
+
 /*
  Default theme.
  Common footer file.
  */
+
 ?>
 </div>
 <div id="footer">
