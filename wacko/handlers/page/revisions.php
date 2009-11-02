@@ -23,7 +23,7 @@ if ($this->HasAccess("read"))
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"fastdiff\" name=\"fastdiff\" />\n <label for=\"fastdiff\">".$this->GetTranslation("SimpleDiff")."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"source\" name=\"source\" />\n <label for=\"source\">".$this->GetTranslation("SourceDiff")."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("revisions.xml")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RevisionXMLTip")."\" alt=\"XML\" /></a>";
-		$output .= "</p>\n<ul>\n";
+		$output .= "</p>\n<ul class=\"revisions\">\n";
 
 		if ($_GET["show"] == "all")
 			$max = 0;
@@ -52,12 +52,13 @@ if ($this->HasAccess("read"))
 			if (++$c <= $max || !$max)
 			{
 				$output .= "<li>";
-				$output .= "<strong>".($t--).".</strong>";
+				$output .= "".($t--).".";
 				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"a\" value=\"".($c == 1 ? "-1" : $page["id"])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";
 				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"b\" value=\"".($c == 1 ? "-1" : $page["id"])."\" ".($c == 2 ? "checked=\"checked\"" : "")." />";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("show").($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."time=".urlencode($page["time"])."\">".$this->GetTimeStringFormatted($page["time"])."</a>";
 				$output .= " — id ".$page["id"]." ";
-				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->GetTranslation("By")." ".($this->IsWikiName($page["user"]) ? $this->Link($page["user"]) : $page["user"]).$edit_note."";
+				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->GetTranslation("By")." ".($this->IsWikiName($page["user"]) ? $this->Link($page["user"]) : $page["user"])."";
+				$output .= "".$edit_note."";
 				$output .= "</li>\n";
 			}
 		}
