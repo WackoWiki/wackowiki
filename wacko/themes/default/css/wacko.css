@@ -74,8 +74,16 @@ h6 { font-family: Arial;   font-size: 12px; }
 .diffinfo { font-weight: bold; color: #555555; }
 
 /* Simple differences */
-.additions { color: #008800; }
-.deletions { color: #880000; }
+.additions {
+background-color: #EEFFEE;
+}
+.deletions {
+background-color: #FFEEEE;
+}
+.additions, .deletions {
+padding: 3px;
+}
+
 
 /* Default differences */
 ins.diff {
