@@ -105,7 +105,8 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"more text NOT NULL DEFAULT '',".
 					"changepassword character varying(100) NOT NULL DEFAULT '',".
 					"email_confirm character varying(40) NOT NULL DEFAULT '',".
-					"CONSTRAINT pk_users_name PRIMARY KEY (id)".
+					"CONSTRAINT pk_users_name PRIMARY KEY (id),".
+					"CONSTRAINT idx_users_name UNIQUE (name)".
 				") WITH (OIDS=FALSE);";
 
 $table_watches = "CREATE TABLE {$pref}watches (".
