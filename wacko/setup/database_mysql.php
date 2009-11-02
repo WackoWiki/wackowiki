@@ -177,7 +177,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"total_revisions INT(10) UNSIGNED NOT NULL,".
 					"total_comments INT(10) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (id),".
-					"KEY idx_name (name),".
+					"UNIQUE KEY idx_name (name),".
 					"KEY idx_signuptime (signuptime)".
 				") TYPE=MyISAM";
 
