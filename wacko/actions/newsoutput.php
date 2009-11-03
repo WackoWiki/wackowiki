@@ -54,10 +54,11 @@ if ($pages != 0)
 {
 	foreach ($pages as $page)
 	{
-		echo '<h2><a href="'.$this->href('', $page['tag'], '').'">'.$page['title'].'</a></h2>'.$this->GetTimeStringFormatted($page['created']).' '.$this->GetTranslation("By").' '.( $page['owner'] == '' ? '<em>'.$this->GetTranslation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['owner']).'">'.$page['owner'].'</a>' ).'';
-		echo $this->Action('include', array('page' => '/'.$page['tag'], 'notoc' => 0, 'nomark' => 1), 1);
-		echo "<span class=\"newsinfo\">".$this->GetTranslation("Comments_all").": ".(int)$page["comments"]." | ".($this->HasAccess("write",$page["tag"]) ? $this->ComposeLinkToPage($page["tag"], "edit", $this->GetTranslation("EditText"), 0)." | " : "").
-			'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#comments">'.$this->GetTranslation("NewsDiscuss").'</a></span>';
+		echo '<h2 class="newstitle"><a href="'.$this->href('', $page['tag'], '').'">'.$page['title']."</a></h2>\n";
+		echo "<div class=\"newsinfo\">".$this->GetTimeStringFormatted($page['created']).' '.$this->GetTranslation("By").' '.( $page['owner'] == '' ? '<em>'.$this->GetTranslation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['owner']).'">'.$page['owner'].'</a>' )."</div>\n";
+		echo $this->Action('include', array('page' => '/'.$page['tag'], 'notoc' => 0, 'nomark' => 1), 1)."\n";
+		echo "<p class=\"newsmeta\">".($this->HasAccess("write",$page["tag"]) ? $this->ComposeLinkToPage($page["tag"], "edit", $this->GetTranslation("EditText"), 0)." | " : "")."  ".
+			'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#comments" title="'.$this->GetTranslation("NewsDiscuss").' '.$page['title'].'">'.(int)$page["comments"]." ".$this->GetTranslation("Comments_all")." &raquo "."</a></p>\n";
 	}
 }
 else
