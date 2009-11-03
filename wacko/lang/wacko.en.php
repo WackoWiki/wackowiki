@@ -11,10 +11,13 @@ $wackoTranslation = array(
 	// registration panel
 	"RegistrationWelcome" => "New user registration:",
 	"RegistrationName" => "Give yourself a ((WackoWiki:Doc/English/WikiName NameSurname))",
-	"RegistrationPassword" => "Password (5+ chars)",
+	"RegistrationPassword" => "Password",
 	"RegistrationButton" => "Register me!",
 	"RegistrationNameOwned" => "This username is already registered. Please choose another.",
 	"RegistrationPage" => "Registration",
+	"SiteRegistered" => "You have successfully registered on the site ",
+	"SiteEmailConfirm" => "<br />Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!",
+
 	// login panel
 	"LoginWelcome" => "Login",
 	"LoginWelcome2" => "((/Registration Create new account))",
@@ -497,6 +500,19 @@ $wackoTranslation = array(
 	"NewsNoName"	=> "You forgot to add news headline.",
 	"NewsNotAvailable"	=> "No News available.",
 	"NewsDiscuss"	=> "Discuss this article...",
+
+	// password complexity
+	"PwdCplxShort"		=> "Password is too short.",
+	"PwdCplxEquals"		=> "Password contains the user name.",
+	"PwdCplxWeak"		=> "Password does not meet complexity requirements.",
+	"PwdCplxDesc1"		=> "Requirements for the password: ",
+	"PwdCplxDesc2"		=> "password should not be less than %1 characters",
+	"PwdCplxDesc3"		=> "should not contain your username",
+	"PwdCplxDesc4"		=> "should consist of ",
+	"PwdCplxDesc41"		=> "letters and numbers",
+	"PwdCplxDesc42"		=> "uppercase and lowercase letters and numbers",
+	"PwdCplxDesc43"		=> "uppercase and lowercase letters, digits and non-alphabetic characters",
+	"PwdCplxDesc5"		=> "You can use any letters, numbers and special characters, but gaps.",
 
 	// log
 	"LogLevel1"					=> "critical",

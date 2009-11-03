@@ -267,9 +267,9 @@ class Init
 
 					"spam_filter" => 1,
 
-					"pwd_unlike_login" => "1",
-					"pwd_char_classes" => "0",
-					"pwd_min_chars" => "5",
+					"pwd_unlike_login" => 1,
+					"pwd_char_classes" => 0,
+					"pwd_min_chars" => 8,
 
 					"captcha_new_comment" => 1,
 					"captcha_new_page" => 1,
