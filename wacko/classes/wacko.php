@@ -2139,7 +2139,7 @@ class Wacko
 
 				return $res;
 			}
-			die ("ERROR: no link template '$tpl' found!");
+			die ("ERROR: no link template '$tpl' found.");
 		}
 
 		if (!$text) $text = htmlspecialchars($tag, ENT_NOQUOTES);
@@ -3804,11 +3804,6 @@ class Wacko
 			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 
 		return true;
-
-		#return $this->Query(
-		#	"DELETE a.* FROM ".$this->config["table_prefix"]."pages a ".
-		#		"INNER JOIN ".$this->config["table_prefix"]."pages b ON (a.comment_on_id = b.id) ".
-		#	"WHERE b.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
 	function RemoveWatches($tag, $cluster = false)
