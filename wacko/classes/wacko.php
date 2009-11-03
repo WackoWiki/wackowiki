@@ -2896,15 +2896,6 @@ class Wacko
 									"WHERE page_tag = '".quote($this->dblink, $tag)."' ".
 										"AND privilege = '".quote($this->dblink, $privilege)."' ".
 									"LIMIT 1");
-					/* if ($acl)
-					 {
-					 $this->Query(
-						"UPDATE ".$this->config["table_prefix"]."acls ".
-					 	"SET supertag='".$supertag."' ".
-						"WHERE page_tag = '".$tag."';" );
-						$acl["supertag"]=$supertag;
-					 }
-					 */
 				}
 
 				// if still no acl, use config defaults
