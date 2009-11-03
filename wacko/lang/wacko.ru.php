@@ -11,10 +11,13 @@ $wackoTranslation = array(
 	// registration panel
 	"RegistrationWelcome" => "Регистрация нового пользователя:",
 	"RegistrationName" => "Придумайте себе ((WackoWiki:Doc/Russian/ЧтоТакоеИмяФамилия ИмяФамилию))",
-	"RegistrationPassword" => "Пароль (не короче 5 символов)",
+	"RegistrationPassword" => "Пароль",
 	"RegistrationButton" => "Поехали!",
 	"RegistrationNameOwned" => "Данное имя уже зарегистрировано. Выберите другое.",
 	"RegistrationPage" => "Регистрация",
+	"SiteRegistered" => "Вы успешно зарегистрировались на сайте ",
+	"SiteEmailConfirm" => "<br />Пожалуйста, подтвердите свой почтовый адрес согласно высланных Вам инструкций. <br />Обратите внимание, что, не подтвердив адрес, Вы не сможете восстановить забытый пароль!",
+
 	// login panel
 	"LoginWelcome" => "Вход",
 	"LoginWelcome2" => "((/Регистрация Регистрация))",
@@ -496,6 +499,19 @@ $wackoTranslation = array(
 	"NewsNoName"	=> "Вы забыли указать заголовок добавляемой новости.",
 	"NewsNotAvailable"	=> "No News available.",
 	"NewsDiscuss"	=> "Обсудить новость...",
+
+	// password complexity
+	"PwdCplxShort"		=> "Пароль слишком короткий.",
+	"PwdCplxEquals"		=> "Пароль содержит в себе имя пользователя.",
+	"PwdCplxWeak"		=> "Пароль не отвечает требованиям сложности.",
+	"PwdCplxDesc1"		=> "Требования к паролю: ",
+	"PwdCplxDesc2"		=> "пароль не должен быть короче %1 символов",
+	"PwdCplxDesc3"		=> "не должен содержать в себе имя пользователя",
+	"PwdCplxDesc4"		=> "должен состоять из ",
+	"PwdCplxDesc41"		=> "букв и цифр",
+	"PwdCplxDesc42"		=> "заглавных и строчных букв и цифр",
+	"PwdCplxDesc43"		=> "заглавных и строчных букв, цифр и небуквенных символов",
+	"PwdCplxDesc5"		=> "Можно использовать любые буквы, цифры и специальные символы, кроме пробелов.",
 
 	// log
 	'LogLevel1'					=> 'Критический',
