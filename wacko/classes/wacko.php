@@ -2511,6 +2511,86 @@ class Wacko
 	}
 
 	// USERS
+	// check whether defined username is already registered.
+	// we add appropriate (but not thorough) transliterations
+	// to not allow too similiar names.
+	function UsernameExists($name)
+	{
+		if ($name == "") return false;
+
+		// checking identical name only?
+		if (!$this->config["antidupe"])
+		{
+			if ($this->LoadSingle(
+			"SELECT * FROM {$this->config['user_table']} ".
+			"WHERE name = '".quote($this->dblink, $name)."'"))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		// substitutions table
+		$table = array(
+			"cyr" => "ÀÂÑÄÅÍÊÌÎÐÒÕÓàñåêìïîðãèòõó0áI1",
+			"lat" => "ABCDEHKMOPTXYacekmnoprutxyÎ6ll"
+		);
+
+		// splitting input name into array
+		$name = preg_split("//", $name, -1, PREG_SPLIT_NO_EMPTY);
+
+		// let's define characters positions and corresponding substitutions.
+		// so we're constructing $p array with username chars needing
+		// substitution positions as keys, and corresponding table positions
+		// as array values
+		$p = array();
+		foreach ($name as $pos => &$char)
+		{
+			if (isset($p[$pos]) === false)
+			{
+				if		(false !== $sub = strpos($table["lat"], $char))	$p[$pos] = $sub;
+				else if	(false !== $sub = strpos($table["cyr"], $char))	$p[$pos] = $sub;
+			}
+		}
+
+		// exploding substitutions table into array
+		foreach ($table as $key => &$val)
+		{
+			$table[$key] = preg_split("//", $table[$key], -1, PREG_SPLIT_NO_EMPTY);
+		}
+
+		// running through all chars positions needing replacement
+		foreach ($p as $pos => $sub)
+		{
+			// what substitution character we have to use?
+			if ($name[$pos] != $table["cyr"][$sub])
+			{
+				// constructing cyrillic regexp addition
+				$name[$pos] = "[".$name[$pos].$table["cyr"][$sub]."]";
+			}
+			else if ($name[$pos] != $table["lat"][$sub])
+			{
+				// constructing latin regexp addition
+				$name[$pos] = "[".$name[$pos].$table["lat"][$sub]."]";
+			}
+		}
+
+		// checking database
+		if ($this->LoadSingle(
+		"SELECT * FROM {$this->config['user_table']} ".
+		"WHERE name REGEXP '".quote($this->dblink, implode('', $name))."'", 1))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	function LoadUser($name, $password = 0)
 	{
 		$user = $this->LoadSingle(
