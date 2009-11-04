@@ -343,9 +343,9 @@ $wackoTranslation = array(
 	//Settings
 	"SettingsFor" => "Parâmetros de  %1",
 	"MetaInfo" => "META Keywords e descrições que são automaticamente inseridos nos headers do HTML.",
-	"MetaTitle" => "Meta Title",
-	"MetaKeywords" => "Meta Keywords",
-	"MetaDescription" => "Meta Description",
+	"MetaTitle" => "Title",
+	"MetaKeywords" => "Keywords",
+	"MetaDescription" => "Description",
 	"SettingsID" => "Page ID",
 	"SettingsSize" => "Size (source / compiled)",
 	"SettingsCreated" => "Created",

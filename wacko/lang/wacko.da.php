@@ -343,8 +343,8 @@ $wackoTranslation = array(
 	//Settings
 	"SettingsFor" => "Indstillinger for %1",
 	"MetaInfo" => "META Keywords/Description metadata.",
-	"MetaTitle" => "Meta Title",
-	"MetaKeywords" => "Meta Keywords",
+	"MetaTitle" => "Title",
+	"MetaKeywords" => "Keywords",
 	"MetaDescription" => "Meta Description (beskrivelse)",
 	"SettingsID" => "Page ID",
 	"SettingsSize" => "Size (source / compiled)",

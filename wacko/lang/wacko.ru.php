@@ -343,7 +343,7 @@ $wackoTranslation = array(
 	//Settings
 	"SettingsFor" => "Настройки %1",
 	"MetaInfo" => "Ключевые слова/Описание &ndash; поля, вставляемые в HTML-заголовок каждой страницы (META).",
-	"MetaTitle" => "Meta Title",
+	"MetaTitle" => "Title",
 	"MetaKeywords" => "Ключевые слова",
 	"MetaDescription" => "Описание",
 	"SettingsID" => "ID документа",

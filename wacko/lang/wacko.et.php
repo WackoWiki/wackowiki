@@ -343,7 +343,7 @@ $wackoTranslation = array(
 	//Settings
 	"SettingsFor" => " %1 seadistused.",
 	"MetaInfo" => "META võtmesõnad/kirjeldus, mis lisatakse HTML-i päisesse.",
-	"MetaTitle" => "Meta Title",
+	"MetaTitle" => "Title",
 	"MetaKeywords" => "META võtmesõnad",
 	"MetaDescription" => "META kirjeldus",
 	"SettingsID" => "Page ID",

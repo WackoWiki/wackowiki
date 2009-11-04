@@ -343,7 +343,7 @@ $wackoTranslation = array(
 	//Settings
 	"SettingsFor" => "Настройки на %1",
 	"MetaInfo" => "Ключови думи/Описание  (за HTML МЕТА таговете).",
-	"MetaTitle" => "Meta Title",
+	"MetaTitle" => "Title",
 	"MetaKeywords" => "Ключови думи",
 	"MetaDescription" => "Описание",
 	"SettingsID" => "Page ID",
