@@ -636,7 +636,7 @@ class Init
 			{
 				$overall_time = $this->GetMicroTime() - $this->timer;
 
-				echo "<div class=\"debug\">".
+				echo "<div id=\"debug\">".
 					 "<p class=\"debug\"><span>Program execution statistics</span></p>\n<ul>\n";
 
 				if (function_exists("memory_get_usage")) if ($execmem = memory_get_usage())
