@@ -103,6 +103,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
 	if ($this->UserIsOwner() && !$this->GetConfigValue("remove_onlyadmins") || $this->IsAdmin())
 	{
 		echo("<li><a href=\"".$this->href("remove")."\">".$this->GetTranslation("SettingsRemove")."</a></li>");
+		echo("<li><a href=\"".$this->href("purge")."\">".$this->GetTranslation("SettingsPurge")."</a></li>");
 	}
 	?>
 <?php
