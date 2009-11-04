@@ -355,6 +355,7 @@ $wackoTranslation = array(
 	"SettingsRename" => "Reоntitulare",
 	"SettingsMassRename" => "for entire cluster",
 	"SettingsRemove" => "Удаление",
+	"SettingsPurge" => "Purge",
 	"SettingsAcls" => "Acces",
 	"SettingsMassAcls" => "for entire cluster",
 	"SettingsUpload" => "Загрузка файлов",

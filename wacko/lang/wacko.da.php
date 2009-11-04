@@ -354,6 +354,7 @@ $wackoTranslation = array(
 	"SettingsRename" => "Omdøb",
 	"SettingsMassRename" => "for hele området",
 	"SettingsRemove" => "Slet",
+	"SettingsPurge" => "Purge",
 	"SettingsAcls" => "Tilladelser",
 	"SettingsMassAcls" => "for hele området",
 	"SettingsUpload" => "Upload",
