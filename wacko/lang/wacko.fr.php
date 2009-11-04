@@ -353,6 +353,7 @@ $wackoTranslation = array(
 	"SettingsRename" => "Renommer",
 	"SettingsMassRename" => "tout le groupe de pages",
 	"SettingsRemove" => "Supprimer",
+	"SettingsPurge" => "Purge",
 	"SettingsAcls" => "Droits",
 	"SettingsMassAcls" => "pour tout le groupe de pages",
 	"SettingsUpload" => "Déposer un fichier",

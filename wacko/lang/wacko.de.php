@@ -354,6 +354,7 @@ $wackoTranslation = array(
 	"SettingsRename" => "Umbenennen",
 	"SettingsMassRename" => "Ganzen Cluster umbenennen",
 	"SettingsRemove" => "Löschen",
+	"SettingsPurge" => "Bereinigen",
 	"SettingsAcls" => "Berechtigungen",
 	"SettingsMassAcls" => "Berechtigungen für ganzen Cluster ändern",
 	"SettingsUpload" => "Dateien hochladen",
