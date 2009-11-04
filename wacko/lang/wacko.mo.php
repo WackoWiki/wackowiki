@@ -344,7 +344,7 @@ $wackoTranslation = array(
 	//Settings
 	"SettingsFor"  => "Bloc de reglare %1",
 	"MetaInfo" => "Ключевые слова/Описание &ndash; поля, вставляемые в HTML-заголовок каждой Paginile (META).",
-	"MetaTitle" => "Meta Title",
+	"MetaTitle" => "Title",
 	"MetaKeywords" => "Ключевые слова",
 	"MetaDescription" => "Descriere",
 	"SettingsID" => "Page ID",
