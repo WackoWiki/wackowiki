@@ -317,7 +317,7 @@ $wackoTranslation = array(
 	"UserNotFound" => "<em>Sellist kasutajanimi või e-postii aadressi ei leitud.</em>",
 	"NotConfirmedMail" => "<em>Sinu e-posti aadress ei leidnud kinnitust..<br />Kirja ei saa saata kinnitust leidmata aadressile.</em>",
 	"EmailForgotSubject" => "Parooli uuendamine ",
-	"EmailForgotMessage" => "Keegi (võib-olla sa ise) on unustanud su parooli %1.<br />Kasutajanimi: %2<br />Vajuta lingil, või kopeeri see brauseri aadressi väljale - et muuta oma parool.<br /><a href=\"%3\">%3</a>",
+	"EmailForgotMessage" => "Keegi (võib-olla sa ise) on unustanud su parooli %1.\nKasutajanimi: %2\n\nVajuta lingil, või kopeeri see brauseri aadressi väljale - et muuta oma parool.\n%3\n\n",
 	"CodeWasSent" => "Parooli muutmise instruktsioonid saadeti sulle e-postile.",
 	"WrongCode" => "<em>Vale kood</em>",
 	"YouWantChangePasswordForUser" => "%1's parooli muutmine",

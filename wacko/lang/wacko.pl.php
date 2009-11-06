@@ -317,7 +317,7 @@ $wackoTranslation = array(
 	"UserNotFound" => "<em>U¿ytkownik z t± nazw± lub adresem e-mail nie zosta³ znaleziony.</em>",
 	"NotConfirmedMail" => "<em>Twój adres e-mail nie zosta³ potwierdzony.<br />Mail nie mo¿e byæ wysy³any na niepotwierdzony adres.</em>",
 	"EmailForgotSubject" => "Ponowienie has³a dla ",
-	"EmailForgotMessage" => "Kto¶ (prawdopodobnie Ty) zapomnia³ swojego has³a do %1<br />Twój login: %2<br />Kliknij na <a href=\"%3\">%3</a> albo skopiuj adres do przegl±darki, aby zmieniæ swoje has³o.",
+	"EmailForgotMessage" => "Kto¶ (prawdopodobnie Ty) zapomnia³ swojego has³a do %1\nTwój login: %2\n\nKliknij na \n%3\n albo skopiuj adres do przegl±darki, aby zmieniæ swoje has³o.\n\n",
 	"CodeWasSent" => "Instrukcje odzyskiwania has³a zosta³y wys³ane do ciebie przez e-mail",
 	"WrongCode" => "<em>Z³y kod</em>",
 	"YouWantChangePasswordForUser" => "Zmiana has³a %1",

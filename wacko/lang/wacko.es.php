@@ -317,7 +317,7 @@ $wackoTranslation = array(
 	"UserNotFound" => "<em>No se ha encontrado ningún usuario con este nombre o e-mail.</em>",
 	"NotConfirmedMail" => "<em>Tu e-mail no ha sido confirmado.<br />No se puede enviar e-mail a una direccion no confirmada.</em>",
 	"EmailForgotSubject" => "Contraseña renovada para ",
-	"EmailForgotMessage" => "Alguien (quizás tu) ha olvidado la contraseña para %1.<br />Tu login: %2<br />Pulsa el link o copia el enlace en un navegador para cambiar tu contraseña.<br /><a href=\"%3\">%3</a>",
+	"EmailForgotMessage" => "Alguien (quizás tu) ha olvidado la contraseña para %1.\nTu login: %2\n\nPulsa el link o copia el enlace en un navegador para cambiar tu contraseña.\n%3\n\n",
 	"CodeWasSent" => "Instrucciones para la recuperación de la contraseña han sido enviadas por e-mail.",
 	"WrongCode" => "<em>Codigo incorrecto</em>",
 	"YouWantChangePasswordForUser" => "Cambio de contraseña de %1",
