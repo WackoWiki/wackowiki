@@ -300,7 +300,7 @@ $wackoTranslation = array(
 	"SendWatchMail" => "Stuur een e-mail wanneer iemand (behalve uzelf) een pagina die u in de gaten houdt verandert.",
 	"PageMoved" => "Deze pagina is verplaatst. U kunt 'm vinden op",
 	"CurrentPassword" => "Huidig wachtwoord",
-	"NewPassword" => "Nieuw wachtwoord<br />(>=5 tekens)",
+	"NewPassword" => "Nieuw wachtwoord",
 	"YouWantChangePassword" => "Wachtwoord wijzigen",
 	"PasswordChanged" => "Wachtwoord gewijzigd",
 	"EmailWelcome" => "U hebt geregistreerd bij ",
