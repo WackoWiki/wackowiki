@@ -52,7 +52,7 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
 // if (!this.area.id) this.area.id = "area_"+String(Math.floor(Math.random()*10000));
 
  this.imagesPath = (imgPath?imgPath:"images/");
- this.editorName = name;
+ //this.editorName = name;
  this.editorNameClass = nameClass;
 
  this.actionName = "document.getElementById('" + this.id + "')._owner.insTag";

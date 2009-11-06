@@ -305,7 +305,7 @@ $wackoTranslation = array(
 	"PasswordChanged" => "Has³o zosta³o zmienione",
 	"EmailWelcome" => "Dziêkujemy. Rejestracja przebieg³a pomy¶lnie ",
 	"EmailRegistered" => "Dziêkujemy! Twoja rejestracja zosta³a zakoñczona pomy¶lnie\nNazwa u¿ytkownika: %2\n\nAby w³±czyæ mo¿liwo¶æ otrzymywania powiadomieñ z tej strony nale¿y potwierdziæ swój adres e-mail. W tym celu nale¿y po³±czyæ siê z \n%3\nt± stron±.\n\n",
-	"EmailVerify" => "Kto¶ (prawdopodobnie Ty) zamierza otrzymywaæ powiadomienia do %1 na ten adres e-mail.<br /> Twoja nazwa u¿ytkownika:  %2<br />Je¿eli chcesz otrzymywaæ od nas powiadomienia niezbêdne jest potwierdzenie. W tym celu nale¿y po³±czyæ siê z <a href=%3>t± stron±</a>.",
+	"EmailVerify" => "Kto¶ (prawdopodobnie Ty) zamierza otrzymywaæ powiadomienia do %1 na ten adres e-mail.\n Twoja nazwa u¿ytkownika:  %2\n\nJe¿eli chcesz otrzymywaæ od nas powiadomienia niezbêdne jest potwierdzenie. W tym celu nale¿y po³±czyæ siê z \n%3\nt± stron±.",
 	"EmailConfirm" => "Weryfikacja adresu e-mail",
 	"EmailConfirmed" => "Adres e-mail zosta³ potwierdzony.",
 	"EmailNotConfirmed" => "Adres e-mail nie móg³ zostaæ potwierdzony. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.",

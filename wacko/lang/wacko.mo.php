@@ -306,7 +306,7 @@ $wackoTranslation = array(
 	"PasswordChanged" => "Пароль успешно изменён",
 	"EmailWelcome" => "Регистрация в ",
 	"EmailRegistered" => "Вы успешно зарегистрировались в %1.\nВаш логин: %2\n\nЧтобы получать уведомления, Вам необходимо подтвердить ваш электронный адрес. Чтобы сделать это, Apasati \n%3\nна ссылку.\n\n",
-	"EmailVerify" => "Кто-то, возможно, Вы, указал Ваш электронный адрес в %1.<br />Ваш логин: %2<br />Чтобы получать уведомления, Вам необходимо подтвердить ваш электронный адрес. Чтобы сделать это, Apasati <a href=%3>на ссылку</a>.",
+	"EmailVerify" => "Кто-то, возможно, Вы, указал Ваш электронный адрес в %1.\nВаш логин: %2\n\nЧтобы получать уведомления, Вам необходимо подтвердить ваш электронный адрес. Чтобы сделать это, Apasati \n%3\nна ссылку.\n\n",
 	"EmailConfirm" => "Запрос на подтверждение email",
 	"EmailConfirmed" => "Ваш email успешно подтверждён.",
 	"EmailNotConfirmed" => "К сожалению, ваш email не может быть подтверждён. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.",
