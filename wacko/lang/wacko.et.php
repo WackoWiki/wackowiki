@@ -304,7 +304,7 @@ $wackoTranslation = array(
 	"YouWantChangePassword" => "Muuda parool",
 	"PasswordChanged" => "Parool muudetud",
 	"EmailWelcome" => "Sa oled registreerunud ",
-	"EmailRegistered" => "sa oled edukalt registreerunud %1.<br />Sinu kasutajanimi on: %2<br />Kui sa tahad märguandeid, siis sa pead näitama oma e-posti aadressi. Järgi <a href=%3>seda linki</a>, et seda teha.",
+	"EmailRegistered" => "sa oled edukalt registreerunud %1.\nSinu kasutajanimi on: %2\n\nKui sa tahad märguandeid, siis sa pead näitama oma e-posti aadressi. Järgi \n%3\nseda linki, et seda teha.\n\n",
 	"EmailVerify" => "Keegi (võib-olla sa ise) on edastanud su e-posti aadressi, et saada sellele teateid %1.<br />Sinu kasutajanimi: %2<br />Kui sa tahad saada teateid, pead sa lubama selleks oma e-posti aadressi. Vaata <a href=%3>seda</a>, et seda teha.",
 	"EmailConfirm" => "Palun kontrolli oma e-posti aadressi",
 	"EmailConfirmed" => "E-posti aadressi õigsus on kinnitust leidnud.",

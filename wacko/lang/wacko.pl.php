@@ -304,7 +304,7 @@ $wackoTranslation = array(
 	"YouWantChangePassword" => "Zmiana has³a",
 	"PasswordChanged" => "Has³o zosta³o zmienione",
 	"EmailWelcome" => "Dziêkujemy. Rejestracja przebieg³a pomy¶lnie ",
-	"EmailRegistered" => "Dziêkujemy! Twoja rejestracja zosta³a zakoñczona pomy¶lnie<br />Nazwa u¿ytkownika: %2<br />Aby w³±czyæ mo¿liwo¶æ otrzymywania powiadomieñ z tej strony nale¿y potwierdziæ swój adres e-mail. W tym celu nale¿y po³±czyæ siê z <a href=%3>t± stron±</a>.",
+	"EmailRegistered" => "Dziêkujemy! Twoja rejestracja zosta³a zakoñczona pomy¶lnie\nNazwa u¿ytkownika: %2\n\nAby w³±czyæ mo¿liwo¶æ otrzymywania powiadomieñ z tej strony nale¿y potwierdziæ swój adres e-mail. W tym celu nale¿y po³±czyæ siê z \n%3\nt± stron±.\n\n",
 	"EmailVerify" => "Kto¶ (prawdopodobnie Ty) zamierza otrzymywaæ powiadomienia do %1 na ten adres e-mail.<br /> Twoja nazwa u¿ytkownika:  %2<br />Je¿eli chcesz otrzymywaæ od nas powiadomienia niezbêdne jest potwierdzenie. W tym celu nale¿y po³±czyæ siê z <a href=%3>t± stron±</a>.",
 	"EmailConfirm" => "Weryfikacja adresu e-mail",
 	"EmailConfirmed" => "Adres e-mail zosta³ potwierdzony.",

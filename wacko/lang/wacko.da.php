@@ -304,7 +304,7 @@ $wackoTranslation = array(
 	"YouWantChangePassword" => "Skift password",
 	"PasswordChanged" => "Password ændret",
 	"EmailWelcome" => "Du blev registreret den ",
-	"EmailRegistered" => "Du er nu registreret i %1.<br />Dit brugernavn: %2<br />Hvis du vil modtage notifikationer, skal du godkende din mail. Følg <a href=%3>dette link</a> for at godkende din mail.",
+	"EmailRegistered" => "Du er nu registreret i %1.\nDit brugernavn: %2\n\nHvis du vil modtage notifikationer, skal du godkende din mail. Følg \n%3\ndette link for at godkende din mail.\n\n",
 	"EmailVerify" => "Du er nu registreret i %1.<br />Dit brugernavn: %2<br />Hvis du vil modtage notifikationer, skal du godkende din mail. Følg <a href=%3>dette link</a> for at godkende din mail.",
 	"EmailConfirm" => "Bekræft din mail",
 	"EmailConfirmed" => "Din mail er bekræftet.",
