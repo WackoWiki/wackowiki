@@ -187,7 +187,7 @@ else if ($_POST["action"] == "login")
 					$this->config["wacko_name"].". ".
 					$this->GetTranslation("SiteEmailConfirm"));
 				$this->context[++$this->current_context] = "";
-				$this->Redirect($this->Href("", $name, "", 1));
+				$this->Redirect($this->Href("", $this->GetTranslation("LoginPage")));
 			}
 		}
 	}
@@ -228,14 +228,12 @@ for ($i = 0; $i < count($langs); $i++)
 		}
 		?>
 <p><label for="name"><?php echo $this->FormatTranslation("RegistrationName");?>:</label>
-<input id="name" name="name" size="27"
-	value="<?php echo htmlspecialchars($name); ?>" /></p>
+<input id="name" name="name" size="27" value="<?php echo htmlspecialchars($name); ?>" /></p>
 
 
 
 <p><label for="password"><?php echo $this->GetTranslation("RegistrationPassword");?>:</label>
-<input type="password" id="password" name="password" size="24"
-	value="<?php echo $password ?>" />
+<input type="password" id="password" name="password" size="24" value="<?php echo $password ?>" />
 <?php
 if ($this->config["pwd_char_classes"] > 0)
 {
