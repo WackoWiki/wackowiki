@@ -1,10 +1,16 @@
 <!--notypo-->
 <?php
 
-if ($_POST["secret_code"])
+// reconnect securely in ssl mode
+if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
+{
+	$this->Redirect(str_replace("http://", "https://", $this->href()));
+}
+
+if ($_GET["secret_code"])
 {
 	// Password forgotten. Provided secret code
-	$code = $_POST["secret_code"];
+	$code = $_GET["secret_code"];
 	$user = $this->LoadSingle(
 		"SELECT * ".
 		"FROM ".$this->config["user_table"]." ".
@@ -20,30 +26,56 @@ if ($_POST["secret_code"])
 			$confpassword = $_POST["confpassword"];
 
 			// check all conditions
+			$complexity		= $this->PasswordComplexity($user, $newpassword);
+			// confirmed password mismatch
 			if ($confpassword != $newpassword)
+			{
 				$error = $this->GetTranslation("PasswordsDidntMatch");
+			}
+			// spaces in password
 			else if (preg_match("/ /", $newpassword))
+			{
 				$error = $this->GetTranslation("SpacesArentAllowed");
-			else if (strlen($newpassword) < 5)
-				$error = $this->GetTranslation("PasswordTooShort");
+			}
+			// password complexity validation
+			else if ($complexity > 0)
+			{
+				if ($complexity >= 5)
+				{
+					$error .= $this->GetTranslation("PwdCplxWeak")." ";
+					$complexity -= 5;
+				}
+				if ($complexity >= 2)
+				{
+					$error .= $this->GetTranslation("PwdCplxShort")." ";
+					$complexity -= 2;
+				}
+				if ($complexity >= 1)
+				{
+					$error .= $this->GetTranslation("PwdCplxEquals")." ";
+					$complexity -= 1;
+				}
+			}
 			else
 			{
 				$this->Query(
 					"UPDATE ".$this->config["user_table"]." ".
 					"SET password = '".quote($this->dblink, md5($newpassword))."' ".
+						"changepassword	= '' ".
 					"WHERE name = '".quote($this->dblink, $user["name"])."' ".
 					"LIMIT 1");
 
-				$this->SetUser($user = $this->LoadUser($user["name"]));
-				$this->LogUserIn($user);
+				#$this->SetUser($user = $this->LoadUser($user["name"]));
+				#$this->LogUserIn($user);
 
 				// log event
 				$this->Log(3, str_replace("%1", $user["name"], $this->GetTranslation("LogUserPasswordRecovered")));
 
 				// forward
 				$this->SetMessage($this->GetTranslation("PasswordChanged"));
-				$this->Redirect($this->href());
+				$this->Redirect($this->href("", $this->GetTranslation("LoginPage")));
 			}
+
 			if ($error) $this->SetMessage($error);
 		}
 		else
@@ -62,6 +94,29 @@ if ($_POST["secret_code"])
 				<p>
 					<label for="confpassword"><?php echo $this->GetTranslation("ConfirmPassword");?>:</label>
 					<input type="password" id="confpassword" name="confpassword" size="24" />
+					<?php
+							if ($this->config["pwd_char_classes"] > 0)
+							{
+								$PwdCplxText = $this->GetTranslation("PwdCplxDesc4");
+								if 		($this->config["pwd_char_classes"] == 1)
+									$PwdCplxText .= $this->GetTranslation("PwdCplxDesc41");
+								else if ($this->config["pwd_char_classes"] == 2)
+									$PwdCplxText .= $this->GetTranslation("PwdCplxDesc42");
+								else if ($this->config["pwd_char_classes"] == 3)
+									$PwdCplxText .= $this->GetTranslation("PwdCplxDesc43");
+								$PwdCplxText .= ". ".$this->GetTranslation("PwdCplxDesc5");
+							}
+							echo "<br /><small>".
+								 $this->GetTranslation("PwdCplxDesc1").
+								 str_replace("%1", $this->config["pwd_min_chars"],
+									$this->GetTranslation("PwdCplxDesc2")).
+								 ($this->config["pwd_unlike_login"] > 0
+									? ", ".$this->GetTranslation("PwdCplxDesc3")
+									: "").
+								 ($this->config["pwd_char_classes"] > 0
+									? ", ".$PwdCplxText
+									: "")."</small>";
+					?>
 				</p>
 				<p>
 				<input type="submit" value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" />
@@ -76,6 +131,7 @@ if ($_POST["secret_code"])
 		echo $this->SetMessage($this->GetTranslation("WrongCode"));
 	}
 }
+// is user trying to update?
 else if (!$forgot && $user = $this->GetUser())
 {
 	// is user trying to update?
@@ -87,6 +143,7 @@ else if (!$forgot && $user = $this->GetUser())
 		$confpassword = $_POST["confpassword"];
 
 		// check all conditions
+		$complexity		= $this->PasswordComplexity($user["name"], $newpassword);
 
 		// wrong current password
 		if (md5($password)!=$user["password"])
@@ -106,9 +163,23 @@ else if (!$forgot && $user = $this->GetUser())
 			$error = $this->GetTranslation("SpacesArentAllowed");
 		}
 		// password complexity validation
-		else if (strlen($newpassword) < 5)
+		else if ($complexity > 0)
 		{
-			$error = $this->GetTranslation("PasswordTooShort");
+			if ($complexity >= 5)
+			{
+				$error .= $this->GetTranslation("PwdCplxWeak")." ";
+				$complexity -= 5;
+			}
+			if ($complexity >= 2)
+			{
+				$error .= $this->GetTranslation("PwdCplxShort")." ";
+				$complexity -= 2;
+			}
+			if ($complexity >= 1)
+			{
+				$error .= $this->GetTranslation("PwdCplxEquals")." ";
+				$complexity -= 1;
+			}
 		}
 		else
 		{
@@ -119,30 +190,33 @@ else if (!$forgot && $user = $this->GetUser())
 				"WHERE name = '".quote($this->dblink, $user["name"])."' ".
 				"LIMIT 1");
 
-			$this->SetUser($user = $this->LoadUser($user["name"]));
-			$this->LogUserIn($user);
+			// reinitialize user session
+			$this->LogoutUser();
+			$this->SetBookmarks(BM_DEFAULT);
+			$this->context[++$this->current_context] = "";
+			#$this->SetUser($user = $this->LoadUser($user["name"]));
+			#$this->LogUserIn($user);
 
 			// log event
 			$this->Log(3, str_replace("%1", $user["name"], $this->GetTranslation("LogUserPasswordChanged")));
 
 			// forward
 			$this->SetMessage($this->GetTranslation("PasswordChanged"));
-
-			$this->Redirect($this->href());
+			$this->Redirect($this->href("", $this->GetTranslation("LoginPage")));
 		}
 	}
+
 	//Print simple change password form
 	print($this->FormOpen());
-	?>
-	<input type="hidden" name="action" value="change" />
-	<div class="cssform">
-		<h3><?php echo $this->FormatTranslation("YouWantChangePassword"); ?></h3>
-		<?php
+
 	if ($error)
 	{
 		$this->SetMessage($this->Format($error));
 	}
 	?>
+	<input type="hidden" name="action" value="change" />
+	<div class="cssform">
+		<h3><?php echo $this->FormatTranslation("YouWantChangePassword"); ?></h3>
 		<p>
 			<label for="password"><?php echo $this->GetTranslation("CurrentPassword");?>:</label>
 			<input type="password" id="password" name="password" size="24" />
@@ -150,6 +224,29 @@ else if (!$forgot && $user = $this->GetUser())
 		<p>
 			<label for="newpassword"><?php echo $this->GetTranslation("NewPassword");?>:</label>
 			<input type="password" id="newpassword" name="newpassword" size="24" />
+			<?php
+			if ($this->config["pwd_char_classes"] > 0)
+			{
+				$PwdCplxText = $this->GetTranslation("PwdCplxDesc4");
+				if 		($this->config["pwd_char_classes"] == 1)
+					$PwdCplxText .= $this->GetTranslation("PwdCplxDesc41");
+				else if ($this->config["pwd_char_classes"] == 2)
+					$PwdCplxText .= $this->GetTranslation("PwdCplxDesc42");
+				else if ($this->config["pwd_char_classes"] == 3)
+					$PwdCplxText .= $this->GetTranslation("PwdCplxDesc43");
+				$PwdCplxText .= ". ".$this->GetTranslation("PwdCplxDesc5");
+			}
+			echo "<br /><small>".
+				 $this->GetTranslation("PwdCplxDesc1").
+				 str_replace("%1", $this->config["pwd_min_chars"],
+					$this->GetTranslation("PwdCplxDesc2")).
+				 ($this->config["pwd_unlike_login"] > 0
+					? ", ".$this->GetTranslation("PwdCplxDesc3")
+					: "").
+				 ($this->config["pwd_char_classes"] > 0
+					? ", ".$PwdCplxText
+					: "")."</small>";
+			?>
 		</p>
 		<p>
 			<label for="confpassword"><?php echo $this->GetTranslation("ConfirmPassword");?>:</label>
@@ -178,7 +275,19 @@ else
 		{
 			if ($user["email_confirm"] == "")
 			{
-				$code = md5(date("D d M Y H:i:s").$user["email"].rand());
+				$code = md5($user["password"].date("D d M Y H:i:s").$user["email"].mt_rand());
+
+				$subject =	$this->GetTranslation("EmailForgotSubject").
+							$this->GetConfigValue("wacko_name");
+				$message =	$this->GetTranslation("MailHello"). $name.".\n\n".
+							str_replace('%1', $this->GetConfigValue("wacko_name"),
+							str_replace('%2', $user["name"],
+							str_replace('%3', $this->Href().
+							($this->config["rewrite_mode"] ? "?" : "&amp;")."secret_code=".$code,
+							$this->GetTranslation("EmailForgotMessage"))))."\n";
+				$message.=	"\n".$this->GetTranslation("MailGoodbye").
+							"\n".$this->GetConfigValue("wacko_name").
+							"\n".$this->config["base_url"];
 
 				// update table
 				$this->Query(
@@ -187,17 +296,6 @@ else
 					"WHERE name = '".quote($this->dblink, $user["name"])."' ".
 					"LIMIT 1");
 
-				$subject =	$this->GetTranslation("EmailForgotSubject").
-							$this->GetConfigValue("wacko_name");
-				$message =	$this->GetTranslation("MailHello"). $name.".\n\n".
-							str_replace('%1', $this->GetConfigValue("wacko_name"),
-							str_replace('%2', $user["name"],
-							str_replace('%3', $this->Href().($this->config["rewrite_mode"] ? "?" : "&amp;")."secret_code=".$code,
-							$this->GetTranslation("EmailForgotMessage"))))."\n";
-				$message.=	"\n".$this->GetTranslation("MailGoodbye").
-							"\n".$this->GetConfigValue("wacko_name").
-							"\n".$this->config["base_url"];
-
 				// send code
 				$this->SendMail($user["email"], $subject, $message);
 
@@ -205,7 +303,7 @@ else
 				$this->Log(3, str_replace("%2", $user["email"], str_replace("%1", $user["name"], $this->GetTranslation("LogUserPasswordReminded"))));
 
 				$this->SetMessage($this->GetTranslation("CodeWasSent"));
-				$this->Redirect($this->href());
+				$this->Redirect($this->href("", $this->GetTranslation("LoginPage")));
 
 			}
 			else
@@ -221,18 +319,17 @@ else
 	// View password forgot form
 	if ($error || $_POST["action"] != "send")
 	{
-		//View password forgot form
-		print($this->FormOpen());
-		?>
-		<input type="hidden" name="action" value="send" />
-		<div class="cssform">
-		<h3><?php echo $this->FormatTranslation("ForgotMain"); ?></h3>
-		<?php
 		if ($error)
 		{
 			$this->SetMessage($error);
 		}
-		?>
+
+		//View password forgot form
+		print($this->FormOpen());
+?>
+		<input type="hidden" name="action" value="send" />
+		<div class="cssform">
+		<h3><?php echo $this->FormatTranslation("ForgotMain"); ?></h3>
 		<p><?php echo $this->FormatTranslation("ForgotComment"); ?></p>
 		<p>
 			<label for="loginormail"><?php echo $this->FormatTranslation("ForgotField"); ?>:</label>
