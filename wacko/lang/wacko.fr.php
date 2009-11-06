@@ -303,7 +303,7 @@ $wackoTranslation = array(
 	"YouWantChangePassword" => "Changement de mot de passe",
 	"PasswordChanged" => "Le mot de passe a été changé",
 	"EmailWelcome" => "Bienvenue sur ",
-	"EmailRegistered" => "Votre enregistrement est confirmé sur %1.<br />Votre nom d&rsquo;utilisateur ou NomWiki est&nbsp;: %2<br />Nous vous conseillons de confirmer votre adresse de messagerie ; ceci vous permettra :<br /> - de recevoir des courriels pour vous informer de changements ou commentaires sur certaines pages,<br /> - et d&rsquo;obtenir un nouveau mot de passe en cas de perte.<br /><br/>Pour confirmer votre adresse de messagerie suivez <a href=%3>ce lien</a>, ou copiez-le dans la barre d&rsquo;adresses de votre navigateur.",
+	"EmailRegistered" => "Votre enregistrement est confirmé sur %1.\nVotre nom d&rsquo;utilisateur ou NomWiki est&nbsp;: %2\n\nNous vous conseillons de confirmer votre adresse de messagerie ; ceci vous permettra :\n - de recevoir des courriels pour vous informer de changements ou commentaires sur certaines pages,\n - et d&rsquo;obtenir un nouveau mot de passe en cas de perte.\n\nPour confirmer votre adresse de messagerie suivez \n%3\nce lien, ou copiez-le dans la barre d&rsquo;adresses de votre navigateur.\n\n",
 	"EmailVerify" => "Quelqu&rsquo;un (peut-être vous) a donné votre adresse de messagerie pour recevoir des notifications des modifications ou commentaires sur %1.<br />Votre nom d&rsquo;utilisateur (NomWiki)&nbsp;: %2<br />Si vous voulez recevoir des notifications, vous devez confirmer votre adresse de messagerie. Pour celà suivez <a href=%3>ce lien</a> .",
 	"EmailConfirm" => "Merci de vérifier votre adresse de messagerie",
 	"EmailConfirmed" => "Adresse de messagerie confirmée.",

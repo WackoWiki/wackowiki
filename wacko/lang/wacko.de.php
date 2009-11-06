@@ -304,7 +304,7 @@ $wackoTranslation = array(
 	"YouWantChangePassword" => "Passwort ändern",
 	"PasswordChanged" => "Passwort geändert",
 	"EmailWelcome" => "Du bist registriert bei ",
-	"EmailRegistered" => "Du hast dich bei %1 registriert.<br />Dein Benutzername lautet: %2<br />Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem <a href=%3>Link</a>.",
+	"EmailRegistered" => "Du hast dich bei %1 registriert.\nDein Benutzername lautet: %2\n\nUm Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem \n%3\nLink.\n\n",
 	"EmailVerify" => "Jemand (vielleicht du) hat deine E-Mailadresse als Bestätigungsadresse bei %1 angegeben.<br />Dein Benutzername lautet: %2<br />Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem <a href=%3>Link</a>.",
 	"EmailConfirm" => "Bitte bestätige deine E-Mail.",
 	"EmailConfirmed" => "E-Mail wurde erfolgreich bestätigt.",
