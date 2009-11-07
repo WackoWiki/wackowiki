@@ -799,6 +799,7 @@ class Wacko
 		}
 
 		$user = $this->GetUser();
+		if (!isset($cl))$cl = 0;
 		$pages[$cl] = $user["name"];
 		$bookm = $this->GetDefaultBookmarks($user["lang"], "site")."\n".
 					($user["bookmarks"]
@@ -808,6 +809,7 @@ class Wacko
 
 		for ($i = 0; $i <= count($bookmarks); $i++)
 		{
+			if (!isset($cl))$cl = 0;
 			if (preg_match("/^[\(\[]/", $bookmarks[$i]))
 				$pages[$cl+$i] = preg_replace("/^(.*?)\s.*$/","\\1",preg_replace("/[\[\]\(\)]/","",$bookmarks[$i]));
 		}
