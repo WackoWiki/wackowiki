@@ -261,7 +261,8 @@ if ($this->page)
 				?>
 			<a name="comments"></a>
 		<div id="commentsheader">
-		<?php echo '<div style="float:right; letter-spacing:normal;"><small><small>'.$pagination['text'].'</small></small></div>'; ?>
+		<?php if ((isset($pagination['text'])) && $pagination['text'] == true )
+				echo '<div style="float:right; letter-spacing:normal;"><small><small>'.$pagination['text'].'</small></small></div>'; ?>
 		<?php echo $this->GetTranslation("Comments_all")." [<a href=\"".$this->href("", "", "show_comments=0")."\">".$this->GetTranslation("HideComments")."</a>]"; ?>
 			</div>
 			<?php
