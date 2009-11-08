@@ -300,7 +300,7 @@ if ($this->page)
 				echo "</ol>";
 			}
 
-			if ($pagination['text'] == true)
+			if ((isset($pagination['text'])) && $pagination['text'] == true )
 				echo '<div style="text-align:right;padding-right:10px;border-top:solid 1px #BABFC7;"><small><small>'.$pagination['text'].'</small></small></div>';
 
 			// display comment form
