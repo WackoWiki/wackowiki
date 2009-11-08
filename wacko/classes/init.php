@@ -292,6 +292,7 @@ class Init
 
 					"referrers_purge_time" => 1,
 					"pages_purge_time" => 0,
+					"keep_deleted_time" => 0,
 				);
 
 				$wackoConfig["aliases"]	= array(
@@ -679,7 +680,7 @@ class Init
 					echo "<li>User language set: ".(isset($user["lang"]) ? 'true' : 'false')."</li>\n";
 					echo "<li>User language value: ".$user["lang"]."</li>\n";
 					echo "<li>Config language: ".$this->config["language"]."</li>\n";
-					echo "<li>User selected language: ".$this->userlang."</li>\n";
+					echo "<li>User selected language: ".$this->engine->userlang."</li>\n";
 					echo "</ul>\n";
 				}
 				echo "</div >\n";
