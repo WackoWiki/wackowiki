@@ -4052,7 +4052,7 @@ class Wacko
 	{
 		$sep	= ', ';		// page links divider
 		$pages	= ceil($total / $perpage);
-		$page	= ($_GET[$name] == true			// if page param = 'last' magic word,
+		$page	= ((isset($_GET[$name])) && $_GET[$name] == true			// if page param = 'last' magic word,
 					? ($_GET[$name] == 'last'	// then open last page of the list
 						? ($pages > 0
 							? $pages
