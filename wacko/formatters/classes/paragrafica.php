@@ -209,7 +209,7 @@ class paragrafica
 	// for further TOC creation routines
 	function add_toc_entry($matches)
 	{
-		if ($matches[7] != "")
+		if ((isset($matches[7])) && $matches[7] != "")
 		{
 			if ($matches[8] == "")
 			$this->toc[] = array($this->wacko->UnwrapLink(trim($matches[7],'"')),"(include)",99999);

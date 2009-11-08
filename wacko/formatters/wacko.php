@@ -25,7 +25,7 @@ $text = "";
 
 for ($i = 0; $i < count($wtexts); $i++)
 {
-	$text = $text.$wtexts[$i].$texts[2 * $i + 1];
+	$text = $text.((isset($wtexts[$i])) ? $wtexts[$i] : "").((isset($texts[2 * $i + 1])) ? $texts[2 * $i + 1] : "");
 }
 
 //$text = implode("", $texts);
