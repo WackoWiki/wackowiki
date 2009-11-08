@@ -3299,17 +3299,21 @@ class Wacko
 
 	function GetBookmarks()
 	{
-		return $_SESSION[$this->config["session_prefix"].'_'."bookmarks"];
+		if (isset($_SESSION[$this->config["session_prefix"].'_'."bookmarks"]))
+
+			return $_SESSION[$this->config["session_prefix"].'_'."bookmarks"];
 	}
 
 	function GetBookmarksFormatted()
 	{
-		return $_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"];
+		if (isset($_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"]))
+			return $_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"];
 	}
 
 	function GetBookmarkLinks()
 	{
-		return $_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"];
+		if (isset($_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"]))
+			return $_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"];
 	}
 
 	// MAINTENANCE
@@ -4048,15 +4052,13 @@ class Wacko
 	{
 		$sep	= ', ';		// page links divider
 		$pages	= ceil($total / $perpage);
-		$page	= (	$_GET[$name] == true ?			// if page param = 'last' magic word,
-					(								// then open last page of the list
-						$_GET[$name] == 'last' ?
-						(
-							$pages > 0 ? $pages : 1
-						)
-						: (int)$_GET[$name]
-					)
-					: 1 );
+		$page	= ($_GET[$name] == true			// if page param = 'last' magic word,
+					? ($_GET[$name] == 'last'	// then open last page of the list
+						? ($pages > 0
+							? $pages
+							: 1)
+						: (int)$_GET[$name])
+					: 1);
 
 		$pagination['offset'] = $perpage * ($page - 1);
 
