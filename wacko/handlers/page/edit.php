@@ -1,7 +1,7 @@
 <?php
 
 // invoke autocomplete if needed
-if ($_GET["_autocomplete"])
+if ((isset($_GET["_autocomplete"])) && $_GET["_autocomplete"])
 {
 	include( dirname(__FILE__)."/_autocomplete.php" );
 	return;
@@ -149,7 +149,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 	if (!$previous = 	$_POST["previous"]) $previous 	= $this->page["time"];
 	if (!$body = 		$_POST["body"]) 	$body 		= $this->page["body"];
 	if (isset($_POST["edit_note"]))			$edit_note	= $_POST["edit_note"];
-	if (isset($_POST["minor_edit"]))		   $minor_edit	= $_POST["minor_edit"];
+	if (isset($_POST["minor_edit"]))		$minor_edit	= $_POST["minor_edit"];
 	$title = isset($_POST["title"]) ? $_POST["title"] : $this->page["title"];
 
 	// display form
