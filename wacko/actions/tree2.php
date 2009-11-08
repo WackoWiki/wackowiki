@@ -7,11 +7,12 @@ $style	= 'ul';
 // input
 if (!isset($root) && !isset($page))
 					$root	= '/'.$this->page['tag'];
-
+if (!isset($page)) $page = "";
 if ($page)			$root	= $page;
 if ($root == '/')	$root	= '';
 if ($root)			$root	= $this->UnwrapLink($root).'/';
 
+if (!isset($depth)) $depth = "";
 if (!$depth || $depth < 1)
 					$depth	= 1;
 else				$depth	= (int)$depth;;
