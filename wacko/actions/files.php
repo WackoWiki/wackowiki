@@ -62,7 +62,7 @@ if ($can_view)
 	if (!$nomark)
 	{
 		$title = $this->GetTranslation("UploadTitle".($global ? "Global" : ""));
-		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.": ".$showpageandpath."</span></p>\n");
+		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.": </span></p>\n");
 	}
 
 	// display
