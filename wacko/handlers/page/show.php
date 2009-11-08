@@ -14,10 +14,10 @@ if ($this->page["comment_on_id"])
 			"AND created <= '".quote($this->dblink, $this->page['created'])."' ".
 		"GROUP BY comment_on_id ".
 		"LIMIT 1", 1);
-	
+
 	// determine comments page number where this comment is located
 	$p = ceil($count["n"] / $this->config["comments_count"]);
-	
+
 	// forcibly open page
 	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page["comment_on_id"]), 'show_comments=1&p='.$p).'#'.$this->page['tag']);
 }
@@ -230,7 +230,7 @@ if ($this->page)
 	$pagination = $this->Pagination($this->GetCommentsCount(), $this->config["comments_count"], 'p', 'show_comments=1#comments');
 
 	// comments form output begins
-	
+
 		if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && ($this->GetConfigValue("hide_comments") != 2 || $this->GetUser()))
 		{
 			// load comments for this page
@@ -310,7 +310,7 @@ if ($this->page)
 
 				echo $this->FormOpen("addcomment"); ?>
 					<label for="addcomment"><?php echo $this->GetTranslation("AddComment");?></label><br />
-					<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
+					<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment'])) echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
 
 					<label for="addcomment_title"><?php echo $this->GetTranslation("AddCommentTitle");?></label><br />
 					<input id="addcomment_title" name="title" size="60" maxlength="100"></input><br />
