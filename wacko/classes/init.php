@@ -167,7 +167,7 @@ class Init
 					"database_database" => "wacko",
 					"database_user" => "",
 					"database_password" => "",
-					"db_collation" => 0,
+					"database_collation" => 0,
 
 					"table_prefix" => "wacko_",
 					"cookie_prefix" => "wacko_",
@@ -476,7 +476,7 @@ class Init
 		// connect to DB
 		if ($dbname == false) $dbname = $this->config["database_database"];
 
-		$this->dblink = connect($this->config["database_host"], $this->config["database_user"], $this->config["database_password"], $this->config["database_database"], $this->config["db_collation"], $this->config["database_driver"], $this->config["database_port"]);
+		$this->dblink = connect($this->config["database_host"], $this->config["database_user"], $this->config["database_password"], $this->config["database_database"], $this->config["database_collation"], $this->config["database_driver"], $this->config["database_port"]);
 
 		if ($this->dblink)
 			return $this->dblink;
