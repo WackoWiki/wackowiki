@@ -132,7 +132,11 @@ class paragrafica
 		// 3. replace each <t->....<-t> to <p class="auto">....</p>
 		$pcount = 0;
 		$pieces = explode( $this->mark2, $what );
-		$sizeof_mark1 = sizeof($mark1);
+		if (isset($mark1))
+			$sizeof_mark1 = sizeof($mark1);
+		else
+			$sizeof_mark1 = NULL;
+
 		foreach( $pieces as $k=>$v )
 		if ($k > 0)
 		{ $pos = strpos($v, $this->mark1);
