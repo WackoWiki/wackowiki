@@ -94,6 +94,8 @@ $update_pages_r4_2_1 = "UPDATE {$pref}pages AS pages, (SELECT id, name FROM {$pr
 $update_pages_r4_2_2 = "UPDATE {$pref}pages AS pages, (SELECT id, name FROM {$pref}users) AS users SET pages.user_id = users.id WHERE pages.user = users.name";
 $update_pages_r4_2_3 = "UPDATE {$pref}pages AS pages, (SELECT id, tag FROM {$pref}pages) AS pages2 SET pages.comment_on_id = pages2.id WHERE pages.comment_on = pages2.tag";
 $update_pages_r4_2_4 = "UPDATE {$pref}pages AS pages, (SELECT comment_on_id, COUNT(comment_on_id) as n FROM {$pref}pages WHERE comment_on_id != '0' GROUP BY comment_on_id) AS comments_on SET pages.comments = comments_on.n WHERE pages.id = comments_on.comment_on_id";
+$update_pages_r4_2_5 = "UPDATE {$pref}pages as pages, (SELECT tag, MIN(time) AS oldest FROM wacko_revisions GROUP BY tag) AS revisions SET pages.created = revisions.oldest WHERE pages.tag = revisions.tag AND pages.created IS NULL";
+$update_pages_r4_2_6 = "UPDATE {$pref}pages as pages, SET pages.created = pages.time WHERE pages.id = pages.id AND pages.created IS NULL";
 
 // REFERRERS
 $alter_referrers_r2_1 = "ALTER TABLE {$pref}referrers CHANGE page_tag page_tag VARCHAR(250) NOT NULL";
