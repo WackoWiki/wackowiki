@@ -7,7 +7,7 @@ if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
 	$this->Redirect(str_replace("http://", "https://", $this->href()));
 }
 
-if ($_GET["secret_code"])
+if (isset($_GET["secret_code"]) && $_GET["secret_code"])
 {
 	// Password forgotten. Provided secret code
 	$code = $_GET["secret_code"];
@@ -132,10 +132,10 @@ if ($_GET["secret_code"])
 	}
 }
 // is user trying to update?
-else if (!$forgot && $user = $this->GetUser())
+else if (!isset($forgot) && $user = $this->GetUser())
 {
 	// is user trying to update?
-	if ($_POST["action"] == "change")
+	if (isset($_POST["action"]) && $_POST["action"] == "change")
 	{
 		//Simple change password
 		$password = $_POST["password"];
@@ -209,7 +209,7 @@ else if (!$forgot && $user = $this->GetUser())
 	//Print simple change password form
 	print($this->FormOpen());
 
-	if ($error)
+	if (isset($error))
 	{
 		$this->SetMessage($this->Format($error));
 	}
