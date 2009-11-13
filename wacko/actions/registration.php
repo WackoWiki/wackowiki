@@ -164,13 +164,13 @@ else if ($_POST["action"] == "login")
 
 				$subject = 	$this->GetTranslation("EmailWelcome").
 							$this->GetConfigValue("wacko_name");
-				$message = 	$this->GetTranslation("MailHello"). $name.".\n\n".
+				$message = 	$this->GetTranslation("EmailHello"). $name.".\n\n".
 							str_replace('%1', $this->GetConfigValue("wacko_name"),
 							str_replace('%2', $name,
 							str_replace('%3', $this->Href().
 							($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
 							$this->GetTranslation("EmailRegistered"))))."\n\n".
-							$this->GetTranslation("MailGoodbye")."\n".
+							$this->GetTranslation("EmailGoodbye")."\n".
 							$this->GetConfigValue("wacko_name")."\n".
 							$this->config["base_url"];
 				$this->SendMail($email, $subject, $message);

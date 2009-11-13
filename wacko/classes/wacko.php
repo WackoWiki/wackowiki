@@ -1319,14 +1319,14 @@ class Wacko
 								$this->SetLanguage ($lang);
 
 								$subject = "[".$this->config["wacko_name"]."] ".$this->GetTranslation("CommentForWatchedPage", $lang)."'".$this->GetCommentOnTag($comment_on_id)."'";
-								$message = $this->GetTranslation("MailHello", $lang). $Watcher["user"].".\n\n".
+								$message = $this->GetTranslation("EmailHello", $lang). $Watcher["user"].".\n\n".
 											$username.
 											$this->GetTranslation("SomeoneCommented", $lang)."\n".
 											$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."\n\n".
 											"----------------------------------------------------------------------\n\n".
 											$this->Format($body_r, "post_wacko")."\n\n".
 											"----------------------------------------------------------------------\n\n".
-											$this->GetTranslation("MailGoodbye", $lang)."\n".
+											$this->GetTranslation("EmailGoodbye", $lang)."\n".
 											$this->config["wacko_name"]."\n".
 											$this->config["base_url"];
 
@@ -1437,14 +1437,14 @@ class Wacko
 									$this->SetLanguage ($lang);
 
 									$subject = "[".$this->config["wacko_name"]."] ".$this->GetTranslation("WatchedPageChanged", $lang)."'".$tag."'";
-									$message = $this->GetTranslation("MailHello", $lang). $Watcher["user"]."\n\n".
+									$message = $this->GetTranslation("EmailHello", $lang). $Watcher["user"]."\n\n".
 										$username.
 										$this->GetTranslation("SomeoneChangedThisPage", $lang)."\n".
 										$this->Href('', $tag)."\n\n".
 										"======================================================================".
 										$this->Format($diff, "html2mail").
 										"\n======================================================================\n\n".
-										$this->GetTranslation("MailGoodbye", $lang)."\n".
+										$this->GetTranslation("EmailGoodbye", $lang)."\n".
 										$this->config["wacko_name"]."\n".
 										$this->config["base_url"];
 
@@ -1735,8 +1735,8 @@ class Wacko
 		{
 			// this is a valid Email
 			$url = ($matches[1] == "mailto:" ? $tag : "mailto:".$tag);
-			$title = $this->GetTranslation("MailLink");
-			$icon = $this->GetTranslation("mailicon");
+			$title = $this->GetTranslation("EmailLink");
+			$icon = $this->GetTranslation("emailicon");
 			$tpl = "email";
 		}
 		else if (preg_match("/^#/", $tag))

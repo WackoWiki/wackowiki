@@ -279,13 +279,13 @@ else
 
 				$subject =	$this->GetTranslation("EmailForgotSubject").
 							$this->GetConfigValue("wacko_name");
-				$message =	$this->GetTranslation("MailHello"). $name.".\n\n".
+				$message =	$this->GetTranslation("EmailHello"). $name.".\n\n".
 							str_replace('%1', $this->GetConfigValue("wacko_name"),
 							str_replace('%2', $user["name"],
 							str_replace('%3', $this->Href().
 							($this->config["rewrite_mode"] ? "?" : "&amp;")."secret_code=".$code,
 							$this->GetTranslation("EmailForgotMessage"))))."\n";
-				$message.=	"\n".$this->GetTranslation("MailGoodbye").
+				$message.=	"\n".$this->GetTranslation("EmailGoodbye").
 							"\n".$this->GetConfigValue("wacko_name").
 							"\n".$this->config["base_url"];
 
@@ -308,7 +308,7 @@ else
 			}
 			else
 			{
-				$error = $this->GetTranslation("NotConfirmedMail");
+				$error = $this->GetTranslation("NotConfirmedEmail");
 			}
 		}
 		else
