@@ -53,12 +53,12 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					if ($User['email_confirm'] == '')
 					{
 						$subject = $this->config['wacko_name'].'. '.$this->GetTranslation('NewPageOwnership');
-						$email  = $this->GetTranslation('MailHello').$newowner.".\n\n";
+						$email  = $this->GetTranslation('EmailHello').$newowner.".\n\n";
 						$email .= str_replace('%2', $this->config['wacko_name'], str_replace('%1', $this->GetUserName(), $this->GetTranslation('YouAreNewOwner')))."\n";
 						$email .= $this->Href('', $this->tag, '')."\n\n";
 						$email .= $this->GetTranslation('PageOwnershipInfo')."\n";
 						//$email .= $this->Href('', '', '')."\n\n";
-						$email .= $this->GetTranslation('MailGoodbye')."\n".$this->config['wacko_name']."\n".$this->config['base_url'];
+						$email .= $this->GetTranslation('EmailGoodbye')."\n".$this->config['wacko_name']."\n".$this->config['base_url'];
 						$this->SendMail($User['email'], $subject, $email);
 					}
 
@@ -140,12 +140,12 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				if ($User['email_confirm'] == '')
 				{
 					$subject = $this->config['wacko_name'].'. '.$this->GetTranslation('NewPageOwnership');
-					$email  = $this->GetRes('MailHello').$newowner.".\n\n";
+					$email  = $this->GetRes('EmailHello').$newowner.".\n\n";
 					$email .= str_replace('%2', $this->config['wacko_name'], str_replace('%1', $this->GetUserName(), $this->GetTranslation('YouAreNewOwner')))."\n";
 					$email .= $ownedpages."\n";
 					$email .= $this->GetTranslation('PageOwnershipInfo')."\n";
 					//$email .= $this->Href('', '', '')."\n\n";
-					$email .= $this->GetTranslation('MailGoodbye')."\n".$this->config['wacko_name']."\n".$this->config['base_url'];
+					$email .= $this->GetTranslation('EmailGoodbye')."\n".$this->config['wacko_name']."\n".$this->config['base_url'];
 					$this->SendMail($User['email'], $subject, $email);
 				}
 			}

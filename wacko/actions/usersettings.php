@@ -52,12 +52,12 @@ else if ($user = $this->GetUser())
 			$confirm = md5(rand().$_POST["email"].rand());
 
 			$subject = $this->config["wacko_name"].". ".$this->GetTranslation("EmailConfirm");
-			$message = $this->GetTranslation("MailHello"). $user["name"].".<br /> <br /> ";
+			$message = $this->GetTranslation("EmailHello"). $user["name"].".<br /> <br /> ";
 			$message.= str_replace('%1', $this->GetConfigValue("wacko_name"),
 			str_replace('%2', $user["name"],
 			str_replace('%3', $this->Href().($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
 			$this->GetTranslation("EmailVerify"))))."<br />  ";
-			$message.= "<br />".$this->GetTranslation("MailGoodbye")." ".$this->GetConfigValue("wacko_name");
+			$message.= "<br />".$this->GetTranslation("EmailGoodbye")." ".$this->GetConfigValue("wacko_name");
 			$this->SendMail($_POST["email"], $subject, $message);
 		}
 
@@ -173,7 +173,7 @@ else if ($user = $this->GetUser())
       <input
 	type="checkbox" id="send_watchmail" name="send_watchmail" value="1"
 	<?php echo $user["options"]["send_watchmail"] == "1" ? "checked=\"checked\"" : "" ?> />
-      <label for="send_watchmail"><?php echo $this->GetTranslation("SendWatchMail");?></label></td>
+      <label for="send_watchmail"><?php echo $this->GetTranslation("SendWatchEmail");?></label></td>
   </tr>
   <tr>
     <!--<td class="form_left">&nbsp;</td>

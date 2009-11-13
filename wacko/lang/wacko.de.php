@@ -27,8 +27,8 @@ $wackoTranslation = array(
 	"LoginPage" => "Anmeldung",
 	// other
 	"MsWordVersion" => "Microsoft Word Version",
-	"MailHello" => "Hallo, ",
-	"MailGoodbye" => "MfG, ",
+	"EmailHello" => "Hallo, ",
+	"EmailGoodbye" => "MfG, ",
 	"WatchedPageChanged" => "Seite wurde geändert ",
 	"SomeoneChangedThisPage" => " änderte diese von dir beobachtete Seite: ",
 	"ActionDenied" => "Diese Aktion ist hier nicht erlaubt.",
@@ -37,7 +37,7 @@ $wackoTranslation = array(
 	"FileLink" => "",
 	"PDFLink" => "PDF Dokument (in neuem Fenster)",
 	"RDFLink" => "RDF Dokument",
-	"MailLink" => "Schreibe E-Mail\n(E-Mailprogramm wird gestartet)",
+	"EmailLink" => "Schreibe E-Mail\n(E-Mailprogramm wird gestartet)",
 	"ShowTip" => "Klicke um in den Ansichtsmodus zurückzukehren",
 	"ShowText" => "Ansicht",
 	"ShowDateTimeInLinks" => "Füge Zeitstempel zu Verweisen hinzu",
@@ -297,7 +297,7 @@ $wackoTranslation = array(
 
 	"RemoveFromBookmarks" => "Entferne aktuelle Seite aus den Lesezeichen",
 	"DontRedirect" => "Keine automatische Weiterleitung erlauben, obwohl eine gesetzt ist.",
-	"SendWatchMail" => "Bestätigunsmail senden, wenn jemand (außer dir) Seiten verändert, die du beobachtest",
+	"SendWatchEmail" => "Bestätigunsmail senden, wenn jemand (außer dir) Seiten verändert, die du beobachtest",
 	"PageMoved" => "Diese Seite wurde verschoben. Sie ist jetzt zu finden unter",
 	"CurrentPassword" => "Derzeitiges Passwort",
 	"NewPassword" => "Neues Passwort",
@@ -315,7 +315,7 @@ $wackoTranslation = array(
 	"ForgotField" => "((WackoWiki:Doc/Deutsch/WikiName VorUndNachname)) oder E-Mail",
 	"SendButton" => "Senden",
 	"UserNotFound" => "<em>Ein Benutzer mit diesem Namen oder E-Mailadresse wurde nicht gefunden.</em>",
-	"NotConfirmedMail" => "<em>Deine E-Mailadresse ist noch nicht bestätigt<br />E-Mails können nicht an unbestätigte E-Mailadressen verschickt werden.</em>",
+	"NotConfirmedEmail" => "<em>Deine E-Mailadresse ist noch nicht bestätigt<br />E-Mails können nicht an unbestätigte E-Mailadressen verschickt werden.</em>",
 	"EmailForgotSubject" => "Neues Passwort für ",
 	"EmailForgotMessage" => "Jemand (vielleicht du) hat sein Passwort für %1 vergessen.\nDein Benutzername lautet: %2\n\nUm dein Passwort zu ändern, folge diesem Link oder kopiere ihn in die Adresszeile deines Browsers.\n%3\n\n",
 	"CodeWasSent" => "Eine E-Mail mit Informationen zu deinem Passwort wurde versandt.",
@@ -434,8 +434,8 @@ $wackoTranslation = array(
 	"ToThePage" => "Zu Seite",
 	"Next" => "weiter",
 	"Prev" => "zurück",
-	"NextAcr" => "Next",
-	"PrevAcr" => "Prev",
+	"NextAcr" => "weiter",
+	"PrevAcr" => "zurück",
 
 	"default_bookmarks" => 	"((SeitenIndex Index))\n".
 							"((LetzteAenderungen Änderungen))\n".
@@ -451,7 +451,7 @@ $wackoTranslation = array(
 	"xmlicon" => '<img src="{theme}icons/xml.gif" alt="XML" />',
 	"pdficon"  => '<img src="{theme}icons/pdf.gif" alt="PDF" />',
 	"rdficon"  => '<img src="{theme}icons/rdf.gif" alt="RDF" />',
-	"mailicon" => '<img src="{theme}icons/mail.gif" alt="E-Mail" />',
+	"emailicon" => '<img src="{theme}icons/mail.gif" alt="E-Mail" />',
 	"lockicon" => '<img src="{theme}icons/lock.gif" alt="Zugriff verweigert" />',
 	"keyicon" => '<img src="{theme}icons/key.gif" alt="Zugriff eingeschränkt" />',
 	"wantedicon" => '?',
