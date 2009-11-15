@@ -4041,6 +4041,50 @@ class Wacko
 		return $error;
 	}
 
+
+    // Generate random password of defined $length that satisfise the complexity rules:
+    // containing n>0 of uppercase ($uc), lowercase ($lc), digits ($di) and symbols ($sy).
+    // The password complexity can be defined in $pwd_complexity :
+    // $pwd_complexity = 2 -- password consists of uppercase, lowercase, digits
+    // $pwd_complexity = 3 -- password consists of uppercase, lowercase, digits and symbols
+	function randomPassword($length, $pwd_complexity)
+	{
+    	$chars_uc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    	$chars_lc = 'abcdefghijklmnopqrstuvwxyz';
+    	$digits = '0123456789';
+    	$symbols = '-_!@#$%^&*(){}[]|~';
+    	$uc = 0;
+    	$lc = 0;
+    	$di = 0;
+    	$sy = 0;
+
+    	if ($pwd_complexity == 2) $sy = 100;
+
+    	while ($uc == 0 || $lc == 0 || $di == 0 || $sy == 0) {
+    		$password = '';
+    		for ($i=0; $i < $length; $i++) {
+        		$k = rand(0,$pwd_complexity);  //randomly choose what's next
+        		if ($k==0) {   //uppercase
+         			$password .= substr(str_shuffle($chars_uc),rand(0,sizeof($chars_uc)-2),1);
+         			$uc++;
+        		}
+        		if ($k==1) {   //lowercase
+         			$password .= substr(str_shuffle($chars_lc),rand(0,sizeof($chars_lc)-2),1);
+         			$lc++;
+        		}
+        		if ($k==2) {   //digits
+        			$password .= substr(str_shuffle($digits),rand(0,sizeof($digits)-2),1);
+            		$di++;
+        		}
+        		if ($k==3) {   //symbols
+        			$password .= substr(str_shuffle($symbols),rand(0,sizeof($symbols)-2),1);
+            		$sy++;
+        		}
+    		}
+    	}
+
+    	return $password;
+	}
 	// pages listing/navigation for multipage lists.
 	// 		$total		= total elements in the list
 	// 		$perpage	= total elements on a page
