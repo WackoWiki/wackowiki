@@ -4,7 +4,7 @@ $wackoTranslation = array(
 	// logged in panel
 	"YouAre" => "Jij bent ",
 	"YouArePanelLink" => "Instellingen",
-	"YouArePanelAccount" => "Instellingen",
+	"YouArePanelAccount" => "Mijn gebruiker",
 	"LogoutLink" => "Uitloggen",
 	"LogoutButton" => "Log uit",
 	"LogoutAreYouSure" => "Weet u zeker dat u wilt uitloggen ?",
