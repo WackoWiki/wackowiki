@@ -91,7 +91,7 @@ else if ($user = $this->GetUser())
 					"WHERE name = '".quote($this->dblink, $user["name"])."' ".
 					"LIMIT 1");
 
-				$this->SetMessage($this->GetTranslation("SettingsStored"));
+				$this->SetMessage($this->GetTranslation("UserSettingsStored"));
 
 				// log event
 				$this->Log(6, str_replace("%1", $user["name"], $this->GetTranslation("LogUserSettingsUpdate")));
@@ -137,7 +137,7 @@ else if ($user = $this->GetUser())
 		$this->SetBookmarks(BM_USER);
 
 		// forward
-		$this->SetMessage($this->GetTranslation("SettingsStored",$_POST["lang"]));
+		$this->SetMessage($this->GetTranslation("UserSettingsStored",$_POST["lang"]));
 
 		$this->Redirect($this->href());
 		$user = $this->GetUser();

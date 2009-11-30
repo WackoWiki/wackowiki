@@ -150,7 +150,7 @@ if ($this->page)
  {
    print($this->GetTranslation("YouAreOwner")."<br /> \n");
 
-   // Rename link: Hinzugefï¿½gt: if ($this->IsAdmin())
+   // Rename link: Hinzugefügt: if ($this->IsAdmin())
  if ($this->IsAdmin())  {
  print(" <a href=\"".$this->href("rename")."\">".$this->GetTranslation("RenameText")."</a><br /> \n");}
 

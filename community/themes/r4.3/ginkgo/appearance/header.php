@@ -88,7 +88,7 @@ echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get");
 // Searchbar
 ?>
 <span class="searchbar nobr"><label for="phrase"><?php echo $this->GetTranslation("SearchText"); ?></label><input
-	type="text" name="phrase" id="phrase" size="15" /><input class="submitinput" type="submit" title="<?php echo $this->GetTranslation("SearchButtonText") ?>" alt="<?php echo $this->GetTranslation("SearchButtonText") ?>" value="ï¿½"/></span>
+	type="text" name="phrase" id="phrase" size="15" /><input class="submitinput" type="submit" title="<?php echo $this->GetTranslation("SearchButtonText") ?>" alt="<?php echo $this->GetTranslation("SearchButtonText") ?>" value="»"/></span>
 <?php
 
 // Search form close
