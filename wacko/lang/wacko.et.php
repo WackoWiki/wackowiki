@@ -309,6 +309,11 @@ $wackoTranslation = array(
 	"EmailConfirm" => "Palun kontrolli oma e-posti aadressi",
 	"EmailConfirmed" => "E-posti aadressi õigsus on kinnitust leidnud.",
 	"EmailNotConfirmed" => "E-posti aadress ei leidnud kinnitust. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.",
+	"EmailNotVerified" => "* Email not verified!",
+	"EmailNotVerifiedDesc" => "You will not receive notification of changes or comments of watched pages, ".
+							"messages from other users, as well you <u>will not be able to recover a forgotten password</u>, ".
+							"until your email-address was confirmed, by following the link in the email sent to you. ".
+							"If, within days after registration You never got a email, ask for it again by clicking ",
 
 	"ForgotComment" => "Sisetage oma kasutajanimi või e-posti aadress,\n siis saadetakse sulle e-postiga instruktsioonid.",
 	"ForgotMain" => "Unustasid parooli?",

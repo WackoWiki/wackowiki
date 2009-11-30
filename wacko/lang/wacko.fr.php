@@ -309,6 +309,11 @@ $wackoTranslation = array(
 	"EmailConfirm" => "Merci de vérifier votre adresse de messagerie",
 	"EmailConfirmed" => "Adresse de messagerie confirmée.",
 	"EmailNotConfirmed" => "Adresse de messagerie non confirmée. Ceci peut être dû à un code de confirmation erroné, mais cette adresse peut aussi avoir été déjà confirmée. Identifiez-vous et vérifiez-le sur votre page %1.",
+	"EmailNotVerified" => "* Email not verified!",
+	"EmailNotVerifiedDesc" => "You will not receive notification of changes or comments of watched pages, ".
+							"messages from other users, as well you <u>will not be able to recover a forgotten password</u>, ".
+							"until your email-address was confirmed, by following the link in the email sent to you. ".
+							"If, within days after registration You never got a email, ask for it again by clicking ",
 
 	"ForgotComment" => "Indiquez votre NomWiki ou votre adresse de messagerie,\nun courriel avec des instructions vous sera envoyé.",
 	"ForgotMain" => "Avez-vous oublié votre mot de passe&nbsp;?",
