@@ -3,8 +3,8 @@
 $wackoTranslation = array(
 	// logged in panel
 	"YouAre" => "Tu sei ",
-	"YouArePanelLink" => "Configurazioni",
-	"YouArePanelAccount" => " Configurazioni ",
+	"YouArePanelLink" => "Settings",
+	"YouArePanelAccount" => "Account",
 	"LogoutLink"  => "Disconnessione",
 	"LogoutButton" => "Disconnessione",
 	"LogoutAreYouSure" => "Vuoi davvero sconnetterti?",
