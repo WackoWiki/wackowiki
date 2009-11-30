@@ -309,6 +309,11 @@ $wackoTranslation = array(
 	"EmailConfirm" => "Por favor verifique o seu email",
 	"EmailConfirmed" => "Email confirmado com sucesso.",
 	"EmailNotConfirmed" => "Email não confirmado. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.",
+	"EmailNotVerified" => "* Email not verified!",
+	"EmailNotVerifiedDesc" => "You will not receive notification of changes or comments of watched pages, ".
+							"messages from other users, as well you <u>will not be able to recover a forgotten password</u>, ".
+							"until your email-address was confirmed, by following the link in the email sent to you. ".
+							"If, within days after registration You never got a email, ask for it again by clicking ",
 
 	"ForgotComment" => "Insira o seu login ou endereço e-mail,\nDepois ser-lhe-á enviado e-mail com instruções.",
 	"ForgotMain" => "Password esquecida?",
