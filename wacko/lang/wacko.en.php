@@ -4,7 +4,7 @@ $wackoTranslation = array(
 	// logged in panel
 	"YouAre" => "You are ",
 	"YouArePanelLink" => "Settings",
-	"YouArePanelAccount" => "Account",
+	"YouArePanelAccount" => "Settings",
 	"LogoutLink" => "Logout",
 	"LogoutButton" => "Log out",
 	"LogoutAreYouSure" => "Do you really want to log out?",
@@ -221,7 +221,7 @@ $wackoTranslation = array(
 	"NoWantedPages" => "<em>No wanted pages. Good!</em>",
 	"RemoveWatch" => "Remove watch for this page",
 	"SetWatch" => "Watch this page",
-	"SettingsStored" => "User settings saved!",
+	"UserSettingsStored" => "User settings saved!",
 	"LoggedOut" => "You are now logged out.",
 	"Hello" => "Hello",
 	"YourEmail" => "Your email address",
