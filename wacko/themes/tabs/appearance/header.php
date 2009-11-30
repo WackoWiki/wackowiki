@@ -87,7 +87,7 @@ else if ($this->HasAccess("write"))
 	src="<?php echo $this->GetConfigValue("theme_url") ?>icons/role.gif"
 	hspace="5" vspace="5" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->GetTranslation("YouAre")." ".$this->Link($this->GetUserName()) ?></span> <small>( <span class="nobr Tune">
     <?php
-echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?>
+echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelAccount"), 0); ?>
     | <a
 	onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');"
 	href="<?php echo $this->Href("","Login").($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a></span> )</small>
