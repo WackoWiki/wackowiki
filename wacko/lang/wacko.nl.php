@@ -4,7 +4,7 @@ $wackoTranslation = array(
 	// logged in panel
 	"YouAre" => "Jij bent ",
 	"YouArePanelLink" => "Instellingen",
-	"YouArePanelName" => "Instellingen",
+	"YouArePanelAccount" => "Mijn gebruiker",
 	"LogoutLink" => "Uitloggen",
 	"LogoutButton" => "Log uit",
 	"LogoutAreYouSure" => "Weet u zeker dat u wilt uitloggen ?",
@@ -48,7 +48,7 @@ $wackoTranslation = array(
 	"Typografica" => "Corrigeer typfouten automatisch",
 	"Comment" => "Reactie",
 	"Comments_0" => "Er zijn geen reacties op deze pagina.",
-	"Comments_1" => "Er is één reactie op deze pagina.",
+	"Comments_1" => "Er is ï¿½ï¿½n reactie op deze pagina.",
 	"Comments_n" => "Er zijn %1 reacties op deze pagina.",
 	"Comments_all" => "Reacties",
 	"CommentEdited" => "edited",

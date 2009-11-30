@@ -117,7 +117,7 @@ if ($this->GetUser()) { ?>
   <?php echo $this->GetTranslation("YouAre")." ".$this->Link($this->GetUserName()) ?><br />
   <small>
   <?php
-      echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?><br />
+      echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelAccount"), 0); ?><br />
   <a onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a></small>
   <?php
 // Else Wacko shows login's controls
@@ -150,7 +150,7 @@ if ($this->page)
  {
    print($this->GetTranslation("YouAreOwner")."<br /> \n");
 
-   // Rename link: Hinzugefügt: if ($this->IsAdmin())
+   // Rename link: Hinzugefï¿½gt: if ($this->IsAdmin())
  if ($this->IsAdmin())  {
  print(" <a href=\"".$this->href("rename")."\">".$this->GetTranslation("RenameText")."</a><br /> \n");}
 

@@ -248,7 +248,7 @@ else if($this->HasAccess("write"))
 			src="<?php echo $this->GetConfigValue("theme_url") ?>icons/user.gif"
 			alt="" width="16" height="16" border="0" align="middle"
 			style="vertical-align: baseline;" /> <?php echo $this->Link($this->GetUserName()) ?>
-		</span> <small> ( <span class="nobr Tune"> <?php echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?>
+		</span> <small> ( <span class="nobr Tune"> <?php echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelAccount"), 0); ?>
 		| <a
 			onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');"
 			href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>">

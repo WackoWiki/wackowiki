@@ -88,7 +88,7 @@ echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get");
 // Searchbar
 ?>
 <span class="searchbar nobr"><label for="phrase"><?php echo $this->GetTranslation("SearchText"); ?></label><input
-	type="text" name="phrase" id="phrase" size="15" /><input class="submitinput" type="submit" title="<?php echo $this->GetTranslation("SearchButtonText") ?>" alt="<?php echo $this->GetTranslation("SearchButtonText") ?>" value="»"/></span>
+	type="text" name="phrase" id="phrase" size="15" /><input class="submitinput" type="submit" title="<?php echo $this->GetTranslation("SearchButtonText") ?>" alt="<?php echo $this->GetTranslation("SearchButtonText") ?>" value="ï¿½"/></span>
 <?php
 
 // Search form close
@@ -116,7 +116,7 @@ if ($this->GetUser()) {
 ?>
             <span class="nobr"><?php echo $this->GetTranslation("YouAre")." ".$this->Link($this->GetUserName()) ?></span> <small>( <span class="nobr Tune">
             <?php
-      echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelName"), 0); ?>
+      echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelAccount"), 0); ?>
             | <a onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a></span> )</small>
             <?php
 // Else Wacko shows login's controls
