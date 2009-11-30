@@ -169,7 +169,7 @@ else if ($user = $this->GetUser())
     <td><input id="email" name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />&nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("root_url").'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("root_url").'images/warning.gif" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="16" height="16" />' ?> 
 <?php
 		if (!$user["email"] || $code["email_confirm"])
-			echo "<strong class=\"cite\".
+			echo "<strong class=\"cite\"".
 				$this->GetTranslation("EmailNotVerified")."</strong><br />".
 				"<small>".$this->GetTranslation("EmailNotVerifiedDesc")."<strong><a href=\"?resend_code=1\">here</a></strong></small>";
 ?></td>
