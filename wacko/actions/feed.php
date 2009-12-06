@@ -222,7 +222,7 @@ if (!$nomark)
 			echo "<".$headertag.">".$this->Link($href, "", $title, 1, 1)."</".$headertag.">";
 
 			if (($time == "yes")&&($date != 0))
-				echo "<p class=\"note\"> (".intervalCalc($date).")</p>";
+				echo "<p class=\"note\"> ".intervalCalc($date)."</p>";
 
 			echo "<p class=\"feed-content\">".$item->get_content()."</p>";
 
