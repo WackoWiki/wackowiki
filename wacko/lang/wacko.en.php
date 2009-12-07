@@ -300,6 +300,7 @@ $wackoTranslation = array(
 	"RemoveFromBookmarks" => "Remove from bookmarks",
 	"DontRedirect" => "Do not allow automatic redirection by action Redirect.",
 	"SendWatchEmail" => "Send notifying email when someone (except you) change any page you are watching",
+	"AllowIntercom" => "Allow private messages from users of the system",
 	"PageMoved" => "This page moved. You can find it at",
 	"CurrentPassword" => "Current password",
 	"NewPassword" => "New password",
