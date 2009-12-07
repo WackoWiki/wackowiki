@@ -279,6 +279,8 @@ $wackoTranslation = array(
 	"RedirectCreated" => "<em>Siden %1 omstiller den den nye</em>",
 	"LinksRenamed" => "<em>Henvisninger til %1 opdateret.</em>",
 	"KeywordsRenamed" => "<em>Keywords relocated to the new name of the page.</em>",
+
+	"UserSettings" => "User settings",
 	"ChooseTheme" => "Vælg tema",
 
 	"CreatePage" => "Opret denne side",

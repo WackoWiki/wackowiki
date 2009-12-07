@@ -279,6 +279,8 @@ $wackoTranslation = array(
 	"RedirectCreated" => "<em>In the page %1 created redirect to the new one</em>",
 	"LinksRenamed" => "<em>Page links from %1 renamed.</em>",
 	"KeywordsRenamed" => "<em>Keywords relocated to the new name of the page.</em>",
+
+	"UserSettings" => "User settings",
 	"ChooseTheme" => "Choose theme",
 
 	"CreatePage" => "Create this page",
@@ -346,7 +348,7 @@ $wackoTranslation = array(
 	"NoChangesWatches"		=> "Among your watched pages are no changes...",
 
 	//Settings
-	"SettingsFor" => "Settings for %1",
+	"SettingsFor" => "Page settings for %1",
 	"MetaInfo" => "META Keywords/Description that get inserted into the HTML headers.",
 	"MetaTitle" => "Title",
 	"MetaKeywords" => "Keywords",

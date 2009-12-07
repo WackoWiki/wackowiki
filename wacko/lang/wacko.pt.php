@@ -279,6 +279,8 @@ $wackoTranslation = array(
 	"RedirectCreated" => "<em>Na página %1 criado redirecionamento para a nova página</em>",
 	"LinksRenamed" => "<em>Links da página %1 renomeada.</em>",
 	"KeywordsRenamed" => "<em>Keywords relocated to the new name of the page.</em>",
+
+	"UserSettings" => "User settings",
 	"ChooseTheme" => "Escolha Visual",
 
 	"CreatePage" => "Criar esta página",
