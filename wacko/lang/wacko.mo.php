@@ -280,6 +280,8 @@ $wackoTranslation = array(
 	"RedirectCreated" => "<em>Pe pagina %1 este creat redirect la pagina noua</em>",
 	"LinksRenamed"  => "<em>Link-urile de pe %1 sunt redenumite.</em>",
 	"KeywordsRenamed" => "<em>Keywords relocated to the new name of the page.</em>",
+
+	"UserSettings" => "User settings",
 	"ChooseTheme" => "Alegeti tema",
 
 	"CreatePage" => "Creaza pagina",

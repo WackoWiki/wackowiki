@@ -279,6 +279,8 @@ $wackoTranslation = array(
 	"RedirectCreated" => "<em>Weiterleitung von der Seite %1 zur neuen Seite eingerichtet.</em>",
 	"LinksRenamed" => "<em>Links von %1 umbenannt.</em>",
 	"KeywordsRenamed" => "<em>Keywords relocated to the new name of the page.</em>",
+
+	"UserSettings" => "Benutzereinstellungen",
 	"ChooseTheme" => "Wähle ein Layout",
 
 	"CreatePage" => "Erstelle diese Seite",
@@ -346,7 +348,7 @@ $wackoTranslation = array(
 	"NoChangesWatches"		=> "Unter deinen beobachteten Seiten sind keine Änderungen...",
 
 	//Settings
-	"SettingsFor" => "Einstellungen für %1",
+	"SettingsFor" => "Seiteneinstellungen für %1",
 	"MetaInfo" => "META Schlüsselwörter/Beschreibungen, die in den HTML-Kopf eingefügt werden.",
 	"MetaTitle" => "Titel",
 	"MetaKeywords" => "Schlüsselwörter",

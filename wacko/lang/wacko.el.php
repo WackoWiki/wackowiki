@@ -279,6 +279,8 @@ $wackoTranslation = array(
 	"RedirectCreated" => "<em>Στην σελίδα %1 δημιουργήθηκε σύνδεσμος στην νέο σελίδα</em>",
 	"LinksRenamed" => "<em>Οι σύνδεσμοι της σελίδας %1 μετονομάστηκαν.</em>",
 	"KeywordsRenamed" => "<em>Keywords relocated to the new name of the page.</em>",
+
+	"UserSettings" => "User settings",
 	"ChooseTheme" => "Επέλεξε θέμα",
 
 	"CreatePage" => "Δημιούργησε αυτή την σελίδα",
