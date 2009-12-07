@@ -36,7 +36,7 @@ define("CACHE_FEED_DIR",				"feeds/");
 define("CACHE_PAGE_DIR",				"pages/");
 define("CACHE_SQL_DIR",					"queries/");
 define("GUEST",							"guest@wacko");
-// define("INTERCOM_MAX_SIZE",				262144);
+define("INTERCOM_MAX_SIZE",				262144);
 define("LOAD_NOCACHE",					0);
 define("LOAD_CACHE",					1);
 define("LOAD_ALL",						0);
