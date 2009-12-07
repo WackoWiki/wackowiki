@@ -3,10 +3,16 @@
 
 /* basic -------------------------------------------------- */
 p, td, li, select, textarea {
-	font-family: Verdana;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size: 13px;
 	line-height: 1.3em;
 }
+
+/* pre {
+	font-family:"Lucida Console","Courier New",monospace;
+	text-align:left;
+	white-space:pre;
+} */
 
 label {
 	cursor: pointer;
@@ -89,7 +95,11 @@ form input.submitinput {
 	margin: 5px 20px;
 }
 
-.debug, .debug li {
+#debug {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.debug, #debug li {
 	font-size: 11px;
 	color: #888888;
 }
@@ -835,3 +845,41 @@ p.layout-box span {
 
 .revisions li:hover {background: #CCFFCC}
 /* #FCFCFC #FFCC99 #CCFFCC */
+
+
+/* settings */
+.lined td {
+	border-bottom: 1px dotted #BABFC7;
+}
+
+/* news / blog extention ******************************************* */
+.news {
+	float: left;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	/*width: 570px;*/
+}
+
+div.newsarticle:hover {
+	background: #E7F9FF;
+}
+
+.newstitle {
+	font-size: 13px;
+	border: none;
+}
+
+.newsinfo {
+	color: #666666;
+	margin: 4px 0 6px;
+}
+
+.newsinfo span {
+	border-bottom: 1px dotted;
+}
+
+.newsmeta {
+	border-bottom: 1px dotted #666666;
+	height: 25px;
+}
