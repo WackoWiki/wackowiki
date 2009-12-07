@@ -194,7 +194,7 @@ $wackoTranslation = array(
 	"NoRecentComments" => "<em>Keine neuen Kommentare.</em>",
 	"LatestCommentBy" => "zuletzt kommentiert von",
 	"NoRecentlyCommented" => "<em>Keine Seite kürzlich kommentiert.</em>",
-	"NoRecentlyDeleted"		=> "<em>No deleted pages found.</em>",
+	"NoRecentlyDeleted"		=> "<em>Keine gelöschten Seiten gefunden.</em>",
 
 	"SearchText" => "Suchen: ",
 	"SearchButtonText" => "Suche",
@@ -336,8 +336,8 @@ $wackoTranslation = array(
 	// mywatches action
 	"WatchedPages"			=> "Liste aller Seiten, die du auf Änderungen beobachtest",
 	"UnwatchedPages"		=> "Liste aller Seiten, die du nicht beobachtest",
-	"NoWatchedPages"		=> "You have no watched pages.",
-	"NoUnwatchedPages"		=> "You watch for changes in all pages.",
+	"NoWatchedPages"		=> "Du hast keine beobachteten Seiten.",
+	"NoUnwatchedPages"		=> "Du beobachtest alle Seiten.",
 	"ViewWatchedPages"		=> "Zeige beobachtete Seiten",
 	"ViewUnwatchedPages"	=> "Zeige unbeobachtete Seiten",
 	"NotLoggedInWatches"	=> "Du bist nicht angemeldet, daher lässt sich die Liste deiner beobachteten Seiten nicht ermitteln.",
