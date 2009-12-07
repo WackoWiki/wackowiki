@@ -643,10 +643,15 @@ p.layout-box span {
 .feed .note {
 	font-size: 11px;
 	color: #777;
+	
 }
 
 .feed .note a {
 	color: #777;
+}
+
+.feed .note span {
+	border-bottom: 1px dotted;
 }
 
 .feed_element_title {

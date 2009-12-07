@@ -185,12 +185,12 @@ if (!$nomark)
 				echo " class=\"feed_element_title\" style=\"background-image:url(".$xfeed->get_favicon().");\"";
 
 			echo ">".$this->Link($item->get_permalink(), "", $item->get_title(), 1, 1)."</".$headertag.">";
-			echo "<p class=\"note\">".$this->GetTranslation("FeedSource")." ".$this->Link($xfeed->get_permalink(), "", $xfeed->get_title(), 1, 1)." | ".$item->get_date('d.m.Y g:i')." | ";
+			echo "<p class=\"note\"><span>".$this->GetTranslation("FeedSource")." ".$this->Link($xfeed->get_permalink(), "", $xfeed->get_title(), 1, 1)." | ".$item->get_date('d.m.Y g:i')." | ";
 
 			if (($time == "yes")&&($date != 0))
 				echo intervalCalc($date);
 
-			echo "</p>";
+			echo "</span></p>";
 			echo "<p class=\"feed-content\">".$item->get_content()."</p>";
 			echo "</div>";
 
@@ -222,7 +222,7 @@ if (!$nomark)
 			echo "<".$headertag.">".$this->Link($href, "", $title, 1, 1)."</".$headertag.">";
 
 			if (($time == "yes")&&($date != 0))
-				echo "<p class=\"note\"> ".intervalCalc($date)."</p>";
+				echo "<p class=\"note\"><span>".intervalCalc($date)."</span></p>";
 
 			echo "<p class=\"feed-content\">".$item->get_content()."</p>";
 
