@@ -72,6 +72,7 @@ else if ($user = $this->GetUser())
 				"dont_redirect" => $_POST["dont_redirect"],
 				"send_watchmail" => $_POST["send_watchmail"],
 				"show_files" => $_POST["show_files"],
+				"allow_intercom" => $_POST["allow_intercom"],
 				));
 
 				$this->Query(
@@ -239,6 +240,14 @@ else if ($user = $this->GetUser())
 	type="checkbox" id="send_watchmail" name="send_watchmail" value="1"
 	<?php echo $user["options"]["send_watchmail"] == "1" ? "checked=\"checked\"" : "" ?> />
       <label for="send_watchmail"><?php echo $this->GetTranslation("SendWatchEmail");?></label></td>
+  </tr>
+  <tr>
+    <td class="form_left">&nbsp;</td>
+    <td class="form_right"><input type="hidden" name="allow_intercom" value="0" />
+      <input
+	type="checkbox" id="allow_intercom" name="allow_intercom" value="1"
+	<?php echo $user["options"]["allow_intercom"] == "1" ? "checked=\"checked\"" : "" ?> />
+      <label for="allow_intercom"><?php echo $this->GetTranslation("AllowIntercom");?></label></td>
   </tr>
   <!--<tr>
     <td class="form_left">&nbsp;</td>
