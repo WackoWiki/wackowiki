@@ -8,8 +8,8 @@ $module['configsystem'] = array(
 		'order'	=> 2,
 		'cat'	=> 'Preferences',
 		'mode'	=> 'configsystem',
-		'name'	=> 'Service',
-		'title'	=> 'Service options',
+		'name'	=> 'System',
+		'title'	=> 'System options',
 	);
 
 ########################################################

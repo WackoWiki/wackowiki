@@ -8,7 +8,7 @@ $module['configsecurity'] = array(
 		'order'	=> 2,
 		'cat'	=> 'Preferences',
 		'mode'	=> 'configsecurity',
-		'name'	=> 'Safety',
+		'name'	=> 'Security',
 		'title'	=> 'setting the security subsystems',
 	);
 
@@ -49,7 +49,7 @@ function admin_configsecurity(&$engine, &$module)
 				"`pwd_min_chars`		= '".quote((int)$_POST['pwd_min_chars'])."', ".
 				"`pwd_char_classes`		= '".quote((int)$_POST['pwd_char_classes'])."', ".
 				"`pwd_unlike_login`		= '".quote((int)$_POST['pwd_unlike_login'])."', ".
-				/* 
+				/*
 				"`gpg`					= '".quote((int)$_POST['gpg'])."', ".
 				"`gpg_debug`			= '".quote((int)$_POST['gpg_debug'])."', ".
 				"`gpg_server`			= '".quote((string)$_POST['gpg_server'])."', ".
@@ -339,7 +339,7 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="comment_delay"><strong>Anti-flood for comments:</strong><br />
-				<small>	
+				<small>
 The minimum delay between the publication of the new user comments (in seconds).</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="comment_delay" name="comment_delay" value="<?php echo htmlspecialchars($engine->config['comment_delay']);?>" /></td>
 			</tr>
