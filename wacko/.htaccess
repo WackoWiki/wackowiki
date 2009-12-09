@@ -2,6 +2,7 @@
  RewriteEngine on
  RewriteCond    %{REQUEST_FILENAME}  -d
  RewriteRule ^(.*/[^\./]*[^/])$ $1/
+ RewriteRule ^admin\.php$ admin.php [L]
  RewriteRule ^(robots\.txt)$ robots.txt [L]
  RewriteRule ^(sitemap\.xml)$ sitemap.xml [L]
  RewriteRule ^(favicon\.ico)$ favicon.ico [L]
