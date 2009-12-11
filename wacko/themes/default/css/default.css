@@ -852,6 +852,10 @@ p.layout-box span {
 	border-bottom: 1px dotted #BABFC7;
 }
 
+.lined:hover {
+	background: #E7F9FF;
+}
+
 /* news / blog extention ******************************************* */
 .news {
 	float: left;
