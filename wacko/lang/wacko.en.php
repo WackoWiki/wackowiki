@@ -361,10 +361,10 @@ $wackoTranslation = array(
 	'UsersLastSession'		=> 'Last session',
 	'UsersNotFound'			=> 'User <tt>%2</tt> not found. Click <a href="/%1">here</a>, to go to the main list.',
 	'UsersProfile'			=> 'Profile',
-	'UsersDocuments'		=> 'Documents',
+	'UsersDocuments'		=> 'Pages',
 	'UsersComments'			=> 'Comments',
 	'UsersContact'			=> 'Contact',
-	'UsersList'			=> 'View the entire list of users ...',
+	'UsersList'			=> 'View the entire list of users',
 	'UsersNA'			=> '[not set]',
 	'UsersNA2'			=> '[No]',
 	'UsersSignupDate'		=> 'Signup date',
@@ -377,22 +377,16 @@ $wackoTranslation = array(
 	'UsersDocsSortDate'		=> '[Sort by creation date]',
 	'UsersSessionNA'		=> '[not recorded]',
 	'UsersSessionHidden'	=> '[hidden]',
-	'UsersGetPubkey'		=> 'Get the public key',
-	'UsersGetKeyNet'		=> 'with keyserver',
-	'UsersGetKeySite'		=> 'from our store',
 	'UsersIntercomSubject'	=> 'Subject',
 	'UsersIntercomSubjectN'	=> '[start a new topic]',
 	'UsersIntercomDisabled'	=> 'Sorry, you do not want or can not receive private messages.',
 	'UsersIntercomSend'		=> 'submit',
-	'UsersIntercomEncrypt'	=> 'Encrypt message users public key',
 	'UsersIntercomDesc'		=> 'Note: sending personal messages carried on the email-address '.
 							   'recipient without disclosing your address. The recipient will be able to respond to you, using '.
 							   'similar form on your profile page. ',
-	'UsersIntercomDesc2'	=> 'If the user has placed at his public key to PGP, you can send him a letter in the encrypted form (it will automatically encrypt server). ',
 	'UsersPMOversized'		=> 'The length of your message exceeds the maximum permissible to %1 characters. Please shorten your message and submit again.',
 	'UsersPMFlooded'		=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'			=> 'Personal message was successfully sent to the user.',
-	'UsersPMEncSent'		=> 'Personal message was successfully encrypted and sent to the user.',
 	'UsersPMPlnSent'		=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'			=> "This message has been sent to you by the user %1 from %2. To answer ".
 							   "this letter, click on the following link (do not use the Reply button / Reply ".
@@ -403,7 +397,6 @@ $wackoTranslation = array(
 							   'Note: If this message is spam, contains abusive or otherwise '.
 							   'violates the rules of the site %2, please send it (using the button Forward /'.
 							   'Forward your mail program) to address %4.',
-	'UsersPMUnusablePubkey'	=> 'Note: the public key user is not suitable for encryption. Unable to send an encrypted message.',
 	'UsersPMNotLoggedIn'	=> 'You are not registered in the system and can not send private messages to users.',
 
 	//Settings
