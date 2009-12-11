@@ -362,7 +362,7 @@ else
 	echo '</td></tr></table><br />'."\n";
 
 	// print list
-	echo "<table>\n";
+	echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;\">\n";
 
 	// pagination
 	if ($pagination['text'] == true)
