@@ -180,6 +180,7 @@ class Init
 						preg_replace("/(\?|&)installAction=site-config/","",$_SERVER["REQUEST_URI"]).
 						($found_rewrite_extension ? "" : "?page="),
 					"rewrite_mode" => ($found_rewrite_extension ? "1" : "0"),
+					"ssl" => 0,
 
 					"action_path" => "actions",
 					"handler_path" => "handlers",
@@ -225,6 +226,7 @@ class Init
 
 					"allrecentchanges_page" => "",
 					"allpageindex_page" => "",
+					"users_page" => "",
 
 					"default_write_acl" => "$",
 					"default_read_acl" => "*",
