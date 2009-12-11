@@ -882,4 +882,5 @@ div.newsarticle:hover {
 .newsmeta {
 	border-bottom: 1px dotted #666666;
 	height: 25px;
+	margin-top: 20px;
 }
