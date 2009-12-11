@@ -293,7 +293,7 @@ $wackoTranslation = array(
 	"CreatePageDenied" => "You do not have the necessary access rights.",
 	"CreatePageDeniedAddress" => "You do not have the right to create the page at this address.",
 	"PageAlreadyExists" => "According to the address provided the page already exists.",
-	"PageAlreadyExistsEdit" => "Do you want ",
+	"PageAlreadyExistsEdit" => "Do you want ", // should be changed for use of %1 params
 	"PageAlreadyExistsEdit2" => "edit it",
 	"PageAlreadyExistsEditDenied" => "You can't edit it.",
 
