@@ -96,7 +96,7 @@ if ($_REQUEST['profile'] == true)
 
 		// header and profile data
 		echo '<h1>'.$user['name'].'</h1>';
-		echo '<small><a href="'.$this->href('', $this->tag).'">'.$this->GetTranslation('UsersList')."</a></small>\n";
+		echo '<small><a href="'.$this->href('', $this->tag).'">&laquo '.$this->GetTranslation('UsersList')."</a></small>\n";
 		echo '<a name="profile"></a><h2>'.$this->GetTranslation('UsersProfile').'</h2><br />'."\n";
 
 		// basic info
