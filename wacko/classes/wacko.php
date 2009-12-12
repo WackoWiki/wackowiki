@@ -596,11 +596,11 @@ class Wacko
 			}
 		}
 
-		$tag = str_replace( "//", "/", $tag );
-		$tag = str_replace( "-", "", $tag );
-		$tag = str_replace( " ", "", $tag );
-		$tag = str_replace( "'", "_", $tag );
-		$_tag = strtolower( $tag );
+		$tag = str_replace("//", "/", $tag);
+		$tag = str_replace("-", "", $tag);
+		$tag = str_replace(" ", "", $tag);
+		$tag = str_replace("'", "_", $tag);
+		$_tag = strtolower($tag);
 
 		if ($strtolow)
 		{
@@ -698,8 +698,10 @@ class Wacko
 				$page = $this->LoadSingle(
 					"SELECT ".$what." ".
 					"FROM ".$this->config["table_prefix"]."pages ".
-					"WHERE supertag='".quote($this->dblink, $tag)."' ".
+					"WHERE supertag = '".quote($this->dblink, $supertag)."' ".
 					"LIMIT 1");
+
+				$owner = $page["owner"];
 
 				if ($time && $time != $page["time"])
 				{
@@ -708,9 +710,11 @@ class Wacko
 					$page = $this->LoadSingle(
 						"SELECT ".$what." ".
 						"FROM ".$this->config["table_prefix"]."revisions ".
-						"WHERE supertag='".quote($this->dblink, $tag)."' ".
+						"WHERE supertag = '".quote($this->dblink, $supertag)."' ".
 							"AND time = '".quote($this->dblink, $time)."' ".
 						"LIMIT 1");
+
+					$page["owner"] = $owner;
 				}
 			}
 			else if (!preg_match('/[^'.$this->language['ALPHANUM_P'].'\_\-]/', $tag))
@@ -718,8 +722,10 @@ class Wacko
 				$page = $this->LoadSingle(
 					"SELECT ".$what." ".
 					"FROM ".$this->config["table_prefix"]."pages ".
-					"WHERE tag='".quote($this->dblink, $tag)."' ".
+					"WHERE tag = '".quote($this->dblink, $tag)."' ".
 					"LIMIT 1");
+
+				$owner = $page["owner"];
 
 				if ($time && $time != $page["time"])
 				{
@@ -728,10 +734,11 @@ class Wacko
 					$page = $this->LoadSingle(
 						"SELECT ".$what." ".
 						"FROM ".$this->config["table_prefix"]."revisions ".
-						"WHERE tag='".quote($this->dblink, $tag)."' ".
+						"WHERE tag = '".quote($this->dblink, $tag)."' ".
 							"AND time = '".quote($this->dblink, $time)."' ".
 						"LIMIT 1");
 
+					$page["owner"] = $owner;
 				}
 			}
 		}
