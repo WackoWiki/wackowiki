@@ -33,7 +33,7 @@ if ($pages == true)
 			// print entry
 			echo "<li>".
 					"<span style=\"text-align:left\">".
-						"<small>(".date($this->config["time_format_seconds"], strtotime($time)).")</small> ".
+						"<small>".date($this->config["time_format_seconds"], strtotime($time))."</small>  &mdash; ".
 						$this->ComposeLinkToPage($page["tag"], "revisions", "", 0).
 					"</span>".
 				"</li>\n";
