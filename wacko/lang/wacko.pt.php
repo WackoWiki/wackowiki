@@ -61,7 +61,8 @@ $wackoTranslation = array(
 	"AddCommentTitle" => "Title of the comment:",
 	"AddCommentButton" => "Anexar comentário",
 
-	"DoesNotExists" => "Esta página ainda não existe. Talvez a queira <a href=\"%1\">criar</a> agora?",
+	"DoesNotExists" => "Esta página ainda não existe.",
+	"PromptCreate" => "Talvez a queira <a href=\"%1\">criar</a> agora?",
 	"Revision" => "Esta é uma revisão antiga de <a href=\"%1\">%2</a> de %3.",
 	"ReadAccessDenied" => "<em>Não está autorizado a ver esta página.</em>",
 	"YouAreOwner" => "Voçê é o dono desta página.",

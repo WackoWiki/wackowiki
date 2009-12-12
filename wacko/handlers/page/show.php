@@ -22,6 +22,7 @@ if ($this->page["comment_on_id"])
 	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page["comment_on_id"]), 'show_comments=1&p='.$p).'#'.$this->page['tag']);
 }
 
+// display page body
 if ($this->HasAccess("read"))
 {
 	if (!$this->page)
@@ -30,7 +31,7 @@ if ($this->HasAccess("read"))
 		// if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
 		header("HTTP/1.0 404 Not Found");
 
-		print(str_replace("%1", $this->href("edit", "", "", 1), $this->GetTranslation("DoesNotExists")));
+		print($this->GetTranslation("DoesNotExists") ." ".( $this->HasAccess("write") ?  str_replace("%1", $this->href("edit", "", "", 1), $this->GetTranslation("PromptCreate")) : ""));
 	}
 	else
 	{
@@ -40,6 +41,7 @@ if ($this->HasAccess("read"))
 			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->GetCommentOnTag($this->page["comment_on_id"]), "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->GetTimeStringFormatted($this->page["time"])."</div>");
 		}
 
+		// revision header
 		if ($this->page["latest"] == "0")
 		{
 			print("<div class=\"revisioninfo\">".
@@ -65,11 +67,14 @@ if ($this->HasAccess("read"))
 			echo "</div>";
 		}
 
-		// count page hit
-		$this->Query(
-			"UPDATE ".$this->config["table_prefix"]."pages ".
-			"SET hits = hits + 1 ".
-			"WHERE id = '".quote($this->dblink, $this->GetPageId())."'");
+		// count page hit (we don't count for page owner)
+		if ($this->GetUserName() != $this->page["owner"])
+		{
+			$this->Query(
+				"UPDATE ".$this->config["table_prefix"]."pages ".
+				"SET hits = hits + 1 ".
+				"WHERE id = '".quote($this->dblink, $this->GetPageId())."'");
+		}
 
 		$this->SetLanguage($this->pagelang);
 
@@ -77,6 +82,7 @@ if ($this->HasAccess("read"))
 		if (($this->page["body_r"] == "") ||
 		(($this->page["body_toc"] == "") && $this->GetConfigValue("paragrafica")))
 		{
+			// build html body
 			$this->page["body_r"] = $this->Format($this->page["body"], "wacko");
 
 			// build toc
@@ -180,27 +186,27 @@ if ($this->page)
 					)
 				)
 			{
-				print("<div class=\"filesform\">\n");
-				echo $this->Action("upload",array("nomark"=>1));
-				print("</div>\n");
+				echo "<div class=\"filesform\">\n";
+				echo $this->Action("upload",array("nomark" => 1));
+				echo "</div>\n";
 			}
 		}
 		else
 		{
-		?>
-		<div id="filesheader">
-	<?php
-		if ($this->page["id"])
-		{
-			// load files for this page
-			$files = $this->LoadAll(
-			"SELECT id FROM ".$this->config["table_prefix"]."upload ".
-			"WHERE page_id = '". quote($this->dblink, $this->page["id"]) ."'");
-		}
-		else
-		{
-			$files = array();
-		}
+			echo "<div id=\"filesheader\">";
+
+			if ($this->page["id"])
+			{
+				// load files for this page
+				$files = $this->LoadAll(
+					"SELECT id ".
+					"FROM ".$this->config["table_prefix"]."upload ".
+					"WHERE page_id = '". quote($this->dblink, $this->page["id"]) ."'");
+			}
+			else
+			{
+				$files = array();
+			}
 
 			switch ($c = count($files))
 			{
@@ -213,11 +219,8 @@ if ($this->page)
 				default:
 					print(str_replace("%1", $c, $this->GetTranslation("Files_n")));
 			}
-		?>
-	<?php echo "[<a href=\"".$this->href("", "", "show_files=1#files")."\">".$this->GetTranslation("ShowFiles")."</a>]"; ?>
-
-		</div>
-		<?php
+			echo "[<a href=\"".$this->href("", "", "show_files=1#files")."\">".$this->GetTranslation("ShowFiles")."</a>]";
+			echo "</div>\n";
 		}
 	}
 	}
