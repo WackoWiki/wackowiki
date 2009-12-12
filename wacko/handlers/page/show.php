@@ -60,6 +60,7 @@ if ($this->HasAccess("read"))
 				<input type="hidden" name="previous" value="<?php echo $latest["time"] ?>" />
 				<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page["body"]) ?>" />
 				<input type="submit" value="<?php echo $this->GetTranslation("ReEditOldRevision") ?>" />
+				<input name="cancel" id="button" type="button" value="<?php echo $this->GetTranslation("EditCancelButton") ?>" onclick="document.location='<?php echo addslashes($this->href()) ?>';" />
 				<?php echo $this->FormClose(); ?>
 				<?php
 			}
