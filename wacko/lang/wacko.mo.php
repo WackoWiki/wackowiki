@@ -60,7 +60,9 @@ $wackoTranslation = array(
 	"AddComment" => "Adauga comentarii:",
 	"AddCommentTitle" => "Title of the comment:",
 	"AddCommentButton" => "Trimite",
-	"DoesNotExists" => "Asa pagina nu exista. Doriti sa<a href=\"%1\">creati</a> ?",
+
+	"DoesNotExists" => "Asa pagina nu exista.",
+	"PromptCreate" => "Doriti sa<a href=\"%1\">creati</a> ?",
 	"Revision"  => "Aceasta e versiune veche <a href=\"%1\">%2</a> de la %3.",
 	"ReadAccessDenied" => "<em>Nu aveti drepturi de citire a paginii date.</em>",
 	"YouAreOwner" => "Posesor: Dvs. ",

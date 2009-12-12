@@ -61,7 +61,8 @@ $wackoTranslation = array(
 	"AddCommentTitle" => "Title of the comment:",
 	"AddCommentButton" => "Reactie toevoegen",
 
-	"DoesNotExists" => "Deze pagina bestaat nog niet. Wil je deze <a href=\"%1\">aanmaken</a>?",
+	"DoesNotExists" => "Deze pagina bestaat nog niet.",
+	"PromptCreate" => "Wil je deze <a href=\"%1\">aanmaken</a>?",
 	"Revision" => "Dit is een oude revisie van <a href=\"%1\">%2</a> from %3.",
 	"ReadAccessDenied" => "<em>U heeft geen leesrechten op deze pagina.</em>",
 	"YouAreOwner" => "U bent de eigenaar van deze pagina.",

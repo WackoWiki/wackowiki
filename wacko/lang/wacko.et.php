@@ -61,7 +61,8 @@ $wackoTranslation = array(
 	"AddCommentTitle" => "Title of the comment:",
 	"AddCommentButton" => "Lisa kommentaar",
 
-	"DoesNotExists" => "Seda lehte ei eksisteeri veel. Soovid sa seda <a href=\"%1\">luua</a>?",
+	"DoesNotExists" => "Seda lehte ei eksisteeri veel.",
+	"PromptCreate" => "Soovid sa seda <a href=\"%1\">luua</a>?",
 	"Revision" => "See on varasem redigeering <a href=\"%1\">%2</a> %3.",
 	"ReadAccessDenied" => "<em>Sul pole õigusi seda lehte lugeda.</em>",
 	"YouAreOwner" => "Sa oled selle lehe omanik.",
