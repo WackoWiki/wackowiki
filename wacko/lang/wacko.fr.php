@@ -286,6 +286,7 @@ $wackoTranslation = array(
 	"KeywordsRenamed" => "<em>Mots-clés rattachés au nouveau nom de la page.</em>",
 
 	"UserSettings" => "User settings",
+	"UserSpace" => "User space",
 	"ChooseTheme" => "Choisir un thème",
 
 	"CreatePage" => "Créer cette page",

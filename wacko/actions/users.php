@@ -1,12 +1,12 @@
 <?php
 
 // display user profile
-if ($_REQUEST['profile'] == true)
+if ($_GET['profile'] == true)
 {
 	// does requested user exists?
-	if (false == $user = $this->LoadUser($_REQUEST['profile']))
+	if (false == $user = $this->LoadUser($_GET['profile']))
 	{
-		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_REQUEST['profile']), str_replace('%1', $this->supertag, $this->GetTranslation('UsersNotFound'))).'</div>';
+		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_GET['profile']), str_replace('%1', $this->supertag, $this->GetTranslation('UsersNotFound'))).'</div>';
 	}
 	else
 	{
@@ -134,6 +134,10 @@ if ($_REQUEST['profile'] == true)
 			<tr>
 				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->GetTranslation('ProfileJabberID'); ?></strong></td>
 				<td><?php echo ( $user['options']['jid'] ? htmlspecialchars($user['options']['jid']) : '<em>'.$this->GetTranslation('UsersNA').'</em>' ); ?></td>
+			</tr>
+			<tr><?php // Have all user pages as sub pages of the current Users page. ?>
+				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->GetTranslation('UserSpace'); // TODO: this might be placed somewhere else, jut put it here for testing ?></strong></td>
+				<td><a href="<?php echo $this->href('', ($this->config['users_page'].'/'.$user['name'])); ?>"><?php echo $this->config['users_page'].'/'.$user['name']; ?></a></td>
 			</tr>
 			<tr>
 				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><a href="<?php echo $this->href('', $this->config['groups_page']); ?>"><?php echo $this->GetTranslation('UsersGroupMembership'); ?></a></strong></td>
