@@ -46,9 +46,7 @@ function admin_configpages(&$engine, &$module)
 				"`orphaned_page`		= '".quote(trim((string)$_POST['orphaned_page'], '/'))."', ".
 				"`todo_page`			= '".quote(trim((string)$_POST['todo_page'], '/'))."', ".
 				"`sandbox`				= '".quote(trim((string)$_POST['sandbox'], '/'))."', ".
-				"`wiki_docs`			= '".quote(trim((string)$_POST['wiki_docs'], '/'))."', ".
-				"`bbcode_docs`			= '".quote(trim((string)$_POST['bbcode_docs'], '/'))."', ".
-				"`moders_docs`			= '".quote(trim((string)$_POST['moders_docs'], '/'))."' ");
+				"`wiki_docs`			= '".quote(trim((string)$_POST['wiki_docs'], '/'))."', ");
 		$engine->Log(1, 'Updated settings base pages');
 		$engine->Redirect(rawurldecode($engine->href()));
 	}
@@ -248,22 +246,6 @@ function admin_configpages(&$engine, &$module)
 				<td class="label"><label for="wiki_docs"><strong>Wiki documentation:</strong><br />
 				<small>Section of the documentation for using the tool site.</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="wiki_docs" name="wiki_docs" value="<?php echo htmlspecialchars($engine->config['wiki_docs']);?>" /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr>
-				<td class="label"><label for="bbcode_docs"><strong>Documentation BBCode:</strong><br />
-				<small>Page describing the syntax BBCode.</small></label></td>
-				<td><input maxlength="255" style="width:200px;" id="bbcode_docs" name="bbcode_docs" value="<?php echo htmlspecialchars($engine->config['bbcode_docs']);?>" /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr>
-				<td class="label"><label for="moders_docs"><strong>Documentation for moderators:</strong><br />
-				<small>How to work with tools moderation discussions.</small></label></td>
-				<td><input maxlength="255" style="width:200px;" id="moders_docs" name="moders_docs" value="<?php echo htmlspecialchars($engine->config['moders_docs']);?>" /></td>
 			</tr>
 		</table>
 		<br />
