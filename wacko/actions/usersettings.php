@@ -177,7 +177,7 @@ else if ($user = $this->GetUser())
   </tr>
 
   <tr>
-    <td class="form_left">other tuning</td>
+    <td class="form_left"><?php echo $this->GetTranslation("UserSettingsOther");?></td>
     <td class="form_right"><input type="hidden" name="doubleclickedit" value="0" />
       <input
 	type="checkbox" id="doubleclickedit" name="doubleclickedit" value="1"
