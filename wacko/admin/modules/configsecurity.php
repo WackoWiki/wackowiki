@@ -30,7 +30,10 @@ function admin_configsecurity(&$engine, &$module)
 		$engine->Query(
 			"UPDATE {$engine->config['table_prefix']}config SET ".
 				"`allow_registration`	= '".quote((int)$_POST['allow_registration'])."', ".
-				"`captcha`				= '".quote((int)$_POST['captcha'])."', ".
+				"captcha_new_comment 	= '".quote((int)$_POST['captcha_new_comment'])."', ".
+				"captcha_new_page 		= '".quote((int)$_POST['captcha_new_page'])."', ".
+				"captcha_edit_page 		= '".quote((int)$_POST['captcha_edit_page'])."', ".
+				"captcha_registration 	= '".quote((int)$_POST['captcha_registration'])."', ".
 				"`strong_cookies`		= '".quote((int)$_POST['strong_cookies'])."', ".
 				"`antidupe`				= '".quote((int)$_POST['antidupe'])."', ".
 				"`default_read_acl`		= '".quote((string)$_POST['default_read_acl'])."', ".
@@ -49,14 +52,6 @@ function admin_configsecurity(&$engine, &$module)
 				"`pwd_min_chars`		= '".quote((int)$_POST['pwd_min_chars'])."', ".
 				"`pwd_char_classes`		= '".quote((int)$_POST['pwd_char_classes'])."', ".
 				"`pwd_unlike_login`		= '".quote((int)$_POST['pwd_unlike_login'])."', ".
-				/*
-				"`gpg`					= '".quote((int)$_POST['gpg'])."', ".
-				"`gpg_debug`			= '".quote((int)$_POST['gpg_debug'])."', ".
-				"`gpg_server`			= '".quote((string)$_POST['gpg_server'])."', ".
-				"`gpg_home`				= '".quote((string)$_POST['gpg_home'])."', ".
-				"`gpg_temp`				= '".quote((string)$_POST['gpg_temp'])."', ".
-				"`gpg_wrapper`			= '".quote((string)$_POST['gpg_wrapper'])."', ".
-				*/
 				"`log_min_level`		= '".quote((int)$_POST['log_min_level'])."', ".
 				"`log_default_show`		= '".quote((int)$_POST['log_default_show'])."', ".
 				"`log_purge_time`		= '".quote((int)$_POST['log_purge_time'])."', ".
@@ -83,14 +78,6 @@ function admin_configsecurity(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="captcha"><strong>Turing test (CAPTCHA):</strong><br />
-				<small>As a measure of protection against spam publications require unregistered users a single solution of the test before registering, posting the comment and editing pages. The parameters for fine-tuning are in the configuration file WackoWiki.</small></label></td>
-				<td><input type="checkbox" id="captcha" name="captcha" value="1"<?php echo ( $engine->config['captcha'] ? ' checked="checked"' : '' );?> /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr>
 				<td class="label"><label for="strong_cookies"><strong>Secure cookies:</strong><br />
 				<small>Use the authenticated cookie with protection against unauthorized use. Enabling this option may complicate the work of users simultaneously through multiple browsers.</small></label></td>
 				<td><input type="checkbox" id="strong_cookies" name="strong_cookies" value="1"<?php echo ( $engine->config['strong_cookies'] ? ' checked="checked"' : '' );?> /></td>
@@ -102,6 +89,46 @@ function admin_configsecurity(&$engine, &$module)
 				<td class="label"><label for="antidupe"><strong>Anti-clone:</strong><br />
 				<small>Disable register on the website under the names, <u>like</u> on the names of existing users (guests also can not use similar names for the signature comments). When this option is checked only <u>identical</u> names.</small></label></td>
 				<td><input type="checkbox" id="antidupe" name="antidupe" value="1"<?php echo ( $engine->config['antidupe'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<br />
+					<div class="center">
+						<input id="submit" type="submit" value="save" />
+						<input id="button" type="reset" value="reset" />
+					</div>
+					<br />
+					CAPTCHA
+				</th>
+			</tr>
+			<tr>
+				<td class="label"><label for="captcha_new_comment"><strong>New comment:</strong><br />
+				<small>As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment. The parameters for fine-tuning are in the configuration file.</small></label></td>
+				<td><input type="checkbox" id="captcha_new_comment" name="captcha_new_comment" value="1"<?php echo ( $engine->config['captcha_new_comment'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="captcha_new_page"><strong>New page:</strong><br />
+				<small>As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages. The parameters for fine-tuning are in the configuration file.</small></label></td>
+				<td><input type="checkbox" id="captcha_new_page" name="captcha_new_page" value="1"<?php echo ( $engine->config['captcha_new_page'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="captcha_edit_page"><strong>Edit page:</strong><br />
+				<small>As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages. The parameters for fine-tuning are in the configuration file.</small></label></td>
+				<td><input type="checkbox" id="captcha_edit_page" name="captcha_edit_page" value="1"<?php echo ( $engine->config['captcha_edit_page'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="captcha_registration"><strong>Registration:</strong><br />
+				<small>As a measure of protection against spam publications require unregistered users a single solution of the test before registering. The parameters for fine-tuning are in the configuration file.</small></label></td>
+				<td><input type="checkbox" id="captcha_registration" name="captcha_registration" value="1"<?php echo ( $engine->config['captcha_registration'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
