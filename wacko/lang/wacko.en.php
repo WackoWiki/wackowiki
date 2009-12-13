@@ -286,6 +286,7 @@ $wackoTranslation = array(
 	"KeywordsRenamed" => "<em>Keywords relocated to the new name of the page.</em>",
 
 	"UserSettings" => "User settings",
+	"UserSpace" => "User space",
 	"ChooseTheme" => "Choose theme",
 
 	"CreatePage" => "Create this page",
@@ -364,7 +365,7 @@ $wackoTranslation = array(
 	'UsersRevisions'		=> 'Revisions',
 	'UsersSignup'			=> 'Signup',
 	'UsersLastSession'		=> 'Last session',
-	'UsersNotFound'			=> 'User <tt>%2</tt> not found. Click <a href="/%1">here</a>, to go to the main list.',
+	"UsersNotFound"			=> "User <tt>%2</tt> not found. Click <a href=\"%1\">here</a>, to go to the main list.",
 	'UsersProfile'			=> 'Profile',
 	'UsersDocuments'		=> 'Pages',
 	'UsersComments'			=> 'Comments',

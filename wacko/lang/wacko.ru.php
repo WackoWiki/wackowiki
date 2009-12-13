@@ -286,6 +286,7 @@ $wackoTranslation = array(
 	"KeywordsRenamed" => "<em>Ключевые слова перемещены на новое имя страницы.</em>",
 
 	"UserSettings" => "Настройки пользователя",
+	"UserSpace" => "User space",
 	"ChooseTheme" => "Выберите тему",
 
 	"CreatePage" => "Создать эту страницу",
@@ -372,7 +373,7 @@ $wackoTranslation = array(
 	'UsersRevisions'		=> 'Редакций',
 	'UsersSignup'			=> 'Регистрация',
 	'UsersLastSession'		=> 'Последнее посещение',
-	'UsersNotFound'			=> 'Пользователь <tt>%2</tt> не найден. Нажмите <a href="/%1">здесь</a>, чтобы перейти к общему списку.',
+	"UsersNotFound"			=> "Пользователь <tt>%2</tt> не найден. Нажмите <a href=\"%1\">здесь</a>, чтобы перейти к общему списку.",
 	'UsersProfile'			=> 'Досье',
 	'UsersDocuments'		=> 'Документы',
 	'UsersComments'			=> 'Комментарии',
