@@ -51,7 +51,7 @@ else if ($user = $this->GetUser())
 		// invalid email
 		else if (!preg_match("/^[\w.-]+?\@[\w.-]+?\.[\w]+$/", $_POST["email"]))
 			$error .= $this->GetTranslation("NotAEmail")." ";
-		
+
 		// check for errors and store
 		if ($error)
 		{
@@ -158,7 +158,7 @@ else if ($user = $this->GetUser())
 <table class="form_tbl">
 <tbody>
   <tr>
-    <td class="form_left"><?php echo $this->GetTranslation("UsersName");?></td>
+    <td class="form_left"><?php echo $this->GetTranslation("UserName");?></td>
     <td><strong><?php echo $user["name"];?></strong></td>
   </tr>
   <tr>
@@ -167,7 +167,7 @@ else if ($user = $this->GetUser())
   </tr>
   <tr>
     <td class="form_left"><label for="email"><?php echo $this->GetTranslation("YourEmail");?>:</label></td>
-    <td><input id="email" name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />&nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("root_url").'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("root_url").'images/warning.gif" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="16" height="16" />' ?> 
+    <td><input id="email" name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />&nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("root_url").'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("root_url").'images/warning.gif" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="16" height="16" />' ?>
 <?php
 		if (!$user["email"] || $code["email_confirm"])
 			echo "<strong class=\"cite\"".
