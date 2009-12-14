@@ -225,7 +225,10 @@ $wackoTranslation = array(
 	"SetWatch" => "Beobachte die Seite",
 	"UserSettingsStored" => "Benutzereinstellungen gespeichert!",
 	"LoggedOut" => "Du bist jetzt abgemeldet.",
+
+	// user settings
 	"Hello" => "Hallo",
+	"UserName" => "Benutzername",
 	"YourEmail" => "Deine E-Mailadresse",
 	"YourMotto" => "Dein Motto",
 	"RevisionListLimit" => "max. Anzahl von Versionen",

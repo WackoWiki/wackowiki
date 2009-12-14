@@ -224,7 +224,10 @@ $wackoTranslation = array(
 	"SetWatch" => "Watch this page",
 	"UserSettingsStored" => "User settings saved!",
 	"LoggedOut" => "You are now logged out.",
+
+	// user settings
 	"Hello" => "Hello",
+	"UserName" => "User name",
 	"YourEmail" => "Your email address",
 	"YourMotto" => "Your motto",
 	"RevisionListLimit" => "Revision list limit",
@@ -286,7 +289,7 @@ $wackoTranslation = array(
 	"KeywordsRenamed" => "<em>Keywords relocated to the new name of the page.</em>",
 
 	"UserSettings" => "User settings",
-	"UserSettingsOther" => "other settings",
+	"UserSettingsOther" => "Other settings",
 	"UserSpace" => "User space",
 	"ChooseTheme" => "Choose theme",
 

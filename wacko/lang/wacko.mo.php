@@ -224,7 +224,10 @@ $wackoTranslation = array(
 	"SetWatch" => "Monitorizeaza",
 	"UserSettingsStored" => "Preferintele Dvs. sunt salvate",
 	"LoggedOut" => "Ati iesit din sistema",
+
+	// user settings
 	"Hello" => "Salut",
+	"UserName" => "User name",
 	"YourEmail" => "Adresa postei electronice",
 	"YourMotto" => "Motto-ul Dvs.",
 	"RevisionListLimit" => "Limitarea listei pagini redactate",
@@ -288,7 +291,7 @@ $wackoTranslation = array(
 	"KeywordsRenamed" => "<em>Keywords relocated to the new name of the page.</em>",
 
 	"UserSettings" => "User settings",
-	"UserSettingsOther" => "other settings",
+	"UserSettingsOther" => "Other settings",
 	"UserSpace" => "User space",
 	"ChooseTheme" => "Alegeti tema",
 

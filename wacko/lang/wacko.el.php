@@ -224,7 +224,10 @@ $wackoTranslation = array(
 	"SetWatch" => "Παρακολούθησε αυτή την σελίδα",
 	"UserSettingsStored" => "Οι ρυθμίσεις σας αποθηκεύτηκαν!",
 	"LoggedOut" => "Τώρα είστε αποσυνδεδεμένος.",
+
+	// user settings
 	"Hello" => "Γειά σου",
+	"UserName" => "User name",
 	"YourEmail" => "Η ηλεκτρονική σας διεύθυνση",
 	"YourMotto" => "Η υπογραφή σας",
 	"RevisionListLimit" => "Όριο λίστας αναθεωρήσεων",
@@ -286,7 +289,7 @@ $wackoTranslation = array(
 	"KeywordsRenamed" => "<em>Keywords relocated to the new name of the page.</em>",
 
 	"UserSettings" => "User settings",
-	"UserSettingsOther" => "other settings",
+	"UserSettingsOther" => "Other settings",
 	"UserSpace" => "User space",
 	"ChooseTheme" => "Επέλεξε θέμα",
 
