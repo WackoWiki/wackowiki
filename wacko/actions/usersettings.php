@@ -158,11 +158,11 @@ else if ($user = $this->GetUser())
 <table class="form_tbl">
 <tbody>
   <tr>
-    <td class="form_left"><?php echo $this->GetTranslation("UserName");?></td>
+    <td class="form_left"><?php echo $this->GetTranslation("UserName");?>:</td>
     <td><strong><?php echo $user["name"];?></strong></td>
   </tr>
   <tr>
-    <td class="form_left"><a href="<?php echo $this->href("", "Password")?>"><?php echo $this->GetTranslation("YouWantChangePassword");?></a></td>
+    <td class="form_left"><a href="<?php echo $this->href("", "Password")?>"><?php echo $this->GetTranslation("YouWantChangePassword");?></a>:</td>
     <td><input type="button" onclick="location.href='password'" value="<?php echo $this->GetTranslation("YouWantChangePassword");?>" name="_password"/></td>
   </tr>
   <tr>
@@ -177,7 +177,7 @@ else if ($user = $this->GetUser())
   </tr>
 
   <tr>
-    <td class="form_left"><?php echo $this->GetTranslation("UserSettingsOther");?></td>
+    <td class="form_left"><?php echo $this->GetTranslation("UserSettingsOther");?>:</td>
     <td class="form_right"><input type="hidden" name="doubleclickedit" value="0" />
       <input
 	type="checkbox" id="doubleclickedit" name="doubleclickedit" value="1"
