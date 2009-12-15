@@ -81,7 +81,7 @@ $cnt = 0;
 if ($pages1)
 	foreach ($pages1 as $page)
 	{
-		if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
+		if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["id"]);
 		else $access = true;
 		if ($access)
 		{
@@ -95,7 +95,7 @@ if ($pages1)
 if ($pages2)
 	foreach ($pages2 as $page)
 	{
-		if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
+		if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["id"]);
 		else $access = true;
 		if ($access)
 		{

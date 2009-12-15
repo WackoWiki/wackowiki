@@ -37,7 +37,7 @@ if ($this->HasAccess("read")) {
 	$pageA = HandlerDiffLoadPageById($this, $b);
 	$pageB = HandlerDiffLoadPageById($this, $a);
 
-	if ($this->HasAccess("read", $pageA["tag"]) && $this->HasAccess("read", $pageB["tag"]) ) {
+	if ($this->HasAccess("read", $pageA["id"]) && $this->HasAccess("read", $pageB["id"]) ) {
 
 		if ($_GET["source"]) $source = 1;
 

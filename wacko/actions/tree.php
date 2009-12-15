@@ -282,7 +282,7 @@ if ($pages)
 	$tree_pages_array = array();
 	foreach($pages as $page)
 	{
-		if (!$this->config["hide_locked"] || $this->HasAccess("read", $page["supertag"]))
+		if (!$this->config["hide_locked"] || $this->HasAccess("read", $page["id"]))
 		{
 			$tree_pages_array["/".$page["supertag"]] = $page["tag"];
 		}

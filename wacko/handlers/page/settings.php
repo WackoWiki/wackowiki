@@ -12,11 +12,11 @@ if (!$this->page) $this->Redirect($this->href('show'));
 if ($this->page['comment_on_id'])
 	$this->Redirect($this->href('', $this->GetCommentOnTag($this->page["comment_on_id"]), 'show_comments=1').'#'.$this->page['tag']);
 
-if ($this->UserIsOwner() || $this->HasAccess("write",$page["tag"]))
+if ($this->UserIsOwner() || $this->HasAccess("write",$page["id"]))
 {
 	if ($_POST)
 	{
-		$this->SaveMeta($this->GetPageTag(), array(
+		$this->SaveMeta($this->GetPageId(), array(
 			"lang" => $_POST["lang"],
 			"title" => $_POST["title"],
 			"description" => $_POST["description"],

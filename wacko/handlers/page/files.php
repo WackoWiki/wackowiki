@@ -17,12 +17,12 @@ $what = $this->LoadAll(
 	"FROM ".$this->config["table_prefix"]."upload f ".
 		"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.id) ".
 	"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-    "AND f.filename='".quote($this->dblink, $_GET["get"])."'");
+	"AND f.filename='".quote($this->dblink, $_GET["get"])."'");
 
 if (sizeof($what) > 0)
 {
 	// 2. check rights
-	if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwnerId($this->tag) == $this->GetUserId())) ||
+	if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwnerId($page_id) == $this->GetUserId())) ||
 	($this->HasAccess("read")) || ($desc["user_id"] == $this->GetUserId()) )
 	{
 		$filepath = $this->config["upload_path".($page_id ? "_per_page" : "")]."/".

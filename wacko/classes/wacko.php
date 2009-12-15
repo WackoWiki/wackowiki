@@ -1035,7 +1035,7 @@ class Wacko
 	function LoadOrphanedPages($for = "")
 	{
 		$pref = $this->config["table_prefix"];
-		$sql = "SELECT DISTINCT tag FROM ".$pref."pages ".
+		$sql = "SELECT DISTINCT id, tag FROM ".$pref."pages ".
 			"LEFT JOIN ".$pref."links ON ".
 			//     $pref."pages.tag = ".$pref."links.to_tag WHERE ".
 			"((".$pref."links.to_tag = ".$pref."pages.tag ".
@@ -1118,6 +1118,7 @@ class Wacko
 		// get current user
 		$user = $this->GetUserName();
 		$user_id = $this->GetUserId();
+		$page_id = $this->GetPageId($tag);
 
 		/*
 			ANTISPAM
@@ -1159,7 +1160,7 @@ class Wacko
 		}
 
 		// check privileges
-		if ($this->HasAccess("write", $tag) || ($comment_on_id && $this->HasAccess("comment", $this->GetCommentOnTag($comment_on_id))))
+		if ($this->HasAccess("write", $page_id) || ($comment_on_id && $this->HasAccess("comment", $comment_on_id)))
 		{
 			// preformatter (macros and such)
 			$body = $this->Format($body, "preformat");
@@ -1217,11 +1218,11 @@ class Wacko
 				else if ($comment_on_id)
 				{
 					// Give comments the same rights as their parent page
-					$write_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on_id), "write");
+					$write_acl = $this->LoadAcl($comment_on_id, "write");
 					$write_acl = $write_acl["list"];
-					$read_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on_id), "read");
+					$read_acl = $this->LoadAcl($comment_on_id, "read");
 					$read_acl = $read_acl["list"];
-					$comment_acl = $this->LoadAcl($this->GetCommentOnTag($comment_on_id), "comment");
+					$comment_acl = $this->LoadAcl($comment_on_id, "comment");
 					$comment_acl = $comment_acl["list"];
 				}
 				else
@@ -1310,7 +1311,7 @@ class Wacko
 						$Watcher["user"] = $this->GetUserNameById($Watcher["user_id"]);
 						$this->SetUser($Watcher, 0);
 
-						if ($this->HasAccess("read", $this->GetCommentOnTag($comment_on_id), $Watcher["user"]))
+						if ($this->HasAccess("read", $comment_on_id, $Watcher["user"]))
 						{
 							$User = $this->LoadSingle(
 								"SELECT email, lang, more, email_confirm ".
@@ -1427,7 +1428,7 @@ class Wacko
 							$this->SetUser($Watcher, 0);
 							$lang = $Watcher["lang"];
 
-							if ($this->HasAccess("read", $tag, $Watcher["user"]))
+							if ($this->HasAccess("read", $page_id, $Watcher["user"]))
 							{
 								$User = $this->LoadSingle(
 									"SELECT email, lang, more, email_confirm ".
@@ -1522,9 +1523,9 @@ class Wacko
 	}
 
 	// update metadata of a given page
-	function SaveMeta($tag, $metadata)
+	function SaveMeta($page_id, $metadata)
 	{
-		if ($this->UserIsOwner($tag) || $this->IsAdmin())
+		if ($this->UserIsOwner($page_id) || $this->IsAdmin())
 		{
 			$this->Query(
 				"UPDATE ".$this->config["table_prefix"]."pages SET ".
@@ -1532,7 +1533,7 @@ class Wacko
 					"title = '".quote($this->dblink, htmlspecialchars($metadata["title"]))."', ".
 					"keywords = '".quote($this->dblink, $metadata["keywords"])."', ".
 					"description = '".quote($this->dblink, $metadata["description"])."' ".
-				"WHERE tag = '".quote($this->dblink, $tag)."' ".
+				"WHERE id = '".quote($this->dblink, $page_id)."' ".
 				"LIMIT 1");
 		}
 		return true;
@@ -1869,6 +1870,7 @@ class Wacko
 
 				//unwrap tag (check !/, ../ cases)
 				$pagetag = rtrim($this->NpjTranslit($this->UnwrapLink($_pagetag)), "./");
+				$page_id = $this->GetPageId($pagetag);
 
 				//try to find in local $tag storage
 				$desc = $this->CheckFileExists($file, $pagetag);
@@ -1876,8 +1878,8 @@ class Wacko
 				if (is_array($desc))
 				{
 					//check 403 here!
-					if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwnerId($this->tag) == $this->GetUserId())) ||
-					($this->HasAccess("read", $pagetag)) || ($desc["user_id"] == $this->GetUserId()))
+					if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwnerId($this->GetPageId()) == $this->GetUserId())) ||
+					($this->HasAccess("read", $page_id)) || ($desc["user_id"] == $this->GetUserId()))
 					{
 						$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
 						$url = $this->config["base_url"].trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file;
@@ -2061,7 +2063,8 @@ class Wacko
 
 				if ($this->config["hide_locked"])
 				{
-					$access = $this->HasAccess("read", $tag);
+					$page_id = $this->GetPageId($tag);
+					$access = $this->HasAccess("read", $page_id);
 				}
 				else
 				{
@@ -2859,16 +2862,16 @@ class Wacko
 	}
 
 	// returns true if logged in user is owner of current page, or page specified in $tag
-	function UserIsOwner($tag = "")
+	function UserIsOwner($page_id = "")
 	{
 		// check if user is logged in
 		if (!$this->GetUser()) return false;
 
 		// set default tag
-		if (!$tag = trim($tag)) $tag = $this->GetPageTag();
+		if (!$page_id = trim($page_id)) $page_id = $this->GetPageId();
 
 		// check if user is owner
-		if ($this->GetPageOwner($tag) == $this->GetUserName())
+		if ($this->GetPageOwnerId($page_id) == $this->GetUserId())
 			return true;
 	}
 
@@ -2892,14 +2895,15 @@ class Wacko
 			return $page["owner"];
 	}
 
-	function GetPageOwnerId($tag = "", $time = "")
+	function GetPageOwnerId($page_id = "", $time = "")
 	{
-		if (!$tag = trim($tag))
+
+		if (!$page_id = trim($page_id))
 		{
 			if (!$time) return $this->page['owner_id'];
-			else $tag = $this->GetPageTag();
+			else $page_id = $this->GetPageId();
 		}
-
+		$tag = $this->GetPageTagById($page_id);
 		if ($page = $this->LoadPage($tag, $time, LOAD_CACHE, LOAD_META))
 			return $page["owner_id"];
 	}
@@ -2917,17 +2921,15 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function SaveAcl($tag, $privilege, $list)
+	function SaveAcl($page_id, $privilege, $list)
 	{
-		$page_id = $this->GetPageId($tag);
-		$supertag = $this->NpjTranslit($tag);
 
-		if ($this->LoadAcl($tag, $privilege, 0))
+		if ($this->LoadAcl($page_id, $privilege, 0))
 		{
 			$this->Query(
 				"UPDATE ".$this->config["table_prefix"]."acls SET ".
 					"list = '".quote($this->dblink, trim(str_replace("\r", "", $list)))."' ".
-				"WHERE supertag = '".quote($this->dblink, $supertag)."' ".
+				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
 					"AND privilege = '".quote($this->dblink, $privilege)."' ");
 		}
 		else
@@ -2935,38 +2937,34 @@ class Wacko
 			$this->Query(
 				"INSERT INTO ".$this->config["table_prefix"]."acls SET ".
 					"list = '".quote($this->dblink, trim(str_replace("\r", "", $list)))."', ".
-					"supertag = '".quote($this->dblink, $supertag)."', ".
-					"page_tag = '".quote($this->dblink, $tag)."', ".
 					"page_id = '".quote($this->dblink, $page_id)."', ".
 					"privilege = '".quote($this->dblink, $privilege)."'");
 		}
 	}
 
-	function GetCachedACL($tag, $privilege, $useDefaults)
+	function GetCachedACL($page_id, $privilege, $useDefaults)
 	{
-		if (isset( $this->aclCache[$tag."#".$privilege."#".$useDefaults] ))
-			return $this->aclCache[$tag."#".$privilege."#".$useDefaults];
+		if (isset( $this->aclCache[$page_id."#".$privilege."#".$useDefaults] ))
+			return $this->aclCache[$page_id."#".$privilege."#".$useDefaults];
 		else
 			return '';
 	}
 
-	function CacheACL($tag, $privilege, $useDefaults, $acl)
+	function CacheACL($page_id, $privilege, $useDefaults, $acl)
 	{
-		$this->aclCache[$tag."#".$privilege."#".$useDefaults] = $acl;
+		$this->aclCache[$page_id."#".$privilege."#".$useDefaults] = $acl;
 	}
 
-	function LoadAcl($tag, $privilege, $useDefaults = 1)
+	function LoadAcl($page_id, $privilege, $useDefaults = 1)
 	{
 		if (!isset($acl)) $acl = "";
 
-		$supertag = $this->NpjTranslit($tag);
-
-		if ($cachedACL = $this->GetCachedACL($supertag, $privilege, $useDefaults))
+		if ($cachedACL = $this->GetCachedACL($page_id, $privilege, $useDefaults))
 			$acl = $cachedACL;
 
 		if (!$acl)
 		{
-			if ($cachedACL = $this->GetCachedACL($tag, $privilege, $useDefaults))
+			if ($cachedACL = $this->GetCachedACL($page_id, $privilege, $useDefaults))
 				$acl = $cachedACL;
 
 			if (!$acl)
@@ -2975,23 +2973,16 @@ class Wacko
 				$acl = $this->LoadSingle(
 								"SELECT * ".
 								"FROM ".$this->config["table_prefix"]."acls ".
-								"WHERE supertag = '".quote($this->dblink, $supertag)."' ".
+								"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
 									"AND privilege = '".quote($this->dblink, $privilege)."' ".
 								"LIMIT 1");
-				if (!$acl)
-				{
-					$acl = $this->LoadSingle(
-									"SELECT * FROM ".$this->config["table_prefix"]."acls ".
-									"WHERE page_tag = '".quote($this->dblink, $tag)."' ".
-										"AND privilege = '".quote($this->dblink, $privilege)."' ".
-									"LIMIT 1");
-				}
 
 				// if still no acl, use config defaults
 				if (!$acl && $useDefaults)
 				{
 					// First look for parent ACL, so that clusters/subpages
 					// work correctly.
+					$tag = $this->GetPageTagById($page_id);
 					if ( strstr($tag, "/") )
 					{
 						$parent = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $tag );
@@ -2999,14 +2990,14 @@ class Wacko
 						// By letting it fetch defaults, it will automatically recurse
 						// up the tree of parent pages... fetching the ACL on the root
 						// page if necessary.
-						$acl = $this->LoadAcl( $parent, $privilege, 1 );
+						$parent_id = $this->GetPageId($parent);
+						$acl = $this->LoadAcl( $parent_id, $privilege, 1 );
 					}
 
 					if (!$acl)
 					{
 						$acl = array(
-							"supertag" => $supertag,
-							"page_tag" => $tag,
+							"page_id" => $page_id,
 							"privilege" => $privilege,
 							"list" => $this->config["default_".$privilege."_acl"],
 							"time" => date("YmdHis"),
@@ -3015,14 +3006,14 @@ class Wacko
 					}
 				}
 
-				$this->CacheACL($supertag, $privilege, $useDefaults, $acl);
+				$this->CacheACL($page_id, $privilege, $useDefaults, $acl);
 			}
 		}
 		return $acl;
 	}
 
 	// returns true if $user (defaults to the current user) has access to $privilege on $page_tag (defaults to the current page)
-	function HasAccess($privilege, $tag = "", $user = "")
+	function HasAccess($privilege, $page_id = "", $user = "")
 	{
 		$registered = false;
 		// see whether user is registered and logged in
@@ -3034,15 +3025,15 @@ class Wacko
 				$user = "guest@wacko";
 		}
 
-		if (!$tag = trim($tag)) $tag = $this->GetPageTag();
+		if (!$page_id = trim($page_id)) $page_id = $this->GetPageId();
 
 		// load acl
-		$acl = $this->LoadAcl($tag, $privilege);
+		$acl = $this->LoadAcl($page_id, $privilege);
 		$this->_acl = $acl;
 
 		// if current user is owner, return true. owner can do anything!
 		if ($user != "guest@wacko")
-			if ($this->UserIsOwner($tag))
+			if ($this->UserIsOwner($page_id))
 				return true;
 
 		return $this->CheckACL($user, $acl['list'], true);
@@ -3165,7 +3156,7 @@ class Wacko
 		$this->ClearWatch($user_id, $page_id);
 		$tag = $this->GetPageTagById($page_id);
 
-		if ($this->HasAccess('read', $tag))
+		if ($this->HasAccess('read', $page_id))
 			return $this->Query(
 				"INSERT INTO ".$this->config["table_prefix"]."watches (user_id, page_id) ".
 				"VALUES ( '".quote($this->dblink, $user_id)."', '".quote($this->dblink, $page_id)."')" );

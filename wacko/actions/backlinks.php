@@ -16,9 +16,9 @@ if ($pages = $this->LoadPagesLinkingTo($tag))
 	{
 		if ($page["tag"])
 		{
-			if ($this->config["hide_locked"]) 
-				$access = $this->HasAccess("read",$page["tag"]);
-			else 
+			if ($this->config["hide_locked"])
+				$access = $this->HasAccess("read",$page["id"]);
+			else
 				$access = true;
 
 			if ($access)

@@ -1,8 +1,8 @@
 <?php
 
 $vars[0] = $this->UnwrapLink($vars[0]);
-
-if (! $this->HasAccess("read",$vars[0]))
+$page_id = $this->GetPageId($vars[0]);
+if (! $this->HasAccess("read",$page_id))
 {
 	echo $this->GetTranslation("NoAccessToSourcePage");
 }

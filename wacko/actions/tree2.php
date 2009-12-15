@@ -22,11 +22,11 @@ if (!isset($title)) $title = "";
 
 // collect pages
 if ($pages = $this->LoadAll(
-"SELECT tag, supertag, title ".
-"FROM {$this->config['table_prefix']}pages ".
-"WHERE comment_on_id = '0' ".
-	"AND tag LIKE '".quote($this->dblink, $root)."%' ".
-"ORDER BY tag", 1))
+	"SELECT id, tag, supertag, title ".
+	"FROM {$this->config['table_prefix']}pages ".
+	"WHERE comment_on_id = '0' ".
+		"AND tag LIKE '".quote($this->dblink, $root)."%' ".
+	"ORDER BY tag", 1))
 {
 	// pick all subpages up to the desired depth level
 	if ($depth > 0)
@@ -117,7 +117,7 @@ if ($pages = $this->LoadAll(
 		{
 			// check read privilege and current page tag
 			if ($page['tag'] == $root ||
-			($this->config['hide_locked'] && !$this->HasAccess('read', $page['tag'])))
+			($this->config['hide_locked'] && !$this->HasAccess('read', $page['id'])))
 				continue;
 
 			// check page level

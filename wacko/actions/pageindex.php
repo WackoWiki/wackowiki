@@ -16,7 +16,7 @@ if (!isset($letter)) $letter = "";
 if(isset($letter)) $letter = strtoupper(substr($letter, 0, 1));
 
 // Get tags for all the pages, even if they're not being displayed on this index page
-$sql = "SELECT tag FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '0' ORDER BY tag";
+$sql = "SELECT id, tag FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '0' ORDER BY tag";
 $pages = $this->LoadAll($sql, 1);
 
 $total = 0;
@@ -44,7 +44,7 @@ foreach($pages as $page)
 
 	// Display the actual page link
 	if($this->config["hide_locked"])
-		$access = $this->HasAccess("read",$page["tag"]);
+		$access = $this->HasAccess("read",$page["id"]);
 	else
 		$access = true;
 

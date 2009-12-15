@@ -25,7 +25,7 @@ if ($this->HasAccess("read"))
 	foreach ($pages as $num => $page)
 	{
 		// check ACLS
-		if (!$this->HasAccess("write", $page["tag"])) continue;
+		if (!$this->HasAccess("write", $page["id"])) continue;
 		// output page
 		$tag = $page["tag"];
 

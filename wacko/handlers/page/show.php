@@ -58,6 +58,7 @@ if ($this->HasAccess("read"))
 				<br />
 				<?php echo $this->FormOpen("edit") ?>
 				<input type="hidden" name="previous" value="<?php echo $latest["time"] ?>" />
+				<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->page["id"]) ?>" />
 				<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page["body"]) ?>" />
 				<input type="submit" value="<?php echo $this->GetTranslation("ReEditOldRevision") ?>" />
 				<input name="cancel" id="button" type="button" value="<?php echo $this->GetTranslation("EditCancelButton") ?>" onclick="document.location='<?php echo addslashes($this->href()) ?>';" />
@@ -168,7 +169,7 @@ if ($this->page)
 
 			<?php
 			echo "<div class=\"files\">";
-			echo $this->Action("files",array("nomark"=>1));
+			echo $this->Action("files",array("nomark" => 1));
 			echo "</div>";
 			// display form
 			if ($user = $this->GetUser())
@@ -280,7 +281,7 @@ if ($this->page)
 				{
 					echo "<li id=\"".$comment["tag"]."\" class=\"comment\">\n";
 					$del = "";
-					if ($this->IsAdmin() || $this->UserIsOwner($comment["tag"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageTag())))
+					if ($this->IsAdmin() || $this->UserIsOwner($comment["id"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageId())))
 					{
 						print("<a href=\"".$this->href("remove", $comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/delete_comment.gif\" title=\"".$this->GetTranslation("DeleteCommentTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" align=\"right\" border=\"0\" /></a>");
 						print("<a href=\"".$this->href("edit", $comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/edit.gif\" title=\"".$this->GetTranslation("EditCommentTip")."\" alt=\"".$this->GetTranslation("EditComment")."\" align=\"right\" border=\"0\" /></a>");
