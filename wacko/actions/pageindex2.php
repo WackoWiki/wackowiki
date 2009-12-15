@@ -24,7 +24,7 @@ if ($pages = $this->LoadAll(
 	foreach ($pages as $page)
 	{
 		if ($this->config['hide_locked'])
-			$access = $this->HasAccess('read', $page['tag']);
+			$access = $this->HasAccess('read', $page['id']);
 		else
 			$access = true;
 

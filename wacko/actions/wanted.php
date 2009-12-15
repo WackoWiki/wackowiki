@@ -7,14 +7,14 @@ else
 
 if ($linking_to = $_GET["linking_to"])
 {
-	if ($pages = $this->LoadPagesLinkingTo($linking_to,$root))
+	if ($pages = $this->LoadPagesLinkingTo($linking_to, $root))
 	{
 		echo $this->GetTranslation("PagesLinkingTo")." ".$this->Link($linking_to).":<br />\n";
 		echo "<ul>\n";
 
 		foreach ($pages as $page)
 		{
-			if (!$this->config["hide_locked"] || $this->HasAccess("read", $page["tag"]))
+			if (!$this->config["hide_locked"] || $this->HasAccess("read", $page["id"]))
 			{
 				echo "<li>".$this->Link("/".$page["tag"],"","/".$page["tag"])."</li>\n";
 			}

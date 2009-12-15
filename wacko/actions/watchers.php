@@ -1,13 +1,17 @@
 <?php
 
-if ($vars[0] && $vars[0]!=$vars["nomark"])
-	$tag = $this->UnwrapLink( $vars[0] );
+if ($vars[0] && $vars[0] != $vars["nomark"])
+{
+	$tag = $this->UnwrapLink($vars[0]);
+	$page_id = $this->GetPageId($tag);
+}
 else
+{
 	$tag = $this->getPageTag();
 	$page_id = $this->getPageId();
-if ($this->UserIsOwner($tag))
+}
+if ($this->UserIsOwner($page_id))
 {
-
 	$watchers = $this->LoadAll(
 		"SELECT * ".
 		"FROM ".$this->config["table_prefix"]."watches ".

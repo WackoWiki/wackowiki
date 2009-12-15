@@ -5,7 +5,7 @@ if ($user_id = $this->GetUserId())
 	if ($max) $limit = $max;
 	else $limit	= 100;
 	$pref	= $this->config['table_prefix'];
-	
+
 	echo $this->GetTranslation('MyChangesWatches').
 		' (<a href="'.$this->href('', '', 'mode=mychangeswatches&amp;reset=1').'#list">'.
 		$this->GetTranslation('ResetChangesWatches').'</a>).<br /><br />';
@@ -20,7 +20,7 @@ if ($user_id = $this->GetUserId())
 			"GROUP BY p.tag ".
 			"ORDER BY p.time DESC, p.tag ASC ".
 			"LIMIT $limit");
-	
+
 	if ($_GET['reset'] == 1 && $pages == true)
 	{
 		foreach ($pages as $page)
@@ -35,7 +35,7 @@ if ($user_id = $this->GetUserId())
 	if ($pages == true)
 	{
 		foreach ($pages as $page)
-			if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['tag']))
+			if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['id']))
 				echo '<small>('.$this->ComposeLinkToPage($page['tag'], 'revisions', $this->GetTimeStringFormatted($page['time']), 0, $this->GetTranslation("History")).
 					')</small> '.$this->ComposeLinkToPage($page['tag'], '', '', 0)."<br />\n";
 	}

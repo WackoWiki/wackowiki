@@ -222,7 +222,7 @@ if ($_GET['profile'] == true)
 		if ($user['total_pages'])
 		{
 			$pages = $this->LoadAll(
-				"SELECT tag, title, created ".
+				"SELECT id, tag, title, created ".
 				"FROM {$this->config['table_prefix']}pages ".
 				"WHERE owner = '".quote($this->dblink, $user['name'])."' ".
 					"AND comment_on_id = '0' ".
@@ -237,9 +237,9 @@ if ($_GET['profile'] == true)
 			echo '<div>'."\n";
 			foreach ($pages as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['tag'], $this->GetUserName()) === true)
+				if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['id'], $this->GetUserName()) === true)
 				{
-					echo '<small>('.$this->GetTimeStringFormatted($page['created']).')</small> '.$this->Link('/'.$page['tag'], '', $page['title'], 0)."<br />\n";
+					echo '<small>'.$this->GetTimeStringFormatted($page['created']).'</small>  &mdash; '.$this->Link('/'.$page['tag'], '', $page['title'], 0)."<br />\n";
 
 					if (++$i >= $limit) break 1;
 				}
@@ -263,7 +263,7 @@ if ($_GET['profile'] == true)
 		if ($user['total_comments'])
 		{
 			$comments = $this->LoadAll(
-				"SELECT tag, created, comment_on_id ".
+				"SELECT id, tag, created, comment_on_id ".
 				"FROM {$this->config['table_prefix']}pages ".
 				"WHERE owner = '".quote($this->dblink, $user['name'])."' ".
 					"AND comment_on_id <> '0' ".
@@ -279,7 +279,7 @@ if ($_GET['profile'] == true)
 			{
 				if (!$this->config['hide_locked'] || $this->HasAccess('read', $comment['comment_on_id'], $this->GetUserName()) === true)
 				{
-					echo '<small>('.$this->GetTimeStringFormatted($comment['created']).')</small> '.$this->Link('/'.$comment['tag'], '', $this->GetPageTitle(0, $comment['comment_on_id']))."<br />\n";
+					echo '<small>'.$this->GetTimeStringFormatted($comment['created']).'</small>  &mdash; '.$this->Link('/'.$comment['tag'], '', $this->GetPageTitle(0, $comment['comment_on_id']))."<br />\n";
 
 					if (++$i >= $limit) break 1;
 				}

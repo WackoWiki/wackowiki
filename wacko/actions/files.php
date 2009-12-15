@@ -30,11 +30,19 @@ else		$user_add = "";
 // do we allowed to see?
 if (!$global)
 {
-	if ($page == "")	$page = $this->tag;
-	else				$page = $this->UnwrapLink($page);
+	if ($page == "")
+	{
+		$page = $this->tag;
+		$page_id = $this->getPageId();
+	}
+	else
+	{
+		$page = $this->UnwrapLink($page);
+		$page_id = $this->GetPageId($page);
+	}
 
-	$can_view   = $this->HasAccess("read", $page) || $this->IsAdmin() || $this->UserIsOwner($page);
-	$can_delete = $this->IsAdmin() || $this->UserIsOwner($page);
+	$can_view   = $this->HasAccess("read", $page_id) || $this->IsAdmin() || $this->UserIsOwner($page_id);
+	$can_delete = $this->IsAdmin() || $this->UserIsOwner($page_id);
 }
 else
 {
@@ -107,9 +115,9 @@ if ($can_view)
 		{
 			$hits	= "";
 		}
-
+		$page_id = $this->GetPageId($page);
 		if ($this->IsAdmin() || (!isset($is_global) &&
-		($this->GetPageOwnerId($page) == $this->GetUserId())) ||
+		($this->GetPageOwnerId($page_id) == $this->GetUserId())) ||
 		($file["user_id"] == $this->GetUserId()))
 		{
 			$remove_mode = 1;

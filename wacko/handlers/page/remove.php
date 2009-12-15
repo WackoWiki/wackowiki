@@ -111,7 +111,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 					"WHERE name = '".quote($this->dblink, $owner)."' ".
 					"LIMIT 1");
 			}
-			
+
 			// log event
 			if (!$comment_on_id)
 			{
@@ -170,7 +170,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			{
 				if ($page["tag"])
 				{
-					if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
+					if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["id"]);
 					else $access = true;
 					if ($access)
 					{

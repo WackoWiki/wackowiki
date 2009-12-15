@@ -42,7 +42,7 @@ if ($user_id = $this->GetUserId())
 		{
 			foreach ($pages as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['pagetag']))
+				if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['page_id']))
 				{
 					$firstChar = strtoupper($page['pagetag'][0]);
 					if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))
@@ -85,7 +85,7 @@ if ($user_id = $this->GetUserId())
 
 		$cnt = 0;
 		if ($pages = $this->LoadAll(
-			"SELECT w.page_id, p.tag as tag ".
+			"SELECT w.page_id, p.tag AS tag ".
 			"FROM {$prefix}watches AS w ".
 			"LEFT JOIN {$prefix}pages AS p ".
 				"ON (p.id = w.page_id) ".
@@ -95,7 +95,7 @@ if ($user_id = $this->GetUserId())
 		{
 			foreach ($pages as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['tag']))
+				if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['w.page_id']))
 				{
 					$firstChar = strtoupper($page['tag'][0]);
 					if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))

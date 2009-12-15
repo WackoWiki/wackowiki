@@ -127,7 +127,7 @@ if ($registered
 				{
 					if ($page["tag"])
 					{
-						if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["tag"]);
+						if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["id"]);
 						else $access = true;
 						if ($access)
 						{

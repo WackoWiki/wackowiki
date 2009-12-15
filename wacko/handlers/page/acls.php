@@ -19,9 +19,9 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		if ($need_massacls == 0)
 		{
 			// store lists
-			$this->SaveAcl($this->GetPageTag(), "read", $_POST["read_acl"]);
-			$this->SaveAcl($this->GetPageTag(), "write", $_POST["write_acl"]);
-			$this->SaveAcl($this->GetPageTag(), "comment", $_POST["comment_acl"]);
+			$this->SaveAcl($this->GetPageId(), "read", $_POST["read_acl"]);
+			$this->SaveAcl($this->GetPageId(), "write", $_POST["write_acl"]);
+			$this->SaveAcl($this->GetPageId(), "comment", $_POST["comment_acl"]);
 
 			// log event
 			$this->Log(2, str_replace("%1", $this->page["tag"]." ".$this->page["title"], $this->GetTranslation("LogACLUpdated")));
@@ -81,9 +81,9 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					"SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '".$this->GetPageId()."' AND owner='".quote($this->dblink, $this->GetUserName())."'");
 			foreach ($comments as $num=>$page)
 			{
-				$this->SaveAcl($page["tag"], "read", $_POST["read_acl"]);
-				$this->SaveAcl($page["tag"], "write", $_POST["write_acl"]);
-				$this->SaveAcl($page["tag"], "comment", $_POST["comment_acl"]);
+				$this->SaveAcl($page["id"], "read", $_POST["read_acl"]);
+				$this->SaveAcl($page["id"], "write", $_POST["write_acl"]);
+				$this->SaveAcl($page["id"], "comment", $_POST["comment_acl"]);
 
 				// change owner?
 				if ($newowner = $_POST["newowner"])
@@ -106,9 +106,9 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			foreach ($pages as $num=>$page)
 			{
 				// store lists
-				$this->SaveAcl($page["tag"], "read", $_POST["read_acl"]);
-				$this->SaveAcl($page["tag"], "write", $_POST["write_acl"]);
-				$this->SaveAcl($page["tag"], "comment", $_POST["comment_acl"]);
+				$this->SaveAcl($page["id"], "read", $_POST["read_acl"]);
+				$this->SaveAcl($page["id"], "write", $_POST["write_acl"]);
+				$this->SaveAcl($page["id"], "comment", $_POST["comment_acl"]);
 
 				// log event
 				$this->Log(2, str_replace("%1", $page["tag"]." ".$page["title"], $this->GetTranslation("LogACLUpdated")));
@@ -157,9 +157,9 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	else
 	{
 		// load acls
-		$readACL = $this->LoadAcl($this->GetPageTag(), "read");
-		$writeACL = $this->LoadAcl($this->GetPageTag(), "write");
-		$commentACL = $this->LoadAcl($this->GetPageTag(), "comment");
+		$readACL = $this->LoadAcl($this->GetPageId(), "read");
+		$writeACL = $this->LoadAcl($this->GetPageId(), "write");
+		$commentACL = $this->LoadAcl($this->GetPageId(), "comment");
 
 		// show form
 		?>
