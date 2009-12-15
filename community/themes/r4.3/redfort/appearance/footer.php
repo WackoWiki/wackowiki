@@ -165,7 +165,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
         print("<a name=\"".$comment["tag"]."\"></a>\n");
         print("<div class=\"comment\">\n");
         $del = "";
-        if ($this->IsAdmin() || $this->UserIsOwner($comment["tag"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageTag())))
+        if ($this->IsAdmin() || $this->UserIsOwner($comment["id"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageId())))
           print("<div style=\"float:right;\" style='background:#ffcfa8; border: solid 1px; border-color:#cccccc'>".
           "<a href=\"".$this->href("remove",$comment["tag"])."\" title=\"".$this->GetTranslation("DeleteTip")."\">".
           "<img src=\"".$this->GetConfigValue("theme_url")."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->GetTranslation("DeleteText")."\"  align=\"absmiddle\" border=\"0\" /></a>".
