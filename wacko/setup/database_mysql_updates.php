@@ -13,8 +13,10 @@ $alter_acls_r2_1 = "ALTER TABLE {$pref}acls ADD supertag VARCHAR(250) NOT NULL D
 $alter_acls_r3_1 = "ALTER TABLE {$pref}acls CHANGE page_tag page_tag VARCHAR(250) BINARY NOT NULL";
 $alter_acls_r4_2 = "ALTER TABLE {$pref}acls ADD page_id INT(10) UNSIGNED NOT NULL AFTER page_tag";
 $alter_acls_r4_2_1 = "ALTER TABLE {$pref}acls CHANGE privilege privilege VARCHAR(10) NOT NULL";
-$alter_acls_r4_2_2 = "ALTER TABLE {$pref}pages DROP page_tag";
-$alter_acls_r4_2_3 = "ALTER TABLE {$pref}pages DROP supertag";
+$alter_acls_r4_2_2 = " ALTER TABLE {$pref}acls DROP PRIMARY KEY";
+$alter_acls_r4_2_3 = " ALTER TABLE {$pref}acls ADD UNIQUE idx_page_id (page_id,privilege)";
+$alter_acls_r4_2_4 = "ALTER TABLE {$pref}pages DROP page_tag";
+$alter_acls_r4_2_5 = "ALTER TABLE {$pref}pages DROP supertag";
 
 $update_acls_r4_2 = "UPDATE {$pref}acls AS acls, (SELECT id, tag FROM {$pref}pages) AS pages SET acls.page_id = pages.id WHERE acls.page_tag = pages.tag";
 

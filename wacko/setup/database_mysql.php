@@ -12,8 +12,7 @@ $table_acls = "CREATE TABLE {$pref}acls (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"privilege VARCHAR(10) NOT NULL DEFAULT '',".
 					"list TEXT NOT NULL,".
-					"PRIMARY KEY  (page_tag,privilege),".
-					"KEY supertag (supertag)".
+					"UNIQUE KEY idx_page_id (page_id,privilege),".
 				") TYPE=MyISAM";
 
 $table_cache = "CREATE TABLE {$pref}cache (".

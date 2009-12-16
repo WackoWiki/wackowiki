@@ -58,7 +58,7 @@ $table_acls = "CREATE TABLE {$pref}acls (".
 					"page_id integer NOT NULL DEFAULT 0,".
 					"privilege character varying(10) NOT NULL DEFAULT '',".
 					"list text NOT NULL DEFAULT '',".
-					"CONSTRAINT pk_acls_page_tag_privilege PRIMARY KEY (page_tag, privilege)".
+					"CONSTRAINT pk_acls_page_id_privilege PRIMARY KEY (page_id, privilege)".
 				") WITH (OIDS=FALSE);";
 
 $table_links = "CREATE TABLE {$pref}links (".
