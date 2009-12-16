@@ -55,9 +55,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 
 
 $table_acls = "CREATE TABLE {$pref}acls (".
-					"page_tag character varying(250) NOT NULL DEFAULT '',".
 					"page_id integer NOT NULL DEFAULT 0,".
-					"supertag character varying(250) NOT NULL DEFAULT '',".
 					"privilege character varying(10) NOT NULL DEFAULT '',".
 					"list text NOT NULL DEFAULT '',".
 					"CONSTRAINT pk_acls_page_tag_privilege PRIMARY KEY (page_tag, privilege)".
