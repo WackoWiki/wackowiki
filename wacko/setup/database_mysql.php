@@ -9,9 +9,7 @@
 $pref = $config["table_prefix"];
 
 $table_acls = "CREATE TABLE {$pref}acls (".
-					"page_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
 					"privilege VARCHAR(10) NOT NULL DEFAULT '',".
 					"list TEXT NOT NULL,".
 					"PRIMARY KEY  (page_tag,privilege),".

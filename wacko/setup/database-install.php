@@ -294,6 +294,10 @@ switch($config["database_driver"])
 
 					test(str_replace("%1","acls",$lang["UpdateTable"]), @mysql_query($update_acls_r4_2, $dblink), str_replace("%1", "acls", $lang["ErrorUpdatingTable"]));
 
+					// Drop obsolete fields
+					test(str_replace("%1","acls",$lang["AlterTable"]), @mysql_query($alter_acls_r4_2_2, $dblink), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
+					test(str_replace("%1","acls",$lang["AlterTable"]), @mysql_query($alter_acls_r4_2_3, $dblink), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
+
 					test(str_replace("%1","config",$lang["CreatingTable"]), @mysql_query($table_config_r4_2, $dblink), str_replace("%1", "config", $lang["ErrorCreatingTable"]));
 
 					test(str_replace("%1","cache",$lang["AlterTable"]), @mysql_query($alter_cache_r4_2, $dblink), str_replace("%1", "cache", $lang["ErrorAlteringTable"]));
@@ -618,6 +622,10 @@ switch($config["database_driver"])
 								test(str_replace("%1","acls",$lang["AlterTable"]), @mysqli_query($dblink, $alter_acls_r4_2_1), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
 
 								test(str_replace("%1","acls",$lang["UpdateTable"]), @mysqli_query($dblink, $update_acls_r4_2), str_replace("%1", "acls", $lang["ErrorUpdatingTable"]));
+
+								// Drop obsolete fields
+								test(str_replace("%1","acls",$lang["AlterTable"]), @mysqli_query($dblink, $alter_acls_r4_2_2), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
+								test(str_replace("%1","acls",$lang["AlterTable"]), @mysqli_query($dblink, $alter_acls_r4_2_3), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
 
 								test(str_replace("%1","cache",$lang["AlterTable"]), @mysqli_query($dblink, $alter_cache_r4_2), str_replace("%1", "cache", $lang["ErrorAlteringTable"]));
 
