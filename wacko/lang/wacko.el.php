@@ -278,7 +278,6 @@ $wackoTranslation = array(
 	"RenameButton" => "Μετονομασία!",
 	"AlredyExists" => "<em>Η σελίδα <strong>%1</strong> υπάρχει ήδη.</em>",
 	"AlreadyNamed" => "<em>Η σελίδα έχει ήδη μετονομαστεί <strong>%1</strong>.</em>",
-	"AclsRenamed" => "<em>Οι acls της σελίδας %1 μετονομάστηκαν.</em>",
 	"PageRenamed" => "<em>Η σελίδα %1 μετονομάστηκε.</em>",
 	"FilesRenamed" => "<em>Τα αρχεία της σελίδα %1 μετονομάστηκαν.</em>",
 	"NewNameOfPage" =>"Νέο όνομα αυτής της σελίδας: ",

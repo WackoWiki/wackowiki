@@ -278,7 +278,6 @@ $wackoTranslation = array(
 	"RenameButton" => "Omdøb!",
 	"AlredyExists" => "<em>Siden <strong>%1</strong> findes allerede.</em>",
 	"AlreadyNamed" => "<em>Siden hedder allerede <strong>%1</strong>.</em>",
-	"AclsRenamed" => "<em>Siderettigheder %1 omdøbt.</em>",
 	"PageRenamed" => "<em>Siden %1 omdøbt.</em>",
 	"FilesRenamed" => "<em>Page files for %1 renamed.</em>",
 	"NewNameOfPage" => "Nyt navn til denne side: ",

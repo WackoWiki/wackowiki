@@ -278,7 +278,6 @@ $wackoTranslation = array(
 	"RenameButton" => "Hernoem!",
 	"AlredyExists" => "<em>Pagina <strong>%1</strong> bestaat al.</em>",
 	"AlreadyNamed" => "<em>Deze pagina heeft al een naam: <strong>%1</strong>.</em>",
-	"AclsRenamed" => "<em>Pagina ACL's %1 hernoemd.</em>",
 	"PageRenamed" => "<em>Pagina %1 hernoemd.</em>",
 	"FilesRenamed" => "<em>Page files for %1 renamed.</em>",
 	"NewNameOfPage" => "Nieuwe naam van deze pagina: ",
