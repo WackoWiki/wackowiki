@@ -278,7 +278,6 @@ $wackoTranslation = array(
 	"RenameButton" => "Zmieñ nazwê!",
 	"AlredyExists" => "<em>Przepraszamy! Strona o nazwie <strong>%1</strong> ju¿ istnieje.</em>",
 	"AlreadyNamed" => "<em>Ta strona ju¿ ma nazwê <strong>%1</strong>.</em>",
-	"AclsRenamed" => "<em>Nazwa listy praw dostêpu do strony %1 zosta³a zmieniona.</em>",
 	"PageRenamed" => "<em>Nazwa strony %1 zosta³a zmieniona.</em>",
 	"FilesRenamed" => "<em>Page files for %1 renamed.</em>",
 	"NewNameOfPage" => "Strona bêdzie obecnie dostêpna pod nazw±: ",
