@@ -1200,19 +1200,21 @@ class Wacko
 				if (strstr($this->context[$this->current_context], "/") && !$comment_on_id)
 				{
 					$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $this->context[$this->current_context] );
-					$write_acl = $this->LoadAcl($root, "write");
+					$root_id = $this->GetPageId($root);
+					$write_acl = $this->LoadAcl($this->GetPageId($root), "write");
 					while ($write_acl["default"] == 1)
 					{
 						$_root = $root;
 						$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $root );
 						if ($root == $_root) break;
-						$write_acl = $this->LoadAcl($root, "write");
+						# $root_id = $this->GetPageId($root); // do we need this?
+						$write_acl = $this->LoadAcl($root_id, "write");
 					}
 
 					$write_acl = $write_acl["list"];
-					$read_acl = $this->LoadAcl($root, "read");
+					$read_acl = $this->LoadAcl($root_id, "read");
 					$read_acl = $read_acl["list"];
-					$comment_acl = $this->LoadAcl($root, "comment");
+					$comment_acl = $this->LoadAcl($root_id, "comment");
 					$comment_acl = $comment_acl["list"];
 				}
 				else if ($comment_on_id)
@@ -3763,20 +3765,6 @@ class Wacko
 					"tag = '".quote($this->dblink, $NewTag)."', ".
 					"supertag = '".quote($this->dblink, $NewSuperTag)."' ".
 				"WHERE tag = '".quote($this->dblink, $tag)."' ");
-	}
-
-	function RenameAcls($tag, $NewTag, $NewSuperTag = "")
-	{
-		if (!$tag || !$NewTag) return false;
-
-		if ($NewSuperTag == "")
-			$NewSuperTag = $this->NpjTranslit($NewTag);
-
-		return $this->Query(
-			"UPDATE ".$this->config["table_prefix"]."acls SET ".
-				"page_tag = '".quote($this->dblink, $NewTag)."', ".
-				"supertag = '".quote($this->dblink, $NewSuperTag)."' ".
-			"WHERE page_tag = '".quote($this->dblink, $tag)."' ");
 	}
 
 	function RenameFiles($tag, $NewTag, $NewSuperTag = "")
