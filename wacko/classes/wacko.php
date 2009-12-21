@@ -63,7 +63,7 @@ class Wacko
 		"left"  => array("_before"),
 	);
 	var $NpjMacros = array(
-		"" => "wiki", "" => "wacko", "" => "web"
+		"âèêè" => "wiki", "âàêà" => "wacko", "âåá" => "web"
 	);
 
 	// CONSTRUCTOR
@@ -1680,13 +1680,13 @@ class Wacko
 		$text = str_replace("_", "'", $text);
 		if ($this->config["urls_underscores"] == 1)
 		{
-			$text = preg_replace("/(".$this->language["ALPHANUM"].")(".$this->language["UPPERNUM"].")/","\\1\\2",$text);
-			$text = preg_replace("/(".$this->language["UPPERNUM"].")(".$this->language["UPPERNUM"].")/","\\1\\2",$text);
-			$text = preg_replace("/(".$this->language["UPPER"].")(?=".$this->language["UPPER"]."".$this->language["UPPERNUM"].")/","\\1",$text);
-			$text = preg_replace("/(".$this->language["UPPER"].")(?=".$this->language["UPPER"]."\/)/","\\1",$text);
-			$text = preg_replace("/(".$this->language["UPPERNUM"].")(".$this->language["UPPERNUM"].")($|\b)/","\\1\\2",$text);
-			$text = preg_replace("/\/(".$this->language["UPPERNUM"].")/","/\\1",$text);
-			$text = str_replace("", "_", $text);
+			$text = preg_replace("/(".$this->language["ALPHANUM"].")(".$this->language["UPPERNUM"].")/","\\1¶\\2",$text);
+			$text = preg_replace("/(".$this->language["UPPERNUM"].")(".$this->language["UPPERNUM"].")/","\\1¶\\2",$text);
+			$text = preg_replace("/(".$this->language["UPPER"].")¶(?=".$this->language["UPPER"]."¶".$this->language["UPPERNUM"].")/","\\1",$text);
+			$text = preg_replace("/(".$this->language["UPPER"].")¶(?=".$this->language["UPPER"]."¶\/)/","\\1",$text);
+			$text = preg_replace("/(".$this->language["UPPERNUM"].")¶(".$this->language["UPPERNUM"].")($|\b)/","\\1\\2",$text);
+			$text = preg_replace("/\/¶(".$this->language["UPPERNUM"].")/","/\\1",$text);
+			$text = str_replace("¶", "_", $text);
 		}
 		return $text;
 	}
@@ -2549,8 +2549,8 @@ class Wacko
 
 		// substitutions table
 		$table = array(
-			"cyr" => "0I1",
-			"lat" => "ABCDEHKMOPTXYacekmnoprutxy6ll"
+			"cyr" => "ÀÂÑÄÅÍÊÌÎÐÒÕÓàñåêìïîðãèòõó0áI1",
+			"lat" => "ABCDEHKMOPTXYacekmnoprutxyÎ6ll"
 		);
 
 		// splitting input name into array
@@ -4015,21 +4015,21 @@ class Wacko
 		{
 			case 1:
 				if (!preg_match('/[0-9]+/', $pwd) ||
-					!preg_match('/[a-zA-Z--]+/', $pwd))
+					!preg_match('/[a-zA-Zà-ÿÀ-ß]+/', $pwd))
 						$error += 5;
 				break;
 
 			case 2:
 				if (!preg_match('/[0-9]+/', $pwd) ||
-					!preg_match('/[A-Z-]+/', $pwd) ||
-					!preg_match('/[a-z-]+/', $pwd))
+					!preg_match('/[A-ZÀ-ß]+/', $pwd) ||
+					!preg_match('/[a-zà-ÿ]+/', $pwd))
 						$error += 5;
 				break;
 
 			case 3:
 				if (!preg_match('/[0-9]+/', $pwd) ||
-					!preg_match('/[A-Z-]+/', $pwd) ||
-					!preg_match('/[a-z-]+/', $pwd) ||
+					!preg_match('/[A-ZÀ-ß]+/', $pwd) ||
+					!preg_match('/[a-zà-ÿ]+/', $pwd) ||
 					!preg_match('/[\W]+/', $pwd))
 						$error += 5;
 				break;
