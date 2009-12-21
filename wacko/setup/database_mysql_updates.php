@@ -90,6 +90,8 @@ $alter_pages_r4_2_11 = "ALTER TABLE {$pref}pages ADD comment_on_id INT(10) UNSIG
 $alter_pages_r4_2_12 = "ALTER TABLE {$pref}pages DROP comment_on";
 $alter_pages_r4_2_13 = "ALTER TABLE {$pref}pages DROP super_comment_on";
 $alter_pages_r4_2_14 = "ALTER TABLE {$pref}pages ADD comments INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER comment_on_id";
+$alter_pages_r4_2_15 = "ALTER TABLE {$pref}pages DROP owner";
+$alter_pages_r4_2_16 = "ALTER TABLE {$pref}pages DROP user";
 
 $update_pages_r3_1 = "UPDATE {$pref}pages SET body_r=''";
 $update_pages_r3_2 = "UPDATE {$pref}pages SET body_toc=''";
@@ -147,6 +149,8 @@ $alter_revisions_r4_2_10 = "ALTER TABLE {$pref}revisions ADD comment_on_id INT(1
 $alter_revisions_r4_2_11 = "ALTER TABLE {$pref}revisions DROP comment_on";
 $alter_revisions_r4_2_12 = "ALTER TABLE {$pref}revisions DROP super_comment_on";
 $alter_revisions_r4_2_13 = "ALTER TABLE {$pref}revisions ADD page_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER id";
+$alter_revisions_r4_2_14 = "ALTER TABLE {$pref}revisions DROP owner";
+$alter_revisions_r4_2_15 = "ALTER TABLE {$pref}revisions DROP user";
 
 $insert_revisions_r2_1 = "INSERT INTO {$pref}revisions ( id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on ) SELECT id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on FROM {$pref}pages WHERE latest='N';";
 

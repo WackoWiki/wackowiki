@@ -163,8 +163,8 @@ function RecursiveMove(&$parent, $root)
 		"SELECT ".$parent->pages_meta." ".
 		"FROM ".$parent->config["table_prefix"]."pages ".
 		"WHERE supertag LIKE ".$query.
-		($owner
-			? " AND owner='".quote($parent->dblink, $owner)."'"
+		($owner_id
+			? " AND owner_id ='".quote($parent->dblink, $owner_id)."'"
 			: "").
 		" AND comment_on_id = '0'");
 

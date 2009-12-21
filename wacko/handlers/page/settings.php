@@ -50,7 +50,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["id"]))
 		echo "<td>".$this->page['id']."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
 		echo "<td>".$this->GetTranslation('Owner')."</td>";
-		echo "<td>".$this->page['owner']."</td>";
+		echo "<td>".$this->GetUserNameById($this->page['owner_id'])."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
 		echo "<td>".$this->GetTranslation('SettingsCreated')."</td>";
 		echo "<td>".$this->GetTimeStringFormatted($this->page['created'])."</td>";

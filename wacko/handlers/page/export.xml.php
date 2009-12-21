@@ -49,7 +49,7 @@ if ($this->HasAccess("read"))
 		$xml .= "\t\t\t<title>".htmlspecialchars($page["title"])."</title>\n";
 		$xml .= "\t\t\t<link>".$this->GetConfigValue("base_url").$page["supertag"]."</link>\n";
 		$xml .= "\t\t\t<description><![CDATA[".str_replace("]]>","]]&gt;",$page["body"])."]]></description>\n";
-		$xml .= "\t\t\t<author>".$page["owner"]."</author>\n";
+		$xml .= "\t\t\t<author>".$page["owner_id"]."</author>\n";
 		$xml .= "\t\t\t<pubDate>".gmdate('D, d M Y H:i:s \G\M\T', strtotime($page["created"]))."</pubDate>\n";
 		$xml .= "\t\t</item>\n";
 	}

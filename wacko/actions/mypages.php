@@ -2,7 +2,7 @@
 
 // actions/mypages.php
 
-if ($user = $this->GetUserName())
+if ($user_id = $this->GetUserId())
 {
 	if ($max) $limit = $max;
 	else $limit	= 100;
@@ -17,7 +17,7 @@ if ($user = $this->GetUserName())
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}pages ".
-			"WHERE owner = '".quote($this->dblink, $user)."' ".
+			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'", 1);
 
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bydate=1#list');
@@ -25,7 +25,7 @@ if ($user = $this->GetUserName())
 		if ($pages = $this->LoadAll(
 		"SELECT tag, created ".
 		"FROM {$prefix}pages ".
-		"WHERE owner = '".quote($this->dblink, $user)."' ".
+		"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 			"AND comment_on_id = '0' ".
 		"ORDER BY created DESC, tag ASC ".
 		"LIMIT {$pagination['offset']}, $limit", 1))
@@ -67,7 +67,7 @@ if ($user = $this->GetUserName())
 			"FROM {$prefix}pages AS p ".
 			"LEFT JOIN {$prefix}revisions AS r ".
 				"ON (p.id = r.page_id ".
-					"AND p.owner = '".quote($this->dblink, $user)."') ".
+					"AND p.owner_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND r.comment_on_id = '0'", 1);
 
@@ -84,7 +84,7 @@ if ($user = $this->GetUserName())
 			"FROM {$prefix}pages AS p ".
 			"LEFT JOIN {$prefix}revisions AS r ".
 				"ON (p.id = r.page_id ".
-					"AND p.owner = '".quote($this->dblink, $user)."') ".
+					"AND p.owner_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND r.comment_on_id = '0' ".
 			"GROUP BY tag ".
@@ -125,7 +125,7 @@ if ($user = $this->GetUserName())
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}pages ".
-			"WHERE owner = '".quote($this->dblink, $user)."' ".
+			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'", 1);
 
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mypages#list');
@@ -138,7 +138,7 @@ if ($user = $this->GetUserName())
 		if ($pages = $this->LoadAll(
 			"SELECT tag, time ".
 			"FROM {$prefix}pages ".
-			"WHERE owner = '".quote($this->dblink, $user)."' ".
+			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY tag ASC ".
 			"LIMIT {$pagination['offset']}, $limit", 1))

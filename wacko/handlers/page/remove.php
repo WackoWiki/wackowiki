@@ -100,7 +100,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			}
 
 			// update user statistics
-			if ($owner = $this->page["owner"])
+			if ($owner_id = $this->page["owner_id"])
 			{
 				$this->Query(
 					"UPDATE {$this->config['user_table']} ".
@@ -108,7 +108,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 					? "SET total_comments	= total_comments	- 1 "
 					: "SET total_pages		= total_pages		- 1 "
 					).
-					"WHERE name = '".quote($this->dblink, $owner)."' ".
+					"WHERE id = '".quote($this->dblink, $owner_id)."' ".
 					"LIMIT 1");
 			}
 

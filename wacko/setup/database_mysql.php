@@ -71,8 +71,6 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"body MEDIUMTEXT NOT NULL,".
 					"body_r MEDIUMTEXT NOT NULL,".
 					"body_toc TEXT NOT NULL,".
-					"owner VARCHAR(50) NOT NULL DEFAULT '',".
-					"user VARCHAR(50) NOT NULL DEFAULT '',".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 					"latest TINYINT(1) UNSIGNED DEFAULT '1',".
@@ -114,8 +112,6 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 						"body MEDIUMTEXT NOT NULL,".
 						"body_r MEDIUMTEXT NOT NULL,".
-						"owner VARCHAR(50) NOT NULL DEFAULT '',".
-						"user VARCHAR(50) NOT NULL DEFAULT '',".
 						"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 						"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 						"latest TINYINT(1) UNSIGNED DEFAULT '0',".
