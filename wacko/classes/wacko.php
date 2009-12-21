@@ -63,7 +63,7 @@ class Wacko
 		"left"  => array("_before"),
 	);
 	var $NpjMacros = array(
-		"âèêè" => "wiki", "âàêà" => "wacko", "âåá" => "web"
+		"" => "wiki", "" => "wacko", "" => "web"
 	);
 
 	// CONSTRUCTOR
@@ -1680,13 +1680,13 @@ class Wacko
 		$text = str_replace("_", "'", $text);
 		if ($this->config["urls_underscores"] == 1)
 		{
-			$text = preg_replace("/(".$this->language["ALPHANUM"].")(".$this->language["UPPERNUM"].")/","\\1¶\\2",$text);
-			$text = preg_replace("/(".$this->language["UPPERNUM"].")(".$this->language["UPPERNUM"].")/","\\1¶\\2",$text);
-			$text = preg_replace("/(".$this->language["UPPER"].")¶(?=".$this->language["UPPER"]."¶".$this->language["UPPERNUM"].")/","\\1",$text);
-			$text = preg_replace("/(".$this->language["UPPER"].")¶(?=".$this->language["UPPER"]."¶\/)/","\\1",$text);
-			$text = preg_replace("/(".$this->language["UPPERNUM"].")¶(".$this->language["UPPERNUM"].")($|\b)/","\\1\\2",$text);
-			$text = preg_replace("/\/¶(".$this->language["UPPERNUM"].")/","/\\1",$text);
-			$text = str_replace("¶", "_", $text);
+			$text = preg_replace("/(".$this->language["ALPHANUM"].")(".$this->language["UPPERNUM"].")/","\\1\\2",$text);
+			$text = preg_replace("/(".$this->language["UPPERNUM"].")(".$this->language["UPPERNUM"].")/","\\1\\2",$text);
+			$text = preg_replace("/(".$this->language["UPPER"].")(?=".$this->language["UPPER"]."".$this->language["UPPERNUM"].")/","\\1",$text);
+			$text = preg_replace("/(".$this->language["UPPER"].")(?=".$this->language["UPPER"]."\/)/","\\1",$text);
+			$text = preg_replace("/(".$this->language["UPPERNUM"].")(".$this->language["UPPERNUM"].")($|\b)/","\\1\\2",$text);
+			$text = preg_replace("/\/(".$this->language["UPPERNUM"].")/","/\\1",$text);
+			$text = str_replace("", "_", $text);
 		}
 		return $text;
 	}
@@ -2549,8 +2549,8 @@ class Wacko
 
 		// substitutions table
 		$table = array(
-			"cyr" => "ÀÂÑÄÅÍÊÌÎÐÒÕÓàñåêìïîðãèòõó0áI1",
-			"lat" => "ABCDEHKMOPTXYacekmnoprutxyÎ6ll"
+			"cyr" => "0I1",
+			"lat" => "ABCDEHKMOPTXYacekmnoprutxy6ll"
 		);
 
 		// splitting input name into array
@@ -2656,6 +2656,16 @@ class Wacko
 			return $user_id;
 		else
 			return NULL;
+	}
+	
+	function GetUserIdByName($user = "")
+	{
+		$user = $this->LoadSingle(
+					"SELECT id FROM ".$this->config["table_prefix"]."users WHERE name = '".$user."' LIMIT 1");
+					// Get user value
+					$user_id = $user['id'];
+
+					return $user_id;
 	}
 
 	function _gethostbyaddr($ip)
@@ -4005,21 +4015,21 @@ class Wacko
 		{
 			case 1:
 				if (!preg_match('/[0-9]+/', $pwd) ||
-					!preg_match('/[a-zA-Zà-ÿÀ-ß]+/', $pwd))
+					!preg_match('/[a-zA-Z--]+/', $pwd))
 						$error += 5;
 				break;
 
 			case 2:
 				if (!preg_match('/[0-9]+/', $pwd) ||
-					!preg_match('/[A-ZÀ-ß]+/', $pwd) ||
-					!preg_match('/[a-zà-ÿ]+/', $pwd))
+					!preg_match('/[A-Z-]+/', $pwd) ||
+					!preg_match('/[a-z-]+/', $pwd))
 						$error += 5;
 				break;
 
 			case 3:
 				if (!preg_match('/[0-9]+/', $pwd) ||
-					!preg_match('/[A-ZÀ-ß]+/', $pwd) ||
-					!preg_match('/[a-zà-ÿ]+/', $pwd) ||
+					!preg_match('/[A-Z-]+/', $pwd) ||
+					!preg_match('/[a-z-]+/', $pwd) ||
 					!preg_match('/[\W]+/', $pwd))
 						$error += 5;
 				break;
