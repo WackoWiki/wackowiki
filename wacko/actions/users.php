@@ -224,7 +224,7 @@ if ($_GET['profile'] == true)
 			$pages = $this->LoadAll(
 				"SELECT id, tag, title, created ".
 				"FROM {$this->config['table_prefix']}pages ".
-				"WHERE owner = '".quote($this->dblink, $user['name'])."' ".
+				"WHERE owner_id = '".quote($this->dblink, $user['id'])."' ".
 					"AND comment_on_id = '0' ".
 				"ORDER BY ".( $_GET['sort'] == 'name' ? 'tag ASC' : 'created DESC' )." ".
 				"LIMIT {$pagination['offset']}, $limit");
@@ -265,7 +265,7 @@ if ($_GET['profile'] == true)
 			$comments = $this->LoadAll(
 				"SELECT id, tag, created, comment_on_id ".
 				"FROM {$this->config['table_prefix']}pages ".
-				"WHERE owner = '".quote($this->dblink, $user['name'])."' ".
+				"WHERE owner_id = '".quote($this->dblink, $user['id'])."' ".
 					"AND comment_on_id <> '0' ".
 				"ORDER BY created DESC ".
 				"LIMIT {$pagination['offset']}, $limit");

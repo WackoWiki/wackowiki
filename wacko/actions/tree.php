@@ -4,6 +4,7 @@ $root = $vars[$page];
 
 // input
 if (!isset($owner)) $owner = "";
+$owner = ;
 if (!isset($nomark)) $nomark = "";
 if (!isset($abc)) $abc = "";
 if (!isset($filter)) $filter = "";
@@ -232,8 +233,8 @@ $pages = $this->LoadAll(
 	"SELECT ".$this->pages_meta." ".
 	"FROM ".$this->config["table_prefix"]."pages ".
 	"WHERE supertag LIKE ".$query.
-		($owner
-			? " AND owner='".quote($this->dblink, $owner)."'"
+		($owner_id
+			? " AND owner_id='".quote($this->dblink, $owner_id)."'"
 			: "").
 		" AND comment_on_id = '0'", 1);
 

@@ -62,7 +62,7 @@ else if ($user = $this->GetUser())
 			if ($user["email"] != $_POST["email"]) $email_changed = true;
 
 			// store if email hasn't been changed otherwise request authorization
-			if ( !$email_changed )
+			if (!$email_changed)
 			{
 				$bookmarks = str_replace("\r", "", $_POST["bookmarks"]);
 
@@ -145,7 +145,7 @@ else if ($user = $this->GetUser())
 	}
 
 	// user is logged in; display config form
-	print($this->FormOpen());
+	echo $this->FormOpen();
 
 	$code = $this->LoadSingle(
 		"SELECT email_confirm ".
@@ -313,7 +313,7 @@ else if ($user = $this->GetUser())
 <br />
 	<?php
 	//  echo $this->FormatTranslation("SeeListOfPages")."<br />";
-	print($this->FormClose());
+	echo $this->FormClose();
 }
 else
 {

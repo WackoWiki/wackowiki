@@ -7,6 +7,8 @@ $pref = $config["table_prefix"];
 
 $table_pages = "CREATE TABLE {$pref}pages (".
 					"id serial,".
+					"\"owner_id\" integer NOT NULL DEFAULT '',".
+					"\"user_id\" integer NOT NULL DEFAULT '',".
 					"tag character varying(250) NOT NULL DEFAULT '',".
 					"supertag character varying(250) NOT NULL DEFAULT '',".
 					"\"created\" timestamp without time zone NOT NULL DEFAULT now(),".
@@ -14,8 +16,6 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"body text NOT NULL,".
 					"body_r text NOT NULL,".
 					"body_toc text NOT NULL,".
-					"\"owner\" character varying(80) NOT NULL DEFAULT '',".
-					"\"user\" character varying(80) NOT NULL DEFAULT '',".
 					"edit_note character varying(100) NOT NULL DEFAULT '',".
 					"minor_edit int(1) NOT NULL DEFAULT '0',".
 					"latest int(1) NOT NULL DEFAULT '1',".
@@ -33,14 +33,14 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"id serial,".
 						"page_id integer NOT NULL DEFAULT 0,".
+						"\"owner_id\" integer NOT NULL DEFAULT '',".
+						"\"user_id\" integer NOT NULL DEFAULT '',".
 						"tag character varying(250) NOT NULL DEFAULT '',".
 						"supertag character varying(250) NOT NULL DEFAULT '',".
 						"\"created\" timestamp without time zone NOT NULL DEFAULT now(),".
 						"\"time\" timestamp without time zone NOT NULL DEFAULT now(),".
 						"body text NOT NULL DEFAULT '',".
 						"body_r text NOT NULL DEFAULT '',".
-						"\"owner\" character varying(80) NOT NULL DEFAULT '',".
-						"\"user\" character varying(80) NOT NULL DEFAULT '',".
 						"edit_note character varying(100) NOT NULL DEFAULT '',".
 						"minor_edit int(1) NOT NULL DEFAULT '0',".
 						"latest int(1) NOT NULL DEFAULT '0',".

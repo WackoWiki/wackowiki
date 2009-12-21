@@ -78,7 +78,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 
 			// Change permissions for all comments on this page
 			$comments = $this->LoadAll(
-					"SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '".$this->GetPageId()."' AND owner='".quote($this->dblink, $this->GetUserName())."'");
+					"SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '".$this->GetPageId()."' AND owner_id='".quote($this->dblink, $this->GetUserId())."'");
 			foreach ($comments as $num=>$page)
 			{
 				$this->SaveAcl($page["id"], "read", $_POST["read_acl"]);
@@ -101,7 +101,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				" OR supertag LIKE '".quote($this->dblink, $this->supertag."/%")."'".
 				" OR comment_on_id = '".quote($this->dblink, $this->GetPageId())."'".
 				" OR comment_on_id LIKE '".quote($this->dblink, $this->tag."/%")."'".
-					") AND owner = '".quote($this->dblink, $this->GetUserName())."'");
+					") AND owner_id = '".quote($this->dblink, $this->GetUserId())."'");
 
 			foreach ($pages as $num=>$page)
 			{

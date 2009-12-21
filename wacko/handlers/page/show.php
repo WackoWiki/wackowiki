@@ -70,7 +70,7 @@ if ($this->HasAccess("read"))
 		}
 
 		// count page hit (we don't count for page owner)
-		if ($this->GetUserName() != $this->page["owner"])
+		if ($this->GetUserId() != $this->page["owner_id"])
 		{
 			$this->Query(
 				"UPDATE ".$this->config["table_prefix"]."pages ".
