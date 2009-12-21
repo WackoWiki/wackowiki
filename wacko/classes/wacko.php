@@ -16,7 +16,7 @@ class Wacko
 	var $WVERSION; //Wacko version
 	var $context = array("");
 	var $current_context = 0;
-	var $pages_meta = "id, tag, supertag, created, time, edit_note, minor_edit, owner, user, latest, handler, comment_on_id, lang, title, keywords, description";
+	var $pages_meta = "id, owner_id, tag, supertag, created, time, edit_note, minor_edit, user, latest, handler, comment_on_id, lang, title, keywords, description";
 	var $first_inclusion = array(); // for backlinks
 	var $optionSplitter = "\n"; // if you change this two symbols, settings for all users will be lost.
 	var $valueSplitter  = "=";
@@ -1235,7 +1235,6 @@ class Wacko
 				}
 
 				// current user is owner; if user is logged in! otherwise, no owner.
-				if ($this->GetUser()) $owner = $user;
 				if ($this->GetUser()) $owner_id = $user_id;
 
 				$this->Query(
@@ -1243,9 +1242,7 @@ class Wacko
 						"comment_on_id = '".quote($this->dblink, $comment_on_id)."', ".
 						"created = NOW(), ".
 						"time = NOW(), ".
-						"owner = '".quote($this->dblink, $owner)."', ".
 						"owner_id = '".quote($this->dblink, $owner_id)."', ".
-						"user = '".quote($this->dblink, $user)."', ".
 						"user_id = '".quote($this->dblink, $user_id)."', ".
 						"latest = '1', ".
 						"supertag = '".quote($this->dblink, $this->NpjTranslit($tag))."', ".
@@ -1363,7 +1360,6 @@ class Wacko
 				}
 
 				// aha! page isn't new. keep owner!
-				$owner = $oldPage["owner"];
 				$owner_id = $oldPage["owner_id"];
 
 				// only if page has been actually changed
@@ -1381,9 +1377,7 @@ class Wacko
 							"comment_on_id = '".quote($this->dblink, $comment_on_id)."', ".
 							"time = NOW(), ".
 							"created = '".quote($this->dblink, $oldPage['created'])."', ".
-							"owner = '".quote($this->dblink, $owner)."', ".
 							"owner_id = '".quote($this->dblink, $owner_id)."', ".
-							"user = '".quote($this->dblink, $user)."', ".
 							"user_id = '".quote($this->dblink, $user_id)."', ".
 							"supertag = '".$this->NpjTranslit($tag)."', ".
 							"body = '".quote($this->dblink, $body)."', ".
@@ -1513,8 +1507,8 @@ class Wacko
 
 		// move revision
 		$this->Query(
-			"INSERT INTO {$this->config['table_prefix']}revisions (page_id, tag, time, body, edit_note, minor_edit, owner, owner_id, user, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
-			"VALUES ('{$oldPage['id']}','{$oldPage['tag']}', '{$oldPage['time']}', '{$oldPage['body']}', '{$oldPage['edit_note']}', '{$oldPage['minor_edit']}', '{$oldPage['owner']}', '{$oldPage['owner_id']}', '{$oldPage['user']}', '{$oldPage['user_id']}', '0', '{$oldPage['handler']}', '{$oldPage['comment_on_id']}', '{$oldPage['supertag']}', '{$oldPage['title']}', '{$oldPage['keywords']}', '{$oldPage['description']}')");
+			"INSERT INTO {$this->config['table_prefix']}revisions (page_id, tag, time, body, edit_note, minor_edit, owner_id, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
+			"VALUES ('{$oldPage['id']}','{$oldPage['tag']}', '{$oldPage['time']}', '{$oldPage['body']}', '{$oldPage['edit_note']}', '{$oldPage['minor_edit']}', '{$oldPage['owner_id']}', '{$oldPage['user_id']}', '0', '{$oldPage['handler']}', '{$oldPage['comment_on_id']}', '{$oldPage['supertag']}', '{$oldPage['title']}', '{$oldPage['keywords']}', '{$oldPage['description']}')");
 
 		// update user statistics for revisions made
 		if ($user = $this->GetUser()) $this->Query(
@@ -2657,7 +2651,7 @@ class Wacko
 		else
 			return NULL;
 	}
-	
+
 	function GetUserIdByName($user = "")
 	{
 		$user = $this->LoadSingle(
@@ -2775,7 +2769,7 @@ class Wacko
 		$count = $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$this->config['table_prefix']}pages ".
-			"WHERE owner = '".quote($this->dblink, $name)."' ".
+			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id <> '0'");
 		return (int)$count['n'];
 	}
@@ -2786,7 +2780,7 @@ class Wacko
 		$count = $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$this->config['table_prefix']}pages ".
-			"WHERE owner = '".quote($this->dblink, $name)."' ".
+			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'");
 		return (int)$count['n'];
 	}
@@ -2797,7 +2791,7 @@ class Wacko
 		$count = $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$this->config['table_prefix']}revisions ".
-			"WHERE owner = '".quote($this->dblink, $name)."' ".
+			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'");
 		return (int)$count['n'];
 	}
@@ -2899,12 +2893,12 @@ class Wacko
 	{
 		if (!$tag = trim($tag))
 		{
-			if (!$time) return $this->page['owner'];
+			if (!$time) return $this->GetUserNameById($this->page['owner_id']);
 			else $tag = $this->GetPageTag();
 		}
 
 		if ($page = $this->LoadPage($tag, $time, LOAD_CACHE, LOAD_META))
-			return $page["owner"];
+			return $this->GetUserNameById($page["owner_id"]);
 	}
 
 	function GetPageOwnerId($page_id = "", $time = "")
@@ -2925,10 +2919,12 @@ class Wacko
 		// check if user exists
 		if (!$this->LoadUser($user)) return;
 
+		$user_id = $this->GetUserIdByName($user);
+
 		// updated latest revision with new owner
 		$this->Query(
 			"UPDATE ".$this->config["table_prefix"]."pages ".
-			"SET owner = '".quote($this->dblink, $user)."' ".
+			"SET owner_id = '".quote($this->dblink, $user_id)."' ".
 			"WHERE tag = '".quote($this->dblink, $tag)."' ".
 			"LIMIT 1");
 	}

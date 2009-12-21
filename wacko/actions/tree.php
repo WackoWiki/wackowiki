@@ -4,7 +4,7 @@ $root = $vars[$page];
 
 // input
 if (!isset($owner)) $owner = "";
-$owner = ;
+$owner_id = $this->GetUserIdByName($owner);
 if (!isset($nomark)) $nomark = "";
 if (!isset($abc)) $abc = "";
 if (!isset($filter)) $filter = "";
