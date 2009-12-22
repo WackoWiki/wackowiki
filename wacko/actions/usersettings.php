@@ -77,6 +77,7 @@ else if ($user = $this->GetUser())
 
 				$this->Query(
 					"UPDATE ".$this->config["user_table"]." SET ".
+						"real_name = '".quote($this->dblink, $_POST["real_name"])."', ".
 						"email = '".quote($this->dblink, $_POST["email"])."', ".
 						"doubleclickedit = '".quote($this->dblink, $_POST["doubleclickedit"])."', ".
 						"show_datetime = '".quote($this->dblink, $_POST["showdatetimeinlinks"])."', ".
@@ -175,7 +176,11 @@ else if ($user = $this->GetUser())
 				"<small>".$this->GetTranslation("EmailNotVerifiedDesc")."<strong><a href=\"?resend_code=1\">here</a></strong></small>";
 ?></td>
   </tr>
-
+    <tr>
+    <td class="form_left"><label for="real_name"><?php echo $this->GetTranslation("RealName");?>:</label></td>
+    <td><input id="real_name" name="real_name" value="<?php echo htmlentities($user["real_name"]) ?>" size="40" />
+    </td>
+  </tr>
   <tr>
     <td class="form_left"><?php echo $this->GetTranslation("UserSettingsOther");?>:</td>
     <td class="form_right"><input type="hidden" name="doubleclickedit" value="0" />

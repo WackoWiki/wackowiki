@@ -103,6 +103,10 @@ if ($_GET['profile'] == true)
 ?>
 		<table border="0" cellspacing="3">
 			<tr>
+				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->GetTranslation('RealName'); ?></strong></td>
+				<td><?php echo $user['real_name']; ?></td>
+			</tr>
+			<tr>
 				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->GetTranslation('UsersSignupDate'); ?></strong></td>
 				<td><?php echo $this->GetTimeStringFormatted($user['signuptime']); ?></td>
 			</tr>
