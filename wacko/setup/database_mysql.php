@@ -150,6 +150,7 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 $table_users = "CREATE TABLE {$pref}users (".
 					"id INT(10) UNSIGNED NOT NULL auto_increment,".
 					"name VARCHAR(80) NOT NULL DEFAULT '',".
+					"real_name VARCHAR(80) NOT NULL DEFAULT '',".
 					"password VARCHAR(32) NOT NULL DEFAULT '',".
 					"email VARCHAR(50) NOT NULL DEFAULT '',".
 					"motto TEXT NOT NULL,".

@@ -192,6 +192,7 @@ $alter_users_r4_2_7 = "ALTER TABLE {$pref}users ADD total_pages INT(10) UNSIGNED
 $alter_users_r4_2_8 = "ALTER TABLE {$pref}users ADD total_revisions INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER total_pages";
 $alter_users_r4_2_9 = "ALTER TABLE {$pref}users ADD total_comments INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER total_revisions";
 $alter_users_r4_2_10 = "ALTER TABLE {$pref}users DROP INDEX idx_name, ADD UNIQUE idx_name (name)";
+$alter_users_r4_2_11 = "ALTER TABLE {$pref}users ADD real_name VARCHAR(80) NOT NULL DEFAULT '' AFTER name";
 
 $update_users_r4_2 = "UPDATE {$pref}users SET doubleclickedit = '0' WHERE doubleclickedit = '2'";
 $update_users_r4_2_1 = "UPDATE {$pref}users SET show_comments = '0' WHERE show_comments = '2'";

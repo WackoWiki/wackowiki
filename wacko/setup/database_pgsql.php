@@ -87,6 +87,7 @@ $table_referrers = "CREATE TABLE {$pref}referrers (".
 $table_users = "CREATE TABLE {$pref}users (".
 					"id serial,".
 					"name character varying(80) NOT NULL DEFAULT '',".
+					"real_name character varying(80) NOT NULL DEFAULT '',".
 					"\"password\" character varying(32) NOT NULL DEFAULT '',".
 					"email character varying(50) NOT NULL DEFAULT '',".
 					"motto text NOT NULL DEFAULT '',".
