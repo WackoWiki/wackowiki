@@ -60,6 +60,7 @@ $wackoTranslation = array(
 	"AddComment" => "Lisa kommentaar sellele leheküljele:",
 	"AddCommentTitle" => "Title of the comment:",
 	"AddCommentButton" => "Lisa kommentaar",
+	"HereLink" => "here",
 
 	"DoesNotExists" => "Seda lehte ei eksisteeri veel.",
 	"PromptCreate" => "Soovid sa seda <a href=\"%1\">luua</a>?",
@@ -303,8 +304,8 @@ $wackoTranslation = array(
 	"CreatePageDenied" => "You do not have the necessary access rights.",
 	"CreatePageDeniedAddress" => "You do not have the right to create the page at this address.",
 	"PageAlreadyExists" => "According to the address provided the page already exists.",
-	"PageAlreadyExistsEdit" => "Do you want ",
-	"PageAlreadyExistsEdit2" => "edit it",
+	"PageAlreadyExistsEdit" => "Do you want %1 it?",
+	"PageAlreadyExistsEdit2" => "edit",
 	"PageAlreadyExistsEditDenied" => "You can't edit it.",
 
 	"RemoveFromBookmarks" => "Eemalda kiirvalikute hulgast",

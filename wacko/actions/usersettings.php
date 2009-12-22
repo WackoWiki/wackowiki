@@ -173,7 +173,7 @@ else if ($user = $this->GetUser())
 		if (!$user["email"] || $code["email_confirm"])
 			echo "<strong class=\"cite\"".
 				$this->GetTranslation("EmailNotVerified")."</strong><br />".
-				"<small>".$this->GetTranslation("EmailNotVerifiedDesc")."<strong><a href=\"?resend_code=1\">here</a></strong></small>";
+				"<small>".$this->GetTranslation("EmailNotVerifiedDesc")."<strong><a href=\"?resend_code=1\">".$this->GetTranslation("HereLink")."</a></strong></small>";
 ?></td>
   </tr>
     <tr>

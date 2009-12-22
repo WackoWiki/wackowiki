@@ -60,6 +60,7 @@ $wackoTranslation = array(
 	"AddComment" => "Rédigez votre commentaire&nbsp;:",
 	"AddCommentTitle" => "Titre du commentaire&nbsp;:",
 	"AddCommentButton" => "Enregistrer ce commentaire",
+	"HereLink" => "here",
 
 	"DoesNotExists" => "Cette page n&rsquo;existe pas encore.",
 	"PromptCreate" => "Peut-être voulez-vous la <a href=\"%1\">créer</a>&nbsp;?",
@@ -303,7 +304,7 @@ $wackoTranslation = array(
 	"CreatePageDenied" => "Vous n&rsquo;avez pas les droits d&rsquo;accès nécessaires.",
 	"CreatePageDeniedAddress" => "Vous n&rsquo;avez pas le droit de créer une page à cette adresse.",
 	"PageAlreadyExists" => "Selon l&rsquo;adresse fournie la page existe déjà.",
-	"PageAlreadyExistsEdit" => "Voulez-vous ",
+	"PageAlreadyExistsEdit" => "Voulez-vous %1",
 	"PageAlreadyExistsEdit2" => "l&rsquo;éditer",
 	"PageAlreadyExistsEditDenied" => "Vous ne pouvez pas l&rsquo;éditer.",
 

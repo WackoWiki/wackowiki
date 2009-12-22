@@ -26,8 +26,7 @@ if ($newtag = trim($_POST['tag'], '/ '))
 		// check existing page write access
 		if ($this->HasAccess('write', $prefix.$newtag))
 		{
-			$message .= $this->GetTranslation("PageAlreadyExistsEdit")." <a href=\"".$this->href('edit', $prefix.$newtag)."\">".$this->GetTranslation("PageAlreadyExistsEdit2")." </a>?";
-			// should be <a href="edit">Отредактировать</a> её? for Russian, reverse word order
+			$message .= str_replace('%1', "<a href=\"".$this->href('edit', $prefix.$newtag)."\">".$this->GetTranslation("PageAlreadyExistsEdit2")." </a>?", $this->GetTranslation("PageAlreadyExistsEdit"));
 		}
 		else
 		{
