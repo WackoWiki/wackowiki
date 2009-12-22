@@ -229,6 +229,7 @@ $wackoTranslation = array(
 	"Hello" => "Salut",
 	"UserName" => "User name",
 	"YourEmail" => "Adresa postei electronice",
+	"RealName" => "Real name",
 	"YourMotto" => "Motto-ul Dvs.",
 	"RevisionListLimit" => "Limitarea listei pagini redactate",
 	"RecentChangesLimit" => "Limitarea listei paginilor modificate",
