@@ -60,6 +60,7 @@ $wackoTranslation = array(
 	"AddComment" => "Attach a comment to this page:",
 	"AddCommentTitle" => "Title of the comment:",
 	"AddCommentButton" => "Attach Comment",
+	"HereLink" => "here",
 
 	"DoesNotExists" => "This page doesn't exist.",
 	"PromptCreate" => "Maybe you want to <a href=\"%1\">create</a> it?",
@@ -303,8 +304,8 @@ $wackoTranslation = array(
 	"CreatePageDenied" => "You do not have the necessary access rights.",
 	"CreatePageDeniedAddress" => "You do not have the right to create the page at this address.",
 	"PageAlreadyExists" => "According to the address provided the page already exists.",
-	"PageAlreadyExistsEdit" => "Do you want ", // should be changed for use of %1 params
-	"PageAlreadyExistsEdit2" => "edit it",
+	"PageAlreadyExistsEdit" => "Do you want %1 it?",
+	"PageAlreadyExistsEdit2" => "edit",
 	"PageAlreadyExistsEditDenied" => "You can't edit it.",
 
 	"RemoveFromBookmarks" => "Remove from bookmarks",
