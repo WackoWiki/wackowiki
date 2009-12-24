@@ -87,9 +87,9 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1)
           <td height="29" bgcolor="#6E0000">
     <div id="filesheader">
     <?php
-      if ($this->page["id"])
-       $files = $this->LoadAll( "select id from ".$this->config["table_prefix"]."upload where ".
-                             " page_id = '". quote($this->dblink, $this->page["id"]) ."'");
+      if ($this->page["page_id"])
+       $files = $this->LoadAll( "SELECT upload_id FROM ".$this->config["table_prefix"]."upload WHERE ".
+                             " page_id = '". quote($this->dblink, $this->page["page_id"]) ."'");
       else $files = array();
 
       switch (count($files))
@@ -165,7 +165,7 @@ if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1)
         print("<a name=\"".$comment["tag"]."\"></a>\n");
         print("<div class=\"comment\">\n");
         $del = "";
-        if ($this->IsAdmin() || $this->UserIsOwner($comment["id"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageId())))
+        if ($this->IsAdmin() || $this->UserIsOwner($comment["page_id"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageId())))
           print("<div style=\"float:right;\" style='background:#ffcfa8; border: solid 1px; border-color:#cccccc'>".
           "<a href=\"".$this->href("remove",$comment["tag"])."\" title=\"".$this->GetTranslation("DeleteTip")."\">".
           "<img src=\"".$this->GetConfigValue("theme_url")."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->GetTranslation("DeleteText")."\"  align=\"absmiddle\" border=\"0\" /></a>".
