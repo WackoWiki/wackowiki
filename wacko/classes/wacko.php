@@ -2929,18 +2929,17 @@ class Wacko
 			return $page["owner_id"];
 	}
 
-	function SetPageOwner($tag, $user)
+	function SetPageOwner($page_id, $user_id)
 	{
 		// check if user exists
+		$user = $this->GetUserNameById($user_id);
 		if (!$this->LoadUser($user)) return;
-
-		$user_id = $this->GetUserIdByName($user);
 
 		// updated latest revision with new owner
 		$this->Query(
 			"UPDATE ".$this->config["table_prefix"]."pages ".
 			"SET owner_id = '".quote($this->dblink, $user_id)."' ".
-			"WHERE tag = '".quote($this->dblink, $tag)."' ".
+			"WHERE id = '".quote($this->dblink, $page_id)."' ".
 			"LIMIT 1");
 	}
 
@@ -3177,7 +3176,6 @@ class Wacko
 	{
 		// Remove old watch first to avoid double watches
 		$this->ClearWatch($user_id, $page_id);
-		$tag = $this->GetPageTagById($page_id);
 
 		if ($this->HasAccess('read', $page_id))
 			return $this->Query(

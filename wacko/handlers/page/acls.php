@@ -41,7 +41,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				if ($exists == true)
 				{
 					$newowner = $exists['name'];
-					$this->SetPageOwner($this->GetPageTag(), $newowner);
+					$newowner_id = $this->GetUserIdByName($newowner);
+					$this->SetPageOwner($this->GetPageId(), $newowner_id);
 
 					$User = $this->LoadSingle(
 							"SELECT email, more, email_confirm ".
@@ -87,7 +88,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 
 				// change owner?
 				if ($newowner = $_POST["newowner"])
-				$this->SetPageOwner($page["tag"], $newowner);
+				$newowner_id = $this->GetUserIdByName($newowner);
+				$this->SetPageOwner($page["id"], $newowner_id);
 			}
 		}
 
@@ -116,7 +118,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				// change owner?
 				if ($newowner = $_POST["newowner"])
 				{
-					$this->SetPageOwner($page["tag"], $newowner);
+					$newowner_id = $this->GetUserIdByName($newowner);
+					$this->SetPageOwner($page["id"], $newowner_id);
 					$ownedpages .= $this->Href("", $page["tag"])."\n";
 
 					// log event

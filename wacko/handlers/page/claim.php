@@ -3,7 +3,7 @@
 // only claim ownership if this page has no owner, and if user is logged in.
 if ($this->page && !$this->GetPageOwnerId() && $this->GetUser() && !$this->page["comment_on_id"])
 {
-	$this->SetPageOwner($this->GetPageTag(), $this->GetUserName());
+	$this->SetPageOwner($this->GetPageId(), $this->GetUserId());
 	$this->SetMessage($this->GetTranslation("YouAreNowTheOwner"));
 	// log event
 	$this->Log(4, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogPageOwnershipClaimed")));
