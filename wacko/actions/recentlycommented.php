@@ -22,9 +22,10 @@ if (!function_exists('LoadRecentlyCommented')){
 				foreach ($ids as $id)
 				{
 					$comment = $wacko->LoadSingle(
-						"SELECT b.tag as comment_on_page, b.supertag, a.tag, a.user, a.time ".
+						"SELECT b.tag as comment_on_page, b.supertag, a.tag, a.user_id, u.name AS user, a.time ".
 						"FROM ".$wacko->config["table_prefix"]."pages a ".
-							"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.id)".
+							"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.id) ".
+							"INNER JOIN ".$wacko->config["table_prefix"]."users u ON (a.user_id = u.id) ".
 						" WHERE a.id = '".$id["id"]."' LIMIT 1");
 					if (!isset($comments[$comment["comment_on_page"]]) && $num < $limit)
 					{
