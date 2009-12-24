@@ -13,7 +13,7 @@ if ($this->HasAccess("read"))
 
 
 	// load revisions for this page
-	if ($pages = $this->LoadRevisions($this->tag))
+	if ($pages = $this->LoadRevisions($this->page["id"]))
 	{
 		$this->context[++$this->current_context] = "";
 		$output .= $this->FormOpen("diff", "", "get");
@@ -70,7 +70,7 @@ if ($this->HasAccess("read"))
 	print($output);
 	$this->current_context--;
 
-	if ($max && $a > $max) 
+	if ($max && $a > $max)
 		echo "<a href=\"".$this->href("revisions", "", "show=all")."\">".$this->GetTranslation("RevisionsShowAll")."</a>";
 }
 else

@@ -888,21 +888,25 @@ class Wacko
 	}
 
 	// STANDARD QUERIES
-	function LoadRevisions($page)
+	function LoadRevisions($page_id)
 	{
+		$pages_meta = "p.id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.time, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.name as user ";
+
 		$rev = $this->LoadAll(
-			"SELECT ".$this->pages_meta." ".
-			"FROM ".$this->config["table_prefix"]."revisions ".
-			"WHERE tag='".quote($this->dblink, $page)."' ".
-			"ORDER BY time DESC");
+			"SELECT ".$pages_meta." ".
+			"FROM ".$this->config["table_prefix"]."revisions p ".
+				"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.id) ".
+			"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
+			"ORDER BY p.time DESC");
 
 		if ($rev == true)
 		{
 			if ($cur = $this->LoadSingle(
-				"SELECT ".$this->pages_meta." ".
-				"FROM ".$this->config["table_prefix"]."pages ".
-				"WHERE tag='".quote($this->dblink, $page)."' ".
-				"ORDER BY time DESC ".
+				"SELECT ".$pages_meta." ".
+				"FROM ".$this->config["table_prefix"]."pages p ".
+					"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.id) ".
+				"WHERE p.id = '".quote($this->dblink, $page_id)."' ".
+				"ORDER BY p.time DESC ".
 				"LIMIT 1"))
 			{
 				array_unshift($rev, $cur);
@@ -911,10 +915,11 @@ class Wacko
 		else
 		{
 			$rev = $this->LoadAll(
-				"SELECT ".$this->pages_meta." ".
-				"FROM ".$this->config["table_prefix"]."pages ".
-				"WHERE tag='".quote($this->dblink, $page)."' ".
-				"ORDER BY time DESC ".
+				"SELECT ".$pages_meta." ".
+				"FROM ".$this->config["table_prefix"]."pages p ".
+					"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.id) ".
+				"WHERE p.id = '".quote($this->dblink, $page_id)."' ".
+				"ORDER BY p.time DESC ".
 				"LIMIT 1");
 		}
 
@@ -2852,10 +2857,11 @@ class Wacko
 		if ($page_id)
 		{
 			return $this->LoadAll(
-					"SELECT id, tag, created, time, body, body_r, title, user ".
-					"FROM ".$this->config["table_prefix"]."pages ".
-					"WHERE comment_on_id = '".quote($this->dblink, $page_id)."' ".
-					"ORDER BY created ".
+					"SELECT p.id, p.tag, p.created, p.time, p.body, p.body_r, p.title, u.name AS user ".
+					"FROM ".$this->config["table_prefix"]."pages p ".
+						"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.id) ".
+					"WHERE p.comment_on_id = '".quote($this->dblink, $page_id)."' ".
+					"ORDER BY p.created ".
 					"LIMIT {$limit}, {$count}");
 		}
 	}
