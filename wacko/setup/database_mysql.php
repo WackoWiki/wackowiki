@@ -83,6 +83,8 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"PRIMARY KEY (id),".
+					"KEY idx_user_id (user_id),".
+					"KEY idx_owner_id (owner_id),".
 					"FULLTEXT KEY body (body),".
 					"UNIQUE KEY idx_tag (tag),".
 					"KEY idx_supertag (supertag),".
@@ -122,6 +124,8 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"description VARCHAR(250) NOT NULL DEFAULT '',".
 						"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 						"PRIMARY KEY (id),".
+						"KEY idx_user_id (user_id),".
+						"KEY idx_owner_id (owner_id),".
 						"KEY idx_tag (tag),".
 						"KEY idx_supertag (supertag),".
 						"KEY idx_time (time),".
