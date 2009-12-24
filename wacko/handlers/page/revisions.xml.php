@@ -22,7 +22,7 @@ $xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 if ($this->HasAccess("read"))
 {
 	// load revisions for this page
-	if ($pages = $this->LoadRevisions($this->tag))
+	if ($pages = $this->LoadRevisions($this->page["id"]))
 	{
 		$max = 10;
 
