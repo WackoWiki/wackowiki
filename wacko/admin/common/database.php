@@ -4,8 +4,6 @@
 ##   Common database backup variables and functions   ##
 ########################################################
 
-// $Id: database.php 158 2007-12-18 09:12:04Z sattva $
-
 // define db tables
 // we really want this up to date
 if (isset($tables, $directories) !== true)
@@ -114,7 +112,7 @@ if (isset($tables, $directories) !== true)
 				'limit' => 1000
 			)
 		);
-	
+
 	// define files dirs
 	$directories = array(
 			$engine->config['cache_dir'].CACHE_FEED_DIR,

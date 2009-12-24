@@ -16,7 +16,7 @@ class Wacko
 	var $WVERSION; //Wacko version
 	var $context = array("");
 	var $current_context = 0;
-	var $pages_meta = "id, owner_id, tag, supertag, created, time, edit_note, minor_edit, user, latest, handler, comment_on_id, lang, title, keywords, description";
+	var $pages_meta = "id, owner_id, user_id, tag, supertag, created, time, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description";
 	var $first_inclusion = array(); // for backlinks
 	var $optionSplitter = "\n"; // if you change this two symbols, settings for all users will be lost.
 	var $valueSplitter  = "=";
@@ -200,7 +200,7 @@ class Wacko
 	}
 	function GetPageSuperTag() { return $this->supertag; }
 	function GetPageTime() { return $this->page["time"]; }
-	function GetPageLastWriter() { return $this->page["user"]; }
+	function GetPageLastWriter() { return $this->page["user_id"]; }
 	function GetMethod() { return $this->method; }
 	function GetConfigValue($name) { return isset( $this->config[$name] ) ? $this->config[$name] : ''; }
 	function GetWackoName() { return $this->config["wacko_name"]; }
@@ -857,7 +857,7 @@ class Wacko
 			$this->CacheACL($notexists[$i], "read", 1, $acl);
 		}
 
-		//   unset($exists);
+		// unset($exists);
 		if ($read_acls = $this->LoadAll(
 		"SELECT * FROM ".$this->config["table_prefix"]."acls ".
 		"WHERE BINARY page_tag IN (".$pages_str.") AND privilege = 'read'", 1))
@@ -938,16 +938,17 @@ class Wacko
 		$limit = (int)$limit;
 
 		if ($pages = $this->LoadAll(
-		"SELECT ".$this->pages_meta." ".
-		"FROM ".$this->config["table_prefix"]."pages ".
-		"WHERE comment_on_id = '0' ".
+		"SELECT p.id, p.owner_id, p.tag, p.supertag, p.created, p.time, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.name as user ".
+		"FROM ".$this->config["table_prefix"]."pages p ".
+			"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.id) ".
+		"WHERE p.comment_on_id = '0' ".
 			($from
-				? "AND time <= '".quote($this->dblink, $from)." 23:59:59'"
+				? "AND p.time <= '".quote($this->dblink, $from)." 23:59:59'"
 				: "").
 			($for
-				? "AND supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
+				? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
 				: "").
-		"ORDER BY time DESC ".
+		"ORDER BY p.time DESC ".
 		"LIMIT ".$limit, 1))
 		{
 			foreach ($pages as $page)
@@ -957,19 +958,20 @@ class Wacko
 
 			if ($read_acls = $this->LoadAll(
 			"SELECT a.* ".
-			"FROM ".$this->config["table_prefix"]."acls a, ".$this->config["table_prefix"]."pages p ".
+			"FROM ".$this->config["table_prefix"]."acls a ".
+				"INNER JOIN ".$this->config["table_prefix"]."pages p ON (a.page_id = p.id) ".
 			"WHERE p.comment_on_id = '0' ".
-				"AND a.supertag = p.supertag ".
+				"AND a.page_id = p.id ".
 				($for
 					? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
 					: "").
-			"AND privilege = 'read' ".
+			"AND a.privilege = 'read' ".
 			"ORDER BY time DESC ".
 			"LIMIT ".$limit, 1))
 			{
 				for ($i = 0; $i < count($read_acls); $i++)
 				{
-					$this->CacheACL($read_acls[$i]["supertag"], "read", 1,$read_acls[$i]);
+					$this->CacheACL($read_acls[$i]["page_id"], "read", 1,$read_acls[$i]);
 				}
 			}
 			return $pages;
@@ -981,12 +983,14 @@ class Wacko
 		$limit = (int) $limit;
 
 		if ($pages = $this->LoadAll(
-		"SELECT ".$this->pages_meta.", body_r FROM ".$this->config["table_prefix"]."pages ".
-		"WHERE comment_on_id != '0' ".
+		"SELECT p.id, p.owner_id, p.tag, p.supertag, p.created, p.time, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.body_r, u.name as user ".
+		"FROM ".$this->config["table_prefix"]."pages p ".
+			"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.id) ".
+		"WHERE p.comment_on_id != '0' ".
 			($for
-				? "AND supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
+				? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
 				: "").
-		"ORDER BY time DESC ".
+		"ORDER BY p.time DESC ".
 		"LIMIT ".$limit))
 		{
 			foreach ($pages as $page)
@@ -996,19 +1000,20 @@ class Wacko
 
 			if ($read_acls = $this->LoadAll(
 			"SELECT a.* ".
-			"FROM ".$this->config["table_prefix"]."acls a, ".$this->config["table_prefix"]."pages p ".
+			"FROM ".$this->config["table_prefix"]."acls a ".
+				"INNER JOIN ".$this->config["table_prefix"]."pages p ON (a.page_id = p.id) ".
 			"WHERE p.comment_on_id = '0' ".
-				"AND a.supertag = p.supertag ".
+				"AND a.page_id = p.id ".
 					($for
 						? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
 						: "").
-			"AND privilege = 'read' ".
+			"AND a.privilege = 'read' ".
 			"ORDER BY time DESC ".
 			"LIMIT ".$limit))
 
 			for ($i = 0; $i < count($read_acls); $i++)
 			{
-				$this->CacheACL($read_acls[$i]["supertag"], "read", 1, $read_acls[$i]);
+				$this->CacheACL($read_acls[$i]["page_id"], "read", 1, $read_acls[$i]);
 			}
 			return $pages;
 		}
@@ -1057,11 +1062,15 @@ class Wacko
 
 	function FullTextSearch($phrase,$filter)
 	{
-		return $this->LoadAll("SELECT ".$this->pages_meta.", body FROM ".$this->config["table_prefix"]."pages WHERE (( match(body) against('".quote($this->dblink, $phrase)."') OR lower(tag) LIKE lower('%".quote($this->dblink, $phrase)."%')) ".($filter?"AND comment_on_id='0'":"")." )");
-
-		/*return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"].
-						"pages WHERE (( match(body) against('".quote($this->dblink, $phrase)."') ".
-						"OR lower(tag) LIKE lower('%".quote($this->dblink, $phrase)."%')) ".($filter?"AND comment_on_id='0'":"")." )");*/
+		return $this->LoadAll(
+			"SELECT ".$this->pages_meta.", body ".
+			"FROM ".$this->config["table_prefix"]."pages ".
+			"WHERE (( match(body) against('".quote($this->dblink, $phrase)."') ".
+				"OR lower(tag) LIKE lower('%".quote($this->dblink, $phrase)."%')) ".
+				($filter
+					? "AND comment_on_id = '0'"
+					: "").
+				" )");
 	}
 
 	function TagSearch($phrase) { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE lower(tag) LIKE binary lower('%".quote($this->dblink, $phrase)."%') ORDER BY supertag"); }

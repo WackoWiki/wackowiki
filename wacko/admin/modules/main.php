@@ -84,7 +84,7 @@ function admin_lock(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 	<p>
-		Note: before the administration of technical activities
+		Note: Before the administration of technical activities
 		<u>strongly</u> are encouraged to block access to the site!
 	</p>
 	<br />
