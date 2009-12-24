@@ -12,7 +12,7 @@ if (!$this->page) $this->Redirect($this->href('show'));
 if ($this->page['comment_on_id'])
 	$this->Redirect($this->href('', $this->GetCommentOnTag($this->page["comment_on_id"]), 'show_comments=1').'#'.$this->page['tag']);
 
-if ($this->UserIsOwner() || $this->HasAccess("write",$page["id"]))
+if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 {
 	if ($_POST)
 	{
@@ -47,7 +47,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["id"]))
 		echo "<table border=\"0\" cellspacing=\"3\" cellpadding=\"0\">";
 		echo "<tr class=\"lined\">";
 		echo "<td>".$this->GetTranslation('SettingsID')."</td>";
-		echo "<td>".$this->page['id']."</td>";
+		echo "<td>".$this->page['page_id']."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
 		echo "<td>".$this->GetTranslation('Owner')."</td>";
 		echo "<td>".$this->GetUserNameById($this->page['owner_id'])."</td>";

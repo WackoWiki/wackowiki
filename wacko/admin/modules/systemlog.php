@@ -23,7 +23,7 @@ function admin_systemlog(&$engine, &$module)
 	{
 		$engine->Redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'])));
 	}
-	
+
 	if ($_POST['update'])
 	{
 		// level filtering
@@ -40,10 +40,10 @@ function admin_systemlog(&$engine, &$module)
 				break;
 		}
 		$where = "WHERE level $mod ".(int)$_POST['level'].' ';
-		
-		
+
+
 	}
-	
+
 	// set time ordering
 	if ($_GET['order'] == 'time_asc')
 	{
@@ -59,7 +59,7 @@ function admin_systemlog(&$engine, &$module)
 	{
 		$ordertime	= 'time_asc';
 	}
-	
+
 	// set level ordering
 	if ($_GET['order'] == 'level_asc')
 	{
@@ -75,7 +75,7 @@ function admin_systemlog(&$engine, &$module)
 	{
 		$orderlevel	= 'level_desc';
 	}
-	
+
 	// filter by username or user ip
 	if ($_GET['user'])
 	{
@@ -85,26 +85,26 @@ function admin_systemlog(&$engine, &$module)
 	{
 		$where = "WHERE ip = '".quote($engine->dblink, $_GET['ip'])."' ";
 	}
-	
+
 	// entries to display
 	$limit = 100;
-	
+
 	// set default level
 	if (!isset($level)) $level = $engine->config['log_default_show'];
-	
+
 	// collecting data
 	$count = $engine->LoadSingle(
 		"SELECT COUNT(message) AS n ".
 		"FROM {$engine->config['table_prefix']}log ".
 		( $where ? $where : 'WHERE level <= '.(int)$level.' ' ));
-	
+
 	$pagination	= $engine->Pagination($count['n'], $limit, 'p', 'mode=systemlog&order='.htmlspecialchars($_GET['order']), '', 'admin.php');
-	
+
 	$log = $engine->LoadAll(
-		"SELECT id, time, level, message, user, ip ".
+		"SELECT log_id, time, level, message, user, ip ".
 		"FROM {$engine->config['table_prefix']}log ".
 		( $where ? $where : 'WHERE level <= '.(int)$level.' ' ).
-		( $order ? $order : 'ORDER BY id DESC ' ).
+		( $order ? $order : 'ORDER BY log_id DESC ' ).
 		"LIMIT {$pagination['offset']}, $limit");
 ?>
 	<form action="admin.php" method="post" name="systemlog">
@@ -125,7 +125,7 @@ function admin_systemlog(&$engine, &$module)
 	}
 ?>
 			</select>
-			
+
 			<input name="update" id="submit" type="submit" value="update" />
 			<input name="reset" id="submit" type="submit" value="reset" />
 		</div>
@@ -168,9 +168,9 @@ function admin_systemlog(&$engine, &$module)
 			{
 				$row['level'] = '<small class="cl-grey">'.$engine->GetTranslation('LogLevel'.$row['level']).'</small>';
 			}
-			
+
 			echo '<tr class="lined">'."\n".
-					'<td valign="top" align="center">'.$row['id'].'</td>'.
+					'<td valign="top" align="center">'.$row['log_id'].'</td>'.
 					'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['time'])).'</small></td>'.
 					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$row['level'].'</td>'.
 					'<td valign="top">'.$engine->Format($row['message'], 'post_wacko').'</td>'.

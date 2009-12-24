@@ -10,19 +10,19 @@ if ($_GET["global"])
 }
 else
 {
-	$page_id = $this->page["id"];
+	$page_id = $this->page["page_id"];
 }
 $what = $this->LoadAll(
-	"SELECT u.name AS user, f.id, f.filename, f.file_ext, f.filesize, f.description, f.hits ".
+	"SELECT u.name AS user, f.upload_id, f.filename, f.file_ext, f.filesize, f.description, f.hits ".
 	"FROM ".$this->config["table_prefix"]."upload f ".
-		"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.id) ".
+		"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
 	"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
 	"AND f.filename='".quote($this->dblink, $_GET["get"])."'");
 
 if (sizeof($what) > 0)
 {
 	// 2. check rights
-	if ($this->IsAdmin() || ($desc["id"] && ($this->GetPageOwnerId($page_id) == $this->GetUserId())) ||
+	if ($this->IsAdmin() || ($desc["upload_id"] && ($this->GetPageOwnerId($page_id) == $this->GetUserId())) ||
 	($this->HasAccess("read")) || ($desc["user_id"] == $this->GetUserId()) )
 	{
 		$filepath = $this->config["upload_path".($page_id ? "_per_page" : "")]."/".
@@ -79,7 +79,7 @@ if ($filepath)
 		$this->Query(
 			"UPDATE {$this->config['table_prefix']}upload ".
 			"SET hits = '".quote($this->dblink, $what[0]['hits'] + 1)."' ".
-			"WHERE id = '".quote($this->dblink, $what[0]['id'])."'");
+			"WHERE upload_id = '".quote($this->dblink, $what[0]['upload_id'])."'");
 	}
 
 	$f = @fopen( $filepath, "rb" );

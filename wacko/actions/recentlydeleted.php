@@ -14,7 +14,7 @@ if ($pages == true)
 	{
 		$i++;
 		if ($this->config["hide_locked"])
-			$access = $this->HasAccess("read", $page["id"]);
+			$access = $this->HasAccess("read", $page["page_id"]);
 		else
 			$access = true;
 

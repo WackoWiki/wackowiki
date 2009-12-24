@@ -17,7 +17,7 @@ if ($user_id = $this->GetUserId())
 			"SELECT COUNT(p.tag) AS n ".
 			"FROM {$prefix}pages AS p ".
 			"LEFT JOIN {$prefix}watches AS w ".
-				"ON (p.id = w.page_id ".
+				"ON (p.page_id = w.page_id ".
 					"AND w.user_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND w.user_id IS NULL", 1);
@@ -33,7 +33,7 @@ if ($user_id = $this->GetUserId())
 			"SELECT p.tag AS pagetag, p.id AS page_id ".
 			"FROM {$prefix}pages AS p ".
 			"LEFT JOIN {$prefix}watches AS w ".
-				"ON (p.id = w.page_id ".
+				"ON (p.page_id = w.page_id ".
 					"AND w.user_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND w.user_id IS NULL ".
@@ -88,7 +88,7 @@ if ($user_id = $this->GetUserId())
 			"SELECT w.page_id, p.tag AS tag ".
 			"FROM {$prefix}watches AS w ".
 			"LEFT JOIN {$prefix}pages AS p ".
-				"ON (p.id = w.page_id) ".
+				"ON (p.page_id = w.page_id) ".
 			"WHERE w.user_id = '".quote($this->dblink, $user_id)."' ".
 			"GROUP BY tag ".
 			"LIMIT {$pagination['offset']}, $limit"))

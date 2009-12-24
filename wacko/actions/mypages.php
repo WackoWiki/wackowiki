@@ -60,13 +60,13 @@ if ($user_id = $this->GetUserId())
 			echo $this->GetTranslation("NoPagesFound");
 		}
 	}
-	else if ($_GET["bychange"] == 1 || $bychange==1)
+	else if ($_GET["bychange"] == 1 || $bychange == 1)
 	{
 		$count	= $this->LoadSingle(
 			"SELECT COUNT( DISTINCT p.tag ) AS n ".
 			"FROM {$prefix}pages AS p ".
 			"LEFT JOIN {$prefix}revisions AS r ".
-				"ON (p.id = r.page_id ".
+				"ON (p.page_id = r.page_id ".
 					"AND p.owner_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND r.comment_on_id = '0'", 1);
@@ -83,7 +83,7 @@ if ($user_id = $this->GetUserId())
 			"SELECT p.tag AS tag, p.time AS time ".
 			"FROM {$prefix}pages AS p ".
 			"LEFT JOIN {$prefix}revisions AS r ".
-				"ON (p.id = r.page_id ".
+				"ON (p.page_id = r.page_id ".
 					"AND p.owner_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND r.comment_on_id = '0' ".

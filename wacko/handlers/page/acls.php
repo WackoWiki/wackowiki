@@ -82,14 +82,14 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					"SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '".$this->GetPageId()."' AND owner_id='".quote($this->dblink, $this->GetUserId())."'");
 			foreach ($comments as $num=>$page)
 			{
-				$this->SaveAcl($page["id"], "read", $_POST["read_acl"]);
-				$this->SaveAcl($page["id"], "write", $_POST["write_acl"]);
-				$this->SaveAcl($page["id"], "comment", $_POST["comment_acl"]);
+				$this->SaveAcl($page["page_id"], "read", $_POST["read_acl"]);
+				$this->SaveAcl($page["page_id"], "write", $_POST["write_acl"]);
+				$this->SaveAcl($page["page_id"], "comment", $_POST["comment_acl"]);
 
 				// change owner?
 				if ($newowner = $_POST["newowner"])
 				$newowner_id = $this->GetUserIdByName($newowner);
-				$this->SetPageOwner($page["id"], $newowner_id);
+				$this->SetPageOwner($page["page_id"], $newowner_id);
 			}
 		}
 
@@ -108,9 +108,9 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			foreach ($pages as $num=>$page)
 			{
 				// store lists
-				$this->SaveAcl($page["id"], "read", $_POST["read_acl"]);
-				$this->SaveAcl($page["id"], "write", $_POST["write_acl"]);
-				$this->SaveAcl($page["id"], "comment", $_POST["comment_acl"]);
+				$this->SaveAcl($page["page_id"], "read", $_POST["read_acl"]);
+				$this->SaveAcl($page["page_id"], "write", $_POST["write_acl"]);
+				$this->SaveAcl($page["page_id"], "comment", $_POST["comment_acl"]);
 
 				// log event
 				$this->Log(2, str_replace("%1", $page["tag"]." ".$page["title"], $this->GetTranslation("LogACLUpdated")));
@@ -119,7 +119,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				if ($newowner = $_POST["newowner"])
 				{
 					$newowner_id = $this->GetUserIdByName($newowner);
-					$this->SetPageOwner($page["id"], $newowner_id);
+					$this->SetPageOwner($page["page_id"], $newowner_id);
 					$ownedpages .= $this->Href("", $page["tag"])."\n";
 
 					// log event

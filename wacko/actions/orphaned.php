@@ -9,7 +9,7 @@ if ($pages = $this->LoadOrphanedPages($root))
 	//!!!! unoptimized
 	if (is_array($pages))
 	foreach ($pages as $page)
-	if (!$this->config["hide_locked"] || $this->HasAccess("read",$page["id"]))
+	if (!$this->config["hide_locked"] || $this->HasAccess("read",$page["page_id"]))
 	{
 		print("<li>".$this->Link("/".$page["tag"], "", "", 0)."</li>\n");
 	}

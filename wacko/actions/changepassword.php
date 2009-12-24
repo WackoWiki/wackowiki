@@ -62,7 +62,7 @@ if (isset($_GET["secret_code"]) && $_GET["secret_code"])
 					"UPDATE ".$this->config["user_table"]." ".
 					"SET password = '".quote($this->dblink, md5($newpassword))."' ".
 						"changepassword	= '' ".
-					"WHERE id = '".quote($this->dblink, $user["id"])."' ".
+					"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
 					"LIMIT 1");
 
 				#$this->SetUser($user = $this->LoadUser($user["name"]));
@@ -187,7 +187,7 @@ else if (!isset($forgot) && $user = $this->GetUser())
 			$this->Query(
 				"UPDATE ".$this->config["user_table"]." ".
 				"SET password = '".quote($this->dblink, md5($newpassword))."' ".
-				"WHERE id = '".quote($this->dblink, $user["id"])."' ".
+				"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
 				"LIMIT 1");
 
 			// reinitialize user session

@@ -7,7 +7,7 @@ if (!function_exists('LoadRecentComments')){
 		$wacko->LoadAll(
 			"SELECT b.tag as comment_on_page, a.tag, b.supertag, a.user, a.time, a.comment_on_id ".
 			"FROM ".$wacko->config["table_prefix"]."pages a ".
-				"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.id)".
+				"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.page_id)".
 			"WHERE ".
 			($for
 				? "b.supertag LIKE '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' "

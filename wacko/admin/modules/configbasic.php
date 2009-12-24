@@ -51,7 +51,7 @@ function admin_configbasic(&$engine, &$module)
 				"`keep_deleted_time`	= '".quote((string)$_POST['keep_deleted_time'])."', ".
 				"`pages_purge_time`		= '".quote((string)$_POST['pages_purge_time'])."', ".
 				"`referrers_purge_time`	= '".quote((string)$_POST['referrers_purge_time'])."' ");
-		$engine->Log(1, 'Обновлены базовые параметры openSpace');
+		$engine->Log(1, 'Обновлены базовые параметры WackoWiki');
 		$engine->Redirect(rawurldecode($engine->href()));
 	}
 ?>

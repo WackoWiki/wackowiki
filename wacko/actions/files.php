@@ -55,14 +55,14 @@ if ($can_view)
 	if ($global || ($tag == $page)) $filepage = $this->page;
 	else $filepage = $this->LoadPage($page);
 
-	if (!$global && !$filepage["id"]) return;
+	if (!$global && !$filepage["page_id"]) return;
 
 	// load files list
 	$files = $this->LoadAll(
-		"SELECT f.id, f.page_id, f.user_id, f.filesize, f.picture_w, f.picture_h, f.filename, f.description, f.uploaded_dt, u.name AS user, f.hits ".
+		"SELECT f.upload_id, f.page_id, f.user_id, f.filesize, f.picture_w, f.picture_h, f.filename, f.description, f.uploaded_dt, u.name AS user, f.hits ".
 		"FROM ".$this->config["table_prefix"]."upload f ".
 			"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.id) ".
-		"WHERE f.page_id = '". ($global ? 0 : $filepage["id"])."' ".$user_add.
+		"WHERE f.page_id = '". ($global ? 0 : $filepage["page_id"])."' ".$user_add.
 		" ORDER BY f.".$orderby );
 
 	if (!is_array($files)) $files = array();

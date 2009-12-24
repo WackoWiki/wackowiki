@@ -11,9 +11,9 @@ if ($user_id = $this->GetUserId())
 		$this->GetTranslation('ResetChangesWatches').'</a>).<br /><br />';
 
 	$pages = $this->LoadAll(
-			"SELECT p.id, p.tag, p.time, w.user_id ".
+			"SELECT p.page_id, p.tag, p.time, w.user_id ".
 			"FROM {$pref}pages AS p, {$pref}watches AS w ".
-			"WHERE p.id = w.page_id ".
+			"WHERE p.page_id = w.page_id ".
 				"AND p.time  > w.time ".
 				"AND w.user_id  = '".quote($this->dblink, $user_id)."' ".
 				"AND p.user_id <> '".quote($this->dblink, $user_id)."' ".
@@ -27,7 +27,7 @@ if ($user_id = $this->GetUserId())
 			$this->Query(
 				"UPDATE {$this->config['table_prefix']}watches ".
 				"SET time = NOW() ".
-				"WHERE page_id = '".quote($this->dblink, $page['id'])."' ".
+				"WHERE page_id = '".quote($this->dblink, $page['page_id'])."' ".
 					"AND user_id = '".quote($this->dblink, $user_id)."'");
 		$this->Redirect($this->href('', '', 'mode=mychangeswatches').'#list');
 	}
@@ -35,7 +35,7 @@ if ($user_id = $this->GetUserId())
 	if ($pages == true)
 	{
 		foreach ($pages as $page)
-			if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['id']))
+			if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['page_id']))
 				echo '<small>('.$this->ComposeLinkToPage($page['tag'], 'revisions', $this->GetTimeStringFormatted($page['time']), 0, $this->GetTranslation("History")).
 					')</small> '.$this->ComposeLinkToPage($page['tag'], '', '', 0)."<br />\n";
 	}

@@ -32,14 +32,14 @@ if ($registered
 		if ($_GET["remove"] == "global")
 			$page_id = 0;
 		else
-			$page_id = $this->page["id"];
+			$page_id = $this->page["page_id"];
 
 		$what = $this->LoadAll(
-			"SELECT ".$this->config["table_prefix"]."users.name AS user, ".$this->config["table_prefix"]."upload.id, ".$this->config["table_prefix"]."upload.filename, ".$this->config["table_prefix"]."upload.filesize, ".$this->config["table_prefix"]."upload.description ".
-			"FROM ".$this->config["table_prefix"]."upload ".
-				"INNER JOIN ".$this->config["table_prefix"]."users ON (".$this->config["table_prefix"]."upload.user_id = ".$this->config["table_prefix"]."users.id) ".
-			"WHERE ".$this->config["table_prefix"]."upload.page_id = '".quote($this->dblink, $page_id)."'".
-			"AND ".$this->config["table_prefix"]."upload.filename='".quote($this->dblink, $_GET["file"])."'");
+			"SELECT u.name AS user, f.upload_id, f.filename, f.filesize, f.description ".
+			"FROM ".$this->config["table_prefix"]."upload f ".
+				"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
+			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
+			"AND f.filename='".quote($this->dblink, $_GET["file"])."'");
 
 		if (sizeof($what) > 0)
 		{
@@ -88,14 +88,14 @@ if ($registered
 		if ($_POST["remove"] == "global")
 			$page_id = 0;
 		else
-			$page_id = $this->page["id"];
+			$page_id = $this->page["page_id"];
 
 		$what = $this->LoadAll(
-			"SELECT ".$this->config["table_prefix"]."users.name AS user, ".$this->config["table_prefix"]."upload.id, ".$this->config["table_prefix"]."upload.filename, ".$this->config["table_prefix"]."upload.filesize, ".$this->config["table_prefix"]."upload.description ".
-			"FROM ".$this->config["table_prefix"]."upload ".
-				"INNER JOIN ".$this->config["table_prefix"]."users ON (".$this->config["table_prefix"]."upload.user_id = ".$this->config["table_prefix"]."users.id) ".
-			"WHERE ".$this->config["table_prefix"]."upload.page_id = '".quote($this->dblink, $page_id)."'".
-			"AND ".$this->config["table_prefix"]."upload.filename='".quote($this->dblink, $_POST["file"])."'");
+			"SELECT u.name AS user, f.upload_id, f.filename, f.filesize, f.description ".
+			"FROM ".$this->config["table_prefix"]."upload f ".
+				"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
+			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
+			"AND f.filename='".quote($this->dblink, $_POST["file"])."'");
 
 		if (sizeof($what) > 0)
 		{
@@ -107,7 +107,7 @@ if ($registered
 				// 2. remove from DB
 				$this->Query(
 					"DELETE FROM ".$this->config["table_prefix"]."upload ".
-					"WHERE id = '". quote($this->dblink, $what[0]["id"])."'" );
+					"WHERE upload_id = '". quote($this->dblink, $what[0]["upload_id"])."'" );
 
 				print("<div>".$this->GetTranslation("UploadRemovedFromDB")."</div>");
 
@@ -140,10 +140,10 @@ if ($registered
 	{
 		$user = $this->GetUser();
 		$files = $this->LoadAll(
-			"SELECT ".$this->config["table_prefix"]."upload.id ".
-			"FROM ".$this->config["table_prefix"]."upload ".
-				"INNER JOIN ".$this->config["table_prefix"]."users ON (".$this->config["table_prefix"]."upload.user_id = ".$this->config["table_prefix"]."users.id) ".
-			"WHERE ".$this->config["table_prefix"]."users.name = '".quote($this->dblink, $user["name"])."'");
+			"SELECT f.upload_id ".
+			"FROM ".$this->config["table_prefix"]."upload f ".
+				"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.users_id) ".
+			"WHERE u.name = '".quote($this->dblink, $user["name"])."'");
 
 		if (!$this->config["upload_max_per_user"] || (sizeof($files) < $this->config["upload_max_per_user"]))
 		{
@@ -234,8 +234,8 @@ if ($registered
 
 						// 5. insert line into DB
 						$this->Query("INSERT INTO ".$this->config["table_prefix"]."upload SET ".
-							"page_id = '".quote($this->dblink, $is_global ? "0" : $this->page["id"])."', ".
-							"user_id = '".quote($this->dblink, $user["id"])."',".
+							"page_id = '".quote($this->dblink, $is_global ? "0" : $this->page["page_id"])."', ".
+							"user_id = '".quote($this->dblink, $user["user_id"])."',".
 							"filename = '".quote($this->dblink, $small_name)."', ".
 							"description = '".quote($this->dblink, $description)."', ".
 							"filesize = '".quote($this->dblink, $file_size)."',".

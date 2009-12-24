@@ -6,7 +6,7 @@
 $pref = $config["table_prefix"];
 
 $table_pages = "CREATE TABLE {$pref}pages (".
-					"id serial,".
+					"page_id serial,".
 					"\"owner_id\" integer NOT NULL DEFAULT '',".
 					"\"user_id\" integer NOT NULL DEFAULT '',".
 					"tag character varying(250) NOT NULL DEFAULT '',".
@@ -26,12 +26,12 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"title character varying(100) NOT NULL DEFAULT '',".
 					"description character varying(250) NOT NULL DEFAULT '',".
 					"keywords character varying(250) NOT NULL DEFAULT '',".
-					"CONSTRAINT pk_pages_id PRIMARY KEY (id),".
+					"CONSTRAINT pk_pages_id PRIMARY KEY (page_id),".
 					"CONSTRAINT idx_pages_tag UNIQUE (tag)".
 				") WITH (OIDS=FALSE);";
 
 $table_revisions = "CREATE TABLE {$pref}revisions (".
-						"id serial,".
+						"revision_id serial,".
 						"page_id integer NOT NULL DEFAULT 0,".
 						"\"owner_id\" integer NOT NULL DEFAULT '',".
 						"\"user_id\" integer NOT NULL DEFAULT '',".
@@ -50,7 +50,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"title character varying(100) NOT NULL DEFAULT '',".
 						"description character varying(250) NOT NULL DEFAULT '',".
 						"keywords character varying(250) NOT NULL DEFAULT '',".
-						"CONSTRAINT pk_revisions_id PRIMARY KEY (id)".
+						"CONSTRAINT pk_revisions_id PRIMARY KEY (revision_id)".
 					") WITH (OIDS=FALSE);";
 
 
@@ -62,20 +62,20 @@ $table_acls = "CREATE TABLE {$pref}acls (".
 				") WITH (OIDS=FALSE);";
 
 $table_links = "CREATE TABLE {$pref}links (".
-					"id serial,".
+					"link_id serial,".
 					"from_tag character varying(250) NOT NULL DEFAULT '',".
 					"to_tag character varying(250) NOT NULL DEFAULT '',".
 					"to_supertag character varying(250) NOT NULL DEFAULT ''".
 				") WITH (OIDS=FALSE);";
 
 $table_log = "CREATE TABLE {$pref}log (".
-				"id serial,".
+				"log_id serial,".
 				"\"time\" timestamp without time zone NOT NULL DEFAULT NOW(),".
 				"level int(1) NOT NULL,".
 				"user character varying(80) NOT NULL DEFAULT '',".
 				"ip character varying(15) NOT NULL DEFAULT '',".
 				"message text NOT NULL DEFAULT '',".
-				"CONSTRAINT pk_log_id PRIMARY KEY (id)".
+				"CONSTRAINT pk_log_id PRIMARY KEY (log_id)".
 			") WITH (OIDS=FALSE);";
 
 $table_referrers = "CREATE TABLE {$pref}referrers (".
@@ -85,7 +85,7 @@ $table_referrers = "CREATE TABLE {$pref}referrers (".
 					") WITH (OIDS=FALSE);";
 
 $table_users = "CREATE TABLE {$pref}users (".
-					"id serial,".
+					"user_id serial,".
 					"name character varying(80) NOT NULL DEFAULT '',".
 					"real_name character varying(80) NOT NULL DEFAULT '',".
 					"\"password\" character varying(32) NOT NULL DEFAULT '',".
@@ -104,20 +104,20 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"more text NOT NULL DEFAULT '',".
 					"changepassword character varying(100) NOT NULL DEFAULT '',".
 					"email_confirm character varying(40) NOT NULL DEFAULT '',".
-					"CONSTRAINT pk_users_name PRIMARY KEY (id),".
+					"CONSTRAINT pk_users_name PRIMARY KEY (user_id),".
 					"CONSTRAINT idx_users_name UNIQUE (name)".
 				") WITH (OIDS=FALSE);";
 
 $table_watches = "CREATE TABLE {$pref}watches (".
-					"id serial,".
+					"watch_id serial,".
 					"page_id integer NOT NULL DEFAULT 0,".
 					"user_id integer NOT NULL DEFAULT 0,".
 					"\"time\" timestamp without time zone NOT NULL DEFAULT now(),".
-					"CONSTRAINT pk_watches_id PRIMARY KEY (id)".
+					"CONSTRAINT pk_watches_id PRIMARY KEY (watch_id)".
 				") WITH (OIDS=FALSE);";
 
 $table_upload = "CREATE TABLE {$pref}upload (".
-					"id serial,".
+					"upload_id serial,".
 					"page_id integer NOT NULL DEFAULT 0,".
 					"user_id integer NOT NULL DEFAULT 0,".
 					"filename character varying(250) NOT NULL DEFAULT '',".

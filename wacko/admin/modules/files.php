@@ -25,7 +25,7 @@ function admin_files(&$engine, &$module)
 	if ($_GET['remove']) // show the form
 	{
 		$what = $engine->LoadAll(
-			"SELECT user_id, id, filename, filesize, description ".
+			"SELECT user_id, upload_id, filename, filesize, description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
 				"AND filename='".quote($engine->dblink, $_GET['file'])."'");
@@ -44,12 +44,12 @@ function admin_files(&$engine, &$module)
 	<input type="hidden" name="file" value="<?php echo $_GET["file"]?>" />
 	<input id="submit" name="submit" type="submit" value="<?php echo $engine->GetTranslation('RemoveButton'); ?>" />
 	<input id="button" type="button" value="<?php echo str_replace("\n", ' ', $engine->GetTranslation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes(rawurldecode($engine->href('upload')))?>';" />
-	<br /><br /> 
+	<br /><br />
 <?php
 			echo $engine->FormClose();
 		}
 		else print($engine->GetTranslation('UploadFileNotFound'));
-		
+
 		echo '</div>';
 		return true;
 
@@ -58,7 +58,7 @@ function admin_files(&$engine, &$module)
 	{
 		// 1. where, existence
 		$what = $engine->LoadAll(
-			"SELECT user_id, id, filename, filesize, description ".
+			"SELECT user_id, upload_id, filename, filesize, description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
 				"AND filename='".quote($engine->dblink, $_POST['file'])."'");
@@ -68,19 +68,19 @@ function admin_files(&$engine, &$module)
 			// 2. remove from DB
 			$engine->Query(
 				"DELETE FROM ".$engine->config['table_prefix']."upload ".
-				"WHERE id = '". quote($engine->dblink, $what[0]['id'])."'");
+				"WHERE upload_id = '". quote($engine->dblink, $what[0]['upload_id'])."'");
 
 			print('<br />');
 			print('<div><em>'.$engine->GetTranslation('UploadRemovedFromDB').'</em></div>');
 
 			// 3. remove from FS
-			$real_filename = $engine->config['upload_path'].'/'.$what[0]['filename']; 
+			$real_filename = $engine->config['upload_path'].'/'.$what[0]['filename'];
 
-			if (@unlink($real_filename))      
+			if (@unlink($real_filename))
 				print('<div><em>'.$engine->GetTranslation('UploadRemovedFromFS').'</em></div><br /><br /> ');
 			else
 				print('<div class="error">'.$engine->GetTranslation('UploadRemovedFromFSError').'</div><br /><br /> ');
-			
+
 			$engine->Log(1, str_replace('%2', $what[0]['filename'], str_replace('%1', $engine->tag.' global storage', $engine->GetTranslation('LogRemovedFile'))));
 		}
 		else
@@ -95,7 +95,7 @@ function admin_files(&$engine, &$module)
 		$files	= $engine->LoadAll(
 			"SELECT id ".
 			"FROM {$engine->config['table_prefix']}upload ".
-			"WHERE user_id = '".quote($engine->dblink, $user['id'])."'");
+			"WHERE user_id = '".quote($engine->dblink, $user['user_id'])."'");
 
 		if (is_uploaded_file($_FILES['file']['tmp_name'])) // there is file
 		{
@@ -126,17 +126,17 @@ function admin_files(&$engine, &$module)
 			// 1.6. check filesize, if asked
 			$maxfilesize	= $engine->config['upload_max_size'];
 
-			if ($_POST['maxsize']) 
+			if ($_POST['maxsize'])
 				if ($maxfilesize > 1 * $_POST['maxsize'])
 					$maxfilesize = 1 * $_POST['maxsize'];
 
 			// 1.7. check is image, if asked
 			$size	= array(0, 0);
 			$src	= $_FILES['file']['tmp_name'];
-			$size	= @getimagesize($src); 
+			$size	= @getimagesize($src);
 
 			// 3. save to permanent location
-			move_uploaded_file($_FILES['file']['tmp_name'], $dir.$result_name); 
+			move_uploaded_file($_FILES['file']['tmp_name'], $dir.$result_name);
 			chmod( $dir.$result_name, 0744 );
 
 			$small_name  = $result_name;
@@ -154,7 +154,7 @@ function admin_files(&$engine, &$module)
 				"picture_w		= '".quote($engine->dblink, $size[0])."',".
 				"picture_h		= '".quote($engine->dblink, $size[1])."',".
 				"file_ext		= '".quote($engine->dblink, substr($ext, 0, 10))."',".
-				"user_id			= '".quote($engine->dblink, $user['id'])."',".
+				"user_id		= '".quote($engine->dblink, $user['user_id'])."',".
 				"uploaded_dt	= '".quote($engine->dblink, date('Y-m-d H:i:s'))."' ");
 
 			// 4. output link to file
@@ -173,21 +173,21 @@ function admin_files(&$engine, &$module)
 		else
 		{
 			if ($_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE || $_FILES['file']['error'] == UPLOAD_ERR_FORM_SIZE)
-				$error = $engine->GetTranslation('UploadMaxSizeReached'); 
+				$error = $engine->GetTranslation('UploadMaxSizeReached');
 			else if ($_FILES['file']['error'] == UPLOAD_ERR_PARTIAL || $_FILES['file']['error'] == UPLOAD_ERR_NO_FILE)
 				$error = $engine->GetTranslation('UploadNoFile');
 			else
-				$error = ' '; 
+				$error = ' ';
 		}
 	}
 	if ($error)
 		echo $error.'<br /><br />';
 
 	// displaying
-	echo $engine->FormOpen('', '', 'post', '', ' enctype="multipart/form-data" '); 
+	echo $engine->FormOpen('', '', 'post', '', ' enctype="multipart/form-data" ');
 
 ?>
-	<input type="hidden" name="MAX_FILE_SIZE" value="999999999" /> 
+	<input type="hidden" name="MAX_FILE_SIZE" value="999999999" />
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td><?php echo $engine->GetTranslation('UploadFor');?>:&nbsp;</td>
@@ -209,15 +209,15 @@ function admin_files(&$engine, &$module)
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td> 
+			<td>
 				<div style="padding-top:5px">
 				<input id="submit" type="submit" value="<?php echo $engine->GetTranslation('UploadButtonText'); ?>" />
 				</div>
 			</td>
 		</tr>
 	</table>
-<?php 
-	echo $engine->FormClose(); 
+<?php
+	echo $engine->FormClose();
 
 	echo '<br />';
 
@@ -226,10 +226,10 @@ function admin_files(&$engine, &$module)
 	if ($order == 'size')		$orderby = 'filesize ASC';
 	if ($order == 'size_desc')	$orderby = 'filesize DESC';
 	if ($order == 'ext')		$orderby = 'file_ext ASC';
-		
+
 	// load files list
 	$files = $engine->LoadAll(
-		"SELECT id, page_id, user_id, filesize, picture_w, picture_h, filename, description, uploaded_dt ".
+		"SELECT upload_id, page_id, user_id, filesize, picture_w, picture_h, filename, description, uploaded_dt ".
 		"FROM {$engine->config['table_prefix']}upload ".
 		"WHERE page_id = 0 ".
 		"ORDER BY ".$orderby);
