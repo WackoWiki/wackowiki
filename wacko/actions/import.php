@@ -52,7 +52,7 @@ else
 			$base_addr = Utility::untag($contents, "title");
 
 			$items = explode("<item>", $contents);
-			
+
 			array_shift($items);
 
 			foreach ($items as $item)
@@ -60,12 +60,14 @@ else
 				$root_tag	= trim($_POST["_to"], "/ ");
 				$rel_tag	= trim(Utility::untag($item, "guid"), "/ ");
 				$tag		= $root_tag.( $root_tag && $rel_tag ? "/" : "" ).$rel_tag;
+				$page_id	= $this->GetPageId($tag);
 				$owner		= Utility::untag($item, "author");
+				$owner_id	= $this->GetUserIdByName($user);
 				$body = str_replace("]]&gt;", "]]>", Utility::untag($item, "description"));
 				$title		= html_entity_decode(Utility::untag($item, "title"));
 
 				$body_r = $this->SavePage($tag, $body, '', $title);
-				$this->SetPageOwner($tag, $owner);
+				$this->SetPageOwner($page_id, $owner_id);
 				// now we render it internally in the context of imported
 				// page so we can write the updated link table
 				$this->context[++$this->current_context] = $tag;
@@ -76,7 +78,7 @@ else
 				$this->WriteLinkTable($tag);
 				$this->ClearLinkTable();
 				$this->current_context--;
-				
+
 				// log import
 				$this->Log(4, str_replace("%1", $tag, $this->GetTranslation("LogPageImported")));
 
