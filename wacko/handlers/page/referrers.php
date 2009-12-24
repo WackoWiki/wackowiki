@@ -27,7 +27,7 @@ if ($user = $this->GetUser())
 			{
 				if ($page["tag"])
 				{
-					if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["id"]);
+					if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["page_id"]);
 					else $access = true;
 					if ($access)
 					{
@@ -51,7 +51,7 @@ if ($user = $this->GetUser())
 		$this->GetTranslation("LastDays"))): ""),
 		str_replace("%3",$this->href("referrers_sites"),$this->GetTranslation("ExternalPages"))));
 
-		$referrers = $this->LoadReferrers($this->page["id"]);
+		$referrers = $this->LoadReferrers($this->page["page_id"]);
 	}
 
 	print("<strong>$title</strong><br /><br />\n");

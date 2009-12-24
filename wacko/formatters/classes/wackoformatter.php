@@ -361,7 +361,7 @@ class WackoFormatter
 		$wacko = & $this->object;
 		$callback = array(&$this, "WackoCallback");
 
-		$this->page_id = $wacko->page["id"];
+		$this->page_id = $wacko->page["page_id"];
 		if (!$this->page_id)
 			$this->page_id = trim(substr(crc32(time()), 0, 5), "-");
 

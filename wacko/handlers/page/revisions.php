@@ -13,7 +13,7 @@ if ($this->HasAccess("read"))
 
 
 	// load revisions for this page
-	if ($pages = $this->LoadRevisions($this->page["id"]))
+	if ($pages = $this->LoadRevisions($this->page["page_id"]))
 	{
 		$this->context[++$this->current_context] = "";
 		$output .= $this->FormOpen("diff", "", "get");
@@ -53,10 +53,10 @@ if ($this->HasAccess("read"))
 			{
 				$output .= "<li>";
 				$output .= "".($t--).".";
-				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"a\" value=\"".($c == 1 ? "-1" : $page["id"])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";
-				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"b\" value=\"".($c == 1 ? "-1" : $page["id"])."\" ".($c == 2 ? "checked=\"checked\"" : "")." />";
+				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"a\" value=\"".($c == 1 ? "-1" : $page["page_id"])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";
+				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"b\" value=\"".($c == 1 ? "-1" : $page["page_id"])."\" ".($c == 2 ? "checked=\"checked\"" : "")." />";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("show").($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."time=".urlencode($page["time"])."\">".$this->GetTimeStringFormatted($page["time"])."</a>";
-				$output .= " — id ".$page["id"]." ";
+				$output .= " — id ".$page["page_id"]." ";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->GetTranslation("By")." ".($this->IsWikiName($page["user"]) ? $this->Link($page["user"]) : $page["user"])."";
 				$output .= "".$edit_note."";
 				$output .= "</li>\n";

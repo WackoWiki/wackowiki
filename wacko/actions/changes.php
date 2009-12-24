@@ -25,7 +25,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 	foreach ($pages as $i => $page)
 	{
 		if ($this->config["hide_locked"])
-			$access = $this->HasAccess("read",$page["id"]);
+			$access = $this->HasAccess("read",$page["page_id"]);
 		else
 			$access = true;
 

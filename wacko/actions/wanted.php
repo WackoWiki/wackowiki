@@ -14,7 +14,7 @@ if ($linking_to = $_GET["linking_to"])
 
 		foreach ($pages as $page)
 		{
-			if (!$this->config["hide_locked"] || $this->HasAccess("read", $page["id"]))
+			if (!$this->config["hide_locked"] || $this->HasAccess("read", $page["page_id"]))
 			{
 				echo "<li>".$this->Link("/".$page["tag"],"","/".$page["tag"])."</li>\n";
 			}

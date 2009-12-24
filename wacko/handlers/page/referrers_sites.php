@@ -26,7 +26,7 @@ if ($user = $this->GetUser())
 		$this->GetTranslation("LastDays"))): ""),
 		str_replace("%3",$this->href("referrers"),$this->GetTranslation("DomainsSitesPages"))));
 
-		$referrers = $this->LoadReferrers($this->page["id"]);
+		$referrers = $this->LoadReferrers($this->page["page_id"]);
 	}
 
 	print("<strong>$title</strong><br /><br />\n");

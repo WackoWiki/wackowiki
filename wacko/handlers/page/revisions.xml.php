@@ -22,7 +22,7 @@ $xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 if ($this->HasAccess("read"))
 {
 	// load revisions for this page
-	if ($pages = $this->LoadRevisions($this->page["id"]))
+	if ($pages = $this->LoadRevisions($this->page["page_id"]))
 	{
 		$max = 10;
 
@@ -42,7 +42,7 @@ if ($this->HasAccess("read"))
 				$xml .= "<guid isPermaLink=\"true\">".$this->href("", $etag)."</guid>\n";
 
 				$_GET["a"] = $_GET["b"];
-				$_GET["b"] = $page["id"];
+				$_GET["b"] = $page["page_id"];
 				$diff = $this->IncludeBuffered("handlers/page/diff.php", "oops");
 
 				$xml .= "<description>".str_replace("<", "&lt;", str_replace("&", "&amp;", $diff))."</description>\n";

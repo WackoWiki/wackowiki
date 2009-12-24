@@ -11,7 +11,7 @@ if (!function_exists('HandlerDiffLoadPageById'))
 			return $wacko->LoadSingle(
 				"SELECT * ".
 				"FROM ".$wacko->config["table_prefix"]."revisions ".
-				"WHERE id = '".quote($wacko->dblink, $id)."' ".
+				"WHERE revision_id = '".quote($wacko->dblink, $id)."' ".
 				"LIMIT 1");
 		}
 		else
@@ -19,7 +19,7 @@ if (!function_exists('HandlerDiffLoadPageById'))
 			return $wacko->LoadSingle(
 				"SELECT * ".
 				"FROM ".$wacko->config["table_prefix"]."pages ".
-				"WHERE id='".quote($wacko->dblink, $wacko->GetPageId())."' ".
+				"WHERE page_id = '".quote($wacko->dblink, $wacko->GetPageId())."' ".
 				"LIMIT 1");
 		}
 	}
@@ -37,7 +37,7 @@ if ($this->HasAccess("read")) {
 	$pageA = HandlerDiffLoadPageById($this, $b);
 	$pageB = HandlerDiffLoadPageById($this, $a);
 
-	if ($this->HasAccess("read", $pageA["id"]) && $this->HasAccess("read", $pageB["id"]) ) {
+	if ($this->HasAccess("read", $pageA["page_id"]) && $this->HasAccess("read", $pageB["page_id"]) ) {
 
 		if ($_GET["source"]) $source = 1;
 

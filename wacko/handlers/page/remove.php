@@ -108,7 +108,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 					? "SET total_comments	= total_comments	- 1 "
 					: "SET total_pages		= total_pages		- 1 "
 					).
-					"WHERE id = '".quote($this->dblink, $owner_id)."' ".
+					"WHERE user_id = '".quote($this->dblink, $owner_id)."' ".
 					"LIMIT 1");
 			}
 
@@ -170,7 +170,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			{
 				if ($page["tag"])
 				{
-					if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["id"]);
+					if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["page_id"]);
 					else $access = true;
 					if ($access)
 					{

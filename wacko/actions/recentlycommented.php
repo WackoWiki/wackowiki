@@ -5,16 +5,16 @@ if (!function_exists('LoadRecentlyCommented')){
 	{
 		// NOTE: this is really stupid. Maybe my SQL-Fu is too weak, but apparently there is no easier way to simply select
 		if ($ids = $wacko->LoadAll(
-			"SELECT a.id, MAX(a.created) as latest, a.comment_on_id ".
+			"SELECT a.page_id, MAX(a.created) as latest, a.comment_on_id ".
 			"FROM ".$wacko->config["table_prefix"]."pages a ".
 			($for
-				? 	"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.id) ".
+				? 	"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.page_id) ".
 					"WHERE ".
 						"b.supertag LIKE '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' "
 				: 	"WHERE a.comment_on_id <> '0' ").
 			($for
 				? 	"GROUP BY b.supertag, a.id ORDER BY latest DESC"
-				:	"GROUP BY a.comment_on_id, a.id ORDER BY latest DESC")
+				:	"GROUP BY a.comment_on_id, a.page_id ORDER BY latest DESC")
 			, 1));
 			{
 				// load complete comments
@@ -24,9 +24,9 @@ if (!function_exists('LoadRecentlyCommented')){
 					$comment = $wacko->LoadSingle(
 						"SELECT b.tag as comment_on_page, b.supertag, a.tag, a.user_id, u.name AS user, a.time ".
 						"FROM ".$wacko->config["table_prefix"]."pages a ".
-							"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.id) ".
-							"INNER JOIN ".$wacko->config["table_prefix"]."users u ON (a.user_id = u.id) ".
-						" WHERE a.id = '".$id["id"]."' LIMIT 1");
+							"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.page_id) ".
+							"INNER JOIN ".$wacko->config["table_prefix"]."users u ON (a.user_id = u.user_id) ".
+						" WHERE a.page_id = '".$id["page_id"]."' LIMIT 1");
 					if (!isset($comments[$comment["comment_on_page"]]) && $num < $limit)
 					{
 						$comments[$comment["comment_on_page"]] = $comment;
@@ -67,7 +67,7 @@ if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
 	foreach ($pages as $page)
 	{
 		if ($this->config["hide_locked"])
-		$access = $this->HasAccess("read",$page["id"]);
+		$access = $this->HasAccess("read",$page["page_id"]);
 		else
 		$access = true;
 

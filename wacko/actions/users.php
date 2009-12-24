@@ -226,9 +226,9 @@ if ($_GET['profile'] == true)
 		if ($user['total_pages'])
 		{
 			$pages = $this->LoadAll(
-				"SELECT id, tag, title, created ".
+				"SELECT page_id, tag, title, created ".
 				"FROM {$this->config['table_prefix']}pages ".
-				"WHERE owner_id = '".quote($this->dblink, $user['id'])."' ".
+				"WHERE owner_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"AND comment_on_id = '0' ".
 				"ORDER BY ".( $_GET['sort'] == 'name' ? 'tag ASC' : 'created DESC' )." ".
 				"LIMIT {$pagination['offset']}, $limit");
@@ -241,7 +241,7 @@ if ($_GET['profile'] == true)
 			echo '<div>'."\n";
 			foreach ($pages as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['id'], $this->GetUserName()) === true)
+				if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['page_id'], $this->GetUserName()) === true)
 				{
 					echo '<small>'.$this->GetTimeStringFormatted($page['created']).'</small>  &mdash; '.$this->Link('/'.$page['tag'], '', $page['title'], 0)."<br />\n";
 
@@ -267,9 +267,9 @@ if ($_GET['profile'] == true)
 		if ($user['total_comments'])
 		{
 			$comments = $this->LoadAll(
-				"SELECT id, tag, created, comment_on_id ".
+				"SELECT page_id, tag, created, comment_on_id ".
 				"FROM {$this->config['table_prefix']}pages ".
-				"WHERE owner_id = '".quote($this->dblink, $user['id'])."' ".
+				"WHERE owner_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"AND comment_on_id <> '0' ".
 				"ORDER BY created DESC ".
 				"LIMIT {$pagination['offset']}, $limit");

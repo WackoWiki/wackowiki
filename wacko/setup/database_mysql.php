@@ -25,35 +25,35 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 				") TYPE=MyISAM";
 
 $table_config = "CREATE TABLE {$pref}config (".
-				"id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+				"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 				"name VARCHAR(100) NOT NULL DEFAULT '',".
 				"value TEXT,".
 				// "updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,".
-				"PRIMARY KEY (id),".
+				"PRIMARY KEY (config_id),".
 				"UNIQUE KEY name (name)".
 			") TYPE=MyISAM";
 
 $table_links = "CREATE TABLE {$pref}links (".
-					"id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"link_id INT(10) UNSIGNED NOT NULL auto_increment,".
 					"from_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"to_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"to_supertag VARCHAR(250) NOT NULL,".
-					"PRIMARY KEY (id),".
+					"PRIMARY KEY (link_id),".
 					"KEY from_tag (from_tag,to_tag(78)),".
 					"KEY idx_from (from_tag),".
 					"KEY idx_to (to_tag)".
 				") TYPE=MyISAM";
 
 $table_log = "CREATE TABLE {$pref}log (".
-				"id INT(10) UNSIGNED NOT NULL auto_increment,".
+				"log_id INT(10) UNSIGNED NOT NULL auto_increment,".
 				"time TIMESTAMP NOT NULL,".
 				"level TINYINT(1) NOT NULL,".
 				"user VARCHAR(100) NOT NULL,".
 				"ip VARCHAR(15) NOT NULL,".
 				"message TEXT NOT NULL,".
-				"PRIMARY KEY (id),".
+				"PRIMARY KEY (log_id),".
 				"KEY idx_level (level),".
 				"KEY idx_user (user),".
 				"KEY idx_ip (ip),".
@@ -61,7 +61,7 @@ $table_log = "CREATE TABLE {$pref}log (".
 			") TYPE=MyISAM";
 
 $table_pages = "CREATE TABLE {$pref}pages (".
-					"id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"page_id INT(10) UNSIGNED NOT NULL auto_increment,".
 					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"tag VARCHAR(250) NOT NULL DEFAULT '',".
@@ -82,7 +82,7 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
-					"PRIMARY KEY (id),".
+					"PRIMARY KEY (page_id),".
 					"KEY idx_user_id (user_id),".
 					"KEY idx_owner_id (owner_id),".
 					"FULLTEXT KEY body (body),".
@@ -104,7 +104,7 @@ $table_referrers = "CREATE TABLE {$pref}referrers (".
 					") TYPE=MyISAM";
 
 $table_revisions = "CREATE TABLE {$pref}revisions (".
-						"id INT(10) UNSIGNED NOT NULL auto_increment,".
+						"revision_id INT(10) UNSIGNED NOT NULL auto_increment,".
 						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -123,7 +123,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"title VARCHAR(100) NOT NULL DEFAULT '',".
 						"description VARCHAR(250) NOT NULL DEFAULT '',".
 						"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
-						"PRIMARY KEY (id),".
+						"PRIMARY KEY (revision_id),".
 						"KEY idx_user_id (user_id),".
 						"KEY idx_owner_id (owner_id),".
 						"KEY idx_tag (tag),".
@@ -134,7 +134,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 					") TYPE=MyISAM;";
 
 $table_upload = "CREATE TABLE {$pref}upload (".
-					"id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"upload_id INT(10) UNSIGNED NOT NULL auto_increment,".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"filename VARCHAR(250) NOT NULL DEFAULT '',".
@@ -145,14 +145,14 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"picture_h INT(11) UNSIGNED NOT NULL DEFAULT '0',".
 					"file_ext VARCHAR(10) NOT NULL DEFAULT '',".
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"PRIMARY KEY (id),".
+					"PRIMARY KEY (upload_id),".
 					"KEY page_id (page_id,filename),".
 					"KEY page_id_2 (page_id,uploaded_dt),".
 					"KEY idx_user_id (user_id)".
 				") TYPE=MyISAM";
 
 $table_users = "CREATE TABLE {$pref}users (".
-					"id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"user_id INT(10) UNSIGNED NOT NULL auto_increment,".
 					"name VARCHAR(80) NOT NULL DEFAULT '',".
 					"real_name VARCHAR(80) NOT NULL DEFAULT '',".
 					"password VARCHAR(32) NOT NULL DEFAULT '',".
@@ -174,17 +174,17 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"total_pages INT(10) UNSIGNED NOT NULL,".
 					"total_revisions INT(10) UNSIGNED NOT NULL,".
 					"total_comments INT(10) UNSIGNED NOT NULL,".
-					"PRIMARY KEY (id),".
+					"PRIMARY KEY (user_id),".
 					"UNIQUE KEY idx_name (name),".
 					"KEY idx_signuptime (signuptime)".
 				") TYPE=MyISAM";
 
 $table_watches = "CREATE TABLE {$pref}watches (".
-						"id INT(10) UNSIGNED NOT NULL auto_increment,".
+						"watch_id INT(10) UNSIGNED NOT NULL auto_increment,".
 						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"time TIMESTAMP NOT NULL,".
-						"PRIMARY KEY (id)".
+						"PRIMARY KEY (watch_id)".
 					") TYPE=MyISAM";
 
 /*

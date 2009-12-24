@@ -122,14 +122,6 @@ function admin_resync(&$engine, &$module)
 					// recompile if necessary
 					if ($page['body_r'] == '')
 					{
-						// decode message body if needed
-						if ($page['digsig'] == '1')
-						{
-							$type	= ( $page['comment_on_id'] != '0' ? 'comment' : 'page' );
-							$signed	= $engine->GetSignedBody($page['id'], $type);
-							$body_t	= iconv($signed['charset'], $engine->GetCharset().'//IGNORE', $page['body']);
-							$body_t	= $engine->Format($body_t, 'preformat');
-						}
 
 						// build html body
 						$page['body_r'] = $engine->Format($engine->Format(( $body_t ? $body_t : $page['body'] ), 'bbcode'), 'wacko');
@@ -146,7 +138,7 @@ function admin_resync(&$engine, &$module)
 							"UPDATE {$engine->config['table_prefix']}pages SET ".
 								"body_r		= '".quote($engine->dblink, $page['body_r'])."', ".
 								"body_toc	= '".quote($engine->dblink, $page['body_toc'])."' ".
-							"WHERE id = '".quote($engine->dblink, $page['id'])."' ".
+							"WHERE page_id = '".quote($engine->dblink, $page['page_id'])."' ".
 							"LIMIT 1");
 
 						if ($body_t) unset($body_t);

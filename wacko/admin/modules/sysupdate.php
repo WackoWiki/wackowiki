@@ -23,10 +23,10 @@ function admin_sysupdate(&$engine, &$module)
 	if (isset($_REQUEST['start']))
 	{
 		$limit = 1500;
-		
+
 		if (isset($_REQUEST['i'])) $i = $_REQUEST['i'];
 		else $i = 0;
-		
+
 		// acls
 		if ((int)$_REQUEST['step'] === 1)
 		{
@@ -88,7 +88,7 @@ function admin_sysupdate(&$engine, &$module)
 		// pages
 		else if ((int)$_REQUEST['step'] === 3)
 		{
-			if ($pages = $engine->LoadAll("SELECT id, tag, comment_on FROM {$engine->config['table_prefix']}pages LIMIT ".($i*$limit).", $limit"))
+			if ($pages = $engine->LoadAll("SELECT page_id, tag, comment_on FROM {$engine->config['table_prefix']}pages LIMIT ".($i*$limit).", $limit"))
 			{
 				foreach ($pages as $page)
 				{
@@ -96,7 +96,7 @@ function admin_sysupdate(&$engine, &$module)
 						"UPDATE {$engine->config['table_prefix']}pages SET ".
 							"supertag = '".$engine->NpjTranslit($page['tag'])."' ".
 							( $page['comment_on'] ? ", super_comment_on = '".$engine->NpjTranslit($page['comment_on'])."' " : '' ).
-						"WHERE id = ".$page['id']);
+						"WHERE page_id = ".$page['page_id']);
 				}
 				$engine->Redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
 			}
@@ -118,14 +118,14 @@ function admin_sysupdate(&$engine, &$module)
 		// revisions
 		else if ((int)$_REQUEST['step'] === 4)
 		{
-			if ($pages = $engine->LoadAll("SELECT id, tag FROM {$engine->config['table_prefix']}revisions LIMIT ".($i*$limit).", $limit"))
+			if ($pages = $engine->LoadAll("SELECT revision_id, tag FROM {$engine->config['table_prefix']}revisions LIMIT ".($i*$limit).", $limit"))
 			{
 				foreach ($pages as $page)
 				{
 					$engine->Query(
 						"UPDATE {$engine->config['table_prefix']}revisions ".
 						"SET supertag = '".$engine->NpjTranslit($page['tag'])."' ".
-						"WHERE id = ".$page['id']);
+						"WHERE revision_id = ".$page['revision_id']);
 				}
 				$engine->Redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
 			}
@@ -160,8 +160,8 @@ function admin_sysupdate(&$engine, &$module)
 				}
 				closedir($dh);
 			}
-			
-			$version = '0.8.20a-cvs';
+
+			$version = '4.3.rc2-svn';
 //			$engine->Query(
 //				"ALTER TABLE `pages` ADD `more` VARCHAR( 255 ) NOT NULL");
 			$engine->Query(

@@ -22,7 +22,7 @@ if (!isset($title)) $title = "";
 
 // collect pages
 if ($pages = $this->LoadAll(
-	"SELECT id, tag, supertag, title ".
+	"SELECT page_id, tag, supertag, title ".
 	"FROM {$this->config['table_prefix']}pages ".
 	"WHERE comment_on_id = '0' ".
 		"AND tag LIKE '".quote($this->dblink, $root)."%' ".
@@ -117,7 +117,7 @@ if ($pages = $this->LoadAll(
 		{
 			// check read privilege and current page tag
 			if ($page['tag'] == $root ||
-			($this->config['hide_locked'] && !$this->HasAccess('read', $page['id'])))
+			($this->config['hide_locked'] && !$this->HasAccess('read', $page['page_id'])))
 				continue;
 
 			// check page level
