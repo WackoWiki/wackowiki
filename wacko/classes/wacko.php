@@ -701,7 +701,7 @@ class Wacko
 					"WHERE supertag = '".quote($this->dblink, $supertag)."' ".
 					"LIMIT 1");
 
-				$owner = $page["owner"];
+				$owner_id = $page["owner_id"];
 
 				if ($time && $time != $page["time"])
 				{
@@ -714,7 +714,7 @@ class Wacko
 							"AND time = '".quote($this->dblink, $time)."' ".
 						"LIMIT 1");
 
-					$page["owner"] = $owner;
+					$page["owner_id"] = $owner_id;
 				}
 			}
 			else if (!preg_match('/[^'.$this->language['ALPHANUM_P'].'\_\-]/', $tag))
@@ -725,7 +725,7 @@ class Wacko
 					"WHERE tag = '".quote($this->dblink, $tag)."' ".
 					"LIMIT 1");
 
-				$owner = $page["owner"];
+				$owner_id = $page["owner_id"];
 
 				if ($time && $time != $page["time"])
 				{
@@ -738,7 +738,7 @@ class Wacko
 							"AND time = '".quote($this->dblink, $time)."' ".
 						"LIMIT 1");
 
-					$page["owner"] = $owner;
+					$page["owner_id"] = $owner_id;
 				}
 			}
 		}
