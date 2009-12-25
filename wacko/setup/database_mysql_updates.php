@@ -22,11 +22,11 @@ $update_acls_r4_2 = "UPDATE {$pref}acls AS acls, (SELECT id, tag FROM {$pref}pag
 
 // CONFIG
 $table_config_r4_2 = "CREATE TABLE {$pref}config (".
-					"id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"name VARCHAR(100) NOT NULL DEFAULT '',".
 					"value TEXT,".
 					// "updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,".
-					"PRIMARY KEY (id),".
+					"PRIMARY KEY (config_id),".
 					"UNIQUE KEY name (name)".
 				") TYPE=MyISAM";
 
@@ -47,13 +47,13 @@ $update_links_r4_2_1 = "UPDATE {$pref}links AS links, (SELECT id, tag FROM {$pre
 
 // LOG
 $table_log_r4_2 = "CREATE TABLE {$pref}log (".
-				"id INT(10) UNSIGNED NOT NULL auto_increment,".
+				"log_id INT(10) UNSIGNED NOT NULL auto_increment,".
 				"time TIMESTAMP NOT NULL,".
 				"level TINYINT(1) NOT NULL,".
 				"user VARCHAR(100) NOT NULL,".
 				"ip VARCHAR(15) NOT NULL,".
 				"message TEXT NOT NULL,".
-				"PRIMARY KEY (id),".
+				"PRIMARY KEY (log_id),".
 				"KEY idx_level (level),".
 				"KEY idx_user (user),".
 				"KEY idx_ip (ip),".
