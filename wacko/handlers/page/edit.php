@@ -156,13 +156,6 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 	if ($error)
 		$this->SetMessage("<div class=\"error\">$error</div>\n");
 
-		// append a comment?
-		/*
-			if ($_REQUEST["appendcomment"])
-			{
-				$body = trim($body)."\n\n----\n\n--".$this->GetUserName()." (".strftime("%c").")";
-			}
-		*/
 		// "cf" attribute: it is for so called "critical fields" in the form. It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog "You are going to leave this page, but there are some changes you made but not saved yet." Is used by this script to determine which changes it need to monitor.
 		$output .= $this->FormOpen("edit", "", "post", "edit", " cf='true' ");
 

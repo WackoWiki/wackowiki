@@ -1578,8 +1578,8 @@ class Wacko
 	// COOKIES
 	function SetSessionCookie($name, $value, $dummy = NULL, $secure = 0)
 	{
-		SetCookie($this->config["cookie_prefix"].$name, $value, 0, "/", "", ( $secure ? true : false ));
-		$_COOKIE[$this->config["cookie_prefix"].$name] = $value;
+		SetCookie($this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name, $value, 0, "/", "", ( $secure ? true : false ));
+		$_COOKIE[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name] = $value;
 	}
 
 	function SetPersistentCookie($name, $value, $days = 0, $secure = 0)
@@ -1587,14 +1587,14 @@ class Wacko
 		// set to default if no pediod given
 		if ($days == 0) $days = $this->config["cookie_session"];
 
-		SetCookie($this->config["cookie_prefix"].$name, $value, time() + $days * 24 * 3600, "/", "", ( $secure ? true : false ));
-		$_COOKIE[$this->config["cookie_prefix"].$name] = $value;
+		SetCookie($this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name, $value, time() + $days * 24 * 3600, "/", "", ( $secure ? true : false ));
+		$_COOKIE[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name] = $value;
 	}
 
 	function DeleteCookie($name)
 	{
 		if ($prefix == false)
-			$prefix = $this->config["cookie_prefix"];
+			$prefix = $this->config["session_prefix"].'_'.$this->config["cookie_prefix"];
 		else
 			$prefix = "";
 
@@ -1604,7 +1604,7 @@ class Wacko
 
 	function GetCookie($name)
 	{
-		return $_COOKIE[$this->config["cookie_prefix"].$name];
+		return $_COOKIE[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name];
 	}
 
 	// HTTP/REQUEST/LINK RELATED
