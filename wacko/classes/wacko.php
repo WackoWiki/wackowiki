@@ -890,10 +890,10 @@ class Wacko
 	// STANDARD QUERIES
 	function LoadRevisions($page_id)
 	{
-		$pages_meta = "p.id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.time, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.name as user ";
+		$pages_meta = "p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.time, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.name as user ";
 
 		$rev = $this->LoadAll(
-			"SELECT ".$pages_meta." ".
+			"SELECT p.revision_id AS revision_m_id, ".$pages_meta." ".
 			"FROM ".$this->config["table_prefix"]."revisions p ".
 				"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 			"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
@@ -902,7 +902,7 @@ class Wacko
 		if ($rev == true)
 		{
 			if ($cur = $this->LoadSingle(
-				"SELECT ".$pages_meta." ".
+				"SELECT p.page_id AS revision_m_id, ".$pages_meta." ".
 				"FROM ".$this->config["table_prefix"]."pages p ".
 					"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 				"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
@@ -915,7 +915,7 @@ class Wacko
 		else
 		{
 			$rev = $this->LoadAll(
-				"SELECT ".$pages_meta." ".
+				"SELECT p.page_id AS revision_m_id, ".$pages_meta." ".
 				"FROM ".$this->config["table_prefix"]."pages p ".
 					"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 				"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
