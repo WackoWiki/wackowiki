@@ -1576,22 +1576,30 @@ class Wacko
 	}
 
 	// COOKIES
-	function SetSessionCookie($name, $value)
+	function SetSessionCookie($name, $value, $dummy = NULL, $secure = 0)
 	{
-		SetCookie($this->config["cookie_prefix"].$name, $value, 0, "/");
+		SetCookie($this->config["cookie_prefix"].$name, $value, 0, "/", "", ( $secure ? true : false ));
 		$_COOKIE[$this->config["cookie_prefix"].$name] = $value;
 	}
 
-	function SetPersistentCookie($name, $value, $remember = 1)
+	function SetPersistentCookie($name, $value, $days = 0, $secure = 0)
 	{
-		SetCookie($this->config["cookie_prefix"].$name, $value, time() + ($remember ? 90*24*60*60 : 60 * 60), "/");
+		// set to default if no pediod given
+		if ($days == 0) $days = $this->config["cookie_session"];
+
+		SetCookie($this->config["cookie_prefix"].$name, $value, time() + $days * 24 * 3600, "/", "", ( $secure ? true : false ));
 		$_COOKIE[$this->config["cookie_prefix"].$name] = $value;
 	}
 
 	function DeleteCookie($name)
 	{
-		SetCookie($this->config["cookie_prefix"].$name, "", 1, "/");
-		$_COOKIE[$this->config["cookie_prefix"].$name] = "";
+		if ($prefix == false)
+			$prefix = $this->config["cookie_prefix"];
+		else
+			$prefix = "";
+
+		SetCookie($prefix.$name, "", 1, "/", "");
+		$_COOKIE[$prefix.$name] = "";
 	}
 
 	function GetCookie($name)
@@ -1631,11 +1639,11 @@ class Wacko
 
 	function NoCache()
 	{
-		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // Date in the past
-		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // always modified
-		header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1
+		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 					// Date in the past
+		header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 		// always modified
+		header("Cache-Control: no-store, no-cache, must-revalidate");		// HTTP 1.1
 		header("Cache-Control: post-check=0, pre-check=0", false);
-		header("Pragma: no-cache"); // HTTP/1.0
+		header("Pragma: no-cache");											// HTTP 1.0
 	}
 
 	function UnwrapLink($tag)
@@ -2650,26 +2658,193 @@ class Wacko
 		if ($user)
 			$user["options"] = $this->DecomposeOptions($user["more"]);
 
+		if ($user["sessiontime"] == SQL_NULLDATE)
+			$user["sessiontime"] = "";
+
 		return $user;
+	}
+
+	function GetUserName()
+	{
+		if ($username = $this->GetUserSetting("name"))
+		{
+			return $username;
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+
+	function GetUserIP()
+	{
+		if ($this->_userhost)
+		{
+			return $this->_userhost;
+		}
+		else
+		{
+			return $this->_userhost = $_SERVER['REMOTE_ADDR'];
+		}
+	}
+
+	// extract user data from the session array
+	function GetUser()
+	{
+		if (isset( $_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"]."user"] ))
+			return $_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"]."user"];
+		else
+			return NULL;
+	}
+
+	// extract specific element from user session array
+	function GetUserSetting($setting, $option = 0, $guest = 0)
+	{
+		if (!$option)
+			return $_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].( !$guest ? "user" : "guest" )][$setting];
+		else
+			return $_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].( !$guest ? "user" : "guest" )]["options"][$setting];
+	}
+
+	// set/update specific element of user session array
+	// !!! BE CAREFUL NOT TO SAVE GUEST VALUES UNDER REGISTERED USER ARRAY !!!
+	// this poses a potential security threat
+	function SetUserSetting($setting, $value, $option = 0, $guest = 0)
+	{
+		if (!$option)
+			return $_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].( !$guest ? "user" : "guest" )][$setting] = $value;
+		else
+			return $_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].( !$guest ? "user" : "guest" )]["options"][$setting] = $value;
+	}
+
+	// insert user data into the session array
+	function SetUser($user, $ip = 1)
+	{
+		$_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"]."user"] = $user;
+
+		// define current IP for foregoing checks
+		if ($ip == true) $this->SetUserSetting("ip", $_SERVER["REMOTE_ADDR"]);
+
+		return true;
+	}
+
+	// update current session time
+	function UpdateSessionTime($user)
+	{
+		if ($user['name'] == true)
+			return $this->Query(
+				"UPDATE {$this->config['user_table']} ".
+				"SET sessiontime = NOW() ".
+				"WHERE name = '".quote($this->dblink, $user['name'])."' ".
+				"LIMIT 1");
+	}
+
+	function LogUserIn($user, $persistent = 1, $session = 0)
+	{
+		// cookie elements
+		$session	= ( $session == 0 ? $this->config['cookie_session'] : $session );
+		$session	= ( $persistent ? $session : 0.25 );
+		$ses_time	= time() + $session * 24 * 3600;
+
+		if ($this->config['strong_cookies'] == true)
+		{
+			$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
+			$username	= $user['name'];
+			$password	= base64_encode(md5($this->config['system_seed'] ^ $time_pad) ^ $user['password']);
+			// authenticating cookie data:
+			// seed | username | composed pwd | raw session time | raw password
+			$cookie_mac	= md5($this->config['system_seed'].$username.$password.$ses_time.$user['password']);
+			// construct and set cookie
+			$cookie		= implode(';', array($username, $password, $ses_time, $cookie_mac));
+		}
+		else
+		{
+			$cookie		= implode(';', array($user['name'], $user['password'], $ses_time));
+		}
+
+		$this->SetSessionCookie('auth', $cookie, '', ( $this->config['ssl'] == true ? 1 : 0 ));
+
+		if ($persistent)
+		{
+			$this->SetPersistentCookie('auth', $cookie, $session, ( $this->config['ssl'] == true ? 1 : 0 ));
+		}
+
+		// update session expiry and clear password recovery
+		// code in user data table
+		$this->Query(
+			"UPDATE {$this->config['user_table']} SET ".
+				"sessionexpire	= '".quote($this->dblink, $ses_time)."', ".
+				"changepassword	= '' ".
+			"WHERE name = '".quote($this->dblink, $user['name'])."' ".
+			"LIMIT 1");
+
+		// restart logged in user session with specific session id
+		return $this->RestartUserSession($user, $ses_time);
+	}
+
+	// regenerate session id for registered user
+	function RestartUserSession($user, $session_time)
+	{
+		$this->DeleteCookie('sid', 1);
+		unset($_SESSION[$this->config["session_prefix"].'_'.$this->config['cookie_prefix'].'user']);
+		session_destroy();
+		session_id(md5($this->timer.$this->config['system_seed'].$session_time.$user['name'].$user['password']));
+		return session_start();
+	}
+
+	// restore username/password/etc from auth cookie
+	function DecomposeAuthCookie($name = 'auth')
+	{
+		if (true == $cookie = $this->GetCookie($name))
+		{
+			if ($this->config['strong_cookies'] == true)
+			{
+				list($username, $b64password, $ses_time, $cookie_mac) = explode(';', $cookie);
+				$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
+				$password	= md5($this->config['system_seed'] ^ $time_pad) ^ base64_decode($b64password);
+				$recalc_mac	= md5($this->config['system_seed'].$username.$b64password.$ses_time.$password);
+			}
+			else
+			{
+				list($username, $password, $ses_time) = explode(';', $cookie);
+			}
+
+			return array(
+				'name'			=> $username,
+				'password'		=> $password,
+				'ses_time'		=> $ses_time,
+				'cookie_mac'	=> $cookie_mac,
+				'recalc_mac'	=> $recalc_mac
+			);
+		}
+		else return NULL;
+	}
+
+	// end user session and free session vars
+	function LogoutUser()
+	{
+		// clear session expiry in user data table
+		$this->Query(
+			"UPDATE {$this->config['user_table']} ".
+			"SET sessionexpire = 0 ".
+			"WHERE name = '".quote($this->dblink, $_SESSION[$this->config["session_prefix"].'_'.$this->config['cookie_prefix'].'user']['name'])."' ".
+			"LIMIT 1");
+
+		$this->DeleteCookie('auth');
+		$this->DeleteCookie('sid', 1);
+		unset($_SESSION[$this->config["session_prefix"].'_'.$this->config['cookie_prefix'].'user']);
+
+		$session_id = md5($this->timer.$this->config['system_seed'].$this->GetUserSetting('password').session_id());
+
+		session_destroy();
+		session_start();
+		session_id($session_id);
 	}
 
 	function LoadUsers()
 	{
 		return $this->LoadAll(
 			"SELECT * FROM ".$this->config["user_table"]." ORDER BY binary name");
-	}
-
-	function GetUserName()
-	{
-		if ($user = $this->GetUser()) $name = $user["name"];
-		else if ($this->_userhost) $name = $this->_userhost;
-		else
-		{
-			if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') $name = $_SERVER["REMOTE_ADDR"];
-			else if (!$name = $this->_gethostbyaddr($_SERVER["REMOTE_ADDR"])) $name = $_SERVER["REMOTE_ADDR"];
-			$this->_userhost = $name;
-		}
-		return $name;
 	}
 
 	function GetUserNameById($user_id = 0)
@@ -2700,60 +2875,6 @@ class Wacko
 					$user_id = $user['user_id'];
 
 					return $user_id;
-	}
-
-	function _gethostbyaddr($ip)
-	{
-		if ($this->config["allow_gethostbyaddr"])
-		{
-			return gethostbyaddr($ip);
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	function GetUserIP()
-	{
-		if ($this->_userhost)
-		{
-			return $this->_userhost;
-		}
-		else
-		{
-			return $this->_userhost = $_SERVER['REMOTE_ADDR'];
-		}
-	}
-
-	// extract user data from the session array
-	function GetUser()
-	{
-		if (isset( $_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"]."user"] ))
-			return $_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"]."user"];
-		else
-			return NULL;
-	}
-
-	// insert user data into the session array
-	function SetUser($user, $setcookie = 1)
-	{
-		$_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"]."user"] = $user;
-		if ($setcookie) $this->SetPersistentCookie("name", $user["name"], 1);
-	}
-
-	function LogUserIn($user)
-	{
-		$this->SetPersistentCookie("name", $user["name"], 1);
-		$this->SetPersistentCookie("password", $user["password"]);
-	}
-
-	// end user session and free session vars
-	function LogoutUser()
-	{
-		$_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"]."user"] = "";
-		$this->DeleteCookie("name");
-		$this->DeleteCookie("password");
 	}
 
 	function UserWantsComments()
@@ -3482,15 +3603,94 @@ class Wacko
 	// MAIN EXECUTION ROUTINE
 	function Run($tag, $method = "")
 	{
+		// mandatory ssl?
+		if ($this->config["ssl"] == true && $this->config["ssl_implicit"] == true && $_SERVER["HTTPS"] != "on")
+		{
+			$this->Redirect(str_replace('http://', 'https://', $this->href($method, $tag)));
+		}
+
+		// url lang selection
+		$url	= explode('@@', $tag);
+		$tag	= trim($url[0]);
+		$lang	= trim($url[1]);
+
+		if (!trim($tag)) $tag = $this->config["root_page"];
+
 		// autotasks
 		if (!($this->GetMicroTime() % 3)) $this->Maintenance();
 
 		$this->ReadInterWikiConfig();
 
-		// do our stuff!
-		if ((!$this->GetUser() && isset( $_COOKIE[$this->config["cookie_prefix"]."name"] )) && ($user = $this->LoadUser($_COOKIE[$this->config["cookie_prefix"]."name"], $_COOKIE[$this->config["cookie_prefix"]."password"]))) $this->SetUser($user);
+		// parse authentication cookie and get user data
+		$auth = $this->DecomposeAuthCookie();
+		$user = $this->LoadUser($auth["name"], $auth["password"]);
+
+		// run in ssl mode?
+		if ($this->config["ssl"] == true && ($_SERVER["HTTPS"] == "on" || $user == true))
+		{
+			$this->config["open_url"] = $this->config["base_url"];
+			$this->config["base_url"] = str_replace("http://", "https://", $this->config["base_url"]);
+			$this->config["root_url"] = str_replace("http://", "https://", $this->config["root_url"]);
+		}
+
+		// in strong cookie mode check session validity
+		if ($this->config["strong_cookies"] == true)
+		{
+			if ($user["sessionexpire"] != 0 && time() < $user["sessionexpire"] &&
+			time() < $auth["ses_time"] && $user["sessionexpire"] == $auth["ses_time"] &&
+			$auth["recalc_mac"] == $auth["cookie_mac"])
+			{
+				$session = true;
+			}
+			else
+			{
+				// log event: invalid auth cookie
+				if ($auth["recalc_mac"] != $auth["cookie_mac"]) $this->Log(1, '<strong><span class="cite">Malformed/forged user authentication cookie detected. Destroying existing session (if any)</span></strong>');
+
+				$session = false;
+
+				// terminate expired/invalid session
+				if ($this->GetUser())
+				{
+					// log event: session expired
+					if (time() > $auth["ses_time"]) $this->Log(2, 'Expired user session terminated');
+
+					$this->LogoutUser();
+					$this->Redirect($this->config["base_url"].$this->config["login_page"].'?goback='.$tag);
+				}
+			}
+		}
+		else
+		{
+			$session = true;
+		}
+
+		// check IP validity
+		if ($this->GetUserSetting("validate_ip", 1) == 'Y' && $this->GetUserSetting("ip") != $_SERVER["REMOTE_ADDR"])
+		{
+			$this->Log(1, '<strong><span class="cite">User in-session IP change detected</span></strong>');
+			$this->LogoutUser();
+			$this->Redirect($this->config["base_url"].$this->config["login_page"].'?goback='.$tag);
+			$session = false;
+		}
+
+		// start user session
+		if (!$this->GetUser() && $session === true && $user == true)
+		{
+			$this->RestartUserSession($user, $auth["ses_time"]);
+			$this->SetUser($user, 1);
+			$this->UpdateSessionTime($user);
+			unset($user);
+		}
 		$user = $this->GetUser();
 
+		unset($auth);
+
+
+		#if ((!$this->GetUser() && isset( $_COOKIE[$this->config["cookie_prefix"]."name"] )) && ($user = $this->LoadUser($_COOKIE[$this->config["cookie_prefix"]."name"], $_COOKIE[$this->config["cookie_prefix"]."password"]))) $this->SetUser($user);
+		#$user = $this->GetUser();
+
+		// user preferences
 		if(isset($user["lang"]))
 		{
 			if($user["lang"] == "")

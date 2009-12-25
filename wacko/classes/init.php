@@ -41,8 +41,8 @@ define("LOAD_NOCACHE",					0);
 define("LOAD_CACHE",					1);
 define("LOAD_ALL",						0);
 define("LOAD_META",						1);
-// define("SESSION_HANDLER_ID",			"sid");
-// define("SESSION_HANDLER_PATH",			NULL);	// if you are using specific path (instead of system default /tmp) for session variables storing, define it here
+define("SESSION_HANDLER_ID",			"sid");
+define("SESSION_HANDLER_PATH",			NULL);	// if you are using specific path (instead of system default /tmp) for session variables storing, define it here
 define("SQL_NULLDATE",					"0000-00-00 00:00:00");
 define("SQL_DATE_FORMAT",				"Y-m-d H:i:s");
 define("TRAN_DONTCHANGE",				0);
@@ -253,7 +253,6 @@ class Init
 					"upload_banned_exts" => "php|cgi|js|php|php3|php4|php5|pl|ssi|jsp|phtm|phtml|shtm|shtml|xhtm|xht|asp|aspx|htw|ida|idq|cer|cdx|asa|htr|idc|stm|printer|asax|ascx|ashx|asmx|axd|vdisco|rem|soap|config|cs|csproj|vb|vbproj|webinfo|licx|resx|resources",
 
 					"outlook_workaround" => 1,
-					"allow_gethostbyaddr" => 1,
 
 					"news_cluster" => "",
 					"news_levels" => "",
@@ -329,6 +328,10 @@ class Init
 						// Else it's an empty file so use the default settings.  This is typical on a fresh install.
 						$this->config = $wackoConfig;
 					}
+					if (!$wackoConfig["system_seed"] || strlen($wackoConfig["system_seed"]) < 20)
+						die("WackoWiki fatal error: system_seed in config.inc.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
+
+						$wackoConfig["system_seed"]	= md5($wackoConfig["system_seed"]);
 				}
 				else
 				{
@@ -436,10 +439,10 @@ class Init
 	{
 		// if ($this->config["ssl"] == true) session_set_cookie_params(0, "/", "", true);
 
-		// session_name(SESSION_HANDLER_ID);
-		// session_save_path(SESSION_HANDLER_PATH);
+		session_name(SESSION_HANDLER_ID);
+		session_save_path(SESSION_HANDLER_PATH);
 		session_start();
-		// return session_id();
+		return session_id();
 	}
 
 	// DATABASE ABSTRACT LAYER
@@ -559,7 +562,7 @@ class Init
 		{
 			if ($this->config["cache"] && $_SERVER["REQUEST_METHOD"] != "POST" && $this->method != "edit" && $this->method != "watch")
 			{
-				if (!isset($_COOKIE[$this->config["cookie_prefix"]."name"]))	// anonymous user
+				if (!isset($_COOKIE[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"]."auth"]))	// anonymous user
 				{
 					return $this->cacheval = $this->cache->CheckHttpRequest($this->page, $this->method);
 				}
