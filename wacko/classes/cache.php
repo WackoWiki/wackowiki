@@ -2,16 +2,16 @@
 
 class Cache
 {
-	var $cache_ttl = 600;
-	var $cache_dir = "_cache/";
-	var $debug = 0;
+	var $cache_ttl	= 600;
+	var $cache_dir	= "_cache/";
+	var $debug		= 0;
 
 	//Constructor
 	function Cache($cache_dir, $cache_ttl)
 	{
-		$this->cache_dir = $cache_dir;
-		$this->cache_ttl = $cache_ttl;
-		$this->timer = $this->GetMicroTime();
+		$this->cache_dir	= $cache_dir;
+		$this->cache_ttl	= $cache_ttl;
+		$this->timer		= $this->GetMicroTime();
 
 		if ($this->wacko->config['debug']) $this->debug = $this->wacko->config['debug'];
 	}
@@ -64,8 +64,8 @@ class Cache
 		if ((time() - ($timestamp = @filemtime($filename))) > $this->cache_ttl)
 			return false;
 
-		$fp = fopen($filename, "r");
-		$contents = fread($fp, filesize($filename));
+		$fp			= fopen($filename, "r");
+		$contents	= fread($fp, filesize($filename));
 		$contents	= "<!-- WackoWiki Caching Engine: page cached at ".date('Y-m-d H:i:s', $timestamp).", contents follows -->\n".$contents;
 		fclose($fp);
 

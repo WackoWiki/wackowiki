@@ -130,13 +130,13 @@ if ($user == false)
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-	<title>Authorization Admin </title>
+	<title>Authorization Admin</title>
 	<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/styles/backend.css" rel="stylesheet" type="text/css" media="screen" />
 	</head>
 	<body>
 		<strong>Authorization</strong><br />
-		Please enter the administrative password (make sure
-also that cookies are allowed in your browser).<br /><br />
+		Please enter the administrative password (make also sure
+that cookies are allowed in your browser).<br /><br />
 		<form action="admin.php" method="post" name="emergency">
 			<tt><strong>Password:</strong> <input name="password" type="password" autocomplete="off" value="" />
 			<input id="submit" type="submit" value="ok" /></tt>
@@ -176,9 +176,6 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 		<div class="middle">
 			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php"><img src="<?php echo rtrim($engine->config['base_url']); ?>files/wacko4.gif" alt="WackoWiki" width="108" height="50"></img></a>
 		</div>
-		<div id="nav">
-			<a href="#" id="nav_bookmarks" title="the list of administrative functions">Menu operations</a>
-		</div>
 		<div id="tools">
 			<span style="font-family: 'Lucida Console', 'Courier New', monospace;">
 				<?php echo $engine->ComposeLinkToPage('/', '', rtrim($engine->config['base_url'], '/')); ?>
@@ -208,7 +205,7 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 			<?php echo ( $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST) ? '<ul><li><strong>' : '<ul><li>' ); ?><a href="admin.php"><?php echo $module['lock']['name']; ?></a><?php echo ( $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST) ? '</strong></li></ul>' : '</li></ul>' ); ?>
 <?php
 			$category = $module['lock']['cat'];
-			
+
 			uasort($module,
 				create_function(
 					'$a, $b',
