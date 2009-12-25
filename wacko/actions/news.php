@@ -14,33 +14,36 @@ $newslevels		= $this->config["news_levels"];
 if ($mode == "latest")
 {
 	$pages	= $this->LoadAll(
-		"SELECT page_id, owner_id, user_id, tag, title, created, comments ".
-		"FROM {$this->config['table_prefix']}pages ".
-		"WHERE comment_on_id = '0' ".
-			"AND tag REGEXP '^{$newscluster}{$newslevels}$' ".
-		"ORDER BY created DESC ".
+		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.name AS  owner ".
+		"FROM {$this->config['table_prefix']}pages p ".
+			"INNER JOIN {$this->config['table_prefix']}users u ON (p.owner_id = u.user_id) ".
+		"WHERE p.comment_on_id = '0' ".
+			"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
+		"ORDER BY p.created DESC ".
 		"LIMIT $limit", 1);
 }
 else if ($mode == 'week')
 {
 	$pages	= $this->LoadAll(
-		"SELECT page_id, owner_id, user_id, tag, title, created, comments ".
-		"FROM {$this->config['table_prefix']}pages ".
-		"WHERE comment_on_id = '0' ".
-			"AND tag REGEXP '^{$newscluster}{$newslevels}$' ".
-			"AND created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
-		"ORDER BY created DESC", 1);
+		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.name AS owner ".
+		"FROM {$this->config['table_prefix']}pages p ".
+			"INNER JOIN {$this->config['table_prefix']}users u ON (p.owner_id = u.user_id) ".
+		"WHERE p.comment_on_id = '0' ".
+			"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
+			"AND p.created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
+		"ORDER BY p.created DESC", 1);
 }
 else if ($mode == 'from' && $date)
 {
 	$date	= date("Y-m-d H:i:s", strtotime($date));
 	$pages	= $this->LoadAll(
-		"SELECT page_id, owner_id, user_id, tag, title, created, comments ".
-		"FROM {$this->config['table_prefix']}pages ".
-		"WHERE comment_on_id = '0' ".
-			"AND tag REGEXP '^{$newscluster}{$newslevels}$' ".
-			"AND created > '$date' ".
-		"ORDER BY created DESC", 1);
+		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.name AS owner ".
+		"FROM {$this->config['table_prefix']}pages p ".
+			"INNER JOIN {$this->config['table_prefix']}users u ON (p.owner_id = u.user_id) ".
+		"WHERE p.comment_on_id = '0' ".
+			"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
+			"AND p.created > '$date' ".
+		"ORDER BY p.created DESC", 1);
 }
 
 // start output
@@ -59,7 +62,7 @@ if ($pages != 0)
 	{
 		echo "<div class=\"newsarticle\">";
 		echo '<h2 class="newstitle"><a href="'.$this->href('', $page['tag'], '').'">'.$page['title']."</a></h2>\n";
-		echo "<div class=\"newsinfo\"><span>".$this->GetTimeStringFormatted($page['created']).' '.$this->GetTranslation("By").' '.( $page['owner_id'] == '' ? '<em>'.$this->GetTranslation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['owner_id']).'">'.$page['owner_id'].'</a>' )."</span></div>\n";
+		echo "<div class=\"newsinfo\"><span>".$this->GetTimeStringFormatted($page['created']).' '.$this->GetTranslation("By").' '.( $page['owner'] == '' ? '<em>'.$this->GetTranslation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['owner']).'">'.$page['owner'].'</a>' )."</span></div>\n";
 		echo "<div class=\"newscontent\">".$this->Action('include', array('page' => '/'.$page['tag'], 'notoc' => 0, 'nomark' => 1), 1)."</div>\n";
 		echo "<div class=\"newsmeta\">".($this->HasAccess("write",$page["page_id"]) ? $this->ComposeLinkToPage($page["tag"], "edit", $this->GetTranslation("EditText"), 0)." | " : "")."  ".
 			'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#comments" title="'.$this->GetTranslation("NewsDiscuss").' '.$page['title'].'">'.(int)$page["comments"]." ".$this->GetTranslation("Comments_all")." &raquo "."</a></div>\n";
