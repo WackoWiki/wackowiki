@@ -18,6 +18,7 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"body_toc text NOT NULL,".
 					"edit_note character varying(100) NOT NULL DEFAULT '',".
 					"minor_edit int(1) NOT NULL DEFAULT '0',".
+					"ip character varying(15) NOT NULL,".
 					"latest int(1) NOT NULL DEFAULT '1',".
 					"\"handler\" character varying(30) NOT NULL DEFAULT 'page',".
 					"comment_on_id integer NOT NULL DEFAULT '0',".
@@ -43,6 +44,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"body_r text NOT NULL DEFAULT '',".
 						"edit_note character varying(100) NOT NULL DEFAULT '',".
 						"minor_edit int(1) NOT NULL DEFAULT '0',".
+						"ip character varying(15) NOT NULL,".
 						"latest int(1) NOT NULL DEFAULT '0',".
 						"\"handler\" character varying(30) NOT NULL DEFAULT 'page',".
 						"comment_on_id integer NOT NULL DEFAULT '0',".

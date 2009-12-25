@@ -73,6 +73,7 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"body_toc TEXT NOT NULL,".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
+					"ip VARCHAR(15) NOT NULL,".
 					"latest TINYINT(1) UNSIGNED DEFAULT '1',".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 					"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -117,6 +118,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 						"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 						"latest TINYINT(1) UNSIGNED DEFAULT '0',".
+						"ip VARCHAR(15) NOT NULL,".
 						"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 						"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 						"lang VARCHAR(2) NOT NULL DEFAULT '',".

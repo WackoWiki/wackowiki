@@ -1127,10 +1127,35 @@ class Wacko
 	// $minor_edit	- minor edit
 	// $comment_on_id	- commented page id
 	// $title		- page name (metadata)
+	// $user		- attach guest pseudonym
 	function SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on_id = "0", $title = "")
 	{
+		// user data
+		$ip = $this->GetUserIP();
+
+		if ($user === '')
+		{
+			$user = GUEST;
+		}
+
+		if ($this->GetUserName())
+		{
+			$owner	= $user = $this->GetUserName();
+			$reg	= true;
+		}
+		else if ($comment_on_id)
+		{
+			$owner	= GUEST;
+			$reg	= false;
+		}
+		else
+		{
+			$owner	= "";
+			$reg	= false;
+		}
+
 		// get current user
-		$user = $this->GetUserName();
+		#$user = $this->GetUserName();
 		$user_id = $this->GetUserId();
 		$page_id = $this->GetPageId($tag);
 
@@ -1253,21 +1278,22 @@ class Wacko
 
 				$this->Query(
 					"INSERT INTO ".$this->config["table_prefix"]."pages SET ".
-						"comment_on_id = '".quote($this->dblink, $comment_on_id)."', ".
-						"created = NOW(), ".
-						"time = NOW(), ".
-						"owner_id = '".quote($this->dblink, $owner_id)."', ".
-						"user_id = '".quote($this->dblink, $user_id)."', ".
-						"latest = '1', ".
-						"supertag = '".quote($this->dblink, $this->NpjTranslit($tag))."', ".
-						"body = '".quote($this->dblink, $body)."', ".
-						"body_r = '".quote($this->dblink, $body_r)."', ".
-						"body_toc = '".quote($this->dblink, $body_toc)."', ".
-						"edit_note = '".quote($this->dblink, $edit_note)."', ".
-						"minor_edit = '".quote($this->dblink, $minor_edit)."', ".
-						"lang = '".quote($this->dblink, $lang)."', ".
-						"tag = '".quote($this->dblink, $tag)."', ".
-						"title = '".quote($this->dblink, htmlspecialchars($title))."'");
+						"comment_on_id 	= '".quote($this->dblink, $comment_on_id)."', ".
+						"created 		= NOW(), ".
+						"time 			= NOW(), ".
+						"owner_id 		= '".quote($this->dblink, $owner_id)."', ".
+						"user_id 		= '".quote($this->dblink, $user_id)."', ".
+						"ip 			= '".quote($this->dblink, $ip)."', ".
+						"latest 		= '1', ".
+						"supertag 		= '".quote($this->dblink, $this->NpjTranslit($tag))."', ".
+						"body 			= '".quote($this->dblink, $body)."', ".
+						"body_r 		= '".quote($this->dblink, $body_r)."', ".
+						"body_toc 		= '".quote($this->dblink, $body_toc)."', ".
+						"edit_note 		= '".quote($this->dblink, $edit_note)."', ".
+						"minor_edit 	= '".quote($this->dblink, $minor_edit)."', ".
+						"lang 			= '".quote($this->dblink, $lang)."', ".
+						"tag 			= '".quote($this->dblink, $tag)."', ".
+						"title 			= '".quote($this->dblink, htmlspecialchars($title))."'");
 
 				// saving acls
 				$this->SaveAcl($tag, "write", $write_acl);
@@ -3846,6 +3872,7 @@ class Wacko
 			// saving updated for the current user
 			$page['time']	= date(SQL_DATE_FORMAT);
 			$page['user']	= $this->GetUserName();
+			$page['ip']		= $this->GetUserIP();
 			$this->SaveRevision($page);
 		}
 
