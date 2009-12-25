@@ -135,7 +135,7 @@ else if ($user = $this->GetUser())
 	// reload user data
 	if ( (isset($_REQUEST["action"]) && $_REQUEST["action"] == "update") || (isset($_GET["resend_code"]) && $_GET["resend_code"] == 1))
 	{
-		$this->SetUser($this->LoadUser($user["name"]));
+		$this->SetUser($this->LoadUser($user["name"]), 1);
 		$this->SetBookmarks(BM_USER);
 
 		// forward
