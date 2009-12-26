@@ -321,16 +321,17 @@ class Init
 					{
 						require("config.inc.php");
 						$this->config = $wackoConfig;
+
+						if (!$wackoConfig["system_seed"] || strlen($wackoConfig["system_seed"]) < 20)
+							die("WackoWiki fatal error: system_seed in config.inc.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
+
+						$wackoConfig["system_seed"]	= md5($wackoConfig["system_seed"]);
 					}
 					else
 					{
 						// Else it's an empty file so use the default settings.  This is typical on a fresh install.
 						$this->config = $wackoConfig;
 					}
-					if (!$wackoConfig["system_seed"] || strlen($wackoConfig["system_seed"]) < 20)
-						die("WackoWiki fatal error: system_seed in config.inc.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
-
-						$wackoConfig["system_seed"]	= md5($wackoConfig["system_seed"]);
 				}
 				else
 				{
