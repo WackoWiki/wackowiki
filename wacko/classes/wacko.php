@@ -105,7 +105,7 @@ class Wacko
 
 	function LoadAll($query, $docache = 0)
 	{
-			$data = array();
+		$data = array();
 
 		// retrieving from cache
 		if ($this->config['cache_sql'] && $docache)
@@ -1128,19 +1128,22 @@ class Wacko
 	// $comment_on_id	- commented page id
 	// $title		- page name (metadata)
 	// $user		- attach guest pseudonym
-	function SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on_id = "0", $title = "")
+	function SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on_id = "0", $title = "", $mute = false, $user = false)
 	{
 		// user data
 		$ip = $this->GetUserIP();
 
-		if ($user === '')
+		// get current user
+		if ($user === "")
 		{
 			$user = GUEST;
 		}
 
+		// current user is owner; if user is logged in! otherwise, no owner.
 		if ($this->GetUserName())
 		{
 			$owner	= $user = $this->GetUserName();
+			$owner_id	= $user_id = $this->GetUserId();
 			$reg	= true;
 		}
 		else if ($comment_on_id)
@@ -1153,10 +1156,7 @@ class Wacko
 			$owner	= "";
 			$reg	= false;
 		}
-
-		// get current user
-		#$user = $this->GetUserName();
-		$user_id = $this->GetUserId();
+		
 		$page_id = $this->GetPageId($tag);
 
 		/*
@@ -1259,22 +1259,19 @@ class Wacko
 				else if ($comment_on_id)
 				{
 					// Give comments the same rights as their parent page
-					$write_acl = $this->LoadAcl($comment_on_id, "write");
-					$write_acl = $write_acl["list"];
 					$read_acl = $this->LoadAcl($comment_on_id, "read");
 					$read_acl = $read_acl["list"];
+					$write_acl = $this->LoadAcl($comment_on_id, "write");
+					$write_acl = $write_acl["list"];
 					$comment_acl = $this->LoadAcl($comment_on_id, "comment");
 					$comment_acl = $comment_acl["list"];
 				}
 				else
 				{
-					$write_acl = $this->config["default_write_acl"];
 					$read_acl  = $this->config["default_read_acl"];
+					$write_acl = $this->config["default_write_acl"];
 					$comment_acl = $this->config["default_comment_acl"];
 				}
-
-				// current user is owner; if user is logged in! otherwise, no owner.
-				if ($this->GetUser()) $owner_id = $user_id;
 
 				$this->Query(
 					"INSERT INTO ".$this->config["table_prefix"]."pages SET ".
@@ -1328,24 +1325,46 @@ class Wacko
 				}
 
 				// set watch
-				if ($this->GetUser() && !$this->config["disable_autosubscribe"])
-					$this->SetWatch($this->GetUserId(), $this->GetPageId($tag));
+				if (!$this->config["disable_autosubscribe"] && !$comment_on_id)
+				{
+					// subscribe the author
+					if ($reg === true) $this->SetWatch($user_id, $page_id);
+				}
 
 				if ($comment_on_id)
 				{
 					// notifying watchers
 					$user_id = $this->GetUserId();
 					$username = $this->GetUserName();
-
+					$title = $this->GetPageTitle(0, $comment_on_id);
 					$Watchers = $this->LoadAll(
 									"SELECT DISTINCT user_id ".
 									"FROM ".$this->config["table_prefix"]."watches ".
 									"WHERE page_id = '".quote($this->dblink, $comment_on_id)."'");
 
-					foreach ($Watchers as $Watcher)
+					if ($Watchers && !$mute) foreach ($Watchers as $Watcher) 
 
-					if ($Watcher["user_id"] != $user_id)
+					if ($Watcher["user_id"] != $user_id && $Watcher['user'] != GUEST)
 					{
+						// assert that user has no comments pending...
+						$pending = $this->LoadSingle(
+							"SELECT comment_id ".
+							"FROM {$this->config['table_prefix']}watches ".
+							"WHERE page_id = '".quote($this->dblink, $comment_on_id)."' ".
+								"AND user_id = '".quote($this->dblink, $Watcher['user_id'])."' ".
+							"LIMIT 1");
+
+						// ...and add one if so
+						if ($pending['comment_id'] == false)
+						{
+							$this->Query(
+								"UPDATE {$this->config['table_prefix']}watches ".
+								"SET comment_id = '".quote($this->dblink, $page_id)."' ".
+								"WHERE page_id = '".quote($this->dblink, $comment_on_id)."' ".
+									"AND user_id = '".quote($this->dblink, $Watcher['user_id'])."'");
+						}
+						else continue;	// skip current watcher
+
 						$_user = $this->GetUser();
 						$Watcher["user"] = $this->GetUserNameById($Watcher["user_id"]);
 						$this->SetUser($Watcher, 0);
@@ -1358,14 +1377,14 @@ class Wacko
 								"WHERE user_id = '".quote($this->dblink, $Watcher["user_id"])."'");
 							$User["options"] = $this->DecomposeOptions($User["more"]);
 
-							if ($User["email_confirm"] == "" && $User["options"]["send_watchmail"] != "N")
+							if ($User["email_confirm"] == "" && $User["options"]["send_watchmail"] != "0")
 							{
 								$lang = $User["lang"];
 								$this->LoadResource($lang);
 								$this->SetResource ($lang);
 								$this->SetLanguage ($lang);
 
-								$subject = "[".$this->config["wacko_name"]."] ".$this->GetTranslation("CommentForWatchedPage", $lang)."'".$this->GetCommentOnTag($comment_on_id)."'";
+								$subject = "[".$this->config["wacko_name"]."] ".$this->GetTranslation("CommentForWatchedPage", $lang)."'".$title."'";
 								$message = $this->GetTranslation("EmailHello", $lang). $Watcher["user"].".\n\n".
 											$username.
 											$this->GetTranslation("SomeoneCommented", $lang)."\n".
@@ -1379,8 +1398,11 @@ class Wacko
 
 								$this->SendMail($User["email"], $subject, $message);
 							}
+						}
+						else
+						{
+							$this->ClearWatch($Watcher['user_id'], $comment_on_id);
 						} // end of hasAccess
-						$this->SetUser($_user, 0);
 					} // end of watchers
 					$this->LoadResource($this->userlang);
 					$this->SetResource ($this->userlang);
@@ -1445,8 +1467,10 @@ class Wacko
 					$diff = $this->IncludeBuffered("handlers/page/diff.php", "oops", array("source" => 1));
 
 					// notifying watchers
-					$user_id = $this->GetUserId();
 					$page_id = $this->GetPageId($tag);
+					$title = $this->GetPageTitle(0, $page_id);
+					$user_id = $this->GetUserId();
+					
 					$username = $this->GetUserName();
 
 					$Watchers = $this->LoadAll(
@@ -1454,7 +1478,7 @@ class Wacko
 						"FROM ".$this->config["table_prefix"]."watches"." ".
 						"WHERE page_id = '".quote($this->dblink, $page_id)."'");
 
-					if ($Watchers)
+					if ($Watchers && !$mute)
 					{
 						foreach ($Watchers as $Watcher)
 						if ($Watcher["user_id"] !=  $user_id)
@@ -1495,22 +1519,21 @@ class Wacko
 									$this->SendMail($User["email"], $subject, $message);
 								}
 							} // end of hasaccess
-							$this->SetUser($_user, 0);
 						} // end of watchers
 						$this->LoadResource($this->userlang);
 						$this->SetResource ($this->userlang);
 						$this->SetLanguage ($this->userlang);
 					}
-				}
-			}
+				} // end of new != old
+			} // end of existing page
 		}
 
 		// writing xmls
 
-		#if ($mute === false)
-		#{
-			#if (!$oldPage['comment_on'] || !$comment_on)
-			#{
+		if ($mute === false)
+		{
+			if (!$oldPage['comment_on_id'] || !$comment_on_id)
+			{
 				$this->UseClass('rss', 'classes/');
 				$xml = new RSS($this);
 				$xml->Changes();
@@ -1528,8 +1551,8 @@ class Wacko
 				}
 
 				unset($xml);
-			#}
-		#}
+			}
+		}
 
 		return $body_r;
 	}
@@ -1578,7 +1601,9 @@ class Wacko
 	// COOKIES
 	function SetSessionCookie($name, $value, $dummy = NULL, $secure = 0)
 	{
-		SetCookie($this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name, $value, 0, "/", "", ( $secure ? true : false ));
+		// The HttpOnly cookie flag is only supported in PHP >= 5.2.0
+		$httponly = 1;
+		setcookie($this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name, $value, 0, "/", "", ( $secure ? true : false ), ( $httponly ? true : false ));
 		$_COOKIE[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name] = $value;
 	}
 
@@ -1587,18 +1612,20 @@ class Wacko
 		// set to default if no pediod given
 		if ($days == 0) $days = $this->config["cookie_session"];
 
-		SetCookie($this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name, $value, time() + $days * 24 * 3600, "/", "", ( $secure ? true : false ));
+		// The HttpOnly cookie flag is only supported in PHP >= 5.2.0
+		$httponly = 1;
+		setcookie($this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name, $value, time() + $days * 24 * 3600, "/", "", ( $secure ? true : false ), ( $httponly ? true : false ));
 		$_COOKIE[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name] = $value;
 	}
 
-	function DeleteCookie($name)
+	function DeleteCookie($name, $prefix = false)
 	{
 		if ($prefix == false)
 			$prefix = $this->config["session_prefix"].'_'.$this->config["cookie_prefix"];
 		else
 			$prefix = "";
 
-		SetCookie($prefix.$name, "", 1, "/", "");
+		setcookie($prefix.$name, "", 1, "/", "");
 		$_COOKIE[$prefix.$name] = "";
 	}
 
@@ -1639,11 +1666,11 @@ class Wacko
 
 	function NoCache()
 	{
-		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 					// Date in the past
+		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 				// Date in the past
 		header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 		// always modified
-		header("Cache-Control: no-store, no-cache, must-revalidate");		// HTTP 1.1
+		header("Cache-Control: no-store, no-cache, must-revalidate");	// HTTP 1.1
 		header("Cache-Control: post-check=0, pre-check=0", false);
-		header("Pragma: no-cache");											// HTTP 1.0
+		header("Pragma: no-cache");										// HTTP 1.0
 	}
 
 	function UnwrapLink($tag)
@@ -1694,7 +1721,7 @@ class Wacko
 	function MiniHref($method = "", $tag = "", $addpage = "")
 	{
 		if (!$tag = trim($tag)) $tag = $this->tag;
-		if (!$addpage) $tag = $this->SlimUrl($tag);
+		if (!$addpage)			$tag = $this->SlimUrl($tag);
 		// if (!$addpage) $tag = $this->NpjTranslit($tag);
 
 		$tag = trim($tag, "/.");
