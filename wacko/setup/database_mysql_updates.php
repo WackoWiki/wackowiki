@@ -195,6 +195,8 @@ $alter_users_r4_2_8 = "ALTER TABLE {$pref}users ADD total_revisions INT(10) UNSI
 $alter_users_r4_2_9 = "ALTER TABLE {$pref}users ADD total_comments INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER total_revisions";
 $alter_users_r4_2_10 = "ALTER TABLE {$pref}users DROP INDEX idx_name, ADD UNIQUE idx_name (name)";
 $alter_users_r4_2_11 = "ALTER TABLE {$pref}users ADD real_name VARCHAR(80) NOT NULL DEFAULT '' AFTER name";
+$alter_users_r4_2_12 = "ALTER TABLE {$pref}users ADD sessiontime DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER email_confirm";
+$alter_users_r4_2_13 = "ALTER TABLE {$pref}users ADD sessionexpire INT(10) UNSIGNED NOT NULL AFTER sessiontime";
 
 $update_users_r4_2 = "UPDATE {$pref}users SET doubleclickedit = '0' WHERE doubleclickedit = '2'";
 $update_users_r4_2_1 = "UPDATE {$pref}users SET show_comments = '0' WHERE show_comments = '2'";

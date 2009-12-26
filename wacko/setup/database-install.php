@@ -283,6 +283,8 @@ switch($config["database_driver"])
 					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r4_2_9, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r4_2_10, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r4_2_11, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
+					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r4_2_12, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
+					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r4_2_13, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 
 					test(str_replace("%1","users",$lang["UpdateTable"]), @mysql_query($update_users_r4_2, $dblink), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
 					test(str_replace("%1","users",$lang["UpdateTable"]), @mysql_query($update_users_r4_2_1, $dblink), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
@@ -621,6 +623,8 @@ switch($config["database_driver"])
 								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r4_2_9), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r4_2_10), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r4_2_11), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
+								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r4_2_12), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
+								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r4_2_13), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 
 								test(str_replace("%1","users",$lang["UpdateTable"]), @mysqli_query($dblink, $update_users_r4_2), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
 								test(str_replace("%1","users",$lang["UpdateTable"]), @mysqli_query($dblink, $update_users_r4_2_1), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
