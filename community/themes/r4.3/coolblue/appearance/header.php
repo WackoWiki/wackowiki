@@ -204,4 +204,4 @@ echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".
 // here we show messages
 if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
 ?>
-<loc><?php echo $this->config["wakka_name"] ?>: <?php echo $this->GetPagePath(); ?><a title="<?php echo $this->GetConfigValue("search_title_help")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></loc>
+<loc><?php echo $this->config["wacko_name"] ?>: <?php echo $this->GetPagePath(); ?><a title="<?php echo $this->GetConfigValue("search_title_help")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></loc>

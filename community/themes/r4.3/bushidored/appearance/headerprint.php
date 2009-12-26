@@ -5,20 +5,20 @@
 
 <html>
 <head>
-  <title><?php echo $this->GetWakkaName()." : ".$this->GetPageTag(); ?></title>
+  <title><?php echo $this->GetWackoName()." : ".$this->GetPageTag(); ?></title>
 <?php if ($this->GetMethod() != 'show')
        echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
   <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
   <meta name="keywords" content="<?php echo $this->GetConfigValue("meta_keywords") ?>" />
   <meta name="description" content="<?php echo $this->GetConfigValue("meta_description") ?>" />
-  <link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/wakkaprint.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/print.css" />
 </head>
 
 <body>
 
 <div class="header">
   <h1>
-  <?php echo file_exists("images/".$this->config["wakka_name"].".png")?"<img src='/images/".$this->config["wakka_name"].".png' alt='".$this->config["wakka_name"]."' />":$this->config["wakka_name"] ?> : <a href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->GetPageTag()); ?>"><?php echo $this->GetPageTag(); ?></a> 
+  <?php echo file_exists("images/".$this->config["wacko_name"].".png")?"<img src='/images/".$this->config["wacko_name"].".png' alt='".$this->config["wacko_name"]."' />":$this->config["wacko_name"] ?> : <a href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->GetPageTag()); ?>"><?php echo $this->GetPageTag(); ?></a>
   </h1>
 </div>
 
