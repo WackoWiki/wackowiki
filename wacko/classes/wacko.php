@@ -3693,7 +3693,7 @@ class Wacko
 		}
 
 		// check IP validity
-		if ($this->GetUserSetting("validate_ip", 1) == 'Y' && $this->GetUserSetting("ip") != $_SERVER["REMOTE_ADDR"])
+		if ($this->GetUserSetting("validate_ip", 1) == '1' && $this->GetUserSetting("ip") != $_SERVER["REMOTE_ADDR"])
 		{
 			$this->Log(1, '<strong><span class="cite">User in-session IP change detected</span></strong>');
 			$this->LogoutUser();

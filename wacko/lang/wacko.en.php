@@ -25,6 +25,11 @@ $wackoTranslation = array(
 	"LoginPassword" => "Password",
 	"LoginButton" => "Login!",
 	"LoginPage" => "Login",
+	// Log me in automatically (save a permanent cookie)
+	"PersistentCookie" => "Stay signed in",
+	"SessionDuration" => "Session duration",
+	"LoggedInAs" => "You are logged in as",
+
 	// other
 	"TopicSearchText" => "Search in titles only",
 	"MsWordVersion" => "Microsoft Word ready version",
@@ -312,6 +317,9 @@ $wackoTranslation = array(
 	"DontRedirect" => "Do not allow automatic redirection by action Redirect.",
 	"SendWatchEmail" => "Send notifying email when someone (except you) change any page you are watching",
 	"AllowIntercom" => "Allow private messages from users of the system",
+	"HideLastSession" => "Hide last session",
+	"ValidateIP" => "Tying session to IP (do not use via Tor)",
+	"ProfileAnonymousPub" => "Preferably, published anonymously (to hide the name)",
 	"PageMoved" => "This page moved. You can find it at",
 	"CurrentPassword" => "Current password",
 	"NewPassword" => "New password",
@@ -627,7 +635,7 @@ $wackoTranslation = array(
 	"PollsLasts"		=> "Poll is (days)",
 	"PollsLasted"		=> "Poll walked (days)",
 	"PollsAdded"		=> "Added",
-	"PollsTotalVotes"	=> "TotalVotes",
+	"PollsTotalVotes"	=> "Total votes",
 	"PollsGuest"		=> "Guest",
 	"PollsShow"			=> "Show",
 	"PollsAll"			=> "All",

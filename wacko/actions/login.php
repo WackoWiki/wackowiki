@@ -60,11 +60,11 @@ else if ($user = $this->GetUser())
 					echo '(in '.ceil($time_diff / 3600).' hours).';
 				else
 					echo '(in '.ceil($time_diff / 60).' minutes).';
-				
+
 				echo "<br />";
 				// Only allow your session to be used from this IP address.
 ?>
-				Bind session to the IP-address <?php echo ( $user['options']['validate_ip'] == 'Y' ? 'enabled (the current IP '.$user['ip'].')' : 'Off' ); ?>.<br />
+				Bind session to the IP-address <?php echo ( $user['options']['validate_ip'] == '1' ? 'enabled (the current IP '.$user['ip'].')' : 'Off' ); ?>.<br />
 <?php
 				if ($this->config["ssl"] == true)
 				{
@@ -78,7 +78,7 @@ else if ($user = $this->GetUser())
 			onclick="document.location='<?php echo $this->href("", "", "action=logout"); ?>'" />
   </p>
   <p>
-		<a href="<?php echo $this->href('', $this->config['settings_page']); ?>">Settings</a> | <a href="?action=clearcookies">Delete all cookie</a>
+		<a href="<?php echo $this->href('', $this->config['settings_page']); ?>">Settings</a> | <a href="?action=clearcookies">Delete all cookies</a>
   </p>
 </div>
 <?php
@@ -156,16 +156,16 @@ else
 	<p>
 		<label for="name"><?php echo $this->FormatTranslation("LoginName");?>:</label>
 		<input id="name" name="name" size="25" maxlength="25" value="<?php echo isset($name) ? $name : ""; ?>" tabindex="1" />
-		
+
 	</p>
 	<p>
 		<label for="password"><?php echo $this->GetTranslation("LoginPassword");?>:</label>
 		<input id="password" type="password" name="password" size="25" tabindex="2" autocomplete="off" />
-		
+
 	</p>
 </div>
 	<p>
-		<label for="">Session Length<?php echo $this->FormatTranslation("SessionLength");?>:</label>
+		<label for=""><?php echo $this->GetTranslation("SessionDuration");?>:</label>
 		<small>
 			<input id="1d" name="session" value="1d" type="radio" /><label for="1d">1 day</label> &nbsp;&nbsp;
 			<input id="7d" name="session" value="7d" type="radio" /><label for="7d">7 days</label> &nbsp;&nbsp;
@@ -174,13 +174,14 @@ else
 	</p>
 	<p>
 		<input id="persistent" name="persistent" value="1" type="checkbox" tabindex="3" checked="checked" />
-		<label for="persistent"><small>Log me in automatically (save a permanent cookie)</small></label>
+		<label for="persistent"><small><?php echo $this->GetTranslation("PersistentCookie"); ?></small></label>
 	</p>
 
 
 
 	<p>
 		<input type="submit" value="<?php echo $this->GetTranslation("LoginButton"); ?>" tabindex="4" />
+		&nbsp;&nbsp;&nbsp;<small><a href="?action=clearcookies">Delete all cookies</a></small>
 	</p>
 	<p><?php echo $this->FormatTranslation("ForgotLink"); ?></p>
 	<p><?php echo $this->FormatTranslation("LoginWelcome2"); ?></p>
