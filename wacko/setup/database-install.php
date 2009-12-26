@@ -90,8 +90,8 @@ switch($config["database_driver"])
 			print("         </ul>\n");
 			print("         <br />\n");
 
-			if ( !isset ( $config["wakka_version"] ) ) $config["wakka_version"] = "";
-			if (!$version = trim($config["wakka_version"])) $version = "0";
+			if ( !isset ( $config["wacko_version"] ) ) $config["wacko_version"] = "";
+			if (!$version = trim($config["wacko_version"])) $version = "0";
 			if ( isset ( $config["wacko_version"] ) )
 			if ( trim ( $config["wacko_version"] ) ) $version = trim($config["wacko_version"]);
 
@@ -151,107 +151,6 @@ switch($config["database_driver"])
 					 The funny upgrading stuff. Make sure these are in order!
 					 And yes, there are no (switch) breaks here. This is on purpose.
 					 */
-
-				// from 0.1 to 0.1.1
-				case "0.1":
-					print("         <h2>0.1 ".$lang["To"]." 0.1.1</h2>\n");
-					print("         <ul>\n");
-					test(str_replace("%1", "pages", $lang["AlterTable"]), @mysql_query($alter_pages_r0_1, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-
-				// from 0.1.1 to 0.1.2
-				case "0.1.1":
-					print("         <h2>0.1.1 ".$lang["To"]." 0.1.2</h2>\n");
-					print("         <ul>\n");
-					test($lang["0.1.1"], 1);
-
-				// from Wakka 0.1.2 or Wacko R1
-				case "0.1.2":
-				case "0.1.3-dev":
-					print("         <h2>0.1.2 ".$lang["To"]." Wacko R2</h2>\n");
-					print("         <ul>\n");
-					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r0_1, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","watches",$lang["CreatingTable"]), @mysql_query($table_pagewatches_r0, $dblink), str_replace("%1","watches",$lang["ErrorCreatingTable"]));
-
-				// from Wacko R2
-				case "R2":
-					print("         <h2>Wacko R2 ".$lang["To"]." R3</h2>\n");
-					print("         <ul>\n");
-					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r2_1, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r2_1, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","acls",$lang["AlterTable"]), @mysql_query($alter_acls_r2_1, $dblink), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","links",$lang["AlterTable"]), @mysql_query($alter_links_r2_1, $dblink), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","referrers",$lang["AlterTable"]), @mysql_query($alter_referrers_r2_1, $dblink), str_replace("%1", "referrers", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","watches",$lang["AlterTable"]), @mysql_query($alter_pagewatches_r2_1, $dblink), str_replace("%1", "pagewatches", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","revision",$lang["CreatingTable"]), @mysql_query($table_revisions_r2, $dblink), str_replace("%1","revisions",$lang["ErrorCreatingTable"]));
-					test($lang["MovingRevisions"], @mysql_query($insert_revisions_r2_1, $dblink), $lang["ErrorMovingRevisions"]);
-					test(str_replace("%1", "pages", $lang["AlterTable"]), @mysql_query($alter_pages_r2_2, $dblink), $lang["CleanupScript"]);
-					print("         </ul>\n");
-					print("         <br />\n");
-					print("         <h2>".$lang["InstallingDefaultData"]."</h2>\n");
-					print("         <ul>\n");
-					print("            <li>".$lang["InstallingPagesBegin"]);
-					require_once("setup/inserts.php");
-					print("</li>\n");
-					print("            <li>".$lang["InstallingPagesEnd"]."</li>\n");
-
-				// from Wacko R3
-				case "R3":
-					print("         <h2>Wacko R3/3.5 ".$lang["To"]." R4</h2>\n");
-					print("         <ul>\n");
-					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r3_1, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r3_2, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r3_3, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r3_1, $dblink), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r3_2, $dblink), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r3_3, $dblink), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r3_4, $dblink), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r3_5, $dblink), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r3_6, $dblink), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
-
-					test(str_replace("%1","links",$lang["AlterTable"]), @mysql_query($alter_links_r3_1, $dblink), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","links",$lang["AlterTable"]), @mysql_query($alter_links_r3_2, $dblink), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","links",$lang["AlterTable"]), @mysql_query($alter_links_r3_3, $dblink), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
-
-					test(str_replace("%1","acls",$lang["AlterTable"]), @mysql_query($alter_acls_r3_1, $dblink), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
-
-					test(str_replace("%1","watches",$lang["AlterTable"]), @mysql_query($alter_watches_r3_1, $dblink), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
-
-					test(str_replace("%1","referrers",$lang["AlterTable"]), @mysql_query($alter_referrers_r3_1, $dblink), str_replace("%1", "referrers", $lang["ErrorAlteringTable"]));
-
-					@mysql_query($alter_pages_r3_1, $dblink);
-					@mysql_query($alter_pages_r3_2, $dblink);
-					@mysql_query($alter_pages_r3_3, $dblink);
-
-					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r3_4, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r3_5, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r3_6, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r3_7, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r3_8, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r3_9, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r3_10, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r3_11, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r3_12, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-
-					test(str_replace("%1","upload",$lang["CreatingTable"]), @mysql_query($table_upload, $dblink), str_replace("%1","upload",$lang["ErrorCreatingTable"]));
-
-					test("", @mysql_query($update_pages_r3_1, $dblink), "");
-					test("", @mysql_query($update_pages_r3_2, $dblink), "");
-
-				//from R4 beta
-				case "R4":
-					print("         <h2>Wacko R4 beta ".$lang["To"]." R4 RC1</h2>\n");
-					print("         <ul>\n");
-					test(str_replace("%1","cache",$lang["CreatingTable"]), @mysql_query($table_cache, $dblink), str_replace("%1","cache",$lang["ErrorCreatingTable"]));
-
-				//from R4 release candidat
-				case "R4 RC1":
-					print("         <h2>Wacko R4 RC1 ".$lang["To"]." R4.0</h2>\n");
-					print("         <ul>\n");
-
-				//from R4.0 to R4.2
-				case "R4.0":
-					print("         <h2>Wacko R4.0 ".$lang["To"]." R4.2</h2>\n");
-					print("         <ul>\n");
 
 				//from R4.2 to R4.3.rc1
 				case "R4.2":
@@ -430,9 +329,9 @@ switch($config["database_driver"])
 						print("         </ul>\n");
 						print("         <br />\n");
 
-						if ( !isset( $config["wakka_version"] ) ) $config["wakka_version"] = "0";
+
 						if ( !isset( $config["wacko_version"] ) ) $config["wacko_version"] = "0";
-						if (!$version = trim($config["wakka_version"])) $version = "0";
+						if (!$version = trim($config["wacko_version"])) $version = "0";
 						if (trim($config["wacko_version"])) $version = trim($config["wacko_version"]);
 
 						if ($config["DeleteTables"] == "on")
@@ -490,107 +389,6 @@ switch($config["database_driver"])
 								 The funny upgrading stuff. Make sure these are in order!
 								 And yes, there are no (switch) breaks here. This is on purpose.
 								 */
-
-							// from 0.1 to 0.1.1
-							case "0.1":
-								print("         <h2>0.1 ".$lang["To"]." 0.1.1</h2>\n");
-								print("         <ul>\n");
-								test(str_replace("%1", "pages", $lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r0_1), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-
-							// from 0.1.1 to 0.1.2
-							case "0.1.1":
-								print("         <h2>0.1.1 ".$lang["To"]." 0.1.2</h2>\n");
-								print("         <ul>\n");
-								test($lang["0.1.1"], 1);
-
-							// from Wakka 0.1.2 or Wacko R1
-							case "0.1.2":
-							case "0.1.3-dev":
-								print("         <h2>0.1.2 ".$lang["To"]." Wacko R2</h2>\n");
-								print("         <ul>\n");
-								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r0_1), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","watches",$lang["CreatingTable"]), @mysqli_query($dblink, $table_watches_r0), str_replace("%1","watches",$lang["ErrorCreatingTable"]));
-
-							// from Wacko R2
-							case "R2":
-								print("         <h2>Wacko R2 ".$lang["To"]." R3</h2>\n");
-								print("         <ul>\n");
-								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r2_1), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r2_1), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","acls",$lang["AlterTable"]), @mysqli_query($dblink, $alter_acls_r2_1), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","links",$lang["AlterTable"]), @mysqli_query($dblink, $alter_links_r2_1), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","referrers",$lang["AlterTable"]), @mysqli_query($dblink, $alter_referrers_r2_1), str_replace("%1", "referrers", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","watches",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watches_r2_1), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","revision",$lang["CreatingTable"]), @mysqli_query($dblink, $table_revisions_r2), str_replace("%1","revision",$lang["ErrorCreatingTable"]));
-								test($lang["MovingRevisions"], @mysqli_query($dblink, $insert_revisions_r2_1), $lang["ErrorMovingRevisions"]);
-								test(str_replace("%1", "pages", $lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r2_2), $lang["CleanupScript"]);
-								print("         </ul>\n");
-								print("         <br />\n");
-								print("         <h2>".$lang["InstallingDefaultData"]."</h2>\n");
-								print("         <ul>\n");
-								print("            <li>".$lang["InstallingPagesBegin"]);
-								require_once("setup/inserts.php");
-								print("</li>\n");
-								print("            <li>".$lang["InstallingPagesEnd"]."</li>\n");
-
-							// from Wacko R3
-							case "R3":
-								print("         <h2>Wacko R3/3.5 ".$lang["To"]." R4</h2>\n");
-								print("         <ul>\n");
-								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r3_1), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r3_2), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r3_3), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","revisions",$lang["AlterTable"]), @mysqli_query($dblink, $alter_revisions_r3_1), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","revisions",$lang["AlterTable"]), @mysqli_query($dblink, $alter_revisions_r3_2), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","revisions",$lang["AlterTable"]), @mysqli_query($dblink, $alter_revisions_r3_3), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","revisions",$lang["AlterTable"]), @mysqli_query($dblink, $alter_revisions_r3_4), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","revisions",$lang["AlterTable"]), @mysqli_query($dblink, $alter_revisions_r3_5), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","revisions",$lang["AlterTable"]), @mysqli_query($dblink, $alter_revisions_r3_6), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
-
-								test(str_replace("%1","links",$lang["AlterTable"]), @mysqli_query($dblink, $alter_links_r3_1), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","links",$lang["AlterTable"]), @mysqli_query($dblink, $alter_links_r3_2), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","links",$lang["AlterTable"]), @mysqli_query($dblink, $alter_links_r3_3), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
-
-								test(str_replace("%1","acls",$lang["AlterTable"]), @mysqli_query($dblink, $alter_acls_r3_1), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
-
-								test(str_replace("%1","watches",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watches_r3_1), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
-
-								test(str_replace("%1","referrers",$lang["AlterTable"]), @mysqli_query($dblink, $alter_referrers_r3_1), str_replace("%1", "referrers", $lang["ErrorAlteringTable"]));
-
-								@mysqli_query($dblink, $alter_pages_r3_1);
-								@mysqli_query($dblink, $alter_pages_r3_2);
-								@mysqli_query($dblink, $alter_pages_r3_3);
-
-								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r3_4), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r3_5), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r3_6), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r3_7), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r3_8), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r3_9), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r3_10), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r3_11), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r3_12), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
-
-								test(str_replace("%1","upload",$lang["CreatingTable"]), @mysqli_query($dblink, $table_upload), str_replace("%1","upload",$lang["ErrorCreatingTable"]));
-
-								test("", @mysqli_query($dblink, $update_pages_r3_1), "");
-								test("", @mysqli_query($dblink, $update_pages_r3_2), "");
-
-							//from R4 beta
-							case "R4":
-								print("         <h2>Wacko R4 beta ".$lang["To"]." R4 RC1</h2>\n");
-								print("         <ul>\n");
-								test(str_replace("%1","cache",$lang["CreatingTable"]), @mysqli_query($dblink, $table_cache), str_replace("%1","cache",$lang["ErrorCreatingTable"]));
-
-							//from R4 release candidat
-							case "R4 RC1":
-								print("         <h2>Wacko R4 RC1 ".$lang["To"]." R4.0</h2>\n");
-								print("         <ul>\n");
-
-							//from R4.0 to R4.2
-							case "R4.0":
-								print("         <h2>Wacko R4.0 ".$lang["To"]." R4.2</h2>\n");
-								print("         <ul>\n");
 
 							//from R4.2 to R4.3.rc1
 							case "R4.2":

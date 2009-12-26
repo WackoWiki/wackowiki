@@ -34,8 +34,6 @@ if(!array_key_exists("aliases", $config))
 }
 
 // set version to current version, yay!
-$was_wakka_upgrade = array_key_exists("wakka_version", $config) && !array_key_exists("wacko_version", $config);
-$config["wakka_version"] = WAKKA_VERSION;
 $config["wacko_version"] = WACKO_VERSION;
 
 // convert config array into PHP code
@@ -43,7 +41,7 @@ $configCode = "<?php\n// config.inc.php ".$lang["WrittenAt"].strftime("%c")."\n/
 $configCode .= array_to_str($config)."\n?>";
 
 // try to write configuration file
-print("         <h2>".$lang[$was_wakka_upgrade ? "FinalSteps" : "FinalStep"]."</h2>\n");
+print("         <h2>".$lang["FinalStep"]."</h2>\n");
 print("         <ul>\n");
 print("            <li>".$lang["Writing"]." - ");
 

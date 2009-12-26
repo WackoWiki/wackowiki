@@ -12,7 +12,6 @@ class Wacko
 	var $queryLog = array();
 	var $interWiki = array();
 	var $aclCache = array();
-	var $VERSION;
 	var $WVERSION; //Wacko version
 	var $context = array("");
 	var $current_context = 0;
@@ -72,7 +71,6 @@ class Wacko
 		$this->timer = $this->GetMicroTime();
 		$this->config = $config;
 		$this->dblink 	= $dblink;
-		$this->VERSION = WAKKA_VERSION;
 		$this->WVERSION = WACKO_VERSION;
 	}
 
@@ -204,7 +202,6 @@ class Wacko
 	function GetMethod() { return $this->method; }
 	function GetConfigValue($name) { return isset( $this->config[$name] ) ? $this->config[$name] : ''; }
 	function GetWackoName() { return $this->config["wacko_name"]; }
-	function GetWakkaVersion() { return $this->VERSION; }
 	function GetWackoVersion() { return $this->WVERSION; }
 
 	function CheckFileExists($filename, $unwrapped_tag = "" )
@@ -1156,7 +1153,7 @@ class Wacko
 			$owner	= "";
 			$reg	= false;
 		}
-		
+
 		$page_id = $this->GetPageId($tag);
 
 		/*
@@ -1342,7 +1339,7 @@ class Wacko
 									"FROM ".$this->config["table_prefix"]."watches ".
 									"WHERE page_id = '".quote($this->dblink, $comment_on_id)."'");
 
-					if ($Watchers && !$mute) foreach ($Watchers as $Watcher) 
+					if ($Watchers && !$mute) foreach ($Watchers as $Watcher)
 
 					if ($Watcher["user_id"] != $user_id && $Watcher['user'] != GUEST)
 					{
@@ -1470,7 +1467,7 @@ class Wacko
 					$page_id = $this->GetPageId($tag);
 					$title = $this->GetPageTitle(0, $page_id);
 					$user_id = $this->GetUserId();
-					
+
 					$username = $this->GetUserName();
 
 					$Watchers = $this->LoadAll(

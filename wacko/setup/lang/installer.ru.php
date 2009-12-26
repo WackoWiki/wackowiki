@@ -19,7 +19,6 @@ $lang = array(
    Language Selection Page
 */
 "UpgradeFromWacko" => "Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
-"UpgradeFromWakka" => "Welcome to WackoWiki, it appears that you are upgrading from WakkaWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
 "FreshInstall" => "Welcome to WackoWiki, you are about to install WackoWiki <tt>%1</tt>.  The next few pages will guide you through the installation process.",
 "PleaseBackup" => "Cделайте резервную копию базы данных, конфигурационного файла и других изменённых вами файлов (например, файлов темы) до начала процесса установки. Это может спасти вас от очень неприятных моментов.",
 "Lang" => "Настройки языка",
@@ -139,7 +138,6 @@ $lang = array(
 */
 "write-config" => "Сохранение конфигурационного файла",
 "FinalStep" => "Final Step",
-"FinalSteps" => "Final Steps",
 "Writing" => "Сохранение конфигурационного файла",
 "RemovingWritePrivilege" => "Удаление привилегий на запись",
 "InstallationComplete" => "Installation Complete",
@@ -150,7 +148,7 @@ $lang = array(
 "ErrorGivePrivileges" => "Конфигурационный файл <tt>%1</tt> не может быть сохранён. Нужно временно дать веб-серверу права на запись либо на каталог WackoWiki, либо на пустой файл <tt>config.inc.php</tt> (<tt>touch config.inc.php ; chmod 666 config.inc.php</tt>; не забудьте убрать эти права после установки, т. e. <tt>chmod 644 config.inc.php</tt>). Если, почему-либо вы не можете выставить такие права, придётся скопировать текст, расположенный ниже в новый файл и загрузить его на сервер под именем <tt>config.inc.php</tt> в каталог WackoWiki. После этого ваш сайт должен заработать. Если нет, смотрите <a href=\"http://wackowiki.org/Doc/English/Installation\">WackoWiki:DocEnglish/Installation</a>",
 "NextStep" => "На следующем шаге программа установки попробует сохранить обновлённый конфигурационный файл, <tt>config.inc.php</tt>. Пожалуйста, проверьте, что веб-сервер имеет достаточно прав для изменения файла; в противном случае вам придётся сохранить изменения вручную. Не побоимся повториться, см. <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:DocEnglish/Installation</a>.",
 "WrittenAt" => "сохранён ",
-"DontChange" => "не меняйте wakka_version вручную!",
+"DontChange" => "не меняйте wacko_version вручную!",
 "ConfigDescription" => "detailed description http://wackowiki.org/Doc/Russian/FajjlKonfiguracii",
 "TryAgain" => "Попытаться снова",
 "RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",

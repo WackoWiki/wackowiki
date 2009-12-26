@@ -19,7 +19,6 @@ $lang = array(
    Language Selection Page
 */
 "UpgradeFromWacko" => "Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
-"UpgradeFromWakka" => "Welcome to WackoWiki, it appears that you are upgrading from WakkaWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
 "FreshInstall" => "Welcome to WackoWiki, you are about to install WackoWiki <tt>%1</tt>.  The next few pages will guide you through the installation process.",
 "PleaseBackup" => "Please, backup your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.",
 "Lang" => "Language Configuration",
@@ -139,7 +138,6 @@ $lang = array(
 */
 "write-config" => "Write Config File",
 "FinalStep" => "Final Step",
-"FinalSteps" => "Final Steps",
 "Writing" => "Writing Configuration File",
 "RemovingWritePrivilege" => "Removing Write Privilege",
 "InstallationComplete" => "Installation Complete",
@@ -150,7 +148,7 @@ $lang = array(
 "ErrorGivePrivileges" => "The configuration file <tt>%1</tt> could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called <tt>config.inc.php</tt> (<tt>touch config.inc.php ; chmod 666 config.inc.php</tt>; don't forget to remove write access again later, ie <tt>chmod 644 config.inc.php</tt>). If, for any reason, you can't do this, you'll have to copy the text below into a new file and save/upload it as <tt>config.inc.php</tt> into the WackoWiki directory. Once you've done this, your WackoWiki site should work. If not, please visit <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a>",
 "NextStep" => "In the next step, the installer will try to write the updated configuration file, <tt>config.inc.php</tt>.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a> for details.",
 "WrittenAt" => "written at ",
-"DontChange" => "do not change wakka_version manually!",
+"DontChange" => "do not change wacko_version manually!",
 "ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Try Again",
 "RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",

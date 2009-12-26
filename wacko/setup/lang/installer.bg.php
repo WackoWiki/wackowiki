@@ -19,7 +19,6 @@ $lang = array(
    Language Selection Page
 */
 "UpgradeFromWacko" => "Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
-"UpgradeFromWakka" => "Welcome to WackoWiki, it appears that you are upgrading from WakkaWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
 "FreshInstall" => "Welcome to WackoWiki, you are about to install WackoWiki <tt>%1</tt>.  The next few pages will guide you through the installation process.",
 "PleaseBackup" => "Моля, съхранете си копие на базата данни (БД) от, конфигурационния файл и другите, променени от вас файлове (например,  теми),  докато още НЕ Е КЪСНО!",
 "Lang" => "Езикови настройки",
@@ -139,7 +138,6 @@ $lang = array(
 */
 "write-config" => "Write Config File",
 "FinalStep" => "Final Step",
-"FinalSteps" => "Final Steps",
 "Writing" => "Запис на конфигурационния файл",
 "RemovingWritePrivilege" => "Removing Write Privilege",
 "InstallationComplete" => "Installation Complete",
@@ -150,7 +148,7 @@ $lang = array(
 "ErrorGivePrivileges" => "Конфигурационния файл <tt>%1</tt> не може да се запише. Трябва сега временно да се променят правата за достъп до (мястото на) този файл или да се направи празен файл <tt>config.inc.php</tt> (<tt>touch config.inc.php ; chmod 666 config.inc.php</tt>; не забравяйте накрая да забраните обратно правата, т.e. <tt>chmod 644 config.inc.php</tt>). Ако нещо не става, ще трябва да копирате и запишете следващия текст в нов празен файл на вашия компютър и после да го прехвърлите с име <tt>config.inc.php</tt> на сървъра в главната директория на Wacko. При проблеми, вижте (англ.) <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a> или (руски) <a href=\"http://wackowiki.org/Doc/English/Installation\">WackoWiki:Документация/Установка</a>",
 "NextStep" => "На следващата стъпка, инсталаторът ще опита да запише обновения конфигурационния файл, <tt>config.inc.php</tt>. Кофигурационният файл <tt>config.inc.php</tt> се  разполага в главната директория, където е WackoWiki. За да стане промяната, този файл трябва да е достъпен за запис чрез системата сървър/скрипт! За да няма проблеми, трябва сега временно да се променят правата за достъп до този файл. В противен случай ще трябва да допишете промените на ръка. Отново, погледнете за подробности, малко е на английски, но все пак <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a>.",
 "WrittenAt" => "записан ",
-"DontChange" => "не променяйте wakka_version ръчно!",
+"DontChange" => "не променяйте wacko_version ръчно!",
 "ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Нов опит",
 "RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",
