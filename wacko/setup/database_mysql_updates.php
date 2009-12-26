@@ -11,10 +11,10 @@ $pref = $config["table_prefix"];
 // ACL
 $alter_acls_r4_2 = "ALTER TABLE {$pref}acls ADD page_id INT(10) UNSIGNED NOT NULL AFTER page_tag";
 $alter_acls_r4_2_1 = "ALTER TABLE {$pref}acls CHANGE privilege privilege VARCHAR(10) NOT NULL";
-$alter_acls_r4_2_2 = " ALTER TABLE {$pref}acls DROP PRIMARY KEY";
-$alter_acls_r4_2_3 = " ALTER TABLE {$pref}acls ADD UNIQUE idx_page_id (page_id,privilege)";
-$alter_acls_r4_2_4 = "ALTER TABLE {$pref}pages DROP page_tag";
-$alter_acls_r4_2_5 = "ALTER TABLE {$pref}pages DROP supertag";
+$alter_acls_r4_2_2 = "ALTER TABLE {$pref}acls DROP PRIMARY KEY";
+$alter_acls_r4_2_3 = "ALTER TABLE {$pref}acls ADD UNIQUE idx_page_id (page_id,privilege)";
+$alter_acls_r4_2_4 = "ALTER TABLE {$pref}acls DROP page_tag";
+$alter_acls_r4_2_5 = "ALTER TABLE {$pref}acls DROP supertag";
 
 $update_acls_r4_2 = "UPDATE {$pref}acls AS acls, (SELECT id, tag FROM {$pref}pages) AS pages SET acls.page_id = pages.id WHERE acls.page_tag = pages.tag";
 
@@ -72,6 +72,7 @@ $alter_pages_r4_2_14 = "ALTER TABLE {$pref}pages ADD comments INT(4) UNSIGNED NO
 $alter_pages_r4_2_15 = "ALTER TABLE {$pref}pages DROP owner";
 $alter_pages_r4_2_16 = "ALTER TABLE {$pref}pages DROP user";
 $alter_pages_r4_2_17 = "ALTER TABLE {$pref}pages ADD ip VARCHAR(15) NOT NULL AFTER minor_edit";
+#ALTER TABLE `fresh_pages` CHANGE `id` `page_id` INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT
 
 $update_pages_r4_2 = "UPDATE {$pref}pages SET body_r=''";
 $update_pages_r4_2_1 = "UPDATE {$pref}pages AS pages, (SELECT id, name FROM {$pref}users) AS users SET pages.owner_id = users.id WHERE pages.owner = users.name";
@@ -101,6 +102,7 @@ $alter_revisions_r4_2_13 = "ALTER TABLE {$pref}revisions ADD page_id INT(10) UNS
 $alter_revisions_r4_2_14 = "ALTER TABLE {$pref}revisions DROP owner";
 $alter_revisions_r4_2_15 = "ALTER TABLE {$pref}revisions DROP user";
 $alter_revisions_r4_2_16 = "ALTER TABLE {$pref}revisions ADD ip VARCHAR(15) NOT NULL AFTER minor_edit";
+#ALTER TABLE `fresh_revisions` CHANGE `id` `revision_id` INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT
 
 $update_revisions_r4_2 = "UPDATE {$pref}revisions AS revisions, (SELECT id, name FROM {$pref}users) AS users SET revisions.owner_id = users.id WHERE revisions.owner = users.name";
 $update_revisions_r4_2_1 = "UPDATE {$pref}revisions AS revisions, (SELECT id, name FROM {$pref}users) AS users SET revisions.user_id = users.id WHERE revisions.user = users.name";
@@ -120,6 +122,7 @@ $alter_upload_r4_2 = "ALTER TABLE {$pref}upload CHANGE id id INT(10) UNSIGNED NO
 																	ADD INDEX idx_user_id (user_id)";
 
 $alter_upload_r4_2_1 = "ALTER TABLE {$pref}upload DROP user";
+#ALTER TABLE `fresh_upload` CHANGE `id` `upload_id` INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT
 
 $update_upload_r4_2 = "UPDATE {$pref}upload AS upload, (SELECT id, name FROM {$pref}users) AS users SET upload.user_id = users.id WHERE upload.user = users.name";
 
@@ -138,6 +141,7 @@ $alter_users_r4_2_10 = "ALTER TABLE {$pref}users DROP INDEX idx_name, ADD UNIQUE
 $alter_users_r4_2_11 = "ALTER TABLE {$pref}users ADD real_name VARCHAR(80) NOT NULL DEFAULT '' AFTER name";
 $alter_users_r4_2_12 = "ALTER TABLE {$pref}users ADD sessiontime DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER email_confirm";
 $alter_users_r4_2_13 = "ALTER TABLE {$pref}users ADD sessionexpire INT(10) UNSIGNED NOT NULL AFTER sessiontime";
+#ALTER TABLE `fresh_users` CHANGE `id` `user_id` INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT
 
 $update_users_r4_2 = "UPDATE {$pref}users SET doubleclickedit = '0' WHERE doubleclickedit = '2'";
 $update_users_r4_2_1 = "UPDATE {$pref}users SET show_comments = '0' WHERE show_comments = '2'";
@@ -151,6 +155,7 @@ $alter_watches_r4_2_1 = "ALTER TABLE {$pref}pagewatches ADD user_id INT(10) UNSI
 $alter_watches_r4_2_2 = "ALTER TABLE {$pref}pagewatches ADD page_id INT(10) UNSIGNED NOT NULL AFTER tag";
 $alter_watches_r4_2_3 = "ALTER TABLE {$pref}pagewatches DROP user";
 $alter_watches_r4_2_4 = "ALTER TABLE {$pref}pagewatches DROP tag";
+#ALTER TABLE `fresh_watches` CHANGE `id` `watch_id` INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT
 
 $update_watches_r4_2 = "UPDATE {$pref}pagewatches AS pagewatches, (SELECT id, name FROM {$pref}users) AS users SET pagewatches.user_id = users.id WHERE pagewatches.user = users.name";
 $update_watches_r4_2_1 = "UPDATE {$pref}pagewatches AS pagewatches, (SELECT id, tag FROM {$pref}pages) AS pages SET pagewatches.page_id = pages.id WHERE pagewatches.tag = pages.tag";
