@@ -19,7 +19,6 @@ $lang = array(
    Language Selection Page
 */
 "UpgradeFromWacko" => "Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
-"UpgradeFromWakka" => "Welcome to WackoWiki, it appears that you are upgrading from WakkaWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
 "FreshInstall" => "Welcome to WackoWiki, you are about to install WackoWiki <tt>%1</tt>.  The next few pages will guide you through the installation process.",
 "PleaseBackup" => "Παρακαλώ, πάρτε αντίγραφο της βάσης, του αρχείου ρυθμίσεων και όλα τα τροποποιημένα αρχεία όπως αυτά που έχουν αλλαγές σε κώδικα και προσθήκες επιρραμάτων πριν την εκκίνηση της διαδικασίας ανάβάθμισης. Αυτό θα σας προτρέψει από έναν μεγάλο πονοκέφαλο.",
 "Lang" => "Ρυθμίσεις Γλώσσας",
@@ -143,7 +142,6 @@ $lang = array(
 */
 "write-config" => "Εγγραφή Αρχείου Ρυθμίσεων",
 "FinalStep" => "Final Step",
-"FinalSteps" => "Final Steps",
 "Writing" => "Εγγραφή Αρχείου Ρυθμίσεων",
 "RemovingWritePrivilege" => "Αφαίρεση Δικαιώματος Εγγραφής",
 "InstallationComplete" => "Installation Complete",
@@ -156,7 +154,7 @@ $lang = array(
 Παρακαλώ σιγουρευτείται ότι ο web server σας έχει δικαίωμα πρόσβασης εγγραφής στο αρχείο, αλλιώς θα χρειαστεί να το επεξεργαστείται με το χέρι.
 Ακόμα μία φορά, δείτε για λεπτομέρειες εδώ: <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a>.",
 "WrittenAt" => "εγγράψιμο στις ",
-"DontChange" => "μην αλλάξετε την έκδοση του wakka_version με το χέρι!",
+"DontChange" => "μην αλλάξετε την έκδοση του wacko_version με το χέρι!",
 "ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Δοκιμάστε Πάλι",
 "RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",

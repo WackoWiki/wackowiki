@@ -19,7 +19,6 @@ $lang = array(
    Language Selection Page
 */
 "UpgradeFromWacko" => "Bienvenue à bord de WackoWiki, vous semblez passer de WackoWiki <tt>%1</tt> à <tt>%2</tt>.  Les quelques pages qui suivent vous guideront dans le processus de mise à niveau.",
-"UpgradeFromWakka" => "Bienvenue à bord de WackoWiki, vous semblez passer de WakkaWiki <tt>%1</tt> to <tt>%2</tt>.  Les quelques pages qui suivent vous guideront dans le processus de mise à niveau.",
 "FreshInstall" => "Bienvenue à bord de WackoWiki, vous vous apprêtez à installer WackoWiki <tt>%1</tt>.  Les quelques pages qui suivent vous guideront dans le processus d'installation.",
 "PleaseBackup" => "Merci de sauvegarder votre base de données, le fichier de configuration et tous les fichiers modifiés, tels que ceux qui auxquels des rustines auraient été appliquées, avant de commencer le processus de mise à niveau. Cela peut vous éviter une bonne migraine.",
 "Lang" => "Configuration de la langue",
@@ -139,7 +138,6 @@ $lang = array(
 */
 "write-config" => "Écriture du fichier de configuration",
 "FinalStep" => "Dernière étape",
-"FinalSteps" => "Dernières étapes",
 "Writing" => "Écriture du fichier de configuration",
 "RemovingWritePrivilege" => "Suppression du droit d'écrire",
 "InstallationComplete" => "Installation terminée",
@@ -150,7 +148,7 @@ $lang = array(
 "ErrorGivePrivileges" => "Le fichier de configuration <tt>%1</tt> n'a pas pu être écrit par le serveur http dans votre répertoire WackoWiki.<br/>Si possible, créez un fichier vide appelé  <tt>config.inc.php</tt>, sur lequel vous attribuerez à provisoirement à tous le droit d'écrire&nbsp;:<br/><tt>touch config.inc.php</tt><br/><tt>chmod 666 config.inc.php</tt>.<br/>Nota&nbsp;: après enregistrement vous supprimerez ce droit, i.e. <tt>chmod 644 config.inc.php</tt>).<br/> Sinon, vous devrez copier le texte ci-dessous dans un fichier et le sauvegarder comme <tt>config.inc.php</tt> dans le répertoire WackoWiki.<br/>Ceci fait, votre site WackoWiki devrait fonctionner. Sinon, voyez  <a href=\"http://wackowiki.org/Doc/Francophone/InstallationEtMiseAJour\">WackoWiki:Doc/Francophone/InstallationEtMiseAJour</a>",
 "NextStep" => "Au cours de la prochaine étape, l'installeur va tenter d'écrire le fichier de configuration mis à jour, <tt>config.inc.php</tt>.  Assurez-vous que le serveur a le droit d'écrire ce fichier, sinon vous devrez l'éditer manuellement. Encore une fois, voyez <a href=\"http://wackowiki.org/Doc/Francophone/InstallationEtMiseAJour\" target=\"_blank\">WackoWiki:Doc/Francophone/InstallationEtMiseAJour</a> pour les détails.",
 "WrittenAt" => "écrit à ",
-"DontChange" => "ne modifiez pas wakka_version !",
+"DontChange" => "ne modifiez pas wacko_version !",
 "ConfigDescription" => "pour une description détaillée de la configuration voir http://wackowiki.org/Doc/Francophone/Configuration",
 "TryAgain" => "Essayez encore",
 "RemoveWakkaConfigFile" => "WackoWiki utilise un fichier de configuration plus récent que celui de votre installation précédente de  WakkaWiki  L'ancien fichier n'a pu être automatiquement supprimé par le système, aussi vous êtes il recommandé d'effacer vous-même le fichier <tt>wakka.config.php</tt>.",

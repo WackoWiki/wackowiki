@@ -19,7 +19,6 @@ $lang = array(
    Language Selection Page
 */
 "UpgradeFromWacko" => "Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
-"UpgradeFromWakka" => "Welcome to WackoWiki, it appears that you are upgrading from WakkaWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
 "FreshInstall" => "Welcome to WackoWiki, you are about to install WackoWiki <tt>%1</tt>.  The next few pages will guide you through the installation process.",
 "PleaseBackup" => "Maak een kopie van de database, het configuratiebestand en alle gewijzigde bestanden (zoals thema's) voor u de upgrade start om gegevensverlies te voorkomen.",
 "Lang" => "Taal Configuratie",
@@ -139,7 +138,6 @@ $lang = array(
 */
 "write-config" => "Write Config File",
 "FinalStep" => "Final Step",
-"FinalSteps" => "Final Steps",
 "Writing" => "Wegschrijven configuratie bestand",
 "RemovingWritePrivilege" => "Removing Write Privilege",
 "InstallationComplete" => "Installatie is voltooid",
@@ -150,7 +148,7 @@ $lang = array(
 "ErrorGivePrivileges" => "Het configuratie bestand <tt>%1</tt> Geen schrijf rechten. U dient uw webserver tijdelijk schrijfrechten te geven op uw WackoWiki directory, of een lege bestand met de naam <tt>config.inc.php</tt> (<tt>touch config.inc.php ; chmod 666 config.inc.php</tt>; vergeet niet om de schrijfrechten later te verwijderen, ie <tt>chmod 644 config.inc.php</tt>). Als, voor welke reden dan ook,for any reason, you can't do this, you'll have to copy the text below into a new file and save/upload it as <tt>config.inc.php</tt> into the WackoWiki directory. Once you've done this, your WackoWiki site should work. If not, please visit <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a>",
 "NextStep" => "In de volgende stap probeert het installatieprogramma het actuele configuratie bestand weg te schrijven, <tt>config.inc.php</tt>. Controleer of de web server schrijfrechten heeft op het bestand, anders moet u het handmatig aanpassen. Wederom, zie <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a> for details.",
 "WrittenAt" => "geschreven op ",
-"DontChange" => "Wijzig de wakka_version niet handmatig!",
+"DontChange" => "Wijzig de wacko_version niet handmatig!",
 "ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Weer proberen",
 "RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",

@@ -19,7 +19,6 @@ $lang = array(
    Language Selection Page
 */
 "UpgradeFromWacko" => "Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
-"UpgradeFromWakka" => "Welcome to WackoWiki, it appears that you are upgrading from WakkaWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
 "FreshInstall" => "Welcome to WackoWiki, you are about to install WackoWiki <tt>%1</tt>.  The next few pages will guide you through the installation process.",
 "PleaseBackup" => "Enne, kui alustad versioonitäienduse sisseviimist, tee tagavarakoopia oma andmebaasist, konfiguratsioonidefailist ja kõikidest muudetud failidest. See võib sind säästa suurest peavalust!",
 "Lang" => "Keele konfigureerimine",
@@ -139,7 +138,6 @@ $lang = array(
 */
 "write-config" => "Write Config File",
 "FinalStep" => "Final Step",
-"FinalSteps" => "Final Steps",
 "Writing" => "Kirjutan konfiguratsioonifaili",
 "RemovingWritePrivilege" => "Removing Write Privilege",
 "InstallationComplete" => "Installation Complete",
@@ -150,7 +148,7 @@ $lang = array(
 "ErrorGivePrivileges" => "Konfiguratsiooni faili <tt>%1</tt> ei ole võimalik kirjutada. Sa pead andma oma veebi serverile ajutiselt kirjutamisõiguse kas oma WackoWiki kataloogile, või siis tühjale failile nimega  <tt>config.inc.php</tt> (<tt>touch config.inc.php; chmod 666 config.inc.php;</tt> ara unusta hiljem kirjutamisõigust eemaldada, näiteks nii: <tt>chmod 644 config.inc.php</tt>). Kuid kui sa mingil põhjusel ei saa seda teha, siis pead sa allpool oleva teksti kopeerima uude faili ja siis salvestama ning uploadima selle nimega <tt>config.inc.php</tt> WackoWiki kataloogi. Kui sa oled selle ära teinud, siis peaks su WackoWiki leht töötama. Kui ei tööta, siis mine aadressile <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a>",
 "NextStep" => "Järgmisena üritatakse kirjutada täiendatud konfiguratsioonifaili, <tt>config.inc.php</tt>. Palun veendu, et veebi serveril oleks faili kirjutamise õigused, vastasel korral pead sa seda käsitsi tegema. Uuesti, vaata täpsema info saamiseks siia: <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Dokumentatsioon/Installeerimine</a>.",
 "WrittenAt" => "kirjutan ",
-"DontChange" => "ära muuda käsitsi wakka_version versiooni!",
+"DontChange" => "ära muuda käsitsi wacko_version versiooni!",
 "ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Proovi uuesti",
 "RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",

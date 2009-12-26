@@ -1,8 +1,3 @@
-<?php
-
-if ( !isset ( $config["wakka_version"] ) )
-{
-	?>
 <script type="text/javascript">
             <!--
                function check()
@@ -16,7 +11,7 @@ if ( !isset ( $config["wakka_version"] ) )
                            return false;
                         }
 
-                     if (f.elements["password"].value.length<5)
+                     if (f.elements["password"].value.length<6)
                         {
                            alert('<?php echo $lang["ErrorAdminPasswordShort"];?>');
                            return false;
@@ -48,23 +43,8 @@ if ( !isset ( $config["wakka_version"] ) )
                   }
             // -->
          </script>
-	<?php
-}
-else
-{
-	?>
-<script type="text/javascript">
-   <!--
-   function check()
-      {
-         return true;
-      }
-   // -->
-</script>
-	<?php
-}
-?>
-<form action="<?php echo myLocation() ?>?installAction=<?php !isset ( $config["wakka_version"] ) ? print "database-config" : print "database-install" ; ?>" method="post" name="form1">
+
+<form action="<?php echo myLocation() ?>?installAction=<?php print "database-config" ; ?>" method="post" name="form1">
 <?php
    writeConfigHiddenNodes(array('wacko_name' => '', 'root_page' => '', 'multilanguage' => '', 'admin_name' => '', 'password' => '', 'admin_email' => '', 'base_url' => '', 'rewrite_mode' => ''));
 ?>
@@ -81,12 +61,7 @@ else
    <div class="fake_hr_seperator">
       <hr />
    </div>
-<?php
 
-// Don't do the following if this is an upgrade install
-if ( !isset ( $config["wakka_version"] ) )
-   {
-?>
    <h2><?php echo $lang["MultiLang"];?></h2>
    <p class="notop"><?php echo $lang["MultiLangDesc"];?></p>
    <label class="indented_label" for="wiki_multilanguage"><?php echo $lang["Enabled"];?></label>
@@ -118,9 +93,7 @@ if ( !isset ( $config["wakka_version"] ) )
    <div class="fake_hr_seperator">
       <hr />
    </div>
-<?php
-   }
-?>
+
    <h2><?php echo $lang["Base"];?></h2>
    <p class="notop"><?php echo $lang["BaseDesc"];?></p>
    <input type="text" maxlength="1000" name="config[base_url]" value="<?php echo $config["base_url"] ?>" class="text_input" style="width: 907px;" />

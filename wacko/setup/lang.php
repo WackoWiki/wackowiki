@@ -4,11 +4,6 @@ if(array_key_exists("wacko_version", $config))
 	echo '<p>'.preg_replace(array("/%1/", "/%2/"), array($config["wacko_version"], WACKO_VERSION), $lang["UpgradeFromWacko"])."</p>\n";
 	echo '<p>'.$lang["PleaseBackup"]."</p>\n";
 }
-else if(array_key_exists("wakka_version", $config))
-{
-	echo '<p>'.preg_replace(array("/%1/", "/%2/"), array($config["wakka_version"], WACKO_VERSION), $lang["UpgradeFromWakka"])."</p>\n";
-	echo '<p>'.$lang["PleaseBackup"]."</p>\n";
-}
 else
 {
 	echo '<p>'.str_replace("%1", WACKO_VERSION, $lang["FreshInstall"])."</p>\n";

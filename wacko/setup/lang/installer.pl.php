@@ -19,7 +19,6 @@ $lang = array(
    Language Selection Page
 */
 "UpgradeFromWacko" => "Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
-"UpgradeFromWakka" => "Welcome to WackoWiki, it appears that you are upgrading from WakkaWiki <tt>%1</tt> to <tt>%2</tt>.  The next few pages will guide you through the upgrade process.",
 "FreshInstall" => "Welcome to WackoWiki, you are about to install WackoWiki <tt>%1</tt>.  The next few pages will guide you through the installation process.",
 "PleaseBackup" => "Please, backup your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.",
 "Lang" => "Konfiguracja J&#281;zyka",
@@ -139,7 +138,6 @@ $lang = array(
 */
 "write-config" => "Write Config File",
 "FinalStep" => "Final Step",
-"FinalSteps" => "Final Steps",
 "Writing" => "Zapisywanie pliku konfiguracyjnego",
 "RemovingWritePrivilege" => "Removing Write Privilege",
 "InstallationComplete" => "Installation Complete",
@@ -150,7 +148,7 @@ $lang = array(
 "ErrorGivePrivileges" => "Plik konfiguracyjny <tt>%1</tt> nie mo&#380;e zosta&#263; zapisany. Musisz nada&#263; swojemu serwerowi tymczasowe prawo do zapisu do katalogu WackoWiki, lub tak&#380;e dla pustego pliku <tt>config.inc.php</tt> (<tt>touch config.inc.php ; chmod 666 config.inc.php</tt>; nie zapomnij usun&#261;&#263; prawa do zapisu p&#243;&#378;niej, czyli <tt>chmod 644 config.inc.php</tt>). Je&#380;eli, z jakiego&#347; powodu nie mo&#380;esz tego zrobi&#263;, b&#281;dziesz musia&#322; skopiowa&#263; poni&#380;szy tekst do nowego pliku i zapisa&#263;/wgra&#263; go na server jako <tt>config.inc.php</tt> do katalogu WackoWiki. Gdy ju&#380; to zrobisz, Twoja strona WackoWiki powinna ju&#380; dzia&#322;a&#263;. Je&#380;eli nie, odwied&#378; prosz&#281; <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a>",
 "NextStep" => "W nast&#281;pnym kroku, instalator b&#281;dzie pr&#243;bowa&#322; zapisa&#263; zaktualizowany plik konfiguracyjny, <tt>config.inc.php</tt>.  Postaraj si&#281;, &#380;e serwer posiada prawo zapisu do pliku, w przeciwnym wypadku b&#281;dziesz musia&#322; edytowa&#263; go r&#281;cznie. Raz jeszcze, zagl&#261;dnij na  <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a> po wi&#281;cej informacji.",
 "WrittenAt" => "zapisano jako ",
-"DontChange" => "nie zmieniaj wakka_version r&#281;cznie!",
+"DontChange" => "nie zmieniaj wacko_version r&#281;cznie!",
 "ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
 "TryAgain" => "Spr&#243;buj ponownie",
 "RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",
