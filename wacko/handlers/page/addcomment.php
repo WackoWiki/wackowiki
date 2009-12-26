@@ -13,6 +13,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 		$num = "1";
 	}
 
+	$user = $this->GetUser();
 	$body = str_replace("\r", "", $_POST["body"]);
 	$body = trim($_POST["body"]);
 
@@ -23,6 +24,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 
 	if (!$body)
 	{
+		# if (!$user) $this->cache->CacheInvalidate($this->supertag);
 		$this->SetMessage($this->GetTranslation("EmptyComment"));
 	}
 	else
@@ -84,13 +86,15 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 
 			// log event
 			$this->Log(5, str_replace("%2", $this->tag." ".$this->page["title"], str_replace("%1", "Comment".$num, $this->GetTranslation("LogCommentPosted"))));
+
+			$this->SetMessage($this->GetTranslation("CommentAdded"));
 		}
 
 		// End Comment Captcha
 	}
 
 	// redirect to page
-	$this->Redirect($this->href('', '', 'show_comments=1').'#Comment'.$num);
+	$this->Redirect($this->href('', '', 'show_comments=1&p=last').'#Comment'.$num);
 }
 else
 {
