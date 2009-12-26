@@ -171,7 +171,7 @@ else if ($user = $this->GetUser())
 ?>
 <input type="hidden" name="action" value="update" />
 <div id="cssformX">
-<h3><?php echo $this->GetTranslation("UserSettings"); ?></h3>
+<h3><?php echo $this->GetTranslation("UsersProfile"); ?></h3>
 <table class="form_tbl">
 <tbody>
   <tr>
