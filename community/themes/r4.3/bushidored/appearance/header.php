@@ -213,5 +213,5 @@ if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
 ?>
 <div id="text">
 <div class="Text">
-<span class="main"><?php echo $this->config["wakka_name"] ?>:</span> <?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetConfigValue("search_title_help")?>"
+<span class="main"><?php echo $this->config["wacko_name"] ?>:</span> <?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetConfigValue("search_title_help")?>"
      href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;") ?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
