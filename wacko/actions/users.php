@@ -79,7 +79,7 @@ if ($_GET['profile'] == true)
 				}
 				else
 				{
-					$message .= "\n\n".$this->GetTranslation('MailGoodbye')."\n".$this->config['wakka_name']."\n".$this->config['base_url'];
+					$message .= "\n\n".$this->GetTranslation('MailGoodbye')."\n".$this->config['wacko_name']."\n".$this->config['base_url'];
 
 					$this->SendMail($user['email'], $subject, $message, 'no-reply@'.$prefix, '', $headers, true);
 					$this->SetMessage($notice);

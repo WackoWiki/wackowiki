@@ -25,8 +25,8 @@ function admin_configbasic(&$engine, &$module)
 	{
 		$engine->Query(
 			"UPDATE {$engine->config['table_prefix']}config SET ".
-				"`wakka_name`			= '".quote((string)$_POST['wacko_name'])."', ".
-				"`wakka_desc`			= '".quote((string)$_POST['wacko_desc'])."', ".
+				"`wacko_name`			= '".quote((string)$_POST['wacko_name'])."', ".
+				"`wacko_desc`			= '".quote((string)$_POST['wacko_desc'])."', ".
 				"`meta_description`		= '".quote((string)$_POST['meta_description'])."', ".
 				"`meta_keywords`		= '".quote((string)$_POST['meta_keywords'])."', ".
 				"`theme`				= '".quote((string)$_POST['theme'])."', ".
@@ -73,7 +73,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr>
 				<td class="label"><label for="wacko_name"><strong>Site Description:</strong><br />
 				<small>Supplement to the title of a site that appears in the pages header.</small></label></td>
-				<td><input maxlength="255" style="width:200px;" id="wakka_desc" name="wakka_desc" value="<?php echo htmlspecialchars($engine->config['wacko_desc']);?>" /></td>
+				<td><input maxlength="255" style="width:200px;" id="wacko_desc" name="wacko_desc" value="<?php echo htmlspecialchars($engine->config['wacko_desc']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
