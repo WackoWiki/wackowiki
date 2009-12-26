@@ -172,9 +172,10 @@ else
 			<input id="30d" name="session" value="30d" type="radio" checked="checked" /><label for="30d">30 days</label>
 		</small>
 	</p>
+<div class="cssform">
 	<p>
 		<input id="persistent" name="persistent" value="1" type="checkbox" tabindex="3" checked="checked" />
-		<label for="persistent"><small><?php echo $this->GetTranslation("PersistentCookie"); ?></small></label>
+		<label for="persistent"><?php echo $this->GetTranslation("PersistentCookie"); ?></label>
 	</p>
 
 
