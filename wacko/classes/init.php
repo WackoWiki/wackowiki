@@ -437,10 +437,14 @@ class Init
 	// SESSION HANDLING
 	function Session()
 	{
-		// if ($this->config["ssl"] == true) session_set_cookie_params(0, "/", "", true);
+		if ($this->config["ssl"] == true) session_set_cookie_params(0, "/", "", true);
 
 		session_name(SESSION_HANDLER_ID);
+
+		// Save session information where specified or with PHP's default
 		session_save_path(SESSION_HANDLER_PATH);
+
+		// Initialize the session
 		session_start();
 		return session_id();
 	}
