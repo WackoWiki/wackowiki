@@ -338,9 +338,14 @@ else
 		$order = "ORDER BY total_revisions DESC ";
 		$param = "sort=".$_GET['sort'];
 	}
-	else if ($_GET['sort'] == 'date')
+	else if ($_GET['sort'] == 'signup')
 	{
 		$order = "ORDER BY signuptime DESC ";
+		$param = "sort=".$_GET['sort'];
+	}
+	else if ($_GET['sort'] == 'session')
+	{
+		$order = "ORDER BY sessiontime DESC ";
 		$param = "sort=".$_GET['sort'];
 	}
 
@@ -353,7 +358,7 @@ else
 
 	// collect data
 	$users = $this->LoadAll(
-		"SELECT name, signuptime, total_pages, total_revisions, total_comments ".
+		"SELECT name, signuptime, sessiontime, total_pages, total_revisions, total_comments ".
 		"FROM {$this->config['user_table']} ".
 		( $where == true ? $where : '' ).
 		( $order == true ? $order : "ORDER BY total_pages DESC " ).
@@ -384,7 +389,8 @@ else
 			'<th><a href="?sort=pages">'.$this->GetTranslation('UsersPages').( $_GET['sort'] == 'pages' || $_GET['sort'] == false ? '*' : '' ).'</a></th>'.
 			'<th><a href="?sort=comments">'.$this->GetTranslation('UsersPosts').( $_GET['sort'] == 'comments' ? '*' : '' ).'</a></th>'.
 			'<th><a href="?sort=revisions">'.$this->GetTranslation('UsersRevisions').( $_GET['sort'] == 'revisions' ? '*' : '' ).'</a></th>'.
-			'<th><a href="?sort=date">'.$this->GetTranslation('UsersSignup').( $_GET['sort'] == 'date' ? '*' : '' ).'</a></th>'.
+			'<th><a href="?sort=signup">'.$this->GetTranslation('UsersSignup').( $_GET['sort'] == 'date' ? '*' : '' ).'</a></th>'.
+			'<th><a href="?sort=session">'.$this->GetTranslation('UsersLastSession').( $_GET['sort'] == 'date' ? '*' : '' ).'</a></th>'.
 		"</tr>\n";
 
 	// list entries
@@ -402,6 +408,7 @@ else
 					'<td align="center">'.$user['total_comments'].'</td>'.
 					'<td align="center">'.$user['total_revisions'].'</td>'.
 					'<td align="center">'.$this->GetTimeStringFormatted($user['signuptime']).'</td>'.
+					'<td align="center">'.$this->GetTimeStringFormatted($user['sessiontime']).'</td>'.
 			"</tr>\n";
 		}
 	}
