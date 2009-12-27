@@ -8,6 +8,7 @@ class Wacko
 	var $dblink;
 	var $page;
 	var $tag;
+	var $iswatched;
 	var $queryTime;
 	var $queryLog = array();
 	var $interWiki = array();
@@ -434,7 +435,7 @@ class Wacko
 	{
 		$langlist = $this->AvailableLanguages();
 		//!!!! wrong code, maybe!
-		if ($this->GetMethod() == "edit" && (isset($_GET["add"]) && $_GET["add"] == 1 ))
+		if ($this->GetMethod() == "edit" && (isset($_GET["add"]) && $_GET["add"] == 1))
 			if (isset($_REQUEST["lang"]) && $_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
 				$lang = $_REQUEST["lang"];
 			else
@@ -1596,7 +1597,7 @@ class Wacko
 	}
 
 	// COOKIES
-	function SetSessionCookie($name, $value, $dummy = NULL, $secure = 0)
+	function SetSessionCookie($name, $value, $dummy = NULL, $secure = 0, $httponly = 0)
 	{
 		// The HttpOnly cookie flag is only supported in PHP >= 5.2.0
 		$httponly = 1;
@@ -1604,7 +1605,7 @@ class Wacko
 		$_COOKIE[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name] = $value;
 	}
 
-	function SetPersistentCookie($name, $value, $days = 0, $secure = 0)
+	function SetPersistentCookie($name, $value, $days = 0, $secure = 0, $httponly = 0)
 	{
 		// set to default if no pediod given
 		if ($days == 0) $days = $this->config["cookie_session"];
@@ -1730,13 +1731,11 @@ class Wacko
 	// returns the full url to a page/method.
 	function Href($method = "", $tag = "", $params = "", $addpage = 0)
 	{
-		$href = $this->config["base_url"].$this->MiniHref($method, $tag, $addpage);
+		$href = $this->config["base_url"].( $this->config["rewrite_mode"] ? "" : "?page=" ).$this->MiniHref($method, $tag, $addpage);
 
 		if ($addpage) $params = "add=1".($params ? "&amp;".$params : "");
-		if ($params)
-		{
-			$href .= ($this->config["rewrite_mode"] ? "?" : "&amp;").$params;
-		}
+		if ($params) $href .= ($this->config["rewrite_mode"] ? "?" : "&amp;").$params;
+
 		return $href;
 	}
 
@@ -2421,6 +2420,16 @@ class Wacko
 		{
 			// xhtmlisation
 			$url = str_replace("&", "&amp;", $url);
+
+			// ssl'ing internal links
+			if ($this->config["ssl"] == true)
+			{
+				if (strpos($url, $this->config["open_url"]) !== false)
+				{
+					$url = str_replace($this->config["open_url"], $this->config["base_url"], $url);
+				}
+			}
+
 			// translit
 			if (strpos($url, $this->config['base_url']) !== false)
 			{
@@ -2441,14 +2450,16 @@ class Wacko
 	}
 
 	// FORMS
-	function FormOpen($method = "", $tag = "", $formMethod = "post", $formname="", $formMore="")
+	function FormOpen($method = "", $tag = "", $formMethod = "post", $formname = "", $formMore = "", $hrefParam = "")
 	{
 		if (!$formMethod) $formMethod = "post";
 
 		$add = isset($_REQUEST["add"]) ? $_REQUEST["add"] : '';
-		$result = "<form action=\"".$this->href($method, $tag, "", $add)."\" ".$formMore." method=\"".$formMethod."\" ".($formname ? "name=\"".$formname."\" " : "").">\n";
+		$result = "<form action=\"".$this->href($method, $tag, $hrefParam, $add)."\" ".$formMore." method=\"".$formMethod."\" ".($formname ? "name=\"".$formname."\" " : "").">\n";
 
 		if (!$this->config["rewrite_mode"]) $result .= "<input type=\"hidden\" name=\"page\" value=\"".$this->MiniHref($method, $tag, $add)."\" />\n";
+
+		if ($this->config["ssl"] == true) $result = str_replace("http://", "https://", $result);
 
 		return $result;
 	}
@@ -3710,10 +3721,6 @@ class Wacko
 
 		unset($auth);
 
-
-		#if ((!$this->GetUser() && isset( $_COOKIE[$this->config["cookie_prefix"]."name"] )) && ($user = $this->LoadUser($_COOKIE[$this->config["cookie_prefix"]."name"], $_COOKIE[$this->config["cookie_prefix"]."password"]))) $this->SetUser($user);
-		#$user = $this->GetUser();
-
 		// user preferences
 		if(isset($user["lang"]))
 		{
@@ -3757,7 +3764,7 @@ class Wacko
 
 		if (!$this->method = trim($method)) $this->method = "show";
 
-		if (!$this->tag = trim($tag)) $this->Redirect($this->href("", $this->config["root_page"]));
+		# if (!$this->tag = trim($tag)) $this->Redirect($this->href("", $this->config["root_page"]));
 
 		// normalizing tag name
 		if (!preg_match("/^[".$this->language["ALPHANUM_P"]."\!]+$/", $tag))
@@ -3784,24 +3791,27 @@ class Wacko
 
 		if (!$this->GetUser() && $this->page["time"])
 		{
-			header("Last-Modified: ".gmdate("D, d M Y H:i:s", strtotime($this->page["time"])+120)." GMT");;
+			header("Last-Modified: ".gmdate("D, d M Y H:i:s", strtotime($this->page["time"]) + 120)." GMT");
 		}
+
+		// check page watching
+		#if ($user && $this->page) if ($this->IsWatched($user['name'], $this->tag))
+		#{
+		#	$this->iswatched = true;
+		#}
 
 		// display page contents
 		if (preg_match("/(\.xml)$/", $this->method))
 		{
 			print($this->Method($this->method));
 		}
-		else if (preg_match("/print$/", $this->method))
-		{
-			print($this->Header("print").$this->Method($this->method).$this->Footer("print"));
-		}
-		else if (preg_match("/msword$/", $this->method))
-		{
-			print($this->Header("msword").$this->Method($this->method).$this->Footer("print"));
-		}
 		else
 		{
+			if (preg_match("/print$/", $this->method)) $mod = "print";
+
+			else if (preg_match("/msword$/", $this->method)) $mod = "msword";
+
+			else $mod = '';
 			if (!isset($data)) $data = "";
 
 			$this->CacheLinks();
@@ -3809,7 +3819,7 @@ class Wacko
 			$this->context[$this->current_context] = $this->tag;
 			$data .= $this->Method($this->method);
 			$this->current_context--;
-			print($this->Header().$data.$this->Footer());
+			print($this->Header($mod).$data.$this->Footer($mod));
 		}
 		return $this->tag;
 	}
@@ -4380,7 +4390,7 @@ class Wacko
 			// pages range links
 			if ($pages <= 10)	// not so many pages
 			{
-				for ($p = 1; $p<=$pages; $p++)
+				for ($p = 1; $p <= $pages; $p++)
 				{
 					if ($p != $page)
 						$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>'.( $p != $pages ? $sep : '' );
@@ -4405,7 +4415,7 @@ class Wacko
 					$pagination['text'] .= ' ... ,';
 
 					// last pages
-					for ($p =($pages - 4); $p <= $pages; $p++)
+					for ($p = ($pages - 4); $p <= $pages; $p++)
 					{
 						if ($p != $page)
 							$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>'.( $p != $pages ? $sep : '' );
@@ -4419,7 +4429,7 @@ class Wacko
 					$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'=1'.( $params == true ? '&amp;'.$params : '' )).'">1</a>'.$sep.' ... '.$sep;
 
 					// middle pages
-					for ($p=($page-2); $p<=($page+2); $p++)
+					for ($p = ($page - 2); $p <= ($page + 2); $p++)
 					{
 						if ($p != $page)
 							$pagination['text'] .= ' <a href="'.$this->href($method, $tag, $name.'='.$p).( $params == true ? '&amp;'.$params : '' ).'">'.$p.'</a>,';
