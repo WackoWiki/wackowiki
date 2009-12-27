@@ -118,7 +118,7 @@ if ($_POST['password'])
 }
 
 // check authorization
-if ($_COOKIE[$engine->config['cookie_prefix'].'admin']  == $pwd)
+if ($_COOKIE[$engine->config["session_prefix"].'_'.$engine->config['cookie_prefix'].'admin']  == $pwd)
 {
 	$user = array('name' => $engine->config['admin_name']);
 }
