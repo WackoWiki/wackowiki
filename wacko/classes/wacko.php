@@ -651,19 +651,17 @@ class Wacko
 	// wrapper for OldLoadPage
 	function LoadPage($tag, $time = "", $cache = LOAD_CACHE, $metadataonly = LOAD_ALL)
 	{
-		$supertag = $this->NpjTranslit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD);
-
-		if ($this->GetCachedWantedPage($supertag) == 1) return "";
+		if ($this->GetCachedWantedPage($tag) == 1) return "";
 
 		// 1. search for supertag
-		$page = $this->OldLoadPage($supertag, $time, $cache, true, $metadataonly);
+		$page = $this->OldLoadPage($this->NpjTranslit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), $time, $cache, true, $metadataonly);
 
 		// 2. if not found, search for tag
 		if (!$page)
 			$page = $this->OldLoadPage($tag, $time, $cache, false, $metadataonly);
 
 		// 3. still nothing? file under wanted
-		if (!$page) $this->CacheWantedPage($supertag);
+		if (!$page) $this->CacheWantedPage($tag);
 
 		return $page;
 	}
@@ -824,11 +822,13 @@ class Wacko
 		$spages_str = '';
 		$pages_str = '';
 
-		for ($i = 0; $i < count($pages); $i++)
+		foreach ($pages as $page)
 		{
-			$spages[$i] = $this->NpjTranslit($pages[$i], TRAN_LOWERCASE, TRAN_DONTLOAD);
-			$spages_str .= "'".quote($this->dblink, $spages[$i])."', ";
-			$pages_str .= "'".quote($this->dblink, $pages[$i])."', ";
+			if ($page != '')
+			{
+				$spages_str	.= "'".quote($this->dblink, $this->NpjTranslit($page, TRAN_LOWERCASE, TRAN_DONTLOAD))."', ";
+				$pages_str	.= "'".quote($this->dblink, $page)."', ";
+			}
 		}
 
 		$spages_str = substr($spages_str, 0, strlen($spages_str) - 2);
@@ -855,7 +855,6 @@ class Wacko
 			$this->CacheACL($notexists[$i], "read", 1, $acl);
 		}
 
-		// unset($exists);
 		if ($read_acls = $this->LoadAll(
 		"SELECT * FROM ".$this->config["table_prefix"]."acls ".
 		"WHERE BINARY page_tag IN (".$pages_str.") AND privilege = 'read'", 1))
@@ -1100,6 +1099,7 @@ class Wacko
 	// $subject, $message 	- self-explaining
 	// $from				- place specific address into the 'From:' field
 	// $charset				- send message in specific charset (w/o actual re-encoding)
+	// $supress_ssl			- don't change all http links to https links in the message body
 	function SendMail($email, $subject, $message, $charset = "")
 	{
 		if (!$email) return;
@@ -1112,7 +1112,9 @@ class Wacko
 		$headers .= "Content-Type: text/plain; charset=".$this->GetCharset()."\r\n";
 		#$subject =  "=?".$this->GetCharset()."?B?" . base64_encode($subject) . "?=";
 		$subject = ( $subject ? "=?".( $charset ? $charset : $this->GetCharset() )."?B?" . base64_encode($subject) . "?=" : "" );
-		#@mail($email, $subject, "<html><head></head><body>".$message."</body></html>", $headers);
+
+		// in ssl mode substitute protocol name in links substrings
+		if ($this->config["ssl"] == true && $supress_ssl === false) $message = str_replace("http://", "https://", $message);
 
 		$message = wordwrap($message, 74, "\n", 0);
 		@mail($email, $subject, $message, $headers);
@@ -1125,13 +1127,13 @@ class Wacko
 	// $minor_edit	- minor edit
 	// $comment_on_id	- commented page id
 	// $title		- page name (metadata)
+	// $mute		- supress email reminders and xml rss recompilation
 	// $user		- attach guest pseudonym
 	function SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on_id = "0", $title = "", $mute = false, $user = false)
 	{
 		// user data
 		$ip = $this->GetUserIP();
 
-		// get current user
 		if ($user === "")
 		{
 			$user = GUEST;
@@ -1185,9 +1187,7 @@ class Wacko
 		{
 			if ($comment_on_id)
 			{
-				$comment_on_tag = $this->GetCommentOnTag($comment_on_id);
-
-				$this->cache->CacheInvalidate($comment_on_tag);
+				$this->cache->CacheInvalidate($this->GetCommentOnTag($comment_on_tag));
 			}
 			else
 			{
@@ -1233,7 +1233,7 @@ class Wacko
 					$body_toc = $this->body_toc;
 				}
 
-				// Manage ACLs
+				// create appropriate acls
 				if (strstr($this->context[$this->current_context], "/") && !$comment_on_id)
 				{
 					$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $this->context[$this->current_context] );
@@ -1309,7 +1309,7 @@ class Wacko
 					$this->Query(
 						"UPDATE {$this->config['user_table']} ".
 						"SET total_comments = total_comments + 1 ".
-						"WHERE name = '".quote($this->dblink, $owner)."' ".
+						"WHERE user_id = '".quote($this->dblink, $owner_id)."' ".
 						"LIMIT 1");
 				}
 				else
@@ -1318,7 +1318,7 @@ class Wacko
 					$this->Query(
 						"UPDATE {$this->config['user_table']} ".
 						"SET total_pages = total_pages + 1 ".
-						"WHERE name = '".quote($this->dblink, $owner)."' ".
+						"WHERE user_id = '".quote($this->dblink, $owner_id)."' ".
 						"LIMIT 1");
 				}
 
@@ -1363,21 +1363,21 @@ class Wacko
 						}
 						else continue;	// skip current watcher
 
-						$_user = $this->GetUser();
+						#$_user = $this->GetUser();
 						$Watcher["user"] = $this->GetUserNameById($Watcher["user_id"]);
-						$this->SetUser($Watcher, 0);
+						#$this->SetUser($Watcher, 0);
 
 						if ($this->HasAccess("read", $comment_on_id, $Watcher["user"]))
 						{
-							$User = $this->LoadSingle(
+							$_user = $this->LoadSingle(
 								"SELECT email, lang, more, email_confirm ".
 								"FROM " .$this->config["user_table"]." ".
 								"WHERE user_id = '".quote($this->dblink, $Watcher["user_id"])."'");
-							$User["options"] = $this->DecomposeOptions($User["more"]);
+							$_user["options"] = $this->DecomposeOptions($_user["more"]);
 
-							if ($User["email_confirm"] == "" && $User["options"]["send_watchmail"] != "0")
+							if ($_user["email_confirm"] == "" && $_user["options"]["send_watchmail"] != "0")
 							{
-								$lang = $User["lang"];
+								$lang = $_user["lang"];
 								$this->LoadResource($lang);
 								$this->SetResource ($lang);
 								$this->SetLanguage ($lang);
@@ -1394,7 +1394,7 @@ class Wacko
 											$this->config["wacko_name"]."\n".
 											$this->config["base_url"];
 
-								$this->SendMail($User["email"], $subject, $message);
+								$this->SendMail($_user["email"], $subject, $message);
 							}
 						}
 						else
@@ -1431,21 +1431,22 @@ class Wacko
 						$this->SaveRevision($oldPage);
 					}
 
-					// add new revision
+					// update current page copy
 					$this->Query(
 						"UPDATE ".$this->config["table_prefix"]."pages SET ".
-							"comment_on_id = '".quote($this->dblink, $comment_on_id)."', ".
-							"time = NOW(), ".
-							"created = '".quote($this->dblink, $oldPage['created'])."', ".
-							"owner_id = '".quote($this->dblink, $owner_id)."', ".
-							"user_id = '".quote($this->dblink, $user_id)."', ".
-							"supertag = '".$this->NpjTranslit($tag)."', ".
-							"body = '".quote($this->dblink, $body)."', ".
-							"body_r = '".quote($this->dblink, $body_r)."', ".
-							"body_toc = '".quote($this->dblink, $body_toc)."', ".
-							"edit_note = '".quote($this->dblink, $edit_note)."', ".
-							"minor_edit = '".quote($this->dblink, $minor_edit)."', ".
-							"title = '".quote($this->dblink, htmlspecialchars($title))."' ".
+							"comment_on_id	= '".quote($this->dblink, $comment_on_id)."', ".
+							"time			= NOW(), ".
+							"created		= '".quote($this->dblink, $oldPage['created'])."', ".
+							"owner_id		= '".quote($this->dblink, $owner_id)."', ".
+							"user_id		= '".quote($this->dblink, $user_id)."', ".
+							#"description	= '".quote($this->dblink, ($oldPage['comment_on_id'] || $oldPage['description'] ? $oldPage['description'] : $desc ))."', ".
+							"supertag		= '".$this->NpjTranslit($tag)."', ".
+							"body			= '".quote($this->dblink, $body)."', ".
+							"body_r			= '".quote($this->dblink, $body_r)."', ".
+							"body_toc		= '".quote($this->dblink, $body_toc)."', ".
+							"edit_note		= '".quote($this->dblink, $edit_note)."', ".
+							"minor_edit		= '".quote($this->dblink, $minor_edit)."', ".
+							"title			= '".quote($this->dblink, htmlspecialchars($title))."' ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
 						"LIMIT 1");
 				}
@@ -1467,9 +1468,8 @@ class Wacko
 					// notifying watchers
 					$page_id = $this->GetPageId($tag);
 					$title = $this->GetPageTitle(0, $page_id);
-					$user_id = $this->GetUserId();
-
-					$username = $this->GetUserName();
+					#$user_id = $this->GetUserId();
+					$username = $user;
 
 					$Watchers = $this->LoadAll(
 						"SELECT DISTINCT user_id ".
@@ -1481,23 +1481,23 @@ class Wacko
 						foreach ($Watchers as $Watcher)
 						if ($Watcher["user_id"] !=  $user_id)
 						{
-							$_user = $this->GetUser();
+							#$_user = $this->GetUser();
 							$Watcher["user"] = $this->GetUserNameById($Watcher["user_id"]);
-							$this->SetUser($Watcher, 0);
+							#$this->SetUser($Watcher, 0);
 							$lang = $Watcher["lang"];
 
 							if ($this->HasAccess("read", $page_id, $Watcher["user"]))
 							{
-								$User = $this->LoadSingle(
+								$_user = $this->LoadSingle(
 									"SELECT email, lang, more, email_confirm ".
 									"FROM " .$this->config["user_table"]." ".
 									"WHERE user_id = '".quote($this->dblink, $Watcher["user_id"])."'");
 
-								$User["options"] = $this->DecomposeOptions($User["more"]);
+								$_user["options"] = $this->DecomposeOptions($_user["more"]);
 
-								if ($User["email_confirm"] == "" && $User["options"]["send_watchmail"] != "0")
+								if ($_user["email_confirm"] == "" && $_user["options"]["send_watchmail"] != "0")
 								{
-									$lang = $User["lang"];
+									$lang = $_user["lang"];
 									$this->LoadResource($lang);
 									$this->SetResource ($lang);
 									$this->SetLanguage ($lang);
@@ -1506,6 +1506,7 @@ class Wacko
 									$message = $this->GetTranslation("EmailHello", $lang). $Watcher["user"]."\n\n".
 										$username.
 										$this->GetTranslation("SomeoneChangedThisPage", $lang)."\n".
+										$title."\n".
 										$this->Href('', $tag)."\n\n".
 										"======================================================================".
 										$this->Format($diff, "html2mail").
@@ -1514,7 +1515,7 @@ class Wacko
 										$this->config["wacko_name"]."\n".
 										$this->config["base_url"];
 
-									$this->SendMail($User["email"], $subject, $message);
+									$this->SendMail($_user["email"], $subject, $message);
 								}
 							} // end of hasaccess
 						} // end of watchers
@@ -1681,30 +1682,30 @@ class Wacko
 		if (strstr($this->context[$this->current_context], "/"))
 			$root = preg_replace("/^(.*)\\/([^\\/]+)$/", "$1", $this->context[$this->current_context]);
 		else
-			$root = "";
+			$root	= "";
 
 		if (preg_match("/^\.\/(.*)$/", $tag, $matches))
 		{
-			$root = "";
+			$root	= "";
 		}
 		else if (preg_match("/^\/(.*)$/", $tag, $matches))
 		{
-			$root = "";
-			$newtag = $matches[1];
+			$root	= "";
+			$newtag	= $matches[1];
 		}
 		else if (preg_match("/^\!\/(.*)$/", $tag, $matches))
 		{
-			$root = $this->context[$this->current_context];
-			$newtag = $matches[1];
+			$root	= $this->context[$this->current_context];
+			$newtag	= $matches[1];
 		}
 		else if (preg_match("/^\.\.\/(.*)$/", $tag, $matches))
 		{
 			$newtag = $matches[1];
 
 			if (strstr($root, "/"))
-				$root = preg_replace("/^(.*)\\/([^\\/]+)$/", "$1", $root);
+				$root	= preg_replace("/^(.*)\\/([^\\/]+)$/", "$1", $root);
 			else
-				$root = "";
+				$root	= "";
 		}
 
 		if ($root != "") $newtag= "/".$newtag;
@@ -1718,9 +1719,9 @@ class Wacko
 	// returns just PageName[/method].
 	function MiniHref($method = "", $tag = "", $addpage = "")
 	{
-		if (!$tag = trim($tag)) $tag = $this->tag;
+		if (!$tag = trim($tag))	$tag = $this->tag;
 		if (!$addpage)			$tag = $this->SlimUrl($tag);
-		// if (!$addpage) $tag = $this->NpjTranslit($tag);
+		// if (!$addpage)		$tag = $this->NpjTranslit($tag);
 
 		$tag = trim($tag, "/.");
 		// $tag = str_replace(array("%2F", "%3F", "%3D"), array("/", "?", "="), rawurlencode($tag));
@@ -1741,7 +1742,7 @@ class Wacko
 
 	function SlimUrl($text)
 	{
-		$text = $this->NpjTranslit($text, TRAN_DONTCHANGE);
+		#$text = $this->NpjTranslit($text, TRAN_DONTCHANGE);
 		$text = str_replace("_", "'", $text);
 		if ($this->config["urls_underscores"] == 1)
 		{
@@ -1784,12 +1785,12 @@ class Wacko
 
 	function Link($tag, $method = "", $text = "", $track = 1, $safe = 0, $linklang = "", $anchorlink = 1)
 	{
-		$class = '';
-		$title = '';
-		$lang = '';
-		$url = '';
-		$imlink = false;
-		$text = str_replace('"', "&quot;", $text);
+		$class	= '';
+		$title	= '';
+		$lang	= '';
+		$url	= '';
+		$imlink	= false;
+		$text	= str_replace('"', "&quot;", $text);
 
 		if (!$safe)
 			$text = htmlspecialchars($text, ENT_NOQUOTES);
@@ -1809,27 +1810,27 @@ class Wacko
 		if (preg_match("/^(mailto[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/", $tag, $matches))
 		{
 			// this is a valid Email
-			$url = ($matches[1] == "mailto:" ? $tag : "mailto:".$tag);
-			$title = $this->GetTranslation("EmailLink");
-			$icon = $this->GetTranslation("emailicon");
-			$tpl = "email";
+			$url	= ($matches[1] == "mailto:" ? $tag : "mailto:".$tag);
+			$title	= $this->GetTranslation("EmailLink");
+			$icon	= $this->GetTranslation("emailicon");
+			$tpl	= "email";
 		}
 		else if (preg_match("/^#/", $tag))
 		{
 			// html-anchor
-			$url = $tag;
-			$tpl = "anchor";
+			$url	= $tag;
+			$tpl	= "anchor";
 		}
 		else if (preg_match("/^[\.\-".$this->language["ALPHANUM_P"]."]+\.(gif|jpg|jpe|jpeg|png)$/i", $tag))
 		{
 			// image
-			$text = preg_replace("/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/", "" ,$text);
+			$text	= preg_replace("/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/", "" ,$text);
 			return "<img src=\"".$this->config["root_url"]."/images/".$tag."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." />";
 		}
 		else if (preg_match("/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i", $tag))
 		{
 			// external image
-			$text = preg_replace("/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/", "" ,$text);
+			$text	= preg_replace("/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/", "" ,$text);
 			if ($text == $tag)
 			{
 				return "<img src=\"".str_replace("&", "&amp;", str_replace("&amp;", "&", $tag))."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." />";
@@ -1845,42 +1846,42 @@ class Wacko
 		else if (preg_match("/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rpm|gz|tgz|zip|rar|exe|doc|xls|ppt|tgz|bz2|7z)$/", $tag))
 		{
 			// this is a file link
-			$url = str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
-			$title= $this->GetTranslation("FileLink");
-			$icon = $this->GetTranslation("fileicon");
-			$tpl = "file";
+			$url	= str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
+			$title	= $this->GetTranslation("FileLink");
+			$icon	= $this->GetTranslation("fileicon");
+			$tpl	= "file";
 		}
 		else if (preg_match("/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/", $tag)) {
 			// this is a PDF link
-			$url = str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
-			$title= $this->GetTranslation("PDFLink");
-			$icon = $this->GetTranslation("pdficon");
-			$tpl = "file";
+			$url	= str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
+			$title	= $this->GetTranslation("PDFLink");
+			$icon	= $this->GetTranslation("pdficon");
+			$tpl	= "file";
 		}
 		else if (preg_match("/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rdf)$/", $tag)) {
 			// this is a RDF link
-			$url = str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
-			$title= $this->GetTranslation("RDFLink");
-			$icon = $this->GetTranslation("rdficon");
-			$tpl = "file";
+			$url	= str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
+			$title	= $this->GetTranslation("RDFLink");
+			$icon	= $this->GetTranslation("rdficon");
+			$tpl	= "file";
 		}
 		else if (preg_match("/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/", $tag))
 		{
 			// this is a valid external URL
-			$url = str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
-			$tpl = "outerlink";
+			$url	= str_replace("&", "&amp;", str_replace("&amp;", "&", $tag));
+			$tpl	= "outerlink";
 			if (!stristr($tag,$this->config["base_url"]))
 			{
-				$title= $this->GetTranslation("OuterLink2");
-				$icon = $this->GetTranslation("outericon");
+				$title	= $this->GetTranslation("OuterLink2");
+				$icon	= $this->GetTranslation("outericon");
 			}
 		}
 		else if (preg_match("/^(_?)file:([^\\s\"<>\(\)]+)$/", $tag, $matches))
 		{
 			// this is a file:
-			$noimg = $matches[1];
-			$thing = $matches[2];
-			$arr = explode("/", $thing);
+			$noimg	= $matches[1];
+			$thing	= $matches[2];
+			$arr	= explode("/", $thing);
 
 			if (count($arr) == 1) // file:some.zip
 			{
@@ -1889,11 +1890,11 @@ class Wacko
 
 				if (is_array($desc))
 				{
-					$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
-					$url = $this->config["root_url"].$this->config["upload_path"]."/".$thing;
-					$icon = $this->GetTranslation("fileicon");
-					$imlink = false;
-					$tpl = "localfile";
+					$title	= $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
+					$url	= $this->config["root_url"].$this->config["upload_path"]."/".$thing;
+					$icon	= $this->GetTranslation("fileicon");
+					$imlink	= false;
+					$tpl	= "localfile";
 					if ($desc["picture_w"] && !$noimg)
 					{
 						if (!$text) $text = $title;
@@ -1908,11 +1909,11 @@ class Wacko
 				$desc = $this->CheckFileExists($arr[1]);
 				if (is_array($desc))
 				{
-					$title = $desc["description"]." (".ceil($desc["filesize"] / 1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
-					$url = $this->config["root_url"].$this->config["upload_path"].$thing;
-					$icon = $this->GetTranslation("fileicon");
-					$imlink = false;
-					$tpl = "localfile";
+					$title	= $desc["description"]." (".ceil($desc["filesize"] / 1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
+					$url	= $this->config["root_url"].$this->config["upload_path"].$thing;
+					$icon	= $this->GetTranslation("fileicon");
+					$imlink	= false;
+					$tpl	= "localfile";
 					if ($desc["picture_w"] && !$noimg)
 					{
 						if (!$text) $text = $title;
@@ -1921,26 +1922,26 @@ class Wacko
 				}
 				else //404
 				{
-					$tpl = "wlocalfile";
-					$title = "404: /".$this->config["upload_path"].$thing;
-					$url = "404";
+					$tpl	= "wlocalfile";
+					$title	= "404: /".$this->config["upload_path"].$thing;
+					$url	= "404";
 				}
 			}
 
 			if (!$url)
 			{
-				$file = $arr[count($arr) - 1];
+				$file		= $arr[count($arr) - 1];
 				unset($arr[count($arr) - 1]);
-				$_pagetag = implode("/", $arr);
+				$_pagetag	= implode("/", $arr);
 
 				if ($_pagetag == "") $_pagetag = "!/";
 
 				//unwrap tag (check !/, ../ cases)
-				$pagetag = rtrim($this->NpjTranslit($this->UnwrapLink($_pagetag)), "./");
-				$page_id = $this->GetPageId($pagetag);
+				$pagetag	= rtrim($this->NpjTranslit($this->UnwrapLink($_pagetag)), "./");
+				$page_id	= $this->GetPageId($pagetag);
 
 				//try to find in local $tag storage
-				$desc = $this->CheckFileExists($file, $pagetag);
+				$desc		= $this->CheckFileExists($file, $pagetag);
 
 				if (is_array($desc))
 				{
@@ -1948,11 +1949,11 @@ class Wacko
 					if ($this->IsAdmin() || ($desc["upload_id"] && ($this->GetPageOwnerId($this->GetPageId()) == $this->GetUserId())) ||
 					($this->HasAccess("read", $page_id)) || ($desc["user_id"] == $this->GetUserId()))
 					{
-						$title = $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
-						$url = $this->config["base_url"].trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file;
-						$imlink = false;
-						$icon = $this->GetTranslation("fileicon");
-						$tpl = "localfile";
+						$title	= $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
+						$url	= $this->config["base_url"].trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file;
+						$imlink	= false;
+						$icon	= $this->GetTranslation("fileicon");
+						$tpl	= "localfile";
 						if ($desc["picture_w"] && !$noimg)
 						{
 							if (!$text)
@@ -1968,18 +1969,18 @@ class Wacko
 					}
 					else //403
 					{
-						$url = $this->config["base_url"].trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file;
-						$icon = $this->GetTranslation("lockicon");
-						$imlink = false;
-						$tpl = "localfile";
-						$class = "denied";
+						$url	= $this->config["base_url"].trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file;
+						$icon	= $this->GetTranslation("lockicon");
+						$imlink	= false;
+						$tpl	= "localfile";
+						$class	= "denied";
 					}
 				}
 				else //404
 				{
-					$title = "404: /".trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file;
-					$url = "404";
-					$tpl = "wlocalfile";
+					$title	= "404: /".trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file;
+					$url	= "404";
+					$tpl	= "wlocalfile";
 				}
 			}
 			//forgot 'bout 403
@@ -1987,51 +1988,51 @@ class Wacko
 		else if ($this->config["disable_tikilinks"] != 1 && preg_match("/^(".$this->language["UPPER"].$this->language["LOWER"].$this->language["ALPHANUM"]."*)\.(".$this->language["ALPHA"].$this->language["ALPHANUM"]."+)$/s", $tag, $matches))
 		{
 			// it`s a Tiki link!
-			$tag = "/".$matches[1]."/".$matches[2];
+			$tag	= "/".$matches[1]."/".$matches[2];
 			if (!$text) $text = $this->AddSpaces($tag);
 			return $this->Link( $tag, $method, $text, $track, 1);
 		}
 		else if (preg_match("/^([[:alnum:]]+)[:]([".$this->language["ALPHANUM_P"]."\-\_\.\+\&\=\#]*)$/", $tag, $matches))
 		{
 			// interwiki
-			$parts = explode("/",$matches[2]);
+			$parts	= explode("/",$matches[2]);
 
 			for ($i = 0; $i < count($parts); $i++)
 				$parts[$i] = str_replace("%23", "#", urlencode($parts[$i]));
 
 			if ($linklang)
-				$text = $this->DoUnicodeEntities($text, $linklang);
+				$text	= $this->DoUnicodeEntities($text, $linklang);
 
-			$url = $this->GetInterWikiUrl($matches[1], implode("/",$parts));
-			$icon = $this->GetTranslation("iwicon");
-			$tpl = "interwiki";
+			$url	= $this->GetInterWikiUrl($matches[1], implode("/",$parts));
+			$icon	= $this->GetTranslation("iwicon");
+			$tpl	= "interwiki";
 		}
 		else if (preg_match("/^([\!\.\-".$this->language["ALPHANUM_P"]."]+)(\#[".$this->language["ALPHANUM_P"]."\_\-]+)?$/", $tag, $matches))
 		{
 			// it's a Wiki link!
-			$tag = $otag = $matches[1];
-			$untag = $unwtag = $this->UnwrapLink($tag);
+			$tag	= $otag		= $matches[1];
+			$untag	= $unwtag	= $this->UnwrapLink($tag);
 
-			$regex_handlers = '/^(.*?)\/('.$this->config["standard_handlers"].')\/(.*)$/i';
-			$ptag = $this->NpjTranslit($unwtag);
-			$handler = NULL;
+			$regex_handlers	= '/^(.*?)\/('.$this->config["standard_handlers"].')\/(.*)$/i';
+			$ptag			= $this->NpjTranslit($unwtag);
+			$handler		= NULL;
 
 			if (preg_match( $regex_handlers, "/".$ptag."/", $match ))
 			{
-				$handler = $match[2];
+				$handler	= $match[2];
 				if (!isset($_ptag)) $_ptag = "";
 
-				$ptag = $match[1];
-				$unwtag = "/".$unwtag."/";
-				$co = substr_count($_ptag, "/") - substr_count($ptag, "/");
+				$ptag		= $match[1];
+				$unwtag		= "/".$unwtag."/";
+				$co			= substr_count($_ptag, "/") - substr_count($ptag, "/");
 
 				for ($i = 0; $i < $co; $i++)
-					$unwtag = substr($unwtag, 0, strrpos($unwtag, "/"));
+					$unwtag	= substr($unwtag, 0, strrpos($unwtag, "/"));
 
 				if ($handler)
 				{
 					if (!isset($data)) $data = "";
-					$opar = "/".$untag."/";
+					$opar	= "/".$untag."/";
 
 					for ($i = 0; $i < substr_count($data, "/") + 2; $i++)
 						$opar = substr($opar, strpos($opar, "/") + 1);
@@ -2040,81 +2041,81 @@ class Wacko
 				}
 			}
 
-			$unwtag = trim($unwtag, "/.");
-			$unwtag = str_replace("_", "", $unwtag);
+			$unwtag			= trim($unwtag, "/.");
+			$unwtag			= str_replace("_", "", $unwtag);
 
 			if ($handler)
-				$method = $handler;
+				$method		= $handler;
 
-			$thispage = $this->LoadPage($unwtag, "", LOAD_CACHE, LOAD_META);
+			$thispage		= $this->LoadPage($unwtag, "", LOAD_CACHE, LOAD_META);
 
 			if (!$thispage && $linklang)
 			{
 				$this->SetLanguage($linklang);
-				$lang = $linklang;
-				$thispage = $this->LoadPage($unwtag, "", LOAD_CACHE, LOAD_META);
+				$lang		= $linklang;
+				$thispage	= $this->LoadPage($unwtag, "", LOAD_CACHE, LOAD_META);
 			}
 
 			if ($thispage)
 			{
-				$_lang = $this->language["code"];
+				$_lang		= $this->language["code"];
 
 				if ($thispage["lang"])
-					$lang = $thispage["lang"];
+					$lang	= $thispage["lang"];
 				else
-					$lang = $this->config["language"];
+					$lang	= $this->config["language"];
 
 				$this->SetLanguage($lang);
-				$supertag = $this->NpjTranslit($tag);
+				$supertag	= $this->NpjTranslit($tag);
 			}
 			else
 			{
-				$supertag = $this->NpjTranslit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD);
+				$supertag	= $this->NpjTranslit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD);
 			}
 
 			$aname = "";
 
 			if (substr($tag, 0, 2) == "!/")
 			{
-				$icon = $this->GetTranslation("childicon");
-				$page0 = substr($tag, 2);
-				$page = $this->AddSpaces($page0);
-				$tpl = "childpage";
+				$icon		= $this->GetTranslation("childicon");
+				$page0		= substr($tag, 2);
+				$page		= $this->AddSpaces($page0);
+				$tpl		= "childpage";
 			}
 			else if (substr($tag, 0, 3) == "../")
 			{
-				$icon = $this->GetTranslation("parenticon");
-				$page0 = substr($tag, 3);
-				$page = $this->AddSpaces($page0);
-				$tpl = "parentpage";
+				$icon		= $this->GetTranslation("parenticon");
+				$page0		= substr($tag, 3);
+				$page		= $this->AddSpaces($page0);
+				$tpl		= "parentpage";
 			}
 			else if (substr($tag, 0, 1) == "/")
 			{
-				$icon = $this->GetTranslation("rooticon");
-				$page0 = substr($tag, 1);
-				$page = $this->AddSpaces($page0);
-				$tpl = "rootpage";
+				$icon		= $this->GetTranslation("rooticon");
+				$page0		= substr($tag, 1);
+				$page		= $this->AddSpaces($page0);
+				$tpl		= "rootpage";
 			}
 			else
 			{
-				$icon = $this->GetTranslation("equalicon");
-				$page0 = $tag;
-				$page = $this->AddSpaces($page0);
-				$tpl = "equalpage";
+				$icon		= $this->GetTranslation("equalicon");
+				$page0		= $tag;
+				$page		= $this->AddSpaces($page0);
+				$tpl		= "equalpage";
 			}
 
 			if ($imlink)
-				$text = "<img src=\"$imlink\" border=\"0\" title=\"$text\" />";
+				$text		= "<img src=\"$imlink\" border=\"0\" title=\"$text\" />";
 
 			if ($text)
 			{
-				$tpl = "descrpage";
-				$icon = "";
+				$tpl		= "descrpage";
+				$icon		= "";
 			}
 
-			$pagepath = substr($untag, 0, strlen($untag) - strlen($page0));
-			$anchor = isset($matches[2]) ? $matches[2] : '';
-			$tag = $unwtag;
+			$pagepath		= substr($untag, 0, strlen($untag) - strlen($page0));
+			$anchor			= isset($matches[2]) ? $matches[2] : '';
+			$tag			= $unwtag;
 
 			if ($_SESSION[$this->config["session_prefix"].'_'."linktracking"] && $track) $this->TrackLinkTo($tag);
 
@@ -2126,7 +2127,7 @@ class Wacko
 
 			if ($thispage)
 			{
-				$pagelink = $this->href($method, $thispage["tag"]).$this->AddDateTime($tag).($anchor ? $anchor : "");
+				$pagelink	= $this->href($method, $thispage["tag"]).$this->AddDateTime($tag).($anchor ? $anchor : "");
 
 				if ($this->config["hide_locked"])
 				{
@@ -2141,18 +2142,18 @@ class Wacko
 
 				if (!$access)
 				{
-					$class = "denied";
-					$accicon = $this->GetTranslation("lockicon");
+					$class		= "denied";
+					$accicon	= $this->GetTranslation("lockicon");
 				}
 				else if ($this->_acl["list"] == "*")
 				{
-					$class = "";
-					$accicon = "";
+					$class		= "";
+					$accicon	= "";
 				}
 				else
 				{
-					$class = "customsec";
-					$accicon = $this->GetTranslation("keyicon");
+					$class		= "customsec";
+					$accicon	= $this->GetTranslation("keyicon");
 				}
 
 				if ($text == trim($otag, "/") || $linklang)
@@ -2164,22 +2165,22 @@ class Wacko
 			}
 			else
 			{
-				$tpl = ($this->method == "print" || $this->method == "msword" ? "p" : "") . "w" . $tpl;
-				$pagelink = $this->href("edit", $tag, $lang ? "lang=".$lang : "", 1);
-				$accicon = $this->GetTranslation("wantedicon");
-				$title = $this->GetTranslation("CreatePage");
+				$tpl		= ($this->method == "print" || $this->method == "msword" ? "p" : "") . "w" . $tpl;
+				$pagelink	= $this->href("edit", $tag, $lang ? "lang=".$lang : "", 1);
+				$accicon	= $this->GetTranslation("wantedicon");
+				$title		= $this->GetTranslation("CreatePage");
 
 				if ($linklang)
 				{
-					$text = $this->DoUnicodeEntities($text, $linklang);
-					$page = $this->DoUnicodeEntities($page, $linklang);
+					$text	= $this->DoUnicodeEntities($text, $linklang);
+					$page	= $this->DoUnicodeEntities($page, $linklang);
 				}
 			}
 
-			$icon = str_replace("{theme}", $this->config["theme_url"], $icon);
-			$accicon = str_replace("{theme}", $this->config["theme_url"], $accicon);
-			$res = $this->GetTranslation("tpl.".$tpl);
-			$text = trim($text);
+			$icon			= str_replace("{theme}", $this->config["theme_url"], $icon);
+			$accicon		= str_replace("{theme}", $this->config["theme_url"], $accicon);
+			$res			= $this->GetTranslation("tpl.".$tpl);
+			$text			= trim($text);
 
 			if ($res)
 			{
@@ -2187,16 +2188,16 @@ class Wacko
 					$icon	= '';
 
 				//todo: pagepath
-				$aname = str_replace("/", ".", $aname);
-				$res = str_replace("{aname}",  $aname,  $res);
-				$res = str_replace("{icon}",   $icon,   $res);
-				$res = str_replace("{accicon}", $accicon, $res);
-				$res = str_replace("{class}",  $class,  $res);
-				$res = str_replace("{title}",  $title,  $res);
-				$res = str_replace("{pagelink}", $pagelink, $res);
-				$res = str_replace("{pagepath}", $pagepath, $res);
-				$res = str_replace("{page}",   $page,  $res);
-				$res = str_replace("{text}",   $text,  $res);
+				$aname		= str_replace("/",			".",		$aname);
+				$res		= str_replace("{aname}",	$aname,		$res);
+				$res		= str_replace("{icon}",		$icon,		$res);
+				$res		= str_replace("{accicon}",	$accicon,	$res);
+				$res		= str_replace("{class}",	$class,		$res);
+				$res		= str_replace("{title}",	$title,		$res);
+				$res		= str_replace("{pagelink}",	$pagelink,	$res);
+				$res		= str_replace("{pagepath}",	$pagepath,	$res);
+				$res		= str_replace("{page}",		$page,		$res);
+				$res		= str_replace("{text}",		$text,		$res);
 
 				if (!$text)
 					$text = htmlspecialchars($tag, ENT_NOQUOTES);
@@ -2221,28 +2222,28 @@ class Wacko
 			die ("ERROR: no link template '$tpl' found.");
 		}
 
-		if (!$text) $text = htmlspecialchars($tag, ENT_NOQUOTES);
+		if (!$text) $text	= htmlspecialchars($tag, ENT_NOQUOTES);
 
 		if ($url)
 		{
 			if ($imlink)
-				$text = "<img src=\"$imlink\" border=\"0\" title=\"$text\" />";
+				$text		= "<img src=\"$imlink\" border=\"0\" title=\"$text\" />";
 
-			$icon = str_replace("{theme}", $this->config["theme_url"], $icon);
-			$res = $this->GetTranslation("tpl.".$tpl);
+			$icon			= str_replace("{theme}", $this->config["theme_url"], $icon);
+			$res			= $this->GetTranslation("tpl.".$tpl);
 
 			if ($res)
 			{
 				if (!$class)
-					$class = "outerlink";
+					$class	= "outerlink";
 				if ($this->method == 'print')
 					$icon	= '';
 
-				$res = str_replace("{icon}",  $icon,  $res);
-				$res = str_replace("{class}", $class, $res);
-				$res = str_replace("{title}", $title, $res);
-				$res = str_replace("{url}",   $url,   $res);
-				$res = str_replace("{text}",  $text,  $res);
+				$res		= str_replace("{icon}",		$icon,	$res);
+				$res		= str_replace("{class}",	$class,	$res);
+				$res		= str_replace("{title}",	$title,	$res);
+				$res		= str_replace("{url}",		$url,	$res);
+				$res		= str_replace("{text}",		$text,	$res);
 
 				// numerated outer links and file links. initialize property as an array to make it work
 				if (is_array($this->numerate_links) && $url != $text && $url != "404" && $url != "403")
@@ -2505,8 +2506,8 @@ class Wacko
 	// PLUGINS
 	function IncludeBuffered($filename, $notfoundText = "", $vars = "", $path = "")
 	{
-		if ($path) $dirs = explode(":", $path);
-		else $dirs = array("");
+		if ($path)	$dirs = explode(":", $path);
+		else		$dirs = array("");
 
 		foreach($dirs as $dir)
 		{
@@ -2534,14 +2535,12 @@ class Wacko
 
 	function Header($mod = "")
 	{
-		$result = $this->IncludeBuffered("header".$mod.".php", "Theme is corrupt: ".$this->config["theme"], "", "themes/".$this->config["theme"]."/appearance");
-		return $result;
+		return $this->IncludeBuffered("header".$mod.".php", "Theme is corrupt: ".$this->config["theme"], "", "themes/".$this->config["theme"]."/appearance");
 	}
 
 	function Footer($mod = "")
 	{
-		$result = $this->IncludeBuffered("footer".$mod.".php", "Theme is corrupt: ".$this->config["theme"], "", "themes/".$this->config["theme"]."/appearance");
-		return $result;
+		return $this->IncludeBuffered("footer".$mod.".php", "Theme is corrupt: ".$this->config["theme"], "", "themes/".$this->config["theme"]."/appearance");
 	}
 
 	function UseClass($class_name, $class_dir = "", $file_name = "")
@@ -2686,8 +2685,8 @@ class Wacko
 	{
 		$user = $this->LoadSingle(
 			"SELECT * FROM ".$this->config["user_table"]." ".
-			"WHERE name = '".
-				quote($this->dblink, $name)."' ".($password === 0 ? "" : "AND password = '".quote($this->dblink, $password)."'")." ".
+			"WHERE name = '".quote($this->dblink, $name)."' ".
+			($password === 0 ? "" : "AND password = '".quote($this->dblink, $password)."'")." ".
 			"LIMIT 1");
 
 		if ($user)
@@ -2935,13 +2934,13 @@ class Wacko
 
 	function DecomposeOptions($more)
 	{
-		$b = array();
-		$opts = explode($this->optionSplitter, $more);
+		$b		= array();
+		$opts	= explode($this->optionSplitter, $more);
 
 		foreach ($opts as $o)
 		{
-			$params = explode($this->valueSplitter, trim($o));
-			$b[$params[0]] = $params[1];
+			$params			= explode($this->valueSplitter, trim($o));
+			$b[$params[0]]	= $params[1];
 		}
 		return $b;
 	}
@@ -3154,6 +3153,7 @@ class Wacko
 			return '';
 	}
 
+	// $acl array must reflect acls table row structure
 	function CacheACL($page_id, $privilege, $useDefaults, $acl)
 	{
 		$this->aclCache[$page_id."#".$privilege."#".$useDefaults] = $acl;
@@ -3235,9 +3235,9 @@ class Wacko
 		$acl = $this->LoadAcl($page_id, $privilege);
 		$this->_acl = $acl;
 
-		// if current user is owner, return true. owner can do anything!
+		// if current user is owner or admin, return true. they can do anything!
 		if ($user != "guest@wacko")
-			if ($this->UserIsOwner($page_id))
+			if ($this->UserIsOwner($page_id) || $this->IsAdmin())
 				return true;
 
 		return $this->CheckACL($user, $acl['list'], true);
@@ -3379,7 +3379,7 @@ class Wacko
 	// BOOKMARKS
 	function GetDefaultBookmarks($lang, $what = "default")
 	{
-		$this->UserAgentLanguage();
+		$lang = $this->UserAgentLanguage();
 
 		if (isset($this->config[$what."_bookmarks"]) &&
 		is_array($this->config[$what."_bookmarks"]) &&
@@ -3404,11 +3404,11 @@ class Wacko
 		$user = $this->GetUser();
 
 		// initial bookmarks table construction
-		if ($set || !($bookmarks=$this->GetBookmarks()))
+		if ($set || !($bookmarks = $this->GetBookmarks()))
 		{
-			$bookmarks = $user["bookmarks"]
+			$bookmarks = ( $user["bookmarks"]
 				? $user["bookmarks"]
-				: $this->GetDefaultBookmarks($user["lang"]);
+				: $this->GetDefaultBookmarks($user["lang"]) );
 
 			if ($set == BM_DEFAULT)
 				$bookmarks = $this->GetDefaultBookmarks($user["lang"]);
@@ -3427,9 +3427,9 @@ class Wacko
 				$bmlinks[$i] = $this->NpjTranslit($bmlinks[$i]);
 			}
 
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarks"] = $bookmarks;
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"] = $bmlinks;
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"] = $this->Format(implode(" | ", $bookmarks), "wacko");
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarks"]		= $bookmarks;
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"]	= $bmlinks;
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"]	= $this->Format(implode(" | ", $bookmarks), "wacko");
 		}
 
 		// adding new bookmark
@@ -3458,25 +3458,26 @@ class Wacko
 
 			$this->SetUser($this->LoadUser($user["name"]));
 
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarks"] = $bookmarks;
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"] = $bmlinks;
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"] = $this->Format(implode(" | ", $bookmarks), "wacko");
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarks"]		= $bookmarks;
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"]	= $bmlinks;
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"]	= $this->Format(implode(" | ", $bookmarks), "wacko");
 		}
 
 		// removing bookmark
 		if (!empty($_REQUEST["removebookmark"]) && $user)
 		{
-			foreach ($bookmarks as $bm)
+			foreach ($bookmarks as $bookmark)
 			{
-				$dummy = $this->Format($bm, "wacko");
+				$dummy = $this->Format($bookmark, "wacko");
 				$this->ClearLinkTable();
 				$this->StartLinkTracking();
 				$dummy = $this->Format($dummy, "post_wacko");
 				$this->StopLinkTracking();
 				$bml = $this->GetLinkTable();
-				if ($this->GetPageSuperTag()!=$this->NpjTranslit($bml[0])) $newbm[] = $bm;
+				if ($this->GetPageSuperTag()!=$this->NpjTranslit($bml[0])) $newbookmarks[] = $bookmark;
 			}
-			$bookmarks = $newbm;
+			$bookmarks = $newbookmarks;
+
 			$this->Query(
 				"UPDATE ".$this->config["user_table"]." ".
 				"SET bookmarks = '".quote($this->dblink, implode("\n", $bookmarks))."' ".
@@ -3492,9 +3493,9 @@ class Wacko
 
 			$this->SetUser($this->LoadUser($user["name"]));
 
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarks"] = $bookmarks;
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"] = $bmlinks;
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"] = $this->Format(implode(" | ", $bookmarks), "wacko");
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarks"]		= $bookmarks;
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"]	= $bmlinks;
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"]	= ( $bookmarks ? $this->Format(implode(" | ", $bookmarks), "wacko") : "" );
 		}
 	}
 
@@ -3737,8 +3738,8 @@ class Wacko
 
 		if (is_array($user) && $user["options"]["theme"])
 		{
-			$this->config["theme"] = $user["options"]["theme"];
-			$this->config["theme_url"] = $this->config["root_url"]."themes/".$this->config["theme"]."/";
+			$this->config["theme"]		= $user["options"]["theme"];
+			$this->config["theme_url"]	= $this->config["root_url"]."themes/".$this->config["theme"]."/";
 		}
 
 		if (!$this->config["multilanguage"])
