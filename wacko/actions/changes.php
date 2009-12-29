@@ -34,7 +34,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 			$count++;
 
 			// day header
-			list($day, $time) = explode(" ", $page["time"]);
+			list($day, $time) = explode(" ", $page["modified"]);
 			if (!isset($curday)) $curday = "";
 
 			if ($day != $curday)

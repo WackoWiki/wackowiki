@@ -80,7 +80,7 @@ if ($user_id = $this->GetUserId())
 			$this->GetTranslation('OrderDate')."</a>]<br /><br />\n");
 
 		if ($pages = $this->LoadAll(
-			"SELECT p.tag AS tag, p.time AS time ".
+			"SELECT p.tag AS tag, p.modified AS modified ".
 			"FROM {$prefix}pages AS p ".
 			"LEFT JOIN {$prefix}revisions AS r ".
 				"ON (p.page_id = r.page_id ".
@@ -88,7 +88,7 @@ if ($user_id = $this->GetUserId())
 			"WHERE p.comment_on_id = '0' ".
 				"AND r.comment_on_id = '0' ".
 			"GROUP BY tag ".
-			"ORDER BY time DESC, tag ASC ".
+			"ORDER BY modified DESC, tag ASC ".
 			"LIMIT {$pagination['offset']}, $limit", 1))
 		{
 			echo "<ul>\n";
@@ -96,7 +96,7 @@ if ($user_id = $this->GetUserId())
 			foreach ($pages as $page)
 			{
 				// day header
-				list($day, $time) = explode(" ", $page["time"]);
+				list($day, $time) = explode(" ", $page["modified"]);
 				if ($day != $curday)
 				{
 					if ($curday)
@@ -136,7 +136,7 @@ if ($user_id = $this->GetUserId())
 		$this->GetTranslation("OrderChange")."</a>] <br /><br />\n");
 
 		if ($pages = $this->LoadAll(
-			"SELECT tag, time ".
+			"SELECT tag, modified ".
 			"FROM {$prefix}pages ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0' ".

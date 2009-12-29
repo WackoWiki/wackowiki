@@ -12,7 +12,7 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"tag character varying(250) NOT NULL DEFAULT '',".
 					"supertag character varying(250) NOT NULL DEFAULT '',".
 					"\"created\" timestamp without time zone NOT NULL DEFAULT now(),".
-					"\"time\" timestamp without time zone NOT NULL DEFAULT now(),".
+					"\"modified\" timestamp without time zone NOT NULL DEFAULT now(),".
 					"body text NOT NULL,".
 					"body_r text NOT NULL,".
 					"body_toc text NOT NULL,".
@@ -39,7 +39,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"tag character varying(250) NOT NULL DEFAULT '',".
 						"supertag character varying(250) NOT NULL DEFAULT '',".
 						"\"created\" timestamp without time zone NOT NULL DEFAULT now(),".
-						"\"time\" timestamp without time zone NOT NULL DEFAULT now(),".
+						"\"modified\" timestamp without time zone NOT NULL DEFAULT now(),".
 						"body text NOT NULL DEFAULT '',".
 						"body_r text NOT NULL DEFAULT '',".
 						"edit_note character varying(100) NOT NULL DEFAULT '',".

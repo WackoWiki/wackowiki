@@ -71,10 +71,10 @@ class RSS
 					$count++;
 					$xml .= "<item>\n";
 					$xml .= "<title>".$page["tag"]."</title>\n";
-					$xml .= "<link>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["time"]))."</link>\n";
-					$xml .= "<guid>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["time"]))."</guid>\n";
-					$xml .= "<pubDate>".date('r', strtotime($page['time']))."</pubDate>\n";
-					$xml .= "<description>".$page["time"]." ".$this->engine->GetTranslation("By")." ".$page["user"].($page["edit_note"] ? " [".$page["edit_note"]."]" : "")."</description>\n";
+					$xml .= "<link>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["modified"]))."</link>\n";
+					$xml .= "<guid>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["modified"]))."</guid>\n";
+					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
+					$xml .= "<description>".$page["modified"]." ".$this->engine->GetTranslation("By")." ".$page["user"].($page["edit_note"] ? " [".$page["edit_note"]."]" : "")."</description>\n";
 					$xml .= "</item>\n";
 				}
 			}
@@ -117,9 +117,9 @@ class RSS
 					$count++;
 					$xml .= "<item>\n";
 					$xml .= "<title>".$page["title"]." ".$this->engine->GetTranslation("To")." ".$this->engine->GetCommentOnTag($page["comment_on_id"])." ".$this->engine->GetTranslation("From")." ".$page["user"]."</title>\n";
-					$xml .= "<link>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["time"]))."</link>\n";
-					$xml .= "<guid>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["time"]))."</guid>\n";
-					$xml .= "<pubDate>".date('r', strtotime($page['time']))."</pubDate>\n";
+					$xml .= "<link>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["modified"]))."</link>\n";
+					$xml .= "<guid>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["modified"]))."</guid>\n";
+					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
 					$xml .= "<dc:creator>".$page["user"]."</dc:creator>\n";
 					$text = $this->engine->Format($page["body_r"], "post_wacko");
 					$xml .= "<description><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></description>\n";
@@ -153,7 +153,7 @@ class RSS
 		// build an array
 		foreach ($pages as $page)
 		{
-			$news_pages[]	= array('tag' => $page['tag'], 'title' => $page['title'], 'time' => $page['created'],
+			$news_pages[]	= array('tag' => $page['tag'], 'title' => $page['title'], 'modified' => $page['created'],
 				'body_r' => $page['body_r'], 'date' => date('Y/m-d', strtotime($page['created'])));
 		}
 
@@ -197,7 +197,7 @@ class RSS
 				$cat	= substr_replace ($page['tag'], '', 0, strlen ($newscluster) + 1); // removes news cluster name
 				$cat	= substr_replace ($cat, '', strpos ($cat, '/')); // removes news page name
 				$link	= $this->engine->href('', $page['tag']);
-				$pdate	= date("r", strtotime($page['time']));
+				$pdate	= date("r", strtotime($page['modified']));
 				$coms	= $link.'?show_comments=1#comments';
 				$body	= $this->engine->LoadPage($page['tag']);
 				$text	= $this->engine->Format($page['body_r'], 'post_wacko');
@@ -235,9 +235,9 @@ class RSS
 				{
 					$xml .= "<url>\n";
 					$xml .= "<loc>".$this->engine->href("", $page["tag"])."</loc>\n";
-					$xml .= "<lastmod>". substr($page["time"], 0, 10) ."</lastmod>\n";
+					$xml .= "<lastmod>". substr($page["modified"], 0, 10) ."</lastmod>\n";
 
-					$daysSinceLastChanged = floor((time() - strtotime(substr($page["time"], 0, 10)))/86400);
+					$daysSinceLastChanged = floor((time() - strtotime(substr($page["modified"], 0, 10)))/86400);
 
 					if($daysSinceLastChanged < 30)
 					{

@@ -15,7 +15,7 @@ if ($this->HasAccess("read"))
 		// comment header?
 		if ($this->page["comment_on_id"])
 		{
-			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->GetCommentOnTag($this->page["comment_on_id"]), "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["time"]."</div>");
+			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->GetCommentOnTag($this->page["comment_on_id"]), "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->page["modified"]."</div>");
 		}
 
 		if ($this->page["latest"] == "0")
@@ -23,7 +23,7 @@ if ($this->HasAccess("read"))
 			print("<div class=\"revisioninfo\">".
 			str_replace("%1",$this->href(),
 			str_replace("%2",$this->GetPageTag(),
-			str_replace("%3",$this->page["time"],
+			str_replace("%3",$this->page["modified"],
 			$this->GetTranslation("Revision")))).".</div>");
 		}
 

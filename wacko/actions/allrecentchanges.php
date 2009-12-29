@@ -22,7 +22,7 @@ if ($pages = $this->LoadRecentlyChanged($max))
 		if (($i < $max) || !$max)
 		{
 			// day header
-			list($day, $time) = explode(" ", $page["time"]);
+			list($day, $time) = explode(" ", $page["modified"]);
 			if ($day != $curday)
 			{
 				if ($curday) print("<br />\n");
@@ -34,7 +34,7 @@ if ($pages = $this->LoadRecentlyChanged($max))
 			print("&nbsp;&nbsp;&nbsp;<span class=\"dt\">".$time."</span> &mdash; (".
 			$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".
 			$this->Link( $page["tag"] )." . . . . . . . . . . . . . . . . <small>".
-			($this->IsWikiName($page["user"])?$this->Link($page["user"]):$page["user"])."</small><br />\n");
+			($this->IsWikiName($page["user"]) ? $this->Link($page["user"]) : $page["user"])."</small><br />\n");
 		}
 	}
 }

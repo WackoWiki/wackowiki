@@ -43,7 +43,7 @@ else if ($user = $this->GetUser())
 				if ($user["sessiontime"] == true)
 				{
 ?>
-				Last visit was recorded <?php echo $this->GetTimeStringFormatted($user['sessiontime']); ?>.<br />
+				Last visit was recorded <tt><?php echo $this->GetTimeStringFormatted($user['sessiontime']); ?></tt>.<br />
 <?php
 				}
 ?>
@@ -64,7 +64,7 @@ else if ($user = $this->GetUser())
 				echo "<br />";
 				// Only allow your session to be used from this IP address.
 ?>
-				Bind session to the IP-address <?php echo ( $user['options']['validate_ip'] == '1' ? 'enabled (the current IP '.$user['ip'].')' : 'Off' ); ?>.<br />
+				Bind session to the IP-address <?php echo ( $user['options']['validate_ip'] == '1' ? 'enabled (the current IP <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ); ?>.<br />
 <?php
 				if ($this->config["ssl"] == true)
 				{

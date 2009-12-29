@@ -33,7 +33,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			$title = trim($_POST["title"]);
 
 			// check for overwriting
-			if ($this->page && $this->page["time"] != $_POST["previous"])
+			if ($this->page && $this->page["modified"] != $_POST["previous"])
 				$error = $this->GetTranslation("OverwriteAlert");
 
 			// check for edit note
@@ -146,7 +146,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 	$this->NoCache();
 
 	// fetch fields
-	if (!$previous = 	$_POST["previous"]) $previous 	= $this->page["time"];
+	if (!$previous = 	$_POST["previous"]) $previous 	= $this->page["modified"];
 	if (!$body = 		$_POST["body"]) 	$body 		= $this->page["body"];
 	if (isset($_POST["edit_note"]))			$edit_note	= $_POST["edit_note"];
 	if (isset($_POST["minor_edit"]))		$minor_edit	= $_POST["minor_edit"];

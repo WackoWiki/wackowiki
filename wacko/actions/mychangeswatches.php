@@ -11,14 +11,14 @@ if ($user_id = $this->GetUserId())
 		$this->GetTranslation('ResetChangesWatches').'</a>).<br /><br />';
 
 	$pages = $this->LoadAll(
-			"SELECT p.page_id, p.tag, p.time, w.user_id ".
+			"SELECT p.page_id, p.tag, p.modified, w.user_id ".
 			"FROM {$pref}pages AS p, {$pref}watches AS w ".
 			"WHERE p.page_id = w.page_id ".
-				"AND p.time  > w.time ".
+				"AND p.modified  > w.time ".
 				"AND w.user_id  = '".quote($this->dblink, $user_id)."' ".
 				"AND p.user_id <> '".quote($this->dblink, $user_id)."' ".
 			"GROUP BY p.tag ".
-			"ORDER BY p.time DESC, p.tag ASC ".
+			"ORDER BY p.modified DESC, p.tag ASC ".
 			"LIMIT $limit");
 
 	if ($_GET['reset'] == 1 && $pages == true)
@@ -36,7 +36,7 @@ if ($user_id = $this->GetUserId())
 	{
 		foreach ($pages as $page)
 			if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['page_id']))
-				echo '<small>('.$this->ComposeLinkToPage($page['tag'], 'revisions', $this->GetTimeStringFormatted($page['time']), 0, $this->GetTranslation("History")).
+				echo '<small>('.$this->ComposeLinkToPage($page['tag'], 'revisions', $this->GetTimeStringFormatted($page['modified']), 0, $this->GetTranslation("History")).
 					')</small> '.$this->ComposeLinkToPage($page['tag'], '', '', 0)."<br />\n";
 	}
 	else

@@ -23,11 +23,11 @@ if ($user = $this->GetUserName())
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mychanges&amp;bydate=1#list');
 
 		if ($pages = $this->LoadAll(
-			"SELECT tag, time, edit_note ".
+			"SELECT tag, modified, edit_note ".
 			"FROM {$prefix}pages ".
 			"WHERE user = '".quote($this->dblink, $user)."' ".
 				"AND comment_on_id = '0' ".
-			"ORDER BY time DESC, tag ASC ".
+			"ORDER BY modified DESC, tag ASC ".
 			"LIMIT {$pagination['offset']}, $limit", 1))
 		{
 			echo "<ul>\n";
@@ -35,7 +35,7 @@ if ($user = $this->GetUserName())
 			foreach ($pages as $page)
 			{
 				// day header
-				list($day, $time) = explode(" ", $page["time"]);
+				list($day, $time) = explode(" ", $page["modified"]);
 				if ($day != $curday)
 				{
 					if ($curday)
@@ -85,11 +85,11 @@ if ($user = $this->GetUserName())
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mychanges#list');
 
 		if ($pages = $this->LoadAll(
-			"SELECT tag, time ".
+			"SELECT tag, modified ".
 			"FROM {$prefix}pages ".
 			"WHERE user = '".quote($this->dblink, $user)."' ".
 				"AND comment_on_id = '0' ".
-			"ORDER BY tag ASC, time DESC ".
+			"ORDER BY tag ASC, modified DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1))
 		{
 			echo "<ul>\n";
@@ -114,7 +114,7 @@ if ($user = $this->GetUserName())
 				}
 
 				// print entry
-				print("<li>".$this->GetTimeStringFormatted($page["time"])." (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."</li>\n");
+				print("<li>".$this->GetTimeStringFormatted($page["modified"])." (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."</li>\n");
 
 
 			}

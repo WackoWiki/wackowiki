@@ -38,7 +38,7 @@ if ($this->HasAccess("read"))
 		// comment header?
 		if ($this->page["comment_on_id"])
 		{
-			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->GetCommentOnTag($this->page["comment_on_id"]), "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->GetTimeStringFormatted($this->page["time"])."</div>");
+			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->GetCommentOnTag($this->page["comment_on_id"]), "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user"])?$this->Link($this->page["user"]):$this->page["user"])." ".$this->GetTranslation("At")." ".$this->GetTimeStringFormatted($this->page["modified"])."</div>");
 		}
 
 		// revision header
@@ -57,7 +57,7 @@ if ($this->HasAccess("read"))
 				?>
 				<br />
 				<?php echo $this->FormOpen("edit") ?>
-				<input type="hidden" name="previous" value="<?php echo $latest["time"] ?>" />
+				<input type="hidden" name="previous" value="<?php echo $latest["modified"] ?>" />
 				<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->page["page_id"]) ?>" />
 				<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page["body"]) ?>" />
 				<input type="submit" value="<?php echo $this->GetTranslation("ReEditOldRevision") ?>" />
@@ -296,8 +296,8 @@ if ($this->page)
 					print("<ul class=\"commentinfo\">\n".
 								"<li>".($this->IsWikiName($comment["user"]) ? $this->Link("/".$comment["user"],"",$comment["user"]) : $comment["user"])."</li>\n".
 								"<li>".$this->GetTimeStringFormatted($comment["created"])."</li>\n".
-								($comment["time"] != $comment["created"]
-									? "<li>".$this->GetTimeStringFormatted($comment["time"])." ".$this->GetTranslation("CommentEdited")."</li>\n"
+								($comment["modified"] != $comment["created"]
+									? "<li>".$this->GetTimeStringFormatted($comment["modified"])." ".$this->GetTranslation("CommentEdited")."</li>\n"
 									: "").
 							"</ul>\n");
 					echo "</li>";

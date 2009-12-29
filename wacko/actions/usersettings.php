@@ -73,15 +73,15 @@ else if ($user = $this->GetUser())
 				$more = $this->ComposeOptions(array(
 					"theme" => $_POST["theme"],
 					"autocomplete" => $_POST["autocomplete"],
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
 					"dont_redirect" => $_POST["dont_redirect"],
 					"send_watchmail" => $_POST["send_watchmail"],
 					"show_files" => $_POST["show_files"],
@@ -194,7 +194,7 @@ else if ($user = $this->GetUser())
 		if (!$user["email"] || $code["email_confirm"])
 			echo "<strong class=\"cite\"".
 				$this->GetTranslation("EmailNotVerified")."</strong><br />".
-				"<small>".$this->GetTranslation("EmailNotVerifiedDesc")."<strong><a href=\"?resend_code=1\">".$this->GetTranslation("HereLink")."</a></strong></small>";
+				"<small>".$this->GetTranslation("EmailNotVerifiedDesc")."<strong><a href=\"?resend_code=1\">".$this->GetTranslation("HereLink")."</a></strong>.</small>";
 ?></td>
   </tr>
 	<tr>

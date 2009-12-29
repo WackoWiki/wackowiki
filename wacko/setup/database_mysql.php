@@ -67,7 +67,7 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
 					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".
 					"body_r MEDIUMTEXT NOT NULL,".
 					"body_toc TEXT NOT NULL,".
@@ -90,7 +90,7 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"UNIQUE KEY idx_tag (tag),".
 					"KEY idx_supertag (supertag),".
 					"KEY idx_created (created),".
-					"KEY idx_time (time),".
+					"KEY idx_modified (modified),".
 					"KEY idx_minor_edit (minor_edit),".
 					"KEY idx_comment_on_id (comment_on_id),".
 					"KEY idx_title (title)".
@@ -112,7 +112,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 						"supertag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 						"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-						"time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+						"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 						"body MEDIUMTEXT NOT NULL,".
 						"body_r MEDIUMTEXT NOT NULL,".
 						"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
@@ -130,7 +130,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"KEY idx_owner_id (owner_id),".
 						"KEY idx_tag (tag),".
 						"KEY idx_supertag (supertag),".
-						"KEY idx_time (time),".
+						"KEY idx_modified (modified),".
 						"KEY idx_minor_edit (minor_edit),".
 						"KEY idx_comment_on_id (comment_on_id)".
 					") TYPE=MyISAM;";
