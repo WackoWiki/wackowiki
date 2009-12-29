@@ -12,7 +12,7 @@ function InsertPage($tag, $body, $lng, $rights = "Admins", $critical = false)
 
 	$page_select = "SELECT * FROM ".$config_global["table_prefix"]."pages WHERE tag='".$tag."'";
 	// user_id 0 for WackoInstaller
-	$page_insert = "INSERT INTO ".$config_global["table_prefix"]."pages (tag, supertag, body, user_id, owner_id, created, time, latest, lang) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$body."', '0', '".$config_global["admin_name"]."', NOW(), NOW(), '1', '".$lng."')";
+	$page_insert = "INSERT INTO ".$config_global["table_prefix"]."pages (tag, supertag, body, user_id, owner_id, created, modified, latest, lang) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$body."', '0', '".$config_global["admin_name"]."', NOW(), NOW(), '1', '".$lng."')";
 	$perm_read_insert = "INSERT INTO ".$config_global["table_prefix"]."acls (page_tag, supertag, privilege, list) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', 'read', '*')";
 	$perm_write_insert = "INSERT INTO ".$config_global["table_prefix"]."acls (page_tag, supertag, privilege, list) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', 'write', '".$rights."')";
 	$perm_comment_insert = "INSERT INTO ".$config_global["table_prefix"]."acls (page_tag, supertag, privilege, list) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', 'comment', '$')";

@@ -56,7 +56,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		echo "<td>".$this->GetTimeStringFormatted($this->page['created'])."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
 		echo "<td>".$this->GetTranslation('SettingsCurrent')."</td>";
-		echo "<td>".$this->GetTimeStringFormatted($this->page['time'])."</td>";
+		echo "<td>".$this->GetTimeStringFormatted($this->page['modified'])."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
 		echo "<td>".$this->GetTranslation('SettingsSize')."&nbsp;&nbsp;</td>";
 		echo "<td>".ceil(strlen($this->page['body']) / 1000).' / '.ceil(strlen($this->page['body_r']) / 1000)." kB"."</td>";

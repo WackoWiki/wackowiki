@@ -21,7 +21,7 @@ if ($this->HasAccess("read"))
 			print("<div class=\"revisioninfo\">".
 			str_replace("%1",$this->href(),
 			str_replace("%2",$this->GetPageTag(),
-			str_replace("%3",$this->page["time"],
+			str_replace("%3",$this->page["modified"],
 			$this->GetTranslation("Revision")))).".</div>");
 		}*/
 
@@ -55,7 +55,7 @@ if ($this->HasAccess("read"))
 					echo "<div class=\"comment\">".
 							"<span class=\"commentinfo\">".
 								"<strong>&#8212; ".( $comment["user"] == GUEST ? "<em>".$this->GetTranslation("Guest")."</em>" : $comment["user"] )."</strong> (".$this->GetTimeStringFormatted($comment["created"]).
-								($comment["time"] != $comment["created"] ? ", ".$this->GetTranslation("CommentEdited")." ".$this->GetTimeStringFormatted($comment["time"]) : "").")".
+								($comment["modified"] != $comment["created"] ? ", ".$this->GetTranslation("CommentEdited")." ".$this->GetTimeStringFormatted($comment["modified"]) : "").")".
 							"&nbsp;&nbsp;&nbsp;</span><br />".
 							$this->Format($comment["body_r"], "post_wacko").
 						"</div>\n";

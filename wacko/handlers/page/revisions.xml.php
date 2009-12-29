@@ -37,8 +37,8 @@ if ($this->HasAccess("read"))
 				$etag = str_replace('%2F', '/', rawurlencode($page["tag"]));
 
 				$xml .= "<item>\n";
-				$xml .= "<title>".$this->GetTimeStringFormatted($page["time"])."</title>\n";
-				$xml .= "<link>".$this->href("show").($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."time=".urlencode($page["time"])."</link>\n";
+				$xml .= "<title>".$this->GetTimeStringFormatted($page["modified"])."</title>\n";
+				$xml .= "<link>".$this->href("show").($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."time=".urlencode($page["modified"])."</link>\n";
 				$xml .= "<guid isPermaLink=\"true\">".$this->href("", $etag)."</guid>\n";
 
 				$_GET["a"] = $_GET["b"];
@@ -46,7 +46,7 @@ if ($this->HasAccess("read"))
 				$diff = $this->IncludeBuffered("handlers/page/diff.php", "oops");
 
 				$xml .= "<description>".str_replace("<", "&lt;", str_replace("&", "&amp;", $diff))."</description>\n";
-				$xml .= "<pubDate>".date ("r", strtotime ($page["time"]))."</pubDate>\n";
+				$xml .= "<pubDate>".date ("r", strtotime ($page["modified"]))."</pubDate>\n";
 				$xml .= "</item>\n";
 			}
 		}

@@ -5,14 +5,14 @@ if (!function_exists('LoadRecentComments')){
 	{
 		return
 		$wacko->LoadAll(
-			"SELECT b.tag as comment_on_page, a.tag, b.supertag, a.user, a.time, a.comment_on_id ".
+			"SELECT b.tag as comment_on_page, a.tag, b.supertag, a.user, a.modified, a.comment_on_id ".
 			"FROM ".$wacko->config["table_prefix"]."pages a ".
 				"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.page_id)".
 			"WHERE ".
 			($for
 				? "b.supertag LIKE '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' "
 				: "a.comment_on_id != '0' ").
-			"ORDER BY a.time DESC LIMIT ".(int)$limit);
+			"ORDER BY a.modified DESC LIMIT ".(int)$limit);
 	}
 }
 
@@ -32,7 +32,7 @@ if ($comments = LoadRecentComments($this, $root, (int)$max))
 		if ($access && $this->UserAllowedComments())
 		{
 			// day header
-			list($day, $time2) = explode(" ", $comment["time"]);
+			list($day, $time2) = explode(" ", $comment["modified"]);
 			if ($day != $curday)
 			{
 				if ($curday)

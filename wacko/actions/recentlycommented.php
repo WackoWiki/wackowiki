@@ -22,7 +22,7 @@ if (!function_exists('LoadRecentlyCommented')){
 				foreach ($ids as $id)
 				{
 					$comment = $wacko->LoadSingle(
-						"SELECT b.tag as comment_on_page, b.supertag, a.tag, a.user_id, u.name AS user, a.time ".
+						"SELECT b.tag as comment_on_page, b.supertag, a.tag, a.user_id, u.name AS user, a.modified ".
 						"FROM ".$wacko->config["table_prefix"]."pages a ".
 							"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.page_id) ".
 							"INNER JOIN ".$wacko->config["table_prefix"]."users u ON (a.user_id = u.user_id) ".
@@ -42,7 +42,7 @@ if (!function_exists('LoadRecentlyCommented')){
 				{
 					$page = $wacko->LoadPage($comment["comment_on_page"]);
 					$page["comment_user"] = $comment["user"];
-					$page["comment_time"] = $comment["time"];
+					$page["comment_time"] = $comment["modified"];
 					$page["comment_on_tag"] = $comment["comment_on_page"];
 					$page["comment_tag"] = $comment["tag"];
 					$pages[] = $page;

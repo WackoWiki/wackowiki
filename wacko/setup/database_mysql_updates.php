@@ -73,6 +73,8 @@ $alter_pages_r4_2_15 = "ALTER TABLE {$pref}pages DROP owner";
 $alter_pages_r4_2_16 = "ALTER TABLE {$pref}pages DROP user";
 $alter_pages_r4_2_17 = "ALTER TABLE {$pref}pages ADD ip VARCHAR(15) NOT NULL AFTER minor_edit";
 $alter_pages_r4_2_18 = "ALTER TABLE {$pref}pages CHANGE id page_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
+$alter_pages_r4_2_19 = "ALTER TABLE {$pref}pages CHANGE time modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
+$alter_pages_r4_2_20 = "ALTER TABLE {$pref}pages DROP INDEX idx_time, ADD INDEX idx_modified ( modified )";
 
 $update_pages_r4_2 = "UPDATE {$pref}pages SET body_r=''";
 $update_pages_r4_2_1 = "UPDATE {$pref}pages AS pages, (SELECT id, name FROM {$pref}users) AS users SET pages.owner_id = users.id WHERE pages.owner = users.name";
@@ -103,6 +105,8 @@ $alter_revisions_r4_2_14 = "ALTER TABLE {$pref}revisions DROP owner";
 $alter_revisions_r4_2_15 = "ALTER TABLE {$pref}revisions DROP user";
 $alter_revisions_r4_2_16 = "ALTER TABLE {$pref}revisions ADD ip VARCHAR(15) NOT NULL AFTER minor_edit";
 $alter_revisions_r4_2_17 = "ALTER TABLE {$pref}revisions CHANGE id revision_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
+$alter_revisions_r4_2_18 = "ALTER TABLE {$pref}revisions CHANGE time modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
+$alter_revisions_r4_2_19 = "ALTER TABLE {$pref}revisions DROP INDEX idx_time , ADD INDEX idx_modified ( modified )";
 
 $update_revisions_r4_2 = "UPDATE {$pref}revisions AS revisions, (SELECT id, name FROM {$pref}users) AS users SET revisions.owner_id = users.id WHERE revisions.owner = users.name";
 $update_revisions_r4_2_1 = "UPDATE {$pref}revisions AS revisions, (SELECT id, name FROM {$pref}users) AS users SET revisions.user_id = users.id WHERE revisions.user = users.name";

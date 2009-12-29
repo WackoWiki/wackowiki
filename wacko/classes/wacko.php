@@ -16,7 +16,7 @@ class Wacko
 	var $WVERSION; //Wacko version
 	var $context = array("");
 	var $current_context = 0;
-	var $pages_meta = "page_id, owner_id, user_id, tag, supertag, created, time, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description";
+	var $pages_meta = "page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description";
 	var $first_inclusion = array(); // for backlinks
 	var $optionSplitter = "\n"; // if you change this two symbols, settings for all users will be lost.
 	var $valueSplitter  = "=";
@@ -198,7 +198,7 @@ class Wacko
 		}
 	}
 	function GetPageSuperTag() { return $this->supertag; }
-	function GetPageTime() { return $this->page["time"]; }
+	function GetPageTime() { return $this->page["modified"]; }
 	function GetPageLastWriter() { return $this->page["user_id"]; }
 	function GetMethod() { return $this->method; }
 	function GetConfigValue($name) { return isset( $this->config[$name] ) ? $this->config[$name] : ''; }
@@ -271,7 +271,7 @@ class Wacko
 
 	function GetPageTimeFormatted()
 	{
-		return $this->GetTimeStringFormatted($this->page["time"]);
+		return $this->GetTimeStringFormatted($this->page["modified"]);
 	}
 
 	// LANG FUNCTIONS
@@ -699,7 +699,7 @@ class Wacko
 
 				$owner_id = $page["owner_id"];
 
-				if ($time && $time != $page["time"])
+				if ($time && $time != $page["modified"])
 				{
 					$this->CachePage($page, $metadataonly);
 
@@ -707,7 +707,7 @@ class Wacko
 						"SELECT ".$what." ".
 						"FROM ".$this->config["table_prefix"]."revisions ".
 						"WHERE supertag = '".quote($this->dblink, $supertag)."' ".
-							"AND time = '".quote($this->dblink, $time)."' ".
+							"AND modified = '".quote($this->dblink, $time)."' ".
 						"LIMIT 1");
 
 					$page["owner_id"] = $owner_id;
@@ -723,7 +723,7 @@ class Wacko
 
 				$owner_id = $page["owner_id"];
 
-				if ($time && $time != $page["time"])
+				if ($time && $time != $page["modified"])
 				{
 					$this->CachePage($page, $metadataonly);
 
@@ -731,7 +731,7 @@ class Wacko
 						"SELECT ".$what." ".
 						"FROM ".$this->config["table_prefix"]."revisions ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
-							"AND time = '".quote($this->dblink, $time)."' ".
+							"AND modified = '".quote($this->dblink, $time)."' ".
 						"LIMIT 1");
 
 					$page["owner_id"] = $owner_id;
@@ -887,14 +887,14 @@ class Wacko
 	// STANDARD QUERIES
 	function LoadRevisions($page_id)
 	{
-		$pages_meta = "p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.time, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.name as user ";
+		$pages_meta = "p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.name as user ";
 
 		$rev = $this->LoadAll(
 			"SELECT p.revision_id AS revision_m_id, ".$pages_meta." ".
 			"FROM ".$this->config["table_prefix"]."revisions p ".
 				"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 			"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
-			"ORDER BY p.time DESC");
+			"ORDER BY p.modified DESC");
 
 		if ($rev == true)
 		{
@@ -903,7 +903,7 @@ class Wacko
 				"FROM ".$this->config["table_prefix"]."pages p ".
 					"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 				"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
-				"ORDER BY p.time DESC ".
+				"ORDER BY p.modified DESC ".
 				"LIMIT 1"))
 			{
 				array_unshift($rev, $cur);
@@ -916,7 +916,7 @@ class Wacko
 				"FROM ".$this->config["table_prefix"]."pages p ".
 					"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 				"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
-				"ORDER BY p.time DESC ".
+				"ORDER BY p.modified DESC ".
 				"LIMIT 1");
 		}
 
@@ -940,17 +940,17 @@ class Wacko
 		$limit = (int)$limit;
 
 		if ($pages = $this->LoadAll(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.time, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.name as user ".
+		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.name as user ".
 		"FROM ".$this->config["table_prefix"]."pages p ".
 			"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".
 			($from
-				? "AND p.time <= '".quote($this->dblink, $from)." 23:59:59'"
+				? "AND p.modified <= '".quote($this->dblink, $from)." 23:59:59'"
 				: "").
 			($for
 				? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
 				: "").
-		"ORDER BY p.time DESC ".
+		"ORDER BY p.modified DESC ".
 		"LIMIT ".$limit, 1))
 		{
 			foreach ($pages as $page)
@@ -968,7 +968,7 @@ class Wacko
 					? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
 					: "").
 			"AND a.privilege = 'read' ".
-			"ORDER BY time DESC ".
+			"ORDER BY modified DESC ".
 			"LIMIT ".$limit, 1))
 			{
 				for ($i = 0; $i < count($read_acls); $i++)
@@ -985,14 +985,14 @@ class Wacko
 		$limit = (int) $limit;
 
 		if ($pages = $this->LoadAll(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.time, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.body_r, u.name as user ".
+		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.body_r, u.name as user ".
 		"FROM ".$this->config["table_prefix"]."pages p ".
 			"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 		"WHERE p.comment_on_id != '0' ".
 			($for
 				? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
 				: "").
-		"ORDER BY p.time DESC ".
+		"ORDER BY p.modified DESC ".
 		"LIMIT ".$limit))
 		{
 			foreach ($pages as $page)
@@ -1010,7 +1010,7 @@ class Wacko
 						? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
 						: "").
 			"AND a.privilege = 'read' ".
-			"ORDER BY time DESC ".
+			"ORDER BY modified DESC ".
 			"LIMIT ".$limit))
 
 			for ($i = 0; $i < count($read_acls); $i++)
@@ -1060,7 +1060,7 @@ class Wacko
 
 	function LoadPageTitles() { return $this->LoadAll("SELECT DISTINCT tag FROM ".$this->config["table_prefix"]."pages ORDER BY tag"); }
 	function LoadAllPages() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '0' ORDER BY BINARY tag"); }
-	function LoadAllPagesByTime() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '0' ORDER BY time DESC, BINARY tag"); }
+	function LoadAllPagesByTime() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '0' ORDER BY modified DESC, BINARY tag"); }
 
 	function FullTextSearch($phrase,$filter)
 	{
@@ -1084,13 +1084,13 @@ class Wacko
 		$meta		= implode(', ', $meta);
 
 		return $this->LoadAll(
-			"SELECT DISTINCT $meta, MAX({$this->config['table_prefix']}revisions.`time`) AS `date` ".
+			"SELECT DISTINCT $meta, MAX({$this->config['table_prefix']}revisions.modified) AS date ".
 			"FROM {$this->config['table_prefix']}revisions ".
 			"LEFT JOIN {$this->config['table_prefix']}pages ON ".
 				"({$this->config['table_prefix']}revisions.tag = {$this->config['table_prefix']}pages.tag) ".
 			"WHERE {$this->config['table_prefix']}pages.tag IS NULL ".
 			"GROUP BY {$this->config['table_prefix']}revisions.tag ".
-			"ORDER BY `date` DESC, {$this->config['table_prefix']}revisions.tag ASC ".
+			"ORDER BY date DESC, {$this->config['table_prefix']}revisions.tag ASC ".
 			( $limit > 0 ? "LIMIT $limit" : '' ), $cache);
 	}
 
@@ -1275,7 +1275,7 @@ class Wacko
 					"INSERT INTO ".$this->config["table_prefix"]."pages SET ".
 						"comment_on_id 	= '".quote($this->dblink, $comment_on_id)."', ".
 						"created 		= NOW(), ".
-						"time 			= NOW(), ".
+						"modified 			= NOW(), ".
 						"owner_id 		= '".quote($this->dblink, $owner_id)."', ".
 						"user_id 		= '".quote($this->dblink, $user_id)."', ".
 						"ip 			= '".quote($this->dblink, $ip)."', ".
@@ -1435,7 +1435,7 @@ class Wacko
 					$this->Query(
 						"UPDATE ".$this->config["table_prefix"]."pages SET ".
 							"comment_on_id	= '".quote($this->dblink, $comment_on_id)."', ".
-							"time			= NOW(), ".
+							"modified			= NOW(), ".
 							"created		= '".quote($this->dblink, $oldPage['created'])."', ".
 							"owner_id		= '".quote($this->dblink, $owner_id)."', ".
 							"user_id		= '".quote($this->dblink, $user_id)."', ".
@@ -1459,7 +1459,7 @@ class Wacko
 						"SELECT ".$this->pages_meta." ".
 						"FROM ".$this->config["table_prefix"]."revisions ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
-						"ORDER BY time DESC");
+						"ORDER BY modified DESC");
 					$_GET["a"] = -1;
 					$_GET["b"] = $page["page_id"];
 					$_GET["fastdiff"] = 1;
@@ -1569,8 +1569,8 @@ class Wacko
 
 		// move revision
 		$this->Query(
-			"INSERT INTO {$this->config['table_prefix']}revisions (page_id, tag, time, body, edit_note, minor_edit, owner_id, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
-			"VALUES ('{$oldPage['page_id']}','{$oldPage['tag']}', '{$oldPage['time']}', '{$oldPage['body']}', '{$oldPage['edit_note']}', '{$oldPage['minor_edit']}', '{$oldPage['owner_id']}', '{$oldPage['user_id']}', '0', '{$oldPage['handler']}', '{$oldPage['comment_on_id']}', '{$oldPage['supertag']}', '{$oldPage['title']}', '{$oldPage['keywords']}', '{$oldPage['description']}')");
+			"INSERT INTO {$this->config['table_prefix']}revisions (page_id, tag, modified, body, edit_note, minor_edit, owner_id, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
+			"VALUES ('{$oldPage['page_id']}','{$oldPage['tag']}', '{$oldPage['modified']}', '{$oldPage['body']}', '{$oldPage['edit_note']}', '{$oldPage['minor_edit']}', '{$oldPage['owner_id']}', '{$oldPage['user_id']}', '0', '{$oldPage['handler']}', '{$oldPage['comment_on_id']}', '{$oldPage['supertag']}', '{$oldPage['title']}', '{$oldPage['keywords']}', '{$oldPage['description']}')");
 
 		// update user statistics for revisions made
 		if ($user = $this->GetUser()) $this->Query(
@@ -2272,7 +2272,7 @@ class Wacko
 		{
 			$_page = $this->LoadPage($tag, "", LOAD_CACHE, LOAD_META);
 			return ($this->config["rewrite_mode"] ? "?" : "&amp;").
-			"v=".base_convert($this->crc16(preg_replace("/[ :\-]/","",$_page["time"])),10,36);
+			"v=".base_convert($this->crc16(preg_replace("/[ :\-]/","",$_page["modified"])),10,36);
 		}
 		else return "";
 	}
@@ -3038,7 +3038,7 @@ class Wacko
 		if ($page_id)
 		{
 			return $this->LoadAll(
-					"SELECT p.page_id, p.tag, p.created, p.time, p.body, p.body_r, p.title, u.name AS user ".
+					"SELECT p.page_id, p.tag, p.created, p.modified, p.body, p.body_r, p.title, u.name AS user ".
 					"FROM ".$this->config["table_prefix"]."pages p ".
 						"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 					"WHERE p.comment_on_id = '".quote($this->dblink, $page_id)."' ".
@@ -3538,7 +3538,7 @@ class Wacko
 		{
 			$this->Query(
 				"DELETE FROM ".$this->config["table_prefix"]."revisions ".
-				"WHERE time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
+				"WHERE modified < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
 			$this->Query("UPDATE {$this->config['table_prefix']}config SET value = '".time()."' WHERE name = 'maint_last_oldpages'");
 
@@ -3790,9 +3790,9 @@ class Wacko
 		$this->LogReferrer();
 		$this->SetBookmarks();
 
-		if (!$this->GetUser() && $this->page["time"])
+		if (!$this->GetUser() && $this->page["modified"])
 		{
-			header("Last-Modified: ".gmdate("D, d M Y H:i:s", strtotime($this->page["time"]) + 120)." GMT");
+			header("Last-Modified: ".gmdate("D, d M Y H:i:s", strtotime($this->page["modified"]) + 120)." GMT");
 		}
 
 		// check page watching
@@ -4105,7 +4105,7 @@ class Wacko
 			// saving original
 			$this->SaveRevision($page);
 			// saving updated for the current user
-			$page['time']	= date(SQL_DATE_FORMAT);
+			$page['modified']	= date(SQL_DATE_FORMAT);
 			$page['user']	= $this->GetUserName();
 			$page['ip']		= $this->GetUserIP();
 			$this->SaveRevision($page);
