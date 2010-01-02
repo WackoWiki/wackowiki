@@ -276,6 +276,9 @@ class Init
 					"captcha_edit_page" => 1,
 					"captcha_registration" => 1,
 
+					"system_seed" => "01234567890123456789", // TODO: autogererate random one
+					"recovery_password" => "",
+
 					"date_format" => "d.m.Y",
 					"time_format" => "H:i:s",
 					"time_format_seconds" => "H:i",
