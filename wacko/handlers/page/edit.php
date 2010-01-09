@@ -40,15 +40,16 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			if (($this->GetConfigValue("edit_summary") == 2) && $_POST["edit_note"] == "" && $this->page["comment_on_id"] == 0)
 				$error .= $this->GetTranslation("EditNoteMissing");
 
+			// captcha code starts
 			if(($this->page && $this->GetConfigValue("captcha_edit_page")) || (!$this->page && $this->GetConfigValue("captcha_new_page")))
 			{
 				// Don't load the captcha at all if the GD extension isn't enabled
 				if(extension_loaded('gd'))
 				{
-					//check whether anonymous user
-					//anonymous user has the IP or host name as name
-					//if name contains '.', we assume it's anonymous
-					if(strpos($this->GetUserName(), '.'))
+					// check whether anonymous user
+					// anonymous user has no name
+					// if false, we assume it's anonymous
+					if($this->GetUserName() == false)
 					{
 						//anonymous user, check the captcha
 						if(!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
@@ -251,7 +252,10 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			// Don't load the captcha at all if the GD extension isn't enabled
 			if(extension_loaded('gd'))
 			{
-				if(strpos($this->GetUserName(), '.'))
+				// check whether anonymous user
+				// anonymous user has no name
+				// if false, we assume it's anonymous
+				if($this->GetUserName() == false)
 				{
 ?>
 		<label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
