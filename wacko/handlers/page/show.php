@@ -329,7 +329,10 @@ if ($this->page)
 						// Don't load the captcha at all if the GD extension isn't enabled
 						if(extension_loaded('gd'))
 						{
-							if(strpos($this->GetUserName(), '.'))
+							// check whether anonymous user
+							// anonymous user has no name
+							// if false, we assume it's anonymous
+							if($this->GetUserName() == false)
 							{
 		?>
 		<br />

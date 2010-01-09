@@ -52,10 +52,10 @@ else if ($_POST["action"] == "login")
 			// Don't load the captcha at all if the GD extension isn't enabled
 			if(extension_loaded('gd'))
 			{
-				//check whether anonymous user
-				//anonymous user has the IP or host name as name
-				//if name contains '.', we assume it's anonymous
-				if(strpos($this->GetUserName(), '.'))
+				// check whether anonymous user
+				// anonymous user has no name
+				// if false, we assume it's anonymous
+				if($this->GetUserName() == false)
 				{
 					//anonymous user, check the captcha
 					if(!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
@@ -101,7 +101,7 @@ else if ($_POST["action"] == "login")
 			else if ($this->UsernameExists($name) === true)
 			{
 				$error .= $this->GetTranslation("RegistrationNameOwned");
-		
+
 				// log event
 				$this->Log(2, str_replace("%1", $name, $this->GetTranslation("LogUserSimiliarName")));
 			}
