@@ -3041,7 +3041,7 @@ class Wacko
 			return $this->LoadAll(
 					"SELECT p.page_id, p.tag, p.created, p.modified, p.body, p.body_r, p.title, u.name AS user ".
 					"FROM ".$this->config["table_prefix"]."pages p ".
-						"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
+						"LEFT OUTER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 					"WHERE p.comment_on_id = '".quote($this->dblink, $page_id)."' ".
 					"ORDER BY p.created ".
 					"LIMIT {$limit}, {$count}");
