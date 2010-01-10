@@ -1291,9 +1291,10 @@ class Wacko
 						"title 			= '".quote($this->dblink, htmlspecialchars($title))."'");
 
 				// saving acls
-				$this->SaveAcl($tag, "write", $write_acl);
-				$this->SaveAcl($tag, "read", $read_acl);
-				$this->SaveAcl($tag, "comment", $comment_acl);
+				$page_id = $this->GetPageId($tag);
+				$this->SaveAcl($page_id, "write", $write_acl);
+				$this->SaveAcl($page_id, "read", $read_acl);
+				$this->SaveAcl($page_id, "comment", $comment_acl);
 
 				// counters
 				if ($comment_on_id)
