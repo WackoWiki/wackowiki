@@ -4083,8 +4083,11 @@ class Wacko
 		if (!$tag) return false;
 
 		return $this->Query(
-			"DELETE FROM ".$this->config["table_prefix"]."acls ".
-			"WHERE page_tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"DELETE a.* ".
+			"FROM ".$this->config["table_prefix"]."acls a ".
+				"LEFT JOIN ".$this->config["table_prefix"]."pages p ".
+					"ON (a.page_id = p.page_id) ".
+			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
 	function RemovePage($tag, $comment_on_id = '0', $dontkeep = 0)
@@ -4166,9 +4169,9 @@ class Wacko
 
 		return $this->Query(
 			"DELETE w.* ".
-			"FROM ".$this->config["table_prefix"]."watches w".
-				"LEFT JOIN ".$this->config["table_prefix"]."pages p".
-					"ON (w.page_id = p.page_id)".
+			"FROM ".$this->config["table_prefix"]."watches w ".
+				"LEFT JOIN ".$this->config["table_prefix"]."pages p ".
+					"ON (w.page_id = p.page_id) ".
 			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
@@ -4205,7 +4208,7 @@ class Wacko
 				"r.* ".
 			"FROM ".
 				$this->config["table_prefix"]."referrers r ".
-				"INNER JOIN ".$this->config["table_prefix"]."pages p ON (r.page_id = p.page_id)".
+				"INNER JOIN ".$this->config["table_prefix"]."pages p ON (r.page_id = p.page_id) ".
 			"WHERE ".
 				"p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
