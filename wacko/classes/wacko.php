@@ -856,8 +856,9 @@ class Wacko
 		}
 
 		if ($read_acls = $this->LoadAll(
-		"SELECT * FROM ".$this->config["table_prefix"]."acls ".
-		"WHERE BINARY page_tag IN (".$pages_str.") AND privilege = 'read'", 1))
+		"SELECT a.* FROM ".$this->config["table_prefix"]."acls a ".
+			"INNER JOIN ".$this->config["table_prefix"]."pages p ON (p.page_id = a.page_id) ".
+		"WHERE BINARY p.tag IN (".$pages_str.") AND a.privilege = 'read'", 1))
 		{
 			for ($i = 0; $i < count($read_acls); $i++)
 			{
@@ -926,12 +927,13 @@ class Wacko
 	function LoadPagesLinkingTo($tag, $for = "")
 	{
 		return $this->LoadAll(
-			"SELECT from_tag AS tag ".
-			"FROM ".$this->config["table_prefix"]."links ".
+			"SELECT p.tag AS tag ".
+			"FROM ".$this->config["table_prefix"]."links l ".
+				"INNER JOIN ".$this->config["table_prefix"]."pages p ON (p.page_id = l.from_page_id) ".
 			"WHERE ".($for
-				? "from_tag LIKE '".quote($this->dblink, $for)."/%' AND "
+				? "p.tag LIKE '".quote($this->dblink, $for)."/%' AND "
 				: "").
-				"((to_supertag = '".quote($this->dblink, $this->NpJTranslit($tag))."')".
+				"(l.to_supertag = '".quote($this->dblink, $this->NpJTranslit($tag))."')".
 			" ORDER BY tag", 1);
 	}
 
@@ -1024,17 +1026,17 @@ class Wacko
 	function LoadWantedPages($for = "")
 	{
 		$pref = $this->config["table_prefix"];
-		$sql = "SELECT DISTINCT ".$pref."links.to_tag AS wanted_tag ".
-		"FROM ".$pref."links ".
-			"LEFT JOIN ".$pref."pages ON ".
-			"((".$pref."links.to_tag = ".$pref."pages.tag ".
-				"AND ".$pref."links.to_supertag = '') ".
-				"OR ".$pref."links.to_supertag = ".$pref."pages.supertag) ".
+		$sql = "SELECT DISTINCT l.to_tag AS wanted_tag ".
+		"FROM ".$pref."links l ".
+			"LEFT JOIN ".$pref."pages p ON ".
+			"((l.to_tag = p.tag ".
+				"AND l.to_supertag = '') ".
+				"OR l.to_supertag = p.supertag) ".
 		"WHERE ".
 			($for
-				? $pref."links.to_tag LIKE '".quote($this->dblink, $for)."/%' AND "
+				? "l.to_tag LIKE '".quote($this->dblink, $for)."/%' AND "
 				: "").
-		$pref."pages.tag is NULL GROUP BY wanted_tag ".
+		"p.tag is NULL GROUP BY wanted_tag ".
 		"ORDER BY wanted_tag ASC";
 		return $this->LoadAll($sql);
 	}
@@ -1042,17 +1044,17 @@ class Wacko
 	function LoadOrphanedPages($for = "")
 	{
 		$pref = $this->config["table_prefix"];
-		$sql = "SELECT DISTINCT page_id, tag FROM ".$pref."pages ".
-			"LEFT JOIN ".$pref."links ON ".
-			//     $pref."pages.tag = ".$pref."links.to_tag WHERE ".
-			"((".$pref."links.to_tag = ".$pref."pages.tag ".
-				"AND ".$pref."links.to_supertag = '') ".
-				"OR ".$pref."links.to_supertag = ".$pref."pages.supertag) ".
+		$sql = "SELECT DISTINCT page_id, tag FROM ".$pref."pages p ".
+			"LEFT JOIN ".$pref."links l ON ".
+			//     $pref."pages.tag = l.to_tag WHERE ".
+			"((l.to_tag = p.tag ".
+				"AND l.to_supertag = '') ".
+				"OR l.to_supertag = p.supertag) ".
 		"WHERE ".
 			($for
-				? $pref."pages.tag LIKE '".quote($this->dblink, $for)."/%' AND "
+				? "p.tag LIKE '".quote($this->dblink, $for)."/%' AND "
 				: "").
-		$pref."links.to_tag is NULL AND ".$pref."pages.comment_on_id = '0' ".
+		"l.to_page_id is NULL AND p.comment_on_id = '0' ".
 		"ORDER BY tag ".
 		"LIMIT 200";
 		return $this->LoadAll($sql);
@@ -2378,24 +2380,24 @@ class Wacko
 
 		$this->Query(
 			"DELETE FROM ".$this->config["table_prefix"]."links ".
-			"WHERE from_tag = '".quote($this->dblink, $from_tag)."'");
+			"WHERE from_page_id = '".quote($this->dblink, $page_id)."'");
 
 		if ($linktable = $this->GetLinkTable())
 		{
-			$from_tag = quote($this->dblink, $this->GetPageTag());
+			$from_page_id = quote($this->dblink, $this->GetPageId());
 			foreach ($linktable as $to_tag)
 			{
 				$lower_to_tag = strtolower($to_tag);
 
 				if (!$written[$lower_to_tag])
 				{
-					$query .= "('".$from_tag."','".$page_id."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->NpjTranslit($to_tag))."'),";
+					$query .= "('".$from_page_id."','".quote($this->dblink, $this->GetPageId($to_tag))."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->NpjTranslit($to_tag))."'),";
 					$written[$lower_to_tag] = 1;
 				}
 			}
 			$this->Query(
 				"INSERT INTO ".$this->config["table_prefix"]."links ".
-					"(from_tag, from_page_id, to_tag, to_supertag) ".
+					"(from_page_id, to_page_id, to_tag, to_supertag) ".
 				"VALUES ".rtrim($query, ","));
 		}
 	}
