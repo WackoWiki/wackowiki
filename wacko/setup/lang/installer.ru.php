@@ -62,7 +62,7 @@ $lang = array(
 "Mail" => "Адрес электронной почты администратора",
 "MailDesc" => "Введите адрес электронной почты администратора.",
 "Base" => "Базовый URL",
-"BaseDesc" => "Базовый URL сайта WackoWiki. К нему будут добавляться имена страниц; если используется mod_rewrite, адрес должен оканчиваться прямой косой чертой, т. е.</p><ul><li><b><i>http://www.wackowiki.org/</i></b></li><li><b><i>http://www.wackowiki.org/wiki/</i></b></li></ul><p class=\"no_top\">Если использование mod_rewrite не планируется, URL должен оканчиваться \"?page=\" т. е.<ul><li><b><i>http://www.wackowiki.org/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/wiki/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/?page=</i></b></li></ul>",
+"BaseDesc" => "Базовый URL сайта WackoWiki. К нему будут добавляться имена страниц; если используется mod_rewrite, адрес должен оканчиваться прямой косой чертой, т. е.</p><ul><li><b><i>http://www.wackowiki.org/</i></b></li><li><b><i>http://www.wackowiki.org/wiki/</i></b></li></ul>",
 "Rewrite" => "Rewrite-режим",
 "RewriteDesc" => "Rewrite-режим должен быть включен, если вы используете mod_rewrite.",
 "Enabled" => "Включен:",
