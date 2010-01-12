@@ -214,8 +214,14 @@ switch($config["database_driver"])
 					test(str_replace("%1","links",$lang["AlterTable"]), @mysql_query($alter_links_r4_2, $dblink), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","links",$lang["AlterTable"]), @mysql_query($alter_links_r4_2_1, $dblink), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","links",$lang["AlterTable"]), @mysql_query($alter_links_r4_2_2, $dblink), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
+
 					test(str_replace("%1","links",$lang["UpdateTable"]), @mysql_query($update_links_r4_2, $dblink), str_replace("%1", "links", $lang["ErrorUpdatingTable"]));
 					test(str_replace("%1","links",$lang["UpdateTable"]), @mysql_query($update_links_r4_2_1, $dblink), str_replace("%1", "links", $lang["ErrorUpdatingTable"]));
+
+					// drop last!
+					test(str_replace("%1","links",$lang["AlterTable"]), @mysql_query($alter_links_r4_2_3, $dblink), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
+					test(str_replace("%1","links",$lang["AlterTable"]), @mysql_query($alter_links_r4_2_4, $dblink), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
+					test(str_replace("%1","links",$lang["AlterTable"]), @mysql_query($alter_links_r4_2_5, $dblink), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
 
 					test(str_replace("%1","log",$lang["CreatingTable"]), @mysql_query($table_log_r4_2, $dblink), str_replace("%1", "log", $lang["ErrorCreatingTable"]));
 
@@ -470,6 +476,11 @@ switch($config["database_driver"])
 
 								test(str_replace("%1","links",$lang["UpdateTable"]), @mysqli_query($dblink, $update_links_r4_2), str_replace("%1", "links", $lang["ErrorUpdatingTable"]));
 								test(str_replace("%1","links",$lang["UpdateTable"]), @mysqli_query($dblink, $update_links_r4_2_1), str_replace("%1", "links", $lang["ErrorUpdatingTable"]));
+
+								// drop last!
+								test(str_replace("%1","links",$lang["AlterTable"]), @mysqli_query($dblink, $alter_links_r4_2_3), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
+								test(str_replace("%1","links",$lang["AlterTable"]), @mysqli_query($dblink, $alter_links_r4_2_4), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
+								test(str_replace("%1","links",$lang["AlterTable"]), @mysqli_query($dblink, $alter_links_r4_2_5), str_replace("%1", "links", $lang["ErrorAlteringTable"]));
 
 								test(str_replace("%1","log",$lang["CreatingTable"]), @mysqli_query($dblink, $table_log_r4_2), str_replace("%1", "log", $lang["ErrorCreatingTable"]));
 
