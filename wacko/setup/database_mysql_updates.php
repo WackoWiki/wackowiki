@@ -34,7 +34,10 @@ $alter_cache_r4_2 = "ALTER TABLE {$pref}cache ADD time TIMESTAMP NOT NULL, ADD I
 // LINKS
 $alter_links_r4_2 = "ALTER TABLE {$pref}links ADD id INT(10) UNSIGNED NOT NULL auto_increment FIRST, ADD PRIMARY KEY (id)";
 $alter_links_r4_2_1 = "ALTER TABLE {$pref}links ADD from_page_id INT(10) UNSIGNED NOT NULL AFTER from_tag";
-$alter_links_r4_2_2 = "ALTER TABLE {$pref}links ADD to_page_id INT(10) UNSIGNED NOT NULL AFTER to_tag";
+$alter_links_r4_2_2 = "ALTER TABLE {$pref}links ADD to_page_id INT(10) UNSIGNED NOT NULL AFTER from_page_id";
+$alter_links_r4_2_3 = "ALTER TABLE {$pref}links DROP from_tag";
+$alter_links_r4_2_4 = "ALTER TABLE {$pref}links DROP INDEX from_tag, ADD INDEX from_tag (from_page_id, to_tag (78))";
+$alter_links_r4_2_5 = "ALTER TABLE {$pref}links ADD INDEX idx_from_page_id (from_page_id)";
 
 $update_links_r4_2 = "UPDATE {$pref}links AS links, (SELECT id, tag FROM {$pref}pages) AS pages SET links.from_page_id = pages.id WHERE links.from_tag = pages.tag";
 $update_links_r4_2_1 = "UPDATE {$pref}links AS links, (SELECT id, tag FROM {$pref}pages) AS pages SET links.to_page_id = pages.id WHERE links.to_tag = pages.tag";
