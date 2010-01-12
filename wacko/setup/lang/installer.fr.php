@@ -62,7 +62,7 @@ $lang = array(
 "Mail" => "Adresse de messagerie de l'administrateur",
 "MailDesc" => "Indiquez l'adresse de messagerie de l'administrateur.",
 "Base" => "URL de base",
-"BaseDesc" => "URL de base de votre site WackoWiki. Les noms de page lui sont accolés, aussi doit-il se terminer par une barre oblique si vous utilisez l'extension \"mod_rewrite\", exemples&nbsp;:<br/><tt>http://www.wackowiki.org/<br/>http://www.wackowiki.org/wiki/</tt><br/><p class=\"no_top\">En revanche si vous n'utilisez pas  \"mod_rewrite\" l'URL doit se terminer par \"?page=\", exemples&nbsp;:<br/><tt>http://www.wackowiki.org/index.php?page=<br/>http://www.wackowiki.org/wiki/index.php?page=<br/>http://www.wackowiki.org/?page=<br/>http://www.wackowiki.org?page=</tt><br/>",
+"BaseDesc" => "URL de base de votre site WackoWiki. Les noms de page lui sont accolés, aussi doit-il se terminer par une barre oblique si vous utilisez l'extension \"mod_rewrite\", exemples&nbsp;:<br/><tt>http://www.wackowiki.org/<br/>http://www.wackowiki.org/wiki/</tt><br/>",
 "Rewrite" => "Mode \"rewrite\"",
 "RewriteDesc" => "L'extension \"mod_rewrite\" doit être activée pour utiliser WackoWiki avec la réécriture d'URL.",
 "Enabled" => "Activé&nbsp;",

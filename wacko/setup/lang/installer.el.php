@@ -64,7 +64,7 @@ $lang = array(
 "Mail" => "Ηλεκτρονική Διεύθυνση Διαχειριστή",
 "MailDesc" => "Εισήγαγε την ηλεκτρονική διεύθυνση του διαχειριστή.",
 "Base" => "Βασικό URL",
-"BaseDesc" => "Το βασικό URL των WackoWiki sites σας. Τα ονόματα των σελίδων θα εξαρτώνται από αυτό, ώστε όταν θα χρησιμοποιείτε το mod_rewrite η διεύθυνση θα τελειώνει με μία κάθετο π.χ.</p><ul><li><b><i>http://www.wackowiki.org/</i></b></li><li><b><i>http://www.wackowiki.org/wiki/</i></b></li></ul><p class=\"no_top\"> Εάν δεν θα χρησιμοποιήσετε το mod_rewrite τότε τα URL θα τελειώνουν με το \"?page=\" π.χ.<ul><li><b><i>http://www.wackowiki.org/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/wiki/index.php?page=</i></b></li><li><b><i>http://www.wackowiki.org/?page=</i></b></li></ul>",
+"BaseDesc" => "Το βασικό URL των WackoWiki sites σας. Τα ονόματα των σελίδων θα εξαρτώνται από αυτό, ώστε όταν θα χρησιμοποιείτε το mod_rewrite η διεύθυνση θα τελειώνει με μία κάθετο π.χ.</p><ul><li><b><i>http://www.wackowiki.org/</i></b></li><li><b><i>http://www.wackowiki.org/wiki/</i></b></li></ul>",
 "Rewrite" => "Κατάσταση Επανεγγραφής",
 "RewriteDesc" => "Η κατάσταση επανεγγραφής θα ενεργοποιηθεί εάν χρησιμοποιείται το WackoWiki με την επανεγγραφή URL.",
 "Enabled" => "Ενεργοποίηση:",
