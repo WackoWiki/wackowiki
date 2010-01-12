@@ -93,7 +93,7 @@ function admin_files(&$engine, &$module)
 	{
 		$user	= $engine->GetUserId();
 		$files	= $engine->LoadAll(
-			"SELECT id ".
+			"SELECT upload_id ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE user_id = '".quote($engine->dblink, $user['user_id'])."'");
 
