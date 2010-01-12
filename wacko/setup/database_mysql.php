@@ -35,14 +35,13 @@ $table_config = "CREATE TABLE {$pref}config (".
 
 $table_links = "CREATE TABLE {$pref}links (".
 					"link_id INT(10) UNSIGNED NOT NULL auto_increment,".
-					"from_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"to_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"to_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"to_supertag VARCHAR(250) NOT NULL,".
 					"PRIMARY KEY (link_id),".
-					"KEY from_tag (from_tag,to_tag(78)),".
-					"KEY idx_from (from_tag),".
+					"KEY from_tag (from_page_id,to_tag(78)),".
+					"KEY idx_from_page_id (from_page_id),".
 					"KEY idx_to (to_tag)".
 				") TYPE=MyISAM";
 
