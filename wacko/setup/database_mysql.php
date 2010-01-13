@@ -172,8 +172,8 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"more TEXT NOT NULL,".
 					"changepassword VARCHAR(100) NOT NULL,".
 					"email_confirm VARCHAR(40) NOT NULL DEFAULT '',".
-					"sessiontime DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"sessionexpire INT(10) UNSIGNED NOT NULL,".
+					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"session_expire INT(10) UNSIGNED NOT NULL,".
 					"total_pages INT(10) UNSIGNED NOT NULL,".
 					"total_revisions INT(10) UNSIGNED NOT NULL,".
 					"total_comments INT(10) UNSIGNED NOT NULL,".

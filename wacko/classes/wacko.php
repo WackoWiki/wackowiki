@@ -2695,8 +2695,8 @@ class Wacko
 		if ($user)
 			$user["options"] = $this->DecomposeOptions($user["more"]);
 
-		if ($user["sessiontime"] == SQL_NULLDATE)
-			$user["sessiontime"] = "";
+		if ($user["session_time"] == SQL_NULLDATE)
+			$user["session_time"] = "";
 
 		return $user;
 	}
@@ -2771,7 +2771,7 @@ class Wacko
 		if ($user['name'] == true)
 			return $this->Query(
 				"UPDATE {$this->config['user_table']} ".
-				"SET sessiontime = NOW() ".
+				"SET session_time = NOW() ".
 				"WHERE name = '".quote($this->dblink, $user['name'])."' ".
 				"LIMIT 1");
 	}
@@ -2810,7 +2810,7 @@ class Wacko
 		// code in user data table
 		$this->Query(
 			"UPDATE {$this->config['user_table']} SET ".
-				"sessionexpire	= '".quote($this->dblink, $ses_time)."', ".
+				"session_expire	= '".quote($this->dblink, $ses_time)."', ".
 				"changepassword	= '' ".
 			"WHERE name = '".quote($this->dblink, $user['name'])."' ".
 			"LIMIT 1");
@@ -2863,7 +2863,7 @@ class Wacko
 		// clear session expiry in user data table
 		$this->Query(
 			"UPDATE {$this->config['user_table']} ".
-			"SET sessionexpire = 0 ".
+			"SET session_expire = 0 ".
 			"WHERE name = '".quote($this->dblink, $_SESSION[$this->config["session_prefix"].'_'.$this->config['cookie_prefix'].'user']['name'])."' ".
 			"LIMIT 1");
 
@@ -3675,8 +3675,8 @@ class Wacko
 		// in strong cookie mode check session validity
 		if ($this->config["strong_cookies"] == true)
 		{
-			if ($user["sessionexpire"] != 0 && time() < $user["sessionexpire"] &&
-			time() < $auth["ses_time"] && $user["sessionexpire"] == $auth["ses_time"] &&
+			if ($user["session_expire"] != 0 && time() < $user["session_expire"] &&
+			time() < $auth["ses_time"] && $user["session_expire"] == $auth["ses_time"] &&
 			$auth["recalc_mac"] == $auth["cookie_mac"])
 			{
 				$session = true;

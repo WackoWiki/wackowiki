@@ -40,10 +40,10 @@ else if ($user = $this->GetUser())
 <div class="cssform">
   <h3><?php echo $this->GetTranslation("Hello").", ".$this->ComposeLinkToPage($user["name"]) ?>!</h3>
 <?php
-				if ($user["sessiontime"] == true)
+				if ($user["session_time"] == true)
 				{
 ?>
-				Last visit was recorded <tt><?php echo $this->GetTimeStringFormatted($user['sessiontime']); ?></tt>.<br />
+				Last visit was recorded <tt><?php echo $this->GetTimeStringFormatted($user['session_time']); ?></tt>.<br />
 <?php
 				}
 ?>
