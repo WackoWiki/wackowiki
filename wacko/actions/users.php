@@ -114,9 +114,9 @@ if ($_GET['profile'] == true)
 				<td style="width:100px; white-space:nowrap; padding-right:20px;" valign="top"><strong><?php echo $this->GetTranslation('UsersLastSession'); ?></strong></td>
 				<td><?php echo ( $user['options']['hide_lastsession'] == '1'
 					? '<em>'.$this->GetTranslation('UsersSessionHidden').'</em>'
-					: ( !$user['sessiontime'] || $user['sessiontime'] == SQL_NULLDATE
+					: ( !$user['session_time'] || $user['session_time'] == SQL_NULLDATE
 						? '<em>'.$this->GetTranslation('UsersSessionNA').'</em>'
-						: $this->GetTimeStringFormatted($user['sessiontime']) )
+						: $this->GetTimeStringFormatted($user['session_time']) )
 					); ?></td>
 			</tr>
 			<tr>
@@ -345,7 +345,7 @@ else
 	}
 	else if ($_GET['sort'] == 'session')
 	{
-		$order = "ORDER BY sessiontime DESC ";
+		$order = "ORDER BY session_time DESC ";
 		$param = "sort=".$_GET['sort'];
 	}
 
@@ -358,7 +358,7 @@ else
 
 	// collect data
 	$users = $this->LoadAll(
-		"SELECT name, signuptime, sessiontime, total_pages, total_revisions, total_comments ".
+		"SELECT name, signuptime, session_time, total_pages, total_revisions, total_comments ".
 		"FROM {$this->config['user_table']} ".
 		( $where == true ? $where : '' ).
 		( $order == true ? $order : "ORDER BY total_pages DESC " ).
@@ -408,7 +408,7 @@ else
 					'<td align="center">'.$user['total_comments'].'</td>'.
 					'<td align="center">'.$user['total_revisions'].'</td>'.
 					'<td align="center">'.$this->GetTimeStringFormatted($user['signuptime']).'</td>'.
-					'<td align="center">'.$this->GetTimeStringFormatted($user['sessiontime']).'</td>'.
+					'<td align="center">'.$this->GetTimeStringFormatted($user['session_time']).'</td>'.
 			"</tr>\n";
 		}
 	}
