@@ -385,12 +385,12 @@ else
 
 	// list header
 	echo '<tr>'.
-			'<th><a href="?sort=name">'.$this->GetTranslation('UsersName').( $_GET['sort'] == 'name' || $_REQUEST['user'] == true ? '*' : '' ).'</a></th>'.
-			'<th><a href="?sort=pages">'.$this->GetTranslation('UsersPages').( $_GET['sort'] == 'pages' || $_GET['sort'] == false ? '*' : '' ).'</a></th>'.
-			'<th><a href="?sort=comments">'.$this->GetTranslation('UsersPosts').( $_GET['sort'] == 'comments' ? '*' : '' ).'</a></th>'.
-			'<th><a href="?sort=revisions">'.$this->GetTranslation('UsersRevisions').( $_GET['sort'] == 'revisions' ? '*' : '' ).'</a></th>'.
-			'<th><a href="?sort=signup">'.$this->GetTranslation('UsersSignup').( $_GET['sort'] == 'date' ? '*' : '' ).'</a></th>'.
-			'<th><a href="?sort=session">'.$this->GetTranslation('UsersLastSession').( $_GET['sort'] == 'date' ? '*' : '' ).'</a></th>'.
+			'<th><a href="?sort=name">'.$this->GetTranslation('UsersName').( $_GET['sort'] == 'name' || $_REQUEST['user'] == true ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="?sort=pages">'.$this->GetTranslation('UsersPages').( $_GET['sort'] == 'pages' || $_GET['sort'] == false ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="?sort=comments">'.$this->GetTranslation('UsersPosts').( $_GET['sort'] == 'comments' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="?sort=revisions">'.$this->GetTranslation('UsersRevisions').( $_GET['sort'] == 'revisions' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="?sort=signup">'.$this->GetTranslation('UsersSignup').( $_GET['sort'] == 'date' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="?sort=session">'.$this->GetTranslation('UsersLastSession').( $_GET['sort'] == 'date' ? '&nbsp;&darr;' : '' ).'</a></th>'.
 		"</tr>\n";
 
 	// list entries
