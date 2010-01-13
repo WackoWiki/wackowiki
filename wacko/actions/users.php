@@ -389,8 +389,8 @@ else
 			'<th><a href="?sort=pages">'.$this->GetTranslation('UsersPages').( $_GET['sort'] == 'pages' || $_GET['sort'] == false ? '&nbsp;&darr;' : '' ).'</a></th>'.
 			'<th><a href="?sort=comments">'.$this->GetTranslation('UsersPosts').( $_GET['sort'] == 'comments' ? '&nbsp;&darr;' : '' ).'</a></th>'.
 			'<th><a href="?sort=revisions">'.$this->GetTranslation('UsersRevisions').( $_GET['sort'] == 'revisions' ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="?sort=signup">'.$this->GetTranslation('UsersSignup').( $_GET['sort'] == 'date' ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="?sort=session">'.$this->GetTranslation('UsersLastSession').( $_GET['sort'] == 'date' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="?sort=signup">'.$this->GetTranslation('UsersSignup').( $_GET['sort'] == 'signup' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="?sort=session">'.$this->GetTranslation('UsersLastSession').( $_GET['sort'] == 'session' ? '&nbsp;&darr;' : '' ).'</a></th>'.
 		"</tr>\n";
 
 	// list entries
