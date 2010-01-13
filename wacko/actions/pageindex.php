@@ -1,146 +1,82 @@
 <?php
 
-/*
- Page Index Action
- {{pageindex
- [max="50"] // optional - number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
- [letter="a"] // optional - only display pages whose name starts with this letter
- }}
- */
-
+if (!isset($title)) $title = "";
 if ($max) $limit = $max;
+else $limit	= 50;
 
-$offset = ( isset($_GET["offset"]) ) ? (int)$_GET["offset"] : 0;
-if(!$limit) $limit = 50;
-if (!isset($letter)) $letter = "";
-if(isset($letter)) $letter = strtoupper(substr($letter, 0, 1));
+$count = $this->LoadSingle(
+	"SELECT COUNT(tag) AS n ".
+	"FROM {$this->config['table_prefix']}pages ".
+	"WHERE comment_on_id = '0'", 1);
 
-// Get tags for all the pages, even if they're not being displayed on this index page
-$sql = "SELECT page_id, tag FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '0' ORDER BY tag";
-$pages = $this->LoadAll($sql, 1);
+$pagination = $this->Pagination($count['n'], $limit);
 
-$total = 0;
-$total_visible = 0;
-$top_links = "";
-$top_links_array = array();
-$page_links = "";
-$letter_count = 0;
-
-$page_links .= "<ul>\n";
-foreach($pages as $page)
+//  collect data
+if ($pages = $this->LoadAll(
+	"SELECT {$this->pages_meta} ".
+	"FROM {$this->config['table_prefix']}pages ".
+	"WHERE comment_on_id = '0' ".
+	"ORDER BY ".($title == 1
+		? "title ASC "
+		: "tag ASC ").
+	"LIMIT {$pagination['offset']}, ".(2 * $limit), 1))
 {
-	$firstChar = strtoupper($page["tag"][0]);
-	if(!preg_match("/".$this->language["ALPHA"]."/", $firstChar)) { $firstChar = "#"; }
-
-	// Create alphabet links at top of page - Don't display this menu if the user specified a particluar letter
-	if($firstChar != $curChar)
+	foreach ($pages as $page)
 	{
-		$top_links_array[] = array("char" => $firstChar, "ind" => $total, "link" => $letter_count);
+		if ($this->config['hide_locked'])
+			$access = $this->HasAccess('read', $page['page_id']);
+		else
+			$access = true;
 
-		$oldChar = $curChar;
+		if ($access)
+		{
+			$pages_to_display[$page['tag']] = $page;
+			$cnt++;
+		}
+
+		if ($cnt >= $limit) break;
+	}
+}
+
+//  display navigation
+if ($pages_to_display)
+	echo "<span class=\"pagination\">{$pagination['text']}</span><br /><br />\n";
+	echo "<ul>\n";
+//  display collected data
+foreach ($pages_to_display as $page)
+{
+	if ($title == 1)
+		$firstChar = strtoupper($page['title'][0]);
+	else
+		$firstChar = strtoupper($page['tag'][0]);
+
+	if (preg_match('/[\W\d]/', $firstChar)) $firstChar = '#';
+
+	if ($firstChar != $curChar)
+	{
+		if ($curChar) echo "</ul></li>\n";
+
+		echo "\n<li><strong>$firstChar</strong>\n<ul>\n";
+
 		$curChar = $firstChar;
-		$letter_count++;
 	}
 
-	// Display the actual page link
-	if($this->config["hide_locked"])
-		$access = $this->HasAccess("read",$page["page_id"]);
+	echo "<li>";
+	if ($title == 1)
+		echo $this->ComposeLinkToPage($page["tag"], '', $page["title"], 0);
 	else
-		$access = true;
+		echo $this->ComposeLinkToPage($page["tag"], '', $page["tag"], 0);
+	echo "</li>\n";
 
-	if($access)
-	{
-
-		if($total >= $offset)
-		{
-			if($total < $offset + $limit)
-			{
-				if(!$letter || $firstChar == $letter)
-				{
-
-					if($firstChar != $oldChar)
-					{
-						if ($oldChar && !$letter)
-						{
-							$page_links .= "</ul>\n<br /></li>\n";
-						}
-						$page_links .= "<li><a name=\"letter_".($letter_count - 1)."\"></a><strong>".$firstChar."</strong><ul>\n";
-						$oldChar = $firstChar;
-					}
-
-					$page_links .= "<li>".$this->Link("/".$page["tag"],"",$page["tag"])."</li>\n";
-
-					$total_visible++;
-				}
-
-			}
-		}
-
-		if(!$letter || $firstChar == $letter)
-		{
-			$total++;
-		}
-	}
 }
-$page_links .= "</ul>\n</li>\n";
-$page_links .= "</ul>\n";
+// close list
+if ($curChar)	echo "</ul>\n</li>\n";
 
-// Display prev/next navigation links?
-if ($limit >= $total) $no_arr = true;
+//  display navigation
+if ($pages_to_display)
 
-// Create the top links menu
-if(!$letter)
-{
-	if(!$no_arr)
-	{
-		foreach($top_links_array as $link_data)
-		{
-			$top_links.="<a href=\"".$this->href("", "", "offset=").(floor($link_data["ind"] / $limit) * $limit)."#letter_".$link_data["link"]."\"><strong>".$link_data["char"]."</strong></a>\n";
-		}
-	}
-	else
-	{
-		foreach($top_links_array as $link_data)
-		{
-			$top_links.="<a href=\"#letter_".$link_data["link"]."\"><li><strong>".$link_data["char"]."</strong></a>\n";
-		}
-	}
-
-	print($top_links."<br /><br />\n");
-}
-
-print($page_links);
-
-if($page_links != "")
-{
-	if(!$no_arr)
-	{
-		// Prev
-		if($offset + $total_visible > $limit)
-		{
-			$prev_page_link = '<a href="'.$this->href("", "", "offset=").($offset - $limit > 0 ? $offset - $limit : 0).'">&lt; '.$this->GetTranslation("Prev").'</a> |';
-		}
-		else
-		{
-			$prev_page_link = "&lt; ".$this->GetTranslation("Prev")." |";
-		}
-
-		// Next
-		if($offset + $total_visible < $total)
-		{
-			$next_page_link = '<a href="'.$this->href("", "", "offset=").($offset + $total_visible).'">'.$this->GetTranslation("Next").' &gt;</a>';
-		}
-		else
-		{
-			$next_page_link = $this->GetTranslation("Next")." &gt;";
-		}
-
-		print "<p class='logBtn'>$prev_page_link $next_page_link</p>\n";
-	}
-}
+	echo "</ul>\n<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 else
-{
-	print $this->GetTranslation("NoPagesFound");
-}
+	echo $this->GetTranslation("NoPagesFound");
 
 ?>
