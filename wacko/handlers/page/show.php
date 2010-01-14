@@ -294,7 +294,11 @@ if ($this->page)
 					print($this->Format($strings,"post_wacko")."\n");
 					echo "</div>\n";
 					print("<ul class=\"commentinfo\">\n".
-								"<li>".($this->IsWikiName($comment["user"]) ? $this->Link("/".$comment["user"],"",$comment["user"]) : $comment["user"])."</li>\n".
+								"<li>".($comment["user"]
+										? ($this->IsWikiName($comment["user"])
+											? $this->Link("/".$comment["user"],"",$comment["user"])
+											: $comment["user"])."</li>\n"
+										: $this->GetTranslation("Guest")).
 								"<li>".$this->GetTimeStringFormatted($comment["created"])."</li>\n".
 								($comment["modified"] != $comment["created"]
 									? "<li>".$this->GetTimeStringFormatted($comment["modified"])." ".$this->GetTranslation("CommentEdited")."</li>\n"
@@ -316,7 +320,7 @@ if ($this->page)
 
 				echo $this->FormOpen("addcomment"); ?>
 					<label for="addcomment"><?php echo $this->GetTranslation("AddComment");?></label><br />
-					<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment'])) echo $_SESSION[$this->config["session_prefix"].'_'.'freecap_old_comment']; ?></textarea>
+					<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?></textarea>
 
 					<label for="addcomment_title"><?php echo $this->GetTranslation("AddCommentTitle");?></label><br />
 					<input id="addcomment_title" name="title" size="60" maxlength="100"></input><br />
