@@ -2,7 +2,7 @@
 
 // {{MyChanges [max="Number"] [bydate="1"]}}
 
-if ($user = $this->GetUserName())
+if ($user_id = $this->GetUserId())
 {
 	if ($max) $limit = $max;
 	else $limit	= 100;
@@ -17,7 +17,7 @@ if ($user = $this->GetUserName())
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}pages ".
-			"WHERE user = '".quote($this->dblink, $user)."' ".
+			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'", 1);
 
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mychanges&amp;bydate=1#list');
@@ -25,7 +25,7 @@ if ($user = $this->GetUserName())
 		if ($pages = $this->LoadAll(
 			"SELECT tag, modified, edit_note ".
 			"FROM {$prefix}pages ".
-			"WHERE user = '".quote($this->dblink, $user)."' ".
+			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY modified DESC, tag ASC ".
 			"LIMIT {$pagination['offset']}, $limit", 1))
@@ -79,7 +79,7 @@ if ($user = $this->GetUserName())
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}pages ".
-			"WHERE user = '".quote($this->dblink, $user)."' ".
+			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'", 1);
 
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mychanges#list');
@@ -87,7 +87,7 @@ if ($user = $this->GetUserName())
 		if ($pages = $this->LoadAll(
 			"SELECT tag, modified ".
 			"FROM {$prefix}pages ".
-			"WHERE user = '".quote($this->dblink, $user)."' ".
+			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY tag ASC, modified DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1))
