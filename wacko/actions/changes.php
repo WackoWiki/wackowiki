@@ -61,13 +61,18 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
 			print("<li><span class=\"dt\">".date($this->config["time_format_seconds"], strtotime( $time ))."</span> &mdash; (".
 			$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".
 			$this->Link( "/".$page["tag"], "", $page["tag"] )." . . . . . . . . . . . . . . . . <small>".
-			($this->IsWikiName($page["user"])
-				? $this->Link("/".$page["user"],"",$page["user"])
-				: $page["user"]).
+			($page["user"]
+				? ($this->IsWikiName($page["user"])
+					? $this->Link("/".$page["user"],"",$page["user"])
+					: $page["user"])
+				: $this->GetTranslation("Guest")).
 			$edit_note.
 			"</small></li>\n");
 		}
 	}
 	echo "</ul>\n</li>\n</ul>\n";
 }
+else
+	echo $this->GetTranslation("NoPagesFound");
+
 ?>

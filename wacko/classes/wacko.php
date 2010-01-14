@@ -944,7 +944,7 @@ class Wacko
 		if ($pages = $this->LoadAll(
 		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.name as user ".
 		"FROM ".$this->config["table_prefix"]."pages p ".
-			"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
+			"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".
 			($from
 				? "AND p.modified <= '".quote($this->dblink, $from)." 23:59:59'"
@@ -989,7 +989,7 @@ class Wacko
 		if ($pages = $this->LoadAll(
 		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.body_r, u.name as user ".
 		"FROM ".$this->config["table_prefix"]."pages p ".
-			"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
+			"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 		"WHERE p.comment_on_id != '0' ".
 			($for
 				? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
