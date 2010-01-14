@@ -25,7 +25,10 @@ $wackoTranslation = array(
 	"LoginPassword" => "Passwort",
 	"LoginButton" => "Benutzer anmelden!",
 	"LoginPage" => "Anmeldung",
+
 	// other
+	"Guest" => "Gast",
+	"Help" => "Hilfe",
 	"MsWordVersion" => "Microsoft Word Version",
 	"EmailHello" => "Hallo, ",
 	"EmailGoodbye" => "MfG, ",
