@@ -74,7 +74,7 @@ $table_log = "CREATE TABLE {$pref}log (".
 				"log_id serial,".
 				"\"time\" timestamp without time zone NOT NULL DEFAULT NOW(),".
 				"level int(1) NOT NULL,".
-				"user character varying(80) NOT NULL DEFAULT '',".
+				"\"user_id\" integer NOT NULL DEFAULT '',".
 				"ip character varying(15) NOT NULL DEFAULT '',".
 				"message text NOT NULL DEFAULT '',".
 				"CONSTRAINT pk_log_id PRIMARY KEY (log_id)".

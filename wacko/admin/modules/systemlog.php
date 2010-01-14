@@ -39,7 +39,7 @@ function admin_systemlog(&$engine, &$module)
 				$mod = '=';
 				break;
 		}
-		$where = "WHERE level $mod ".(int)$_POST['level'].' ';
+		$where = "WHERE l.level $mod ".(int)$_POST['level'].' ';
 
 
 	}
@@ -47,12 +47,12 @@ function admin_systemlog(&$engine, &$module)
 	// set time ordering
 	if ($_GET['order'] == 'time_asc')
 	{
-		$order		= 'ORDER BY time ASC ';
+		$order		= 'ORDER BY l.time ASC ';
 		$ordertime	= 'time_desc';
 	}
 	else if ($_GET['order'] == 'time_desc')
 	{
-		$order		= 'ORDER BY time DESC ';
+		$order		= 'ORDER BY l.time DESC ';
 		$ordertime	= 'time_asc';
 	}
 	else
@@ -63,12 +63,12 @@ function admin_systemlog(&$engine, &$module)
 	// set level ordering
 	if ($_GET['order'] == 'level_asc')
 	{
-		$order		= 'ORDER BY level DESC ';		// we make level sorting
+		$order		= 'ORDER BY l.level DESC ';		// we make level sorting
 		$orderlevel	= 'level_desc';					// in reverse orber because
 	}												// higher level is denoted
 	else if ($_GET['order'] == 'level_desc')		// by lower value (e.g.
 	{												// 1 = critical, 2 = highest,
-		$order		= 'ORDER BY level ASC ';		// and so on)
+		$order		= 'ORDER BY l.level ASC ';		// and so on)
 		$orderlevel	= 'level_asc';
 	}
 	else
@@ -79,11 +79,11 @@ function admin_systemlog(&$engine, &$module)
 	// filter by username or user ip
 	if ($_GET['user'])
 	{
-		$where = "WHERE user = '".quote($engine->dblink, $_GET['user'])."' ";
+		$where = "WHERE u.name = '".quote($engine->dblink, $_GET['user'])."' ";
 	}
 	else if ($_GET['ip'])
 	{
-		$where = "WHERE ip = '".quote($engine->dblink, $_GET['ip'])."' ";
+		$where = "WHERE l.ip = '".quote($engine->dblink, $_GET['ip'])."' ";
 	}
 
 	// entries to display
@@ -101,10 +101,11 @@ function admin_systemlog(&$engine, &$module)
 	$pagination	= $engine->Pagination($count['n'], $limit, 'p', 'mode=systemlog&order='.htmlspecialchars($_GET['order']), '', 'admin.php');
 
 	$log = $engine->LoadAll(
-		"SELECT log_id, time, level, message, user, ip ".
-		"FROM {$engine->config['table_prefix']}log ".
-		( $where ? $where : 'WHERE level <= '.(int)$level.' ' ).
-		( $order ? $order : 'ORDER BY log_id DESC ' ).
+		"SELECT l.log_id, l.time, l.level, l.message, u.name as user, l.ip ".
+		"FROM {$engine->config['table_prefix']}log l ".
+			"LEFT JOIN {$engine->config['table_prefix']}users u ON (l.user_id = u.user_id) ".
+		( $where ? $where : 'WHERE l.level <= '.(int)$level.' ' ).
+		( $order ? $order : 'ORDER BY l.log_id DESC ' ).
 		"LIMIT {$pagination['offset']}, $limit");
 ?>
 	<form action="admin.php" method="post" name="systemlog">
