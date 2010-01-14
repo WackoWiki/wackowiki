@@ -52,6 +52,7 @@ function admin_configsystem(&$engine, &$module)
 				"`date_macro_format`	= '".quote((string)$_POST['date_macro_format'])."', ".
 				"`date_precise_format`	= '".quote((string)$_POST['date_precise_format'])."', ".
 				"`cookie_prefix`		= '".quote((string)$_POST['cookie_prefix'])."', ".
+				"`session_prefix`		= '".quote((string)$_POST['session_prefix'])."', ".
 				"`rewrite_mode`			= '".quote((int)$_POST['rewrite_mode'])."'
 
 				$engine->Query(
@@ -253,6 +254,14 @@ function admin_configsystem(&$engine, &$module)
 				<td class="label"><label for="cookie_prefix"><strong>The prefix for the names of cookies:</strong><br />
 				<small>Special prefix used for all the cookies platform.</small></label></td>
 				<td><input maxlength="50" style="width:200px;" id="cookie_prefix" name="cookie_prefix" value="<?php echo htmlspecialchars($engine->config['cookie_prefix']);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="session_prefix"><strong>The prefix for the names of session:</strong><br />
+				<small>Special prefix used for all the session platform.</small></label></td>
+				<td><input maxlength="50" style="width:200px;" id="session_prefix" name="session_prefix" value="<?php echo htmlspecialchars($engine->config['session_prefix']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

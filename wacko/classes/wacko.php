@@ -4496,14 +4496,14 @@ class Wacko
 		$html = $this->config['allow_rawhtml'];
 		$this->config['allow_rawhtml'] = 0;
 		$message = ( $this->language ? $this->Format($message, 'wacko') : $message );
-		$user = $this->GetUserName();
+		$user_id = $this->GetUserId();
 		$this->config['allow_rawhtml'] = $html;
 
 		// current timestamp set automatically
 		return $this->Query(
 			"INSERT INTO {$this->config['table_prefix']}log SET ".
 				"level		= '".quote($this->dblink, $level)."', ".
-				"user		= '".quote($this->dblink, $user ? $user : GUEST )."', ".
+				"user_id		= '".quote($this->dblink, $user_id ? $user_id : 0 )."', ".
 				"ip			= '".quote($this->dblink, $this->GetUserIP())."', ".
 				"message	= '".quote($this->dblink, $message)."'");
 	}

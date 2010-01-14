@@ -211,7 +211,7 @@ function admin_configbasic(&$engine, &$module)
 				</th>
 			</tr>
 			<tr>
-				<td class="label"><strong>Panel comments:</strong><br />
+				<td class="label"><strong>Comments panel:</strong><br />
 				<small>The default display in the bottom of the cover pages of comments.</small></td>
 				<td>
 					<input type="radio" id="hide_comments_on" name="hide_comments" value="0"<?php echo ( !$engine->config['hide_comments'] ? ' checked="checked"' : '' );?> /><label for="hide_comments_on">On.</label>
@@ -222,7 +222,7 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><strong>Panel File:</strong><br />
+				<td class="label"><strong>File panel:</strong><br />
 				<small>The default display in the bottom of the cover pages of attachments.</small></td>
 				<td>
 					<input type="radio" id="hide_files_on" name="hide_files" value="0"<?php echo ( !$engine->config['hide_files'] ? ' checked="checked"' : '' );?> /><label for="hide_files_on">On.</label>
@@ -233,7 +233,7 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><strong>Panel rating:</strong><br />
+				<td class="label"><strong>Rating panel :</strong><br />
 				<small>The default display in the bottom of the panel rating of the document.</small></td>
 				<td>
 					<input type="radio" id="hide_rating_on" name="hide_rating" value="0"<?php echo ( !$engine->config['hide_rating'] ? ' checked="checked"' : '' );?> /><label for="hide_rating_on">On.</label>
@@ -244,7 +244,7 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><strong>Panel table of contents:</strong><br />
+				<td class="label"><strong>Table of contents panel :</strong><br />
 				<small>The default display panel table of contents of document (may need support in the templates).</small></td>
 				<td>
 					<input type="radio" id="hide_toc_on" name="hide_toc" value="0"<?php echo ( !$engine->config['hide_toc'] ? ' checked="checked"' : '' );?> /><label for="hide_toc_on">On.</label>
