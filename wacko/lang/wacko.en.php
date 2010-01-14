@@ -31,6 +31,8 @@ $wackoTranslation = array(
 	"LoggedInAs" => "You are logged in as",
 
 	// other
+	"Guest" => "Guest",
+	"Help" => "Help",
 	"TopicSearchText" => "Search in titles only",
 	"MsWordVersion" => "Microsoft Word ready version",
 	"EmailHello" => "Hello, ",

@@ -44,7 +44,7 @@ if ($comments = LoadRecentComments($this, $root, (int)$max))
 			}
 
 			// print entry
-			print("<li><span class=\"dt\">".$time2."</span> &mdash; (<a href=\"".$this->href("", $comment["comment_on_page"], "show_comments=1")."#".$comment["tag"]."\">".$comment["comment_on_page"]."</a>) . . . . . . . . . . . . . . . . <small>".
+			print("<li><span class=\"dt\">".$time2."</span> &mdash; (<a href=\"".$this->href("", $comment["tag"], "")."\">".$comment["comment_on_page"]."</a>) . . . . . . . . . . . . . . . . <small>".
 			($this->IsWikiName($comment["user"])?$this->Link("/".$comment["user"],"",$comment["user"]):$comment["user"])."</small></li>\n");
 		}
 	}
