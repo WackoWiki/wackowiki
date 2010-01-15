@@ -638,6 +638,9 @@ p.layout-box span {
 	vertical-align: top;
 	width: 20%;
 }
+td.form_left {
+	padding-right: 20px;
+}
 
 /*Actions --------------------------------------------------*/
 .smaller {

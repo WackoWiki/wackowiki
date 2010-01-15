@@ -1,9 +1,9 @@
 <!--notypo-->
 <?php
 
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/wikiedit2.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/autocomplete.js\"></script>\n";
+#	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/protoedit.js\"></script>\n";
+#	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/wikiedit2.js\"></script>\n";
+#	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/autocomplete.js\"></script>\n";
 
 // reconnect securely in ssl mode
 if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
@@ -73,15 +73,6 @@ else if ($user = $this->GetUser())
 				$more = $this->ComposeOptions(array(
 					"theme" => $_POST["theme"],
 					"autocomplete" => $_POST["autocomplete"],
-
-
-
-
-
-
-
-
-
 					"dont_redirect" => $_POST["dont_redirect"],
 					"send_watchmail" => $_POST["send_watchmail"],
 					"show_files" => $_POST["show_files"],
@@ -171,24 +162,24 @@ else if ($user = $this->GetUser())
 ?>
 <input type="hidden" name="action" value="update" />
 <div id="cssformX">
-<h3><?php echo $this->GetTranslation("UsersProfile"); ?></h3>
+<h3><?php echo $this->GetTranslation("UserSettings"); ?></h3>
 <table class="form_tbl">
 <tbody>
   <tr>
-    <td class="form_left"><?php echo $this->GetTranslation("UserName");?>:</td>
+    <td class="form_left"><?php echo $this->GetTranslation("UserName");?></td>
     <td><strong><?php echo $user["name"];?></strong></td>
   </tr>
   <tr>
-    <td class="form_left"><label for="real_name"><?php echo $this->GetTranslation("RealName");?>:</label></td>
+    <td class="form_left"><label for="real_name"><?php echo $this->GetTranslation("RealName");?></label></td>
     <td><input id="real_name" name="real_name" value="<?php echo htmlentities($user["real_name"]) ?>" size="40" />
     </td>
   </tr>
   <tr>
-    <td class="form_left"><a href="<?php echo $this->href("", "Password")?>"><?php echo $this->GetTranslation("YouWantChangePassword");?></a>:</td>
+    <td class="form_left"><a href="<?php echo $this->href("", "Password")?>"><?php echo $this->GetTranslation("YouWantChangePassword");?></a></td>
     <td><input type="button" onclick="location.href='password'" value="<?php echo $this->GetTranslation("YouWantChangePassword");?>" name="_password"/></td>
   </tr>
   <tr>
-    <td class="form_left"><label for="email"><?php echo $this->GetTranslation("YourEmail");?>:</label></td>
+    <td class="form_left"><label for="email"><?php echo $this->GetTranslation("YourEmail");?></label></td>
     <td><input id="email" name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />&nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("root_url").'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("root_url").'images/warning.gif" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="16" height="16" />' ?>
 <?php
 		if (!$user["email"] || $code["email_confirm"])
@@ -197,41 +188,36 @@ else if ($user = $this->GetUser())
 				"<small>".$this->GetTranslation("EmailNotVerifiedDesc")."<strong><a href=\"?resend_code=1\">".$this->GetTranslation("HereLink")."</a></strong>.</small>";
 ?></td>
   </tr>
+  <tr>
+    <td class="form_left"><label for="motto"><?php echo $this->GetTranslation("YourMotto");?></label></td>
+    <td class="form_right"><textarea id="motto" name="motto" cols="80" rows="2"><?php echo htmlspecialchars($user["motto"]) ?></textarea>
+<?php /*
+		<script type="text/javascript">
+					wE = new WikiEdit();
+					wE.init('motto','<a href="<?php echo $this->href('', $this->config['wiki_docs']); ?>" title="<?php echo $this->GetTranslation('WikiEditTitle'); ?>">WikiEdit</a>','edname-w','<?php echo $this->config['root_url']; ?>images/wikiedit/');
+				</script>
+*/ ?>
+	</td>
+  </tr>
+	<tr class="lined">
+		<td></td>
+		<td></td>
+	</tr>
 	<tr>
-	<td class="form_left"><label for="lang"><?php echo $this->GetTranslation("YourLanguage");?>:</label></td>
+	<td class="form_left"><label for="lang"><?php echo $this->GetTranslation("YourLanguage");?></label></td>
 	<td class="form_right"><select id="lang" name="lang">
 	<option value=""></option>
 	<?php
 	$langs = $this->AvailableLanguages();
 	for ($i = 0; $i < count($langs); $i++)
 	{
-		echo "	<option value=\"".$langs[$i]."\"".($user["lang"] == $langs[$i] ? " selected=\"selected\"" : "").">".$langs[$i]."</option>\n";
+		echo "<option value=\"".$langs[$i]."\" ".($user["lang"] == $langs[$i] ? " selected=\"selected\"" : "").">".$langs[$i]."</option>\n";
 	}
 	?>
 </select></td>
   </tr>
   <tr>
-    <td class="form_left"><label for="motto"><?php echo $this->GetTranslation("YourMotto");?>:</label></td>
-    <td class="form_right"><textarea id="motto" name="motto" cols="80" rows="10"><?php echo htmlspecialchars($user["motto"]) ?></textarea>
-		<script type="text/javascript">
-					wE = new WikiEdit();
-					wE.init('motto','<a href="<?php echo $this->href('', $this->config['wiki_docs']); ?>" title="<?php echo $this->GetTranslation('WikiEditTitle'); ?>">WikiEdit</a>','edname-w','<?php echo $this->config['root_url']; ?>images/wikiedit/');
-				</script>
-	</td>
-  </tr>
-  <tr>
-    <td class="form_left">&nbsp;</td>
-    <td class="form_right">
-		<input id="submit" name="submit" type="submit" value="<?php echo $this->GetTranslation("UpdateSettingsButton"); ?>" />
-		&nbsp;
-		<input id="button" name="button" type="button" onclick="document.location='<?php echo $this->href("", "", "action=logout"); ?>'" value="<?php echo $this->GetTranslation("LogoutButton"); ?>" />
-	</td>
-  </tr>
-</table>
-<h3><?php echo $this->GetTranslation("UserSettings"); ?></h3>
-<table class="form_tbl">
-  <tr>
-    <td class="form_left"><label for="theme"><?php echo $this->GetTranslation("ChooseTheme");?>:</label></td>
+    <td class="form_left"><label for="theme"><?php echo $this->GetTranslation("ChooseTheme");?></label></td>
     <td class="form_right"><select id="theme" name="theme">
       <option value=""></option>
       <?php
@@ -244,16 +230,16 @@ else if ($user = $this->GetUser())
     </select></td>
   </tr>
   <tr>
-    <td class="form_left"><label for="bookmarks"><?php echo $this->GetTranslation("YourBookmarks");?>:</label></td>
+    <td class="form_left"><label for="bookmarks"><?php echo $this->GetTranslation("YourBookmarks");?></label></td>
     <td class="form_right"><textarea id="bookmarks" name="bookmarks" cols="40" rows="10"><?php echo htmlspecialchars($user["bookmarks"]) ?></textarea></td>
   </tr>
   <tr>
-    <td class="form_left"><label for="changescount"><?php echo $this->GetTranslation("RecentChangesLimit");?>:</label></td>
+    <td class="form_left"><label for="changescount"><?php echo $this->GetTranslation("RecentChangesLimit");?></label></td>
     <td class="form_right"><input id="changescount" name="changescount"
 	value="<?php echo htmlentities($user["changescount"]) ?>" size="40" /></td>
   </tr>
   <tr>
-    <td class="form_left"><label for="revisioncount"><?php echo $this->GetTranslation("RevisionListLimit");?>:</label></td>
+    <td class="form_left"><label for="revisioncount"><?php echo $this->GetTranslation("RevisionListLimit");?></label></td>
     <td class="form_right"><input id="revisioncount" name="revisioncount"
 	value="<?php echo htmlentities($user["revisioncount"]) ?>" size="40" /></td>
   </tr>
@@ -262,7 +248,7 @@ else if ($user = $this->GetUser())
 		<td></td>
 	</tr>
   <tr>
-    <td class="form_left"><?php echo $this->GetTranslation("UserSettingsOther");?>:</td>
+    <td class="form_left"><?php echo $this->GetTranslation("UserSettingsOther");?></td>
     <td class="form_right"><input type="hidden" name="doubleclickedit" value="0" />
       <input
 	type="checkbox" id="doubleclickedit" name="doubleclickedit" value="1"
@@ -362,6 +348,10 @@ else if ($user = $this->GetUser())
 	<input type="hidden" name="typografica" value="0" /><input type="checkbox" id="typografica" name="typografica" value="1" <?php echo $user["typografica"] == "1" ? "checked=\"checked\"" : "" ?> /><label for="typografica"><?php echo $this->GetTranslation("Typografica");?></label>
 	</td>
   </tr>-->
+	<tr class="lined">
+		<td></td>
+		<td></td>
+	</tr>
   <tr>
     <td class="form_left">&nbsp;</td>
     <td class="form_right">
