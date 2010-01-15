@@ -70,7 +70,7 @@ $wackoTranslation = array(
 	"Revision" => "See on varasem redigeering <a href=\"%1\">%2</a> %3.",
 	"ReadAccessDenied" => "<em>Sul pole õigusi seda lehte lugeda.</em>",
 	"YouAreOwner" => "Sa oled selle lehe omanik.",
-	"Owner" => "Omanik: ",
+	"Owner" => "Omanik",
 	"Nobody" => "Mittekeegi",
 	"TakeOwnership" => "Omasta",
 	"DeleteConfirm" => "Kas tõesti soovid selle lehe KUSTUTADA?\\nTaastamise võimalust enam pole!.",

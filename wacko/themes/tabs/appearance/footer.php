@@ -113,7 +113,7 @@ if ($this->page)
 	print($this->GetTranslation("YouAreOwner"));
 	else
 	if ($owner = $this->GetPageOwner())
-	print($this->GetTranslation("Owner").$this->Link($owner));
+	print($this->GetTranslation("Owner").": ".$this->Link($owner));
 	else if (!$this->page["comment_on_id"])
 	print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
 }

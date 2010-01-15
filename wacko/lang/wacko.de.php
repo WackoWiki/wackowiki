@@ -68,7 +68,7 @@ $wackoTranslation = array(
 	"Revision" => "Das ist eine alte Version von <a href=\"%1\">%2</a> vom %3.",
 	"ReadAccessDenied" => "<em>Du bist nicht berechtigt, diese Seite zu lesen.</em>",
 	"YouAreOwner" => "Diese Seite gehört dir.",
-	"Owner" => "Besitzer: ",
+	"Owner" => "Besitzer",
 	"Nobody" => "Niemand",
 	"TakeOwnership" => "Seite übernehmen",
 	"DeleteConfirm" => "Willst du wirklich diese Seite löschen?\\nDiese Aktion kann nicht rückgängig gemacht werden!",

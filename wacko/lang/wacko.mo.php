@@ -70,7 +70,7 @@ $wackoTranslation = array(
 	"Revision"  => "Aceasta e versiune veche <a href=\"%1\">%2</a> de la %3.",
 	"ReadAccessDenied" => "<em>Nu aveti drepturi de citire a paginii date.</em>",
 	"YouAreOwner" => "Posesor: Dvs. ",
-	"Owner" => "Posesor: ",
+	"Owner" => "Posesor",
 	"Nobody" => "Nimeni",
 	"TakeOwnership" => "A deveni posesor",
 	"DeleteConfirm" => "Doriti sa STERGETI textul? \\nNu va putea fi restabilit ulterior\ÿ.",
