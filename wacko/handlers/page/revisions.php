@@ -8,12 +8,14 @@
 if ($this->page["comment_on_id"])
 	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page["comment_on_id"]), "show_comments=1")."#".$this->page["tag"]);
 
+if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET["minor_edit"]) ? $_GET["minor_edit"] :"";
+
 if ($this->HasAccess("read"))
 {
 
 
 	// load revisions for this page
-	if ($pages = $this->LoadRevisions($this->page["page_id"]))
+	if ($pages = $this->LoadRevisions($this->page["page_id"], $hide_minor_edit))
 	{
 		$this->context[++$this->current_context] = "";
 		$output .= $this->FormOpen("diff", "", "get");
@@ -23,6 +25,10 @@ if ($this->HasAccess("read"))
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"fastdiff\" name=\"fastdiff\" />\n <label for=\"fastdiff\">".$this->GetTranslation("SimpleDiff")."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"source\" name=\"source\" />\n <label for=\"source\">".$this->GetTranslation("SourceDiff")."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("revisions.xml")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RevisionXMLTip")."\" alt=\"XML\" /></a>";
+		if ($this->GetConfigValue("minor_edit"))
+		{
+			$output .= "<br />".(!$_GET['minor_edit'] == '1' ? "<a href=\"".$this->href("revisions", "", "minor_edit=1")."\">".$this->GetTranslation("MinorEditHide")."</a>" : "<a href=\"".$this->href("revisions", "", "minor_edit=0")."\">".$this->GetTranslation("MinorEditShow")."</a>");
+		}
 		$output .= "</p>\n<ul class=\"revisions\">\n";
 
 		if ($_GET["show"] == "all")

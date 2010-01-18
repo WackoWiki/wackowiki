@@ -886,7 +886,7 @@ class Wacko
 	}
 
 	// STANDARD QUERIES
-	function LoadRevisions($page_id)
+	function LoadRevisions($page_id, $minor_edit = "")
 	{
 		$pages_meta = "p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.name as user ";
 
@@ -895,6 +895,9 @@ class Wacko
 			"FROM ".$this->config["table_prefix"]."revisions p ".
 				"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 			"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
+				($minor_edit
+					? "AND p.minor_edit = '0' "
+					: "").
 			"ORDER BY p.modified DESC");
 
 		if ($rev == true)
@@ -904,6 +907,9 @@ class Wacko
 				"FROM ".$this->config["table_prefix"]."pages p ".
 					"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 				"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
+					($minor_edit
+						? "AND p.minor_edit = '0' "
+						: "").
 				"ORDER BY p.modified DESC ".
 				"LIMIT 1"))
 			{
@@ -937,7 +943,7 @@ class Wacko
 			" ORDER BY tag", 1);
 	}
 
-	function LoadRecentlyChanged($limit = 100, $for = "", $from = "")
+	function LoadRecentlyChanged($limit = 100, $for = "", $from = "", $minor_edit = "")
 	{
 		$limit = (int)$limit;
 
@@ -951,6 +957,9 @@ class Wacko
 				: "").
 			($for
 				? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
+				: "").
+			($minor_edit
+				? "AND p.minor_edit = '0' "
 				: "").
 		"ORDER BY p.modified DESC ".
 		"LIMIT ".$limit, 1))
