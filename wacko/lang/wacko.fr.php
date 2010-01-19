@@ -329,7 +329,7 @@ $wackoTranslation = array(
 	"EmailConfirm" => "Merci de vérifier votre adresse de messagerie",
 	"EmailConfirmed" => "Adresse de messagerie confirmée.",
 	"EmailNotConfirmed" => "Adresse de messagerie non confirmée. Ceci peut être dû à un code de confirmation erroné, mais cette adresse peut aussi avoir été déjà confirmée. Identifiez-vous et vérifiez-le sur votre page %1.",
-	"EmailNotVerified" => "* Email not verified!",
+	"EmailNotVerified" => "Email not verified!",
 	"EmailNotVerifiedDesc" => "You will not receive notification of changes or comments of watched pages, ".
 							"messages from other users, as well you <u>will not be able to recover a forgotten password</u>, ".
 							"until your email-address was confirmed, by following the link in the email sent to you. ".

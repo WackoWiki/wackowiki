@@ -44,32 +44,32 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 <div style="float: left; witdh: 79%;">
 <?php echo $this->FormOpen("settings") ?>
 <?php
-		echo "<table border=\"0\" cellspacing=\"3\" cellpadding=\"0\">";
+		echo "<table class=\"form_tbl\">";
 		echo "<tr class=\"lined\">";
-		echo "<td>".$this->GetTranslation('SettingsID')."</td>";
-		echo "<td>".$this->page['page_id']."</td>";
+		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsID')."</th>";
+		echo "<td class=\"form_right\">".$this->page['page_id']."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
-		echo "<td>".$this->GetTranslation('Owner')."</td>";
-		echo "<td>".$this->GetUserNameById($this->page['owner_id'])."</td>";
+		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('Owner')."</th>";
+		echo "<td class=\"form_right\">".$this->GetUserNameById($this->page['owner_id'])."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
-		echo "<td>".$this->GetTranslation('SettingsCreated')."</td>";
-		echo "<td>".$this->GetTimeStringFormatted($this->page['created'])."</td>";
+		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsCreated')."</th>";
+		echo "<td class=\"form_right\">".$this->GetTimeStringFormatted($this->page['created'])."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
-		echo "<td>".$this->GetTranslation('SettingsCurrent')."</td>";
-		echo "<td>".$this->GetTimeStringFormatted($this->page['modified'])."</td>";
+		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsCurrent')."</th>";
+		echo "<td class=\"form_right\">".$this->GetTimeStringFormatted($this->page['modified'])."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
-		echo "<td>".$this->GetTranslation('SettingsSize')."&nbsp;&nbsp;</td>";
-		echo "<td>".ceil(strlen($this->page['body']) / 1000).' / '.ceil(strlen($this->page['body_r']) / 1000)." kB"."</td>";
+		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsSize')."&nbsp;&nbsp;</th>";
+		echo "<td class=\"form_right\">".ceil(strlen($this->page['body']) / 1000).' kB / '.ceil(strlen($this->page['body_r']) / 1000)." kB"."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
-		echo "<td>".$this->GetTranslation('SettingsTotalRevs')."</td>";
-		echo "<td>".(int)$revs['total']."</td>";
+		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsTotalRevs')."</th>";
+		echo "<td class=\"form_right\">".(int)$revs['total']."</td>";
 		unset($revs);
 		echo "</tr>\n<tr class=\"lined\">";
-		echo "<td>".$this->GetTranslation('SettingsTotalComs')."</td>";
-		echo "<td>".$this->page['comments']."</td>";
+		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsTotalComs')."</th>";
+		echo "<td class=\"form_right\">".$this->page['comments']."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
-		echo "<td>".$this->GetTranslation('SettingsHits')."</td>";
-		echo "<td>".$this->page['hits']."</td>";
+		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsHits')."</th>";
+		echo "<td class=\"form_right\">".$this->page['hits']."</td>";
 
 
 
@@ -83,20 +83,20 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 ?>
 
 		<?php echo "</tr>\n<tr class=\"lined\">"; ?>
-		<td><label for="title"><?php echo $this->GetTranslation("MetaTitle"); ?></label></td>
-		<td><input id="title" name="title" value="<?php echo $this->page["title"] ?>" size="60" maxlength="100" /></td>
+		<th class="form_left" scope="row"><label for="title"><?php echo $this->GetTranslation("MetaTitle"); ?></label></th>
+		<td class="form_right"><input id="title" name="title" value="<?php echo $this->page["title"] ?>" size="60" maxlength="100" /></td>
 
 		<?php echo "</tr>\n<tr class=\"lined\">"; ?>
-		<td><label for="keywords"><?php echo $this->GetTranslation("MetaKeywords"); ?></label></td>
-		<td><textarea id="keywords" name="keywords" rows="4" cols="51"><?php echo $this->page["keywords"] ?></textarea></td>
+		<th class="form_left" scope="row"><label for="keywords"><?php echo $this->GetTranslation("MetaKeywords"); ?></label></th>
+		<td class="form_right"><textarea id="keywords" name="keywords" rows="4" cols="51"><?php echo $this->page["keywords"] ?></textarea></td>
 
 		<?php echo "</tr>\n<tr class=\"lined\">"; ?>
-		<td><label for="description"><?php echo $this->GetTranslation("MetaDescription"); ?></label></td>
-		<td><textarea id="description" name="description" rows="4" cols="51"><?php echo $this->page["description"] ?></textarea></td>
+		<th class="form_left" scope="row"><label for="description"><?php echo $this->GetTranslation("MetaDescription"); ?></label></th>
+		<td class="form_right"><textarea id="description" name="description" rows="4" cols="51"><?php echo $this->page["description"] ?></textarea></td>
 
 		<?php echo "</tr>\n<tr class=\"lined\">"; ?>
-		<td><label for="lang"><?php echo $this->GetTranslation("SetLang"); ?></label></td>
-		<td><select id="lang" name="lang">
+		<th class="form_left" scope="row"><label for="lang"><?php echo $this->GetTranslation("SetLang"); ?></label></th>
+		<td class="form_right"><select id="lang" name="lang">
 		<?php
 		if (!($clang = $this->page["lang"]))
 		$clang = $this->GetConfigValue("language");
@@ -105,7 +105,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		{
 			foreach ($langs as $lang)
 			{
-				print("<option value=\"".$lang."\"".($clang==$lang ? "selected=\"selected\"" : "").">".$lang."</option>\n");
+				print("<option value=\"".$lang."\" ".($clang==$lang ? "selected=\"selected\"" : "").">".$lang."</option>\n");
 			}
 		}
 		?>
@@ -114,7 +114,8 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		<div class="BewareChangeLang"> <?php echo $this->GetTranslation("BewareChangeLang"); ?></div></td>
 
 		<?php echo "</tr>\n<tr class=\"lined\">"; ?>
-		<td><input type="submit" value="<?php echo $this->GetTranslation("MetaStoreButton"); ?>" style="width: 120px" accesskey="s" />
+		<th class="form_left"></td>
+		<td class="form_right"><input type="submit" value="<?php echo $this->GetTranslation("MetaStoreButton"); ?>" style="width: 120px" accesskey="s" />
 		&nbsp;
 		<input type="button" value="<?php echo $this->GetTranslation("MetaCancelButton"); ?>" onclick="history.back();" style="width: 120px" /></td>
 
@@ -124,17 +125,17 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		else
 		{
 			echo "</tr>\n<tr class=\"lined\">";
-			echo "<td>".$this->GetTranslation("MetaTitle")."</td>";
-			echo "<td>".$this->page["title"]."</td>";
+			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation("MetaTitle")."</th>";
+			echo "<td class=\"form_right\">".$this->page["title"]."</td>";
 			echo "</tr>\n<tr class=\"lined\">";
-			echo "<td>".$this->GetTranslation("MetaKeywords")."</td>";
-			echo "<td>".$this->page["keywords"]."</td>";
+			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation("MetaKeywords")."</th>";
+			echo "<td class=\"form_right\">".$this->page["keywords"]."</td>";
 			echo "</tr>\n<tr class=\"lined\">";
-			echo "<td>".$this->GetTranslation("MetaDescription")."</td>";
-			echo "<td>".$this->page["description"]."</td>";
+			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation("MetaDescription")."</th>";
+			echo "<td class=\"form_right\">".$this->page["description"]."</td>";
 			echo "</tr>\n<tr class=\"lined\">";
-			echo "<td>".$this->GetTranslation("SetLang")."</td>";
-			echo "<td>".$this->page["lang"]."</td>";
+			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation("SetLang")."</th>";
+			echo "<td class=\"form_right\">".$this->page["lang"]."</td>";
 		}
 		echo "</tr>\n</table>";
 		echo $this->FormClose();
@@ -142,7 +143,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 }
 ?>
 
-<br /><br />
+
 <div style="float: right;">
 <p><?php echo $this->GetTranslation("SettingsPortal");?></p>
 <ul>

@@ -329,7 +329,7 @@ $wackoTranslation = array(
 	"EmailConfirm" => "Bitte bestätige deine E-Mail.",
 	"EmailConfirmed" => "E-Mail wurde erfolgreich bestätigt.",
 	"EmailNotConfirmed" => "E-Mail konnte nicht bestätigt werden. Dies könnte an einen falschen Bestätigung-Code liegen oder die E-Mail-Adresse wurde möglicherweise bereits bestätigt. Du kannst prüfen ob die E-Mail bereits bestätigt wurde indem du dich anmeldst und deinen Status auf deiner %1 Seite einsiehst.",
-	"EmailNotVerified" => "* E-Mail wurde nicht bestätigt!",
+	"EmailNotVerified" => "E-Mail wurde nicht bestätigt!",
 	"EmailNotVerifiedDesc" => "Du erhälst keine Benachrichtigung über Änderungen oder Kommentare von beobachteten Seiten, ".
 							"Nachrichten von anderen Nutzern, ebenso wirst du nicht in der Lage sein <u> ein vergessenes Passwort wieder herzustellen</u>, ".
 							"bis deine E-Mail-Adresse bestätigt wurde, indem du den Link in der dir zugesendeten E-Mail folgst.".

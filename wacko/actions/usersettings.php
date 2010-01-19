@@ -166,30 +166,30 @@ else if ($user = $this->GetUser())
 <table class="form_tbl">
 <tbody>
   <tr>
-    <td class="form_left"><?php echo $this->GetTranslation("UserName");?></td>
+    <th class="form_left" scope="row"><?php echo $this->GetTranslation("UserName");?></th>
     <td><strong><?php echo $user["name"];?></strong></td>
   </tr>
   <tr>
-    <td class="form_left"><label for="real_name"><?php echo $this->GetTranslation("RealName");?></label></td>
+    <th class="form_left" scope="row"><label for="real_name"><?php echo $this->GetTranslation("RealName");?></label></th>
     <td><input id="real_name" name="real_name" value="<?php echo htmlentities($user["real_name"]) ?>" size="40" />
     </td>
   </tr>
   <tr>
-    <td class="form_left"><a href="<?php echo $this->href("", "Password")?>"><?php echo $this->GetTranslation("YouWantChangePassword");?></a></td>
+    <th class="form_left" scope="row"><a href="<?php echo $this->href("", "Password")?>"><?php echo $this->GetTranslation("YouWantChangePassword");?></a></th>
     <td><input type="button" onclick="location.href='password'" value="<?php echo $this->GetTranslation("YouWantChangePassword");?>" name="_password"/></td>
   </tr>
   <tr>
-    <td class="form_left"><label for="email"><?php echo $this->GetTranslation("YourEmail");?></label></td>
+    <th class="form_left" scope="row"><label for="email"><?php echo $this->GetTranslation("YourEmail");?></label></th>
     <td><input id="email" name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />&nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("root_url").'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("root_url").'images/warning.gif" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="16" height="16" />' ?>
 <?php
 		if (!$user["email"] || $code["email_confirm"])
-			echo "<strong class=\"cite\"".
+			echo "<div class=\"BewareChangeLang\"><strong class=\"cite\">".
 				$this->GetTranslation("EmailNotVerified")."</strong><br />".
-				"<small>".$this->GetTranslation("EmailNotVerifiedDesc")."<strong><a href=\"?resend_code=1\">".$this->GetTranslation("HereLink")."</a></strong>.</small>";
+				"<small>".$this->GetTranslation("EmailNotVerifiedDesc")."<strong><a href=\"?resend_code=1\">".$this->GetTranslation("HereLink")."</a></strong>.</small></div>";
 ?></td>
   </tr>
   <tr>
-    <td class="form_left"><label for="motto"><?php echo $this->GetTranslation("YourMotto");?></label></td>
+    <th class="form_left" scope="row"><label for="motto"><?php echo $this->GetTranslation("YourMotto");?></label></th>
     <td class="form_right"><textarea id="motto" name="motto" cols="80" rows="2"><?php echo htmlspecialchars($user["motto"]) ?></textarea>
 <?php /*
 		<script type="text/javascript">
@@ -204,7 +204,7 @@ else if ($user = $this->GetUser())
 		<td></td>
 	</tr>
 	<tr>
-	<td class="form_left"><label for="lang"><?php echo $this->GetTranslation("YourLanguage");?></label></td>
+	<th class="form_left" scope="row"><label for="lang"><?php echo $this->GetTranslation("YourLanguage");?></label></th>
 	<td class="form_right"><select id="lang" name="lang">
 	<option value=""></option>
 	<?php
@@ -217,7 +217,7 @@ else if ($user = $this->GetUser())
 </select></td>
   </tr>
   <tr>
-    <td class="form_left"><label for="theme"><?php echo $this->GetTranslation("ChooseTheme");?></label></td>
+    <th class="form_left" scope="row"><label for="theme"><?php echo $this->GetTranslation("ChooseTheme");?></label></th>
     <td class="form_right"><select id="theme" name="theme">
       <option value=""></option>
       <?php
@@ -230,16 +230,16 @@ else if ($user = $this->GetUser())
     </select></td>
   </tr>
   <tr>
-    <td class="form_left"><label for="bookmarks"><?php echo $this->GetTranslation("YourBookmarks");?></label></td>
+    <th class="form_left" scope="row"><label for="bookmarks"><?php echo $this->GetTranslation("YourBookmarks");?></label></th>
     <td class="form_right"><textarea id="bookmarks" name="bookmarks" cols="40" rows="10"><?php echo htmlspecialchars($user["bookmarks"]) ?></textarea></td>
   </tr>
   <tr>
-    <td class="form_left"><label for="changescount"><?php echo $this->GetTranslation("RecentChangesLimit");?></label></td>
+    <th class="form_left" scope="row"><label for="changescount"><?php echo $this->GetTranslation("RecentChangesLimit");?></label></th>
     <td class="form_right"><input id="changescount" name="changescount"
 	value="<?php echo htmlentities($user["changescount"]) ?>" size="40" /></td>
   </tr>
   <tr>
-    <td class="form_left"><label for="revisioncount"><?php echo $this->GetTranslation("RevisionListLimit");?></label></td>
+    <th class="form_left" scope="row"><label for="revisioncount"><?php echo $this->GetTranslation("RevisionListLimit");?></label></th>
     <td class="form_right"><input id="revisioncount" name="revisioncount"
 	value="<?php echo htmlentities($user["revisioncount"]) ?>" size="40" /></td>
   </tr>
@@ -248,7 +248,7 @@ else if ($user = $this->GetUser())
 		<td></td>
 	</tr>
   <tr>
-    <td class="form_left"><?php echo $this->GetTranslation("UserSettingsOther");?></td>
+    <th class="form_left" scope="row"><?php echo $this->GetTranslation("UserSettingsOther");?></th>
     <td class="form_right"><input type="hidden" name="doubleclickedit" value="0" />
       <input
 	type="checkbox" id="doubleclickedit" name="doubleclickedit" value="1"
