@@ -115,7 +115,8 @@ $update_revisions_r4_2 = "UPDATE {$pref}revisions AS revisions, (SELECT id, name
 $update_revisions_r4_2_1 = "UPDATE {$pref}revisions AS revisions, (SELECT id, name FROM {$pref}users) AS users SET revisions.user_id = users.id WHERE revisions.user = users.name";
 $update_revisions_r4_2_2 = "UPDATE {$pref}revisions SET latest = '0'";
 $update_revisions_r4_2_3 = "UPDATE {$pref}revisions AS revisions, (SELECT id, tag FROM {$pref}pages) AS pages SET revisions.page_id = pages.id WHERE revisions.tag = pages.tag";
-# $update_revisions_r4_2_4 = "UPDATE {$pref}revisions AS revisions, (SELECT id, tag FROM {$pref}pages) AS pages2 SET revisions.comment_on_id = pages2.id WHERE revisions.comment_on = pages2.tag";
+# $update_revisions_r4_2_x = "UPDATE {$pref}revisions AS revisions, (SELECT id, tag FROM {$pref}pages) AS pages2 SET revisions.comment_on_id = pages2.id WHERE revisions.comment_on = pages2.tag";
+$update_revisions_r4_2_4 = "UPDATE {$pref}revisions revisions AS revisions SET minor_edit = '0' WHERE revisions.minor_edit IS NULL";
 
 // UPLOAD
 $alter_upload_r4_2 = "ALTER TABLE {$pref}upload CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
