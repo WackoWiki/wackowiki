@@ -135,7 +135,7 @@ echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $thi
 <?php if ($this->method == "edit") echo "style=\"margin-bottom:0;padding-bottom:0\""?>>
 <div class="Print">
   <?php if ($this->GetUser()) { ?>
-  <?php echo ($this->IsWatched($this->GetUserId(), $this->GetPageId()) ?
+  <?php echo ($this->iswatched === true ?
       "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("RemoveWatch")."</a>" :
       "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("SetWatch")."</a>" ) ?> ::
   <?php if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>

@@ -165,7 +165,7 @@ if ($this->method == "show") {
 				$registered = true;
 			}
 			else
-			$user = "guest@wacko";
+			$user = GUEST;
 
 			if ($registered
 			&&

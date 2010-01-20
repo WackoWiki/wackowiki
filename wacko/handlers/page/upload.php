@@ -14,7 +14,7 @@ if ($user = $this->GetUser())
 }
 else
 {
-	$user = "guest@wacko";
+	$user = GUEST;
 }
 
 if ($registered
