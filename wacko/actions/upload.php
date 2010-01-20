@@ -6,7 +6,7 @@
 		[hide_description=1]
 	}}
 */
- 
+
 if (!isset($global)) $global = "";
 if (!isset($maxsize)) $maxsize = "";
 if (!isset($hide_description)) $hide_description = "";
@@ -23,7 +23,7 @@ if ($user = $this->GetUser())
 }
 else
 {
-	$user = "guest@wacko";
+	$user = GUEST;
 }
 
 if ($registered
@@ -67,10 +67,10 @@ if ($registered
 		<td>&nbsp;</td>
 		<td>
 		<div>
-		<input type="radio" name="_to" disabled="disabled" checked="checked" value="global" id="toUploadGlobalDisabled" /> 
+		<input type="radio" name="_to" disabled="disabled" checked="checked" value="global" id="toUploadGlobalDisabled" />
 		<input type="hidden" name="to" value="global" /> <?php echo $this->GetTranslation("UploadGlobalText"); ?>
 		</div>
-	
+
 	</tr>
 	<?php }
 	else

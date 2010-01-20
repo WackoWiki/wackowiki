@@ -13,7 +13,7 @@ if ($user = $this->GetUser())
 	$registered = true;
 }
 else
-$user = "guest@wacko";
+$user = GUEST;
 
 if ($registered
 &&

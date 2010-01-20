@@ -787,10 +787,11 @@ class Wacko
 
 	function CacheLinks()
 	{
+		$page_id = $this->GetPageId();
 		if ($links = $this->LoadAll(
 			"SELECT * ".
 			"FROM ".$this->config["table_prefix"]."links ".
-			"WHERE from_page_id='".quote($this->dblink, $this->GetPageId())."'"))
+			"WHERE from_page_id='".quote($this->dblink, $page_id)."'"))
 		{
 			$cl = count($links);
 			if (!isset($cl))$cl = 0;
@@ -2588,7 +2589,6 @@ class Wacko
 
 	function Method($method)
 	{
-		if ($method == "show") $this->CacheLinks();
 		if (!$handler = $this->page["handler"]) $handler = "page";
 
 		$methodLocation = $handler."/".$method.".php";
@@ -3233,12 +3233,12 @@ class Wacko
 	{
 		$registered = false;
 		// see whether user is registered and logged in
-		if ($user != "guest@wacko")
+		if ($user != GUEST)
 		{
 			if ($user = $this->GetUser()) $registered = true;
 				$user = strtolower($this->GetUserName());
 			if (!$registered)
-				$user = "guest@wacko";
+				$user = GUEST;
 		}
 
 		if (!$page_id = trim($page_id)) $page_id = $this->GetPageId();
@@ -3248,7 +3248,7 @@ class Wacko
 		$this->_acl = $acl;
 
 		// if current user is owner or admin, return true. they can do anything!
-		if ($user != "guest@wacko")
+		if ($user != GUEST)
 			if ($this->UserIsOwner($page_id) || $this->IsAdmin())
 				return true;
 
@@ -3268,7 +3268,7 @@ class Wacko
 
 		$acls = "\n".$acl."\n";
 
-		if ($user == "guest@wacko" || $user == "")
+		if ($user == GUEST || $user == "")
 		{
 			if (($pos = strpos($acls, '*')) === false)
 				return false;
@@ -3298,7 +3298,7 @@ class Wacko
 
 		if ($bpos !== false)
 		{
-			if ($user == "guest@wacko" || $user == "") return false;
+			if ($user == GUEST || $user == "") return false;
 			else return true;
 		}
 
@@ -3773,11 +3773,7 @@ class Wacko
 			}
 		}
 
-		$wacko = &$this;
-
 		if (!$this->method = trim($method)) $this->method = "show";
-
-		# if (!$this->tag = trim($tag)) $this->Redirect($this->href("", $this->config["root_page"]));
 
 		// normalizing tag name
 		if (!preg_match("/^[".$this->language["ALPHANUM_P"]."\!]+$/", $tag))
@@ -3786,8 +3782,8 @@ class Wacko
 		$tag = str_replace("'", "_", str_replace("\\", "", str_replace("_", "", $tag)));
 		$tag = preg_replace("/[^".$this->language["ALPHANUM_P"]."\_\-\.]/", "", $tag);
 
-		$this->tag = $tag;
-		$this->supertag = $this->NpjTranslit($tag);
+		$this->tag		= $tag;
+		$this->supertag	= $this->NpjTranslit($tag);
 
 		$time = isset($_GET["time"]) ? $_GET["time"] : "";
 
@@ -3802,16 +3798,16 @@ class Wacko
 		$this->LogReferrer();
 		$this->SetBookmarks();
 
-		if (!$this->GetUser() && $this->page["modified"])
+		if (!$user && $this->page["modified"])
 		{
 			header("Last-Modified: ".gmdate("D, d M Y H:i:s", strtotime($this->page["modified"]) + 120)." GMT");
 		}
 
 		// check page watching
-		#if ($user && $this->page) if ($this->IsWatched($user['name'], $this->tag))
-		#{
-		#	$this->iswatched = true;
-		#}
+		if ($user && $this->page) if ($this->IsWatched($user['user_id'], $this->page["page_id"]))
+		{
+			$this->iswatched = true;
+		}
 
 		// display page contents
 		if (preg_match("/(\.xml)$/", $this->method))

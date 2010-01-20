@@ -75,7 +75,7 @@ if ($this->HasAccess("read"))
 			$this->Query(
 				"UPDATE ".$this->config["table_prefix"]."pages ".
 				"SET hits = hits + 1 ".
-				"WHERE page_id = '".quote($this->dblink, $this->GetPageId())."'");
+				"WHERE page_id = '".quote($this->dblink, $this->page["page_id"])."'");
 		}
 
 		$this->SetLanguage($this->pagelang);
@@ -178,7 +178,7 @@ if ($this->page)
 				$registered = true;
 			}
 			else
-				$user = "guest@wacko";
+				$user = GUEST;
 
 			if (isset($registered)
 				&&
@@ -239,7 +239,7 @@ if ($this->page)
 		if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && ($this->GetConfigValue("hide_comments") != 2 || $this->GetUser()))
 		{
 			// load comments for this page
-			$comments = $this->LoadComments($this->GetPageId(), $pagination['offset'], $this->config["comments_count"]);
+			$comments = $this->LoadComments($this->page["page_id"], $pagination['offset'], $this->config["comments_count"]);
 
 			// store comments display in session
 			$tag = $this->GetPageTag();
