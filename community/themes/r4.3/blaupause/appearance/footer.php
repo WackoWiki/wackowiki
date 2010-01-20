@@ -66,7 +66,7 @@ print("<li><a href=\"".$this->href("referrers")."\"><img src=\"".$this->GetConfi
 
 if ($this->GetUser()){
 	// Watch/Unwatch icon
-	echo ($this->IsWatched($this->GetUserId(), $this->GetPageId()) ? "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  /></a></li>\n" : "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\" /></a></li>\n");
+	echo ($this->iswatched === true ? "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  /></a></li>\n" : "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\" /></a></li>\n");
 }
 
 // Print icon

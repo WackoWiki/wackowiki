@@ -238,7 +238,7 @@ else if($this->HasAccess("write"))
 		<td><!-- wrapper --> <?php echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
 		<input type="hidden" name="action" value="login" />
 
-		<div class="header"><?php echo ($this->IsWatched($this->GetUserId(), $this->GetPageId())
+		<div class="header"><?php echo ($this->iswatched === true
 		? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>"
 		: "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?>
 		| <?php echo "<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->GetConfigValue("theme_url")."icons/print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"absmiddle\" border=\"0\" /></a>";?>
