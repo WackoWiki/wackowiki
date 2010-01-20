@@ -14,7 +14,7 @@
 		<?php } ?> &nbsp;|&nbsp; <a
 	href="<?php echo $this->href("settings"); ?>"><?php echo $this->GetTranslation("SettingsText"); ?></a>
 &nbsp;|&nbsp; <?php // Watch page ?> <a
-	href="<?php echo $this->href("watch"); ?>"> <?php if($this->IsWatched($this->GetUserId(), $this->GetPageId())) { ?>
+	href="<?php echo $this->href("watch"); ?>"> <?php if($this->iswatched === true) { ?>
 <img
 	src="<?php echo $this->GetConfigValue("theme_url"); ?>images/watch-remove.gif"
 	alt="<?php echo $this->GetTranslation("RemoveWatch"); ?>"
