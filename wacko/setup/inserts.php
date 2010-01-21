@@ -14,7 +14,7 @@ function InsertPage($tag, $body, $lng, $rights = "Admins", $critical = false)
 	$owner_id = "SELECT user_id FROM ".$config_global["table_prefix"]."users WHERE name = '".$config_global["admin_name"]."' LIMIT 1";
 
 	// user_id 0 for WackoInstaller
-	$page_insert = "INSERT INTO ".$config_global["table_prefix"]."pages (tag, supertag, body, user_id, owner_id, created, modified, latest, lang) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$body."', '0', (".$owner_id."), NOW(), NOW(), '1', '".$lng."')";
+	$page_insert = "INSERT INTO ".$config_global["table_prefix"]."pages (tag, supertag, body, user_id, owner_id, created, modified, latest, lang) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lng."')";
 
 	$page_id = "SELECT page_id FROM ".$config_global["table_prefix"]."pages WHERE tag = '".$tag."' LIMIT 1";
 

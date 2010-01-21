@@ -5,7 +5,7 @@
 function test($text, $condition, $errorText = "")
 {
 	global $lang;
-	print("            <li>".$text." - ".output_image($condition));
+	print("            <li>".$text." ".output_image($condition));
 
 	if(!$condition)
 	{
