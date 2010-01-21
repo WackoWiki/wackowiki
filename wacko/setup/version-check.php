@@ -12,14 +12,14 @@ writeConfigHiddenNodes(array('none' => ''));
 	$php_version_result = version_compare("5.1.0", PHP_VERSION, "<");
 	?>
 <h2><?php echo $lang["PHPVersion"]; ?></h2>
-<p class="notop"><?php echo $lang["PHPDetected"]; ?> <?php print phpversion().' - '.output_image($php_version_result); ?></p>
+<p class="notop"><?php echo $lang["PHPDetected"]; ?> <?php print phpversion().'   '.output_image($php_version_result); ?></p>
 	<?php
 	/*
 		Check if mod_rewrite is installed
 	*/
 	?>
 <h2><?php echo $lang["ModRewrite"]; ?></h2>
-<p class="notop"><?php echo $lang["ModRewriteInstalled"]; ?> - <?php if(function_exists('apache_get_modules')) { print output_image(in_array('mod_rewrite', apache_get_modules())); } else { print($lang["ModRewriteStatusUnknown"]); } ?></p>
+<p class="notop"><?php echo $lang["ModRewriteInstalled"]; ?>   <?php if(function_exists('apache_get_modules')) { print output_image(in_array('mod_rewrite', apache_get_modules())); } else { print($lang["ModRewriteStatusUnknown"]); } ?></p>
 	<?php
 	/*
 	 Check which database extensions are installed and what versions of the db are there
@@ -60,9 +60,9 @@ writeConfigHiddenNodes(array('none' => ''));
 	?>
 <h2><?php echo $lang["Database"]; ?></h2>
 <ul>
-	<li>MySQL - <?php print output_image(extension_loaded("mysql")); ?></li>
-	<li>MySQLi - <?php print output_image(extension_loaded("mysqli")); ?></li>
-	<li>PDO - <?php print output_image($detected > 0); ?></li>
+	<li>MySQL   <?php print output_image(extension_loaded("mysql")); ?></li>
+	<li>MySQLi   <?php print output_image(extension_loaded("mysqli")); ?></li>
+	<li>PDO   <?php print output_image($detected > 0); ?></li>
 </ul>
 	<?php
 	/*
@@ -84,12 +84,12 @@ writeConfigHiddenNodes(array('none' => ''));
 	?>
 <h2><?php echo $lang["Permissions"]; ?></h2>
 <ul>
-	<li>config.inc.php - <?php print output_image(is__writable('config.inc.php')); ?></li>
-	<li>_cache - <?php print output_image(is__writable('_cache/')); ?></li>
-	<li>xml - <?php print output_image(is__writable('xml/')); ?></li>
-	<li>files - <?php print output_image(is__writable('files/')); ?></li>
-	<li>files/perpage - <?php print output_image(is__writable('files/perpage/')); ?></li>
-	<li>sitemap.xml - <?php print output_image(is__writable('sitemap.xml')); ?></li>
+	<li>config.inc.php   <?php print output_image(is__writable('config.inc.php')); ?></li>
+	<li>_cache   <?php print output_image(is__writable('_cache/')); ?></li>
+	<li>xml   <?php print output_image(is__writable('xml/')); ?></li>
+	<li>files   <?php print output_image(is__writable('files/')); ?></li>
+	<li>files/perpage   <?php print output_image(is__writable('files/perpage/')); ?></li>
+	<li>sitemap.xml   <?php print output_image(is__writable('sitemap.xml')); ?></li>
 </ul>
 	<?php
 	/*

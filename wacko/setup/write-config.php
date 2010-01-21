@@ -60,7 +60,7 @@ if ($fp)
 
 	print(output_image(true)."</li>\n");
 
-	print("            <li>".$lang["RemovingWritePrivilege"]." - ".output_image($perm_changed))."</li>\n";
+	print("            <li>".$lang["RemovingWritePrivilege"]."   ".output_image($perm_changed))."</li>\n";
 }
 else
 {
@@ -74,7 +74,7 @@ if($was_wakka_upgrade && is_file('wakka.config.php'))
 {
 	@chown('wakka.config.php', 666);
 	$deleted_old_wakka_config_file = unlink('wakka.config.php');
-	print("            <li>".$lang["DeletingWakkaConfigFile"]." - ".output_image($deleted_old_wakka_config_file))."</li>\n";
+	print("            <li>".$lang["DeletingWakkaConfigFile"]."   ".output_image($deleted_old_wakka_config_file))."</li>\n";
 }
 
 print("         </ul>\n");
