@@ -3082,7 +3082,7 @@ class Wacko
 		if (!$this->GetUser()) return false;
 
 		// set default tag
-		if (!$page_id = trim($page_id)) $page_id = $this->GetPageId();
+		if (!$page_id = trim($page_id)) $page_id = $this->page["page_id"];
 
 		// check if user is owner
 		if ($this->GetPageOwnerId($page_id) == $this->GetUserId())
@@ -3102,7 +3102,7 @@ class Wacko
 		if (!$tag = trim($tag))
 		{
 			if (!$time) return $this->GetUserNameById($this->page['owner_id']);
-			else $tag = $this->GetPageTag();
+			else $tag = $this->tag;
 		}
 
 		if ($page = $this->LoadPage($tag, $time, LOAD_CACHE, LOAD_META))
@@ -3115,7 +3115,7 @@ class Wacko
 		if (!$page_id = trim($page_id))
 		{
 			if (!$time) return $this->page['owner_id'];
-			else $page_id = $this->GetPageId();
+			else $page_id = $this->page['page_id'];
 		}
 		$tag = $this->GetPageTagById($page_id);
 		if ($page = $this->LoadPage($tag, $time, LOAD_CACHE, LOAD_META))
@@ -4199,9 +4199,13 @@ class Wacko
 			"UPDATE {$this->config['table_prefix']}pages ".
 			"SET keywords = '' ".
 			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+
 		$this->Query(
-			"DELETE FROM {$this->config['table_prefix']}keywords_pages ".
-			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"DELETE k.* ".
+			"FROM {$this->config['table_prefix']}keywords_pages k ".
+				"LEFT JOIN ".$this->config["table_prefix"]."pages p ".
+					"ON (k.page_id = p.page_id) ".
+			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 
 		return true;
 	}
@@ -4320,49 +4324,50 @@ class Wacko
 	}
 
 
-    // Generate random password of defined $length that satisfise the complexity rules:
-    // containing n>0 of uppercase ($uc), lowercase ($lc), digits ($di) and symbols ($sy).
-    // The password complexity can be defined in $pwd_complexity :
-    // $pwd_complexity = 2 -- password consists of uppercase, lowercase, digits
-    // $pwd_complexity = 3 -- password consists of uppercase, lowercase, digits and symbols
+	// Generate random password of defined $length that satisfise the complexity rules:
+	// containing n>0 of uppercase ($uc), lowercase ($lc), digits ($di) and symbols ($sy).
+	// The password complexity can be defined in $pwd_complexity :
+	// $pwd_complexity = 2 -- password consists of uppercase, lowercase, digits
+	// $pwd_complexity = 3 -- password consists of uppercase, lowercase, digits and symbols
 	function randomPassword($length, $pwd_complexity)
 	{
-    	$chars_uc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    	$chars_lc = 'abcdefghijklmnopqrstuvwxyz';
-    	$digits = '0123456789';
-    	$symbols = '-_!@#$%^&*(){}[]|~';
-    	$uc = 0;
-    	$lc = 0;
-    	$di = 0;
-    	$sy = 0;
+		$chars_uc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$chars_lc = 'abcdefghijklmnopqrstuvwxyz';
+		$digits = '0123456789';
+		$symbols = '-_!@#$%^&*(){}[]|~';
+		$uc = 0;
+		$lc = 0;
+		$di = 0;
+		$sy = 0;
 
-    	if ($pwd_complexity == 2) $sy = 100;
+		if ($pwd_complexity == 2) $sy = 100;
 
-    	while ($uc == 0 || $lc == 0 || $di == 0 || $sy == 0) {
-    		$password = '';
-    		for ($i=0; $i < $length; $i++) {
-        		$k = rand(0,$pwd_complexity);  //randomly choose what's next
-        		if ($k==0) {   //uppercase
-         			$password .= substr(str_shuffle($chars_uc),rand(0,sizeof($chars_uc)-2),1);
-         			$uc++;
-        		}
-        		if ($k==1) {   //lowercase
-         			$password .= substr(str_shuffle($chars_lc),rand(0,sizeof($chars_lc)-2),1);
-         			$lc++;
-        		}
-        		if ($k==2) {   //digits
-        			$password .= substr(str_shuffle($digits),rand(0,sizeof($digits)-2),1);
-            		$di++;
-        		}
-        		if ($k==3) {   //symbols
-        			$password .= substr(str_shuffle($symbols),rand(0,sizeof($symbols)-2),1);
-            		$sy++;
-        		}
-    		}
-    	}
+		while ($uc == 0 || $lc == 0 || $di == 0 || $sy == 0) {
+			$password = '';
+			for ($i=0; $i < $length; $i++) {
+				$k = rand(0,$pwd_complexity);  //randomly choose what's next
+				if ($k==0) {   //uppercase
+					$password .= substr(str_shuffle($chars_uc),rand(0,sizeof($chars_uc)-2),1);
+					$uc++;
+				}
+				if ($k==1) {   //lowercase
+					$password .= substr(str_shuffle($chars_lc),rand(0,sizeof($chars_lc)-2),1);
+					$lc++;
+				}
+				if ($k==2) {   //digits
+					$password .= substr(str_shuffle($digits),rand(0,sizeof($digits)-2),1);
+					$di++;
+				}
+				if ($k==3) {   //symbols
+					$password .= substr(str_shuffle($symbols),rand(0,sizeof($symbols)-2),1);
+					$sy++;
+				}
+			}
+		}
 
-    	return $password;
+		return $password;
 	}
+
 	// pages listing/navigation for multipage lists.
 	// 		$total		= total elements in the list
 	// 		$perpage	= total elements on a page
@@ -4520,33 +4525,33 @@ class Wacko
 	function GetKeywordsList($lang, $cache = 1, $root = false)
 	{
 		if ($_keywords = $this->LoadAll(
-		"SELECT id, parent, name ".
+		"SELECT keyword_id, parent, keyword ".
 		"FROM {$this->config['table_prefix']}keywords ".
 		"WHERE lang = '".quote($this->dblink, $lang)."' ".
-		"ORDER BY parent ASC, name ASC", $cache))
+		"ORDER BY parent ASC, keyword ASC", $cache))
 		{
 			// process pages count (if have to)
 			if ($root !== false)
 			{
 				if ($_counts = $this->LoadAll(
-				"SELECT keyword, COUNT( tag ) AS n ".
-				"FROM {$this->config['table_prefix']}keywords, ".
-					"{$this->config['table_prefix']}keywords_pages ".
-				"WHERE lang = '".quote($this->dblink, $lang)."' AND keyword_id = id ".
+				"SELECT kp.keyword_id, COUNT( kp.page_id ) AS n ".
+				"FROM {$this->config['table_prefix']}keywords k , ".
+					"{$this->config['table_prefix']}keywords_pages kp ".
+				"WHERE lang = '".quote($this->dblink, $lang)."' AND kp.keyword_id = k.keyword_id ".
 					( $root != '' ? "AND ( tag = '".quote($this->dblink, $root)."' OR tag LIKE '".quote($this->dblink, $root)."/%' ) " : '' ).
-				"GROUP BY keyword", 1))
+				"GROUP BY keyword_id", 1))
 				{
-					foreach ($_counts as $count) $counts[$count['keyword']] = $count['n'];
+					foreach ($_counts as $count) $counts[$count['keyword_id']] = $count['n'];
 				}
 			}
 
 			// process categories names
 			foreach ($_keywords as $word)
 			{
-				$keywords[$word['id']] = array(
+				$keywords[$word['keyword_id']] = array(
 					'parent'	=> $word['parent'],
-					'name'		=> $word['name'],
-					'n'			=> $counts[$word['id']]
+					'keyword'		=> $word['keyword'],
+					'n'			=> $counts[$word['keyword_id']]
 				);
 			}
 
@@ -4567,7 +4572,7 @@ class Wacko
 	// passed through POST global array. returns:
 	//	true	- if something was saved
 	//	false	- if list was empty
-	function SaveKeywordsList($tag, $dryrun = 0)
+	function SaveKeywordsList($page_id, $dryrun = 0)
 	{
 		// what's selected
 		foreach ($_POST as $key => $val)
@@ -4585,7 +4590,7 @@ class Wacko
 		{
 			if (!$dryrun)
 			{
-				foreach ($set as $id) $values[] = "(".quote($this->dblink, (int)$id).", '".quote($this->dblink, $this->page["page_id"])."')";
+				foreach ($set as $id) $values[] = "(".quote($this->dblink, (int)$id).", '".quote($this->dblink, $page_id)."')";
 
 				$this->Query(
 					"INSERT INTO {$this->config['table_prefix']}keywords_pages (keyword_id, page_id) ".
@@ -4593,7 +4598,7 @@ class Wacko
 				$this->Query(
 					"UPDATE {$this->config['table_prefix']}pages ".
 					"SET keywords = '".quote($this->dblink, implode(' ', $set))."' ".
-					"WHERE page_id = '".quote($this->dblink, $this->page["page_id"])."' ");
+					"WHERE page_id = '".quote($this->dblink, $page_id)."' ");
 			}
 			return true;
 		}

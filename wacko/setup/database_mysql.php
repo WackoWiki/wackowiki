@@ -33,6 +33,21 @@ $table_config = "CREATE TABLE {$pref}config (".
 				"UNIQUE KEY name (name)".
 			") TYPE=MyISAM";
 
+$table_keywords = "CREATE TABLE {$pref}keywords (".
+					"keyword_id INT(10) unsigned NOT NULL AUTO_INCREMENT,".
+					"parent INT(10) unsigned NOT NULL,".
+					"lang VARCHAR(2) COLLATE latin1_general_ci NOT NULL,".
+					"keyword VARCHAR(100) COLLATE latin1_general_ci NOT NULL,".
+					"PRIMARY KEY (keyword_id),".
+					"UNIQUE KEY idx_keywords (lang,keyword)".
+				") TYPE=MyISAM";
+
+$table_keywords_pages = "CREATE TABLE {$pref}keywords_pages (".
+						"keyword_id INT(10) unsigned NOT NULL,".
+						"page_id INT(10) unsigned NOT NULL,".
+						"UNIQUE KEY idx_pageword (keyword_id,page_id)".
+					") ENGINE=MyISAM";
+
 $table_links = "CREATE TABLE {$pref}links (".
 					"link_id INT(10) UNSIGNED NOT NULL auto_increment,".
 					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -194,16 +209,18 @@ $table_watches = "CREATE TABLE {$pref}watches (".
  Wacko Wiki MySQL Table Deletion Script
 */
 
-$table_pages_drop = "DROP TABLE {$pref}pages";
-$table_revisions_drop = "DROP TABLE {$pref}revisions";
 $table_acls_drop = "DROP TABLE {$pref}acls";
+$table_cache_drop = "DROP TABLE {$pref}cache";
+$table_config_drop = "DROP TABLE {$pref}config";
+$table_keywords_drop = "DROP TABLE {$pref}keywords";
+$table_keywords_pages_drop = "DROP TABLE {$pref}keywords_pages";
 $table_links_drop = "DROP TABLE {$pref}links";
+$table_log_drop = "DROP TABLE {$pref}log";
+$table_pages_drop = "DROP TABLE {$pref}pages";
 $table_referrers_drop = "DROP TABLE {$pref}referrers";
+$table_revisions_drop = "DROP TABLE {$pref}revisions";
+$table_upload_drop = "DROP TABLE {$pref}upload";
 $table_users_drop = "DROP TABLE {$pref}users";
 $table_watches_drop = "DROP TABLE {$pref}watches";
-$table_upload_drop = "DROP TABLE {$pref}upload";
-$table_cache_drop = "DROP TABLE {$pref}cache";
-$table_log_drop = "DROP TABLE {$pref}log";
-$table_config_drop = "DROP TABLE {$pref}config";
 
 ?>
