@@ -89,25 +89,36 @@ if (!$ids)
 	// header
 	if (!$nomark)
 	{
-		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>Keywords".( $root ? " a cluster ".$this->Link('/'.$root, '', '', 0) : '' ).":</span></p>\n";
+		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>Keywords".( $root ? " of cluster ".$this->Link('/'.$root, '', '', 0) : '' ).":</span></p>\n";
 	}
 	
 	// keywords list
 	if ($keywords = $this->GetKeywordsList($lang, 1, $root))
 	{
+		echo "<ul>\n";
+		
 		foreach ($keywords as $id => $word)
 		{
 			$spacer = '&nbsp;&nbsp;&nbsp;';
 			
-			if (!$inline && $i++ > 0) echo '<br />';
+			# if (!$inline && $i++ > 0) echo '<br />';
 			
-			echo '<span class="nobr">'.( !$inline ? '<strong>' : '' ).'&bull; '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'">' : '' ).htmlspecialchars($word['keyword']).' ('.(int)$word['n'].')'.( $list ? '</a>' : '' ).( !$inline ? '</strong>' : $spacer )."</span>\n";
+			echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'">' : '' ).htmlspecialchars($word['keyword']).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."";
 			
-			if ($word['childs'] == true) foreach ($word['childs'] as $id => $word)
+			if ($word['childs'] == true)
 			{
-				echo '<span class="nobr">'.( !$inline ? $spacer : '' ).'&bull; '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'">' : '' ).htmlspecialchars($word['keyword']).' ('.(int)$word['n'].')'.( $list ? '</a>' : '' ).( !$inline ? '' : $spacer )."</span>\n";
+				echo "<ul>\n";
+				
+				foreach ($word['childs'] as $id => $word)
+				{
+					echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'">' : '' ).htmlspecialchars($word['keyword']).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."</li>\n";
+				}
+				echo "</ul>\n</li>\n";
 			}
+			else
+			echo "</li>\n";
 		}
+		echo "</ul>\n";
 	}
 	else
 	{
