@@ -233,6 +233,7 @@ class Init
 					"default_create_acl" => "$",
 
 					"rename_globalacl" => "Admins",
+					"owners_can_change_keywords" => 1,
 					"remove_onlyadmins" => 0,
 					"owners_can_remove_comments" => 1,
 					"store_deleted_pages" => 0,

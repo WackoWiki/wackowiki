@@ -13,7 +13,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	{
 		// acls for page or entire cluster
 		$need_massacls = 0;
-		if ($_POST["massacls"] == "on")  $need_massacls = 1;
+		if ($_POST["massacls"] == "on") $need_massacls = 1;
 
 		// acls page
 		if ($need_massacls == 0)
@@ -153,6 +153,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				}
 			}
 		}
+
 		// redirect back to page
 		$this->SetMessage($message."!");
 		$this->Redirect($this->href());

@@ -281,7 +281,7 @@ if ($this->page)
 				{
 					echo "<li id=\"".$comment["tag"]."\" class=\"comment\">\n";
 					$del = "";
-					if ($this->IsAdmin() || $this->UserIsOwner($comment["page_id"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->GetPageId())))
+					if ($this->IsAdmin() || $this->UserIsOwner($comment["page_id"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->page["page_id"])))
 					{
 						print("<a href=\"".$this->href("remove", $comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/delete_comment.gif\" title=\"".$this->GetTranslation("DeleteCommentTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" align=\"right\" border=\"0\" /></a>");
 						print("<a href=\"".$this->href("edit", $comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/edit.gif\" title=\"".$this->GetTranslation("EditCommentTip")."\" alt=\"".$this->GetTranslation("EditComment")."\" align=\"right\" border=\"0\" /></a>");

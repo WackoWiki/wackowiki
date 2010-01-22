@@ -4537,8 +4537,13 @@ class Wacko
 				"SELECT kp.keyword_id, COUNT( kp.page_id ) AS n ".
 				"FROM {$this->config['table_prefix']}keywords k , ".
 					"{$this->config['table_prefix']}keywords_pages kp ".
-				"WHERE lang = '".quote($this->dblink, $lang)."' AND kp.keyword_id = k.keyword_id ".
-					( $root != '' ? "AND ( tag = '".quote($this->dblink, $root)."' OR tag LIKE '".quote($this->dblink, $root)."/%' ) " : '' ).
+					( $root != ''
+						? "INNER JOIN ".$this->config["table_prefix"]."pages p ON (kp.page_id = p.page_id) "
+						: '' ).
+				"WHERE k.lang = '".quote($this->dblink, $lang)."' AND kp.keyword_id = k.keyword_id ".
+					( $root != ''
+						? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) "
+						: '' ).
 				"GROUP BY keyword_id", 1))
 				{
 					foreach ($_counts as $count) $counts[$count['keyword_id']] = $count['n'];
