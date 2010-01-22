@@ -18,6 +18,9 @@ $alter_acls_r4_2_5 = "ALTER TABLE {$pref}acls DROP supertag";
 
 $update_acls_r4_2 = "UPDATE {$pref}acls AS acls, (SELECT id, tag FROM {$pref}pages) AS pages SET acls.page_id = pages.id WHERE acls.page_tag = pages.tag";
 
+// CACHE
+$alter_cache_r4_2 = "ALTER TABLE {$pref}cache ADD time TIMESTAMP NOT NULL, ADD INDEX timestamp (time)";
+
 // CONFIG
 $table_config_r4_2 = "CREATE TABLE {$pref}config (".
 					"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -28,8 +31,21 @@ $table_config_r4_2 = "CREATE TABLE {$pref}config (".
 					"UNIQUE KEY name (name)".
 				") TYPE=MyISAM";
 
-// CACHE
-$alter_cache_r4_2 = "ALTER TABLE {$pref}cache ADD time TIMESTAMP NOT NULL, ADD INDEX timestamp (time)";
+// KEYWORDS
+$table_keywords_r4_2 = "CREATE TABLE {$pref}keywords (".
+					"keyword_id INT(10) unsigned NOT NULL AUTO_INCREMENT,".
+					"parent INT(10) unsigned NOT NULL,".
+					"lang VARCHAR(2) COLLATE latin1_general_ci NOT NULL,".
+					"keyword VARCHAR(100) COLLATE latin1_general_ci NOT NULL,".
+					"PRIMARY KEY (keyword_id),".
+					"UNIQUE KEY idx_keywords (lang,keyword)".
+				") TYPE=MyISAM";
+
+$table_keywords_pages_r4_2 = "CREATE TABLE {$pref}keywords_pages (".
+						"keyword_id INT(10) unsigned NOT NULL,".
+						"page_id INT(10) unsigned NOT NULL,".
+						"UNIQUE KEY idx_pageword (keyword_id,page_id)".
+					") ENGINE=MyISAM";
 
 // LINKS
 $alter_links_r4_2 = "ALTER TABLE {$pref}links ADD id INT(10) UNSIGNED NOT NULL auto_increment FIRST, ADD PRIMARY KEY (id)";
