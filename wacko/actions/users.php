@@ -385,12 +385,12 @@ else
 
 	// list header
 	echo '<tr>'.
-			'<th><a href="?sort=name">'.$this->GetTranslation('UsersName').( $_GET['sort'] == 'name' || $_REQUEST['user'] == true ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="?sort=pages">'.$this->GetTranslation('UsersPages').( $_GET['sort'] == 'pages' || $_GET['sort'] == false ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="?sort=comments">'.$this->GetTranslation('UsersPosts').( $_GET['sort'] == 'comments' ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="?sort=revisions">'.$this->GetTranslation('UsersRevisions').( $_GET['sort'] == 'revisions' ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="?sort=signup">'.$this->GetTranslation('UsersSignup').( $_GET['sort'] == 'signup' ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="?sort=session">'.$this->GetTranslation('UsersLastSession').( $_GET['sort'] == 'session' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=name').'">'.$this->GetTranslation('UsersName').( $_GET['sort'] == 'name' || $_REQUEST['user'] == true ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=pages').'">'.$this->GetTranslation('UsersPages').( $_GET['sort'] == 'pages' || $_GET['sort'] == false ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=comments').'">'.$this->GetTranslation('UsersPosts').( $_GET['sort'] == 'comments' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=revisions').'">'.$this->GetTranslation('UsersRevisions').( $_GET['sort'] == 'revisions' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=signup').'">'.$this->GetTranslation('UsersSignup').( $_GET['sort'] == 'signup' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=session').'">'.$this->GetTranslation('UsersLastSession').( $_GET['sort'] == 'session' ? '&nbsp;&darr;' : '' ).'</a></th>'.
 		"</tr>\n";
 
 	// list entries
@@ -403,7 +403,7 @@ else
 		foreach ($users as $user)
 		{
 			echo '<tr class="lined">'.
-					'<td style="padding-left:5px;"><a href="?profile='.htmlspecialchars($user['name']).'">'.$user['name'].'</a></td>'.
+					'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($user['name']).'').'">'.$user['name'].'</a></td>'.
 					'<td align="center">'.$user['total_pages'].'</td>'.
 					'<td align="center">'.$user['total_comments'].'</td>'.
 					'<td align="center">'.$user['total_revisions'].'</td>'.
