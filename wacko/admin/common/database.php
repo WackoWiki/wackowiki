@@ -11,8 +11,8 @@ if (isset($tables, $directories) !== true)
 	$tables	= array(
 			$engine->config['table_prefix'].'acls' => array(
 				'name'	=> $engine->config['table_prefix'].'acls',
-				'where'	=> 'tag',
-				'order'	=> 'tag',
+				'where'	=> 'page_id',
+				'order'	=> 'page_id',
 				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'cache' => array(
@@ -24,7 +24,7 @@ if (isset($tables, $directories) !== true)
 			$engine->config['table_prefix'].'config' => array(
 				'name'	=> $engine->config['table_prefix'].'config',
 				'where'	=> false,
-				'order'	=> 'id',
+				'order'	=> 'config_id',
 				'limit' => 1
 			),
 			$engine->config['table_prefix'].'groups' => array(
@@ -36,19 +36,19 @@ if (isset($tables, $directories) !== true)
 			$engine->config['table_prefix'].'keywords' => array(
 				'name'	=> $engine->config['table_prefix'].'keywords',
 				'where'	=> false,
-				'order'	=> 'id',
+				'order'	=> 'keywords_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'keywordspages' => array(
-				'name'	=> $engine->config['table_prefix'].'keywordspages',
-				'where'	=> 'tag',
-				'order'	=> 'tag',
+			$engine->config['table_prefix'].'keywords_pages' => array(
+				'name'	=> $engine->config['table_prefix'].'keywords_pages',
+				'where'	=> 'page_id',
+				'order'	=> 'page_id',
 				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'links' => array(
 				'name'	=> $engine->config['table_prefix'].'links',
-				'where'	=> 'from_tag',
-				'order'	=> 'from_tag',
+				'where'	=> 'from_page_id',
+				'order'	=> 'from_page_id',
 				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'log' => array(
@@ -65,8 +65,8 @@ if (isset($tables, $directories) !== true)
 			),
 			$engine->config['table_prefix'].'watches' => array(
 				'name'	=> $engine->config['table_prefix'].'watches',
-				'where'	=> 'tag',
-				'order'	=> 'tag',
+				'where'	=> 'page_id',
+				'order'	=> 'page_id',
 				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'polls' => array(
@@ -83,8 +83,8 @@ if (isset($tables, $directories) !== true)
 			),
 			$engine->config['table_prefix'].'referrers' => array(
 				'name'	=> $engine->config['table_prefix'].'referrers',
-				'where'	=> 'page_tag',
-				'order'	=> 'page_tag',
+				'where'	=> 'page_id',
+				'order'	=> 'page_id',
 				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'revisions' => array(
@@ -102,7 +102,7 @@ if (isset($tables, $directories) !== true)
 			$engine->config['table_prefix'].'upload' => array(
 				'name'	=> $engine->config['table_prefix'].'upload',
 				'where'	=> false,
-				'order'	=> 'id',
+				'order'	=> 'upload_id',
 				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'users' => array(

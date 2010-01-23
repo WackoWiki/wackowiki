@@ -40,7 +40,6 @@ function admin_configbasic(&$engine, &$module)
 				"`upload_max_per_user`	= '".quote((int)$_POST['upload_max_per_user'])."', ".
 				"`hide_comments`		= '".quote((int)$_POST['hide_comments'])."', ".
 				"`hide_files`			= '".quote((int)$_POST['hide_files'])."', ".
-				"`hide_rating`			= '".quote((int)$_POST['hide_rating'])."', ".
 				"`hide_toc`				= '".quote((int)$_POST['hide_toc'])."', ".
 				"`hide_index`			= '".quote((int)$_POST['hide_index'])."', ".
 				"`lower_index`			= '".quote( $_POST['index_mode'] == 'l' ? 1 : 0 )."', ".
@@ -121,7 +120,7 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="admin_email"><strong>Email owner of the site:</strong><br />
+				<td class="label"><label for="admin_email"><strong>Email of the site owner:</strong><br />
 				<small>This address will appear as the<tt>"From:"</tt> all the email-notification site.</small></label></td>
 				<td><input maxlength="100" style="width:200px;" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->config['admin_email']);?>" /></td>
 			</tr>
@@ -233,17 +232,6 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><strong>Rating panel :</strong><br />
-				<small>The default display in the bottom of the panel rating of the document.</small></td>
-				<td>
-					<input type="radio" id="hide_rating_on" name="hide_rating" value="0"<?php echo ( !$engine->config['hide_rating'] ? ' checked="checked"' : '' );?> /><label for="hide_rating_on">On.</label>
-					<input type="radio" id="hide_rating_off" name="hide_rating" value="1"<?php echo ( $engine->config['hide_rating'] ? ' checked="checked"' : '' );?> /><label for="hide_rating_off">Off.</label>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr>
 				<td class="label"><strong>Table of contents panel :</strong><br />
 				<small>The default display panel table of contents of document (may need support in the templates).</small></td>
 				<td>
@@ -284,6 +272,28 @@ function admin_configbasic(&$engine, &$module)
 					<br />
 					Miscellaneous
 				</th>
+			</tr>
+			<tr>
+				<td class="label"><strong>Edit summary:</strong><br />
+				<small>Shows change summary in the edit mode.</small></td>
+				<td>
+					<input type="radio" id="edit_summary_on" name="edit_summary" value="1"<?php echo ( $engine->config['edit_summary'] ? ' checked="checked"' : '' );?> /><label for="edit_summary_on">On.</label>
+					<input type="radio" id="edit_summary_off" name="edit_summary" value="0"<?php echo ( !$engine->config['edit_summary'] ? ' checked="checked"' : '' );?> /><label for="edit_summary_off">Off.</label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><strong>Minor edit:</strong><br />
+				<small>Enables minor edit option in the edit mode.</small></td>
+				<td>
+					<input type="radio" id="minor_edit_on" name="minor_edit" value="1"<?php echo ( $engine->config['minor_edit'] ? ' checked="checked"' : '' );?> /><label for="minor_edit_on">On.</label>
+					<input type="radio" id="minor_edit_off" name="minor_edit" value="0"<?php echo ( !$engine->config['minor_edit'] ? ' checked="checked"' : '' );?> /><label for="minor_edit_off">Off.</label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
 			</tr>
 			<tr>
 				<td class="label"><strong>Autosubscribe:</strong><br />
