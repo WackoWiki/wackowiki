@@ -9,7 +9,7 @@
 
 ?>
 <div id="page">
-<h3>Keywords for <?php echo $this->ComposeLinkToPage($this->tag, "", "", 0) ?></h3>
+<h3><?php echo $this->GetTranslation("KeywordsFor")." ".$this->ComposeLinkToPage($this->tag, "", "", 0) ?></h3>
 <br />
 <?php
 
@@ -32,7 +32,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		$this->SaveKeywordsList($this->page["page_id"]);
 		
 		$this->Log(4, "Updated page keywords [[/{$this->tag} {$this->page['title']}]]");
-		$this->SetMessage('Page Keywords updated.');
+		$this->SetMessage($this->GetTranslation('KeywordsUpdated'));
 		$this->Redirect($this->href('settings'));
 	}
 	else if ($this->IsAdmin() || $this->config['owners_can_change_keywords'] == true)
@@ -53,7 +53,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			"SELECT keyword_id FROM {$this->config['table_prefix']}keywords ".
 			"WHERE keyword = '".quote($this->dblink, $_POST['newname'])."'"))
 			{
-				$this->SetMessage('This keyword is already there.');
+				$this->SetMessage($this->GetTranslation('KeywordsAlreadyExists'));
 				$_POST['change'] = $_POST['id'];
 				$_POST['create'] = 1;
 			}
@@ -67,7 +67,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 						).
 						"lang = '".quote($this->dblink, $this->page['lang'])."', ".
 						"keyword = '".quote($this->dblink, $_POST['newname'])."'");
-				$this->SetMessage('Keyword added successfully.');
+				$this->SetMessage($this->GetTranslation('KeywordsAdded'));
 				$this->Log(4, "Created a new keyword //'{$_POST['newname']}'//");
 				unset($_POST['create']);
 			}
@@ -80,7 +80,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			"SELECT keyword_id FROM {$this->config['table_prefix']}keywords ".
 			"WHERE keyword = '".quote($this->dblink, $_POST['newname'])."' AND keyword_id <> '".quote($this->dblink, $_POST['id'])."'"))
 			{
-				$this->SetMessage('This keyword is already there.');
+				$this->SetMessage($this->GetTranslation('KeywordsAlreadyExists'));
 				$_POST['change'] = $_POST['id'];
 				$_POST['rename'] = 1;
 			}
@@ -90,7 +90,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					"UPDATE {$this->config['table_prefix']}keywords ".
 					"SET keyword = '".quote($this->dblink, $_POST['newname'])."' ".
 					"WHERE keyword_id = '".quote($this->dblink, $_POST['id'])."'");
-				$this->SetMessage('Keyword successfully renamed.');
+				$this->SetMessage($this->GetTranslation('KeywordsRenamed'));
 				$this->Log(4, "Keyword //'{$word['keyword']}'// renamed //'{$_POST['newname']}'//");
 			}
 		}
@@ -104,7 +104,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					"UPDATE {$this->config['table_prefix']}keywords ".
 					"SET parent = 0 ".
 					"WHERE keyword_id = '".quote($this->dblink, $_POST['id'])."'");
-				$this->SetMessage('Keyword debundled successfully.');
+				$this->SetMessage($this->GetTranslation('KeywordsUngrouped'));
 				$this->Log(4, "Keyword //'{$word['keyword']}'// debundled");
 			}
 			else
@@ -123,12 +123,12 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 						"UPDATE {$this->config['table_prefix']}keywords ".
 						"SET parent = 0 ".
 						"WHERE parent = '".quote($this->dblink, $_POST['id'])."'");
-					$this->SetMessage('The keyword entered in the new group.');
+					$this->SetMessage($this->GetTranslation('KeywordsGrouped'));
 					$this->Log(4, "Keyword //'{$word['keyword']}'// grouped with the word //'{$parent['keyword']}'//");
 				}
 				else
 				{
-					$this->SetMessage('Multilevel grouping keywords is not possible.');
+					$this->SetMessage($this->GetTranslation('NoMultilevelGrouping'));
 				}
 			}
 		}
@@ -145,7 +145,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				"UPDATE {$this->config['table_prefix']}keywords ".
 				"SET parent = 0 ".
 				"WHERE parent = '".quote($this->dblink, $_POST['id'])."'");
-			$this->SetMessage('The keyword was deleted from the database and all pages.');
+			$this->SetMessage($this->GetTranslation('KeywordsDeleted'));
 			$this->Log(4, "Keyword //'{$word['keyword']}'// removed from the database");
 		}
 	}
@@ -193,16 +193,16 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			echo $this->FormOpen('keywords');
 			echo '<input type="hidden" name="id" value="'.htmlspecialchars($group).'" />'."\n";
 			echo '<table class="formation">';
-			echo '<tr><td>'.
-				'Add a new keyword: '.
+			echo '<tr><td><label for="">'.
+				$this->GetTranslation('KeywordsAdd').'</label> '.
 				'<input name="newname" value="'.( $_POST['newname'] ? htmlspecialchars($_POST['newname']) : '' ).'" size="20" maxlength="100" /><br /> ';
 			if ($group)
 			{
-				echo '<small><input type="radio" id="group1" name="group" value="1" checked="checked" /> <label for="group1">Grouped with the keyword <em>\''.$word['keyword'].'\'</em>.</label></small><br />';
-				echo '<small><input type="radio" id="group0" name="group" value="0" /> <label for="group0">No group.</label></small><br />';
+				echo '<small><input type="radio" id="group1" name="group" value="1" checked="checked" /> <label for="group1">'.$this->GetTranslation('KeywordsAddGrouped').' \'<tt>'.$word['keyword'].'</tt>\'.</label></small><br />';
+				echo '<small><input type="radio" id="group0" name="group" value="0" /> <label for="group0">'.$this->GetTranslation('KeywordsAddGroupedNo').'</label></small><br />';
 			}
-			echo '<input id="submit" type="submit" name="create" value="done" /> '.
-				'<input id="button" type="button" value="'.$this->GetTranslation('ACLCancelButton').'" onclick="document.location=\''.addslashes($this->href('keywords')).'\';" />'.
+			echo '<input id="submit" type="submit" name="create" value="'.$this->GetTranslation('KeywordsSaveButton').'" /> '.
+				'<input id="button" type="button" value="'.$this->GetTranslation('KeywordsCancelButton').'" onclick="document.location=\''.addslashes($this->href('keywords')).'\';" />'.
 				'</td></tr>';
 			echo '</table><br />';
 			echo $this->FormClose();
@@ -215,12 +215,12 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				echo $this->FormOpen('keywords');
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
 				echo '<table class="formation">';
-				echo '<tr><td>'.
-					'Rename a keyword <em>\''.htmlspecialchars($word['keyword']).'\'</em> in '.
+				echo '<tr><td><label for="">'.
+					$this->GetTranslation('KeywordsRename').' \'<tt>'.htmlspecialchars($word['keyword']).'</tt>\' in</label> '.
 					'<input name="newname" value="'.( $_POST['newname'] ? htmlspecialchars($_POST['newname']) : htmlspecialchars($word['keyword']) ).'" size="20" maxlength="100" /> '.
-					'<input id="submit" type="submit" name="rename" value="done" /> '.
-					'<input id="button" type="button" value="'.$this->GetTranslation('ACLCancelButton').'" onclick="document.location=\''.addslashes($this->href('keywords')).'\';" />'.
-					'<br /><small>* Note: Change will affect all pages that are assigned to that keyword.</small>'.
+					'<input id="submit" type="submit" name="rename" value="'.$this->GetTranslation('KeywordsSaveButton').'" /> '.
+					'<input id="button" type="button" value="'.$this->GetTranslation('KeywordsCancelButton').'" onclick="document.location=\''.addslashes($this->href('keywords')).'\';" />'.
+					'<br /><small>'.$this->GetTranslation('KeywordsRenameInfo').'</small>'.
 					'</td></tr>';
 				echo '</table><br />';
 				echo $this->FormClose();
@@ -245,15 +245,15 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				echo $this->FormOpen('keywords');
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
 				echo '<table class="formation">';
-				echo '<tr><td>'.
-					'Group keywords <em>\''.htmlspecialchars($word['keyword']).'\'</em> with '.
+				echo '<tr><td><label for="">'.
+					$this->GetTranslation('KeywordsGroup').' \'<tt>'.htmlspecialchars($word['keyword']).'</tt>\' with</label> '.
 					'<select style="width:100px;" name="parent">'.
 						'<option value="0">[no group]</option>'.
 						$options.
 					'</select> '.
-					'<input id="submit" type="submit" name="ugroup" value="done" /> '.
-					'<input id="button" type="button" value="'.$this->GetTranslation('ACLCancelButton').'" onclick="document.location=\''.addslashes($this->href('keywords')).'\';" />'.
-					'<br /><small>* Select <em>[no group]</em>, to debundled keyword.</small>'.
+					'<input id="submit" type="submit" name="ugroup" value="'.$this->GetTranslation('KeywordsSaveButton').'" /> '.
+					'<input id="button" type="button" value="'.$this->GetTranslation('KeywordsCancelButton').'" onclick="document.location=\''.addslashes($this->href('keywords')).'\';" />'.
+					'<br /><small>'.$this->GetTranslation('KeywordsGroupInfo').'</small>'.
 					'</td></tr>';
 				echo '</table><br />';
 				echo $this->FormClose();
@@ -267,11 +267,11 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				echo $this->FormOpen('keywords');
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
 				echo '<table class="formation">';
-				echo '<tr><td>'.
-					'Are you sure you want to remove keyword <em>\''.htmlspecialchars($word['keyword']).'\'</em>? '.
+				echo '<tr><td><label for="">'.
+					$this->GetTranslation('KeywordsDelete').' \'<tt>'.htmlspecialchars($word['keyword']).'</tt>\'?</label> '.
 					'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
 					'<input id="button" type="button" value="no" style="width:40px;" onclick="document.location=\''.addslashes($this->href('keywords')).'\';" />'.
-					'<br /><small>* Note: Change will affect all pages that are assigned to that keyword. If the word has a sub-category, they will not be deleted, but only debundled.</small>'.
+					'<br /><small>'.$this->GetTranslation('KeywordsDeleteInfo').'</small>'.
 					'</td></tr>';
 				echo '</table><br />';
 				echo $this->FormClose();
@@ -309,23 +309,23 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		/////////////////////////////////////////////
 		
 		echo '<br />';
-		echo '<input id="submit" type="submit" name="save" value="'.$this->GetTranslation('ACLStoreButton').'" /> ';
-		echo '<input id="button" type="button" value="'.$this->GetTranslation('ACLCancelButton').'" onclick="history.back();" /> ';
-		echo '<small><br />To assign keywords to a page select the checkboxes.<br /><br /></small> ';
+		echo '<input id="submit" type="submit" name="save" value="'.$this->GetTranslation('KeywordsStoreButton').'" /> ';
+		echo '<input id="button" type="button" value="'.$this->GetTranslation('KeywordsCancelButton').'" onclick="history.back();" /> ';
+		echo '<small><br />'.$this->GetTranslation('KeywordsStoreInfo').'<br /><br /></small> ';
 	}
 	else
 	{
-		echo 'There are still no keywords available.<br />Availability depends on the page language and your access rights, additionally you need also the right to create new ones.<br /><br />';
-		echo '<input id="button" type="button" value="'.$this->GetTranslation('ACLCancelButton').'" onclick="history.back();" /> ';
+		echo $this->GetTranslation('NoKeywordsForThisLanguage').'<br /><br /><br />'; // Availability depends on the page language and your access rights, additionally you need also the right to create new ones.
+		echo '<input id="button" type="button" value="'.$this->GetTranslation('KeywordsCancelButton').'" onclick="history.back();" /><br /><br /> ';
 	}
 	
 	if ($this->IsAdmin() || $this->config['owners_can_change_keywords'] == true)
 	{
-		echo '<input id="button" type="submit" name="create" value="add" /> ';
-		echo '<input id="button" type="submit" name="rename" value="rename" /> ';
-		echo '<input id="button" type="submit" name="ugroup" value="group" /> ';
-		echo '<input id="button" type="submit" name="delete" value="remove" /> ';
-		echo '<small><br />To edit the keyword list select the radio button.</small> ';
+		echo '<input id="button" type="submit" name="create" value="'.$this->GetTranslation('KeywordsAddButton').'" /> ';
+		echo '<input id="button" type="submit" name="rename" value="'.$this->GetTranslation('KeywordsRenameButton').'" /> ';
+		echo '<input id="button" type="submit" name="ugroup" value="'.$this->GetTranslation('KeywordsGroupButton').'" /> ';
+		echo '<input id="button" type="submit" name="delete" value="'.$this->GetTranslation('KeywordsRemoveButton').'" /> ';
+		echo '<small><br />'.$this->GetTranslation('KeywordsEditInfo').'</small> ';
 	}
 	echo "<br /><br />";
 	echo $this->FormClose();

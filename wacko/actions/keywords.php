@@ -3,11 +3,11 @@
 // settings:
 //	root		- where to start counting from (defaults to current tag)
 //	list		- make keywords a clickable links which display pages of a given category (1 (default) or 0)
-//	ids		- display pages which belong to these comma-separated keyword ids (default none)
+//	ids			- display pages which belong to these comma-separated keyword ids (default none)
 //	lang		- keywords language if necessary (defaults to current page lang)
 //	inline		- display all keywords on one line and not emphisize main categories (1 or 0 (default))
 //	sort		- order pages alphabetically ('abc', default) or creation date ('date')
-//	nomark	- display header and fieldset (1, 2 (no header even in 'keywords' mode) or 0 (default))
+//	nomark		- display header and fieldset (1, 2 (no header even in 'keywords' mode) or 0 (default))
 
 if (!$root)			$root	= '/';
 
@@ -38,7 +38,7 @@ if ($list && ($ids || $_GET['category']))
 			foreach ($_words as $word) $words[] = $word['keyword'];
 			$words = strtolower(implode(', ', $words));
 		}
-		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>Pages Categories".( $words ? ' &laquo;<b>'.$words.'</b>&raquo;' : '' ).":</span></p>\n";
+		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation('PagesCategory').( $words ? ' &laquo;<b>'.$words.'</b>&raquo;' : '' ).":</span></p>\n";
 	}
 	
 	if		($sort == 'abc')	$order = 'title ASC';
@@ -70,12 +70,12 @@ if ($list && ($ids || $_GET['category']))
 		}
 		else
 		{
-			echo '<em>Category does not exist.</em><br />';
+			echo '<em>'.$this->GetTranslation('CategoryNotExists').'</em><br />';
 		}
 	}
 	else
 	{
-		echo '<em>Category empty.</em><br />';
+		echo '<em>'.$this->GetTranslation('CategoryEmpty').'</em><br />';
 	}
 	
 	if ($nomark != 2)
@@ -89,7 +89,7 @@ if (!$ids)
 	// header
 	if (!$nomark)
 	{
-		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>Keywords".( $root ? " of cluster ".$this->Link('/'.$root, '', '', 0) : '' ).":</span></p>\n";
+		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>Keywords".$this->GetTranslation('Category').( $root ? " of cluster ".$this->Link('/'.$root, '', '', 0) : '' ).":</span></p>\n";
 	}
 	
 	// keywords list
@@ -122,7 +122,7 @@ if (!$ids)
 	}
 	else
 	{
-		echo '<em>Keywords for this language are not specified.</em>';
+		echo '<em>'.$this->GetTranslation('NoKeywordsForThisLanguage').'</em>';
 	}
 	
 	if (!$nomark)
