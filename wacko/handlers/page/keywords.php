@@ -157,9 +157,21 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	// load keywords for the page's particular language
 	$keywords = $this->GetKeywordsList($this->page['lang'], 0);
 	
-	// get currently selected words
-	$selected = explode(' ', $this->page['keywords']);
-	
+	// get currently selected keyword_ids
+	$_selected = $this->LoadAll(
+				"SELECT keyword_id FROM {$this->config['table_prefix']}keywords_pages ".
+				"WHERE page_id = '".$this->page['page_id']."'");
+
+	// exploding keywords into array
+	foreach ($_selected as $key => &$val)
+	{
+		if ($val <> ' ') 
+		{
+			$selected[$key] = $val['keyword_id'];
+		}
+	}
+	$selected = $selected;
+
 	/////////////////////////////////////////////
 	//   edit forms
 	/////////////////////////////////////////////
