@@ -5,7 +5,7 @@
 //	- multilevel hierarchical categories (first we need to
 //	  find a way to unwrap table-structured SQL data array
 //	  into a tree-structured multilevel array)
-//
+//	localize message sets
 
 ?>
 <div id="page">
@@ -165,9 +165,10 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	// exploding keywords into array
 	foreach ($_selected as $key => &$val)
 	{
-		if ($val <> ' ') 
+		if (is_array($val))
 		{
 			$selected[$key] = $val['keyword_id'];
+			# unset($selected[$key]);
 		}
 	}
 	$selected = $selected;
@@ -285,30 +286,38 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	echo $this->FormOpen('keywords');
 	
 	// print keywords list
-	foreach ($keywords as $id => $word)
+	if (is_array($keywords))
 	{
-		if ($n++ > 0) echo '<hr />';
-		echo '<input type="radio" name="change" value="'.$id.'" /><input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.( in_array($id, $selected) ? ' checked="checked"' : '' ).' /> <label for="keyword'.$id.'"><strong>'.htmlspecialchars($word['keyword']).'</strong></label>'."\n";
-		
-		if ($word['childs'] == true) foreach ($word['childs'] as $id => $word)
+		foreach ($keywords as $id => $word)
 		{
-			if ($i++ < 1) echo '<br /><div class="indent">';
-			echo '<span class="nobr"><input type="radio" name="change" value="'.$id.'" /><input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.( in_array($id, $selected) ? ' checked="checked"' : '' ).' /><label for="keyword'.$id.'">'.htmlspecialchars($word['keyword']).'</label>&nbsp;&nbsp;&nbsp;</span>'."\n";
+			if ($n++ > 0) echo '<hr />';
+			echo '<input type="radio" name="change" value="'.$id.'" /><input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /> <label for="keyword'.$id.'"><strong>'.htmlspecialchars($word['keyword']).'</strong></label>'."\n";
+			
+			if ($word['childs'] == true) foreach ($word['childs'] as $id => $word)
+			{
+				if ($i++ < 1) echo '<br /><div class="indent">';
+				echo '<span class="nobr"><input type="radio" name="change" value="'.$id.'" /><input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /><label for="keyword'.$id.'">'.htmlspecialchars($word['keyword']).'</label>&nbsp;&nbsp;&nbsp;</span>'."\n";
+			}
+			
+			if ($i > 0) echo "</div>\n";
+			else echo "<br />\n";
+			$i = 0;
 		}
+	
+		/////////////////////////////////////////////
+		//   control buttons
+		/////////////////////////////////////////////
 		
-		if ($i > 0) echo "</div>\n";
-		else echo "<br />\n";
-		$i = 0;
+		echo '<br />';
+		echo '<input id="submit" type="submit" name="save" value="'.$this->GetTranslation('ACLStoreButton').'" /> ';
+		echo '<input id="button" type="button" value="'.$this->GetTranslation('ACLCancelButton').'" onclick="history.back();" /> ';
+		echo '<small><br />To assign keywords to a page select the checkboxes.<br /><br /></small> ';
 	}
-	
-	/////////////////////////////////////////////
-	//   control buttons
-	/////////////////////////////////////////////
-	
-	echo '<br />';
-	echo '<input id="submit" type="submit" name="save" value="'.$this->GetTranslation('ACLStoreButton').'" /> ';
-	echo '<input id="button" type="button" value="'.$this->GetTranslation('ACLCancelButton').'" onclick="history.back();" /> ';
-	echo '<small><br />To assign keywords to a page select the checkboxes.<br /><br /></small> ';
+	else
+	{
+		echo 'There are still no keywords available.<br />Availability depends on the page language and your access rights, additionally you need also the right to create new ones.<br /><br />';
+		echo '<input id="button" type="button" value="'.$this->GetTranslation('ACLCancelButton').'" onclick="history.back();" /> ';
+	}
 	
 	if ($this->IsAdmin() || $this->config['owners_can_change_keywords'] == true)
 	{
