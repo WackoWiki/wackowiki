@@ -21,16 +21,16 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	/////////////////////////////////////////////
 	//   list change/update
 	/////////////////////////////////////////////
-	
+
 	// update keywords list for the current page
 	if (isset($_POST['save']))
 	{
 		// clear old list
 		$this->RemoveKeywords($this->tag);
-		
+
 		// save new list
 		$this->SaveKeywordsList($this->page["page_id"]);
-		
+
 		$this->Log(4, "Updated page keywords [[/{$this->tag} {$this->page['title']}]]");
 		$this->SetMessage($this->GetTranslation('KeywordsUpdated'));
 		$this->Redirect($this->href('settings'));
@@ -44,7 +44,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				"SELECT keyword_id, parent, keyword FROM {$this->config['table_prefix']}keywords ".
 				"WHERE keyword_id = '".quote($this->dblink, $_POST['id'])."'");
 		}
-		
+
 		// add item
 		if (isset($_POST['create']) && $_POST['newname'])
 		{
@@ -112,7 +112,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				$parent = $this->LoadSingle(
 					"SELECT parent, keyword FROM {$this->config['table_prefix']}keywords ".
 					"WHERE keyword_id = '".quote($this->dblink, $_POST['parent'])."'");
-				
+
 				if ($parent['parent'] == 0)
 				{
 					$this->Query(
@@ -149,14 +149,14 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			$this->Log(4, "Keyword //'{$word['keyword']}'// removed from the database");
 		}
 	}
-	
+
 	/////////////////////////////////////////////
 	//   building list
 	/////////////////////////////////////////////
-	
+
 	// load keywords for the page's particular language
 	$keywords = $this->GetKeywordsList($this->page['lang'], 0);
-	
+
 	// get currently selected keyword_ids
 	$_selected = $this->LoadAll(
 				"SELECT keyword_id FROM {$this->config['table_prefix']}keywords_pages ".
@@ -176,7 +176,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	/////////////////////////////////////////////
 	//   edit forms
 	/////////////////////////////////////////////
-	
+
 	if ($this->IsAdmin() || $this->config['owners_can_change_keywords'] == true)
 	{
 		// add new item
@@ -189,7 +189,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					"WHERE keyword_id = '".quote($this->dblink, $_POST['change'])."'");
 				$group = ( $word['parent'] == 0 ? $word['keyword_id'] : $group = $word['parent'] );
 			}
-			
+
 			echo $this->FormOpen('keywords');
 			echo '<input type="hidden" name="id" value="'.htmlspecialchars($group).'" />'."\n";
 			echo '<table class="formation">';
@@ -236,12 +236,12 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					"FROM {$this->config['table_prefix']}keywords ".
 					"WHERE parent = 0 ".
 					"ORDER BY keyword ASC");
-				
+
 				foreach ($parents as $parent)
 				{
 					$options .= '<option value="'.$parent['keyword_id'].'">'.htmlspecialchars($parent['keyword']).'</option>';
 				}
-				
+
 				echo $this->FormOpen('keywords');
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
 				echo '<table class="formation">';
@@ -278,36 +278,36 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			}
 		}
 	}
-	
+
 	/////////////////////////////////////////////
 	//   print list
 	/////////////////////////////////////////////
-	
+
 	echo $this->FormOpen('keywords');
-	
+
 	// print keywords list
 	if (is_array($keywords))
 	{
 		foreach ($keywords as $id => $word)
 		{
 			if ($n++ > 0) echo '<hr />';
-			echo '<input type="radio" name="change" value="'.$id.'" /><input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /> <label for="keyword'.$id.'"><strong>'.htmlspecialchars($word['keyword']).'</strong></label>'."\n";
-			
+			echo ($this->IsAdmin() || $this->config['owners_can_change_keywords'] == true ? '<input type="radio" name="change" value="'.$id.'" />' : '').'<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /> <label for="keyword'.$id.'"><strong>'.htmlspecialchars($word['keyword']).'</strong></label>'."\n";
+
 			if ($word['childs'] == true) foreach ($word['childs'] as $id => $word)
 			{
 				if ($i++ < 1) echo '<br /><div class="indent">';
-				echo '<span class="nobr"><input type="radio" name="change" value="'.$id.'" /><input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /><label for="keyword'.$id.'">'.htmlspecialchars($word['keyword']).'</label>&nbsp;&nbsp;&nbsp;</span>'."\n";
+				echo '<span class="nobr">'.($this->IsAdmin() || $this->config['owners_can_change_keywords'] == true ? '<input type="radio" name="change" value="'.$id.'" />' : '').'<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /><label for="keyword'.$id.'">'.htmlspecialchars($word['keyword']).'</label>&nbsp;&nbsp;&nbsp;</span>'."\n";
 			}
-			
+
 			if ($i > 0) echo "</div>\n";
 			else echo "<br />\n";
 			$i = 0;
 		}
-	
+
 		/////////////////////////////////////////////
 		//   control buttons
 		/////////////////////////////////////////////
-		
+
 		echo '<br />';
 		echo '<input id="submit" type="submit" name="save" value="'.$this->GetTranslation('KeywordsStoreButton').'" /> ';
 		echo '<input id="button" type="button" value="'.$this->GetTranslation('KeywordsCancelButton').'" onclick="history.back();" /> ';
@@ -318,7 +318,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		echo $this->GetTranslation('NoKeywordsForThisLanguage').'<br /><br /><br />'; // Availability depends on the page language and your access rights, additionally you need also the right to create new ones.
 		echo '<input id="button" type="button" value="'.$this->GetTranslation('KeywordsCancelButton').'" onclick="history.back();" /><br /><br /> ';
 	}
-	
+
 	if ($this->IsAdmin() || $this->config['owners_can_change_keywords'] == true)
 	{
 		echo '<input id="button" type="submit" name="create" value="'.$this->GetTranslation('KeywordsAddButton').'" /> ';
