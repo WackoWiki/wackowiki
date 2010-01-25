@@ -1601,6 +1601,7 @@ class Wacko
 			$this->Query(
 				"UPDATE ".$this->config["table_prefix"]."pages SET ".
 					"lang = '".quote($this->dblink, $metadata["lang"])."', ".
+					"more = '".quote($this->dblink, $metadata["more"])."', ".
 					"title = '".quote($this->dblink, htmlspecialchars($metadata["title"]))."', ".
 					"keywords = '".quote($this->dblink, $metadata["keywords"])."', ".
 					"description = '".quote($this->dblink, $metadata["description"])."' ".
@@ -3797,6 +3798,28 @@ class Wacko
 		$this->SetPage($page);
 		$this->LogReferrer();
 		$this->SetBookmarks();
+
+		if ($this->page)
+		{
+			// override perpage settings
+			$this->page['options'] = $this->DecomposeOptions($this->page['more']);
+
+			foreach ($this->page['options'] as $key => $val)
+			{
+				if ($key && $val == true) $this->config[$key] = $val;
+			}
+
+			// set page keywords. this defines $keywords (array) object property
+			// consisting of keywords ids as keys and  corresponding names as values
+			if ($this->page['keywords'])
+			{
+				$keywords = $this->LoadAll(
+					"SELECT keyword_id, keyword FROM {$this->config['table_prefix']}keywords ".
+					"WHERE keyword_id IN ( '".str_replace(' ', "', '", $this->page['keywords'])."' )");
+				foreach ($keywords as $word) $this->keywords[$word['keyword_id']] = $word['keyword'];
+				unset($keywords, $word);
+			}
+		}
 
 		if (!$user && $this->page["modified"])
 		{
