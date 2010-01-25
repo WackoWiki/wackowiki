@@ -258,24 +258,24 @@ if ($pages)
 	foreach($pages as $page)
 	{
 		$this->CachePage($page, 1);
-		$supertag_list[] = $page["supertag"];
+		$page_id_list[] = $page["page_id"];
 	}
 
 	//Constituent line request for acl
-	for ($i = 0; $i < count($supertag_list); $i++)
+	for ($i = 0; $i < count($page_id_list); $i++)
 	{
 
-		$supertag_str .= "'".quote($this->dblink, $supertag_list[$i])."', ";
+		$acl_str .= "'".quote($this->dblink, $page_id_list[$i])."', ";
 	}
 
-	$supertag_str = substr($supertag_str, 0, strlen($supertag_str) - 2);
+	$acl_str = substr($acl_str, 0, strlen($acl_str) - 2);
 
 	//Cache access rights
-	if ( $read_acls = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."acls WHERE supertag in (".$supertag_str.") AND privilege = 'read'", 1))
+	if ( $read_acls = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."acls WHERE page_id IN (".$acl_str.") AND privilege = 'read'", 1))
 	{
 		for ($i = 0; $i < count($read_acls); $i++)
 		{
-			$this->CacheACL($read_acls[$i]["supertag"], "read", 1, $read_acls[$i]);
+			$this->CacheACL($read_acls[$i]["page_id"], "read", 1, $read_acls[$i]);
 		}
 	}
 

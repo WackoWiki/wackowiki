@@ -41,7 +41,7 @@ if ($pages = $this->LoadAll(
 			if (substr_count($pages[$k]['tag'], '/') < $maxlevel)
 			{
 				$_pages[]	= $pages[$k];
-				$acl_str[]	= $pages[$k]['tag'];
+				$acl_str[]	= $pages[$k]['page_id'];
 				$sup_str[]	= $pages[$k]['supertag'];
 			}
 		}
@@ -66,11 +66,11 @@ if ($pages = $this->LoadAll(
 	// cache acls
 	if ($acls = $this->LoadAll(
 	"SELECT * FROM {$this->config['table_prefix']}acls ".
-	"WHERE tag IN ( '".implode("', '", $acl_str)."' )", 1))
+	"WHERE page_id IN ( '".implode("', '", $acl_str)."' )", 1))
 	{
 		for ($i = 0; $i < count($acls); $i++)
 		{
-			$this->CacheACL($acls[$i]['tag'], 1, $acls[$i]);
+			$this->CacheACL($acls[$i]['page_id'], 1, $acls[$i]);
 		}
 	}
 
