@@ -261,6 +261,7 @@ switch($config["database_driver"])
 					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r4_2_18, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r4_2_19, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r4_2_20, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
+					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r4_2_21, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
 
 					test(str_replace("%1","watches",$lang["AlterTable"]), @mysql_query($alter_watches_r4_2, $dblink), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","watches",$lang["AlterTable"]), @mysql_query($alter_watches_r4_2_1, $dblink), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
@@ -529,6 +530,7 @@ switch($config["database_driver"])
 								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r4_2_18), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r4_2_19), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r4_2_20), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
+								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r4_2_21), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
 
 								test(str_replace("%1","watches",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watches_r4_2), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","watches",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watches_r4_2_1), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));

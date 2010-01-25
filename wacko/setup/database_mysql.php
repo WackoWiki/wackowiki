@@ -97,6 +97,7 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
+					"more VARCHAR(255) NOT NULL,".
 					"PRIMARY KEY (page_id),".
 					"KEY idx_user_id (user_id),".
 					"KEY idx_owner_id (owner_id),".
@@ -193,7 +194,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"total_revisions INT(10) UNSIGNED NOT NULL,".
 					"total_comments INT(10) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (user_id),".
-					"UNIQUE KEY idx_name (name),".
+					"UNIQUE KEY idx_name (user_name),".
 					"KEY idx_signuptime (signuptime)".
 				") TYPE=MyISAM";
 
