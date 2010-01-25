@@ -1,307 +1,187 @@
 <?php
-if (!isset($page)) $page = $this->page["tag"];
-$root = $vars[$page];
+
+// constants
+$limit	= 500;
+$style	= 'ul';
 
 // input
-if (!isset($owner)) $owner = "";
-$owner_id = $this->GetUserIdByName($owner);
-if (!isset($nomark)) $nomark = "";
-if (!isset($abc)) $abc = "";
-if (!isset($filter)) $filter = "";
-if (!isset($style)) $style="indent";
 if (!isset($root) && !isset($page))
-					$root = "/".$this->page["tag"];
-if ($page)			$root = $page;
-if ($root == "/") 	$root = "";
-if ($root) 			$root = $this->UnwrapLink($root);
+					$root	= '/'.$this->page['tag'];
+if (!isset($page)) $page = "";
+if ($page)			$root	= $page;
+if ($root == '/')	$root	= '';
+if ($root)			$root	= $this->UnwrapLink($root).'/';
 
-if (!isset($depth)) $depth = 0;
-if (!is_numeric($depth)) $depth = 0;
-if ($depth == 0) $depth = 2147483647; //Which means unlimitedly
-if (!in_array($style, array("br", "ul", "ol", "indent"))) $style = "indent";
+if (!isset($depth)) $depth = "";
+if (!$depth || $depth < 1)
+					$depth	= 1;
+else				$depth	= (int)$depth;;
 
-global $tree_pages_array;
+if (!isset($nomark)) $nomark = "";
+if (!isset($title)) $title = "";
 
-if (!function_exists('create_cluster_tree'))
+// collect pages
+if ($pages = $this->LoadAll(
+	"SELECT page_id, tag, supertag, title ".
+	"FROM {$this->config['table_prefix']}pages ".
+	"WHERE comment_on_id = '0' ".
+		"AND tag LIKE '".quote($this->dblink, $root)."%' ".
+	"ORDER BY tag", 1))
 {
-	function create_cluster_tree(&$wacko, $supertag, $tag, $depth)
+	// pick all subpages up to the desired depth level
+	if ($depth > 0)
 	{
-		global $tree_pages_array;
+		$maxlevel = substr_count($root, '/') + $depth;
+		reset($pages);
 
-		while (! ( current($tree_pages_array) === FALSE))
+		do
 		{
-			$page_supertag = key($tree_pages_array);
-			$page_tag = pos($tree_pages_array);
+			$k = key($pages);
 
-			//Itself we do not sketch, the parent must care about this
-			if ($supertag == $page_supertag)
+			if (substr_count($pages[$k]['tag'], '/') < $maxlevel)
 			{
-				next($tree_pages_array);
+				$_pages[]	= $pages[$k];
+				$acl_str[]	= $pages[$k]['page_id'];
+				$sup_str[]	= $pages[$k]['supertag'];
+			}
+		}
+		while (false !== next($pages));
+
+		$pages = $_pages;
+		unset($_pages);
+	}
+
+	// cache links
+	if ($links = $this->LoadAll(
+	"SELECT {$this->pages_meta} ".
+	"FROM {$this->config['table_prefix']}pages ".
+	"WHERE supertag IN ( '".implode("', '", $sup_str)."' )", 1))
+	{
+		for ($i = 0; $i < count($links); $i++)
+		{
+			$this->CachePage($links[$i], 1);
+		}
+	}
+
+	// cache acls
+	if ($acls = $this->LoadAll(
+	"SELECT * FROM {$this->config['table_prefix']}acls ".
+	"WHERE page_id IN ( '".implode("', '", $acl_str)."' )", 1))
+	{
+		for ($i = 0; $i < count($acls); $i++)
+		{
+			$this->CacheACL($acls[$i]['page_id'], "read", 1, $acls[$i]);
+		}
+	}
+
+	// header
+	if ($root)
+	{
+		if (!$nomark)
+		{
+			if ($title)
+			{
+				$title = $this->Format($title);
+			}
+			else
+			{
+				$title = $this->GetTranslation('TreeClusterTitle');
+				$title = str_replace('%1', $this->Link('/'.$root, '', rtrim($root, '/')), $title).':';
+			}
+
+			echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title."</span></p>\n";
+		}
+	}
+	else
+	{
+		if (!$nomark)
+			echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("TreeSiteTitle")."</span></p>\n";
+	}
+
+	// tree
+	if (count($pages) > $limit)
+	{
+		echo '<small><em>'.$this->GetTranslation('TreeTooBig').'</em></small><br/>';
+	}
+	else
+	{
+		// cluster root level
+		$rootlevel = substr_count($root, '/');
+
+		// begin list
+		echo "<ul>\n";
+
+		$i	= 0;
+		$ul	= 0;
+		foreach ($pages as $page)
+		{
+			// check read privilege and current page tag
+			if ($page['tag'] == $root ||
+			($this->config['hide_locked'] && !$this->HasAccess('read', $page['page_id'])))
 				continue;
-			}
 
-			if ( $supertag <> "/" && !( strpos($page_supertag,$supertag."/") === 0) )
+			// check page level
+			$curlevel	= substr_count($page['tag'], '/');
+
+			// indents (sublevels)
+			if ($i > 0)
 			{
-				//Ended “our” leaves.
-				break;
-			}
+				// levels difference
+				$diff = $curlevel - $prevlevel;
 
-			//We believe supertag sub
-
-			//Relative
-			if ($supertag != "/"){
-				$rel_supertag = substr($page_supertag,strlen($supertag) + 1);
-			}
-			else
-			{
-				$rel_supertag = substr($page_supertag,1);
-			}
-
-			if (!strpos($rel_supertag,"/") === FALSE){$rel_supertag = substr($rel_supertag, 0, strpos($rel_supertag, "/"));};
-			//And the absolute
-			if ($supertag != "/")
-			{
-				$sub_supertag = $supertag."/".$rel_supertag;
-			}
-			else
-			{
-				$sub_supertag = "/".$rel_supertag;
-			}
-
-			if ($depth > 0)
-			{
-				//We have to calculate tag for this supertag
-				$sub_tag = "";
-				$exists = 0;
-
-				if ($tree_pages_array[$sub_supertag])
+				if ($diff > 0)
 				{
-					//This page is, take her tag.
-					$sub_tag = $tree_pages_array[$sub_supertag];
-					$exists = 1;
-				}
-				else
-				{
-					//This page does not have its sub. We will consider the likely tags.
-					$sub_sub_tag = $page_tag;
-
-					//Searches for backslashes so long as there is in supertag
-					$scount = substr_count($sub_supertag,"/");
-					for ($i = 0; $i < $scount - 1; $i++)
+					while ($diff > 0)
 					{
-						$sub_tag = $sub_tag.substr($sub_sub_tag, 0, strpos($sub_sub_tag, "/") + 1);;
-						$sub_sub_tag = substr($sub_sub_tag, strpos($sub_sub_tag, "/") + 1);
+						echo "<ul>\n";	// open indent
+						$diff--;
+						$ul++;
 					}
-					//Reject everything after the next slash.
-					$sub_tag = $sub_tag.substr($sub_sub_tag, 0, strpos($sub_sub_tag, "/"));
 				}
-
-				$sub_pages_tree[$sub_tag]["supertag"] = $sub_supertag;
-				$sub_pages_tree[$sub_tag]["exists"] = $exists;
-			}
-
-			$sub_tree = create_cluster_tree($wacko, $sub_supertag, "", $depth - 1);
-
-			if ($depth > 0)
-			{
-				$sub_pages_tree[$sub_tag]["subtree"] = $sub_tree;
-			}
-
-		}
-		if (isset($sub_pages_tree))
-			return $sub_pages_tree;
-		else
-			return NULL;
-	}
-}
-
-if (!function_exists('test_page_existance'))
-{
-	function test_page_existance($page_array)
-	{
-		if ($page_array["exists"]) return true;
-			$sub_tree = $page_array["subtree"];
-		if (is_array($sub_tree))
-		{
-			foreach ( $sub_tree as $sub_tag => $sub_page_array )
-			{
-				if ( test_page_existance($sub_page_array) ) return true;
-			}
-		}
-		return false;
-	}
-}
-
-if (!function_exists('print_cluster_tree'))
-{
-	function print_cluster_tree(&$wacko, $tree, $style, $current_depth, $abc, $filter)
-	{
-		if (is_array($tree))
-		{
-			ksort ( $tree, SORT_STRING );
-
-			static $letter = "";
-			static $need_letter = 0;
-			static $newletter = "!";
-
-			if ($style == "ul")
-				print "<ul>";
-			if ($style == "ol")
-				print "<ol>";
-			if ($style == "indent")
-				print "<div class=\"indent\">";
-
-			foreach ($tree as $sub_tag => $sub_tag_array )
-			{
-				$sub_supertag = $sub_tag_array["supertag"];
-				$sub_exists = $sub_tag_array["exists"];
-
-				$linktext = $sub_tag;
-				if ($style != "br" && (!strpos($linktext,"/") === false))
+				else if ($diff < 0)
 				{
-					//Displaying only the last word
-					$linktext = substr($linktext, strrpos($linktext, "/") + 1);
-				}
-
-				if ($abc && ( $current_depth == 1 ))
-				{
-					$newletter = strtoupper(substr($linktext, 0, 1));
-					if (!preg_match("/[".$wacko->language["ALPHA_P"]."]/", $newletter)) { $newletter = "#"; }
-					if ($newletter == '') $newletter = $linktext{0};
-					if ($letter <> $newletter)
+					while ($diff < 0)
 					{
-						$need_letter = 1; //Print at the first opportunity
+						echo "</ul>\n";	// close indent
+						$diff++;
+						$ul--;
 					}
-				};
-
-				if ($sub_exists || ($style != "br" && ( $filter == "all" || test_page_existance($sub_tag_array))))
-				{
-					if ($need_letter == 1)
-					{ //Convenient case to print the letter
-						if (($style == "ul" || $style == "ol" ) && $letter)
-							print "<br />";
-						if ($letter)
-							print "<br />";
-						$letter = $newletter;
-						print "<strong>".$letter."</strong><br />";
-						$need_letter = 0;
-					}
-
-					if ($style == "ul" || $style == "ol")
-						print "<li>";
-
-					$_page = $wacko->LoadPage(ltrim($sub_supertag, "/"));
-					if ($_page["tag"])
-						$_tag = $_page["tag"];
-					else
-						$_tag = $sub_supertag;
-
-					print($wacko->Link("/".$_tag, "", $linktext)."\n");
-
-					if ($style == "indent" || $style == "br")
-						print "<br />";
 				}
-
-				print_cluster_tree($wacko, $sub_tag_array["subtree"], $style, $current_depth + 1, $abc, $filter);
 			}
 
-			if ($style == "ul") print "</ul>";
-			if ($style == "ol") print "</ol>";
-			if ($style == "indent") print "</div>";
-		}
-	}
-}
+			// begin element
+			echo '<li>';
+			if ($curlevel == $rootlevel && $curlevel < 2)	echo '<strong>';
+			if ($this->tag == $page['tag'])					echo '<em>';
 
-// header
-if ($root)
-{
-	if (!$nomark)
-	{
-		$title = $this->GetTranslation("TreeClusterTitle");
-		$title = str_replace("%1",  $this->Link("/".$root, "", $root), $title);
-		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.":</span></p>\n");
-	}
-	$query = "'".quote($this->dblink, $this->NpjTranslit($root))."/%'";
-}
-else
-{
-	if (!$nomark)  print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("TreeSiteTitle")."</span></p>\n");
-	$query = "'%'";
-}
+			echo $this->Link('/'.$page['tag'], '', $page['title'], 0, 1, '', 0);
 
-$pages = $this->LoadAll(
-	"SELECT ".$this->pages_meta." ".
-	"FROM ".$this->config["table_prefix"]."pages ".
-	"WHERE supertag LIKE ".$query.
-		($owner_id
-			? " AND owner_id='".quote($this->dblink, $owner_id)."'"
-			: "").
-		" AND comment_on_id = '0'", 1);
+			// end element
+			if ($this->tag == $page['tag'])					echo '</em>';
+			if ($curlevel == $rootlevel && $curlevel < 2)	echo '</strong>';
+			echo "</li>\n";
 
-if ($pages)
-{
-	//Check the pages, according to the desired depth ($depth)  at all to be displayed
-	$i = 0;
-	$current_depth = count(explode("/", $query));
-	foreach($pages as $page)
-	{
-		$page_depth = count(explode("/", $page["supertag"]));
-		if ($page_depth <= $depth + $current_depth - 1)
-		{
-			$new_pages[$i] = $page;
+
+			// recheck page level
+			$prevlevel	= substr_count($page['tag'], '/');
+
 			$i++;
 		}
-	}
-	$pages = $new_pages;
 
-	//Cache page and prepare a list for caching acl
-	foreach($pages as $page)
-	{
-		$this->CachePage($page, 1);
-		$page_id_list[] = $page["page_id"];
-	}
-
-	//Constituent line request for acl
-	for ($i = 0; $i < count($page_id_list); $i++)
-	{
-
-		$acl_str .= "'".quote($this->dblink, $page_id_list[$i])."', ";
-	}
-
-	$acl_str = substr($acl_str, 0, strlen($acl_str) - 2);
-
-	//Cache access rights
-	if ( $read_acls = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."acls WHERE page_id IN (".$acl_str.") AND privilege = 'read'", 1))
-	{
-		for ($i = 0; $i < count($read_acls); $i++)
+		// close all opened <ul> tags
+		if ($ul > 0) while ($ul > 0)
 		{
-			$this->CacheACL($read_acls[$i]["page_id"], "read", 1, $read_acls[$i]);
+			echo "</ul>\n";
+			$ul--;
 		}
+
+		// end list
+		echo "</ul>\n";
 	}
-
-	//Get an array of pages
-	$tree_pages_array = array();
-	foreach($pages as $page)
-	{
-		if (!$this->config["hide_locked"] || $this->HasAccess("read", $page["page_id"]))
-		{
-			$tree_pages_array["/".$page["supertag"]] = $page["tag"];
-		}
-	}
-
-	//Sort in order supertag
-	ksort ( $tree_pages_array, SORT_STRING );
-
-	$tree = create_cluster_tree($this,"/".$this->NpjTranslit($root),$root,$depth);
-
-	print_cluster_tree($this, $tree, $style, 1, $abc, $filter);
-
 }
 else
 {
-	$empty_string = $this->GetTranslation("TreeEmpty");
-	$empty_string = str_replace("%1", $this->Link("/".$root,"",$root), $empty_string);
-	print($empty_string."<br />");
+	if (!$nomark) echo '<small><em>'.$this->GetTranslation('TreeEmpty').'</em></small><br/>';
 }
 
 // footer
