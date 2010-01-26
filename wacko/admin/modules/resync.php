@@ -150,7 +150,7 @@ function admin_resync(&$engine, &$module)
 					$engine->StartLinkTracking();
 					$dummy = $engine->Format($page['body_r'], 'post_wacko');
 					$engine->StopLinkTracking();
-					$engine->WriteLinkTable($page['tag']);
+					$engine->WriteLinkTable($page['page_id']);
 					$engine->ClearLinkTable();
 					$engine->current_context--;
 				}

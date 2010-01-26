@@ -75,7 +75,7 @@ else
 				$this->StartLinkTracking();
 				$dummy = $this->Format($body_r, 'post_wacko');
 				$this->StopLinkTracking();
-				$this->WriteLinkTable($tag);
+				$this->WriteLinkTable($page_id);
 				$this->ClearLinkTable();
 				$this->current_context--;
 
