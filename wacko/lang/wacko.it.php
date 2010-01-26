@@ -209,6 +209,7 @@ $wackoTranslation = array(
 	"ReferrersRemoved" => "<i> Riferimenti alla pagina %1 rimossi.</i>",
 	"LinksRemoved" => "<i> Links dalla pagina %1 rimossi.</i>",
 	"KeywordsRemoved" => "<em>Keywords pages deleted.</em>",
+	"RatingRemoved" => "<em>Rating removed.</em>",
 	"AclsRemoved" => "<i> Permessi pagina %1 rimossi.</i>",
 	"WatchesRemoved" => "<i>Watches from page %1 rimossi.</i>",
 	"CommentsRemoved" => "<i>Comments from page %1 rimossi.</i>",
