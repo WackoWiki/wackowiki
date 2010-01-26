@@ -89,7 +89,7 @@ del A.outerlink:HOVER { color:#cc3300 }
 .time{ color:#999999; font-size: 9px; margin:5px 20px;}
 .debug { font-size: 11px; color: #888888;}
 
-#commentsheader, #filesheader {
+#commentsheader, #filesheader, #rateheader {
 	background-color: #eeeeee;
 	padding: 2px 50px;
 }

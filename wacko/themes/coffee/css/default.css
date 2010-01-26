@@ -26,7 +26,7 @@ td {vertical-align: top }
 span.small {font-size: 80%}
 
 /* Page footer */
-#filesheader, #commentsheader, #footer {padding: 5px 10px; background-color: #FFEFD5; border-top: 1px solid #ccc; font-size: 90%}
+#filesheader, #commentsheader, #rateheader, #footer {padding: 5px 10px; background-color: #FFEFD5; border-top: 1px solid #ccc; font-size: 90%}
 .searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-color: #FFE4B5;}
 .searchbar input { border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;}
 #credits {clear: right; padding: 10px; color: #AAAAAA; font-size: 11px; text-align: right}

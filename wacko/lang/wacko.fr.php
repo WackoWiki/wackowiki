@@ -400,6 +400,22 @@ $wackoTranslation = array(
 	"ResetChangesWatches"	=> "Réinitialiser la liste des pages surveillées",
 	"NoChangesWatches"		=> "Pas de modification parmi les pages que vous surveillez&nbsp;...",
 
+	// rating handler
+	"RatingDenied"			=> "You can not rate this page.",
+	"RatingSuccess"			=> "Thank you for your evaluation",
+	"RatingDuplicate"		=> "You have already rated this page.",
+	"RatingHeader"			=> "Your rating of the page",
+	"RatingHeaderResults"	=> "Overall assessment instrument",
+	"RatingResults"			=> "show results",
+	"RatingForm"			=> "show form",
+	"RatingSubmit"			=> "Submit",
+	"RatingVoters"			=> "Voters",
+	"RatingTotal"			=> "average grade",
+	"RatingNotRated"		=> "Page not yet rated",
+	"RatingTopPages"		=> "Best readers rated pages",
+	"RatingBottomPages"		=> "Worst readers rated pages",
+	"RatingNoPagesRated"	=> "are none",
+
 	//Settings
 	"SettingsFor" => "Réglages pour %1",
 	"MetaInfo" => "META Mots-clés/Description insérée dans les en-têtes HTML.",
@@ -426,6 +442,7 @@ $wackoTranslation = array(
 	"SettingsTotalRevs" => "Révisions",
 	"SettingsTotalComs" => "Commentaires",
 	"SettingsHits" => "Vues",
+	"SettingsRating" => "Readers rating",
 	"SettingsText" => "Réglages",
 	"SettingsTip" => "Autres réglages et propriétés de cette page",
 	"SettingsPortal" => "Autres réglages et propriétés pour cette page&nbsp;:",

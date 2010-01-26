@@ -463,6 +463,21 @@ $wackoTranslation = array(
 							   "Forward вашей почтовой программы) на адрес %4.",
 	"UsersPMNotLoggedIn"	=> "Вы не зарегистрированы в системе и не можете отправлять личные сообщения пользователям.",
 
+	// rating handler
+	"RatingDenied"			=> "Вы не можете оценивать эту страницу.",
+	"RatingSuccess"			=> "Благодарим за вашу оценку",
+	"RatingDuplicate"		=> "Вы уже оценивали эту страницу.",
+	"RatingHeader"			=> "Ваша оценка документа",
+	"RatingHeaderResults"	=> "Общая оценка документа",
+	"RatingResults"			=> "показать результаты",
+	"RatingForm"			=> "показать форму",
+	"RatingSubmit"			=> "готово",
+	"RatingVoters"			=> "респондентов",
+	"RatingTotal"			=> "средний балл",
+	"RatingNotRated"		=> "страница еще не оценена",
+	"RatingTopPages"		=> "Лучшие документы по оценке читателей",
+	"RatingBottomPages"		=> "Худшие документы по оценке читателей",
+	"RatingNoPagesRated"	=> "таковых нет",
 
 	//Settings
 	"SettingsFor" => "Свойства документа %1",
@@ -490,6 +505,7 @@ $wackoTranslation = array(
 	"SettingsTotalRevs" => "Всего редакций",
 	"SettingsTotalComs" => "Всего комментариев",
 	"SettingsHits" => "Всего просмотров",
+	"SettingsRating" => "Читательский рейтинг",
 	"SettingsText" => "Свойства",
 	"SettingsTip" => "Прочие свойства и настройки данной страницы",
 	"SettingsPortal" => "Прочие настройки и действия над страницей:",

@@ -31,6 +31,19 @@ $table_config_r4_2 = "CREATE TABLE {$pref}config (".
 					"UNIQUE KEY name (name)".
 				") TYPE=MyISAM";
 
+// GROUPS
+$table_groups_r4_2 = "CREATE TABLE {$pref}groups (".
+					"name VARCHAR(100) NOT NULL,".
+					"description VARCHAR(255) NOT NULL,".
+					"moderator VARCHAR(25) NOT NULL,".
+					"members TEXT NOT NULL,".
+					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
+					"open TINYINT(1) UNSIGNED NOT NULL,".
+					"active TINYINT(1) UNSIGNED NOT NULL,".
+					// "special TINYINT(1) UNSIGNED NOT NULL,".
+					"PRIMARY KEY (name)".
+				") TYPE=MyISAM";
+
 // KEYWORDS
 $table_keywords_r4_2 = "CREATE TABLE {$pref}keywords (".
 					"keyword_id INT(10) unsigned NOT NULL AUTO_INCREMENT,".
@@ -104,6 +117,16 @@ $update_pages_r4_2_4 = "UPDATE {$pref}pages AS pages, (SELECT comment_on_id, COU
 $update_pages_r4_2_5 = "UPDATE {$pref}pages as pages, (SELECT tag, MIN(time) AS oldest FROM wacko_revisions GROUP BY tag) AS revisions SET pages.created = revisions.oldest WHERE pages.tag = revisions.tag AND pages.created IS NULL";
 $update_pages_r4_2_6 = "UPDATE {$pref}pages as pages SET pages.created = pages.time WHERE pages.id = pages.id AND pages.created IS NULL";
 $update_pages_r4_2_7 = "UPDATE {$pref}pages as pages SET minor_edit = '0' WHERE pages.minor_edit IS NULL";
+
+// RATING
+$table_rating_r4_2 = "CREATE TABLE {$pref}rating (".
+					"page_id int(10) UNSIGNED NOT NULL,".
+					"value INT(11) NOT NULL,".
+					"voters INT(10) UNSIGNED NOT NULL,".
+					"time TIMESTAMP NOT NULL,".
+					"PRIMARY KEY (page_id),".
+					"KEY voters_rate (voters)".
+				") TYPE=MyISAM";
 
 // REFERRERS
 $alter_referrers_r4_2 = "ALTER TABLE {$pref}referrers DROP INDEX idx_page_tag, CHANGE page_tag page_id INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD INDEX idx_page_id (page_id)";

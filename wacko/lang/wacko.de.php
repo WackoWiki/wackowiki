@@ -400,6 +400,22 @@ $wackoTranslation = array(
 	"ResetChangesWatches"	=> "Liste der Änderungen zurücksetzen",
 	"NoChangesWatches"		=> "Unter deinen beobachteten Seiten sind keine Änderungen...",
 
+	// rating handler
+	"RatingDenied"			=> "Du kannst diese Seite nicht bewerten.",
+	"RatingSuccess"			=> "Deine Bewertung wurde berücksichtigt",
+	"RatingDuplicate"		=> "Du hast diese Seite bereits bewertet.",
+	"RatingHeader"			=> "Diese Seite bewerten",
+	"RatingHeaderResults"	=> "Gesamtbewertung der Seite",
+	"RatingResults"			=> "zeige Ergebnisse",
+	"RatingForm"			=> "zeige Formular",
+	"RatingSubmit"			=> "Bewertung abgeben",
+	"RatingVoters"			=> "Stimmen",
+	"RatingTotal"			=> "durchschnittliche Bewertung",
+	"RatingNotRated"		=> "Seite wurde noch nicht bewertet",
+	"RatingTopPages"		=> "Am besten bewertete Seiten",
+	"RatingBottomPages"		=> "Am schlechtesten bewertete Seiten",
+	"RatingNoPagesRated"	=> "keine vorhanden",
+
 	//Settings
 	"SettingsFor" => "Seiteneinstellungen für %1",
 	"MetaInfo" => "META Schlüsselwörter/Beschreibungen, die in den HTML-Kopf eingefügt werden.",
@@ -426,6 +442,7 @@ $wackoTranslation = array(
 	"SettingsTotalRevs" => "Revsionen",
 	"SettingsTotalComs" => "Kommentare",
 	"SettingsHits" => "Aufrufe",
+	"SettingsRating" => "Leserbewertung",
 	"SettingsText" => "Einstellungen",
 	"SettingsTip" => "Andere Einstellungen und Eigenschaften dieser Seite:",
 	"SettingsPortal" => "Andere Einstellungen und Eigenschaften dieser Seite:",
