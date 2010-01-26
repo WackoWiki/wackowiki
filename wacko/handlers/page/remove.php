@@ -37,6 +37,10 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			{
 				print(str_replace("%1", $this->tag, $this->GetTranslation("LinksRemoved"))."<br />\n");
 			}
+			if ($this->RemoveKeywords($this->tag))
+			{
+				print($this->GetTranslation("KeywordsRemoved")."<br />\n");
+			}
 			if ($this->RemoveAcls($this->tag))
 			{
 				print(str_replace("%1", $this->tag, $this->GetTranslation("AclsRemoved"))."<br />\n");
@@ -46,6 +50,10 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 				if ($this->RemoveWatches($this->tag))
 				{
 					print(str_replace("%1", $this->tag, $this->GetTranslation("WatchesRemoved"))."<br />\n");
+				}
+				if ($this->RemoveRatings($this->tag))
+				{
+					print($this->GetTranslation("RatingRemoved")."<br />\n");
 				}
 				if ($this->RemoveComments($this->tag, false, $dontkeep))
 				{
@@ -77,8 +85,10 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			{
 				$this->RemoveReferrers	($this->tag, true);
 				$this->RemoveLinks		($this->tag, true);
+				$this->RemoveKeywords	($this->tag, true);
 				$this->RemoveAcls		($this->tag, true);
 				$this->RemoveWatches	($this->tag, true);
+				$this->RemoveRatings	($this->tag, true);
 				$this->RemoveComments	($this->tag, true, $dontkeep);
 				$this->RemoveFiles		($this->tag, true);
 
