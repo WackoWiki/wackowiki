@@ -63,8 +63,14 @@ if ($this->HasAccess("read"))
 				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"b\" value=\"".($c == 1 ? "-1" : $page["revision_m_id"])."\" ".($c == 2 ? "checked=\"checked\"" : "")." />";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("show").($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."time=".urlencode($page["modified"])."\">".$this->GetTimeStringFormatted($page["modified"])."</a>";
 				$output .= " — id ".$page["revision_m_id"]." ";
-				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->GetTranslation("By")." ".($this->IsWikiName($page["user"]) ? $this->Link($page["user"]) : $page["user"])."";
+				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->GetTranslation("By")." ".
+				($page["user"]
+					? ($this->IsWikiName($page["user"])
+						? $this->Link("/".$page["user"],"",$page["user"])
+						: $page["user"])
+					: $this->GetTranslation("Guest"))."";
 				$output .= "".$edit_note."";
+				$output .= " ".($page["minor_edit"] ? "m" : "");
 				$output .= "</li>\n";
 			}
 		}
