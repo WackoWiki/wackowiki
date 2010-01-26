@@ -894,7 +894,7 @@ class Wacko
 		$rev = $this->LoadAll(
 			"SELECT p.revision_id AS revision_m_id, ".$pages_meta." ".
 			"FROM ".$this->config["table_prefix"]."revisions p ".
-				"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
+				"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 			"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
 				($minor_edit
 					? "AND p.minor_edit = '0' "
@@ -906,7 +906,7 @@ class Wacko
 			if ($cur = $this->LoadSingle(
 				"SELECT p.page_id AS revision_m_id, ".$pages_meta." ".
 				"FROM ".$this->config["table_prefix"]."pages p ".
-					"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
+					"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 				"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
 					($minor_edit
 						? "AND p.minor_edit = '0' "
@@ -3073,6 +3073,21 @@ class Wacko
 		return false;
 	}
 
+	function IsModerator()
+	{
+		if (!$this->GetUser()) return false;
+
+		if (is_array($this->config['aliases']))
+		{
+			$al  = $this->config['aliases'];
+			$mod = explode("\n", $al['Moders']);
+
+			if ($mod == true && in_array($this->GetUserName(), $mod))
+				return true;
+		}
+		return false;
+	}
+
 	// returns true if logged in user is owner of current page, or page specified in $tag
 	function UserIsOwner($page_id = "")
 	{
@@ -3229,6 +3244,9 @@ class Wacko
 	// returns true if $user (defaults to the current user) has access to $privilege on $page_tag (defaults to the current page)
 	function HasAccess($privilege, $page_id = "", $user = "")
 	{
+		if ($user == '') $username = strtolower($this->GetUserName());
+		else if ($user == GUEST) $username = GUEST;
+		else $username = $user;
 		$registered = false;
 		// see whether user is registered and logged in
 		if ($user != GUEST)
@@ -3246,11 +3264,11 @@ class Wacko
 		$this->_acl = $acl;
 
 		// if current user is owner or admin, return true. they can do anything!
-		if ($user != GUEST)
+		if ($user == '' && $username != GUEST)
 			if ($this->UserIsOwner($page_id) || $this->IsAdmin())
 				return true;
 
-		return $this->CheckACL($user, $acl['list'], true);
+		return $this->CheckACL($username, $acl['list'], true);
 	}
 
 	function CheckACL($user, $acl_list, $copy_to_this_acl = false, $debug = 0)
