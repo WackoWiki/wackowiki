@@ -2381,28 +2381,25 @@ class Wacko
 		$_SESSION[$this->config["session_prefix"].'_'."linktracking"] = 0;
 	}
 
-	function WriteLinkTable($from_tag = "")
+	function WriteLinkTable($from_page_id = "")
 	{
-		$page_id = $this->GetPageId($tag);
-
 		// delete old link table
-		if ($from_tag == "")
-			$from_tag = $this->tag;
+		if ($from_page_id == "")
+			$from_page_id = $this->page["page_id"];
 
 		$this->Query(
 			"DELETE FROM ".$this->config["table_prefix"]."links ".
-			"WHERE from_page_id = '".quote($this->dblink, $page_id)."'");
+			"WHERE from_page_id = '".quote($this->dblink, $from_page_id)."'");
 
 		if ($linktable = $this->GetLinkTable())
 		{
-			$from_page_id = quote($this->dblink, $this->GetPageId());
 			foreach ($linktable as $to_tag)
 			{
 				$lower_to_tag = strtolower($to_tag);
 
 				if (!$written[$lower_to_tag])
 				{
-					$query .= "('".$from_page_id."','".quote($this->dblink, $this->GetPageId($to_tag))."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->NpjTranslit($to_tag))."'),";
+					$query .= "('".quote($this->dblink, $from_page_id)."','".quote($this->dblink, $this->GetPageId($to_tag))."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->NpjTranslit($to_tag))."'),";
 					$written[$lower_to_tag] = 1;
 				}
 			}
