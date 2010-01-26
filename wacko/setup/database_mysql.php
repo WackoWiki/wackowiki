@@ -25,13 +25,25 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 				") TYPE=MyISAM";
 
 $table_config = "CREATE TABLE {$pref}config (".
-				"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-				"name VARCHAR(100) NOT NULL DEFAULT '',".
-				"value TEXT,".
-				// "updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,".
-				"PRIMARY KEY (config_id),".
-				"UNIQUE KEY name (name)".
-			") TYPE=MyISAM";
+					"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"name VARCHAR(100) NOT NULL DEFAULT '',".
+					"value TEXT,".
+					// "updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,".
+					"PRIMARY KEY (config_id),".
+					"UNIQUE KEY name (name)".
+				") TYPE=MyISAM";
+
+$table_groups = "CREATE TABLE {$pref}groups (".
+					"name VARCHAR(100) NOT NULL,".
+					"description VARCHAR(255) NOT NULL,".
+					"moderator VARCHAR(25) NOT NULL,".
+					"members TEXT NOT NULL,".
+					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
+					"open TINYINT(1) UNSIGNED NOT NULL,".
+					"active TINYINT(1) UNSIGNED NOT NULL,".
+					// "special TINYINT(1) UNSIGNED NOT NULL,".
+					"PRIMARY KEY (name)".
+				") TYPE=MyISAM";
 
 $table_keywords = "CREATE TABLE {$pref}keywords (".
 					"keyword_id INT(10) unsigned NOT NULL AUTO_INCREMENT,".
@@ -61,18 +73,18 @@ $table_links = "CREATE TABLE {$pref}links (".
 				") TYPE=MyISAM";
 
 $table_log = "CREATE TABLE {$pref}log (".
-				"log_id INT(10) UNSIGNED NOT NULL auto_increment,".
-				"time TIMESTAMP NOT NULL,".
-				"level TINYINT(1) NOT NULL,".
-				"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-				"ip VARCHAR(15) NOT NULL,".
-				"message TEXT NOT NULL,".
-				"PRIMARY KEY (log_id),".
-				"KEY idx_level (level),".
-				"KEY idx_user_id (user_id),".
-				"KEY idx_ip (ip),".
-				"KEY idx_time (time)".
-			") TYPE=MyISAM";
+					"log_id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"time TIMESTAMP NOT NULL,".
+					"level TINYINT(1) NOT NULL,".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"ip VARCHAR(15) NOT NULL,".
+					"message TEXT NOT NULL,".
+					"PRIMARY KEY (log_id),".
+					"KEY idx_level (level),".
+					"KEY idx_user_id (user_id),".
+					"KEY idx_ip (ip),".
+					"KEY idx_time (time)".
+				") TYPE=MyISAM";
 
 $table_pages = "CREATE TABLE {$pref}pages (".
 					"page_id INT(10) UNSIGNED NOT NULL auto_increment,".
@@ -111,44 +123,53 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"KEY idx_title (title)".
 				") TYPE=MyISAM;";
 
+$table_rating = "CREATE TABLE {$pref}rating (".
+					"page_id int(10) UNSIGNED NOT NULL,".
+					"value INT(11) NOT NULL,".
+					"voters INT(10) UNSIGNED NOT NULL,".
+					"time TIMESTAMP NOT NULL,".
+					"PRIMARY KEY (page_id),".
+					"KEY voters_rate (voters)".
+				") TYPE=MyISAM";
+
 $table_referrers = "CREATE TABLE {$pref}referrers (".
-						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-						"referrer CHAR(150) NOT NULL DEFAULT '',".
-						"time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-						"KEY idx_page_id (page_id),".
-						"KEY idx_time (time)".
-					") TYPE=MyISAM";
+					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"referrer CHAR(150) NOT NULL DEFAULT '',".
+					"time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"KEY idx_page_id (page_id),".
+					"KEY idx_time (time)".
+				") TYPE=MyISAM";
 
 $table_revisions = "CREATE TABLE {$pref}revisions (".
-						"revision_id INT(10) UNSIGNED NOT NULL auto_increment,".
-						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-						"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-						"tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
-						"supertag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
-						"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-						"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-						"body MEDIUMTEXT NOT NULL,".
-						"body_r MEDIUMTEXT NOT NULL,".
-						"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
-						"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
-						"latest TINYINT(1) UNSIGNED DEFAULT '0',".
-						"ip VARCHAR(15) NOT NULL,".
-						"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
-						"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-						"lang VARCHAR(2) NOT NULL DEFAULT '',".
-						"title VARCHAR(100) NOT NULL DEFAULT '',".
-						"description VARCHAR(250) NOT NULL DEFAULT '',".
-						"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
-						"PRIMARY KEY (revision_id),".
-						"KEY idx_user_id (user_id),".
-						"KEY idx_owner_id (owner_id),".
-						"KEY idx_tag (tag),".
-						"KEY idx_supertag (supertag),".
-						"KEY idx_modified (modified),".
-						"KEY idx_minor_edit (minor_edit),".
-						"KEY idx_comment_on_id (comment_on_id)".
-					") TYPE=MyISAM;";
+					"revision_id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
+					"supertag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
+					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"body MEDIUMTEXT NOT NULL,".
+					"body_r MEDIUMTEXT NOT NULL,".
+					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
+					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
+					"latest TINYINT(1) UNSIGNED DEFAULT '0',".
+					"ip VARCHAR(15) NOT NULL,".
+					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
+					"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"lang VARCHAR(2) NOT NULL DEFAULT '',".
+					"title VARCHAR(100) NOT NULL DEFAULT '',".
+					"description VARCHAR(250) NOT NULL DEFAULT '',".
+					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
+					"PRIMARY KEY (revision_id),".
+					"KEY idx_user_id (user_id),".
+					"KEY idx_owner_id (owner_id),".
+					"KEY idx_tag (tag),".
+					"KEY idx_supertag (supertag),".
+					"KEY idx_modified (modified),".
+					"KEY idx_minor_edit (minor_edit),".
+					"KEY idx_comment_on_id (comment_on_id)".
+				") TYPE=MyISAM;";
 
 $table_upload = "CREATE TABLE {$pref}upload (".
 					"upload_id INT(10) UNSIGNED NOT NULL auto_increment,".
@@ -199,12 +220,12 @@ $table_users = "CREATE TABLE {$pref}users (".
 				") TYPE=MyISAM";
 
 $table_watches = "CREATE TABLE {$pref}watches (".
-						"watch_id INT(10) UNSIGNED NOT NULL auto_increment,".
-						"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-						"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-						"time TIMESTAMP NOT NULL,".
-						"PRIMARY KEY (watch_id)".
-					") TYPE=MyISAM";
+					"watch_id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"time TIMESTAMP NOT NULL,".
+					"PRIMARY KEY (watch_id)".
+				") TYPE=MyISAM";
 
 /*
  Wacko Wiki MySQL Table Deletion Script
@@ -213,11 +234,13 @@ $table_watches = "CREATE TABLE {$pref}watches (".
 $table_acls_drop = "DROP TABLE {$pref}acls";
 $table_cache_drop = "DROP TABLE {$pref}cache";
 $table_config_drop = "DROP TABLE {$pref}config";
+$table_groups_drop = "DROP TABLE {$pref}groups";
 $table_keywords_drop = "DROP TABLE {$pref}keywords";
 $table_keywords_pages_drop = "DROP TABLE {$pref}keywords_pages";
 $table_links_drop = "DROP TABLE {$pref}links";
 $table_log_drop = "DROP TABLE {$pref}log";
 $table_pages_drop = "DROP TABLE {$pref}pages";
+$table_rating_drop = "DROP TABLE {$pref}rating";
 $table_referrers_drop = "DROP TABLE {$pref}referrers";
 $table_revisions_drop = "DROP TABLE {$pref}revisions";
 $table_upload_drop = "DROP TABLE {$pref}upload";

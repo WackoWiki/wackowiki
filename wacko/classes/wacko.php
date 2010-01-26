@@ -4205,6 +4205,23 @@ class Wacko
 			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
+	function RemoveRatings($tag, $cluster = false)
+	{
+		if (!$tag) return false;
+
+		$ids = $this->LoadAll(
+			"SELECT page_id FROM {$this->config['table_prefix']}pages ".
+			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+
+		foreach ($ids as $id)
+		{
+			$this->Query(
+				"DELETE FROM {$this->config['table_prefix']}rating ".
+				"WHERE page_id = {$id['id']}");
+		}
+		return true;
+	}
+
 	function RemoveLinks($tag, $cluster = false)
 	{
 		if (!$tag) return false;

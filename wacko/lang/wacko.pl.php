@@ -400,6 +400,22 @@ $wackoTranslation = array(
 	"ResetChangesWatches"	=> "reset the list of changes",
 	"NoChangesWatches"		=> "Among your watched pages are no changes...",
 
+	// rating handler
+	"RatingDenied"			=> "You can not rate this page.",
+	"RatingSuccess"			=> "Thank you for your evaluation",
+	"RatingDuplicate"		=> "You have already rated this page.",
+	"RatingHeader"			=> "Your rating of the page",
+	"RatingHeaderResults"	=> "Overall assessment instrument",
+	"RatingResults"			=> "show results",
+	"RatingForm"			=> "show form",
+	"RatingSubmit"			=> "Submit",
+	"RatingVoters"			=> "Voters",
+	"RatingTotal"			=> "average grade",
+	"RatingNotRated"		=> "Page not yet rated",
+	"RatingTopPages"		=> "Best readers rated pages",
+	"RatingBottomPages"		=> "Worst readers rated pages",
+	"RatingNoPagesRated"	=> "are none",
+
 	//Settings
 	"SettingsFor" => "Ustawienia dla %1",
 	"MetaInfo" => "S³owa kluczowe/Opis META które zostan± dodane do nag³ówków HTML.",
@@ -426,6 +442,7 @@ $wackoTranslation = array(
 	"SettingsTotalRevs" => "Revsions",
 	"SettingsTotalComs" => "Comments",
 	"SettingsHits" => "Views",
+	"SettingsRating" => "Readers rating",
 	"SettingsText" => "Ustawienia",
 	"SettingsTip" => "Inne ustawienia i w³asno¶ci tej strony",
 	"SettingsPortal" => "Inne ustawienia i w³asno¶ci dla tej strony:",

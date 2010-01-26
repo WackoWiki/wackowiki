@@ -186,7 +186,7 @@ form input.submitinput {
 
 /** File and comment-related *************************************************/
 	/* Headers (always visible) */
-#filesheader,#commentsheader {
+#filesheader, #commentsheader, #rateheader {
 	background-color: #F0F4F5;
 	padding: 2px 10px;
 	border-top: 1px dotted #CCCCCC;
