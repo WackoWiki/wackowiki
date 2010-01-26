@@ -4,57 +4,57 @@
 class Wacko
 {
 	// VARIABLES
-	var $config	= array();
+	var $config					= array();
 	var $dblink;
 	var $page;
 	var $tag;
+	var $WVERSION; //Wacko version
 	var $iswatched;
 	var $queryTime;
-	var $queryLog = array();
-	var $interWiki = array();
-	var $aclCache = array();
-	var $WVERSION; //Wacko version
-	var $context = array("");
-	var $current_context = 0;
-	var $pages_meta = "page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description";
-	var $first_inclusion = array(); // for backlinks
-	var $optionSplitter = "\n"; // if you change this two symbols, settings for all users will be lost.
-	var $valueSplitter  = "=";
-	var $format_safe = true; //for htmlspecialchars() in PreLink
-	var $unicode_entities = array(); //common unicode array
+	var $queryLog				= array();
+	var $interWiki				= array();
+	var $aclCache				= array();
+	var $context				= array();
+	var $current_context		= 0;
+	var $pages_meta				= "page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description";
+	var $first_inclusion		= array();	// for backlinks
+	var $optionSplitter			= "\n";		// if you change this two symbols, settings for all users will be lost.
+	var $valueSplitter			= "=";
+	var $format_safe			= true;		//for htmlspecialchars() in PreLink
+	var $unicode_entities		= array();	//common unicode array
 	var $timer;
-	var $toc_context = array();
-	var $search_engines = array("bot", "rambler", "yandex", "crawl", "search", "archiver", "slurp", "aport", "crawler", "google", "inktomi", "spider", );
-	var $_langlist = NULL;
-	var $languages = NULL;
-	var $resources = NULL;
-	var $wantedCache = NULL;
-	var $pageCache = NULL;
-	var $_formatter_noautolinks = NULL;
-	var $numerate_links	= NULL;
-	var $post_wacko_action = NULL;
-	var $_userhost = NULL;
-	var $paragrafica_styles = array(
+	var $toc_context			= array();
+	var $search_engines			= array("bot", "rambler", "yandex", "crawl", "search", "archiver", "slurp", "aport", "crawler", "google", "inktomi", "spider", );
+	var $_langlist				= NULL;
+	var $languages				= NULL;
+	var $resources				= NULL;
+	var $wantedCache			= NULL;
+	var $pageCache				= NULL;
+	var $_formatter_noautolinks	= NULL;
+	var $numerate_links			= NULL;
+	var $post_wacko_action		= NULL;
+	var $_userhost				= NULL;
+	var $paragrafica_styles		= array(
 		"before"	=> array(
-						"_before" => "",
-						"_after" => "",
-						"before" => "<span class='pmark'>[##]</span><br />",
-						"after" => ""),
+						"_before"	=> "",
+						"_after"	=> "",
+						"before"	=> "<span class='pmark'>[##]</span><br />",
+						"after"		=> ""),
 		"after"		=> array(
-						"_before" => "",
-						"_after" => "",
-						"before" => "",
-						"after" => "<span class='pmark'>[##]</span>"),
+						"_before"	=> "",
+						"_after"	=> "",
+						"before"	=> "",
+						"after"		=> "<span class='pmark'>[##]</span>"),
 		"right"		=> array(
-						"_before" => "<div class='pright'><div class='p-'>&nbsp;<span class='pmark'>[##]</span></div><div class='pbody-'>",
-						"_after" => "</div></div>",
-						"before" => "",
-						"after" => ""),
+						"_before"	=> "<div class='pright'><div class='p-'>&nbsp;<span class='pmark'>[##]</span></div><div class='pbody-'>",
+						"_after"	=> "</div></div>",
+						"before"	=> "",
+						"after"		=> ""),
 		"left"		=> array(
-						"_before" => "<div class='pleft'><div class='p-'><span class='pmark'>[##]</span>&nbsp;</div><div class='pbody-'>",
-						"_after" => "</div></div>",
-						"before" => "",
-						"after" => ""),
+						"_before"	=> "<div class='pleft'><div class='p-'><span class='pmark'>[##]</span>&nbsp;</div><div class='pbody-'>",
+						"_after"	=> "</div></div>",
+						"before"	=> "",
+						"after"		=> ""),
 	);
 	var $paragrafica_patches = array(
 		"before" => array("before"),
@@ -69,10 +69,10 @@ class Wacko
 	// CONSTRUCTOR
 	function Wacko($config, $dblink)
 	{
-		$this->timer = $this->GetMicroTime();
-		$this->config = $config;
-		$this->dblink 	= $dblink;
-		$this->WVERSION = WACKO_VERSION;
+		$this->timer	= $this->GetMicroTime();
+		$this->config	= $config;
+		$this->dblink	= $dblink;
+		$this->WVERSION	= WACKO_VERSION;
 	}
 
 	// DATABASE
@@ -104,7 +104,7 @@ class Wacko
 
 	function LoadAll($query, $docache = 0)
 	{
-		$data = array();
+		$data	= array();
 
 		// retrieving from cache
 		if ($this->config['cache_sql'] && $docache)
@@ -125,6 +125,7 @@ class Wacko
 		{
 			$this->cache->SaveSQL($query, $data);
 		}
+
 		if (isset($data))
 			return $data;
 		else
@@ -143,7 +144,6 @@ class Wacko
 			{
 				return NULL;
 			}
-
 	}
 
 	// MISC
@@ -594,11 +594,11 @@ class Wacko
 			}
 		}
 
-		$tag = str_replace("//", "/", $tag);
-		$tag = str_replace("-", "", $tag);
-		$tag = str_replace(" ", "", $tag);
-		$tag = str_replace("'", "_", $tag);
-		$_tag = strtolower($tag);
+		$tag	= str_replace("//", "/", $tag);
+		$tag	= str_replace("-", "", $tag);
+		$tag	= str_replace(" ", "", $tag);
+		$tag	= str_replace("'", "_", $tag);
+		$_tag	= strtolower($tag);
 
 		if ($strtolow)
 		{
@@ -922,7 +922,7 @@ class Wacko
 			$rev = $this->LoadAll(
 				"SELECT p.page_id AS revision_m_id, ".$pages_meta." ".
 				"FROM ".$this->config["table_prefix"]."pages p ".
-					"INNER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
+					"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 				"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
 				"ORDER BY p.modified DESC ".
 				"LIMIT 1");
@@ -1188,8 +1188,8 @@ class Wacko
 		// write tag
 		if($_POST["tag"])
 		{
-			$this->tag = $tag = $_POST["tag"];
-			$this->supertag = $this->NpjTranslit($tag);
+			$this->tag		= $tag = $_POST["tag"];
+			$this->supertag	= $this->NpjTranslit($tag);
 		}
 
 		if (!$this->NpjTranslit($tag)) return;
@@ -1376,7 +1376,6 @@ class Wacko
 						}
 						else continue;	// skip current watcher
 
-						#$_user = $this->GetUser();
 						$Watcher["user"] = $this->GetUserNameById($Watcher["user_id"]);
 						#$this->SetUser($Watcher, 0);
 
@@ -1481,7 +1480,6 @@ class Wacko
 					// notifying watchers
 					$page_id = $this->GetPageId($tag);
 					$title = $this->GetPageTitle(0, $page_id);
-					#$user_id = $this->GetUserId();
 					$username = $user;
 
 					$Watchers = $this->LoadAll(
@@ -1494,7 +1492,6 @@ class Wacko
 						foreach ($Watchers as $Watcher)
 						if ($Watcher["user_id"] !=  $user_id)
 						{
-							#$_user = $this->GetUser();
 							$Watcher["user"] = $this->GetUserNameById($Watcher["user_id"]);
 							#$this->SetUser($Watcher, 0);
 							$lang = $Watcher["lang"];
@@ -1748,15 +1745,15 @@ class Wacko
 	{
 		$href = $this->config["base_url"].( $this->config["rewrite_mode"] ? "" : "?page=" ).$this->MiniHref($method, $tag, $addpage);
 
-		if ($addpage) $params = "add=1".($params ? "&amp;".$params : "");
-		if ($params) $href .= ($this->config["rewrite_mode"] ? "?" : "&amp;").$params;
+		if ($addpage)	$params = "add=1".($params ? "&amp;".$params : "");
+		if ($params)	$href .= ($this->config["rewrite_mode"] ? "?" : "&amp;").$params;
 
 		return $href;
 	}
 
 	function SlimUrl($text)
 	{
-		#$text = $this->NpjTranslit($text, TRAN_DONTCHANGE);
+		# $text = $this->NpjTranslit($text, TRAN_DONTCHANGE);
 		$text = str_replace("_", "'", $text);
 		if ($this->config["urls_underscores"] == 1)
 		{
@@ -1960,8 +1957,11 @@ class Wacko
 				if (is_array($desc))
 				{
 					//check 403 here!
-					if ($this->IsAdmin() || ($desc["upload_id"] && ($this->GetPageOwnerId($this->GetPageId()) == $this->GetUserId())) ||
-					($this->HasAccess("read", $page_id)) || ($desc["user_id"] == $this->GetUserId()))
+					if ($this->IsAdmin() || (
+					$desc["upload_id"] && (
+					$this->GetPageOwnerId($this->GetPageId()) == $this->GetUserId())) || (
+					$this->HasAccess("read", $page_id)) || (
+					$desc["user_id"] == $this->GetUserId()))
 					{
 						$title	= $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
 						$url	= $this->config["base_url"].trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file;
@@ -3247,7 +3247,7 @@ class Wacko
 		if ($user == '') $username = strtolower($this->GetUserName());
 		else if ($user == GUEST) $username = GUEST;
 		else $username = $user;
-		$registered = false;
+		/* $registered = false;
 		// see whether user is registered and logged in
 		if ($user != GUEST)
 		{
@@ -3255,7 +3255,7 @@ class Wacko
 				$user = strtolower($this->GetUserName());
 			if (!$registered)
 				$user = GUEST;
-		}
+		} */
 
 		if (!$page_id = trim($page_id)) $page_id = $this->GetPageId();
 
@@ -3295,27 +3295,27 @@ class Wacko
 			return false;
 		}
 
-		$upos = strpos($acls, "\n".$user."\n");
-		$aupos = strpos($acls, "\n!".$user."\n");
-		$spos = strpos($acls, '*');
-		$bpos = strpos($acls, '$');
+		$upos	= strpos($acls, "\n".$user."\n");
+		$aupos	= strpos($acls, "\n!".$user."\n");
+		$spos	= strpos($acls, '*');
+		$bpos	= strpos($acls, '$');
 
-		if ($aupos !== false) return false;
+		if ($aupos !== false)	return false;
 
-		if ($upos !== false)  return true;
+		if ($upos !== false)	return true;
 
 		if ($spos !== false)
-			if ($acls{$spos - 1} == "!") return false;
+			if ($acls{$spos - 1} == "!")	return false;
 
 		if ($bpos !== false)
-			if ($acls{$bpos - 1} == "!") return false;
+			if ($acls{$bpos - 1} == "!")	return false;
 
-		if ($spos !== false) return true;
+		if ($spos !== false)	return true;
 
 		if ($bpos !== false)
 		{
-			if ($user == GUEST || $user == "") return false;
-			else return true;
+			if ($user == GUEST || $user == "")	return false;
+			else								return true;
 		}
 
 		return false;
@@ -3332,9 +3332,9 @@ class Wacko
 
 		do
 		{
-			$list = array();
-			$lines = explode("\n", $acl);
-			$replaced = 0;
+			$list		= array();
+			$lines		= explode("\n", $acl);
+			$replaced	= 0;
 
 			foreach ($lines as $line)
 			{
@@ -3342,8 +3342,8 @@ class Wacko
 				// check for inversion character "!"
 				if (preg_match("/^\!(.*)$/", $line, $matches))
 				{
-					$negate = 1;
-					$linel = $matches[1];
+					$negate	= 1;
+					$linel	= $matches[1];
 				}
 				else
 				{
@@ -3356,8 +3356,8 @@ class Wacko
 				{
 					foreach (explode("\n", $aliases[$linel]) as $item)
 					{
-						$item = trim($item);
-						$list[] = ($negate ? "!".$item : $item);
+						$item	= trim($item);
+						$list[]	= ($negate ? "!".$item : $item);
 					}
 					$replaced++;
 				}
@@ -4082,14 +4082,14 @@ class Wacko
 		return
 			$this->Query(
 				"UPDATE ".$this->config["table_prefix"]."revisions SET ".
-					"tag = '".quote($this->dblink, $NewTag)."', ".
-					"supertag = '".quote($this->dblink, $NewSuperTag)."' ".
+					"tag		= '".quote($this->dblink, $NewTag)."', ".
+					"supertag	= '".quote($this->dblink, $NewSuperTag)."' ".
 				"WHERE tag = '".quote($this->dblink, $tag)."' ")
 			&&
 			$this->Query(
 				"UPDATE ".$this->config["table_prefix"]."pages  SET ".
-					"tag = '".quote($this->dblink, $NewTag)."', ".
-					"supertag = '".quote($this->dblink, $NewSuperTag)."' ".
+					"tag		= '".quote($this->dblink, $NewTag)."', ".
+					"supertag	= '".quote($this->dblink, $NewSuperTag)."' ".
 				"WHERE tag = '".quote($this->dblink, $tag)."' ");
 	}
 
