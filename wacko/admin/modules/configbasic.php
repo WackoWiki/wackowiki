@@ -40,6 +40,7 @@ function admin_configbasic(&$engine, &$module)
 				"`upload_max_per_user`	= '".quote((int)$_POST['upload_max_per_user'])."', ".
 				"`hide_comments`		= '".quote((int)$_POST['hide_comments'])."', ".
 				"`hide_files`			= '".quote((int)$_POST['hide_files'])."', ".
+				"`hide_rating`			= '".quote((int)$_POST['hide_rating'])."', ".
 				"`hide_toc`				= '".quote((int)$_POST['hide_toc'])."', ".
 				"`hide_index`			= '".quote((int)$_POST['hide_index'])."', ".
 				"`lower_index`			= '".quote( $_POST['index_mode'] == 'l' ? 1 : 0 )."', ".
@@ -50,7 +51,7 @@ function admin_configbasic(&$engine, &$module)
 				"`keep_deleted_time`	= '".quote((string)$_POST['keep_deleted_time'])."', ".
 				"`pages_purge_time`		= '".quote((string)$_POST['pages_purge_time'])."', ".
 				"`referrers_purge_time`	= '".quote((string)$_POST['referrers_purge_time'])."' ");
-		$engine->Log(1, 'Обновлены базовые параметры WackoWiki');
+		$engine->Log(1, 'Updated basic parameters  WackoWiki');
 		$engine->Redirect(rawurldecode($engine->href()));
 	}
 ?>
@@ -226,6 +227,17 @@ function admin_configbasic(&$engine, &$module)
 				<td>
 					<input type="radio" id="hide_files_on" name="hide_files" value="0"<?php echo ( !$engine->config['hide_files'] ? ' checked="checked"' : '' );?> /><label for="hide_files_on">On.</label>
 					<input type="radio" id="hide_files_off" name="hide_files" value="1"<?php echo ( $engine->config['hide_files'] ? ' checked="checked"' : '' );?> /><label for="hide_files_off">Off.</label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><strong>Rating panel :</strong><br />
+				<small>The default display in the bottom of the panel rating of the document.</small></td>
+				<td>
+					<input type="radio" id="hide_rating_on" name="hide_rating" value="0"<?php echo ( !$engine->config['hide_rating'] ? ' checked="checked"' : '' );?> /><label for="hide_rating_on">On.</label>
+					<input type="radio" id="hide_rating_off" name="hide_rating" value="1"<?php echo ( $engine->config['hide_rating'] ? ' checked="checked"' : '' );?> /><label for="hide_rating_off">Off.</label>
 				</td>
 			</tr>
 			<tr class="lined">

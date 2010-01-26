@@ -197,6 +197,7 @@ class Init
 
 					"hide_comments" => 0,
 					"hide_files" => 0,
+					"hide_rating" => 1,
 
 					"footer_comments" => 1,
 					"footer_files" => 1,
