@@ -3,17 +3,19 @@
 
 if (!isset ($this->config["comments_count"])) $this->config["comments_count"] = 15;
 
-// registering local functions
-// determine if user has rated a given page
-function HandlerShowPageIsRated(&$engine, $id)
+if ($this->config['hide_rating'] != 1)
 {
-	$cookie	= $engine->GetCookie('rating');
-	$ids	= explode(';', $cookie);
-	if ($id = array_search($id, $ids))
-		return true;
-	else return false;
+	// registering local functions
+	// determine if user has rated a given page
+	function HandlerShowPageIsRated(&$engine, $id)
+	{
+		$cookie	= $engine->GetCookie('rating');
+		$ids	= explode(';', $cookie);
+		if ($id = array_search($id, $ids))
+			return true;
+		else return false;
+	}
 }
-
 
 // redirect from comment page to the commented one
 if ($this->page["comment_on_id"])
@@ -403,18 +405,18 @@ if ($this->page)
 			echo '<div id="rateheader">';
 			echo $this->GetTranslation('RatingHeader').' [<a href="'.$this->href('', '', 'show_rating=1').'#rating">'.$this->GetTranslation('RatingResults').'</a>]';
 			echo "</div>\n";
-			
+
 			// display rating form
-			echo '<div class="rating">'.$this->FormOpen('rate').'<table class="rating"><tr>';
-			echo '<td><input id="minus3" name="value" type="radio" value="-3" /><label for="minus3">-3</label></td>'.
-				 '<td><input id="minus2" name="value" type="radio" value="-2" /><label for="minus2">-2</label></td>'.
-				 '<td><input id="minus1" name="value" type="radio" value="-1" /><label for="minus1">-1</label></td>'.
-				 '<td><input id="plus0" name="value" type="radio" value="0" /><label for="plus0"> 0</label></td>'.
-				 '<td><input id="plus1" name="value" type="radio" value="1" /><label for="plus1">+1</label></td>'.
-				 '<td><input id="plus2" name="value" type="radio" value="2" /><label for="plus2">+2</label></td>'.
-				 '<td><input id="plus3" name="value" type="radio" value="3" /><label for="plus3">+3</label></td>'.
-				 '<td><input name="rate" id="submit" type="submit" value="'.$this->GetTranslation('RatingSubmit').'" /></td>';
-			echo '</tr></table>'.$this->FormClose().'</div>';
+			echo '<div class="rating">'.$this->FormOpen('rate').'';
+			echo '<input id="minus3" name="value" type="radio" value="-3" /><label for="minus3">-3</label>'.
+				 '<input id="minus2" name="value" type="radio" value="-2" /><label for="minus2">-2</label>'.
+				 '<input id="minus1" name="value" type="radio" value="-1" /><label for="minus1">-1</label>'.
+				 '<input id="plus0" name="value" type="radio" value="0" /><label for="plus0"> 0</label>'.
+				 '<input id="plus1" name="value" type="radio" value="1" /><label for="plus1">+1</label>'.
+				 '<input id="plus2" name="value" type="radio" value="2" /><label for="plus2">+2</label>'.
+				 '<input id="plus3" name="value" type="radio" value="3" /><label for="plus3">+3</label>'.
+				 '<input name="rate" id="submit" type="submit" value="'.$this->GetTranslation('RatingSubmit').'" />';
+			echo ''.$this->FormClose().'</div>';
 		}
 		else
 		{
@@ -423,11 +425,11 @@ if ($this->page)
 				"FROM {$this->config['table_prefix']}rating ".
 				"WHERE page_id = {$this->page['page_id']} ".
 				"LIMIT 1");
-				
+
 			if ($results['voters'] > 0)			$results['ratio'] = $results['value'] / $results['voters'];
 			if (is_float($results['ratio']))	$results['ratio'] = round($results['ratio'], 2);
 			if ($results['ratio'] > 0)			$results['ratio'] = '+'.$results['ratio'];
-			
+
 			// display rating header
 			echo '<a name="rating"></a>';
 			echo '<div id="rateheader">';
@@ -436,21 +438,21 @@ if ($this->page)
 					? ' [<a href="'.$this->href('', '', 'show_rating=0').'#rating">'.$this->GetTranslation('RatingForm').'</a>]'
 					: '');
 			echo "</div>\n";
-			
+
 			// display rating results
 			if (isset($results['ratio']))
 			{
-				echo '<div class="rating"><table><tr>';
-				echo '<td>'.$this->GetTranslation('RatingTotal').': <strong>'.$results['ratio'].'</strong></td>'.
-					 '<td></td>'.
-					 '<td>'.$this->GetTranslation('RatingVoters').': <strong>'.$results['voters'].'</strong></td>';
-				echo '</tr></table></div>';
+				echo '<div class="rating">';
+				echo ''.$this->GetTranslation('RatingTotal').': <strong>'.$results['ratio'].'</strong>'.
+					 ' '.
+					 ''.$this->GetTranslation('RatingVoters').': <strong>'.$results['voters'].'</strong>';
+				echo '</div>';
 			}
 			else
 			{
-				echo '<div class="rating"><table><tr>';
-				echo '<td><em>'.$this->GetTranslation('RatingNotRated').'</em></td>';
-				echo '</tr></table></div>';
+				echo '<div class="rating">';
+				echo '<em>'.$this->GetTranslation('RatingNotRated').'</em>';
+				echo '</div>';
 			}
 		}
 	}
