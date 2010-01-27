@@ -1728,14 +1728,14 @@ class Wacko
 	}
 
 	// returns just PageName[/method].
-	function MiniHref($method = "", $tag = "", $addpage = "")
+	function MiniHref($method = "", $tag = "", $addpage = 0)
 	{
 		if (!$tag = trim($tag))	$tag = $this->tag;
 		if (!$addpage)			$tag = $this->SlimUrl($tag);
 		// if (!$addpage)		$tag = $this->NpjTranslit($tag);
 
 		$tag = trim($tag, "/.");
-		// $tag = str_replace(array("%2F", "%3F", "%3D"), array("/", "?", "="), rawurlencode($tag));
+		$tag = str_replace(array("%2F", "%3F", "%3D"), array("/", "?", "="), rawurlencode($tag));
 
 		return $tag.($method ? "/".$method : "");
 	}
@@ -3407,7 +3407,16 @@ class Wacko
 	// BOOKMARKS
 	function GetDefaultBookmarks($lang, $what = "default")
 	{
-		$lang = $this->UserAgentLanguage();
+		$user = $this->GetUser();
+
+		if(isset($user["lang"]))
+		{ 
+			$lang =  $user["lang"];
+		}
+		else 
+		{
+			$lang = $this->UserAgentLanguage();
+		}
 
 		if (isset($this->config[$what."_bookmarks"]) &&
 		is_array($this->config[$what."_bookmarks"]) &&
@@ -3762,7 +3771,10 @@ class Wacko
 				$this->userlang = $user["lang"];
 			}
 		}
-		$this->UserAgentLanguage();
+		else
+		{
+			$this->UserAgentLanguage();
+		}
 
 		if (is_array($user) && $user["options"]["theme"])
 		{

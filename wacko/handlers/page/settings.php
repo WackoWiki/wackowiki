@@ -25,7 +25,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 			'lower_index'		=> ( $_POST['index_mode'] == 'l' ? 1 : 0 ),
 			'upper_index'		=> ( $_POST['index_mode'] == 'u' ? 1 : 0 ),
 		);
-		
+
 		if ($this->IsAdmin())
 		{
 			$options['allow_rawhtml']		= (int)$_POST['allow_rawhtml'];
@@ -62,7 +62,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 			"FROM {$this->config['table_prefix']}rating ".
 			"WHERE page_id = {$this->page['page_id']} ".
 			"LIMIT 1");
-		
+
 		if ($rating['voters'] > 0)			$rating['ratio'] = $rating['value'] / $rating['voters'];
 		if (is_float($rating['ratio']))		$rating['ratio'] = round($rating['ratio'], 2);
 		if ($rating['ratio'] > 0)			$rating['ratio'] = '+'.$rating['ratio'];
@@ -99,12 +99,15 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		echo "</tr>\n<tr class=\"lined\">";
 		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsHits')."</th>";
 		echo "<td class=\"form_right\">".$this->page['hits']."</td>";
-		echo "</tr>\n<tr class=\"lined\">";
-		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsRating')."</th>";
-		echo "<td class=\"form_right\">".$rating['ratio'].' ('.$this->GetTranslation('RatingVoters').': '.(int)$rating['voters'].')'."</td>";
- 			unset($rating);
-
 		echo "</tr>\n";
+		if ($this->config['hide_rating'] != 2)
+		{
+			echo "<tr class=\"lined\">";
+			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsRating')."</th>";
+			echo "<td class=\"form_right\">".$rating['ratio'].' ('.$this->GetTranslation('RatingVoters').': '.(int)$rating['voters'].')'."</td>";
+	 			unset($rating);
+			echo "</tr>\n";
+		}
 
 	// load settings (shows only if owner is current user or Admin)
 	if ($this->UserIsOwner() || $this->IsAdmin())
@@ -123,13 +126,15 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		echo "<input type=\"radio\" id=\"filesOff\" name=\"hide_files\" value=\"1\"".( $this->config['hide_files'] ? "checked=\"checked\"" : "" )."/><label for=\"filesOff\">".$this->GetTranslation('MetaOff')."</label>";
 		echo "</td>";
 		echo "</tr>";
-
-		echo "<tr class=\"lined\">";
-		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('MetaRating')."</th>";
-		echo "<td class=\"form_right\">";
-		echo "<input type=\"radio\" id=\"ratingOn\" name=\"hide_rating\" value=\"0\"".( !$this->config['hide_rating'] ? "checked=\"checked\"" : "" )."/><label for=\"ratingOn\">".$this->GetTranslation('MetaOn')."</label>";
-		echo "<input type=\"radio\" id=\"ratingOff\" name=\"hide_rating\" value=\"1\"".( $this->config['hide_rating'] ? "checked=\"checked\"" : "" )."/><label for=\"ratingOff\">".$this->GetTranslation('MetaOff')."</label>";
-		echo "</td>";
+		if ($this->config['hide_rating'] != 2)
+		{
+			echo "<tr class=\"lined\">";
+			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('MetaRating')."</th>";
+			echo "<td class=\"form_right\">";
+			echo "<input type=\"radio\" id=\"ratingOn\" name=\"hide_rating\" value=\"0\"".( !$this->config['hide_rating'] ? "checked=\"checked\"" : "" )."/><label for=\"ratingOn\">".$this->GetTranslation('MetaOn')."</label>";
+			echo "<input type=\"radio\" id=\"ratingOff\" name=\"hide_rating\" value=\"1\"".( $this->config['hide_rating'] ? "checked=\"checked\"" : "" )."/><label for=\"ratingOff\">".$this->GetTranslation('MetaOff')."</label>";
+			echo "</td>";
+		}
 		echo "</tr>";
 		echo "<tr class=\"lined\">";
 		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('MetaToc')."</th>";

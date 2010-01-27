@@ -13,8 +13,16 @@ if ((isset($_GET["_autocomplete"])) && $_GET["_autocomplete"])
 
 if ($this->HasAccess("write") && $this->HasAccess("read"))
 {
+	$user	= $this->GetUser();
 	if ($_POST)
 	{
+		// watch page
+		if ($this->page && $_POST['watchpage'] && $_POST['noid_publication'] != $this->tag && $user && $this->iswatched !== true)
+		{
+			$this->SetWatch($user['user_id'], $this->page['page_id']);
+			$this->iswatched = true;
+		}
+
 		// only if saving:
 		if ($_POST["save"] && $_POST["body"] != "")
 		{
@@ -39,6 +47,10 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			// check for edit note
 			if (($this->GetConfigValue("edit_summary") == 2) && $_POST["edit_note"] == "" && $this->page["comment_on_id"] == 0)
 				$error .= $this->GetTranslation("EditNoteMissing");
+
+			// check keywords
+			if (!$this->page && $this->GetKeywordsList($this->pagelang, 1) && $this->SaveKeywordsList($this->tag, 1) !== true)
+				$error .= 'Select at least one referring keyword (field) to the page. ';
 
 			// captcha code starts
 			if(($this->page && $this->GetConfigValue("captcha_edit_page")) || (!$this->page && $this->GetConfigValue("captcha_new_page")))
@@ -93,6 +105,14 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			// store
 			if (!$error)
 			{
+				// publish anonymously
+				if ($_POST['noid_publication'] == $this->tag)
+				{
+					// undefine username
+					$remember_name = $this->GetUserName();
+					$this->SetUserSetting('name', NULL);
+				}
+
 				// add page (revisions)
 				$body_r = $this->SavePage($this->tag, $body, $edit_note, $minor_edit, $this->page["comment_on_id"], $title);
 
@@ -104,9 +124,11 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				}
 				else
 				{
+					// log event, save keywords
 					if ($this->page == false)
 					{
 						// new page created
+						$this->SaveKeywordsList($this->GetPageId($this->tag));
 						$this->Log(4, str_replace("%1", $this->tag." ".$_POST["title"], $this->GetTranslation("LogPageCreated")));
 					}
 					else
@@ -115,12 +137,20 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 						$this->Log(6, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogPageEdited")));
 					}
 
+					// restore username after anonymous publication
+					if ($_POST['noid_publication'] == $this->tag)
+					{
+						$this->SetUserSetting('name', $remember_name);
+						unset($remember_name);
+						if ($body_r) $this->SetUserSetting('noid_protect', true);
+					}
+
 					// now we render it internally so we can write the updated link table.
 					$this->ClearLinkTable();
 					$this->StartLinkTracking();
 					$dummy = $this->Format($body_r, "post_wacko");
 					$this->StopLinkTracking();
-					$this->WriteLinkTable();
+					$this->WriteLinkTable($this->page["page_id"]);
 					$this->ClearLinkTable();
 				}
 
@@ -238,10 +268,40 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				$output .= "<label for=\"minor_edit\">".$this->GetTranslation("EditMinor")."</label>";
 				$output .= "<br />";
 			}
+
+			if ($user)
+			{
+				// publish anonymously
+				if (($this->page && $this->HasAccess('write', '', GUEST)) || (!$this->page && $this->HasAccess('create', '', GUEST)))
+				{
+					$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".htmlspecialchars($this->tag)."\"".( $this->GetUserSetting("noid_pubs", 1) == "1" ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">Post anonymously without giving your name</label></small>";
+					$output .= "<br />";
+				}
+
+				// watch a page
+				if ($this->page && $this->iswatched !== true)
+				{
+					$output .= "<input type=\"checkbox\" name=\"watchpage\" id=\"watchpage\" value=\"1\"".( $this->GetUserSetting("send_watchmail", 1) == "1" ? "checked=\"checked\"" : "" )." /> <small><label for=\"watchpage\">Notify me about new comments and changes of the page</label></small>";
+				}
+			}
 			else
 				$output .= "<br />";
 		}
 
+		if (!$this->page && $words = $this->GetKeywordsList($this->pagelang, 1))
+		{
+			foreach ($words as $id => $word)
+			{
+				$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.( $_POST['keyword'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="keyword'.$id.'"><strong>'.htmlspecialchars($word['keyword']).'</strong></label></span> ';
+				
+				if ($word['childs'] == true) foreach ($word['childs'] as $id => $word)
+				{
+					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.( $_POST['keyword'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="keyword'.$id.'">'.htmlspecialchars($word['keyword']).'</label></span> ';
+				}
+			}
+
+			$output .= $this->GetTranslation("Keywords").':<small><br /><br />'.substr(implode(' ', $_words), 6).'</small><br /><br />';
+		}
 		print($output);
 
 		// captcha code starts

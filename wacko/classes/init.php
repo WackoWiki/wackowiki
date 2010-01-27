@@ -197,7 +197,11 @@ class Init
 
 					"hide_comments" => 0,
 					"hide_files" => 0,
-					"hide_rating" => 1,
+					"hide_rating" => 2,
+					
+					"hide_index" => "0",
+					"lower_index" => "0",
+					"upper_index" => "0",
 
 					"footer_comments" => 1,
 					"footer_files" => 1,
