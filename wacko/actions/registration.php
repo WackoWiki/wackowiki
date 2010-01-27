@@ -214,13 +214,12 @@ if (!$_POST["confirm"])
 <select id="lang" name="lang">
 	<!--<option value=""></option>-->
 <?php
-#$lang = $this->UserAgentLanguage();
-
+$lang = $this->UserAgentLanguage();
 $langs = $this->AvailableLanguages();
 for ($i = 0; $i < count($langs); $i++)
 {
+
 	echo "<option value=\"".$langs[$i]."\"".($lang == $langs[$i] ? "selected=\"selected\"" : "").">".$langs[$i]."</option>\n";
-	#echo '<option value="'.$langs[$i].'"'.($user["lang"] == $langs[$i] ? "selected=\"selected\"" : "").'>'.$langs[$i].'</option>';
 }
 ?>
 </select></p>
