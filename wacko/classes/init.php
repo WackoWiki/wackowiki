@@ -685,6 +685,7 @@ class Init
 
 				if ($this->config["debug"] >= 2)
 				{
+					$user = $this->engine->GetUser();
 					echo "<p class=\"debug\"><span>Language data</span></p>\n<ul>\n";
 					echo "<li>Multilanguage: ".($this->config["multilanguage"] == 1 ? 'true' : 'false')."</li>\n";
 					echo "<li>HTTP_ACCEPT_LANGUAGE set: ".(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false')."</li>\n";
