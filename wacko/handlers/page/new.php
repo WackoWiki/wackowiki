@@ -24,7 +24,7 @@ if ($newtag = trim($_POST['tag'], '/ '))
 		$message = $this->GetTranslation("PageAlreadyExists")." &laquo;".$page['tag']."&raquo;. ";
 
 		// check existing page write access
-		if ($this->HasAccess('write', $prefix.$newtag))
+		if ($this->HasAccess('write', $this->GetPageId($prefix.$newtag)))
 		{
 			$message .= str_replace('%1', "<a href=\"".$this->href('edit', $prefix.$newtag)."\">".$this->GetTranslation("PageAlreadyExistsEdit2")." </a>?", $this->GetTranslation("PageAlreadyExistsEdit"));
 		}
@@ -37,9 +37,10 @@ if ($newtag = trim($_POST['tag'], '/ '))
 	else
 	{
 		// check new page write access
-		if ($this->HasAccess('write', $prefix.$newtag))
+		if ($this->HasAccess('write', $this->GetPageId($prefix.$newtag)))
 		{
-			$this->Redirect($this->href('edit', $prefix.$newtag, '', 1));
+			// str_replace: fixed newPage&amp;add=1
+			$this->Redirect(str_replace("&amp;", "&", ($this->href("edit", $prefix.$newtag, "", 1))));
 		}
 		else
 		{
@@ -54,7 +55,7 @@ if ($newtag = trim($_POST['tag'], '/ '))
 echo $this->FormOpen('new');
 echo "<input type=\"hidden\" name=\"option\" value=\"1\" />";
 echo "<label for=\"create_subpage\">".$this->GetTranslation("CreateSubPage").":</label><br />";
-if ($this->HasAccess('write', $this->tag))
+if ($this->HasAccess('write', $this->GetPageId($this->tag)))
 {
 	echo "<tt>".( strlen($this->tag) > 50 ? "...".substr($this->tag, -50) : $this->tag )."/</tt>".
 		"<input id=\"create_subpage\" name=\"tag\" value=\"".( $_POST['option'] === '1' ? htmlspecialchars($newtag) : "" )."\" size=\"20\" maxlength=\"255\" /> ".
@@ -76,7 +77,7 @@ if (substr_count($this->tag, '/') > 0)
 	echo $this->FormOpen('new');
 	echo "<input type=\"hidden\" name=\"option\" value=\"2\" />";
 	echo "<label for=\"create_pageparentcluster\">".$this->GetTranslation("CreatePageParentCluster").":</label><br />";
-	if ($this->HasAccess('write', $parent))
+	if ($this->HasAccess('write', $this->GetPageId($parent)))
 	{
 		echo "<tt>".( strlen($parent) > 50 ? "...".substr($parent, -50) : $parent )."/</tt>".
 			"<input id=\"create_pageparentcluster\" name=\"tag\" value=\"".( $_POST['option'] === '2' ? htmlspecialchars($newtag) : "" )."\" size=\"20\" maxlength=\"255\" /> ".
