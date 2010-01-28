@@ -110,8 +110,8 @@ $alter_pages_r4_2_20 = "ALTER TABLE {$pref}pages DROP INDEX idx_time, ADD INDEX 
 $alter_pages_r4_2_21 = "ALTER TABLE {$pref}pages ADD more VARCHAR(255) NOT NULL AFTER keywords".
 
 $update_pages_r4_2 = "UPDATE {$pref}pages SET body_r=''";
-$update_pages_r4_2_1 = "UPDATE {$pref}pages AS pages, (SELECT id, name FROM {$pref}users) AS users SET pages.owner_id = users.id WHERE pages.owner = users.name";
-$update_pages_r4_2_2 = "UPDATE {$pref}pages AS pages, (SELECT id, name FROM {$pref}users) AS users SET pages.user_id = users.id WHERE pages.user = users.name";
+$update_pages_r4_2_1 = "UPDATE {$pref}pages AS pages, (SELECT user_id, user_name FROM {$pref}users) AS users SET pages.owner_id = users.user_id WHERE pages.owner = users.user_name";
+$update_pages_r4_2_2 = "UPDATE {$pref}pages AS pages, (SELECT user_id, user_name FROM {$pref}users) AS users SET pages.user_id = users.user_id WHERE pages.user = users.user_name";
 $update_pages_r4_2_3 = "UPDATE {$pref}pages AS pages, (SELECT id, tag FROM {$pref}pages) AS pages2 SET pages.comment_on_id = pages2.id WHERE pages.comment_on = pages2.tag";
 $update_pages_r4_2_4 = "UPDATE {$pref}pages AS pages, (SELECT comment_on_id, COUNT(comment_on_id) as n FROM {$pref}pages WHERE comment_on_id != '0' GROUP BY comment_on_id) AS comments_on SET pages.comments = comments_on.n WHERE pages.id = comments_on.comment_on_id";
 $update_pages_r4_2_5 = "UPDATE {$pref}pages as pages, (SELECT tag, MIN(time) AS oldest FROM wacko_revisions GROUP BY tag) AS revisions SET pages.created = revisions.oldest WHERE pages.tag = revisions.tag AND pages.created IS NULL";
@@ -152,8 +152,8 @@ $alter_revisions_r4_2_17 = "ALTER TABLE {$pref}revisions CHANGE id revision_id I
 $alter_revisions_r4_2_18 = "ALTER TABLE {$pref}revisions CHANGE time modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
 $alter_revisions_r4_2_19 = "ALTER TABLE {$pref}revisions DROP INDEX idx_time , ADD INDEX idx_modified ( modified )";
 
-$update_revisions_r4_2 = "UPDATE {$pref}revisions AS revisions, (SELECT id, name FROM {$pref}users) AS users SET revisions.owner_id = users.id WHERE revisions.owner = users.name";
-$update_revisions_r4_2_1 = "UPDATE {$pref}revisions AS revisions, (SELECT id, name FROM {$pref}users) AS users SET revisions.user_id = users.id WHERE revisions.user = users.name";
+$update_revisions_r4_2 = "UPDATE {$pref}revisions AS revisions, (SELECT user_id, user_name FROM {$pref}users) AS users SET revisions.owner_id = users.user_id WHERE revisions.owner = users.user_name";
+$update_revisions_r4_2_1 = "UPDATE {$pref}revisions AS revisions, (SELECT user_id, user_name FROM {$pref}users) AS users SET revisions.user_id = users.user_id WHERE revisions.user = users.user_name";
 $update_revisions_r4_2_2 = "UPDATE {$pref}revisions SET latest = '0'";
 $update_revisions_r4_2_3 = "UPDATE {$pref}revisions AS revisions, (SELECT id, tag FROM {$pref}pages) AS pages SET revisions.page_id = pages.id WHERE revisions.tag = pages.tag";
 # $update_revisions_r4_2_x = "UPDATE {$pref}revisions AS revisions, (SELECT id, tag FROM {$pref}pages) AS pages2 SET revisions.comment_on_id = pages2.id WHERE revisions.comment_on = pages2.tag";
@@ -173,7 +173,7 @@ $alter_upload_r4_2 = "ALTER TABLE {$pref}upload CHANGE id id INT(10) UNSIGNED NO
 $alter_upload_r4_2_1 = "ALTER TABLE {$pref}upload DROP user";
 $alter_upload_r4_2_2 = "ALTER TABLE {$pref}upload CHANGE id upload_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
 
-$update_upload_r4_2 = "UPDATE {$pref}upload AS upload, (SELECT id, name FROM {$pref}users) AS users SET upload.user_id = users.id WHERE upload.user = users.name";
+$update_upload_r4_2 = "UPDATE {$pref}upload AS upload, (SELECT user_id, user_name FROM {$pref}users) AS users SET upload.user_id = users.user_id WHERE upload.user = users.user_name";
 
 // USERS
 $alter_users_r4_2 = "ALTER TABLE {$pref}users ADD id INT(10) UNSIGNED NOT NULL auto_increment FIRST, DROP PRIMARY KEY, ADD PRIMARY KEY (id)";
@@ -186,8 +186,8 @@ $alter_users_r4_2_6 = "ALTER TABLE {$pref}users CHANGE typografica typografica T
 $alter_users_r4_2_7 = "ALTER TABLE {$pref}users ADD total_pages INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER email_confirm";
 $alter_users_r4_2_8 = "ALTER TABLE {$pref}users ADD total_revisions INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER total_pages";
 $alter_users_r4_2_9 = "ALTER TABLE {$pref}users ADD total_comments INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER total_revisions";
-$alter_users_r4_2_10 = "ALTER TABLE {$pref}users DROP INDEX idx_name, ADD UNIQUE idx_name (name)";
-$alter_users_r4_2_11 = "ALTER TABLE {$pref}users ADD real_name VARCHAR(80) NOT NULL DEFAULT '' AFTER name";
+$alter_users_r4_2_10 = "ALTER TABLE {$pref}users CHANGE name user_name VARCHAR(80) NOT NULL DEFAULT '', DROP INDEX idx_name, ADD UNIQUE idx_user_name (user_name)";
+$alter_users_r4_2_11 = "ALTER TABLE {$pref}users ADD real_name VARCHAR(80) NOT NULL DEFAULT '' AFTER user_name";
 $alter_users_r4_2_12 = "ALTER TABLE {$pref}users ADD session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER email_confirm";
 $alter_users_r4_2_13 = "ALTER TABLE {$pref}users ADD session_expire INT(10) UNSIGNED NOT NULL AFTER session_time";
 $alter_users_r4_2_14 = "ALTER TABLE {$pref}users CHANGE id user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
@@ -206,7 +206,7 @@ $alter_watches_r4_2_3 = "ALTER TABLE {$pref}pagewatches DROP user";
 $alter_watches_r4_2_4 = "ALTER TABLE {$pref}pagewatches DROP tag";
 $alter_watches_r4_2_5 = "ALTER TABLE {$pref}pagewatches CHANGE id watch_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
 
-$update_watches_r4_2 = "UPDATE {$pref}pagewatches AS pagewatches, (SELECT id, name FROM {$pref}users) AS users SET pagewatches.user_id = users.id WHERE pagewatches.user = users.name";
+$update_watches_r4_2 = "UPDATE {$pref}pagewatches AS pagewatches, (SELECT user_id, user_name FROM {$pref}users) AS users SET pagewatches.user_id = users.user_id WHERE pagewatches.user = users.name";
 $update_watches_r4_2_1 = "UPDATE {$pref}pagewatches AS pagewatches, (SELECT id, tag FROM {$pref}pages) AS pages SET pagewatches.page_id = pages.id WHERE pagewatches.tag = pages.tag";
 
 $rename_watches_r4_2 = "RENAME TABLE {$pref}pagewatches TO {$pref}watches";
