@@ -198,7 +198,6 @@ switch($config["database_driver"])
 					test(str_replace("%1","users",$lang["UpdateTable"]), @mysql_query($update_users_r4_2, $dblink), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
 					test(str_replace("%1","users",$lang["UpdateTable"]), @mysql_query($update_users_r4_2_1, $dblink), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
 					test(str_replace("%1","users",$lang["UpdateTable"]), @mysql_query($update_users_r4_2_2, $dblink), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","users",$lang["UpdateTable"]), @mysql_query($update_users_r4_2_3, $dblink), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
 					test(str_replace("%1","users",$lang["UpdateTable"]), @mysql_query($update_users_r4_2_4, $dblink), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
 
 					// rename id after upate!
@@ -475,7 +474,6 @@ switch($config["database_driver"])
 								test(str_replace("%1","users",$lang["UpdateTable"]), @mysqli_query($dblink, $update_users_r4_2), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
 								test(str_replace("%1","users",$lang["UpdateTable"]), @mysqli_query($dblink, $update_users_r4_2_1), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
 								test(str_replace("%1","users",$lang["UpdateTable"]), @mysqli_query($dblink, $update_users_r4_2_2), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","users",$lang["UpdateTable"]), @mysqli_query($dblink, $update_users_r4_2_3), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
 								test(str_replace("%1","users",$lang["UpdateTable"]), @mysqli_query($dblink, $update_users_r4_2_4), str_replace("%1", "users", $lang["ErrorUpdatingTable"]));
 
 								// rename id after upate!
