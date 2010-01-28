@@ -191,7 +191,7 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 
 $table_users = "CREATE TABLE {$pref}users (".
 					"user_id INT(10) UNSIGNED NOT NULL auto_increment,".
-					"name VARCHAR(80) NOT NULL DEFAULT '',".
+					"user_name VARCHAR(80) NOT NULL DEFAULT '',".
 					"real_name VARCHAR(80) NOT NULL DEFAULT '',".
 					"password VARCHAR(32) NOT NULL DEFAULT '',".
 					"email VARCHAR(50) NOT NULL DEFAULT '',".
@@ -215,7 +215,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"total_revisions INT(10) UNSIGNED NOT NULL,".
 					"total_comments INT(10) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (user_id),".
-					"UNIQUE KEY idx_name (name),".
+					"UNIQUE KEY idx_user_name (user_name),".
 					"KEY idx_signuptime (signuptime)".
 				") TYPE=MyISAM";
 

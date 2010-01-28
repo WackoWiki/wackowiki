@@ -25,32 +25,32 @@ function admin_configbasic(&$engine, &$module)
 	{
 		$engine->Query(
 			"UPDATE {$engine->config['table_prefix']}config SET ".
-				"`wacko_name`			= '".quote((string)$_POST['wacko_name'])."', ".
-				"`wacko_desc`			= '".quote((string)$_POST['wacko_desc'])."', ".
-				"`meta_description`		= '".quote((string)$_POST['meta_description'])."', ".
-				"`meta_keywords`		= '".quote((string)$_POST['meta_keywords'])."', ".
-				"`theme`				= '".quote((string)$_POST['theme'])."', ".
-				"`admin_name`			= '".quote((string)$_POST['admin_name'])."', ".
-				"`admin_email`			= '".quote((string)$_POST['admin_email'])."', ".
-				"`abuse_email`			= '".quote((string)$_POST['abuse_email'])."', ".
-				"`language`				= '".quote((string)$_POST['language'])."', ".
-				"`multilanguage`		= '".quote((int)$_POST['multilanguage'])."', ".
-				"`upload_images_only`	= '".quote((int)$_POST['upload_images_only'])."', ".
-				"`upload_max_size`		= '".quote((int)$_POST['upload_max_size'])."', ".
-				"`upload_max_per_user`	= '".quote((int)$_POST['upload_max_per_user'])."', ".
-				"`hide_comments`		= '".quote((int)$_POST['hide_comments'])."', ".
-				"`hide_files`			= '".quote((int)$_POST['hide_files'])."', ".
-				"`hide_rating`			= '".quote((int)$_POST['hide_rating'])."', ".
-				"`hide_toc`				= '".quote((int)$_POST['hide_toc'])."', ".
-				"`hide_index`			= '".quote((int)$_POST['hide_index'])."', ".
-				"`lower_index`			= '".quote( $_POST['index_mode'] == 'l' ? 1 : 0 )."', ".
-				"`upper_index`			= '".quote( $_POST['index_mode'] == 'u' ? 1 : 0 )."', ".
-				"`disable_autosubscribe`	= '".quote((int)$_POST['disable_autosubscribe'])."', ".
-				"`default_rename_redirect`	= '".quote((int)$_POST['default_rename_redirect'])."', ".
-				"`store_deleted_pages`		= '".quote((int)$_POST['store_deleted_pages'])."', ".
-				"`keep_deleted_time`	= '".quote((string)$_POST['keep_deleted_time'])."', ".
-				"`pages_purge_time`		= '".quote((string)$_POST['pages_purge_time'])."', ".
-				"`referrers_purge_time`	= '".quote((string)$_POST['referrers_purge_time'])."' ");
+				"`wacko_name`			= '".quote($engine->dblink, (string)$_POST['wacko_name'])."', ".
+				"`wacko_desc`			= '".quote($engine->dblink, (string)$_POST['wacko_desc'])."', ".
+				"`meta_description`		= '".quote($engine->dblink, (string)$_POST['meta_description'])."', ".
+				"`meta_keywords`		= '".quote($engine->dblink, (string)$_POST['meta_keywords'])."', ".
+				"`theme`				= '".quote($engine->dblink, (string)$_POST['theme'])."', ".
+				"`admin_name`			= '".quote($engine->dblink, (string)$_POST['admin_name'])."', ".
+				"`admin_email`			= '".quote($engine->dblink, (string)$_POST['admin_email'])."', ".
+				"`abuse_email`			= '".quote($engine->dblink, (string)$_POST['abuse_email'])."', ".
+				"`language`				= '".quote($engine->dblink, (string)$_POST['language'])."', ".
+				"`multilanguage`		= '".quote($engine->dblink, (int)$_POST['multilanguage'])."', ".
+				"`upload_images_only`	= '".quote($engine->dblink, (int)$_POST['upload_images_only'])."', ".
+				"`upload_max_size`		= '".quote($engine->dblink, (int)$_POST['upload_max_size'])."', ".
+				"`upload_max_per_user`	= '".quote($engine->dblink, (int)$_POST['upload_max_per_user'])."', ".
+				"`hide_comments`		= '".quote($engine->dblink, (int)$_POST['hide_comments'])."', ".
+				"`hide_files`			= '".quote($engine->dblink, (int)$_POST['hide_files'])."', ".
+				"`hide_rating`			= '".quote($engine->dblink, (int)$_POST['hide_rating'])."', ".
+				"`hide_toc`				= '".quote($engine->dblink, (int)$_POST['hide_toc'])."', ".
+				"`hide_index`			= '".quote($engine->dblink, (int)$_POST['hide_index'])."', ".
+				"`lower_index`			= '".quote($engine->dblink,  $_POST['index_mode'] == 'l' ? 1 : 0 )."', ".
+				"`upper_index`			= '".quote($engine->dblink,  $_POST['index_mode'] == 'u' ? 1 : 0 )."', ".
+				"`disable_autosubscribe`	= '".quote($engine->dblink, (int)$_POST['disable_autosubscribe'])."', ".
+				"`default_rename_redirect`	= '".quote($engine->dblink, (int)$_POST['default_rename_redirect'])."', ".
+				"`store_deleted_pages`		= '".quote($engine->dblink, (int)$_POST['store_deleted_pages'])."', ".
+				"`keep_deleted_time`	= '".quote($engine->dblink, (string)$_POST['keep_deleted_time'])."', ".
+				"`pages_purge_time`		= '".quote($engine->dblink, (string)$_POST['pages_purge_time'])."', ".
+				"`referrers_purge_time`	= '".quote($engine->dblink, (string)$_POST['referrers_purge_time'])."' ");
 		$engine->Log(1, 'Updated basic parameters  WackoWiki');
 		$engine->Redirect(rawurldecode($engine->href()));
 	}

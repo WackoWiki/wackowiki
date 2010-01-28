@@ -38,7 +38,7 @@ else if ($user = $this->GetUser())
 
 <input type="hidden" name="action" value="logout" />
 <div class="cssform">
-  <h3><?php echo $this->GetTranslation("Hello").", ".$this->ComposeLinkToPage($user["name"]) ?>!</h3>
+  <h3><?php echo $this->GetTranslation("Hello").", ".$this->ComposeLinkToPage($user["user_name"]) ?>!</h3>
 <?php
 				if ($user["session_time"] == true)
 				{
@@ -119,7 +119,7 @@ else
 				$this->UpdateSessionTime($existingUser);
 				$this->SetBookmarks(BM_USER);
 				$this->context[++$this->current_context] = "";
-				$this->Log(3, str_replace("%1", $existingUser["name"], $this->GetTranslation("LogUserLoginOK")));
+				$this->Log(3, str_replace("%1", $existingUser["user_name"], $this->GetTranslation("LogUserLoginOK")));
 
 				// run in ssl mode?
 				if ($this->config['ssl'] == true)

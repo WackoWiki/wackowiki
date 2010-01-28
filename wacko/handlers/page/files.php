@@ -13,7 +13,7 @@ else
 	$page_id = $this->page["page_id"];
 }
 $what = $this->LoadAll(
-	"SELECT u.name AS user, f.upload_id, f.filename, f.file_ext, f.filesize, f.description, f.hits ".
+	"SELECT u.user_name AS user, f.upload_id, f.filename, f.file_ext, f.filesize, f.description, f.hits ".
 	"FROM ".$this->config["table_prefix"]."upload f ".
 		"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
 	"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".

@@ -9,7 +9,7 @@ if (!$max || $limit < $max)
 	$max = $limit;
 
 $last_users = $this->LoadAll(
-				"SELECT user_id, name, signuptime ".
+				"SELECT user_id, user_name, signuptime ".
 				"FROM ".$this->config["user_table"]." ".
 				"ORDER BY signuptime DESC ".
 				"LIMIT ".(int)$max);
@@ -21,7 +21,7 @@ foreach($last_users as $user)
 				"FROM ".$this->config["table_prefix"]."pages ".
 				"WHERE owner_id='".quote($this->dblink, $user["user_id"])."'");
 
-	print("(<span class=\"dt\">".$user["signuptime"].")</span> ".$this->Link("/".$user["name"],"",$user["name"]).($stat!=="0"?" . . . (".$num["n"].")":"")."<br />\n");
+	print("(<span class=\"dt\">".$user["signuptime"].")</span> ".$this->Link("/".$user["user_name"],"",$user["user_name"]).($stat!=="0"?" . . . (".$num["n"].")":"")."<br />\n");
 }
 
 ?>

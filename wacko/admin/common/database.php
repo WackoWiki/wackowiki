@@ -108,7 +108,7 @@ if (isset($tables, $directories) !== true)
 			$engine->config['table_prefix'].'users' => array(
 				'name'	=> $engine->config['table_prefix'].'users',
 				'where'	=> false,
-				'order'	=> 'name',
+				'order'	=> 'user_name',
 				'limit' => 1000
 			)
 		);

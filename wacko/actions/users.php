@@ -22,7 +22,7 @@ if ($_GET['profile'] == true)
 			{
 				$group_users = explode("\n", $group_str);
 
-				if (in_array($user['name'], $group_users)) $groups[] = $group_name;
+				if (in_array($user['user_name'], $group_users)) $groups[] = $group_name;
 			}
 
 			if ($groups == true) $usergroups = implode(', ', $groups);
@@ -83,7 +83,7 @@ if ($_GET['profile'] == true)
 
 					$this->SendMail($user['email'], $subject, $message, 'no-reply@'.$prefix, '', $headers, true);
 					$this->SetMessage($notice);
-					$this->Log(4, str_replace('%2', $user['name'], str_replace('%1', $this->GetUserName(), $this->GetTranslation('LogPMSent'))));
+					$this->Log(4, str_replace('%2', $user['user_name'], str_replace('%1', $this->GetUserName(), $this->GetTranslation('LogPMSent'))));
 					$_SESSION['intercom_delay']	= time();
 					$_POST['mail_body']			= '';
 					$_POST['mail_subject']		= '';
@@ -95,7 +95,7 @@ if ($_GET['profile'] == true)
 		}
 
 		// header and profile data
-		echo '<h1>'.$user['name'].'</h1>';
+		echo '<h1>'.$user['user_name'].'</h1>';
 		echo '<small><a href="'.$this->href('', $this->tag).'">&laquo '.$this->GetTranslation('UsersList')."</a></small>\n";
 		echo '<a name="profile"></a><h2>'.$this->GetTranslation('UsersProfile').'</h2><br />'."\n";
 
@@ -141,7 +141,7 @@ if ($_GET['profile'] == true)
 			</tr>
 			<tr><?php // Have all user pages as sub pages of the current Users page. ?>
 				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->GetTranslation('UserSpace'); // TODO: this might be placed somewhere else, jut put it here for testing ?></strong></td>
-				<td><a href="<?php echo $this->href('', ($this->config['users_page'].'/'.$user['name'])); ?>"><?php echo $this->config['users_page'].'/'.$user['name']; ?></a></td>
+				<td><a href="<?php echo $this->href('', ($this->config['users_page'].'/'.$user['user_name'])); ?>"><?php echo $this->config['users_page'].'/'.$user['user_name']; ?></a></td>
 			</tr>
 			<tr>
 				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><a href="<?php echo $this->href('', $this->config['groups_page']); ?>"><?php echo $this->GetTranslation('UsersGroupMembership'); ?></a></strong></td>
@@ -173,7 +173,7 @@ if ($_GET['profile'] == true)
 ?>
 		<br />
 		<?php echo $this->FormOpen(); ?>
-		<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['name']); ?>" />
+		<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['user_name']); ?>" />
 		<?php if ($_POST['ref']) echo '<input type="hidden" name="ref" value="'.htmlspecialchars($_POST['ref']).'" />'; ?>
 		<table cellspacing="3" class="formation">
 <?php
@@ -185,7 +185,7 @@ if ($_GET['profile'] == true)
 				<td class="label" style="width:50px; white-space:nowrap;"><?php echo $this->GetTranslation('UsersIntercomSubject'); ?>:</td>
 				<td>
 					<input name="mail_subject" value="<?php echo htmlspecialchars($_POST['mail_subject']); ?>" size="60" maxlength="200" />
-					<?php if ($_POST['ref']) echo '&nbsp;&nbsp; <a href="'.$this->href('', '', 'profile='.$user['name'].'#contacts').'">'.$this->GetTranslation('UsersIntercomSubjectN').'</a>'; ?>
+					<?php if ($_POST['ref']) echo '&nbsp;&nbsp; <a href="'.$this->href('', '', 'profile='.$user['user_name'].'#contacts').'">'.$this->GetTranslation('UsersIntercomSubjectN').'</a>'; ?>
 				</td>
 			</tr>
 			<tr>
@@ -221,7 +221,7 @@ if ($_GET['profile'] == true)
 		echo '<a name="documents"></a><h2>'.$this->GetTranslation('UsersDocuments').'</a></h2>'."\n";
 		echo '<div class="indent"><small>'.$this->GetTranslation('UsersOwnedPages').': '.$user['total_pages'].'&nbsp;&nbsp;&nbsp; '.$this->GetTranslation('UsersRevisionsMade').': '.$user['total_revisions']."</small></div><br />\n";
 
-		$pagination = $this->Pagination($user['total_pages'], $limit, 'd', 'profile='.$user['name'].'&amp;sort='.( $_GET['sort'] != 'name' ? 'date' : 'name' ).'#documents');
+		$pagination = $this->Pagination($user['total_pages'], $limit, 'd', 'profile='.$user['user_name'].'&amp;sort='.( $_GET['sort'] != 'name' ? 'date' : 'name' ).'#documents');
 
 		if ($user['total_pages'])
 		{
@@ -234,7 +234,7 @@ if ($_GET['profile'] == true)
 				"LIMIT {$pagination['offset']}, $limit");
 
 			// sorting and pagination
-			echo '<table><tr><td><small>'.( $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$user['name'].'&amp;sort=date').'#documents">'.$this->GetTranslation('UsersDocsSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$user['name'].'&amp;sort=name').'#documents">'.$this->GetTranslation('UsersDocsSortName').'</a>' ).'</small></td>'.
+			echo '<table><tr><td><small>'.( $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=date').'#documents">'.$this->GetTranslation('UsersDocsSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=name').'#documents">'.$this->GetTranslation('UsersDocsSortName').'</a>' ).'</small></td>'.
 				 '<td align="right"><small>'.$pagination['text']."</small></td></tr></table>\n";
 
 			// pages list itself
@@ -262,7 +262,7 @@ if ($_GET['profile'] == true)
 		echo '<a name="comments"></a><h2>'.$this->GetTranslation('UsersComments').'</h2>'."\n";
 		echo '<div class="indent"><small>'.$this->GetTranslation('UsersCommentsPosted').': '.$user['total_comments']."</small></div>\n";
 
-		$pagination = $this->Pagination($user['total_comments'], $limit, 'c', 'profile='.$user['name'].'#comments');
+		$pagination = $this->Pagination($user['total_comments'], $limit, 'c', 'profile='.$user['user_name'].'#comments');
 
 		if ($user['total_comments'])
 		{
@@ -314,13 +314,13 @@ else
 		}
 		else
 		{
-			$where = "WHERE name LIKE '%".quote($this->dblink, $_GET['user'])."%' ";
+			$where = "WHERE user_name LIKE '%".quote($this->dblink, $_GET['user'])."%' ";
 			$param = "user=".htmlspecialchars($_GET['user']);
 		}
 	}
 	else if ($_GET['sort'] == 'name')
 	{
-		$order = "ORDER BY name ";
+		$order = "ORDER BY user_name ";
 		$param = "sort=".$_GET['sort'];
 	}
 	else if ($_GET['sort'] == 'pages')
@@ -350,7 +350,7 @@ else
 	}
 
 	$count = $this->LoadSingle(
-		"SELECT COUNT(name) AS n ".
+		"SELECT COUNT(user_name) AS n ".
 		"FROM {$this->config['user_table']} ".
 		( $where == true ? $where : '' ));
 
@@ -358,7 +358,7 @@ else
 
 	// collect data
 	$users = $this->LoadAll(
-		"SELECT name, signuptime, session_time, total_pages, total_revisions, total_comments ".
+		"SELECT user_name, signuptime, session_time, total_pages, total_revisions, total_comments ".
 		"FROM {$this->config['user_table']} ".
 		( $where == true ? $where : '' ).
 		( $order == true ? $order : "ORDER BY total_pages DESC " ).
@@ -403,7 +403,7 @@ else
 		foreach ($users as $user)
 		{
 			echo '<tr class="lined">'.
-					'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($user['name']).'').'">'.$user['name'].'</a></td>'.
+					'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($user['user_name']).'').'">'.$user['user_name'].'</a></td>'.
 					'<td align="center">'.$user['total_pages'].'</td>'.
 					'<td align="center">'.$user['total_comments'].'</td>'.
 					'<td align="center">'.$user['total_revisions'].'</td>'.

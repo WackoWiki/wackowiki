@@ -24,7 +24,7 @@ if ($order == "size") $orderby = "filesize ASC";
 if ($order == "size_desc") $orderby = "filesize DESC";
 if ($order == "ext") $orderby = "file_ext ASC";
 
-if ($owner) $user_add = "AND u.name='".quote($this->dblink, $owner)."' ";
+if ($owner) $user_add = "AND u.user_name='".quote($this->dblink, $owner)."' ";
 else		$user_add = "";
 
 // do we allowed to see?
@@ -59,7 +59,7 @@ if ($can_view)
 
 	// load files list
 	$files = $this->LoadAll(
-		"SELECT f.upload_id, f.page_id, f.user_id, f.filesize, f.picture_w, f.picture_h, f.filename, f.description, f.uploaded_dt, u.name AS user, f.hits ".
+		"SELECT f.upload_id, f.page_id, f.user_id, f.filesize, f.picture_w, f.picture_h, f.filename, f.description, f.uploaded_dt, u.user_name AS user, f.hits ".
 		"FROM ".$this->config["table_prefix"]."upload f ".
 			"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '". ($global ? 0 : $filepage["page_id"])."' ".$user_add.
