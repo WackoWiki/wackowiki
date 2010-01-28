@@ -14,7 +14,7 @@ $newslevels		= $this->config["news_levels"];
 if ($mode == "latest")
 {
 	$pages	= $this->LoadAll(
-		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.name AS  owner ".
+		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS  owner ".
 		"FROM {$this->config['table_prefix']}pages p ".
 			"INNER JOIN {$this->config['table_prefix']}users u ON (p.owner_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".
@@ -25,7 +25,7 @@ if ($mode == "latest")
 else if ($mode == 'week')
 {
 	$pages	= $this->LoadAll(
-		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.name AS owner ".
+		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
 		"FROM {$this->config['table_prefix']}pages p ".
 			"INNER JOIN {$this->config['table_prefix']}users u ON (p.owner_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".
@@ -37,7 +37,7 @@ else if ($mode == 'from' && $date)
 {
 	$date	= date("Y-m-d H:i:s", strtotime($date));
 	$pages	= $this->LoadAll(
-		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.name AS owner ".
+		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
 		"FROM {$this->config['table_prefix']}pages p ".
 			"INNER JOIN {$this->config['table_prefix']}users u ON (p.owner_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".

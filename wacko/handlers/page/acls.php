@@ -33,21 +33,21 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			{
 				// check user exists
 				$exists = $this->LoadSingle(
-						"SELECT name ".
+						"SELECT user_name ".
 						"FROM {$this->config['user_table']} ".
-						"WHERE name = '".quote($this->dblink, $newowner)."' ".
+						"WHERE user_name = '".quote($this->dblink, $newowner)."' ".
 						"LIMIT 1");
 
 				if ($exists == true)
 				{
-					$newowner = $exists['name'];
+					$newowner = $exists['user_name'];
 					$newowner_id = $this->GetUserIdByName($newowner);
 					$this->SetPageOwner($this->GetPageId(), $newowner_id);
 
 					$User = $this->LoadSingle(
 							"SELECT email, more, email_confirm ".
 							"FROM {$this->config['user_table']} ".
-							"WHERE name = '".quote($this->dblink, $newowner)."'");
+							"WHERE user_name = '".quote($this->dblink, $newowner)."'");
 
 					$User['options'] = $this->DecomposeOptions($User['more']);
 
@@ -123,7 +123,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					$ownedpages .= $this->Href("", $page["tag"])."\n";
 
 					// log event
-					$this->Log(2, str_replace("%2", $exists["name"], str_replace("%1", $page["tag"]." ".$page["title"], $this->GetTranslation("LogOwnershipChanged"))));
+					$this->Log(2, str_replace("%2", $exists["user_name"], str_replace("%1", $page["tag"]." ".$page["title"], $this->GetTranslation("LogOwnershipChanged"))));
 				}
 			}
 
@@ -136,7 +136,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				$User = $this->LoadSingle(
 					"SELECT email, more, email_confirm ".
 					"FROM {$this->config['user_table']} ".
-					"WHERE name = '".quote($newowner)."'");
+					"WHERE user_name = '".quote($newowner)."'");
 
 				$User['options'] = $this->DecomposeOptions($User['more']);
 
@@ -188,7 +188,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	{
 		foreach($users as $user)
 		{
-			print("<option value=\"".htmlspecialchars($user["name"])."\">".$user["name"]."</option>\n");
+			print("<option value=\"".htmlspecialchars($user["user_name"])."\">".$user["user_name"]."</option>\n");
 		}
 	}
 	?>

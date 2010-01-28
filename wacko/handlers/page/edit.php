@@ -49,8 +49,8 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				$error .= $this->GetTranslation("EditNoteMissing");
 
 			// check keywords
-			if (!$this->page && $this->GetKeywordsList($this->pagelang, 1) && $this->SaveKeywordsList($this->tag, 1) !== true)
-				$error .= 'Select at least one referring keyword (field) to the page. ';
+			#if (!$this->page && $this->GetKeywordsList($this->pagelang, 1) && $this->SaveKeywordsList($this->tag, 1) !== true)
+			#	$error .= 'Select at least one referring keyword (field) to the page. ';
 
 			// captcha code starts
 			if(($this->page && $this->GetConfigValue("captcha_edit_page")) || (!$this->page && $this->GetConfigValue("captcha_new_page")))
@@ -293,7 +293,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			foreach ($words as $id => $word)
 			{
 				$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.( $_POST['keyword'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="keyword'.$id.'"><strong>'.htmlspecialchars($word['keyword']).'</strong></label></span> ';
-				
+
 				if ($word['childs'] == true) foreach ($word['childs'] as $id => $word)
 				{
 					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.( $_POST['keyword'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="keyword'.$id.'">'.htmlspecialchars($word['keyword']).'</label></span> ';

@@ -65,11 +65,11 @@ if (isset($_GET["secret_code"]) && $_GET["secret_code"])
 					"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
 					"LIMIT 1");
 
-				#$this->SetUser($user = $this->LoadUser($user["name"]));
+				#$this->SetUser($user = $this->LoadUser($user["user_name"]));
 				#$this->LogUserIn($user);
 
 				// log event
-				$this->Log(3, str_replace("%1", $user["name"], $this->GetTranslation("LogUserPasswordRecovered")));
+				$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordRecovered")));
 
 				// forward
 				$this->SetMessage($this->GetTranslation("PasswordChanged"));
@@ -86,7 +86,7 @@ if (isset($_GET["secret_code"]) && $_GET["secret_code"])
 			?>
 
 			<div class="cssform">
-				<h3><?php echo $this->Format( str_replace('%1', $user["name"], $this->GetTranslation("YouWantChangePasswordForUser"))); ?></h3>
+				<h3><?php echo $this->Format( str_replace('%1', $user["user_name"], $this->GetTranslation("YouWantChangePasswordForUser"))); ?></h3>
 				<p>
 					<label for="newpassword"><?php echo $this->GetTranslation("NewPassword");?>:</label>
 					<input type="password" id="newpassword" name="newpassword" size="24" />
@@ -143,14 +143,14 @@ else if (!isset($forgot) && $user = $this->GetUser())
 		$confpassword = $_POST["confpassword"];
 
 		// check all conditions
-		$complexity		= $this->PasswordComplexity($user["name"], $newpassword);
+		$complexity		= $this->PasswordComplexity($user["user_name"], $newpassword);
 
 		// wrong current password
 		if (md5($password)!=$user["password"])
 		{
 			$error = $this->GetTranslation("WrongPassword");
 			// log event
-			$this->Log(3, str_replace("%1", $user["name"], $this->GetTranslation("LogUserPasswordMismatch")));
+			$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordMismatch")));
 		}
 		// confirmed password mismatch
 		else if ($confpassword != $newpassword)
@@ -194,11 +194,11 @@ else if (!isset($forgot) && $user = $this->GetUser())
 			$this->LogoutUser();
 			$this->SetBookmarks(BM_DEFAULT);
 			$this->context[++$this->current_context] = "";
-			#$this->SetUser($user = $this->LoadUser($user["name"]));
+			#$this->SetUser($user = $this->LoadUser($user["user_name"]));
 			#$this->LogUserIn($user);
 
 			// log event
-			$this->Log(3, str_replace("%1", $user["name"], $this->GetTranslation("LogUserPasswordChanged")));
+			$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordChanged")));
 
 			// forward
 			$this->SetMessage($this->GetTranslation("PasswordChanged"));
@@ -268,8 +268,8 @@ else
 		$user = $this->LoadSingle(
 			"SELECT * ".
 			"FROM ".$this->config["user_table"]." ".
-			"WHERE name='".quote($this->dblink, $name)."' ".
-				"OR email='".quote($this->dblink, $name)."'");
+			"WHERE user_name = '".quote($this->dblink, $name)."' ".
+				"OR email = '".quote($this->dblink, $name)."'");
 
 		if ($user)
 		{
@@ -281,7 +281,7 @@ else
 							$this->GetConfigValue("wacko_name");
 				$message =	$this->GetTranslation("EmailHello"). $name.".\n\n".
 							str_replace('%1', $this->GetConfigValue("wacko_name"),
-							str_replace('%2', $user["name"],
+							str_replace('%2', $user["user_name"],
 							str_replace('%3', $this->Href().
 							($this->config["rewrite_mode"] ? "?" : "&amp;")."secret_code=".$code,
 							$this->GetTranslation("EmailForgotMessage"))))."\n";
@@ -293,14 +293,14 @@ else
 				$this->Query(
 					"UPDATE ".$this->config["user_table"]." ".
 					"SET changepassword = '".quote($this->dblink, $code)."' ".
-					"WHERE name = '".quote($this->dblink, $user["name"])."' ".
+					"WHERE user_name = '".quote($this->dblink, $user["user_name"])."' ".
 					"LIMIT 1");
 
 				// send code
 				$this->SendMail($user["email"], $subject, $message);
 
 				// log event
-				$this->Log(3, str_replace("%2", $user["email"], str_replace("%1", $user["name"], $this->GetTranslation("LogUserPasswordReminded"))));
+				$this->Log(3, str_replace("%2", $user["email"], str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordReminded"))));
 
 				$this->SetMessage($this->GetTranslation("CodeWasSent"));
 				$this->Redirect($this->href("", $this->GetTranslation("LoginPage")));

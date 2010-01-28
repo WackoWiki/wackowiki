@@ -804,7 +804,7 @@ class Wacko
 
 		$user = $this->GetUser();
 		if (!isset($cl))$cl = 0;
-		$pages[$cl] = $user["name"];
+		$pages[$cl] = $user["user_name"];
 		$bookm = $this->GetDefaultBookmarks($user["lang"], "site")."\n".
 					($user["bookmarks"]
 						? $user["bookmarks"]
@@ -889,7 +889,7 @@ class Wacko
 	// STANDARD QUERIES
 	function LoadRevisions($page_id, $minor_edit = "")
 	{
-		$pages_meta = "p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.name as user ";
+		$pages_meta = "p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.user_name as user ";
 
 		$rev = $this->LoadAll(
 			"SELECT p.revision_id AS revision_m_id, ".$pages_meta." ".
@@ -949,7 +949,7 @@ class Wacko
 		$limit = (int)$limit;
 
 		if ($pages = $this->LoadAll(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.name as user ".
+		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.user_name as user ".
 		"FROM ".$this->config["table_prefix"]."pages p ".
 			"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".
@@ -997,7 +997,7 @@ class Wacko
 		$limit = (int) $limit;
 
 		if ($pages = $this->LoadAll(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.body_r, u.name as user ".
+		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.body_r, u.user_name as user ".
 		"FROM ".$this->config["table_prefix"]."pages p ".
 			"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 		"WHERE p.comment_on_id != '0' ".
@@ -1586,7 +1586,7 @@ class Wacko
 		if ($user = $this->GetUser()) $this->Query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET total_revisions = total_revisions + 1 ".
-			"WHERE name = '".quote($this->dblink, $user['name'])."' ".
+			"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
 			"LIMIT 1");
 	}
 
@@ -2623,7 +2623,7 @@ class Wacko
 		{
 			if ($this->LoadSingle(
 			"SELECT * FROM {$this->config['user_table']} ".
-			"WHERE name = '".quote($this->dblink, $name)."'"))
+			"WHERE user_name = '".quote($this->dblink, $name)."'"))
 			{
 				return true;
 			}
@@ -2681,7 +2681,7 @@ class Wacko
 		// checking database
 		if ($this->LoadSingle(
 		"SELECT * FROM {$this->config['user_table']} ".
-		"WHERE name REGEXP '".quote($this->dblink, implode('', $name))."'", 1))
+		"WHERE user_name REGEXP '".quote($this->dblink, implode('', $name))."'", 1))
 		{
 			return true;
 		}
@@ -2695,7 +2695,7 @@ class Wacko
 	{
 		$user = $this->LoadSingle(
 			"SELECT * FROM ".$this->config["user_table"]." ".
-			"WHERE name = '".quote($this->dblink, $name)."' ".
+			"WHERE user_name = '".quote($this->dblink, $name)."' ".
 			($password === 0 ? "" : "AND password = '".quote($this->dblink, $password)."'")." ".
 			"LIMIT 1");
 
@@ -2710,7 +2710,7 @@ class Wacko
 
 	function GetUserName()
 	{
-		if ($username = $this->GetUserSetting("name"))
+		if ($username = $this->GetUserSetting("user_name"))
 		{
 			return $username;
 		}
@@ -2775,11 +2775,11 @@ class Wacko
 	// update current session time
 	function UpdateSessionTime($user)
 	{
-		if ($user['name'] == true)
+		if ($user['user_name'] == true)
 			return $this->Query(
 				"UPDATE {$this->config['user_table']} ".
 				"SET session_time = NOW() ".
-				"WHERE name = '".quote($this->dblink, $user['name'])."' ".
+				"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
 				"LIMIT 1");
 	}
 
@@ -2793,7 +2793,7 @@ class Wacko
 		if ($this->config['strong_cookies'] == true)
 		{
 			$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
-			$username	= $user['name'];
+			$username	= $user['user_name'];
 			$password	= base64_encode(md5($this->config['system_seed'] ^ $time_pad) ^ $user['password']);
 			// authenticating cookie data:
 			// seed | username | composed pwd | raw session time | raw password
@@ -2803,7 +2803,7 @@ class Wacko
 		}
 		else
 		{
-			$cookie		= implode(';', array($user['name'], $user['password'], $ses_time));
+			$cookie		= implode(';', array($user['user_name'], $user['password'], $ses_time));
 		}
 
 		$this->SetSessionCookie('auth', $cookie, '', ( $this->config['ssl'] == true ? 1 : 0 ));
@@ -2819,7 +2819,7 @@ class Wacko
 			"UPDATE {$this->config['user_table']} SET ".
 				"session_expire	= '".quote($this->dblink, $ses_time)."', ".
 				"changepassword	= '' ".
-			"WHERE name = '".quote($this->dblink, $user['name'])."' ".
+			"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
 			"LIMIT 1");
 
 		// restart logged in user session with specific session id
@@ -2832,7 +2832,7 @@ class Wacko
 		$this->DeleteCookie('sid', 1);
 		unset($_SESSION[$this->config["session_prefix"].'_'.$this->config['cookie_prefix'].'user']);
 		session_destroy();
-		session_id(md5($this->timer.$this->config['system_seed'].$session_time.$user['name'].$user['password']));
+		session_id(md5($this->timer.$this->config['system_seed'].$session_time.$user['user_name'].$user['password']));
 		return session_start();
 	}
 
@@ -2871,7 +2871,7 @@ class Wacko
 		$this->Query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET session_expire = 0 ".
-			"WHERE name = '".quote($this->dblink, $_SESSION[$this->config["session_prefix"].'_'.$this->config['cookie_prefix'].'user']['name'])."' ".
+			"WHERE user_name = '".quote($this->dblink, $_SESSION[$this->config["session_prefix"].'_'.$this->config['cookie_prefix'].'user']['user_name'])."' ".
 			"LIMIT 1");
 
 		$this->DeleteCookie('auth');
@@ -2888,15 +2888,15 @@ class Wacko
 	function LoadUsers()
 	{
 		return $this->LoadAll(
-			"SELECT * FROM ".$this->config["user_table"]." ORDER BY binary name");
+			"SELECT * FROM ".$this->config["user_table"]." ORDER BY binary user_name");
 	}
 
 	function GetUserNameById($user_id = 0)
 	{
 		$user = $this->LoadSingle(
-					"SELECT name FROM ".$this->config["table_prefix"]."users WHERE user_id = '".$user_id."' LIMIT 1");
+					"SELECT user_name FROM ".$this->config["table_prefix"]."users WHERE user_id = '".$user_id."' LIMIT 1");
 					// Get user value
-					$user = $user['name'];
+					$user = $user['user_name'];
 
 					return $user;
 	}
@@ -2914,7 +2914,7 @@ class Wacko
 	function GetUserIdByName($user = "")
 	{
 		$user = $this->LoadSingle(
-					"SELECT user_id FROM ".$this->config["table_prefix"]."users WHERE name = '".$user."' LIMIT 1");
+					"SELECT user_id FROM ".$this->config["table_prefix"]."users WHERE user_name = '".$user."' LIMIT 1");
 					// Get user value
 					$user_id = $user['user_id'];
 
@@ -3048,7 +3048,7 @@ class Wacko
 		if ($page_id)
 		{
 			return $this->LoadAll(
-					"SELECT p.page_id, p.tag, p.created, p.modified, p.body, p.body_r, p.title, u.name AS user ".
+					"SELECT p.page_id, p.tag, p.created, p.modified, p.body, p.body_r, p.title, u.user_name AS user ".
 					"FROM ".$this->config["table_prefix"]."pages p ".
 						"LEFT OUTER JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 					"WHERE p.comment_on_id = '".quote($this->dblink, $page_id)."' ".
@@ -3273,7 +3273,7 @@ class Wacko
 
 	function CheckACL($user, $acl_list, $copy_to_this_acl = false, $debug = 0)
 	{
-		if (is_array($user)) $user = $user["name"];
+		if (is_array($user)) $user = $user["user_name"];
 
 		$user = strtolower($user);
 
@@ -3410,10 +3410,10 @@ class Wacko
 		$user = $this->GetUser();
 
 		if(isset($user["lang"]))
-		{ 
+		{
 			$lang =  $user["lang"];
 		}
-		else 
+		else
 		{
 			$lang = $this->UserAgentLanguage();
 		}
@@ -3482,7 +3482,7 @@ class Wacko
 				$this->Query(
 					"UPDATE ".$this->config["user_table"]." ".
 					"SET bookmarks = '".quote($this->dblink, implode("\n", $bookmarks))."' ".
-					"WHERE name = '".quote($this->dblink, $user["name"])."' ".
+					"WHERE user_name = '".quote($this->dblink, $user["user_name"])."' ".
 					"LIMIT 1");
 			}
 
@@ -3493,7 +3493,7 @@ class Wacko
 				$bmlinks[$i] = trim($this->NpjTranslit($bmlinks[$i]),"()");
 			}
 
-			$this->SetUser($this->LoadUser($user["name"]));
+			$this->SetUser($this->LoadUser($user["user_name"]));
 
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarks"]		= $bookmarks;
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"]	= $bmlinks;
@@ -3518,7 +3518,7 @@ class Wacko
 			$this->Query(
 				"UPDATE ".$this->config["user_table"]." ".
 				"SET bookmarks = '".quote($this->dblink, implode("\n", $bookmarks))."' ".
-				"WHERE name = '".quote($this->dblink, $user["name"])."' ".
+				"WHERE user_name = '".quote($this->dblink, $user["user_name"])."' ".
 				"LIMIT 1");
 
 			// parsing bookmarks into links table
@@ -3528,7 +3528,7 @@ class Wacko
 				$bmlinks[$i] = trim($this->NpjTranslit($bmlinks[$i]),"()");
 			}
 
-			$this->SetUser($this->LoadUser($user["name"]));
+			$this->SetUser($this->LoadUser($user["user_name"]));
 
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarks"]		= $bookmarks;
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"]	= $bmlinks;

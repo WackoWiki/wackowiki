@@ -10,7 +10,7 @@ if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
 if ($_GET["confirm"])
 {
 	if ($temp = $this->LoadSingle(
-		"SELECT name, email, email_confirm ".
+		"SELECT user_name, email, email_confirm ".
 		"FROM ".$this->config["user_table"]." ".
 		"WHERE email_confirm = '".quote($this->dblink, $_GET["confirm"])."'"))
 	{
@@ -22,7 +22,7 @@ if ($_GET["confirm"])
 		echo "<div class=\"info\">".$this->GetTranslation("EmailConfirmed")."</div><br />";
 
 		// log event
-		$this->Log(4, str_replace("%2", $temp["name"], str_replace("%1", $temp["email"], $this->GetTranslation("LogUserEmailActivated"))));
+		$this->Log(4, str_replace("%2", $temp["user_name"], str_replace("%1", $temp["email"], $this->GetTranslation("LogUserEmailActivated"))));
 
 		unset($temp);
 	}
@@ -150,7 +150,7 @@ else if ($_POST["action"] == "login")
 					"INSERT INTO ".$this->config["user_table"]." ".
 					"SET ".
 						"signuptime = NOW(), ".
-						"name = '".quote($this->dblink, $name)."', ".
+						"user_name = '".quote($this->dblink, $name)."', ".
 						"email = '".quote($this->dblink, $email)."', ".
 						"email_confirm = '".quote($this->dblink, $confirm)."', ".
 						"bookmarks = '".quote($this->dblink, $this->GetDefaultBookmarks($lang))."', ".

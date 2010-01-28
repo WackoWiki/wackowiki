@@ -35,7 +35,7 @@ if ($registered
 			$page_id = $this->page["page_id"];
 
 		$what = $this->LoadAll(
-			"SELECT u.name AS user, f.upload_id, f.filename, f.filesize, f.description ".
+			"SELECT u.user_name AS user, f.upload_id, f.filename, f.filesize, f.description ".
 			"FROM ".$this->config["table_prefix"]."upload f ".
 				"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
@@ -91,7 +91,7 @@ if ($registered
 			$page_id = $this->page["page_id"];
 
 		$what = $this->LoadAll(
-			"SELECT u.name AS user, f.upload_id, f.filename, f.filesize, f.description ".
+			"SELECT u.user_name AS user, f.upload_id, f.filename, f.filesize, f.description ".
 			"FROM ".$this->config["table_prefix"]."upload f ".
 				"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
@@ -143,7 +143,7 @@ if ($registered
 			"SELECT f.upload_id ".
 			"FROM ".$this->config["table_prefix"]."upload f ".
 				"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.users_id) ".
-			"WHERE u.name = '".quote($this->dblink, $user["name"])."'");
+			"WHERE u.user_name = '".quote($this->dblink, $user["user_name"])."'");
 
 		if (!$this->config["upload_max_per_user"] || (sizeof($files) < $this->config["upload_max_per_user"]))
 		{

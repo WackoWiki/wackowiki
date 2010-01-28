@@ -15,7 +15,7 @@ if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
 if (isset($_GET["confirm"]) && $_GET["confirm"])
 {
 	if ($temp = $this->LoadSingle(
-			"SELECT name, email, email_confirm ".
+			"SELECT user_name, email, email_confirm ".
 			"FROM ".$this->config["user_table"]." ".
 			"WHERE email_confirm = '".quote($this->dblink, $_GET["confirm"])."'"))
 	{
@@ -27,7 +27,7 @@ if (isset($_GET["confirm"]) && $_GET["confirm"])
 		echo "<br /><br />".$this->GetTranslation("EmailConfirmed")."<br /><br />";
 
 		// log event
-		$this->Log(4, str_replace("%2", $temp["name"], str_replace("%1", $temp["email"], $this->GetTranslation("LogUserEmailActivated"))));
+		$this->Log(4, str_replace("%2", $temp["user_name"], str_replace("%1", $temp["email"], $this->GetTranslation("LogUserEmailActivated"))));
 
 		unset($temp);
 	}
@@ -97,13 +97,13 @@ else if ($user = $this->GetUser())
 						"typografica = '".quote($this->dblink, $_POST["typografica"])."', ".
 						"lang = '".quote($this->dblink, $_POST["lang"])."', ".
 						"more = '".quote($this->dblink, $more)."' ".
-					"WHERE name = '".quote($this->dblink, $user["name"])."' ".
+					"WHERE user_name = '".quote($this->dblink, $user["user_name"])."' ".
 					"LIMIT 1");
 
 				$this->SetMessage($this->GetTranslation("UserSettingsStored"));
 
 				// log event
-				$this->Log(6, str_replace("%1", $user["name"], $this->GetTranslation("LogUserSettingsUpdate")));
+				$this->Log(6, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserSettingsUpdate")));
 			}
 		}
 	}
@@ -118,13 +118,13 @@ else if ($user = $this->GetUser())
 			$this->Query(
 				"UPDATE {$this->config["user_table"]} ".
 				"SET email_confirm = '".quote($this->dblink, $confirm)."' ".
-				"WHERE name = '".quote($this->dblink, $user['name'])."' ".
+				"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
 				"LIMIT 1");
 
 			$subject = $this->config["wacko_name"].". ".$this->GetTranslation("EmailConfirm");
-			$message = $this->GetTranslation("EmailHello"). $user["name"].".\n\n".
+			$message = $this->GetTranslation("EmailHello"). $user["user_name"].".\n\n".
 						str_replace('%1', $this->GetConfigValue("wacko_name"),
-						str_replace('%2', $user["name"],
+						str_replace('%2', $user["user_name"],
 						str_replace('%3', $this->Href().
 						($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
 						$this->GetTranslation("EmailVerify"))))."\n\n".
@@ -142,7 +142,7 @@ else if ($user = $this->GetUser())
 	// reload user data
 	if ( (isset($_REQUEST["action"]) && $_REQUEST["action"] == "update") || (isset($_GET["resend_code"]) && $_GET["resend_code"] == 1))
 	{
-		$this->SetUser($this->LoadUser($user["name"]), 1);
+		$this->SetUser($this->LoadUser($user["user_name"]), 1);
 		$this->SetBookmarks(BM_USER);
 
 		// forward
@@ -158,7 +158,7 @@ else if ($user = $this->GetUser())
 	$code = $this->LoadSingle(
 		"SELECT email_confirm ".
 		"FROM {$this->config["user_table"]} ".
-		"WHERE name = '".quote($this->dblink, $user["name"])."'");
+		"WHERE user_name = '".quote($this->dblink, $user["user_name"])."'");
 ?>
 <input type="hidden" name="action" value="update" />
 <div id="cssformX">
@@ -167,7 +167,7 @@ else if ($user = $this->GetUser())
 <tbody>
   <tr>
     <th class="form_left" scope="row"><?php echo $this->GetTranslation("UserName");?></th>
-    <td><strong><?php echo $user["name"];?></strong></td>
+    <td><strong><?php echo $user["user_name"];?></strong></td>
   </tr>
   <tr>
     <th class="form_left" scope="row"><label for="real_name"><?php echo $this->GetTranslation("RealName");?></label></th>
