@@ -43,7 +43,6 @@ $wackoTranslation = array(
 	"EmailLink" => "Schreibe E-Mail\n(E-Mailprogramm wird gestartet)",
 	"ShowTip" => "Klicke um in den Ansichtsmodus zurückzukehren",
 	"ShowText" => "Ansicht",
-	"ShowDateTimeInLinks" => "Füge Zeitstempel zu Verweisen hinzu",
 	"WikieditAutocomplete" => "Vervollständige Wikilinks mit Strg+Leertaste",
 	"WikiEditInactiveJs" => "Um WikiEdit nutzen zu können, aktiviere bitte JavaScript in deinem Browser.",
 	"Typografica" => "Autokorrektur im Ansichtsmodus",

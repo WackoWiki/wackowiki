@@ -101,7 +101,6 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"bookmarks text NOT NULL DEFAULT '',".
 					"lang character varying(2) NOT NULL DEFAULT '',".
 					"show_spaces int(1) NOT NULL DEFAULT '1',".
-					"show_datetime int(1) NOT NULL DEFAULT '1',".
 					"typografica int(1) NOT NULL DEFAULT '1',".
 					"more text NOT NULL DEFAULT '',".
 					"changepassword character varying(100) NOT NULL DEFAULT '',".

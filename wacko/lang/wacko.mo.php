@@ -45,7 +45,6 @@ $wackoTranslation = array(
 	"EmailLink" => "Scrie scrisoare (deschide programul Dvs. postal)",
 	"ShowTip" => "Apasati, pentru intoarcere la vizualizare",
 	"ShowText" => "Vizualizare",
-	"ShowDateTimeInLinks" => "Adauga data/timpul in linkuri",
 	"WikieditAutocomplete" => "Complete wikilinks by Ctrl+Space",
 	"WikiEditInactiveJs" => "In order to be able to use WikiEdit, please enable JavaScript in your browser.",
 	"Typografica" => "Corectarea tipografica la vizualizare",

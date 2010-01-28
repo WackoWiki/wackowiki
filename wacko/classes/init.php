@@ -198,21 +198,19 @@ class Init
 					"hide_comments" => 0,
 					"hide_files" => 0,
 					"hide_rating" => 2,
-					
-					"hide_index" => "0",
-					"lower_index" => "0",
-					"upper_index" => "0",
+
+					"hide_index" => 0,
+					"lower_index" => 0,
+					"upper_index" => 0,
 
 					"footer_comments" => 1,
 					"footer_files" => 1,
 
 					"revisions_hide_cancel" => 0,
 
-					"show_datetime" => 0,
 					"show_spaces" => 1,
 
 					"default_typografica" => 1,
-					"default_showdatetime" => 1,
 					"paragrafica" => 1,
 
 					"disable_tikilinks" => 0,

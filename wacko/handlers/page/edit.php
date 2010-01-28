@@ -163,14 +163,14 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				}
 				else
 				{
-					$this->Redirect($this->href("", $this->tag).$this->AddDateTime($this->tag));
+					$this->Redirect($this->href());
 				}
 			}
 		}
 		// saving blank document
 		else if ($_POST["body"] == "")
 		{
-			$this->Redirect($this->href("", $this->tag).$this->AddDateTime($this->tag));
+			$this->Redirect($this->href());
 		}
 	}
 

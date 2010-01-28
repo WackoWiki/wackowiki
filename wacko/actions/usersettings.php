@@ -87,7 +87,6 @@ else if ($user = $this->GetUser())
 						"real_name = '".quote($this->dblink, $_POST["real_name"])."', ".
 						"email = '".quote($this->dblink, $_POST["email"])."', ".
 						"doubleclickedit = '".quote($this->dblink, $_POST["doubleclickedit"])."', ".
-						"show_datetime = '".quote($this->dblink, $_POST["showdatetimeinlinks"])."', ".
 						"show_comments = '".quote($this->dblink, $_POST["show_comments"])."', ".
 						"revisioncount = '".quote($this->dblink, $_POST["revisioncount"])."', ".
 						"changescount = '".quote($this->dblink, $_POST["changescount"])."', ".
@@ -262,15 +261,6 @@ else if ($user = $this->GetUser())
 	type="checkbox" id="autocomplete" name="autocomplete" value="1"
 	<?php echo $user["options"]["autocomplete"] == "1" ? "checked=\"checked\"" : "" ?> />
       <label for="autocomplete"><?php echo $this->GetTranslation("WikieditAutocomplete");?></label></td>
-  </tr>
-  <tr>
-    <td class="form_left">&nbsp;</td>
-    <td class="form_right"><input type="hidden" name="showdatetimeinlinks" value="0" />
-      <input
-	type="checkbox" id="showdatetimeinlinks" name="showdatetimeinlinks"
-	value="1"
-	<?php echo $user["show_datetime"] == "1" ? "checked=\"checked\"" : "" ?> />
-      <label for="showdatetimeinlinks"><?php echo $this->GetTranslation("ShowDateTimeInLinks");?></label></td>
   </tr>
   <tr>
     <td class="form_left">&nbsp;</td>

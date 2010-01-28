@@ -2141,7 +2141,7 @@ class Wacko
 
 			if ($thispage)
 			{
-				$pagelink	= $this->href($method, $thispage["tag"]).$this->AddDateTime($tag).($anchor ? $anchor : "");
+				$pagelink	= $this->href($method, $thispage["tag"]).($anchor ? $anchor : "");
 
 				if ($this->config["hide_locked"])
 				{
@@ -2274,35 +2274,6 @@ class Wacko
 			}
 		}
 		return $text;
-	}
-
-	function AddDatetime($tag)
-	{
-		if ($user = $this->GetUser()) $show = $user["show_datetime"];
-		if (!isset($show)) $show = $this->config["show_datetime"];
-		if (!isset($show)) $show = "1";
-		// TODO: double?
-		if ($show != "0" && $show != "0")
-		{
-			$_page = $this->LoadPage($tag, "", LOAD_CACHE, LOAD_META);
-			return ($this->config["rewrite_mode"] ? "?" : "&amp;").
-			"v=".base_convert($this->crc16(preg_replace("/[ :\-]/","",$_page["modified"])),10,36);
-		}
-		else return "";
-	}
-
-	function crc16($string)
-	{
-		$crc = 0xFFFF;
-		for ($x = 0; $x < strlen ($string); $x++) {
-			$crc = $crc ^ ord($string[$x]);
-			for ($y = 0; $y < 8; $y++) {
-				if (($crc & 0x0001) == 0x0001) {
-					$crc = (($crc >> 1) ^ 0xA001);
-				} else { $crc = $crc >> 1; }
-			}
-		}
-		return $crc;
 	}
 
 	function AddSpaces($text)
@@ -3796,8 +3767,8 @@ class Wacko
 		{
 			if (stristr($_SERVER["HTTP_USER_AGENT"], $engine))
 			{
-				$this->config["default_showdatetime"] = 0;
-				$this->config["show_datetime"] = 0;
+				$this->resource["OuterLink2"]	= "";
+				$this->resource["outericon"]	= "";
 			}
 		}
 

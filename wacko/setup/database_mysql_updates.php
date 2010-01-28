@@ -181,7 +181,7 @@ $alter_users_r4_2_1 = "ALTER TABLE {$pref}users CHANGE lang lang VARCHAR(2) NOT 
 $alter_users_r4_2_2 = "ALTER TABLE {$pref}users CHANGE doubleclickedit doubleclickedit TINYINT(1) NOT NULL DEFAULT '1'";
 $alter_users_r4_2_3 = "ALTER TABLE {$pref}users CHANGE show_comments show_comments TINYINT(1) NOT NULL DEFAULT '0'";
 $alter_users_r4_2_4 = "ALTER TABLE {$pref}users CHANGE show_spaces show_spaces TINYINT(1) NOT NULL DEFAULT '1'";
-$alter_users_r4_2_5 = "ALTER TABLE {$pref}users CHANGE showdatetime show_datetime TINYINT(1) NOT NULL DEFAULT '1'";
+$alter_users_r4_2_5 = "ALTER TABLE {$pref}users DROP showdatetime";
 $alter_users_r4_2_6 = "ALTER TABLE {$pref}users CHANGE typografica typografica TINYINT(1) NOT NULL DEFAULT '1'";
 $alter_users_r4_2_7 = "ALTER TABLE {$pref}users ADD total_pages INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER email_confirm";
 $alter_users_r4_2_8 = "ALTER TABLE {$pref}users ADD total_revisions INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER total_pages";
@@ -195,7 +195,6 @@ $alter_users_r4_2_14 = "ALTER TABLE {$pref}users CHANGE id user_id INT(10) UNSIG
 $update_users_r4_2 = "UPDATE {$pref}users SET doubleclickedit = '0' WHERE doubleclickedit = '2'";
 $update_users_r4_2_1 = "UPDATE {$pref}users SET show_comments = '0' WHERE show_comments = '2'";
 $update_users_r4_2_2 = "UPDATE {$pref}users SET show_spaces = '0' WHERE show_spaces = '2'";
-$update_users_r4_2_3 = "UPDATE {$pref}users SET show_datetime = '0' WHERE show_datetime = '2'";
 $update_users_r4_2_4 = "UPDATE {$pref}users SET typografica = '0' WHERE typografica = '2'";
 
 // WATCHES
