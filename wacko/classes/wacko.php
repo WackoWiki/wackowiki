@@ -1735,7 +1735,7 @@ class Wacko
 		// if (!$addpage)		$tag = $this->NpjTranslit($tag);
 
 		$tag = trim($tag, "/.");
-		$tag = str_replace(array("%2F", "%3F", "%3D"), array("/", "?", "="), rawurlencode($tag));
+		// $tag = str_replace(array("%2F", "%3F", "%3D"), array("/", "?", "="), rawurlencode($tag));
 
 		return $tag.($method ? "/".$method : "");
 	}

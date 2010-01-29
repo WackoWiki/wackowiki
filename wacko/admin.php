@@ -136,7 +136,7 @@ if ($user == false)
 	<body>
 		<strong>Authorization</strong><br />
 		Please enter the administrative password (make also sure
-that cookies are allowed in your browser).<br /><br />
+		that cookies are allowed in your browser).<br /><br />
 		<form action="admin.php" method="post" name="emergency">
 			<tt><strong>Password:</strong> <input name="password" type="password" autocomplete="off" value="" />
 			<input id="submit" type="submit" value="ok" /></tt>
