@@ -78,7 +78,7 @@ if (isset($tables, $directories) !== true)
 			$engine->config['table_prefix'].'rating' => array(
 				'name'	=> $engine->config['table_prefix'].'rating',
 				'where'	=> false,
-				'order'	=> 'id',
+				'order'	=> 'page_id',
 				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'referrers' => array(
@@ -93,12 +93,14 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'tag',
 				'limit' => 500
 			),
+			/*
 			$engine->config['table_prefix'].'signed' => array(
 				'name'	=> $engine->config['table_prefix'].'signed',
 				'where'	=> false,
 				'order'	=> 'id',
 				'limit' => 500
 			),
+			*/
 			$engine->config['table_prefix'].'upload' => array(
 				'name'	=> $engine->config['table_prefix'].'upload',
 				'where'	=> false,
