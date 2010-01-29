@@ -166,7 +166,7 @@ else if ($user = $this->GetUser())
 <tbody>
   <tr>
     <th class="form_left" scope="row"><?php echo $this->GetTranslation("UserName");?></th>
-    <td><strong><?php echo $user["user_name"];?></strong></td>
+    <td><strong><?php echo "<a href=\"".$this->href("", $this->config["users_page"], "profile=".$user["user_name"])."\">".$user["user_name"]."</a>";?></strong></td>
   </tr>
   <tr>
     <th class="form_left" scope="row"><label for="real_name"><?php echo $this->GetTranslation("RealName");?></label></th>

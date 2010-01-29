@@ -79,7 +79,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		echo "<td class=\"form_right\">".$this->page['page_id']."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
 		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('Owner')."</th>";
-		echo "<td class=\"form_right\">".$this->GetUserNameById($this->page['owner_id'])."</td>";
+		echo "<td class=\"form_right\">"."<a href=\"".$this->href("", $this->config["users_page"], "profile=".$this->GetUserNameById($this->page["owner_id"]))."\">".$this->GetUserNameById($this->page["owner_id"])."</a>"."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
 		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsCreated')."</th>";
 		echo "<td class=\"form_right\">".$this->GetTimeStringFormatted($this->page['created'])."</td>";
@@ -91,7 +91,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		echo "<td class=\"form_right\">".ceil(strlen($this->page['body']) / 1000).' kB / '.ceil(strlen($this->page['body_r']) / 1000)." kB"."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
 		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsTotalRevs')."</th>";
-		echo "<td class=\"form_right\">".(int)$revs['total']."</td>";
+		echo "<td class=\"form_right\"><a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".(int)$revs['total']."</a></td>";
 		unset($revs);
 		echo "</tr>\n<tr class=\"lined\">";
 		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsTotalComs')."</th>";

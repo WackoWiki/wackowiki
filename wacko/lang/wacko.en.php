@@ -441,7 +441,7 @@ $wackoTranslation = array(
 	"UsersIntercomSubjectN"	=> "[start a new topic]",
 	"UsersIntercomDisabled"	=> "Sorry, you do not want or can not receive private messages.",
 	"UsersIntercomSend"		=> "submit",
-	"UsersIntercomDesc"		=> "Note: sending personal messages carried on the email-address ".
+	"UsersIntercomDesc"		=> "Note: Sending personal messages carried on the email-address ".
 							   "recipient without disclosing your address. The recipient will be able to respond to you, using ".
 							   "similar form on your profile page. ",
 	"UsersPMOversized"		=> "The length of your message exceeds the maximum permissible to %1 characters. Please shorten your message and submit again.",
