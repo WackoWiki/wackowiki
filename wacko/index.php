@@ -15,6 +15,7 @@ $init->Settings('user_table',	$init->config['table_prefix'].'users');
 if ($init->IsLocked() === true)
 {
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
+	// echo "The site is temporaily unavailable due to system maintenance. Please try again later.";
 	exit;
 }
 

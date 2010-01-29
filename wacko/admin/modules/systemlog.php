@@ -79,7 +79,7 @@ function admin_systemlog(&$engine, &$module)
 	// filter by username or user ip
 	if ($_GET['user'])
 	{
-		$where = "WHERE u.name = '".quote($engine->dblink, $_GET['user'])."' ";
+		$where = "WHERE u.user_name = '".quote($engine->dblink, $_GET['user'])."' ";
 	}
 	else if ($_GET['ip'])
 	{
@@ -101,7 +101,7 @@ function admin_systemlog(&$engine, &$module)
 	$pagination	= $engine->Pagination($count['n'], $limit, 'p', 'mode=systemlog&order='.htmlspecialchars($_GET['order']), '', 'admin.php');
 
 	$log = $engine->LoadAll(
-		"SELECT l.log_id, l.time, l.level, l.message, u.name as user, l.ip ".
+		"SELECT l.log_id, l.time, l.level, l.message, u.user_name as user, l.ip ".
 		"FROM {$engine->config['table_prefix']}log l ".
 			"LEFT JOIN {$engine->config['table_prefix']}users u ON (l.user_id = u.user_id) ".
 		( $where ? $where : 'WHERE l.level <= '.(int)$level.' ' ).
