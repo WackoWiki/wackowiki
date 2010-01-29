@@ -68,7 +68,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		if ($rating['ratio'] > 0)			$rating['ratio'] = '+'.$rating['ratio'];
 ?>
 
-<div style="float: left; witdh: 79%;">
+<div class="page_settings">
 <?php
 		// show form
 		echo $this->FormOpen("settings") ?>
@@ -250,7 +250,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 ?>
 
 
-<div style="float: right;">
+<div class="page_tools">
 <p><?php echo $this->GetTranslation("SettingsPortal");?></p>
 <ul>
 	<li><a href="<?php echo $this->href("edit");?>"><?php echo $this->GetTranslation("SettingsEdit"); ?></a></li>
@@ -294,5 +294,5 @@ else
 	print($this->GetTranslation("ReadAccessDenied"));
 }
 ?>
-<br />
+<br style="clear: both;">
 </div>

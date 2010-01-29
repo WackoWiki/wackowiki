@@ -858,6 +858,13 @@ td.form_left, th.form_left {
 	background: #CCFFCC;
 }
 
+.page_settings {
+	float: left;
+}
+.page_tools {
+	float: right;
+}
+
 /* news / blog extention ******************************************* */
 .news {
 	float: left;
