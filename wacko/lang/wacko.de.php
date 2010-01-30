@@ -295,7 +295,7 @@ $wackoTranslation = array(
 	"PasswordTooShort" => "Passwort zu kurz.",
 	"ListMyPages" => "Liste deiner Seiten",
 	"ListMyChanges" => "Liste deiner Änderungen",
-	"ListMyWatches" => "Liste  of watched pages",
+	"ListMyWatches" => "Liste der beobachteten Seiten",
 	"ListMyChangesWatches" => "Änderungen an den von dir beobachteten Seiten",
 	"SeeListOfPages" => "Zeige Liste meiner Seiten (MeineSeiten) und die Seiten, die ich editiert haben (MeineAenderungen).",
 	"AddToBookmarks" => "Füge aktuelle Seite zu Lesezeichen hinzu",
@@ -353,7 +353,7 @@ $wackoTranslation = array(
 	"RemoveFromBookmarks" => "Entferne aktuelle Seite aus den Lesezeichen",
 	"DontRedirect" => "Keine automatische Weiterleitung erlauben, obwohl eine gesetzt ist.",
 	"SendWatchEmail" => "Bestätigunsmail senden, wenn jemand (außer dir) Seiten verändert, die du beobachtest",
-	"AllowIntercom" => "Allow private messages from users of the system",
+	"AllowIntercom" => "Erlaube persönliche Nachrichten von Nutzern des Systems",
 	"HideLastSession" => "Letzte Sitzung verbergen",
 	"ValidateIP" => "Binde Sitzung an IP-Adresse (do not use via Tor)",
 	"ProfileAnonymousPub" => "Vorzugsweise anonym veröffentlichen (den Namen verstecken)",
@@ -411,21 +411,19 @@ $wackoTranslation = array(
 	"UsersNoMatching"		=> "Keine passenden Benutzer gefunden. Versuche es mit weicheren Suchkriterien.",
 	"UsersName"			=> "Benutzername",
 	"UsersPages"			=> "Seiten",
-	"UsersPosts"			=> "Kommentare",
+	"UsersComments"			=> "Kommentare",
 	"UsersRevisions"		=> "Revisionen",
 	"UsersSignup"			=> "Anmeldung",
 	"UsersLastSession"		=> "Letzter Besuch",
 	"UsersNotFound"			=> "Benutzer <tt>%2</tt> nicht gefunden. Klicke <a href=\"%1\">hier</a>, to go to the main list.",
 	"UsersProfile"			=> "Profil",
-	"UsersDocuments"		=> "Seiten",
-	"UsersComments"			=> "Kommentare",
 	"UsersContact"			=> "Kontakt",
 	"UsersList"			=> "Zeige gesamte Liste der Benutzer",
 	"UsersNA"			=> "[nicht gesetzt]",
 	"UsersNA2"			=> "[keine]",
 	"UsersSignupDate"		=> "Beitrittsdatum",
 	"UsersGroupMembership"	=> "Gruppen-Mitgliedschaft",
-	"UsersPersonalInfo"		=> "Personal info",
+	"UsersPersonalInfo"		=> "Persönliche Infos",
 	"UsersOwnedPages"		=> "Owned pages",
 	"UsersCommentsPosted"	=> "Kommentare erstellt",
 	"UsersRevisionsMade"	=> "Revisionen erstellt",
@@ -435,15 +433,15 @@ $wackoTranslation = array(
 	"UsersSessionHidden"	=> "[verborgen]",
 	"UsersIntercomSubject"	=> "Betreff",
 	"UsersIntercomSubjectN"	=> "[Beginne ein neues Thema]",
-	"UsersIntercomDisabled"	=> "Sorry, you do not want or can not receive private messages.",
+	"UsersIntercomDisabled"	=> "Du möchtest oder kannst keine privaten Nachrichten empfangen.",
 	"UsersIntercomSend"		=> "absenden",
-	"UsersIntercomDesc"		=> "Hinweis: sending personal messages carried on the email-address ".
-							   "recipient without disclosing your address. The recipient will be able to respond to you, using ".
-							   "similar form on your profile page.",
-	"UsersPMOversized"		=> "The length of your message exceeds the maximum permissible to %1 characters. Please shorten your message and submit again.",
-	"UsersPMFlooded"		=> "The interval between sending personal messages should not be less than %1 seconds.",
-	"UsersPMSent"			=> "Personal message was successfully sent to the user.",
-	"UsersPMPlnSent"		=> "Personal message sent to the user in plain text.",
+	"UsersIntercomDesc"		=> "Hinweis: Senden von persönlichen Nachrichten an die E-Mail-Adresse des ".
+							   "Empfänger ohne Offenlegung deiner Adresse. Der Empfänger wird in der Lage, dir zu anworten, using ".
+							   "das gleiche Formular auf deiner Profilseite.",
+	"UsersPMOversized"		=> "Die Länge der Nachricht überschreitet die maximal zulässigen %1 Zeichen. Bitte kürze deine Mitteilung und übermittle sie erneut.",
+	"UsersPMFlooded"		=> "Der Abstand zwischen dem Senden von persönlichen Nachrichten sollte nicht kleiner sein als %1 Sekunden.",
+	"UsersPMSent"			=> "Persönliche Nachricht wurde erfolgreich an den Nutzer gesendet.",
+	"UsersPMPlnSent"		=> "Persönliche Nachricht für den Benutzer im Klartext gesendet.",
 	"UsersPMBody"			=> "This message has been sent to you by the user %1 from %2. To answer ".
 							   "this letter, click on the following link (do not use the Reply button / Reply ".
 							   "in mailer):\n%3\n\n".
@@ -453,7 +451,7 @@ $wackoTranslation = array(
 							   "Note: If this message is spam, contains abusive or otherwise ".
 							   "violates the rules of the site %2, please send it (using the button Forward /".
 							   "Forward your mail program) to address %4.",
-	"UsersPMNotLoggedIn"	=> "You are not registered in the system and can not send private messages to users.",
+	"UsersPMNotLoggedIn"	=> "Du bist nicht im System angemeldet und kannst daher keine persönlichen Nachrichten an andere Nutzer übermitteln.",
 
 	// rating handler
 	"RatingDenied"			=> "Du kannst diese Seite nicht bewerten.",
