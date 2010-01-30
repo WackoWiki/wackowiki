@@ -97,7 +97,7 @@ if ($_GET['profile'] == true)
 		// header and profile data
 		echo '<h1>'.$user['user_name'].'</h1>';
 		echo '<small><a href="'.$this->href('', $this->tag).'">&laquo '.$this->GetTranslation('UsersList')."</a></small>\n";
-		echo '<a name="profile"></a><h2>'.$this->GetTranslation('UsersProfile').'</h2><br />'."\n";
+		echo '<h2>'.$this->GetTranslation('UsersProfile').'</h2>'."\n";
 
 		// basic info
 ?>
@@ -119,26 +119,6 @@ if ($_GET['profile'] == true)
 						: $this->GetTimeStringFormatted($user['session_time']) )
 					); ?></td>
 			</tr>
-			<tr>
-				<td style="width:100px; white-space:nowrap; padding-right:20px;" valign="top"><strong><?php echo $this->GetTranslation('ProfileOccupation'); ?></strong></td>
-				<td><?php echo ( $user['options']['occupation'] ? htmlspecialchars($user['options']['occupation']) : '<em>'.$this->GetTranslation('UsersNA').'</em>' ); ?></td>
-			</tr>
-			<tr>
-				<td style="width:100px; white-space:nowrap; padding-right:20px;" valign="top"><strong><?php echo $this->GetTranslation('ProfileInterests'); ?></strong></td>
-				<td><?php echo ( $user['options']['interests'] ? htmlspecialchars($user['options']['interests']) : '<em>'.$this->GetTranslation('UsersNA').'</em>' ); ?></td>
-			</tr>
-			<tr>
-				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->GetTranslation('ProfileWebsite'); ?></strong></td>
-				<td><?php echo ( $user['options']['website'] ? htmlspecialchars($user['options']['website']) : '<em>'.$this->GetTranslation('UsersNA').'</em>' ); ?></td>
-			</tr>
-			<tr>
-				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->GetTranslation('ProfileICQUIN'); ?></strong></td>
-				<td><?php echo ( $user['options']['icq'] ? htmlspecialchars($user['options']['icq']) : '<em>'.$this->GetTranslation('UsersNA').'</em>' ); ?></td>
-			</tr>
-			<tr>
-				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->GetTranslation('ProfileJabberID'); ?></strong></td>
-				<td><?php echo ( $user['options']['jid'] ? htmlspecialchars($user['options']['jid']) : '<em>'.$this->GetTranslation('UsersNA').'</em>' ); ?></td>
-			</tr>
 			<tr><?php // Have all user pages as sub pages of the current Users page. ?>
 				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->GetTranslation('UserSpace'); // TODO: this might be placed somewhere else, jut put it here for testing ?></strong></td>
 				<td><a href="<?php echo $this->href('', ($this->config['users_page'].'/'.$user['user_name'])); ?>"><?php echo $this->config['users_page'].'/'.$user['user_name']; ?></a></td>
@@ -153,13 +133,13 @@ if ($_GET['profile'] == true)
 		if ($user['motto'] == true)
 		{
 			$this->StopLinkTracking();
-			echo '<a name="info"></a><h3>'.$this->GetTranslation('UsersPersonalInfo').'</h3><br />'."\n";
+			echo '<h3>'.$this->GetTranslation('UsersPersonalInfo').'</h3>'."\n";
 			echo $this->Format($this->Format($user['motto'], 'wacko'), 'post_wacko')."\n";
 			$this->StartLinkTracking();
 		}
 
 		// contact form
-		echo '<a name="contacts"></a><h2>'.$this->GetTranslation('UsersContact').'</h2><br />'."\n";
+		echo '<h2>'.$this->GetTranslation('UsersContact').'</h2>'."\n";
 
 		// only registered users can send PMs
 		if ($this->GetUser())
@@ -218,7 +198,7 @@ if ($_GET['profile'] == true)
 
 		// user-owned pages
 		$limit = 20;
-		echo '<a name="documents"></a><h2>'.$this->GetTranslation('UsersDocuments').'</a></h2>'."\n";
+		echo '<h2>'.$this->GetTranslation('UsersPages').'</a></h2>'."\n";
 		echo '<div class="indent"><small>'.$this->GetTranslation('UsersOwnedPages').': '.$user['total_pages'].'&nbsp;&nbsp;&nbsp; '.$this->GetTranslation('UsersRevisionsMade').': '.$user['total_revisions']."</small></div><br />\n";
 
 		$pagination = $this->Pagination($user['total_pages'], $limit, 'd', 'profile='.$user['user_name'].'&amp;sort='.( $_GET['sort'] != 'name' ? 'date' : 'name' ).'#documents');
@@ -259,7 +239,7 @@ if ($_GET['profile'] == true)
 
 		// last user comments
 		$limit = 20;
-		echo '<a name="comments"></a><h2>'.$this->GetTranslation('UsersComments').'</h2>'."\n";
+		echo '<h2>'.$this->GetTranslation('UsersComments').'</h2>'."\n";
 		echo '<div class="indent"><small>'.$this->GetTranslation('UsersCommentsPosted').': '.$user['total_comments']."</small></div>\n";
 
 		$pagination = $this->Pagination($user['total_comments'], $limit, 'c', 'profile='.$user['user_name'].'#comments');
@@ -387,7 +367,7 @@ else
 	echo '<tr>'.
 			'<th><a href="'.$this->href('', '', 'sort=name').'">'.$this->GetTranslation('UsersName').( $_GET['sort'] == 'name' || $_REQUEST['user'] == true ? '&nbsp;&darr;' : '' ).'</a></th>'.
 			'<th><a href="'.$this->href('', '', 'sort=pages').'">'.$this->GetTranslation('UsersPages').( $_GET['sort'] == 'pages' || $_GET['sort'] == false ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="'.$this->href('', '', 'sort=comments').'">'.$this->GetTranslation('UsersPosts').( $_GET['sort'] == 'comments' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=comments').'">'.$this->GetTranslation('UsersComments').( $_GET['sort'] == 'comments' ? '&nbsp;&darr;' : '' ).'</a></th>'.
 			'<th><a href="'.$this->href('', '', 'sort=revisions').'">'.$this->GetTranslation('UsersRevisions').( $_GET['sort'] == 'revisions' ? '&nbsp;&darr;' : '' ).'</a></th>'.
 			'<th><a href="'.$this->href('', '', 'sort=signup').'">'.$this->GetTranslation('UsersSignup').( $_GET['sort'] == 'signup' ? '&nbsp;&darr;' : '' ).'</a></th>'.
 			'<th><a href="'.$this->href('', '', 'sort=session').'">'.$this->GetTranslation('UsersLastSession').( $_GET['sort'] == 'session' ? '&nbsp;&darr;' : '' ).'</a></th>'.

@@ -42,43 +42,43 @@ else if ($user = $this->GetUser())
 <?php
 				if ($user["session_time"] == true)
 				{
-?>
-				Last visit was recorded <tt><?php echo $this->GetTimeStringFormatted($user['session_time']); ?></tt>.<br />
-<?php
+					$output .= "Last visit was recorded <tt>". $this->GetTimeStringFormatted($user['session_time'])."</tt>.<br />";
 				}
-?>
-				The current session ends
-<?php
+
+				$output .= "The current session ends ";
+
 				$cookie = explode(';', $this->GetCookie("auth"));
 				// session expiry date
-				echo $this->GetUnixTimeFormatted($cookie[2]).' ';
+				$output .= $this->GetUnixTimeFormatted($cookie[2]).' ';
 				// session time left
 				$time_diff = $cookie[2] - time();
 				if ($time_diff > 2 * 24 * 3600)
-					echo '(in '.ceil($time_diff / 24 / 3600).' days).';
+					$output .= '(in '.ceil($time_diff / 24 / 3600).' days).';
 				else if ($time_diff > 5 * 3600)
-					echo '(in '.ceil($time_diff / 3600).' hours).';
+					$output .= '(in '.ceil($time_diff / 3600).' hours).';
 				else
-					echo '(in '.ceil($time_diff / 60).' minutes).';
+					$output .= '(in '.ceil($time_diff / 60).' minutes).';
 
-				echo "<br />";
+				$output .= "<br />";
 				// Only allow your session to be used from this IP address.
-?>
-				Bind session to the IP-address <?php echo ( $user['options']['validate_ip'] == '1' ? 'enabled (the current IP <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ); ?>.<br />
-<?php
+
+				$output .= "Bind session to the IP-address ". ( $user['options']['validate_ip'] == '1' ? 'enabled (the current IP <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).".<br />";
+
 				if ($this->config["ssl"] == true)
 				{
-?>
-				Traffic Protection <?php echo ( $_SERVER["HTTPS"] == "on" ? $_SERVER["SSL_CIPHER"].' ('.$_SERVER["SSL_PROTOCOL"].')' : 'no' ); ?>.
-<?php
+
+					$output .= "Traffic Protection ". ( $_SERVER["HTTPS"] == "on" ? $_SERVER["SSL_CIPHER"].' ('.$_SERVER["SSL_PROTOCOL"].')' : 'no' ).".";
+
 				}
+
+				$this->SetMessage($output);
 ?>
   <p>
     <input type="button" value="<?php echo $this->GetTranslation("LogoutButton"); ?>"
 			onclick="document.location='<?php echo $this->href("", "", "action=logout"); ?>'" />
   </p>
   <p>
-		<a href="<?php echo $this->href('', $this->config['settings_page']); ?>">Settings</a> | <a href="?action=clearcookies">Delete all cookies</a>
+		<?php echo "<a href=\"".$this->href('', $this->config['settings_page'])."\">".$this->GetTranslation("SettingsText")."</a>"; ?> | <a href="?action=clearcookies">Delete all cookies</a>
   </p>
 </div>
 <?php
