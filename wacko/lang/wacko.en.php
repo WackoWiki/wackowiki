@@ -742,7 +742,7 @@ $wackoTranslation = array(
 	"LogUserPasswordRecovered"	=> "User ##%1## successfully recover his forgotten password",  // no "his" (Russian impersonal sentence alike)?
 	"LogUserPasswordChanged"	=> "User ##%1## successfully updated (changed) his password", // no "his"?
 	"LogUserPasswordMismatch"	=> "!!User ##%1## failed to change his password: current password mismatch!!", // "his" => "the"?
-	"LogUserIPSwitched"			=> "Unauthorized IP-address change of the user ##%1## from ##%2## to ##%3##",
+	"LogUserIPSwitched"			=> "Unauthorized IP address change of the user ##%1## from ##%2## to ##%3##",
 	"LogPageImported"			=> "Imported page [[/%1]]",
 	"LogPageCreated"			=> "Created new page [[/%1]]",
 	"LogPageMetaUpdated"		=> "Updated page meta data [[/%1]]",  // "meta data" => "properties"?
