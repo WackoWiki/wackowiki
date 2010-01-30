@@ -155,7 +155,7 @@ $lang = array(
 Ακόμα μία φορά, δείτε για λεπτομέρειες εδώ: <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a>.",
 "WrittenAt" => "εγγράψιμο στις ",
 "DontChange" => "μην αλλάξετε την έκδοση του wacko_version με το χέρι!",
-"ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
+"ConfigDescription" => "<a href=\"http://wackowiki.org/Doc/English/Configuration\" target=\"_blank\">detailed description</a>",
 "TryAgain" => "Δοκιμάστε Πάλι",
 "RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",
 "DeletingWakkaConfigFile" => "Deleting Obsolete Wakka Configuration File",

@@ -149,7 +149,7 @@ $lang = array(
 "NextStep" => "En el paso siguiente el instalador intentará guardar el archivo con las configuraciones actualizadas, <tt>config.inc.php</tt>. Por favor asegurese que el servidor web tenga acceso de escritura al archivo, o lo tendrá que editar manualmente. Vea <a href=\"http://wackowiki.org/Doc/English/Installation\" target=\"_blank\">WackoWiki:Doc/English/Installation</a> por detalles.",
 "WrittenAt" => "Guardado ",
 "DontChange" => "no cambie manualmente wacko_version!",
-"ConfigDescription" => "detailed description http://wackowiki.org/Doc/English/Configuration",
+"ConfigDescription" => "<a href=\"http://wackowiki.org/Doc/English/Configuration\" target=\"_blank\">detailed description</a>",
 "TryAgain" => "Intente de Nuevo",
 "RemoveWakkaConfigFile" => "WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.",
 "DeletingWakkaConfigFile" => "Deleting Obsolete Wakka Configuration File",
