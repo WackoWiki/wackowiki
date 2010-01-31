@@ -31,9 +31,9 @@ function outputError($errorText = "")
 print("         <h2>".$lang["TestingConfiguration"]."</h2>\n");
 
 // Generic Default Inserts
-$insert_admin = "INSERT INTO ".$config["table_prefix"]."users (name, password, email, signuptime, lang) VALUES ('".$config["admin_name"]."', md5('".$_POST["password"]."'), '".$config["admin_email"]."', NOW(), '".$config["language"]."')";
+$insert_admin = "INSERT INTO ".$config["table_prefix"]."users (user_name, password, email, signuptime, lang) VALUES ('".$config["admin_name"]."', md5('".$_POST["password"]."'), '".$config["admin_email"]."', NOW(), '".$config["language"]."')";
 
-$insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, user_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config["table_prefix"]."users WHERE name = '".$config["admin_name"]."' LIMIT 1),'wacko4.gif', 'WackoWiki', NOW(), '1580', '108', '50', 'gif')";
+$insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, user_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config["table_prefix"]."users WHERE user_name = '".$config["admin_name"]."' LIMIT 1),'wacko4.gif', 'WackoWiki', NOW(), '1580', '108', '50', 'gif')";
 $insert_config = "INSERT INTO ".$config["table_prefix"]."config (config_id, name, value) VALUES
 	(0, 'maint_last_cache', NULL),
 	(0, 'maint_last_log', NULL),
