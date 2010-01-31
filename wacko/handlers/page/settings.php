@@ -251,7 +251,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 
 
 <div class="page_tools">
-<p><?php echo $this->GetTranslation("SettingsPortal");?></p>
+<?php echo "<div class=\"layout-box\"><p class=\"layout-box\"><span> ".$this->GetTranslation("SettingsPortal")."  </span></p>";?>
 <ul>
 	<li><a href="<?php echo $this->href("edit");?>"><?php echo $this->GetTranslation("SettingsEdit"); ?></a></li>
 	<li><a href="<?php echo $this->href("revisions");?>"><?php echo $this->GetTranslation("SettingsRevisions"); ?></a></li>
@@ -286,7 +286,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 	<li><a href="<?php echo $this->href("latex");?>"><?php echo $this->GetTranslation("SettingsLatex"); ?></a></li>
 	<li><a href="<?php echo $this->href("export.xml");?>"><?php echo $this->GetTranslation("SettingsXML"); ?></a></li>
 </ul>
-</div>
+</div></div>
 <?php
 }
 else
