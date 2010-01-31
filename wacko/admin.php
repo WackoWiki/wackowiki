@@ -201,9 +201,17 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 ?>
 	<div id="menu_bookmarks" class="menu">
 		<div class="sub">
-			<ul><li class="text submenu"><?php echo $module['lock']['cat']; ?></li>
-			<?php echo ( $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST) ? '<ul><li><strong>' : '<ul><li>' ); ?><a href="admin.php"><?php echo $module['lock']['name']; ?></a><?php echo ( $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST) ? '</strong></li></ul>' : '</li></ul>' ); ?>
-<?php
+			<ul>
+			<li class="text submenu"><?php echo $module['lock']['cat']; ?>
+			<?php echo ( $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
+				? "\n<ul>\n<li><strong>"
+				: "\n<ul>\n<li>" ); ?>
+			<a href="admin.php">
+			<?php echo $module['lock']['name']; ?></a>
+			<?php echo ( $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
+				? "</strong></li>\n"
+				: "</li>\n" );
+
 			$category = $module['lock']['cat'];
 
 			uasort($module,
@@ -216,12 +224,21 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 					else
 						return 0;')
 				);
+
 			foreach ($module as $row)
 			{
 				if ($row['mode'] != 'lock')
 				{
-					echo ( $row['cat'] != $category ? '<li class="text submenu2">'.$row['cat'].'</li>' : '');
-					echo ( $_REQUEST['mode'] == $row['mode'] ? '<ul><li><strong>' : '<ul><li>' ); ?><a href="?mode=<?php echo $row['mode']; ?>" title="<?php echo $row['title']; ?>"><?php echo $row['name']; ?></a><?php echo ( $_REQUEST['mode'] == $row['mode'] ? '</strong></li></ul>' : '</li></ul>' );
+					echo ( $row['cat'] != $category
+						? "</ul>\n</li>\n<li class=\"text submenu2\">".$row['cat']."<ul>\n"
+						: "");
+					echo ( $_REQUEST['mode'] == $row['mode']
+						? "<li><strong>"
+						: "<li>" ); ?>
+					<a href="?mode=<?php echo $row['mode']; ?>" title="<?php echo $row['title']; ?>"><?php echo $row['name']; ?></a>
+					<?php echo ( $_REQUEST['mode'] == $row['mode']
+					? "</strong></li>\n"
+					: "</li>\n" );
 				}
 				else
 				{
@@ -230,7 +247,9 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 				$category = $row['cat'];
 			}
 			unset($category);
-?>		</ul></div>
+
+?>
+</ul></li></ul></div>
 	</div>
 <?php
 
