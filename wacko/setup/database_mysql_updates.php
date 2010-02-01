@@ -33,7 +33,7 @@ $table_config_r4_2 = "CREATE TABLE {$pref}config (".
 
 // GROUPS
 $table_groups_r4_2 = "CREATE TABLE {$pref}groups (".
-					"group_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"name VARCHAR(100) NOT NULL,".
 					"description VARCHAR(255) NOT NULL,".
 					"moderator VARCHAR(25) NOT NULL,".
@@ -48,17 +48,17 @@ $table_groups_r4_2 = "CREATE TABLE {$pref}groups (".
 
 // KEYWORDS
 $table_keywords_r4_2 = "CREATE TABLE {$pref}keywords (".
-					"keyword_id INT(10) unsigned NOT NULL AUTO_INCREMENT,".
-					"parent INT(10) unsigned NOT NULL,".
-					"lang VARCHAR(2) COLLATE latin1_general_ci NOT NULL,".
-					"keyword VARCHAR(100) COLLATE latin1_general_ci NOT NULL,".
+					"keyword_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"parent INT(10) UNSIGNED NOT NULL,".
+					"lang VARCHAR(2) NOT NULL,".
+					"keyword VARCHAR(100) NOT NULL,".
 					"PRIMARY KEY (keyword_id),".
 					"UNIQUE KEY idx_keywords (lang,keyword)".
 				") TYPE=MyISAM";
 
 $table_keywords_pages_r4_2 = "CREATE TABLE {$pref}keywords_pages (".
-						"keyword_id INT(10) unsigned NOT NULL,".
-						"page_id INT(10) unsigned NOT NULL,".
+						"keyword_id INT(10) UNSIGNED NOT NULL,".
+						"page_id INT(10) UNSIGNED NOT NULL,".
 						"UNIQUE KEY idx_pageword (keyword_id,page_id)".
 					") ENGINE=MyISAM";
 
@@ -127,7 +127,7 @@ $table_rating_r4_2 = "CREATE TABLE {$pref}rating (".
 					"voters INT(10) UNSIGNED NOT NULL,".
 					"time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (page_id),".
-					"KEY voters_rate (voters)".
+					"KEY idx_voters_rate (voters)".
 				") TYPE=MyISAM";
 
 // REFERRERS

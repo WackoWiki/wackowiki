@@ -34,7 +34,7 @@ $table_config = "CREATE TABLE {$pref}config (".
 				") TYPE=MyISAM";
 
 $table_groups = "CREATE TABLE {$pref}groups (".
-					"group_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"name VARCHAR(100) NOT NULL,".
 					"description VARCHAR(255) NOT NULL,".
 					"moderator VARCHAR(25) NOT NULL,".
@@ -48,10 +48,10 @@ $table_groups = "CREATE TABLE {$pref}groups (".
 				") TYPE=MyISAM";
 
 $table_keywords = "CREATE TABLE {$pref}keywords (".
-					"keyword_id INT(10) unsigned NOT NULL AUTO_INCREMENT,".
-					"parent INT(10) unsigned NOT NULL,".
-					"lang VARCHAR(2) COLLATE latin1_general_ci NOT NULL,".
-					"keyword VARCHAR(100) COLLATE latin1_general_ci NOT NULL,".
+					"keyword_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"parent INT(10) UNSIGNED NOT NULL,".
+					"lang VARCHAR(2) NOT NULL,".
+					"keyword VARCHAR(100) NOT NULL,".
 					"PRIMARY KEY (keyword_id),".
 					"UNIQUE KEY idx_keywords (lang,keyword)".
 				") TYPE=MyISAM";
@@ -63,7 +63,7 @@ $table_keywords_pages = "CREATE TABLE {$pref}keywords_pages (".
 					") ENGINE=MyISAM";
 
 $table_links = "CREATE TABLE {$pref}links (".
-					"link_id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,".
 					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"to_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
@@ -75,7 +75,7 @@ $table_links = "CREATE TABLE {$pref}links (".
 				") TYPE=MyISAM";
 
 $table_log = "CREATE TABLE {$pref}log (".
-					"log_id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"log_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"time TIMESTAMP NOT NULL,".
 					"level TINYINT(1) NOT NULL,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -89,7 +89,7 @@ $table_log = "CREATE TABLE {$pref}log (".
 				") TYPE=MyISAM";
 
 $table_pages = "CREATE TABLE {$pref}pages (".
-					"page_id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"page_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"tag VARCHAR(250) NOT NULL DEFAULT '',".
@@ -131,7 +131,7 @@ $table_rating = "CREATE TABLE {$pref}rating (".
 					"voters INT(10) UNSIGNED NOT NULL,".
 					"time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (page_id),".
-					"KEY voters_rate (voters)".
+					"KEY idx_voters_rate (voters)".
 				") TYPE=MyISAM";
 
 $table_referrers = "CREATE TABLE {$pref}referrers (".
@@ -143,7 +143,7 @@ $table_referrers = "CREATE TABLE {$pref}referrers (".
 				") TYPE=MyISAM";
 
 $table_revisions = "CREATE TABLE {$pref}revisions (".
-					"revision_id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"revision_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -174,7 +174,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 				") TYPE=MyISAM;";
 
 $table_upload = "CREATE TABLE {$pref}upload (".
-					"upload_id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"upload_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"filename VARCHAR(250) NOT NULL DEFAULT '',".
@@ -192,7 +192,7 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 				") TYPE=MyISAM";
 
 $table_users = "CREATE TABLE {$pref}users (".
-					"user_id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_name VARCHAR(80) NOT NULL DEFAULT '',".
 					"real_name VARCHAR(80) NOT NULL DEFAULT '',".
 					"password VARCHAR(32) NOT NULL DEFAULT '',".
@@ -223,7 +223,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 				") TYPE=MyISAM";
 
 $table_watches = "CREATE TABLE {$pref}watches (".
-					"watch_id INT(10) UNSIGNED NOT NULL auto_increment,".
+					"watch_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"time TIMESTAMP NOT NULL,".
