@@ -787,11 +787,10 @@ class Wacko
 
 	function CacheLinks()
 	{
-		$page_id = $this->GetPageId();
 		if ($links = $this->LoadAll(
 			"SELECT * ".
 			"FROM ".$this->config["table_prefix"]."links ".
-			"WHERE from_page_id='".quote($this->dblink, $page_id)."'"))
+			"WHERE from_page_id='".quote($this->dblink, $this->page["page_id"])."'"))
 		{
 			$cl = count($links);
 			if (!isset($cl))$cl = 0;
@@ -802,26 +801,26 @@ class Wacko
 			}
 		}
 
-		$user = $this->GetUser();
+		$user		= $this->GetUser();
 		if (!isset($cl))$cl = 0;
-		$pages[$cl] = $user["user_name"];
-		$bookm = $this->GetDefaultBookmarks($user["lang"], "site")."\n".
+		$pages[$cl]	= $user["user_name"];
+		$bookm		= $this->GetDefaultBookmarks($user["lang"], "site")."\n".
 					($user["bookmarks"]
 						? $user["bookmarks"]
 						: $this->GetDefaultBookmarks($user["lang"]));
-		$bookmarks = explode("\n", $bookm);
+		$bookmarks	= explode("\n", $bookm);
 
 		for ($i = 0; $i <= count($bookmarks); $i++)
 		{
 			if (!isset($cl))$cl = 0;
 			if (preg_match("/^[\(\[]/", (isset($bookmarks[$i])) ? ($bookmarks[$i]) : "" ))
-				$pages[$cl+$i] = preg_replace("/^(.*?)\s.*$/","\\1",preg_replace("/[\[\]\(\)]/","",$bookmarks[$i]));
+				$pages[$cl+$i] = preg_replace("/^(.*?)\s.*$/", "\\1", preg_replace("/[\[\]\(\)]/", "", $bookmarks[$i]));
 		}
 
-		$pages[] = $this->GetPageTag();
-		$spages = $pages;
-		$spages_str = '';
-		$pages_str = '';
+		$pages[]	= $this->tag;
+		$spages		= $pages;
+		$spages_str	= '';
+		$pages_str	= '';
 
 		foreach ($pages as $page)
 		{
@@ -832,8 +831,8 @@ class Wacko
 			}
 		}
 
-		$spages_str = substr($spages_str, 0, strlen($spages_str) - 2);
-		$pages_str = substr($pages_str, 0, strlen($pages_str) - 2);
+		$spages_str	= substr($spages_str, 0, strlen($spages_str) - 2);
+		$pages_str	= substr($pages_str, 0, strlen($pages_str) - 2);
 
 		if ($links = $this->LoadAll(
 		"SELECT ".$this->pages_meta." ".
@@ -853,7 +852,7 @@ class Wacko
 		for ($i = 0; $i < count($notexists); $i++)
 		{
 			$this->CacheWantedPage($pages[array_search($notexists[$i], $spages)], 1);
-			$this->CacheACL($notexists[$i], "read", 1, $acl);
+			$this->CacheACL($this->GetPageId($notexists[$i]), "read", 1, $acl);
 		}
 
 		if ($read_acls = $this->LoadAll(
@@ -863,7 +862,7 @@ class Wacko
 		{
 			for ($i = 0; $i < count($read_acls); $i++)
 			{
-				$this->CacheACL($read_acls[$i]["supertag"], "read", 1, $read_acls[$i]);
+				$this->CacheACL($read_acls[$i]["page_id"], "read", 1, $read_acls[$i]);
 			}
 		}
 	}
@@ -4367,7 +4366,7 @@ class Wacko
 	// The password complexity can be defined in $pwd_complexity :
 	// $pwd_complexity = 2 -- password consists of uppercase, lowercase, digits
 	// $pwd_complexity = 3 -- password consists of uppercase, lowercase, digits and symbols
-	function randomPassword($length, $pwd_complexity)
+	function RandomPassword($length, $pwd_complexity)
 	{
 		$chars_uc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$chars_lc = 'abcdefghijklmnopqrstuvwxyz';
