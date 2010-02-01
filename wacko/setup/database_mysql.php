@@ -195,16 +195,17 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"real_name VARCHAR(80) NOT NULL DEFAULT '',".
 					"password VARCHAR(32) NOT NULL DEFAULT '',".
 					"email VARCHAR(50) NOT NULL DEFAULT '',".
+					"enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"motto TEXT NOT NULL,".
 					"revisioncount INT(10) UNSIGNED NOT NULL DEFAULT '20',".
 					"changescount INT(10) UNSIGNED NOT NULL DEFAULT '50',".
-					"doubleclickedit TINYINT(1) NOT NULL DEFAULT '1',".
+					"doubleclickedit TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"signuptime DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"show_comments TINYINT(1) NOT NULL DEFAULT '1',".
+					"show_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"bookmarks TEXT NOT NULL,".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
-					"show_spaces TINYINT(1) NOT NULL DEFAULT '1',".
-					"typografica TINYINT(1) NOT NULL DEFAULT '1',".
+					"show_spaces TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
+					"typografica TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"more TEXT NOT NULL,".
 					"changepassword VARCHAR(100) NOT NULL,".
 					"email_confirm VARCHAR(40) NOT NULL DEFAULT '',".
@@ -215,6 +216,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"total_comments INT(10) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (user_id),".
 					"UNIQUE KEY idx_user_name (user_name),".
+					"KEY idx_enabled (enabled),".
 					"KEY idx_signuptime (signuptime)".
 				") TYPE=MyISAM";
 
