@@ -191,6 +191,7 @@ $alter_users_r4_2_11 = "ALTER TABLE {$pref}users ADD real_name VARCHAR(80) NOT N
 $alter_users_r4_2_12 = "ALTER TABLE {$pref}users ADD session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER email_confirm";
 $alter_users_r4_2_13 = "ALTER TABLE {$pref}users ADD session_expire INT(10) UNSIGNED NOT NULL AFTER session_time";
 $alter_users_r4_2_14 = "ALTER TABLE {$pref}users CHANGE id user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
+$alter_users_r4_2_15 = "ALTER TABLE {$pref}users ADD enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER email, ADD INDEX idx_enabled (enabled)";
 
 $update_users_r4_2 = "UPDATE {$pref}users SET doubleclickedit = '0' WHERE doubleclickedit = '2'";
 $update_users_r4_2_1 = "UPDATE {$pref}users SET show_comments = '0' WHERE show_comments = '2'";
