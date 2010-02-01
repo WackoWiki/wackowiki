@@ -46,7 +46,7 @@ if ($engine->config['ssl'] == true)
 	else
 	{
 		$engine->config['base_url'] = str_replace('http://', 'https://', $engine->config['base_url']);
-		#$engine->config['root_url'] = str_replace('http://', 'https://', $engine->config['root_url']);
+		$engine->config['root_url'] = str_replace('http://', 'https://', $engine->config['root_url']);
 	}
 }
 
