@@ -28,11 +28,12 @@ $table_config_r4_2 = "CREATE TABLE {$pref}config (".
 					"value TEXT,".
 					// "updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,".
 					"PRIMARY KEY (config_id),".
-					"UNIQUE KEY name (name)".
+					"UNIQUE KEY idx_name (name)".
 				") TYPE=MyISAM";
 
 // GROUPS
 $table_groups_r4_2 = "CREATE TABLE {$pref}groups (".
+					"group_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"name VARCHAR(100) NOT NULL,".
 					"description VARCHAR(255) NOT NULL,".
 					"moderator VARCHAR(25) NOT NULL,".
@@ -41,7 +42,8 @@ $table_groups_r4_2 = "CREATE TABLE {$pref}groups (".
 					"open TINYINT(1) UNSIGNED NOT NULL,".
 					"active TINYINT(1) UNSIGNED NOT NULL,".
 					// "special TINYINT(1) UNSIGNED NOT NULL,".
-					"PRIMARY KEY (name)".
+					"PRIMARY KEY (group_id),".
+					"UNIQUE KEY idx_name (name)".
 				") TYPE=MyISAM";
 
 // KEYWORDS
