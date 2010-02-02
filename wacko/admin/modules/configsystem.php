@@ -174,7 +174,7 @@ function admin_configsystem(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="allow_rawhtml"><strong>Global Support HTML:</strong><br />
+				<td class="label"><label for="allow_rawhtml"><strong>Global HTML Support:</strong><br />
 				<small>Use this option to open a potentially unsafe site.</small></label></td>
 				<td><input type="checkbox" id="allow_rawhtml" name="allow_rawhtml" value="1"<?php echo ( $engine->config['allow_rawhtml'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>

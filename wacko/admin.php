@@ -298,9 +298,11 @@ else if (!($_GET && $_POST))
 <!-- end page output -->
 </div>
 </div>
+<?php /*
 <div id="tabs">
 	<div class="controls"></div>
 </div>
+*/ ?>
 <div id="footer">System <a href="http://wackowiki.org">WackoWiki</a></div>
 
 <?php
