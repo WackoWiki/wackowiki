@@ -20,6 +20,49 @@ function array_to_str ($arr, $name="")
 	return $str;
 }
 
+function RandomSeed($length, $pwd_complexity)
+{
+	$chars_uc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$chars_lc = 'abcdefghijklmnopqrstuvwxyz';
+	$digits = '0123456789';
+	$symbols = '-_!@#$%^&*(){}[]|~';
+	$uc = 0;
+	$lc = 0;
+	$di = 0;
+	$sy = 0;
+
+	if ($pwd_complexity == 2) $sy = 100;
+
+	while ($uc == 0 || $lc == 0 || $di == 0 || $sy == 0) {
+		$seed = '';
+		for ($i = 0; $i < $length; $i++) {
+			$k = rand(0, $pwd_complexity);  //randomly choose what's next
+			if ($k == 0) {   //uppercase
+				$seed .= substr(str_shuffle($chars_uc), rand(0, sizeof($chars_uc) - 2), 1);
+				$uc++;
+			}
+			if ($k == 1) {   //lowercase
+				$seed .= substr(str_shuffle($chars_lc), rand(0, sizeof($chars_lc) - 2), 1);
+				$lc++;
+			}
+			if ($k == 2) {   //digits
+				$seed .= substr(str_shuffle($digits), rand(0, sizeof($digits) - 2), 1);
+				$di++;
+			}
+			if ($k == 3) {   //symbols
+				$seed .= substr(str_shuffle($symbols), rand(0, sizeof($symbols) - 2), 1);
+				$sy++;
+			}
+		}
+	}
+
+	return $seed;
+}
+
+if ( ( $config["system_seed"] == "") )
+	$config["system_seed"] = RandomSeed(20, 3);
+
+
 if ( ( $config["database_driver"] == "mysqli_legacy" ) && empty( $config["database_port"] ) )
 $config["database_port"] = $config["database_port"] = "3306";
 

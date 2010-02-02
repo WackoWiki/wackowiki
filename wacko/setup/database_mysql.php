@@ -35,7 +35,7 @@ $table_config = "CREATE TABLE {$pref}config (".
 
 $table_groups = "CREATE TABLE {$pref}groups (".
 					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"name VARCHAR(100) NOT NULL,".
+					"group_name VARCHAR(100) NOT NULL,".
 					"description VARCHAR(255) NOT NULL,".
 					"moderator VARCHAR(25) NOT NULL,".
 					"members TEXT NOT NULL,".
@@ -44,7 +44,7 @@ $table_groups = "CREATE TABLE {$pref}groups (".
 					"active TINYINT(1) UNSIGNED NOT NULL,".
 					// "special TINYINT(1) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (group_id),".
-					"UNIQUE KEY idx_name (name)".
+					"UNIQUE KEY idx_name (group_name)".
 				") TYPE=MyISAM";
 
 $table_keywords = "CREATE TABLE {$pref}keywords (".
