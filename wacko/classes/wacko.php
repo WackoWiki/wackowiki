@@ -3381,11 +3381,15 @@ class Wacko
 
 		if(isset($user["lang"]))
 		{
-			$lang =  $user["lang"];
+			$lang = $user["lang"];
+		}
+		else if (isset($this->config["multilanguage"]))
+		{
+			$lang = $this->UserAgentLanguage();
 		}
 		else
 		{
-			$lang = $this->UserAgentLanguage();
+			$lang = $this->config["language"];
 		}
 
 		if (isset($this->config[$what."_bookmarks"]) &&
