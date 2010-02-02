@@ -75,7 +75,7 @@ class Init
 	function Init()
 	{
 		error_reporting (E_ALL ^ E_NOTICE);
-		#error_reporting (E_ALL);
+		# error_reporting (E_ALL);
 
 		// start execution timer
 		$this->timer = $this->GetMicroTime();
@@ -279,7 +279,7 @@ class Init
 					"captcha_edit_page" => 1,
 					"captcha_registration" => 1,
 
-					"system_seed" => "01234567890123456789", // TODO: autogererate random one
+					"system_seed" => "", // installer autogererate random one
 					"recovery_password" => "",
 
 					"date_format" => "d.m.Y",
@@ -369,7 +369,7 @@ class Init
 
 				// retrieving usergroups data
 				/*
-				$wackoDBQuery = "SELECT name, members FROM {$this->config["table_prefix"]}groups";
+				$wackoDBQuery = "SELECT group_name, members FROM {$this->config["table_prefix"]}groups";
 				if ($result = query($this->dblink, $wackoDBQuery, 0))
 				{
 					while ($row = fetch_assoc($result))
