@@ -279,7 +279,7 @@ class Init
 					"captcha_edit_page" => 1,
 					"captcha_registration" => 1,
 
-					"system_seed" => "", // installer autogererate random one
+					"system_seed" => "", // installer autogenerate random one
 					"recovery_password" => "",
 
 					"date_format" => "d.m.Y",
