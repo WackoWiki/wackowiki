@@ -26,11 +26,11 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 
 $table_config = "CREATE TABLE {$pref}config (".
 					"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"name VARCHAR(100) NOT NULL DEFAULT '',".
+					"config_name VARCHAR(100) NOT NULL DEFAULT '',".
 					"value TEXT,".
 					// "updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,".
 					"PRIMARY KEY (config_id),".
-					"UNIQUE KEY idx_name (name)".
+					"UNIQUE KEY idx_config_name (config_name)".
 				") TYPE=MyISAM";
 
 $table_groups = "CREATE TABLE {$pref}groups (".
