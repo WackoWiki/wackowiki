@@ -353,12 +353,12 @@ class Init
 				$this->DBAL();
 
 				// retrieving configuration data
-				 $wackoDBQuery = "SELECT name, value FROM {$this->config["table_prefix"]}config";
+				 $wackoDBQuery = "SELECT config_name, value FROM {$this->config["table_prefix"]}config";
 				if ($result = query($this->dblink, $wackoDBQuery , 0))
 				{
 					while ($row = fetch_assoc($result))
 					{
-						$this->config[$row["name"]] = $row["value"];
+						$this->config[$row["config_name"]] = $row["value"];
 					}
 					free_result($result);
 				}
@@ -374,7 +374,7 @@ class Init
 				{
 					while ($row = fetch_assoc($result))
 					{
-						$this->config["aliases"][$row["name"]] = $row["members"];
+						$this->config["aliases"][$row["group_name"]] = $row["members"];
 					}
 					free_result($result);
 				}
