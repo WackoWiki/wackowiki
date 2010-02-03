@@ -45,6 +45,9 @@ small {
 sup, sub {
 	word-spacing: 1px;
 }
+.underline {
+	text-decoration:underline;
+}
 #content fieldset .toc1, #content fieldset .toc2, #content fieldset .toc3,
 #content fieldset .toc4, #content fieldset .toc5, #content fieldset .toc6,
 ul {

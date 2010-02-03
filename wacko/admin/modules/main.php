@@ -85,7 +85,7 @@ function admin_lock(&$engine, &$module)
 	<br />
 	<p>
 		Note: Before the administration of technical activities
-		<u>strongly</u> are encouraged to block access to the site!
+		<span class="underline">strongly</span> are encouraged to block access to the site!
 	</p>
 	<br />
 	<form action="admin.php" method="post" name="lock">
