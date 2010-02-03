@@ -204,13 +204,11 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 			<ul>
 			<li class="text submenu"><?php echo $module['lock']['cat']; ?>
 			<?php echo ( $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
-				? "\n<ul>\n<li><strong>"
+				? "\n<ul>\n<li class=\"active\">"
 				: "\n<ul>\n<li>" ); ?>
 			<a href="admin.php">
 			<?php echo $module['lock']['name']; ?></a>
-			<?php echo ( $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
-				? "</strong></li>\n"
-				: "</li>\n" );
+			<?php echo "</li>\n";
 
 			$category = $module['lock']['cat'];
 
@@ -233,12 +231,10 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 						? "</ul>\n</li>\n<li class=\"text submenu2\">".$row['cat']."<ul>\n"
 						: "");
 					echo ( $_REQUEST['mode'] == $row['mode']
-						? "<li><strong>"
+						? "<li class=\"active\">"
 						: "<li>" ); ?>
 					<a href="?mode=<?php echo $row['mode']; ?>" title="<?php echo $row['title']; ?>"><?php echo $row['name']; ?></a>
-					<?php echo ( $_REQUEST['mode'] == $row['mode']
-					? "</strong></li>\n"
-					: "</li>\n" );
+					<?php echo "</li>\n";
 				}
 				else
 				{
