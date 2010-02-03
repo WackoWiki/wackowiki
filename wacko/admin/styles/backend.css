@@ -432,12 +432,14 @@ div.menu {
 
 }
 #user_menu {
-		border-top: 1px solid #073D69;
+	border-top: 1px solid #073D69;
 	margin-top: -10px;
 	width: 150px;
 }
 
-
+.menu .active{
+	font-weight: bold;
+}
 
 /*	Page layout	*/
 
