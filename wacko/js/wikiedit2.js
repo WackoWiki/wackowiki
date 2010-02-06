@@ -9,7 +9,7 @@
 //   (c) Roman "Kukutz" Ivanov, Evgeny Nedelko, 2003                  //
 // Many thanks to Alexander Babaev, Sergey Kruglov, Evgeny Nedelko    //
 //             and Nikolay Jaremko                                    //
-// http://wackowiki.com/WikiEdit                                      //
+// http://wackowiki.org/Dev/Projects/WikiEdit                                      //
 //                                                                    //
 ////////////////////////////////////////////////////////////////////////
 
@@ -73,6 +73,8 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
  this.addButton("h1","Heading 1","'==','==',0,1");
  this.addButton("h2","Heading 2","'===','===',0,1");
  this.addButton("h3","Heading 3","'====','====',0,1");
+// this.addButton("h4","Heading 4","'=====','=====',0,1");
+// this.addButton("h5","Heading 5","'======','======',0,1");
  this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
  this.addButton("bold","Bold","'**','**'");
  this.addButton("italic","Italic","'//','//'");
@@ -663,7 +665,7 @@ WikiEdit.prototype.help = function ()
 {
  s =  "         WikiEdit 3.03 \n";
  s += "  (c) Roman Ivanov, 2003-2005   \n";
- s += "  http://wackowiki.com/WikiEdit \n";
+ s += "  http://wackowiki.org/Dev/Projects/WikiEdit \n";
  s += "\n";
  s += " Shortcuts:\n";
  s += " Ctrl+B - Bold\n";
