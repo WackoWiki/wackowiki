@@ -274,14 +274,14 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				// publish anonymously
 				if (($this->page && $this->HasAccess('write', '', GUEST)) || (!$this->page && $this->HasAccess('create', '', GUEST)))
 				{
-					$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".htmlspecialchars($this->tag)."\"".( $this->GetUserSetting("noid_pubs", 1) == "1" ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">Post anonymously without giving your name</label></small>";
+					$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".htmlspecialchars($this->tag)."\"".( $this->GetUserSetting("noid_pubs", 1) == "1" ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">".$this->GetTranslation("PostAnonymously")."</label></small>";
 					$output .= "<br />";
 				}
 
 				// watch a page
 				if ($this->page && $this->iswatched !== true)
 				{
-					$output .= "<input type=\"checkbox\" name=\"watchpage\" id=\"watchpage\" value=\"1\"".( $this->GetUserSetting("send_watchmail", 1) == "1" ? "checked=\"checked\"" : "" )." /> <small><label for=\"watchpage\">Notify me about new comments and changes of the page</label></small>";
+					$output .= "<input type=\"checkbox\" name=\"watchpage\" id=\"watchpage\" value=\"1\"".( $this->GetUserSetting("send_watchmail", 1) == "1" ? "checked=\"checked\"" : "" )." /> <small><label for=\"watchpage\">".$this->GetTranslation("NotifyMe")."</label></small>";
 				}
 			}
 			else
