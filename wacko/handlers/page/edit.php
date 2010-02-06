@@ -262,7 +262,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			}
 
 			// minor edit
-			if ($this->GetConfigValue("minor_edit") != 0)
+			if ($this->page && $this->GetConfigValue("minor_edit") != 0)
 			{
 				$output .= "<input id=\"minor_edit\" type=\"checkbox\" value=\"1\" name=\"minor_edit\"/>";
 				$output .= "<label for=\"minor_edit\">".$this->GetTranslation("EditMinor")."</label>";
@@ -282,6 +282,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				if ($this->page && $this->iswatched !== true)
 				{
 					$output .= "<input type=\"checkbox\" name=\"watchpage\" id=\"watchpage\" value=\"1\"".( $this->GetUserSetting("send_watchmail", 1) == "1" ? "checked=\"checked\"" : "" )." /> <small><label for=\"watchpage\">".$this->GetTranslation("NotifyMe")."</label></small>";
+					$output .= "<br />";
 				}
 			}
 			else
@@ -300,7 +301,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				}
 			}
 
-			$output .= $this->GetTranslation("Keywords").':<small><br /><br />'.substr(implode(' ', $_words), 6).'</small><br /><br />';
+			$output .= "<br />".$this->GetTranslation("Keywords").':<small><br /><br />'.substr(implode(' ', $_words), 6).'</small><br /><br />';
 		}
 		print($output);
 
@@ -343,7 +344,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 	}
 ?>
 		wE.init('postText','WikiEdit','edname-w','<?php echo $this->GetConfigValue("root_url");?>images/wikiedit/');
-		</script>
+		</script><br />
 		<input name="save" type="submit" value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
 		&nbsp;
 		<input name="preview" type="submit" value="<?php echo $this->GetTranslation("EditPreviewButton"); ?>" />
