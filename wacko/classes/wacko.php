@@ -4237,11 +4237,6 @@ class Wacko
 		if (!$tag) return false;
 
 		$this->Query(
-			"UPDATE {$this->config['table_prefix']}pages ".
-			"SET keywords = '' ".
-			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
-
-		$this->Query(
 			"DELETE k.* ".
 			"FROM {$this->config['table_prefix']}keywords_pages k ".
 				"LEFT JOIN ".$this->config["table_prefix"]."pages p ".
@@ -4641,10 +4636,6 @@ class Wacko
 				$this->Query(
 					"INSERT INTO {$this->config['table_prefix']}keywords_pages (keyword_id, page_id) ".
 					"VALUES ".implode(', ', $values));
-				$this->Query(
-					"UPDATE {$this->config['table_prefix']}pages ".
-					"SET keywords = '".quote($this->dblink, implode(' ', $set))."' ".
-					"WHERE page_id = '".quote($this->dblink, $page_id)."' ");
 			}
 			return true;
 		}
