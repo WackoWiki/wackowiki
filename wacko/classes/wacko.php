@@ -4537,8 +4537,8 @@ class Wacko
 		if (!is_numeric($level)) return false;
 
 		// check event level: do we have to log it?
-		if ((int)$this->config['log_min_level'] === -1 ||
-		((int)$this->config['log_min_level'] !== 0 &&
+		if ((int)$this->config['log_min_level'] === 0 ||
+		((int)$this->config['log_min_level'] !== 7 &&
 		$level > (int)$this->config['log_min_level']))
 		{
 			return true;
