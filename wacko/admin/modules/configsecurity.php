@@ -308,8 +308,8 @@ function admin_configsecurity(&$engine, &$module)
 				<small>The minimum priority of the events recorded in the log.</small></label></td>
 				<td>
 					<select style="width:200px;" id="log_min_level" name="log_min_level">
-						<option value="-1"<?php echo ( (int)$engine->config['log_min_level'] === -1 ? ' selected="selected"' : '' );?>>not keep a journal</option>
-						<option value="0"<?php echo ( (int)$engine->config['log_min_level'] === 0 ? ' selected="selected"' : '' );?>>record all</option>
+						<option value="0"<?php echo ( (int)$engine->config['log_min_level'] === 0 ? ' selected="selected"' : '' );?>>not keep a journal</option>
+						<option value="7"<?php echo ( (int)$engine->config['log_min_level'] === 7 ? ' selected="selected"' : '' );?>>record all</option>
 						<option value="6"<?php echo ( (int)$engine->config['log_min_level'] === 6 ? ' selected="selected"' : '' );?>>the minimum level</option>
 						<option value="5"<?php echo ( (int)$engine->config['log_min_level'] === 5 ? ' selected="selected"' : '' );?>>from low</option>
 						<option value="4"<?php echo ( (int)$engine->config['log_min_level'] === 4 ? ' selected="selected"' : '' );?>>on average</option>
