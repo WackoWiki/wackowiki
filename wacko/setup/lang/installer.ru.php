@@ -114,6 +114,7 @@ $lang = array(
 "InstallingPagesBegin" => "Добавление страниц по умолчанию",
 "InstallingPagesEnd" => "Добавление страниц по умолчанию завершено",
 "InstallingAdmin" => "Добавление пользователя-администратора",
+"InstallingAdminGroup" => "Adding Admins Group",
 "InstallingLogoImage" => "Добавление картинки логотипа",
 "InstallingConfigValues" => "Добавление параметров конфигурации",
 "ErrorInsertingPage" => "Ошибка вставки страницы <tt>%1</tt>",
