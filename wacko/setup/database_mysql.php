@@ -37,7 +37,7 @@ $table_groups = "CREATE TABLE {$pref}groups (".
 					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"group_name VARCHAR(100) NOT NULL,".
 					"description VARCHAR(255) NOT NULL,".
-					"moderator VARCHAR(25) NOT NULL,".
+					"moderator INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"members TEXT NOT NULL,".
 					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
 					"open TINYINT(1) UNSIGNED NOT NULL,".
