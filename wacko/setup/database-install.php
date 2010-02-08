@@ -32,6 +32,9 @@ print("         <h2>".$lang["TestingConfiguration"]."</h2>\n");
 
 // Generic Default Inserts
 $insert_admin = "INSERT INTO ".$config["table_prefix"]."users (user_name, password, email, signuptime, lang) VALUES ('".$config["admin_name"]."', md5('".$_POST["password"]."'), '".$config["admin_email"]."', NOW(), '".$config["language"]."')";
+// TODO: for Upgrade insert other aliases also in groups table
+// $config["aliases"] = array("Admins" => $config["admin_name"]);
+$insert_admin_group = "INSERT INTO ".$config["table_prefix"]."groups (group_name, description, moderator, members, created) VALUES ('Admins', '', '".$config["admin_email"]."', '".$config["admin_name"]."', NOW())";
 
 $insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, user_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config["table_prefix"]."users WHERE user_name = '".$config["admin_name"]."' LIMIT 1),'wacko4.gif', 'WackoWiki', NOW(), '1580', '108', '50', 'gif')";
 $insert_config = "INSERT INTO ".$config["table_prefix"]."config (config_id, config_name, value) VALUES
@@ -143,6 +146,7 @@ switch($config["database_driver"])
 					test(str_replace("%1","keywords_pages",$lang["CreatingTable"]), @mysql_query($table_keywords_pages, $dblink), str_replace("%1","keywords_pages",$lang["ErrorCreatingTable"]));
 
 					test($lang["InstallingAdmin"], @mysql_query($insert_admin, $dblink), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
+					test($lang["InstallingAdminGroup"], @mysql_query($insert_admin_group, $dblink), str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
 					print("            </ul>\n");
 					print("            <br />\n");
 					print("            <h2>".$lang["InstallingDefaultData"]."</h2>\n");
@@ -420,6 +424,7 @@ switch($config["database_driver"])
 								test(str_replace("%1","keywords_pages",$lang["CreatingTable"]), @mysqli_query($dblink, $table_keywords_pages), str_replace("%1","keywords_pages",$lang["ErrorCreatingTable"]));
 
 								test($lang["InstallingAdmin"], @mysqli_query($dblink, $insert_admin), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
+								test($lang["InstallingAdminGroup"], @mysqli_query($dblink, $insert_admin_group), str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
 								print("         </ul>\n");
 								print("         <br />\n");
 								print("         <h2>".$lang["InstallingDefaultData"]."</h2>\n");
@@ -695,6 +700,7 @@ switch($config["database_driver"])
 									testPDO(str_replace("%1","keywords_pages",$lang["CreatingTable"]), $table_keywords_pages, str_replace("%1","keywords_pages",$lang["ErrorCreatingTable"]));
 
 									testPDO($lang["InstallingAdmin"], $insert_admin, str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
+									testPDO($lang["InstallingAdminGroup"], $insert_admin_group, str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
 									print("         </ul>\n");
 									print("         <br />\n");
 									print("         <h2>".$lang["InstallingDefaultData"]."</h2>\n");

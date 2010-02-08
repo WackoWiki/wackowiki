@@ -114,6 +114,7 @@ $lang = array(
 "InstallingPagesBegin" => "Agregando Páginas por defecto",
 "InstallingPagesEnd" => "Fin de agregar páginas por defecto",
 "InstallingAdmin" => "Agregando usuario Administrador",
+"InstallingAdminGroup" => "Adding Admins Group",
 "InstallingLogoImage" => "Agregando Imágen de Logo",
 "InstallingConfigValues" => "Adding Config Values",
 "ErrorInsertingPage" => "Error al insertar <tt>%1</tt> página",

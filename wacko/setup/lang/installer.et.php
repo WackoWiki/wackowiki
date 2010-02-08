@@ -114,6 +114,7 @@ $lang = array(
 "InstallingPagesBegin" => "Adding Default Pages",
 "InstallingPagesEnd" => "Finished Adding Default Pages",
 "InstallingAdmin" => "Lisan adminni kontot",
+"InstallingAdminGroup" => "Adding Admins Group",
 "InstallingLogoImage" => "Adding Logo Image",
 "InstallingConfigValues" => "Adding Config Values",
 "ErrorInsertingPage" => "Error inserting <tt>%1</tt> page",

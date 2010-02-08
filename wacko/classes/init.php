@@ -368,7 +368,6 @@ class Init
 				}
 
 				// retrieving usergroups data
-				/*
 				$wackoDBQuery = "SELECT group_name, members FROM {$this->config["table_prefix"]}groups";
 				if ($result = query($this->dblink, $wackoDBQuery, 0))
 				{
@@ -382,7 +381,6 @@ class Init
 				{
 					die("Error loading WackoWiki usergroups data: database `groups` table is empty.");
 				}
-				*/
 
 				return $this->config;
 			}

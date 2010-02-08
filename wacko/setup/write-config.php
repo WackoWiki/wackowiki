@@ -71,11 +71,6 @@ if(!array_key_exists("wacko_version", $config))
 	$config["cookie_prefix"] = $config["table_prefix"];
 }
 
-if(!array_key_exists("aliases", $config))
-{
-	$config["aliases"] = array("Admins" => $config["admin_name"]);
-}
-
 // set version to current version, yay!
 $config["wacko_version"] = WACKO_VERSION;
 
