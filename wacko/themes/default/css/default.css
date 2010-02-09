@@ -858,6 +858,15 @@ td.form_left, th.form_left {
 	background: #CCFFCC;
 }
 
+.lined-strike td, .lined-strike th {
+	border-bottom: 1px dotted #BABFC7;
+	text-decoration: line-through;
+}
+
+.lined-strike:hover {
+	background: #FFCCCC;
+}
+
 .page_settings {
 	float: left;
 }
