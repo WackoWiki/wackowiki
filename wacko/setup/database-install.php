@@ -34,7 +34,8 @@ print("         <h2>".$lang["TestingConfiguration"]."</h2>\n");
 $insert_admin = "INSERT INTO ".$config["table_prefix"]."users (user_name, password, email, signuptime, lang) VALUES ('".$config["admin_name"]."', md5('".$_POST["password"]."'), '".$config["admin_email"]."', NOW(), '".$config["language"]."')";
 // TODO: for Upgrade insert other aliases also in groups table
 // $config["aliases"] = array("Admins" => $config["admin_name"]);
-$insert_admin_group = "INSERT INTO ".$config["table_prefix"]."groups (group_name, description, moderator, members, created) VALUES ('Admins', '', (SELECT user_id FROM ".$config["table_prefix"]."users WHERE user_name = '".$config["admin_name"]."' LIMIT 1), '".$config["admin_name"]."', NOW())";
+$insert_admin_group = "INSERT INTO ".$config["table_prefix"]."groups (group_name, description, moderator, created) VALUES ('Admins', '', (SELECT user_id FROM ".$config["table_prefix"]."users WHERE user_name = '".$config["admin_name"]."' LIMIT 1), NOW())";
+$insert_admin_group_member = "INSERT INTO ".$config["table_prefix"]."groups_members (group_id, user_id) VALUES ((SELECT group_id FROM ".$config["table_prefix"]."groups WHERE group_name = 'Admins' LIMIT 1), (SELECT user_id FROM ".$config["table_prefix"]."users WHERE user_name = '".$config["admin_name"]."' LIMIT 1))";
 
 $insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, user_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config["table_prefix"]."users WHERE user_name = '".$config["admin_name"]."' LIMIT 1),'wacko4.gif', 'WackoWiki', NOW(), '1580', '108', '50', 'gif')";
 $insert_config = "INSERT INTO ".$config["table_prefix"]."config (config_id, config_name, value) VALUES
@@ -113,6 +114,7 @@ switch($config["database_driver"])
 					test(str_replace("%1", "cache", $lang["DeletingTable"]), @mysql_query($table_cache_drop, $dblink), str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "log", $lang["DeletingTable"]), @mysql_query($table_log_drop, $dblink), str_replace("%1", "log", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "groups", $lang["DeletingTable"]), @mysql_query($table_groups_drop, $dblink), str_replace("%1", "groups", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "groups_members", $lang["DeletingTable"]), @mysql_query($table_groups_members_drop, $dblink), str_replace("%1", "groups_members", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "rating", $lang["DeletingTable"]), @mysql_query($table_rating_drop, $dblink), str_replace("%1", "rating", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "config", $lang["DeletingTable"]), @mysql_query($table_config_drop, $dblink), str_replace("%1", "config", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "keywords", $lang["DeletingTable"]), @mysql_query($table_keywords_drop, $dblink), str_replace("%1", "keywords", $lang["ErrorDeletingTable"]));
@@ -140,6 +142,7 @@ switch($config["database_driver"])
 					test(str_replace("%1","cache",$lang["CreatingTable"]), @mysql_query($table_cache, $dblink), str_replace("%1","cache",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","log",$lang["CreatingTable"]), @mysql_query($table_log, $dblink), str_replace("%1","log",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","groups",$lang["CreatingTable"]), @mysql_query($table_groups, $dblink), str_replace("%1","groups",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","groups_members",$lang["CreatingTable"]), @mysql_query($table_groups_members, $dblink), str_replace("%1","groups_members",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","rating",$lang["CreatingTable"]), @mysql_query($table_rating, $dblink), str_replace("%1","rating",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","config",$lang["CreatingTable"]), @mysql_query($table_config, $dblink), str_replace("%1","config",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","keywords",$lang["CreatingTable"]), @mysql_query($table_keywords, $dblink), str_replace("%1","keywords",$lang["ErrorCreatingTable"]));
@@ -147,6 +150,7 @@ switch($config["database_driver"])
 
 					test($lang["InstallingAdmin"], @mysql_query($insert_admin, $dblink), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 					test($lang["InstallingAdminGroup"], @mysql_query($insert_admin_group, $dblink), str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
+					test($lang["InstallingAdminGroup"], @mysql_query($insert_admin_group_member, $dblink), str_replace("%1","admin group member",$lang["ErrorAlreadyExists"]));
 					print("            </ul>\n");
 					print("            <br />\n");
 					print("            <h2>".$lang["InstallingDefaultData"]."</h2>\n");
@@ -224,6 +228,7 @@ switch($config["database_driver"])
 					test(str_replace("%1","config",$lang["CreatingTable"]), @mysql_query($table_config_r4_2, $dblink), str_replace("%1", "config", $lang["ErrorCreatingTable"]));
 
 					test(str_replace("%1","groups",$lang["CreatingTable"]), @mysql_query($table_groups_r4_2, $dblink), str_replace("%1", "groups", $lang["ErrorCreatingTable"]));
+					test(str_replace("%1","groups_members",$lang["CreatingTable"]), @mysql_query($table_groups_members_r4_2, $dblink), str_replace("%1", "groups_members", $lang["ErrorCreatingTable"]));
 
 					test(str_replace("%1","keywords",$lang["CreatingTable"]), @mysql_query($table_keywords_r4_2, $dblink), str_replace("%1", "keywords", $lang["ErrorCreatingTable"]));
 					test(str_replace("%1","keywords_pages",$lang["CreatingTable"]), @mysql_query($table_keywords_pages_r4_2, $dblink), str_replace("%1", "keywords_pages", $lang["ErrorCreatingTable"]));
@@ -391,6 +396,7 @@ switch($config["database_driver"])
 							test(str_replace("%1", "cache", $lang["DeletingTable"]), @mysqli_query($dblink, $table_cache_drop), str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "log", $lang["DeletingTable"]), @mysqli_query($dblink, $table_log_drop), str_replace("%1", "log", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "groups", $lang["DeletingTable"]), @mysqli_query($dblink, $table_groups_drop), str_replace("%1", "groups", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "groups_members", $lang["DeletingTable"]), @mysqli_query($dblink, $table_groups_members_drop), str_replace("%1", "groups_members", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "rating", $lang["DeletingTable"]), @mysqli_query($dblink, $table_rating_drop), str_replace("%1", "rating", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "config", $lang["DeletingTable"]), @mysqli_query($dblink, $table_config_drop), str_replace("%1", "config", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "keywords", $lang["DeletingTable"]), @mysqli_query($dblink, $table_keywords_drop), str_replace("%1", "keywords", $lang["ErrorDeletingTable"]));
@@ -418,6 +424,7 @@ switch($config["database_driver"])
 								test(str_replace("%1","cache",$lang["CreatingTable"]), @mysqli_query($dblink, $table_cache), str_replace("%1","cache",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","log",$lang["CreatingTable"]), @mysqli_query($dblink, $table_log), str_replace("%1","log",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","groups",$lang["CreatingTable"]), @mysqli_query($dblink, $table_groups), str_replace("%1","groups",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","groups_members",$lang["CreatingTable"]), @mysqli_query($dblink, $table_groups_members), str_replace("%1","groups_members",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","rating",$lang["CreatingTable"]), @mysqli_query($dblink, $table_rating), str_replace("%1","rating",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","config",$lang["CreatingTable"]), @mysqli_query($dblink, $table_config), str_replace("%1","config",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","keywords",$lang["CreatingTable"]), @mysqli_query($dblink, $table_keywords), str_replace("%1","keywords",$lang["ErrorCreatingTable"]));
@@ -425,6 +432,7 @@ switch($config["database_driver"])
 
 								test($lang["InstallingAdmin"], @mysqli_query($dblink, $insert_admin), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 								test($lang["InstallingAdminGroup"], @mysqli_query($dblink, $insert_admin_group), str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
+								test($lang["InstallingAdminGroup"], @mysqli_query($dblink, $insert_admin_group_member), str_replace("%1","admin group member",$lang["ErrorAlreadyExists"]));
 								print("         </ul>\n");
 								print("         <br />\n");
 								print("         <h2>".$lang["InstallingDefaultData"]."</h2>\n");
@@ -502,6 +510,7 @@ switch($config["database_driver"])
 								test(str_replace("%1","config",$lang["CreatingTable"]), @mysqli_query($dblink, $table_config_r4_2), str_replace("%1", "config", $lang["ErrorCreatingTable"]));
 
 								test(str_replace("%1","groups",$lang["CreatingTable"]), @mysqli_query($dblink, $table_groups_r4_2), str_replace("%1", "groups", $lang["ErrorCreatingTable"]));
+								test(str_replace("%1","groups_members",$lang["CreatingTable"]), @mysqli_query($dblink, $table_groups_members_r4_2), str_replace("%1", "groups_members", $lang["ErrorCreatingTable"]));
 
 								test(str_replace("%1","keywords",$lang["CreatingTable"]), @mysqli_query($dblink, $table_keywords_r4_2), str_replace("%1", "keywords", $lang["ErrorCreatingTable"]));
 								test(str_replace("%1","keywords_pages",$lang["CreatingTable"]), @mysqli_query($dblink, $table_keywords_pages_r4_2), str_replace("%1", "keywords_pages", $lang["ErrorCreatingTable"]));
@@ -670,6 +679,7 @@ switch($config["database_driver"])
 										testPDO(str_replace("%1", "cache", $lang["DeletingTable"]), $table_cache_drop, str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "log", $lang["DeletingTable"]), $table_log_drop, str_replace("%1", "log", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "groups", $lang["DeletingTable"]), $table_groups_drop, str_replace("%1", "groups", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "groups_members", $lang["DeletingTable"]), $table_groups_members_drop, str_replace("%1", "groups_members", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "rating", $lang["DeletingTable"]), $table_rating_drop, str_replace("%1", "rating", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "config", $lang["DeletingTable"]), $table_config_drop, str_replace("%1", "config", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "keywords", $lang["DeletingTable"]), $table_keywords_drop, str_replace("%1", "keywords", $lang["ErrorDeletingTable"]));
@@ -694,6 +704,7 @@ switch($config["database_driver"])
 									testPDO(str_replace("%1","cache",$lang["CreatingTable"]), $table_cache, str_replace("%1","cache",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","log",$lang["CreatingTable"]), $table_log, str_replace("%1","log",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","groups",$lang["CreatingTable"]), $table_groups, str_replace("%1","groups",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","groups_members",$lang["CreatingTable"]), $table_groups_members, str_replace("%1","groups_members",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","rating",$lang["CreatingTable"]), $table_rating, str_replace("%1","rating",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","config",$lang["CreatingTable"]), $table_config, str_replace("%1","config",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","keywords",$lang["CreatingTable"]), $table_keywords, str_replace("%1","keywords",$lang["ErrorCreatingTable"]));
@@ -701,6 +712,7 @@ switch($config["database_driver"])
 
 									testPDO($lang["InstallingAdmin"], $insert_admin, str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 									testPDO($lang["InstallingAdminGroup"], $insert_admin_group, str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
+									testPDO($lang["InstallingAdminGroup"], $insert_admin_group_member, str_replace("%1","admin group member",$lang["ErrorAlreadyExists"]));
 									print("         </ul>\n");
 									print("         <br />\n");
 									print("         <h2>".$lang["InstallingDefaultData"]."</h2>\n");

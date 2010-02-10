@@ -38,7 +38,7 @@ $table_groups = "CREATE TABLE {$pref}groups (".
 					"group_name VARCHAR(100) NOT NULL,".
 					"description VARCHAR(255) NOT NULL,".
 					"moderator INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"members TEXT NOT NULL,".
+					//"members TEXT NOT NULL,".
 					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
 					"open TINYINT(1) UNSIGNED NOT NULL,".
 					"active TINYINT(1) UNSIGNED NOT NULL,".
@@ -46,6 +46,12 @@ $table_groups = "CREATE TABLE {$pref}groups (".
 					"PRIMARY KEY (group_id),".
 					"UNIQUE KEY idx_name (group_name)".
 				") TYPE=MyISAM";
+
+$table_groups_members = "CREATE TABLE {$pref}groups_members (".
+					"group_id INTEGER(10) UNSIGNED NOT NULL,".
+					"user_id INTEGER(10) UNSIGNED NOT NULL,".
+					"UNIQUE KEY idx_groups_id (group_id, user_id)".
+				")ENGINE=MyISAM";
 
 $table_keywords = "CREATE TABLE {$pref}keywords (".
 					"keyword_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -238,6 +244,7 @@ $table_acls_drop = "DROP TABLE {$pref}acls";
 $table_cache_drop = "DROP TABLE {$pref}cache";
 $table_config_drop = "DROP TABLE {$pref}config";
 $table_groups_drop = "DROP TABLE {$pref}groups";
+$table_groups_members_drop = "DROP TABLE {$pref}groups_members";
 $table_keywords_drop = "DROP TABLE {$pref}keywords";
 $table_keywords_pages_drop = "DROP TABLE {$pref}keywords_pages";
 $table_links_drop = "DROP TABLE {$pref}links";
