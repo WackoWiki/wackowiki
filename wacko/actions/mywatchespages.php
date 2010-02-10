@@ -30,7 +30,7 @@ if ($user_id = $this->GetUserId())
 
 		$cnt = 0;
 		if ($pages = $this->LoadAll(
-			"SELECT p.tag AS pagetag, p.id AS page_id ".
+			"SELECT p.tag AS pagetag, p.page_id AS page_id ".
 			"FROM {$prefix}pages AS p ".
 			"LEFT JOIN {$prefix}watches AS w ".
 				"ON (p.page_id = w.page_id ".

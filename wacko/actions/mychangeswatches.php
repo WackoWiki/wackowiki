@@ -14,8 +14,8 @@ if ($user_id = $this->GetUserId())
 			"SELECT p.page_id, p.tag, p.modified, w.user_id ".
 			"FROM {$pref}pages AS p, {$pref}watches AS w ".
 			"WHERE p.page_id = w.page_id ".
-				"AND p.modified  > w.time ".
-				"AND w.user_id  = '".quote($this->dblink, $user_id)."' ".
+				"AND p.modified > w.time ".
+				"AND w.user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND p.user_id <> '".quote($this->dblink, $user_id)."' ".
 			"GROUP BY p.tag ".
 			"ORDER BY p.modified DESC, p.tag ASC ".
