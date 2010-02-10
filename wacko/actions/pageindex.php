@@ -41,7 +41,7 @@ if ($pages = $this->LoadAll(
 //  display navigation
 if ($pages_to_display)
 	echo "<span class=\"pagination\">{$pagination['text']}</span><br /><br />\n";
-	echo "<ul>\n";
+	echo "<ul class=\"ul_list\">\n";
 //  display collected data
 foreach ($pages_to_display as $page)
 {
