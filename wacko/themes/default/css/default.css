@@ -88,7 +88,7 @@ form input.submitinput {
 	font-weight: bold;
 }
 
-/* Debugging informations */
+/* Debugging informations*/
 .time {
 	color: #999999;
 	font-size: 9px;
@@ -102,6 +102,7 @@ form input.submitinput {
 .debug, #debug li {
 	font-size: 11px;
 	color: #888888;
+	/* font-family:"Lucida Console","Courier New",monospace; */
 }
 
 #header {
@@ -839,10 +840,16 @@ td.form_left, th.form_left {
 	border-bottom-style: none;
 }
 
-.ul_list , .ul_list ul, .revisions {
+/* lists */
+.ul_list, .revisions {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
+}
+
+.ul_list ul {
+	list-style-type: none;
+	padding-left: 20px;
 }
 
 .revisions li:hover {background: #CCFFCC}
@@ -908,4 +915,8 @@ div.newsarticle:hover {
 	border-bottom: 1px dotted #666666;
 	height: 25px;
 	margin-top: 20px;
+}
+
+.pagination {
+	float: right;
 }
