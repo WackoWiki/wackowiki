@@ -68,7 +68,7 @@ if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
 		echo "<a href=\"".$this->GetConfigValue("root_url")."xml/comments_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentCommentsXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
 	}
 
-	echo "<ul>\n";
+	echo "<ul class=\"ul_list\">\n";
 
 	foreach ($pages as $page)
 	{

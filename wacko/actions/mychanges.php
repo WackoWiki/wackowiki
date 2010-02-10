@@ -30,7 +30,7 @@ if ($user_id = $this->GetUserId())
 			"ORDER BY modified DESC, tag ASC ".
 			"LIMIT {$pagination['offset']}, $limit", 1))
 		{
-			echo "<ul>\n";
+			echo "<ul class=\"ul_list\">\n";
 
 			foreach ($pages as $page)
 			{
@@ -92,7 +92,7 @@ if ($user_id = $this->GetUserId())
 			"ORDER BY tag ASC, modified DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1))
 		{
-			echo "<ul>\n";
+			echo "<ul class=\"ul_list\">\n";
 
 			foreach ($pages as $page)
 			{
