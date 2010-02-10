@@ -37,7 +37,7 @@ $table_groups_r4_2 = "CREATE TABLE {$pref}groups (".
 					"group_name VARCHAR(100) NOT NULL,".
 					"description VARCHAR(255) NOT NULL,".
 					"moderator INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"members TEXT NOT NULL,".
+					// "members TEXT NOT NULL,".
 					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
 					"open TINYINT(1) UNSIGNED NOT NULL,".
 					"active TINYINT(1) UNSIGNED NOT NULL,".
@@ -45,6 +45,12 @@ $table_groups_r4_2 = "CREATE TABLE {$pref}groups (".
 					"PRIMARY KEY (group_id),".
 					"UNIQUE KEY idx_name (group_name)".
 				") TYPE=MyISAM";
+
+$table_groups_members_r4_2 = "CREATE TABLE {$pref}groups_members (".
+					"group_id INTEGER(10) UNSIGNED NOT NULL,".
+					"user_id INTEGER(10) UNSIGNED NOT NULL,".
+					"UNIQUE KEY idx_groups_id (group_id, user_id)".
+				")ENGINE=MyISAM";
 
 // KEYWORDS
 $table_keywords_r4_2 = "CREATE TABLE {$pref}keywords (".
