@@ -245,7 +245,7 @@ class Init
 					"allow_registration" => 1,
 					"disable_autosubscribe" => 0,
 
-					"standard_handlers" => "acls|addcomment|claim|diff|edit|latex|msword|new|print|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|settings|show|watch",
+					"standard_handlers" => "acls|addcomment|claim|diff|edit|keywords|latex|msword|new|print|rate|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|settings|show|watch",
 
 					"upload" => "admins",
 					"upload_images_only" => 0,
