@@ -51,6 +51,7 @@ function admin_configbasic(&$engine, &$module)
 				"`keep_deleted_time`	= '".quote($engine->dblink, (string)$_POST['keep_deleted_time'])."', ".
 				"`pages_purge_time`		= '".quote($engine->dblink, (string)$_POST['pages_purge_time'])."', ".
 				"`referrers_purge_time`	= '".quote($engine->dblink, (string)$_POST['referrers_purge_time'])."' ");
+				"`xml_sitemap`		= '".quote($engine->dblink, (int)$_POST['xml_sitemap'])."', ".
 		$engine->Log(1, 'Updated basic parameters  WackoWiki');
 		$engine->Redirect(rawurldecode($engine->href()));
 	}
@@ -136,11 +137,6 @@ function admin_configbasic(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
-					<br />
 					Language settings
 				</th>
 			</tr>
@@ -170,11 +166,6 @@ function admin_configbasic(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
-					<br />
 					File uploads
 				</th>
 			</tr>
@@ -201,11 +192,6 @@ function admin_configbasic(&$engine, &$module)
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
 					<br />
 					Toolbar
 				</th>
@@ -276,11 +262,6 @@ function admin_configbasic(&$engine, &$module)
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
 					<br />
 					Miscellaneous
 				</th>
@@ -354,6 +335,14 @@ function admin_configbasic(&$engine, &$module)
 				<td class="label"><label for="referrers_purge_time"><strong>Shelf life referrers:</strong><br />
 				<small>Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="referrers_purge_time" name="referrers_purge_time" value="<?php echo htmlspecialchars($engine->config['referrers_purge_time']);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="xml_sitemap"><strong>XML Sitemap:</strong><br />
+				<small>Create an XML file called "sitemap-wackowiki.xml" inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder.</small></label></td>
+				<td><input type="checkbox" id="xml_sitemap" name="xml_sitemap" value="1"<?php echo ( $engine->config['xml_sitemap'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 		</table>
 		<br />
