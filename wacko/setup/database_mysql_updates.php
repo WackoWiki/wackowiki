@@ -49,7 +49,7 @@ $table_groups_r4_2 = "CREATE TABLE {$pref}groups (".
 $table_groups_members_r4_2 = "CREATE TABLE {$pref}groups_members (".
 					"group_id INTEGER(10) UNSIGNED NOT NULL,".
 					"user_id INTEGER(10) UNSIGNED NOT NULL,".
-					"UNIQUE KEY idx_groups_id (group_id, user_id)".
+					"UNIQUE KEY idx_group_id (group_id, user_id)".
 				")ENGINE=MyISAM";
 
 // KEYWORDS
