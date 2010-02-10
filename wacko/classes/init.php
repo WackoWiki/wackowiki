@@ -170,6 +170,7 @@ class Init
 
 					"table_prefix" => "wacko_",
 					"cookie_prefix" => "wacko_",
+					"cookie_session" => 30, // cookie_expire_days
 					"session_prefix" => "wacko43_",
 
 					"root_page" => "HomePage",
