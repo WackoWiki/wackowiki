@@ -170,7 +170,6 @@ class Init
 
 					"table_prefix" => "wacko_",
 					"cookie_prefix" => "wacko_",
-					"cookie_session" => 30, // cookie_expire_days
 					"session_prefix" => "wacko43_",
 
 					"root_page" => "HomePage",
@@ -245,7 +244,7 @@ class Init
 					"allow_registration" => 1,
 					"disable_autosubscribe" => 0,
 
-					"standard_handlers" => "acls|addcomment|claim|diff|edit|keywords|latex|msword|new|print|rate|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|settings|show|watch",
+					"standard_handlers" => "acls|addcomment|claim|diff|edit|latex|msword|new|print|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|settings|show|watch",
 
 					"upload" => "admins",
 					"upload_images_only" => 0,
@@ -369,14 +368,38 @@ class Init
 				}
 
 				// retrieving usergroups data
-				$wackoDBQuery = "SELECT group_name, members FROM {$this->config["table_prefix"]}groups";
+				$wackoDBQuery = "SELECT
+                                    g.group_name,
+                                    u.user_name
+                                 FROM
+                                 {$this->config["table_prefix"]}groups_members gm 
+                                 INNER JOIN {$this->config["table_prefix"]}users u ON (gm.user_id = u.user_id)
+                                 INNER JOIN {$this->config["table_prefix"]}groups g ON (gm.groups_id = g.group_id)";
+                
+                $groups_array = array();
+                
 				if ($result = query($this->dblink, $wackoDBQuery, 0))
 				{
 					while ($row = fetch_assoc($result))
 					{
-						$this->config["aliases"][$row["group_name"]] = $row["members"];
+					    // Here we join our stuff in a single array
+                       array_push($groups_array, $row);
 					}
 					free_result($result);
+                    
+                    foreach ($groups_array as $user_group_pairs) 
+                    {
+                        // Then we make old fashioned UserName1\nUserName2\n lines for each group
+                        $groupz[$user_group_pairs['group_name']] .= $user_group_pairs['user_name'].'\n';
+                    }
+                    
+                    foreach ($groupz as $group => $users) 
+                    {
+                        // Finally we put the proper Group => UserName1\nUserName2\n to the config
+                        $this->config["aliases"][$group] = $users;      
+                    }
+                    
+                    
 				}
 				else
 				{
