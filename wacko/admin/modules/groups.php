@@ -251,7 +251,7 @@ function admin_groups(&$engine, &$module)
 		// filter by lang
 		if ($_GET['moderator'])
 		{
-			$where = "WHERE u.user_name = '".quote($engine->dblink, $_GET['moderator'])."' ";
+			$where = "WHERE g.moderator = '".quote($engine->dblink, $_GET['moderator'])."' ";
 		}
 
 		// entries to display
