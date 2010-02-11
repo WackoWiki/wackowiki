@@ -42,7 +42,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		{
 			$word = $this->LoadSingle(
 				"SELECT keyword_id, parent, keyword FROM {$this->config['table_prefix']}keywords ".
-				"WHERE keyword_id = '".quote($this->dblink, $_POST['id'])."'");
+				"WHERE keyword_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
 		}
 
 		// add item
@@ -51,7 +51,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			// do we have identical names?
 			if ($this->LoadSingle(
 			"SELECT keyword_id FROM {$this->config['table_prefix']}keywords ".
-			"WHERE keyword = '".quote($this->dblink, $_POST['newname'])."'"))
+			"WHERE keyword = '".quote($this->dblink, $_POST['newname'])."' LIMIT 1"))
 			{
 				$this->SetMessage($this->GetTranslation('KeywordsAlreadyExists'));
 				$_POST['change'] = $_POST['id'];
@@ -67,6 +67,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 						).
 						"lang = '".quote($this->dblink, $this->page['lang'])."', ".
 						"keyword = '".quote($this->dblink, $_POST['newname'])."'");
+
 				$this->SetMessage($this->GetTranslation('KeywordsAdded'));
 				$this->Log(4, "Created a new keyword //'{$_POST['newname']}'//");
 				unset($_POST['create']);
@@ -78,7 +79,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			// do we have identical names?
 			if ($this->LoadSingle(
 			"SELECT keyword_id FROM {$this->config['table_prefix']}keywords ".
-			"WHERE keyword = '".quote($this->dblink, $_POST['newname'])."' AND keyword_id <> '".quote($this->dblink, $_POST['id'])."'"))
+			"WHERE keyword = '".quote($this->dblink, $_POST['newname'])."' AND keyword_id <> '".quote($this->dblink, $_POST['id'])."' LIMIT 1"))
 			{
 				$this->SetMessage($this->GetTranslation('KeywordsAlreadyExists'));
 				$_POST['change'] = $_POST['id'];
@@ -89,7 +90,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				$this->Query(
 					"UPDATE {$this->config['table_prefix']}keywords ".
 					"SET keyword = '".quote($this->dblink, $_POST['newname'])."' ".
-					"WHERE keyword_id = '".quote($this->dblink, $_POST['id'])."'");
+					"WHERE keyword_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
+
 				$this->SetMessage($this->GetTranslation('KeywordsRenamed'));
 				$this->Log(4, "Keyword //'{$word['keyword']}'// renamed //'{$_POST['newname']}'//");
 			}
@@ -103,7 +105,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				$this->Query(
 					"UPDATE {$this->config['table_prefix']}keywords ".
 					"SET parent = 0 ".
-					"WHERE keyword_id = '".quote($this->dblink, $_POST['id'])."'");
+					"WHERE keyword_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
 				$this->SetMessage($this->GetTranslation('KeywordsUngrouped'));
 				$this->Log(4, "Keyword //'{$word['keyword']}'// debundled");
 			}
@@ -111,14 +113,14 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			{
 				$parent = $this->LoadSingle(
 					"SELECT parent, keyword FROM {$this->config['table_prefix']}keywords ".
-					"WHERE keyword_id = '".quote($this->dblink, $_POST['parent'])."'");
+					"WHERE keyword_id = '".quote($this->dblink, $_POST['parent'])."' LIMIT 1");
 
 				if ($parent['parent'] == 0)
 				{
 					$this->Query(
 						"UPDATE {$this->config['table_prefix']}keywords ".
 						"SET parent = '".quote($this->dblink, $_POST['parent'])."' ".
-						"WHERE keyword_id = '".quote($this->dblink, $_POST['id'])."'");
+						"WHERE keyword_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
 					$this->Query(
 						"UPDATE {$this->config['table_prefix']}keywords ".
 						"SET parent = 0 ".
@@ -186,7 +188,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			{
 				$word = $this->LoadSingle(
 					"SELECT keyword_id, parent, keyword FROM {$this->config['table_prefix']}keywords ".
-					"WHERE keyword_id = '".quote($this->dblink, $_POST['change'])."'");
+					"WHERE keyword_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1");
 				$group = ( $word['parent'] == 0 ? $word['keyword_id'] : $group = $word['parent'] );
 			}
 
@@ -210,7 +212,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		// rename item
 		else if (isset($_POST['rename']) && $_POST['change'])
 		{
-			if ($word = $this->LoadSingle("SELECT keyword FROM {$this->config['table_prefix']}keywords WHERE keyword_id = '".quote($this->dblink, $_POST['change'])."'"))
+			if ($word = $this->LoadSingle("SELECT keyword FROM {$this->config['table_prefix']}keywords WHERE keyword_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
 			{
 				echo $this->FormOpen('keywords');
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
@@ -229,12 +231,12 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		// (un)group item
 		else if (isset($_POST['ugroup']) && $_POST['change'])
 		{
-			if ($word = $this->LoadSingle("SELECT keyword FROM {$this->config['table_prefix']}keywords WHERE keyword_id = '".quote($this->dblink, $_POST['change'])."'"))
+			if ($word = $this->LoadSingle("SELECT keyword_id, keyword, lang FROM {$this->config['table_prefix']}keywords WHERE keyword_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
 			{
 				$parents = $this->LoadAll(
 					"SELECT keyword_id, keyword ".
 					"FROM {$this->config['table_prefix']}keywords ".
-					"WHERE parent = 0 ".
+					"WHERE parent = 0 AND lang = '".$word['lang']."' AND keyword_id != '".$word['keyword_id']."'".
 					"ORDER BY keyword ASC");
 
 				foreach ($parents as $parent)
@@ -262,7 +264,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		// delete item
 		if (isset($_POST['delete']) && $_POST['change'])
 		{
-			if ($word = $this->LoadSingle("SELECT keyword FROM {$this->config['table_prefix']}keywords WHERE keyword_id = '".quote($this->dblink, $_POST['change'])."'"))
+			if ($word = $this->LoadSingle("SELECT keyword FROM {$this->config['table_prefix']}keywords WHERE keyword_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
 			{
 				echo $this->FormOpen('keywords');
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
@@ -290,7 +292,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	{
 		foreach ($keywords as $id => $word)
 		{
-			if ($n++ > 0) echo '<hr />';
+			# if ($n++ > 0) echo '<hr />';
 			echo ($this->IsAdmin() || $this->config['owners_can_change_keywords'] == true ? '<input type="radio" name="change" value="'.$id.'" />' : '').'<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /> <label for="keyword'.$id.'"><strong>'.htmlspecialchars($word['keyword']).'</strong></label>'."\n";
 
 			if ($word['childs'] == true) foreach ($word['childs'] as $id => $word)
