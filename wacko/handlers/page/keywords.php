@@ -231,17 +231,17 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		// (un)group item
 		else if (isset($_POST['ugroup']) && $_POST['change'])
 		{
-			if ($word = $this->LoadSingle("SELECT keyword_id, keyword, lang FROM {$this->config['table_prefix']}keywords WHERE keyword_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
+			if ($word = $this->LoadSingle("SELECT keyword_id, parent, keyword, lang FROM {$this->config['table_prefix']}keywords WHERE keyword_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
 			{
 				$parents = $this->LoadAll(
 					"SELECT keyword_id, keyword ".
 					"FROM {$this->config['table_prefix']}keywords ".
-					"WHERE parent = 0 AND lang = '".$word['lang']."' AND keyword_id != '".$word['keyword_id']."'".
+					"WHERE parent = 0 AND lang = '".$word['lang']."' AND keyword_id != '".$word['keyword_id']."' ".
 					"ORDER BY keyword ASC");
 
 				foreach ($parents as $parent)
 				{
-					$options .= '<option value="'.$parent['keyword_id'].'">'.htmlspecialchars($parent['keyword']).'</option>';
+					$options .= '<option value="'.$parent['keyword_id'].'" '.($word['parent'] == $parent['keyword_id'] ? 'selected="selected"' : '').'>'.htmlspecialchars($parent['keyword']).'</option>';
 				}
 
 				echo $this->FormOpen('keywords');
