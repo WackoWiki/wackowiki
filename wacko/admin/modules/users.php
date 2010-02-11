@@ -96,20 +96,36 @@ function admin_users(&$engine, &$module)
 			$orderrevisions	= 'total_revisions_asc';
 		}
 
-		// set user ordering
+		// set user_name ordering
 		if ($_GET['order'] == 'user_asc')
 		{
-			$order		= 'ORDER BY user_name DESC ';		// we make level sorting
-			$orderuser	= 'user_desc';					// in reverse orber because
-		}												// higher level is denoted
-		else if ($_GET['order'] == 'user_desc')		// by lower value (e.g.
-		{												// 1 = critical, 2 = highest,
-			$order		= 'ORDER BY user_name ASC ';		// and so on)
+			$order		= 'ORDER BY user_name DESC ';
+			$orderuser	= 'user_desc';
+		}
+		else if ($_GET['order'] == 'user_desc')
+		{
+			$order		= 'ORDER BY user_name ASC ';
 			$orderuser	= 'user_asc';
 		}
 		else
 		{
 			$orderuser	= 'user_desc';
+		}
+
+		// set real_name ordering
+		if ($_GET['order'] == 'name_asc')
+		{
+			$order		= 'ORDER BY real_name DESC ';
+			$ordername	= 'name_desc';
+		}
+		else if ($_GET['order'] == 'name_desc')
+		{
+			$order		= 'ORDER BY real_name ASC ';
+			$ordername	= 'name_asc';
+		}
+		else
+		{
+			$ordername	= 'name_desc';
 		}
 
 		// filter by lang
@@ -144,13 +160,13 @@ function admin_users(&$engine, &$module)
 			<table border="0" cellspacing="5" cellpadding="3" class="formation">
 				<tr>
 					<th style="width:5px;">ID</th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderuser;  ?>">Username</a></th>
-					<th style="width:150px;"><a href="?mode=users&order=<?php echo $orderuser;  ?>">Realname</a></th>
+					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderuser; ?>">Username</a></th>
+					<th style="width:150px;"><a href="?mode=users&order=<?php echo $ordername; ?>">Realname</a></th>
 
 					<th>Email</th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderpages;  ?>">Pages</a></th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $ordercomments;  ?>">Comments</a></th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderrevisions;  ?>">Revisions</a></th>
+					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderpages; ?>">Pages</a></th>
+					<th style="width:20px;"><a href="?mode=users&order=<?php echo $ordercomments; ?>">Comments</a></th>
+					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderrevisions; ?>">Revisions</a></th>
 					<th style="width:20px;">Language</th>
 					<th style="width:20px;">Active</th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $signuptime; ?>">Signuptime</a></th>
