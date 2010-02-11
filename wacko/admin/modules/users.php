@@ -159,10 +159,10 @@ function admin_users(&$engine, &$module)
 			<?php echo '<div class="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '&nbsp;' ).'</div>'."\n"; ?>
 			<table border="0" cellspacing="5" cellpadding="3" class="formation">
 				<tr>
+					<th style="width:5px;"></th>
 					<th style="width:5px;">ID</th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderuser; ?>">Username</a></th>
 					<th style="width:150px;"><a href="?mode=users&order=<?php echo $ordername; ?>">Realname</a></th>
-
 					<th>Email</th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderpages; ?>">Pages</a></th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $ordercomments; ?>">Comments</a></th>
@@ -178,10 +178,10 @@ function admin_users(&$engine, &$module)
 			foreach ($users as $row)
 			{
 				echo '<tr class="lined">'."\n".
+						'<td valign="top" align="center"><input type="radio" name="change" value="'.$row['user_id'].'" /></td>'.
 						'<td valign="top" align="center">'.$row['user_id'].'</td>'.
 						'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=users&user_id='.$row['user_id'].'">'.$row['user_name'].'</a></strong></td>'.
 						'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$row['real_name'].'</td>'.
-
 						'<td valign="top">'.$row['email'].'</td>'.
 						'<td valign="top" align="center">'.$row['total_pages'].'</td>'.
 						'<td valign="top" align="center">'.$row['total_comments'].'</td>'.

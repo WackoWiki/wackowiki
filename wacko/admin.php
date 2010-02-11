@@ -257,6 +257,10 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 
 <div id="content">
 <div id="page">
+<?php
+// here we show messages
+if ($message = $engine->GetMessage()) echo "<div class=\"info\">$message</div>";
+?>
 <!-- begin page output -->
 
 <?php
