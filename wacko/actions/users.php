@@ -214,8 +214,8 @@ if ($_GET['profile'] == true)
 				"LIMIT {$pagination['offset']}, $limit");
 
 			// sorting and pagination
-			echo '<table><tr><td><small>'.( $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=date').'#documents">'.$this->GetTranslation('UsersDocsSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=name').'#documents">'.$this->GetTranslation('UsersDocsSortName').'</a>' ).'</small></td>'.
-				 '<td align="right"><small>'.$pagination['text']."</small></td></tr></table>\n";
+			echo '<small>'.( $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=date').'#documents">'.$this->GetTranslation('UsersDocsSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=name').'#documents">'.$this->GetTranslation('UsersDocsSortName').'</a>' ).'</small>'.
+				 " <span class=\"pagination\">".$pagination['text']."</span>\n";
 
 			// pages list itself
 			echo '<div>'."\n";
@@ -255,7 +255,7 @@ if ($_GET['profile'] == true)
 				"LIMIT {$pagination['offset']}, $limit");
 
 			// pagination
-			echo '<table><tr><td align="right"><small>'.$pagination['text']."</small></td></tr></table>\n";
+			echo "<span class=\"pagination\">".$pagination['text']."</span>\n";
 
 			// comments list itself
 			echo '<div>'."\n";
@@ -400,7 +400,7 @@ else
 	// pagination
 	if ($pagination['text'] == true)
 	{
-		echo '<tr><td colspan="5"><small><small>'.$pagination['text'].'</small></small></td></tr>'."\n";
+		echo "<tr><td colspan=\"5\"><span class=\"pagination\">".$pagination['text']."</span></td></tr>"."\n";
 	}
 
 	echo "</table>\n";
