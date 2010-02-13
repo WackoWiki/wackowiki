@@ -44,7 +44,7 @@ function admin_groups(&$engine, &$module)
 				"LIMIT 1");
 		}
 
-		// add item
+		// add group
 		if (isset($_POST['create']) && $_POST['newname'])
 		{
 			// do we have identical names?
@@ -99,7 +99,7 @@ function admin_groups(&$engine, &$module)
 				$engine->Log(4, "Group //'{$group['group_name']}'// renamed //'{$_POST['newname']}'//");
 			}
 		}
-		// delete item
+		// delete group
 		else if (isset($_POST['delete']) && $_POST['id'])
 		{
 			$engine->Query(
@@ -124,12 +124,12 @@ function admin_groups(&$engine, &$module)
 			echo "<form action=\"admin.php\" method=\"post\" name=\"groups\">";
 			echo "<input type=\"hidden\" name=\"mode\" value=\"groups\" />";
 			echo '<table class="formation">';
-			echo '<tr><td><label for="newname">'.$engine->GetTranslation('GroupsAdd').'</label> '.
-				'<input id="newname" name="newname" value="'.( $_POST['newname'] ? htmlspecialchars($_POST['newname']) : '' ).'" size="20" maxlength="100" /><br /> '.
-				'<label for="description">'.$engine->GetTranslation('GroupsDescription').'</label> '.
-				'<input id="description" name="description" value="'.( $_POST['description'] ? htmlspecialchars($_POST['description']) : '' ).'" size="50" maxlength="100" /><br /> '.
-				'<label for="moderator">'.$engine->GetTranslation('GroupsModerator').'</label> '.
-				'<select id="moderator" name="moderator">';?>
+			echo '<tr><td><label for="newname">'.$engine->GetTranslation('GroupsAdd').'</label></td>'.
+				'<td><input id="newname" name="newname" value="'.( $_POST['newname'] ? htmlspecialchars($_POST['newname']) : '' ).'" size="20" maxlength="100" /></td></tr>'.
+				'<tr><td><label for="description">'.$engine->GetTranslation('GroupsDescription').'</label></td>'.
+				'<td><input id="description" name="description" value="'.( $_POST['description'] ? htmlspecialchars($_POST['description']) : '' ).'" size="50" maxlength="100" /></td></tr>'.
+				'<tr><td><label for="moderator">'.$engine->GetTranslation('GroupsModerator').'</label></td>'.
+				'<td><select id="moderator" name="moderator">';?>
 					<option value=""></option>
 					<?php
 					if ($users = $engine->LoadUsers())
@@ -140,8 +140,8 @@ function admin_groups(&$engine, &$module)
 						}
 					}
 
-			echo '</select><br /><br />';
-			echo '<input id="submit" type="submit" name="create" value="'.$engine->GetTranslation('GroupsSaveButton').'" /> '.
+			echo '</select></td></tr>';
+			echo '<tr><td><br /><input id="submit" type="submit" name="create" value="'.$engine->GetTranslation('GroupsSaveButton').'" /> '.
 				'<input id="button" type="button" value="'.$engine->GetTranslation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 				'</td></tr>';
 			echo '</table><br />';
@@ -156,12 +156,12 @@ function admin_groups(&$engine, &$module)
 				echo "<input type=\"hidden\" name=\"mode\" value=\"groups\" />";
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
 				echo '<table class="formation">';
-				echo '<tr><td><label for="newname">'.$engine->GetTranslation('GroupsRename').' \'<tt>'.htmlspecialchars($group['group_name']).'</tt>\' in</label> '.
-					'<input id="newname" name="newname" value="'.( $_POST['newname'] ? htmlspecialchars($_POST['newname']) : htmlspecialchars($group['group_name']) ).'" size="20" maxlength="100" /><br /> '.
-					'<label for="newdescription">'.$engine->GetTranslation('GroupsDescription').'</label> '.
-					'<input id="newdescription" name="newdescription" value="'.( $_POST['newdescription'] ? htmlspecialchars($_POST['newdescription']) : htmlspecialchars($group['description']) ).'" size="50" maxlength="100" /><br /> '.
-					'<label for="moderator">'.$engine->GetTranslation('GroupsModerator').'</label> '.
-					'<select id="moderator" name="moderator">'.
+				echo '<tr><td><label for="newname">'.$engine->GetTranslation('GroupsRename').' \'<tt>'.htmlspecialchars($group['group_name']).'</tt>\' in</label></td>'.
+					'<td><input id="newname" name="newname" value="'.( $_POST['newname'] ? htmlspecialchars($_POST['newname']) : htmlspecialchars($group['group_name']) ).'" size="20" maxlength="100" /></td></tr>'.
+					'<tr><td><label for="newdescription">'.$engine->GetTranslation('GroupsDescription').'</label></td>'.
+					'<td><input id="newdescription" name="newdescription" value="'.( $_POST['newdescription'] ? htmlspecialchars($_POST['newdescription']) : htmlspecialchars($group['description']) ).'" size="50" maxlength="100" /></td></tr>'.
+					'<tr><td><label for="moderator">'.$engine->GetTranslation('GroupsModerator').'</label></td>'.
+					'<td><select id="moderator" name="moderator">'.
 					'<option value=""></option> ';
 
 					if ($users = $engine->LoadUsers())
@@ -172,8 +172,8 @@ function admin_groups(&$engine, &$module)
 						}
 					}
 
-				echo '</select><br /><br />'.
-					'<input id="submit" type="submit" name="rename" value="'.$engine->GetTranslation('GroupsSaveButton').'" /> '.
+				echo '</select></td></tr>'.
+					'<tr><td><br /><input id="submit" type="submit" name="rename" value="'.$engine->GetTranslation('GroupsSaveButton').'" /> '.
 					'<input id="button" type="button" value="'.$engine->GetTranslation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 					'<br /><small>'.$engine->GetTranslation('GroupsRenameInfo').'</small>'.
 					'</td></tr>';
