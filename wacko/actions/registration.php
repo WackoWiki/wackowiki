@@ -143,6 +143,7 @@ else if ($_POST["action"] == "login")
 			{
 				$confirm = md5($password.mt_rand().time().mt_rand().$email.mt_rand());
 				$more = $this->ComposeOptions(array(
+					"theme" => $this->GetConfigValue("theme"),
 					"send_watchmail" => "1",
 				));
 
