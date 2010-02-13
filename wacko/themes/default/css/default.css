@@ -867,7 +867,7 @@ td.form_left, th.form_left {
 
 .lined-strike td, .lined-strike th {
 	border-bottom: 1px dotted #BABFC7;
-	text-decoration: line-through;
+	/* text-decoration: line-through; */
 }
 
 .lined-strike:hover {
