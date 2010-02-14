@@ -396,8 +396,9 @@ class Init
 
 					foreach ($groupz as $group => $users)
 					{
-						// Finally we put the proper Group => UserName1\nUserName2\n to the config
-						$this->config["aliases"][$group] = $users;
+						// Finally we put the proper Group => UserName1\nUserName2\n to the config  
+                        // when we make trim($users, '\n') we get UserName1\nUserName2 without trailing '\n'
+						$this->config["aliases"][$group] = trim($users,'\n');
 					}
 
 
