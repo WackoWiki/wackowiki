@@ -24,9 +24,6 @@ h1 {
 }
 h2 {
 	font-size: 17px;
-	background-image: url(/images/openSpace/page_header_fade.gif);
-	background-repeat: no-repeat;
-	background-position: top left;
 	margin-top: 30px;
 	padding-top: 3px;
 }
@@ -51,7 +48,7 @@ sup, sub {
 #content fieldset .toc1, #content fieldset .toc2, #content fieldset .toc3,
 #content fieldset .toc4, #content fieldset .toc5, #content fieldset .toc6,
 ul {
-	list-style-image: url(/images/openSpace/page_list_bullet.gif);
+	
 }
 
 
@@ -165,9 +162,6 @@ textarea {
 	margin-left: 20px;
 	margin-right: 20px;
 	height: 20px;
-	background-image: url(/images/openSpace/globe_top.gif);
-	background-repeat: no-repeat;
-	background-position: bottom left;
 }
 	#path a {
 		color: #333333;
@@ -193,17 +187,11 @@ textarea {
 	height: 60px;
 }
 	#pane div.left {
-		background-image: url(/images/openSpace/pane_left.gif);
-		background-repeat: no-repeat;
-		background-position: top left;
 		width: 20px;
 		height: 60px;
 		float: left;
 	}
 	#pane div.middle {
-		background-image: url(/images/openSpace/globe_middle.gif);
-		background-repeat: no-repeat;
-		background-position: top left;
 		min-width: 153px;
 		height: 60px;
 		float: left;
@@ -215,9 +203,6 @@ textarea {
 			line-height: 18px;
 			text-align: center;
 			white-space: normal;
-			background-image: url(/images/openSpace/pane_bar_title.gif);
-			background-repeat: no-repeat;
-			background-position: 153px 29px;
 			margin: 0px;
 			padding-top: 13px;
 			width: 153px;
@@ -231,9 +216,6 @@ textarea {
 		padding-left: 15px;
 		padding-top: 2px;
 		height: 30px;
-		background-image: url(/images/openSpace/pane_bar_nav.gif);
-		background-repeat: no-repeat;
-		background-position: bottom left;
 		float: left;
 	}
 		#nav a {
@@ -306,10 +288,6 @@ textarea {
 			color: #EDEDED;
 			font-weight: bold;
 			text-decoration: none;
-			background-color: #5D94B2;
-			background-image: url(/images/openSpace/pane_section_inactive.gif);
-			background-repeat: repeat-x;
-			background-position: bottom left;
 			margin-left: 5px;
 			padding-left: 5px;
 			padding-right: 5px;
@@ -318,37 +296,21 @@ textarea {
 		#sections a:hover {
 			color: #FFFFFF;
 			text-decoration: none;
-			background-color: #7D9BAB;
-			background-image: url(/images/openSpace/pane_section_active.gif);
-			background-repeat: repeat-x;
-			background-position: bottom left;
 			border-bottom: 3px solid #B00202;
 		}
 		#sections a:active {
 			color: #FFFFFF;
 			text-decoration: none;
-			background-color: #7D9BAB;
-			background-image: url(/images/openSpace/pane_section_active.gif);
-			background-repeat: repeat-x;
-			background-position: bottom left;
 			border-bottom: 3px solid #FF0000;
 		}
 #shadow {
-	background-image: url(/images/openSpace/pane_shadow.gif);
-	background-repeat: repeat-x;
-	background-position: top left;
 	height: 20px;
 }
 	#shadow div.bottom {
-		background-image: url(/images/openSpace/globe_bottom.gif);
-		background-repeat: no-repeat;
-		background-position: top left;
 		margin-left: 20px;
 		width: 153px;
 		height: 20px;
 	}
-
-
 
 /*	Pop-up menus	*/
 
