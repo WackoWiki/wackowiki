@@ -200,7 +200,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_name VARCHAR(80) NOT NULL DEFAULT '',".
 					"real_name VARCHAR(80) NOT NULL DEFAULT '',".
-					"password VARCHAR(32) NOT NULL DEFAULT '',".
+					"password VARCHAR(40) NOT NULL DEFAULT '',".
 					"email VARCHAR(50) NOT NULL DEFAULT '',".
 					"enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"motto TEXT NOT NULL,".
