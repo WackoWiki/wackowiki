@@ -1,0 +1,169 @@
+
+/*	Basic tags	*/
+
+h1, h2, h3, h4, h5, h6 {
+	color: #000000;
+}
+h1 {
+	font-size: 19px;
+}
+h2 {
+	font-size: 17px;
+	border-top-width: 2px;
+	border-top-style: solid;
+	border-top-color: #000000;
+}
+h3 {
+	font-size: 17px;
+}
+h4 {
+	font-size: 15px;
+}
+h5, h6 {
+	font-size: 14px;
+}
+ul {
+	list-style-type: square;
+}
+
+
+
+/*	Main container ID style	*/
+
+#print {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #000000;
+	background-color: #FFFFFF;
+	letter-spacing: 1px;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+
+
+/*	Header layout	*/
+
+#header {
+	font-family: "Lucida Console", "Courier New", monospace;
+	font-size: 10px;
+}
+	#header .container {
+		padding-left: 30px;
+		padding-right: 30px;
+		padding-bottom: 5px;
+		margin-bottom: 20px;
+		border-bottom: 6px solid #000000;
+	}
+	#header h1 {
+		font-size: 27px;
+		margin-top: 0px;
+	}
+	#header .top {
+		background-image: url(./../images/print/min_shield_top.gif);
+		background-position: 102px 100%;
+		background-repeat: no-repeat;
+		height: 12px;
+		padding-left: 195px;
+	}
+	#header .middle {
+		background-color: #000000;
+		background-image: url(./../images/print/min_logo.gif);
+		background-position: 30px 0%;
+		background-repeat: no-repeat;
+		height: 50px;
+	}
+	#header .bottom {
+		background-image: url(./../images/print/min_shield_bot.gif);
+		background-position: 102px 0%;
+		background-repeat: no-repeat;
+		height: 25px;
+		padding-top: 1px;
+		padding-left: 195px;
+	}
+
+
+
+/*	Content layout	*/
+
+#content {
+	font-size: 14px;
+	line-height: 18px;
+	text-align: justify;
+}
+
+
+
+/*	Footer layout	*/
+
+#footer {
+	font-size: 11px;
+	line-height: 11px;
+	text-align: center;
+	padding-top: 5px;
+	margin-top: 20px;
+	border-top: 6px solid #000000;
+}
+
+
+
+/*	Common styles	*/
+
+#content, #footer {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+
+
+/*	Link styles	*/
+
+#header a, #footer a {
+	color: #000000;
+	text-decoration: none;
+}
+#header a:hover, #footer a:hover {
+	color: #000000;
+	text-decoration: underline;
+}
+
+#content a {
+	color: #000000;
+	text-decoration: underline;
+}
+#content a:hover {
+	color: #999999;
+	text-decoration: underline;
+}
+
+#content a img {
+/*	display: none;*/
+}
+
+
+
+/*	Altered styles	*/
+
+#print .email1, #print .email2 {
+	color: #666666;
+}
+#print .mark {
+	color: #333333;
+	background-color: #EDEDED;
+	border-color: #333333;	
+}
+#print .cite, #print .cl-grey, #print .cl-green , #print .cl-blue {
+	color: #666666;
+}
+#print .nb .sign, #print .nb .text, #print .fyi .sign, #print .fyi .text {
+	color: #333333;
+	border-color: #333333;
+}
+#print .missingpage {
+	color: #666666;
+	border-bottom: 1px dashed #666666;
+}
+#print .code {
+	background-color: #FFFFFF;
+	border: 2px solid #000000;
+	width: 100%;
+}
