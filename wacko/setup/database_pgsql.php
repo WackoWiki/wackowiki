@@ -90,7 +90,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"user_id serial,".
 					"name character varying(80) NOT NULL DEFAULT '',".
 					"real_name character varying(80) NOT NULL DEFAULT '',".
-					"\"password\" character varying(32) NOT NULL DEFAULT '',".
+					"\"password\" character varying(40) NOT NULL DEFAULT '',".
 					"email character varying(50) NOT NULL DEFAULT '',".
 					"motto text NOT NULL DEFAULT '',".
 					"revisioncount integer NOT NULL DEFAULT 20,".
