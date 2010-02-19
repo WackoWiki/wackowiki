@@ -83,7 +83,7 @@ $table_log = "CREATE TABLE {$pref}log (".
 $table_referrers = "CREATE TABLE {$pref}referrers (".
 						"page_id integer NOT NULL DEFAULT 0,".
 						"referrer character varying(150) NOT NULL DEFAULT '', ".
-						"\"time\" timestamp without time zone NOT NULL DEFAULT now()".
+						"\"referrer_time\" timestamp without time zone NOT NULL DEFAULT now()".
 					") WITH (OIDS=FALSE);";
 
 $table_users = "CREATE TABLE {$pref}users (".
@@ -113,7 +113,7 @@ $table_watches = "CREATE TABLE {$pref}watches (".
 					"watch_id serial,".
 					"page_id integer NOT NULL DEFAULT 0,".
 					"user_id integer NOT NULL DEFAULT 0,".
-					"\"time\" timestamp without time zone NOT NULL DEFAULT now(),".
+					"\"watch_time\" timestamp without time zone NOT NULL DEFAULT now(),".
 					"CONSTRAINT pk_watches_id PRIMARY KEY (watch_id)".
 				") WITH (OIDS=FALSE);";
 
@@ -136,7 +136,7 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 					"name character varying(32) NOT NULL DEFAULT '',".
 					"method character varying(20) NOT NULL DEFAULT '',".
 					"query character varying(100) NOT NULL DEFAULT '',".
-					"\"time\" timestamp without time zone NOT NULL DEFAULT now(),".
+					"\"cache_time\" timestamp without time zone NOT NULL DEFAULT now(),".
 					"CONSTRAINT pk_cache_name PRIMARY KEY (name)".
 				") WITH (OIDS=FALSE);";
 

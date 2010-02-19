@@ -47,12 +47,12 @@ function admin_systemlog(&$engine, &$module)
 	// set time ordering
 	if ($_GET['order'] == 'time_asc')
 	{
-		$order		= 'ORDER BY l.time ASC ';
+		$order		= 'ORDER BY l.log_time ASC ';
 		$ordertime	= 'time_desc';
 	}
 	else if ($_GET['order'] == 'time_desc')
 	{
-		$order		= 'ORDER BY l.time DESC ';
+		$order		= 'ORDER BY l.log_time DESC ';
 		$ordertime	= 'time_asc';
 	}
 	else
@@ -101,7 +101,7 @@ function admin_systemlog(&$engine, &$module)
 	$pagination	= $engine->Pagination($count['n'], $limit, 'p', 'mode=systemlog&order='.htmlspecialchars($_GET['order']), '', 'admin.php');
 
 	$log = $engine->LoadAll(
-		"SELECT l.log_id, l.time, l.level, l.message, u.user_name as user, l.ip ".
+		"SELECT l.log_id, l.log_time, l.level, l.message, u.user_name as user, l.ip ".
 		"FROM {$engine->config['table_prefix']}log l ".
 			"LEFT JOIN {$engine->config['table_prefix']}users u ON (l.user_id = u.user_id) ".
 		( $where ? $where : 'WHERE l.level <= '.(int)$level.' ' ).
@@ -172,7 +172,7 @@ function admin_systemlog(&$engine, &$module)
 
 			echo '<tr class="lined">'."\n".
 					'<td valign="top" align="center">'.$row['log_id'].'</td>'.
-					'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['time'])).'</small></td>'.
+					'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['log_time'])).'</small></td>'.
 					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$row['level'].'</td>'.
 					'<td valign="top">'.$engine->Format($row['message'], 'post_wacko').'</td>'.
 					'<td valign="top" align="center"><small>'.

@@ -291,6 +291,7 @@ switch($config["database_driver"])
 					test(str_replace("%1","watches",$lang["AlterTable"]), @mysql_query($alter_watches_r4_2_3, $dblink), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","watches",$lang["AlterTable"]), @mysql_query($alter_watches_r4_2_4, $dblink), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","watches",$lang["AlterTable"]), @mysql_query($alter_watches_r4_2_5, $dblink), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
+					test(str_replace("%1","watches",$lang["AlterTable"]), @mysql_query($alter_watches_r4_2_6, $dblink), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
 
 					// rename
 					test(str_replace("%1","watches",$lang["AlterTable"]), @mysql_query($rename_watches_r4_2, $dblink), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
@@ -298,6 +299,7 @@ switch($config["database_driver"])
 					test(str_replace("%1","rating",$lang["CreatingTable"]), @mysql_query($table_rating_r4_2, $dblink), str_replace("%1", "rating", $lang["ErrorCreatingTable"]));
 
 					test(str_replace("%1","referrers",$lang["AlterTable"]), @mysql_query($alter_referrers_r4_2, $dblink), str_replace("%1", "referrers", $lang["ErrorAlteringTable"]));
+					test(str_replace("%1","referrers",$lang["AlterTable"]), @mysql_query($alter_referrers_r4_2_1, $dblink), str_replace("%1", "referrers", $lang["ErrorAlteringTable"]));
 
 					test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r4_2_3, $dblink), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","revisions",$lang["AlterTable"]), @mysql_query($alter_revisions_r4_2_4, $dblink), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
@@ -575,6 +577,7 @@ switch($config["database_driver"])
 								test(str_replace("%1","watches",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watches_r4_2_3), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","watches",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watches_r4_2_4), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","watches",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watches_r4_2_5), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
+								test(str_replace("%1","watches",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watches_r4_2_6), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
 
 								// rename
 								test(str_replace("%1","watches",$lang["AlterTable"]), @mysqli_query($dblink, $rename_watches_r4_2), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
@@ -582,6 +585,7 @@ switch($config["database_driver"])
 								test(str_replace("%1","rating",$lang["CreatingTable"]), @mysqli_query($dblink, $table_rating_r4_2), str_replace("%1", "rating", $lang["ErrorCreatingTable"]));
 
 								test(str_replace("%1","referrers",$lang["AlterTable"]), @mysqli_query($dblink, $alter_referrers_r4_2), str_replace("%1", "referrers", $lang["ErrorAlteringTable"]));
+								test(str_replace("%1","referrers",$lang["AlterTable"]), @mysqli_query($dblink, $alter_referrers_r4_2_1), str_replace("%1", "referrers", $lang["ErrorAlteringTable"]));
 
 								test(str_replace("%1","revisions",$lang["AlterTable"]), @mysqli_query($dblink, $alter_revisions_r4_2_3), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","revisions",$lang["AlterTable"]), @mysqli_query($dblink, $alter_revisions_r4_2_4), str_replace("%1", "revisions", $lang["ErrorAlteringTable"]));

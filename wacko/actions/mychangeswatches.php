@@ -14,7 +14,7 @@ if ($user_id = $this->GetUserId())
 			"SELECT p.page_id, p.tag, p.modified, w.user_id ".
 			"FROM {$pref}pages AS p, {$pref}watches AS w ".
 			"WHERE p.page_id = w.page_id ".
-				"AND p.modified > w.time ".
+				"AND p.modified > w.watch_time ".
 				"AND w.user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND p.user_id <> '".quote($this->dblink, $user_id)."' ".
 			"GROUP BY p.tag ".
@@ -26,7 +26,7 @@ if ($user_id = $this->GetUserId())
 		foreach ($pages as $page)
 			$this->Query(
 				"UPDATE {$this->config['table_prefix']}watches ".
-				"SET time = NOW() ".
+				"SET watch_time = NOW() ".
 				"WHERE page_id = '".quote($this->dblink, $page['page_id'])."' ".
 					"AND user_id = '".quote($this->dblink, $user_id)."'");
 		$this->Redirect($this->href('', '', 'mode=mychangeswatches').'#list');

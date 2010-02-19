@@ -3537,7 +3537,7 @@ class Wacko
 		{
 			$this->Query(
 				"DELETE FROM ".$this->config["table_prefix"]."referrers ".
-				"WHERE time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
+				"WHERE referrer_time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
 			$this->Query("UPDATE {$this->config['table_prefix']}config SET value = '".time()."' WHERE config_name = 'maint_last_refs'");
 
@@ -3586,7 +3586,7 @@ class Wacko
 		{
 			$this->Query(
 				"DELETE FROM {$this->config["table_prefix"]}log ".
-				"WHERE time < DATE_SUB( NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY )");
+				"WHERE log_time < DATE_SUB( NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY )");
 
 			$this->Query("UPDATE {$this->config['table_prefix']}config SET value = '".time()."' WHERE config_name = 'maint_last_log'");
 
@@ -3602,7 +3602,7 @@ class Wacko
 				// clear from db
 				$this->Query(
 					"DELETE FROM ".$this->config["table_prefix"]."cache ".
-					"WHERE time < DATE_SUB( NOW(), INTERVAL '".quote($this->dblink, $ttl)."' SECOND )");
+					"WHERE cache_time < DATE_SUB( NOW(), INTERVAL '".quote($this->dblink, $ttl)."' SECOND )");
 
 				// delete from fs
 				clearstatcache();

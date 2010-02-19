@@ -19,9 +19,9 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 					"name VARCHAR(32) NOT NULL,".
 					"method VARCHAR(20) NOT NULL,".
 					"query VARCHAR(100) NOT NULL,".
-					"time TIMESTAMP NOT NULL,".
+					"cache_time TIMESTAMP NOT NULL,".
 					"INDEX (name),".
-					"KEY timestamp (time)".
+					"KEY timestamp (cache_time)".
 				") TYPE=MyISAM";
 
 $table_config = "CREATE TABLE {$pref}config (".
@@ -81,7 +81,7 @@ $table_links = "CREATE TABLE {$pref}links (".
 
 $table_log = "CREATE TABLE {$pref}log (".
 					"log_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"time TIMESTAMP NOT NULL,".
+					"log_time TIMESTAMP NOT NULL,".
 					"level TINYINT(1) NOT NULL,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"ip VARCHAR(15) NOT NULL,".
@@ -90,7 +90,7 @@ $table_log = "CREATE TABLE {$pref}log (".
 					"KEY idx_level (level),".
 					"KEY idx_user_id (user_id),".
 					"KEY idx_ip (ip),".
-					"KEY idx_time (time)".
+					"KEY idx_time (log_time)".
 				") TYPE=MyISAM";
 
 $table_pages = "CREATE TABLE {$pref}pages (".
@@ -134,7 +134,7 @@ $table_rating = "CREATE TABLE {$pref}rating (".
 					"page_id int(10) UNSIGNED NOT NULL,".
 					"value INT(11) NOT NULL,".
 					"voters INT(10) UNSIGNED NOT NULL,".
-					"time TIMESTAMP NOT NULL,".
+					"rating_time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (page_id),".
 					"KEY idx_voters_rate (voters)".
 				") TYPE=MyISAM";
@@ -142,9 +142,9 @@ $table_rating = "CREATE TABLE {$pref}rating (".
 $table_referrers = "CREATE TABLE {$pref}referrers (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"referrer CHAR(150) NOT NULL DEFAULT '',".
-					"time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"referrer_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"KEY idx_page_id (page_id),".
-					"KEY idx_time (time)".
+					"KEY idx_referrer_time (referrer_time)".
 				") TYPE=MyISAM";
 
 $table_revisions = "CREATE TABLE {$pref}revisions (".
@@ -231,7 +231,7 @@ $table_watches = "CREATE TABLE {$pref}watches (".
 					"watch_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"time TIMESTAMP NOT NULL,".
+					"watch_time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (watch_id)".
 				") TYPE=MyISAM";
 
