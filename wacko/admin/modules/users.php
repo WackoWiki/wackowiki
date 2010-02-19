@@ -61,7 +61,7 @@ function admin_users(&$engine, &$module)
 			{
 				$engine->Query(
 					"INSERT INTO {$engine->config['table_prefix']}users SET ".
-						"signuptime		= NOW(), ".
+						"signup_time		= NOW(), ".
 						"email	= '".quote($engine->dblink, $_POST['email'])."', ".
 						"lang			= '".quote($engine->dblink, (int)$_POST['lang'])."', ".
 						"user_name		= '".quote($engine->dblink, $_POST['newname'])."'");
@@ -212,20 +212,20 @@ function admin_users(&$engine, &$module)
 	}
 	else
 	{
-		// set signuptime ordering
+		// set signup_time ordering
 		if ($_GET['order'] == 'signup_asc')
 		{
-			$order		= 'ORDER BY signuptime ASC ';
-			$signuptime	= 'signup_desc';
+			$order		= 'ORDER BY signup_time ASC ';
+			$signup_time	= 'signup_desc';
 		}
 		else if ($_GET['order'] == 'signup_desc')
 		{
-			$order		= 'ORDER BY signuptime DESC ';
-			$signuptime	= 'signup_asc';
+			$order		= 'ORDER BY signup_time DESC ';
+			$signup_time	= 'signup_asc';
 		}
 		else
 		{
-			$signuptime	= 'signup_asc';
+			$signup_time	= 'signup_asc';
 		}
 
 		// set total_pages ordering
@@ -350,7 +350,7 @@ function admin_users(&$engine, &$module)
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderrevisions; ?>">Revisions</a></th>
 					<th style="width:20px;">Language</th>
 					<th style="width:20px;">Active</th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $signuptime; ?>">Signuptime</a></th>
+					<th style="width:20px;"><a href="?mode=users&order=<?php echo $signup_time; ?>">signup_time</a></th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderlevel; ?>">Sessiontime</a></th>
 				</tr>
 	<?php
@@ -369,7 +369,7 @@ function admin_users(&$engine, &$module)
 						'<td valign="top" align="center">'.$row['total_revisions'].'</td>'.
 						'<td valign="top" align="center"><small><a href="?mode=users&lang='.$row['lang'].'">'.$row['lang'].'</a></small></td>'.
 						'<td valign="top" align="center">'.$row['enabled'].'</td>'.
-						'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['signuptime'])).'</small></td>'.
+						'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.
 						'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['session_time'])).'</small></td>'.
 					'</tr>';
 			}

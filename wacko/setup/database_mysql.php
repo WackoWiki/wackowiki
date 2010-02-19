@@ -207,7 +207,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"revisioncount INT(10) UNSIGNED NOT NULL DEFAULT '20',".
 					"changescount INT(10) UNSIGNED NOT NULL DEFAULT '50',".
 					"doubleclickedit TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
-					"signuptime DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"show_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"bookmarks TEXT NOT NULL,".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
@@ -224,7 +224,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"PRIMARY KEY (user_id),".
 					"UNIQUE KEY idx_user_name (user_name),".
 					"KEY idx_enabled (enabled),".
-					"KEY idx_signuptime (signuptime)".
+					"KEY idx_signup_time (signup_time)".
 				") TYPE=MyISAM";
 
 $table_watches = "CREATE TABLE {$pref}watches (".
