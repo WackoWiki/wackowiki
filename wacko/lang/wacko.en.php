@@ -25,7 +25,6 @@ $wackoTranslation = array(
 	"LoginPassword" => "Password",
 	"LoginButton" => "Login!",
 	"LoginPage" => "Login",
-	// Log me in automatically (save a permanent cookie)
 	"PersistentCookie" => "Stay signed in",
 	"SessionDuration" => "Session duration",
 	"LoggedInAs" => "You are logged in as",
