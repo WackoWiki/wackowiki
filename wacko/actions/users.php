@@ -120,7 +120,7 @@ if ($_GET['profile'] == true)
 					); ?></td>
 			</tr>
 			<tr><?php // Have all user pages as sub pages of the current Users page. ?>
-				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->GetTranslation('UserSpace'); // TODO: this might be placed somewhere else, jut put it here for testing ?></strong></td>
+				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->GetTranslation('UserSpace'); // TODO: this might be placed somewhere else, just put it here for testing ?></strong></td>
 				<td><a href="<?php echo $this->href('', ($this->config['users_page'].'/'.$user['user_name'])); ?>"><?php echo $this->config['users_page'].'/'.$user['user_name']; ?></a></td>
 			</tr>
 			<tr>
