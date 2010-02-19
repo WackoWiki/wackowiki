@@ -2466,9 +2466,9 @@ class Wacko
 		{
 			$this->Query(
 				"INSERT INTO ".$this->config["table_prefix"]."referrers SET ".
-					"page_id = '".quote($this->dblink, $page_id)."', ".
-					"referrer = '".quote($this->dblink, $referrer)."', ".
-					"time = NOW()");
+					"page_id		= '".quote($this->dblink, $page_id)."', ".
+					"referrer		= '".quote($this->dblink, $referrer)."', ".
+					"referrer_time	= NOW()");
 		}
 	}
 
