@@ -19,7 +19,7 @@ $alter_acls_r4_2_5 = "ALTER TABLE {$pref}acls DROP supertag";
 $update_acls_r4_2 = "UPDATE {$pref}acls AS acls, (SELECT id, tag FROM {$pref}pages) AS pages SET acls.page_id = pages.id WHERE acls.page_tag = pages.tag";
 
 // CACHE
-$alter_cache_r4_2 = "ALTER TABLE {$pref}cache ADD time TIMESTAMP NOT NULL, ADD INDEX timestamp (time)";
+$alter_cache_r4_2 = "ALTER TABLE {$pref}cache ADD cache_time TIMESTAMP NOT NULL, ADD INDEX timestamp (cache_time)";
 
 // CONFIG
 $table_config_r4_2 = "CREATE TABLE {$pref}config (".
@@ -81,7 +81,7 @@ $update_links_r4_2_1 = "UPDATE {$pref}links AS links, (SELECT id, tag FROM {$pre
 // LOG
 $table_log_r4_2 = "CREATE TABLE {$pref}log (".
 				"log_id INT(10) UNSIGNED NOT NULL auto_increment,".
-				"time TIMESTAMP NOT NULL,".
+				"log_time TIMESTAMP NOT NULL,".
 				"level TINYINT(1) NOT NULL,".
 				"user VARCHAR(100) NOT NULL,".
 				"ip VARCHAR(15) NOT NULL,".
@@ -90,7 +90,7 @@ $table_log_r4_2 = "CREATE TABLE {$pref}log (".
 				"KEY idx_level (level),".
 				"KEY idx_user (user),".
 				"KEY idx_ip (ip),".
-				"KEY idx_time (time)".
+				"KEY idx_time (log_time)".
 			") TYPE=MyISAM";
 
 // PAGES
@@ -130,13 +130,14 @@ $table_rating_r4_2 = "CREATE TABLE {$pref}rating (".
 					"page_id int(10) UNSIGNED NOT NULL,".
 					"value INT(11) NOT NULL,".
 					"voters INT(10) UNSIGNED NOT NULL,".
-					"time TIMESTAMP NOT NULL,".
+					"rating_time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (page_id),".
 					"KEY idx_voters_rate (voters)".
 				") TYPE=MyISAM";
 
 // REFERRERS
 $alter_referrers_r4_2 = "ALTER TABLE {$pref}referrers DROP INDEX idx_page_tag, CHANGE page_tag page_id INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD INDEX idx_page_id (page_id)";
+$alter_referrers_r4_2_1 = "ALTER TABLE {$pref}referrers CHANGE time referrer_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
 
 // REVISIONS
 $alter_revisions_r4_2_1 = "ALTER TABLE {$pref}revisions MODIFY COLUMN body MEDIUMTEXT NOT NULL";
@@ -214,6 +215,7 @@ $alter_watches_r4_2_2 = "ALTER TABLE {$pref}pagewatches ADD page_id INT(10) UNSI
 $alter_watches_r4_2_3 = "ALTER TABLE {$pref}pagewatches DROP user";
 $alter_watches_r4_2_4 = "ALTER TABLE {$pref}pagewatches DROP tag";
 $alter_watches_r4_2_5 = "ALTER TABLE {$pref}pagewatches CHANGE id watch_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
+$alter_watches_r4_2_6 = "ALTER TABLE {$pref}pagewatches CHANGE time watch_time TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
 
 $update_watches_r4_2 = "UPDATE {$pref}pagewatches AS pagewatches, (SELECT user_id, user_name FROM {$pref}users) AS users SET pagewatches.user_id = users.user_id WHERE pagewatches.user = users.name";
 $update_watches_r4_2_1 = "UPDATE {$pref}pagewatches AS pagewatches, (SELECT id, tag FROM {$pref}pages) AS pages SET pagewatches.page_id = pages.id WHERE pagewatches.tag = pages.tag";
