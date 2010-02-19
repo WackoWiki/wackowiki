@@ -150,7 +150,7 @@ else if ($_POST["action"] == "login")
 				$this->Query(
 					"INSERT INTO ".$this->config["user_table"]." ".
 					"SET ".
-						"signuptime = NOW(), ".
+						"signup_time = NOW(), ".
 						"user_name = '".quote($this->dblink, $name)."', ".
 						"email = '".quote($this->dblink, $email)."', ".
 						"email_confirm = '".quote($this->dblink, $confirm)."', ".

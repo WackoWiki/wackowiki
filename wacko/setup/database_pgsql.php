@@ -96,7 +96,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"revisioncount integer NOT NULL DEFAULT 20,".
 					"changescount integer NOT NULL DEFAULT 50,".
 					"doubleclickedit int(1) NOT NULL DEFAULT '1',".
-					"signuptime timestamp without time zone NOT NULL DEFAULT now(),".
+					"signup_time timestamp without time zone NOT NULL DEFAULT now(),".
 					"show_comments int(1) NOT NULL DEFAULT '1',".
 					"bookmarks text NOT NULL DEFAULT '',".
 					"lang character varying(2) NOT NULL DEFAULT '',".
