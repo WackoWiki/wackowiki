@@ -204,9 +204,9 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"email VARCHAR(50) NOT NULL DEFAULT '',".
 					"enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"motto TEXT NOT NULL,".
-					"revisioncount INT(10) UNSIGNED NOT NULL DEFAULT '20',".
-					"changescount INT(10) UNSIGNED NOT NULL DEFAULT '50',".
-					"doubleclickedit TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
+					"revisions_count INT(10) UNSIGNED NOT NULL DEFAULT '20',".
+					"changes_count INT(10) UNSIGNED NOT NULL DEFAULT '50',".
+					"doubleclick_edit TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"show_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"bookmarks TEXT NOT NULL,".
@@ -214,7 +214,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"show_spaces TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"typografica TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"more TEXT NOT NULL,".
-					"changepassword VARCHAR(100) NOT NULL,".
+					"change_password VARCHAR(100) NOT NULL,".
 					"email_confirm VARCHAR(40) NOT NULL DEFAULT '',".
 					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"session_expire INT(10) UNSIGNED NOT NULL,".

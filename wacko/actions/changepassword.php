@@ -14,7 +14,7 @@ if (isset($_GET["secret_code"]) && $_GET["secret_code"])
 	$user = $this->LoadSingle(
 		"SELECT * ".
 		"FROM ".$this->config["user_table"]." ".
-		"WHERE changepassword='".quote($this->dblink, $code)."'");
+		"WHERE change_password='".quote($this->dblink, $code)."'");
 
 	if ($user)
 	{
@@ -61,7 +61,7 @@ if (isset($_GET["secret_code"]) && $_GET["secret_code"])
 				$this->Query(
 					"UPDATE ".$this->config["user_table"]." ".
 					"SET password = '".quote($this->dblink, md5($newpassword))."' ".
-						"changepassword	= '' ".
+						"change_password	= '' ".
 					"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
 					"LIMIT 1");
 
@@ -292,7 +292,7 @@ else
 				// update table
 				$this->Query(
 					"UPDATE ".$this->config["user_table"]." ".
-					"SET changepassword = '".quote($this->dblink, $code)."' ".
+					"SET change_password = '".quote($this->dblink, $code)."' ".
 					"WHERE user_name = '".quote($this->dblink, $user["user_name"])."' ".
 					"LIMIT 1");
 

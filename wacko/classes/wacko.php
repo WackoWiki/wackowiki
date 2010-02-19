@@ -2788,7 +2788,7 @@ class Wacko
 		$this->Query(
 			"UPDATE {$this->config['user_table']} SET ".
 				"session_expire	= '".quote($this->dblink, $ses_time)."', ".
-				"changepassword	= '' ".
+				"change_password	= '' ".
 			"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
 			"LIMIT 1");
 

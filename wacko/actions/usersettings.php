@@ -86,10 +86,10 @@ else if ($user = $this->GetUser())
 					"UPDATE ".$this->config["user_table"]." SET ".
 						"real_name = '".quote($this->dblink, $_POST["real_name"])."', ".
 						"email = '".quote($this->dblink, $_POST["email"])."', ".
-						"doubleclickedit = '".quote($this->dblink, $_POST["doubleclickedit"])."', ".
+						"doubleclick_edit = '".quote($this->dblink, $_POST["doubleclick_edit"])."', ".
 						"show_comments = '".quote($this->dblink, $_POST["show_comments"])."', ".
-						"revisioncount = '".quote($this->dblink, $_POST["revisioncount"])."', ".
-						"changescount = '".quote($this->dblink, $_POST["changescount"])."', ".
+						"revisions_count = '".quote($this->dblink, $_POST["revisions_count"])."', ".
+						"changes_count = '".quote($this->dblink, $_POST["changes_count"])."', ".
 						"motto = '".quote($this->dblink, $_POST["motto"])."', ".
 						"bookmarks = '".quote($this->dblink, $bookmarks)."', ".
 						"show_spaces = '".quote($this->dblink, $_POST["show_spaces"])."', ".
@@ -233,14 +233,14 @@ else if ($user = $this->GetUser())
     <td class="form_right"><textarea id="bookmarks" name="bookmarks" cols="40" rows="10"><?php echo htmlspecialchars($user["bookmarks"]) ?></textarea></td>
   </tr>
   <tr>
-    <th class="form_left" scope="row"><label for="changescount"><?php echo $this->GetTranslation("RecentChangesLimit");?></label></th>
-    <td class="form_right"><input id="changescount" name="changescount"
-	value="<?php echo htmlentities($user["changescount"]) ?>" size="40" /></td>
+    <th class="form_left" scope="row"><label for="changes_count"><?php echo $this->GetTranslation("RecentChangesLimit");?></label></th>
+    <td class="form_right"><input id="changes_count" name="changes_count"
+	value="<?php echo htmlentities($user["changes_count"]) ?>" size="40" /></td>
   </tr>
   <tr>
-    <th class="form_left" scope="row"><label for="revisioncount"><?php echo $this->GetTranslation("RevisionListLimit");?></label></th>
-    <td class="form_right"><input id="revisioncount" name="revisioncount"
-	value="<?php echo htmlentities($user["revisioncount"]) ?>" size="40" /></td>
+    <th class="form_left" scope="row"><label for="revisions_count"><?php echo $this->GetTranslation("RevisionListLimit");?></label></th>
+    <td class="form_right"><input id="revisions_count" name="revisions_count"
+	value="<?php echo htmlentities($user["revisions_count"]) ?>" size="40" /></td>
   </tr>
 	<tr class="lined">
 		<td></td>
@@ -248,11 +248,11 @@ else if ($user = $this->GetUser())
 	</tr>
   <tr>
     <th class="form_left" scope="row"><?php echo $this->GetTranslation("UserSettingsOther");?></th>
-    <td class="form_right"><input type="hidden" name="doubleclickedit" value="0" />
+    <td class="form_right"><input type="hidden" name="doubleclick_edit" value="0" />
       <input
-	type="checkbox" id="doubleclickedit" name="doubleclickedit" value="1"
-	<?php echo $user["doubleclickedit"] == "1" ? "checked=\"checked\"" : "" ?> />
-      <label for="doubleclickedit"><?php echo $this->GetTranslation("DoubleclickEditing");?></label></td>
+	type="checkbox" id="doubleclick_edit" name="doubleclick_edit" value="1"
+	<?php echo $user["doubleclick_edit"] == "1" ? "checked=\"checked\"" : "" ?> />
+      <label for="doubleclick_edit"><?php echo $this->GetTranslation("DoubleclickEditing");?></label></td>
   </tr>
   <tr>
     <td class="form_left">&nbsp;</td>

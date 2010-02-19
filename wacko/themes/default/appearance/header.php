@@ -50,7 +50,7 @@ if ($this->method == 'edit')
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->GetUser())
 {
-	if ($user["doubleclickedit"] == "1")
+	if ($user["doubleclick_edit"] == "1")
 	{
 ?>
 	<script type="text/javascript">
@@ -99,7 +99,8 @@ else
 {
 	// Show Register / Login link
 	echo "<ul>\n<li>".$this->ComposeLinkToPage($this->GetTranslation("LoginPage").($this->config["rewrite_mode"] ? "?" : "&amp;")."goback=".$this->SlimUrl($this->tag), "", $this->GetTranslation("LoginPage"), 0)."</li>\n";
-	echo "<li>".$this->ComposeLinkToPage($this->GetTranslation("RegistrationPage"), "", $this->GetTranslation("RegistrationPage"), 0)."</li>\n</ul>";
+	echo "<li>".$this->ComposeLinkToPage($this->GetTranslation("RegistrationPage"), "", $this->GetTranslation("RegistrationPage"), 0)."</li>\n";
+	// echo "<li>".$this->ComposeLinkToPage($this->GetTranslation("RegistrationPage"), "", $this->GetTranslation("Help"), 0)."</li>\n</ul>";
 }
 
 // End if

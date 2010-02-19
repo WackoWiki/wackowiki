@@ -1,7 +1,7 @@
 <?php
 if ($user = $this->GetUser())
 {
-	$max = $user["changescount"];
+	$max = $user["changes_count"];
 }
 else
 {
