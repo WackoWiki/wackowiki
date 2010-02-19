@@ -115,6 +115,7 @@ $lang = array(
 "InstallingPagesEnd" => "Die Basis-Seiten wurden hinzugefügt",
 "InstallingAdmin" => "Füge Benutzerkonto für Verwalter hinzu",
 "InstallingAdminGroup" => "Gruppe Admins hinzugefügt",
+"InstallingAdminGroupMember" => "Gruppe Admins Mitglied hinzugefügt",
 "InstallingLogoImage" => "Füge WackoWiki Logo hinzu",
 "InstallingConfigValues" => "Adding Config Values",
 "ErrorInsertingPage" => "Fehler beim Einfügen der <tt>%1</tt> Seite",

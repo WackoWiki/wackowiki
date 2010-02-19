@@ -150,7 +150,7 @@ switch($config["database_driver"])
 
 					test($lang["InstallingAdmin"], @mysql_query($insert_admin, $dblink), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 					test($lang["InstallingAdminGroup"], @mysql_query($insert_admin_group, $dblink), str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
-					test($lang["InstallingAdminGroup"], @mysql_query($insert_admin_group_member, $dblink), str_replace("%1","admin group member",$lang["ErrorAlreadyExists"]));
+					test($lang["InstallingAdminGroupMember"], @mysql_query($insert_admin_group_member, $dblink), str_replace("%1","admin group member",$lang["ErrorAlreadyExists"]));
 					print("            </ul>\n");
 					print("            <br />\n");
 					print("            <h2>".$lang["InstallingDefaultData"]."</h2>\n");
@@ -439,7 +439,7 @@ switch($config["database_driver"])
 
 								test($lang["InstallingAdmin"], @mysqli_query($dblink, $insert_admin), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 								test($lang["InstallingAdminGroup"], @mysqli_query($dblink, $insert_admin_group), str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
-								test($lang["InstallingAdminGroup"], @mysqli_query($dblink, $insert_admin_group_member), str_replace("%1","admin group member",$lang["ErrorAlreadyExists"]));
+								test($lang["InstallingAdminGroupMember"], @mysqli_query($dblink, $insert_admin_group_member), str_replace("%1","admin group member",$lang["ErrorAlreadyExists"]));
 								print("         </ul>\n");
 								print("         <br />\n");
 								print("         <h2>".$lang["InstallingDefaultData"]."</h2>\n");
@@ -726,7 +726,7 @@ switch($config["database_driver"])
 
 									testPDO($lang["InstallingAdmin"], $insert_admin, str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 									testPDO($lang["InstallingAdminGroup"], $insert_admin_group, str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
-									testPDO($lang["InstallingAdminGroup"], $insert_admin_group_member, str_replace("%1","admin group member",$lang["ErrorAlreadyExists"]));
+									testPDO($lang["InstallingAdminGroupMember"], $insert_admin_group_member, str_replace("%1","admin group member",$lang["ErrorAlreadyExists"]));
 									print("         </ul>\n");
 									print("         <br />\n");
 									print("         <h2>".$lang["InstallingDefaultData"]."</h2>\n");
