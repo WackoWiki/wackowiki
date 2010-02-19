@@ -119,6 +119,7 @@ $lang = array(
 "InstallingPagesEnd" => "Ολοκλήρωση Προσθήκης Προκαθορισμένων Σελίδων",
 "InstallingAdmin" => "Προσθήκη Χρήση Διαχειριστή",
 "InstallingAdminGroup" => "Adding Admins Group",
+"InstallingAdminGroupMember" => "Adding Admins Group Member",
 "InstallingLogoImage" => "Προσθήκη Εικόνας Λογότυπο",
 "InstallingConfigValues" => "Adding Config Values",
 "ErrorInsertingPage" => "Σφάλμα κατά την εισαγωγή της <tt>%1</tt> σελίδας",
