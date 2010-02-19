@@ -25,6 +25,9 @@ $wackoTranslation = array(
 	"LoginPassword" => "Mot de Passe&nbsp;",
 	"LoginButton" => "Connexion",
 	"LoginPage" => "Connexion",
+	"PersistentCookie" => "Rester connecté",
+	"SessionDuration" => "Session duration",
+	"LoggedInAs" => "You are logged in as",
 
 	// other
 	"Guest" => "Guest",

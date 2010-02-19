@@ -25,10 +25,13 @@ $wackoTranslation = array(
 	"LoginPassword" => "Password",
 	"LoginButton" => "Login!",
 	"LoginPage" => "Login",
+	"PersistentCookie" => "Manter sessão iniciada",
+	"SessionDuration" => "Session duration",
+	"LoggedInAs" => "You are logged in as",
 
 	// other
-	"Guest" => "Guest",
-	"Help" => "Help",
+	"Guest" => "Clientes",
+	"Help" => "Ajuda",
 	"TopicSearchText" => "Procurar apenas nos títulos",
 	"MsWordVersion" => "versão preparada para Microsoft Word",
 	"EmailHello" => "Olá, ",
