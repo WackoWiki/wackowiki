@@ -35,7 +35,7 @@ if ($this->HasAccess("read"))
 			$max = 0;
 		else if ($user = $this->GetUser())
 		{
-			$max = $user["revisioncount"];
+			$max = $user["revisions_count"];
 		}
 		else
 		{

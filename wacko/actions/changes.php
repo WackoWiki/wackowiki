@@ -3,15 +3,16 @@
 if (!isset($root)) $root = $this->UnwrapLink($vars[0]);
 if (!isset($root)) $root = $this->page["tag"];
 if (!isset($date)) $date = isset($_GET["date"]) ? $_GET["date"] :"";
+if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET["minor_edit"]) ? $_GET["minor_edit"] :"";
 if (!isset($noxml)) $noxml = 0;
 if ($user = $this->GetUser())
-$usermax = $user["changescount"];
+$usermax = $user["changes_count"];
 else
 $usermax = 50;
 if (!isset($max) || $usermax < $max)
 $max = $usermax;
 
-if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date))
+if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date, $hide_minor_edit))
 {
 	$count = 0;
 	if ($root == "" && !(int)$noxml)

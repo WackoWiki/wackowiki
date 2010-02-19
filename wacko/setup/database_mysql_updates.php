@@ -186,7 +186,7 @@ $update_upload_r4_2 = "UPDATE {$pref}upload AS upload, (SELECT user_id, user_nam
 // USERS
 $alter_users_r4_2 = "ALTER TABLE {$pref}users ADD id INT(10) UNSIGNED NOT NULL auto_increment FIRST, DROP PRIMARY KEY, ADD PRIMARY KEY (id)";
 $alter_users_r4_2_1 = "ALTER TABLE {$pref}users CHANGE lang lang VARCHAR(2) NOT NULL DEFAULT ''";
-$alter_users_r4_2_2 = "ALTER TABLE {$pref}users CHANGE doubleclickedit doubleclickedit TINYINT(1) NOT NULL DEFAULT '1'";
+$alter_users_r4_2_2 = "ALTER TABLE {$pref}users CHANGE doubleclickedit doubleclick_edit TINYINT(1) NOT NULL DEFAULT '1'";
 $alter_users_r4_2_3 = "ALTER TABLE {$pref}users CHANGE show_comments show_comments TINYINT(1) NOT NULL DEFAULT '0'";
 $alter_users_r4_2_4 = "ALTER TABLE {$pref}users CHANGE show_spaces show_spaces TINYINT(1) NOT NULL DEFAULT '1'";
 $alter_users_r4_2_5 = "ALTER TABLE {$pref}users DROP showdatetime";
@@ -202,8 +202,11 @@ $alter_users_r4_2_14 = "ALTER TABLE {$pref}users CHANGE id user_id INT(10) UNSIG
 $alter_users_r4_2_15 = "ALTER TABLE {$pref}users ADD enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER email, ADD INDEX idx_enabled (enabled)";
 $alter_users_r4_2_16 = "ALTER TABLE {$pref}users CHANGE password password VARCHAR(40) NOT NULL DEFAULT ''";
 $alter_users_r4_2_17 = "ALTER TABLE {$pref}users CHANGE signuptime signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
+$alter_users_r4_2_18 = "ALTER TABLE {$pref}users CHANGE changepassword change_password VARCHAR(100) NOT NULL";
+$alter_users_r4_2_19 = "ALTER TABLE {$pref}users CHANGE revisioncount revisions_count INT(10) UNSIGNED NOT NULL DEFAULT '20'";
+$alter_users_r4_2_20 = "ALTER TABLE {$pref}users CHANGE changescount changes_count INT(10) UNSIGNED NOT NULL DEFAULT '50'";
 
-$update_users_r4_2 = "UPDATE {$pref}users SET doubleclickedit = '0' WHERE doubleclickedit = '2'";
+$update_users_r4_2 = "UPDATE {$pref}users SET doubleclick_edit = '0' WHERE doubleclick_edit = '2'";
 $update_users_r4_2_1 = "UPDATE {$pref}users SET show_comments = '0' WHERE show_comments = '2'";
 $update_users_r4_2_2 = "UPDATE {$pref}users SET show_spaces = '0' WHERE show_spaces = '2'";
 $update_users_r4_2_4 = "UPDATE {$pref}users SET typografica = '0' WHERE typografica = '2'";

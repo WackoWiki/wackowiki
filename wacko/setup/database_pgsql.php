@@ -93,9 +93,9 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"\"password\" character varying(40) NOT NULL DEFAULT '',".
 					"email character varying(50) NOT NULL DEFAULT '',".
 					"motto text NOT NULL DEFAULT '',".
-					"revisioncount integer NOT NULL DEFAULT 20,".
-					"changescount integer NOT NULL DEFAULT 50,".
-					"doubleclickedit int(1) NOT NULL DEFAULT '1',".
+					"revisions_count integer NOT NULL DEFAULT 20,".
+					"changes_count integer NOT NULL DEFAULT 50,".
+					"doubleclick_edit int(1) NOT NULL DEFAULT '1',".
 					"signup_time timestamp without time zone NOT NULL DEFAULT now(),".
 					"show_comments int(1) NOT NULL DEFAULT '1',".
 					"bookmarks text NOT NULL DEFAULT '',".
@@ -103,7 +103,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"show_spaces int(1) NOT NULL DEFAULT '1',".
 					"typografica int(1) NOT NULL DEFAULT '1',".
 					"more text NOT NULL DEFAULT '',".
-					"changepassword character varying(100) NOT NULL DEFAULT '',".
+					"change_password character varying(100) NOT NULL DEFAULT '',".
 					"email_confirm character varying(40) NOT NULL DEFAULT '',".
 					"CONSTRAINT pk_users_name PRIMARY KEY (user_id),".
 					"CONSTRAINT idx_users_name UNIQUE (name)".

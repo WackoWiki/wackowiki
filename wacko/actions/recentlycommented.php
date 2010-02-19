@@ -57,7 +57,7 @@ if (!function_exists('LoadRecentlyCommented'))
 if (!isset($root))	$root	= $this->UnwrapLink($vars[0]);
 if (!isset($root))	$root	= $this->page["tag"];
 if (!isset($noxml)) $noxml	= 0;
-if ($max == false)	$max	= $user['changescount'];
+if ($max == false)	$max	= $user['changes_count'];
 if ($max == false)	$max	= 50;
 if ($max > 100)		$max	= 100;
 
