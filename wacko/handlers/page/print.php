@@ -37,7 +37,7 @@ if ($this->HasAccess("read"))
 		echo $data;
 
 		// display comments
-		if ($_SESSION[$this->config["session_prefix"].'_'."show_comments"][$this->tag])
+		if ($_SESSION[$this->config["session_prefix"].'_'."show_comments"][$this->tag] || $this->forum)
 		{
 			if ($comments = $this->LoadComments($this->GetPageId()));
 			{

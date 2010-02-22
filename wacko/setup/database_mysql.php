@@ -114,6 +114,7 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"title VARCHAR(100) NOT NULL DEFAULT '',".
+					"commented` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"more VARCHAR(255) NOT NULL,".
@@ -127,6 +128,7 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"KEY idx_modified (modified),".
 					"KEY idx_minor_edit (minor_edit),".
 					"KEY idx_comment_on_id (comment_on_id),".
+					"KEY idx_commented (commented),".
 					"KEY idx_title (title)".
 				") TYPE=MyISAM;";
 
