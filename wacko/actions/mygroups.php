@@ -7,7 +7,7 @@ function MyGroups($username, $al)
 	$my_groups_count = 0;
 	foreach($al as $group => $members)
 	{
-		$groupmembers = explode("\n", $members);
+		$groupmembers = explode("\\n", $members);
 		if(in_array ($username, $groupmembers))
 		{
 			print $group.'<br />';
