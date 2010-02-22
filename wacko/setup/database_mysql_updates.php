@@ -114,7 +114,8 @@ $alter_pages_r4_2_17 = "ALTER TABLE {$pref}pages ADD ip VARCHAR(15) NOT NULL AFT
 $alter_pages_r4_2_18 = "ALTER TABLE {$pref}pages CHANGE id page_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
 $alter_pages_r4_2_19 = "ALTER TABLE {$pref}pages CHANGE time modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
 $alter_pages_r4_2_20 = "ALTER TABLE {$pref}pages DROP INDEX idx_time, ADD INDEX idx_modified ( modified )";
-$alter_pages_r4_2_21 = "ALTER TABLE {$pref}pages ADD more VARCHAR(255) NOT NULL AFTER keywords".
+$alter_pages_r4_2_21 = "ALTER TABLE {$pref}pages ADD more VARCHAR(255) NOT NULL AFTER keywords";
+$alter_pages_r4_2_22 = "ALTER TABLE {$pref}pages ADD commented DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER title, ADD INDEX idx_commented (commented) ";
 
 $update_pages_r4_2 = "UPDATE {$pref}pages SET body_r=''";
 $update_pages_r4_2_1 = "UPDATE {$pref}pages AS pages, (SELECT user_id, user_name FROM {$pref}users) AS users SET pages.owner_id = users.user_id WHERE pages.owner = users.user_name";

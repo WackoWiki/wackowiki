@@ -11,6 +11,9 @@ if (!$this->page) $this->Redirect($this->href('show'));
 // deny for comment
 if ($this->page['comment_on_id'])
 	$this->Redirect($this->href('', $this->GetCommentOnTag($this->page["comment_on_id"]), 'show_comments=1').'#'.$this->page['tag']);
+// and for forum page
+else if ($this->forum === true && !$this->IsAdmin())
+	$this->Redirect($this->href());
 
 if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 {

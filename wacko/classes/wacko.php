@@ -8,6 +8,7 @@ class Wacko
 	var $dblink;
 	var $page;
 	var $tag;
+	var $forum;
 	var $WVERSION; //Wacko version
 	var $iswatched;
 	var $queryTime;
@@ -1157,7 +1158,7 @@ class Wacko
 			$owner_id	= $user_id = $this->GetUserId();
 			$reg	= true;
 		}
-		else if ($comment_on_id)
+		else if ($this->forum === true || $comment_on_id)
 		{
 			$owner	= GUEST;
 			$reg	= false;
@@ -1286,7 +1287,8 @@ class Wacko
 					"INSERT INTO ".$this->config["table_prefix"]."pages SET ".
 						"comment_on_id 	= '".quote($this->dblink, $comment_on_id)."', ".
 						"created 		= NOW(), ".
-						"modified 			= NOW(), ".
+						"modified 		= NOW(), ".
+						"commented		= NOW(), ".
 						"owner_id 		= '".quote($this->dblink, $owner_id)."', ".
 						"user_id 		= '".quote($this->dblink, $user_id)."', ".
 						"ip 			= '".quote($this->dblink, $ip)."', ".
@@ -1313,7 +1315,8 @@ class Wacko
 					// updating comments count for commented page
 					$this->Query(
 						"UPDATE {$this->config['table_prefix']}pages SET ".
-							"comments	= '".(int)$this->CountComments($comment_on_id)."' ".
+							"comments	= '".(int)$this->CountComments($comment_on_id)."', ".
+							"commented	= NOW() ".
 						"WHERE tag = '".quote($this->dblink, $this->GetCommentOnTag($comment_on_id))."' ".
 						"LIMIT 1");
 
@@ -3833,6 +3836,17 @@ class Wacko
 			$this->iswatched = true;
 		}
 
+		// forum page
+		if (preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->tag) ||
+		preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->page['comment_on_id'])) // TODO: get real comment_on
+		{
+			$this->forum = true;
+		}
+		else
+		{
+			$this->forum = false;
+		}
+
 		// display page contents
 		if (preg_match("/(\.xml)$/", $this->method))
 		{
@@ -4151,12 +4165,21 @@ class Wacko
 			"DELETE FROM ".$this->config["table_prefix"]."pages ".
 			"WHERE tag = '".quote($this->dblink, $tag)."' ");
 
-		// for removed comment correct comments count on commented page
+		// for removed comment correct comments count and date on commented page
 		if ($comment_on_id)
 		{
+			// load latest comment
+			$comment = $this->LoadSingle(
+				"SELECT created ".
+				"FROM {$this->config['table_prefix']}pages ".
+				"WHERE comment_on_id = '".quote($this->dblink, $comment_on_id)."' ".
+				"ORDER BY created DESC ".
+				"LIMIT 1");
+
 			$this->Query(
 				"UPDATE {$this->config['table_prefix']}pages SET ".
 					"comments	= '".(int)$this->CountComments($comment_on_id)."' ".
+					"commented	= '".quote($this->dblink, $comment['created'])."' ".
 				"WHERE tag = '".quote($this->dblink, $this->GetCommentOnTag($comment_on_id))."' ".
 				"LIMIT 1");
 		}
@@ -4187,8 +4210,9 @@ class Wacko
 
 		// reset comments count
 		$this->Query(
-			"UPDATE {$this->config['table_prefix']}pages ".
-			"SET comments	= '0' ".
+			"UPDATE {$this->config['table_prefix']}pages SET ".
+				"comments	= '0', ".
+				"commented	= created ".
 			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 
 		return true;
