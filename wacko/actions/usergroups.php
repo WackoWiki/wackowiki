@@ -27,7 +27,7 @@ if($user = $this->GetUser())
 				$i = 1;
 			}
 
-			$arr = explode("\n", $gusers);
+			$arr = explode("\\n", $gusers);
 			$allowed_groups = array();
 
 			sort($arr);
