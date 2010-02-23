@@ -1,5 +1,9 @@
 <?php
 
+// shows tree list
+// {{tree [page="tag"] [depth="3"] [nomark="0"] [title=""]}}
+// use [page="/"] to get the entire root
+
 // constants
 $limit	= 500;
 $style	= 'ul';
@@ -109,7 +113,7 @@ if ($pages = $this->LoadAll(
 		$rootlevel = substr_count($root, '/');
 
 		// begin list
-		echo "<ul>\n";
+		echo "<ul class=\"tree\">\n";
 
 		$i	= 0;
 		$ul	= 0;
@@ -151,14 +155,14 @@ if ($pages = $this->LoadAll(
 
 			// begin element
 			echo '<li>';
-			if ($curlevel == $rootlevel && $curlevel < 2)	echo '<strong>';
+			# if ($curlevel == $rootlevel && $curlevel < 2)	echo '<strong>';
 			if ($this->tag == $page['tag'])					echo '<em>';
 
 			echo $this->Link('/'.$page['tag'], '', $page['title'], 0, 1, '', 0);
 
 			// end element
 			if ($this->tag == $page['tag'])					echo '</em>';
-			if ($curlevel == $rootlevel && $curlevel < 2)	echo '</strong>';
+			# if ($curlevel == $rootlevel && $curlevel < 2)	echo '</strong>';
 			echo "</li>\n";
 
 
