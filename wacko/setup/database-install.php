@@ -649,7 +649,8 @@ switch($config["database_driver"])
 										$dsn = $config["database_driver"].":database=".$config["database_host"].";host=".$config["database_database"].($config["database_port"] != "" ? ";service=".$config["database_port"] : "");
 										break;
 									case "oci":
-										$dsn = $config["database_driver"].":dbname=//".$config["database_host"].($config["database_port"] != "" ? ":".$config["database_port"] : "")."/".$config["database_database"];
+										require_once("setup/database_oracle.php");
+										$dsn = $config["database_driver"].":dbname=".$config["database_database"];
 										break;
 									case "sqlite":
 									case "sqlite2":
