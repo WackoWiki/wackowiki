@@ -56,7 +56,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	foreach ($forums as $forum)
 	{
 		// show only those forums where user has read access
-		if ($this->HasAccess('read', $forum['tag']))
+		if ($this->HasAccess('read', $forum['page_id']))
 		{
 			// load latest comment
 			$comment = $this->LoadSingle(
