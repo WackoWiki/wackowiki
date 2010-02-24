@@ -5,12 +5,13 @@ if (!isset($root)) $root = $this->page["tag"];
 if (!isset($date)) $date = isset($_GET["date"]) ? $_GET["date"] :"";
 if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET["minor_edit"]) ? $_GET["minor_edit"] :"";
 if (!isset($noxml)) $noxml = 0;
+
 if ($user = $this->GetUser())
-$usermax = $user["changes_count"];
+	$usermax = $user["changes_count"];
 else
-$usermax = 50;
+	$usermax = 50;
 if (!isset($max) || $usermax < $max)
-$max = $usermax;
+	$max = $usermax;
 
 if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date, $hide_minor_edit))
 {

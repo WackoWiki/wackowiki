@@ -1,5 +1,5 @@
 <?php
-# ALTER TABLE `wacko_pages` ADD `commented` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `title` 
+
 // shows forum topics list
 // {{topics [pages="subtag1, subtag2, ..."]}}
 //		pages	= when creating multilevel forums this optional parameter passes
