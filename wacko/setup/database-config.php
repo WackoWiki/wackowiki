@@ -78,6 +78,7 @@ $drivers[] = array("pdo", "mysql", "PDO MySQL");
 // $drivers[] = array("pdo", "pgsql", "PDO PostgreSQL");
 // $drivers[] = array("pdo", "sqlite", "PDO SQLite");
 // $drivers[] = array("pdo", "sqlite2", "PDO SQLite2");
+$drivers[] = array("pdo", "oci", "PDO Oracle");
 
 $detected = 0;
 for($count = 0; $count < count($drivers); $count++)
