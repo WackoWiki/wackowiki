@@ -682,6 +682,10 @@ $wackoTranslation = array(
 	"NewsDiscuss"	=> "Discuss this article...",
 
 	// moderation handler
+	"Moderation"			=> "Moderation",
+	"Topics"				=> "topics",
+	"ModerateSection"		=> "section / page ",
+
 	"NotModerator"			=> "<h3>You have no authority to moderation of the page / chapter</h3>",
 	"ModerateDelete"		=> "delete",
 	"ModerateDeleteTopic"	=> "delete topic / page",
@@ -701,12 +705,12 @@ $wackoTranslation = array(
 	"ModerateRenameExists"	=> "Page same name already exists! Choose a different name.",
 	"ModerateRename1Only"	=> "Note: renamed to be only the first page you chose!",
 	"ModerateMovesConfirm"	=> "Select the target partition to move the forum to",
-	"ModerateMoveConfirm"	=> "Select the forum or specify the cluster to move these subjects. To move a page to the root of the site, type &quot;/&quot;",
+	"ModerateMoveConfirm"	=> "Select the forum or specify the cluster to move these topics. To move a page to the root of the site, type &quot;/&quot;",
 	"ModeratePgMoveConfirm"	=> "Specify the name of the cluster, in which to place the page. To move a page to the root of the site, type &quot;/&quot;",
 	"ModerateMoveExists"	=> "Operation aborted: in this section already exists topics with the same name %1. If you still need to transfer the above-mentioned topics, please rename them first.",
 	"ModerateMoveNotExists"	=> "The document / cluster does not exist. Please check the name and try again.",
-	"ModerateMergeConfirm"	=> "Choose a theme, which should combine the remaining",
-	"ModerateMerge2Min"		=> "To join you must select at least two themes!",
+	"ModerateMergeConfirm"	=> "Choose a topic, which should combine the remaining",
+	"ModerateMerge2Min"		=> "To join you must select at least two topics!",
 	"ModerateComDelConfirm"	=> "Are you sure you want to <u>remove</u> %1 %2?",
 	"ModerateComment"		=> "Comment",
 	"ModerateComments"		=> "Comments",

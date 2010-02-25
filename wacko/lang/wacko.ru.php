@@ -665,6 +665,9 @@ $wackoTranslation = array(
 	"NewsDiscuss"	=> "Обсудить новость…",
 
 	// moderation handler
+	"Moderation"			=> "Модерация",
+	"Topics"				=> "темы",
+	"ModerateSection"		=> "раздела/документа  ",
 	"NotModerator"			=> "<h3>У вас нет полномочий для модерации данного документа/раздела</h3>",
 	"ModerateDelete"		=> "удалить",
 	"ModerateDeleteTopic"	=> "удалить тему/страницу",
