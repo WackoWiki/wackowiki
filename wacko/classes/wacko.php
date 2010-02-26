@@ -3220,15 +3220,6 @@ class Wacko
 		if ($user == '') $username = strtolower($this->GetUserName());
 		else if ($user == GUEST) $username = GUEST;
 		else $username = $user;
-		/* $registered = false;
-		// see whether user is registered and logged in
-		if ($user != GUEST)
-		{
-			if ($user = $this->GetUser()) $registered = true;
-				$user = strtolower($this->GetUserName());
-			if (!$registered)
-				$user = GUEST;
-		} */
 
 		if (!$page_id = trim($page_id)) $page_id = $this->GetPageId();
 
@@ -3818,8 +3809,10 @@ class Wacko
 			if ($this->page['keywords'])
 			{
 				$keywords = $this->LoadAll(
-					"SELECT keyword_id, keyword FROM {$this->config['table_prefix']}keywords ".
-					"WHERE keyword_id IN ( '".str_replace(' ', "', '", $this->page['keywords'])."' )");
+					"SELECT k.keyword_id, k.keyword 
+					FROM {$this->config['table_prefix']}keywords k 
+						INNER JOIN {$this->config['table_prefix']}keywords_pages kp ON (k.keyword_id = kp.keyword_id)
+					WHERE kp.page_id = '{$this->page['page_id']}' ");
 				foreach ($keywords as $word) $this->keywords[$word['keyword_id']] = $word['keyword'];
 				unset($keywords, $word);
 			}

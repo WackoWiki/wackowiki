@@ -35,12 +35,12 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 			$options['disable_safehtml']	= (int)$_POST['disable_safehtml'];
 		}
 
-		$this->SaveMeta($this->GetPageId(), array(
+		$this->SaveMeta($this->page["page_id"], array(
 			"lang" => $_POST["lang"],
 			"more" => $this->ComposeOptions($options),
 			"title" => $_POST["title"],
 			"description" => $_POST["description"],
-			#"keywords" => $_POST["keywords"]
+			"keywords" => $_POST["keywords"]
 		));
 
 		// log event
