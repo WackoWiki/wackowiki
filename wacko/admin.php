@@ -199,7 +199,7 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 ########################################################
 
 ?>
-	<div id="menu_bookmarks" class="menu">
+	<div id="menu" class="menu">
 		<div class="sub">
 			<ul>
 			<li class="text submenu"><?php echo $module['lock']['cat']; ?>

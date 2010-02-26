@@ -150,7 +150,7 @@ textarea {
 /*	Header layout	*/
 
 #header {
-	height: 100px;
+	height: 80px;
 	font-family: Arial, Helvetica, sans-serif;
 	white-space: nowrap;
 }
@@ -292,16 +292,19 @@ textarea {
 			padding-left: 5px;
 			padding-right: 5px;
 			border-bottom: 3px none;
+			background-color: #0C4D81;
 		}
 		#sections a:hover {
 			color: #FFFFFF;
 			text-decoration: none;
 			border-bottom: 3px solid #B00202;
+			background-color: #32759E;
 		}
 		#sections a:active {
 			color: #FFFFFF;
 			text-decoration: none;
 			border-bottom: 3px solid #FF0000;
+			background-color: #32759E;
 		}
 #shadow {
 	height: 20px;
@@ -318,7 +321,7 @@ div.menu {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	background-color: #FFFFFF;
-	border: 1px solid #073D69;
+	padding-bottom: 20px;
 
 	/*visibility: hidden;*/
 	/*position: absolute;
@@ -387,10 +390,11 @@ div.menu {
 	div.menu ul ul a, div.menu ol ol a {
 		padding-left: 15px;
 	}
-#menu_bookmarks, #menu_contents, #menu_sections {
-		width: 22%;
+#menu {
+	width: 22%;
 	max-width: 180px; 
 	float: right;
+	/* position:fixed; */
 	clear: both;
 	top: 40px;
 	left: 187px;
@@ -409,8 +413,11 @@ div.menu {
 /*	Page layout	*/
 
 #content {
+	width: 78%;
+	float: left;
 	padding-left: 20px;
 	padding-right: 20px;
+	
 }
 #page {
 	color: #333333;
@@ -494,6 +501,7 @@ div.menu {
 	font-size: 10px;
 	text-align: center;
 	padding: 20px;
+	clear: both;
 }
 	#footer a {
 		color: #666666;
@@ -516,9 +524,8 @@ div.menu {
 }
 
 #debug {
-	padding-left: 20px;
-	padding-right: 20px;
-}
+	padding: 20px;
+	}
 
 .debug, #debug li {
 	font-size: 11px;
