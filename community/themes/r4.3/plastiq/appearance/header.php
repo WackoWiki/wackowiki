@@ -336,12 +336,12 @@
 		'l');
 
 	// moderation tab
-	/* echo EchoTab(
+	echo EchoTab(
 		$this->href('moderate'),
 		$this->GetTranslation('ModerateTip'),
 		($this->IsModerator() && $this->HasAccess('read')) ? 'модерация' : '',
 		$this->method == 'moderate',
-		'm'); */
+		'm');
 
 	// settings tab
 	echo EchoTab(
