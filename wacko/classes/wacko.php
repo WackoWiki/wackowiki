@@ -3038,7 +3038,7 @@ class Wacko
 		if (is_array($this->config['aliases']))
 		{
 			$al = $this->config['aliases'];
-			$adm = explode("\n", $al['Admins']);
+			$adm = explode("\\n", $al['Admins']);
 
 			if ($adm == true && in_array($this->GetUserName(), $adm))
 				return true;
@@ -3053,7 +3053,7 @@ class Wacko
 		if (is_array($this->config['aliases']))
 		{
 			$al  = $this->config['aliases'];
-			$mod = explode("\n", $al['Moders']);
+			$mod = explode("\\n", $al['Moderators']);
 
 			if ($mod == true && in_array($this->GetUserName(), $mod))
 				return true;
@@ -3318,7 +3318,7 @@ class Wacko
 
 				if (isset($aliases[$linel]))
 				{
-					foreach (explode("\n", $aliases[$linel]) as $item)
+					foreach (explode("\\n", $aliases[$linel]) as $item)
 					{
 						$item	= trim($item);
 						$list[]	= ($negate ? "!".$item : $item);
@@ -3809,11 +3809,13 @@ class Wacko
 			if ($this->page['keywords'])
 			{
 				$keywords = $this->LoadAll(
-					"SELECT k.keyword_id, k.keyword 
-					FROM {$this->config['table_prefix']}keywords k 
+					"SELECT k.keyword_id, k.keyword
+					FROM {$this->config['table_prefix']}keywords k
 						INNER JOIN {$this->config['table_prefix']}keywords_pages kp ON (k.keyword_id = kp.keyword_id)
 					WHERE kp.page_id = '{$this->page['page_id']}' ");
-				foreach ($keywords as $word) $this->keywords[$word['keyword_id']] = $word['keyword'];
+
+				foreach ($keywords as $word)
+					$this->keywords[$word['keyword_id']] = $word['keyword'];
 				unset($keywords, $word);
 			}
 		}
