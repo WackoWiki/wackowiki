@@ -1221,8 +1221,24 @@ class Wacko
 		// check privileges
 		if ($this->HasAccess("write", $page_id) || ($comment_on_id && $this->HasAccess("comment", $comment_on_id)))
 		{
+			// for forum topic prepare description
+			if (!$comment_on_id)
+			{
+				$desc = $this->Format(substr($body, 0, 500), 'cleanwacko');
+				$desc = ( strlen($desc) > 240 ? substr($desc, 0, 240).'...' : $desc.' (-)' );
+			}
+
 			// preformatter (macros and such)
 			$body = $this->Format($body, "preformat");
+
+			// making page body components
+			$body_r = $this->Format($body, "wacko");
+
+			if ($this->config["paragrafica"] && !$comment_on_id)
+			{
+				$body_r = $this->Format($body_r, "paragrafica");
+				$body_toc = $this->body_toc;
+			}
 
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
 			if (!$oldPage = $this->LoadPage($tag))
@@ -1246,13 +1262,6 @@ class Wacko
 						$title = $this->GetTranslation("Comment")." ".substr($tag, 7);
 					else
 						$title = $this->GetPageTitle($tag);
-				}
-
-				$body_r = $this->Format($body, "wacko");
-				if ($this->config["paragrafica"] && !$comment_on_id)
-				{
-					$body_r = $this->Format($body_r, "paragrafica");
-					$body_toc = $this->body_toc;
 				}
 
 				// create appropriate acls
@@ -1435,13 +1444,6 @@ class Wacko
 			else
 			{
 				$this->SetLanguage($this->pagelang);
-				$body_r = $this->Format($body, "wacko");
-
-				if ($this->config["paragrafica"])
-				{
-					$body_r = $this->Format($body_r, "paragrafica");
-					$body_toc = $this->body_toc;
-				}
 
 				// aha! page isn't new. keep owner!
 				$owner_id = $oldPage["owner_id"];
