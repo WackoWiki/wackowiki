@@ -9,11 +9,23 @@ if ($this->page["comment_on_id"])
 	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page["comment_on_id"]), "show_comments=1")."#".$this->page["tag"]);
 
 if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET["minor_edit"]) ? $_GET["minor_edit"] :"";
+// get page_id for deleted but stored page
+if (!isset($this->page["page_id"]))
+{
+	$tag = trim($_GET['page'],'/revisions'); //
+	// Returns Array ( [id] => Value )
+	$get_page_ID = $this->LoadSingle(
+			"SELECT page_id ".
+			"FROM ".$this->config["table_prefix"]."revisions ".
+			"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
+
+	// Get the_ID value
+	$this->page["page_id"] = $get_page_ID['page_id'];
+	echo "BACKUP of deleted page!"; // TODO: localize and add description: to restore the page you ...
+}
 
 if ($this->HasAccess("read"))
 {
-
-
 	// load revisions for this page
 	if ($pages = $this->LoadRevisions($this->page["page_id"], $hide_minor_edit))
 	{
