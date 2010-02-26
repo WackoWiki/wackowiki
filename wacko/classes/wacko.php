@@ -649,6 +649,16 @@ class Wacko
 			return $this->config["meta_description"];
 	}
 
+	function GetTagById($id, $old = 0)
+	{
+		$page = $this->LoadSingle(
+			"SELECT tag ".
+			"FROM {$this->config['table_prefix']}".( !$old ? 'pages' : 'revisions' )." ".
+			"WHERE page_id = ".quote($this->dblink, (int)$id)." ".
+			"LIMIT 1");
+		return $page['tag'];
+	}
+
 	// wrapper for OldLoadPage
 	function LoadPage($tag, $time = "", $cache = LOAD_CACHE, $metadataonly = LOAD_ALL)
 	{

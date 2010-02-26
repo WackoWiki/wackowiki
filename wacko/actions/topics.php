@@ -94,7 +94,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	$pagination	= $this->Pagination($count['n'], $this->config['forum_topics']);
 	
 	// make collector query
-	$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, u.user_name AS user,  o.user_name as owner ".
+	$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, u.user_name AS user, o.user_name as owner ".
 		"FROM {$this->config['table_prefix']}pages AS p ".
 			"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 			"LEFT JOIN ".$this->config["table_prefix"]."users o ON (p.owner_id = o.user_id), ".
