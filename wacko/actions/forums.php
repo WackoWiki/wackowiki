@@ -31,7 +31,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		"FROM {$this->config['table_prefix']}pages AS p, ".
 			"{$this->config['table_prefix']}acls AS a ".
 		"WHERE p.page_id = a.page_id ".
-		"AND a.privilege = 'comment' AND a.list = '$' ";
+		"AND a.privilege = 'comment' AND a.list = '*' ";
 	if (!isset($pages))
 	{
 		$sql .= "AND p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ";
@@ -72,7 +72,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			// print
 			echo '<tr class="lined">'.
 					'<td style="width:70%" valign="top">'.
-						( $this->HasAccess('create', $forum['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->GetTranslation('lockicon')) : '' ).
+						( $this->HasAccess('write', $forum['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->GetTranslation('lockicon')) : '' ).
 						( $user['sessiontime'] == true && $comment['user'] != $user['user_name'] && $comment['created'] > $user['sessiontime'] ? '<strong class="cite" title="'.$this->GetTranslation('ForumNewPosts').'">[updated]</strong> ' : '' ).
 						'<strong>'.$this->Link($forum['tag'], '', $forum['title'], 0).'</strong><br />'.
 						'<small><small>'.$forum['description'].'</small></small>'.
