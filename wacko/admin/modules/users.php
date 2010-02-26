@@ -212,7 +212,7 @@ function admin_users(&$engine, &$module)
 	}
 	else
 	{
-		// set signup_time ordering
+		// set signuptime ordering
 		if ($_GET['order'] == 'signup_asc')
 		{
 			$order		= 'ORDER BY signup_time ASC ';
@@ -226,6 +226,22 @@ function admin_users(&$engine, &$module)
 		else
 		{
 			$signup_time	= 'signup_asc';
+		}
+
+		// set sessiontime ordering
+		if ($_GET['order'] == 'session_asc')
+		{
+			$order		= 'ORDER BY session_time ASC ';
+			$session_time	= 'session_desc';
+		}
+		else if ($_GET['order'] == 'session_desc')
+		{
+			$order		= 'ORDER BY session_time DESC ';
+			$session_time	= 'session_asc';
+		}
+		else
+		{
+			$session_time	= 'session_asc';
 		}
 
 		// set total_pages ordering
@@ -350,8 +366,8 @@ function admin_users(&$engine, &$module)
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderrevisions; ?>">Revisions</a></th>
 					<th style="width:20px;">Language</th>
 					<th style="width:20px;">Active</th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $signup_time; ?>">signup_time</a></th>
-					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderlevel; ?>">Sessiontime</a></th>
+					<th style="width:20px;"><a href="?mode=users&order=<?php echo $signup_time; ?>">Signuptime</a></th>
+					<th style="width:20px;"><a href="?mode=users&order=<?php echo $session_time; ?>">Sessiontime</a></th>
 				</tr>
 	<?php
 		if ($users)
