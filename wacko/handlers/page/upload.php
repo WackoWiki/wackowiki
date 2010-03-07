@@ -35,7 +35,7 @@ if ($registered
 			$page_id = $this->page["page_id"];
 
 		$what = $this->LoadAll(
-			"SELECT u.user_name AS user, f.upload_id, f.filename, f.filesize, f.description ".
+			"SELECT f.user_id, u.user_name AS user, f.upload_id, f.filename, f.filesize, f.description, f.uploaded_dt ".
 			"FROM ".$this->config["table_prefix"]."upload f ".
 				"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
@@ -53,9 +53,15 @@ if ($registered
 				// !!!!! place here a reference to delete files
 ?>
 	<br />
-	<ul>
-		<li><?php echo $this->Link( "file:".$_GET["file"] ); ?></li>
-		<?php // place here file description too ?>
+	<ul class="upload">
+		<li><?php echo $this->Link( "file:".$_GET["file"] ); ?>
+			<ul>
+				<li><?php echo $this->GetTimeStringFormatted($what[0]["uploaded_dt"]); ?></li>
+				<li><?php echo "(".ceil($what[0]["filesize"] / 1024)." ".$this->GetTranslation("UploadKB").")"; ?></li>
+				<li><?php echo $_GET["file"]; ?></li>
+				<li><?php echo $what[0]["description"]; ?></li>
+			</ul>
+		</li>
 	</ul>
 	<br />
 	<input type="hidden" name="remove" value="<?php echo $_GET["remove"]?>" />
@@ -91,7 +97,7 @@ if ($registered
 			$page_id = $this->page["page_id"];
 
 		$what = $this->LoadAll(
-			"SELECT u.user_name AS user, f.upload_id, f.filename, f.filesize, f.description ".
+			"SELECT f.user_id, u.user_name AS user, f.upload_id, f.filename, f.filesize, f.description ".
 			"FROM ".$this->config["table_prefix"]."upload f ".
 				"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
@@ -185,8 +191,8 @@ if ($registered
 						$name = $_name.(++$count);
 				}
 
-				$result_name = $name.".".$ext;
-				$file_size = $_FILES["file"]['size'];
+				$result_name	= $name.".".$ext;
+				$file_size		= $_FILES["file"]['size'];
 
 				// 1.6. check filesize, if asked
 				$maxfilesize = $this->config["upload_max_size"];
@@ -224,6 +230,9 @@ if ($registered
 							$small_name = $small_name[ sizeof($small_name) -1 ];
 						}
 
+						$file_size_kb	= ceil($file_size / 1024);
+						$uploaded_dt	= date("Y-m-d H:i:s");
+
 						$description = substr(quote($this->dblink, $_POST["description"]),0,250);
 						$description = rtrim( $description, "\\" );
 
@@ -242,7 +251,7 @@ if ($registered
 							"picture_w = '".quote($this->dblink, $size[0])."',".
 							"picture_h = '".quote($this->dblink, $size[1])."',".
 							"file_ext = '".quote($this->dblink, substr($ext,0,10))."',".
-							"uploaded_dt= '".quote($this->dblink, date("Y-m-d H:i:s"))."' ");
+							"uploaded_dt= '".quote($this->dblink, $uploaded_dt)."' ");
 
 						// 4. output link to file
 						// !!!!! write after providing filelink syntax
@@ -251,17 +260,23 @@ if ($registered
 						// log event
 						if ($is_global)
 						{
-							$this->Log(4, str_replace("%3", ceil($file_size / 1024), str_replace("%2", $small_name, $this->GetTranslation("LogFileUploadedGlobal"))));
+							$this->Log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, $this->GetTranslation("LogFileUploadedGlobal"))));
 						}
 						else
 						{
-							$this->Log(4, str_replace("%3", ceil($file_size / 1024), str_replace("%2", $small_name, str_replace("%1", $this->page["tag"]." ".$this->page["title"], $this->GetTranslation("LogFileUploadedLocal")))));
+							$this->Log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, str_replace("%1", $this->page["tag"]." ".$this->page["title"], $this->GetTranslation("LogFileUploadedLocal")))));
 						}
 						?>
 	<br />
-	<ul>
-		<li><?php echo $this->Link("file:".$small_name); ?></li>
-		<li><?php echo $description; ?></li>
+	<ul class="upload">
+		<li><?php echo $this->Link("file:".$small_name); ?>
+			<ul>
+				<li><?php echo $this->GetTimeStringFormatted($uploaded_dt); ?></li>
+				<li><?php echo "(".$file_size_kb." ".$this->GetTranslation("UploadKB").")"; ?></li>
+				<li><?php echo $small_name; ?></li>
+				<li><?php echo $description; ?></li>
+			</ul>
+		</li>
 	</ul>
 	<br />
 <?php
