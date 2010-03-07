@@ -78,7 +78,7 @@ if ($registered
 				echo $this->FormClose();
 			}
 			else
-				print($this->GetTranslation("UploadRemoveDenied"));
+				$this->SetMessage($this->GetTranslation("UploadRemoveDenied"));
 		}
 		else
 			print($this->GetTranslation("UploadFileNotFound"));
@@ -115,7 +115,7 @@ if ($registered
 					"DELETE FROM ".$this->config["table_prefix"]."upload ".
 					"WHERE upload_id = '". quote($this->dblink, $what[0]["upload_id"])."'" );
 
-				print("<div>".$this->GetTranslation("UploadRemovedFromDB")."</div>");
+				$message .= $this->GetTranslation("UploadRemovedFromDB")."<br />";
 
 				// 3. remove from FS
 				$real_filename = ($page_id
@@ -124,21 +124,22 @@ if ($registered
 					$what[0]["filename"];
 
 				if (@unlink($real_filename))
-					print("<div>".$this->GetTranslation("UploadRemovedFromFS")."</div><br /><br /> ");
+					$message .= $this->GetTranslation("UploadRemovedFromFS");
 				else
-					print("<div class=\"error\">".$this->GetTranslation("UploadRemovedFromFSError")."</div><br /><br /> ");
+					$message .= "<div class=\"error\">".$this->GetTranslation("UploadRemovedFromFSError")."</div>";
 
+				$this->SetMessage($message);
 				// log event
 				$this->Log(1, str_replace("%2", $what[0]["filename"], str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedFile"))));
 			}
 			else
 			{
-				print($this->GetTranslation("UploadRemoveDenied"));
+				$this->SetMessage($this->GetTranslation("UploadRemoveDenied"));
 			}
 		}
 		else
 		{
-			print($this->GetTranslation("UploadRemoveNotFound"));
+			$this->SetMessage($this->GetTranslation("UploadRemoveNotFound"));
 		}
 
 	}
@@ -255,7 +256,7 @@ if ($registered
 
 						// 4. output link to file
 						// !!!!! write after providing filelink syntax
-						echo "<strong>".$this->GetTranslation("UploadDone")."</strong>";
+						$this->SetMessage("<strong>".$this->GetTranslation("UploadDone")."</strong>");
 
 						// log event
 						if ($is_global)
@@ -305,7 +306,7 @@ if ($registered
 	}
 	if ($error)
 	{
-		echo "<div class=\"error\">".$error."</div><br /><br />";
+		$this->SetMessage("<div class=\"error\">".$error."</div>");
 	}
 	echo $this->Action("upload", array())."<br />";
 	echo $this->Action("files", array());
@@ -313,7 +314,7 @@ if ($registered
 }
 else
 {
-	print($this->GetTranslation("UploadForbidden"));
+	$this->SetMessage($this->GetTranslation("UploadForbidden"));
 }
 if (!$this->GetConfigValue("revisions_hide_cancel"))
 	echo "<input type=\"button\" value=\"".$this->GetTranslation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
