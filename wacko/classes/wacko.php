@@ -1267,44 +1267,45 @@ class Wacko
 				// create appropriate acls
 				if (strstr($this->context[$this->current_context], "/") && !$comment_on_id)
 				{
-					$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $this->context[$this->current_context] );
-					$root_id = $this->GetPageId($root);
-					$write_acl = $this->LoadAcl($this->GetPageId($root), "write");
+					$root			= preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $this->context[$this->current_context] );
+					$root_id		= $this->GetPageId($root);
+					$write_acl		= $this->LoadAcl($this->GetPageId($root), "write");
 					while ($write_acl["default"] == 1)
 					{
-						$_root = $root;
-						$root = preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $root );
+						$_root		= $root;
+						$root		= preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $root );
 						if ($root == $_root) break;
-						# $root_id = $this->GetPageId($root); // do we need this?
-						$write_acl = $this->LoadAcl($root_id, "write");
+						# $root_id	= $this->GetPageId($root); // do we need this?
+						$write_acl	= $this->LoadAcl($root_id, "write");
 					}
 
-					$write_acl = $write_acl["list"];
-					$read_acl = $this->LoadAcl($root_id, "read");
-					$read_acl = $read_acl["list"];
-					$comment_acl = $this->LoadAcl($root_id, "comment");
-					$comment_acl = $comment_acl["list"];
+					$write_acl		= $write_acl["list"];
+					$read_acl		= $this->LoadAcl($root_id, "read");
+					$read_acl		= $read_acl["list"];
+					$comment_acl	= $this->LoadAcl($root_id, "comment");
+					$comment_acl	= $comment_acl["list"];
 				}
 				else if ($comment_on_id)
 				{
 					// Give comments the same rights as their parent page
-					$read_acl = $this->LoadAcl($comment_on_id, "read");
-					$read_acl = $read_acl["list"];
-					$write_acl = $this->LoadAcl($comment_on_id, "write");
-					$write_acl = $write_acl["list"];
-					$comment_acl = $this->LoadAcl($comment_on_id, "comment");
-					$comment_acl = $comment_acl["list"];
+					$read_acl		= $this->LoadAcl($comment_on_id, "read");
+					$read_acl		= $read_acl["list"];
+					$write_acl		= $this->LoadAcl($comment_on_id, "write");
+					$write_acl		= $write_acl["list"];
+					$comment_acl	= $this->LoadAcl($comment_on_id, "comment");
+					$comment_acl	= $comment_acl["list"];
 				}
 				else
 				{
-					$read_acl  = $this->config["default_read_acl"];
-					$write_acl = $this->config["default_write_acl"];
-					$comment_acl = $this->config["default_comment_acl"];
+					$read_acl		= $this->config["default_read_acl"];
+					$write_acl		= $this->config["default_write_acl"];
+					$comment_acl	= $this->config["default_comment_acl"];
 				}
 
 				$this->Query(
 					"INSERT INTO ".$this->config["table_prefix"]."pages SET ".
 						"comment_on_id 	= '".quote($this->dblink, $comment_on_id)."', ".
+						(!$comment_on_id ? "description = '".quote($this->dblink, $desc)."', " : "").
 						"created 		= NOW(), ".
 						"modified 		= NOW(), ".
 						"commented		= NOW(), ".
@@ -1465,7 +1466,7 @@ class Wacko
 							"created		= '".quote($this->dblink, $oldPage['created'])."', ".
 							"owner_id		= '".quote($this->dblink, $owner_id)."', ".
 							"user_id		= '".quote($this->dblink, $user_id)."', ".
-							#"description	= '".quote($this->dblink, ($oldPage['comment_on_id'] || $oldPage['description'] ? $oldPage['description'] : $desc ))."', ".
+							"description	= '".quote($this->dblink, ($oldPage['comment_on_id'] || $oldPage['description'] ? $oldPage['description'] : $desc ))."', ".
 							"supertag		= '".$this->NpjTranslit($tag)."', ".
 							"body			= '".quote($this->dblink, $body)."', ".
 							"body_r			= '".quote($this->dblink, $body_r)."', ".
@@ -1798,8 +1799,8 @@ class Wacko
 
 		if (preg_match("/^[\!\.".$this->language["ALPHANUM_P"]."]+$/", $tag))
 		{
-			// it's a Wiki link!
 			if ($_SESSION[$this->config["session_prefix"].'_'."linktracking"] && $track)
+				// it's a Wiki link!
 				$this->TrackLinkTo($this->UnwrapLink( $tag ));
 		}
 		if ($imgurl == 1)
@@ -3989,8 +3990,8 @@ class Wacko
 
 	function NumerateTocCallbackP($matches)
 	{
-		$before = "";
-		$after = "";
+		$before	= "";
+		$after	= "";
 
 		if (!($style = $this->paragrafica_styles[$this->post_wacko_action["p"]]))
 		{
@@ -3998,8 +3999,8 @@ class Wacko
 			$style = $this->paragrafica_styles["before"];
 		}
 
-		$len = strlen("".$this->post_wacko_maxp);
-		$link = '<a href="#'.$matches[2].'">'.
+		$len	= strlen("".$this->post_wacko_maxp);
+		$link	= '<a href="#'.$matches[2].'">'.
 		str_pad($this->post_wacko_toc_hash[$matches[2]][66], $len, "0", STR_PAD_LEFT).
 		'</a>';
 
@@ -4048,18 +4049,18 @@ class Wacko
 		return $result;
 	}
 
-	// $id is preferred, $tag next
-	function GetPageTitle($tag = '', $id = 0)
+	// $page_id is preferred, $tag next
+	function GetPageTitle($tag = '', $page_id = 0)
 	{
 		if ($tag) $tag = trim($tag, '/');
 
-		if ($tag == true || $id != 0)
+		if ($tag == true || $page_id != 0)
 		{
 			$page = $this->LoadSingle(
 				"SELECT title ".
 				"FROM {$this->config['table_prefix']}pages ".
-				"WHERE ".( $id != 0
-					? "page_id	= '".quote($this->dblink, (int)$id)."' "
+				"WHERE ".( $page_id != 0
+					? "page_id	= '".quote($this->dblink, (int)$page_id)."' "
 					: "tag	= '".quote($this->dblink, $tag)."' " ).
 				"LIMIT 1");
 
