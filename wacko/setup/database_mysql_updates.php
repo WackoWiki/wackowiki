@@ -20,6 +20,7 @@ $update_acls_r4_2 = "UPDATE {$pref}acls AS acls, (SELECT id, tag FROM {$pref}pag
 
 // CACHE
 $alter_cache_r4_2 = "ALTER TABLE {$pref}cache ADD cache_time TIMESTAMP NOT NULL, ADD INDEX timestamp (cache_time)";
+$alter_cache_r4_2_1 = "ALTER TABLE {$pref}cache ADD lang VARCHAR(2) NOT NULL AFTER query";
 
 // CONFIG
 $table_config_r4_2 = "CREATE TABLE {$pref}config (".
