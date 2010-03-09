@@ -19,6 +19,7 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 					"name VARCHAR(32) NOT NULL,".
 					"method VARCHAR(20) NOT NULL,".
 					"query VARCHAR(100) NOT NULL,".
+					"lang VARCHAR(2) NOT NULL,".
 					"cache_time TIMESTAMP NOT NULL,".
 					"INDEX (name),".
 					"KEY timestamp (cache_time)".

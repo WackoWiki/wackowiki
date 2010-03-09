@@ -229,6 +229,7 @@ switch($config["database_driver"])
 					test(str_replace("%1","acls",$lang["AlterTable"]), @mysql_query($alter_acls_r4_2_5, $dblink), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
 
 					test(str_replace("%1","cache",$lang["AlterTable"]), @mysql_query($alter_cache_r4_2, $dblink), str_replace("%1", "cache", $lang["ErrorAlteringTable"]));
+					test(str_replace("%1","cache",$lang["AlterTable"]), @mysql_query($alter_cache_r4_2_1, $dblink), str_replace("%1", "cache", $lang["ErrorAlteringTable"]));
 
 					test(str_replace("%1","config",$lang["CreatingTable"]), @mysql_query($table_config_r4_2, $dblink), str_replace("%1", "config", $lang["ErrorCreatingTable"]));
 
@@ -519,6 +520,7 @@ switch($config["database_driver"])
 								test(str_replace("%1","acls",$lang["AlterTable"]), @mysqli_query($dblink, $alter_acls_r4_2_5), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
 
 								test(str_replace("%1","cache",$lang["AlterTable"]), @mysqli_query($dblink, $alter_cache_r4_2), str_replace("%1", "cache", $lang["ErrorAlteringTable"]));
+								test(str_replace("%1","cache",$lang["AlterTable"]), @mysqli_query($dblink, $alter_cache_r4_2_1), str_replace("%1", "cache", $lang["ErrorAlteringTable"]));
 
 								test(str_replace("%1","config",$lang["CreatingTable"]), @mysqli_query($dblink, $table_config_r4_2), str_replace("%1", "config", $lang["ErrorCreatingTable"]));
 
