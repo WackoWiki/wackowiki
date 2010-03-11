@@ -151,7 +151,7 @@ $wackoTranslation = array(
 	"KeywordsSaveButton" 	=> "Save",
 	"KeywordsCancelButton" 	=> "Cancel",
 	"KeywordsAddButton"		=> "Add",
-	"KeywordsRenameButton"	=> "Rename",
+	"KeywordsRenameButton"	=> "Nimeta ümber",
 	"KeywordsGroupButton"	=> "Group",
 	"KeywordsRemoveButton"	=> "Remove",
 	"KeywordsEditInfo"		=> "To edit the keyword list select the radio button.",
@@ -324,7 +324,7 @@ $wackoTranslation = array(
 
 	"RenameText" => "Nimeta ümber",
 	"NewName" => "Anna lehele uus nimi",
-	"RenameButton" => "Nimeta ümber!",
+	"RenameButton" => "Nimeta ümber",
 	"AlredyExists" => "<em>Lehekülg <strong>%1</strong> juba eksisteerib.</em>",
 	"AlreadyNamed" => "<em>See leht nimetati juba selliseks: <strong>%1</strong>.</em>",
 	"PageRenamed" => "<em>Leht %1 on ümber nimetatud.</em>",

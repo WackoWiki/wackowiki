@@ -151,7 +151,7 @@ $wackoTranslation = array(
 	"KeywordsSaveButton" 	=> "Save",
 	"KeywordsCancelButton" 	=> "Cancel",
 	"KeywordsAddButton"		=> "Add",
-	"KeywordsRenameButton"	=> "Rename",
+	"KeywordsRenameButton"	=> "Μετονομασία",
 	"KeywordsGroupButton"	=> "Group",
 	"KeywordsRemoveButton"	=> "Remove",
 	"KeywordsEditInfo"		=> "To edit the keyword list select the radio button.",
@@ -324,7 +324,7 @@ $wackoTranslation = array(
 
 	"RenameText" => "Μετονομασία",
 	"NewName" => "Εισήγαγε ένα νέο όνομα σε αυτή την σελίδα",
-	"RenameButton" => "Μετονομασία!",
+	"RenameButton" => "Μετονομασία",
 	"AlredyExists" => "<em>Η σελίδα <strong>%1</strong> υπάρχει ήδη.</em>",
 	"AlreadyNamed" => "<em>Η σελίδα έχει ήδη μετονομαστεί <strong>%1</strong>.</em>",
 	"PageRenamed" => "<em>Η σελίδα %1 μετονομάστηκε.</em>",
