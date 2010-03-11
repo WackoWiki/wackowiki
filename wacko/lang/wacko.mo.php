@@ -151,7 +151,7 @@ $wackoTranslation = array(
 	"KeywordsSaveButton" 	=> "Save",
 	"KeywordsCancelButton" 	=> "Cancel",
 	"KeywordsAddButton"		=> "Add",
-	"KeywordsRenameButton"	=> "Rename",
+	"KeywordsRenameButton"	=> "Redenumeste",
 	"KeywordsGroupButton"	=> "Group",
 	"KeywordsRemoveButton"	=> "Remove",
 	"KeywordsEditInfo"		=> "To edit the keyword list select the radio button.",
@@ -326,7 +326,7 @@ $wackoTranslation = array(
 
 	"RenameText" => "Redenumeste",
 	"NewName" => "Introduceti nume nou pentru pagina data",
-	"RenameButton" => "Redenumeste!",
+	"RenameButton" => "Redenumeste",
 	"AlredyExists" => "<em>Pagina cu numele <strong>%1</strong> deja exista.</em>",
 	"AlreadyNamed" => "<em>Pagina data deja se numeste <strong>%1</strong>.</em>",
 	"PageRenamed" => "<em>Pagina %1 deja e redenumita.</em>",

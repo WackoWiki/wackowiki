@@ -151,7 +151,7 @@ $wackoTranslation = array(
 	"KeywordsSaveButton" 	=> "Save",
 	"KeywordsCancelButton" 	=> "Cancel",
 	"KeywordsAddButton"		=> "Add",
-	"KeywordsRenameButton"	=> "Rename",
+	"KeywordsRenameButton"	=> "Omdøb",
 	"KeywordsGroupButton"	=> "Group",
 	"KeywordsRemoveButton"	=> "Remove",
 	"KeywordsEditInfo"		=> "To edit the keyword list select the radio button.",
@@ -324,7 +324,7 @@ $wackoTranslation = array(
 
 	"RenameText" => "Omdøb",
 	"NewName" => "Skriv nyt navn for siden",
-	"RenameButton" => "Omdøb!",
+	"RenameButton" => "Omdøb",
 	"AlredyExists" => "<em>Siden <strong>%1</strong> findes allerede.</em>",
 	"AlreadyNamed" => "<em>Siden hedder allerede <strong>%1</strong>.</em>",
 	"PageRenamed" => "<em>Siden %1 omdøbt.</em>",
