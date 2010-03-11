@@ -47,7 +47,6 @@ function ModerateRenameTopic(&$engine, $oldtag, $newtag, $title = '')
 
 	$supertag = $engine->NpjTranslit($newtag);
 
-	$engine->RenameFiles($oldtag, $newtag);
 	$engine->RenamePage($oldtag, $newtag, $supertag);
 	$engine->RemoveReferrers($oldtag);
 	$engine->RemoveLinks($oldtag);

@@ -26,7 +26,7 @@ if (sizeof($what) > 0)
 	($this->HasAccess("read")) || ($desc["user_id"] == $this->GetUserId()) )
 	{
 		$filepath = $this->config["upload_path".($page_id ? "_per_page" : "")]."/".
-		($page_id ? ("@".str_replace("/", "@", $this->supertag)."@") : "").
+		($page_id ? ("@".$this->page["page_id"]."@") : "").
 		$what[0]["filename"];
 	}
 	else

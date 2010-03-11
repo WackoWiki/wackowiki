@@ -4101,35 +4101,6 @@ class Wacko
 				"WHERE tag = '".quote($this->dblink, $tag)."' ");
 	}
 
-	function RenameFiles($tag, $NewTag, $NewSuperTag = "")
-	{
-		if($NewSuperTag == "")
-		$NewSuperTag = $this->NpjTranslit($NewTag);
-
-		$dir = $this->config["upload_path_per_page"]."/";
-
-		$old_name = "@".str_replace("/", "@", $tag)."@";
-		$new_name = "@".str_replace("/", "@", $NewSuperTag)."@";
-
-		if($handle = opendir($dir))
-		{
-			while(false !== ($file = readdir($handle)))
-			{
-				if($file != "." && $file != "..")
-				{
-					$pos = stristr($file, $old_name);
-					if ($pos !== false)
-					{
-						rename($dir.$file, $dir.$new_name.substr($file, strlen($old_name)));
-					}
-				}
-			}
-			closedir($handle);
-		}
-
-		return true;
-	}
-
 	// REMOVALS
 	function RemoveAcls($tag, $cluster = false)
 	{
@@ -4297,7 +4268,7 @@ class Wacko
 		if (!$tag) return false;
 
 		$pages = $this->LoadAll(
-			"SELECT page_id, supertag ".
+			"SELECT page_id ".
 			"FROM {$this->config['table_prefix']}pages ".
 			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 
@@ -4313,7 +4284,7 @@ class Wacko
 			{
 				// remove from FS
 				$filename = $this->config['upload_path_per_page'].'/@'.
-					str_replace('/', '@', $page['supertag']).'@'.$file['filename'];
+					$page['page_id'].'@'.$file['filename'];
 				@unlink($filename);
 			}
 			// remove from DB
