@@ -69,9 +69,6 @@ if ($registered
 						if ($this->RenamePage($this->tag, $NewName, $supernewname))
 						print(str_replace("%1",$this->tag,$this->GetTranslation("PageRenamed"))."<br />\n");
 
-						if ($this->RenameFiles($this->tag, $NewName, $supernewname))
-						print(str_replace("%1",$this->tag,$this->GetTranslation("FilesRenamed"))."<br />\n");
-
 						$this->ClearCacheWantedPage($NewName);
 						$this->ClearCacheWantedPage($supernewname);
 
@@ -216,9 +213,6 @@ function Move(&$parent, $OldPage, $NewName )
 
 				if ($parent->RenamePage($OldPage["tag"], $NewName, $supernewname))
 					print(str_replace("%1",$OldPage["tag"],$parent->GetTranslation("PageRenamed"))."<br />\n");
-
-				if ($parent->RenameFiles($OldPage["tag"], $NewName, $supernewname))
-					print(str_replace("%1",$OldPage["tag"],$parent->GetTranslation("FilesRenamed"))."<br />\n");
 
 				$parent->ClearCacheWantedPage($NewName);
 				$parent->ClearCacheWantedPage($supernewname);

@@ -119,7 +119,7 @@ if ($registered
 
 				// 3. remove from FS
 				$real_filename = ($page_id
-					? ($this->config["upload_path_per_page"]."/@".str_replace("/","@",$this->supertag)."@")
+					? ($this->config["upload_path_per_page"]."/@".$page_id."@")
 					: ($this->config["upload_path"]."/")).
 					$what[0]["filename"];
 
@@ -166,9 +166,9 @@ if ($registered
 				// here would be place for translit
 				$name = $this->Format($name, "translit");
 
-				// 1.5. +write @PageSupertag@SubPage@ to name
+				// 1.5. +write @page_id@ to name
 				if ($_POST["to"] != "global")
-					$name = "@".str_replace("/", "@", $this->page["supertag"])."@".$name;
+					$name = "@".$this->page["page_id"]."@".$name;
 				else
 					$is_global = 1;
 

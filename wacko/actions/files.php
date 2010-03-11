@@ -77,7 +77,7 @@ if ($can_view)
 	$kb  = $this->GetTranslation("UploadKB");
 	$del = $this->GetTranslation("UploadRemove");
 
-	if (!$global)	$path = "@".str_replace("/", "@", $this->NpjTranslit($page))."@";
+	if (!$global)	$path = "@".$filepage["page_id"]."@";
 	else			$path = "";
 
 	if (!$global) 	$path2 = "file:/".($this->SlimUrl($page))."/";
