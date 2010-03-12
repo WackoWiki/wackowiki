@@ -162,7 +162,7 @@ $wackoTranslation = array(
 
 	// groups handler
 	"Groups"				=> "Groups",
-	"GroupsMembers"			=> "Members for",
+	"GroupsMembers"			=> "Members for Group",
 	"GroupsDescription"	=> "Description",
 	"GroupsModerator"	=> "Moderator",
 	"GroupsTip"			=> "Click to edit Group",
@@ -183,6 +183,18 @@ $wackoTranslation = array(
 	"GroupsRenameButton"	=> "Rename",
 	"GroupsRemoveButton"	=> "Remove",
 	"GroupsEditInfo"		=> "To edit the groups list select the radio button.",
+
+	"MembersAddNew"		=> "Add new member",
+	"MembersRemove"		=> "Are you sure you want to remove member ",
+	"MembersRemoved"		=> "The member was removed from the group.",
+	"MembersDeleteInfo"	=> "* Note: Change will affect all members that are assigned to that group.",
+
+	"UsersAddNew"		=> "Add new user",
+	"UsersDelete"		=> "Are you sure you want to remove user ",
+	"UsersDeleted"		=> "The user was deleted from the database.",
+	"UsersRename"		=> "Rename the user",
+	"UsersRenameInfo"	=> "* Note: Change will affect all pages that are assigned to that user.",
+	"UsersRenamed"		=> "User successfully renamed.",
 
 	"MetaUpdated" => "Meta data updated",
 	"MetaStoreButton" => "Save",
@@ -350,7 +362,7 @@ $wackoTranslation = array(
 
 	"RenameText" => "Rename",
 	"NewName" => "Enter new name for this page",
-	"RenameButton" => "Rename",
+	"RenameButton" => "Rename!",
 	"AlredyExists" => "<em>Page <strong>%1</strong> already exists.</em>",
 	"AlreadyNamed" => "<em>This page already named <strong>%1</strong>.</em>",
 	"PageRenamed" => "<em>Page %1 renamed.</em>",
