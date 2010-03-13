@@ -110,6 +110,7 @@ form input.submitinput {
 	padding: 9px 0px 0px;
 	border-top-width: 1px;
 	border-top-style: solid;
+	border: 1px inset;
 
 }
 
@@ -119,14 +120,13 @@ form input.submitinput {
 	padding-right: 10px;
 	padding-bottom: 20px;
 	padding-left: 10px;
-	border: 1px inset;
 	border-top: none;
 	border-bottom: none;
 }
 
 #pageedit {
 	background-color: #FFFFFF;
-	border: 1px inset;
+	
 	border-bottom: none;
 }
 
