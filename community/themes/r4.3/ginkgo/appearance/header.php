@@ -153,13 +153,13 @@ if ($this->GetUser()) {
 // Bookmarks
 $BMs = $this->GetBookmarks();
 $formatedBMs =  $this->Format($this->Format(implode("| ", $BMs), "wacko"), "post_wacko");
-$formatedBMs = str_replace ( "| ", "</li><li>\n", $formatedBMs );
+$formatedBMs = str_replace ( "\n", "</li><li>\n", $formatedBMs );
 echo $formatedBMs;
 echo "</li></ul></div>";
         # echo "<hr color=#CCCCCC noshade size=1 />";
 		echo '<br />';
        if ($this->GetUser()) {
-			if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>
+			if (!in_array($this->tag, $this->GetBookmarkLinks())) {?>
             <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"> <img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark1.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->GetTranslation("Bookmarks"); ?> </a>
             <?php } else { ?>
             <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"> <img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark2.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->GetTranslation("Bookmarks");

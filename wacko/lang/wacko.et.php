@@ -538,7 +538,7 @@ $wackoTranslation = array(
 	"PrevAcr" => "Prev",
 
 	"default_bookmarks" => "SisuKord\n((ViimasedMuudatused Muudatused))\n((ViimatiKommenteeritud Kommenteeritud))",
-	"site_bookmarks" => "SisuKord / ((ViimasedMuudatused Muudatused)) / ((ViimatiKommenteeritud Kommenteeritud))",
+	"site_bookmarks" => "SisuKord\n((ViimasedMuudatused Muudatused))\n((ViimatiKommenteeritud Kommenteeritud))",
 
 	//icons
 	"outericon" => '<img src="{theme}icons/web.gif" alt="" />',

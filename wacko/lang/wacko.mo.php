@@ -538,7 +538,7 @@ $wackoTranslation = array(
 	"PrevAcr" => "Prev",
 
 	"default_bookmarks" => "((PageIndex Index))\n((RecentChanges Changes))\n((RecentlyCommented Comments @@mo))",
-	"site_bookmarks" => "((PageIndex Index)) / ((RecentChanges Changes)) / ((RecentlyCommented Comments @@mo))",
+	"site_bookmarks" => "((PageIndex Index))\n((RecentChanges Changes))\n((RecentlyCommented Comments @@mo))",
 
 	//icons
 	"outericon" => '<img src="{theme}icons/web.gif" alt="" />',

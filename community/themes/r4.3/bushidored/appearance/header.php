@@ -99,7 +99,7 @@ else if($this->HasAccess("write"))
   // Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
 if ($this->GetUser())
 {
- if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks()))
+ if (!in_array($this->tag, $this->GetBookmarkLinks()))
  {?>
   <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark1.gif" alt="+" title="<?php echo $this->GetTranslation("AddToBookmarks") ?>" border="0" align="middle" /></a> <br />
   <?php
