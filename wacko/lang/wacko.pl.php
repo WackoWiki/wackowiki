@@ -537,7 +537,7 @@ $wackoTranslation = array(
 	"PrevAcr" => "Prev",
 
 	"default_bookmarks" => "((IndexStron Index))\n((OstatnieZmiany Zmiany))\n((OstatnioKomentowane Komentowane))",
-	"site_bookmarks" => "((IndexStron Index)) / ((OstatnieZmiany Zmiany)) / ((OstatnioKomentowane Komentowane))",
+	"site_bookmarks" => "((IndexStron Index))\n((OstatnieZmiany Zmiany))\n((OstatnioKomentowane Komentowane))",
 
 	//icons
 	"outericon" => '<img src="{theme}icons/web.gif" alt="" />',

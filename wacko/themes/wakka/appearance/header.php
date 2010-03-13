@@ -113,7 +113,7 @@ else
 		echo "<li>";
 		// Bookmarks
 		$formatedBMs = $this->Format($this->GetBookmarksFormatted(), "post_wacko");
-		$formatedBMs = str_replace (" | ", "</li>\n<li>", $formatedBMs);
+		$formatedBMs = str_replace ("\n", "</li>\n<li>", $formatedBMs);
 		echo $formatedBMs;
 
 		echo "</li>\n";
@@ -121,7 +121,7 @@ else
 		if ($this->GetUser())
 		{
 			// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
-			if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks()))
+			if (!in_array($this->tag, $this->GetBookmarkLinks()))
 				echo '<li><a href="'. $this->Href('', '', "addbookmark=yes")
 					.'"><img src="'. $this->GetConfigValue("theme_url")
 					.'icons/bookmark1.gif" alt="+" title="'.

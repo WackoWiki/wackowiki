@@ -1397,7 +1397,6 @@ class Wacko
 						else continue;	// skip current watcher
 
 						$Watcher["user"] = $this->GetUserNameById($Watcher["user_id"]);
-						#$this->SetUser($Watcher, 0);
 
 						if ($this->HasAccess("read", $comment_on_id, $Watcher["user"]))
 						{
@@ -1506,7 +1505,6 @@ class Wacko
 						if ($Watcher["user_id"] !=  $user_id)
 						{
 							$Watcher["user"] = $this->GetUserNameById($Watcher["user_id"]);
-							#$this->SetUser($Watcher, 0);
 							$lang = $Watcher["lang"];
 
 							if ($this->HasAccess("read", $page_id, $Watcher["user"]))
@@ -3423,30 +3421,44 @@ class Wacko
 			if ($set == BM_DEFAULT)
 				$bookmarks = $this->GetDefaultBookmarks($user["lang"]);
 
-			$dummy = $this->Format($bookmarks, "wacko");
-			$this->ClearLinkTable();
-			$this->StartLinkTracking();
-			$dummy = $this->Format($dummy, "post_wacko");
-			$this->StopLinkTracking();
-			$bmlinks = $this->GetLinkTable();
+			#$dummy = $this->Format($bookmarks, "wacko");
+			#$this->ClearLinkTable();
+			#$this->StartLinkTracking();
+			#$dummy = $this->Format($dummy, "post_wacko");
+			#$this->StopLinkTracking();
+			#$bmlinks = $this->GetLinkTable();
 
 			// parsing bookmarks into links table
-			$bookmarks = explode("\n", $bookmarks);
+			$bookmarks	= explode("\n", $bookmarks);
+			$bmlinks	= $bookmarks;
 			for ($i = 0; $i < count($bmlinks); $i++)
 			{
-				$bmlinks[$i] = $this->NpjTranslit($bmlinks[$i]);
+				if (strpos($bmlinks[$i], '[') === 0 || strpos($bmlinks[$i], '(') === 0)
+				{
+					if (($space = strpos($bmlinks[$i], ' ')) == true)
+						$bmlinks[$i] = substr($bmlinks[$i], 0, $space);
+					else
+						$bmlinks[$i] = substr($bmlinks[$i], 0);
+
+					$bmlinks[$i] = trim($bmlinks[$i], '[( )]');
+					#$bmlinks[$i] = $this->NpjTranslit($bmlinks[$i]);
+				}
+				else
+				{
+					$bmlinks[$i] = '';
+				}
 			}
 
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarks"]		= $bookmarks;
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"]	= $bmlinks;
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"]	= $this->Format(implode(" | ", $bookmarks), "wacko");
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"]	= $this->Format(implode("\n", $bookmarks), "wacko");
 		}
 
 		// adding new bookmark
 		if (!empty($_REQUEST["addbookmark"]) && $user)
 		{
 			// writing bookmark
-			$bookmark = "((".$this->GetPageTag()." ".$this->GetPageTitle().($user["lang"] != $this->pagelang ? " @@".$this->pagelang : "")."))";
+			$bookmark = "((".$this->tag." ".$this->GetPageTitle().($user["lang"] != $this->pagelang ? " @@".$this->pagelang : "")."))";
 
 			if (!in_array($bookmark, $bookmarks))
 			{
@@ -3463,34 +3475,53 @@ class Wacko
 			$bmlinks = $bookmarks;
 			for ($i = 0; $i < count($bmlinks); $i++)
 			{
-				$bmlinks[$i] = trim($this->NpjTranslit($bmlinks[$i]),"()");
+				if (strpos($bmlinks[$i], '[') === 0 || strpos($bmlinks[$i], '(') === 0)
+				{
+					if (($space = strpos($bmlinks[$i], ' ')) == true)
+						$bmlinks[$i] = substr($bmlinks[$i], 0, $space);
+					else
+						$bmlinks[$i] = substr($bmlinks[$i], 0);
+
+					$bmlinks[$i] = trim($bmlinks[$i], '[( )]');
+					#$bmlinks[$i] = $this->NpjTranslit($bmlinks[$i]);
+				}
+				else
+				{
+					$bmlinks[$i] = '';
+				}
 			}
 
-			$this->SetUser($this->LoadUser($user["user_name"]));
+			$this->SetUserSetting("bookmarks", implode("\n", $bookmarks));
 
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarks"]		= $bookmarks;
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"]	= $bmlinks;
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"]	= $this->Format(implode(" | ", $bookmarks), "wacko");
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"]	= $this->Format(implode("\n", $bookmarks), "wacko");
 		}
 
 		// removing bookmark
 		if (!empty($_REQUEST["removebookmark"]) && $user)
 		{
+			// rewriting bookmarks table except containing current page tag
 			foreach ($bookmarks as $bookmark)
 			{
-				$dummy = $this->Format($bookmark, "wacko");
-				$this->ClearLinkTable();
-				$this->StartLinkTracking();
-				$dummy = $this->Format($dummy, "post_wacko");
-				$this->StopLinkTracking();
-				$bml = $this->GetLinkTable();
-				if ($this->GetPageSuperTag()!=$this->NpjTranslit($bml[0])) $newbookmarks[] = $bookmark;
+				#$dummy = $this->Format($bookmark, "wacko");
+				#$this->ClearLinkTable();
+				#$this->StartLinkTracking();
+				#$dummy = $this->Format($dummy, "post_wacko");
+				#$this->StopLinkTracking();
+				#$bml = $this->GetLinkTable();
+				
+				if ($bookmark && substr($bookmark, 2, strpos($bookmark, ' ', 2) - 2) != $this->tag)
+					$newbookmarks[] = $bookmark;
 			}
+
+			if (count($newbookmarks) < 1) $newbookmarks[] = '';
+
 			$bookmarks = $newbookmarks;
 
 			$this->Query(
 				"UPDATE ".$this->config["user_table"]." ".
-				"SET bookmarks = '".quote($this->dblink, implode("\n", $bookmarks))."' ".
+				"SET bookmarks = '".quote($this->dblink, $bookmarks ? implode("\n", $bookmarks) : '' )."' ".
 				"WHERE user_name = '".quote($this->dblink, $user["user_name"])."' ".
 				"LIMIT 1");
 
@@ -3498,21 +3529,33 @@ class Wacko
 			$bmlinks = $bookmarks;
 			for ($i = 0; $i < count($bmlinks); $i++)
 			{
-				$bmlinks[$i] = trim($this->NpjTranslit($bmlinks[$i]),"()");
+				if (strpos($bmlinks[$i], '[') === 0 || strpos($bmlinks[$i], '(') === 0)
+				{
+					if (($space = strpos($bmlinks[$i], ' ')) == true)
+						$bmlinks[$i] = substr($bmlinks[$i], 0, $space);
+					else
+						$bmlinks[$i] = substr($bmlinks[$i], 0);
+
+					$bmlinks[$i] = trim($bmlinks[$i], '[( )]');
+					#$bmlinks[$i] = $this->NpjTranslit($bmlinks[$i]);
+				}
+				else
+				{
+					$bmlinks[$i] = '';
+				}
 			}
 
-			$this->SetUser($this->LoadUser($user["user_name"]));
+			$this->SetUserSetting("bookmarks", ( $bookmarks ? implode("\n", $bookmarks) : "" ));
 
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarks"]		= $bookmarks;
 			$_SESSION[$this->config["session_prefix"].'_'."bookmarklinks"]	= $bmlinks;
-			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"]	= ( $bookmarks ? $this->Format(implode(" | ", $bookmarks), "wacko") : "" );
+			$_SESSION[$this->config["session_prefix"].'_'."bookmarksfmt"]	= ( $bookmarks ? $this->Format(implode("\n", $bookmarks), "wacko") : "" );
 		}
 	}
 
 	function GetBookmarks()
 	{
 		if (isset($_SESSION[$this->config["session_prefix"].'_'."bookmarks"]))
-
 			return $_SESSION[$this->config["session_prefix"].'_'."bookmarks"];
 	}
 

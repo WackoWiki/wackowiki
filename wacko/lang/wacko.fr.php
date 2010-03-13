@@ -537,7 +537,7 @@ $wackoTranslation = array(
 	"PrevAcr" => "Précédent",
 
 	"default_bookmarks" => "((Index))\n((Modifications))\n((Commentaires))",
-	"site_bookmarks" => "((Index)) / ((Modifications)) / ((Commentaires))",
+	"site_bookmarks" => "((Index))\n((Modifications))\n((Commentaires))",
 
 	//icons
 	"outericon" => '<img src="{theme}icons/web.gif" alt="Document externe" />',

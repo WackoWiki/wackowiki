@@ -23,7 +23,7 @@
 	src="<?php echo $this->GetConfigValue("theme_url"); ?>images/watch-add.gif"
 	alt="<?php echo $this->GetTranslation("SetWatch"); ?>"
 	title="<?php echo $this->GetTranslation("SetWatch"); ?>" width="16"
-	height="16" /> <?php } ?> </a> <?php // Bookmark page ?> <?php if(in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) { ?>
+	height="16" /> <?php } ?> </a> <?php // Bookmark page ?> <?php if(in_array($this->tag, $this->GetBookmarkLinks())) { ?>
 <a href="<?php echo $this->Href('', '', "removebookmark=yes"); ?>"> <img
 	src="<?php echo $this->GetConfigValue("theme_url"); ?>images/bookmark-remove.gif"
 	alt="<?php echo $this->GetTranslation("RemoveFromBookmarks"); ?>"

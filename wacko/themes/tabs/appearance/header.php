@@ -138,7 +138,7 @@ echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $thi
   <?php echo ($this->iswatched === true ?
       "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("RemoveWatch")."</a>" :
       "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("SetWatch")."</a>" ) ?> ::
-  <?php if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>
+  <?php if (!in_array($this->tag, $this->GetBookmarkLinks())) {?>
   <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img
 	src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark.gif"
 	width="12" height="12"

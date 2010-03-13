@@ -109,7 +109,7 @@ else if($this->HasAccess("write"))
         echo "<hr />";
 
         if ($this->GetUser()) {
-			if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>
+			if (!in_array($this->tag, $this->GetBookmarkLinks())) {?>
 				<a href="<?php echo $this->Href('', '', "addbookmark=yes")?>">
 					<?php echo $this->GetTranslation("AddToBookmarks"); ?>
 				</a>

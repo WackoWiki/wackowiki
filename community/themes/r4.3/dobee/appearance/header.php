@@ -134,7 +134,7 @@ else if($this->HasAccess("write"))
 						echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 
 						if ($this->GetUser()) {
-							if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>
+							if (!in_array($this->tag, $this->GetBookmarkLinks())) {?>
 						<a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"
 							title="<?php echo $this->GetTranslation("AddToBookmarks"); ?>">
 						<img
