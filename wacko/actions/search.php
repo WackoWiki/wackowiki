@@ -179,7 +179,7 @@ function highlight_this($text, $words, $the_place)
 
 	}
 	//added to show how many keywords were found
-	#echo "<br><div class=\"emphasis\">A search for <strong>" . $words. "</strong> found <strong>" . $the_count . "</strong> matches within the " . $the_place. ".</div><br>";
+	#echo "<br /><div class=\"emphasis\">A search for <strong>" . $words. "</strong> found <strong>" . $the_count . "</strong> matches within the " . $the_place. ".</div><br />";
 
 	return $text;
 }
