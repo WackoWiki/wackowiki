@@ -9,7 +9,6 @@ class Wacko
 	var $page;
 	var $tag;
 	var $forum;
-	var $WVERSION; //Wacko version
 	var $iswatched;
 	var $queryTime;
 	var $queryLog				= array();
@@ -73,7 +72,6 @@ class Wacko
 		$this->timer	= $this->GetMicroTime();
 		$this->config	= $config;
 		$this->dblink	= $dblink;
-		$this->WVERSION	= WACKO_VERSION;
 	}
 
 	// DATABASE
@@ -204,7 +202,7 @@ class Wacko
 	function GetMethod() { return $this->method; }
 	function GetConfigValue($name) { return isset( $this->config[$name] ) ? $this->config[$name] : ''; }
 	function GetWackoName() { return $this->config["wacko_name"]; }
-	function GetWackoVersion() { return $this->WVERSION; }
+	function GetWackoVersion() { return WACKO_VERSION; }
 
 	function CheckFileExists($filename, $unwrapped_tag = "" )
 	{
