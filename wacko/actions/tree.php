@@ -185,7 +185,12 @@ if ($pages = $this->LoadAll(
 }
 else
 {
-	if (!$nomark) echo '<small><em>'.$this->GetTranslation('TreeEmpty').'</em></small><br/>';
+	if (!$nomark)
+    {
+        $title_empty_tree = $this->GetTranslation('TreeEmpty');
+        $title_empty_tree = str_replace('%1', $this->Link('/'.$root, '', rtrim($root, '/')), $title_empty_tree);
+        echo '<small><em>'.$title_empty_tree.'</em></small><br/>';
+    } 
 }
 
 // footer
