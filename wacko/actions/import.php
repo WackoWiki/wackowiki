@@ -41,7 +41,7 @@ else
 				echo "<pre>";
 				print_r($_FILES);
 				print_r($_POST);
-				die("</pre><br>IMPORT failed");
+				die("</pre><br />IMPORT failed");
 			}
 
 			$contents = fread($fd, filesize($_FILES['_import']['tmp_name']));
@@ -99,7 +99,7 @@ else
 			echo "<pre>";
 			print_r($_FILES);
 			print_r($_POST);
-			die("</pre><br>IMPORT failed");
+			die("</pre><br />IMPORT failed");
 		}
 }
 
