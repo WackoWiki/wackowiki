@@ -20,18 +20,18 @@ function admin_dbbackup(&$engine, &$module)
 	// import passed variables and objects
 	$tables			= & $module['vars'][0];
 	$directories	= & $module['vars'][1];
-	
+
 	// backup scheme
 	if ($_GET['structure'] === NULL && $_GET['data'] === NULL && $_GET['files'] === NULL)
 	{
 		$scheme['structure']	= 1;
 		$scheme['data']			= 1;
 	}
-	
+
 	if ($_GET['structure']	== 1)	$scheme['structure']	= 1;
 	if ($_GET['data']		== 1)	$scheme['data']			= 1;
 	if ($_GET['files']		== 1)	$scheme['files']		= 1;
-	
+
 	$getstr = '';
 	if (is_array($scheme))
 	{
@@ -50,19 +50,19 @@ function admin_dbbackup(&$engine, &$module)
 	if (isset($_POST['start']))
 	{
 		@set_time_limit(1800);
-		
+
 		$time	= time();
 		$pack	= SetPackDir($engine, $time);	// backup directory
 		$root	= $_POST['root'];
 		$data	= array();
 		$strc	= array();
 		$fils	= array();
-		
+
 		foreach ($_POST as $val => $key)
 		{
 			// strip prefix
 			$val = substr($val, 7);
-			
+
 			// collect table names for sql recreation query
 			if ($key == 'structure' && $val == true)
 			{
@@ -81,7 +81,7 @@ function admin_dbbackup(&$engine, &$module)
 				GetFiles($engine, $pack, $val, $root);
 			}
 		}
-		
+
 		// write sql for recreating selected tables
 		if ($strc == true)
 		{
@@ -92,22 +92,22 @@ function admin_dbbackup(&$engine, &$module)
 					$drop = 1;
 				else
 					$drop = 0;
-				
+
 				// force drop for tables w/o WHERE clause
 				if (in_array($table, $data) &&
 				$tables[$engine->config['table_prefix'].$table]['where'] === false)
 					$drop = 1;
-				
+
 				// ...and for these specific tables
 				if ($table == $engine->config['table_prefix'].'cache' ||
 				$table == $engine->config['table_prefix'].'referrers' ||
 				$table == $engine->config['table_prefix'].'log')
 					$drop = 1;
-				
+
 				$sql .= GetTable($engine, $table, $drop)."\n";
 			}
 		}
-		
+
 		// save sql to the disk
 		if ($sql == true)
 		{
@@ -115,25 +115,25 @@ function admin_dbbackup(&$engine, &$module)
 			clearstatcache();
 			$filename = $pack.BACKUP_FILE_STRUCTURE;
 			if (file_exists($filename) === true) unlink($filename);
-			
+
 			// open file with writa access
 			$file	= fopen($filename, 'w');
-			
+
 			// write data (strip last semicolon
 			// off the sql) and close file
 			fwrite($file, substr($sql, 0, strrpos($sql, ';')));
 			fclose($file);
 			chmod($filename, 0644);
 		}
-		
+
 		// save backup log
 		clearstatcache();
 		$filename = $pack.BACKUP_FILE_LOG;
 		if (file_exists($filename) === true) unlink($filename);
-		
+
 		// open file with writa access
 		$file	= fopen($filename, 'w');
-		
+
 		// log contents
 		$contents = array(
 			$time,					// 0: backup time (unix format)
@@ -143,20 +143,20 @@ function admin_dbbackup(&$engine, &$module)
 			implode(';', $data),	// 4: table data
 			implode(';', $fils)		// 5: files
 		);
-		
+
 		// write log file
 		fwrite($file, implode("\n", $contents));
 		fclose($file);
 		chmod($filename, 0644);
-		
+
 		$engine->Log(1, 'Saved backup database '.trim($pack, '/'));
 ?>
 		<p>
 			Backing up and archiving completed. Package backup
-			retained in the backup-directory directory files. To obtain
-			Use FTP (not sure if you copy the structure to maintain
-			directories and file names and directories). Restore a backup
-			copy or remove a package, you can see <a href="?mode=dbrestore">Restoration</a>.
+			retained in the backup-directory directory files.<br />To obtain
+			use FTP (not sure if you copy the structure to maintain
+			directories and file names and directories).<br />To restore a backup
+			copy or remove a package, go to <a href="?mode=dbrestore">Restoration</a>.
 		</p>
 		<br />
 <?php
@@ -165,12 +165,12 @@ function admin_dbbackup(&$engine, &$module)
 	{
 ?>
 		<p>
-			Specify the desired scheme of reservation. The root cluster does not affect the
+			Specify the desired scheme of Backup. The root cluster does not affect the
 			global backup files and cache files (with their choice of
 			they are always saved in full).<br />
 			<br />
-			<u>Attention</u>: to avoid loss of information from the database WackoWiki,
-			to indicate the root cluster, the table from this backup will not be
+			<u>Attention</u>: To avoid loss of information from the WackoWiki database,
+			indicate the root cluster, the table from this backup will not be
 			restructured; similar, with only the reserve of
 			table without saving the data. To complete the conversion tables in the format
 			backup must be <em>full redundancy throughout the framework
@@ -193,10 +193,10 @@ function admin_dbbackup(&$engine, &$module)
 		foreach ($tables as $table)
 		{
 			$check = false;
-			
+
 			if ($table['name'] != 'cache' && $table['name'] != 'referrers' && $table['name'] != 'log')
 				$check = true;
-			
+
 			echo '<tr>'.
 					'<td class="label"><strong>'.$table['name'].'</strong></td>'.
 					'<td align="center">&nbsp;&nbsp;<input name="__str__'.$table['name'].'" type="checkbox" value="structure"'.( $scheme['structure'] == true ? 'checked="checked"' : '' ).' /></td>'.
@@ -213,11 +213,11 @@ function admin_dbbackup(&$engine, &$module)
 		foreach ($directories as $dir)
 		{
 			$check = false;
-			
+
 			if ($dir != $engine->config['cache_dir']) $check = true;
-			
+
 			$dir = rtrim($dir, '/');
-			
+
 			echo '<tr>'.
 					'<td colspan="2" class="label"><strong>'.$dir.'</strong></td>'.
 					'<td align="center">&nbsp;&nbsp;<input name="__dir__'.$dir.'" type="checkbox" value="files"'.( $check === true && $scheme['files'] == true ? 'checked="checked"' : '' ).' /></td>'.

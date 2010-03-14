@@ -42,17 +42,17 @@ function admin_dbrestore(&$engine, &$module)
 	if (isset($_POST['start']) && $_POST['id'] == true)
 	{
 		set_time_limit(3600);
-		
+
 		$dir	= $engine->config['upload_path_backup'].'/';
 		$pack	= $_POST['id'];
-		
+
 		// set parameters
 		if ($_POST['ignore_keys']	== 1) $ikeys	= true;
 		if ($_POST['ignore_files']	== 1) $ifiles	= true;
-		
+
 		// read backup log
 		$log = str_replace("\n", '', file($dir.$pack.'/'.BACKUP_FILE_LOG));
-		
+
 		// start process logging
 		$results = '<strong>'.date('H:i:s').' - Initiated Backups'."\n".
 			'================================================'."\n".
@@ -62,42 +62,42 @@ function admin_dbrestore(&$engine, &$module)
 			'Saved cluster: '.( $log[2] == true ? $log[2] : 'No' )."\n".
 			"\t".( $log[2] == true ? 'Data Protection - DROP TABLE omitted' : 'Assume DROP TABLE' )."\n".
 			'</strong>'."\n\n";
-		
+
 		// request structure restore
 		$results .= '<strong>'.date('H:i:s').' - Restoring the structure of the tables'."\n".
 			'================================================</strong>'."\n";
-		
+
 		if ($log[3] == true)
 		{
 			$results .= '<strong>Perform SQL-instructions:</strong>'."\n\n";
 			$results .= file_get_contents($dir.$pack.'/'.BACKUP_FILE_STRUCTURE)."\n\n";
-			
+
 			// run
 			$total = PutTable($engine, $pack);
-			
+
 			$results .= '<strong>'.date('H:i:s').' - Completed. Processed instructions: '.$total.'</strong>'."\n\n\n";
 		}
 		else
 		{
 			$results .= '<strong>The structure of the tables are not saved - skip</strong>'."\n\n\n";
 		}
-		
+
 		// request data restore
 		$results .= '<strong>'.date('H:i:s').' - Restore the contents of tables'."\n".
 			'================================================</strong>'."\n";
-		
+
 		if ($log[4] == true)
 		{
 			$list = explode(';', $log[4]);
-			
+
 			// sql mode
 			if		($log[2] == false)						$mode = 'INSERT';
 			else if	($log[2] == true && $ikeys === true)	$mode = 'INSERT IGNORE';
 			else if	($log[2] == true && $ikeys == false)	$mode = 'REPLACE';
-			
+
 			$results .= '<strong>Just download and process dump tables'."\n".
 				'(Instruction '.$mode.'):</strong>'."\n\n";
-			
+
 			// run
 			$overall = 0;
 			foreach ($list as $table)
@@ -107,56 +107,56 @@ function admin_dbrestore(&$engine, &$module)
 				$table == $tables[$engine->config['table_prefix'].'links']['name']) &&
 				$ikeys == false)
 					$mode = 'REPLACE';
-				
+
 				$results .= "\t".'<strong>'.date('H:i:s').' - '.$table."\n".
 					"\t".'==========================</strong>'."\n";
-				
+
 				$total		= PutData($engine, $pack, $table, $mode);
 				$overall	+= $total;
-				
+
 				$results .= "\t\t".'records:   '.$total."\n\n";
 			}
-			
+
 			$results .= '<strong>'.date('H:i:s').' - Completed. Total entries: '.$overall.'</strong>'."\n\n\n";
 		}
 		else
 		{
 			$results .= '<strong>Data not saved - skip</strong>'."\n\n\n";
 		}
-		
+
 		// request files restore
 		$results .= '<strong>'.date('H:i:s').' - Restoring files'."\n".
 			'================================================</strong>'."\n";
-		
+
 		if ($log[5] == true)
 		{
 			$list = explode(';', $log[5]);
-			
+
 			// rewrite mode
 			if ($ifiles === true)	$keep = 1;
 			else					$keep = 0;
-			
+
 			$results .= '<strong>Decompress and store the contents of directories'."\n".
 				'(homonymic files '.( $ifiles === true ? 'skip' : 'substitute' ).'):</strong>'."\n\n";
-			
+
 			// run
 			$overall = array();
 			foreach ($list as $dir)
 			{
 				$results .= "\t".'<strong>'.date('H:i:s').' - '.$dir."\n".
 					"\t".'==========================</strong>'."\n";
-				
+
 				$total		= PutFiles($engine, $pack, $dir, $keep);
 				$overall[0]	+= $total[0];
 				$overall[1]	+= $total[1];
-				
-				$results .= 
+
+				$results .=
 					"\t\t".'File:    '.(int)array_sum($total)."\n".
 					"\t\t".'recorded:  '.(int)$total[0]."\n".
 					"\t\t".'skipped: '.(int)$total[1]."\n\n";
 			}
-			
-			$results .= '<strong>'.date('H:i:s').' - Завершено. Итог файлов:'."\n".
+
+			$results .= '<strong>'.date('H:i:s').' - Completed. Total files:'."\n".
 				"\t".'all:     '.(int)array_sum($overall)."\n".
 				"\t".'recorded:  '.(int)$overall[0]."\n".
 				"\t".'skipped: '.(int)$overall[1]."\n".
@@ -166,7 +166,7 @@ function admin_dbrestore(&$engine, &$module)
 		{
 			$results .= '<strong>Files are not stored - skip</strong>'."\n\n\n";
 		}
-		
+
 		// finishing
 		$results .= '<strong>================================================'."\n".
 			date('H:i:s').' - RESTORATION COMPLETED</strong>';
@@ -195,7 +195,7 @@ function admin_dbrestore(&$engine, &$module)
 				RemovePack($engine, $_GET['id']);
 				$engine->Log(1, 'Removed backup database '.$_GET['id']);
 			}
-			
+
 			echo '<p class="green"><em>The selected backup has been successfully removed.</em></p><br />';
 		}
 ?>
@@ -213,7 +213,7 @@ function admin_dbrestore(&$engine, &$module)
 						</tr>
 <?php
 		$dir = $engine->config['upload_path_backup'].'/';
-		
+
 		// open backups dir and run through all subdirs
 		if ($dh = opendir(rtrim($dir, '/')))
 		{
@@ -226,17 +226,17 @@ function admin_dbrestore(&$engine, &$module)
 				{
 					// read log
 					$log = str_replace("\n", '', file($dir.$packname.'/'.BACKUP_FILE_LOG));
-					
+
 					// open row
 					echo '<tr>'."\n";
-					
+
 					// pack
 					echo '<td valign="top"><table><tr><td class="label" style="width:10px;">'.
 							'<input name="id" type="radio" value="'.$packname.'" />'.
 						'</td><th style="text-align:left;white-space:nowrap;">'.
 							date($engine->config['date_format'].' '.$engine->config['time_format_seconds'], $log[0]).
 						'</th></tr></table></td>'."\n";
-													
+
 					// description
 					echo '<td valign="top"><table>';
 						// cluster root
@@ -278,7 +278,7 @@ function admin_dbrestore(&$engine, &$module)
 						foreach ($directories as $directory)
 						{
 							$directory = rtrim($directory, '/');
-							
+
 							if (in_array($directory, $list))
 								echo '<strong>'.$directory.'</strong><br />';
 							else
@@ -286,13 +286,13 @@ function admin_dbrestore(&$engine, &$module)
 						}
 						echo	 '</td>'."\n".
 							'</tr></table>'."\n";
-						
+
 					// close row
 					echo '</td></tr>'.
 						'<tr class="lined"><td colspan="2"></td></tr>'."\n";
 				} // end dir check
 			} // end while loop
-			closedir($dh); 
+			closedir($dh);
 		} // end opendir
 ?>
 						<tr>
@@ -313,7 +313,7 @@ function admin_dbrestore(&$engine, &$module)
 					* Before restoring the backup <u>cluster</u> WackoWiki, the target table
 					not destroyed (to prevent loss of information from non -
 					Clusters). Thus, in the recovery process will occur
-					Dublikatnye record. In normal mode, they will be replaced by recordings of
+					duplicate record. In normal mode, they will be replaced by recordings of
 					backup (using SQL-instructions  <tt>REPLACE</tt>), but if this
 					checked, all duplicates will be skipped (to be kept current
 					values of records), and added to the table only the records with new keys
@@ -321,10 +321,10 @@ function admin_dbrestore(&$engine, &$module)
 					complete backup of the site, this option has no value.<br />
 					<br />
 					** If the backup contains the user files (global and
-					постраничные, cache files, etc.), while in normal mode when you restore it 			will replace the same
+					perpage, cache files, etc.), while in normal mode when you restore it 			will replace the same
 					files are placed in the same directory. This option allows you to save the 	current
 					copies of the files and restore from a backup only new (missing
-					On the server) files.
+					on the server) files.
 				</small></p>
 <?php
 	}
