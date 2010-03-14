@@ -26,53 +26,53 @@ function admin_resync(&$engine, &$module)
 		{
 			// total pages in ownership
 			$users = $engine->LoadAll(
-				"SELECT p.owner AS name, COUNT(p.tag) AS n ".
+				"SELECT p.owner_id, COUNT(p.tag) AS n ".
 				"FROM {$engine->config['table_prefix']}pages AS p, {$engine->config['user_table']} AS u ".
-				"WHERE p.owner = u.name AND p.comment_on_id = '0' ".
-				"GROUP BY p.owner");
+				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' ".
+				"GROUP BY p.owner_id");
 
 			foreach ($users as $user)
 			{
 				$engine->Query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_pages = ".(int)$user['n']." ".
-					"WHERE name = '".quote($engine->dblink, $user['name'])."' ".
+					"WHERE user_id = '".quote($engine->dblink, $user['owner_id'])."' ".
 					"LIMIT 1");
 			}
 
 			// total comments posted
 			$users = $engine->LoadAll(
-				"SELECT p.user AS name, COUNT(p.tag) AS n ".
+				"SELECT p.user_id, COUNT(p.tag) AS n ".
 				"FROM {$engine->config['table_prefix']}pages AS p, {$engine->config['user_table']} AS u ".
-				"WHERE p.owner = u.name AND p.comment_on_id <> '0' ".
-				"GROUP BY p.user");
+				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' ".
+				"GROUP BY p.user_id");
 
 			foreach ($users as $user)
 			{
 				$engine->Query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_comments = ".(int)$user['n']." ".
-					"WHERE name = '".quote($engine->dblink, $user['name'])."' ".
+					"WHERE user_id = '".quote($engine->dblink, $user['user_id'])."' ".
 					"LIMIT 1");
 			}
 
 			// total revisions made
 			$users = $engine->LoadAll(
-				"SELECT r.user AS name, COUNT(r.tag) AS n ".
+				"SELECT r.user_id, COUNT(r.tag) AS n ".
 				"FROM {$engine->config['table_prefix']}revisions AS r, {$engine->config['user_table']} AS u ".
-				"WHERE r.owner = u.name AND r.comment_on_id = '0' ".
-				"GROUP BY r.user");
+				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' ".
+				"GROUP BY r.user_id");
 
 			foreach ($users as $user)
 			{
 				$engine->Query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_revisions = ".(int)$user['n']." ".
-					"WHERE name = '".quote($engine->dblink, $user['name'])."' ".
+					"WHERE user_id = '".quote($engine->dblink, $user['user_id'])."' ".
 					"LIMIT 1");
 			}
 
-			$engine->Log(1, 'To synchronize user statistics');
+			$engine->Log(1, 'Synchronized user statistics');
 ?>
 			<p>
 				<em>Statistics users synchronized.</em>
@@ -87,7 +87,7 @@ function admin_resync(&$engine, &$module)
 			$xml->Changes();
 			$xml->Comments();
 			$xml->News();
-			$engine->Log(1, 'Synchronize RSS feeds');
+			$engine->Log(1, 'Synchronized RSS feeds');
 			unset($xml);
 ?>
 			<p>
