@@ -22,7 +22,7 @@ td {vertical-align: top }
 .header {background-color: #FFEFD5; padding: 10px; font-size: 90%}
 .header div.title {font-size: 140%; padding-top: 10px}
 .header div.user {float: right; text-align: right}
-.bookmarks {padding: 5px 10px; font-size: 90%; border-bottom: 1px solid #ccc; background-color: #FFE4B5}
+
 span.small {font-size: 80%}
 
 /* Page footer */
@@ -46,8 +46,6 @@ legend {font-weight: normal; padding: 0 5px;}
 
 /* Page main area */
 #page {padding: 10px 10px;}
-
-
 
 /* Formatters */
 
@@ -154,34 +152,34 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 #tooltip{ border: 1px solid #666666; margin: 0px; padding: 3px 5px; background: #FFFFFF; color: #333333; font: menu; position: absolute; visibility: hidden }
 
 /* vseedit toolbar */
- .toolbar tr { background: ButtonFace; }
- .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
-  background: ButtonFace;
-  color: ButtonText;
-  border: 1px solid ButtonFace;
-  padding: 1px;  margin: 0px;
-  cursor: pointer; cursor: hand;
- }
- .toolbar .btn- img{
-  width: 20px;
-  height: 20px;
- }
- .toolbar .btn-hover {
-  border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
- }
- .toolbar .btn-active,  .toolbar .btn-pressed {
-  border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
- }
- .toolbar .btn-pressed {
-  background: ButtonHighlight;
- }
- .toolbar .btn-separator {
-border-left:1px solid buttonshadow;
-border-right:1px solid buttonhighlight;
-height:18px;
-margin:3px;
-padding:0;
-width:0;
+.toolbar tr { background: ButtonFace; }
+.toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
+	background: ButtonFace;
+	color: ButtonText;
+	border: 1px solid ButtonFace;
+	padding: 1px;  margin: 0px;
+	cursor: pointer; cursor: hand;
+}
+.toolbar .btn- img{
+	width: 20px;
+	height: 20px;
+}
+.toolbar .btn-hover {
+	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+}
+.toolbar .btn-active,  .toolbar .btn-pressed {
+	border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+}
+.toolbar .btn-pressed {
+	background: ButtonHighlight;
+}
+.toolbar .btn-separator {
+	border-left:1px solid buttonshadow;
+	border-right:1px solid buttonhighlight;
+	height:18px;
+	margin:3px;
+	padding:0;
+	width:0;
 }
  .edname-w, .edname-r, .edname-s
             { font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
@@ -189,15 +187,15 @@ width:0;
  .edname-r  { background: #2A45D0; }
  .edname-s  { background: #D08C2A; }
 
- .autocomplete-inplace
- {
-   background: ButtonFace;
-   border: 1px solid ButtonShadow;
-   padding: 2px;
-   font: 12px Arial;
- }
- .autocomplete-inplace div          { padding: 2px 5px; cursor: pointer; cursor: hand; }
- .autocomplete-inplace div.ac-over- { color:#ffffff; background: #1E9905; }
+.autocomplete-inplace
+{
+	background: ButtonFace;
+	border: 1px solid ButtonShadow;
+	padding: 2px;
+	font: 12px Arial;
+}
+.autocomplete-inplace div          { padding: 2px 5px; cursor: pointer; cursor: hand; }
+.autocomplete-inplace div.ac-over- { color:#ffffff; background: #1E9905; }
 
 
 /* CSS form formater */
@@ -276,16 +274,56 @@ width:0;
 	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
 
+/* Bookmarks */
+.bookmarks {padding: 5px 10px; height:20px; border-bottom: 1px solid #ccc; background-color: #FFE4B5}
+#bookmarks {
+
+float:left;
+margin:0 auto;
+overflow:hidden;
+position:relative;
+text-align:left;
+}
+#bookmarks ol {
+list-style:none outside none;
+margin:0;
+padding:0;
+}
+#bookmarks li {
+border-left:1px solid #AAAAAA;
+float:left;
+line-height:1.2em;
+margin:0 0.5em 0 -0.5em;
+padding:0 0.5em;
+white-space:nowrap;
+}
+#bookmarks li a {
+font-size: 90%;
+border:medium none;
+display:inline;
+text-decoration:none;
+}
+#bookmarks li a:visited {
+color:#990000;
+}
+#bookmarks li a:hover {
+color:#B90022;
+text-decoration:underline;
+}
+#bookmarks li a:active {
+color:#FF0000;
+}
+
 /* feed action */
 .feed {
-    overflow:auto;
+	overflow:auto;
 }
 .feed .note {
-     font-size: 11px;
-     color: #777;
+	font-size: 11px;
+	color: #777;
 }
 .feed .note a {
-     color: #777;
+	color: #777;
 }
 .feed_element_title {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */

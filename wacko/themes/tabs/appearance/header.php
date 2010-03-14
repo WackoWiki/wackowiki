@@ -78,7 +78,7 @@ else if ($this->HasAccess("write"))
 ?>
 <body onload="all_init();">
 <div class="Top<?php if (!$this->GetUser()) echo "LoggedOut";?>">
-  <div class="TopRight"><?php echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?> <span class="nobr"> <?php echo $this->ComposeLinkToPage($this->GetConfigValue("root_page")) ?>&nbsp;|&nbsp; <?php echo $this->Format($this->GetDefaultBookmarks($this->userlang, "site")) ?></span> | <?php echo $this->GetTranslation("SearchText") ?>
+  <div class="TopRight"><?php echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?> <span class="nobr"> <?php echo $this->ComposeLinkToPage($this->GetConfigValue("root_page")) ?>&nbsp;|&nbsp; <?php echo $this->Format($this->Format(str_replace("\n", '&nbsp;|&nbsp;', $this->GetDefaultBookmarks($user['lang'], 'site'))), 'post_wacko'); ?></span> | <?php echo $this->GetTranslation("SearchText") ?>
     <input name="phrase" size="15" class="ShSearch" />
     <?php echo $this->FormClose(); ?> </div>
   <div class="TopLeft">
