@@ -27,31 +27,31 @@ function admin_deletedpages(&$engine, &$module)
 			"DELETE FROM {$engine->config['table_prefix']}revisions ".
 			"WHERE tag = '".quote($_GET['remove'])."'");
 	}
-	
+
 	$pages = $engine->LoadRecentlyDeleted(100000, 0);
 ?>
 	<p>
-		List of remote documents, copies of which were in the table editors.
-Finally remove the document from the database by clicking on the link <em>Remove</em>
-		in the corresponding row. (Be careful not to delete confirmation is not requested!)
+		List of removed pages, copies which were in the table revisions.
+		Finally remove the pages from the database by clicking on the link <em>Remove</em>
+		in the corresponding row. (Be careful, no delete confirmation is requested!)
 	</p>
 <?php
 	if ($pages == true)
 	{
 		echo '<table>';
-		
+
 		foreach ($pages as $page)
 		{
 			// day header
 			list($day, $time) = explode(' ', $page['date']);
-			
+
 			if ($day != $curday)
 			{
 				if ($curday) print("\n");
 				echo '<tr class="lined"><td colspan="2"><br /><strong>'.date($engine->config['date_format'],strtotime($day)).":</strong></td></tr>\n";
 				$curday = $day;
 			}
-			
+
 			// print entry
 			echo '<tr>'.
 					'<td style="text-align:left">'.
@@ -60,7 +60,7 @@ Finally remove the document from the database by clicking on the link <em>Remove
 					'</td>'.
 				"</tr>\n";
 		}
-		
+
 		echo '</table>';
 	}
 	else

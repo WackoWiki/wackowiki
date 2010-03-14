@@ -93,7 +93,7 @@ foreach ($dirs as $dir)
 if ($engine->config['recovery_password'] == false)
 {
 	die('<strong>The administrative password is not specified!</strong><br />'.
-		'Note: the absence of an administrative password is '.
+		'Note: The absence of an administrative password is '.
 		'threat to security! Enter your password in the configuration file '.
 		'and run the program again.');
 }

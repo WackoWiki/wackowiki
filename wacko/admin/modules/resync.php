@@ -82,11 +82,14 @@ function admin_resync(&$engine, &$module)
 		}
 		else if ($_REQUEST['action'] == 'rssfeeds')
 		{
-			$engine->UseClass('rss');
+			$engine->UseClass('rss', 'classes/');
 			$xml = new RSS($engine);
 			$xml->Changes();
 			$xml->Comments();
-			$xml->News();
+			if ($engine->config["news_cluster"])
+			{
+				$xml->News();
+			}
 			$engine->Log(1, 'Synchronized RSS feeds');
 			unset($xml);
 ?>

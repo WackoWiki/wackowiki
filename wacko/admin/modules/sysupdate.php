@@ -34,10 +34,10 @@ function admin_sysupdate(&$engine, &$module)
 			{
 				foreach ($pages as $page)
 				{
-					$engine->Query(
-						"UPDATE {$engine->config['table_prefix']}acls ".
-						"SET supertag = '".$engine->NpjTranslit($page['tag'])."' ".
-						"WHERE tag = '".$page['tag']."'");
+					#$engine->Query(
+					#	"UPDATE {$engine->config['table_prefix']}acls ".
+					#	"SET supertag = '".$engine->NpjTranslit($page['tag'])."' ".
+					#	"WHERE tag = '".$page['tag']."'");
 				}
 				$engine->Redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
 			}
@@ -88,14 +88,13 @@ function admin_sysupdate(&$engine, &$module)
 		// pages
 		else if ((int)$_REQUEST['step'] === 3)
 		{
-			if ($pages = $engine->LoadAll("SELECT page_id, tag, comment_on FROM {$engine->config['table_prefix']}pages LIMIT ".($i*$limit).", $limit"))
+			if ($pages = $engine->LoadAll("SELECT page_id, tag FROM {$engine->config['table_prefix']}pages LIMIT ".($i*$limit).", $limit"))
 			{
 				foreach ($pages as $page)
 				{
 					$engine->Query(
 						"UPDATE {$engine->config['table_prefix']}pages SET ".
 							"supertag = '".$engine->NpjTranslit($page['tag'])."' ".
-							( $page['comment_on'] ? ", super_comment_on = '".$engine->NpjTranslit($page['comment_on'])."' " : '' ).
 						"WHERE page_id = ".$page['page_id']);
 				}
 				$engine->Redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
@@ -161,12 +160,12 @@ function admin_sysupdate(&$engine, &$module)
 				closedir($dh);
 			}
 
-			$version = '4.3.rc2-svn';
+			$version = '4.3.rc2';
 //			$engine->Query(
 //				"ALTER TABLE `pages` ADD `more` VARCHAR( 255 ) NOT NULL");
 			$engine->Query(
 				"UPDATE {$engine->config['table_prefix']}config ".
-				"SET openSpace_version = '$version'");
+				"SET wackowiki_version = '$version'");
 			$engine->Log(1, 'Upgrading to version WackoWiki '.$version);
 ?>
 			<ol>
@@ -183,10 +182,10 @@ function admin_sysupdate(&$engine, &$module)
 	{
 ?>
 		<ol>
-			<li>Transliterate field `supertag` in table `acls`.</li>
+			<li>empty</li>
 			<li>Transliterate field `to_supertag` in table `links`.</li>
-			<li>Transliterate field `supertag` and `super_comment_on` in table `pages`.</li>
-			<li>Transliterate field `supertag` and `super_comment_on` in table `revisions`.</li>
+			<li>Transliterate field `supertag` in table `pages`.</li>
+			<li>Transliterate field `supertag` in table `revisions`.</li>
 			<li>Transliterate the names of attached files.</li>
 		</ol>
 		<br />
