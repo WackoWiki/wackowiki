@@ -189,7 +189,7 @@ function admin_resync(&$engine, &$module)
 	<h3>RSS-Feeds</h3>
 	<br />
 	<p>
-		In the case of direct editing of documents in the database, the content of RSS-feeds are not
+		In the case of direct editing of pages in the database, the content of RSS-feeds are not
 		reflect the changes made. This function synchronizes the RSS-channels
 		Current state of the database.
 	</p>
