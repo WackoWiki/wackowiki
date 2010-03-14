@@ -106,28 +106,33 @@ else if ($this->HasAccess("write"))
 </div>
 
 <div class="bookmarks"><?php
+	echo '<div id="bookmarks">';
+		echo "<ol>\n";
+		// Main page
+		echo "<li>".$this->ComposeLinkToPage($this->config["root_page"])."</li>\n";
+		echo "<li>";
+		// Bookmarks
+		$formatedBMs = $this->Format($this->GetBookmarksFormatted(), "post_wacko");
+		$formatedBMs = str_replace ("\n", "</li>\n<li>", $formatedBMs);
+		echo $formatedBMs;
 
-echo $this->ComposeLinkToPage($this->config["root_page"]);
-echo " | ";
-//echo $this->GetBookmarksFormatted();
-$formatedBMs = $this->Format($this->GetBookmarksFormatted(), "post_wacko");
-$formatedBMs = str_replace ("<br>", " | ", $formatedBMs);
-echo $formatedBMs;
-//echo $this->Format(implode(" | ", $this->GetBookmarks()));
-?> | <?php
+		echo "</li>\n";
 
-if ($this->GetUser()) {
-	if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>
-<a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img
-	src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark1.gif"
-	alt="+" title="<?php echo $this->GetTranslation("AddToBookmarks") ?>" /></a><?php
-} else {
-	?><a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"><img
-	src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark2.gif"
-	alt="-"
-	title="<?php echo $this->GetTranslation("RemoveFromBookmarks") ?>" /></a><?php
-}
-} ?></div>
+		if ($this->GetUser())
+		{
+			// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
+			if (!in_array($this->tag, $this->GetBookmarkLinks()))
+				echo '<li><a href="'. $this->Href('', '', "addbookmark=yes")
+					.'"><img src="'. $this->GetConfigValue("theme_url")
+					.'icons/bookmark1.gif" alt="+" title="'.
+					$this->GetTranslation("AddToBookmarks") .'"/></a></li>';
+			else
+				echo '<li><a href="'. $this->Href('', '', "removebookmark=yes")
+					.'"><img src="'. $this->GetConfigValue("theme_url")
+					.'icons/bookmark2.gif" alt="-" title="'.
+					$this->GetTranslation("RemoveFromBookmarks") .'"/></a></li>';
+			}
+	echo "\n</ol></div>"; ?><br style="clear: both;"></div>
 
 <?php echo $this->FormClose(); ?>
 <?php
