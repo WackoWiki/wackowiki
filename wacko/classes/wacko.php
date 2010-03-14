@@ -3510,7 +3510,7 @@ class Wacko
 				#$dummy = $this->Format($dummy, "post_wacko");
 				#$this->StopLinkTracking();
 				#$bml = $this->GetLinkTable();
-				
+
 				if ($bookmark && substr($bookmark, 2, strpos($bookmark, ' ', 2) - 2) != $this->tag)
 					$newbookmarks[] = $bookmark;
 			}
@@ -4266,8 +4266,11 @@ class Wacko
 		if (!$tag) return false;
 
 		return $this->Query(
-			"DELETE FROM ".$this->config["table_prefix"]."links ".
-			"WHERE from_tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+			"DELETE l.* ".
+			"FROM ".$this->config["table_prefix"]."links l ".
+				"LEFT JOIN ".$this->config["table_prefix"]."pages p ".
+					"ON (l.from_page_id = p.page_id) ".
+			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
 	function RemoveKeywords($tag, $cluster = false)
