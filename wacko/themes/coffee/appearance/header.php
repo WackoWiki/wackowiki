@@ -42,7 +42,7 @@ if ($this->method == 'edit')
 	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("root_url")."js/autocomplete.js\"></script>\n";
 }
 ?>
-<?php 
+<?php
 /* <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/swfobject.js"></script> */
 ?>
 <script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url");?>js/captcha.js"></script>
@@ -110,12 +110,14 @@ else if ($this->HasAccess("write"))
 echo $this->ComposeLinkToPage($this->config["root_page"]);
 echo " | ";
 //echo $this->GetBookmarksFormatted();
-echo $this->Format($this->GetBookmarksFormatted(), "post_wacko");
+$formatedBMs = $this->Format($this->GetBookmarksFormatted(), "post_wacko");
+$formatedBMs = str_replace ("<br>", " | ", $formatedBMs);
+echo $formatedBMs;
 //echo $this->Format(implode(" | ", $this->GetBookmarks()));
 ?> | <?php
 
 if ($this->GetUser()) {
-	if (!in_array($this->tag, $this->GetBookmarkLinks())) {?>
+	if (!in_array($this->GetPageSuperTag(),$this->GetBookmarkLinks())) {?>
 <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img
 	src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark1.gif"
 	alt="+" title="<?php echo $this->GetTranslation("AddToBookmarks") ?>" /></a><?php
