@@ -29,6 +29,13 @@
 
 */
 
+// constants
+define("BACKUP_COMPRESSION_RATE",		9);					// gzip compression rate
+define("BACKUP_MEMORY_STEP",			1048576);			// max bytes to process per cycle (make sure it's at least 10 times less than PHP memory limit!)
+define("BACKUP_FILE_LOG",				"backup.log");		// backup log filename
+define("BACKUP_FILE_STRUCTURE",			"structure.sql");	// tables structure filename
+define("BACKUP_FILE_DUMP_SUFFIX",		".dat.gz");			// tables dump filename suffix
+define("BACKUP_FILE_GZIP_SUFFIX",		".gz");				// regular compressed files suffix
 define("BM_AUTO",						0);
 define("BM_USER",						1);
 define("BM_DEFAULT",					2);
