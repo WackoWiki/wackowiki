@@ -33,6 +33,12 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'group_name',
 				'limit' => 1000
 			),
+			$engine->config['table_prefix'].'groups_members' => array(
+				'name'	=> $engine->config['table_prefix'].'groups_members',
+				'where'	=> false,
+				'order'	=> 'group_id',
+				'limit' => 1000
+			),
 			$engine->config['table_prefix'].'keywords' => array(
 				'name'	=> $engine->config['table_prefix'].'keywords',
 				'where'	=> false,
