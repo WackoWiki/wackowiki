@@ -6,15 +6,16 @@ $config_global = $config;
 $dblink_global = $dblink;
 $lang_global = $lang;
 
-function InsertPage($tag, $body, $lng, $rights = "Admins", $critical = false)
+function InsertPage($tag, $body, $lng, $rights = "Admins", $critical = false, $title = false)
 {
 	global $config_global, $dblink_global, $lang_global;
 
 	$page_select = "SELECT * FROM ".$config_global["table_prefix"]."pages WHERE tag='".$tag."'";
 	$owner_id = "SELECT user_id FROM ".$config_global["table_prefix"]."users WHERE user_name = '".$config_global["admin_name"]."' LIMIT 1";
+	# if ($title == false) $title = AddSpacesTitle(trim(substr($tag, strrpos($tag, '/')), '/'), $lng);
 
 	// user_id 0 for WackoInstaller
-	$page_insert = "INSERT INTO ".$config_global["table_prefix"]."pages (tag, supertag, body, user_id, owner_id, created, modified, latest, lang) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lng."')";
+	$page_insert = "INSERT INTO ".$config_global["table_prefix"]."pages (tag, supertag, body, user_id, owner_id, created, modified, latest, lang, title) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lng."', '".$title."')";
 
 	$page_id = "SELECT page_id FROM ".$config_global["table_prefix"]."pages WHERE tag = '".$tag."' LIMIT 1";
 
