@@ -252,6 +252,7 @@ function GetTable(&$engine, $table, $drop = true)
 	$schema_create	= "";
 	$field_query	= "SHOW FIELDS FROM $table";
 	$key_query		= "SHOW KEYS FROM $table";
+	$collation_db	= $engine->LoadSingle("SELECT @@collation_database");
 
 	if ($drop == true) $schema_create .= "DROP TABLE IF EXISTS $table;\n";
 
@@ -316,7 +317,7 @@ function GetTable(&$engine, $table, $drop = true)
 			$schema_create .= "	KEY `$x` (" . implode($columns, ', ') . ')';
 	}
 
-	$schema_create .= "\n) ENGINE=MyISAM DEFAULT CHARSET=cp1251;";
+	$schema_create .= "\n) ENGINE=MyISAM DEFAULT CHARSET={$collation_db['@@collation_database']};"; // ToDo: CHARSET per table
 
 	if (get_magic_quotes_runtime())
 		return (stripslashes($schema_create));
