@@ -172,19 +172,22 @@ function SetLanguage($lng)
 	return $language;
 }
 
+// Inserting base pages
 $error_inserting_pages = false;
 
 require_once("setup/lang/inserts.".$config["language"].".php");
 
-if ( $config["multilanguage"] ) {
+if ( $config["multilanguage"] )
+{
 	$handle = opendir("setup/lang");
 	while (false !== ($file = readdir($handle)))
 	if(1 == preg_match("/^inserts\.(.*?)\.php$/",$file,$match))
-	$langlist[] = $match[1];
+		$langlist[] = $match[1];
 
 	closedir($handle);
 
-	foreach ($langlist as $_lang) {
+	foreach ($langlist as $_lang)
+	{
 		unset($lng);
 		unset($languages);
 		require_once("setup/lang/inserts.".$_lang.".php");

@@ -66,7 +66,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			}
 			if ($this->RemovePage($this->tag, $comment_on_id, $dontkeep))
 			{
-				$this->UseClass('rss', 'classes/');
+				$this->UseClass('rss');
 				$xml = new RSS($this);
 				$xml->Comments();
 				if (!$comment_on_id)

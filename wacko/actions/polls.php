@@ -10,7 +10,7 @@
 //					Default: "h"
 
 // create polls object
-$this->UseClass("polls", "classes/");
+$this->UseClass("polls");
 $pollsObj = new Polls($this);
 
 // processing input

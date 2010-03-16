@@ -148,7 +148,7 @@ form input.submitinput {
 
 .footer {
 	background-color: #F0F4F5;
-	padding: 5px 10px;
+	padding: 5px 20px;
 	border-top: none;
 	border-top: 1px dotted #CCCCCC;
 }
@@ -188,7 +188,7 @@ form input.submitinput {
 	/* Headers (always visible) */
 #filesheader, #commentsheader, #rateheader {
 	background-color: #F0F4F5;
-	padding: 2px 10px;
+	padding: 2px 20px;
 	border-top: 1px dotted #CCCCCC;
 }
 
@@ -263,6 +263,7 @@ width:320px;
 	font-size: 11px;
 	color: #AAAAAA;
 	text-align: right;
+	padding:0px 20px;
 }
 
 #credits a {

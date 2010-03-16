@@ -25,41 +25,36 @@ function admin_configsystem(&$engine, &$module)
 	<br />
 <?php
 	// update settings
-	// "UPDATE ".TABLE_PREFIX."config SET value = '$value' WHERE name = '$config_name'"
-	//UPDATE tbl_name SET fld2 = CASE fld1
-	//WHEN val1 THEN data1
-	//WHEN val2 THEN data2
-	//ELSE fld2 END
+
 	if ($_POST['action'] == 'update')
 	{
-		/*
-				"`debug`				= '".quote($engine->dblink, (int)$_POST['debug'])."', ".
-				"`debug_sql_threshold`	= '".quote($engine->dblink, (float)$_POST['debug_sql_threshold'])."', ".
-				"`debug_admin_only`		= '".quote($engine->dblink, (int)$_POST['debug_admin_only'])."', ".
-				"`cache`				= '".quote($engine->dblink, (int)$_POST['cache'])."', ".
-				"`cache_ttl`			= '".quote($engine->dblink, (int)$_POST['cache_ttl'])."', ".
-				"`cache_sql`			= '".quote($engine->dblink, (int)$_POST['cache_sql'])."', ".
-				"`cache_sql_ttl`		= '".quote($engine->dblink, (int)$_POST['cache_sql_ttl'])."', ".
-				"`bbcode`				= '".quote($engine->dblink, (int)$_POST['bbcode'])."', ".
-				"`default_typografica`	= '".quote($engine->dblink, (int)$_POST['default_typografica'])."', ".
-				"`paragrafica`			= '".quote($engine->dblink, (int)$_POST['paragrafica'])."', ".
-				"`allow_rawhtml`		= '".quote($engine->dblink, (int)$_POST['allow_rawhtml'])."', ".
-				"`disable_safehtml`		= '".quote($engine->dblink, (int)$_POST['disable_safehtml'])."', ".
-				"`date_format`			= '".quote($engine->dblink, (string)$_POST['date_format'])."', ".
-				"`time_format`			= '".quote($engine->dblink, (string)$_POST['time_format'])."', ".
-				"`time_format_seconds`	= '".quote($engine->dblink, (string)$_POST['time_format_seconds'])."', ".
-				"`name_date_macro`		= '".quote($engine->dblink, (string)$_POST['name_date_macro'])."', ".
-				"`date_macro_format`	= '".quote($engine->dblink, (string)$_POST['date_macro_format'])."', ".
-				"`date_precise_format`	= '".quote($engine->dblink, (string)$_POST['date_precise_format'])."', ".
-				"`cookie_prefix`		= '".quote($engine->dblink, (string)$_POST['cookie_prefix'])."', ".
-				"`session_prefix`		= '".quote($engine->dblink, (string)$_POST['session_prefix'])."', ".
-				"`rewrite_mode`			= '".quote($engine->dblink, (int)$_POST['rewrite_mode'])."'
+		$config['debug']			= (int)$_POST['debug'];
+		$config['debug_sql_threshold']			= (float)$_POST['debug_sql_threshold'];
+		$config['debug_admin_only']			= (int)$_POST['debug_admin_only'];
+		$config['cache']			= (int)$_POST['cache'];
+		$config['cache_ttl']			= (int)$_POST['cache_ttl'];
+		$config['cache_sql']			= (int)$_POST['cache_sql'];
+		$config['cache_sql_ttl']			= (int)$_POST['cache_sql_ttl'];
+		$config['bbcode']			= (int)$_POST['bbcode'];
+		$config['default_typografica']			= (int)$_POST['default_typografica'];
+		$config['paragrafica']			= (int)$_POST['paragrafica'];
+		$config['allow_rawhtml']			= (int)$_POST['allow_rawhtml'];
+		$config['disable_safehtml']			= (int)$_POST['disable_safehtml'];
+		$config['date_format']			= (string)$_POST['date_format'];
+		$config['time_format']			= (string)$_POST['time_format'];
+		$config['time_format_seconds']			= (string)$_POST['time_format_seconds'];
+		$config['name_date_macro']			= (string)$_POST['name_date_macro'];
+		$config['date_macro_format']			= (string)$_POST['date_macro_format'];
+		$config['date_precise_format']			= (string)$_POST['date_precise_format'];
+		$config['cookie_prefix']			= (string)$_POST['cookie_prefix'];
+		$config['session_prefix']			= (string)$_POST['session_prefix'];
+		$config['rewrite_mode']			= (int)$_POST['rewrite_mode'];
 
-				$engine->Query(
-			"UPDATE {$engine->config['table_prefix']}config
-				SET value = '".quote($engine->dblink, $this->dblink, $value)."'
-				WHERE name = '".quote($engine->dblink, $this->dblink, $config_name)."' ");
-				*/
+		foreach($config as $key => $value)
+		{
+			$engine->Query(
+				"UPDATE {$engine->config['table_prefix']}config SET value = '$value' WHERE config_name = '$key'");
+		}
 		$engine->Log(1, 'Updated config parameters WackoWiki');
 		$engine->Redirect(rawurldecode($engine->href()));
 	}

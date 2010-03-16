@@ -1554,7 +1554,7 @@ class Wacko
 		{
 			if (!$oldPage['comment_on_id'] || !$comment_on_id)
 			{
-				$this->UseClass('rss', 'classes/');
+				$this->UseClass('rss');
 				$xml = new RSS($this);
 				$xml->Changes();
 				$xml->Comments();
@@ -2535,9 +2535,9 @@ class Wacko
 		if (!class_exists($class_name))
 		{
 			if ($file_name == "") $file_name = strtolower($class_name);
-			if ($class_dir == "") $class_dir = $this->classes_dir;
+			if ($class_dir == "") $class_dir = $this->config["classes_path"];
 
-			$class_file = $class_dir.$file_name.".php";
+			$class_file = $class_dir."/".$file_name.".php";
 			$class_file = trim($class_file, "./");
 
 			if (!@is_readable($class_file))
