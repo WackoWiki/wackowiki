@@ -21,7 +21,7 @@ function admin_pollsadmin(&$engine, &$module)
 	<br />
 <?php
 	// create polls object
-	$engine->UseClass("polls", "classes/");
+	$engine->UseClass("polls");
 	$pollsObj = new Polls($engine);
 
 	// define context
@@ -33,7 +33,7 @@ function admin_pollsadmin(&$engine, &$module)
 	// processing input
 	if ($admin === true)
 	{
-		#$engine->UseClass("rss", "classes/");
+		#$engine->UseClass("rss");
 		#$xml = new RSS($engine);
 
 		// selected year for archived polls

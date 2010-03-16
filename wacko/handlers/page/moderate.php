@@ -305,7 +305,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 	unset($n, $id);
 
 	// creting rss object
-	$this->UseClass('rss', 'classes/');
+	$this->UseClass('rss');
 	$xml = new RSS($this);
 
 ////// BEGIN SUBFORUM MODERATION //////

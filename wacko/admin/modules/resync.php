@@ -82,7 +82,7 @@ function admin_resync(&$engine, &$module)
 		}
 		else if ($_REQUEST['action'] == 'rssfeeds')
 		{
-			$engine->UseClass('rss', 'classes/');
+			$engine->UseClass('rss');
 			$xml = new RSS($engine);
 			$xml->Changes();
 			$xml->Comments();

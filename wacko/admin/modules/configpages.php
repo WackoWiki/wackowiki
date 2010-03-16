@@ -23,30 +23,35 @@ function admin_configpages(&$engine, &$module)
 	// update settings
 	if ($_POST['action'] == 'update')
 	{
-		$engine->Query(
-			"UPDATE {$engine->config['table_prefix']}config SET ".
-				"`forum_cluster`		= '".quote($engine->dblink, trim((string)$_POST['forum_cluster'], '/'))."', ".
-				"`forum_topics`			= '".quote($engine->dblink, (int)$_POST['forum_topics'])."', ".
-				"`forum_posts`			= '".quote($engine->dblink, (int)$_POST['forum_posts'])."', ".
-				"`news_cluster`			= '".quote($engine->dblink, trim((string)$_POST['news_cluster'], '/'))."', ".
-				"`news_levels`			= '".quote($engine->dblink, (string)$_POST['news_levels'])."', ".
-				"`root_page`			= '".quote($engine->dblink, trim((string)$_POST['root_page'], '/'))."', ".
-				"`policy_page`			= '".quote($engine->dblink, trim((string)$_POST['policy_page'], '/'))."', ".
-				"`search_page`			= '".quote($engine->dblink, trim((string)$_POST['search_page'], '/'))."', ".
-				"`registration_page`	= '".quote($engine->dblink, trim((string)$_POST['registration_page'], '/'))."', ".
-				"`login_page`			= '".quote($engine->dblink, trim((string)$_POST['login_page'], '/'))."', ".
-				"`settings_page`		= '".quote($engine->dblink, trim((string)$_POST['settings_page'], '/'))."', ".
-				"`password_page`		= '".quote($engine->dblink, trim((string)$_POST['password_page'], '/'))."', ".
-				"`users_page`			= '".quote($engine->dblink, trim((string)$_POST['users_page'], '/'))."', ".
-				"`groups_page`			= '".quote($engine->dblink, trim((string)$_POST['groups_page'], '/'))."', ".
-				"`changes_page`			= '".quote($engine->dblink, trim((string)$_POST['changes_page'], '/'))."', ".
-				"`comments_page`		= '".quote($engine->dblink, trim((string)$_POST['comments_page'], '/'))."', ".
-				"`removals_page`		= '".quote($engine->dblink, trim((string)$_POST['removals_page'], '/'))."', ".
-				"`wanted_page`			= '".quote($engine->dblink, trim((string)$_POST['wanted_page'], '/'))."', ".
-				"`orphaned_page`		= '".quote($engine->dblink, trim((string)$_POST['orphaned_page'], '/'))."', ".
-				"`todo_page`			= '".quote($engine->dblink, trim((string)$_POST['todo_page'], '/'))."', ".
-				"`sandbox`				= '".quote($engine->dblink, trim((string)$_POST['sandbox'], '/'))."', ".
-				"`wiki_docs`			= '".quote($engine->dblink, trim((string)$_POST['wiki_docs'], '/'))."', ");
+		$config['forum_cluster']		= trim((string)$_POST['forum_cluster'], '/');
+		$config['forum_topics']			= (int)$_POST['forum_topics'];
+		$config['forum_posts']			= (int)$_POST['forum_posts'];
+		$config['news_cluster']			= trim((string)$_POST['news_cluster'], '/');
+		$config['news_levels']			= (string)$_POST['news_levels'];
+		$config['root_page']			= trim((string)$_POST['root_page'], '/');
+		$config['policy_page']			= trim((string)$_POST['policy_page'], '/');
+		$config['search_page']			= trim((string)$_POST['search_page'], '/');
+		$config['registration_page']	= trim((string)$_POST['registration_page'], '/');
+		$config['login_page']			= trim((string)$_POST['login_page'], '/');
+		$config['settings_page']		= trim((string)$_POST['settings_page'], '/');
+		$config['password_page']		= trim((string)$_POST['password_page'], '/');
+		$config['users_page']			= trim((string)$_POST['users_page'], '/');
+		$config['groups_page']			= trim((string)$_POST['groups_page'], '/');
+		$config['changes_page']			= trim((string)$_POST['changes_page'], '/');
+		$config['comments_page']		= trim((string)$_POST['comments_page'], '/');
+		$config['removals_page']		= trim((string)$_POST['removals_page'], '/');
+		$config['wanted_page']			= trim((string)$_POST['wanted_page'], '/');
+		$config['orphaned_page']		= trim((string)$_POST['orphaned_page'], '/');
+		$config['todo_page']			= trim((string)$_POST['todo_page'], '/');
+		$config['sandbox']				= trim((string)$_POST['sandbox'], '/');
+		$config['wiki_docs']			= trim((string)$_POST['wiki_docs'], '/');
+
+
+		foreach($config as $key => $value)
+		{
+			$engine->Query(
+				"UPDATE {$engine->config['table_prefix']}config SET value = '$value' WHERE config_name = '$key'");
+		}
 		$engine->Log(1, 'Updated settings base pages');
 		$engine->Redirect(rawurldecode($engine->href()));
 	}

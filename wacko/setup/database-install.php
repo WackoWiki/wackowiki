@@ -38,7 +38,107 @@ $insert_admin_group = "INSERT INTO ".$config["table_prefix"]."groups (group_name
 $insert_admin_group_member = "INSERT INTO ".$config["table_prefix"]."groups_members (group_id, user_id) VALUES ((SELECT group_id FROM ".$config["table_prefix"]."groups WHERE group_name = 'Admins' LIMIT 1), (SELECT user_id FROM ".$config["table_prefix"]."users WHERE user_name = '".$config["admin_name"]."' LIMIT 1))";
 
 $insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, user_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config["table_prefix"]."users WHERE user_name = '".$config["admin_name"]."' LIMIT 1),'wacko4.gif', 'WackoWiki', NOW(), '1580', '108', '50', 'gif')";
+
+// inserting config values
+$configDb['admin_email'] = $config['admin_email'];
+$configDb['admin_name'] = $config['admin_name'];
+$configDb['allow_rawhtml'] = $config['allow_rawhtml'];
+$configDb['allow_registration'] = $config['allow_registration'];
+$configDb['allow_themes'] = $config['allow_themes'];
+$configDb['allpageindex_page'] = $config['allpageindex_page'];
+$configDb['allrecentchanges_page'] = $config['allrecentchanges_page'];
+$configDb['cache'] = $config['cache'];
+$configDb['cache_sql'] = $config['cache_sql'];
+$configDb['cache_sql_ttl'] = $config['cache_sql_ttl'];
+$configDb['cache_ttl'] = $config['cache_ttl'];
+$configDb['captcha_edit_page'] = $config['captcha_edit_page'];
+$configDb['captcha_new_comment'] = $config['captcha_new_comment'];
+$configDb['captcha_new_page'] = $config['captcha_new_page'];
+$configDb['captcha_registration'] = $config['captcha_registration'];
+$configDb['cookie_prefix'] = $config['cookie_prefix'];
+$configDb['cookie_session'] = $config['cookie_session'];
+$configDb['date_format'] = $config['date_format'];
+$configDb['date_macro_format'] = $config['date_macro_format'];
+$configDb['date_precise_format'] = $config['date_precise_format'];
+$configDb['debug'] = $config['debug'];
+$configDb['debug_admin_only'] = $config['debug_admin_only'];
+$configDb['debug_sql_threshold'] = $config['debug_sql_threshold'];
+$configDb['default_comment_acl'] = $config['default_comment_acl'];
+$configDb['default_create_acl'] = $config['default_create_acl'];
+$configDb['default_read_acl'] = $config['default_read_acl'];
+$configDb['default_rename_redirect'] = $config['default_rename_redirect'];
+$configDb['default_typografica'] = $config['default_typografica'];
+$configDb['default_write_acl'] = $config['default_write_acl'];
+$configDb['disable_autosubscribe'] = $config['disable_autosubscribe'];
+$configDb['disable_bracketslinks'] = $config['disable_bracketslinks'];
+$configDb['disable_formatters'] = $config['disable_formatters'];
+$configDb['disable_npjlinks'] = $config['disable_npjlinks'];
+$configDb['disable_safehtml'] = $config['disable_safehtml'];
+$configDb['disable_tikilinks'] = $config['disable_tikilinks'];
+$configDb['disable_wikilinks'] = $config['disable_wikilinks'];
+$configDb['edit_summary'] = $config['edit_summary'];
+$configDb['footer_comments'] = $config['footer_comments'];
+$configDb['footer_files'] = $config['footer_files'];
+$configDb['forum_cluster'] = $config['forum_cluster'];
+$configDb['forum_topics'] = $config['forum_topics'];
+$configDb['hide_comments'] = $config['hide_comments'];
+$configDb['hide_files'] = $config['hide_files'];
+$configDb['hide_index'] = $config['hide_index'];
+$configDb['hide_locked'] = $config['hide_locked'];
+$configDb['hide_rating'] = $config['hide_rating'];
+$configDb['keep_deleted_time'] = $config['keep_deleted_time'];
+$configDb['language'] = $config['language'];
+$configDb['log_min_level'] = $config['log_min_level'];
+$configDb['log_purge_time'] = $config['log_purge_time'];
+$configDb['lower_index'] = $config['lower_index'];
+$configDb['minor_edit'] = $config['minor_edit'];
+$configDb['multilanguage'] = $config['multilanguage'];
+$configDb['name_date_macro'] = $config['name_date_macro'];
+$configDb['news_cluster'] = $config['news_cluster'];
+$configDb['news_levels'] = $config['news_levels'];
+$configDb['outlook_workaround'] = $config['outlook_workaround'];
+$configDb['owners_can_change_keywords'] = $config['owners_can_change_keywords'];
+$configDb['owners_can_remove_comments'] = $config['owners_can_remove_comments'];
+$configDb['pages_purge_time'] = $config['pages_purge_time'];
+$configDb['paragrafica'] = $config['paragrafica'];
+$configDb['pwd_char_classes'] = $config['pwd_char_classes'];
+$configDb['pwd_min_chars'] = $config['pwd_min_chars'];
+$configDb['pwd_unlike_login'] = $config['pwd_unlike_login'];
+$configDb['referrers_purge_time'] = $config['referrers_purge_time'];
+$configDb['remove_onlyadmins'] = $config['remove_onlyadmins'];
+$configDb['rename_globalacl'] = $config['rename_globalacl'];
+$configDb['revisions_hide_cancel'] = $config['revisions_hide_cancel'];
+$configDb['rewrite_mode'] = $config['rewrite_mode'];
+$configDb['root_page'] = $config['root_page'];
+$configDb['session_prefix'] = $config['session_prefix'];
+$configDb['show_spaces'] = $config['show_spaces'];
+$configDb['spam_filter'] = $config['spam_filter'];
+$configDb['ssl'] = $config['ssl'];
+$configDb['standard_handlers'] = $config['standard_handlers'];
+$configDb['store_deleted_pages'] = $config['store_deleted_pages'];
+$configDb['theme'] = $config['theme'];
+$configDb['time_format'] = $config['time_format'];
+$configDb['time_format_seconds'] = $config['time_format_seconds'];
+$configDb['upload'] = $config['upload'];
+$configDb['upload_banned_exts'] = $config['upload_banned_exts'];
+$configDb['upload_images_only'] = $config['upload_images_only'];
+$configDb['upload_max_per_user'] = $config['upload_max_per_user'];
+$configDb['upload_max_size'] = $config['upload_max_size'];
+$configDb['upper_index'] = $config['upper_index'];
+$configDb['urls_underscores'] = $config['urls_underscores'];
+$configDb['users_page'] = $config['users_page'];
+$configDb['wacko_name'] = $config['wacko_name'];
+$configDb['xml_sitemap'] = $config['xml_sitemap'];
+$configDb['youarehere_text'] = $config['youarehere_text'];
+#$configDb[''] = $config[''];
+
+foreach($configDb as $key => $value)
+{
+	$config_insert .= "(0, '$key', '$value'),";
+}
+
 $insert_config = "INSERT INTO ".$config["table_prefix"]."config (config_id, config_name, value) VALUES
+	".$config_insert."
 	(0, 'maint_last_cache', NULL),
 	(0, 'maint_last_log', NULL),
 	(0, 'maint_last_refs', NULL),

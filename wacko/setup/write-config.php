@@ -20,6 +20,7 @@ function array_to_str ($arr, $name="")
 	return $str;
 }
 
+// config values
 function RandomSeed($length, $pwd_complexity)
 {
 	$chars_uc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -62,7 +63,6 @@ function RandomSeed($length, $pwd_complexity)
 if ( ( $config["system_seed"] == "") )
 	$config["system_seed"] = RandomSeed(20, 3);
 
-
 if ( ( $config["database_driver"] == "mysqli_legacy" ) && empty( $config["database_port"] ) )
 $config["database_port"] = $config["database_port"] = "3306";
 
@@ -74,9 +74,38 @@ if(!array_key_exists("wacko_version", $config))
 // set version to current version, yay!
 $config["wacko_version"] = WACKO_VERSION;
 
+///////////////////////////////////////////////////////////////////////////////////////////
+//	BEGIN MANDATORY CONFIGURATION
+///////////////////////////////////////////////////////////////////////////////////////////
+$configFile['base_url'] = $config['base_url'];
+// database connection
+$configFile['database_collation'] = $config['database_collation'];
+$configFile['database_driver'] = $config['database_driver'];
+$configFile['database_host'] = $config['database_host'];
+$configFile['database_port'] = $config['database_port'];
+$configFile['database_database'] = $config['database_database'];
+$configFile['database_user'] = $config['database_user'];
+$configFile['database_password'] = $config['database_password'];
+$configFile['table_prefix'] = $config['table_prefix'];
+// security values
+$configFile['system_seed'] = $config['system_seed'];
+$configFile['recovery_password'] = $config['recovery_password'];
+// paths
+$configFile['cache_dir'] = $config['cache_dir'];
+$configFile['classes_path'] = $config['classes_path'];
+$configFile['action_path'] = $config['action_path'];
+$configFile['handler_path'] = $config['handler_path'];
+$configFile['upload_path'] = $config['upload_path'];
+$configFile['upload_path_per_page'] = $config['upload_path_per_page'];
+$configFile['header_action'] = $config['header_action'];
+$configFile['footer_action'] = $config['footer_action'];
+// version
+$configFile['wacko_version'] = $config['wacko_version'];
+#$configFile[''] = $config[''];
+
 // convert config array into PHP code
 $configCode = "<?php\n// config.inc.php ".$lang["WrittenAt"].strftime("%c")."\n// ".$lang["ConfigDescription"]."\n// ".$lang["DontChange"]."\n\n";
-$configCode .= array_to_str($config)."\n?>";
+$configCode .= array_to_str($configFile)."\n?>";
 
 // try to write configuration file
 print("         <h2>".$lang["FinalStep"]."</h2>\n");

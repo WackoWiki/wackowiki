@@ -1,7 +1,7 @@
 <?php
 
 // create polls object
-$this->UseClass("polls", "classes/");
+$this->UseClass("polls");
 $pollsObj = new Polls($this);
 
 // polls for moderation

@@ -27,37 +27,41 @@ function admin_configsecurity(&$engine, &$module)
 	// update settings
 	if ($_POST['action'] == 'update')
 	{
-		$engine->Query(
-			"UPDATE {$engine->config['table_prefix']}config SET ".
-				"`allow_registration`	= '".quote($engine->dblink, (int)$_POST['allow_registration'])."', ".
-				"captcha_new_comment 	= '".quote($engine->dblink, (int)$_POST['captcha_new_comment'])."', ".
-				"captcha_new_page 		= '".quote($engine->dblink, (int)$_POST['captcha_new_page'])."', ".
-				"captcha_edit_page 		= '".quote($engine->dblink, (int)$_POST['captcha_edit_page'])."', ".
-				"captcha_registration 	= '".quote($engine->dblink, (int)$_POST['captcha_registration'])."', ".
-				"`strong_cookies`		= '".quote($engine->dblink, (int)$_POST['strong_cookies'])."', ".
-				"`antidupe`				= '".quote($engine->dblink, (int)$_POST['antidupe'])."', ".
-				"`default_read_acl`		= '".quote($engine->dblink, (string)$_POST['default_read_acl'])."', ".
-				"`default_write_acl`	= '".quote($engine->dblink, (string)$_POST['default_write_acl'])."', ".
-				"`default_comment_acl`	= '".quote($engine->dblink, (string)$_POST['default_comment_acl'])."', ".
-				"`default_create_acl`	= '".quote($engine->dblink, (string)$_POST['default_create_acl'])."', ".
-				"`default_upload_acl`	= '".quote($engine->dblink, (string)$_POST['default_upload_acl'])."', ".
-				"`rename_globalacl`		= '".quote($engine->dblink, (string)$_POST['rename_globalacl'])."', ".
-				"`hide_locked`			= '".quote($engine->dblink, (int)$_POST['hide_locked'])."', ".
-				"`remove_onlyadmins`	= '".quote($engine->dblink, (int)$_POST['remove_onlyadmins'])."', ".
-				"`owners_can_remove_comments`	= '".quote($engine->dblink, (int)$_POST['owners_can_remove_comments'])."', ".
-				"`owners_can_change_keywords`	= '".quote($engine->dblink, (int)$_POST['owners_can_change_keywords'])."', ".
-				"`moders_can_edit`		= '".quote($engine->dblink, (int)$_POST['moders_can_edit'])."', ".
-				"`ssl`					= '".quote($engine->dblink, (int)$_POST['ssl'])."', ".
-				"`ssl_implicit`			= '".quote($engine->dblink, (int)$_POST['ssl_implicit'])."', ".
-				"`pwd_min_chars`		= '".quote($engine->dblink, (int)$_POST['pwd_min_chars'])."', ".
-				"`pwd_char_classes`		= '".quote($engine->dblink, (int)$_POST['pwd_char_classes'])."', ".
-				"`pwd_unlike_login`		= '".quote($engine->dblink, (int)$_POST['pwd_unlike_login'])."', ".
-				"`log_min_level`		= '".quote($engine->dblink, (int)$_POST['log_min_level'])."', ".
-				"`log_default_show`		= '".quote($engine->dblink, (int)$_POST['log_default_show'])."', ".
-				"`log_purge_time`		= '".quote($engine->dblink, (int)$_POST['log_purge_time'])."', ".
-				"`cookie_session`		= '".quote($engine->dblink, (int)$_POST['cookie_session'])."', ".
-				"`comment_delay`		= '".quote($engine->dblink, (int)$_POST['comment_delay'])."', ".
-				"`intercom_delay`		= '".quote($engine->dblink, (int)$_POST['intercom_delay'])."' ");
+		$config['allow_registration']			= (int)$_POST['allow_registration'];
+		$config['captcha_new_comment']			= (int)$_POST['captcha_new_comment'];
+		$config['captcha_new_page']				= (int)$_POST['captcha_new_page'];
+		$config['captcha_edit_page']			= (int)$_POST['captcha_edit_page'];
+		$config['captcha_registration']			= (int)$_POST['captcha_registration'];
+		$config['strong_cookies']				= (int)$_POST['strong_cookies'];
+		$config['antidupe']						= (int)$_POST['antidupe'];
+		$config['default_read_acl']				= (string)$_POST['default_read_acl'];
+		$config['default_write_acl']			= (string)$_POST['default_write_acl'];
+		$config['default_comment_acl']			= (string)$_POST['default_comment_acl'];
+		$config['default_create_acl']			= (string)$_POST['default_create_acl'];
+		$config['default_upload_acl']			= (string)$_POST['default_upload_acl'];
+		$config['rename_globalacl']				= (string)$_POST['rename_globalacl'];
+		$config['hide_locked']					= (int)$_POST['hide_locked'];
+		$config['remove_onlyadmins']			= (int)$_POST['remove_onlyadmins'];
+		$config['owners_can_remove_comments']	= (int)$_POST['owners_can_remove_comments'];
+		$config['owners_can_change_keywords']	= (int)$_POST['owners_can_change_keywords'];
+		$config['moders_can_edit']				= (int)$_POST['moders_can_edit'];
+		$config['ssl']							= (int)$_POST['ssl'];
+		$config['ssl_implicit']					= (int)$_POST['ssl_implicit'];
+		$config['pwd_min_chars']				= (int)$_POST['pwd_min_chars'];
+		$config['pwd_char_classes']				= (int)$_POST['pwd_char_classes'];
+		$config['pwd_unlike_login']				= (int)$_POST['pwd_unlike_login'];
+		$config['log_min_level']				= (int)$_POST['log_min_level'];
+		$config['log_default_show']				= (int)$_POST['log_default_show'];
+		$config['log_purge_time']				= (int)$_POST['log_purge_time'];
+		$config['cookie_session']				= (int)$_POST['cookie_session'];
+		$config['comment_delay']				= (int)$_POST['comment_delay'];
+		$config['intercom_delay']				= (int)$_POST['intercom_delay'];
+
+		foreach($config as $key => $value)
+		{
+			$engine->Query(
+				"UPDATE {$engine->config['table_prefix']}config SET value = '$value' WHERE config_name = '$key'");
+		}
 		$engine->Log(1, '!!Updated security settings WackoWiki!!');
 		$engine->Redirect(rawurldecode($engine->href()));
 	}
@@ -247,7 +251,7 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="ssl_implicit"><strong>Forced SSL:</strong><br />
-				<small>Force client reconnection c HTTP to HTTPS. When this option the customer can view the site for open HTTP-channel.</small></label></td>
+				<small>Force client reconnection from HTTP to HTTPS. When this option the customer can view the site for open HTTP-channel.</small></label></td>
 				<td><input type="checkbox" id="ssl_implicit" name="ssl_implicit" value="1"<?php echo ( $engine->config['ssl_implicit'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr>
