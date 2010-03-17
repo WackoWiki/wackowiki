@@ -13,7 +13,7 @@ $pagination = $this->Pagination($count['n'], $limit);
 
 //  collect data
 if ($pages = $this->LoadAll(
-	"SELECT {$this->pages_meta} ".
+	"SELECT page_id, tag, title ".
 	"FROM {$this->config['table_prefix']}pages ".
 	"WHERE comment_on_id = '0' ".
 	"ORDER BY ".($title == 1

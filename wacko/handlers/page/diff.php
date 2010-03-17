@@ -9,7 +9,7 @@ if (!function_exists('HandlerDiffLoadPageById'))
 		if ($id != "-1")
 		{
 			return $wacko->LoadSingle(
-				"SELECT * ".
+				"SELECT page_id, modified, body ".
 				"FROM ".$wacko->config["table_prefix"]."revisions ".
 				"WHERE revision_id = '".quote($wacko->dblink, $id)."' ".
 				"LIMIT 1");
@@ -17,7 +17,7 @@ if (!function_exists('HandlerDiffLoadPageById'))
 		else
 		{
 			return $wacko->LoadSingle(
-				"SELECT * ".
+				"SELECT page_id, modified, body ".
 				"FROM ".$wacko->config["table_prefix"]."pages ".
 				"WHERE page_id = '".quote($wacko->dblink, $wacko->GetPageId())."' ".
 				"LIMIT 1");
