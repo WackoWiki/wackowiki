@@ -3420,13 +3420,6 @@ class Wacko
 			if ($set == BM_DEFAULT)
 				$bookmarks = $this->GetDefaultBookmarks($user["lang"]);
 
-			#$dummy = $this->Format($bookmarks, "wacko");
-			#$this->ClearLinkTable();
-			#$this->StartLinkTracking();
-			#$dummy = $this->Format($dummy, "post_wacko");
-			#$this->StopLinkTracking();
-			#$bmlinks = $this->GetLinkTable();
-
 			// parsing bookmarks into links table
 			$bookmarks	= explode("\n", $bookmarks);
 			$bmlinks	= $bookmarks;
@@ -3503,13 +3496,6 @@ class Wacko
 			// rewriting bookmarks table except containing current page tag
 			foreach ($bookmarks as $bookmark)
 			{
-				#$dummy = $this->Format($bookmark, "wacko");
-				#$this->ClearLinkTable();
-				#$this->StartLinkTracking();
-				#$dummy = $this->Format($dummy, "post_wacko");
-				#$this->StopLinkTracking();
-				#$bml = $this->GetLinkTable();
-
 				if ($bookmark && substr($bookmark, 2, strpos($bookmark, ' ', 2) - 2) != $this->tag)
 					$newbookmarks[] = $bookmark;
 			}
