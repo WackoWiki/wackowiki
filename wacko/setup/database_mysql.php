@@ -100,6 +100,7 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
+					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".
@@ -114,7 +115,6 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"comments INT(4) UNSIGNED NOT NULL DEFAULT '0',".
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
-					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"commented DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
@@ -157,6 +157,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
+					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".
@@ -168,7 +169,6 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 					"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
-					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"PRIMARY KEY (revision_id),".

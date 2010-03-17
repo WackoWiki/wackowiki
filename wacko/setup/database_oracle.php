@@ -98,6 +98,7 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"user_id number(10) default 0 not null,".
 					"tag varchar2(250) not null,".
 					"supertag varchar2(250) not null,".
+					"title varchar2(100) not null,".
 					"created date default sysdate not null,".
 					"modified date default sysdate not null,".
 					"body clob,".
@@ -112,7 +113,6 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"comments number(4) default 0 not null,".
 					"hits number(10) default 0 not null,".
 					"lang varchar2(2) not null,".
-					"title varchar2(100) not null,".
 					"commented date default sysdate not null,".
 					"description varchar2(250) not null,".
 					"keywords varchar2(250) not null,".
@@ -155,6 +155,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 					"user_id number(10) default 0 not null,".
 					"tag varchar2(250) not null,".
 					"supertag varchar2(250) not null,".
+					"title varchar2(100) not null,".
 					"created date default sysdate not null,".
 					"modified date default sysdate not null,".
 					"body clob,".
@@ -166,7 +167,6 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 					"handler varchar2(30) default 'page' not null,".
 					"comment_on_id number(10) default 0 not null,".
 					"lang varchar2(2) not null,".
-					"title varchar2(100) not null,".
 					"description varchar2(250) not null,".
 					"keywords varchar2(250) not null,".
 					"constraint {$pref}revisions_pk primary key (revision_id)/*,".
