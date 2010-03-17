@@ -100,13 +100,17 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		if ($need_massacls == 1)
 		{
 			$pages = $this->LoadAll("
-				SELECT ".$this->pages_meta." ".
-				"FROM ".$this->config["table_prefix"]."pages ".
-				"WHERE (supertag = '".quote($this->dblink, $this->supertag)."'".
-				" OR supertag LIKE '".quote($this->dblink, $this->supertag."/%")."'".
-				" OR comment_on_id = '".quote($this->dblink, $this->GetPageId())."'".
-				" OR comment_on_id LIKE '".quote($this->dblink, $this->tag."/%")."'".
-					") AND owner_id = '".quote($this->dblink, $this->GetUserId())."'");
+				SELECT p.page_id, p.tag, p.title ".
+				"FROM ".$this->config["table_prefix"]."pages p ".
+					"LEFT JOIN ".$this->config["table_prefix"]."pages c ON (p.comment_on_id = c.page_id) ".
+				"WHERE (p.supertag = '".quote($this->dblink, $this->supertag)."'".
+				" OR p.supertag LIKE '".quote($this->dblink, $this->supertag."/%")."'".
+				" OR p.comment_on_id = '".quote($this->dblink, $this->GetPageId())."'".
+				" OR c.supertag LIKE '".quote($this->dblink, $this->supertag."/%")."'".
+					") ".
+				($this->IsAdmin()
+					? ""
+					: "AND p.owner_id = '".quote($this->dblink, $this->GetUserId())."'"));
 
 			foreach ($pages as $num=>$page)
 			{
