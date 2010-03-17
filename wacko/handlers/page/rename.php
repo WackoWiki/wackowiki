@@ -160,7 +160,7 @@ function RecursiveMove(&$parent, $root)
 
 	$query = "'".quote($parent->dblink, $parent->NpjTranslit($root))."%'";
 	$pages = $parent->LoadAll(
-		"SELECT ".$parent->pages_meta." ".
+		"SELECT page_id, tag, supertag ".
 		"FROM ".$parent->config["table_prefix"]."pages ".
 		"WHERE supertag LIKE ".$query.
 		($owner_id
