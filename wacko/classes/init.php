@@ -234,8 +234,6 @@ class Init
 					"disable_safehtml" => 0,
 					"urls_underscores" => 0,
 
-					"allrecentchanges_page" => "",
-					"allpageindex_page" => "",
 					"users_page" => "",
 
 					"default_write_acl" => "$",
