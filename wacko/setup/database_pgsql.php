@@ -11,6 +11,7 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"\"user_id\" integer NOT NULL DEFAULT '',".
 					"tag character varying(250) NOT NULL DEFAULT '',".
 					"supertag character varying(250) NOT NULL DEFAULT '',".
+					"title character varying(100) NOT NULL DEFAULT '',".
 					"\"created\" timestamp without time zone NOT NULL DEFAULT now(),".
 					"\"modified\" timestamp without time zone NOT NULL DEFAULT now(),".
 					"body text NOT NULL,".
@@ -24,7 +25,6 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"comment_on_id integer NOT NULL DEFAULT '0',".
 					"hits integer NOT NULL DEFAULT 0,".
 					"lang character varying(2) NOT NULL DEFAULT '',".
-					"title character varying(100) NOT NULL DEFAULT '',".
 					"description character varying(250) NOT NULL DEFAULT '',".
 					"keywords character varying(250) NOT NULL DEFAULT '',".
 					"CONSTRAINT pk_pages_id PRIMARY KEY (page_id),".
@@ -38,6 +38,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"\"user_id\" integer NOT NULL DEFAULT '',".
 						"tag character varying(250) NOT NULL DEFAULT '',".
 						"supertag character varying(250) NOT NULL DEFAULT '',".
+						"title character varying(100) NOT NULL DEFAULT '',".
 						"\"created\" timestamp without time zone NOT NULL DEFAULT now(),".
 						"\"modified\" timestamp without time zone NOT NULL DEFAULT now(),".
 						"body text NOT NULL DEFAULT '',".
@@ -49,7 +50,6 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"\"handler\" character varying(30) NOT NULL DEFAULT 'page',".
 						"comment_on_id integer NOT NULL DEFAULT '0',".
 						"lang character varying(2) NOT NULL DEFAULT '',".
-						"title character varying(100) NOT NULL DEFAULT '',".
 						"description character varying(250) NOT NULL DEFAULT '',".
 						"keywords character varying(250) NOT NULL DEFAULT '',".
 						"CONSTRAINT pk_revisions_id PRIMARY KEY (revision_id)".
