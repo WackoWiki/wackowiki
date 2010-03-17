@@ -234,7 +234,7 @@ class Init
 					"disable_safehtml" => 0,
 					"urls_underscores" => 0,
 
-					"users_page" => "",
+					"users_page" => "Users",
 
 					"default_write_acl" => "$",
 					"default_read_acl" => "*",
