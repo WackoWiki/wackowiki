@@ -4241,7 +4241,7 @@ class Wacko
 		{
 			$this->Query(
 				"DELETE FROM {$this->config['table_prefix']}rating ".
-				"WHERE page_id = {$id['id']}");
+				"WHERE page_id = '{$id['page_id']}'");
 		}
 		return true;
 	}
