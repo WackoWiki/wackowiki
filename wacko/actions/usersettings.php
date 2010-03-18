@@ -112,7 +112,7 @@ else if ($user = $this->GetUser())
 	{
 		if ($email = ( $_GET["resend_code"] == 1 ? $user["email"] : $_POST["email"] ))
 		{
-			$confirm = md5($user["password"].mt_rand().time().mt_rand().$email.mt_rand());
+			$confirm = sha1($user["password"].mt_rand().time().mt_rand().$email.mt_rand());
 
 			$this->Query(
 				"UPDATE {$this->config["user_table"]} ".

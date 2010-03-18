@@ -141,7 +141,7 @@ else if ($_POST["action"] == "login")
 			// submitting input to DB
 			else
 			{
-				$confirm = md5($password.mt_rand().time().mt_rand().$email.mt_rand());
+				$confirm = sha1($password.mt_rand().time().mt_rand().$email.mt_rand());
 				$more = $this->ComposeOptions(array(
 					"theme" => $this->GetConfigValue("theme"),
 					"send_watchmail" => "1",
@@ -160,7 +160,7 @@ else if ($_POST["action"] == "login")
 						($lang
 							? "lang = '".quote($this->dblink, $lang)."', "
 							: "").
-						"password = md5('".quote($this->dblink, $_POST["password"])."')");
+						"password = sha1('".quote($this->dblink, $_POST["password"])."')");
 
 				$subject = 	$this->GetTranslation("EmailWelcome").
 							$this->GetConfigValue("wacko_name");

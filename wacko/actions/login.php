@@ -95,8 +95,25 @@ else
 		// if user name already exists, check password
 		if ($existingUser = $this->LoadUser($_POST["name"]))
 		{
+			if (strlen($existingUser["password"]) == 32)
+			{
+				$_processed_password = md5($_POST["password"]);
+
+				if ($existingUser["password"] == $_processed_password)
+				{
+					// update database with the sha1 password for future logins
+					$this->Query("UPDATE ".$this->config["table_prefix"]."users SET ".
+								"password = SHA1( '".$_POST["password"]."' ) ".
+								"WHERE user_name = '".$_POST["name"]."'");
+				}
+			}
+			else
+			{
+				$_processed_password = sha1($_POST["password"]);
+			}
+
 			// check password
-			if ($existingUser["password"] == md5($_POST["password"]))
+			if ($existingUser["password"] == $_processed_password)
 			{
 				// define session longetivity
 				switch ($_POST['session'])
