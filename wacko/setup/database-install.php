@@ -125,6 +125,7 @@ $configDb['upload_max_size'] = $config['upload_max_size'];
 $configDb['upper_index'] = $config['upper_index'];
 $configDb['urls_underscores'] = $config['urls_underscores'];
 $configDb['users_page'] = $config['users_page'];
+$configDb['wacko_desc'] = $config['wacko_desc'];
 $configDb['wacko_name'] = $config['wacko_name'];
 $configDb['xml_sitemap'] = $config['xml_sitemap'];
 $configDb['youarehere_text'] = $config['youarehere_text'];

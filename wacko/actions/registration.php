@@ -178,10 +178,6 @@ else if ($_POST["action"] == "login")
 				// log event
 				$this->Log(4, str_replace("%2", $email, str_replace("%1", $name, $this->GetTranslation("LogUserRegistered"))));
 
-				// log in
-			#	$this->SetUser($this->LoadUser($name));
-			#	$this->LogUserIn($this->GetUser());
-
 				// forward
 				$this->SetMessage($this->GetTranslation("SiteRegistered").
 					$this->config["wacko_name"].". ".

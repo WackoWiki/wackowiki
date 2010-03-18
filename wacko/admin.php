@@ -19,8 +19,8 @@ require('classes/init.php');
 $init = new Init();
 
 // define settings
-$init->Settings();
-$init->Settings();
+$init->Settings(); // populate from config.inc.php
+$init->Settings(); // initialize DBAL and populate from config table
 $init->DBAL();
 $init->Settings('root_url',		(preg_replace("#/[^/]*$#","/",$init->config['base_url'])));
 $init->Settings('theme_url',	$init->config['root_url'].'themes/'.$init->config['theme'].'/');
@@ -99,15 +99,15 @@ if ($engine->config['recovery_password'] == false)
 }
 else
 {
-	$pwd = md5($engine->config['recovery_password']);
+	$pwd = sha1($engine->config['recovery_password']);
 }
 
 // recovery preauthorization
 if ($_POST['password'])
 {
-	if (md5($_POST['password']) == $pwd)
+	if (sha1($_POST['password']) == $pwd)
 	{
-		$engine->SetSessionCookie('admin', md5($_POST['password']), '', ( $engine->config['ssl'] == true ? 1 : 0 ));
+		$engine->SetSessionCookie('admin', sha1($_POST['password']), '', ( $engine->config['ssl'] == true ? 1 : 0 ));
 		$engine->Log(1, $engine->GetTranslation('LogAdminLoginSuccess'));
 		$engine->Redirect('admin.php');
 	}

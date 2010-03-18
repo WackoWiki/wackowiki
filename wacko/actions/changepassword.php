@@ -65,9 +65,6 @@ if (isset($_GET["secret_code"]) && $_GET["secret_code"])
 					"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
 					"LIMIT 1");
 
-				#$this->SetUser($user = $this->LoadUser($user["user_name"]));
-				#$this->LogUserIn($user);
-
 				// log event
 				$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordRecovered")));
 
@@ -194,8 +191,6 @@ else if (!isset($forgot) && $user = $this->GetUser())
 			$this->LogoutUser();
 			$this->SetBookmarks(BM_DEFAULT);
 			$this->context[++$this->current_context] = "";
-			#$this->SetUser($user = $this->LoadUser($user["user_name"]));
-			#$this->LogUserIn($user);
 
 			// log event
 			$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordChanged")));
