@@ -45,13 +45,13 @@ class RSS
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
 		$xml .= "<title>".$this->engine->config["wacko_name"].$this->engine->GetTranslation("RecentChangesTitleXML")."</title>\n";
-		$xml .= "<link>".$this->engine->config["root_url"]."</link>\n";
+		$xml .= "<link>".$this->engine->config["base_url"]."</link>\n";
 		$xml .= "<description>".$this->engine->GetTranslation("RecentChangesXML").$this->engine->config["wacko_name"]." </description>\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
 		$xml .= "<title>".$this->engine->config["wacko_name"].$this->engine->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->engine->config["root_url"]."</link>\n";
-		$xml .= "<url>".$this->engine->config["root_url"]."files/wacko4.gif"."</url>\n";
+		$xml .= "<link>".$this->engine->config["base_url"]."</link>\n";
+		$xml .= "<url>".$this->engine->config["base_url"]."files/wacko4.gif"."</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
@@ -96,13 +96,13 @@ class RSS
 		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
 		$xml .= "<title>".$this->engine->config["wacko_name"].$this->engine->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->engine->config["root_url"]."</link>\n";
+		$xml .= "<link>".$this->engine->config["base_url"]."</link>\n";
 		$xml .= "<description>".$this->engine->GetTranslation("RecentCommentsXML").$this->engine->config["wacko_name"]." </description>\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
 		$xml .= "<title>".$this->engine->config["wacko_name"].$this->engine->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->engine->config["root_url"]."</link>\n";
-		$xml .= "<url>".$this->engine->config["root_url"]."files/wacko4.gif"."</url>\n";
+		$xml .= "<link>".$this->engine->config["base_url"]."</link>\n";
+		$xml .= "<url>".$this->engine->config["base_url"]."files/wacko4.gif"."</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
@@ -174,15 +174,15 @@ class RSS
 				'<rss version="2.0">'."\n".
 					'<channel>'."\n".
 						'<title>'.$this->engine->config['wacko_name'].$this->engine->GetTranslation("RecentNewsTitleXML").'</title>'."\n".
-						'<link>'.$this->engine->config['root_url'].str_replace('%2F', '/', rawurlencode($newscluster)).'</link>'."\n".
+						'<link>'.$this->engine->config['base_url'].str_replace('%2F', '/', rawurlencode($newscluster)).'</link>'."\n".
 						'<description>'.$this->engine->GetTranslation("RecentNewsXML").$this->engine->config["wacko_name"].'</description>'."\n".
 						'<language>'.$this->engine->config['language'].'</language>'."\n".
 						'<pubDate>'.date('r').'</pubDate>'."\n".
 						'<lastBuildDate>'.date('r').'</lastBuildDate>'."\n";
 		$xml .= "<image>\n";
 		$xml .= "<title>".$this->engine->config["wacko_name"].$this->engine->GetTranslation("NewsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->engine->config["root_url"].str_replace('%2F', '/', rawurlencode($newscluster))."</link>\n";
-		$xml .= "<url>".$this->engine->config["root_url"]."files/wacko4.gif"."</url>\n";
+		$xml .= "<link>".$this->engine->config["base_url"].str_replace('%2F', '/', rawurlencode($newscluster))."</link>\n";
+		$xml .= "<url>".$this->engine->config["base_url"]."files/wacko4.gif"."</url>\n";
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";

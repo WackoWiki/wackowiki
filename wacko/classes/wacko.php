@@ -1822,7 +1822,7 @@ class Wacko
 
 		if (preg_match("/^[\.\-".$this->language["ALPHANUM_P"]."]+\.(gif|jpg|jpe|jpeg|png)$/i", $text))
 		{
-			$imlink = $this->config["root_url"]."/images/".$text;
+			$imlink = $this->config["base_url"]."/images/".$text;
 		}
 		else if (preg_match("/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i", preg_replace("/<\/?nobr>/", "", $text)))
 		{
@@ -1907,14 +1907,14 @@ class Wacko
 				if (is_array($desc))
 				{
 					$title	= $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
-					$url	= $this->config["root_url"].$this->config["upload_path"]."/".$thing;
+					$url	= $this->config["base_url"].$this->config["upload_path"]."/".$thing;
 					$icon	= $this->GetTranslation("fileicon");
 					$imlink	= false;
 					$tpl	= "localfile";
 					if ($desc["picture_w"] && !$noimg)
 					{
 						if (!$text) $text = $title;
-						return "<img src=\"".$this->config["root_url"].$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
+						return "<img src=\"".$this->config["base_url"].$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
 					}
 				}
 			}
@@ -1926,14 +1926,14 @@ class Wacko
 				if (is_array($desc))
 				{
 					$title	= $desc["description"]." (".ceil($desc["filesize"] / 1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
-					$url	= $this->config["root_url"].$this->config["upload_path"].$thing;
+					$url	= $this->config["base_url"].$this->config["upload_path"].$thing;
 					$icon	= $this->GetTranslation("fileicon");
 					$imlink	= false;
 					$tpl	= "localfile";
 					if ($desc["picture_w"] && !$noimg)
 					{
 						if (!$text) $text = $title;
-						return "<img src=\"".$this->config["root_url"].$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
+						return "<img src=\"".$this->config["base_url"].$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
 					}
 				}
 				else //404
@@ -3705,7 +3705,7 @@ class Wacko
 		{
 			$this->config["open_url"] = $this->config["base_url"];
 			$this->config["base_url"] = str_replace("http://", "https://", $this->config["base_url"]);
-			$this->config["root_url"] = str_replace("http://", "https://", $this->config["root_url"]);
+			$this->config["base_url"] = str_replace("http://", "https://", $this->config["base_url"]);
 		}
 
 		// in strong cookie mode check session validity
@@ -3781,7 +3781,7 @@ class Wacko
 		if (is_array($user) && $user["options"]["theme"])
 		{
 			$this->config["theme"]		= $user["options"]["theme"];
-			$this->config["theme_url"]	= $this->config["root_url"]."themes/".$this->config["theme"]."/";
+			$this->config["theme_url"]	= $this->config["base_url"]."themes/".$this->config["theme"]."/";
 		}
 
 		if (!$this->config["multilanguage"])

@@ -21,9 +21,9 @@
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="/xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="/xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
-<script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url") ?>js/controls.js"></script>
-<script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url") ?>js/protoedit.js"></script>
-<script type="text/javascript" src="<?php echo $this->GetConfigValue("root_url") ?>js/wikiedit2.js"></script>
+<script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url") ?>js/controls.js"></script>
+<script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url") ?>js/protoedit.js"></script>
+<script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url") ?>js/wikiedit2.js"></script>
 </head>
 </head>
 <body>

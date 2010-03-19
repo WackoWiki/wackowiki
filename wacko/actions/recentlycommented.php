@@ -65,7 +65,7 @@ if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
 {
 	if ($root == "" && !(int)$noxml)
 	{
-		echo "<a href=\"".$this->GetConfigValue("root_url")."xml/comments_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentCommentsXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
+		echo "<a href=\"".$this->GetConfigValue("base_url")."xml/comments_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentCommentsXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
 	}
 
 	echo "<ul class=\"ul_list\">\n";
