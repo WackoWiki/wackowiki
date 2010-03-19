@@ -337,9 +337,8 @@ class Wacko
 			if (@file_exists($resourcefile)) include($resourcefile);
 
 			$this->languages[$lang] = $wackoLanguage;
-			$ue = @array_flip($wackoLanguage["unicode_entities"]);
-			if (!isset($ue)) $ue = array();
-			$ue = array();
+			$ue = array(); 
+            $ue = @array_flip($wackoLanguage["unicode_entities"]);
 			$this->unicode_entities = array_merge($this->unicode_entities, $ue);
 			unset($this->unicode_entities[0]);
 		}
