@@ -108,7 +108,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				'</td>'.
 				'<td align="right">'.
 					// XML button
-					'<a href="'.$this->config['root_url'].'xml/comments_'.
+					'<a href="'.$this->config['base_url'].'xml/comments_'.
 					preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])).
 					'.xml"><img src="'.$this->config['theme_url'].
 					'icons/xml.gif" alt="XML" /></a><a href="/Проект/ОСайте/RSS" '.

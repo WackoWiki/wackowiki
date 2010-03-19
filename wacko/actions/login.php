@@ -142,7 +142,7 @@ else
 				if ($this->config['ssl'] == true)
 				{
 					$this->config['base_url'] = str_replace('http://', 'https://', $this->config['base_url']);
-					$this->config['root_url'] = str_replace('http://', 'https://', $this->config['root_url']);
+					$this->config['base_url'] = str_replace('http://', 'https://', $this->config['base_url']);
 				}
 
 				if ($_POST["goback"] != "")
