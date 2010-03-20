@@ -149,7 +149,7 @@ if ($registered
 		$files = $this->LoadAll(
 			"SELECT f.upload_id ".
 			"FROM ".$this->config["table_prefix"]."upload f ".
-				"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.users_id) ".
+				"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
 			"WHERE u.user_name = '".quote($this->dblink, $user["user_name"])."'");
 
 		if (!$this->config["upload_max_per_user"] || (sizeof($files) < $this->config["upload_max_per_user"]))
