@@ -7,10 +7,10 @@ if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
 	$this->Redirect(str_replace("http://", "https://", $this->href()));
 }
 
-if (isset($_REQUEST["secret_code"]) && $_REQUEST["secret_code"])
+if (isset($_GET["secret_code"]) && $_GET["secret_code"])
 {
 	// Password forgotten. Provided secret code
-	$code = $_REQUEST["secret_code"];
+	$code = $_GET["secret_code"];
 	$user = $this->LoadSingle(
 		"SELECT * ".
 		"FROM ".$this->config["user_table"]." ".
@@ -59,8 +59,8 @@ if (isset($_REQUEST["secret_code"]) && $_REQUEST["secret_code"])
 			else
 			{
 				$this->Query(
-					"UPDATE ".$this->config["user_table"]." ".
-					"SET password = '".quote($this->dblink, sha1($newpassword))."', ".
+					"UPDATE ".$this->config["user_table"]." SET ".
+						"password			= '".quote($this->dblink, sha1($newpassword))."', ".
 						"change_password	= '' ".
 					"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
 					"LIMIT 1");
