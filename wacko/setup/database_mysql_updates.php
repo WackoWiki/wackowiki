@@ -207,6 +207,7 @@ $alter_users_r4_2_17 = "ALTER TABLE {$pref}users CHANGE signuptime signup_time D
 $alter_users_r4_2_18 = "ALTER TABLE {$pref}users CHANGE changepassword change_password VARCHAR(100) NOT NULL";
 $alter_users_r4_2_19 = "ALTER TABLE {$pref}users CHANGE revisioncount revisions_count INT(10) UNSIGNED NOT NULL DEFAULT '20'";
 $alter_users_r4_2_20 = "ALTER TABLE {$pref}users CHANGE changescount changes_count INT(10) UNSIGNED NOT NULL DEFAULT '50'";
+$alter_users_r4_2_21 = "ALTER TABLE {$pref}users ADD salt VARCHAR(40) NOT NULL DEFAULT '' AFTER password";
 
 $update_users_r4_2 = "UPDATE {$pref}users SET doubleclick_edit = '0' WHERE doubleclick_edit = '2'";
 $update_users_r4_2_1 = "UPDATE {$pref}users SET show_comments = '0' WHERE show_comments = '2'";

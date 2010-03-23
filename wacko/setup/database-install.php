@@ -315,6 +315,7 @@ switch($config["database_driver"])
 					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r4_2_18, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r4_2_19, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r4_2_20, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
+					test(str_replace("%1","users",$lang["AlterTable"]), @mysql_query($alter_users_r4_2_21, $dblink), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 
 					test(str_replace("%1","acls",$lang["AlterTable"]), @mysql_query($alter_acls_r4_2, $dblink), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","acls",$lang["AlterTable"]), @mysql_query($alter_acls_r4_2_1, $dblink), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
@@ -606,6 +607,7 @@ switch($config["database_driver"])
 								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r4_2_18), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r4_2_19), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r4_2_20), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
+								test(str_replace("%1","users",$lang["AlterTable"]), @mysqli_query($dblink, $alter_users_r4_2_21), str_replace("%1", "users", $lang["ErrorAlteringTable"]));
 
 								test(str_replace("%1","acls",$lang["AlterTable"]), @mysqli_query($dblink, $alter_acls_r4_2), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","acls",$lang["AlterTable"]), @mysqli_query($dblink, $alter_acls_r4_2_1), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));

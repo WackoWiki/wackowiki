@@ -202,6 +202,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"user_name varchar2(80) not null,".
 					"real_name varchar2(80) not null,".
 					"password varchar2(40) not null,".
+					"salt varchar2(40) not null,".
 					"email varchar2(50) not null,".
 					"enabled number(1) default 1 not null,".
 					"motto varchar2(4000) not null,".
