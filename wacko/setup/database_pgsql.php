@@ -91,6 +91,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"name character varying(80) NOT NULL DEFAULT '',".
 					"real_name character varying(80) NOT NULL DEFAULT '',".
 					"\"password\" character varying(40) NOT NULL DEFAULT '',".
+					"salt character varying(40) NOT NULL DEFAULT '',".
 					"email character varying(50) NOT NULL DEFAULT '',".
 					"motto text NOT NULL DEFAULT '',".
 					"revisions_count integer NOT NULL DEFAULT 20,".
