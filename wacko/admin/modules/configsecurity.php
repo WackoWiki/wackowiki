@@ -9,7 +9,7 @@ $module['configsecurity'] = array(
 		'cat'	=> 'Preferences',
 		'mode'	=> 'configsecurity',
 		'name'	=> 'Security',
-		'title'	=> 'setting the security subsystems',
+		'title'	=> 'security subsystems settings',
 	);
 
 ########################################################
@@ -243,7 +243,7 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="ssl"><strong>SSL-Connection:</strong><br />
-				<small>Use SSL-secured connection. <span class="cite">To activate the required pre-installed on the server SSL-certificate, otherwise you will lose access to the admin panel!</span></small></label></td>
+				<small>Use SSL-secured connection. <span class="cite">Activate the required pre-installed SSL-certificate on the server , otherwise you will lose access to the admin panel!</span></small></label></td>
 				<td><input type="checkbox" id="ssl" name="ssl" value="1"<?php echo ( $engine->config['ssl'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">

@@ -9,7 +9,7 @@ $module['configpages'] = array(
 		'cat'	=> 'Preferences',
 		'mode'	=> 'configpages',
 		'name'	=> 'Pages',
-		'title'	=> 'Addresses and parameters site',
+		'title'	=> 'Pages and site parameters',
 	);
 
 ########################################################
