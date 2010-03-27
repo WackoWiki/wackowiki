@@ -496,6 +496,7 @@ $wackoTranslation = array(
 	"MetaDescription" => "Описание",
 	"MetaOn"				=> "Вкл.",
 	"MetaOff"				=> "Выкл.",
+	"MetaRegistered"		=> "Registered",
 	"MetaComments"			=> "Отображение панели комментариев",
 	"MetaFiles"				=> "Отображение панели файлов",
 	"MetaRating"			=> "Отображение панели рейтинга",

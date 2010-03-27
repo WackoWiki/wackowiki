@@ -488,6 +488,7 @@ $wackoTranslation = array(
 	"MetaDescription" => "Beschreibung",
 	"MetaOn"				=> "An",
 	"MetaOff"				=> "Aus",
+	"MetaRegistered"		=> "Registriert",
 	"MetaComments"			=> "Zeige Kommentare",
 	"MetaFiles"				=> "Zeige Dateileiste",
 	"MetaRating"			=> "Zeige Bewertungsleiste",

@@ -103,7 +103,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsHits')."</th>";
 		echo "<td class=\"form_right\">".$this->page['hits']."</td>";
 		echo "</tr>\n";
-		if ($this->config['hide_rating'] != 2)
+		if ($this->config['hide_rating'] != 1)
 		{
 			echo "<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsRating')."</th>";
@@ -119,23 +119,26 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('MetaComments')."</th>";
 		echo "<td class=\"form_right\">";
 		echo "<input type=\"radio\" id=\"commentsOn\" name=\"hide_comments\" value=\"0\"".( !$this->config['hide_comments'] ? "checked=\"checked\"" : "" )."/><label for=\"commentsOn\">".$this->GetTranslation('MetaOn')."</label>";
-		echo "<input type=\"radio\" id=\"commentsOff\" name=\"hide_comments\" value=\"1\"".( $this->config['hide_comments'] ? "checked=\"checked\"" : "" )."/><label for=\"commentsOff\">".$this->GetTranslation('MetaOff')."</label>";
+		echo "<input type=\"radio\" id=\"commentsGuest\" name=\"hide_comments\" value=\"2\"".( $this->config['hide_comments'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"commentsGuest\">".$this->GetTranslation('MetaRegistered')."</label>";
+		echo "<input type=\"radio\" id=\"commentsOff\" name=\"hide_comments\" value=\"1\"".( $this->config['hide_comments'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"commentsOff\">".$this->GetTranslation('MetaOff')."</label>";
 		echo "</td>";
 		echo "</tr>";
 		echo "<tr class=\"lined\">";
 		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('MetaFiles')."</th>";
 		echo "<td class=\"form_right\">";
 		echo "<input type=\"radio\" id=\"filesOn\" name=\"hide_files\" value=\"0\"".( !$this->config['hide_files'] ? "checked=\"checked\"" : "" )."/><label for=\"filesOn\">".$this->GetTranslation('MetaOn')."</label>";
-		echo "<input type=\"radio\" id=\"filesOff\" name=\"hide_files\" value=\"1\"".( $this->config['hide_files'] ? "checked=\"checked\"" : "" )."/><label for=\"filesOff\">".$this->GetTranslation('MetaOff')."</label>";
+		echo "<input type=\"radio\" id=\"filesGuest\" name=\"hide_files\" value=\"2\"".( $this->config['hide_files'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"filesGuest\">".$this->GetTranslation('MetaRegistered')."</label>";
+		echo "<input type=\"radio\" id=\"filesOff\" name=\"hide_files\" value=\"1\"".( $this->config['hide_files'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"filesOff\">".$this->GetTranslation('MetaOff')."</label>";
 		echo "</td>";
 		echo "</tr>";
-		if ($this->config['hide_rating'] != 2)
+		if ($this->config['hide_rating'] != 1)
 		{
 			echo "<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('MetaRating')."</th>";
 			echo "<td class=\"form_right\">";
 			echo "<input type=\"radio\" id=\"ratingOn\" name=\"hide_rating\" value=\"0\"".( !$this->config['hide_rating'] ? "checked=\"checked\"" : "" )."/><label for=\"ratingOn\">".$this->GetTranslation('MetaOn')."</label>";
-			echo "<input type=\"radio\" id=\"ratingOff\" name=\"hide_rating\" value=\"1\"".( $this->config['hide_rating'] ? "checked=\"checked\"" : "" )."/><label for=\"ratingOff\">".$this->GetTranslation('MetaOff')."</label>";
+			echo "<input type=\"radio\" id=\"ratingGuest\" name=\"hide_rating\" value=\"2\"".( $this->config['hide_rating'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"ratingGuest\">".$this->GetTranslation('MetaRegistered')."</label>";
+			echo "<input type=\"radio\" id=\"ratingOff\" name=\"hide_rating\" value=\"1\"".( $this->config['hide_rating'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"ratingOff\">".$this->GetTranslation('MetaOff')."</label>";
 			echo "</td>";
 		}
 		echo "</tr>";

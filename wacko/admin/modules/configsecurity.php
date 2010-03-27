@@ -219,7 +219,7 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="owners_can_change_keywords"><strong>Owners can edit pages keywords:</strong><br />
-				<small>Allow owners to modify the documents keyword list your site (add words, delete the word), assigns to a page.</small></label></td>
+				<small>Allow owners to modify the pages keyword list of your site (add words, delete words), assigns to a page.</small></label></td>
 				<td><input type="checkbox" id="owners_can_change_keywords" name="owners_can_change_keywords" value="1"<?php echo ( $engine->config['owners_can_change_keywords'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
@@ -312,14 +312,14 @@ function admin_configsecurity(&$engine, &$module)
 				<small>The minimum priority of the events recorded in the log.</small></label></td>
 				<td>
 					<select style="width:200px;" id="log_min_level" name="log_min_level">
-						<option value="0"<?php echo ( (int)$engine->config['log_min_level'] === 0 ? ' selected="selected"' : '' );?>>not keep a journal</option>
-						<option value="7"<?php echo ( (int)$engine->config['log_min_level'] === 7 ? ' selected="selected"' : '' );?>>record all</option>
-						<option value="6"<?php echo ( (int)$engine->config['log_min_level'] === 6 ? ' selected="selected"' : '' );?>>the minimum level</option>
-						<option value="5"<?php echo ( (int)$engine->config['log_min_level'] === 5 ? ' selected="selected"' : '' );?>>from low</option>
-						<option value="4"<?php echo ( (int)$engine->config['log_min_level'] === 4 ? ' selected="selected"' : '' );?>>on average</option>
-						<option value="3"<?php echo ( (int)$engine->config['log_min_level'] === 3 ? ' selected="selected"' : '' );?>>from high</option>
-						<option value="2"<?php echo ( (int)$engine->config['log_min_level'] === 2 ? ' selected="selected"' : '' );?>>from the highest level</option>
-						<option value="1"<?php echo ( (int)$engine->config['log_min_level'] === 1 ? ' selected="selected"' : '' );?>>only the critical level</option>
+						<option value="0"<?php echo ( (int)$engine->config['log_min_level'] === 0 ? ' selected="selected"' : '' );?>>0: not keep a journal</option>
+						<option value="7"<?php echo ( (int)$engine->config['log_min_level'] === 7 ? ' selected="selected"' : '' );?>>7: record all</option>
+						<option value="6"<?php echo ( (int)$engine->config['log_min_level'] === 6 ? ' selected="selected"' : '' );?>>6: the minimum level</option>
+						<option value="5"<?php echo ( (int)$engine->config['log_min_level'] === 5 ? ' selected="selected"' : '' );?>>5: from low</option>
+						<option value="4"<?php echo ( (int)$engine->config['log_min_level'] === 4 ? ' selected="selected"' : '' );?>>4: on average</option>
+						<option value="3"<?php echo ( (int)$engine->config['log_min_level'] === 3 ? ' selected="selected"' : '' );?>>3: from high</option>
+						<option value="2"<?php echo ( (int)$engine->config['log_min_level'] === 2 ? ' selected="selected"' : '' );?>>2: from the highest level</option>
+						<option value="1"<?php echo ( (int)$engine->config['log_min_level'] === 1 ? ' selected="selected"' : '' );?>>1: only the critical level</option>
 					</select>
 				</td>
 			</tr>
@@ -327,7 +327,7 @@ function admin_configsecurity(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="log_default_show"><strong>Display Mode magazine:</strong><br />
+				<td class="label"><label for="log_default_show"><strong>Display Log Mode:</strong><br />
 				<small>The minimum priority events displayed in the log by default.</small></label></td>
 				<td>
 					<select style="width:200px;" id="log_default_show" name="log_default_show">
