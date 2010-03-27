@@ -207,7 +207,8 @@ function admin_configbasic(&$engine, &$module)
 				<small>The default display in the bottom of the cover pages of comments.</small></td>
 				<td>
 					<input type="radio" id="hide_comments_on" name="hide_comments" value="0"<?php echo ( !$engine->config['hide_comments'] ? ' checked="checked"' : '' );?> /><label for="hide_comments_on">On.</label>
-					<input type="radio" id="hide_comments_off" name="hide_comments" value="1"<?php echo ( $engine->config['hide_comments'] ? ' checked="checked"' : '' );?> /><label for="hide_comments_off">Off.</label>
+					<input type="radio" id="hide_comments_guest" name="hide_comments" value="2"<?php echo ( $engine->config['hide_comments'] == 2 ? ' checked="checked"' : '' );?> /><label for="hide_comments_guest">Registered.</label>
+					<input type="radio" id="hide_comments_off" name="hide_comments" value="1"<?php echo ( $engine->config['hide_comments'] == 1 ? ' checked="checked"' : '' );?> /><label for="hide_comments_off">Off.</label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -218,7 +219,8 @@ function admin_configbasic(&$engine, &$module)
 				<small>The default display in the bottom of the cover pages of attachments.</small></td>
 				<td>
 					<input type="radio" id="hide_files_on" name="hide_files" value="0"<?php echo ( !$engine->config['hide_files'] ? ' checked="checked"' : '' );?> /><label for="hide_files_on">On.</label>
-					<input type="radio" id="hide_files_off" name="hide_files" value="1"<?php echo ( $engine->config['hide_files'] ? ' checked="checked"' : '' );?> /><label for="hide_files_off">Off.</label>
+					<input type="radio" id="hide_files_guest" name="hide_files" value="2"<?php echo ( $engine->config['hide_files'] == 2 ? ' checked="checked"' : '' );?> /><label for="hide_files_guest">Registered.</label>
+					<input type="radio" id="hide_files_off" name="hide_files" value="1"<?php echo ( $engine->config['hide_files'] == 1 ? ' checked="checked"' : '' );?> /><label for="hide_files_off">Off.</label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -229,7 +231,8 @@ function admin_configbasic(&$engine, &$module)
 				<small>The default display in the bottom of the panel rating of the document.</small></td>
 				<td>
 					<input type="radio" id="hide_rating_on" name="hide_rating" value="0"<?php echo ( !$engine->config['hide_rating'] ? ' checked="checked"' : '' );?> /><label for="hide_rating_on">On.</label>
-					<input type="radio" id="hide_rating_off" name="hide_rating" value="1"<?php echo ( $engine->config['hide_rating'] ? ' checked="checked"' : '' );?> /><label for="hide_rating_off">Off.</label>
+					<input type="radio" id="hide_rating_guest" name="hide_rating" value="2"<?php echo ( $engine->config['hide_rating'] == 2 ? ' checked="checked"' : '' );?> /><label for="hide_rating_guest">Registered.</label>
+					<input type="radio" id="hide_rating_off" name="hide_rating" value="1"<?php echo ( $engine->config['hide_rating'] == 1 ? ' checked="checked"' : '' );?> /><label for="hide_rating_off">Off.</label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -276,7 +279,8 @@ function admin_configbasic(&$engine, &$module)
 				<td class="label"><strong>Edit summary:</strong><br />
 				<small>Shows change summary in the edit mode.</small></td>
 				<td>
-					<input type="radio" id="edit_summary_on" name="edit_summary" value="1"<?php echo ( $engine->config['edit_summary'] ? ' checked="checked"' : '' );?> /><label for="edit_summary_on">On.</label>
+					<input type="radio" id="edit_summary_on" name="edit_summary" value="1"<?php echo ( $engine->config['edit_summary'] == 1 ? ' checked="checked"' : '' );?> /><label for="edit_summary_on">On.</label>
+					<input type="radio" id="edit_summary_mandatory" name="edit_summary" value="2"<?php echo ( $engine->config['edit_summary'] == 2 ? ' checked="checked"' : '' );?> /><label for="edit_summary_mandatory">Mandatory.</label>
 					<input type="radio" id="edit_summary_off" name="edit_summary" value="0"<?php echo ( !$engine->config['edit_summary'] ? ' checked="checked"' : '' );?> /><label for="edit_summary_off">Off.</label>
 				</td>
 			</tr>

@@ -439,6 +439,7 @@ $wackoTranslation = array(
 	"MetaDescription" => "Opis Meta",
 	"MetaOn"				=> "On",
 	"MetaOff"				=> "Off",
+	"MetaRegistered"		=> "Registered",
 	"MetaComments"			=> "Show comments",
 	"MetaFiles"				=> "Show files panel",
 	"MetaRating"			=> "Show rating panel",

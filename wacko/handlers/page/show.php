@@ -3,7 +3,7 @@
 
 if (!isset ($this->config["comments_count"])) $this->config["comments_count"] = 15;
 
-if ($this->config['hide_rating'] != true)
+if ($this->config['hide_rating'] != 1 && ($this->GetConfigValue("hide_rating") != 2 || $this->GetUser()))
 {
 	// registering local functions
 	// determine if user has rated a given page
@@ -395,7 +395,7 @@ if ($this->page)
 	}
 
 	// rating form output begins
-	if ($this->HasAccess('read') && $this->page && $this->config['hide_rating'] != true)
+	if ($this->HasAccess('read') && $this->page && $this->config['hide_rating'] != 1 && ($this->GetConfigValue("hide_rating") != 2 || $this->GetUser()))
 	{
 		// determine if user has rated this page
 		if (HandlerShowPageIsRated($this, $this->page['page_id']) === false && $_GET['show_rating'] != 1)
@@ -456,7 +456,6 @@ if ($this->page)
 			}
 		}
 	}
-
 }
 
 ?>
