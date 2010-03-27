@@ -337,8 +337,10 @@ class Wacko
 			if (@file_exists($resourcefile)) include($resourcefile);
 
 			$this->languages[$lang] = $wackoLanguage;
-			$ue = array(); 
-            $ue = @array_flip($wackoLanguage["unicode_entities"]);
+			$ue = array();
+			$ue = @array_flip($wackoLanguage["unicode_entities"]);
+			if (!isset($ue)) $ue = array();
+
 			$this->unicode_entities = array_merge($this->unicode_entities, $ue);
 			unset($this->unicode_entities[0]);
 		}
@@ -3703,7 +3705,6 @@ class Wacko
 		if ($this->config["ssl"] == true && ($_SERVER["HTTPS"] == "on" || $user == true))
 		{
 			$this->config["open_url"] = $this->config["base_url"];
-			$this->config["base_url"] = str_replace("http://", "https://", $this->config["base_url"]);
 			$this->config["base_url"] = str_replace("http://", "https://", $this->config["base_url"]);
 		}
 
