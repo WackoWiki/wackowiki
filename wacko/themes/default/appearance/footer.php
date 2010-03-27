@@ -29,7 +29,7 @@ if ($this->page)
 		// Add page link
 		(($this->method == 'new')
 			? ""
-			: print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/add.gif\" title=\"".$this->GetTranslation("CreateNewPage")."\" alt=\"".$this->GetTranslation("CreateNewPage")."\" /></a></li>\n")
+			: print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/add_page.gif\" title=\"".$this->GetTranslation("CreateNewPage")."\" alt=\"".$this->GetTranslation("CreateNewPage")."\" /></a></li>\n")
 		);
 
 		// Rename link
@@ -57,7 +57,7 @@ if ($this->page)
 		// Add page link
 		(($this->method == 'new')
 			? ""
-			: print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/add.gif\" title=\"".$this->GetTranslation("CreateNewPage")."\" alt=\"".$this->GetTranslation("CreateNewPage")."\" /></a></li>\n")
+			: print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/add_page.gif\" title=\"".$this->GetTranslation("CreateNewPage")."\" alt=\"".$this->GetTranslation("CreateNewPage")."\" /></a></li>\n")
 		);
 	}
 

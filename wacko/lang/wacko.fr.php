@@ -409,6 +409,12 @@ $wackoTranslation = array(
 	"ResetChangesWatches"	=> "Réinitialiser la liste des pages surveillées",
 	"NoChangesWatches"		=> "Pas de modification parmi les pages que vous surveillez&nbsp;...",
 
+	// whatsnew action
+	"NewCommentAdded"		=> "Added new comment",
+	"NewPageCreated"		=> "Created a new page",
+	"NewRevisionAdded"		=> "Changed page",
+	"Cluster"				=> "cluster",
+
 	// rating handler
 	"RatingDenied"			=> "You can not rate this page.",
 	"RatingSuccess"			=> "Thank you for your evaluation",
