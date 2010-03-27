@@ -45,8 +45,13 @@ if ($engine->config['ssl'] == true)
 	else
 	{
 		$engine->config['base_url'] = str_replace('http://', 'https://', $engine->config['base_url']);
-		$engine->config['base_url'] = str_replace('http://', 'https://', $engine->config['base_url']);
 	}
+}
+
+// enable rewrite_mode to avoid href() appends '?page='
+if ($engine->config['rewrite_mode'] == false)
+{
+	$engine->config['rewrite_mode'] = 1;
 }
 
 ########################################################
