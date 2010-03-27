@@ -409,6 +409,12 @@ $wackoTranslation = array(
 	"ResetChangesWatches"	=> "Liste der Änderungen zurücksetzen",
 	"NoChangesWatches"		=> "Unter deinen beobachteten Seiten sind keine Änderungen...",
 
+	// whatsnew action
+	"NewCommentAdded"		=> "Kommentar hinzugefügt",
+	"NewPageCreated"		=> "Neue Seite erstellt",
+	"NewRevisionAdded"		=> "Seite geändert",
+	"Cluster"				=> "Cluster",
+
 	// users action
 	"UsersSearch"			=> "Benutzersuche",
 	"UsersFilter"			=> "Suche",

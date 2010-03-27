@@ -417,6 +417,12 @@ $wackoTranslation = array(
 	"ResetChangesWatches"	=> "сбросить список изменений",
 	"NoChangesWatches"		=> "Среди наблюдаемых страниц нет изменений.",
 
+	// whatsnew action
+	"NewCommentAdded"		=> "Added new comment",
+	"NewPageCreated"		=> "Created a new page",
+	"NewRevisionAdded"		=> "Changed page",
+	"Cluster"				=> "cluster",
+
 	// users action
 	"UsersSearch"			=> "Найти пользователя",
 	"UsersFilter"			=> "поиск",
