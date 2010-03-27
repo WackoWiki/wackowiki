@@ -187,6 +187,7 @@ class Init
 						preg_replace("/(\?|&)installAction=site-config/","",$_SERVER["REQUEST_URI"]),
 					"rewrite_mode" => ($found_rewrite_extension ? "1" : "0"),
 					"ssl" => 0,
+					"ssl_implicit" => 0,
 
 					"classes_path" => "classes",
 					"action_path" => "actions",
@@ -290,6 +291,9 @@ class Init
 					"captcha_new_page" => 1,
 					"captcha_edit_page" => 1,
 					"captcha_registration" => 1,
+
+					"strong_cookies" => 0,
+					"antidupe" => 0,
 
 					"system_seed" => "", // installer autogenerate random one
 					"recovery_password" => "",
