@@ -86,7 +86,7 @@ if ($pages = array_merge($pages1, $pages2))
 			if ($page['comment_on_id'])
 			{
 				preg_match('/^[^\/]+/', $page['comment_on_page'], $subtag);
-				echo "<img src=\"".$this->GetConfigValue("theme_url")."icons/comments.png"."\" title=\"".$this->GetTranslation("NewCommentAdded")."\" alt=\"[comment]\" /> ".''.$this->Link('/'.$page['tag'], '', $this->GetTranslation("Comment"), 0, 1).' '.$this->GetTranslation("To").' '.$this->Link('/'.$page['comment_on_page'], '', $this->GetPageTitle("" , $page['comment_on_id']), 1).' &nbsp;&nbsp;&rarr; '.$this->GetTranslation("Cluster").' '.$subtag[0].$separator.$author.'';
+				echo "<img src=\"".$this->GetConfigValue("theme_url")."icons/comment.png"."\" title=\"".$this->GetTranslation("NewCommentAdded")."\" alt=\"[comment]\" /> ".''.$this->Link('/'.$page['tag'], '', $this->GetTranslation("Comment"), 0, 1).' '.$this->GetTranslation("To").' '.$this->Link('/'.$page['comment_on_page'], '', $this->GetPageTitle("" , $page['comment_on_id']), 1).' &nbsp;&nbsp;&rarr; '.$this->GetTranslation("Cluster").' '.$subtag[0].$separator.$author.'';
 			}
 			// new page
 			else if ($page['created'] == $page['modified'])
@@ -98,7 +98,7 @@ if ($pages = array_merge($pages1, $pages2))
 			else
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $subtag);
-				echo "<img src=\"".$this->GetConfigValue("theme_url")."icons/pencil.png"."\" title=\"".$this->GetTranslation("NewRevisionAdded")."\" alt=\"[changed]\" /> ".''.$this->Link('/'.$page['tag'], '', $page['title'], 0, 1).' ('.$this->Link('/'.$page['tag'], 'revisions', $this->GetTranslation("History"), 0, 1).') &nbsp;&nbsp;&rarr; '.$this->GetTranslation("Cluster").' '.$subtag[0].$separator.$author.'';
+				echo "<img src=\"".$this->GetConfigValue("theme_url")."icons/edit.gif"."\" title=\"".$this->GetTranslation("NewRevisionAdded")."\" alt=\"[changed]\" /> ".''.$this->Link('/'.$page['tag'], '', $page['title'], 0, 1).' ('.$this->Link('/'.$page['tag'], 'revisions', $this->GetTranslation("History"), 0, 1).') &nbsp;&nbsp;&rarr; '.$this->GetTranslation("Cluster").' '.$subtag[0].$separator.$author.'';
 			}
 
 			echo "</li>\n";
