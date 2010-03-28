@@ -34,7 +34,7 @@ if ($_GET["confirm"])
 else if ($_POST["action"] == "login")
 {
 	// create new account if possible
-	if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
+	if ($this->config["allow_registration"] || $this->IsAdmin())
 	{
 		// passing vars from user input
 		$name = trim($_POST["name"]);
@@ -47,7 +47,7 @@ else if ($_POST["action"] == "login")
 		// Start Registration Captcha
 
 		// Only show captcha if the admin enabled it in the config file
-		if(!$this->IsAdmin() && $this->GetConfigValue("captcha_registration"))
+		if(!$this->IsAdmin() && $this->config["captcha_registration"])
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
 			if(extension_loaded('gd'))
@@ -92,7 +92,7 @@ else if ($_POST["action"] == "login")
 		}
 		// End Comment Captcha
 
-		if (($word_ok) || $this->IsAdmin() || !$this->GetConfigValue("captcha_registration"))
+		if (($word_ok) || $this->IsAdmin() || !$this->config["captcha_registration"])
 		{
 			// check if name is WikiName style
 			if (!$this->IsWikiName($name))
@@ -143,35 +143,36 @@ else if ($_POST["action"] == "login")
 			{
 				$confirm = sha1($password.mt_rand().time().mt_rand().$email.mt_rand());
 				$more = $this->ComposeOptions(array(
-					"theme" => $this->GetConfigValue("theme"),
+					"theme" => $this->config["theme"],
 					"send_watchmail" => "1",
 				));
 
 				$this->Query(
 					"INSERT INTO ".$this->config["user_table"]." ".
 					"SET ".
-						"signup_time = NOW(), ".
-						"user_name = '".quote($this->dblink, $name)."', ".
-						"email = '".quote($this->dblink, $email)."', ".
-						"email_confirm = '".quote($this->dblink, $confirm)."', ".
-						"bookmarks = '".quote($this->dblink, $this->GetDefaultBookmarks($lang))."', ".
-						"typografica = '".(($this->config["default_typografica"] == 1) ? "1" : "0")."', ".
-						"more = '".quote($this->dblink, $more)."', ".
+						"signup_time	= NOW(), ".
+						"user_name		= '".quote($this->dblink, $name)."', ".
+						"email			= '".quote($this->dblink, $email)."', ".
+						"email_confirm	= '".quote($this->dblink, $confirm)."', ".
+						"bookmarks		= '".quote($this->dblink, $this->GetDefaultBookmarks($lang))."', ".
+						"typografica	= '".(($this->config["default_typografica"] == 1) ? "1" : "0")."', ".
+						"more			= '".quote($this->dblink, $more)."', ".
 						($lang
-							? "lang = '".quote($this->dblink, $lang)."', "
+							? "lang		= '".quote($this->dblink, $lang)."', "
 							: "").
-						"password = sha1('".quote($this->dblink, $_POST["password"])."')");
+						"password		= sha1('".quote($this->dblink, $_POST["password"])."', ".
+						"salt			= '".quote($this->dblink, $salt)."'");
 
 				$subject = 	$this->GetTranslation("EmailWelcome").
-							$this->GetConfigValue("wacko_name");
+							$this->config["wacko_name"];
 				$message = 	$this->GetTranslation("EmailHello"). $name.".\n\n".
-							str_replace('%1', $this->GetConfigValue("wacko_name"),
+							str_replace('%1', $this->config["wacko_name"],
 							str_replace('%2', $name,
 							str_replace('%3', $this->Href().
 							($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
 							$this->GetTranslation("EmailRegistered"))))."\n\n".
 							$this->GetTranslation("EmailGoodbye")."\n".
-							$this->GetConfigValue("wacko_name")."\n".
+							$this->config["wacko_name"]."\n".
 							$this->config["base_url"];
 				$this->SendMail($email, $subject, $message);
 
@@ -191,7 +192,7 @@ else if ($_POST["action"] == "login")
 
 if (!$_POST["confirm"])
 {
-	if ($this->GetConfigValue("allow_registration") || $this->IsAdmin())
+	if ($this->config["allow_registration"] || $this->IsAdmin())
 	{
 		if ($error) $this->SetMessage($this->Format($error));
 
@@ -203,7 +204,7 @@ if (!$_POST["confirm"])
 <h3><?php echo $this->FormatTranslation("RegistrationWelcome"); ?></h3>
 		<?php
 
-		if ($this->GetConfigValue("multilanguage"))
+		if ($this->config["multilanguage"])
 		{
 			?>
 <p><label for="lang"><?php echo $this->FormatTranslation("RegistrationLang");?>:</label>
@@ -266,7 +267,7 @@ echo "<br /><small>".
 		// captcha code starts
 
 		// Only show captcha if the admin enabled it in the config file
-		if($this->GetConfigValue("captcha_registration"))
+		if($this->config["captcha_registration"])
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
 			if(extension_loaded('gd'))
@@ -279,11 +280,11 @@ echo "<br /><small>".
 					?>
 <p><label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
 <img
-	src="<?php echo $this->GetConfigValue("base_url");?>lib/captcha/freecap.php"
+	src="<?php echo $this->config["base_url"];?>lib/captcha/freecap.php"
 	id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a
 	href="" onclick="this.blur(); new_freecap(); return false;"
 	title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img
-	src="<?php echo $this->GetConfigValue("base_url");?>images/reload.png"
+	src="<?php echo $this->config["base_url"];?>images/reload.png"
 	width="18" height="17"
 	alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a> <br />
 <input id="captcha" type="text" name="word" maxlength="6"
