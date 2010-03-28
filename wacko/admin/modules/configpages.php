@@ -25,7 +25,7 @@ function admin_configpages(&$engine, &$module)
 	{
 		$config['forum_cluster']		= trim((string)$_POST['forum_cluster'], '/');
 		$config['forum_topics']			= (int)$_POST['forum_topics'];
-		$config['forum_posts']			= (int)$_POST['forum_posts'];
+		$config['comments_count']		= (int)$_POST['comments_count'];
 		$config['news_cluster']			= trim((string)$_POST['news_cluster'], '/');
 		$config['news_levels']			= (string)$_POST['news_levels'];
 		$config['root_page']			= trim((string)$_POST['root_page'], '/');
@@ -80,9 +80,9 @@ function admin_configpages(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="forum_posts"><strong>Number of comments per page:</strong><br />
+				<td class="label"><label for="comments_count"><strong>Number of comments per page:</strong><br />
 				<small>Number of comments displayed on each page list of comments. This applies to all the comments on the site, and not just posted in the forum.</small></label></td>
-				<td><input maxlength="3" style="width:200px;" id="forum_posts" name="forum_posts" value="<?php echo htmlspecialchars($engine->config['forum_posts']);?>" /></td>
+				<td><input maxlength="3" style="width:200px;" id="comments_count" name="comments_count" value="<?php echo htmlspecialchars($engine->config['comments_count']);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">

@@ -268,6 +268,7 @@ class Init
 
 					"forum_cluster" => "Forum",
 					"forum_topics" => "10",
+					"comments_count" => "10",
 
 					"news_cluster" => "",
 					"news_levels" => "",

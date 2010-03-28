@@ -54,6 +54,7 @@ $configDb['captcha_edit_page'] = $config['captcha_edit_page'];
 $configDb['captcha_new_comment'] = $config['captcha_new_comment'];
 $configDb['captcha_new_page'] = $config['captcha_new_page'];
 $configDb['captcha_registration'] = $config['captcha_registration'];
+$configDb['comments_count'] = $config['comments_count'];
 $configDb['cookie_prefix'] = $config['cookie_prefix'];
 $configDb['cookie_session'] = $config['cookie_session'];
 $configDb['date_format'] = $config['date_format'];
