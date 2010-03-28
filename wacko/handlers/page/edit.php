@@ -45,7 +45,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				$error = $this->GetTranslation("OverwriteAlert");
 
 			// check for edit note
-			if (($this->GetConfigValue("edit_summary") == 2) && $_POST["edit_note"] == "" && $this->page["comment_on_id"] == 0)
+			if (($this->config["edit_summary"] == 2) && $_POST["edit_note"] == "" && $this->page["comment_on_id"] == 0)
 				$error .= $this->GetTranslation("EditNoteMissing");
 
 			// check keywords
@@ -53,7 +53,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			#	$error .= 'Select at least one referring keyword (field) to the page. ';
 
 			// captcha code starts
-			if(($this->page && $this->GetConfigValue("captcha_edit_page")) || (!$this->page && $this->GetConfigValue("captcha_new_page")))
+			if(($this->page && $this->config["captcha_edit_page"]) || (!$this->page && $this->config["captcha_new_page"]))
 			{
 				// Don't load the captcha at all if the GD extension isn't enabled
 				if(extension_loaded('gd'))
@@ -214,7 +214,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 
 				$output = "<div class=\"preview\"><p class=\"preview\"><span>".$this->GetTranslation("EditPreview")."</span></p>\n";
 
-				if ($this->GetConfigValue("edit_summary") != 0)
+				if ($this->config["edit_summary"] != 0)
 					$output .= "<div class=\"commenttitle\">\n<a href=\"#\">".$title."</a>\n</div>\n";
 
 					$output .= $preview;
@@ -254,7 +254,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				$output .= "<input id=\"addpage_title\" value=\"".htmlspecialchars($title)."\" size=\"60\" maxlength=\"100\" name=\"title\" /><br />";
 			}
 			// edit note
-			if ($this->GetConfigValue("edit_summary") != 0)
+			if ($this->config["edit_summary"] != 0)
 			{
 				$output .= "<label for=\"edit_note\">".$this->GetTranslation("EditNote").":</label><br />";
 				$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
@@ -262,7 +262,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			}
 
 			// minor edit
-			if ($this->page && $this->GetConfigValue("minor_edit") != 0)
+			if ($this->page && $this->config["minor_edit"] != 0)
 			{
 				$output .= "<input id=\"minor_edit\" type=\"checkbox\" value=\"1\" name=\"minor_edit\"/>";
 				$output .= "<label for=\"minor_edit\">".$this->GetTranslation("EditMinor")."</label>";
@@ -308,7 +308,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 		// captcha code starts
 
 		// Only show captcha if the admin enabled it in the config file
-		if(($this->page && $this->GetConfigValue("captcha_edit_page")) || (!$this->page && $this->GetConfigValue("captcha_new_page")))
+		if(($this->page && $this->config["captcha_edit_page"]) || (!$this->page && $this->config["captcha_new_page"]))
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
 			if(extension_loaded('gd'))
@@ -321,7 +321,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 ?>
 		<label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
 		<br />
-		<img src="<?php echo $this->GetConfigValue("base_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("base_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
+		<img src="<?php echo $this->config["base_url"];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->config["base_url"];?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
 		<br />
 		<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
 		<br />
@@ -343,7 +343,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 <?php
 	}
 ?>
-		wE.init('postText','WikiEdit','edname-w','<?php echo $this->GetConfigValue("base_url");?>images/wikiedit/');
+		wE.init('postText','WikiEdit','edname-w','<?php echo $this->config["base_url"];?>images/wikiedit/');
 		</script><br />
 		<input name="save" type="submit" value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
 		&nbsp;

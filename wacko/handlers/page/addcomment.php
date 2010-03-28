@@ -32,7 +32,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 		// Start Comment Captcha
 
 		// Only show captcha if the admin enabled it in the config file
-		if ($this->GetConfigValue("captcha_new_comment"))
+		if ($this->config["captcha_new_comment"])
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
 			if (extension_loaded('gd'))

@@ -20,32 +20,32 @@ if ($this->GetMethod() != 'show' || $this->page["latest"] == "0")
 	<meta name="description" content="<?php echo $this->GetDescription(); ?>" />
 	<meta name="language" content="<?php echo $this->page["lang"] ?>" />
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/default.css" />
-	<link media="print" rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/print.css" />
-	<link rel="shortcut icon" href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico" type="image/x-icon" />
-	<link title="<?php echo $this->GetConfigValue("root_page");?>" href="<?php echo $this->GetConfigValue("base_url");?>" rel="start"/>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->GetConfigValue("base_url");?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->GetConfigValue("base_url");?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentNewsRSS");?>" href="<?php echo $this->GetConfigValue("base_url");?>xml/news_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"] ?>css/default.css" />
+	<link media="print" rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"] ?>css/print.css" />
+	<link rel="shortcut icon" href="<?php echo $this->config["theme_url"] ?>icons/favicon.ico" type="image/x-icon" />
+	<link title="<?php echo $this->config["root_page"];?>" href="<?php echo $this->config["base_url"];?>" rel="start"/>
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->config["base_url"];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->config["base_url"];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentNewsRSS");?>" href="<?php echo $this->config["base_url"];?>xml/news_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
 ?>
-	<script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url");?>js/default.js"></script>
+	<script type="text/javascript" src="<?php echo $this->config["base_url"];?>js/default.js"></script>
 <?php
 // autocomplete.js, protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages.
 if ($this->method == 'edit')
 {
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/protoedit.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/wikiedit2.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/autocomplete.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/protoedit.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/wikiedit2.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/autocomplete.js\"></script>\n";
 }
 ?>
 <?php
-/* <script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url");?>js/swfobject.js"></script> */
+/* <script type="text/javascript" src="<?php echo $this->config["base_url"];?>js/swfobject.js"></script> */
 ?>
-<script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url");?>js/captcha.js"></script>
+<script type="text/javascript" src="<?php echo $this->config["base_url"];?>js/captcha.js"></script>
 <?php
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
@@ -86,7 +86,7 @@ else if ($this->HasAccess("write"))
 <div class="header">
 <div class="user"><?php if ($this->GetUser()) { ?> <span class="nobr"><?php echo $this->GetTranslation("YouAre"); ?>
 <img
-	src="<?php echo $this->GetConfigValue("theme_url") ?>icons/user.gif"
+	src="<?php echo $this->config["theme_url"] ?>icons/user.gif"
 	width="12" height="12" border="0" style="vertical-align: baseline;"
 	alt="" /><?php echo $this->Link($this->GetUserName()) ?></span><br />
 <span class="small">( <span class="nobr Tune"><?php echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelAccount"), 0); ?>
@@ -123,12 +123,12 @@ else if ($this->HasAccess("write"))
 			// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
 			if (!in_array($this->tag, $this->GetBookmarkLinks()))
 				echo '<li><a href="'. $this->Href('', '', "addbookmark=yes")
-					.'"><img src="'. $this->GetConfigValue("theme_url")
+					.'"><img src="'. $this->config["theme_url"]
 					.'icons/bookmark1.gif" alt="+" title="'.
 					$this->GetTranslation("AddToBookmarks") .'"/></a></li>';
 			else
 				echo '<li><a href="'. $this->Href('', '', "removebookmark=yes")
-					.'"><img src="'. $this->GetConfigValue("theme_url")
+					.'"><img src="'. $this->config["theme_url"]
 					.'icons/bookmark2.gif" alt="-" title="'.
 					$this->GetTranslation("RemoveFromBookmarks") .'"/></a></li>';
 			}

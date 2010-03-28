@@ -52,7 +52,7 @@ echo "<div class=\"news\">";
 // displaying XML icon
 if (!(int)$noxml)
 	{
-		echo "<a href=\"".$this->GetConfigValue("base_url")."xml/news_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name"))).".xml\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentNewsXMLTip")."\" alt=\"XML\" /></a>\n";
+		echo "<a href=\"".$this->config["base_url"]."xml/news_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"])).".xml\"><img src=\"".$this->config["theme_url"]."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentNewsXMLTip")."\" alt=\"XML\" /></a>\n";
 	}
 
 // displaying articles

@@ -44,10 +44,10 @@ if ($user = $this->GetUser())
 
 		$title = str_replace("%1", $this->ComposeLinkToPage($this->GetPageTag()),
 		str_replace("%2",
-		($this->GetConfigValue("referrers_purge_time") ?
-		($this->GetConfigValue("referrers_purge_time") == 1 ?
+		($this->config["referrers_purge_time"] ?
+		($this->config["referrers_purge_time"] == 1 ?
 		$this->GetTranslation("Last24Hours") :
-		str_replace("%1",$this->GetConfigValue("referrers_purge_time"),
+		str_replace("%1",$this->config["referrers_purge_time"],
 		$this->GetTranslation("LastDays"))): ""),
 		str_replace("%3",$this->href("referrers_sites"),$this->GetTranslation("ExternalPages"))));
 

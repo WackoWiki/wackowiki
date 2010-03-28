@@ -18,24 +18,24 @@ if ($this->IsAdmin())
 		@set_time_limit(0);
 
 		// pages
-		$handle = opendir(rtrim($this->GetConfigValue("cache_dir").CACHE_PAGE_DIR,"/"));
+		$handle = opendir(rtrim($this->config["cache_dir"].CACHE_PAGE_DIR,"/"));
 		while (false !== ($file = readdir($handle)))
 		{
-			if ($file != "." && $file != ".." && !is_dir($this->GetConfigValue("cache_dir").CACHE_PAGE_DIR.$file))
+			if ($file != "." && $file != ".." && !is_dir($this->config["cache_dir"].CACHE_PAGE_DIR.$file))
 			{
-				unlink($this->GetConfigValue("cache_dir").CACHE_PAGE_DIR.$file);
+				unlink($this->config["cache_dir"].CACHE_PAGE_DIR.$file);
 			}
 		}
 		closedir($handle);
 		$this->Query("DELETE FROM ".$this->config["table_prefix"]."cache");
 
 		// queries
-		$handle = opendir(rtrim($this->GetConfigValue("cache_dir").CACHE_SQL_DIR, "/"));
+		$handle = opendir(rtrim($this->config["cache_dir"].CACHE_SQL_DIR, "/"));
 		while (false !== ($file = readdir($handle)))
 		{
-			if ($file != "." && $file != ".." && !is_dir($this->GetConfigValue("cache_dir").CACHE_SQL_DIR.$file))
+			if ($file != "." && $file != ".." && !is_dir($this->config["cache_dir"].CACHE_SQL_DIR.$file))
 			{
-				unlink($this->GetConfigValue("cache_dir").CACHE_SQL_DIR.$file);
+				unlink($this->config["cache_dir"].CACHE_SQL_DIR.$file);
 			}
 		}
 		closedir($handle);

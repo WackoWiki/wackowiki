@@ -36,8 +36,8 @@ if ($this->HasAccess("read"))
 		#$output .= "<input type=\"button\" value=\"".$this->GetTranslation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"fastdiff\" name=\"fastdiff\" />\n <label for=\"fastdiff\">".$this->GetTranslation("SimpleDiff")."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"source\" name=\"source\" />\n <label for=\"source\">".$this->GetTranslation("SourceDiff")."</label>";
-		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("revisions.xml")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/xml.gif"."\" title=\"".$this->GetTranslation("RevisionXMLTip")."\" alt=\"XML\" /></a>";
-		if ($this->GetConfigValue("minor_edit"))
+		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("revisions.xml")."\"><img src=\"".$this->config["theme_url"]."icons/xml.gif"."\" title=\"".$this->GetTranslation("RevisionXMLTip")."\" alt=\"XML\" /></a>";
+		if ($this->config["minor_edit"])
 		{
 			$output .= "<br />".(!$_GET['minor_edit'] == '1' ? "<a href=\"".$this->href("revisions", "", "minor_edit=1")."\">".$this->GetTranslation("MinorEditHide")."</a>" : "<a href=\"".$this->href("revisions", "", "minor_edit=0")."\">".$this->GetTranslation("MinorEditShow")."</a>");
 		}
@@ -73,7 +73,7 @@ if ($this->HasAccess("read"))
 				$output .= "".($t--).".";
 				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"a\" value=\"".($c == 1 ? "-1" : $page["revision_m_id"])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";
 				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"b\" value=\"".($c == 1 ? "-1" : $page["revision_m_id"])."\" ".($c == 2 ? "checked=\"checked\"" : "")." />";
-				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("show").($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."time=".urlencode($page["modified"])."\">".$this->GetTimeStringFormatted($page["modified"])."</a>";
+				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"".$this->href("show").($this->config["rewrite_mode"] ? "?" : "&amp;")."time=".urlencode($page["modified"])."\">".$this->GetTimeStringFormatted($page["modified"])."</a>";
 				$output .= " — id ".$page["revision_m_id"]." ";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->GetTranslation("By")." ".
 				($page["user"]
@@ -88,7 +88,7 @@ if ($this->HasAccess("read"))
 		}
 		$output .= "</ul>\n<br />\n";
 
-		if (!$this->GetConfigValue("revisions_hide_cancel")) $output .= "<input type=\"button\" value=\"".$this->GetTranslation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
+		if (!$this->config["revisions_hide_cancel"]) $output .= "<input type=\"button\" value=\"".$this->GetTranslation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
 		$output .= $this->FormClose()."\n";
 	}
 	print($output);

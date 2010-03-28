@@ -1,9 +1,9 @@
 <!--notypo-->
 <?php
 
-#	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/protoedit.js\"></script>\n";
-#	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/wikiedit2.js\"></script>\n";
-#	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/autocomplete.js\"></script>\n";
+#	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/protoedit.js\"></script>\n";
+#	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/wikiedit2.js\"></script>\n";
+#	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/autocomplete.js\"></script>\n";
 
 // reconnect securely in ssl mode
 if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
@@ -122,14 +122,14 @@ else if ($user = $this->GetUser())
 
 			$subject = $this->config["wacko_name"].". ".$this->GetTranslation("EmailConfirm");
 			$message = $this->GetTranslation("EmailHello"). $user["user_name"].".\n\n".
-						str_replace('%1', $this->GetConfigValue("wacko_name"),
+						str_replace('%1', $this->config["wacko_name"],
 						str_replace('%2', $user["user_name"],
 						str_replace('%3', $this->Href().
 						($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
 						$this->GetTranslation("EmailVerify"))))."\n\n".
 						$this->GetTranslation("EmailGoodbye")."\n".
-						$this->GetConfigValue("wacko_name")."\n".
-						$this->GetConfigValue("base_url");
+						$this->config["wacko_name"]."\n".
+						$this->config["base_url"];
 			$this->SendMail($email, $subject, $message);
 		}
 		else
@@ -179,7 +179,7 @@ else if ($user = $this->GetUser())
   </tr>
   <tr>
     <th class="form_left" scope="row"><label for="email"><?php echo $this->GetTranslation("YourEmail");?></label></th>
-    <td><input id="email" name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />&nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->GetConfigValue("base_url").'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->GetConfigValue("base_url").'images/warning.gif" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="16" height="16" />' ?>
+    <td><input id="email" name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />&nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->config["base_url"].'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->config["base_url"].'images/warning.gif" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="16" height="16" />' ?>
 <?php
 		if (!$user["email"] || $code["email_confirm"])
 			echo "<div class=\"BewareChangeLang\"><strong class=\"cite\">".

@@ -3,7 +3,7 @@
 
 if (!isset ($this->config["comments_count"])) $this->config["comments_count"] = 15;
 
-if ($this->config['hide_rating'] != 1 && ($this->GetConfigValue("hide_rating") != 2 || $this->GetUser()))
+if ($this->config['hide_rating'] != 1 && ($this->config["hide_rating"] != 2 || $this->GetUser()))
 {
 	// registering local functions
 	// determine if user has rated a given page
@@ -96,13 +96,13 @@ if ($this->HasAccess("read"))
 
 		// recompile if necessary
 		if (($this->page["body_r"] == "") ||
-		(($this->page["body_toc"] == "") && $this->GetConfigValue("paragrafica")))
+		(($this->page["body_toc"] == "") && $this->config["paragrafica"]))
 		{
 			// build html body
 			$this->page["body_r"] = $this->Format($this->page["body"], "wacko");
 
 			// build toc
-			if ($this->GetConfigValue("paragrafica"))
+			if ($this->config["paragrafica"])
 			{
 				$this->page["body_r"]   = $this->Format($this->page["body_r"], "paragrafica");
 				$this->page["body_toc"] = $this->body_toc;
@@ -147,10 +147,10 @@ else
 if ($this->page)
 {
 	// files code starts
-	if ($this->GetConfigValue("footer_files"))
+	if ($this->config["footer_files"])
 	{
 
-		if ($this->HasAccess("read") && $this->GetConfigValue("hide_files") != 1 && ($this->GetConfigValue("hide_files") != 2 || $this->GetUser()))
+		if ($this->HasAccess("read") && $this->config["hide_files"] != 1 && ($this->config["hide_files"] != 2 || $this->GetUser()))
 		{
 
 			// store files display in session
@@ -243,14 +243,14 @@ if ($this->page)
 	// files form output ends
 	?>
 	<?php
-	if ($this->GetConfigValue("footer_comments"))
+	if ($this->config["footer_comments"])
 	{
 	// pagination
 	$pagination = $this->Pagination($this->GetCommentsCount(), $this->config["comments_count"], 'p', 'show_comments=1#comments');
 
 	// comments form output begins
 
-		if ($this->HasAccess("read") && $this->GetConfigValue("hide_comments") != 1 && ($this->GetConfigValue("hide_comments") != 2 || $this->GetUser()))
+		if ($this->HasAccess("read") && $this->config["hide_comments"] != 1 && ($this->config["hide_comments"] != 2 || $this->GetUser()))
 		{
 			// load comments for this page
 			$comments = $this->LoadComments($this->page["page_id"], $pagination['offset'], $this->config["comments_count"]);
@@ -295,10 +295,10 @@ if ($this->page)
 				{
 					echo "<li id=\"".$comment["tag"]."\" class=\"comment\">\n";
 					$del = "";
-					if ($this->IsAdmin() || $this->UserIsOwner($comment["page_id"]) || ($this->GetConfigValue("owners_can_remove_comments") && $this->UserIsOwner($this->page["page_id"])))
+					if ($this->IsAdmin() || $this->UserIsOwner($comment["page_id"]) || ($this->config["owners_can_remove_comments"] && $this->UserIsOwner($this->page["page_id"])))
 					{
-						print("<a href=\"".$this->href("remove", $comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/delete_comment.gif\" title=\"".$this->GetTranslation("DeleteCommentTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" align=\"right\" border=\"0\" /></a>");
-						print("<a href=\"".$this->href("edit", $comment["tag"])."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/edit.gif\" title=\"".$this->GetTranslation("EditCommentTip")."\" alt=\"".$this->GetTranslation("EditComment")."\" align=\"right\" border=\"0\" /></a>");
+						print("<a href=\"".$this->href("remove", $comment["tag"])."\"><img src=\"".$this->config["theme_url"]."icons/delete_comment.gif\" title=\"".$this->GetTranslation("DeleteCommentTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" align=\"right\" border=\"0\" /></a>");
+						print("<a href=\"".$this->href("edit", $comment["tag"])."\"><img src=\"".$this->config["theme_url"]."icons/edit.gif\" title=\"".$this->GetTranslation("EditCommentTip")."\" alt=\"".$this->GetTranslation("EditComment")."\" align=\"right\" border=\"0\" /></a>");
 					}
 					if ($comment["body_r"]) $strings = $comment["body_r"];
 
@@ -342,7 +342,7 @@ if ($this->page)
 					// captcha code starts
 
 					// Only show captcha if the admin enabled it in the config file
-					if($this->GetConfigValue("captcha_new_comment"))
+					if($this->config["captcha_new_comment"])
 					{
 						// Don't load the captcha at all if the GD extension isn't enabled
 						if(extension_loaded('gd'))
@@ -357,7 +357,7 @@ if ($this->page)
 		<br />
 		<label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
 		<br />
-		<img src="<?php echo $this->GetConfigValue("base_url");?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->GetConfigValue("base_url");?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
+		<img src="<?php echo $this->config["base_url"];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->config["base_url"];?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
 		<br />
 		<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
 		<br />
@@ -395,7 +395,7 @@ if ($this->page)
 	}
 
 	// rating form output begins
-	if ($this->HasAccess('read') && $this->page && $this->config['hide_rating'] != 1 && ($this->GetConfigValue("hide_rating") != 2 || $this->GetUser()))
+	if ($this->HasAccess('read') && $this->page && $this->config['hide_rating'] != 1 && ($this->config["hide_rating"] != 2 || $this->GetUser()))
 	{
 		// determine if user has rated this page
 		if (HandlerShowPageIsRated($this, $this->page['page_id']) === false && $_GET['show_rating'] != 1)

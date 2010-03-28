@@ -273,15 +273,15 @@ else
 				$code = sha1($user["password"].date("D d M Y H:i:s").$user["email"].mt_rand());
 
 				$subject =	$this->GetTranslation("EmailForgotSubject").
-							$this->GetConfigValue("wacko_name");
+							$this->config["wacko_name"];
 				$message =	$this->GetTranslation("EmailHello"). $name.".\n\n".
-							str_replace('%1', $this->GetConfigValue("wacko_name"),
+							str_replace('%1', $this->config["wacko_name"],
 							str_replace('%2', $user["user_name"],
 							str_replace('%3', $this->Href().
 							($this->config["rewrite_mode"] ? "?" : "&amp;")."secret_code=".$code,
 							$this->GetTranslation("EmailForgotMessage"))))."\n";
 				$message.=	"\n".$this->GetTranslation("EmailGoodbye").
-							"\n".$this->GetConfigValue("wacko_name").
+							"\n".$this->config["wacko_name"].
 							"\n".$this->config["base_url"];
 
 				// update table

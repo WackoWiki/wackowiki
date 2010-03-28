@@ -12,7 +12,7 @@ if ($user_id = $this->GetUserId())
 	{
 		print($this->GetTranslation("MyChangesTitle1")." [<a href=\"".
 			$this->href("", "", "mode=mychanges")."#list\">".$this->GetTranslation("OrderABC")."</a>].<br /><br />\n");
-			#.($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;").
+			#.($this->config["rewrite_mode"] ? "?" : "&amp;").
 
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
@@ -73,7 +73,7 @@ if ($user_id = $this->GetUserId())
 	else
 	{
 		print($this->GetTranslation("MyChangesTitle2")." [<a href=\"".
-			$this->href("", "", "mode=mychanges&amp;bydate=1")."#list\">". #($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."bydate=true\">".
+			$this->href("", "", "mode=mychanges&amp;bydate=1")."#list\">". #($this->config["rewrite_mode"] ? "?" : "&amp;")."bydate=true\">".
 			$this->GetTranslation("OrderChange")."</a>].</strong><br /><br />\n");
 
 		$count	= $this->LoadSingle(
