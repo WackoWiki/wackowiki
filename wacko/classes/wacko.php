@@ -199,7 +199,6 @@ class Wacko
 	function GetPageTime() { return $this->page["modified"]; }
 	function GetPageLastWriter() { return $this->page["user_id"]; }
 	function GetMethod() { return $this->method; }
-	function GetConfigValue($name) { return isset( $this->config[$name] ) ? $this->config[$name] : ''; }
 	function GetWackoName() { return $this->config["wacko_name"]; }
 	function GetWackoVersion() { return WACKO_VERSION; }
 
