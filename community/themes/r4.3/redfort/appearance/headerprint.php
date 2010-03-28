@@ -8,7 +8,7 @@
 <?php if ($this->GetMethod() != 'show')
        echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
   <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
-  <link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/print.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"] ?>css/print.css" />
 </head>
 <body>
 <div class="header">

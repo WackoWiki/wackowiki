@@ -196,7 +196,6 @@ class Wacko
 			return $new_page_id;
 		}
 	}
-	function GetPageSuperTag() { return $this->supertag; }
 	function GetPageTime() { return $this->page["modified"]; }
 	function GetPageLastWriter() { return $this->page["user_id"]; }
 	function GetMethod() { return $this->method; }
