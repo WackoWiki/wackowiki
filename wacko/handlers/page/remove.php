@@ -7,7 +7,7 @@ if (!$this->page) $this->Redirect($this->href());
 // check user permissions to delete
 // ToDo: config->owners_can_remove_comments ?
 if ($this->IsAdmin() ||
-(!$this->GetConfigValue("remove_onlyadmins") &&
+(!$this->config["remove_onlyadmins"] &&
 ($this->GetPageOwner($this->tag) == $this->GetUserName() ||
 $this->GetPageOwnerFromComment() == $this->GetUserName())))
 {

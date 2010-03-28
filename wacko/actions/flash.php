@@ -54,7 +54,7 @@ if($url)
 
 	print "<script type=\"text/javascript\">\n";
 	print "		// <![CDATA[\n";
-	print "		swfobject.embedSWF(\"".$url."\", \"".$name."\", \"".$width."\", \"".$height."\", \"".$version."\", \"".$this->GetConfigValue("base_url")."themes/_common/expressInstall.swf\", {}, {";
+	print "		swfobject.embedSWF(\"".$url."\", \"".$name."\", \"".$width."\", \"".$height."\", \"".$version."\", \"".$this->config["base_url"]."themes/_common/expressInstall.swf\", {}, {";
 
 	// Write Params
 	$written = 0;

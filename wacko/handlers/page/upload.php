@@ -316,7 +316,7 @@ else
 {
 	$this->SetMessage($this->GetTranslation("UploadForbidden"));
 }
-if (!$this->GetConfigValue("revisions_hide_cancel"))
+if (!$this->config["revisions_hide_cancel"])
 	echo "<input type=\"button\" value=\"".$this->GetTranslation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
 ?>
 </div>

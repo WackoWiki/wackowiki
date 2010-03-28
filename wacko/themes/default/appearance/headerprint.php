@@ -8,7 +8,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 <meta name="robots" content="noindex, nofollow" />
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 
-<link rel="stylesheet" type="text/css" href="<?php echo $this->GetConfigValue("theme_url") ?>css/print.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"] ?>css/print.css" />
 
 <link rel="start" href="/" />
 <link rel="prev" href="<?php echo $this->href() ?>" />

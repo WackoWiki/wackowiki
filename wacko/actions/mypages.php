@@ -12,7 +12,7 @@ if ($user_id = $this->GetUserId())
 	{
 		print($this->GetTranslation("ListOwnedPages2"));
 		print("<br />[<a href=\"".$this->href("", "", "mode=mypages")."#list"."\">".
-		$this->GetTranslation("OrderABC")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."#list"."\">".
+		$this->GetTranslation("OrderABC")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->config["rewrite_mode"] ? "?" : "&amp;")."#list"."\">".
 		$this->GetTranslation("OrderChange")."</a>] <br /><br />\n");
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
@@ -132,7 +132,7 @@ if ($user_id = $this->GetUserId())
 
 		print($this->GetTranslation("ListOwnedPages"));
 		print("<br />[<a href=\"".$this->href("", "", "mode=mypages&amp;bydate=1")."#list"."\">".
-		$this->GetTranslation("OrderDate")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->GetConfigValue("rewrite_mode") ? "?" : "&amp;")."#list"."\">".
+		$this->GetTranslation("OrderDate")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->config["rewrite_mode"] ? "?" : "&amp;")."#list"."\">".
 		$this->GetTranslation("OrderChange")."</a>] <br /><br />\n");
 
 		if ($pages = $this->LoadAll(

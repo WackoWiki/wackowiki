@@ -107,7 +107,7 @@ if ($registered
 			?> <input type="hidden" name="rename" value="1" /> <input type="text"
 	name="newname" value="<?php echo $this->tag;?>" size="40" /> <br />
 <br />
-			<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" "; if ($this->GetConfigValue("default_rename_redirect")==1){echo "checked=\"checked\"";}; echo " /> <label for=\"redirect\">".$this->GetTranslation("NeedRedirect")."</label>"; ?>
+			<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" "; if ($this->config["default_rename_redirect"] == 1){echo "checked=\"checked\"";}; echo " /> <label for=\"redirect\">".$this->GetTranslation("NeedRedirect")."</label>"; ?>
 <br />
 			<?php if ($this->CheckACL($user,$this->config["rename_globalacl"]))
 			{

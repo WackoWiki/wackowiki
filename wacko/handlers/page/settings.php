@@ -211,7 +211,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		<td class="form_right"><select id="lang" name="lang">
 		<?php
 		if (!($clang = $this->page["lang"]))
-		$clang = $this->GetConfigValue("language");
+		$clang = $this->config["language"];
 
 		if ($langs = $this->AvailableLanguages())
 		{
@@ -270,7 +270,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 	}
 	?>
 <?php // Remove link (shows only for page owner if allowed)
-	if ($this->UserIsOwner() && !$this->GetConfigValue("remove_onlyadmins") || $this->IsAdmin())
+	if ($this->UserIsOwner() && !$this->config["remove_onlyadmins"] || $this->IsAdmin())
 	{
 		echo("<li><a href=\"".$this->href("remove")."\">".$this->GetTranslation("SettingsRemove")."</a></li>");
 		echo("<li><a href=\"".$this->href("purge")."\">".$this->GetTranslation("SettingsPurge")."</a></li>");
