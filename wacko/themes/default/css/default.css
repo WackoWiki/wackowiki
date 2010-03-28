@@ -97,8 +97,7 @@ form input.submitinput {
 }
 
 #debug {
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 0 20px 20px 20px;
 }
 .debug, #debug li {
 	font-size: 11px;
@@ -192,9 +191,9 @@ form input.submitinput {
 	border-top: 1px dotted #CCCCCC;
 }
 
-.files,.comment {
+.files,.comment,.rating {
 	background-color: #FFFFFF;
-	padding: 10px;
+	padding: 10px 20px;
 	border-bottom: 1px solid #EEEEEE;
 }
 
@@ -245,7 +244,7 @@ width:320px;
 }
 
 .filesform,.commentform {
-	padding: 10px;
+	padding: 10px 20px;
 	border-top: 1px solid #CCCCCC;
 	background-color: #FCFCFC;
 }
