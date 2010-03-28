@@ -309,6 +309,7 @@ class Init
 					"debug_admin_only" => 0,
 					"debug_sql_threshold" => 0,
 
+					"log_default_show" => 1,
 					"log_min_level" => 0,
 					"log_purge_time" => 0,
 

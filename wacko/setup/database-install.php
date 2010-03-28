@@ -87,6 +87,7 @@ $configDb['hide_locked'] = $config['hide_locked'];
 $configDb['hide_rating'] = $config['hide_rating'];
 $configDb['keep_deleted_time'] = $config['keep_deleted_time'];
 $configDb['language'] = $config['language'];
+$configDb['log_default_show'] = $config['log_default_show'];
 $configDb['log_min_level'] = $config['log_min_level'];
 $configDb['log_purge_time'] = $config['log_purge_time'];
 $configDb['lower_index'] = $config['lower_index'];
