@@ -12,26 +12,26 @@
 <meta name="description" content="<?php echo htmlspecialchars($this->GetDescription()); ?>" />
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <meta http-equiv="imagetoolbar" content="no" />
-<link href="<?php echo $this->GetConfigValue("theme_url") ?>css/atom.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="<?php echo $this->GetConfigValue("theme_url") ?>css/wacko.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="<?php echo $this->GetConfigValue("theme_url") ?>css/default.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="<?php echo $this->config["theme_url"] ?>css/atom.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="<?php echo $this->config["theme_url"] ?>css/wacko.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="<?php echo $this->config["theme_url"] ?>css/default.css" rel="stylesheet" type="text/css" media="screen" />
 <link rel="start" href="/" />
 <link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page'])); ?>" />
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentNewsRSS");?>" href="/xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="/xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="/xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
-<script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url") ?>js/controls.js"></script>
-<script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url") ?>js/protoedit.js"></script>
-<script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url") ?>js/wikiedit2.js"></script>
+<script type="text/javascript" src="<?php echo $this->config["base_url"] ?>js/controls.js"></script>
+<script type="text/javascript" src="<?php echo $this->config["base_url"] ?>js/protoedit.js"></script>
+<script type="text/javascript" src="<?php echo $this->config["base_url"] ?>js/wikiedit2.js"></script>
 </head>
 </head>
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
-		<td width="50" height="64" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/back_top_1.png);"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/spacer.gif" width="50" height="1" /></td>
-		<td style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/back_top_3.png); background-repeat:repeat-x;">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/back_top_2.png); background-repeat:no-repeat;">
+		<td width="50" height="64" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/back_top_1.png);"><img src="<?php echo $this->config["theme_url"] ?>images/spacer.gif" width="50" height="1" /></td>
+		<td style="background-image:url(<?php echo $this->config["theme_url"] ?>images/back_top_3.png); background-repeat:repeat-x;">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/back_top_2.png); background-repeat:no-repeat;">
 				<tr>
 					<td>
 						<div id="title" style="padding-top:5px;">
@@ -63,19 +63,19 @@
 				</tr>
 			</table>
 		</td>
-		<td width="25" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/back_top_4.png);"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/spacer.gif" width="25" height="1" /></td>
-		<td width="25" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/back_top_5.png);"><img src="<?php echo $this->GetConfigValue("theme_url") ?>images/spacer.gif" width="25" height="1" /></td>
+		<td width="25" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/back_top_4.png);"><img src="<?php echo $this->config["theme_url"] ?>images/spacer.gif" width="25" height="1" /></td>
+		<td width="25" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/back_top_5.png);"><img src="<?php echo $this->config["theme_url"] ?>images/spacer.gif" width="25" height="1" /></td>
 	</tr>
 	<tr>
-		<td height="315" valign="top" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/back_left_2.png); background-repeat:repeat-y;"><div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/back_left_1.png); background-repeat:no-repeat; height:311px;"></div></td>
+		<td height="315" valign="top" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/back_left_2.png); background-repeat:repeat-y;"><div style="background-image:url(<?php echo $this->config["theme_url"] ?>images/back_left_1.png); background-repeat:no-repeat; height:311px;"></div></td>
 		<td colspan="2" rowspan="2">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#FFFFFF;">
 				<tr>
 					<td height="25" colspan="3">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#646464;">
 							<tr>
-								<td width="25" height="25" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/panel_left.png);"></td>
-								<td style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/panel_mid.png); background-repeat:repeat-x;">
+								<td width="25" height="25" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/panel_left.png);"></td>
+								<td style="background-image:url(<?php echo $this->config["theme_url"] ?>images/panel_mid.png); background-repeat:repeat-x;">
 									<div id="navigation">
 <?php
 	$this->context[++$this->current_context] = '/';
@@ -87,23 +87,23 @@
 ?>
 									</div>
 								</td>
-								<td width="50" align="right" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/panel_right.png);">
+								<td width="50" align="right" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/panel_right.png);">
 									<div id="tools">
 <?php
 	if ($this->GetUser())
 	{
 		if (in_array($this->tag, $this->GetBookmarkLinks()))
 		{
-			echo '<div class="bookmark_out"><a href="'.$this->href('', '', 'removebookmark=yes').'" title="remove this page from the Bookmarks menu"><img src="'.$this->GetConfigValue("theme_url").'images/spacer.gif" /></a></div>';
+			echo '<div class="bookmark_out"><a href="'.$this->href('', '', 'removebookmark=yes').'" title="remove this page from the Bookmarks menu"><img src="'.$this->config["theme_url"].'images/spacer.gif" /></a></div>';
 		}
 		else
 		{
-			echo '<div class="bookmark_in"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="Add this page to the bookmark menu"><img src="'.$this->GetConfigValue("theme_url").'images/spacer.gif" /></a></div>';
+			echo '<div class="bookmark_in"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="Add this page to the bookmark menu"><img src="'.$this->config["theme_url"].'images/spacer.gif" /></a></div>';
 		}
 	}
 	else
 	{
-		echo '<div class="bookmark_in"><img src="'.$this->GetConfigValue("theme_url").'images/spacer.gif" title="You must be registered to work with the system bookmarks" /></div>';
+		echo '<div class="bookmark_in"><img src="'.$this->config["theme_url"].'images/spacer.gif" title="You must be registered to work with the system bookmarks" /></div>';
 	}
 	echo "\n";
 
@@ -116,9 +116,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" valign="top" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/body_leftmid.png); background-repeat:repeat-y; <?php echo $wordsHeight; ?>">
-						<div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/body_topmid.png); background-repeat:repeat-x; <?php echo $wordsHeight; ?>">
-							<div id="meta" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/body_topleft.png); background-repeat:no-repeat; <?php echo $wordsHeight; ?>">
+					<td colspan="2" valign="top" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/body_leftmid.png); background-repeat:repeat-y; <?php echo $wordsHeight; ?>">
+						<div style="background-image:url(<?php echo $this->config["theme_url"] ?>images/body_topmid.png); background-repeat:repeat-x; <?php echo $wordsHeight; ?>">
+							<div id="meta" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/body_topleft.png); background-repeat:no-repeat; <?php echo $wordsHeight; ?>">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
 									<tr>
 										<td>
@@ -193,12 +193,12 @@
 							</div>
 						</div>
 					</td>
-					<td width="210" rowspan="2" valign="top" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/body_rightmid.png); background-position:right; background-repeat:repeat-y;">
+					<td width="210" rowspan="2" valign="top" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/body_rightmid.png); background-position:right; background-repeat:repeat-y;">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td height="348" valign="top" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/body_right.png); background-position:top right; background-repeat:no-repeat;">
+								<td height="348" valign="top" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/body_right.png); background-position:top right; background-repeat:no-repeat;">
 									<div id="sidepanel">
-										<div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/glass_top.png); height:20px;"></div>
+										<div style="background-image:url(<?php echo $this->config["theme_url"] ?>images/glass_top.png); height:20px;"></div>
 										<div id="bookmarks">
 <?php
 	echo $this->Format(implode(' ', $this->GetBookmarks())) . "\n";
@@ -211,11 +211,11 @@
 	if ($this->page && $this->config['hide_index'] == '0' && $this->method == 'show')
 	{
 ?>
-										<div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/glass_sub_1.png); height:20px;"></div>
-										<div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/glass_sub_2.png); height:20px;">
-											<div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/glass_sections.png); background-position:right; background-repeat:no-repeat; height:20px;"></div>
+										<div style="background-image:url(<?php echo $this->config["theme_url"] ?>images/glass_sub_1.png); height:20px;"></div>
+										<div style="background-image:url(<?php echo $this->config["theme_url"] ?>images/glass_sub_2.png); height:20px;">
+											<div style="background-image:url(<?php echo $this->config["theme_url"] ?>images/glass_sections.png); background-position:right; background-repeat:no-repeat; height:20px;"></div>
 										</div>
-										<div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/glass_sub_3.png); height:20px;"></div>
+										<div style="background-image:url(<?php echo $this->config["theme_url"] ?>images/glass_sub_3.png); height:20px;"></div>
 										<div id="sections">
 <?php
 		/* if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->config['forum_cluster'])
@@ -242,18 +242,18 @@
 		}
 ?>
 										</div>
-										<div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/glass_mid_2.png); background-repeat:repeat-y; height:20px;"></div>
+										<div style="background-image:url(<?php echo $this->config["theme_url"] ?>images/glass_mid_2.png); background-repeat:repeat-y; height:20px;"></div>
 <?php
 	}
 	else
 	{
 ?>
-										<div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/glass_mid_1.png); background-repeat:repeat-y; height:20px;"></div>
+										<div style="background-image:url(<?php echo $this->config["theme_url"] ?>images/glass_mid_1.png); background-repeat:repeat-y; height:20px;"></div>
 <?php
 	}
 	echo "\n";
 ?>
-										<div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/glass_bot.png); height:5px; background-repeat:no-repeat;"></div>
+										<div style="background-image:url(<?php echo $this->config["theme_url"] ?>images/glass_bot.png); height:5px; background-repeat:no-repeat;"></div>
 									</div>
 								</td>
 							</tr>
@@ -261,9 +261,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td width="25" height="321" valign="top" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/body_leftmid.png); background-repeat:repeat-y;">
-						<div id="tools" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/tools_back.png); background-repeat:repeat-y;">
-							<div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/tools_top.png); height:7px;"></div>
+					<td width="25" height="321" valign="top" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/body_leftmid.png); background-repeat:repeat-y;">
+						<div id="tools" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/tools_back.png); background-repeat:repeat-y;">
+							<div style="background-image:url(<?php echo $this->config["theme_url"] ?>images/tools_top.png); height:7px;"></div>
 <?php
 	// defining tabs constructor
 	function EchoTab($link, $hint, $title, $active = false, $bonus = '')
@@ -275,9 +275,9 @@
 		$method = substr($link, strrpos($link, '/') + 1);
 
 		if ($active)
-			$tab = "<div class=\"$method\"><img src=\"".$engine->GetConfigValue("theme_url")."images/spacer.gif\" alt=\"$title\" /></div>\n";
+			$tab = "<div class=\"$method\"><img src=\"".$engine->config["theme_url"]."images/spacer.gif\" alt=\"$title\" /></div>\n";
 		else
-			$tab = "<div class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$bonus\"><img src=\"".$engine->GetConfigValue("theme_url")."images/spacer.gif\" alt=\"$title\" /></a></div>\n";
+			$tab = "<div class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$bonus\"><img src=\"".$engine->config["theme_url"]."images/spacer.gif\" alt=\"$title\" /></a></div>\n";
 
 		return $tab;
 	}
@@ -367,10 +367,10 @@
 		$this->method == 'acls' || $this->method == 'massacls',
 		'a');
 ?>
-							<div style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/tools_bottom.png); height:7px;"></div>
+							<div style="background-image:url(<?php echo $this->config["theme_url"] ?>images/tools_bottom.png); height:7px;"></div>
 						</div>
 					</td>
-					<td height="321" valign="top" style="background-image:url(<?php echo $this->GetConfigValue("theme_url") ?>images/body_divider.png); background-repeat:no-repeat;">
+					<td height="321" valign="top" style="background-image:url(<?php echo $this->config["theme_url"] ?>images/body_divider.png); background-repeat:no-repeat;">
 						<div id="body"><div id="content">
 <?php
 	if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";

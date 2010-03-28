@@ -21,18 +21,18 @@ if ($this->GetMethod() != 'show' || $this->page["latest"] == "0") {
 <meta http-equiv="content-type"
 	content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <link rel="stylesheet" type="text/css"
-	href="<?php echo $this->GetConfigValue("theme_url") ?>css/default.css" />
+	href="<?php echo $this->config["theme_url"] ?>css/default.css" />
 <link rel="stylesheet" type="text/css"
-	href="<?php echo $this->GetConfigValue("theme_url") ?>css/left.css" />
+	href="<?php echo $this->config["theme_url"] ?>css/left.css" />
 <link rel="shortcut icon"
-	href="<?php echo $this->GetConfigValue("theme_url") ?>icons/favicon.ico"
+	href="<?php echo $this->config["theme_url"] ?>icons/favicon.ico"
 	type="image/x-icon" />
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetTranslation("RecentChangesRSS");?>"
-	href="<?php echo $this->GetConfigValue("base_url");?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+	href="<?php echo $this->config["base_url"];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>"
-	href="<?php echo $this->GetConfigValue("base_url");?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->GetConfigValue("wacko_name")));?>.xml" />
+	href="<?php echo $this->config["base_url"];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
 <link rel="alternate" type="application/rss+xml"
 	title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>"
 	href="<?php echo $this->href("revisions.xml");?>" />
@@ -40,22 +40,22 @@ if ($this->GetMethod() != 'show' || $this->page["latest"] == "0") {
 // JS files.
 // default.js contains common procedures and should be included everywhere
 ?>
-  <script type="text/javascript" src="<?php echo $this->GetConfigValue("base_url");?>js/default.js"></script>
+  <script type="text/javascript" src="<?php echo $this->config["base_url"];?>js/default.js"></script>
 <?php
 // protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages
 if ($this->method == 'edit')
 {
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/protoedit.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/wikiedit2.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->GetConfigValue("base_url")."js/autocomplete.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/protoedit.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/wikiedit2.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/autocomplete.js\"></script>\n";
 }
 ?>
 <script type="text/javascript"
-	src="<?php echo $this->GetConfigValue("base_url");?>js/swfobject.js"></script>
+	src="<?php echo $this->config["base_url"];?>js/swfobject.js"></script>
 <script type="text/javascript"
-	src="<?php echo $this->GetConfigValue("base_url");?>js/captcha.js"></script>
+	src="<?php echo $this->config["base_url"];?>js/captcha.js"></script>
 <script type="text/javascript"
-	src="<?php echo $this->GetConfigValue("theme_url") ?>js/leftframe.js"></script>
+	src="<?php echo $this->config["theme_url"] ?>js/leftframe.js"></script>
 <?php
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
@@ -117,7 +117,7 @@ else if($this->HasAccess("write"))
 							cellspacing="0" width="100%">
 							<tr>
 								<td class="titleLeft"><img
-									src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif"
+									src="<?php echo $this->config["theme_url"] ?>images/1x1.gif"
 									width="14" /></td>
 								<td class="titleText" width="100%"><?php echo $this->GetTranslation("YourBookmarks"); ?>
 								</td>
@@ -138,13 +138,13 @@ else if($this->HasAccess("write"))
 						<a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"
 							title="<?php echo $this->GetTranslation("AddToBookmarks"); ?>">
 						<img
-							src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark1.gif"
+							src="<?php echo $this->config["theme_url"] ?>icons/bookmark1.gif"
 							border="0" align="bottom" style="vertical-align: middle;" /> <?php echo $this->GetTranslation("Bookmarks"); ?>
 						</a> <?php } else { ?> <a
 							href="<?php echo $this->Href('', '', "removebookmark=yes")?>"
 							title="<?php echo $this->GetTranslation("RemoveFromBookmarks"); ?>">
 						<img
-							src="<?php echo $this->GetConfigValue("theme_url") ?>icons/bookmark2.gif"
+							src="<?php echo $this->config["theme_url"] ?>icons/bookmark2.gif"
 							style="vertical-align: middle;" /> <?php echo $this->GetTranslation("Bookmarks"); ?>
 						</a> <?php }
 						}
@@ -165,7 +165,7 @@ else if($this->HasAccess("write"))
 							cellspacing="0" width="100%">
 							<tr>
 								<td class="titleLeft"><img
-									src="<?php echo $this->GetConfigValue("theme_url") ?>images/1x1.gif"
+									src="<?php echo $this->config["theme_url"] ?>images/1x1.gif"
 									width="14" /></td>
 								<td class="titleText" width="100%"><?php echo $this->GetTranslation("ThisPage"); ?>
 								</td>
@@ -180,21 +180,21 @@ else if($this->HasAccess("write"))
 						echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 
 						if ($this->HasAccess("write")) {
-							echo "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetTranslation("EditTip")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/edit.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("EditText")."</a>\n";
+							echo "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetTranslation("EditTip")."\"><img src=\"".$this->config["theme_url"]."icons/edit.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("EditText")."</a>\n";
 
 						}
 						echo '<br />';
 						if ($this->GetPageTime()) {
-							echo "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/vers.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation('SettingsRevisions')."</a>\n";
+							echo "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\"><img src=\"".$this->config["theme_url"]."icons/vers.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation('SettingsRevisions')."</a>\n";
 						}
 						// if this page exists
 						if ($this->page) {
 							// if owner is current user
 							if ($this->UserIsOwner()) {
 								echo '<br />';
-								print(" <a href=\"".$this->href("rename")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/ren.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("RenameText")."</a>");
+								print(" <a href=\"".$this->href("rename")."\"><img src=\"".$this->config["theme_url"]."icons/ren.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("RenameText")."</a>");
 								echo '<br />';
-								print("<a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/access.gif\""."style=\"vertical-align: middle\"".">".$this->GetTranslation("EditACLText")."</a>");
+								print("<a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"")."\"><img src=\"".$this->config["theme_url"]."icons/access.gif\""."style=\"vertical-align: middle\"".">".$this->GetTranslation("EditACLText")."</a>");
 							}
 
 							if ($this->CheckACL($this->GetUserName(),$this->config["rename_globalacl"]) && !$this->UserIsOwner()) {
@@ -204,14 +204,14 @@ else if($this->HasAccess("write"))
 
 							if ($this->IsAdmin()) {
 								echo '<br />';
-								print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/delete.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("DeleteText")."</a>");
+								print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->config["theme_url"]."icons/delete.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("DeleteText")."</a>");
 							}
 
 							echo '<br />';
-							print("<a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/prop.gif\""."style=\"vertical-align: middle\"".">".$this->GetTranslation("SettingsText")."</a>");
+							print("<a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"")."\"><img src=\"".$this->config["theme_url"]."icons/prop.gif\""."style=\"vertical-align: middle\"".">".$this->GetTranslation("SettingsText")."</a>");
 
 							echo '<br />';
-							print "<a href=\"".$this->href("export.xml")."\" title=\"".$this->GetTranslation("RevisionXMLTip")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/1xml.gif\""."style=\"vertical-align: middle\""."\" target=\"_blank\">".$this->GetTranslation("ExportToXML")."</a>\n";
+							print "<a href=\"".$this->href("export.xml")."\" title=\"".$this->GetTranslation("RevisionXMLTip")."\"><img src=\"".$this->config["theme_url"]."icons/1xml.gif\""."style=\"vertical-align: middle\""."\" target=\"_blank\">".$this->GetTranslation("ExportToXML")."</a>\n";
 
 							//print $this->Format( '{{TOC}}' );
 
@@ -239,13 +239,13 @@ else if($this->HasAccess("write"))
 		<input type="hidden" name="action" value="login" />
 
 		<div class="header"><?php echo ($this->iswatched === true
-		? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>"
-		: "<a href=\"".$this->href("watch")."\"><img src=\"".$this->GetConfigValue("theme_url")."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?>
-		| <?php echo "<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->GetConfigValue("theme_url")."icons/print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"absmiddle\" border=\"0\" /></a>";?>
+		? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config["theme_url"]."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>"
+		: "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config["theme_url"]."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?>
+		| <?php echo "<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->config["theme_url"]."icons/print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"absmiddle\" border=\"0\" /></a>";?>
 		| <?php
 		if ($this->GetUser()) { ?> <span class="nobr"> <?php echo $this->GetTranslation("YouAre"); ?>
 		<img
-			src="<?php echo $this->GetConfigValue("theme_url") ?>icons/user.gif"
+			src="<?php echo $this->config["theme_url"] ?>icons/user.gif"
 			alt="" width="16" height="16" border="0" align="middle"
 			style="vertical-align: baseline;" /> <?php echo $this->Link($this->GetUserName()) ?>
 		</span> <small> ( <span class="nobr Tune"> <?php echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelAccount"), 0); ?>
