@@ -236,6 +236,7 @@ class Init
 					"urls_underscores" => 0,
 
 					"users_page" => "Users",
+					"policy_page" => "",
 
 					"default_write_acl" => "$",
 					"default_read_acl" => "*",
