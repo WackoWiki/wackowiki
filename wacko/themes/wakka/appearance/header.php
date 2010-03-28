@@ -123,12 +123,12 @@ else
 			// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
 			if (!in_array($this->tag, $this->GetBookmarkLinks()))
 				echo '<li><a href="'. $this->Href('', '', "addbookmark=yes")
-					.'"><img src="'. $this->GetConfigValue("theme_url")
+					.'"><img src="'. $this->config["theme_url"]
 					.'icons/bookmark1.gif" alt="+" title="'.
 					$this->GetTranslation("AddToBookmarks") .'"/></a></li>';
 			else
 				echo '<li><a href="'. $this->Href('', '', "removebookmark=yes")
-					.'"><img src="'. $this->GetConfigValue("theme_url")
+					.'"><img src="'. $this->config["theme_url"]
 					.'icons/bookmark2.gif" alt="-" title="'.
 					$this->GetTranslation("RemoveFromBookmarks") .'"/></a></li>';
 			}
