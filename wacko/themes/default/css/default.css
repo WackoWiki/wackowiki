@@ -138,6 +138,7 @@ form input.submitinput {
 #pageedit {
 	background-color: #FFFFFF;
 	border-bottom: none;
+	padding: 5px 20px 20px 20px;
 }
 
 #pageedit form textarea {
