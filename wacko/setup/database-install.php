@@ -102,6 +102,7 @@ $configDb['owners_can_change_keywords'] = $config['owners_can_change_keywords'];
 $configDb['owners_can_remove_comments'] = $config['owners_can_remove_comments'];
 $configDb['pages_purge_time'] = $config['pages_purge_time'];
 $configDb['paragrafica'] = $config['paragrafica'];
+$configDb['policy_page'] = $config['policy_page'];
 $configDb['pwd_char_classes'] = $config['pwd_char_classes'];
 $configDb['pwd_min_chars'] = $config['pwd_min_chars'];
 $configDb['pwd_unlike_login'] = $config['pwd_unlike_login'];

@@ -105,7 +105,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="news_levels"><strong>Depth of news pages from the root cluster:</strong><br />
-				<small>Regular expression (regexp-slang SQL), specifying the number of intermediate sections of the root cluster news directly to the names of pages of news reports.</small></label></td>
+				<small>Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. /.+/.+/.+)</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="news_levels" name="news_levels" value="<?php echo htmlspecialchars($engine->config['news_levels']);?>" /></td>
 			</tr>
 			<tr>
