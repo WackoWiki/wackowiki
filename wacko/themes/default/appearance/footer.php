@@ -105,6 +105,10 @@ if ($this->page)
 </div>
 </div>
 <div id="credits"><?php
+
+// comment this out for not showing website policy link at the bottom of your pages
+if ($this->config["policy_page"]) echo '<a href="'.$this->href('', $this->config['policy_page']).'">'.$this->GetTranslation("StandardTerms").'</a><br />';
+
 if ($this->GetUser())
 {
 	echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion());
