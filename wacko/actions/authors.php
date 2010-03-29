@@ -14,6 +14,10 @@ print document and revisions' authors.
 	cluster	= consider all cluster subpages (if = 1) or current page only (0, default)
 */
 
+if (!isset($add)) $add = "";
+if (!isset($license)) $license = "";
+if (!isset($cluster)) $cluster = "";
+
 echo '<small>';
 
 if (!$this->page && !$add && !$license)
@@ -34,7 +38,7 @@ else
 		}
 		$output[] = implode('<br />', $add);
 	}
-	
+
 	// search and process co-authors
 	if ($this->page)
 	{
@@ -84,7 +88,7 @@ else
 					$authors[$author['name']]['total']++;
 				}
 			}
-			
+
 			// okey, we've got data, it's time to sort it by working years
 			$sort = create_function(
 				'$a, $b',	// func params
@@ -94,14 +98,14 @@ else
 					'return ( $a["total"] < $b["total"] ? 1 : -1 );');
 			usort($authors, $sort);
 			unset($_authors, $sort);
-			
+
 			// writing output author strings. while we're doing so
 			// let's place guest entry at the bottom of the list
 			foreach ($authors as $i => $author)
 			{
 				if ($author['name'] != GUEST)
 				{
-					if (!$all_authors[$author['years']])
+					if (!isset($all_authors[$author['years']]))
 					{
 						$all_authors[$author['years']] = "&copy; {$author['years']} ";
 					}
@@ -117,12 +121,12 @@ else
 					unset($authors[$i]);
 				}
 			}
-			
+
 			if (isset($guest_authors)) $all_authors[] = $guest_authors;
 			$output[] = implode('<br />', $all_authors);
 		}
 	}
-	
+
 	if ($license)
 	{
 		// license names and links to texts
@@ -133,7 +137,7 @@ else
 			'GNU-FDL'		=> array('http://www.gnu.org/licenses/fdl.html',				'GNU Free Documentation License'),
 			'PD'			=> array('http://en.wikipedia.org/wiki/Public_domain',			'Public Domain / Free Use'),
 		);
-		
+
 		if (isset($licenses[$license]))
 		{
 			// constant license
@@ -146,10 +150,10 @@ else
 			// free-form text
 			$license = $this->Format($this->Format($license, 'wacko'), 'post_wacko');
 		}
-		
+
 		$output[] = $license;
 	}
-	
+
 	// print results
 	if ($output) echo implode('<br />', $output);
 }

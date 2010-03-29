@@ -2,7 +2,7 @@
 
 if ($this->IsAdmin())
 {
-	if (!$_POST["clear"])
+	if (!isset($_POST["clear"]))
 	{
 		echo $this->FormOpen();
 		?>
