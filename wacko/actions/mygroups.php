@@ -2,6 +2,8 @@
 
 // actions/mygroups.php
 
+if (!isset($nomark)) $nomark = "";
+
 function MyGroups($username, $al)
 {
 	$my_groups_count = 0;

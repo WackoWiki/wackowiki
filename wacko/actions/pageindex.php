@@ -1,6 +1,7 @@
 <?php
 
 if (!isset($title)) $title = "";
+if (!isset($max)) $max = "";
 if ($max) $limit = $max;
 else $limit	= 50;
 

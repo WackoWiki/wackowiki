@@ -1,5 +1,7 @@
 <?php
 
+if (!isset($nomark)) $nomark = "";
+
 if (!function_exists('links_tree_view'))
 {
 	function links_tree_view(&$wacko, $node, $level, $indent = 0)
@@ -38,7 +40,7 @@ if (!function_exists('links_tree_view'))
 
 $root = $vars[0];
 if ($root == "/") $root = "";
-if (!($root)) $root = $this->page["tag"];
+if (!isset($root)) $root = $this->page["tag"];
 $root = $this->UnwrapLink($root);
 
 if (!$nomark)
@@ -46,7 +48,7 @@ if (!$nomark)
 	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("LinksTreeTitle")."</span></p>\n");
 }
 
-if (!$levels) $levels = 3;
+if (!isset($levels)) $levels = 3;
 else $levels = (int)$levels;
 if ($levels > 4)
 {

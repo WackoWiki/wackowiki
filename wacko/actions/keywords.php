@@ -9,28 +9,28 @@
 //	sort		- order pages alphabetically ('abc', default) or creation date ('date')
 //	nomark		- display header and fieldset (1, 2 (no header even in 'keywords' mode) or 0 (default))
 
-if (!$root)			$root	= '/';
-
-if (!$lang)			$lang	= $this->page['lang'];
-
-if (!isset($list))	$list	= 1;
-
-if (!$sort || !in_array($sort, array('abc', 'date')))
+if (!isset($root))			$root	= '/';
+if (!isset($list))			$list	= 1;
+if (!isset($ids)) 			$ids	= "";
+if (!isset($lang))			$lang	= $this->page['lang'];
+if (!isset($inline)) 		$inline	= "";
+if (!isset($sort) || !in_array($sort, array('abc', 'date')))
 	$sort = 'abc';
+if (!isset($nomark)) $nomark = "";
 
 $root = $this->UnwrapLink($root);
 
 //echo '<br />';
 
-if ($list && ($ids || $_GET['category']))
+if ($list && ($ids || isset($_GET['category'])))
 {
 	if ($ids) $category = preg_replace('/[^\d, ]/', '', $ids);
 	else $category = (int)$_GET['category'];
-	
+
 	if ($_words = $this->LoadAll(
 	"SELECT keyword FROM {$this->config['table_prefix']}keywords ".
 	"WHERE keyword_id IN ( ".quote($this->dblink, $category)." )", 1));
-	
+
 	if ($nomark != 2)
 	{
 		if ($_words)
@@ -40,10 +40,10 @@ if ($list && ($ids || $_GET['category']))
 		}
 		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation('PagesCategory').( $words ? ' &laquo;<b>'.$words.'</b>&raquo;' : '' ).":</span></p>\n";
 	}
-	
+
 	if		($sort == 'abc')	$order = 'title ASC';
 	else if ($sort == 'date')	$order = 'created DESC';
-	
+
 	if ($pages = $this->LoadAll(
 	"SELECT p.page_id, p.tag, p.title, p.created ".
 	"FROM {$this->config['table_prefix']}keywords_pages AS k ".
@@ -57,7 +57,7 @@ if ($list && ($ids || $_GET['category']))
 		"WHERE keyword_id IN ( ".quote($this->dblink, $category)." )", 1))
 		{
 			echo '<ul>';
-			
+
 			foreach ($pages as $page)
 			{
 				if ($this->HasAccess('read', $page['page_id']) !== true)
@@ -65,7 +65,7 @@ if ($list && ($ids || $_GET['category']))
 				else
 					echo '<li>'.( $sort == 'date' ? '<small>('.date('d/m/Y', strtotime($page['created'])).')</small> ' : '' ).$this->Link('/'.$page['tag'], '', $page['title'], 0, 1)."</li>\n";
 			}
-			
+
 			echo '</ul>';
 		}
 		else
@@ -77,7 +77,7 @@ if ($list && ($ids || $_GET['category']))
 	{
 		echo '<em>'.$this->GetTranslation('CategoryEmpty').'</em><br />';
 	}
-	
+
 	if ($nomark != 2)
 	{
 		echo '</div><br />';
@@ -91,24 +91,24 @@ if (!$ids)
 	{
 		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>Keywords".$this->GetTranslation('Category').( $root ? " of cluster ".$this->Link('/'.$root, '', '', 0) : '' ).":</span></p>\n";
 	}
-	
+
 	// keywords list
 	if ($keywords = $this->GetKeywordsList($lang, 1, $root))
 	{
 		echo "<ul>\n";
-		
+
 		foreach ($keywords as $id => $word)
 		{
 			$spacer = '&nbsp;&nbsp;&nbsp;';
-			
+
 			# if (!$inline && $i++ > 0) echo '<br />';
-			
+
 			echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'">' : '' ).htmlspecialchars($word['keyword']).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."";
-			
+
 			if ($word['childs'] == true)
 			{
 				echo "<ul>\n";
-				
+
 				foreach ($word['childs'] as $id => $word)
 				{
 					echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'">' : '' ).htmlspecialchars($word['keyword']).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."</li>\n";
@@ -124,7 +124,7 @@ if (!$ids)
 	{
 		echo '<em>'.$this->GetTranslation('NoKeywordsForThisLanguage').'</em>';
 	}
-	
+
 	if (!$nomark)
 	{
 		echo "</div>\n";
