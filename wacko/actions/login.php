@@ -66,9 +66,7 @@ else if ($user = $this->GetUser())
 
 				if ($this->config["ssl"] == true)
 				{
-
 					$output .= "Traffic Protection ". ( $_SERVER["HTTPS"] == "on" ? $_SERVER["SSL_CIPHER"].' ('.$_SERVER["SSL_PROTOCOL"].')' : 'no' ).".";
-
 				}
 
 				$this->SetMessage($output);
@@ -145,7 +143,6 @@ else
 				// run in ssl mode?
 				if ($this->config['ssl'] == true)
 				{
-					$this->config['base_url'] = str_replace('http://', 'https://', $this->config['base_url']);
 					$this->config['base_url'] = str_replace('http://', 'https://', $this->config['base_url']);
 				}
 
