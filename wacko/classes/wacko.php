@@ -4395,7 +4395,7 @@ class Wacko
 		$chars_uc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$chars_lc = 'abcdefghijklmnopqrstuvwxyz';
 		$digits = '0123456789';
-		$symbols = '-_!@#$%^&*(){}[]|~';
+		$symbols = '-_!@#%^&*(){}[]|~'; // removed '$'
 		$uc = 0;
 		$lc = 0;
 		$di = 0;

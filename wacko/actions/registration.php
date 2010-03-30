@@ -1,5 +1,8 @@
 <!--notypo-->
 <?php
+
+
+
 // reconnect securely in ssl mode
 if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
 {
@@ -141,7 +144,9 @@ else if ($_POST["action"] == "login")
 			// submitting input to DB
 			else
 			{
-				$confirm = sha1($password.mt_rand().time().mt_rand().$email.mt_rand());
+				$salt = $this->RandomPassword(4, 3);
+				$confirm = sha1($password.$salt.mt_rand().time().mt_rand().$email.mt_rand());
+				$password_encrypted = sha1($name.$salt.$_POST["password"]);
 				$more = $this->ComposeOptions(array(
 					"theme" => $this->config["theme"],
 					"send_watchmail" => "1",
@@ -160,7 +165,7 @@ else if ($_POST["action"] == "login")
 						($lang
 							? "lang		= '".quote($this->dblink, $lang)."', "
 							: "").
-						"password		= sha1('".quote($this->dblink, $_POST["password"])."', ".
+						"password		= '".quote($this->dblink, $password_encrypted)."', ".
 						"salt			= '".quote($this->dblink, $salt)."'");
 
 				$subject = 	$this->GetTranslation("EmailWelcome").

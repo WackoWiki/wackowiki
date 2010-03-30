@@ -102,14 +102,18 @@ else
 				if ($existingUser["password"] == $_processed_password)
 				{
 					// update database with the sha1 password for future logins
+					$salt = $this->createSalt();
+					$password = $this->encryptPassword($_POST["password"], $_POST["name"], $salt);
+
 					$this->Query("UPDATE ".$this->config["table_prefix"]."users SET ".
-								"password = SHA1( '".$_POST["password"]."' ) ".
+								"password	= '".$password."', ".
+								"salt		= '".$salt."' ".
 								"WHERE user_name = '".$_POST["name"]."'");
 				}
 			}
 			else
 			{
-				$_processed_password = sha1($_POST["password"]);
+				$_processed_password = sha1($_POST["name"].$existingUser["salt"].$_POST["password"]);
 			}
 
 			// check password
