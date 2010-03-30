@@ -85,7 +85,7 @@ if ( ( $config["system_seed"] == "") )
 
 $salt = RandomSeed(4, 3);
 $password_encrypted = sha1($config["admin_name"].$salt.$_POST["password"]);
-$insert_admin = "INSERT INTO ".$config["table_prefix"]."users (user_name, password, email, signup_time, lang) VALUES ('".$config["admin_name"]."', '".$password_encrypted."', '".$config["admin_email"]."', NOW(), '".$config["language"]."')";
+$insert_admin = "INSERT INTO ".$config["table_prefix"]."users (user_name, password, salt, email, signup_time, lang) VALUES ('".$config["admin_name"]."', '".$password_encrypted."', '".$salt."', '".$config["admin_email"]."', NOW(), '".$config["language"]."')";
 // TODO: for Upgrade insert other aliases also in groups table
 // $config["aliases"] = array("Admins" => $config["admin_name"]);
 $insert_admin_group = "INSERT INTO ".$config["table_prefix"]."groups (group_name, description, moderator, created) VALUES ('Admins', '', (SELECT user_id FROM ".$config["table_prefix"]."users WHERE user_name = '".$config["admin_name"]."' LIMIT 1), NOW())";
