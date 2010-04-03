@@ -1,11 +1,18 @@
 <?php
 
+$topic = "";
+$title = "";
+$filter = "";
+$style = "";
+$nomark = "";
+$for = "";
+
 if (($topic == 1) || ($title == 1))
 	$mode = "topic";
 else
 	$mode = "full";
 
-if ($_GET["topic"] == "on") $mode = "topic";
+if (isset($_GET["topic"]) && $_GET["topic"] == "on") $mode = "topic";
 
 //if (!$delim) $delim="---";
 if (!in_array($style, array("br","ul","ol","comma"))) $style = "ol";
@@ -15,7 +22,7 @@ $i = 0;
 if ($filter != "pages") $filter = "all";
 if (!isset($clean)) $clean = false;
 
-if ($vars[$for] != "") $phrase = $vars[$for];
+if (isset($vars[$for])) $phrase = $vars[$for];
 else
 {
 	$phrase = "";
@@ -31,7 +38,7 @@ if ($form)
 <br />
 <input
 	name="phrase" id="searchfor" size="40"
-	value="<?php echo htmlspecialchars($_GET["phrase"]) ?>" />
+	value="<?php echo htmlspecialchars(isset($_GET["phrase"])? $_GET["phrase"] : ""); ?>" />
 <input
 	type="submit"
 	value="<?php echo $this->GetTranslation("SearchButtonText"); ?>" />

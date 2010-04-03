@@ -27,7 +27,7 @@ if ($registered
 ($this->HasAccess("write") && $this->HasAccess("read") || ($_POST["to"]=="global"))
 )
 {
-	if ($_GET["remove"]) // show the form
+	if (isset($_GET["remove"])) // show the form
 	{
 		if ($_GET["remove"] == "global")
 			$page_id = 0;
@@ -88,7 +88,7 @@ if ($registered
 
 	}
 	else
-	if ($_POST["remove"]) // delete
+	if (isset($_POST["remove"])) // delete
 	{
 		// 1. where, existence
 		if ($_POST["remove"] == "global")
@@ -128,7 +128,10 @@ if ($registered
 				else
 					$message .= "<div class=\"error\">".$this->GetTranslation("UploadRemovedFromFSError")."</div>";
 
-				$this->SetMessage($message);
+				if ($message)
+				{
+					$this->SetMessage($message);
+				}
 				// log event
 				$this->Log(1, str_replace("%2", $what[0]["filename"], str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedFile"))));
 			}
@@ -298,7 +301,7 @@ if ($registered
 				else if ($_FILES["file"]['error'] == UPLOAD_ERR_PARTIAL || $_FILES["file"]['error'] == UPLOAD_ERR_NO_FILE)
 					$error = $this->GetTranslation("UploadNoFile");
 				else
-					$error = " ";
+					$error = "";
 			}
 		}
 		else

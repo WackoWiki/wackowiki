@@ -58,7 +58,7 @@ if ($engine->config['rewrite_mode'] == false)
 ##            End admin session and logout            ##
 ########################################################
 
-if ($_GET['action'] == 'logout')
+if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
 	$engine->DeleteCookie('admin');
 	$engine->Log(1, $engine->GetTranslation('LogAdminLogout'));
@@ -107,7 +107,7 @@ else
 }
 
 // recovery preauthorization
-if ($_POST['password'])
+if (isset($_POST['password']))
 {
 	if (sha1($_POST['password']) == $pwd)
 	{
@@ -122,7 +122,8 @@ if ($_POST['password'])
 }
 
 // check authorization
-if ($_COOKIE[$engine->config["session_prefix"].'_'.$engine->config['cookie_prefix'].'admin']  == $pwd)
+$user = "";
+if (isset($_COOKIE[$engine->config["session_prefix"].'_'.$engine->config['cookie_prefix'].'admin']) && $_COOKIE[$engine->config["session_prefix"].'_'.$engine->config['cookie_prefix'].'admin'] == $pwd)
 {
 	$user = array('name' => $engine->config['admin_name']);
 }
@@ -207,7 +208,7 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 		<div class="sub">
 			<ul>
 			<li class="text submenu"><?php echo $module['lock']['cat']; ?>
-			<?php echo ( $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
+			<?php echo ( isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'lock' || (!$_GET && !$_POST)
 				? "\n<ul>\n<li class=\"active\">"
 				: "\n<ul>\n<li>" ); ?>
 			<a href="admin.php">
@@ -234,7 +235,7 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 					echo ( $row['cat'] != $category
 						? "</ul>\n</li>\n<li class=\"text submenu2\">".$row['cat']."<ul>\n"
 						: "");
-					echo ( $_REQUEST['mode'] == $row['mode']
+					echo ( isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode']
 						? "<li class=\"active\">"
 						: "<li>" ); ?>
 					<a href="?mode=<?php echo $row['mode']; ?>" title="<?php echo $row['title']; ?>"><?php echo $row['name']; ?></a>

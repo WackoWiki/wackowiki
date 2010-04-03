@@ -297,11 +297,14 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 		{
 			foreach ($words as $id => $word)
 			{
-				$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.( $_POST['keyword'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="keyword'.$id.'"><strong>'.htmlspecialchars($word['keyword']).'</strong></label></span> ';
+				$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['keyword'.$id.'|'.$word['parent']]) && $_POST['keyword'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="keyword'.$id.'"><strong>'.htmlspecialchars($word['keyword']).'</strong></label></span> ';
 
-				if ($word['childs'] == true) foreach ($word['childs'] as $id => $word)
+				if (isset($word['childs']) && $word['childs'] == true)
 				{
-					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.( $_POST['keyword'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="keyword'.$id.'">'.htmlspecialchars($word['keyword']).'</label></span> ';
+					foreach ($word['childs'] as $id => $word)
+					{
+						$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['keyword'.$id.'|'.$word['parent']]) && $_POST['keyword'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="keyword'.$id.'">'.htmlspecialchars($word['keyword']).'</label></span> ';
+					}
 				}
 			}
 

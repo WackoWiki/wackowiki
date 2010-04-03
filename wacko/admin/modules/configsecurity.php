@@ -25,7 +25,7 @@ function admin_configsecurity(&$engine, &$module)
 	<br />
 <?php
 	// update settings
-	if ($_POST['action'] == 'update')
+	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		$config['allow_registration']			= (int)$_POST['allow_registration'];
 		$config['captcha_new_comment']			= (int)$_POST['captcha_new_comment'];

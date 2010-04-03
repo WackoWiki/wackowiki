@@ -1,6 +1,8 @@
 <div id="page">
 <?php
 
+$comment_on_id = "";
+
 // obviously do not allow to remove non-existent pages
 if (!$this->page) $this->Redirect($this->href());
 
