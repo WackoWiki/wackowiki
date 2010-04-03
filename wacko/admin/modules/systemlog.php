@@ -19,12 +19,12 @@ function admin_systemlog(&$engine, &$module)
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 <?php
-	if ($_POST['reset'])
+	if (isset($_POST['reset']))
 	{
 		$engine->Redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'])));
 	}
 
-	if ($_POST['update'])
+	if (isset($_POST['update']))
 	{
 		// level filtering
 		switch ($_POST['level_mod'])
@@ -45,12 +45,12 @@ function admin_systemlog(&$engine, &$module)
 	}
 
 	// set time ordering
-	if ($_GET['order'] == 'time_asc')
+	if (isset($_GET['order']) && $_GET['order'] == 'time_asc')
 	{
 		$order		= 'ORDER BY l.log_time ASC ';
 		$ordertime	= 'time_desc';
 	}
-	else if ($_GET['order'] == 'time_desc')
+	else if (isset($_GET['order']) && $_GET['order'] == 'time_desc')
 	{
 		$order		= 'ORDER BY l.log_time DESC ';
 		$ordertime	= 'time_asc';
@@ -61,12 +61,12 @@ function admin_systemlog(&$engine, &$module)
 	}
 
 	// set level ordering
-	if ($_GET['order'] == 'level_asc')
+	if (isset($_GET['order']) && $_GET['order'] == 'level_asc')
 	{
 		$order		= 'ORDER BY l.level DESC ';		// we make level sorting
 		$orderlevel	= 'level_desc';					// in reverse orber because
 	}												// higher level is denoted
-	else if ($_GET['order'] == 'level_desc')		// by lower value (e.g.
+	else if (isset($_GET['order']) && $_GET['order'] == 'level_desc')		// by lower value (e.g.
 	{												// 1 = critical, 2 = highest,
 		$order		= 'ORDER BY l.level ASC ';		// and so on)
 		$orderlevel	= 'level_asc';
@@ -77,11 +77,11 @@ function admin_systemlog(&$engine, &$module)
 	}
 
 	// filter by username or user ip
-	if ($_GET['user'])
+	if (isset($_GET['user']))
 	{
 		$where = "WHERE u.user_name = '".quote($engine->dblink, $_GET['user'])."' ";
 	}
-	else if ($_GET['ip'])
+	else if (isset($_GET['ip']))
 	{
 		$where = "WHERE l.ip = '".quote($engine->dblink, $_GET['ip'])."' ";
 	}
@@ -98,7 +98,7 @@ function admin_systemlog(&$engine, &$module)
 		"FROM {$engine->config['table_prefix']}log ".
 		( $where ? $where : 'WHERE level <= '.(int)$level.' ' ));
 
-	$pagination	= $engine->Pagination($count['n'], $limit, 'p', 'mode=systemlog&order='.htmlspecialchars($_GET['order']), '', 'admin.php');
+	$pagination	= $engine->Pagination($count['n'], $limit, 'p', 'mode=systemlog&order='.htmlspecialchars(isset($_GET['order']) && $_GET['order']), '', 'admin.php');
 
 	$log = $engine->LoadAll(
 		"SELECT l.log_id, l.log_time, l.level, l.message, u.user_name as user, l.ip ".
@@ -114,9 +114,9 @@ function admin_systemlog(&$engine, &$module)
 			<h4>Filter events by criteria:</h4><br />
 			Level
 			<select name="level_mod">
-				<option value="not_lower"<?php echo ( !$_POST['level_mod'] || $_POST['level_mod'] == 'not_lower' ? ' selected="selected"' : '' ); ?>>not less than</option>
-				<option value="not_higher"<?php echo ( $_POST['level_mod'] == 'not_higher' ? ' selected="selected"' : '' ); ?>>not higher than</option>
-				<option value="equal"<?php echo ( $_POST['level_mod'] == 'equal' ? ' selected="selected"' : '' ); ?>>corresponds</option>
+				<option value="not_lower"<?php echo ( !isset($_POST['level_mod']) || (isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_lower') ? ' selected="selected"' : '' ); ?>>not less than</option>
+				<option value="not_higher"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_higher' ? ' selected="selected"' : '' ); ?>>not higher than</option>
+				<option value="equal"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'equal' ? ' selected="selected"' : '' ); ?>>corresponds</option>
 			</select>
 			<select name="level">
 <?php
@@ -130,7 +130,7 @@ function admin_systemlog(&$engine, &$module)
 			<input name="update" id="submit" type="submit" value="update" />
 			<input name="reset" id="submit" type="submit" value="reset" />
 		</div>
-		<?php echo '<div class="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '&nbsp;' ).'</div>'."\n"; ?>
+		<?php echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n"; ?>
 		<table border="0" cellspacing="5" cellpadding="3" class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>
@@ -188,7 +188,7 @@ function admin_systemlog(&$engine, &$module)
 	}
 ?>
 		</table>
-		<?php echo '<div class="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '' ).'</div>'."\n"; ?>
+		<?php echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</div>'."\n"; ?>
 	</form>
 <?php
 }

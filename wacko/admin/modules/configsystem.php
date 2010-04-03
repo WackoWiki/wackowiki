@@ -26,7 +26,7 @@ function admin_configsystem(&$engine, &$module)
 <?php
 	// update settings
 
-	if ($_POST['action'] == 'update')
+	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		$config['debug']			= (int)$_POST['debug'];
 		$config['debug_sql_threshold']			= (float)$_POST['debug_sql_threshold'];

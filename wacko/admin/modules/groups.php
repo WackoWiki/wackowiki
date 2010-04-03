@@ -36,7 +36,7 @@ function admin_groups(&$engine, &$module)
 	else
 	{
 		// get group
-		if ($_GET['group_id'] || $_POST['addmember']|| $_POST['removemember'])
+		if (isset($_GET['group_id']) || isset($_POST['addmember'])|| isset($_POST['removemember']))
 		{
 			$group_id = ($_GET['group_id'] ? $_GET['group_id'] : $_POST['group_id']);
 
@@ -294,7 +294,7 @@ function admin_groups(&$engine, &$module)
 	/////////////////////////////////////////////
 
 	// get group
-	if ($_GET['group_id'] || $_POST['group_id'])
+	if (isset($_GET['group_id']) || isset($_POST['group_id']))
 	{
 		$group = $engine->LoadSingle(
 			"SELECT group_id, moderator, group_name FROM {$engine->config['table_prefix']}groups ".
@@ -346,12 +346,12 @@ function admin_groups(&$engine, &$module)
 	else
 	{
 		// set created ordering
-		if ($_GET['order'] == 'created_asc')
+		if (isset($_GET['order']) && $_GET['order'] == 'created_asc')
 		{
 			$order		= 'ORDER BY g.created ASC ';
 			$created	= 'created_desc';
 		}
-		else if ($_GET['order'] == 'created_desc')
+		else if (isset($_GET['order']) && $_GET['order'] == 'created_desc')
 		{
 			$order		= 'ORDER BY g.created DESC ';
 			$created	= 'created_asc';
@@ -362,12 +362,12 @@ function admin_groups(&$engine, &$module)
 		}
 
 		// set group ordering
-		if ($_GET['order'] == 'group_asc')
+		if (isset($_GET['order']) && $_GET['order'] == 'group_asc')
 		{
 			$order		= 'ORDER BY g.group_name DESC ';
 			$ordergroup	= 'user_desc';
 		}
-		else if ($_GET['order'] == 'group_desc')
+		else if (isset($_GET['order']) && $_GET['order'] == 'group_desc')
 		{
 			$order		= 'ORDER BY g.group_name ASC ';
 			$ordergroup	= 'group_asc';
@@ -378,7 +378,7 @@ function admin_groups(&$engine, &$module)
 		}
 
 		// filter by lang
-		if ($_GET['moderator'])
+		if (isset($_GET['moderator']))
 		{
 			$where = "WHERE g.moderator = '".quote($engine->dblink, $_GET['moderator'])."' ";
 		}

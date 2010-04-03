@@ -36,7 +36,7 @@ function admin_users(&$engine, &$module)
 	else
 	{
 		// get user
-		if ($_POST['id'])
+		if (isset($_POST['id']))
 		{
 			$user = $engine->LoadSingle(
 				"SELECT user_id, user_name, real_name, email FROM {$engine->config['table_prefix']}users ".
@@ -199,7 +199,7 @@ function admin_users(&$engine, &$module)
 <?php
 
 	// get user
-	if ($_GET['user_id'] )
+	if (isset($_GET['user_id']))
 	{
 		// user data
 		echo '';
@@ -208,12 +208,12 @@ function admin_users(&$engine, &$module)
 	else
 	{
 		// set signuptime ordering
-		if ($_GET['order'] == 'signup_asc')
+		if (isset($_GET['order']) && $_GET['order'] == 'signup_asc')
 		{
 			$order		= 'ORDER BY signup_time ASC ';
 			$signup_time	= 'signup_desc';
 		}
-		else if ($_GET['order'] == 'signup_desc')
+		else if (isset($_GET['order']) && $_GET['order'] == 'signup_desc')
 		{
 			$order		= 'ORDER BY signup_time DESC ';
 			$signup_time	= 'signup_asc';
@@ -224,12 +224,12 @@ function admin_users(&$engine, &$module)
 		}
 
 		// set sessiontime ordering
-		if ($_GET['order'] == 'session_asc')
+		if (isset($_GET['order']) && $_GET['order'] == 'session_asc')
 		{
 			$order		= 'ORDER BY session_time ASC ';
 			$session_time	= 'session_desc';
 		}
-		else if ($_GET['order'] == 'session_desc')
+		else if (isset($_GET['order']) && $_GET['order'] == 'session_desc')
 		{
 			$order		= 'ORDER BY session_time DESC ';
 			$session_time	= 'session_asc';
@@ -240,12 +240,12 @@ function admin_users(&$engine, &$module)
 		}
 
 		// set total_pages ordering
-		if ($_GET['order'] == 'total_pages_asc')
+		if (isset($_GET['order']) && $_GET['order'] == 'total_pages_asc')
 		{
 			$order		= 'ORDER BY total_pages ASC ';
 			$orderpages	= 'total_pages_desc';
 		}
-		else if ($_GET['order'] == 'total_pages_desc')
+		else if (isset($_GET['order']) && $_GET['order'] == 'total_pages_desc')
 		{
 			$order		= 'ORDER BY total_pages DESC ';
 			$orderpages	= 'total_pages_asc';
@@ -256,12 +256,12 @@ function admin_users(&$engine, &$module)
 		}
 
 		// set total_comments ordering
-		if ($_GET['order'] == 'total_comments_asc')
+		if (isset($_GET['order']) && $_GET['order'] == 'total_comments_asc')
 		{
 			$order		= 'ORDER BY total_comments ASC ';
 			$ordercomments	= 'total_comments_desc';
 		}
-		else if ($_GET['order'] == 'total_comments_desc')
+		else if (isset($_GET['order']) && $_GET['order'] == 'total_comments_desc')
 		{
 			$order		= 'ORDER BY total_comments DESC ';
 			$ordercomments	= 'total_comments_asc';
@@ -272,12 +272,12 @@ function admin_users(&$engine, &$module)
 		}
 
 		// set total_revisions ordering
-		if ($_GET['order'] == 'total_revisions_asc')
+		if (isset($_GET['order']) && $_GET['order'] == 'total_revisions_asc')
 		{
 			$order		= 'ORDER BY total_revisions ASC ';
 			$orderrevisions	= 'total_revisions_desc';
 		}
-		else if ($_GET['order'] == 'total_revisions_desc')
+		else if (isset($_GET['order']) && $_GET['order'] == 'total_revisions_desc')
 		{
 			$order		= 'ORDER BY total_revisions DESC ';
 			$orderrevisions	= 'total_revisions_asc';
@@ -288,12 +288,12 @@ function admin_users(&$engine, &$module)
 		}
 
 		// set user_name ordering
-		if ($_GET['order'] == 'user_asc')
+		if (isset($_GET['order']) && $_GET['order'] == 'user_asc')
 		{
 			$order		= 'ORDER BY user_name DESC ';
 			$orderuser	= 'user_desc';
 		}
-		else if ($_GET['order'] == 'user_desc')
+		else if (isset($_GET['order']) && $_GET['order'] == 'user_desc')
 		{
 			$order		= 'ORDER BY user_name ASC ';
 			$orderuser	= 'user_asc';
@@ -304,12 +304,12 @@ function admin_users(&$engine, &$module)
 		}
 
 		// set real_name ordering
-		if ($_GET['order'] == 'name_asc')
+		if (isset($_GET['order']) && $_GET['order'] == 'name_asc')
 		{
 			$order		= 'ORDER BY real_name DESC ';
 			$ordername	= 'name_desc';
 		}
-		else if ($_GET['order'] == 'name_desc')
+		else if (isset($_GET['order']) && $_GET['order'] == 'name_desc')
 		{
 			$order		= 'ORDER BY real_name ASC ';
 			$ordername	= 'name_asc';
@@ -320,7 +320,7 @@ function admin_users(&$engine, &$module)
 		}
 
 		// filter by lang
-		if ($_GET['lang'])
+		if (isset($_GET['lang']))
 		{
 			$where = "WHERE lang = '".quote($engine->dblink, $_GET['lang'])."' ";
 		}

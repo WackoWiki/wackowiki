@@ -1,6 +1,7 @@
 <div id="page">
 <?php
 
+$max = "";
 $output = "";
 
 // redirect to show method if page don't exists

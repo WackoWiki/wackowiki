@@ -21,7 +21,7 @@ function admin_configbasic(&$engine, &$module)
 	<br />
 <?php
 	// update settings
-	if ($_POST['action'] == 'update')
+	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		$config['wacko_name']				= (string)$_POST['wacko_name'];
 		$config['wacko_desc']				= (string)$_POST['wacko_desc'];

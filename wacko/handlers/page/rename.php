@@ -29,11 +29,11 @@ if ($registered
 	}
 	else
 	{
-		if ($_POST["newname"] && $_POST["rename"] == "1")
+		if (isset($_POST["newname"]) && $_POST["rename"] == "1")
 		{
 			// rename or massrename
 			$need_massrename = 0;
-			if ($_POST["massrename"] == "on")  $need_massrename = 1;
+			if ($_POST["massrename"] == "on") $need_massrename = 1;
 
 			// rename
 			if ($need_massrename == 0)

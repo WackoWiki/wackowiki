@@ -24,7 +24,7 @@ function admin_lock(&$engine, &$module)
 	$directories	= & $module['vars'][1];
 
 	// (un)lock website
-	if ($_POST['action'] == 'lock')
+	if (isset($_POST['action']) && $_POST['action'] == 'lock')
 	{
 		$access	= $init->IsLocked();
 		$file	= fopen('lock', 'w');
@@ -44,7 +44,7 @@ function admin_lock(&$engine, &$module)
 		$engine->Redirect('admin.php');
 	}
 	// clear cache
-	else if ($_POST['action'] == 'cache')
+	else if (isset($_POST['action']) && $_POST['action'] == 'cache')
 	{
 		// pages
 		$handle = opendir(rtrim($engine->config['cache_dir'].CACHE_PAGE_DIR, '/'));
@@ -105,7 +105,7 @@ function admin_lock(&$engine, &$module)
 		<table border="0" cellspacing="1" cellpadding="4" style="max-width:200px" class="formation">
 			<tr>
 				<td class="label" style="white-space:nowrap"><?php echo $engine->GetTranslation("ClearCache");?></td>
-				<td align="center"><?php  echo ($_POST['action'] == 'cache' ? $engine->GetTranslation("CacheCleared") : '<input id="submit" type="submit" value="clean" />');?></td>
+				<td align="center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->GetTranslation("CacheCleared") : '<input id="submit" type="submit" value="clean" />');?></td>
 			</tr>
 		</table>
 	</form>

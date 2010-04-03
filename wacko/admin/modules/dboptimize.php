@@ -19,10 +19,10 @@ function admin_dboptimize(&$engine, &$module)
 {
 	// import passed variables and objects
 	$tables	= & $module['vars'][0];
-	
+
 	// optimizatin scheme
-	if ($_GET['all'] == 1) $scheme['all'] = 1;
-	
+	if (isset($_GET['all']) && $_GET['all'] == 1) $scheme['all'] = 1;
+
 	$getstr = '';
 	if (is_array($scheme))
 	{
@@ -44,10 +44,10 @@ function admin_dboptimize(&$engine, &$module)
 		{
 			if ($key == 'table') $elements[] = $val;
 		}
-		
+
 		$sql = implode(",\n\t", $elements);
 		$sql = "OPTIMIZE TABLE $sql";
-		
+
 		$engine->Query($sql);
 
 		$engine->Log(1, 'Optimize database');
@@ -77,7 +77,7 @@ function admin_dboptimize(&$engine, &$module)
 				</tr>
 <?php
 		$results = $engine->LoadAll("SHOW TABLE STATUS FROM {$engine->config['database_database']}");
-		
+
 		foreach ($results as $table)
 		{
 			foreach ($tables as $wtable)

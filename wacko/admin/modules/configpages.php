@@ -21,7 +21,7 @@ function admin_configpages(&$engine, &$module)
 	<br />
 <?php
 	// update settings
-	if ($_POST['action'] == 'update')
+	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		$config['forum_cluster']		= trim((string)$_POST['forum_cluster'], '/');
 		$config['forum_topics']			= (int)$_POST['forum_topics'];

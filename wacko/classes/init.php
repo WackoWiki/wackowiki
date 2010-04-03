@@ -248,7 +248,7 @@ class Init
 					"owners_can_change_keywords" => 1,
 					"remove_onlyadmins" => 0,
 					"owners_can_remove_comments" => 1,
-					"store_deleted_pages" => 0,
+					"store_deleted_pages" => 1,
 					"default_rename_redirect" => 1,
 
 					"allow_registration" => 1,

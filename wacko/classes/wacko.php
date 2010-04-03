@@ -942,7 +942,7 @@ class Wacko
 	function LoadPagesLinkingTo($tag, $for = "")
 	{
 		return $this->LoadAll(
-			"SELECT p.tag AS tag ".
+			"SELECT p.page_id, p.tag AS tag ".
 			"FROM ".$this->config["table_prefix"]."links l ".
 				"INNER JOIN ".$this->config["table_prefix"]."pages p ON (p.page_id = l.from_page_id) ".
 			"WHERE ".($for
@@ -2915,7 +2915,7 @@ class Wacko
 		if (!$user = $this->GetUser())
 			return false;
 
-		return ($user["options"]["show_files"] == "1");
+		return (isset($user["options"]["show_files"]) && $user["options"]["show_files"] == "1");
 	}
 
 	// Returns boolean indicating if the current user is allowed to see comments at all
