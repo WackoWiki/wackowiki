@@ -207,12 +207,17 @@ else if ($user = $this->GetUser())
 	<tr>
 	<th class="form_left" scope="row"><label for="lang"><?php echo $this->GetTranslation("YourLanguage");?></label></th>
 	<td class="form_right"><select id="lang" name="lang">
-	<option value=""></option>
 	<?php
 	$langs = $this->AvailableLanguages();
 	for ($i = 0; $i < count($langs); $i++)
 	{
-		echo "<option value=\"".$langs[$i]."\" ".($user["lang"] == $langs[$i] ? " selected=\"selected\"" : "").">".$langs[$i]."</option>\n";
+		echo "<option value=\"".$langs[$i]."\" ".
+			($user["lang"] == $langs[$i]
+				? " selected=\"selected\""
+				: (!isset($user["lang"]) && $this->config["language"] == $langs[$i]
+					? "selected=\"selected\""
+					: "")
+			).">".$langs[$i]."</option>\n";
 	}
 	?>
 </select></td>
@@ -220,12 +225,18 @@ else if ($user = $this->GetUser())
 	<tr>
 		<th class="form_left" scope="row"><label for="theme"><?php echo $this->GetTranslation("ChooseTheme");?></label></th>
 		<td class="form_right"><select id="theme" name="theme">
-		<option value=""></option>
+
 <?php
 	$themes = $this->AvailableThemes();
 	for ($i = 0; $i < count($themes); $i++)
 	{
-		echo '<option value="'.$themes[$i].'" '.(isset($user["options"]["theme"]) && $user["options"]["theme"] == $themes[$i] ? "selected=\"selected\"" : "").'>'.$themes[$i]."</option>\n";
+		echo '<option value="'.$themes[$i].'" '.
+			(isset($user["options"]["theme"]) && $user["options"]["theme"] == $themes[$i]
+				? "selected=\"selected\""
+				: ($this->config["theme"] == $themes[$i]
+					? "selected=\"selected\""
+					: "")
+			).">".$themes[$i]."</option>\n";
 	}
 	?>
 		</select></td>
