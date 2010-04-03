@@ -5,6 +5,7 @@ $name = "";
 $email = "";
 $password = "";
 $confpassword = "";
+$error = "";
 
 // reconnect securely in ssl mode
 if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
@@ -13,7 +14,7 @@ if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
 }
 
 // is user trying to confirm email, login or register?
-if ($_GET["confirm"])
+if (isset($_GET["confirm"]))
 {
 	if ($temp = $this->LoadSingle(
 		"SELECT user_name, email, email_confirm ".
@@ -37,7 +38,7 @@ if ($_GET["confirm"])
 		echo "<div class=\"info\">".str_replace('%1', $this->ComposeLinkToPage('Settings', '', $this->GetTranslation("SettingsText"), 0), $this->GetTranslation("EmailNotConfirmed"))."</div><br />";
 	}
 }
-else if ($_POST["action"] == "login")
+else if (isset($_POST["action"]) && $_POST["action"] == "login")
 {
 	// create new account if possible
 	if ($this->config["allow_registration"] || $this->IsAdmin())
@@ -198,7 +199,7 @@ else if ($_POST["action"] == "login")
 	}
 }
 
-if (!$_POST["confirm"])
+if (!isset($_POST["confirm"]))
 {
 	if ($this->config["allow_registration"] || $this->IsAdmin())
 	{

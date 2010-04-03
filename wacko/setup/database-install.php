@@ -140,6 +140,7 @@ $configDb['hide_files'] = $config['hide_files'];
 $configDb['hide_index'] = $config['hide_index'];
 $configDb['hide_locked'] = $config['hide_locked'];
 $configDb['hide_rating'] = $config['hide_rating'];
+$configDb['hide_toc'] = $config['hide_toc'];
 $configDb['keep_deleted_time'] = $config['keep_deleted_time'];
 $configDb['language'] = $config['language'];
 $configDb['log_default_show'] = $config['log_default_show'];

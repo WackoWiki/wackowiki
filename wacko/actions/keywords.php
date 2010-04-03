@@ -105,7 +105,7 @@ if (!$ids)
 
 			echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'">' : '' ).htmlspecialchars($word['keyword']).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."";
 
-			if ($word['childs'] == true)
+			if (isset($word['childs']) && $word['childs'] == true)
 			{
 				echo "<ul>\n";
 

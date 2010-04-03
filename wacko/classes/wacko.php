@@ -1651,7 +1651,8 @@ class Wacko
 
 	function GetCookie($name)
 	{
-		return $_COOKIE[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name];
+		if (isset($_COOKIE[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name]))
+			return $_COOKIE[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].$name];
 	}
 
 	// HTTP/REQUEST/LINK RELATED
@@ -1782,7 +1783,7 @@ class Wacko
 	{
 		if (!$text) $text = $this->AddSpaces($tag);
 		//$text = htmlentities($text);
-		if ($_SESSION[$this->config["session_prefix"].'_'."linktracking"] && $track)
+		if (isset($_SESSION[$this->config["session_prefix"].'_'."linktracking"]) && $track)
 			$this->TrackLinkTo($tag);
 
 		return '<a href="'.$this->href($method, $tag).'"'.($title ? ' title="'.$title.'"' : '').'>'.$text.'</a>';
@@ -1794,7 +1795,7 @@ class Wacko
 
 		if (preg_match("/^[\!\.".$this->language["ALPHANUM_P"]."]+$/", $tag))
 		{
-			if ($_SESSION[$this->config["session_prefix"].'_'."linktracking"] && $track)
+			if (isset($_SESSION[$this->config["session_prefix"].'_'."linktracking"]) && $track)
 				// it's a Wiki link!
 				$this->TrackLinkTo($this->UnwrapLink( $tag ));
 		}
@@ -1807,6 +1808,7 @@ class Wacko
 	function Link($tag, $method = "", $text = "", $track = 1, $safe = 0, $linklang = "", $anchorlink = 1)
 	{
 		$class	= '';
+		$icon	= '';
 		$title	= '';
 		$lang	= '';
 		$url	= '';
@@ -2135,7 +2137,7 @@ class Wacko
 			$anchor			= isset($matches[2]) ? $matches[2] : '';
 			$tag			= $unwtag;
 
-			if ($_SESSION[$this->config["session_prefix"].'_'."linktracking"] && $track) $this->TrackLinkTo($tag);
+			if (isset($_SESSION[$this->config["session_prefix"].'_'."linktracking"]) && $track) $this->TrackLinkTo($tag);
 
 			if ($anchorlink && !isset($this->first_inclusion[$supertag]))
 			{
@@ -2229,7 +2231,7 @@ class Wacko
 				{
 					if (!$refnum = $this->numerate_links[$pagelink])
 					{
-						$refnum = "[link".((string)count($this->numerate_links)+1)."]";
+						$refnum = "[link".((string)count($this->numerate_links) + 1)."]";
 						$this->numerate_links[$pagelink] = $refnum;
 					}
 					$res .= "<sup><strong>".$refnum."</strong></sup>";
@@ -2720,9 +2722,11 @@ class Wacko
 	function GetUserSetting($setting, $option = 0, $guest = 0)
 	{
 		if (!$option)
-			return $_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].( !$guest ? "user" : "guest" )][$setting];
+			if (isset($_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].( !$guest ? "user" : "guest" )][$setting]))
+				return $_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].( !$guest ? "user" : "guest" )][$setting];
 		else
-			return $_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].( !$guest ? "user" : "guest" )]["options"][$setting];
+			if (isset($_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].( !$guest ? "user" : "guest" )]["options"][$setting]))
+				return $_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"].( !$guest ? "user" : "guest" )]["options"][$setting];
 	}
 
 	// set/update specific element of user session array
@@ -2814,6 +2818,9 @@ class Wacko
 	// restore username/password/etc from auth cookie
 	function DecomposeAuthCookie($name = 'auth')
 	{
+		$recalc_mac = "";
+		$cookie_mac = "";
+
 		if (true == $cookie = $this->GetCookie($name))
 		{
 			if ($this->config['strong_cookies'] == true)
@@ -3776,7 +3783,7 @@ class Wacko
 			$this->UserAgentLanguage();
 		}
 
-		if (is_array($user) && $user["options"]["theme"])
+		if (is_array($user) && isset($user["options"]["theme"]))
 		{
 			$this->config["theme"]		= $user["options"]["theme"];
 			$this->config["theme_url"]	= $this->config["base_url"]."themes/".$this->config["theme"]."/";
@@ -4607,7 +4614,10 @@ class Wacko
 						: '' ).
 				"GROUP BY keyword_id", 1))
 				{
-					foreach ($_counts as $count) $counts[$count['keyword_id']] = $count['n'];
+					foreach ($_counts as $count)
+					{
+						$counts[$count['keyword_id']] = $count['n'];
+					}
 				}
 			}
 
@@ -4616,14 +4626,14 @@ class Wacko
 			{
 				$keywords[$word['keyword_id']] = array(
 					'parent'	=> $word['parent'],
-					'keyword'		=> $word['keyword'],
-					'n'			=> $counts[$word['keyword_id']]
+					'keyword'	=> $word['keyword'],
+					'n'			=> (isset($counts[$word['keyword_id']]) ? $counts[$word['keyword_id']] : '')
 				);
 			}
 
 			foreach ($keywords as $id => $word)
 			{
-				if ($keywords[$word['parent']])
+				if (isset($keywords[$word['parent']]))
 				{
 					$keywords[$word['parent']]['childs'][$id] = $word;
 					unset($keywords[$id]);

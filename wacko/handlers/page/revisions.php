@@ -1,6 +1,8 @@
 <div id="page">
 <?php
 
+$output = "";
+
 // redirect to show method if page don't exists
 #if (!$this->page) $this->Redirect($this->href("show"));
 
@@ -43,7 +45,7 @@ if ($this->HasAccess("read"))
 		}
 		$output .= "</p>\n<ul class=\"revisions\">\n";
 
-		if ($_GET["show"] == "all")
+		if (isset($_GET["show"]) && $_GET["show"] == "all")
 			$max = 0;
 		else if ($user = $this->GetUser())
 		{

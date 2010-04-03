@@ -146,7 +146,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('MetaToc')."</th>";
 		echo "<td class=\"form_right\">";
 		echo "<input type=\"radio\" id=\"tocOn\" name=\"hide_toc\" value=\"0\"".( !$this->config['hide_toc'] ? "checked=\"checked\"" : "" )."/><label for=\"tocOn\">".$this->GetTranslation('MetaOn')."</label>";
-		echo "<input type=\"radio\" id=\"tocOff\" name=\"hide_toc\" value=\"1\"".( $this->config['hide_toc'] ? "checked=\"checked\"" : "" )."/><label for=\"tocOff\">".$this->GetTranslation('MetaOff')."</label>";
+		echo "<input type=\"radio\" id=\"tocOff\" name=\"hide_toc\" value=\"1\"".( $this->config['hide_toc'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"tocOff\">".$this->GetTranslation('MetaOff')."</label>";
 		echo "</td>";
 		echo "</tr>";
 		echo "<tr class=\"lined\">";
@@ -272,15 +272,15 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 <?php // Remove link (shows only for page owner if allowed)
 	if ($this->UserIsOwner() && !$this->config["remove_onlyadmins"] || $this->IsAdmin())
 	{
-		echo("<li><a href=\"".$this->href("remove")."\">".$this->GetTranslation("SettingsRemove")."</a></li>");
-		echo("<li><a href=\"".$this->href("purge")."\">".$this->GetTranslation("SettingsPurge")."</a></li>");
+		echo("<li><a href=\"".$this->href("remove")."\">".$this->GetTranslation("SettingsRemove")."</a></li>\n");
+		echo("<li><a href=\"".$this->href("purge")."\">".$this->GetTranslation("SettingsPurge")."</a></li>\n");
 	}
 	?>
 <?php
 	// ACL link (shows only if owner is current user or Admin)
 	if ($this->UserIsOwner() || $this->IsAdmin())
 	{
-		echo("<li><a href=\"".$this->href("acls")."\">".$this->GetTranslation("SettingsAcls")."</a></li>");
+		echo("<li><a href=\"".$this->href("acls")."\">".$this->GetTranslation("SettingsAcls")."</a></li>\n");
 	}
 	?>
 	<li><a href="<?php echo $this->href("keywords"); ?>"><?php echo $this->GetTranslation("SettingsKeywords"); ?></a></li>
