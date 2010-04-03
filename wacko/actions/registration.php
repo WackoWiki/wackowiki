@@ -218,14 +218,19 @@ if (!isset($_POST["confirm"]))
 			?>
 <p><label for="lang"><?php echo $this->FormatTranslation("RegistrationLang");?>:</label>
 <select id="lang" name="lang">
-	<!--<option value=""></option>-->
+
 <?php
 $lang = $this->UserAgentLanguage();
 $langs = $this->AvailableLanguages();
 for ($i = 0; $i < count($langs); $i++)
 {
-
-	echo "<option value=\"".$langs[$i]."\"".($lang == $langs[$i] ? "selected=\"selected\"" : "").">".$langs[$i]."</option>\n";
+	echo "<option value=\"".$langs[$i]."\"".
+		($lang == $langs[$i]
+			? "selected=\"selected\""
+			: (!isset($lang) && $this->config["language"] == $langs[$i]
+				? "selected=\"selected\""
+				: "")
+		).">".$langs[$i]."</option>\n";
 }
 ?>
 </select></p>
@@ -234,9 +239,6 @@ for ($i = 0; $i < count($langs); $i++)
 		?>
 <p><label for="name"><?php echo $this->FormatTranslation("RegistrationName");?>:</label>
 <input id="name" name="name" size="27" value="<?php echo htmlspecialchars($name); ?>" /></p>
-
-
-
 <p><label for="password"><?php echo $this->GetTranslation("RegistrationPassword");?>:</label>
 <input type="password" id="password" name="password" size="24" value="<?php echo $password ?>" />
 <?php

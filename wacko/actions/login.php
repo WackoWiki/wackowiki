@@ -47,11 +47,11 @@ else if ($user = $this->GetUser())
 					$output .= "Last visit was recorded <tt>". $this->GetTimeStringFormatted($user['session_time'])."</tt>.<br />";
 				}
 
-				$output .= "The current session ends ";
+				$output .= "The current session ends <tt>";
 
 				$cookie = explode(';', $this->GetCookie("auth"));
 				// session expiry date
-				$output .= $this->GetUnixTimeFormatted($cookie[2]).' ';
+				$output .= $this->GetUnixTimeFormatted($cookie[2]).'</tt> ';
 				// session time left
 				$time_diff = $cookie[2] - time();
 				if ($time_diff > 2 * 24 * 3600)
@@ -68,7 +68,7 @@ else if ($user = $this->GetUser())
 
 				if ($this->config["ssl"] == true)
 				{
-					$output .= "Traffic Protection ". ( $_SERVER["HTTPS"] == "on" ? $_SERVER["SSL_CIPHER"].' ('.$_SERVER["SSL_PROTOCOL"].')' : 'no' ).".";
+					$output .= "Traffic Protection <tt>". ( $_SERVER["HTTPS"] == "on" ? $_SERVER["SSL_CIPHER"].' ('.$_SERVER["SSL_PROTOCOL"].')' : 'no' )."</tt>.";
 				}
 
 				$this->SetMessage($output);
