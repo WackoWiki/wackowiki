@@ -1,5 +1,8 @@
 <?php
 
+$error = "";
+$output = "";
+
 // invoke autocomplete if needed
 if ((isset($_GET["_autocomplete"])) && $_GET["_autocomplete"])
 {
@@ -17,14 +20,14 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 	if ($_POST)
 	{
 		// watch page
-		if ($this->page && $_POST['watchpage'] && $_POST['noid_publication'] != $this->tag && $user && $this->iswatched !== true)
+		if ($this->page && isset($_POST['watchpage']) && $_POST['noid_publication'] != $this->tag && $user && $this->iswatched !== true)
 		{
 			$this->SetWatch($user['user_id'], $this->page['page_id']);
 			$this->iswatched = true;
 		}
 
 		// only if saving:
-		if ($_POST["save"] && $_POST["body"] != "")
+		if (isset($_POST["save"]) && $_POST["body"] != "")
 		{
 			if(isset($_POST["edit_note"]))
 			{
@@ -177,11 +180,12 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 	$this->NoCache();
 
 	// fetch fields
-	if (!$previous = 	$_POST["previous"]) $previous 	= $this->page["modified"];
-	if (!$body = 		$_POST["body"]) 	$body 		= $this->page["body"];
+	$previous = isset($_POST["previous"]) ? $_POST["previous"] : $this->page["modified"];
+	$body = isset($_POST["body"]) ? $_POST["body"] : $this->page["body"];
+	$title = isset($_POST["title"]) ? $_POST["title"] : $this->page["title"];
 	if (isset($_POST["edit_note"]))			$edit_note	= $_POST["edit_note"];
 	if (isset($_POST["minor_edit"]))		$minor_edit	= $_POST["minor_edit"];
-	$title = isset($_POST["title"]) ? $_POST["title"] : $this->page["title"];
+
 
 	// display form
 	if ($error)
@@ -190,7 +194,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 		// "cf" attribute: it is for so called "critical fields" in the form. It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog "You are going to leave this page, but there are some changes you made but not saved yet." Is used by this script to determine which changes it need to monitor.
 		$output .= $this->FormOpen("edit", "", "post", "edit", " cf='true' ");
 
-		if ($_REQUEST["add"])
+		if (isset($_REQUEST["add"]))
 			$output .=	'<input name="lang" type="hidden" value="'.$this->pagelang.'" /><input name="tag" type="hidden" value="'.$this->tag.'" /><input name="add" type="hidden" value="1" />';
 
 			print($output);
@@ -199,7 +203,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			$preview = "";
 
 			// preview?
-			if ($_POST["preview"])
+			if (isset($_POST["preview"]))
 			{
 ?>
 		<input name="save" type="submit" value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />

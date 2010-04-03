@@ -209,6 +209,7 @@ class Init
 					"hide_files" => 0,
 					"hide_rating" => 2,
 
+					"hide_toc" => 0,
 					"hide_index" => 0,
 					"lower_index" => 0,
 					"upper_index" => 0,
@@ -406,13 +407,15 @@ class Init
 					}
 					free_result($result);
 
+					$_groups = "";
+
 					foreach ($groups_array as $user_group_pairs)
 					{
 						// Then we make old fashioned UserName1\nUserName2\n lines for each group
-						$groupz[$user_group_pairs['group_name']] .= $user_group_pairs['user_name'].'\n';
+						$_groups[$user_group_pairs['group_name']] .= $user_group_pairs['user_name'].'\n';
 					}
 
-					foreach ($groupz as $group => $users)
+					foreach ($_groups as $group => $users)
 					{
 						// Finally we put the proper Group => UserName1\nUserName2\n to the config
 						// when we make trim($users, '\n') we get UserName1\nUserName2 without trailing '\n'

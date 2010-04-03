@@ -13,6 +13,8 @@
 <br />
 <?php
 
+$selected = "";
+
 // redirect to show method if page don't exists
 if (!$this->page) $this->Redirect($this->href("show"));
 
@@ -38,10 +40,11 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	else if ($this->IsAdmin() || $this->config['owners_can_change_keywords'] == true)
 	{
 		// get keyword
-		if ($_POST['id'])
+		if (isset($_POST['id']))
 		{
 			$word = $this->LoadSingle(
-				"SELECT keyword_id, parent, keyword FROM {$this->config['table_prefix']}keywords ".
+				"SELECT keyword_id, parent, keyword ".
+				"FROM {$this->config['table_prefix']}keywords ".
 				"WHERE keyword_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
 		}
 
@@ -50,7 +53,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		{
 			// do we have identical names?
 			if ($this->LoadSingle(
-			"SELECT keyword_id FROM {$this->config['table_prefix']}keywords ".
+			"SELECT keyword_id ".
+			"FROM {$this->config['table_prefix']}keywords ".
 			"WHERE keyword = '".quote($this->dblink, $_POST['newname'])."' LIMIT 1"))
 			{
 				$this->SetMessage($this->GetTranslation('KeywordsAlreadyExists'));
@@ -78,7 +82,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		{
 			// do we have identical names?
 			if ($this->LoadSingle(
-			"SELECT keyword_id FROM {$this->config['table_prefix']}keywords ".
+			"SELECT keyword_id ".
+			"FROM {$this->config['table_prefix']}keywords ".
 			"WHERE keyword = '".quote($this->dblink, $_POST['newname'])."' AND keyword_id <> '".quote($this->dblink, $_POST['id'])."' LIMIT 1"))
 			{
 				$this->SetMessage($this->GetTranslation('KeywordsAlreadyExists'));
@@ -112,7 +117,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			else
 			{
 				$parent = $this->LoadSingle(
-					"SELECT parent, keyword FROM {$this->config['table_prefix']}keywords ".
+					"SELECT parent, keyword ".
+					"FROM {$this->config['table_prefix']}keywords ".
 					"WHERE keyword_id = '".quote($this->dblink, $_POST['parent'])."' LIMIT 1");
 
 				if ($parent['parent'] == 0)
@@ -161,7 +167,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 
 	// get currently selected keyword_ids
 	$_selected = $this->LoadAll(
-				"SELECT keyword_id FROM {$this->config['table_prefix']}keywords_pages ".
+				"SELECT keyword_id ".
+				"FROM {$this->config['table_prefix']}keywords_pages ".
 				"WHERE page_id = '".$this->page['page_id']."'");
 
 	// exploding keywords into array
@@ -187,7 +194,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			if ($_POST['change'] || $_POST['id'])
 			{
 				$word = $this->LoadSingle(
-					"SELECT keyword_id, parent, keyword FROM {$this->config['table_prefix']}keywords ".
+					"SELECT keyword_id, parent, keyword ".
+					"FROM {$this->config['table_prefix']}keywords ".
 					"WHERE keyword_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1");
 				$group = ( $word['parent'] == 0 ? $word['keyword_id'] : $group = $word['parent'] );
 			}
@@ -290,19 +298,26 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	// print keywords list
 	if (is_array($keywords))
 	{
+		$i = "";
+
 		foreach ($keywords as $id => $word)
 		{
 			# if ($n++ > 0) echo '<hr />';
 			echo ($this->IsAdmin() || $this->config['owners_can_change_keywords'] == true ? '<input type="radio" name="change" value="'.$id.'" />' : '').'<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /> <label for="keyword'.$id.'"><strong>'.htmlspecialchars($word['keyword']).'</strong></label>'."\n";
 
-			if ($word['childs'] == true) foreach ($word['childs'] as $id => $word)
+			if (isset($word['childs']) && $word['childs'] == true)
 			{
-				if ($i++ < 1) echo '<br /><div class="indent">';
-				echo '<span class="nobr">'.($this->IsAdmin() || $this->config['owners_can_change_keywords'] == true ? '<input type="radio" name="change" value="'.$id.'" />' : '').'<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /><label for="keyword'.$id.'">'.htmlspecialchars($word['keyword']).'</label>&nbsp;&nbsp;&nbsp;</span>'."\n";
+				foreach ($word['childs'] as $id => $word)
+				{
+					if ($i++ < 1) echo '<br /><div class="indent">';
+					echo '<span class="nobr">'.($this->IsAdmin() || $this->config['owners_can_change_keywords'] == true ? '<input type="radio" name="change" value="'.$id.'" />' : '').'<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.(is_array($selected) ? ( in_array($id, $selected) ? ' checked="checked"' : '') : '').' /><label for="keyword'.$id.'">'.htmlspecialchars($word['keyword']).'</label>&nbsp;&nbsp;&nbsp;</span>'."\n";
+				}
 			}
 
-			if ($i > 0) echo "</div>\n";
-			else echo "<br />\n";
+			if ($i > 0)
+				echo "</div>\n";
+			else
+				echo "<br />\n";
 			$i = 0;
 		}
 

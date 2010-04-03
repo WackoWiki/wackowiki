@@ -1,6 +1,8 @@
 <!--notypo-->
 <?php
 
+$error = "";
+
 // reconnect securely in ssl mode
 if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
 {
@@ -8,7 +10,7 @@ if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
 }
 
 // actions
-if ($_GET["action"] == "clearcookies")
+if (isset($_GET["action"]) && $_GET["action"] == "clearcookies")
 {
 	foreach ($_COOKIE as $name => $value)
 	{
@@ -17,7 +19,7 @@ if ($_GET["action"] == "clearcookies")
 	$_POST["action"] = "logout";
 }
 
-if ($_GET["action"] == "logout")
+if (isset($_GET["action"]) && $_GET["action"] == "logout")
 {
 	$this->Log(5, str_replace("%1", $this->GetUserName(), $this->GetTranslation("LogUserLoggedOut")));
 	$this->LogoutUser();
@@ -88,7 +90,7 @@ else
 	$focus = 0;
 
 	// is user trying to log in or register?
-	if ($_POST["action"] == "login")
+	if (isset($_POST["action"]) && $_POST["action"] == "login")
 	{
 		// if user name already exists, check password
 		if ($existingUser = $this->LoadUser($_POST["name"]))
