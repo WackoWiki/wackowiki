@@ -210,8 +210,8 @@ class Wacko
 		}
 		else
 		{
-			$page = $this->LoadPage($unwrapped_tag, "", LOAD_CACHE, LOAD_META);
-			$page_id = $page["page_id"];
+			$page		= $this->LoadPage($unwrapped_tag, "", LOAD_CACHE, LOAD_META);
+			$page_id	= $page["page_id"];
 
 			if (!$page_id) return false;
 		}
@@ -609,8 +609,8 @@ class Wacko
 			{
 				while (($pos = strpos($_tag, $macro)) !== false)
 				{
-					$_tag = substr_replace($_tag, $value, $pos, strlen($macro));
-					$tag = substr_replace($tag, ucfirst($value), $pos, strlen($macro));
+					$_tag	= substr_replace($_tag, $value, $pos, strlen($macro));
+					$tag	= substr_replace($tag, ucfirst($value), $pos, strlen($macro));
 				}
 			}
 		}
@@ -647,12 +647,12 @@ class Wacko
 			return $this->config["meta_description"];
 	}
 
-	function GetTagById($id, $old = 0)
+	function GetTagById($page_id, $old = 0)
 	{
 		$page = $this->LoadSingle(
 			"SELECT tag ".
 			"FROM {$this->config['table_prefix']}".( !$old ? 'pages' : 'revisions' )." ".
-			"WHERE page_id = ".quote($this->dblink, (int)$id)." ".
+			"WHERE page_id = ".quote($this->dblink, (int)$page_id)." ".
 			"LIMIT 1");
 		return $page['tag'];
 	}
@@ -767,7 +767,7 @@ class Wacko
 
 	function CachePage($page, $metadataonly = 0)
 	{
-		$page["supertag"] = $this->NpjTranslit($page["supertag"], TRAN_LOWERCASE, TRAN_DONTLOAD);
+		if (!$page["supertag"]) $page["supertag"] = $this->NpjTranslit($page["tag"], TRAN_LOWERCASE, TRAN_DONTLOAD);
 
 		$this->pageCache[$page["supertag"]] = $page;
 		$this->pageCache[$page["supertag"]]["mdonly"] = $metadataonly;
@@ -878,8 +878,8 @@ class Wacko
 
 	function SetPage($page)
 	{
-		$langlist = $this->AvailableLanguages();
-		$this->page = $page;
+		$langlist	= $this->AvailableLanguages();
+		$this->page	= $page;
 
 		if ($this->page["tag"])
 			$this->tag = $this->page["tag"];
@@ -1233,8 +1233,8 @@ class Wacko
 
 			if ($this->config["paragrafica"] && !$comment_on_id)
 			{
-				$body_r = $this->Format($body_r, "paragrafica");
-				$body_toc = $this->body_toc;
+				$body_r		= $this->Format($body_r, "paragrafica");
+				$body_toc	= $this->body_toc;
 			}
 
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
@@ -1364,10 +1364,9 @@ class Wacko
 				if ($comment_on_id)
 				{
 					// notifying watchers
-					$user_id = $this->GetUserId();
-					$username = $this->GetUserName();
-					$title = $this->GetPageTitle(0, $comment_on_id);
-					$Watchers = $this->LoadAll(
+					$username	= $user;
+					$title		= $this->GetPageTitle(0, $comment_on_id);
+					$Watchers	= $this->LoadAll(
 									"SELECT DISTINCT user_id ".
 									"FROM ".$this->config["table_prefix"]."watches ".
 									"WHERE page_id = '".quote($this->dblink, $comment_on_id)."'");
@@ -1489,11 +1488,11 @@ class Wacko
 					$diff = $this->IncludeBuffered("handlers/page/diff.php", "oops", array("source" => 1));
 
 					// notifying watchers
-					$page_id = $this->GetPageId($tag);
-					$title = $this->GetPageTitle(0, $page_id);
-					$username = $user;
+					$page_id	= $this->GetPageId($tag);
+					$title		= $this->GetPageTitle(0, $page_id);
+					$username	= $user;
 
-					$Watchers = $this->LoadAll(
+					$Watchers	= $this->LoadAll(
 						"SELECT DISTINCT user_id ".
 						"FROM ".$this->config["table_prefix"]."watches"." ".
 						"WHERE page_id = '".quote($this->dblink, $page_id)."'");
@@ -1920,7 +1919,7 @@ class Wacko
 				}
 			}
 
-			if (count($arr) == 2 && $arr[0] == "") // file:/some.zip
+			if (count($arr) == 2 && $arr[0] == "")	// file:/some.zip
 			{
 				//try to find in global storage and return if success
 				$desc = $this->CheckFileExists($arr[1]);
@@ -1937,7 +1936,7 @@ class Wacko
 						return "<img src=\"".$this->config["base_url"].$this->config["upload_path"]."/".$thing."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc["picture_w"]."' height='".$desc["picture_h"]."' />";
 					}
 				}
-				else //404
+				else	//404
 				{
 					$tpl	= "wlocalfile";
 					$title	= "404: /".$this->config["upload_path"].$thing;
@@ -2086,11 +2085,11 @@ class Wacko
 					$lang	= $this->config["language"];
 
 				$this->SetLanguage($lang);
-				$supertag	= $this->NpjTranslit($tag);
+				$supertag	= $this->NpjTranslit($untag);
 			}
 			else
 			{
-				$supertag	= $this->NpjTranslit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD);
+				$supertag	= $this->NpjTranslit($untag, TRAN_LOWERCASE, TRAN_DONTLOAD);
 			}
 
 			$aname = "";
@@ -2220,11 +2219,11 @@ class Wacko
 				$res		= str_replace("{text}",		$text,		$res);
 
 				if (!$text)
-					$text = htmlspecialchars($tag, ENT_NOQUOTES);
+					$text	= htmlspecialchars($tag, ENT_NOQUOTES);
 
 				if ($this->config["youarehere_text"])
 					if ($this->NpjTranslit($tag) == $this->NpjTranslit($this->context[$this->current_context]))
-						$res = str_replace("####", $text, $this->config["youarehere_text"]);
+						$res	= str_replace("####", $text, $this->config["youarehere_text"]);
 
 				// numerated wiki-links. initialize property as an array to make it work
 				if (is_array($this->numerate_links) && $pagelink != $text && $title != $this->GetTranslation("CreatePage"))
@@ -2270,7 +2269,7 @@ class Wacko
 				{
 					if (!$refnum = $this->numerate_links[$url])
 					{
-						$refnum = "[link".((string)count($this->numerate_links)+1)."]";
+						$refnum = "[link".((string)count($this->numerate_links) + 1)."]";
 						$this->numerate_links[$url] = $refnum;
 					}
 					$res .= "<sup><strong>".$refnum."</strong></sup>";
@@ -2443,8 +2442,8 @@ class Wacko
 	{
 		if (!$formMethod) $formMethod = "post";
 
-		$add = isset($_REQUEST["add"]) ? $_REQUEST["add"] : '';
-		$result = "<form action=\"".$this->href($method, $tag, $hrefParam, $add)."\" ".$formMore." method=\"".$formMethod."\" ".($formname ? "name=\"".$formname."\" " : "").">\n";
+		$add	= isset($_REQUEST["add"]) ? $_REQUEST["add"] : '';
+		$result	= "<form action=\"".$this->href($method, $tag, $hrefParam, $add)."\" ".$formMore." method=\"".$formMethod."\" ".($formname ? "name=\"".$formname."\" " : "").">\n";
 
 		if (!$this->config["rewrite_mode"]) $result .= "<input type=\"hidden\" name=\"page\" value=\"".$this->MiniHref($method, $tag, $add)."\" />\n";
 
