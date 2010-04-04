@@ -10,7 +10,7 @@ if ($this->page["comment_on_id"])
 
 if ($user = $this->GetUser())
 {
-	if ($global = $_GET["global"])
+	if ($global = isset($_GET["global"]))
 	{
 		$title = str_replace("%1", $this->href("referrers_sites", "", "global=1"), $this->GetTranslation("ExternalPagesGlobal"));
 		$referrers = $this->LoadReferrers();
