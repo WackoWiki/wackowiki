@@ -275,6 +275,9 @@ class Init
 					"news_cluster" => "",
 					"news_levels" => "",
 
+					"meta_description" => "",
+					"meta_keywords" => "",
+
 					"xml_sitemap" => 0,
 
 					"cache" => 0,
