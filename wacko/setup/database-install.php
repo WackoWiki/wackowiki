@@ -94,6 +94,7 @@ $insert_admin_group_member = "INSERT INTO ".$config["table_prefix"]."groups_memb
 $insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, user_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config["table_prefix"]."users WHERE user_name = '".$config["admin_name"]."' LIMIT 1),'wacko4.gif', 'WackoWiki', NOW(), '1580', '108', '50', 'gif')";
 
 // inserting config values
+$configDb['abuse_email'] = $config['abuse_email'];
 $configDb['admin_email'] = $config['admin_email'];
 $configDb['admin_name'] = $config['admin_name'];
 $configDb['allow_rawhtml'] = $config['allow_rawhtml'];

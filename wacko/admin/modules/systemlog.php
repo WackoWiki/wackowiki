@@ -91,6 +91,8 @@ function admin_systemlog(&$engine, &$module)
 
 	// set default level
 	if (!isset($level)) $level = $engine->config['log_default_show'];
+	if (!isset($where)) $where = "";
+	if (!isset($order)) $order = "";
 
 	// collecting data
 	$count = $engine->LoadSingle(

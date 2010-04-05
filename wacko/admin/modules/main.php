@@ -123,6 +123,9 @@ function admin_lock(&$engine, &$module)
 		</tr>
 <?php
 	$results = $engine->LoadAll("SHOW TABLE STATUS FROM {$engine->config['database_database']}");
+	$tdata = "";
+	$tindex = "";
+	$tfrag = "";
 
 	foreach ($results as $table)
 	{
@@ -165,6 +168,9 @@ function admin_lock(&$engine, &$module)
 		</tr>
 <?php
 	clearstatcache();
+
+	$tfiles = "";
+	$tsize = "";
 
 	foreach ($directories as $dir)
 	{

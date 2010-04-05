@@ -41,7 +41,7 @@ function admin_pollsadmin(&$engine, &$module)
 		else						$year	= $_GET['year'];
 
 		// intent to remove a survey
-		if ($_POST['remove'] && $_POST['id'])
+		if (isset($_POST['remove']) && $_POST['id'])
 		{
 			$remove_id		= $_POST['id'];
 			$title			= $pollsObj->GetPollTitle($remove_id);
@@ -49,13 +49,13 @@ function admin_pollsadmin(&$engine, &$module)
 			$confirmation	= true;
 		}
 		// approvely delete a survey
-		else if ($_POST['delete'] && $_POST['yes'])
+		else if (isset($_POST['delete']) && $_POST['yes'])
 		{
 			$pollsObj->RemovePoll($_POST['delete']);
 			$engine->Log(1, str_replace('%1', (int)$_POST['delete'], $engine->GetTranslation('LogRemovedPoll')));
 		}
 		// stop current survey
-		else if ($_POST['stop'] && $_POST['id'])
+		else if (isset($_POST['stop']) && $_POST['id'])
 		{
 			$engine->Query(
 				"UPDATE {$engine->config['table_prefix']}polls ".
@@ -65,7 +65,7 @@ function admin_pollsadmin(&$engine, &$module)
 			$engine->Log(4, str_replace('%1', (int)$_POST['id'], $engine->GetTranslation('LogPollStopped')));
 		}
 		// reset current survey
-		else if ($_POST['reset'] && $_POST['id'])
+		else if (isset($_POST['reset']) && $_POST['id'])
 		{
 			$engine->Query(	// reset start date
 				"UPDATE {$engine->config['table_prefix']}polls SET ".
@@ -80,7 +80,7 @@ function admin_pollsadmin(&$engine, &$module)
 			$engine->Log(4, str_replace('%1', (int)$_POST['id'], $engine->GetTranslation('LogPollReset')));
 		}
 		// activate new survey
-		else if ($_POST['activate'] && $_POST['id'])
+		else if (isset($_POST['activate']) && $_POST['id'])
 		{
 			$engine->Query(
 				"UPDATE {$engine->config['table_prefix']}polls ".
@@ -90,7 +90,7 @@ function admin_pollsadmin(&$engine, &$module)
 			$engine->Log(4, str_replace('%1', (int)$_POST['id'], $engine->GetTranslation('LogPollStarted')));
 		}
 		// edit/moderate new survey
-		else if ($_POST['edit'] && $_POST['id'])
+		else if (isset($_POST['edit']) && $_POST['id'])
 		{
 			$edit_id		= $_POST['id'];
 			$header			= $pollsObj->GetPollTitle($edit_id);
@@ -98,7 +98,7 @@ function admin_pollsadmin(&$engine, &$module)
 				$moderation	= true;
 		}
 		// continued moderation
-		else if ($_POST['moderation'])
+		else if (isset($_POST['moderation']))
 		{
 			$moderation = true;
 		}
@@ -110,7 +110,7 @@ function admin_pollsadmin(&$engine, &$module)
 	if ($admin === true && isset($install) === false)
 	{
 		// show poll results
-		if ($_GET['poll'] && $_GET['results'] == 1)
+		if (isset($_GET['poll']) && $_GET['results'] == 1)
 		{
 			echo $pollsObj->ShowPollResults($_GET['poll']);
 		}
