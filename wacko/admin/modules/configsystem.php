@@ -35,7 +35,7 @@ function admin_configsystem(&$engine, &$module)
 		$config['cache_ttl']			= (int)$_POST['cache_ttl'];
 		$config['cache_sql']			= (int)$_POST['cache_sql'];
 		$config['cache_sql_ttl']			= (int)$_POST['cache_sql_ttl'];
-		$config['bbcode']			= (int)$_POST['bbcode'];
+		// $config['bbcode']			= (int)$_POST['bbcode'];
 		$config['default_typografica']			= (int)$_POST['default_typografica'];
 		$config['paragrafica']			= (int)$_POST['paragrafica'];
 		$config['allow_rawhtml']			= (int)$_POST['allow_rawhtml'];
@@ -145,10 +145,10 @@ function admin_configsystem(&$engine, &$module)
 					Text Handler
 				</th>
 			</tr>
-			<tr>
+			<!--<tr>
 				<td class="label"><label for="bbcode"><strong>Parser BBCode:</strong></label></td>
 				<td><input type="checkbox" id="bbcode" name="bbcode" value="1"<?php echo ( $engine->config['bbcode'] ? ' checked="checked"' : '' );?> /></td>
-			</tr>
+			</tr>-->
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>

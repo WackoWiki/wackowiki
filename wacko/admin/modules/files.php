@@ -22,7 +22,7 @@ function admin_files(&$engine, &$module)
 <?php
 	$user = strtolower($engine->GetUserId());
 
-	if ($_GET['remove']) // show the form
+	if (isset($_GET['remove'])) // show the form
 	{
 		$what = $engine->LoadAll(
 			"SELECT user_id, upload_id, filename, filesize, description ".
@@ -54,7 +54,7 @@ function admin_files(&$engine, &$module)
 		return true;
 
 	}
-	else if ($_POST['remove']) // delete
+	else if (isset($_POST['remove'])) // delete
 	{
 		// 1. where, existence
 		$what = $engine->LoadAll(
