@@ -31,14 +31,6 @@
                            return false;
                         }
 
-                     if (f.elements["config[base_url]"].value.indexOf( "?" ) != -1 && f.elements["config[rewrite_mode]"].value != 0 && f.elements["config[rewrite_mode]"].value != undefined)
-                        {
-                           if (!confirm('<?php echo addcslashes($lang["WarningRewriteMode"],"\n"); ?>'))
-                              {
-                                 return false;
-                              }
-                        }
-
                      return true;
                   }
             // -->
@@ -93,7 +85,12 @@
    <div class="fake_hr_seperator">
       <hr />
    </div>
+<?php
 
+// 4.3rc1 -> 4.3.rc2: remove obsolete appendix 'index.php?page='
+$config['base_url'] = preg_replace("#/[^/]*$#","/",$config['base_url']);
+
+?>
    <h2><?php echo $lang["Base"];?></h2>
    <p class="notop"><?php echo $lang["BaseDesc"];?></p>
    <input type="text" maxlength="1000" name="config[base_url]" value="<?php echo $config["base_url"] ?>" class="text_input" style="width: 907px;" />
