@@ -5,7 +5,7 @@ if (!isset($root))
 else
 	$root = $this->UnwrapLink($root);
 
-if ($linking_to = $_GET["linking_to"])
+if ($linking_to = (isset($_GET["linking_to"]) ? $_GET["linking_to"] : ""))
 {
 	if ($pages = $this->LoadPagesLinkingTo($linking_to, $root))
 	{
@@ -28,7 +28,22 @@ if ($linking_to = $_GET["linking_to"])
 }
 else
 {
-	if ($pages = $this->LoadWantedPages($root))
+	$for = $root;
+	$pref = $this->config["table_prefix"];
+	$sql = "SELECT DISTINCT l.to_tag AS wanted_tag ".
+		"FROM ".$pref."links l ".
+			"LEFT JOIN ".$pref."pages p ON ".
+			"((l.to_tag = p.tag ".
+				"AND l.to_supertag = '') ".
+				"OR l.to_supertag = p.supertag) ".
+		"WHERE ".
+			($for
+				? "l.to_tag LIKE '".quote($this->dblink, $for)."/%' AND "
+				: "").
+		"p.tag is NULL GROUP BY wanted_tag ".
+		"ORDER BY wanted_tag ASC";
+
+	if ($pages = $this->LoadAll($sql))
 	{
 		if (is_array($pages))
 		{

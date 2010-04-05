@@ -2,6 +2,7 @@
 <?php
 
 $error = "";
+$output = "";
 
 // reconnect securely in ssl mode
 if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
