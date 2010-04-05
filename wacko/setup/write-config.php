@@ -55,6 +55,7 @@ $configFile['action_path'] = $config['action_path'];
 $configFile['handler_path'] = $config['handler_path'];
 $configFile['upload_path'] = $config['upload_path'];
 $configFile['upload_path_per_page'] = $config['upload_path_per_page'];
+$configFile['upload_path_backup'] = $config['upload_path_backup'];
 $configFile['header_action'] = $config['header_action'];
 $configFile['footer_action'] = $config['footer_action'];
 // version
