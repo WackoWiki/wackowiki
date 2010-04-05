@@ -1041,43 +1041,6 @@ class Wacko
 		}
 	}
 
-	function LoadWantedPages($for = "")
-	{
-		$pref = $this->config["table_prefix"];
-		$sql = "SELECT DISTINCT l.to_tag AS wanted_tag ".
-		"FROM ".$pref."links l ".
-			"LEFT JOIN ".$pref."pages p ON ".
-			"((l.to_tag = p.tag ".
-				"AND l.to_supertag = '') ".
-				"OR l.to_supertag = p.supertag) ".
-		"WHERE ".
-			($for
-				? "l.to_tag LIKE '".quote($this->dblink, $for)."/%' AND "
-				: "").
-		"p.tag is NULL GROUP BY wanted_tag ".
-		"ORDER BY wanted_tag ASC";
-		return $this->LoadAll($sql);
-	}
-
-	function LoadOrphanedPages($for = "")
-	{
-		$pref = $this->config["table_prefix"];
-		$sql = "SELECT DISTINCT page_id, tag FROM ".$pref."pages p ".
-			"LEFT JOIN ".$pref."links l ON ".
-			//     $pref."pages.tag = l.to_tag WHERE ".
-			"((l.to_tag = p.tag ".
-				"AND l.to_supertag = '') ".
-				"OR l.to_supertag = p.supertag) ".
-		"WHERE ".
-			($for
-				? "p.tag LIKE '".quote($this->dblink, $for)."/%' AND "
-				: "").
-		"l.to_page_id is NULL AND p.comment_on_id = '0' ".
-		"ORDER BY tag ".
-		"LIMIT 200";
-		return $this->LoadAll($sql);
-	}
-
 	function LoadPageTitles() { return $this->LoadAll("SELECT DISTINCT tag FROM ".$this->config["table_prefix"]."pages ORDER BY tag"); }
 	function LoadAllPagesByTime() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '0' ORDER BY modified DESC, BINARY tag"); }
 
