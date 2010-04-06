@@ -8,7 +8,7 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 	 $this->engine = new Wacko($this->config, $this->dblink); -- at line 571 of init.php
 	 "$this" - was for class Init and its context
 	 for other functions declared outside class Init the class Wacko comes as var $engine
-	 so we can try to ue it (say try because tested only in PHP 5.2.4).
+	 so we can try to use it.
 
 	 Elar9000 (2009.08.16)
 	 */
