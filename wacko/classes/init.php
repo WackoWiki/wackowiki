@@ -62,7 +62,7 @@ define("WACKO_VERSION",					"R4.3.rc2");
 define("XML_HTMLSAX3",					"lib/HTMLSax3/");
 #define('XML_HTMLSAX3',					dirname(__FILE__)."/lib/HTMLSax3/");
 define("ACTIONS4DIFF",					"a, anchor, toc"); //allowed actions in DIFF
-define("PHP_MIN_VERSION",				"5.1.0"); //minimum required PHP version
+define("PHP_MIN_VERSION",				"5.2.0"); //minimum required PHP version
 
 class Init
 {
