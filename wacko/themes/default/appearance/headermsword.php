@@ -6,7 +6,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 <html>
 <head>
 <title><?php echo $this->GetWackoName()." : ".$this->GetPageTag(); ?></title>
-<?php if ($this->GetMethod() != 'show')
+<?php if ($this->method != 'show')
 echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <meta http-equiv="content-type"
 	content="text/html; charset=<?php echo $this->GetCharset(); ?>" />

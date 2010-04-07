@@ -17,7 +17,7 @@ Common header file.
 ?></title>
 <?php
 // We don't need search robots to index subordinate pages
-  if ($this->GetMethod() != 'show' || $this->page["latest"] == "0")
+  if ($this->method != 'show' || $this->page["latest"] == "0")
      echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 ?>
   <meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />

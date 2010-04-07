@@ -1,7 +1,12 @@
 <?php
 
+$where = "";
+$order = "";
+$param = "";
+$usergroups = "";
+
 // display user profile
-if ($_GET['profile'] == true)
+if (isset($_GET['profile']) && $_GET['profile'] == true)
 {
 	// does requested user exists?
 	if (false == $user = $this->LoadUser($_GET['profile']))
@@ -145,7 +150,7 @@ if ($_GET['profile'] == true)
 		if ($this->GetUser())
 		{
 			// decompose reply referrer
-			if ($_GET['ref'] == true)
+			if (isset($_GET['ref']) && $_GET['ref'] == true)
 			{
 				list($_POST['ref'], $_POST['mail_subject']) = explode('@@', base64_decode(rawurldecode($_GET['ref'])), 2);
 				if (substr($_POST['mail_subject'], 0, 3) != 'Re:') $_POST['mail_subject'] = 'Re: '.$_POST['mail_subject'];
@@ -154,7 +159,7 @@ if ($_GET['profile'] == true)
 		<br />
 		<?php echo $this->FormOpen(); ?>
 		<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['user_name']); ?>" />
-		<?php if ($_POST['ref']) echo '<input type="hidden" name="ref" value="'.htmlspecialchars($_POST['ref']).'" />'; ?>
+		<?php if (isset($_POST['ref'])) echo '<input type="hidden" name="ref" value="'.htmlspecialchars($_POST['ref']).'" />'; ?>
 		<table cellspacing="3" class="formation">
 <?php
 			// user must allow incoming messages, and needs confirmed email address set
@@ -165,7 +170,7 @@ if ($_GET['profile'] == true)
 				<td class="label" style="width:50px; white-space:nowrap;"><?php echo $this->GetTranslation('UsersIntercomSubject'); ?>:</td>
 				<td>
 					<input name="mail_subject" value="<?php echo htmlspecialchars($_POST['mail_subject']); ?>" size="60" maxlength="200" />
-					<?php if ($_POST['ref']) echo '&nbsp;&nbsp; <a href="'.$this->href('', '', 'profile='.$user['user_name'].'#contacts').'">'.$this->GetTranslation('UsersIntercomSubjectN').'</a>'; ?>
+					<?php if (isset($_POST['ref'])) echo '&nbsp;&nbsp; <a href="'.$this->href('', '', 'profile='.$user['user_name'].'#contacts').'">'.$this->GetTranslation('UsersIntercomSubjectN').'</a>'; ?>
 				</td>
 			</tr>
 			<tr>
@@ -201,7 +206,7 @@ if ($_GET['profile'] == true)
 		echo '<h2>'.$this->GetTranslation('UsersPages').'</a></h2>'."\n";
 		echo '<div class="indent"><small>'.$this->GetTranslation('UsersOwnedPages').': '.$user['total_pages'].'&nbsp;&nbsp;&nbsp; '.$this->GetTranslation('UsersRevisionsMade').': '.$user['total_revisions']."</small></div><br />\n";
 
-		$pagination = $this->Pagination($user['total_pages'], $limit, 'd', 'profile='.$user['user_name'].'&amp;sort='.( $_GET['sort'] != 'name' ? 'date' : 'name' ).'#documents');
+		$pagination = $this->Pagination($user['total_pages'], $limit, 'd', 'profile='.$user['user_name'].'&amp;sort='.( isset($_GET['sort']) && $_GET['sort'] != 'name' ? 'date' : 'name' ).'#documents');
 
 		if ($user['total_pages'])
 		{
@@ -210,11 +215,11 @@ if ($_GET['profile'] == true)
 				"FROM {$this->config['table_prefix']}pages ".
 				"WHERE owner_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"AND comment_on_id = '0' ".
-				"ORDER BY ".( $_GET['sort'] == 'name' ? 'tag ASC' : 'created DESC' )." ".
+				"ORDER BY ".( isset($_GET['sort']) && $_GET['sort'] == 'name' ? 'tag ASC' : 'created DESC' )." ".
 				"LIMIT {$pagination['offset']}, $limit");
 
 			// sorting and pagination
-			echo '<small>'.( $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=date').'#documents">'.$this->GetTranslation('UsersDocsSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=name').'#documents">'.$this->GetTranslation('UsersDocsSortName').'</a>' ).'</small>'.
+			echo '<small>'.( isset($_GET['sort']) && $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=date').'#documents">'.$this->GetTranslation('UsersDocsSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=name').'#documents">'.$this->GetTranslation('UsersDocsSortName').'</a>' ).'</small>'.
 				 " <span class=\"pagination\">".$pagination['text']."</span>\n";
 
 			// pages list itself
@@ -285,7 +290,7 @@ else
 
 	// defining WHERE and ORDER clauses
 	// $param is passed to the pagination links
-	if ($_GET['user'] == true && strlen($_GET['user']) > 2)
+	if (isset($_GET['user']) && $_GET['user'] == true && strlen($_GET['user']) > 2)
 	{
 		// goto user profile directly if so desired
 		if (isset($_GET['gotoprofile']) && $this->LoadUser($_GET['user']) == true)
@@ -298,32 +303,32 @@ else
 			$param = "user=".htmlspecialchars($_GET['user']);
 		}
 	}
-	else if ($_GET['sort'] == 'name')
+	else if (isset($_GET['sort']) && $_GET['sort'] == 'name')
 	{
 		$order = "ORDER BY user_name ";
 		$param = "sort=".$_GET['sort'];
 	}
-	else if ($_GET['sort'] == 'pages')
+	else if (isset($_GET['sort']) && $_GET['sort'] == 'pages')
 	{
 		$order = "ORDER BY total_pages DESC ";
 		$param = "sort=".$_GET['sort'];
 	}
-	else if ($_GET['sort'] == 'comments')
+	else if (isset($_GET['sort']) && $_GET['sort'] == 'comments')
 	{
 		$order = "ORDER BY total_comments DESC ";
 		$param = "sort=".$_GET['sort'];
 	}
-	else if ($_GET['sort'] == 'revisions')
+	else if (isset($_GET['sort']) && $_GET['sort'] == 'revisions')
 	{
 		$order = "ORDER BY total_revisions DESC ";
 		$param = "sort=".$_GET['sort'];
 	}
-	else if ($_GET['sort'] == 'signup')
+	else if (isset($_GET['sort']) && $_GET['sort'] == 'signup')
 	{
 		$order = "ORDER BY signup_time DESC ";
 		$param = "sort=".$_GET['sort'];
 	}
-	else if ($_GET['sort'] == 'session')
+	else if (isset($_GET['sort']) && $_GET['sort'] == 'session')
 	{
 		$order = "ORDER BY session_time DESC ";
 		$param = "sort=".$_GET['sort'];
@@ -348,7 +353,7 @@ else
 	echo '<table border="0" cellspacing="3" class="formation"><tr><td class="label">';
 	echo $this->FormOpen('', '', 'get');
 	echo $this->GetTranslation('UsersSearch').': </td><td>';
-	echo '<input name="user" maxchars="40" size="40" value="'.htmlspecialchars($_GET['user']).'" /> ';
+	echo '<input name="user" maxchars="40" size="40" value="'.htmlspecialchars(isset($_GET['user']) && $_GET['user']).'" /> ';
 	echo '<input id="submit" type="submit" value="'.$this->GetTranslation('UsersFilter').'" /> ';
 	echo '<input id="button" type="submit" value="'.$this->GetTranslation('UsersOpenProfile').'" name="gotoprofile" />';
 	echo $this->FormClose();
@@ -365,12 +370,12 @@ else
 
 	// list header
 	echo '<tr>'.
-			'<th><a href="'.$this->href('', '', 'sort=name').'">'.$this->GetTranslation('UsersName').( $_GET['sort'] == 'name' || $_REQUEST['user'] == true ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="'.$this->href('', '', 'sort=pages').'">'.$this->GetTranslation('UsersPages').( $_GET['sort'] == 'pages' || $_GET['sort'] == false ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="'.$this->href('', '', 'sort=comments').'">'.$this->GetTranslation('UsersComments').( $_GET['sort'] == 'comments' ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="'.$this->href('', '', 'sort=revisions').'">'.$this->GetTranslation('UsersRevisions').( $_GET['sort'] == 'revisions' ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="'.$this->href('', '', 'sort=signup').'">'.$this->GetTranslation('UsersSignup').( $_GET['sort'] == 'signup' ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="'.$this->href('', '', 'sort=session').'">'.$this->GetTranslation('UsersLastSession').( $_GET['sort'] == 'session' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=name').'">'.$this->GetTranslation('UsersName').( (isset($_GET['sort']) && $_GET['sort'] == 'name') || (isset($_REQUEST['user']) && $_REQUEST['user'] == true) ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=pages').'">'.$this->GetTranslation('UsersPages').( (isset($_GET['sort']) && $_GET['sort'] == 'pages') || (isset($_GET['sort']) && $_GET['sort'] == false) ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=comments').'">'.$this->GetTranslation('UsersComments').( isset($_GET['sort']) && $_GET['sort'] == 'comments' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=revisions').'">'.$this->GetTranslation('UsersRevisions').( isset($_GET['sort']) && $_GET['sort'] == 'revisions' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=signup').'">'.$this->GetTranslation('UsersSignup').( isset($_GET['sort']) && $_GET['sort'] == 'signup' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=session').'">'.$this->GetTranslation('UsersLastSession').( isset($_GET['sort']) && $_GET['sort'] == 'session' ? '&nbsp;&darr;' : '' ).'</a></th>'.
 		"</tr>\n";
 
 	// list entries
