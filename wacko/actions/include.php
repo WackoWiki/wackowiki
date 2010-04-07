@@ -48,7 +48,7 @@ else
 		$strings = preg_replace("/.*<!--action:begin-->a name=\"?$first_anchor\"?<!--action:end-->(.*)<!--action:begin-->a name=\"?$last_anchor\"?<!--action:end-->.*$/is", "\$1", $strings);
 
 		// header
-		if (($this->GetMethod() != "print") && ($nomark != 1) && ($nomark != 2 || $this->HasAccess("write", $page_id)))
+		if (($this->method != "print") && ($nomark != 1) && ($nomark != 2 || $this->HasAccess("write", $page_id)))
 		{
 			echo "<div class=\"include\">"."<div class=\"name\">".$this->Link("/".$inc_page['tag'])."&nbsp;&nbsp;::&nbsp;".
 				"<a href=\"".$this->Href("edit", $inc_page['tag'])."\">".$this->GetTranslation("EditIcon")."</a></div>";
@@ -63,7 +63,7 @@ else
 		$this->StartLinkTracking();
 
 		// footer
-		if (($this->GetMethod() != "print") && ($nomark !=1 ) && ($nomark != 2 || $this->HasAccess("write", $page_id)))
+		if (($this->method != "print") && ($nomark !=1 ) && ($nomark != 2 || $this->HasAccess("write", $page_id)))
 		{
 			echo "<div class=\"name\">".$this->Link("/".$inc_page['tag'])."&nbsp;&nbsp;::&nbsp;".
 				"<a href=\"".$this->Href("edit", $inc_page['tag'])."\">".$this->GetTranslation("EditIcon")."</a></div></div>";

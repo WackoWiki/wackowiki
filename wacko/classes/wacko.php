@@ -198,7 +198,6 @@ class Wacko
 	}
 	function GetPageTime() { return $this->page["modified"]; }
 	function GetPageLastWriter() { return $this->page["user_id"]; }
-	function GetMethod() { return $this->method; }
 	function GetWackoName() { return $this->config["wacko_name"]; }
 	function GetWackoVersion() { return WACKO_VERSION; }
 
@@ -434,7 +433,7 @@ class Wacko
 	{
 		$langlist = $this->AvailableLanguages();
 		//!!!! wrong code, maybe!
-		if ($this->GetMethod() == "edit" && (isset($_GET["add"]) && $_GET["add"] == 1))
+		if ($this->method == "edit" && (isset($_GET["add"]) && $_GET["add"] == 1))
 			if (isset($_REQUEST["lang"]) && $_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
 				$lang = $_REQUEST["lang"];
 			else
