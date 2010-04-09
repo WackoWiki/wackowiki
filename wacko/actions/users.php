@@ -230,6 +230,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				{
 					echo '<small>'.$this->GetTimeStringFormatted($page['created']).'</small>  &mdash; '.$this->Link('/'.$page['tag'], '', $page['title'], 0)."<br />\n";
 
+					$i = 0;
 					if (++$i >= $limit) break 1;
 				}
 			}
@@ -270,6 +271,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				{
 					echo '<small>'.$this->GetTimeStringFormatted($comment['created']).'</small>  &mdash; '.$this->Link('/'.$comment['tag'], '', $this->GetPageTitle(0, $comment['comment_on_id']))."<br />\n";
 
+					$i = 0;
 					if (++$i >= $limit) break 1;
 				}
 			}

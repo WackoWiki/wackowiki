@@ -7,7 +7,7 @@ v2.2.2.
 
 */
 
-// TODO: for default use only red, yello, green, grey maybe blue .($this->object->config["allow_x11colors"] == 1?"x11_colors":"default_colors").
+// TODO: for default use only red, yello, green, grey maybe blue .($this->object->config["allow_x11colors"] == 1 ? "x11_colors" : "default_colors").
 class WackoFormatter
 {
 	var $object;
@@ -244,6 +244,8 @@ class WackoFormatter
 
 	function WackoPreprocess($things)
 	{
+		$formatter = "";
+		$output = "";
 		$thing = $things[1];
 		$wacko = &$this->object;
 		$callback = array( &$this, "wackoPreprocess");

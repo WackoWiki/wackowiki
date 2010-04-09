@@ -1664,7 +1664,7 @@ class Wacko
 
 		$newtag = $tag;
 
-		if (strstr($this->context[$this->current_context], "/"))
+		if (isset($this->context[$this->current_context]) && strstr($this->context[$this->current_context], "/"))
 			$root = preg_replace("/^(.*)\\/([^\\/]+)$/", "$1", $this->context[$this->current_context]);
 		else
 			$root	= "";
@@ -2896,7 +2896,7 @@ class Wacko
 		foreach ($opts as $o)
 		{
 			$params			= explode($this->valueSplitter, trim($o));
-			$b[$params[0]]	= $params[1];
+			$b[$params[0]]	= (isset($params[1]) ? $params[1] : NULL) ;
 		}
 		return $b;
 	}
@@ -3657,7 +3657,7 @@ class Wacko
 		// url lang selection
 		$url	= explode('@@', $tag);
 		$tag	= trim($url[0]);
-		$lang	= trim($url[1]);
+		$lang	= (isset($url[1]) ? trim($url[1]) : NULL);
 
 		if (!trim($tag)) $tag = $this->config["root_page"];
 
