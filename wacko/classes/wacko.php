@@ -214,8 +214,8 @@ class Wacko
 
 			if (!$page_id) return false;
 		}
-
-		if (!($file = $this->filesCache[$page_id][$filename]))
+		$file = (isset($this->filesCache[$page_id][$filename]) ? $this->filesCache[$page_id][$filename] : "");
+		if (!($file))
 		{
 			$what = $this->LoadAll(
 				"SELECT upload_id, filename, filesize, description, picture_w, picture_h, file_ext ".
@@ -411,13 +411,15 @@ class Wacko
 		if ($lang != "")
 		{
 			$this->LoadResource($lang);
-			return (is_array($this->resources[$lang][$name]))
-				? $this->resources[$lang][$name]
-				: ($dounicode
-					? $this->DoUnicodeEntities($this->resources[$lang][$name], $lang)
-					: $this->resources[$lang][$name]);
+			if (isset($this->resources[$lang][$name]))
+				return (is_array($this->resources[$lang][$name]))
+					? $this->resources[$lang][$name]
+					: ($dounicode
+						? $this->DoUnicodeEntities($this->resources[$lang][$name], $lang)
+						: $this->resources[$lang][$name]);
 		}
-		return $this->resource[$name];
+		if (isset($this->resource[$name]))
+			return $this->resource[$name];
 	}
 
 	function FormatTranslation($name, $lang = "")
@@ -2366,7 +2368,8 @@ class Wacko
 
 	function GetInterWikiUrl($name, $tag)
 	{
-		if ($url = $this->interWiki[strtolower($name)])
+		$url = (isset($this->interWiki[strtolower($name)]) ? $this->interWiki[strtolower($name)] : "");
+		if ($url)
 		{
 			// xhtmlisation
 			$url = str_replace("&", "&amp;", $url);
