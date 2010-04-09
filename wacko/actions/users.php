@@ -3,6 +3,7 @@
 $where = "";
 $order = "";
 $param = "";
+$groups = "";
 $usergroups = "";
 
 // display user profile
@@ -169,12 +170,12 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 			<tr>
 				<td class="label" style="width:50px; white-space:nowrap;"><?php echo $this->GetTranslation('UsersIntercomSubject'); ?>:</td>
 				<td>
-					<input name="mail_subject" value="<?php echo htmlspecialchars($_POST['mail_subject']); ?>" size="60" maxlength="200" />
+					<input name="mail_subject" value="<?php echo (isset($_POST['mail_subject']) ? htmlspecialchars($_POST['mail_subject']) : ""); ?>" size="60" maxlength="200" />
 					<?php if (isset($_POST['ref'])) echo '&nbsp;&nbsp; <a href="'.$this->href('', '', 'profile='.$user['user_name'].'#contacts').'">'.$this->GetTranslation('UsersIntercomSubjectN').'</a>'; ?>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea name="mail_body" cols="80" rows="15"><?php echo htmlspecialchars($_POST['mail_body']); ?></textarea></td>
+				<td colspan="2"><textarea name="mail_body" cols="80" rows="15"><?php echo (isset($_POST['mail_body']) ? htmlspecialchars($_POST['mail_body']) : ""); ?></textarea></td>
 			</tr>
 			<tr>
 				<td><input id="submit" type="submit" name="send_pm" value="<?php echo $this->GetTranslation('UsersIntercomSend'); ?>" /></td>
@@ -219,8 +220,9 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				"LIMIT {$pagination['offset']}, $limit");
 
 			// sorting and pagination
-			echo '<small>'.( isset($_GET['sort']) && $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=date').'#documents">'.$this->GetTranslation('UsersDocsSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=name').'#documents">'.$this->GetTranslation('UsersDocsSortName').'</a>' ).'</small>'.
-				 " <span class=\"pagination\">".$pagination['text']."</span>\n";
+			echo '<small>'.( isset($_GET['sort']) && $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=date').'#documents">'.$this->GetTranslation('UsersDocsSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=name').'#documents">'.$this->GetTranslation('UsersDocsSortName').'</a>' ).'</small>';
+			if ((isset($pagination['text'])) && $pagination['text'] == true )
+				echo " <span class=\"pagination\">".$pagination['text']."</span>\n";
 
 			// pages list itself
 			echo '<div>'."\n";
@@ -261,7 +263,8 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				"LIMIT {$pagination['offset']}, $limit");
 
 			// pagination
-			echo "<span class=\"pagination\">".$pagination['text']."</span>\n";
+			if ((isset($pagination['text'])) && $pagination['text'] == true )
+				echo "<span class=\"pagination\">".$pagination['text']."</span>\n";
 
 			// comments list itself
 			echo '<div>'."\n";
@@ -365,7 +368,7 @@ else
 	echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;\">\n";
 
 	// pagination
-	if ($pagination['text'] == true)
+	if ((isset($pagination['text'])) && $pagination['text'] == true )
 	{
 		echo '<tr><td colspan="5"><small><small>'.$pagination['text'].'</small></small></td></tr>'."\n";
 	}
@@ -404,7 +407,7 @@ else
 	}
 
 	// pagination
-	if ($pagination['text'] == true)
+	if ((isset($pagination['text'])) && $pagination['text'] == true )
 	{
 		echo "<tr><td colspan=\"5\"><span class=\"pagination\">".$pagination['text']."</span></td></tr>"."\n";
 	}

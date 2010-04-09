@@ -52,7 +52,7 @@ if ($form)
 	echo $this->FormClose();
 }
 
-if ($phrase == "") $phrase = $_GET["phrase"];
+if ($phrase == "") $phrase = (isset($_GET["phrase"]) ? $_GET["phrase"] : NULL);
 if ($phrase)
 {
 	if ($form) print "<br />";

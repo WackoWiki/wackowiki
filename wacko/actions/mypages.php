@@ -1,6 +1,10 @@
 <?php
 
 // actions/mypages.php
+$bydate = "";
+$max = "";
+$bychange = "";
+$curChar = "";
 
 if ($user_id = $this->GetUserId())
 {
@@ -8,7 +12,7 @@ if ($user_id = $this->GetUserId())
 	else $limit	= 100;
 	$prefix = $this->config['table_prefix'];
 
-	if ($_GET["bydate"] == 1 || $bydate == 1)
+	if ((isset($_GET["bydate"]) && $_GET["bydate"] == 1) || $bydate == 1)
 	{
 		print($this->GetTranslation("ListOwnedPages2"));
 		print("<br />[<a href=\"".$this->href("", "", "mode=mypages")."#list"."\">".
@@ -53,14 +57,15 @@ if ($user_id = $this->GetUserId())
 			}
 			echo "</ul>\n</li>\n</ul>\n";
 			// pagination
-			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			if ((isset($pagination['text'])) && $pagination['text'] == true )
+				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else
 		{
 			echo $this->GetTranslation("NoPagesFound");
 		}
 	}
-	else if ($_GET["bychange"] == 1 || $bychange == 1)
+	else if ((isset($_GET["bychange"]) && $_GET["bychange"] == 1) || $bychange == 1)
 	{
 		$count	= $this->LoadSingle(
 			"SELECT COUNT( DISTINCT p.tag ) AS n ".
@@ -113,7 +118,8 @@ if ($user_id = $this->GetUserId())
 			}
 			echo "</ul>\n</li>\n</ul>\n";
 			// pagination
-			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			if ((isset($pagination['text'])) && $pagination['text'] == true )
+				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else
 		{
@@ -168,7 +174,8 @@ if ($user_id = $this->GetUserId())
 			}
 			echo "</ul>\n</li>\n</ul>\n";
 			// pagination
-			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			if ((isset($pagination['text'])) && $pagination['text'] == true )
+				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else
 		{
