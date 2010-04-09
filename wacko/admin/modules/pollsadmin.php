@@ -16,6 +16,9 @@ $module['pollsadmin'] = array(
 
 function admin_pollsadmin(&$engine, &$module)
 {
+	$confirmation = "";
+	$moderation = "";
+
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />

@@ -28,9 +28,9 @@ function admin_dbbackup(&$engine, &$module)
 		$scheme['data']			= 1;
 	}
 
-	if ($_GET['structure']	== 1)	$scheme['structure']	= 1;
-	if ($_GET['data']		== 1)	$scheme['data']			= 1;
-	if ($_GET['files']		== 1)	$scheme['files']		= 1;
+	if (isset($_GET['structure'])	&& $_GET['structure']	== 1)	$scheme['structure']	= 1;
+	if (isset($_GET['data']) 		&& $_GET['data']		== 1)	$scheme['data']			= 1;
+	if (isset($_GET['files']) 		&& $_GET['files']		== 1)	$scheme['files']		= 1;
 
 	$getstr = '';
 	if (is_array($scheme))

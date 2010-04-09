@@ -16,6 +16,7 @@ $module['files'] = array(
 
 function admin_files(&$engine, &$module)
 {
+	$order = "";
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
@@ -245,7 +246,7 @@ function admin_files(&$engine, &$module)
 	$path2	= 'file:';
 
 	// !!!!! patch link not to show pictures when not needed
-	if (!$pictures)	$path2 = str_replace('file:', '_file:', $path2);
+	if (!isset($pictures))	$path2 = str_replace('file:', '_file:', $path2);
 
 	if (count($files))
 	{

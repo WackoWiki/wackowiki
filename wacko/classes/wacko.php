@@ -328,6 +328,8 @@ class Wacko
 
 	function LoadLang($lang)
 	{
+		$wackoLanguage = "";
+
 		if (!isset($this->languages[$lang]))
 		{
 			$resourcefile = "lang/lang.".$lang.".php";
@@ -405,7 +407,7 @@ class Wacko
 		if (!$this->config["multilanguage"])
 			return $this->resource[$name];
 
-		if (!$lang && $this->userlang != $this->pagelang)
+		if (!$lang && (isset($this->userlang) && $this->userlang != $this->pagelang))
 			$lang = $this->userlang;
 
 		if ($lang != "")
@@ -435,7 +437,7 @@ class Wacko
 	{
 		$langlist = $this->AvailableLanguages();
 		//!!!! wrong code, maybe!
-		if ($this->method == "edit" && (isset($_GET["add"]) && $_GET["add"] == 1))
+		if ((isset($this->method) && $this->method == "edit") && (isset($_GET["add"]) && $_GET["add"] == 1))
 			if (isset($_REQUEST["lang"]) && $_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
 				$lang = $_REQUEST["lang"];
 			else
@@ -2219,7 +2221,7 @@ class Wacko
 			{
 				if (!$class)
 					$class	= "outerlink";
-				if ($this->method == 'print')
+				if (isset($this->method) && $this->method == 'print')
 					$icon	= '';
 
 				$res		= str_replace("{icon}",		$icon,	$res);
