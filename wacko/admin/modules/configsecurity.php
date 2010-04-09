@@ -345,7 +345,7 @@ function admin_configsecurity(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="log_purge_time"><strong>Shelf life magazine:</strong><br />
+				<td class="label"><label for="log_purge_time"><strong>Storage time of Log:</strong><br />
 				<small>Remove event log over a given number of days.</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="log_purge_time" name="log_purge_time" value="<?php echo htmlspecialchars($engine->config['log_purge_time']);?>" /></td>
 			</tr>

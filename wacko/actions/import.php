@@ -7,7 +7,7 @@
 	i.e. no relative addressing
 */
 
-if (!$_POST["_to"])
+if (!isset($_POST["_to"]))
 {
 	// show FORM
 	echo $this->FormOpen("", "", "post", "", " enctype='multipart/form-data' ");

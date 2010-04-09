@@ -326,7 +326,7 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="keep_deleted_time"><strong>Shelf life of remote pages:</strong><br />
+				<td class="label"><label for="keep_deleted_time"><strong>Storage time of remote pages:</strong><br />
 				<small>The period in days. It makes sense only if the previous option. Zero indicates the eternal possession (in this case the administrator can clear the "cart" manually).</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="keep_deleted_time" name="keep_deleted_time" value="<?php echo htmlspecialchars($engine->config['keep_deleted_time']);?>" /></td>
 			</tr>
@@ -334,7 +334,7 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="pages_purge_time"><strong>Shelf life editorial pages:</strong><br />
+				<td class="label"><label for="pages_purge_time"><strong>Storage time of page revisions:</strong><br />
 				<small>Automatically delete the older edition of the number of days. If you enter zero, the old edition will not be removed.</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="pages_purge_time" name="pages_purge_time" value="<?php echo htmlspecialchars($engine->config['pages_purge_time']);?>" /></td>
 			</tr>
@@ -342,7 +342,7 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="referrers_purge_time"><strong>Shelf life referrers:</strong><br />
+				<td class="label"><label for="referrers_purge_time"><strong>Storage time of referrers:</strong><br />
 				<small>Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="referrers_purge_time" name="referrers_purge_time" value="<?php echo htmlspecialchars($engine->config['referrers_purge_time']);?>" /></td>
 			</tr>

@@ -412,7 +412,7 @@ function admin_groups(&$engine, &$module)
 		<form action="admin.php" method="post" name="groups">
 		<input type="hidden" name="mode" value="groups" />
 
-			<?php echo '<div class="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '&nbsp;' ).'</div>'."\n"; ?>
+			<?php if ((isset($pagination['text'])) && $pagination['text'] == true ) echo '<div class="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '&nbsp;' ).'</div>'."\n"; ?>
 			<table border="0" cellspacing="5" cellpadding="3" class="formation">
 				<tr>
 					<th style="width:5px;"></th>
@@ -447,7 +447,7 @@ function admin_groups(&$engine, &$module)
 		}
 	?>
 			</table>
-			<?php echo '<div class="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '' ).'</div>'."\n";
+			<?php if ((isset($pagination['text'])) && $pagination['text'] == true ) echo '<div class="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '' ).'</div>'."\n";
 
 		/////////////////////////////////////////////
 		//   control buttons
