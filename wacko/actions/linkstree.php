@@ -20,7 +20,8 @@ if (!function_exists('links_tree_view'))
 
 			if (is_array($pages))
 			{
-				$head = explode(" / ",str_replace("))", "", str_replace("((", "", $wacko->config["default_bookmarks"])));
+				if (isset($wacko->config["default_bookmarks"]))
+					$head = explode(" / ",str_replace("))", "", str_replace("((", "", $wacko->config["default_bookmarks"])));
 
 				foreach ($pages as $page)
 				{
@@ -38,7 +39,7 @@ if (!function_exists('links_tree_view'))
 	}
 }
 
-$root = $vars[0];
+$root = (isset($vars[0]) ? $vars[0] : NULL);
 if ($root == "/") $root = "";
 if (!isset($root)) $root = $this->page["tag"];
 $root = $this->UnwrapLink($root);

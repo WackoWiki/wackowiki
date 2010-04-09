@@ -2,13 +2,17 @@
 
 // {{MyChanges [max="Number"] [bydate="1"]}}
 
+$bydate = "";
+$max = "";
+$curChar = "";
+
 if ($user_id = $this->GetUserId())
 {
 	if ($max) $limit = $max;
 	else $limit	= 100;
 	$prefix = $this->config['table_prefix'];
 
-	if($_GET["bydate"] == 1)
+	if(isset($_GET["bydate"]) && $_GET["bydate"] == 1)
 	{
 		print($this->GetTranslation("MyChangesTitle1")." [<a href=\"".
 			$this->href("", "", "mode=mychanges")."#list\">".$this->GetTranslation("OrderABC")."</a>].<br /><br />\n");
@@ -63,7 +67,8 @@ if ($user_id = $this->GetUserId())
 			echo "</ul>\n</li>\n</ul>\n";
 
 			// pagination
-			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			if ((isset($pagination['text'])) && $pagination['text'] == true )
+				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else
 		{
@@ -121,7 +126,8 @@ if ($user_id = $this->GetUserId())
 			echo "</ul>\n</li>\n</ul>\n";
 
 			// pagination
-			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			if ((isset($pagination['text'])) && $pagination['text'] == true )
+				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else
 		{
