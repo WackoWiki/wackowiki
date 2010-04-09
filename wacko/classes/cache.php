@@ -13,7 +13,8 @@ class Cache
 		$this->cache_ttl	= $cache_ttl;
 		$this->timer		= $this->GetMicroTime();
 
-		if ($this->wacko->config['debug']) $this->debug = $this->wacko->config['debug'];
+		if (isset($this->wacko->config['debug']))
+			$this->debug = $this->wacko->config['debug'];
 	}
 
 	// save serialized sql results
