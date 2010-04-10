@@ -296,6 +296,8 @@ if ($pages)
 
 	print_cluster_tree($this, $tree, $style, 1, $abc, $filter);
 
+	// footer
+	if (!$nomark) echo "</div>\n";
 }
 else
 {
@@ -303,8 +305,5 @@ else
 	$empty_string = str_replace("%1", $this->Link("/".$root,"",$root), $empty_string);
 	print($empty_string."<br />");
 }
-
-// footer
-if (!$nomark) echo "</div>\n";
 
 ?>

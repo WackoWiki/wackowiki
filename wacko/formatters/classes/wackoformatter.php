@@ -293,7 +293,7 @@ class WackoFormatter
 
 						foreach($matches as $m)
 						{
-							$value = $m[3] ? ($m[5] ? $m[6] : $m[7]) : "1";
+							$value = isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : "1";
 							$params[$c] = $value;
 							$params[ $m[2] ] = $value;
 							if ($c == 0)
@@ -311,7 +311,7 @@ class WackoFormatter
 
 			$res = $wacko->_Format(trim($code), "highlight/".$formatter, $params);
 
-			if ($params["wrapper"] && ($params["wrapper"] != "none"))
+			if (isset($params["wrapper"]) && ($params["wrapper"] != "none"))
 			{
 				$wrapper = "wrapper_".$params["wrapper"];
 				$params["wrapper"] = ""; // no recursion

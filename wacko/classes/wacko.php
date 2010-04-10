@@ -461,7 +461,10 @@ class Wacko
 	{
 		$lang = $this->DetermineLang();
 		$this->LoadResource($lang);
-		return $this->languages[$lang]["charset"];
+		if (isset($this->languages[$lang]["charset"]))
+			return $this->languages[$lang]["charset"];
+		else
+			NULL;
 	}
 
 	function DoUnicodeEntities($string, $lang)
@@ -889,7 +892,7 @@ class Wacko
 
 		if ($page["lang"])
 			$this->pagelang = $page["lang"];
-		else if ($_REQUEST["add"] && $_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
+		else if ($_REQUEST["add"] && isset($_REQUEST["lang"]) && in_array($_REQUEST["lang"], $langlist))
 			$this->pagelang = $_REQUEST["lang"];
 		else if ($_REQUEST["add"])
 			$this->pagelang = $this->userlang;
@@ -2250,8 +2253,8 @@ class Wacko
 	function AddSpaces($text)
 	{
 		$show = "1";
-		if ($user = $this->GetUser()) $show = $user["show_spaces"];
-		if (!$show) $show = $this->config["show_spaces"];
+		if ($user = $this->GetUser())	$show = $user["show_spaces"];
+		if (!$show)						$show = $this->config["show_spaces"];
 		if ($show != "0")
 		{
 			$text = preg_replace("/(".$this->language["ALPHANUM"].")(".$this->language["UPPERNUM"].")/", "\\1&nbsp;\\2", $text);

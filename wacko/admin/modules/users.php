@@ -16,6 +16,8 @@ $module['users'] = array(
 
 function admin_users(&$engine, &$module)
 {
+	$where = "";
+	$order = "";
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
@@ -153,7 +155,7 @@ function admin_users(&$engine, &$module)
 			echo "</form>";
 		}
 		// rename user
-		else if (isset($_POST['rename']) && $_POST['change'])
+		else if (isset($_POST['rename']) && isset($_POST['change']))
 		{
 			if ($user = $engine->LoadSingle("SELECT user_name, real_name, email, lang FROM {$engine->config['table_prefix']}users WHERE user_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
 			{

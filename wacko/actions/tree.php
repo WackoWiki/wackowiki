@@ -105,7 +105,7 @@ if ($pages = $this->LoadAll(
 	// tree
 	if (count($pages) > $limit)
 	{
-		echo '<small><em>'.$this->GetTranslation('TreeTooBig').'</em></small><br/>';
+		echo '<em>'.$this->GetTranslation('TreeTooBig').'</em><br/>';
 	}
 	else
 	{
@@ -182,18 +182,17 @@ if ($pages = $this->LoadAll(
 		// end list
 		echo "</ul>\n";
 	}
+	// footer
+	if (!$nomark) echo "</div>\n";
 }
 else
 {
 	if (!$nomark)
-    {
-        $title_empty_tree = $this->GetTranslation('TreeEmpty');
-        $title_empty_tree = str_replace('%1', $this->Link('/'.$root, '', rtrim($root, '/')), $title_empty_tree);
-        echo '<small><em>'.$title_empty_tree.'</em></small><br/>';
-    } 
+	{
+		$title_empty_tree = $this->GetTranslation('TreeEmpty');
+		$title_empty_tree = str_replace('%1', $this->Link('/'.$root, '', rtrim($root, '/')), $title_empty_tree);
+		echo '<em>'.$title_empty_tree.'</em><br/>';
+	}
 }
-
-// footer
-if (!$nomark) echo "</div>\n";
 
 ?>
