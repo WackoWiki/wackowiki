@@ -1,5 +1,8 @@
 <?php
 
+$page = "";
+$nomark = "";
+
 if ($page)
 	$tag = $this->UnwrapLink($page);
 else

@@ -16,6 +16,8 @@ $module['groups'] = array(
 
 function admin_groups(&$engine, &$module)
 {
+	$where = "";
+	$order = "";
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
@@ -41,7 +43,7 @@ function admin_groups(&$engine, &$module)
 			$group_id = ($_GET['group_id'] ? $_GET['group_id'] : $_POST['group_id']);
 
 			// add member
-			if (isset($_POST['addmember']) && $_POST['newmember'])
+			if (isset($_POST['addmember']) && isset($_POST['newmember']))
 			{
 				// do we have identical names?
 				if ($engine->LoadSingle(

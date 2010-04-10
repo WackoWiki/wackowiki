@@ -16,12 +16,13 @@ $module['deletedpages'] = array(
 
 function admin_deletedpages(&$engine, &$module)
 {
+	$curday = "";
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 <?php
 	// clear specific page revisions
-	if ($_GET['remove'])
+	if (isset($_GET['remove']))
 	{
 		$engine->Query(
 			"DELETE FROM {$engine->config['table_prefix']}revisions ".
