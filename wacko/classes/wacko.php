@@ -3961,7 +3961,7 @@ class Wacko
 			$what = preg_replace_callback("!(<a name=\"(h[0-9]+-[0-9]+)\"></a><h([0-9])>(.*?)</h\\3>)!i",
 				array(&$this, "NumerateTocCallbackToc"), $what);
 		}
-		if ($this->post_wacko_action["p"])
+		if (isset($this->post_wacko_action["p"]))
 		{
 			// #2. find all <a></a><p...> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatters/paragrafica (subject to refactor)

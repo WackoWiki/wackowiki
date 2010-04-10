@@ -67,8 +67,9 @@ else
 				$numbers[ $depth ]++;
 				// collect numbering on the array of $ numbers from start to the current depth, allowing zero
 				$num="";
-				for($j = 1; $j<=$depth; $j++)
-				if ($numbers[$j] > 0) $num.=$numbers[$j].".";
+				for($j = 1; $j <= $depth; $j++)
+				if (isset($numbers[$j]) && $numbers[$j] > 0)
+				$num .= $numbers[$j].".";
 				// Human content TOC
 				$toc[$i][1] = $num." ".$toc[$i][1];
 			}
@@ -81,7 +82,7 @@ else
 	} // --------------------------------------------------------------
 	// display!
 	foreach( $toc as $v )
-	if ($v[4])
+	if (isset($v[4]) && $v[4])
 	{
 		echo '<div class="toc'.$v[4].'">';
 		echo '<a href="'.$v[3].'#'.$v[0].'">'.strip_tags($v[1]).'</a>';
