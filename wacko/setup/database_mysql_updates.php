@@ -127,6 +127,20 @@ $update_pages_r4_2_5 = "UPDATE {$pref}pages as pages, (SELECT tag, MIN(time) AS 
 $update_pages_r4_2_6 = "UPDATE {$pref}pages as pages SET pages.created = pages.time WHERE pages.id = pages.id AND pages.created IS NULL";
 $update_pages_r4_2_7 = "UPDATE {$pref}pages as pages SET minor_edit = '0' WHERE pages.minor_edit IS NULL";
 
+// POLLS
+$table_polls_r4_2 = "CREATE TABLE {$pref}polls (".
+					"poll_id INT(10) UNSIGNED NOT NULL,".
+					"v_id TINYINT(3) UNSIGNED NOT NULL,".
+					"text VARCHAR(255) NOT NULL,".
+					"user_id INT(10) UNSIGNED NOT NULL,".
+					"plural TINYINT(1) NOT NULL,".
+					"votes SMALLINT(5) UNSIGNED NOT NULL,".
+					"start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"end DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"KEY idx_poll_id (poll_id),".
+					"KEY idx_time_frame (start,end)".
+				") TYPE=MyISAM";
+
 // RATING
 $table_rating_r4_2 = "CREATE TABLE {$pref}rating (".
 					"page_id int(10) UNSIGNED NOT NULL,".

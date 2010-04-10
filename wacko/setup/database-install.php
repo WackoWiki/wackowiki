@@ -266,22 +266,23 @@ switch($config["database_driver"])
 			{
 					print("<h2>".$lang["DeletingTables"]."</h2>\n");
 					print("            <ul>\n");
-					test(str_replace("%1", "page", $lang["DeletingTable"]), @mysql_query($table_pages_drop, $dblink), str_replace("%1", "page", $lang["ErrorDeletingTable"]));
-					test(str_replace("%1", "revision", $lang["DeletingTable"]), @mysql_query($table_revisions_drop, $dblink), str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "acl", $lang["DeletingTable"]), @mysql_query($table_acls_drop, $dblink), str_replace("%1", "acl", $lang["ErrorDeletingTable"]));
-					test(str_replace("%1", "link tracking", $lang["DeletingTable"]), @mysql_query($table_links_drop, $dblink), str_replace("%1", "link", $lang["ErrorDeletingTable"]));
-					test(str_replace("%1", "referrer", $lang["DeletingTable"]), @mysql_query($table_referrers_drop, $dblink), str_replace("%1", "referrer", $lang["ErrorDeletingTable"]));
-					test(str_replace("%1", "user", $lang["DeletingTable"]), @mysql_query($table_users_drop, $dblink), str_replace("%1", "user", $lang["ErrorDeletingTable"]));
-					test(str_replace("%1", "watches", $lang["DeletingTable"]), @mysql_query($table_watches_drop, $dblink), str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
-					test(str_replace("%1", "upload", $lang["DeletingTable"]), @mysql_query($table_upload_drop, $dblink), str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "cache", $lang["DeletingTable"]), @mysql_query($table_cache_drop, $dblink), str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
-					test(str_replace("%1", "log", $lang["DeletingTable"]), @mysql_query($table_log_drop, $dblink), str_replace("%1", "log", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "config", $lang["DeletingTable"]), @mysql_query($table_config_drop, $dblink), str_replace("%1", "config", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "groups", $lang["DeletingTable"]), @mysql_query($table_groups_drop, $dblink), str_replace("%1", "groups", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "groups_members", $lang["DeletingTable"]), @mysql_query($table_groups_members_drop, $dblink), str_replace("%1", "groups_members", $lang["ErrorDeletingTable"]));
-					test(str_replace("%1", "rating", $lang["DeletingTable"]), @mysql_query($table_rating_drop, $dblink), str_replace("%1", "rating", $lang["ErrorDeletingTable"]));
-					test(str_replace("%1", "config", $lang["DeletingTable"]), @mysql_query($table_config_drop, $dblink), str_replace("%1", "config", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "keywords", $lang["DeletingTable"]), @mysql_query($table_keywords_drop, $dblink), str_replace("%1", "keywords", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "keywords_pages", $lang["DeletingTable"]), @mysql_query($table_keywords_pages_drop, $dblink), str_replace("%1", "keywords_pages", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "links", $lang["DeletingTable"]), @mysql_query($table_links_drop, $dblink), str_replace("%1", "links", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "log", $lang["DeletingTable"]), @mysql_query($table_log_drop, $dblink), str_replace("%1", "log", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "pages", $lang["DeletingTable"]), @mysql_query($table_pages_drop, $dblink), str_replace("%1", "pages", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "polls", $lang["DeletingTable"]), @mysql_query($table_polls_drop, $dblink), str_replace("%1", "polls", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "rating", $lang["DeletingTable"]), @mysql_query($table_rating_drop, $dblink), str_replace("%1", "rating", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "referrer", $lang["DeletingTable"]), @mysql_query($table_referrers_drop, $dblink), str_replace("%1", "referrer", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "revision", $lang["DeletingTable"]), @mysql_query($table_revisions_drop, $dblink), str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "upload", $lang["DeletingTable"]), @mysql_query($table_upload_drop, $dblink), str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "user", $lang["DeletingTable"]), @mysql_query($table_users_drop, $dblink), str_replace("%1", "user", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "watches", $lang["DeletingTable"]), @mysql_query($table_watches_drop, $dblink), str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
 					print("            <li>".$lang["DeletingTablesEnd"]."</li>\n");
 					print("         </ul>\n");
 					print("         <br />\n");
@@ -294,22 +295,23 @@ switch($config["database_driver"])
 				case "0":
 					print("<h2>".$lang["InstallingTables"]."</h2>\n");
 					print("            <ul>\n");
-					test(str_replace("%1","page",$lang["CreatingTable"]), @mysql_query($table_pages, $dblink), str_replace("%1","page",$lang["ErrorCreatingTable"]));
-					test(str_replace("%1","revision",$lang["CreatingTable"]), @mysql_query($table_revisions, $dblink), str_replace("%1","revision",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","acl",$lang["CreatingTable"]), @mysql_query($table_acls, $dblink), str_replace("%1","acl",$lang["ErrorCreatingTable"]));
-					test(str_replace("%1","link tracking",$lang["CreatingTable"]), @mysql_query($table_links, $dblink), str_replace("%1","link",$lang["ErrorCreatingTable"]));
-					test(str_replace("%1","referrer",$lang["CreatingTable"]), @mysql_query($table_referrers, $dblink), str_replace("%1","referrer",$lang["ErrorCreatingTable"]));
-					test(str_replace("%1","user",$lang["CreatingTable"]), @mysql_query($table_users, $dblink), str_replace("%1","user",$lang["ErrorCreatingTable"]));
-					test(str_replace("%1","watches",$lang["CreatingTable"]), @mysql_query($table_watches, $dblink), str_replace("%1","watches",$lang["ErrorCreatingTable"]));
-					test(str_replace("%1","upload",$lang["CreatingTable"]), @mysql_query($table_upload, $dblink), str_replace("%1","upload",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","cache",$lang["CreatingTable"]), @mysql_query($table_cache, $dblink), str_replace("%1","cache",$lang["ErrorCreatingTable"]));
-					test(str_replace("%1","log",$lang["CreatingTable"]), @mysql_query($table_log, $dblink), str_replace("%1","log",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","config",$lang["CreatingTable"]), @mysql_query($table_config, $dblink), str_replace("%1","config",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","groups",$lang["CreatingTable"]), @mysql_query($table_groups, $dblink), str_replace("%1","groups",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","groups_members",$lang["CreatingTable"]), @mysql_query($table_groups_members, $dblink), str_replace("%1","groups_members",$lang["ErrorCreatingTable"]));
-					test(str_replace("%1","rating",$lang["CreatingTable"]), @mysql_query($table_rating, $dblink), str_replace("%1","rating",$lang["ErrorCreatingTable"]));
-					test(str_replace("%1","config",$lang["CreatingTable"]), @mysql_query($table_config, $dblink), str_replace("%1","config",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","keywords",$lang["CreatingTable"]), @mysql_query($table_keywords, $dblink), str_replace("%1","keywords",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","keywords_pages",$lang["CreatingTable"]), @mysql_query($table_keywords_pages, $dblink), str_replace("%1","keywords_pages",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","links",$lang["CreatingTable"]), @mysql_query($table_links, $dblink), str_replace("%1","links",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","log",$lang["CreatingTable"]), @mysql_query($table_log, $dblink), str_replace("%1","log",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","pages",$lang["CreatingTable"]), @mysql_query($table_pages, $dblink), str_replace("%1","pages",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","polls",$lang["CreatingTable"]), @mysql_query($table_polls, $dblink), str_replace("%1","polls",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","rating",$lang["CreatingTable"]), @mysql_query($table_rating, $dblink), str_replace("%1","rating",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","referrer",$lang["CreatingTable"]), @mysql_query($table_referrers, $dblink), str_replace("%1","referrer",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","revision",$lang["CreatingTable"]), @mysql_query($table_revisions, $dblink), str_replace("%1","revision",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","upload",$lang["CreatingTable"]), @mysql_query($table_upload, $dblink), str_replace("%1","upload",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","user",$lang["CreatingTable"]), @mysql_query($table_users, $dblink), str_replace("%1","user",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","watches",$lang["CreatingTable"]), @mysql_query($table_watches, $dblink), str_replace("%1","watches",$lang["ErrorCreatingTable"]));
 
 					test($lang["InstallingAdmin"], @mysql_query($insert_admin, $dblink), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 					test($lang["InstallingAdminGroup"], @mysql_query($insert_admin_group, $dblink), str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
@@ -449,6 +451,8 @@ switch($config["database_driver"])
 					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r4_2_21, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","pages",$lang["AlterTable"]), @mysql_query($alter_pages_r4_2_22, $dblink), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
 
+					test(str_replace("%1","polls",$lang["CreatingTable"]), @mysql_query($table_polls_r4_2, $dblink), str_replace("%1", "polls", $lang["ErrorCreatingTable"]));
+
 					test(str_replace("%1","watches",$lang["AlterTable"]), @mysql_query($alter_watches_r4_2, $dblink), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","watches",$lang["AlterTable"]), @mysql_query($alter_watches_r4_2_1, $dblink), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","watches",$lang["AlterTable"]), @mysql_query($alter_watches_r4_2_2, $dblink), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
@@ -558,22 +562,23 @@ switch($config["database_driver"])
 						{
 							print("<h2>".$lang["DeletingTables"]."</h2>\n");
 							print("            <ul>\n");
-							test(str_replace("%1", "page", $lang["DeletingTable"]), @mysqli_query($dblink, $table_pages_drop), str_replace("%1", "page", $lang["ErrorDeletingTable"]));
-							test(str_replace("%1", "revision", $lang["DeletingTable"]), @mysqli_query($dblink, $table_revisions_drop), str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "acl", $lang["DeletingTable"]), @mysqli_query($dblink, $table_acls_drop), str_replace("%1", "acl", $lang["ErrorDeletingTable"]));
-							test(str_replace("%1", "link tracking", $lang["DeletingTable"]), @mysqli_query($dblink, $table_links_drop), str_replace("%1", "link", $lang["ErrorDeletingTable"]));
-							test(str_replace("%1", "referrer", $lang["DeletingTable"]), @mysqli_query($dblink, $table_referrers_drop), str_replace("%1", "referrer", $lang["ErrorDeletingTable"]));
-							test(str_replace("%1", "user", $lang["DeletingTable"]), @mysqli_query($dblink, $table_users_drop), str_replace("%1", "user", $lang["ErrorDeletingTable"]));
-							test(str_replace("%1", "watches", $lang["DeletingTable"]), @mysqli_query($dblink, $table_watches_drop), str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
-							test(str_replace("%1", "upload", $lang["DeletingTable"]), @mysqli_query($dblink, $table_upload_drop), str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "cache", $lang["DeletingTable"]), @mysqli_query($dblink, $table_cache_drop), str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
-							test(str_replace("%1", "log", $lang["DeletingTable"]), @mysqli_query($dblink, $table_log_drop), str_replace("%1", "log", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "config", $lang["DeletingTable"]), @mysqli_query($dblink, $table_config_drop), str_replace("%1", "config", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "groups", $lang["DeletingTable"]), @mysqli_query($dblink, $table_groups_drop), str_replace("%1", "groups", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "groups_members", $lang["DeletingTable"]), @mysqli_query($dblink, $table_groups_members_drop), str_replace("%1", "groups_members", $lang["ErrorDeletingTable"]));
-							test(str_replace("%1", "rating", $lang["DeletingTable"]), @mysqli_query($dblink, $table_rating_drop), str_replace("%1", "rating", $lang["ErrorDeletingTable"]));
-							test(str_replace("%1", "config", $lang["DeletingTable"]), @mysqli_query($dblink, $table_config_drop), str_replace("%1", "config", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "keywords", $lang["DeletingTable"]), @mysqli_query($dblink, $table_keywords_drop), str_replace("%1", "keywords", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "keywords_pages", $lang["DeletingTable"]), @mysqli_query($dblink, $table_keywords_pages_drop), str_replace("%1", "keywords_pages", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "links", $lang["DeletingTable"]), @mysqli_query($dblink, $table_links_drop), str_replace("%1", "links", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "log", $lang["DeletingTable"]), @mysqli_query($dblink, $table_log_drop), str_replace("%1", "log", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "pages", $lang["DeletingTable"]), @mysqli_query($dblink, $table_pages_drop), str_replace("%1", "pages", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "polls", $lang["DeletingTable"]), @mysqli_query($dblink, $table_polls_drop), str_replace("%1", "polls", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "rating", $lang["DeletingTable"]), @mysqli_query($dblink, $table_rating_drop), str_replace("%1", "rating", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "referrer", $lang["DeletingTable"]), @mysqli_query($dblink, $table_referrers_drop), str_replace("%1", "referrer", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "revision", $lang["DeletingTable"]), @mysqli_query($dblink, $table_revisions_drop), str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "upload", $lang["DeletingTable"]), @mysqli_query($dblink, $table_upload_drop), str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "user", $lang["DeletingTable"]), @mysqli_query($dblink, $table_users_drop), str_replace("%1", "user", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "watches", $lang["DeletingTable"]), @mysqli_query($dblink, $table_watches_drop), str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
 							print("            <li>".$lang["DeletingTablesEnd"]."</li>\n");
 							print("         </ul>\n");
 							print("         <br />\n");
@@ -586,22 +591,23 @@ switch($config["database_driver"])
 							case "0":
 								print("         <h2>".$lang["InstallingTables"]."</h2>\n");
 								print("         <ul>\n");
-								test(str_replace("%1","page",$lang["CreatingTable"]), @mysqli_query($dblink, $table_pages), str_replace("%1","page",$lang["ErrorCreatingTable"]));
-								test(str_replace("%1","revision",$lang["CreatingTable"]), @mysqli_query($dblink, $table_revisions), str_replace("%1","revision",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","acl",$lang["CreatingTable"]), @mysqli_query($dblink, $table_acls), str_replace("%1","acl",$lang["ErrorCreatingTable"]));
-								test(str_replace("%1","link tracking",$lang["CreatingTable"]), @mysqli_query($dblink, $table_links), str_replace("%1","link",$lang["ErrorCreatingTable"]));
-								test(str_replace("%1","referrer",$lang["CreatingTable"]), @mysqli_query($dblink, $table_referrers), str_replace("%1","referrer",$lang["ErrorCreatingTable"]));
-								test(str_replace("%1","user",$lang["CreatingTable"]), @mysqli_query($dblink, $table_users), str_replace("%1","user",$lang["ErrorCreatingTable"]));
-								test(str_replace("%1","watches",$lang["CreatingTable"]), @mysqli_query($dblink, $table_watches), str_replace("%1","watches",$lang["ErrorCreatingTable"]));
-								test(str_replace("%1","upload",$lang["CreatingTable"]), @mysqli_query($dblink, $table_upload), str_replace("%1","upload",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","cache",$lang["CreatingTable"]), @mysqli_query($dblink, $table_cache), str_replace("%1","cache",$lang["ErrorCreatingTable"]));
-								test(str_replace("%1","log",$lang["CreatingTable"]), @mysqli_query($dblink, $table_log), str_replace("%1","log",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","config",$lang["CreatingTable"]), @mysqli_query($dblink, $table_config), str_replace("%1","config",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","groups",$lang["CreatingTable"]), @mysqli_query($dblink, $table_groups), str_replace("%1","groups",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","groups_members",$lang["CreatingTable"]), @mysqli_query($dblink, $table_groups_members), str_replace("%1","groups_members",$lang["ErrorCreatingTable"]));
-								test(str_replace("%1","rating",$lang["CreatingTable"]), @mysqli_query($dblink, $table_rating), str_replace("%1","rating",$lang["ErrorCreatingTable"]));
-								test(str_replace("%1","config",$lang["CreatingTable"]), @mysqli_query($dblink, $table_config), str_replace("%1","config",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","keywords",$lang["CreatingTable"]), @mysqli_query($dblink, $table_keywords), str_replace("%1","keywords",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","keywords_pages",$lang["CreatingTable"]), @mysqli_query($dblink, $table_keywords_pages), str_replace("%1","keywords_pages",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","links",$lang["CreatingTable"]), @mysqli_query($dblink, $table_links), str_replace("%1","links",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","log",$lang["CreatingTable"]), @mysqli_query($dblink, $table_log), str_replace("%1","log",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","pages",$lang["CreatingTable"]), @mysqli_query($dblink, $table_pages), str_replace("%1","pages",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","polls",$lang["CreatingTable"]), @mysqli_query($dblink, $table_polls), str_replace("%1","polls",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","rating",$lang["CreatingTable"]), @mysqli_query($dblink, $table_rating), str_replace("%1","rating",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","referrer",$lang["CreatingTable"]), @mysqli_query($dblink, $table_referrers), str_replace("%1","referrer",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","revision",$lang["CreatingTable"]), @mysqli_query($dblink, $table_revisions), str_replace("%1","revision",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","upload",$lang["CreatingTable"]), @mysqli_query($dblink, $table_upload), str_replace("%1","upload",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","user",$lang["CreatingTable"]), @mysqli_query($dblink, $table_users), str_replace("%1","user",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","watches",$lang["CreatingTable"]), @mysqli_query($dblink, $table_watches), str_replace("%1","watches",$lang["ErrorCreatingTable"]));
 
 								test($lang["InstallingAdmin"], @mysqli_query($dblink, $insert_admin), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 								test($lang["InstallingAdminGroup"], @mysqli_query($dblink, $insert_admin_group), str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
@@ -741,6 +747,8 @@ switch($config["database_driver"])
 								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r4_2_21), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","pages",$lang["AlterTable"]), @mysqli_query($dblink, $alter_pages_r4_2_22), str_replace("%1", "pages", $lang["ErrorAlteringTable"]));
 
+								test(str_replace("%1","polls",$lang["CreatingTable"]), @mysqli_query($dblink, $table_polls_r4_2), str_replace("%1", "polls", $lang["ErrorCreatingTable"]));
+
 								test(str_replace("%1","watches",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watches_r4_2), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","watches",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watches_r4_2_1), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","watches",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watches_r4_2_2), str_replace("%1", "watches", $lang["ErrorAlteringTable"]));
@@ -852,23 +860,23 @@ switch($config["database_driver"])
 									{
 										print("<h2>".$lang["DeletingTables"]."</h2>\n");
 										print("            <ul>\n");
-										testPDO(str_replace("%1", "page", $lang["DeletingTable"]), $table_pages_drop, str_replace("%1", "page", $lang["ErrorDeletingTable"]));
-										testPDO(str_replace("%1", "revision", $lang["DeletingTable"]), $table_revisions_drop, str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "acl", $lang["DeletingTable"]), $table_acls_drop, str_replace("%1", "acl", $lang["ErrorDeletingTable"]));
-										testPDO(str_replace("%1", "link tracking", $lang["DeletingTable"]), $table_links_drop, str_replace("%1", "link", $lang["ErrorDeletingTable"]));
-										testPDO(str_replace("%1", "referrer", $lang["DeletingTable"]), $table_referrers_drop, str_replace("%1", "referrer", $lang["ErrorDeletingTable"]));
-										testPDO(str_replace("%1", "user", $lang["DeletingTable"]), $table_users_drop, str_replace("%1", "user", $lang["ErrorDeletingTable"]));
-										testPDO(str_replace("%1", "watches", $lang["DeletingTable"]), $table_watches_drop, str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
-										testPDO(str_replace("%1", "upload", $lang["DeletingTable"]), $table_upload_drop, str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "cache", $lang["DeletingTable"]), $table_cache_drop, str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
-										testPDO(str_replace("%1", "log", $lang["DeletingTable"]), $table_log_drop, str_replace("%1", "log", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "config", $lang["DeletingTable"]), $table_config_drop, str_replace("%1", "config", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "groups", $lang["DeletingTable"]), $table_groups_drop, str_replace("%1", "groups", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "groups_members", $lang["DeletingTable"]), $table_groups_members_drop, str_replace("%1", "groups_members", $lang["ErrorDeletingTable"]));
-										testPDO(str_replace("%1", "rating", $lang["DeletingTable"]), $table_rating_drop, str_replace("%1", "rating", $lang["ErrorDeletingTable"]));
-										testPDO(str_replace("%1", "config", $lang["DeletingTable"]), $table_config_drop, str_replace("%1", "config", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "keywords", $lang["DeletingTable"]), $table_keywords_drop, str_replace("%1", "keywords", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "keywords_pages", $lang["DeletingTable"]), $table_keywords_pages_drop, str_replace("%1", "keywords_pages", $lang["ErrorDeletingTable"]));
-
+										testPDO(str_replace("%1", "links", $lang["DeletingTable"]), $table_links_drop, str_replace("%1", "links", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "log", $lang["DeletingTable"]), $table_log_drop, str_replace("%1", "log", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "pages", $lang["DeletingTable"]), $table_pages_drop, str_replace("%1", "pages", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "polls", $lang["DeletingTable"]), $table_polls_drop, str_replace("%1", "polls", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "rating", $lang["DeletingTable"]), $table_rating_drop, str_replace("%1", "rating", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "referrer", $lang["DeletingTable"]), $table_referrers_drop, str_replace("%1", "referrer", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "revision", $lang["DeletingTable"]), $table_revisions_drop, str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "upload", $lang["DeletingTable"]), $table_upload_drop, str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "user", $lang["DeletingTable"]), $table_users_drop, str_replace("%1", "user", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "watches", $lang["DeletingTable"]), $table_watches_drop, str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
 										print("            <li>".$lang["DeletingTablesEnd"]."</li>\n");
 										print("         </ul>\n");
 										print("         <br />\n");
@@ -877,22 +885,23 @@ switch($config["database_driver"])
 									// No need to check the past versions since PDO SQL is only officially supported in this release (v4.3)
 									print("         <h2>".$lang["InstallingTables"]."</h2>\n");
 									print("         <ul>\n");
-									testPDO(str_replace("%1","page",$lang["CreatingTable"]), $table_pages, str_replace("%1","page",$lang["ErrorCreatingTable"]));
-									testPDO(str_replace("%1","revision",$lang["CreatingTable"]), $table_revisions, str_replace("%1","revision",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","acl",$lang["CreatingTable"]), $table_acls, str_replace("%1","acl",$lang["ErrorCreatingTable"]));
-									testPDO(str_replace("%1","link tracking",$lang["CreatingTable"]), $table_links, str_replace("%1","link",$lang["ErrorCreatingTable"]));
-									testPDO(str_replace("%1","referrer",$lang["CreatingTable"]), $table_referrers, str_replace("%1","referrer",$lang["ErrorCreatingTable"]));
-									testPDO(str_replace("%1","user",$lang["CreatingTable"]), $table_users, str_replace("%1","user",$lang["ErrorCreatingTable"]));
-									testPDO(str_replace("%1","watches",$lang["CreatingTable"]), $table_watches, str_replace("%1","watches",$lang["ErrorCreatingTable"]));
-									testPDO(str_replace("%1","upload",$lang["CreatingTable"]), $table_upload, str_replace("%1","upload",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","cache",$lang["CreatingTable"]), $table_cache, str_replace("%1","cache",$lang["ErrorCreatingTable"]));
-									testPDO(str_replace("%1","log",$lang["CreatingTable"]), $table_log, str_replace("%1","log",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","config",$lang["CreatingTable"]), $table_config, str_replace("%1","config",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","groups",$lang["CreatingTable"]), $table_groups, str_replace("%1","groups",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","groups_members",$lang["CreatingTable"]), $table_groups_members, str_replace("%1","groups_members",$lang["ErrorCreatingTable"]));
-									testPDO(str_replace("%1","rating",$lang["CreatingTable"]), $table_rating, str_replace("%1","rating",$lang["ErrorCreatingTable"]));
-									testPDO(str_replace("%1","config",$lang["CreatingTable"]), $table_config, str_replace("%1","config",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","keywords",$lang["CreatingTable"]), $table_keywords, str_replace("%1","keywords",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","keywords_pages",$lang["CreatingTable"]), $table_keywords_pages, str_replace("%1","keywords_pages",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","links",$lang["CreatingTable"]), $table_links, str_replace("%1","links",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","log",$lang["CreatingTable"]), $table_log, str_replace("%1","log",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","pages",$lang["CreatingTable"]), $table_pages, str_replace("%1","pages",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","polls",$lang["CreatingTable"]), $table_polls, str_replace("%1","polls",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","rating",$lang["CreatingTable"]), $table_rating, str_replace("%1","rating",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","referrer",$lang["CreatingTable"]), $table_referrers, str_replace("%1","referrer",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","revision",$lang["CreatingTable"]), $table_revisions, str_replace("%1","revision",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","upload",$lang["CreatingTable"]), $table_upload, str_replace("%1","upload",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","user",$lang["CreatingTable"]), $table_users, str_replace("%1","user",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","watches",$lang["CreatingTable"]), $table_watches, str_replace("%1","watches",$lang["ErrorCreatingTable"]));
 
 									testPDO($lang["InstallingAdmin"], $insert_admin, str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 									testPDO($lang["InstallingAdminGroup"], $insert_admin_group, str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));

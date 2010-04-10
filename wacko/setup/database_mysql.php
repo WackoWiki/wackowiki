@@ -133,8 +133,21 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"KEY idx_title (title)".
 				") TYPE=MyISAM;";
 
+$table_polls = "CREATE TABLE {$pref}polls (".
+					"poll_id INT(10) UNSIGNED NOT NULL,".
+					"v_id TINYINT(3) UNSIGNED NOT NULL,".
+					"text VARCHAR(255) NOT NULL,".
+					"user_id INT(10) UNSIGNED NOT NULL,".
+					"plural TINYINT(1) NOT NULL,".
+					"votes SMALLINT(5) UNSIGNED NOT NULL,".
+					"start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"end DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"KEY idx_poll_id (poll_id),".
+					"KEY idx_time_frame (start,end)".
+				") TYPE=MyISAM";
+
 $table_rating = "CREATE TABLE {$pref}rating (".
-					"page_id int(10) UNSIGNED NOT NULL,".
+					"page_id INT(10) UNSIGNED NOT NULL,".
 					"value INT(11) NOT NULL,".
 					"voters INT(10) UNSIGNED NOT NULL,".
 					"rating_time TIMESTAMP NOT NULL,".
@@ -253,6 +266,7 @@ $table_keywords_pages_drop = "DROP TABLE {$pref}keywords_pages";
 $table_links_drop = "DROP TABLE {$pref}links";
 $table_log_drop = "DROP TABLE {$pref}log";
 $table_pages_drop = "DROP TABLE {$pref}pages";
+$table_polls_drop = "DROP TABLE {$pref}polls";
 $table_rating_drop = "DROP TABLE {$pref}rating";
 $table_referrers_drop = "DROP TABLE {$pref}referrers";
 $table_revisions_drop = "DROP TABLE {$pref}revisions";
