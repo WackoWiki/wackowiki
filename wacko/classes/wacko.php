@@ -1048,7 +1048,7 @@ class Wacko
 	}
 
 	function LoadPageTitles() { return $this->LoadAll("SELECT DISTINCT tag FROM ".$this->config["table_prefix"]."pages ORDER BY tag"); }
-	function LoadAllPagesByTime() { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '0' ORDER BY modified DESC, BINARY tag"); }
+	function LoadAllPagesByTime() { return $this->LoadAll("SELECT page_id, tag, modified FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '0' ORDER BY modified DESC, BINARY tag"); }
 
 	function FullTextSearch($phrase,$filter)
 	{
@@ -1534,7 +1534,7 @@ class Wacko
 
 				if($this->config["xml_sitemap"])
 				{
-					$this->SiteMap();
+					$xml->SiteMap();
 				}
 
 				unset($xml);

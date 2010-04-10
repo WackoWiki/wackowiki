@@ -231,7 +231,7 @@ class RSS
 		{
 			foreach ($pages as $i => $page)
 			{
-				if ($this->engine->config["hide_locked"] ? $this->engine->HasAccess("read",$page["page_id"],GUEST) : true)
+				if ($this->engine->config["hide_locked"] ? $this->engine->HasAccess("read", $page["page_id"], GUEST) : true)
 				{
 					$xml .= "<url>\n";
 					$xml .= "<loc>".$this->engine->href("", $page["tag"])."</loc>\n";
