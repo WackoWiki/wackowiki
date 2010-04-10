@@ -220,7 +220,7 @@ function admin_dbbackup(&$engine, &$module)
 
 			echo '<tr>'.
 					'<td colspan="2" class="label"><strong>'.$dir.'</strong></td>'.
-					'<td align="center">&nbsp;&nbsp;<input name="__dir__'.$dir.'" type="checkbox" value="files"'.( $check === true && $scheme['files'] == true ? 'checked="checked"' : '' ).' /></td>'.
+					'<td align="center">&nbsp;&nbsp;<input name="__dir__'.$dir.'" type="checkbox" value="files"'.( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? 'checked="checked"' : '' ).' /></td>'.
 				'</tr>'.
 				'<tr class="lined"><td colspan="3"></td></tr>'."\n";
 		}
