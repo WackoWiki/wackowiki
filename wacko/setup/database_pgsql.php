@@ -145,14 +145,22 @@ $table_cache = "CREATE TABLE {$pref}cache (".
  Wacko Wiki MySQL Table Deletion Script
 */
 
-$table_pages_drop = "DROP TABLE {$pref}pages;";
-$table_revisions_drop = "DROP TABLE {$pref}revisions;";
-$table_acls_drop = "DROP TABLE {$pref}acls;";
-$table_links_drop = "DROP TABLE {$pref}links;";
-$table_referrers_drop = "DROP TABLE {$pref}referrers;";
-$table_users_drop = "DROP TABLE {$pref}users;";
-$table_watches_drop = "DROP TABLE {$pref}watches;";
-$table_upload_drop = "DROP TABLE {$pref}upload;";
-$table_cache_drop = "DROP TABLE {$pref}cache;";
+$table_acls_drop = "DROP TABLE {$pref}acls";
+$table_cache_drop = "DROP TABLE {$pref}cache";
+$table_config_drop = "DROP TABLE {$pref}config";
+$table_groups_drop = "DROP TABLE {$pref}groups";
+$table_groups_members_drop = "DROP TABLE {$pref}groups_members";
+$table_keywords_drop = "DROP TABLE {$pref}keywords";
+$table_keywords_pages_drop = "DROP TABLE {$pref}keywords_pages";
+$table_links_drop = "DROP TABLE {$pref}links";
 $table_log_drop = "DROP TABLE {$pref}log";
+$table_pages_drop = "DROP TABLE {$pref}pages";
+$table_polls_drop = "DROP TABLE {$pref}polls";
+$table_rating_drop = "DROP TABLE {$pref}rating";
+$table_referrers_drop = "DROP TABLE {$pref}referrers";
+$table_revisions_drop = "DROP TABLE {$pref}revisions";
+$table_upload_drop = "DROP TABLE {$pref}upload";
+$table_users_drop = "DROP TABLE {$pref}users";
+$table_watches_drop = "DROP TABLE {$pref}watches";
+
 ?>

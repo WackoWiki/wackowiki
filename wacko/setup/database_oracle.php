@@ -251,6 +251,7 @@ $table_keywords_pages_drop = "DROP TABLE {$pref}keywords_pages";
 $table_links_drop = "DROP TABLE {$pref}links";
 $table_log_drop = "DROP TABLE {$pref}log";
 $table_pages_drop = "DROP TABLE {$pref}pages";
+$table_polls_drop = "DROP TABLE {$pref}polls";
 $table_rating_drop = "DROP TABLE {$pref}rating";
 $table_referrers_drop = "DROP TABLE {$pref}referrers";
 $table_revisions_drop = "DROP TABLE {$pref}revisions";
