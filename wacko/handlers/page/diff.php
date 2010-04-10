@@ -1,6 +1,9 @@
 <div id="page">
 <?php
 
+$output = "";
+$source = "";
+
 if (!function_exists('HandlerDiffLoadPageById'))
 {
 	function HandlerDiffLoadPageById($wacko, $id)
@@ -39,9 +42,9 @@ if ($this->HasAccess("read")) {
 
 	if ($this->HasAccess("read", $pageA["page_id"]) && $this->HasAccess("read", $pageB["page_id"]) ) {
 
-		if ($_GET["source"]) $source = 1;
+		if (isset($_GET["source"])) $source = 1;
 
-		if ($_GET["fastdiff"] || $source == 1) {
+		if (isset($_GET["fastdiff"]) || $source == 1) {
 
 			// This is a really cheap way to do it.
 

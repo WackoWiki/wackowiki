@@ -223,10 +223,10 @@ class paragrafica
 		}
 		else
 		// id, text, depth
-		if ($matches[6] != "")
-		$this->toc[] = array($matches[6],"(p)",77777);
+		if ((isset($matches[6])) && $matches[6] != "")
+			$this->toc[] = array($matches[6],"(p)",77777);
 		else
-		$this->toc[] = array($matches[2],$matches[4],$matches[3]);
+			$this->toc[] = array($matches[2],$matches[4],$matches[3]);
 		return $matches[0];
 	}
 }
