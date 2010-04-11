@@ -122,7 +122,7 @@ function admin_lock(&$engine, &$module)
 			<th style="text-align:left;">Overhead</th>
 		</tr>
 <?php
-	$results = $engine->LoadAll("SHOW TABLE STATUS FROM {$engine->config['database_database']}");
+	$results = $engine->LoadAll("SHOW TABLE STATUS FROM `{$engine->config['database_database']}`");
 	$tdata = "";
 	$tindex = "";
 	$tfrag = "";

@@ -165,6 +165,8 @@ $wackoTranslation = array(
 	"GroupsMembers"			=> "Members for Group",
 	"GroupsDescription"	=> "Description",
 	"GroupsModerator"	=> "Moderator",
+	"GroupsOpen"		=> "Open",
+	"GroupsActive"		=> "Active",
 	"GroupsTip"			=> "Click to edit Group",
 	"GroupsUpdated"		=> "Groups updated",
 	"GroupsAlreadyExists"	=> "This group already exists.",
@@ -189,6 +191,7 @@ $wackoTranslation = array(
 	"MembersRemoved"		=> "The member was removed from the group.",
 	"MembersDeleteInfo"	=> "* Note: Change will affect all members that are assigned to that group.",
 
+	"UserEnabled"		=> "Enabled",
 	"UsersAddNew"		=> "Add new user",
 	"UsersDelete"		=> "Are you sure you want to remove user ",
 	"UsersDeleted"		=> "The user was deleted from the database.",
