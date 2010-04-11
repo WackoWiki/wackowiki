@@ -207,7 +207,7 @@ class Init
 
 					"hide_comments" => 0,
 					"hide_files" => 0,
-					"hide_rating" => 2,
+					"hide_rating" => 1,
 
 					"hide_toc" => 0,
 					"hide_index" => 0,
