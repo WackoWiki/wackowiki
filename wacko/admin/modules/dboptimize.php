@@ -77,7 +77,7 @@ function admin_dboptimize(&$engine, &$module)
 					<th style="text-align:left;">Fragmentation</th>
 				</tr>
 <?php
-		$results = $engine->LoadAll("SHOW TABLE STATUS FROM {$engine->config['database_database']}");
+		$results = $engine->LoadAll("SHOW TABLE STATUS FROM `{$engine->config['database_database']}`");
 
 		foreach ($results as $table)
 		{

@@ -18,6 +18,8 @@ function admin_groups(&$engine, &$module)
 {
 	$where = "";
 	$order = "";
+	$group = "";
+	$orderuser = "";
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
@@ -40,7 +42,7 @@ function admin_groups(&$engine, &$module)
 		// get group
 		if (isset($_GET['group_id']) || isset($_POST['addmember'])|| isset($_POST['removemember']))
 		{
-			$group_id = ($_GET['group_id'] ? $_GET['group_id'] : $_POST['group_id']);
+			$group_id = (isset($_GET['group_id']) ? $_GET['group_id'] : $_POST['group_id']);
 
 			// add member
 			if (isset($_POST['addmember']) && isset($_POST['newmember']))
@@ -69,7 +71,7 @@ function admin_groups(&$engine, &$module)
 			}
 
 			// delete member
-			else if (isset($_POST['removemember']) && $_POST['member_id'])
+			else if (isset($_POST['removemember']) && isset($_POST['member_id']))
 			{
 				$engine->Query(
 					"DELETE FROM {$engine->config['table_prefix']}groups_members ".
@@ -112,7 +114,7 @@ function admin_groups(&$engine, &$module)
 			}
 
 			// remove member
-			if (isset($_POST['removemember']) && $_POST['changemember'])
+			if (isset($_POST['removemember']) && isset($_POST['changemember']))
 			{
 				if ($member = $engine->LoadSingle("SELECT user_name FROM {$engine->config['table_prefix']}users WHERE user_id = '".quote($engine->dblink, $_POST['changemember'])."' LIMIT 1"))
 				{
@@ -134,7 +136,7 @@ function admin_groups(&$engine, &$module)
 		}
 
 		// add group
-		if (isset($_POST['create']) && $_POST['newname'])
+		if (isset($_POST['create']) && isset($_POST['newname']))
 		{
 			// do we have identical names?
 			if ($engine->LoadSingle(
@@ -153,7 +155,9 @@ function admin_groups(&$engine, &$module)
 						"created		= NOW(), ".
 						"description	= '".quote($engine->dblink, $_POST['description'])."', ".
 						"moderator		= '".quote($engine->dblink, (int)$_POST['moderator'])."', ".
-						"group_name		= '".quote($engine->dblink, $_POST['newname'])."'");
+						"group_name		= '".quote($engine->dblink, $_POST['newname'])."', ".
+						"open			= '".quote($engine->dblink, (int)$_POST['open'])."', ".
+						"active			= '".quote($engine->dblink, (int)$_POST['active'])."'");
 
 				$engine->SetMessage($engine->GetTranslation('GroupsAdded'));
 				$engine->Log(4, "Created a new group //'{$_POST['newname']}'//");
@@ -161,7 +165,7 @@ function admin_groups(&$engine, &$module)
 			}
 		}
 		// rename group
-		else if (isset($_POST['rename']) && $_POST['id'] && ($_POST['newname'] || $_POST['moderator']))
+		else if (isset($_POST['rename']) && isset($_POST['id']) && (isset($_POST['newname']) || isset($_POST['moderator'])))
 		{
 			// do we have identical names?
 			if ($engine->LoadSingle(
@@ -179,7 +183,9 @@ function admin_groups(&$engine, &$module)
 					"UPDATE {$engine->config['table_prefix']}groups SET ".
 					"group_name		= '".quote($engine->dblink, $_POST['newname'])."', ".
 					"description	= '".quote($engine->dblink, $_POST['newdescription'])."', ".
-					"moderator		= '".quote($engine->dblink, (int)$_POST['moderator'])."' ".
+					"moderator		= '".quote($engine->dblink, (int)$_POST['moderator'])."', ".
+					"open			= '".quote($engine->dblink, (int)$_POST['open'])."', ".
+					"active			= '".quote($engine->dblink, (int)$_POST['active'])."' ".
 					"WHERE group_id = '".quote($engine->dblink, $_POST['id'])."' ".
 					"LIMIT 1");
 
@@ -189,7 +195,7 @@ function admin_groups(&$engine, &$module)
 			}
 		}
 		// delete group
-		else if (isset($_POST['delete']) && $_POST['id'])
+		else if (isset($_POST['delete']) && isset($_POST['id']))
 		{
 			$engine->Query(
 				"DELETE FROM {$engine->config['table_prefix']}groups ".
@@ -214,9 +220,9 @@ function admin_groups(&$engine, &$module)
 			echo "<input type=\"hidden\" name=\"mode\" value=\"groups\" />";
 			echo '<table class="formation">';
 			echo '<tr><td><label for="newname">'.$engine->GetTranslation('GroupsAdd').'</label></td>'.
-				'<td><input id="newname" name="newname" value="'.( $_POST['newname'] ? htmlspecialchars($_POST['newname']) : '' ).'" size="20" maxlength="100" /></td></tr>'.
+				'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : '' ).'" size="20" maxlength="100" /></td></tr>'.
 				'<tr><td><label for="description">'.$engine->GetTranslation('GroupsDescription').'</label></td>'.
-				'<td><input id="description" name="description" value="'.( $_POST['description'] ? htmlspecialchars($_POST['description']) : '' ).'" size="50" maxlength="100" /></td></tr>'.
+				'<td><input id="description" name="description" value="'.( isset($_POST['description']) ? htmlspecialchars($_POST['description']) : '' ).'" size="50" maxlength="100" /></td></tr>'.
 				'<tr><td><label for="moderator">'.$engine->GetTranslation('GroupsModerator').'</label></td>'.
 				'<td><select id="moderator" name="moderator">';?>
 					<option value=""></option>
@@ -230,6 +236,10 @@ function admin_groups(&$engine, &$module)
 					}
 
 			echo '</select></td></tr>';
+			echo '<tr><td><label for="open">'.$engine->GetTranslation('GroupsOpen').'</label></td>'.
+				'<td><input type="checkbox" id="open" name="open" value="1" '. ( !isset($_POST['open']) ? ' checked="checked"' : '' ).' /></td></tr>'.
+				'<tr><td><label for="active">'.$engine->GetTranslation('GroupsActive').'</label></td>'.
+				'<td><input type="checkbox" id="active" name="active" value="1" '. ( !isset($_POST['active']) ? ' checked="checked"' : '' ).' /></td></tr>';
 			echo '<tr><td><br /><input id="submit" type="submit" name="create" value="'.$engine->GetTranslation('GroupsSaveButton').'" /> '.
 				'<input id="button" type="button" value="'.$engine->GetTranslation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 				'</td></tr>';
@@ -237,18 +247,18 @@ function admin_groups(&$engine, &$module)
 			echo "</form>";
 		}
 		// rename group
-		else if (isset($_POST['rename']) && $_POST['change'])
+		else if (isset($_POST['rename']) && isset($_POST['change']))
 		{
-			if ($group = $engine->LoadSingle("SELECT group_name, description, moderator FROM {$engine->config['table_prefix']}groups WHERE group_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
+			if ($group = $engine->LoadSingle("SELECT group_name, description, moderator, open, active FROM {$engine->config['table_prefix']}groups WHERE group_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
 			{
 				echo "<form action=\"admin.php\" method=\"post\" name=\"groups\">";
 				echo "<input type=\"hidden\" name=\"mode\" value=\"groups\" />";
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="newname">'.$engine->GetTranslation('GroupsRename').' \'<tt>'.htmlspecialchars($group['group_name']).'</tt>\' in</label></td>'.
-					'<td><input id="newname" name="newname" value="'.( $_POST['newname'] ? htmlspecialchars($_POST['newname']) : htmlspecialchars($group['group_name']) ).'" size="20" maxlength="100" /></td></tr>'.
+					'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : htmlspecialchars($group['group_name']) ).'" size="20" maxlength="100" /></td></tr>'.
 					'<tr><td><label for="newdescription">'.$engine->GetTranslation('GroupsDescription').'</label></td>'.
-					'<td><input id="newdescription" name="newdescription" value="'.( $_POST['newdescription'] ? htmlspecialchars($_POST['newdescription']) : htmlspecialchars($group['description']) ).'" size="50" maxlength="100" /></td></tr>'.
+					'<td><input id="newdescription" name="newdescription" value="'.( isset($_POST['newdescription']) ? htmlspecialchars($_POST['newdescription']) : htmlspecialchars($group['description']) ).'" size="50" maxlength="100" /></td></tr>'.
 					'<tr><td><label for="moderator">'.$engine->GetTranslation('GroupsModerator').'</label></td>'.
 					'<td><select id="moderator" name="moderator">'.
 					'<option value=""></option> ';
@@ -261,8 +271,12 @@ function admin_groups(&$engine, &$module)
 						}
 					}
 
-				echo '</select></td></tr>'.
-					'<tr><td><br /><input id="submit" type="submit" name="rename" value="'.$engine->GetTranslation('GroupsSaveButton').'" /> '.
+				echo '</select></td></tr>';
+				echo '<tr><td><label for="open">'.$engine->GetTranslation('GroupsOpen').'</label></td>'.
+					'<td><input type="checkbox" id="open" name="open" value="1" '. ( isset($_POST['open']) || $group['open'] == 1 ? ' checked="checked"' : '' ).' /></td></tr>'.
+					'<tr><td><label for="active">'.$engine->GetTranslation('GroupsActive').'</label></td>'.
+					'<td><input type="checkbox" id="active" name="active" value="1" '. ( isset($_POST['active']) || $group['active'] == 1 ? ' checked="checked"' : '' ).' /></td></tr>';
+				echo '<tr><td><br /><input id="submit" type="submit" name="rename" value="'.$engine->GetTranslation('GroupsSaveButton').'" /> '.
 					'<input id="button" type="button" value="'.$engine->GetTranslation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 					'<br /><small>'.$engine->GetTranslation('GroupsRenameInfo').'</small>'.
 					'</td></tr>';
@@ -271,7 +285,7 @@ function admin_groups(&$engine, &$module)
 			}
 		}
 		// delete group
-		if (isset($_POST['delete']) && $_POST['change'])
+		if (isset($_POST['delete']) && isset($_POST['change']))
 		{
 			if ($group = $engine->LoadSingle("SELECT group_name FROM {$engine->config['table_prefix']}groups WHERE group_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
 			{
@@ -319,7 +333,7 @@ function admin_groups(&$engine, &$module)
 		<tr>
 			<th style="width:5px;"></th>
 			<th style="width:5px;">ID</th>
-			<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderuser; ?>">Username</a></th>
+			<th style="width:20px;"><a href="?mode=groups&order=<?php echo $orderuser; ?>">Username</a></th>
 		</tr>
 <?php
 		foreach ($members as $member)
