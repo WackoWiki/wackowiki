@@ -17,6 +17,7 @@ $module['files'] = array(
 function admin_files(&$engine, &$module)
 {
 	$order = "";
+	$error = "";
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
@@ -98,7 +99,7 @@ function admin_files(&$engine, &$module)
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE user_id = '".quote($engine->dblink, $user['user_id'])."'");
 
-		if (is_uploaded_file($_FILES['file']['tmp_name'])) // there is file
+		if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) // there is file
 		{
 			// 1. check out $data
 			$_data	= explode('.', $_FILES['file']['name'] );
@@ -127,7 +128,7 @@ function admin_files(&$engine, &$module)
 			// 1.6. check filesize, if asked
 			$maxfilesize	= $engine->config['upload_max_size'];
 
-			if ($_POST['maxsize'])
+			if (isset($_POST['maxsize']))
 				if ($maxfilesize > 1 * $_POST['maxsize'])
 					$maxfilesize = 1 * $_POST['maxsize'];
 
@@ -173,12 +174,15 @@ function admin_files(&$engine, &$module)
 		} //!is_uploaded_file
 		else
 		{
-			if ($_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE || $_FILES['file']['error'] == UPLOAD_ERR_FORM_SIZE)
-				$error = $engine->GetTranslation('UploadMaxSizeReached');
-			else if ($_FILES['file']['error'] == UPLOAD_ERR_PARTIAL || $_FILES['file']['error'] == UPLOAD_ERR_NO_FILE)
-				$error = $engine->GetTranslation('UploadNoFile');
+			if (isset($_FILES['file']['error']))
+			{
+				if ($_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE || $_FILES['file']['error'] == UPLOAD_ERR_FORM_SIZE)
+					$error = $engine->GetTranslation('UploadMaxSizeReached');
+				else if ($_FILES['file']['error'] == UPLOAD_ERR_PARTIAL || $_FILES['file']['error'] == UPLOAD_ERR_NO_FILE)
+					$error = $engine->GetTranslation('UploadNoFile');
+			}
 			else
-				$error = ' ';
+				$error = '';
 		}
 	}
 	if ($error)
@@ -271,7 +275,8 @@ function admin_files(&$engine, &$module)
 		$remove_href = $engine->tag.'&amp;remove=global&amp;file='.$filename;
 ?>
 		<tr>
-			<td style=""><?php echo $link; ?> (<?php echo $filesize; ?> <?php echo $kb; ?>)</td>
+			<td style=""><?php echo $link; ?></td>
+			<td>(<?php echo $filesize; ?> <?php echo $kb; ?>)</td>
 			<td><?php echo $desc ?></td>
 			<td style="white-space:nowrap;"><?php echo $dt ?></td>
 			<td><a href="<?php echo $remove_href; ?>"><?php echo $engine->GetTranslation('RemoveButton') ?></a></td>

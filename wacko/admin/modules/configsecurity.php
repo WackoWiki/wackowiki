@@ -97,11 +97,6 @@ function admin_configsecurity(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
-					<br />
 					CAPTCHA
 				</th>
 			</tr>
@@ -136,11 +131,6 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
 					<br />
 					Tolerances and privileges
 				</th>
@@ -233,11 +223,6 @@ function admin_configsecurity(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
-					<br />
 					SSL Settings
 				</th>
 			</tr>
@@ -256,11 +241,6 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
 					<br />
 					Persistence of user passwords
 				</th>
@@ -298,11 +278,6 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
 					<br />
 					Log settings
 				</th>
@@ -351,11 +326,6 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
 					<br />
 					Miscellaneous
 				</th>
