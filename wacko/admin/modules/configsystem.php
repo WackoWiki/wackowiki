@@ -97,11 +97,6 @@ function admin_configsystem(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
-					<br />
 					Caching Options
 				</th>
 			</tr>
@@ -136,11 +131,6 @@ function admin_configsystem(&$engine, &$module)
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
 					<br />
 					Text Handler
 				</th>
@@ -187,11 +177,6 @@ function admin_configsystem(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
-					<br />
 					Date Formats
 				</th>
 			</tr>
@@ -236,11 +221,6 @@ function admin_configsystem(&$engine, &$module)
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
 					<br />
 					Miscellaneous
 				</th>

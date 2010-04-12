@@ -2253,7 +2253,7 @@ class Wacko
 	function AddSpaces($text)
 	{
 		$show = "1";
-		if ($user = $this->GetUser())	$show = $user["show_spaces"];
+		if ($user = $this->GetUser())	$show = (isset($user["show_spaces"]) ? $user["show_spaces"] : NULL);
 		if (!$show)						$show = $this->config["show_spaces"];
 		if ($show != "0")
 		{
@@ -2854,7 +2854,7 @@ class Wacko
 
 	function GetUserId()
 	{
-		if ($user = $this->GetUser()) $user_id = $user["user_id"];
+		if ($user = $this->GetUser()) $user_id = (isset($user["user_id"]) ? $user["user_id"] : NULL);
 
 		if (isset($user_id))
 			return $user_id;

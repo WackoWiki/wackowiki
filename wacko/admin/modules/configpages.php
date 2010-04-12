@@ -87,11 +87,6 @@ function admin_configpages(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
-					<br />
 					Section News
 				</th>
 			</tr>
@@ -110,11 +105,6 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
-					<div class="center">
-						<input id="submit" type="submit" value="save" />
-						<input id="button" type="reset" value="reset" />
-					</div>
 					<br />
 					Service pages
 				</th>
