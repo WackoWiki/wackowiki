@@ -325,6 +325,8 @@ $wackoTranslation = array(
 	"ShowComments?" => "Show comments by default",
 	"DoubleclickEditing" => "Doubleclick Editing",
 	"UpdateSettingsButton" => "Update Settings",
+
+	"AccountDisabled" => "Your account may be disabled or blocked.",
 	"WrongPassword" => "Wrong password!",
 	"AlreadyRegistered" => "If you're already a registered user, log in here!",
 	"YourLogin" => "Your WikiName",

@@ -96,72 +96,81 @@ else
 		// if user name already exists, check password
 		if ($existingUser = $this->LoadUser($_POST["name"]))
 		{
-			if (strlen($existingUser["password"]) == 32)
+			// check for disabled account
+			if ($existingUser["enabled"] == false)
 			{
-				$_processed_password = md5($_POST["password"]);
+				$error = $this->GetTranslation("AccountDisabled");
+			}
+			else
+			{
+				// check for old md5 password
+				if (strlen($existingUser["password"]) == 32)
+				{
+					$_processed_password = md5($_POST["password"]);
 
+					if ($existingUser["password"] == $_processed_password)
+					{
+						$salt = $this->RandomPassword(4, 3);
+						$password = sha1($_POST["name"].$salt.$_POST["password"]);
+
+						// update database with the sha1 password for future logins
+						$this->Query("UPDATE ".$this->config["table_prefix"]."users SET ".
+									"password	= '".$password."', ".
+									"salt		= '".$salt."' ".
+									"WHERE user_name = '".$_POST["name"]."'");
+					}
+				}
+				else
+				{
+					$_processed_password = sha1($_POST["name"].$existingUser["salt"].$_POST["password"]);
+				}
+
+				// check password
 				if ($existingUser["password"] == $_processed_password)
 				{
-					$salt = $this->RandomPassword(4, 3);
-					$password = sha1($_POST["name"].$salt.$_POST["password"]);
+					// define session longetivity
+					switch ($_POST['session'])
+					{
+						case '1d':
+							$session = 1;
+							break;
+						case '7d':
+							$session = 7;
+							break;
+						case '30d':
+							$session = 30;
+							break;
+						default:
+							$session = $this->config['cookie_session'];
+					}
 
-					// update database with the sha1 password for future logins
-					$this->Query("UPDATE ".$this->config["table_prefix"]."users SET ".
-								"password	= '".$password."', ".
-								"salt		= '".$salt."' ".
-								"WHERE user_name = '".$_POST["name"]."'");
+					$this->LogUserIn($existingUser, $_POST['persistent'], $session);
+					$this->SetUser($existingUser, 1);
+					$this->UpdateSessionTime($existingUser);
+					$this->SetBookmarks(BM_USER);
+					$this->context[++$this->current_context] = "";
+					$this->Log(3, str_replace("%1", $existingUser["user_name"], $this->GetTranslation("LogUserLoginOK")));
+
+					// run in ssl mode?
+					if ($this->config['ssl'] == true)
+					{
+						$this->config['base_url'] = str_replace('http://', 'https://', $this->config['base_url']);
+					}
+
+					if ($_POST["goback"] != "")
+						$this->Redirect($this->Href("", stripslashes($_POST["goback"]), "cache=".rand(0,1000)));
+					else
+						$this->Redirect($this->href());
 				}
-			}
-			else
-			{
-				$_processed_password = sha1($_POST["name"].$existingUser["salt"].$_POST["password"]);
-			}
-
-			// check password
-			if ($existingUser["password"] == $_processed_password)
-			{
-				// define session longetivity
-				switch ($_POST['session'])
-				{
-					case '1d':
-						$session = 1;
-						break;
-					case '7d':
-						$session = 7;
-						break;
-					case '30d':
-						$session = 30;
-						break;
-					default:
-						$session = $this->config['cookie_session'];
-				}
-
-				$this->LogUserIn($existingUser, $_POST['persistent'], $session);
-				$this->SetUser($existingUser, 1);
-				$this->UpdateSessionTime($existingUser);
-				$this->SetBookmarks(BM_USER);
-				$this->context[++$this->current_context] = "";
-				$this->Log(3, str_replace("%1", $existingUser["user_name"], $this->GetTranslation("LogUserLoginOK")));
-
-				// run in ssl mode?
-				if ($this->config['ssl'] == true)
-				{
-					$this->config['base_url'] = str_replace('http://', 'https://', $this->config['base_url']);
-				}
-
-				if ($_POST["goback"] != "")
-					$this->Redirect($this->Href("", stripslashes($_POST["goback"]), "cache=".rand(0,1000)));
 				else
-					$this->Redirect($this->href());
-			}
-			else
-			{
-				$error = $this->GetTranslation("WrongPassword");
-				$name = $_POST["name"];
-				$focus = 1;
+				{
+					$error = $this->GetTranslation("WrongPassword");
+					$name = $_POST["name"];
+					$focus = 1;
 
-				// log failed attempt
-				$this->Log(2, str_replace("%1", $_POST["name"], $this->GetTranslation("LogUserLoginFailed")));
+					// log failed attempt
+					$this->Log(2, str_replace("%1", $_POST["name"], $this->GetTranslation("LogUserLoginFailed")));
+				}
 			}
 		}
 	}

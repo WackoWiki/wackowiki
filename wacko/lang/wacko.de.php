@@ -285,6 +285,8 @@ $wackoTranslation = array(
 	"ShowComments?" => "Zeige Kommentare",
 	"DoubleclickEditing" => "Editieren durch Doppelklick",
 	"UpdateSettingsButton" => "Speichere Einstellungen",
+
+	"AccountDisabled" => "Dein Konto ist deaktiviert oder gesperrt.",
 	"WrongPassword" => "Falsches Passwort!",
 	"AlreadyRegistered" => "Falls du dich bereits registriert hast, melde dich hier an!",
 	"YourLogin" => "Benutzername",

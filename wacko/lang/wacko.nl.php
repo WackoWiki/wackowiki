@@ -284,6 +284,8 @@ $wackoTranslation = array(
 	"ShowComments?" => "Reacties altijd tonen?",
 	"DoubleclickEditing" => "Dubbelklik om te wijzigen",
 	"UpdateSettingsButton" => "Bewaar instellingen",
+
+	"AccountDisabled" => "Uw account kan uitgeschakeld zijn.",
 	"WrongPassword" => "Verkeerd wachtwoord!",
 	"AlreadyRegistered" => "Als u een geregistreerde gebruiker ben, kunt u hier inloggen!",
 	"YourLogin" => "Uw wikinaam",
