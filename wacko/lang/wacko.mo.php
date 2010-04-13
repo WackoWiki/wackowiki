@@ -284,6 +284,8 @@ $wackoTranslation = array(
 	"ShowComments?" => "Afiseaza comentariile implicit",
 	"DoubleclickEditing" => "Editarea prin double-click",
 	"UpdateSettingsButton" => "Pastreaza preferintele",
+
+	"AccountDisabled" => "Your account may be disabled or blocked.",
 	"WrongPassword" => "Parola incorecta!",
 	"AlreadyRegistered" => "Daca deja sunteti inregistrat, atunci intrati aici!",
 	"YourLogin" => "WikkiNume al Dvs.",

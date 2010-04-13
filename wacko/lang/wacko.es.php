@@ -284,6 +284,8 @@ $wackoTranslation = array(
 	"ShowComments?" => "Mostrar comentarios por defecto",
 	"DoubleclickEditing" => "Editar haciendo doble-click en la página",
 	"UpdateSettingsButton" => "Guardar preferencias",
+
+	"AccountDisabled" => "Su cuenta puede estar deshabilitada.",
 	"WrongPassword" => "Contraseña erronea!",
 	"AlreadyRegistered" => "Ya estás registrado, conectate aqui!",
 	"YourLogin" => "Tu login (WikiName)",

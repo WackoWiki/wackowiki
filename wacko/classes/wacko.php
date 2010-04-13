@@ -1368,12 +1368,12 @@ class Wacko
 						if ($this->HasAccess("read", $comment_on_id, $Watcher["user"]))
 						{
 							$_user = $this->LoadSingle(
-								"SELECT email, lang, more, email_confirm ".
+								"SELECT email, lang, more, email_confirm, enabled ".
 								"FROM " .$this->config["user_table"]." ".
 								"WHERE user_id = '".quote($this->dblink, $Watcher["user_id"])."'");
 							$_user["options"] = $this->DecomposeOptions($_user["more"]);
 
-							if ($_user["email_confirm"] == "" && $_user["options"]["send_watchmail"] != "0")
+							if ($_user["enabled"] == true && $_user["email_confirm"] == "" && $_user["options"]["send_watchmail"] != "0")
 							{
 								$lang = $_user["lang"];
 								$this->LoadResource($lang);
@@ -1477,13 +1477,13 @@ class Wacko
 							if ($this->HasAccess("read", $page_id, $Watcher["user"]))
 							{
 								$_user = $this->LoadSingle(
-									"SELECT email, lang, more, email_confirm ".
+									"SELECT email, lang, more, email_confirm, enabled ".
 									"FROM " .$this->config["user_table"]." ".
 									"WHERE user_id = '".quote($this->dblink, $Watcher["user_id"])."'");
 
 								$_user["options"] = $this->DecomposeOptions($_user["more"]);
 
-								if ($_user["email_confirm"] == "" && $_user["options"]["send_watchmail"] != "0")
+								if ($_user["enabled"] == true && $_user["email_confirm"] == "" && $_user["options"]["send_watchmail"] != "0")
 								{
 									$lang = $_user["lang"];
 									$this->LoadResource($lang);

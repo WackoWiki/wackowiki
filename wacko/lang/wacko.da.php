@@ -284,6 +284,8 @@ $wackoTranslation = array(
 	"ShowComments?" => "Vis kommentarer",
 	"DoubleclickEditing" => "Doubleclick Editing",
 	"UpdateSettingsButton" => "Gem opsætningen",
+
+	"AccountDisabled" => "Din konto er måske deaktiveret.",
 	"WrongPassword" => "Forkert password!",
 	"AlreadyRegistered" => "Er du allerede registreret kan du logge ind her!",
 	"YourLogin" => "Dit WikiNavn",

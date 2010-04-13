@@ -284,6 +284,8 @@ $wackoTranslation = array(
 	"ShowComments?" => "Εμφάνιση σχολίων εξ' ορισμού",
 	"DoubleclickEditing" => "Επεξεργασία με διπλό click",
 	"UpdateSettingsButton" => "Αποθήκευση Ρυθμίσεων",
+
+	"AccountDisabled" => "Your account may be disabled or blocked.",
 	"WrongPassword" => "Λανθασμένο συνθηματικό!",
 	"AlreadyRegistered" => "Αν είστε ήδη εγγεγραμμένος χρήστης, συνδεθείτε εδώ!",
 	"YourLogin" => "Το WikiName",

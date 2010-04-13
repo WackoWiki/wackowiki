@@ -284,6 +284,8 @@ $wackoTranslation = array(
 	"ShowComments?" => "Näita vaikimisi kommentaare",
 	"DoubleclickEditing" => "Topeltklõps muutmiseks",
 	"UpdateSettingsButton" => "Uuenda seaded",
+
+	"AccountDisabled" => "Sinu kasutajakonto võib olla blokeeritud.",
 	"WrongPassword" => "Vale parool!",
 	"AlreadyRegistered" => "Kui sa oled juba registreerunud, logi siit sisse!",
 	"YourLogin" => "Sinu WikiNimi",

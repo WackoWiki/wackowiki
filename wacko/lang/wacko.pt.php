@@ -284,6 +284,8 @@ $wackoTranslation = array(
 	"ShowComments?" => "Por defeito mostra comentários",
 	"DoubleclickEditing" => "Edição por duplo clique",
 	"UpdateSettingsButton" => "Actualizar Parâmetros",
+
+	"AccountDisabled" => "Your account may be disabled or blocked.",
 	"WrongPassword" => "Password errada!",
 	"AlreadyRegistered" => "Se já é um utilizador registado, faça aqui o seu login!",
 	"YourLogin" => "O seu username",

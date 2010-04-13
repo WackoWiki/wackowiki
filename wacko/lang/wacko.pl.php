@@ -284,6 +284,8 @@ $wackoTranslation = array(
 	"ShowComments?" => "Domy¶lnie wy¶wietlaj komentarze",
 	"DoubleclickEditing" => "W³±cz edycjê przez podwójne klikniêcie",
 	"UpdateSettingsButton" => "Zachowaj zmiany",
+
+	"AccountDisabled" => "Twoje konto mo¿e byæ wy³±czone.",
 	"WrongPassword" => "Nieprawid³owe has³o!",
 	"AlreadyRegistered" => "Zaloguj siê!",
 	"YourLogin" => "Twoja NazwaWiki",

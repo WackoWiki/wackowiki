@@ -284,6 +284,8 @@ $wackoTranslation = array(
 	"ShowComments?" => "Показывать комментарии по умолчанию",
 	"DoubleclickEditing" => "Редактирование двойным щелчком мыши",
 	"UpdateSettingsButton" => "Сохранить настройки",
+
+	"AccountDisabled" => "Your account may be disabled or blocked.",
 	"WrongPassword" => "Неправильный пароль!",
 	"AlreadyRegistered" => "Если вы уже регистрировались, заходите здесь!",
 	"YourLogin" => "Ваше ВикиИмя",
