@@ -38,11 +38,13 @@ function admin_users(&$engine, &$module)
 	else
 	{
 		// get user
-		if (isset($_POST['id']))
+		if (isset($_GET['user_id']) || isset($_POST['user_id']))
 		{
+			$user_id = (isset($_GET['user_id']) ? $_GET['user_id'] : $_POST['user_id']);
+
 			$user = $engine->LoadSingle(
 				"SELECT user_id, user_name, real_name, email FROM {$engine->config['table_prefix']}users ".
-				"WHERE user_id = '".quote($engine->dblink, $_POST['id'])."' ".
+				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."' ".
 				"LIMIT 1");
 		}
 
@@ -56,7 +58,7 @@ function admin_users(&$engine, &$module)
 			"LIMIT 1"))
 			{
 				$engine->SetMessage($engine->GetTranslation('UsersAlreadyExists'));
-				$_POST['change'] = $_POST['id'];
+				$_POST['change'] = $_POST['user_id'];
 				$_POST['create'] = 1;
 			}
 			else
@@ -75,18 +77,18 @@ function admin_users(&$engine, &$module)
 				unset($_POST['create']);
 			}
 		}
-		// rename user
-		else if (isset($_POST['rename']) && isset($_POST['id']) && (isset($_POST['newname']) || isset($_POST['moderator'])))
+		// edit user
+		else if (isset($_POST['edit']) && isset($_POST['user_id']) && (isset($_POST['newname']) || isset($_POST['moderator'])))
 		{
 			// do we have identical names?
 			if ($engine->LoadSingle(
 			"SELECT user_id FROM {$engine->config['table_prefix']}users ".
-			"WHERE user_name = '".quote($engine->dblink, $_POST['newname'])."' AND user_id <> '".quote($engine->dblink, $_POST['id'])."' ".
+			"WHERE user_name = '".quote($engine->dblink, $_POST['newname'])."' AND user_id <> '".quote($engine->dblink, $_POST['user_id'])."' ".
 			"LIMIT 1"))
 			{
 				$engine->SetMessage($engine->GetTranslation('UsersAlreadyExists'));
-				$_POST['change'] = $_POST['id'];
-				$_POST['rename'] = 1;
+				$_POST['change'] = $_POST['user_id'];
+				$_POST['edit'] = 1;
 			}
 			else
 			{
@@ -97,7 +99,7 @@ function admin_users(&$engine, &$module)
 					"real_name		= '".quote($engine->dblink, $_POST['newrealname'])."', ".
 					"lang		= '".quote($engine->dblink, $_POST['lang'])."', ".
 					"enabled		= '".quote($engine->dblink, (int)$_POST['enabled'])."' ".
-					"WHERE user_id = '".quote($engine->dblink, $_POST['id'])."' ".
+					"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."' ".
 					"LIMIT 1");
 
 
@@ -106,14 +108,14 @@ function admin_users(&$engine, &$module)
 			}
 		}
 		// delete user
-		else if (isset($_POST['delete']) && isset($_POST['id']))
+		else if (isset($_POST['delete']) && isset($_POST['user_id']))
 		{
 			$engine->Query(
 				"DELETE FROM {$engine->config['table_prefix']}users ".
-				"WHERE user_id = '".quote($engine->dblink, $_POST['id'])."'");
+				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
 			$engine->Query(
 				"DELETE FROM {$engine->config['table_prefix']}groups_members ".
-				"WHERE user_id = '".quote($engine->dblink, $_POST['id'])."'");
+				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
 
 			$engine->SetMessage($engine->GetTranslation('UsersDeleted'));
 			$engine->Log(4, "User //'{$user['user_name']}'// removed from the database");
@@ -158,14 +160,14 @@ function admin_users(&$engine, &$module)
 			echo '</table><br />';
 			echo "</form>";
 		}
-		// rename user
-		else if (isset($_POST['rename']) && isset($_POST['change']))
+		// edit user
+		else if (isset($_POST['edit']) && isset($_POST['change']))
 		{
 			if ($user = $engine->LoadSingle("SELECT user_name, real_name, email, lang, enabled FROM {$engine->config['table_prefix']}users WHERE user_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
 			{
 				echo "<form action=\"admin.php\" method=\"post\" name=\"users\">";
 				echo "<input type=\"hidden\" name=\"mode\" value=\"users\" />";
-				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
+				echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="newname">'.$engine->GetTranslation('UsersRename').' \'<tt>'.htmlspecialchars($user['user_name']).'</tt>\' in</label></td>'.
 					'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : htmlspecialchars($user['user_name']) ).'" size="20" maxlength="100" /></td></tr>'.
@@ -189,7 +191,7 @@ function admin_users(&$engine, &$module)
 					echo '</select></td></tr>';
 					echo '<tr><td><label for="enabled">'.$engine->GetTranslation('UserEnabled').'</label></td>'.
 						'<td><input type="checkbox" id="enabled" name="enabled" value="1" '. ( isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked="checked"' : '' ).' /></td></tr>';
-					echo '<tr><td><br /><input id="submit" type="submit" name="rename" value="'.$engine->GetTranslation('GroupsSaveButton').'" /> '.
+					echo '<tr><td><br /><input id="submit" type="submit" name="edit" value="'.$engine->GetTranslation('GroupsSaveButton').'" /> '.
 					'<input id="button" type="button" value="'.$engine->GetTranslation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 					'<br /><small>'.$engine->GetTranslation('UsersRenameInfo').'</small>'.
 					'</td></tr>';
@@ -204,7 +206,7 @@ function admin_users(&$engine, &$module)
 			{
 				echo "<form action=\"admin.php\" method=\"post\" name=\"users\">";
 				echo "<input type=\"hidden\" name=\"mode\" value=\"users\" />";
-				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
+				echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">'.$engine->GetTranslation('UsersDelete').' \'<tt>'.htmlspecialchars($user['user_name']).'</tt>\'?</label> '.
 					'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
