@@ -54,7 +54,7 @@ function admin_groups(&$engine, &$module)
 				"LIMIT 1"))
 				{
 					$engine->SetMessage($engine->GetTranslation('GroupsAlreadyExists'));
-					$_POST['change'] = $_POST['id'];
+					$_POST['change'] = $_POST['group_id'];
 					$_POST['create'] = 1;
 				}
 				else
@@ -145,7 +145,7 @@ function admin_groups(&$engine, &$module)
 			"LIMIT 1"))
 			{
 				$engine->SetMessage($engine->GetTranslation('GroupsAlreadyExists'));
-				$_POST['change'] = $_POST['id'];
+				$_POST['change'] = $_POST['group_id'];
 				$_POST['create'] = 1;
 			}
 			else
@@ -164,18 +164,18 @@ function admin_groups(&$engine, &$module)
 				unset($_POST['create']);
 			}
 		}
-		// rename group
-		else if (isset($_POST['rename']) && isset($_POST['id']) && (isset($_POST['newname']) || isset($_POST['moderator'])))
+		// edit group
+		else if (isset($_POST['edit']) && isset($_POST['group_id']) && (isset($_POST['newname']) || isset($_POST['moderator'])))
 		{
 			// do we have identical names?
 			if ($engine->LoadSingle(
 			"SELECT group_id FROM {$engine->config['table_prefix']}groups ".
-			"WHERE group_name = '".quote($engine->dblink, $_POST['newname'])."' AND group_id <> '".quote($engine->dblink, $_POST['id'])."' ".
+			"WHERE group_name = '".quote($engine->dblink, $_POST['newname'])."' AND group_id <> '".quote($engine->dblink, $_POST['group_id'])."' ".
 			"LIMIT 1"))
 			{
 				$engine->SetMessage($engine->GetTranslation('GroupsAlreadyExists'));
-				$_POST['change'] = $_POST['id'];
-				$_POST['rename'] = 1;
+				$_POST['change'] = $_POST['group_id'];
+				$_POST['edit'] = 1;
 			}
 			else
 			{
@@ -186,7 +186,7 @@ function admin_groups(&$engine, &$module)
 					"moderator		= '".quote($engine->dblink, (int)$_POST['moderator'])."', ".
 					"open			= '".quote($engine->dblink, (int)$_POST['open'])."', ".
 					"active			= '".quote($engine->dblink, (int)$_POST['active'])."' ".
-					"WHERE group_id = '".quote($engine->dblink, $_POST['id'])."' ".
+					"WHERE group_id = '".quote($engine->dblink, $_POST['group_id'])."' ".
 					"LIMIT 1");
 
 
@@ -195,14 +195,14 @@ function admin_groups(&$engine, &$module)
 			}
 		}
 		// delete group
-		else if (isset($_POST['delete']) && isset($_POST['id']))
+		else if (isset($_POST['delete']) && isset($_POST['group_id']))
 		{
 			$engine->Query(
 				"DELETE FROM {$engine->config['table_prefix']}groups ".
-				"WHERE group_id = '".quote($engine->dblink, $_POST['id'])."'");
+				"WHERE group_id = '".quote($engine->dblink, $_POST['group_id'])."'");
 			$engine->Query(
 				"DELETE FROM {$engine->config['table_prefix']}groups_members ".
-				"WHERE group_id = '".quote($engine->dblink, $_POST['id'])."'");
+				"WHERE group_id = '".quote($engine->dblink, $_POST['group_id'])."'");
 
 			$engine->SetMessage($engine->GetTranslation('GroupsDeleted'));
 			$engine->Log(4, "Group //'{$group['group_name']}'// removed from the database");
@@ -246,14 +246,14 @@ function admin_groups(&$engine, &$module)
 			echo '</table><br />';
 			echo "</form>";
 		}
-		// rename group
-		else if (isset($_POST['rename']) && isset($_POST['change']))
+		// edit group
+		else if (isset($_POST['edit']) && isset($_POST['change']))
 		{
 			if ($group = $engine->LoadSingle("SELECT group_name, description, moderator, open, active FROM {$engine->config['table_prefix']}groups WHERE group_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
 			{
 				echo "<form action=\"admin.php\" method=\"post\" name=\"groups\">";
 				echo "<input type=\"hidden\" name=\"mode\" value=\"groups\" />";
-				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
+				echo '<input type="hidden" name="group_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="newname">'.$engine->GetTranslation('GroupsRename').' \'<tt>'.htmlspecialchars($group['group_name']).'</tt>\' in</label></td>'.
 					'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : htmlspecialchars($group['group_name']) ).'" size="20" maxlength="100" /></td></tr>'.
@@ -276,7 +276,7 @@ function admin_groups(&$engine, &$module)
 					'<td><input type="checkbox" id="open" name="open" value="1" '. ( isset($_POST['open']) || $group['open'] == 1 ? ' checked="checked"' : '' ).' /></td></tr>'.
 					'<tr><td><label for="active">'.$engine->GetTranslation('GroupsActive').'</label></td>'.
 					'<td><input type="checkbox" id="active" name="active" value="1" '. ( isset($_POST['active']) || $group['active'] == 1 ? ' checked="checked"' : '' ).' /></td></tr>';
-				echo '<tr><td><br /><input id="submit" type="submit" name="rename" value="'.$engine->GetTranslation('GroupsSaveButton').'" /> '.
+				echo '<tr><td><br /><input id="submit" type="submit" name="edit" value="'.$engine->GetTranslation('GroupsSaveButton').'" /> '.
 					'<input id="button" type="button" value="'.$engine->GetTranslation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 					'<br /><small>'.$engine->GetTranslation('GroupsRenameInfo').'</small>'.
 					'</td></tr>';
@@ -291,7 +291,7 @@ function admin_groups(&$engine, &$module)
 			{
 				echo "<form action=\"admin.php\" method=\"post\" name=\"groups\">";
 				echo "<input type=\"hidden\" name=\"mode\" value=\"groups\" />";
-				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
+				echo '<input type="hidden" name="group_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">'.$engine->GetTranslation('GroupsDelete').' \'<tt>'.htmlspecialchars($group['group_name']).'</tt>\'?</label> '.
 					'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
@@ -470,7 +470,7 @@ function admin_groups(&$engine, &$module)
 		/////////////////////////////////////////////
 
 			echo '<br /><input id="button" type="submit" name="create" value="'.$engine->GetTranslation('GroupsAddButton').'" /> ';
-			echo '<input id="button" type="submit" name="rename" value="'.$engine->GetTranslation('GroupsRenameButton').'" /> ';
+			echo '<input id="button" type="submit" name="edit" value="'.$engine->GetTranslation('GroupsEditButton').'" /> ';
 			echo '<input id="button" type="submit" name="delete" value="'.$engine->GetTranslation('GroupsRemoveButton').'" /> ';
 		 ?>
 		</form>

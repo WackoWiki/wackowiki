@@ -182,7 +182,7 @@ $wackoTranslation = array(
 	"GroupsSaveButton" 	=> "Submit",
 	"GroupsCancelButton" 	=> "Cancel",
 	"GroupsAddButton"		=> "Add",
-	"GroupsRenameButton"	=> "Rename",
+	"GroupsEditButton"	=> "Edit",
 	"GroupsRemoveButton"	=> "Remove",
 	"GroupsEditInfo"		=> "To edit the groups list select the radio button.",
 
