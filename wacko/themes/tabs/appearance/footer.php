@@ -53,7 +53,7 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 	$this->HasAccess("write") ? $this->GetTranslation("EditText") : "",
 	$this->method != "edit"
 	) ?> <?php EchoTab( $this->href("revisions"),  $this->GetTranslation("RevisionTip"),
-	$this->GetPageTime() ? $this->GetPageTimeFormatted() : "",
+	$this->page["modified"] ? $this->GetPageTimeFormatted() : "",
 	$this->method != "revisions"
 	) ?> <?php
 	// if this page exists

@@ -164,7 +164,7 @@ class Wacko
 
 	function GetPageTag() { return $this->tag; }
 
-	// TODO: same as function GetCommentOnTag, but he use other variable names and this one will probably obsolete if we use page_id in acls table ( ? )
+	// TODO: same as function GetCommentOnTag, but uses other variable names and this one will probably obsolete if we use page_id in acls table ( ? )
 	function GetPageTagById($page_id = 0)
 	{
 		$tag = $this->LoadSingle(
@@ -196,7 +196,6 @@ class Wacko
 			return $new_page_id;
 		}
 	}
-	function GetPageTime() { return $this->page["modified"]; }
 	function GetPageLastWriter() { return $this->page["user_id"]; }
 	function GetWackoName() { return $this->config["wacko_name"]; }
 	function GetWackoVersion() { return WACKO_VERSION; }
