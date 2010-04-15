@@ -11,7 +11,7 @@ CoolBlue theme.
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
 <title><?php // Echoes Title of the page.
-echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?>
+echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":""); ?>
 </title>
 <?php
 // We don't need search robots to index subordinate pages
@@ -177,7 +177,7 @@ echo $this->HasAccess("write") ? "<br /><a href=\"".$this->href("edit")."\" acce
   <br />
   <?php
 // Watch/Unwatch icon
-echo ($this->IsWatched($this->GetUserName(), $this->GetPageTag()) ? "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("SetWatch")."</a>" );
+echo ($this->IsWatched($this->GetUserName(), $this->tag) ? "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("SetWatch")."</a>" );
 ?>
   <br />
   <?php
@@ -204,4 +204,4 @@ echo $this->page["modified"] ? "<a href=\"".$this->href("revisions")."\" title=\
 // here we show messages
 if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
 ?>
-<loc><?php echo $this->config["wacko_name"] ?>: <?php echo $this->GetPagePath(); ?><a title="<?php echo $this->config["search_title_help"]?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></loc>
+<loc><?php echo $this->config["wacko_name"] ?>: <?php echo $this->GetPagePath(); ?><a title="<?php echo $this->config["search_title_help"]?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></loc>

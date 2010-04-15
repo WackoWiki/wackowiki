@@ -130,7 +130,7 @@ if ($this->method == "show") {
 	if ($this->HasAccess("read") && $this->config["hide_files"] != 1 && ($this->config["hide_files"] != 2 || $this->GetUser()))
 	{
 		// store files display in session
-		$tag = $this->GetPageTag();
+		$tag = $this->tag;
 		if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag]))
 		$_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
 
@@ -213,7 +213,7 @@ switch (count($files))
 		$comments = $this->LoadComments($this->GetPageId());
 
 		// store comments display in session
-		$tag = $this->GetPageTag();
+		$tag = $this->tag;
 		if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag]))
 		$_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
 

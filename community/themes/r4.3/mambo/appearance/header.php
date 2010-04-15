@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 	<head>
   		<title>
-			<?php echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?>
+			<?php echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":""); ?>
 		</title>
 <?php
 	if ($this->method != 'show' || $this->page["latest"] == "0") {
@@ -70,7 +70,7 @@ else if($this->HasAccess("write"))
 	<tr>
   		<td>
 			<?php echo $this->config["wacko_name"] ?>: <?php echo $this->GetPagePath(); ?>
-			<a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
+			<a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
 		</td>
 	  	<td class="searchArea" align="right" valign="bottom">
 			<?php echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?>

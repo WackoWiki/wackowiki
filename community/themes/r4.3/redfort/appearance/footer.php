@@ -22,7 +22,7 @@ Updated by Pavel Fedotov.
 if ($this->HasAccess("read") && $this->config["hide_files"] != 1)
 {
   // store files display in session
-  $tag = $this->GetPageTag();
+  $tag = $this->tag;
   if (!isset($_SESSION["show_files"][$tag]))
     $_SESSION["show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
 
@@ -125,7 +125,7 @@ if ($this->HasAccess("read") && $this->config["hide_comments"] != 1)
   $comments = $this->LoadComments($this->GetPageId());
 
   // store comments display in session
-  $tag = $this->GetPageTag();
+  $tag = $this->tag;
   if (!isset($_SESSION["show_comments"][$tag]))
     $_SESSION["show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
 

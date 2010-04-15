@@ -20,7 +20,7 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
     <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->config["base_url"];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
     <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 	<?php if($this->method != 'show' || $this->page["latest"] == "0") { ?><meta name="robots" content="noindex, nofollow" /><?php } ?>
-	<title><?php echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?></title>
+	<title><?php echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":""); ?></title>
 	<!-- JavaScript used by WackoWiki -->
 	<?php
 // JS files.
@@ -75,7 +75,7 @@ else if($this->HasAccess("write"))
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
 			<b><?php echo $this->config["wacko_name"]; ?>:</b>
 			<?php echo $this->GetPagePath(); ?>
-			<a title="<?php echo $this->GetTranslation("SearchTitleTip"); ?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
+			<a title="<?php echo $this->GetTranslation("SearchTitleTip"); ?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
 		</div>
 		<div id="quicklinks">
 			<div class="bookmarks">

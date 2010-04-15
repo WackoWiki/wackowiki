@@ -21,7 +21,7 @@ if ($user = $this->GetUser())
 		print("<strong>$title</strong><br /><br />\n");
 
 		// show backlinks
-		if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
+		if ($pages = $this->LoadPagesLinkingTo($this->tag))
 		{
 			foreach ($pages as $page)
 			{
@@ -42,7 +42,7 @@ if ($user = $this->GetUser())
 			print($this->GetTranslation("NoReferringPages")."<p></p>");
 		}
 
-		$title = str_replace("%1", $this->ComposeLinkToPage($this->GetPageTag()),
+		$title = str_replace("%1", $this->ComposeLinkToPage($this->tag),
 		str_replace("%2",
 		($this->config["referrers_purge_time"] ?
 		($this->config["referrers_purge_time"] == 1 ?
@@ -76,7 +76,7 @@ if ($user = $this->GetUser())
 
 	if ($global)
 	{
-		print("<br />[".str_replace("%1",$this->href("referrers_sites"),str_replace("%2",$this->GetPageTag(),$this->GetTranslation("ViewReferringSites")))." | ".str_replace("%1",$this->href("referrers"),str_replace("%2",$this->GetPageTag(),$this->GetTranslation("ViewReferrersFor")))."]");
+		print("<br />[".str_replace("%1",$this->href("referrers_sites"),str_replace("%2",$this->tag,$this->GetTranslation("ViewReferringSites")))." | ".str_replace("%1",$this->href("referrers"),str_replace("%2",$this->tag,$this->GetTranslation("ViewReferrersFor")))."]");
 	}
 	else
 	{

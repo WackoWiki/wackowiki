@@ -13,7 +13,7 @@ Common header file.
 <head>
   <title><?php
 // Echoes Title of the page.
-  echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
+  echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":"");
 ?></title>
 <?php
 // We don't need search robots to index subordinate pages
@@ -91,7 +91,7 @@ else if($this->HasAccess("write"))
      <span class="main"><?php echo $this->config["wacko_name"] ?>:</span>
      <span class="pagetitle"><?php echo $this->GetPagePath(); ?></span>
      <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>"
-     href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a><br />
+     href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a><br />
 <!-- </h1> -->
 </td><td>
 <?php

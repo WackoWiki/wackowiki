@@ -5,7 +5,7 @@
 
 <html>
 <head>
-  <title><?php echo $this->config["wacko_name"]." : ".$this->GetPageTag(); ?></title>
+  <title><?php echo $this->config["wacko_name"]." : ".$this->tag; ?></title>
 <?php if ($this->method != 'show')
        echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
   <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
@@ -18,7 +18,7 @@
 
 <div class="header">
   <h5>
-  <?php echo file_exists("images/".$this->config["wacko_name"].".png")?"<img src='/images/".$this->config["wacko_name"].".png' alt='".$this->config["wacko_name"]."' />":$this->config["wacko_name"] ?> : <a href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->GetPageTag()); ?>"><?php echo $this->GetPageTag(); ?></a> 
+  <?php echo file_exists("images/".$this->config["wacko_name"].".png")?"<img src='/images/".$this->config["wacko_name"].".png' alt='".$this->config["wacko_name"]."' />":$this->config["wacko_name"] ?> : <a href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->tag); ?>"><?php echo $this->tag; ?></a> 
   </h5>
 </div>
 

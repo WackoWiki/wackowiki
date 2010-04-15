@@ -5,7 +5,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
-<title><?php echo $this->config["wacko_name"]." : ".$this->GetPageTag(); ?></title>
+<title><?php echo $this->config["wacko_name"]." : ".$this->tag; ?></title>
 <?php if ($this->method != 'show')
 echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <meta http-equiv="content-type"
@@ -23,6 +23,6 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <div class="header">
 <h1><?php echo file_exists("images/".$this->config["wacko_name"].".png")?"<img src='/images/".$this->config["wacko_name"].".png' alt='".$this->config["wacko_name"]."' />":$this->config["wacko_name"] ?>
 : <a
-	href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->GetPageTag()); ?>"><?php echo $this->GetPageTag(); ?></a>
+	href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->tag); ?>"><?php echo $this->tag; ?></a>
 </h1>
 </div>

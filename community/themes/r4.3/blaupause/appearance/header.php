@@ -11,7 +11,7 @@ Common header file.
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
 <title><?php // Echoes Title of the page.
-echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?>
+echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":""); ?>
 </title>
 <?php
 // We don't need search robots to index subordinate pages
@@ -100,7 +100,7 @@ else if($this->HasAccess("write"))
     <div id="breadcrumb">
       <!-- <h1>-->
       <span class="main"><a href="<?php echo $this->config["base_url"]; ?>"><?php echo $this->config["wacko_name"] ?></a>:</span> <span class="pagetitle"><?php echo $this->GetPagePath(); ?></span> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>"
-     href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a><br />
+     href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a><br />
       <!-- </h1> -->
     </div>
     <div id="languages">

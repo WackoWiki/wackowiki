@@ -14,7 +14,7 @@ Common header file.
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
 <title><?php // Echoes Title of the page.
-echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?>
+echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":""); ?>
 </title>
 <?php
 // We don't need search robots to index subordinate pages
@@ -176,7 +176,7 @@ echo $this->HasAccess("write") ? "<br /><a href=\"".$this->href("edit")."\" acce
   <br />
   <?php
 // Watch/Unwatch icon
-echo ($this->IsWatched($this->GetUserName(), $this->GetPageTag()) ? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config["theme_url"]."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->GetTranslation("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config["theme_url"]."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->GetTranslation("SetWatch")."</a>" );
+echo ($this->IsWatched($this->GetUserName(), $this->tag) ? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config["theme_url"]."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->GetTranslation("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config["theme_url"]."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->GetTranslation("SetWatch")."</a>" );
 ?>
   <br />
   <?php
@@ -214,4 +214,4 @@ if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
 <div id="text">
 <div class="Text">
 <span class="main"><?php echo $this->config["wacko_name"] ?>:</span> <?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->config["search_title_help"]?>"
-     href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;") ?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
+     href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;") ?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
