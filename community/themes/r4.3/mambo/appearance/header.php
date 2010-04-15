@@ -142,14 +142,14 @@ else if($this->HasAccess("write"))
     				<td class="modulecontent">
 						<div class="modulecontent">
 						<?php
-echo $this->GetPageTime() ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTimeFormatted()."</a>\n" : "";
+echo $this->page["modified"] ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTimeFormatted()."</a>\n" : "";
         					echo "<hr />";
 
                             if ($this->HasAccess("write")) {
 								echo "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetTranslation("EditTip")."\">".$this->GetTranslation("EditText")."</a>\n";
 							}
 							echo '<br />';
-                            if ($this->GetPageTime()) {
+                            if ($this->page["modified"]) {
 								echo "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetTranslation('SettingsRevisions')."</a>\n";
                             }
 							// if this page exists

@@ -14,7 +14,7 @@ echo $this->HasAccess("write") ? "<li><a href=\"".$this->href("edit")."\" access
 if ($this->page)
 {
 	// Revisions link
-	echo $this->GetPageTime() ? "<li><a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTimeFormatted()."</a></li>\n" : "";
+	echo $this->page["modified"] ? "<li><a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTimeFormatted()."</a></li>\n" : "";
 
 	// If owner is current user
 	if ($this->UserIsOwner())
