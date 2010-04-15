@@ -7,6 +7,33 @@ $style = "";
 $nomark = "";
 $for = "";
 
+if (!function_exists('FullTextSearch'))
+{
+	function FullTextSearch(&$wacko, $phrase, $filter)
+	{
+		return $wacko->LoadAll(
+			"SELECT ".$wacko->pages_meta.", body ".
+			"FROM ".$wacko->config["table_prefix"]."pages ".
+			"WHERE (( match(body) against('".quote($wacko->dblink, $phrase)."') ".
+				"OR lower(tag) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
+				($filter
+					? "AND comment_on_id = '0'"
+					: "").
+				" )");
+	}
+}
+if (!function_exists('TagSearch'))
+{
+	function TagSearch(&$wacko, $phrase)
+	{
+		return $wacko->LoadAll(
+			"SELECT ".$wacko->pages_meta." ".
+			"FROM ".$wacko->config["table_prefix"]."pages ".
+			"WHERE lower(tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
+			"ORDER BY supertag");
+	}
+}
+
 if (($topic == 1) || ($title == 1))
 	$mode = "topic";
 else
@@ -59,8 +86,11 @@ if ($phrase)
 
 	if (strlen($phrase) >= 3)
 	{
-		if ($mode == "topic") $results = $this->TagSearch($phrase);
-		else $results = $this->FullTextSearch($phrase, ($filter == "all" ? 0 : 1));
+		if ($mode == "topic")
+			$results = TagSearch($this, $phrase);
+		else
+			$results = FullTextSearch($this, $phrase, ($filter == "all" ? 0 : 1));
+
 		$phrase = htmlspecialchars($phrase);
 
 		// make and display results
@@ -85,10 +115,13 @@ if ($phrase)
 						if ($style == "comma" && $i > 0) print ",\n";
 
 						print("<h3>".$this->Link("/".$page["tag"],"",$page["tag"])."</h3>");
-						$context = getLineWithPhrase($phrase, $page["body"], $clean);
-						$context = preview_text($TEXT = $context, $LIMIT = 500, $TAGS = 0);
-						$context = highlight_this($text = $context, $words = $phrase, $the_place = 0);
-						print("<div>".str_replace("\n", '<br />', $context)."</div>");
+						if ($mode !== "topic")
+						{
+							$context = getLineWithPhrase($phrase, $page["body"], $clean);
+							$context = preview_text($TEXT = $context, $LIMIT = 500, $TAGS = 0);
+							$context = highlight_this($text = $context, $words = $phrase, $the_place = 0);
+							print("<div>".str_replace("\n", '<br />', $context)."</div>");
+						}
 
 						// close item
 						if ($style == "br") print "<br />\n";
