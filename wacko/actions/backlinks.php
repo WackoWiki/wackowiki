@@ -6,7 +6,7 @@ $nomark = "";
 if ($page)
 	$tag = $this->UnwrapLink($page);
 else
-	$tag = $this->getPageTag();
+	$tag = $this->tag;
 
 if ($pages = $this->LoadPagesLinkingTo($tag))
 {

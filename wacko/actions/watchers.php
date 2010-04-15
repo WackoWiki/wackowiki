@@ -7,7 +7,7 @@ if ($vars[0] && $vars[0] != $vars["nomark"])
 }
 else
 {
-	$tag = $this->getPageTag();
+	$tag = $this->tag;
 	$page_id = $this->getPageId();
 }
 if ($this->UserIsOwner($page_id))

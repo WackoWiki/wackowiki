@@ -13,7 +13,7 @@ Common header file.
 <title>
 <?php
 // Echoes Title of the page.
-  echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
+  echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":"");
 ?>
 </title>
 <?php
@@ -109,7 +109,7 @@ echo $this->FormClose();
     <td height="20" colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td><div class="navText"><strong><?php echo $this->ComposeLinkToPage($this->config["root_page"]);?>:</strong> <?php echo $this->GetPagePath(); ?> <a title="<?php echo $this->GetTranslation("SearchTitleTip")?>"
-     href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a></div></td>
+     href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></div></td>
           <td align="right"><?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->GetUser()) {

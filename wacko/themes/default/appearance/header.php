@@ -10,7 +10,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
-	<title><?php echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->GetPageTag()).($this->method != "show" ? " (".$this->method.")" : "");?></title>
+	<title><?php echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->tag).($this->method != "show" ? " (".$this->method.")" : "");?></title>
 <?php
 // We don't need search robots to index subordinate pages
 if ($this->method != 'show' || $this->page["latest"] == "0")
@@ -85,7 +85,7 @@ else if($this->HasAccess("write"))
 	<div id="header">
 		<div id="header-main">
 			<div id="header-top">
-			<strong><?php echo $this->config["wacko_name"] ?>: </strong><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
+			<strong><?php echo $this->config["wacko_name"] ?>: </strong><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
 		</div>
 		<div id="login">
 <?php

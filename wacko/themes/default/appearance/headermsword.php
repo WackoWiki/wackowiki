@@ -5,7 +5,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 
 <html>
 <head>
-<title><?php echo $this->config["wacko_name"]." : ".$this->GetPageTag(); ?></title>
+<title><?php echo $this->config["wacko_name"]." : ".$this->tag; ?></title>
 <?php if ($this->method != 'show')
 echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <meta http-equiv="content-type"
@@ -22,6 +22,6 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 
 <div class="header">
 <h1><?php echo $this->config["wacko_name"] ?>: <a
-	href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->GetPageTag()); ?>"><?php echo $this->GetPageTag(); ?></a>
+	href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->tag); ?>"><?php echo $this->tag; ?></a>
 </h1>
 </div>

@@ -162,8 +162,6 @@ class Wacko
 					return $comment_on_tag;
 	}
 
-	function GetPageTag() { return $this->tag; }
-
 	// TODO: same as function GetCommentOnTag, but uses other variable names and this one will probably obsolete if we use page_id in acls table ( ? )
 	function GetPageTagById($page_id = 0)
 	{

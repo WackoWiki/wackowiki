@@ -174,7 +174,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 
 		// show form
 		?>
-<h3><?php echo str_replace("%1",$this->Link("/".$this->GetPageTag()),$this->GetTranslation("ACLFor")); ?></h3>
+<h3><?php echo str_replace("%1",$this->Link("/".$this->tag),$this->GetTranslation("ACLFor")); ?></h3>
 <?php echo $this->FormOpen("acls") ?> <?php echo "<input type=\"checkbox\" id=\"massacls\" name=\"massacls\" "; echo " /> <label for=\"massacls\">".$this->GetTranslation("SettingsMassAcls")."</label>"; ?>
 <br />
 <div class="cssform">

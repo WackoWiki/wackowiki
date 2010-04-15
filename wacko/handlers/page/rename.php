@@ -117,7 +117,7 @@ if ($registered
 <br />
 			<?php
 			// show backlinks
-			if ($pages = $this->LoadPagesLinkingTo($this->getPageTag()))
+			if ($pages = $this->LoadPagesLinkingTo($this->tag))
 			{
 				print("<br /><div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("AlertReferringPages").":</span></p>\n");
 				foreach ($pages as $page)

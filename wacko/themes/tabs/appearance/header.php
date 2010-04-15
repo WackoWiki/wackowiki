@@ -10,7 +10,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
-	<title><?php echo $this->AddSpaces($this->GetPageTag()).($this->method != "show" ? " (".$this->method.")" : "");
+	<title><?php echo $this->AddSpaces($this->tag).($this->method != "show" ? " (".$this->method.")" : "");
 echo " (@".$this->config["wacko_name"].")" ?></title>
 <?php
 // We don't need search robots to index subordinate pages
@@ -161,7 +161,7 @@ echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $thi
 <div class="header">
   <h1><span class="Main"><?php echo $this->config["wacko_name"] ?>:</span> <?php echo $this->GetPagePath(); ?> <a class="Search"
 	title="<?php echo $this->GetTranslation("SearchTitleTip")?>"
-	href="<?php echo $this->config["base_url"] ?>TextSearch<?php echo ($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a> </h1>
+	href="<?php echo $this->config["base_url"] ?>TextSearch<?php echo ($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a> </h1>
   <?php if (($this->method != "edit") || !$this->HasAccess("write")) { ?>
   <div style="background-image:url(<?php echo $this->config["theme_url"] ?>icons/shade2.gif);" class="Shade"><img
 	src="<?php echo $this->config["theme_url"] ?>icons/shade1.gif"

@@ -22,7 +22,7 @@ if ($this->HasAccess("read"))
 		{
 			print("<div class=\"revisioninfo\">".
 			str_replace("%1",$this->href(),
-			str_replace("%2",$this->GetPageTag(),
+			str_replace("%2",$this->tag,
 			str_replace("%3",$this->page["modified"],
 			$this->GetTranslation("Revision")))).".</div>");
 		}

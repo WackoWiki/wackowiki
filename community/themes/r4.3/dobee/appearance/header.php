@@ -7,7 +7,7 @@ header( "Content-Type: text/html; charset=".$this->GetCharset() );
 	lang="<?php echo $this->page["lang"] ?>">
 
 <head>
-<title><?php echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":""); ?>
+<title><?php echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":""); ?>
 </title>
 <?php
 if ($this->method != 'show' || $this->page["latest"] == "0") {
@@ -91,7 +91,7 @@ else if($this->HasAccess("write"))
 		<td><?php echo $this->config["wacko_name"] ?>: <?php echo $this->GetPagePath(); ?>
 		<a class="Search"
 			title="<?php echo $this->GetTranslation("SearchTitleTip")?>"
-			href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->GetPageTag()); ?>">...</a>
+			href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
 		</td>
 		<td class="searchArea" align="right" valign="bottom"><?php echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?>
 		<input name="phrase" type="text"

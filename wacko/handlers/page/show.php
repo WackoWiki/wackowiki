@@ -60,7 +60,7 @@ if ($this->HasAccess("read"))
 		{
 			print("<div class=\"revisioninfo\">".
 			str_replace("%1",$this->href(),
-			str_replace("%2",$this->GetPageTag(),
+			str_replace("%2",$this->tag,
 			str_replace("%3",$this->GetPageTimeFormatted(),
 			$this->GetTranslation("Revision")))));
 
@@ -154,7 +154,7 @@ if ($this->page)
 		{
 
 			// store files display in session
-			$tag = $this->GetPageTag();
+			$tag = $this->tag;
 			if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag]))
 			$_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
 
@@ -256,7 +256,7 @@ if ($this->page)
 			$comments = $this->LoadComments($this->page["page_id"], $pagination['offset'], $this->config["comments_count"]);
 
 			// store comments display in session
-			$tag = $this->GetPageTag();
+			$tag = $this->tag;
 			if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag]))
 			$_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
 
