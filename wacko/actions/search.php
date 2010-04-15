@@ -12,7 +12,7 @@ if (!function_exists('FullTextSearch'))
 	function FullTextSearch(&$wacko, $phrase, $filter)
 	{
 		return $wacko->LoadAll(
-			"SELECT ".$wacko->pages_meta.", body ".
+			"SELECT tag, body, comment_on_id ".
 			"FROM ".$wacko->config["table_prefix"]."pages ".
 			"WHERE (( match(body) against('".quote($wacko->dblink, $phrase)."') ".
 				"OR lower(tag) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
@@ -27,7 +27,7 @@ if (!function_exists('TagSearch'))
 	function TagSearch(&$wacko, $phrase)
 	{
 		return $wacko->LoadAll(
-			"SELECT ".$wacko->pages_meta." ".
+			"SELECT tag, comment_on_id ".
 			"FROM ".$wacko->config["table_prefix"]."pages ".
 			"WHERE lower(tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
 			"ORDER BY supertag");
