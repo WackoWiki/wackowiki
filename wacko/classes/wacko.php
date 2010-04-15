@@ -1046,21 +1046,6 @@ class Wacko
 	function LoadPageTitles() { return $this->LoadAll("SELECT DISTINCT tag FROM ".$this->config["table_prefix"]."pages ORDER BY tag"); }
 	function LoadAllPagesByTime() { return $this->LoadAll("SELECT page_id, tag, modified FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '0' ORDER BY modified DESC, BINARY tag"); }
 
-	function FullTextSearch($phrase,$filter)
-	{
-		return $this->LoadAll(
-			"SELECT ".$this->pages_meta.", body ".
-			"FROM ".$this->config["table_prefix"]."pages ".
-			"WHERE (( match(body) against('".quote($this->dblink, $phrase)."') ".
-				"OR lower(tag) LIKE lower('%".quote($this->dblink, $phrase)."%')) ".
-				($filter
-					? "AND comment_on_id = '0'"
-					: "").
-				" )");
-	}
-
-	function TagSearch($phrase) { return $this->LoadAll("SELECT ".$this->pages_meta." FROM ".$this->config["table_prefix"]."pages WHERE lower(tag) LIKE binary lower('%".quote($this->dblink, $phrase)."%') ORDER BY supertag"); }
-
 	function LoadRecentlyDeleted($limit = 1000, $cache = 1)
 	{
 		$_metaArr	= explode(',', $this->pages_meta);
