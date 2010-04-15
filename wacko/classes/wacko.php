@@ -197,7 +197,6 @@ class Wacko
 		}
 	}
 	function GetPageLastWriter() { return $this->page["user_id"]; }
-	function GetWackoName() { return $this->config["wacko_name"]; }
 	function GetWackoVersion() { return WACKO_VERSION; }
 
 	function CheckFileExists($filename, $unwrapped_tag = "" )

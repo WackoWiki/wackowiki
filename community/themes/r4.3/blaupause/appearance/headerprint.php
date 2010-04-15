@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<title><?php echo $this->GetWackoName()." : ".$this->GetPageTag(); ?></title>
+<title><?php echo $this->config["wacko_name"]." : ".$this->GetPageTag(); ?></title>
 <?php if ($this->method != 'show')
        echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />

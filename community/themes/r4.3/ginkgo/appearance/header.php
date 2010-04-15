@@ -13,7 +13,7 @@ Common header file.
 <title>
 <?php
 // Echoes Title of the page.
-  echo $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
+  echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
 ?>
 </title>
 <?php
