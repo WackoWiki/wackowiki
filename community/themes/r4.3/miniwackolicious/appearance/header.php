@@ -31,7 +31,7 @@
 <?php
 	echo '	<link rel="start" href="'.$base_url.'Homepage" />'."\n";
 	// Echoes Title of the page.
-  echo "	<title>" . $this->GetWackoName()." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
+  echo "	<title>" . $this->config["wacko_name"]." : ".$this->AddSpaces($this->GetPageTag()).($this->method!="show"?" (".$this->method.")":"");
 	echo "</title>\n";
 ?>
 	<!-- link rel="shortcut icon" href="<?php echo $this->config["theme_url"] ?>icons/favicon.ico" type="image/x-icon" / -->
