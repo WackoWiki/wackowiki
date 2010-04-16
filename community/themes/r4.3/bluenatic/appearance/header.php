@@ -13,12 +13,13 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 	<meta name="description" content="<?php echo $this->GetDescription(); ?>" />
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"]; ?>css/default.css" media="screen" />
+	<?php if ($this->config["allow_x11colors"]) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config["base_url"] ?>themes/_common/X11colors.css" /><?php } ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"]; ?>css/page.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"]; ?>css/wacko.css" media="screen" />
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->config["theme_url"]; ?>icons/icon.gif" />
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->config["base_url"];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
-    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->config["base_url"];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
-    <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->config["base_url"];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 	<?php if($this->method != 'show' || $this->page["latest"] == "0") { ?><meta name="robots" content="noindex, nofollow" /><?php } ?>
 	<title><?php echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":""); ?></title>
 	<!-- JavaScript used by WackoWiki -->

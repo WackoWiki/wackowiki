@@ -15,27 +15,16 @@ if ($this->method != 'show' || $this->page["latest"] == "0") {
 }
 ?>
 <meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
-<meta name="description"
-	content="<?php echo $this->GetDescription(); ?>" />
+<meta name="description" content="<?php echo $this->GetDescription(); ?>" />
 <meta name="language" content="<?php echo $this->page["lang"] ?>" />
-<meta http-equiv="content-type"
-	content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
-<link rel="stylesheet" type="text/css"
-	href="<?php echo $this->config["theme_url"] ?>css/default.css" />
-<link rel="stylesheet" type="text/css"
-	href="<?php echo $this->config["theme_url"] ?>css/left.css" />
-<link rel="shortcut icon"
-	href="<?php echo $this->config["theme_url"] ?>icons/favicon.ico"
-	type="image/x-icon" />
-<link rel="alternate" type="application/rss+xml"
-	title="<?php echo $this->GetTranslation("RecentChangesRSS");?>"
-	href="<?php echo $this->config["base_url"];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
-<link rel="alternate" type="application/rss+xml"
-	title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>"
-	href="<?php echo $this->config["base_url"];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
-<link rel="alternate" type="application/rss+xml"
-	title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>"
-	href="<?php echo $this->href("revisions.xml");?>" />
+<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"] ?>css/default.css" />
+<?php if ($this->config["allow_x11colors"]) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config["base_url"] ?>themes/_common/X11colors.css" /><?php } ?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"] ?>css/left.css" />
+<link rel="shortcut icon" href="<?php echo $this->config["theme_url"] ?>icons/favicon.ico" type="image/x-icon" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->config["base_url"];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->config["base_url"];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere

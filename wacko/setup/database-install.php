@@ -100,6 +100,7 @@ $configDb['admin_name'] = $config['admin_name'];
 $configDb['allow_rawhtml'] = $config['allow_rawhtml'];
 $configDb['allow_registration'] = $config['allow_registration'];
 $configDb['allow_themes'] = $config['allow_themes'];
+$configDb['allow_x11colors'] = $config['allow_x11colors'];
 $configDb['antidupe'] = $config['antidupe'];
 $configDb['cache'] = $config['cache'];
 $configDb['cache_sql'] = $config['cache_sql'];

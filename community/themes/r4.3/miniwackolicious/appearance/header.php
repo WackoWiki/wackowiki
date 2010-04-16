@@ -10,7 +10,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->config["language"]; ?>" lang="<?php echo $this->config["language"]; ?>">
 <head>
-    <meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
+	<meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
 	<meta name="description" content="<?php echo $this->GetDescription(); ?>" />
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <?php
@@ -18,20 +18,21 @@
 	if ($this->method != 'show' || $this->page["latest"] == "0")
 		echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 ?>
- 	<link href="<?php echo $this->config["theme_url"] ?>../default/css/default.css.php" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $this->config["theme_url"] ?>layout/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $this->config["theme_url"] ?>layout/patches/opera.css" rel="stylesheet" type="text/opera" />
-    <!--[if IE 5]><link href="<?php echo $this->config["theme_url"] ?>layout/patches/ie5.css" rel="stylesheet" type="text/css" /><![endif]-->
-    <!--[if IE 6]><link href="<?php echo $this->config["theme_url"] ?>layout/patches/ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
-    <!--[if IE 7]><link href="<?php echo $this->config["theme_url"] ?>layout/patches/ie7.css" rel="stylesheet" type="text/css" /><![endif]-->
-    <link href="<?php echo $this->config["theme_url"] ?>layout/print.css" media="print" rel="stylesheet" type="text/css" />
+	<link href="<?php echo $this->config["theme_url"] ?>../default/css/default.css.php" rel="stylesheet" type="text/css" />
+	<?php if ($this->config["allow_x11colors"]) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config["base_url"] ?>themes/_common/X11colors.css" /><?php } ?>
+	<link href="<?php echo $this->config["theme_url"] ?>layout/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="<?php echo $this->config["theme_url"] ?>layout/patches/opera.css" rel="stylesheet" type="text/opera" />
+	<!--[if IE 5]><link href="<?php echo $this->config["theme_url"] ?>layout/patches/ie5.css" rel="stylesheet" type="text/css" /><![endif]-->
+	<!--[if IE 6]><link href="<?php echo $this->config["theme_url"] ?>layout/patches/ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+	<!--[if IE 7]><link href="<?php echo $this->config["theme_url"] ?>layout/patches/ie7.css" rel="stylesheet" type="text/css" /><![endif]-->
+	<link href="<?php echo $this->config["theme_url"] ?>layout/print.css" media="print" rel="stylesheet" type="text/css" />
 
-    <!-- MiniWackoLicious Theme for WackoWiki, by eye48.com -->
+	<!-- MiniWackoLicious Theme for WackoWiki, by eye48.com -->
 
 <?php
 	echo '	<link rel="start" href="'.$base_url.'Homepage" />'."\n";
 	// Echoes Title of the page.
-  echo "	<title>" . $this->config["wacko_name"]." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":"");
+	echo "	<title>" . $this->config["wacko_name"]." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":"");
 	echo "</title>\n";
 ?>
 	<!-- link rel="shortcut icon" href="<?php echo $this->config["theme_url"] ?>icons/favicon.ico" type="image/x-icon" / -->
