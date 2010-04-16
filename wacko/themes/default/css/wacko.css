@@ -233,7 +233,7 @@ tt { color:#666600; background:#ffffcc; padding: 0 2px }
 .underline { text-decoration:underline; }
 
 /* Highlighted text: SYNTAX ??text?? */
-.mark {background: #ffff00; /* old red: #ffaaaa */ }
+.mark {background: #ffffaa; /* old red: #ffaaaa */ }
 
 /* Highlighted text: SYNTAX ??(green)text?? */
 .mark-yellow {background: #ffff00;}
