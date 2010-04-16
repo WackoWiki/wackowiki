@@ -43,8 +43,8 @@ function admin_users(&$engine, &$module)
 			$user_id = (isset($_GET['user_id']) ? $_GET['user_id'] : $_POST['user_id']);
 
 			$user = $engine->LoadSingle(
-				"SELECT user_id, user_name, real_name, email FROM {$engine->config['table_prefix']}users ".
-				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."' ".
+				"SELECT user_id, user_name, real_name, email, enabled FROM {$engine->config['table_prefix']}users ".
+				"WHERE user_id = '".quote($engine->dblink, $user_id)."' ".
 				"LIMIT 1");
 		}
 

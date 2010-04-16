@@ -221,6 +221,7 @@ class Init
 
 					"show_spaces" => 1,
 
+					"allow_x11colors" => 0,
 					"default_typografica" => 1,
 					"paragrafica" => 1,
 

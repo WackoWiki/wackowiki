@@ -28,6 +28,7 @@ function admin_configbasic(&$engine, &$module)
 		$config['meta_description']			= (string)$_POST['meta_description'];
 		$config['meta_keywords']			= (string)$_POST['meta_keywords'];
 		$config['theme']					= (string)$_POST['theme'];
+		$config['allow_themes']				= (string)$_POST['allow_themes'];
 		$config['admin_name']				= (string)$_POST['admin_name'];
 		$config['admin_email']				= (string)$_POST['admin_email'];
 		$config['abuse_email']				= (string)$_POST['abuse_email'];
@@ -102,8 +103,8 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="theme"><strong>Theme design:</strong><br />
-				<small>Template design a site that is used by default.</small></label></td>
+				<td class="label"><label for="theme"><strong>Theme:</strong><br />
+				<small>Template design the site uses by default.</small></label></td>
 				<td>
 					<select style="width:200px;" id="theme" name="theme">
 <?php
@@ -115,6 +116,14 @@ function admin_configbasic(&$engine, &$module)
 ?>
 					</select>
 				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="allow_themes"><strong>Allow Themes:</strong><br />
+				<small>Allowed themes, which the user can choose: "0" – all available themes are allowed (default), <br />"default,coffee" – here only these both themes are allowed.</small></label></td>
+				<td><input maxlength="25" style="width:200px;" id="allow_themes" name="allow_themes" value="<?php echo htmlspecialchars($engine->config['allow_themes']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

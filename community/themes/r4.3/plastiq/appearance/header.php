@@ -13,6 +13,7 @@
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <meta http-equiv="imagetoolbar" content="no" />
 <link href="<?php echo $this->config["theme_url"] ?>css/atom.css" rel="stylesheet" type="text/css" media="screen" />
+<?php if ($this->config["allow_x11colors"]) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config["base_url"] ?>themes/_common/X11colors.css" /><?php } ?>
 <link href="<?php echo $this->config["theme_url"] ?>css/wacko.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo $this->config["theme_url"] ?>css/default.css" rel="stylesheet" type="text/css" media="screen" />
 <link rel="start" href="/" />

@@ -1,5 +1,6 @@
 <?php
 
+$edit_note = "";
 $error = "";
 $output = "";
 

@@ -36,6 +36,7 @@ function admin_configsystem(&$engine, &$module)
 		$config['cache_sql']			= (int)$_POST['cache_sql'];
 		$config['cache_sql_ttl']			= (int)$_POST['cache_sql_ttl'];
 		// $config['bbcode']			= (int)$_POST['bbcode'];
+		$config['allow_x11colors']			= (int)$_POST['allow_x11colors'];
 		$config['default_typografica']			= (int)$_POST['default_typografica'];
 		$config['paragrafica']			= (int)$_POST['paragrafica'];
 		$config['allow_rawhtml']			= (int)$_POST['allow_rawhtml'];
@@ -139,6 +140,14 @@ function admin_configsystem(&$engine, &$module)
 				<td class="label"><label for="bbcode"><strong>Parser BBCode:</strong></label></td>
 				<td><input type="checkbox" id="bbcode" name="bbcode" value="1"<?php echo ( $engine->config['bbcode'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>-->
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="allow_x11colors"><strong>X11 Colors Usage:</strong><br />
+				<small>Extents the available colors for <tt>??(color) background??</tt> and <tt>!!(color) text!!</tt> Unsetting slightly speed up the process of adding comments and save the page.</small></label></td>
+				<td><input type="checkbox" id="allow_x11colors" name="allow_x11colors" value="1"<?php echo ( $engine->config['allow_x11colors'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>

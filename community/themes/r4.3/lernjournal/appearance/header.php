@@ -27,6 +27,7 @@ lernjournal theme.
 <meta name="language" content="<?php echo $this->page["lang"] ?>" />
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"] ?>css/default.css" />
+<?php if ($this->config["allow_x11colors"]) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config["base_url"] ?>themes/_common/X11colors.css" /><?php } ?>
 <link href="<?php echo $this->config["theme_url"] ?>css/layout.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $this->config["theme_url"] ?>css/fontdesign.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $this->config["theme_url"] ?>css/sidenote.css" rel="stylesheet" type="text/css" />

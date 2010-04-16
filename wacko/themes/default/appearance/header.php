@@ -21,6 +21,9 @@ if ($this->method != 'show' || $this->page["latest"] == "0")
 	<meta name="language" content="<?php echo $this->page["lang"] ?>" />
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"] ?>css/default.css" />
+	<?php if ($this->config["allow_x11colors"]) {?>
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->config["base_url"] ?>themes/_common/X11colors.css" />
+	<?php } ?>
 	<link media="print" rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"] ?>css/print.css" />
 	<link rel="shortcut icon" href="<?php echo $this->config["theme_url"] ?>icons/favicon.ico" type="image/x-icon" />
 	<link  rel="start" title="<?php echo $this->config["root_page"];?>" href="<?php echo $this->config["base_url"];?>"/>
