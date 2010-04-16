@@ -47,6 +47,7 @@ color:green;
 .cl-red {
 color:#C00;
 }
+.cl-yellow {color: #ffff00;}
 
 .code {
 background:#FFF;
@@ -230,8 +231,13 @@ font-size:22px;
 
 .mark {
 background:#faa;
-color:#00000;
 }
+
+/* Highlighted text: SYNTAX ??(green)text?? */
+.mark-yellow {background: #ffff00;}
+.mark-green {background: #008000;}
+.mark-blue {background: #0000ff;}
+.mark-red {background: #ff0000;}
 
 .micq1 {
 font-weight:700;

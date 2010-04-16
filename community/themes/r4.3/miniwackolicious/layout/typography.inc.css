@@ -42,7 +42,13 @@ blockquote
 /* ##monospace##      */ tt { font-family:System, monospace; background:#f6f6f6; }
 /* --strike through-- */ s { text-decoration:line-through }
 /* !!attention!!      */ span.cite { background:#ffb; color:#000; }
-/* ??marked??         */ span.mark { background:#fbb; color:#000; }
+/* ??marked??         */ span.mark { background:#fbb;}
+
+/* Highlighted text: SYNTAX ??(green)text?? */
+.mark-yellow {background: #ffff00;}
+.mark-green {background: #008000;}
+.mark-blue {background: #0000ff;}
+.mark-red {background: #ff0000;}
 /* (?Term==Def?)      */ dfn { font-variant:small-caps; cursor:help; font-style:normal; border-bottom:dotted 1px #ccc; color:#000; }
 
 abbr, acronym { border-bottom:dotted; border-width:1px; cursor:help; }
