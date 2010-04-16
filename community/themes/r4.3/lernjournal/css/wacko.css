@@ -273,9 +273,10 @@ div.action           { margin:2px; background: #FFF4B3 }
 div.action-content   { padding:10px 10px 25px 10px; border: solid #999999 1px;}
 
 /* Important colored text: SYNTAX !!(red)text!! */
-.cl-red {color:#C00;}
-.cl-green {color:green;}
-.cl-blue {color:#00C;}
+.cl-red {color: #CC0000;}
+.cl-green {color: #008000;}
+.cl-blue {color: #0000CC;}
+.cl-yellow {color: #ffff00;}
 
 /* Fixed width text: SYNTAX ##monospace## */
 tt {background:#ffc;color:#660;padding:0 2px;}
@@ -286,5 +287,11 @@ tt {background:#ffc;color:#660;padding:0 2px;}
 /* underline text: SYNTAX __text__ */
 .underline { text-decoration:underline; }
 
-/* Marked text: SYNTAX ??text?? */
-.mark {background:#faa;color:#000000;}
+/* Highlighted text: SYNTAX ??text?? */
+.mark {background:#faa;}
+
+/* Highlighted text: SYNTAX ??(green)text?? */
+.mark-yellow {background: #ffff00;}
+.mark-green {background: #008000;}
+.mark-blue {background: #0000ff;}
+.mark-red {background: #ff0000;}

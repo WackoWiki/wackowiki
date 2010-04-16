@@ -253,6 +253,12 @@ table.upload img {
 /*	border: 1px solid #990000;*/
 }
 
+/* Highlighted text: SYNTAX ??(green)text?? */
+.mark-yellow {background: #ffff00;}
+.mark-green {background: #008000;}
+.mark-blue {background: #0000ff;}
+.mark-red {background: #ff0000;}
+
 .nb td, .fyi td, .inf td {
 	padding: 5px;
 	height: 50px;

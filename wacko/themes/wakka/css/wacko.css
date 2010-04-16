@@ -209,9 +209,10 @@ div.action           {
 div.action-content   { padding:10px 10px 25px 10px; }
 
 /* Important colored text: SYNTAX !!(red)text!! */
-.cl-red   {color: #CC0000;}
+.cl-red {color: #CC0000;}
 .cl-green {color: #008000;}
-.cl-blue  {color: #0000CC;}
+.cl-blue {color: #0000CC;}
+.cl-yellow {color: #ffff00;}
 
 /* Fixed width text: SYNTAX ##monospace## */
 tt { color:#666600; background:#ffffcc; padding: 0 2px }
@@ -222,5 +223,11 @@ tt { color:#666600; background:#ffffcc; padding: 0 2px }
 /* underline text: SYNTAX __text__ */
 .underline { text-decoration:underline; }
 
-/* Marked text: SYNTAX ??text?? */
-.mark { color: #000; background:#ffaaaa; }
+/* Highlighted text: SYNTAX ??text?? */
+.mark { background:#FFFFAA; }
+
+/* Highlighted text: SYNTAX ??(green)text?? */
+.mark-yellow {background: #ffff00;}
+.mark-green {background: #008000;}
+.mark-blue {background: #0000ff;}
+.mark-red {background: #ff0000;}

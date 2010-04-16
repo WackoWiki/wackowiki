@@ -93,6 +93,7 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
 // this.addButton("signature","Signature","'::@::',' ',1");
  this.addButton("quote","Quote","'\\n<[',']>\\n',2");
  this.addButton("textred","Marked text","'!!','!!',2");
+ this.addButton("highlightcolor","Highlight text","'??','??',2");
  this.addButton("createlink","Hyperlink","","document.getElementById('" + this.id + "')._owner.createLink");
  
  if (this.autocomplete) this.autocomplete.addButton();

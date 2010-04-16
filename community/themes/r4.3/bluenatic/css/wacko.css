@@ -290,7 +290,7 @@ div .action-content {padding:7px;}
 .cl-blue  {background-color:	transparent; color:#009;}
 .cl-green {background-color:transparent; color:#090;}
 .cl-red   {background-color:transparent; color:#c00;}
-
+.cl-yellow {background-color:transparent; color: #ffff00;}
 
 /* Fixed width text: SYNTAX ##monospace## */
 tt {
@@ -307,5 +307,11 @@ tt {
 /* underline text: SYNTAX __text__ */
 .underline { text-decoration:underline; }
 
-/* Marked text: SYNTAX ??text?? */
-.mark {background-color:#ffc; border:solid 1px #cc9; color:#000;}
+/* Highlighted text: SYNTAX ??text?? */
+.mark {background-color:#ffc; border:solid 1px #cc9;}
+
+/* Highlighted text: SYNTAX ??(green)text?? */
+.mark-yellow {background: #ffff00;}
+.mark-green {background: #008000;}
+.mark-blue {background: #0000ff;}
+.mark-red {background: #ff0000;}
