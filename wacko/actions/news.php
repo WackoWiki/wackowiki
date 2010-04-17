@@ -1,10 +1,14 @@
 <?php
 
+// {{news [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number]}}
+
 if (!isset($mode))	$mode = "latest";
 if (!isset($noxml)) $noxml = 0;
-
+if ($max) $limit = $max;
 if (!isset($limit))	$limit = 10;
 else			$limit = (int)$limit;
+
+$pages = "";
 
 $newscluster	= $this->config["news_cluster"];
 $newslevels		= $this->config["news_levels"];
@@ -13,6 +17,14 @@ $newslevels		= $this->config["news_levels"];
 // heavy lifting here (watch out for REGEXPs!)
 if ($mode == "latest")
 {
+	$count	= $this->LoadSingle(
+			"SELECT COUNT(tag) AS n ".
+			"FROM {$this->config['table_prefix']}pages ".
+			"WHERE tag REGEXP '^{$newscluster}{$newslevels}$' ".
+				"AND comment_on_id = '0'", 1);
+
+	$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=latest');
+
 	$pages	= $this->LoadAll(
 		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS  owner ".
 		"FROM {$this->config['table_prefix']}pages p ".
@@ -20,10 +32,19 @@ if ($mode == "latest")
 		"WHERE p.comment_on_id = '0' ".
 			"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
 		"ORDER BY p.created DESC ".
-		"LIMIT $limit", 1);
+		"LIMIT {$pagination['offset']}, $limit", 1);
 }
 else if ($mode == 'week')
 {
+	$count	= $this->LoadSingle(
+		"SELECT COUNT(tag) AS n ".
+		"FROM {$this->config['table_prefix']}pages ".
+		"WHERE tag REGEXP '^{$newscluster}{$newslevels}$' ".
+			"AND created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
+			"AND comment_on_id = '0'", 1);
+
+	$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=week');
+
 	$pages	= $this->LoadAll(
 		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
 		"FROM {$this->config['table_prefix']}pages p ".
@@ -31,10 +52,20 @@ else if ($mode == 'week')
 		"WHERE p.comment_on_id = '0' ".
 			"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
 			"AND p.created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
-		"ORDER BY p.created DESC", 1);
+		"ORDER BY p.created DESC ".
+		"LIMIT {$pagination['offset']}, $limit", 1);
 }
 else if ($mode == 'from' && $date)
 {
+	$count	= $this->LoadSingle(
+		"SELECT COUNT(tag) AS n ".
+		"FROM {$this->config['table_prefix']}pages ".
+		"WHERE tag REGEXP '^{$newscluster}{$newslevels}$' ".
+			"AND created > '$date' ".
+			"AND comment_on_id = '0'", 1);
+
+	$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=week');
+
 	$date	= date("Y-m-d H:i:s", strtotime($date));
 	$pages	= $this->LoadAll(
 		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
@@ -43,7 +74,8 @@ else if ($mode == 'from' && $date)
 		"WHERE p.comment_on_id = '0' ".
 			"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
 			"AND p.created > '$date' ".
-		"ORDER BY p.created DESC", 1);
+		"ORDER BY p.created DESC ".
+		"LIMIT {$pagination['offset']}, $limit", 1);
 }
 
 // start output
@@ -56,8 +88,12 @@ if (!(int)$noxml)
 	}
 
 // displaying articles
-if ($pages != 0)
+if ($pages)
 {
+	// pagination
+	if ((isset($pagination['text'])) && $pagination['text'] == true )
+		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+
 	foreach ($pages as $page)
 	{
 		echo "<div class=\"newsarticle\">";
@@ -68,13 +104,14 @@ if ($pages != 0)
 			'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#comments" title="'.$this->GetTranslation("NewsDiscuss").' '.$page['title'].'">'.(int)$page["comments"]." ".$this->GetTranslation("Comments_all")." &raquo "."</a></div>\n";
 		echo "</div>";
 	}
+	// pagination
+	if ((isset($pagination['text'])) && $pagination['text'] == true )
+		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 }
 else
 {
-	echo $this->GetTranslation("NewsNotAvailable");
+	echo "<br /><br />".$this->GetTranslation("NewsNotAvailable");
 }
-
-// TODO: show link to news page "news_cluster" OR (is news page) Previous Entries -> Pagination
 
 // end output
 echo "</div>";
