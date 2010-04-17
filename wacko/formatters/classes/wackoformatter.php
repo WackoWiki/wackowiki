@@ -24,6 +24,7 @@ class WackoFormatter
 	"red" => "red",
 	"green" => "green",
 	"blue" => "blue",
+	"yellow" => "yellow",
 	);
 	var $x11_colors = array(
 	"indianred" => "indianred",
