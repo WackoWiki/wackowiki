@@ -422,7 +422,7 @@ function admin_users(&$engine, &$module)
 		/////////////////////////////////////////////
 
 			echo '<br /><input id="button" type="submit" name="create" value="'.$engine->GetTranslation('GroupsAddButton').'" /> ';
-			echo '<input id="button" type="submit" name="rename" value="'.$engine->GetTranslation('GroupsRenameButton').'" /> ';
+			echo '<input id="button" type="submit" name="edit" value="'.$engine->GetTranslation('GroupsEditButton').'" /> ';
 			echo '<input id="button" type="submit" name="delete" value="'.$engine->GetTranslation('GroupsRemoveButton').'" /> ';
 		 ?>
 		</form>

@@ -9,7 +9,7 @@ if (!isset($limit))	$limit = 10;
 else			$limit = (int)$limit;
 
 $pages = "";
-
+$prefix			= $this->config['table_prefix'];
 $newscluster	= $this->config["news_cluster"];
 $newslevels		= $this->config["news_levels"];
 
@@ -19,7 +19,7 @@ if ($mode == "latest")
 {
 	$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
-			"FROM {$this->config['table_prefix']}pages ".
+			"FROM {$prefix}pages ".
 			"WHERE tag REGEXP '^{$newscluster}{$newslevels}$' ".
 				"AND comment_on_id = '0'", 1);
 
@@ -27,8 +27,8 @@ if ($mode == "latest")
 
 	$pages	= $this->LoadAll(
 		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS  owner ".
-		"FROM {$this->config['table_prefix']}pages p ".
-			"INNER JOIN {$this->config['table_prefix']}users u ON (p.owner_id = u.user_id) ".
+		"FROM {$prefix}pages p ".
+			"INNER JOIN {$prefix}users u ON (p.owner_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".
 			"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
 		"ORDER BY p.created DESC ".
@@ -38,7 +38,7 @@ else if ($mode == 'week')
 {
 	$count	= $this->LoadSingle(
 		"SELECT COUNT(tag) AS n ".
-		"FROM {$this->config['table_prefix']}pages ".
+		"FROM {$prefix}pages ".
 		"WHERE tag REGEXP '^{$newscluster}{$newslevels}$' ".
 			"AND created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
 			"AND comment_on_id = '0'", 1);
@@ -47,8 +47,8 @@ else if ($mode == 'week')
 
 	$pages	= $this->LoadAll(
 		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
-		"FROM {$this->config['table_prefix']}pages p ".
-			"INNER JOIN {$this->config['table_prefix']}users u ON (p.owner_id = u.user_id) ".
+		"FROM {$prefix}pages p ".
+			"INNER JOIN {$prefix}users u ON (p.owner_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".
 			"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
 			"AND p.created > DATE_SUB( NOW(), INTERVAL 7 DAY ) ".
@@ -59,7 +59,7 @@ else if ($mode == 'from' && $date)
 {
 	$count	= $this->LoadSingle(
 		"SELECT COUNT(tag) AS n ".
-		"FROM {$this->config['table_prefix']}pages ".
+		"FROM {$prefix}pages ".
 		"WHERE tag REGEXP '^{$newscluster}{$newslevels}$' ".
 			"AND created > '$date' ".
 			"AND comment_on_id = '0'", 1);
@@ -69,8 +69,8 @@ else if ($mode == 'from' && $date)
 	$date	= date("Y-m-d H:i:s", strtotime($date));
 	$pages	= $this->LoadAll(
 		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
-		"FROM {$this->config['table_prefix']}pages p ".
-			"INNER JOIN {$this->config['table_prefix']}users u ON (p.owner_id = u.user_id) ".
+		"FROM {$prefix}pages p ".
+			"INNER JOIN {$prefix}users u ON (p.owner_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".
 			"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
 			"AND p.created > '$date' ".
