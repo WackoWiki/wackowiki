@@ -40,6 +40,7 @@ class RSS
 	{
 		$limit	= 30;
 		$name = "changes";
+		$count = "";
 
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->GetCharset()."\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
@@ -90,6 +91,7 @@ class RSS
 	{
 		$limit	= 20;
 		$name = "comments";
+		$count = "";
 
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->GetCharset()."\"?>\n";
 		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->engine->config["theme_url"]."css/wacko.css\" media=\"screen\"?>\n";

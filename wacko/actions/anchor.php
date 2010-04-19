@@ -1,11 +1,11 @@
 <?php
 // Param name
-if($vars[0])
+if(isset($vars[0]))
 {
 	$href = $vars[0];
 
 	$text = '';
-	if($vars['text'])
+	if(isset($vars['text']))
 	{
 		if(strpos($vars['text'], "~") !== false)
 		{
@@ -15,7 +15,7 @@ if($vars[0])
 	}
 
 	$title = '';
-	if($vars['title'])
+	if(isset($vars['title']))
 	{
 		$title = htmlspecialchars($vars['title']);
 	}

@@ -27,7 +27,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			if ($this->page["comment_on_id"])
 				$comment_on_id = $this->page["comment_on_id"];
 
-			if ($_POST["dontkeep"] && $this->IsAdmin())
+			if (isset($_POST["dontkeep"]) && $this->IsAdmin())
 				$dontkeep = 1;
 
 			// Remove page
@@ -78,12 +78,12 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 				print(str_replace("%1", $this->tag, $this->GetTranslation("PageRemoved"))."<br />\n");
 			}
 
-			if ($this->IsAdmin() && $_POST["revisions"] == 1 && !$comment_on_id)
+			if ($this->IsAdmin() && (isset($_POST["revisions"]) && $_POST["revisions"] == 1) && !$comment_on_id)
 			{
 				$this->RemoveRevisions($this->tag);
 				echo $this->GetTranslation("RevisionsRemoved")."<br />\n";
 			}
-			if ($this->IsAdmin() && $_POST["cluster"] == 1)
+			if ($this->IsAdmin() && (isset($_POST["cluster"]) && $_POST["cluster"] == 1))
 			{
 				$this->RemoveReferrers	($this->tag, true);
 				$this->RemoveLinks		($this->tag, true);
@@ -105,7 +105,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 					unset($list, $row);
 				}
 
-				if ($_POST["revisions"] == 1 || $comment_on_id)
+				if ((isset($_POST["revisions"]) && $_POST["revisions"] == 1) || $comment_on_id)
 					$this->RemoveRevisions($this->tag, true);
 
 				echo "<em>".$this->GetTranslation("ClusterRemoved")."</em><br />\n";
@@ -127,7 +127,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			// log event
 			if (!$comment_on_id)
 			{
-				$this->Log(1, str_replace("%2", $this->page["user"], str_replace("%1", $this->tag, ( $_POST["cluster"] == 1 ? $this->GetTranslation("LogRemovedCluster") : $this->GetTranslation("LogRemovedPage") ))));
+				$this->Log(1, str_replace("%2", $this->page["user"], str_replace("%1", $this->tag, ( isset($_POST["cluster"]) && $_POST["cluster"] == 1 ? $this->GetTranslation("LogRemovedCluster") : $this->GetTranslation("LogRemovedPage") ))));
 			}
 			else
 			{

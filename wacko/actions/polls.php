@@ -9,12 +9,16 @@
 //					or vertical.
 //					Default: "h"
 
+$align = "";
+$results = "";
+$vote = "";
+
 // create polls object
 $this->UseClass("polls");
 $pollsObj = new Polls($this);
 
 // processing input
-if ($_POST['vote'] && $_POST['poll'])
+if (isset($_POST['vote']) && isset($_POST['poll']))
 {
 	$header	= $pollsObj->GetPollTitle((int)$_POST['poll']);
 
@@ -64,7 +68,7 @@ if ($_POST['vote'] && $_POST['poll'])
 		$vote = $header['poll_id'];
 	}
 }
-else if ($_POST['results'] && $_POST['poll'])
+else if (isset($_POST['results']) && isset($_POST['poll']))
 {
 	$vote = (int)$_POST['poll'];
 }

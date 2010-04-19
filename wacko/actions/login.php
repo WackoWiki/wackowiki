@@ -128,7 +128,7 @@ else
 				// check password
 				if ($existingUser["password"] == $_processed_password)
 				{
-					// define session longetivity
+					// define session duration
 					switch ($_POST['session'])
 					{
 						case '1d':

@@ -5,17 +5,25 @@
 	name="absolute|toc-relative|DOCUMENT-RELATIVE"  // "toc-relative" don't implemented yet
 	}}
 */
+
+$name = "";
+$style = "";
+$start_depth = "";
+$end_depth = "";
+$numerate = "";
+$link = "";
+
 $page = ""; $ppage="";
 $context = $this->tag;
 $_page = $this->page;
-$link = "";
+
 
 if (!$name)  $name  = "document-relative";
 if (!$style) $style = "before";
 
 // there's only preparsing, all output is not here
 {
-	if ($this->post_wacko_toc) $toc = &$this->post_wacko_toc;
+	if (isset($this->post_wacko_toc)) $toc = &$this->post_wacko_toc;
 	else
 	$toc = $this->BuildToc( $context, $start_depth, $end_depth, $numerate, $link );
 

@@ -7,6 +7,15 @@
 //								useful with "moderation='true'".
 //								Default: null
 
+$moderation = "";
+$stop_mod = "";
+$error = "";
+$message = "";
+$mode_file = "";
+$topic = "";
+$plural = "";
+$startmod = "";
+
 // create polls object
 $this->UseClass("polls");
 $pollsObj = new Polls($this);
@@ -45,13 +54,13 @@ if ($admin)
 {
 	if ($moderation === true)
 	{
-		if ($_POST['moderation'])	$edit_id	= $_POST['moderation'];
-		if ($_POST['user'])			$user		= $_POST['user'];
+		if (isset($_POST['moderation']))	$edit_id	= $_POST['moderation'];
+		if (isset($_POST['user']))			$user		= $_POST['user'];
 	}
-	if ($_POST['startmod'])			$startmod	= $_POST['startmod'];
+	if (isset($_POST['startmod']))			$startmod	= $_POST['startmod'];
 }
-if ($_POST['plural'])				$plural		= $_POST['plural'];
-if ($_POST['topic'])				$topic		= $_POST['topic'];
+if (isset($_POST['plural']))				$plural		= $_POST['plural'];
+if (isset($_POST['topic']))					$topic		= $_POST['topic'];
 
 $i = 1;
 foreach ($_POST as $key => $value)
@@ -67,7 +76,7 @@ foreach ($_POST as $key => $value)
 }
 
 // parsing and validating submitted poll
-if ($_POST['submitpoll'])
+if (isset($_POST['submitpoll']))
 {
 	//parsing input
 	$strip = array('<', '>', '[', ']', '\\', "'", '"');
@@ -147,11 +156,11 @@ if ($stop_mod !== true)
 {
 	// managing number of survey answers
 	$total_vars = count($vars);
-	if ($_POST['addvar'] && $total_vars < 20) {
+	if (isset($_POST['addvar']) && $total_vars < 20) {
 		$vars[] = array('v_id' => $total_vars + 1, 'text' => '');
 		$total_vars++;
 	}
-	if ($_POST['delvar'] && $total_vars > 5) {
+	if (isset($_POST['delvar']) && $total_vars > 5) {
 		end($vars);
 		$i = key($vars);
 		unset($vars[$i]);

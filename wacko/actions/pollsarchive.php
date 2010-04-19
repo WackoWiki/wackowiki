@@ -17,7 +17,7 @@ if (!isset($_GET['year']))	$year	= date('Y');
 else						$year	= (int)$_GET['year'];
 
 // print results
-if ($_GET['poll'] && $_GET['results'] == 1)
+if (isset($_GET['poll']) && (isset($_GET['results']) && $_GET['results'] == 1))
 {
 	echo $pollsObj->ShowPollResults((int)$_GET['poll']);
 	echo '<br />';

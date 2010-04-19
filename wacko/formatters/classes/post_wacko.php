@@ -76,7 +76,7 @@ class post_wacko
 
 					foreach( $matches as $m )
 					{
-						$value = $m[3] ? ($m[5] ? $m[6] : $m[7]) : "1";
+						$value = isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : "1";
 						$params[$c] = $value;
 						$params[ $m[2] ] = $value;
 						$c++;
