@@ -30,9 +30,10 @@ else			$list	= $pollsObj->GetPollsList('all');
 
 
 // print list
-echo ($nomark != 1 ? '<fieldset><legend>'.
-	($year == 0 ? $this->GetTranslation('PollsArchiveAll') : str_replace('%1', $year, $this->GetTranslation('PollsArchiveYear'))).
-	':</legend>' : '');
+if(!$nomark)
+{
+	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".($year == 0 ? $this->GetTranslation('PollsArchiveAll') : str_replace('%1', $year, $this->GetTranslation('PollsArchiveYear')))."</span></p>\n");
+}
 
 	if ($list) // normal list
 	{
@@ -66,7 +67,10 @@ echo ($nomark != 1 ? '<fieldset><legend>'.
 	}
 	echo '</small>';
 
-echo ($nomark != 1 ? '</fieldset>' : '');
+if(!$nomark)
+{
+	echo "</div>\n";
+}
 
 // destroy polls object
 unset($pollsObj);

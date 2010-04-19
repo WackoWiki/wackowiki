@@ -1,5 +1,7 @@
 <?php
 
+$useemptystring = "";
+
 $vars[0] = $this->UnwrapLink($vars[0]);
 $page_id = $this->GetPageId($vars[0]);
 if (! $this->HasAccess("read",$page_id))
@@ -17,11 +19,11 @@ else
 		$strings = preg_replace("/\{\{[^\}]+\}\}/","",$phrase_page["body"]);
 		$strings = $this->Format($strings);
 		$splitexpr = "|<br />|";
-		if ($useemptystring==1) $splitexpr = "|<br />[\n\r ]*<br />|";
+		if ($useemptystring == 1) $splitexpr = "|<br />[\n\r ]*<br />|";
 		$lines = preg_split($splitexpr,$strings);
 		$lines = array_values(array_filter( $lines, "trim"));
 		srand ((double) microtime() * 1000000);
-		print $lines[rand(0,count($lines)-1)];
+		print $lines[rand(0, count($lines) - 1)];
 	};
 }
 

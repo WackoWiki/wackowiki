@@ -1,6 +1,8 @@
 <?php
 
-if ($vars[0] && $vars[0] != $vars["nomark"])
+$nomark = "";
+
+if (isset($vars['for']))
 {
 	$tag = $this->UnwrapLink($vars[0]);
 	$page_id = $this->GetPageId($tag);
