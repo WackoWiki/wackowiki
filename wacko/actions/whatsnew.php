@@ -1,5 +1,10 @@
 <?php
 
+$max = "";
+$noxml = "";
+$printed = "";
+$curday = "";
+
 if (!$max || $max > 100) $max = 100;
 
 $admin	= $this->IsAdmin();
@@ -62,7 +67,7 @@ if ($pages = array_merge($pages1, $pages2))
 		else
 			$access = true;
 
-		if ($access && ($printed[$page['tag']] != $page['date']) && ($count++ < $max))
+		if ($access && isset($page['tag']) && ($printed[$page['tag']] != $page['date']) && ($count++ < $max))
 		{
 			$printed[$page['tag']] = $page['date'];	// ignore duplicates
 

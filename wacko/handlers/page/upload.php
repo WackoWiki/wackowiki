@@ -1,5 +1,11 @@
 <div id="page">
 <?php
+
+
+$is_global = "";
+$message = "";
+$error = "";
+
 // redirect to show method if page don't exists
 if (!$this->page) $this->Redirect($this->href("show"));
 
@@ -157,7 +163,7 @@ if ($registered
 
 		if (!$this->config["upload_max_per_user"] || (sizeof($files) < $this->config["upload_max_per_user"]))
 		{
-			if (is_uploaded_file($_FILES["file"]["tmp_name"])) // there is file
+			if (isset($_FILES["file"]["tmp_name"]) && is_uploaded_file($_FILES["file"]["tmp_name"])) // there is file
 			{
 				// 1. check out $data
 				$_data = explode(".", $_FILES["file"]["name"] );
@@ -201,7 +207,7 @@ if ($registered
 				// 1.6. check filesize, if asked
 				$maxfilesize = $this->config["upload_max_size"];
 
-				if ($_POST["maxsize"])
+				if (isset($_POST["maxsize"]))
 					if ($maxfilesize > 1 * $_POST["maxsize"])
 						$maxfilesize = 1 * $_POST["maxsize"];
 
@@ -296,9 +302,9 @@ if ($registered
 			} //!is_uploaded_file
 			else
 			{
-				if ($_FILES["file"]['error'] == UPLOAD_ERR_INI_SIZE || $_FILES["file"]['error'] == UPLOAD_ERR_FORM_SIZE)
+				if (isset($_FILES["file"]['error']) && ($_FILES["file"]['error'] == UPLOAD_ERR_INI_SIZE || $_FILES["file"]['error'] == UPLOAD_ERR_FORM_SIZE))
 					$error = $this->GetTranslation("UploadMaxSizeReached");
-				else if ($_FILES["file"]['error'] == UPLOAD_ERR_PARTIAL || $_FILES["file"]['error'] == UPLOAD_ERR_NO_FILE)
+				else if (isset($_FILES["file"]['error']) && ($_FILES["file"]['error'] == UPLOAD_ERR_PARTIAL || $_FILES["file"]['error'] == UPLOAD_ERR_NO_FILE))
 					$error = $this->GetTranslation("UploadNoFile");
 				else
 					$error = "";
