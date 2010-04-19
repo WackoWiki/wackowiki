@@ -1,5 +1,8 @@
 <?php
 
+$stat = "";
+$max = "";
+
 if (isset($stat) && $stat == 0)
 	$limit = 1000;
 else
@@ -21,7 +24,7 @@ foreach($last_users as $user)
 				"FROM ".$this->config["table_prefix"]."pages ".
 				"WHERE owner_id='".quote($this->dblink, $user["user_id"])."'");
 
-	print("(<span class=\"dt\">".$user["signup_time"].")</span> ".$this->Link("/".$user["user_name"],"",$user["user_name"]).($stat!=="0"?" . . . (".$num["n"].")":"")."<br />\n");
+	print("(<span class=\"dt\">".$this->GetTimeStringFormatted($user["signup_time"]).")</span> ".$this->Link("/".$user["user_name"],"",$user["user_name"]).($stat!=="0"?" . . . (".$num["n"].")":"")."<br />\n");
 }
 
 ?>

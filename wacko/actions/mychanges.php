@@ -5,6 +5,7 @@
 $bydate = "";
 $max = "";
 $curChar = "";
+$curday = "";
 
 if ($user_id = $this->GetUserId())
 {

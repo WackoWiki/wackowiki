@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($root)) $root = $this->UnwrapLink($vars[0]);
+if (!isset($root)) $root = $this->UnwrapLink(isset($vars['for']) ? $vars['for'] : "");
 if (!isset($root)) $root = $this->page["tag"];
 if (!isset($date)) $date = isset($_GET["date"]) ? $_GET["date"] :"";
 if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET["minor_edit"]) ? $_GET["minor_edit"] :"";
@@ -27,7 +27,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date, $hide_minor_edi
 	foreach ($pages as $i => $page)
 	{
 		if ($this->config["hide_locked"])
-			$access = $this->HasAccess("read",$page["page_id"]);
+			$access = $this->HasAccess("read", $page["page_id"]);
 		else
 			$access = true;
 
@@ -65,7 +65,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date, $hide_minor_edi
 			$this->Link( "/".$page["tag"], "", $page["tag"] )." . . . . . . . . . . . . . . . . <small>".
 			($page["user"]
 				? ($this->IsWikiName($page["user"])
-					? $this->Link("/".$page["user"],"",$page["user"])
+					? $this->Link("/".$page["user"], "", $page["user"])
 					: $page["user"])
 				: $this->GetTranslation("Guest")).
 			$edit_note.

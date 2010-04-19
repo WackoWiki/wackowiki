@@ -1,5 +1,7 @@
 <?php
 
+$max = "";
+
 if ($user_id = $this->GetUserId())
 {
 	if ($max) $limit = $max;
@@ -21,7 +23,7 @@ if ($user_id = $this->GetUserId())
 			"ORDER BY p.modified DESC, p.tag ASC ".
 			"LIMIT $limit");
 
-	if ($_GET['reset'] == 1 && $pages == true)
+	if ((isset($_GET['reset']) && $_GET['reset'] == 1) && $pages == true)
 	{
 		foreach ($pages as $page)
 			$this->Query(

@@ -1,17 +1,20 @@
 <?php
 
+$max = "";
+$curChar = "";
+
 if ($user_id = $this->GetUserId())
 {
-	if ($_GET['unwatch'] != '')
+	if (isset($_GET['unwatch']) && $_GET['unwatch'] != '')
 		$this->ClearWatch($user_id, $_GET['unwatch']);
-	else if ($_GET['setwatch'] != '')
+	else if (isset($_GET['setwatch']) && $_GET['setwatch'] != '')
 		$this->SetWatch($user_id, $_GET['setwatch']);
 
 	if ($max) $limit = $max;
 	else $limit	= 100;
 	$prefix = $this->config["table_prefix"];
 
-	if ($_GET['unwatched'] == 1)
+	if (isset($_GET['unwatched']) && $_GET['unwatched'] == 1)
 	{
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(p.tag) AS n ".
@@ -96,7 +99,7 @@ if ($user_id = $this->GetUserId())
 		{
 			foreach ($pages as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['w.page_id']))
+				if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['page_id']))
 				{
 					$firstChar = strtoupper($page['tag'][0]);
 					if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))

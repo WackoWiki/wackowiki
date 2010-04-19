@@ -1,7 +1,12 @@
-<a href="<?php
+<?php
 
 //you can click comments inside from bookmarks or wikipages
 //{{comments [page="CommentThisPage"] [text="your text"]}}
+
+$for = "";
+$page = "";
+$output = "";
+$text = "";
 
 if ($for) $page=$for;
 if (!$page) {$page = "";}
@@ -11,6 +16,6 @@ if (!$text)
 else
 	$output .= $text;
 
-echo ($output);
+echo "<a href=\"".($output)."</a>\n";
 
-?></a>
+?>

@@ -36,9 +36,10 @@ class Polls
 	function GetPollTitle($id)
 	{
 		$title = $this->engine->LoadSingle(
-			"SELECT poll_id, text, user_id, plural, votes, start, end ".
-			"FROM {$this->engine->config['table_prefix']}polls ".
-			"WHERE poll_id = $id AND v_id = 0");
+			"SELECT p.poll_id, p.text, p.user_id, p.plural, p.votes, p.start, p.end, u.user_name ".
+			"FROM {$this->engine->config['table_prefix']}polls p ".
+				"LEFT JOIN {$this->engine->config["table_prefix"]}users u ON (p.user_id = u.user_id) ".
+			"WHERE p.poll_id = $id AND p.v_id = 0");
 		return $title;
 	}
 
@@ -175,7 +176,7 @@ class Polls
 		$header		= $this->GetPollTitle($id);
 		$vars		= $this->GetPollVars($id);
 		$duration	= $this->PollTime($header['start'], ($header['end'] == SQL_NULLDATE ? time() : $header['end']));
-		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->GetTranslation('PollsGuest').'</em>' : $header['user_id'] );
+		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->GetTranslation('PollsGuest').'</em>' : $header['user_name'] );
 
 		if ($header['start'] == SQL_NULLDATE)
 		{	// non-existent or not moderated poll
@@ -217,11 +218,13 @@ class Polls
 	// print survey results
 	function ShowPollResults($id)
 	{
+		$total = "";
+
 		// load poll data
 		$header		= $this->GetPollTitle($id);
 		$vars		= $this->GetPollVars($id, 1);
 		$duration	= $this->PollTime($header['start'], ($header['end'] == SQL_NULLDATE ? time() : $header['end']));
-		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->GetTranslation('PollsGuest').'</em>' : $header['user_id'] );
+		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->GetTranslation('PollsGuest').'</em>' : $header['user_name'] );
 		$voters	= $header['votes'];
 
 		if ($header['plural'] != 1)		$total  = $header['votes'];
@@ -251,7 +254,7 @@ class Polls
 			$poll	.= '<tr><td colspan="3"><small>'.$this->engine->GetTranslation('PollsTotalVotes').': '.$voters.
 						'<br />'.($header['end'] != SQL_NULLDATE ? $this->engine->GetTranslation('PollsLasted') :
 							$this->engine->GetTranslation('PollsLasts')).': '.$duration.
-						'<br />'.$this->engine->GetTranslation('PollsAdded').': '.( strpos($header['user_id'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
+						'<br />'.$this->engine->GetTranslation('PollsAdded').': '.( strpos($header['user_name'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
 					'</table>'.
 					$this->engine->FormClose();
 		}

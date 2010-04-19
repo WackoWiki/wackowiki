@@ -1,5 +1,8 @@
 <?php
 
+$page = "";
+$nomark = "";
+
 $page = $this->UnwrapLink($page);
 if (!isset($first_anchor))		$first_anchor = "";
 if (!isset($last_anchor))		$last_anchor = "";

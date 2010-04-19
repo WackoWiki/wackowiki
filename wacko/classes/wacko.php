@@ -3937,7 +3937,7 @@ class Wacko
 
 		$this->post_wacko_toc_hash = &$hash;
 
-		if ($this->post_wacko_action["toc"])
+		if (isset($this->post_wacko_action["toc"]))
 		{
 			// #2. find all <a></a><hX> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatters/paragrafica (subject to refactor)
