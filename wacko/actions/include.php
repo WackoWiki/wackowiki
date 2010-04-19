@@ -1,7 +1,8 @@
 <?php
 
-$page = "";
-$nomark = "";
+if (!isset($page))			$page = NULL;
+if (!isset($page)) return;
+if (!isset($nomark))		$nomark = "";
 
 $page = $this->UnwrapLink($page);
 if (!isset($first_anchor))		$first_anchor = "";
