@@ -2,8 +2,7 @@
 
 // {{news [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number]}}
 
-$max = "";
-
+if (!isset($max)) $max = "";
 if (!isset($mode))	$mode = "latest";
 if (!isset($noxml)) $noxml = 0;
 if ($max) $limit = $max;

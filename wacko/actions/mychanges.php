@@ -2,8 +2,8 @@
 
 // {{MyChanges [max="Number"] [bydate="1"]}}
 
-$bydate = "";
-$max = "";
+if (!isset($bydate)) $bydate = "";
+if (!isset($max)) $max = "";
 $curChar = "";
 $curday = "";
 

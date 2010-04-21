@@ -1,7 +1,7 @@
 <?php
 
-$max = "";
-$curChar = "";
+if (!isset($max)) $max = "";
+if (!isset($curChar)) $curChar = "";
 
 if ($user_id = $this->GetUserId())
 {

@@ -1,6 +1,6 @@
 <?php
 
-$useemptystring = "";
+if (!isset($useemptystring)) $useemptystring = "";
 
 $vars[0] = $this->UnwrapLink($vars[0]);
 $page_id = $this->GetPageId($vars[0]);

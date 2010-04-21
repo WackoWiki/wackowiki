@@ -40,11 +40,11 @@
 	align
 	}}
 */
-$url = "";
-$width = "";
-$height = "";
-$name = "";
-$version = "";
+if (!isset($url)) $url = "";
+if (!isset($width)) $width = "";
+if (!isset($height)) $height = "";
+if (!isset($name)) $name = "";
+if (!isset($version)) $version = "";
 
 if (!$url) $url = isset($vars['url']) ? $vars['url'] : "";
 $url = htmlspecialchars($url);

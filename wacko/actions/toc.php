@@ -12,7 +12,6 @@ if (!isset($numerate)) $numerate = "";
 if (!isset($to)) $to = "";
 if (!isset($title)) $title = "";
 
-
 if ($for) $page = $for;
 if ($page)
 {

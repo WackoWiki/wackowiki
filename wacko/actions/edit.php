@@ -3,10 +3,10 @@
 // If User has rights to edit page, show Edit link
 // {{edit [page="yourPage"] [text="your text"]}}
 
-$for = "";
-$page = "";
-$output = "";
-$text = "";
+if (!isset($for)) $for = "";
+if (!isset($page)) $page = "";
+if (!isset($output)) $output = "";
+if (!isset($text)) $text = "";
 
 if ($for) $page=$for;
 	$editpage = $this->href("", $page."/edit");

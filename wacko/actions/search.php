@@ -1,11 +1,11 @@
 <?php
 
-$topic = "";
-$title = "";
-$filter = "";
-$style = "";
-$nomark = "";
-$for = "";
+if (!isset($topic)) $topic = "";
+if (!isset($title)) $title = "";
+if (!isset($filter)) $filter = "";
+if (!isset($style)) $style = "";
+if (!isset($nomark)) $nomark = "";
+if (!isset($for)) $for = "";
 
 if (!function_exists('FullTextSearch'))
 {

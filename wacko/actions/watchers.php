@@ -1,6 +1,6 @@
 <?php
 
-$nomark = "";
+if (!isset($nomark)) $nomark = "";
 
 if (isset($vars['for']))
 {

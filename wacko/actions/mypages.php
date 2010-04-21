@@ -1,9 +1,9 @@
 <?php
 
 // actions/mypages.php
-$bydate = "";
-$max = "";
-$bychange = "";
+if (!isset($bydate)) $bydate = "";
+if (!isset($max)) $max = "";
+if (!isset($bychange)) $bychange = "";
 $curChar = "";
 $curday = "";
 

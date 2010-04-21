@@ -3,10 +3,10 @@
 //you can click comments inside from bookmarks or wikipages
 //{{comments [page="CommentThisPage"] [text="your text"]}}
 
-$for = "";
-$page = "";
-$output = "";
-$text = "";
+if (!isset($for)) $for = "";
+if (!isset($page)) $page = "";
+if (!isset($output)) $output = "";
+if (!isset($text)) $text = "";
 
 if ($for) $page=$for;
 if (!$page) {$page = "";}
