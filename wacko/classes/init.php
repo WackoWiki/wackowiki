@@ -270,8 +270,8 @@ class Init
 					"outlook_workaround" => 1,
 
 					"forum_cluster" => "Forum",
-					"forum_topics" => "10",
-					"comments_count" => "10",
+					"forum_topics" => 10,
+					"comments_count" => 10,
 
 					"news_cluster" => "",
 					"news_levels" => "",

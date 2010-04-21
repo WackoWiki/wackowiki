@@ -1,9 +1,9 @@
 <?php
 
-$max = "";
-$noxml = "";
-$printed = "";
-$curday = "";
+if (!isset($max)) $max = "";
+if (!isset($noxml)) $noxml = "";
+if (!isset($printed)) $printed = "";
+if (!isset($curday)) $curday = "";
 
 if (!$max || $max > 100) $max = 100;
 
