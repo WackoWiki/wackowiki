@@ -625,12 +625,12 @@ $wackoTranslation = array(
 	"CacheCleared" => "Кэш очищен.",
 
 	// Flash
-	"FlashNoURL" => "Please specify a Flash file with the Parameter url. (e.g. {{flash url=\"file:the_movie.swf\"}}",
+	"FlashNoURL" => "Please specify a Flash file with the Parameter url. (e.g. {{flash url=\"file:the_movie.swf\"}} )",
 
 	// Feed
 	"FeedTitle" => "Заголовок канала новостей",
 	"FeedMulti" => "Несколько источников",
-	"FeedNoURL" => "Пожалуйста, укажите канал новостей с параметром url, например, {{feed url=\"http://wackowiki.org/xml/comments_wackowiki.xml\"}}",
+	"FeedNoURL" => "Пожалуйста, укажите канал новостей с параметром url, например, {{feed url=\"http://wackowiki.org/xml/comments_wackowiki.xml\"}} )",
 	"FeedError" => "Невозможно загрузить или распознать новости",
 	"FeedSource" => "Источник:",
 

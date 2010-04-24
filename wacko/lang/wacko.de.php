@@ -624,7 +624,7 @@ $wackoTranslation = array(
 	"CacheCleared" => "Cache geleert.",
 
 	// Flash
-	"FlashNoURL" => "Bitte gib einen Flashdatei mit dem Parameter url an. (z.B. {{flash url=\"file:the_movie.swf\"}}",
+	"FlashNoURL" => "Bitte gib eine Flashdatei mit dem Parameter url an. (z.B. {{flash url=\"file:the_movie.swf\"}} )",
 
 	// Feed
 	"FeedTitle" => "Feed Titel",
