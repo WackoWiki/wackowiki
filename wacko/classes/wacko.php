@@ -636,17 +636,17 @@ class Wacko
 	function GetKeywords()
 	{
 		if ($this->page["keywords"])
-			return $this->page["keywords"];
+			return htmlspecialchars($this->page["keywords"]);
 		else
-			return $this->config["meta_keywords"];
+			return htmlspecialchars($this->config["meta_keywords"]);
 	}
 
 	function GetDescription()
 	{
 		if ($this->page["description"])
-			return $this->page["description"];
+			return htmlspecialchars($this->page["description"]);
 		else
-			return $this->config["meta_description"];
+			return htmlspecialchars($this->config["meta_description"]);
 	}
 
 	function GetTagById($page_id, $old = 0)
@@ -1168,11 +1168,11 @@ class Wacko
 		if ($this->HasAccess("write", $page_id) || ($comment_on_id && $this->HasAccess("comment", $comment_on_id)))
 		{
 			// for forum topic prepare description
-			if (!$comment_on_id)
-			{
-				$desc = $this->Format(substr($body, 0, 500), 'cleanwacko');
-				$desc = ( strlen($desc) > 240 ? substr($desc, 0, 240).'...' : $desc.' (-)' );
-			}
+			#if (!$comment_on_id)
+			#{
+			#	$desc = $this->Format(substr($body, 0, 500), 'cleanwacko');
+			#	$desc = ( strlen($desc) > 240 ? substr($desc, 0, 240).'...' : $desc.' (-)' );
+			#}
 
 			// preformatter (macros and such)
 			$body = $this->Format($body, "preformat");
@@ -1251,7 +1251,7 @@ class Wacko
 				$this->Query(
 					"INSERT INTO ".$this->config["table_prefix"]."pages SET ".
 						"comment_on_id 	= '".quote($this->dblink, $comment_on_id)."', ".
-						(!$comment_on_id ? "description = '".quote($this->dblink, $desc)."', " : "").
+						#(!$comment_on_id ? "description = '".quote($this->dblink, $desc)."', " : "").
 						"created 		= NOW(), ".
 						"modified 		= NOW(), ".
 						"commented		= NOW(), ".

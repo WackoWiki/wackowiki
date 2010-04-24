@@ -5,7 +5,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
-<title><?php echo $this->config["wacko_name"]." : ".$this->tag; ?></title>
+<title><?php echo htmlspecialchars($this->config["wacko_name"])." : ".$this->tag; ?></title>
 <?php if ($this->method != 'show')
 echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <meta http-equiv="content-type"

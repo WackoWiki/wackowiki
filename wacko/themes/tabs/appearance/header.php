@@ -11,7 +11,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
 <head>
 	<title><?php echo $this->AddSpaces($this->tag).($this->method != "show" ? " (".$this->method.")" : "");
-echo " (@".$this->config["wacko_name"].")" ?></title>
+echo " (@".htmlspecialchars($this->config["wacko_name"]).")" ?></title>
 <?php
 // We don't need search robots to index subordinate pages
 if ($this->method != 'show' || $this->page["latest"] == "0")
