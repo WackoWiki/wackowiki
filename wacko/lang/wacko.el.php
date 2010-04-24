@@ -569,6 +569,9 @@ $wackoTranslation = array(
 	"ClearCache" => "Εκκαθάριση Προσωρινής μνήμης",
 	"CacheCleared" => "Η προσωρινή μνήμη καθάρισε.",
 
+	// Flash
+	"FlashNoURL" => "Please specify a Flash file with the Parameter url. (e.g. {{flash url=\"file:the_movie.swf\"}}",
+
 	// Feed
 	"FeedTitle" => "Feed Title",
 	"FeedMulti" => "Multi-Feed",
