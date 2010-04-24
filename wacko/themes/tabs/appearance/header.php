@@ -38,6 +38,11 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 ?>
   <script type="text/javascript" src="<?php echo $this->config["base_url"];?>js/default.js"></script>
 <?php
+// load swfobject with flash action (e.g. $this->config["allow_swfobject"] = 1), by default it is set off
+if ($this->config["allow_swfobject"])
+{
+	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/swfobject.js\"></script>\n";
+}
 // autocomplete.js, protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages.
 if ($this->method == 'edit')
 {
@@ -46,7 +51,6 @@ if ($this->method == 'edit')
 	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/autocomplete.js\"></script>\n";
 }
 ?>
-<script type="text/javascript" src="<?php echo $this->config["base_url"];?>js/swfobject.js"></script>
 <script type="text/javascript" src="<?php echo $this->config["base_url"];?>js/captcha.js"></script>
 <?php
 // Doubleclick edit feature.

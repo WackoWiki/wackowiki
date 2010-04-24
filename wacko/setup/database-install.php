@@ -99,6 +99,7 @@ $configDb['admin_email'] = $config['admin_email'];
 $configDb['admin_name'] = $config['admin_name'];
 $configDb['allow_rawhtml'] = $config['allow_rawhtml'];
 $configDb['allow_registration'] = $config['allow_registration'];
+$configDb['allow_swfobject'] = $config['allow_swfobject'];
 $configDb['allow_themes'] = $config['allow_themes'];
 $configDb['allow_x11colors'] = $config['allow_x11colors'];
 $configDb['antidupe'] = $config['antidupe'];
