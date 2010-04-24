@@ -73,7 +73,11 @@ if(!$height) $height = 100;
 if(!$name) $name = 'flash'.rand();
 if(!$version) $version = '9.0.0';
 
-if($url)
+if (!$url)
+{
+	echo "<p><i>".$this->GetTranslation("FlashNoURL")."</i></p>\n";
+}
+else if($url)
 {
 	// Load swfobject with header
 	$this->config["allow_swfobject"] = 1;

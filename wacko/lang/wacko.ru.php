@@ -624,6 +624,9 @@ $wackoTranslation = array(
 	"ClearCache" => "Очистить кэш",
 	"CacheCleared" => "Кэш очищен.",
 
+	// Flash
+	"FlashNoURL" => "Please specify a Flash file with the Parameter url. (e.g. {{flash url=\"file:the_movie.swf\"}}",
+
 	// Feed
 	"FeedTitle" => "Заголовок канала новостей",
 	"FeedMulti" => "Несколько источников",
