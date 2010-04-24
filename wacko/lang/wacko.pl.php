@@ -569,12 +569,12 @@ $wackoTranslation = array(
 	"CacheCleared" => "Cache cleared.",
 
 	// Flash
-	"FlashNoURL" => "Please specify a Flash file with the Parameter url. (e.g. {{flash url=\"file:the_movie.swf\"}}",
+	"FlashNoURL" => "Please specify a Flash file with the Parameter url. (e.g. {{flash url=\"file:the_movie.swf\"}} )",
 
 	// Feed
 	"FeedTitle" => "Feed Title",
 	"FeedMulti" => "Multi-Feed",
-	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/comments_wackowiki.xml\"}}",
+	"FeedNoURL" => "Please specify a Feed with the Parameter url. (e.g. {{feed url=\"http://wackowiki.org/xml/comments_wackowiki.xml\"}} )",
 	"FeedError" => "Could not load or parse feed",
 	"FeedSource" => "Source:",
 
