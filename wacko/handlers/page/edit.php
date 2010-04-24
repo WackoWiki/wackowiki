@@ -20,9 +20,12 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 	$user	= $this->GetUser();
 	if ($_POST)
 	{
+		$textchars	= strlen($_POST['body']);
+
 		// watch page
 		if ($this->page && isset($_POST['watchpage']) && $_POST['noid_publication'] != $this->tag && $user && $this->iswatched !== true)
 		{
+
 			$this->SetWatch($user['user_id'], $this->page['page_id']);
 			$this->iswatched = true;
 		}
@@ -42,11 +45,16 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 
 			$title = $this->page["title"];
 			if(isset($_POST["title"]))
-			$title = trim($_POST["title"]);
-
+			{
+				$title = trim($_POST["title"]);
+			}
 			// check for overwriting
 			if ($this->page && $this->page["modified"] != $_POST["previous"])
 				$error = $this->GetTranslation("OverwriteAlert");
+
+			// check text length
+			#if ($textchars > $maxchars)
+			#	$error .= str_replace('%1', $textchars - $maxchars, $this->GetTranslation('TextDBOversize')).' ';
 
 			// check for edit note
 			if (($this->config["edit_summary"] == 2) && $_POST["edit_note"] == "" && $this->page["comment_on_id"] == 0)
@@ -183,7 +191,9 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 	// fetch fields
 	$previous = isset($_POST["previous"]) ? $_POST["previous"] : $this->page["modified"];
 	$body = isset($_POST["body"]) ? $_POST["body"] : $this->page["body"];
+	$body = html_entity_decode($body);
 	$title = isset($_POST["title"]) ? $_POST["title"] : $this->page["title"];
+	$title = html_entity_decode($title);
 	if (isset($_POST["edit_note"]))			$edit_note	= $_POST["edit_note"];
 	if (isset($_POST["minor_edit"]))		$minor_edit	= $_POST["minor_edit"];
 
@@ -192,20 +202,22 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 	if ($error)
 		$this->SetMessage("<div class=\"error\">$error</div>\n");
 
-		// "cf" attribute: it is for so called "critical fields" in the form. It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog "You are going to leave this page, but there are some changes you made but not saved yet." Is used by this script to determine which changes it need to monitor.
-		$output .= $this->FormOpen("edit", "", "post", "edit", " cf='true' ");
+	// "cf" attribute: it is for so called "critical fields" in the form. It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog "You are going to leave this page, but there are some changes you made but not saved yet." Is used by this script to determine which changes it need to monitor.
+	$output .= $this->FormOpen("edit", "", "post", "edit", " cf='true' ");
 
-		if (isset($_REQUEST["add"]))
-			$output .=	'<input name="lang" type="hidden" value="'.$this->pagelang.'" /><input name="tag" type="hidden" value="'.$this->tag.'" /><input name="add" type="hidden" value="1" />';
+	if (isset($_REQUEST["add"]))
+		$output .=	'<input name="lang" type="hidden" value="'.$this->pagelang.'" />'.
+					'<input name="tag" type="hidden" value="'.$this->tag.'" />'.
+					'<input name="add" type="hidden" value="1" />';
 
-			print($output);
+	print($output);
 
-			$output = "";
-			$preview = "";
+	$output		= "";
+	$preview	= "";
 
-			// preview?
-			if (isset($_POST["preview"]))
-			{
+	// preview?
+	if (isset($_POST["preview"]))
+	{
 ?>
 		<input name="save" type="submit" value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
 		&nbsp;
@@ -213,23 +225,46 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 		&nbsp;
 		<input type="button" value="<?php echo $this->GetTranslation("EditCancelButton"); ?>" onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
 <?php
-				$preview = $this->Format($body, "preformat");
-				$preview = $this->Format($preview, "wacko");
-				$preview = $this->Format($preview, "post_wacko");
+		$preview = $this->Format($body, "preformat");
+		$preview = $this->Format($preview, "wacko");
+		$preview = $this->Format($preview, "post_wacko");
 
-				$output = "<div class=\"preview\"><p class=\"preview\"><span>".$this->GetTranslation("EditPreview")."</span></p>\n";
+		$output = "<div class=\"preview\"><p class=\"preview\"><span>".$textchars." ".$this->GetTranslation("EditPreview")."</span></p>\n";
 
-				if ($this->config["edit_summary"] != 0)
-					$output .= "<div class=\"commenttitle\">\n<a href=\"#\">".$title."</a>\n</div>\n";
+		if ($this->config["edit_summary"] != 0)
+		{
+			$output .= "<div class=\"commenttitle\">\n<a href=\"#\">".$title."</a>\n</div>\n";
+		}
 
-					$output .= $preview;
-					$output .= "</div><br />\n";
+		$output .= $preview;
+		$output .= "</div><br />\n";
 
-					print($output);
+		print($output);
 
-					// edit
-					$output = "";
-			}
+		// edit
+		$output = "";
+		#$title	= $_POST['title'];
+	}
+
+	if ($_SESSION['body'] != '')
+	{
+		$body = $_SESSION['body'];
+		$_SESSION['body'] = '';
+	}
+
+	if ($_SESSION['title'] != '')
+	{
+		$title = $_SESSION['title'];
+		$_SESSION['title'] = '';
+	}
+	else if (isset($_POST['title']) && $_POST['title'] == true)
+	{
+		$title = $_POST['title'];
+	}
+	else
+	{
+		$title = $this->page['title'];
+	}
 ?>
 		<input name="save" type="submit" value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
 		&nbsp;

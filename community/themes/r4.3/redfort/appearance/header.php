@@ -14,7 +14,7 @@ by Pavel Fedotov (me@fedotov.org).
 <head>
   <title><?php
 // Echoes Title of the page.
-  echo $this->config["wacko_name"]." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":"");
+  echo htmlspecialchars($this->config["wacko_name"])." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":"");
 ?></title>
 <?php
 // We don't need search robots to index subordinate pages

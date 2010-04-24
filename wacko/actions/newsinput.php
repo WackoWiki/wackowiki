@@ -11,14 +11,14 @@ if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd')
 		$name		= ucwords($name);
 		$name		= preg_replace('/[^- \\w]/', '', $name);
 		$name		= str_replace(array(' ', "\t"), '', $name);
-		
+
 		if ($name == '') $error = $this->GetTranslation('NewsNoName');
 	}
 	else
 	{
 		$error = $this->GetTranslation('NewsNoName');
 	}
-	
+
 	// if errors were found - return, else continue
 	if ($error)
 	{
@@ -30,14 +30,12 @@ if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd')
 		// building news template
 		$template	= '===={{a name="'.date ('dm').'"}}""'.date ('d.m').' // '.$namehead.'""====
 
-!!Delete this text and in its place enter your news. Do not forget to mention the source of the message in the form of direct links.!!
+!!Delete this text and in its place enter your news.!!';
 
-++Source: ((http://))++';
-		
 		// redirecting to the edit form
 		$_SESSION['body']	= $template;
 		$_SESSION['title']	= $namehead;
-		$this->Redirect($this->href('edit', $this->tag.'/'.date('Y/').$name, '', 1));
+		$this->Redirect($this->href('edit', $this->tag.'/'.date('Y/').date('F/').$name, '', 1));
 	}
 }
 

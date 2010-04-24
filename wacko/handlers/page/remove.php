@@ -2,6 +2,7 @@
 <?php
 
 $comment_on_id = "";
+$dontkeep = "";
 
 // obviously do not allow to remove non-existent pages
 if (!$this->page) $this->Redirect($this->href());
