@@ -1,6 +1,7 @@
 <?php
 
-if (!function_exists('LoadRecentComments')){
+if (!function_exists('LoadRecentComments'))
+{
 	function LoadRecentComments(&$wacko, $for = "", $limit = 50)
 	{
 		return
@@ -16,8 +17,9 @@ if (!function_exists('LoadRecentComments')){
 	}
 }
 
-if (!isset($root)) $root = $this->UnwrapLink($vars[0]);
+if (!isset($root)) $root = (isset($vars['for']) ? $this->UnwrapLink($vars['for']) : "");
 if (!isset($root)) $root = $this->page["tag"];
+if (!isset($max)) $max = "";
 if (!$max) $max = 50;
 
 if ($comments = LoadRecentComments($this, $root, (int)$max))

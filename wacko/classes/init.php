@@ -746,9 +746,9 @@ class Init
 					echo "<li>HTTP_ACCEPT_LANGUAGE value: ".$_SERVER['HTTP_ACCEPT_LANGUAGE']."</li>\n";
 					echo "<li>HTTP_ACCEPT_LANGUAGE chopped value: ".strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2))."</li>\n";
 					echo "<li>User language set: ".(isset($user["lang"]) ? 'true' : 'false')."</li>\n";
-					echo "<li>User language value: ".$user["lang"]."</li>\n";
+					echo "<li>User language value: ".(isset($user["lang"]) ? $user["lang"]: "")."</li>\n";
 					echo "<li>Config language: ".$this->config["language"]."</li>\n";
-					echo "<li>User selected language: ".$this->engine->userlang."</li>\n";
+					echo "<li>User selected language: ".(isset($this->engine->userlang) ? $this->engine->userlang : "")."</li>\n";
 					echo "</ul>\n";
 				}
 				echo "</div >\n";
