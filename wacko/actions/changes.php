@@ -13,9 +13,23 @@ else
 if (!isset($max) || $usermax < $max)
 	$max = $usermax;
 
+$admin	= ( $this->IsAdmin() ? true : false );
+
+// process 'mark read' - reset session time
+if (isset($_GET['markread']) && $user == true)
+{
+	$this->UpdateSessionTime($user);
+	$this->SetUserSetting('sessiontime', date('Y-m-d H:i:s', time()));
+	$user = $this->GetUser();
+}
+
 if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date, $hide_minor_edit))
 {
-	$count = 0;
+	$count	= 0;
+	if ($user == true)
+	{
+		echo '<small><small><a href="?markread=yes">'.$this->GetTranslation('ForumMarkRead').'</a></small></small>';
+	}
 	if ($root == "" && !(int)$noxml)
 	{
 		echo "<a href=\"".$this->config["base_url"]."xml/changes_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"])).".xml\"><img src=\"".$this->config["theme_url"]."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
@@ -75,6 +89,8 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date, $hide_minor_edi
 	echo "</ul>\n</li>\n</ul>\n";
 }
 else
+{
 	echo $this->GetTranslation("NoPagesFound");
+}
 
 ?>

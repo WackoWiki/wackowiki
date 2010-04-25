@@ -694,9 +694,9 @@ class Wacko
 
 		// load page
 		if ($metadataonly)
-			$what = $this->pages_meta;
+			$what = "p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.keywords, p.description, u.user_name, o.user_name AS owner_name";
 		else
-			$what = "*";
+			$what = "p.*, u.user_name, o.user_name AS owner_name";
 
 		if (!$page)
 		{
@@ -704,7 +704,9 @@ class Wacko
 			{
 				$page = $this->LoadSingle(
 					"SELECT ".$what." ".
-					"FROM ".$this->config["table_prefix"]."pages ".
+					"FROM ".$this->config["table_prefix"]."pages p ".
+						"LEFT JOIN ".$this->config["table_prefix"]."users o ON (p.owner_id = o.user_id) ".
+						"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 					"WHERE supertag = '".quote($this->dblink, $supertag)."' ".
 					"LIMIT 1");
 
@@ -716,7 +718,9 @@ class Wacko
 
 					$page = $this->LoadSingle(
 						"SELECT ".$what." ".
-						"FROM ".$this->config["table_prefix"]."revisions ".
+						"FROM ".$this->config["table_prefix"]."revisions p ".
+							"LEFT JOIN ".$this->config["table_prefix"]."users o ON (p.owner_id = o.user_id) ".
+							"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 						"WHERE supertag = '".quote($this->dblink, $supertag)."' ".
 							"AND modified = '".quote($this->dblink, $time)."' ".
 						"LIMIT 1");
@@ -728,7 +732,9 @@ class Wacko
 			{
 				$page = $this->LoadSingle(
 					"SELECT ".$what." ".
-					"FROM ".$this->config["table_prefix"]."pages ".
+					"FROM ".$this->config["table_prefix"]."pages p ".
+						"LEFT JOIN ".$this->config["table_prefix"]."users o ON (p.owner_id = o.user_id) ".
+						"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 					"WHERE tag = '".quote($this->dblink, $tag)."' ".
 					"LIMIT 1");
 
@@ -740,7 +746,9 @@ class Wacko
 
 					$page = $this->LoadSingle(
 						"SELECT ".$what." ".
-						"FROM ".$this->config["table_prefix"]."revisions ".
+						"FROM ".$this->config["table_prefix"]."revisions p ".
+							"LEFT JOIN ".$this->config["table_prefix"]."users o ON (p.owner_id = o.user_id) ".
+							"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
 							"AND modified = '".quote($this->dblink, $time)."' ".
 						"LIMIT 1");
@@ -1316,9 +1324,10 @@ class Wacko
 					$username	= $user;
 					$title		= $this->GetPageTitle(0, $comment_on_id);
 					$Watchers	= $this->LoadAll(
-									"SELECT DISTINCT user_id ".
-									"FROM ".$this->config["table_prefix"]."watches ".
-									"WHERE page_id = '".quote($this->dblink, $comment_on_id)."'");
+									"SELECT DISTINCT w.user_id, u.user_name ".
+									"FROM ".$this->config["table_prefix"]."watches w ".
+										"LEFT JOIN ".$this->config["table_prefix"]."users u ON (w.user_id = u.user_id) ".
+									"WHERE w.page_id = '".quote($this->dblink, $comment_on_id)."'");
 
 					if ($Watchers && !$mute) foreach ($Watchers as $Watcher)
 
@@ -1343,9 +1352,7 @@ class Wacko
 						}
 						else continue;	// skip current watcher
 
-						$Watcher["user"] = $this->GetUserNameById($Watcher["user_id"]);
-
-						if ($this->HasAccess("read", $comment_on_id, $Watcher["user"]))
+						if ($this->HasAccess("read", $comment_on_id, $Watcher["user_name"]))
 						{
 							$_user = $this->LoadSingle(
 								"SELECT email, lang, more, email_confirm, enabled ".
@@ -1361,7 +1368,7 @@ class Wacko
 								$this->SetLanguage ($lang);
 
 								$subject = "[".$this->config["wacko_name"]."] ".$this->GetTranslation("CommentForWatchedPage", $lang)."'".$title."'";
-								$message = $this->GetTranslation("EmailHello", $lang). $Watcher["user"].".\n\n".
+								$message = $this->GetTranslation("EmailHello", $lang). $Watcher["user_name"].".\n\n".
 											$username.
 											$this->GetTranslation("SomeoneCommented", $lang)."\n".
 											$this->Href("",$this->GetCommentOnTag($comment_on_id),"")."\n\n".
@@ -1442,19 +1449,17 @@ class Wacko
 					$username	= $user;
 
 					$Watchers	= $this->LoadAll(
-						"SELECT DISTINCT user_id ".
-						"FROM ".$this->config["table_prefix"]."watches"." ".
-						"WHERE page_id = '".quote($this->dblink, $page_id)."'");
+						"SELECT DISTINCT w.user_id, u.user_name ".
+						"FROM ".$this->config["table_prefix"]."watches w ".
+							"LEFT JOIN ".$this->config["table_prefix"]."users u ON (w.user_id = u.user_id) ".
+						"WHERE w.page_id = '".quote($this->dblink, $page_id)."'");
 
 					if ($Watchers && !$mute)
 					{
 						foreach ($Watchers as $Watcher)
 						if ($Watcher["user_id"] !=  $user_id)
 						{
-							$Watcher["user"] = $this->GetUserNameById($Watcher["user_id"]);
-							$lang = $Watcher["lang"];
-
-							if ($this->HasAccess("read", $page_id, $Watcher["user"]))
+							if ($this->HasAccess("read", $page_id, $Watcher["user_name"]))
 							{
 								$_user = $this->LoadSingle(
 									"SELECT email, lang, more, email_confirm, enabled ".
@@ -1471,7 +1476,7 @@ class Wacko
 									$this->SetLanguage ($lang);
 
 									$subject = "[".$this->config["wacko_name"]."] ".$this->GetTranslation("WatchedPageChanged", $lang)."'".$tag."'";
-									$message = $this->GetTranslation("EmailHello", $lang). $Watcher["user"]."\n\n".
+									$message = $this->GetTranslation("EmailHello", $lang). $Watcher["user_name"]."\n\n".
 										$username.
 										$this->GetTranslation("SomeoneChangedThisPage", $lang)."\n".
 										$title."\n".
@@ -2617,12 +2622,17 @@ class Wacko
 		}
 	}
 
-	function LoadUser($name, $password = 0)
+	function LoadUser($user_name, $user_id = 0, $password = 0)
 	{
 		$user = $this->LoadSingle(
 			"SELECT * FROM ".$this->config["user_table"]." ".
-			"WHERE user_name = '".quote($this->dblink, $name)."' ".
-			($password === 0 ? "" : "AND password = '".quote($this->dblink, $password)."'")." ".
+			"WHERE ".( $user_id != 0
+					? "page_id		= '".quote($this->dblink, $user_id)."' "
+					: "user_name	= '".quote($this->dblink, $user_name)."' ").
+			($password === 0
+				? ""
+				: "AND password = '".quote($this->dblink, $password)."'"
+				)." ".
 			"LIMIT 1");
 
 		if ($user)
@@ -2820,16 +2830,6 @@ class Wacko
 	{
 		return $this->LoadAll(
 			"SELECT * FROM ".$this->config["user_table"]." ORDER BY binary user_name");
-	}
-
-	function GetUserNameById($user_id = 0)
-	{
-		$user = $this->LoadSingle(
-					"SELECT user_name FROM ".$this->config["table_prefix"]."users WHERE user_id = '".$user_id."' LIMIT 1");
-					// Get user value
-					$user = $user['user_name'];
-
-					return $user;
 	}
 
 	function GetUserId()
@@ -3045,12 +3045,12 @@ class Wacko
 	{
 		if (!$tag = trim($tag))
 		{
-			if (!$time) return $this->GetUserNameById($this->page['owner_id']);
+			if (!$time) return $this->page['owner_name'];
 			else $tag = $this->tag;
 		}
 
 		if ($page = $this->LoadPage($tag, $time, LOAD_CACHE, LOAD_META))
-			return $this->GetUserNameById($page["owner_id"]);
+			return $page["owner_name"];
 	}
 
 	function GetPageOwnerId($page_id = "", $time = "")
@@ -3069,8 +3069,7 @@ class Wacko
 	function SetPageOwner($page_id, $user_id)
 	{
 		// check if user exists
-		$user = $this->GetUserNameById($user_id);
-		if (!$this->LoadUser($user)) return;
+		if (!$this->LoadUser(0, $user_id)) return;
 
 		// updated latest revision with new owner
 		$this->Query(
@@ -3653,7 +3652,7 @@ class Wacko
 
 		// parse authentication cookie and get user data
 		$auth = $this->DecomposeAuthCookie();
-		$user = $this->LoadUser($auth["name"], $auth["password"]);
+		$user = $this->LoadUser($auth["name"], 0, $auth["password"]);
 
 		// run in ssl mode?
 		if ($this->config["ssl"] == true && ($_SERVER["HTTPS"] == "on" || $user == true))

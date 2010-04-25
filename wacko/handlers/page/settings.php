@@ -82,7 +82,7 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 		echo "<td class=\"form_right\">".$this->page['page_id']."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
 		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('Owner')."</th>";
-		echo "<td class=\"form_right\">"."<a href=\"".$this->href("", $this->config["users_page"], "profile=".$this->GetUserNameById($this->page["owner_id"]))."\">".$this->GetUserNameById($this->page["owner_id"])."</a>"."</td>";
+		echo "<td class=\"form_right\">"."<a href=\"".$this->href("", $this->config["users_page"], "profile=".$this->page["owner_name"])."\">".$this->page["owner_name"]."</a>"."</td>";
 		echo "</tr>\n<tr class=\"lined\">";
 		echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsCreated')."</th>";
 		echo "<td class=\"form_right\">".$this->GetTimeStringFormatted($this->page['created'])."</td>";
