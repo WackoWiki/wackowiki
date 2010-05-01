@@ -85,7 +85,8 @@ if ( ( $config["system_seed"] == "") )
 
 $salt = RandomSeed(4, 3);
 $password_encrypted = sha1($config["admin_name"].$salt.$_POST["password"]);
-$insert_admin = "INSERT INTO ".$config["table_prefix"]."users (user_name, password, salt, email, signup_time, lang) VALUES ('".$config["admin_name"]."', '".$password_encrypted."', '".$salt."', '".$config["admin_email"]."', NOW(), '".$config["language"]."')";
+$insert_admin = "INSERT INTO ".$config["table_prefix"]."users (user_name, password, salt, email, signup_time, lang) VALUES ('".$config["admin_name"]."', '".$password_encrypted."', '".$salt."', '".$config["admin_email"]."', NOW())";
+$insert_admin_setting = "INSERT INTO ".$config["table_prefix"]."users_settings (user_id, lang) VALUES ((SELECT user_id FROM ".$config["table_prefix"]."users WHERE user_name = '".$config["admin_name"]."' LIMIT 1), '".$config["language"]."')";
 // TODO: for Upgrade insert other aliases also in groups table
 // $config["aliases"] = array("Admins" => $config["admin_name"]);
 $insert_admin_group = "INSERT INTO ".$config["table_prefix"]."groups (group_name, description, moderator, created) VALUES ('Admins', '', (SELECT user_id FROM ".$config["table_prefix"]."users WHERE user_name = '".$config["admin_name"]."' LIMIT 1), NOW())";
@@ -284,6 +285,7 @@ switch($config["database_driver"])
 					test(str_replace("%1", "revision", $lang["DeletingTable"]), @mysql_query($table_revisions_drop, $dblink), str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "upload", $lang["DeletingTable"]), @mysql_query($table_upload_drop, $dblink), str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "user", $lang["DeletingTable"]), @mysql_query($table_users_drop, $dblink), str_replace("%1", "user", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "users_settings", $lang["DeletingTable"]), @mysql_query($table_users_settings_drop, $dblink), str_replace("%1", "users_settings", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "watches", $lang["DeletingTable"]), @mysql_query($table_watches_drop, $dblink), str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
 					print("            <li>".$lang["DeletingTablesEnd"]."</li>\n");
 					print("         </ul>\n");
@@ -313,9 +315,11 @@ switch($config["database_driver"])
 					test(str_replace("%1","revision",$lang["CreatingTable"]), @mysql_query($table_revisions, $dblink), str_replace("%1","revision",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","upload",$lang["CreatingTable"]), @mysql_query($table_upload, $dblink), str_replace("%1","upload",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","user",$lang["CreatingTable"]), @mysql_query($table_users, $dblink), str_replace("%1","user",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","user_settings",$lang["CreatingTable"]), @mysql_query($table_users_settings, $dblink), str_replace("%1","user_settings",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","watches",$lang["CreatingTable"]), @mysql_query($table_watches, $dblink), str_replace("%1","watches",$lang["ErrorCreatingTable"]));
 
 					test($lang["InstallingAdmin"], @mysql_query($insert_admin, $dblink), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
+					test($lang["InstallingAdminSetting"], @mysql_query($insert_admin_setting, $dblink), str_replace("%1","admin user settings",$lang["ErrorAlreadyExists"]));
 					test($lang["InstallingAdminGroup"], @mysql_query($insert_admin_group, $dblink), str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
 					test($lang["InstallingAdminGroupMember"], @mysql_query($insert_admin_group_member, $dblink), str_replace("%1","admin group member",$lang["ErrorAlreadyExists"]));
 					print("            </ul>\n");
@@ -580,6 +584,7 @@ switch($config["database_driver"])
 							test(str_replace("%1", "revision", $lang["DeletingTable"]), @mysqli_query($dblink, $table_revisions_drop), str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "upload", $lang["DeletingTable"]), @mysqli_query($dblink, $table_upload_drop), str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "user", $lang["DeletingTable"]), @mysqli_query($dblink, $table_users_drop), str_replace("%1", "user", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "users_settings", $lang["DeletingTable"]), @mysqli_query($dblink, $table_users_settings_drop), str_replace("%1", "users_settings", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "watches", $lang["DeletingTable"]), @mysqli_query($dblink, $table_watches_drop), str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
 							print("            <li>".$lang["DeletingTablesEnd"]."</li>\n");
 							print("         </ul>\n");
@@ -609,9 +614,11 @@ switch($config["database_driver"])
 								test(str_replace("%1","revision",$lang["CreatingTable"]), @mysqli_query($dblink, $table_revisions), str_replace("%1","revision",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","upload",$lang["CreatingTable"]), @mysqli_query($dblink, $table_upload), str_replace("%1","upload",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","user",$lang["CreatingTable"]), @mysqli_query($dblink, $table_users), str_replace("%1","user",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","user_settings",$lang["CreatingTable"]), @mysqli_query($dblink, $table_users_settings), str_replace("%1","user_settings",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","watches",$lang["CreatingTable"]), @mysqli_query($dblink, $table_watches), str_replace("%1","watches",$lang["ErrorCreatingTable"]));
 
 								test($lang["InstallingAdmin"], @mysqli_query($dblink, $insert_admin), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
+								test($lang["InstallingAdminSetting"], @mysqli_query($dblink, $insert_admin_setting), str_replace("%1","admin user settings",$lang["ErrorAlreadyExists"]));
 								test($lang["InstallingAdminGroup"], @mysqli_query($dblink, $insert_admin_group), str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
 								test($lang["InstallingAdminGroupMember"], @mysqli_query($dblink, $insert_admin_group_member), str_replace("%1","admin group member",$lang["ErrorAlreadyExists"]));
 								print("         </ul>\n");
@@ -878,6 +885,7 @@ switch($config["database_driver"])
 										testPDO(str_replace("%1", "revision", $lang["DeletingTable"]), $table_revisions_drop, str_replace("%1", "revision", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "upload", $lang["DeletingTable"]), $table_upload_drop, str_replace("%1", "upload", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "user", $lang["DeletingTable"]), $table_users_drop, str_replace("%1", "user", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "users_settings", $lang["DeletingTable"]), $table_users_settings_drop, str_replace("%1", "users_settings", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "watches", $lang["DeletingTable"]), $table_watches_drop, str_replace("%1", "watches", $lang["ErrorDeletingTable"]));
 										print("            <li>".$lang["DeletingTablesEnd"]."</li>\n");
 										print("         </ul>\n");
@@ -903,9 +911,11 @@ switch($config["database_driver"])
 									testPDO(str_replace("%1","revision",$lang["CreatingTable"]), $table_revisions, str_replace("%1","revision",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","upload",$lang["CreatingTable"]), $table_upload, str_replace("%1","upload",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","user",$lang["CreatingTable"]), $table_users, str_replace("%1","user",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","user_settings",$lang["CreatingTable"]), $table_users_settings, str_replace("%1","user_settings",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","watches",$lang["CreatingTable"]), $table_watches, str_replace("%1","watches",$lang["ErrorCreatingTable"]));
 
 									testPDO($lang["InstallingAdmin"], $insert_admin, str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
+									testPDO($lang["InstallingAdminSetting"], $insert_admin_setting, str_replace("%1","admin user settings",$lang["ErrorAlreadyExists"]));
 									testPDO($lang["InstallingAdminGroup"], $insert_admin_group, str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
 									testPDO($lang["InstallingAdminGroupMember"], $insert_admin_group_member, str_replace("%1","admin group member",$lang["ErrorAlreadyExists"]));
 									print("         </ul>\n");

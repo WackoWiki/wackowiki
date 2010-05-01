@@ -52,8 +52,6 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 							"FROM {$this->config['user_table']} ".
 							"WHERE user_name = '".quote($this->dblink, $newowner)."'");
 
-					$User['options'] = $this->DecomposeOptions($User['more']);
-
 					if ($User['email_confirm'] == '')
 					{
 						$subject = $this->config['wacko_name'].'. '.$this->GetTranslation('NewPageOwnership');
@@ -144,8 +142,6 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					"SELECT email, more, email_confirm ".
 					"FROM {$this->config['user_table']} ".
 					"WHERE user_name = '".quote($newowner)."'");
-
-				$User['options'] = $this->DecomposeOptions($User['more']);
 
 				if ($User['email_confirm'] == '')
 				{

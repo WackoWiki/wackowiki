@@ -1076,7 +1076,7 @@ class Wacko
 	// $from				- place specific address into the 'From:' field
 	// $charset				- send message in specific charset (w/o actual re-encoding)
 	// $supress_ssl			- don't change all http links to https links in the message body
-	function SendMail($email, $subject, $message, $charset = "")
+	function SendMail($email, $subject, $message, $from = "", $charset = "", $supress_ssl = false)
 	{
 		if (!$email) return;
 
@@ -1355,12 +1355,12 @@ class Wacko
 						if ($this->HasAccess("read", $comment_on_id, $Watcher["user_name"]))
 						{
 							$_user = $this->LoadSingle(
-								"SELECT email, lang, more, email_confirm, enabled ".
-								"FROM " .$this->config["user_table"]." ".
-								"WHERE user_id = '".quote($this->dblink, $Watcher["user_id"])."'");
-							$_user["options"] = $this->DecomposeOptions($_user["more"]);
+								"SELECT u.email, p.lang, p.email_confirm, u.enabled, p.send_watchmail ".
+								"FROM " .$this->config["user_table"]." u ".
+									"LEFT JOIN ".$this->config["table_prefix"]."users_settings p ON (u.user_id = p.user_id) ".
+								"WHERE u.user_id = '".quote($this->dblink, $Watcher["user_id"])."'");
 
-							if ($_user["enabled"] == true && $_user["email_confirm"] == "" && $_user["options"]["send_watchmail"] != "0")
+							if ($_user["enabled"] == true && $_user["email_confirm"] == "" && $_user["send_watchmail"] != "0")
 							{
 								$lang = $_user["lang"];
 								$this->LoadResource($lang);
@@ -1462,13 +1462,12 @@ class Wacko
 							if ($this->HasAccess("read", $page_id, $Watcher["user_name"]))
 							{
 								$_user = $this->LoadSingle(
-									"SELECT email, lang, more, email_confirm, enabled ".
-									"FROM " .$this->config["user_table"]." ".
-									"WHERE user_id = '".quote($this->dblink, $Watcher["user_id"])."'");
+									"SELECT u.email, p.lang, p.email_confirm, u.enabled, p.send_watchmail ".
+									"FROM " .$this->config["user_table"]." u ".
+										"LEFT JOIN ".$this->config["table_prefix"]."users_settings p ON (u.user_id = p.user_id) ".
+									"WHERE u.user_id = '".quote($this->dblink, $Watcher["user_id"])."'");
 
-								$_user["options"] = $this->DecomposeOptions($_user["more"]);
-
-								if ($_user["enabled"] == true && $_user["email_confirm"] == "" && $_user["options"]["send_watchmail"] != "0")
+								if ($_user["enabled"] == true && $_user["email_confirm"] == "" && $_user["send_watchmail"] != "0")
 								{
 									$lang = $_user["lang"];
 									$this->LoadResource($lang);
@@ -2625,18 +2624,17 @@ class Wacko
 	function LoadUser($user_name, $user_id = 0, $password = 0)
 	{
 		$user = $this->LoadSingle(
-			"SELECT * FROM ".$this->config["user_table"]." ".
+			"SELECT u.*, p.doubleclick_edit, p.show_comments, p.bookmarks, p.motto, p.revisions_count, p.changes_count, p.lang, p.show_spaces, p.typografica, p.theme, p.autocomplete, p.dont_redirect, p.send_watchmail, p.show_files, p.allow_intercom, p.hide_lastsession, p.validate_ip, p.noid_pubs ".
+			"FROM ".$this->config["user_table"]." u ".
+				"LEFT JOIN ".$this->config["table_prefix"]."users_settings p ON (u.user_id = p.user_id) ".
 			"WHERE ".( $user_id != 0
-					? "page_id		= '".quote($this->dblink, $user_id)."' "
-					: "user_name	= '".quote($this->dblink, $user_name)."' ").
+					? "u.user_id		= '".quote($this->dblink, $user_id)."' "
+					: "u.user_name	= '".quote($this->dblink, $user_name)."' ").
 			($password === 0
 				? ""
-				: "AND password = '".quote($this->dblink, $password)."'"
+				: "AND u.password = '".quote($this->dblink, $password)."'"
 				)." ".
 			"LIMIT 1");
-
-		if ($user)
-			$user["options"] = $this->DecomposeOptions($user["more"]);
 
 		if ($user["session_time"] == SQL_NULLDATE)
 			$user["session_time"] = "";
@@ -2826,6 +2824,30 @@ class Wacko
 		session_id($session_id);
 	}
 
+	// Increment the failed login count by 1
+	function SetFailedUserLoginCount($user_id)
+	{
+		$this->Query(
+			"UPDATE {$this->config['user_table']} ".
+			"SET failed_login_count=failed_login_count+1 ".
+			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"LIMIT 1");
+
+		return true;
+	}
+
+	// Reset to zero the failed login attempts
+	function ResetFailedUserLoginCount($user_id)
+	{
+		$this->Query(
+			"UPDATE {$this->config['user_table']} ".
+			"SET failed_login_count = 0 ".
+			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"LIMIT 1");
+
+		return true;
+	}
+
 	function LoadUsers()
 	{
 		return $this->LoadAll(
@@ -2864,7 +2886,7 @@ class Wacko
 		if (!$user = $this->GetUser())
 			return false;
 
-		return (isset($user["options"]["show_files"]) && $user["options"]["show_files"] == "1");
+		return (isset($user["show_files"]) && $user["show_files"] == "1");
 	}
 
 	// Returns boolean indicating if the current user is allowed to see comments at all
@@ -3714,7 +3736,7 @@ class Wacko
 
 		unset($auth);
 
-		// user preferences
+		// user settings
 		if(isset($user["lang"]))
 		{
 			if($user["lang"] == "")
@@ -3731,9 +3753,9 @@ class Wacko
 			$this->UserAgentLanguage();
 		}
 
-		if (is_array($user) && isset($user["options"]["theme"]))
+		if (is_array($user) && isset($user["theme"]))
 		{
-			$this->config["theme"]		= $user["options"]["theme"];
+			$this->config["theme"]		= $user["theme"];
 			$this->config["theme_url"]	= $this->config["base_url"]."themes/".$this->config["theme"]."/";
 		}
 

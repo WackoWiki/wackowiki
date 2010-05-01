@@ -216,7 +216,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"show_spaces number(1) default 1 not null,".
 					"typografica number(1) default 1 not null,".
 					"more clob not null,".
-					"change_password varchar2(100) not null,".
+					"change_password varchar2(40) not null,".
 					"email_confirm varchar2(40) not null,".
 					"session_time date default sysdate not null,".
 					"session_expire number(10) not null,".
@@ -257,6 +257,7 @@ $table_referrers_drop = "DROP TABLE {$pref}referrers";
 $table_revisions_drop = "DROP TABLE {$pref}revisions";
 $table_upload_drop = "DROP TABLE {$pref}upload";
 $table_users_drop = "DROP TABLE {$pref}users";
+$table_users_settings_drop = "DROP TABLE {$pref}users_settings";
 $table_watches_drop = "DROP TABLE {$pref}watches";
 
 ?>

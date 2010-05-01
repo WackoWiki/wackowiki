@@ -866,7 +866,7 @@ class WackoFormatter
 				$start = "";
 
 			// find out which indent type we want
-			$newIndentType = $matches[3][0];
+			$newIndentType = isset($matches[3][0]) ? $matches[3][0] : "";
 
 			if (!$newIndentType)
 			{

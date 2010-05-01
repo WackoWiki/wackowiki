@@ -22,10 +22,34 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 		$title = trim($_POST["title"]);
 	}
 
+	// watch page
+	if ($this->page && $_POST['watchpage'] && $_POST['noid_publication'] != $this->tag && $user && $this->iswatched !== true)
+	{
+		$this->SetWatch($user['user_id'], $this->page['page_id']);
+	}
+
 	if (!$body)
 	{
-		# if (!$user) $this->cache->CacheInvalidate($this->supertag);
+		if (!$user) $this->cache->CacheInvalidate($this->supertag);
 		$this->SetMessage($this->GetTranslation("EmptyComment"));
+	}
+	else if ($_POST['preview'])
+	{
+		// comment preview
+		if (!$user) $this->cache->CacheInvalidate($this->supertag);
+		$_SESSION['preview']	= $body;
+		$_SESSION['body']		= $body;
+		$_SESSION['guest']		= $guest;
+		$this->redirect($this->href('', '', 'show_comments=1&p=last').'#preview');
+	}
+	else if ($_SESSION['comment_delay'] && ((time() - $_SESSION['comment_delay']) < $this->config['comment_delay']))
+	{
+		// posting flood protection
+		if (!$user) $this->cache->CacheInvalidate($this->supertag);
+		$this->SetMessage('<div class="error">'.str_replace('%1', $this->config['comment_delay'], $this->GetRes('CommentFlooded')).'</div>');
+		$_SESSION['body']			= $body;
+		$_SESSION['comment_delay']	= time();
+		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
 	}
 	else
 	{
@@ -78,6 +102,20 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 			}
 		}
 
+		// everything's okay
+		$_SESSION['preview']		= '';
+		$_SESSION['body']			= '';
+		$_SESSION['guest']			= '';
+		$_SESSION['comment_delay']	= time();
+
+		// publish anonymously
+		if ($_POST['noid_publication'] == $this->tag)
+		{
+			// undefine username
+			$remember_name = $this->GetUserName();
+			$this->SetUserSetting('name', NULL);
+		}
+
 		if (!$error)
 		{
 			$comment_on_id = $this->GetPageId();
@@ -86,6 +124,22 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 
 			// log event
 			$this->Log(5, str_replace("%2", $this->tag." ".$this->page["title"], str_replace("%1", "Comment".$num, $this->GetTranslation("LogCommentPosted"))));
+
+		// restore username after anonymous publication
+		if ($_POST['noid_publication'] == $this->tag)
+		{
+			$this->SetUserSetting('name', $remember_name);
+			unset($remember_name);
+			if ($body_r) $this->SetUserSetting('noid_protect', true);
+		}
+
+		// now we render it internally so we can write the updated link table.
+		$this->ClearLinkTable();
+		$this->StartLinkTracking();
+		$dummy = $this->Format($body_r, 'post_wacko');
+		$this->StopLinkTracking();
+		$this->WriteLinkTable('Comment'.$num);
+		$this->ClearLinkTable();
 
 			$this->SetMessage($this->GetTranslation("CommentAdded"));
 		}

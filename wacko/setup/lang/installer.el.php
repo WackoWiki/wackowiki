@@ -118,6 +118,7 @@ $lang = array(
 "InstallingPagesBegin" => "Προσθήκη Προκαθορισμένων Σελίδων",
 "InstallingPagesEnd" => "Ολοκλήρωση Προσθήκης Προκαθορισμένων Σελίδων",
 "InstallingAdmin" => "Προσθήκη Χρήση Διαχειριστή",
+"InstallingAdminSetting" => "Προσθήκη Χρήση Διαχειριστή",
 "InstallingAdminGroup" => "Adding Admins Group",
 "InstallingAdminGroupMember" => "Adding Admins Group Member",
 "InstallingLogoImage" => "Προσθήκη Εικόνας Λογότυπο",

@@ -71,7 +71,7 @@ $url = htmlspecialchars($url);
 if(!$width) $width = 550;
 if(!$height) $height = 100;
 if(!$name) $name = 'flash'.rand();
-if(!$version) $version = '9.0.0';
+if(!$version) $version = '10.0.0';
 
 if (!$url)
 {

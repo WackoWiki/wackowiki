@@ -220,21 +220,14 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"salt VARCHAR(40) NOT NULL DEFAULT '',".
 					"email VARCHAR(50) NOT NULL DEFAULT '',".
 					"enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
-					"motto TEXT NOT NULL,".
-					"revisions_count INT(10) UNSIGNED NOT NULL DEFAULT '20',".
-					"changes_count INT(10) UNSIGNED NOT NULL DEFAULT '50',".
-					"doubleclick_edit TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"show_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
-					"bookmarks TEXT NOT NULL,".
-					"lang VARCHAR(2) NOT NULL DEFAULT '',".
-					"show_spaces TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
-					"typografica TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
-					"more TEXT NOT NULL,".
-					"change_password VARCHAR(100) NOT NULL,".
+					"change_password VARCHAR(40) NOT NULL,".
 					"email_confirm VARCHAR(40) NOT NULL DEFAULT '',".
 					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"session_expire INT(10) UNSIGNED NOT NULL,".
+					"login_count INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"lost_password_request_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',".
+					"failed_login_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',".
 					"total_pages INT(10) UNSIGNED NOT NULL,".
 					"total_revisions INT(10) UNSIGNED NOT NULL,".
 					"total_comments INT(10) UNSIGNED NOT NULL,".
@@ -242,6 +235,33 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"UNIQUE KEY idx_user_name (user_name),".
 					"KEY idx_enabled (enabled),".
 					"KEY idx_signup_time (signup_time)".
+				") TYPE=MyISAM";
+
+$table_users_settings = "CREATE TABLE {$pref}users_settings (".
+					"setting_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"theme VARCHAR(20) COLLATE latin1_general_ci DEFAULT NULL,".
+					"lang VARCHAR(2) COLLATE latin1_general_ci DEFAULT NULL,".
+					"bookmarks TEXT COLLATE latin1_general_ci,".
+					"motto TEXT COLLATE latin1_general_ci,".
+					"changes_count INT(10) UNSIGNED NOT NULL DEFAULT '20',".
+					"revisions_count INT(10) UNSIGNED NOT NULL DEFAULT '50',".
+					"dont_redirect TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"send_watchmail TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"show_files TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"show_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
+					"doubleclick_edit TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"show_spaces TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
+					"typografica TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
+					"autocomplete TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"allow_intercom TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"hide_lastsession TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"validate_ip TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"noid_pubs TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"timezone VARCHAR(32) COLLATE latin1_general_ci DEFAULT NULL,".
+					"PRIMARY KEY (setting_id),".
+					"UNIQUE KEY idx_user_id (user_id),".
+					"KEY idx_send_watchmail (send_watchmail)".
 				") TYPE=MyISAM";
 
 $table_watches = "CREATE TABLE {$pref}watches (".
@@ -272,6 +292,7 @@ $table_referrers_drop = "DROP TABLE {$pref}referrers";
 $table_revisions_drop = "DROP TABLE {$pref}revisions";
 $table_upload_drop = "DROP TABLE {$pref}upload";
 $table_users_drop = "DROP TABLE {$pref}users";
+$table_users_settings_drop = "DROP TABLE {$pref}users_settings";
 $table_watches_drop = "DROP TABLE {$pref}watches";
 
 ?>
