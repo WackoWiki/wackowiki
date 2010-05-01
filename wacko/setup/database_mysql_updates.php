@@ -218,15 +218,53 @@ $alter_users_r4_2_14 = "ALTER TABLE {$pref}users CHANGE id user_id INT(10) UNSIG
 $alter_users_r4_2_15 = "ALTER TABLE {$pref}users ADD enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER email, ADD INDEX idx_enabled (enabled)";
 $alter_users_r4_2_16 = "ALTER TABLE {$pref}users CHANGE password password VARCHAR(40) NOT NULL DEFAULT ''";
 $alter_users_r4_2_17 = "ALTER TABLE {$pref}users CHANGE signuptime signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
-$alter_users_r4_2_18 = "ALTER TABLE {$pref}users CHANGE changepassword change_password VARCHAR(100) NOT NULL";
+$alter_users_r4_2_18 = "ALTER TABLE {$pref}users CHANGE changepassword change_password VARCHAR(40) NOT NULL";
 $alter_users_r4_2_19 = "ALTER TABLE {$pref}users CHANGE revisioncount revisions_count INT(10) UNSIGNED NOT NULL DEFAULT '20'";
 $alter_users_r4_2_20 = "ALTER TABLE {$pref}users CHANGE changescount changes_count INT(10) UNSIGNED NOT NULL DEFAULT '50'";
 $alter_users_r4_2_21 = "ALTER TABLE {$pref}users ADD salt VARCHAR(40) NOT NULL DEFAULT '' AFTER password";
+$alter_users_r4_2_22 = "ALTER TABLE {$pref}users DROP motto";
+$alter_users_r4_2_23 = "ALTER TABLE {$pref}users DROP revisions_count";
+$alter_users_r4_2_24 = "ALTER TABLE {$pref}users DROP changes_count";
+$alter_users_r4_2_25 = "ALTER TABLE {$pref}users DROP doubleclick_edit";
+$alter_users_r4_2_26 = "ALTER TABLE {$pref}users DROP show_comments";
+$alter_users_r4_2_27 = "ALTER TABLE {$pref}users DROP bookmarks";
+$alter_users_r4_2_28 = "ALTER TABLE {$pref}users DROP lang";
+$alter_users_r4_2_29 = "ALTER TABLE {$pref}users DROP show_spaces";
+$alter_users_r4_2_30 = "ALTER TABLE {$pref}users DROP typografica";
+$alter_users_r4_2_31 = "ALTER TABLE {$pref}users DROP more";
 
 $update_users_r4_2 = "UPDATE {$pref}users SET doubleclick_edit = '0' WHERE doubleclick_edit = '2'";
 $update_users_r4_2_1 = "UPDATE {$pref}users SET show_comments = '0' WHERE show_comments = '2'";
 $update_users_r4_2_2 = "UPDATE {$pref}users SET show_spaces = '0' WHERE show_spaces = '2'";
 $update_users_r4_2_4 = "UPDATE {$pref}users SET typografica = '0' WHERE typografica = '2'";
+
+// USERS SETTINGS
+$table_users_settings_r4_2 = "CREATE TABLE {$pref}users_settings (".
+					"setting_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"theme VARCHAR(20) COLLATE latin1_general_ci DEFAULT NULL,".
+					"lang VARCHAR(2) COLLATE latin1_general_ci DEFAULT NULL,".
+					"bookmarks TEXT COLLATE latin1_general_ci,".
+					"motto TEXT COLLATE latin1_general_ci,".
+					"changes_count INTEGER(10) UNSIGNED NOT NULL DEFAULT '20',".
+					"revisions_count INTEGER(10) UNSIGNED NOT NULL DEFAULT '50',".
+					"dont_redirect TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"send_watchmail TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"show_files TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"show_comments TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"doubleclick_edit TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"show_spaces TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
+					"typografica TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
+					"autocomplete TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"allow_intercom TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"hide_lastsession TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"validate_ip TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"noid_pubs TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"timezone VARCHAR(32) COLLATE latin1_general_ci DEFAULT NULL,".
+					"PRIMARY KEY (setting_id),".
+					"UNIQUE KEY idx_user_id (user_id),".
+					"KEY idx_send_watchmail (send_watchmail)".
+				") TYPE=MyISAM";
 
 // WATCHES
 $alter_watches_r4_2 = "ALTER TABLE {$pref}pagewatches CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";

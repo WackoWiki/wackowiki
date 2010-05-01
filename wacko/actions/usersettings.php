@@ -70,33 +70,36 @@ else if ($user = $this->GetUser())
 			{
 				$bookmarks = str_replace("\r", "", $_POST["bookmarks"]);
 
-				$more = $this->ComposeOptions(array(
-					"theme" => $_POST["theme"],
-					"autocomplete" => $_POST["autocomplete"],
-					"dont_redirect" => $_POST["dont_redirect"],
-					"send_watchmail" => $_POST["send_watchmail"],
-					"show_files" => $_POST["show_files"],
-					"allow_intercom" => $_POST["allow_intercom"],
-					"hide_lastsession" => $_POST["hide_lastsession"],
-					"validate_ip" => $_POST["validate_ip"],
-					"noid_pubs" => $_POST["noid_pubs"],
-				));
-
+				// update users table
 				$this->Query(
 					"UPDATE ".$this->config["user_table"]." SET ".
-						"real_name = '".quote($this->dblink, $_POST["real_name"])."', ".
-						"email = '".quote($this->dblink, $_POST["email"])."', ".
-						"doubleclick_edit = '".quote($this->dblink, $_POST["doubleclick_edit"])."', ".
-						"show_comments = '".quote($this->dblink, $_POST["show_comments"])."', ".
-						"revisions_count = '".quote($this->dblink, $_POST["revisions_count"])."', ".
-						"changes_count = '".quote($this->dblink, $_POST["changes_count"])."', ".
-						"motto = '".quote($this->dblink, $_POST["motto"])."', ".
-						"bookmarks = '".quote($this->dblink, $bookmarks)."', ".
-						"show_spaces = '".quote($this->dblink, $_POST["show_spaces"])."', ".
-						"typografica = '".quote($this->dblink, $_POST["typografica"])."', ".
-						"lang = '".quote($this->dblink, $_POST["lang"])."', ".
-						"more = '".quote($this->dblink, $more)."' ".
-					"WHERE user_name = '".quote($this->dblink, $user["user_name"])."' ".
+						"real_name			= '".quote($this->dblink, $_POST["real_name"])."', ".
+						"email				= '".quote($this->dblink, $_POST["email"])."' ".
+					"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
+					"LIMIT 1");
+
+				// update users_settings table
+				$this->Query(
+					"UPDATE ".$this->config["table_prefix"]."users_settings SET ".
+						"doubleclick_edit	= '".quote($this->dblink, $_POST["doubleclick_edit"])."', ".
+						"show_comments		= '".quote($this->dblink, $_POST["show_comments"])."', ".
+						"revisions_count	= '".quote($this->dblink, $_POST["revisions_count"])."', ".
+						"changes_count		= '".quote($this->dblink, $_POST["changes_count"])."', ".
+						"motto				= '".quote($this->dblink, $_POST["motto"])."', ".
+						"bookmarks			= '".quote($this->dblink, $bookmarks)."', ".
+						"show_spaces		= '".quote($this->dblink, $_POST["show_spaces"])."', ".
+						"typografica		= '".quote($this->dblink, $_POST["typografica"])."', ".
+						"lang				= '".quote($this->dblink, $_POST["lang"])."', ".
+						"theme				= '".quote($this->dblink, $_POST["theme"])."', ".
+						"autocomplete		= '".quote($this->dblink, $_POST["autocomplete"])."', ".
+						"dont_redirect		= '".quote($this->dblink, $_POST["dont_redirect"])."', ".
+						"send_watchmail		= '".quote($this->dblink, $_POST["send_watchmail"])."', ".
+						"show_files			= '".quote($this->dblink, $_POST["show_files"])."', ".
+						"allow_intercom		= '".quote($this->dblink, $_POST["allow_intercom"])."', ".
+						"hide_lastsession	= '".quote($this->dblink, $_POST["hide_lastsession"])."', ".
+						"validate_ip		= '".quote($this->dblink, $_POST["validate_ip"])."', ".
+						"noid_pubs			= '".quote($this->dblink, $_POST["noid_pubs"])."' ".
+					"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
 					"LIMIT 1");
 
 				$this->SetMessage($this->GetTranslation("UserSettingsStored"));
@@ -231,7 +234,7 @@ else if ($user = $this->GetUser())
 	for ($i = 0; $i < count($themes); $i++)
 	{
 		echo '<option value="'.$themes[$i].'" '.
-			(isset($user["options"]["theme"]) && $user["options"]["theme"] == $themes[$i]
+			(isset($user["theme"]) && $user["theme"] == $themes[$i]
 				? "selected=\"selected\""
 				: ($this->config["theme"] == $themes[$i]
 					? "selected=\"selected\""
@@ -272,7 +275,7 @@ else if ($user = $this->GetUser())
 		<td class="form_right"><input type="hidden" name="autocomplete" value="0" />
 			<input
 	type="checkbox" id="autocomplete" name="autocomplete" value="1"
-	<?php echo (isset($user["options"]["autocomplete"]) && $user["options"]["autocomplete"] == "1") ? "checked=\"checked\"" : "" ?> />
+	<?php echo (isset($user["autocomplete"]) && $user["autocomplete"] == "1") ? "checked=\"checked\"" : "" ?> />
 			<label for="autocomplete"><?php echo $this->GetTranslation("WikieditAutocomplete");?></label></td>
 	</tr>
 	<tr>
@@ -288,7 +291,7 @@ else if ($user = $this->GetUser())
 		<td class="form_right"><input type="hidden" name="show_files" value="0" />
 			<input
 	type="checkbox" id="show_files" name="show_files" value="1"
-	<?php echo (isset($user["options"]["show_files"]) && $user["options"]["show_files"] == "1") ? "checked=\"checked\"" : "" ?> />
+	<?php echo (isset($user["show_files"]) && $user["show_files"] == "1") ? "checked=\"checked\"" : "" ?> />
 		<label for="show_files"><?php echo $this->GetTranslation("ShowFiles?");?></label></td>
 	</tr>
 	<tr>
@@ -304,7 +307,7 @@ else if ($user = $this->GetUser())
 		<td class="form_right"><input type="hidden" name="dont_redirect" value="0" />
 			<input
 	type="checkbox" id="dont_redirect" name="dont_redirect" value="1"
-	<?php echo (isset($user["options"]["dont_redirect"]) && $user["options"]["dont_redirect"] == "1") ? "checked=\"checked\"" : "" ?> />
+	<?php echo (isset($user["dont_redirect"]) && $user["dont_redirect"] == "1") ? "checked=\"checked\"" : "" ?> />
 	<label for="dont_redirect"><?php echo $this->GetTranslation("DontRedirect");?></label></td>
 	</tr>
 	<tr>
@@ -312,7 +315,7 @@ else if ($user = $this->GetUser())
 	<td class="form_right"><input type="hidden" name="send_watchmail" value="0" />
 		<input
 	type="checkbox" id="send_watchmail" name="send_watchmail" value="1"
-	<?php echo (isset($user["options"]["send_watchmail"]) && $user["options"]["send_watchmail"] == "1") ? "checked=\"checked\"" : "" ?> />
+	<?php echo (isset($user["send_watchmail"]) && $user["send_watchmail"] == "1") ? "checked=\"checked\"" : "" ?> />
 		<label for="send_watchmail"><?php echo $this->GetTranslation("SendWatchEmail");?></label></td>
 	</tr>
 	<tr>
@@ -320,7 +323,7 @@ else if ($user = $this->GetUser())
 		<td class="form_right"><input type="hidden" name="allow_intercom" value="0" />
 		<input
 	type="checkbox" id="allow_intercom" name="allow_intercom" value="1"
-	<?php echo (isset($user["options"]["allow_intercom"]) && $user["options"]["allow_intercom"] == "1") ? "checked=\"checked\"" : "" ?> />
+	<?php echo (isset($user["allow_intercom"]) && $user["allow_intercom"] == "1") ? "checked=\"checked\"" : "" ?> />
 	<label for="allow_intercom"><?php echo $this->GetTranslation("AllowIntercom");?></label></td>
 	</tr>
 
@@ -328,21 +331,21 @@ else if ($user = $this->GetUser())
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right">
 			<input type="hidden" name="validate_ip" value="0" />
-			<input type="checkbox" name="validate_ip" id="validate_ip" value="1" <?php echo (isset($user['options']['validate_ip']) && $user['options']['validate_ip'] == '1') ? 'checked' : '' ?> />
+			<input type="checkbox" name="validate_ip" id="validate_ip" value="1" <?php echo (isset($user['validate_ip']) && $user['validate_ip'] == '1') ? 'checked' : '' ?> />
 		<label for="validate_ip"><?php echo $this->GetTranslation('ValidateIP');?></label></td>
 	</tr>
 	<tr>
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right">
 			<input type="hidden" name="hide_lastsession" value="0" />
-			<input type="checkbox" name="hide_lastsession" id="hide_lastsession" value="1" <?php echo (isset($user['options']['hide_lastsession']) && $user['options']['hide_lastsession'] == '1') ? 'checked' : '' ?> />
+			<input type="checkbox" name="hide_lastsession" id="hide_lastsession" value="1" <?php echo (isset($user['hide_lastsession']) && $user['hide_lastsession'] == '1') ? 'checked' : '' ?> />
 		<label for="hide_lastsession"><?php echo $this->GetTranslation('HideLastSession');?></label></td>
 	</tr>
 	<tr>
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right">
 			<input type="hidden" name="noid_pubs" value="0" />
-			<input type="checkbox" name="noid_pubs" id="noid_pubs" value="1" <?php echo (isset($user['options']['noid_pubs']) && $user['options']['noid_pubs'] == '1') ? 'checked' : '' ?> />
+			<input type="checkbox" name="noid_pubs" id="noid_pubs" value="1" <?php echo (isset($user['noid_pubs']) && $user['noid_pubs'] == '1') ? 'checked' : '' ?> />
 		<label for="noid_pubs"><?php echo $this->GetTranslation('ProfileAnonymousPub');?></label></td>
 	</tr>
 	<!--<tr>

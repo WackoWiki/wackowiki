@@ -104,7 +104,7 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"show_spaces int(1) NOT NULL DEFAULT '1',".
 					"typografica int(1) NOT NULL DEFAULT '1',".
 					"more text NOT NULL DEFAULT '',".
-					"change_password character varying(100) NOT NULL DEFAULT '',".
+					"change_password character varying(40) NOT NULL DEFAULT '',".
 					"email_confirm character varying(40) NOT NULL DEFAULT '',".
 					"CONSTRAINT pk_users_name PRIMARY KEY (user_id),".
 					"CONSTRAINT idx_users_name UNIQUE (name)".
@@ -161,6 +161,7 @@ $table_referrers_drop = "DROP TABLE {$pref}referrers";
 $table_revisions_drop = "DROP TABLE {$pref}revisions";
 $table_upload_drop = "DROP TABLE {$pref}upload";
 $table_users_drop = "DROP TABLE {$pref}users";
+$table_users_settings_drop = "DROP TABLE {$pref}users_settings";
 $table_watches_drop = "DROP TABLE {$pref}watches";
 
 ?>

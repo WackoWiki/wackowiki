@@ -114,6 +114,7 @@ $lang = array(
 "InstallingPagesBegin" => "Adding Default Pages",
 "InstallingPagesEnd" => "Finished Adding Default Pages",
 "InstallingAdmin" => "Toevoegen van de gebruiker beheerder",
+"InstallingAdminSetting" => "Toevoegen van de gebruiker beheerder",
 "InstallingAdminGroup" => "Adding Admins Group",
 "InstallingAdminGroupMember" => "Adding Admins Group Member",
 "InstallingLogoImage" => "Adding Logo Image",

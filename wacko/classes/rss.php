@@ -39,8 +39,8 @@ class RSS
 	function Changes()
 	{
 		$limit	= 30;
-		$name = "changes";
-		$count = "";
+		$name	= "changes";
+		$count	= "";
 
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->GetCharset()."\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
@@ -48,6 +48,7 @@ class RSS
 		$xml .= "<title>".$this->engine->config["wacko_name"].$this->engine->GetTranslation("RecentChangesTitleXML")."</title>\n";
 		$xml .= "<link>".$this->engine->config["base_url"]."</link>\n";
 		$xml .= "<description>".$this->engine->GetTranslation("RecentChangesXML").$this->engine->config["wacko_name"]." </description>\n";
+		$xml .= '<copyright>'.$this->engine->href('', $this->engine->config['policy_page']).'</copyright>'."\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
 		$xml .= "<title>".$this->engine->config["wacko_name"].$this->engine->GetTranslation("RecentCommentsTitleXML")."</title>\n";
@@ -56,7 +57,7 @@ class RSS
 		$xml .= "<width>108</width>\n";
 		$xml .= "<height>50</height>\n";
 		$xml .= "</image>\n";
-		$xml .= "<language>en-us</language>\n";
+		$xml .= "<language>".$this->engine->config['language']."</language>\n";
 		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 		$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
@@ -65,7 +66,7 @@ class RSS
 			foreach ($pages as $i => $page)
 			{
 				if ($this->engine->config["hide_locked"])
-					$access =$this->engine->HasAccess("read",$page["page_id"],GUEST);
+					$access = $this->engine->HasAccess("read", $page["page_id"], GUEST);
 
 				if ($access && ($count < 30))
 				{
@@ -76,56 +77,6 @@ class RSS
 					$xml .= "<guid>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["modified"]))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
 					$xml .= "<description>".$page["modified"]." ".$this->engine->GetTranslation("By")." ".$page["user"].($page["edit_note"] ? " [".$page["edit_note"]."]" : "")."</description>\n";
-					$xml .= "</item>\n";
-				}
-			}
-		}
-
-		$xml .= "</channel>\n";
-		$xml .= "</rss>\n";
-
-		$this->WriteFile($name, $xml);
-	}
-
-	function Comments()
-	{
-		$limit	= 20;
-		$name = "comments";
-		$count = "";
-
-		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->GetCharset()."\"?>\n";
-		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->engine->config["theme_url"]."css/wacko.css\" media=\"screen\"?>\n";
-		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
-		$xml .= "<channel>\n";
-		$xml .= "<title>".$this->engine->config["wacko_name"].$this->engine->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->engine->config["base_url"]."</link>\n";
-		$xml .= "<description>".$this->engine->GetTranslation("RecentCommentsXML").$this->engine->config["wacko_name"]." </description>\n";
-		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
-		$xml .= "<image>\n";
-		$xml .= "<title>".$this->engine->config["wacko_name"].$this->engine->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-		$xml .= "<link>".$this->engine->config["base_url"]."</link>\n";
-		$xml .= "<url>".$this->engine->config["base_url"]."files/wacko4.gif"."</url>\n";
-		$xml .= "<width>108</width>\n";
-		$xml .= "<height>50</height>\n";
-		$xml .= "</image>\n";
-		$xml .= "<language>en-us</language>\n";
-		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-		$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
-
-		if ( $pages = $this->engine->LoadRecentlyComment() ) {
-			foreach ($pages as $i => $page) {
-				if ($this->engine->config["hide_locked"]) $access =$this->engine->HasAccess("read",$page["page_id"],GUEST);
-				if ( $access && ($count < 30) ) {
-					$count++;
-					$xml .= "<item>\n";
-					$xml .= "<title>".$page["title"]." ".$this->engine->GetTranslation("To")." ".$this->engine->GetCommentOnTag($page["comment_on_id"])." ".$this->engine->GetTranslation("From")." ".$page["user"]."</title>\n";
-					$xml .= "<link>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["modified"]))."</link>\n";
-					$xml .= "<guid>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["modified"]))."</guid>\n";
-					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
-					$xml .= "<dc:creator>".$page["user"]."</dc:creator>\n";
-					$text = $this->engine->Format($page["body_r"], "post_wacko");
-					$xml .= "<description><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></description>\n";
-					#$xml .= "<content:encoded><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></content:encoded>\n";
 					$xml .= "</item>\n";
 				}
 			}
@@ -178,6 +129,7 @@ class RSS
 						'<title>'.$this->engine->config['wacko_name'].$this->engine->GetTranslation("RecentNewsTitleXML").'</title>'."\n".
 						'<link>'.$this->engine->config['base_url'].str_replace('%2F', '/', rawurlencode($newscluster)).'</link>'."\n".
 						'<description>'.$this->engine->GetTranslation("RecentNewsXML").$this->engine->config["wacko_name"].'</description>'."\n".
+						'<copyright>'.$this->engine->href('', $this->engine->config['policy_page']).'</copyright>'."\n".
 						'<language>'.$this->engine->config['language'].'</language>'."\n".
 						'<pubDate>'.date('r').'</pubDate>'."\n".
 						'<lastBuildDate>'.date('r').'</lastBuildDate>'."\n";
@@ -220,6 +172,58 @@ class RSS
 
 		$xml .= 	'</channel>'."\n".
 				'</rss>';
+
+		$this->WriteFile($name, $xml);
+	}
+
+	function Comments()
+	{
+		$limit	= 20;
+		$name	= "comments";
+		$count	= "";
+
+		// build output
+		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->GetCharset()."\"?>\n";
+		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->engine->config["theme_url"]."css/wacko.css\" media=\"screen\"?>\n";
+		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
+		$xml .= "<channel>\n";
+		$xml .= "<title>".$this->engine->config["wacko_name"].$this->engine->GetTranslation("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<link>".$this->engine->config["base_url"]."</link>\n";
+		$xml .= "<description>".$this->engine->GetTranslation("RecentCommentsXML").$this->engine->config["wacko_name"]." </description>\n";
+		$xml .= '<copyright>'.$this->engine->href('', $this->engine->config['policy_page']).'</copyright>'."\n";
+		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
+		$xml .= "<image>\n";
+		$xml .= "<title>".$this->engine->config["wacko_name"].$this->engine->GetTranslation("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<link>".$this->engine->config["base_url"]."</link>\n";
+		$xml .= "<url>".$this->engine->config["base_url"]."files/wacko4.gif"."</url>\n";
+		$xml .= "<width>108</width>\n";
+		$xml .= "<height>50</height>\n";
+		$xml .= "</image>\n";
+		$xml .= "<language>".$this->engine->config['language']."</language>\n";
+		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
+		$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
+
+		if ( $pages = $this->engine->LoadRecentlyComment() ) {
+			foreach ($pages as $i => $page) {
+				if ($this->engine->config["hide_locked"]) $access =$this->engine->HasAccess("read",$page["page_id"],GUEST);
+				if ( $access && ($count < 30) ) {
+					$count++;
+					$xml .= "<item>\n";
+					$xml .= "<title>".$page["title"]." ".$this->engine->GetTranslation("To")." ".$this->engine->GetCommentOnTag($page["comment_on_id"])." ".$this->engine->GetTranslation("From")." ".$page["user"]."</title>\n";
+					$xml .= "<link>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["modified"]))."</link>\n";
+					$xml .= "<guid>".$this->engine->href("show", $page["tag"], "time=".urlencode($page["modified"]))."</guid>\n";
+					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
+					$xml .= "<dc:creator>".$page["user"]."</dc:creator>\n";
+					$text = $this->engine->Format($page["body_r"], "post_wacko");
+					$xml .= "<description><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></description>\n";
+					#$xml .= "<content:encoded><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></content:encoded>\n";
+					$xml .= "</item>\n";
+				}
+			}
+		}
+
+		$xml .= "</channel>\n";
+		$xml .= "</rss>\n";
 
 		$this->WriteFile($name, $xml);
 	}

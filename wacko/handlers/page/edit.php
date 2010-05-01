@@ -379,7 +379,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 		wE = new WikiEdit();
 <?php
 	if ($user = $this->GetUser())
-	if ($user["options"]["autocomplete"])
+	if ($user["autocomplete"])
 	{
 ?>
 		if (AutoComplete) { wEaC = new AutoComplete( wE, "<?php echo $this->href("edit");?>" ); }

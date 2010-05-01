@@ -1,11 +1,12 @@
 <!--notypo-->
 <?php
 
-$name = "";
+$user_name = "";
 $email = "";
 $password = "";
 $confpassword = "";
 $error = "";
+$word_ok = "";
 
 // reconnect securely in ssl mode
 if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
@@ -44,12 +45,12 @@ else if (isset($_POST["action"]) && $_POST["action"] == "login")
 	if ($this->config["allow_registration"] || $this->IsAdmin())
 	{
 		// passing vars from user input
-		$name = trim($_POST["name"]);
-		$email = trim($_POST["email"]);
-		$password = $_POST["password"];
-		$confpassword = $_POST["confpassword"];
-		$lang = $_POST["lang"];
-		$complexity	= $this->PasswordComplexity($name, $password);
+		$user_name		= trim($_POST["name"]);
+		$email			= trim($_POST["email"]);
+		$password		= $_POST["password"];
+		$confpassword	= $_POST["confpassword"];
+		$lang			= $_POST["lang"];
+		$complexity		= $this->PasswordComplexity($user_name, $password);
 
 		// Start Registration Captcha
 
@@ -102,15 +103,15 @@ else if (isset($_POST["action"]) && $_POST["action"] == "login")
 		if (($word_ok) || $this->IsAdmin() || !$this->config["captcha_registration"])
 		{
 			// check if name is WikiName style
-			if (!$this->IsWikiName($name))
+			if (!$this->IsWikiName($user_name))
 				$error .= $this->GetTranslation("MustBeWikiName")." ";
 			// if user name already exists
-			else if ($this->UsernameExists($name) === true)
+			else if ($this->UsernameExists($user_name) === true)
 			{
 				$error .= $this->GetTranslation("RegistrationNameOwned");
 
 				// log event
-				$this->Log(2, str_replace("%1", $name, $this->GetTranslation("LogUserSimiliarName")));
+				$this->Log(2, str_replace("%1", $user_name, $this->GetTranslation("LogUserSimiliarName")));
 			}
 			// no email given
 			else if ($email == "")
@@ -148,35 +149,42 @@ else if (isset($_POST["action"]) && $_POST["action"] == "login")
 			// submitting input to DB
 			else
 			{
-				$salt = $this->RandomPassword(4, 3);
+				$salt_length = 4;
+				$salt = $this->RandomPassword($salt_length, 3);
 				$confirm = sha1($password.$salt.mt_rand().time().mt_rand().$email.mt_rand());
-				$password_encrypted = sha1($name.$salt.$_POST["password"]);
-				$more = $this->ComposeOptions(array(
-					"theme" => $this->config["theme"],
-					"send_watchmail" => "1",
-				));
+				$password_encrypted = sha1($user_name.$salt.$_POST["password"]);
 
+				// INSERT USER
 				$this->Query(
 					"INSERT INTO ".$this->config["user_table"]." ".
 					"SET ".
 						"signup_time	= NOW(), ".
-						"user_name		= '".quote($this->dblink, $name)."', ".
+						"user_name		= '".quote($this->dblink, $user_name)."', ".
 						"email			= '".quote($this->dblink, $email)."', ".
 						"email_confirm	= '".quote($this->dblink, $confirm)."', ".
-						"bookmarks		= '".quote($this->dblink, $this->GetDefaultBookmarks($lang))."', ".
-						"typografica	= '".(($this->config["default_typografica"] == 1) ? "1" : "0")."', ".
-						"more			= '".quote($this->dblink, $more)."', ".
-						($lang
-							? "lang		= '".quote($this->dblink, $lang)."', "
-							: "").
 						"password		= '".quote($this->dblink, $password_encrypted)."', ".
 						"salt			= '".quote($this->dblink, $salt)."'");
 
+				$_user_id = $this->LoadSingle("SELECT user_id FROM ".$this->config["table_prefix"]."users WHERE user_name = '".quote($this->dblink, $user_name)."'");
+
+				// INSERT USER Settings
+				$this->Query(
+					"INSERT INTO ".$this->config["table_prefix"]."users_settings ".
+					"SET ".
+						"user_id		= '".quote($this->dblink, $_user_id["user_id"])."', ".
+						"bookmarks		= '".quote($this->dblink, $this->GetDefaultBookmarks($lang))."', ".
+						"typografica	= '".(($this->config["default_typografica"] == 1) ? 1 : 0)."', ".
+						($lang
+							? "lang		= '".quote($this->dblink, $lang)."', "
+							: "").
+						"theme			= '".quote($this->dblink, $this->config["theme"])."', ".
+						"send_watchmail	= '".quote($this->dblink, 1)."'");
+
 				$subject = 	$this->GetTranslation("EmailWelcome").
 							$this->config["wacko_name"];
-				$message = 	$this->GetTranslation("EmailHello"). $name.".\n\n".
+				$message = 	$this->GetTranslation("EmailHello"). $user_name.".\n\n".
 							str_replace('%1', $this->config["wacko_name"],
-							str_replace('%2', $name,
+							str_replace('%2', $user_name,
 							str_replace('%3', $this->Href().
 							($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
 							$this->GetTranslation("EmailRegistered"))))."\n\n".
@@ -186,7 +194,7 @@ else if (isset($_POST["action"]) && $_POST["action"] == "login")
 				$this->SendMail($email, $subject, $message);
 
 				// log event
-				$this->Log(4, str_replace("%2", $email, str_replace("%1", $name, $this->GetTranslation("LogUserRegistered"))));
+				$this->Log(4, str_replace("%2", $email, str_replace("%1", $user_name, $this->GetTranslation("LogUserRegistered"))));
 
 				// forward
 				$this->SetMessage($this->GetTranslation("SiteRegistered").
@@ -238,7 +246,7 @@ for ($i = 0; $i < count($langs); $i++)
 		}
 		?>
 <p><label for="name"><?php echo $this->FormatTranslation("RegistrationName");?>:</label>
-<input id="name" name="name" size="27" value="<?php echo htmlspecialchars($name); ?>" /></p>
+<input id="name" name="name" size="27" value="<?php echo htmlspecialchars($user_name); ?>" /></p>
 <p><label for="password"><?php echo $this->GetTranslation("RegistrationPassword");?>:</label>
 <input type="password" id="password" name="password" size="24" value="<?php echo $password ?>" />
 <?php

@@ -16,10 +16,6 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 	}
 	else
 	{
-		// extract all user info
-		$user['options'] = $this->DecomposeOptions($user['more']);
-		unset($user['more']);
-
 		// usergroups
 		if (is_array($this->config['aliases']))
 		{
@@ -38,7 +34,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 
 		// prepare and send personal message
 		if (isset($_POST['send_pm']) && $_POST['mail_body'] == true && $this->GetUser() &&
-		$user['options']['allow_intercom'] == '1' && $user['email'] && !$user['email_confirm'])
+		$user['allow_intercom'] == '1' && $user['email'] && !$user['email_confirm'])
 		{
 			// check for errors
 			// message is too long
@@ -118,7 +114,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 			</tr>
 			<tr>
 				<td style="width:100px; white-space:nowrap; padding-right:20px;" valign="top"><strong><?php echo $this->GetTranslation('UsersLastSession'); ?></strong></td>
-				<td><?php echo ( $user['options']['hide_lastsession'] == '1'
+				<td><?php echo ( $user['hide_lastsession'] == '1'
 					? '<em>'.$this->GetTranslation('UsersSessionHidden').'</em>'
 					: ( !$user['session_time'] || $user['session_time'] == SQL_NULLDATE
 						? '<em>'.$this->GetTranslation('UsersSessionNA').'</em>'
@@ -164,7 +160,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 		<table cellspacing="3" class="formation">
 <?php
 			// user must allow incoming messages, and needs confirmed email address set
-			if ($user['options']['allow_intercom'] == '1' && $user['email'] && !$user['email_confirm'])
+			if ($user['allow_intercom'] == '1' && $user['email'] && !$user['email_confirm'])
 			{
 ?>
 			<tr>
