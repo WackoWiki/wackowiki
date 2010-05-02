@@ -14,7 +14,8 @@ if (isset($_GET["secret_code"]) && $_GET["secret_code"])
 	$user = $this->LoadSingle(
 		"SELECT * ".
 		"FROM ".$this->config["user_table"]." ".
-		"WHERE change_password='".quote($this->dblink, $code)."'");
+		"WHERE change_password='".quote($this->dblink, $code)."' ".
+		"LIMIT 1");
 
 	if ($user)
 	{
@@ -293,6 +294,9 @@ else
 
 				// send code
 				$this->SendMail($user["email"], $subject, $message);
+
+				// count attempt
+				$this->SetLostPasswordCount($user["user_id"]);
 
 				// log event
 				$this->Log(3, str_replace("%2", $user["email"], str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordReminded"))));
