@@ -2860,6 +2860,30 @@ class Wacko
 		return true;
 	}
 
+	// Increment the failed login count by 1
+	function SetLostPasswordCount($user_id)
+	{
+		$this->Query(
+			"UPDATE {$this->config['user_table']} ".
+			"SET lost_password_request_count = lost_password_request_count+1 ".
+			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"LIMIT 1");
+
+		return true;
+	}
+
+	// Reset to zero the 'lost password' in progress attempts
+	function ResetLostPasswordCount($user_id)
+	{
+		$this->Query(
+			"UPDATE {$this->config['user_table']} ".
+			"SET lost_password_request_count = 0 ".
+			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"LIMIT 1");
+
+		return true;
+	}
+
 	function LoadUsers()
 	{
 		return $this->LoadAll(

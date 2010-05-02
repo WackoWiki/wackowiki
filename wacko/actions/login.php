@@ -152,6 +152,7 @@ else
 
 					$this->LoginCount($existingUser["user_id"]);
 					$this->ResetFailedUserLoginCount($existingUser["user_id"]);
+					$this->ResetLostPasswordCount($existingUser["user_id"]);
 
 					$this->Log(3, str_replace("%1", $existingUser["user_name"], $this->GetTranslation("LogUserLoginOK")));
 
