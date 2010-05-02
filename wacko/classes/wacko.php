@@ -2824,12 +2824,24 @@ class Wacko
 		session_id($session_id);
 	}
 
+	// Increment the number of times the user has logegd in
+	function LoginCount($user_id)
+	{
+		$this->Query(
+			"UPDATE {$this->config['user_table']} ".
+			"SET login_count = login_count+1 ".
+			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
+			"LIMIT 1");
+
+		return true;
+	}
+
 	// Increment the failed login count by 1
 	function SetFailedUserLoginCount($user_id)
 	{
 		$this->Query(
 			"UPDATE {$this->config['user_table']} ".
-			"SET failed_login_count=failed_login_count+1 ".
+			"SET failed_login_count = failed_login_count+1 ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 			"LIMIT 1");
 

@@ -149,6 +149,10 @@ else
 					$this->UpdateSessionTime($existingUser);
 					$this->SetBookmarks(BM_USER);
 					$this->context[++$this->current_context] = "";
+
+					$this->LoginCount($existingUser["user_id"]);
+					$this->ResetFailedUserLoginCount($existingUser["user_id"]);
+
 					$this->Log(3, str_replace("%1", $existingUser["user_name"], $this->GetTranslation("LogUserLoginOK")));
 
 					// run in ssl mode?
@@ -167,6 +171,8 @@ else
 					$error = $this->GetTranslation("WrongPassword");
 					$name = $_POST["name"];
 					$focus = 1;
+
+					$this->SetFailedUserLoginCount($existingUser["user_id"]);
 
 					// log failed attempt
 					$this->Log(2, str_replace("%1", $_POST["name"], $this->GetTranslation("LogUserLoginFailed")));
