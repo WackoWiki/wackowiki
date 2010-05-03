@@ -19,7 +19,7 @@ $admin	= ( $this->IsAdmin() ? true : false );
 if (isset($_GET['markread']) && $user == true)
 {
 	$this->UpdateSessionTime($user);
-	$this->SetUserSetting('sessiontime', date('Y-m-d H:i:s', time()));
+	$this->SetUserSetting('session_time', date('Y-m-d H:i:s', time()));
 	$user = $this->GetUser();
 }
 

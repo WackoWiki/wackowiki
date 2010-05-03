@@ -26,7 +26,7 @@ if ($this->HasAccess("read") && $this->config["hide_files"] != 1)
   if (!isset($_SESSION["show_files"][$tag]))
     $_SESSION["show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
 
-  switch($_REQUEST["show_files"])
+  switch($_GET["show_files"])
   {
   case "0":
     $_SESSION["show_files"][$tag] = 0;
@@ -129,7 +129,7 @@ if ($this->HasAccess("read") && $this->config["hide_comments"] != 1)
   if (!isset($_SESSION["show_comments"][$tag]))
     $_SESSION["show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
 
-  switch($_REQUEST["show_comments"])
+  switch($_GET["show_comments"])
   {
   case "0":
     $_SESSION["show_comments"][$tag] = 0;

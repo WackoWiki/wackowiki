@@ -10,22 +10,22 @@
 if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->config['forum_cluster'])
 {
 	$this->forum = false;
-	
+
 	// load user data
 	$user = $this->GetUser();
-	
+
 	// process 'mark read' - reset session time
 	if (isset($_GET['markread']) && $user == true)
 	{
 		$this->UpdateSessionTime($user);
-		$this->SetUserSetting('sessiontime', date('Y-m-d H:i:s', time()));
+		$this->SetUserSetting('session_time', date('Y-m-d H:i:s', time()));
 		$user = $this->GetUser();
 		$user_id = $this->GetUserId(); //xxx
 	}
-	
+
 	// parse subforums list if any
 	if (!empty($pages)) $pages = trim(explode(',', $pages), '/ ');
-	
+
 	// make query
 	$sql = "SELECT p.page_id, p.tag, p.title, p.description ".
 		"FROM {$this->config['table_prefix']}pages AS p, ".
@@ -45,14 +45,14 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 	// load subforums data
 	$forums	= $this->LoadAll($sql, 1);
-	
+
 	// display list
 	echo '<table cellspacing="1" cellpadding="4" class="forum">'.
 			'<tr>'.
 				'<th>'.$this->GetTranslation('ForumSubforums').'</th>'.
 				'<th colspan="2">'.$this->GetTranslation('ForumLastComment').'</th>'.
 			'</tr>'."\n";
-	
+
 	foreach ($forums as $forum)
 	{
 		// show only those forums where user has read access
@@ -68,7 +68,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 					"OR a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
 				"ORDER BY a.created DESC ".
 				"LIMIT 1", 1);
-			
+
 			// print
 			echo '<tr class="lined">'.
 					'<td style="width:70%" valign="top">'.
@@ -81,7 +81,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			if ($comment == true)
 			{
 				echo '<td style="text-align:left" valign="top">';
-				
+
 				if ($comment['comment_on_id'] == true)
 					echo '<small><a href="'.$this->href('', $comment['comment_on'], 'p=last').'#'.$comment['tag'].'">'.$this->GetPageTitle($comment['comment_on']).'</a><br />'.
 						( $comment['user'] == GUEST ? '<em>'.$this->GetTranslation('Guest').'</em>' : $comment['user'] ).' ('.$this->GetTimeStringFormatted($comment['created']).')</small>';
@@ -99,7 +99,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		}
 	}
 	echo '</table>'."\n";
-	
+
 	echo '<table>'.
 			'<tr>'.
 				'<td>'.

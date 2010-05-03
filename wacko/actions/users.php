@@ -344,10 +344,11 @@ else
 
 	// collect data
 	$users = $this->LoadAll(
-		"SELECT user_name, signup_time, session_time, total_pages, total_revisions, total_comments ".
-		"FROM {$this->config['user_table']} ".
+		"SELECT u.user_name, u.signup_time, u.session_time, u.total_pages, u.total_revisions, u.total_comments, p.hide_lastsession ".
+		"FROM {$this->config['user_table']} u ".
+			"LEFT JOIN ".$this->config["table_prefix"]."users_settings p ON (u.user_id = p.user_id) ".
 		( $where == true ? $where : '' ).
-		( $order == true ? $order : "ORDER BY total_pages DESC " ).
+		( $order == true ? $order : "ORDER BY u.total_pages DESC " ).
 		"LIMIT {$pagination['offset']}, $limit");
 
 	// user filter form
@@ -397,7 +398,12 @@ else
 					'<td align="center">'.$user['total_comments'].'</td>'.
 					'<td align="center">'.$user['total_revisions'].'</td>'.
 					'<td align="center">'.$this->GetTimeStringFormatted($user['signup_time']).'</td>'.
-					'<td align="center">'.$this->GetTimeStringFormatted($user['session_time']).'</td>'.
+					'<td align="center">'.( $user['hide_lastsession'] == '1'
+					? '<em>'.$this->GetTranslation('UsersSessionHidden').'</em>'
+					: ( !$user['session_time'] || $user['session_time'] == SQL_NULLDATE
+						? '<em>'.$this->GetTranslation('UsersSessionNA').'</em>'
+						: $this->GetTimeStringFormatted($user['session_time']) )
+					).'</td>'.
 			"</tr>\n";
 		}
 	}
