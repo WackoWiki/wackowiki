@@ -2793,7 +2793,7 @@ class Wacko
 			}
 
 			return array(
-				'name'			=> $username,
+				'user_name'			=> $username,
 				'password'		=> $password,
 				'ses_time'		=> $ses_time,
 				'cookie_mac'	=> $cookie_mac,
@@ -3460,7 +3460,7 @@ class Wacko
 		}
 
 		// adding new bookmark
-		if (!empty($_REQUEST["addbookmark"]) && $user)
+		if (!empty($_GET["addbookmark"]) && $user)
 		{
 			// writing bookmark
 			$bookmark = "((".$this->tag." ".$this->GetPageTitle().($user["lang"] != $this->pagelang ? " @@".$this->pagelang : "")."))";
@@ -3470,9 +3470,9 @@ class Wacko
 				$bookmarks[] = $bookmark;
 
 				$this->Query(
-					"UPDATE ".$this->config["user_table"]." ".
+					"UPDATE ".$this->config["table_prefix"]."users_settings ".
 					"SET bookmarks = '".quote($this->dblink, implode("\n", $bookmarks))."' ".
-					"WHERE user_name = '".quote($this->dblink, $user["user_name"])."' ".
+					"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
 					"LIMIT 1");
 			}
 
@@ -3504,7 +3504,7 @@ class Wacko
 		}
 
 		// removing bookmark
-		if (!empty($_REQUEST["removebookmark"]) && $user)
+		if (!empty($_GET["removebookmark"]) && $user)
 		{
 			// rewriting bookmarks table except containing current page tag
 			foreach ($bookmarks as $bookmark)
@@ -3518,9 +3518,9 @@ class Wacko
 			$bookmarks = $newbookmarks;
 
 			$this->Query(
-				"UPDATE ".$this->config["user_table"]." ".
+				"UPDATE ".$this->config["table_prefix"]."users_settings ".
 				"SET bookmarks = '".quote($this->dblink, $bookmarks ? implode("\n", $bookmarks) : '' )."' ".
-				"WHERE user_name = '".quote($this->dblink, $user["user_name"])."' ".
+				"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
 				"LIMIT 1");
 
 			// parsing bookmarks into links table
@@ -3710,7 +3710,7 @@ class Wacko
 
 		// parse authentication cookie and get user data
 		$auth = $this->DecomposeAuthCookie();
-		$user = $this->LoadUser($auth["name"], 0, $auth["password"]);
+		$user = $this->LoadUser($auth["user_name"], 0, $auth["password"]);
 
 		// run in ssl mode?
 		if ($this->config["ssl"] == true && ($_SERVER["HTTPS"] == "on" || $user == true))

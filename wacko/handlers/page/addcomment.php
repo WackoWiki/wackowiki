@@ -113,7 +113,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 		{
 			// undefine username
 			$remember_name = $this->GetUserName();
-			$this->SetUserSetting('name', NULL);
+			$this->SetUserSetting('user_name', NULL);
 		}
 
 		if (!$error)
@@ -128,7 +128,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 		// restore username after anonymous publication
 		if ($_POST['noid_publication'] == $this->tag)
 		{
-			$this->SetUserSetting('name', $remember_name);
+			$this->SetUserSetting('user_name', $remember_name);
 			unset($remember_name);
 			if ($body_r) $this->SetUserSetting('noid_protect', true);
 		}

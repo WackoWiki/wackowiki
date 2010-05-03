@@ -14,29 +14,29 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	// count slashes in the tag
 	$i		= 0;
 	$tag	= $this->tag;
-	
+
 	while (strpos($tag, '/') !== false)
 	{
 		$tag = substr($tag, strpos($tag, '/') + 1);
 		$i++;
 	}
-	
+
 	$this->forum = $i - 1;
-	
+
 	// load user data
 	$user = $this->GetUser();
-	
+
 	// process 'mark read' - reset session time
 	if (isset($_GET['markread']) && $user == true)
 	{
 		$this->UpdateSessionTime($user);
-		$this->SetUserSetting('sessiontime', date('Y-m-d H:i:s', time()));
+		$this->SetUserSetting('session_time', date('Y-m-d H:i:s', time()));
 		$user = $this->GetUser();
 	}
-	
+
 	// check privilege
 	if ($this->HasAccess('write') === true) $access = true;
-	
+
 	// checking new topic input if any
 	if ($_POST['action'] == 'topicadd' && $access === true)
 	{
@@ -47,7 +47,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			$name		= ucwords($name);
 			$name		= preg_replace('/[^- \\w]/', '', $name);
 			$name		= str_replace(array(' ', "\t"), '', $name);
-			
+
 			if ($name == '') $error = $this->GetTranslation('ForumNoTopicName');
 		}
 		else
@@ -69,13 +69,13 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			$this->Redirect($this->href('edit', $this->tag.'/'.$name, '', 1));
 		}
 	}
-	
+
 	// check admin privilege
 	$admin = $this->IsAdmin();
-	
+
 	// parse subforums list if any
 	if (!empty($pages)) $pages = trim(explode(',', $pages), '/ ');
-	
+
 	// make counter query
 	$sql = "SELECT COUNT(p.tag) AS n ".
 		"FROM {$this->config['table_prefix']}pages AS p, ".
@@ -92,7 +92,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	// count topics and make pagination
 	$count		= $this->LoadSingle($sql);
 	$pagination	= $this->Pagination($count['n'], $this->config['forum_topics']);
-	
+
 	// make collector query
 	$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, u.user_name AS user, o.user_name as owner ".
 		"FROM {$this->config['table_prefix']}pages AS p ".
@@ -112,11 +112,11 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 	// load topics data
 	$topics	= $this->LoadAll($sql);
-	
+
 	// display list
 	echo '<table><tr><td>'.( $access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->GetTranslation('ForumNewTopic').'</a></small></strong>' : '' ).'</td>'.
 			'<td align="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '' ).'</td></tr></table>'."\n";
-	
+
 	echo '<table cellspacing="1" cellpadding="4" class="forum">'.
 			'<tr>'.
 				'<th>'.$this->GetTranslation('ForumTopics').'</th>'.
@@ -125,12 +125,12 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				'<th>'.$this->GetTranslation('ForumViews').'</th>'.
 				'<th colspan="2">'.$this->GetTranslation('ForumLastComment').'</th>'.
 			'</tr>'."\n";
-	
+
 	foreach ($topics as $topic)
 	{
 		$comment = false;
 		$updated = false;
-		
+
 		// load latest comment
 		if ($topic['comments'] > 0)
 		{
@@ -143,11 +143,11 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				"ORDER BY p.created DESC ".
 				"LIMIT 1");
 		}
-		
+
 		// check new comments
 		if ($user['sessiontime'] == true && ( ($comment['user'] != $user['user_name'] && $comment['created'] > $user['sessiontime']) || ($topic['owner'] != $user['user_name'] && $topic['created'] > $user['sessiontime']) ))
 			$updated = true;
-		
+
 		// print
 		echo '<tr>'.
 				'<td align="left">'.
@@ -184,12 +184,12 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				'<td colspan="6"></td>'.
 			'</tr>'."\n";
 	}
-	
+
 	echo '</table>'."\n";
 
 	echo '<table><tr><td>'.( $user == true ? '<small><small><a href="?markread=yes">'.$this->GetTranslation('ForumMarkRead').'</a></small></small>' : '' ).'</td>'.
 			'<td align="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '' ).'</td></tr></table>'."\n";
-	
+
 	// display new topic form when applicable
 	if ($access === true)
 	{

@@ -125,7 +125,7 @@ if (isset($_POST['password']))
 $user = "";
 if (isset($_COOKIE[$engine->config["session_prefix"].'_'.$engine->config['cookie_prefix'].'admin']) && $_COOKIE[$engine->config["session_prefix"].'_'.$engine->config['cookie_prefix'].'admin'] == $pwd)
 {
-	$user = array('name' => $engine->config['admin_name']);
+	$user = array('user_name' => $engine->config['admin_name']);
 }
 
 if ($user == false)
