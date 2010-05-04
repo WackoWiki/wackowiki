@@ -367,7 +367,7 @@ $wackoTranslation = array(
 
 	"RenameText" => "Rename",
 	"NewName" => "Enter new name for this page",
-	"RenameButton" => "Rename!",
+	"RenameButton" => "Rename",
 	"AlredyExists" => "<em>Page <strong>%1</strong> already exists.</em>",
 	"AlreadyNamed" => "<em>This page already named <strong>%1</strong>.</em>",
 	"PageRenamed" => "<em>Page %1 renamed.</em>",

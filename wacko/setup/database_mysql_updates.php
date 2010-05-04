@@ -242,10 +242,9 @@ $update_users_r4_2_4 = "UPDATE {$pref}users SET typografica = '0' WHERE typograf
 $table_users_settings_r4_2 = "CREATE TABLE {$pref}users_settings (".
 					"setting_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"theme VARCHAR(20) COLLATE latin1_general_ci DEFAULT NULL,".
-					"lang VARCHAR(2) COLLATE latin1_general_ci DEFAULT NULL,".
-					"bookmarks TEXT COLLATE latin1_general_ci,".
-					"motto TEXT COLLATE latin1_general_ci,".
+					"theme VARCHAR(20) DEFAULT NULL,".
+					"lang VARCHAR(2) DEFAULT NULL,".
+					"motto TEXT,".
 					"changes_count INTEGER(10) UNSIGNED NOT NULL DEFAULT '20',".
 					"revisions_count INTEGER(10) UNSIGNED NOT NULL DEFAULT '50',".
 					"dont_redirect TINYINT(1) UNSIGNED DEFAULT NULL,".
@@ -260,7 +259,7 @@ $table_users_settings_r4_2 = "CREATE TABLE {$pref}users_settings (".
 					"hide_lastsession TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"validate_ip TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"noid_pubs TINYINT(1) UNSIGNED DEFAULT NULL,".
-					"timezone VARCHAR(32) COLLATE latin1_general_ci DEFAULT NULL,".
+					"timezone VARCHAR(32) DEFAULT NULL,".
 					"PRIMARY KEY (setting_id),".
 					"UNIQUE KEY idx_user_id (user_id),".
 					"KEY idx_send_watchmail (send_watchmail)".

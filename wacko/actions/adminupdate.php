@@ -4,7 +4,9 @@
 //
 // for testing and improvement - thought for upgrade routine of the installer
 
-echo "Renames files in \\files\perpage folder to @page_id@filename:<br /><br />";
+echo "<h2>Migration Routines for R4.3.rc1 to rc2 Upgrade</h2>";
+
+echo "<h3>1. Renames files in \\files\perpage folder to @page_id@filename:</h3>";
 if ($this->IsAdmin())
 {
 	if (!isset($_POST["rename"]))
@@ -13,7 +15,7 @@ if ($this->IsAdmin())
 		?>
 		<input
 		type="submit" name="rename"
-		value="<?php echo $this->GetTranslation("RenameButton");?>" />
+		value="<?php echo $this->GetTranslation("RatingSubmit");?>" />
 		<?php
 		echo $this->FormClose();
 	}
@@ -63,7 +65,7 @@ if ($this->IsAdmin())
 	}
 }
 
-echo "<b>Migrates user otions to users_settings table</b>:<br /><br />";
+echo "<h3>2. Migrates user otions to users_settings table:</h3>";
 if ($this->IsAdmin())
 {
 	if (!isset($_POST["migrate_user_otions"]))
@@ -72,7 +74,7 @@ if ($this->IsAdmin())
 		?>
 		<input
 		type="submit" name="migrate_user_otions"
-		value="<?php echo $this->GetTranslation("RenameButton");?>" />
+		value="<?php echo $this->GetTranslation("RatingSubmit");?>" />
 		<?php
 		echo $this->FormClose();
 	}
@@ -92,9 +94,110 @@ if ($this->IsAdmin())
 			// $_user['options'] : theme, autocomplete, dont_redirect, send_watchmail, show_files, allow_intercom, hide_lastsession, validate_ip, noid_pubs
 
 			$sql =	"INSERT INTO {$this->config['table_prefix']}users_settings
-					(user_id, doubleclick_edit, show_comments, bookmarks, motto, revisions_count, changes_count, lang, show_spaces, typografica, theme, autocomplete, dont_redirect, send_watchmail, show_files, allow_intercom, hide_lastsession, validate_ip, noid_pubs)
-					VALUES ('{$_user['user_id']}', '{$_user['doubleclick_edit']}', '{$_user['show_comments']}', '{$_user['bookmarks']}', '{$_user['motto']}', '{$_user['revisions_count']}', '{$_user['changes_count']}', '{$_user['lang']}', '{$_user['show_spaces']}', '{$_user['typografica']}', '{$_user['options']['theme']}', '{$_user['options']['autocomplete']}', '{$_user['options']['dont_redirect']}', '{$_user['options']['send_watchmail']}', '{$_user['options']['show_files']}', '{$_user['options']['allow_intercom']}', '{$_user['options']['hide_lastsession']}', '{$_user['options']['validate_ip']}', '{$_user['options']['noid_pubs']}')";
+					(user_id, doubleclick_edit, show_comments, motto, revisions_count, changes_count, lang, show_spaces, typografica, theme, autocomplete, dont_redirect, send_watchmail, show_files, allow_intercom, hide_lastsession, validate_ip, noid_pubs)
+					VALUES ('{$_user['user_id']}', '{$_user['doubleclick_edit']}', '{$_user['show_comments']}', '{$_user['motto']}', '{$_user['revisions_count']}', '{$_user['changes_count']}', '{$_user['lang']}', '{$_user['show_spaces']}', '{$_user['typografica']}', '{$_user['options']['theme']}', '{$_user['options']['autocomplete']}', '{$_user['options']['dont_redirect']}', '{$_user['options']['send_watchmail']}', '{$_user['options']['show_files']}', '{$_user['options']['allow_intercom']}', '{$_user['options']['hide_lastsession']}', '{$_user['options']['validate_ip']}', '{$_user['options']['noid_pubs']}')";
 			$this->Query($sql);
+
+			// Bookmarks
+			$_bookmarks	= explode("\n", $_user['bookmarks']);
+
+			if ($_bookmarks)
+			{
+				foreach($_bookmarks as $key => $_bookmark)
+				{
+					$_bookmark = str_replace(array("((/", "((", "))", "[[/", "[[", "]]"), "", $_bookmark);
+					// links ((link desc @@lang))
+					if (preg_match("/([^\n]+)[\s]{1}([^\n]*)[\s]{1}@@([^\n]*)$/", $_bookmark, $matches))
+					{
+						list (, $url, $text, $lang) = $matches;
+						if ($url)
+						{
+							$title = trim(preg_replace("/|__|\[\[|\(\(/","",$text));
+							$page_id = $this->GetPageId($url);
+							echo "url: ".$url."<br />"; // is tag and existing page then give back page_id
+							echo "page_id: ".$page_id."<br />";
+							echo "text: ".$text."<br />"; // ignore if its same as page title else set as alternate bm_title
+							echo "lang: ".$lang."<br />";
+						}
+					}
+					if (isset($page_id))
+					{
+						$this->Query(
+							"INSERT INTO ".$this->config["table_prefix"]."bookmarks SET ".
+							"user_id		= '".quote($this->dblink, $user["user_id"])."', ".
+							"page_id		= '".quote($this->dblink, $page_id)."', ".
+							"lang			= '".quote($this->dblink, $lang)."', ".
+							"bm_title		= '".quote($this->dblink, $title)."', ".
+							"bm_sorting		= '".quote($this->dblink, $key)."' ");
+					}
+				}
+			}
+
+		}
+
+		echo "<br />".$count." user settings inserted.";
+	}
+}
+
+echo "<h3>2.1 Migrates user bookmarks to bookmarks table [temp for dev branch!]:</h3>";
+if ($this->IsAdmin())
+{
+	if (!isset($_POST["migrate_bookmarks"]))
+	{
+		echo $this->FormOpen();
+		?>
+		<input
+		type="submit" name="migrate_bookmarks"
+		value="<?php echo $this->GetTranslation("RatingSubmit");?>" />
+		<?php
+		echo $this->FormClose();
+	}
+	// rename files in \files\perpage folder to @page_id@filename
+	else
+	{
+		$_users = $this->LoadAll(
+			"SELECT user_id, bookmarks ".
+			"FROM {$this->config['table_prefix']}users_settings ");
+
+		$count = count($_users);
+
+		foreach ($_users as $_user)
+		{
+			// Bookmarks
+			$_bookmarks	= explode("\n", $_user['bookmarks']);
+
+			if ($_bookmarks)
+			{
+				foreach($_bookmarks as $key => $_bookmark)
+				{
+					$_bookmark = str_replace(array("((/", "((", "))", "[[/", "[[", "]]"), "", $_bookmark);
+					// links ((link desc @@lang))
+					if (preg_match("/([^\n]+)[\s]{1}([^\n]*)[\s]{1}@@([^\n]*)$/", $_bookmark, $matches))
+					{
+						list (, $url, $text, $lang) = $matches;
+						if ($url)
+						{
+							$title = trim(preg_replace("/|__|\[\[|\(\(/","",$text));
+							$page_id = $this->GetPageId($url);
+							echo "url: ".$url."<br />"; // is tag and existing page then give back page_id
+							echo "page_id: ".$page_id."<br />";
+							echo "text: ".$text."<br />"; // ignore if its same as page title else set as alternate bm_title
+							echo "lang: ".$lang."<br />";
+						}
+					}
+					if (isset($page_id))
+					{
+						$this->Query(
+							"INSERT INTO ".$this->config["table_prefix"]."bookmarks SET ".
+							"user_id		= '".quote($this->dblink, $user["user_id"])."', ".
+							"page_id		= '".quote($this->dblink, $page_id)."', ".
+							"lang			= '".quote($this->dblink, $lang)."', ".
+							"bm_title		= '".quote($this->dblink, $title)."', ".
+							"bm_sorting		= '".quote($this->dblink, $key)."' ");
+					}
+				}
+			}
+
 		}
 
 		echo "<br />".$count." user settings inserted.";

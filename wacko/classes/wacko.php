@@ -821,11 +821,12 @@ class Wacko
 		}
 
 		$user		= $this->GetUser();
+		$userbm		= $this->GetUserBookmarks($user["user_id"]);
 		if (!isset($cl))$cl = 0;
 		$pages[$cl]	= $user["user_name"];
 		$bookm		= $this->GetDefaultBookmarks($user["lang"], "site")."\n".
-					($user["bookmarks"]
-						? $user["bookmarks"]
+					($userbm
+						? $userbm
 						: $this->GetDefaultBookmarks($user["lang"]));
 		$bookmarks	= explode("\n", $bookm);
 
@@ -2624,7 +2625,7 @@ class Wacko
 	function LoadUser($user_name, $user_id = 0, $password = 0)
 	{
 		$user = $this->LoadSingle(
-			"SELECT u.*, p.doubleclick_edit, p.show_comments, p.bookmarks, p.motto, p.revisions_count, p.changes_count, p.lang, p.show_spaces, p.typografica, p.theme, p.autocomplete, p.dont_redirect, p.send_watchmail, p.show_files, p.allow_intercom, p.hide_lastsession, p.validate_ip, p.noid_pubs ".
+			"SELECT u.*, p.doubleclick_edit, p.show_comments, p.motto, p.revisions_count, p.changes_count, p.lang, p.show_spaces, p.typografica, p.theme, p.autocomplete, p.dont_redirect, p.send_watchmail, p.show_files, p.allow_intercom, p.hide_lastsession, p.validate_ip, p.noid_pubs ".
 			"FROM ".$this->config["user_table"]." u ".
 				"LEFT JOIN ".$this->config["table_prefix"]."users_settings p ON (u.user_id = p.user_id) ".
 			"WHERE ".( $user_id != 0
@@ -3419,6 +3420,32 @@ class Wacko
 		}
 	}
 
+	function GetUserBookmarks($user_id)
+	{
+		$user_bm = "";
+
+		// avoid results if $user_id is 0 (user does not exists)
+		if ($user_id)
+		{
+			$_bookmarks = $this->LoadAll(
+					"SELECT p.tag, p.title, b.bm_title, b.lang ".
+					"FROM ".$this->config["table_prefix"]."pages p ".
+						"LEFT JOIN ".$this->config["table_prefix"]."bookmarks b ON (p.user_id = b.user_id) ".
+					"WHERE b.user_id = '".quote($this->dblink, $user_id)."' ".
+					"AND b.page_id = p.page_id ".
+					"ORDER BY b.bm_sorting", 1);
+
+			if ($_bookmarks)
+			{
+				foreach($_bookmarks as $_bookmark)
+				{
+					$user_bm .= "((".$_bookmark["tag"]." ".(!empty($_bookmark["bm_title"]) ? $_bookmark["bm_title"] : $_bookmark["title"]).(!empty($_bookmark["lang"]) ? " @@".$_bookmark["lang"] : "")."))\n";
+				}
+			}
+			return $user_bm;
+		}
+	}
+
 	function SetBookmarks($set = BM_AUTO)
 	{
 		$user = $this->GetUser();
@@ -3426,8 +3453,9 @@ class Wacko
 		// initial bookmarks table construction
 		if ($set || !($bookmarks = $this->GetBookmarks()))
 		{
-			$bookmarks = ( $user["bookmarks"]
-				? $user["bookmarks"]
+			$userbm = $this->GetUserBookmarks($user["user_id"]);
+			$bookmarks = ( $userbm
+				? $userbm
 				: $this->GetDefaultBookmarks($user["lang"]) );
 
 			if ($set == BM_DEFAULT)
@@ -3470,10 +3498,10 @@ class Wacko
 				$bookmarks[] = $bookmark;
 
 				$this->Query(
-					"UPDATE ".$this->config["table_prefix"]."users_settings ".
-					"SET bookmarks = '".quote($this->dblink, implode("\n", $bookmarks))."' ".
-					"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
-					"LIMIT 1");
+					"INSERT INTO ".$this->config["table_prefix"]."bookmarks SET ".
+					"user_id		= '".quote($this->dblink, $user["user_id"])."', ".
+					"page_id		= '".quote($this->dblink, $this->page["page_id"])."', ".
+					"lang			= '".quote($this->dblink, ($user["lang"] != $this->pagelang ? $this->pagelang : ""))."' ");
 			}
 
 			// parsing bookmarks into links table
@@ -3518,9 +3546,9 @@ class Wacko
 			$bookmarks = $newbookmarks;
 
 			$this->Query(
-				"UPDATE ".$this->config["table_prefix"]."users_settings ".
-				"SET bookmarks = '".quote($this->dblink, $bookmarks ? implode("\n", $bookmarks) : '' )."' ".
+				"DELETE FROM ".$this->config["table_prefix"]."bookmarks ".
 				"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
+				"AND page_id = '".quote($this->dblink, $this->page["page_id"])."' ".
 				"LIMIT 1");
 
 			// parsing bookmarks into links table
