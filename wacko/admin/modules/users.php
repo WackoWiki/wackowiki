@@ -97,8 +97,13 @@ function admin_users(&$engine, &$module)
 					"user_name		= '".quote($engine->dblink, $_POST['newname'])."', ".
 					"email	= '".quote($engine->dblink, $_POST['newemail'])."', ".
 					"real_name		= '".quote($engine->dblink, $_POST['newrealname'])."', ".
-					"lang		= '".quote($engine->dblink, $_POST['lang'])."', ".
 					"enabled		= '".quote($engine->dblink, (int)$_POST['enabled'])."' ".
+					"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."' ".
+					"LIMIT 1");
+
+				$engine->Query(
+					"UPDATE {$engine->config['table_prefix']}users_settings SET ".
+					"lang		= '".quote($engine->dblink, $_POST['lang'])."' ".
 					"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."' ".
 					"LIMIT 1");
 
@@ -163,7 +168,12 @@ function admin_users(&$engine, &$module)
 		// edit user
 		else if (isset($_POST['edit']) && isset($_POST['change']))
 		{
-			if ($user = $engine->LoadSingle("SELECT user_name, real_name, email, lang, enabled FROM {$engine->config['table_prefix']}users WHERE user_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
+			if ($user = $engine->LoadSingle(
+				"SELECT u.user_name, u.real_name, u.email, p.lang, u.enabled ".
+				"FROM {$engine->config['table_prefix']}users u ".
+					"LEFT JOIN ".$engine->config["table_prefix"]."users_settings p ON (u.user_id = p.user_id) ".
+				"WHERE u.user_id = '".quote($engine->dblink, $_POST['change'])."' ".
+				"LIMIT 1"))
 			{
 				echo "<form action=\"admin.php\" method=\"post\" name=\"users\">";
 				echo "<input type=\"hidden\" name=\"mode\" value=\"users\" />";
@@ -224,9 +234,59 @@ function admin_users(&$engine, &$module)
 	// get user
 	if (isset($_GET['user_id']))
 	{
+		echo "<h2>".$user['user_name']."</h2>";
 		// user data
-		echo '';
-		echo "";
+		?>
+		<form action="admin.php" method="post" name="users">
+		<input type="hidden" name="mode" value="users" />
+		<input type="hidden" name="user_id" value="<?php echo $group_id; ?>" />
+
+		<table border="0" cellspacing="5" cellpadding="3" class="formation">
+		<?php
+
+			echo '<tr class="lined">'."\n".
+					'<th valign="top" align="center">'.$engine->GetTranslation("UserName").'</th>'.
+					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;"><strong>'.$user['user_name'].'</strong></td>'.
+				'</tr>'.
+				'<tr class="lined">'."\n".
+					'<th valign="top" align="center">'.$engine->GetTranslation("RealName").'</th>'.
+					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['real_name'].'</td>'.
+				'</tr>'.
+
+				'<tr class="lined">'."\n".
+					'<th valign="top" align="center">'.$engine->GetTranslation("YourEmail").'</th>'.
+					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['email'].'</td>'.
+				'</tr>'.
+				'<tr class="lined">'."\n".
+					'<th valign="top" align="center">'.$engine->GetTranslation("YourMotto").'</th>'.
+					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['motto'].'</td>'.
+				'</tr>'.
+				'<tr class="lined">'."\n".
+					'<th valign="top" align="center">'.$engine->GetTranslation("YourLanguage").'</th>'.
+					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['user_name'].'</td>'.
+				'</tr>'.
+				'<tr class="lined">'."\n".
+					'<th valign="top" align="center">'.$engine->GetTranslation("ChooseTheme").'</th>'.
+					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['user_name'].'</td>'.
+				'</tr>'.
+				'<tr class="lined">'."\n".
+					'<th valign="top" align="center">'.$engine->GetTranslation("UserEnabled").'</th>'.
+					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['enabled'].'</td>'.
+				'</tr>';
+			?>
+		</table>
+		<?php
+
+		/////////////////////////////////////////////
+		//   control buttons
+		/////////////////////////////////////////////
+
+		echo '<br /><input id="button" type="submit" name="addmember" value="'.$engine->GetTranslation('GroupsAddButton').'" /> ';
+		echo '<input id="button" type="submit" name="removemember" value="'.$engine->GetTranslation('GroupsRemoveButton').'" /> ';
+		echo '<input id="button" type="button" value="'.$engine->GetTranslation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />';
+	 ?>
+		</form>
+		<?php
 	}
 	else
 	{
@@ -361,11 +421,11 @@ function admin_users(&$engine, &$module)
 		$pagination	= $engine->Pagination($count['n'], $limit, 'p', 'mode=users&order='.htmlspecialchars($_GET['order']), '', 'admin.php');
 
 		$users = $engine->LoadAll(
-			"SELECT * ".
-			"FROM {$engine->config['table_prefix']}users ".
-
+			"SELECT u.*, p.lang ".
+			"FROM {$engine->config['table_prefix']}users u ".
+				"LEFT JOIN ".$engine->config["table_prefix"]."users_settings p ON (u.user_id = p.user_id) ".
 			( $where ? $where : '' ).
-			( $order ? $order : 'ORDER BY user_id DESC ' ).
+			( $order ? $order : 'ORDER BY u.user_id DESC ' ).
 			"LIMIT {$pagination['offset']}, $limit");
 	?>
 		<form action="admin.php" method="post" name="users">
@@ -384,7 +444,7 @@ function admin_users(&$engine, &$module)
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $ordercomments; ?>">Comments</a></th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderrevisions; ?>">Revisions</a></th>
 					<th style="width:20px;">Language</th>
-					<th style="width:20px;">Active</th>
+					<th style="width:20px;">Enabled</th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $signup_time; ?>">Signuptime</a></th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $session_time; ?>">Sessiontime</a></th>
 				</tr>
