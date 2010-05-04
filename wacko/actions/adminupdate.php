@@ -15,7 +15,7 @@ if ($this->IsAdmin())
 		?>
 		<input
 		type="submit" name="rename"
-		value="<?php echo $this->GetTranslation("RatingSubmit");?>" />
+		value="<?php echo $this->GetTranslation("KeywordsSaveButton");?>" />
 		<?php
 		echo $this->FormClose();
 	}
@@ -74,7 +74,7 @@ if ($this->IsAdmin())
 		?>
 		<input
 		type="submit" name="migrate_user_otions"
-		value="<?php echo $this->GetTranslation("RatingSubmit");?>" />
+		value="<?php echo $this->GetTranslation("KeywordsSaveButton");?>" />
 		<?php
 		echo $this->FormClose();
 	}
@@ -105,26 +105,41 @@ if ($this->IsAdmin())
 			{
 				foreach($_bookmarks as $key => $_bookmark)
 				{
-					$_bookmark = str_replace(array("((/", "((", "))", "[[/", "[[", "]]"), "", $_bookmark);
 					// links ((link desc @@lang))
+					$_bookmark = str_replace(array("((/", "((", "))", "[[/", "[[", "]]"), "", $_bookmark);
+					$_bookmark = str_replace(" @@", "@@", $_bookmark);
+
 					if (preg_match("/([^\n]+)[\s]{1}([^\n]*)[\s]{1}@@([^\n]*)$/", $_bookmark, $matches))
 					{
-						list (, $url, $text, $lang) = $matches;
+						list (, $url, $text) = $matches;
 						if ($url)
 						{
+							if (stristr($text, "@@"))
+							{
+								$t = explode("@@", $text);
+								$text = $t[0];
+								$lang = $t[1];
+							}
+
 							$title = trim(preg_replace("/|__|\[\[|\(\(/","",$text));
 							$page_id = $this->GetPageId($url);
-							echo "url: ".$url."<br />"; // is tag and existing page then give back page_id
-							echo "page_id: ".$page_id."<br />";
-							echo "text: ".$text."<br />"; // ignore if its same as page title else set as alternate bm_title
-							echo "lang: ".$lang."<br />";
+							$page_title = $this->GetPageTitle("", $page_id);
+
+							if ( $page_title !== $title )
+							{
+								$title = $title;
+							}
+							else
+							{
+								$title = NULL;
+							}
 						}
 					}
 					if (isset($page_id))
 					{
 						$this->Query(
 							"INSERT INTO ".$this->config["table_prefix"]."bookmarks SET ".
-							"user_id		= '".quote($this->dblink, $user["user_id"])."', ".
+							"user_id		= '".quote($this->dblink, $_user["user_id"])."', ".
 							"page_id		= '".quote($this->dblink, $page_id)."', ".
 							"lang			= '".quote($this->dblink, $lang)."', ".
 							"bm_title		= '".quote($this->dblink, $title)."', ".
@@ -139,7 +154,7 @@ if ($this->IsAdmin())
 	}
 }
 
-echo "<h3>2.1 Migrates user bookmarks to bookmarks table [temp for dev branch!]:</h3>";
+echo "<h3>2.1 Migrates user bookmarks to bookmarks table [! users_options -> bookmarks][temp for dev branch!]:</h3>";
 if ($this->IsAdmin())
 {
 	if (!isset($_POST["migrate_bookmarks"]))
@@ -148,7 +163,7 @@ if ($this->IsAdmin())
 		?>
 		<input
 		type="submit" name="migrate_bookmarks"
-		value="<?php echo $this->GetTranslation("RatingSubmit");?>" />
+		value="<?php echo $this->GetTranslation("KeywordsSaveButton");?>" />
 		<?php
 		echo $this->FormClose();
 	}
@@ -170,26 +185,41 @@ if ($this->IsAdmin())
 			{
 				foreach($_bookmarks as $key => $_bookmark)
 				{
-					$_bookmark = str_replace(array("((/", "((", "))", "[[/", "[[", "]]"), "", $_bookmark);
 					// links ((link desc @@lang))
+					$_bookmark = str_replace(array("((/", "((", "))", "[[/", "[[", "]]"), "", $_bookmark);
+					$_bookmark = str_replace(" @@", "@@", $_bookmark);
+
 					if (preg_match("/([^\n]+)[\s]{1}([^\n]*)[\s]{1}@@([^\n]*)$/", $_bookmark, $matches))
 					{
-						list (, $url, $text, $lang) = $matches;
+						list (, $url, $text) = $matches;
 						if ($url)
 						{
+							if (stristr($text, "@@"))
+							{
+								$t = explode("@@", $text);
+								$text = $t[0];
+								$lang = $t[1];
+							}
+
 							$title = trim(preg_replace("/|__|\[\[|\(\(/","",$text));
 							$page_id = $this->GetPageId($url);
-							echo "url: ".$url."<br />"; // is tag and existing page then give back page_id
-							echo "page_id: ".$page_id."<br />";
-							echo "text: ".$text."<br />"; // ignore if its same as page title else set as alternate bm_title
-							echo "lang: ".$lang."<br />";
+							$page_title = $this->GetPageTitle("", $page_id);
+
+							if ( $page_title !== $title )
+							{
+								$title = $title;
+							}
+							else
+							{
+								$title = NULL;
+							}
 						}
 					}
 					if (isset($page_id))
 					{
 						$this->Query(
 							"INSERT INTO ".$this->config["table_prefix"]."bookmarks SET ".
-							"user_id		= '".quote($this->dblink, $user["user_id"])."', ".
+							"user_id		= '".quote($this->dblink, $_user["user_id"])."', ".
 							"page_id		= '".quote($this->dblink, $page_id)."', ".
 							"lang			= '".quote($this->dblink, $lang)."', ".
 							"bm_title		= '".quote($this->dblink, $title)."', ".
@@ -200,7 +230,7 @@ if ($this->IsAdmin())
 
 		}
 
-		echo "<br />".$count." user settings inserted.";
+		echo "<br />bookmarks for ".$count." user inserted in bookmarks table.";
 	}
 }
 
