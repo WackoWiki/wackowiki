@@ -18,6 +18,18 @@ $alter_acls_r4_2_5 = "ALTER TABLE {$pref}acls DROP supertag";
 
 $update_acls_r4_2 = "UPDATE {$pref}acls AS acls, (SELECT id, tag FROM {$pref}pages) AS pages SET acls.page_id = pages.id WHERE acls.page_tag = pages.tag";
 
+// BOOKMARKS
+$table_bookmarks_r4_2 = "CREATE TABLE {$pref}bookmarks (".
+					"bookmark_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"user_id INT(10) UNSIGNED NOT NULL,".
+					"page_id INT(10) UNSIGNED NOT NULL,".
+					"lang VARCHAR(2) NOT NULL,".
+					"bm_title VARCHAR(100) NOT NULL,".
+					"bm_sorting SMALLINT(2) UNSIGNED NOT NULL,".
+					"PRIMARY KEY (bookmark_id),".
+					"UNIQUE KEY idx_user_id (user_id,page_id)".
+				") TYPE=MyISAM;";
+
 // CACHE
 $alter_cache_r4_2 = "ALTER TABLE {$pref}cache ADD cache_time TIMESTAMP NOT NULL, ADD INDEX timestamp (cache_time)";
 $alter_cache_r4_2_1 = "ALTER TABLE {$pref}cache ADD lang VARCHAR(2) NOT NULL AFTER query";

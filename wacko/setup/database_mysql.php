@@ -15,6 +15,17 @@ $table_acls = "CREATE TABLE {$pref}acls (".
 					"UNIQUE KEY idx_page_id (page_id,privilege)".
 				") TYPE=MyISAM";
 
+$table_bookmarks = "CREATE TABLE {$pref}bookmarks (".
+					"bookmark_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"user_id INT(10) UNSIGNED NOT NULL,".
+					"page_id INT(10) UNSIGNED NOT NULL,".
+					"lang VARCHAR(2) NOT NULL,".
+					"bm_title VARCHAR(100) NOT NULL,".
+					"bm_sorting SMALLINT(2) UNSIGNED NOT NULL,".
+					"PRIMARY KEY (bookmark_id),".
+					"UNIQUE KEY idx_user_id (user_id,page_id)".
+				") TYPE=MyISAM;";
+
 $table_cache = "CREATE TABLE {$pref}cache (".
 					"name VARCHAR(32) NOT NULL,".
 					"method VARCHAR(20) NOT NULL,".
@@ -51,7 +62,7 @@ $table_groups_members = "CREATE TABLE {$pref}groups_members (".
 					"group_id INTEGER(10) UNSIGNED NOT NULL,".
 					"user_id INTEGER(10) UNSIGNED NOT NULL,".
 					"UNIQUE KEY idx_group_id (group_id, user_id)".
-				")ENGINE=MyISAM";
+				")TYPE=MyISAM";
 
 $table_keywords = "CREATE TABLE {$pref}keywords (".
 					"keyword_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -66,7 +77,7 @@ $table_keywords_pages = "CREATE TABLE {$pref}keywords_pages (".
 						"keyword_id INT(10) unsigned NOT NULL,".
 						"page_id INT(10) unsigned NOT NULL,".
 						"UNIQUE KEY idx_pageword (keyword_id,page_id)".
-					") ENGINE=MyISAM";
+					") TYPE=MyISAM";
 
 $table_links = "CREATE TABLE {$pref}links (".
 					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,".
@@ -276,6 +287,7 @@ $table_watches = "CREATE TABLE {$pref}watches (".
 */
 
 $table_acls_drop = "DROP TABLE {$pref}acls";
+$table_bookmarks_drop = "DROP TABLE {$pref}bookmarks";
 $table_cache_drop = "DROP TABLE {$pref}cache";
 $table_config_drop = "DROP TABLE {$pref}config";
 $table_groups_drop = "DROP TABLE {$pref}groups";

@@ -242,6 +242,7 @@ $table_watches = "CREATE TABLE {$pref}watches (".
 */
 
 $table_acls_drop = "DROP TABLE {$pref}acls";
+$table_bookmarks_drop = "DROP TABLE {$pref}bookmarks";
 $table_cache_drop = "DROP TABLE {$pref}cache";
 $table_config_drop = "DROP TABLE {$pref}config";
 $table_groups_drop = "DROP TABLE {$pref}groups";

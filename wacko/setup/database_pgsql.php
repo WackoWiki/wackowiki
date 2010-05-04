@@ -146,6 +146,7 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 */
 
 $table_acls_drop = "DROP TABLE {$pref}acls";
+$table_bookmarks_drop = "DROP TABLE {$pref}bookmarks";
 $table_cache_drop = "DROP TABLE {$pref}cache";
 $table_config_drop = "DROP TABLE {$pref}config";
 $table_groups_drop = "DROP TABLE {$pref}groups";

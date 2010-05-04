@@ -270,6 +270,7 @@ switch($config["database_driver"])
 					print("<h2>".$lang["DeletingTables"]."</h2>\n");
 					print("            <ul>\n");
 					test(str_replace("%1", "acl", $lang["DeletingTable"]), @mysql_query($table_acls_drop, $dblink), str_replace("%1", "acl", $lang["ErrorDeletingTable"]));
+					test(str_replace("%1", "bookmarks", $lang["DeletingTable"]), @mysql_query($table_bookmarks_drop, $dblink), str_replace("%1", "bookmarks", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "cache", $lang["DeletingTable"]), @mysql_query($table_cache_drop, $dblink), str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "config", $lang["DeletingTable"]), @mysql_query($table_config_drop, $dblink), str_replace("%1", "config", $lang["ErrorDeletingTable"]));
 					test(str_replace("%1", "groups", $lang["DeletingTable"]), @mysql_query($table_groups_drop, $dblink), str_replace("%1", "groups", $lang["ErrorDeletingTable"]));
@@ -300,6 +301,7 @@ switch($config["database_driver"])
 					print("<h2>".$lang["InstallingTables"]."</h2>\n");
 					print("            <ul>\n");
 					test(str_replace("%1","acl",$lang["CreatingTable"]), @mysql_query($table_acls, $dblink), str_replace("%1","acl",$lang["ErrorCreatingTable"]));
+					test(str_replace("%1","bookmarks",$lang["CreatingTable"]), @mysql_query($table_bookmarks, $dblink), str_replace("%1","bookmarks",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","cache",$lang["CreatingTable"]), @mysql_query($table_cache, $dblink), str_replace("%1","cache",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","config",$lang["CreatingTable"]), @mysql_query($table_config, $dblink), str_replace("%1","config",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","groups",$lang["CreatingTable"]), @mysql_query($table_groups, $dblink), str_replace("%1","groups",$lang["ErrorCreatingTable"]));
@@ -399,6 +401,8 @@ switch($config["database_driver"])
 					test(str_replace("%1","acls",$lang["AlterTable"]), @mysql_query($alter_acls_r4_2_3, $dblink), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","acls",$lang["AlterTable"]), @mysql_query($alter_acls_r4_2_4, $dblink), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","acls",$lang["AlterTable"]), @mysql_query($alter_acls_r4_2_5, $dblink), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
+
+					test(str_replace("%1","bookmarks",$lang["CreatingTable"]), @mysql_query($table_bookmarks_r4_2, $dblink), str_replace("%1", "bookmarks", $lang["ErrorCreatingTable"]));
 
 					test(str_replace("%1","cache",$lang["AlterTable"]), @mysql_query($alter_cache_r4_2, $dblink), str_replace("%1", "cache", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","cache",$lang["AlterTable"]), @mysql_query($alter_cache_r4_2_1, $dblink), str_replace("%1", "cache", $lang["ErrorAlteringTable"]));
@@ -569,6 +573,7 @@ switch($config["database_driver"])
 							print("<h2>".$lang["DeletingTables"]."</h2>\n");
 							print("            <ul>\n");
 							test(str_replace("%1", "acl", $lang["DeletingTable"]), @mysqli_query($dblink, $table_acls_drop), str_replace("%1", "acl", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "bookmarks", $lang["DeletingTable"]), @mysqli_query($dblink, $table_bookmarks_drop), str_replace("%1", "bookmarks", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "cache", $lang["DeletingTable"]), @mysqli_query($dblink, $table_cache_drop), str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "config", $lang["DeletingTable"]), @mysqli_query($dblink, $table_config_drop), str_replace("%1", "config", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "groups", $lang["DeletingTable"]), @mysqli_query($dblink, $table_groups_drop), str_replace("%1", "groups", $lang["ErrorDeletingTable"]));
@@ -599,6 +604,7 @@ switch($config["database_driver"])
 								print("         <h2>".$lang["InstallingTables"]."</h2>\n");
 								print("         <ul>\n");
 								test(str_replace("%1","acl",$lang["CreatingTable"]), @mysqli_query($dblink, $table_acls), str_replace("%1","acl",$lang["ErrorCreatingTable"]));
+								test(str_replace("%1","bookmarks",$lang["CreatingTable"]), @mysqli_query($dblink, $table_bookmarks), str_replace("%1","bookmarks",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","cache",$lang["CreatingTable"]), @mysqli_query($dblink, $table_cache), str_replace("%1","cache",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","config",$lang["CreatingTable"]), @mysqli_query($dblink, $table_config), str_replace("%1","config",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","groups",$lang["CreatingTable"]), @mysqli_query($dblink, $table_groups), str_replace("%1","groups",$lang["ErrorCreatingTable"]));
@@ -698,6 +704,8 @@ switch($config["database_driver"])
 								test(str_replace("%1","acls",$lang["AlterTable"]), @mysqli_query($dblink, $alter_acls_r4_2_3), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","acls",$lang["AlterTable"]), @mysqli_query($dblink, $alter_acls_r4_2_4), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","acls",$lang["AlterTable"]), @mysqli_query($dblink, $alter_acls_r4_2_5), str_replace("%1", "acls", $lang["ErrorAlteringTable"]));
+
+								test(str_replace("%1","bookmarks",$lang["CreatingTable"]), @mysqli_query($dblink, $table_bookmarks_r4_2), str_replace("%1", "bookmarks", $lang["ErrorCreatingTable"]));
 
 								test(str_replace("%1","cache",$lang["AlterTable"]), @mysqli_query($dblink, $alter_cache_r4_2), str_replace("%1", "cache", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","cache",$lang["AlterTable"]), @mysqli_query($dblink, $alter_cache_r4_2_1), str_replace("%1", "cache", $lang["ErrorAlteringTable"]));
@@ -870,6 +878,7 @@ switch($config["database_driver"])
 										print("<h2>".$lang["DeletingTables"]."</h2>\n");
 										print("            <ul>\n");
 										testPDO(str_replace("%1", "acl", $lang["DeletingTable"]), $table_acls_drop, str_replace("%1", "acl", $lang["ErrorDeletingTable"]));
+										testPDO(str_replace("%1", "bookmarks", $lang["DeletingTable"]), $table_bookmarks_drop, str_replace("%1", "bookmarks", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "cache", $lang["DeletingTable"]), $table_cache_drop, str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "config", $lang["DeletingTable"]), $table_config_drop, str_replace("%1", "config", $lang["ErrorDeletingTable"]));
 										testPDO(str_replace("%1", "groups", $lang["DeletingTable"]), $table_groups_drop, str_replace("%1", "groups", $lang["ErrorDeletingTable"]));
@@ -896,6 +905,7 @@ switch($config["database_driver"])
 									print("         <h2>".$lang["InstallingTables"]."</h2>\n");
 									print("         <ul>\n");
 									testPDO(str_replace("%1","acl",$lang["CreatingTable"]), $table_acls, str_replace("%1","acl",$lang["ErrorCreatingTable"]));
+									testPDO(str_replace("%1","bookmarks",$lang["CreatingTable"]), $table_bookmarks, str_replace("%1","bookmarks",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","cache",$lang["CreatingTable"]), $table_cache, str_replace("%1","cache",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","config",$lang["CreatingTable"]), $table_config, str_replace("%1","config",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","groups",$lang["CreatingTable"]), $table_groups, str_replace("%1","groups",$lang["ErrorCreatingTable"]));
