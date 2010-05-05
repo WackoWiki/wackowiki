@@ -3387,19 +3387,22 @@ class Wacko
 	// BOOKMARKS
 	function GetDefaultBookmarks($lang, $what = "default")
 	{
-		$user = $this->GetUser();
+		if (!isset($lang))
+		{
+			$user = $this->GetUser();
 
-		if(isset($user["lang"]))
-		{
-			$lang = $user["lang"];
-		}
-		else if (isset($this->config["multilanguage"]))
-		{
-			$lang = $this->UserAgentLanguage();
-		}
-		else
-		{
-			$lang = $this->config["language"];
+			if(isset($user["lang"]))
+			{
+				$lang = $user["lang"];
+			}
+			else if (isset($this->config["multilanguage"]))
+			{
+				$lang = $this->UserAgentLanguage();
+			}
+			else
+			{
+				$lang = $this->config["language"];
+			}
 		}
 
 		if (isset($this->config[$what."_bookmarks"]) &&
@@ -3443,6 +3446,65 @@ class Wacko
 				}
 			}
 			return $user_bm;
+		}
+	}
+
+	function ConvertIntoBookmarksTable($bookmarks, $user_id)
+	{
+		// Bookmarks
+		$_bookmarks	= explode("\n", $bookmarks);
+
+		if ($_bookmarks)
+		{
+			foreach($_bookmarks as $key => $_bookmark)
+			{
+				// links ((link desc @@lang))
+				if ((preg_match("/^\[\[(\S+)(\s+(.+))?\]\]$/", $_bookmark, $matches)) ||
+					(preg_match("/^\(\((\S+)(\s+(.+))?\)\)$/", $_bookmark, $matches)) ||
+					(preg_match("/^(\S+)(\s+(.+))?$/", $thing, $matches)) ) // without brackets at last!
+				{
+					list (, $url, $text) = $matches;
+					if ($url)
+					{
+						$url = str_replace(" ", "", $url);
+						if ($url{0} == "/")
+						{
+							$url = substr($url, 1);
+						}
+
+						if (stristr($text, "@@"))
+						{
+							$t = explode("@@", $text);
+							$text = $t[0];
+							$bm_lang = $t[1];
+						}
+
+						$title = trim(preg_replace("/|__|\[\[|\(\(/","",$text));
+						$page_id = $this->GetPageId($url);
+						$page_title = $this->GetPageTitle("", $page_id);
+
+						if ( $page_title !== $title )
+						{
+							$title = $title;
+						}
+						else
+						{
+							$title = NULL;
+						}
+					}
+				}
+				if (isset($page_id))
+				{
+					$this->Query(
+						"INSERT INTO ".$this->config["table_prefix"]."bookmarks SET ".
+						"user_id		= '".quote($this->dblink, $user_id)."', ".
+						"page_id		= '".quote($this->dblink, $page_id)."', ".
+						"lang			= '".quote($this->dblink, $bm_lang)."', ".
+						"bm_title		= '".quote($this->dblink, $title)."', ".
+						"bm_sorting		= '".quote($this->dblink, $key)."' ");
+				}
+				$bm_lang = "";
+			}
 		}
 	}
 
