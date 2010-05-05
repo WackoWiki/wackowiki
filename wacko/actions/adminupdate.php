@@ -20,7 +20,7 @@ if ($this->IsAdmin())
 		echo $this->FormClose();
 	}
 	// rename files in \files\perpage folder to @page_id@filename
-	else
+	else if (isset($_POST["rename"]))
 	{
 		@set_time_limit(0);
 
@@ -79,7 +79,7 @@ if ($this->IsAdmin())
 		echo $this->FormClose();
 	}
 	// rename files in \files\perpage folder to @page_id@filename
-	else
+	else if (isset($_POST["migrate_user_otions"]))
 	{
 		$_users = $this->LoadAll(
 			"SELECT user_id, doubleclick_edit, show_comments, bookmarks, motto, revisions_count, changes_count, lang, show_spaces, typografica, more ".
@@ -99,55 +99,7 @@ if ($this->IsAdmin())
 			$this->Query($sql);
 
 			// Bookmarks
-			$_bookmarks	= explode("\n", $_user['bookmarks']);
-
-			if ($_bookmarks)
-			{
-				foreach($_bookmarks as $key => $_bookmark)
-				{
-					// links ((link desc @@lang))
-					$_bookmark = str_replace(array("((/", "((", "))", "[[/", "[[", "]]"), "", $_bookmark);
-					$_bookmark = str_replace(" @@", "@@", $_bookmark);
-
-					if (preg_match("/([^\n]+)[\s]{1}([^\n]*)[\s]{1}@@([^\n]*)$/", $_bookmark, $matches))
-					{
-						list (, $url, $text) = $matches;
-						if ($url)
-						{
-							if (stristr($text, "@@"))
-							{
-								$t = explode("@@", $text);
-								$text = $t[0];
-								$lang = $t[1];
-							}
-
-							$title = trim(preg_replace("/|__|\[\[|\(\(/","",$text));
-							$page_id = $this->GetPageId($url);
-							$page_title = $this->GetPageTitle("", $page_id);
-
-							if ( $page_title !== $title )
-							{
-								$title = $title;
-							}
-							else
-							{
-								$title = NULL;
-							}
-						}
-					}
-					if (isset($page_id))
-					{
-						$this->Query(
-							"INSERT INTO ".$this->config["table_prefix"]."bookmarks SET ".
-							"user_id		= '".quote($this->dblink, $_user["user_id"])."', ".
-							"page_id		= '".quote($this->dblink, $page_id)."', ".
-							"lang			= '".quote($this->dblink, $lang)."', ".
-							"bm_title		= '".quote($this->dblink, $title)."', ".
-							"bm_sorting		= '".quote($this->dblink, $key)."' ");
-					}
-				}
-			}
-
+			$this->ConvertIntoBookmarksTable($_user['bookmarks'], $_user['user_id']);
 		}
 
 		echo "<br />".$count." user settings inserted.";
@@ -168,7 +120,7 @@ if ($this->IsAdmin())
 		echo $this->FormClose();
 	}
 	// rename files in \files\perpage folder to @page_id@filename
-	else
+	else if (isset($_POST["migrate_bookmarks"]))
 	{
 		$_users = $this->LoadAll(
 			"SELECT user_id, bookmarks ".
@@ -179,55 +131,7 @@ if ($this->IsAdmin())
 		foreach ($_users as $_user)
 		{
 			// Bookmarks
-			$_bookmarks	= explode("\n", $_user['bookmarks']);
-
-			if ($_bookmarks)
-			{
-				foreach($_bookmarks as $key => $_bookmark)
-				{
-					// links ((link desc @@lang))
-					$_bookmark = str_replace(array("((/", "((", "))", "[[/", "[[", "]]"), "", $_bookmark);
-					$_bookmark = str_replace(" @@", "@@", $_bookmark);
-
-					if (preg_match("/([^\n]+)[\s]{1}([^\n]*)[\s]{1}@@([^\n]*)$/", $_bookmark, $matches))
-					{
-						list (, $url, $text) = $matches;
-						if ($url)
-						{
-							if (stristr($text, "@@"))
-							{
-								$t = explode("@@", $text);
-								$text = $t[0];
-								$lang = $t[1];
-							}
-
-							$title = trim(preg_replace("/|__|\[\[|\(\(/","",$text));
-							$page_id = $this->GetPageId($url);
-							$page_title = $this->GetPageTitle("", $page_id);
-
-							if ( $page_title !== $title )
-							{
-								$title = $title;
-							}
-							else
-							{
-								$title = NULL;
-							}
-						}
-					}
-					if (isset($page_id))
-					{
-						$this->Query(
-							"INSERT INTO ".$this->config["table_prefix"]."bookmarks SET ".
-							"user_id		= '".quote($this->dblink, $_user["user_id"])."', ".
-							"page_id		= '".quote($this->dblink, $page_id)."', ".
-							"lang			= '".quote($this->dblink, $lang)."', ".
-							"bm_title		= '".quote($this->dblink, $title)."', ".
-							"bm_sorting		= '".quote($this->dblink, $key)."' ");
-					}
-				}
-			}
-
+			$this->ConvertIntoBookmarksTable($_user['bookmarks'], $_user['user_id']);
 		}
 
 		echo "<br />bookmarks for ".$count." user inserted in bookmarks table.";

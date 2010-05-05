@@ -172,13 +172,15 @@ else if (isset($_POST["action"]) && $_POST["action"] == "login")
 					"INSERT INTO ".$this->config["table_prefix"]."users_settings ".
 					"SET ".
 						"user_id		= '".quote($this->dblink, $_user_id["user_id"])."', ".
-						"bookmarks		= '".quote($this->dblink, $this->GetDefaultBookmarks($lang))."', ".
 						"typografica	= '".(($this->config["default_typografica"] == 1) ? 1 : 0)."', ".
 						($lang
 							? "lang		= '".quote($this->dblink, $lang)."', "
 							: "").
 						"theme			= '".quote($this->dblink, $this->config["theme"])."', ".
 						"send_watchmail	= '".quote($this->dblink, 1)."'");
+
+				// INSERT USER Bookmarks
+				$this->ConvertIntoBookmarksTable($this->GetDefaultBookmarks($lang), $_user_id['user_id']);
 
 				$subject = 	$this->GetTranslation("EmailWelcome").
 							$this->config["wacko_name"];
