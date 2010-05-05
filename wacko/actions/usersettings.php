@@ -245,32 +245,6 @@ else if ($user = $this->GetUser())
 		</select></td>
 	</tr>
 	<tr>
-		<th class="form_left" scope="row"><label for="bookmarks"><?php echo $this->GetTranslation("YourBookmarks");?></label></th>
-		<td class="form_right"></td>
-	</tr>
-		<?php
-			$_bookmarks = $this->LoadAll(
-					"SELECT p.tag, p.title, b.bookmark_id, b.bm_title, b.lang ".
-					"FROM ".$this->config["table_prefix"]."pages p ".
-						"LEFT JOIN ".$this->config["table_prefix"]."bookmarks b ON (p.user_id = b.user_id) ".
-					"WHERE b.user_id = '".quote($this->dblink, $user["user_id"])."' ".
-					"AND b.page_id = p.page_id ".
-					"ORDER BY b.bm_sorting", 1);
-
-			if ($_bookmarks)
-			{
-				foreach($_bookmarks as $_bookmark)
-				{
-					echo "<tr>\n<td class=\"form_left\">&nbsp;</td>
-					<td class=\"form_right\">
-					<input type=\"radio\" id=\"bookmark".$_bookmark["bookmark_id"]."\" name=\"change\" value=\"".$_bookmark["bookmark_id"]."\" />
-					<label for=\"bookmark".$_bookmark["bookmark_id"]."\">".$_bookmark["tag"]." ".(!empty($_bookmark["bm_title"]) ? $_bookmark["bm_title"] : $_bookmark["title"]).(!empty($_bookmark["lang"]) ? " @@".$_bookmark["lang"] : "")."</label></td>\n</tr>\n";
-				}
-			}
-				?>
-		<?php // <td class="form_right"><textarea id="bookmarks" name="bookmarks" cols="40" rows="10"><?php echo htmlspecialchars($this->GetUserBookmarks($user["user_id"])) </textarea></td>?>
-	<?php // </tr> ?>
-	<tr>
 		<th class="form_left" scope="row"><label for="changes_count"><?php echo $this->GetTranslation("RecentChangesLimit");?></label></th>
 		<td class="form_right"><input id="changes_count" name="changes_count"
 	value="<?php echo htmlentities($user["changes_count"]) ?>" size="40" /></td>
