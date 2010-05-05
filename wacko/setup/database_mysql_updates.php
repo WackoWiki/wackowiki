@@ -25,7 +25,7 @@ $table_bookmarks_r4_2 = "CREATE TABLE {$pref}bookmarks (".
 					"page_id INT(10) UNSIGNED NOT NULL,".
 					"lang VARCHAR(2) NOT NULL,".
 					"bm_title VARCHAR(100) NOT NULL,".
-					"bm_sorting SMALLINT(2) UNSIGNED NOT NULL,".
+					"bm_position SMALLINT(2) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (bookmark_id),".
 					"UNIQUE KEY idx_user_id (user_id,page_id)".
 				") TYPE=MyISAM;";
@@ -257,13 +257,13 @@ $table_users_settings_r4_2 = "CREATE TABLE {$pref}users_settings (".
 					"theme VARCHAR(20) DEFAULT NULL,".
 					"lang VARCHAR(2) DEFAULT NULL,".
 					"motto TEXT,".
-					"changes_count INTEGER(10) UNSIGNED NOT NULL DEFAULT '20',".
-					"revisions_count INTEGER(10) UNSIGNED NOT NULL DEFAULT '50',".
+					"changes_count INTEGER(10) UNSIGNED NOT NULL DEFAULT '50',".
+					"revisions_count INTEGER(10) UNSIGNED NOT NULL DEFAULT '20',".
 					"dont_redirect TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"send_watchmail TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"show_files TINYINT(1) UNSIGNED DEFAULT NULL,".
-					"show_comments TINYINT(1) UNSIGNED DEFAULT NULL,".
-					"doubleclick_edit TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"show_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
+					"doubleclick_edit TINYINT(1) UNSIGNED  NOT NULL DEFAULT '1',".
 					"show_spaces TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"typografica TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"autocomplete TINYINT(1) UNSIGNED DEFAULT NULL,".

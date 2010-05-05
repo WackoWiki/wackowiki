@@ -3432,17 +3432,16 @@ class Wacko
 		{
 			$_bookmarks = $this->LoadAll(
 					"SELECT p.tag, p.title, b.bm_title, b.lang ".
-					"FROM ".$this->config["table_prefix"]."pages p ".
-						"LEFT JOIN ".$this->config["table_prefix"]."bookmarks b ON (p.user_id = b.user_id) ".
+					"FROM ".$this->config["table_prefix"]."bookmarks b ".
+						"LEFT JOIN ".$this->config["table_prefix"]."pages p ON (b.page_id = p.page_id) ".
 					"WHERE b.user_id = '".quote($this->dblink, $user_id)."' ".
-					"AND b.page_id = p.page_id ".
-					"ORDER BY b.bm_sorting", 1);
+					"ORDER BY b.bm_position", 1);
 
 			if ($_bookmarks)
 			{
 				foreach($_bookmarks as $_bookmark)
 				{
-					$user_bm .= "((".$_bookmark["tag"]." ".(!empty($_bookmark["bm_title"]) ? $_bookmark["bm_title"] : $_bookmark["title"]).(!empty($_bookmark["lang"]) ? " @@".$_bookmark["lang"] : "")."))\n";
+					$user_bm .= "((".$_bookmark["tag"].(!empty($_bookmark["bm_title"]) ? " ".$_bookmark["bm_title"] : (!empty($_bookmark["title"]) ? " ".$_bookmark["title"] : "" )).(!empty($_bookmark["lang"]) ? " @@".$_bookmark["lang"] : "")."))\n";
 				}
 			}
 			return $user_bm;
@@ -3501,7 +3500,7 @@ class Wacko
 						"page_id		= '".quote($this->dblink, $page_id)."', ".
 						"lang			= '".quote($this->dblink, $bm_lang)."', ".
 						"bm_title		= '".quote($this->dblink, $title)."', ".
-						"bm_sorting		= '".quote($this->dblink, $key)."' ");
+						"bm_position		= '".quote($this->dblink, ($key + 1))."' ");
 				}
 				$bm_lang = "";
 			}
@@ -3559,11 +3558,18 @@ class Wacko
 			{
 				$bookmarks[] = $bookmark;
 
+				$_bm_position = $this->LoadAll(
+					"SELECT b.bookmark_id ".
+					"FROM ".$this->config["table_prefix"]."bookmarks b ".
+					"WHERE b.user_id = '".quote($this->dblink, $user["user_id"])."' ", 0);
+				$_bm_count = count($_bm_position);
+
 				$this->Query(
 					"INSERT INTO ".$this->config["table_prefix"]."bookmarks SET ".
 					"user_id		= '".quote($this->dblink, $user["user_id"])."', ".
 					"page_id		= '".quote($this->dblink, $this->page["page_id"])."', ".
-					"lang			= '".quote($this->dblink, ($user["lang"] != $this->pagelang ? $this->pagelang : ""))."' ");
+					"lang			= '".quote($this->dblink, ($user["lang"] != $this->pagelang ? $this->pagelang : ""))."', ".
+					"bm_position		= '".quote($this->dblink, ($_bm_count + 1))."'");
 			}
 
 			// parsing bookmarks into links table
