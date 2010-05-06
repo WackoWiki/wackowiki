@@ -65,6 +65,26 @@ if ($this->IsAdmin())
 	}
 }
 
+// Migrate User settings
+if (!function_exists('DecomposeOptions'))
+{
+	function DecomposeOptions($more)
+	{
+		$optionSplitter			= "\n";		// if you change this two symbols, settings for all users will be lost.
+		$valueSplitter			= "=";
+
+		$b		= array();
+		$opts	= explode($optionSplitter, $more);
+
+		foreach ($opts as $o)
+		{
+			$params			= explode($valueSplitter, trim($o));
+			$b[$params[0]]	= (isset($params[1]) ? $params[1] : NULL) ;
+		}
+		return $b;
+	}
+}
+
 echo "<h3>2. Migrates user otions to users_settings table:</h3>";
 if ($this->IsAdmin())
 {

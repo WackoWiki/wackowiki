@@ -412,12 +412,17 @@ class Init
 					}
 					free_result($result);
 
-					$_groups = "";
-
-					foreach ($groups_array as $user_group_pairs)
+					if (!empty($groups_array))
 					{
-						// Then we make old fashioned UserName1\nUserName2\n lines for each group
-						$_groups[$user_group_pairs['group_name']] .= $user_group_pairs['user_name'].'\n';
+						$_groups = array();
+
+						foreach ($groups_array as $user_group_pairs)
+						{
+							if (!isset($_groups[$user_group_pairs['group_name']])) $_groups[$user_group_pairs['group_name']] = "";
+
+							// Then we make old fashioned UserName1\nUserName2\n lines for each group
+							$_groups[$user_group_pairs['group_name']] .= $user_group_pairs['user_name'].'\n';
+						}
 					}
 
 					foreach ($_groups as $group => $users)

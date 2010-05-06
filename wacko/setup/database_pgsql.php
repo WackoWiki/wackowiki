@@ -103,7 +103,6 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"lang character varying(2) NOT NULL DEFAULT '',".
 					"show_spaces int(1) NOT NULL DEFAULT '1',".
 					"typografica int(1) NOT NULL DEFAULT '1',".
-					"more text NOT NULL DEFAULT '',".
 					"change_password character varying(40) NOT NULL DEFAULT '',".
 					"email_confirm character varying(40) NOT NULL DEFAULT '',".
 					"CONSTRAINT pk_users_name PRIMARY KEY (user_id),".

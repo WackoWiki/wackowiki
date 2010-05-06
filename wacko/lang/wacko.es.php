@@ -602,7 +602,7 @@ $wackoTranslation = array(
 
 	"RecentChangesRSS" => "Cambios recientes",
 	"RecentCommentsRSS" => "Comentarios recientes",
-	"RecentNewsRSS" => "Recent news",
+	"RecentNewsRSS" => "News",
 	"HistoryRevisionsRSS" => "Historial/revisiones de ",
 
 	"LastModification" => "Ultima Modificación",

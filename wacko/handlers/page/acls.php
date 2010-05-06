@@ -48,7 +48,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					$this->SetPageOwner($this->GetPageId(), $newowner_id);
 
 					$User = $this->LoadSingle(
-							"SELECT email, more, email_confirm ".
+							"SELECT email, email_confirm ".
 							"FROM {$this->config['user_table']} ".
 							"WHERE user_name = '".quote($this->dblink, $newowner)."'");
 
@@ -139,7 +139,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				$message .= $this->GetTranslation("ACLGaveOwnership").$newowner;
 
 				$User = $this->LoadSingle(
-					"SELECT email, more, email_confirm ".
+					"SELECT email, email_confirm ".
 					"FROM {$this->config['user_table']} ".
 					"WHERE user_name = '".quote($newowner)."'");
 

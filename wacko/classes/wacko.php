@@ -18,8 +18,6 @@ class Wacko
 	var $current_context		= 0;
 	var $pages_meta				= "page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description";
 	var $first_inclusion		= array();	// for backlinks
-	var $optionSplitter			= "\n";		// if you change this two symbols, settings for all users will be lost.
-	var $valueSplitter			= "=";
 	var $format_safe			= true;		//for htmlspecialchars() in PreLink
 	var $unicode_entities		= array();	//common unicode array
 	var $timer;
@@ -1560,11 +1558,19 @@ class Wacko
 		{
 			$this->Query(
 				"UPDATE ".$this->config["table_prefix"]."pages SET ".
-					"lang = '".quote($this->dblink, $metadata["lang"])."', ".
-					"more = '".quote($this->dblink, $metadata["more"])."', ".
-					"title = '".quote($this->dblink, htmlspecialchars($metadata["title"]))."', ".
-					"keywords = '".quote($this->dblink, $metadata["keywords"])."', ".
-					"description = '".quote($this->dblink, $metadata["description"])."' ".
+					"lang				= '".quote($this->dblink, $metadata["lang"])."', ".
+					"title				= '".quote($this->dblink, htmlspecialchars($metadata["title"]))."', ".
+					"keywords			= '".quote($this->dblink, $metadata["keywords"])."', ".
+					"description		= '".quote($this->dblink, $metadata["description"])."', ".
+					"hide_comments		= '".quote($this->dblink, $metadata['hide_comments'])."', ".
+					"hide_files			= '".quote($this->dblink, $metadata['hide_files'])."', ".
+					"hide_rating		= '".quote($this->dblink, $metadata['hide_rating'])."', ".
+					"hide_toc			= '".quote($this->dblink, $metadata['hide_toc'])."', ".
+					"hide_index			= '".quote($this->dblink, $metadata['hide_index'])."', ".
+					"lower_index		= '".quote($this->dblink, ( $metadata['index_mode'] == 'l' ? 1 : 0 ))."', ".
+					"upper_index		= '".quote($this->dblink, ( $metadata['index_mode'] == 'u' ? 1 : 0 ))."', ".
+					"allow_rawhtml		= '".quote($this->dblink, $metadata['allow_rawhtml'])."', ".
+					"disable_safehtml	= '".quote($this->dblink, $metadata['disable_safehtml'])."' ".
 				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
 				"LIMIT 1");
 		}
@@ -2932,31 +2938,6 @@ class Wacko
 		return $this->config["hide_comments"] != 1 && ($this->config["hide_comments"] != 2 || $this->GetUser());
 	}
 
-	function DecomposeOptions($more)
-	{
-		$b		= array();
-		$opts	= explode($this->optionSplitter, $more);
-
-		foreach ($opts as $o)
-		{
-			$params			= explode($this->valueSplitter, trim($o));
-			$b[$params[0]]	= (isset($params[1]) ? $params[1] : NULL) ;
-		}
-		return $b;
-	}
-
-	function ComposeOptions($options)
-	{
-		$opts = array();
-
-		foreach ($options as $k => $v)
-		{
-			$opts[] = $k.$this->valueSplitter.$v;
-		}
-
-		return implode($this->optionSplitter, $opts);
-	}
-
 	// COMMENTS AND COUNTS
 	// recount all user's comments
 	function CountUserComments($name)
@@ -3938,7 +3919,17 @@ class Wacko
 		if ($this->page)
 		{
 			// override perpage settings
-			$this->page['options'] = $this->DecomposeOptions($this->page['more']);
+			$this->page['options'] = array(
+				"hide_comments"		=> $this->page['hide_comments'],
+				"hide_files"		=> $this->page['hide_files'],
+				"hide_rating"		=> $this->page['hide_rating'],
+				"hide_toc"			=> $this->page['hide_toc'],
+				"hide_index"		=> $this->page['hide_index'],
+				"lower_index"		=> $this->page['lower_index'],
+				"upper_index"		=> $this->page['upper_index'],
+				"allow_rawhtml"		=> $this->page['allow_rawhtml'],
+				"disable_safehtml"	=> $this->page['disable_safehtml'],
+				);
 
 			foreach ($this->page['options'] as $key => $val)
 			{
@@ -3946,7 +3937,7 @@ class Wacko
 			}
 
 			// set page keywords. this defines $keywords (array) object property
-			// consisting of keywords ids as keys and  corresponding names as values
+			// consisting of keywords ids as keys and corresponding names as values
 			if ($this->page['keywords'])
 			{
 				$keywords = $this->LoadAll(

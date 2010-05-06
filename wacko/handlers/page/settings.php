@@ -19,7 +19,17 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 {
 	if ($_POST)
 	{
-		$options = array(
+		if ($this->IsAdmin())
+		{
+			$allow_rawhtml		= (int)$_POST['allow_rawhtml'];
+			$disable_safehtml	= (int)$_POST['disable_safehtml'];
+		}
+
+		$this->SaveMeta($this->page["page_id"], array(
+			"lang"				=> $_POST["lang"],
+			"title"				=> $_POST["title"],
+			"description"		=> $_POST["description"],
+			"keywords"			=> $_POST["keywords"],
 			'hide_comments'		=> (int)$_POST['hide_comments'],
 			'hide_files'		=> (int)$_POST['hide_files'],
 			'hide_rating'		=> (int)$_POST['hide_rating'],
@@ -27,20 +37,8 @@ if ($this->UserIsOwner() || $this->HasAccess("write",$page["page_id"]))
 			'hide_index'		=> (int)$_POST['hide_index'],
 			'lower_index'		=> ( $_POST['index_mode'] == 'l' ? 1 : 0 ),
 			'upper_index'		=> ( $_POST['index_mode'] == 'u' ? 1 : 0 ),
-		);
-
-		if ($this->IsAdmin())
-		{
-			$options['allow_rawhtml']		= (int)$_POST['allow_rawhtml'];
-			$options['disable_safehtml']	= (int)$_POST['disable_safehtml'];
-		}
-
-		$this->SaveMeta($this->page["page_id"], array(
-			"lang" => $_POST["lang"],
-			"more" => $this->ComposeOptions($options),
-			"title" => $_POST["title"],
-			"description" => $_POST["description"],
-			"keywords" => $_POST["keywords"]
+			'allow_rawhtml'		=> $allow_rawhtml,
+			'disable_safehtml'	=> $disable_safehtml
 		));
 
 		// log event

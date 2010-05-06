@@ -4,19 +4,22 @@
 
 if (!isset($nomark)) $nomark = "";
 
-function MyGroups($username, $al)
+if (!function_exists('MyGroups'))
 {
-	$my_groups_count = 0;
-	foreach($al as $group => $members)
+	function MyGroups($username, $al)
 	{
-		$groupmembers = explode("\\n", $members);
-		if(in_array ($username, $groupmembers))
+		$my_groups_count = 0;
+		foreach($al as $group => $members)
 		{
-			print $group.'<br />';
-			$my_groups_count++;
+			$groupmembers = explode("\\n", $members);
+			if(in_array ($username, $groupmembers))
+			{
+				print $group.'<br />';
+				$my_groups_count++;
+			}
 		}
+		return $my_groups_count;
 	}
-	return $my_groups_count;
 }
 
 if($user = $this->GetUser())
