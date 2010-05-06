@@ -603,7 +603,7 @@ $wackoTranslation = array(
 
 	"RecentChangesRSS" => "Πρόσφατες αλλαγές",
 	"RecentCommentsRSS" => "Πρόσφατα σχόλια",
-	"RecentNewsRSS" => "Recent news",
+	"RecentNewsRSS" => "News",
 	"HistoryRevisionsRSS" => "Ιστορικό/εκδόσεις του ",
 
 	"LastModification" => "Τελευταίες Τροποποιήσεις",

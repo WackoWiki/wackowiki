@@ -129,7 +129,15 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"commented DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
-					"more VARCHAR(255) NOT NULL,".
+					"hide_comments TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"hide_files TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"hide_rating TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"hide_toc TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"hide_index TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"lower_index TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"upper_index TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"allow_rawhtml TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"disable_safehtml TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"PRIMARY KEY (page_id),".
 					"KEY idx_user_id (user_id),".
 					"KEY idx_owner_id (owner_id),".

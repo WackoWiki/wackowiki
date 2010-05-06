@@ -161,8 +161,7 @@ function admin_sysupdate(&$engine, &$module)
 			}
 
 			$version = '4.3.rc2';
-//			$engine->Query(
-//				"ALTER TABLE `pages` ADD `more` VARCHAR( 255 ) NOT NULL");
+
 			$engine->Query(
 				"UPDATE {$engine->config['table_prefix']}config ".
 				"SET wackowiki_version = '$version'");

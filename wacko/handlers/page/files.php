@@ -1,10 +1,13 @@
 <?php
 
+if (!isset($isimage)) $isimage = "";
+if (!isset($isplain)) $isplain = "";
+$error = "";
 $file404 = "images/upload404.gif";
 $file403 = "images/upload403.gif";
 
 // 1. check existence
-if ($_GET["global"])
+if (isset($_GET["global"]))
 {
 	$page_id = 0;
 }
@@ -73,7 +76,7 @@ if ($filepath)
 {
 	header("Content-Disposition:".( $isimage || $isplain ? "" : " attachment;" )." filename=".$what[0]["filename"]);
 
-	if (!$isimage)
+	if (!isset($isimage))
 	{
 		// count file download
 		$this->Query(

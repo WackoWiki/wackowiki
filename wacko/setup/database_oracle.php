@@ -116,7 +116,15 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"commented date default sysdate not null,".
 					"description varchar2(250) not null,".
 					"keywords varchar2(250) not null,".
-					"more varchar2(255) not null,".
+					"hide_comments number(1) null,".
+					"hide_files number(1) null,".
+					"hide_rating number(1) null,".
+					"hide_toc number(1) null,".
+					"hide_index number(1) null,".
+					"lower_index number(1) null,".
+					"upper_index number(1) null,".
+					"allow_rawhtml number(1) null,".
+					"disable_safehtml number(1) null,".
 					"constraint {$pref}pages_pk primary key (page_id)/*,".
 					"KEY idx_user_id (user_id),".      // TODO
 					"KEY idx_owner_id (owner_id),".
@@ -215,7 +223,6 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"lang varchar2(2) not null,".
 					"show_spaces number(1) default 1 not null,".
 					"typografica number(1) default 1 not null,".
-					"more clob not null,".
 					"change_password varchar2(40) not null,".
 					"email_confirm varchar2(40) not null,".
 					"session_time date default sysdate not null,".
