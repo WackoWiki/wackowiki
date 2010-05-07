@@ -1,8 +1,8 @@
 <?php
 
-if (!function_exists('usermenu_cmp'))
+if (!function_exists('bookmark_sorting'))
 {
-	function usermenu_cmp ($a, $b)
+	function bookmark_sorting ($a, $b)
 	{
 		if ($a["bm_position"] == $b["bm_position"])
 			return 0;
@@ -43,7 +43,7 @@ if (isset($_POST["_user_bookmarks"]))
 		$data = array();
 		foreach( $object->data["user_menu"] as $k => $item )
 			$data[] = array( "bookmark_id" => $item["bookmark_id"], "bm_position"=> 1 * $_POST["pos_".$item["bookmark_id"]] );
-		usort ($data, "usermenu_cmp");
+		usort ($data, "bookmark_sorting");
 		foreach( $data as $k => $item )
 			$data[$k]["bm_position"] = $k + 1;
 		// save

@@ -33,7 +33,7 @@ if ($registered
 		{
 			// rename or massrename
 			$need_massrename = 0;
-			if ($_POST["massrename"] == "on") $need_massrename = 1;
+			if (isset($_POST["massrename"]) && $_POST["massrename"] == "on") $need_massrename = 1;
 
 			// rename
 			if ($need_massrename == 0)
@@ -60,7 +60,7 @@ if ($registered
 					{// Rename page
 
 						$need_redirect = 0;
-						if ($_POST["redirect"] == "on") $need_redirect = 1;
+						if (isset($_POST["redirect"]) && $_POST["redirect"] == "on") $need_redirect = 1;
 
 						if ($need_redirect == 0)
 						if ($this->RemoveReferrers($this->tag))
