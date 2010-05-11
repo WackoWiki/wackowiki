@@ -188,6 +188,7 @@ class Init
 					"rewrite_mode" => ($found_rewrite_extension ? "1" : "0"),
 					"ssl" => 0,
 					"ssl_implicit" => 0,
+					"ssl_proxy" => "",
 
 					"classes_path" => "classes",
 					"action_path" => "actions",

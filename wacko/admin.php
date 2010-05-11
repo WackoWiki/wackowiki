@@ -38,13 +38,13 @@ $init->Engine('res');
 // reconnect securely in ssl mode
 if ($engine->config['ssl'] == true)
 {
-	if ($_SERVER['HTTPS'] != 'on')
+	if ( ($_SERVER["HTTPS"] != "on" && empty($engine->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] != '443' )
 	{
-		$engine->Redirect(str_replace('http://', 'https://', $engine->config['base_url']).'admin.php');
+		$engine->Redirect(str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'] : ''), $engine->config['base_url']).'admin.php');
 	}
 	else
 	{
-		$engine->config['base_url'] = str_replace('http://', 'https://', $engine->config['base_url']);
+		$engine->config['base_url'] = str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'] : ''), $engine->config['base_url']);
 	}
 }
 
@@ -62,7 +62,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
 	$engine->DeleteCookie('admin');
 	$engine->Log(1, $engine->GetTranslation('LogAdminLogout'));
-	$engine->Redirect(( $engine->config['ssl'] == true ? str_replace('http://', 'https://', $engine->href()) : $engine->href() ));
+	$engine->Redirect(( $engine->config['ssl'] == true ? str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'] : ''), $engine->href()) : $engine->href() ));
 	exit;
 }
 

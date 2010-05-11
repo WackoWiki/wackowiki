@@ -2,9 +2,9 @@
 <?php
 
 // reconnect securely in ssl mode
-if ($this->config["ssl"] == true && $_SERVER["HTTPS"] != "on")
+if ($this->config["ssl"] == true && ( ($_SERVER["HTTPS"] != "on" && empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] != '443' ))
 {
-	$this->Redirect(str_replace("http://", "https://", $this->href()));
+	$this->Redirect(str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'] : ''), $this->href()));
 }
 
 if (isset($_GET["secret_code"]) && $_GET["secret_code"])

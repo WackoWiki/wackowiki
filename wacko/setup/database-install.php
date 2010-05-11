@@ -178,6 +178,7 @@ $configDb['show_spaces'] = $config['show_spaces'];
 $configDb['spam_filter'] = $config['spam_filter'];
 $configDb['ssl'] = $config['ssl'];
 $configDb['ssl_implicit'] = $config['ssl_implicit'];
+$configDb['ssl_proxy'] = $config['ssl_proxy'];
 $configDb['standard_handlers'] = $config['standard_handlers'];
 $configDb['store_deleted_pages'] = $config['store_deleted_pages'];
 $configDb['strong_cookies'] = $config['strong_cookies'];
