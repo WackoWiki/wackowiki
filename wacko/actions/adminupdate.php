@@ -6,11 +6,12 @@
 
 echo "<h2>Migration Routines for R4.3.rc1 to rc2 Upgrade</h2>";
 
-echo "<h3>1. Renames files in \\files\perpage folder to @page_id@filename:</h3>";
 if ($this->IsAdmin())
 {
 	if (!isset($_POST["rename"]))
 	{
+		echo "<h3>1. Renames files in \\files\perpage folder to @page_id@filename:</h3>";
+
 		echo $this->FormOpen();
 		?>
 		<input
@@ -85,11 +86,12 @@ if (!function_exists('DecomposeOptions'))
 	}
 }
 
-echo "<h3>2. Migrates user otions to users_settings table:</h3>";
+
 if ($this->IsAdmin())
 {
 	if (!isset($_POST["migrate_user_otions"]))
 	{
+		echo "<h3>2. Migrates user otions to users_settings table:</h3>";
 		echo $this->FormOpen();
 		?>
 		<input
@@ -126,11 +128,12 @@ if ($this->IsAdmin())
 	}
 }
 
-echo "<h3>2.1 Migrates user bookmarks to bookmarks table [! users_options -> bookmarks][temp for dev branch!]:</h3>";
+
 if ($this->IsAdmin())
 {
 	if (!isset($_POST["migrate_bookmarks"]))
 	{
+		echo "<h3>2.1 Migrates user bookmarks to bookmarks table [! users_options -> bookmarks][temp for dev branch!]:</h3>";
 		echo $this->FormOpen();
 		?>
 		<input

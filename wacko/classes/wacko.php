@@ -334,7 +334,7 @@ class Wacko
 			$ue = @array_flip($wackoLanguage["unicode_entities"]);
 			if (!isset($ue)) $ue = array();
 
-			$this->unicode_entities = array_merge($this->unicode_entities, $ue);
+			$this->unicode_entities = array_merge($this->unicode_entities, (array)$ue);
 			unset($this->unicode_entities[0]);
 		}
 	}
@@ -1089,7 +1089,7 @@ class Wacko
 		$subject = ( $subject ? "=?".( $charset ? $charset : $this->GetCharset() )."?B?" . base64_encode($subject) . "?=" : "" );
 
 		// in ssl mode substitute protocol name in links substrings
-		if ($this->config["ssl"] == true && $supress_ssl === false) $message = str_replace("http://", "https://", $message);
+		if ($this->config["ssl"] == true && $supress_ssl === false) $message = str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'] : ''), $message);
 
 		$message = wordwrap($message, 74, "\n", 0);
 		@mail($email, $subject, $message, $headers);
@@ -2408,7 +2408,7 @@ class Wacko
 
 		if (!$this->config["rewrite_mode"]) $result .= "<input type=\"hidden\" name=\"page\" value=\"".$this->MiniHref($method, $tag, $add)."\" />\n";
 
-		if ($this->config["ssl"] == true) $result = str_replace("http://", "https://", $result);
+		if ($this->config["ssl"] == true) $result = str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'] : ''), $result);
 
 		return $result;
 	}
@@ -3768,9 +3768,9 @@ class Wacko
 	function Run($tag, $method = "")
 	{
 		// mandatory ssl?
-		if ($this->config["ssl"] == true && $this->config["ssl_implicit"] == true && $_SERVER["HTTPS"] != "on")
+		if ($this->config["ssl"] == true && $this->config["ssl_implicit"] == true && ( ($_SERVER["HTTPS"] != "on" && empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] != '443' ))
 		{
-			$this->Redirect(str_replace('http://', 'https://', $this->href($method, $tag)));
+			$this->Redirect(str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'] : ''), $this->href($method, $tag)));
 		}
 
 		// url lang selection
@@ -3790,10 +3790,10 @@ class Wacko
 		$user = $this->LoadUser($auth["user_name"], 0, $auth["password"]);
 
 		// run in ssl mode?
-		if ($this->config["ssl"] == true && ($_SERVER["HTTPS"] == "on" || $user == true))
+		if ($this->config["ssl"] == true && (( ($_SERVER["HTTPS"] == "on" && !empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
 		{
 			$this->config["open_url"] = $this->config["base_url"];
-			$this->config["base_url"] = str_replace("http://", "https://", $this->config["base_url"]);
+			$this->config["base_url"] = str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'] : ''), $this->config["base_url"]);
 		}
 
 		// in strong cookie mode check session validity

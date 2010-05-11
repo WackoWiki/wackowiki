@@ -47,6 +47,7 @@ function admin_configsecurity(&$engine, &$module)
 		$config['moders_can_edit']				= (int)$_POST['moders_can_edit'];
 		$config['ssl']							= (int)$_POST['ssl'];
 		$config['ssl_implicit']					= (int)$_POST['ssl_implicit'];
+		$config['ssl_proxy']					= trim((string)$_POST['ssl_proxy']);
 		$config['pwd_min_chars']				= (int)$_POST['pwd_min_chars'];
 		$config['pwd_char_classes']				= (int)$_POST['pwd_char_classes'];
 		$config['pwd_unlike_login']				= (int)$_POST['pwd_unlike_login'];
@@ -238,6 +239,14 @@ function admin_configsecurity(&$engine, &$module)
 				<td class="label"><label for="ssl_implicit"><strong>Forced SSL:</strong><br />
 				<small>Force client reconnection from HTTP to HTTPS. When this option the customer can view the site for open HTTP-channel.</small></label></td>
 				<td><input type="checkbox" id="ssl_implicit" name="ssl_implicit" value="1"<?php echo ( $engine->config['ssl_implicit'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="ssl_proxy"><strong>SSL Proxy:</strong><br />
+				<small>Uses the provided SSL Proxy inplace of SSL. E.g. https://<span class="cite">your-https-proxy.tld/</span>.</small></label></td>
+				<td><input maxlength="100" style="width:200px;" id="ssl_proxy" name="ssl_proxy" value="<?php echo htmlspecialchars($engine->config['ssl_proxy']);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">

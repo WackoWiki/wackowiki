@@ -11,32 +11,40 @@ if (!function_exists('bookmark_sorting'))
 			: 1;
 	}
 }
+if (!function_exists('LoadUserBookmarks'))
+{
+	function LoadUserBookmarks(&$wacko, $user_id)
+	{
+		$_bookmarks = $wacko->LoadAll(
+							"SELECT p.tag, p.title, b.bookmark_id, b.user_id, b.bm_title, b.lang, b.bm_position ".
+							"FROM ".$wacko->config["table_prefix"]."bookmarks b ".
+								"LEFT JOIN ".$wacko->config["table_prefix"]."pages p ON (b.page_id = p.page_id) ".
+							"WHERE b.user_id = '".quote($wacko->dblink, $user_id)."' ".
+							"ORDER BY b.bm_position", 0);
+
+		return $_bookmarks;
+	}
+}
 
 $user = $this->GetUser();
-
-$_bookmarks = $this->LoadAll(
-					"SELECT p.tag, p.title, b.bookmark_id, b.user_id, b.bm_title, b.lang, b.bm_position ".
-					"FROM ".$this->config["table_prefix"]."bookmarks b ".
-						"LEFT JOIN ".$this->config["table_prefix"]."pages p ON (b.page_id = p.page_id) ".
-					"WHERE b.user_id = '".quote($this->dblink, $user["user_id"])."' ".
-					"ORDER BY b.bm_position", 0);
-
-$a = $_bookmarks;
-$b = array();
-
-foreach($a as $k=>$v)
-{
-	$b[$k]["user_id"]		= $v["user_id"];
-	$b[$k]["bookmark_id"]	= $v["bookmark_id"];
-	$b[$k]["bm_position"]	= $v["bm_position"];
-	$b[$k]["bm_title"]		= $v["bm_title"];
-	$b[$k]["tag"]			= $v["tag"];
-}
-$object->data["user_menu"] = &$b;
 
 /// Processing of our special form
 if (isset($_POST["_user_bookmarks"]))
 {
+	$_bookmarks = LoadUserBookmarks($this, $user["user_id"]);
+	$a = $_bookmarks;
+	$b = array();
+
+	foreach($a as $k=>$v)
+	{
+		$b[$k]["user_id"]		= $v["user_id"];
+		$b[$k]["bookmark_id"]	= $v["bookmark_id"];
+		$b[$k]["bm_position"]	= $v["bm_position"];
+		$b[$k]["bm_title"]		= $v["bm_title"];
+		$b[$k]["tag"]			= $v["tag"];
+	}
+	$object->data["user_menu"] = &$b;
+
 	if (isset($_POST["update_bookmarks"]))
 	{
 		// repos
@@ -75,45 +83,50 @@ if (isset($_POST["_user_bookmarks"]))
 			}
 		}
 	}
-
 }
-if ($user = $this->GetUser())
+if ($user)
 {
+	$_bookmarks = LoadUserBookmarks($this, $user["user_id"]);
+
 	if ($_bookmarks)
 	{
-		echo "<h3>".$this->GetTranslation("YourBookmarks")."</h3>";
+		echo "<h4>".$this->GetTranslation("YourBookmarks")."</h4>";
 
 		// user is logged in; display config form
 		echo $this->FormOpen();
 		echo "<input type=\"hidden\" name=\"_user_bookmarks\" value=\"yes\" />";
 
-
 		echo "<table>";
-		echo "<tr><th>No.</th><th>Title</th><th>X</th><th>Page</th><th>Display</th><th>Lang</th></tr>";
+		echo "<tr><th>No.</th><th>Bookmark Title</th><th>Page</th><th>X</th><!--<th>Display</th><th>Lang</th>--></tr>";
 
 		foreach($_bookmarks as $_bookmark)
 		{
-			echo "<tr>\n
+			echo "<tr class=\"lined\">\n
 			<td class=\"\">
 			<input name=\"pos_".$_bookmark["bookmark_id"]."\" type=\"text\" size=\"2\" value=\"".$_bookmark["bm_position"]."\" />
 			</td><td>
 			<input name=\"title_".$_bookmark["bookmark_id"]."\" type=\"text\" size=\"40\" value=\"".$_bookmark["bm_title"]."\" />
 			</td><td>
 			<!--<input type=\"radio\" id=\"bookmark".$_bookmark["bookmark_id"]."\" name=\"change\" value=\"".$_bookmark["bookmark_id"]."\" /> -->
+			<label for=\"bookmark".$_bookmark["bookmark_id"]."\">&raquo ".$_bookmark["tag"]."</label>
+			</td><td>
 			<input id=\"bookmark".$_bookmark["bookmark_id"]."\" name=\"delete_".$_bookmark["bookmark_id"]."\" type=\"checkbox\" />
-			</td><td>
-			<label for=\"bookmark".$_bookmark["bookmark_id"]."\">".$_bookmark["tag"]."</label>
-			</td><td>
+			</td><!--<td>
+
 			".(!empty($_bookmark["bm_title"]) ? $_bookmark["bm_title"] : $_bookmark["title"])."
 			</td><td>
-			".(!empty($_bookmark["lang"]) ? $_bookmark["lang"] : "")."
+			".(!empty($_bookmark["lang"]) ? $_bookmark["lang"] : "")."-->
 			</td>\n</tr>\n";
 		}
-
+		echo "<tfoot>";
+		echo "<tr>\n<td colspan=\"2\">\n";
+		echo "<input name=\"update_bookmarks\" type=\"submit\" value=\"Save Changes\" />";
+		echo "</td><td>";
+		echo "<input name=\"delete_bookmarks\" type=\"submit\" value=\"Delete Selected\" />";
+		echo "</td>\n</tr>\n";
+		echo "</tfoot>";
 		echo "</table>";
 
-		echo "<input name=\"update_bookmarks\" type=\"submit\" value=\"Save Changes\" />";
-		echo "<input name=\"delete_bookmarks\" type=\"submit\" value=\"Delete Selected\" />";
 		echo $this->FormClose();
 	}
 }
