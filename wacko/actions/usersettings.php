@@ -169,7 +169,7 @@ else if ($user = $this->GetUser())
 	if (isset($_GET['bookmarks']) || isset($_POST['_user_bookmarks']))
 	{
 		echo "<h3>".$this->GetTranslation("UserSettings")." &raquo ".$this->GetTranslation("Bookmarks")."</h3>";
-		echo "[<a href=\"".$this->href("", "", "")."\">".$this->GetTranslation("UserSettingsGeneral")."</a>] [".$this->GetTranslation("Bookmarks")."] [<a href=\"".$this->href("", "", "extended")."\">".$this->GetTranslation("UserSettingsExtended")."</a>]<br /><br />\n";
+		echo "<ul class=\"menu\"><li><a href=\"".$this->href("", "", "")."\">".$this->GetTranslation("UserSettingsGeneral")."</a></li><li class=\"active\">".$this->GetTranslation("Bookmarks")."</li><li><a href=\"".$this->href("", "", "extended")."\">".$this->GetTranslation("UserSettingsExtended")."</a></li></ul><br /><br />\n";
 		echo $this->Action('bookmarks');
 	}
 
@@ -177,8 +177,7 @@ else if ($user = $this->GetUser())
 	else if (isset($_GET['extended']) || (isset($_POST['action'])&& $_POST["action"] == "update_extended"))
 	{
 		echo "<h3>".$this->GetTranslation("UserSettings")." &raquo ".$this->GetTranslation("UserSettingsExtended")."</h3>";
-		# echo "<ul><li>[<a href=\"".$this->href("", "", "")."\">".$this->GetTranslation("UserSettingsGeneral")."</a>]</li><li>[<a href=\"".$this->href("", "", "bookmarks")."\">".$this->GetTranslation("Bookmarks")."</a>]</li><li>[".$this->GetTranslation("UserSettingsExtended")."]</li></ul><br /><br />\n";
-		echo "[<a href=\"".$this->href("", "", "")."\">".$this->GetTranslation("UserSettingsGeneral")."</a>] [<a href=\"".$this->href("", "", "bookmarks")."\">".$this->GetTranslation("Bookmarks")."</a>] [".$this->GetTranslation("UserSettingsExtended")."]<br /><br />\n";
+		echo "<ul class=\"menu\"><li><a href=\"".$this->href("", "", "")."\">".$this->GetTranslation("UserSettingsGeneral")."</a></li><li><a href=\"".$this->href("", "", "bookmarks")."\">".$this->GetTranslation("Bookmarks")."</a></li><li class=\"active\">".$this->GetTranslation("UserSettingsExtended")."</li></ul><br /><br />\n";
 		echo $this->FormOpen();
 		echo "<input type=\"hidden\" name=\"action\" value=\"update_extended\" />";
 		?>
@@ -307,7 +306,7 @@ else if ($user = $this->GetUser())
 			"WHERE user_name = '".quote($this->dblink, $user["user_name"])."'");
 
 		echo "<h3>".$this->GetTranslation("UserSettings")." &raquo ".$this->GetTranslation("UserSettingsGeneral")."</h3>";
-		echo "[".$this->GetTranslation("UserSettingsGeneral")."] [<a href=\"".$this->href("", "", "bookmarks")."\">".$this->GetTranslation("Bookmarks")."</a>] [<a href=\"".$this->href("", "", "extended")."\">".$this->GetTranslation("UserSettingsExtended")."</a>]<br /><br />\n";
+		echo "<ul class=\"menu\"><li class=\"active\">".$this->GetTranslation("UserSettingsGeneral")."</li><li><a href=\"".$this->href("", "", "bookmarks")."\">".$this->GetTranslation("Bookmarks")."</a></li><li><a href=\"".$this->href("", "", "extended")."\">".$this->GetTranslation("UserSettingsExtended")."</a></li></ul><br /><br />\n";
 ?>
 <input type="hidden" name="action" value="update" />
 <div class="page_settings">
@@ -325,7 +324,7 @@ else if ($user = $this->GetUser())
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><a href="<?php echo $this->href("", "Password")?>"><?php echo $this->GetTranslation("YouWantChangePassword");?></a></th>
-		<td><input type="button" onclick="location.href='password'" value="<?php echo $this->GetTranslation("YouWantChangePassword");?>" name="_password"/></td>
+		<td><input id="button" type="button" onclick="location.href='password'" value="<?php echo $this->GetTranslation("YouWantChangePassword");?>" name="_password"/></td>
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="email"><?php echo $this->GetTranslation("YourEmail");?></label></th>
