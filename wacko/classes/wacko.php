@@ -4290,6 +4290,18 @@ class Wacko
 		return true;
 	}
 
+	function RemoveBookmarks($tag, $cluster = false)
+	{
+		if (!$tag) return false;
+
+		return $this->Query(
+			"DELETE b.* ".
+			"FROM ".$this->config["table_prefix"]."bookmarks b ".
+				"LEFT JOIN ".$this->config["table_prefix"]."pages p ".
+					"ON (b.page_id = p.page_id) ".
+			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+	}
+
 	function RemoveWatches($tag, $cluster = false)
 	{
 		if (!$tag) return false;
