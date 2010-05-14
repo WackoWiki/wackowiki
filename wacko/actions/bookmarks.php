@@ -83,6 +83,9 @@ if (isset($_POST["_user_bookmarks"]))
 			}
 		}
 	}
+	// reload user data
+	$this->SetUser($this->LoadUser($user["user_name"]), 0, 1);
+	$this->SetBookmarks(BM_USER);
 }
 if ($user)
 {
@@ -90,7 +93,7 @@ if ($user)
 
 	if ($_bookmarks)
 	{
-		echo "<h4>".$this->GetTranslation("YourBookmarks")."</h4>";
+		// echo "<h4>".$this->GetTranslation("YourBookmarks")."</h4>";
 
 		// user is logged in; display config form
 		echo $this->FormOpen();

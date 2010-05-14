@@ -76,35 +76,45 @@ else if ($user = $this->GetUser())
 					"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
 					"LIMIT 1");
 
-				// update users_settings table
-				$this->Query(
-					"UPDATE ".$this->config["table_prefix"]."users_settings SET ".
-						"doubleclick_edit	= '".quote($this->dblink, $_POST["doubleclick_edit"])."', ".
-						"show_comments		= '".quote($this->dblink, $_POST["show_comments"])."', ".
-						"revisions_count	= '".quote($this->dblink, $_POST["revisions_count"])."', ".
-						"changes_count		= '".quote($this->dblink, $_POST["changes_count"])."', ".
-						"motto				= '".quote($this->dblink, $_POST["motto"])."', ".
-						"show_spaces		= '".quote($this->dblink, $_POST["show_spaces"])."', ".
-						"typografica		= '".quote($this->dblink, $_POST["typografica"])."', ".
-						"lang				= '".quote($this->dblink, $_POST["lang"])."', ".
-						"theme				= '".quote($this->dblink, $_POST["theme"])."', ".
-						"autocomplete		= '".quote($this->dblink, $_POST["autocomplete"])."', ".
-						"dont_redirect		= '".quote($this->dblink, $_POST["dont_redirect"])."', ".
-						"send_watchmail		= '".quote($this->dblink, $_POST["send_watchmail"])."', ".
-						"show_files			= '".quote($this->dblink, $_POST["show_files"])."', ".
-						"allow_intercom		= '".quote($this->dblink, $_POST["allow_intercom"])."', ".
-						"hide_lastsession	= '".quote($this->dblink, $_POST["hide_lastsession"])."', ".
-						"validate_ip		= '".quote($this->dblink, $_POST["validate_ip"])."', ".
-						"noid_pubs			= '".quote($this->dblink, $_POST["noid_pubs"])."' ".
-					"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
-					"LIMIT 1");
-
 				$this->SetMessage($this->GetTranslation("UserSettingsStored"));
 
 				// log event
 				$this->Log(6, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserSettingsUpdate")));
 			}
 		}
+	}
+
+	if (isset($_POST["action"]) && ($_POST["action"] == "update_extended" || $_POST["action"] == "update"))
+	{
+		// update users_settings table
+		$this->Query(
+			"UPDATE ".$this->config["table_prefix"]."users_settings SET ".
+			($_POST["action"] == "update_extended"
+				?	"doubleclick_edit	= '".quote($this->dblink, $_POST["doubleclick_edit"])."', ".
+					"show_comments		= '".quote($this->dblink, $_POST["show_comments"])."', ".
+					"show_spaces		= '".quote($this->dblink, $_POST["show_spaces"])."', ".
+					#"typografica		= '".quote($this->dblink, $_POST["typografica"])."', ".
+					"autocomplete		= '".quote($this->dblink, $_POST["autocomplete"])."', ".
+					"dont_redirect		= '".quote($this->dblink, $_POST["dont_redirect"])."', ".
+					"send_watchmail		= '".quote($this->dblink, $_POST["send_watchmail"])."', ".
+					"show_files			= '".quote($this->dblink, $_POST["show_files"])."', ".
+					"allow_intercom		= '".quote($this->dblink, $_POST["allow_intercom"])."', ".
+					"hide_lastsession	= '".quote($this->dblink, $_POST["hide_lastsession"])."', ".
+					"validate_ip		= '".quote($this->dblink, $_POST["validate_ip"])."', ".
+					"noid_pubs			= '".quote($this->dblink, $_POST["noid_pubs"])."' "
+				:	"motto				= '".quote($this->dblink, $_POST["motto"])."', ".
+					"lang				= '".quote($this->dblink, $_POST["lang"])."', ".
+					"theme				= '".quote($this->dblink, $_POST["theme"])."', ".
+					"revisions_count	= '".quote($this->dblink, $_POST["revisions_count"])."', ".
+					"changes_count		= '".quote($this->dblink, $_POST["changes_count"])."' "
+				).
+			"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
+			"LIMIT 1");
+
+		$this->SetMessage($this->GetTranslation("UserSettingsStored"));
+
+		// log event
+		$this->Log(6, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserSettingsUpdate")));
 	}
 
 	$email_changed = "";
@@ -141,7 +151,7 @@ else if ($user = $this->GetUser())
 	}
 
 	// reload user data
-	if ( (isset($_REQUEST["action"]) && $_REQUEST["action"] == "update") || (isset($_GET["resend_code"]) && $_GET["resend_code"] == 1))
+	if ( (isset($_POST["action"]) && ($_POST["action"] == "update" || $_POST["action"] == "update_extended")) || (isset($_GET["resend_code"]) && $_GET["resend_code"] == 1))
 	{
 		$this->SetUser($this->LoadUser($user["user_name"]), 0, 1);
 		$this->SetBookmarks(BM_USER);
@@ -149,7 +159,7 @@ else if ($user = $this->GetUser())
 		// forward
 		$this->SetMessage($this->GetTranslation("UserSettingsStored",$_POST["lang"]));
 
-		$this->Redirect($this->href());
+		$this->Redirect(($_POST["action"] == "update_extended" ? $this->Href("", "", "extended") : $this->Href()));
 		$user = $this->GetUser();
 	}
 
@@ -164,12 +174,13 @@ else if ($user = $this->GetUser())
 	}
 
 	// EXTENDED
-	else if (isset($_GET['extended']) || isset($_POST['update_extended']))
+	else if (isset($_GET['extended']) || (isset($_POST['action'])&& $_POST["action"] == "update_extended"))
 	{
 		echo "<h3>".$this->GetTranslation("UserSettings")." &raquo ".$this->GetTranslation("UserSettingsExtended")."</h3>";
-		echo "<ul><li>[<a href=\"".$this->href("", "", "")."\">".$this->GetTranslation("UserSettingsGeneral")."</a>]</li><li>[<a href=\"".$this->href("", "", "bookmarks")."\">".$this->GetTranslation("Bookmarks")."</a>]</li><li>[".$this->GetTranslation("UserSettingsExtended")."]</li></ul><br /><br />\n";
+		# echo "<ul><li>[<a href=\"".$this->href("", "", "")."\">".$this->GetTranslation("UserSettingsGeneral")."</a>]</li><li>[<a href=\"".$this->href("", "", "bookmarks")."\">".$this->GetTranslation("Bookmarks")."</a>]</li><li>[".$this->GetTranslation("UserSettingsExtended")."]</li></ul><br /><br />\n";
+		echo "[<a href=\"".$this->href("", "", "")."\">".$this->GetTranslation("UserSettingsGeneral")."</a>] [<a href=\"".$this->href("", "", "bookmarks")."\">".$this->GetTranslation("Bookmarks")."</a>] [".$this->GetTranslation("UserSettingsExtended")."]<br /><br />\n";
 		echo $this->FormOpen();
-		echo "<input type=\"hidden\" name=\"update_extended\" value=\"yes\" />";
+		echo "<input type=\"hidden\" name=\"action\" value=\"update_extended\" />";
 		?>
 		<div class="page_settings">
 		<table class="form_tbl">

@@ -432,7 +432,7 @@ class Wacko
 		$langlist = $this->AvailableLanguages();
 		//!!!! wrong code, maybe!
 		if ((isset($this->method) && $this->method == "edit") && (isset($_GET["add"]) && $_GET["add"] == 1))
-			if (isset($_REQUEST["lang"]) && $_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
+			if (isset($_REQUEST["lang"]) && in_array($_REQUEST["lang"], $langlist))
 				$lang = $_REQUEST["lang"];
 			else
 				$lang = $this->userlang;
@@ -895,9 +895,9 @@ class Wacko
 
 		if ($page["lang"])
 			$this->pagelang = $page["lang"];
-		else if ($_REQUEST["add"] && isset($_REQUEST["lang"]) && in_array($_REQUEST["lang"], $langlist))
+		else if (isset($_REQUEST["add"]) && isset($_REQUEST["lang"]) && in_array($_REQUEST["lang"], $langlist))
 			$this->pagelang = $_REQUEST["lang"];
-		else if ($_REQUEST["add"])
+		else if (isset($_REQUEST["add"]))
 			$this->pagelang = $this->userlang;
 		else
 			$this->pagelang = $this->config["language"];
@@ -1551,32 +1551,6 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	// update metadata of a given page
-	function SaveMeta($page_id, $metadata)
-	{
-		if ($this->UserIsOwner($page_id) || $this->IsAdmin())
-		{
-			$this->Query(
-				"UPDATE ".$this->config["table_prefix"]."pages SET ".
-					"lang				= '".quote($this->dblink, $metadata["lang"])."', ".
-					"title				= '".quote($this->dblink, htmlspecialchars($metadata["title"]))."', ".
-					"keywords			= '".quote($this->dblink, $metadata["keywords"])."', ".
-					"description		= '".quote($this->dblink, $metadata["description"])."', ".
-					"hide_comments		= '".quote($this->dblink, $metadata['hide_comments'])."', ".
-					"hide_files			= '".quote($this->dblink, $metadata['hide_files'])."', ".
-					"hide_rating		= '".quote($this->dblink, $metadata['hide_rating'])."', ".
-					"hide_toc			= '".quote($this->dblink, $metadata['hide_toc'])."', ".
-					"hide_index			= '".quote($this->dblink, $metadata['hide_index'])."', ".
-					"lower_index		= '".quote($this->dblink, ( $metadata['index_mode'] == 'l' ? 1 : 0 ))."', ".
-					"upper_index		= '".quote($this->dblink, ( $metadata['index_mode'] == 'u' ? 1 : 0 ))."', ".
-					"allow_rawhtml		= '".quote($this->dblink, $metadata['allow_rawhtml'])."', ".
-					"disable_safehtml	= '".quote($this->dblink, $metadata['disable_safehtml'])."' ".
-				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
-				"LIMIT 1");
-		}
-		return true;
-	}
-
 	// COOKIES
 	function SetSessionCookie($name, $value, $dummy = NULL, $secure = 0, $httponly = 0)
 	{
@@ -2163,7 +2137,7 @@ class Wacko
 
 			if ($res)
 			{
-				if ($this->method == 'print')
+				if (isset($this->method) && $this->method == 'print')
 					$icon	= '';
 
 				//todo: pagepath
@@ -4666,7 +4640,7 @@ class Wacko
 
 		$html = $this->config['allow_rawhtml'];
 		$this->config['allow_rawhtml'] = 0;
-		$message = ( $this->language ? $this->Format($message, 'wacko') : $message );
+		$message = ( isset($this->language) ? $this->Format($message, 'wacko') : $message );
 		$user_id = $this->GetUserId();
 		$this->config['allow_rawhtml'] = $html;
 
