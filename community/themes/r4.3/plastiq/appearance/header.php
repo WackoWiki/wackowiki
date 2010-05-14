@@ -148,7 +148,7 @@
 
 			if ($this->page['created'] != SQL_NULLDATE) echo '(created '.$this->GetTimeStringFormatted($this->page['created']).'), ';
 
-			echo 'modified '.$this->GetTimeStringFormatted($this->page['modified']).' ('.$this->GetTranslation('By').': '.( $this->page['user_id'] == GUEST ? '<em>'.$this->GetTranslation('Guest').'</em>' : ( $this->GetUserNameById($this->page['user_id']) == $this->GetUserName() ? 'You' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->GetUserNameById($this->page['user_id'])).'">'.$this->GetUserNameById($this->page['user_id']).'</a>' ) ).')';
+			echo 'modified '.$this->GetTimeStringFormatted($this->page['modified']).' ('.$this->GetTranslation('By').': '.( $this->page['user_id'] == GUEST ? '<em>'.$this->GetTranslation('Guest').'</em>' : ( $this->page['user_name'] == $this->GetUserName() ? 'You' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>' ) ).')';
 		}
 	}
 	echo "\n";

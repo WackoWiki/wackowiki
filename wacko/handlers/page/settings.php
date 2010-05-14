@@ -78,7 +78,7 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $page[
 	// EXTENDED
 	if (isset($_GET['extended']) || isset($_POST['extended']))
 	{
-		echo "[<a href=\"".$this->href("settings", "", "")."\">".$this->GetTranslation("UserSettingsGeneral")."</a>] [".$this->GetTranslation("UserSettingsExtended")."]<br /><br />\n";
+		echo "<ul class=\"menu\"><li><a href=\"".$this->href("settings", "", "")."\">".$this->GetTranslation("UserSettingsGeneral")."</a></li><li class=\"menu\">".$this->GetTranslation("UserSettingsExtended")."</li></ul><br /><br />\n";
 
 		echo "<div class=\"page_settings\">";
 
@@ -175,7 +175,7 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $page[
 	// GENERAL
 	else
 	{
-		echo "[".$this->GetTranslation("UserSettingsGeneral")."]  [<a href=\"".$this->href("settings", "", "extended")."\">".$this->GetTranslation("UserSettingsExtended")."</a>]<br /><br />\n";
+		echo "<ul class=\"menu\"><li class=\"menu\">".$this->GetTranslation("UserSettingsGeneral")."</li><li><a href=\"".$this->href("settings", "", "extended")."\">".$this->GetTranslation("UserSettingsExtended")."</a></li></ul><br /><br />\n";
 
 		echo "<div class=\"page_settings\">";
 

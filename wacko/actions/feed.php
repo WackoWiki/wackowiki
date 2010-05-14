@@ -1,5 +1,4 @@
 <?php
-# error_reporting(E_ALL);
 
 // actions/feed.php - WackoWiki Action to integrate RSS/Atom Feeds
 // requires SimplePie: http://simplepie.org
@@ -24,8 +23,13 @@
 //   * local image cache
 //   * feed_acl
 
+if (!isset($nomark)) $nomark = "";
+if (!isset($title)) $title = "";
+if (!isset($max)) $max = "";
+if (!isset($time)) $time = "";
+
 // Include SimplePie
-require_once("lib/SimplePie/simplepie.inc");
+include_once("lib/SimplePie/simplepie.class.php");
 # include_once('lib/SimplePie/idn/idna_convert.class.php');
 
 if (!function_exists('intervalCalc'))
@@ -80,8 +84,8 @@ else
 	if (count($urlset)==1) $urlset = $urlset[0];
 	// Initialize SimplePie (ONLY ONCE PER ACTION!!!! DO NOT WRITE IT AGAIN PLEASE;))
 	// Thus all configs will be same for all RSS-feeds
-	$feed = new SimplePie($urlset);
-
+	$feed = new SimplePie();
+	$feed->set_feed_url($urlset);
 	// Set where the cache files should be stored.
 	$feed->set_cache_location('./'.$this->config["cache_dir"].'feeds');
 
@@ -132,7 +136,7 @@ if (!$nomark)
 			}
 			elseif (!$title && $counturlset == 1)
 			{
-				echo "<h3 class=\"feed_element_title\" style=\"background-image:url(".$feed->get_favicon().");\">".$this->Link($feed->get_permalink(), "", $feed->get_title(), 1, 1)."</h3>";
+				echo "<h3 class=\"feed_element_title\">".$this->Link($feed->get_permalink(), "", $feed->get_title(), 1, 1)."</h3>";
 			}
 			elseif (!$title && $counturlset > 1)
 			{
