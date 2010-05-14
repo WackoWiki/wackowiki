@@ -246,13 +246,13 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 		#$title	= $_POST['title'];
 	}
 
-	if ($_SESSION['body'] != '')
+	if (isset($_SESSION['body']) && $_SESSION['body'] != '')
 	{
 		$body = $_SESSION['body'];
 		$_SESSION['body'] = '';
 	}
 
-	if ($_SESSION['title'] != '')
+	if (isset($_SESSION['title']) && $_SESSION['title'] != '')
 	{
 		$title = $_SESSION['title'];
 		$_SESSION['title'] = '';

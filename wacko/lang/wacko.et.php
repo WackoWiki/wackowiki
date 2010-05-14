@@ -215,6 +215,7 @@ $wackoTranslation = array(
 	"KeywordsRemoved" => "<em>Keywords pages deleted.</em>",
 	"RatingRemoved" => "<em>Rating removed.</em>",
 	"AclsRemoved" => "<i>Lehe KÕL'id %1 eemaldatud.</i>",
+	"BookmarksRemoved" => "<i>Bookmarks from page %1 eemaldatud.</i>",
 	"WatchesRemoved" => "<i>Watches from page %1 eemaldatud.</i>",
 	"CommentsRemoved" => "<i>Comments from page %1 eemaldatud.</i>",
 	"FilesRemoved" => "<i>Files from page %1 removed.</i>",
