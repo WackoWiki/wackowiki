@@ -50,6 +50,10 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			}
 			if (!$comment_on_id)
 			{
+				if ($this->RemoveBookmarks($this->tag))
+				{
+					print(str_replace("%1", $this->tag, $this->GetTranslation("BookmarksRemoved"))."<br />\n");
+				}
 				if ($this->RemoveWatches($this->tag))
 				{
 					print(str_replace("%1", $this->tag, $this->GetTranslation("WatchesRemoved"))."<br />\n");
@@ -90,6 +94,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 				$this->RemoveLinks		($this->tag, true);
 				$this->RemoveKeywords	($this->tag, true);
 				$this->RemoveAcls		($this->tag, true);
+				$this->RemoveBookmarks	($this->tag, true);
 				$this->RemoveWatches	($this->tag, true);
 				$this->RemoveRatings	($this->tag, true);
 				$this->RemoveComments	($this->tag, true, $dontkeep);
