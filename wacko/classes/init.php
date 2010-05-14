@@ -711,7 +711,7 @@ class Init
 				$overall_time = $this->GetMicroTime() - $this->timer;
 
 				echo "<div id=\"debug\">".
-					 "<p class=\"debug\"><span>Program execution statistics</span></p>\n<ul>\n";
+					 "<p class=\"debug\">Program execution statistics</p>\n<ul>\n";
 
 				if (function_exists("memory_get_usage")) if ($execmem = memory_get_usage())
 					echo "<li>Memory allocated: ".(number_format(($execmem / (1024*1024)), 3))." MB </li>\n";
@@ -746,7 +746,7 @@ class Init
 				if ($this->config["debug"] >= 2)
 				{
 					$user = $this->engine->GetUser();
-					echo "<p class=\"debug\"><span>Language data</span></p>\n<ul>\n";
+					echo "<p class=\"debug\">Language data</p>\n<ul>\n";
 					echo "<li>Multilanguage: ".($this->config["multilanguage"] == 1 ? 'true' : 'false')."</li>\n";
 					echo "<li>HTTP_ACCEPT_LANGUAGE set: ".(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false')."</li>\n";
 					echo "<li>HTTP_ACCEPT_LANGUAGE value: ".$_SERVER['HTTP_ACCEPT_LANGUAGE']."</li>\n";
