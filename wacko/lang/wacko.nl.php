@@ -82,7 +82,7 @@ $wackoTranslation = array(
 	"EditACLConfirm" => "Wilt u afsluiten zonder te bewaren?",
 	"EditACLText" => "Bewerk ACL's (rechten)",
 	"EditSettingsConfirm" => "Wilt u afsluiten zonder te bewaren?",
-	"EditSettingsText" => "Instellingen",
+	"EditSettingsText" => "Eigenschappen",
 	"EditTip" => "Klik om de pagina te bewerken." ,
 	"EditText" => "Bewerk deze pagina" ,
 	"EditCommentTip" => "Click to edit this comment." ,
@@ -437,8 +437,8 @@ $wackoTranslation = array(
 	"RatingBottomPages"		=> "Worst readers rated pages",
 	"RatingNoPagesRated"	=> "are none",
 
-	//Settings
-	"SettingsFor" => "Instellingen voor %1",
+	// Properties
+	"PropertiesFor" => "Instellingen voor %1",
 	"MetaInfo" => "Meta-keywords/-beschrijving die in de HTML-headers terechtkomen.",
 	"MetaTitle" => "Title",
 	"MetaKeywords" => "Meta-keywords",

@@ -82,7 +82,7 @@ $wackoTranslation = array(
 	"EditACLConfirm" => "Vil du ikke gemme ændringerne?",
 	"EditACLText" => "Rediger tilladelser",
 	"EditSettingsConfirm" => "Vil du ikke gemme ændringerne?",
-	"EditSettingsText" => "Indstillinger",
+	"EditSettingsText" => "Egenskaber",
 	"EditTip" => "Klik her for at redigere siden." ,
 	"EditText" => "Rediger siden" ,
 	"EditCommentTip" => "Click to edit this comment." ,
@@ -436,8 +436,8 @@ $wackoTranslation = array(
 	"RatingBottomPages"		=> "Worst readers rated pages",
 	"RatingNoPagesRated"	=> "are none",
 
-	//Settings
-	"SettingsFor" => "Indstillinger for %1",
+	// Properties
+	"PropertiesFor" => "Indstillinger for %1",
 	"MetaInfo" => "META Keywords/Description metadata.",
 	"MetaTitle" => "Title",
 	"MetaKeywords" => "Keywords",

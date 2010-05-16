@@ -69,7 +69,7 @@ if ($this->page)
 	if($this->HasAccess("write") && $this->GetUser() || $this->IsAdmin())
 	{
 		// Page  settings link
-		print("<li><a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditSettingsConfirm")."');\"":"").">".$this->GetTranslation("EditSettingsText")."</a></li>\n");
+		print("<li><a href=\"".$this->href("properties"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditSettingsConfirm")."');\"":"").">".$this->GetTranslation("EditSettingsText")."</a></li>\n");
 
 		// referrers icon
 		print("<li><a href=\"".$this->href("referrers")."\"><img src=\"".$this->config["theme_url"]."icons/referer.gif\" title=\"".$this->GetTranslation("ReferrersTip")."\" alt=\"".$this->GetTranslation("ReferrersText")."\" /></a></li>\n");

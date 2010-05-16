@@ -82,7 +82,7 @@ $wackoTranslation = array(
 	"EditACLConfirm" => "Vuoi davvero uscire senza salvare?",
 	"EditACLText" => "Modifica i permessi (ACL)",
 	"EditSettingsConfirm" => "Vuoi davvero uscire senza salvare?",
-	"EditSettingsText" => "Impostazioni",
+	"EditSettingsText" => "Proprietà",
 	"EditTip" => "Clicca per editare la pagina." ,
 	"EditText" => "Edita questa pagina" ,
 	"EditCommentTip" => "Click to edit this comment." ,
@@ -436,8 +436,8 @@ $wackoTranslation = array(
 	"RatingBottomPages"		=> "Worst readers rated pages",
 	"RatingNoPagesRated"	=> "are none",
 
-	//Settings
-	"SettingsFor" => "Impostazioni per %1",
+	// Properties
+	"PropertiesFor" => "Impostazioni per %1",
 	"MetaInfo" => "META Keywords/Description that get inserted into the HTML headers.",
 	"MetaTitle" => "Title",
 	"MetaKeywords" => "Keywords",

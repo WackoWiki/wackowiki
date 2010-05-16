@@ -1,6 +1,6 @@
 <div id="page">
 
-<h3><?php echo str_replace("%1",$this->Link("/".$this->tag),$this->GetTranslation("SettingsFor")); ?></h3>
+<h3><?php echo str_replace("%1",$this->Link("/".$this->tag),$this->GetTranslation("PropertiesFor")); ?></h3>
 
 <?php
 
@@ -54,7 +54,7 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $page[
 
 		// reload page
 		$this->SetMessage($this->GetTranslation("MetaUpdated")."!");
-		$this->Redirect((isset($_POST['extended']) ? $this->Href("settings", "", "extended") : $this->Href("settings")));
+		$this->Redirect((isset($_POST['extended']) ? $this->Href("properties", "", "extended") : $this->href("properties")));
 	}
 
 	// load settings
@@ -78,11 +78,11 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $page[
 	// EXTENDED
 	if (isset($_GET['extended']) || isset($_POST['extended']))
 	{
-		echo "<ul class=\"menu\"><li><a href=\"".$this->href("settings", "", "")."\">".$this->GetTranslation("UserSettingsGeneral")."</a></li><li class=\"menu\">".$this->GetTranslation("UserSettingsExtended")."</li></ul><br /><br />\n";
+		echo "<ul class=\"menu\"><li><a href=\"".$this->href("properties", "", "")."\">".$this->GetTranslation("UserSettingsGeneral")."</a></li><li class=\"menu\">".$this->GetTranslation("UserSettingsExtended")."</li></ul><br /><br />\n";
 
 		echo "<div class=\"page_settings\">";
 
-		echo $this->FormOpen("settings"); // , "", "", "", "", "extended"
+		echo $this->FormOpen("properties"); // , "", "", "", "", "extended"
 		echo "<input type=\"hidden\" name=\"extended\" value=\"yes\" />";
 		echo "\n<table class=\"form_tbl\">\n";
 
@@ -175,11 +175,11 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $page[
 	// GENERAL
 	else
 	{
-		echo "<ul class=\"menu\"><li class=\"menu\">".$this->GetTranslation("UserSettingsGeneral")."</li><li><a href=\"".$this->href("settings", "", "extended")."\">".$this->GetTranslation("UserSettingsExtended")."</a></li></ul><br /><br />\n";
+		echo "<ul class=\"menu\"><li class=\"menu\">".$this->GetTranslation("UserSettingsGeneral")."</li><li><a href=\"".$this->href("properties", "", "extended")."\">".$this->GetTranslation("UserSettingsExtended")."</a></li></ul><br /><br />\n";
 
 		echo "<div class=\"page_settings\">";
 
-		echo $this->FormOpen("settings");
+		echo $this->FormOpen("properties");
 
 		echo "<table class=\"form_tbl\">";
 
@@ -231,10 +231,10 @@ if ($langs = $this->AvailableLanguages())
 	onclick="history.back();" style="width: 120px" /></td>
 
 <?php
-
 		}
 		else
 		{
+
 			echo "<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation("MetaTitle")."</th>";
 			echo "<td class=\"form_right\">".$this->page["title"]."</td>";
@@ -247,6 +247,7 @@ if ($langs = $this->AvailableLanguages())
 			echo "</tr>\n<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation("SetLang")."</th>";
 			echo "<td class=\"form_right\">".$this->page["lang"]."</td>";
+
 		}
 		echo "</tr>\n</table>";
 		echo $this->FormClose();
@@ -333,6 +334,7 @@ if ($langs = $this->AvailableLanguages())
 </div>
 	<?php
 }
+
 else
 {
 	print($this->GetTranslation("ReadAccessDenied"));

@@ -436,8 +436,8 @@ $wackoTranslation = array(
 	"RatingBottomPages"		=> "Worst readers rated pages",
 	"RatingNoPagesRated"	=> "are none",
 
-	//Settings
-	"SettingsFor" => "Ustawienia dla %1",
+	// Properties
+	"PropertiesFor" => "Ustawienia dla %1",
 	"MetaInfo" => "S³owa kluczowe/Opis META które zostan± dodane do nag³ówków HTML.",
 	"MetaTitle" => "Title",
 	"MetaKeywords" => "S³owa kluczowe Meta",

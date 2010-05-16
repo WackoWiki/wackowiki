@@ -930,3 +930,56 @@ div.newsarticle:hover {
 .pagination {
 	float: right;
 }
+
+
+table.formation {
+	background-color: #EDEDED;
+	border: 1px solid #CDCDCD;
+}
+table.formation th, tr.formation th {
+	background-color: #DDDDDD;
+	letter-spacing: normal;
+	border: 1px solid #CDCDCD;
+}
+
+.nb td, .fyi td, .inf td {
+	padding: 5px;
+	height: 50px;
+}
+.nb .text, .fyi .text, .inf .text {
+	padding-left: 20px;
+	border-top: none;
+	border-bottom: none;
+}
+.nb .sign, .fyi .sign, .inf .sign {
+	font-weight: 700;
+	font-size: 50px;
+	text-align: center;
+	width: 20px;
+	border: none;
+	border-right: 1px solid;
+}
+.nb .sign {
+	color: #CC0000;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.nb .sign, .nb .text {
+	border-color: #CC0000;
+}
+.fyi .sign {
+	color: #00AACC;
+	font-family: "Times New Roman", Times, serif;
+}
+.fyi .sign, .fyi .text {
+	border-color: #00AACC;
+}
+.inf .sign {
+	color: #BABFC7;
+	font-family: "Times New Roman", Times, serif;
+}
+.inf .text {
+	color: #6A7387;
+}
+.inf .sign, .inf .text {
+	border-color: #BABFC7;
+}

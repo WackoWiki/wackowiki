@@ -14,6 +14,7 @@
 <?php
 
 $selected = "";
+$group = "";
 
 // redirect to show method if page don't exists
 if (!$this->page) $this->Redirect($this->href("show"));
@@ -35,7 +36,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 
 		$this->Log(4, "Updated page keywords [[/{$this->tag} {$this->page['title']}]]");
 		$this->SetMessage($this->GetTranslation('KeywordsUpdated'));
-		$this->Redirect($this->href('settings'));
+		$this->Redirect($this->href('properties'));
 	}
 	else if ($this->IsAdmin() || $this->config['owners_can_change_keywords'] == true)
 	{
@@ -49,7 +50,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		}
 
 		// add item
-		if (isset($_POST['create']) && $_POST['newname'])
+		if (isset($_POST['create']) && isset($_POST['newname']))
 		{
 			// do we have identical names?
 			if ($this->LoadSingle(
@@ -191,7 +192,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		// add new item
 		if (isset($_POST['create']))
 		{
-			if ($_POST['change'] || $_POST['id'])
+			if (isset($_POST['change']) || isset($_POST['id']))
 			{
 				$word = $this->LoadSingle(
 					"SELECT keyword_id, parent, keyword ".
@@ -205,7 +206,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			echo '<table class="formation">';
 			echo '<tr><td><label for="">'.
 				$this->GetTranslation('KeywordsAdd').'</label> '.
-				'<input name="newname" value="'.( $_POST['newname'] ? htmlspecialchars($_POST['newname']) : '' ).'" size="20" maxlength="100" /><br /> ';
+				'<input name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : '' ).'" size="20" maxlength="100" /><br /> ';
 			if ($group)
 			{
 				echo '<small><input type="radio" id="group1" name="group" value="1" checked="checked" /> <label for="group1">'.$this->GetTranslation('KeywordsAddGrouped').' \'<tt>'.$word['keyword'].'</tt>\'.</label></small><br />';

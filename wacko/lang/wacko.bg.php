@@ -435,8 +435,8 @@ $wackoTranslation = array(
 	"RatingBottomPages"		=> "Worst readers rated pages",
 	"RatingNoPagesRated"	=> "are none",
 
-	//Settings
-	"SettingsFor" => "Настройки на %1",
+	// Properties
+	"PropertiesFor" => "Настройки на %1",
 	"MetaInfo" => "Ключови думи/Описание  (за HTML МЕТА таговете).",
 	"MetaTitle" => "Title",
 	"MetaKeywords" => "Ключови думи",

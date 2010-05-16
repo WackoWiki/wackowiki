@@ -61,9 +61,9 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 	{
 		if($this->HasAccess("write") && $this->GetUser() || $this->IsAdmin())
 		{
-			EchoTab( $this->href("settings"),  $this->GetTranslation("SettingsTip"),
+			EchoTab( $this->href("properties"),  $this->GetTranslation("SettingsTip"),
 			$this->GetTranslation("EditSettingsText"),
-			$this->method != "settings"
+			$this->method != "properties"
 			);
 		}
 

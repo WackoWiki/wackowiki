@@ -80,11 +80,11 @@ $wackoTranslation = array(
 	"DeleteCommentTip" => "Click here to delete comment.",
 	"DeleteText" => "Delete",
 	"EditACLConfirm" => "Do you really want to leave without saving?",
-	"EditACLText" => "Edit ACLs",
+	"EditACLText" => "Permissions",
 	"EditSettingsConfirm" => "Do you really want to leave without saving?",
-	"EditSettingsText" => "Settings",
-	"EditTip" => "Click to edit this page." ,
-	"EditText" => "Edit this page" ,
+	"EditSettingsText" => "Properties",
+	"EditTip" => "Edit this page." ,
+	"EditText" => "Edit" ,
 	"EditCommentTip" => "Click to edit this comment." ,
 	"EditComment" => "Edit this comment" ,
 	"RevisionTip" => "Click to view recent page revisions",
@@ -526,8 +526,8 @@ $wackoTranslation = array(
 	"RatingBottomPages"		=> "Worst readers rated pages",
 	"RatingNoPagesRated"	=> "are none",
 
-	//Settings
-	"SettingsFor" => "Page settings for %1",
+	// Properties
+	"PropertiesFor" => "Page properties for %1",
 	"MetaInfo" => "META Keywords/Description that get inserted into the HTML headers.",
 	"MetaTitle" => "Title",
 	"MetaKeywords" => "Keywords",
