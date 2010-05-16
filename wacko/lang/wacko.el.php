@@ -436,8 +436,8 @@ $wackoTranslation = array(
 	"RatingBottomPages"		=> "Worst readers rated pages",
 	"RatingNoPagesRated"	=> "are none",
 
-	//Settings
-	"SettingsFor" => "Ρυθμίσεις για %1",
+	// Properties
+	"PropertiesFor" => "Ρυθμίσεις για %1",
 	"MetaInfo" => "META Keywords/Description that get inserted into the HTML headers.",
 	"MetaTitle" => "Title",
 	"MetaKeywords" => "Λέξεις Κλειδιά",

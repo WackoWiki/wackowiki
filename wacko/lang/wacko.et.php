@@ -82,7 +82,7 @@ $wackoTranslation = array(
 	"EditACLConfirm" => "Kas tõesti ei soovi muudatusi salvestada?",
 	"EditACLText" => "Muuda KÕL'id",
 	"EditSettingsConfirm" => "Kas tõesti ei soovi muudatusi salvestada?",
-	"EditSettingsText" => "Seadistused",
+	"EditSettingsText" => "Omadused",
 	"EditTip" => "Lehe muutmiseks vajuta siia." ,
 	"EditText" => "Muuda lehte" ,
 	"EditCommentTip" => "Click to edit this comment." ,
@@ -436,8 +436,8 @@ $wackoTranslation = array(
 	"RatingBottomPages"		=> "Worst readers rated pages",
 	"RatingNoPagesRated"	=> "are none",
 
-	//Settings
-	"SettingsFor" => " %1 seadistused.",
+	// Properties
+	"PropertiesFor" => " %1 seadistused.",
 	"MetaInfo" => "META võtmesõnad/kirjeldus, mis lisatakse HTML-i päisesse.",
 	"MetaTitle" => "Title",
 	"MetaKeywords" => "META võtmesõnad",

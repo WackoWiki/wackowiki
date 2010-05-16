@@ -2,6 +2,7 @@
 
 if (!isset($isimage)) $isimage = "";
 if (!isset($isplain)) $isplain = "";
+if (!isset($desc))$desc  = "";
 $error = "";
 $file404 = "images/upload404.gif";
 $file403 = "images/upload403.gif";
@@ -25,7 +26,7 @@ $what = $this->LoadAll(
 if (sizeof($what) > 0)
 {
 	// 2. check rights
-	if ($this->IsAdmin() || ($desc["upload_id"] && ($this->GetPageOwnerId($page_id) == $this->GetUserId())) ||
+	if ($this->IsAdmin() || (isset($desc["upload_id"]) && ($this->page["owner_id"] == $this->GetUserId())) ||
 	($this->HasAccess("read")) || ($desc["user_id"] == $this->GetUserId()) )
 	{
 		$filepath = $this->config["upload_path".($page_id ? "_per_page" : "")]."/".

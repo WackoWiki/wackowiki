@@ -80,7 +80,7 @@ $wackoTranslation = array(
 	"EditACLConfirm" => "Änderungen wirklich nicht speichern?",
 	"EditACLText" => "Berechtigungen",
 	"EditSettingsConfirm" => "Änderungen wirklich nicht speichern?",
-	"EditSettingsText" => "Einstellungen",
+	"EditSettingsText" => "Eigenschaften",
 	"EditTip" => "Klicke hier um die Seite zu editieren." ,
 	"EditText" => "Editieren" ,
 	"EditCommentTip" => "Klicke hier um den Kommentar zu editieren." ,
@@ -485,8 +485,8 @@ $wackoTranslation = array(
 	"RatingBottomPages"		=> "Am schlechtesten bewertete Seiten",
 	"RatingNoPagesRated"	=> "keine vorhanden",
 
-	//Settings
-	"SettingsFor" => "Einstellungen für Seite %1",
+	// Properties
+	"PropertiesFor" => "Einstellungen für Seite %1",
 	"MetaInfo" => "META Schlüsselwörter/Beschreibungen, die in den HTML-Kopf eingefügt werden.",
 	"MetaTitle" => "Titel",
 	"MetaKeywords" => "Schlüsselwörter",

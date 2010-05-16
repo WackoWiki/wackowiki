@@ -3,8 +3,7 @@
 // status: alpha - just hacked together
 //
 // for testing and improvement - thought for upgrade routine of the installer
-
-echo "<h2>Migration Routines for R4.3.rc1 to rc2 Upgrade</h2>";
+echo "<h2>Upgrade Utilities -> Migration Routines for R4.3.rc1 to rc2 Upgrade</h2>";
 
 if ($this->IsAdmin())
 {

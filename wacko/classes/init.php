@@ -58,7 +58,7 @@ define("TRAN_LOAD",						0);
 define("TRAN_DONTLOAD",					1);
 
 // do not change this two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-define("WACKO_VERSION",					"R4.3.rc2");
+define("WACKO_VERSION",					"R4.4.rc1");
 define("XML_HTMLSAX3",					"lib/HTMLSax3/");
 #define('XML_HTMLSAX3',					dirname(__FILE__)."/lib/HTMLSax3/");
 define("ACTIONS4DIFF",					"a, anchor, toc"); //allowed actions in DIFF
@@ -257,7 +257,7 @@ class Init
 					"allow_registration" => 1,
 					"disable_autosubscribe" => 0,
 
-					"standard_handlers" => "acls|addcomment|claim|diff|edit|keywords|latex|msword|new|print|rate|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|settings|show|watch",
+					"standard_handlers" => "acls|addcomment|claim|diff|edit|keywords|latex|msword|new|print|properties|rate|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|show|watch",
 
 					"upload" => "admins",
 					"upload_images_only" => 0,

@@ -438,8 +438,8 @@ $wackoTranslation = array(
 	"RatingBottomPages"		=> "Worst readers rated pages",
 	"RatingNoPagesRated"	=> "are none",
 
-	//Settings
-	"SettingsFor"  => "Bloc de reglare %1",
+	// Properties
+	"PropertiesFor"  => "Bloc de reglare %1",
 	"MetaInfo" => "Ключевые слова/Описание &ndash; поля, вставляемые в HTML-заголовок каждой Paginile (META).",
 	"MetaTitle" => "Title",
 	"MetaKeywords" => "Ключевые слова",

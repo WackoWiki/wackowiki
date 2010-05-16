@@ -493,8 +493,8 @@ $wackoTranslation = array(
 	"RatingBottomPages"		=> "Худшие документы по оценке читателей",
 	"RatingNoPagesRated"	=> "таковых нет",
 
-	//Settings
-	"SettingsFor" => "Свойства документа %1",
+	// Properties
+	"PropertiesFor" => "Свойства документа %1",
 	"MetaInfo" => "Ключевые слова/Описание&nbsp;&mdash; поля, вставляемые в HTML-заголовок каждой страницы (META).",
 	"MetaTitle" => "Заголовок",
 	"MetaKeywords" => "Ключевые слова",
