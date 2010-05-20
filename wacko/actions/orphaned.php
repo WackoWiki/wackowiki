@@ -5,8 +5,8 @@ if (!function_exists('LoadOrphanedPages'))
 	function LoadOrphanedPages(&$engine, $for = "")
 	{
 		$pref = $engine->config["table_prefix"];
-		$sql = "SELECT DISTINCT page_id, tag FROM ".$pref."pages p ".
-			"LEFT JOIN ".$pref."links l ON ".
+		$sql = "SELECT DISTINCT page_id, tag FROM ".$pref."page p ".
+			"LEFT JOIN ".$pref."link l ON ".
 			"((l.to_tag = p.tag ".
 				"AND l.to_supertag = '') ".
 				"OR l.to_supertag = p.supertag) ".

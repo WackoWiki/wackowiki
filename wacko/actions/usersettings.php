@@ -86,9 +86,9 @@ else if ($user = $this->GetUser())
 
 	if (isset($_POST["action"]) && ($_POST["action"] == "update_extended" || $_POST["action"] == "update"))
 	{
-		// update users_settings table
+		// update user_setting table
 		$this->Query(
-			"UPDATE ".$this->config["table_prefix"]."users_settings SET ".
+			"UPDATE ".$this->config["table_prefix"]."user_setting SET ".
 			($_POST["action"] == "update_extended"
 				?	"doubleclick_edit	= '".quote($this->dblink, $_POST["doubleclick_edit"])."', ".
 					"show_comments		= '".quote($this->dblink, $_POST["show_comments"])."', ".

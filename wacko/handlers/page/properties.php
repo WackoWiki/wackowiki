@@ -28,7 +28,7 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $page[
 
 		// update page metadata
 		$this->Query(
-			"UPDATE ".$this->config["table_prefix"]."pages SET ".
+			"UPDATE ".$this->config["table_prefix"]."page SET ".
 				(isset($_POST['extended'])
 				?	"hide_comments		= '".quote($this->dblink, (int)$_POST['hide_comments'])."', ".
 					"hide_files			= '".quote($this->dblink, (int)$_POST['hide_files'])."', ".
@@ -60,7 +60,7 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $page[
 	// load settings
 	$revs = $this->LoadSingle(
 		"SELECT COUNT(tag) AS total ".
-		"FROM {$this->config['table_prefix']}revisions ".
+		"FROM {$this->config['table_prefix']}revision ".
 		"WHERE tag = '".quote($this->dblink, $this->tag)."' ".
 		"GROUP BY tag");
 

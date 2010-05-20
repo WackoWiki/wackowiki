@@ -61,7 +61,7 @@ function admin_pollsadmin(&$engine, &$module)
 		else if (isset($_POST['stop']) && $_POST['id'])
 		{
 			$engine->Query(
-				"UPDATE {$engine->config['table_prefix']}polls ".
+				"UPDATE {$engine->config['table_prefix']}poll ".
 				"SET end = NOW() ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0 ".
 				"LIMIT 1");
@@ -71,11 +71,11 @@ function admin_pollsadmin(&$engine, &$module)
 		else if (isset($_POST['reset']) && $_POST['id'])
 		{
 			$engine->Query(	// reset start date
-				"UPDATE {$engine->config['table_prefix']}polls SET ".
+				"UPDATE {$engine->config['table_prefix']}poll SET ".
 					"start	= NOW() ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0");
 			$engine->Query(	// reset votes and update servey id
-				"UPDATE {$engine->config['table_prefix']}polls SET ".
+				"UPDATE {$engine->config['table_prefix']}poll SET ".
 					"poll_id		= ".($pollsObj->GetLastPollID() + 1).", ".
 					"votes	= 0 ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id']));
@@ -86,7 +86,7 @@ function admin_pollsadmin(&$engine, &$module)
 		else if (isset($_POST['activate']) && $_POST['id'])
 		{
 			$engine->Query(
-				"UPDATE {$engine->config['table_prefix']}polls ".
+				"UPDATE {$engine->config['table_prefix']}poll ".
 				"SET start = NOW() ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0");
 			$xml->News(); // update news feed

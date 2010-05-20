@@ -10,18 +10,18 @@ function InsertPage($tag, $body, $lng, $rights = "Admins", $critical = false, $t
 {
 	global $config_global, $dblink_global, $lang_global;
 
-	$page_select = "SELECT * FROM ".$config_global["table_prefix"]."pages WHERE tag='".$tag."'";
-	$owner_id = "SELECT user_id FROM ".$config_global["table_prefix"]."users WHERE user_name = '".$config_global["admin_name"]."' LIMIT 1";
+	$page_select = "SELECT * FROM ".$config_global["table_prefix"]."page WHERE tag='".$tag."'";
+	$owner_id = "SELECT user_id FROM ".$config_global["table_prefix"]."user WHERE user_name = '".$config_global["admin_name"]."' LIMIT 1";
 	# if ($title == false) $title = AddSpacesTitle(trim(substr($tag, strrpos($tag, '/')), '/'), $lng);
 
 	// user_id 0 for WackoInstaller
-	$page_insert = "INSERT INTO ".$config_global["table_prefix"]."pages (tag, supertag, body, user_id, owner_id, created, modified, latest, lang, title) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lng."', '".$title."')";
+	$page_insert = "INSERT INTO ".$config_global["table_prefix"]."page (tag, supertag, body, user_id, owner_id, created, modified, latest, lang, title) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lng."', '".$title."')";
 
-	$page_id = "SELECT page_id FROM ".$config_global["table_prefix"]."pages WHERE tag = '".$tag."' LIMIT 1";
+	$page_id = "SELECT page_id FROM ".$config_global["table_prefix"]."page WHERE tag = '".$tag."' LIMIT 1";
 
-	$perm_read_insert = "INSERT INTO ".$config_global["table_prefix"]."acls (page_id, privilege, list) VALUES ((".$page_id."), 'read', '*')";
-	$perm_write_insert = "INSERT INTO ".$config_global["table_prefix"]."acls (page_id, privilege, list) VALUES ((".$page_id."), 'write', '".$rights."')";
-	$perm_comment_insert = "INSERT INTO ".$config_global["table_prefix"]."acls (page_id, privilege, list) VALUES ((".$page_id."), 'comment', '$')";
+	$perm_read_insert = "INSERT INTO ".$config_global["table_prefix"]."acl (page_id, privilege, list) VALUES ((".$page_id."), 'read', '*')";
+	$perm_write_insert = "INSERT INTO ".$config_global["table_prefix"]."acl (page_id, privilege, list) VALUES ((".$page_id."), 'write', '".$rights."')";
+	$perm_comment_insert = "INSERT INTO ".$config_global["table_prefix"]."acl (page_id, privilege, list) VALUES ((".$page_id."), 'comment', '$')";
 
 	switch($config_global["database_driver"])
 	{

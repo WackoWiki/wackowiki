@@ -43,7 +43,7 @@ function admin_users(&$engine, &$module)
 			$user_id = (isset($_GET['user_id']) ? $_GET['user_id'] : $_POST['user_id']);
 
 			$user = $engine->LoadSingle(
-				"SELECT user_id, user_name, real_name, email, enabled FROM {$engine->config['table_prefix']}users ".
+				"SELECT user_id, user_name, real_name, email, enabled FROM {$engine->config['table_prefix']}user ".
 				"WHERE user_id = '".quote($engine->dblink, $user_id)."' ".
 				"LIMIT 1");
 		}
@@ -53,7 +53,7 @@ function admin_users(&$engine, &$module)
 		{
 			// do we have identical names?
 			if ($engine->LoadSingle(
-			"SELECT user_id FROM {$engine->config['table_prefix']}users ".
+			"SELECT user_id FROM {$engine->config['table_prefix']}user ".
 			"WHERE user_name = '".quote($engine->dblink, $_POST['newname'])."' ".
 			"LIMIT 1"))
 			{
@@ -64,7 +64,7 @@ function admin_users(&$engine, &$module)
 			else
 			{
 				$engine->Query(
-					"INSERT INTO {$engine->config['table_prefix']}users SET ".
+					"INSERT INTO {$engine->config['table_prefix']}user SET ".
 						"signup_time		= NOW(), ".
 						"email	= '".quote($engine->dblink, $_POST['email'])."', ".
 						"real_name		= '".quote($engine->dblink, $_POST['newrealname'])."', ".
@@ -82,7 +82,7 @@ function admin_users(&$engine, &$module)
 		{
 			// do we have identical names?
 			if ($engine->LoadSingle(
-			"SELECT user_id FROM {$engine->config['table_prefix']}users ".
+			"SELECT user_id FROM {$engine->config['table_prefix']}user ".
 			"WHERE user_name = '".quote($engine->dblink, $_POST['newname'])."' AND user_id <> '".quote($engine->dblink, $_POST['user_id'])."' ".
 			"LIMIT 1"))
 			{
@@ -93,7 +93,7 @@ function admin_users(&$engine, &$module)
 			else
 			{
 				$engine->Query(
-					"UPDATE {$engine->config['table_prefix']}users SET ".
+					"UPDATE {$engine->config['table_prefix']}user SET ".
 					"user_name		= '".quote($engine->dblink, $_POST['newname'])."', ".
 					"email	= '".quote($engine->dblink, $_POST['newemail'])."', ".
 					"real_name		= '".quote($engine->dblink, $_POST['newrealname'])."', ".
@@ -102,7 +102,7 @@ function admin_users(&$engine, &$module)
 					"LIMIT 1");
 
 				$engine->Query(
-					"UPDATE {$engine->config['table_prefix']}users_settings SET ".
+					"UPDATE {$engine->config['table_prefix']}user_setting SET ".
 					"lang		= '".quote($engine->dblink, $_POST['lang'])."' ".
 					"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."' ".
 					"LIMIT 1");
@@ -116,10 +116,10 @@ function admin_users(&$engine, &$module)
 		else if (isset($_POST['delete']) && isset($_POST['user_id']))
 		{
 			$engine->Query(
-				"DELETE FROM {$engine->config['table_prefix']}users ".
+				"DELETE FROM {$engine->config['table_prefix']}user ".
 				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
 			$engine->Query(
-				"DELETE FROM {$engine->config['table_prefix']}groups_members ".
+				"DELETE FROM {$engine->config['table_prefix']}group_member ".
 				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
 
 			$engine->SetMessage($engine->GetTranslation('UsersDeleted'));
@@ -170,8 +170,8 @@ function admin_users(&$engine, &$module)
 		{
 			if ($user = $engine->LoadSingle(
 				"SELECT u.user_name, u.real_name, u.email, p.lang, u.enabled ".
-				"FROM {$engine->config['table_prefix']}users u ".
-					"LEFT JOIN ".$engine->config["table_prefix"]."users_settings p ON (u.user_id = p.user_id) ".
+				"FROM {$engine->config['table_prefix']}user u ".
+					"LEFT JOIN ".$engine->config["table_prefix"]."user_setting p ON (u.user_id = p.user_id) ".
 				"WHERE u.user_id = '".quote($engine->dblink, $_POST['change'])."' ".
 				"LIMIT 1"))
 			{
@@ -212,7 +212,7 @@ function admin_users(&$engine, &$module)
 		// delete user
 		if (isset($_POST['delete']) && isset($_POST['change']))
 		{
-			if ($user = $engine->LoadSingle("SELECT user_name FROM {$engine->config['table_prefix']}users WHERE user_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
+			if ($user = $engine->LoadSingle("SELECT user_name FROM {$engine->config['table_prefix']}user WHERE user_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
 			{
 				echo "<form action=\"admin.php\" method=\"post\" name=\"users\">";
 				echo "<input type=\"hidden\" name=\"mode\" value=\"users\" />";
@@ -414,7 +414,7 @@ function admin_users(&$engine, &$module)
 		// collecting data
 		$count = $engine->LoadSingle(
 			"SELECT COUNT(user_name) AS n ".
-			"FROM {$engine->config['table_prefix']}users ".
+			"FROM {$engine->config['table_prefix']}user ".
 			( $where ? $where : '' )
 			);
 
@@ -422,8 +422,8 @@ function admin_users(&$engine, &$module)
 
 		$users = $engine->LoadAll(
 			"SELECT u.*, p.lang ".
-			"FROM {$engine->config['table_prefix']}users u ".
-				"LEFT JOIN ".$engine->config["table_prefix"]."users_settings p ON (u.user_id = p.user_id) ".
+			"FROM {$engine->config['table_prefix']}user u ".
+				"LEFT JOIN ".$engine->config["table_prefix"]."user_setting p ON (u.user_id = p.user_id) ".
 			( $where ? $where : '' ).
 			( $order ? $order : 'ORDER BY u.user_id DESC ' ).
 			"LIMIT {$pagination['offset']}, $limit");

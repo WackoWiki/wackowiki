@@ -16,7 +16,7 @@ function ModeratePageExists(&$engine, $tag)
 {
 	if ($page = $engine->LoadSingle(
 	"SELECT page_id ".
-	"FROM {$engine->config['table_prefix']}pages ".
+	"FROM {$engine->config['table_prefix']}page ".
 	"WHERE tag = '".quote($this->dblink, $tag)."' ".
 	"LIMIT 1"))
 		return true;
@@ -53,7 +53,7 @@ function ModerateRenameTopic(&$engine, $oldtag, $newtag, $title = '')
 	$engine->ClearCacheWantedPage($newtag);
 	$engine->ClearCacheWantedPage($supertag);
 
-	// rerender page and update links table in new context
+	// rerender page and update link table in new context
 	$page = $engine->LoadPage($newtag);
 	$engine->current_context++;
 	$engine->context[$engine->current_context] = $newtag;
@@ -73,7 +73,7 @@ function ModerateRenameTopic(&$engine, $oldtag, $newtag, $title = '')
 		$engine->SavePage($newtag, $page['body'], '', '', '', '', true, false);
 
 		$engine->Query(
-			"UPDATE {$engine->config['table_prefix']}pages ".
+			"UPDATE {$engine->config['table_prefix']}page ".
 			"SET title = '".quote($this->dblink, $title)."' ".
 			"WHERE tag = '".quote($this->dblink, $newtag)."' ".
 			"LIMIT 1");
@@ -100,7 +100,7 @@ function ModerateMergeTopics(&$engine, $base, $topics, $movetopics = true)
 		{
 			// move comments to the base topic
 			$engine->Query(
-				"UPDATE {$engine->config['table_prefix']}pages SET ".
+				"UPDATE {$engine->config['table_prefix']}page SET ".
 					"comment_on_id = '".quote($this->dblink, $base)."', ".
 				"WHERE comment_on_id = '".quote($this->dblink, $topic)."'");
 
@@ -109,7 +109,7 @@ function ModerateMergeTopics(&$engine, $base, $topics, $movetopics = true)
 			{
 				// find latest number
 				$status	= $engine->LoadAll("SHOW TABLE STATUS");
-				foreach ($status as $row) if ($row['Name'] == $engine->config['table_prefix'].'pages') $num = $row['Auto_increment'];
+				foreach ($status as $row) if ($row['Name'] == $engine->config['table_prefix'].'page') $num = $row['Auto_increment'];
 
 				// resave topic body as comment
 				$page = $engine->LoadPage($topic);
@@ -119,7 +119,7 @@ function ModerateMergeTopics(&$engine, $base, $topics, $movetopics = true)
 
 				// restore creation date
 				$engine->Query(
-					"UPDATE {$engine->config['table_prefix']}pages SET ".
+					"UPDATE {$engine->config['table_prefix']}page SET ".
 						"modified		= '".quote($this->dblink, $page['modified'])."', ".
 						"created	= '".quote($this->dblink, $page['created'])."', ".
 						"commented	= '".quote($this->dblink, $page['commented'])."', ".
@@ -134,10 +134,10 @@ function ModerateMergeTopics(&$engine, $base, $topics, $movetopics = true)
 		}
 	}
 
-	// update links table
+	// update link table
 	$comments = $engine->LoadAll(
 		"SELECT tag, body_r ".
-		"FROM {$engine->config['table_prefix']}pages ".
+		"FROM {$engine->config['table_prefix']}page ".
 		"WHERE comment_on_id = '".quote($this->dblink, $base)."'");
 
 	foreach ($comments as $comment)
@@ -154,7 +154,7 @@ function ModerateMergeTopics(&$engine, $base, $topics, $movetopics = true)
 
 	// recount comments for the base topic
 	$engine->Query(
-		"UPDATE {$engine->config['table_prefix']}pages SET ".
+		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"comments	= '".(int)$engine->CountComments($base)."', ".
 			"commented	= NOW() ".
 		"WHERE tag = '".quote($this->dblink, $base)."' ".
@@ -184,7 +184,7 @@ function ModerateSplitTopic(&$engine, $comment_ids, $oldtag, $newtag, $title)
 
 	// bug-resistent check: has page been really resaved?
 	if ($engine->LoadSingle(
-	"SELECT page_id FROM {$engine->config['table_prefix']}pages ".
+	"SELECT page_id FROM {$engine->config['table_prefix']}page ".
 	"WHERE tag = '".quote($this->dblink, $newtag)."'") != true)
 	{
 		$engine->forum = $forum_context;
@@ -193,7 +193,7 @@ function ModerateSplitTopic(&$engine, $comment_ids, $oldtag, $newtag, $title)
 
 	// restore original metadata
 	$engine->Query(
-		"UPDATE {$engine->config['table_prefix']}pages SET ".
+		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"modified		= '".quote($this->dblink, $page['modified'])."', ".
 			"created	= '".quote($this->dblink, $page['created'])."', ".
 			"owner_id		= '".quote($this->dblink, $page['owner_id'])."', ".
@@ -205,7 +205,7 @@ function ModerateSplitTopic(&$engine, $comment_ids, $oldtag, $newtag, $title)
 	foreach ($comment_ids as $id)
 	{
 		$engine->Query(
-			"UPDATE {$engine->config['table_prefix']}pages SET ".
+			"UPDATE {$engine->config['table_prefix']}page SET ".
 				"comment_on_id = '".quote($this->dblink, $newtag)."', ".
 			"WHERE page_id = '".quote($this->dblink, $id)."'");
 	}
@@ -213,7 +213,7 @@ function ModerateSplitTopic(&$engine, $comment_ids, $oldtag, $newtag, $title)
 	// remove old first comment
 	ModerateDeletePage($engine, $first_tag);
 
-	// update links table
+	// update link table
 	$page = $engine->LoadPage($newtag);
 	$engine->current_context++;
 	$engine->context[$engine->current_context] = $newtag;
@@ -227,13 +227,13 @@ function ModerateSplitTopic(&$engine, $comment_ids, $oldtag, $newtag, $title)
 
 	// recount comments for old and new topics
 	$engine->Query(
-		"UPDATE {$engine->config['table_prefix']}pages SET ".
+		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"comments	= '".(int)$engine->CountComments($newtag)."', ".
 			"commented	= NOW() ".
 		"WHERE tag = '".quote($this->dblink, $newtag)."' ".
 		"LIMIT 1");
 	$engine->Query(
-		"UPDATE {$engine->config['table_prefix']}pages ".
+		"UPDATE {$engine->config['table_prefix']}page ".
 		"SET comments = '".(int)$engine->CountComments($oldtag)."' ".
 		"WHERE tag = '".quote($this->dblink, $oldtag)."' ".
 		"LIMIT 1");
@@ -464,8 +464,8 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 
 		// make counter query
 		$sql = "SELECT COUNT(p.tag) AS n ".
-			"FROM {$this->config['table_prefix']}pages AS p, ".
-				"{$this->config['table_prefix']}acls AS a ".
+			"FROM {$this->config['table_prefix']}page AS p, ".
+				"{$this->config['table_prefix']}acl AS a ".
 			"WHERE p.page_id = a.page_id ".
 				#"AND a.`create` = '' ".
 				"AND p.tag LIKE '{$this->tag}/%'";
@@ -476,10 +476,10 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 
 		// make collector query
 		$sql = "SELECT p.page_id, p.tag, title, p.owner_id, p.user_id, ip, comments, created, u.user_name AS user,  o.user_name as owner ".
-			"FROM {$this->config['table_prefix']}pages AS p ".
-					"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
-					"LEFT JOIN ".$this->config["table_prefix"]."users o ON (p.owner_id = o.user_id), ".
-				"{$this->config['table_prefix']}acls AS a ".
+			"FROM {$this->config['table_prefix']}page AS p ".
+					"LEFT JOIN ".$this->config["table_prefix"]."user u ON (p.user_id = u.user_id) ".
+					"LEFT JOIN ".$this->config["table_prefix"]."user o ON (p.owner_id = o.user_id), ".
+				"{$this->config['table_prefix']}acl AS a ".
 			"WHERE p.page_id = a.page_id ".
 				#"AND a.`create` = '' ".
 				"AND p.tag LIKE '{$this->tag}/%' ".
@@ -517,8 +517,8 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 
 			$sections = $this->LoadAll(
 				"SELECT p.tag, p.title ".
-				"FROM {$this->config['table_prefix']}pages AS p, ".
-					"{$this->config['table_prefix']}acls AS a ".
+				"FROM {$this->config['table_prefix']}page AS p, ".
+					"{$this->config['table_prefix']}acl AS a ".
 				"WHERE p.page_id = a.page_id ".
 					#"AND a.`comment` = '' ".
 					"AND p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
@@ -778,7 +778,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 
 				// recount comments for current topic
 				$this->Query(
-					"UPDATE {$this->config['table_prefix']}pages SET ".
+					"UPDATE {$this->config['table_prefix']}page SET ".
 						"comments	= '".(int)$this->CountComments($this->tag)."', ".
 						"commented	= NOW() ".
 					"WHERE tag = '".quote($this->dblink, $this->tag)."' ".
@@ -836,7 +836,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 						$first_comment	= $this->LoadPage($this->GetTagById($_set[0]));
 						$_comments		= $this->LoadAll(
 							"SELECT page_id ".
-							"FROM {$this->config['table_prefix']}pages ".
+							"FROM {$this->config['table_prefix']}page ".
 							"WHERE comment_on_id = '".quote($this->dblink, $first_comment['comment_on_id'])."' ".
 								"AND created >= '".quote($this->dblink, $first_comment['created'])."' ".
 							"ORDER BY created ASC");
@@ -874,14 +874,14 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 
 						// move
 						$this->Query(
-							"UPDATE {$this->config['table_prefix']}pages SET ".
+							"UPDATE {$this->config['table_prefix']}page SET ".
 								"comment_on_id = '".quote($this->dblink, $title)."', ".
 							"WHERE page_id IN ( $idsStr )");
 
-						// update links table
+						// update link table
 						$comments = $this->LoadAll(
 							"SELECT tag, body_r ".
-							"FROM {$this->config['table_prefix']}pages ".
+							"FROM {$this->config['table_prefix']}page ".
 							"WHERE page_id IN ( $idsStr )");
 
 						foreach ($comments as $comment)
@@ -898,12 +898,12 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 
 						// recount comments for the old and new page
 						$this->Query(
-							"UPDATE {$this->config['table_prefix']}pages ".
+							"UPDATE {$this->config['table_prefix']}page ".
 							"SET comments = '".(int)$this->CountComments($this->tag)."' ".
 							"WHERE tag = '".quote($this->dblink, $this->tag)."' ".
 							"LIMIT 1");
 						$this->Query(
-							"UPDATE {$this->config['table_prefix']}pages SET ".
+							"UPDATE {$this->config['table_prefix']}page SET ".
 								"comments	= '".(int)$this->CountComments($title)."', ".
 								"commented	= NOW() ".
 							"WHERE tag = '".quote($this->dblink, $title)."' ".
@@ -921,7 +921,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 
 		// make counter query
 		$sql = "SELECT COUNT(tag) AS n ".
-			"FROM {$this->config['table_prefix']}pages ".
+			"FROM {$this->config['table_prefix']}page ".
 			"WHERE comment_on_id = '{$this->page['page_id']}'";
 
 		// count posts and make pagination
@@ -930,9 +930,9 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 
 		// make collector query
 		$sql = "SELECT p.page_id, p.tag, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, created, u.user_name AS user, o.user_name as owner ".
-			"FROM {$this->config['table_prefix']}pages p ".
-				"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
-				"LEFT JOIN ".$this->config["table_prefix"]."users o ON (p.owner_id = o.user_id) ".
+			"FROM {$this->config['table_prefix']}page p ".
+				"LEFT JOIN ".$this->config["table_prefix"]."user u ON (p.user_id = u.user_id) ".
+				"LEFT JOIN ".$this->config["table_prefix"]."user o ON (p.owner_id = o.user_id) ".
 			"WHERE comment_on_id = '{$this->page['page_id']}' ".
 			"ORDER BY created ASC ".
 			"LIMIT {$pagination['offset']}, $limit";
@@ -975,8 +975,8 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 			{
 				$sections = $this->LoadAll(
 					"SELECT p.tag, p.title ".
-					"FROM {$this->config['table_prefix']}pages AS p, ".
-						"{$this->config['table_prefix']}acls AS a ".
+					"FROM {$this->config['table_prefix']}page AS p, ".
+						"{$this->config['table_prefix']}acl AS a ".
 					"WHERE p.page_id = a.page_id ".
 						#"AND a.`comment` = '' ".
 						"AND p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".

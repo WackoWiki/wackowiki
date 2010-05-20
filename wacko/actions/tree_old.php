@@ -231,7 +231,7 @@ else
 
 $pages = $this->LoadAll(
 	"SELECT ".$this->pages_meta." ".
-	"FROM ".$this->config["table_prefix"]."pages ".
+	"FROM ".$this->config["table_prefix"]."page ".
 	"WHERE supertag LIKE ".$query.
 		($owner_id
 			? " AND owner_id='".quote($this->dblink, $owner_id)."'"
@@ -271,7 +271,7 @@ if ($pages)
 	$acl_str = substr($acl_str, 0, strlen($acl_str) - 2);
 
 	//Cache access rights
-	if ( $read_acls = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."acls WHERE page_id IN (".$acl_str.") AND privilege = 'read'", 1))
+	if ( $read_acls = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."acl WHERE page_id IN (".$acl_str.") AND privilege = 'read'", 1))
 	{
 		for ($i = 0; $i < count($read_acls); $i++)
 		{

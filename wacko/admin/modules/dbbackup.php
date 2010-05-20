@@ -100,7 +100,7 @@ function admin_dbbackup(&$engine, &$module)
 
 				// ...and for these specific tables
 				if ($table == $engine->config['table_prefix'].'cache' ||
-				$table == $engine->config['table_prefix'].'referrers' ||
+				$table == $engine->config['table_prefix'].'referrer' ||
 				$table == $engine->config['table_prefix'].'log')
 					$drop = 1;
 
@@ -194,7 +194,7 @@ function admin_dbbackup(&$engine, &$module)
 		{
 			$check = false;
 
-			if ($table['name'] != 'cache' && $table['name'] != 'referrers' && $table['name'] != 'log')
+			if ($table['name'] != 'cache' && $table['name'] != 'referrer' && $table['name'] != 'log')
 				$check = true;
 
 			echo '<tr>'.

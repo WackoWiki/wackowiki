@@ -103,7 +103,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 				// get list of pages in the cluster
 				if ($list = $this->LoadAll(
 				"SELECT tag ".
-				"FROM {$this->config['table_prefix']}pages ".
+				"FROM {$this->config['table_prefix']}page ".
 				"WHERE tag LIKE '".quote($this->dblink, $this->tag.'/%')."'"))
 				{
 					// remove by one page at a time

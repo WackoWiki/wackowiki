@@ -21,17 +21,17 @@ if (isset($_GET['markread']) && $user == true)
 // loading new pages/comments
 $pages1 = $this->LoadAll(
 	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, c.tag as comment_on_page, user_name ".
-	"FROM {$this->config['table_prefix']}pages p ".
-		"LEFT JOIN {$this->config['table_prefix']}pages c ON (p.comment_on_id = c.page_id) ".
-		"LEFT JOIN {$this->config['table_prefix']}users u ON (p.user_id = u.user_id) ".
+	"FROM {$this->config['table_prefix']}page p ".
+		"LEFT JOIN {$this->config['table_prefix']}page c ON (p.comment_on_id = c.page_id) ".
+		"LEFT JOIN {$this->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
 	"ORDER BY p.created DESC ".
 	"LIMIT ".($max * 2), 1);
 // loading revisions
 $pages2 = $this->LoadAll(
 	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, c.tag as comment_on_page, user_name ".
-	"FROM {$this->config['table_prefix']}pages p ".
-		"LEFT JOIN {$this->config['table_prefix']}pages c ON (p.comment_on_id = c.page_id) ".
-		"LEFT JOIN {$this->config['table_prefix']}users u ON (p.user_id = u.user_id) ".
+	"FROM {$this->config['table_prefix']}page p ".
+		"LEFT JOIN {$this->config['table_prefix']}page c ON (p.comment_on_id = c.page_id) ".
+		"LEFT JOIN {$this->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
 	"WHERE p.comment_on_id = '' ".
 	"ORDER BY modified DESC ".
 	"LIMIT ".($max * 2), 1);

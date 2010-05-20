@@ -13,7 +13,7 @@ if (!function_exists('HandlerDiffLoadPageById'))
 		{
 			return $wacko->LoadSingle(
 				"SELECT page_id, modified, body ".
-				"FROM ".$wacko->config["table_prefix"]."revisions ".
+				"FROM ".$wacko->config["table_prefix"]."revision ".
 				"WHERE revision_id = '".quote($wacko->dblink, $id)."' ".
 				"LIMIT 1");
 		}
@@ -21,7 +21,7 @@ if (!function_exists('HandlerDiffLoadPageById'))
 		{
 			return $wacko->LoadSingle(
 				"SELECT page_id, modified, body ".
-				"FROM ".$wacko->config["table_prefix"]."pages ".
+				"FROM ".$wacko->config["table_prefix"]."page ".
 				"WHERE page_id = '".quote($wacko->dblink, $wacko->GetPageId())."' ".
 				"LIMIT 1");
 		}

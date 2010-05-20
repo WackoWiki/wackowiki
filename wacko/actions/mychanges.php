@@ -21,7 +21,7 @@ if ($user_id = $this->GetUserId())
 
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
-			"FROM {$prefix}pages ".
+			"FROM {$prefix}page ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'", 1);
 
@@ -29,7 +29,7 @@ if ($user_id = $this->GetUserId())
 
 		if ($pages = $this->LoadAll(
 			"SELECT tag, modified, edit_note ".
-			"FROM {$prefix}pages ".
+			"FROM {$prefix}page ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY modified DESC, tag ASC ".
@@ -84,7 +84,7 @@ if ($user_id = $this->GetUserId())
 
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
-			"FROM {$prefix}pages ".
+			"FROM {$prefix}page ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'", 1);
 
@@ -92,7 +92,7 @@ if ($user_id = $this->GetUserId())
 
 		if ($pages = $this->LoadAll(
 			"SELECT tag, modified ".
-			"FROM {$prefix}pages ".
+			"FROM {$prefix}page ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY tag ASC, modified DESC ".

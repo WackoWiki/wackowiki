@@ -16,8 +16,8 @@ if ($this->UserIsOwner($page_id))
 {
 	$watchers = $this->LoadAll(
 		"SELECT w.*, u.user_name ".
-		"FROM ".$this->config["table_prefix"]."watches w ".
-			"LEFT JOIN ".$this->config["table_prefix"]."users u ON (w.user_id = u.user_id) ".
+		"FROM ".$this->config["table_prefix"]."watch w ".
+			"LEFT JOIN ".$this->config["table_prefix"]."user u ON (w.user_id = u.user_id) ".
 		"WHERE w.page_id = '".quote($this->dblink, $page_id)."' ".
 		"");
 

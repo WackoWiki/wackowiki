@@ -5,7 +5,7 @@
 
 $pref = $config["table_prefix"];
 
-$table_pages = "CREATE TABLE {$pref}pages (".
+$table_page = "CREATE TABLE {$pref}page (".
 					"page_id serial,".
 					"\"owner_id\" integer NOT NULL DEFAULT '',".
 					"\"user_id\" integer NOT NULL DEFAULT '',".
@@ -27,11 +27,11 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"lang character varying(2) NOT NULL DEFAULT '',".
 					"description character varying(250) NOT NULL DEFAULT '',".
 					"keywords character varying(250) NOT NULL DEFAULT '',".
-					"CONSTRAINT pk_pages_id PRIMARY KEY (page_id),".
-					"CONSTRAINT idx_pages_tag UNIQUE (tag)".
+					"CONSTRAINT pk_page_id PRIMARY KEY (page_id),".
+					"CONSTRAINT idx_page_tag UNIQUE (tag)".
 				") WITH (OIDS=FALSE);";
 
-$table_revisions = "CREATE TABLE {$pref}revisions (".
+$table_revision = "CREATE TABLE {$pref}revision (".
 						"revision_id serial,".
 						"page_id integer NOT NULL DEFAULT 0,".
 						"\"owner_id\" integer NOT NULL DEFAULT '',".
@@ -52,18 +52,18 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 						"lang character varying(2) NOT NULL DEFAULT '',".
 						"description character varying(250) NOT NULL DEFAULT '',".
 						"keywords character varying(250) NOT NULL DEFAULT '',".
-						"CONSTRAINT pk_revisions_id PRIMARY KEY (revision_id)".
+						"CONSTRAINT pk_revision_id PRIMARY KEY (revision_id)".
 					") WITH (OIDS=FALSE);";
 
 
-$table_acls = "CREATE TABLE {$pref}acls (".
+$table_acl = "CREATE TABLE {$pref}acl (".
 					"page_id integer NOT NULL DEFAULT 0,".
 					"privilege character varying(10) NOT NULL DEFAULT '',".
 					"list text NOT NULL DEFAULT '',".
-					"CONSTRAINT pk_acls_page_id_privilege PRIMARY KEY (page_id, privilege)".
+					"CONSTRAINT pk_acl_page_id_privilege PRIMARY KEY (page_id, privilege)".
 				") WITH (OIDS=FALSE);";
 
-$table_links = "CREATE TABLE {$pref}links (".
+$table_link = "CREATE TABLE {$pref}link (".
 					"link_id serial,".
 					"from_tag character varying(250) NOT NULL DEFAULT '',".
 					"to_tag character varying(250) NOT NULL DEFAULT '',".
@@ -80,13 +80,13 @@ $table_log = "CREATE TABLE {$pref}log (".
 				"CONSTRAINT pk_log_id PRIMARY KEY (log_id)".
 			") WITH (OIDS=FALSE);";
 
-$table_referrers = "CREATE TABLE {$pref}referrers (".
+$table_referrer = "CREATE TABLE {$pref}referrer (".
 						"page_id integer NOT NULL DEFAULT 0,".
 						"referrer character varying(150) NOT NULL DEFAULT '', ".
 						"\"referrer_time\" timestamp without time zone NOT NULL DEFAULT now()".
 					") WITH (OIDS=FALSE);";
 
-$table_users = "CREATE TABLE {$pref}users (".
+$table_user = "CREATE TABLE {$pref}user (".
 					"user_id serial,".
 					"name character varying(80) NOT NULL DEFAULT '',".
 					"real_name character varying(80) NOT NULL DEFAULT '',".
@@ -105,16 +105,16 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"typografica int(1) NOT NULL DEFAULT '1',".
 					"change_password character varying(40) NOT NULL DEFAULT '',".
 					"email_confirm character varying(40) NOT NULL DEFAULT '',".
-					"CONSTRAINT pk_users_name PRIMARY KEY (user_id),".
-					"CONSTRAINT idx_users_name UNIQUE (name)".
+					"CONSTRAINT pk_user_name PRIMARY KEY (user_id),".
+					"CONSTRAINT idx_user_name UNIQUE (name)".
 				") WITH (OIDS=FALSE);";
 
-$table_watches = "CREATE TABLE {$pref}watches (".
+$table_watch = "CREATE TABLE {$pref}watch (".
 					"watch_id serial,".
 					"page_id integer NOT NULL DEFAULT 0,".
 					"user_id integer NOT NULL DEFAULT 0,".
 					"\"watch_time\" timestamp without time zone NOT NULL DEFAULT now(),".
-					"CONSTRAINT pk_watches_id PRIMARY KEY (watch_id)".
+					"CONSTRAINT pk_watch_id PRIMARY KEY (watch_id)".
 				") WITH (OIDS=FALSE);";
 
 $table_upload = "CREATE TABLE {$pref}upload (".
@@ -144,24 +144,24 @@ $table_cache = "CREATE TABLE {$pref}cache (".
  Wacko Wiki MySQL Table Deletion Script
 */
 
-$table_acls_drop = "DROP TABLE {$pref}acls";
-$table_bookmarks_drop = "DROP TABLE {$pref}bookmarks";
+$table_acl_drop = "DROP TABLE {$pref}acl";
+$table_bookmark_drop = "DROP TABLE {$pref}bookmark";
 $table_cache_drop = "DROP TABLE {$pref}cache";
 $table_config_drop = "DROP TABLE {$pref}config";
-$table_groups_drop = "DROP TABLE {$pref}groups";
-$table_groups_members_drop = "DROP TABLE {$pref}groups_members";
-$table_categories_drop = "DROP TABLE {$pref}categories";
-$table_categories_pages_drop = "DROP TABLE {$pref}categories_pages";
-$table_links_drop = "DROP TABLE {$pref}links";
+$table_group_drop = "DROP TABLE {$pref}group";
+$table_group_member_drop = "DROP TABLE {$pref}group_member";
+$table_category_drop = "DROP TABLE {$pref}category";
+$table_category_page_drop = "DROP TABLE {$pref}category_page";
+$table_link_drop = "DROP TABLE {$pref}link";
 $table_log_drop = "DROP TABLE {$pref}log";
-$table_pages_drop = "DROP TABLE {$pref}pages";
-$table_polls_drop = "DROP TABLE {$pref}polls";
+$table_page_drop = "DROP TABLE {$pref}page";
+$table_poll_drop = "DROP TABLE {$pref}poll";
 $table_rating_drop = "DROP TABLE {$pref}rating";
-$table_referrers_drop = "DROP TABLE {$pref}referrers";
-$table_revisions_drop = "DROP TABLE {$pref}revisions";
+$table_referrer_drop = "DROP TABLE {$pref}referrer";
+$table_revision_drop = "DROP TABLE {$pref}revision";
 $table_upload_drop = "DROP TABLE {$pref}upload";
-$table_users_drop = "DROP TABLE {$pref}users";
-$table_users_settings_drop = "DROP TABLE {$pref}users_settings";
-$table_watches_drop = "DROP TABLE {$pref}watches";
+$table_user_drop = "DROP TABLE {$pref}user";
+$table_user_setting_drop = "DROP TABLE {$pref}user_setting";
+$table_watch_drop = "DROP TABLE {$pref}watch";
 
 ?>

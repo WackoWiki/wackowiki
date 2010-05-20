@@ -9,7 +9,7 @@ else $limit	= 50;
 
 $count = $this->LoadSingle(
 	"SELECT COUNT(tag) AS n ".
-	"FROM {$this->config['table_prefix']}pages ".
+	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0'", 1);
 
 $pagination = $this->Pagination($count['n'], $limit);
@@ -17,7 +17,7 @@ $pagination = $this->Pagination($count['n'], $limit);
 //  collect data
 if ($pages = $this->LoadAll(
 	"SELECT page_id, tag, title ".
-	"FROM {$this->config['table_prefix']}pages ".
+	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
 	"ORDER BY ".($title == 1
 		? "title ASC "

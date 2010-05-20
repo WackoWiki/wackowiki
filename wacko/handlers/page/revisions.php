@@ -19,7 +19,7 @@ if (!isset($this->page["page_id"]))
 	// Returns Array ( [id] => Value )
 	$get_page_ID = $this->LoadSingle(
 			"SELECT page_id ".
-			"FROM ".$this->config["table_prefix"]."revisions ".
+			"FROM ".$this->config["table_prefix"]."revision ".
 			"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
 
 	// Get the_ID value

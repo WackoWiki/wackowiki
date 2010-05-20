@@ -18,8 +18,8 @@ if ($user_id = $this->GetUserId())
 	{
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(p.tag) AS n ".
-			"FROM {$prefix}pages AS p ".
-			"LEFT JOIN {$prefix}watches AS w ".
+			"FROM {$prefix}page AS p ".
+			"LEFT JOIN {$prefix}watch AS w ".
 				"ON (p.page_id = w.page_id ".
 					"AND w.user_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
@@ -34,8 +34,8 @@ if ($user_id = $this->GetUserId())
 		$cnt = 0;
 		if ($pages = $this->LoadAll(
 			"SELECT p.tag AS pagetag, p.page_id AS page_id ".
-			"FROM {$prefix}pages AS p ".
-			"LEFT JOIN {$prefix}watches AS w ".
+			"FROM {$prefix}page AS p ".
+			"LEFT JOIN {$prefix}watch AS w ".
 				"ON (p.page_id = w.page_id ".
 					"AND w.user_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
@@ -78,7 +78,7 @@ if ($user_id = $this->GetUserId())
 	{
 		$count	= $this->LoadSingle(
 			"SELECT COUNT( DISTINCT page_id ) as n ".
-			"FROM {$prefix}watches ".
+			"FROM {$prefix}watch ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."'", 1);
 
 		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mywatches#list');
@@ -90,8 +90,8 @@ if ($user_id = $this->GetUserId())
 		$cnt = 0;
 		if ($pages = $this->LoadAll(
 			"SELECT w.page_id, p.tag AS tag ".
-			"FROM {$prefix}watches AS w ".
-			"LEFT JOIN {$prefix}pages AS p ".
+			"FROM {$prefix}watch AS w ".
+			"LEFT JOIN {$prefix}page AS p ".
 				"ON (p.page_id = w.page_id) ".
 			"WHERE w.user_id = '".quote($this->dblink, $user_id)."' ".
 			"GROUP BY tag ".

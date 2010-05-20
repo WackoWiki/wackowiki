@@ -80,7 +80,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 
 			// Change permissions for all comments on this page
 			$comments = $this->LoadAll(
-					"SELECT page_id FROM ".$this->config["table_prefix"]."pages WHERE comment_on_id = '".$this->GetPageId()."' AND owner_id='".quote($this->dblink, $this->GetUserId())."'");
+					"SELECT page_id FROM ".$this->config["table_prefix"]."page WHERE comment_on_id = '".$this->GetPageId()."' AND owner_id='".quote($this->dblink, $this->GetUserId())."'");
 			foreach ($comments as $num=>$page)
 			{
 				$this->SaveAcl($page["page_id"], "read", $_POST["read_acl"]);
@@ -99,8 +99,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		{
 			$pages = $this->LoadAll("
 				SELECT p.page_id, p.tag, p.title ".
-				"FROM ".$this->config["table_prefix"]."pages p ".
-					"LEFT JOIN ".$this->config["table_prefix"]."pages c ON (p.comment_on_id = c.page_id) ".
+				"FROM ".$this->config["table_prefix"]."page p ".
+					"LEFT JOIN ".$this->config["table_prefix"]."page c ON (p.comment_on_id = c.page_id) ".
 				"WHERE (p.supertag = '".quote($this->dblink, $this->supertag)."'".
 				" OR p.supertag LIKE '".quote($this->dblink, $this->supertag."/%")."'".
 				" OR p.comment_on_id = '".quote($this->dblink, $this->GetPageId())."'".

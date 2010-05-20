@@ -165,11 +165,11 @@ else if (isset($_POST["action"]) && $_POST["action"] == "login")
 						"password		= '".quote($this->dblink, $password_encrypted)."', ".
 						"salt			= '".quote($this->dblink, $salt)."'");
 
-				$_user_id = $this->LoadSingle("SELECT user_id FROM ".$this->config["table_prefix"]."users WHERE user_name = '".quote($this->dblink, $user_name)."'");
+				$_user_id = $this->LoadSingle("SELECT user_id FROM ".$this->config["table_prefix"]."user WHERE user_name = '".quote($this->dblink, $user_name)."'");
 
 				// INSERT USER Settings
 				$this->Query(
-					"INSERT INTO ".$this->config["table_prefix"]."users_settings ".
+					"INSERT INTO ".$this->config["table_prefix"]."user_setting ".
 					"SET ".
 						"user_id		= '".quote($this->dblink, $_user_id["user_id"])."', ".
 						"typografica	= '".(($this->config["default_typografica"] == 1) ? 1 : 0)."', ".

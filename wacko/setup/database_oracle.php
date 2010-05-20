@@ -7,11 +7,11 @@
 
 $pref = $config["table_prefix"];
 
-$table_acls = "CREATE TABLE {$pref}acls (".
+$table_acl = "CREATE TABLE {$pref}acl (".
 					"page_id number(10) default 0 not null,".
 					"privilege varchar2(10) not null,".
 					"list clob,".
-					"constraint {$pref}acls_pk primary key (page_id, privilege)".
+					"constraint {$pref}acl_pk primary key (page_id, privilege)".
 				")";
 
 $table_cache = "CREATE TABLE {$pref}cache (".
@@ -32,7 +32,7 @@ $table_config = "CREATE TABLE {$pref}config (".
 					"constraint {$pref}config_uk unique (config_name)".
 				")";
 
-$table_groups = "CREATE TABLE {$pref}groups (".
+$table_group = "CREATE TABLE {$pref}group (".
 					"group_id number(10) not null /*AUTO_INCREMENT*/,".
 					"group_name varchar2(100) not null,".
 					"description varchar2(255) not null,".
@@ -41,38 +41,38 @@ $table_groups = "CREATE TABLE {$pref}groups (".
 					"open number(1) not null,".
 					"active number(1) not null,".
 					// "special number(1) not null,".
-					"constraint {$pref}groups_pk primary key (group_id),".
-					"constraint {$pref}groups_uk unique (group_name)".
+					"constraint {$pref}group_pk primary key (group_id),".
+					"constraint {$pref}group_uk unique (group_name)".
 				")";
 
-$table_groups_members = "CREATE TABLE {$pref}groups_members (".
+$table_group_member = "CREATE TABLE {$pref}group_member (".
 					"group_id number(10) not null,".
 					"user_id number(10) not null,".
-					"constraint {$pref}groups_members_pk primary key (group_id, user_id)".
+					"constraint {$pref}group_member_pk primary key (group_id, user_id)".
 				")";
 
-$table_categories = "CREATE TABLE {$pref}categories (".
+$table_category = "CREATE TABLE {$pref}category (".
 					"category_id number(10) not null /*AUTO_INCREMENT*/,".
 					"parent number(10) not null,".
 					"lang varchar2(2) not null,".
 					"category varchar2(100) not null,".
-					"constraint {$pref}categories_pk primary key (category_id),".
-					"constraint {$pref}categories_uk unique (lang, category)".
+					"constraint {$pref}category_pk primary key (category_id),".
+					"constraint {$pref}category_uk unique (lang, category)".
 				")";
 
-$table_categories_pages = "CREATE TABLE {$pref}categories_pages (".
+$table_category_page = "CREATE TABLE {$pref}category_page (".
 						"category_id number(10) not null,".
 						"page_id number(10) not null,".
-						"constraint {$pref}categories_pages_pk primary key (category_id, page_id)".
+						"constraint {$pref}category_page_pk primary key (category_id, page_id)".
 					")";
 
-$table_links = "CREATE TABLE {$pref}links (".
+$table_link = "CREATE TABLE {$pref}link (".
 					"link_id number(10) not null /*AUTO_INCREMENT*/,".
 					"from_page_id number(10) default 0 not null,".
 					"to_page_id number(10) default 0 not null,".
 					"to_tag varchar2(250) not null,".
 					"to_supertag varchar2(250) not null,".
-					"constraint {$pref}links_pk primary key (link_id)/*,".
+					"constraint {$pref}link_pk primary key (link_id)/*,".
 					"KEY from_tag (from_page_id,to_tag(78)),". // TODO
 					"KEY idx_from_page_id (from_page_id),".
 					"KEY idx_to (to_tag)*/".
@@ -92,7 +92,7 @@ $table_log = "CREATE TABLE {$pref}log (".
 					"KEY idx_time (log_time)*/".
 				")";
 
-$table_pages = "CREATE TABLE {$pref}pages (".
+$table_page = "CREATE TABLE {$pref}page (".
 					"page_id number(10) not null /*AUTO_INCREMENT*/,".
 					"owner_id number(10) default 0 not null,".
 					"user_id number(10) default 0 not null,".
@@ -125,11 +125,11 @@ $table_pages = "CREATE TABLE {$pref}pages (".
 					"upper_index number(1) null,".
 					"allow_rawhtml number(1) null,".
 					"disable_safehtml number(1) null,".
-					"constraint {$pref}pages_pk primary key (page_id)/*,".
+					"constraint {$pref}page_pk primary key (page_id)/*,".
 					"KEY idx_user_id (user_id),".      // TODO
 					"KEY idx_owner_id (owner_id),".
 					"FULLTEXT KEY body (body)*/,".
-					"constraint {$pref}pages_uk unique (tag)/*,".
+					"constraint {$pref}page_uk unique (tag)/*,".
 					"KEY idx_supertag (supertag),".    // TODO
 					"KEY idx_created (created),".
 					"KEY idx_modified (modified),".
@@ -148,7 +148,7 @@ $table_rating = "CREATE TABLE {$pref}rating (".
 					"KEY idx_voters_rate (voters)*/". // TODO
 				")";
 
-$table_referrers = "CREATE TABLE {$pref}referrers (".
+$table_referrer = "CREATE TABLE {$pref}referrer (".
 					"page_id number(10) default 0 not null,".
 					"referrer varchar2(150) not null,".
 					"referrer_time date default sysdate not null/*,".
@@ -156,7 +156,7 @@ $table_referrers = "CREATE TABLE {$pref}referrers (".
 					"KEY idx_referrer_time (referrer_time)*/".
 				")";
 
-$table_revisions = "CREATE TABLE {$pref}revisions (".
+$table_revision = "CREATE TABLE {$pref}revision (".
 					"revision_id number(10) not null /*AUTO_INCREMENT*/,".
 					"page_id number(10) default 0 not null,".
 					"owner_id number(10) default 0 not null,".
@@ -177,7 +177,7 @@ $table_revisions = "CREATE TABLE {$pref}revisions (".
 					"lang varchar2(2) not null,".
 					"description varchar2(250) not null,".
 					"keywords varchar2(250) not null,".
-					"constraint {$pref}revisions_pk primary key (revision_id)/*,".
+					"constraint {$pref}revision_pk primary key (revision_id)/*,".
 					"KEY idx_user_id (user_id),".       // TODO
 					"KEY idx_owner_id (owner_id),".
 					"KEY idx_tag (tag),".
@@ -205,7 +205,7 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"KEY idx_user_id (user_id)*/".
 				")";
 
-$table_users = "CREATE TABLE {$pref}users (".
+$table_user = "CREATE TABLE {$pref}user (".
 					"user_id number(10) not null /*AUTO_INCREMENT*/,".
 					"user_name varchar2(80) not null,".
 					"real_name varchar2(80) not null,".
@@ -230,42 +230,42 @@ $table_users = "CREATE TABLE {$pref}users (".
 					"total_pages number(10) not null,".
 					"total_revisions number(10) not null,".
 					"total_comments number(10) not null,".
-					"constraint {$pref}users_pk primary key (user_id),".
-					"constraint {$pref}users_uk unique (user_name)/*,".
+					"constraint {$pref}user_pk primary key (user_id),".
+					"constraint {$pref}user_uk unique (user_name)/*,".
 					"KEY idx_enabled (enabled),".       // TODO
 					"KEY idx_signup_time (signup_time)*/".
 				")";
 
-$table_watches = "CREATE TABLE {$pref}watches (".
+$table_watch = "CREATE TABLE {$pref}watch (".
 					"watch_id number(10) not null /*AUTO_INCREMENT*/,".
 					"user_id number(10) default 0 not null,".
 					"page_id number(10) default 0 not null,".
 					"watch_time date not null,".
-					"constraint {$pref}watches_pk primary key (watch_id)".
+					"constraint {$pref}watch_pk primary key (watch_id)".
 				")";
 
 /*
  Wacko Wiki Oracle Table Deletion Script
 */
 
-$table_acls_drop = "DROP TABLE {$pref}acls";
-$table_bookmarks_drop = "DROP TABLE {$pref}bookmarks";
+$table_acl_drop = "DROP TABLE {$pref}acl";
+$table_bookmark_drop = "DROP TABLE {$pref}bookmark";
 $table_cache_drop = "DROP TABLE {$pref}cache";
 $table_config_drop = "DROP TABLE {$pref}config";
-$table_groups_drop = "DROP TABLE {$pref}groups";
-$table_groups_members_drop = "DROP TABLE {$pref}groups_members";
-$table_categories_drop = "DROP TABLE {$pref}categories";
-$table_categories_pages_drop = "DROP TABLE {$pref}categories_pages";
-$table_links_drop = "DROP TABLE {$pref}links";
+$table_group_drop = "DROP TABLE {$pref}group";
+$table_group_member_drop = "DROP TABLE {$pref}group_member";
+$table_category_drop = "DROP TABLE {$pref}category";
+$table_category_page_drop = "DROP TABLE {$pref}category_page";
+$table_link_drop = "DROP TABLE {$pref}link";
 $table_log_drop = "DROP TABLE {$pref}log";
-$table_pages_drop = "DROP TABLE {$pref}pages";
-$table_polls_drop = "DROP TABLE {$pref}polls";
+$table_page_drop = "DROP TABLE {$pref}page";
+$table_poll_drop = "DROP TABLE {$pref}poll";
 $table_rating_drop = "DROP TABLE {$pref}rating";
-$table_referrers_drop = "DROP TABLE {$pref}referrers";
-$table_revisions_drop = "DROP TABLE {$pref}revisions";
+$table_referrer_drop = "DROP TABLE {$pref}referrer";
+$table_revision_drop = "DROP TABLE {$pref}revision";
 $table_upload_drop = "DROP TABLE {$pref}upload";
-$table_users_drop = "DROP TABLE {$pref}users";
-$table_users_settings_drop = "DROP TABLE {$pref}users_settings";
-$table_watches_drop = "DROP TABLE {$pref}watches";
+$table_user_drop = "DROP TABLE {$pref}user";
+$table_user_setting_drop = "DROP TABLE {$pref}user_setting";
+$table_watch_drop = "DROP TABLE {$pref}watch";
 
 ?>

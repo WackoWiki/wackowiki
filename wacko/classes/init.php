@@ -398,9 +398,9 @@ class Init
 									g.group_name,
 									u.user_name
 								FROM
-									{$this->config["table_prefix"]}groups_members gm
-									INNER JOIN {$this->config["table_prefix"]}users u ON (gm.user_id = u.user_id)
-									INNER JOIN {$this->config["table_prefix"]}groups g ON (gm.group_id = g.group_id)";
+									{$this->config["table_prefix"]}group_member gm
+									INNER JOIN {$this->config["table_prefix"]}user u ON (gm.user_id = u.user_id)
+									INNER JOIN {$this->config["table_prefix"]}group g ON (gm.group_id = g.group_id)";
 
 				$groups_array = array();
 
@@ -435,11 +435,10 @@ class Init
 						$this->config["aliases"][$group] = trim($trimone,'\\');
 					}
 
-
 				}
 				else
 				{
-					#die("Error loading WackoWiki usergroups data: database `groups` table is empty.");
+					#die("Error loading WackoWiki usergroups data: database `group` table is empty.");
 				}
 
 				return $this->config;

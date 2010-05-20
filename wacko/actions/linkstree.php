@@ -13,9 +13,9 @@ if (!function_exists('links_tree_view'))
 
 			$pages = $wacko->LoadAll(
 				"SELECT to_tag ".
-				"FROM ".$wacko->config["table_prefix"]."links, ".$wacko->config["table_prefix"]."pages ".
+				"FROM ".$wacko->config["table_prefix"]."link, ".$wacko->config["table_prefix"]."page ".
 				"WHERE from_tag='".quote($wacko->dblink, $node)."' ".
-					"AND ".$wacko->config["table_prefix"]."links.to_tag = ".$wacko->config["table_prefix"]."pages.tag ".
+					"AND ".$wacko->config["table_prefix"]."link.to_tag = ".$wacko->config["table_prefix"]."page.tag ".
 				"ORDER BY to_tag ASC");
 
 			if (is_array($pages))

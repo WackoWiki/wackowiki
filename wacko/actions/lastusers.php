@@ -21,7 +21,7 @@ foreach($last_users as $user)
 {
 	if ($stat !== "0") $num = $this->LoadSingle(
 				"SELECT COUNT(*) AS n ".
-				"FROM ".$this->config["table_prefix"]."pages ".
+				"FROM ".$this->config["table_prefix"]."page ".
 				"WHERE owner_id='".quote($this->dblink, $user["user_id"])."'");
 
 	print("(<span class=\"dt\">".$this->GetTimeStringFormatted($user["signup_time"]).")</span> ".$this->Link("/".$user["user_name"],"",$user["user_name"]).($stat!=="0"?" . . . (".$num["n"].")":"")."<br />\n");

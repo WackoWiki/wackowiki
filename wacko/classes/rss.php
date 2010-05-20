@@ -98,7 +98,7 @@ class RSS
 		//  collect data
 		$pages = $this->engine->LoadAll(
 			"SELECT tag, title, created, body_r ".
-			"FROM {$this->engine->config['table_prefix']}pages ".
+			"FROM {$this->engine->config['table_prefix']}page ".
 			"WHERE comment_on_id = '0' ".
 				"AND tag REGEXP '^{$newscluster}{$newslevels}$' ".
 			"ORDER BY tag");
