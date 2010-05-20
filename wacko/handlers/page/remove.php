@@ -40,9 +40,9 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			{
 				print(str_replace("%1", $this->tag, $this->GetTranslation("LinksRemoved"))."<br />\n");
 			}
-			if ($this->RemoveKeywords($this->tag))
+			if ($this->RemoveCategories($this->tag))
 			{
-				print($this->GetTranslation("KeywordsRemoved")."<br />\n");
+				print($this->GetTranslation("CategoriesRemoved")."<br />\n");
 			}
 			if ($this->RemoveAcls($this->tag))
 			{
@@ -92,7 +92,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			{
 				$this->RemoveReferrers	($this->tag, true);
 				$this->RemoveLinks		($this->tag, true);
-				$this->RemoveKeywords	($this->tag, true);
+				$this->RemoveCategories	($this->tag, true);
 				$this->RemoveAcls		($this->tag, true);
 				$this->RemoveBookmarks	($this->tag, true);
 				$this->RemoveWatches	($this->tag, true);

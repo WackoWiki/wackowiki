@@ -39,14 +39,14 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'group_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'keywords' => array(
-				'name'	=> $engine->config['table_prefix'].'keywords',
+			$engine->config['table_prefix'].'categories' => array(
+				'name'	=> $engine->config['table_prefix'].'categories',
 				'where'	=> false,
-				'order'	=> 'keywords_id',
+				'order'	=> 'categories_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'keywords_pages' => array(
-				'name'	=> $engine->config['table_prefix'].'keywords_pages',
+			$engine->config['table_prefix'].'categories_pages' => array(
+				'name'	=> $engine->config['table_prefix'].'categories_pages',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000

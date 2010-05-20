@@ -82,8 +82,8 @@ if ($this->page)
 
 		if ($this->UserIsOwner() || $this->IsAdmin())
 		{
-			// Add Keywords link (shows only for page owner if allowed)
-			print("<li><a href=\"".$this->href("keywords")."\"".(($this->method=='keywords') ? " onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"" : "")."><img src=\"".$this->config["theme_url"]."icons/add_tag.png\" title=\"".$this->GetTranslation("KeywordsTip")."\" alt=\"".$this->GetTranslation("KeywordsTip")."\" /></a></li>\n");
+			// Add Categories link (shows only for page owner if allowed)
+			print("<li><a href=\"".$this->href("categories")."\"".(($this->method=='categories') ? " onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"" : "")."><img src=\"".$this->config["theme_url"]."icons/add_tag.png\" title=\"".$this->GetTranslation("CategoriesTip")."\" alt=\"".$this->GetTranslation("CategoriesTip")."\" /></a></li>\n");
 		}
 
 		// referrers icon

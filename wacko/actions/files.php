@@ -33,12 +33,13 @@ if (!$global)
 	if ($page == "")
 	{
 		$page = $this->tag;
-		$page_id = $this->getPageId();
+		$page_id = $this->page['page_id'];
 	}
 	else
 	{
 		$page = $this->UnwrapLink($page);
-		$page_id = $this->GetPageId($page);
+		if ($_page_id = $this->GetPageId($page))
+			$page_id = $_page_id;
 	}
 
 	$can_view   = $this->HasAccess("read", $page_id) || $this->IsAdmin() || $this->UserIsOwner($page_id);
@@ -115,7 +116,7 @@ if ($can_view)
 		{
 			$hits	= "";
 		}
-		$page_id = $this->GetPageId($page);
+
 		if ($this->IsAdmin() || (!isset($is_global) &&
 		($this->GetPageOwnerId($page_id) == $this->GetUserId())) ||
 		($file["user_id"] == $this->GetUserId()))

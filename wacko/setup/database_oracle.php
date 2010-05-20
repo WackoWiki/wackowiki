@@ -51,19 +51,19 @@ $table_groups_members = "CREATE TABLE {$pref}groups_members (".
 					"constraint {$pref}groups_members_pk primary key (group_id, user_id)".
 				")";
 
-$table_keywords = "CREATE TABLE {$pref}keywords (".
-					"keyword_id number(10) not null /*AUTO_INCREMENT*/,".
+$table_categories = "CREATE TABLE {$pref}categories (".
+					"category_id number(10) not null /*AUTO_INCREMENT*/,".
 					"parent number(10) not null,".
 					"lang varchar2(2) not null,".
-					"keyword varchar2(100) not null,".
-					"constraint {$pref}keywords_pk primary key (keyword_id),".
-					"constraint {$pref}keywords_uk unique (lang, keyword)".
+					"category varchar2(100) not null,".
+					"constraint {$pref}categories_pk primary key (category_id),".
+					"constraint {$pref}categories_uk unique (lang, category)".
 				")";
 
-$table_keywords_pages = "CREATE TABLE {$pref}keywords_pages (".
-						"keyword_id number(10) not null,".
+$table_categories_pages = "CREATE TABLE {$pref}categories_pages (".
+						"category_id number(10) not null,".
 						"page_id number(10) not null,".
-						"constraint {$pref}keywords_pages_pk primary key (keyword_id, page_id)".
+						"constraint {$pref}categories_pages_pk primary key (category_id, page_id)".
 					")";
 
 $table_links = "CREATE TABLE {$pref}links (".
@@ -254,8 +254,8 @@ $table_cache_drop = "DROP TABLE {$pref}cache";
 $table_config_drop = "DROP TABLE {$pref}config";
 $table_groups_drop = "DROP TABLE {$pref}groups";
 $table_groups_members_drop = "DROP TABLE {$pref}groups_members";
-$table_keywords_drop = "DROP TABLE {$pref}keywords";
-$table_keywords_pages_drop = "DROP TABLE {$pref}keywords_pages";
+$table_categories_drop = "DROP TABLE {$pref}categories";
+$table_categories_pages_drop = "DROP TABLE {$pref}categories_pages";
 $table_links_drop = "DROP TABLE {$pref}links";
 $table_log_drop = "DROP TABLE {$pref}log";
 $table_pages_drop = "DROP TABLE {$pref}pages";

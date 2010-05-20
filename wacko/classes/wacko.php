@@ -1898,7 +1898,7 @@ class Wacko
 					//check 403 here!
 					if ($this->IsAdmin() || (
 					$desc["upload_id"] && (
-					$this->GetPageOwnerId($this->GetPageId()) == $this->GetUserId())) || (
+					$this->page['owner_id'] == $this->GetUserId())) || (
 					$this->HasAccess("read", $page_id)) || (
 					$desc["user_id"] == $this->GetUserId()))
 					{
@@ -3192,7 +3192,7 @@ class Wacko
 		else if ($user == GUEST) $username = GUEST;
 		else $username = $user;
 
-		if (!$page_id = trim($page_id)) $page_id = $this->GetPageId();
+		if (!$page_id = trim($page_id)) $page_id = $this->page["page_id"];
 
 		// load acl
 		$acl = $this->LoadAcl($page_id, $privilege);
@@ -3915,13 +3915,13 @@ class Wacko
 			if ($this->page['keywords'])
 			{
 				$keywords = $this->LoadAll(
-					"SELECT k.keyword_id, k.keyword
-					FROM {$this->config['table_prefix']}keywords k
-						INNER JOIN {$this->config['table_prefix']}keywords_pages kp ON (k.keyword_id = kp.keyword_id)
+					"SELECT k.category_id, k.category
+					FROM {$this->config['table_prefix']}categories k
+						INNER JOIN {$this->config['table_prefix']}categories_pages kp ON (k.category_id = kp.category_id)
 					WHERE kp.page_id = '{$this->page['page_id']}' ");
 
 				foreach ($keywords as $word)
-					$this->keywords[$word['keyword_id']] = $word['keyword'];
+					$this->keywords[$word['category_id']] = $word['category'];
 				unset($keywords, $word);
 			}
 		}
@@ -4343,13 +4343,13 @@ class Wacko
 			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
-	function RemoveKeywords($tag, $cluster = false)
+	function RemoveCategories($tag, $cluster = false)
 	{
 		if (!$tag) return false;
 
 		$this->Query(
 			"DELETE k.* ".
-			"FROM {$this->config['table_prefix']}keywords_pages k ".
+			"FROM {$this->config['table_prefix']}categories_pages k ".
 				"LEFT JOIN ".$this->config["table_prefix"]."pages p ".
 					"ON (k.page_id = p.page_id) ".
 			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
@@ -4665,74 +4665,74 @@ class Wacko
 				"message	= '".quote($this->dblink, $message)."'");
 	}
 
-	// load keywords for the page's particular language.
+	// load categories for the page's particular language.
 	// if root string value is passed, returns number of
 	// pages under each category and below defined root
 	// page
-	function GetKeywordsList($lang, $cache = 1, $root = false)
+	function GetCategoriesList($lang, $cache = 1, $root = false)
 	{
-		if ($_keywords = $this->LoadAll(
-		"SELECT keyword_id, parent, keyword ".
-		"FROM {$this->config['table_prefix']}keywords ".
+		if ($_categories = $this->LoadAll(
+		"SELECT category_id, parent, category ".
+		"FROM {$this->config['table_prefix']}categories ".
 		"WHERE lang = '".quote($this->dblink, $lang)."' ".
-		"ORDER BY parent ASC, keyword ASC", $cache))
+		"ORDER BY parent ASC, category ASC", $cache))
 		{
 			// process pages count (if have to)
 			if ($root !== false)
 			{
 				if ($_counts = $this->LoadAll(
-				"SELECT kp.keyword_id, COUNT( kp.page_id ) AS n ".
-				"FROM {$this->config['table_prefix']}keywords k , ".
-					"{$this->config['table_prefix']}keywords_pages kp ".
+				"SELECT kp.category_id, COUNT( kp.page_id ) AS n ".
+				"FROM {$this->config['table_prefix']}categories k , ".
+					"{$this->config['table_prefix']}categories_pages kp ".
 					( $root != ''
 						? "INNER JOIN ".$this->config["table_prefix"]."pages p ON (kp.page_id = p.page_id) "
 						: '' ).
-				"WHERE k.lang = '".quote($this->dblink, $lang)."' AND kp.keyword_id = k.keyword_id ".
+				"WHERE k.lang = '".quote($this->dblink, $lang)."' AND kp.category_id = k.category_id ".
 					( $root != ''
 						? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) "
 						: '' ).
-				"GROUP BY keyword_id", 1))
+				"GROUP BY category_id", 1))
 				{
 					foreach ($_counts as $count)
 					{
-						$counts[$count['keyword_id']] = $count['n'];
+						$counts[$count['category_id']] = $count['n'];
 					}
 				}
 			}
 
 			// process categories names
-			foreach ($_keywords as $word)
+			foreach ($_categories as $word)
 			{
-				$keywords[$word['keyword_id']] = array(
+				$categories[$word['category_id']] = array(
 					'parent'	=> $word['parent'],
-					'keyword'	=> $word['keyword'],
-					'n'			=> (isset($counts[$word['keyword_id']]) ? $counts[$word['keyword_id']] : '')
+					'category'	=> $word['category'],
+					'n'			=> (isset($counts[$word['category_id']]) ? $counts[$word['category_id']] : '')
 				);
 			}
 
-			foreach ($keywords as $id => $word)
+			foreach ($categories as $id => $word)
 			{
-				if (isset($keywords[$word['parent']]))
+				if (isset($categories[$word['parent']]))
 				{
-					$keywords[$word['parent']]['childs'][$id] = $word;
-					unset($keywords[$id]);
+					$categories[$word['parent']]['childs'][$id] = $word;
+					unset($categories[$id]);
 				}
 			}
-			return $keywords;
+			return $categories;
 		}
 		else return false;
 	}
 
-	// save keywords selected in webform. ids are
+	// save categories selected in webform. ids are
 	// passed through POST global array. returns:
 	//	true	- if something was saved
 	//	false	- if list was empty
-	function SaveKeywordsList($page_id, $dryrun = 0)
+	function SaveCategoriesList($page_id, $dryrun = 0)
 	{
 		// what's selected
 		foreach ($_POST as $key => $val)
 		{
-			if (preg_match('/^keyword([0-9]+)\|([0-9]+)$/', $key, $ids) && $val == 'set')
+			if (preg_match('/^category([0-9]+)\|([0-9]+)$/', $key, $ids) && $val == 'set')
 			{
 				$set[] = $ids[1];
 
@@ -4748,7 +4748,7 @@ class Wacko
 				foreach ($set as $id) $values[] = "(".quote($this->dblink, (int)$id).", '".quote($this->dblink, $page_id)."')";
 
 				$this->Query(
-					"INSERT INTO {$this->config['table_prefix']}keywords_pages (keyword_id, page_id) ".
+					"INSERT INTO {$this->config['table_prefix']}categories_pages (category_id, page_id) ".
 					"VALUES ".implode(', ', $values));
 			}
 			return true;

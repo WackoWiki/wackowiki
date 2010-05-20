@@ -320,7 +320,7 @@ if ($langs = $this->AvailableLanguages())
 		echo("<li><a href=\"".$this->href("acls")."\">".$this->GetTranslation("SettingsAcls")."</a></li>\n");
 	}
 	?>
-	<li><a href="<?php echo $this->href("keywords"); ?>"><?php echo $this->GetTranslation("SettingsKeywords"); ?></a></li>
+	<li><a href="<?php echo $this->href("categories"); ?>"><?php echo $this->GetTranslation("SettingsCategories"); ?></a></li>
 	<li><a href="<?php echo $this->href("upload"); ?>"><?php echo $this->GetTranslation("SettingsUpload"); ?></a></li>
 	<li><a href="<?php echo $this->href("referrers"); ?>"><?php echo $this->GetTranslation("SettingsReferrers"); ?></a></li>
 	<li><a href="<?php echo $this->href("watch"); ?>"><?php echo ($this->iswatched === true ? $this->GetTranslation("RemoveWatch") : $this->GetTranslation("SetWatch")); ?></a></li>
