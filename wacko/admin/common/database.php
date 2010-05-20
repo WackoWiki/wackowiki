@@ -9,8 +9,8 @@
 if (isset($tables, $directories) !== true)
 {
 	$tables	= array(
-			$engine->config['table_prefix'].'acls' => array(
-				'name'	=> $engine->config['table_prefix'].'acls',
+			$engine->config['table_prefix'].'acl' => array(
+				'name'	=> $engine->config['table_prefix'].'acl',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
@@ -27,32 +27,32 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'config_id',
 				'limit' => 500
 			),
-			$engine->config['table_prefix'].'groups' => array(
-				'name'	=> $engine->config['table_prefix'].'groups',
+			$engine->config['table_prefix'].'group' => array(
+				'name'	=> $engine->config['table_prefix'].'group',
 				'where'	=> false,
 				'order'	=> 'group_name',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'groups_members' => array(
-				'name'	=> $engine->config['table_prefix'].'groups_members',
+			$engine->config['table_prefix'].'group_member' => array(
+				'name'	=> $engine->config['table_prefix'].'group_member',
 				'where'	=> false,
 				'order'	=> 'group_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'categories' => array(
-				'name'	=> $engine->config['table_prefix'].'categories',
+			$engine->config['table_prefix'].'category' => array(
+				'name'	=> $engine->config['table_prefix'].'category',
 				'where'	=> false,
-				'order'	=> 'categories_id',
+				'order'	=> 'category_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'categories_pages' => array(
-				'name'	=> $engine->config['table_prefix'].'categories_pages',
+			$engine->config['table_prefix'].'category_page' => array(
+				'name'	=> $engine->config['table_prefix'].'category_page',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'links' => array(
-				'name'	=> $engine->config['table_prefix'].'links',
+			$engine->config['table_prefix'].'link' => array(
+				'name'	=> $engine->config['table_prefix'].'link',
 				'where'	=> 'from_page_id',
 				'order'	=> 'from_page_id',
 				'limit' => 1000
@@ -63,20 +63,20 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'log_time',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'pages' => array(
-				'name'	=> $engine->config['table_prefix'].'pages',
+			$engine->config['table_prefix'].'page' => array(
+				'name'	=> $engine->config['table_prefix'].'page',
 				'where'	=> true,
 				'order'	=> 'tag',
 				'limit' => 500
 			),
-			$engine->config['table_prefix'].'watches' => array(
-				'name'	=> $engine->config['table_prefix'].'watches',
+			$engine->config['table_prefix'].'watch' => array(
+				'name'	=> $engine->config['table_prefix'].'watch',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'polls' => array(
-				'name'	=> $engine->config['table_prefix'].'polls',
+			$engine->config['table_prefix'].'poll' => array(
+				'name'	=> $engine->config['table_prefix'].'poll',
 				'where'	=> false,
 				'order'	=> 'poll_id, v_id',
 				'limit' => 1000
@@ -87,14 +87,14 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'page_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'referrers' => array(
-				'name'	=> $engine->config['table_prefix'].'referrers',
+			$engine->config['table_prefix'].'referrer' => array(
+				'name'	=> $engine->config['table_prefix'].'referrer',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'revisions' => array(
-				'name'	=> $engine->config['table_prefix'].'revisions',
+			$engine->config['table_prefix'].'revision' => array(
+				'name'	=> $engine->config['table_prefix'].'revision',
 				'where'	=> 'tag',
 				'order'	=> 'tag',
 				'limit' => 500
@@ -105,10 +105,16 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'upload_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'users' => array(
-				'name'	=> $engine->config['table_prefix'].'users',
+			$engine->config['table_prefix'].'user' => array(
+				'name'	=> $engine->config['table_prefix'].'user',
 				'where'	=> false,
 				'order'	=> 'user_name',
+				'limit' => 1000
+			),
+			$engine->config['table_prefix'].'user_setting' => array(
+				'name'	=> $engine->config['table_prefix'].'user_setting',
+				'where'	=> false,
+				'order'	=> 'user_id',
 				'limit' => 1000
 			)
 		);
@@ -332,7 +338,7 @@ function GetData(&$engine, &$tables, $pack, $table, $root = '')
 	// sql clauses
 	if ($root == true && $tables[$engine->config['table_prefix'].$table]['where'] == true)
 	{
-		if ($table != $engine->config['table_prefix'].'pages')	// not page table
+		if ($table != $engine->config['table_prefix'].'page')	// not page table
 			$where = "WHERE {$tables[$table]['where']} LIKE '".quote($engine->dblink, $root)."%' ";
 		else
 			$where = "WHERE tag LIKE '".quote($engine->dblink, $root)."%' OR comment_on_id LIKE '".quote($engine->dblink, $root)."%' ";
@@ -341,7 +347,7 @@ function GetData(&$engine, &$tables, $pack, $table, $root = '')
 	$limit = "LIMIT %1, {$tables[$table]['limit']} ";
 
 	// tweak
-	if ($table == $engine->config['table_prefix'].'pages') $tweak = true;
+	if ($table == $engine->config['table_prefix'].'page') $tweak = true;
 
 	// check file existance
 	clearstatcache();
@@ -366,7 +372,7 @@ function GetData(&$engine, &$tables, $pack, $table, $root = '')
 			$r++;	// count rows for LIMIT clause
 
 			// storage optimization tweak: don't save `body_r`
-			// and `body_toc` fields for `pages` table
+			// and `body_toc` fields for `page` table
 			if ($tweak === true)
 			{
 				$row['body_r']		= '';

@@ -45,7 +45,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		{
 			$word = $this->LoadSingle(
 				"SELECT category_id, parent, category ".
-				"FROM {$this->config['table_prefix']}categories ".
+				"FROM {$this->config['table_prefix']}category ".
 				"WHERE category_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
 		}
 
@@ -55,7 +55,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			// do we have identical names?
 			if ($this->LoadSingle(
 			"SELECT category_id ".
-			"FROM {$this->config['table_prefix']}categories ".
+			"FROM {$this->config['table_prefix']}category ".
 			"WHERE category = '".quote($this->dblink, $_POST['newname'])."' LIMIT 1"))
 			{
 				$this->SetMessage($this->GetTranslation('CategoriesAlreadyExists'));
@@ -65,7 +65,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			else
 			{
 				$this->Query(
-					"INSERT INTO {$this->config['table_prefix']}categories SET ".
+					"INSERT INTO {$this->config['table_prefix']}category SET ".
 						( $_POST['id'] && $_POST['group'] == 1
 							? "parent = '".quote($this->dblink, (int)( $word['parent'] != 0 ? $word['parent'] : $word['category_id'] ))."', "
 							: ''
@@ -84,7 +84,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			// do we have identical names?
 			if ($this->LoadSingle(
 			"SELECT category_id ".
-			"FROM {$this->config['table_prefix']}categories ".
+			"FROM {$this->config['table_prefix']}category ".
 			"WHERE category = '".quote($this->dblink, $_POST['newname'])."' AND category_id <> '".quote($this->dblink, $_POST['id'])."' LIMIT 1"))
 			{
 				$this->SetMessage($this->GetTranslation('CategoriesAlreadyExists'));
@@ -94,7 +94,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			else
 			{
 				$this->Query(
-					"UPDATE {$this->config['table_prefix']}categories ".
+					"UPDATE {$this->config['table_prefix']}category ".
 					"SET category = '".quote($this->dblink, $_POST['newname'])."' ".
 					"WHERE category_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
 
@@ -109,7 +109,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			if ($_POST['parent'] == 0)
 			{
 				$this->Query(
-					"UPDATE {$this->config['table_prefix']}categories ".
+					"UPDATE {$this->config['table_prefix']}category ".
 					"SET parent = 0 ".
 					"WHERE category_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
 				$this->SetMessage($this->GetTranslation('CategoriesUngrouped'));
@@ -119,17 +119,17 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			{
 				$parent = $this->LoadSingle(
 					"SELECT parent, category ".
-					"FROM {$this->config['table_prefix']}categories ".
+					"FROM {$this->config['table_prefix']}category ".
 					"WHERE category_id = '".quote($this->dblink, $_POST['parent'])."' LIMIT 1");
 
 				if ($parent['parent'] == 0)
 				{
 					$this->Query(
-						"UPDATE {$this->config['table_prefix']}categories ".
+						"UPDATE {$this->config['table_prefix']}category ".
 						"SET parent = '".quote($this->dblink, $_POST['parent'])."' ".
 						"WHERE category_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
 					$this->Query(
-						"UPDATE {$this->config['table_prefix']}categories ".
+						"UPDATE {$this->config['table_prefix']}category ".
 						"SET parent = 0 ".
 						"WHERE parent = '".quote($this->dblink, $_POST['id'])."'");
 					$this->SetMessage($this->GetTranslation('CategoriesGrouped'));
@@ -145,13 +145,13 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		else if (isset($_POST['delete']) && $_POST['id'])
 		{
 			$this->Query(
-				"DELETE FROM {$this->config['table_prefix']}categories ".
+				"DELETE FROM {$this->config['table_prefix']}category ".
 				"WHERE category_id = '".quote($this->dblink, $_POST['id'])."'");
 			$this->Query(
-				"DELETE FROM {$this->config['table_prefix']}categories_pages ".
+				"DELETE FROM {$this->config['table_prefix']}category_page ".
 				"WHERE category_id = '".quote($this->dblink, $_POST['id'])."'");
 			$this->Query(
-				"UPDATE {$this->config['table_prefix']}categories ".
+				"UPDATE {$this->config['table_prefix']}category ".
 				"SET parent = 0 ".
 				"WHERE parent = '".quote($this->dblink, $_POST['id'])."'");
 			$this->SetMessage($this->GetTranslation('CategoriesDeleted'));
@@ -169,7 +169,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	// get currently selected category_ids
 	$_selected = $this->LoadAll(
 				"SELECT category_id ".
-				"FROM {$this->config['table_prefix']}categories_pages ".
+				"FROM {$this->config['table_prefix']}category_page ".
 				"WHERE page_id = '".$this->page['page_id']."'");
 
 	// exploding categories into array
@@ -196,7 +196,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			{
 				$word = $this->LoadSingle(
 					"SELECT category_id, parent, category ".
-					"FROM {$this->config['table_prefix']}categories ".
+					"FROM {$this->config['table_prefix']}category ".
 					"WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1");
 				$group = ( $word['parent'] == 0 ? $word['category_id'] : $group = $word['parent'] );
 			}
@@ -221,7 +221,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		// rename item
 		else if (isset($_POST['rename']) && $_POST['change'])
 		{
-			if ($word = $this->LoadSingle("SELECT category FROM {$this->config['table_prefix']}categories WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
+			if ($word = $this->LoadSingle("SELECT category FROM {$this->config['table_prefix']}category WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
 			{
 				echo $this->FormOpen('categories');
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
@@ -240,11 +240,11 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		// (un)group item
 		else if (isset($_POST['ugroup']) && $_POST['change'])
 		{
-			if ($word = $this->LoadSingle("SELECT category_id, parent, category, lang FROM {$this->config['table_prefix']}categories WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
+			if ($word = $this->LoadSingle("SELECT category_id, parent, category, lang FROM {$this->config['table_prefix']}category WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
 			{
 				$parents = $this->LoadAll(
 					"SELECT category_id, category ".
-					"FROM {$this->config['table_prefix']}categories ".
+					"FROM {$this->config['table_prefix']}category ".
 					"WHERE parent = 0 AND lang = '".$word['lang']."' AND category_id != '".$word['category_id']."' ".
 					"ORDER BY category ASC");
 
@@ -273,7 +273,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		// delete item
 		if (isset($_POST['delete']) && $_POST['change'])
 		{
-			if ($word = $this->LoadSingle("SELECT category FROM {$this->config['table_prefix']}categories WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
+			if ($word = $this->LoadSingle("SELECT category FROM {$this->config['table_prefix']}category WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
 			{
 				echo $this->FormOpen('categories');
 				echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";

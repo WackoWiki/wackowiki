@@ -78,8 +78,8 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 	// make counter query
 	$sql = "SELECT COUNT(p.tag) AS n ".
-		"FROM {$this->config['table_prefix']}pages AS p, ".
-			"{$this->config['table_prefix']}acls AS a ".
+		"FROM {$this->config['table_prefix']}page AS p, ".
+			"{$this->config['table_prefix']}acl AS a ".
 		"WHERE p.page_id = a.page_id ".
 			"AND a.privilege = 'write' AND a.list = '$' ".
 			"AND p.tag LIKE '{$this->tag}/%' ";
@@ -95,10 +95,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 	// make collector query
 	$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, u.user_name AS user, o.user_name as owner ".
-		"FROM {$this->config['table_prefix']}pages AS p ".
-			"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
-			"LEFT JOIN ".$this->config["table_prefix"]."users o ON (p.owner_id = o.user_id), ".
-			"{$this->config['table_prefix']}acls AS a ".
+		"FROM {$this->config['table_prefix']}page AS p ".
+			"LEFT JOIN ".$this->config["table_prefix"]."user u ON (p.user_id = u.user_id) ".
+			"LEFT JOIN ".$this->config["table_prefix"]."user o ON (p.owner_id = o.user_id), ".
+			"{$this->config['table_prefix']}acl AS a ".
 		"WHERE p.page_id = a.page_id ".
 			"AND a.privilege = 'write' AND a.list = '$' ".
 			"AND p.tag LIKE '{$this->tag}/%' ";
@@ -136,9 +136,9 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		{
 			$comment = $this->LoadSingle(
 				"SELECT p.tag, p.ip, p.created, u.user_name AS user, o.user_name AS owner ".
-				"FROM {$this->config['table_prefix']}pages p ".
-				"LEFT JOIN ".$this->config["table_prefix"]."users u ON (p.user_id = u.user_id) ".
-				"LEFT JOIN ".$this->config["table_prefix"]."users o ON (p.owner_id = o.user_id) ".
+				"FROM {$this->config['table_prefix']}page p ".
+				"LEFT JOIN ".$this->config["table_prefix"]."user u ON (p.user_id = u.user_id) ".
+				"LEFT JOIN ".$this->config["table_prefix"]."user o ON (p.owner_id = o.user_id) ".
 				"WHERE p.comment_on_id = '".quote($this->dblink, $topic['page_id'])."' ".
 				"ORDER BY p.created DESC ".
 				"LIMIT 1");

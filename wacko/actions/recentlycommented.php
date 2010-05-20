@@ -7,9 +7,9 @@ if (!function_exists('LoadRecentlyCommented'))
 		// NOTE: this is really stupid. Maybe my SQL-Fu is too weak, but apparently there is no easier way to simply select
 		if ($ids = $wacko->LoadAll(
 			"SELECT a.page_id, MAX(a.created) as latest, a.comment_on_id ".
-			"FROM ".$wacko->config["table_prefix"]."pages a ".
+			"FROM ".$wacko->config["table_prefix"]."page a ".
 			($for
-				? 	"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.page_id) ".
+				? 	"INNER JOIN ".$wacko->config["table_prefix"]."page b ON (a.comment_on_id = b.page_id) ".
 					"WHERE ".
 						"b.supertag LIKE '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' "
 				: 	"WHERE a.comment_on_id <> '0' ").
@@ -24,9 +24,9 @@ if (!function_exists('LoadRecentlyCommented'))
 				{
 					$comment = $wacko->LoadSingle(
 						"SELECT b.tag as comment_on_page, b.supertag, a.tag, a.user_id, u.user_name AS user, a.modified ".
-						"FROM ".$wacko->config["table_prefix"]."pages a ".
-							"INNER JOIN ".$wacko->config["table_prefix"]."pages b ON (a.comment_on_id = b.page_id) ".
-							"LEFT OUTER JOIN ".$wacko->config["table_prefix"]."users u ON (a.user_id = u.user_id) ".
+						"FROM ".$wacko->config["table_prefix"]."page a ".
+							"INNER JOIN ".$wacko->config["table_prefix"]."page b ON (a.comment_on_id = b.page_id) ".
+							"LEFT OUTER JOIN ".$wacko->config["table_prefix"]."user u ON (a.user_id = u.user_id) ".
 						" WHERE a.page_id = '".$id["page_id"]."' LIMIT 1");
 					if (!isset($comments[$comment["comment_on_page"]]) && $num < $limit)
 					{

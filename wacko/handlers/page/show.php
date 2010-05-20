@@ -23,7 +23,7 @@ if ($this->page["comment_on_id"])
 	// count previous comments
 	$count = $this->LoadSingle(
 		"SELECT COUNT(tag) AS n ".
-		"FROM {$this->config['table_prefix']}pages ".
+		"FROM {$this->config['table_prefix']}page ".
 		"WHERE comment_on_id = '".quote($this->dblink, $this->page['comment_on_id'])."' ".
 			"AND created <= '".quote($this->dblink, $this->page['created'])."' ".
 		"GROUP BY comment_on_id ".
@@ -87,7 +87,7 @@ if ($this->HasAccess("read"))
 		if ($this->GetUserId() != $this->page["owner_id"])
 		{
 			$this->Query(
-				"UPDATE ".$this->config["table_prefix"]."pages ".
+				"UPDATE ".$this->config["table_prefix"]."page ".
 				"SET hits = hits + 1 ".
 				"WHERE page_id = '".quote($this->dblink, $this->page["page_id"])."'");
 		}
@@ -111,7 +111,7 @@ if ($this->HasAccess("read"))
 			// store to DB
 			if ($this->page["latest"] != "0")
 				$this->Query(
-					"UPDATE ".$this->config["table_prefix"]."pages SET ".
+					"UPDATE ".$this->config["table_prefix"]."page SET ".
 						"body_r = '".quote($this->dblink, $this->page["body_r"])."', ".
 						"body_toc = '".quote($this->dblink, $this->page["body_toc"])."' ".
 					"WHERE page_id = '".quote($this->dblink, $this->page["page_id"])."' ".

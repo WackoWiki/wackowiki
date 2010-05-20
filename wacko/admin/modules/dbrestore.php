@@ -103,8 +103,8 @@ function admin_dbrestore(&$engine, &$module)
 			foreach ($list as $table)
 			{
 				// force sql mode for some tables
-				if (($table == $tables[$engine->config['table_prefix'].'acls']['name'] ||
-				$table == $tables[$engine->config['table_prefix'].'links']['name']) &&
+				if (($table == $tables[$engine->config['table_prefix'].'acl']['name'] ||
+				$table == $tables[$engine->config['table_prefix'].'link']['name']) &&
 				$ikeys == false)
 					$mode = 'REPLACE';
 

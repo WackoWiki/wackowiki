@@ -27,7 +27,7 @@ function admin_resync(&$engine, &$module)
 			// total pages in ownership
 			$users = $engine->LoadAll(
 				"SELECT p.owner_id, COUNT(p.tag) AS n ".
-				"FROM {$engine->config['table_prefix']}pages AS p, {$engine->config['user_table']} AS u ".
+				"FROM {$engine->config['table_prefix']}page AS p, {$engine->config['user_table']} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' ".
 				"GROUP BY p.owner_id");
 
@@ -35,7 +35,7 @@ function admin_resync(&$engine, &$module)
 			{
 				$engine->Query(
 					"UPDATE {$engine->config['user_table']} ".
-					"SET total_pages = ".(int)$user['n']." ".
+					"SET total_page = ".(int)$user['n']." ".
 					"WHERE user_id = '".quote($engine->dblink, $user['owner_id'])."' ".
 					"LIMIT 1");
 			}
@@ -43,7 +43,7 @@ function admin_resync(&$engine, &$module)
 			// total comments posted
 			$users = $engine->LoadAll(
 				"SELECT p.user_id, COUNT(p.tag) AS n ".
-				"FROM {$engine->config['table_prefix']}pages AS p, {$engine->config['user_table']} AS u ".
+				"FROM {$engine->config['table_prefix']}page AS p, {$engine->config['user_table']} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' ".
 				"GROUP BY p.user_id");
 
@@ -59,7 +59,7 @@ function admin_resync(&$engine, &$module)
 			// total revisions made
 			$users = $engine->LoadAll(
 				"SELECT r.user_id, COUNT(r.tag) AS n ".
-				"FROM {$engine->config['table_prefix']}revisions AS r, {$engine->config['user_table']} AS u ".
+				"FROM {$engine->config['table_prefix']}revision AS r, {$engine->config['user_table']} AS u ".
 				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' ".
 				"GROUP BY r.user_id");
 
@@ -111,12 +111,12 @@ function admin_resync(&$engine, &$module)
 			{
 				// truncate table
 				$i = 0;
-				$engine->Query("DELETE FROM {$engine->config['table_prefix']}links");
+				$engine->Query("DELETE FROM {$engine->config['table_prefix']}link");
 			}
 
 			$engine->SetUserSetting('dont_redirect', '1', 1);
 
-			if ($pages = $engine->LoadAll("SELECT * FROM {$engine->config['table_prefix']}pages LIMIT ".($i*$limit).", $limit"))
+			if ($pages = $engine->LoadAll("SELECT * FROM {$engine->config['table_prefix']}page LIMIT ".($i*$limit).", $limit"))
 			{
 				foreach ($pages as $n => $page)
 				{
@@ -138,7 +138,7 @@ function admin_resync(&$engine, &$module)
 
 						// store to DB
 						$engine->Query(
-							"UPDATE {$engine->config['table_prefix']}pages SET ".
+							"UPDATE {$engine->config['table_prefix']}page SET ".
 								"body_r		= '".quote($engine->dblink, $page['body_r'])."', ".
 								"body_toc	= '".quote($engine->dblink, $page['body_toc'])."' ".
 							"WHERE page_id = '".quote($engine->dblink, $page['page_id'])."' ".

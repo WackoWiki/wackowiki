@@ -31,8 +31,8 @@ else
 	$for = $root;
 	$pref = $this->config["table_prefix"];
 	$sql = "SELECT DISTINCT l.to_tag AS wanted_tag ".
-		"FROM ".$pref."links l ".
-			"LEFT JOIN ".$pref."pages p ON ".
+		"FROM ".$pref."link l ".
+			"LEFT JOIN ".$pref."page p ON ".
 			"((l.to_tag = p.tag ".
 				"AND l.to_supertag = '') ".
 				"OR l.to_supertag = p.supertag) ".

@@ -1,7 +1,6 @@
 <div id="page">
 <?php
 
-
 $is_global = "";
 $message = "";
 $error = "";
@@ -43,7 +42,7 @@ if ($registered
 		$what = $this->LoadAll(
 			"SELECT f.user_id, u.user_name AS user, f.upload_id, f.filename, f.filesize, f.description, f.uploaded_dt ".
 			"FROM ".$this->config["table_prefix"]."upload f ".
-				"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
+				"INNER JOIN ".$this->config["table_prefix"]."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
 			"AND f.filename='".quote($this->dblink, $_GET["file"])."'");
 
@@ -105,7 +104,7 @@ if ($registered
 		$what = $this->LoadAll(
 			"SELECT f.user_id, u.user_name AS user, f.upload_id, f.filename, f.filesize, f.description ".
 			"FROM ".$this->config["table_prefix"]."upload f ".
-				"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
+				"INNER JOIN ".$this->config["table_prefix"]."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
 			"AND f.filename='".quote($this->dblink, $_POST["file"])."'");
 
@@ -158,7 +157,7 @@ if ($registered
 		$files = $this->LoadAll(
 			"SELECT f.upload_id ".
 			"FROM ".$this->config["table_prefix"]."upload f ".
-				"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
+				"INNER JOIN ".$this->config["table_prefix"]."user u ON (f.user_id = u.user_id) ".
 			"WHERE u.user_name = '".quote($this->dblink, $user["user_name"])."'");
 
 		if (!$this->config["upload_max_per_user"] || (sizeof($files) < $this->config["upload_max_per_user"]))

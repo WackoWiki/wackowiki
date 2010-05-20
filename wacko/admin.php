@@ -23,7 +23,7 @@ $init->Settings(); // populate from config.inc.php
 $init->Settings(); // initialize DBAL and populate from config table
 $init->DBAL();
 $init->Settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
-$init->Settings('user_table',	$init->config['table_prefix'].'users');
+$init->Settings('user_table',	$init->config['table_prefix'].'user');
 
 // misc
 $init->Session();

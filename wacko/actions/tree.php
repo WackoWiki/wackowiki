@@ -27,7 +27,7 @@ if (!isset($title)) $title = "";
 // collect pages
 if ($pages = $this->LoadAll(
 	"SELECT page_id, tag, supertag, title ".
-	"FROM {$this->config['table_prefix']}pages ".
+	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
 		"AND tag LIKE '".quote($this->dblink, $root)."%' ".
 	"ORDER BY tag", 1))
@@ -58,7 +58,7 @@ if ($pages = $this->LoadAll(
 	// cache links
 	if ($links = $this->LoadAll(
 	"SELECT {$this->pages_meta} ".
-	"FROM {$this->config['table_prefix']}pages ".
+	"FROM {$this->config['table_prefix']}page ".
 	"WHERE supertag IN ( '".implode("', '", $sup_str)."' )", 1))
 	{
 		for ($i = 0; $i < count($links); $i++)
@@ -69,7 +69,7 @@ if ($pages = $this->LoadAll(
 
 	// cache acls
 	if ($acls = $this->LoadAll(
-	"SELECT * FROM {$this->config['table_prefix']}acls ".
+	"SELECT * FROM {$this->config['table_prefix']}acl ".
 	"WHERE page_id IN ( '".implode("', '", $acl_str)."' ) AND privilege = 'read'", 1))
 	{
 		for ($i = 0; $i < count($acls); $i++)

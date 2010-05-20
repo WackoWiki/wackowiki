@@ -19,7 +19,7 @@ else
 $what = $this->LoadAll(
 	"SELECT u.user_name AS user, f.upload_id, f.filename, f.file_ext, f.filesize, f.description, f.hits ".
 	"FROM ".$this->config["table_prefix"]."upload f ".
-		"INNER JOIN ".$this->config["table_prefix"]."users u ON (f.user_id = u.user_id) ".
+		"INNER JOIN ".$this->config["table_prefix"]."user u ON (f.user_id = u.user_id) ".
 	"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
 	"AND f.filename='".quote($this->dblink, $_GET["get"])."'");
 

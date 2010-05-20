@@ -14,7 +14,7 @@ if ($user_id = $this->GetUserId())
 
 	$pages = $this->LoadAll(
 			"SELECT p.page_id, p.tag, p.modified, w.user_id ".
-			"FROM {$pref}pages AS p, {$pref}watches AS w ".
+			"FROM {$pref}pages AS p, {$pref}watch AS w ".
 			"WHERE p.page_id = w.page_id ".
 				"AND p.modified > w.watch_time ".
 				"AND w.user_id = '".quote($this->dblink, $user_id)."' ".
@@ -27,7 +27,7 @@ if ($user_id = $this->GetUserId())
 	{
 		foreach ($pages as $page)
 			$this->Query(
-				"UPDATE {$this->config['table_prefix']}watches ".
+				"UPDATE {$this->config['table_prefix']}watch ".
 				"SET watch_time = NOW() ".
 				"WHERE page_id = '".quote($this->dblink, $page['page_id'])."' ".
 					"AND user_id = '".quote($this->dblink, $user_id)."'");

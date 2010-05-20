@@ -63,14 +63,14 @@ $limit = 10;
 
 $pages1 = $this->LoadAll(
 	"SELECT page_id, tag, supertag ".
-	"FROM ".$this->config["table_prefix"]."pages ".
+	"FROM ".$this->config["table_prefix"]."page ".
 	"WHERE supertag LIKE '".quote($this->dblink, $supertag1)."%' ".
 		"AND comment_on_id = '0' ".
 	"ORDER BY supertag ASC LIMIT $limit");
 
 $pages2 = $this->LoadAll(
 	"SELECT page_id, tag, supertag ".
-	"FROM ".$this->config["table_prefix"]."pages ".
+	"FROM ".$this->config["table_prefix"]."page ".
 	"WHERE  supertag LIKE '".quote($this->dblink, $supertag2)."%' ".
 		"AND comment_on_id = '0' ".
 	"ORDER BY supertag ASC LIMIT $limit");

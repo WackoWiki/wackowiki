@@ -17,8 +17,8 @@ if (!function_exists('LoadUserBookmarks'))
 	{
 		$_bookmarks = $wacko->LoadAll(
 							"SELECT p.tag, p.title, b.bookmark_id, b.user_id, b.bm_title, b.lang, b.bm_position ".
-							"FROM ".$wacko->config["table_prefix"]."bookmarks b ".
-								"LEFT JOIN ".$wacko->config["table_prefix"]."pages p ON (b.page_id = p.page_id) ".
+							"FROM ".$wacko->config["table_prefix"]."bookmark b ".
+								"LEFT JOIN ".$wacko->config["table_prefix"]."page p ON (b.page_id = p.page_id) ".
 							"WHERE b.user_id = '".quote($wacko->dblink, $user_id)."' ".
 							"ORDER BY b.bm_position", 0);
 
@@ -58,7 +58,7 @@ if (isset($_POST["_user_bookmarks"]))
 		foreach( $data as $item )
 		{
 			$this->Query(
-				"UPDATE ".$this->config["table_prefix"]."bookmarks SET ".
+				"UPDATE ".$this->config["table_prefix"]."bookmark SET ".
 				"bm_position = '".quote($this->dblink, $item["bm_position"])."', ".
 				"bm_title = '".quote($this->dblink, substr($_POST["title_".$item["bookmark_id"]],0,250))."' ".
 				"WHERE bookmark_id = '".quote($this->dblink, $item["bookmark_id"])."' ".
@@ -78,7 +78,7 @@ if (isset($_POST["_user_bookmarks"]))
 			if ($deletion != "")
 			{
 				$this->Query(
-					"DELETE FROM ".$this->config["table_prefix"]."bookmarks ".
+					"DELETE FROM ".$this->config["table_prefix"]."bookmark ".
 					"WHERE bookmark_id IN (".$deletion.")");
 			}
 		}

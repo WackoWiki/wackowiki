@@ -114,7 +114,7 @@ else
 						$password = sha1($_POST["name"].$salt.$_POST["password"]);
 
 						// update database with the sha1 password for future logins
-						$this->Query("UPDATE ".$this->config["table_prefix"]."users SET ".
+						$this->Query("UPDATE ".$this->config["table_prefix"]."user SET ".
 									"password	= '".$password."', ".
 									"salt		= '".$salt."' ".
 									"WHERE user_name = '".$_POST["name"]."'");

@@ -25,14 +25,14 @@ function admin_deletedpages(&$engine, &$module)
 	if (isset($_GET['remove']))
 	{
 		$engine->Query(
-			"DELETE FROM {$engine->config['table_prefix']}revisions ".
+			"DELETE FROM {$engine->config['table_prefix']}revision ".
 			"WHERE tag = '".quote($_GET['remove'])."'");
 	}
 
 	$pages = $engine->LoadRecentlyDeleted(100000, 0);
 ?>
 	<p>
-		List of removed pages, copies which were in the table revisions.
+		List of removed pages, copies which were in the table revision.
 		Finally remove the pages from the database by clicking on the link <em>Remove</em>
 		in the corresponding row. (Be careful, no delete confirmation is requested!)
 	</p>

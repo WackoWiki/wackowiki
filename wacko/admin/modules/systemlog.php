@@ -105,7 +105,7 @@ function admin_systemlog(&$engine, &$module)
 	$log = $engine->LoadAll(
 		"SELECT l.log_id, l.log_time, l.level, l.message, u.user_name as user, l.ip ".
 		"FROM {$engine->config['table_prefix']}log l ".
-			"LEFT JOIN {$engine->config['table_prefix']}users u ON (l.user_id = u.user_id) ".
+			"LEFT JOIN {$engine->config['table_prefix']}user u ON (l.user_id = u.user_id) ".
 		( $where ? $where : 'WHERE l.level <= '.(int)$level.' ' ).
 		( $order ? $order : 'ORDER BY l.log_id DESC ' ).
 		"LIMIT {$pagination['offset']}, $limit");

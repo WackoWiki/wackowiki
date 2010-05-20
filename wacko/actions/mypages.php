@@ -21,7 +21,7 @@ if ($user_id = $this->GetUserId())
 		$this->GetTranslation("OrderChange")."</a>] <br /><br />\n");
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
-			"FROM {$prefix}pages ".
+			"FROM {$prefix}page ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'", 1);
 
@@ -29,7 +29,7 @@ if ($user_id = $this->GetUserId())
 
 		if ($pages = $this->LoadAll(
 		"SELECT tag, created ".
-		"FROM {$prefix}pages ".
+		"FROM {$prefix}page ".
 		"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 			"AND comment_on_id = '0' ".
 		"ORDER BY created DESC, tag ASC ".
@@ -70,8 +70,8 @@ if ($user_id = $this->GetUserId())
 	{
 		$count	= $this->LoadSingle(
 			"SELECT COUNT( DISTINCT p.tag ) AS n ".
-			"FROM {$prefix}pages AS p ".
-			"LEFT JOIN {$prefix}revisions AS r ".
+			"FROM {$prefix}page AS p ".
+			"LEFT JOIN {$prefix}revision AS r ".
 				"ON (p.page_id = r.page_id ".
 					"AND p.owner_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
@@ -87,8 +87,8 @@ if ($user_id = $this->GetUserId())
 
 		if ($pages = $this->LoadAll(
 			"SELECT p.tag AS tag, p.modified AS modified ".
-			"FROM {$prefix}pages AS p ".
-			"LEFT JOIN {$prefix}revisions AS r ".
+			"FROM {$prefix}page AS p ".
+			"LEFT JOIN {$prefix}revision AS r ".
 				"ON (p.page_id = r.page_id ".
 					"AND p.owner_id = '".quote($this->dblink, $user_id)."') ".
 			"WHERE p.comment_on_id = '0' ".
@@ -131,7 +131,7 @@ if ($user_id = $this->GetUserId())
 	{
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
-			"FROM {$prefix}pages ".
+			"FROM {$prefix}page ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'", 1);
 
@@ -144,7 +144,7 @@ if ($user_id = $this->GetUserId())
 
 		if ($pages = $this->LoadAll(
 			"SELECT tag, modified ".
-			"FROM {$prefix}pages ".
+			"FROM {$prefix}page ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0' ".
 			"ORDER BY tag ASC ".

@@ -25,7 +25,7 @@ class Polls
 	{
 		$id = $this->engine->LoadSingle(
 			'SELECT poll_id '.
-			'FROM '.$this->engine->config['table_prefix'].'polls '.
+			'FROM '.$this->engine->config['table_prefix'].'poll '.
 			'ORDER BY poll_id DESC '.
 			'LIMIT 1');
 		if ($id['id'] == false) return 0;
@@ -37,8 +37,8 @@ class Polls
 	{
 		$title = $this->engine->LoadSingle(
 			"SELECT p.poll_id, p.text, p.user_id, p.plural, p.votes, p.start, p.end, u.user_name ".
-			"FROM {$this->engine->config['table_prefix']}polls p ".
-				"LEFT JOIN {$this->engine->config["table_prefix"]}users u ON (p.user_id = u.user_id) ".
+			"FROM {$this->engine->config['table_prefix']}poll p ".
+				"LEFT JOIN {$this->engine->config["table_prefix"]}user u ON (p.user_id = u.user_id) ".
 			"WHERE p.poll_id = $id AND p.v_id = 0");
 		return $title;
 	}
@@ -49,7 +49,7 @@ class Polls
 	{
 		$vars = $this->engine->LoadAll(
 			"SELECT poll_id, v_id, text, votes ".
-			"FROM {$this->engine->config['table_prefix']}polls ".
+			"FROM {$this->engine->config['table_prefix']}poll ".
 			"WHERE poll_id = $id AND v_id <> 0 ".
 			"ORDER BY ".($votes == 1 ? "votes DESC, " : "")."v_id ASC");
 		return $vars;
@@ -60,7 +60,7 @@ class Polls
 	{
 		$list = $this->engine->LoadAll(
 			"SELECT YEAR(start) AS years ".
-			"FROM {$this->engine->config['table_prefix']}polls ".
+			"FROM {$this->engine->config['table_prefix']}poll ".
 			"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
 			"GROUP BY years ".
 			"ORDER BY years DESC");
@@ -88,7 +88,7 @@ class Polls
 			case 'current':
 				$list = $this->engine->LoadAll(
 					"SELECT poll_id, text, user_id, plural, start ".
-					"FROM {$this->engine->config['table_prefix']}polls ".
+					"FROM {$this->engine->config['table_prefix']}poll ".
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' AND end = '".SQL_NULLDATE."' ".
 					"ORDER BY start DESC");
 				break;
@@ -96,14 +96,14 @@ class Polls
 			case 'moderation':
 				$list = $this->engine->LoadAll(
 					"SELECT poll_id, text, user_id, plural ".
-					"FROM {$this->engine->config['table_prefix']}polls ".
+					"FROM {$this->engine->config['table_prefix']}poll ".
 					"WHERE v_id = 0 AND start = '".SQL_NULLDATE."' AND end = '".SQL_NULLDATE."' ".
 					"ORDER BY poll_id ASC");
 				break;
 			case 'ended':
 				$list = $this->engine->LoadAll(
 					"SELECT poll_id, text, user_id, plural, start, end ".
-					"FROM {$this->engine->config['table_prefix']}polls ".
+					"FROM {$this->engine->config['table_prefix']}poll ".
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' AND end <> '".SQL_NULLDATE."' ".
 					"ORDER BY end DESC");
 				break;
@@ -111,7 +111,7 @@ class Polls
 				if ($year == 0) $year = date('Y');
 				$list = $this->engine->LoadAll(
 					"SELECT poll_id, text, user_id, plural, start, end ".
-					"FROM {$this->engine->config['table_prefix']}polls ".
+					"FROM {$this->engine->config['table_prefix']}poll ".
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
 						"AND end <> '".SQL_NULLDATE."' AND YEAR(start) = $year ".
 					"ORDER BY end DESC");
@@ -120,7 +120,7 @@ class Polls
 			case 'all':
 				$list = $this->engine->LoadAll(
 					"SELECT poll_id, text, user_id, plural, start, end ".
-					"FROM {$this->engine->config['table_prefix']}polls ".
+					"FROM {$this->engine->config['table_prefix']}poll ".
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
 					"ORDER BY start DESC");
 		}
@@ -136,7 +136,7 @@ class Polls
 
 		// submitting title
 		$this->engine->Query(
-			"INSERT INTO {$this->engine->config['table_prefix']}polls SET ".
+			"INSERT INTO {$this->engine->config['table_prefix']}poll SET ".
 				"poll_id	= $id, ".
 				"text		= '".quote($this->engine->dblink, rtrim($topic, '.'))."', ".
 				"user_id	= '".quote($this->engine->dblink, $user)."', ".
@@ -149,7 +149,7 @@ class Polls
 			$v_id	+= 1;
 			$v_text	= quote($this->engine->dblink, $v_text);
 			$this->engine->Query(
-				"INSERT INTO {$this->engine->config['table_prefix']}polls SET ".
+				"INSERT INTO {$this->engine->config['table_prefix']}poll SET ".
 					"poll_id	= $id, ".
 					"v_id		= $v_id, ".
 					"text		= '".quote($this->engine->dblink, rtrim($v_text, '.'))."'");
@@ -161,7 +161,7 @@ class Polls
 	function RemovePoll($id)
 	{
 		return $this->engine->Query(
-			"DELETE FROM {$this->engine->config['table_prefix']}polls ".
+			"DELETE FROM {$this->engine->config['table_prefix']}poll ".
 			"WHERE poll_id = $id");
 	}
 
@@ -308,7 +308,7 @@ class Polls
 				{
 					$new = $var['votes'] + 1;
 					$this->engine->Query(
-						"UPDATE {$this->engine->config['table_prefix']}polls ".
+						"UPDATE {$this->engine->config['table_prefix']}poll ".
 						"SET votes = '".quote($this->engine->dblink, $new)."' ".
 						"WHERE poll_id = '".quote($this->engine->dblink, $id)."' ".
 							"AND v_id = '".quote($this->engine->dblink, $vote_id)."'");
@@ -318,7 +318,7 @@ class Polls
 		}
 		$new = $header['votes'] + 1; //$total;
 		$this->engine->Query(
-			"UPDATE {$this->engine->config['table_prefix']}polls ".
+			"UPDATE {$this->engine->config['table_prefix']}poll ".
 			"SET votes = '".quote($this->engine->dblink, $new)."' ".
 			"WHERE poll_id = '".quote($this->engine->dblink, $id)."' ".
 				"AND v_id = '0'");

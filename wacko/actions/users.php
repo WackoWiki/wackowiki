@@ -209,7 +209,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 		{
 			$pages = $this->LoadAll(
 				"SELECT page_id, tag, title, created ".
-				"FROM {$this->config['table_prefix']}pages ".
+				"FROM {$this->config['table_prefix']}page ".
 				"WHERE owner_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"AND comment_on_id = '0' ".
 				"ORDER BY ".( isset($_GET['sort']) && $_GET['sort'] == 'name' ? 'tag ASC' : 'created DESC' )." ".
@@ -252,7 +252,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 		{
 			$comments = $this->LoadAll(
 				"SELECT page_id, tag, created, comment_on_id ".
-				"FROM {$this->config['table_prefix']}pages ".
+				"FROM {$this->config['table_prefix']}page ".
 				"WHERE owner_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"AND comment_on_id <> '0' ".
 				"ORDER BY created DESC ".
@@ -346,7 +346,7 @@ else
 	$users = $this->LoadAll(
 		"SELECT u.user_name, u.signup_time, u.session_time, u.total_pages, u.total_revisions, u.total_comments, p.hide_lastsession ".
 		"FROM {$this->config['user_table']} u ".
-			"LEFT JOIN ".$this->config["table_prefix"]."users_settings p ON (u.user_id = p.user_id) ".
+			"LEFT JOIN ".$this->config["table_prefix"]."user_setting p ON (u.user_id = p.user_id) ".
 		( $where == true ? $where : '' ).
 		( $order == true ? $order : "ORDER BY u.total_pages DESC " ).
 		"LIMIT {$pagination['offset']}, $limit");

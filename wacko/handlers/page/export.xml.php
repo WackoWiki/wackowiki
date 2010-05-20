@@ -17,7 +17,7 @@ if ($this->HasAccess("read"))
 	$numOfSlashes = substr_count($this->tag, "/");
 
 	$pages = $this->LoadAll(
-		"SELECT * FROM ".$this->config["table_prefix"]."pages ".
+		"SELECT * FROM ".$this->config["table_prefix"]."page ".
 		"WHERE (supertag = '".quote($this->dblink, $this->supertag)."'".
 		" OR supertag LIKE '".quote($this->dblink, $this->supertag."/%")."')".
 		" AND comment_on_id = '0'");
