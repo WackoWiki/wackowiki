@@ -43,7 +43,7 @@ function admin_configsecurity(&$engine, &$module)
 		$config['hide_locked']					= (int)$_POST['hide_locked'];
 		$config['remove_onlyadmins']			= (int)$_POST['remove_onlyadmins'];
 		$config['owners_can_remove_comments']	= (int)$_POST['owners_can_remove_comments'];
-		$config['owners_can_change_keywords']	= (int)$_POST['owners_can_change_keywords'];
+		$config['owners_can_change_categories']	= (int)$_POST['owners_can_change_categories'];
 		$config['moders_can_edit']				= (int)$_POST['moders_can_edit'];
 		$config['ssl']							= (int)$_POST['ssl'];
 		$config['ssl_implicit']					= (int)$_POST['ssl_implicit'];
@@ -209,9 +209,9 @@ function admin_configsecurity(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="owners_can_change_keywords"><strong>Owners can edit pages keywords:</strong><br />
-				<small>Allow owners to modify the pages keyword list of your site (add words, delete words), assigns to a page.</small></label></td>
-				<td><input type="checkbox" id="owners_can_change_keywords" name="owners_can_change_keywords" value="1"<?php echo ( $engine->config['owners_can_change_keywords'] ? ' checked="checked"' : '' );?> /></td>
+				<td class="label"><label for="owners_can_change_categories"><strong>Owners can edit pages categories:</strong><br />
+				<small>Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.</small></label></td>
+				<td><input type="checkbox" id="owners_can_change_categories" name="owners_can_change_categories" value="1"<?php echo ( $engine->config['owners_can_change_categories'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

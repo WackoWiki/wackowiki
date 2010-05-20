@@ -60,9 +60,9 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			if (($this->config["edit_summary"] == 2) && $_POST["edit_note"] == "" && $this->page["comment_on_id"] == 0)
 				$error .= $this->GetTranslation("EditNoteMissing");
 
-			// check keywords
-			#if (!$this->page && $this->GetKeywordsList($this->pagelang, 1) && $this->SaveKeywordsList($this->page["page_id"], 1) !== true)
-			#	$error .= 'Select at least one referring keyword (field) to the page. ';
+			// check categories
+			#if (!$this->page && $this->GetCategoriesList($this->pagelang, 1) && $this->SaveCategoriesList($this->page["page_id"], 1) !== true)
+			#	$error .= 'Select at least one referring category (field) to the page. ';
 
 			// captcha code starts
 			if(($this->page && $this->config["captcha_edit_page"]) || (!$this->page && $this->config["captcha_new_page"]))
@@ -136,11 +136,11 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				}
 				else
 				{
-					// log event, save keywords
+					// log event, save categories
 					if ($this->page == false)
 					{
 						// new page created
-						$this->SaveKeywordsList($this->GetPageId($this->tag));
+						$this->SaveCategoriesList($this->GetPageId($this->tag));
 						$this->Log(4, str_replace("%1", $this->tag." ".$_POST["title"], $this->GetTranslation("LogPageCreated")));
 					}
 					else
@@ -329,22 +329,22 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				$output .= "<br />";
 		}
 
-		if (!$this->page && $words = $this->GetKeywordsList($this->pagelang, 1))
+		if (!$this->page && $words = $this->GetCategoriesList($this->pagelang, 1))
 		{
 			foreach ($words as $id => $word)
 			{
-				$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['keyword'.$id.'|'.$word['parent']]) && $_POST['keyword'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="keyword'.$id.'"><strong>'.htmlspecialchars($word['keyword']).'</strong></label></span> ';
+				$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="category'.$id.'"><strong>'.htmlspecialchars($word['category']).'</strong></label></span> ';
 
 				if (isset($word['childs']) && $word['childs'] == true)
 				{
 					foreach ($word['childs'] as $id => $word)
 					{
-						$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="keyword'.$id.'" name="keyword'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['keyword'.$id.'|'.$word['parent']]) && $_POST['keyword'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="keyword'.$id.'">'.htmlspecialchars($word['keyword']).'</label></span> ';
+						$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="category'.$id.'">'.htmlspecialchars($word['category']).'</label></span> ';
 					}
 				}
 			}
 
-			$output .= "<br />".$this->GetTranslation("Keywords").':<small><br /><br />'.substr(implode(' ', $_words), 6).'</small><br /><br />';
+			$output .= "<br />".$this->GetTranslation("Categories").':<small><br /><br />'.substr(implode(' ', $_words), 6).'</small><br /><br />';
 		}
 		print($output);
 

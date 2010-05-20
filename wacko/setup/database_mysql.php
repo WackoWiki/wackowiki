@@ -36,6 +36,21 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 					"KEY timestamp (cache_time)".
 				") TYPE=MyISAM";
 
+$table_categories = "CREATE TABLE {$pref}categories (".
+					"category_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"parent INT(10) UNSIGNED NOT NULL,".
+					"lang VARCHAR(2) NOT NULL,".
+					"category VARCHAR(100) NOT NULL,".
+					"PRIMARY KEY (category_id),".
+					"UNIQUE KEY idx_categories (lang,category)".
+				") TYPE=MyISAM";
+
+$table_categories_pages = "CREATE TABLE {$pref}categories_pages (".
+						"category_id INT(10) unsigned NOT NULL,".
+						"page_id INT(10) unsigned NOT NULL,".
+						"UNIQUE KEY idx_pageword (category_id,page_id)".
+					") TYPE=MyISAM";
+
 $table_config = "CREATE TABLE {$pref}config (".
 					"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"config_name VARCHAR(100) NOT NULL DEFAULT '',".
@@ -63,21 +78,6 @@ $table_groups_members = "CREATE TABLE {$pref}groups_members (".
 					"user_id INTEGER(10) UNSIGNED NOT NULL,".
 					"UNIQUE KEY idx_group_id (group_id, user_id)".
 				")TYPE=MyISAM";
-
-$table_keywords = "CREATE TABLE {$pref}keywords (".
-					"keyword_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"parent INT(10) UNSIGNED NOT NULL,".
-					"lang VARCHAR(2) NOT NULL,".
-					"keyword VARCHAR(100) NOT NULL,".
-					"PRIMARY KEY (keyword_id),".
-					"UNIQUE KEY idx_keywords (lang,keyword)".
-				") TYPE=MyISAM";
-
-$table_keywords_pages = "CREATE TABLE {$pref}keywords_pages (".
-						"keyword_id INT(10) unsigned NOT NULL,".
-						"page_id INT(10) unsigned NOT NULL,".
-						"UNIQUE KEY idx_pageword (keyword_id,page_id)".
-					") TYPE=MyISAM";
 
 $table_links = "CREATE TABLE {$pref}links (".
 					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,".
@@ -300,8 +300,8 @@ $table_cache_drop = "DROP TABLE {$pref}cache";
 $table_config_drop = "DROP TABLE {$pref}config";
 $table_groups_drop = "DROP TABLE {$pref}groups";
 $table_groups_members_drop = "DROP TABLE {$pref}groups_members";
-$table_keywords_drop = "DROP TABLE {$pref}keywords";
-$table_keywords_pages_drop = "DROP TABLE {$pref}keywords_pages";
+$table_categories_drop = "DROP TABLE {$pref}categories";
+$table_categories_pages_drop = "DROP TABLE {$pref}categories_pages";
 $table_links_drop = "DROP TABLE {$pref}links";
 $table_log_drop = "DROP TABLE {$pref}log";
 $table_pages_drop = "DROP TABLE {$pref}pages";

@@ -51,7 +51,7 @@ if ($registered
 		{
 			if ($this->IsAdmin() || (
 				$page_id && (
-				$this->GetPageOwnerId($page_id) == $this->GetUserId())) || (
+				$this->page["owner_id"] == $this->GetUserId())) || (
 				$what[0]["user_id"] == $this->GetUserId()))
 			{
 				echo "<strong>".$this->GetTranslation("UploadRemoveConfirm")."</strong>";
@@ -113,7 +113,7 @@ if ($registered
 		{
 			if ($this->IsAdmin() || (
 				$page_id && (
-				$this->GetPageOwnerId($page_id) == $this->GetUserId())) || (
+				$this->page["owner_id"] == $this->GetUserId())) || (
 				$what[0]["user_id"] == $this->GetUserId()))
 			{
 				// 2. remove from DB

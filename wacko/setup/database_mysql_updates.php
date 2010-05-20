@@ -34,6 +34,22 @@ $table_bookmarks_r4_3 = "CREATE TABLE {$pref}bookmarks (".
 $alter_cache_r4_3 = "ALTER TABLE {$pref}cache ADD cache_time TIMESTAMP NOT NULL, ADD INDEX timestamp (cache_time)";
 $alter_cache_r4_3_1 = "ALTER TABLE {$pref}cache ADD lang VARCHAR(2) NOT NULL AFTER query";
 
+// CATEGORIES
+$table_categories_r4_3 = "CREATE TABLE {$pref}categories (".
+					"category_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"parent INT(10) UNSIGNED NOT NULL,".
+					"lang VARCHAR(2) NOT NULL,".
+					"category VARCHAR(100) NOT NULL,".
+					"PRIMARY KEY (category_id),".
+					"UNIQUE KEY idx_categories (lang,category)".
+				") TYPE=MyISAM";
+
+$table_categories_pages_r4_3 = "CREATE TABLE {$pref}categories_pages (".
+						"category_id INT(10) UNSIGNED NOT NULL,".
+						"page_id INT(10) UNSIGNED NOT NULL,".
+						"UNIQUE KEY idx_pageword (category_id,page_id)".
+					") ENGINE=MyISAM";
+
 // CONFIG
 $table_config_r4_3 = "CREATE TABLE {$pref}config (".
 					"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -63,22 +79,6 @@ $table_groups_members_r4_3 = "CREATE TABLE {$pref}groups_members (".
 					"user_id INTEGER(10) UNSIGNED NOT NULL,".
 					"UNIQUE KEY idx_group_id (group_id, user_id)".
 				")ENGINE=MyISAM";
-
-// KEYWORDS
-$table_keywords_r4_3 = "CREATE TABLE {$pref}keywords (".
-					"keyword_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"parent INT(10) UNSIGNED NOT NULL,".
-					"lang VARCHAR(2) NOT NULL,".
-					"keyword VARCHAR(100) NOT NULL,".
-					"PRIMARY KEY (keyword_id),".
-					"UNIQUE KEY idx_keywords (lang,keyword)".
-				") TYPE=MyISAM";
-
-$table_keywords_pages_r4_3 = "CREATE TABLE {$pref}keywords_pages (".
-						"keyword_id INT(10) UNSIGNED NOT NULL,".
-						"page_id INT(10) UNSIGNED NOT NULL,".
-						"UNIQUE KEY idx_pageword (keyword_id,page_id)".
-					") ENGINE=MyISAM";
 
 // LINKS
 $alter_links_r4_3 = "ALTER TABLE {$pref}links ADD id INT(10) UNSIGNED NOT NULL auto_increment FIRST, ADD PRIMARY KEY (id)";

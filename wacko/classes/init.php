@@ -248,7 +248,7 @@ class Init
 					"default_create_acl" => "$",
 
 					"rename_globalacl" => "Admins",
-					"owners_can_change_keywords" => 1,
+					"owners_can_change_categories" => 1,
 					"remove_onlyadmins" => 0,
 					"owners_can_remove_comments" => 1,
 					"store_deleted_pages" => 1,
@@ -257,7 +257,7 @@ class Init
 					"allow_registration" => 1,
 					"disable_autosubscribe" => 0,
 
-					"standard_handlers" => "acls|addcomment|claim|diff|edit|keywords|latex|msword|new|print|properties|rate|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|show|watch",
+					"standard_handlers" => "acls|addcomment|categories|claim|diff|edit|latex|msword|new|print|properties|rate|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|show|watch",
 
 					"upload" => "admins",
 					"upload_images_only" => 0,
@@ -582,7 +582,7 @@ class Init
 		// compare versions, start installer if necessary
 		if ($this->config["wacko_version"] != WACKO_VERSION)
 		{
-			if (!$_REQUEST["installAction"] && !strstr($_SERVER["SERVER_SOFTWARE"], "IIS"))
+			if (!isset($_REQUEST["installAction"]) && !strstr($_SERVER["SERVER_SOFTWARE"], "IIS"))
 			{
 				$req = $_SERVER["REQUEST_URI"];
 				if ($req{strlen($req) - 1} != "/" && strstr($req, ".php") != ".php")
