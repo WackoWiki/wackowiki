@@ -35,7 +35,7 @@ function admin_resync(&$engine, &$module)
 			{
 				$engine->Query(
 					"UPDATE {$engine->config['user_table']} ".
-					"SET total_page = ".(int)$user['n']." ".
+					"SET total_pages = ".(int)$user['n']." ".
 					"WHERE user_id = '".quote($engine->dblink, $user['owner_id'])."' ".
 					"LIMIT 1");
 			}
