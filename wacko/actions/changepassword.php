@@ -7,10 +7,14 @@ if ($this->config["ssl"] == true && ( ($_SERVER["HTTPS"] != "on" && empty($this-
 	$this->Redirect(str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'] : ''), $this->href()));
 }
 
-if (isset($_GET["secret_code"]) && $_GET["secret_code"])
+if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
 {
 	// Password forgotten. Provided secret code
-	$code = $_GET["secret_code"];
+	if ($_GET["secret_code"])
+		$code = $_GET["secret_code"];
+	elseif ($_POST["secret_code"])
+		$code = $_POST["secret_code"];
+
 	$user = $this->LoadSingle(
 		"SELECT * ".
 		"FROM ".$this->config["user_table"]." ".
