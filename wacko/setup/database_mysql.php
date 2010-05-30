@@ -258,7 +258,7 @@ $table_user = "CREATE TABLE {$pref}user (".
 
 $table_user_setting = "CREATE TABLE {$pref}user_setting (".
 					"setting_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"user_id INT(10) UNSIGNED NOT NULL,".
 					"theme VARCHAR(20) DEFAULT NULL,".
 					"lang VARCHAR(2) DEFAULT NULL,".
 					"motto TEXT,".

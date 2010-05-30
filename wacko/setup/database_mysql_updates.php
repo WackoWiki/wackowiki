@@ -261,7 +261,7 @@ $update_user_r4_3_4 = "UPDATE {$pref}users SET typografica = '0' WHERE typografi
 // USER SETTING
 $table_user_setting_r4_3 = "CREATE TABLE {$pref}user_setting (".
 					"setting_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"user_id INT(10) UNSIGNED NOT NULL,".
 					"theme VARCHAR(20) DEFAULT NULL,".
 					"lang VARCHAR(2) DEFAULT NULL,".
 					"motto TEXT,".
