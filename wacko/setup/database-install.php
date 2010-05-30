@@ -85,7 +85,7 @@ if ( ( $config["system_seed"] == "") )
 
 $salt = RandomSeed(4, 3);
 $password_encrypted = sha1($config["admin_name"].$salt.$_POST["password"]);
-$insert_admin = "INSERT INTO ".$config["table_prefix"]."user (user_name, password, salt, email, signup_time, lang) VALUES ('".$config["admin_name"]."', '".$password_encrypted."', '".$salt."', '".$config["admin_email"]."', NOW())";
+$insert_admin = "INSERT INTO ".$config["table_prefix"]."user (user_name, password, salt, email, signup_time) VALUES ('".$config["admin_name"]."', '".$password_encrypted."', '".$salt."', '".$config["admin_email"]."', NOW())";
 $insert_admin_setting = "INSERT INTO ".$config["table_prefix"]."user_setting (user_id, lang) VALUES ((SELECT user_id FROM ".$config["table_prefix"]."user WHERE user_name = '".$config["admin_name"]."' LIMIT 1), '".$config["language"]."')";
 // TODO: for Upgrade insert other aliases also in group table
 // $config["aliases"] = array("Admins" => $config["admin_name"]);
@@ -584,7 +584,7 @@ switch($config["database_driver"])
 							print("<h2>".$lang["DeletingTables"]."</h2>\n");
 							print("            <ul>\n");
 							test(str_replace("%1", "acl", $lang["DeletingTable"]), @mysqli_query($dblink, $table_acl_drop), str_replace("%1", "acl", $lang["ErrorDeletingTable"]));
-							test(str_replace("%1", "bookmark", $lang["DeletingTable"]), @mysqli_query($dblink, $table_bookmarks_drop), str_replace("%1", "bookmark", $lang["ErrorDeletingTable"]));
+							test(str_replace("%1", "bookmark", $lang["DeletingTable"]), @mysqli_query($dblink, $table_bookmark_drop), str_replace("%1", "bookmark", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "cache", $lang["DeletingTable"]), @mysqli_query($dblink, $table_cache_drop), str_replace("%1", "cache", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "config", $lang["DeletingTable"]), @mysqli_query($dblink, $table_config_drop), str_replace("%1", "config", $lang["ErrorDeletingTable"]));
 							test(str_replace("%1", "group", $lang["DeletingTable"]), @mysqli_query($dblink, $table_group_drop), str_replace("%1", "group", $lang["ErrorDeletingTable"]));
