@@ -128,7 +128,7 @@ if (!$nomark)
 		{
 			if ($title != "" && $counturlset == 1)
 			{
-				echo "<h3 class=\"feed_element_title\" style=\"background-image:url(".$feed->get_favicon().");\">".$this->Link($feed->get_permalink(), "", $title, 1, 1)."</h3>";
+				echo "<h3 class=\"feed_element_title\">".$this->Link($feed->get_permalink(), "", $title, 1, 1)."</h3>";
 			}
 			if ($title != "" && $counturlset > 1)
 			{
@@ -186,7 +186,7 @@ if (!$nomark)
 			echo "<".$headertag;
 
 			if($nomark)
-				echo " class=\"feed_element_title\" style=\"background-image:url(".$xfeed->get_favicon().");\"";
+				echo " class=\"feed_element_title\"";
 
 			echo ">".$this->Link($item->get_permalink(), "", $item->get_title(), 1, 1)."</".$headertag.">";
 			echo "<p class=\"note\"><span>".$this->GetTranslation("FeedSource")." ".$this->Link($xfeed->get_permalink(), "", $xfeed->get_title(), 1, 1)." | ".$item->get_date('d.m.Y g:i')." | ";
