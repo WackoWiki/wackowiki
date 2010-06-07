@@ -363,6 +363,16 @@ switch($config["database_driver"])
 				case "R4.3":
 					print("         <h2>Wacko R4.3.rc1 ".$lang["To"]." R4.4.rc1</h2>\n");
 					print("         <ul>\n");
+
+					// rename tables
+					test(str_replace("%1","acl",$lang["RenameTable"]), @mysql_query($rename_acl_r4_3_1, $dblink), str_replace("%1", "acl", $lang["ErrorRenamingTable"]));
+					test(str_replace("%1","link",$lang["RenameTable"]), @mysql_query($rename_link_r4_3_1, $dblink), str_replace("%1", "link", $lang["ErrorRenamingTable"]));
+					test(str_replace("%1","page",$lang["RenameTable"]), @mysql_query($rename_page_r4_2_1, $dblink), str_replace("%1", "page", $lang["ErrorRenamingTable"]));
+					test(str_replace("%1","referrer",$lang["RenameTable"]), @mysql_query($rename_referrer_r4_3_1, $dblink), str_replace("%1", "referrer", $lang["ErrorRenamingTable"]));
+					test(str_replace("%1","revision",$lang["RenameTable"]), @mysql_query($rename_revision_r4_2_1, $dblink), str_replace("%1", "revision", $lang["ErrorRenamingTable"]));
+					test(str_replace("%1","user",$lang["RenameTable"]), @mysql_query($rename_user_r4_3_1, $dblink), str_replace("%1", "user", $lang["ErrorRenamingTable"]));
+					test(str_replace("%1","watch",$lang["RenameTable"]), @mysql_query($rename_watch_r4_3_1, $dblink), str_replace("%1", "watch", $lang["ErrorRenamingTable"]));
+
 					// ! new user_id first
 					test(str_replace("%1","user",$lang["AlterTable"]), @mysql_query($alter_user_r4_3, $dblink), str_replace("%1", "user", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","user",$lang["AlterTable"]), @mysql_query($alter_user_r4_3_1, $dblink), str_replace("%1", "user", $lang["ErrorAlteringTable"]));
@@ -486,9 +496,6 @@ switch($config["database_driver"])
 					test(str_replace("%1","watch",$lang["AlterTable"]), @mysql_query($alter_watch_r4_3_4, $dblink), str_replace("%1", "watch", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","watch",$lang["AlterTable"]), @mysql_query($alter_watch_r4_3_5, $dblink), str_replace("%1", "watch", $lang["ErrorAlteringTable"]));
 					test(str_replace("%1","watch",$lang["AlterTable"]), @mysql_query($alter_watch_r4_3_6, $dblink), str_replace("%1", "watch", $lang["ErrorAlteringTable"]));
-
-					// rename
-					test(str_replace("%1","watch",$lang["AlterTable"]), @mysql_query($rename_watch_r4_3, $dblink), str_replace("%1", "watch", $lang["ErrorAlteringTable"]));
 
 					test(str_replace("%1","rating",$lang["CreatingTable"]), @mysql_query($table_rating_r4_3, $dblink), str_replace("%1", "rating", $lang["ErrorCreatingTable"]));
 
@@ -674,6 +681,15 @@ switch($config["database_driver"])
 								print("         <h2>Wacko R4.3.rc1 ".$lang["To"]." R4.4.rc1</h2>\n");
 								print("         <ul>\n");
 
+								// rename tables
+								test(str_replace("%1","acl",$lang["RenameTable"]), @mysqli_query($dblink, $rename_acl_r4_3_1), str_replace("%1", "acl", $lang["ErrorRenamingTable"]));
+								test(str_replace("%1","link",$lang["RenameTable"]), @mysqli_query($dblink, $rename_link_r4_3_1), str_replace("%1", "link", $lang["ErrorRenamingTable"]));
+								test(str_replace("%1","page",$lang["RenameTable"]), @mysqli_query($dblink, $rename_page_r4_2_1), str_replace("%1", "page", $lang["ErrorRenamingTable"]));
+								test(str_replace("%1","referrer",$lang["RenameTable"]), @mysqli_query($dblink, $rename_referrer_r4_3_1), str_replace("%1", "referrer", $lang["ErrorRenamingTable"]));
+								test(str_replace("%1","revision",$lang["RenameTable"]), @mysqli_query($dblink, $rename_revision_r4_2_1), str_replace("%1", "revision", $lang["ErrorRenamingTable"]));
+								test(str_replace("%1","user",$lang["RenameTable"]), @mysqli_query($dblink, $rename_user_r4_3_1), str_replace("%1", "user", $lang["ErrorRenamingTable"]));
+								test(str_replace("%1","watch",$lang["RenameTable"]), @mysqli_query($dblink, $rename_watch_r4_3_1), str_replace("%1", "watch", $lang["ErrorRenamingTable"]));
+
 								// ! new user_id first
 								test(str_replace("%1","user",$lang["AlterTable"]), @mysqli_query($dblink, $alter_user_r4_3), str_replace("%1", "user", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","user",$lang["AlterTable"]), @mysqli_query($dblink, $alter_user_r4_3_1), str_replace("%1", "user", $lang["ErrorAlteringTable"]));
@@ -797,9 +813,6 @@ switch($config["database_driver"])
 								test(str_replace("%1","watch",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watch_r4_3_4), str_replace("%1", "watch", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","watch",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watch_r4_3_5), str_replace("%1", "watch", $lang["ErrorAlteringTable"]));
 								test(str_replace("%1","watch",$lang["AlterTable"]), @mysqli_query($dblink, $alter_watch_r4_3_6), str_replace("%1", "watch", $lang["ErrorAlteringTable"]));
-
-								// rename
-								test(str_replace("%1","watch",$lang["AlterTable"]), @mysqli_query($dblink, $rename_watch_r4_3), str_replace("%1", "watch", $lang["ErrorAlteringTable"]));
 
 								test(str_replace("%1","rating",$lang["CreatingTable"]), @mysqli_query($dblink, $table_rating_r4_3), str_replace("%1", "rating", $lang["ErrorCreatingTable"]));
 
