@@ -159,7 +159,7 @@ function SetLanguage($lng)
 {
 	global $config, $language, $languages;
 
-	if ( !$languages[$lng] )
+	if ( !isset($languages[$lng]) )
 	{
 		$resourcefile = "lang/lang.".$lng.".php";
 		if (@file_exists($resourcefile)) include($resourcefile);
