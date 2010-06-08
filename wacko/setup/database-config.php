@@ -139,7 +139,7 @@ for($count = 0; $count < count($drivers); $count++)
    <h2><?php echo $lang["DeleteTables"];?></h2>
    <p class="notop"><?php print $lang["DeleteTablesDesc"]; ?></p>
    <label class="indented_label" for="wiki_delete_tables"><?php echo $lang["DeleteTables"];?></label>
-   <input type="checkbox" id="wiki_delete_tables" name="config[DeleteTables]" <?php echo $config["DeleteTables"] ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
+   <input type="checkbox" id="wiki_delete_tables" name="config[DeleteTables]" <?php echo isset($config["DeleteTables"]) ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
    <br />
    <div class="fake_hr_seperator">
       <hr />

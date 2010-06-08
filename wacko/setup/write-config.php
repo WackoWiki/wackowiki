@@ -96,7 +96,7 @@ else
 
 // try to delete wakka config file
 $deleted_old_wakka_config_file = true;
-if($was_wakka_upgrade && is_file('wakka.config.php'))
+if(isset($was_wakka_upgrade) && is_file('wakka.config.php'))
 {
 	@chown('wakka.config.php', 666);
 	$deleted_old_wakka_config_file = unlink('wakka.config.php');

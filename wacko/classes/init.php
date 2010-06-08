@@ -579,7 +579,7 @@ class Init
 	function Installer()
 	{
 		// compare versions, start installer if necessary
-		if ($this->config["wacko_version"] != WACKO_VERSION)
+		if (isset($this->config["wacko_version"]) && $this->config["wacko_version"] != WACKO_VERSION)
 		{
 			if (!isset($_REQUEST["installAction"]) && !strstr($_SERVER["SERVER_SOFTWARE"], "IIS"))
 			{
