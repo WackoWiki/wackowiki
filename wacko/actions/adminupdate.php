@@ -127,37 +127,4 @@ if ($this->IsAdmin())
 	}
 }
 
-
-if ($this->IsAdmin())
-{
-	if (!isset($_POST["migrate_bookmarks"]))
-	{
-		echo "<h3>2.1 Migrates user bookmarks to bookmarks table [! users_options -> bookmarks][temp for dev branch!]:</h3>";
-		echo $this->FormOpen();
-		?>
-		<input
-		type="submit" name="migrate_bookmarks"
-		value="<?php echo $this->GetTranslation("KeywordsSaveButton");?>" />
-		<?php
-		echo $this->FormClose();
-	}
-	// rename files in \files\perpage folder to @page_id@filename
-	else if (isset($_POST["migrate_bookmarks"]))
-	{
-		$_users = $this->LoadAll(
-			"SELECT user_id, bookmarks ".
-			"FROM {$this->config['table_prefix']}user_setting ");
-
-		$count = count($_users);
-
-		foreach ($_users as $_user)
-		{
-			// Bookmarks
-			$this->ConvertIntoBookmarksTable($_user['bookmarks'], $_user['user_id']);
-		}
-
-		echo "<br />bookmarks for ".$count." user inserted in bookmarks table.";
-	}
-}
-
 ?>
