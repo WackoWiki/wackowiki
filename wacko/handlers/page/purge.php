@@ -15,23 +15,23 @@ else if ($this->forum === true)
 // ToDo: config->owners_can_remove_comments ?
 if ($this->UserIsOwner() || $this->IsAdmin())
 {
-	if ($_POST["purge"] == 1)
+	if (isset($_POST["purge"]) && $_POST["purge"] == 1)
 	{
 		// Purge page
 		print("<br /><em>");
-		if ($_POST["comments"] == 1)
+		if (isset($_POST["comments"]) && $_POST["comments"] == 1)
 		{
 			$this->RemoveComments($this->tag);
 			$this->Log(1, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedAllComments")));
 			echo $this->GetTranslation("CommentsPurged")."<br />\n";
 		}
-		if ($_POST["files"] == 1)
+		if (isset($_POST["files"]) && $_POST["files"] == 1)
 		{
 			$this->RemoveFiles($this->tag);
 			$this->Log(1, str_replace('%1', $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedAllFiles")));
 			echo $this->GetTranslation("FilesPurged")."<br />\n";
 		}
-		if ($_POST["revisions"] == 1 && $this->IsAdmin())
+		if (isset($_POST["revisions"]) && $_POST["revisions"] == 1 && $this->IsAdmin())
 		{
 			$this->RemoveRevisions($this->tag);
 			$this->Log(1, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedAllRevisions")));

@@ -131,10 +131,11 @@ $wackoTranslation = array(
 	"PurgeButton"			=> "purger",
 
 	// categories handler
-	"Categories"				=> "Mots clefs",
-	"CategoriesFor"			=> "Mots clefs pour",
+	"Categories"				=> "Catégories",
+	"CategoriesFor"			=> "Catégories pour",
 	"CategoriesTip"			=> "Cliquer pour éditer les mots clefs",
-	"CategoriesUpdated"		=> "Mots clefs mis à jour",
+	"CategoriesText"		=> "Catégories",
+	"CategoriesUpdated"		=> "Catégories mis à jour",
 	"CategoriesAlreadyExists"	=> "Ce mot clef est déjà là.",
 	"CategoriesAdded"			=> "Ajout du mot clef réussi.",
 	"CategoriesRenamed"		=> "Changement de nom du mot clef réussi.",
