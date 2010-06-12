@@ -62,7 +62,7 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 		if($this->HasAccess("write") && $this->GetUser() || $this->IsAdmin())
 		{
 			EchoTab( $this->href("properties"),  $this->GetTranslation("SettingsTip"),
-			$this->GetTranslation("EditSettingsText"),
+			$this->GetTranslation("PropertiesText"),
 			$this->method != "properties"
 			);
 		}
@@ -71,7 +71,7 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 		if ($this->UserIsOwner())
 		{
 			EchoTab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->GetTranslation("EditACLConfirm")."\");":""),
-			$this->GetTranslation("EditACLText"),
+			$this->GetTranslation("ACLText"),
 			$this->method != "acls"
 			);
 		}

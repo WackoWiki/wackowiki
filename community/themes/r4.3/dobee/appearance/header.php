@@ -188,7 +188,7 @@ else if($this->HasAccess("write"))
 								echo '<br />';
 								print(" <a href=\"".$this->href("rename")."\"><img src=\"".$this->config["theme_url"]."icons/ren.gif\""."style=\"vertical-align: middle\""."\">".$this->GetTranslation("RenameText")."</a>");
 								echo '<br />';
-								print("<a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"")."\"><img src=\"".$this->config["theme_url"]."icons/access.gif\""."style=\"vertical-align: middle\"".">".$this->GetTranslation("EditACLText")."</a>");
+								print("<a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"")."\"><img src=\"".$this->config["theme_url"]."icons/access.gif\""."style=\"vertical-align: middle\"".">".$this->GetTranslation("ACLText")."</a>");
 							}
 
 							if ($this->CheckACL($this->GetUserName(),$this->config["rename_globalacl"]) && !$this->UserIsOwner()) {
