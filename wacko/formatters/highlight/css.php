@@ -13,7 +13,7 @@ $options['color']['attributevalues'] = "blue";
 $options['color']['entities'] = "orange";
 $options['color']['digits'] = "green";
 $options['line_numbers'] = false;
-if ($options["notypo"]!==false) $options["notypo"] = true;
+if ($options["notypo"] !== false) $options["notypo"] = true;
 
 $css = htmlspecialchars($text);
 $keywords = array(
@@ -195,7 +195,7 @@ $special_keywords = array(	'color',
 	}
 
 	if ($options["notypo"]) echo "<!--no"."typo-->";
-	if (!$options["nopre"]) echo "<pre class=\"code\">";
+	if (!isset($options["nopre"])) echo "<pre class=\"code\">";
 	echo preg_replace("/\&nbsp\;/", "", str_replace("\t","	",$css), 1);
 	if (!$options["nopre"]) echo "</pre>";
 	if ($options["notypo"]) echo "<!--/no"."typo-->";

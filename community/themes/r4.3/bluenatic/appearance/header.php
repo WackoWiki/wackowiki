@@ -109,7 +109,7 @@ else if($this->HasAccess("write"))
 			<?php // Show ACL button only if user has privileges (or is admin) and if the page exists ?>
 			<?php if($this->page) if($this->UserIsOwner() || $this->IsAdmin()) { ?>
 			<a href="<?php echo $this->href("acls"); ?>">
-				<img src="<?php echo $this->config["theme_url"]; ?>images/qa-acl.gif" alt="<?php echo $this->GetTranslation("EditACLText"); ?>" title="<?php echo $this->GetTranslation("EditACLText"); ?>" />
+				<img src="<?php echo $this->config["theme_url"]; ?>images/qa-acl.gif" alt="<?php echo $this->GetTranslation("ACLText"); ?>" title="<?php echo $this->GetTranslation("ACLText"); ?>" />
 			</a>
 			<?php } ?>
 			<a href="<?php echo $this->href("print"); ?>">

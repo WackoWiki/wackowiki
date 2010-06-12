@@ -295,7 +295,7 @@
 	echo EchoTab(
 		$this->href('show'),
 		$this->GetTranslation('ShowTip'),
-		$this->HasAccess('read') ? 'просмотр' : '',
+		$this->HasAccess('read') ? $this->GetTranslation("ShowText") : '',
 		$this->method == 'show',
 		'v');
 
@@ -306,7 +306,7 @@
 		((!$this->page && $this->HasAccess('create')) || $this->IsAdmin() ||
 			($this->forum === false && $this->HasAccess('write')) ||
 			($this->forum === true && ($this->UserIsOwner() || $this->IsModerator()) && (int)$this->page['comments'] == 0))
-			? 'правка' : '',
+			? $this->GetTranslation("EditText") : '',
 		$this->method == 'edit',
 		'e');
 
@@ -314,7 +314,7 @@
 	echo EchoTab(
 		$this->href('revisions'),
 		$this->GetTranslation('RevisionTip'),
-		(/* $this->forum === false && */ $this->page && $this->HasAccess('read')) ? 'редакции' : '',
+		(/* $this->forum === false && */ $this->page && $this->HasAccess('read')) ? $this->GetTranslation('RevisionText') : '',
 		$this->method == 'revisions' || $this->method == 'diff',
 		'r');
 
@@ -325,14 +325,14 @@
 		($this->page && ($this->IsAdmin() || !$this->config['remove_onlyadmins'] && (
 			($this->forum === true && $this->UserIsOwner() && (int)$this->page['comments'] == 0) ||
 			($this->forum === false && $this->UserIsOwner()))))
-			? 'удалить' : '',
+			? $this->GetTranslation('DeleteText')  : '',
 		$this->method == 'remove');
 
 	// referrers tab
 	echo EchoTab(
 		$this->href('referrers'),
 		$this->GetTranslation('ReferrersTip'),
-		($this->page && $this->HasAccess('read')) ? 'ссылки' : '',
+		($this->page && $this->HasAccess('read')) ? $this->GetTranslation("ReferrersText") : '',
 		$this->method == 'referrers' || $this->method == 'referrers_sites',
 		'l');
 
@@ -340,23 +340,23 @@
 	echo EchoTab(
 		$this->href('moderate'),
 		$this->GetTranslation('ModerateTip'),
-		($this->IsModerator() && $this->HasAccess('read')) ? 'модерация' : '',
+		($this->IsModerator() && $this->HasAccess('read')) ? $this->GetTranslation('ModerateText') : '',
 		$this->method == 'moderate',
 		'm');
 
 	// settings tab
 	echo EchoTab(
-		$this->href('settings'),
-		$this->GetTranslation('SettingsTip'),
-		(/* $this->forum === false && $this->page && */ ($this->IsAdmin() /*|| $this->IsModerator() */|| $this->UserIsOwner())) ? 'properties' : '',
-		$this->method == 'settings' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
+		$this->href('properties'),
+		$this->GetTranslation('PropertiesTip'),
+		(/* $this->forum === false && $this->page && */ ($this->IsAdmin() /*|| $this->IsModerator() */|| $this->UserIsOwner())) ? $this->GetTranslation("PropertiesText") : '',
+		$this->method == 'properties' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
 		's');
 
 	// upload tab
 	echo EchoTab(
 		$this->href('upload'),
 		$this->GetTranslation('FilesTip'),
-		(/* $this->forum === false && */ $this->page && $this->HasAccess('upload')) ? 'файлы' : '',
+		(/* $this->forum === false && */ $this->page && $this->HasAccess('upload')) ? $this->GetTranslation('FilesText') : '',
 		$this->method == 'upload',
 		'u');
 
@@ -364,8 +364,8 @@
 	echo EchoTab(
 		$this->href('acls'),
 		$this->GetTranslation('ACLTip'),
-		($this->forum === false && $this->page && ($this->IsAdmin() || $this->UserIsOwner())) ? 'доступ' : '',
-		$this->method == 'acls' || $this->method == 'massacls',
+		($this->forum === false && $this->page && ($this->IsAdmin() || $this->UserIsOwner())) ? $this->GetTranslation("ACLText") : '',
+		$this->method == 'acls',
 		'a');
 ?>
 							<div style="background-image:url(<?php echo $this->config["theme_url"] ?>images/tools_bottom.png); height:7px;"></div>
