@@ -141,8 +141,8 @@ echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $thi
 <div class="Wrapper"
 <?php if ($this->method == "edit") echo "style=\"margin-bottom:0;padding-bottom:0\""?>>
 <div class="Print">
-  <?php if ($this->GetUser()) { ?>
-  <?php echo ($this->iswatched === true ?
+<?php if ($this->GetUser()) { ?>
+<?php echo ($this->iswatched === true ?
       "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("RemoveWatch")."</a>" :
       "<a href=\"".$this->href("watch")."\">".$this->GetTranslation("SetWatch")."</a>" ) ?> ::
   <?php if (!in_array($this->tag, $this->GetBookmarkLinks())) {?>
@@ -150,15 +150,15 @@ echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $thi
 	src="<?php echo $this->config["theme_url"] ?>icons/bookmark.gif"
 	width="12" height="12"
 	alt="<?php echo $this->GetTranslation("AddToBookmarks") ?>" /></a> ::
-  <?php } else { ?>
+<?php } else { ?>
   <a
 	href="<?php echo $this->Href('', '', "removebookmark=yes")?>"><img
 	src="<?php echo $this->config["theme_url"] ?>icons/unbookmark.gif"
 	width="12" height="12"
 	alt="<?php echo $this->GetTranslation("RemoveFromBookmarks") ?>" /></a> ::
-  <?php } }
+<?php } }
 ?>
-  <?php echo"<a href=\"".$this->href("print")."\" target=\"_blank\">" ?><img
+<?php echo"<a href=\"".$this->href("print")."\" target=\"_blank\">" ?><img
 	src="<?php echo $this->config["theme_url"] ?>icons/print.gif"
 	width="21" height="20"
 	alt="<?php echo $this->GetTranslation("PrintVersion") ?>" /></a> :: <?php echo"<a href=\"".$this->href("msword")."\" target=\"_blank\">" ?><img
@@ -169,11 +169,11 @@ echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $thi
   <h1><span class="Main"><?php echo $this->config["wacko_name"] ?>:</span> <?php echo $this->GetPagePath(); ?> <a class="Search"
 	title="<?php echo $this->GetTranslation("SearchTitleTip")?>"
 	href="<?php echo $this->config["base_url"] ?>TextSearch<?php echo ($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a> </h1>
-  <?php if (($this->method != "edit") || !$this->HasAccess("write")) { ?>
+<?php if (($this->method != "edit") || !$this->HasAccess("write")) { ?>
   <div style="background-image:url(<?php echo $this->config["theme_url"] ?>icons/shade2.gif);" class="Shade"><img
 	src="<?php echo $this->config["theme_url"] ?>icons/shade1.gif"
 	width="106" height="6" alt="" /></div>
-  <?php } ?>
+<?php } ?>
 </div>
 <?php
 // here we show messages

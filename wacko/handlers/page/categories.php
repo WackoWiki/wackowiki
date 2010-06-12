@@ -15,6 +15,7 @@
 
 $selected = "";
 $group = "";
+$options = "";
 
 // redirect to show method if page don't exists
 if (!$this->page) $this->Redirect($this->href("show"));
@@ -238,7 +239,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			}
 		}
 		// (un)group item
-		else if (isset($_POST['ugroup']) && $_POST['change'])
+		else if (isset($_POST['ugroup']) && isset($_POST['change']))
 		{
 			if ($word = $this->LoadSingle("SELECT category_id, parent, category, lang FROM {$this->config['table_prefix']}category WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
 			{

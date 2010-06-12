@@ -131,6 +131,7 @@ $wackoTranslation = array(
 	"Categories"				=> "Kategorien",
 	"CategoriesFor"			=> "Kategorien für",
 	"CategoriesTip"			=> "Klicke hier um die Kategorien zu bearbeiten",
+	"CategoriesText"		=> "Kategorien",
 	"CategoriesUpdated"		=> "Kategorien aktualisiert",
 	"CategoriesAlreadyExists"	=> "Die Kategorie gibt es bereits.",
 	"CategoriesAdded"			=> "Kategorie erfolgreich hinzugefügt.",
@@ -488,7 +489,7 @@ $wackoTranslation = array(
 	"RatingNoPagesRated"	=> "keine vorhanden",
 
 	// Properties
-	"PropertiesFor" => "Einstellungen für Seite %1",
+	"PropertiesFor" => "Eigenschaften für Seite %1",
 	"MetaInfo" => "META Schlüsselwörter/Beschreibungen, die in den HTML-Kopf eingefügt werden.",
 	"MetaTitle" => "Titel",
 	"MetaKeywords" => "Schlüsselwörter",

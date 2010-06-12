@@ -134,6 +134,7 @@ $wackoTranslation = array(
 	"Categories"				=> "Categories",
 	"CategoriesFor"			=> "Categories for",
 	"CategoriesTip"			=> "Click to edit categories",
+	"CategoriesText"		=> "Categories",
 	"CategoriesUpdated"		=> "Categories updated",
 	"CategoriesAlreadyExists"	=> "This category is already there.",
 	"CategoriesAdded"			=> "Category added successfully.",

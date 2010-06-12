@@ -134,6 +134,7 @@ $wackoTranslation = array(
 	"Categories"				=> "Categories",
 	"CategoriesFor"			=> "Ключевые слова документа",
 	"CategoriesTip"			=> "Click to edit categories",
+	"CategoriesText"		=> "Categories",
 	"CategoriesUpdated"		=> "Ключевые слова документа обновлены.",
 	"CategoriesAlreadyExists"	=> "Такое ключевое слово уже существует.",
 	"CategoriesAdded"			=> "Ключевое слово успешно добавлено.",
