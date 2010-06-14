@@ -1140,7 +1140,7 @@ class Wacko
 			We load in the external antispam.conf file and then search the entire body content for each of the
 			words defined as spam.  If we find any then we return from the function, not saving the changes.
 		*/
-		$this->spam = file("antispam.conf", 1);
+		$this->spam = file("config/antispam.conf", 1);
 
 		if ($this->config["spam_filter"] && is_array($this->spam))
 		foreach ($this->spam as $spam)
@@ -2323,7 +2323,7 @@ class Wacko
 	// INTERWIKI STUFF
 	function ReadInterWikiConfig()
 	{
-		if ($lines = file("interwiki.conf"))
+		if ($lines = file("config/interwiki.conf"))
 		{
 			foreach ($lines as $line)
 			{
