@@ -409,7 +409,7 @@ function admin_groups(&$engine, &$module)
 			( $where ? $where : '' )
 			);
 
-		$pagination	= $engine->Pagination($count['n'], $limit, 'p', 'mode=groups&order='.htmlspecialchars($_GET['order']), '', 'admin.php');
+		$pagination	= $engine->Pagination($count['n'], $limit, 'p', 'mode=groups&order='.htmlspecialchars(isset($_GET['order']) && $_GET['order']), '', 'admin.php');
 
 		$users = $engine->LoadAll(
 			"SELECT g.*, u.user_name ".

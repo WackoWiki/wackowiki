@@ -294,7 +294,7 @@ if ($langs = $this->AvailableLanguages())
 
 	?>
 	<br />
-<?php echo "<div class=\"layout-box\"><p class=\"layout-box\"><span> ".$this->GetTranslation("SettingsPortal")."  </span></p>";?>
+
 <ul>
 	<li><a href="<?php echo $this->href("edit");?>"><?php echo $this->GetTranslation("SettingsEdit"); ?></a></li>
 	<li><a href="<?php echo $this->href("revisions");?>"><?php echo $this->GetTranslation("SettingsRevisions"); ?></a></li>
@@ -329,7 +329,7 @@ if ($langs = $this->AvailableLanguages())
 	<li><a href="<?php echo $this->href("latex");?>"><?php echo $this->GetTranslation("SettingsLatex"); ?></a></li>
 	<li><a href="<?php echo $this->href("export.xml");?>"><?php echo $this->GetTranslation("SettingsXML"); ?></a></li>
 </ul>
-</div>
+
 
 </div>
 	<?php
