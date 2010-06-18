@@ -418,7 +418,7 @@ function admin_users(&$engine, &$module)
 			( $where ? $where : '' )
 			);
 
-		$pagination	= $engine->Pagination($count['n'], $limit, 'p', 'mode=users&order='.htmlspecialchars($_GET['order']), '', 'admin.php');
+		$pagination	= $engine->Pagination($count['n'], $limit, 'p', 'mode=users&order='.htmlspecialchars(isset($_GET['order']) && $_GET['order']), '', 'admin.php');
 
 		$users = $engine->LoadAll(
 			"SELECT u.*, p.lang ".
