@@ -287,7 +287,7 @@
 	echo EchoTab(
 		$this->href('new'),
 		$this->GetTranslation('CreateTip'),
-		'создать',
+		$this->GetTranslation("CreateText"),
 		$this->method == 'new',
 		'n');
 
