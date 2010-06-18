@@ -4,6 +4,7 @@
 $is_global = "";
 $message = "";
 $error = "";
+$registered = "";
 
 // redirect to show method if page don't exists
 if (!$this->page) $this->Redirect($this->href("show"));
