@@ -132,7 +132,7 @@ $wackoTranslation = array(
 	"FilesPurged"			=> "All attached files were removed.",
 	"PurgeRevisions"		=> "Purge all revisions of the page",
 	"RevisionsPurged"		=> "Revisions were perged.",
-	"PurgeButton"			=> "purge",
+	"PurgeButton"			=> "Purge",
 
 	// categories handler
 	"Categories"				=> "Categories",
