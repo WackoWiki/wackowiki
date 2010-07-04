@@ -680,23 +680,24 @@ $wackoTranslation = array(
 	"CaptchaReloadWarning" => "Kann das Captcha Bild nicht neu laden, du musst die Seite neu laden um das zu tun.",
 
 	// news
+	"News"			=> "Nachrichten",
 	"NewsName"		=> "Titel",
 	"NewsSubmit"	=> "hinzufügen",
 	"NewsNoName"	=> "Du habst vergessen eine Schlagzeile hinzuzufügen.",
-	"NewsNotAvailable"	=> "No News available.",
-	"NewsDiscuss"	=> "Discuss this article...",
+	"NewsNotAvailable"	=> "Keine Nachrichten verfügbar.",
+	"NewsDiscuss"	=> "Diskutiere diesen Artikel...",
 
 	// password complexity
-	"PwdCplxShort"		=> "Password is too short.",
-	"PwdCplxEquals"		=> "Password contains the user name.",
-	"PwdCplxWeak"		=> "Password does not meet complexity requirements.",
-	"PwdCplxDesc1"		=> "Requirements for the password: ",
-	"PwdCplxDesc2"		=> "password should not be less than %1 characters",
-	"PwdCplxDesc3"		=> "should not contain your username",
-	"PwdCplxDesc4"		=> "should consist of ",
-	"PwdCplxDesc41"		=> "letters and numbers",
-	"PwdCplxDesc42"		=> "uppercase and lowercase letters and numbers",
-	"PwdCplxDesc43"		=> "uppercase and lowercase letters, digits and non-alphabetic characters",
+	"PwdCplxShort"		=> "Passwort ist zu kurz.",
+	"PwdCplxEquals"		=> "Passwort enthält den Benutzernamen.",
+	"PwdCplxWeak"		=> "Kennwort entspricht nicht der Komplexitäts-Anforderungen.",
+	"PwdCplxDesc1"		=> "Anforderungen an das Kennwort: ",
+	"PwdCplxDesc2"		=> "Passwort sollte nicht weniger als %1 Zeichen sein",
+	"PwdCplxDesc3"		=> "sollte nicht deinen Benutzernamen enthalten ",
+	"PwdCplxDesc4"		=> "sollte bestehen aus ",
+	"PwdCplxDesc41"		=> "Buchstaben und Zahlen",
+	"PwdCplxDesc42"		=> "Groß- und Kleinbuchstaben und Zahlen",
+	"PwdCplxDesc43"		=> "Groß- und Kleinbuchstaben, Ziffern und nicht-alphabetische Zeichen",
 	"PwdCplxDesc5"		=> "You can use any letters, numbers and special characters, but gaps.",
 
 	// log

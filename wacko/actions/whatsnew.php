@@ -67,7 +67,9 @@ if ($pages = array_merge($pages1, $pages2))
 		else
 			$access = true;
 
-		if ($access && isset($page['tag']) && ($printed[$page['tag']] != $page['date']) && ($count++ < $max))
+		if (!isset($printed[$page['tag']])) $printed[$page['tag']] = "";
+
+		if ($access && ($printed[$page['tag']] != $page['date']) && ($count++ < $max))
 		{
 			$printed[$page['tag']] = $page['date'];	// ignore duplicates
 
