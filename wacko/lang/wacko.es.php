@@ -625,6 +625,7 @@ $wackoTranslation = array(
 	"CaptchaReloadWarning" => "Disculpe, no puede recargar la imagen captcha, deberá recargar toda la página para hacer esto",
 
 	// news
+	"News"			=> "Noticias",
 	"NewsName"		=> "Title",
 	"NewsSubmit"	=> "add",
 	"NewsNoName"	=> "You forgot to add news headline.",
