@@ -1840,7 +1840,7 @@ class Wacko
 
 				if (is_array($desc))
 				{
-					$title	= $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
+					$title	= $desc["description"]." (".$this->binary_multiples($desc["filesize"], true, true, true).")";
 					$url	= $this->config["base_url"].$this->config["upload_path"]."/".$thing;
 					$icon	= $this->GetTranslation("fileicon");
 					$imlink	= false;
@@ -1859,7 +1859,7 @@ class Wacko
 				$desc = $this->CheckFileExists($arr[1]);
 				if (is_array($desc))
 				{
-					$title	= $desc["description"]." (".ceil($desc["filesize"] / 1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
+					$title	= $desc["description"]." (".$this->binary_multiples($desc["filesize"], true, true, true).")";
 					$url	= $this->config["base_url"].$this->config["upload_path"].$thing;
 					$icon	= $this->GetTranslation("fileicon");
 					$imlink	= false;
@@ -1902,7 +1902,7 @@ class Wacko
 					$this->HasAccess("read", $page_id)) || (
 					$desc["user_id"] == $this->GetUserId()))
 					{
-						$title	= $desc["description"]." (".ceil($desc["filesize"]/1024)."&nbsp;".$this->GetTranslation("UploadKB").")";
+						$title	= $desc["description"]." (".$this->binary_multiples($desc["filesize"], true, true, true).")";
 						$url	= $this->config["base_url"].trim($pagetag,"/")."/files".($this->config["rewrite_mode"] ? "?" : "&amp;")."get=".$file;
 						$imlink	= false;
 						$icon	= $this->GetTranslation("fileicon");
@@ -4756,6 +4756,61 @@ class Wacko
 		else return false;
 	}
 
+	function binary_multiples($size, $praefix = true, $short = true, $rounded = false)
+	{
+		if(is_numeric($size))
+		{
+			if($praefix === true)
+			{
+				// Decimal prefix
+				if($short === true)
+				{
+					$norm = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+				}
+				else
+				{
+					$norm = array('Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte');
+				}
+
+				$factor = 1000;
+			}
+			else
+			{
+				// Binary prefix
+				if($short === true)
+				{
+					$norm = array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB');
+				}
+				else
+				{
+					$norm = array('Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte');
+				}
+
+				$factor = 1024;
+			}
+
+			$count = count($norm) -1;
+
+			$x = 0;
+			while ($size >= $factor && $x < $count)
+			{
+				$size /= $factor;
+				$x++;
+			}
+			// ToDo: $this->GetTranslation($norm[$x])
+			if ($rounded === true)
+			{
+				$size = round($size, 0) . '&nbsp;' . $norm[$x];
+			}
+			else
+			{
+				$size = sprintf("%01.2f", $size) . '&nbsp;' . $norm[$x];
+			}
+
+			return $size;
+		}
+	}
+	
 }
 
 ?>
