@@ -686,6 +686,7 @@ $wackoTranslation = array(
 	"NewsSubmit"	=> "добавить",
 	"NewsNoName"	=> "Вы забыли указать заголовок добавляемой новости.",
 	"NewsNotAvailable"	=> "Новостей нет.",
+	"NewsNoClusterDefined"	=> "No News cluster defined.",
 	"NewsDiscuss"	=> "Обсудить новость…",
 
 	// moderation handler

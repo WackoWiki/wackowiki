@@ -685,6 +685,7 @@ $wackoTranslation = array(
 	"NewsSubmit"	=> "hinzufügen",
 	"NewsNoName"	=> "Du habst vergessen eine Schlagzeile hinzuzufügen.",
 	"NewsNotAvailable"	=> "Keine Nachrichten verfügbar.",
+	"NewsNoClusterDefined"	=> "No News cluster defined.",
 	"NewsDiscuss"	=> "Diskutiere diesen Artikel...",
 
 	// password complexity
