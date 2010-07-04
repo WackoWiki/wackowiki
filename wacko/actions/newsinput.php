@@ -35,16 +35,23 @@ if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd')
 		// redirecting to the edit form
 		$_SESSION['body']	= $template;
 		$_SESSION['title']	= $namehead;
-		$this->Redirect($this->href('edit', $this->tag.'/'.date('Y/').date('F/').$name, '', 1));
+		$this->Redirect($this->href('edit', $this->config["news_cluster"].'/'.date('Y/').date('F/').$name, '', 1));
 	}
 }
-
-print($this->FormOpen());
+if (!empty($this->config["news_cluster"]))
+{
+	echo $this->FormOpen();
 ?>
 	<input type="hidden" name="action" value="newsadd" />
 	<label for="newstitle"><?php echo $this->GetTranslation("NewsName"); ?>:</label>
 	<input id="newstitle" name="title" size="50" maxlength="100" value="" />
 	<input id="submit" type="submit" value="<?php echo $this->GetTranslation("NewsSubmit"); ?>" />
 
-<?php print($this->FormClose()); ?>
+<?php echo $this->FormClose(); 
+}
+else
+{
+	echo $this->GetTranslation("NewsNoClusterDefined");
+}
+?>
 <!--/notypo-->

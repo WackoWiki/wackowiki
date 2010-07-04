@@ -67,7 +67,7 @@ if ($this->HasAccess("read"))
 		// numerated links
 		if (($c = count($this->numerate_links)) > 0)
 		{
-			if (!$comments) echo "<br />";
+			if (!isset($comments)) echo "<br />";
 
 			echo "<br />";
 			echo "<div id=\"commentsfiles\">";
