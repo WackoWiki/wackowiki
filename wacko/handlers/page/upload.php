@@ -30,7 +30,7 @@ if ($registered
 ($this->CheckACL($user,$this->config["upload"]))
 )
 &&
-($this->HasAccess("write") && $this->HasAccess("read") || ($_POST["to"]=="global"))
+($this->HasAccess("write") && $this->HasAccess("read") || ($_POST["to"] == "global"))
 )
 {
 	if (isset($_GET["remove"])) // show the form
@@ -63,7 +63,7 @@ if ($registered
 		<li><?php echo $this->Link( "file:".$_GET["file"] ); ?>
 			<ul>
 				<li><?php echo $this->GetTimeStringFormatted($what[0]["uploaded_dt"]); ?></li>
-				<li><?php echo "(".ceil($what[0]["filesize"] / 1024)." ".$this->GetTranslation("UploadKB").")"; ?></li>
+				<li><?php echo "(".$this->binary_multiples($what[0]["filesize"], true, true, true).")"; ?></li>
 				<li><?php echo $_GET["file"]; ?></li>
 				<li><?php echo $what[0]["description"]; ?></li>
 			</ul>

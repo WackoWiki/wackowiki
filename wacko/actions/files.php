@@ -75,7 +75,6 @@ if ($can_view)
 	}
 
 	// display
-	$kb  = $this->GetTranslation("UploadKB");
 	$del = $this->GetTranslation("UploadRemove");
 
 	if (!$global)	$path = "@".$filepage["page_id"]."@";
@@ -104,7 +103,7 @@ if ($can_view)
 		if ($desc == "") $desc = "&nbsp;";
 
 		$filename	= $file["filename"];
-		$filesize	= ceil($file["filesize"] / 1024);
+		$filesize	= $this->binary_multiples($file["filesize"], true, true, true);
 		$fileext	= substr($filename, strrpos($filename, ".") + 1);
 		$link		= $this->Link($path2.$filename, "", $filename);
 
@@ -146,7 +145,7 @@ if ($can_view)
 <?php
 		}
 ?>
-		<td class="size-"><span class="size2-">(<?php echo $filesize; ?>&nbsp;<?php	echo $kb; ?>)</span>&nbsp;</td>
+		<td class="size-"><span class="size2-">(<?php echo $filesize; ?>)</span>&nbsp;</td>
 		<td class="file-"><?php echo $link; ?></td>
 		<td class="desc-"><?php echo $desc ?></td>
 	</tr>
