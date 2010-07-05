@@ -318,12 +318,17 @@ if ($registered
 		$this->SetMessage("<div class=\"error\">".$error."</div>");
 	}
 	echo $this->Action("upload", array())."<br />";
-	echo $this->Action("files", array());
+	
 // if (!$error) echo "<br /><hr />".$this->Action("upload", array())."<hr /><br />";
 }
 else
 {
 	$this->SetMessage($this->GetTranslation("UploadForbidden"));
+}
+// show uploaded files for current page
+if ($this->HasAccess("read"))
+{
+	echo $this->Action("files", array());
 }
 if (!$this->config["revisions_hide_cancel"])
 	echo "<input type=\"button\" value=\"".$this->GetTranslation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
