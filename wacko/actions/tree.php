@@ -37,6 +37,7 @@ if ($pages = $this->LoadAll(
 	{
 		$maxlevel = substr_count($root, '/') + $depth;
 		reset($pages);
+		$_pages = "";
 
 		do
 		{
@@ -54,136 +55,147 @@ if ($pages = $this->LoadAll(
 		$pages = $_pages;
 		unset($_pages);
 	}
-
-	// cache links
-	if ($links = $this->LoadAll(
-	"SELECT {$this->pages_meta} ".
-	"FROM {$this->config['table_prefix']}page ".
-	"WHERE supertag IN ( '".implode("', '", $sup_str)."' )", 1))
+	
+	// check results for given $depth
+	if (!empty($pages))
 	{
-		for ($i = 0; $i < count($links); $i++)
+		// cache links
+		if ($links = $this->LoadAll(
+		"SELECT {$this->pages_meta} ".
+		"FROM {$this->config['table_prefix']}page ".
+		"WHERE supertag IN ( '".implode("', '", $sup_str)."' )", 1))
 		{
-			$this->CachePage($links[$i], 1);
-		}
-	}
-
-	// cache acls
-	if ($acls = $this->LoadAll(
-	"SELECT * FROM {$this->config['table_prefix']}acl ".
-	"WHERE page_id IN ( '".implode("', '", $acl_str)."' ) AND privilege = 'read'", 1))
-	{
-		for ($i = 0; $i < count($acls); $i++)
-		{
-			$this->CacheACL($acls[$i]['page_id'], "read", 1, $acls[$i]);
-		}
-	}
-
-	// header
-	if ($root)
-	{
-		if (!$nomark)
-		{
-			if ($title)
+			for ($i = 0; $i < count($links); $i++)
 			{
-				$title = $this->Format($title);
+				$this->CachePage($links[$i], 1);
 			}
-			else
-			{
-				$title = $this->GetTranslation('TreeClusterTitle');
-				$title = str_replace('%1', $this->Link('/'.$root, '', rtrim($root, '/')), $title).':';
-			}
-
-			echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title."</span></p>\n";
 		}
-	}
-	else
-	{
-		if (!$nomark)
-			echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("TreeSiteTitle")."</span></p>\n";
-	}
 
-	// tree
-	if (count($pages) > $limit)
-	{
-		echo '<em>'.$this->GetTranslation('TreeTooBig').'</em><br/>';
-	}
-	else
-	{
-		// cluster root level
-		$rootlevel = substr_count($root, '/');
-
-		// begin list
-		echo "<ul class=\"tree\">\n";
-
-		$i	= 0;
-		$ul	= 0;
-		foreach ($pages as $page)
+		// cache acls
+		if ($acls = $this->LoadAll(
+		"SELECT * FROM {$this->config['table_prefix']}acl ".
+		"WHERE page_id IN ( '".implode("', '", $acl_str)."' ) AND privilege = 'read'", 1))
 		{
-			// check read privilege and current page tag
-			if ($page['tag'] == $root ||
-			($this->config['hide_locked'] && !$this->HasAccess('read', $page['page_id'])))
-				continue;
-
-			// check page level
-			$curlevel	= substr_count($page['tag'], '/');
-
-			// indents (sublevels)
-			if ($i > 0)
+			for ($i = 0; $i < count($acls); $i++)
 			{
-				// levels difference
-				$diff = $curlevel - $prevlevel;
+				$this->CacheACL($acls[$i]['page_id'], "read", 1, $acls[$i]);
+			}
+		}
 
-				if ($diff > 0)
+		// header
+		if ($root)
+		{
+			if (!$nomark)
+			{
+				if ($title)
 				{
-					while ($diff > 0)
+					$title = $this->Format($title);
+				}
+				else
+				{
+					$title = $this->GetTranslation('TreeClusterTitle');
+					$title = str_replace('%1', $this->Link('/'.$root, '', rtrim($root, '/')), $title).':';
+				}
+
+				echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title."</span></p>\n";
+			}
+		}
+		else
+		{
+			if (!$nomark)
+				echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("TreeSiteTitle")."</span></p>\n";
+		}
+
+		// tree
+		if (count($pages) > $limit)
+		{
+			echo '<em>'.$this->GetTranslation('TreeTooBig').'</em><br/>';
+		}
+		else
+		{
+			// cluster root level
+			$rootlevel = substr_count($root, '/');
+
+			// begin list
+			echo "<ul class=\"tree\">\n";
+
+			$i	= 0;
+			$ul	= 0;
+			foreach ($pages as $page)
+			{
+				// check read privilege and current page tag
+				if ($page['tag'] == $root ||
+				($this->config['hide_locked'] && !$this->HasAccess('read', $page['page_id'])))
+					continue;
+
+				// check page level
+				$curlevel	= substr_count($page['tag'], '/');
+
+				// indents (sublevels)
+				if ($i > 0)
+				{
+					// levels difference
+					$diff = $curlevel - $prevlevel;
+
+					if ($diff > 0)
 					{
-						echo "<ul>\n";	// open indent
-						$diff--;
-						$ul++;
+						while ($diff > 0)
+						{
+							echo "<ul>\n";	// open indent
+							$diff--;
+							$ul++;
+						}
+					}
+					else if ($diff < 0)
+					{
+						while ($diff < 0)
+						{
+							echo "</ul>\n";	// close indent
+							$diff++;
+							$ul--;
+						}
 					}
 				}
-				else if ($diff < 0)
-				{
-					while ($diff < 0)
-					{
-						echo "</ul>\n";	// close indent
-						$diff++;
-						$ul--;
-					}
-				}
+
+				// begin element
+				echo '<li>';
+				# if ($curlevel == $rootlevel && $curlevel < 2)	echo '<strong>';
+				if ($this->tag == $page['tag'])					echo '<em>';
+
+				echo $this->Link('/'.$page['tag'], '', $page['title'], 0, 1, '', 0);
+
+				// end element
+				if ($this->tag == $page['tag'])					echo '</em>';
+				# if ($curlevel == $rootlevel && $curlevel < 2)	echo '</strong>';
+				echo "</li>\n";
+
+
+				// recheck page level
+				$prevlevel	= substr_count($page['tag'], '/');
+
+				$i++;
 			}
 
-			// begin element
-			echo '<li>';
-			# if ($curlevel == $rootlevel && $curlevel < 2)	echo '<strong>';
-			if ($this->tag == $page['tag'])					echo '<em>';
+			// close all opened <ul> tags
+			if ($ul > 0) while ($ul > 0)
+			{
+				echo "</ul>\n";
+				$ul--;
+			}
 
-			echo $this->Link('/'.$page['tag'], '', $page['title'], 0, 1, '', 0);
-
-			// end element
-			if ($this->tag == $page['tag'])					echo '</em>';
-			# if ($curlevel == $rootlevel && $curlevel < 2)	echo '</strong>';
-			echo "</li>\n";
-
-
-			// recheck page level
-			$prevlevel	= substr_count($page['tag'], '/');
-
-			$i++;
-		}
-
-		// close all opened <ul> tags
-		if ($ul > 0) while ($ul > 0)
-		{
+			// end list
 			echo "</ul>\n";
-			$ul--;
 		}
-
-		// end list
-		echo "</ul>\n";
+		// footer
+		if (!$nomark) echo "</div>\n";
 	}
-	// footer
-	if (!$nomark) echo "</div>\n";
+	else
+	{
+		// no results in given level $depth
+		$title_empty_tree = $this->GetTranslation('TreeEmptyLevels');
+		$title_empty_tree = str_replace('%1', $this->Link('/'.$root, '', rtrim($root, '/')), $title_empty_tree);
+		echo '<em>'.$title_empty_tree.'</em><br/>';
+	}
 }
 else
 {

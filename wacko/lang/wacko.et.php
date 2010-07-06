@@ -333,6 +333,7 @@ $wackoTranslation = array(
 	"TreeClusterTitle" =>"Grupi %1 puu",
 	"TreeSiteTitle" =>"Saitide puu",
 	"TreeEmpty" => "%1&nbsp;-el ei ole alamlehti",
+	"TreeEmptyLevels" => "%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.",
 	"SearchTitleTip" => "Click here to show all pages containing this page title.",
 
 	"RenameText" => "Nimeta ümber",
