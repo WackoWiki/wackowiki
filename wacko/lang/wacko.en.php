@@ -374,6 +374,7 @@ $wackoTranslation = array(
 	"TreeClusterTitle" => "Tree of cluster %1",
 	"TreeSiteTitle" => "Site tree",
 	"TreeEmpty" => "%1&nbsp;has not subpages",
+	"TreeEmptyLevels" => "%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.",
 	"SearchTitleTip" => "Click here to show all pages containing this page title.",
 
 	"RenameText" => "Rename",

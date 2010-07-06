@@ -328,7 +328,7 @@ else
 // show uploaded files for current page
 if ($this->HasAccess("read"))
 {
-	echo $this->Action("files", array());
+	echo $this->Action("files", array())."<br />";
 }
 if (!$this->config["revisions_hide_cancel"])
 	echo "<input type=\"button\" value=\"".$this->GetTranslation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";

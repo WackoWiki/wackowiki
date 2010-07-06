@@ -333,6 +333,7 @@ $wackoTranslation = array(
 	"TreeClusterTitle" => "Arbre du groupe %1",
 	"TreeSiteTitle" => "Arbre du site",
 	"TreeEmpty" => "%1&nbsp;n&rsquo;a pas de pages subordonnées ou sous-pages",
+	"TreeEmptyLevels" => "%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.",
 	"SearchTitleTip" => "Cliquez ici pour voir toutes les pages avec ce titre.",
 
 	"RenameText" => "Cliquer ici pour renommer cette page",

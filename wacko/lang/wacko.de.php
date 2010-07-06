@@ -334,6 +334,7 @@ $wackoTranslation = array(
 	"TreeClusterTitle" => "Baumansicht des Clusters %1",
 	"TreeSiteTitle" => "Baumansicht der Seite",
 	"TreeEmpty" => "%1&nbsp;hat keine Unterseiten",
+	"TreeEmptyLevels" => "%1&nbsp;hat keine Unterseiten für die angegebene Baumtiefe. Erhöhe den Wert für dir Tiefe.",
 
 	"RenameText" => "Umbenennen",
 	"NewName" => "Neuer Name für diese Seite",
