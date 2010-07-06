@@ -115,7 +115,7 @@ form input.submitinput {
 }
 
 #navigation {
-	padding: 5px 20px;
+	padding: 5px 20px 0;
 	overflow: hidden;
 }
 
@@ -819,6 +819,8 @@ td.form_left, th.form_left {
 /*search*/
 .highlight {
 	background-color: #FFFEA1;
+	font-style: normal;
+	font-weight: bold;
 }
 
 #search_results li {
@@ -982,4 +984,12 @@ table.formation th, tr.formation th {
 }
 .inf .sign, .inf .text {
 	border-color: #BABFC7;
+}
+
+.breadcrumb {
+overflow:hidden;
+color:#666666;
+font-size:11px;
+padding:0 20px 0;
+margin:0 0 5px;
 }

@@ -244,7 +244,6 @@ function admin_files(&$engine, &$module)
 	print('<fieldset><legend>'.$engine->GetTranslation('UploadTitleGlobal').":</legend>\n");
 
 	// display
-	$kb		= $engine->GetTranslation('UploadKB');
 	$del	= $engine->GetTranslation('UploadRemove');
 	$path	= '';
 	$path2	= 'file:';
@@ -269,14 +268,14 @@ function admin_files(&$engine, &$module)
 		if ($desc == '') $desc = '&nbsp;';
 
 		$filename	= $file['filename'];
-		$filesize	= ceil($file['filesize'] / 1024);
+		$filesize	= $engine->binary_multiples($file['filesize'], true, true, true);
 		$fileext	= substr($filename, strrpos($filename, '.') + 1);
 		$link		= $engine->Link($path2.$filename, '', $filename);
 		$remove_href = $engine->tag.'&amp;remove=global&amp;file='.$filename;
 ?>
 		<tr>
 			<td style=""><?php echo $link; ?></td>
-			<td>(<?php echo $filesize; ?> <?php echo $kb; ?>)</td>
+			<td>(<?php echo $filesize; ?>)</td>
 			<td><?php echo $desc ?></td>
 			<td style="white-space:nowrap;"><?php echo $dt ?></td>
 			<td><a href="<?php echo $remove_href; ?>"><?php echo $engine->GetTranslation('RemoveButton') ?></a></td>

@@ -163,7 +163,7 @@ del.diff {
 .email-even {color:#808000}
 
 /* Quotes: SYNTAX <[text]> */
-blockquote {  border-left:#cccccc 3px solid; padding:5px; color: #999999; }
+blockquote {  border-left:#cccccc 3px solid; padding:5px; color: #666666; }
 blockquote p {  padding:0px;  margin: 5px 0px; }
 
 /* Paragraphs */
