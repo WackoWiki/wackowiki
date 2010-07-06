@@ -4108,37 +4108,50 @@ class Wacko
 	}
 
 	// BREADCRUMBS -- additional navigation added with WackoClusters
-	function GetPagePath($titles = false, $separator = '/', $linking = true)
+	function GetPagePath($titles = false, $separator = '/', $linking = true, $root_page = false)
 	{
-		$steps		= explode('/', $this->tag);
-		$links		= array();
 		$result		= '';
+		$_root_page	= '';
 
-		for ($i = 0; $i < count($steps) -1; $i++)
+		// check if current page is home page 
+		if ($this->config["root_page"] == $this->tag)
+			$_root_page = true;
+
+		// adds home page in front of breadcrumbs or current page is home page
+		if ($_root_page == true || $root_page == true)
+			$result .= $this->ComposeLinkToPage($this->config["root_page"]).($_root_page == true ? '' : ' '.$separator.' ');
+
+		if ($_root_page == false)
 		{
-			if ($i == 0)	$prev = '';
-			else			$prev = $links[$i - 1].'/';
-			$links[] = $prev.$steps[$i];
-		}
+			$steps		= explode('/', $this->tag);
+			$links		= array();
+
+			for ($i = 0; $i < count($steps) -1; $i++)
+			{
+				if ($i == 0)	$prev = '';
+				else			$prev = $links[$i - 1].'/';
+				$links[] = $prev.$steps[$i];
+			}
 
 			# camel case'ing
 			$linktext = preg_replace('([A-Z][a-z])', ' ${0}', $steps[$i]);
 
-		for ($i = 0; $i < count($steps) -1; $i++)
-		{
+			for ($i = 0; $i < count($steps) -1; $i++)
+			{
+				if ($titles == false)
+					$result .= $this->Link($links[$i], '', $steps[$i]).$separator;
+				else if ($linking == true)
+					$result .= $this->Link($links[$i], '', $this->GetPageTitle($steps[$i])).$separator;
+				else
+					$result .= $this->GetPageTitle($links[$i]).' '.$separator.' ';
+			}
+
 			if ($titles == false)
-				$result .= $this->Link($links[$i], '', $steps[$i]).$separator;
-			else if ($linking == true)
-				$result .= $this->Link($links[$i], '', $this->GetPageTitle($steps[$i])).$separator;
+				$result .= $steps[count($steps) - 1];
 			else
-				$result .= $this->GetPageTitle($links[$i]).' '.$separator.' ';
+				$result .= $this->GetPageTitle($this->tag);
 		}
-
-		if ($titles == false)
-			$result .= $steps[count($steps) - 1];
-		else
-			$result .= $this->GetPageTitle($this->tag);
-
+		
 		return $result;
 	}
 
