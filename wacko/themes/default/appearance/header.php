@@ -111,7 +111,8 @@ else
 	// Show Register / Login link
 	echo "<ul>\n<li>".$this->ComposeLinkToPage($this->GetTranslation("LoginPage").($this->config["rewrite_mode"] ? "?" : "&amp;")."goback=".$this->SlimUrl($this->tag), "", $this->GetTranslation("LoginPage"), 0)."</li>\n";
 	echo "<li>".$this->ComposeLinkToPage($this->GetTranslation("RegistrationPage"), "", $this->GetTranslation("RegistrationPage"), 0)."</li>\n";
-	// echo "<li>".$this->ComposeLinkToPage($this->GetTranslation("RegistrationPage"), "", $this->GetTranslation("Help"), 0)."</li>\n</ul>";
+	// echo "<li>".$this->ComposeLinkToPage($this->GetTranslation("RegistrationPage"), "", $this->GetTranslation("Help"), 0)."</li>\n";
+	echo "</ul>\n";
 }
 
 // End if
@@ -166,6 +167,12 @@ echo $this->FormClose();
 </div>
 </div>
 <div id="content">
+<div class="breadcrumb">
+<?php 
+// Shows breadcrumbs
+# echo $this->GetPagePath($titles = true, $separator = ' &gt ', $linking = true, true); ?> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag);
+?>">...</a>
+</div>
 <?php
 // here we show messages
 if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
