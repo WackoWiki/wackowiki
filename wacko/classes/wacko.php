@@ -4117,7 +4117,7 @@ class Wacko
 		for ($i = 0; $i < count($steps) -1; $i++)
 		{
 			if ($i == 0)	$prev = '';
-			else			$prev = $links[$i - 1].$separator;
+			else			$prev = $links[$i - 1].'/';
 			$links[] = $prev.$steps[$i];
 		}
 
