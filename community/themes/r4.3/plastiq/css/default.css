@@ -341,9 +341,9 @@ textarea {
 	#tools .moderate a img { background-image:url(./../images/tools_moderate.png); }
 	#tools .moderate a:hover img { background-image:url(./../images/tools_moderate_o.png); }
 	
-	#tools .settings img { background-image:url(./../images/tools_settings_s.png); }
-	#tools .settings a img { background-image:url(./../images/tools_settings.png); }
-	#tools .settings a:hover img { background-image:url(./../images/tools_settings_o.png); }
+	#tools .properties img { background-image:url(./../images/tools_properties_s.png); }
+	#tools .properties a img { background-image:url(./../images/tools_properties.png); }
+	#tools .properties a:hover img { background-image:url(./../images/tools_properties_o.png); }
 	
 	#tools .acls img { background-image:url(./../images/tools_acls_s.png); }
 	#tools .acls a img { background-image:url(./../images/tools_acls.png); }
