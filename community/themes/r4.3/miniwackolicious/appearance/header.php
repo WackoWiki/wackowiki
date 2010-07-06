@@ -130,7 +130,7 @@ else if($this->HasAccess("write"))
                         if (strpos($this->tag, $this->config["root_page"].'/') !== 0)
                             echo '<a href="'.$this->config["base_url"].'">'.$this->config["root_page"].'</a> /';
                     ?>
-                    <?php echo $this->GetPagePath(" / "); ?>
+                    <?php echo $this->GetPagePath(false, " / "); ?>
                 </p>
             </div>
             <?php } ?>
