@@ -39,7 +39,7 @@ width:100%;
 }
 
 /* Debugging informations */
-div.debug {
+div#debug {
 	background: #FFF3F3;
 	border-width: 0.2em;
 	border-style: solid;
@@ -48,7 +48,7 @@ div.debug {
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 }
-.debug, .debug li { font-size: 11px; color: #888888;}
+#debug, .debug li { font-size: 11px; color: #888888;}
 
 /* Displays text: "Comparison for..." */
 .diffinfo { font-weight: bold; color: #555555; }
