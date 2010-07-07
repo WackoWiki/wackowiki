@@ -192,7 +192,6 @@ class Wacko
 			return $new_page_id;
 		}
 	}
-	function GetPageLastWriter() { return $this->page["user_id"]; }
 	function GetWackoVersion() { return WACKO_VERSION; }
 
 	function CheckFileExists($filename, $unwrapped_tag = "" )
@@ -4113,7 +4112,7 @@ class Wacko
 		$result		= '';
 		$_root_page	= '';
 
-		// check if current page is home page 
+		// check if current page is home page
 		if ($this->config["root_page"] == $this->tag)
 			$_root_page = true;
 
@@ -4151,7 +4150,7 @@ class Wacko
 			else
 				$result .= $this->GetPageTitle($this->tag);
 		}
-		
+
 		return $result;
 	}
 
@@ -4823,7 +4822,7 @@ class Wacko
 			return $size;
 		}
 	}
-	
+
 }
 
 ?>
