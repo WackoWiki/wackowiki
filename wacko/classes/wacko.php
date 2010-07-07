@@ -276,13 +276,13 @@ class Wacko
 
 		setlocale(LC_CTYPE, $this->language["locale"]);
 
-		$this->language["locale"] = setlocale(LC_CTYPE, 0);
-		$this->language["UPPER"]     = "[".$this->language["UPPER_P"]."]";
-		$this->language["UPPERNUM"]  = "[0-9".$this->language["UPPER_P"]."]";
-		$this->language["LOWER"]     = "[".$this->language["LOWER_P"]."]";
-		$this->language["ALPHA"]     = "[".$this->language["ALPHA_P"]."]";
-		$this->language["ALPHANUM"]  = "[0-9".$this->language["ALPHA_P"]."]";
-		$this->language["ALPHANUM_P"]= "0-9".$this->language["ALPHA_P"];
+		$this->language["locale"]		= setlocale(LC_CTYPE, 0);
+		$this->language["UPPER"]		= "[".$this->language["UPPER_P"]."]";
+		$this->language["UPPERNUM"]		= "[0-9".$this->language["UPPER_P"]."]";
+		$this->language["LOWER"]		= "[".$this->language["LOWER_P"]."]";
+		$this->language["ALPHA"]		= "[".$this->language["ALPHA_P"]."]";
+		$this->language["ALPHANUM"]		= "[0-9".$this->language["ALPHA_P"]."]";
+		$this->language["ALPHANUM_P"]	= "0-9".$this->language["ALPHA_P"];
 	}
 
 	function LoadResource($lang)
