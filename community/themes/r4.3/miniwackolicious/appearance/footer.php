@@ -17,7 +17,7 @@
 								print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
 						}
 					?>
-					<?php /* show last edit info */ echo ($this->HasAccess("read") && $this->page["modified"]) ? $this->GetTranslation("LastModification").': <a href="'.$this->href("revisions").'" title="'.$this->GetTranslation("RevisionTip").'" id="page_diff"><span class="backendbutton"></span><img class="contexticon" src="'.$this->config["theme_url"].'icons/page_diff.png" alt="" />'.$this->GetPageTimeFormatted().'</a> '.$this->GetTranslation("by").' '.$this->Link($this->GetPageLastWriter()).".\n" : ''; ?>
+					<?php /* show last edit info */ echo ($this->HasAccess("read") && $this->page["modified"]) ? $this->GetTranslation("LastModification").': <a href="'.$this->href("revisions").'" title="'.$this->GetTranslation("RevisionTip").'" id="page_diff"><span class="backendbutton"></span><img class="contexticon" src="'.$this->config["theme_url"].'icons/page_diff.png" alt="" />'.$this->GetPageTimeFormatted().'</a> '.$this->GetTranslation("by").' '.$this->Link($this->page["user_name"]).".\n" : ''; ?>
 				</p>
 				<?php if ($this->GetUser()) { ?>
 				<ul>
@@ -51,7 +51,7 @@
 		<?php
 		if ($this->GetUser())
 		{
-            echo '<hr class="onlyAural"/>';
+			echo '<hr class="onlyAural"/>';
 			echo '<div class="bookmarks">';
 				echo '<h1>'.$this->GetTranslation("Bookmarks").'</h1>';
 				echo '<ol id="usermenu" class="normal">';
