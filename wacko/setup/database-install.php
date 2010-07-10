@@ -86,7 +86,7 @@ if ( ( $config["system_seed"] == "") )
 $salt = RandomSeed(4, 3);
 $password_encrypted = sha1($config["admin_name"].$salt.$_POST["password"]);
 // system holds all default pages
-$insert_system = "INSERT INTO ".$config["table_prefix"]."user (user_name, password, salt, email, account_type, signup_time) VALUES ('System', '', '', '0', '')";
+$insert_system = "INSERT INTO ".$config["table_prefix"]."user (user_name, password, salt, email, account_type, signup_time) VALUES ('System', '', '', '1', '')";
 $insert_admin = "INSERT INTO ".$config["table_prefix"]."user (user_name, password, salt, email, signup_time) VALUES ('".$config["admin_name"]."', '".$password_encrypted."', '".$salt."', '".$config["admin_email"]."', NOW())";
 $insert_admin_setting = "INSERT INTO ".$config["table_prefix"]."user_setting (user_id, lang) VALUES ((SELECT user_id FROM ".$config["table_prefix"]."user WHERE user_name = '".$config["admin_name"]."' LIMIT 1), '".$config["language"]."')";
 // TODO: for Upgrade insert other aliases also in group table
@@ -325,7 +325,7 @@ switch($config["database_driver"])
 					test(str_replace("%1","user_setting",$lang["CreatingTable"]), @mysql_query($table_user_setting, $dblink), str_replace("%1","user_setting",$lang["ErrorCreatingTable"]));
 					test(str_replace("%1","watch",$lang["CreatingTable"]), @mysql_query($table_watch, $dblink), str_replace("%1","watch",$lang["ErrorCreatingTable"]));
 
-					test($lang["InstallingAdmin"], @mysql_query($insert_system, $dblink), str_replace("%1","system account",$lang["ErrorAlreadyExists"]));
+					test($lang["InstallingSystemAccount"], @mysql_query($insert_system, $dblink), str_replace("%1","system account",$lang["ErrorAlreadyExists"]));
 					test($lang["InstallingAdmin"], @mysql_query($insert_admin, $dblink), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 					test($lang["InstallingAdminSetting"], @mysql_query($insert_admin_setting, $dblink), str_replace("%1","admin user settings",$lang["ErrorAlreadyExists"]));
 					test($lang["InstallingAdminGroup"], @mysql_query($insert_admin_group, $dblink), str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
@@ -542,6 +542,7 @@ switch($config["database_driver"])
 
 					// inserting config values
 					test($lang["InstallingConfigValues"], @mysql_query($insert_config, $dblink), str_replace("%1","config values",$lang["ErrorAlreadyExists"]));
+					test($lang["InstallingSystemAccount"], @mysql_query($insert_system, $dblink), str_replace("%1","system account",$lang["ErrorAlreadyExists"]));
 			}
 			print("            </ul>\n");
 		}
@@ -645,7 +646,7 @@ switch($config["database_driver"])
 								test(str_replace("%1","user_setting",$lang["CreatingTable"]), @mysqli_query($dblink, $table_user_setting), str_replace("%1","user_setting",$lang["ErrorCreatingTable"]));
 								test(str_replace("%1","watch",$lang["CreatingTable"]), @mysqli_query($dblink, $table_watch), str_replace("%1","watch",$lang["ErrorCreatingTable"]));
 
-								test($lang["InstallingAdmin"], @mysqli_query($dblink, $insert_system), str_replace("%1","system account",$lang["ErrorAlreadyExists"]));
+								test($lang["InstallingSystemAccount"], @mysqli_query($dblink, $insert_system), str_replace("%1","system account",$lang["ErrorAlreadyExists"]));
 								test($lang["InstallingAdmin"], @mysqli_query($dblink, $insert_admin), str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 								test($lang["InstallingAdminSetting"], @mysqli_query($dblink, $insert_admin_setting), str_replace("%1","admin user settings",$lang["ErrorAlreadyExists"]));
 								test($lang["InstallingAdminGroup"], @mysqli_query($dblink, $insert_admin_group), str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));
@@ -860,6 +861,7 @@ switch($config["database_driver"])
 
 								// inserting config values
 								test($lang["InstallingConfigValues"], @mysqli_query($dblink, $insert_config), str_replace("%1","config values",$lang["ErrorAlreadyExists"]));
+								test($lang["InstallingSystemAccount"], @mysqli_query($dblink, $insert_system), str_replace("%1","system account",$lang["ErrorAlreadyExists"]));
 
 						}
 						print("         </ul>\n");
@@ -962,7 +964,7 @@ switch($config["database_driver"])
 									testPDO(str_replace("%1","user_setting",$lang["CreatingTable"]), $table_user_setting, str_replace("%1","user_setting",$lang["ErrorCreatingTable"]));
 									testPDO(str_replace("%1","watch",$lang["CreatingTable"]), $table_watch, str_replace("%1","watch",$lang["ErrorCreatingTable"]));
 
-									testPDO($lang["InstallingAdmin"], $insert_system, str_replace("%1","system account",$lang["ErrorAlreadyExists"]));
+									testPDO($lang["InstallingSystemAccount"], $insert_system, str_replace("%1","system account",$lang["ErrorAlreadyExists"]));
 									testPDO($lang["InstallingAdmin"], $insert_admin, str_replace("%1","admin user",$lang["ErrorAlreadyExists"]));
 									testPDO($lang["InstallingAdminSetting"], $insert_admin_setting, str_replace("%1","admin user settings",$lang["ErrorAlreadyExists"]));
 									testPDO($lang["InstallingAdminGroup"], $insert_admin_group, str_replace("%1","admin group",$lang["ErrorAlreadyExists"]));

@@ -114,6 +114,7 @@ $lang = array(
 "InstallingDefaultData" => "Добавление данных по умолчанию",
 "InstallingPagesBegin" => "Добавление страниц по умолчанию",
 "InstallingPagesEnd" => "Добавление страниц по умолчанию завершено",
+"InstallingSystemAccount" => "Adding System User",
 "InstallingAdmin" => "Добавление пользователя-администратора",
 "InstallingAdminSetting" => "Добавление пользователя-администратора",
 "InstallingAdminGroup" => "Adding Admins Group",
