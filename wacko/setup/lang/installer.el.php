@@ -118,6 +118,7 @@ $lang = array(
 "InstallingDefaultData" => "Προσθήκη Προκαθορισμένων Δεδομένων",
 "InstallingPagesBegin" => "Προσθήκη Προκαθορισμένων Σελίδων",
 "InstallingPagesEnd" => "Ολοκλήρωση Προσθήκης Προκαθορισμένων Σελίδων",
+"InstallingSystemAccount" => "Adding System User",
 "InstallingAdmin" => "Προσθήκη Χρήση Διαχειριστή",
 "InstallingAdminSetting" => "Προσθήκη Χρήση Διαχειριστή",
 "InstallingAdminGroup" => "Adding Admins Group",
