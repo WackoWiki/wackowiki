@@ -85,6 +85,11 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
  this.addButton("ul","List","'  * ','',0,1,1");
  this.addButton("ol","Numbered list","'  1. ','',0,1,1");
  this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
+//this.addButton("left","Left","'%%(wacko wrapper=text wrapper_align=left)','%%',2");
+ this.addButton("center","Center","'%%(wacko wrapper=text wrapper_align=center)','%%',2");
+ this.addButton("right","Right","'%%(wacko wrapper=text wrapper_align=right)','%%',2");
+ this.addButton("justify","Justify","'%%(wacko wrapper=text wrapper_align=justify)','%%',2");
+ this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
  this.addButton("outdent","Outdent","","document.getElementById('" + this.id + "')._owner.unindent");
  this.addButton("indent","Indent","'  ','',0,1");
  this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
