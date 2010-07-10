@@ -14,6 +14,7 @@ if (!$max || $limit < $max)
 $last_users = $this->LoadAll(
 				"SELECT user_id, user_name, signup_time ".
 				"FROM ".$this->config["user_table"]." ".
+				"WHERE account_type = '0' ".
 				"ORDER BY signup_time DESC ".
 				"LIMIT ".(int)$max);
 

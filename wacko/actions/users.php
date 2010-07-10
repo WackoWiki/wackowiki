@@ -348,6 +348,8 @@ else
 		"FROM {$this->config['user_table']} u ".
 			"LEFT JOIN ".$this->config["table_prefix"]."user_setting p ON (u.user_id = p.user_id) ".
 		( $where == true ? $where : '' ).
+		( $where ? 'AND ' : "WHERE ").
+			"u.account_type = '0' ".
 		( $order == true ? $order : "ORDER BY u.total_pages DESC " ).
 		"LIMIT {$pagination['offset']}, $limit");
 

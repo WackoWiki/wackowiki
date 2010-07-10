@@ -141,9 +141,9 @@ class Init
 			*/
 
 				// load default configuration values
-				if ( @file_exists("config/config_default.inc.php") )
+				if ( @file_exists("config/config_defaults.inc.php") )
 				{
-					require_once("config/config_default.inc.php");
+					require_once("config/config_defaults.inc.php");
 				}
 				else
 				{
