@@ -238,6 +238,7 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"password VARCHAR(40) NOT NULL DEFAULT '',".
 					"salt VARCHAR(40) NOT NULL DEFAULT '',".
 					"email VARCHAR(50) NOT NULL DEFAULT '',".
+					"account_type TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"change_password VARCHAR(40) NOT NULL,".
@@ -252,6 +253,7 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"total_comments INT(10) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (user_id),".
 					"UNIQUE KEY idx_user_name (user_name),".
+					"KEY idx_account_type (account_type),".
 					"KEY idx_enabled (enabled),".
 					"KEY idx_signup_time (signup_time)".
 				") TYPE=MyISAM";

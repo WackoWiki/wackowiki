@@ -254,16 +254,17 @@ $alter_user_r4_3_19 = "ALTER TABLE {$pref}user CHANGE changepassword change_pass
 $alter_user_r4_3_20 = "ALTER TABLE {$pref}user CHANGE revisioncount revisions_count INT(10) UNSIGNED NOT NULL DEFAULT '20'";
 $alter_user_r4_3_21 = "ALTER TABLE {$pref}user CHANGE changescount changes_count INT(10) UNSIGNED NOT NULL DEFAULT '50'";
 $alter_user_r4_3_22 = "ALTER TABLE {$pref}user ADD salt VARCHAR(40) NOT NULL DEFAULT '' AFTER password";
-$alter_user_r4_3_23 = "ALTER TABLE {$pref}user DROP motto";
-$alter_user_r4_3_24 = "ALTER TABLE {$pref}user DROP revisions_count";
-$alter_user_r4_3_25 = "ALTER TABLE {$pref}user DROP changes_count";
-$alter_user_r4_3_26 = "ALTER TABLE {$pref}user DROP doubleclick_edit";
-$alter_user_r4_3_27 = "ALTER TABLE {$pref}user DROP show_comments";
-$alter_user_r4_3_28 = "ALTER TABLE {$pref}user DROP bookmarks";
-$alter_user_r4_3_29 = "ALTER TABLE {$pref}user DROP lang";
-$alter_user_r4_3_30 = "ALTER TABLE {$pref}user DROP show_spaces";
-$alter_user_r4_3_31 = "ALTER TABLE {$pref}user DROP typografica";
-$alter_user_r4_3_32 = "ALTER TABLE {$pref}user DROP more";
+$alter_user_r4_3_23 = "ALTER TABLE {$pref}user ADD account_type TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER email, ADD INDEX idx_account_type (account_type)";
+$alter_user_r4_3_24 = "ALTER TABLE {$pref}user DROP motto";
+$alter_user_r4_3_25 = "ALTER TABLE {$pref}user DROP revisions_count";
+$alter_user_r4_3_26 = "ALTER TABLE {$pref}user DROP changes_count";
+$alter_user_r4_3_27 = "ALTER TABLE {$pref}user DROP doubleclick_edit";
+$alter_user_r4_3_28 = "ALTER TABLE {$pref}user DROP show_comments";
+$alter_user_r4_3_29 = "ALTER TABLE {$pref}user DROP bookmarks";
+$alter_user_r4_3_30 = "ALTER TABLE {$pref}user DROP lang";
+$alter_user_r4_3_31 = "ALTER TABLE {$pref}user DROP show_spaces";
+$alter_user_r4_3_32 = "ALTER TABLE {$pref}user DROP typografica";
+$alter_user_r4_3_33 = "ALTER TABLE {$pref}user DROP more";
 
 $update_user_r4_3 = "UPDATE {$pref}user SET doubleclick_edit = '0' WHERE doubleclick_edit = '2'";
 $update_user_r4_3_1 = "UPDATE {$pref}user SET show_comments = '0' WHERE show_comments = '2'";

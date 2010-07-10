@@ -960,7 +960,7 @@ class Wacko
 			" ORDER BY tag", 1);
 	}
 
-	function LoadRecentlyChanged($limit = 100, $for = "", $from = "", $minor_edit = "")
+	function LoadRecentlyChanged($limit = 100, $for = "", $from = "", $minor_edit = "", $default_pages = false)
 	{
 		$limit = (int)$limit;
 
@@ -977,6 +977,9 @@ class Wacko
 				: "").
 			($minor_edit
 				? "AND p.minor_edit = '0' "
+				: "").
+			($default_pages == false
+				? "AND u.account_type = '0' "
 				: "").
 		"ORDER BY p.modified DESC ".
 		"LIMIT ".$limit, 1))
@@ -2604,12 +2607,13 @@ class Wacko
 	function LoadUser($user_name, $user_id = 0, $password = 0)
 	{
 		$user = $this->LoadSingle(
-			"SELECT u.*, p.doubleclick_edit, p.show_comments, p.motto, p.revisions_count, p.changes_count, p.lang, p.show_spaces, p.typografica, p.theme, p.autocomplete, p.dont_redirect, p.send_watchmail, p.show_files, p.allow_intercom, p.hide_lastsession, p.validate_ip, p.noid_pubs ".
+			"SELECT u.*, s.doubleclick_edit, s.show_comments, s.motto, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs ".
 			"FROM ".$this->config["user_table"]." u ".
-				"LEFT JOIN ".$this->config["table_prefix"]."user_setting p ON (u.user_id = p.user_id) ".
+				"LEFT JOIN ".$this->config["table_prefix"]."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE ".( $user_id != 0
 					? "u.user_id		= '".quote($this->dblink, $user_id)."' "
 					: "u.user_name	= '".quote($this->dblink, $user_name)."' ").
+					"AND u.account_type = '0' ".
 			($password === 0
 				? ""
 				: "AND u.password = '".quote($this->dblink, $password)."'"

@@ -45,6 +45,7 @@ function admin_users(&$engine, &$module)
 			$user = $engine->LoadSingle(
 				"SELECT user_id, user_name, real_name, email, enabled FROM {$engine->config['table_prefix']}user ".
 				"WHERE user_id = '".quote($engine->dblink, $user_id)."' ".
+					"AND account_type = '0' ".
 				"LIMIT 1");
 		}
 
@@ -173,6 +174,7 @@ function admin_users(&$engine, &$module)
 				"FROM {$engine->config['table_prefix']}user u ".
 					"LEFT JOIN ".$engine->config["table_prefix"]."user_setting p ON (u.user_id = p.user_id) ".
 				"WHERE u.user_id = '".quote($engine->dblink, $_POST['change'])."' ".
+					"AND u.account_type = '0' ".
 				"LIMIT 1"))
 			{
 				echo "<form action=\"admin.php\" method=\"post\" name=\"users\">";
@@ -425,6 +427,8 @@ function admin_users(&$engine, &$module)
 			"FROM {$engine->config['table_prefix']}user u ".
 				"LEFT JOIN ".$engine->config["table_prefix"]."user_setting p ON (u.user_id = p.user_id) ".
 			( $where ? $where : '' ).
+			( $where ? 'AND ' : "WHERE ").
+				"u.account_type = '0' ".
 			( $order ? $order : 'ORDER BY u.user_id DESC ' ).
 			"LIMIT {$pagination['offset']}, $limit");
 	?>

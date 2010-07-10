@@ -168,10 +168,10 @@ echo $this->FormClose();
 </div>
 <div id="content">
 <div class="breadcrumb">
-<?php 
+<?php
 // Shows breadcrumbs
-# echo $this->GetPagePath($titles = true, $separator = ' &gt ', $linking = true, true); ?> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag);
-?>">...</a>
+/* echo $this->GetPagePath($titles = true, $separator = ' &gt ', $linking = true, true); ?> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag);
+?>">...</a> */ ?>
 </div>
 <?php
 // here we show messages

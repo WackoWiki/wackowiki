@@ -97,7 +97,7 @@ else
 		if ($existingUser = $this->LoadUser($_POST["name"]))
 		{
 			// check for disabled account
-			if ($existingUser["enabled"] == false)
+			if (($existingUser["enabled"] == false) || $existingUser["account_type"] != 0 )
 			{
 				$error = $this->GetTranslation("AccountDisabled");
 			}
@@ -201,6 +201,8 @@ else
 
 	</p>
 </div>
+<?php
+/*
 	<p>
 		<label for=""><?php echo $this->GetTranslation("SessionDuration");?>:</label>
 		<small>
@@ -209,6 +211,8 @@ else
 			<input id="30d" name="session" value="30d" type="radio" checked="checked" /><label for="30d">30 days</label>
 		</small>
 	</p>
+	*/
+?>
 <div class="cssform">
 	<p>
 		<input id="persistent" name="persistent" value="1" type="checkbox" tabindex="3" checked="checked" />

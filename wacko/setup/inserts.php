@@ -11,7 +11,8 @@ function InsertPage($tag, $body, $lng, $rights = "Admins", $critical = false, $t
 	global $config_global, $dblink_global, $lang_global;
 
 	$page_select = "SELECT * FROM ".$config_global["table_prefix"]."page WHERE tag='".$tag."'";
-	$owner_id = "SELECT user_id FROM ".$config_global["table_prefix"]."user WHERE user_name = '".$config_global["admin_name"]."' LIMIT 1";
+	#$owner_id = "SELECT user_id FROM ".$config_global["table_prefix"]."user WHERE user_name = '".$config_global["admin_name"]."' LIMIT 1";
+	$owner_id = "SELECT user_id FROM ".$config_global["table_prefix"]."user WHERE user_name = 'System' LIMIT 1";
 	# if ($title == false) $title = AddSpacesTitle(trim(substr($tag, strrpos($tag, '/')), '/'), $lng);
 
 	// user_id 0 for WackoInstaller
