@@ -2,7 +2,7 @@
 
 // info box
 print("<div class=\"inf\">");
-include("formatters/wakka.php");
+include("formatters/wiki.php");
 print("</div>");
 
 ?>

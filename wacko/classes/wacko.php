@@ -2508,7 +2508,7 @@ class Wacko
 	}
 
 	// wrapper for the next method
-	function Format($text, $formatter = "wakka", $options = "")
+	function Format($text, $formatter = "wiki", $options = "")
 	{
 		return $this->_Format($text, $formatter, $options);
 	}

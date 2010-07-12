@@ -2,7 +2,7 @@
 
 // question box
 print("<div class=\"quest\">");
-include("formatters/wakka.php");
+include("formatters/wiki.php");
 print("</div>");
 
 ?>
