@@ -1,5 +1,5 @@
 <?php
 
-include("formatters/wakka.php");
+include("formatters/wiki.php");
 
 ?>
