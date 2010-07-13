@@ -7,13 +7,13 @@ $wackoLanguage = array(
 	"UPPER_P"  => "A-Z\xc0-\xdf\xa8",
 	"LOWER_P"  => "a-z\xe0-\xff\xb8\/\'",
 	"ALPHA_P"  => "A-Za-z\xc0-\xff\xa8\xb8\_\/\'",
-	"locale" => (version_compare(PHP_VERSION, "4.3.0", "<"))?"bg_BG.CP1251":array("bg_BG.CP1251","bg_BG","bulgarian","bg"),
+	"locale" => array("bg_BG.CP1251","bg_BG","bulgarian","bg"),
 	"NpjLettersFrom" => "àáâãäåçèêëìíîïðñòóôõúüöûÀÁÂÃÄÅÇÈÊËÌÍÎÏÐÑÒÓÔÕÚÜÖÛ",
 	"NpjLettersTo"   => "abvgdeziklmnoprstufx__cyABVGDEZIKLMNOPRSTUFX__CY",
-	"NpjBiLetters" => array( 
-		"é" => "jj", "¸" => "jo", "æ" => "zh", "÷" => "ch", 
+	"NpjBiLetters" => array(
+		"é" => "jj", "¸" => "jo", "æ" => "zh", "÷" => "ch",
 		"ø" => "sh", "ù" => "shh", "ý" => "je", "þ" => "ju", "ÿ" => "ja",
-		"É" => "Jj", "¨" => "Jo", "Æ" => "Zh", "×" => "Ch", 
+		"É" => "Jj", "¨" => "Jo", "Æ" => "Zh", "×" => "Ch",
 		"Ø" => "Sh", "Ù" => "Shh", "Ý" => "Je", "Þ" => "Ju", "ß" => "Ja",
 	),
 	"unicode_entities" => array(
