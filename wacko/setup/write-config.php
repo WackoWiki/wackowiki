@@ -72,7 +72,7 @@ print("         <ul>\n");
 print("            <li>".$lang["Writing"]." - ");
 
 $perm_changed = true;
-$fp = @fopen('config.inc.php', "w");
+$fp = @fopen('config/config.inc.php', "w");
 
 if ($fp)
 {
@@ -81,8 +81,8 @@ if ($fp)
 	fclose($fp);
 
 	// Try and make it non-writable
-	@chmod("config.inc.php", 0644);
-	$perm_changed = !is__writable('config.inc.php');
+	@chmod("config/config.inc.php", 0644);
+	$perm_changed = !is__writable('config/config.inc.php');
 
 	print(output_image(true)."</li>\n");
 

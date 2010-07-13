@@ -165,12 +165,12 @@ class Init
 						$this->config = $wackoConfig;
 					}
 				}
-				else if ( @file_exists("config.inc.php") )
+				else if ( @file_exists("config/config.inc.php") )
 				{
 					// If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R4.3
-					if ( @filesize("config.inc.php") > 0)
+					if ( @filesize("config/config.inc.php") > 0)
 					{
-						require("config.inc.php");
+						require("config/config.inc.php");
 						$this->config = $wackoConfig;
 
 						if ($wackoConfig["wacko_version"] != "R4.3.rc" && (!$wackoConfig["system_seed"] || strlen($wackoConfig["system_seed"]) < 20))
