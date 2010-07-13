@@ -8,12 +8,12 @@ $wackoLanguage = array(
 	"UPPER_P"  => "A-Z\xc0-\xd6\xd8-\xdd",
 	"LOWER_P"  => "a-z\xdf-\xf6\xf8-\xfd\xff\/'",
 	"ALPHA_P"  => "A-Za-z\xc0-\xd6\xd8-\xdd\xdf-\xf6\xf8-\xfd\xff\_\-\/'",
-	"locale" => (version_compare(PHP_VERSION, "4.3.0", "<"))?"fr_FR":array("fr","fr_FR","french"),
+	"locale" => array("fr","fr_FR","french"),
 	"NpjLettersFrom" => "àáâãåçèéêëìíîïòóôõùúûýÀÁÂÃÅÇÈÉÊËÌÍÎÏÒÓÔÕÙÚÛÝ",
 	"NpjLettersTo"   => "aaaaaceeeeiiiioooouuuyAAAAACEEEEIIIIOOOOUUUY",
 	"NpjBiLetters" => array(
 		"ä"=>"ae", "ñ"=>"ny", "ö"=>"oe", "ø"=>"oe", "ü"=>"ue", "æ"=>"ae", "Ä"=>"Ae",
-		"Ñ"=>"Ny", "Ö"=>"Oe", "Ø"=>"Oe", "Ü"=>"Ue", "Æ"=>"Ae", "ÿ"=>"yu", "ß"=>"ss", 
+		"Ñ"=>"Ny", "Ö"=>"Oe", "Ø"=>"Oe", "Ü"=>"Ue", "Æ"=>"Ae", "ÿ"=>"yu", "ß"=>"ss",
 	),
 	"unicode_entities" => array(
 		"À"=>"&#192;", "Á"=>"&#193;", "Â"=>"&#194;", "Ã"=>"&#195;", "Ä"=>"&#196;", "Å"=>"&#197;", "Æ"=>"&#198;",

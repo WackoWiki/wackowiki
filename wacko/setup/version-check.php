@@ -9,7 +9,7 @@ writeConfigHiddenNodes(array('none' => ''));
 		Check PHP Version
 	*/
 
-	$php_version_result = version_compare("5.1.0", PHP_VERSION, "<");
+	$php_version_result = version_compare("5.2.0", PHP_VERSION, "<");
 	?>
 <h2><?php echo $lang["PHPVersion"]; ?></h2>
 <p class="notop"><?php echo $lang["PHPDetected"]; ?> <?php print phpversion().'   '.output_image($php_version_result); ?></p>
