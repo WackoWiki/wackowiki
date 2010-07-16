@@ -4,9 +4,12 @@ if (!function_exists('LoadRecentlyCommented'))
 {
 	function LoadRecentlyCommented(&$wacko, $for = "", $limit = 50)
 	{
-		// NOTE: this is really stupid. Maybe my SQL-Fu is too weak, but apparently there is no easier way to simply select
+		$_ids = "";
+		$limit = (int) $limit;
+
+		// NOTE: this is really stupid. Maybe my SQL-Fu is too weak, but apparently there is no easier way
 		if ($ids = $wacko->LoadAll(
-			"SELECT a.page_id, MAX(a.created) as latest, a.comment_on_id ".
+			"SELECT a.page_id ".
 			"FROM ".$wacko->config["table_prefix"]."page a ".
 			($for
 				? 	"INNER JOIN ".$wacko->config["table_prefix"]."page b ON (a.comment_on_id = b.page_id) ".
@@ -14,66 +17,63 @@ if (!function_exists('LoadRecentlyCommented'))
 						"b.supertag LIKE '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' "
 				: 	"WHERE a.comment_on_id <> '0' ").
 			($for
-				? 	"GROUP BY b.supertag, a.id ORDER BY latest DESC"
-				:	"GROUP BY a.comment_on_id, a.page_id ORDER BY latest DESC")
+				? 	"GROUP BY a.comment_on_id ORDER BY a.created DESC"
+				:	"GROUP BY a.comment_on_id ORDER BY a.created DESC")
 			, 1));
-			{
-				// load complete comments
+		{
 				if ($ids)
-				foreach ($ids as $id)
 				{
-					$comment = $wacko->LoadSingle(
-						"SELECT b.tag as comment_on_page, b.supertag, a.tag, a.user_id, u.user_name AS user, a.modified ".
-						"FROM ".$wacko->config["table_prefix"]."page a ".
-							"INNER JOIN ".$wacko->config["table_prefix"]."page b ON (a.comment_on_id = b.page_id) ".
-							"LEFT OUTER JOIN ".$wacko->config["table_prefix"]."user u ON (a.user_id = u.user_id) ".
-						" WHERE a.page_id = '".$id["page_id"]."' LIMIT 1");
-					if (!isset($comments[$comment["comment_on_page"]]) && $num < $limit)
-					{
-						$comments[$comment["comment_on_page"]] = $comment;
-						$num++;
-					}
-				}
+					$count		= count($ids);
+					$pagination = $wacko->Pagination($count, $limit);
 
-			// now load pages
-			if ($comments)
-			{
-				// now using these ids, load the actual pages
-				foreach ($comments as $comment)
-				{
-					$page = $wacko->LoadPage($comment["comment_on_page"]);
-					$page["comment_user"] = $comment["user"];
-					$page["comment_time"] = $comment["modified"];
-					$page["comment_on_tag"] = $comment["comment_on_page"];
-					$page["comment_tag"] = $comment["tag"];
-					$pages[] = $page;
+					foreach ($ids as $key => $id)
+					{
+						if ($key > 0)
+							$_ids .= ", ";
+						$_ids .= "'".$id['page_id']."'";
+					}
+
+					// load complete comments
+					$comments = $wacko->LoadAll(
+							"SELECT b.tag as comment_on_tag, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.user_id, u.user_name AS comment_user, a.modified AS comment_time ".
+							"FROM ".$wacko->config["table_prefix"]."page a ".
+								"INNER JOIN ".$wacko->config["table_prefix"]."page b ON (a.comment_on_id = b.page_id) ".
+								"LEFT OUTER JOIN ".$wacko->config["table_prefix"]."user u ON (a.user_id = u.user_id) ".
+							" WHERE a.page_id IN ( ".$_ids." ) ".
+							"ORDER BY comment_time DESC ".
+							"LIMIT {$pagination['offset']}, {$limit}");
 				}
-			}
 		}
-		return $pages;
+		return array($comments, $pagination);
 	}
 }
 
-if (!isset($root))	$root	= $this->UnwrapLink($vars[0]);
+if (!isset($root))	$root	= $this->UnwrapLink(isset($vars['for']) ? $vars['for'] : "");
 if (!isset($root))	$root	= $this->page["tag"];
 if (!isset($noxml)) $noxml	= 0;
-if ($max == false)	$max	= $user['changes_count'];
-if ($max == false)	$max	= 50;
+
+if ($user = $this->GetUser())
+	$usermax = $user["changes_count"];
+else
+	$usermax = 50;
+if (!isset($max) || $usermax < $max)
+	$max = $usermax;
+
 if ($max > 100)		$max	= 100;
 
-if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
+if (list ($pages, $pagination) = LoadRecentlyCommented($this, $root, (int)$max))
 {
 	if ($root == "" && !(int)$noxml)
 	{
 		echo "<a href=\"".$this->config["base_url"]."xml/comments_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"])).".xml\"><img src=\"".$this->config["theme_url"]."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentCommentsXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
 	}
-
+	echo "<span class=\"pagination\">{$pagination['text']}</span>\n";
 	echo "<ul class=\"ul_list\">\n";
 
 	foreach ($pages as $page)
 	{
 		if ($this->config["hide_locked"])
-			$access = $this->HasAccess("read", $page["page_id"]);
+			$access = $this->HasAccess("read", $page["comment_on_id"]);
 		else
 			$access = true;
 
@@ -106,6 +106,7 @@ if ($pages = LoadRecentlyCommented($this, $root, (int)$max))
 		}
 	}
 	echo "</ul>\n</li>\n</ul>\n";
+	echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 }
 else
 {
