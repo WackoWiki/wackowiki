@@ -59,21 +59,21 @@ if ($this->method == 'edit')
 <?php
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
+$doubleclick = "";
 if ($user = $this->GetUser())
 {
 	if ($user["doubleclick_edit"] == "1")
 	{
-?>
-	<script type="text/javascript">
-	var edit = "<?php echo $this->href("edit");?>";
-	</script>
-<?php
+		$doubleclick = true;
 	}
 }
 else if($this->HasAccess("write"))
 {
+	$doubleclick = true;
+}
+if ($doubleclick == true)
+{
 ?>
-
 	<script type="text/javascript">
 	var edit = "<?php echo $this->href("edit");?>";
 	</script>

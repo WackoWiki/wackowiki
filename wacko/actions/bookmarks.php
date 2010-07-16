@@ -111,7 +111,7 @@ if ($user)
 			<input name=\"title_".$_bookmark["bookmark_id"]."\" type=\"text\" size=\"40\" value=\"".$_bookmark["bm_title"]."\" />
 			</td><td>
 			<!--<input type=\"radio\" id=\"bookmark".$_bookmark["bookmark_id"]."\" name=\"change\" value=\"".$_bookmark["bookmark_id"]."\" /> -->
-			<label for=\"bookmark".$_bookmark["bookmark_id"]."\">&raquo ".$_bookmark["tag"]."</label>
+			<label for=\"bookmark".$_bookmark["bookmark_id"]."\" title=\"".$_bookmark["title"]."\">&raquo ".$_bookmark["tag"]."</label>
 			</td><td>
 			<input id=\"bookmark".$_bookmark["bookmark_id"]."\" name=\"delete_".$_bookmark["bookmark_id"]."\" type=\"checkbox\" />
 			</td><!--<td>

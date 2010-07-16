@@ -5,7 +5,7 @@ $error = "";
 $output = "";
 
 // reconnect securely in ssl mode
-if ($this->config["ssl"] == true && ( ($_SERVER["HTTPS"] != "on" && empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] != '443' ))
+if ($this->config["ssl"] == true && ( (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "on" && empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] != '443' ))
 {
 	$this->Redirect(str_replace("http://", "https://".(!empty($this->config["ssl_proxy"]) ? $this->config["ssl_proxy"] : ""), $this->href()));
 }
@@ -69,7 +69,7 @@ else if ($user = $this->GetUser())
 
 				if ($this->config["ssl"] == true)
 				{
-					$output .= "Traffic Protection <tt>". ( $_SERVER["HTTPS"] == "on" ? $_SERVER["SSL_CIPHER"].' ('.$_SERVER["SSL_PROTOCOL"].')' : 'no' )."</tt>.";
+					$output .= "Traffic Protection <tt>". ( isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on" ? $_SERVER["SSL_CIPHER"].' ('.$_SERVER["SSL_PROTOCOL"].')' : 'no' )."</tt>.";
 				}
 
 				$this->SetMessage($output);
@@ -79,7 +79,7 @@ else if ($user = $this->GetUser())
 			onclick="document.location='<?php echo $this->href("", "", "action=logout"); ?>'" />
   </p>
   <p>
-		<?php echo "<a href=\"".$this->href('', $this->config['settings_page'])."\">".$this->GetTranslation("SettingsText")."</a>"; ?> | <a href="?action=clearcookies">Delete all cookies</a>
+		<?php echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelAccount"), 0); ?> | <a href="?action=clearcookies">Delete all cookies</a>
   </p>
 </div>
 <?php
