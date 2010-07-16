@@ -75,7 +75,7 @@ class Wacko
 	// DATABASE
 	function Query($query, $debug = 0)
 	{
-		if ($debug) echo "((QUERY: $query))";
+		if ($debug) echo "(QUERY: $query)";
 
 		if ($this->config['debug'] >= 2)
 			$start = $this->GetMicroTime();
@@ -964,6 +964,29 @@ class Wacko
 	{
 		$limit = (int)$limit;
 
+		// count pages
+		$count_pages = $this->LoadAll(
+		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.user_name as user ".
+		"FROM ".$this->config["table_prefix"]."page p ".
+			"LEFT JOIN ".$this->config["table_prefix"]."user u ON (p.user_id = u.user_id) ".
+		"WHERE p.comment_on_id = '0' ".
+			($from
+				? "AND p.modified <= '".quote($this->dblink, $from)." 23:59:59'"
+				: "").
+			($for
+				? "AND p.supertag LIKE '".quote($this->dblink, $this->NpjTranslit($for))."/%' "
+				: "").
+			($minor_edit
+				? "AND p.minor_edit = '0' "
+				: "").
+			($default_pages == false
+				? "AND u.account_type = '0' "
+				: "")
+		);
+
+		$count		= count($count_pages);
+		$pagination = $this->Pagination($count, $limit);
+
 		if ($pages = $this->LoadAll(
 		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.user_name as user ".
 		"FROM ".$this->config["table_prefix"]."page p ".
@@ -982,7 +1005,7 @@ class Wacko
 				? "AND u.account_type = '0' "
 				: "").
 		"ORDER BY p.modified DESC ".
-		"LIMIT ".$limit, 1))
+		"LIMIT {$pagination['offset']}, {$limit}", 1))
 		{
 			foreach ($pages as $page)
 			{
@@ -1000,14 +1023,14 @@ class Wacko
 					: "").
 			"AND a.privilege = 'read' ".
 			"ORDER BY modified DESC ".
-			"LIMIT ".$limit, 1))
+			"LIMIT {$limit}", 1))
 			{
 				for ($i = 0; $i < count($read_acls); $i++)
 				{
 					$this->CacheACL($read_acls[$i]["page_id"], "read", 1,$read_acls[$i]);
 				}
 			}
-			return $pages;
+			return array($pages, $pagination);
 		}
 	}
 
@@ -1026,6 +1049,9 @@ class Wacko
 		"ORDER BY p.modified DESC ".
 		"LIMIT ".$limit))
 		{
+			$count		= count($pages['page_id']);
+			$pagination = $this->Pagination($count, $limit);
+
 			foreach ($pages as $page)
 			{
 				$this->CachePage($page, 1);
@@ -1042,13 +1068,13 @@ class Wacko
 						: "").
 			"AND a.privilege = 'read' ".
 			"ORDER BY modified DESC ".
-			"LIMIT ".$limit))
+			"LIMIT {$pagination['offset']}, {$limit}"))
 
 			for ($i = 0; $i < count($read_acls); $i++)
 			{
 				$this->CacheACL($read_acls[$i]["page_id"], "read", 1, $read_acls[$i]);
 			}
-			return $pages;
+			return array($pages, $pagination);
 		}
 	}
 
@@ -3767,7 +3793,7 @@ class Wacko
 		$user = $this->LoadUser($auth["user_name"], 0, $auth["password"]);
 
 		// run in ssl mode?
-		if ($this->config["ssl"] == true && (( ($_SERVER["HTTPS"] == "on" && !empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
+		if ($this->config["ssl"] == true && (( (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on" && !empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
 		{
 			$this->config["open_url"] = $this->config["base_url"];
 			$this->config["base_url"] = str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'] : ''), $this->config["base_url"]);
