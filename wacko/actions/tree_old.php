@@ -1,6 +1,6 @@
 <?php
 if (!isset($page)) $page = $this->page["tag"];
-$root = $vars[$page];
+$root = (isset($vars[$page]) ? $vars[$page] : '');
 
 // input
 if (!isset($owner)) $owner = "";
@@ -260,6 +260,8 @@ if ($pages)
 		$this->CachePage($page, 1);
 		$page_id_list[] = $page["page_id"];
 	}
+
+	$acl_str = "";
 
 	//Constituent line request for acl
 	for ($i = 0; $i < count($page_id_list); $i++)
