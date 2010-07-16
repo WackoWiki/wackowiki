@@ -75,6 +75,8 @@ if ($this->HasAccess("read"))
 			echo $this->GetTranslation("Links");
 			echo "</div>\n";
 
+			$i = 0;
+
 			foreach ($this->numerate_links as $l => $n)
 			{
 				echo "<small><strong><sup><a name=\"reflink\">$n</a></sup></strong> $l</small>\n";

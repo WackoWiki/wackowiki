@@ -1049,8 +1049,8 @@ class Wacko
 		"ORDER BY p.modified DESC ".
 		"LIMIT ".$limit))
 		{
-			$count		= count($pages['page_id']);
-			$pagination = $this->Pagination($count, $limit);
+			#$count		= count($pages['page_id']);
+			#$pagination = $this->Pagination($count, $limit);
 
 			foreach ($pages as $page)
 			{
@@ -1068,13 +1068,13 @@ class Wacko
 						: "").
 			"AND a.privilege = 'read' ".
 			"ORDER BY modified DESC ".
-			"LIMIT {$pagination['offset']}, {$limit}"))
+			"LIMIT {$limit}"))
 
 			for ($i = 0; $i < count($read_acls); $i++)
 			{
 				$this->CacheACL($read_acls[$i]["page_id"], "read", 1, $read_acls[$i]);
 			}
-			return array($pages, $pagination);
+			return $pages;
 		}
 	}
 
@@ -2190,7 +2190,7 @@ class Wacko
 				// numerated wiki-links. initialize property as an array to make it work
 				if (is_array($this->numerate_links) && $pagelink != $text && $title != $this->GetTranslation("CreatePage"))
 				{
-					if (!$refnum = $this->numerate_links[$pagelink])
+					if (!$refnum = (isset($this->numerate_links[$pagelink]) ? $this->numerate_links[$pagelink] : ''))
 					{
 						$refnum = "[link".((string)count($this->numerate_links) + 1)."]";
 						$this->numerate_links[$pagelink] = $refnum;
@@ -2229,7 +2229,7 @@ class Wacko
 				// numerated outer links and file links. initialize property as an array to make it work
 				if (is_array($this->numerate_links) && $url != $text && $url != "404" && $url != "403")
 				{
-					if (!$refnum = $this->numerate_links[$url])
+					if (!$refnum = (isset($this->numerate_links[$url]) ? $this->numerate_links[$url] : ''))
 					{
 						$refnum = "[link".((string)count($this->numerate_links) + 1)."]";
 						$this->numerate_links[$url] = $refnum;

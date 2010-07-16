@@ -132,7 +132,7 @@ function admin_systemlog(&$engine, &$module)
 			<input name="update" id="submit" type="submit" value="update" />
 			<input name="reset" id="submit" type="submit" value="reset" />
 		</div>
-		<?php if ((isset($pagination['text'])) && $pagination['text'] == true )
+		<?php if (isset($pagination['text']))
 		echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n"; ?>
 		<table border="0" cellspacing="5" cellpadding="3" class="formation">
 			<tr>
@@ -191,7 +191,7 @@ function admin_systemlog(&$engine, &$module)
 	}
 ?>
 		</table>
-		<?php if ((isset($pagination['text'])) && $pagination['text'] == true )
+		<?php if (isset($pagination['text']))
 		echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</div>'."\n"; ?>
 	</form>
 <?php

@@ -67,7 +67,9 @@ if (list ($pages, $pagination) = LoadRecentlyCommented($this, $root, (int)$max))
 	{
 		echo "<a href=\"".$this->config["base_url"]."xml/comments_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"])).".xml\"><img src=\"".$this->config["theme_url"]."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentCommentsXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
 	}
-	echo "<span class=\"pagination\">{$pagination['text']}</span>\n";
+	// pagination
+	if (isset($pagination['text']))
+		echo "<span class=\"pagination\">{$pagination['text']}</span>\n";
 	echo "<ul class=\"ul_list\">\n";
 
 	foreach ($pages as $page)
@@ -106,7 +108,10 @@ if (list ($pages, $pagination) = LoadRecentlyCommented($this, $root, (int)$max))
 		}
 	}
 	echo "</ul>\n</li>\n</ul>\n";
-	echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+
+	// pagination
+	if (isset($pagination['text']))
+		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 }
 else
 {
