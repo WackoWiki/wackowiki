@@ -23,7 +23,7 @@ if (isset($_GET['markread']) && $user == true)
 	$user = $this->GetUser();
 }
 
-if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date, $hide_minor_edit))
+if (list ($pages, $pagination) = $this->LoadRecentlyChanged((int)$max, $root, $date, $hide_minor_edit))
 {
 	$count	= 0;
 	if ($user == true)
@@ -35,6 +35,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date, $hide_minor_edi
 		echo "<a href=\"".$this->config["base_url"]."xml/changes_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"])).".xml\"><img src=\"".$this->config["theme_url"]."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
 	}
 
+	echo "<span class=\"pagination\">{$pagination['text']}</span>\n";
 	echo "<ul class=\"ul_list\">\n";
 	$access = true;
 
@@ -87,6 +88,7 @@ if ($pages = $this->LoadRecentlyChanged((int)$max, $root, $date, $hide_minor_edi
 		}
 	}
 	echo "</ul>\n</li>\n</ul>\n";
+	echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 }
 else
 {
