@@ -36,7 +36,7 @@ if ( @file_exists("config/constants.php") )
 }
 else
 {
-	#die("Error loading WackoWiki constants data: file `config/constants.php` is missing.");
+	die("Error loading WackoWiki constants data: file `config/constants.php` is missing.");
 }
 
 class Init
@@ -147,7 +147,7 @@ class Init
 				}
 				else
 				{
-					#die("Error loading WackoWiki default config data: file `config/config_default.inc.php` is missing.");
+					die("Error loading WackoWiki default config data: file `config/config_defaults.inc.php` is missing.");
 				}
 
 				// load primary config
