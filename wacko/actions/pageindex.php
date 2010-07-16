@@ -43,43 +43,53 @@ if ($pages = $this->LoadAll(
 
 //  display navigation
 if ($pages_to_display)
-	echo "<span class=\"pagination\">{$pagination['text']}</span><br /><br />\n";
-	echo "<ul class=\"ul_list\">\n";
-//  display collected data
-foreach ($pages_to_display as $page)
 {
-	if ($title == 1)
-		$firstChar = strtoupper($page['title'][0]);
-	else
-		$firstChar = strtoupper($page['tag'][0]);
+	//  display navigation
+	if ($pages_to_display)
+		echo "<span class=\"pagination\">{$pagination['text']}</span><br /><br />\n";
 
-	if (preg_match('/[\W\d]/', $firstChar)) $firstChar = '#';
+	echo "<ul class=\"ul_list\">\n";
 
-	if ($firstChar != $curChar)
+	//  display collected data
+	foreach ($pages_to_display as $page)
 	{
-		if ($curChar) echo "</ul></li>\n";
+		if ($title == 1)
+			$firstChar = strtoupper($page['title'][0]);
+		else
+			$firstChar = strtoupper($page['tag'][0]);
 
-		echo "\n<li><strong>$firstChar</strong>\n<ul>\n";
+		if (preg_match('/[\W\d]/', $firstChar)) $firstChar = '#';
 
-		$curChar = $firstChar;
+		if ($firstChar != $curChar)
+		{
+			if ($curChar) echo "</ul></li>\n";
+
+			echo "\n<li><strong>$firstChar</strong>\n<ul>\n";
+
+			$curChar = $firstChar;
+		}
+
+		echo "<li>";
+		if ($title == 1)
+			echo $this->ComposeLinkToPage($page["tag"], '', $page["title"], 0);
+		else
+			echo $this->ComposeLinkToPage($page["tag"], '', $page["tag"], 0);
+		echo "</li>\n";
+
 	}
+	// close list
+	if ($curChar)
+		echo "</ul>\n</li>\n";
 
-	echo "<li>";
-	if ($title == 1)
-		echo $this->ComposeLinkToPage($page["tag"], '', $page["title"], 0);
-	else
-		echo $this->ComposeLinkToPage($page["tag"], '', $page["tag"], 0);
-	echo "</li>\n";
+	echo "</ul>\n";
 
+	//  display navigation
+	if ($pages_to_display)
+		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 }
-// close list
-if ($curChar)	echo "</ul>\n</li>\n";
-
-//  display navigation
-if ($pages_to_display)
-
-	echo "</ul>\n<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 else
+{
 	echo $this->GetTranslation("NoPagesFound");
+}
 
 ?>

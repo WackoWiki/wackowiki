@@ -280,7 +280,7 @@ if ($this->page)
 				?>
 			<a name="comments"></a>
 		<div id="commentsheader">
-		<?php if ((isset($pagination['text'])) && $pagination['text'] == true )
+		<?php if (isset($pagination['text']))
 				echo '<div style="float:right; letter-spacing:normal;"><small><small>'.$pagination['text'].'</small></small></div>'; ?>
 		<?php echo $this->GetTranslation("Comments_all")." [<a href=\"".$this->href("", "", "show_comments=0")."\">".$this->GetTranslation("HideComments")."</a>]"; ?>
 			</div>
@@ -324,7 +324,7 @@ if ($this->page)
 				echo "</ol>";
 			}
 
-			if ((isset($pagination['text'])) && $pagination['text'] == true )
+			if (isset($pagination['text']))
 				echo '<div style="text-align:right;padding-right:10px;border-top:solid 1px #BABFC7;"><small><small>'.$pagination['text'].'</small></small></div>';
 
 			// display comment form

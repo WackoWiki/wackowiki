@@ -68,7 +68,7 @@ if ($user_id = $this->GetUserId())
 			echo "</ul>\n</li>\n</ul>\n";
 
 			// pagination
-			if ((isset($pagination['text'])) && $pagination['text'] == true )
+			if (isset($pagination['text']))
 				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else
@@ -127,7 +127,7 @@ if ($user_id = $this->GetUserId())
 			echo "</ul>\n</li>\n</ul>\n";
 
 			// pagination
-			if ((isset($pagination['text'])) && $pagination['text'] == true )
+			if (isset($pagination['text']))
 				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 		else

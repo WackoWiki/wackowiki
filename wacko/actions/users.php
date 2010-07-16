@@ -217,7 +217,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 
 			// sorting and pagination
 			echo '<small>'.( isset($_GET['sort']) && $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=date').'#documents">'.$this->GetTranslation('UsersDocsSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=name').'#documents">'.$this->GetTranslation('UsersDocsSortName').'</a>' ).'</small>';
-			if ((isset($pagination['text'])) && $pagination['text'] == true )
+			if (isset($pagination['text']))
 				echo " <span class=\"pagination\">".$pagination['text']."</span>\n";
 
 			// pages list itself
@@ -259,7 +259,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				"LIMIT {$pagination['offset']}, $limit");
 
 			// pagination
-			if ((isset($pagination['text'])) && $pagination['text'] == true )
+			if (isset($pagination['text']))
 				echo "<span class=\"pagination\">".$pagination['text']."</span>\n";
 
 			// comments list itself
@@ -367,7 +367,7 @@ else
 	echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;\">\n";
 
 	// pagination
-	if ((isset($pagination['text'])) && $pagination['text'] == true )
+	if (isset($pagination['text']))
 	{
 		echo '<tr><td colspan="5"><small><small>'.$pagination['text'].'</small></small></td></tr>'."\n";
 	}
@@ -411,7 +411,7 @@ else
 	}
 
 	// pagination
-	if ((isset($pagination['text'])) && $pagination['text'] == true )
+	if (isset($pagination['text']))
 	{
 		echo "<tr><td colspan=\"5\"><span class=\"pagination\">".$pagination['text']."</span></td></tr>"."\n";
 	}

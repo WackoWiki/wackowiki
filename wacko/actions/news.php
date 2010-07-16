@@ -98,7 +98,7 @@ if (!empty($this->config["news_cluster"]))
 	if ($pages)
 	{
 		// pagination
-		if ((isset($pagination['text'])) && $pagination['text'] == true )
+		if (isset($pagination['text']))
 			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 
 		foreach ($pages as $page)
@@ -112,7 +112,7 @@ if (!empty($this->config["news_cluster"]))
 			echo "</div>";
 		}
 		// pagination
-		if ((isset($pagination['text'])) && $pagination['text'] == true )
+		if (isset($pagination['text']))
 			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 	}
 	else
