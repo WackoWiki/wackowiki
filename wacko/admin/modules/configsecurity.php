@@ -51,7 +51,7 @@ function admin_configsecurity(&$engine, &$module)
 		$config['pwd_min_chars']				= (int)$_POST['pwd_min_chars'];
 		$config['pwd_char_classes']				= (int)$_POST['pwd_char_classes'];
 		$config['pwd_unlike_login']				= (int)$_POST['pwd_unlike_login'];
-		$config['log_min_level']				= (int)$_POST['log_min_level'];
+		$config['log_level']				= (int)$_POST['log_level'];
 		$config['log_default_show']				= (int)$_POST['log_default_show'];
 		$config['log_purge_time']				= (int)$_POST['log_purge_time'];
 		$config['cookie_session']				= (int)$_POST['cookie_session'];
@@ -292,18 +292,18 @@ function admin_configsecurity(&$engine, &$module)
 				</th>
 			</tr>
 			<tr>
-				<td class="label"><label for="log_min_level"><strong>Using logging:</strong><br />
+				<td class="label"><label for="log_level"><strong>Using logging:</strong><br />
 				<small>The minimum priority of the events recorded in the log.</small></label></td>
 				<td>
-					<select style="width:200px;" id="log_min_level" name="log_min_level">
-						<option value="0"<?php echo ( (int)$engine->config['log_min_level'] === 0 ? ' selected="selected"' : '' );?>>0: not keep a journal</option>
-						<option value="7"<?php echo ( (int)$engine->config['log_min_level'] === 7 ? ' selected="selected"' : '' );?>>7: record all</option>
-						<option value="6"<?php echo ( (int)$engine->config['log_min_level'] === 6 ? ' selected="selected"' : '' );?>>6: the minimum level</option>
-						<option value="5"<?php echo ( (int)$engine->config['log_min_level'] === 5 ? ' selected="selected"' : '' );?>>5: from low</option>
-						<option value="4"<?php echo ( (int)$engine->config['log_min_level'] === 4 ? ' selected="selected"' : '' );?>>4: on average</option>
-						<option value="3"<?php echo ( (int)$engine->config['log_min_level'] === 3 ? ' selected="selected"' : '' );?>>3: from high</option>
-						<option value="2"<?php echo ( (int)$engine->config['log_min_level'] === 2 ? ' selected="selected"' : '' );?>>2: from the highest level</option>
-						<option value="1"<?php echo ( (int)$engine->config['log_min_level'] === 1 ? ' selected="selected"' : '' );?>>1: only the critical level</option>
+					<select style="width:200px;" id="log_level" name="log_level">
+						<option value="0"<?php echo ( (int)$engine->config['log_level'] === 0 ? ' selected="selected"' : '' );?>>0: not keep a journal</option>
+						<option value="7"<?php echo ( (int)$engine->config['log_level'] === 7 ? ' selected="selected"' : '' );?>>7: record all</option>
+						<option value="6"<?php echo ( (int)$engine->config['log_level'] === 6 ? ' selected="selected"' : '' );?>>6: the minimum level</option>
+						<option value="5"<?php echo ( (int)$engine->config['log_level'] === 5 ? ' selected="selected"' : '' );?>>5: from low</option>
+						<option value="4"<?php echo ( (int)$engine->config['log_level'] === 4 ? ' selected="selected"' : '' );?>>4: on average</option>
+						<option value="3"<?php echo ( (int)$engine->config['log_level'] === 3 ? ' selected="selected"' : '' );?>>3: from high</option>
+						<option value="2"<?php echo ( (int)$engine->config['log_level'] === 2 ? ' selected="selected"' : '' );?>>2: from the highest level</option>
+						<option value="1"<?php echo ( (int)$engine->config['log_level'] === 1 ? ' selected="selected"' : '' );?>>1: only the critical level</option>
 					</select>
 				</td>
 			</tr>
