@@ -2375,7 +2375,7 @@ class Wacko
 			// ssl'ing internal links
 			if ($this->config["ssl"] == true)
 			{
-				if (strpos($url, $this->config["open_url"]) !== false)
+				if (isset($this->config["open_url"]) && strpos($url, $this->config["open_url"]) !== false)
 				{
 					$url = str_replace($this->config["open_url"], $this->config["base_url"], $url);
 				}
@@ -4685,9 +4685,9 @@ class Wacko
 		if (!is_numeric($level)) return false;
 
 		// check event level: do we have to log it?
-		if ((int)$this->config['log_min_level'] === 0 ||
-		((int)$this->config['log_min_level'] !== 7 &&
-		$level > (int)$this->config['log_min_level']))
+		if ((int)$this->config['log_level'] === 0 ||
+		((int)$this->config['log_level'] !== 7 &&
+		$level > (int)$this->config['log_level']))
 		{
 			return true;
 		}

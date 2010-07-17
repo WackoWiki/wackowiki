@@ -157,7 +157,7 @@ $wackoConfig = array(
 	"debug_sql_threshold" => 0,
 
 	"log_default_show" => 1,
-	"log_min_level" => 0,
+	"log_level" => 0,
 	"log_purge_time" => 0,
 
 	"referrers_purge_time" => 1,
