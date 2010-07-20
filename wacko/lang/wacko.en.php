@@ -46,8 +46,7 @@ $wackoTranslation = array(
 	"PDFLink" => "PDF Document (in new window)",
 	"RDFLink" => "RDF Document",
 	"EmailLink" => "Write an email (mail client launch)",
-	"CreateTip" => "Click to create a new page",
-	"CreateText" => "Create",
+
 	"ShowTip" => "Return in view mode",
 	"ShowText" => "View",
 	"WikieditAutocomplete" => "Complete wikilinks by Ctrl+Space",

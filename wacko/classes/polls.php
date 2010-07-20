@@ -58,6 +58,8 @@ class Polls
 	// all years when new surveys was started
 	function PollYears()
 	{
+		$years = '';
+
 		$list = $this->engine->LoadAll(
 			"SELECT YEAR(start) AS years ".
 			"FROM {$this->engine->config['table_prefix']}poll ".

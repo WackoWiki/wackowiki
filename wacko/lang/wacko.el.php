@@ -46,8 +46,7 @@ $wackoTranslation = array(
 	"PDFLink" => "Έγγραφο PDF (σε νέο παράθυρο)",
 	"RDFLink" => "Έγγραφο RDF",
 	"EmailLink" => "Συγγραφή ενός email (εκκίνηση mail εφαρμογής)",
-	"CreateTip" => "Click to create a new page",
-	"CreateText" => "Create",
+
 	"ShowTip" => "Πάτησε εδώ για να επιστρέψεις στην κατάσταση εμφάνισης",
 	"ShowText" => "Εμφάνιση",
 	"WikieditAutocomplete" => "Ολοκλήρωση των wikilinks με Ctrl+Space",
@@ -137,7 +136,7 @@ $wackoTranslation = array(
 	// categories handler
 	"Categories"				=> "Categories",
 	"CategoriesFor"			=> "Categories for",
-	"CategoriesTip"			=> "Click to edit categories",
+	"CategoriesTip"			=> "Edit categories",
 	"CategoriesText"		=> "Categories",
 	"CategoriesUpdated"		=> "Categories updated",
 	"CategoriesAlreadyExists"	=> "This category is already there.",
@@ -356,7 +355,7 @@ $wackoTranslation = array(
 
 	"CreatePage" => "Δημιούργησε αυτή την σελίδα",
 	"CreateNewPage" => "Create a new page",
-	"CreateNewPageTip" => "Click to create a new page.",
+	"CreateNewPageTip" => "Create a new page.",
 	"CreateRandomPage" => "Create a random page",
 	"CreatePageButton" => "Create",
 	"CreateSubPage" => "Create a sub page in the cluster",

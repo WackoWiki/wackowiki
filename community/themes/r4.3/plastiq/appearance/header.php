@@ -286,8 +286,8 @@
 	// create tab
 	echo EchoTab(
 		$this->href('new'),
-		$this->GetTranslation('CreateTip'),
-		$this->GetTranslation("CreateText"),
+		$this->GetTranslation('CreateNewPageTip'),
+		$this->GetTranslation("CreatePageButton"),
 		$this->method == 'new',
 		'n');
 

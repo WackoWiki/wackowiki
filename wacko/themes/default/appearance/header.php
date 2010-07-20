@@ -124,7 +124,7 @@ else
 	echo '<div id="usermenu">';
 		echo "<ol>\n";
 		// Main page
-		echo "<li>".$this->ComposeLinkToPage($this->config["root_page"])."</li>\n";
+		#echo "<li>".$this->ComposeLinkToPage($this->config["root_page"])."</li>\n";
 		echo "<li>";
 		// Bookmarks
 		$formatedBMs = $this->Format($this->GetBookmarksFormatted(), "post_wacko");
@@ -170,9 +170,11 @@ echo $this->FormClose();
 <div class="breadcrumb">
 <?php
 // Shows breadcrumbs
-/* echo $this->GetPagePath($titles = true, $separator = ' &gt ', $linking = true, true); ?> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag);
-?>">...</a> */ ?>
+echo $this->GetPagePath($titles = true, $separator = ' &gt ', $linking = true, true); ?> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag);
+?>">...</a>
 </div>
+</div>
+<div id="content">
 <?php
 // here we show messages
 if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";

@@ -22,7 +22,9 @@ function admin_dbbackup(&$engine, &$module)
 	$directories	= & $module['vars'][1];
 
 	// backup scheme
-	if ($_GET['structure'] === NULL && $_GET['data'] === NULL && $_GET['files'] === NULL)
+	if (!isset($_GET['structure']) && 
+		!isset($_GET['data'])  && 
+		!isset($_GET['files']) )
 	{
 		$scheme['structure']	= 1;
 		$scheme['data']			= 1;
