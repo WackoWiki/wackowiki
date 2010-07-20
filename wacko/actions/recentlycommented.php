@@ -72,50 +72,53 @@ if (list ($pages, $pagination) = LoadRecentlyCommented($this, $root, (int)$max))
 		echo "<span class=\"pagination\">{$pagination['text']}</span>\n";
 	echo "<ul class=\"ul_list\">\n";
 
-	foreach ($pages as $page)
+	if ($pages)
 	{
-		if ($this->config["hide_locked"])
-			$access = $this->HasAccess("read", $page["comment_on_id"]);
-		else
-			$access = true;
-
-		if ($access && $this->UserAllowedComments())
+		foreach ($pages as $page)
 		{
-			// day header
-			list($day, $time) = explode(" ", $page["comment_time"]);
+			if ($this->config["hide_locked"])
+				$access = $this->HasAccess("read", $page["comment_on_id"]);
+			else
+				$access = true;
 
-			if (!isset($curday)) $curday = "";
-			if ($day != $curday)
+			if ($access && $this->UserAllowedComments())
 			{
-				if ($curday)
+				// day header
+				list($day, $time) = explode(" ", $page["comment_time"]);
+
+				if (!isset($curday)) $curday = "";
+				if ($day != $curday)
 				{
-					echo "</ul>\n<br /></li>\n";
+					if ($curday)
+					{
+						echo "</ul>\n<br /></li>\n";
+					}
+					echo "<li><b>".date($this->config["date_format"],strtotime($day)).":</b>\n<ul>\n";
+					$curday = $day;
 				}
-				echo "<li><b>".date($this->config["date_format"],strtotime($day)).":</b>\n<ul>\n";
-				$curday = $day;
+
+				// print entry
+				echo "<li><span class=\"dt\">".date($this->config["time_format_seconds"], strtotime( $time ))."</span> &mdash; (<a href=\"".
+				$this->href("", $page["comment_tag"], "")."\">".$page["comment_on_tag"]."</a>".
+				") . . . . . . . . . . . . . . . . <small>".$this->GetTranslation("LatestCommentBy")." ".
+				($page["comment_user"]
+					? ($this->IsWikiName($page["comment_user"])
+						? $this->Link("/".$page["comment_user"],"",$page["comment_user"] )
+						: $page["comment_user"])
+					: $this->GetTranslation("Guest")).
+				"</small></li>\n";
 			}
-
-			// print entry
-			echo "<li><span class=\"dt\">".date($this->config["time_format_seconds"], strtotime( $time ))."</span> &mdash; (<a href=\"".
-			$this->href("", $page["comment_tag"], "")."\">".$page["comment_on_tag"]."</a>".
-			") . . . . . . . . . . . . . . . . <small>".$this->GetTranslation("LatestCommentBy")." ".
-			($page["comment_user"]
-				? ($this->IsWikiName($page["comment_user"])
-					? $this->Link("/".$page["comment_user"],"",$page["comment_user"] )
-					: $page["comment_user"])
-				: $this->GetTranslation("Guest")).
-			"</small></li>\n";
 		}
-	}
-	echo "</ul>\n</li>\n</ul>\n";
+		echo "</ul>\n</li>\n</ul>\n";
 
-	// pagination
-	if (isset($pagination['text']))
-		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
-}
-else
-{
-	echo $this->GetTranslation("NoRecentlyCommented");
+		// pagination
+		if (isset($pagination['text']))
+			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+	}
+	else
+	{
+		echo $this->GetTranslation("NoRecentlyCommented");
+	}
 }
 
 ?>

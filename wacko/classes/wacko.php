@@ -436,7 +436,7 @@ class Wacko
 			else
 				$lang = $this->userlang;
 			else
-				$lang = $this->pagelang;
+				$lang = (isset($this->pagelang) ? $this->pagelang : NULL);
 
 		return $lang;
 	}

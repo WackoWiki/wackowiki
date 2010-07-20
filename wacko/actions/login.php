@@ -55,6 +55,7 @@ else if ($user = $this->GetUser())
 				$output .= $this->GetUnixTimeFormatted($cookie[2]).'</tt> ';
 				// session time left
 				$time_diff = $cookie[2] - time();
+
 				if ($time_diff > 2 * 24 * 3600)
 					$output .= '(in '.ceil($time_diff / 24 / 3600).' days).';
 				else if ($time_diff > 5 * 3600)

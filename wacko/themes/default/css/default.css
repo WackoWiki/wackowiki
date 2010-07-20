@@ -112,11 +112,13 @@ form input.submitinput {
 	clear: both;
 	overflow: hidden;
 	padding: 20px 20px 5px 20px;
+	background: #FFFFFF;
 }
 
 #navigation {
 	padding: 5px 20px 0;
 	overflow: hidden;
+	background:#FFFFFF;
 }
 
 /** Styles for the main content in the page. *********************************/
@@ -699,7 +701,7 @@ td.form_left, th.form_left {
 }
 
 #usermenu li {
-	border-left: 1px solid #aaa;
+	border-left: 1px dotted #aaa;
 	float: left;
 	line-height: 1.2em;
 	margin: 0 .5em 0 -.5em;
@@ -987,9 +989,14 @@ table.formation th, tr.formation th {
 }
 
 .breadcrumb {
-overflow:hidden;
-color:#666666;
-font-size:11px;
-padding:0 20px 0;
-margin:0 0 5px;
+/*overflow:hidden;*/
+/* background: #D2D0D0; */
+border-bottom:1px dotted #F6F6F6;
+border-top:1px dotted #B2B0B0;
+clear:both;
+color:#333333;
+font-size:0.75em;
+font-weight:normal;
+margin:0;
+padding: 0.1em 20px;
 }

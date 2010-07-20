@@ -335,6 +335,9 @@ function GetTable(&$engine, $table, $drop = true)
 // $tables var is a tables definition array
 function GetData(&$engine, &$tables, $pack, $table, $root = '')
 {
+	$where = "";
+	$tweak = "";
+	
 	// sql clauses
 	if ($root == true && $tables[$engine->config['table_prefix'].$table]['where'] == true)
 	{

@@ -46,8 +46,7 @@ $wackoTranslation = array(
 	"PDFLink" => "PDF Document (en nueva ventana)",
 	"RDFLink" => "RDF Document",
 	"EmailLink" => "Escribe un email (programa de mail)",
-	"CreateTip" => "Click to create a new page",
-	"CreateText" => "Create",
+
 	"ShowTip" => "Pulsa para volver al modo de lectura",
 	"ShowText" => "Ver",
 	"WikieditAutocomplete" => "Complete wikilinks con Ctrl+Space",
@@ -137,7 +136,7 @@ $wackoTranslation = array(
 	// categories handler
 	"Categories"				=> "Categories",
 	"CategoriesFor"			=> "Categories for",
-	"CategoriesTip"			=> "Click to edit categories",
+	"CategoriesTip"			=> "Edit categories",
 	"CategoriesText"		=> "Categories",
 	"CategoriesUpdated"		=> "Categories updated",
 	"CategoriesAlreadyExists"	=> "This category is already there.",
@@ -356,7 +355,7 @@ $wackoTranslation = array(
 
 	"CreatePage" => "Crear esta página",
 	"CreateNewPage" => "Create a new page",
-	"CreateNewPageTip" => "Click to create a new page.",
+	"CreateNewPageTip" => "Create a new page.",
 	"CreateRandomPage" => "Create a random page",
 	"CreatePageButton" => "Create",
 	"CreateSubPage" => "Create a sub page in the cluster",

@@ -46,8 +46,7 @@ $wackoTranslation = array(
 	"PDFLink" => "Документ PDF (откроется в новом окне)",
 	"RDFLink" => "Документ RDF",
 	"EmailLink" => "Написать письмо (вызов почтовой программы)",
-	"CreateTip" => "создать новый документ",
-	"CreateText" => "создать",
+
 	"ShowTip" => "Нажмите, чтобы вернуться к просмотру",
 	"ShowText" => "Просмотр",
 	"WikieditAutocomplete" => "Автоподстановка ссылок по Ctrl+Пробел",
@@ -137,7 +136,7 @@ $wackoTranslation = array(
 	// categories handler
 	"Categories"				=> "Categories",
 	"CategoriesFor"			=> "Ключевые слова документа",
-	"CategoriesTip"			=> "Click to edit categories",
+	"CategoriesTip"			=> "Edit categories",
 	"CategoriesText"		=> "Categories",
 	"CategoriesUpdated"		=> "Ключевые слова документа обновлены.",
 	"CategoriesAlreadyExists"	=> "Такое ключевое слово уже существует.",

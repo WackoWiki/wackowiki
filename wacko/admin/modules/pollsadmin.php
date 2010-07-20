@@ -248,12 +248,18 @@ function admin_pollsadmin(&$engine, &$module)
 		echo '<tr><td colspan="4">';
 		// pagination
 		echo '<small><strong>'.$engine->GetTranslation('PollsShow').':</strong> ';
-		if ($year == 0) echo $engine->GetTranslation('PollsAll').' ';
-		else echo '<a href="'.rawurldecode($engine->href('', $mode_file, $mode_http.'year=0')).'">'.$engine->GetTranslation('PollsAll').'</a> ';
-		foreach ($years as $item)
+		if ($year == 0) 
+			echo $engine->GetTranslation('PollsAll').' ';
+		else 
+			echo '<a href="'.rawurldecode($engine->href('', $mode_file, $mode_http.'year=0')).'">'.$engine->GetTranslation('PollsAll').'</a> ';
+
+		if (!empty($years))
 		{
-			if ($item == $year) echo $item.' ';
-			else echo '<a href="'.rawurldecode($engine->href('', $mode_file, $mode_http.'year='.$item)).'">'.$item.'</a> ';
+			foreach ($years as $item)
+			{
+				if ($item == $year) echo $item.' ';
+				else echo '<a href="'.rawurldecode($engine->href('', $mode_file, $mode_http.'year='.$item)).'">'.$item.'</a> ';
+			}
 		}
 		echo '</small>';
 		echo '</td></tr>';
