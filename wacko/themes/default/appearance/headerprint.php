@@ -18,7 +18,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 	<div class="container">
 		<?php // Print wackoname and wackopath ?>
 		<h1><?php echo $this->config["wacko_name"]; ?>: <?php echo $this->GetPagePath(); ?></h1>
-		<a href="/"><?php echo rtrim($this->config["base_url"], "/"); ?></a><?php if ($this->page) { ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->GetTranslation("Version").": ".$this->GetPageTimeFormatted(); } ?><br />
+		<a href="<?php echo $this->config["base_url"] ?>"><?php echo rtrim($this->config["base_url"], "/"); ?></a><?php if ($this->page) { ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->GetTranslation("Version").": ".$this->GetPageTimeFormatted(); } ?><br />
 		<?php echo $this->GetPagePath() ?><br />
 	</div>
 </div>

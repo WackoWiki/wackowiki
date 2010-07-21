@@ -96,7 +96,7 @@ $insert_admin_setting = "INSERT INTO ".$config["table_prefix"]."user_setting (us
 $insert_admin_group = "INSERT INTO ".$config["table_prefix"]."group (group_name, description, moderator, created) VALUES ('Admins', '', (SELECT user_id FROM ".$config["table_prefix"]."user WHERE user_name = '".$config["admin_name"]."' LIMIT 1), NOW())";
 $insert_admin_group_member = "INSERT INTO ".$config["table_prefix"]."group_member (group_id, user_id) VALUES ((SELECT group_id FROM ".$config["table_prefix"]."group WHERE group_name = 'Admins' LIMIT 1), (SELECT user_id FROM ".$config["table_prefix"]."user WHERE user_name = '".$config["admin_name"]."' LIMIT 1))";
 
-$insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, user_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config["table_prefix"]."user WHERE user_name = '".$config["admin_name"]."' LIMIT 1),'wacko4.gif', 'WackoWiki', NOW(), '1580', '108', '50', 'gif')";
+$insert_logo_image = "INSERT INTO ".$config["table_prefix"]."upload (page_id, user_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config["table_prefix"]."user WHERE user_name = '".$config["admin_name"]."' LIMIT 1),'wacko4.png', 'WackoWiki', NOW(), '1580', '108', '50', 'png')";
 
 // inserting config values
 $configDb['abuse_email'] = $config['abuse_email'];
