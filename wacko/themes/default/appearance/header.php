@@ -166,7 +166,6 @@ echo $this->FormClose();
 </div>
 </div>
 </div>
-<div id="content">
 <div class="breadcrumb">
 <?php
 // Shows breadcrumbs
