@@ -3,7 +3,7 @@ $lng = "ru";
 
 if ($config["language"] == $lng)
 {
-	InsertPage($config["root_page"], "((file:wacko4.gif WackoWiki))\n**Добро пожаловать в волшебный мир ((WackoWiki:Doc/Russian WackoWiki)).**\n\nНажмите \"Правка\" внизу страницы, чтобы изменить её (между прочим, вы можете просто совершить двойной щелчок мышкой -- это приведёт к тому же результату).\n\nДокументация по ~WackoWiki доступна на WackoWiki:Doc/Russian.\n\nПолезные страницы: ((WackoWiki:Doc/Russian/WackoSintaksis Форматирование)), ПропущенныеСтраницы, ЗабытыеСтраницы, ((Поиск)), МоиСтраницы, МоиИзменения.\n", $lng, "Admins", true);
+	InsertPage($config["root_page"], "((file:wacko4.png WackoWiki))\n**Добро пожаловать в волшебный мир ((WackoWiki:Doc/Russian WackoWiki)).**\n\nНажмите \"Правка\" внизу страницы, чтобы изменить её (между прочим, вы можете просто совершить двойной щелчок мышкой -- это приведёт к тому же результату).\n\nДокументация по ~WackoWiki доступна на WackoWiki:Doc/Russian.\n\nПолезные страницы: ((WackoWiki:Doc/Russian/WackoSintaksis Форматирование)), ПропущенныеСтраницы, ЗабытыеСтраницы, ((Поиск)), МоиСтраницы, МоиИзменения.\n", $lng, "Admins", true);
 	InsertPage('ПропущенныеСтраницы', '{{WantedPages}}', $lng, "Admins", true);
 	InsertPage('ЗабытыеСтраницы', '{{OrphanedPages}}', $lng, "Admins", true);
 	InsertPage('МоиСтраницы', '{{MyPages}}', $lng, "Admins", true);
