@@ -53,7 +53,10 @@ if (!isset($root))	$root	= $this->page["tag"];
 if (!isset($noxml)) $noxml	= 0;
 
 if ($user = $this->GetUser())
+{
 	$usermax = $user["changes_count"];
+	if ($usermax == 0) $usermax = 10;
+}
 else
 	$usermax = 50;
 if (!isset($max) || $usermax < $max)

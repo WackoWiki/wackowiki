@@ -179,7 +179,7 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 	<div id="pane">
 		<div class="left"></div>
 		<div class="middle">
-			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php"><img src="<?php echo rtrim($engine->config['base_url']); ?>files/wacko4.gif" alt="WackoWiki" width="108" height="50"></img></a>
+			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php"><img src="<?php echo rtrim($engine->config['base_url']); ?>files/wacko4.png" alt="WackoWiki" width="108" height="50"></img></a>
 		</div>
 		<div id="tools">
 			<span style="font-family: 'Lucida Console', 'Courier New', monospace;">

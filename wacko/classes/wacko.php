@@ -4566,6 +4566,8 @@ class Wacko
 	// for SQL queries) elements.
 	function Pagination($total, $perpage = 100, $name = 'p', $params = '', $method = '', $tag = '')
 	{
+		if ($perpage == 0) $perpage = 10; // no division by zero
+
 		$sep	= ', ';		// page links divider
 		$pages	= ceil($total / $perpage);
 		$page	= ((isset($_GET[$name])) && $_GET[$name] == true			// if page param = 'last' magic word,

@@ -7,7 +7,10 @@ if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET["minor_edit"]) ? $_
 if (!isset($noxml)) $noxml = 0;
 
 if ($user = $this->GetUser())
+{
 	$usermax = $user["changes_count"];
+	if ($usermax == 0) $usermax = 10;
+}
 else
 	$usermax = 50;
 if (!isset($max) || $usermax < $max)
