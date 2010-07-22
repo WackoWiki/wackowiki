@@ -133,11 +133,11 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			// log event
 			if (!$comment_on_id)
 			{
-				$this->Log(1, str_replace("%2", $this->page["user"], str_replace("%1", $this->tag, ( isset($_POST["cluster"]) && $_POST["cluster"] == 1 ? $this->GetTranslation("LogRemovedCluster") : $this->GetTranslation("LogRemovedPage") ))));
+				$this->Log(1, str_replace("%2", $this->page["user_name"], str_replace("%1", $this->tag, ( isset($_POST["cluster"]) && $_POST["cluster"] == 1 ? $this->GetTranslation("LogRemovedCluster") : $this->GetTranslation("LogRemovedPage") ))));
 			}
 			else
 			{
-				$this->Log(1, str_replace("%3", $this->GetTimeStringFormatted($this->page["created"]), str_replace("%2", $this->page["user"], str_replace("%1", $comment_on_id." ".$this->GetPageTitle($comment_on_id), $this->GetTranslation("LogRemovedComment")))));
+				$this->Log(1, str_replace("%3", $this->GetTimeStringFormatted($this->page["created"]), str_replace("%2", $this->page["user_name"], str_replace("%1", $comment_on_id." ".$this->GetPageTitle($comment_on_id), $this->GetTranslation("LogRemovedComment")))));
 			}
 
 			echo "<br />".$this->GetTranslation("ThisActionHavenotUndo")."<br />\n";

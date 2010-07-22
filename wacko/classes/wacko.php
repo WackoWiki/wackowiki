@@ -583,7 +583,7 @@ class Wacko
 			{
 				$_lang = $this->language["code"];
 
-				if ($page["lang"])
+				if (isset($page["lang"]))
 					$lang = $page["lang"];
 				else
 					$lang = $this->config["language"];

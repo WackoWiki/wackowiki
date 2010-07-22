@@ -61,7 +61,7 @@ class RSS
 		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 		$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
-		if ($pages = $this->engine->LoadRecentlyChanged())
+		if (list ($pages, $pagination) = $this->engine->LoadRecentlyChanged())
 		{
 			foreach ($pages as $i => $page)
 			{

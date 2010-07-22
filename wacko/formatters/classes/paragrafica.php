@@ -218,7 +218,7 @@ class paragrafica
 	{
 		if ((isset($matches[7])) && $matches[7] != "")
 		{
-			if ($matches[8] == "")
+			if (isset($matches[8]) && $matches[8] == "")
 			$this->toc[] = array($this->wacko->UnwrapLink(trim($matches[7],'"')),"(include)",99999);
 		}
 		else
