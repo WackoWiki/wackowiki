@@ -2,8 +2,9 @@
 
 // {{Redirect to="!/NewPage" permanent="0 or 1"}}
 
-$page = $this->UnwrapLink($vars[0]);
-$is_permanent = $vars[1];
+if (isset($vars['page'])) $vars['to'] = $vars['page'];
+$page = $this->UnwrapLink(isset($vars['to']) ? $vars['to'] : "");
+$is_permanent = (isset($vars['permanent']) ? $vars['permanent'] : 0);
 
 if ($page)
 {

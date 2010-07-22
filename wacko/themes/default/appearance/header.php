@@ -170,8 +170,7 @@ echo $this->FormClose();
 <div class="breadcrumb">
 <?php
 // Shows breadcrumbs
-echo $this->GetPagePath($titles = true, $separator = ' &gt ', $linking = true, true); ?> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag);
-?>">...</a>
+echo $this->GetPagePath($titles = true, $separator = ' &gt ', $linking = true, true); ?>
 </div>
 </div>
 <div id="content">
