@@ -14,8 +14,8 @@ function InsertPage($tag, $title = false, $body, $lng, $rights = "Admins", $crit
 	$owner_id = "SELECT user_id FROM ".$config_global["table_prefix"]."user WHERE user_name = 'System' LIMIT 1";
 	# if ($title == false) $title = AddSpacesTitle(trim(substr($tag, strrpos($tag, '/')), '/'), $lng);
 
-	// user_id 0 for WackoInstaller
-	$page_insert = "INSERT INTO ".$config_global["table_prefix"]."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, lang) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lng."')";
+	// user_id for user System
+	$page_insert = "INSERT INTO ".$config_global["table_prefix"]."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, lang, hide_comments, hide_files, hide_rating) VALUES ('".$tag."', '".NpjTranslit($tag, $lng)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lng."', '1', '1', '1')";
 
 	$page_id = "SELECT page_id FROM ".$config_global["table_prefix"]."page WHERE tag = '".$tag."' LIMIT 1";
 

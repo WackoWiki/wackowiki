@@ -57,7 +57,7 @@ $lang = array(
 "Admin" => "Име",
 "AdminDesc" => "Изберете име. Нещо от тип <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a> (без кирилица).",
 "Password" => "Име Парола",
-"PasswordDesc" => "Изберете парола ( 5 и повече символа )",
+"PasswordDesc" => "Изберете парола ( 8 и повече символа )",
 "Password2" => "Подтвърждение на паролата:",
 "Mail" => "Admin Email Address",
 "MailDesc" => "Адрес на електронната поща (email) на администратора.",
@@ -69,7 +69,7 @@ $lang = array(
 "ErrorAdminName" => "Изберете валидно WackoWiki име!",
 "ErrorAdminEmail" => "Въведете истински адрес!",
 "ErrorAdminPasswordMismatch" => "Паролата на администратора не съвпадна нещо!",
-"ErrorAdminPasswordShort" => "The admin много е кратка, the minimum length is 5 characters!",
+"ErrorAdminPasswordShort" => "The admin много е кратка, the minimum length is 8 characters!",
 "WarningRewriteMode" => "ВНИМАНИЕ!\nНастройки базового URL и Rewrite-режима выглядят подозрительно. Обычно при включенном Rewrite не бывает знака ? в базовом URL, но у вас он есть.\n\nДля продолжения инсталляции с текущими настройками нажмите ОК.\nДля того, чтобы вернуться в форму и всё исправить, нажмите ОТМЕНА.\n\nЕсли вы решили идти дальше, помните, что такое сочетание часто является причиной неработоспособности после инсталляции.",
 "ModRewriteStatusUnknown" => "The installer cannot veriry that mod_rewrite is enabled, however this does not mean it is disabled",
 

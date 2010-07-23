@@ -57,7 +57,7 @@ $lang = array(
 "Admin" => "Nombre de Administrador",
 "AdminDesc" => "Ingrese el nombre de usuario del administrador, esto debería escrito de manera <a href=\"http://wackowiki.org/Doc/English/WikiName\" title=\"View Help\" target=\"_blank\">NombreWiki</a> (e.g. WikiAdmin).",
 "Password" => "Contraseña del Administrador",
-"PasswordDesc" => "Elija una contraseña del administrador con un mínimo de 5 caracteres.",
+"PasswordDesc" => "Elija una contraseña del administrador con un mínimo de 8 caracteres.",
 "Password2" => "Repita la Contraseña:",
 "Mail" => "Email del Administrador",
 "MailDesc" => "Ingrese la dierección email del administrador.",
@@ -69,7 +69,7 @@ $lang = array(
 "ErrorAdminName" => "El nombre de administrador debe ser nombre tipo WikiName!",
 "ErrorAdminEmail" => "La dirección email ingresada no está válida!",
 "ErrorAdminPasswordMismatch" => "Las contraseñas no coinciden!.",
-"ErrorAdminPasswordShort" => "La contraseña del administrador es demasiado corta, longitud mínima es 5 caracteres!",
+"ErrorAdminPasswordShort" => "La contraseña del administrador es demasiado corta, longitud mínima es 8 caracteres!",
 "WarningRewriteMode" => "ATENCION!\nLa URL base se ve extraña considerando la configuración de modo rewrite. Generalmente no hay el signo ? en la URL base si el modo rewrite está activado - pero actualmente está presente.\n\nPara continuar usando la configuración actual presione OK.\nPara volver al formulario y modificar los datos de configuraciíon presione CANCEL.\n\nSi tiene la intención de continuar con la configuración actual puede tener problemas con la instalación de WackoWiki.",
 "ModRewriteStatusUnknown" => "El instalador no puede verificar si el modo mod_rewrite está habilitado, sin embargo no quiere decir que está deshabilitado",
 
