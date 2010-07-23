@@ -57,7 +57,7 @@ $lang = array(
 "Admin" => "Verwalter Name",
 "AdminDesc" => "Gib den Benutzernamen des Verwalters an. Sollte ein <a href=\"http://wackowiki.org/Doc/Deutsch/WikiName\" title=\"View Help\" target=\"_blank\">WikiName</a> sein (z.B. WikiAdmin).",
 "Password" => "Verwalter Passwort",
-"PasswordDesc" => "Wähle ein Passwort für den Verwalter mit mindestens 5 Zeichen.",
+"PasswordDesc" => "Wähle ein Passwort für den Verwalter mit mindestens 8 Zeichen.",
 "Password2" => "Wiederhole Passwort:",
 "Mail" => "E-Mail Adresse des Verwalters",
 "MailDesc" => "Gib die E-Mail Adresse des Verwalters ein.",
@@ -69,7 +69,7 @@ $lang = array(
 "ErrorAdminName" => "Der Verwalter Name muss ein WikiName sein!",
 "ErrorAdminEmail" => "Du hast eine ungültige E-Mailadresse angegeben!",
 "ErrorAdminPasswordMismatch" => "Die Passwörter stimmen nicht überein!",
-"ErrorAdminPasswordShort" => "Das Verwalter Passwort ist zu kurz, die Mindestlänge ist 5 Zeichen!",
+"ErrorAdminPasswordShort" => "Das Verwalter Passwort ist zu kurz, die Mindestlänge ist 8 Zeichen!",
 "WarningRewriteMode" => "ACHTUNG!\nDeine Basis-URL & die Umschreib-Rechte (rewrite-mode settings) schauen ungewöhnlich aus. Normalerweise ist da kein ? in der URL wenn Umschreibe-Rechte aktiviert sind - in deinem Fall ist da aber ein Fragezeichen.\n\nUm dennoch mit diesen Einstellungen fortzufahren drücke OK.\nZurück zu den Einstellungen (form & change settings) drücke ABBRECHEN.\n\nFalls du mit den Einstellungen fortfährst, kann diese Software-Installation zu unerwarteten Fehlern führen.",
 "ModRewriteStatusUnknown" => "Der Installer kann nicht ermitteln ob mod_rewrite aktiviert ist, dies bedeutet jedoch nicht das es deaktiviert ist.",
 
