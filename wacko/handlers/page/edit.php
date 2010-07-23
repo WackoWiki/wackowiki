@@ -126,7 +126,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				}
 
 				// add page (revisions)
-				$body_r = $this->SavePage($this->tag, $body, $edit_note, $minor_edit, $this->page["comment_on_id"], $title);
+				$body_r = $this->SavePage($this->tag, $title, $body, $edit_note, $minor_edit, $this->page["comment_on_id"]);
 
 				// log event
 				if ($this->page["comment_on_id"] != 0)

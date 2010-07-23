@@ -335,6 +335,15 @@ $wackoTranslation = array(
 	"TreeEmptyLevels" => "%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.",
 	"SearchTitleTip" => "Нажмите, чтобы вывести все страницы, имеющие данный заголовок.",
 
+	// clone handler
+	"ClonePage" => "Clone page",
+	"CloneText" => "Clone",
+	"CloneName" => "Enter new name for a clone this page",
+	"CloneButton" => "Clone",
+	"PageCloned" => "<em>Page %1 cloned.</em>",
+	"ClonedFrom" => "Cloned from %1.",
+	"ClonedRedirect" => "Edit after creation",
+
 	"RenameText" => "Переименовать",
 	"NewName" => "Введите новое имя для этой страницы",
 	"RenameButton" => "Переименовать",
@@ -534,6 +543,7 @@ $wackoTranslation = array(
 	"SettingsPortal" => "Прочие настройки и действия над страницей:",
 	"SettingsEdit" => "Редактирование",
 	"SettingsRevisions" => "Версии",
+	"SettingsClone" => "Clone",
 	"SettingsRename" => "Переименование",
 	"SettingsMassRename" => "для всех страниц кластера",
 	"SettingsRemove" => "Удаление",
@@ -824,6 +834,7 @@ $wackoTranslation = array(
 	"LogACLUpdated"				=> "Обновлен ACL документа [[/%1]]",
 	"LogOwnershipChanged"		=> "Право владения документом [[/%1]] передано пользователю ##%2##",
 	"LogUserLoginFailed"		=> '!!Неудачная попытка авторизации в системе с логином ##""%1""##!!',
+	"LogClonedPage"				=> "Page ##%1## cloned to [[/%2]]",
 	"LogRenamedPage"			=> "Документ ##%1## переименован в [[/%2]]",
 	"LogRenamedPage2"			=> ". На старой странице установлена ссылка на новую",
 	"LogUserPasswordReminded"	=> "Пользователь ##%1## запросил восстановление пароля на адрес ##%2##",

@@ -70,7 +70,7 @@ function ModerateRenameTopic(&$engine, $oldtag, $newtag, $title = '')
 	{
 		// resave modified body
 		$page['body'] = preg_replace('/^==.*?==/', '=='.$title.'==', $page['body']);
-		$engine->SavePage($newtag, $page['body'], '', '', '', '', true, false);
+		$engine->SavePage($newtag, false, $page['body'], '', '', '', '', true);
 
 		$engine->Query(
 			"UPDATE {$engine->config['table_prefix']}page ".
@@ -115,7 +115,7 @@ function ModerateMergeTopics(&$engine, $base, $topics, $movetopics = true)
 				$page = $engine->LoadPage($topic);
 
 				$page['body'] = preg_replace('/^==.*?==(\\n)*/', '', str_replace("\r", '', $page['body']));
-				$engine->SavePage('Comment'.$num, $page['body'], '', '', $base, '', true, false);
+				$engine->SavePage('Comment'.$num, false, $page['body'], '', '', $base, '', true);
 
 				// restore creation date
 				$engine->Query(
@@ -180,7 +180,7 @@ function ModerateSplitTopic(&$engine, $comment_ids, $oldtag, $newtag, $title)
 
 	// resave modified body
 	$page['body']	= '=='.$title."==\n\n".$page['body'];
-	$engine->SavePage($newtag, $page['body'], '', '', '', $title, true, false);
+	$engine->SavePage($newtag, false, $page['body'], '', '', '', $title, true);
 
 	// bug-resistent check: has page been really resaved?
 	if ($engine->LoadSingle(

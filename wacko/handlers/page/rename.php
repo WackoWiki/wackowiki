@@ -20,12 +20,12 @@ $user = GUEST;
 
 if ($registered
 &&
-($this->CheckACL($user,$this->config["rename_globalacl"]) || strtolower($this->GetPageOwner($this->tag)) == $user)
+($this->CheckACL($user, $this->config["rename_globalacl"]) || strtolower($this->GetPageOwner($this->tag)) == $user)
 )
 {
 	if (!$this->page)
 	{
-		print(str_replace("%1",$this->href("edit"),$this->GetTranslation("DoesNotExists")));
+		print(str_replace("%1", $this->href("edit"), $this->GetTranslation("DoesNotExists")));
 	}
 	else
 	{
@@ -50,13 +50,13 @@ if ($registered
 				//     if ($this->supertag == $supernewname)
 				else if ($this->tag == $new_name)
 				{
-					print(str_replace("%1",$this->Link($new_name),$this->GetTranslation("AlreadyNamed"))."<br />\n");
+					print(str_replace("%1", $this->ComposeLinkToPage($new_name, "", "", 0), $this->GetTranslation("AlreadyNamed"))."<br />\n");
 				}
 				else
 				{
 					if ($this->supertag != $supernewname && $page=$this->LoadPage($supernewname, "", LOAD_CACHE, LOAD_META))
 					{
-						print(str_replace("%1",$this->Link($new_name),$this->GetTranslation("AlredyExists"))."<br />\n");
+						print(str_replace("%1", $this->ComposeLinkToPage($new_name, "", "", 0), $this->GetTranslation("AlredyExists"))."<br />\n");
 					}
 					else
 					{
@@ -68,10 +68,10 @@ if ($registered
 						if ($need_redirect == 0)
 						{
 							if ($this->RemoveReferrers($this->tag))
-									print(str_replace("%1",$this->tag,$this->GetTranslation("ReferrersRemoved"))."<br />\n");
+									print(str_replace("%1", $this->tag, $this->GetTranslation("ReferrersRemoved"))."<br />\n");
 
 							if ($this->RenamePage($this->tag, $new_name, $supernewname))
-								print(str_replace("%1",$this->tag,$this->GetTranslation("PageRenamed"))."<br />\n");
+								print(str_replace("%1", $this->tag, $this->GetTranslation("PageRenamed"))."<br />\n");
 
 							$this->ClearCacheWantedPage($new_name);
 							$this->ClearCacheWantedPage($supernewname);
@@ -82,7 +82,7 @@ if ($registered
 							$this->CacheWantedPage($this->supertag);
 
 							if ($this->SavePage($this->tag, "{{Redirect page=\"/".$new_name."\"}}"))
-								print(str_replace("%1",$this->tag,$this->GetTranslation("RedirectCreated"))."<br />\n");
+								print(str_replace("%1", $this->tag, $this->GetTranslation("RedirectCreated"))."<br />\n");
 
 							$this->ClearCacheWantedPage($this->tag);
 							$this->ClearCacheWantedPage($this->supertag);
@@ -108,8 +108,8 @@ if ($registered
 			echo $this->GetTranslation("NewName");
 			echo $this->FormOpen("rename");
 
-			?> <input type="hidden" name="rename" value="1" /> <input type="text"
-	name="newname" value="<?php echo $this->tag;?>" size="40" /> <br />
+			?> <input type="hidden" name="rename" value="1" /><input type="text"
+	name="newname" value="<?php echo $this->tag;?>" size="40" /><br />
 <br />
 			<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" "; if ($this->config["default_rename_redirect"] == 1){echo "checked=\"checked\"";}; echo " /> <label for=\"redirect\">".$this->GetTranslation("NeedRedirect")."</label>"; ?>
 <br />
@@ -197,13 +197,13 @@ function Move(&$parent, $OldPage, $new_name )
 		//     if ($OldPage["supertag"] == $supernewname)
 		else if ($OldPage["tag"] == $new_name)
 		{
-			print(str_replace("%1",$parent->Link($new_name),$parent->GetTranslation("AlreadyNamed"))."<br />\n");
+			print(str_replace("%1", $parent->Link($new_name), $parent->GetTranslation("AlreadyNamed"))."<br />\n");
 		}
 		else
 		{
 			if ($OldPage["supertag"] != $supernewname && $page=$parent->LoadPage($supernewname, "", LOAD_CACHE, LOAD_META))
 			{
-				print(str_replace("%1",$parent->Link($new_name),$parent->GetTranslation("AlredyExists"))."<br />\n");
+				print(str_replace("%1", $parent->Link($new_name), $parent->GetTranslation("AlredyExists"))."<br />\n");
 			}
 			else
 			{
@@ -214,10 +214,10 @@ function Move(&$parent, $OldPage, $new_name )
 				if ($need_redirect == 0)
 				{
 					if ($parent->RemoveReferrers($OldPage["tag"]))
-						print("<br />".str_replace("%1",$OldPage["tag"],$parent->GetTranslation("ReferrersRemoved"))."<br />\n");
+						print("<br />".str_replace("%1", $OldPage["tag"], $parent->GetTranslation("ReferrersRemoved"))."<br />\n");
 
 					if ($parent->RenamePage($OldPage["tag"], $new_name, $supernewname))
-						print(str_replace("%1",$OldPage["tag"],$parent->GetTranslation("PageRenamed"))."<br />\n");
+						print(str_replace("%1", $OldPage["tag"], $parent->GetTranslation("PageRenamed"))."<br />\n");
 
 					$parent->ClearCacheWantedPage($new_name);
 					$parent->ClearCacheWantedPage($supernewname);
@@ -227,8 +227,8 @@ function Move(&$parent, $OldPage, $new_name )
 					$parent->CacheWantedPage($OldPage["tag"]);
 					$parent->CacheWantedPage($OldPage["supertag"]);
 
-					if ($parent->SavePage($OldPage["tag"], "{{Redirect page=\"/".$new_name."\"}}"))
-						print(str_replace("%1",$OldPage["tag"],$parent->GetTranslation("RedirectCreated"))."<br />\n");
+					if ($parent->SavePage($OldPage["tag"], "", "{{Redirect page=\"/".$new_name."\"}}"))
+						print(str_replace("%1", $OldPage["tag"], $parent->GetTranslation("RedirectCreated"))."<br />\n");
 
 					$parent->ClearCacheWantedPage($OldPage["tag"]);
 					$parent->ClearCacheWantedPage($OldPage["supertag"]);
