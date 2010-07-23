@@ -1125,14 +1125,15 @@ class Wacko
 
 	// PAGE SAVING ROUTINE
 	// $tag			- page address
+	// $title		- page name (metadata)
 	// $body		- page body (plain text)
 	// $edit_note	- edit summary
 	// $minor_edit	- minor edit
 	// $comment_on_id	- commented page id
-	// $title		- page name (metadata)
+	// $lang		- page language
 	// $mute		- supress email reminders and xml rss recompilation
 	// $user		- attach guest pseudonym
-	function SavePage($tag, $body, $edit_note = "", $minor_edit = "0", $comment_on_id = "0", $title = "", $mute = false, $user = false)
+	function SavePage($tag, $title = "", $body, $edit_note = "", $minor_edit = "0", $comment_on_id = "0", $lang = false, $mute = false, $user = false)
 	{
 		// user data
 		$ip = $this->GetUserIP();
@@ -1177,7 +1178,7 @@ class Wacko
 		}
 
 		// write tag
-		if($_POST["tag"])
+		if(isset($_POST["tag"]))
 		{
 			$this->tag		= $tag = $_POST["tag"];
 			$this->supertag	= $this->NpjTranslit($tag);
@@ -1224,13 +1225,15 @@ class Wacko
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
 			if (!$oldPage = $this->LoadPage($tag))
 			{
-				$langlist = $this->AvailableLanguages();
+				if (!isset($lang))
+				{
+					$langlist = $this->AvailableLanguages();
 
-				if ($_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
-					$lang = $_REQUEST["lang"];
-				else
-					$lang = $this->userlang;
-
+					if ($_REQUEST["lang"] && in_array($_REQUEST["lang"], $langlist))
+						$lang = $_REQUEST["lang"];
+					else
+						$lang = $this->userlang;
+				}
 				if (!$lang)
 					$lang = $this->config["language"];
 
@@ -1251,6 +1254,7 @@ class Wacko
 					$root			= preg_replace( "/^(.*)\\/([^\\/]+)$/", "$1", $this->context[$this->current_context] );
 					$root_id		= $this->GetPageId($root);
 					$write_acl		= $this->LoadAcl($this->GetPageId($root), "write");
+
 					while ($write_acl["default"] == 1)
 					{
 						$_root		= $root;
@@ -4214,7 +4218,24 @@ class Wacko
 		}
 	}
 
-	// RENAMING / MOVING
+	// CLONE / RENAMING / MOVING
+
+	function ClonePage($tag, $clonetag, $cloneSuperTag = "", $edit_note)
+	{
+		if (!$tag || !$clonetag) return false;
+		
+		if ($cloneSuperTag == "")
+			$cloneSuperTag = $this->NpjTranslit($clonetag);
+
+		// load page and site information
+		$page = $this->LoadPage($tag);
+		$new = $clonetag;
+
+		return
+			// save
+			$this->SavePage($new, $title = $page["title"], $page["body"], $edit_note, $minor_edit = "0", $comment_on_id = "0", $lang = $page["lang"], $mute = false, $user = false);
+	}
+	
 	function RenamePage($tag, $NewTag, $NewSuperTag = "")
 	{
 		if (!$tag || !$NewTag) return false;

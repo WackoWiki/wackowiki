@@ -335,6 +335,15 @@ $wackoTranslation = array(
 	"TreeEmptyLevels" => "%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.",
 	"SearchTitleTip" => "Cliquez ici pour voir toutes les pages avec ce titre.",
 
+	// clone handler
+	"ClonePage" => "Clone page",
+	"CloneText" => "Clone",
+	"CloneName" => "Enter new name for a clone this page",
+	"CloneButton" => "Clone",
+	"PageCloned" => "<em>Page %1 cloned.</em>",
+	"ClonedFrom" => "Cloned from %1.",
+	"ClonedRedirect" => "Edit after creation",
+
 	"RenameText" => "Cliquer ici pour renommer cette page",
 	"NewName" => "Donner un nouveau nom à cette page",
 	"RenameButton" => "Renommer",
@@ -477,6 +486,7 @@ $wackoTranslation = array(
 	"SettingsPortal" => "Autres réglages et propriétés pour cette page&nbsp;:",
 	"SettingsEdit" => "&Eacute;dition",
 	"SettingsRevisions" => "Révisions",
+	"SettingsClone" => "Clone",
 	"SettingsRename" => "Renommer",
 	"SettingsMassRename" => "tout le groupe de pages",
 	"SettingsRemove" => "Supprimer",
@@ -668,6 +678,7 @@ $wackoTranslation = array(
 	"LogACLUpdated"				=> "Droits de la page [[/%1]] mis à jour",
 	"LogOwnershipChanged"		=> "Propriété de la page [[/%1]] transférée à l&rsquo;utilisateur ##%2##",
 	"LogUserLoginFailed"		=> "!!&Eacute;chec de la connexion avec ##~%1##!!",
+	"LogClonedPage"				=> "Page ##%1## cloned to [[/%2]]",
 	"LogRenamedPage"			=> "Page ##%1## renommée en [[/%2]]",
 	"LogRenamedPage2"			=> ". Sur l&rsquo;ancienne page, un lien  vers la nouvelle",
 	"LogUserPasswordReminded"	=> "L&rsquo;utilisateur ##%1## a demandé une récupération de mot de passe à l&rsquo;adresse ##%2##",

@@ -66,7 +66,7 @@ else
 				$body = str_replace("]]&gt;", "]]>", Utility::untag($item, "description"));
 				$title		= html_entity_decode(Utility::untag($item, "title"));
 
-				$body_r = $this->SavePage($tag, $body, '', $title);
+				$body_r = $this->SavePage($tag, $title, $body, '');
 				$this->SetPageOwner($page_id, $owner_id);
 				// now we render it internally in the context of imported
 				// page so we can write the updated link table

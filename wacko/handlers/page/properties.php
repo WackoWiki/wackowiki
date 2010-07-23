@@ -16,7 +16,7 @@ if ($this->page['comment_on_id'])
 else if ($this->forum === true && !$this->IsAdmin())
 	$this->Redirect($this->href());
 
-if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $page["page_id"]))
+if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this->page["page_id"]))
 {
 	if ($_POST)
 	{
@@ -298,6 +298,7 @@ if ($langs = $this->AvailableLanguages())
 <ul>
 	<li><a href="<?php echo $this->href("edit");?>"><?php echo $this->GetTranslation("SettingsEdit"); ?></a></li>
 	<li><a href="<?php echo $this->href("revisions");?>"><?php echo $this->GetTranslation("SettingsRevisions"); ?></a></li>
+	<li><a href="<?php echo $this->href("clone");?>"><?php echo $this->GetTranslation("SettingsClone"); ?></a></li>
 	<?php
 	// Rename link (shows only if owner is current user or Admin)
 	if ($this->UserIsOwner() || $this->IsAdmin())
