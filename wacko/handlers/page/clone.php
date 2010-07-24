@@ -3,6 +3,8 @@
 <br />
 <?php
 
+$output = "";
+
 // redirect to show method if page don't exists
 if (!$this->page) $this->Redirect($this->href('show'));
 
@@ -63,7 +65,7 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this-
 						$this->Log(4, str_replace("%2", $new_name, str_replace("%1", $this->tag, $this->GetTranslation("LogClonedPage"))) );
 
 						if (isset($_POST["redirect"]) && $_POST["redirect"] == "on") $need_redirect = 1;
-						
+
 						if ($need_redirect == 1)
 						{
 							$this->SetMessage($edit_note);
@@ -94,7 +96,7 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this-
 	?>
 	<input type="hidden" name="clone" value="1" />
 	<input name="newname" size="40"/><br />
-	<?php 
+	<?php
 	// edit note
 	if ($this->config["edit_summary"] != 0)
 	{

@@ -121,23 +121,7 @@ if ($registered
 <br />
 			<?php
 			// show backlinks
-			if ($pages = $this->LoadPagesLinkingTo($this->tag))
-			{
-				print("<br /><div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("AlertReferringPages").":</span></p>\n");
-				foreach ($pages as $page)
-				{
-					if ($page["tag"])
-					{
-						if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["page_id"]);
-						else $access = true;
-						if ($access)
-						{
-							echo($this->ComposeLinkToPage($page["tag"])."<br />\n");
-						}
-					}
-				}
-				echo "</div>\n";
-			}
+			echo $this->Action("backlinks", array("nomark" => 0));
 			?> <br />
 <br />
 <input name="submit" type="submit" value="<?php echo $this->GetTranslation("RenameButton"); ?>" /> &nbsp;

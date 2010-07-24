@@ -253,15 +253,15 @@ if ($registered
 
 						// 5. insert line into DB
 						$this->Query("INSERT INTO ".$this->config["table_prefix"]."upload SET ".
-							"page_id = '".quote($this->dblink, $is_global ? "0" : $this->page["page_id"])."', ".
-							"user_id = '".quote($this->dblink, $user["user_id"])."',".
-							"filename = '".quote($this->dblink, $small_name)."', ".
-							"description = '".quote($this->dblink, $description)."', ".
-							"filesize = '".quote($this->dblink, $file_size)."',".
-							"picture_w = '".quote($this->dblink, $size[0])."',".
-							"picture_h = '".quote($this->dblink, $size[1])."',".
-							"file_ext = '".quote($this->dblink, substr($ext,0,10))."',".
-							"uploaded_dt= '".quote($this->dblink, $uploaded_dt)."' ");
+							"page_id		= '".quote($this->dblink, $is_global ? "0" : $this->page["page_id"])."', ".
+							"user_id		= '".quote($this->dblink, $user["user_id"])."',".
+							"filename		= '".quote($this->dblink, $small_name)."', ".
+							"description	= '".quote($this->dblink, $description)."', ".
+							"filesize		= '".quote($this->dblink, $file_size)."',".
+							"picture_w		= '".quote($this->dblink, $size[0])."',".
+							"picture_h		= '".quote($this->dblink, $size[1])."',".
+							"file_ext		= '".quote($this->dblink, substr($ext,0,10))."',".
+							"uploaded_dt	= '".quote($this->dblink, $uploaded_dt)."' ");
 
 						// 4. output link to file
 						// !!!!! write after providing filelink syntax
@@ -318,7 +318,7 @@ if ($registered
 		$this->SetMessage("<div class=\"error\">".$error."</div>");
 	}
 	echo $this->Action("upload", array())."<br />";
-	
+
 // if (!$error) echo "<br /><hr />".$this->Action("upload", array())."<hr /><br />";
 }
 else
