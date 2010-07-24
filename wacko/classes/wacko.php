@@ -1082,9 +1082,11 @@ class Wacko
 
 	function LoadRecentlyDeleted($limit = 1000, $cache = 1)
 	{
-		$_metaArr	= explode(',', $this->pages_meta);
-		foreach($_metaArr as $_metaStr) $meta[] = $this->config['table_prefix'].'revision.'.trim($_metaStr);
-		$meta		= implode(', ', $meta);
+		$meta = "r.page_id, r.owner_id, r.user_id, r.tag, r.supertag, r.created, r.modified, r.edit_note, r.minor_edit, r.latest, r.handler, r.comment_on_id, r.lang, r.title, r.keywords, r.description";
+
+		#$_metaArr	= explode(',', $this->pages_meta);
+		#foreach($_metaArr as $_metaStr) $meta[] = $this->config['table_prefix'].'revision.'.trim($_metaStr);
+		#$meta		= implode(', ', $meta);
 
 		return $this->LoadAll(
 			"SELECT DISTINCT $meta, MAX(r.modified) AS date ".
@@ -4223,7 +4225,7 @@ class Wacko
 	function ClonePage($tag, $clonetag, $cloneSuperTag = "", $edit_note)
 	{
 		if (!$tag || !$clonetag) return false;
-		
+
 		if ($cloneSuperTag == "")
 			$cloneSuperTag = $this->NpjTranslit($clonetag);
 
@@ -4235,7 +4237,7 @@ class Wacko
 			// save
 			$this->SavePage($new, $title = $page["title"], $page["body"], $edit_note, $minor_edit = "0", $comment_on_id = "0", $lang = $page["lang"], $mute = false, $user = false);
 	}
-	
+
 	function RenamePage($tag, $NewTag, $NewSuperTag = "")
 	{
 		if (!$tag || !$NewTag) return false;

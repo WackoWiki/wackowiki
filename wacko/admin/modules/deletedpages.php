@@ -26,7 +26,7 @@ function admin_deletedpages(&$engine, &$module)
 	{
 		$engine->Query(
 			"DELETE FROM {$engine->config['table_prefix']}revision ".
-			"WHERE tag = '".quote($_GET['remove'])."'");
+			"WHERE tag = '".quote($engine->dblink, $_GET['remove'])."'");
 	}
 
 	$pages = $engine->LoadRecentlyDeleted(100000, 0);
