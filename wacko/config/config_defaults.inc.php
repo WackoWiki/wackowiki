@@ -93,7 +93,7 @@ $wackoConfig = array(
 	"allow_registration" => 1,
 	"disable_autosubscribe" => 0,
 
-	"standard_handlers" => "acls|addcomment|categories|claim|diff|edit|latex|msword|new|print|properties|rate|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|show|watch",
+	"standard_handlers" => "acls|addcomment|categories|claim|clone|diff|edit|latex|msword|new|print|properties|rate|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|show|watch",
 
 	"upload" => "admins",
 	"upload_images_only" => 0,

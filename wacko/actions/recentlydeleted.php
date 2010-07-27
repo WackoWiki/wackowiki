@@ -1,6 +1,6 @@
 <?php
 
-if (!$max || $max > 1000) $max = 1000;
+if (!isset($max) || $max > 1000) $max = 1000;
 
 $pages = $this->LoadRecentlyDeleted($max);
 
@@ -8,7 +8,7 @@ if ($pages == true)
 {
 	$i = 0;
 
-	echo "<ul>";
+	echo "<ul class=\"ul_list\">\n";
 
 	foreach ($pages as $page)
 	{
@@ -22,11 +22,12 @@ if ($pages == true)
 		{
 			// day header
 			list($day, $time) = explode(" ", $page["date"]);
+			if (!isset($curday)) $curday = "";
 
 			if ($day != $curday)
 			{
 				if ($curday) print("</ul>\n<br /></li>\n");
-				echo "<li class=\"lined\"><strong>".date($this->config['date_format'],strtotime($day)).":</strong>\n<ul>\n";
+				echo "<li><strong>".date($this->config['date_format'],strtotime($day)).":</strong>\n<ul>\n";
 				$curday = $day;
 			}
 
