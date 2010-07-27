@@ -23,9 +23,7 @@ class Cache
 		$filename	= $this->SQLCacheID($query);
 		$sqldata	= serialize($data);
 
-		$fp	= fopen($filename, 'w');
-		fwrite($fp, $sqldata);
-		fclose($fp);
+		file_put_contents($filename, $sqldata);
 		chmod($filename, 0644);
 
 		return true;
@@ -108,9 +106,7 @@ class Cache
 		$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", $page))));
 		$filename = $this->ConstructID($page, $method, $query);
 
-		$fp = fopen ($filename, "w");
-		fputs($fp, $data);
-		fclose($fp);
+		file_put_contents($filename, $data);
 
 		if ($this->wacko) $this->wacko->Query(
 			"INSERT INTO ".$this->wacko->config["table_prefix"]."cache SET ".
@@ -168,9 +164,9 @@ class Cache
 	{
 		if ($this->debug > 1)
 		{
-			$fp = fopen ($this->cache_dir."log", "a");
-			fputs($fp, $msg."\n");
-			fclose($fp);
+			$filename = $this->cache_dir."log";
+
+			file_put_contents($filename, $msg."\n", FILE_APPEND);
 		}
 	}
 
