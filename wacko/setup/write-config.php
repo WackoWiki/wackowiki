@@ -71,18 +71,15 @@ print("         <h2>".$lang["FinalStep"]."</h2>\n");
 print("         <ul>\n");
 print("            <li>".$lang["Writing"]." - ");
 
-$perm_changed = true;
-$fp = @fopen('config/config.inc.php', "w");
+$perm_changed	= true;
+$filename		= 'config/config.inc.php';
 
-if ($fp)
+if (file_put_contents($filename, $configCode) == true)
 {
-	// Saving file was successful
-	fwrite($fp, $configCode);
-	fclose($fp);
-
 	// Try and make it non-writable
-	@chmod("config/config.inc.php", 0644);
-	$perm_changed = !is__writable('config/config.inc.php');
+	@chmod($filename, 0644);
+	$perm_changed = !is__writable($filename);
+
 
 	print(output_image(true)."</li>\n");
 

@@ -26,12 +26,7 @@ class RSS
 	{
 		$filename = 'xml/'.$name.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->engine->config['wacko_name'])).'.xml';
 
-		$fp = fopen($filename, 'w');
-		if ($fp)
-		{
-			fwrite($fp, $body);
-			fclose($fp);
-		}
+		file_put_contents($filename, $body);
 
 		@chmod($filename, 0644);
 	}
@@ -269,12 +264,8 @@ class RSS
 
 		$filename = "sitemap.xml";
 
-		$fp = @fopen($filename, "w");
-		if ($fp)
-		{
-			fwrite($fp, $xml);
-			fclose($fp);
-		}
+		file_put_contents($filename, $xml);
+		@chmod($filename, 0644);
 	}
 }
 
