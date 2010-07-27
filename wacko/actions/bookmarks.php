@@ -100,7 +100,7 @@ if ($user)
 		echo "<input type=\"hidden\" name=\"_user_bookmarks\" value=\"yes\" />";
 
 		echo "<table>";
-		echo "<tr><th>No.</th><th>Bookmark Title</th><th>Page</th><th>X</th><!--<th>Display</th><th>Lang</th>--></tr>";
+		echo "<tr><th>No.</th><th>Bookmark Title</th><th>Page</th><th>Mark</th><!--<th>Display</th><th>Lang</th>--></tr>";
 
 		foreach($_bookmarks as $_bookmark)
 		{
