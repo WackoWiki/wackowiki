@@ -73,7 +73,7 @@
 $drivers = array();
 $drivers[] = array("mysql", "mysql_legacy", "MySQL");
 $drivers[] = array("mysqli", "mysqli_legacy", "MySQLi");
-$drivers[] = array("pdo", "mysql", "PDO MySQL");
+$drivers[] = array("pdo", "mysql_pdo", "PDO MySQL");
 // $drivers[] = array("pdo", "mssql", "PDO MS SQL");
 // $drivers[] = array("pdo", "pgsql", "PDO PostgreSQL");
 // $drivers[] = array("pdo", "sqlite", "PDO SQLite");

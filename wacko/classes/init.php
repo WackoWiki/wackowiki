@@ -56,8 +56,17 @@ class Init
 	// Mandatory runs and checks.
 	function Init()
 	{
-		error_reporting (E_ALL ^ E_NOTICE);
-		# error_reporting (E_ALL);
+		// setting PHP error reporting
+		switch(PHP_ERROR_REPORTING)
+		{
+			case 0:		error_reporting(0); break;
+			case 1:		error_reporting(E_ERROR | E_WARNING | E_PARSE); break;
+			case 2:		error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE); break;
+			case 3:		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING)); break;
+			case 4:		error_reporting(E_ALL ^ E_NOTICE); break;
+			case 5:		error_reporting(E_ALL); break;
+			default:	error_reporting(E_ALL);
+		}
 
 		// start execution timer
 		$this->timer = $this->GetMicroTime();
@@ -347,7 +356,7 @@ class Init
 
 		switch($this->config["database_driver"])
 		{
-			case "mysql":
+			case "mysql_pdo":
 				$dbfile = "db/pdo.php";
 				break;
 			case "mysqli_legacy":

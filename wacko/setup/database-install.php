@@ -886,7 +886,7 @@ switch($config["database_driver"])
 										break;
 									case "sqlite":
 									case "sqlite2":
-									case "mysql":
+									case "mysql_pdo":
 										require_once("setup/database_mysql.php");
 										$dsn = $config["database_driver"].":dbname=".$config["database_database"].";host=".$config["database_host"].($config["database_port"] != "" ? ";port=".$config["database_port"] : "");
 										break;
