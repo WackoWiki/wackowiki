@@ -656,6 +656,22 @@ $wackoTranslation = array(
 	"PwdCplxDesc43"		=> "lettres en capitales, bas de casse, chiffres et caractères non alphabétiques",
 	"PwdCplxDesc5"		=> "Vous pouvez utiliser chiffres, lettres et caractères spéciaux mais pas d&rsquo;espaces.",
 
+	// Admin panel
+	"Authorization"			=> "Authorization",
+	"AuthorizationTip"		=> "Please enter the administrative password (make also sure that cookies are allowed in your browser).",
+	"NoRecoceryPassword"	=> "The administrative password is not specified!",
+	"NoRecoceryPasswordTip"	=> "Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.",
+
+	"LogFilterTip"			=> "Filter events by criteria",
+	"LogLevel"				=> "Level",
+	"LogLevelNotLower"		=> "not less than",
+	"LogLevelNotHigher"		=> "not higher than",
+	"LogLevelEqual"			=> "equal",
+	"LogNoMatch"			=> "No events that meet the criteria",
+	"LogDate"				=> "Date",
+	"LogEvent"				=> "Event",
+	"LogUsername"			=> "Username",
+
 	// log
 	"LogLevel1"					=> "critique",
 	"LogLevel2"					=> "le plus élevé",
