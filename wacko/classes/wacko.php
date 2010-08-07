@@ -1119,7 +1119,7 @@ class Wacko
 		$subject = ( $subject ? "=?".( $charset ? $charset : $this->GetCharset() )."?B?" . base64_encode($subject) . "?=" : "" );
 
 		// in ssl mode substitute protocol name in links substrings
-		if ($this->config["ssl"] == true && $supress_ssl === false) $message = str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'] : ''), $message);
+		if ($this->config["ssl"] == true && $supress_ssl === false) $message = str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $message);
 
 		$message = wordwrap($message, 74, "\n", 0);
 		@mail($email, $subject, $message, $headers);
@@ -2299,7 +2299,7 @@ class Wacko
 	{
 		$_data = $this->NpjTranslit( $data );
 		$_data = "/".$_data."/";
-		
+
 		// Find the string of text
 		# $this->REGEX_WACKO_FUNCTIONS = '/^(.*?)\/'.STANDARD_HANDLERS.'\/(.*)$/i';
 		// Find the word
@@ -2308,19 +2308,19 @@ class Wacko
 		echo $this->REGEX_WACKO_FUNCTIONS;
 		if (preg_match( $this->REGEX_WACKO_FUNCTIONS, $_data, $match ))
 		{
-			return $message = "As the part of the address you used the reserved word, do not make thus."; 
+			return $message = "As the part of the address you used the reserved word, do not make thus.";
 			/// !!! to messageset, function found
 		}
 		/*
 		if (preg_match( $this->REGEX_WACKO_SPACES, $_data, $match ))
 		{
-		  return "As the part of the address you used the reserved word, do not make thus."; 
+		  return "As the part of the address you used the reserved word, do not make thus.";
 		  /// !!! to messageset, subspace found
 		}
-		
+
 		if (preg_match( "/^\/[0-9]+/", $_data, $match ))
 		{
-		  return "It is not possible to create pages, whose name consists of numbers or begins on them."; 
+		  return "It is not possible to create pages, whose name consists of numbers or begins on them.";
 		  /// !!! to messageset, begins with 0-9
 		}
 		*/
@@ -2448,7 +2448,7 @@ class Wacko
 
 		if (!$this->config["rewrite_mode"]) $result .= "<input type=\"hidden\" name=\"page\" value=\"".$this->MiniHref($method, $tag, $add)."\" />\n";
 
-		if ($this->config["ssl"] == true) $result = str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'] : ''), $result);
+		if ($this->config["ssl"] == true) $result = str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $result);
 
 		return $result;
 	}
@@ -2710,7 +2710,8 @@ class Wacko
 		}
 		else
 		{
-			return $this->_userhost = $_SERVER['REMOTE_ADDR'];
+			//only accept http_x for ssl-proxy
+			return $this->_userhost = (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['ssl_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
 		}
 	}
 
@@ -3811,7 +3812,7 @@ class Wacko
 		// mandatory ssl?
 		if ($this->config["ssl"] == true && $this->config["ssl_implicit"] == true && ( ($_SERVER["HTTPS"] != "on" && empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] != '443' ))
 		{
-			$this->Redirect(str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'] : ''), $this->href($method, $tag)));
+			$this->Redirect(str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->href($method, $tag)));
 		}
 
 		// url lang selection
@@ -3834,7 +3835,7 @@ class Wacko
 		if ($this->config["ssl"] == true && (( (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on" && !empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
 		{
 			$this->config["open_url"] = $this->config["base_url"];
-			$this->config["base_url"] = str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'] : ''), $this->config["base_url"]);
+			$this->config["base_url"] = str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config["base_url"]);
 		}
 
 		// in strong cookie mode check session validity

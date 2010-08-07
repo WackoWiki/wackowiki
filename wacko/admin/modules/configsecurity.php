@@ -245,7 +245,7 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="ssl_proxy"><strong>SSL Proxy:</strong><br />
-				<small>Uses the provided SSL Proxy inplace of SSL. E.g. https://<span class="cite">your-https-proxy.tld/</span>.</small></label></td>
+				<small>Uses the provided SSL Proxy inplace of SSL. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slah.</small></label></td>
 				<td><input maxlength="100" style="width:200px;" id="ssl_proxy" name="ssl_proxy" value="<?php echo htmlspecialchars($engine->config['ssl_proxy']);?>" /></td>
 			</tr>
 			<tr>
