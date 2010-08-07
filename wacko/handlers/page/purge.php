@@ -22,19 +22,19 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		if (isset($_POST["comments"]) && $_POST["comments"] == 1)
 		{
 			$this->RemoveComments($this->tag);
-			$this->Log(1, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedAllComments")));
+			$this->Log(1, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedAllComments", $this->config["language"])));
 			echo $this->GetTranslation("CommentsPurged")."<br />\n";
 		}
 		if (isset($_POST["files"]) && $_POST["files"] == 1)
 		{
 			$this->RemoveFiles($this->tag);
-			$this->Log(1, str_replace('%1', $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedAllFiles")));
+			$this->Log(1, str_replace('%1', $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedAllFiles", $this->config["language"])));
 			echo $this->GetTranslation("FilesPurged")."<br />\n";
 		}
 		if (isset($_POST["revisions"]) && $_POST["revisions"] == 1 && $this->IsAdmin())
 		{
 			$this->RemoveRevisions($this->tag);
-			$this->Log(1, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedAllRevisions")));
+			$this->Log(1, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedAllRevisions", $this->config["language"])));
 			echo $this->GetTranslation("RevisionsPurged")."<br />\n";
 		}
 		print('</em>');

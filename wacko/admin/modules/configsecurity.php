@@ -133,7 +133,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br />
-					Tolerances and privileges
+					Rights and privileges
 				</th>
 			</tr>
 			<tr>

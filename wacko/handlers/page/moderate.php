@@ -327,7 +327,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 				{
 					$page = $this->LoadPage($this->GetTagById($id), '', LOAD_NOCACHE, LOAD_META);
 					ModerateDeletePage($this, $page['tag']);
-					$this->Log(1, str_replace('%2', $page['user_id'], str_replace('%1', $page['tag'], $this->GetTranslation('LogRemovedPage'))));
+					$this->Log(1, str_replace('%2', $page['user_id'], str_replace('%1', $page['tag'], $this->GetTranslation('LogRemovedPage', $this->config['language']))));
 				}
 				unset($acceptAction);
 				$xml->Comments();
@@ -365,7 +365,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 					foreach ($set as $id)
 					{
 						ModerateRenameTopic($this, $oldtags[$i], $newtags[$i]);
-						$this->Log(3, str_replace('%2', $newtags[$i], str_replace('%1', $oldtags[$i], $this->GetTranslation('LogRenamedPage'))));
+						$this->Log(3, str_replace('%2', $newtags[$i], str_replace('%1', $oldtags[$i], $this->GetTranslation('LogRenamedPage', $this->config['language']))));
 						$i++;
 					}
 					unset($acceptAction, $i, $oldtags, $newtags);
@@ -399,7 +399,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 				if ($tag != '' && $error != true)
 				{
 					ModerateRenameTopic($this, $oldtag, $this->tag.'/'.$tag, $title);
-					$this->Log(3, str_replace('%2', $this->tag.'/'.$tag.' '.$title, str_replace('%1', $oldtag, $this->GetTranslation('LogRenamedPage'))));
+					$this->Log(3, str_replace('%2', $this->tag.'/'.$tag.' '.$title, str_replace('%1', $oldtag, $this->GetTranslation('LogRenamedPage', $this->config['language']))));
 					unset($acceptAction, $oldtag, $tag, $title);
 					$xml->Comments();
 					$set = array();
@@ -426,7 +426,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 					$topics[] = $this->GetTagById($id);
 				}
 				ModerateMergeTopics($this, $_POST['base'], $topics);
-				$this->Log(3, str_replace('%2', $_POST['base'], str_replace('%1', '##'.implode('##, ##', $topics).'##', $this->GetTranslation('LogMergedPages'))));
+				$this->Log(3, str_replace('%2', $_POST['base'], str_replace('%1', '##'.implode('##, ##', $topics).'##', $this->GetTranslation('LogMergedPages', $this->config['language']))));
 				unset($acceptAction, $topics);
 				$xml->Comments();
 				$set = array();
@@ -440,7 +440,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 			foreach ($set as $id)
 			{
 				$page = $this->LoadPage($this->GetTagById($id), '', LOAD_NOCACHE, LOAD_META);
-				$this->Log(2, str_replace('%1', $page['tag'].' '.$page['title'], $this->GetTranslation('LogTopicLocked')));
+				$this->Log(2, str_replace('%1', $page['tag'].' '.$page['title'], $this->GetTranslation('LogTopicLocked', $this->config['language'])));
 				// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 				$this->SaveAcl($id, 'comment', '!*');
 			}
@@ -454,7 +454,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 			foreach ($set as $id)
 			{
 				$page = $this->LoadPage($this->GetTagById($id), '', LOAD_NOCACHE, LOAD_META);
-				$this->Log(2, str_replace('%1', $page['tag'].' '.$page['title'], $this->GetTranslation('LogTopicUnlocked')));
+				$this->Log(2, str_replace('%1', $page['tag'].' '.$page['title'], $this->GetTranslation('LogTopicUnlocked', $this->config['language'])));
 				$this->SaveAcl($id, 'comment', '*');
 			}
 			$set = array();
@@ -657,7 +657,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 			// actually remove topics
 			if ($_POST['accept'])
 			{
-				$this->Log(1, str_replace('%2', $this->page['user_id'], str_replace('%1', $this->page['tag'], $this->GetTranslation('LogRemovedPage'))));
+				$this->Log(1, str_replace('%2', $this->page['user_id'], str_replace('%1', $this->page['tag'], $this->GetTranslation('LogRemovedPage', $this->config['language']))));
 				ModerateDeletePage($this, $this->tag);
 				unset($acceptAction);
 				$xml->Comments();
@@ -702,7 +702,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 				else
 				{
 					ModerateRenameTopic($this, $oldtag, $newtag);
-					$this->Log(3, str_replace('%2', $newtag, str_replace('%1', $oldtag, $this->GetTranslation('LogRenamedPage'))));
+					$this->Log(3, str_replace('%2', $newtag, str_replace('%1', $oldtag, $this->GetTranslation('LogRenamedPage', $this->config['language']))));
 					unset($acceptAction);
 					$xml->Comments();
 					$this->SetMessage('Page successfully moved.'); // ru: Документ успешно перемещен.
@@ -736,7 +736,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 				if ($tag != '' && $error != true)
 				{
 					ModerateRenameTopic($this, $oldtag, $newtag, $title);
-					$this->Log(3, str_replace('%2', $newtag.' '.$title, str_replace('%1', $oldtag, $this->GetTranslation('LogRenamedPage'))));
+					$this->Log(3, str_replace('%2', $newtag.' '.$title, str_replace('%1', $oldtag, $this->GetTranslation('LogRenamedPage', $this->config['language']))));
 					unset($acceptAction);
 					$xml->Comments();
 					$this->SetMessage('Topic successfully renamed. Note: if the topic signed electronically, its title on the same.'); // ru: Тема успешно переименована. Заметьте: если тема электронно подписана, ее заголовок оставлен неизменным.
@@ -749,7 +749,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 		{
 			// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 			$this->SaveAcl($this->page['page_id'], 'comment', '!*');
-			$this->Log(2, str_replace('%1', $this->page['tag'].' '.$this->page['title'], $this->GetTranslation('LogTopicLocked')));
+			$this->Log(2, str_replace('%1', $this->page['tag'].' '.$this->page['title'], $this->GetTranslation('LogTopicLocked', $this->config['language'])));
 			$this->SetMessage('Topic successfully blocked.'); // ru: Тема успешно заблокирована.
 			$this->Redirect($this->href('moderate'));
 		}
@@ -757,7 +757,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 		else if ($_POST['topic_unlock'] && $forumCluster === true)
 		{
 			$this->SaveAcl($this->page['page_id'], 'comment', '*');
-			$this->Log(2, str_replace('%1', $this->page['tag'].' '.$this->page['title'], $this->GetTranslation('LogTopicUnlocked')));
+			$this->Log(2, str_replace('%1', $this->page['tag'].' '.$this->page['title'], $this->GetTranslation('LogTopicUnlocked', $this->config['language'])));
 			$this->SetMessage('Topic successfully unlocked.'); // ru: Тема успешно разблокирована.
 			$this->Redirect($this->href('moderate'));
 		}
@@ -773,7 +773,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 				{
 					$page = $this->LoadPage($this->GetTagById($id), '', LOAD_NOCACHE, LOAD_META);
 					ModerateDeletePage($this, $page['tag']);
-					$this->Log(1, str_replace('%3', $this->GetTimeStringFormatted($page['created']), str_replace('%2', $page['user'], str_replace('%1', $page['comment_on'].' '.$this->GetPageTitle($page['comment_on']), $this->GetTranslation('LogRemovedComment')))));
+					$this->Log(1, str_replace('%3', $this->GetTimeStringFormatted($page['created']), str_replace('%2', $page['user'], str_replace('%1', $page['comment_on'].' '.$this->GetPageTitle($page['comment_on']), $this->GetTranslation('LogRemovedComment', $this->config['language'])))));
 				}
 
 				// recount comments for current topic
@@ -853,7 +853,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 					{
 						if (ModerateSplitTopic($this, $comment_ids, $oldtag, $section.'/'.$tag, $title) === true)
 						{
-							$this->Log(3, str_replace('%2', $section.'/'.$tag.' '.$title, str_replace('%1', $this->tag.' '.$this->page['title'], $this->GetTranslation('LogSplittedPage'))));
+							$this->Log(3, str_replace('%2', $section.'/'.$tag.' '.$title, str_replace('%1', $this->tag.' '.$this->page['title'], $this->GetTranslation('LogSplittedPage', $this->config['language']))));
 							unset($acceptAction);
 							$xml->Comments();
 							$this->SetMessage('Selected comments successfully separated in a new topic.'); // ru: Выбранные комментарии успешно отделены в новую тему.
@@ -909,7 +909,7 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 							"WHERE tag = '".quote($this->dblink, $title)."' ".
 							"LIMIT 1");
 
-						$this->Log(3, str_replace('%2', $title.' '.$this->GetPageTitle($title), str_replace('%1', $this->tag.' '.$this->page['title'], $this->GetTranslation('LogSplittedPage'))));
+						$this->Log(3, str_replace('%2', $title.' '.$this->GetPageTitle($title), str_replace('%1', $this->tag.' '.$this->page['title'], $this->GetTranslation('LogSplittedPage', $this->config['language']))));
 						unset($acceptAction);
 						$xml->Comments();
 						$this->SetMessage('Selected comments successfully migrated to a given page.'); // ru: Выбранные комментарии успешно перенесены в заданный документ.

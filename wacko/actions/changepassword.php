@@ -71,7 +71,7 @@ if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
 					"LIMIT 1");
 
 				// log event
-				$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordRecovered")));
+				$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordRecovered", $this->config["language"])));
 
 				// forward
 				$this->SetMessage($this->GetTranslation("PasswordChanged"));
@@ -152,7 +152,7 @@ else if (!isset($forgot) && $user = $this->GetUser())
 		{
 			$error = $this->GetTranslation("WrongPassword");
 			// log event
-			$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordMismatch")));
+			$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordMismatch", $this->config["language"])));
 		}
 		// confirmed password mismatch
 		else if ($confpassword != $newpassword)
@@ -198,7 +198,7 @@ else if (!isset($forgot) && $user = $this->GetUser())
 			$this->context[++$this->current_context] = "";
 
 			// log event
-			$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordChanged")));
+			$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordChanged", $this->config["language"])));
 
 			// forward
 			$this->SetMessage($this->GetTranslation("PasswordChanged"));
@@ -303,7 +303,7 @@ else
 				$this->SetLostPasswordCount($user["user_id"]);
 
 				// log event
-				$this->Log(3, str_replace("%2", $user["email"], str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordReminded"))));
+				$this->Log(3, str_replace("%2", $user["email"], str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordReminded", $this->config["language"]))));
 
 				$this->SetMessage($this->GetTranslation("CodeWasSent"));
 				$this->Redirect($this->href("", $this->GetTranslation("LoginPage")));

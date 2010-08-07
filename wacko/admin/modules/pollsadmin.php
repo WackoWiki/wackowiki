@@ -55,7 +55,7 @@ function admin_pollsadmin(&$engine, &$module)
 		else if (isset($_POST['delete']) && $_POST['yes'])
 		{
 			$pollsObj->RemovePoll($_POST['delete']);
-			$engine->Log(1, str_replace('%1', (int)$_POST['delete'], $engine->GetTranslation('LogRemovedPoll')));
+			$engine->Log(1, str_replace('%1', (int)$_POST['delete'], $engine->GetTranslation('LogRemovedPoll', $engine->config['language'])));
 		}
 		// stop current survey
 		else if (isset($_POST['stop']) && $_POST['id'])
@@ -65,7 +65,7 @@ function admin_pollsadmin(&$engine, &$module)
 				"SET end = NOW() ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0 ".
 				"LIMIT 1");
-			$engine->Log(4, str_replace('%1', (int)$_POST['id'], $engine->GetTranslation('LogPollStopped')));
+			$engine->Log(4, str_replace('%1', (int)$_POST['id'], $engine->GetTranslation('LogPollStopped', $engine->config['language'])));
 		}
 		// reset current survey
 		else if (isset($_POST['reset']) && $_POST['id'])
@@ -80,7 +80,7 @@ function admin_pollsadmin(&$engine, &$module)
 					"votes	= 0 ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id']));
 			$xml->News(); // update news feed
-			$engine->Log(4, str_replace('%1', (int)$_POST['id'], $engine->GetTranslation('LogPollReset')));
+			$engine->Log(4, str_replace('%1', (int)$_POST['id'], $engine->GetTranslation('LogPollReset', $engine->config['language'])));
 		}
 		// activate new survey
 		else if (isset($_POST['activate']) && $_POST['id'])
@@ -90,7 +90,7 @@ function admin_pollsadmin(&$engine, &$module)
 				"SET start = NOW() ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0");
 			$xml->News(); // update news feed
-			$engine->Log(4, str_replace('%1', (int)$_POST['id'], $engine->GetTranslation('LogPollStarted')));
+			$engine->Log(4, str_replace('%1', (int)$_POST['id'], $engine->GetTranslation('LogPollStarted', $engine->config['language'])));
 		}
 		// edit/moderate new survey
 		else if (isset($_POST['edit']) && $_POST['id'])
@@ -248,9 +248,9 @@ function admin_pollsadmin(&$engine, &$module)
 		echo '<tr><td colspan="4">';
 		// pagination
 		echo '<small><strong>'.$engine->GetTranslation('PollsShow').':</strong> ';
-		if ($year == 0) 
+		if ($year == 0)
 			echo $engine->GetTranslation('PollsAll').' ';
-		else 
+		else
 			echo '<a href="'.rawurldecode($engine->href('', $mode_file, $mode_http.'year=0')).'">'.$engine->GetTranslation('PollsAll').'</a> ';
 
 		if (!empty($years))

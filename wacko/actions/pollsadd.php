@@ -137,17 +137,17 @@ if (isset($_POST['submitpoll']))
 					   $this->config['wacko_name']."\n".
 					   $this->config['base_url'];
 			$this->SendMail($this->config['admin_email'], $subject, $email);
-			$this->Log(4, str_replace('%1', $edit_id, $this->GetTranslation('LogPollCreated')));
+			$this->Log(4, str_replace('%1', $edit_id, $this->GetTranslation('LogPollCreated', $this->config['language'])));
 		}
 		else if ($moderation === true)
 		{
-			$this->Log(4, str_replace('%1', $edit_id, $this->GetTranslation('LogPollChanged')));
+			$this->Log(4, str_replace('%1', $edit_id, $this->GetTranslation('LogPollChanged', $this->config['language'])));
 		}
 
 		// log if we started a poll
 		if ($startmod == 1 && $admin)
 		{
-			$this->Log(4, str_replace('%1', $edit_id, $this->GetTranslation('LogPollStarted')));
+			$this->Log(4, str_replace('%1', $edit_id, $this->GetTranslation('LogPollStarted', $this->config['language'])));
 		}
 	}
 }

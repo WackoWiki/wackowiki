@@ -61,7 +61,7 @@ if ($engine->config['rewrite_mode'] == false)
 if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
 	$engine->DeleteCookie('admin');
-	$engine->Log(1, $engine->GetTranslation('LogAdminLogout'));
+	$engine->Log(1, $engine->GetTranslation('LogAdminLogout', $engine->config['language']));
 	$engine->Redirect(( $engine->config['ssl'] == true ? str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'] : ''), $engine->href()) : $engine->href() ));
 	exit;
 }
@@ -96,10 +96,9 @@ foreach ($dirs as $dir)
 // recovery password
 if ($engine->config['recovery_password'] == false)
 {
-	die('<strong>The administrative password is not specified!</strong><br />'.
-		'Note: The absence of an administrative password is '.
-		'threat to security! Enter your password in the configuration file '.
-		'and run the program again.');
+	echo '<strong>'.$engine->GetTranslation('NoRecoceryPassword').'</strong><br />';
+	echo $engine->GetTranslation('NoRecoceryPasswordTip');
+	die();
 }
 else
 {
@@ -112,12 +111,12 @@ if (isset($_POST['password']))
 	if (sha1($_POST['password']) == $pwd)
 	{
 		$engine->SetSessionCookie('admin', sha1($_POST['password']), '', ( $engine->config['ssl'] == true ? 1 : 0 ));
-		$engine->Log(1, $engine->GetTranslation('LogAdminLoginSuccess'));
+		$engine->Log(1, $engine->GetTranslation('LogAdminLoginSuccess', $engine->config['language']));
 		$engine->Redirect('admin.php');
 	}
 	else
 	{
-		$engine->Log(1, str_replace('%1', $_POST['password'], $engine->GetTranslation('LogAdminLoginFailed')));
+		$engine->Log(1, str_replace('%1', $_POST['password'], $engine->GetTranslation('LogAdminLoginFailed', $engine->config['language'])));
 	}
 }
 
@@ -132,18 +131,18 @@ if ($user == false)
 {
 	header('Content-Type: text/html; charset='.$engine->GetCharset());
 ?>
-	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	<title>Authorization Admin</title>
 	<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/styles/backend.css" rel="stylesheet" type="text/css" media="screen" />
 	</head>
 	<body>
-		<strong>Authorization</strong><br />
-		Please enter the administrative password (make also sure
-		that cookies are allowed in your browser).<br /><br />
+		<strong><?php echo $engine->GetTranslation('Authorization'); ?></strong><br />
+		<?php echo $engine->GetTranslation('AuthorizationTip'); ?>
+		<br /><br />
 		<form action="admin.php" method="post" name="emergency">
-			<tt><strong>Password:</strong> <input name="password" type="password" autocomplete="off" value="" />
+			<tt><strong><?php echo $engine->GetTranslation('LoginPassword'); ?>:</strong> <input name="password" type="password" autocomplete="off" value="" />
 			<input id="submit" type="submit" value="ok" /></tt>
 		</form>
 	</body>

@@ -47,7 +47,10 @@ if ($this->page)
 		// Show Owner of this page
 		if ($owner = $this->GetPageOwner())
 		{
-			print("<li>".$this->GetTranslation("Owner").": ".$this->Link($owner)."</li>\n");
+			if ($owner == 'System')
+				print("<li>".$this->GetTranslation("Owner").": ".$owner."</li>\n");
+			else
+				print("<li>".$this->GetTranslation("Owner").": ".$this->Link($owner)."</li>\n");
 		}
 		else if (!$this->page["comment_on_id"])
 		{

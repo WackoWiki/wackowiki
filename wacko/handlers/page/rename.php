@@ -91,7 +91,7 @@ if ($registered
 						print("<br />".$this->GetTranslation("NewNameOfPage").$this->Link("/".$new_name));
 
 						// log event
-						$this->Log(3, str_replace("%2", $new_name, str_replace("%1", $this->tag, $this->GetTranslation("LogRenamedPage"))).( $need_redirect == 1 ? $this->GetTranslation("LogRenamedPage2") : "" ));
+						$this->Log(3, str_replace("%2", $new_name, str_replace("%1", $this->tag, $this->GetTranslation("LogRenamedPage", $this->config["language"]))).( $need_redirect == 1 ? $this->GetTranslation("LogRenamedPage2", $this->config["language"]) : "" ));
 					}
 				}
 			}
@@ -221,7 +221,7 @@ function Move(&$parent, $OldPage, $new_name )
 				print("<br />".$parent->GetTranslation("NewNameOfPage").$parent->Link("/".$new_name));
 
 				// log event
-				$engine->Log(3, str_replace("%2", $new_name, str_replace("%1", $OldPage["tag"], $engine->GetTranslation("LogRenamedPage"))).( $need_redirect == 1 ? $engine->GetTranslation("LogRenamedPage2") : "" ));
+				$engine->Log(3, str_replace("%2", $new_name, str_replace("%1", $OldPage["tag"], $engine->GetTranslation("LogRenamedPage", $this->config["language"]))).( $need_redirect == 1 ? $engine->GetTranslation("LogRenamedPage2", $this->config["language"]) : "" ));
 			}
 		}
 	}

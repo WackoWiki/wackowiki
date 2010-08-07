@@ -27,7 +27,7 @@ if (isset($_GET["confirm"]))
 		echo "<br /><br />".$this->GetTranslation("EmailConfirmed")."<br /><br />";
 
 		// log event
-		$this->Log(4, str_replace("%2", $temp["user_name"], str_replace("%1", $temp["email"], $this->GetTranslation("LogUserEmailActivated"))));
+		$this->Log(4, str_replace("%2", $temp["user_name"], str_replace("%1", $temp["email"], $this->GetTranslation("LogUserEmailActivated", $this->config["language"]))));
 
 		unset($temp);
 	}
@@ -79,7 +79,7 @@ else if ($user = $this->GetUser())
 				$this->SetMessage($this->GetTranslation("UserSettingsStored"));
 
 				// log event
-				$this->Log(6, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserSettingsUpdate")));
+				$this->Log(6, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserSettingsUpdate", $this->config["language"])));
 			}
 		}
 	}
@@ -114,7 +114,7 @@ else if ($user = $this->GetUser())
 		$this->SetMessage($this->GetTranslation("UserSettingsStored"));
 
 		// log event
-		$this->Log(6, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserSettingsUpdate")));
+		$this->Log(6, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserSettingsUpdate", $this->config["language"])));
 	}
 
 	$email_changed = "";

@@ -1,43 +1,4 @@
 
-/*	Digital signature verification	*/
-
-#sigheader {
-	font-size: 11px;
-	padding-bottom: 10px;
-}
-#sigstatus a {
-	display: block;
-	border: 1px solid;
-	padding: 1px;
-	float: left;
-}
-	#sigstatus a.valid:hover, #sigstatus a.invalid:hover, #sigstatus a.marginal:hover, #sigstatus a.unknown:hover {
-		text-decoration: none;
-	}
-	#sigstatus a.valid, #sigstatus a.valid:hover {
-		color: #006600;
-		background-color: #CCFFCC;
-		border-color: #006600;
-	}
-	#sigstatus a.invalid, #sigstatus a.invalid:hover {
-		color: #660000;
-		/*text-decoration: blink;*/
-		background-color: #FFCCCC;
-		border-color: #660000;
-	}
-	#sigstatus a.marginal, #sigstatus a.marginal:hover {
-		color: #804000;
-		background-color: #FFFFCC;
-		border-color: #804000;
-	}
-	#sigstatus a.unknown, #sigstatus a.unknown:hover {
-		color: #333333;
-		background-color: #CCCCCC;
-		border-color: #333333;
-	}
-
-
-
 /*	Files/comments forms layout	*/
 
 #commentsfiles {

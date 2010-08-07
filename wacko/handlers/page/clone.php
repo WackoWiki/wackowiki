@@ -62,7 +62,7 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this-
 					if ($this->ClonePage($this->tag, $new_name, $supernewname, $edit_note))
 					{
 						// log event
-						$this->Log(4, str_replace("%2", $new_name, str_replace("%1", $this->tag, $this->GetTranslation("LogClonedPage"))) );
+						$this->Log(4, str_replace("%2", $new_name, str_replace("%1", $this->tag, $this->GetTranslation("LogClonedPage", $this->config["language"]))) );
 
 						if (isset($_POST["redirect"]) && $_POST["redirect"] == "on") $need_redirect = 1;
 

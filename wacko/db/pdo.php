@@ -55,6 +55,8 @@ function free_result($rs)
 function connect($host, $user, $password, $db, $collation = false, $driver, $port)
 {
 	$dsn = "";
+	if ($driver == 'mysql_pdo') $driver = 'mysql';
+
 	switch($driver)
 	{
 		case "firebird":

@@ -30,7 +30,7 @@ if (isset($_GET["confirm"]))
 		echo "<div class=\"info\">".$this->GetTranslation("EmailConfirmed")."</div><br />";
 
 		// log event
-		$this->Log(4, str_replace("%2", $temp["user_name"], str_replace("%1", $temp["email"], $this->GetTranslation("LogUserEmailActivated"))));
+		$this->Log(4, str_replace("%2", $temp["user_name"], str_replace("%1", $temp["email"], $this->GetTranslation("LogUserEmailActivated", $this->config["language"]))));
 
 		unset($temp);
 	}
@@ -111,7 +111,7 @@ else if (isset($_POST["action"]) && $_POST["action"] == "login")
 				$error .= $this->GetTranslation("RegistrationNameOwned");
 
 				// log event
-				$this->Log(2, str_replace("%1", $user_name, $this->GetTranslation("LogUserSimiliarName")));
+				$this->Log(2, str_replace("%1", $user_name, $this->GetTranslation("LogUserSimiliarName", $this->config["language"])));
 			}
 			// no email given
 			else if ($email == "")
@@ -196,7 +196,7 @@ else if (isset($_POST["action"]) && $_POST["action"] == "login")
 				$this->SendMail($email, $subject, $message);
 
 				// log event
-				$this->Log(4, str_replace("%2", $email, str_replace("%1", $user_name, $this->GetTranslation("LogUserRegistered"))));
+				$this->Log(4, str_replace("%2", $email, str_replace("%1", $user_name, $this->GetTranslation("LogUserRegistered", $this->config["language"]))));
 
 				// forward
 				$this->SetMessage($this->GetTranslation("SiteRegistered").

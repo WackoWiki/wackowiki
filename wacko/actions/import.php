@@ -80,7 +80,7 @@ else
 				$this->current_context--;
 
 				// log import
-				$this->Log(4, str_replace("%1", $tag, $this->GetTranslation("LogPageImported")));
+				$this->Log(4, str_replace("%1", $tag, $this->GetTranslation("LogPageImported", $this->config["language"])));
 
 				// count page
 				$t++;

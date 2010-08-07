@@ -6,7 +6,7 @@ if ($this->page && !$this->page["owner_id"] && $this->GetUser() && !$this->page[
 	$this->SetPageOwner($this->GetPageId(), $this->GetUserId());
 	$this->SetMessage($this->GetTranslation("YouAreNowTheOwner"));
 	// log event
-	$this->Log(4, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogPageOwnershipClaimed")));
+	$this->Log(4, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogPageOwnershipClaimed", $this->config["language"])));
 }
 
 $this->Redirect($this->href());

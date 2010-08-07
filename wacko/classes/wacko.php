@@ -2295,6 +2295,38 @@ class Wacko
 		return $text;
 	}
 
+	function ValidateReservedWords( $data )
+	{
+		$_data = $this->NpjTranslit( $data );
+		$_data = "/".$_data."/";
+		
+		// Find the string of text
+		# $this->REGEX_WACKO_FUNCTIONS = '/^(.*?)\/'.STANDARD_HANDLERS.'\/(.*)$/i';
+		// Find the word
+		$this->REGEX_WACKO_FUNCTIONS = '/\b('.STANDARD_HANDLERS.')\b/i';
+
+		echo $this->REGEX_WACKO_FUNCTIONS;
+		if (preg_match( $this->REGEX_WACKO_FUNCTIONS, $_data, $match ))
+		{
+			return $message = "As the part of the address you used the reserved word, do not make thus."; 
+			/// !!! to messageset, function found
+		}
+		/*
+		if (preg_match( $this->REGEX_WACKO_SPACES, $_data, $match ))
+		{
+		  return "As the part of the address you used the reserved word, do not make thus."; 
+		  /// !!! to messageset, subspace found
+		}
+		
+		if (preg_match( "/^\/[0-9]+/", $_data, $match ))
+		{
+		  return "It is not possible to create pages, whose name consists of numbers or begins on them."; 
+		  /// !!! to messageset, begins with 0-9
+		}
+		*/
+		return 0;
+	}
+
 	function IsWikiName($text)
 	{
 		return preg_match("/^".$this->language["UPPER"].$this->language["LOWER"]."+".$this->language["UPPERNUM"].$this->language["ALPHANUM"]."*$/", $text);
