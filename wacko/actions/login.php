@@ -7,7 +7,7 @@ $output = "";
 // reconnect securely in ssl mode
 if ($this->config["ssl"] == true && ( (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "on" && empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] != '443' ))
 {
-	$this->Redirect(str_replace("http://", "https://".(!empty($this->config["ssl_proxy"]) ? $this->config["ssl_proxy"] : ""), $this->href()));
+	$this->Redirect(str_replace("http://", "https://".(!empty($this->config["ssl_proxy"]) ? $this->config["ssl_proxy"].'/' : ""), $this->href()));
 }
 
 // actions
@@ -161,7 +161,7 @@ else
 					// run in ssl mode?
 					if ($this->config['ssl'] == true)
 					{
-						$this->config['base_url'] = str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'] : ''), $this->config['base_url']);
+						$this->config['base_url'] = str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
 					}
 
 					if ($_POST["goback"] != "")
