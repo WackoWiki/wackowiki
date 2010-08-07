@@ -812,6 +812,22 @@ $wackoTranslation = array(
 	"PollsNotifyBody"	=> "Пользователь %1 добавил новый опрос. Для просмотра деталей, подтверждения или отклонения опроса пройдите по этой ссылке:",
 	"PollsNone"			=> "Активных опросов нет.",
 
+	// Admin panel
+	"Authorization"			=> "Authorization",
+	"AuthorizationTip"		=> "Please enter the administrative password (make also sure that cookies are allowed in your browser).",
+	"NoRecoceryPassword"	=> "The administrative password is not specified!",
+	"NoRecoceryPasswordTip"	=> "Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.",
+
+	"LogFilterTip"			=> "Filter events by criteria",
+	"LogLevel"				=> "Level",
+	"LogLevelNotLower"		=> "not less than",
+	"LogLevelNotHigher"		=> "not higher than",
+	"LogLevelEqual"			=> "equal",
+	"LogNoMatch"			=> "No events that meet the criteria",
+	"LogDate"				=> "Date",
+	"LogEvent"				=> "Event",
+	"LogUsername"			=> "Username",
+
 	// log
 	"LogLevel1"					=> "Критический",
 	"LogLevel2"					=> "Наивысший",
