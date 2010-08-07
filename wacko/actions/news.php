@@ -4,11 +4,11 @@
 
 if (!empty($this->config["news_cluster"]))
 {
-	if (!isset($max)) $max = "";
+	if (!isset($max))	$max = "";
 	if (!isset($mode))	$mode = "latest";
 	if (!isset($title))	$title = 1;
-	if (!isset($noxml)) $noxml = 0;
-	if ($max) $limit = $max;
+	if (!isset($noxml))	$noxml = 0;
+	if ($max)			$limit = $max;
 	if (!isset($limit))	$limit = 10;
 	else				$limit = (int)$limit;
 
@@ -86,7 +86,16 @@ if (!empty($this->config["news_cluster"]))
 	echo "<div class=\"news\">";
 	if ($title == 1)
 	{
-		echo "<h1>".$this->GetTranslation("News")."</h1>";
+		if ($this->page == $this->config["news_cluster"])
+		{
+			$_title = $this->GetTranslation("News");
+		}
+		else
+		{
+			$_title = $this->ComposeLinkToPage($this->config["news_cluster"], "", $this->GetTranslation("News"), 0);
+		}
+
+		echo "<h1>".$_title."</h1>";
 	}
 		// displaying XML icon
 	if (!(int)$noxml)
