@@ -50,7 +50,7 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this-
 			"LIMIT 1");
 
 		// log event
-		$this->Log(4, str_replace("%1", $this->tag." ".(isset($_POST["title"]) ? $_POST["title"] : ""), $this->GetTranslation("LogPageMetaUpdated")));
+		$this->Log(4, str_replace("%1", $this->tag." ".(isset($_POST["title"]) ? $_POST["title"] : ""), $this->GetTranslation("LogPageMetaUpdated", $this->config["language"])));
 
 		// reload page
 		$this->SetMessage($this->GetTranslation("MetaUpdated")."!");

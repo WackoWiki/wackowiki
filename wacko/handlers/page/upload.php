@@ -139,7 +139,7 @@ if ($registered
 					$this->SetMessage($message);
 				}
 				// log event
-				$this->Log(1, str_replace("%2", $what[0]["filename"], str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedFile"))));
+				$this->Log(1, str_replace("%2", $what[0]["filename"], str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedFile", $this->config["language"]))));
 			}
 			else
 			{
@@ -270,11 +270,11 @@ if ($registered
 						// log event
 						if ($is_global)
 						{
-							$this->Log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, $this->GetTranslation("LogFileUploadedGlobal"))));
+							$this->Log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, $this->GetTranslation("LogFileUploadedGlobal", $this->config["language"]))));
 						}
 						else
 						{
-							$this->Log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, str_replace("%1", $this->page["tag"]." ".$this->page["title"], $this->GetTranslation("LogFileUploadedLocal")))));
+							$this->Log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, str_replace("%1", $this->page["tag"]." ".$this->page["title"], $this->GetTranslation("LogFileUploadedLocal", $this->config["language"])))));
 						}
 						?>
 	<br />

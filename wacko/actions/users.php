@@ -85,7 +85,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 
 					$this->SendMail($user['email'], $subject, $message, 'no-reply@'.$prefix, '', $headers, true);
 					$this->SetMessage($notice);
-					$this->Log(4, str_replace('%2', $user['user_name'], str_replace('%1', $this->GetUserName(), $this->GetTranslation('LogPMSent'))));
+					$this->Log(4, str_replace('%2', $user['user_name'], str_replace('%1', $this->GetUserName(), $this->GetTranslation('LogPMSent', $this->config['language']))));
 					$_SESSION['intercom_delay']	= time();
 					$_POST['mail_body']			= '';
 					$_POST['mail_subject']		= '';

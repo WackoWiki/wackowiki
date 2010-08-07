@@ -22,7 +22,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "clearcookies")
 
 if (isset($_GET["action"]) && $_GET["action"] == "logout")
 {
-	$this->Log(5, str_replace("%1", $this->GetUserName(), $this->GetTranslation("LogUserLoggedOut")));
+	$this->Log(5, str_replace("%1", $this->GetUserName(), $this->GetTranslation("LogUserLoggedOut", $this->config["language"])));
 	$this->LogoutUser();
 	$this->SetBookmarks(BM_DEFAULT);
 	//$this->SetMessage($this->GetTranslation("LoggedOut"));
@@ -130,7 +130,8 @@ else
 				if ($existingUser["password"] == $_processed_password)
 				{
 					// define session duration
-					switch ($_POST['session'])
+					$_session = isset($_POST['session']) ? $_POST['session'] : NULL ;
+					switch ($_session)
 					{
 						case '1d':
 							$session = 1;
@@ -155,7 +156,7 @@ else
 					$this->ResetFailedUserLoginCount($existingUser["user_id"]);
 					$this->ResetLostPasswordCount($existingUser["user_id"]);
 
-					$this->Log(3, str_replace("%1", $existingUser["user_name"], $this->GetTranslation("LogUserLoginOK")));
+					$this->Log(3, str_replace("%1", $existingUser["user_name"], $this->GetTranslation("LogUserLoginOK", $this->config["language"])));
 
 					// run in ssl mode?
 					if ($this->config['ssl'] == true)
@@ -177,7 +178,7 @@ else
 					$this->SetFailedUserLoginCount($existingUser["user_id"]);
 
 					// log failed attempt
-					$this->Log(2, str_replace("%1", $_POST["name"], $this->GetTranslation("LogUserLoginFailed")));
+					$this->Log(2, str_replace("%1", $_POST["name"], $this->GetTranslation("LogUserLoginFailed", $this->config["language"])));
 				}
 			}
 		}

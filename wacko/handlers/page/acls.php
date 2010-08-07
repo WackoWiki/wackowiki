@@ -27,7 +27,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			$this->SaveAcl($this->GetPageId(), "comment", $_POST["comment_acl"]);
 
 			// log event
-			$this->Log(2, str_replace("%1", $this->page["tag"]." ".$this->page["title"], $this->GetTranslation("LogACLUpdated")));
+			$this->Log(2, str_replace("%1", $this->page["tag"]." ".$this->page["title"], $this->GetTranslation("LogACLUpdated", $this->config["language"])));
 
 			$message = $this->GetTranslation("ACLUpdated");
 
@@ -65,7 +65,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					}
 
 					// log event
-					$this->Log(2, str_replace("%2", $newowner, str_replace("%1", $this->page["tag"]." ".$this->page["title"], $this->GetTranslation("LogOwnershipChanged"))));
+					$this->Log(2, str_replace("%2", $newowner, str_replace("%1", $this->page["tag"]." ".$this->page["title"], $this->GetTranslation("LogOwnershipChanged", $this->config["language"]))));
 
 					$message .= $this->GetTranslation("ACLGaveOwnership").$newowner;
 				}
@@ -118,7 +118,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 				$this->SaveAcl($page["page_id"], "comment", $_POST["comment_acl"]);
 
 				// log event
-				$this->Log(2, str_replace("%1", $page["tag"]." ".$page["title"], $this->GetTranslation("LogACLUpdated")));
+				$this->Log(2, str_replace("%1", $page["tag"]." ".$page["title"], $this->GetTranslation("LogACLUpdated", $this->config["language"])));
 
 				// change owner?
 				if ($newowner = $_POST["newowner"])
@@ -128,7 +128,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					$ownedpages .= $this->Href("", $page["tag"])."\n";
 
 					// log event
-					$this->Log(2, str_replace("%2", $exists["user_name"], str_replace("%1", $page["tag"]." ".$page["title"], $this->GetTranslation("LogOwnershipChanged"))));
+					$this->Log(2, str_replace("%2", $exists["user_name"], str_replace("%1", $page["tag"]." ".$page["title"], $this->GetTranslation("LogOwnershipChanged", $this->config["language"]))));
 				}
 			}
 

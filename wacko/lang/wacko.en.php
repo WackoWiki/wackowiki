@@ -855,6 +855,22 @@ $wackoTranslation = array(
 	"PollsNotifyBody"	=> "User %1 added a new poll. To view details, confirm or reject the poll go to this link:",
 	"PollsNone"			=> "No active poll.",
 
+	// Admin panel
+	"Authorization"			=> "Authorization",
+	"AuthorizationTip"		=> "Please enter the administrative password (make also sure that cookies are allowed in your browser).",
+	"NoRecoceryPassword"	=> "The administrative password is not specified!",
+	"NoRecoceryPasswordTip"	=> "Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.",
+
+	"LogFilterTip"			=> "Filter events by criteria",
+	"LogLevel"				=> "Level",
+	"LogLevelNotLower"		=> "not less than",
+	"LogLevelNotHigher"		=> "not higher than",
+	"LogLevelEqual"			=> "equal",
+	"LogNoMatch"			=> "No events that meet the criteria",
+	"LogDate"				=> "Date",
+	"LogEvent"				=> "Event",
+	"LogUsername"			=> "Username",
+
 	// log
 	"LogLevel1"					=> "critical",
 	"LogLevel2"					=> "highest",

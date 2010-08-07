@@ -83,7 +83,7 @@ function admin_files(&$engine, &$module)
 			else
 				print('<div class="error">'.$engine->GetTranslation('UploadRemovedFromFSError').'</div><br /><br /> ');
 
-			$engine->Log(1, str_replace('%2', $what[0]['filename'], str_replace('%1', $engine->tag.' global storage', $engine->GetTranslation('LogRemovedFile'))));
+			$engine->Log(1, str_replace('%2', $what[0]['filename'], str_replace('%1', $engine->tag.' global storage', $engine->GetTranslation('LogRemovedFile', $engine->config['language']))));
 		}
 		else
 		{
@@ -164,7 +164,7 @@ function admin_files(&$engine, &$module)
 			echo '<strong>'.$engine->GetTranslation('UploadDone').'</strong>';
 
 			// log event
-			$engine->Log(4, str_replace('%3', ceil($file_size / 1024), str_replace('%2', $small_name, $engine->GetTranslation('LogFileUploadedGlobal'))));
+			$engine->Log(4, str_replace('%3', ceil($file_size / 1024), str_replace('%2', $small_name, $engine->GetTranslation('LogFileUploadedGlobal', $engine->config['language']))));
 ?>
 <br /><ul>
 <li><?php echo $engine->Link( 'file:'.$small_name ); ?></li>

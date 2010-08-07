@@ -27,6 +27,8 @@ define("TRAN_LOWERCASE",				1);
 define("TRAN_LOAD",						0);
 define("TRAN_DONTLOAD",					1);
 
+define("STANDARD_HANDLERS",				"acls|addcomment|categories|claim|diff|edit|latex|msword|new|print|properties|rate|referrers|referrers_sites|remove|rename|revisions|show|watch");
+
 // do not change this two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
 define("WACKO_VERSION",					"R4.4.rc1");
 define("XML_HTMLSAX3",					"lib/HTMLSax3/");
