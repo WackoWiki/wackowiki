@@ -135,6 +135,7 @@ $wackoTranslation = array(
 
 	// categories handler
 	"Categories"				=> "Categories",
+	"Category"				=> "Category",
 	"CategoriesFor"			=> "Ключевые слова документа",
 	"CategoriesTip"			=> "Edit categories",
 	"CategoriesText"		=> "Categories",
@@ -276,6 +277,7 @@ $wackoTranslation = array(
 	"To" => "до",
 	"By" => "пользователем",
 	"From" => "от",
+	"For" => "for",
 	"ReturnToCommented" => "Возврат к комментируемой странице",
 
 	"RemoveWatch" => "Снять наблюдение",

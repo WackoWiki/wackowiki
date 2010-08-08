@@ -2,10 +2,15 @@
 
 // {{news [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
 
-if (!empty($this->config["news_cluster"]))
+if (!empty($this->config['news_cluster']))
 {
-	if (!isset($max))	$max = "";
-	if (!isset($mode))	$mode = "latest";
+	if (!isset($max))	$max = '';
+	if (isset($_GET['category']))
+	{
+		$mode = 'category';
+		$category_id = $_GET['category'];
+	}
+	if (!isset($mode))	$mode = 'latest';
 	if (!isset($title))	$title = 1;
 	if (!isset($noxml))	$noxml = 0;
 	if ($max)			$limit = $max;
@@ -35,6 +40,34 @@ if (!empty($this->config["news_cluster"]))
 				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
 				"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
+			"ORDER BY p.created DESC ".
+			"LIMIT {$pagination['offset']}, $limit", 1);
+	}
+	else if ($mode == 'category')
+	{
+		$count	= $this->LoadSingle(
+			"SELECT COUNT(p.tag) AS n ".
+			"FROM {$prefix}category_page c ".
+			"INNER JOIN {$prefix}page p ON (c.page_id = p.page_id) ".
+			"WHERE p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
+				"AND c.category_id = '$category_id' ".
+				"AND p.comment_on_id = '0'", 1);
+
+		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=week');
+
+		$category_title	= $this->LoadSingle(
+			"SELECT category ".
+			"FROM {$prefix}category ".
+			"WHERE category_id = '$category_id' ", 0);
+
+		$pages	= $this->LoadAll(
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner ".
+			"FROM {$prefix}page p ".
+				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ".
+				"INNER JOIN {$prefix}category_page c  ON (c.page_id = p.page_id) ".
+			"WHERE p.comment_on_id = '0' ".
+				"AND p.tag REGEXP '^{$newscluster}{$newslevels}$' ".
+				"AND c.category_id = '$category_id' ".
 			"ORDER BY p.created DESC ".
 			"LIMIT {$pagination['offset']}, $limit", 1);
 	}
@@ -86,13 +119,17 @@ if (!empty($this->config["news_cluster"]))
 	echo "<div class=\"news\">";
 	if ($title == 1)
 	{
+		if (isset($category_title))
+			$_category_title = ' '.$this->GetTranslation('For').' '.$this->GetTranslation('Category').' &laquo;'.$category_title['category'].'&raquo;';
+		else
+			$_category_title = '';
 		if ($this->page == $this->config["news_cluster"])
 		{
-			$_title = $this->GetTranslation("News");
+			$_title = $this->GetTranslation("News").$_category_title;
 		}
 		else
 		{
-			$_title = $this->ComposeLinkToPage($this->config["news_cluster"], "", $this->GetTranslation("News"), 0);
+			$_title = $this->ComposeLinkToPage($this->config["news_cluster"], "", $this->GetTranslation("News"), 0).$_category_title;
 		}
 
 		echo "<h1>".$_title."</h1>";
@@ -112,13 +149,31 @@ if (!empty($this->config["news_cluster"]))
 
 		foreach ($pages as $page)
 		{
+			$categories	= $this->LoadAll(
+				"SELECT
+					c.category_id, c.category
+				FROM
+					{$prefix}category_page p
+				INNER JOIN {$prefix}category c ON (p.category_id = c.category_id)
+				WHERE
+					p.page_id = '{$page['page_id']}'", 0);
+
+			foreach ($categories as $id => $category)
+			{
+				if ($id > 0) $_category .= ', ';
+				$_category .= '<a href="'.$this->href('', '', 'category='.$category['category_id']).'">' .htmlspecialchars($category['category']).'</a>';
+			}
+			$_category = isset($_category) ? $this->GetTranslation('Category').': '.$_category.' | ' : '';
+
 			echo "<div class=\"newsarticle\">";
 			echo '<h2 class="newstitle"><a href="'.$this->href('', $page['tag'], '').'">'.$page['title']."</a></h2>\n";
 			echo "<div class=\"newsinfo\"><span>".$this->GetTimeStringFormatted($page['created']).' '.$this->GetTranslation("By").' '.( $page['owner'] == '' ? '<em>'.$this->GetTranslation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['owner']).'">'.$page['owner'].'</a>' )."</span></div>\n";
 			echo "<div class=\"newscontent\">".$this->Action('include', array('page' => '/'.$page['tag'], 'notoc' => 0, 'nomark' => 1), 1)."</div>\n";
-			echo "<div class=\"newsmeta\">".($this->HasAccess("write",$page["page_id"]) ? $this->ComposeLinkToPage($page["tag"], "edit", $this->GetTranslation("EditText"), 0)." | " : "")."  ".
+			echo "<div class=\"newsmeta\">".$_category." ".($this->HasAccess("write",$page["page_id"]) ? $this->ComposeLinkToPage($page["tag"], "edit", $this->GetTranslation("EditText"), 0)." | " : "")."  ".
 				'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#comments" title="'.$this->GetTranslation("NewsDiscuss").' '.$page['title'].'">'.(int)$page["comments"]." ".$this->GetTranslation("Comments_all")." &raquo "."</a></div>\n";
 			echo "</div>";
+
+			unset ($_category);
 		}
 		// pagination
 		if (isset($pagination['text']))

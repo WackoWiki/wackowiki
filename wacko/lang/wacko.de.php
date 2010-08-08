@@ -132,6 +132,7 @@ $wackoTranslation = array(
 
 	// categories handler
 	"Categories"				=> "Kategorien",
+	"Category"				=> "Kategorie",
 	"CategoriesFor"			=> "Kategorien für",
 	"CategoriesTip"			=> "Kategorien bearbeiten",
 	"CategoriesText"		=> "Kategorien",
@@ -274,6 +275,7 @@ $wackoTranslation = array(
 	"To" => "zu",
 	"By" => "durch",
 	"From" => "von",
+	"For" => "zu",
 	"ReturnToCommented" => "zurück zur kommentierten Seite",
 
 	"PagesLinkingTo" => "Seiten, die verweisen auf",
