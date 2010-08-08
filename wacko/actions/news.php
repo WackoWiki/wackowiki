@@ -149,6 +149,8 @@ if (!empty($this->config['news_cluster']))
 
 		foreach ($pages as $page)
 		{
+			$_category = '';
+
 			$categories	= $this->LoadAll(
 				"SELECT
 					c.category_id, c.category
@@ -160,6 +162,7 @@ if (!empty($this->config['news_cluster']))
 
 			foreach ($categories as $id => $category)
 			{
+
 				if ($id > 0) $_category .= ', ';
 				$_category .= '<a href="'.$this->href('', '', 'category='.$category['category_id']).'">' .htmlspecialchars($category['category']).'</a>';
 			}
