@@ -134,7 +134,8 @@ $wackoTranslation = array(
 	"PurgeButton"			=> "Purge",
 
 	// categories handler
-	"Categories"				=> "Categories",
+	"Categories"			=> "Categories",
+	"Category"				=> "Category",
 	"CategoriesFor"			=> "Categories for",
 	"CategoriesTip"			=> "Edit categories",
 	"CategoriesText"		=> "Categories",
@@ -322,6 +323,7 @@ $wackoTranslation = array(
 	"To" => "to",
 	"By" => "by",
 	"From" => "from",
+	"For" => "for",
 	"ReturnToCommented" => "Return to commented page",
 
 	"PagesLinkingTo" => "Pages linking to",
