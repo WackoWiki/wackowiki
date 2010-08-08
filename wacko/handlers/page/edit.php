@@ -1,8 +1,9 @@
 <?php
 
-$edit_note = "";
-$error = "";
-$output = "";
+$edit_note = '';
+$minor_edit = '';
+$error = '';
+$output = '';
 
 // invoke autocomplete if needed
 if ((isset($_GET["_autocomplete"])) && $_GET["_autocomplete"])
@@ -118,7 +119,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			if (!$error)
 			{
 				// publish anonymously
-				if ($_POST['noid_publication'] == $this->tag)
+				if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->tag)
 				{
 					// undefine username
 					$remember_name = $this->GetUserName();

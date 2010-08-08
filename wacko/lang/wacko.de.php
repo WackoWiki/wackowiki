@@ -678,9 +678,9 @@ $wackoTranslation = array(
 	"ExportClusterXML" => "Export des ganzen Clusters von ",
 	"AccessDeniedXML" => "Du hast keine Berechtigung für den Zugriff auf diese Seite.",
 
-	"RecentChangesRSS" => "Letzte Änderungen",
-	"RecentCommentsRSS" => "Letzte Kommentare",
-	"RecentNewsRSS" => "Letzte Nachrichten",
+	"RecentChangesRSS" => "Änderungen",
+	"RecentCommentsRSS" => "Kommentare",
+	"RecentNewsRSS" => "Nachrichten",
 	"HistoryRevisionsRSS" => "Versionen von ",
 
 	"LastModification" => "Letzte Änderung",

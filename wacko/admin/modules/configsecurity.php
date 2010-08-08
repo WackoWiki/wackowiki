@@ -51,7 +51,7 @@ function admin_configsecurity(&$engine, &$module)
 		$config['pwd_min_chars']				= (int)$_POST['pwd_min_chars'];
 		$config['pwd_char_classes']				= (int)$_POST['pwd_char_classes'];
 		$config['pwd_unlike_login']				= (int)$_POST['pwd_unlike_login'];
-		$config['log_level']				= (int)$_POST['log_level'];
+		$config['log_level']					= (int)$_POST['log_level'];
 		$config['log_default_show']				= (int)$_POST['log_default_show'];
 		$config['log_purge_time']				= (int)$_POST['log_purge_time'];
 		$config['cookie_session']				= (int)$_POST['cookie_session'];
@@ -245,7 +245,7 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="ssl_proxy"><strong>SSL Proxy:</strong><br />
-				<small>Uses the provided SSL Proxy inplace of SSL. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slah.</small></label></td>
+				<small>Uses the provided SSL Proxy inplace of SSL. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash.</small></label></td>
 				<td><input maxlength="100" style="width:200px;" id="ssl_proxy" name="ssl_proxy" value="<?php echo htmlspecialchars($engine->config['ssl_proxy']);?>" /></td>
 			</tr>
 			<tr>

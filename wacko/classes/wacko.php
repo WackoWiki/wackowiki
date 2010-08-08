@@ -1431,13 +1431,13 @@ class Wacko
 				$this->SetLanguage($this->pagelang);
 
 				// aha! page isn't new. keep owner!
-				$owner_id = $oldPage["owner_id"];
+				$owner_id = $oldPage['owner_id'];
 
 				// only if page has been actually changed
 				if ($oldPage['body'] != $body || $oldPage['title'] != $title)
 				{
 					// Dont save revisions for comments.  Personally I think we should.
-					if (!$oldPage[comment_on_id])
+					if (!$oldPage['comment_on_id'])
 					{
 						$this->SaveRevision($oldPage);
 					}

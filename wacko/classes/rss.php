@@ -89,11 +89,12 @@ class RSS
 		$name			= 'news';
 		$newscluster	= $this->engine->config['news_cluster'];
 		$newslevels		= $this->engine->config['news_levels'];
+		$prefix			= $this->engine->config['table_prefix'];
 
 		//  collect data
 		$pages = $this->engine->LoadAll(
-			"SELECT tag, title, created, body_r ".
-			"FROM {$this->engine->config['table_prefix']}page ".
+			"SELECT page_id, tag, title, created, body_r ".
+			"FROM {$prefix}page ".
 			"WHERE comment_on_id = '0' ".
 				"AND tag REGEXP '^{$newscluster}{$newslevels}$' ".
 			"ORDER BY tag");
@@ -101,7 +102,7 @@ class RSS
 		// build an array
 		foreach ($pages as $page)
 		{
-			$news_pages[]	= array('tag' => $page['tag'], 'title' => $page['title'], 'modified' => $page['created'],
+			$news_pages[]	= array('page_id' => $page['page_id'], 'tag' => $page['tag'], 'title' => $page['title'], 'modified' => $page['created'],
 				'body_r' => $page['body_r'], 'date' => date('Y/m-d', strtotime($page['created'])));
 		}
 
@@ -141,25 +142,38 @@ class RSS
 		{
 			$i++;
 
-				// this is a news article
-				$title	= $page['title'];
-				$cat	= substr_replace ($page['tag'], '', 0, strlen ($newscluster) + 1); // removes news cluster name
-				$cat	= substr_replace ($cat, '', strpos ($cat, '/')); // removes news page name
-				$link	= $this->engine->href('', $page['tag']);
-				$pdate	= date("r", strtotime($page['modified']));
-				$coms	= $link.'?show_comments=1#comments';
-				$body	= $this->engine->LoadPage($page['tag']);
-				$text	= $this->engine->Format($page['body_r'], 'post_wacko');
+			$categories	= $this->engine->LoadAll(
+				"SELECT
+					c.category_id, c.category
+				FROM
+					{$prefix}category_page p
+				INNER JOIN {$prefix}category c ON (p.category_id = c.category_id)
+				WHERE
+					p.page_id = '{$page['page_id']}'", 0);
 
+			// this is a news article
+			$title	= $page['title'];
+			$cat	= substr_replace ($page['tag'], '', 0, strlen ($newscluster) + 1); // removes news cluster name
+			$cat	= substr_replace ($cat, '', strpos ($cat, '/')); // removes news page name
+			$link	= $this->engine->href('', $page['tag']);
+			$pdate	= date("r", strtotime($page['modified']));
+			$coms	= $link.'?show_comments=1#comments';
+			$body	= $this->engine->LoadPage($page['tag']);
+			$text	= $this->engine->Format($page['body_r'], 'post_wacko');
 
 			$xml .= '<item>'."\n".
 						'<title>'.$title.'</title>'."\n".
 						'<link>'.$link.'</link>'."\n".
 						'<guid isPermaLink="true">'.$link.'</guid>'."\n".
 						'<description><![CDATA['.str_replace(']]>', ']]&gt;', $text).']]></description>'."\n".
-						'<pubDate>'.$pdate.'</pubDate>'."\n".
-						'<category>'.str_replace(' ', '', $cat).'</category>'."\n".
-						( $coms != '' ? '<comments>'.$coms.'</comments>'."\n" : '' ).
+						'<pubDate>'.$pdate.'</pubDate>'."\n";
+
+			foreach ($categories as $id => $category)
+			{
+				$xml .= '<category>'.$category['category'].'</category>'."\n";
+			}
+
+			$xml .= 	( $coms != '' ? '<comments>'.$coms.'</comments>'."\n" : '' ).
 					'</item>'."\n";
 
 			if ($i >= $limit) break;
