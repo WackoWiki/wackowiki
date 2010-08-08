@@ -3836,6 +3836,7 @@ class Wacko
 		{
 			$this->config["open_url"] = $this->config["base_url"];
 			$this->config["base_url"] = str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config["base_url"]);
+			$this->config["theme_url"]	= $this->config["base_url"]."themes/".$this->config["theme"]."/";
 		}
 
 		// in strong cookie mode check session validity
