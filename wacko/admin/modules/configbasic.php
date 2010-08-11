@@ -79,7 +79,7 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="wacko_name"><strong>Site Description:</strong><br />
+				<td class="label"><label for="wacko_desc"><strong>Site Description:</strong><br />
 				<small>Supplement to the title of a site that appears in the pages header.</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="wacko_desc" name="wacko_desc" value="<?php echo htmlspecialchars($engine->config['wacko_desc']);?>" /></td>
 			</tr>

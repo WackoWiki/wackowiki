@@ -84,7 +84,7 @@ if ( ( $config["system_seed"] == "") )
 	$config["system_seed"] = RandomSeed(20, 3);
 
 $salt = RandomSeed(4, 3);
-$password_encrypted = sha1($config["admin_name"].$salt.$_POST["password"]);
+$password_encrypted = hash('sha1', $config["admin_name"].$salt.$_POST["password"]);
 // system holds all default pages
 $insert_system = "INSERT INTO ".$config["table_prefix"]."user (user_name, password, salt, email, account_type, signup_time) VALUES ('System', '', '', '', '1', '')";
 $insert_admin = "INSERT INTO ".$config["table_prefix"]."user (user_name, password, salt, email, signup_time) VALUES ('".$config["admin_name"]."', '".$password_encrypted."', '".$salt."', '".$config["admin_email"]."', NOW())";
