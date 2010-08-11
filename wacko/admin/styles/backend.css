@@ -51,29 +51,20 @@ ul {
 	
 }
 
-
-
 .banner {
 	border: 1px dashed #B00202;
 	position: relative;
 	float: none;
 }
 
-
-
 .info {
-	color: #B00202;
-	font-size: 12px;
-	letter-spacing: 1px;
-	background-color: #FFDDDD;
-	margin: 10px;
-	padding: 5px;
-	padding-left: 20px;
-	padding-right: 20px;
-	border: 1px solid #B00202;
+	background:#F4FBFF;
+	border:1px solid #D5D9E6;
+	color:#CC3333;
+	font-weight:bold;
+	margin:10px;
+	padding:10px 10px 10px 40px;
 }
-
-
 
 /*	Link styles	*/
 
@@ -111,9 +102,6 @@ input#button, input#submit, .btnlite, .btnmain {
 }
 input#button:hover, input#submit:hover, .btnlite:hover, .btnmain:hover {
 	
-	
-	
-	
 }
 input#button:active, input#submit:active, .btnlite:active, .btnmain:active {
 
@@ -128,8 +116,6 @@ textarea {
 }
 #postText {
 }
-
-
 
 /*	Forum styles	*/
 

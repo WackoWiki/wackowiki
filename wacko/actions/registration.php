@@ -151,8 +151,8 @@ else if (isset($_POST["action"]) && $_POST["action"] == "login")
 			{
 				$salt_length = 4;
 				$salt = $this->RandomPassword($salt_length, 3);
-				$confirm = sha1($password.$salt.mt_rand().time().mt_rand().$email.mt_rand());
-				$password_encrypted = sha1($user_name.$salt.$_POST["password"]);
+				$confirm = hash('sha1', $password.$salt.mt_rand().time().mt_rand().$email.mt_rand());
+				$password_encrypted = hash('sha1', $user_name.$salt.$_POST["password"]);
 
 				// INSERT USER
 				$this->Query(

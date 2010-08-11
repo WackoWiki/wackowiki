@@ -38,7 +38,7 @@ $init->Engine('res');
 // reconnect securely in ssl mode
 if ($engine->config['ssl'] == true)
 {
-	if ( ($_SERVER["HTTPS"] != "on" && empty($engine->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] != '443' )
+	if ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "on" && empty($engine->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ))
 	{
 		$engine->Redirect(str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->config['base_url']).'admin.php');
 	}
@@ -102,16 +102,17 @@ if ($engine->config['recovery_password'] == false)
 }
 else
 {
-	$pwd = sha1($engine->config['recovery_password']);
+	$pwd = hash('sha1', $engine->config['recovery_password']);
 }
 
 // recovery preauthorization
 if (isset($_POST['password']))
 {
-	if (sha1($_POST['password']) == $pwd)
+	if (hash('sha1', $_POST['password']) == $pwd)
 	{
-		$engine->SetSessionCookie('admin', sha1($_POST['password']), '', ( $engine->config['ssl'] == true ? 1 : 0 ));
+		$engine->SetSessionCookie('admin', hash('sha1', $_POST['password']), '', ( $engine->config['ssl'] == true ? 1 : 0 ));
 		$engine->Log(1, $engine->GetTranslation('LogAdminLoginSuccess', $engine->config['language']));
+		$_SESSION['LAST_ACTIVITY'] = time();
 		$engine->Redirect('admin.php');
 	}
 	else
@@ -138,6 +139,11 @@ if ($user == false)
 	<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/styles/backend.css" rel="stylesheet" type="text/css" media="screen" />
 	</head>
 	<body>
+		<?php
+		// here we show messages
+		if ($message = $engine->GetMessage()) echo "<div class=\"info\">$message</div>";
+		?>
+
 		<strong><?php echo $engine->GetTranslation('Authorization'); ?></strong><br />
 		<?php echo $engine->GetTranslation('AuthorizationTip'); ?>
 		<br /><br />
@@ -156,6 +162,33 @@ unset($pwd);
 global $_user;
 $_user = $engine->GetUser();
 $engine->SetUser($user, 0);
+
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) //1800
+{
+	// last request was more than 15 minutes ago
+	$engine->DeleteCookie('admin');
+	$engine->Log(1, $engine->GetTranslation('LogAdminLogout', $engine->config['language']));
+
+	//session_destroy();   // destroy session data in storage
+	//session_unset();     // unset $_SESSION variable for the runtime
+	$engine->SetMessage($engine->GetTranslation("LoggedOut"));
+	$engine->Redirect('admin.php');
+}
+
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
+
+if (!isset($_SESSION['CREATED']))
+{
+	$_SESSION['CREATED'] = time();
+}
+else if (time() - $_SESSION['CREATED'] > 1800)
+{
+	// session started more than 30 minates ago
+	session_regenerate_id(true);    // change session ID for the current session an invalidate old session ID
+	$_SESSION['CREATED'] = time();  // update creation time
+}
+
+
 
 ########################################################
 ##                     Page header                    ##
@@ -182,6 +215,10 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 		</div>
 		<div id="tools">
 			<span style="font-family: 'Lucida Console', 'Courier New', monospace;">
+
+				<?php $time_left = round((1800 - (time() - $_SESSION['CREATED'])) / 60);
+				echo "Time left: ".$time_left." minutes"; ?>
+				&nbsp;&nbsp;
 				<?php echo $engine->ComposeLinkToPage('/', '', rtrim($engine->config['base_url'], '/')); ?>
 				&nbsp;&nbsp;
 				<?php echo ( $init->IsLocked() === true ? '<strong>site closed</strong>' : 'site opened' ); ?>

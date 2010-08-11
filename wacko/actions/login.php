@@ -112,7 +112,7 @@ else
 					if ($existingUser["password"] == $_processed_password)
 					{
 						$salt = $this->RandomPassword(4, 3);
-						$password = sha1($_POST["name"].$salt.$_POST["password"]);
+						$password = hash('sha1', $_POST["name"].$salt.$_POST["password"]);
 
 						// update database with the sha1 password for future logins
 						$this->Query("UPDATE ".$this->config["table_prefix"]."user SET ".
@@ -123,7 +123,7 @@ else
 				}
 				else
 				{
-					$_processed_password = sha1($_POST["name"].$existingUser["salt"].$_POST["password"]);
+					$_processed_password = hash('sha1', $_POST["name"].$existingUser["salt"].$_POST["password"]);
 				}
 
 				// check password

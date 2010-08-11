@@ -2779,10 +2779,10 @@ class Wacko
 		{
 			$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
 			$username	= $user['user_name'];
-			$password	= base64_encode(sha1($this->config['system_seed'] ^ $time_pad) ^ $user['password']);
+			$password	= base64_encode(hash('sha1', $this->config['system_seed'] ^ $time_pad) ^ $user['password']);
 			// authenticating cookie data:
 			// seed | username | composed pwd | raw session time | raw password
-			$cookie_mac	= sha1($this->config['system_seed'].$username.$password.$ses_time.$user['password']);
+			$cookie_mac	= hash('sha1', $this->config['system_seed'].$username.$password.$ses_time.$user['password']);
 			// construct and set cookie
 			$cookie		= implode(';', array($username, $password, $ses_time, $cookie_mac));
 		}
@@ -2818,7 +2818,7 @@ class Wacko
 		unset($_SESSION[$this->config["session_prefix"].'_'.$this->config['cookie_prefix'].'user']);
 		session_destroy(); // destroy session data in storage
 
-		session_id(sha1($this->timer.$this->config['system_seed'].$session_time.$user['user_name'].$user['password']));
+		session_id(hash('sha1', $this->timer.$this->config['system_seed'].$session_time.$user['user_name'].$user['password']));
 		return session_start();
 	}
 
@@ -2834,8 +2834,8 @@ class Wacko
 			{
 				list($username, $b64password, $ses_time, $cookie_mac) = explode(';', $cookie);
 				$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
-				$password	= sha1($this->config['system_seed'] ^ $time_pad) ^ base64_decode($b64password);
-				$recalc_mac	= sha1($this->config['system_seed'].$username.$b64password.$ses_time.$password);
+				$password	= hash('sha1', $this->config['system_seed'] ^ $time_pad) ^ base64_decode($b64password);
+				$recalc_mac	= hash('sha1', $this->config['system_seed'].$username.$b64password.$ses_time.$password);
 			}
 			else
 			{
@@ -2867,7 +2867,7 @@ class Wacko
 		$this->DeleteCookie('sid', 1);
 		unset($_SESSION[$this->config["session_prefix"].'_'.$this->config['cookie_prefix'].'user']);
 
-		$session_id = sha1($this->timer.$this->config['system_seed'].$this->GetUserSetting('password').session_id());
+		$session_id = hash('sha1', $this->timer.$this->config['system_seed'].$this->GetUserSetting('password').session_id());
 
 		session_destroy(); // destroy session data in storage
 
