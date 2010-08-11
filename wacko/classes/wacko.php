@@ -2152,7 +2152,7 @@ class Wacko
 			}
 			else
 			{
-				$tpl		= ($this->method == "print" || $this->method == "msword" ? "p" : "") . "w" . $tpl;
+				$tpl		= (isset($this->method) && ($this->method == "print" || $this->method == "msword") ? "p" : "") . "w" . $tpl;
 				$pagelink	= $this->href("edit", $tag, $lang ? "lang=".$lang : "", 1);
 				$accicon	= $this->GetTranslation("wantedicon");
 				$title		= $this->GetTranslation("CreatePage");
@@ -2752,7 +2752,7 @@ class Wacko
 		$_SESSION[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"]."user"] = $user;
 
 		// define current IP for foregoing checks
-		if ($ip == true) $this->SetUserSetting("ip", $_SERVER["REMOTE_ADDR"]);
+		if ($ip == true) $this->SetUserSetting("ip", (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['ssl_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) );
 
 		return true;
 	}
@@ -2816,7 +2816,8 @@ class Wacko
 	{
 		$this->DeleteCookie('sid', 1);
 		unset($_SESSION[$this->config["session_prefix"].'_'.$this->config['cookie_prefix'].'user']);
-		session_destroy();
+		session_destroy(); // destroy session data in storage
+
 		session_id(sha1($this->timer.$this->config['system_seed'].$session_time.$user['user_name'].$user['password']));
 		return session_start();
 	}
@@ -2868,7 +2869,8 @@ class Wacko
 
 		$session_id = sha1($this->timer.$this->config['system_seed'].$this->GetUserSetting('password').session_id());
 
-		session_destroy();
+		session_destroy(); // destroy session data in storage
+
 		session_start();
 		session_id($session_id);
 	}
@@ -3834,8 +3836,8 @@ class Wacko
 		// run in ssl mode?
 		if ($this->config["ssl"] == true && (( (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on" && !empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
 		{
-			$this->config["open_url"] = $this->config["base_url"];
-			$this->config["base_url"] = str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config["base_url"]);
+			$this->config["open_url"]	= $this->config["base_url"];
+			$this->config["base_url"]	= str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config["base_url"]);
 			$this->config["theme_url"]	= $this->config["base_url"]."themes/".$this->config["theme"]."/";
 		}
 
@@ -3872,7 +3874,7 @@ class Wacko
 		}
 
 		// check IP validity
-		if ($this->GetUserSetting("validate_ip", 1) == '1' && $this->GetUserSetting("ip") != $_SERVER["REMOTE_ADDR"])
+		if ($this->GetUserSetting("validate_ip", 1) == '1' && $this->GetUserSetting("ip") != (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['ssl_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) )
 		{
 			$this->Log(1, '<strong><span class="cite">User in-session IP change detected</span></strong>');
 			$this->LogoutUser();

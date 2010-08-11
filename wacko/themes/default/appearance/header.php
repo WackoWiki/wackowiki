@@ -45,14 +45,14 @@ if ($this->method != 'show' || $this->page["latest"] == "0")
 // load swfobject with flash action (e.g. $this->config["allow_swfobject"] = 1), by default it is set off
 if ($this->config["allow_swfobject"])
 {
-	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/swfobject.js\"></script>\n";
+	echo "<script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/swfobject.js\"></script>\n";
 }
 // autocomplete.js, protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages.
 if ($this->method == 'edit')
 {
-	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/protoedit.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/wikiedit2.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/autocomplete.js\"></script>\n";
+	echo "<script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/protoedit.js\"></script>\n";
+	echo "<script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/wikiedit2.js\"></script>\n";
+	echo "<script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/autocomplete.js\"></script>\n";
 }
 ?>
 	<script type="text/javascript" src="<?php echo $this->config["base_url"];?>js/captcha.js"></script>
@@ -93,7 +93,7 @@ if ($doubleclick == true)
 	<div id="header">
 		<div id="header-main">
 			<div id="header-top">
-			<strong><?php echo $this->config["wacko_name"] ?>: </strong><?php echo $this->GetPagePath(); ?> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
+			<strong><?php echo $this->config["wacko_name"] ?>: </strong><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->GetPagePath() ); ?> <a class="Search" title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
 		</div>
 		<div id="login">
 <?php
@@ -169,7 +169,7 @@ echo $this->FormClose();
 <div class="breadcrumb">
 <?php
 // Shows breadcrumbs
-echo $this->GetPagePath($titles = true, $separator = ' &gt ', $linking = true, true); ?>
+echo $this->GetPagePath($titles = false, $separator = ' &gt ', $linking = true, true); ?>
 </div>
 </div>
 <div id="content">
