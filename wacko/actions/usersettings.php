@@ -39,6 +39,7 @@ if (isset($_GET["confirm"]))
 else if (isset($_POST["action"]) && $_POST["action"] == "logout")
 {
 	$this->LogoutUser();
+	$this->SetBookmarks(BM_DEFAULT);
 	$this->SetMessage($this->GetTranslation("LoggedOut"));
 	$this->Redirect($this->href());
 }

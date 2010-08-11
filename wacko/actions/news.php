@@ -162,11 +162,10 @@ if (!empty($this->config['news_cluster']))
 
 			foreach ($categories as $id => $category)
 			{
-
 				if ($id > 0) $_category .= ', ';
 				$_category .= '<a href="'.$this->href('', '', 'category='.$category['category_id']).'">' .htmlspecialchars($category['category']).'</a>';
 			}
-			$_category = isset($_category) ? $this->GetTranslation('Category').': '.$_category.' | ' : '';
+			$_category = !empty($_category) ? $this->GetTranslation('Category').': '.$_category.' | ' : '';
 
 			echo "<div class=\"newsarticle\">";
 			echo '<h2 class="newstitle"><a href="'.$this->href('', $page['tag'], '').'">'.$page['title']."</a></h2>\n";

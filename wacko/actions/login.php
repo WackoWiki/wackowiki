@@ -5,7 +5,7 @@ $error = "";
 $output = "";
 
 // reconnect securely in ssl mode
-if ($this->config["ssl"] == true && ( (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "on" && empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] != '443' ))
+if ($this->config["ssl"] == true && ( (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "on" && empty($this->config["ssl_proxy"])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
 {
 	$this->Redirect(str_replace("http://", "https://".(!empty($this->config["ssl_proxy"]) ? $this->config["ssl_proxy"].'/' : ""), $this->href()));
 }
@@ -68,7 +68,7 @@ else if ($user = $this->GetUser())
 
 				$output .= "Bind session to the IP-address ". ( $user['validate_ip'] == '1' ? 'enabled (the current IP <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).".<br />";
 
-				if ($this->config["ssl"] == true)
+				if ($this->config["ssl"] == true || $this->config["ssl_proxy"] == true)
 				{
 					$output .= "Traffic Protection <tt>". ( isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on" ? $_SERVER["SSL_CIPHER"].' ('.$_SERVER["SSL_PROTOCOL"].')' : 'no' )."</tt>.";
 				}
@@ -129,7 +129,7 @@ else
 				// check password
 				if ($existingUser["password"] == $_processed_password)
 				{
-					// define session duration
+					// define session duration in days
 					$_session = isset($_POST['session']) ? $_POST['session'] : NULL ;
 					switch ($_session)
 					{
@@ -189,7 +189,7 @@ else
 	print($this->FormOpen());
 	?>
 <input type="hidden" name="action" value="login" />
-<input type="hidden" name="goback" value="<?php echo stripslashes($_GET["goback"]);?>" />
+<input type="hidden" name="goback" value="<?php echo (isset($_GET["goback"]) ? stripslashes($_GET["goback"]) : '');?>" />
 <div class="cssform">
 	<h3><?php echo $this->GetTranslation("LoginWelcome"); ?></h3>
 	<p>
@@ -217,7 +217,7 @@ else
 ?>
 <div class="cssform">
 	<p>
-		<input id="persistent" name="persistent" value="1" type="checkbox" tabindex="3" checked="checked" />
+		<input id="persistent" name="persistent" value="1" type="checkbox" tabindex="3"/>
 		<label for="persistent"><?php echo $this->GetTranslation("PersistentCookie"); ?></label>
 	</p>
 
