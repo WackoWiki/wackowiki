@@ -138,6 +138,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"upper_index TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"allow_rawhtml TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"disable_safehtml TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"noindex TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"PRIMARY KEY (page_id),".
 					"KEY idx_user_id (user_id),".
 					"KEY idx_owner_id (owner_id),".

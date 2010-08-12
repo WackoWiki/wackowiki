@@ -691,7 +691,7 @@ class Wacko
 
 		// load page
 		if ($metadataonly)
-			$what = "p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.keywords, p.description, u.user_name, o.user_name AS owner_name";
+			$what = "p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.keywords, p.description, p.noindex, u.user_name, o.user_name AS owner_name";
 		else
 			$what = "p.*, u.user_name, o.user_name AS owner_name";
 

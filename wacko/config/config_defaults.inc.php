@@ -72,6 +72,7 @@ $wackoConfig = array(
 
 	"youarehere_text" => "",
 	"hide_locked" => 1,
+	"noindex" => 0,
 	"allow_rawhtml" => 1,
 	"disable_safehtml" => 0,
 	"urls_underscores" => 0,

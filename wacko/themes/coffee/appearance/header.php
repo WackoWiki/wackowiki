@@ -13,7 +13,7 @@ header("Content-Type: text/html; charset=".$this->GetCharset());
 	<title><?php echo htmlspecialchars($this->config["wacko_name"])." : ".$this->AddSpaces($this->tag).($this->method != "show" ? " (".$this->method.")" : "");?></title>
 <?php
 // We don't need search robots to index subordinate pages
-if ($this->method != 'show' || $this->page["latest"] == "0")
+if ($this->method != 'show' || $this->page["latest"] == "0" || $this->page["noindex"] == "1")
 	echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 ?>
 	<meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />

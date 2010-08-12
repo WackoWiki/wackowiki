@@ -15,7 +15,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <?php
 	// We don't need search robots to index subordinate pages
-	if ($this->method != 'show' || $this->page["latest"] == "0")
+	if ($this->method != 'show' || $this->page["latest"] == "0" || $this->page["noindex"] == "1")
 		echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 ?>
 	<link href="<?php echo $this->config["theme_url"] ?>../default/css/default.css.php" rel="stylesheet" type="text/css" />

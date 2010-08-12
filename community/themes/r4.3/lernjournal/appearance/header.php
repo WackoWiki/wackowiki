@@ -19,7 +19,7 @@ lernjournal theme.
 </title>
 <?php
 // We don't need search robots to index subordinate pages
-  if ($this->method != 'show' || $this->page["latest"] == "1")
+  if ($this->method != 'show' || $this->page["latest"] == "0" || $this->page["noindex"] == "1")
      echo "<meta name=\"robots\" content=\"index, follow\" />\n";
 ?>
 <meta name="Keywords" content="<?php echo $this->GetKeywords(); ?>" />
