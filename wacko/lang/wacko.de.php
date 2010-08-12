@@ -523,6 +523,7 @@ $wackoTranslation = array(
 	"MetaIndexLower"		=> "untere",
 	"MetaHtml"				=> "HTML Unterstützung für Seite",
 	"MetaSafeHtml"			=> "Unsicheres HTML filtern",
+	"MetaNoIndex"			=> "Block search engines",
 	"SettingsID" => "ID der Seite",
 	"SettingsSize" => "Größe",
 	"SettingsSizeTip" => "Quelltext / zusammengestellt",

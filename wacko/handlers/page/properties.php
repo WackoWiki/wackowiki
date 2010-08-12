@@ -40,7 +40,8 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this-
 					"lower_index		= '".quote($this->dblink, ( $_POST['index_mode'] == 'l' ? 1 : 0 ))."', ".
 					"upper_index		= '".quote($this->dblink, ( $_POST['index_mode'] == 'u' ? 1 : 0 ))."', ".
 					"allow_rawhtml		= '".quote($this->dblink, $allow_rawhtml)."', ".
-					"disable_safehtml	= '".quote($this->dblink, $disable_safehtml)."' "
+					"disable_safehtml	= '".quote($this->dblink, $disable_safehtml)."', ".
+					"noindex			= '".quote($this->dblink, (int)$_POST['noindex'])."' "
 				: 	"lang				= '".quote($this->dblink, $_POST["lang"])."', ".
 					"title				= '".quote($this->dblink, htmlspecialchars($_POST["title"]))."', ".
 					"keywords			= '".quote($this->dblink, htmlspecialchars($_POST["keywords"]))."', ".
@@ -157,9 +158,17 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this-
 				echo "<input type=\"radio\" id=\"safehtmlOff\" name=\"disable_safehtml\" value=\"1\" ".( $this->config['disable_safehtml'] ? "checked=\"checked\"" : '' )."/><label for=\"safehtmlOff\">".$this->GetTranslation('MetaOff')."</label>";
 				echo "</td>";
 				echo "</tr>\n";
-
 			}
-			echo "<tr>"; ?>
+
+			echo "<tr class=\"lined\">";
+			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('MetaNoIndex')."</th>";
+			echo "<td class=\"form_right\">";
+			echo "<input type=\"radio\" id=\"noindexOn\" name=\"noindex\" value=\"1\" ".( $this->page['noindex'] ? "checked=\"checked\"" : '' )."/><label for=\"noindexOn\">".$this->GetTranslation('MetaOn')."</label>";
+			echo "<input type=\"radio\" id=\"noindexOff\" name=\"noindex\" value=\"0\" ".( !$this->page['noindex'] ? "checked=\"checked\"" : '' )."/><label for=\"noindexOff\">".$this->GetTranslation('MetaOff')."</label>";
+			echo "</td>";
+			echo "</tr>\n";
+			echo "<tr>";
+?>
 <th class="form_left"></th>
 <td class="form_right"><input type="submit" name="extended"
 	value="<?php echo $this->GetTranslation("MetaStoreButton"); ?>"

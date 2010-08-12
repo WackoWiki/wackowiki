@@ -531,6 +531,7 @@ $wackoTranslation = array(
 	"MetaIndexLower"		=> "Нижние",
 	"MetaHtml"				=> "Поддержка HTML для документа",
 	"MetaSafeHtml"			=> "Фильтрация небезопасного HTML",
+	"MetaNoIndex"			=> "Block search engines",
 	"SettingsID" => "ID документа",
 	"SettingsSize" => "Объём документа (байт)",
 	"SettingsSizeTip" => "исходный / скомпилированный",
