@@ -1,5 +1,5 @@
 <?php
-if (!isset($page)) $page = $this->page["tag"];
+if (!isset($page)) $page = $this->page['tag'];
 $root = (isset($vars[$page]) ? $vars[$page] : '');
 
 // input
@@ -10,7 +10,7 @@ if (!isset($abc)) $abc = "";
 if (!isset($filter)) $filter = "";
 if (!isset($style)) $style="indent";
 if (!isset($root) && !isset($page))
-					$root = "/".$this->page["tag"];
+					$root = "/".$this->page['tag'];
 if ($page)			$root = $page;
 if ($root == "/") 	$root = "";
 if ($root) 			$root = $this->UnwrapLink($root);
@@ -96,7 +96,7 @@ if (!function_exists('create_cluster_tree'))
 					$sub_tag = $sub_tag.substr($sub_sub_tag, 0, strpos($sub_sub_tag, "/"));
 				}
 
-				$sub_pages_tree[$sub_tag]["supertag"] = $sub_supertag;
+				$sub_pages_tree[$sub_tag]['supertag'] = $sub_supertag;
 				$sub_pages_tree[$sub_tag]["exists"] = $exists;
 			}
 
@@ -153,7 +153,7 @@ if (!function_exists('print_cluster_tree'))
 
 			foreach ($tree as $sub_tag => $sub_tag_array )
 			{
-				$sub_supertag = $sub_tag_array["supertag"];
+				$sub_supertag = $sub_tag_array['supertag'];
 				$sub_exists = $sub_tag_array["exists"];
 
 				$linktext = $sub_tag;
@@ -166,7 +166,7 @@ if (!function_exists('print_cluster_tree'))
 				if ($abc && ( $current_depth == 1 ))
 				{
 					$newletter = strtoupper(substr($linktext, 0, 1));
-					if (!preg_match("/[".$wacko->language["ALPHA_P"]."]/", $newletter)) { $newletter = "#"; }
+					if (!preg_match("/[".$wacko->language['ALPHA_P']."]/", $newletter)) { $newletter = "#"; }
 					if ($newletter == '') $newletter = $linktext{0};
 					if ($letter <> $newletter)
 					{
@@ -191,8 +191,8 @@ if (!function_exists('print_cluster_tree'))
 						print "<li>";
 
 					$_page = $wacko->LoadPage(ltrim($sub_supertag, "/"));
-					if ($_page["tag"])
-						$_tag = $_page["tag"];
+					if ($_page['tag'])
+						$_tag = $_page['tag'];
 					else
 						$_tag = $sub_supertag;
 
@@ -231,7 +231,7 @@ else
 
 $pages = $this->LoadAll(
 	"SELECT ".$this->pages_meta." ".
-	"FROM ".$this->config["table_prefix"]."page ".
+	"FROM ".$this->config['table_prefix']."page ".
 	"WHERE supertag LIKE ".$query.
 		($owner_id
 			? " AND owner_id='".quote($this->dblink, $owner_id)."'"
@@ -245,7 +245,7 @@ if ($pages)
 	$current_depth = count(explode("/", $query));
 	foreach($pages as $page)
 	{
-		$page_depth = count(explode("/", $page["supertag"]));
+		$page_depth = count(explode("/", $page['supertag']));
 		if ($page_depth <= $depth + $current_depth - 1)
 		{
 			$new_pages[$i] = $page;
@@ -258,7 +258,7 @@ if ($pages)
 	foreach($pages as $page)
 	{
 		$this->CachePage($page, 1);
-		$page_id_list[] = $page["page_id"];
+		$page_id_list[] = $page['page_id'];
 	}
 
 	$acl_str = "";
@@ -273,11 +273,11 @@ if ($pages)
 	$acl_str = substr($acl_str, 0, strlen($acl_str) - 2);
 
 	//Cache access rights
-	if ( $read_acls = $this->LoadAll("SELECT * FROM ".$this->config["table_prefix"]."acl WHERE page_id IN (".$acl_str.") AND privilege = 'read'", 1))
+	if ( $read_acls = $this->LoadAll("SELECT * FROM ".$this->config['table_prefix']."acl WHERE page_id IN (".$acl_str.") AND privilege = 'read'", 1))
 	{
 		for ($i = 0; $i < count($read_acls); $i++)
 		{
-			$this->CacheACL($read_acls[$i]["page_id"], "read", 1, $read_acls[$i]);
+			$this->CacheACL($read_acls[$i]['page_id'], "read", 1, $read_acls[$i]);
 		}
 	}
 
@@ -285,9 +285,9 @@ if ($pages)
 	$tree_pages_array = array();
 	foreach($pages as $page)
 	{
-		if (!$this->config["hide_locked"] || $this->HasAccess("read", $page["page_id"]))
+		if (!$this->config['hide_locked'] || $this->HasAccess("read", $page['page_id']))
 		{
-			$tree_pages_array["/".$page["supertag"]] = $page["tag"];
+			$tree_pages_array["/".$page['supertag']] = $page['tag'];
 		}
 	}
 

@@ -33,7 +33,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		$this->RemoveCategories($this->tag);
 
 		// save new list
-		$this->SaveCategoriesList($this->page["page_id"]);
+		$this->SaveCategoriesList($this->page['page_id']);
 
 		$this->Log(4, "Updated page categories [[/{$this->tag} {$this->page['title']}]]");
 		$this->SetMessage($this->GetTranslation('CategoriesUpdated'));

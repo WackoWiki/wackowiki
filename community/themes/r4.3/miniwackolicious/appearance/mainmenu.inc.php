@@ -9,15 +9,15 @@ if (!function_exists('mainMenu'))
 
         $menu = array(
                     /* 'WikiSiteLink or URL' => 'Name' */ // you can put those WikiSites and Names to your translation file for i18n
-                    $wobj->config["root_page"] => $wobj->config["root_page"],
+                    $wobj->config['root_page'] => $wobj->config['root_page'],
                     'PageIndex' => 'Page Index',
                     'RecentChanges' => 'Recent Changes'
                 );
 
         /* == Stop here! ... and let it flow ================================ */
 
-	    $language = $wobj->config["language"];
-	    $base_url = $wobj->config["base_url"];
+	    $language = $wobj->config['language'];
+	    $base_url = $wobj->config['base_url'];
         $current_page = $wobj->tag;
 
         $menulist = NULL;

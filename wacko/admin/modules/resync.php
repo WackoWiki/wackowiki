@@ -86,7 +86,7 @@ function admin_resync(&$engine, &$module)
 			$xml = new RSS($engine);
 			$xml->Changes();
 			$xml->Comments();
-			if ($engine->config["news_cluster"])
+			if ($engine->config['news_cluster'])
 			{
 				$xml->News();
 			}

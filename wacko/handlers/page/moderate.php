@@ -477,8 +477,8 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 		// make collector query
 		$sql = "SELECT p.page_id, p.tag, title, p.owner_id, p.user_id, ip, comments, created, u.user_name AS user,  o.user_name as owner ".
 			"FROM {$this->config['table_prefix']}page AS p ".
-					"LEFT JOIN ".$this->config["table_prefix"]."user u ON (p.user_id = u.user_id) ".
-					"LEFT JOIN ".$this->config["table_prefix"]."user o ON (p.owner_id = o.user_id), ".
+					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id), ".
 				"{$this->config['table_prefix']}acl AS a ".
 			"WHERE p.page_id = a.page_id ".
 				#"AND a.`create` = '' ".
@@ -931,8 +931,8 @@ if (($this->IsModerator() && $this->HasAccess('read')) || $this->IsAdmin())
 		// make collector query
 		$sql = "SELECT p.page_id, p.tag, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, created, u.user_name AS user, o.user_name as owner ".
 			"FROM {$this->config['table_prefix']}page p ".
-				"LEFT JOIN ".$this->config["table_prefix"]."user u ON (p.user_id = u.user_id) ".
-				"LEFT JOIN ".$this->config["table_prefix"]."user o ON (p.owner_id = o.user_id) ".
+				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+				"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 			"WHERE comment_on_id = '{$this->page['page_id']}' ".
 			"ORDER BY created ASC ".
 			"LIMIT {$pagination['offset']}, $limit";

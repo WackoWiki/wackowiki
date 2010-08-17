@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($root))
-	$root = $this->page["tag"];
+	$root = $this->page['tag'];
 else
 	$root = $this->UnwrapLink($root);
 
@@ -14,9 +14,9 @@ if ($linking_to = (isset($_GET["linking_to"]) ? $_GET["linking_to"] : ""))
 
 		foreach ($pages as $page)
 		{
-			if (!$this->config["hide_locked"] || $this->HasAccess("read", $page["page_id"]))
+			if (!$this->config['hide_locked'] || $this->HasAccess("read", $page['page_id']))
 			{
-				echo "<li>".$this->Link("/".$page["tag"],"","/".$page["tag"])."</li>\n";
+				echo "<li>".$this->Link("/".$page['tag'],"","/".$page['tag'])."</li>\n";
 			}
 		}
 		echo "</ul>\n";
@@ -29,7 +29,7 @@ if ($linking_to = (isset($_GET["linking_to"]) ? $_GET["linking_to"] : ""))
 else
 {
 	$for = $root;
-	$pref = $this->config["table_prefix"];
+	$pref = $this->config['table_prefix'];
 	$sql = "SELECT DISTINCT l.to_tag AS wanted_tag ".
 		"FROM ".$pref."link l ".
 			"LEFT JOIN ".$pref."page p ON ".
@@ -53,7 +53,7 @@ else
 			{
 				$page_parent = substr($page["wanted_tag"], 0, strrpos($page["wanted_tag"], "/"));
 
-				if(!$this->config["hide_locked"] || $this->HasAccess("read", $page_parent))
+				if(!$this->config['hide_locked'] || $this->HasAccess("read", $page_parent))
 				{
 					// Update the referrer count for the WantedPage, we need to take pages the user is not allowed to view out of the total
 					$count = 0;
@@ -62,7 +62,7 @@ else
 					{
 						foreach ($referring_pages as $referrer_page)
 						{
-							if(!$this->config["hide_locked"] || $this->HasAccess("read", $referrer_page["tag"]))
+							if(!$this->config['hide_locked'] || $this->HasAccess("read", $referrer_page['tag']))
 							{
 								$count++;
 							}
@@ -72,7 +72,7 @@ else
 					// If no pages are referring to the WantedPage it means the referrers are all locked so don't show the link at all
 					if($count > 0)
 					{
-						echo "<li>".$this->Link("/".$page["wanted_tag"])." (<a href=\"".$this->href().($this->config["rewrite_mode"] ? "?" : "&amp;")."linking_to=".$page["wanted_tag"]."\">".$count."</a>)</li>\n";
+						echo "<li>".$this->Link("/".$page["wanted_tag"])." (<a href=\"".$this->href().($this->config['rewrite_mode'] ? "?" : "&amp;")."linking_to=".$page["wanted_tag"]."\">".$count."</a>)</li>\n";
 					}
 				}
 			}

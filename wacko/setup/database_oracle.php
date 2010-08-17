@@ -5,7 +5,7 @@
  Oracle 8i and above
  */
 
-$pref = $config["table_prefix"];
+$pref = $config['table_prefix'];
 
 $table_acl = "CREATE TABLE {$pref}acl (".
 					"page_id number(10) default 0 not null,".

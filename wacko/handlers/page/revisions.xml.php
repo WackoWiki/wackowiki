@@ -4,14 +4,14 @@ header("Content-type: text/xml");
 $xml = "<?xml version=\"1.0\" encoding=\"".$this->GetCharset()."\"?>\n";
 $xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 $xml .= "<channel>\n";
-$xml .= "<title>".$this->config["wacko_name"]." - ".$this->tag."</title>\n";
-$xml .= "<link>".$this->config["base_url"].$this->tag."</link>\n";
-$xml .= "<description>".$this->GetTranslation("PageRevisionsXML").$this->config["wacko_name"]."/".$this->tag."</description>\n";
+$xml .= "<title>".$this->config['wacko_name']." - ".$this->tag."</title>\n";
+$xml .= "<link>".$this->config['base_url'].$this->tag."</link>\n";
+$xml .= "<description>".$this->GetTranslation("PageRevisionsXML").$this->config['wacko_name']."/".$this->tag."</description>\n";
 $xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 $xml .= "<image>\n";
-$xml .= "<title>".$this->config["wacko_name"].$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
-$xml .= "<link>".$this->config["base_url"]."</link>\n";
-$xml .= "<url>".$this->config["base_url"]."files/wacko4.png"."</url>\n";
+$xml .= "<title>".$this->config['wacko_name'].$this->GetTranslation("RecentCommentsTitleXML")."</title>\n";
+$xml .= "<link>".$this->config['base_url']."</link>\n";
+$xml .= "<url>".$this->config['base_url']."files/wacko4.png"."</url>\n";
 $xml .= "<width>108</width>\n";
 $xml .= "<height>50</height>\n";
 $xml .= "</image>\n";
@@ -22,7 +22,7 @@ $xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 if ($this->HasAccess("read"))
 {
 	// load revisions for this page
-	if ($pages = $this->LoadRevisions($this->page["page_id"]))
+	if ($pages = $this->LoadRevisions($this->page['page_id']))
 	{
 		$max = 10;
 
@@ -34,19 +34,19 @@ if ($this->HasAccess("read"))
 			$c++;
 			if (($c <= $max) && $c>1)
 			{
-				$etag = str_replace('%2F', '/', rawurlencode($page["tag"]));
+				$etag = str_replace('%2F', '/', rawurlencode($page['tag']));
 
 				$xml .= "<item>\n";
-				$xml .= "<title>".$this->GetTimeStringFormatted($page["modified"])."</title>\n";
-				$xml .= "<link>".$this->href("show").($this->config["rewrite_mode"] ? "?" : "&amp;")."time=".urlencode($page["modified"])."</link>\n";
+				$xml .= "<title>".$this->GetTimeStringFormatted($page['modified'])."</title>\n";
+				$xml .= "<link>".$this->href("show").($this->config['rewrite_mode'] ? "?" : "&amp;")."time=".urlencode($page['modified'])."</link>\n";
 				$xml .= "<guid isPermaLink=\"true\">".$this->href("", $etag)."</guid>\n";
 
 				$_GET["a"] = $_GET["b"];
-				$_GET["b"] = $page["page_id"];
+				$_GET["b"] = $page['page_id'];
 				$diff = $this->IncludeBuffered("handlers/page/diff.php", "oops");
 
 				$xml .= "<description>".str_replace("<", "&lt;", str_replace("&", "&amp;", $diff))."</description>\n";
-				$xml .= "<pubDate>".date ("r", strtotime ($page["modified"]))."</pubDate>\n";
+				$xml .= "<pubDate>".date ("r", strtotime ($page['modified']))."</pubDate>\n";
 				$xml .= "</item>\n";
 			}
 		}

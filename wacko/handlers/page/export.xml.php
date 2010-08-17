@@ -5,8 +5,8 @@ $xml = "<?xml version=\"1.0\" encoding=\"".$this->GetCharset()."\"?>\n";
 $xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 $xml .= "\t<channel>\n";
 $xml .= "\t\t<title>".$this->tag."</title>\n";
-$xml .= "\t\t<link>".$this->config["base_url"]."</link>\n";
-$xml .= "\t\t<description>".$this->GetTranslation("ExportClusterXML").$this->config["wacko_name"]."/".$this->tag."</description>\n";
+$xml .= "\t\t<link>".$this->config['base_url']."</link>\n";
+$xml .= "\t\t<description>".$this->GetTranslation("ExportClusterXML").$this->config['wacko_name']."/".$this->tag."</description>\n";
 $xml .= "\t\t<lastBuildDate>".date('r')."</lastBuildDate>\n";
 $xml .= "\t\t<language></language>\n";//!!!
 $xml .= "\t\t<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
@@ -17,7 +17,7 @@ if ($this->HasAccess("read"))
 	$numOfSlashes = substr_count($this->tag, "/");
 
 	$pages = $this->LoadAll(
-		"SELECT * FROM ".$this->config["table_prefix"]."page ".
+		"SELECT * FROM ".$this->config['table_prefix']."page ".
 		"WHERE (supertag = '".quote($this->dblink, $this->supertag)."'".
 		" OR supertag LIKE '".quote($this->dblink, $this->supertag."/%")."')".
 		" AND comment_on_id = '0'");
@@ -25,9 +25,9 @@ if ($this->HasAccess("read"))
 	foreach ($pages as $num => $page)
 	{
 		// check ACLS
-		if (!$this->HasAccess("write", $page["page_id"])) continue;
+		if (!$this->HasAccess("write", $page['page_id'])) continue;
 		// output page
-		$tag = $page["tag"];
+		$tag = $page['tag'];
 
 		if ($numOfSlashes == substr_count($tag, "/"))
 		{
@@ -46,11 +46,11 @@ if ($this->HasAccess("read"))
 
 		$xml .= "\t\t<item>\n";
 		$xml .= "\t\t\t<guid>".rtrim($tag, "/")."</guid>\n";
-		$xml .= "\t\t\t<title>".htmlspecialchars($page["title"])."</title>\n";
-		$xml .= "\t\t\t<link>".$this->config["base_url"].$page["supertag"]."</link>\n";
-		$xml .= "\t\t\t<description><![CDATA[".str_replace("]]>","]]&gt;",$page["body"])."]]></description>\n";
-		$xml .= "\t\t\t<author>".$page["owner_id"]."</author>\n";
-		$xml .= "\t\t\t<pubDate>".gmdate('D, d M Y H:i:s \G\M\T', strtotime($page["created"]))."</pubDate>\n";
+		$xml .= "\t\t\t<title>".htmlspecialchars($page['title'])."</title>\n";
+		$xml .= "\t\t\t<link>".$this->config['base_url'].$page['supertag']."</link>\n";
+		$xml .= "\t\t\t<description><![CDATA[".str_replace("]]>","]]&gt;",$page['body'])."]]></description>\n";
+		$xml .= "\t\t\t<author>".$page['owner_id']."</author>\n";
+		$xml .= "\t\t\t<pubDate>".gmdate('D, d M Y H:i:s \G\M\T', strtotime($page['created']))."</pubDate>\n";
 		$xml .= "\t\t</item>\n";
 	}
 

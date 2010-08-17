@@ -8,59 +8,59 @@ lernjournal theme.
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page["lang"] ?>" lang="<?php echo $this->page["lang"] ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page['lang'] ?>" lang="<?php echo $this->page['lang'] ?>">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>
 <?php
 // Echoes Title of the page.
-  echo htmlspecialchars($this->config["wacko_name"])." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":"");
+  echo htmlspecialchars($this->config['wacko_name'])." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":"");
 ?>
 </title>
 <?php
 // We don't need search robots to index subordinate pages
-  if ($this->method != 'show' || $this->page["latest"] == "0" || $this->page["noindex"] == "1")
+  if ($this->method != 'show' || $this->page['latest'] == "0" || $this->page['noindex'] == "1")
      echo "<meta name=\"robots\" content=\"index, follow\" />\n";
 ?>
 <meta name="Keywords" content="<?php echo $this->GetKeywords(); ?>" />
 <meta name="Description" content="<?php echo $this->GetDescription(); ?>" />
-<meta name="language" content="<?php echo $this->page["lang"] ?>" />
+<meta name="language" content="<?php echo $this->page['lang'] ?>" />
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
-<link rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"] ?>css/default.css" />
-<?php if ($this->config["allow_x11colors"]) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config["base_url"] ?>themes/_common/X11colors.css" /><?php } ?>
-<link href="<?php echo $this->config["theme_url"] ?>css/layout.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo $this->config["theme_url"] ?>css/fontdesign.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo $this->config["theme_url"] ?>css/sidenote.css" rel="stylesheet" type="text/css" />
-<link rel="shortcut icon" href="<?php echo $this->config["theme_url"] ?>icons/wacko.ico" type="image/x-icon" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->config["base_url"];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->config["base_url"];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"]));?>.xml" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
+<?php if ($this->config['allow_x11colors']) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" /><?php } ?>
+<link href="<?php echo $this->config['theme_url'] ?>css/layout.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $this->config['theme_url'] ?>css/fontdesign.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $this->config['theme_url'] ?>css/sidenote.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/wacko.ico" type="image/x-icon" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
 ?>
-  <script type="text/javascript" src="<?php echo $this->config["base_url"];?>js/default.js"></script>
+  <script type="text/javascript" src="<?php echo $this->config['base_url'];?>js/default.js"></script>
 <?php
-// load swfobject with flash action (e.g. $this->config["allow_swfobject"] = 1), by default it is set off
-if ($this->config["allow_swfobject"])
+// load swfobject with flash action (e.g. $this->config['allow_swfobject'] = 1), by default it is set off
+if ($this->config['allow_swfobject'])
 {
-	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/swfobject.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->config['base_url']."js/swfobject.js\"></script>\n";
 }
 // autocomplete.js, protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages.
 if ($this->method == 'edit')
 {
-	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/protoedit.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/wikiedit2.js\"></script>\n";
-	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/autocomplete.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->config['base_url']."js/protoedit.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->config['base_url']."js/wikiedit2.js\"></script>\n";
+	echo "  <script type=\"text/javascript\" src=\"".$this->config['base_url']."js/autocomplete.js\"></script>\n";
 }
 ?>
-  <script type="text/javascript" src="<?php echo $this->config["base_url"];?>js/captcha.js"></script>
+  <script type="text/javascript" src="<?php echo $this->config['base_url'];?>js/captcha.js"></script>
 <?php
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->GetUser())
    {
-      if ($user["doubleclick_edit"] == "1")
+      if ($user['doubleclick_edit'] == "1")
          {
 ?>
   <script type="text/javascript">
@@ -82,7 +82,7 @@ else if($this->HasAccess("write"))
 </head>
 <body onload="all_init();">
 <div id="head">
-  <div id="wikititle"><?php echo $this->config["wacko_name"] ?></div>
+  <div id="wikititle"><?php echo $this->config['wacko_name'] ?></div>
   <?php
 // Searchbar
 echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?>
@@ -97,7 +97,7 @@ echo $this->FormClose();
   <?php
 // Outputs Bookmarks AKA QuickLinks
   // Main page
-  echo $this->ComposeLinkToPage($this->config["root_page"]); ?><br />
+  echo $this->ComposeLinkToPage($this->config['root_page']); ?><br />
   <?php
   // All user's Bookmarks
   echo $this->Format(implode( "\n", $this->GetBookmarks())); ?><br />
@@ -107,10 +107,10 @@ if ($this->GetUser())
 {
  if (!in_array($this->tag, $this->GetBookmarkLinks()))
  {?>
-  <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->config["theme_url"] ?>icons/bookmark1.gif" alt="+" title="<?php echo $this->GetTranslation("AddToBookmarks") ?>" border="0" align="middle" /></a><br />
+  <a href="<?php echo $this->Href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->config['theme_url'] ?>icons/bookmark1.gif" alt="+" title="<?php echo $this->GetTranslation("AddToBookmarks") ?>" border="0" align="middle" /></a><br />
   <?php
  } else { ?>
-  <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"><img src="<?php echo $this->config["theme_url"] ?>icons/bookmark2.gif" alt="-" title="<?php echo $this->GetTranslation("RemoveFromBookmarks") ?>" border="0" align="middle" /></a><br />
+  <a href="<?php echo $this->Href('', '', "removebookmark=yes")?>"><img src="<?php echo $this->config['theme_url'] ?>icons/bookmark2.gif" alt="-" title="<?php echo $this->GetTranslation("RemoveFromBookmarks") ?>" border="0" align="middle" /></a><br />
   <?php
  }
 }
@@ -123,7 +123,7 @@ if ($this->GetUser()) { ?>
   <small>
   <?php
       echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelAccount"), 0); ?><br />
-  <a onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config["rewrite_mode"] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a></small>
+  <a onclick="return confirm('<?php echo $this->GetTranslation("LogoutAreYouSure");?>');" href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a></small>
   <?php
 // Else Wacko shows login's controls
 } else {
@@ -137,7 +137,7 @@ echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
   <input type="text" name="name" size="12" class="login" alt="username" /><br />
   <?php echo $this->GetTranslation("LoginPassword") ?>:<br />
   <input type="password" name="password" class="login" size="8" alt="password" />
-  <input type="image" src="<?php echo $this->config["theme_url"] ?>icons/login.gif" alt=">>>" align="top" />
+  <input type="image" src="<?php echo $this->config['theme_url'] ?>icons/login.gif" alt=">>>" align="top" />
   <?php // Closing Login form
 echo $this->FormClose();
 ?>
@@ -169,7 +169,7 @@ if ($this->page)
    if ($owner = $this->GetPageOwner())
    {
      print($this->GetTranslation("Owner").": ".$this->Link($owner));
-   } else if (!$this->page["comment_on_id"]) {
+   } else if (!$this->page['comment_on_id']) {
      print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
    }
  }
@@ -182,7 +182,7 @@ echo ($this->iswatched === true ? "<a href=\"".$this->href("watch")."\">".$this-
 ?><br />
   <?php
  // Rename link
- if ($this->CheckACL($this->GetUserName(),$this->config["rename_globalacl"]) && !$this->UserIsOwner())
+ if ($this->CheckACL($this->GetUserName(),$this->config['rename_globalacl']) && !$this->UserIsOwner())
  {
    print("<a href=\"".$this->href("rename")."\">".$this->GetTranslation("RenameText")."</a><br />");
  }
@@ -196,18 +196,18 @@ if ($this->IsAdmin()){
 ?>
 <?php
 // Print icon
-echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->config["theme_url"]."icons/print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"middle\" border=\"0\" /></a>";
+echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"middle\" border=\"0\" /></a>";
 
 ?>
 
 <hr noshade="noshade" />
 <?php
 // Revisions link
-echo $this->page["modified"] ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTimeFormatted()."</a>\n" : "";
+echo $this->page['modified'] ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTimeFormatted()."</a>\n" : "";
 ?>
 </div>
 <div id="content">
-<span class="loc"><strong><?php echo $this->config["wacko_name"] ?>:</strong> <?php echo $this->GetPagePath(); ?><a title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->GetTranslation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></span> <?php # if (mysql_num_rows(mysql_query("SELECT status FROM ".$this->config["table_prefix"]."mail where UserTo='".$this->GetUserName()."' and folder='inbox' and status='nicht gelesen' and viewrecipient='Y' LIMIT 1"))!=0) {echo "&nbsp;&nbsp;&nbsp;<img src=\"images/newmessage1.gif\" alt=\"Neue Nachricht\" width=\"18\" height=\"18\" /> <a href='index.php?page=WikiMessenger' title='Du hast mindestens eine neue Nachricht erhalten.'><font color=orangered><strong>&nbsp;Neue Nachricht</strong></font></a>";} ?>
+<span class="loc"><strong><?php echo $this->config['wacko_name'] ?>:</strong> <?php echo $this->GetPagePath(); ?><a title="<?php echo $this->GetTranslation("SearchTitleTip")?>" href="<?php echo $this->config['base_url'].$this->GetTranslation("TextSearchPage").($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></span> <?php # if (mysql_num_rows(mysql_query("SELECT status FROM ".$this->config['table_prefix']."mail where UserTo='".$this->GetUserName()."' and folder='inbox' and status='nicht gelesen' and viewrecipient='Y' LIMIT 1"))!=0) {echo "&nbsp;&nbsp;&nbsp;<img src=\"images/newmessage1.gif\" alt=\"Neue Nachricht\" width=\"18\" height=\"18\" /> <a href='index.php?page=WikiMessenger' title='Du hast mindestens eine neue Nachricht erhalten.'><font color=orangered><strong>&nbsp;Neue Nachricht</strong></font></a>";} ?>
 
 <?php # if ($user = $this->GetUser()) { include("actions/popupchat.php"); } ?>
 <?php

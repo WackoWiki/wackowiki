@@ -153,7 +153,7 @@ function admin_users(&$engine, &$module)
 					{
 						for ($i = 0; $i < count($langs); $i++)
 						{
-							echo "<option value=\"".$langs[$i]."\" ".($user["lang"] == $langs[$i] ? " selected=\"selected\"" : "").">".$langs[$i]."</option>\n";
+							echo "<option value=\"".$langs[$i]."\" ".($user['lang'] == $langs[$i] ? " selected=\"selected\"" : "").">".$langs[$i]."</option>\n";
 						}
 					}
 
@@ -172,7 +172,7 @@ function admin_users(&$engine, &$module)
 			if ($user = $engine->LoadSingle(
 				"SELECT u.user_name, u.real_name, u.email, p.lang, u.enabled ".
 				"FROM {$engine->config['table_prefix']}user u ".
-					"LEFT JOIN ".$engine->config["table_prefix"]."user_setting p ON (u.user_id = p.user_id) ".
+					"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 				"WHERE u.user_id = '".quote($engine->dblink, $_POST['change'])."' ".
 					"AND u.account_type = '0' ".
 				"LIMIT 1"))
@@ -196,7 +196,7 @@ function admin_users(&$engine, &$module)
 						{
 							for ($i = 0; $i < count($langs); $i++)
 							{
-								echo "<option value=\"".$langs[$i]."\" ".($user["lang"] == $langs[$i] ? " selected=\"selected\"" : "").">".$langs[$i]."</option>\n";
+								echo "<option value=\"".$langs[$i]."\" ".($user['lang'] == $langs[$i] ? " selected=\"selected\"" : "").">".$langs[$i]."</option>\n";
 							}
 						}
 
@@ -425,7 +425,7 @@ function admin_users(&$engine, &$module)
 		$users = $engine->LoadAll(
 			"SELECT u.*, p.lang ".
 			"FROM {$engine->config['table_prefix']}user u ".
-				"LEFT JOIN ".$engine->config["table_prefix"]."user_setting p ON (u.user_id = p.user_id) ".
+				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 			( $where ? $where : '' ).
 			( $where ? 'AND ' : "WHERE ").
 				"u.account_type = '0' ".

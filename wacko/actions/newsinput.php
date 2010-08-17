@@ -35,10 +35,10 @@ if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd')
 		// redirecting to the edit form
 		$_SESSION['body']	= $template;
 		$_SESSION['title']	= $namehead;
-		$this->Redirect($this->href('edit', $this->config["news_cluster"].'/'.date('Y/').date('F/').$name, '', 1));
+		$this->Redirect($this->href('edit', $this->config['news_cluster'].'/'.date('Y/').date('F/').$name, '', 1));
 	}
 }
-if (!empty($this->config["news_cluster"]))
+if (!empty($this->config['news_cluster']))
 {
 	echo $this->FormOpen();
 ?>

@@ -2,9 +2,9 @@
 
 $lng = "bg";
 
-if ($config["language"] == $lng)
+if ($config['language'] == $lng)
 {
-	InsertPage($config["root_page"], '', "((file:wacko4.png WackoWiki))\n**Добре дошли във вълшебния свят на ((WackoWiki:Doc/English/WackoWiki WackoWiki)).**\n\nКликнете на линка долу, за да редактирате тази страница (става също и само с двойно кликане на мишката някъде на страницата).\n\nДокументация (на английски) има на WackoWiki:Doc/Bulgarian.\n\nПолезни неща: ((WackoWiki:Doc/English/Formatting Formatting)), OrphanedPages, WantedPages, TextSearch, MyPages, MyChanges.\n\n", $lng, "Admins", true);
+	InsertPage($config['root_page'], '', "((file:wacko4.png WackoWiki))\n**Добре дошли във вълшебния свят на ((WackoWiki:Doc/English/WackoWiki WackoWiki)).**\n\nКликнете на линка долу, за да редактирате тази страница (става също и само с двойно кликане на мишката някъде на страницата).\n\nДокументация (на английски) има на WackoWiki:Doc/Bulgarian.\n\nПолезни неща: ((WackoWiki:Doc/English/Formatting Formatting)), OrphanedPages, WantedPages, TextSearch, MyPages, MyChanges.\n\n", $lng, "Admins", true);
 	InsertPage('ПропуснатиСтраници', 'Пропуснати Страници', '{{WantedPages}}', $lng, "Admins", true);
 	InsertPage('ЗабравениСтраници', 'Забравени Страници', '{{OrphanedPages}}', $lng, "Admins", true);
 	InsertPage('МоиСтраници', 'Мои Страници', '{{MyPages}}', $lng, "Admins", true);

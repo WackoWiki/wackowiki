@@ -8,7 +8,7 @@
 	<?php if($owner = $this->GetPageOwner()) {
 		echo $this->GetTranslation("Owner");
 		echo $this->Link($owner);
-	} else if(!$this->page["comment_on_id"]) {
+	} else if(!$this->page['comment_on_id']) {
 		echo $this->GetTranslation("Nobody"); ?> <a
 	href="<?php echo $this->href("claim"); ?>"><?php echo $this->GetTranslation("TakeOwnership"); ?></a>
 		<?php } ?> &nbsp;|&nbsp; <a
@@ -16,21 +16,21 @@
 &nbsp;|&nbsp; <?php // Watch page ?> <a
 	href="<?php echo $this->href("watch"); ?>"> <?php if($this->iswatched === true) { ?>
 <img
-	src="<?php echo $this->config["theme_url"]; ?>images/watch-remove.gif"
+	src="<?php echo $this->config['theme_url']; ?>images/watch-remove.gif"
 	alt="<?php echo $this->GetTranslation("RemoveWatch"); ?>"
 	title="<?php echo $this->GetTranslation("RemoveWatch"); ?>"
 	width="16" height="16" /> <?php } else { ?> <img
-	src="<?php echo $this->config["theme_url"]; ?>images/watch-add.gif"
+	src="<?php echo $this->config['theme_url']; ?>images/watch-add.gif"
 	alt="<?php echo $this->GetTranslation("SetWatch"); ?>"
 	title="<?php echo $this->GetTranslation("SetWatch"); ?>" width="16"
 	height="16" /> <?php } ?> </a> <?php // Bookmark page ?> <?php if(in_array($this->tag, $this->GetBookmarkLinks())) { ?>
 <a href="<?php echo $this->Href('', '', "removebookmark=yes"); ?>"> <img
-	src="<?php echo $this->config["theme_url"]; ?>images/bookmark-remove.gif"
+	src="<?php echo $this->config['theme_url']; ?>images/bookmark-remove.gif"
 	alt="<?php echo $this->GetTranslation("RemoveFromBookmarks"); ?>"
 	title="<?php echo $this->GetTranslation("RemoveFromBookmarks"); ?>"
 	width="16" height="16" /> <?php } else { ?> <a
 	href="<?php echo $this->Href('', '', "addbookmark=yes"); ?>"> <img
-	src="<?php echo $this->config["theme_url"]; ?>images/bookmark-add.gif"
+	src="<?php echo $this->config['theme_url']; ?>images/bookmark-add.gif"
 	alt="<?php echo $this->GetTranslation("AddToBookmarks"); ?>"
 	title="<?php echo $this->GetTranslation("AddToBookmarks"); ?>"
 	width="16" height="16" /> <?php } ?> </a> <?php }

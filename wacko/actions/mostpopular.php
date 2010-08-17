@@ -34,7 +34,7 @@ if ($page)
 	$context = $page;
 	$_page = $this->LoadPage($page);
 	if (!$title) $title = $page;
-	$link = $this->Href("",$_page["tag"]);
+	$link = $this->Href("",$_page['tag']);
 }
 else
 {
@@ -51,7 +51,7 @@ if(!$nomark)
 
 if(!$for)
 {
-	$pages = $this->LoadAll("SELECT page_id, tag, hits FROM ".$this->config["table_prefix"]."page ORDER BY hits DESC LIMIT ".$max);
+	$pages = $this->LoadAll("SELECT page_id, tag, hits FROM ".$this->config['table_prefix']."page ORDER BY hits DESC LIMIT ".$max);
 }
 else
 {
@@ -60,12 +60,12 @@ else
 	if(!$dontrecurse || strtolower($dontrecurse) == 'false')
 	{
 		// We want to recurse and include all the sub pages of sub pages (and so on) in the listing
-		$pages = $this->LoadAll("SELECT DISTINCT page_id, tag, hits FROM ".$this->config["table_prefix"]."page, ".$this->config["table_prefix"]."link WHERE tag <> '".$for."' AND tag = to_tag AND INSTR(from_tag, '".$for."') = 1 AND INSTR(to_tag, '".$for."') = 1 ORDER BY hits DESC LIMIT ".$max);
+		$pages = $this->LoadAll("SELECT DISTINCT page_id, tag, hits FROM ".$this->config['table_prefix']."page, ".$this->config['table_prefix']."link WHERE tag <> '".$for."' AND tag = to_tag AND INSTR(from_tag, '".$for."') = 1 AND INSTR(to_tag, '".$for."') = 1 ORDER BY hits DESC LIMIT ".$max);
 	}
 	else
 	{
 		// The only pages we want to display are those directly under the selected page, not their kids and grandkids
-		$pages = $this->LoadAll("SELECT DISTINCT page_id, tag, hits FROM ".$this->config["table_prefix"]."page, ".$this->config["table_prefix"]."link WHERE tag <> '".$for."' AND tag = to_tag AND from_tag = '".$for."' AND INSTR(to_tag, '".$for."') = 1 ORDER BY hits DESC LIMIT ".$max);
+		$pages = $this->LoadAll("SELECT DISTINCT page_id, tag, hits FROM ".$this->config['table_prefix']."page, ".$this->config['table_prefix']."link WHERE tag <> '".$for."' AND tag = to_tag AND from_tag = '".$for."' AND INSTR(to_tag, '".$for."') = 1 ORDER BY hits DESC LIMIT ".$max);
 	}
 }
 
@@ -76,13 +76,13 @@ foreach ($pages as $page)
 {
 	if ($num < $max)
 	{
-		if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["page_id"]);
+		if ($this->config['hide_locked']) $access = $this->HasAccess("read",$page['page_id']);
 		else $access = true;
 		if ($access)
 		{
 			// print entry
 			$num++;
-			print("<tr><td>&nbsp;&nbsp;".$num.".&nbsp;".$this->Link("/".$page["tag"],"",$page["tag"])."</td><td>".
+			print("<tr><td>&nbsp;&nbsp;".$num.".&nbsp;".$this->Link("/".$page['tag'],"",$page['tag'])."</td><td>".
 			$this->GetTranslation("Shown")."</td><td>".
 			$page["hits"]."</td></tr>\n");
 		}

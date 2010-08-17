@@ -10,13 +10,13 @@ if (! $this->HasAccess("read", $page_id))
 }
 else
 {
-	if (!$phrase_page = $this->LoadPage($vars[0], $_GET["time"]))
+	if (!$phrase_page = $this->LoadPage($vars[0], $_GET['time']))
 	{
 		echo "<em> ".$this->GetTranslation("SourcePageDoesntExist")."(".$vars[0].")</em>";
 	}
 	else
 	{
-		$strings = preg_replace("/\{\{[^\}]+\}\}/","",$phrase_page["body"]);
+		$strings = preg_replace("/\{\{[^\}]+\}\}/","",$phrase_page['body']);
 		$strings = $this->Format($strings);
 		$splitexpr = "|<br />|";
 		if ($useemptystring == 1) $splitexpr = "|<br />[\n\r ]*<br />|";

@@ -78,7 +78,7 @@ writeConfigHiddenNodes(array('none' => ''));
 	@chmod ("config/config.inc.php", 0777);
 
 	// If the cache directory is writable then we can enable caching as default
-	print("            <input type=\"hidden\" name=\"config[cache]\" value=\"".(is__writable('_cache/') ? "1" : $config["cache"])."\" />\n");
+	print("            <input type=\"hidden\" name=\"config[cache]\" value=\"".(is__writable('_cache/') ? "1" : $config['cache'])."\" />\n");
 
 	$file_permissions_result = is__writable('config/config.inc.php') && is__writable('_cache/') && is__writable('xml/') && is__writable('files/') && is__writable('files/perpage/') && is__writable('sitemap.xml');
 	?>

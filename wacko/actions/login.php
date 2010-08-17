@@ -5,9 +5,10 @@ $error = "";
 $output = "";
 
 // reconnect securely in ssl mode
-if ($this->config["ssl"] == true && ( (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "on" && empty($this->config["ssl_proxy"])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
+#if ($this->config['ssl'] == true && $this->config['ssl_implicit'] == true && ( ($_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
+if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
 {
-	$this->Redirect(str_replace("http://", "https://".(!empty($this->config["ssl_proxy"]) ? $this->config["ssl_proxy"].'/' : ""), $this->href()));
+	$this->Redirect(str_replace("http://", "https://".(!empty($this->config['ssl_proxy']) ? $this->config['ssl_proxy'].'/' : ""), $this->href()));
 }
 
 // actions
@@ -15,14 +16,14 @@ if (isset($_GET["action"]) && $_GET["action"] == "clearcookies")
 {
 	foreach ($_COOKIE as $name => $value)
 	{
-		$this->DeleteCookie($name, true);
+		$this->DeleteCookie($name, false, false);
 	}
 	$_POST["action"] = "logout";
 }
 
 if (isset($_GET["action"]) && $_GET["action"] == "logout")
 {
-	$this->Log(5, str_replace("%1", $this->GetUserName(), $this->GetTranslation("LogUserLoggedOut", $this->config["language"])));
+	$this->Log(5, str_replace("%1", $this->GetUserName(), $this->GetTranslation("LogUserLoggedOut", $this->config['language'])));
 	$this->LogoutUser();
 	$this->SetBookmarks(BM_DEFAULT);
 	//$this->SetMessage($this->GetTranslation("LoggedOut"));
@@ -41,9 +42,9 @@ else if ($user = $this->GetUser())
 
 <input type="hidden" name="action" value="logout" />
 <div class="cssform">
-  <h3><?php echo $this->GetTranslation("Hello").", ".$this->ComposeLinkToPage($user["user_name"]) ?>!</h3>
+  <h3><?php echo $this->GetTranslation("Hello").", ".$this->ComposeLinkToPage($user['user_name']) ?>!</h3>
 <?php
-				if ($user["session_time"] == true)
+				if ($user['session_time'] == true)
 				{
 					$output .= "Last visit was recorded <tt>". $this->GetTimeStringFormatted($user['session_time'])."</tt>.<br />";
 				}
@@ -68,9 +69,9 @@ else if ($user = $this->GetUser())
 
 				$output .= "Bind session to the IP-address ". ( $user['validate_ip'] == '1' ? 'enabled (the current IP <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).".<br />";
 
-				if ($this->config["ssl"] == true || $this->config["ssl_proxy"] == true)
+				if ($this->config['ssl'] == true || $this->config['ssl_proxy'] == true)
 				{
-					$output .= "Traffic Protection <tt>". ( isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on" ? $_SERVER["SSL_CIPHER"].' ('.$_SERVER["SSL_PROTOCOL"].')' : 'no' )."</tt>.";
+					$output .= "Traffic Protection <tt>". ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on" ? $_SERVER["SSL_CIPHER"].' ('.$_SERVER["SSL_PROTOCOL"].')' : 'no' )."</tt>.";
 				}
 
 				$this->SetMessage($output);
@@ -98,24 +99,24 @@ else
 		if ($existingUser = $this->LoadUser($_POST["name"]))
 		{
 			// check for disabled account
-			if (($existingUser["enabled"] == false) || $existingUser["account_type"] != 0 )
+			if (($existingUser['enabled'] == false) || $existingUser["account_type"] != 0 )
 			{
 				$error = $this->GetTranslation("AccountDisabled");
 			}
 			else
 			{
 				// check for old md5 password
-				if (strlen($existingUser["password"]) == 32)
+				if (strlen($existingUser['password']) == 32)
 				{
-					$_processed_password = md5($_POST["password"]);
+					$_processed_password = hash('md5', $_POST['password']);
 
-					if ($existingUser["password"] == $_processed_password)
+					if ($existingUser['password'] == $_processed_password)
 					{
 						$salt = $this->RandomPassword(4, 3);
-						$password = hash('sha1', $_POST["name"].$salt.$_POST["password"]);
+						$password = hash('sha1', $_POST["name"].$salt.$_POST['password']);
 
 						// update database with the sha1 password for future logins
-						$this->Query("UPDATE ".$this->config["table_prefix"]."user SET ".
+						$this->Query("UPDATE ".$this->config['table_prefix']."user SET ".
 									"password	= '".$password."', ".
 									"salt		= '".$salt."' ".
 									"WHERE user_name = '".$_POST["name"]."'");
@@ -123,11 +124,11 @@ else
 				}
 				else
 				{
-					$_processed_password = hash('sha1', $_POST["name"].$existingUser["salt"].$_POST["password"]);
+					$_processed_password = hash('sha1', $_POST["name"].$existingUser["salt"].$_POST['password']);
 				}
 
 				// check password
-				if ($existingUser["password"] == $_processed_password)
+				if ($existingUser['password'] == $_processed_password)
 				{
 					// define session duration in days
 					$_session = isset($_POST['session']) ? $_POST['session'] : NULL ;
@@ -152,11 +153,11 @@ else
 					$this->SetBookmarks(BM_USER);
 					$this->context[++$this->current_context] = "";
 
-					$this->LoginCount($existingUser["user_id"]);
-					$this->ResetFailedUserLoginCount($existingUser["user_id"]);
-					$this->ResetLostPasswordCount($existingUser["user_id"]);
+					$this->LoginCount($existingUser['user_id']);
+					$this->ResetFailedUserLoginCount($existingUser['user_id']);
+					$this->ResetLostPasswordCount($existingUser['user_id']);
 
-					$this->Log(3, str_replace("%1", $existingUser["user_name"], $this->GetTranslation("LogUserLoginOK", $this->config["language"])));
+					$this->Log(3, str_replace("%1", $existingUser['user_name'], $this->GetTranslation("LogUserLoginOK", $this->config['language'])));
 
 					// run in ssl mode?
 					if ($this->config['ssl'] == true)
@@ -167,7 +168,7 @@ else
 					if ($_POST["goback"] != "")
 						$this->Redirect($this->Href("", stripslashes($_POST["goback"]), "cache=".rand(0,1000)));
 					else
-						$this->Redirect($this->href());
+						$this->Redirect($this->href("", "", "cache=".rand(0,1000)));
 				}
 				else
 				{
@@ -175,10 +176,10 @@ else
 					$name = $_POST["name"];
 					$focus = 1;
 
-					$this->SetFailedUserLoginCount($existingUser["user_id"]);
+					$this->SetFailedUserLoginCount($existingUser['user_id']);
 
 					// log failed attempt
-					$this->Log(2, str_replace("%1", $_POST["name"], $this->GetTranslation("LogUserLoginFailed", $this->config["language"])));
+					$this->Log(2, str_replace("%1", $_POST["name"], $this->GetTranslation("LogUserLoginFailed", $this->config['language'])));
 				}
 			}
 		}

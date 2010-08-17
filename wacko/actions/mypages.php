@@ -17,7 +17,7 @@ if ($user_id = $this->GetUserId())
 	{
 		echo $this->GetTranslation("ListOwnedPages2");
 		print("<br />[<a href=\"".$this->href("", "", "mode=mypages")."#list"."\">".
-		$this->GetTranslation("OrderABC")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->config["rewrite_mode"] ? "?" : "&amp;")."#list"."\">".
+		$this->GetTranslation("OrderABC")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
 		$this->GetTranslation("OrderChange")."</a>] <br /><br />\n");
 		$count	= $this->LoadSingle(
 			"SELECT COUNT(tag) AS n ".
@@ -40,7 +40,7 @@ if ($user_id = $this->GetUserId())
 			foreach ($pages as $page)
 			{
 				// day header
-				list($day, $time) = explode(" ", $page["created"]);
+				list($day, $time) = explode(" ", $page['created']);
 				if ($day != $curday)
 				{
 					if ($curday)
@@ -52,7 +52,7 @@ if ($user_id = $this->GetUserId())
 				}
 
 				// print entry
-				echo "<li>$time (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."</li>\n";
+				echo "<li>$time (".$this->ComposeLinkToPage($page['tag'], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page['tag'], "", "", 0)."</li>\n";
 
 
 			}
@@ -102,7 +102,7 @@ if ($user_id = $this->GetUserId())
 			foreach ($pages as $page)
 			{
 				// day header
-				list($day, $time) = explode(" ", $page["modified"]);
+				list($day, $time) = explode(" ", $page['modified']);
 				if ($day != $curday)
 				{
 					if ($curday)
@@ -114,7 +114,7 @@ if ($user_id = $this->GetUserId())
 				}
 
 				// print entry
-				echo "<li>".$this->GetTimeStringFormatted($time)." (".$this->ComposeLinkToPage($page["tag"], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page["tag"], "", "", 0)."</li>\n";
+				echo "<li>".$this->GetTimeStringFormatted($time)." (".$this->ComposeLinkToPage($page['tag'], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page['tag'], "", "", 0)."</li>\n";
 
 			}
 			echo "</ul>\n</li>\n</ul>\n";
@@ -139,7 +139,7 @@ if ($user_id = $this->GetUserId())
 
 		echo $this->GetTranslation("ListOwnedPages");
 		print("<br />[<a href=\"".$this->href("", "", "mode=mypages&amp;bydate=1")."#list"."\">".
-		$this->GetTranslation("OrderDate")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->config["rewrite_mode"] ? "?" : "&amp;")."#list"."\">".
+		$this->GetTranslation("OrderDate")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
 		$this->GetTranslation("OrderChange")."</a>] <br /><br />\n");
 
 		if ($pages = $this->LoadAll(
@@ -154,9 +154,9 @@ if ($user_id = $this->GetUserId())
 
 			foreach ($pages as $page)
 			{
-				$firstChar = strtoupper($page["tag"][0]);
+				$firstChar = strtoupper($page['tag'][0]);
 
-				if (!preg_match("/".$this->language["ALPHA"]."/", $firstChar))
+				if (!preg_match("/".$this->language['ALPHA']."/", $firstChar))
 				{
 					$firstChar = "#";
 				}
@@ -171,7 +171,7 @@ if ($user_id = $this->GetUserId())
 					$curChar = $firstChar;
 				}
 
-				echo "<li>".$this->ComposeLinkToPage($page["tag"])."</li>\n";
+				echo "<li>".$this->ComposeLinkToPage($page['tag'])."</li>\n";
 			}
 			echo "</ul>\n</li>\n</ul>\n";
 			// pagination

@@ -10,7 +10,7 @@ if (!$this->page) $this->Redirect($this->href());
 // check user permissions to delete
 // ToDo: config->owners_can_remove_comments ?
 if ($this->IsAdmin() ||
-(!$this->config["remove_onlyadmins"] &&
+(!$this->config['remove_onlyadmins'] &&
 ($this->GetPageOwner($this->tag) == $this->GetUserName() ||
 $this->GetPageOwnerFromComment() == $this->GetUserName())))
 {
@@ -20,13 +20,13 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 	}
 	else
 	{
-		if ($this->page["comment_on_id"])
-			$comment_on_id = $this->page["comment_on_id"];
+		if ($this->page['comment_on_id'])
+			$comment_on_id = $this->page['comment_on_id'];
 
 		if (isset($_POST["delete"]) && $_POST["delete"] == 1)
 		{
-			if ($this->page["comment_on_id"])
-				$comment_on_id = $this->page["comment_on_id"];
+			if ($this->page['comment_on_id'])
+				$comment_on_id = $this->page['comment_on_id'];
 
 			if (isset($_POST["dontkeep"]) && $this->IsAdmin())
 				$dontkeep = 1;
@@ -107,7 +107,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 				"WHERE tag LIKE '".quote($this->dblink, $this->tag.'/%')."'"))
 				{
 					// remove by one page at a time
-					foreach ($list as $row) $this->RemovePage($row["tag"], "", $dontkeep);
+					foreach ($list as $row) $this->RemovePage($row['tag'], "", $dontkeep);
 					unset($list, $row);
 				}
 
@@ -118,7 +118,7 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			}
 
 			// update user statistics
-			if ($owner_id = $this->page["owner_id"])
+			if ($owner_id = $this->page['owner_id'])
 			{
 				$this->Query(
 					"UPDATE {$this->config['user_table']} ".
@@ -133,11 +133,11 @@ $this->GetPageOwnerFromComment() == $this->GetUserName())))
 			// log event
 			if (!$comment_on_id)
 			{
-				$this->Log(1, str_replace("%2", $this->page["user_name"], str_replace("%1", $this->tag, ( isset($_POST["cluster"]) && $_POST["cluster"] == 1 ? $this->GetTranslation("LogRemovedCluster", $this->config["language"]) : $this->GetTranslation("LogRemovedPage", $this->config["language"]) ))));
+				$this->Log(1, str_replace("%2", $this->page['user_name'], str_replace("%1", $this->tag, ( isset($_POST["cluster"]) && $_POST["cluster"] == 1 ? $this->GetTranslation("LogRemovedCluster", $this->config['language']) : $this->GetTranslation("LogRemovedPage", $this->config['language']) ))));
 			}
 			else
 			{
-				$this->Log(1, str_replace("%3", $this->GetTimeStringFormatted($this->page["created"]), str_replace("%2", $this->page["user_name"], str_replace("%1", $comment_on_id." ".$this->GetPageTitle($comment_on_id), $this->GetTranslation("LogRemovedComment", $this->config["language"])))));
+				$this->Log(1, str_replace("%3", $this->GetTimeStringFormatted($this->page['created']), str_replace("%2", $this->page['user_name'], str_replace("%1", $comment_on_id." ".$this->GetPageTitle($comment_on_id), $this->GetTranslation("LogRemovedComment", $this->config['language'])))));
 			}
 
 			echo "<br />".$this->GetTranslation("ThisActionHavenotUndo")."<br />\n";

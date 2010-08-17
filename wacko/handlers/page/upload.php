@@ -10,8 +10,8 @@ $registered = "";
 if (!$this->page) $this->Redirect($this->href("show"));
 
 // deny for comment
-if ($this->page["comment_on_id"])
-	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page["comment_on_id"]), "show_comments=1")."#".$this->page["tag"]);
+if ($this->page['comment_on_id'])
+	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page['comment_on_id']), "show_comments=1")."#".$this->page['tag']);
 
 if ($user = $this->GetUser())
 {
@@ -26,8 +26,8 @@ else
 if ($registered
 &&
 (
-($this->config["upload"] === true) || ($this->config["upload"] == "1") ||
-($this->CheckACL($user,$this->config["upload"]))
+($this->config['upload'] === true) || ($this->config['upload'] == "1") ||
+($this->CheckACL($user,$this->config['upload']))
 )
 &&
 ($this->HasAccess("write") && $this->HasAccess("read") || ($_POST["to"] == "global"))
@@ -38,12 +38,12 @@ if ($registered
 		if ($_GET["remove"] == "global")
 			$page_id = 0;
 		else
-			$page_id = $this->page["page_id"];
+			$page_id = $this->page['page_id'];
 
 		$what = $this->LoadAll(
 			"SELECT f.user_id, u.user_name AS user, f.upload_id, f.filename, f.filesize, f.description, f.uploaded_dt ".
-			"FROM ".$this->config["table_prefix"]."upload f ".
-				"INNER JOIN ".$this->config["table_prefix"]."user u ON (f.user_id = u.user_id) ".
+			"FROM ".$this->config['table_prefix']."upload f ".
+				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
 			"AND f.filename='".quote($this->dblink, $_GET["file"])."'");
 
@@ -51,8 +51,8 @@ if ($registered
 		{
 			if ($this->IsAdmin() || (
 				$page_id && (
-				$this->page["owner_id"] == $this->GetUserId())) || (
-				$what[0]["user_id"] == $this->GetUserId()))
+				$this->page['owner_id'] == $this->GetUserId())) || (
+				$what[0]['user_id'] == $this->GetUserId()))
 			{
 				echo "<strong>".$this->GetTranslation("UploadRemoveConfirm")."</strong>";
 				echo $this->FormOpen("upload");
@@ -63,9 +63,9 @@ if ($registered
 		<li><?php echo $this->Link( "file:".$_GET["file"] ); ?>
 			<ul>
 				<li><?php echo $this->GetTimeStringFormatted($what[0]["uploaded_dt"]); ?></li>
-				<li><?php echo "(".$this->binary_multiples($what[0]["filesize"], true, true, true).")"; ?></li>
+				<li><?php echo "(".$this->binary_multiples($what[0]['filesize'], true, true, true).")"; ?></li>
 				<li><?php echo $_GET["file"]; ?></li>
-				<li><?php echo $what[0]["description"]; ?></li>
+				<li><?php echo $what[0]['description']; ?></li>
 			</ul>
 		</li>
 	</ul>
@@ -100,12 +100,12 @@ if ($registered
 		if ($_POST["remove"] == "global")
 			$page_id = 0;
 		else
-			$page_id = $this->page["page_id"];
+			$page_id = $this->page['page_id'];
 
 		$what = $this->LoadAll(
 			"SELECT f.user_id, u.user_name AS user, f.upload_id, f.filename, f.filesize, f.description ".
-			"FROM ".$this->config["table_prefix"]."upload f ".
-				"INNER JOIN ".$this->config["table_prefix"]."user u ON (f.user_id = u.user_id) ".
+			"FROM ".$this->config['table_prefix']."upload f ".
+				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
 			"AND f.filename='".quote($this->dblink, $_POST["file"])."'");
 
@@ -113,20 +113,20 @@ if ($registered
 		{
 			if ($this->IsAdmin() || (
 				$page_id && (
-				$this->page["owner_id"] == $this->GetUserId())) || (
-				$what[0]["user_id"] == $this->GetUserId()))
+				$this->page['owner_id'] == $this->GetUserId())) || (
+				$what[0]['user_id'] == $this->GetUserId()))
 			{
 				// 2. remove from DB
 				$this->Query(
-					"DELETE FROM ".$this->config["table_prefix"]."upload ".
-					"WHERE upload_id = '". quote($this->dblink, $what[0]["upload_id"])."'" );
+					"DELETE FROM ".$this->config['table_prefix']."upload ".
+					"WHERE upload_id = '". quote($this->dblink, $what[0]['upload_id'])."'" );
 
 				$message .= $this->GetTranslation("UploadRemovedFromDB")."<br />";
 
 				// 3. remove from FS
 				$real_filename = ($page_id
 					? ($this->config["upload_path_per_page"]."/@".$page_id."@")
-					: ($this->config["upload_path"]."/")).
+					: ($this->config['upload_path']."/")).
 					$what[0]["filename"];
 
 				if (@unlink($real_filename))
@@ -139,7 +139,7 @@ if ($registered
 					$this->SetMessage($message);
 				}
 				// log event
-				$this->Log(1, str_replace("%2", $what[0]["filename"], str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedFile", $this->config["language"]))));
+				$this->Log(1, str_replace("%2", $what[0]["filename"], str_replace("%1", $this->tag." ".$this->page['title'], $this->GetTranslation("LogRemovedFile", $this->config['language']))));
 			}
 			else
 			{
@@ -157,9 +157,9 @@ if ($registered
 		$user = $this->GetUser();
 		$files = $this->LoadAll(
 			"SELECT f.upload_id ".
-			"FROM ".$this->config["table_prefix"]."upload f ".
-				"INNER JOIN ".$this->config["table_prefix"]."user u ON (f.user_id = u.user_id) ".
-			"WHERE u.user_name = '".quote($this->dblink, $user["user_name"])."'");
+			"FROM ".$this->config['table_prefix']."upload f ".
+				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+			"WHERE u.user_name = '".quote($this->dblink, $user['user_name'])."'");
 
 		if (!$this->config["upload_max_per_user"] || (sizeof($files) < $this->config["upload_max_per_user"]))
 		{
@@ -177,13 +177,13 @@ if ($registered
 
 				// 1.5. +write @page_id@ to name
 				if ($_POST["to"] != "global")
-					$name = "@".$this->page["page_id"]."@".$name;
+					$name = "@".$this->page['page_id']."@".$name;
 				else
 					$is_global = 1;
 
 				if ($is_global)
 				{
-					$dir = $this->config["upload_path"]."/";
+					$dir = $this->config['upload_path']."/";
 					$banned = explode("|", $this->config["upload_banned_exts"]);
 					if (in_array(strtolower($ext), $banned))
 						$ext = $ext.".txt";
@@ -205,7 +205,7 @@ if ($registered
 				$file_size		= $_FILES["file"]['size'];
 
 				// 1.6. check filesize, if asked
-				$maxfilesize = $this->config["upload_max_size"];
+				$maxfilesize = $this->config['upload_max_size'];
 
 				if (isset($_POST["maxsize"]))
 					if ($maxfilesize > 1 * $_POST["maxsize"])
@@ -243,7 +243,7 @@ if ($registered
 						$file_size_kb	= ceil($file_size / 1024);
 						$uploaded_dt	= date("Y-m-d H:i:s");
 
-						$description = substr(quote($this->dblink, $_POST["description"]),0,250);
+						$description = substr(quote($this->dblink, $_POST['description']),0,250);
 						$description = rtrim( $description, "\\" );
 
 						// Make HTML in the description redundant ;¬)
@@ -252,9 +252,9 @@ if ($registered
 						$description = htmlentities($description,ENT_COMPAT,$this->GetCharset());
 
 						// 5. insert line into DB
-						$this->Query("INSERT INTO ".$this->config["table_prefix"]."upload SET ".
-							"page_id		= '".quote($this->dblink, $is_global ? "0" : $this->page["page_id"])."', ".
-							"user_id		= '".quote($this->dblink, $user["user_id"])."',".
+						$this->Query("INSERT INTO ".$this->config['table_prefix']."upload SET ".
+							"page_id		= '".quote($this->dblink, $is_global ? "0" : $this->page['page_id'])."', ".
+							"user_id		= '".quote($this->dblink, $user['user_id'])."',".
 							"filename		= '".quote($this->dblink, $small_name)."', ".
 							"description	= '".quote($this->dblink, $description)."', ".
 							"filesize		= '".quote($this->dblink, $file_size)."',".
@@ -270,11 +270,11 @@ if ($registered
 						// log event
 						if ($is_global)
 						{
-							$this->Log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, $this->GetTranslation("LogFileUploadedGlobal", $this->config["language"]))));
+							$this->Log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, $this->GetTranslation("LogFileUploadedGlobal", $this->config['language']))));
 						}
 						else
 						{
-							$this->Log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, str_replace("%1", $this->page["tag"]." ".$this->page["title"], $this->GetTranslation("LogFileUploadedLocal", $this->config["language"])))));
+							$this->Log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, str_replace("%1", $this->page['tag']." ".$this->page['title'], $this->GetTranslation("LogFileUploadedLocal", $this->config['language'])))));
 						}
 						?>
 	<br />

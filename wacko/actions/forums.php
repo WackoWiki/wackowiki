@@ -62,8 +62,8 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			$comment = $this->LoadSingle(
 				"SELECT a.tag, a.title, a.comment_on_id, a.user_id, a.owner_id, a.created, b.tag as comment_on, u.user_name AS user ".
 				"FROM {$this->config['table_prefix']}page a ".
-				"LEFT JOIN ".$this->config["table_prefix"]."user u ON (a.user_id = u.user_id) ".
-				"LEFT JOIN ".$this->config["table_prefix"]."page b ON (a.comment_on_id = b.page_id) ".
+				"LEFT JOIN ".$this->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
+				"LEFT JOIN ".$this->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 				"WHERE b.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
 					"OR a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
 				"ORDER BY a.created DESC ".

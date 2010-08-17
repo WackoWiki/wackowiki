@@ -10,7 +10,7 @@ if (!$this->page) $this->Redirect($this->href('show'));
 
 // deny for comment
 if ($this->page['comment_on_id'])
-	$this->Redirect($this->href('', $this->GetCommentOnTag($this->page["comment_on_id"]), 'show_comments=1').'#'.$this->page['tag']);
+	$this->Redirect($this->href('', $this->GetCommentOnTag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
 // and for forum page
 else if ($this->forum === true && !$this->IsAdmin())
 	$this->Redirect($this->href());
@@ -25,24 +25,24 @@ $user = GUEST;
 
 $edit_note = str_replace("%1", $this->tag, $this->GetTranslation("ClonedFrom"));
 
-if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this->page["page_id"]))
+if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this->page['page_id']))
 {
-	if (isset($_POST["newname"]) && $_POST["clone"] == "1")
+	if (isset($_POST['newname']) && $_POST['clone'] == "1")
 	{
 		// clone or massclone
 		$need_massclone = 0;
-		if (isset($_POST["massclone"]) && $_POST["massclone"] == "on") $need_massclone = 1;
+		if (isset($_POST['massclone']) && $_POST['massclone'] == "on") $need_massclone = 1;
 
 		// clone
 		if ($need_massclone == 0)
 		{
 			// strip whitespaces
-			$new_name		= preg_replace('/\s+/', '', $_POST["newname"]);
+			$new_name		= preg_replace('/\s+/', '', $_POST['newname']);
 			$new_name		= trim($new_name, "/");
 			$supernewname	= $this->NpjTranslit($new_name);
 			$edit_note = isset($_POST['edit_note']) ? $_POST['edit_note'] : $edit_note;
 
-			if (!preg_match("/^([\_\.\-".$this->language["ALPHANUM_P"]."]+)$/", $new_name))
+			if (!preg_match("/^([\_\.\-".$this->language['ALPHANUM_P']."]+)$/", $new_name))
 			{
 				print($this->GetTranslation("BadName")."<br />\n");
 			}
@@ -62,9 +62,9 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this-
 					if ($this->ClonePage($this->tag, $new_name, $supernewname, $edit_note))
 					{
 						// log event
-						$this->Log(4, str_replace("%2", $new_name, str_replace("%1", $this->tag, $this->GetTranslation("LogClonedPage", $this->config["language"]))) );
+						$this->Log(4, str_replace("%2", $new_name, str_replace("%1", $this->tag, $this->GetTranslation("LogClonedPage", $this->config['language']))) );
 
-						if (isset($_POST["redirect"]) && $_POST["redirect"] == "on") $need_redirect = 1;
+						if (isset($_POST['redirect']) && $_POST['redirect'] == "on") $need_redirect = 1;
 
 						if ($need_redirect == 1)
 						{
@@ -98,7 +98,7 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this-
 	<input name="newname" size="40"/><br />
 	<?php
 	// edit note
-	if ($this->config["edit_summary"] != 0)
+	if ($this->config['edit_summary'] != 0)
 	{
 		$output .= "<label for=\"edit_note\">".$this->GetTranslation("EditNote").":</label><br />";
 		$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";

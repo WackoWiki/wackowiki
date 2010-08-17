@@ -32,25 +32,25 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 		}
 
 		// only if saving:
-		if (isset($_POST["save"]) && $_POST["body"] != "")
+		if (isset($_POST["save"]) && $_POST['body'] != "")
 		{
-			if(isset($_POST["edit_note"]))
+			if(isset($_POST['edit_note']))
 			{
-				$edit_note = trim($_POST["edit_note"]);
+				$edit_note = trim($_POST['edit_note']);
 			}
 
-			if(isset($_POST["minor_edit"]))
+			if(isset($_POST['minor_edit']))
 			{
-				$minor_edit = $_POST["minor_edit"];
+				$minor_edit = $_POST['minor_edit'];
 			}
 
-			$title = $this->page["title"];
-			if(isset($_POST["title"]))
+			$title = $this->page['title'];
+			if(isset($_POST['title']))
 			{
-				$title = trim($_POST["title"]);
+				$title = trim($_POST['title']);
 			}
 			// check for overwriting
-			if ($this->page && $this->page["modified"] != $_POST["previous"])
+			if ($this->page && $this->page['modified'] != $_POST["previous"])
 				$error = $this->GetTranslation("OverwriteAlert");
 
 			// check text length
@@ -58,15 +58,15 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			#	$error .= str_replace('%1', $textchars - $maxchars, $this->GetTranslation('TextDBOversize')).' ';
 
 			// check for edit note
-			if (($this->config["edit_summary"] == 2) && $_POST["edit_note"] == "" && $this->page["comment_on_id"] == 0)
+			if (($this->config['edit_summary'] == 2) && $_POST['edit_note'] == "" && $this->page['comment_on_id'] == 0)
 				$error .= $this->GetTranslation("EditNoteMissing");
 
 			// check categories
-			#if (!$this->page && $this->GetCategoriesList($this->pagelang, 1) && $this->SaveCategoriesList($this->page["page_id"], 1) !== true)
+			#if (!$this->page && $this->GetCategoriesList($this->pagelang, 1) && $this->SaveCategoriesList($this->page['page_id'], 1) !== true)
 			#	$error .= 'Select at least one referring category (field) to the page. ';
 
 			// captcha code starts
-			if(($this->page && $this->config["captcha_edit_page"]) || (!$this->page && $this->config["captcha_new_page"]))
+			if(($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
 			{
 				// Don't load the captcha at all if the GD extension isn't enabled
 				if(extension_loaded('gd'))
@@ -109,10 +109,10 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				}
 			}
 
-			$body = str_replace("\r", "", $_POST["body"]);
+			$body = str_replace("\r", "", $_POST['body']);
 
 			// You're not allowed to have empty comments as they would be kinda pointless.
-			if (!$body && $this->page["comment_on_id"] != 0)
+			if (!$body && $this->page['comment_on_id'] != 0)
 			$error .= $this->GetTranslation("EmptyComment");
 
 			// store
@@ -127,13 +127,13 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				}
 
 				// add page (revisions)
-				$body_r = $this->SavePage($this->tag, $title, $body, $edit_note, $minor_edit, $this->page["comment_on_id"]);
+				$body_r = $this->SavePage($this->tag, $title, $body, $edit_note, $minor_edit, $this->page['comment_on_id']);
 
 				// log event
-				if ($this->page["comment_on_id"] != 0)
+				if ($this->page['comment_on_id'] != 0)
 				{
 					// comment modified
-					$this->Log(6, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogCommentEdited", $this->config["language"])));
+					$this->Log(6, str_replace("%1", $this->tag." ".$this->page['title'], $this->GetTranslation("LogCommentEdited", $this->config['language'])));
 				}
 				else
 				{
@@ -142,12 +142,12 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 					{
 						// new page created
 						$this->SaveCategoriesList($this->GetPageId($this->tag));
-						$this->Log(4, str_replace("%1", $this->tag." ".$_POST["title"], $this->GetTranslation("LogPageCreated", $this->config["language"])));
+						$this->Log(4, str_replace("%1", $this->tag." ".$_POST['title'], $this->GetTranslation("LogPageCreated", $this->config['language'])));
 					}
 					else
 					{
 						// old page modified
-						$this->Log(6, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogPageEdited", $this->config["language"])));
+						$this->Log(6, str_replace("%1", $this->tag." ".$this->page['title'], $this->GetTranslation("LogPageEdited", $this->config['language'])));
 					}
 
 					// restore username after anonymous publication
@@ -163,16 +163,16 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 					$this->StartLinkTracking();
 					$dummy = $this->Format($body_r, "post_wacko");
 					$this->StopLinkTracking();
-					$this->WriteLinkTable($this->page["page_id"]);
+					$this->WriteLinkTable($this->page['page_id']);
 					$this->ClearLinkTable();
 				}
 
 				// forward
 				$this->pageCache[$this->supertag] = "";
 
-				if ($this->page["comment_on_id"] != 0)
+				if ($this->page['comment_on_id'] != 0)
 				{
-					$this->Redirect($this->href("", $this->GetCommentOnTag($this->page["comment_on_id"]), "show_comments=1#".$this->page["tag"]));
+					$this->Redirect($this->href("", $this->GetCommentOnTag($this->page['comment_on_id']), "show_comments=1#".$this->page['tag']));
 				}
 				else
 				{
@@ -181,7 +181,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			}
 		}
 		// saving blank document
-		else if ($_POST["body"] == "")
+		else if ($_POST['body'] == "")
 		{
 			$this->Redirect($this->href());
 		}
@@ -190,13 +190,13 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 	$this->NoCache();
 
 	// fetch fields
-	$previous = isset($_POST["previous"]) ? $_POST["previous"] : $this->page["modified"];
-	$body = isset($_POST["body"]) ? $_POST["body"] : $this->page["body"];
+	$previous = isset($_POST["previous"]) ? $_POST["previous"] : $this->page['modified'];
+	$body = isset($_POST['body']) ? $_POST['body'] : $this->page['body'];
 	$body = html_entity_decode($body);
-	$title = isset($_POST["title"]) ? $_POST["title"] : $this->page["title"];
+	$title = isset($_POST['title']) ? $_POST['title'] : $this->page['title'];
 	$title = html_entity_decode($title);
-	if (isset($_POST["edit_note"]))			$edit_note	= $_POST["edit_note"];
-	if (isset($_POST["minor_edit"]))		$minor_edit	= $_POST["minor_edit"];
+	if (isset($_POST['edit_note']))			$edit_note	= $_POST['edit_note'];
+	if (isset($_POST['minor_edit']))		$minor_edit	= $_POST['minor_edit'];
 
 
 	// display form
@@ -206,7 +206,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 	// "cf" attribute: it is for so called "critical fields" in the form. It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog "You are going to leave this page, but there are some changes you made but not saved yet." Is used by this script to determine which changes it need to monitor.
 	$output .= $this->FormOpen("edit", "", "post", "edit", " cf='true' ");
 
-	if (isset($_REQUEST["add"]))
+	if (isset($_REQUEST['add']))
 		$output .=	'<input name="lang" type="hidden" value="'.$this->pagelang.'" />'.
 					'<input name="tag" type="hidden" value="'.$this->tag.'" />'.
 					'<input name="add" type="hidden" value="1" />';
@@ -232,7 +232,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 
 		$output = "<div class=\"preview\"><p class=\"preview\"><span>".$textchars." ".$this->GetTranslation("EditPreview")."</span></p>\n";
 
-		if ($this->config["edit_summary"] != 0)
+		if ($this->config['edit_summary'] != 0)
 		{
 			$output .= "<div class=\"commenttitle\">\n<a href=\"#\">".$title."</a>\n</div>\n";
 		}
@@ -280,7 +280,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 		$output .= htmlspecialchars($body)."</textarea><br />\n";
 
 		// comment title
-		if ($this->page["comment_on_id"] != 0)
+		if ($this->page['comment_on_id'] != 0)
 		{
 			$output .= "<label for=\"addcomment_title\">".$this->GetTranslation("AddCommentTitle").":</label><br />";
 			$output .= "<input id=\"addcomment_title\" maxlength=\"100\" value=\"".htmlspecialchars($title)."\" size=\"60\" name=\"title\" />";
@@ -295,7 +295,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 				$output .= "<input id=\"addpage_title\" value=\"".htmlspecialchars($title)."\" size=\"60\" maxlength=\"100\" name=\"title\" /><br />";
 			}
 			// edit note
-			if ($this->config["edit_summary"] != 0)
+			if ($this->config['edit_summary'] != 0)
 			{
 				$output .= "<label for=\"edit_note\">".$this->GetTranslation("EditNote").":</label><br />";
 				$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
@@ -303,7 +303,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 			}
 
 			// minor edit
-			if ($this->page && $this->config["minor_edit"] != 0)
+			if ($this->page && $this->config['minor_edit'] != 0)
 			{
 				$output .= "<input id=\"minor_edit\" type=\"checkbox\" value=\"1\" name=\"minor_edit\"/>";
 				$output .= "<label for=\"minor_edit\">".$this->GetTranslation("EditMinor")."</label>";
@@ -352,7 +352,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 		// captcha code starts
 
 		// Only show captcha if the admin enabled it in the config file
-		if(($this->page && $this->config["captcha_edit_page"]) || (!$this->page && $this->config["captcha_new_page"]))
+		if(($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
 			if(extension_loaded('gd'))
@@ -365,7 +365,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 ?>
 		<label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
 		<br />
-		<img src="<?php echo $this->config["base_url"];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->config["base_url"];?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
+		<img src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->config['base_url'];?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
 		<br />
 		<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
 		<br />
@@ -387,7 +387,7 @@ if ($this->HasAccess("write") && $this->HasAccess("read"))
 <?php
 	}
 ?>
-		wE.init('postText','WikiEdit','edname-w','<?php echo $this->config["base_url"];?>images/wikiedit/');
+		wE.init('postText','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>images/wikiedit/');
 		</script><br />
 		<input name="save" type="submit" value="<?php echo $this->GetTranslation("EditStoreButton"); ?>" />
 		&nbsp;

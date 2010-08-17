@@ -3,7 +3,7 @@
  Wacko Wiki PostgreSQL Table Creation Script
  */
 
-$pref = $config["table_prefix"];
+$pref = $config['table_prefix'];
 
 $table_page = "CREATE TABLE {$pref}page (".
 					"page_id serial,".

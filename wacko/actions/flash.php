@@ -80,11 +80,11 @@ if (!$url)
 else if($url)
 {
 	// Load swfobject with header
-	$this->config["allow_swfobject"] = 1;
+	$this->config['allow_swfobject'] = 1;
 
 	print "<script type=\"text/javascript\">\n";
 	print "		// <![CDATA[\n";
-	print "		swfobject.embedSWF(\"".$url."\", \"".$name."\", \"".$width."\", \"".$height."\", \"".$version."\", \"".$this->config["base_url"]."themes/_common/expressInstall.swf\", {}, {";
+	print "		swfobject.embedSWF(\"".$url."\", \"".$name."\", \"".$width."\", \"".$height."\", \"".$version."\", \"".$this->config['base_url']."themes/_common/expressInstall.swf\", {}, {";
 
 	// Write Params
 	$written = 0;

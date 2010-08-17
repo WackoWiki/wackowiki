@@ -12,7 +12,7 @@ if ($user_id = $this->GetUserId())
 
 	if ($max) $limit = $max;
 	else $limit	= 100;
-	$prefix = $this->config["table_prefix"];
+	$prefix = $this->config['table_prefix'];
 
 	if (isset($_GET['unwatched']) && $_GET['unwatched'] == 1)
 	{
@@ -59,7 +59,7 @@ if ($user_id = $this->GetUserId())
 					}
 
 					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.$_GET['p'].'&amp;' : '').'mode=mywatches&amp;unwatched=1&amp;setwatch='.$page['page_id']).'#list">'.
-						"<img src=\"".$this->config["theme_url"]."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  />".'</a> '.$this->ComposeLinkToPage($page['pagetag'], '', '', 0)."<br />\n";
+						"<img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  />".'</a> '.$this->ComposeLinkToPage($page['pagetag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
 				if ($cnt >= $limit) break;
@@ -113,7 +113,7 @@ if ($user_id = $this->GetUserId())
 					}
 
 					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.$_GET['p'].'&amp;' : '').'mode=mywatches&amp;unwatch='.$page['page_id']).'#list">'.
-						"<img src=\"".$this->config["theme_url"]."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  />".'</a> '.$this->ComposeLinkToPage($page['tag'], '', '', 0)."<br />\n";
+						"<img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  />".'</a> '.$this->ComposeLinkToPage($page['tag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
 				if ($cnt >= $limit) break;

@@ -2,7 +2,7 @@
 <?php
 
 // reconnect securely in ssl mode
-if ($this->config["ssl"] == true && ( ($_SERVER["HTTPS"] != "on" && empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] != '443' ))
+if ($this->config['ssl'] == true && ( ($_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 {
 	$this->Redirect(str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->href()));
 }
@@ -17,7 +17,7 @@ if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
 
 	$user = $this->LoadSingle(
 		"SELECT * ".
-		"FROM ".$this->config["user_table"]." ".
+		"FROM ".$this->config['user_table']." ".
 		"WHERE change_password='".quote($this->dblink, $code)."' ".
 		"LIMIT 1");
 
@@ -64,14 +64,14 @@ if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
 			else
 			{
 				$this->Query(
-					"UPDATE ".$this->config["user_table"]." SET ".
+					"UPDATE ".$this->config['user_table']." SET ".
 						"password			= '".quote($this->dblink, hash('sha1', $newpassword))."', ".
 						"change_password	= '' ".
-					"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
+					"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"LIMIT 1");
 
 				// log event
-				$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordRecovered", $this->config["language"])));
+				$this->Log(3, str_replace("%1", $user['user_name'], $this->GetTranslation("LogUserPasswordRecovered", $this->config['language'])));
 
 				// forward
 				$this->SetMessage($this->GetTranslation("PasswordChanged"));
@@ -88,7 +88,7 @@ if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
 			?>
 
 			<div class="cssform">
-				<h3><?php echo $this->Format( str_replace('%1', $user["user_name"], $this->GetTranslation("YouWantChangePasswordForUser"))); ?></h3>
+				<h3><?php echo $this->Format( str_replace('%1', $user['user_name'], $this->GetTranslation("YouWantChangePasswordForUser"))); ?></h3>
 				<p>
 					<label for="newpassword"><?php echo $this->GetTranslation("NewPassword");?>:</label>
 					<input type="password" id="newpassword" name="newpassword" size="24" />
@@ -140,19 +140,19 @@ else if (!isset($forgot) && $user = $this->GetUser())
 	if (isset($_POST["action"]) && $_POST["action"] == "change")
 	{
 		//Simple change password
-		$password = $_POST["password"];
+		$password = $_POST['password'];
 		$newpassword = $_POST["newpassword"];
 		$confpassword = $_POST["confpassword"];
 
 		// check all conditions
-		$complexity		= $this->PasswordComplexity($user["user_name"], $newpassword);
+		$complexity		= $this->PasswordComplexity($user['user_name'], $newpassword);
 
 		// wrong current password
-		if (hash('sha1', $password)!=$user["password"])
+		if (hash('sha1', $password)!=$user['password'])
 		{
 			$error = $this->GetTranslation("WrongPassword");
 			// log event
-			$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordMismatch", $this->config["language"])));
+			$this->Log(3, str_replace("%1", $user['user_name'], $this->GetTranslation("LogUserPasswordMismatch", $this->config['language'])));
 		}
 		// confirmed password mismatch
 		else if ($confpassword != $newpassword)
@@ -187,9 +187,9 @@ else if (!isset($forgot) && $user = $this->GetUser())
 		{
 			// store new password
 			$this->Query(
-				"UPDATE ".$this->config["user_table"]." ".
+				"UPDATE ".$this->config['user_table']." ".
 				"SET password = '".quote($this->dblink, hash('sha1', $newpassword))."' ".
-				"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
+				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 				"LIMIT 1");
 
 			// reinitialize user session
@@ -198,7 +198,7 @@ else if (!isset($forgot) && $user = $this->GetUser())
 			$this->context[++$this->current_context] = "";
 
 			// log event
-			$this->Log(3, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordChanged", $this->config["language"])));
+			$this->Log(3, str_replace("%1", $user['user_name'], $this->GetTranslation("LogUserPasswordChanged", $this->config['language'])));
 
 			// forward
 			$this->SetMessage($this->GetTranslation("PasswordChanged"));
@@ -267,43 +267,43 @@ else
 		$name = str_replace(" ","", $_POST["loginormail"]);
 		$user = $this->LoadSingle(
 			"SELECT * ".
-			"FROM ".$this->config["user_table"]." ".
+			"FROM ".$this->config['user_table']." ".
 			"WHERE user_name = '".quote($this->dblink, $name)."' ".
 				"OR email = '".quote($this->dblink, $name)."'");
 
 		if ($user)
 		{
-			if ($user["email_confirm"] == "")
+			if ($user['email_confirm'] == "")
 			{
-				$code = hash('sha1', $user["password"].date("D d M Y H:i:s").$user["email"].mt_rand());
+				$code = hash('sha1', $user['password'].date("D d M Y H:i:s").$user['email'].mt_rand());
 
 				$subject =	$this->GetTranslation("EmailForgotSubject").
-							$this->config["wacko_name"];
+							$this->config['wacko_name'];
 				$message =	$this->GetTranslation("EmailHello"). $name.".\n\n".
-							str_replace('%1', $this->config["wacko_name"],
-							str_replace('%2', $user["user_name"],
+							str_replace('%1', $this->config['wacko_name'],
+							str_replace('%2', $user['user_name'],
 							str_replace('%3', $this->Href().
-							($this->config["rewrite_mode"] ? "?" : "&amp;")."secret_code=".$code,
+							($this->config['rewrite_mode'] ? "?" : "&amp;")."secret_code=".$code,
 							$this->GetTranslation("EmailForgotMessage"))))."\n";
 				$message.=	"\n".$this->GetTranslation("EmailGoodbye").
-							"\n".$this->config["wacko_name"].
-							"\n".$this->config["base_url"];
+							"\n".$this->config['wacko_name'].
+							"\n".$this->config['base_url'];
 
 				// update table
 				$this->Query(
-					"UPDATE ".$this->config["user_table"]." ".
+					"UPDATE ".$this->config['user_table']." ".
 					"SET change_password = '".quote($this->dblink, $code)."' ".
-					"WHERE user_name = '".quote($this->dblink, $user["user_name"])."' ".
+					"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
 					"LIMIT 1");
 
 				// send code
-				$this->SendMail($user["email"], $subject, $message);
+				$this->SendMail($user['email'], $subject, $message);
 
 				// count attempt
-				$this->SetLostPasswordCount($user["user_id"]);
+				$this->SetLostPasswordCount($user['user_id']);
 
 				// log event
-				$this->Log(3, str_replace("%2", $user["email"], str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserPasswordReminded", $this->config["language"]))));
+				$this->Log(3, str_replace("%2", $user['email'], str_replace("%1", $user['user_name'], $this->GetTranslation("LogUserPasswordReminded", $this->config['language']))));
 
 				$this->SetMessage($this->GetTranslation("CodeWasSent"));
 				$this->Redirect($this->href("", $this->GetTranslation("LoginPage")));

@@ -14,7 +14,7 @@ echo $this->HasAccess("write") ? "<li><a href=\"".$this->href("edit")."\" access
 if ($this->page)
 {
 	// Revisions link
-	echo $this->page["modified"] ? "<li><a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTimeFormatted()."</a></li>\n" : "";
+	echo $this->page['modified'] ? "<li><a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTimeFormatted()."</a></li>\n" : "";
 
 	// If owner is current user
 	if ($this->UserIsOwner())
@@ -22,10 +22,10 @@ if ($this->page)
 		print("<li>".$this->GetTranslation("YouAreOwner")."</li>\n");
 
 		// Rename link
-		print("<li><a href=\"".$this->href("rename")."\"><img src=\"".$this->config["theme_url"]."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" /></a></li>\n");
+		print("<li><a href=\"".$this->href("rename")."\"><img src=\"".$this->config['theme_url']."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" /></a></li>\n");
 
 		// Remove link (shows only for page owner if allowed)
-		if (!$this->config["remove_onlyadmins"]) print("<li><a href=\"".$this->href("remove")."\"><img src=\"".$this->config["theme_url"]."icons/delete.gif\" title=\"".$this->GetTranslation("DeleteTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" /></a></li>\n");
+		if (!$this->config['remove_onlyadmins']) print("<li><a href=\"".$this->href("remove")."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->GetTranslation("DeleteTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" /></a></li>\n");
 
 		//Edit ACLs link
 		print("<li><a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"").">".$this->GetTranslation("ACLText")."</a></li>\n");
@@ -37,20 +37,20 @@ if ($this->page)
 		if ($owner = $this->GetPageOwner())
 		{
 			print("<li>".$this->GetTranslation("Owner").": ".$this->Link($owner)."</li>\n");
-		} else if (!$this->page["comment_on_id"]) {
+		} else if (!$this->page['comment_on_id']) {
 			print("<li>".$this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a></li>\n)" : ""));
 		}
 	}
 
 	// Rename link
-	if ($this->CheckACL($this->GetUserName(),$this->config["rename_globalacl"]) && !$this->UserIsOwner())
+	if ($this->CheckACL($this->GetUserName(),$this->config['rename_globalacl']) && !$this->UserIsOwner())
 	{
-		print("<li><a href=\"".$this->href("rename")."\"><img src=\"".$this->config["theme_url"]."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" /></a></li>\n");
+		print("<li><a href=\"".$this->href("rename")."\"><img src=\"".$this->config['theme_url']."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" /></a></li>\n");
 	}
 	// Remove link (shows only for Admins)
 	if ($this->IsAdmin() && !$this->UserIsOwner())
 	{
-		print("<li><a href=\"".$this->href("remove")."\"><img src=\"".$this->config["theme_url"]."icons/delete.gif\" title=\"".$this->GetTranslation("DeleteTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" /></a></li>\n");
+		print("<li><a href=\"".$this->href("remove")."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->GetTranslation("DeleteTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" /></a></li>\n");
 
 		// Edit ACLs link (shows also for Admins)
 		print("<li><a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"").">".$this->GetTranslation("ACLText")."</a></li>\n");
@@ -61,16 +61,16 @@ if ($this->page)
 		// Page  settings link
 		print("<li><a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditPropertiesConfirm")."');\"":"").">".$this->GetTranslation("PropertiesText")."</a></li>\n");
 // referrers icon
-print("<li><a href=\"".$this->href("referrers")."\"><img src=\"".$this->config["theme_url"]."icons/referer.gif\" title=\"".$this->GetTranslation("ReferrersTip")."\" alt=\"".$this->GetTranslation("ReferrersText")."\" /></a></li>\n");
+print("<li><a href=\"".$this->href("referrers")."\"><img src=\"".$this->config['theme_url']."icons/referer.gif\" title=\"".$this->GetTranslation("ReferrersTip")."\" alt=\"".$this->GetTranslation("ReferrersText")."\" /></a></li>\n");
 	}
 
 if ($this->GetUser()){
 	// Watch/Unwatch icon
-	echo ($this->iswatched === true ? "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->config["theme_url"]."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  /></a></li>\n" : "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->config["theme_url"]."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\" /></a></li>\n");
+	echo ($this->iswatched === true ? "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  /></a></li>\n" : "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\" /></a></li>\n");
 }
 
 // Print icon
-echo"<li><a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->config["theme_url"]."icons/print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\" /></a></li>\n";
+echo"<li><a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\" /></a></li>\n";
 
 }
 ?>

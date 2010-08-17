@@ -24,6 +24,8 @@ $init->Settings(); // initialize DBAL and populate from config table
 $init->DBAL();
 $init->Settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
 $init->Settings('user_table',	$init->config['table_prefix'].'user');
+$init->Settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
+$init->Settings('cookie_hash',	hash('sha1', $init->config['base_url'].$init->config['system_seed']));
 
 // misc
 $init->Session();
@@ -60,7 +62,7 @@ if ($engine->config['rewrite_mode'] == false)
 
 if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
-	$engine->DeleteCookie('admin');
+	$engine->DeleteCookie('admin', true, true);
 	$engine->Log(1, $engine->GetTranslation('LogAdminLogout', $engine->config['language']));
 	$engine->Redirect(( $engine->config['ssl'] == true ? str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->href()) : $engine->href() ));
 	exit;
@@ -113,7 +115,7 @@ if (isset($_POST['password']))
 		$engine->SetSessionCookie('admin', hash('sha1', $_POST['password']), '', ( $engine->config['ssl'] == true ? 1 : 0 ));
 		$engine->Log(1, $engine->GetTranslation('LogAdminLoginSuccess', $engine->config['language']));
 		$_SESSION['LAST_ACTIVITY'] = time();
-		$engine->Redirect('admin.php');
+		$engine->Redirect(( $engine->config['ssl'] == true ? str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->href('admin.php')) : $engine->href('admin.php') ));
 	}
 	else
 	{
@@ -123,7 +125,7 @@ if (isset($_POST['password']))
 
 // check authorization
 $user = "";
-if (isset($_COOKIE[$engine->config["session_prefix"].'_'.$engine->config['cookie_prefix'].'admin']) && $_COOKIE[$engine->config["session_prefix"].'_'.$engine->config['cookie_prefix'].'admin'] == $pwd)
+if (isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']]) && $_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']] == $pwd)
 {
 	$user = array('user_name' => $engine->config['admin_name']);
 }
@@ -166,7 +168,7 @@ $engine->SetUser($user, 0);
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) //1800
 {
 	// last request was more than 15 minutes ago
-	$engine->DeleteCookie('admin');
+	$engine->DeleteCookie('admin', true, true);
 	$engine->Log(1, $engine->GetTranslation('LogAdminLogout', $engine->config['language']));
 
 	//session_destroy();   // destroy session data in storage

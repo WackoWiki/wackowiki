@@ -49,7 +49,7 @@ class Cache
 
 	function SQLCacheID($query)
 	{
-		return $this->cache_dir.CACHE_SQL_DIR.md5($query);
+		return $this->cache_dir.CACHE_SQL_DIR.hash('md5', $query);
 	}
 
 	//Get page content from cache
@@ -76,9 +76,9 @@ class Cache
 		$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", rawurldecode($page)))));
 
 		$this->Log("ConstructID page=".$page);
-		$this->Log("ConstructID md5=".md5($page."_".$method."_".$query));
+		$this->Log("ConstructID md5=".hash('md5', $page."_".$method."_".$query));
 
-		$filename = $this->cache_dir.CACHE_PAGE_DIR.md5($page."_".$method."_".$query);
+		$filename = $this->cache_dir.CACHE_PAGE_DIR.hash('md5', $page."_".$method."_".$query);
 		return $filename;
 	}
 
@@ -109,8 +109,8 @@ class Cache
 		file_put_contents($filename, $data);
 
 		if ($this->wacko) $this->wacko->Query(
-			"INSERT INTO ".$this->wacko->config["table_prefix"]."cache SET ".
-			"name  ='".quote($this->wacko->dblink, md5($page))."', ".
+			"INSERT INTO ".$this->wacko->config['table_prefix']."cache SET ".
+			"name  ='".quote($this->wacko->dblink, hash('md5', $page))."', ".
 			"method='".quote($this->wacko->dblink, $method)."', ".
 			"query ='".quote($this->wacko->dblink, $query)."'");
 			// TIMESTAMP type is filled automatically by MySQL
@@ -129,19 +129,19 @@ class Cache
 			$this->Log("CacheInvalidate page=".$page);
 			$this->Log("CacheInvalidate query=".
 				"SELECT * ".
-				"FROM ".$this->wacko->config["table_prefix"]."cache ".
-				"WHERE name ='".quote($this->wacko->dblink, md5($page))."'");
+				"FROM ".$this->wacko->config['table_prefix']."cache ".
+				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
 
 			$params = $this->wacko->LoadAll(
 				"SELECT * ".
-				"FROM ".$this->wacko->config["table_prefix"]."cache ".
-				"WHERE name ='".quote($this->wacko->dblink, md5($page))."'");
+				"FROM ".$this->wacko->config['table_prefix']."cache ".
+				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
 
 			$this->Log("CacheInvalidate count params=".count($params));
 
 			foreach ($params as $param)
 			{
-				$filename = $this->ConstructID($page, $param["method"], $param["query"]);
+				$filename = $this->ConstructID($page, $param['method'], $param['query']);
 
 				$this->Log("CacheInvalidate delete=".$filename);
 
@@ -150,8 +150,8 @@ class Cache
 			}
 
 			$this->wacko->Query(
-				"DELETE FROM ".$this->wacko->config["table_prefix"]."cache ".
-				"WHERE name ='".quote($this->wacko->dblink, md5($page))."'");
+				"DELETE FROM ".$this->wacko->config['table_prefix']."cache ".
+				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
 
 			$this->Log("CacheInvalidate end");
 
@@ -201,12 +201,12 @@ class Cache
 			$this->Log("CheckHttpRequest incache mtime=".$mtime);
 
 			$gmt = gmdate('D, d M Y H:i:s \G\M\T', $mtime);
-			$etag = (isset($_SERVER["HTTP_IF_NONE_MATCH"]) ? $_SERVER["HTTP_IF_NONE_MATCH"] : "");
-			$lastm = (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) ? $_SERVER["HTTP_IF_MODIFIED_SINCE"] : "");
+			$etag = (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? $_SERVER['HTTP_IF_NONE_MATCH'] : "");
+			$lastm = (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : "");
 
 			if ($p = strpos($lastm, ";")) $lastm = substr($lastm, 0, $p);
 
-			if ($_SERVER["REQUEST_METHOD"] == "GET") //may be we need HEAD support ???
+			if ($_SERVER['REQUEST_METHOD'] == "GET") //may be we need HEAD support ???
 			{
 				if (!$lastm && !$etag);
 				else if ($lastm && $gmt != $lastm);

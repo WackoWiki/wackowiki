@@ -13,9 +13,9 @@ if (!function_exists('links_tree_view'))
 
 			$pages = $wacko->LoadAll(
 				"SELECT to_tag ".
-				"FROM ".$wacko->config["table_prefix"]."link, ".$wacko->config["table_prefix"]."page ".
+				"FROM ".$wacko->config['table_prefix']."link, ".$wacko->config['table_prefix']."page ".
 				"WHERE from_tag='".quote($wacko->dblink, $node)."' ".
-					"AND ".$wacko->config["table_prefix"]."link.to_tag = ".$wacko->config["table_prefix"]."page.tag ".
+					"AND ".$wacko->config['table_prefix']."link.to_tag = ".$wacko->config['table_prefix']."page.tag ".
 				"ORDER BY to_tag ASC");
 
 			if (is_array($pages))
@@ -28,7 +28,7 @@ if (!function_exists('links_tree_view'))
 					$wacko->CachePage($page["to_tag"]);
 
 					// we don't want page from the header. we don't want root_page (!!!!!!!)
-					if ((!in_array($node, $head, TRUE) && $wacko->config["root_page"] != $node) || $indent == 0)
+					if ((!in_array($node, $head, TRUE) && $wacko->config['root_page'] != $node) || $indent == 0)
 					{
 						if ($wacko->HasAccess("read", $page["to_tag"]))
 						links_tree_view($wacko, $page["to_tag"], $level - 1, $indent + 1);
@@ -41,7 +41,7 @@ if (!function_exists('links_tree_view'))
 
 $root = (isset($vars[0]) ? $vars[0] : NULL);
 if ($root == "/") $root = "";
-if (!isset($root)) $root = $this->page["tag"];
+if (!isset($root)) $root = $this->page['tag'];
 $root = $this->UnwrapLink($root);
 
 if (!$nomark)

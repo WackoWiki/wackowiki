@@ -1,7 +1,7 @@
 <?php
 if(array_key_exists("wacko_version", $config))
 {
-	echo '<p>'.preg_replace(array("/%1/", "/%2/"), array($config["wacko_version"], WACKO_VERSION), $lang["UpgradeFromWacko"])."</p>\n";
+	echo '<p>'.preg_replace(array("/%1/", "/%2/"), array($config['wacko_version'], WACKO_VERSION), $lang["UpgradeFromWacko"])."</p>\n";
 	echo '<p>'.$lang["PleaseBackup"]."</p>\n";
 }
 else
@@ -42,7 +42,7 @@ foreach($lang_codes as $key => $value)
 			echo " checked=\"checked\" ";
 		}
 	}
-	elseif ( $config["language"] == $key )
+	elseif ( $config['language'] == $key )
 	{
 		echo " checked=\"checked\" ";
 	}

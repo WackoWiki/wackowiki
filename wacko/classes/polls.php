@@ -38,7 +38,7 @@ class Polls
 		$title = $this->engine->LoadSingle(
 			"SELECT p.poll_id, p.text, p.user_id, p.plural, p.votes, p.start, p.end, u.user_name ".
 			"FROM {$this->engine->config['table_prefix']}poll p ".
-				"LEFT JOIN {$this->engine->config["table_prefix"]}user u ON (p.user_id = u.user_id) ".
+				"LEFT JOIN {$this->engine->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
 			"WHERE p.poll_id = $id AND p.v_id = 0");
 		return $title;
 	}

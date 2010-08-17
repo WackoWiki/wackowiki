@@ -17,8 +17,8 @@ if (!function_exists('LoadUserBookmarks'))
 	{
 		$_bookmarks = $wacko->LoadAll(
 							"SELECT p.tag, p.title, b.bookmark_id, b.user_id, b.bm_title, b.lang, b.bm_position ".
-							"FROM ".$wacko->config["table_prefix"]."bookmark b ".
-								"LEFT JOIN ".$wacko->config["table_prefix"]."page p ON (b.page_id = p.page_id) ".
+							"FROM ".$wacko->config['table_prefix']."bookmark b ".
+								"LEFT JOIN ".$wacko->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
 							"WHERE b.user_id = '".quote($wacko->dblink, $user_id)."' ".
 							"ORDER BY b.bm_position", 0);
 
@@ -31,17 +31,17 @@ $user = $this->GetUser();
 /// Processing of our special form
 if (isset($_POST["_user_bookmarks"]))
 {
-	$_bookmarks = LoadUserBookmarks($this, $user["user_id"]);
+	$_bookmarks = LoadUserBookmarks($this, $user['user_id']);
 	$a = $_bookmarks;
 	$b = array();
 
 	foreach($a as $k=>$v)
 	{
-		$b[$k]["user_id"]		= $v["user_id"];
+		$b[$k]['user_id']		= $v['user_id'];
 		$b[$k]["bookmark_id"]	= $v["bookmark_id"];
 		$b[$k]["bm_position"]	= $v["bm_position"];
-		$b[$k]["bm_title"]		= $v["bm_title"];
-		$b[$k]["tag"]			= $v["tag"];
+		$b[$k]['bm_title']		= $v['bm_title'];
+		$b[$k]['tag']			= $v['tag'];
 	}
 	$object->data["user_menu"] = &$b;
 
@@ -58,7 +58,7 @@ if (isset($_POST["_user_bookmarks"]))
 		foreach( $data as $item )
 		{
 			$this->Query(
-				"UPDATE ".$this->config["table_prefix"]."bookmark SET ".
+				"UPDATE ".$this->config['table_prefix']."bookmark SET ".
 				"bm_position = '".quote($this->dblink, $item["bm_position"])."', ".
 				"bm_title = '".quote($this->dblink, substr($_POST["title_".$item["bookmark_id"]],0,250))."' ".
 				"WHERE bookmark_id = '".quote($this->dblink, $item["bookmark_id"])."' ".
@@ -78,18 +78,18 @@ if (isset($_POST["_user_bookmarks"]))
 			if ($deletion != "")
 			{
 				$this->Query(
-					"DELETE FROM ".$this->config["table_prefix"]."bookmark ".
+					"DELETE FROM ".$this->config['table_prefix']."bookmark ".
 					"WHERE bookmark_id IN (".$deletion.")");
 			}
 		}
 	}
 	// reload user data
-	$this->SetUser($this->LoadUser($user["user_name"]), 0, 1);
+	$this->SetUser($this->LoadUser($user['user_name']), 0, 1);
 	$this->SetBookmarks(BM_USER);
 }
 if ($user)
 {
-	$_bookmarks = LoadUserBookmarks($this, $user["user_id"]);
+	$_bookmarks = LoadUserBookmarks($this, $user['user_id']);
 
 	if ($_bookmarks)
 	{
@@ -108,17 +108,17 @@ if ($user)
 			<td class=\"\">
 			<input name=\"pos_".$_bookmark["bookmark_id"]."\" type=\"text\" size=\"2\" value=\"".$_bookmark["bm_position"]."\" />
 			</td><td>
-			<input name=\"title_".$_bookmark["bookmark_id"]."\" type=\"text\" size=\"40\" value=\"".$_bookmark["bm_title"]."\" />
+			<input name=\"title_".$_bookmark["bookmark_id"]."\" type=\"text\" size=\"40\" value=\"".$_bookmark['bm_title']."\" />
 			</td><td>
 			<!--<input type=\"radio\" id=\"bookmark".$_bookmark["bookmark_id"]."\" name=\"change\" value=\"".$_bookmark["bookmark_id"]."\" /> -->
-			<label for=\"bookmark".$_bookmark["bookmark_id"]."\" title=\"".$_bookmark["title"]."\">&raquo ".$_bookmark["tag"]."</label>
+			<label for=\"bookmark".$_bookmark["bookmark_id"]."\" title=\"".$_bookmark['title']."\">&raquo ".$_bookmark['tag']."</label>
 			</td><td>
 			<input id=\"bookmark".$_bookmark["bookmark_id"]."\" name=\"delete_".$_bookmark["bookmark_id"]."\" type=\"checkbox\" />
 			</td><!--<td>
 
-			".(!empty($_bookmark["bm_title"]) ? $_bookmark["bm_title"] : $_bookmark["title"])."
+			".(!empty($_bookmark['bm_title']) ? $_bookmark['bm_title'] : $_bookmark['title'])."
 			</td><td>
-			".(!empty($_bookmark["lang"]) ? $_bookmark["lang"] : "")."-->
+			".(!empty($_bookmark['lang']) ? $_bookmark['lang'] : "")."-->
 			</td>\n</tr>\n";
 		}
 		echo "<tfoot>";

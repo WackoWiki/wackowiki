@@ -36,7 +36,7 @@ if($user = $this->GetUser())
 			 If they are an Admin show them all users in all groups
 			 Else they are a normal logged in user so just show them groups they belong to
 			 */
-			if($this->IsAdmin() || in_array($user["user_name"], $arr))
+			if($this->IsAdmin() || in_array($user['user_name'], $arr))
 			{
 				print "<td valign=\"top\">";
 

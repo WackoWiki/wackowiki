@@ -6,7 +6,7 @@
  TODO: add COMMENT 'field description'
  */
 
-$pref = $config["table_prefix"];
+$pref = $config['table_prefix'];
 
 $table_acl = "CREATE TABLE {$pref}acl (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".

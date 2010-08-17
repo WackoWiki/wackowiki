@@ -1,7 +1,7 @@
 <div id="page" class="page">
 <?php
 
-if (!isset ($this->config["comments_count"])) $this->config["comments_count"] = 15;
+if (!isset ($this->config['comments_count'])) $this->config['comments_count'] = 15;
 
 if ($this->config['hide_rating'] != 1 && ($this->config["hide_rating"] != 2 || $this->GetUser()))
 {
@@ -18,7 +18,7 @@ if ($this->config['hide_rating'] != 1 && ($this->config["hide_rating"] != 2 || $
 }
 
 // redirect from comment page to the commented one
-if ($this->page["comment_on_id"])
+if ($this->page['comment_on_id'])
 {
 	// count previous comments
 	$count = $this->LoadSingle(
@@ -30,10 +30,10 @@ if ($this->page["comment_on_id"])
 		"LIMIT 1", 1);
 
 	// determine comments page number where this comment is located
-	$p = ceil($count["n"] / $this->config["comments_count"]);
+	$p = ceil($count["n"] / $this->config['comments_count']);
 
 	// forcibly open page
-	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page["comment_on_id"]), 'show_comments=1&p='.$p).'#'.$this->page['tag']);
+	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page['comment_on_id']), 'show_comments=1&p='.$p).'#'.$this->page['tag']);
 }
 
 // display page body
@@ -50,13 +50,13 @@ if ($this->HasAccess("read"))
 	else
 	{
 		// comment header?
-		if ($this->page["comment_on_id"])
+		if ($this->page['comment_on_id'])
 		{
-			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->GetCommentOnTag($this->page["comment_on_id"]), "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page["user_name"])?$this->Link($this->page["user_name"]):$this->page["user_name"])." ".$this->GetTranslation("At")." ".$this->GetTimeStringFormatted($this->page["modified"])."</div>");
+			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->GetCommentOnTag($this->page['comment_on_id']), "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page['user_name'])?$this->Link($this->page['user_name']):$this->page['user_name'])." ".$this->GetTranslation("At")." ".$this->GetTimeStringFormatted($this->page['modified'])."</div>");
 		}
 
 		// revision header
-		if ($this->page["latest"] == "0")
+		if ($this->page['latest'] == "0")
 		{
 			print("<div class=\"revisioninfo\">".
 			str_replace("%1",$this->href(),
@@ -71,9 +71,9 @@ if ($this->HasAccess("read"))
 				?>
 				<br />
 				<?php echo $this->FormOpen("edit") ?>
-				<input type="hidden" name="previous" value="<?php echo $latest["modified"] ?>" />
-				<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->page["page_id"]) ?>" />
-				<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page["body"]) ?>" />
+				<input type="hidden" name="previous" value="<?php echo $latest['modified'] ?>" />
+				<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->page['page_id']) ?>" />
+				<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page['body']) ?>" />
 				<input type="submit" value="<?php echo $this->GetTranslation("ReEditOldRevision") ?>" />
 				<input name="cancel" id="button" type="button" value="<?php echo $this->GetTranslation("EditCancelButton") ?>" onclick="document.location='<?php echo addslashes($this->href()) ?>';" />
 				<?php echo $this->FormClose(); ?>
@@ -84,42 +84,42 @@ if ($this->HasAccess("read"))
 		}
 
 		// count page hit (we don't count for page owner)
-		if ($this->GetUserId() != $this->page["owner_id"])
+		if ($this->GetUserId() != $this->page['owner_id'])
 		{
 			$this->Query(
-				"UPDATE ".$this->config["table_prefix"]."page ".
+				"UPDATE ".$this->config['table_prefix']."page ".
 				"SET hits = hits + 1 ".
-				"WHERE page_id = '".quote($this->dblink, $this->page["page_id"])."'");
+				"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."'");
 		}
 
 		$this->SetLanguage($this->pagelang);
 
 		// recompile if necessary
-		if (($this->page["body_r"] == "") ||
-		(($this->page["body_toc"] == "") && $this->config["paragrafica"]))
+		if (($this->page['body_r'] == "") ||
+		(($this->page['body_toc'] == "") && $this->config['paragrafica']))
 		{
 			// build html body
-			$this->page["body_r"] = $this->Format($this->page["body"], "wacko");
+			$this->page['body_r'] = $this->Format($this->page['body'], "wacko");
 
 			// build toc
-			if ($this->config["paragrafica"])
+			if ($this->config['paragrafica'])
 			{
-				$this->page["body_r"]   = $this->Format($this->page["body_r"], "paragrafica");
-				$this->page["body_toc"] = $this->body_toc;
+				$this->page['body_r']   = $this->Format($this->page['body_r'], "paragrafica");
+				$this->page['body_toc'] = $this->body_toc;
 			}
 
 			// store to DB
-			if ($this->page["latest"] != "0")
+			if ($this->page['latest'] != "0")
 				$this->Query(
-					"UPDATE ".$this->config["table_prefix"]."page SET ".
-						"body_r = '".quote($this->dblink, $this->page["body_r"])."', ".
-						"body_toc = '".quote($this->dblink, $this->page["body_toc"])."' ".
-					"WHERE page_id = '".quote($this->dblink, $this->page["page_id"])."' ".
+					"UPDATE ".$this->config['table_prefix']."page SET ".
+						"body_r = '".quote($this->dblink, $this->page['body_r'])."', ".
+						"body_toc = '".quote($this->dblink, $this->page['body_toc'])."' ".
+					"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
 					"LIMIT 1");
 		}
 
 		// display page
-		$data = $this->Format($this->page["body_r"], "post_wacko", array("bad" => "good"));
+		$data = $this->Format($this->page['body_r'], "post_wacko", array("bad" => "good"));
 		$data = $this->NumerateToc( $data ); //  numerate toc if needed
 		echo $data;
 
@@ -147,32 +147,32 @@ else
 if ($this->page)
 {
 	// files code starts
-	if ($this->config["footer_files"])
+	if ($this->config['footer_files'])
 	{
 
-		if ($this->HasAccess("read") && $this->config["hide_files"] != 1 && ($this->config["hide_files"] != 2 || $this->GetUser()))
+		if ($this->HasAccess("read") && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->GetUser()))
 		{
 
 			// store files display in session
 			$tag = $this->tag;
-			if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag]))
-			$_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
+			if (!isset($_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag]))
+			$_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
 
-			if(isset($_GET["show_files"]))
+			if(isset($_GET['show_files']))
 			{
-				switch($_GET["show_files"])
+				switch($_GET['show_files'])
 				{
 					case "0":
-						$_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = 0;
+						$_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag] = 0;
 						break;
 					case "1":
-						$_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag] = 1;
+						$_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag] = 1;
 						break;
 				}
 			}
 
 			// display files!
-			if ($this->page && $_SESSION[$this->config["session_prefix"].'_'."show_files"][$tag])
+			if ($this->page && $_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag])
 			{
 				// display files header
 				?>
@@ -197,8 +197,8 @@ if ($this->page)
 			if (isset($registered)
 				&&
 					(
-						($this->config["upload"] === true) || ($this->config["upload"] == "1") ||
-						($this->CheckACL($user,$this->config["upload"]))
+						($this->config['upload'] === true) || ($this->config['upload'] == "1") ||
+						($this->CheckACL($user,$this->config['upload']))
 					)
 				)
 			{
@@ -211,13 +211,13 @@ if ($this->page)
 		{
 			echo "<div id=\"filesheader\">";
 
-			if ($this->page["page_id"])
+			if ($this->page['page_id'])
 			{
 				// load files for this page
 				$files = $this->LoadAll(
 					"SELECT upload_id ".
-					"FROM ".$this->config["table_prefix"]."upload ".
-					"WHERE page_id = '". quote($this->dblink, $this->page["page_id"]) ."'");
+					"FROM ".$this->config['table_prefix']."upload ".
+					"WHERE page_id = '". quote($this->dblink, $this->page['page_id']) ."'");
 			}
 			else
 			{
@@ -246,35 +246,35 @@ if ($this->page)
 	if ($this->config["footer_comments"])
 	{
 	// pagination
-	$pagination = $this->Pagination($this->GetCommentsCount(), $this->config["comments_count"], 'p', 'show_comments=1#comments');
+	$pagination = $this->Pagination($this->GetCommentsCount(), $this->config['comments_count'], 'p', 'show_comments=1#comments');
 
 	// comments form output begins
 
-		if ($this->HasAccess("read") && $this->config["hide_comments"] != 1 && ($this->config["hide_comments"] != 2 || $this->GetUser()))
+		if ($this->HasAccess("read") && $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->GetUser()))
 		{
 			// load comments for this page
-			$comments = $this->LoadComments($this->page["page_id"], $pagination['offset'], $this->config["comments_count"]);
+			$comments = $this->LoadComments($this->page['page_id'], $pagination['offset'], $this->config['comments_count']);
 
 			// store comments display in session
 			$tag = $this->tag;
-			if (!isset($_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag]))
-			$_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
+			if (!isset($_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag]))
+			$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
 
-			if(isset($_GET["show_comments"]))
+			if(isset($_GET['show_comments']))
 			{
-				switch($_GET["show_comments"])
+				switch($_GET['show_comments'])
 				{
 					case "0":
-						$_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = 0;
+						$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag] = 0;
 						break;
 					case "1":
-						$_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag] = 1;
+						$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag] = 1;
 						break;
 				}
 			}
 
 			// display comments!
-			if ($this->page && $_SESSION[$this->config["session_prefix"].'_'."show_comments"][$tag])
+			if ($this->page && $_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag])
 			{
 				// display comments header
 				?>
@@ -293,29 +293,29 @@ if ($this->page)
 
 				foreach ($comments as $comment)
 				{
-					echo "<li id=\"".$comment["tag"]."\" class=\"comment\">\n";
+					echo "<li id=\"".$comment['tag']."\" class=\"comment\">\n";
 					$del = "";
-					if ($this->IsAdmin() || $this->UserIsOwner($comment["page_id"]) || ($this->config["owners_can_remove_comments"] && $this->UserIsOwner($this->page["page_id"])))
+					if ($this->IsAdmin() || $this->UserIsOwner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->UserIsOwner($this->page['page_id'])))
 					{
-						print("<a href=\"".$this->href("remove", $comment["tag"])."\"><img src=\"".$this->config["theme_url"]."icons/delete_comment.gif\" title=\"".$this->GetTranslation("DeleteCommentTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" align=\"right\" border=\"0\" /></a>");
-						print("<a href=\"".$this->href("edit", $comment["tag"])."\"><img src=\"".$this->config["theme_url"]."icons/edit.gif\" title=\"".$this->GetTranslation("EditCommentTip")."\" alt=\"".$this->GetTranslation("EditComment")."\" align=\"right\" border=\"0\" /></a>");
+						print("<a href=\"".$this->href("remove", $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/delete_comment.gif\" title=\"".$this->GetTranslation("DeleteCommentTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" align=\"right\" border=\"0\" /></a>");
+						print("<a href=\"".$this->href("edit", $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/edit.gif\" title=\"".$this->GetTranslation("EditCommentTip")."\" alt=\"".$this->GetTranslation("EditComment")."\" align=\"right\" border=\"0\" /></a>");
 					}
-					if ($comment["body_r"]) $strings = $comment["body_r"];
+					if ($comment['body_r']) $strings = $comment['body_r'];
 
-					else $strings = $this->Format($comment["body"], "wacko");
+					else $strings = $this->Format($comment['body'], "wacko");
 					echo "<div class=\"commenttext\">\n";
-					print("<div class=\"commenttitle\">\n<a href=\"".$this->href("", "", "show_comments=1")."#".$comment["tag"]."\">".$comment["title"]."</a>\n</div>\n");
+					print("<div class=\"commenttitle\">\n<a href=\"".$this->href("", "", "show_comments=1")."#".$comment['tag']."\">".$comment['title']."</a>\n</div>\n");
 					print($this->Format($strings,"post_wacko")."\n");
 					echo "</div>\n";
 					print("<ul class=\"commentinfo\">\n".
-								"<li>".($comment["user"]
-										? ($this->IsWikiName($comment["user"])
-											? $this->Link("/".$comment["user"],"",$comment["user"])
-											: $comment["user"])."</li>\n"
+								"<li>".($comment['user']
+										? ($this->IsWikiName($comment['user'])
+											? $this->Link("/".$comment['user'],"",$comment['user'])
+											: $comment['user'])."</li>\n"
 										: $this->GetTranslation("Guest")).
-								"<li>".$this->GetTimeStringFormatted($comment["created"])."</li>\n".
-								($comment["modified"] != $comment["created"]
-									? "<li>".$this->GetTimeStringFormatted($comment["modified"])." ".$this->GetTranslation("CommentEdited")."</li>\n"
+								"<li>".$this->GetTimeStringFormatted($comment['created'])."</li>\n".
+								($comment['modified'] != $comment['created']
+									? "<li>".$this->GetTimeStringFormatted($comment['modified'])." ".$this->GetTranslation("CommentEdited")."</li>\n"
 									: "").
 							"</ul>\n");
 					echo "</li>";
@@ -357,7 +357,7 @@ if ($this->page)
 		<br />
 		<label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
 		<br />
-		<img src="<?php echo $this->config["base_url"];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->config["base_url"];?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
+		<img src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->config['base_url'];?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
 		<br />
 		<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
 		<br />

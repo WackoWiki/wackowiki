@@ -10,6 +10,8 @@
 	}}
  */
 
+$page_id = "";
+
 if (!isset($nomark)) $nomark = "";
 if (!isset($order)) $order = "";
 if (!isset($global)) $global = "";
@@ -56,14 +58,14 @@ if ($can_view)
 	if ($global || ($tag == $page)) $filepage = $this->page;
 	else $filepage = $this->LoadPage($page);
 
-	if (!$global && !$filepage["page_id"]) return;
+	if (!$global && !$filepage['page_id']) return;
 
 	// load files list
 	$files = $this->LoadAll(
 		"SELECT f.upload_id, f.page_id, f.user_id, f.filesize, f.picture_w, f.picture_h, f.filename, f.description, f.uploaded_dt, u.user_name AS user, f.hits ".
-		"FROM ".$this->config["table_prefix"]."upload f ".
-			"INNER JOIN ".$this->config["table_prefix"]."user u ON (f.user_id = u.user_id) ".
-		"WHERE f.page_id = '". ($global ? 0 : $filepage["page_id"])."' ".$user_add.
+		"FROM ".$this->config['table_prefix']."upload f ".
+			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".$user_add.
 		" ORDER BY f.".$orderby );
 
 	if (!is_array($files)) $files = array();
@@ -77,7 +79,7 @@ if ($can_view)
 	// display
 	$del = $this->GetTranslation("UploadRemove");
 
-	if (!$global)	$path = "@".$filepage["page_id"]."@";
+	if (!$global)	$path = "@".$filepage['page_id']."@";
 	else			$path = "";
 
 	if (!$global) 	$path2 = "file:/".($this->SlimUrl($page))."/";
@@ -95,15 +97,15 @@ if ($can_view)
 
 	foreach($files as $file)
 	{
-		$this->filesCache[$file["page_id"]][$file["filename"]] = &$file;
+		$this->filesCache[$file['page_id']][$file["filename"]] = &$file;
 
 		$dt = $file["uploaded_dt"];
-		$desc = $this->Format($file["description"], "typografica" );
+		$desc = $this->Format($file['description'], "typografica" );
 
 		if ($desc == "") $desc = "&nbsp;";
 
 		$filename	= $file["filename"];
-		$filesize	= $this->binary_multiples($file["filesize"], true, true, true);
+		$filesize	= $this->binary_multiples($file['filesize'], true, true, true);
 		$fileext	= substr($filename, strrpos($filename, ".") + 1);
 		$link		= $this->Link($path2.$filename, "", $filename);
 
@@ -118,7 +120,7 @@ if ($can_view)
 
 		if ($this->IsAdmin() || (!isset($is_global) &&
 		($this->GetPageOwnerId($page_id) == $this->GetUserId())) ||
-		($file["user_id"] == $this->GetUserId()))
+		($file['user_id'] == $this->GetUserId()))
 		{
 			$remove_mode = 1;
 		}

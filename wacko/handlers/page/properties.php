@@ -10,13 +10,13 @@ if (!$this->page)
 
 // deny for comment
 if ($this->page['comment_on_id'])
-	$this->Redirect($this->href('', $this->GetCommentOnTag($this->page["comment_on_id"]), 'show_comments=1').'#'.$this->page['tag']);
+	$this->Redirect($this->href('', $this->GetCommentOnTag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
 
 // and for forum page
 else if ($this->forum === true && !$this->IsAdmin())
 	$this->Redirect($this->href());
 
-if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this->page["page_id"]))
+if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this->page['page_id']))
 {
 	if ($_POST)
 	{
@@ -28,7 +28,7 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this-
 
 		// update page metadata
 		$this->Query(
-			"UPDATE ".$this->config["table_prefix"]."page SET ".
+			"UPDATE ".$this->config['table_prefix']."page SET ".
 				(isset($_POST['extended'])
 				?	"hide_comments		= '".quote($this->dblink, (int)$_POST['hide_comments'])."', ".
 					"hide_files			= '".quote($this->dblink, (int)$_POST['hide_files'])."', ".
@@ -42,16 +42,16 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this-
 					"allow_rawhtml		= '".quote($this->dblink, $allow_rawhtml)."', ".
 					"disable_safehtml	= '".quote($this->dblink, $disable_safehtml)."', ".
 					"noindex			= '".quote($this->dblink, (int)$_POST['noindex'])."' "
-				: 	"lang				= '".quote($this->dblink, $_POST["lang"])."', ".
-					"title				= '".quote($this->dblink, htmlspecialchars($_POST["title"]))."', ".
-					"keywords			= '".quote($this->dblink, htmlspecialchars($_POST["keywords"]))."', ".
-					"description		= '".quote($this->dblink, htmlspecialchars($_POST["description"]))."' "
+				: 	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
+					"title				= '".quote($this->dblink, htmlspecialchars($_POST['title']))."', ".
+					"keywords			= '".quote($this->dblink, htmlspecialchars($_POST['keywords']))."', ".
+					"description		= '".quote($this->dblink, htmlspecialchars($_POST['description']))."' "
 				).
-			"WHERE page_id = '".quote($this->dblink, $this->page["page_id"])."' ".
+			"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
 			"LIMIT 1");
 
 		// log event
-		$this->Log(4, str_replace("%1", $this->tag." ".(isset($_POST["title"]) ? $_POST["title"] : ""), $this->GetTranslation("LogPageMetaUpdated", $this->config["language"])));
+		$this->Log(4, str_replace("%1", $this->tag." ".(isset($_POST['title']) ? $_POST['title'] : ""), $this->GetTranslation("LogPageMetaUpdated", $this->config['language'])));
 
 		// reload page
 		$this->SetMessage($this->GetTranslation("MetaUpdated")."!");
@@ -199,24 +199,24 @@ if ($this->UserIsOwner() || $this->IsAdmin() || $this->HasAccess("write", $this-
 			?> <?php echo "<tr class=\"lined\">"; ?>
 <th class="form_left" scope="row"><label for="title"><?php echo $this->GetTranslation("MetaTitle"); ?></label></th>
 <td class="form_right"><input id="title" name="title"
-	value="<?php echo $this->page["title"] ?>" size="60" maxlength="100" /></td>
+	value="<?php echo $this->page['title'] ?>" size="60" maxlength="100" /></td>
 
 			<?php echo "</tr>\n<tr class=\"lined\">"; ?>
 <th class="form_left" scope="row"><label for="keywords"><?php echo $this->GetTranslation("MetaKeywords"); ?></label></th>
 <td class="form_right"><textarea id="keywords" name="keywords" rows="4"
-	cols="51"><?php echo $this->page["keywords"] ?></textarea></td>
+	cols="51"><?php echo $this->page['keywords'] ?></textarea></td>
 
 			<?php echo "</tr>\n<tr class=\"lined\">"; ?>
 <th class="form_left" scope="row"><label for="description"><?php echo $this->GetTranslation("MetaDescription"); ?></label></th>
 <td class="form_right"><textarea id="description" name="description"
-	rows="4" cols="51"><?php echo $this->page["description"] ?></textarea></td>
+	rows="4" cols="51"><?php echo $this->page['description'] ?></textarea></td>
 
 			<?php echo "</tr>\n<tr class=\"lined\">"; ?>
 <th class="form_left" scope="row"><label for="lang"><?php echo $this->GetTranslation("SetLang"); ?></label></th>
 <td class="form_right"><select id="lang" name="lang">
 <?php
-if (!($clang = $this->page["lang"]))
-$clang = $this->config["language"];
+if (!($clang = $this->page['lang']))
+$clang = $this->config['language'];
 
 if ($langs = $this->AvailableLanguages())
 {
@@ -246,16 +246,16 @@ if ($langs = $this->AvailableLanguages())
 
 			echo "<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation("MetaTitle")."</th>";
-			echo "<td class=\"form_right\">".$this->page["title"]."</td>";
+			echo "<td class=\"form_right\">".$this->page['title']."</td>";
 			echo "</tr>\n<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation("MetaKeywords")."</th>";
-			echo "<td class=\"form_right\">".$this->page["keywords"]."</td>";
+			echo "<td class=\"form_right\">".$this->page['keywords']."</td>";
 			echo "</tr>\n<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation("MetaDescription")."</th>";
-			echo "<td class=\"form_right\">".$this->page["description"]."</td>";
+			echo "<td class=\"form_right\">".$this->page['description']."</td>";
 			echo "</tr>\n<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation("SetLang")."</th>";
-			echo "<td class=\"form_right\">".$this->page["lang"]."</td>";
+			echo "<td class=\"form_right\">".$this->page['lang']."</td>";
 
 		}
 		echo "</tr>\n</table>";
@@ -270,7 +270,7 @@ if ($langs = $this->AvailableLanguages())
 	echo "<td class=\"form_right\">".$this->page['page_id']."</td>";
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('Owner')."</th>";
-	echo "<td class=\"form_right\">"."<a href=\"".$this->href("", $this->config["users_page"], "profile=".$this->page["owner_name"])."\">".$this->page["owner_name"]."</a>"."</td>";
+	echo "<td class=\"form_right\">"."<a href=\"".$this->href("", $this->config['users_page'], "profile=".$this->page['owner_name'])."\">".$this->page['owner_name']."</a>"."</td>";
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->GetTranslation('SettingsCreated')."</th>";
 	echo "<td class=\"form_right\">".$this->GetTimeStringFormatted($this->page['created'])."</td>";
@@ -317,7 +317,7 @@ if ($langs = $this->AvailableLanguages())
 	}
 	?>
 	<?php // Remove link (shows only for page owner if allowed)
-	if ($this->UserIsOwner() && !$this->config["remove_onlyadmins"] || $this->IsAdmin())
+	if ($this->UserIsOwner() && !$this->config['remove_onlyadmins'] || $this->IsAdmin())
 	{
 		echo("<li><a href=\"".$this->href("remove")."\">".$this->GetTranslation("SettingsRemove")."</a></li>\n");
 		echo("<li><a href=\"".$this->href("purge")."\">".$this->GetTranslation("SettingsPurge")."</a></li>\n");

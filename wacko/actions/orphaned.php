@@ -4,7 +4,7 @@ if (!function_exists('LoadOrphanedPages'))
 {
 	function LoadOrphanedPages(&$engine, $for = "")
 	{
-		$pref = $engine->config["table_prefix"];
+		$pref = $engine->config['table_prefix'];
 		$sql = "SELECT DISTINCT page_id, tag FROM ".$pref."page p ".
 			"LEFT JOIN ".$pref."link l ON ".
 			"((l.to_tag = p.tag ".
@@ -23,7 +23,7 @@ if (!function_exists('LoadOrphanedPages'))
 	}
 }
 
-if (!isset($root)) $root = $this->page["tag"];
+if (!isset($root)) $root = $this->page['tag'];
 else $root = $this->UnwrapLink($root);
 
 if ($pages = LoadOrphanedPages($this, $root))
@@ -32,9 +32,9 @@ if ($pages = LoadOrphanedPages($this, $root))
 	//!!!! unoptimized
 	if (is_array($pages))
 	foreach ($pages as $page)
-	if (!$this->config["hide_locked"] || $this->HasAccess("read",$page["page_id"]))
+	if (!$this->config['hide_locked'] || $this->HasAccess("read",$page['page_id']))
 	{
-		print("<li>".$this->Link("/".$page["tag"], "", "", 0)."</li>\n");
+		print("<li>".$this->Link("/".$page['tag'], "", "", 0)."</li>\n");
 	}
 	echo "</ol>\n";
 }
