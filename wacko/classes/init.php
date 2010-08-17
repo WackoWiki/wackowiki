@@ -93,7 +93,7 @@ class Init
 			$this->ParseMQ($_REQUEST);
 		}
 
-		if (strstr($_SERVER["SERVER_SOFTWARE"], "IIS")) $_SERVER["REQUEST_URI"] = $_SERVER["PATH_INFO"];
+		if (strstr($_SERVER['SERVER_SOFTWARE'], "IIS")) $_SERVER['REQUEST_URI'] = $_SERVER['PATH_INFO'];
 	}
 
 	// INT TIMER
@@ -182,10 +182,10 @@ class Init
 						require("config/config.inc.php");
 						$this->config = $wackoConfig;
 
-						if ($wackoConfig["wacko_version"] != "R4.3.rc" && (!$wackoConfig["system_seed"] || strlen($wackoConfig["system_seed"]) < 20))
+						if ($wackoConfig['wacko_version'] != "R4.3.rc" && (!$wackoConfig['system_seed'] || strlen($wackoConfig['system_seed']) < 20))
 							die("WackoWiki fatal error: system_seed in config.inc.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
 
-						$wackoConfig["system_seed"]	= hash('sha1', $wackoConfig["system_seed"]);
+						$wackoConfig['system_seed']	= hash('sha1', $wackoConfig['system_seed']);
 					}
 					else
 					{
@@ -207,12 +207,12 @@ class Init
 				$this->DBAL();
 
 				// retrieving configuration data
-				 $wackoDBQuery = "SELECT config_name, value FROM {$this->config["table_prefix"]}config";
+				 $wackoDBQuery = "SELECT config_name, value FROM {$this->config['table_prefix']}config";
 				if ($result = query($this->dblink, $wackoDBQuery , 0))
 				{
 					while ($row = fetch_assoc($result))
 					{
-						$this->config[$row["config_name"]] = $row["value"];
+						$this->config[$row['config_name']] = $row['value'];
 					}
 					free_result($result);
 				}
@@ -226,9 +226,9 @@ class Init
 									g.group_name,
 									u.user_name
 								FROM
-									{$this->config["table_prefix"]}group_member gm
-									INNER JOIN {$this->config["table_prefix"]}user u ON (gm.user_id = u.user_id)
-									INNER JOIN {$this->config["table_prefix"]}group g ON (gm.group_id = g.group_id)";
+									{$this->config['table_prefix']}group_member gm
+									INNER JOIN {$this->config['table_prefix']}user u ON (gm.user_id = u.user_id)
+									INNER JOIN {$this->config['table_prefix']}group g ON (gm.group_id = g.group_id)";
 
 				$groups_array = array();
 
@@ -260,7 +260,7 @@ class Init
 						// when we make trim($users, '\n') we get UserName1\nUserName2 without trailing '\n'
 						// Made so to prevent system from trimming 'n\n' (like TestMan\n ->  TestMa)
 						$trimone = rtrim($users,'n');
-						$this->config["aliases"][$group] = trim($trimone,'\\');
+						$this->config['aliases'][$group] = trim($trimone,'\\');
 					}
 
 				}
@@ -282,16 +282,16 @@ class Init
 		if ($this->config == false) die("Error processing request: WackoWiki config data must be initialized.");
 
 		// fetch wacko location
-		if (isset($_SERVER["PATH_INFO"]) && function_exists("virtual"))
-			$this->request = $_SERVER["PATH_INFO"];
+		if (isset($_SERVER['PATH_INFO']) && function_exists("virtual"))
+			$this->request = $_SERVER['PATH_INFO'];
 		else
-			$this->request = @$_REQUEST["page"];
+			$this->request = @$_REQUEST['page'];
 
 		// fix win32 apache 1 bug
-		if (stristr($_SERVER["SERVER_SOFTWARE"], "Apache/1") && stristr($_SERVER["SERVER_SOFTWARE"], "Win32") && $this->config["rewrite_mode"])
+		if (stristr($_SERVER['SERVER_SOFTWARE'], "Apache/1") && stristr($_SERVER['SERVER_SOFTWARE'], "Win32") && $this->config['rewrite_mode'])
 		{
-			$dir			= str_replace("http://".$_SERVER["SERVER_NAME"].($_SERVER["SERVER_PORT"] != 80 ? ":".$_SERVER["SERVER_PORT"] : ""), "", $this->config["base_url"]);
-			$this->request	= preg_replace("+^".preg_quote(rtrim($dir,"/"))."+i", "", $_SERVER["REDIRECT_URL"]);//$request);
+			$dir			= str_replace("http://".$_SERVER['SERVER_NAME'].($_SERVER['SERVER_PORT'] != 80 ? ":".$_SERVER['SERVER_PORT'] : ""), "", $this->config['base_url']);
+			$this->request	= preg_replace("+^".preg_quote(rtrim($dir,"/"))."+i", "", $_SERVER['REDIRECT_URL']);//$request);
 		}
 
 		// remove leading slash
@@ -310,12 +310,12 @@ class Init
 			$this->page			= substr($this->request, 0, $p);
 			$m1	= $this->method = strtolower(substr($this->request, $p - strlen($this->request) + 1));
 
-			if (!@file_exists($this->config["handler_path"]."/page/".$this->method.".php"))
+			if (!@file_exists($this->config['handler_path']."/page/".$this->method.".php"))
 			{
 				$this->page		= $this->request;
 				$this->method	= "";
 			}
-			else if (preg_match("/^(.*?)\/(".$this->config["standard_handlers"].")($|\/(.*)$)/i", $this->page, $match))
+			else if (preg_match("/^(.*?)\/(".$this->config['standard_handlers'].")($|\/(.*)$)/i", $this->page, $match))
 			{
 				//translit case
 				$this->page		= $match[1];
@@ -328,9 +328,12 @@ class Init
 	// SESSION HANDLING
 	function Session()
 	{
-		if ($this->config["ssl"] == true) session_set_cookie_params(0, "/", "", true);
+		$_cookie_path = $this->config['cookie_path'];
+		echo "#################".$_cookie_path;
+		($this->config['ssl'] == true ? $secure = true : $secure = false );
 
-		session_name(SESSION_HANDLER_ID);
+		session_set_cookie_params(0, $_cookie_path, "", $secure, true);
+		session_name($this->config['cookie_prefix'].SESSION_HANDLER_ID);
 
 		// Save session information where specified or with PHP's default
 		session_save_path(SESSION_HANDLER_PATH);
@@ -352,9 +355,9 @@ class Init
 		if ($this->config == false) die("Error loading WackoWiki DBAL: config data must be initialized.");
 
 		// Load the correct database connector
-		if (!isset( $this->config["database_driver"] )) $this->Settings("database_driver", "mysql_legacy");
+		if (!isset( $this->config['database_driver'] )) $this->Settings("database_driver", "mysql_legacy");
 
-		switch($this->config["database_driver"])
+		switch($this->config['database_driver'])
 		{
 			case "mysql_pdo":
 				$dbfile = "db/pdo.php";
@@ -374,9 +377,9 @@ class Init
 			die("Error loading WackoWiki DBAL: file ".$dbfile." not found.");
 
 		// connect to DB
-		if ($dbname == false) $dbname = $this->config["database_database"];
+		if ($dbname == false) $dbname = $this->config['database_database'];
 
-		$this->dblink = connect($this->config["database_host"], $this->config["database_user"], $this->config["database_password"], $this->config["database_database"], $this->config["database_collation"], $this->config["database_driver"], $this->config["database_port"]);
+		$this->dblink = connect($this->config['database_host'], $this->config['database_user'], $this->config['database_password'], $this->config['database_database'], $this->config['database_collation'], $this->config['database_driver'], $this->config['database_port']);
 
 		if ($this->dblink)
 			return $this->dblink;
@@ -407,14 +410,14 @@ class Init
 	function Installer()
 	{
 		// compare versions, start installer if necessary
-		if (!isset($this->config["wacko_version"]) || $this->config["wacko_version"] != WACKO_VERSION)
+		if (!isset($this->config['wacko_version']) || $this->config['wacko_version'] != WACKO_VERSION)
 		{
-			if (!isset($_REQUEST["installAction"]) && !strstr($_SERVER["SERVER_SOFTWARE"], "IIS"))
+			if (!isset($_REQUEST['installAction']) && !strstr($_SERVER['SERVER_SOFTWARE'], "IIS"))
 			{
-				$req = $_SERVER["REQUEST_URI"];
+				$req = $_SERVER['REQUEST_URI'];
 				if ($req{strlen($req) - 1} != "/" && strstr($req, ".php") != ".php")
 				{
-					header("Location: http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]."/");
+					header("Location: http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']."/");
 					exit;
 				}
 			}
@@ -423,7 +426,7 @@ class Init
 			global $config;
 			$config = $this->config;
 
-			if (!$installAction = trim($_REQUEST["installAction"])) $installAction = "lang";
+			if (!$installAction = trim($_REQUEST['installAction'])) $installAction = "lang";
 			include("setup/header.php");
 
 			if (@file_exists("setup/".$installAction.".php"))
@@ -451,13 +454,13 @@ class Init
 		if ($this->cache == false || $op == false)
 		{
 			require("classes/cache.php");
-			return $this->cache = new Cache($this->config["cache_dir"], $this->config["cache_ttl"]);
+			return $this->cache = new Cache($this->config['cache_dir'], $this->config['cache_ttl']);
 		}
 		else if ($this->cache == true && $op == "check")
 		{
-			if ($this->config["cache"] && $_SERVER["REQUEST_METHOD"] != "POST" && $this->method != "edit" && $this->method != "watch")
+			if ($this->config['cache'] && $_SERVER['REQUEST_METHOD'] != "POST" && $this->method != "edit" && $this->method != "watch")
 			{
-				if (!isset($_COOKIE[$this->config["session_prefix"].'_'.$this->config["cookie_prefix"]."auth"]))	// anonymous user
+				if (!isset($_COOKIE[$this->config['cookie_prefix']."auth".$this->config['cookie_hash']]))	// anonymous user
 				{
 					return $this->cacheval = $this->cache->CheckHttpRequest($this->page, $this->method);
 				}
@@ -473,7 +476,7 @@ class Init
 		}
 		else if ($this->cache == true && $op == "log")
 		{
-			return $this->cache->Log("Before Run WackoWiki=".$this->engine->config["wacko_version"]);
+			return $this->cache->Log("Before Run WackoWiki=".$this->engine->config['wacko_version']);
 		}
 		else
 		{
@@ -514,7 +517,7 @@ class Init
 		}
 		else if ($this->engine == true && $op == "res")
 		{
-			if ($lang == false) $lang = $this->config["language"];
+			if ($lang == false) $lang = $this->config['language'];
 
 			$this->engine->LoadAllLanguages();
 			$this->engine->LoadResource($lang);
@@ -531,9 +534,9 @@ class Init
 	// DEBUG INFO
 	function Debug()
 	{
-		if ($this->config["debug"] >= 1 && strpos($this->method, ".xml") === false && $this->method != "print" && $this->method != "msword")
+		if ($this->config['debug'] >= 1 && strpos($this->method, ".xml") === false && $this->method != "print" && $this->method != "msword")
 		{
-			if (($this->config["debug_admin_only"] == true && $this->engine->IsAdmin() === true) || $this->config["debug_admin_only"] == false)
+			if (($this->config['debug_admin_only'] == true && $this->engine->IsAdmin() === true) || $this->config['debug_admin_only'] == false)
 			{
 				$overall_time = $this->GetMicroTime() - $this->timer;
 
@@ -545,24 +548,24 @@ class Init
 
 				echo "<li>Overall time taken: ".(number_format(($overall_time), 3))." sec. </li>\n";
 
-				if ($this->config["debug"] >= 2)
+				if ($this->config['debug'] >= 2)
 				{
 					echo "<li>Execution time: ".number_format($overall_time - $this->engine->queryTime, 3)." sec.</li>\n";
 					echo "<li>SQL time: ".number_format($this->engine->queryTime, 3)." sec.</li>\n";
 				}
 
-				if ($this->config["debug"] >= 3)
+				if ($this->config['debug'] >= 3)
 				{
 					echo "<li>SQL queries: ".count($this->engine->queryLog)."</li>\n";
-					echo "<li>SQL queries dump follows".( $this->config["debug_sql_threshold"] > 0 ? " (&gt;".$this->config["debug_sql_threshold"]." sec.)" : "" ).":<ol>\n";
+					echo "<li>SQL queries dump follows".( $this->config['debug_sql_threshold'] > 0 ? " (&gt;".$this->config['debug_sql_threshold']." sec.)" : "" ).":<ol>\n";
 
 					foreach ($this->engine->queryLog as $query)
 					{
-						if ($query["time"] < $this->config["debug_sql_threshold"]) continue;
+						if ($query['time'] < $this->config['debug_sql_threshold']) continue;
 
 						echo "<li>";
-						echo str_replace(array("<", ">"), array("&lt;", "&gt;"), $query["query"])."<br />";
-						echo "[".number_format($query["time"], 4)." sec.]";
+						echo str_replace(array("<", ">"), array("&lt;", "&gt;"), $query['query'])."<br />";
+						echo "[".number_format($query['time'], 4)." sec.]";
 						echo "</li>\n";
 					}
 
@@ -570,17 +573,17 @@ class Init
 				}
 				echo "</ul>\n";
 
-				if ($this->config["debug"] >= 2)
+				if ($this->config['debug'] >= 2)
 				{
 					$user = $this->engine->GetUser();
 					echo "<p class=\"debug\">Language data</p>\n<ul>\n";
-					echo "<li>Multilanguage: ".($this->config["multilanguage"] == 1 ? 'true' : 'false')."</li>\n";
+					echo "<li>Multilanguage: ".($this->config['multilanguage'] == 1 ? 'true' : 'false')."</li>\n";
 					echo "<li>HTTP_ACCEPT_LANGUAGE set: ".(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false')."</li>\n";
 					echo "<li>HTTP_ACCEPT_LANGUAGE value: ".$_SERVER['HTTP_ACCEPT_LANGUAGE']."</li>\n";
 					echo "<li>HTTP_ACCEPT_LANGUAGE chopped value: ".strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2))."</li>\n";
-					echo "<li>User language set: ".(isset($user["lang"]) ? 'true' : 'false')."</li>\n";
-					echo "<li>User language value: ".(isset($user["lang"]) ? $user["lang"]: "")."</li>\n";
-					echo "<li>Config language: ".$this->config["language"]."</li>\n";
+					echo "<li>User language set: ".(isset($user['lang']) ? 'true' : 'false')."</li>\n";
+					echo "<li>User language value: ".(isset($user['lang']) ? $user['lang']: "")."</li>\n";
+					echo "<li>Config language: ".$this->config['language']."</li>\n";
 					echo "<li>User selected language: ".(isset($this->engine->userlang) ? $this->engine->userlang : "")."</li>\n";
 					echo "</ul>\n";
 				}

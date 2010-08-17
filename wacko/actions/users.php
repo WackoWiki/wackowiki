@@ -346,7 +346,7 @@ else
 	$users = $this->LoadAll(
 		"SELECT u.user_name, u.signup_time, u.session_time, u.total_pages, u.total_revisions, u.total_comments, p.hide_lastsession ".
 		"FROM {$this->config['user_table']} u ".
-			"LEFT JOIN ".$this->config["table_prefix"]."user_setting p ON (u.user_id = p.user_id) ".
+			"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 		( $where == true ? $where : '' ).
 		( $where ? 'AND ' : "WHERE ").
 			"u.account_type = '0' ".

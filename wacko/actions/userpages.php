@@ -9,22 +9,22 @@ if ($this->GetUserName())
 	echo "<li><a href=\"".$this->href("", "", "mode=mychangeswatches")."#list\">".$this->GetTranslation("ListMyChangesWatches")."</a></li>";
 	echo "</ul>";
 
-	if (isset($_GET["mode"]) && $_GET["mode"] == "mypages")
+	if (isset($_GET['mode']) && $_GET['mode'] == "mypages")
 	{
 		echo "<a name=\"list\"></a><h3>".$this->GetTranslation("ListMyPages")."</h3>";
 		echo $this->Action("mypages");
 	}
-	else if (isset($_GET["mode"]) && $_GET["mode"] == "mywatches")
+	else if (isset($_GET['mode']) && $_GET['mode'] == "mywatches")
 	{
 		echo "<a name=\"list\"></a><h3>".$this->GetTranslation("ListMyWatches")."</h3>";
 		echo $this->Action("mywatches");
 	}
-	else if (!isset($_GET["mode"]) || $_GET["mode"] == "mychangeswatches")
+	else if (!isset($_GET['mode']) || $_GET['mode'] == "mychangeswatches")
 	{
 		echo "<a name=\"list\"></a><h3>".$this->GetTranslation("ListMyChangesWatches")."</h3>";
 		echo $this->Action("mychangeswatches");
 	}
-	else if (isset($_GET["mode"]) && $_GET["mode"] == "mychanges")
+	else if (isset($_GET['mode']) && $_GET['mode'] == "mychanges")
 	{
 		echo "<a name=\"list\"></a><h3>".$this->GetTranslation("ListMyChanges")."</h3>";
 		echo $this->Action("mychanges");

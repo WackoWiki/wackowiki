@@ -19,9 +19,9 @@ $wackoConfig = array(
 	"root_page" => "HomePage",
 	"wacko_name" => "MyWackoSite",
 	"wacko_desc" => "A light and handy Wiki-engine",
-	"base_url" => ($_SERVER["SERVER_PORT"] == 443 ? "https" : "http")."://".$_SERVER["SERVER_NAME"].
-		($_SERVER["SERVER_PORT"] != 80 ? ":".$_SERVER["SERVER_PORT"] : "").
-		preg_replace("/(\?|&)installAction=site-config/","",$_SERVER["REQUEST_URI"]),
+	"base_url" => ($_SERVER['SERVER_PORT'] == 443 ? "https" : "http")."://".$_SERVER['SERVER_NAME'].
+		($_SERVER['SERVER_PORT'] != 80 ? ":".$_SERVER['SERVER_PORT'] : "").
+		preg_replace("/(\?|&)installAction=site-config/","",$_SERVER['REQUEST_URI']),
 	"rewrite_mode" => ($found_rewrite_extension ? "1" : "0"),
 	"ssl" => 0,
 	"ssl_implicit" => 0,
@@ -167,7 +167,7 @@ $wackoConfig = array(
 	"keep_deleted_time" => 0,
 );
 
-$wackoConfig["aliases"]	= array(
+$wackoConfig['aliases']	= array(
 	"Admins" => ""
 );
 

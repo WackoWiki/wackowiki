@@ -9,7 +9,7 @@ if (!isset($first_anchor))		$first_anchor = "";
 if (!isset($last_anchor))		$last_anchor = "";
 if (!isset($track))				$track = "";
 
-if ($_SESSION[$this->config["session_prefix"].'_'."linktracking"] && $track)
+if ($_SESSION[$this->config['session_prefix'].'_'."linktracking"] && $track)
 	$this->TrackLinkTo($page);
 
 if (in_array($page, $this->context)) return;
@@ -23,7 +23,7 @@ if (! $this->HasAccess("read", $page_id))
 }
 else
 {
-	if (isset($_GET["time"])) $time = $_GET["time"];
+	if (isset($_GET['time'])) $time = $_GET['time'];
 	else $time = "";
 
 	if (!$inc_page = $this->LoadPage($page, $time))
@@ -32,15 +32,15 @@ else
 	}
 	else
 	{
-		if ($inc_page["body_r"])
+		if ($inc_page['body_r'])
 		{
-			$strings = $inc_page["body_r"];
+			$strings = $inc_page['body_r'];
 		}
 		else
 		{
 			// recompile body
 			// build html body
-			$strings = $this->Format($inc_page["body"], "wacko");
+			$strings = $this->Format($inc_page['body'], "wacko");
 		}
 
 		// cleaning up

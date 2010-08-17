@@ -1,6 +1,6 @@
 <?php
 $themeResource = array(
-	"EditIcon" => "<img src=\"".$this->config["theme_url"]."icons/edit.gif\" alt=\"Редактировать вложенную страницу\" border=\"0\" />",
+	"EditIcon" => "<img src=\"".$this->config['theme_url']."icons/edit.gif\" alt=\"Редактировать вложенную страницу\" border=\"0\" />",
 	"ACLStoreButton"  => "Сохранить",
 	"ACLCancelButton" => "Отменить\nи вернуться",
 	"ACLAccessDenied" => "<em>Вы не владелец этой страницы.</em>",

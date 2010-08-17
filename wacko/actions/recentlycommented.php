@@ -10,9 +10,9 @@ if (!function_exists('LoadRecentlyCommented'))
 		// NOTE: this is really stupid. Maybe my SQL-Fu is too weak, but apparently there is no easier way
 		if ($ids = $wacko->LoadAll(
 			"SELECT a.page_id ".
-			"FROM ".$wacko->config["table_prefix"]."page a ".
+			"FROM ".$wacko->config['table_prefix']."page a ".
 			($for
-				? 	"INNER JOIN ".$wacko->config["table_prefix"]."page b ON (a.comment_on_id = b.page_id) ".
+				? 	"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 					"WHERE ".
 						"b.supertag LIKE '".quote($wacko->dblink, $wacko->NpjTranslit($for))."/%' "
 				: 	"WHERE a.comment_on_id <> '0' ").
@@ -36,9 +36,9 @@ if (!function_exists('LoadRecentlyCommented'))
 					// load complete comments
 					$comments = $wacko->LoadAll(
 							"SELECT b.tag as comment_on_tag, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.user_id, u.user_name AS comment_user, a.modified AS comment_time ".
-							"FROM ".$wacko->config["table_prefix"]."page a ".
-								"INNER JOIN ".$wacko->config["table_prefix"]."page b ON (a.comment_on_id = b.page_id) ".
-								"LEFT OUTER JOIN ".$wacko->config["table_prefix"]."user u ON (a.user_id = u.user_id) ".
+							"FROM ".$wacko->config['table_prefix']."page a ".
+								"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
+								"LEFT OUTER JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
 							" WHERE a.page_id IN ( ".$_ids." ) ".
 							"ORDER BY comment_time DESC ".
 							"LIMIT {$pagination['offset']}, {$limit}");
@@ -49,7 +49,7 @@ if (!function_exists('LoadRecentlyCommented'))
 }
 
 if (!isset($root))	$root	= $this->UnwrapLink(isset($vars['for']) ? $vars['for'] : "");
-if (!isset($root))	$root	= $this->page["tag"];
+if (!isset($root))	$root	= $this->page['tag'];
 if (!isset($noxml)) $noxml	= 0;
 
 if ($user = $this->GetUser())
@@ -68,7 +68,7 @@ if (list ($pages, $pagination) = LoadRecentlyCommented($this, $root, (int)$max))
 {
 	if ($root == "" && !(int)$noxml)
 	{
-		echo "<a href=\"".$this->config["base_url"]."xml/comments_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"])).".xml\"><img src=\"".$this->config["theme_url"]."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentCommentsXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
+		echo "<a href=\"".$this->config['base_url']."xml/comments_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentCommentsXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
 	}
 	// pagination
 	if (isset($pagination['text']))
@@ -79,8 +79,8 @@ if (list ($pages, $pagination) = LoadRecentlyCommented($this, $root, (int)$max))
 	{
 		foreach ($pages as $page)
 		{
-			if ($this->config["hide_locked"])
-				$access = $this->HasAccess("read", $page["comment_on_id"]);
+			if ($this->config['hide_locked'])
+				$access = $this->HasAccess("read", $page['comment_on_id']);
 			else
 				$access = true;
 
@@ -96,12 +96,12 @@ if (list ($pages, $pagination) = LoadRecentlyCommented($this, $root, (int)$max))
 					{
 						echo "</ul>\n<br /></li>\n";
 					}
-					echo "<li><b>".date($this->config["date_format"],strtotime($day)).":</b>\n<ul>\n";
+					echo "<li><b>".date($this->config['date_format'],strtotime($day)).":</b>\n<ul>\n";
 					$curday = $day;
 				}
 
 				// print entry
-				echo "<li><span class=\"dt\">".date($this->config["time_format_seconds"], strtotime( $time ))."</span> &mdash; (<a href=\"".
+				echo "<li><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (<a href=\"".
 				$this->href("", $page["comment_tag"], "")."\">".$page["comment_on_tag"]."</a>".
 				") . . . . . . . . . . . . . . . . <small>".$this->GetTranslation("LatestCommentBy")." ".
 				($page["comment_user"]

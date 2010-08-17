@@ -13,7 +13,7 @@ if (!function_exists('HandlerDiffLoadPageById'))
 		{
 			return $wacko->LoadSingle(
 				"SELECT page_id, modified, body ".
-				"FROM ".$wacko->config["table_prefix"]."revision ".
+				"FROM ".$wacko->config['table_prefix']."revision ".
 				"WHERE revision_id = '".quote($wacko->dblink, $id)."' ".
 				"LIMIT 1");
 		}
@@ -21,7 +21,7 @@ if (!function_exists('HandlerDiffLoadPageById'))
 		{
 			return $wacko->LoadSingle(
 				"SELECT page_id, modified, body ".
-				"FROM ".$wacko->config["table_prefix"]."page ".
+				"FROM ".$wacko->config['table_prefix']."page ".
 				"WHERE page_id = '".quote($wacko->dblink, $wacko->GetPageId())."' ".
 				"LIMIT 1");
 		}
@@ -40,7 +40,7 @@ if ($this->HasAccess("read")) {
 	$pageA = HandlerDiffLoadPageById($this, $b);
 	$pageB = HandlerDiffLoadPageById($this, $a);
 
-	if ($this->HasAccess("read", $pageA["page_id"]) && $this->HasAccess("read", $pageB["page_id"]) ) {
+	if ($this->HasAccess("read", $pageA['page_id']) && $this->HasAccess("read", $pageB['page_id']) ) {
 
 		if (isset($_GET["source"])) $source = 1;
 
@@ -49,15 +49,15 @@ if ($this->HasAccess("read")) {
 			// This is a really cheap way to do it.
 
 			// prepare bodies
-			$bodyA = explode("\n", $pageB["body"]);
-			$bodyB = explode("\n", $pageA["body"]);
+			$bodyA = explode("\n", $pageB['body']);
+			$bodyB = explode("\n", $pageA['body']);
 
 			$added = array_diff($bodyA, $bodyB);
 			$deleted = array_diff($bodyB, $bodyA);
 
 			$output .=
-			str_replace("%1", "<a href=\"".$this->href("", "", ($b != -1 ? "time=".urlencode($pageA["modified"]) : ""))."\">".$this->GetTimeStringFormatted($pageA["modified"])."</a>",
-			str_replace("%2", "<a href=\"".$this->href("", "", ($a != -1 ? "time=".urlencode($pageB["modified"]) : ""))."\">".$this->GetTimeStringFormatted($pageB["modified"])."</a>",
+			str_replace("%1", "<a href=\"".$this->href("", "", ($b != -1 ? "time=".urlencode($pageA['modified']) : ""))."\">".$this->GetTimeStringFormatted($pageA['modified'])."</a>",
+			str_replace("%2", "<a href=\"".$this->href("", "", ($a != -1 ? "time=".urlencode($pageB['modified']) : ""))."\">".$this->GetTimeStringFormatted($pageB['modified'])."</a>",
 			str_replace("%3", $this->ComposeLinkToPage($this->tag, "", "", 0),
 			"<div class=\"diffinfo\">".$this->GetTranslation("Comparison"))))."</div><br />\n";
 
@@ -94,8 +94,8 @@ if ($this->HasAccess("read")) {
 			// load pages
 
 			// extract text from bodies
-			$textA = $pageA["body"];
-			$textB = $pageB["body"];
+			$textA = $pageA['body'];
+			$textB = $pageB['body'];
 
 			$sideA = new Side($textA);
 			$sideB = new Side($textB);
@@ -173,8 +173,8 @@ if ($this->HasAccess("read")) {
 			$sideB->copy_until_ordinal($count_total_right,$output);
 			$sideB->copy_whitespace($output);
 			$out=$this->Format($output);
-			$out = str_replace("%1", "<a href=\"".$this->href("", "", "time=".urlencode($pageB["modified"]))."\">".$this->GetTimeStringFormatted($pageB["modified"])."</a>",
-			str_replace("%2", "<a href=\"".$this->href("", "", "time=".urlencode($pageA["modified"]))."\">".$this->GetTimeStringFormatted($pageA["modified"])."</a>",
+			$out = str_replace("%1", "<a href=\"".$this->href("", "", "time=".urlencode($pageB['modified']))."\">".$this->GetTimeStringFormatted($pageB['modified'])."</a>",
+			str_replace("%2", "<a href=\"".$this->href("", "", "time=".urlencode($pageA['modified']))."\">".$this->GetTimeStringFormatted($pageA['modified'])."</a>",
 			str_replace("%3", $this->ComposeLinkToPage($this->tag, "", "", 0),
 			"<div class=\"diffinfo\">".$this->GetTranslation("Comparison"))))."</div><br />\n<br />\n".$out;
 			print $out;

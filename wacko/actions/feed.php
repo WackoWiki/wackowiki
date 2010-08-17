@@ -87,7 +87,7 @@ else
 	$feed = new SimplePie();
 	$feed->set_feed_url($urlset);
 	// Set where the cache files should be stored.
-	$feed->set_cache_location('./'.$this->config["cache_dir"].'feeds');
+	$feed->set_cache_location('./'.$this->config['cache_dir'].'feeds');
 
 	// Make sure that we're sending the right character set headers, etc.
 	$feed->set_output_encoding($this->languages[$this->config['language']]['charset']);

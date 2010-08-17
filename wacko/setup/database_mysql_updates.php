@@ -6,7 +6,7 @@
 	These are all the updates that need to applied to earlier Wacko version to bring them up to 4.3 specs
 */
 
-$pref = $config["table_prefix"];
+$pref = $config['table_prefix'];
 
 // ACL
 $rename_acl_r4_3_1 = "RENAME TABLE {$pref}acls TO {$pref}acl";

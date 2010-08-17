@@ -13,7 +13,7 @@ if (!function_exists('FullTextSearch'))
 	{
 		return $wacko->LoadAll(
 			"SELECT tag, body, comment_on_id ".
-			"FROM ".$wacko->config["table_prefix"]."page ".
+			"FROM ".$wacko->config['table_prefix']."page ".
 			"WHERE (( match(body) against('".quote($wacko->dblink, $phrase)."') ".
 				"OR lower(tag) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
 				($filter
@@ -28,7 +28,7 @@ if (!function_exists('TagSearch'))
 	{
 		return $wacko->LoadAll(
 			"SELECT tag, comment_on_id ".
-			"FROM ".$wacko->config["table_prefix"]."page ".
+			"FROM ".$wacko->config['table_prefix']."page ".
 			"WHERE lower(tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
 			"ORDER BY supertag");
 	}
@@ -105,19 +105,19 @@ if ($phrase)
 
 			foreach ($results as $page)
 			{
-				if (!$this->config["hide_locked"] || $this->HasAccess("read",$page["tag"]) )
+				if (!$this->config['hide_locked'] || $this->HasAccess("read",$page['tag']) )
 				{
 					// Don't show it if it's a comment and we're hiding comments from this user
-					if($page["comment_on_id"] == '0' || ($page["comment_on_id"] != '0' && $this->UserAllowedComments()))
+					if($page['comment_on_id'] == '0' || ($page['comment_on_id'] != '0' && $this->UserAllowedComments()))
 					{
 						// open item
 						if ($style == "ul" || $style == "ol") print "<li>";
 						if ($style == "comma" && $i > 0) print ",\n";
 
-						print("<h3>".$this->Link("/".$page["tag"],"",$page["tag"])."</h3>");
+						print("<h3>".$this->Link("/".$page['tag'],"",$page['tag'])."</h3>");
 						if ($mode !== "topic")
 						{
-							$context = getLineWithPhrase($phrase, $page["body"], $clean);
+							$context = getLineWithPhrase($phrase, $page['body'], $clean);
 							$context = preview_text($TEXT = $context, $LIMIT = 500, $TAGS = 0);
 							$context = highlight_this($text = $context, $words = $phrase, $the_place = 0);
 							print("<div>".str_replace("\n", '<br />', $context)."</div>");

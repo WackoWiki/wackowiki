@@ -10,6 +10,16 @@ $init->Settings();	// initialize DBAL and populate from config table
 $init->DBAL();
 $init->Settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
 $init->Settings('user_table',	$init->config['table_prefix'].'user');
+$init->Settings('cookie_hash',	hash('sha1', $init->config['base_url'].$init->config['system_seed']));
+// run in ssl mode?
+echo "<br />base_url 1: ".$init->config['base_url'];
+if ($init->config['ssl'] == true && (( ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") && !empty($init->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') ) ))
+{
+	$init->Settings('base_url',	str_replace("http://", "https://".($init->config['ssl_proxy'] ? $init->config['ssl_proxy'].'/' : ''), $init->config['base_url']));
+}
+$init->Settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
+echo "<br />base_url 2: ".$init->config['base_url'];
+echo "<br />cookie_path 1".$init->config['cookie_path']."<br />";
 
 if ($init->IsLocked() === true)
 {

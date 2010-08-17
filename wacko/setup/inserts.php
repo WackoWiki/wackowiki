@@ -23,7 +23,7 @@ function InsertPage($tag, $title = false, $body, $lng, $rights = "Admins", $crit
 	$perm_write_insert = "INSERT INTO ".$config_global["table_prefix"]."acl (page_id, privilege, list) VALUES ((".$page_id."), 'write', '".$rights."')";
 	$perm_comment_insert = "INSERT INTO ".$config_global["table_prefix"]."acl (page_id, privilege, list) VALUES ((".$page_id."), 'comment', '$')";
 
-	switch($config_global["database_driver"])
+	switch($config_global['database_driver'])
 	{
 		case "mysql_legacy":
 			if (0 == mysql_num_rows(mysql_query($page_select, $dblink_global)))
@@ -148,8 +148,8 @@ function NpjTranslit($tag, $lng)
 	$tag = str_replace( " ", "", $tag );
 	$tag = str_replace( "'", "_", $tag );
 
-	$tag = @strtr( $tag, $language["NpjLettersFrom"], $language["NpjLettersTo"] );
-	$tag = @strtr( $tag, $language["NpjBiLetters"] );
+	$tag = @strtr( $tag, $language['NpjLettersFrom'], $language["NpjLettersTo"] );
+	$tag = @strtr( $tag, $language['NpjBiLetters'] );
 	$tag = strtolower( $tag );
 
 	return rtrim($tag, "/");
@@ -167,17 +167,17 @@ function SetLanguage($lng)
 	}
 
 	$language = &$languages[$lng];
-	setlocale(LC_CTYPE,$language["locale"]);
-	$language["locale"] = setlocale(LC_CTYPE,0);
+	setlocale(LC_CTYPE,$language['locale']);
+	$language['locale'] = setlocale(LC_CTYPE,0);
 	return $language;
 }
 
 // Inserting base pages
 $error_inserting_pages = false;
 
-require_once("setup/lang/inserts.".$config["language"].".php");
+require_once("setup/lang/inserts.".$config['language'].".php");
 
-if ( $config["multilanguage"] )
+if ( $config['multilanguage'] )
 {
 	$handle = opendir("setup/lang");
 	while (false !== ($file = readdir($handle)))

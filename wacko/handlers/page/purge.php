@@ -6,8 +6,8 @@
 if (!$this->page) $this->Redirect($this->href("show"));
 
 // deny for comment
-if ($this->page["comment_on_id"])
-	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page["comment_on_id"]), "show_comments=1")."#".$this->page["tag"]);
+if ($this->page['comment_on_id'])
+	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page['comment_on_id']), "show_comments=1")."#".$this->page['tag']);
 // and for forum page
 else if ($this->forum === true)
 	$this->Redirect($this->href());
@@ -22,19 +22,19 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		if (isset($_POST["comments"]) && $_POST["comments"] == 1)
 		{
 			$this->RemoveComments($this->tag);
-			$this->Log(1, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedAllComments", $this->config["language"])));
+			$this->Log(1, str_replace("%1", $this->tag." ".$this->page['title'], $this->GetTranslation("LogRemovedAllComments", $this->config['language'])));
 			echo $this->GetTranslation("CommentsPurged")."<br />\n";
 		}
 		if (isset($_POST["files"]) && $_POST["files"] == 1)
 		{
 			$this->RemoveFiles($this->tag);
-			$this->Log(1, str_replace('%1', $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedAllFiles", $this->config["language"])));
+			$this->Log(1, str_replace('%1', $this->tag." ".$this->page['title'], $this->GetTranslation("LogRemovedAllFiles", $this->config['language'])));
 			echo $this->GetTranslation("FilesPurged")."<br />\n";
 		}
 		if (isset($_POST["revisions"]) && $_POST["revisions"] == 1 && $this->IsAdmin())
 		{
 			$this->RemoveRevisions($this->tag);
-			$this->Log(1, str_replace("%1", $this->tag." ".$this->page["title"], $this->GetTranslation("LogRemovedAllRevisions", $this->config["language"])));
+			$this->Log(1, str_replace("%1", $this->tag." ".$this->page['title'], $this->GetTranslation("LogRemovedAllRevisions", $this->config['language'])));
 			echo $this->GetTranslation("RevisionsPurged")."<br />\n";
 		}
 		print('</em>');

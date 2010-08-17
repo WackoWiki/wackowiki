@@ -9,7 +9,7 @@ Updated by Pavel Fedotov.
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td height="1" align="left" valign="top" background="<?php echo $this->config["theme_url"]."icons/bottom_line.gif"; ?>"><img src="<?php echo $this->config["theme_url"]."icons/bottom_line.gif"; ?>" width="61" height="41"></td>
+    <td height="1" align="left" valign="top" background="<?php echo $this->config['theme_url']."icons/bottom_line.gif"; ?>"><img src="<?php echo $this->config['theme_url']."icons/bottom_line.gif"; ?>" width="61" height="41"></td>
   </tr>
   <tr>
     <td align="left" valign="top" bgcolor="#990000">
@@ -19,25 +19,25 @@ Updated by Pavel Fedotov.
   if ($this->method == "show") {
 ?>
 <?php
-if ($this->HasAccess("read") && $this->config["hide_files"] != 1)
+if ($this->HasAccess("read") && $this->config['hide_files'] != 1)
 {
   // store files display in session
   $tag = $this->tag;
-  if (!isset($_SESSION["show_files"][$tag]))
-    $_SESSION["show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
+  if (!isset($_SESSION['show_files'][$tag]))
+    $_SESSION['show_files'][$tag] = ($this->UserWantsFiles() ? "1" : "0");
 
-  switch($_GET["show_files"])
+  switch($_GET['show_files'])
   {
   case "0":
-    $_SESSION["show_files"][$tag] = 0;
+    $_SESSION['show_files'][$tag] = 0;
     break;
   case "1":
-    $_SESSION["show_files"][$tag] = 1;
+    $_SESSION['show_files'][$tag] = 1;
     break;
   }
 
   // display files!
-  if ($this->page && $_SESSION["show_files"][$tag])
+  if ($this->page && $_SESSION['show_files'][$tag])
   {
     // display files header
     ?>
@@ -51,7 +51,7 @@ if ($this->HasAccess("read") && $this->config["hide_files"] != 1)
 	</td>
         </tr>
         <tr>
-          <td height="1" align="left" valign="top" background="<?php echo $this->config["theme_url"]."icons/border_line.gif"; ?>"><img src="<?php echo $this->config["theme_url"]."icons/border_line.gif"; ?>" width="4" height="5"></td>
+          <td height="1" align="left" valign="top" background="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>"><img src="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>" width="4" height="5"></td>
         </tr>
       </table>
     <?php
@@ -72,8 +72,8 @@ if ($this->HasAccess("read") && $this->config["hide_files"] != 1)
     if ($registered
         &&
         (
-         ($this->config["upload"] === true) || ($this->config["upload"] == "1") ||
-         ($this->CheckACL($user,$this->config["upload"]))
+         ($this->config['upload'] === true) || ($this->config['upload'] == "1") ||
+         ($this->CheckACL($user,$this->config['upload']))
         )
        )
     echo $this->Action("upload",array("nomark"=>1));
@@ -87,9 +87,9 @@ if ($this->HasAccess("read") && $this->config["hide_files"] != 1)
           <td height="29" bgcolor="#6E0000">
     <div id="filesheader">
     <?php
-      if ($this->page["page_id"])
-       $files = $this->LoadAll( "SELECT upload_id FROM ".$this->config["table_prefix"]."upload WHERE ".
-                             " page_id = '". quote($this->dblink, $this->page["page_id"]) ."'");
+      if ($this->page['page_id'])
+       $files = $this->LoadAll( "SELECT upload_id FROM ".$this->config['table_prefix']."upload WHERE ".
+                             " page_id = '". quote($this->dblink, $this->page['page_id']) ."'");
       else $files = array();
 
       switch (count($files))
@@ -110,7 +110,7 @@ if ($this->HasAccess("read") && $this->config["hide_files"] != 1)
     </div>	</td>
         </tr>
         <tr>
-          <td height="1" align="left" valign="top" background="<?php echo $this->config["theme_url"]."icons/border_line.gif"; ?>"><img src="<?php echo $this->config["theme_url"]."icons/border_line.gif"; ?>" width="4" height="5"></td>
+          <td height="1" align="left" valign="top" background="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>"><img src="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>" width="4" height="5"></td>
         </tr>
       </table>
     <?php
@@ -119,28 +119,28 @@ if ($this->HasAccess("read") && $this->config["hide_files"] != 1)
 ?>
 
 <?php
-if ($this->HasAccess("read") && $this->config["hide_comments"] != 1)
+if ($this->HasAccess("read") && $this->config['hide_comments'] != 1)
 {
   // load comments for this page
   $comments = $this->LoadComments($this->GetPageId());
 
   // store comments display in session
   $tag = $this->tag;
-  if (!isset($_SESSION["show_comments"][$tag]))
-    $_SESSION["show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
+  if (!isset($_SESSION['show_comments'][$tag]))
+    $_SESSION['show_comments'][$tag] = ($this->UserWantsComments() ? "1" : "0");
 
-  switch($_GET["show_comments"])
+  switch($_GET['show_comments'])
   {
   case "0":
-    $_SESSION["show_comments"][$tag] = 0;
+    $_SESSION['show_comments'][$tag] = 0;
     break;
   case "1":
-    $_SESSION["show_comments"][$tag] = 1;
+    $_SESSION['show_comments'][$tag] = 1;
     break;
   }
 
   // display comments!
-  if ($this->page && $_SESSION["show_comments"][$tag])
+  if ($this->page && $_SESSION['show_comments'][$tag])
   {
     // display comments header
     ?>
@@ -152,7 +152,7 @@ if ($this->HasAccess("read") && $this->config["hide_comments"] != 1)
     </div></td>
         </tr>
         <tr>
-          <td height="1" align="left" valign="top" background="<?php echo $this->config["theme_url"]."icons/border_line.gif"; ?>"><img src="<?php echo $this->config["theme_url"]."icons/border_line.gif"; ?>" width="4" height="5"></td>
+          <td height="1" align="left" valign="top" background="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>"><img src="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>" width="4" height="5"></td>
         </tr>
       </table>
     <?php
@@ -162,16 +162,16 @@ if ($this->HasAccess("read") && $this->config["hide_comments"] != 1)
     {
       foreach ($comments as $comment)
       {
-        print("<a name=\"".$comment["tag"]."\"></a>\n");
+        print("<a name=\"".$comment['tag']."\"></a>\n");
         print("<div class=\"comment\">\n");
         $del = "";
-        if ($this->IsAdmin() || $this->UserIsOwner($comment["page_id"]) || ($this->config["owners_can_remove_comments"] && $this->UserIsOwner($this->GetPageId())))
+        if ($this->IsAdmin() || $this->UserIsOwner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->UserIsOwner($this->GetPageId())))
           print("<div style=\"float:right;\" style='background:#ffcfa8; border: solid 1px; border-color:#cccccc'>".
-          "<a href=\"".$this->href("remove",$comment["tag"])."\" title=\"".$this->GetTranslation("DeleteTip")."\">".
-          "<img src=\"".$this->config["theme_url"]."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->GetTranslation("DeleteText")."\"  align=\"absmiddle\" border=\"0\" /></a>".
+          "<a href=\"".$this->href("remove",$comment['tag'])."\" title=\"".$this->GetTranslation("DeleteTip")."\">".
+          "<img src=\"".$this->config['theme_url']."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->GetTranslation("DeleteText")."\"  align=\"absmiddle\" border=\"0\" /></a>".
           "</div>");
-        print($this->Format($comment["body"])."\n");
-        print("<div class=\"commentinfo\">\n-- ".($this->IsWikiName($comment["user"])?$this->Link("/".$comment["user"],"",$comment["user"]):$comment["user"])." (".$comment["time"].")\n</div>\n");
+        print($this->Format($comment['body'])."\n");
+        print("<div class=\"commentinfo\">\n-- ".($this->IsWikiName($comment['user'])?$this->Link("/".$comment['user'],"",$comment['user']):$comment['user'])." (".$comment['time'].")\n</div>\n");
         print("</div>\n");
       }
     }
@@ -215,7 +215,7 @@ if ($this->HasAccess("read") && $this->config["hide_comments"] != 1)
     </div></td>
         </tr>
         <tr>
-          <td height="1" align="left" valign="top" background="<?php echo $this->config["theme_url"]."icons/border_line.gif"; ?>"><img src="<?php echo $this->config["theme_url"]."icons/border_line.gif"; ?>" width="4" height="5"></td>
+          <td height="1" align="left" valign="top" background="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>"><img src="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>" width="4" height="5"></td>
         </tr>
       </table>
     <?php
@@ -236,7 +236,7 @@ echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?>
 echo $this->HasAccess("write") ? "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetTranslation("EditTip")."\">".$this->GetTranslation("EditText")."</a> |\n" : "";
 
 // Revisions link
-echo $this->page["modified"] ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTimeFormatted()."</a> |\n" : "";
+echo $this->page['modified'] ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetPageTimeFormatted()."</a> |\n" : "";
 
 // If this page exists
 if ($this->page)
@@ -247,8 +247,8 @@ if ($this->page)
    print($this->GetTranslation("YouAreOwner"));
 
    // Rename link
-   print(" <a href=\"".$this->href("rename")."\"><img src=\"".$this->config["theme_url"]."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" align=\"middle\" border=\"0\" /></a>");
-//   if (!$this->config["remove_onlyadmins"] || $this->IsAdmin()) print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->config["theme_url"]."icons/delete.gif\" title=\"".$this->GetTranslation("DeleteTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" align=\"middle\" border=\"0\" /></a>");
+   print(" <a href=\"".$this->href("rename")."\"><img src=\"".$this->config['theme_url']."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" align=\"middle\" border=\"0\" /></a>");
+//   if (!$this->config['remove_onlyadmins'] || $this->IsAdmin()) print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->GetTranslation("DeleteTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" align=\"middle\" border=\"0\" /></a>");
 
    //Edit ACLs link
    print(" | <a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"").">".$this->GetTranslation("ACLText")."</a>");
@@ -260,35 +260,35 @@ if ($this->page)
    if ($owner = $this->GetPageOwner())
    {
      print($this->GetTranslation("Owner").": ".$this->Link($owner));
-   } else if (!$this->page["comment_on_id"]) {
+   } else if (!$this->page['comment_on_id']) {
      print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
    }
  }
 
  // Rename link
- if ($this->CheckACL($this->GetUserName(),$this->config["rename_globalacl"]) && !$this->UserIsOwner())
+ if ($this->CheckACL($this->GetUserName(),$this->config['rename_globalacl']) && !$this->UserIsOwner())
  {
-   print(" <a href=\"".$this->href("rename")."\"><img src=\"".$this->config["theme_url"]."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" align=\"middle\" border=\"0\" /></a>");
+   print(" <a href=\"".$this->href("rename")."\"><img src=\"".$this->config['theme_url']."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" align=\"middle\" border=\"0\" /></a>");
  }
 
  // Remove link (shows only for Admins)
  if ($this->IsAdmin())
  {
-   print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->config["theme_url"]."icons/delete.gif\" title=\"".$this->GetTranslation("DeleteTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\"  align=\"middle\" border=\"0\" /></a>");
+   print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->GetTranslation("DeleteTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\"  align=\"middle\" border=\"0\" /></a>");
  }
 
  // Page  settings link
  print(" | <a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"").">".$this->GetTranslation("SettingsText")."</a> | ");
-// print("<a href=\"".$this->href("referrers")."\"><img src=\"".$this->config["theme_url"]."icons/referer.gif\" title=\"".$this->GetTranslation("ReferrersTip")."\" alt=\"".$this->GetTranslation("ReferrersText")."\" border=\"0\" align=\"middle\" /></a> |");
+// print("<a href=\"".$this->href("referrers")."\"><img src=\"".$this->config['theme_url']."icons/referer.gif\" title=\"".$this->GetTranslation("ReferrersTip")."\" alt=\"".$this->GetTranslation("ReferrersText")."\" border=\"0\" align=\"middle\" /></a> |");
 }
 ?>
 <?php
 // Watch/Unwatch icon
-echo ($this->iswatched === true ? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config["theme_url"]."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"middle\" border=\"0\" /></a>" : "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config["theme_url"]."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"middle\" border=\"0\" /></a>" )
+echo ($this->iswatched === true ? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  align=\"middle\" border=\"0\" /></a>" : "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  align=\"middle\" border=\"0\" /></a>" )
 ?> |
 <?php
 // Print icon
-echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->config["theme_url"]."icons/print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"middle\" border=\"0\" /></a>";
+echo"<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\"  align=\"middle\" border=\"0\" /></a>";
 
 // Searchbar
 ?> |

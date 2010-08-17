@@ -2,9 +2,9 @@
 
 $lng = "de";
 
-if ($config["language"] == $lng)
+if ($config['language'] == $lng)
 {
-	InsertPage($config["root_page"], '', "((file:wacko4.png WackoWiki))\n**Willkommen zu Deiner ((WackoWiki:Doc/Deutsch/WackoWiki WackoWiki)) Installation!**\n\nKlicke nach der ((Anmeldung)) unten auf den Punkt \"Editieren\" um zu beginnen.\n\nDie Dokumentation ist unter WackoWiki:Doc/Deutsch zu finden.\n\nNützliche Seiten: ((WackoWiki:Doc/Deutsch/Formatierung Formatierung)), VerwaisteSeiten, OffeneSeiten, TextSuche, MeineSeiten, MeineAenderungen.\n\n", $lng, "Admins", true);
+	InsertPage($config['root_page'], '', "((file:wacko4.png WackoWiki))\n**Willkommen zu Deiner ((WackoWiki:Doc/Deutsch/WackoWiki WackoWiki)) Installation!**\n\nKlicke nach der ((Anmeldung)) unten auf den Punkt \"Editieren\" um zu beginnen.\n\nDie Dokumentation ist unter WackoWiki:Doc/Deutsch zu finden.\n\nNützliche Seiten: ((WackoWiki:Doc/Deutsch/Formatierung Formatierung)), VerwaisteSeiten, OffeneSeiten, TextSuche, MeineSeiten, MeineAenderungen.\n\n", $lng, "Admins", true);
 	InsertPage('OffeneSeiten', 'Offene Seiten', '{{WantedPages}}', $lng, "Admins", true);
 	InsertPage('VerwaisteSeiten', 'Verwaiste Seiten', '{{OrphanedPages}}', $lng, "Admins", true);
 	InsertPage('MeineSeiten', 'Meine Seiten', '{{MyPages}}', $lng, "Admins", true);

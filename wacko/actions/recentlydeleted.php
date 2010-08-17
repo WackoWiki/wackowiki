@@ -13,8 +13,8 @@ if ($pages == true)
 	foreach ($pages as $page)
 	{
 		$i++;
-		if ($this->config["hide_locked"])
-			$access = $this->HasAccess("read", $page["page_id"]);
+		if ($this->config['hide_locked'])
+			$access = $this->HasAccess("read", $page['page_id']);
 		else
 			$access = true;
 
@@ -34,8 +34,8 @@ if ($pages == true)
 			// print entry
 			echo "<li>".
 					"<span style=\"text-align:left\">".
-						"<small>".date($this->config["time_format_seconds"], strtotime($time))."</small>  &mdash; ".
-						$this->ComposeLinkToPage($page["tag"], "revisions", "", 0).
+						"<small>".date($this->config['time_format_seconds'], strtotime($time))."</small>  &mdash; ".
+						$this->ComposeLinkToPage($page['tag'], "revisions", "", 0).
 					"</span>".
 				"</li>\n";
 		}

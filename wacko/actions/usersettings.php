@@ -1,12 +1,12 @@
 <!--notypo-->
 <?php
 
-#	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/protoedit.js\"></script>\n";
-#	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/wikiedit2.js\"></script>\n";
-#	echo "  <script type=\"text/javascript\" src=\"".$this->config["base_url"]."js/autocomplete.js\"></script>\n";
+#	echo "  <script type=\"text/javascript\" src=\"".$this->config['base_url']."js/protoedit.js\"></script>\n";
+#	echo "  <script type=\"text/javascript\" src=\"".$this->config['base_url']."js/wikiedit2.js\"></script>\n";
+#	echo "  <script type=\"text/javascript\" src=\"".$this->config['base_url']."js/autocomplete.js\"></script>\n";
 
 // reconnect securely in ssl mode
-if ($this->config["ssl"] == true && ( (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "on" && empty($this->config["ssl_proxy"])) || $_SERVER['SERVER_PORT'] != '443' ))
+if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 {
 	$this->Redirect(str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->href()));
 }
@@ -16,18 +16,18 @@ if (isset($_GET["confirm"]))
 {
 	if ($temp = $this->LoadSingle(
 			"SELECT user_name, email, email_confirm ".
-			"FROM ".$this->config["user_table"]." ".
+			"FROM ".$this->config['user_table']." ".
 			"WHERE email_confirm = '".quote($this->dblink, $_GET["confirm"])."'"))
 	{
 		$this->Query(
-			"UPDATE ".$this->config["user_table"]." ".
+			"UPDATE ".$this->config['user_table']." ".
 			"SET email_confirm = '' ".
 			"WHERE email_confirm = '".quote($this->dblink, $_GET["confirm"])."'");
 
 		echo "<br /><br />".$this->GetTranslation("EmailConfirmed")."<br /><br />";
 
 		// log event
-		$this->Log(4, str_replace("%2", $temp["user_name"], str_replace("%1", $temp["email"], $this->GetTranslation("LogUserEmailActivated", $this->config["language"]))));
+		$this->Log(4, str_replace("%2", $temp['user_name'], str_replace("%1", $temp['email'], $this->GetTranslation("LogUserEmailActivated", $this->config['language']))));
 
 		unset($temp);
 	}
@@ -51,10 +51,10 @@ else if ($user = $this->GetUser())
 	if (isset($_POST["action"]) && $_POST["action"] == "update")
 	{
 		// no email given
-		if (!$_POST["email"])
+		if (!$_POST['email'])
 			$error .= $this->GetTranslation("SpecifyEmail")." ";
 		// invalid email
-		else if (!preg_match("/^[\w.-]+?\@[\w.-]+?\.[\w]+$/", $_POST["email"]))
+		else if (!preg_match("/^[\w.-]+?\@[\w.-]+?\.[\w]+$/", $_POST['email']))
 			$error .= $this->GetTranslation("NotAEmail")." ";
 
 		// check for errors and store
@@ -64,23 +64,23 @@ else if ($user = $this->GetUser())
 		}
 		else
 		{
-			if ($user["email"] != $_POST["email"]) $email_changed = true;
+			if ($user['email'] != $_POST['email']) $email_changed = true;
 
 			// store if email hasn't been changed otherwise request authorization
 			if (!$email_changed)
 			{
 				// update users table
 				$this->Query(
-					"UPDATE ".$this->config["user_table"]." SET ".
+					"UPDATE ".$this->config['user_table']." SET ".
 						"real_name			= '".quote($this->dblink, $_POST["real_name"])."', ".
-						"email				= '".quote($this->dblink, $_POST["email"])."' ".
-					"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
+						"email				= '".quote($this->dblink, $_POST['email'])."' ".
+					"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"LIMIT 1");
 
 				$this->SetMessage($this->GetTranslation("UserSettingsStored"));
 
 				// log event
-				$this->Log(6, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserSettingsUpdate", $this->config["language"])));
+				$this->Log(6, str_replace("%1", $user['user_name'], $this->GetTranslation("LogUserSettingsUpdate", $this->config['language'])));
 			}
 		}
 	}
@@ -89,33 +89,33 @@ else if ($user = $this->GetUser())
 	{
 		// update user_setting table
 		$this->Query(
-			"UPDATE ".$this->config["table_prefix"]."user_setting SET ".
+			"UPDATE ".$this->config['table_prefix']."user_setting SET ".
 			($_POST["action"] == "update_extended"
-				?	"doubleclick_edit	= '".quote($this->dblink, $_POST["doubleclick_edit"])."', ".
-					"show_comments		= '".quote($this->dblink, $_POST["show_comments"])."', ".
-					"show_spaces		= '".quote($this->dblink, $_POST["show_spaces"])."', ".
+				?	"doubleclick_edit	= '".quote($this->dblink, $_POST['doubleclick_edit'])."', ".
+					"show_comments		= '".quote($this->dblink, $_POST['show_comments'])."', ".
+					"show_spaces		= '".quote($this->dblink, $_POST['show_spaces'])."', ".
 					#"typografica		= '".quote($this->dblink, $_POST["typografica"])."', ".
 					"autocomplete		= '".quote($this->dblink, $_POST["autocomplete"])."', ".
 					"dont_redirect		= '".quote($this->dblink, $_POST["dont_redirect"])."', ".
-					"send_watchmail		= '".quote($this->dblink, $_POST["send_watchmail"])."', ".
-					"show_files			= '".quote($this->dblink, $_POST["show_files"])."', ".
+					"send_watchmail		= '".quote($this->dblink, $_POST['send_watchmail'])."', ".
+					"show_files			= '".quote($this->dblink, $_POST['show_files'])."', ".
 					"allow_intercom		= '".quote($this->dblink, $_POST["allow_intercom"])."', ".
 					"hide_lastsession	= '".quote($this->dblink, $_POST["hide_lastsession"])."', ".
 					"validate_ip		= '".quote($this->dblink, $_POST["validate_ip"])."', ".
 					"noid_pubs			= '".quote($this->dblink, $_POST["noid_pubs"])."' "
 				:	"motto				= '".quote($this->dblink, $_POST["motto"])."', ".
-					"lang				= '".quote($this->dblink, $_POST["lang"])."', ".
-					"theme				= '".quote($this->dblink, $_POST["theme"])."', ".
+					"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
+					"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
 					"revisions_count	= '".quote($this->dblink, $_POST["revisions_count"])."', ".
 					"changes_count		= '".quote($this->dblink, $_POST["changes_count"])."' "
 				).
-			"WHERE user_id = '".quote($this->dblink, $user["user_id"])."' ".
+			"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 			"LIMIT 1");
 
 		$this->SetMessage($this->GetTranslation("UserSettingsStored"));
 
 		// log event
-		$this->Log(6, str_replace("%1", $user["user_name"], $this->GetTranslation("LogUserSettingsUpdate", $this->config["language"])));
+		$this->Log(6, str_replace("%1", $user['user_name'], $this->GetTranslation("LogUserSettingsUpdate", $this->config['language'])));
 	}
 
 	$email_changed = "";
@@ -123,26 +123,26 @@ else if ($user = $this->GetUser())
 	// (re)send email confirmation code
 	if ((isset($_GET['resend_code']) && $_GET['resend_code'] == 1) || $email_changed === true)
 	{
-		if ($email = ( $_GET["resend_code"] == 1 ? $user["email"] : $_POST["email"] ))
+		if ($email = ( $_GET["resend_code"] == 1 ? $user['email'] : $_POST['email'] ))
 		{
-			$confirm = hash('sha1', $user["password"].mt_rand().time().mt_rand().$email.mt_rand());
+			$confirm = hash('sha1', $user['password'].mt_rand().time().mt_rand().$email.mt_rand());
 
 			$this->Query(
-				"UPDATE {$this->config["user_table"]} ".
+				"UPDATE {$this->config['user_table']} ".
 				"SET email_confirm = '".quote($this->dblink, $confirm)."' ".
 				"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
 				"LIMIT 1");
 
-			$subject = $this->config["wacko_name"].". ".$this->GetTranslation("EmailConfirm");
-			$message = $this->GetTranslation("EmailHello"). $user["user_name"].".\n\n".
-						str_replace('%1', $this->config["wacko_name"],
-						str_replace('%2', $user["user_name"],
+			$subject = $this->config['wacko_name'].". ".$this->GetTranslation("EmailConfirm");
+			$message = $this->GetTranslation("EmailHello"). $user['user_name'].".\n\n".
+						str_replace('%1', $this->config['wacko_name'],
+						str_replace('%2', $user['user_name'],
 						str_replace('%3', $this->Href().
-						($this->config["rewrite_mode"] ? "?" : "&amp;")."confirm=".$confirm,
+						($this->config['rewrite_mode'] ? "?" : "&amp;")."confirm=".$confirm,
 						$this->GetTranslation("EmailVerify"))))."\n\n".
 						$this->GetTranslation("EmailGoodbye")."\n".
-						$this->config["wacko_name"]."\n".
-						$this->config["base_url"];
+						$this->config['wacko_name']."\n".
+						$this->config['base_url'];
 			$this->SendMail($email, $subject, $message);
 		}
 		else
@@ -154,11 +154,11 @@ else if ($user = $this->GetUser())
 	// reload user data
 	if ( (isset($_POST["action"]) && ($_POST["action"] == "update" || $_POST["action"] == "update_extended")) || (isset($_GET["resend_code"]) && $_GET["resend_code"] == 1))
 	{
-		$this->SetUser($this->LoadUser($user["user_name"]), 0, 1);
+		$this->SetUser($this->LoadUser($user['user_name']), 0, 1);
 		$this->SetBookmarks(BM_USER);
 
 		// forward
-		$this->SetMessage($this->GetTranslation("UserSettingsStored",$_POST["lang"]));
+		$this->SetMessage($this->GetTranslation("UserSettingsStored",$_POST['lang']));
 
 		$this->Redirect(($_POST["action"] == "update_extended" ? $this->Href("", "", "extended") : $this->Href()));
 		$user = $this->GetUser();
@@ -190,7 +190,7 @@ else if ($user = $this->GetUser())
 		<td class="form_right"><input type="hidden" name="doubleclick_edit" value="0" />
 		<input
 	type="checkbox" id="doubleclick_edit" name="doubleclick_edit" value="1"
-	<?php echo (isset($user["doubleclick_edit"]) && $user["doubleclick_edit"] == "1") ? "checked=\"checked\"" : "" ?> />
+	<?php echo (isset($user['doubleclick_edit']) && $user['doubleclick_edit'] == "1") ? "checked=\"checked\"" : "" ?> />
 		<label for="doubleclick_edit"><?php echo $this->GetTranslation("DoubleclickEditing");?></label></td>
 	</tr>
 	<tr class="lined">
@@ -206,7 +206,7 @@ else if ($user = $this->GetUser())
 		<td class="form_right"><input type="hidden" name="show_comments" value="0" />
 			<input
 	type="checkbox" id="show_comments" name="show_comments" value="1"
-	<?php echo (isset($user["show_comments"]) && $user["show_comments"] == "1") ? "checked=\"checked\"" : "" ?> />
+	<?php echo (isset($user['show_comments']) && $user['show_comments'] == "1") ? "checked=\"checked\"" : "" ?> />
 			<label for="show_comments"><?php echo $this->GetTranslation("ShowComments?");?></label></td>
 	</tr>
 	<tr class="lined">
@@ -214,7 +214,7 @@ else if ($user = $this->GetUser())
 		<td class="form_right"><input type="hidden" name="show_files" value="0" />
 			<input
 	type="checkbox" id="show_files" name="show_files" value="1"
-	<?php echo (isset($user["show_files"]) && $user["show_files"] == "1") ? "checked=\"checked\"" : "" ?> />
+	<?php echo (isset($user['show_files']) && $user['show_files'] == "1") ? "checked=\"checked\"" : "" ?> />
 		<label for="show_files"><?php echo $this->GetTranslation("ShowFiles?");?></label></td>
 	</tr>
 	<tr class="lined">
@@ -222,7 +222,7 @@ else if ($user = $this->GetUser())
 		<td class="form_right"><input type="hidden" name="show_spaces" value="0" />
 			<input
 	type="checkbox" id="show_spaces" name="show_spaces" value="1"
-	<?php echo (isset($user["show_spaces"]) && $user["show_spaces"] == "1") ? "checked=\"checked\"" : "" ?> />
+	<?php echo (isset($user['show_spaces']) && $user['show_spaces'] == "1") ? "checked=\"checked\"" : "" ?> />
 		<label for="show_spaces"><?php echo $this->GetTranslation("ShowSpaces");?></label></td>
 	</tr>
 	<tr class="lined">
@@ -238,7 +238,7 @@ else if ($user = $this->GetUser())
 	<td class="form_right"><input type="hidden" name="send_watchmail" value="0" />
 		<input
 	type="checkbox" id="send_watchmail" name="send_watchmail" value="1"
-	<?php echo (isset($user["send_watchmail"]) && $user["send_watchmail"] == "1") ? "checked=\"checked\"" : "" ?> />
+	<?php echo (isset($user['send_watchmail']) && $user['send_watchmail'] == "1") ? "checked=\"checked\"" : "" ?> />
 		<label for="send_watchmail"><?php echo $this->GetTranslation("SendWatchEmail");?></label></td>
 	</tr>
 	<tr class="lined">
@@ -303,8 +303,8 @@ else if ($user = $this->GetUser())
 
 		$code = $this->LoadSingle(
 			"SELECT email_confirm ".
-			"FROM {$this->config["user_table"]} ".
-			"WHERE user_name = '".quote($this->dblink, $user["user_name"])."'");
+			"FROM {$this->config['user_table']} ".
+			"WHERE user_name = '".quote($this->dblink, $user['user_name'])."'");
 
 		echo "<h3>".$this->GetTranslation("UserSettings")." &raquo ".$this->GetTranslation("UserSettingsGeneral")."</h3>";
 		echo "<ul class=\"menu\"><li class=\"active\">".$this->GetTranslation("UserSettingsGeneral")."</li><li><a href=\"".$this->href("", "", "bookmarks")."\">".$this->GetTranslation("Bookmarks")."</a></li><li><a href=\"".$this->href("", "", "extended")."\">".$this->GetTranslation("UserSettingsExtended")."</a></li></ul><br /><br />\n";
@@ -316,7 +316,7 @@ else if ($user = $this->GetUser())
 <tbody>
 	<tr class="lined">
 		<th class="form_left" scope="row"><?php echo $this->GetTranslation("UserName");?></th>
-		<td><strong><?php echo "<a href=\"".$this->href("", $this->config["users_page"], "profile=".$user["user_name"])."\">".$user["user_name"]."</a>";?></strong></td>
+		<td><strong><?php echo "<a href=\"".$this->href("", $this->config["users_page"], "profile=".$user['user_name'])."\">".$user['user_name']."</a>";?></strong></td>
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="real_name"><?php echo $this->GetTranslation("RealName");?></label></th>
@@ -329,9 +329,9 @@ else if ($user = $this->GetUser())
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="email"><?php echo $this->GetTranslation("YourEmail");?></label></th>
-		<td><input id="email" name="email" value="<?php echo htmlentities($user["email"]) ?>" size="40" />&nbsp;<?php echo $user["email_confirm"] == "" ? '<img src="'.$this->config["base_url"].'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->config["base_url"].'images/warning.gif" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="16" height="16" />' ?>
+		<td><input id="email" name="email" value="<?php echo htmlentities($user['email']) ?>" size="40" />&nbsp;<?php echo $user['email_confirm'] == "" ? '<img src="'.$this->config['base_url'].'images/tick.png" alt="'.$this->GetTranslation("EmailConfirmed").'" title="'.$this->GetTranslation("EmailConfirmed").'" width="20" height="20" />' : '<img src="'.$this->config['base_url'].'images/warning.gif" alt="'.$this->GetTranslation("EmailConfirm").'" title="'.$this->GetTranslation("EmailConfirm").'" width="16" height="16" />' ?>
 <?php
-		if (!$user["email"] || $code["email_confirm"])
+		if (!$user['email'] || $code['email_confirm'])
 			echo "<div class=\"BewareChangeLang\"><strong class=\"cite\">".
 				$this->GetTranslation("EmailNotVerified")."</strong><br />".
 				"<small>".$this->GetTranslation("EmailNotVerifiedDesc")."<strong><a href=\"?resend_code=1\">".$this->GetTranslation("HereLink")."</a></strong>.</small></div>";
@@ -360,9 +360,9 @@ else if ($user = $this->GetUser())
 	for ($i = 0; $i < count($langs); $i++)
 	{
 		echo "<option value=\"".$langs[$i]."\" ".
-			($user["lang"] == $langs[$i]
+			($user['lang'] == $langs[$i]
 				? " selected=\"selected\""
-				: (!isset($user["lang"]) && $this->config["language"] == $langs[$i]
+				: (!isset($user['lang']) && $this->config['language'] == $langs[$i]
 					? "selected=\"selected\""
 					: "")
 			).">".$langs[$i]."</option>\n";
@@ -379,9 +379,9 @@ else if ($user = $this->GetUser())
 	for ($i = 0; $i < count($themes); $i++)
 	{
 		echo '<option value="'.$themes[$i].'" '.
-			(isset($user["theme"]) && $user["theme"] == $themes[$i]
+			(isset($user['theme']) && $user['theme'] == $themes[$i]
 				? "selected=\"selected\""
-				: ($this->config["theme"] == $themes[$i]
+				: ($this->config['theme'] == $themes[$i]
 					? "selected=\"selected\""
 					: "")
 			).">".$themes[$i]."</option>\n";

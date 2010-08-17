@@ -19,8 +19,8 @@ if (!empty($this->config['news_cluster']))
 
 	$pages = "";
 	$prefix			= $this->config['table_prefix'];
-	$newscluster	= $this->config["news_cluster"];
-	$newslevels		= $this->config["news_levels"];
+	$newscluster	= $this->config['news_cluster'];
+	$newslevels		= $this->config['news_levels'];
 
 	// collect data
 	// heavy lifting here (watch out for REGEXPs!)
@@ -123,13 +123,13 @@ if (!empty($this->config['news_cluster']))
 			$_category_title = ' '.$this->GetTranslation('For').' '.$this->GetTranslation('Category').' &laquo;'.$category_title['category'].'&raquo;';
 		else
 			$_category_title = '';
-		if ($this->page == $this->config["news_cluster"])
+		if ($this->page['tag'] == $this->config['news_cluster'])
 		{
 			$_title = $this->GetTranslation("News").$_category_title;
 		}
 		else
 		{
-			$_title = $this->ComposeLinkToPage($this->config["news_cluster"], "", $this->GetTranslation("News"), 0).$_category_title;
+			$_title = $this->ComposeLinkToPage($this->config['news_cluster'], "", $this->GetTranslation("News"), 0).$_category_title;
 		}
 
 		echo "<h1>".$_title."</h1>";
@@ -137,7 +137,7 @@ if (!empty($this->config['news_cluster']))
 		// displaying XML icon
 	if (!(int)$noxml)
 		{
-			echo "<a href=\"".$this->config["base_url"]."xml/news_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config["wacko_name"])).".xml\"><img src=\"".$this->config["theme_url"]."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentNewsXMLTip")."\" alt=\"XML\" /></a>\n";
+			echo "<a href=\"".$this->config['base_url']."xml/news_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->GetTranslation("RecentNewsXMLTip")."\" alt=\"XML\" /></a>\n";
 		}
 
 	// displaying articles
@@ -171,7 +171,7 @@ if (!empty($this->config['news_cluster']))
 			echo '<h2 class="newstitle"><a href="'.$this->href('', $page['tag'], '').'">'.$page['title']."</a></h2>\n";
 			echo "<div class=\"newsinfo\"><span>".$this->GetTimeStringFormatted($page['created']).' '.$this->GetTranslation("By").' '.( $page['owner'] == '' ? '<em>'.$this->GetTranslation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['owner']).'">'.$page['owner'].'</a>' )."</span></div>\n";
 			echo "<div class=\"newscontent\">".$this->Action('include', array('page' => '/'.$page['tag'], 'notoc' => 0, 'nomark' => 1), 1)."</div>\n";
-			echo "<div class=\"newsmeta\">".$_category." ".($this->HasAccess("write",$page["page_id"]) ? $this->ComposeLinkToPage($page["tag"], "edit", $this->GetTranslation("EditText"), 0)." | " : "")."  ".
+			echo "<div class=\"newsmeta\">".$_category." ".($this->HasAccess("write",$page['page_id']) ? $this->ComposeLinkToPage($page['tag'], "edit", $this->GetTranslation("EditText"), 0)." | " : "")."  ".
 				'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#comments" title="'.$this->GetTranslation("NewsDiscuss").' '.$page['title'].'">'.(int)$page["comments"]." ".$this->GetTranslation("Comments_all")." &raquo "."</a></div>\n";
 			echo "</div>";
 

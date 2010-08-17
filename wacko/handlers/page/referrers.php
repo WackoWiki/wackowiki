@@ -5,8 +5,8 @@
 if (!$this->page) $this->Redirect($this->href("show"));
 
 // deny for comment
-if ($this->page["comment_on_id"])
-	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page["comment_on_id"]), "show_comments=1")."#".$this->page["tag"]);
+if ($this->page['comment_on_id'])
+	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page['comment_on_id']), "show_comments=1")."#".$this->page['tag']);
 
 if ($user = $this->GetUser())
 {
@@ -25,13 +25,13 @@ if ($user = $this->GetUser())
 		{
 			foreach ($pages as $page)
 			{
-				if ($page["tag"])
+				if ($page['tag'])
 				{
-					if ($this->config["hide_locked"]) $access = $this->HasAccess("read",$page["page_id"]);
+					if ($this->config['hide_locked']) $access = $this->HasAccess("read",$page['page_id']);
 					else $access = true;
 					if ($access)
 					{
-						$links[] = $this->Link("/".$page["tag"]);
+						$links[] = $this->Link("/".$page['tag']);
 					}
 				}
 			}
@@ -44,14 +44,14 @@ if ($user = $this->GetUser())
 
 		$title = str_replace("%1", $this->ComposeLinkToPage($this->tag),
 		str_replace("%2",
-		($this->config["referrers_purge_time"] ?
-		($this->config["referrers_purge_time"] == 1 ?
+		($this->config['referrers_purge_time'] ?
+		($this->config['referrers_purge_time'] == 1 ?
 		$this->GetTranslation("Last24Hours") :
-		str_replace("%1",$this->config["referrers_purge_time"],
+		str_replace("%1",$this->config['referrers_purge_time'],
 		$this->GetTranslation("LastDays"))): ""),
 		str_replace("%3",$this->href("referrers_sites"),$this->GetTranslation("ExternalPages"))));
 
-		$referrers = $this->LoadReferrers($this->page["page_id"]);
+		$referrers = $this->LoadReferrers($this->page['page_id']);
 	}
 
 	print("<strong>$title</strong><br /><br />\n");

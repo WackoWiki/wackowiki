@@ -7,7 +7,7 @@ v2.2.2.
 
 */
 
-// TODO: for default use only red, yello, green, grey maybe blue .($this->object->config["allow_x11colors"] == 1 ? "x11_colors" : "default_colors").
+// TODO: for default use only red, yello, green, grey maybe blue .($this->object->config['allow_x11colors'] == 1 ? "x11_colors" : "default_colors").
 class WackoFormatter
 {
 	var $object;
@@ -191,7 +191,7 @@ class WackoFormatter
 			"<\[.*?\]>|".
 			"\+\+\S\+\+|\+\+(\S[^\n]*?\S)\+\+|".
 			"\b[[:alpha:]]+:\/\/\S+|mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\_\.]+|\?\?\S\?\?|\?\?(\S.*?\S)\?\?|".
-			"\\\\\\\\[".$object->language["ALPHANUM_P"]."\-\_\\\!\.]+|".
+			"\\\\\\\\[".$object->language['ALPHANUM_P']."\-\_\\\!\.]+|".
 			"\*\*[^\n]*?\*\*|\#\#[^\n]*?\#\#|\¹\¹[^\n]*?\¹\¹|\'\'.*?\'\'|\!\!\S\!\!|\!\!(\S.*?\S)\!\!|__[^\n]*?__|".
 			"\^\^\S*?\^\^|vv\S*?vv|".
 			"<!--markup:1:begin-->\S<!--markup:1:end-->|<!--markup:2:begin-->\S<!--markup:2:end-->|<!--markup:1:begin-->(\S.*?\S)<!--markup:1:end-->|<!--markup:2:begin-->(\S.*?\S)<!--markup:2:end-->|".
@@ -200,17 +200,17 @@ class WackoFormatter
 			"\n[ \t]*=======.*?={2,7}|\n[ \t]*======.*?={2,7}|\n[ \t]*=====.*?={2,7}|\n[ \t]*====.*?={2,7}|\n[ \t]*===.*?={2,7}|\n[ \t]*==.*?={2,7}|".
 			"[-]{4,}|---\n?\s*|--\S--|--(\S.*?[^- \t\n\r])--|".
 			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]|([0-9]{1,3}))[\.\)](\#[0-9]{1,3})?)?|".
-			"\b[[:alnum:]]+[:][".$object->language["ALPHANUM_P"]."\!\.][".$object->language["ALPHANUM_P"]."\-\_\.\+\&\=\#]+|".
+			"\b[[:alnum:]]+[:][".$object->language['ALPHANUM_P']."\!\.][".$object->language['ALPHANUM_P']."\-\_\.\+\&\=\#]+|".
 			"~([^ \t\n]+)|".
-			 ($this->object->config["disable_tikilinks"] == 1
+			 ($this->object->config['disable_tikilinks'] == 1
 				? ""
-				: "\b(".$object->language["UPPER"].$object->language["LOWER"].$object->language["ALPHANUM"]."*\.".$object->language["ALPHA"].$object->language["ALPHANUM"]."+)\b|").
+				: "\b(".$object->language['UPPER'].$object->language['LOWER'].$object->language['ALPHANUM']."*\.".$object->language['ALPHA'].$object->language['ALPHANUM']."+)\b|").
 			 ($this->object->config["disable_wikilinks"] == 1
 				? ""
-				: "(~?)(?<=[^\.".$object->language["ALPHANUM_P"]."]|^)(((\.\.|!)?\/)?".$object->language["UPPER"].$object->language["LOWER"]."+".$object->language["UPPERNUM"].$object->language["ALPHANUM"]."*)\b|").
+				: "(~?)(?<=[^\.".$object->language['ALPHANUM_P']."]|^)(((\.\.|!)?\/)?".$object->language['UPPER'].$object->language['LOWER']."+".$object->language['UPPERNUM'].$object->language['ALPHANUM']."*)\b|").
 			 ($this->object->config["disable_npjlinks"] == 1
 				? ""
-				: "(~?)".$object->language["ALPHANUM"]."+\@".$object->language["ALPHA"]."*(?!".$object->language["ALPHANUM"]."*\.".$object->language["ALPHANUM"]."+)(\:".$object->language["ALPHANUM"]."*)?|".$object->language["ALPHANUM"]."+\:\:".$object->language["ALPHANUM"]."+|").
+				: "(~?)".$object->language['ALPHANUM']."+\@".$object->language['ALPHA']."*(?!".$object->language['ALPHANUM']."*\.".$object->language['ALPHANUM']."+)(\:".$object->language['ALPHANUM']."*)?|".$object->language['ALPHANUM']."+\:\:".$object->language['ALPHANUM']."+|").
 			"\n)/sm";
 
 		$this->NOTLONGREGEXP =
@@ -370,7 +370,7 @@ class WackoFormatter
 		$wacko = & $this->object;
 		$callback = array(&$this, "WackoCallback");
 
-		$this->page_id = $wacko->page["page_id"];
+		$this->page_id = $wacko->page['page_id'];
 		if (!$this->page_id)
 			$this->page_id = trim(substr(crc32(time()), 0, 5), "-");
 
@@ -582,7 +582,7 @@ class WackoFormatter
 				preg_match("/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/s", $thing, $matches))
 		{
 			$this->br = 1;
-			if ($matches[3] && $color = ($this->object->config["allow_x11colors"] == 1 ? $this->x11_colors[$matches[3]] : $this->colors[$matches[3]]))
+			if ($matches[3] && $color = ($this->object->config['allow_x11colors'] == 1 ? $this->x11_colors[$matches[3]] : $this->colors[$matches[3]]))
 			{
 				return "<span class=\"cl-".$color."\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[4])."</span>";
 			}
@@ -592,7 +592,7 @@ class WackoFormatter
 		else if (preg_match("/^\?\?((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\?\?$/s", $thing, $matches))
 		{
 			$this->br = 1;
-			if ($matches[3] && $color = ($this->object->config["allow_x11colors"] == 1 ? $this->x11_colors[$matches[3]] : $this->colors[$matches[3]]))
+			if ($matches[3] && $color = ($this->object->config['allow_x11colors'] == 1 ? $this->x11_colors[$matches[3]] : $this->colors[$matches[3]]))
 			{
 				return "<span class=\"mark-".$color."\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[4])."</span>";
 			}
@@ -617,7 +617,7 @@ class WackoFormatter
 			}
 		}
 		// lan path
-		else if (preg_match("/^\\\\\\\\([".$wacko->language["ALPHANUM_P"]."\\\!\.\-\_]+)$/", $thing, $matches))
+		else if (preg_match("/^\\\\\\\\([".$wacko->language['ALPHANUM_P']."\\\!\.\-\_]+)$/", $thing, $matches))
 		{
 			//[[:alnum:]\\\!\.\_\-]+\\
 			return "<a href=\"file://///".str_replace("\\","/",$matches[1])."\">\\\\".$matches[1]."</a>";
@@ -946,20 +946,20 @@ class WackoFormatter
 			return $result;
 		}
 		// interwiki links
-		else if (preg_match("/^([[:alnum:]]+[:][".$wacko->language["ALPHANUM_P"]."\!\.][".$wacko->language["ALPHANUM_P"]."\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\-\_\=]?)$/s", $thing, $matches))
+		else if (preg_match("/^([[:alnum:]]+[:][".$wacko->language['ALPHANUM_P']."\!\.][".$wacko->language['ALPHANUM_P']."\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\-\_\=]?)$/s", $thing, $matches))
 		{
 			return $wacko->PreLink($matches[1]).$matches[2];
 		}
 		// tikiwiki links
 		else if ((!$wacko->_formatter_noautolinks) &&
-				$wacko->config["disable_tikilinks"] != 1 &&
-				(preg_match("/^(".$wacko->language["UPPER"].$wacko->language["LOWER"].$wacko->language["ALPHANUM"]."*\.".$wacko->language["ALPHA"].$wacko->language["ALPHANUM"]."+)$/s", $thing, $matches)))
+				$wacko->config['disable_tikilinks'] != 1 &&
+				(preg_match("/^(".$wacko->language['UPPER'].$wacko->language['LOWER'].$wacko->language['ALPHANUM']."*\.".$wacko->language['ALPHA'].$wacko->language['ALPHANUM']."+)$/s", $thing, $matches)))
 		{
 			return $wacko->PreLink($thing);
 		}
 		// npj links
 		else if ((!$wacko->_formatter_noautolinks) &&
-				(preg_match("/^(~?)(".$wacko->language["ALPHANUM"]."+\@".$wacko->language["ALPHA"]."*(\:".$wacko->language["ALPHANUM"]."*)?|".$wacko->language["ALPHANUM"]."+\:\:".$wacko->language["ALPHANUM"]."+)$/s", $thing, $matches)))
+				(preg_match("/^(~?)(".$wacko->language['ALPHANUM']."+\@".$wacko->language['ALPHA']."*(\:".$wacko->language['ALPHANUM']."*)?|".$wacko->language['ALPHANUM']."+\:\:".$wacko->language['ALPHANUM']."+)$/s", $thing, $matches)))
 		{
 			if ($matches[1] == "~")
 			return $matches[2];
@@ -967,7 +967,7 @@ class WackoFormatter
 		}
 		// wacko links!
 		else if ((!$wacko->_formatter_noautolinks) &&
-				(preg_match("/^(((\.\.)|!)?\/?|~)?(".$wacko->language["UPPER"].$wacko->language["LOWER"]."+".$wacko->language["UPPERNUM"].$wacko->language["ALPHANUM"]."*)$/s", $thing, $matches)))
+				(preg_match("/^(((\.\.)|!)?\/?|~)?(".$wacko->language['UPPER'].$wacko->language['LOWER']."+".$wacko->language['UPPERNUM'].$wacko->language['ALPHANUM']."*)$/s", $thing, $matches)))
 		{
 			if ($matches[1] == "~")
 			return $matches[4];

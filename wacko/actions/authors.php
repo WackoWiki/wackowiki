@@ -46,13 +46,13 @@ else
 		if ($_authors = $this->LoadAll(
 		"( SELECT u.user_name AS name, YEAR(r.modified) AS year ".
 		"FROM {$this->config['table_prefix']}revision r ".
-			"INNER JOIN ".$this->config["table_prefix"]."user u ON (r.user_id = u.user_id) ".
+			"INNER JOIN ".$this->config['table_prefix']."user u ON (r.user_id = u.user_id) ".
 		"WHERE r.supertag = '".quote($this->dblink, $this->supertag)."' ".( $cluster ? "OR r.supertag LIKE '".quote($this->dblink, $this->supertag)."/%' " : '' ).
 		"GROUP BY u.user_name, year ) ".
 		"UNION ".
 		"( SELECT u.user_name AS name, YEAR(p.modified) AS year ".
 		"FROM {$this->config['table_prefix']}page p ".
-			"LEFT JOIN ".$this->config["table_prefix"]."user u ON (p.user_id = u.user_id) ".
+			"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 		"WHERE p.supertag = '".quote($this->dblink, $this->supertag)."' ".( $cluster ? "OR p.supertag LIKE '".quote($this->dblink, $this->supertag)."/%' " : '' ).
 		"GROUP BY u.user_name, year ) ".
 		"ORDER BY name ASC, year ASC", 1))

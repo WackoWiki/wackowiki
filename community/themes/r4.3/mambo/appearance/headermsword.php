@@ -5,20 +5,20 @@
 
 <html>
 <head>
-  <title><?php echo htmlspecialchars($this->config["wacko_name"])." : ".$this->tag; ?></title>
+  <title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".$this->tag; ?></title>
 <?php if ($this->method != 'show')
        echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
   <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
-  <meta name="keywords" content="<?php echo $this->config["meta_keywords"] ?>" />
-  <meta name="description" content="<?php echo $this->config["meta_description"] ?>" />
-  <link rel="stylesheet" type="text/css" href="<?php echo $this->config["theme_url"] ?>css/msword.css" />
+  <meta name="keywords" content="<?php echo $this->config['meta_keywords'] ?>" />
+  <meta name="description" content="<?php echo $this->config['meta_description'] ?>" />
+  <link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/msword.css" />
 </head>
 
 <body>
 
 <div class="header">
   <h1>
-  <?php echo $this->config["wacko_name"] ?>: 
-  <a href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->tag); ?>"><?php echo $this->tag; ?></a> 
+  <?php echo $this->config['wacko_name'] ?>: 
+  <a href="<?php echo $this->config['base_url'] ?>TextSearch?phrase=<?php echo urlencode($this->tag); ?>"><?php echo $this->tag; ?></a> 
   </h1>
 </div>

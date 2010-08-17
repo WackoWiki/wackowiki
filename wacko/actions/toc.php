@@ -20,7 +20,7 @@ if ($page)
 	$context = $page;
 	$_page = $this->LoadPage($page);
 	if (!$title) $title = $page;
-	$link = $this->Href("",$_page["tag"]);
+	$link = $this->Href("",$_page['tag']);
 }
 else
 {
@@ -42,7 +42,7 @@ if (!$nomark)
 	print "<div class=\"layout-box\"><p class=\"layout-box\"><span> ".$this->GetTranslation("TOCTitle")." ".$this->Link($ppage, "", $title)."  </span></p>";
 }
 
-if (!$this->HasAccess("read",$_page["page_id"]))
+if (!$this->HasAccess("read",$_page['page_id']))
 	print $this->GetTranslation("ReadAccessDenied");
 
 else
@@ -77,7 +77,7 @@ else
 		$this->tocs[ $context ] = &$toc;
 		// it is now necessary to place flag about the fact that good to [iskurochit] in Post-[vake]
 		// the source page, adding there [tsyfirki]
-		if (!$ppage) { $this->post_wacko_toc = &$toc; $this->post_wacko_action["toc"] = 1; }
+		if (!$ppage) { $this->post_wacko_toc = &$toc; $this->post_wacko_action['toc'] = 1; }
 	} // --------------------------------------------------------------
 	// display!
 	foreach( $toc as $v )

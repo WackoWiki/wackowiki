@@ -3,9 +3,9 @@
 if ($this->HasAccess("comment") && $this->HasAccess("read"))
 {
 	// find number
-	if ($latestComment = $this->LoadSingle("SELECT tag, page_id FROM ".$this->config["table_prefix"]."page WHERE comment_on_id != '0' ORDER BY page_id DESC LIMIT 1"))
+	if ($latestComment = $this->LoadSingle("SELECT tag, page_id FROM ".$this->config['table_prefix']."page WHERE comment_on_id != '0' ORDER BY page_id DESC LIMIT 1"))
 	{
-		preg_match("/^Comment([0-9]+)$/", $latestComment["tag"], $matches);
+		preg_match("/^Comment([0-9]+)$/", $latestComment['tag'], $matches);
 		$num = $matches[1] + 1;
 	}
 	else
@@ -14,12 +14,12 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 	}
 
 	$user = $this->GetUser();
-	$body = str_replace("\r", "", $_POST["body"]);
-	$body = trim($_POST["body"]);
+	$body = str_replace("\r", "", $_POST['body']);
+	$body = trim($_POST['body']);
 
-	if(isset($_POST["title"]))
+	if(isset($_POST['title']))
 	{
-		$title = trim($_POST["title"]);
+		$title = trim($_POST['title']);
 	}
 
 	// watch page
@@ -56,7 +56,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 		// Start Comment Captcha
 
 		// Only show captcha if the admin enabled it in the config file
-		if ($this->config["captcha_new_comment"])
+		if ($this->config['captcha_new_comment'])
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
 			if (extension_loaded('gd'))
@@ -123,7 +123,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 			$this->SavePage("Comment".$num, $title, $body, $edit_note = "", $minor_edit = "0", $comment_on_id);
 
 			// log event
-			$this->Log(5, str_replace("%2", $this->tag." ".$this->page["title"], str_replace("%1", "Comment".$num, $this->GetTranslation("LogCommentPosted", $this->config["language"]))));
+			$this->Log(5, str_replace("%2", $this->tag." ".$this->page['title'], str_replace("%1", "Comment".$num, $this->GetTranslation("LogCommentPosted", $this->config['language']))));
 
 		// restore username after anonymous publication
 		if ($_POST['noid_publication'] == $this->tag)

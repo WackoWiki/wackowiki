@@ -16,7 +16,7 @@ if (!isset($letter)) $letter = "";
 if(isset($letter)) $letter = strtoupper(substr($letter, 0, 1));
 
 // Get tags for all the pages, even if they're not being displayed on this index page
-$sql = "SELECT page_id, tag FROM ".$this->config["table_prefix"]."page WHERE comment_on_id = '0' ORDER BY tag";
+$sql = "SELECT page_id, tag FROM ".$this->config['table_prefix']."page WHERE comment_on_id = '0' ORDER BY tag";
 $pages = $this->LoadAll($sql, 1);
 
 $total = 0;
@@ -29,8 +29,8 @@ $letter_count = 0;
 $page_links .= "<ul>\n";
 foreach($pages as $page)
 {
-	$firstChar = strtoupper($page["tag"][0]);
-	if(!preg_match("/".$this->language["ALPHA"]."/", $firstChar)) { $firstChar = "#"; }
+	$firstChar = strtoupper($page['tag'][0]);
+	if(!preg_match("/".$this->language['ALPHA']."/", $firstChar)) { $firstChar = "#"; }
 
 	// Create alphabet links at top of page - Don't display this menu if the user specified a particluar letter
 	if($firstChar != $curChar)
@@ -43,8 +43,8 @@ foreach($pages as $page)
 	}
 
 	// Display the actual page link
-	if($this->config["hide_locked"])
-		$access = $this->HasAccess("read",$page["page_id"]);
+	if($this->config['hide_locked'])
+		$access = $this->HasAccess("read",$page['page_id']);
 	else
 		$access = true;
 
@@ -68,7 +68,7 @@ foreach($pages as $page)
 						$oldChar = $firstChar;
 					}
 
-					$page_links .= "<li>".$this->Link("/".$page["tag"],"",$page["tag"])."</li>\n";
+					$page_links .= "<li>".$this->Link("/".$page['tag'],"",$page['tag'])."</li>\n";
 
 					$total_visible++;
 				}

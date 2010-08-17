@@ -29,8 +29,8 @@ else
 if ($registered
 &&
 (
-($this->config["upload"] === true) || ($this->config["upload"] == "1") ||
-($this->CheckACL($user,$this->config["upload"]))
+($this->config['upload'] === true) || ($this->config['upload'] == "1") ||
+($this->CheckACL($user,$this->config['upload']))
 )
 )
 {
@@ -45,7 +45,7 @@ if ($registered
 	if (!$this->IsAdmin())
 	$global = "global";
 
-	$maxfilesize = $this->config["upload_max_size"];
+	$maxfilesize = $this->config['upload_max_size'];
 
 	if ($maxsize)
 		if ($maxfilesize > 1 * $maxsize)
@@ -58,7 +58,7 @@ if ($registered
 		<td><label for="FileUpload"><?php echo $this->GetTranslation("UploadFor");?>:&nbsp;</label>
 		<input type="hidden" name="MAX_FILE_SIZE"
 			value="<?php echo $maxfilesize;?>" /></td>
-		<td style="white-space: nowrap;"><input name="file" id="FileUpload" type="file" />&nbsp;(<?php echo $this->GetTranslation("UploadMax").$this->binary_multiples(($this->config["upload_max_size"] * 1024), true, true, true);?>)</td>
+		<td style="white-space: nowrap;"><input name="file" id="FileUpload" type="file" />&nbsp;(<?php echo $this->GetTranslation("UploadMax").$this->binary_multiples(($this->config['upload_max_size'] * 1024), true, true, true);?>)</td>
 	</tr>
 	<?php
 	if ($global)

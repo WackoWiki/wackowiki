@@ -5,7 +5,7 @@
 if (!$this->page) $this->Redirect($this->href("show"));
 
 // deny for comment
-if ($this->page["comment_on_id"]) $this->Redirect($this->href("", $this->page["tag"]));
+if ($this->page['comment_on_id']) $this->Redirect($this->href("", $this->page['tag']));
 
 if ($this->HasAccess("read"))
 {
@@ -16,12 +16,12 @@ if ($this->HasAccess("read"))
 	else
 	{
 		/* obsolete code - or do we need an ability to print old revisions?
-		if ($this->page["latest"] == "0")
+		if ($this->page['latest'] == "0")
 		{
 			print("<div class=\"revisioninfo\">".
 			str_replace("%1",$this->href(),
 			str_replace("%2",$this->tag,
-			str_replace("%3",$this->page["modified"],
+			str_replace("%3",$this->page['modified'],
 			$this->GetTranslation("Revision")))).".</div>");
 		}*/
 
@@ -29,7 +29,7 @@ if ($this->HasAccess("read"))
 		$this->numerate_links = array();
 
 		// build html body
-		$data = $this->Format($this->page["body"], "wacko");
+		$data = $this->Format($this->page['body'], "wacko");
 
 		// display page
 		$data = $this->Format($data, "post_wacko", array("bad" => "good"));
@@ -37,7 +37,7 @@ if ($this->HasAccess("read"))
 		echo $data;
 
 		// display comments
-		if ($_SESSION[$this->config["session_prefix"].'_'."show_comments"][$this->tag] || $this->forum)
+		if ($_SESSION[$this->config['session_prefix'].'_'."show_comments"][$this->tag] || $this->forum)
 		{
 			if ($comments = $this->LoadComments($this->GetPageId()));
 			{
@@ -50,14 +50,14 @@ if ($this->HasAccess("read"))
 
 				foreach ($comments as $comment)
 				{
-					if (!$comment["body_r"]) $comment["body_r"] = $this->Format($comment["body"]);
+					if (!$comment['body_r']) $comment['body_r'] = $this->Format($comment['body']);
 
 					echo "<div class=\"comment\">".
 							"<span class=\"commentinfo\">".
-								"<strong>&#8212; ".( $comment["user"] == GUEST ? "<em>".$this->GetTranslation("Guest")."</em>" : $comment["user"] )."</strong> (".$this->GetTimeStringFormatted($comment["created"]).
-								($comment["modified"] != $comment["created"] ? ", ".$this->GetTranslation("CommentEdited")." ".$this->GetTimeStringFormatted($comment["modified"]) : "").")".
+								"<strong>&#8212; ".( $comment['user'] == GUEST ? "<em>".$this->GetTranslation("Guest")."</em>" : $comment['user'] )."</strong> (".$this->GetTimeStringFormatted($comment['created']).
+								($comment['modified'] != $comment['created'] ? ", ".$this->GetTranslation("CommentEdited")." ".$this->GetTimeStringFormatted($comment['modified']) : "").")".
 							"&nbsp;&nbsp;&nbsp;</span><br />".
-							$this->Format($comment["body_r"], "post_wacko").
+							$this->Format($comment['body_r'], "post_wacko").
 						"</div>\n";
 				}
 				echo "</div>\n";

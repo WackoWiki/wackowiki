@@ -27,7 +27,7 @@ if ($this->IsAdmin())
 		$files = $this->LoadAll(
 			"SELECT u.page_id, filename, supertag ".
 			"FROM {$this->config['table_prefix']}upload u ".
-			"INNER JOIN ".$this->config["table_prefix"]."page p ON (u.page_id = p.page_id) ".
+			"INNER JOIN ".$this->config['table_prefix']."page p ON (u.page_id = p.page_id) ".
 			"WHERE u.page_id != '0'");
 
 		$dir = $this->config["upload_path_per_page"]."/";

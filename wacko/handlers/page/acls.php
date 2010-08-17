@@ -4,8 +4,8 @@
 if (!$this->page) $this->Redirect($this->href("show"));
 
 // deny for comment
-if ($this->page["comment_on_id"])
-$this->Redirect($this->href('', $this->GetCommentOnTag($this->page["comment_on_id"]), 'show_comments=1').'#'.$this->page['tag']);
+if ($this->page['comment_on_id'])
+$this->Redirect($this->href('', $this->GetCommentOnTag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
 // and for forum page
 else if ($this->forum === true && !$this->IsAdmin())
 	$this->Redirect($this->href());
@@ -27,12 +27,12 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			$this->SaveAcl($this->GetPageId(), "comment", $_POST["comment_acl"]);
 
 			// log event
-			$this->Log(2, str_replace("%1", $this->page["tag"]." ".$this->page["title"], $this->GetTranslation("LogACLUpdated", $this->config["language"])));
+			$this->Log(2, str_replace("%1", $this->page['tag']." ".$this->page['title'], $this->GetTranslation("LogACLUpdated", $this->config['language'])));
 
 			$message = $this->GetTranslation("ACLUpdated");
 
 			// change owner?
-			if ($newowner = $_POST["newowner"])
+			if ($newowner = $_POST['newowner'])
 			{
 				// check user exists
 				$exists = $this->LoadSingle(
@@ -65,7 +65,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 					}
 
 					// log event
-					$this->Log(2, str_replace("%2", $newowner, str_replace("%1", $this->page["tag"]." ".$this->page["title"], $this->GetTranslation("LogOwnershipChanged", $this->config["language"]))));
+					$this->Log(2, str_replace("%2", $newowner, str_replace("%1", $this->page['tag']." ".$this->page['title'], $this->GetTranslation("LogOwnershipChanged", $this->config['language']))));
 
 					$message .= $this->GetTranslation("ACLGaveOwnership").$newowner;
 				}
@@ -80,17 +80,17 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 
 			// Change permissions for all comments on this page
 			$comments = $this->LoadAll(
-					"SELECT page_id FROM ".$this->config["table_prefix"]."page WHERE comment_on_id = '".$this->GetPageId()."' AND owner_id='".quote($this->dblink, $this->GetUserId())."'");
+					"SELECT page_id FROM ".$this->config['table_prefix']."page WHERE comment_on_id = '".$this->GetPageId()."' AND owner_id='".quote($this->dblink, $this->GetUserId())."'");
 			foreach ($comments as $num=>$page)
 			{
-				$this->SaveAcl($page["page_id"], "read", $_POST["read_acl"]);
-				$this->SaveAcl($page["page_id"], "write", $_POST["write_acl"]);
-				$this->SaveAcl($page["page_id"], "comment", $_POST["comment_acl"]);
+				$this->SaveAcl($page['page_id'], "read", $_POST["read_acl"]);
+				$this->SaveAcl($page['page_id'], "write", $_POST["write_acl"]);
+				$this->SaveAcl($page['page_id'], "comment", $_POST["comment_acl"]);
 
 				// change owner?
-				if ($newowner = $_POST["newowner"])
+				if ($newowner = $_POST['newowner'])
 				$newowner_id = $this->GetUserIdByName($newowner);
-				$this->SetPageOwner($page["page_id"], $newowner_id);
+				$this->SetPageOwner($page['page_id'], $newowner_id);
 			}
 		}
 
@@ -99,8 +99,8 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 		{
 			$pages = $this->LoadAll("
 				SELECT p.page_id, p.tag, p.title ".
-				"FROM ".$this->config["table_prefix"]."page p ".
-					"LEFT JOIN ".$this->config["table_prefix"]."page c ON (p.comment_on_id = c.page_id) ".
+				"FROM ".$this->config['table_prefix']."page p ".
+					"LEFT JOIN ".$this->config['table_prefix']."page c ON (p.comment_on_id = c.page_id) ".
 				"WHERE (p.supertag = '".quote($this->dblink, $this->supertag)."'".
 				" OR p.supertag LIKE '".quote($this->dblink, $this->supertag."/%")."'".
 				" OR p.comment_on_id = '".quote($this->dblink, $this->GetPageId())."'".
@@ -113,28 +113,28 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 			foreach ($pages as $num=>$page)
 			{
 				// store lists
-				$this->SaveAcl($page["page_id"], "read", $_POST["read_acl"]);
-				$this->SaveAcl($page["page_id"], "write", $_POST["write_acl"]);
-				$this->SaveAcl($page["page_id"], "comment", $_POST["comment_acl"]);
+				$this->SaveAcl($page['page_id'], "read", $_POST["read_acl"]);
+				$this->SaveAcl($page['page_id'], "write", $_POST["write_acl"]);
+				$this->SaveAcl($page['page_id'], "comment", $_POST["comment_acl"]);
 
 				// log event
-				$this->Log(2, str_replace("%1", $page["tag"]." ".$page["title"], $this->GetTranslation("LogACLUpdated", $this->config["language"])));
+				$this->Log(2, str_replace("%1", $page['tag']." ".$page['title'], $this->GetTranslation("LogACLUpdated", $this->config['language'])));
 
 				// change owner?
-				if ($newowner = $_POST["newowner"])
+				if ($newowner = $_POST['newowner'])
 				{
 					$newowner_id = $this->GetUserIdByName($newowner);
-					$this->SetPageOwner($page["page_id"], $newowner_id);
-					$ownedpages .= $this->Href("", $page["tag"])."\n";
+					$this->SetPageOwner($page['page_id'], $newowner_id);
+					$ownedpages .= $this->Href("", $page['tag'])."\n";
 
 					// log event
-					$this->Log(2, str_replace("%2", $exists["user_name"], str_replace("%1", $page["tag"]." ".$page["title"], $this->GetTranslation("LogOwnershipChanged", $this->config["language"]))));
+					$this->Log(2, str_replace("%2", $exists['user_name'], str_replace("%1", $page['tag']." ".$page['title'], $this->GetTranslation("LogOwnershipChanged", $this->config['language']))));
 				}
 			}
 
 			$message = $this->GetTranslation("ACLUpdated");
 
-			if ($newowner = $_POST["newowner"])
+			if ($newowner = $_POST['newowner'])
 			{
 				$message .= $this->GetTranslation("ACLGaveOwnership").$newowner;
 
@@ -175,13 +175,13 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 <br />
 <div class="cssform">
 <p><label for="read_acl"><?php echo $this->GetTranslation("ACLRead"); ?></label>
-<textarea id="read_acl" name="read_acl" rows="4" cols="20"><?php echo $readACL["list"] ?></textarea>
+<textarea id="read_acl" name="read_acl" rows="4" cols="20"><?php echo $readACL['list'] ?></textarea>
 </p>
 <p><label for="write_acl"><?php echo $this->GetTranslation("ACLWrite"); ?></label>
-<textarea id="write_acl" name="write_acl" rows="4" cols="20"><?php echo $writeACL["list"] ?></textarea>
+<textarea id="write_acl" name="write_acl" rows="4" cols="20"><?php echo $writeACL['list'] ?></textarea>
 </p>
 <p><label for="comment_acl"><?php echo $this->GetTranslation("ACLComment"); ?></label>
-<textarea id="comment_acl" name="comment_acl" rows="4" cols="20"><?php echo $commentACL["list"] ?></textarea>
+<textarea id="comment_acl" name="comment_acl" rows="4" cols="20"><?php echo $commentACL['list'] ?></textarea>
 </p>
 <p><label for="newowner"><?php echo $this->GetTranslation("SetOwner"); ?></label>
 <select id="newowner" name="newowner">
@@ -191,7 +191,7 @@ if ($this->UserIsOwner() || $this->IsAdmin())
 	{
 		foreach($users as $user)
 		{
-			print("<option value=\"".htmlspecialchars($user["user_name"])."\">".$user["user_name"]."</option>\n");
+			print("<option value=\"".htmlspecialchars($user['user_name'])."\">".$user['user_name']."</option>\n");
 		}
 	}
 	?>
