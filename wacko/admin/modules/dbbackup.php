@@ -22,8 +22,8 @@ function admin_dbbackup(&$engine, &$module)
 	$directories	= & $module['vars'][1];
 
 	// backup scheme
-	if (!isset($_GET['structure']) && 
-		!isset($_GET['data'])  && 
+	if (!isset($_GET['structure']) &&
+		!isset($_GET['data'])  &&
 		!isset($_GET['files']) )
 	{
 		$scheme['structure']	= 1;
@@ -171,7 +171,7 @@ function admin_dbbackup(&$engine, &$module)
 			global backup files and cache files (with their choice of
 			they are always saved in full).<br />
 			<br />
-			<u>Attention</u>: To avoid loss of information from the WackoWiki database,
+			<u>Attention</u>: To avoid loss of information from the database,
 			indicate the root cluster, the table from this backup will not be
 			restructured; similar, with only the reserve of
 			table without saving the data. To complete the conversion tables in the format

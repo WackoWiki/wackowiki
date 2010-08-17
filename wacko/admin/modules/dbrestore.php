@@ -310,7 +310,7 @@ function admin_dbrestore(&$engine, &$module)
 				</form>
 				<br />
 				<p><small>
-					* Before restoring the backup <u>cluster</u> WackoWiki, the target table
+					* Before restoring the backup <u>cluster</u>, the target table
 					not destroyed (to prevent loss of information from non -
 					Clusters). Thus, in the recovery process will occur
 					duplicate record. In normal mode, they will be replaced by recordings of

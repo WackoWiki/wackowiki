@@ -63,7 +63,7 @@ function admin_configsecurity(&$engine, &$module)
 			$engine->Query(
 				"UPDATE {$engine->config['table_prefix']}config SET value = '$value' WHERE config_name = '$key'");
 		}
-		$engine->Log(1, '!!Updated security settings WackoWiki!!');
+		$engine->Log(1, '!!Updated security settings!!');
 		$engine->Redirect(rawurldecode($engine->href()));
 	}
 ?>
