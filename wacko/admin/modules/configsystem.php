@@ -56,7 +56,7 @@ function admin_configsystem(&$engine, &$module)
 			$engine->Query(
 				"UPDATE {$engine->config['table_prefix']}config SET value = '$value' WHERE config_name = '$key'");
 		}
-		$engine->Log(1, 'Updated config parameters WackoWiki');
+		$engine->Log(1, 'Updated config parameters');
 		$engine->Redirect(rawurldecode($engine->href()));
 	}
 ?>
@@ -92,7 +92,7 @@ function admin_configsystem(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="debug_admin_only"><strong>Closed diagnosis:</strong><br />
-				<small>Show debug data of the program (and DBMS) only for the WackoWiki administrator.</small></label></td>
+				<small>Show debug data of the program (and DBMS) only for the administrator.</small></label></td>
 				<td><input type="checkbox" id="debug_admin_only" name="debug_admin_only" value="1"<?php echo ( $engine->config['debug_admin_only'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr>

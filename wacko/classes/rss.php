@@ -54,7 +54,7 @@ class RSS
 		$xml .= "</image>\n";
 		$xml .= "<language>".$this->engine->config['language']."</language>\n";
 		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-		$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
+		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
 		if (list ($pages, $pagination) = $this->engine->LoadRecentlyChanged())
 		{
@@ -210,7 +210,7 @@ class RSS
 		$xml .= "</image>\n";
 		$xml .= "<language>".$this->engine->config['language']."</language>\n";
 		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-		$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
+		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
 		if ( $pages = $this->engine->LoadRecentlyComment() ) {
 			foreach ($pages as $i => $page) {

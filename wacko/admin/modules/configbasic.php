@@ -59,7 +59,7 @@ function admin_configbasic(&$engine, &$module)
 			$engine->Query(
 				"UPDATE {$engine->config['table_prefix']}config SET value = '$value' WHERE config_name = '$key'");
 		}
-		$engine->Log(1, 'Updated basic parameters  WackoWiki');
+		$engine->Log(1, 'Updated basic parameters');
 		$engine->Redirect(rawurldecode($engine->href()));
 	}
 ?>
