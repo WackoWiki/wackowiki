@@ -267,7 +267,7 @@
 							<div style="background-image:url(<?php echo $this->config['theme_url'] ?>images/tools_top.png); height:7px;"></div>
 <?php
 	// defining tabs constructor
-	function EchoTab($link, $hint, $title, $active = false, $bonus = '')
+	function echo_tab($link, $hint, $title, $active = false, $bonus = '')
 	{
 		global $engine;
 
@@ -284,7 +284,7 @@
 	}
 
 	// create tab
-	echo EchoTab(
+	echo echo_tab(
 		$this->href('new'),
 		$this->get_translation('CreateNewPageTip'),
 		$this->get_translation("CreatePageButton"),
@@ -292,7 +292,7 @@
 		'n');
 
 	// show tab
-	echo EchoTab(
+	echo echo_tab(
 		$this->href('show'),
 		$this->get_translation('ShowTip'),
 		$this->has_access('read') ? $this->get_translation("ShowText") : '',
@@ -300,7 +300,7 @@
 		'v');
 
 	// edit tab
-	echo EchoTab(
+	echo echo_tab(
 		$this->href('edit'),
 		$this->get_translation('EditTip'),
 		((!$this->page && $this->has_access('create')) || $this->is_admin() ||
@@ -311,7 +311,7 @@
 		'e');
 
 	// revisions tab
-	echo EchoTab(
+	echo echo_tab(
 		$this->href('revisions'),
 		$this->get_translation('RevisionTip'),
 		(/* $this->forum === false && */ $this->page && $this->has_access('read')) ? $this->get_translation('RevisionText') : '',
@@ -319,7 +319,7 @@
 		'r');
 
 	// remove tab
-	echo EchoTab(
+	echo echo_tab(
 		$this->href('remove'),
 		$this->get_translation('DeleteTip'),
 		($this->page && ($this->is_admin() || !$this->config['remove_onlyadmins'] && (
@@ -329,7 +329,7 @@
 		$this->method == 'remove');
 
 	// referrers tab
-	echo EchoTab(
+	echo echo_tab(
 		$this->href('referrers'),
 		$this->get_translation('ReferrersTip'),
 		($this->page && $this->has_access('read')) ? $this->get_translation("ReferrersText") : '',
@@ -337,7 +337,7 @@
 		'l');
 
 	// moderation tab
-	echo EchoTab(
+	echo echo_tab(
 		$this->href('moderate'),
 		$this->get_translation('ModerateTip'),
 		($this->is_moderator() && $this->has_access('read')) ? $this->get_translation('ModerateText') : '',
@@ -345,7 +345,7 @@
 		'm');
 
 	// settings tab
-	echo EchoTab(
+	echo echo_tab(
 		$this->href('properties'),
 		$this->get_translation('PropertiesTip'),
 		(/* $this->forum === false && $this->page && */ ($this->is_admin() /*|| $this->is_moderator() */|| $this->user_is_owner())) ? $this->get_translation("PropertiesText") : '',
@@ -353,7 +353,7 @@
 		's');
 
 	// upload tab
-	echo EchoTab(
+	echo echo_tab(
 		$this->href('upload'),
 		$this->get_translation('FilesTip'),
 		(/* $this->forum === false && */ $this->page && $this->has_access('upload')) ? $this->get_translation('FilesText') : '',
@@ -361,7 +361,7 @@
 		'u');
 
 	// acls tab
-	echo EchoTab(
+	echo echo_tab(
 		$this->href('acls'),
 		$this->get_translation('ACLTip'),
 		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation("ACLText") : '',

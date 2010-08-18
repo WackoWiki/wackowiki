@@ -174,7 +174,7 @@ class WackoFormatter
 	"rosybrown" => "rosybrown",
 	);
 
-	function WackoFormatter( &$object )
+	function wacko_formatter( &$object )
 	{
 		$this->object = &$object;
 
@@ -230,7 +230,7 @@ class WackoFormatter
 			")/sm";
 	}
 
-	function IndentClose()
+	function indent_close()
 	{
 		$result = '';
 
@@ -248,7 +248,7 @@ class WackoFormatter
 		return $result;
 	}
 
-	function WackoPreprocess($things)
+	function wacko_preprocess($things)
 	{
 		$formatter = "";
 		$output = "";
@@ -258,7 +258,7 @@ class WackoFormatter
 
 		if ($thing{0} == "~")
 			if ($thing{1} == "~")
-				return "~~".$this->WackoPreprocess(array(0, substr($thing, 2)));
+				return "~~".$this->wacko_preprocess(array(0, substr($thing, 2)));
 
 		// escaped text
 		if (preg_match("/^<!--escaped-->(.*)<!--escaped-->$/s", $thing, $matches))
@@ -339,14 +339,14 @@ class WackoFormatter
 		return $thing;
 	}
 
-	function WackoMiddleprocess($things)
+	function wacko_middleprocess($things)
 	{
 		$thing = $things[1];
 		$wacko = &$this->object;
-		$callback = array( &$this, "WackoCallback");
+		$callback = array( &$this, "wacko_callback");
 
 		if ($thing{0} == "~")
-		if ($thing{1} == "~") return "~~".$this->WackoMiddleprocess( array(0,substr($thing,2)) );
+		if ($thing{1} == "~") return "~~".$this->wacko_middleprocess( array(0,substr($thing,2)) );
 
 		// escaped text
 		if (preg_match("/^<!--escaped-->(.*)<!--escaped-->$/s", $thing, $matches))
@@ -362,13 +362,13 @@ class WackoFormatter
 		return $thing;
 	}
 
-	function WackoCallback($things)
+	function wacko_callback($things)
 	{
 		$result = NULL;
 		$li = "";
 		$thing = $things[1];
 		$wacko = & $this->object;
-		$callback = array(&$this, "WackoCallback");
+		$callback = array(&$this, "wacko_callback");
 
 		$this->page_id = $wacko->page['page_id'];
 		if (!$this->page_id)
@@ -442,7 +442,7 @@ class WackoFormatter
 					$cells[$i] = substr($cells[$i], 1);
 
 				$output	.= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<th class=\"userhead\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$i])));
-				$output	.= $this->IndentClose();
+				$output	.= $this->indent_close();
 				$output	.= "</th>";
 			}
 			if (($this->cols <> 0) and ($count < $this->cols))
@@ -454,7 +454,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 
 				$output	.= str_replace("\177", '', str_replace("\177"."<br />\n", "", "<th class=\"userhead\" colspan=\"".($this->cols-$count + 1)."\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
-				$output	.= $this->IndentClose();
+				$output	.= $this->indent_close();
 				$output	.= "</th>";
 			}
 			else
@@ -466,7 +466,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 
 				$output	.= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<th class=\"userhead\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
-				$output	.= $this->IndentClose();
+				$output	.= $this->indent_close();
 				$output	.= "</th>";
 			}
 			$output .= "</tr>";
@@ -500,7 +500,7 @@ class WackoFormatter
 					$cells[$i] = substr($cells[$i], 1);
 
 				$output .= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<td class=\"usercell\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$i])));
-				$output .= $this->IndentClose();
+				$output .= $this->indent_close();
 				$output .= "</td>";
 			}
 			if (($this->cols <> 0) and ($count < $this->cols))
@@ -512,7 +512,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 
 				$output .= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<td class=\"usercell\" colspan=\"".($this->cols-$count + 1)."\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
-				$output .= $this->IndentClose();
+				$output .= $this->indent_close();
 				$output .= "</td>";
 			}
 			else
@@ -524,7 +524,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 
 				$output .= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<td  class=\"usercell\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
-				$output .= $this->IndentClose();
+				$output .= $this->indent_close();
 				$output .= "</td>";
 			}
 			$output .= "</tr>";
@@ -653,42 +653,42 @@ class WackoFormatter
 		// headers
 		else if (preg_match("/\n[ \t]*=======(.*?)={2,7}$/", $thing, $matches))
 		{
-			$result = $this->IndentClose();
+			$result = $this->indent_close();
 			$this->br = 0;
 			$wacko->headerCount++;
 			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h6>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h6>";
 		}
 		else if (preg_match("/\n[ \t]*======(.*?)={2,7}$/", $thing, $matches))
 		{
-			$result = $this->IndentClose();
+			$result = $this->indent_close();
 			$this->br = 0;
 			$wacko->headerCount++;
 			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h5>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h5>";
 		}
 		else if (preg_match("/\n[ \t]*=====(.*?)={2,7}$/", $thing, $matches))
 		{
-			$result = $this->IndentClose();
+			$result = $this->indent_close();
 			$this->br = 0;
 			$wacko->headerCount++;
 			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h4>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h4>";
 		}
 		else if (preg_match("/\n[ \t]*====(.*?)={2,7}$/", $thing, $matches))
 		{
-			$result = $this->IndentClose();
+			$result = $this->indent_close();
 			$this->br = 0;
 			$wacko->headerCount++;
 			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h3>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h3>";
 		}
 		else if (preg_match("/\n[ \t]*===(.*?)={2,7}$/", $thing, $matches))
 		{
-			$result = $this->IndentClose();
+			$result = $this->indent_close();
 			$this->br = 0;
 			$wacko->headerCount++;
 			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h2>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h2>";
 		}
 		else if (preg_match("/\n[ \t]*==(.*?)={2,7}$/", $thing, $matches))
 		{
-			$result = $this->IndentClose();
+			$result = $this->indent_close();
 			$this->br = 0;
 			$wacko->headerCount++;
 			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h1>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h1>";
@@ -934,7 +934,7 @@ class WackoFormatter
 		{
 			// if we got here, there was no tab in the next line;
 			// this means that we can close all open indents.
-			$result = $this->IndentClose();
+			$result = $this->indent_close();
 
 			if ($result)
 				$this->br = 0;

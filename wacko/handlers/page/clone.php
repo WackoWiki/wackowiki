@@ -84,7 +84,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access("write", $t
 		{
 			// ToDo: clone all sheeps and optional ACLs
 			print "<p><b>".$this->get_translation("MassCloning")."</b><p>";   //!!!
-			#RecursiveMove($this, $this->tag );
+			#recursive_move($this, $this->tag );
 		}
 	}
 	else

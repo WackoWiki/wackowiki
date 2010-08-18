@@ -328,9 +328,15 @@ class Init
 	// SESSION HANDLING
 	function session()
 	{
-		$_cookie_path = $this->config['cookie_path'];
-		echo "#################".$_cookie_path;
-		($this->config['ssl'] == true ? $secure = true : $secure = false );
+		// run in ssl mode?
+		if ($this->config['ssl'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on" && !empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) ))
+		{
+			$this->config['base_url']	= str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
+			$_secure = true;
+		}
+		$_cookie_path = preg_replace('|https?://[^/]+|i', '', $this->config['base_url'].'');
+
+		($_secure == true ? $secure = true : $secure = false );
 
 		session_set_cookie_params(0, $_cookie_path, "", $secure, true);
 		session_name($this->config['cookie_prefix'].SESSION_HANDLER_ID);
@@ -582,11 +588,27 @@ class Init
 					echo "<li>HTTP_ACCEPT_LANGUAGE value: ".$_SERVER['HTTP_ACCEPT_LANGUAGE']."</li>\n";
 					echo "<li>HTTP_ACCEPT_LANGUAGE chopped value: ".strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2))."</li>\n";
 					echo "<li>User language set: ".(isset($user['lang']) ? 'true' : 'false')."</li>\n";
-					echo "<li>User language value: ".(isset($user['lang']) ? $user['lang']: "")."</li>\n";
+					echo "<li>User language value: ".(isset($user['lang']) ? $user['lang'] : "")."</li>\n";
 					echo "<li>Config language: ".$this->config['language']."</li>\n";
 					echo "<li>User selected language: ".(isset($this->engine->userlang) ? $this->engine->userlang : "")."</li>\n";
 					echo "</ul>\n";
 				}
+
+				if ($this->config['debug'] >= 3)
+				{
+					echo "<p class=\"debug\">Session data</p>\n<ul>\n";
+					echo "<li>Base URL: ".$this->config['base_url']."</li>\n";
+					echo "<li>HTTPS: ".$_SERVER['HTTPS']."</li>\n";
+					echo "<li>IP-address: ".$this->engine->get_user_ip()."</li>\n";
+					echo "<li>SERVER_PORT: ".$_SERVER['SERVER_PORT']."</li>\n";
+					echo "<li>SSL: ".(isset($this->config['ssl']) ? 'on' : 'off')."</li>\n";
+					echo "<li>SSL Proxy: ".(!empty($this->config['ssl_proxy']) ? $this->config['ssl_proxy'] : "false")."</li>\n";
+					echo "<li>SSL implicit: ".(($this->config['ssl_implicit'] == true) ? 'on' : 'off')."</li>\n";
+					echo "<li>Cookie hash: ".(isset($this->config['cookie_hash']) ? $this->config['cookie_hash'] : "")."</li>\n";
+					echo "<li>Cookie path: ".$this->config['cookie_path']."</li>\n";
+					echo "</ul>\n";
+				}
+
 				echo "</div >\n";
 			}
 			else return;

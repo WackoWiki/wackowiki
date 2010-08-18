@@ -100,7 +100,7 @@ if ($registered
 			if ($need_massrename == 1)
 			{
 				print "<p><b>".$this->get_translation("MassRenaming")."</b><p>";   //!!!
-				RecursiveMove($this, $this->tag );
+				recursive_move($this, $this->tag );
 			}
 		}
 		else
@@ -140,7 +140,7 @@ else
 ?></div>
 <?php
 
-function RecursiveMove(&$parent, $root)
+function recursive_move(&$parent, $root)
 {
 	$new_root = trim($_POST['newname'], "/");
 
@@ -160,11 +160,11 @@ function RecursiveMove(&$parent, $root)
 	{
 		// $new_name = str_replace( $root, $new_root, $page['tag'] );
 		$new_name = preg_replace('/'.preg_quote($root, '/').'/', preg_quote($new_root), $page['tag'], 1);
-		Move( $parent, $page, $new_name );
+		move( $parent, $page, $new_name );
 	}
 }
 
-function Move(&$parent, $OldPage, $new_name )
+function move(&$parent, $OldPage, $new_name )
 {
 	//     $new_name = trim($_POST['newname'], "/");
 	$user = $parent->get_user();

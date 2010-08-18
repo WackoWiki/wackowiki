@@ -146,7 +146,7 @@ class typografica
 		// --- not ported to wacko ---
 
 		// 3. Special characters
-		$data = $this->replaceSpecials( $data );
+		$data = $this->replace_specials( $data );
 
 		// 4. Short words and &nbsp;
 		if ($this->settings["wordglue"])
@@ -173,7 +173,7 @@ class typografica
 		}
 
 		// 6. Macros
-		$data = $this->replaceMacros( $data, $noParagraph );
+		$data = $this->replace_macros( $data, $noParagraph );
 
 		// 7. Line feeds
 		// --- not ported to wacko ---
@@ -222,7 +222,7 @@ class typografica
 
 	// -----------------------------------------------------------------------------------
 	// Method is only for internal use. Checks only special characters
-	function replaceSpecials( $data )
+	function replace_specials( $data )
 	{
 		//print "(($data))";
 		// 0. inches with digits
@@ -318,7 +318,7 @@ class typografica
 
 	// -----------------------------------------------------------------------------------
 	// Method is only for internal use. Checks only macros
-	function replaceMacros( $data, $noParagraph )
+	function replace_macros( $data, $noParagraph )
 	{
 		// 1. Paragraphs
 		// --- not ported to wacko ---

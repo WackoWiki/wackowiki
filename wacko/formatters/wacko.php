@@ -9,7 +9,7 @@ $parser = new WackoFormatter($this);
 
 $this->headerCount = 0;
 
-$text = preg_replace_callback($parser->NOTLONGREGEXP, array(&$parser, "WackoPreprocess"), $text);
+$text = preg_replace_callback($parser->NOTLONGREGEXP, array(&$parser, "wacko_preprocess"), $text);
 $texts = explode("<!--escaped-->", $text);
 $wtext = $texts[0];
 
@@ -18,8 +18,8 @@ for ($i = 2; $i < count($texts); $i = $i + 2)
 	$wtext = $wtext."\xa6".$texts[$i];
 }
 
-$wtext = preg_replace_callback($parser->MOREREGEXP, array(&$parser, "WackoMiddleprocess"), $wtext);
-$wtext = preg_replace_callback($parser->LONGREGEXP, array(&$parser, "WackoCallback"), $wtext);
+$wtext = preg_replace_callback($parser->MOREREGEXP, array(&$parser, "wacko_middleprocess"), $wtext);
+$wtext = preg_replace_callback($parser->LONGREGEXP, array(&$parser, "wacko_callback"), $wtext);
 $wtexts = explode("\xa6", $wtext);
 $text = "";
 

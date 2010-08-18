@@ -1,7 +1,7 @@
 <?php
 
 // Parse & decode QUERY_STRING.
-function _parseQueryString()
+function _parse_query_string()
 {
 	$get = array();
 	foreach ($_GET as $k=>$v)
@@ -17,14 +17,14 @@ function _unescape($s)
 {
 	$s = preg_replace_callback(
 		'/% (?: u([A-F0-9]{1,4}) | ([A-F0-9]{1,2})) /sxi',
-		"_unescapeCallback",
+		"_unescape_callback",
 		$s
 	);
 	return $s;
 }
 
 // Inplace entity replacement.
-function _unescapeCallback($p)
+function _unescape_callback($p)
 {
 	if ($p[1])
 	{
@@ -48,7 +48,7 @@ function _unescapeCallback($p)
 }
 
 // Getting a query
-_parseQueryString();
+_parse_query_string();
 $q		= $_GET["q"];
 $ta_id	= $_GET["ta_id"];
 

@@ -2,7 +2,7 @@
 
 // registering local functions
 // determine if user has rated a given page
-function HandlerRatePageIsRated(&$engine, $id)
+function handler_rate_page_is_rated(&$engine, $id)
 {
 	$cookie	= $engine->get_cookie('rating');
 	$ids	= explode(';', $cookie);
@@ -12,7 +12,7 @@ function HandlerRatePageIsRated(&$engine, $id)
 	else return false;
 }
 // set page rating cookie
-function HandlerRateSetRateCookie(&$engine, $id)
+function handler_rate_set_rate_cookie(&$engine, $id)
 {
 	$cookie	= $engine->get_cookie('rating');
 	$ids	= explode(';', $cookie);
@@ -35,7 +35,7 @@ if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 
 		if ($value < -3) $value = -3;
 	
 		// determine if user has rated this page
-		if (HandlerRatePageIsRated($this, $id) === false)
+		if (handler_rate_page_is_rated($this, $id) === false)
 		{
 			// try to load current rating entry
 			if ($rating = $this->load_single(
@@ -63,7 +63,7 @@ if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 
 			}
 		
 			// set cookie
-			HandlerRateSetRateCookie($this, $id);
+			handler_rate_set_rate_cookie($this, $id);
 		
 			// rated successfully
 			$this->set_message($this->get_translation('RatingSuccess'));
