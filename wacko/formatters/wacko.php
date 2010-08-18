@@ -1,6 +1,6 @@
 <?php
 
-$this->UseClass("wackoformatter", "formatters/classes/");
+$this->use_class("wackoformatter", "formatters/classes/");
 
 $text = str_replace("\r", "", $text);
 $text = "\177\n".$text."\n";

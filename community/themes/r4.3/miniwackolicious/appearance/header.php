@@ -5,14 +5,14 @@
 	$base_url = $this->config['base_url'];
 
 	// HTTP header with right Charset settings
-	header("Content-Type: text/html; charset=".$this->GetCharset());
+	header("Content-Type: text/html; charset=".$this->get_charset());
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->config['language']; ?>" lang="<?php echo $this->config['language']; ?>">
 <head>
-	<meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
-	<meta name="description" content="<?php echo $this->GetDescription(); ?>" />
-	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
+	<meta name="keywords" content="<?php echo $this->get_keywords(); ?>" />
+	<meta name="description" content="<?php echo $this->get_description(); ?>" />
+	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 <?php
 	// We don't need search robots to index subordinate pages
 	if ($this->method != 'show' || $this->page['latest'] == "0" || $this->page['noindex'] == "1")
@@ -32,13 +32,13 @@
 <?php
 	echo '	<link rel="start" href="'.$base_url.'Homepage" />'."\n";
 	// Echoes Title of the page.
-	echo "	<title>" . $this->config['wacko_name']." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":"");
+	echo "	<title>" . $this->config['wacko_name']." : ".$this->add_spaces($this->tag).($this->method!="show"?" (".$this->method.")":"");
 	echo "</title>\n";
 ?>
 	<!-- link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" / -->
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -62,7 +62,7 @@ if ($this->method == 'edit')
 <?php
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
-if ($user = $this->GetUser())
+if ($user = $this->get_user())
    {
       if ($user['doubleclick_edit'] == "1")
          {
@@ -73,7 +73,7 @@ if ($user = $this->GetUser())
 <?php
          }
    }
-else if($this->HasAccess("write"))
+else if($this->has_access("write"))
    {
 ?>
 
@@ -91,13 +91,13 @@ else if($this->HasAccess("write"))
 //   * Smooth scrolling
 
 ?>
-<body onload="all_init();"<?php echo ($this->GetUser()) ? ' id="backend"':'';?>>
+<body onload="all_init();"<?php echo ($this->get_user()) ? ' id="backend"':'';?>>
 <script type="text/javascript">
     // test for javascript
     document.getElementsByTagName("body")[0].className = "js";
 </script>
     <div class="sitewrapper">
-<?php echo ($this->GetUser()) ? '<div id="backendrow"></div><div id="system_bookmarks" class="backendbutton" onclick="var menu = document.getElementById(\'usermenu\'); if (menu.className==\'normal\') {menu.className=\'dropdown\';} else {menu.className=\'normal\';} return;"></div>':''; ?>
+<?php echo ($this->get_user()) ? '<div id="backendrow"></div><div id="system_bookmarks" class="backendbutton" onclick="var menu = document.getElementById(\'usermenu\'); if (menu.className==\'normal\') {menu.className=\'dropdown\';} else {menu.className=\'normal\';} return;"></div>':''; ?>
 
         <div class="header">
 
@@ -110,13 +110,13 @@ else if($this->HasAccess("write"))
                 </ul>
 
                 <div class="search">
-                    <?php echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?>
+                    <?php echo $this->form_open("", $this->get_translation("TextSearchPage"), "get"); ?>
                         <fieldset>
                             <label for="phrase">Search: </label>
                             <input name="phrase" id="phrase" size="15" class="textinput" type="text"/>
                             <button type="submit"><span class="onlyAural">Search </span>&raquo;</button>
                         </fieldset>
-                    <?php echo $this->FormClose(); ?>
+                    <?php echo $this->form_close(); ?>
                 </div> <!-- /search -->
 
             </div> <!-- /nav-main -->
@@ -125,12 +125,12 @@ else if($this->HasAccess("write"))
             <div class="nav-breadcrumb">
            		<hr class="onlyAural"/>
                 <p>
-                    <span class="onlyAural"><?php echo $this->GetTranslation("YouAreHere"); ?>: </span>
+                    <span class="onlyAural"><?php echo $this->get_translation("YouAreHere"); ?>: </span>
                     <?php
                         if (strpos($this->tag, $this->config['root_page'].'/') !== 0)
                             echo '<a href="'.$this->config['base_url'].'">'.$this->config['root_page'].'</a> /';
                     ?>
-                    <?php echo $this->GetPagePath(false, " / "); ?>
+                    <?php echo $this->get_page_path(false, " / "); ?>
                 </p>
             </div>
             <?php } ?>
@@ -143,5 +143,5 @@ else if($this->HasAccess("write"))
 
 		<?php
 		// here we show messages
-		if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+		if ($message = $this->get_message()) echo "<div class=\"info\">$message</div>";
 		?>

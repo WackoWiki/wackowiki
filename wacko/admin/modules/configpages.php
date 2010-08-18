@@ -49,11 +49,11 @@ function admin_configpages(&$engine, &$module)
 
 		foreach($config as $key => $value)
 		{
-			$engine->Query(
+			$engine->query(
 				"UPDATE {$engine->config['table_prefix']}config SET value = '$value' WHERE config_name = '$key'");
 		}
-		$engine->Log(1, 'Updated settings base pages');
-		$engine->Redirect(rawurldecode($engine->href()));
+		$engine->log(1, 'Updated settings base pages');
+		$engine->redirect(rawurldecode($engine->href()));
 	}
 ?>
 	<form action="admin.php" method="post" name="pages">

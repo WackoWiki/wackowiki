@@ -11,7 +11,7 @@ else
 if (!$max || $limit < $max)
 	$max = $limit;
 
-$last_users = $this->LoadAll(
+$last_users = $this->load_all(
 				"SELECT user_id, user_name, signup_time ".
 				"FROM ".$this->config['user_table']." ".
 				"WHERE account_type = '0' ".
@@ -20,12 +20,12 @@ $last_users = $this->LoadAll(
 
 foreach($last_users as $user)
 {
-	if ($stat !== "0") $num = $this->LoadSingle(
+	if ($stat !== "0") $num = $this->load_single(
 				"SELECT COUNT(*) AS n ".
 				"FROM ".$this->config['table_prefix']."page ".
 				"WHERE owner_id='".quote($this->dblink, $user['user_id'])."'");
 
-	print("(<span class=\"dt\">".$this->GetTimeStringFormatted($user["signup_time"]).")</span> ".$this->Link("/".$user['user_name'],"",$user['user_name']).($stat!=="0"?" . . . (".$num["n"].")":"")."<br />\n");
+	print("(<span class=\"dt\">".$this->get_time_string_formatted($user["signup_time"]).")</span> ".$this->link("/".$user['user_name'],"",$user['user_name']).($stat!=="0"?" . . . (".$num["n"].")":"")."<br />\n");
 }
 
 ?>

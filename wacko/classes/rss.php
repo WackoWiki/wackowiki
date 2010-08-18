@@ -15,14 +15,14 @@ class RSS
 	var $charset;
 
 	// CONSTRUCTOR
-	function RSS(&$engine)
+	function rss(&$engine)
 	{
 		$this->engine = & $engine;
-		$this->engine->LoadResource($this->engine->config['language']);
+		$this->engine->load_resource($this->engine->config['language']);
 		$this->charset = $this->engine->languages[$this->engine->config['language']]['charset'];
 	}
 
-	function WriteFile($name, $body)
+	function write_file($name, $body)
 	{
 		$filename = 'xml/'.$name.'_'.preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->engine->config['wacko_name'])).'.xml';
 
@@ -31,22 +31,22 @@ class RSS
 		@chmod($filename, 0644);
 	}
 
-	function Changes()
+	function changes()
 	{
 		$limit	= 30;
 		$name	= "changes";
 		$count	= "";
 
-		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->GetCharset()."\"?>\n";
+		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->get_charset()."\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
-		$xml .= "<title>".$this->engine->config['wacko_name'].$this->engine->GetTranslation("RecentChangesTitleXML")."</title>\n";
+		$xml .= "<title>".$this->engine->config['wacko_name'].$this->engine->get_translation("RecentChangesTitleXML")."</title>\n";
 		$xml .= "<link>".$this->engine->config['base_url']."</link>\n";
-		$xml .= "<description>".$this->engine->GetTranslation("RecentChangesXML").$this->engine->config['wacko_name']." </description>\n";
+		$xml .= "<description>".$this->engine->get_translation("RecentChangesXML").$this->engine->config['wacko_name']." </description>\n";
 		$xml .= '<copyright>'.$this->engine->href('', $this->engine->config['policy_page']).'</copyright>'."\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->engine->config['wacko_name'].$this->engine->GetTranslation("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<title>".$this->engine->config['wacko_name'].$this->engine->get_translation("RecentCommentsTitleXML")."</title>\n";
 		$xml .= "<link>".$this->engine->config['base_url']."</link>\n";
 		$xml .= "<url>".$this->engine->config['base_url']."files/wacko4.png"."</url>\n";
 		$xml .= "<width>108</width>\n";
@@ -56,12 +56,12 @@ class RSS
 		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
-		if (list ($pages, $pagination) = $this->engine->LoadRecentlyChanged())
+		if (list ($pages, $pagination) = $this->engine->load_recently_changed())
 		{
 			foreach ($pages as $i => $page)
 			{
 				if ($this->engine->config['hide_locked'])
-					$access = $this->engine->HasAccess("read", $page['page_id'], GUEST);
+					$access = $this->engine->has_access("read", $page['page_id'], GUEST);
 
 				if ($access && ($count < 30))
 				{
@@ -71,7 +71,7 @@ class RSS
 					$xml .= "<link>".$this->engine->href("show", $page['tag'], "time=".urlencode($page['modified']))."</link>\n";
 					$xml .= "<guid>".$this->engine->href("show", $page['tag'], "time=".urlencode($page['modified']))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
-					$xml .= "<description>".$page['modified']." ".$this->engine->GetTranslation("By")." ".$page['user'].($page['edit_note'] ? " [".$page['edit_note']."]" : "")."</description>\n";
+					$xml .= "<description>".$page['modified']." ".$this->engine->get_translation("By")." ".$page['user'].($page['edit_note'] ? " [".$page['edit_note']."]" : "")."</description>\n";
 					$xml .= "</item>\n";
 				}
 			}
@@ -80,10 +80,10 @@ class RSS
 		$xml .= "</channel>\n";
 		$xml .= "</rss>\n";
 
-		$this->WriteFile($name, $xml);
+		$this->write_file($name, $xml);
 	}
 
-	function News()
+	function news()
 	{
 		$limit			= 10;
 		$name			= 'news';
@@ -92,7 +92,7 @@ class RSS
 		$prefix			= $this->engine->config['table_prefix'];
 
 		//  collect data
-		$pages = $this->engine->LoadAll(
+		$pages = $this->engine->load_all(
 			"SELECT page_id, tag, title, created, body_r ".
 			"FROM {$prefix}page ".
 			"WHERE comment_on_id = '0' ".
@@ -122,15 +122,15 @@ class RSS
 				// TODO: atom.css
 				'<rss version="2.0">'."\n".
 					'<channel>'."\n".
-						'<title>'.$this->engine->config['wacko_name'].$this->engine->GetTranslation("RecentNewsTitleXML").'</title>'."\n".
+						'<title>'.$this->engine->config['wacko_name'].$this->engine->get_translation("RecentNewsTitleXML").'</title>'."\n".
 						'<link>'.$this->engine->config['base_url'].str_replace('%2F', '/', rawurlencode($newscluster)).'</link>'."\n".
-						'<description>'.$this->engine->GetTranslation("RecentNewsXML").$this->engine->config['wacko_name'].'</description>'."\n".
+						'<description>'.$this->engine->get_translation("RecentNewsXML").$this->engine->config['wacko_name'].'</description>'."\n".
 						'<copyright>'.$this->engine->href('', $this->engine->config['policy_page']).'</copyright>'."\n".
 						'<language>'.$this->engine->config['language'].'</language>'."\n".
 						'<pubDate>'.date('r').'</pubDate>'."\n".
 						'<lastBuildDate>'.date('r').'</lastBuildDate>'."\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->engine->config['wacko_name'].$this->engine->GetTranslation("NewsTitleXML")."</title>\n";
+		$xml .= "<title>".$this->engine->config['wacko_name'].$this->engine->get_translation("NewsTitleXML")."</title>\n";
 		$xml .= "<link>".$this->engine->config['base_url'].str_replace('%2F', '/', rawurlencode($newscluster))."</link>\n";
 		$xml .= "<url>".$this->engine->config['base_url']."files/wacko4.png"."</url>\n";
 		$xml .= "<width>108</width>\n";
@@ -142,7 +142,7 @@ class RSS
 		{
 			$i++;
 
-			$categories	= $this->engine->LoadAll(
+			$categories	= $this->engine->load_all(
 				"SELECT
 					c.category_id, c.category
 				FROM
@@ -158,8 +158,8 @@ class RSS
 			$link	= $this->engine->href('', $page['tag']);
 			$pdate	= date("r", strtotime($page['modified']));
 			$coms	= $link.'?show_comments=1#comments';
-			$body	= $this->engine->LoadPage($page['tag']);
-			$text	= $this->engine->Format($page['body_r'], 'post_wacko');
+			$body	= $this->engine->load_page($page['tag']);
+			$text	= $this->engine->format($page['body_r'], 'post_wacko');
 
 			$xml .= '<item>'."\n".
 						'<title>'.$title.'</title>'."\n".
@@ -182,27 +182,27 @@ class RSS
 		$xml .= 	'</channel>'."\n".
 				'</rss>';
 
-		$this->WriteFile($name, $xml);
+		$this->write_file($name, $xml);
 	}
 
-	function Comments()
+	function comments()
 	{
 		$limit	= 20;
 		$name	= "comments";
 		$count	= "";
 
 		// build output
-		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->GetCharset()."\"?>\n";
+		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->get_charset()."\"?>\n";
 		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->engine->config['theme_url']."css/wacko.css\" media=\"screen\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
-		$xml .= "<title>".$this->engine->config['wacko_name'].$this->engine->GetTranslation("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<title>".$this->engine->config['wacko_name'].$this->engine->get_translation("RecentCommentsTitleXML")."</title>\n";
 		$xml .= "<link>".$this->engine->config['base_url']."</link>\n";
-		$xml .= "<description>".$this->engine->GetTranslation("RecentCommentsXML").$this->engine->config['wacko_name']." </description>\n";
+		$xml .= "<description>".$this->engine->get_translation("RecentCommentsXML").$this->engine->config['wacko_name']." </description>\n";
 		$xml .= '<copyright>'.$this->engine->href('', $this->engine->config['policy_page']).'</copyright>'."\n";
 		$xml .= "<lastBuildDate>".date('r')."</lastBuildDate>\n";
 		$xml .= "<image>\n";
-		$xml .= "<title>".$this->engine->config['wacko_name'].$this->engine->GetTranslation("RecentCommentsTitleXML")."</title>\n";
+		$xml .= "<title>".$this->engine->config['wacko_name'].$this->engine->get_translation("RecentCommentsTitleXML")."</title>\n";
 		$xml .= "<link>".$this->engine->config['base_url']."</link>\n";
 		$xml .= "<url>".$this->engine->config['base_url']."files/wacko4.png"."</url>\n";
 		$xml .= "<width>108</width>\n";
@@ -212,18 +212,18 @@ class RSS
 		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
-		if ( $pages = $this->engine->LoadRecentlyComment() ) {
+		if ( $pages = $this->engine->load_recently_comment() ) {
 			foreach ($pages as $i => $page) {
-				if ($this->engine->config['hide_locked']) $access =$this->engine->HasAccess("read",$page['page_id'],GUEST);
+				if ($this->engine->config['hide_locked']) $access =$this->engine->has_access("read",$page['page_id'],GUEST);
 				if ( $access && ($count < 30) ) {
 					$count++;
 					$xml .= "<item>\n";
-					$xml .= "<title>".$page['title']." ".$this->engine->GetTranslation("To")." ".$this->engine->GetCommentOnTag($page['comment_on_id'])." ".$this->engine->GetTranslation("From")." ".$page['user']."</title>\n";
+					$xml .= "<title>".$page['title']." ".$this->engine->get_translation("To")." ".$this->engine->get_comment_on_tag($page['comment_on_id'])." ".$this->engine->get_translation("From")." ".$page['user']."</title>\n";
 					$xml .= "<link>".$this->engine->href("show", $page['tag'], "time=".urlencode($page['modified']))."</link>\n";
 					$xml .= "<guid>".$this->engine->href("show", $page['tag'], "time=".urlencode($page['modified']))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
 					$xml .= "<dc:creator>".$page['user']."</dc:creator>\n";
-					$text = $this->engine->Format($page['body_r'], "post_wacko");
+					$text = $this->engine->format($page['body_r'], "post_wacko");
 					$xml .= "<description><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></description>\n";
 					#$xml .= "<content:encoded><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></content:encoded>\n";
 					$xml .= "</item>\n";
@@ -234,19 +234,19 @@ class RSS
 		$xml .= "</channel>\n";
 		$xml .= "</rss>\n";
 
-		$this->WriteFile($name, $xml);
+		$this->write_file($name, $xml);
 	}
 
-	function SiteMap()
+	function site_map()
 	{
 		$xml = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n";
 		$xml .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 
-		if ($pages = $this->engine->LoadAllPagesByTime())
+		if ($pages = $this->engine->load_all_pages_by_time())
 		{
 			foreach ($pages as $i => $page)
 			{
-				if ($this->engine->config['hide_locked'] ? $this->engine->HasAccess("read", $page['page_id'], GUEST) : true)
+				if ($this->engine->config['hide_locked'] ? $this->engine->has_access("read", $page['page_id'], GUEST) : true)
 				{
 					$xml .= "<url>\n";
 					$xml .= "<loc>".$this->engine->href("", $page['tag'])."</loc>\n";

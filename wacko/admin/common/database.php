@@ -258,7 +258,7 @@ function GetTable(&$engine, $table, $drop = true)
 	$schema_create	= "";
 	$field_query	= "SHOW FIELDS FROM $table";
 	$key_query		= "SHOW KEYS FROM $table";
-	$collation_db	= $engine->LoadSingle("SELECT @@collation_database");
+	$collation_db	= $engine->load_single("SELECT @@collation_database");
 
 	if ($drop == true) $schema_create .= "DROP TABLE IF EXISTS $table;\n";
 
@@ -267,7 +267,7 @@ function GetTable(&$engine, $table, $drop = true)
 	//
 	// Ok lets grab the fields...
 	//
-	$result = $engine->LoadAll($field_query);
+	$result = $engine->load_all($field_query);
 
 	foreach ($result as $row)
 	{
@@ -292,7 +292,7 @@ function GetTable(&$engine, $table, $drop = true)
 	//
 	// Get any Indexed fields from the database...
 	//
-	$result = $engine->LoadAll($key_query);
+	$result = $engine->load_all($key_query);
 
 	foreach ($result as $row)
 	{
@@ -363,7 +363,7 @@ function GetData(&$engine, &$tables, $pack, $table, $root = '')
 	// read table data until it's exhausted
 	$r = 0;
 	$t = 0;
-	while (true == $data = $engine->LoadAll(
+	while (true == $data = $engine->load_all(
 	"SELECT * FROM $table ".
 	( $where ? $where : "" ).
 	$order.
@@ -413,7 +413,7 @@ function GetFiles(&$engine, $pack, $dir, $root)
 {
 	// set file mask for cluster backup
 	if ($root == true && $dir == $engine->config['upload_path_per_page'])
-		$tag = '@'.str_replace('/', '@', $engine->NpjTranslit($root)).'@';
+		$tag = '@'.str_replace('/', '@', $engine->npj_translit($root)).'@';
 
 	// create write (backup) subdir or restore path recursively if needed
 	if (strpos($dir, '/'))
@@ -492,7 +492,7 @@ function PutTable(&$engine, $pack)
 	$t = 0;
 	foreach ($sql as $instruction)
 	{
-		$engine->Query($instruction);
+		$engine->query($instruction);
 		$t++;
 	}
 
@@ -541,7 +541,7 @@ function PutData(&$engine, $pack, $table, $mode)
 			}
 
 			// run and count sql query
-			$engine->Query("$mode INTO $table VALUES ( ".implode(', ', $row)." )");
+			$engine->query("$mode INTO $table VALUES ( ".implode(', ', $row)." )");
 			$t++;	// rows processed
 		}
 		// set read pointer to the beginning of the next slack row

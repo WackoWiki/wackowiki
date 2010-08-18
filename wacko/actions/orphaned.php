@@ -19,12 +19,12 @@ if (!function_exists('LoadOrphanedPages'))
 		"ORDER BY tag ".
 		"LIMIT 200";
 
-		return $engine->LoadAll($sql);
+		return $engine->load_all($sql);
 	}
 }
 
 if (!isset($root)) $root = $this->page['tag'];
-else $root = $this->UnwrapLink($root);
+else $root = $this->unwrap_link($root);
 
 if ($pages = LoadOrphanedPages($this, $root))
 {
@@ -32,15 +32,15 @@ if ($pages = LoadOrphanedPages($this, $root))
 	//!!!! unoptimized
 	if (is_array($pages))
 	foreach ($pages as $page)
-	if (!$this->config['hide_locked'] || $this->HasAccess("read",$page['page_id']))
+	if (!$this->config['hide_locked'] || $this->has_access("read",$page['page_id']))
 	{
-		print("<li>".$this->Link("/".$page['tag'], "", "", 0)."</li>\n");
+		print("<li>".$this->link("/".$page['tag'], "", "", 0)."</li>\n");
 	}
 	echo "</ol>\n";
 }
 else
 {
-	echo $this->GetTranslation("NoOrphaned");
+	echo $this->get_translation("NoOrphaned");
 }
 
 ?>

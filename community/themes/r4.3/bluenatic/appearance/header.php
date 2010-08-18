@@ -9,19 +9,19 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page['lang'] ?>" lang="<?php echo $this->page['lang'] ?>">
 <head>
 	<meta name="author" content="Theme for WackoWiki by Robert Vaeth" />
-	<meta name="keywords" content="<?php echo $this->GetKeywords(); ?>" />
-	<meta name="description" content="<?php echo $this->GetDescription(); ?>" />
-	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
+	<meta name="keywords" content="<?php echo $this->get_keywords(); ?>" />
+	<meta name="description" content="<?php echo $this->get_description(); ?>" />
+	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url']; ?>css/default.css" media="screen" />
 	<?php if ($this->config['allow_x11colors']) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" /><?php } ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url']; ?>css/page.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url']; ?>css/wacko.css" media="screen" />
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->config['theme_url']; ?>icons/icon.gif" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
 	<?php if($this->method != 'show' || $this->page['latest'] == "0") { ?><meta name="robots" content="noindex, nofollow" /><?php } ?>
-	<title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".$this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":""); ?></title>
+	<title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".$this->add_spaces($this->tag).($this->method!="show"?" (".$this->method.")":""); ?></title>
 	<!-- JavaScript used by WackoWiki -->
 	<?php
 // JS files.
@@ -46,7 +46,7 @@ if ($this->method == 'edit')
 	<?php
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
-if ($user = $this->GetUser())
+if ($user = $this->get_user())
    {
       if ($user['doubleclick_edit'] == "1")
          {
@@ -57,7 +57,7 @@ if ($user = $this->GetUser())
 <?php
          }
    }
-else if($this->HasAccess("write"))
+else if($this->has_access("write"))
    {
 ?>
 
@@ -73,63 +73,63 @@ else if($this->HasAccess("write"))
 	<div id="mainwrapper">
 		<div id="header">
 			<?php // Insert search form ?>
-			<?php echo $this->FormOpen("", $this->GetTranslation("TextSearchPage"), "get"); ?>
-			<input type="text" name="phrase" size="15" value="<?php echo $this->GetTranslation("SearchButtonText"); ?>" class="search" />
-			<?php echo $this->FormClose(); ?>
+			<?php echo $this->form_open("", $this->get_translation("TextSearchPage"), "get"); ?>
+			<input type="text" name="phrase" size="15" value="<?php echo $this->get_translation("SearchButtonText"); ?>" class="search" />
+			<?php echo $this->form_close(); ?>
 
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
 			<b><?php echo $this->config['wacko_name']; ?>:</b>
-			<?php echo $this->GetPagePath(); ?>
-			<a title="<?php echo $this->GetTranslation("SearchTitleTip"); ?>" href="<?php echo $this->config['base_url'].$this->GetTranslation("TextSearchPage").($this->config['rewrite_mode'] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
+			<?php echo $this->get_page_path(); ?>
+			<a title="<?php echo $this->get_translation("SearchTitleTip"); ?>" href="<?php echo $this->config['base_url'].$this->get_translation("TextSearchPage").($this->config['rewrite_mode'] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
 		</div>
 		<div id="quicklinks">
 			<div class="bookmarks">
 				<?php // Insert links to root page and personal bookmarks ?>
-				<?php echo $this->ComposeLinkToPage($this->config['root_page']); ?> |
-				<?php echo $this->Format($this->GetBookmarksFormatted(), "post_wacko"); ?>
+				<?php echo $this->compose_link_to_page($this->config['root_page']); ?> |
+				<?php echo $this->format($this->get_bookmarks_formatted(), "post_wacko"); ?>
 			</div>
 			<?php // If logged in, show username, settings and logout ?>
-			<?php if($user = $this->GetUser()) { ?>
+			<?php if($user = $this->get_user()) { ?>
 			<div class="user">
-				<?php echo $this->Link($this->GetUserName()); ?>
-				<small>( <?php echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelAccount"), 0); ?> |
-				<a href="<?php echo $this->Href("",$this->GetTranslation("LoginPage")).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->SlimUrl($this->tag);?>"><?php echo $this->GetTranslation("LogoutLink"); ?></a> )</small>
+				<?php echo $this->link($this->get_user_name()); ?>
+				<small>( <?php echo $this->compose_link_to_page($this->get_translation("YouArePanelLink"), "", $this->get_translation("YouArePanelAccount"), 0); ?> |
+				<a href="<?php echo $this->href("",$this->get_translation("LoginPage")).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation("LogoutLink"); ?></a> )</small>
 			</div>
 			<?php } ?>
 		</div>
 		<div id="quickactions">
 			<?php // If logged in, show quick actions, else show login box ?>
-			<?php if($user = $this->GetUser()) { ?>
+			<?php if($user = $this->get_user()) { ?>
 			<?php // Show edit button only if user has privileges ?>
-			<?php if($this->HasAccess("write")) { ?>
+			<?php if($this->has_access("write")) { ?>
 			<a href="<?php echo $this->href("edit"); ?>" accesskey="E">
-				<img src="<?php echo $this->config['theme_url']; ?>images/qa-edit.gif" alt="<?php echo $this->GetTranslation("EditTip"); ?>" title="<?php echo $this->GetTranslation("EditTip"); ?>" />
+				<img src="<?php echo $this->config['theme_url']; ?>images/qa-edit.gif" alt="<?php echo $this->get_translation("EditTip"); ?>" title="<?php echo $this->get_translation("EditTip"); ?>" />
 			</a>&nbsp;&nbsp;&nbsp;
 			<?php } ?>
 			<?php // Show ACL button only if user has privileges (or is admin) and if the page exists ?>
-			<?php if($this->page) if($this->UserIsOwner() || $this->IsAdmin()) { ?>
+			<?php if($this->page) if($this->user_is_owner() || $this->is_admin()) { ?>
 			<a href="<?php echo $this->href("acls"); ?>">
-				<img src="<?php echo $this->config['theme_url']; ?>images/qa-acl.gif" alt="<?php echo $this->GetTranslation("ACLText"); ?>" title="<?php echo $this->GetTranslation("ACLText"); ?>" />
+				<img src="<?php echo $this->config['theme_url']; ?>images/qa-acl.gif" alt="<?php echo $this->get_translation("ACLText"); ?>" title="<?php echo $this->get_translation("ACLText"); ?>" />
 			</a>
 			<?php } ?>
 			<a href="<?php echo $this->href("print"); ?>">
-				<img src="<?php echo $this->config['theme_url']; ?>images/qa-print.gif" alt="<?php echo $this->GetTranslation("PrintVersion"); ?>" title="<?php echo $this->GetTranslation("PrintVersion"); ?>" />
+				<img src="<?php echo $this->config['theme_url']; ?>images/qa-print.gif" alt="<?php echo $this->get_translation("PrintVersion"); ?>" title="<?php echo $this->get_translation("PrintVersion"); ?>" />
 			</a>
 			<?php } else { ?>
 			<div class="loginbox">
-				<?php echo $this->FormOpen("", $this->GetTranslation("LoginPage"), "post"); ?>
+				<?php echo $this->form_open("", $this->get_translation("LoginPage"), "post"); ?>
 				<input type="hidden" name="action" value="login" />
-				<input type="hidden" name="goback" value="<?php echo $this->SlimUrl($this->tag); ?>" />
-				<?php echo $this->GetTranslation("LoginWelcome"); ?>
+				<input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag); ?>" />
+				<?php echo $this->get_translation("LoginWelcome"); ?>
 				<input type="text" name="name" size="15" class="login" />
-				<?php echo $this->GetTranslation("LoginPassword"); ?>
+				<?php echo $this->get_translation("LoginPassword"); ?>
 				<input type="password" name="password" size="10" class="login" />
-				<input type="image" src="<?php echo $this->config['theme_url']; ?>icons/login.gif" alt="<?php echo $this->GetTranslation("LoginWelcome"); ?>" class="login" />
-				<?php echo $this->FormClose(); ?>
+				<input type="image" src="<?php echo $this->config['theme_url']; ?>icons/login.gif" alt="<?php echo $this->get_translation("LoginWelcome"); ?>" class="login" />
+				<?php echo $this->form_close(); ?>
 			</div>
 			<?php } ?>
 		</div>
 	<?php
 	// here we show messages
-	if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+	if ($message = $this->get_message()) echo "<div class=\"info\">$message</div>";
 	?>

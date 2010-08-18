@@ -1,14 +1,14 @@
 <?php
 
 // only claim ownership if this page has no owner, and if user is logged in.
-if ($this->page && !$this->page['owner_id'] && $this->GetUser() && !$this->page['comment_on_id'])
+if ($this->page && !$this->page['owner_id'] && $this->get_user() && !$this->page['comment_on_id'])
 {
-	$this->SetPageOwner($this->GetPageId(), $this->GetUserId());
-	$this->SetMessage($this->GetTranslation("YouAreNowTheOwner"));
+	$this->set_page_owner($this->get_page_id(), $this->get_user_id());
+	$this->set_message($this->get_translation("YouAreNowTheOwner"));
 	// log event
-	$this->Log(4, str_replace("%1", $this->tag." ".$this->page['title'], $this->GetTranslation("LogPageOwnershipClaimed", $this->config['language'])));
+	$this->log(4, str_replace("%1", $this->tag." ".$this->page['title'], $this->get_translation("LogPageOwnershipClaimed", $this->config['language'])));
 }
 
-$this->Redirect($this->href());
+$this->redirect($this->href());
 
 ?>

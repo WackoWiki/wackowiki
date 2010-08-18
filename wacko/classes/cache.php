@@ -7,20 +7,20 @@ class Cache
 	var $debug		= 0;
 
 	//Constructor
-	function Cache($cache_dir, $cache_ttl)
+	function cache($cache_dir, $cache_ttl)
 	{
 		$this->cache_dir	= $cache_dir;
 		$this->cache_ttl	= $cache_ttl;
-		$this->timer		= $this->GetMicroTime();
+		$this->timer		= $this->get_micro_time();
 
 		if (isset($this->wacko->config['debug']))
 			$this->debug = $this->wacko->config['debug'];
 	}
 
 	// save serialized sql results
-	function SaveSQL($query, $data)
+	function save_sql($query, $data)
 	{
-		$filename	= $this->SQLCacheID($query);
+		$filename	= $this->sql_cache_id($query);
 		$sqldata	= serialize($data);
 
 		file_put_contents($filename, $sqldata);
@@ -30,9 +30,9 @@ class Cache
 	}
 
 	// retrieve and unserialize cached sql data
-	function LoadSQL($query)
+	function load_sql($query)
 	{
-		$filename = $this->SQLCacheID($query);
+		$filename = $this->sql_cache_id($query);
 
 		if (!@file_exists($filename))
 			return false;
@@ -47,15 +47,15 @@ class Cache
 		return unserialize($data);
 	}
 
-	function SQLCacheID($query)
+	function sql_cache_id($query)
 	{
 		return $this->cache_dir.CACHE_SQL_DIR.hash('md5', $query);
 	}
 
 	//Get page content from cache
-	function GetCached($page, $method, $query)
+	function get_cached($page, $method, $query)
 	{
-		$filename = $this->ConstructID($page, $method, $query);
+		$filename = $this->construct_id($page, $method, $query);
 
 		if (!@file_exists($filename))
 			return false;
@@ -71,21 +71,21 @@ class Cache
 		return $contents;
 	}
 
-	function ConstructID($page, $method, $query)
+	function construct_id($page, $method, $query)
 	{
 		$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", rawurldecode($page)))));
 
-		$this->Log("ConstructID page=".$page);
-		$this->Log("ConstructID md5=".hash('md5', $page."_".$method."_".$query));
+		$this->log("construct_id page=".$page);
+		$this->log("construct_id md5=".hash('md5', $page."_".$method."_".$query));
 
 		$filename = $this->cache_dir.CACHE_PAGE_DIR.hash('md5', $page."_".$method."_".$query);
 		return $filename;
 	}
 
 	//Get timestamp of content from cache
-	function GetCachedTime($page, $method, $query)
+	function get_cached_time($page, $method, $query)
 	{
-		$filename = $this->ConstructID($page, $method, $query);
+		$filename = $this->construct_id($page, $method, $query);
 
 		if (!@file_exists($filename))
 			return false;
@@ -97,18 +97,18 @@ class Cache
 	}
 
 	//Store content to cache
-	function StoreToCache($data, $page = false, $method = false, $query = false)
+	function store_to_cache($data, $page = false, $method = false, $query = false)
 	{
 		if (!$page)   $page   = $this->page;
 		if (!$method) $method = $this->method;
 		if (!$query)  $query  = $this->query;
 
 		$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", $page))));
-		$filename = $this->ConstructID($page, $method, $query);
+		$filename = $this->construct_id($page, $method, $query);
 
 		file_put_contents($filename, $data);
 
-		if ($this->wacko) $this->wacko->Query(
+		if ($this->wacko) $this->wacko->query(
 			"INSERT INTO ".$this->wacko->config['table_prefix']."cache SET ".
 			"name  ='".quote($this->wacko->dblink, hash('md5', $page))."', ".
 			"method='".quote($this->wacko->dblink, $method)."', ".
@@ -121,46 +121,46 @@ class Cache
 	}
 
 	//Invalidate the cache
-	function CacheInvalidate($page)
+	function cache_invalidate($page)
 	{
 		if ($this->wacko)
 		{
 			$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", $page))));
-			$this->Log("CacheInvalidate page=".$page);
-			$this->Log("CacheInvalidate query=".
+			$this->log("cache_invalidate page=".$page);
+			$this->log("cache_invalidate query=".
 				"SELECT * ".
 				"FROM ".$this->wacko->config['table_prefix']."cache ".
 				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
 
-			$params = $this->wacko->LoadAll(
+			$params = $this->wacko->load_all(
 				"SELECT * ".
 				"FROM ".$this->wacko->config['table_prefix']."cache ".
 				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
 
-			$this->Log("CacheInvalidate count params=".count($params));
+			$this->log("cache_invalidate count params=".count($params));
 
 			foreach ($params as $param)
 			{
-				$filename = $this->ConstructID($page, $param['method'], $param['query']);
+				$filename = $this->construct_id($page, $param['method'], $param['query']);
 
-				$this->Log("CacheInvalidate delete=".$filename);
+				$this->log("cache_invalidate delete=".$filename);
 
 				if (@file_exists($filename))
 					@unlink($filename);
 			}
 
-			$this->wacko->Query(
+			$this->wacko->query(
 				"DELETE FROM ".$this->wacko->config['table_prefix']."cache ".
 				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
 
-			$this->Log("CacheInvalidate end");
+			$this->log("cache_invalidate end");
 
 			return true;
 		}
 		else return false;
 	}
 
-	function Log($msg)
+	function log($msg)
 	{
 		if ($this->debug > 1)
 		{
@@ -171,7 +171,7 @@ class Cache
 	}
 
 	//Check http-request. May be, output cached version.
-	function CheckHttpRequest($page, $method)
+	function check_http_request($page, $method)
 	{
 		if (!$page) return false;
 
@@ -193,12 +193,12 @@ class Cache
 			}
 		}
 		if (!isset($query)) $query = "";
-		$this->Log("CheckHttpRequest query=".$query);
+		$this->log("check_http_request query=".$query);
 
 		//check cache
-		if ($mtime = $this->GetCachedTime($page, $method, $query))
+		if ($mtime = $this->get_cached_time($page, $method, $query))
 		{
-			$this->Log("CheckHttpRequest incache mtime=".$mtime);
+			$this->log("check_http_request incache mtime=".$mtime);
 
 			$gmt = gmdate('D, d M Y H:i:s \G\M\T', $mtime);
 			$etag = (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? $_SERVER['HTTP_IF_NONE_MATCH'] : "");
@@ -217,7 +217,7 @@ class Cache
 					die();
 				}
 
-				$cached = $this->GetCached($page, $method, $query);
+				$cached = $this->get_cached($page, $method, $query);
 				header ("Last-Modified: ".$gmt);
 				header ("ETag: \"".$gmt."\"");
 				//header ("Content-Type: text/xml");
@@ -229,7 +229,7 @@ class Cache
 				// how much time script take
 				if ($this->debug >= 1 && strpos($method,".xml") === false)
 				{
-					$ddd = $this->GetMicroTime();
+					$ddd = $this->get_micro_time();
 					echo ("<div class=\"debug\">cache time: ".(number_format(($ddd-$this->timer),3))." s<br />");
 					echo "</div>";
 				}
@@ -248,11 +248,11 @@ class Cache
 		return true;
 	}
 
-	function Output()
+	function output()
 	{
 		clearstatcache();
 
-		if (!($mtime = $this->GetCachedTime($this->page, $this->method, $this->query)))
+		if (!($mtime = $this->get_cached_time($this->page, $this->method, $this->query)))
 			$mtime = time();
 
 		$gmt = gmdate('D, d M Y H:i:s \G\M\T', $mtime);
@@ -268,7 +268,7 @@ class Cache
 		die();
 	}
 
-	function GetMicroTime()
+	function get_micro_time()
 	{
 		list($usec, $sec) = explode(" ", microtime());
 		return ((float)$usec + (float)$sec);

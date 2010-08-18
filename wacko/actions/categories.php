@@ -18,7 +18,7 @@ if (!isset($sort) || !in_array($sort, array('abc', 'date')))
 	$sort = 'abc';
 if (!isset($nomark)) $nomark = "";
 
-$root = $this->UnwrapLink($root);
+$root = $this->unwrap_link($root);
 
 //echo '<br />';
 
@@ -27,7 +27,7 @@ if ($list && ($ids || isset($_GET['category'])))
 	if ($ids) $category = preg_replace('/[^\d, ]/', '', $ids);
 	else $category = (int)$_GET['category'];
 
-	if ($_words = $this->LoadAll(
+	if ($_words = $this->load_all(
 	"SELECT category FROM {$this->config['table_prefix']}category ".
 	"WHERE category_id IN ( ".quote($this->dblink, $category)." )", 1));
 
@@ -38,13 +38,13 @@ if ($list && ($ids || isset($_GET['category'])))
 			foreach ($_words as $word) $words[] = $word['category'];
 			$words = strtolower(implode(', ', $words));
 		}
-		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation('PagesCategory').( $words ? ' &laquo;<b>'.$words.'</b>&raquo;' : '' ).":</span></p>\n";
+		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('PagesCategory').( $words ? ' &laquo;<b>'.$words.'</b>&raquo;' : '' ).":</span></p>\n";
 	}
 
 	if		($sort == 'abc')	$order = 'title ASC';
 	else if ($sort == 'date')	$order = 'created DESC';
 
-	if ($pages = $this->LoadAll(
+	if ($pages = $this->load_all(
 	"SELECT p.page_id, p.tag, p.title, p.created ".
 	"FROM {$this->config['table_prefix']}category_page AS k ".
 		"INNER JOIN {$this->config['table_prefix']}page AS p ON (k.page_id = p.page_id) ".
@@ -52,7 +52,7 @@ if ($list && ($ids || isset($_GET['category'])))
 		( $root ? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) " : '' ).
 	"ORDER BY p.$order ", 1))
 	{
-		if ($_words = $this->LoadAll(
+		if ($_words = $this->load_all(
 		"SELECT category FROM {$this->config['table_prefix']}category ".
 		"WHERE category_id IN ( ".quote($this->dblink, $category)." )", 1))
 		{
@@ -60,22 +60,22 @@ if ($list && ($ids || isset($_GET['category'])))
 
 			foreach ($pages as $page)
 			{
-				if ($this->HasAccess('read', $page['page_id']) !== true)
+				if ($this->has_access('read', $page['page_id']) !== true)
 					continue;
 				else
-					echo '<li>'.( $sort == 'date' ? '<small>('.date('d/m/Y', strtotime($page['created'])).')</small> ' : '' ).$this->Link('/'.$page['tag'], '', $page['title'], 0, 1)."</li>\n";
+					echo '<li>'.( $sort == 'date' ? '<small>('.date('d/m/Y', strtotime($page['created'])).')</small> ' : '' ).$this->link('/'.$page['tag'], '', $page['title'], 0, 1)."</li>\n";
 			}
 
 			echo '</ul>';
 		}
 		else
 		{
-			echo '<em>'.$this->GetTranslation('CategoryNotExists').'</em><br />';
+			echo '<em>'.$this->get_translation('CategoryNotExists').'</em><br />';
 		}
 	}
 	else
 	{
-		echo '<em>'.$this->GetTranslation('CategoryEmpty').'</em><br />';
+		echo '<em>'.$this->get_translation('CategoryEmpty').'</em><br />';
 	}
 
 	if ($nomark != 2)
@@ -89,11 +89,11 @@ if (!$ids)
 	// header
 	if (!$nomark)
 	{
-		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>Categories".$this->GetTranslation('Category').( $root ? " of cluster ".$this->Link('/'.$root, '', '', 0) : '' ).":</span></p>\n";
+		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>Categories".$this->get_translation('Category').( $root ? " of cluster ".$this->link('/'.$root, '', '', 0) : '' ).":</span></p>\n";
 	}
 
 	// categories list
-	if ($categories = $this->GetCategoriesList($lang, 1, $root))
+	if ($categories = $this->get_categories_list($lang, 1, $root))
 	{
 		echo "<ul>\n";
 
@@ -122,7 +122,7 @@ if (!$ids)
 	}
 	else
 	{
-		echo '<em>'.$this->GetTranslation('NoCategoriesForThisLanguage').'</em>';
+		echo '<em>'.$this->get_translation('NoCategoriesForThisLanguage').'</em>';
 	}
 
 	if (!$nomark)

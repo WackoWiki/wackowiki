@@ -25,7 +25,7 @@ if (!$style) $style = "before";
 {
 	if (isset($this->post_wacko_toc)) $toc = &$this->post_wacko_toc;
 	else
-	$toc = $this->BuildToc( $context, $start_depth, $end_depth, $numerate, $link );
+	$toc = $this->build_toc( $context, $start_depth, $end_depth, $numerate, $link );
 
 	{ // ---------------------- p numeration ------------------------
 		// clarifying, what numbers where is placed

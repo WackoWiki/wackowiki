@@ -7,15 +7,15 @@ if (!isset($max)) $max = "";
 if ($max) $limit = $max;
 else $limit	= 50;
 
-$count = $this->LoadSingle(
+$count = $this->load_single(
 	"SELECT COUNT(tag) AS n ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0'", 1);
 
-$pagination = $this->Pagination($count['n'], $limit);
+$pagination = $this->pagination($count['n'], $limit);
 
 //  collect data
-if ($pages = $this->LoadAll(
+if ($pages = $this->load_all(
 	"SELECT page_id, tag, title ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
@@ -27,7 +27,7 @@ if ($pages = $this->LoadAll(
 	foreach ($pages as $page)
 	{
 		if ($this->config['hide_locked'])
-			$access = $this->HasAccess('read', $page['page_id']);
+			$access = $this->has_access('read', $page['page_id']);
 		else
 			$access = true;
 
@@ -71,9 +71,9 @@ if ($pages_to_display)
 
 		echo "<li>";
 		if ($title == 1)
-			echo $this->ComposeLinkToPage($page['tag'], '', $page['title'], 0);
+			echo $this->compose_link_to_page($page['tag'], '', $page['title'], 0);
 		else
-			echo $this->ComposeLinkToPage($page['tag'], '', $page['tag'], 0);
+			echo $this->compose_link_to_page($page['tag'], '', $page['tag'], 0);
 		echo "</li>\n";
 
 	}
@@ -89,7 +89,7 @@ if ($pages_to_display)
 }
 else
 {
-	echo $this->GetTranslation("NoPagesFound");
+	echo $this->get_translation("NoPagesFound");
 }
 
 ?>

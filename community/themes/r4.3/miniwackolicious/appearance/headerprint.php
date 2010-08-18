@@ -1,17 +1,17 @@
 <?php
 	// Wacko can show message (by javascript)
-	$message = $this->GetMessage();
+	$message = $this->get_message();
 	$base_url = $this->config['base_url'];
 
 	// HTTP header with right Charset settings
-	header("Content-Type: text/html; charset=".$this->GetCharset());
+	header("Content-Type: text/html; charset=".$this->get_charset());
 ?>
 <!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->config['language']; ?>" lang="<?php echo $this->config['language']; ?>">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
+	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 	<meta name="robots" content="noindex, nofollow" /> <!-- do not index alternative print pages -->
  	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>../default/css/default.css.php" />
 	<link media="screen,projection,print" rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>layout/print.css" />
@@ -20,7 +20,7 @@
 		br {display:inline;}
 	</style>
 	<link rel="start" href="<?php echo $this->config['base_url']; ?>" />
-	<title><?php echo $this->config['wacko_name'] ?> : <?php echo $this->AddSpaces($this->tag).($this->method!="show"?" (".$this->method.")":""); ?></title>
+	<title><?php echo $this->config['wacko_name'] ?> : <?php echo $this->add_spaces($this->tag).($this->method!="show"?" (".$this->method.")":""); ?></title>
 	<link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" />
 
 <body>

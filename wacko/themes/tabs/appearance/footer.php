@@ -46,39 +46,39 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 	src="<?php echo $this->config['base_url'];?>images/z.gif"
 	width="5" height="1" alt="" align="left" border="0" /><img
 	src="<?php echo $this->config['base_url'];?>images/z.gif"
-	width="5" height="1" alt="" align="right" border="0" /> <?php EchoTab( $this->href("show"),  $this->GetTranslation("ShowTip"),
-	$this->HasAccess("read") ? $this->GetTranslation("ShowText") : "",
+	width="5" height="1" alt="" align="right" border="0" /> <?php EchoTab( $this->href("show"),  $this->get_translation("ShowTip"),
+	$this->has_access("read") ? $this->get_translation("ShowText") : "",
 	$this->method != "show"
-	) ?> <?php EchoTab( $this->href("edit"),  $this->GetTranslation("EditTip"),
-	$this->HasAccess("write") ? $this->GetTranslation("EditText") : "",
+	) ?> <?php EchoTab( $this->href("edit"),  $this->get_translation("EditTip"),
+	$this->has_access("write") ? $this->get_translation("EditText") : "",
 	$this->method != "edit"
-	) ?> <?php EchoTab( $this->href("revisions"),  $this->GetTranslation("RevisionTip"),
-	$this->page['modified'] ? $this->GetPageTimeFormatted() : "",
+	) ?> <?php EchoTab( $this->href("revisions"),  $this->get_translation("RevisionTip"),
+	$this->page['modified'] ? $this->get_page_time_formatted() : "",
 	$this->method != "revisions"
 	) ?> <?php
 	// if this page exists
 	if ($this->page)
 	{
-		if($this->HasAccess("write") && $this->GetUser() || $this->IsAdmin())
+		if($this->has_access("write") && $this->get_user() || $this->is_admin())
 		{
-			EchoTab( $this->href("properties"),  $this->GetTranslation("SettingsTip"),
-			$this->GetTranslation("PropertiesText"),
+			EchoTab( $this->href("properties"),  $this->get_translation("SettingsTip"),
+			$this->get_translation("PropertiesText"),
 			$this->method != "properties"
 			);
 		}
 
 		// if owner is current user
-		if ($this->UserIsOwner())
+		if ($this->user_is_owner())
 		{
-			EchoTab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->GetTranslation("EditACLConfirm")."\");":""),
-			$this->GetTranslation("ACLText"),
+			EchoTab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->get_translation("EditACLConfirm")."\");":""),
+			$this->get_translation("ACLText"),
 			$this->method != "acls"
 			);
 		}
-		if ($this->IsAdmin() || (!$this->config['remove_onlyadmins'] && $this->UserIsOwner()))
+		if ($this->is_admin() || (!$this->config['remove_onlyadmins'] && $this->user_is_owner()))
 		{
-			EchoTab( $this->href("remove"),  $this->GetTranslation("DeleteTip")."",
-				'<img src="'.$this->config['theme_url'].'icons/del'.($this->method != "remove"?"":"_").'.gif" width="14" height="15" alt="" />'.$this->GetTranslation("DeleteText"),
+			EchoTab( $this->href("remove"),  $this->get_translation("DeleteTip")."",
+				'<img src="'.$this->config['theme_url'].'icons/del'.($this->method != "remove"?"":"_").'.gif" width="14" height="15" alt="" />'.$this->get_translation("DeleteText"),
 			$this->method != "remove",
 				"2a"
 				);
@@ -86,19 +86,19 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 	}
 	?>
 	<?php
-	if ($this->GetUser())
+	if ($this->get_user())
 	{
-		EchoTab( $this->href("new"), $this->GetTranslation("CreateNewPage"),
-		$this->HasAccess("write") ? $this->GetTranslation("CreateNewPage") : "",
+		EchoTab( $this->href("new"), $this->get_translation("CreateNewPage"),
+		$this->has_access("write") ? $this->get_translation("CreateNewPage") : "",
 		$this->method != "new",
 		"2"
 		);
 	} ?>
 	<?php
-	if ($this->GetUser())
+	if ($this->get_user())
 	{
-		EchoTab( $this->href("referrers"), $this->GetTranslation("ReferrersTip"),
-		$this->GetTranslation("ReferrersText"),
+		EchoTab( $this->href("referrers"), $this->get_translation("ReferrersTip"),
+		$this->get_translation("ReferrersText"),
 		$this->method != "referrers",
 		"2"
 		);
@@ -109,13 +109,13 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 if ($this->page)
 {
 	// if owner is current user
-	if ($this->UserIsOwner())
-	print($this->GetTranslation("YouAreOwner"));
+	if ($this->user_is_owner())
+	print($this->get_translation("YouAreOwner"));
 	else
-	if ($owner = $this->GetPageOwner())
-	print($this->GetTranslation("Owner").": ".$this->Link($owner));
+	if ($owner = $this->get_page_owner())
+	print($this->get_translation("Owner").": ".$this->link($owner));
 	else if (!$this->page['comment_on_id'])
-	print($this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a>)" : ""));
+	print($this->get_translation("Nobody").($this->get_user() ? " (<a href=\"".$this->href("claim")."\">".$this->get_translation("TakeOwnership")."</a>)" : ""));
 }
 ?></div>
 </div>
@@ -127,12 +127,12 @@ if ($this->method == "show") {
 
 
 	// files code starts
-	if ($this->HasAccess("read") && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->GetUser()))
+	if ($this->has_access("read") && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->get_user()))
 	{
 		// store files display in session
 		$tag = $this->tag;
 		if (!isset($_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag]))
-		$_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
+		$_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag] = ($this->user_wants_files() ? "1" : "0");
 
 		switch($_GET['show_files'])
 		{
@@ -150,18 +150,18 @@ if ($this->method == "show") {
 			// display files header
 			?>
 <a name="files"></a>
-<div id="filesheader"><?php echo $this->GetTranslation("Files_all") ?> <?php echo "[<a href=\"".$this->href("", "", "show_files=0")."\">".$this->GetTranslation("HideFiles")."</a>]"; ?>
+<div id="filesheader"><?php echo $this->get_translation("Files_all") ?> <?php echo "[<a href=\"".$this->href("", "", "show_files=0")."\">".$this->get_translation("HideFiles")."</a>]"; ?>
 </div>
 			<?php
 
 			echo "<div class=\"files\">";
-			echo $this->Action("files",array("nomark"=>1));
+			echo $this->action("files",array("nomark"=>1));
 			echo "</div>";
 			// display form
 			print("<div class=\"filesform\">\n");
-			if ($user = $this->GetUser())
+			if ($user = $this->get_user())
 			{
-				$user = strtolower($this->GetUserName());
+				$user = strtolower($this->get_user_name());
 				$registered = true;
 			}
 			else
@@ -171,10 +171,10 @@ if ($this->method == "show") {
 			&&
 			(
 			($this->config['upload'] === true) || ($this->config['upload'] == "1") ||
-			($this->CheckACL($user,$this->config['upload']))
+			($this->check_acl($user,$this->config['upload']))
 			)
 			)
-			echo $this->Action("upload",array("nomark"=>1));
+			echo $this->action("upload",array("nomark"=>1));
 			print("</div>\n");
 		}
 		else
@@ -182,7 +182,7 @@ if ($this->method == "show") {
 			?>
 <div id="filesheader"><?php
 if ($this->page['page_id'])
-$files = $this->LoadAll(
+$files = $this->load_all(
 		"SELECT upload_id ".
 		"FROM ".$this->config['table_prefix']."upload ".
 		"WHERE page_id = '". quote($this->dblink, $this->page['page_id']) ."'");
@@ -191,15 +191,15 @@ else $files = array();
 switch (count($files))
 {
 	case 0:
-		print($this->GetTranslation("Files_0"));
+		print($this->get_translation("Files_0"));
 		break;
 	case 1:
-		print($this->GetTranslation("Files_1"));
+		print($this->get_translation("Files_1"));
 		break;
 	default:
-		print(str_replace("%1",count($files), $this->GetTranslation("Files_n")));
+		print(str_replace("%1",count($files), $this->get_translation("Files_n")));
 }
-?> <?php echo "[<a href=\"".$this->href("", "", "show_files=1#files")."\">".$this->GetTranslation("ShowFiles")."</a>]"; ?>
+?> <?php echo "[<a href=\"".$this->href("", "", "show_files=1#files")."\">".$this->get_translation("ShowFiles")."</a>]"; ?>
 
 </div>
 <?php
@@ -207,15 +207,15 @@ switch (count($files))
 	}
 	// end files
 	// comments code starts
-	if ($this->HasAccess("read") && $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->GetUser()))
+	if ($this->has_access("read") && $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->get_user()))
 	{
 		// load comments for this page
-		$comments = $this->LoadComments($this->GetPageId());
+		$comments = $this->load_comments($this->get_page_id());
 
 		// store comments display in session
 		$tag = $this->tag;
 		if (!isset($_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag]))
-		$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
+		$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag] = ($this->user_wants_comments() ? "1" : "0");
 
 		switch($_GET['show_comments'])
 		{
@@ -233,8 +233,8 @@ switch (count($files))
 			// display comments header
 			?>
 <a name="comments"></a>
-<div id="commentsheader"><?php echo $this->GetTranslation("Comments_all") ?>
-			<?php echo "[<a href=\"".$this->href("", "", "show_comments=0")."\">".$this->GetTranslation("HideComments")."</a>]"; ?>
+<div id="commentsheader"><?php echo $this->get_translation("Comments_all") ?>
+			<?php echo "[<a href=\"".$this->href("", "", "show_comments=0")."\">".$this->get_translation("HideComments")."</a>]"; ?>
 </div>
 			<?php
 
@@ -246,25 +246,25 @@ switch (count($files))
 					print("<a name=\"".$comment['tag']."\"></a>\n");
 					print("<div class=\"comment\">\n");
 					$del = "";
-					if ($this->IsAdmin() || $this->UserIsOwner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->UserIsOwner($this->GetPageId())))
+					if ($this->is_admin() || $this->user_is_owner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->get_page_id())))
 					print("<div style=\"float:right;\" style='background:#ffcfa8; border: solid 1px; border-color:#cccccc'>".
-				"<a href=\"".$this->href("remove",$comment['tag'])."\" title=\"".$this->GetTranslation("DeleteTip")."\">".
-				"<img src=\"".$this->config['theme_url']."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->GetTranslation("DeleteText")."\" /></a>".
+				"<a href=\"".$this->href("remove",$comment['tag'])."\" title=\"".$this->get_translation("DeleteTip")."\">".
+				"<img src=\"".$this->config['theme_url']."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->get_translation("DeleteText")."\" /></a>".
 				"</div>");
-					print($this->Format($comment['body'])."\n");
-					print("<div class=\"commentinfo\">\n-- ".($this->IsWikiName($comment['user'])?$this->Link("/".$comment['user'],"",$comment['user']):$comment['user'])." (".$comment['modified'].")\n</div>\n");
+					print($this->format($comment['body'])."\n");
+					print("<div class=\"commentinfo\">\n-- ".($this->is_wiki_name($comment['user'])?$this->link("/".$comment['user'],"",$comment['user']):$comment['user'])." (".$comment['modified'].")\n</div>\n");
 					print("</div>\n");
 				}
 			}
 
 			// display comment form
-			if ($this->HasAccess("comment"))
+			if ($this->has_access("comment"))
 			{
 				print("<div class=\"commentform\">\n");
 
-				echo $this->GetTranslation("AddComment"); ?>
+				echo $this->get_translation("AddComment"); ?>
 <br />
-				<?php echo $this->FormOpen("addcomment"); ?>
+				<?php echo $this->form_open("addcomment"); ?>
 <textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config['session_prefix'].'_'.'freecap_old_comment']; ?></textarea>
 				<?php
 				// captcha code starts
@@ -275,19 +275,19 @@ switch (count($files))
 					// Don't load the captcha at all if the GD extension isn't enabled
 					if(extension_loaded('gd'))
 					{
-						if(strpos($this->GetUserName(), '.'))
+						if(strpos($this->get_user_name(), '.'))
 						{
 							?>
-<label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
+<label for="captcha"><?php echo $this->get_translation("Captcha");?>:</label>
 <br />
 <img
 	src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php"
-	id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" />
+	id="freecap" alt="<?php echo $this->get_translation("Captcha");?>" />
 <a href="" onclick="this.blur(); new_freecap(); return false;"
-	title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img
+	title="<?php echo $this->get_translation("CaptchaReload"); ?>"><img
 	src="<?php echo $this->config['base_url'];?>images/reload.png"
 	width="18" height="17"
-	alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
+	alt="<?php echo $this->get_translation("CaptchaReload"); ?>" /></a>
 <br />
 <input id="captcha" type="text" name="word"
 	maxlength="6" style="width: 273px;" />
@@ -300,9 +300,9 @@ switch (count($files))
 				// end captcha
 				?>
 <input type="submit"
-	value="<?php echo $this->GetTranslation("AddCommentButton"); ?>"
+	value="<?php echo $this->get_translation("AddCommentButton"); ?>"
 	accesskey="s" />
-				<?php echo $this->FormClose(); ?>
+				<?php echo $this->form_close(); ?>
 				<?php
 				print("</div>\n");
 			}
@@ -315,15 +315,15 @@ switch (count($files))
 switch (count($comments))
 {
 	case 0:
-		print($this->GetTranslation("Comments_0"));
+		print($this->get_translation("Comments_0"));
 		break;
 	case 1:
-		print($this->GetTranslation("Comments_1"));
+		print($this->get_translation("Comments_1"));
 		break;
 	default:
-		print(str_replace("%1",count($comments), $this->GetTranslation("Comments_n")));
+		print(str_replace("%1",count($comments), $this->get_translation("Comments_n")));
 }
-?> <?php echo "[<a href=\"".$this->href("", "", "show_comments=1#comments")."\">".$this->GetTranslation("ShowComments")."</a>]"; ?>
+?> <?php echo "[<a href=\"".$this->href("", "", "show_comments=1#comments")."\">".$this->get_translation("ShowComments")."</a>]"; ?>
 
 </div>
 <?php
@@ -336,8 +336,8 @@ switch (count($comments))
 <!-- !!! -->
 
 <div id="credits"><?php
-if ($this->GetUser()){
-	echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion())." :: Redesign by Mendokusee";
+if ($this->get_user()){
+	echo $this->get_translation("PoweredBy")." ".$this->link("WackoWiki:HomePage", "", "WackoWiki ".$this->get_wacko_version())." :: Redesign by Mendokusee";
 }
 ?></div>
 <?php

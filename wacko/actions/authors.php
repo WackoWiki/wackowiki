@@ -34,7 +34,7 @@ else
 		$add = explode(';', $add);
 		foreach ($add as $i => $str)
 		{
-			$add[$i] = $this->Format($this->Format($str, 'wacko'), 'post_wacko');
+			$add[$i] = $this->format($this->format($str, 'wacko'), 'post_wacko');
 		}
 		$output[] = implode('<br />', $add);
 	}
@@ -43,7 +43,7 @@ else
 	if ($this->page)
 	{
 		// load overall authors data from revision and page table
-		if ($_authors = $this->LoadAll(
+		if ($_authors = $this->load_all(
 		"( SELECT u.user_name AS name, YEAR(r.modified) AS year ".
 		"FROM {$this->config['table_prefix']}revision r ".
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (r.user_id = u.user_id) ".
@@ -142,13 +142,13 @@ else
 		{
 			// constant license
 			$license = '<br />Material is distributed under<br />'. // ru]: ћатериал распростран€етс€ на услови€х
-				$this->Link($licenses[$license][0], '', $licenses[$license][1]).'<br />'.
-				$this->Link('file:'.strtolower($license).'.png', '', $licenses[$license][1]);
+				$this->link($licenses[$license][0], '', $licenses[$license][1]).'<br />'.
+				$this->link('file:'.strtolower($license).'.png', '', $licenses[$license][1]);
 		}
 		else
 		{
 			// free-form text
-			$license = $this->Format($this->Format($license, 'wacko'), 'post_wacko');
+			$license = $this->format($this->format($license, 'wacko'), 'post_wacko');
 		}
 
 		$output[] = $license;

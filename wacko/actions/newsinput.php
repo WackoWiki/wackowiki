@@ -12,18 +12,18 @@ if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd')
 		$name		= preg_replace('/[^- \\w]/', '', $name);
 		$name		= str_replace(array(' ', "\t"), '', $name);
 
-		if ($name == '') $error = $this->GetTranslation('NewsNoName');
+		if ($name == '') $error = $this->get_translation('NewsNoName');
 	}
 	else
 	{
-		$error = $this->GetTranslation('NewsNoName');
+		$error = $this->get_translation('NewsNoName');
 	}
 
 	// if errors were found - return, else continue
 	if ($error)
 	{
-		$this->SetMessage('<div class="error">'.$error.'</div>');
-		$this->Redirect($this->href());
+		$this->set_message('<div class="error">'.$error.'</div>');
+		$this->redirect($this->href());
 	}
 	else
 	{
@@ -35,23 +35,23 @@ if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd')
 		// redirecting to the edit form
 		$_SESSION['body']	= $template;
 		$_SESSION['title']	= $namehead;
-		$this->Redirect($this->href('edit', $this->config['news_cluster'].'/'.date('Y/').date('F/').$name, '', 1));
+		$this->redirect($this->href('edit', $this->config['news_cluster'].'/'.date('Y/').date('F/').$name, '', 1));
 	}
 }
 if (!empty($this->config['news_cluster']))
 {
-	echo $this->FormOpen();
+	echo $this->form_open();
 ?>
 	<input type="hidden" name="action" value="newsadd" />
-	<label for="newstitle"><?php echo $this->GetTranslation("NewsName"); ?>:</label>
+	<label for="newstitle"><?php echo $this->get_translation("NewsName"); ?>:</label>
 	<input id="newstitle" name="title" size="50" maxlength="100" value="" />
-	<input id="submit" type="submit" value="<?php echo $this->GetTranslation("NewsSubmit"); ?>" />
+	<input id="submit" type="submit" value="<?php echo $this->get_translation("NewsSubmit"); ?>" />
 
-<?php echo $this->FormClose(); 
+<?php echo $this->form_close(); 
 }
 else
 {
-	echo $this->GetTranslation("NewsNoClusterDefined");
+	echo $this->get_translation("NewsNoClusterDefined");
 }
 ?>
 <!--/notypo-->

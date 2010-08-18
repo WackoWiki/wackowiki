@@ -13,85 +13,85 @@
 <ul>
 <?php
 // If User has rights to edit page, show Edit link
-echo ($this->HasAccess("write") && ($this->method != 'edit')) ? "<li><a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->GetTranslation("EditTip")."\">".$this->GetTranslation("EditText")."</a></li>\n" : "";
+echo ($this->has_access("write") && ($this->method != 'edit')) ? "<li><a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a></li>\n" : "";
 
 // If this page exists
 if ($this->page)
 {
 	// Revisions link
-	echo $this->page['modified'] ? "<li><a href=\"".$this->href("revisions")."\" title=\"".$this->GetTranslation("RevisionTip")."\">".$this->GetTimeStringFormatted($this->page['modified'])."</a></li>\n" : "";
+	echo $this->page['modified'] ? "<li><a href=\"".$this->href("revisions")."\" title=\"".$this->get_translation("RevisionTip")."\">".$this->get_time_string_formatted($this->page['modified'])."</a></li>\n" : "";
 
 	// If owner is current user
-	if ($this->UserIsOwner())
+	if ($this->user_is_owner())
 	{
-		print("<li>".$this->GetTranslation("YouAreOwner")."</li>\n");
+		print("<li>".$this->get_translation("YouAreOwner")."</li>\n");
 
 		// Add page link
 		(($this->method == 'new')
 			? ""
-			: print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->GetTranslation("CreateNewPage")."\" alt=\"".$this->GetTranslation("CreateNewPage")."\" /></a></li>\n")
+			: print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation("CreateNewPage")."\" alt=\"".$this->get_translation("CreateNewPage")."\" /></a></li>\n")
 		);
 
 		// Rename link
-		print("<li><a href=\"".$this->href("rename")."\"><img src=\"".$this->config['theme_url']."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" /></a></li>\n");
+		print("<li><a href=\"".$this->href("rename")."\"><img src=\"".$this->config['theme_url']."icons/rename.gif\" title=\"".$this->get_translation("RenameText")."\" alt=\"".$this->get_translation("RenameText")."\" /></a></li>\n");
 
 		// Remove link (shows only for page owner if allowed)
-		if (!$this->config['remove_onlyadmins']) print("<li><a href=\"".$this->href("remove")."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->GetTranslation("DeleteTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" /></a></li>\n");
+		if (!$this->config['remove_onlyadmins']) print("<li><a href=\"".$this->href("remove")."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->get_translation("DeleteTip")."\" alt=\"".$this->get_translation("DeleteText")."\" /></a></li>\n");
 
 		//Edit ACLs link
-		print("<li><a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"").">".$this->GetTranslation("ACLText")."</a></li>\n");
+		print("<li><a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a></li>\n");
 	}
 	// If owner is NOT current user
 	else
 	{
 		// Show Owner of this page
-		if ($owner = $this->GetPageOwner())
+		if ($owner = $this->get_page_owner())
 		{
-			print("<li>".$this->GetTranslation("Owner").": ".$this->Link($owner)."</li>\n");
+			print("<li>".$this->get_translation("Owner").": ".$this->link($owner)."</li>\n");
 		}
 		else if (!$this->page['comment_on_id'])
 		{
-			print("<li>".$this->GetTranslation("Nobody").($this->GetUser() ? " (<a href=\"".$this->href("claim")."\">".$this->GetTranslation("TakeOwnership")."</a></li>\n)" : ""));
+			print("<li>".$this->get_translation("Nobody").($this->get_user() ? " (<a href=\"".$this->href("claim")."\">".$this->get_translation("TakeOwnership")."</a></li>\n)" : ""));
 		}
 
 		// Add page link
 		(($this->method == 'new')
 			? ""
-			: print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->GetTranslation("CreateNewPage")."\" alt=\"".$this->GetTranslation("CreateNewPage")."\" /></a></li>\n")
+			: print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation("CreateNewPage")."\" alt=\"".$this->get_translation("CreateNewPage")."\" /></a></li>\n")
 		);
 	}
 
 	// Rename link
-	if ($this->CheckACL($this->GetUserName(),$this->config['rename_globalacl']) && !$this->UserIsOwner())
+	if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->user_is_owner())
 	{
-		print("<li><a href=\"".$this->href("rename")."\"><img src=\"".$this->config['theme_url']."icons/rename.gif\" title=\"".$this->GetTranslation("RenameText")."\" alt=\"".$this->GetTranslation("RenameText")."\" /></a></li>\n");
+		print("<li><a href=\"".$this->href("rename")."\"><img src=\"".$this->config['theme_url']."icons/rename.gif\" title=\"".$this->get_translation("RenameText")."\" alt=\"".$this->get_translation("RenameText")."\" /></a></li>\n");
 	}
 	// Remove link (shows only for Admins)
-	if ($this->IsAdmin() && !$this->UserIsOwner())
+	if ($this->is_admin() && !$this->user_is_owner())
 	{
-		print("<li><a href=\"".$this->href("remove")."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->GetTranslation("DeleteTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" /></a></li>\n");
+		print("<li><a href=\"".$this->href("remove")."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->get_translation("DeleteTip")."\" alt=\"".$this->get_translation("DeleteText")."\" /></a></li>\n");
 
 		// Edit ACLs link (shows also for Admins)
-		print("<li><a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditACLConfirm")."');\"":"").">".$this->GetTranslation("ACLText")."</a></li>\n");
+		print("<li><a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a></li>\n");
 	}
 
-	if($this->HasAccess("write") && $this->GetUser() || $this->IsAdmin())
+	if($this->has_access("write") && $this->get_user() || $this->is_admin())
 	{
 		// Page  settings link
-		print("<li><a href=\"".$this->href("properties"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->GetTranslation("EditPropertiesConfirm")."');\"":"").">".$this->GetTranslation("PropertiesText")."</a></li>\n");
+		print("<li><a href=\"".$this->href("properties"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditPropertiesConfirm")."');\"":"").">".$this->get_translation("PropertiesText")."</a></li>\n");
 
 		// referrers icon
-		print("<li><a href=\"".$this->href("referrers")."\"><img src=\"".$this->config['theme_url']."icons/referer.gif\" title=\"".$this->GetTranslation("ReferrersTip")."\" alt=\"".$this->GetTranslation("ReferrersText")."\" /></a></li>\n");
+		print("<li><a href=\"".$this->href("referrers")."\"><img src=\"".$this->config['theme_url']."icons/referer.gif\" title=\"".$this->get_translation("ReferrersTip")."\" alt=\"".$this->get_translation("ReferrersText")."\" /></a></li>\n");
 	}
 
-	if ($this->GetUser())
+	if ($this->get_user())
 	{
 		// Watch/Unwatch icon
-		echo ($this->iswatched === true ? "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  /></a></li>\n" : "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\" /></a></li>\n");
+		echo ($this->iswatched === true ? "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation("RemoveWatch")."\" alt=\"".$this->get_translation("RemoveWatch")."\"  /></a></li>\n" : "<li><a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation("set_watch")."\" alt=\"".$this->get_translation("set_watch")."\" /></a></li>\n");
 	}
 
 	// Print icon
-	echo"<li><a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->GetTranslation("PrintVersion")."\" alt=\"".$this->GetTranslation("PrintVersion")."\" /></a></li>\n";
+	echo"<li><a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation("PrintVersion")."\" alt=\"".$this->get_translation("PrintVersion")."\" /></a></li>\n";
 }
 
 ?>
@@ -99,9 +99,9 @@ if ($this->page)
 </div>
 </div>
 <div id="credits"><?php
-if ($this->GetUser())
+if ($this->get_user())
 {
-	echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion());
+	echo $this->get_translation("PoweredBy")." ".$this->link("WackoWiki:HomePage", "", "WackoWiki ".$this->get_wacko_version());
 }
 ?></div>
 </div>

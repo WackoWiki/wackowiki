@@ -140,7 +140,7 @@ $xhtml_tags = array(
   $source = preg_replace(
              '/(&lt;style.*?&gt;)(.*?)&lt;\/style&gt;/es',
              '"$1".
-             $this->Format("$2","highlight/css", array("nopre"=>true,"notypo"=>false)).
+             $this->format("$2","highlight/css", array("nopre"=>true,"notypo"=>false)).
              "&lt;/style&gt;"',
   $source);
 

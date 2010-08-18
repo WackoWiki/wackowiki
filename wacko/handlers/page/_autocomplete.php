@@ -55,20 +55,20 @@ $ta_id	= $_GET["ta_id"];
 
 // 1. convert into supertag and unwrap
 $q = ltrim($q, "/");
-$supertag1 = $this->NpjTranslit( $this->UnwrapLink($q) );
-$supertag2 = $this->NpjTranslit( $q );
+$supertag1 = $this->npj_translit( $this->unwrap_link($q) );
+$supertag2 = $this->npj_translit( $q );
 
 // 2. going to DB two times
 $limit = 10;
 
-$pages1 = $this->LoadAll(
+$pages1 = $this->load_all(
 	"SELECT page_id, tag, supertag ".
 	"FROM ".$this->config['table_prefix']."page ".
 	"WHERE supertag LIKE '".quote($this->dblink, $supertag1)."%' ".
 		"AND comment_on_id = '0' ".
 	"ORDER BY supertag ASC LIMIT $limit");
 
-$pages2 = $this->LoadAll(
+$pages2 = $this->load_all(
 	"SELECT page_id, tag, supertag ".
 	"FROM ".$this->config['table_prefix']."page ".
 	"WHERE  supertag LIKE '".quote($this->dblink, $supertag2)."%' ".
@@ -81,7 +81,7 @@ $cnt = 0;
 if ($pages1)
 	foreach ($pages1 as $page)
 	{
-		if ($this->config['hide_locked']) $access = $this->HasAccess("read",$page['page_id']);
+		if ($this->config['hide_locked']) $access = $this->has_access("read",$page['page_id']);
 		else $access = true;
 		if ($access)
 		{
@@ -95,7 +95,7 @@ if ($pages1)
 if ($pages2)
 	foreach ($pages2 as $page)
 	{
-		if ($this->config['hide_locked']) $access = $this->HasAccess("read",$page['page_id']);
+		if ($this->config['hide_locked']) $access = $this->has_access("read",$page['page_id']);
 		else $access = true;
 		if ($access)
 		{

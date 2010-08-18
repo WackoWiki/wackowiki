@@ -8,7 +8,7 @@ $output = "";
 #if ($this->config['ssl'] == true && $this->config['ssl_implicit'] == true && ( ($_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
 {
-	$this->Redirect(str_replace("http://", "https://".(!empty($this->config['ssl_proxy']) ? $this->config['ssl_proxy'].'/' : ""), $this->href()));
+	$this->redirect(str_replace("http://", "https://".(!empty($this->config['ssl_proxy']) ? $this->config['ssl_proxy'].'/' : ""), $this->href()));
 }
 
 // actions
@@ -16,44 +16,44 @@ if (isset($_GET["action"]) && $_GET["action"] == "clearcookies")
 {
 	foreach ($_COOKIE as $name => $value)
 	{
-		$this->DeleteCookie($name, false, false);
+		$this->delete_cookie($name, false, false);
 	}
 	$_POST["action"] = "logout";
 }
 
 if (isset($_GET["action"]) && $_GET["action"] == "logout")
 {
-	$this->Log(5, str_replace("%1", $this->GetUserName(), $this->GetTranslation("LogUserLoggedOut", $this->config['language'])));
-	$this->LogoutUser();
-	$this->SetBookmarks(BM_DEFAULT);
-	//$this->SetMessage($this->GetTranslation("LoggedOut"));
+	$this->log(5, str_replace("%1", $this->get_user_name(), $this->get_translation("LogUserLoggedOut", $this->config['language'])));
+	$this->logout_user();
+	$this->set_bookmarks(BM_DEFAULT);
+	//$this->set_message($this->get_translation("LoggedOut"));
 	$this->context[++$this->current_context] = "";
 
 	if ($_GET["goback"] != "")
-		$this->Redirect($this->Href("", stripslashes($_GET["goback"])));
+		$this->redirect($this->href("", stripslashes($_GET["goback"])));
 	else
-		$this->Redirect($this->href());
+		$this->redirect($this->href());
 }
-else if ($user = $this->GetUser())
+else if ($user = $this->get_user())
 {
 	// user is logged in; display logout form
-	print($this->FormOpen());
+	print($this->form_open());
 	?>
 
 <input type="hidden" name="action" value="logout" />
 <div class="cssform">
-  <h3><?php echo $this->GetTranslation("Hello").", ".$this->ComposeLinkToPage($user['user_name']) ?>!</h3>
+  <h3><?php echo $this->get_translation("Hello").", ".$this->compose_link_to_page($user['user_name']) ?>!</h3>
 <?php
 				if ($user['session_time'] == true)
 				{
-					$output .= "Last visit was recorded <tt>". $this->GetTimeStringFormatted($user['session_time'])."</tt>.<br />";
+					$output .= "Last visit was recorded <tt>". $this->get_time_string_formatted($user['session_time'])."</tt>.<br />";
 				}
 
 				$output .= "The current session ends <tt>";
 
-				$cookie = explode(';', $this->GetCookie("auth"));
+				$cookie = explode(';', $this->get_cookie("auth"));
 				// session expiry date
-				$output .= $this->GetUnixTimeFormatted($cookie[2]).'</tt> ';
+				$output .= $this->get_unix_time_formatted($cookie[2]).'</tt> ';
 				// session time left
 				$time_diff = $cookie[2] - time();
 
@@ -74,18 +74,18 @@ else if ($user = $this->GetUser())
 					$output .= "Traffic Protection <tt>". ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on" ? $_SERVER["SSL_CIPHER"].' ('.$_SERVER["SSL_PROTOCOL"].')' : 'no' )."</tt>.";
 				}
 
-				$this->SetMessage($output);
+				$this->set_message($output);
 ?>
   <p>
-    <input type="button" value="<?php echo $this->GetTranslation("LogoutButton"); ?>"
+    <input type="button" value="<?php echo $this->get_translation("LogoutButton"); ?>"
 			onclick="document.location='<?php echo $this->href("", "", "action=logout"); ?>'" />
   </p>
   <p>
-		<?php echo $this->ComposeLinkToPage($this->GetTranslation("YouArePanelLink"), "", $this->GetTranslation("YouArePanelAccount"), 0); ?> | <a href="?action=clearcookies">Delete all cookies</a>
+		<?php echo $this->compose_link_to_page($this->get_translation("YouArePanelLink"), "", $this->get_translation("YouArePanelAccount"), 0); ?> | <a href="?action=clearcookies">Delete all cookies</a>
   </p>
 </div>
 <?php
-	print($this->FormClose());
+	print($this->form_close());
 }
 else
 {
@@ -96,12 +96,12 @@ else
 	if (isset($_POST["action"]) && $_POST["action"] == "login")
 	{
 		// if user name already exists, check password
-		if ($existingUser = $this->LoadUser($_POST["name"]))
+		if ($existingUser = $this->load_user($_POST["name"]))
 		{
 			// check for disabled account
 			if (($existingUser['enabled'] == false) || $existingUser["account_type"] != 0 )
 			{
-				$error = $this->GetTranslation("AccountDisabled");
+				$error = $this->get_translation("AccountDisabled");
 			}
 			else
 			{
@@ -112,11 +112,11 @@ else
 
 					if ($existingUser['password'] == $_processed_password)
 					{
-						$salt = $this->RandomPassword(4, 3);
+						$salt = $this->random_password(4, 3);
 						$password = hash('sha1', $_POST["name"].$salt.$_POST['password']);
 
 						// update database with the sha1 password for future logins
-						$this->Query("UPDATE ".$this->config['table_prefix']."user SET ".
+						$this->query("UPDATE ".$this->config['table_prefix']."user SET ".
 									"password	= '".$password."', ".
 									"salt		= '".$salt."' ".
 									"WHERE user_name = '".$_POST["name"]."'");
@@ -147,17 +147,17 @@ else
 							$session = $this->config['cookie_session'];
 					}
 
-					$this->LogUserIn($existingUser, $_POST['persistent'], $session);
-					$this->SetUser($existingUser, 1);
-					$this->UpdateSessionTime($existingUser);
-					$this->SetBookmarks(BM_USER);
+					$this->log_user_in($existingUser, $_POST['persistent'], $session);
+					$this->set_user($existingUser, 1);
+					$this->update_session_time($existingUser);
+					$this->set_bookmarks(BM_USER);
 					$this->context[++$this->current_context] = "";
 
-					$this->LoginCount($existingUser['user_id']);
-					$this->ResetFailedUserLoginCount($existingUser['user_id']);
-					$this->ResetLostPasswordCount($existingUser['user_id']);
+					$this->login_count($existingUser['user_id']);
+					$this->reset_failed_user_login_count($existingUser['user_id']);
+					$this->reset_lost_password_count($existingUser['user_id']);
 
-					$this->Log(3, str_replace("%1", $existingUser['user_name'], $this->GetTranslation("LogUserLoginOK", $this->config['language'])));
+					$this->log(3, str_replace("%1", $existingUser['user_name'], $this->get_translation("LogUserLoginOK", $this->config['language'])));
 
 					// run in ssl mode?
 					if ($this->config['ssl'] == true)
@@ -166,40 +166,40 @@ else
 					}
 
 					if ($_POST["goback"] != "")
-						$this->Redirect($this->Href("", stripslashes($_POST["goback"]), "cache=".rand(0,1000)));
+						$this->redirect($this->href("", stripslashes($_POST["goback"]), "cache=".rand(0,1000)));
 					else
-						$this->Redirect($this->href("", "", "cache=".rand(0,1000)));
+						$this->redirect($this->href("", "", "cache=".rand(0,1000)));
 				}
 				else
 				{
-					$error = $this->GetTranslation("WrongPassword");
+					$error = $this->get_translation("WrongPassword");
 					$name = $_POST["name"];
 					$focus = 1;
 
-					$this->SetFailedUserLoginCount($existingUser['user_id']);
+					$this->set_failed_user_login_count($existingUser['user_id']);
 
 					// log failed attempt
-					$this->Log(2, str_replace("%1", $_POST["name"], $this->GetTranslation("LogUserLoginFailed", $this->config['language'])));
+					$this->log(2, str_replace("%1", $_POST["name"], $this->get_translation("LogUserLoginFailed", $this->config['language'])));
 				}
 			}
 		}
 	}
 
-	if ($error) $this->SetMessage($error);
+	if ($error) $this->set_message($error);
 
-	print($this->FormOpen());
+	print($this->form_open());
 	?>
 <input type="hidden" name="action" value="login" />
 <input type="hidden" name="goback" value="<?php echo (isset($_GET["goback"]) ? stripslashes($_GET["goback"]) : '');?>" />
 <div class="cssform">
-	<h3><?php echo $this->GetTranslation("LoginWelcome"); ?></h3>
+	<h3><?php echo $this->get_translation("LoginWelcome"); ?></h3>
 	<p>
-		<label for="name"><?php echo $this->FormatTranslation("LoginName");?>:</label>
+		<label for="name"><?php echo $this->format_translation("LoginName");?>:</label>
 		<input id="name" name="name" size="25" maxlength="25" value="<?php echo isset($name) ? $name : ""; ?>" tabindex="1" />
 
 	</p>
 	<p>
-		<label for="password"><?php echo $this->GetTranslation("LoginPassword");?>:</label>
+		<label for="password"><?php echo $this->get_translation("LoginPassword");?>:</label>
 		<input id="password" type="password" name="password" size="25" tabindex="2" autocomplete="off" />
 
 	</p>
@@ -207,7 +207,7 @@ else
 <?php
 /*
 	<p>
-		<label for=""><?php echo $this->GetTranslation("SessionDuration");?>:</label>
+		<label for=""><?php echo $this->get_translation("SessionDuration");?>:</label>
 		<small>
 			<input id="1d" name="session" value="1d" type="radio" /><label for="1d">1 day</label> &nbsp;&nbsp;
 			<input id="7d" name="session" value="7d" type="radio" /><label for="7d">7 days</label> &nbsp;&nbsp;
@@ -219,23 +219,23 @@ else
 <div class="cssform">
 	<p>
 		<input id="persistent" name="persistent" value="1" type="checkbox" tabindex="3"/>
-		<label for="persistent"><?php echo $this->GetTranslation("PersistentCookie"); ?></label>
+		<label for="persistent"><?php echo $this->get_translation("PersistentCookie"); ?></label>
 	</p>
 
 
 
 	<p>
-		<input type="submit" value="<?php echo $this->GetTranslation("LoginButton"); ?>" tabindex="4" />
+		<input type="submit" value="<?php echo $this->get_translation("LoginButton"); ?>" tabindex="4" />
 		&nbsp;&nbsp;&nbsp;<small><a href="?action=clearcookies">Delete all cookies</a></small>
 	</p>
-	<p><?php echo $this->FormatTranslation("ForgotLink"); ?></p>
-	<p><?php echo $this->FormatTranslation("LoginWelcome2"); ?></p>
+	<p><?php echo $this->format_translation("ForgotLink"); ?></p>
+	<p><?php echo $this->format_translation("LoginWelcome2"); ?></p>
 </div>
 <script type="text/javascript">
 	document.getElementById("f<?php echo $focus;?>").focus();
 </script>
 <?php
-	print($this->FormClose());
+	print($this->form_close());
 }
 ?>
 <!--/notypo-->

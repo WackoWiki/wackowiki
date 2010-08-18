@@ -11,11 +11,11 @@ if (!function_exists('bookmark_sorting'))
 			: 1;
 	}
 }
-if (!function_exists('LoadUserBookmarks'))
+if (!function_exists('load_userBookmarks'))
 {
-	function LoadUserBookmarks(&$wacko, $user_id)
+	function load_userBookmarks(&$wacko, $user_id)
 	{
-		$_bookmarks = $wacko->LoadAll(
+		$_bookmarks = $wacko->load_all(
 							"SELECT p.tag, p.title, b.bookmark_id, b.user_id, b.bm_title, b.lang, b.bm_position ".
 							"FROM ".$wacko->config['table_prefix']."bookmark b ".
 								"LEFT JOIN ".$wacko->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
@@ -26,12 +26,12 @@ if (!function_exists('LoadUserBookmarks'))
 	}
 }
 
-$user = $this->GetUser();
+$user = $this->get_user();
 
 /// Processing of our special form
 if (isset($_POST["_user_bookmarks"]))
 {
-	$_bookmarks = LoadUserBookmarks($this, $user['user_id']);
+	$_bookmarks = load_userBookmarks($this, $user['user_id']);
 	$a = $_bookmarks;
 	$b = array();
 
@@ -57,7 +57,7 @@ if (isset($_POST["_user_bookmarks"]))
 		// save
 		foreach( $data as $item )
 		{
-			$this->Query(
+			$this->query(
 				"UPDATE ".$this->config['table_prefix']."bookmark SET ".
 				"bm_position = '".quote($this->dblink, $item["bm_position"])."', ".
 				"bm_title = '".quote($this->dblink, substr($_POST["title_".$item["bookmark_id"]],0,250))."' ".
@@ -77,26 +77,26 @@ if (isset($_POST["_user_bookmarks"]))
 			}
 			if ($deletion != "")
 			{
-				$this->Query(
+				$this->query(
 					"DELETE FROM ".$this->config['table_prefix']."bookmark ".
 					"WHERE bookmark_id IN (".$deletion.")");
 			}
 		}
 	}
 	// reload user data
-	$this->SetUser($this->LoadUser($user['user_name']), 0, 1);
-	$this->SetBookmarks(BM_USER);
+	$this->set_user($this->load_user($user['user_name']), 0, 1);
+	$this->set_bookmarks(BM_USER);
 }
 if ($user)
 {
-	$_bookmarks = LoadUserBookmarks($this, $user['user_id']);
+	$_bookmarks = load_userBookmarks($this, $user['user_id']);
 
 	if ($_bookmarks)
 	{
-		// echo "<h4>".$this->GetTranslation("YourBookmarks")."</h4>";
+		// echo "<h4>".$this->get_translation("YourBookmarks")."</h4>";
 
 		// user is logged in; display config form
-		echo $this->FormOpen();
+		echo $this->form_open();
 		echo "<input type=\"hidden\" name=\"_user_bookmarks\" value=\"yes\" />";
 
 		echo "<table>";
@@ -130,7 +130,7 @@ if ($user)
 		echo "</tfoot>";
 		echo "</table>";
 
-		echo $this->FormClose();
+		echo $this->form_close();
 	}
 }
 

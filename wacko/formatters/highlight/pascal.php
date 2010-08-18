@@ -1,6 +1,6 @@
 <?php
 
-$this->UseClass("delphihightlighter", "formatters/classes/");
+$this->use_class("delphihightlighter", "formatters/classes/");
 
 $DH = new DelphiHightlighter();
 echo "<!--no"."typo-->";

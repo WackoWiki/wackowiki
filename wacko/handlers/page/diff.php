@@ -4,14 +4,14 @@
 $output = "";
 $source = "";
 
-if (!function_exists('HandlerDiffLoadPageById'))
+if (!function_exists('HandlerDiffload_pageById'))
 {
-	function HandlerDiffLoadPageById($wacko, $id)
+	function HandlerDiffload_pageById($wacko, $id)
 	{
 		// extracting
 		if ($id != "-1")
 		{
-			return $wacko->LoadSingle(
+			return $wacko->load_single(
 				"SELECT page_id, modified, body ".
 				"FROM ".$wacko->config['table_prefix']."revision ".
 				"WHERE revision_id = '".quote($wacko->dblink, $id)."' ".
@@ -19,28 +19,28 @@ if (!function_exists('HandlerDiffLoadPageById'))
 		}
 		else
 		{
-			return $wacko->LoadSingle(
+			return $wacko->load_single(
 				"SELECT page_id, modified, body ".
 				"FROM ".$wacko->config['table_prefix']."page ".
-				"WHERE page_id = '".quote($wacko->dblink, $wacko->GetPageId())."' ".
+				"WHERE page_id = '".quote($wacko->dblink, $wacko->get_page_id())."' ".
 				"LIMIT 1");
 		}
 	}
 }
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->Redirect($this->href("show"));
+if (!$this->page) $this->redirect($this->href("show"));
 
 	$a = $_GET["a"];
 	$b = $_GET["b"];
 
 // If asked, call original diff
-if ($this->HasAccess("read")) {
+if ($this->has_access("read")) {
 
-	$pageA = HandlerDiffLoadPageById($this, $b);
-	$pageB = HandlerDiffLoadPageById($this, $a);
+	$pageA = HandlerDiffload_pageById($this, $b);
+	$pageB = HandlerDiffload_pageById($this, $a);
 
-	if ($this->HasAccess("read", $pageA['page_id']) && $this->HasAccess("read", $pageB['page_id']) ) {
+	if ($this->has_access("read", $pageA['page_id']) && $this->has_access("read", $pageB['page_id']) ) {
 
 		if (isset($_GET["source"])) $source = 1;
 
@@ -56,33 +56,33 @@ if ($this->HasAccess("read")) {
 			$deleted = array_diff($bodyB, $bodyA);
 
 			$output .=
-			str_replace("%1", "<a href=\"".$this->href("", "", ($b != -1 ? "time=".urlencode($pageA['modified']) : ""))."\">".$this->GetTimeStringFormatted($pageA['modified'])."</a>",
-			str_replace("%2", "<a href=\"".$this->href("", "", ($a != -1 ? "time=".urlencode($pageB['modified']) : ""))."\">".$this->GetTimeStringFormatted($pageB['modified'])."</a>",
-			str_replace("%3", $this->ComposeLinkToPage($this->tag, "", "", 0),
-			"<div class=\"diffinfo\">".$this->GetTranslation("Comparison"))))."</div><br />\n";
+			str_replace("%1", "<a href=\"".$this->href("", "", ($b != -1 ? "time=".urlencode($pageA['modified']) : ""))."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
+			str_replace("%2", "<a href=\"".$this->href("", "", ($a != -1 ? "time=".urlencode($pageB['modified']) : ""))."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
+			str_replace("%3", $this->compose_link_to_page($this->tag, "", "", 0),
+			"<div class=\"diffinfo\">".$this->get_translation("Comparison"))))."</div><br />\n";
 
 			if ($added)
 			{
 				// remove blank lines
-				$output .= "<br />\n".$this->GetTranslation("SimpleDiffAdditions")."<br />\n\n";
+				$output .= "<br />\n".$this->get_translation("SimpleDiffAdditions")."<br />\n\n";
 				$output .= "<div class=\"additions\">".($source == 1
 															? '<pre>'.wordwrap(implode("\n", $added), 70, "\n", 1).'</pre>'
-															: $this->Format(implode("\n", $added))
+															: $this->format(implode("\n", $added))
 														)."</div>";
 			}
 
 			if ($deleted)
 			{
-				$output .= "<br />\n\n".$this->GetTranslation("SimpleDiffDeletions")."<br />\n\n";
+				$output .= "<br />\n\n".$this->get_translation("SimpleDiffDeletions")."<br />\n\n";
 				$output .= "<div class=\"deletions\">".($source == 1
 															? '<pre>'.wordwrap(implode("\n", $deleted), 70, "\n", 1).'</pre>'
-															: $this->Format(implode("\n", $deleted))
+															: $this->format(implode("\n", $deleted))
 														)."</div>";
 			}
 
 			if (!$added && !$deleted)
 			{
-				$output .= "<br />\n".$this->GetTranslation("NoDifferences");
+				$output .= "<br />\n".$this->get_translation("NoDifferences");
 			}
 			print($output);
 
@@ -172,23 +172,23 @@ if ($this->HasAccess("read")) {
 
 			$sideB->copy_until_ordinal($count_total_right,$output);
 			$sideB->copy_whitespace($output);
-			$out=$this->Format($output);
-			$out = str_replace("%1", "<a href=\"".$this->href("", "", "time=".urlencode($pageB['modified']))."\">".$this->GetTimeStringFormatted($pageB['modified'])."</a>",
-			str_replace("%2", "<a href=\"".$this->href("", "", "time=".urlencode($pageA['modified']))."\">".$this->GetTimeStringFormatted($pageA['modified'])."</a>",
-			str_replace("%3", $this->ComposeLinkToPage($this->tag, "", "", 0),
-			"<div class=\"diffinfo\">".$this->GetTranslation("Comparison"))))."</div><br />\n<br />\n".$out;
+			$out=$this->format($output);
+			$out = str_replace("%1", "<a href=\"".$this->href("", "", "time=".urlencode($pageB['modified']))."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
+			str_replace("%2", "<a href=\"".$this->href("", "", "time=".urlencode($pageA['modified']))."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
+			str_replace("%3", $this->compose_link_to_page($this->tag, "", "", 0),
+			"<div class=\"diffinfo\">".$this->get_translation("Comparison"))))."</div><br />\n<br />\n".$out;
 			print $out;
 
 		}
 	}
 	else
 	{
-		print($this->GetTranslation("ReadAccessDenied"));
+		print($this->get_translation("ReadAccessDenied"));
 	}
 }
 else
 {
-	print($this->GetTranslation("ReadAccessDenied"));
+	print($this->get_translation("ReadAccessDenied"));
 }
 ?>
 </div>

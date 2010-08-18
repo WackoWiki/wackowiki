@@ -21,7 +21,7 @@ function admin_systemlog(&$engine, &$module)
 <?php
 	if (isset($_POST['reset']))
 	{
-		$engine->Redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'])));
+		$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'])));
 	}
 
 	if (isset($_POST['update']))
@@ -95,14 +95,14 @@ function admin_systemlog(&$engine, &$module)
 	if (!isset($order)) $order = "";
 
 	// collecting data
-	$count = $engine->LoadSingle(
+	$count = $engine->load_single(
 		"SELECT COUNT(message) AS n ".
 		"FROM {$engine->config['table_prefix']}log ".
 		( $where ? $where : 'WHERE level <= '.(int)$level.' ' ));
 
-	$pagination	= $engine->Pagination($count['n'], $limit, 'p', 'mode=systemlog&order='.htmlspecialchars(isset($_GET['order']) && $_GET['order']), '', 'admin.php');
+	$pagination	= $engine->pagination($count['n'], $limit, 'p', 'mode=systemlog&order='.htmlspecialchars(isset($_GET['order']) && $_GET['order']), '', 'admin.php');
 
-	$log = $engine->LoadAll(
+	$log = $engine->load_all(
 		"SELECT l.log_id, l.log_time, l.level, l.message, u.user_name as user, l.ip ".
 		"FROM {$engine->config['table_prefix']}log l ".
 			"LEFT JOIN {$engine->config['table_prefix']}user u ON (l.user_id = u.user_id) ".
@@ -113,18 +113,18 @@ function admin_systemlog(&$engine, &$module)
 	<form action="admin.php" method="post" name="systemlog">
 		<input type="hidden" name="mode" value="systemlog" />
 		<div>
-			<h4><?php echo $engine->GetTranslation('LogFilterTip'); ?>:</h4><br />
-			<?php echo $engine->GetTranslation('LogLevel'); ?>
+			<h4><?php echo $engine->get_translation('LogFilterTip'); ?>:</h4><br />
+			<?php echo $engine->get_translation('LogLevel'); ?>
 			<select name="level_mod">
-				<option value="not_lower"<?php echo ( !isset($_POST['level_mod']) || (isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_lower') ? ' selected="selected"' : '' ); ?>><?php echo $engine->GetTranslation('LogLevelNotLower'); ?></option>
-				<option value="not_higher"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_higher' ? ' selected="selected"' : '' ); ?>><?php echo $engine->GetTranslation('LogLevelNotHigher'); ?></option>
-				<option value="equal"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'equal' ? ' selected="selected"' : '' ); ?>><?php echo $engine->GetTranslation('LogLevelEqual'); ?></option>
+				<option value="not_lower"<?php echo ( !isset($_POST['level_mod']) || (isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_lower') ? ' selected="selected"' : '' ); ?>><?php echo $engine->get_translation('LogLevelNotLower'); ?></option>
+				<option value="not_higher"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'not_higher' ? ' selected="selected"' : '' ); ?>><?php echo $engine->get_translation('LogLevelNotHigher'); ?></option>
+				<option value="equal"<?php echo ( isset($_POST['level_mod']) && $_POST['level_mod'] == 'equal' ? ' selected="selected"' : '' ); ?>><?php echo $engine->get_translation('LogLevelEqual'); ?></option>
 			</select>
 			<select name="level">
 <?php
 	for ($i = 1; $i <= 7; $i++)
 	{
-		echo '<option value="'.$i.'"'.( (!$_POST['level'] && $level == $i) || $_POST['level'] == $i ? ' selected="selected"' : '' ).'>'.strtolower($engine->GetTranslation('LogLevel'.$i)).'</option>'."\n";
+		echo '<option value="'.$i.'"'.( (!$_POST['level'] && $level == $i) || $_POST['level'] == $i ? ' selected="selected"' : '' ).'>'.strtolower($engine->get_translation('LogLevel'.$i)).'</option>'."\n";
 	}
 ?>
 			</select>
@@ -137,10 +137,10 @@ function admin_systemlog(&$engine, &$module)
 		<table border="0" cellspacing="5" cellpadding="3" class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="?mode=systemlog&order=<?php echo $ordertime;  ?>"><?php echo $engine->GetTranslation('LogDate'); ?></a></th>
-				<th style="width:20px;"><a href="?mode=systemlog&order=<?php echo $orderlevel; ?>"><?php echo $engine->GetTranslation('LogLevel'); ?></a></th>
-				<th><?php echo $engine->GetTranslation('LogEvent'); ?></th>
-				<th style="width:20px;"><?php echo $engine->GetTranslation('LogUsername'); ?></th>
+				<th style="width:20px;"><a href="?mode=systemlog&order=<?php echo $ordertime;  ?>"><?php echo $engine->get_translation('LogDate'); ?></a></th>
+				<th style="width:20px;"><a href="?mode=systemlog&order=<?php echo $orderlevel; ?>"><?php echo $engine->get_translation('LogLevel'); ?></a></th>
+				<th><?php echo $engine->get_translation('LogEvent'); ?></th>
+				<th style="width:20px;"><?php echo $engine->get_translation('LogUsername'); ?></th>
 			</tr>
 <?php
 	if ($log)
@@ -150,36 +150,36 @@ function admin_systemlog(&$engine, &$module)
 			// level highlighting
 			if ($row['level'] == 1)
 			{
-				$row['level'] = '<strong class="red">'.$engine->GetTranslation('LogLevel1').'</strong>';
+				$row['level'] = '<strong class="red">'.$engine->get_translation('LogLevel1').'</strong>';
 			}
 			else if ($row['level'] == 2)
 			{
-				$row['level'] = '<span class="red">'.$engine->GetTranslation('LogLevel2').'</span>';
+				$row['level'] = '<span class="red">'.$engine->get_translation('LogLevel2').'</span>';
 			}
 			else if ($row['level'] == 3)
 			{
-				$row['level'] = '<strong>'.$engine->GetTranslation('LogLevel3').'</strong>';
+				$row['level'] = '<strong>'.$engine->get_translation('LogLevel3').'</strong>';
 			}
 			else if ($row['level'] == 4)
 			{
-				$row['level'] = $engine->GetTranslation('LogLevel'.$row['level']);
+				$row['level'] = $engine->get_translation('LogLevel'.$row['level']);
 			}
 			else if ($row['level'] == 5)
 			{
-				$row['level'] = '<small>'.$engine->GetTranslation('LogLevel'.$row['level']).'</small>';
+				$row['level'] = '<small>'.$engine->get_translation('LogLevel'.$row['level']).'</small>';
 			}
 			else if ($row['level'] > 5)
 			{
-				$row['level'] = '<small class="grey">'.$engine->GetTranslation('LogLevel'.$row['level']).'</small>';
+				$row['level'] = '<small class="grey">'.$engine->get_translation('LogLevel'.$row['level']).'</small>';
 			}
 
 			echo '<tr class="lined">'."\n".
 					'<td valign="top" align="center">'.$row['log_id'].'</td>'.
 					'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['log_time'])).'</small></td>'.
 					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$row['level'].'</td>'.
-					'<td valign="top">'.$engine->Format($row['message'], 'post_wacko').'</td>'.
+					'<td valign="top">'.$engine->format($row['message'], 'post_wacko').'</td>'.
 					'<td valign="top" align="center"><small>'.
-						'<a href="?mode=systemlog&user='.$row['user'].'">'.( $row['user'] == GUEST ? '<em>'.$engine->GetTranslation('Guest').'</em>' : $row['user'] ).'</a>'.
+						'<a href="?mode=systemlog&user='.$row['user'].'">'.( $row['user'] == GUEST ? '<em>'.$engine->get_translation('Guest').'</em>' : $row['user'] ).'</a>'.
 						'<br />'.'<a href="?mode=systemlog&ip='.$row['ip'].'">'.$row['ip'].'</a>'.
 					'</small></td>'.
 				'</tr>';
@@ -187,7 +187,7 @@ function admin_systemlog(&$engine, &$module)
 	}
 	else
 	{
-		echo '<tr><td colspan="5" align="center"><br /><em>'.$engine->GetTranslation('LogNoMatch').'</em></td></tr>';
+		echo '<tr><td colspan="5" align="center"><br /><em>'.$engine->get_translation('LogNoMatch').'</em></td></tr>';
 	}
 ?>
 		</table>

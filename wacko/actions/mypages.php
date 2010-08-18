@@ -7,7 +7,7 @@ if (!isset($bychange)) $bychange = "";
 $curChar = "";
 $curday = "";
 
-if ($user_id = $this->GetUserId())
+if ($user_id = $this->get_user_id())
 {
 	if ($max) $limit = $max;
 	else $limit	= 100;
@@ -15,19 +15,19 @@ if ($user_id = $this->GetUserId())
 
 	if ((isset($_GET["bydate"]) && $_GET["bydate"] == 1) || $bydate == 1)
 	{
-		echo $this->GetTranslation("ListOwnedPages2");
+		echo $this->get_translation("ListOwnedPages2");
 		print("<br />[<a href=\"".$this->href("", "", "mode=mypages")."#list"."\">".
-		$this->GetTranslation("OrderABC")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
-		$this->GetTranslation("OrderChange")."</a>] <br /><br />\n");
-		$count	= $this->LoadSingle(
+		$this->get_translation("OrderABC")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
+		$this->get_translation("OrderChange")."</a>] <br /><br />\n");
+		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'", 1);
 
-		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bydate=1#list');
+		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bydate=1#list');
 
-		if ($pages = $this->LoadAll(
+		if ($pages = $this->load_all(
 		"SELECT tag, created ".
 		"FROM {$prefix}page ".
 		"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
@@ -52,7 +52,7 @@ if ($user_id = $this->GetUserId())
 				}
 
 				// print entry
-				echo "<li>$time (".$this->ComposeLinkToPage($page['tag'], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page['tag'], "", "", 0)."</li>\n";
+				echo "<li>$time (".$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation("History"), 0).") ".$this->compose_link_to_page($page['tag'], "", "", 0)."</li>\n";
 
 
 			}
@@ -63,12 +63,12 @@ if ($user_id = $this->GetUserId())
 		}
 		else
 		{
-			echo $this->GetTranslation("NoPagesFound");
+			echo $this->get_translation("NoPagesFound");
 		}
 	}
 	else if ((isset($_GET["bychange"]) && $_GET["bychange"] == 1) || $bychange == 1)
 	{
-		$count	= $this->LoadSingle(
+		$count	= $this->load_single(
 			"SELECT COUNT( DISTINCT p.tag ) AS n ".
 			"FROM {$prefix}page AS p ".
 			"LEFT JOIN {$prefix}revision AS r ".
@@ -77,15 +77,15 @@ if ($user_id = $this->GetUserId())
 			"WHERE p.comment_on_id = '0' ".
 				"AND r.comment_on_id = '0'", 1);
 
-		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bychange=1#list');
+		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bychange=1#list');
 
-		echo $this->GetTranslation('ListOwnedPages3').'.';
+		echo $this->get_translation('ListOwnedPages3').'.';
 		print('<br />[<a href="'.
-			$this->href('', '', 'mode=mypages').'#list">'.$this->GetTranslation('OrderABC').
+			$this->href('', '', 'mode=mypages').'#list">'.$this->get_translation('OrderABC').
 			'</a>] [<a href="'.$this->href('', '', 'mode=mypages&amp;bydate=1').'#list">'.
-			$this->GetTranslation('OrderDate')."</a>]<br /><br />\n");
+			$this->get_translation('OrderDate')."</a>]<br /><br />\n");
 
-		if ($pages = $this->LoadAll(
+		if ($pages = $this->load_all(
 			"SELECT p.tag AS tag, p.modified AS modified ".
 			"FROM {$prefix}page AS p ".
 			"LEFT JOIN {$prefix}revision AS r ".
@@ -114,7 +114,7 @@ if ($user_id = $this->GetUserId())
 				}
 
 				// print entry
-				echo "<li>".$this->GetTimeStringFormatted($time)." (".$this->ComposeLinkToPage($page['tag'], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page['tag'], "", "", 0)."</li>\n";
+				echo "<li>".$this->get_time_string_formatted($time)." (".$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation("History"), 0).") ".$this->compose_link_to_page($page['tag'], "", "", 0)."</li>\n";
 
 			}
 			echo "</ul>\n</li>\n</ul>\n";
@@ -124,25 +124,25 @@ if ($user_id = $this->GetUserId())
 		}
 		else
 		{
-			echo $this->GetTranslation("NoPagesFound");
+			echo $this->get_translation("NoPagesFound");
 		}
 	}
 	else
 	{
-		$count	= $this->LoadSingle(
+		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'", 1);
 
-		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mypages#list');
+		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages#list');
 
-		echo $this->GetTranslation("ListOwnedPages");
+		echo $this->get_translation("ListOwnedPages");
 		print("<br />[<a href=\"".$this->href("", "", "mode=mypages&amp;bydate=1")."#list"."\">".
-		$this->GetTranslation("OrderDate")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
-		$this->GetTranslation("OrderChange")."</a>] <br /><br />\n");
+		$this->get_translation("OrderDate")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
+		$this->get_translation("OrderChange")."</a>] <br /><br />\n");
 
-		if ($pages = $this->LoadAll(
+		if ($pages = $this->load_all(
 			"SELECT tag, modified ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
@@ -171,7 +171,7 @@ if ($user_id = $this->GetUserId())
 					$curChar = $firstChar;
 				}
 
-				echo "<li>".$this->ComposeLinkToPage($page['tag'])."</li>\n";
+				echo "<li>".$this->compose_link_to_page($page['tag'])."</li>\n";
 			}
 			echo "</ul>\n</li>\n</ul>\n";
 			// pagination
@@ -180,18 +180,18 @@ if ($user_id = $this->GetUserId())
 		}
 		else
 		{
-			echo $this->GetTranslation("NoPagesFound");
+			echo $this->get_translation("NoPagesFound");
 		}
 	}
 
 	if ($pages == false)
 	{
-		echo $this->GetTranslation("YouDontOwn");
+		echo $this->get_translation("YouDontOwn");
 	}
 }
 else
 {
-	echo $this->GetTranslation("NotLoggedInThusOwned");
+	echo $this->get_translation("NotLoggedInThusOwned");
 }
 
 ?>

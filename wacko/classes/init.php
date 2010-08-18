@@ -8,22 +8,22 @@
 
 	Calling order (* - mandatory for engine startup):
 
-	1.  Init()*			- constructor, unescape magic quotes, version checks
-	2.  Settings()*		- load primary engine config from file: variables and constants
-	3.  Settings()*		- load secondary engine config from database (calls DBAL())
-	4.  Settings($p,$v)	- set additional config parameters if needed
-	5.  Request()		- parse request string if needed for wacko pages processing
-	6.  DBAL()*			- establish DBAL for database operations and connect to DB (required by Engine())
-	7.  Session()		- start user session
-	8.  IsLocked()		- check website for locking
-	9.  Installer()		- start installer if necessary
-	10. GetMicroTime()	- return precise timer
-	11. Cache()			- initialize caching engine
-	12. Cache('check')	- process request for caching purposes (required by Cache('store'))
-	13. Engine()*		- initialize Wacko engine
-	14. Engine('run')	- execute script and open start page (requires Engine())
-	15. Cache('store')	- cache page (requires Engine())
-	16. Debug()			- print debugging information
+	1.  init()*			- constructor, unescape magic quotes, version checks
+	2.  settings()*		- load primary engine config from file: variables and constants
+	3.  settings()*		- load secondary engine config from database (calls dbal())
+	4.  settings($p,$v)	- set additional config parameters if needed
+	5.  request()		- parse request string if needed for wacko pages processing
+	6.  dbal()*			- establish DBAL for database operations and connect to DB (required by engine())
+	7.  session()		- start user session
+	8.  is_locked()		- check website for locking
+	9.  installer()		- start installer if necessary
+	10. get_micro_time()	- return precise timer
+	11. cache()			- initialize caching engine
+	12. cache('check')	- process request for caching purposes (required by cache('store'))
+	13. engine()*		- initialize Wacko engine
+	14. engine('run')	- execute script and open start page (requires engine())
+	15. cache('store')	- cache page (requires engine())
+	16. debug()			- print debugging information
 
 	Additional information can be found in class methods' comments.
 
@@ -54,7 +54,7 @@ class Init
 
 	// CONSTRUCTOR
 	// Mandatory runs and checks.
-	function Init()
+	function init()
 	{
 		// setting PHP error reporting
 		switch(PHP_ERROR_REPORTING)
@@ -69,7 +69,7 @@ class Init
 		}
 
 		// start execution timer
-		$this->timer = $this->GetMicroTime();
+		$this->timer = $this->get_micro_time();
 
 		if (ini_get("zlib.output_compression"))
 			ob_start();
@@ -86,32 +86,32 @@ class Init
 
 		if (get_magic_quotes_gpc())
 		{
-			$this->ParseMQ($_POST);
-			$this->ParseMQ($_GET);
-			$this->ParseMQ($_COOKIE);
-			$this->ParseMQ($_SERVER);
-			$this->ParseMQ($_REQUEST);
+			$this->parse_mq($_POST);
+			$this->parse_mq($_GET);
+			$this->parse_mq($_COOKIE);
+			$this->parse_mq($_SERVER);
+			$this->parse_mq($_REQUEST);
 		}
 
 		if (strstr($_SERVER['SERVER_SOFTWARE'], "IIS")) $_SERVER['REQUEST_URI'] = $_SERVER['PATH_INFO'];
 	}
 
 	// INT TIMER
-	function GetMicroTime()
+	function get_micro_time()
 	{
 		list($usec, $sec) = explode(" ", microtime());
 		return ((float)$usec + (float)$sec);
 	}
 
 	// Workaround for the amazingly annoying magic quotes.
-	function ParseMQ(&$a)
+	function parse_mq(&$a)
 	{
 		if (is_array($a))
 		{
 			foreach ($a as $k => $v)
 			{
 				if (is_array($v))
-					$this->ParseMQ($a[$k]);
+					$this->parse_mq($a[$k]);
 				else
 					$a[$k] = stripslashes($v);
 			}
@@ -121,7 +121,7 @@ class Init
 	// DEFINE WACKO SETTINGS
 	// First must be called without parameters to initialize default
 	// settings. Additional settings can be added afterwards.
-	function Settings($name = "", $value = "", $override = 0)
+	function settings($name = "", $value = "", $override = 0)
 	{
 		// specific definition
 		if ($name == true)
@@ -198,13 +198,13 @@ class Init
 					$this->config = $wackoConfig;
 				}
 
-				$this->Installer();
+				$this->installer();
 			}
 			// secondary settings
 			else if ($this->config == true && !isset($this->dblink))
 			{
 				// connecting to db
-				$this->DBAL();
+				$this->dbal();
 
 				// retrieving configuration data
 				 $wackoDBQuery = "SELECT config_name, value FROM {$this->config['table_prefix']}config";
@@ -276,7 +276,7 @@ class Init
 
 	// REQUEST HANDLING
 	// Process request string, define $page and $method vars
-	function Request()
+	function request()
 	{
 		// check config data
 		if ($this->config == false) die("Error processing request: WackoWiki config data must be initialized.");
@@ -326,7 +326,7 @@ class Init
 	}
 
 	// SESSION HANDLING
-	function Session()
+	function session()
 	{
 		$_cookie_path = $this->config['cookie_path'];
 		echo "#################".$_cookie_path;
@@ -347,7 +347,7 @@ class Init
 	// Initialize DBAL for basic DB operations and connect to selected DB.
 	// Default DB is 'mysql_database' config value, however any other value may
 	// be passed. All DBs must be on the server specified in the config file.
-	function DBAL($dbname = "")
+	function dbal($dbname = "")
 	{
 		if (isset($this->dblink)) return;
 
@@ -355,7 +355,7 @@ class Init
 		if ($this->config == false) die("Error loading WackoWiki DBAL: config data must be initialized.");
 
 		// Load the correct database connector
-		if (!isset( $this->config['database_driver'] )) $this->Settings("database_driver", "mysql_legacy");
+		if (!isset( $this->config['database_driver'] )) $this->settings("database_driver", "mysql_legacy");
 
 		switch($this->config['database_driver'])
 		{
@@ -388,7 +388,7 @@ class Init
 	}
 
 	// CHECK WEBSITE LOCKING
-	function IsLocked()
+	function is_locked()
 	{
 		clearstatcache();
 		if (@file_exists("lock"))
@@ -407,7 +407,7 @@ class Init
 	}
 
 	// INSTALLER
-	function Installer()
+	function installer()
 	{
 		// compare versions, start installer if necessary
 		if (!isset($this->config['wacko_version']) || $this->config['wacko_version'] != WACKO_VERSION)
@@ -444,9 +444,9 @@ class Init
 	// can be used with these values (for corresponding
 	// cache class methods):
 	//		log		= Log
-	//		check	= CheckHttpRequest
-	//		store	= StoreToCache
-	function Cache($op = "")
+	//		check	= check_http_request
+	//		store	= store_to_cache
+	function cache($op = "")
 	{
 		// check config data
 		if ($this->config == false) die("Error starting WackoWiki cache engine: config data must be initialized.");
@@ -454,7 +454,7 @@ class Init
 		if ($this->cache == false || $op == false)
 		{
 			require("classes/cache.php");
-			return $this->cache = new Cache($this->config['cache_dir'], $this->config['cache_ttl']);
+			return $this->cache = new cache($this->config['cache_dir'], $this->config['cache_ttl']);
 		}
 		else if ($this->cache == true && $op == "check")
 		{
@@ -462,7 +462,7 @@ class Init
 			{
 				if (!isset($_COOKIE[$this->config['cookie_prefix']."auth"."_".$this->config['cookie_hash']]))	// anonymous user
 				{
-					return $this->cacheval = $this->cache->CheckHttpRequest($this->page, $this->method);
+					return $this->cacheval = $this->cache->check_http_request($this->page, $this->method);
 				}
 			}
 		}
@@ -471,12 +471,12 @@ class Init
 			if ($this->cacheval == true)
 			{
 				$data = ob_get_contents();
-				return $this->cache->StoreToCache($data);
+				return $this->cache->store_to_cache($data);
 			}
 		}
 		else if ($this->cache == true && $op == "log")
 		{
-			return $this->cache->Log("Before Run WackoWiki=".$this->engine->config['wacko_version']);
+			return $this->cache->log("Before Run WackoWiki=".$this->engine->config['wacko_version']);
 		}
 		else
 		{
@@ -490,7 +490,7 @@ class Init
 	//		run		= Main execution routine (open start page)
 	//		res		= Load and register locale string resources
 	//				  only (for $lang or for default language)
-	function Engine($op = "", $lang = "")
+	function engine($op = "", $lang = "")
 	{
 		// check config data
 		if ($this->config == false)	die("Error starting WackoWiki engine: config data must be initialized.");
@@ -513,16 +513,16 @@ class Init
 		}
 		else if ($this->engine == true && $op == "run")
 		{
-			return $this->engine->Run($this->page, $this->method);
+			return $this->engine->run($this->page, $this->method);
 		}
 		else if ($this->engine == true && $op == "res")
 		{
 			if ($lang == false) $lang = $this->config['language'];
 
-			$this->engine->LoadAllLanguages();
-			$this->engine->LoadResource($lang);
-			$this->engine->SetResource ($lang);
-			$this->engine->SetLanguage ($lang);
+			$this->engine->load_all_languages();
+			$this->engine->load_resource($lang);
+			$this->engine->set_resource ($lang);
+			$this->engine->set_language ($lang);
 			return true;
 		}
 		else
@@ -532,13 +532,13 @@ class Init
 	}
 
 	// DEBUG INFO
-	function Debug()
+	function debug()
 	{
 		if ($this->config['debug'] >= 1 && strpos($this->method, ".xml") === false && $this->method != "print" && $this->method != "msword")
 		{
-			if (($this->config['debug_admin_only'] == true && $this->engine->IsAdmin() === true) || $this->config['debug_admin_only'] == false)
+			if (($this->config['debug_admin_only'] == true && $this->engine->is_admin() === true) || $this->config['debug_admin_only'] == false)
 			{
-				$overall_time = $this->GetMicroTime() - $this->timer;
+				$overall_time = $this->get_micro_time() - $this->timer;
 
 				echo "<div id=\"debug\">".
 					 "<p class=\"debug\">Program execution statistics</p>\n<ul>\n";
@@ -575,7 +575,7 @@ class Init
 
 				if ($this->config['debug'] >= 2)
 				{
-					$user = $this->engine->GetUser();
+					$user = $this->engine->get_user();
 					echo "<p class=\"debug\">Language data</p>\n<ul>\n";
 					echo "<li>Multilanguage: ".($this->config['multilanguage'] == 1 ? 'true' : 'false')."</li>\n";
 					echo "<li>HTTP_ACCEPT_LANGUAGE set: ".(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false')."</li>\n";

@@ -15,12 +15,12 @@ if (!isset($title)) $title = "";
 if ($for) $page = $for;
 if ($page)
 {
-	$page = $this->UnwrapLink($page);
+	$page = $this->unwrap_link($page);
 	$ppage = "/".$page;
 	$context = $page;
-	$_page = $this->LoadPage($page);
+	$_page = $this->load_page($page);
 	if (!$title) $title = $page;
-	$link = $this->Href("",$_page['tag']);
+	$link = $this->href("",$_page['tag']);
 }
 else
 {
@@ -39,15 +39,15 @@ $end_depth   = $to{1};
 // 3. output
 if (!$nomark)
 {
-	print "<div class=\"layout-box\"><p class=\"layout-box\"><span> ".$this->GetTranslation("TOCTitle")." ".$this->Link($ppage, "", $title)."  </span></p>";
+	print "<div class=\"layout-box\"><p class=\"layout-box\"><span> ".$this->get_translation("TOCTitle")." ".$this->link($ppage, "", $title)."  </span></p>";
 }
 
-if (!$this->HasAccess("read",$_page['page_id']))
-	print $this->GetTranslation("ReadAccessDenied");
+if (!$this->has_access("read",$_page['page_id']))
+	print $this->get_translation("ReadAccessDenied");
 
 else
 {
-	$toc = $this->BuildToc( $context, $start_depth, $end_depth, $numerate, $link );
+	$toc = $this->build_toc( $context, $start_depth, $end_depth, $numerate, $link );
 	{ // ---------------------- toc numeration ------------------------
 		// identify what size where faces
 		$toc_len = sizeof($toc);
@@ -87,7 +87,7 @@ else
 		echo '<a href="'.$v[3].'#'.$v[0].'">'.strip_tags($v[1]).'</a>';
 		echo '</div>';
 	}
-	//$this->tocRecursion( ($ppage?$this->Href("",$ppage):""), $toc_body, 2 );
+	//$this->tocRecursion( ($ppage?$this->href("",$ppage):""), $toc_body, 2 );
 }
 if (!$nomark)
 {

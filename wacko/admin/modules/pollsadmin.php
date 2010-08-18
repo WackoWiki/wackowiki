@@ -24,11 +24,11 @@ function admin_pollsadmin(&$engine, &$module)
 	<br />
 <?php
 	// create polls object
-	$engine->UseClass("polls");
+	$engine->use_class("polls");
 	$pollsObj = new Polls($engine);
 
 	// define context
-	$admin		= true; #$engine->IsAdmin();
+	$admin		= true; #$engine->is_admin();
 	$mode		= $module['mode'];
 	$mode_http	= 'mode='.$mode.'&amp;';
 	$mode_file	= $_SERVER['PHP_SELF'];
@@ -36,8 +36,8 @@ function admin_pollsadmin(&$engine, &$module)
 	// processing input
 	if ($admin === true)
 	{
-		#$engine->UseClass("rss");
-		#$xml = new RSS($engine);
+		#$engine->use_class("rss");
+		#$xml = new rss($engine);
 
 		// selected year for archived polls
 		if (!isset($_GET['year']))	$year	= date('Y');
@@ -55,42 +55,42 @@ function admin_pollsadmin(&$engine, &$module)
 		else if (isset($_POST['delete']) && $_POST['yes'])
 		{
 			$pollsObj->RemovePoll($_POST['delete']);
-			$engine->Log(1, str_replace('%1', (int)$_POST['delete'], $engine->GetTranslation('LogRemovedPoll', $engine->config['language'])));
+			$engine->log(1, str_replace('%1', (int)$_POST['delete'], $engine->get_translation('LogRemovedPoll', $engine->config['language'])));
 		}
 		// stop current survey
 		else if (isset($_POST['stop']) && $_POST['id'])
 		{
-			$engine->Query(
+			$engine->query(
 				"UPDATE {$engine->config['table_prefix']}poll ".
 				"SET end = NOW() ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0 ".
 				"LIMIT 1");
-			$engine->Log(4, str_replace('%1', (int)$_POST['id'], $engine->GetTranslation('LogPollStopped', $engine->config['language'])));
+			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->get_translation('LogPollStopped', $engine->config['language'])));
 		}
 		// reset current survey
 		else if (isset($_POST['reset']) && $_POST['id'])
 		{
-			$engine->Query(	// reset start date
+			$engine->query(	// reset start date
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
 					"start	= NOW() ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0");
-			$engine->Query(	// reset votes and update servey id
+			$engine->query(	// reset votes and update servey id
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
 					"poll_id		= ".($pollsObj->GetLastPollID() + 1).", ".
 					"votes	= 0 ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id']));
-			$xml->News(); // update news feed
-			$engine->Log(4, str_replace('%1', (int)$_POST['id'], $engine->GetTranslation('LogPollReset', $engine->config['language'])));
+			$xml->news(); // update news feed
+			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->get_translation('LogPollReset', $engine->config['language'])));
 		}
 		// activate new survey
 		else if (isset($_POST['activate']) && $_POST['id'])
 		{
-			$engine->Query(
+			$engine->query(
 				"UPDATE {$engine->config['table_prefix']}poll ".
 				"SET start = NOW() ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0");
-			$xml->News(); // update news feed
-			$engine->Log(4, str_replace('%1', (int)$_POST['id'], $engine->GetTranslation('LogPollStarted', $engine->config['language'])));
+			$xml->news(); // update news feed
+			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->get_translation('LogPollStarted', $engine->config['language'])));
 		}
 		// edit/moderate new survey
 		else if (isset($_POST['edit']) && $_POST['id'])
@@ -121,38 +121,38 @@ function admin_pollsadmin(&$engine, &$module)
 		// poll remove confirmation dialog
 		if ($confirmation === true)
 		{
-			echo $engine->FormOpen('', $mode_file);
+			echo $engine->form_open('', $mode_file);
 			echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 			echo '<input name="delete" type="hidden" value="'.$remove_id.'" />';
 			echo '<table cellspacing="3" class="formation">';
-			echo '<tr><th>'.$engine->GetTranslation('PollsConfirmDelete').'</th></tr>';
+			echo '<tr><th>'.$engine->get_translation('PollsConfirmDelete').'</th></tr>';
 			echo '<tr><td><em>&quot;'.$title.'&quot;</em></td></tr>';
 			echo '<tr><td>'.
-				'<input name="yes" id="submit" type="submit" value="'.$engine->GetTranslation('PollsSubmit').'" /> '.
-				'<input name="cancel" id="button" type="button" value="'.$engine->GetTranslation('PollsCancel').'" onclick="document.location=\''.addslashes(rawurldecode($engine->href('', $mode_file, $mode_http))).'\';" />'.
+				'<input name="yes" id="submit" type="submit" value="'.$engine->get_translation('PollsSubmit').'" /> '.
+				'<input name="cancel" id="button" type="button" value="'.$engine->get_translation('PollsCancel').'" onclick="document.location=\''.addslashes(rawurldecode($engine->href('', $mode_file, $mode_http))).'\';" />'.
 				'</td></tr>';
 			echo '</table>';
-			echo $engine->FormClose();
+			echo $engine->form_close();
 		}
 		// poll moderation
 		else if ($moderation === true)
 		{
-			echo $engine->Action('pollsadd', array('moderation' => true, 'edit_id' => $edit_id, 'mode' => $mode));
+			echo $engine->action('pollsadd', array('moderation' => true, 'edit_id' => $edit_id, 'mode' => $mode));
 		}
 
 		// current active polls
-		echo $engine->FormOpen('', $mode_file);
+		echo $engine->form_open('', $mode_file);
 		echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 		echo '<table cellspacing="3" class="formation">';
 		$list = $pollsObj->GetPollsList('current');
 		if (empty($list))
 		{
-			echo '<tr><th>'.$engine->GetTranslation('PollsCurrent').'</th></tr>';
-			echo '<tr><td align="center"><em>'.$engine->GetTranslation('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><th>'.$engine->get_translation('PollsCurrent').'</th></tr>';
+			echo '<tr><td align="center"><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
 		}
 		else
 		{
-			echo '<tr><th colspan="4">'.$engine->GetTranslation('PollsCurrent').'</th></tr>';
+			echo '<tr><th colspan="4">'.$engine->get_translation('PollsCurrent').'</th></tr>';
 			foreach ($list as $row)
 			{
 				echo '<tr class="lined">';
@@ -165,27 +165,27 @@ function admin_pollsadmin(&$engine, &$module)
 				echo '</tr>';
 			}
 			echo '<tr><td colspan="4">'.
-				'<input name="stop" id="submit" type="submit" value="'.$engine->GetTranslation('PollsStop').'" /> '.
-				'<input name="reset" id="submit" type="submit" value="'.$engine->GetTranslation('PollsReset').'" /> '.
-				'<input name="remove" id="submit" type="submit" value="'.$engine->GetTranslation('PollsRemove').'" />'.
+				'<input name="stop" id="submit" type="submit" value="'.$engine->get_translation('PollsStop').'" /> '.
+				'<input name="reset" id="submit" type="submit" value="'.$engine->get_translation('PollsReset').'" /> '.
+				'<input name="remove" id="submit" type="submit" value="'.$engine->get_translation('PollsRemove').'" />'.
 				'</td></tr>';
 		}
 		echo '</table>';
-		echo $engine->FormClose();
+		echo $engine->form_close();
 
 		// polls for moderation
-		echo $engine->FormOpen('', $mode_file);
+		echo $engine->form_open('', $mode_file);
 		echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 		echo '<table cellspacing="3" class="formation">';
 		$list = $pollsObj->GetPollsList('moderation');
 		if (empty($list))
 		{
-			echo '<tr><th>'.$engine->GetTranslation('PollsModeration').'</th></tr>';
-			echo '<tr><td align="center"><em>'.$engine->GetTranslation('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><th>'.$engine->get_translation('PollsModeration').'</th></tr>';
+			echo '<tr><td align="center"><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
 		}
 		else
 		{
-			echo '<tr><th colspan="3">'.$engine->GetTranslation('PollsModeration').'</th></tr>';
+			echo '<tr><th colspan="3">'.$engine->get_translation('PollsModeration').'</th></tr>';
 			foreach ($list as $row)
 			{
 				echo '<tr>';
@@ -203,20 +203,20 @@ function admin_pollsadmin(&$engine, &$module)
 					}
 					echo '</table></td>';
 					echo '<td style="text-align:left;" valign="top">'.
-						($row['plural'] == 1 ? $engine->GetTranslation('PollsPlural') : $engine->GetTranslation('PollsSingular')).'</td>';
+						($row['plural'] == 1 ? $engine->get_translation('PollsPlural') : $engine->get_translation('PollsSingular')).'</td>';
 				echo '</tr>';
 			}
 			echo '<tr><td colspan="3">'.
-				'<input name="activate" id="submit" type="submit" value="'.$engine->GetTranslation('PollsActivate').'" /> '.
-				'<input name="edit" id="submit" type="submit" value="'.$engine->GetTranslation('PollsEdit').'" /> '.
-				'<input name="remove" id="submit" type="submit" value="'.$engine->GetTranslation('PollsRemove').'" />'.
+				'<input name="activate" id="submit" type="submit" value="'.$engine->get_translation('PollsActivate').'" /> '.
+				'<input name="edit" id="submit" type="submit" value="'.$engine->get_translation('PollsEdit').'" /> '.
+				'<input name="remove" id="submit" type="submit" value="'.$engine->get_translation('PollsRemove').'" />'.
 				'</td></tr>';
 		}
 		echo '</table>';
-		echo $engine->FormClose();
+		echo $engine->form_close();
 
 		// ended polls
-		echo $engine->FormOpen('', $mode_file);
+		echo $engine->form_open('', $mode_file);
 		echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 		echo '<table cellspacing="3" class="formation">';
 		// make list
@@ -225,12 +225,12 @@ function admin_pollsadmin(&$engine, &$module)
 						$years	= $pollsObj->PollYears();
 		if (empty($list))
 		{
-			echo '<tr><th>'.$engine->GetTranslation('PollsEnded').'</th></tr>';
-			echo '<tr><td align="center"><em>'.$engine->GetTranslation('PollsEmptyList').'</em></td></tr>';
+			echo '<tr><th>'.$engine->get_translation('PollsEnded').'</th></tr>';
+			echo '<tr><td align="center"><em>'.$engine->get_translation('PollsEmptyList').'</em></td></tr>';
 		}
 		else
 		{
-			echo '<tr><th colspan="4">'.$engine->GetTranslation('PollsEnded').'</th></tr>';
+			echo '<tr><th colspan="4">'.$engine->get_translation('PollsEnded').'</th></tr>';
 
 			foreach ($list as $row)
 			{
@@ -247,11 +247,11 @@ function admin_pollsadmin(&$engine, &$module)
 
 		echo '<tr><td colspan="4">';
 		// pagination
-		echo '<small><strong>'.$engine->GetTranslation('PollsShow').':</strong> ';
+		echo '<small><strong>'.$engine->get_translation('PollsShow').':</strong> ';
 		if ($year == 0)
-			echo $engine->GetTranslation('PollsAll').' ';
+			echo $engine->get_translation('PollsAll').' ';
 		else
-			echo '<a href="'.rawurldecode($engine->href('', $mode_file, $mode_http.'year=0')).'">'.$engine->GetTranslation('PollsAll').'</a> ';
+			echo '<a href="'.rawurldecode($engine->href('', $mode_file, $mode_http.'year=0')).'">'.$engine->get_translation('PollsAll').'</a> ';
 
 		if (!empty($years))
 		{
@@ -267,11 +267,11 @@ function admin_pollsadmin(&$engine, &$module)
 		if (!empty($list))
 		{
 			echo '<tr><td colspan="4">'.
-				'<input name="remove" id="submit" type="submit" value="'.$engine->GetTranslation('PollsRemove').'" />'.
+				'<input name="remove" id="submit" type="submit" value="'.$engine->get_translation('PollsRemove').'" />'.
 				'</td></tr>';
 		}
 		echo '</table>';
-		echo $engine->FormClose();
+		echo $engine->form_close();
 	}
 
 	// destroy polls object

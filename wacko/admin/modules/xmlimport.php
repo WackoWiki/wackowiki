@@ -20,7 +20,7 @@ function admin_xmlimport(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 <?php
-	echo $engine->Action('import');
+	echo $engine->action('import');
 }
 
 ?>

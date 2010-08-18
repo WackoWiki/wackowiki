@@ -1,16 +1,16 @@
 <?php
-	header('Content-Type: text/html; charset='.$this->GetCharset());
+	header('Content-Type: text/html; charset='.$this->get_charset());
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title><?php echo htmlspecialchars($this->config['wacko_name']); ?> : <?php echo $this->GetPagePath(true, $separator = "/", false); ?></title>
+<title><?php echo htmlspecialchars($this->config['wacko_name']); ?> : <?php echo $this->get_page_path(true, $separator = "/", false); ?></title>
 <?php if ($this->method != 'show' || $this->page['latest'] == '0') { ?>
 <meta name="robots" content="noindex, nofollow" />
 <?php } ?>
-<meta name="keywords" content="<?php echo htmlspecialchars($this->GetKeywords()); ?>" />
-<meta name="description" content="<?php echo htmlspecialchars($this->GetDescription()); ?>" />
-<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords()); ?>" />
+<meta name="description" content="<?php echo htmlspecialchars($this->get_description()); ?>" />
+<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 <meta http-equiv="imagetoolbar" content="no" />
 <link href="<?php echo $this->config['theme_url'] ?>css/atom.css" rel="stylesheet" type="text/css" media="screen" />
 <?php if ($this->config['allow_x11colors']) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" /><?php } ?>
@@ -18,10 +18,10 @@
 <link href="<?php echo $this->config['theme_url'] ?>css/default.css" rel="stylesheet" type="text/css" media="screen" />
 <link rel="start" href="/" />
 <link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page'])); ?>" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentNewsRSS");?>" href="/xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentCommentsRSS");?>" href="/xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("RecentChangesRSS");?>" href="/xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->GetTranslation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentNewsRSS");?>" href="/xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentCommentsRSS");?>" href="/xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentChangesRSS");?>" href="/xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 <script type="text/javascript" src="<?php echo $this->config['base_url'] ?>js/controls.js"></script>
 <script type="text/javascript" src="<?php echo $this->config['base_url'] ?>js/protoedit.js"></script>
 <script type="text/javascript" src="<?php echo $this->config['base_url'] ?>js/wikiedit2.js"></script>
@@ -44,16 +44,16 @@
 						<div id="controls">
 							<a name="top"></a>
 <?php
-	if ($this->GetUser())
+	if ($this->get_user())
 	{
 ?>
-							id: <?php echo $this->GetUserName() ;?> &nbsp; <a href="<?php echo $this->href('', $this->config['settings_page']); ?>" title="Account Settings"><?php echo $this->GetTranslation("YouArePanelAccount"); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->config['login_page']); ?>" title="parameters of current session">Session</a> &nbsp; <a onclick="return confirm('Do you really want to leave the system?');" href="<?php echo $this->href('', $this->config['login_page'], 'action=logout&amp;goback='.$this->SlimUrl($this->tag)); ?>" title="Logout">Logout</a><br />
+							id: <?php echo $this->get_user_name() ;?> &nbsp; <a href="<?php echo $this->href('', $this->config['settings_page']); ?>" title="Account Settings"><?php echo $this->get_translation("YouArePanelAccount"); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->config['login_page']); ?>" title="parameters of current session">Session</a> &nbsp; <a onclick="return confirm('Do you really want to leave the system?');" href="<?php echo $this->href('', $this->config['login_page'], 'action=logout&amp;goback='.$this->slim_url($this->tag)); ?>" title="Logout">Logout</a><br />
 <?php
 	}
 	else
 	{
 ?>
-							id: <em><?php echo $this->GetTranslation('Guest') ;?></em> &nbsp; <a href="<?php echo $this->href('', $this->config['login_page']); ?>" title="log and log in">login</a> &nbsp; <a href="<?php echo $this->href('', $this->config['registration_page']); ?>" title="log in">Registration</a><br />
+							id: <em><?php echo $this->get_translation('Guest') ;?></em> &nbsp; <a href="<?php echo $this->href('', $this->config['login_page']); ?>" title="log and log in">login</a> &nbsp; <a href="<?php echo $this->href('', $this->config['registration_page']); ?>" title="log in">Registration</a><br />
 <?php
 	}
 	echo "\n";
@@ -80,9 +80,9 @@
 									<div id="navigation">
 <?php
 	$this->context[++$this->current_context] = '/';
-	$this->StopLinkTracking();
-	echo $this->Format($this->Format(strtolower(str_replace("\n", ' ', $this->GetDefaultBookmarks($user['lang'], 'site')))), 'post_wacko');
-	$this->StartLinkTracking();
+	$this->stop_link_tracking();
+	echo $this->format($this->format(strtolower(str_replace("\n", ' ', $this->get_default_bookmarks($user['lang'], 'site')))), 'post_wacko');
+	$this->start_link_tracking();
 	$this->current_context--;
 	echo "\n";
 ?>
@@ -91,9 +91,9 @@
 								<td width="50" align="right" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/panel_right.png);">
 									<div id="tools">
 <?php
-	if ($this->GetUser())
+	if ($this->get_user())
 	{
-		if (in_array($this->tag, $this->GetBookmarkLinks()))
+		if (in_array($this->tag, $this->get_bookmark_links()))
 		{
 			echo '<div class="bookmark_out"><a href="'.$this->href('', '', 'removebookmark=yes').'" title="remove this page from the Bookmarks menu"><img src="'.$this->config['theme_url'].'images/spacer.gif" /></a></div>';
 		}
@@ -128,27 +128,27 @@
 	{
 		if ($this->forum === true)
 		{
-			if ($this->UserIsOwner())
+			if ($this->user_is_owner())
 				echo 'Thread poster: You, ';
-			else if ($owner = $this->GetPageOwner())
-				echo 'By topic: '.( $owner == GUEST ? '<em>'.$this->GetTranslation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$owner).'">'.$owner.'</a>' ).', ';
+			else if ($owner = $this->get_page_owner())
+				echo 'By topic: '.( $owner == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$owner).'">'.$owner.'</a>' ).', ';
 
-			if ($this->page['created'] != SQL_NULLDATE) echo 'Theme open '.$this->GetTimeStringFormatted($this->page['created']);
+			if ($this->page['created'] != SQL_NULLDATE) echo 'Theme open '.$this->get_time_string_formatted($this->page['created']);
 		}
 		else
 		{
-			if ($this->UserIsOwner())
+			if ($this->user_is_owner())
 				echo 'Owner: You ';
-			else if ($owner = $this->GetPageOwner())
-				echo 'Owner: '.( $owner == GUEST ? '<em>'.$this->GetTranslation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$owner).'">'.$owner.'</a>' ).' ';
+			else if ($owner = $this->get_page_owner())
+				echo 'Owner: '.( $owner == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$owner).'">'.$owner.'</a>' ).' ';
 			else
 				echo ( substr($this->tag, 0, strlen($this->config['news_cluster'])) == $this->config['news_cluster']
 					? 'Holder No '
 					: '<a href="'.$this->href('claim').'">Possession</a> ' );
 
-			if ($this->page['created'] != SQL_NULLDATE) echo '(created '.$this->GetTimeStringFormatted($this->page['created']).'), ';
+			if ($this->page['created'] != SQL_NULLDATE) echo '(created '.$this->get_time_string_formatted($this->page['created']).'), ';
 
-			echo 'modified '.$this->GetTimeStringFormatted($this->page['modified']).' ('.$this->GetTranslation('By').': '.( $this->page['user_id'] == GUEST ? '<em>'.$this->GetTranslation('Guest').'</em>' : ( $this->page['user_name'] == $this->GetUserName() ? 'You' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>' ) ).')';
+			echo 'modified '.$this->get_time_string_formatted($this->page['modified']).' ('.$this->get_translation('By').': '.( $this->page['user_id'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $this->page['user_name'] == $this->get_user_name() ? 'You' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>' ) ).')';
 		}
 	}
 	echo "\n";
@@ -158,7 +158,7 @@
 <?php
 	if ($this->page)
 	{
-		if ($this->GetUser())
+		if ($this->get_user())
 		{
 			if ($this->iswatched === true)
 			{
@@ -189,7 +189,7 @@
 	}
 ?>
 								<div class="path" title="Path to current document">
-									<a href="/"><?php echo trim($this->config['base_url'], '/'); ?></a>/<?php echo $this->GetPagePath() ?> <a title="look like in other documents" href="<?php echo $this->href('', $this->config['search_page'], 'phrase='.urlencode($this->GetPageTitle())); ?>">&gt;&gt;&gt;</a>
+									<a href="/"><?php echo trim($this->config['base_url'], '/'); ?></a>/<?php echo $this->get_page_path() ?> <a title="look like in other documents" href="<?php echo $this->href('', $this->config['search_page'], 'phrase='.urlencode($this->get_page_title())); ?>">&gt;&gt;&gt;</a>
 								</div>
 							</div>
 						</div>
@@ -202,7 +202,7 @@
 										<div style="background-image:url(<?php echo $this->config['theme_url'] ?>images/glass_top.png); height:20px;"></div>
 										<div id="bookmarks">
 <?php
-	echo $this->Format(implode(' ', $this->GetBookmarks())) . "\n";
+	echo $this->format(implode(' ', $this->get_bookmarks())) . "\n";
 ?>
 										</div>
 <?php
@@ -222,24 +222,24 @@
 		/* if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->config['forum_cluster'])
 		{
 			// forum index
-			echo $this->Action('tree', array('page' => $this->config['forum_cluster'], 'depth' => 1, 'nomark' => 1));
+			echo $this->action('tree', array('page' => $this->config['forum_cluster'], 'depth' => 1, 'nomark' => 1));
 		}
 		else */ if ($this->config['lower_index'] == '1')
 		{
 			// lower index
-			echo $this->Action('tree', array('page' => $this->tag, 'depth' => 1, 'nomark' => 1));
+			echo $this->action('tree', array('page' => $this->tag, 'depth' => 1, 'nomark' => 1));
 		}
 		else if ($this->config['upper_index'] == '1')
 		{
 			// upper index
 			$page = '/'.substr($this->tag, 0, ( strrpos($this->tag, '/') ? strrpos($this->tag, '/') : strlen($this->tag) ));
-			echo $this->Action('tree', array('page' => $page, 'depth' => 1, 'nomark' => 1));
+			echo $this->action('tree', array('page' => $page, 'depth' => 1, 'nomark' => 1));
 		}
 		else
 		{
 			// default index
 			$page = '/'.substr($this->tag, 0, ( strrpos($this->tag, '/') ? strrpos($this->tag, '/') : strlen($this->tag) ));
-			echo $this->Action('tree', array('page' => $page, 'depth' => 2, 'nomark' => 1));
+			echo $this->action('tree', array('page' => $page, 'depth' => 2, 'nomark' => 1));
 		}
 ?>
 										</div>
@@ -286,85 +286,85 @@
 	// create tab
 	echo EchoTab(
 		$this->href('new'),
-		$this->GetTranslation('CreateNewPageTip'),
-		$this->GetTranslation("CreatePageButton"),
+		$this->get_translation('CreateNewPageTip'),
+		$this->get_translation("CreatePageButton"),
 		$this->method == 'new',
 		'n');
 
 	// show tab
 	echo EchoTab(
 		$this->href('show'),
-		$this->GetTranslation('ShowTip'),
-		$this->HasAccess('read') ? $this->GetTranslation("ShowText") : '',
+		$this->get_translation('ShowTip'),
+		$this->has_access('read') ? $this->get_translation("ShowText") : '',
 		$this->method == 'show',
 		'v');
 
 	// edit tab
 	echo EchoTab(
 		$this->href('edit'),
-		$this->GetTranslation('EditTip'),
-		((!$this->page && $this->HasAccess('create')) || $this->IsAdmin() ||
-			($this->forum === false && $this->HasAccess('write')) ||
-			($this->forum === true && ($this->UserIsOwner() || $this->IsModerator()) && (int)$this->page['comments'] == 0))
-			? $this->GetTranslation("EditText") : '',
+		$this->get_translation('EditTip'),
+		((!$this->page && $this->has_access('create')) || $this->is_admin() ||
+			($this->forum === false && $this->has_access('write')) ||
+			($this->forum === true && ($this->user_is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
+			? $this->get_translation("EditText") : '',
 		$this->method == 'edit',
 		'e');
 
 	// revisions tab
 	echo EchoTab(
 		$this->href('revisions'),
-		$this->GetTranslation('RevisionTip'),
-		(/* $this->forum === false && */ $this->page && $this->HasAccess('read')) ? $this->GetTranslation('RevisionText') : '',
+		$this->get_translation('RevisionTip'),
+		(/* $this->forum === false && */ $this->page && $this->has_access('read')) ? $this->get_translation('RevisionText') : '',
 		$this->method == 'revisions' || $this->method == 'diff',
 		'r');
 
 	// remove tab
 	echo EchoTab(
 		$this->href('remove'),
-		$this->GetTranslation('DeleteTip'),
-		($this->page && ($this->IsAdmin() || !$this->config['remove_onlyadmins'] && (
-			($this->forum === true && $this->UserIsOwner() && (int)$this->page['comments'] == 0) ||
-			($this->forum === false && $this->UserIsOwner()))))
-			? $this->GetTranslation('DeleteText')  : '',
+		$this->get_translation('DeleteTip'),
+		($this->page && ($this->is_admin() || !$this->config['remove_onlyadmins'] && (
+			($this->forum === true && $this->user_is_owner() && (int)$this->page['comments'] == 0) ||
+			($this->forum === false && $this->user_is_owner()))))
+			? $this->get_translation('DeleteText')  : '',
 		$this->method == 'remove');
 
 	// referrers tab
 	echo EchoTab(
 		$this->href('referrers'),
-		$this->GetTranslation('ReferrersTip'),
-		($this->page && $this->HasAccess('read')) ? $this->GetTranslation("ReferrersText") : '',
+		$this->get_translation('ReferrersTip'),
+		($this->page && $this->has_access('read')) ? $this->get_translation("ReferrersText") : '',
 		$this->method == 'referrers' || $this->method == 'referrers_sites',
 		'l');
 
 	// moderation tab
 	echo EchoTab(
 		$this->href('moderate'),
-		$this->GetTranslation('ModerateTip'),
-		($this->IsModerator() && $this->HasAccess('read')) ? $this->GetTranslation('ModerateText') : '',
+		$this->get_translation('ModerateTip'),
+		($this->is_moderator() && $this->has_access('read')) ? $this->get_translation('ModerateText') : '',
 		$this->method == 'moderate',
 		'm');
 
 	// settings tab
 	echo EchoTab(
 		$this->href('properties'),
-		$this->GetTranslation('PropertiesTip'),
-		(/* $this->forum === false && $this->page && */ ($this->IsAdmin() /*|| $this->IsModerator() */|| $this->UserIsOwner())) ? $this->GetTranslation("PropertiesText") : '',
+		$this->get_translation('PropertiesTip'),
+		(/* $this->forum === false && $this->page && */ ($this->is_admin() /*|| $this->is_moderator() */|| $this->user_is_owner())) ? $this->get_translation("PropertiesText") : '',
 		$this->method == 'properties' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
 		's');
 
 	// upload tab
 	echo EchoTab(
 		$this->href('upload'),
-		$this->GetTranslation('FilesTip'),
-		(/* $this->forum === false && */ $this->page && $this->HasAccess('upload')) ? $this->GetTranslation('FilesText') : '',
+		$this->get_translation('FilesTip'),
+		(/* $this->forum === false && */ $this->page && $this->has_access('upload')) ? $this->get_translation('FilesText') : '',
 		$this->method == 'upload',
 		'u');
 
 	// acls tab
 	echo EchoTab(
 		$this->href('acls'),
-		$this->GetTranslation('ACLTip'),
-		($this->forum === false && $this->page && ($this->IsAdmin() || $this->UserIsOwner())) ? $this->GetTranslation("ACLText") : '',
+		$this->get_translation('ACLTip'),
+		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation("ACLText") : '',
 		$this->method == 'acls',
 		'a');
 ?>
@@ -374,6 +374,6 @@
 					<td height="321" valign="top" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_divider.png); background-repeat:no-repeat;">
 						<div id="body"><div id="content">
 <?php
-	if ($message = $this->GetMessage()) echo "<div class=\"info\">$message</div>";
+	if ($message = $this->get_message()) echo "<div class=\"info\">$message</div>";
 ?>
 <!-- begin page output -->

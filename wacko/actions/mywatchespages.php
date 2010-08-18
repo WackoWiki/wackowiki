@@ -3,12 +3,12 @@
 if (!isset($max)) $max = "";
 if (!isset($curChar)) $curChar = "";
 
-if ($user_id = $this->GetUserId())
+if ($user_id = $this->get_user_id())
 {
 	if (isset($_GET['unwatch']) && $_GET['unwatch'] != '')
-		$this->ClearWatch($user_id, $_GET['unwatch']);
+		$this->clear_watch($user_id, $_GET['unwatch']);
 	else if (isset($_GET['setwatch']) && $_GET['setwatch'] != '')
-		$this->SetWatch($user_id, $_GET['setwatch']);
+		$this->set_watch($user_id, $_GET['setwatch']);
 
 	if ($max) $limit = $max;
 	else $limit	= 100;
@@ -16,7 +16,7 @@ if ($user_id = $this->GetUserId())
 
 	if (isset($_GET['unwatched']) && $_GET['unwatched'] == 1)
 	{
-		$count	= $this->LoadSingle(
+		$count	= $this->load_single(
 			"SELECT COUNT(p.tag) AS n ".
 			"FROM {$prefix}page AS p ".
 			"LEFT JOIN {$prefix}watch AS w ".
@@ -25,14 +25,14 @@ if ($user_id = $this->GetUserId())
 			"WHERE p.comment_on_id = '0' ".
 				"AND w.user_id IS NULL", 1);
 
-		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mywatches&amp;unwatched=1#list');
+		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mywatches&amp;unwatched=1#list');
 
-		echo $this->GetTranslation('UnwatchedPages').' (<a href="'.
+		echo $this->get_translation('UnwatchedPages').' (<a href="'.
 			$this->href('', '', 'mode='.$_GET['mode']).'#list">'.
-			$this->GetTranslation('ViewWatchedPages').'</a>).<br /><br />';
+			$this->get_translation('ViewWatchedPages').'</a>).<br /><br />';
 
 		$cnt = 0;
-		if ($pages = $this->LoadAll(
+		if ($pages = $this->load_all(
 			"SELECT p.tag AS pagetag, p.page_id AS page_id ".
 			"FROM {$prefix}page AS p ".
 			"LEFT JOIN {$prefix}watch AS w ".
@@ -45,7 +45,7 @@ if ($user_id = $this->GetUserId())
 		{
 			foreach ($pages as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['page_id']))
+				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 				{
 					$firstChar = strtoupper($page['pagetag'][0]);
 					if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))
@@ -59,7 +59,7 @@ if ($user_id = $this->GetUserId())
 					}
 
 					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.$_GET['p'].'&amp;' : '').'mode=mywatches&amp;unwatched=1&amp;setwatch='.$page['page_id']).'#list">'.
-						"<img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->GetTranslation("SetWatch")."\" alt=\"".$this->GetTranslation("SetWatch")."\"  />".'</a> '.$this->ComposeLinkToPage($page['pagetag'], '', '', 0)."<br />\n";
+						"<img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation("set_watch")."\" alt=\"".$this->get_translation("set_watch")."\"  />".'</a> '.$this->compose_link_to_page($page['pagetag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
 				if ($cnt >= $limit) break;
@@ -71,24 +71,24 @@ if ($user_id = $this->GetUserId())
 		}
 		else
 		{
-			echo '<em>'.$this->GetTranslation('NoUnwatchedPages').'</em>';
+			echo '<em>'.$this->get_translation('NoUnwatchedPages').'</em>';
 		}
 	}
 	else
 	{
-		$count	= $this->LoadSingle(
+		$count	= $this->load_single(
 			"SELECT COUNT( DISTINCT page_id ) as n ".
 			"FROM {$prefix}watch ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."'", 1);
 
-		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mywatches#list');
+		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mywatches#list');
 
-		echo $this->GetTranslation('WatchedPages').' (<a href="'.
+		echo $this->get_translation('WatchedPages').' (<a href="'.
 			$this->href('', '', 'mode='.$_GET['mode'].'&amp;unwatched=1').'#list">'.
-			$this->GetTranslation('ViewUnwatchedPages').'</a>).<br /><br />';
+			$this->get_translation('ViewUnwatchedPages').'</a>).<br /><br />';
 
 		$cnt = 0;
-		if ($pages = $this->LoadAll(
+		if ($pages = $this->load_all(
 			"SELECT w.page_id, p.tag AS tag ".
 			"FROM {$prefix}watch AS w ".
 			"LEFT JOIN {$prefix}page AS p ".
@@ -99,7 +99,7 @@ if ($user_id = $this->GetUserId())
 		{
 			foreach ($pages as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['page_id']))
+				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 				{
 					$firstChar = strtoupper($page['tag'][0]);
 					if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))
@@ -113,7 +113,7 @@ if ($user_id = $this->GetUserId())
 					}
 
 					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.$_GET['p'].'&amp;' : '').'mode=mywatches&amp;unwatch='.$page['page_id']).'#list">'.
-						"<img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->GetTranslation("RemoveWatch")."\" alt=\"".$this->GetTranslation("RemoveWatch")."\"  />".'</a> '.$this->ComposeLinkToPage($page['tag'], '', '', 0)."<br />\n";
+						"<img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation("RemoveWatch")."\" alt=\"".$this->get_translation("RemoveWatch")."\"  />".'</a> '.$this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
 				if ($cnt >= $limit) break;
@@ -125,13 +125,13 @@ if ($user_id = $this->GetUserId())
 		}
 		else
 		{
-			echo '<em>'.$this->GetTranslation('NoWatchedPages').'</em>';
+			echo '<em>'.$this->get_translation('NoWatchedPages').'</em>';
 		}
 	}
 }
 else
 {
-	echo '<em>'.$this->GetTranslation('NotLoggedInWatches').'</em>';
+	echo '<em>'.$this->get_translation('NotLoggedInWatches').'</em>';
 }
 
 ?>

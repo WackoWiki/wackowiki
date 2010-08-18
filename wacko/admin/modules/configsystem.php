@@ -53,11 +53,11 @@ function admin_configsystem(&$engine, &$module)
 
 		foreach($config as $key => $value)
 		{
-			$engine->Query(
+			$engine->query(
 				"UPDATE {$engine->config['table_prefix']}config SET value = '$value' WHERE config_name = '$key'");
 		}
-		$engine->Log(1, 'Updated config parameters');
-		$engine->Redirect(rawurldecode($engine->href()));
+		$engine->log(1, 'Updated config parameters');
+		$engine->redirect(rawurldecode($engine->href()));
 	}
 ?>
 	<form action="admin.php" method="post" name="system">

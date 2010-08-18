@@ -1,9 +1,9 @@
 <?php
 
-if ($this->HasAccess("comment") && $this->HasAccess("read"))
+if ($this->has_access("comment") && $this->has_access("read"))
 {
 	// find number
-	if ($latestComment = $this->LoadSingle("SELECT tag, page_id FROM ".$this->config['table_prefix']."page WHERE comment_on_id != '0' ORDER BY page_id DESC LIMIT 1"))
+	if ($latestComment = $this->load_single("SELECT tag, page_id FROM ".$this->config['table_prefix']."page WHERE comment_on_id != '0' ORDER BY page_id DESC LIMIT 1"))
 	{
 		preg_match("/^Comment([0-9]+)$/", $latestComment['tag'], $matches);
 		$num = $matches[1] + 1;
@@ -13,7 +13,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 		$num = "1";
 	}
 
-	$user = $this->GetUser();
+	$user = $this->get_user();
 	$body = str_replace("\r", "", $_POST['body']);
 	$body = trim($_POST['body']);
 
@@ -25,18 +25,18 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 	// watch page
 	if ($this->page && $_POST['watchpage'] && $_POST['noid_publication'] != $this->tag && $user && $this->iswatched !== true)
 	{
-		$this->SetWatch($user['user_id'], $this->page['page_id']);
+		$this->set_watch($user['user_id'], $this->page['page_id']);
 	}
 
 	if (!$body)
 	{
-		if (!$user) $this->cache->CacheInvalidate($this->supertag);
-		$this->SetMessage($this->GetTranslation("EmptyComment"));
+		if (!$user) $this->cache->cache_invalidate($this->supertag);
+		$this->set_message($this->get_translation("EmptyComment"));
 	}
 	else if ($_POST['preview'])
 	{
 		// comment preview
-		if (!$user) $this->cache->CacheInvalidate($this->supertag);
+		if (!$user) $this->cache->cache_invalidate($this->supertag);
 		$_SESSION['preview']	= $body;
 		$_SESSION['body']		= $body;
 		$_SESSION['guest']		= $guest;
@@ -45,8 +45,8 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 	else if ($_SESSION['comment_delay'] && ((time() - $_SESSION['comment_delay']) < $this->config['comment_delay']))
 	{
 		// posting flood protection
-		if (!$user) $this->cache->CacheInvalidate($this->supertag);
-		$this->SetMessage('<div class="error">'.str_replace('%1', $this->config['comment_delay'], $this->GetRes('CommentFlooded')).'</div>');
+		if (!$user) $this->cache->cache_invalidate($this->supertag);
+		$this->set_message('<div class="error">'.str_replace('%1', $this->config['comment_delay'], $this->GetRes('CommentFlooded')).'</div>');
 		$_SESSION['body']			= $body;
 		$_SESSION['comment_delay']	= time();
 		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
@@ -64,7 +64,7 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 				//check whether anonymous user
 				//anonymous user has the IP or host name as name
 				//if name contains '.', we assume it's anonymous
-				if (strpos($this->GetUserName(), '.'))
+				if (strpos($this->get_user_name(), '.'))
 				{
 					//anonymous user, check the captcha
 					if (!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
@@ -94,8 +94,8 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 					if (!$word_ok)
 					{
 						//not the right word
-						$error = $this->GetTranslation("SpamAlert");
-						$this->SetMessage($this->GetTranslation("SpamAlert"));
+						$error = $this->get_translation("SpamAlert");
+						$this->set_message($this->get_translation("SpamAlert"));
 						$_SESSION['freecap_old_comment'] = $body;
 					}
 				}
@@ -112,47 +112,47 @@ if ($this->HasAccess("comment") && $this->HasAccess("read"))
 		if ($_POST['noid_publication'] == $this->tag)
 		{
 			// undefine username
-			$remember_name = $this->GetUserName();
-			$this->SetUserSetting('user_name', NULL);
+			$remember_name = $this->get_user_name();
+			$this->set_user_setting('user_name', NULL);
 		}
 
 		if (!$error)
 		{
-			$comment_on_id = $this->GetPageId();
+			$comment_on_id = $this->get_page_id();
 			// store new comment
-			$this->SavePage("Comment".$num, $title, $body, $edit_note = "", $minor_edit = "0", $comment_on_id);
+			$this->save_page("Comment".$num, $title, $body, $edit_note = "", $minor_edit = "0", $comment_on_id);
 
 			// log event
-			$this->Log(5, str_replace("%2", $this->tag." ".$this->page['title'], str_replace("%1", "Comment".$num, $this->GetTranslation("LogCommentPosted", $this->config['language']))));
+			$this->log(5, str_replace("%2", $this->tag." ".$this->page['title'], str_replace("%1", "Comment".$num, $this->get_translation("LogCommentPosted", $this->config['language']))));
 
 		// restore username after anonymous publication
 		if ($_POST['noid_publication'] == $this->tag)
 		{
-			$this->SetUserSetting('user_name', $remember_name);
+			$this->set_user_setting('user_name', $remember_name);
 			unset($remember_name);
-			if ($body_r) $this->SetUserSetting('noid_protect', true);
+			if ($body_r) $this->set_user_setting('noid_protect', true);
 		}
 
 		// now we render it internally so we can write the updated link table.
-		$this->ClearLinkTable();
-		$this->StartLinkTracking();
-		$dummy = $this->Format($body_r, 'post_wacko');
-		$this->StopLinkTracking();
-		$this->WriteLinkTable('Comment'.$num);
-		$this->ClearLinkTable();
+		$this->clear_link_table();
+		$this->start_link_tracking();
+		$dummy = $this->format($body_r, 'post_wacko');
+		$this->stop_link_tracking();
+		$this->write_link_table('Comment'.$num);
+		$this->clear_link_table();
 
-			$this->SetMessage($this->GetTranslation("CommentAdded"));
+			$this->set_message($this->get_translation("CommentAdded"));
 		}
 
 		// End Comment Captcha
 	}
 
 	// redirect to page
-	$this->Redirect($this->href('', '', 'show_comments=1&p=last').'#Comment'.$num);
+	$this->redirect($this->href('', '', 'show_comments=1&p=last').'#Comment'.$num);
 }
 else
 {
-	print("<div id=\"page\">".$this->GetTranslation("CommentAccessDenied")."</div>\n");
+	print("<div id=\"page\">".$this->get_translation("CommentAccessDenied")."</div>\n");
 }
 
 ?>

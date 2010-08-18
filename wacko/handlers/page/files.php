@@ -16,7 +16,7 @@ else
 {
 	$page_id = $this->page['page_id'];
 }
-$what = $this->LoadAll(
+$what = $this->load_all(
 	"SELECT u.user_name AS user, f.upload_id, f.filename, f.file_ext, f.filesize, f.description, f.hits ".
 	"FROM ".$this->config['table_prefix']."upload f ".
 		"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -26,8 +26,8 @@ $what = $this->LoadAll(
 if (sizeof($what) > 0)
 {
 	// 2. check rights
-	if ($this->IsAdmin() || (isset($desc['upload_id']) && ($this->page['owner_id'] == $this->GetUserId())) ||
-	($this->HasAccess("read")) || ($desc['user_id'] == $this->GetUserId()) )
+	if ($this->is_admin() || (isset($desc['upload_id']) && ($this->page['owner_id'] == $this->get_user_id())) ||
+	($this->has_access("read")) || ($desc['user_id'] == $this->get_user_id()) )
 	{
 		$filepath = $this->config["upload_path".($page_id ? "_per_page" : "")]."/".
 		($page_id ? ("@".$this->page['page_id']."@") : "").
@@ -80,7 +80,7 @@ if ($filepath)
 	if (!isset($isimage))
 	{
 		// count file download
-		$this->Query(
+		$this->query(
 			"UPDATE {$this->config['table_prefix']}upload ".
 			"SET hits = '".quote($this->dblink, $what[0]['hits'] + 1)."' ".
 			"WHERE upload_id = '".quote($this->dblink, $what[0]['upload_id'])."'");
@@ -95,7 +95,7 @@ else if ($error == 404)
 	// if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
 	header("HTTP/1.0 404 Not Found");
 
-	print($this->GetTranslation("UploadFileNotFound"));
+	print($this->get_translation("UploadFileNotFound"));
 }
 else
 {
@@ -103,7 +103,7 @@ else
 	// if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
 	header("HTTP/1.0 403 Forbidden");
 
-	print($this->GetTranslation("UploadFileForbidden"));
+	print($this->get_translation("UploadFileForbidden"));
 }
 
 // 4. die

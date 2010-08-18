@@ -10,25 +10,25 @@
 if (!isset($_POST["_to"]))
 {
 	// show FORM
-	echo $this->FormOpen("", "", "post", "", " enctype='multipart/form-data' ");
+	echo $this->form_open("", "", "post", "", " enctype='multipart/form-data' ");
 	?>
 
 <div class="cssform">
   <p>
-    <label for="importto"><?php echo $this->GetTranslation("ImportTo"); ?>:</label>
+    <label for="importto"><?php echo $this->get_translation("ImportTo"); ?>:</label>
     <input type="text" id="importto" name="_to" size="40" value="" />
   </p>
   <p>
-    <label for="importwhat"><?php echo $this->GetTranslation("ImportWhat"); ?>:</label>
+    <label for="importwhat"><?php echo $this->get_translation("ImportWhat"); ?>:</label>
     <input type="file" id="importwhat" name="_import" />
   </p>
   <p>
     <input type="submit"
-			value="<?php echo $this->GetTranslation("ImportButtonText"); ?>" />
+			value="<?php echo $this->get_translation("ImportButtonText"); ?>" />
   </p>
 </div>
 <?php
-	echo $this->FormClose();
+	echo $this->form_close();
 }
 else
 {
@@ -60,38 +60,38 @@ else
 				$root_tag	= trim($_POST["_to"], "/ ");
 				$rel_tag	= trim(Utility::untag($item, "guid"), "/ ");
 				$tag		= $root_tag.( $root_tag && $rel_tag ? "/" : "" ).$rel_tag;
-				$page_id	= $this->GetPageId($tag);
+				$page_id	= $this->get_page_id($tag);
 				$owner		= Utility::untag($item, "author");
-				$owner_id	= $this->GetUserIdByName($user);
+				$owner_id	= $this->get_user_id_by_name($user);
 				$body = str_replace("]]&gt;", "]]>", Utility::untag($item, "description"));
 				$title		= html_entity_decode(Utility::untag($item, "title"));
 
-				$body_r = $this->SavePage($tag, $title, $body, '');
-				$this->SetPageOwner($page_id, $owner_id);
+				$body_r = $this->save_page($tag, $title, $body, '');
+				$this->set_page_owner($page_id, $owner_id);
 				// now we render it internally in the context of imported
 				// page so we can write the updated link table
 				$this->context[++$this->current_context] = $tag;
-				$this->ClearLinkTable();
-				$this->StartLinkTracking();
-				$dummy = $this->Format($body_r, 'post_wacko');
-				$this->StopLinkTracking();
-				$this->WriteLinkTable($page_id);
-				$this->ClearLinkTable();
+				$this->clear_link_table();
+				$this->start_link_tracking();
+				$dummy = $this->format($body_r, 'post_wacko');
+				$this->stop_link_tracking();
+				$this->write_link_table($page_id);
+				$this->clear_link_table();
 				$this->current_context--;
 
 				// log import
-				$this->Log(4, str_replace("%1", $tag, $this->GetTranslation("LogPageImported", $this->config['language'])));
+				$this->log(4, str_replace("%1", $tag, $this->get_translation("LogPageImported", $this->config['language'])));
 
 				// count page
 				$t++;
 				$pages[] = $tag;
 			}
 
-			echo "<em>".str_replace('%1', $t, $this->GetTranslation("ImportSuccess"))."</em><br />";
+			echo "<em>".str_replace('%1', $t, $this->get_translation("ImportSuccess"))."</em><br />";
 
 			foreach ($pages as $page)
 			{
-				echo $this->Link('/'.$page, '', '', 0).'<br />';
+				echo $this->link('/'.$page, '', '', 0).'<br />';
 			}
 		}
 		else

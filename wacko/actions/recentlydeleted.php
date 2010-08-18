@@ -2,7 +2,7 @@
 
 if (!isset($max) || $max > 1000) $max = 1000;
 
-$pages = $this->LoadRecentlyDeleted($max);
+$pages = $this->load_recently_deleted($max);
 
 if ($pages == true)
 {
@@ -14,7 +14,7 @@ if ($pages == true)
 	{
 		$i++;
 		if ($this->config['hide_locked'])
-			$access = $this->HasAccess("read", $page['page_id']);
+			$access = $this->has_access("read", $page['page_id']);
 		else
 			$access = true;
 
@@ -35,7 +35,7 @@ if ($pages == true)
 			echo "<li>".
 					"<span style=\"text-align:left\">".
 						"<small>".date($this->config['time_format_seconds'], strtotime($time))."</small>  &mdash; ".
-						$this->ComposeLinkToPage($page['tag'], "revisions", "", 0).
+						$this->compose_link_to_page($page['tag'], "revisions", "", 0).
 					"</span>".
 				"</li>\n";
 		}
@@ -45,7 +45,7 @@ if ($pages == true)
 }
 else
 {
-	echo $this->GetTranslation("NoRecentlyDeleted");
+	echo $this->get_translation("NoRecentlyDeleted");
 }
 
 ?>

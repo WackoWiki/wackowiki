@@ -315,13 +315,13 @@ class WackoFormatter
 			if ($formatter == "c") $formatter = "comments";
 			if ($formatter == "") $formatter = "code";
 
-			$res = $wacko->_Format(trim($code), "highlight/".$formatter, $params);
+			$res = $wacko->_format(trim($code), "highlight/".$formatter, $params);
 
 			if (isset($params["wrapper"]) && ($params["wrapper"] != "none"))
 			{
 				$wrapper = "wrapper_".$params["wrapper"];
 				$params["wrapper"] = ""; // no recursion
-				$res = $wacko->_Format(trim($res), "highlight/".$wrapper, $params);
+				$res = $wacko->_format(trim($res), "highlight/".$wrapper, $params);
 			}
 
 			$output .= $res;
@@ -394,7 +394,7 @@ class WackoFormatter
 			if ($this->object->config["disable_safehtml"])
 				return "<!--notypo-->".$matches[1]."<!--/notypo-->";
 			else
-				return "<!--notypo-->".$wacko->Format($matches[1], "safehtml")."<!--/notypo-->";
+				return "<!--notypo-->".$wacko->format($matches[1], "safehtml")."<!--/notypo-->";
 		}
 		//table begin
 		else if ($thing == "#||")
@@ -613,7 +613,7 @@ class WackoFormatter
 			}
 			else
 			{
-				return $wacko->PreLink($matches[1]).$matches[2];
+				return $wacko->pre_link($matches[1]).$matches[2];
 			}
 		}
 		// lan path
@@ -806,7 +806,7 @@ class WackoFormatter
 					$url = str_replace(" ", "", $url);
 					$text = preg_replace("/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/", "", $text);
 
-					return $result.$wacko->PreLink($url, $text);
+					return $result.$wacko->pre_link($url, $text);
 				}
 			}
 			return "";
@@ -832,7 +832,7 @@ class WackoFormatter
 					$result.= "[";
 				}
 				$img = preg_replace("/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(|/", "", $img);
-				return $result.$wacko->PreLink($url, $img, 1, 1);
+				return $result.$wacko->pre_link($url, $img, 1, 1);
 			}
 			else return "";
 		}
@@ -948,14 +948,14 @@ class WackoFormatter
 		// interwiki links
 		else if (preg_match("/^([[:alnum:]]+[:][".$wacko->language['ALPHANUM_P']."\!\.][".$wacko->language['ALPHANUM_P']."\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\-\_\=]?)$/s", $thing, $matches))
 		{
-			return $wacko->PreLink($matches[1]).$matches[2];
+			return $wacko->pre_link($matches[1]).$matches[2];
 		}
 		// tikiwiki links
 		else if ((!$wacko->_formatter_noautolinks) &&
 				$wacko->config['disable_tikilinks'] != 1 &&
 				(preg_match("/^(".$wacko->language['UPPER'].$wacko->language['LOWER'].$wacko->language['ALPHANUM']."*\.".$wacko->language['ALPHA'].$wacko->language['ALPHANUM']."+)$/s", $thing, $matches)))
 		{
-			return $wacko->PreLink($thing);
+			return $wacko->pre_link($thing);
 		}
 		// npj links
 		else if ((!$wacko->_formatter_noautolinks) &&
@@ -963,7 +963,7 @@ class WackoFormatter
 		{
 			if ($matches[1] == "~")
 			return $matches[2];
-			return $wacko->PreLink($thing);
+			return $wacko->pre_link($thing);
 		}
 		// wacko links!
 		else if ((!$wacko->_formatter_noautolinks) &&
@@ -971,7 +971,7 @@ class WackoFormatter
 		{
 			if ($matches[1] == "~")
 			return $matches[4];
-			return $wacko->PreLink($thing);
+			return $wacko->pre_link($thing);
 		}
 
 		if (($thing[0] == "~") && ($thing[1] != "~")) $thing=ltrim($thing, "~");

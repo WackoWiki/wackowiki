@@ -35,29 +35,29 @@ $query = "SELECT p.supertag ".
 			#"AND p.body != '{{randompage}}' ". // very expensive
 			"LIMIT {$max}";
 
-$pages = $this->LoadAll($query, 1);
+$pages = $this->load_all($query, 1);
 
 is_array ( $pages )
 	? $page = array_rand ( $pages )
 	: $page = $this->config['root_page'];
 
-if (isset($test) || ($user = $this->GetUser()))
+if (isset($test) || ($user = $this->get_user()))
 {
 	if (isset($test) || $user["dont_redirect"] == "1" || $_POST['redirect'] == "no")
 	{
 		// show only result
-		echo $this->ComposeLinkToPage($pages[$page]['supertag']);
+		echo $this->compose_link_to_page($pages[$page]['supertag']);
 	}
 	else
 	{
 		// redirect to random page
-		$this->Redirect($this->href("", $pages[$page]['supertag']));
+		$this->redirect($this->href("", $pages[$page]['supertag']));
 	}
 }
 else
 {
 	// redirect to random page
-	$this->Redirect($this->href("", $pages[$page]['supertag']));
+	$this->redirect($this->href("", $pages[$page]['supertag']));
 }
 
 ?>

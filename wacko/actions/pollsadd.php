@@ -17,11 +17,11 @@ $plural = "";
 $startmod = "";
 
 // create polls object
-$this->UseClass("polls");
+$this->use_class("polls");
 $pollsObj = new Polls($this);
 
 // define context
-$admin = $this->IsAdmin();
+$admin = $this->is_admin();
 
 // basic privilege check for moderation mode
 if ($moderation === true && !$admin) $moderation === false;
@@ -91,63 +91,63 @@ if (isset($_POST['submitpoll']))
 	}
 
 	// missing poll topic
-	if ($topic == '') $error = $this->GetTranslation('PollsNeedTopic');
+	if ($topic == '') $error = $this->get_translation('PollsNeedTopic');
 	// we need at least two alternate answers
-	if (count($answers) < 2) $error .= ' '.$this->GetTranslation('PollsNeedAnswers');
+	if (count($answers) < 2) $error .= ' '.$this->get_translation('PollsNeedAnswers');
 	// captcha validation
-	if (!$this->GetUser() && $this->ValidateCAPTCHA() === false)
-		$error .= ' '.$this->GetTranslation('CaptchaFailed');
+	if (!$this->get_user() && $this->ValidateCAPTCHA() === false)
+		$error .= ' '.$this->get_translation('CaptchaFailed');
 
 	// in case no errors found submit poll or changes to the db
 	if (!$error)
 	{
-		if (!$user)		$user		= $this->GetUserId();
-		if (!$user)		$user		= $this->GetUserIP();
+		if (!$user)		$user		= $this->get_user_id();
+		if (!$user)		$user		= $this->get_user_ip();
 		if (!$edit_id)	$edit_id	= $pollsObj->GetLastPollID() + 1;
 		// remove moderated poll
 		if ($moderation === true)	  $pollsObj->RemovePoll($edit_id);
 		// save new or update moderated poll
 		$pollsObj->SubmitPoll($edit_id, $topic, $plural, $answers, $user, ($startmod == 1 && $admin ? 1 : 0));
 		// update page cache
-		if ($this->tag) $this->cache->CacheInvalidate($this->supertag);
+		if ($this->tag) $this->cache->cache_invalidate($this->supertag);
 		// update news RSS feed
 		if ($startmod == 1)
 		{
-			#$this->UseClass('rss');
-			#$xml = new RSS($this);
-			#$xml->News();
+			#$this->use_class('rss');
+			#$xml = new rss($this);
+			#$xml->news();
 			unset($xml);
 		}
 		// set confirmation message
-		if ($moderation !== true)	  $message = $this->GetTranslation('PollsSubmitted').
+		if ($moderation !== true)	  $message = $this->get_translation('PollsSubmitted').
 									  ($startmod == 1 && $admin
 									  	? ''
-										: ' '.$this->GetTranslation('PollsSubmittedMod'));
+										: ' '.$this->get_translation('PollsSubmittedMod'));
 		// stopping moderation
 		if ($moderation === true)	  $stop_mod = true;
 		// notify wiki owner & log event
 		if ($user != $this->config['admin_name'] && $moderation !== true)
 		{
-			$subject = $this->config['wacko_name'].'. '.$this->GetTranslation('PollsNotifySubj');
-			$email	 = $this->GetTranslation('MailHello').
+			$subject = $this->config['wacko_name'].'. '.$this->get_translation('PollsNotifySubj');
+			$email	 = $this->get_translation('MailHello').
 					   $this->config['admin_name'].".\n\n".
-					   str_replace('%1', $user, $this->GetTranslation('PollsNotifyBody'))."\n".
-					   $this->Href('', 'admin.php')."\n\n".
-					   $this->GetTranslation('MailGoodbye')."\n".
+					   str_replace('%1', $user, $this->get_translation('PollsNotifyBody'))."\n".
+					   $this->href('', 'admin.php')."\n\n".
+					   $this->get_translation('MailGoodbye')."\n".
 					   $this->config['wacko_name']."\n".
 					   $this->config['base_url'];
-			$this->SendMail($this->config['admin_email'], $subject, $email);
-			$this->Log(4, str_replace('%1', $edit_id, $this->GetTranslation('LogPollCreated', $this->config['language'])));
+			$this->send_mail($this->config['admin_email'], $subject, $email);
+			$this->log(4, str_replace('%1', $edit_id, $this->get_translation('LogPollCreated', $this->config['language'])));
 		}
 		else if ($moderation === true)
 		{
-			$this->Log(4, str_replace('%1', $edit_id, $this->GetTranslation('LogPollChanged', $this->config['language'])));
+			$this->log(4, str_replace('%1', $edit_id, $this->get_translation('LogPollChanged', $this->config['language'])));
 		}
 
 		// log if we started a poll
 		if ($startmod == 1 && $admin)
 		{
-			$this->Log(4, str_replace('%1', $edit_id, $this->GetTranslation('LogPollStarted', $this->config['language'])));
+			$this->log(4, str_replace('%1', $edit_id, $this->get_translation('LogPollStarted', $this->config['language'])));
 		}
 	}
 }
@@ -181,31 +181,31 @@ if ($stop_mod !== true)
 }
 
 // print error message, if any
-if ($error) $this->SetMessage($error);
+if ($error) $this->set_message($error);
 
 // for successful submit print a message
 // else show input form
 if ($message)
 {
-	$this->SetMessage($message);
+	$this->set_message($message);
 }
 else if ($stop_mod !== true)
 {
 	// printing form
-	echo $this->FormOpen('', $mode_file, 'post', '', '', '#pollsadd_form');
+	echo $this->form_open('', $mode_file, 'post', '', '', '#pollsadd_form');
 	echo ($moderation === true ? '<input name="mode" type="hidden" value="'.$mode.'" />'.
 		'<input name="moderation" type="hidden" value="'.$edit_id.'" />'.
 		'<input name="user" type="hidden" value="'.$user.'" />' : '');
 	echo '<a name="pollsadd_form"></a><table cellspacing="3" class="formation">';
 	echo '<tr>';
-		echo '<th>'.$this->GetTranslation('PollsTopic').':</th>';
+		echo '<th>'.$this->get_translation('PollsTopic').':</th>';
 		echo '<th style="text-align:left;"><input name="topic" type="text" size="70" maxlength="250" value="'.$topic.'" style="font-weight:normal;" /></th>';
 	echo '</tr>';
 	// fill out survey answers
 	foreach ($vars as $var)
 	{
 		echo '<tr>';
-			echo '<td class="label">'.$this->GetTranslation('PollsVariant').' '.$var['v_id'].':</td>';
+			echo '<td class="label">'.$this->get_translation('PollsVariant').' '.$var['v_id'].':</td>';
 			echo '<td><input name="'.$var['v_id'].'" type="text" size="40" maxlength="250" value="'.$var['text'].'" /></td>';
 		echo '</tr>';
 	}
@@ -213,26 +213,26 @@ else if ($stop_mod !== true)
 		echo '<td></td>';
 		echo '<td>';
 		if ($total_vars < 20)
-			echo '<input name="addvar" id="submit" type="submit" value="'.$this->GetTranslation('PollsAddVariant').'" /> ';
+			echo '<input name="addvar" id="submit" type="submit" value="'.$this->get_translation('PollsAddVariant').'" /> ';
 		if ($total_vars > 5)
-			echo '<input name="delvar" id="submit" type="submit" value="'.$this->GetTranslation('PollsDelVariant').'" />';
+			echo '<input name="delvar" id="submit" type="submit" value="'.$this->get_translation('PollsDelVariant').'" />';
 		echo '</td>';
 	echo '</tr>';
 	echo '<tr><td colspan="2">'.
 		'<input name="plural" type="checkbox" id="plural" value="1"'.($plural == 1 ? ' checked="checked" ' : ' ').'/> '.
-		'<label for="plural">'.$this->GetTranslation('PollsPlural').'</label>'.
+		'<label for="plural">'.$this->get_translation('PollsPlural').'</label>'.
 		'</td></tr>';
 	echo '<tr><td colspan="2">';
 	// begin captcha output
-	echo '<input name="submitpoll" id="submit" type="submit" value="'.$this->GetTranslation('PollsSubmit').'" /> ',
-		( $this->GetUser() ? false : true );
+	echo '<input name="submitpoll" id="submit" type="submit" value="'.$this->get_translation('PollsSubmit').'" /> ',
+		( $this->get_user() ? false : true );
 	// end captcha output
-		echo ($moderation === true ? '<input name="cancel" id="button" type="button" value="'.$this->GetTranslation('PollsCancel').'" onclick="document.location=\''.addslashes($this->href('', $mode_file, $mode_http)).'\';" />' : '').
+		echo ($moderation === true ? '<input name="cancel" id="button" type="button" value="'.$this->get_translation('PollsCancel').'" onclick="document.location=\''.addslashes($this->href('', $mode_file, $mode_http)).'\';" />' : '').
 			($admin ? '&nbsp;&nbsp;&nbsp;&nbsp;<input name="startmod" type="checkbox" id="startmod" value="1"'.($startmod == 1 ? ' checked="checked" ' : ' ').'/> '.
-			'<label for="startmod">'.$this->GetTranslation('PollsStartMod').'</label>' : '').
+			'<label for="startmod">'.$this->get_translation('PollsStartMod').'</label>' : '').
 			'</td></tr>';
 	echo '</table>';
-	echo $this->FormClose();
+	echo $this->form_close();
 }
 
 // destroy polls object

@@ -24,12 +24,12 @@ function admin_deletedpages(&$engine, &$module)
 	// clear specific page revisions
 	if (isset($_GET['remove']))
 	{
-		$engine->Query(
+		$engine->query(
 			"DELETE FROM {$engine->config['table_prefix']}revision ".
 			"WHERE tag = '".quote($engine->dblink, $_GET['remove'])."'");
 	}
 
-	$pages = $engine->LoadRecentlyDeleted(100000, 0);
+	$pages = $engine->load_recently_deleted(100000, 0);
 ?>
 	<p>
 		List of removed pages, copies which were in the table revision.
@@ -56,8 +56,8 @@ function admin_deletedpages(&$engine, &$module)
 			// print entry
 			echo '<tr>'.
 					'<td style="text-align:left">'.
-						'<small>('.date($engine->config['time_format_seconds'], strtotime($time)).' - <a href="'.rawurldecode($engine->href()).'&amp;remove='.$page['tag'].'">'.$engine->GetTranslation('RemoveButton').'</a>)</small> '.
-						$engine->ComposeLinkToPage($page['tag'], 'revisions', '', 0).
+						'<small>('.date($engine->config['time_format_seconds'], strtotime($time)).' - <a href="'.rawurldecode($engine->href()).'&amp;remove='.$page['tag'].'">'.$engine->get_translation('RemoveButton').'</a>)</small> '.
+						$engine->compose_link_to_page($page['tag'], 'revisions', '', 0).
 					'</td>'.
 				"</tr>\n";
 		}
@@ -66,7 +66,7 @@ function admin_deletedpages(&$engine, &$module)
 	}
 	else
 	{
-		echo $engine->GetTranslation('NoRecentlyDeleted');
+		echo $engine->get_translation('NoRecentlyDeleted');
 	}
 }
 
