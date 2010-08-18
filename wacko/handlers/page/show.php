@@ -7,7 +7,7 @@ if ($this->config['hide_rating'] != 1 && ($this->config["hide_rating"] != 2 || $
 {
 	// registering local functions
 	// determine if user has rated a given page
-	function HandlerShowPageIsRated(&$engine, $id)
+	function handler_show_page_is_rated(&$engine, $id)
 	{
 		$cookie	= $engine->get_cookie('rating');
 		$ids	= explode(';', $cookie);
@@ -398,7 +398,7 @@ if ($this->page)
 	if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 1 && ($this->config["hide_rating"] != 2 || $this->get_user()))
 	{
 		// determine if user has rated this page
-		if (HandlerShowPageIsRated($this, $this->page['page_id']) === false && $_GET['show_rating'] != 1)
+		if (handler_show_page_is_rated($this, $this->page['page_id']) === false && $_GET['show_rating'] != 1)
 		{
 			// display rating header
 			echo '<a name="rating"></a>';
@@ -434,7 +434,7 @@ if ($this->page)
 			echo '<a name="rating"></a>';
 			echo '<div id="rateheader">';
 			echo $this->get_translation('RatingHeaderResults').
-				(HandlerShowPageIsRated($this, $this->page['page_id']) === false
+				(handler_show_page_is_rated($this, $this->page['page_id']) === false
 					? ' [<a href="'.$this->href('', '', 'show_rating=0').'#rating">'.$this->get_translation('RatingForm').'</a>]'
 					: '');
 			echo "</div>\n";

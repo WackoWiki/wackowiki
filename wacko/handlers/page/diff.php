@@ -4,9 +4,9 @@
 $output = "";
 $source = "";
 
-if (!function_exists('HandlerDiffload_pageById'))
+if (!function_exists('handler_diff_load_page_by_id'))
 {
-	function HandlerDiffload_pageById($wacko, $id)
+	function handler_diff_load_page_by_id($wacko, $id)
 	{
 		// extracting
 		if ($id != "-1")
@@ -37,8 +37,8 @@ if (!$this->page) $this->redirect($this->href("show"));
 // If asked, call original diff
 if ($this->has_access("read")) {
 
-	$pageA = HandlerDiffload_pageById($this, $b);
-	$pageB = HandlerDiffload_pageById($this, $a);
+	$pageA = handler_diff_load_page_by_id($this, $b);
+	$pageB = handler_diff_load_page_by_id($this, $a);
 
 	if ($this->has_access("read", $pageA['page_id']) && $this->has_access("read", $pageB['page_id']) ) {
 

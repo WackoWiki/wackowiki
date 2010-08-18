@@ -1,7 +1,7 @@
 <?php
 
 // tabbed theme output routine
-function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
+function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 {
 	/*
 	 To avoid creation of new classes we remember that we've created
@@ -46,13 +46,13 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 	src="<?php echo $this->config['base_url'];?>images/z.gif"
 	width="5" height="1" alt="" align="left" border="0" /><img
 	src="<?php echo $this->config['base_url'];?>images/z.gif"
-	width="5" height="1" alt="" align="right" border="0" /> <?php EchoTab( $this->href("show"),  $this->get_translation("ShowTip"),
+	width="5" height="1" alt="" align="right" border="0" /> <?php echo_tab( $this->href("show"),  $this->get_translation("ShowTip"),
 	$this->has_access("read") ? $this->get_translation("ShowText") : "",
 	$this->method != "show"
-	) ?> <?php EchoTab( $this->href("edit"),  $this->get_translation("EditTip"),
+	) ?> <?php echo_tab( $this->href("edit"),  $this->get_translation("EditTip"),
 	$this->has_access("write") ? $this->get_translation("EditText") : "",
 	$this->method != "edit"
-	) ?> <?php EchoTab( $this->href("revisions"),  $this->get_translation("RevisionTip"),
+	) ?> <?php echo_tab( $this->href("revisions"),  $this->get_translation("RevisionTip"),
 	$this->page['modified'] ? $this->get_page_time_formatted() : "",
 	$this->method != "revisions"
 	) ?> <?php
@@ -61,7 +61,7 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 	{
 		if($this->has_access("write") && $this->get_user() || $this->is_admin())
 		{
-			EchoTab( $this->href("properties"),  $this->get_translation("SettingsTip"),
+			echo_tab( $this->href("properties"),  $this->get_translation("SettingsTip"),
 			$this->get_translation("PropertiesText"),
 			$this->method != "properties"
 			);
@@ -70,14 +70,14 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 		// if owner is current user
 		if ($this->user_is_owner())
 		{
-			EchoTab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->get_translation("EditACLConfirm")."\");":""),
+			echo_tab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->get_translation("EditACLConfirm")."\");":""),
 			$this->get_translation("ACLText"),
 			$this->method != "acls"
 			);
 		}
 		if ($this->is_admin() || (!$this->config['remove_onlyadmins'] && $this->user_is_owner()))
 		{
-			EchoTab( $this->href("remove"),  $this->get_translation("DeleteTip")."",
+			echo_tab( $this->href("remove"),  $this->get_translation("DeleteTip")."",
 				'<img src="'.$this->config['theme_url'].'icons/del'.($this->method != "remove"?"":"_").'.gif" width="14" height="15" alt="" />'.$this->get_translation("DeleteText"),
 			$this->method != "remove",
 				"2a"
@@ -88,7 +88,7 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 	<?php
 	if ($this->get_user())
 	{
-		EchoTab( $this->href("new"), $this->get_translation("CreateNewPage"),
+		echo_tab( $this->href("new"), $this->get_translation("CreateNewPage"),
 		$this->has_access("write") ? $this->get_translation("CreateNewPage") : "",
 		$this->method != "new",
 		"2"
@@ -97,7 +97,7 @@ function EchoTab( $link, $hint, $text, $selected = false, $bonus = "" )
 	<?php
 	if ($this->get_user())
 	{
-		EchoTab( $this->href("referrers"), $this->get_translation("ReferrersTip"),
+		echo_tab( $this->href("referrers"), $this->get_translation("ReferrersTip"),
 		$this->get_translation("ReferrersText"),
 		$this->method != "referrers",
 		"2"

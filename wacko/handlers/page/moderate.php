@@ -12,7 +12,7 @@
 <?php
 
 // local functions
-function ModeratePageExists(&$engine, $tag)
+function moderate_page_exists(&$engine, $tag)
 {
 	if ($page = $engine->load_single(
 	"SELECT page_id ".
@@ -25,7 +25,7 @@ function ModeratePageExists(&$engine, $tag)
 }
 
 // applicable for both topics and comments
-function ModerateDeletePage(&$engine, $tag)
+function moderate_delete_page(&$engine, $tag)
 {
 	if (!$tag) return false;
 	$engine->remove_referrers($tag);
@@ -39,7 +39,7 @@ function ModerateDeletePage(&$engine, $tag)
 	return true;
 }
 
-function ModerateRenameTopic(&$engine, $oldtag, $newtag, $title = '')
+function moderate_rename_topic(&$engine, $oldtag, $newtag, $title = '')
 {
 	// set forum context
 	$forum_context	= $engine->forum;
@@ -85,7 +85,7 @@ function ModerateRenameTopic(&$engine, $oldtag, $newtag, $title = '')
 	return true;
 }
 
-function ModerateMergeTopics(&$engine, $base, $topics, $movetopics = true)
+function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 {
 	// set forum context
 	$forum_context	= $engine->forum;
@@ -129,7 +129,7 @@ function ModerateMergeTopics(&$engine, $base, $topics, $movetopics = true)
 					"WHERE tag = '".quote($this->dblink, 'Comment'.$num)."'");
 
 				// remove old page remnants
-				ModerateDeletePage($engine, $topic);
+				moderate_delete_page($engine, $topic);
 			}
 		}
 	}
@@ -166,7 +166,7 @@ function ModerateMergeTopics(&$engine, $base, $topics, $movetopics = true)
 	return true;
 }
 
-function ModerateSplitTopic(&$engine, $comment_ids, $oldtag, $newtag, $title)
+function moderate_split_topic(&$engine, $comment_ids, $oldtag, $newtag, $title)
 {
 	if (is_array($comment_ids) === false) return false;
 
@@ -211,7 +211,7 @@ function ModerateSplitTopic(&$engine, $comment_ids, $oldtag, $newtag, $title)
 	}
 
 	// remove old first comment
-	ModerateDeletePage($engine, $first_tag);
+	moderate_delete_page($engine, $first_tag);
 
 	// update link table
 	$page = $engine->load_page($newtag);
@@ -326,7 +326,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				foreach ($set as $id)
 				{
 					$page = $this->load_page($this->get_tag_by_id($id), '', LOAD_NOCACHE, LOAD_META);
-					ModerateDeletePage($this, $page['tag']);
+					moderate_delete_page($this, $page['tag']);
 					$this->log(1, str_replace('%2', $page['user_id'], str_replace('%1', $page['tag'], $this->get_translation('LogRemovedPage', $this->config['language']))));
 				}
 				unset($acceptAction);
@@ -350,7 +350,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$oldtags[] = $this->get_tag_by_id($id);
 					$newtags[] = $_POST['section'].substr($oldtags[$i], strrpos($oldtags[$i], '/'));
 
-					if (ModeratePageExists($this, $newtags[$i++]) === true)
+					if (moderate_page_exists($this, $newtags[$i++]) === true)
 						$error[] = '<u>&laquo;'.$this->get_page_title('', $id).'&raquo;</u>';
 				}
 
@@ -364,7 +364,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$i = 0;
 					foreach ($set as $id)
 					{
-						ModerateRenameTopic($this, $oldtags[$i], $newtags[$i]);
+						moderate_rename_topic($this, $oldtags[$i], $newtags[$i]);
 						$this->log(3, str_replace('%2', $newtags[$i], str_replace('%1', $oldtags[$i], $this->get_translation('LogRenamedPage', $this->config['language']))));
 						$i++;
 					}
@@ -392,13 +392,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tag		= str_replace(array(' ', "\t"), '', $tag);
 
 				// check new tag existance
-				if ($oldtag != $this->tag.'/'.$tag && ModeratePageExists($this, $this->tag.'/'.$tag) === true)
+				if ($oldtag != $this->tag.'/'.$tag && moderate_page_exists($this, $this->tag.'/'.$tag) === true)
 					$error = $this->get_translation('ModerateRenameExists');
 
 				// okey, then rename page
 				if ($tag != '' && $error != true)
 				{
-					ModerateRenameTopic($this, $oldtag, $this->tag.'/'.$tag, $title);
+					moderate_rename_topic($this, $oldtag, $this->tag.'/'.$tag, $title);
 					$this->log(3, str_replace('%2', $this->tag.'/'.$tag.' '.$title, str_replace('%1', $oldtag, $this->get_translation('LogRenamedPage', $this->config['language']))));
 					unset($acceptAction, $oldtag, $tag, $title);
 					$xml->comments();
@@ -425,7 +425,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				{
 					$topics[] = $this->get_tag_by_id($id);
 				}
-				ModerateMergeTopics($this, $_POST['base'], $topics);
+				moderate_merge_topics($this, $_POST['base'], $topics);
 				$this->log(3, str_replace('%2', $_POST['base'], str_replace('%1', '##'.implode('##, ##', $topics).'##', $this->get_translation('LogMergedPages', $this->config['language']))));
 				unset($acceptAction, $topics);
 				$xml->comments();
@@ -658,7 +658,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			if ($_POST['accept'])
 			{
 				$this->log(1, str_replace('%2', $this->page['user_id'], str_replace('%1', $this->page['tag'], $this->get_translation('LogRemovedPage', $this->config['language']))));
-				ModerateDeletePage($this, $this->tag);
+				moderate_delete_page($this, $this->tag);
 				unset($acceptAction);
 				$xml->comments();
 				$this->set_message('Topic has been successfully removed.'); // ru: Тема успешно удалена.
@@ -682,16 +682,16 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				{
 					if ($_POST['cluster'] && $_POST['cluster'] != '/')
 					{
-						if (ModeratePageExists($this, $_POST['cluster']) === false) $error = $this->get_translation('ModerateMoveNotExists');
+						if (moderate_page_exists($this, $_POST['cluster']) === false) $error = $this->get_translation('ModerateMoveNotExists');
 					}
 					else if ($_POST['section'])
 					{
-						if (ModeratePageExists($this, $newtag) === true) $error = '<u>&laquo;'.$this->page['title'].'&raquo;</u>';
+						if (moderate_page_exists($this, $newtag) === true) $error = '<u>&laquo;'.$this->page['title'].'&raquo;</u>';
 					}
 				}
 				else if ($_POST['cluster'] != '/')
 				{
-					if (ModeratePageExists($this, $_POST['cluster']) === false) $error = $this->get_translation('ModerateMoveNotExists');
+					if (moderate_page_exists($this, $_POST['cluster']) === false) $error = $this->get_translation('ModerateMoveNotExists');
 				}
 
 				// in case no errors, move...
@@ -701,7 +701,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 				else
 				{
-					ModerateRenameTopic($this, $oldtag, $newtag);
+					moderate_rename_topic($this, $oldtag, $newtag);
 					$this->log(3, str_replace('%2', $newtag, str_replace('%1', $oldtag, $this->get_translation('LogRenamedPage', $this->config['language']))));
 					unset($acceptAction);
 					$xml->comments();
@@ -729,13 +729,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$newtag		= ( $section ? $section.'/' : '' ).$tag;
 
 				// check new tag existance
-				if ($oldtag == $newtag || ModeratePageExists($this, $newtag) === true)
+				if ($oldtag == $newtag || moderate_page_exists($this, $newtag) === true)
 					$error = $this->get_translation('ModerateRenameExists');
 
 				// okey, then rename page
 				if ($tag != '' && $error != true)
 				{
-					ModerateRenameTopic($this, $oldtag, $newtag, $title);
+					moderate_rename_topic($this, $oldtag, $newtag, $title);
 					$this->log(3, str_replace('%2', $newtag.' '.$title, str_replace('%1', $oldtag, $this->get_translation('LogRenamedPage', $this->config['language']))));
 					unset($acceptAction);
 					$xml->comments();
@@ -772,7 +772,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				foreach ($set as $id)
 				{
 					$page = $this->load_page($this->get_tag_by_id($id), '', LOAD_NOCACHE, LOAD_META);
-					ModerateDeletePage($this, $page['tag']);
+					moderate_delete_page($this, $page['tag']);
 					$this->log(1, str_replace('%3', $this->get_time_string_formatted($page['created']), str_replace('%2', $page['user'], str_replace('%1', $page['comment_on'].' '.$this->get_page_title($page['comment_on']), $this->get_translation('LogRemovedComment', $this->config['language'])))));
 				}
 
@@ -810,13 +810,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				if ($forumCluster === true)
 				{
 					// check new tag existance
-					if ($oldtag != $section.'/'.$tag && ModeratePageExists($this, $section.'/'.$tag) === true)
+					if ($oldtag != $section.'/'.$tag && moderate_page_exists($this, $section.'/'.$tag) === true)
 						$error = $this->get_translation('ModerateRenameExists');
 				}
 				else
 				{
 					// check desired target tag existance
-					if (ModeratePageExists($this, $title) === false)
+					if (moderate_page_exists($this, $title) === false)
 						$error = $this->get_translation('ModerateMoveNotExists');
 				}
 
@@ -851,7 +851,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 					if ($forumCluster === true)
 					{
-						if (ModerateSplitTopic($this, $comment_ids, $oldtag, $section.'/'.$tag, $title) === true)
+						if (moderate_split_topic($this, $comment_ids, $oldtag, $section.'/'.$tag, $title) === true)
 						{
 							$this->log(3, str_replace('%2', $section.'/'.$tag.' '.$title, str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogSplittedPage', $this->config['language']))));
 							unset($acceptAction);
