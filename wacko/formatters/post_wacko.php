@@ -1,6 +1,6 @@
 <?php
 
-$this->UseClass("post_wacko", "formatters/classes/");
+$this->use_class("post_wacko", "formatters/classes/");
 
 $parser = new post_wacko($this, $options);
 

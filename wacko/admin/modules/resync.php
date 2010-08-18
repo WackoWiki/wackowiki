@@ -25,7 +25,7 @@ function admin_resync(&$engine, &$module)
 		if ($_REQUEST['action'] == 'userstats')
 		{
 			// total pages in ownership
-			$users = $engine->LoadAll(
+			$users = $engine->load_all(
 				"SELECT p.owner_id, COUNT(p.tag) AS n ".
 				"FROM {$engine->config['table_prefix']}page AS p, {$engine->config['user_table']} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' ".
@@ -33,7 +33,7 @@ function admin_resync(&$engine, &$module)
 
 			foreach ($users as $user)
 			{
-				$engine->Query(
+				$engine->query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_pages = ".(int)$user['n']." ".
 					"WHERE user_id = '".quote($engine->dblink, $user['owner_id'])."' ".
@@ -41,7 +41,7 @@ function admin_resync(&$engine, &$module)
 			}
 
 			// total comments posted
-			$users = $engine->LoadAll(
+			$users = $engine->load_all(
 				"SELECT p.user_id, COUNT(p.tag) AS n ".
 				"FROM {$engine->config['table_prefix']}page AS p, {$engine->config['user_table']} AS u ".
 				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' ".
@@ -49,7 +49,7 @@ function admin_resync(&$engine, &$module)
 
 			foreach ($users as $user)
 			{
-				$engine->Query(
+				$engine->query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_comments = ".(int)$user['n']." ".
 					"WHERE user_id = '".quote($engine->dblink, $user['user_id'])."' ".
@@ -57,7 +57,7 @@ function admin_resync(&$engine, &$module)
 			}
 
 			// total revisions made
-			$users = $engine->LoadAll(
+			$users = $engine->load_all(
 				"SELECT r.user_id, COUNT(r.tag) AS n ".
 				"FROM {$engine->config['table_prefix']}revision AS r, {$engine->config['user_table']} AS u ".
 				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' ".
@@ -65,14 +65,14 @@ function admin_resync(&$engine, &$module)
 
 			foreach ($users as $user)
 			{
-				$engine->Query(
+				$engine->query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_revisions = ".(int)$user['n']." ".
 					"WHERE user_id = '".quote($engine->dblink, $user['user_id'])."' ".
 					"LIMIT 1");
 			}
 
-			$engine->Log(1, 'Synchronized user statistics');
+			$engine->log(1, 'Synchronized user statistics');
 ?>
 			<p>
 				<em>Statistics users synchronized.</em>
@@ -82,15 +82,15 @@ function admin_resync(&$engine, &$module)
 		}
 		else if ($_REQUEST['action'] == 'rssfeeds')
 		{
-			$engine->UseClass('rss');
-			$xml = new RSS($engine);
-			$xml->Changes();
-			$xml->Comments();
+			$engine->use_class('rss');
+			$xml = new rss($engine);
+			$xml->changes();
+			$xml->comments();
 			if ($engine->config['news_cluster'])
 			{
-				$xml->News();
+				$xml->news();
 			}
-			$engine->Log(1, 'Synchronized RSS feeds');
+			$engine->log(1, 'Synchronized RSS feeds');
 			unset($xml);
 ?>
 			<p>
@@ -111,12 +111,12 @@ function admin_resync(&$engine, &$module)
 			{
 				// truncate table
 				$i = 0;
-				$engine->Query("DELETE FROM {$engine->config['table_prefix']}link");
+				$engine->query("DELETE FROM {$engine->config['table_prefix']}link");
 			}
 
-			$engine->SetUserSetting('dont_redirect', '1', 1);
+			$engine->set_user_setting('dont_redirect', '1', 1);
 
-			if ($pages = $engine->LoadAll("SELECT * FROM {$engine->config['table_prefix']}page LIMIT ".($i*$limit).", $limit"))
+			if ($pages = $engine->load_all("SELECT * FROM {$engine->config['table_prefix']}page LIMIT ".($i*$limit).", $limit"))
 			{
 				foreach ($pages as $n => $page)
 				{
@@ -127,17 +127,17 @@ function admin_resync(&$engine, &$module)
 					{
 
 						// build html body
-						$page['body_r'] = $engine->Format($engine->Format(( $body_t ? $body_t : $page['body'] ), 'bbcode'), 'wacko');
+						$page['body_r'] = $engine->format($engine->format(( $body_t ? $body_t : $page['body'] ), 'bbcode'), 'wacko');
 
 						// build toc
 						if ($engine->config['paragrafica'] && $page['comment_on_id'] == '0' && $page['body_toc'] == '')
 						{
-							$page['body_r']		= $engine->Format($page['body_r'], 'paragrafica');
+							$page['body_r']		= $engine->format($page['body_r'], 'paragrafica');
 							$page['body_toc']	= $engine->body_toc;
 						}
 
 						// store to DB
-						$engine->Query(
+						$engine->query(
 							"UPDATE {$engine->config['table_prefix']}page SET ".
 								"body_r		= '".quote($engine->dblink, $page['body_r'])."', ".
 								"body_toc	= '".quote($engine->dblink, $page['body_toc'])."' ".
@@ -149,15 +149,15 @@ function admin_resync(&$engine, &$module)
 
 					// rendering links
 					$engine->context[++$engine->current_context] = ( $page['comment_on_id'] ? $page['comment_on_id'] : $page['tag'] );
-					$engine->ClearLinkTable();
-					$engine->StartLinkTracking();
-					$dummy = $engine->Format($page['body_r'], 'post_wacko');
-					$engine->StopLinkTracking();
-					$engine->WriteLinkTable($page['page_id']);
-					$engine->ClearLinkTable();
+					$engine->clear_link_table();
+					$engine->start_link_tracking();
+					$dummy = $engine->format($page['body_r'], 'post_wacko');
+					$engine->stop_link_tracking();
+					$engine->write_link_table($page['page_id']);
+					$engine->clear_link_table();
 					$engine->current_context--;
 				}
-				$engine->Redirect('/admin.php?mode='.$module['mode'].'&start=1&action=wikilinks&i='.(++$i));
+				$engine->redirect('/admin.php?mode='.$module['mode'].'&start=1&action=wikilinks&i='.(++$i));
 			}
 			else
 			{

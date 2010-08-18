@@ -30,16 +30,16 @@ function admin_sysupdate(&$engine, &$module)
 		// acls
 		if ((int)$_REQUEST['step'] === 1)
 		{
-			if ($pages = $engine->LoadAll("SELECT tag FROM {$engine->config['table_prefix']}acl LIMIT ".($i*$limit).", $limit"))
+			if ($pages = $engine->load_all("SELECT tag FROM {$engine->config['table_prefix']}acl LIMIT ".($i*$limit).", $limit"))
 			{
 				foreach ($pages as $page)
 				{
-					#$engine->Query(
+					#$engine->query(
 					#	"UPDATE {$engine->config['table_prefix']}acl ".
-					#	"SET supertag = '".$engine->NpjTranslit($page['tag'])."' ".
+					#	"SET supertag = '".$engine->npj_translit($page['tag'])."' ".
 					#	"WHERE tag = '".$page['tag']."'");
 				}
-				$engine->Redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
+				$engine->redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
 			}
 			else
 			{
@@ -59,16 +59,16 @@ function admin_sysupdate(&$engine, &$module)
 		// links
 		else if ((int)$_REQUEST['step'] === 2)
 		{
-			if ($pages = $engine->LoadAll("SELECT to_tag FROM {$engine->config['table_prefix']}link LIMIT ".($i*$limit).", $limit"))
+			if ($pages = $engine->load_all("SELECT to_tag FROM {$engine->config['table_prefix']}link LIMIT ".($i*$limit).", $limit"))
 			{
 				foreach ($pages as $page)
 				{
-					$engine->Query(
+					$engine->query(
 						"UPDATE {$engine->config['table_prefix']}link ".
-						"SET to_supertag = '".$engine->NpjTranslit($page['to_tag'])."' ".
+						"SET to_supertag = '".$engine->npj_translit($page['to_tag'])."' ".
 						"WHERE to_tag = '".$page['to_tag']."'");
 				}
-				$engine->Redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
+				$engine->redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
 			}
 			else
 			{
@@ -88,16 +88,16 @@ function admin_sysupdate(&$engine, &$module)
 		// pages
 		else if ((int)$_REQUEST['step'] === 3)
 		{
-			if ($pages = $engine->LoadAll("SELECT page_id, tag FROM {$engine->config['table_prefix']}page LIMIT ".($i*$limit).", $limit"))
+			if ($pages = $engine->load_all("SELECT page_id, tag FROM {$engine->config['table_prefix']}page LIMIT ".($i*$limit).", $limit"))
 			{
 				foreach ($pages as $page)
 				{
-					$engine->Query(
+					$engine->query(
 						"UPDATE {$engine->config['table_prefix']}page SET ".
-							"supertag = '".$engine->NpjTranslit($page['tag'])."' ".
+							"supertag = '".$engine->npj_translit($page['tag'])."' ".
 						"WHERE page_id = ".$page['page_id']);
 				}
-				$engine->Redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
+				$engine->redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
 			}
 			else
 			{
@@ -117,16 +117,16 @@ function admin_sysupdate(&$engine, &$module)
 		// revisions
 		else if ((int)$_REQUEST['step'] === 4)
 		{
-			if ($pages = $engine->LoadAll("SELECT revision_id, tag FROM {$engine->config['table_prefix']}revision LIMIT ".($i*$limit).", $limit"))
+			if ($pages = $engine->load_all("SELECT revision_id, tag FROM {$engine->config['table_prefix']}revision LIMIT ".($i*$limit).", $limit"))
 			{
 				foreach ($pages as $page)
 				{
-					$engine->Query(
+					$engine->query(
 						"UPDATE {$engine->config['table_prefix']}revision ".
-						"SET supertag = '".$engine->NpjTranslit($page['tag'])."' ".
+						"SET supertag = '".$engine->npj_translit($page['tag'])."' ".
 						"WHERE revision_id = ".$page['revision_id']);
 				}
-				$engine->Redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
+				$engine->redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
 			}
 			else
 			{
@@ -154,7 +154,7 @@ function admin_sysupdate(&$engine, &$module)
 					if (is_dir($dir.'/'.$file) !== true && $file != '.htaccess')
 					{
 						chmod($dir.'/'.$file, 0755);
-						rename($dir.'/'.$file, $dir.'/'.$engine->NpjTranslit($file));
+						rename($dir.'/'.$file, $dir.'/'.$engine->npj_translit($file));
 					}
 				}
 				closedir($dh);
@@ -162,10 +162,10 @@ function admin_sysupdate(&$engine, &$module)
 
 			$version = '4.3.rc2';
 
-			$engine->Query(
+			$engine->query(
 				"UPDATE {$engine->config['table_prefix']}config ".
 				"SET wackowiki_version = '$version'");
-			$engine->Log(1, 'Upgrading to version WackoWiki '.$version);
+			$engine->log(1, 'Upgrading to version WackoWiki '.$version);
 ?>
 			<ol>
 				<li value="5"><s>Transliterate the names of attached files</s>.</li>

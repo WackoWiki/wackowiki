@@ -24,7 +24,7 @@ if (!function_exists('mainMenu'))
 
         foreach($menu as $menutarget => $menuname)
         {
-            $t_menutarget = $wobj->GetTranslation($menutarget);
+            $t_menutarget = $wobj->get_translation($menutarget);
             if ($t_menutarget) $menutarget = $t_menutarget;
             if (!(strpos($menutarget, 'http://') === 0 ||
                 strpos($menutarget, 'https://') === 0 ||
@@ -33,7 +33,7 @@ if (!function_exists('mainMenu'))
                 $menutarget = $base_url.$menutarget;
             }
 
-            $t_menuname = $wobj->GetTranslation($menuname);
+            $t_menuname = $wobj->get_translation($menuname);
             if ($t_menuname) $menuname = $t_menuname;
 
             $link = '<li><a href="'.$menutarget.'">'.$menuname.'</a></li>';

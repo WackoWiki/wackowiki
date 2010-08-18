@@ -219,7 +219,7 @@ class paragrafica
 		if ((isset($matches[7])) && $matches[7] != "")
 		{
 			if (isset($matches[8]) && $matches[8] == "")
-			$this->toc[] = array($this->wacko->UnwrapLink(trim($matches[7],'"')),"(include)",99999);
+			$this->toc[] = array($this->wacko->unwrap_link(trim($matches[7],'"')),"(include)",99999);
 		}
 		else
 		// id, text, depth

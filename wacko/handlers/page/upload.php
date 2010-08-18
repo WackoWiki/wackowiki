@@ -7,15 +7,15 @@ $error = "";
 $registered = "";
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->Redirect($this->href("show"));
+if (!$this->page) $this->redirect($this->href("show"));
 
 // deny for comment
 if ($this->page['comment_on_id'])
-	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page['comment_on_id']), "show_comments=1")."#".$this->page['tag']);
+	$this->redirect($this->href("", $this->get_comment_on_tag($this->page['comment_on_id']), "show_comments=1")."#".$this->page['tag']);
 
-if ($user = $this->GetUser())
+if ($user = $this->get_user())
 {
-	$user = strtolower($this->GetUserName());
+	$user = strtolower($this->get_user_name());
 	$registered = true;
 }
 else
@@ -27,10 +27,10 @@ if ($registered
 &&
 (
 ($this->config['upload'] === true) || ($this->config['upload'] == "1") ||
-($this->CheckACL($user,$this->config['upload']))
+($this->check_acl($user,$this->config['upload']))
 )
 &&
-($this->HasAccess("write") && $this->HasAccess("read") || ($_POST["to"] == "global"))
+($this->has_access("write") && $this->has_access("read") || ($_POST["to"] == "global"))
 )
 {
 	if (isset($_GET["remove"])) // show the form
@@ -40,7 +40,7 @@ if ($registered
 		else
 			$page_id = $this->page['page_id'];
 
-		$what = $this->LoadAll(
+		$what = $this->load_all(
 			"SELECT f.user_id, u.user_name AS user, f.upload_id, f.filename, f.filesize, f.description, f.uploaded_dt ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -49,20 +49,20 @@ if ($registered
 
 		if (sizeof($what) > 0)
 		{
-			if ($this->IsAdmin() || (
+			if ($this->is_admin() || (
 				$page_id && (
-				$this->page['owner_id'] == $this->GetUserId())) || (
-				$what[0]['user_id'] == $this->GetUserId()))
+				$this->page['owner_id'] == $this->get_user_id())) || (
+				$what[0]['user_id'] == $this->get_user_id()))
 			{
-				echo "<strong>".$this->GetTranslation("UploadRemoveConfirm")."</strong>";
-				echo $this->FormOpen("upload");
+				echo "<strong>".$this->get_translation("UploadRemoveConfirm")."</strong>";
+				echo $this->form_open("upload");
 				// !!!!! place here a reference to delete files
 ?>
 	<br />
 	<ul class="upload">
-		<li><?php echo $this->Link( "file:".$_GET["file"] ); ?>
+		<li><?php echo $this->link( "file:".$_GET["file"] ); ?>
 			<ul>
-				<li><?php echo $this->GetTimeStringFormatted($what[0]["uploaded_dt"]); ?></li>
+				<li><?php echo $this->get_time_string_formatted($what[0]["uploaded_dt"]); ?></li>
 				<li><?php echo "(".$this->binary_multiples($what[0]['filesize'], true, true, true).")"; ?></li>
 				<li><?php echo $_GET["file"]; ?></li>
 				<li><?php echo $what[0]['description']; ?></li>
@@ -73,21 +73,21 @@ if ($registered
 	<input type="hidden" name="remove" value="<?php echo $_GET["remove"]?>" />
 	<input type="hidden" name="file" value="<?php echo $_GET["file"]?>" />
 	<input
-		name="submit" type="submit" value="<?php echo $this->GetTranslation("RemoveButton"); ?>" />
+		name="submit" type="submit" value="<?php echo $this->get_translation("RemoveButton"); ?>" />
 	&nbsp;
 	<input
-		type="button" value="<?php echo str_replace("\n"," ",$this->GetTranslation("EditCancelButton")); ?>"
+		type="button" value="<?php echo str_replace("\n"," ",$this->get_translation("EditCancelButton")); ?>"
 		onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
 	<br />
 	<br />
 <?php
-				echo $this->FormClose();
+				echo $this->form_close();
 			}
 			else
-				$this->SetMessage($this->GetTranslation("UploadRemoveDenied"));
+				$this->set_message($this->get_translation("UploadRemoveDenied"));
 		}
 		else
-			print($this->GetTranslation("UploadFileNotFound"));
+			print($this->get_translation("UploadFileNotFound"));
 
 		echo "</div>";
 		return true;
@@ -102,7 +102,7 @@ if ($registered
 		else
 			$page_id = $this->page['page_id'];
 
-		$what = $this->LoadAll(
+		$what = $this->load_all(
 			"SELECT f.user_id, u.user_name AS user, f.upload_id, f.filename, f.filesize, f.description ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -111,17 +111,17 @@ if ($registered
 
 		if (sizeof($what) > 0)
 		{
-			if ($this->IsAdmin() || (
+			if ($this->is_admin() || (
 				$page_id && (
-				$this->page['owner_id'] == $this->GetUserId())) || (
-				$what[0]['user_id'] == $this->GetUserId()))
+				$this->page['owner_id'] == $this->get_user_id())) || (
+				$what[0]['user_id'] == $this->get_user_id()))
 			{
 				// 2. remove from DB
-				$this->Query(
+				$this->query(
 					"DELETE FROM ".$this->config['table_prefix']."upload ".
 					"WHERE upload_id = '". quote($this->dblink, $what[0]['upload_id'])."'" );
 
-				$message .= $this->GetTranslation("UploadRemovedFromDB")."<br />";
+				$message .= $this->get_translation("UploadRemovedFromDB")."<br />";
 
 				// 3. remove from FS
 				$real_filename = ($page_id
@@ -130,32 +130,32 @@ if ($registered
 					$what[0]["filename"];
 
 				if (@unlink($real_filename))
-					$message .= $this->GetTranslation("UploadRemovedFromFS");
+					$message .= $this->get_translation("UploadRemovedFromFS");
 				else
-					$message .= "<div class=\"error\">".$this->GetTranslation("UploadRemovedFromFSError")."</div>";
+					$message .= "<div class=\"error\">".$this->get_translation("UploadRemovedFromFSError")."</div>";
 
 				if ($message)
 				{
-					$this->SetMessage($message);
+					$this->set_message($message);
 				}
 				// log event
-				$this->Log(1, str_replace("%2", $what[0]["filename"], str_replace("%1", $this->tag." ".$this->page['title'], $this->GetTranslation("LogRemovedFile", $this->config['language']))));
+				$this->log(1, str_replace("%2", $what[0]["filename"], str_replace("%1", $this->tag." ".$this->page['title'], $this->get_translation("LogRemovedFile", $this->config['language']))));
 			}
 			else
 			{
-				$this->SetMessage($this->GetTranslation("UploadRemoveDenied"));
+				$this->set_message($this->get_translation("UploadRemoveDenied"));
 			}
 		}
 		else
 		{
-			$this->SetMessage($this->GetTranslation("UploadRemoveNotFound"));
+			$this->set_message($this->get_translation("UploadRemoveNotFound"));
 		}
 
 	}
 	else // process upload
 	{
-		$user = $this->GetUser();
-		$files = $this->LoadAll(
+		$user = $this->get_user();
+		$files = $this->load_all(
 			"SELECT f.upload_id ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -173,7 +173,7 @@ if ($registered
 				$name = str_replace("@", "_", $name);
 
 				// here would be place for translit
-				$name = $this->Format($name, "translit");
+				$name = $this->format($name, "translit");
 
 				// 1.5. +write @page_id@ to name
 				if ($_POST["to"] != "global")
@@ -247,12 +247,12 @@ if ($registered
 						$description = rtrim( $description, "\\" );
 
 						// Make HTML in the description redundant ;¬)
-						$description = $this->Format($description, "preformat");
-						$description = $this->Format($description, "safehtml");
-						$description = htmlentities($description,ENT_COMPAT,$this->GetCharset());
+						$description = $this->format($description, "preformat");
+						$description = $this->format($description, "safehtml");
+						$description = htmlentities($description,ENT_COMPAT,$this->get_charset());
 
 						// 5. insert line into DB
-						$this->Query("INSERT INTO ".$this->config['table_prefix']."upload SET ".
+						$this->query("INSERT INTO ".$this->config['table_prefix']."upload SET ".
 							"page_id		= '".quote($this->dblink, $is_global ? "0" : $this->page['page_id'])."', ".
 							"user_id		= '".quote($this->dblink, $user['user_id'])."',".
 							"filename		= '".quote($this->dblink, $small_name)."', ".
@@ -265,24 +265,24 @@ if ($registered
 
 						// 4. output link to file
 						// !!!!! write after providing filelink syntax
-						$this->SetMessage("<strong>".$this->GetTranslation("UploadDone")."</strong>");
+						$this->set_message("<strong>".$this->get_translation("UploadDone")."</strong>");
 
 						// log event
 						if ($is_global)
 						{
-							$this->Log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, $this->GetTranslation("LogFileUploadedGlobal", $this->config['language']))));
+							$this->log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, $this->get_translation("LogFileUploadedGlobal", $this->config['language']))));
 						}
 						else
 						{
-							$this->Log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, str_replace("%1", $this->page['tag']." ".$this->page['title'], $this->GetTranslation("LogFileUploadedLocal", $this->config['language'])))));
+							$this->log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, str_replace("%1", $this->page['tag']." ".$this->page['title'], $this->get_translation("LogFileUploadedLocal", $this->config['language'])))));
 						}
 						?>
 	<br />
 	<ul class="upload">
-		<li><?php echo $this->Link("file:".$small_name); ?>
+		<li><?php echo $this->link("file:".$small_name); ?>
 			<ul>
-				<li><?php echo $this->GetTimeStringFormatted($uploaded_dt); ?></li>
-				<li><?php echo "(".$file_size_kb." ".$this->GetTranslation("UploadKB").")"; ?></li>
+				<li><?php echo $this->get_time_string_formatted($uploaded_dt); ?></li>
+				<li><?php echo "(".$file_size_kb." ".$this->get_translation("UploadKB").")"; ?></li>
 				<li><?php echo $small_name; ?></li>
 				<li><?php echo $description; ?></li>
 			</ul>
@@ -293,44 +293,44 @@ if ($registered
 
 					}
 					else //forbid
-						$error = $this->GetTranslation("UploadNotAPicture");
+						$error = $this->get_translation("UploadNotAPicture");
 
 				}
 				else //maxsize
-					$error = $this->GetTranslation("UploadMaxSizeReached");
+					$error = $this->get_translation("UploadMaxSizeReached");
 
 			} //!is_uploaded_file
 			else
 			{
 				if (isset($_FILES["file"]['error']) && ($_FILES["file"]['error'] == UPLOAD_ERR_INI_SIZE || $_FILES["file"]['error'] == UPLOAD_ERR_FORM_SIZE))
-					$error = $this->GetTranslation("UploadMaxSizeReached");
+					$error = $this->get_translation("UploadMaxSizeReached");
 				else if (isset($_FILES["file"]['error']) && ($_FILES["file"]['error'] == UPLOAD_ERR_PARTIAL || $_FILES["file"]['error'] == UPLOAD_ERR_NO_FILE))
-					$error = $this->GetTranslation("UploadNoFile");
+					$error = $this->get_translation("UploadNoFile");
 				else
 					$error = "";
 			}
 		}
 		else
-			$error = $this->GetTranslation("UploadMaxFileCount");
+			$error = $this->get_translation("UploadMaxFileCount");
 	}
 	if ($error)
 	{
-		$this->SetMessage("<div class=\"error\">".$error."</div>");
+		$this->set_message("<div class=\"error\">".$error."</div>");
 	}
-	echo $this->Action("upload", array())."<br />";
+	echo $this->action("upload", array())."<br />";
 
-// if (!$error) echo "<br /><hr />".$this->Action("upload", array())."<hr /><br />";
+// if (!$error) echo "<br /><hr />".$this->action("upload", array())."<hr /><br />";
 }
 else
 {
-	$this->SetMessage($this->GetTranslation("UploadForbidden"));
+	$this->set_message($this->get_translation("UploadForbidden"));
 }
 // show uploaded files for current page
-if ($this->HasAccess("read"))
+if ($this->has_access("read"))
 {
-	echo $this->Action("files", array())."<br />";
+	echo $this->action("files", array())."<br />";
 }
 if (!$this->config["revisions_hide_cancel"])
-	echo "<input type=\"button\" value=\"".$this->GetTranslation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
+	echo "<input type=\"button\" value=\"".$this->get_translation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
 ?>
 </div>

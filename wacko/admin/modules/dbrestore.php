@@ -178,7 +178,7 @@ function admin_dbrestore(&$engine, &$module)
 				<br />
 				<div class="code" style="padding:3px;"><small><pre><?php echo $results; ?></pre></small></div><br />
 <?php
-		$engine->Log(1, 'Restored backup of a database '.$pack);
+		$engine->log(1, 'Restored backup of a database '.$pack);
 	}
 	else
 	{
@@ -188,12 +188,12 @@ function admin_dbrestore(&$engine, &$module)
 			if ($_POST['id'] == true)
 			{
 				RemovePack($engine, $_POST['id']);
-				$engine->Log(1, 'Removed backup database '.$_POST['id']);
+				$engine->log(1, 'Removed backup database '.$_POST['id']);
 			}
 			else if ($_GET['id'] == true)
 			{
 				RemovePack($engine, $_GET['id']);
-				$engine->Log(1, 'Removed backup database '.$_GET['id']);
+				$engine->log(1, 'Removed backup database '.$_GET['id']);
 			}
 
 			echo '<p class="green"><em>The selected backup has been successfully removed.</em></p><br />';

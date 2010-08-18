@@ -2,7 +2,7 @@
 
 if ($text == "") return;
 
-$this->UseClass("typografica", "formatters/classes/");
+$this->use_class("typografica", "formatters/classes/");
 
 $typo = new typografica($this);
 

@@ -12,8 +12,8 @@
 	cellspacing="0" width="100%">
 	<tr>
 		<td id="credits"><?php 
-		if ($this->GetUser()){
-			echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->GetWackoVersion());
+		if ($this->get_user()){
+			echo $this->get_translation("PoweredBy")." ".$this->link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->get_wacko_version());
 		}
 		?></td>
 	</tr>

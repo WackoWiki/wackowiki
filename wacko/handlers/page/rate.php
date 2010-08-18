@@ -4,7 +4,7 @@
 // determine if user has rated a given page
 function HandlerRatePageIsRated(&$engine, $id)
 {
-	$cookie	= $engine->GetCookie('rating');
+	$cookie	= $engine->get_cookie('rating');
 	$ids	= explode(';', $cookie);
 	
 	if (in_array($id, $ids) === true || $id == $cookie)
@@ -14,17 +14,17 @@ function HandlerRatePageIsRated(&$engine, $id)
 // set page rating cookie
 function HandlerRateSetRateCookie(&$engine, $id)
 {
-	$cookie	= $engine->GetCookie('rating');
+	$cookie	= $engine->get_cookie('rating');
 	$ids	= explode(';', $cookie);
 	$ids[]	= $id;
 	$cookie	= implode(';', $ids);
-	$engine->SetSessionCookie('rating', $cookie);
-	$engine->SetPersistentCookie('rating', $cookie, 365);
+	$engine->set_session_cookie('rating', $cookie);
+	$engine->set_persistent_cookie('rating', $cookie, 365);
 	return true;
 }
 
 // update page rating
-if ($this->HasAccess('read') && $this->page && $this->config['hide_rating'] != 1)
+if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 1)
 {
 	if (isset($_POST['value']))
 	{
@@ -38,14 +38,14 @@ if ($this->HasAccess('read') && $this->page && $this->config['hide_rating'] != 1
 		if (HandlerRatePageIsRated($this, $id) === false)
 		{
 			// try to load current rating entry
-			if ($rating = $this->LoadSingle(
+			if ($rating = $this->load_single(
 				"SELECT page_id, value, voters ".
 				"FROM {$this->config['table_prefix']}rating ".
 				"WHERE page_id = $id ".
 				"LIMIT 1"))
 			{
 				// update entry
-				$this->Query(
+				$this->query(
 					"UPDATE {$this->config['table_prefix']}rating SET ".
 					"value	= {$rating['value']} + '".quote($this->dblink, $value)."', ".
 					"voters	= {$rating['voters']} + 1 ".
@@ -54,7 +54,7 @@ if ($this->HasAccess('read') && $this->page && $this->config['hide_rating'] != 1
 			else
 			{
 				// create entry
-				$this->Query(
+				$this->query(
 					"INSERT INTO {$this->config['table_prefix']}rating SET ".
 					"page_id		= $id, ".
 					"value	= '".quote($this->dblink, $value)."', ".
@@ -66,26 +66,26 @@ if ($this->HasAccess('read') && $this->page && $this->config['hide_rating'] != 1
 			HandlerRateSetRateCookie($this, $id);
 		
 			// rated successfully
-			$this->SetMessage($this->GetTranslation('RatingSuccess'));
-			$this->Redirect($this->href('', '', 'show_rating=1').'#rating');
+			$this->set_message($this->get_translation('RatingSuccess'));
+			$this->redirect($this->href('', '', 'show_rating=1').'#rating');
 		}
 		else
 		{
 			// already rated
-			$this->SetMessage($this->GetTranslation('RatingDuplicate'));
-			$this->Redirect($this->href());
+			$this->set_message($this->get_translation('RatingDuplicate'));
+			$this->redirect($this->href());
 		}
 	}
 	else
 	{
 		// rating value hasn't been given
-		$this->Redirect($this->href());
+		$this->redirect($this->href());
 	}
 }
 else
 {
 	echo '<div class="page">';
-	echo '<h4>'.$this->GetTranslation('RatingDenied').'</h4>';
+	echo '<h4>'.$this->get_translation('RatingDenied').'</h4>';
 	echo '</div>';
 }
 

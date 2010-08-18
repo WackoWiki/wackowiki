@@ -151,7 +151,7 @@ function admin_dbbackup(&$engine, &$module)
 		fclose($file);
 		chmod($filename, 0644);
 
-		$engine->Log(1, 'Saved backup database '.trim($pack, '/'));
+		$engine->log(1, 'Saved backup database '.trim($pack, '/'));
 ?>
 		<p>
 			Backing up and archiving completed. Package backup

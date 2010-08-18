@@ -5,7 +5,7 @@
 	<title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".$this->tag; ?></title>
 	<?php if ($this->method != 'show')
 		echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
-	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
+	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
 </head>
 
@@ -13,7 +13,7 @@
 	<div class="header">
 		<?php // Print wackoname and wackopath ?>
 		<?php echo $this->config['wacko_name']; ?>:
-		<?php echo $this->GetPagePath(); ?>
+		<?php echo $this->get_page_path(); ?>
 	</div>
 
 <!-- End of header //-->

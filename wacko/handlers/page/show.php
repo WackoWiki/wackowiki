@@ -3,13 +3,13 @@
 
 if (!isset ($this->config['comments_count'])) $this->config['comments_count'] = 15;
 
-if ($this->config['hide_rating'] != 1 && ($this->config["hide_rating"] != 2 || $this->GetUser()))
+if ($this->config['hide_rating'] != 1 && ($this->config["hide_rating"] != 2 || $this->get_user()))
 {
 	// registering local functions
 	// determine if user has rated a given page
 	function HandlerShowPageIsRated(&$engine, $id)
 	{
-		$cookie	= $engine->GetCookie('rating');
+		$cookie	= $engine->get_cookie('rating');
 		$ids	= explode(';', $cookie);
 		if ($id = array_search($id, $ids))
 			return true;
@@ -21,7 +21,7 @@ if ($this->config['hide_rating'] != 1 && ($this->config["hide_rating"] != 2 || $
 if ($this->page['comment_on_id'])
 {
 	// count previous comments
-	$count = $this->LoadSingle(
+	$count = $this->load_single(
 		"SELECT COUNT(tag) AS n ".
 		"FROM {$this->config['table_prefix']}page ".
 		"WHERE comment_on_id = '".quote($this->dblink, $this->page['comment_on_id'])."' ".
@@ -33,11 +33,11 @@ if ($this->page['comment_on_id'])
 	$p = ceil($count["n"] / $this->config['comments_count']);
 
 	// forcibly open page
-	$this->Redirect($this->href("", $this->GetCommentOnTag($this->page['comment_on_id']), 'show_comments=1&p='.$p).'#'.$this->page['tag']);
+	$this->redirect($this->href("", $this->get_comment_on_tag($this->page['comment_on_id']), 'show_comments=1&p='.$p).'#'.$this->page['tag']);
 }
 
 // display page body
-if ($this->HasAccess("read"))
+if ($this->has_access("read"))
 {
 	if (!$this->page)
 	{
@@ -45,14 +45,14 @@ if ($this->HasAccess("read"))
 		// if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
 		header("HTTP/1.0 404 Not Found");
 
-		print($this->GetTranslation("DoesNotExists") ." ".( $this->HasAccess("write") ?  str_replace("%1", $this->href("edit", "", "", 1), $this->GetTranslation("PromptCreate")) : ""));
+		print($this->get_translation("DoesNotExists") ." ".( $this->has_access("write") ?  str_replace("%1", $this->href("edit", "", "", 1), $this->get_translation("PromptCreate")) : ""));
 	}
 	else
 	{
 		// comment header?
 		if ($this->page['comment_on_id'])
 		{
-			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->GetCommentOnTag($this->page['comment_on_id']), "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page['user_name'])?$this->Link($this->page['user_name']):$this->page['user_name'])." ".$this->GetTranslation("At")." ".$this->GetTimeStringFormatted($this->page['modified'])."</div>");
+			print("<div class=\"commentinfo\">".$this->get_translation("ThisIsCommentOn")." ".$this->compose_link_to_page($this->get_comment_on_tag($this->page['comment_on_id']), "", "", 0).", ".$this->get_translation("PostedBy")." ".($this->is_wiki_name($this->page['user_name'])?$this->link($this->page['user_name']):$this->page['user_name'])." ".$this->get_translation("At")." ".$this->get_time_string_formatted($this->page['modified'])."</div>");
 		}
 
 		// revision header
@@ -61,22 +61,22 @@ if ($this->HasAccess("read"))
 			print("<div class=\"revisioninfo\">".
 			str_replace("%1",$this->href(),
 			str_replace("%2",$this->tag,
-			str_replace("%3",$this->GetPageTimeFormatted(),
-			$this->GetTranslation("Revision")))));
+			str_replace("%3",$this->get_page_time_formatted(),
+			$this->get_translation("Revision")))));
 
 			// if this is an old revision, display ReEdit button
-			if ($this->HasAccess("write"))
+			if ($this->has_access("write"))
 			{
-				$latest = $this->LoadPage($this->tag);
+				$latest = $this->load_page($this->tag);
 				?>
 				<br />
-				<?php echo $this->FormOpen("edit") ?>
+				<?php echo $this->form_open("edit") ?>
 				<input type="hidden" name="previous" value="<?php echo $latest['modified'] ?>" />
 				<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->page['page_id']) ?>" />
 				<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page['body']) ?>" />
-				<input type="submit" value="<?php echo $this->GetTranslation("ReEditOldRevision") ?>" />
-				<input name="cancel" id="button" type="button" value="<?php echo $this->GetTranslation("EditCancelButton") ?>" onclick="document.location='<?php echo addslashes($this->href()) ?>';" />
-				<?php echo $this->FormClose(); ?>
+				<input type="submit" value="<?php echo $this->get_translation("ReEditOldRevision") ?>" />
+				<input name="cancel" id="button" type="button" value="<?php echo $this->get_translation("EditCancelButton") ?>" onclick="document.location='<?php echo addslashes($this->href()) ?>';" />
+				<?php echo $this->form_close(); ?>
 				<?php
 			}
 
@@ -84,33 +84,33 @@ if ($this->HasAccess("read"))
 		}
 
 		// count page hit (we don't count for page owner)
-		if ($this->GetUserId() != $this->page['owner_id'])
+		if ($this->get_user_id() != $this->page['owner_id'])
 		{
-			$this->Query(
+			$this->query(
 				"UPDATE ".$this->config['table_prefix']."page ".
 				"SET hits = hits + 1 ".
 				"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."'");
 		}
 
-		$this->SetLanguage($this->pagelang);
+		$this->set_language($this->pagelang);
 
 		// recompile if necessary
 		if (($this->page['body_r'] == "") ||
 		(($this->page['body_toc'] == "") && $this->config['paragrafica']))
 		{
 			// build html body
-			$this->page['body_r'] = $this->Format($this->page['body'], "wacko");
+			$this->page['body_r'] = $this->format($this->page['body'], "wacko");
 
 			// build toc
 			if ($this->config['paragrafica'])
 			{
-				$this->page['body_r']   = $this->Format($this->page['body_r'], "paragrafica");
+				$this->page['body_r']   = $this->format($this->page['body_r'], "paragrafica");
 				$this->page['body_toc'] = $this->body_toc;
 			}
 
 			// store to DB
 			if ($this->page['latest'] != "0")
-				$this->Query(
+				$this->query(
 					"UPDATE ".$this->config['table_prefix']."page SET ".
 						"body_r = '".quote($this->dblink, $this->page['body_r'])."', ".
 						"body_toc = '".quote($this->dblink, $this->page['body_toc'])."' ".
@@ -119,11 +119,11 @@ if ($this->HasAccess("read"))
 		}
 
 		// display page
-		$data = $this->Format($this->page['body_r'], "post_wacko", array("bad" => "good"));
-		$data = $this->NumerateToc( $data ); //  numerate toc if needed
+		$data = $this->format($this->page['body_r'], "post_wacko", array("bad" => "good"));
+		$data = $this->numerate_toc( $data ); //  numerate toc if needed
 		echo $data;
 
-		$this->SetLanguage($this->userlang);
+		$this->set_language($this->userlang);
 		?>
 		<script type="text/javascript">
 			var dbclick = "page";
@@ -138,7 +138,7 @@ else
 	// if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
 	header("HTTP/1.0 403 Forbidden");
 
-	print($this->GetTranslation("ReadAccessDenied"));
+	print($this->get_translation("ReadAccessDenied"));
 }
 ?>
 <br style="clear: both" />&nbsp;</div>
@@ -150,13 +150,13 @@ if ($this->page)
 	if ($this->config['footer_files'])
 	{
 
-		if ($this->HasAccess("read") && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->GetUser()))
+		if ($this->has_access("read") && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->get_user()))
 		{
 
 			// store files display in session
 			$tag = $this->tag;
 			if (!isset($_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag]))
-			$_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag] = ($this->UserWantsFiles() ? "1" : "0");
+			$_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag] = ($this->user_wants_files() ? "1" : "0");
 
 			if(isset($_GET['show_files']))
 			{
@@ -177,18 +177,18 @@ if ($this->page)
 				// display files header
 				?>
 	<a name="files" id="files"></a>
-	<div id="filesheader"><?php echo $this->GetTranslation("Files_all") ?>
-	<?php echo "[<a href=\"".$this->href("", "", "show_files=0")."\">".$this->GetTranslation("HideFiles")."</a>]"; ?>
+	<div id="filesheader"><?php echo $this->get_translation("Files_all") ?>
+	<?php echo "[<a href=\"".$this->href("", "", "show_files=0")."\">".$this->get_translation("HideFiles")."</a>]"; ?>
 	</div>
 
 			<?php
 			echo "<div class=\"files\">";
-			echo $this->Action("files",array("nomark" => 1));
+			echo $this->action("files",array("nomark" => 1));
 			echo "</div>";
 			// display form
-			if ($user = $this->GetUser())
+			if ($user = $this->get_user())
 			{
-				$user = strtolower($this->GetUserName());
+				$user = strtolower($this->get_user_name());
 				$registered = true;
 			}
 			else
@@ -198,12 +198,12 @@ if ($this->page)
 				&&
 					(
 						($this->config['upload'] === true) || ($this->config['upload'] == "1") ||
-						($this->CheckACL($user,$this->config['upload']))
+						($this->check_acl($user,$this->config['upload']))
 					)
 				)
 			{
 				echo "<div class=\"filesform\">\n";
-				echo $this->Action("upload",array("nomark" => 1));
+				echo $this->action("upload",array("nomark" => 1));
 				echo "</div>\n";
 			}
 		}
@@ -214,7 +214,7 @@ if ($this->page)
 			if ($this->page['page_id'])
 			{
 				// load files for this page
-				$files = $this->LoadAll(
+				$files = $this->load_all(
 					"SELECT upload_id ".
 					"FROM ".$this->config['table_prefix']."upload ".
 					"WHERE page_id = '". quote($this->dblink, $this->page['page_id']) ."'");
@@ -227,15 +227,15 @@ if ($this->page)
 			switch ($c = count($files))
 			{
 				case 0:
-					print($this->GetTranslation("Files_0"));
+					print($this->get_translation("Files_0"));
 					break;
 				case 1:
-					print($this->GetTranslation("Files_1"));
+					print($this->get_translation("Files_1"));
 					break;
 				default:
-					print(str_replace("%1", $c, $this->GetTranslation("Files_n")));
+					print(str_replace("%1", $c, $this->get_translation("Files_n")));
 			}
-			echo "[<a href=\"".$this->href("", "", "show_files=1#files")."\">".$this->GetTranslation("ShowFiles")."</a>]";
+			echo "[<a href=\"".$this->href("", "", "show_files=1#files")."\">".$this->get_translation("ShowFiles")."</a>]";
 			echo "</div>\n";
 		}
 	}
@@ -246,19 +246,19 @@ if ($this->page)
 	if ($this->config["footer_comments"])
 	{
 	// pagination
-	$pagination = $this->Pagination($this->GetCommentsCount(), $this->config['comments_count'], 'p', 'show_comments=1#comments');
+	$pagination = $this->pagination($this->get_comments_count(), $this->config['comments_count'], 'p', 'show_comments=1#comments');
 
 	// comments form output begins
 
-		if ($this->HasAccess("read") && $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->GetUser()))
+		if ($this->has_access("read") && $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->get_user()))
 		{
 			// load comments for this page
-			$comments = $this->LoadComments($this->page['page_id'], $pagination['offset'], $this->config['comments_count']);
+			$comments = $this->load_comments($this->page['page_id'], $pagination['offset'], $this->config['comments_count']);
 
 			// store comments display in session
 			$tag = $this->tag;
 			if (!isset($_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag]))
-			$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag] = ($this->UserWantsComments() ? "1" : "0");
+			$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag] = ($this->user_wants_comments() ? "1" : "0");
 
 			if(isset($_GET['show_comments']))
 			{
@@ -282,7 +282,7 @@ if ($this->page)
 		<div id="commentsheader">
 		<?php if (isset($pagination['text']))
 				echo '<div style="float:right; letter-spacing:normal;"><small><small>'.$pagination['text'].'</small></small></div>'; ?>
-		<?php echo $this->GetTranslation("Comments_all")." [<a href=\"".$this->href("", "", "show_comments=0")."\">".$this->GetTranslation("HideComments")."</a>]"; ?>
+		<?php echo $this->get_translation("Comments_all")." [<a href=\"".$this->href("", "", "show_comments=0")."\">".$this->get_translation("HideComments")."</a>]"; ?>
 			</div>
 			<?php
 
@@ -295,27 +295,27 @@ if ($this->page)
 				{
 					echo "<li id=\"".$comment['tag']."\" class=\"comment\">\n";
 					$del = "";
-					if ($this->IsAdmin() || $this->UserIsOwner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->UserIsOwner($this->page['page_id'])))
+					if ($this->is_admin() || $this->user_is_owner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->page['page_id'])))
 					{
-						print("<a href=\"".$this->href("remove", $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/delete_comment.gif\" title=\"".$this->GetTranslation("DeleteCommentTip")."\" alt=\"".$this->GetTranslation("DeleteText")."\" align=\"right\" border=\"0\" /></a>");
-						print("<a href=\"".$this->href("edit", $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/edit.gif\" title=\"".$this->GetTranslation("EditCommentTip")."\" alt=\"".$this->GetTranslation("EditComment")."\" align=\"right\" border=\"0\" /></a>");
+						print("<a href=\"".$this->href("remove", $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/delete_comment.gif\" title=\"".$this->get_translation("DeleteCommentTip")."\" alt=\"".$this->get_translation("DeleteText")."\" align=\"right\" border=\"0\" /></a>");
+						print("<a href=\"".$this->href("edit", $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/edit.gif\" title=\"".$this->get_translation("EditCommentTip")."\" alt=\"".$this->get_translation("EditComment")."\" align=\"right\" border=\"0\" /></a>");
 					}
 					if ($comment['body_r']) $strings = $comment['body_r'];
 
-					else $strings = $this->Format($comment['body'], "wacko");
+					else $strings = $this->format($comment['body'], "wacko");
 					echo "<div class=\"commenttext\">\n";
 					print("<div class=\"commenttitle\">\n<a href=\"".$this->href("", "", "show_comments=1")."#".$comment['tag']."\">".$comment['title']."</a>\n</div>\n");
-					print($this->Format($strings,"post_wacko")."\n");
+					print($this->format($strings,"post_wacko")."\n");
 					echo "</div>\n";
 					print("<ul class=\"commentinfo\">\n".
 								"<li>".($comment['user']
-										? ($this->IsWikiName($comment['user'])
-											? $this->Link("/".$comment['user'],"",$comment['user'])
+										? ($this->is_wiki_name($comment['user'])
+											? $this->link("/".$comment['user'],"",$comment['user'])
 											: $comment['user'])."</li>\n"
-										: $this->GetTranslation("Guest")).
-								"<li>".$this->GetTimeStringFormatted($comment['created'])."</li>\n".
+										: $this->get_translation("Guest")).
+								"<li>".$this->get_time_string_formatted($comment['created'])."</li>\n".
 								($comment['modified'] != $comment['created']
-									? "<li>".$this->GetTimeStringFormatted($comment['modified'])." ".$this->GetTranslation("CommentEdited")."</li>\n"
+									? "<li>".$this->get_time_string_formatted($comment['modified'])." ".$this->get_translation("CommentEdited")."</li>\n"
 									: "").
 							"</ul>\n");
 					echo "</li>";
@@ -328,15 +328,15 @@ if ($this->page)
 				echo '<div style="text-align:right;padding-right:10px;border-top:solid 1px #BABFC7;"><small><small>'.$pagination['text'].'</small></small></div>';
 
 			// display comment form
-			if ($this->HasAccess("comment"))
+			if ($this->has_access("comment"))
 			{
 				print("<div class=\"commentform\">\n");
 
-				echo $this->FormOpen("addcomment"); ?>
-					<label for="addcomment"><?php echo $this->GetTranslation("AddComment");?></label><br />
+				echo $this->form_open("addcomment"); ?>
+					<label for="addcomment"><?php echo $this->get_translation("AddComment");?></label><br />
 					<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?></textarea>
 
-					<label for="addcomment_title"><?php echo $this->GetTranslation("AddCommentTitle");?></label><br />
+					<label for="addcomment_title"><?php echo $this->get_translation("AddCommentTitle");?></label><br />
 					<input id="addcomment_title" name="title" size="60" maxlength="100"></input><br />
 		<?php
 					// captcha code starts
@@ -350,14 +350,14 @@ if ($this->page)
 							// check whether anonymous user
 							// anonymous user has no name
 							// if false, we assume it's anonymous
-							if($this->GetUserName() == false)
+							if($this->get_user_name() == false)
 							{
 		?>
 		<br />
 		<br />
-		<label for="captcha"><?php echo $this->GetTranslation("Captcha");?>:</label>
+		<label for="captcha"><?php echo $this->get_translation("Captcha");?>:</label>
 		<br />
-		<img src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->GetTranslation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->GetTranslation("CaptchaReload"); ?>"><img src="<?php echo $this->config['base_url'];?>images/reload.png" width="18" height="17" alt="<?php echo $this->GetTranslation("CaptchaReload"); ?>" /></a>
+		<img src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->get_translation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->get_translation("CaptchaReload"); ?>"><img src="<?php echo $this->config['base_url'];?>images/reload.png" width="18" height="17" alt="<?php echo $this->get_translation("CaptchaReload"); ?>" /></a>
 		<br />
 		<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
 		<br />
@@ -368,8 +368,8 @@ if ($this->page)
 					}
 					// end captcha
 		?>
-		<input type="submit" value="<?php echo $this->GetTranslation("AddCommentButton"); ?>" accesskey="s" />
-		<?php echo $this->FormClose(); ?>
+		<input type="submit" value="<?php echo $this->get_translation("AddCommentButton"); ?>" accesskey="s" />
+		<?php echo $this->form_close(); ?>
 		<?php
 				print("</div>\n");
 				}
@@ -382,20 +382,20 @@ if ($this->page)
 		<?php
 				$c = (int)$this->page["comments"];
 
-				if		($c  <  1)	echo $this->GetTranslation('Comments_0');
-				else if	($c === 1)	echo $this->GetTranslation('Comments_1');
-				else if	($c  >  1)	echo str_replace('%1', $c, $this->GetTranslation('Comments_n'));
+				if		($c  <  1)	echo $this->get_translation('Comments_0');
+				else if	($c === 1)	echo $this->get_translation('Comments_1');
+				else if	($c  >  1)	echo str_replace('%1', $c, $this->get_translation('Comments_n'));
 
 			//TODO: show link to show comment only if there is one or/and user has the right to add a new one
 		?>
-			[<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->GetTranslation("ShowComments"); ?></a>]</div>
+			[<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->get_translation("ShowComments"); ?></a>]</div>
 		<?php
 			}
 		}
 	}
 
 	// rating form output begins
-	if ($this->HasAccess('read') && $this->page && $this->config['hide_rating'] != 1 && ($this->config["hide_rating"] != 2 || $this->GetUser()))
+	if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 1 && ($this->config["hide_rating"] != 2 || $this->get_user()))
 	{
 		// determine if user has rated this page
 		if (HandlerShowPageIsRated($this, $this->page['page_id']) === false && $_GET['show_rating'] != 1)
@@ -403,11 +403,11 @@ if ($this->page)
 			// display rating header
 			echo '<a name="rating"></a>';
 			echo '<div id="rateheader">';
-			echo $this->GetTranslation('RatingHeader').' [<a href="'.$this->href('', '', 'show_rating=1').'#rating">'.$this->GetTranslation('RatingResults').'</a>]';
+			echo $this->get_translation('RatingHeader').' [<a href="'.$this->href('', '', 'show_rating=1').'#rating">'.$this->get_translation('RatingResults').'</a>]';
 			echo "</div>\n";
 
 			// display rating form
-			echo '<div class="rating">'.$this->FormOpen('rate').'';
+			echo '<div class="rating">'.$this->form_open('rate').'';
 			echo '<input id="minus3" name="value" type="radio" value="-3" /><label for="minus3">-3</label>'.
 				 '<input id="minus2" name="value" type="radio" value="-2" /><label for="minus2">-2</label>'.
 				 '<input id="minus1" name="value" type="radio" value="-1" /><label for="minus1">-1</label>'.
@@ -415,12 +415,12 @@ if ($this->page)
 				 '<input id="plus1" name="value" type="radio" value="1" /><label for="plus1">+1</label>'.
 				 '<input id="plus2" name="value" type="radio" value="2" /><label for="plus2">+2</label>'.
 				 '<input id="plus3" name="value" type="radio" value="3" /><label for="plus3">+3</label>'.
-				 '<input name="rate" id="submit" type="submit" value="'.$this->GetTranslation('RatingSubmit').'" />';
-			echo ''.$this->FormClose().'</div>';
+				 '<input name="rate" id="submit" type="submit" value="'.$this->get_translation('RatingSubmit').'" />';
+			echo ''.$this->form_close().'</div>';
 		}
 		else
 		{
-			$results = $this->LoadSingle(
+			$results = $this->load_single(
 				"SELECT page_id, value, voters ".
 				"FROM {$this->config['table_prefix']}rating ".
 				"WHERE page_id = {$this->page['page_id']} ".
@@ -433,9 +433,9 @@ if ($this->page)
 			// display rating header
 			echo '<a name="rating"></a>';
 			echo '<div id="rateheader">';
-			echo $this->GetTranslation('RatingHeaderResults').
+			echo $this->get_translation('RatingHeaderResults').
 				(HandlerShowPageIsRated($this, $this->page['page_id']) === false
-					? ' [<a href="'.$this->href('', '', 'show_rating=0').'#rating">'.$this->GetTranslation('RatingForm').'</a>]'
+					? ' [<a href="'.$this->href('', '', 'show_rating=0').'#rating">'.$this->get_translation('RatingForm').'</a>]'
 					: '');
 			echo "</div>\n";
 
@@ -443,15 +443,15 @@ if ($this->page)
 			if (isset($results['ratio']))
 			{
 				echo '<div class="rating">';
-				echo ''.$this->GetTranslation('RatingTotal').': <strong>'.$results['ratio'].'</strong>'.
+				echo ''.$this->get_translation('RatingTotal').': <strong>'.$results['ratio'].'</strong>'.
 					 ' '.
-					 ''.$this->GetTranslation('RatingVoters').': <strong>'.$results['voters'].'</strong>';
+					 ''.$this->get_translation('RatingVoters').': <strong>'.$results['voters'].'</strong>';
 				echo '</div>';
 			}
 			else
 			{
 				echo '<div class="rating">';
-				echo '<em>'.$this->GetTranslation('RatingNotRated').'</em>';
+				echo '<em>'.$this->get_translation('RatingNotRated').'</em>';
 				echo '</div>';
 			}
 		}

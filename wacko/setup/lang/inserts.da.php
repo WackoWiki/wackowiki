@@ -4,22 +4,22 @@ $lng = "da";
 
 if ($config['language'] == $lng)
 {
-	InsertPage($config['root_page'], '', "((file:wacko4.png WackoWiki))\n**Velkommen til din ((WackoWiki:Doc/English/WackoWiki WackoWiki)) installation!**\n\nKlik på \"Rediger siden\" linket nederst for at rette denne side.\n\nDokumentation finder du på WackoWiki:Doc/English.\n\nSærlige wikisider: ((WackoWiki:Doc/English/Formatting Formatting)), OrphanedPages, WantedPages, ((Søgning)), MyPages, MyChanges.\n\n", $lng, "Admins", true);
-	InsertPage('WantedPages', 'Wanted Pages', '{{WantedPages}}', $lng, "Admins", true);
-	InsertPage('OrphanedPages', 'Orphaned Pages', '{{OrphanedPages}}', $lng, "Admins", true);
-	InsertPage('MineSider', 'Mine Sider', '{{MyPages}}', $lng, "Admins", true);
-	InsertPage('MineOpdateringer', 'Mine Opdateringer', '{{MyChanges}}', $lng, "Admins", true);
+	insert_page($config['root_page'], '', "((file:wacko4.png WackoWiki))\n**Velkommen til din ((WackoWiki:Doc/English/WackoWiki WackoWiki)) installation!**\n\nKlik på \"Rediger siden\" linket nederst for at rette denne side.\n\nDokumentation finder du på WackoWiki:Doc/English.\n\nSærlige wikisider: ((WackoWiki:Doc/English/Formatting Formatting)), OrphanedPages, WantedPages, ((Søgning)), MyPages, MyChanges.\n\n", $lng, "Admins", true);
+	insert_page('WantedPages', 'Wanted Pages', '{{WantedPages}}', $lng, "Admins", true);
+	insert_page('OrphanedPages', 'Orphaned Pages', '{{OrphanedPages}}', $lng, "Admins", true);
+	insert_page('MineSider', 'Mine Sider', '{{MyPages}}', $lng, "Admins", true);
+	insert_page('MineOpdateringer', 'Mine Opdateringer', '{{MyChanges}}', $lng, "Admins", true);
 }
 
-InsertPage('Opdateringer', 'Opdateringer', '{{RecentChanges}}', $lng);
-InsertPage('Kommentarer', 'Kommentarer', '{{RecentlyCommented}}', $lng);
-InsertPage('Indhold', 'Indhold', '{{PageIndex}}', $lng);
-InsertPage('Brugere', 'Brugere', '{{LastUsers}}', $lng);
-InsertPage('Registrering', 'Registrering', '{{Registration}}', $lng);
+insert_page('Opdateringer', 'Opdateringer', '{{RecentChanges}}', $lng);
+insert_page('Kommentarer', 'Kommentarer', '{{RecentlyCommented}}', $lng);
+insert_page('Indhold', 'Indhold', '{{PageIndex}}', $lng);
+insert_page('Brugere', 'Brugere', '{{LastUsers}}', $lng);
+insert_page('Registrering', 'Registrering', '{{Registration}}', $lng);
 
-InsertPage('Password', 'Password', '{{ChangePassword}}', $lng);
-InsertPage('Søgning', 'Søgning', '{{Search}}', $lng);
-InsertPage('Login', 'Login', '{{Login}}', $lng);
-InsertPage('Indstillinger', 'Indstillinger', '{{UserSettings}}', $lng);
+insert_page('Password', 'Password', '{{ChangePassword}}', $lng);
+insert_page('Søgning', 'Søgning', '{{Search}}', $lng);
+insert_page('Login', 'Login', '{{Login}}', $lng);
+insert_page('Indstillinger', 'Indstillinger', '{{UserSettings}}', $lng);
 
 ?>

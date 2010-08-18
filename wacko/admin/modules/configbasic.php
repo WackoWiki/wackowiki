@@ -56,11 +56,11 @@ function admin_configbasic(&$engine, &$module)
 
 		foreach($config as $key => $value)
 		{
-			$engine->Query(
+			$engine->query(
 				"UPDATE {$engine->config['table_prefix']}config SET value = '$value' WHERE config_name = '$key'");
 		}
-		$engine->Log(1, 'Updated basic parameters');
-		$engine->Redirect(rawurldecode($engine->href()));
+		$engine->log(1, 'Updated basic parameters');
+		$engine->redirect(rawurldecode($engine->href()));
 	}
 ?>
 	<form action="admin.php" method="post" name="basic">
@@ -108,7 +108,7 @@ function admin_configbasic(&$engine, &$module)
 				<td>
 					<select style="width:200px;" id="theme" name="theme">
 <?php
-						$themes = $engine->AvailableThemes();
+						$themes = $engine->available_themes();
 						for ($i = 0; $i < count($themes); $i++)
 						{
 							echo '<option value="'.$themes[$i].'" '.($engine->config['theme'] == $themes[$i] ? 'selected="selected"' : '').'>'.$themes[$i].'</option>';
@@ -161,7 +161,7 @@ function admin_configbasic(&$engine, &$module)
 				<td>
 					<select style="width:200px;" id="language" name="language">
 <?php
-						$langs = $engine->AvailableLanguages();
+						$langs = $engine->available_languages();
 						for ($i = 0; $i < count($langs); $i++)
 						{
 							echo '<option value="'.$langs[$i].'" '.($engine->config['language'] == $langs[$i] ? 'selected="selected"' : '').'>'.$langs[$i].'</option>';

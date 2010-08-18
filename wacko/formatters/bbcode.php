@@ -1,6 +1,6 @@
 <?php
 
-$this->UseClass('bbcode', 'formatters/classes/');
+$this->use_class('bbcode', 'formatters/classes/');
 
 $parser = new bbcode($this);
 

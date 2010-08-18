@@ -12,7 +12,7 @@ if ($for) $page=$for;
 if (!$page) {$page = "";}
 	$output .= $this->href("", $page, "show_comments=1#comments")."\">";
 if (!$text)
-	$output .= $this->GetTranslation("ShowComments");
+	$output .= $this->get_translation("ShowComments");
 else
 	$output .= $text;
 

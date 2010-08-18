@@ -39,13 +39,13 @@ if (!$global)
 	}
 	else
 	{
-		$page = $this->UnwrapLink($page);
-		if ($_page_id = $this->GetPageId($page))
+		$page = $this->unwrap_link($page);
+		if ($_page_id = $this->get_page_id($page))
 			$page_id = $_page_id;
 	}
 
-	$can_view   = $this->HasAccess("read", $page_id) || $this->IsAdmin() || $this->UserIsOwner($page_id);
-	$can_delete = $this->IsAdmin() || $this->UserIsOwner($page_id);
+	$can_view   = $this->has_access("read", $page_id) || $this->is_admin() || $this->user_is_owner($page_id);
+	$can_delete = $this->is_admin() || $this->user_is_owner($page_id);
 }
 else
 {
@@ -56,12 +56,12 @@ else
 if ($can_view)
 {
 	if ($global || ($tag == $page)) $filepage = $this->page;
-	else $filepage = $this->LoadPage($page);
+	else $filepage = $this->load_page($page);
 
 	if (!$global && !$filepage['page_id']) return;
 
 	// load files list
-	$files = $this->LoadAll(
+	$files = $this->load_all(
 		"SELECT f.upload_id, f.page_id, f.user_id, f.filesize, f.picture_w, f.picture_h, f.filename, f.description, f.uploaded_dt, u.user_name AS user, f.hits ".
 		"FROM ".$this->config['table_prefix']."upload f ".
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -72,17 +72,17 @@ if ($can_view)
 
 	if (!$nomark)
 	{
-		$title = $this->GetTranslation("UploadTitle".($global ? "Global" : ""));
+		$title = $this->get_translation("UploadTitle".($global ? "Global" : ""));
 		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.": </span></p>\n");
 	}
 
 	// display
-	$del = $this->GetTranslation("UploadRemove");
+	$del = $this->get_translation("UploadRemove");
 
 	if (!$global)	$path = "@".$filepage['page_id']."@";
 	else			$path = "";
 
-	if (!$global) 	$path2 = "file:/".($this->SlimUrl($page))."/";
+	if (!$global) 	$path2 = "file:/".($this->slim_url($page))."/";
 	else			$path2 = "file:";
 
 	// !!!!! patch link not to show pictures when not needed
@@ -100,14 +100,14 @@ if ($can_view)
 		$this->filesCache[$file['page_id']][$file["filename"]] = &$file;
 
 		$dt = $file["uploaded_dt"];
-		$desc = $this->Format($file['description'], "typografica" );
+		$desc = $this->format($file['description'], "typografica" );
 
 		if ($desc == "") $desc = "&nbsp;";
 
 		$filename	= $file["filename"];
 		$filesize	= $this->binary_multiples($file['filesize'], true, true, true);
 		$fileext	= substr($filename, strrpos($filename, ".") + 1);
-		$link		= $this->Link($path2.$filename, "", $filename);
+		$link		= $this->link($path2.$filename, "", $filename);
 
 		if ($fileext != "gif" && $fileext != "jpg" && $fileext != "png")
 		{
@@ -118,9 +118,9 @@ if ($can_view)
 			$hits	= "";
 		}
 
-		if ($this->IsAdmin() || (!isset($is_global) &&
-		($this->GetPageOwnerId($page_id) == $this->GetUserId())) ||
-		($file['user_id'] == $this->GetUserId()))
+		if ($this->is_admin() || (!isset($is_global) &&
+		($this->get_page_owner_id($page_id) == $this->get_user_id())) ||
+		($file['user_id'] == $this->get_user_id()))
 		{
 			$remove_mode = 1;
 		}
@@ -129,10 +129,10 @@ if ($can_view)
 			$remove_mode = 0;
 		}
 
-		$remove_href = $this->Href("upload", $page, "remove=".($global ? "global" : "local")."&amp;file=".$filename);
+		$remove_href = $this->href("upload", $page, "remove=".($global ? "global" : "local")."&amp;file=".$filename);
 ?>
 		<tr>
-			<td class="dt-"><span class="dt2-"><?php echo $this->GetTimeStringFormatted($dt) ?></span>&nbsp;</td>
+			<td class="dt-"><span class="dt2-"><?php echo $this->get_time_string_formatted($dt) ?></span>&nbsp;</td>
 <?php
 		if ($remove_mode)
 		{
@@ -165,7 +165,7 @@ if ($can_view)
 }
 else
 {
-	echo "<em>".$this->GetTranslation("ActionDenied")."</em> ";
+	echo "<em>".$this->get_translation("ActionDenied")."</em> ";
 }
 
 ?>

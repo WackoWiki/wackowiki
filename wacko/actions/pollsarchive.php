@@ -7,7 +7,7 @@
 //						Default: "ul"
 
 // create polls object
-$this->UseClass('polls');
+$this->use_class('polls');
 $pollsObj = new Polls($this);
 
 // parameters
@@ -32,7 +32,7 @@ else			$list	= $pollsObj->GetPollsList('all');
 // print list
 if(!$nomark)
 {
-	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".($year == 0 ? $this->GetTranslation('PollsArchiveAll') : str_replace('%1', $year, $this->GetTranslation('PollsArchiveYear')))."</span></p>\n");
+	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".($year == 0 ? $this->get_translation('PollsArchiveAll') : str_replace('%1', $year, $this->get_translation('PollsArchiveYear')))."</span></p>\n");
 }
 
 	if ($list) // normal list
@@ -53,13 +53,13 @@ if(!$nomark)
 	}
 	else // empty list
 	{
-		echo '<em>'.$this->GetTranslation('PollsEmptyList').'</em><br />';
+		echo '<em>'.$this->get_translation('PollsEmptyList').'</em><br />';
 	}
 
 	// pagination
-	echo '<small><strong>'.$this->GetTranslation('PollsShow').':</strong> ';
-	if ($year == 0) echo $this->GetTranslation('PollsAll').' ';
-	else echo '<a href="'.$this->href('', '', 'year=0').'">'.$this->GetTranslation('PollsAll').'</a> ';
+	echo '<small><strong>'.$this->get_translation('PollsShow').':</strong> ';
+	if ($year == 0) echo $this->get_translation('PollsAll').' ';
+	else echo '<a href="'.$this->href('', '', 'year=0').'">'.$this->get_translation('PollsAll').'</a> ';
 	foreach ($years as $item)
 	{
 		if ($item == $year) echo $item.' ';

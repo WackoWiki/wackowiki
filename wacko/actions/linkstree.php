@@ -9,9 +9,9 @@ if (!function_exists('links_tree_view'))
 		if ($level > 0)
 		{
 			if ($indent)
-			print((str_repeat("&nbsp;",$indent*7)).$wacko->Link("/".$node, "", $node)."<br/>\n");
+			print((str_repeat("&nbsp;",$indent*7)).$wacko->link("/".$node, "", $node)."<br/>\n");
 
-			$pages = $wacko->LoadAll(
+			$pages = $wacko->load_all(
 				"SELECT to_tag ".
 				"FROM ".$wacko->config['table_prefix']."link, ".$wacko->config['table_prefix']."page ".
 				"WHERE from_tag='".quote($wacko->dblink, $node)."' ".
@@ -25,12 +25,12 @@ if (!function_exists('links_tree_view'))
 
 				foreach ($pages as $page)
 				{
-					$wacko->CachePage($page["to_tag"]);
+					$wacko->cache_page($page["to_tag"]);
 
 					// we don't want page from the header. we don't want root_page (!!!!!!!)
 					if ((!in_array($node, $head, TRUE) && $wacko->config['root_page'] != $node) || $indent == 0)
 					{
-						if ($wacko->HasAccess("read", $page["to_tag"]))
+						if ($wacko->has_access("read", $page["to_tag"]))
 						links_tree_view($wacko, $page["to_tag"], $level - 1, $indent + 1);
 					}
 				}
@@ -42,11 +42,11 @@ if (!function_exists('links_tree_view'))
 $root = (isset($vars[0]) ? $vars[0] : NULL);
 if ($root == "/") $root = "";
 if (!isset($root)) $root = $this->page['tag'];
-$root = $this->UnwrapLink($root);
+$root = $this->unwrap_link($root);
 
 if (!$nomark)
 {
-	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("LinksTreeTitle")."</span></p>\n");
+	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation("LinksTreeTitle")."</span></p>\n");
 }
 
 if (!isset($levels)) $levels = 3;
@@ -54,10 +54,10 @@ else $levels = (int)$levels;
 if ($levels > 4)
 {
 	$levels = 4;
-	print("<em>".$this->GetTranslation("LinksTreeLevel4Warning")."</em><br />");
+	print("<em>".$this->get_translation("LinksTreeLevel4Warning")."</em><br />");
 }
 
-print($this->Link("/".$root, "", $root)."<br />\n");//<br/>
+print($this->link("/".$root, "", $root)."<br />\n");//<br/>
 
 links_tree_view($this,$root,$levels,0);
 

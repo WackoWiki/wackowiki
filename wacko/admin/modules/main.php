@@ -26,7 +26,7 @@ function admin_lock(&$engine, &$module)
 	// (un)lock website
 	if (isset($_POST['action']) && $_POST['action'] == 'lock')
 	{
-		$access	= $init->IsLocked();
+		$access	= $init->is_locked();
 		$file	= fopen('lock', 'w');
 
 		if ($access === true)
@@ -40,8 +40,8 @@ function admin_lock(&$engine, &$module)
 
 		fclose($file);
 		unset($access);
-		$engine->SetUser($_user, 0);
-		$engine->Redirect('admin.php');
+		$engine->set_user($_user, 0);
+		$engine->redirect('admin.php');
 	}
 	// clear cache
 	else if (isset($_POST['action']) && $_POST['action'] == 'cache')
@@ -56,7 +56,7 @@ function admin_lock(&$engine, &$module)
 			}
 		}
 		closedir($handle);
-		$engine->Query("DELETE FROM {$engine->config['table_prefix']}cache");
+		$engine->query("DELETE FROM {$engine->config['table_prefix']}cache");
 
 		// queries
 		$handle = opendir(rtrim($engine->config['cache_dir'].CACHE_SQL_DIR, '/'));
@@ -93,8 +93,8 @@ function admin_lock(&$engine, &$module)
 		<input type="hidden" name="action" value="lock" />
 		<table border="0" cellspacing="1" cellpadding="4" style="max-width:200px" class="formation">
 			<tr>
-				<td class="label" style="white-space:nowrap"><?php echo ( $init->IsLocked() === true ? '<span class="red">The site is closed</span>' : '<span class="green">The site is open</span>' ); ?></td>
-				<td align="center"><input id="submit" type="submit" value="<?php echo ( $init->IsLocked() === true ? 'open' : 'close' ); ?>" /></td>
+				<td class="label" style="white-space:nowrap"><?php echo ( $init->is_locked() === true ? '<span class="red">The site is closed</span>' : '<span class="green">The site is open</span>' ); ?></td>
+				<td align="center"><input id="submit" type="submit" value="<?php echo ( $init->is_locked() === true ? 'open' : 'close' ); ?>" /></td>
 			</tr>
 		</table>
 	</form>
@@ -104,8 +104,8 @@ function admin_lock(&$engine, &$module)
 		<input type="hidden" name="action" value="cache" />
 		<table border="0" cellspacing="1" cellpadding="4" style="max-width:200px" class="formation">
 			<tr>
-				<td class="label" style="white-space:nowrap"><?php echo $engine->GetTranslation("ClearCache");?></td>
-				<td align="center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->GetTranslation("CacheCleared") : '<input id="submit" type="submit" value="clean" />');?></td>
+				<td class="label" style="white-space:nowrap"><?php echo $engine->get_translation("ClearCache");?></td>
+				<td align="center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->get_translation("CacheCleared") : '<input id="submit" type="submit" value="clean" />');?></td>
 			</tr>
 		</table>
 	</form>
@@ -122,7 +122,7 @@ function admin_lock(&$engine, &$module)
 			<th style="text-align:left;">Overhead</th>
 		</tr>
 <?php
-	$results = $engine->LoadAll("SHOW TABLE STATUS FROM `{$engine->config['database_database']}`");
+	$results = $engine->load_all("SHOW TABLE STATUS FROM `{$engine->config['database_database']}`");
 	$tdata = "";
 	$tindex = "";
 	$tfrag = "";

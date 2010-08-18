@@ -2,20 +2,20 @@
 <?php
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->Redirect($this->href("show"));
+if (!$this->page) $this->redirect($this->href("show"));
 
-if ($this->HasAccess("read"))
+if ($this->has_access("read"))
 {
 	if (!$this->page)
 	{
-		print(str_replace("%1",$this->href("edit"),$this->GetTranslation("DoesNotExists")));
+		print(str_replace("%1",$this->href("edit"),$this->get_translation("DoesNotExists")));
 	}
 	else
 	{
 		// comment header?
 		if ($this->page['comment_on_id'])
 		{
-			print("<div class=\"commentinfo\">".$this->GetTranslation("ThisIsCommentOn")." ".$this->ComposeLinkToPage($this->GetCommentOnTag($this->page['comment_on_id']), "", "", 0).", ".$this->GetTranslation("PostedBy")." ".($this->IsWikiName($this->page['user_name'])?$this->Link($this->page['user_name']):$this->page['user_name'])." ".$this->GetTranslation("At")." ".$this->page['modified']."</div>");
+			print("<div class=\"commentinfo\">".$this->get_translation("ThisIsCommentOn")." ".$this->compose_link_to_page($this->get_comment_on_tag($this->page['comment_on_id']), "", "", 0).", ".$this->get_translation("PostedBy")." ".($this->is_wiki_name($this->page['user_name'])?$this->link($this->page['user_name']):$this->page['user_name'])." ".$this->get_translation("At")." ".$this->page['modified']."</div>");
 		}
 
 		if ($this->page['latest'] == "0")
@@ -24,13 +24,13 @@ if ($this->HasAccess("read"))
 			str_replace("%1",$this->href(),
 			str_replace("%2",$this->tag,
 			str_replace("%3",$this->page['modified'],
-			$this->GetTranslation("Revision")))).".</div>");
+			$this->get_translation("Revision")))).".</div>");
 		}
 
 		// display page
 		$this->context[++$this->current_context] = $this->tag;
 		$text = preg_replace("/{{(tableofcontents|toc).*?}}/i", "", $this->page['body']);
-		$data = $this->Format($text, "wiki");
+		$data = $this->format($text, "wiki");
 
 		// Convert everything that doesn't need regexps
 		$data = str_replace(
@@ -106,7 +106,7 @@ if ($this->HasAccess("read"))
 }
 else
 {
-	print($this->GetTranslation("ReadAccessDenied"));
+	print($this->get_translation("ReadAccessDenied"));
 }
 ?>
 </div>

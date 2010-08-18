@@ -4,7 +4,7 @@
 // reconnect securely in ssl mode
 if ($this->config['ssl'] == true && ( ($_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 {
-	$this->Redirect(str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->href()));
+	$this->redirect(str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->href()));
 }
 
 if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
@@ -15,7 +15,7 @@ if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
 	elseif ($_POST["secret_code"])
 		$code = $_POST["secret_code"];
 
-	$user = $this->LoadSingle(
+	$user = $this->load_single(
 		"SELECT * ".
 		"FROM ".$this->config['user_table']." ".
 		"WHERE change_password='".quote($this->dblink, $code)."' ".
@@ -31,39 +31,39 @@ if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
 			$confpassword = $_POST["confpassword"];
 
 			// check all conditions
-			$complexity		= $this->PasswordComplexity($user, $newpassword);
+			$complexity		= $this->password_complexity($user, $newpassword);
 			// confirmed password mismatch
 			if ($confpassword != $newpassword)
 			{
-				$error = $this->GetTranslation("PasswordsDidntMatch");
+				$error = $this->get_translation("PasswordsDidntMatch");
 			}
 			// spaces in password
 			else if (preg_match("/ /", $newpassword))
 			{
-				$error = $this->GetTranslation("SpacesArentAllowed");
+				$error = $this->get_translation("SpacesArentAllowed");
 			}
 			// password complexity validation
 			else if ($complexity > 0)
 			{
 				if ($complexity >= 5)
 				{
-					$error .= $this->GetTranslation("PwdCplxWeak")." ";
+					$error .= $this->get_translation("PwdCplxWeak")." ";
 					$complexity -= 5;
 				}
 				if ($complexity >= 2)
 				{
-					$error .= $this->GetTranslation("PwdCplxShort")." ";
+					$error .= $this->get_translation("PwdCplxShort")." ";
 					$complexity -= 2;
 				}
 				if ($complexity >= 1)
 				{
-					$error .= $this->GetTranslation("PwdCplxEquals")." ";
+					$error .= $this->get_translation("PwdCplxEquals")." ";
 					$complexity -= 1;
 				}
 			}
 			else
 			{
-				$this->Query(
+				$this->query(
 					"UPDATE ".$this->config['user_table']." SET ".
 						"password			= '".quote($this->dblink, hash('sha1', $newpassword))."', ".
 						"change_password	= '' ".
@@ -71,49 +71,49 @@ if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
 					"LIMIT 1");
 
 				// log event
-				$this->Log(3, str_replace("%1", $user['user_name'], $this->GetTranslation("LogUserPasswordRecovered", $this->config['language'])));
+				$this->log(3, str_replace("%1", $user['user_name'], $this->get_translation("LogUserPasswordRecovered", $this->config['language'])));
 
 				// forward
-				$this->SetMessage($this->GetTranslation("PasswordChanged"));
-				$this->Redirect($this->href("", $this->GetTranslation("LoginPage")));
+				$this->set_message($this->get_translation("PasswordChanged"));
+				$this->redirect($this->href("", $this->get_translation("LoginPage")));
 			}
 
-			if ($error) $this->SetMessage($error);
+			if ($error) $this->set_message($error);
 		}
 		else
 		{
 			//Password forgotten. Provided secret code only. Print password change form.
-			print($this->FormOpen());
+			print($this->form_open());
 			echo "<input type=\"hidden\" name=\"secret_code\" value=\"".$code."\" />";
 			?>
 
 			<div class="cssform">
-				<h3><?php echo $this->Format( str_replace('%1', $user['user_name'], $this->GetTranslation("YouWantChangePasswordForUser"))); ?></h3>
+				<h3><?php echo $this->format( str_replace('%1', $user['user_name'], $this->get_translation("YouWantChangePasswordForUser"))); ?></h3>
 				<p>
-					<label for="newpassword"><?php echo $this->GetTranslation("NewPassword");?>:</label>
+					<label for="newpassword"><?php echo $this->get_translation("NewPassword");?>:</label>
 					<input type="password" id="newpassword" name="newpassword" size="24" />
 				</p>
 				<p>
-					<label for="confpassword"><?php echo $this->GetTranslation("ConfirmPassword");?>:</label>
+					<label for="confpassword"><?php echo $this->get_translation("ConfirmPassword");?>:</label>
 					<input type="password" id="confpassword" name="confpassword" size="24" />
 					<?php
 							if ($this->config["pwd_char_classes"] > 0)
 							{
-								$PwdCplxText = $this->GetTranslation("PwdCplxDesc4");
+								$PwdCplxText = $this->get_translation("PwdCplxDesc4");
 								if 		($this->config["pwd_char_classes"] == 1)
-									$PwdCplxText .= $this->GetTranslation("PwdCplxDesc41");
+									$PwdCplxText .= $this->get_translation("PwdCplxDesc41");
 								else if ($this->config["pwd_char_classes"] == 2)
-									$PwdCplxText .= $this->GetTranslation("PwdCplxDesc42");
+									$PwdCplxText .= $this->get_translation("PwdCplxDesc42");
 								else if ($this->config["pwd_char_classes"] == 3)
-									$PwdCplxText .= $this->GetTranslation("PwdCplxDesc43");
-								$PwdCplxText .= ". ".$this->GetTranslation("PwdCplxDesc5");
+									$PwdCplxText .= $this->get_translation("PwdCplxDesc43");
+								$PwdCplxText .= ". ".$this->get_translation("PwdCplxDesc5");
 							}
 							echo "<br /><small>".
-								 $this->GetTranslation("PwdCplxDesc1").
+								 $this->get_translation("PwdCplxDesc1").
 								 str_replace("%1", $this->config["pwd_min_chars"],
-									$this->GetTranslation("PwdCplxDesc2")).
+									$this->get_translation("PwdCplxDesc2")).
 								 ($this->config["pwd_unlike_login"] > 0
-									? ", ".$this->GetTranslation("PwdCplxDesc3")
+									? ", ".$this->get_translation("PwdCplxDesc3")
 									: "").
 								 ($this->config["pwd_char_classes"] > 0
 									? ", ".$PwdCplxText
@@ -121,20 +121,20 @@ if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
 					?>
 				</p>
 				<p>
-				<input type="submit" value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" />
+				<input type="submit" value="<?php echo $this->get_translation("RegistrationButton"); ?>" />
 				</p>
 			</div>
 			<?php
-			print($this->FormClose());
+			print($this->form_close());
 		}
 	}
 	else
 	{
-		echo $this->SetMessage($this->GetTranslation("WrongCode"));
+		echo $this->set_message($this->get_translation("WrongCode"));
 	}
 }
 // is user trying to update?
-else if (!isset($forgot) && $user = $this->GetUser())
+else if (!isset($forgot) && $user = $this->get_user())
 {
 	// is user trying to update?
 	if (isset($_POST["action"]) && $_POST["action"] == "change")
@@ -145,103 +145,103 @@ else if (!isset($forgot) && $user = $this->GetUser())
 		$confpassword = $_POST["confpassword"];
 
 		// check all conditions
-		$complexity		= $this->PasswordComplexity($user['user_name'], $newpassword);
+		$complexity		= $this->password_complexity($user['user_name'], $newpassword);
 
 		// wrong current password
 		if (hash('sha1', $password)!=$user['password'])
 		{
-			$error = $this->GetTranslation("WrongPassword");
+			$error = $this->get_translation("WrongPassword");
 			// log event
-			$this->Log(3, str_replace("%1", $user['user_name'], $this->GetTranslation("LogUserPasswordMismatch", $this->config['language'])));
+			$this->log(3, str_replace("%1", $user['user_name'], $this->get_translation("LogUserPasswordMismatch", $this->config['language'])));
 		}
 		// confirmed password mismatch
 		else if ($confpassword != $newpassword)
 		{
-			$error = $this->GetTranslation("PasswordsDidntMatch");
+			$error = $this->get_translation("PasswordsDidntMatch");
 		}
 		// spaces in password
 		else if (preg_match("/ /", $newpassword))
 		{
-			$error = $this->GetTranslation("SpacesArentAllowed");
+			$error = $this->get_translation("SpacesArentAllowed");
 		}
 		// password complexity validation
 		else if ($complexity > 0)
 		{
 			if ($complexity >= 5)
 			{
-				$error .= $this->GetTranslation("PwdCplxWeak")." ";
+				$error .= $this->get_translation("PwdCplxWeak")." ";
 				$complexity -= 5;
 			}
 			if ($complexity >= 2)
 			{
-				$error .= $this->GetTranslation("PwdCplxShort")." ";
+				$error .= $this->get_translation("PwdCplxShort")." ";
 				$complexity -= 2;
 			}
 			if ($complexity >= 1)
 			{
-				$error .= $this->GetTranslation("PwdCplxEquals")." ";
+				$error .= $this->get_translation("PwdCplxEquals")." ";
 				$complexity -= 1;
 			}
 		}
 		else
 		{
 			// store new password
-			$this->Query(
+			$this->query(
 				"UPDATE ".$this->config['user_table']." ".
 				"SET password = '".quote($this->dblink, hash('sha1', $newpassword))."' ".
 				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 				"LIMIT 1");
 
 			// reinitialize user session
-			$this->LogoutUser();
-			$this->SetBookmarks(BM_DEFAULT);
+			$this->logout_user();
+			$this->set_bookmarks(BM_DEFAULT);
 			$this->context[++$this->current_context] = "";
 
 			// log event
-			$this->Log(3, str_replace("%1", $user['user_name'], $this->GetTranslation("LogUserPasswordChanged", $this->config['language'])));
+			$this->log(3, str_replace("%1", $user['user_name'], $this->get_translation("LogUserPasswordChanged", $this->config['language'])));
 
 			// forward
-			$this->SetMessage($this->GetTranslation("PasswordChanged"));
-			$this->Redirect($this->href("", $this->GetTranslation("LoginPage")));
+			$this->set_message($this->get_translation("PasswordChanged"));
+			$this->redirect($this->href("", $this->get_translation("LoginPage")));
 		}
 	}
 
 	//Print simple change password form
-	print($this->FormOpen());
+	print($this->form_open());
 
 	if (isset($error))
 	{
-		$this->SetMessage($this->Format($error));
+		$this->set_message($this->format($error));
 	}
 	?>
 	<input type="hidden" name="action" value="change" />
 	<div class="cssform">
-		<h3><?php echo $this->FormatTranslation("YouWantChangePassword"); ?></h3>
+		<h3><?php echo $this->format_translation("YouWantChangePassword"); ?></h3>
 		<p>
-			<label for="password"><?php echo $this->GetTranslation("CurrentPassword");?>:</label>
+			<label for="password"><?php echo $this->get_translation("CurrentPassword");?>:</label>
 			<input type="password" id="password" name="password" size="24" />
 		</p>
 		<p>
-			<label for="newpassword"><?php echo $this->GetTranslation("NewPassword");?>:</label>
+			<label for="newpassword"><?php echo $this->get_translation("NewPassword");?>:</label>
 			<input type="password" id="newpassword" name="newpassword" size="24" />
 			<?php
 			if ($this->config["pwd_char_classes"] > 0)
 			{
-				$PwdCplxText = $this->GetTranslation("PwdCplxDesc4");
+				$PwdCplxText = $this->get_translation("PwdCplxDesc4");
 				if 		($this->config["pwd_char_classes"] == 1)
-					$PwdCplxText .= $this->GetTranslation("PwdCplxDesc41");
+					$PwdCplxText .= $this->get_translation("PwdCplxDesc41");
 				else if ($this->config["pwd_char_classes"] == 2)
-					$PwdCplxText .= $this->GetTranslation("PwdCplxDesc42");
+					$PwdCplxText .= $this->get_translation("PwdCplxDesc42");
 				else if ($this->config["pwd_char_classes"] == 3)
-					$PwdCplxText .= $this->GetTranslation("PwdCplxDesc43");
-				$PwdCplxText .= ". ".$this->GetTranslation("PwdCplxDesc5");
+					$PwdCplxText .= $this->get_translation("PwdCplxDesc43");
+				$PwdCplxText .= ". ".$this->get_translation("PwdCplxDesc5");
 			}
 			echo "<br /><small>".
-				 $this->GetTranslation("PwdCplxDesc1").
+				 $this->get_translation("PwdCplxDesc1").
 				 str_replace("%1", $this->config["pwd_min_chars"],
-					$this->GetTranslation("PwdCplxDesc2")).
+					$this->get_translation("PwdCplxDesc2")).
 				 ($this->config["pwd_unlike_login"] > 0
-					? ", ".$this->GetTranslation("PwdCplxDesc3")
+					? ", ".$this->get_translation("PwdCplxDesc3")
 					: "").
 				 ($this->config["pwd_char_classes"] > 0
 					? ", ".$PwdCplxText
@@ -249,15 +249,15 @@ else if (!isset($forgot) && $user = $this->GetUser())
 			?>
 		</p>
 		<p>
-			<label for="confpassword"><?php echo $this->GetTranslation("ConfirmPassword");?>:</label>
+			<label for="confpassword"><?php echo $this->get_translation("ConfirmPassword");?>:</label>
 			<input type="password" id="confpassword" name="confpassword" size="24" />
 		</p>
 		<p>
-			<input type="submit" value="<?php echo $this->GetTranslation("RegistrationButton"); ?>" />
+			<input type="submit" value="<?php echo $this->get_translation("RegistrationButton"); ?>" />
 		</p>
 	</div>
 <?php
-	print($this->FormClose());
+	print($this->form_close());
 }
 //Password forgotten. Send mail
 else
@@ -265,7 +265,7 @@ else
 	if ($_POST["action"] == "send")
 	{
 		$name = str_replace(" ","", $_POST["loginormail"]);
-		$user = $this->LoadSingle(
+		$user = $this->load_single(
 			"SELECT * ".
 			"FROM ".$this->config['user_table']." ".
 			"WHERE user_name = '".quote($this->dblink, $name)."' ".
@@ -277,46 +277,46 @@ else
 			{
 				$code = hash('sha1', $user['password'].date("D d M Y H:i:s").$user['email'].mt_rand());
 
-				$subject =	$this->GetTranslation("EmailForgotSubject").
+				$subject =	$this->get_translation("EmailForgotSubject").
 							$this->config['wacko_name'];
-				$message =	$this->GetTranslation("EmailHello"). $name.".\n\n".
+				$message =	$this->get_translation("EmailHello"). $name.".\n\n".
 							str_replace('%1', $this->config['wacko_name'],
 							str_replace('%2', $user['user_name'],
-							str_replace('%3', $this->Href().
+							str_replace('%3', $this->href().
 							($this->config['rewrite_mode'] ? "?" : "&amp;")."secret_code=".$code,
-							$this->GetTranslation("EmailForgotMessage"))))."\n";
-				$message.=	"\n".$this->GetTranslation("EmailGoodbye").
+							$this->get_translation("EmailForgotMessage"))))."\n";
+				$message.=	"\n".$this->get_translation("EmailGoodbye").
 							"\n".$this->config['wacko_name'].
 							"\n".$this->config['base_url'];
 
 				// update table
-				$this->Query(
+				$this->query(
 					"UPDATE ".$this->config['user_table']." ".
 					"SET change_password = '".quote($this->dblink, $code)."' ".
 					"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
 					"LIMIT 1");
 
 				// send code
-				$this->SendMail($user['email'], $subject, $message);
+				$this->send_mail($user['email'], $subject, $message);
 
 				// count attempt
-				$this->SetLostPasswordCount($user['user_id']);
+				$this->set_lost_password_count($user['user_id']);
 
 				// log event
-				$this->Log(3, str_replace("%2", $user['email'], str_replace("%1", $user['user_name'], $this->GetTranslation("LogUserPasswordReminded", $this->config['language']))));
+				$this->log(3, str_replace("%2", $user['email'], str_replace("%1", $user['user_name'], $this->get_translation("LogUserPasswordReminded", $this->config['language']))));
 
-				$this->SetMessage($this->GetTranslation("CodeWasSent"));
-				$this->Redirect($this->href("", $this->GetTranslation("LoginPage")));
+				$this->set_message($this->get_translation("CodeWasSent"));
+				$this->redirect($this->href("", $this->get_translation("LoginPage")));
 
 			}
 			else
 			{
-				$error = $this->GetTranslation("NotConfirmedEmail");
+				$error = $this->get_translation("NotConfirmedEmail");
 			}
 		}
 		else
 		{
-			$error = $this->GetTranslation("UserNotFound");
+			$error = $this->get_translation("UserNotFound");
 		}
 	}
 	// View password forgot form
@@ -324,26 +324,26 @@ else
 	{
 		if ($error)
 		{
-			$this->SetMessage($error);
+			$this->set_message($error);
 		}
 
 		//View password forgot form
-		print($this->FormOpen());
+		print($this->form_open());
 ?>
 		<input type="hidden" name="action" value="send" />
 		<div class="cssform">
-		<h3><?php echo $this->FormatTranslation("ForgotMain"); ?></h3>
-		<p><?php echo $this->FormatTranslation("ForgotComment"); ?></p>
+		<h3><?php echo $this->format_translation("ForgotMain"); ?></h3>
+		<p><?php echo $this->format_translation("ForgotComment"); ?></p>
 		<p>
-			<label for="loginormail"><?php echo $this->FormatTranslation("ForgotField"); ?>:</label>
+			<label for="loginormail"><?php echo $this->format_translation("ForgotField"); ?>:</label>
 			<input type="text" id="loginormail" name="loginormail" size="24" />
 		</p>
 		<p>
-			<input type="submit" value="<?php echo $this->GetTranslation("SendButton"); ?>" />
+			<input type="submit" value="<?php echo $this->get_translation("SendButton"); ?>" />
 		</p>
 		</div>
 		<?php
-		print($this->FormClose());
+		print($this->form_close());
 	}
 }
 

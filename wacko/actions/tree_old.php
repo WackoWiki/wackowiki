@@ -4,7 +4,7 @@ $root = (isset($vars[$page]) ? $vars[$page] : '');
 
 // input
 if (!isset($owner)) $owner = "";
-$owner_id = $this->GetUserIdByName($owner);
+$owner_id = $this->get_user_id_by_name($owner);
 if (!isset($nomark)) $nomark = "";
 if (!isset($abc)) $abc = "";
 if (!isset($filter)) $filter = "";
@@ -13,7 +13,7 @@ if (!isset($root) && !isset($page))
 					$root = "/".$this->page['tag'];
 if ($page)			$root = $page;
 if ($root == "/") 	$root = "";
-if ($root) 			$root = $this->UnwrapLink($root);
+if ($root) 			$root = $this->unwrap_link($root);
 
 if (!isset($depth)) $depth = 0;
 if (!is_numeric($depth)) $depth = 0;
@@ -190,13 +190,13 @@ if (!function_exists('print_cluster_tree'))
 					if ($style == "ul" || $style == "ol")
 						print "<li>";
 
-					$_page = $wacko->LoadPage(ltrim($sub_supertag, "/"));
+					$_page = $wacko->load_page(ltrim($sub_supertag, "/"));
 					if ($_page['tag'])
 						$_tag = $_page['tag'];
 					else
 						$_tag = $sub_supertag;
 
-					print($wacko->Link("/".$_tag, "", $linktext)."\n");
+					print($wacko->link("/".$_tag, "", $linktext)."\n");
 
 					if ($style == "indent" || $style == "br")
 						print "<br />";
@@ -217,19 +217,19 @@ if ($root)
 {
 	if (!$nomark)
 	{
-		$title = $this->GetTranslation("TreeClusterTitle");
-		$title = str_replace("%1",  $this->Link("/".$root, "", $root), $title);
+		$title = $this->get_translation("TreeClusterTitle");
+		$title = str_replace("%1",  $this->link("/".$root, "", $root), $title);
 		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.":</span></p>\n");
 	}
-	$query = "'".quote($this->dblink, $this->NpjTranslit($root))."/%'";
+	$query = "'".quote($this->dblink, $this->npj_translit($root))."/%'";
 }
 else
 {
-	if (!$nomark)  print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->GetTranslation("TreeSiteTitle")."</span></p>\n");
+	if (!$nomark)  print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation("TreeSiteTitle")."</span></p>\n");
 	$query = "'%'";
 }
 
-$pages = $this->LoadAll(
+$pages = $this->load_all(
 	"SELECT ".$this->pages_meta." ".
 	"FROM ".$this->config['table_prefix']."page ".
 	"WHERE supertag LIKE ".$query.
@@ -257,7 +257,7 @@ if ($pages)
 	//Cache page and prepare a list for caching acl
 	foreach($pages as $page)
 	{
-		$this->CachePage($page, 1);
+		$this->cache_page($page, 1);
 		$page_id_list[] = $page['page_id'];
 	}
 
@@ -273,11 +273,11 @@ if ($pages)
 	$acl_str = substr($acl_str, 0, strlen($acl_str) - 2);
 
 	//Cache access rights
-	if ( $read_acls = $this->LoadAll("SELECT * FROM ".$this->config['table_prefix']."acl WHERE page_id IN (".$acl_str.") AND privilege = 'read'", 1))
+	if ( $read_acls = $this->load_all("SELECT * FROM ".$this->config['table_prefix']."acl WHERE page_id IN (".$acl_str.") AND privilege = 'read'", 1))
 	{
 		for ($i = 0; $i < count($read_acls); $i++)
 		{
-			$this->CacheACL($read_acls[$i]['page_id'], "read", 1, $read_acls[$i]);
+			$this->cache_acl($read_acls[$i]['page_id'], "read", 1, $read_acls[$i]);
 		}
 	}
 
@@ -285,7 +285,7 @@ if ($pages)
 	$tree_pages_array = array();
 	foreach($pages as $page)
 	{
-		if (!$this->config['hide_locked'] || $this->HasAccess("read", $page['page_id']))
+		if (!$this->config['hide_locked'] || $this->has_access("read", $page['page_id']))
 		{
 			$tree_pages_array["/".$page['supertag']] = $page['tag'];
 		}
@@ -294,7 +294,7 @@ if ($pages)
 	//Sort in order supertag
 	ksort ( $tree_pages_array, SORT_STRING );
 
-	$tree = create_cluster_tree($this,"/".$this->NpjTranslit($root),$root,$depth);
+	$tree = create_cluster_tree($this,"/".$this->npj_translit($root),$root,$depth);
 
 	print_cluster_tree($this, $tree, $style, 1, $abc, $filter);
 
@@ -303,8 +303,8 @@ if ($pages)
 }
 else
 {
-	$empty_string = $this->GetTranslation("TreeEmpty");
-	$empty_string = str_replace("%1", $this->Link("/".$root,"",$root), $empty_string);
+	$empty_string = $this->get_translation("TreeEmpty");
+	$empty_string = str_replace("%1", $this->link("/".$root,"",$root), $empty_string);
 	print($empty_string."<br />");
 }
 

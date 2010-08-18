@@ -1,9 +1,9 @@
 </div>
   </div>
   <div id="credits"><?php
-if ($this->GetUser())
+if ($this->get_user())
 {
-	echo $this->GetTranslation("PoweredBy")." ".$this->Link("WackoWiki:HomePage", "", "WackoWiki ".$this->GetWackoVersion());
+	echo $this->get_translation("PoweredBy")." ".$this->link("WackoWiki:HomePage", "", "WackoWiki ".$this->get_wacko_version());
 }
 ?></div>
 </div>

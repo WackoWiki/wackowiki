@@ -16,33 +16,33 @@
 
 // initialize engine api
 require('classes/init.php');
-$init = new Init();
+$init = new init();
 
 // define settings
-$init->Settings(); // populate from config.inc.php
-$init->Settings(); // initialize DBAL and populate from config table
-$init->DBAL();
-$init->Settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
-$init->Settings('user_table',	$init->config['table_prefix'].'user');
-$init->Settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
-$init->Settings('cookie_hash',	hash('sha1', $init->config['base_url'].$init->config['system_seed']));
+$init->settings(); // populate from config.inc.php
+$init->settings(); // initialize DBAL and populate from config table
+$init->dbal();
+$init->settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
+$init->settings('user_table',	$init->config['table_prefix'].'user');
+$init->settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
+$init->settings('cookie_hash',	hash('sha1', $init->config['base_url'].$init->config['system_seed']));
 
 // misc
-$init->Session();
+$init->session();
 
 // start engine
-$cache	= $init->Cache();
-$engine	= $init->Engine();
+$cache	= $init->cache();
+$engine	= $init->engine();
 
 // register locale resources
-$init->Engine('res');
+$init->engine('res');
 
 // reconnect securely in ssl mode
 if ($engine->config['ssl'] == true)
 {
 	if ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "on" && empty($engine->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ))
 	{
-		$engine->Redirect(str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->config['base_url']).'admin.php');
+		$engine->redirect(str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->config['base_url']).'admin.php');
 	}
 	else
 	{
@@ -62,9 +62,9 @@ if ($engine->config['rewrite_mode'] == false)
 
 if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
-	$engine->DeleteCookie('admin', true, true);
-	$engine->Log(1, $engine->GetTranslation('LogAdminLogout', $engine->config['language']));
-	$engine->Redirect(( $engine->config['ssl'] == true ? str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->href()) : $engine->href() ));
+	$engine->delete_cookie('admin', true, true);
+	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
+	$engine->redirect(( $engine->config['ssl'] == true ? str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->href()) : $engine->href() ));
 	exit;
 }
 
@@ -98,8 +98,8 @@ foreach ($dirs as $dir)
 // recovery password
 if ($engine->config['recovery_password'] == false)
 {
-	echo '<strong>'.$engine->GetTranslation('NoRecoceryPassword').'</strong><br />';
-	echo $engine->GetTranslation('NoRecoceryPasswordTip');
+	echo '<strong>'.$engine->get_translation('NoRecoceryPassword').'</strong><br />';
+	echo $engine->get_translation('NoRecoceryPasswordTip');
 	die();
 }
 else
@@ -112,14 +112,15 @@ if (isset($_POST['password']))
 {
 	if (hash('sha1', $_POST['password']) == $pwd)
 	{
-		$engine->SetSessionCookie('admin', hash('sha1', $_POST['password']), '', ( $engine->config['ssl'] == true ? 1 : 0 ));
-		$engine->Log(1, $engine->GetTranslation('LogAdminLoginSuccess', $engine->config['language']));
+		$engine->set_session_cookie('admin', hash('sha1', $_POST['password']), '', ( $engine->config['ssl'] == true ? 1 : 0 ));
+		$_SESSION['CREATED'] = time();
 		$_SESSION['LAST_ACTIVITY'] = time();
-		$engine->Redirect(( $engine->config['ssl'] == true ? str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->href('admin.php')) : $engine->href('admin.php') ));
+		$engine->log(1, $engine->get_translation('LogAdminLoginSuccess', $engine->config['language']));
+		$engine->redirect(( $engine->config['ssl'] == true ? str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->href('admin.php')) : $engine->href('admin.php') ));
 	}
 	else
 	{
-		$engine->Log(1, str_replace('%1', $_POST['password'], $engine->GetTranslation('LogAdminLoginFailed', $engine->config['language'])));
+		$engine->log(1, str_replace('%1', $_POST['password'], $engine->get_translation('LogAdminLoginFailed', $engine->config['language'])));
 	}
 }
 
@@ -132,7 +133,7 @@ if (isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config[
 
 if ($user == false)
 {
-	header('Content-Type: text/html; charset='.$engine->GetCharset());
+	header('Content-Type: text/html; charset='.$engine->get_charset());
 ?>
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml">
@@ -143,14 +144,14 @@ if ($user == false)
 	<body>
 		<?php
 		// here we show messages
-		if ($message = $engine->GetMessage()) echo "<div class=\"info\">$message</div>";
+		if ($message = $engine->get_message()) echo "<div class=\"info\">$message</div>";
 		?>
 
-		<strong><?php echo $engine->GetTranslation('Authorization'); ?></strong><br />
-		<?php echo $engine->GetTranslation('AuthorizationTip'); ?>
+		<strong><?php echo $engine->get_translation('Authorization'); ?></strong><br />
+		<?php echo $engine->get_translation('AuthorizationTip'); ?>
 		<br /><br />
 		<form action="admin.php" method="post" name="emergency">
-			<tt><strong><?php echo $engine->GetTranslation('LoginPassword'); ?>:</strong> <input name="password" type="password" autocomplete="off" value="" />
+			<tt><strong><?php echo $engine->get_translation('LoginPassword'); ?>:</strong> <input name="password" type="password" autocomplete="off" value="" />
 			<input id="submit" type="submit" value="ok" /></tt>
 		</form>
 	</body>
@@ -162,19 +163,19 @@ unset($pwd);
 
 // setting temporary admin user context
 global $_user;
-$_user = $engine->GetUser();
-$engine->SetUser($user, 0);
+$_user = $engine->get_user();
+$engine->set_user($user, 0);
 
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) //1800
 {
 	// last request was more than 15 minutes ago
-	$engine->DeleteCookie('admin', true, true);
-	$engine->Log(1, $engine->GetTranslation('LogAdminLogout', $engine->config['language']));
+	$engine->delete_cookie('admin', true, true);
+	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
 
 	//session_destroy();   // destroy session data in storage
 	//session_unset();     // unset $_SESSION variable for the runtime
-	$engine->SetMessage($engine->GetTranslation("LoggedOut"));
-	$engine->Redirect('admin.php');
+	$engine->set_message($engine->get_translation("LoggedOut"));
+	$engine->redirect('admin.php');
 }
 
 $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
@@ -186,7 +187,8 @@ if (!isset($_SESSION['CREATED']))
 else if (time() - $_SESSION['CREATED'] > 1800)
 {
 	// session started more than 30 minates ago
-	session_regenerate_id(true);    // change session ID for the current session an invalidate old session ID
+	$engine->restart_user_session();
+	//session_regenerate_id(true);    // change session ID for the current session an invalidate old session ID
 	$_SESSION['CREATED'] = time();  // update creation time
 }
 
@@ -196,7 +198,7 @@ else if (time() - $_SESSION['CREATED'] > 1800)
 ##                     Page header                    ##
 ########################################################
 
-header('Content-Type: text/html; charset='.$engine->GetCharset());
+header('Content-Type: text/html; charset='.$engine->get_charset());
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -221,9 +223,9 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 				<?php $time_left = round((1800 - (time() - $_SESSION['CREATED'])) / 60);
 				echo "Time left: ".$time_left." minutes"; ?>
 				&nbsp;&nbsp;
-				<?php echo $engine->ComposeLinkToPage('/', '', rtrim($engine->config['base_url'], '/')); ?>
+				<?php echo $engine->compose_link_to_page('/', '', rtrim($engine->config['base_url'], '/')); ?>
 				&nbsp;&nbsp;
-				<?php echo ( $init->IsLocked() === true ? '<strong>site closed</strong>' : 'site opened' ); ?>
+				<?php echo ( $init->is_locked() === true ? '<strong>site closed</strong>' : 'site opened' ); ?>
 				&nbsp;&nbsp;
 				version <?php echo $engine->config['wacko_version']; ?>
 			</span>
@@ -302,7 +304,7 @@ header('Content-Type: text/html; charset='.$engine->GetCharset());
 <div id="page">
 <?php
 // here we show messages
-if ($message = $engine->GetMessage()) echo "<div class=\"info\">$message</div>";
+if ($message = $engine->get_message()) echo "<div class=\"info\">$message</div>";
 ?>
 <!-- begin page output -->
 
@@ -351,7 +353,7 @@ else if (!($_GET && $_POST))
 <?php
 
 // debugging info on script execution time and memory taken
-$init->Debug();
+$init->debug();
 
 ?>
 
@@ -365,6 +367,6 @@ $init->Debug();
 ########################################################
 
 // getting out of temp context
-$engine->SetUser($_user, 0);
+$engine->set_user($_user, 0);
 
 ?>

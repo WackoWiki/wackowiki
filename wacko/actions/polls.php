@@ -14,7 +14,7 @@ $results = "";
 $vote = "";
 
 // create polls object
-$this->UseClass("polls");
+$this->use_class("polls");
 $pollsObj = new Polls($this);
 
 // processing input
@@ -47,21 +47,21 @@ if (isset($_POST['vote']) && isset($_POST['poll']))
 			$vote = $header['poll_id'];
 
 			// update cache
-			$this->SetMessage($this->GetTranslation('PollsDone'));
-			$this->cache->CacheInvalidate($this->supertag);
+			$this->set_message($this->get_translation('PollsDone'));
+			$this->cache->cache_invalidate($this->supertag);
 		}
 	}
 	else if ($pollsObj->PollIsVoted($header['poll_id']))
 	{
 		$vote = $header['poll_id'];
-		$this->SetMessage($this->GetTranslation('PollsAlreadyVoted'));
-		$this->cache->CacheInvalidate($this->supertag);
+		$this->set_message($this->get_translation('PollsAlreadyVoted'));
+		$this->cache->cache_invalidate($this->supertag);
 	}
 	else if ($header['start'] != SQL_NULLDATE && $header['end'] != SQL_NULLDATE)
 	{
 		$vote = $header['poll_id'];
-		$this->SetMessage($this->GetTranslation('PollsAlreadyEnded'));
-		$this->cache->CacheInvalidate($this->supertag);
+		$this->set_message($this->get_translation('PollsAlreadyEnded'));
+		$this->cache->cache_invalidate($this->supertag);
 	}
 	else
 	{
@@ -114,7 +114,7 @@ else
 	else
 	{
 		echo '<table cellspacing="3" class="formation"><tr><td align="center"><em>';
-		echo $this->GetTranslation('PollsNone');
+		echo $this->get_translation('PollsNone');
 		echo '</em></td></tr></table>';
 	}
 }

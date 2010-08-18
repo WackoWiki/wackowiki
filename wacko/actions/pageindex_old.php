@@ -17,7 +17,7 @@ if(isset($letter)) $letter = strtoupper(substr($letter, 0, 1));
 
 // Get tags for all the pages, even if they're not being displayed on this index page
 $sql = "SELECT page_id, tag FROM ".$this->config['table_prefix']."page WHERE comment_on_id = '0' ORDER BY tag";
-$pages = $this->LoadAll($sql, 1);
+$pages = $this->load_all($sql, 1);
 
 $total = 0;
 $total_visible = 0;
@@ -44,7 +44,7 @@ foreach($pages as $page)
 
 	// Display the actual page link
 	if($this->config['hide_locked'])
-		$access = $this->HasAccess("read",$page['page_id']);
+		$access = $this->has_access("read",$page['page_id']);
 	else
 		$access = true;
 
@@ -68,7 +68,7 @@ foreach($pages as $page)
 						$oldChar = $firstChar;
 					}
 
-					$page_links .= "<li>".$this->Link("/".$page['tag'],"",$page['tag'])."</li>\n";
+					$page_links .= "<li>".$this->link("/".$page['tag'],"",$page['tag'])."</li>\n";
 
 					$total_visible++;
 				}
@@ -118,21 +118,21 @@ if($page_links != "")
 		// Prev
 		if($offset + $total_visible > $limit)
 		{
-			$prev_page_link = '<a href="'.$this->href("", "", "offset=").($offset - $limit > 0 ? $offset - $limit : 0).'">&lt; '.$this->GetTranslation("Prev").'</a> |';
+			$prev_page_link = '<a href="'.$this->href("", "", "offset=").($offset - $limit > 0 ? $offset - $limit : 0).'">&lt; '.$this->get_translation("Prev").'</a> |';
 		}
 		else
 		{
-			$prev_page_link = "&lt; ".$this->GetTranslation("Prev")." |";
+			$prev_page_link = "&lt; ".$this->get_translation("Prev")." |";
 		}
 
 		// Next
 		if($offset + $total_visible < $total)
 		{
-			$next_page_link = '<a href="'.$this->href("", "", "offset=").($offset + $total_visible).'">'.$this->GetTranslation("Next").' &gt;</a>';
+			$next_page_link = '<a href="'.$this->href("", "", "offset=").($offset + $total_visible).'">'.$this->get_translation("Next").' &gt;</a>';
 		}
 		else
 		{
-			$next_page_link = $this->GetTranslation("Next")." &gt;";
+			$next_page_link = $this->get_translation("Next")." &gt;";
 		}
 
 		print "<p class='logBtn'>$prev_page_link $next_page_link</p>\n";
@@ -140,7 +140,7 @@ if($page_links != "")
 }
 else
 {
-	print $this->GetTranslation("NoPagesFound");
+	print $this->get_translation("NoPagesFound");
 }
 
 ?>

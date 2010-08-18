@@ -1,22 +1,22 @@
 <?php
 header("Content-type: text/xml");
 
-$xml = "<?xml version=\"1.0\" encoding=\"".$this->GetCharset()."\"?>\n";
+$xml = "<?xml version=\"1.0\" encoding=\"".$this->get_charset()."\"?>\n";
 $xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 $xml .= "\t<channel>\n";
 $xml .= "\t\t<title>".$this->tag."</title>\n";
 $xml .= "\t\t<link>".$this->config['base_url']."</link>\n";
-$xml .= "\t\t<description>".$this->GetTranslation("ExportClusterXML").$this->config['wacko_name']."/".$this->tag."</description>\n";
+$xml .= "\t\t<description>".$this->get_translation("ExportClusterXML").$this->config['wacko_name']."/".$this->tag."</description>\n";
 $xml .= "\t\t<lastBuildDate>".date('r')."</lastBuildDate>\n";
 $xml .= "\t\t<language></language>\n";//!!!
 $xml .= "\t\t<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 $xml .= "\t\t<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
-if ($this->HasAccess("read"))
+if ($this->has_access("read"))
 {
 	$numOfSlashes = substr_count($this->tag, "/");
 
-	$pages = $this->LoadAll(
+	$pages = $this->load_all(
 		"SELECT * FROM ".$this->config['table_prefix']."page ".
 		"WHERE (supertag = '".quote($this->dblink, $this->supertag)."'".
 		" OR supertag LIKE '".quote($this->dblink, $this->supertag."/%")."')".
@@ -25,7 +25,7 @@ if ($this->HasAccess("read"))
 	foreach ($pages as $num => $page)
 	{
 		// check ACLS
-		if (!$this->HasAccess("write", $page['page_id'])) continue;
+		if (!$this->has_access("write", $page['page_id'])) continue;
 		// output page
 		$tag = $page['tag'];
 
@@ -60,7 +60,7 @@ else
 	$xml .= "\t\t<item>\n";
 	$xml .= "\t\t\t<title>Error</title>\n";
 	$xml .= "\t\t\t<link>".$this->href("show")."</link>\n";
-	$xml .= "\t\t\t<description>".$this->GetTranslation("AccessDeniedXML")."</description>\n";
+	$xml .= "\t\t\t<description>".$this->get_translation("AccessDeniedXML")."</description>\n";
 	$xml .= "\t\t</item>\n";
 }
 

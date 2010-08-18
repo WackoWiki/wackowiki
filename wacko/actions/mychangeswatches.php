@@ -2,17 +2,17 @@
 
 if (!isset($max)) $max = "";
 
-if ($user_id = $this->GetUserId())
+if ($user_id = $this->get_user_id())
 {
 	if ($max) $limit = $max;
 	else $limit	= 100;
 	$pref	= $this->config['table_prefix'];
 
-	echo $this->GetTranslation('MyChangesWatches').
+	echo $this->get_translation('MyChangesWatches').
 		' (<a href="'.$this->href('', '', 'mode=mychangeswatches&amp;reset=1').'#list">'.
-		$this->GetTranslation('ResetChangesWatches').'</a>).<br /><br />';
+		$this->get_translation('ResetChangesWatches').'</a>).<br /><br />';
 
-	$pages = $this->LoadAll(
+	$pages = $this->load_all(
 			"SELECT p.page_id, p.tag, p.modified, w.user_id ".
 			"FROM {$pref}pages AS p, {$pref}watch AS w ".
 			"WHERE p.page_id = w.page_id ".
@@ -26,28 +26,28 @@ if ($user_id = $this->GetUserId())
 	if ((isset($_GET['reset']) && $_GET['reset'] == 1) && $pages == true)
 	{
 		foreach ($pages as $page)
-			$this->Query(
+			$this->query(
 				"UPDATE {$this->config['table_prefix']}watch ".
 				"SET watch_time = NOW() ".
 				"WHERE page_id = '".quote($this->dblink, $page['page_id'])."' ".
 					"AND user_id = '".quote($this->dblink, $user_id)."'");
-		$this->Redirect($this->href('', '', 'mode=mychangeswatches').'#list');
+		$this->redirect($this->href('', '', 'mode=mychangeswatches').'#list');
 	}
 
 	if ($pages == true)
 	{
 		foreach ($pages as $page)
-			if (!$this->config['hide_locked'] || $this->HasAccess('read', $page['page_id']))
-				echo '<small>('.$this->ComposeLinkToPage($page['tag'], 'revisions', $this->GetTimeStringFormatted($page['modified']), 0, $this->GetTranslation("History")).
-					')</small> '.$this->ComposeLinkToPage($page['tag'], '', '', 0)."<br />\n";
+			if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
+				echo '<small>('.$this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_string_formatted($page['modified']), 0, $this->get_translation("History")).
+					')</small> '.$this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
 	}
 	else
 	{
-		echo '<em>'.$this->GetTranslation('NoChangesWatches').'</em>';
+		echo '<em>'.$this->get_translation('NoChangesWatches').'</em>';
 	}
 }
 else
 {
-	echo '<em>'.$this->GetTranslation('NotLoggedInWatches').'</em>';
+	echo '<em>'.$this->get_translation('NotLoggedInWatches').'</em>';
 }
 ?>

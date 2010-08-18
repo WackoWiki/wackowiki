@@ -22,12 +22,12 @@ function test($text, $condition, $errorText = "")
 	return true;
 }
 
-function outputError($errorText = "")
+function output_error($errorText = "")
 {
 	print("<ul class=\"install_error\"><li>".$errorText."</li></ul>");
 }
 
-function RandomSeed($length, $seed_complexity)
+function random_seed($length, $seed_complexity)
 {
 	$chars_uc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	$chars_lc = 'abcdefghijklmnopqrstuvwxyz';
@@ -81,9 +81,9 @@ print("         <h2>".$lang["TestingConfiguration"]."</h2>\n");
 
 // Generic Default Inserts
 if ( ( $config['system_seed'] == "") )
-	$config['system_seed'] = RandomSeed(20, 3);
+	$config['system_seed'] = random_seed(20, 3);
 
-$salt = RandomSeed(4, 3);
+$salt = random_seed(4, 3);
 $password_encrypted = hash('sha1', $config['admin_name'].$salt.$_POST['password']);
 // system holds all default pages
 $insert_system = "INSERT INTO ".$config['table_prefix']."user (user_name, password, salt, email, account_type, signup_time) VALUES ('System', '', '', '', '1', '')";
@@ -919,25 +919,25 @@ switch($config['database_driver'])
 									{
 										print("<h2>".$lang['DeletingTables']."</h2>\n");
 										print("            <ul>\n");
-										testPDO(str_replace("%1", "acl", $lang['DeletingTable']), $table_acl_drop, str_replace("%1", "acl", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "bookmark", $lang['DeletingTable']), $table_bookmark_drop, str_replace("%1", "bookmark", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "cache", $lang['DeletingTable']), $table_cache_drop, str_replace("%1", "cache", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "config", $lang['DeletingTable']), $table_config_drop, str_replace("%1", "config", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "group", $lang['DeletingTable']), $table_group_drop, str_replace("%1", "group", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "group_member", $lang['DeletingTable']), $table_group_member_drop, str_replace("%1", "group_member", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "category", $lang['DeletingTable']), $table_category_drop, str_replace("%1", "category", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "category_page", $lang['DeletingTable']), $table_category_page_drop, str_replace("%1", "category_page", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "link", $lang['DeletingTable']), $table_link_drop, str_replace("%1", "link", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "log", $lang['DeletingTable']), $table_log_drop, str_replace("%1", "log", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "page", $lang['DeletingTable']), $table_page_drop, str_replace("%1", "page", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "poll", $lang['DeletingTable']), $table_poll_drop, str_replace("%1", "poll", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "rating", $lang['DeletingTable']), $table_rating_drop, str_replace("%1", "rating", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "referrer", $lang['DeletingTable']), $table_referrer_drop, str_replace("%1", "referrer", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "revision", $lang['DeletingTable']), $table_revision_drop, str_replace("%1", "revision", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "upload", $lang['DeletingTable']), $table_upload_drop, str_replace("%1", "upload", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "user", $lang['DeletingTable']), $table_user_drop, str_replace("%1", "user", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "user_setting", $lang['DeletingTable']), $table_user_setting_drop, str_replace("%1", "user_setting", $lang['ErrorDeletingTable']));
-										testPDO(str_replace("%1", "watch", $lang['DeletingTable']), $table_watch_drop, str_replace("%1", "watch", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "acl", $lang['DeletingTable']), $table_acl_drop, str_replace("%1", "acl", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "bookmark", $lang['DeletingTable']), $table_bookmark_drop, str_replace("%1", "bookmark", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "cache", $lang['DeletingTable']), $table_cache_drop, str_replace("%1", "cache", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "config", $lang['DeletingTable']), $table_config_drop, str_replace("%1", "config", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "group", $lang['DeletingTable']), $table_group_drop, str_replace("%1", "group", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "group_member", $lang['DeletingTable']), $table_group_member_drop, str_replace("%1", "group_member", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "category", $lang['DeletingTable']), $table_category_drop, str_replace("%1", "category", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "category_page", $lang['DeletingTable']), $table_category_page_drop, str_replace("%1", "category_page", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "link", $lang['DeletingTable']), $table_link_drop, str_replace("%1", "link", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "log", $lang['DeletingTable']), $table_log_drop, str_replace("%1", "log", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "page", $lang['DeletingTable']), $table_page_drop, str_replace("%1", "page", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "poll", $lang['DeletingTable']), $table_poll_drop, str_replace("%1", "poll", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "rating", $lang['DeletingTable']), $table_rating_drop, str_replace("%1", "rating", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "referrer", $lang['DeletingTable']), $table_referrer_drop, str_replace("%1", "referrer", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "revision", $lang['DeletingTable']), $table_revision_drop, str_replace("%1", "revision", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "upload", $lang['DeletingTable']), $table_upload_drop, str_replace("%1", "upload", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "user", $lang['DeletingTable']), $table_user_drop, str_replace("%1", "user", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "user_setting", $lang['DeletingTable']), $table_user_setting_drop, str_replace("%1", "user_setting", $lang['ErrorDeletingTable']));
+										test_pdo(str_replace("%1", "watch", $lang['DeletingTable']), $table_watch_drop, str_replace("%1", "watch", $lang['ErrorDeletingTable']));
 										print("            <li>".$lang['DeletingTablesEnd']."</li>\n");
 										print("         </ul>\n");
 										print("         <br />\n");
@@ -946,31 +946,31 @@ switch($config['database_driver'])
 									// No need to check the past versions since PDO SQL is only officially supported in this release (v4.3)
 									print("         <h2>".$lang['InstallingTables']."</h2>\n");
 									print("         <ul>\n");
-									testPDO(str_replace("%1","acl",$lang['CreatingTable']), $table_acl, str_replace("%1","acl",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","bookmark",$lang['CreatingTable']), $table_bookmark, str_replace("%1","bookmark",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","cache",$lang['CreatingTable']), $table_cache, str_replace("%1","cache",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","config",$lang['CreatingTable']), $table_config, str_replace("%1","config",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","group",$lang['CreatingTable']), $table_group, str_replace("%1","group",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","group_member",$lang['CreatingTable']), $table_group_member, str_replace("%1","group_member",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","category",$lang['CreatingTable']), $table_category, str_replace("%1","category",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","category_page",$lang['CreatingTable']), $table_category_page, str_replace("%1","category_page",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","link",$lang['CreatingTable']), $table_link, str_replace("%1","link",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","log",$lang['CreatingTable']), $table_log, str_replace("%1","log",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","page",$lang['CreatingTable']), $table_page, str_replace("%1","page",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","poll",$lang['CreatingTable']), $table_poll, str_replace("%1","poll",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","rating",$lang['CreatingTable']), $table_rating, str_replace("%1","rating",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","referrer",$lang['CreatingTable']), $table_referrer, str_replace("%1","referrer",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","revision",$lang['CreatingTable']), $table_revision, str_replace("%1","revision",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","upload",$lang['CreatingTable']), $table_upload, str_replace("%1","upload",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","user",$lang['CreatingTable']), $table_user, str_replace("%1","user",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","user_setting",$lang['CreatingTable']), $table_user_setting, str_replace("%1","user_setting",$lang['ErrorCreatingTable']));
-									testPDO(str_replace("%1","watch",$lang['CreatingTable']), $table_watch, str_replace("%1","watch",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","acl",$lang['CreatingTable']), $table_acl, str_replace("%1","acl",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","bookmark",$lang['CreatingTable']), $table_bookmark, str_replace("%1","bookmark",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","cache",$lang['CreatingTable']), $table_cache, str_replace("%1","cache",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","config",$lang['CreatingTable']), $table_config, str_replace("%1","config",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","group",$lang['CreatingTable']), $table_group, str_replace("%1","group",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","group_member",$lang['CreatingTable']), $table_group_member, str_replace("%1","group_member",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","category",$lang['CreatingTable']), $table_category, str_replace("%1","category",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","category_page",$lang['CreatingTable']), $table_category_page, str_replace("%1","category_page",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","link",$lang['CreatingTable']), $table_link, str_replace("%1","link",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","log",$lang['CreatingTable']), $table_log, str_replace("%1","log",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","page",$lang['CreatingTable']), $table_page, str_replace("%1","page",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","poll",$lang['CreatingTable']), $table_poll, str_replace("%1","poll",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","rating",$lang['CreatingTable']), $table_rating, str_replace("%1","rating",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","referrer",$lang['CreatingTable']), $table_referrer, str_replace("%1","referrer",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","revision",$lang['CreatingTable']), $table_revision, str_replace("%1","revision",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","upload",$lang['CreatingTable']), $table_upload, str_replace("%1","upload",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","user",$lang['CreatingTable']), $table_user, str_replace("%1","user",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","user_setting",$lang['CreatingTable']), $table_user_setting, str_replace("%1","user_setting",$lang['ErrorCreatingTable']));
+									test_pdo(str_replace("%1","watch",$lang['CreatingTable']), $table_watch, str_replace("%1","watch",$lang['ErrorCreatingTable']));
 
-									testPDO($lang['InstallingSystemAccount'], $insert_system, str_replace("%1","system account",$lang['ErrorAlreadyExists']));
-									testPDO($lang['InstallingAdmin'], $insert_admin, str_replace("%1","admin user",$lang['ErrorAlreadyExists']));
-									testPDO($lang["InstallingAdminSetting"], $insert_admin_setting, str_replace("%1","admin user settings",$lang['ErrorAlreadyExists']));
-									testPDO($lang["InstallingAdminGroup"], $insert_admin_group, str_replace("%1","admin group",$lang['ErrorAlreadyExists']));
-									testPDO($lang["InstallingAdminGroupMember"], $insert_admin_group_member, str_replace("%1","admin group member",$lang['ErrorAlreadyExists']));
+									test_pdo($lang['InstallingSystemAccount'], $insert_system, str_replace("%1","system account",$lang['ErrorAlreadyExists']));
+									test_pdo($lang['InstallingAdmin'], $insert_admin, str_replace("%1","admin user",$lang['ErrorAlreadyExists']));
+									test_pdo($lang["InstallingAdminSetting"], $insert_admin_setting, str_replace("%1","admin user settings",$lang['ErrorAlreadyExists']));
+									test_pdo($lang["InstallingAdminGroup"], $insert_admin_group, str_replace("%1","admin group",$lang['ErrorAlreadyExists']));
+									test_pdo($lang["InstallingAdminGroupMember"], $insert_admin_group_member, str_replace("%1","admin group member",$lang['ErrorAlreadyExists']));
 									print("         </ul>\n");
 									print("         <br />\n");
 									print("         <h2>".$lang["InstallingDefaultData"]."</h2>\n");
@@ -980,8 +980,8 @@ switch($config['database_driver'])
 									print("</li>\n");
 									print("            <li>".$lang["InstallingPagesEnd"]."</li>\n");
 
-									testPDO($lang["InstallingLogoImage"], $insert_logo_image, str_replace("%1","logo image",$lang['ErrorAlreadyExists']));
-									testPDO($lang['InstallingConfigValues'], $insert_config, str_replace("%1","config values",$lang['ErrorAlreadyExists']));
+									test_pdo($lang["InstallingLogoImage"], $insert_logo_image, str_replace("%1","logo image",$lang['ErrorAlreadyExists']));
+									test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace("%1","config values",$lang['ErrorAlreadyExists']));
 									print("         </ul>\n");
 								}
 								break;

@@ -1,20 +1,20 @@
 <?php
 
-$page_id = $this->GetPageId();
-$user_id = $this->GetUserId();
+$page_id = $this->get_page_id();
+$user_id = $this->get_user_id();
 
-if ($this->GetUser() && $this->page)
+if ($this->get_user() && $this->page)
 {
-	if ($this->IsWatched($user_id, $page_id))
+	if ($this->is_watched($user_id, $page_id))
 	{
-		$this->ClearWatch($user_id, $page_id);
+		$this->clear_watch($user_id, $page_id);
 	}
 	else
 	{
-		$this->SetWatch($user_id, $page_id);
+		$this->set_watch($user_id, $page_id);
 	}
 }
 
-$this->Redirect($this->href());
+$this->redirect($this->href());
 
 ?>

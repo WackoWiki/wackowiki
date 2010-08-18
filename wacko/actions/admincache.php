@@ -1,16 +1,16 @@
 <?php
 
-if ($this->IsAdmin())
+if ($this->is_admin())
 {
 	if (!isset($_POST["clear"]))
 	{
-		echo $this->FormOpen();
+		echo $this->form_open();
 		?>
 <input
 	type="submit" name="clear"
-	value="<?php echo $this->GetTranslation("ClearCache");?>" />
+	value="<?php echo $this->get_translation("ClearCache");?>" />
 		<?php
-		echo $this->FormClose();
+		echo $this->form_close();
 	}
 	// clear cache
 	else
@@ -27,7 +27,7 @@ if ($this->IsAdmin())
 			}
 		}
 		closedir($handle);
-		$this->Query("DELETE FROM ".$this->config['table_prefix']."cache");
+		$this->query("DELETE FROM ".$this->config['table_prefix']."cache");
 
 		// queries
 		$handle = opendir(rtrim($this->config['cache_dir'].CACHE_SQL_DIR, "/"));
@@ -40,7 +40,7 @@ if ($this->IsAdmin())
 		}
 		closedir($handle);
 
-		echo $this->GetTranslation("CacheCleared");
+		echo $this->get_translation("CacheCleared");
 	}
 }
 

@@ -7,7 +7,7 @@ if (!isset($max)) $max = "";
 $curChar = "";
 $curday = "";
 
-if ($user_id = $this->GetUserId())
+if ($user_id = $this->get_user_id())
 {
 	if ($max) $limit = $max;
 	else $limit	= 100;
@@ -15,19 +15,19 @@ if ($user_id = $this->GetUserId())
 
 	if(isset($_GET["bydate"]) && $_GET["bydate"] == 1)
 	{
-		print($this->GetTranslation("MyChangesTitle1")." [<a href=\"".
-			$this->href("", "", "mode=mychanges")."#list\">".$this->GetTranslation("OrderABC")."</a>].<br /><br />\n");
+		print($this->get_translation("MyChangesTitle1")." [<a href=\"".
+			$this->href("", "", "mode=mychanges")."#list\">".$this->get_translation("OrderABC")."</a>].<br /><br />\n");
 			#.($this->config['rewrite_mode'] ? "?" : "&amp;").
 
-		$count	= $this->LoadSingle(
+		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'", 1);
 
-		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mychanges&amp;bydate=1#list');
+		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mychanges&amp;bydate=1#list');
 
-		if ($pages = $this->LoadAll(
+		if ($pages = $this->load_all(
 			"SELECT tag, modified, edit_note ".
 			"FROM {$prefix}page ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
@@ -61,7 +61,7 @@ if ($user_id = $this->GetUserId())
 				}
 
 				// print entry
-				print("<li>$time (".$this->ComposeLinkToPage($page['tag'], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page['tag'], "", "", 0).$edit_note."</li>\n");
+				print("<li>$time (".$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation("History"), 0).") ".$this->compose_link_to_page($page['tag'], "", "", 0).$edit_note."</li>\n");
 
 
 			}
@@ -73,24 +73,24 @@ if ($user_id = $this->GetUserId())
 		}
 		else
 		{
-			echo $this->GetTranslation("DidntEditAnyPage");
+			echo $this->get_translation("DidntEditAnyPage");
 		}
 	}
 	else
 	{
-		print($this->GetTranslation("MyChangesTitle2")." [<a href=\"".
+		print($this->get_translation("MyChangesTitle2")." [<a href=\"".
 			$this->href("", "", "mode=mychanges&amp;bydate=1")."#list\">". #($this->config['rewrite_mode'] ? "?" : "&amp;")."bydate=true\">".
-			$this->GetTranslation("OrderChange")."</a>].</strong><br /><br />\n");
+			$this->get_translation("OrderChange")."</a>].</strong><br /><br />\n");
 
-		$count	= $this->LoadSingle(
+		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'", 1);
 
-		$pagination = $this->Pagination($count['n'], $limit, 'p', 'mode=mychanges#list');
+		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mychanges#list');
 
-		if ($pages = $this->LoadAll(
+		if ($pages = $this->load_all(
 			"SELECT tag, modified ".
 			"FROM {$prefix}page ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
@@ -120,7 +120,7 @@ if ($user_id = $this->GetUserId())
 				}
 
 				// print entry
-				print("<li>".$this->GetTimeStringFormatted($page['modified'])." (".$this->ComposeLinkToPage($page['tag'], "revisions", $this->GetTranslation("History"), 0).") ".$this->ComposeLinkToPage($page['tag'], "", "", 0)."</li>\n");
+				print("<li>".$this->get_time_string_formatted($page['modified'])." (".$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation("History"), 0).") ".$this->compose_link_to_page($page['tag'], "", "", 0)."</li>\n");
 
 
 			}
@@ -132,13 +132,13 @@ if ($user_id = $this->GetUserId())
 		}
 		else
 		{
-			echo $this->GetTranslation("DidntEditAnyPage");
+			echo $this->get_translation("DidntEditAnyPage");
 		}
 	}
 }
 else
 {
-	echo $this->GetTranslation("NotLoggedInThusEdited");
+	echo $this->get_translation("NotLoggedInThusEdited");
 }
 
 ?>

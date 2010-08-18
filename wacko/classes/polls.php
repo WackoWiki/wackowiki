@@ -23,7 +23,7 @@ class Polls
 	// id number of the latest poll
 	function GetLastPollID()
 	{
-		$id = $this->engine->LoadSingle(
+		$id = $this->engine->load_single(
 			'SELECT poll_id '.
 			'FROM '.$this->engine->config['table_prefix'].'poll '.
 			'ORDER BY poll_id DESC '.
@@ -35,7 +35,7 @@ class Polls
 	// title information for a given poll
 	function GetPollTitle($id)
 	{
-		$title = $this->engine->LoadSingle(
+		$title = $this->engine->load_single(
 			"SELECT p.poll_id, p.text, p.user_id, p.plural, p.votes, p.start, p.end, u.user_name ".
 			"FROM {$this->engine->config['table_prefix']}poll p ".
 				"LEFT JOIN {$this->engine->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
@@ -47,7 +47,7 @@ class Polls
 	// sorts by total votes if "$votes = 1"
 	function GetPollVars($id, $votes = 0)
 	{
-		$vars = $this->engine->LoadAll(
+		$vars = $this->engine->load_all(
 			"SELECT poll_id, v_id, text, votes ".
 			"FROM {$this->engine->config['table_prefix']}poll ".
 			"WHERE poll_id = $id AND v_id <> 0 ".
@@ -60,7 +60,7 @@ class Polls
 	{
 		$years = '';
 
-		$list = $this->engine->LoadAll(
+		$list = $this->engine->load_all(
 			"SELECT YEAR(start) AS years ".
 			"FROM {$this->engine->config['table_prefix']}poll ".
 			"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
@@ -88,7 +88,7 @@ class Polls
 		{
 			case 'active':
 			case 'current':
-				$list = $this->engine->LoadAll(
+				$list = $this->engine->load_all(
 					"SELECT poll_id, text, user_id, plural, start ".
 					"FROM {$this->engine->config['table_prefix']}poll ".
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' AND end = '".SQL_NULLDATE."' ".
@@ -96,14 +96,14 @@ class Polls
 				break;
 			case 'mod':
 			case 'moderation':
-				$list = $this->engine->LoadAll(
+				$list = $this->engine->load_all(
 					"SELECT poll_id, text, user_id, plural ".
 					"FROM {$this->engine->config['table_prefix']}poll ".
 					"WHERE v_id = 0 AND start = '".SQL_NULLDATE."' AND end = '".SQL_NULLDATE."' ".
 					"ORDER BY poll_id ASC");
 				break;
 			case 'ended':
-				$list = $this->engine->LoadAll(
+				$list = $this->engine->load_all(
 					"SELECT poll_id, text, user_id, plural, start, end ".
 					"FROM {$this->engine->config['table_prefix']}poll ".
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' AND end <> '".SQL_NULLDATE."' ".
@@ -111,7 +111,7 @@ class Polls
 				break;
 			case 'archive':
 				if ($year == 0) $year = date('Y');
-				$list = $this->engine->LoadAll(
+				$list = $this->engine->load_all(
 					"SELECT poll_id, text, user_id, plural, start, end ".
 					"FROM {$this->engine->config['table_prefix']}poll ".
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
@@ -120,7 +120,7 @@ class Polls
 				break;
 			default:
 			case 'all':
-				$list = $this->engine->LoadAll(
+				$list = $this->engine->load_all(
 					"SELECT poll_id, text, user_id, plural, start, end ".
 					"FROM {$this->engine->config['table_prefix']}poll ".
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
@@ -137,7 +137,7 @@ class Polls
 		if ($plural != 1) $plural = 0;
 
 		// submitting title
-		$this->engine->Query(
+		$this->engine->query(
 			"INSERT INTO {$this->engine->config['table_prefix']}poll SET ".
 				"poll_id	= $id, ".
 				"text		= '".quote($this->engine->dblink, rtrim($topic, '.'))."', ".
@@ -150,7 +150,7 @@ class Polls
 		{
 			$v_id	+= 1;
 			$v_text	= quote($this->engine->dblink, $v_text);
-			$this->engine->Query(
+			$this->engine->query(
 				"INSERT INTO {$this->engine->config['table_prefix']}poll SET ".
 					"poll_id	= $id, ".
 					"v_id		= $v_id, ".
@@ -162,7 +162,7 @@ class Polls
 	// remove a given poll from the datebase
 	function RemovePoll($id)
 	{
-		return $this->engine->Query(
+		return $this->engine->query(
 			"DELETE FROM {$this->engine->config['table_prefix']}poll ".
 			"WHERE poll_id = $id");
 	}
@@ -178,18 +178,18 @@ class Polls
 		$header		= $this->GetPollTitle($id);
 		$vars		= $this->GetPollVars($id);
 		$duration	= $this->PollTime($header['start'], ($header['end'] == SQL_NULLDATE ? time() : $header['end']));
-		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->GetTranslation('PollsGuest').'</em>' : $header['user_name'] );
+		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->get_translation('PollsGuest').'</em>' : $header['user_name'] );
 
 		if ($header['start'] == SQL_NULLDATE)
 		{	// non-existent or not moderated poll
 			$poll	= '<table cellspacing="3" class="formation">'.
-					'<tr><th>'.$this->engine->GetTranslation('PollsError').'</th></tr>'.
-					'<tr><td align="center"><em>'.$this->engine->GetTranslation('PollsNotExists').'</em></td></tr>'.
+					'<tr><th>'.$this->engine->get_translation('PollsError').'</th></tr>'.
+					'<tr><td align="center"><em>'.$this->engine->get_translation('PollsNotExists').'</em></td></tr>'.
 					'</table>';
 		}
 		else
 		{
-			$poll	= $this->engine->FormOpen('', $tag, '', '', '', '#poll'.$id.'_form').
+			$poll	= $this->engine->form_open('', $tag, '', '', '', '#poll'.$id.'_form').
 					'<a name="p'.date('dm', strtotime($header['start'])).'"></a>'.
 					'<a name="poll'.$id.'_form"></a>'.
 					'<input name="poll" type="hidden" value="'.$id.'" />'.
@@ -205,14 +205,14 @@ class Polls
 						'<td style="width:95%;text-align:left;">'.$var['text'].'</td></tr>'.
 						'<tr class="lined"><td colspan="2"></td></tr>';
 			}
-			$poll	.= '<tr><td colspan="2"><small>'.$this->engine->GetTranslation('PollsLasts').': '.$duration.
-						'<br />'.$this->engine->GetTranslation('PollsAdded').': '.( strpos($header['user_id'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
+			$poll	.= '<tr><td colspan="2"><small>'.$this->engine->get_translation('PollsLasts').': '.$duration.
+						'<br />'.$this->engine->get_translation('PollsAdded').': '.( strpos($header['user_id'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
 					'<tr><td colspan="2" style="white-space:nowrap;">'.
-					'<input name="vote" id="submit" type="submit" value="'.$this->engine->GetTranslation('PollsSubmit').'" /> '.
-					'<input name="results" id="submit" type="submit" value="'.$this->engine->GetTranslation('PollsResults').'" />'.
+					'<input name="vote" id="submit" type="submit" value="'.$this->engine->get_translation('PollsSubmit').'" /> '.
+					'<input name="results" id="submit" type="submit" value="'.$this->engine->get_translation('PollsResults').'" />'.
 					'</tr></td>'.
 					'</table>'.
-					$this->engine->FormClose();
+					$this->engine->form_close();
 		}
 		return $poll;
 	}
@@ -226,7 +226,7 @@ class Polls
 		$header		= $this->GetPollTitle($id);
 		$vars		= $this->GetPollVars($id, 1);
 		$duration	= $this->PollTime($header['start'], ($header['end'] == SQL_NULLDATE ? time() : $header['end']));
-		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->GetTranslation('PollsGuest').'</em>' : $header['user_name'] );
+		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->get_translation('PollsGuest').'</em>' : $header['user_name'] );
 		$voters	= $header['votes'];
 
 		if ($header['plural'] != 1)		$total  = $header['votes'];
@@ -235,13 +235,13 @@ class Polls
 		if ($header['start'] == SQL_NULLDATE)
 		{	// non-existent or not moderated poll
 			$poll	= '<table cellspacing="3" class="formation">'.
-					'<tr><th>'.$this->engine->GetTranslation('PollsError').'</th></tr>'.
-					'<tr><td align="center"><em>'.$this->engine->GetTranslation('PollsNotExists').'</em></td></tr>'.
+					'<tr><th>'.$this->engine->get_translation('PollsError').'</th></tr>'.
+					'<tr><td align="center"><em>'.$this->engine->get_translation('PollsNotExists').'</em></td></tr>'.
 					'</table>';
 		}
 		else
 		{
-			$poll	= $this->engine->FormOpen().
+			$poll	= $this->engine->form_open().
 					'<a name="p'.date('dm', strtotime($header['start'])).'"></a>'.
 					'<a name="poll'.$id.'_form"></a>'.
 					'<table cellspacing="3" class="formation">'.
@@ -253,12 +253,12 @@ class Polls
 						'<td>&nbsp;<strong>'.$var['votes'].'</strong>&nbsp;</td>'.
 						'<td>&nbsp;<strong>'.$percent.'%</strong></td></tr>';
 			}
-			$poll	.= '<tr><td colspan="3"><small>'.$this->engine->GetTranslation('PollsTotalVotes').': '.$voters.
-						'<br />'.($header['end'] != SQL_NULLDATE ? $this->engine->GetTranslation('PollsLasted') :
-							$this->engine->GetTranslation('PollsLasts')).': '.$duration.
-						'<br />'.$this->engine->GetTranslation('PollsAdded').': '.( strpos($header['user_name'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
+			$poll	.= '<tr><td colspan="3"><small>'.$this->engine->get_translation('PollsTotalVotes').': '.$voters.
+						'<br />'.($header['end'] != SQL_NULLDATE ? $this->engine->get_translation('PollsLasted') :
+							$this->engine->get_translation('PollsLasts')).': '.$duration.
+						'<br />'.$this->engine->get_translation('PollsAdded').': '.( strpos($header['user_name'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
 					'</table>'.
-					$this->engine->FormClose();
+					$this->engine->form_close();
 		}
 
 		if ($header == true)
@@ -274,7 +274,7 @@ class Polls
 	// determine if user has voted a given poll
 	function PollIsVoted($id)
 	{
-		$cookie	= $this->engine->GetCookie('poll');
+		$cookie	= $this->engine->get_cookie('poll');
 		$ids	= explode(';', $cookie);
 
 		if (in_array($id, $ids) === true || $id == $cookie) return true;
@@ -284,11 +284,11 @@ class Polls
 	// set poll cookie
 	function SetPollCookie($id)
 	{
-		if ($cookie = $this->engine->GetCookie('poll')) $ids = explode(';', $cookie);
+		if ($cookie = $this->engine->get_cookie('poll')) $ids = explode(';', $cookie);
 		$ids[]	= $id;
 		$cookie	= implode(';', $ids);
-		$this->engine->SetSessionCookie('poll', $cookie);
-		$this->engine->SetPersistentCookie('poll', $cookie, 365);
+		$this->engine->set_session_cookie('poll', $cookie);
+		$this->engine->set_persistent_cookie('poll', $cookie, 365);
 		return true;
 	}
 
@@ -309,7 +309,7 @@ class Polls
 				if ($var['v_id'] == $vote_id)
 				{
 					$new = $var['votes'] + 1;
-					$this->engine->Query(
+					$this->engine->query(
 						"UPDATE {$this->engine->config['table_prefix']}poll ".
 						"SET votes = '".quote($this->engine->dblink, $new)."' ".
 						"WHERE poll_id = '".quote($this->engine->dblink, $id)."' ".
@@ -319,7 +319,7 @@ class Polls
 			}
 		}
 		$new = $header['votes'] + 1; //$total;
-		$this->engine->Query(
+		$this->engine->query(
 			"UPDATE {$this->engine->config['table_prefix']}poll ".
 			"SET votes = '".quote($this->engine->dblink, $new)."' ".
 			"WHERE poll_id = '".quote($this->engine->dblink, $id)."' ".

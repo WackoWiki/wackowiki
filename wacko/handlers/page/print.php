@@ -2,16 +2,16 @@
 <?php
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->Redirect($this->href("show"));
+if (!$this->page) $this->redirect($this->href("show"));
 
 // deny for comment
-if ($this->page['comment_on_id']) $this->Redirect($this->href("", $this->page['tag']));
+if ($this->page['comment_on_id']) $this->redirect($this->href("", $this->page['tag']));
 
-if ($this->HasAccess("read"))
+if ($this->has_access("read"))
 {
 	if (!$this->page)
 	{
-		print(str_replace("%1",$this->href("edit"),$this->GetTranslation("DoesNotExists")));
+		print(str_replace("%1",$this->href("edit"),$this->get_translation("DoesNotExists")));
 	}
 	else
 	{
@@ -22,42 +22,42 @@ if ($this->HasAccess("read"))
 			str_replace("%1",$this->href(),
 			str_replace("%2",$this->tag,
 			str_replace("%3",$this->page['modified'],
-			$this->GetTranslation("Revision")))).".</div>");
+			$this->get_translation("Revision")))).".</div>");
 		}*/
 
 		// start enumerating links
 		$this->numerate_links = array();
 
 		// build html body
-		$data = $this->Format($this->page['body'], "wacko");
+		$data = $this->format($this->page['body'], "wacko");
 
 		// display page
-		$data = $this->Format($data, "post_wacko", array("bad" => "good"));
-		$data = $this->NumerateToc($data); //  numerate toc if needed
+		$data = $this->format($data, "post_wacko", array("bad" => "good"));
+		$data = $this->numerate_toc($data); //  numerate toc if needed
 		echo $data;
 
 		// display comments
 		if ($_SESSION[$this->config['session_prefix'].'_'."show_comments"][$this->tag] || $this->forum)
 		{
-			if ($comments = $this->LoadComments($this->GetPageId()));
+			if ($comments = $this->load_comments($this->get_page_id()));
 			{
 				// display comments header
 				echo "<br /><br />";
 				echo "<div id=\"commentsfiles\">";
 				echo "<div class=\"commentsheader\">";
-				echo $this->GetTranslation("Comments_all");
+				echo $this->get_translation("Comments_all");
 				echo "</div>\n";
 
 				foreach ($comments as $comment)
 				{
-					if (!$comment['body_r']) $comment['body_r'] = $this->Format($comment['body']);
+					if (!$comment['body_r']) $comment['body_r'] = $this->format($comment['body']);
 
 					echo "<div class=\"comment\">".
 							"<span class=\"commentinfo\">".
-								"<strong>&#8212; ".( $comment['user'] == GUEST ? "<em>".$this->GetTranslation("Guest")."</em>" : $comment['user'] )."</strong> (".$this->GetTimeStringFormatted($comment['created']).
-								($comment['modified'] != $comment['created'] ? ", ".$this->GetTranslation("CommentEdited")." ".$this->GetTimeStringFormatted($comment['modified']) : "").")".
+								"<strong>&#8212; ".( $comment['user'] == GUEST ? "<em>".$this->get_translation("Guest")."</em>" : $comment['user'] )."</strong> (".$this->get_time_string_formatted($comment['created']).
+								($comment['modified'] != $comment['created'] ? ", ".$this->get_translation("CommentEdited")." ".$this->get_time_string_formatted($comment['modified']) : "").")".
 							"&nbsp;&nbsp;&nbsp;</span><br />".
-							$this->Format($comment['body_r'], "post_wacko").
+							$this->format($comment['body_r'], "post_wacko").
 						"</div>\n";
 				}
 				echo "</div>\n";
@@ -72,7 +72,7 @@ if ($this->HasAccess("read"))
 			echo "<br />";
 			echo "<div id=\"commentsfiles\">";
 			echo "<div class=\"linksheader\">";
-			echo $this->GetTranslation("Links");
+			echo $this->get_translation("Links");
 			echo "</div>\n";
 
 			$i = 0;
@@ -92,7 +92,7 @@ if ($this->HasAccess("read"))
 }
 else
 {
-	print($this->GetTranslation("ReadAccessDenied"));
+	print($this->get_translation("ReadAccessDenied"));
 }
 ?>
 </div>

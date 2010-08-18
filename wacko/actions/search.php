@@ -11,7 +11,7 @@ if (!function_exists('FullTextSearch'))
 {
 	function FullTextSearch(&$wacko, $phrase, $filter)
 	{
-		return $wacko->LoadAll(
+		return $wacko->load_all(
 			"SELECT tag, body, comment_on_id ".
 			"FROM ".$wacko->config['table_prefix']."page ".
 			"WHERE (( match(body) against('".quote($wacko->dblink, $phrase)."') ".
@@ -26,7 +26,7 @@ if (!function_exists('TagSearch'))
 {
 	function TagSearch(&$wacko, $phrase)
 	{
-		return $wacko->LoadAll(
+		return $wacko->load_all(
 			"SELECT tag, comment_on_id ".
 			"FROM ".$wacko->config['table_prefix']."page ".
 			"WHERE lower(tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
@@ -58,9 +58,9 @@ else
 
 if ($form)
 {
-	echo $this->FormOpen("", "", "get") ?>
+	echo $this->form_open("", "", "get") ?>
 
-<label for="searchfor"><?php echo $this->GetTranslation("SearchFor");?></label>
+<label for="searchfor"><?php echo $this->get_translation("SearchFor");?></label>
 :&nbsp;
 <br />
 <input
@@ -68,15 +68,15 @@ if ($form)
 	value="<?php echo htmlspecialchars(isset($_GET["phrase"])? $_GET["phrase"] : ""); ?>" />
 <input
 	type="submit"
-	value="<?php echo $this->GetTranslation("SearchButtonText"); ?>" />
+	value="<?php echo $this->get_translation("SearchButtonText"); ?>" />
 <br />
 <input
 	type="checkbox" name="topic"
 	<?php if ($mode == "topic") echo "CHECKED"; ?> id="checkboxSearch" />
-<label for="checkboxSearch"><?php echo $this->GetTranslation("TopicSearchText"); ?></label>
+<label for="checkboxSearch"><?php echo $this->get_translation("TopicSearchText"); ?></label>
 
 	<?php
-	echo $this->FormClose();
+	echo $this->form_close();
 }
 
 if ($phrase == "") $phrase = (isset($_GET["phrase"]) ? $_GET["phrase"] : NULL);
@@ -97,7 +97,7 @@ if ($phrase)
 		if ($results)
 		{
 			if (!$nomark) print(  "<div class=\"layout-box\"><p class=\"layout-box\"><span>".
-			$this->GetTranslation(($mode == "topic" ? "Topic" : "")."SearchResults").
+			$this->get_translation(($mode == "topic" ? "Topic" : "")."SearchResults").
 			" \"$phrase\":</span></p>");
 			// open list
 			if ($style == "ul") print "<ul id=\"search_results\">\n";
@@ -105,16 +105,16 @@ if ($phrase)
 
 			foreach ($results as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->HasAccess("read",$page['tag']) )
+				if (!$this->config['hide_locked'] || $this->has_access("read",$page['tag']) )
 				{
 					// Don't show it if it's a comment and we're hiding comments from this user
-					if($page['comment_on_id'] == '0' || ($page['comment_on_id'] != '0' && $this->UserAllowedComments()))
+					if($page['comment_on_id'] == '0' || ($page['comment_on_id'] != '0' && $this->user_allowed_comments()))
 					{
 						// open item
 						if ($style == "ul" || $style == "ol") print "<li>";
 						if ($style == "comma" && $i > 0) print ",\n";
 
-						print("<h3>".$this->Link("/".$page['tag'],"",$page['tag'])."</h3>");
+						print("<h3>".$this->link("/".$page['tag'],"",$page['tag'])."</h3>");
 						if ($mode !== "topic")
 						{
 							$context = getLineWithPhrase($phrase, $page['body'], $clean);
@@ -137,11 +137,11 @@ if ($phrase)
 			if (!$nomark) print("</div>");
 		}
 		else
-		if (!$nomark) echo $this->GetTranslation("NoResultsFor")."\"$phrase\".";
+		if (!$nomark) echo $this->get_translation("NoResultsFor")."\"$phrase\".";
 	}
 	else
 	{
-		if (!$nomark) echo $this->GetTranslation("NoResultsFor")."\"$phrase\".";
+		if (!$nomark) echo $this->get_translation("NoResultsFor")."\"$phrase\".";
 	}
 }
 
