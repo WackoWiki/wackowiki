@@ -63,7 +63,7 @@ $configFile['wacko_version'] = $config['wacko_version'];
 #$configFile[''] = $config[''];
 
 // convert config array into PHP code
-$configCode = "<?php\n// config.inc.php ".$lang["WrittenAt"].strftime("%c")."\n// ".$lang["ConfigDescription"]."\n// ".$lang["DontChange"]."\n\n";
+$configCode = "<?php\n// config.php ".$lang["WrittenAt"].strftime("%c")."\n// ".$lang["ConfigDescription"]."\n// ".$lang["DontChange"]."\n\n";
 $configCode .= array_to_str($configFile)."\n?>";
 
 // try to write configuration file
@@ -72,7 +72,7 @@ print("         <ul>\n");
 print("            <li>".$lang["Writing"]." - ");
 
 $perm_changed	= true;
-$filename		= 'config/config.inc.php';
+$filename		= 'config/config.php';
 
 if (file_put_contents($filename, $configCode) == true)
 {

@@ -5,7 +5,7 @@ require('classes/init.php');
 $init = new init();
 
 // define settings
-$init->settings();	// populate from config.inc.php
+$init->settings();	// populate from config.php
 $init->settings();	// initialize DBAL and populate from config table
 $init->dbal();
 $init->settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');

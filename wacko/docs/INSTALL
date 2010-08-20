@@ -15,7 +15,7 @@ Note that Wacko distributions normally unpack into directories that include the 
 in their name; you'll probably want to rename those to just "wacko" -- or, if you're
 on a unixoid system, set up a symbolic link.
 
-For configuration purposes, you'll probably want to make config.inc.php writable
+For configuration purposes, you'll probably want to make config.php writable
 by the web server, at least temporarily.
 
 WackoWiki can export the RecentChanges list as RSS. Please make sure the xml/
