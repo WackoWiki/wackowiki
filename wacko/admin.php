@@ -19,7 +19,7 @@ require('classes/init.php');
 $init = new init();
 
 // define settings
-$init->settings(); // populate from config.inc.php
+$init->settings(); // populate from config.php
 $init->settings(); // initialize DBAL and populate from config table
 $init->dbal();
 $init->settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
@@ -113,8 +113,8 @@ if (isset($_POST['password']))
 	if (hash('sha1', $_POST['password']) == $pwd)
 	{
 		$engine->set_session_cookie('admin', hash('sha1', $_POST['password']), '', ( $engine->config['ssl'] == true ? 1 : 0 ));
-		$_SESSION['CREATED'] = time();
-		$_SESSION['LAST_ACTIVITY'] = time();
+		$_SESSION['created'] = time();
+		$_SESSION['last_activity'] = time();
 		$engine->log(1, $engine->get_translation('LogAdminLoginSuccess', $engine->config['language']));
 		$engine->redirect(( $engine->config['ssl'] == true ? str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->href('admin.php')) : $engine->href('admin.php') ));
 	}
@@ -166,7 +166,7 @@ global $_user;
 $_user = $engine->get_user();
 $engine->set_user($user, 0);
 
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) //1800
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 900)) //1800
 {
 	// last request was more than 15 minutes ago
 	$engine->delete_cookie('admin', true, true);
@@ -178,18 +178,18 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
 	$engine->redirect('admin.php');
 }
 
-$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
+$_SESSION['last_activity'] = time(); // update last activity time stamp
 
-if (!isset($_SESSION['CREATED']))
+if (!isset($_SESSION['created']))
 {
-	$_SESSION['CREATED'] = time();
+	$_SESSION['created'] = time();
 }
-else if (time() - $_SESSION['CREATED'] > 1800)
+else if (time() - $_SESSION['created'] > 1800)
 {
 	// session started more than 30 minates ago
 	$engine->restart_user_session();
 	//session_regenerate_id(true);    // change session ID for the current session an invalidate old session ID
-	$_SESSION['CREATED'] = time();  // update creation time
+	$_SESSION['created'] = time();  // update creation time
 }
 
 

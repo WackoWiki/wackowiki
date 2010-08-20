@@ -10,7 +10,7 @@ DOWNLOAD AND INSTALLATION ------------------------------------------------------
 * Download MiniWackoLicious as ZIP- or TAR.GZ archive, unzip it and copy the
   miniwackolicious directory to your themes folder of the WackoFork
   installation.
-* Edit your config.inc.php (or personal.config.inc.php) and set
+* Edit your config.php (or personal.config.php) and set
   "theme" => "miniwackolicious".
 * Your wacko user may also select this theme on the Settings page.
 

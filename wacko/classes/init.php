@@ -150,13 +150,13 @@ class Init
 			*/
 
 				// load default configuration values
-				if ( @file_exists("config/config_defaults.inc.php") )
+				if ( @file_exists("config/config_defaults.php") )
 				{
-					require_once("config/config_defaults.inc.php");
+					require_once("config/config_defaults.php");
 				}
 				else
 				{
-					die("Error loading WackoWiki default config data: file `config/config_defaults.inc.php` is missing.");
+					die("Error loading WackoWiki default config data: file `config/config_defaults.php` is missing.");
 				}
 
 				// load primary config
@@ -174,16 +174,16 @@ class Init
 						$this->config = $wackoConfig;
 					}
 				}
-				else if ( @file_exists("config/config.inc.php") )
+				else if ( @file_exists("config/config.php") )
 				{
 					// If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R4.3
-					if ( @filesize("config/config.inc.php") > 0)
+					if ( @filesize("config/config.php") > 0)
 					{
-						require("config/config.inc.php");
+						require("config/config.php");
 						$this->config = $wackoConfig;
 
 						if ($wackoConfig['wacko_version'] != "R4.3.rc" && (!$wackoConfig['system_seed'] || strlen($wackoConfig['system_seed']) < 20))
-							die("WackoWiki fatal error: system_seed in config.inc.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
+							die("WackoWiki fatal error: system_seed in config.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
 
 						$wackoConfig['system_seed']	= hash('sha1', $wackoConfig['system_seed']);
 					}

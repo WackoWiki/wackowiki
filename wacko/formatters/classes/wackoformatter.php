@@ -2,12 +2,9 @@
 /*
 
 WackoFormatter.
-v2.2.2.
-10 January 2005.
 
 */
 
-// TODO: for default use only red, yello, green, grey maybe blue .($this->object->config['allow_x11colors'] == 1 ? "x11_colors" : "default_colors").
 class WackoFormatter
 {
 	var $object;
@@ -174,7 +171,7 @@ class WackoFormatter
 	"rosybrown" => "rosybrown",
 	);
 
-	function wacko_formatter( &$object )
+	function WackoFormatter( &$object )
 	{
 		$this->object = &$object;
 
