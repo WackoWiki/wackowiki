@@ -246,6 +246,7 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"email_confirm VARCHAR(40) NOT NULL DEFAULT '',".
 					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"session_expire INT(10) UNSIGNED NOT NULL,".
+					"last_mark DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"login_count INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"lost_password_request_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',".
 					"failed_login_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',".

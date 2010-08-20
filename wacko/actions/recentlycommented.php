@@ -6,6 +6,8 @@ if (!function_exists('load_recently_commented'))
 	{
 		$_ids = "";
 		$limit = (int) $limit;
+		$comments = "";
+		$pagination = "";
 
 		// NOTE: this is really stupid. Maybe my SQL-Fu is too weak, but apparently there is no easier way
 		if ($ids = $wacko->load_all(

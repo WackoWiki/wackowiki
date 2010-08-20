@@ -2721,8 +2721,8 @@ class Wacko
 	// extract user data from the session array
 	function get_user()
 	{
-		if (isset( $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash']."user"] ))
-			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash']."user"];
+		if (isset( $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'."user"] ))
+			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'."user"];
 		else
 			return NULL;
 	}
@@ -2731,11 +2731,11 @@ class Wacko
 	function get_user_setting($setting, $option = 0, $guest = 0)
 	{
 		if (!$option)
-			if (isset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].( !$guest ? "user" : "guest" )][$setting]))
-				return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].( !$guest ? "user" : "guest" )][$setting];
+			if (isset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? "user" : "guest" )][$setting]))
+				return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? "user" : "guest" )][$setting];
 		else
-			if (isset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].( !$guest ? "user" : "guest" )]["options"][$setting]))
-				return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].( !$guest ? "user" : "guest" )]["options"][$setting];
+			if (isset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? "user" : "guest" )]["options"][$setting]))
+				return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? "user" : "guest" )]["options"][$setting];
 	}
 
 	// set/update specific element of user session array
@@ -2744,15 +2744,15 @@ class Wacko
 	function set_user_setting($setting, $value, $option = 0, $guest = 0)
 	{
 		if (!$option)
-			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].( !$guest ? "user" : "guest" )][$setting] = $value;
+			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? "user" : "guest" )][$setting] = $value;
 		else
-			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].( !$guest ? "user" : "guest" )]["options"][$setting] = $value;
+			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? "user" : "guest" )]["options"][$setting] = $value;
 	}
 
 	// insert user data into the session array
 	function set_user($user, $ip = 1)
 	{
-		$_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash']."user"] = $user;
+		$_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'."user"] = $user;
 
 		// define current IP for foregoing checks
 		if ($ip == true) $this->set_user_setting("ip", (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['ssl_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) );
@@ -2767,6 +2767,16 @@ class Wacko
 			return $this->query(
 				"UPDATE {$this->config['user_table']} ".
 				"SET session_time = NOW() ".
+				"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
+				"LIMIT 1");
+	}
+
+	function update_last_mark($user)
+	{
+		if ($user['user_name'] == true)
+			return $this->query(
+				"UPDATE {$this->config['user_table']} ".
+				"SET last_mark = NOW() ".
 				"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
 				"LIMIT 1");
 	}
@@ -2868,7 +2878,7 @@ class Wacko
 
 		$this->delete_cookie('auth', true, true);
 		$this->delete_cookie('sid', true, false);
-		unset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'user']);
+		unset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']);
 
 		$session_id = hash('sha1', $this->timer.$this->config['system_seed'].$this->get_user_setting('password').session_id());
 
@@ -3469,7 +3479,18 @@ class Wacko
 			{
 				foreach($_bookmarks as $_bookmark)
 				{
-					$user_bm .= "((".$_bookmark['tag'].(!empty($_bookmark['bm_title']) ? " ".$_bookmark['bm_title'] : (!empty($_bookmark['title']) ? " ".$_bookmark['title'] : "" )).(!empty($_bookmark['lang']) ? " @@".$_bookmark['lang'] : "")."))\n";
+					$user_bm .= "((".$_bookmark['tag'].
+						(!empty($_bookmark['bm_title'])
+							? " ".$_bookmark['bm_title']
+							: (!empty($_bookmark['title'])
+								? " ".$_bookmark['title']
+								: " ".$_bookmark['tag']
+								)
+						).
+						(!empty($_bookmark['lang'])
+							? " @@".$_bookmark['lang']
+							: "").
+					"))\n";
 				}
 			}
 			return $user_bm;

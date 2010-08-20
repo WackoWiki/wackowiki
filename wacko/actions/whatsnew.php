@@ -13,8 +13,8 @@ $user	= $this->get_user();
 // process 'mark read' - reset session time
 if (isset($_GET['markread']) && $user == true)
 {
-	$this->update_session_time($user);
-	$this->set_user_setting('session_time', date('Y-m-d H:i:s', time()));
+	$this->update_last_mark($user);
+	$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
 	$user = $this->get_user();
 }
 

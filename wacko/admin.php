@@ -220,7 +220,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 		<div id="tools">
 			<span style="font-family: 'Lucida Console', 'Courier New', monospace;">
 
-				<?php $time_left = round((1800 - (time() - $_SESSION['CREATED'])) / 60);
+				<?php $time_left = round((1800 - (time() - $_SESSION['created'])) / 60);
 				echo "Time left: ".$time_left." minutes"; ?>
 				&nbsp;&nbsp;
 				<?php echo $engine->compose_link_to_page('/', '', rtrim($engine->config['base_url'], '/')); ?>
