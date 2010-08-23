@@ -144,7 +144,7 @@ else
 							$session = 30;
 							break;
 						default:
-							$session = $this->config['cookie_session'];
+							$session = $this->config['session_expiration'];
 					}
 
 					$this->log_user_in($existingUser, $_POST['persistent'], $session);

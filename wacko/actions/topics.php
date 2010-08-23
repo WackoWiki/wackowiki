@@ -145,7 +145,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		}
 
 		// check new comments
-		if ($user['sessiontime'] == true && ( ($comment['user'] != $user['user_name'] && $comment['created'] > $user['sessiontime']) || ($topic['owner'] != $user['user_name'] && $topic['created'] > $user['sessiontime']) ))
+		if ($user['last_mark'] == true && ( ($comment['user'] != $user['user_name'] && $comment['created'] > $user['last_mark']) || ($topic['owner'] != $user['user_name'] && $topic['created'] > $user['last_mark']) ))
 			$updated = true;
 
 		// print

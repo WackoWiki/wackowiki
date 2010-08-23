@@ -32,7 +32,7 @@ function admin_configsecurity(&$engine, &$module)
 		$config['captcha_new_page']				= (int)$_POST['captcha_new_page'];
 		$config['captcha_edit_page']			= (int)$_POST['captcha_edit_page'];
 		$config['captcha_registration']			= (int)$_POST['captcha_registration'];
-		$config['strong_cookies']				= (int)$_POST['strong_cookies'];
+		$config['session_encrypt_cookie']				= (int)$_POST['session_encrypt_cookie'];
 		$config['antidupe']						= (int)$_POST['antidupe'];
 		$config['default_read_acl']				= (string)$_POST['default_read_acl'];
 		$config['default_write_acl']			= (string)$_POST['default_write_acl'];
@@ -54,7 +54,7 @@ function admin_configsecurity(&$engine, &$module)
 		$config['log_level']					= (int)$_POST['log_level'];
 		$config['log_default_show']				= (int)$_POST['log_default_show'];
 		$config['log_purge_time']				= (int)$_POST['log_purge_time'];
-		$config['cookie_session']				= (int)$_POST['cookie_session'];
+		$config['session_expiration']				= (int)$_POST['session_expiration'];
 		$config['comment_delay']				= (int)$_POST['comment_delay'];
 		$config['intercom_delay']				= (int)$_POST['intercom_delay'];
 
@@ -83,9 +83,9 @@ function admin_configsecurity(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="strong_cookies"><strong>Secure cookies:</strong><br />
+				<td class="label"><label for="session_encrypt_cookie"><strong>Secure cookies:</strong><br />
 				<small>Use the authenticated cookie with protection against unauthorized use. Enabling this option may complicate the work of users simultaneously through multiple browsers.</small></label></td>
-				<td><input type="checkbox" id="strong_cookies" name="strong_cookies" value="1"<?php echo ( $engine->config['strong_cookies'] ? ' checked="checked"' : '' );?> /></td>
+				<td><input type="checkbox" id="session_encrypt_cookie" name="session_encrypt_cookie" value="1"<?php echo ( $engine->config['session_encrypt_cookie'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -340,9 +340,9 @@ function admin_configsecurity(&$engine, &$module)
 				</th>
 			</tr>
 			<tr>
-				<td class="label"><label for="cookie_session"><strong>Term login cookie:</strong><br />
+				<td class="label"><label for="session_expiration"><strong>Term login cookie:</strong><br />
 				<small>The lifetime of the user cookie login by default (in days).</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="cookie_session" name="cookie_session" value="<?php echo htmlspecialchars($engine->config['cookie_session']);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="session_expiration" name="session_expiration" value="<?php echo htmlspecialchars($engine->config['session_expiration']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

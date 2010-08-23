@@ -23,7 +23,7 @@
 		<h1><?php echo $this->config['wacko_name']; ?></h1>
 		<a href="/"><?php echo rtrim($this->config['base_url'], '/'); ?></a><?php if ($this->page) { ?>&nbsp;&nbsp;&nbsp;&nbsp;modified: <?php echo $this->get_page_time_formatted(); } ?><br />
 		<?php echo $this->get_page_path() ?><br />
-		<a href="<?php echo $this->href() ?>">&laquo back</a>
+		<a href="<?php echo $this->href() ?>">&laquo; back</a>
 	</div>
 </div>
 <div id="content" style="letter-spacing: normal;">

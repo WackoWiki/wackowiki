@@ -80,11 +80,14 @@ function random_seed($length, $seed_complexity)
 print("         <h2>".$lang["TestingConfiguration"]."</h2>\n");
 
 // Generic Default Inserts
-if ( ( $config['system_seed'] == "") )
+if ($config['system_seed'] == "")
 	$config['system_seed'] = random_seed(20, 3);
 
 $salt = random_seed(4, 3);
 $password_encrypted = hash('sha1', $config['admin_name'].$salt.$_POST['password']);
+
+$config_insert = '';
+
 // system holds all default pages
 $insert_system = "INSERT INTO ".$config['table_prefix']."user (user_name, password, salt, email, account_type, signup_time) VALUES ('System', '', '', '', '1', '')";
 $insert_admin = "INSERT INTO ".$config['table_prefix']."user (user_name, password, salt, email, signup_time) VALUES ('".$config['admin_name']."', '".$password_encrypted."', '".$salt."', '".$config['admin_email']."', NOW())";
@@ -99,7 +102,7 @@ $insert_admin_group_member = "INSERT INTO ".$config['table_prefix']."group_membe
 $insert_logo_image = "INSERT INTO ".$config['table_prefix']."upload (page_id, user_id, filename, description, uploaded_dt, filesize, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1),'wacko4.png', 'WackoWiki', NOW(), '1580', '108', '50', 'png')";
 
 // inserting config values
-$configDb['abuse_email'] = $config['abuse_email'];
+$configDb['abuse_email'] = $config['admin_email'];
 $configDb['admin_email'] = $config['admin_email'];
 $configDb['admin_name'] = $config['admin_name'];
 $configDb['allow_rawhtml'] = $config['allow_rawhtml'];
@@ -118,7 +121,7 @@ $configDb['captcha_new_page'] = $config['captcha_new_page'];
 $configDb['captcha_registration'] = $config['captcha_registration'];
 $configDb['comments_count'] = $config['comments_count'];
 $configDb['cookie_prefix'] = $config['cookie_prefix'];
-$configDb['cookie_session'] = $config['cookie_session'];
+$configDb['session_expiration'] = $config['session_expiration'];
 $configDb['date_format'] = $config['date_format'];
 $configDb['date_macro_format'] = $config['date_macro_format'];
 $configDb['date_precise_format'] = $config['date_precise_format'];
@@ -177,7 +180,11 @@ $configDb['rename_globalacl'] = $config['rename_globalacl'];
 $configDb['revisions_hide_cancel'] = $config['revisions_hide_cancel'];
 $configDb['rewrite_mode'] = $config['rewrite_mode'];
 $configDb['root_page'] = $config['root_page'];
+$configDb['session_match_ip'] = $config['session_match_ip'];
+$configDb['session_match_useragent'] = $config['session_match_useragent'];
 $configDb['session_prefix'] = $config['session_prefix'];
+$configDb['session_time_to_update'] = $config['session_time_to_update'];
+$configDb['session_use_db'] = $config['session_use_db'];
 $configDb['show_spaces'] = $config['show_spaces'];
 $configDb['spam_filter'] = $config['spam_filter'];
 $configDb['ssl'] = $config['ssl'];
@@ -185,7 +192,7 @@ $configDb['ssl_implicit'] = $config['ssl_implicit'];
 $configDb['ssl_proxy'] = $config['ssl_proxy'];
 $configDb['standard_handlers'] = $config['standard_handlers'];
 $configDb['store_deleted_pages'] = $config['store_deleted_pages'];
-$configDb['strong_cookies'] = $config['strong_cookies'];
+$configDb['session_encrypt_cookie'] = $config['session_encrypt_cookie'];
 $configDb['theme'] = $config['theme'];
 $configDb['time_format'] = $config['time_format'];
 $configDb['time_format_seconds'] = $config['time_format_seconds'];
