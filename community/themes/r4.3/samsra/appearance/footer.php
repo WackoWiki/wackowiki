@@ -61,7 +61,7 @@ print("<a href=\"".$this->href("referrers")."\"><img src=\"".$this->config['them
 ?>
 <?php
 // Watch/Unwatch icon
-echo ($this->iswatched === true ? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation("RemoveWatch")."\" alt=\"".$this->get_translation("RemoveWatch")."\"  /></a>" : "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation("set_watch")."\" alt=\"".$this->get_translation("set_watch")."\" /></a>" )
+echo ($this->iswatched === true ? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation("RemoveWatch")."\" alt=\"".$this->get_translation("RemoveWatch")."\"  /></a>" : "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation("SetWatch")."\" alt=\"".$this->get_translation("SetWatch")."\" /></a>" )
 ?> |
 <?php
 // Print icon

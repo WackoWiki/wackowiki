@@ -21,8 +21,8 @@
 	title="<?php echo $this->get_translation("RemoveWatch"); ?>"
 	width="16" height="16" /> <?php } else { ?> <img
 	src="<?php echo $this->config['theme_url']; ?>images/watch-add.gif"
-	alt="<?php echo $this->get_translation("set_watch"); ?>"
-	title="<?php echo $this->get_translation("set_watch"); ?>" width="16"
+	alt="<?php echo $this->get_translation("SetWatch"); ?>"
+	title="<?php echo $this->get_translation("SetWatch"); ?>" width="16"
 	height="16" /> <?php } ?> </a> <?php // Bookmark page ?> <?php if(in_array($this->tag, $this->get_bookmark_links())) { ?>
 <a href="<?php echo $this->href('', '', "removebookmark=yes"); ?>"> <img
 	src="<?php echo $this->config['theme_url']; ?>images/bookmark-remove.gif"

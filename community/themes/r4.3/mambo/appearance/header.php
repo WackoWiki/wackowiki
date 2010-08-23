@@ -212,7 +212,7 @@ echo $this->page['modified'] ? "<a href=\"".$this->href("revisions")."\" title=\
 <div class="header">
 	<?php echo ($this->iswatched === true
 			? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation("RemoveWatch")."\" alt=\"".$this->get_translation("RemoveWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>"
-			: "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation("set_watch")."\" alt=\"".$this->get_translation("set_watch")."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?> |
+			: "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation("SetWatch")."\" alt=\"".$this->get_translation("SetWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?> |
   	<?php echo "<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation("PrintVersion")."\" alt=\"".$this->get_translation("PrintVersion")."\"  align=\"absmiddle\" border=\"0\" /></a>";?> |
     <?php
 		if ($this->get_user()) { ?>

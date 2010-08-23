@@ -180,7 +180,7 @@ echo $this->has_access("write") ? "<br /><a href=\"".$this->href("edit")."\" acc
   <br />
   <?php
 // Watch/Unwatch icon
-echo ($this->is_watched($this->get_user_name(), $this->tag) ? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation("RemoveWatch")."\" alt=\"".$this->get_translation("RemoveWatch")."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->get_translation("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation("set_watch")."\" alt=\"".$this->get_translation("set_watch")."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->get_translation("set_watch")."</a>" );
+echo ($this->is_watched($this->get_user_name(), $this->tag) ? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation("RemoveWatch")."\" alt=\"".$this->get_translation("RemoveWatch")."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->get_translation("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation("SetWatch")."\" alt=\"".$this->get_translation("SetWatch")."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->get_translation("SetWatch")."</a>" );
 ?>
   <br />
   <?php

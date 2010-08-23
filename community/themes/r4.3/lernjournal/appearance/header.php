@@ -178,7 +178,7 @@ echo $this->has_access("write") ? "<br /><a href=\"".$this->href("edit")."\" acc
 ?><br />
   <?php
 // Watch/Unwatch icon
-echo ($this->iswatched === true ? "<a href=\"".$this->href("watch")."\">".$this->get_translation("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\">".$this->get_translation("set_watch")."</a>" );
+echo ($this->iswatched === true ? "<a href=\"".$this->href("watch")."\">".$this->get_translation("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\">".$this->get_translation("SetWatch")."</a>" );
 ?><br />
   <?php
  // Rename link
