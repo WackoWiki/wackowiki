@@ -2,8 +2,6 @@
 /*
 
 Typografica library: paragrafica class.
-v.2.6
-23 February 2005.
 
 ---------
 
@@ -15,7 +13,7 @@ All rights reserved.
 class paragrafica
 {
 	var $ignore = "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex to be ignored
-	// paragpaph is a chicken-feed like this: <t->text, text, fucking text<-t>
+	// paragpaph is a chicken-feed like this: <t->text, text, just text<-t>
 	var $wacko;
 	var $t0 = array( // terminators like <-t>$1<t->
 		"/(<br[^>]*>)(\s*<br[^>]*>)+/si",
@@ -39,6 +37,9 @@ class paragrafica
 	array( // wronginators-2
 		"!(</li>)!si",
 	),
+	array( // wronginators-3
+	"!(</pre>)!si",
+	),
 	);
 	var $t2 = array( // terminators like $1<t->
 	array( // rightinators
@@ -56,6 +57,9 @@ class paragrafica
 	),
 	array( // wronginators-2
 		"!(<li[^>]*>)!is",
+	),
+	array( // wronginators-3
+		"!(<pre[^>]*>)!is",
 	),
 	);
 

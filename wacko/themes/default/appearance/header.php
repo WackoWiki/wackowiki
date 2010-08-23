@@ -169,7 +169,7 @@ echo $this->form_close();
 <div class="breadcrumb">
 <?php
 // Shows breadcrumbs
-echo $this->get_page_path($titles = false, $separator = ' &gt ', $linking = true, true); ?>
+echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true, true); ?>
 </div>
 </div>
 <div id="content">

@@ -1137,6 +1137,7 @@ class Wacko
 	// $user		- attach guest pseudonym
 	function save_page($tag, $title = "", $body, $edit_note = "", $minor_edit = "0", $comment_on_id = "0", $lang = false, $mute = false, $user = false)
 	{
+		$desc = "";
 		// user data
 		$ip = $this->get_user_ip();
 
@@ -1595,7 +1596,7 @@ class Wacko
 	function set_persistent_cookie($name, $value, $days = 0, $secure = 0, $httponly = 1)
 	{
 		// set to default if no pediod given
-		if ($days == 0) $days = $this->config['cookie_session'];
+		if ($days == 0) $days = $this->config['session_expiration'];
 
 		setcookie($this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash'], $value, time() + $days * 24 * 3600, $this->config['cookie_path'], "", ( $secure ? true : false ), ( $httponly ? true : false ));
 		$_COOKIE[$this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash']] = $value;
@@ -2784,11 +2785,11 @@ class Wacko
 	function log_user_in($user, $persistent = 1, $session = 0)
 	{
 		// cookie elements
-		$session	= ( $session == 0 ? $this->config['cookie_session'] : $session );
+		$session	= ( $session == 0 ? $this->config['session_expiration'] : $session );
 		$session	= ( $persistent ? $session : 0.25 );
 		$ses_time	= time() + $session * 24 * 3600;
 
-		if ($this->config['strong_cookies'] == true)
+		if ($this->config['session_encrypt_cookie'] == true)
 		{
 			$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
 			$username	= $user['user_name'];
@@ -2843,7 +2844,7 @@ class Wacko
 
 		if (true == $cookie = $this->get_cookie($name))
 		{
-			if ($this->config['strong_cookies'] == true)
+			if ($this->config['session_encrypt_cookie'] == true)
 			{
 				list($username, $b64password, $ses_time, $cookie_mac) = explode(';', $cookie);
 				$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
@@ -3867,7 +3868,7 @@ class Wacko
 		}
 
 		// in strong cookie mode check session validity
-		if ($this->config['strong_cookies'] == true)
+		if ($this->config['session_encrypt_cookie'] == true)
 		{
 			if ($user['session_expire'] != 0 && time() < $user['session_expire'] &&
 			time() < $auth['ses_time'] && $user['session_expire'] == $auth['ses_time'] &&

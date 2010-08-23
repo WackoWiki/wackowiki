@@ -10,7 +10,7 @@ if (isset($vars['for']))
 else
 {
 	$tag = $this->tag;
-	$page_id = $this->getPageId();
+	$page_id = $this->get_page_id();
 }
 if ($this->user_is_owner($page_id))
 {

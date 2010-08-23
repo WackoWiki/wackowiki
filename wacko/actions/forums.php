@@ -73,7 +73,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			echo '<tr class="lined">'.
 					'<td style="width:70%" valign="top">'.
 						( $this->has_access('write', $forum['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).
-						( $user['sessiontime'] == true && $comment['user'] != $user['user_name'] && $comment['created'] > $user['sessiontime'] ? '<strong class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</strong> ' : '' ).
+						( $user['last_mark'] == true && $comment['user'] != $user['user_name'] && $comment['created'] > $user['last_mark'] ? '<strong class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</strong> ' : '' ).
 						'<strong>'.$this->link($forum['tag'], '', $forum['title'], 0).'</strong><br />'.
 						'<small><small>'.$forum['description'].'</small></small>'.
 					'</td>'.

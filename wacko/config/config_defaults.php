@@ -13,7 +13,7 @@ $wackoConfig = array(
 
 	"table_prefix" => "wacko_",
 	"cookie_prefix" => "wacko_",
-	"cookie_session" => 30, // cookie_expire_days
+	"session_expiration" => 30, // cookie_expire_days
 	"session_prefix" => "wacko43_",
 
 	"root_page" => "HomePage",
@@ -141,8 +141,12 @@ $wackoConfig = array(
 	"captcha_edit_page" => 1,
 	"captcha_registration" => 1,
 
-	"strong_cookies" => 0,
+	"session_encrypt_cookie" => 0,
 	"antidupe" => 0,
+	"session_match_ip" => FALSE,
+	"session_match_useragent" => TRUE,
+	"session_use_db" => FALSE,
+	"session_time_to_update" => 300,
 
 	"system_seed" => "", // installer autogenerate random one
 	"recovery_password" => "",

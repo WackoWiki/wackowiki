@@ -214,6 +214,15 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"KEY idx_comment_on_id (comment_on_id)".
 				") TYPE=MyISAM;";
 
+$table_session = "CREATE TABLE {$pref}session (".
+					"session_id varchar( 40 ) DEFAULT '0' NOT NULL ,".
+					"ip_address varchar( 16 ) DEFAULT '0' NOT NULL ,".
+					"user_agent varchar( 50 ) NOT NULL ,".
+					"last_activity int( 10 ) unsigned DEFAULT 0 NOT NULL ,".
+					"user_data text NOT NULL ,".
+					"PRIMARY KEY ( session_id )".
+					") TYPE=MyISAM;";
+
 $table_upload = "CREATE TABLE {$pref}upload (".
 					"upload_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".

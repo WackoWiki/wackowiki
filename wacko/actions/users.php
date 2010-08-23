@@ -98,7 +98,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 
 		// header and profile data
 		echo '<h1>'.$user['user_name'].'</h1>';
-		echo '<small><a href="'.$this->href('', $this->tag).'">&laquo '.$this->get_translation('UsersList')."</a></small>\n";
+		echo '<small><a href="'.$this->href('', $this->tag).'">&laquo; '.$this->get_translation('UsersList')."</a></small>\n";
 		echo '<h2>'.$this->get_translation('UsersProfile').'</h2>'."\n";
 
 		// basic info
