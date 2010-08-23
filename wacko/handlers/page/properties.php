@@ -333,7 +333,7 @@ if ($langs = $this->available_languages())
 	<li><a href="<?php echo $this->href("categories"); ?>"><?php echo $this->get_translation("SettingsCategories"); ?></a></li>
 	<li><a href="<?php echo $this->href("upload"); ?>"><?php echo $this->get_translation("SettingsUpload"); ?></a></li>
 	<li><a href="<?php echo $this->href("referrers"); ?>"><?php echo $this->get_translation("SettingsReferrers"); ?></a></li>
-	<li><a href="<?php echo $this->href("watch"); ?>"><?php echo ($this->iswatched === true ? $this->get_translation("RemoveWatch") : $this->get_translation("set_watch")); ?></a></li>
+	<li><a href="<?php echo $this->href("watch"); ?>"><?php echo ($this->iswatched === true ? $this->get_translation("RemoveWatch") : $this->get_translation("SetWatch")); ?></a></li>
 	<li><a href="<?php echo $this->href("print");?>"><?php echo $this->get_translation("SettingsPrint"); ?></a></li>
 	<li><a href="<?php echo $this->href("msword");?>"><?php echo $this->get_translation("SettingsMsword"); ?></a></li>
 	<li><a href="<?php echo $this->href("latex");?>"><?php echo $this->get_translation("SettingsLatex"); ?></a></li>
