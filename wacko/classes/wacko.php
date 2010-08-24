@@ -372,6 +372,8 @@ class Wacko
 
 	function user_agent_language()
 	{
+		$lang = '';
+
 		if ($this->config['multilanguage'])
 		{
 			if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))

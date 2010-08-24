@@ -173,9 +173,7 @@ else if (isset($_POST["action"]) && $_POST["action"] == "login")
 					"SET ".
 						"user_id		= '".quote($this->dblink, $_user_id['user_id'])."', ".
 						"typografica	= '".(($this->config['default_typografica'] == 1) ? 1 : 0)."', ".
-						($lang
-							? "lang		= '".quote($this->dblink, $lang)."', "
-							: "").
+						"lang			= '".quote($this->dblink, ($lang ? $lang : $this->config['language']))."', ".
 						"theme			= '".quote($this->dblink, $this->config['theme'])."', ".
 						"send_watchmail	= '".quote($this->dblink, 1)."'");
 

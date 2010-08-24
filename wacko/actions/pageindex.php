@@ -41,11 +41,11 @@ if ($pages = $this->load_all(
 	}
 }
 
-//  display navigation
+// display navigation
 if ($pages_to_display)
 {
-	//  display navigation
-	if ($pages_to_display)
+	// pagination
+	if (isset($pagination['text']))
 		echo "<span class=\"pagination\">{$pagination['text']}</span><br /><br />\n";
 
 	echo "<ul class=\"ul_list\">\n";
@@ -83,8 +83,8 @@ if ($pages_to_display)
 
 	echo "</ul>\n";
 
-	//  display navigation
-	if ($pages_to_display)
+	// pagination
+	if (isset($pagination['text']))
 		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 }
 else

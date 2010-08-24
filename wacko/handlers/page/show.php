@@ -281,7 +281,7 @@ if ($this->page)
 			<a name="comments"></a>
 		<div id="commentsheader">
 		<?php if (isset($pagination['text']))
-				echo '<div style="float:right; letter-spacing:normal;"><small><small>'.$pagination['text'].'</small></small></div>'; ?>
+				echo '<div style="float:right; letter-spacing:normal;"><small>'.$pagination['text'].'</small></div>'; ?>
 		<?php echo $this->get_translation("Comments_all")." [<a href=\"".$this->href("", "", "show_comments=0")."\">".$this->get_translation("HideComments")."</a>]"; ?>
 			</div>
 			<?php
@@ -325,7 +325,7 @@ if ($this->page)
 			}
 
 			if (isset($pagination['text']))
-				echo '<div style="text-align:right;padding-right:10px;border-top:solid 1px #BABFC7;"><small><small>'.$pagination['text'].'</small></small></div>';
+				echo '<div style="text-align:right;padding-right:10px;border-top:solid 1px #BABFC7;"><small>'.$pagination['text'].'</small></div>';
 
 			// display comment form
 			if ($this->has_access("comment"))

@@ -115,7 +115,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 	// display list
 	echo '<table><tr><td>'.( $access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '' ).'</td>'.
-			'<td align="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '' ).'</td></tr></table>'."\n";
+			'<td align="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</td></tr></table>'."\n";
 
 	echo '<table cellspacing="1" cellpadding="4" class="forum">'.
 			'<tr>'.
@@ -178,7 +178,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		echo	'</td>'.
 			'</tr>'.
 			'<tr>'.
-				'<td colspan="6" class="description"><small><small>'.htmlspecialchars($topic['description']).'</small></small></td>'.
+				'<td colspan="6" class="description"><small>'.htmlspecialchars($topic['description']).'</small></td>'.
 			'</tr>'."\n".
 			'<tr class="lined">'.
 				'<td colspan="6"></td>'.
@@ -187,8 +187,8 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 	echo '</table>'."\n";
 
-	echo '<table><tr><td>'.( $user == true ? '<small><small><a href="?markread=yes">'.$this->get_translation('ForumMarkRead').'</a></small></small>' : '' ).'</td>'.
-			'<td align="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '' ).'</td></tr></table>'."\n";
+	echo '<table><tr><td>'.( $user == true ? '<small><a href="?markread=yes">'.$this->get_translation('ForumMarkRead').'</a></small>' : '' ).'</td>'.
+			'<td align="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</td></tr></table>'."\n";
 
 	// display new topic form when applicable
 	if ($access === true)
