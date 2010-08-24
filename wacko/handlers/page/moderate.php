@@ -492,7 +492,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// display list
 		echo $this->form_open('moderate');
 		echo '<table><tr>'.
-				'<td align="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '&nbsp;' ).'</td>'.
+				'<td align="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</td>'.
 			'</tr></table>'."\n";
 
 		// confirm deletion
@@ -637,7 +637,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		echo '</table>'."\n";
 		echo '<table><tr>'.
-				'<td align="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '' ).'</td>'.
+				'<td align="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</td>'.
 			'</tr></table>'."\n";
 		echo $this->form_close();
 	}
@@ -948,7 +948,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// display list
 		echo $this->form_open('moderate');
 		echo '<table><tr>'.
-				'<td align="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '&nbsp;' ).'</td>'.
+				'<td align="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</td>'.
 			'</tr></table>'."\n";
 
 		// confirm topic deletion
@@ -1136,7 +1136,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		echo '</table>'."\n";
 		echo '<table><tr>'.
-				'<td align="right">'.( $pagination['text'] == true ? '<small><small>'.$pagination['text'].'</small></small>' : '' ).'</td>'.
+				'<td align="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</td>'.
 			'</tr></table>'."\n";
 		echo $this->form_close();
 	}

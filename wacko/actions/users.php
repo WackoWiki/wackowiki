@@ -369,7 +369,7 @@ else
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo '<tr><td colspan="5"><small><small>'.$pagination['text'].'</small></small></td></tr>'."\n";
+		echo '<tr><td colspan="5"><small>'.$pagination['text'].'</small></td></tr>'."\n";
 	}
 
 	// list header

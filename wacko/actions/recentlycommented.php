@@ -98,14 +98,14 @@ if (list ($pages, $pagination) = load_recently_commented($this, $root, (int)$max
 					{
 						echo "</ul>\n<br /></li>\n";
 					}
-					echo "<li><b>".date($this->config['date_format'],strtotime($day)).":</b>\n<ul>\n";
+					echo "<li><b>".date($this->config['date_format'], strtotime($day)).":</b>\n<ul>\n";
 					$curday = $day;
 				}
 
 				// print entry
 				echo "<li><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (<a href=\"".
 				$this->href("", $page["comment_tag"], "")."\">".$page["comment_on_tag"]."</a>".
-				") . . . . . . . . . . . . . . . . <small>".$this->get_translation("latest_commentBy")." ".
+				") . . . . . . . . . . . . . . . . <small>".$this->get_translation("LatestCommentBy")." ".
 				($page["comment_user"]
 					? ($this->is_wiki_name($page["comment_user"])
 						? $this->link("/".$page["comment_user"],"",$page["comment_user"] )

@@ -50,7 +50,7 @@ if ($pages = array_merge($pages1, $pages2))
 
 	if ($user == true)
 	{
-		echo '<small><small><a href="?markread=yes">'.$this->get_translation('ForumMarkRead').'</a></small></small>';
+		echo '<small><a href="?markread=yes">'.$this->get_translation('ForumMarkRead').'</a></small>';
 	}
 
 	if (!(int)$noxml)

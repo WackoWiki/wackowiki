@@ -75,7 +75,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 						( $this->has_access('write', $forum['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).
 						( $user['last_mark'] == true && $comment['user'] != $user['user_name'] && $comment['created'] > $user['last_mark'] ? '<strong class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</strong> ' : '' ).
 						'<strong>'.$this->link($forum['tag'], '', $forum['title'], 0).'</strong><br />'.
-						'<small><small>'.$forum['description'].'</small></small>'.
+						'<small>'.$forum['description'].'</small>'.
 					'</td>'.
 					'<td>&nbsp;&nbsp;&nbsp;</td>';
 			if ($comment == true)
@@ -104,7 +104,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			'<tr>'.
 				'<td>'.
 					// mark all forums read
-					( $user == true ? '<small><small><a href="?markread=yes">'.$this->get_translation('ForumMarkRead').'</a></small></small>' : '' ).
+					( $user == true ? '<small><a href="?markread=yes">'.$this->get_translation('ForumMarkRead').'</a></small>' : '' ).
 				'</td>'.
 				'<td align="right">'.
 					// XML button

@@ -329,6 +329,7 @@ class Init
 	function session()
 	{
 		$_secure = '';
+
 		// run in ssl mode?
 		if ($this->config['ssl'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on" && !empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) ))
 		{

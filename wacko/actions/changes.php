@@ -31,7 +31,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 	$count	= 0;
 	if ($user == true)
 	{
-		echo '<small><small><a href="?markread=yes">'.$this->get_translation('ForumMarkRead').'</a></small></small>';
+		echo '<small><a href="?markread=yes">'.$this->get_translation('ForumMarkRead').'</a></small>';
 	}
 	if ($root == "" && !(int)$noxml)
 	{
