@@ -50,7 +50,7 @@ if ($pages = array_merge($pages1, $pages2))
 
 	if ($user == true)
 	{
-		echo '<small><a href="?markread=yes">'.$this->get_translation('ForumMarkRead').'</a></small>';
+		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
 	}
 
 	if (!(int)$noxml)
@@ -86,7 +86,7 @@ if ($pages = array_merge($pages1, $pages2))
 			// print entry
 			$separator = " . . . . . . . . . . . . . . . . ";
 			$author = ( $page['user_name'] == GUEST ? '<em title="'.( $admin ? $page['ip'] : '' ).'">'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['user_name']).'" title="'.( $admin ? $page['ip'] : '' ).'">'.$page['user_name'].'</a>' );
-			$viewed = ( $user['session_time'] == true && $page['user_name'] != $user['user_name'] && $page['date'] > $user['session_time'] ? ' style="font-weight:600;"' : '' );
+			$viewed = ( $user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['date'] > $user['last_mark'] ? ' class="viewed"' : '' );
 			echo '<li'.$viewed.'><span class=\"dt\">'.date($this->config['time_format_seconds'], strtotime($time)).'&nbsp;&nbsp;</span>';
 
 			// new comment

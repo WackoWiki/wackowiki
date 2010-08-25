@@ -327,6 +327,7 @@ $wackoTranslation = array(
 	"SomeoneCommented" => " a commenté cette page que vous surveillez&nbsp;: ",
 	"AlertReferringPages" => "Cette page est référencée depuis les pages suivantes ",
 	"UnknownAction" => "Action inconnue",
+	"MarkRead"		=> "Mark all as read",
 
 	"EditIcon" => "&Eacute;dition",
 	"LinksTreeLevel4Warning" => "L&rsquo;arbre des liens ne supporte que 4 niveaux",

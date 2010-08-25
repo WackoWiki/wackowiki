@@ -31,7 +31,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 	$count	= 0;
 	if ($user == true)
 	{
-		echo '<small><a href="?markread=yes">'.$this->get_translation('ForumMarkRead').'</a></small>';
+		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
 	}
 	if ($root == "" && !(int)$noxml)
 	{
@@ -79,8 +79,10 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 				$edit_note = "";
 			}
 
+			$viewed = ( $user['last_mark'] == true && $page['user'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' class="viewed"' : '' );
+
 			// print entry
-			print("<li><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (".
+			echo "<li ".$viewed."><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (".
 			$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation("History"), 0).") ".
 			$this->link( "/".$page['tag'], "", $page['tag'] )." . . . . . . . . . . . . . . . . <small>".
 			($page['user']
@@ -89,7 +91,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 					: $page['user'])
 				: $this->get_translation("Guest")).
 			$edit_note.
-			"</small></li>\n");
+			"</small></li>\n";
 		}
 	}
 	echo "</ul>\n</li>\n</ul>\n";

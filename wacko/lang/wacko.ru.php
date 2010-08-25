@@ -327,6 +327,7 @@ $wackoTranslation = array(
 	"SomeoneCommented" => " прокомментировал наблюдаемую вами страницу: ",
 	"AlertReferringPages" => "Ссылки на данную страницу есть на страницах",
 	"UnknownAction" => "Неизвестное действие",
+	"MarkRead"		=> "Отметить все как прочитанные",
 
 	"EditIcon" => "правка",
 	"LinksTreeLevel4Warning" => "Дерево ссылок не может иметь больше 4 уровней",
@@ -757,7 +758,6 @@ $wackoTranslation = array(
 	"ForumNoTopicName"	=> "Укажите название новой страницы.",
 	"ForumNewPosts"		=> "поступили новые сообщения",
 	"ForumLocked"		=> "раздел заблокирован",
-	"ForumMarkRead"		=> "Отметить все как прочитанные",
 
 	// password complexity
 	"PwdCplxShort"		=> "Пароль слишком короткий.",

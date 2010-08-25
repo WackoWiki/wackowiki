@@ -187,7 +187,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 	echo '</table>'."\n";
 
-	echo '<table><tr><td>'.( $user == true ? '<small><a href="?markread=yes">'.$this->get_translation('ForumMarkRead').'</a></small>' : '' ).'</td>'.
+	echo '<table><tr><td>'.( $user == true ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>' : '' ).'</td>'.
 			'<td align="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</td></tr></table>'."\n";
 
 	// display new topic form when applicable

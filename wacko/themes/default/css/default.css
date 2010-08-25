@@ -1007,3 +1007,7 @@ padding: 0.1em 20px;
 	float:right;
 	margin-right:20px;
 }
+
+.viewed {
+	font-weight:600;
+}

@@ -328,6 +328,7 @@ $wackoTranslation = array(
 	"SomeoneCommented" => " kommentierte die von dir beobachtete Seite: ",
 	"AlertReferringPages" => "Auf diese Seite wird von folgenden Seiten verwiesen",
 	"UnknownAction" => "Unbekannte Aktion",
+	"MarkRead"		=> "Als gelesen markieren",
 
 	"EditIcon" => "Editieren",
 	"LinksTreeLevel4Warning" => "die Baumansicht unterstützt nicht mehr als 4 Ebenen",
