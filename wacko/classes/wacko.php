@@ -4002,12 +4002,14 @@ class Wacko
 				"upper_index"		=> $this->page['upper_index'],
 				"allow_rawhtml"		=> $this->page['allow_rawhtml'],
 				"disable_safehtml"	=> $this->page['disable_safehtml'],
+				"theme"				=> $this->page['theme']
 				);
 
 			foreach ($this->page['options'] as $key => $val)
 			{
 				if ($key && $val == true) $this->config[$key] = $val;
 			}
+			$this->config['theme_url']	= $this->config['base_url']."themes/".$this->config['theme']."/";
 
 			// set page keywords. this defines $keywords (array) object property
 			// consisting of keywords ids as keys and corresponding names as values

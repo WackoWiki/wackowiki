@@ -55,7 +55,7 @@ if ($pages = array_merge($pages1, $pages2))
 
 	if (!(int)$noxml)
 	{
-		echo "<a href=\"".$this->config['base_url']."xml/changes_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation("RecentChangesXMLTip")."\" alt=\"XML\" /></a><br /><br />\n";
+		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/changes_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation("RecentChangesXMLTip")."\" alt=\"XML\" /></a></span><br /><br />\n";
 	}
 
 	echo "<ul class=\"ul_list\">\n";
