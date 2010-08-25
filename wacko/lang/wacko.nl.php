@@ -327,6 +327,7 @@ $wackoTranslation = array(
 	"SomeoneCommented" => " heeft een reactie toegevoegd aan deze pagina waarop u een abonnement heeft: ",
 	"AlertReferringPages" => "Voor deze pagina zijn er verwijzingen vanaf de volgende pagina",
 	"UnknownAction" => "Unknown action",
+	"MarkRead"		=> "Mark all as read",
 
 	"EditIcon" => "Bewerk",
 	"LinksTreeLevel4Warning" => "Verwijzingenboom ondersteunt niet meer dan 4 niveaus",

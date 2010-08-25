@@ -330,6 +330,7 @@ $wackoTranslation = array(
 	"SomeoneCommented" => " am comentat pagina cercetata de Dvs.: ",
 	"AlertReferringPages" => "Referintele la pagina data sunt pe paginile",
 	"UnknownAction" => "Unknown action",
+	"MarkRead"		=> "Mark all as read",
 
 	"EditIcon" => "editare",
 	"LinksTreeLevel4Warning" => "Дерево ссылок не может иметь больше 4 уровней",

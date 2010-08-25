@@ -327,6 +327,7 @@ $wackoTranslation = array(
 	"SomeoneCommented" => " kommenteeris seda lehte, mida sa praegu vaatad: ",
 	"AlertReferringPages" => "Sellele lehele viidavad järgmised lehed",
 	"UnknownAction" => "Unknown action",
+	"MarkRead"		=> "Mark all as read",
 
 	"EditIcon" => "redigeeri",
 	"LinksTreeLevel4Warning" => "Ühenduste puus on võimalik maksimaalselt 4 taset",

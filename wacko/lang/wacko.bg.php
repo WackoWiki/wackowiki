@@ -327,6 +327,7 @@ $wackoTranslation = array(
 	"SomeoneCommented" => " коментирал гледаната от вас страница: ",
 	"AlertReferringPages" => "Препратка на дадената страница е на страница",
 	"UnknownAction" => "Unknown action",
+	"MarkRead"		=> "Mark all as read",
 
 	"EditIcon" => "редактиране",
 	"LinksTreeLevel4Warning" => "Линковете са макс. 4 нива",

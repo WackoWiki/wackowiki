@@ -327,6 +327,7 @@ $wackoTranslation = array(
 	"SomeoneCommented" => " skomentowa³ obserwowan± przez Ciebie stronê: ",
 	"AlertReferringPages" => "Do tej strony odwo³uj± siê nastêpuj±ce dokumenty",
 	"UnknownAction" => "Unknown action",
+	"MarkRead"		=> "Mark all as read",
 
 	"EditIcon" => "edytuj",
 	"LinksTreeLevel4Warning" => "Drzewo odno¶ników nie obs³uguje zagnie¿d¿ania powy¿ej 4 poziomów",

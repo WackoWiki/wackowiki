@@ -327,6 +327,7 @@ $wackoTranslation = array(
 	"SomeoneCommented" => " η σελίδα που παρακολουθείτε έχει σχολιαστεί: ",
 	"AlertReferringPages" => "Αυτή η σελίδα αναφέρεται από αυτές τις σελίδες",
 	"UnknownAction" => "Άγνωστη ενέργεια",
+	"MarkRead"		=> "Mark all as read",
 
 	"EditIcon" => "edit",
 	"LinksTreeLevel4Warning" => "Links tree does not support more than 4 levels",

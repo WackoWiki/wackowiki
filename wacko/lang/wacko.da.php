@@ -327,6 +327,7 @@ $wackoTranslation = array(
 	"SomeoneCommented" => " kommenterer en side du overvåger: ",
 	"AlertReferringPages" => "Følgende sider henviser til denne",
 	"UnknownAction" => "Unknown action",
+	"MarkRead"		=> "Mark all as read",
 
 	"EditIcon" => "ret",
 	"LinksTreeLevel4Warning" => "Vi kan kun klare fire niveauer",

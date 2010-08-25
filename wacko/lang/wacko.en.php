@@ -376,6 +376,7 @@ $wackoTranslation = array(
 	"SomeoneCommented" => " commented this page that you are watching: ",
 	"AlertReferringPages" => "This page is referred to by these pages",
 	"UnknownAction" => "Unknown action",
+	"MarkRead"		=> "Mark all as read",
 
 	"EditIcon" => "edit",
 	"LinksTreeLevel4Warning" => "Links tree does not support more than 4 levels",
@@ -800,7 +801,6 @@ $wackoTranslation = array(
 	"ForumNoTopicName"	=> "Specify a name for the new page.",
 	"ForumNewPosts"		=> "new post",
 	"ForumLocked"		=> "section blocked",
-	"ForumMarkRead"		=> "Mark all as read",
 
 	// password complexity
 	"PwdCplxShort"		=> "Password is too short.",
