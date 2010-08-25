@@ -43,6 +43,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access("write", $t
 					"disable_safehtml	= '".quote($this->dblink, $disable_safehtml)."', ".
 					"noindex			= '".quote($this->dblink, (int)$_POST['noindex'])."' "
 				: 	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
+					"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
 					"title				= '".quote($this->dblink, htmlspecialchars($_POST['title']))."', ".
 					"keywords			= '".quote($this->dblink, htmlspecialchars($_POST['keywords']))."', ".
 					"description		= '".quote($this->dblink, htmlspecialchars($_POST['description']))."' "
@@ -230,6 +231,24 @@ if ($langs = $this->available_languages())
 
 <div class="BewareChangeLang"><?php echo $this->get_translation("BewareChangeLang"); ?></div>
 </td>
+</tr><tr class="lined">
+<th class="form_left" scope="row"><label for="theme"><?php echo $this->get_translation("ChooseTheme");?></label></th>
+<td class="form_right"><select id="theme" name="theme">
+
+<?php
+	$themes = $this->available_themes();
+	for ($i = 0; $i < count($themes); $i++)
+	{
+		echo '<option value="'.$themes[$i].'" '.
+			(isset($user['theme']) && $user['theme'] == $themes[$i]
+				? "selected=\"selected\""
+				: ($this->config['theme'] == $themes[$i]
+					? "selected=\"selected\""
+					: "")
+			).">".$themes[$i]."</option>\n";
+	}
+	?>
+		</select></td>
 
 <?php echo "</tr>\n<tr>"; ?>
 <th class="form_left"></th>
@@ -243,7 +262,6 @@ if ($langs = $this->available_languages())
 		}
 		else
 		{
-
 			echo "<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation("MetaTitle")."</th>";
 			echo "<td class=\"form_right\">".$this->page['title']."</td>";
@@ -256,7 +274,6 @@ if ($langs = $this->available_languages())
 			echo "</tr>\n<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation("SetLang")."</th>";
 			echo "<td class=\"form_right\">".$this->page['lang']."</td>";
-
 		}
 		echo "</tr>\n</table>";
 		echo $this->form_close();

@@ -111,8 +111,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 					'<a href="'.$this->config['base_url'].'xml/comments_'.
 					preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])).
 					'.xml"><img src="'.$this->config['theme_url'].
-					'icons/xml.gif" alt="XML" /></a><a href="/Проект/ОСайте/RSS" '.
-					'title="Что это такое?">?</a>'.
+					'icons/xml.gif" alt="XML" /></a>'.
 				'</td>'.
 			'</tr>'.
 		'</table>'."\n";
