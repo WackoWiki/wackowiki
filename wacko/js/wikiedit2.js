@@ -75,24 +75,24 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
  this.addButton("h3","Heading 3","'====','====',0,1");
 // this.addButton("h4","Heading 4","'=====','=====',0,1");
 // this.addButton("h5","Heading 5","'======','======',0,1");
- this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
+ this.addButton("customhtml",'<li><div class="btn-separator"/></div></li>');
  this.addButton("bold","Bold","'**','**'");
  this.addButton("italic","Italic","'//','//'");
  this.addButton("underline","Underline","'__','__'");
  this.addButton("strike","Strikethrough","'--','--'");
 // this.addButton("fixed","Monospace","'##','##'");
- this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
+ this.addButton("customhtml",'<li><div class="btn-separator"/></div></li>');
  this.addButton("ul","List","'  * ','',0,1,1");
  this.addButton("ol","Numbered list","'  1. ','',0,1,1");
- this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
+ this.addButton("customhtml",'<li><div class="btn-separator"/></div></li>');
 //this.addButton("left","Left","'%%(wacko wrapper=text wrapper_align=left)','%%',2");
  this.addButton("center","Center","'%%(wacko wrapper=text wrapper_align=center)','%%',2");
  this.addButton("right","Right","'%%(wacko wrapper=text wrapper_align=right)','%%',2");
  this.addButton("justify","Justify","'%%(wacko wrapper=text wrapper_align=justify)','%%',2");
- this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
+ this.addButton("customhtml",'<li><div class="btn-separator"/></div></li>');
  this.addButton("outdent","Outdent","","document.getElementById('" + this.id + "')._owner.unindent");
  this.addButton("indent","Indent","'  ','',0,1");
- this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
+ this.addButton("customhtml",'<li><div class="btn-separator"/></div></li>');
 // this.addButton("code","Code","'%% ',' %%',2");
  this.addButton("hr","Line","'','\\n----\\n',2");
 // this.addButton("signature","Signature","'::@::',' ',1");
@@ -104,13 +104,13 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
  if (this.autocomplete) this.autocomplete.addButton();
 
  this.addButton("createtable","Insert Table","'','\\n#|\\n|| | ||\\n|| | ||\\n|#\\n',2");
- this.addButton("customhtml",'<td><div class="btn-separator"/></div></td>');
+ this.addButton("customhtml",'<li><div class="btn-separator"/></div></li>');
  this.addButton("help","Help & About","","document.getElementById('" + this.id + "')._owner.help");
- this.addButton("customhtml",'<td><div style="font:12px Arial;text-decoration:underline; padding:4px;" id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
+ this.addButton("customhtml",'<li><div style="font:12px Arial;text-decoration:underline; padding: 3px 3px 4px 4px;" id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
             + 'onmouseout=\'this.className="btn-";\' class="btn-" '
             + 'onclick="this.className=\'btn-pressed\';window.open(\'http://wackowiki.org/Doc/English/Formatting\');" '
             + ' title="Help on Wiki-formatting">Help'
-            + '</div></td>');
+            + '</div></li>');
 
  try {
   var toolbar = document.createElement("div");

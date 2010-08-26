@@ -138,11 +138,27 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 
 /* BACKEND EDITOR */
 /* WikiEdit Toolbar -------------------------------------- */
-table.toolbar {
+ul.toolbar {
 	display:block;
 	visibility:visible;
 }
- .toolbar tr { background: ButtonFace; }
+
+#buttons_1 {
+	clear:none;
+	float:left;
+	padding:0 0 0 0;
+}
+
+#buttons_1 li {
+	float:left;
+	padding-right:0.3em;
+	white-space:nowrap;
+	list-style:none outside none;
+}
+
+.toolbar li {
+	background: ButtonFace;
+}
  .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
   background: ButtonFace;
   color: ButtonText;
@@ -150,9 +166,7 @@ table.toolbar {
   padding: 1px;  margin: 0px;
   cursor: pointer; cursor: hand; 
  }
-.toolbar td {
-	padding:0;margin:0;
-}
+
 .toolbar div {
 	width: 20px;
 	height: 20px;
