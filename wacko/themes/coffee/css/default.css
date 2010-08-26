@@ -151,7 +151,23 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 #tooltip{ border: 1px solid #666666; margin: 0px; padding: 3px 5px; background: #FFFFFF; color: #333333; font: menu; position: absolute; visibility: hidden }
 
 /* vseedit toolbar */
-.toolbar tr { background: ButtonFace; }
+
+#buttons_1 {
+	clear:none;
+	float:left;
+	padding:0 0 0 0;
+}
+
+#buttons_1 li {
+	float:left;
+	padding-right:0.3em;
+	white-space:nowrap;
+	list-style:none outside none;
+}
+
+.toolbar li {
+	background: ButtonFace;
+}
 .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
 	background: ButtonFace;
 	color: ButtonText;

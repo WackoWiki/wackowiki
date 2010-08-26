@@ -94,26 +94,26 @@ ProtoEdit.prototype.insTag = function (Tag,Tag2) {
 ProtoEdit.prototype.createToolbar = function (id, width, height, readOnly) {
   wh = "";
 
-  html = '<table id="buttons_' + id + '" cellpadding="1" cellspacing="0" class="toolbar">'
-          + '  <tr>';
-  if (this.editorName) html += '<td class="'+this.editorNameClass+'">'+this.editorName+'</td>';
+  html = '<ul id="buttons_' + id + '" class="toolbar">'
+          + '  ';
+  if (this.editorName) html += '<li class="'+this.editorNameClass+'">'+this.editorName+'</li>';
 
   for (var i = 0; i<this.buttons.length; i++) 
   {
    var btn = this.buttons[i];
    if (btn.name==" ")
-    html += ' <td>&nbsp;</td>\n';
+    html += ' <li>&nbsp;</li>\n';
    else if (btn.name=="customhtml")
     html += btn.desc;
    else
-    html += ' <td class="btns-"><div id="' + btn.name + '_' + id + '" onmouseover=\'this.className="btn-hover";\' '
+    html += ' <li class="btns-"><div id="' + btn.name + '_' + id + '" onmouseover=\'this.className="btn-hover";\' '
           + 'onmouseout=\'this.className="btn-";\' class="btn-" '
           + 'onclick="this.className=\'btn-pressed\';' + btn.actionName + '('//\'' + id + '\', ' 
           + btn.actionParams + ')"><img src="' + this.imagesPath 
           + btn.name + '.gif" ' + wh + ' alt="' + btn.desc + '" title="' + btn.desc 
-          + '"></div></td>\n';
+          + '"></div></li>\n';
   }
-  html += '</tr></table>\n';
+  html += '</ul>\n';
 
   return html;
 }

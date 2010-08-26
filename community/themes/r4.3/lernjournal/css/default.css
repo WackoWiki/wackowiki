@@ -177,6 +177,24 @@ height:400px;
 width:100%;
 }
 
+
+#buttons_1 {
+	clear:none;
+	float:left;
+	padding:0 0 0 0;
+}
+
+#buttons_1 li {
+	float:left;
+	padding-right:0.3em;
+	white-space:nowrap;
+	list-style:none outside none;
+}
+
+.toolbar li {
+	background: ButtonFace;
+}
+
 .toolbar .btn-,.toolbar .btn-hover,.toolbar .btn-active,.toolbar .btn-pressed {
 background:ButtonFace;
 border:1px solid ButtonFace;
@@ -212,9 +230,6 @@ height:20px;
 width:20px;
 }
 
-.toolbar tr {
-background:ButtonFace;
-}
 
 A:LINK  { text-decoration: none; color: #333399; } /* 9A0E2A */
 a:active { text-decoration: none; color: #333399; }

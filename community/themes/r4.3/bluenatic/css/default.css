@@ -283,9 +283,22 @@ ol li {
 
 /** Wikiedit-related (JavaScript) ********************************************/
 
-.toolbar tr {
-	background-color:	#eee;
-	color:			#000;
+
+#buttons_1 {
+	clear:none;
+	float:left;
+	padding:0 0 0 0;
+}
+
+#buttons_1 li {
+	float:left;
+	padding-right:0.3em;
+	white-space:nowrap;
+	list-style:none outside none;
+}
+
+.toolbar li {
+	background: ButtonFace;
 }
 .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
 	background-color:	#eee;
