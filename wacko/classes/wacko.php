@@ -958,7 +958,7 @@ class Wacko
 			"WHERE ".($for
 				? "p.tag LIKE '".quote($this->dblink, $for)."/%' AND "
 				: "").
-				"(l.to_supertag = '".quote($this->dblink, $this->NpJTranslit($tag))."')".
+				"(l.to_supertag = '".quote($this->dblink, $this->npj_translit($tag))."')".
 			" ORDER BY tag", 1);
 	}
 
