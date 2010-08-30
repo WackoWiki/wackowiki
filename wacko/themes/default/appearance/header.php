@@ -149,6 +149,164 @@ else
 			}
 	echo "\n</ol></div>";
 ?>
+<div id="handler">
+
+<?php
+	// defining tabs constructor
+	function echo_tab($link, $hint, $title, $active = false, $image, $accesskey = '')
+	{
+		global $engine;
+		if ($title == '') return; // no tab;
+		if ($image == 1) $image = "spacer.gif";
+		
+		$method = substr($link, strrpos($link, '/') + 1);
+		
+		if ($active)
+		{
+			if ($image)
+			{
+				$tab = "<li class=\"$method active\"><img src=\"".$engine->config["theme_url"]."icons/$image\" alt=\"$title\" /></li>\n";
+			}
+			else
+			{
+				$tab = "<li class=\"$method active\">$title</li>\n";
+			}
+		}
+		else
+		{
+			if ($method == 'show') $link = ".";
+
+			if ($image)
+			{
+				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->config["theme_url"]."icons/$image\" alt=\"$title\" /></a></li>\n";
+			}
+			else
+			{
+				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\">$title</a></li>\n";
+			}
+		}
+		return $tab;
+	}
+
+	echo "<ul>\n";
+	
+	// show tab
+	echo echo_tab(
+		$this->href('show'),
+		$this->get_translation('ShowTip'),
+		$this->has_access('read') ? $this->get_translation("ShowText") : '',
+		$this->method == 'show',
+		1,
+		'v');
+	
+	// edit tab
+	echo echo_tab(
+		$this->href('edit'),
+		$this->get_translation('EditTip'),
+		((!$this->page && $this->has_access('create')) || $this->IsAdmin() ||
+			($this->forum === false && $this->has_access('write')) ||
+			($this->forum === true && ($this->UserIsOwner() || $this->IsModerator()) && (int)$this->page['comments'] == 0))
+			? $this->get_translation("EditText") : '',
+		$this->method == 'edit',
+		1,
+		'e');
+		// create tab
+	
+	echo echo_tab(
+		$this->href('new'),
+		$this->get_translation('CreateTip'),
+		$this->get_translation("CreateText"),
+		$this->method == 'new',
+		1,
+		'n');
+	
+	// revisions tab
+	echo echo_tab(
+		$this->href('revisions'),
+		$this->get_translation('RevisionTip'),
+		($this->forum === false && $this->page && $this->has_access('read')) ? $this->get_translation('RevisionText') : '',
+		$this->method == 'revisions' || $this->method == 'diff',
+		1,
+		'r');
+	
+	// remove tab
+	#echo echo_tab(
+	#	$this->href('remove'),
+	#	$this->get_translation('DeleteTip'),
+	#	($this->page && ($this->IsAdmin() || !$this->config['remove_onlyadmins'] && (
+	#		($this->forum === true && $this->UserIsOwner() && (int)$this->page['comments'] == 0) ||
+	#		($this->forum === false && $this->UserIsOwner()))))
+	#		? $this->get_translation('DeleteText') : '',
+	#	0,
+	#	$this->method == 'remove');
+	
+	// moderation tab
+	#echo echo_tab(
+	#	$this->href('moderate'),
+	#	$this->get_translation('ModerateTip'),
+	#	($this->IsModerator() && $this->has_access('read')) ? $this->get_translation('ModerateText') : '',
+	#	$this->method == 'moderate',
+	#	0,
+	#	'm');
+	
+	// acls tab
+	echo echo_tab(
+		$this->href('acls'),
+		$this->get_translation('ACLTip'),
+		($this->forum === false && $this->page && ($this->IsAdmin() || $this->UserIsOwner())) ? $this->get_translation("ACLText") : '',
+		$this->method == 'acls',
+		1,
+		'a');
+		
+	// categories tab
+	echo echo_tab(
+		$this->href('categories'),
+		$this->get_translation('CategoriesTip'),
+		($this->forum === false && $this->page && ($this->IsAdmin() || $this->UserIsOwner())) ? $this->get_translation("CategoriesText") : '',
+		$this->method == 'categories',
+		1,
+		'c');
+		
+	// referrers tab
+	#echo echo_tab(
+	#	$this->href('referrers'),
+	#	$this->get_translation('ReferrersTip'),
+	#	($this->page && $this->has_access('read')) ? $this->get_translation("ReferrersText") : '',
+	#	$this->method == 'referrers' || $this->method == 'referrers_sites',
+	#	0,
+	#	'l');
+		
+	// watch tab
+	echo echo_tab(
+		$this->href('watch'),
+		($this->iswatched === true ? $this->get_translation("RemoveWatch") : $this->get_translation("SetWatch")),
+		($this->forum === false && $this->page && ($this->IsAdmin() || $this->UserIsOwner())) ? $this->get_translation("SetWatch") : '',
+		$this->method == 'watch',
+		($this->iswatched === true ? "layer-visible-on.png" : "layer-visible-off.png"),
+		'a');
+		
+	// properties tab
+	echo echo_tab(
+		$this->href('properties'),
+		$this->get_translation('PropertiesTip'),
+		($this->forum === false && $this->page && ($this->IsAdmin() || $this->UserIsOwner())) ? $this->get_translation("PropertiesText") : '',
+		$this->method == 'properties' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
+		1,
+		's');
+	
+	// upload tab
+	echo echo_tab(
+		$this->href('upload'),
+		$this->get_translation('FilesTip'),
+		($this->forum === false && $this->page /*&& $this->has_access('upload')*/) ? $this->get_translation('FilesText') : '',
+		$this->method == 'upload',
+		1,
+		'u');
+	
+	#echo "</ul>\n";
+?>
+
+<li class="search">
 <div id="search">
 <?php
 // Opens Search form
@@ -164,6 +322,7 @@ echo $this->form_open("", $this->get_translation("TextSearchPage"), "get");
 echo $this->form_close();
 ?>
 </div>
+</li></ul>
 </div>
 </div>
 <div class="breadcrumb">
