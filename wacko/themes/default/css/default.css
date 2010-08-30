@@ -1003,6 +1003,144 @@ table.formation th, tr.formation th {
 .inf .sign, .inf .text {
 	border-color: #BABFC7;
 }
+#handler {
+float:right;
+margin:0 auto;
+overflow:hidden;
+position:relative;
+text-align:left;
+}
+#handler ul {
+list-style:none outside none;
+margin:0;
+padding:0;
+}
+#handler li {
+float:left;
+margin:0;
+padding:1px 0.5em 4px;
+white-space:nowrap;
+}
+#handler li.search{
+padding-bottom: 0px;
+}
+#handler li:hover {
+
+background-color: #FFFFFF;
+}
+#handler li.active {
+border-color: #AAAAAA;
+border-style:solid;
+border-width:1px 1px 0;
+background-color: #FCFCFC;
+}
+
+#handler {
+/*background-color:#646464;
+width:35px;*/
+}
+#handler img, #handler  a img {
+border:medium none;
+height:16px;
+width:16px;
+}
+
+#handler li.new img {
+background-image:url("./../icons/add_page.gif");
+background-repeat: no-repeat;
+}
+#handler li.new a img {
+background-image:url("./../icons/add_page.gif");
+background-repeat: no-repeat;
+}
+#handler li.new a:hover img {
+background-image:url("./../icons/add_page.gif");
+background-repeat: no-repeat;
+}
+#handler li.categories img {
+background-image:url("./../icons/add_tag.png");
+background-repeat: no-repeat;
+}
+#handler li.categories a img {
+background-image:url("./../icons/add_tag.png");
+background-repeat: no-repeat;
+}
+#handler li.categories a:hover img {
+background-image:url("./../icons/add_tag.png");
+background-repeat: no-repeat;
+}
+#handler li.upload img {
+background-image:url("./../icons/attachment.png");
+background-repeat: no-repeat;
+}
+#handler li.upload a img {
+background-image:url("./../icons/attachment.png");
+background-repeat: no-repeat;
+}
+#handler li.upload a:hover img {
+background-image:url("./../icons/attachment.png");
+background-repeat: no-repeat;
+}
+#handler li.edit img {
+background-image:url("./../icons/edit2.png");
+background-repeat: no-repeat;
+}
+#handler li.edit a img {
+background-image:url("./../icons/edit2.png");
+background-repeat: no-repeat;
+}
+#handler li.edit a:hover img {
+background-image:url("./../icons/edit2.png");
+background-repeat: no-repeat;
+}
+#handler li.revisions img {
+background-image:url("./../icons/page_diff.png");
+background-repeat: no-repeat;
+}
+#handler li.revisions a img {
+background-image:url("./../icons/page_diff.png");
+background-repeat: no-repeat;
+}
+#handler li.revisions a:hover img {
+background-image:url("./../icons/page_diff.png");
+background-repeat: no-repeat;
+}
+#handler li.properties img {
+background-image:url("./../icons/page_gear.png");
+background-repeat: no-repeat;
+}
+#handler li.properties a img {
+background-image:url("./../icons/page_gear.png");
+background-repeat: no-repeat;
+}
+#handler li.properties a:hover img {
+background-image:url("./../icons/page_gear.png");
+background-repeat: no-repeat;
+}
+#handler li.acls img {
+background-image:url("./../icons/security.png");
+background-repeat: no-repeat;
+}
+#handler li.acls a img {
+background-image:url("./../icons/security.png");
+background-repeat: no-repeat;
+}
+#handler li.acls a:hover img {
+background-image:url("./../icons/security.png");
+background-repeat: no-repeat;
+}
+#handler li.show img {
+background-image:url("./../icons/document.png");
+background-repeat: no-repeat;
+}
+#handler li.show a img {
+background-image:url("./../icons/document.png");
+background-repeat: no-repeat;
+}
+#handler li.show a:hover img {
+background-image:url("./../icons/document.png");
+background-repeat: no-repeat;
+}
 
 .breadcrumb {
 /*overflow:hidden;*/
