@@ -245,13 +245,13 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_name VARCHAR(80) NOT NULL DEFAULT '',".
 					"real_name VARCHAR(80) NOT NULL DEFAULT '',".
-					"password VARCHAR(40) NOT NULL DEFAULT '',".
+					"password VARCHAR(64) NOT NULL DEFAULT '',".
 					"salt VARCHAR(40) NOT NULL DEFAULT '',".
 					"email VARCHAR(50) NOT NULL DEFAULT '',".
 					"account_type TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"change_password VARCHAR(40) NOT NULL,".
+					"change_password VARCHAR(64) NOT NULL,".
 					"email_confirm VARCHAR(40) NOT NULL DEFAULT '',".
 					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"session_expire INT(10) UNSIGNED NOT NULL,".
