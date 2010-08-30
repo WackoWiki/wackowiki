@@ -70,9 +70,9 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 		// if owner is current user
 		if ($this->user_is_owner())
 		{
-			echo_tab( $this->href("acls"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->get_translation("EditACLConfirm")."\");":""),
+			echo_tab( $this->href("permissions"),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->get_translation("EditACLConfirm")."\");":""),
 			$this->get_translation("ACLText"),
-			$this->method != "acls"
+			$this->method != "permissions"
 			);
 		}
 		if ($this->is_admin() || (!$this->config['remove_onlyadmins'] && $this->user_is_owner()))

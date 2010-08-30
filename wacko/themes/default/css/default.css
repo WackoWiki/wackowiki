@@ -1082,63 +1082,63 @@ background-image:url("./../icons/attachment.png");
 background-repeat: no-repeat;
 }
 #handler li.edit img {
-background-image:url("./../icons/edit2.png");
+background-image:url("./../icons/edit.png");
 background-repeat: no-repeat;
 }
 #handler li.edit a img {
-background-image:url("./../icons/edit2.png");
+background-image:url("./../icons/edit.png");
 background-repeat: no-repeat;
 }
 #handler li.edit a:hover img {
-background-image:url("./../icons/edit2.png");
+background-image:url("./../icons/edit.png");
 background-repeat: no-repeat;
 }
 #handler li.revisions img {
-background-image:url("./../icons/page_diff.png");
+background-image:url("./../icons/revisions.png");
 background-repeat: no-repeat;
 }
 #handler li.revisions a img {
-background-image:url("./../icons/page_diff.png");
+background-image:url("./../icons/revisions.png");
 background-repeat: no-repeat;
 }
 #handler li.revisions a:hover img {
-background-image:url("./../icons/page_diff.png");
+background-image:url("./../icons/revisions.png");
 background-repeat: no-repeat;
 }
 #handler li.properties img {
-background-image:url("./../icons/page_gear.png");
+background-image:url("./../icons/properties.png");
 background-repeat: no-repeat;
 }
 #handler li.properties a img {
-background-image:url("./../icons/page_gear.png");
+background-image:url("./../icons/properties.png");
 background-repeat: no-repeat;
 }
 #handler li.properties a:hover img {
-background-image:url("./../icons/page_gear.png");
+background-image:url("./../icons/properties.png");
 background-repeat: no-repeat;
 }
-#handler li.acls img {
-background-image:url("./../icons/security.png");
+#handler li.permissions img {
+background-image:url("./../icons/permissions.png");
 background-repeat: no-repeat;
 }
-#handler li.acls a img {
-background-image:url("./../icons/security.png");
+#handler li.permissions a img {
+background-image:url("./../icons/permissions.png");
 background-repeat: no-repeat;
 }
-#handler li.acls a:hover img {
-background-image:url("./../icons/security.png");
+#handler li.permissions a:hover img {
+background-image:url("./../icons/permissions.png");
 background-repeat: no-repeat;
 }
 #handler li.show img {
-background-image:url("./../icons/document.png");
+background-image:url("./../icons/show.png");
 background-repeat: no-repeat;
 }
 #handler li.show a img {
-background-image:url("./../icons/document.png");
+background-image:url("./../icons/show.png");
 background-repeat: no-repeat;
 }
 #handler li.show a:hover img {
-background-image:url("./../icons/document.png");
+background-image:url("./../icons/show.png");
 background-repeat: no-repeat;
 }
 

@@ -362,10 +362,10 @@
 
 	// acls tab
 	echo echo_tab(
-		$this->href('acls'),
+		$this->href('permissions'),
 		$this->get_translation('ACLTip'),
 		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation("ACLText") : '',
-		$this->method == 'acls',
+		$this->method == 'permissions',
 		'a');
 ?>
 							<div style="background-image:url(<?php echo $this->config['theme_url'] ?>images/tools_bottom.png); height:7px;"></div>

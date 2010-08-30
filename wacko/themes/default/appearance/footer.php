@@ -29,7 +29,7 @@ if ($this->page)
 		// Add page link
 		(($this->method == 'new')
 			? ""
-			: print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation("CreateNewPage")."\" alt=\"".$this->get_translation("CreateNewPage")."\" /></a></li>\n")
+			: print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation("CreateNewPageTip")."\" alt=\"".$this->get_translation("CreateNewPage")."\" /></a></li>\n")
 		);
 
 		// Rename link
@@ -39,7 +39,7 @@ if ($this->page)
 		if (!$this->config['remove_onlyadmins']) print("<li><a href=\"".$this->href("remove")."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->get_translation("DeleteTip")."\" alt=\"".$this->get_translation("DeleteText")."\" /></a></li>\n");
 
 		// Edit ACLs link
-		print("<li><a href=\"".$this->href("acls")."\"".(($this->method=='edit') ? " onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"" : "").">".$this->get_translation("ACLText")."</a></li>\n");
+		print("<li><a href=\"".$this->href("permissions")."\"".(($this->method=='edit') ? " onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"" : "").">".$this->get_translation("ACLText")."</a></li>\n");
 	}
 	// If owner is NOT current user
 	else
@@ -60,7 +60,7 @@ if ($this->page)
 		// Add page link
 		(($this->method == 'new')
 			? ""
-			: print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation("CreateNewPage")."\" alt=\"".$this->get_translation("CreateNewPage")."\" /></a></li>\n")
+			: print("<li><a href=\"".$this->href("new")."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation("CreateNewPageTip")."\" alt=\"".$this->get_translation("CreateNewPage")."\" /></a></li>\n")
 		);
 	}
 
@@ -75,7 +75,7 @@ if ($this->page)
 		print("<li><a href=\"".$this->href("remove")."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->get_translation("DeleteTip")."\" alt=\"".$this->get_translation("DeleteText")."\" /></a></li>\n");
 
 		// Edit ACLs link (shows also for Admins)
-		print("<li><a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a></li>\n");
+		print("<li><a href=\"".$this->href("permissions")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a></li>\n");
 	}
 
 	if($this->has_access("write") && $this->get_user() || $this->is_admin())
