@@ -25,7 +25,7 @@ $init->dbal();
 $init->settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
 $init->settings('user_table',	$init->config['table_prefix'].'user');
 $init->settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
-$init->settings('cookie_hash',	hash('sha1', $init->config['base_url'].$init->config['system_seed']));
+$init->settings('cookie_hash',	hash('md5', $init->config['base_url'].$init->config['system_seed']));
 
 // misc
 $init->session();
@@ -104,15 +104,15 @@ if ($engine->config['recovery_password'] == false)
 }
 else
 {
-	$pwd = hash('sha1', $engine->config['recovery_password']);
+	$pwd = hash('sha256', $engine->config['recovery_password']);
 }
 
 // recovery preauthorization
 if (isset($_POST['password']))
 {
-	if (hash('sha1', $_POST['password']) == $pwd)
+	if (hash('sha256', $_POST['password']) == $pwd)
 	{
-		$engine->set_session_cookie('admin', hash('sha1', $_POST['password']), '', ( $engine->config['ssl'] == true ? 1 : 0 ));
+		$engine->set_session_cookie('admin', hash('sha256', $_POST['password']), '', ( $engine->config['ssl'] == true ? 1 : 0 ));
 		$_SESSION['created'] = time();
 		$_SESSION['last_activity'] = time();
 		$engine->log(1, $engine->get_translation('LogAdminLoginSuccess', $engine->config['language']));

@@ -106,16 +106,22 @@ else
 			else
 			{
 				// check for old md5 password
-				if (strlen($existingUser['password']) == 32)
+				if (strlen($existingUser['password']) < 64)
 				{
-					$_processed_password = hash('md5', $_POST['password']);
-
+					if (strlen($existingUser['password']) == 32)
+					{
+						$_processed_password = hash('md5', $_POST['password']);
+					}
+					if (strlen($existingUser['password']) == 40) // only for dev versions
+					{
+						$_processed_password = hash('sha1', $_POST["name"].$existingUser["salt"].$_POST['password']);
+					}
 					if ($existingUser['password'] == $_processed_password)
 					{
-						$salt = $this->random_password(4, 3);
-						$password = hash('sha1', $_POST["name"].$salt.$_POST['password']);
+						$salt = $this->random_password(10, 3);
+						$password = hash('sha256', $_POST["name"].$salt.$_POST['password']);
 
-						// update database with the sha1 password for future logins
+						// update database with the sha256 password for future logins
 						$this->query("UPDATE ".$this->config['table_prefix']."user SET ".
 									"password	= '".$password."', ".
 									"salt		= '".$salt."' ".
@@ -124,7 +130,7 @@ else
 				}
 				else
 				{
-					$_processed_password = hash('sha1', $_POST["name"].$existingUser["salt"].$_POST['password']);
+					$_processed_password = hash('sha256', $_POST["name"].$existingUser["salt"].$_POST['password']);
 				}
 
 				// check password

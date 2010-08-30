@@ -149,10 +149,10 @@ else if (isset($_POST["action"]) && $_POST["action"] == "login")
 			// submitting input to DB
 			else
 			{
-				$salt_length = 4;
+				$salt_length = 10;
 				$salt = $this->random_password($salt_length, 3);
-				$confirm = hash('sha1', $password.$salt.mt_rand().time().mt_rand().$email.mt_rand());
-				$password_encrypted = hash('sha1', $user_name.$salt.$_POST['password']);
+				$confirm = hash('sha256', $password.$salt.mt_rand().time().mt_rand().$email.mt_rand());
+				$password_encrypted = hash('sha256', $user_name.$salt.$_POST['password']);
 
 				// INSERT USER
 				$this->query(

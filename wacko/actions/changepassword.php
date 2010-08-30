@@ -65,7 +65,7 @@ if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
 			{
 				$this->query(
 					"UPDATE ".$this->config['user_table']." SET ".
-						"password			= '".quote($this->dblink, hash('sha1', $newpassword))."', ".
+						"password			= '".quote($this->dblink, hash('sha256', $newpassword))."', ".
 						"change_password	= '' ".
 					"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"LIMIT 1");
@@ -148,7 +148,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 		$complexity		= $this->password_complexity($user['user_name'], $newpassword);
 
 		// wrong current password
-		if (hash('sha1', $password)!=$user['password'])
+		if (hash('sha256', $password)!= $user['password'])
 		{
 			$error = $this->get_translation("WrongPassword");
 			// log event
@@ -188,7 +188,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 			// store new password
 			$this->query(
 				"UPDATE ".$this->config['user_table']." ".
-				"SET password = '".quote($this->dblink, hash('sha1', $newpassword))."' ".
+				"SET password = '".quote($this->dblink, hash('sha256', $newpassword))."' ".
 				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 				"LIMIT 1");
 
@@ -275,7 +275,7 @@ else
 		{
 			if ($user['email_confirm'] == "")
 			{
-				$code = hash('sha1', $user['password'].date("D d M Y H:i:s").$user['email'].mt_rand());
+				$code = hash('sha256', $user['password'].date("D d M Y H:i:s").$user['email'].mt_rand());
 
 				$subject =	$this->get_translation("EmailForgotSubject").
 							$this->config['wacko_name'];
