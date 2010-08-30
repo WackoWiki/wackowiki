@@ -86,7 +86,7 @@ $wackoTranslation = array(
 	"EditPropertiesConfirm" => "Änderungen wirklich nicht speichern?",
 	"PropertiesText" => "Eigenschaften",
 	"PropertiesTip" => "Eigenschaften bearbeiten",
-	"EditTip" => "Seite editieren." ,
+	"EditTip" => "Seite bearbeiten" ,
 	"EditText" => "Editieren" ,
 	"EditCommentTip" => "Kommentar editieren." ,
 	"EditComment" => "Kommentar editieren" ,
@@ -367,6 +367,7 @@ $wackoTranslation = array(
 
 	"CreatePage" => "Erstelle diese Seite",
 	"CreateNewPage" => "Neue Seite erstellen",
+	"CreateNewPageText" => "Erstellen",
 	"CreateNewPageTip" => "Neue Seite erstellen",
 	"CreatePageButton" => "Erstellen",
 	"CreateRandomPage" => "Beliebige Seite",

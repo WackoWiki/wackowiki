@@ -163,7 +163,7 @@ if ($this->page)
    print(" <a href=\"".$this->href("rename")."\">".$this->get_translation("RenameText")."</a><br /> \n");
 
    //Edit ACLs link
-   print("<a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a>");
+   print("<a href=\"".$this->href("permissions")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a>");
  }
  // If owner is NOT current user
  else

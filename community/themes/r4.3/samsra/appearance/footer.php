@@ -28,7 +28,7 @@ if ($this->page)
 //   if (!$this->config['remove_onlyadmins'] || $this->is_admin()) print(" <a href=\"".$this->href("remove")."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->get_translation("DeleteTip")."\" alt=\"".$this->get_translation("DeleteText")."\" /></a>");
 
    //Edit ACLs link
-   print(" | <a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a>");
+   print(" | <a href=\"".$this->href("permissions")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a>");
  }
  // If owner is NOT current user
  else

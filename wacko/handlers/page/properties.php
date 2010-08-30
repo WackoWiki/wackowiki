@@ -344,7 +344,7 @@ if ($langs = $this->available_languages())
 	// ACL link (shows only if owner is current user or Admin)
 	if ($this->user_is_owner() || $this->is_admin())
 	{
-		echo("<li><a href=\"".$this->href("acls")."\">".$this->get_translation("SettingsAcls")."</a></li>\n");
+		echo("<li><a href=\"".$this->href("permissions")."\">".$this->get_translation("SettingsAcls")."</a></li>\n");
 	}
 	?>
 	<li><a href="<?php echo $this->href("categories"); ?>"><?php echo $this->get_translation("SettingsCategories"); ?></a></li>

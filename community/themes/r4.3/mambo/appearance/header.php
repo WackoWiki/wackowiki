@@ -164,7 +164,7 @@ echo $this->page['modified'] ? "<a href=\"".$this->href("revisions")."\" title=\
 									echo '<br />';
 							    	print(" <a href=\"".$this->href("rename")."\">".$this->get_translation("RenameText")."</a>");
 									echo '<br />';
-							    	print("<a href=\"".$this->href("acls")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a>");
+							    	print("<a href=\"".$this->href("permissions")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a>");
 							    }
 
 							    if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->user_is_owner()) {

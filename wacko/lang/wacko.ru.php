@@ -367,6 +367,7 @@ $wackoTranslation = array(
 
 	"CreatePage" => "Создать эту страницу",
 	"CreateNewPage" => "Создать новую страницу",
+	"CreateNewPageText" => "Создать",
 	"CreateNewPageTip" => "Щёлкните, чтобы создать новую страницу.",
 	"CreateRandomPage" => "Создать произвольную страницу",
 	"CreatePageButton" => "Создать",

@@ -370,6 +370,7 @@ $wackoTranslation = array(
 
 	"CreatePage" => "Creaza pagina",
 	"CreateNewPage" => "Create a new page",
+	"CreateNewPageText" => "Create",
 	"CreateNewPageTip" => "Create a new page.",
 	"CreateRandomPage" => "Create a random page",
 	"CreatePageButton" => "Create",
