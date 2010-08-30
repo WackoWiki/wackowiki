@@ -1,17 +1,17 @@
 --------------------------------------------------------------------------------
-MiniWackoLicious Theme 0.9.1
+Wacko Default Theme
 --------------------------------------------------------------------------------
 
-MiniWackoLicious is a theme (a.k.a. template) for WackoWiki.
+Default is a theme (a.k.a. template) for WackoWiki.
 
 
 DOWNLOAD AND INSTALLATION ------------------------------------------------------
 
-* Download MiniWackoLicious as ZIP- or TAR.GZ archive, unzip it and copy the
-  miniwackolicious directory to your themes folder of the WackoWiki
+* Download Default as ZIP- or TAR.GZ archive, unzip it and copy the
+  'default' directory to your themes folder of the WackoWiki
   installation.
 * Edit your config.php (or personal.config.php) and set
-  "theme" => "miniwackolicious".
+  "theme" => "default".
 * Your wacko user may also select this theme on the Settings page.
 
 
@@ -20,9 +20,7 @@ FEATURES -----------------------------------------------------------------------
 The theme has been designed for all options you got by the wacko markup. It
 contains a small main navigation including the input field for the keyword
 search. At the footer you find the link to the login page or – if logged in –
-links to the user page, settings and logout. Modern browsers also got a fixed
-backend bar at the top of the page when a user is logged in. That's it. Simple
-and eye candy.
+links to the user page, settings and logout. 
 
 
 CUSTOMIZATION ------------------------------------------------------------------
@@ -30,8 +28,6 @@ CUSTOMIZATION ------------------------------------------------------------------
 To alternate the HTML just edit header.php and footer.php at the appearance
 folder. To change colors/etc and typographical formatting you can edit
 screen.css and typography.css at the layout folder.
-
-The main menu can be controlled in appearance/mainmenu.inc.php:
 
 /* == Edit your main menu here ====================================== */
  
@@ -49,23 +45,14 @@ translation files which you find at lang folder.
 
 BUGS, FEATURES & SUPPORT -------------------------------------------------------
 
-For bug reports and feature requests you can write to haschek@eye48.com –
-please understand that I cannot provide free support for installation or
-customization issues.
-
-For commercial support you can contact me at eye48.com.
-
+For bug reports and feature requests you can write to bugs.wackowiki.org.
 
 LICENSE ------------------------------------------------------------------------
 
-The MiniWackoLicious Theme is released open-source under the Creative Commons
-Attribution-Share Alike 3.0 licence.
+The Default Theme is part of the WackoWiki package.
+BSD licence.
 
-Icons were taken from the Silk icons set by Mark James and Oxygen Icons .
-http://www.famfamfam.com/lab/icons/silk/
+Some Icons were taken from the Oxygen Icons set.
 http://www.oxygen-icons.org
 
 
---------------------------------------------------------------------------------
-MiniWackoLicious - http://eye48.com/go/miniwackolicious
---------------------------------------------------------------------------------
