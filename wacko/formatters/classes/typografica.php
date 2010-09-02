@@ -67,7 +67,7 @@ class typografica
 							"emdash" => 1, // (151) - long dash by two minus
 							"(c)" => 1, "(r)" => 1, "(tm)" => 1, "(p)" => 1, "+-" => 1, // special characters, as you know
 							"degrees" => 1, // degree character
-							"<-->" => 1,    // indents like $Indent*
+							"[--]" => 1,    // indents like $Indent*
 							"dashglue" => 1, "wordglue" => 1, // dash and word glues
 							"spacing" => 1, // comma and spacing, exchange
 							"phones" => 0,  // phone number processing
@@ -284,7 +284,8 @@ class typografica
 
 		// 4. (ñ)
 		if ($this->settings["(c)"])
-			$data = preg_replace("/\([cCñÑ]\)((?=\w)|(?=\s[0-9]+))/i", "&copy;", $data);
+			$data = preg_replace("/\([cCñÑ]\)/i", "&copy;", $data);
+			# $data = preg_replace("/\([cCñÑ]\)((?=\w)|(?=\s[0-9]+))/i", "&copy;", $data); // not working (?)
 		// 4a. (r)
 		if ($this->settings["(r)"])
 			$data = preg_replace("/\(r\)/i", "<sup>&#174;</sup>", $data);
@@ -301,9 +302,9 @@ class typografica
 		// 5a. 12^C
 		if ($this->settings["degrees"])
 		{
-			$data = preg_replace("/-([0-9])+\^([FCÑ])/", "&ndash;\\1&#176\\2", $data);
-			$data = preg_replace("/\+([0-9])+\^([FCÑ])/", "+\\1&#176\\2", $data);
-			$data = preg_replace("/\^([FCÑ])/", "&#176\\1", $data);
+			$data = preg_replace("/-([0-9])+\^([FCÑK])/", "&ndash;\\1&#176\\2", $data);
+			$data = preg_replace("/\+([0-9])+\^([FCÑK])/", "+\\1&#176\\2", $data);
+			$data = preg_replace("/\^([FCÑK])/", "&#176\\1", $data);
 		}
 
 		// 6. phones
@@ -323,10 +324,10 @@ class typografica
 		// 1. Paragraphs
 		// --- not ported to wacko ---
 		// 2. Paragpaph indent (indented line)
-		if ($this->settings["<-->"])
+		if ($this->settings["[--]"])
 		{
-			$data = preg_replace( "/<\->/i", $this->Indent1, $data );
-			$data = preg_replace( "/<\-\->/i", $this->Indent1, $data );
+			$data = preg_replace( "/\[--\]/i", $this->Indent1, $data );
+			$data = preg_replace( "/\[---\]/i", $this->Indent2, $data );
 		}
 		// 3. mailto:
 		// --- not ported to wacko ---

@@ -12,10 +12,10 @@ class post_wacko
 
 	function postcallback($things)
 	{
-		$lang = '';
-		$thing = $things[1];
+		$lang	= '';
+		$thing	= $things[1];
 
-		$wacko = &$this->object;
+		$wacko	= &$this->object;
 
 		// forced links ((link link == desc desc))
 		if (preg_match("/^<!--link:begin-->([^\n]+)==([^\n]*)<!--link:end-->$/", $thing, $matches))
@@ -23,13 +23,13 @@ class post_wacko
 			list (, $url, $text) = $matches;
 			if ($url)
 			{
-				$url = str_replace(" ", "", $url);
-				$text = trim(preg_replace("/<!--markup:1:[\w]+-->|__|\[\[|\(\(/","",$text));
-				if (stristr($text,"@@"))
+				$url	= str_replace(' ', '%20', trim($url));
+				$text	= trim(preg_replace("/<!--markup:1:[\w]+-->|__|\[\[|\(\(/", "", $text));
+				if (stristr($text, '@@'))
 				{
-					$t = explode("@@", $text);
-					$text = $t[0];
-					$lang = $t[1];
+					$t		= explode('@@', $text);
+					$text	= $t[0];
+					$lang	= $t[1];
 				}
 				return $wacko->link($url, "", $text, 1, 1, $lang);
 			}
@@ -52,33 +52,33 @@ class post_wacko
 				return '<a href="'.$url.'">'.$img.'</a>';
 			}
 			else
-				return "";
+				return '';
 		}
 		// actions
 		else if (preg_match("/^<!--action:begin-->\s*([^\n]+?)<!--action:end-->$/s", $thing, $matches))
 		{
-			if ($matches[1] && (!isset($this->options["diff"]) || in_array(strtolower($matches[1]),$this->actions)))
+			if ($matches[1] && (!isset($this->options['diff']) || in_array(strtolower($matches[1]), $this->actions)))
 			{
 				// check for action' parameters
 				$sep = strpos( $matches[1], " " );
 				if ($sep === false)
 				{
-					$action = $matches[1];
-					$params = array();
+					$action	= $matches[1];
+					$params	= array();
 				}
 				else
 				{
-					$action = substr( $matches[1], 0, $sep );
-					$p = " ".substr( $matches[1], $sep )." ";
-					$paramcount = preg_match_all( "/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/", $p, $matches, PREG_SET_ORDER );
-					$params = array();
+					$action		= substr( $matches[1], 0, $sep );
+					$p			= " ".substr( $matches[1], $sep )." ";
+					$paramcount	= preg_match_all( "/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/", $p, $matches, PREG_SET_ORDER );
+					$params		= array();
 					$c = 0;
 
 					foreach( $matches as $m )
 					{
-						$value = isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : "1";
-						$params[$c] = $value;
-						$params[ $m[2] ] = $value;
+						$value				= isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : "1";
+						$params[$c]			= $value;
+						$params[ $m[2] ]	= $value;
 						$c++;
 					}
 				}

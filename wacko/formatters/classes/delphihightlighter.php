@@ -129,7 +129,7 @@ class DelphiHightlighter{
 	function analyseword($tok)
 	{
 		// Si c'est un nombre
-		if (($tok[0] == '$') || ($tok[0] == '#') || ($tok == (string)intval($tok)))
+		if ((isset($tok[0]) && $tok[0] == '$') || (isset($tok[0]) && $tok[0] == '#') || ($tok == (string)intval($tok)))
 		return $this->formatspecialtok($tok, $this->colornumber, $this->stylenumber);
 		// Si c'est vide, on renvoie une chaine vide
 		if (empty($tok)) return $tok;
