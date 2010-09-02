@@ -1784,6 +1784,7 @@ class Wacko
 		$icon	= '';
 		$title	= '';
 		$lang	= '';
+		$desc	= '';
 		$url	= '';
 		$imlink	= false;
 		$text	= str_replace('"', "&quot;", $text);
@@ -1897,6 +1898,7 @@ class Wacko
 			{
 				//try to find in global storage and return if success
 				$desc = $this->check_file_exists($arr[1]);
+
 				if (is_array($desc))
 				{
 					$title	= $desc['description']." (".$this->binary_multiples($desc['filesize'], true, true, true).")";
@@ -1943,7 +1945,7 @@ class Wacko
 					$desc['user_id'] == $this->get_user_id()))
 					{
 						$title	= $desc['description']." (".$this->binary_multiples($desc['filesize'], true, true, true).")";
-						$url	= $this->config['base_url'].trim($pagetag,"/")."/files".($this->config['rewrite_mode'] ? "?" : "&amp;")."get=".$file;
+						$url	= $this->href("files", trim($pagetag,"/")).($this->config['rewrite_mode'] ? "?" : "&amp;")."get=".$file;
 						$imlink	= false;
 						$icon	= $this->get_translation("fileicon");
 						$tpl	= "localfile";
@@ -1952,17 +1954,17 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
-								return "<img src=\"".$this->config['base_url'].trim($pagetag,"/")."/files".($this->config['rewrite_mode'] ? "?" : "&amp;")."get=".$file."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc['picture_w']."' height='".$desc['picture_h']."' />";
+								return "<img src=\"".$this->href("files", trim($pagetag,"/")).($this->config['rewrite_mode'] ? "?" : "&amp;")."get=".$file."\" ".($text ? "alt=\"".$text."\" title=\"".$text."\"" : "")." width='".$desc['picture_w']."' height='".$desc['picture_h']."' />";
 							}
 							else
 							{
-								return "<a href=\"".$this->config['base_url'].trim($pagetag,"/")."/files".($this->config['rewrite_mode'] ? "?" : "&amp;")."get=".$file."\" title=\"".$title."\">".$text."</a>";
+								return "<a href=\"".$this->href("files", trim($pagetag,"/")).($this->config['rewrite_mode'] ? "?" : "&amp;")."get=".$file."\" title=\"".$title."\">".$text."</a>";
 							}
 						}
 					}
 					else //403
 					{
-						$url	= $this->config['base_url'].trim($pagetag,"/")."/files".($this->config['rewrite_mode'] ? "?" : "&amp;")."get=".$file;
+						$url	= $this->href("files", trim($pagetag,"/")).($this->config['rewrite_mode'] ? "?" : "&amp;")."get=".$file;
 						$icon	= $this->get_translation("lockicon");
 						$imlink	= false;
 						$tpl	= "localfile";

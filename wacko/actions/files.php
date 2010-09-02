@@ -86,7 +86,7 @@ if ($can_view)
 	else			$path2 = "file:";
 
 	// !!!!! patch link not to show pictures when not needed
-	if (!isset($pictures)) $path2 = str_replace("file:", "_file:", $path2);
+	if ($pictures == false) $path2 = str_replace("file:", "_file:", $path2);
 
 	if (count($files))
 	{
@@ -105,9 +105,10 @@ if ($can_view)
 		if ($desc == "") $desc = "&nbsp;";
 
 		$filename	= $file["filename"];
+		$text		= ($pictures == false) ? $filename : '';
 		$filesize	= $this->binary_multiples($file['filesize'], true, true, true);
 		$fileext	= substr($filename, strrpos($filename, ".") + 1);
-		$link		= $this->link($path2.$filename, "", $filename);
+		$link		= $this->link($path2.$filename, "", $text);
 
 		if ($fileext != "gif" && $fileext != "jpg" && $fileext != "png")
 		{
@@ -149,9 +150,11 @@ if ($can_view)
 ?>
 		<td class="size-"><span class="size2-">(<?php echo $filesize; ?>)</span>&nbsp;</td>
 		<td class="file-"><?php echo $link; ?></td>
-		<td class="desc-"><?php echo $desc ?></td>
+		<td class="desc-"><?php echo $desc; ?></td>
 	</tr>
 <?php
+		unset($link);
+		unset($desc);
 	}
 
 	if (count($files))
