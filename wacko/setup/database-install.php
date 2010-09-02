@@ -494,6 +494,7 @@ switch($config['database_driver'])
 					test(str_replace("%1","page",$lang['AlterTable']), @mysql_query($alter_page_r4_3_29, $dblink), str_replace("%1", "page", $lang['ErrorAlteringTable']));
 					test(str_replace("%1","page",$lang['AlterTable']), @mysql_query($alter_page_r4_3_30, $dblink), str_replace("%1", "page", $lang['ErrorAlteringTable']));
 					test(str_replace("%1","page",$lang['AlterTable']), @mysql_query($alter_page_r4_3_31, $dblink), str_replace("%1", "page", $lang['ErrorAlteringTable']));
+					test(str_replace("%1","page",$lang['AlterTable']), @mysql_query($alter_page_r4_3_32, $dblink), str_replace("%1", "page", $lang['ErrorAlteringTable']));
 
 					test(str_replace("%1","poll",$lang['CreatingTable']), @mysql_query($table_poll_r4_3, $dblink), str_replace("%1", "poll", $lang['ErrorCreatingTable']));
 
@@ -816,6 +817,7 @@ switch($config['database_driver'])
 								test(str_replace("%1","page",$lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_29), str_replace("%1", "page", $lang['ErrorAlteringTable']));
 								test(str_replace("%1","page",$lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_30), str_replace("%1", "page", $lang['ErrorAlteringTable']));
 								test(str_replace("%1","page",$lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_31), str_replace("%1", "page", $lang['ErrorAlteringTable']));
+								test(str_replace("%1","page",$lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_32), str_replace("%1", "page", $lang['ErrorAlteringTable']));
 
 								test(str_replace("%1","poll",$lang['CreatingTable']), @mysqli_query($dblink, $table_poll_r4_3), str_replace("%1", "poll", $lang['ErrorCreatingTable']));
 
