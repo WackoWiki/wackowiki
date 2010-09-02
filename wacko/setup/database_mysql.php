@@ -125,6 +125,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"comments INT(4) UNSIGNED NOT NULL DEFAULT '0',".
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"theme VARCHAR(20) DEFAULT NULL,".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"commented DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
