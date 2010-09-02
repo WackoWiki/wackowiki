@@ -176,13 +176,13 @@ class WackoFormatter
 		$this->object = &$object;
 
 		$this->LONGREGEXP =
-			"/(".
-			"<!--escaped-->.*?<!--escaped-->|".($this->object->config["allow_rawhtml"] == 1
-				? "\<\#.*?\#\>|"
-				: "").
+			'/('.
+			"<!--escaped-->.*?<!--escaped-->|".($this->object->config['allow_rawhtml'] == 1
+				? '\<\#.*?\#\>|'
+				: '').
 			"\(\?(\S+?)([ \t]+([^\n]+?))?\?\)|".
-			($this->object->config["disable_bracketslinks"] == 1
-				? ""
+			($this->object->config['disable_bracketslinks'] == 1
+				? ''
 				: "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)|\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]|\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)|").
 			"\n[ \t]*>+[^\n]*|".
 			"<\[.*?\]>|".
@@ -199,20 +199,20 @@ class WackoFormatter
 			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]|([0-9]{1,3}))[\.\)](\#[0-9]{1,3})?)?|".
 			"\b[[:alnum:]]+[:][".$object->language['ALPHANUM_P']."\!\.][".$object->language['ALPHANUM_P']."\-\_\.\+\&\=\#]+|".
 			"~([^ \t\n]+)|".
-			 ($this->object->config['disable_tikilinks'] == 1
-				? ""
+			($this->object->config['disable_tikilinks'] == 1
+				? ''
 				: "\b(".$object->language['UPPER'].$object->language['LOWER'].$object->language['ALPHANUM']."*\.".$object->language['ALPHA'].$object->language['ALPHANUM']."+)\b|").
-			 ($this->object->config["disable_wikilinks"] == 1
-				? ""
+			($this->object->config['disable_wikilinks'] == 1
+				? ''
 				: "(~?)(?<=[^\.".$object->language['ALPHANUM_P']."]|^)(((\.\.|!)?\/)?".$object->language['UPPER'].$object->language['LOWER']."+".$object->language['UPPERNUM'].$object->language['ALPHANUM']."*)\b|").
-			 ($this->object->config["disable_npjlinks"] == 1
-				? ""
+			($this->object->config['disable_npjlinks'] == 1
+				? ''
 				: "(~?)".$object->language['ALPHANUM']."+\@".$object->language['ALPHA']."*(?!".$object->language['ALPHANUM']."*\.".$object->language['ALPHANUM']."+)(\:".$object->language['ALPHANUM']."*)?|".$object->language['ALPHANUM']."+\:\:".$object->language['ALPHANUM']."+|").
 			"\n)/sm";
 
 		$this->NOTLONGREGEXP =
-			"/(".($this->object->config["disable_formatters"] == 1
-				? ""
+			"/(".($this->object->config['disable_formatters'] == 1
+				? ''
 				: "\%\%.*?\%\%|").
 			"~([^ \t\n]+)|".
 			"\"\".*?\"\"|".
@@ -231,31 +231,31 @@ class WackoFormatter
 	{
 		$result = '';
 
-		if ($this->intable) $Closers = &$this->tdindentClosers;
-		else $Closers = &$this->indentClosers;
+		if ($this->intable)	$Closers = &$this->tdindentClosers;
+		else				$Closers = &$this->indentClosers;
 
 		$c = count($Closers);
 
 		for ($i = 0; $i < $c; $i++)
 			$result .= array_pop($Closers);
 
-		if ($this->intable) $this->tdoldIndentLevel = 0;
-		else $this->oldIndentLevel = 0;
+		if ($this->intable)	$this->tdoldIndentLevel	= 0;
+		else				$this->oldIndentLevel	= 0;
 
 		return $result;
 	}
 
 	function wacko_preprocess($things)
 	{
-		$formatter = "";
-		$output = "";
-		$thing = $things[1];
-		$wacko = &$this->object;
-		$callback = array( &$this, "wackoPreprocess");
+		$formatter	= '';
+		$output		= '';
+		$thing		= $things[1];
+		$wacko		= &$this->object;
+		$callback	= array(&$this, 'wackoPreprocess');
 
-		if ($thing{0} == "~")
-			if ($thing{1} == "~")
-				return "~~".$this->wacko_preprocess(array(0, substr($thing, 2)));
+		if ($thing{0} == '~')
+			if ($thing{1} == '~')
+				return '~~'.$this->wacko_preprocess(array(0, substr($thing, 2)));
 
 		// escaped text
 		if (preg_match("/^<!--escaped-->(.*)<!--escaped-->$/s", $thing, $matches))
@@ -265,7 +265,7 @@ class WackoFormatter
 		// escaped text
 		else if (preg_match("/^\"\"(.*)\"\"$/s", $thing, $matches))
 		{
-			return "<!--escaped--><!--notypo-->".str_replace("\n","<br />",htmlspecialchars($matches[1]))."<!--/notypo--><!--escaped-->";
+			return "<!--escaped--><!--notypo-->".str_replace("\n", '<br />', htmlspecialchars($matches[1]))."<!--/notypo--><!--escaped-->";
 		}
 		// code text
 		else if (preg_match("/^\%\%(.*)\%\%$/s", $thing, $matches))
@@ -279,28 +279,28 @@ class WackoFormatter
 				if ($matches[1])
 				{
 					// check for formatter parameters
-					$sep = strpos( $matches[1], " ");
+					$sep = strpos($matches[1], ' ');
 
 					if ($sep === false)
 					{
-						$formatter = $matches[1];
-						$params = array();
+						$formatter	= $matches[1];
+						$params		= array();
 					}
 					else
 					{
-						$formatter = substr($matches[1], 0, $sep);
-						$p = " ".substr($matches[1], $sep)." ";
-						$paramcount = preg_match_all("/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/", $p, $matches, PREG_SET_ORDER);
-						$params = array();
-						$c = 0;
+						$formatter	= substr($matches[1], 0, $sep);
+						$p			= ' '.substr($matches[1], $sep).' ';
+						$paramcount	= preg_match_all("/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/", $p, $matches, PREG_SET_ORDER);
+						$params		= array();
+						$c			= 0;
 
 						foreach($matches as $m)
 						{
-							$value = isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : "1";
-							$params[$c] = $value;
-							$params[ $m[2] ] = $value;
+							$value			= isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : '1';
+							$params[$c]		= $value;
+							$params[$m[2]]	= $value;
 							if ($c == 0)
-								$params["_default"] = $m[2];
+								$params['_default'] = $m[2];
 							$c++;
 						}
 					}
@@ -308,17 +308,17 @@ class WackoFormatter
 			}
 			$formatter = strtolower($formatter);
 
-			if ($formatter == "\xF1") $formatter = "c";
-			if ($formatter == "c") $formatter = "comments";
-			if ($formatter == "") $formatter = "code";
+			if ($formatter == "\xF1")	$formatter = 'c';
+			if ($formatter == 'c')		$formatter = 'comments';
+			if ($formatter == '')		$formatter = 'code';
 
-			$res = $wacko->_format(trim($code), "highlight/".$formatter, $params);
+			$res = $wacko->_format(trim($code), 'highlight/'.$formatter, $params);
 
-			if (isset($params["wrapper"]) && ($params["wrapper"] != "none"))
+			if (isset($params['wrapper']) && ($params['wrapper'] != 'none'))
 			{
-				$wrapper = "wrapper_".$params["wrapper"];
-				$params["wrapper"] = ""; // no recursion
-				$res = $wacko->_format(trim($res), "highlight/".$wrapper, $params);
+				$wrapper			= 'wrapper_'.$params['wrapper'];
+				$params['wrapper']	= ''; // no recursion
+				$res				= $wacko->_format(trim($res), 'highlight/'.$wrapper, $params);
 			}
 
 			$output .= $res;
@@ -338,12 +338,12 @@ class WackoFormatter
 
 	function wacko_middleprocess($things)
 	{
-		$thing = $things[1];
-		$wacko = &$this->object;
-		$callback = array( &$this, "wacko_callback");
+		$thing		= $things[1];
+		$wacko		= &$this->object;
+		$callback	= array( &$this, 'wacko_callback');
 
-		if ($thing{0} == "~")
-		if ($thing{1} == "~") return "~~".$this->wacko_middleprocess( array(0,substr($thing,2)) );
+		if ($thing{0} == '~')
+		if ($thing{1} == '~') return '~~'.$this->wacko_middleprocess( array(0, substr($thing, 2)) );
 
 		// escaped text
 		if (preg_match("/^<!--escaped-->(.*)<!--escaped-->$/s", $thing, $matches))
@@ -361,24 +361,24 @@ class WackoFormatter
 
 	function wacko_callback($things)
 	{
-		$result = NULL;
-		$li = "";
-		$thing = $things[1];
-		$wacko = & $this->object;
-		$callback = array(&$this, "wacko_callback");
+		$result		= NULL;
+		$li			= "";
+		$thing		= $things[1];
+		$wacko		= & $this->object;
+		$callback	= array(&$this, 'wacko_callback');
 
 		$this->page_id = $wacko->page['page_id'];
 		if (!$this->page_id)
-			$this->page_id = trim(substr(crc32(time()), 0, 5), "-");
+			$this->page_id = trim(substr(crc32(time()), 0, 5), '-');
 
 		// convert HTML thingies
-		if ($thing == "<")
+		if ($thing == '<')
 		{
-			return "&lt;";
+			return '&lt;';
 		}
-		else if ($thing == ">")
+		else if ($thing == '>')
 		{
-			return "&gt;";
+			return '&gt;';
 		}
 		// escaped text
 		else if (preg_match("/^<!--escaped-->(.*)<!--escaped-->$/s", $thing, $matches))
@@ -388,35 +388,35 @@ class WackoFormatter
 		// escaped html
 		else if (preg_match("/^\<\#(.*)\#\>$/s", $thing, $matches))
 		{
-			if ($this->object->config["disable_safehtml"])
-				return "<!--notypo-->".$matches[1]."<!--/notypo-->";
+			if ($this->object->config['disable_safehtml'])
+				return '<!--notypo-->'.$matches[1].'<!--/notypo-->';
 			else
-				return "<!--notypo-->".$wacko->format($matches[1], "safehtml")."<!--/notypo-->";
+				return '<!--notypo-->'.$wacko->format($matches[1], 'safehtml').'<!--/notypo-->';
 		}
 		//table begin
-		else if ($thing == "#||")
+		else if ($thing == '#||')
 		{
-			$this->br = 0;
-			$this->cols = 0;
-			$this->intablebr = true;
-			$this->tableScope = true;
-			return "<table class=\"dtable\" border=\"0\">";
+			$this->br			= 0;
+			$this->cols			= 0;
+			$this->intablebr	= true;
+			$this->tableScope	= true;
+			return '<table class="dtable" border="0">';
 		}
-		else if ($thing == "#|")
+		else if ($thing == '#|')
 		{
-			$this->br = 0;
-			$this->cols = 0;
-			$this->intablebr = true;
-			$this->tableScope = true;
-			return "<table class=\"usertable\" border=\"1\">";
+			$this->br			= 0;
+			$this->cols			= 0;
+			$this->intablebr	= true;
+			$this->tableScope	= true;
+			return '<table class="usertable" border="1">';
 		}
 		//table end
-		else if (($thing == "|#" || $thing == "||#") && $this->tableScope)
+		else if (($thing == '|#' || $thing == '||#') && $this->tableScope)
 		{
-			$this->br = 0;
-			$this->intablebr = false;
-			$this->tableScope = false;
-			return "</table>";
+			$this->br			= 0;
+			$this->intablebr	= false;
+			$this->tableScope	= false;
+			return '</table>';
 		}
 		//table head
 		else if (preg_match("/^\*\|(.*?)\|\*$/s", $thing, $matches) && $this->tableScope)
@@ -425,7 +425,7 @@ class WackoFormatter
 			$this->intable		= true;
 			$this->intablebr	= false;
 
-			$output		= "<tr class=\"userrow\">";
+			$output		= '<tr class="userrow">';
 			$cells		= preg_split("/\|/", $matches[1]);
 			$count		= count($cells);
 			$count--;
@@ -438,9 +438,9 @@ class WackoFormatter
 				if ($cells[$i]{0} == "\n")
 					$cells[$i] = substr($cells[$i], 1);
 
-				$output	.= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<th class=\"userhead\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$i])));
+				$output	.= str_replace("\177", '', str_replace("\177"."<br />\n", '', '<th class="userhead">'.preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$i])));
 				$output	.= $this->indent_close();
-				$output	.= "</th>";
+				$output	.= '</th>';
 			}
 			if (($this->cols <> 0) and ($count < $this->cols))
 			{
@@ -450,9 +450,9 @@ class WackoFormatter
 				if ($cells[$i]{0} == "\n")
 					$cells[$count] = substr($cells[$count], 1);
 
-				$output	.= str_replace("\177", '', str_replace("\177"."<br />\n", "", "<th class=\"userhead\" colspan=\"".($this->cols-$count + 1)."\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
+				$output	.= str_replace("\177", '', str_replace("\177"."<br />\n", '', '<th class="userhead" colspan="'.($this->cols-$count + 1).'">'.preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
 				$output	.= $this->indent_close();
-				$output	.= "</th>";
+				$output	.= '</th>';
 			}
 			else
 			{
@@ -462,11 +462,11 @@ class WackoFormatter
 				if ($cells[$i]{0} == "\n")
 					$cells[$count] = substr($cells[$count], 1);
 
-				$output	.= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<th class=\"userhead\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
+				$output	.= str_replace("\177", '', str_replace("\177"."<br />\n", '', '<th class="userhead">'.preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
 				$output	.= $this->indent_close();
-				$output	.= "</th>";
+				$output	.= '</th>';
 			}
-			$output .= "</tr>";
+			$output .= '</tr>';
 
 			if ($this->cols	== 0)
 				$this->cols	= $count;
@@ -479,60 +479,60 @@ class WackoFormatter
 		//table row and cells
 		else if (preg_match("/^\|\|(.*?)\|\|$/s", $thing, $matches) && $this->tableScope)
 		{
-			$this->br = 1;
-			$this->intable = true;
-			$this->intablebr = false;
+			$this->br			= 1;
+			$this->intable		= true;
+			$this->intablebr	= false;
 
-			$output = "<tr class=\"userrow\">";
-			$cells = preg_split("/\|/", $matches[1]);
-			$count = count($cells);
+			$output		= '<tr class="userrow">';
+			$cells		= preg_split("/\|/", $matches[1]);
+			$count		= count($cells);
 			$count--;
 
 			for ($i = 0; $i < $count; $i++)
 			{
-				$this->tdoldIndentLevel = 0;
-				$this->tdindentClosers = array();
+				$this->tdoldIndentLevel	= 0;
+				$this->tdindentClosers	= array();
 
 				if ($cells[$i]{0} == "\n")
 					$cells[$i] = substr($cells[$i], 1);
 
-				$output .= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<td class=\"usercell\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$i])));
-				$output .= $this->indent_close();
-				$output .= "</td>";
+				$output	.= str_replace("\177", '', str_replace("\177"."<br />\n", '', '<td class="usercell">'.preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$i])));
+				$output	.= $this->indent_close();
+				$output	.= '</td>';
 			}
 			if (($this->cols <> 0) and ($count < $this->cols))
 			{
-				$this->tdoldIndentLevel = 0;
-				$this->tdindentClosers = array();
+				$this->tdoldIndentLevel	= 0;
+				$this->tdindentClosers	= array();
 
 				if ($cells[$i]{0} == "\n")
 					$cells[$count] = substr($cells[$count], 1);
 
-				$output .= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<td class=\"usercell\" colspan=\"".($this->cols-$count + 1)."\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
-				$output .= $this->indent_close();
-				$output .= "</td>";
+				$output	.= str_replace("\177", '', str_replace("\177"."<br />\n", '', '<td class="usercell" colspan="'.($this->cols-$count + 1).'">'.preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
+				$output	.= $this->indent_close();
+				$output	.= '</td>';
 			}
 			else
 			{
-				$this->tdoldIndentLevel = 0;
-				$this->tdindentClosers = array();
+				$this->tdoldIndentLevel	= 0;
+				$this->tdindentClosers	= array();
 
 				if ($cells[$i]{0} == "\n")
 					$cells[$count] = substr($cells[$count], 1);
 
-				$output .= str_replace("\177", "", str_replace("\177"."<br />\n", "", "<td  class=\"usercell\">".preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
-				$output .= $this->indent_close();
-				$output .= "</td>";
+				$output	.= str_replace("\177", '', str_replace("\177"."<br />\n", '', '<td class="usercell">'.preg_replace_callback($this->LONGREGEXP, $callback, "\177\n".$cells[$count])));
+				$output	.= $this->indent_close();
+				$output	.= '</td>';
 			}
-			$output .= "</tr>";
+			$output	.= '</tr>';
 
 			if ($this->cols == 0)
 			{
 				$this->cols = $count;
 			}
 
-			$this->intablebr = true;
-			$this->intable = false;
+			$this->intablebr	= true;
+			$this->intable		= false;
 
 			return $output;
 		}
@@ -540,50 +540,50 @@ class WackoFormatter
 		else if (preg_match("/^<!--markup:1:begin-->((\S.*?\S)|(\S))<!--markup:1:end-->$/s", $thing, $matches))
 		{
 			$this->br = 0;
-			return "<del class=\"diff\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</del>";
+			return '<del class="diff">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</del>';
 		}
 		// Inserted
 		else if (preg_match("/^<!--markup:2:begin-->((\S.*?\S)|(\S))<!--markup:2:end-->$/s", $thing, $matches))
 		{
 			$this->br = 0;
-			return "<ins class=\"diff\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</ins>";
+			return '<ins class="diff">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</ins>';
 		}
 		// bold
 		else if (preg_match("/^\*\*(.*?)\*\*$/", $thing, $matches))
 		{
-			return "<strong>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</strong>";
+			return '<strong>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</strong>';
 		}
 		// italic
 		else if (preg_match("/^\/\/(.*?)\/\/$/", $thing, $matches))
 		{
-			return "<em>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</em>";
+			return '<em>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</em>';
 		}
 		// underline
 		else if (preg_match("/^__(.*?)__$/", $thing, $matches))
 		{
-			return "<span class=\"underline\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</span>";
+			return '<span class="underline">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</span>';
 		}
 		// monospace
 		else if (preg_match("/^\#\#(.*?)\#\#$/", $thing, $matches) ||
-				preg_match("/^\¹\¹(.*?)\¹\¹$/", $thing, $matches))
+				 preg_match("/^\¹\¹(.*?)\¹\¹$/", $thing, $matches))
 		{
-			return "<tt>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</tt>";
+			return '<tt>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</tt>';
 		}
 		// small
 		else if (preg_match("/^\+\+(.*?)\+\+$/", $thing, $matches))
 		{
-			return "<small>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</small>";
+			return '<small>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</small>';
 		}
 		// cite
 		else if (preg_match("/^\'\'(.*?)\'\'$/s", $thing, $matches) ||
-				preg_match("/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/s", $thing, $matches))
+				 preg_match("/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/s", $thing, $matches))
 		{
 			$this->br = 1;
 			if ($matches[3] && $color = ($this->object->config['allow_x11colors'] == 1 ? $this->x11_colors[$matches[3]] : $this->colors[$matches[3]]))
 			{
-				return "<span class=\"cl-".$color."\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[4])."</span>";
+				return '<span class="cl-'.$color.'">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[4]).'</span>';
 			}
-			return "<span class=\"cite\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</span>";
+			return '<span class="cite">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</span>';
 		}
 		// mark
 		else if (preg_match("/^\?\?((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\?\?$/s", $thing, $matches))
@@ -593,20 +593,26 @@ class WackoFormatter
 			{
 				return "<span class=\"mark-".$color."\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[4])."</span>";
 			}
-			return "<span class=\"mark\">".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</span>";
+			return '<span class="mark">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</span>';
 		}
 		// urls
 		else if (preg_match("/^([[:alpha:]]+:\/\/\S+?|mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/", $thing, $matches))
 		{
 			$url = strtolower($matches[1]);
 
-			if (substr($url, -4) == ".jpg" ||
-				substr($url, -4) == ".gif" ||
-				substr($url, -4) == ".png" ||
-				substr($url, -4) == ".jpe" ||
-				substr($url, -5) == ".jpeg")
+			if (substr($url, -4) == '.jpg' ||
+				substr($url, -4) == '.gif' ||
+				substr($url, -4) == '.png' ||
+				substr($url, -4) == '.jpe' ||
+				substr($url, -5) == '.jpeg')
 			{
-				return "<img src=\"".$matches[1]."\" />".$matches[2];
+				return '<img src="'.$matches[1].'" />'.$matches[2];
+			}
+			// shorten url name if too long
+			else if (strlen($url) > 55)
+			{
+				$url = substr($matches[1], 0, 30).'[...]'.substr($matches[1], -20);
+				return $wacko->pre_link($matches[1], $url).$matches[2];
 			}
 			else
 			{
@@ -617,7 +623,7 @@ class WackoFormatter
 		else if (preg_match("/^\\\\\\\\([".$wacko->language['ALPHANUM_P']."\\\!\.\-\_]+)$/", $thing, $matches))
 		{
 			//[[:alnum:]\\\!\.\_\-]+\\
-			return "<a href=\"file://///".str_replace("\\","/",$matches[1])."\">\\\\".$matches[1]."</a>";
+			return "<a href=\"file://///".str_replace("\\", "/", $matches[1])."\">\\\\".$matches[1]."</a>";
 		}
 		// citated
 		else if (preg_match("/^\n[ \t]*(>+)(.*)$/s", $thing, $matches))
@@ -627,66 +633,69 @@ class WackoFormatter
 		// blockquote
 		else if (preg_match("/^<\[(.*)\]>$/s", $thing, $matches))
 		{
+			// trivial substitution (is there a security hole?)
+			$matches[0] = str_replace('<[', "<!--escaped--><blockquote><!--escaped-->", $matches[0]);
+			$matches[0] = str_replace(']>', "<!--escaped--></blockquote><!--escaped-->", $matches[0]);
 			//$this->br = 0;
-			$result = preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]);
+			$result = preg_replace_callback($this->LONGREGEXP, $callback, $matches[0]);
 			$result = preg_replace( "/^(<br \/>)+/i", "", $result );
 			$result = preg_replace( "/(<br \/>)+$/i", "", $result );
 
 			// These regexp needed for workaround MSIE bug (</ul></blockquote>)
 			if (preg_match( "/<\/ul>[\s\r\t\n]*$/i", $result)) $result.= $this->z_gif;
 
-			return "<blockquote>".$result."</blockquote>";
+			return '<blockquote>'.$result.'</blockquote>';
 		}
 		// super
 		else if (preg_match("/^\^\^(.*)\^\^$/", $thing, $matches))
 		{
-			return "<sup>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</sup>";
+			return '<sup>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</sup>';
 		}
 		// sub
 		else if (preg_match("/^vv(.*)vv$/", $thing, $matches))
 		{
-			return "<sub>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</sub>";
+			return '<sub>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</sub>';
 		}
 		// headers
 		else if (preg_match("/\n[ \t]*=======(.*?)={2,7}$/", $thing, $matches))
 		{
-			$result = $this->indent_close();
-			$this->br = 0;
+			$result		= $this->indent_close();
+			$this->br	= 0;
 			$wacko->headerCount++;
-			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h6>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h6>";
+			return $result.'<a name="h'.$this->page_id.'-'.$wacko->headerCount.'"></a><h6>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h6>';
 		}
 		else if (preg_match("/\n[ \t]*======(.*?)={2,7}$/", $thing, $matches))
 		{
-			$result = $this->indent_close();
-			$this->br = 0;
+			$result		= $this->indent_close();
+			$this->br	= 0;
 			$wacko->headerCount++;
 			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h5>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h5>";
 		}
 		else if (preg_match("/\n[ \t]*=====(.*?)={2,7}$/", $thing, $matches))
 		{
-			$result = $this->indent_close();
-			$this->br = 0;
+			$result		= $this->indent_close();
+			$this->br	= 0;
 			$wacko->headerCount++;
 			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h4>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h4>";
 		}
 		else if (preg_match("/\n[ \t]*====(.*?)={2,7}$/", $thing, $matches))
 		{
-			$result = $this->indent_close();
-			$this->br = 0;
+			$result		= $this->indent_close();
+			$this->br	= 0;
 			$wacko->headerCount++;
 			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h3>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h3>";
 		}
 		else if (preg_match("/\n[ \t]*===(.*?)={2,7}$/", $thing, $matches))
 		{
-			$result = $this->indent_close();
-			$this->br = 0;
+			$result		= $this->indent_close();
+			$this->br	= 0;
 			$wacko->headerCount++;
 			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h2>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h2>";
 		}
 		else if (preg_match("/\n[ \t]*==(.*?)={2,7}$/", $thing, $matches))
 		{
-			$result = $this->indent_close();
-			$this->br = 0;
+			$result	= $this->indent_close();
+			$this->br	= 0;
 			$wacko->headerCount++;
 			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h1>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h1>";
 		}
@@ -704,11 +713,11 @@ class WackoFormatter
 		// strike
 		else if (preg_match("/^--((\S.*?\S)|(\S))--$/s", $thing, $matches))    //NB: wrong
 		{
-			return "<del>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</del>";
+			return '<del>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</del>';
 		}
 		// definitions
-		else if ((preg_match("/^\(\?(.+?)(==|\|\|)(.*)\?\)$/", $thing, $matches)) ||
-				(preg_match("/^\(\?(\S+)(\s+(.+))?\?\)$/", $thing, $matches)))
+		else if (preg_match("/^\(\?(.+?)(==|\|\|)(.*)\?\)$/", $thing, $matches) ||
+				 preg_match("/^\(\?(\S+)(\s+(.+))?\?\)$/", $thing, $matches))
 		{
 			list (, $def, ,$text) = $matches;
 			if ($def)
@@ -723,85 +732,85 @@ class WackoFormatter
 			return "";
 		}
 		// forced links & footnotes
-		else if ((preg_match("/^\[\[(.+)(==|\|)(.*)\]\]$/", $thing, $matches)) ||
-				(preg_match("/^\(\((.+)(==|\|)(.*)\)\)$/", $thing, $matches)) ||
-				(preg_match("/^\[\[(\S+)(\s+(.+))?\]\]$/", $thing, $matches)) ||
-				(preg_match("/^\(\((\S+)(\s+(.+))?\)\)$/", $thing, $matches)))
+		else if (preg_match("/^\[\[(.+)(==|\|)(.*)\]\]$/", $thing, $matches) ||
+				 preg_match("/^\(\((.+)(==|\|)(.*)\)\)$/", $thing, $matches) ||
+				 preg_match("/^\[\[(\S+)(\s+(.+))?\]\]$/", $thing, $matches) ||
+				 preg_match("/^\(\((\S+)(\s+(.+))?\)\)$/", $thing, $matches))
 		{
-			$url = isset( $matches[1] ) ? $matches[1] : '';
-			$text = isset( $matches[3] ) ? $matches[3] : '';
+			$url	= isset($matches[1]) ? $matches[1] : '';
+			$text	= isset($matches[3]) ? $matches[3] : '';
 
 			if ($url)
 			{
-				if ($url{0} == "*")
+				if ($url{0} == '*')
 				{
 					$sup = 1;
 
 					if (preg_match("/^\*+$/", $url))
 					{
-						$aname = "ftn".strlen($url);
+						$aname	= "ftn".strlen($url);
 						if (!$text) $text = $url;
 					}
 					else if (preg_match("/^\*\d+$/", $url))
 					{
-						$aname = "ftnd".substr($url, 1);
+						$aname	= "ftnd".substr($url, 1);
 					}
 					else
 					{
-						$aname = htmlspecialchars(substr($url, 1));
-						$sup = 0;
+						$aname	= htmlspecialchars(substr($url, 1));
+						$sup	= 0;
 					}
 
 					if (!$text) $text = substr($url, 1);
 
-					return ($sup ? "<sup>" : "")."<a href=\"#o".$aname."\" name=\"".$aname."\">".$text."</a>".($sup ? "</sup>" : "");
+					return ($sup ? '<sup>' : '')."<a href=\"#o".$aname."\" name=\"".$aname."\">".$text."</a>".($sup ? '</sup>' : '');
 				}
 				else if ($url{0} == "#")
 				{
-					$anchor = substr($url, 1);
-					$sup = 1;
+					$anchor	= substr($url, 1);
+					$sup	= 1;
 
 					if (preg_match("/^\*+$/", $anchor))
 					{
-						$ahref = "ftn".strlen($anchor);
+						$ahref	= "ftn".strlen($anchor);
 					}
 					else if (preg_match("/^\d+$/", $anchor))
 					{
-						$ahref = "ftnd".$anchor;
+						$ahref	= "ftnd".$anchor;
 					}
 					else
 					{
-						$ahref = htmlspecialchars($anchor);
-						$sup = 0;
+						$ahref	= htmlspecialchars($anchor);
+						$sup	= 0;
 					}
 
 					if (!$text) $text = substr($url, 1);
 
-					return ($sup ? "<sup>" : "")."<a href=\"#".$ahref."\" name=\"o".$ahref."\">".$text."</a>".($sup ? "</sup>" : "");
+					return ($sup ? '<sup>' : '')."<a href=\"#".$ahref."\" name=\"o".$ahref."\">".$text."</a>".($sup ? '</sup>' : '');
 				}
 				else
 				{
 					if ($url != ($url = (preg_replace("/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/", "", $url))))
 					{
-						$result = "</span>";
+						$result	= "</span>";
 					}
 
 					if ($url{0} == "(")
 					{
-						$url = substr($url, 1);
-						$result .= "(";
+						$url	= substr($url, 1);
+						$result	.= "(";
 					}
 
 					if ($url{0} == "[")
 					{
-						$url = substr($url, 1);
-						$result .= "[";
+						$url	= substr($url, 1);
+						$result	.= "[";
 					}
 
 					if (!$text) $text = $url;
 
-					$url = str_replace(" ", "", $url);
-					$text = preg_replace("/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/", "", $text);
+					$url	= str_replace(" ", "", $url);
+					$text	= preg_replace("/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/", "", $text);
 
 					return $result.$wacko->pre_link($url, $text);
 				}
@@ -809,29 +818,29 @@ class WackoFormatter
 			return "";
 		}
 		// image link
-		else if (preg_match("/^\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]$/", $thing, $matches) ||
-				 preg_match("/^\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)$/", $thing, $matches))
+		else if (preg_match('/^\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]$/', $thing, $matches) ||
+				 preg_match('/^\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)$/', $thing, $matches))
 		{
-			$url	= isset($matches[1]) ? $matches[1] : "";
-			$img	= isset($matches[3]) ? $matches[3] : "";
+			$url	= isset($matches[1]) ? $matches[1] : '';
+			$img	= isset($matches[3]) ? $matches[3] : '';
 			if ($url && $img)
 			{
-				if ($url != ($url = (preg_replace("/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(/", "", $url))))
-					$result	= "</span>";
-				if ($url{0} == "(")
+				if ($url != ($url = (preg_replace("/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(/", '', $url))))
+					$result	= '</span>';
+				if ($url{0} == '(')
 				{
 					$url	= substr($url, 1);
-					$result.= "(";
+					$result.= '(';
 				}
-				if ($url{0} == "[")
+				if ($url{0} == '[')
 				{
 					$url=substr($url, 1);
-					$result.= "[";
+					$result.= '[';
 				}
-				$img = preg_replace("/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(|/", "", $img);
+				$img		= preg_replace("/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(|/", '', $img);
 				return $result.$wacko->pre_link($url, $img, 1, 1);
 			}
-			else return "";
+			else return '';
 		}
 		// indented text
 		else if (preg_match("/(\n)(\t+|(?:[ ]{2})+)(-|\*|([a-zA-Z]|[0-9]{1,3})[\.\)](\#[0-9]{1,3})?)?(\n|$)/s", $thing, $matches))
@@ -842,15 +851,15 @@ class WackoFormatter
 			//intable or not?
 			if ($this->intable)
 			{
-				$Closers = &$this->tdindentClosers;
-				$oldlevel = &$this->tdoldIndentLevel;
-				$oldtype = &$this->tdoldIndentType;
+				$Closers	= &$this->tdindentClosers;
+				$oldlevel	= &$this->tdoldIndentLevel;
+				$oldtype	= &$this->tdoldIndentType;
 			}
 			else
 			{
-				$Closers = &$this->indentClosers;
-				$oldlevel = &$this->oldIndentLevel;
-				$oldtype = &$this->oldIndentType;
+				$Closers	= &$this->indentClosers;
+				$oldlevel	= &$this->oldIndentLevel;
+				$oldtype	= &$this->oldIndentType;
 			}
 
 			// we definitely want no line break in this one.
@@ -860,37 +869,37 @@ class WackoFormatter
 			if ($matches[5])
 				$start = substr($matches[5], 1);
 			else
-				$start = "";
+				$start = '';
 
 			// find out which indent type we want
 			$newIndentType = isset($matches[3][0]) ? $matches[3][0] : "";
 
 			if (!$newIndentType)
 			{
-				$opener = "<div class=\"indent\">";
-				$closer = "</div>";
-				$this->br = 1;
-				$newtype = "i";
+				$opener		= '<div class="indent">';
+				$closer		= '</div>';
+				$this->br	= 1;
+				$newtype	= 'i';
 			}
-			else if ($newIndentType == "-" || $newIndentType == "*")
+			else if ($newIndentType == '-' || $newIndentType == '*')
 			{
-				$opener = "<ul><li>";
-				$closer = "</li></ul>";
-				$newtype = "*";
-				$li = 1;
+				$opener		= '<ul><li>';
+				$closer		= '</li></ul>';
+				$newtype	= '*';
+				$li			= 1;
 			}
 			else
 			{
-				$opener = "<ol type=\"".$newIndentType."\"><li".
-							($start ? " value=\"".$start."\"" : "").">";
-				$closer = "</li></ol>";
-				$newtype = "1";
-				$li = 1;
+				$opener		= '<ol type="'.$newIndentType.'"><li'.
+							  ($start ? ' value="'.$start.'"' : '').'>';
+				$closer		= '</li></ol>';
+				$newtype	= '1';
+				$li			= 1;
 			}
 
 			// get new indent level
-			if ($matches[2][0] == " ")
-				$newIndentLevel = (int) (strlen($matches[2]) / 2);
+			if ($matches[2][0] == ' ')
+				$newIndentLevel = (int)strlen($matches[2]) / 2;
 			else
 				$newIndentLevel = strlen($matches[2]);
 
@@ -916,12 +925,12 @@ class WackoFormatter
 				array_push($Closers, $closer);
 			}
 
-			$oldlevel = $newIndentLevel;
-			$oldtype  = $newtype;
+			$oldlevel	= $newIndentLevel;
+			$oldtype	= $newtype;
 
 			if ($li && !preg_match("/".str_replace(")", "\)", $opener)."$/", $result))
 			{
-				$result .= "</li><li".($start ? " value=\"".$start."\"" : "").">";
+				$result .= '</li><li'.($start ? ' value="'.$start.'"' : '').'>';
 			}
 
 			return $result;
@@ -948,9 +957,9 @@ class WackoFormatter
 			return $wacko->pre_link($matches[1]).$matches[2];
 		}
 		// tikiwiki links
-		else if ((!$wacko->_formatter_noautolinks) &&
-				$wacko->config['disable_tikilinks'] != 1 &&
-				(preg_match("/^(".$wacko->language['UPPER'].$wacko->language['LOWER'].$wacko->language['ALPHANUM']."*\.".$wacko->language['ALPHA'].$wacko->language['ALPHANUM']."+)$/s", $thing, $matches)))
+		else if (!$wacko->_formatter_noautolinks &&
+				 $wacko->config['disable_tikilinks'] != 1 &&
+				 preg_match("/^(".$wacko->language['UPPER'].$wacko->language['LOWER'].$wacko->language['ALPHANUM']."*\.".$wacko->language['ALPHA'].$wacko->language['ALPHANUM']."+)$/s", $thing, $matches))
 		{
 			return $wacko->pre_link($thing);
 		}

@@ -958,7 +958,7 @@ class Wacko
 			"WHERE ".($for
 				? "p.tag LIKE '".quote($this->dblink, $for)."/%' AND "
 				: "").
-				"(l.to_supertag = '".quote($this->dblink, $this->NpJTranslit($tag))."')".
+				"(l.to_supertag = '".quote($this->dblink, $this->npj_translit($tag))."')".
 			" ORDER BY tag", 1);
 	}
 
@@ -1807,7 +1807,7 @@ class Wacko
 		if (preg_match("/^(mailto[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/", $tag, $matches))
 		{
 			// this is a valid Email
-			$url	= ($matches[1] == "mailto:" ? $tag : "mailto:".$tag);
+			$url	= (isset($matches[1]) && $matches[1] == "mailto:" ? $tag : "mailto:".$tag);
 			$title	= $this->get_translation("EmailLink");
 			$icon	= $this->get_translation("emailicon");
 			$tpl	= "email";
@@ -1961,6 +1961,7 @@ class Wacko
 								return "<a href=\"".$this->href("files", trim($pagetag,"/")).($this->config['rewrite_mode'] ? "?" : "&amp;")."get=".$file."\" title=\"".$title."\">".$text."</a>";
 							}
 						}
+						#$this->debug_print_r($desc);
 					}
 					else //403
 					{
@@ -4944,6 +4945,14 @@ class Wacko
 
 			return $size;
 		}
+	}
+
+	function debug_print_r ($array)
+	{
+		echo '<pre>';
+		print_r($array);
+		echo '</pre>';
+
 	}
 
 }
