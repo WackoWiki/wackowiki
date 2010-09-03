@@ -553,6 +553,13 @@ $wackoTranslation = array(
 	"ACLForCluster" => "Kasutaja õiguste loend üle kogu %1 grupi",
 	"ACLAreYouSure" => "Sa asud nüüd muutma nii selle lehe, kui kõigi selle lehe alamlehtede kasutaja  õiguste loendit. Kas jätkad?",
 
+	"BookmarkDeleteSelected" => "Delete Selected",
+	"BookmarkMark" => "Mark",
+	"BookmarkNo" => "No.",
+	"BookmarkTitle" => "Bookmark Title",
+	"BookmarkPage" => "Page",
+	"BookmarkSaveChanges" => "Save Changes",
+
 	"MeasuredTime" => "Aeg",
 	"MeasuredMemory" => "Mälu",
 	"PoweredBy" => "Powered by",

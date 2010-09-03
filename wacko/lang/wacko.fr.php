@@ -552,6 +552,13 @@ $wackoTranslation = array(
 	"ACLForCluster" => "Contrôle d&rsquo;accès pour LA TOTALITÉ du groupe %1",
 	"ACLAreYouSure" => "Vous allez changer les droits relatifs à cette page et à toutes ses pages subordonnées ou sous-pages. Continuer&nbsp;?",
 
+	"BookmarkDeleteSelected" => "Delete Selected",
+	"BookmarkMark" => "Mark",
+	"BookmarkNo" => "No.",
+	"BookmarkTitle" => "Bookmark Title",
+	"BookmarkPage" => "Page",
+	"BookmarkSaveChanges" => "Save Changes",
+
 	"MeasuredTime" => "Temps",
 	"MeasuredMemory" => "Mémoire",
 	"PoweredBy" => "Motorisé par",
