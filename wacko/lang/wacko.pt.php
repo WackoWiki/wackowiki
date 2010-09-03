@@ -553,6 +553,13 @@ $wackoTranslation = array(
 	"ACLForCluster" => "Lista de Permissões para TODO o cluster %1",
 	"ACLAreYouSure" => "Vai alterar aas permissões desta página e todas as suas subpáginas. Quer continuar?",
 
+	"BookmarkDeleteSelected" => "Delete Selected",
+	"BookmarkMark" => "Mark",
+	"BookmarkNo" => "No.",
+	"BookmarkTitle" => "Bookmark Title",
+	"BookmarkPage" => "Page",
+	"BookmarkSaveChanges" => "Save Changes",
+
 	"MeasuredTime" => "Tempo",
 	"MeasuredMemory" => "Memória",
 	"PoweredBy" => "Powered by",

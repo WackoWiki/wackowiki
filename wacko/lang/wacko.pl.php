@@ -552,6 +552,13 @@ $wackoTranslation = array(
 	"ACLForCluster" => "Lista Praw Dostêpu dla CA£EGO klastra %1",
 	"ACLAreYouSure" => "Zamierzasz zmieniæ prawa dostêpu dla tej strony i wszystkich jej podstron. Kontynuowaæ?",
 
+	"BookmarkDeleteSelected" => "Delete Selected",
+	"BookmarkMark" => "Mark",
+	"BookmarkNo" => "No.",
+	"BookmarkTitle" => "Bookmark Title",
+	"BookmarkPage" => "Page",
+	"BookmarkSaveChanges" => "Save Changes",
+
 	"MeasuredTime" => "Czas",
 	"MeasuredMemory" => "Memory",
 	"PoweredBy" => "Powered by",

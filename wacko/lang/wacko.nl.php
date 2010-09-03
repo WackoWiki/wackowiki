@@ -419,7 +419,6 @@ $wackoTranslation = array(
 	"Watchers" => "Watchers voor %1",
 	"NoWatchers" => "<em>Er zijn geen mensen die %1 in de gaten houden.</em>",
 	"NotOwnerAndViewWatchers" => "<em>U bent niet de eigenaar van deze pagina, en kunt de lijst van watchers dus niet bekijken.</em",
-	"MeasuredTime" => "Tijd",
 
 	// mywatches action
 	"WatchedPages"			=> "List of all pages you follow for changes ",
@@ -555,7 +554,14 @@ $wackoTranslation = array(
 	"ACLForCluster" => "ACL's (rechten) voor de GEHELE cluster %1",
 	"ACLAreYouSure" => "U gaat de rechten (ACL's) voor deze pagina en alle subpagina's veranderen. Wilt u doorgaan?",
 
-	"MeasuredTime" => "Czas",
+	"BookmarkDeleteSelected" => "Delete Selected",
+	"BookmarkMark" => "Mark",
+	"BookmarkNo" => "No.",
+	"BookmarkTitle" => "Bookmark Title",
+	"BookmarkPage" => "Page",
+	"BookmarkSaveChanges" => "Save Changes",
+
+	"MeasuredTime" => "Tijd",
 	"MeasuredMemory" => "Geheugen",
 	"PoweredBy" => "Powered by",
 

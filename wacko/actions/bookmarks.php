@@ -4,9 +4,9 @@ if (!function_exists('bookmark_sorting'))
 {
 	function bookmark_sorting ($a, $b)
 	{
-		if ($a["bm_position"] == $b["bm_position"])
+		if ($a['bm_position'] == $b['bm_position'])
 			return 0;
-		return ($a["bm_position"] < $b["bm_position"])
+		return ($a['bm_position'] < $b['bm_position'])
 			? -1
 			: 1;
 	}
@@ -38,8 +38,8 @@ if (isset($_POST["_user_bookmarks"]))
 	foreach($a as $k=>$v)
 	{
 		$b[$k]['user_id']		= $v['user_id'];
-		$b[$k]["bookmark_id"]	= $v["bookmark_id"];
-		$b[$k]["bm_position"]	= $v["bm_position"];
+		$b[$k]['bookmark_id']	= $v['bookmark_id'];
+		$b[$k]['bm_position']	= $v['bm_position'];
 		$b[$k]['bm_title']		= $v['bm_title'];
 		$b[$k]['tag']			= $v['tag'];
 	}
@@ -50,18 +50,18 @@ if (isset($_POST["_user_bookmarks"]))
 		// repos
 		$data = array();
 		foreach( $object->data["user_menu"] as $k => $item )
-			$data[] = array( "bookmark_id" => $item["bookmark_id"], "bm_position"=> 1 * $_POST["pos_".$item["bookmark_id"]] );
+			$data[] = array( "bookmark_id" => $item['bookmark_id'], "bm_position"=> 1 * $_POST["pos_".$item['bookmark_id']] );
 		usort ($data, "bookmark_sorting");
 		foreach( $data as $k => $item )
-			$data[$k]["bm_position"] = $k + 1;
+			$data[$k]['bm_position'] = $k + 1;
 		// save
 		foreach( $data as $item )
 		{
 			$this->query(
 				"UPDATE ".$this->config['table_prefix']."bookmark SET ".
-				"bm_position = '".quote($this->dblink, $item["bm_position"])."', ".
-				"bm_title = '".quote($this->dblink, substr($_POST["title_".$item["bookmark_id"]],0,250))."' ".
-				"WHERE bookmark_id = '".quote($this->dblink, $item["bookmark_id"])."' ".
+				"bm_position = '".quote($this->dblink, $item['bm_position'])."', ".
+				"bm_title = '".quote($this->dblink, substr($_POST["title_".$item['bookmark_id']],0,250))."' ".
+				"WHERE bookmark_id = '".quote($this->dblink, $item['bookmark_id'])."' ".
 				"LIMIT 1");
 		}
 	}
@@ -70,10 +70,10 @@ if (isset($_POST["_user_bookmarks"]))
 		$deletion = "";
 		foreach( $object->data["user_menu"] as $item )
 		{
-			if (isset($_POST["delete_".$item["bookmark_id"]]))
+			if (isset($_POST["delete_".$item['bookmark_id']]))
 			{
 				if ($deletion != "") $deletion.=", ";
-				$deletion.= quote($this->dblink, $item["bookmark_id"]);
+				$deletion.= quote($this->dblink, $item['bookmark_id']);
 			}
 			if ($deletion != "")
 			{
@@ -100,20 +100,20 @@ if ($user)
 		echo "<input type=\"hidden\" name=\"_user_bookmarks\" value=\"yes\" />";
 
 		echo "<table>";
-		echo "<tr><th>No.</th><th>Bookmark Title</th><th>Page</th><th>Mark</th><!--<th>Display</th><th>Lang</th>--></tr>";
+		echo "<tr><th>".$this->get_translation("BookmarkNo")."</th><th>".$this->get_translation("BookmarkTitle")."</th><th>".$this->get_translation("BookmarkPage")."</th><th>".$this->get_translation("BookmarkMark")."</th><!--<th>Display</th><th>Lang</th>--></tr>";
 
 		foreach($_bookmarks as $_bookmark)
 		{
 			echo "<tr class=\"lined\">\n
 			<td class=\"\">
-			<input name=\"pos_".$_bookmark["bookmark_id"]."\" type=\"text\" size=\"2\" value=\"".$_bookmark["bm_position"]."\" />
+			<input name=\"pos_".$_bookmark['bookmark_id']."\" type=\"text\" size=\"2\" value=\"".$_bookmark['bm_position']."\" />
 			</td><td>
-			<input name=\"title_".$_bookmark["bookmark_id"]."\" type=\"text\" size=\"40\" value=\"".$_bookmark['bm_title']."\" />
+			<input name=\"title_".$_bookmark['bookmark_id']."\" type=\"text\" size=\"40\" value=\"".$_bookmark['bm_title']."\" />
 			</td><td>
-			<!--<input type=\"radio\" id=\"bookmark".$_bookmark["bookmark_id"]."\" name=\"change\" value=\"".$_bookmark["bookmark_id"]."\" /> -->
-			<label for=\"bookmark".$_bookmark["bookmark_id"]."\" title=\"".$_bookmark['title']."\">&raquo; ".$_bookmark['tag']."</label>
+			<!--<input type=\"radio\" id=\"bookmark".$_bookmark['bookmark_id']."\" name=\"change\" value=\"".$_bookmark['bookmark_id']."\" /> -->
+			<label for=\"bookmark".$_bookmark['bookmark_id']."\" title=\"".$_bookmark['title']."\">&raquo; ".$_bookmark['tag']."</label>
 			</td><td>
-			<input id=\"bookmark".$_bookmark["bookmark_id"]."\" name=\"delete_".$_bookmark["bookmark_id"]."\" type=\"checkbox\" />
+			<input id=\"bookmark".$_bookmark['bookmark_id']."\" name=\"delete_".$_bookmark['bookmark_id']."\" type=\"checkbox\" />
 			</td><!--<td>
 
 			".(!empty($_bookmark['bm_title']) ? $_bookmark['bm_title'] : $_bookmark['title'])."
@@ -123,9 +123,9 @@ if ($user)
 		}
 		echo "<tfoot>";
 		echo "<tr>\n<td colspan=\"2\">\n";
-		echo "<input name=\"update_bookmarks\" type=\"submit\" value=\"Save Changes\" />";
+		echo "<input name=\"update_bookmarks\" type=\"submit\" value=\"".$this->get_translation("BookmarkSaveChanges")."\" />";
 		echo "</td><td>";
-		echo "<input name=\"delete_bookmarks\" type=\"submit\" value=\"Delete Selected\" />";
+		echo "<input name=\"delete_bookmarks\" type=\"submit\" value=\"".$this->get_translation("BookmarkDeleteSelected")."\" />";
 		echo "</td>\n</tr>\n";
 		echo "</tfoot>";
 		echo "</table>";

@@ -551,6 +551,13 @@ $wackoTranslation = array(
 	"ACLForCluster" => "Контрол на достъп  за  целия  СЕКТОР %1",
 	"ACLAreYouSure" => "Ще се сменят правата за тази страница и всички подстраници. Продължение?",
 
+	"BookmarkDeleteSelected" => "Delete Selected",
+	"BookmarkMark" => "Mark",
+	"BookmarkNo" => "No.",
+	"BookmarkTitle" => "Bookmark Title",
+	"BookmarkPage" => "Page",
+	"BookmarkSaveChanges" => "Save Changes",
+
 	"MeasuredTime" => "Време",
 	"MeasuredMemory" => "Използвана памет",
 	"PoweredBy" => "Powered by",
