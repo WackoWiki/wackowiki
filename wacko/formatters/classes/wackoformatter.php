@@ -99,7 +99,7 @@ class WackoFormatter
 	"black" => "black",
 	"darksalmon" => "darksalmon",
 	"salmon" => "salmon",
-	"red" => "red" ,
+	"red" => "red",
 	"firebrick" => "firebrick",
 	"mediumvioletred" => "mediumvioletred",
 	"lightpink" => "lightpink",
@@ -968,7 +968,7 @@ class WackoFormatter
 				(preg_match("/^(~?)(".$wacko->language['ALPHANUM']."+\@".$wacko->language['ALPHA']."*(\:".$wacko->language['ALPHANUM']."*)?|".$wacko->language['ALPHANUM']."+\:\:".$wacko->language['ALPHANUM']."+)$/s", $thing, $matches)))
 		{
 			if ($matches[1] == "~")
-			return $matches[2];
+				return $matches[2];
 			return $wacko->pre_link($thing);
 		}
 		// wacko links!
@@ -976,7 +976,7 @@ class WackoFormatter
 				(preg_match("/^(((\.\.)|!)?\/?|~)?(".$wacko->language['UPPER'].$wacko->language['LOWER']."+".$wacko->language['UPPERNUM'].$wacko->language['ALPHANUM']."*)$/s", $thing, $matches)))
 		{
 			if ($matches[1] == "~")
-			return $matches[4];
+				return $matches[4];
 			return $wacko->pre_link($thing);
 		}
 
