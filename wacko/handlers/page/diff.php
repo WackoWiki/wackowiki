@@ -35,12 +35,12 @@ if (!$this->page) $this->redirect($this->href("show"));
 	$b = $_GET["b"];
 
 // If asked, call original diff
-if ($this->has_access("read")) {
+if ($this->has_access('read')) {
 
 	$pageA = handler_diff_load_page_by_id($this, $b);
 	$pageB = handler_diff_load_page_by_id($this, $a);
 
-	if ($this->has_access("read", $pageA['page_id']) && $this->has_access("read", $pageB['page_id']) ) {
+	if ($this->has_access('read', $pageA['page_id']) && $this->has_access('read', $pageB['page_id']) ) {
 
 		if (isset($_GET["source"])) $source = 1;
 

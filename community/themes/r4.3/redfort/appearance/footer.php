@@ -19,7 +19,7 @@ Updated by Pavel Fedotov.
   if ($this->method == "show") {
 ?>
 <?php
-if ($this->has_access("read") && $this->config['hide_files'] != 1)
+if ($this->has_access('read') && $this->config['hide_files'] != 1)
 {
   // store files display in session
   $tag = $this->tag;
@@ -119,7 +119,7 @@ if ($this->has_access("read") && $this->config['hide_files'] != 1)
 ?>
 
 <?php
-if ($this->has_access("read") && $this->config['hide_comments'] != 1)
+if ($this->has_access('read') && $this->config['hide_comments'] != 1)
 {
   // load comments for this page
   $comments = $this->load_comments($this->get_page_id());
@@ -178,7 +178,7 @@ if ($this->has_access("read") && $this->config['hide_comments'] != 1)
 
     // display comment form
     print("<div class=\"commentform\">\n");
-    if ($this->has_access("comment"))
+    if ($this->has_access('comment'))
     {
       ?>
         <?php echo $this->get_translation("AddComment"); ?><br />
@@ -233,7 +233,7 @@ echo $this->form_open("", $this->get_translation("TextSearchPage"), "get"); ?>
 <?php
 
 // If User has rights to edit page, show Edit link
-echo $this->has_access("write") ? "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a> |\n" : "";
+echo $this->has_access('write') ? "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a> |\n" : "";
 
 // Revisions link
 echo $this->page['modified'] ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->get_translation("RevisionTip")."\">".$this->get_page_time_formatted()."</a> |\n" : "";

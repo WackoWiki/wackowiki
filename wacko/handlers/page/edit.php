@@ -16,7 +16,7 @@ if ((isset($_GET["_autocomplete"])) && $_GET["_autocomplete"])
 <div id="pageedit">
 <?php
 
-if ($this->has_access("write") && $this->has_access("read"))
+if ($this->has_access('write') && $this->has_access('read'))
 {
 	$user	= $this->get_user();
 	if ($_POST)
@@ -168,7 +168,7 @@ if ($this->has_access("write") && $this->has_access("read"))
 				}
 
 				// forward
-				$this->pageCache[$this->supertag] = "";
+				$this->page_cache[$this->supertag] = "";
 
 				if ($this->page['comment_on_id'] != 0)
 				{

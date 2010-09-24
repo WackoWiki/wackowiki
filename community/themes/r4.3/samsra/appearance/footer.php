@@ -10,7 +10,7 @@ Common footer file.
 <?php
 
 // If User has rights to edit page, show Edit link
-echo $this->has_access("write") ? "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a> |\n" : "";
+echo $this->has_access('write') ? "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a> |\n" : "";
 
 // Revisions link
 echo $this->page['modified'] ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->get_translation("RevisionTip")."\">".$this->get_page_time_formatted()."</a> |\n" : "";

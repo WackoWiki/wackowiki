@@ -67,7 +67,7 @@ if ($user = $this->get_user())
 <?php
          }
    }
-else if($this->has_access("write"))
+else if($this->has_access('write'))
    {
 ?>
 

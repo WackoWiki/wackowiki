@@ -44,7 +44,7 @@ foreach($pages as $page)
 
 	// Display the actual page link
 	if($this->config['hide_locked'])
-		$access = $this->has_access("read",$page['page_id']);
+		$access = $this->has_access('read',$page['page_id']);
 	else
 		$access = true;
 

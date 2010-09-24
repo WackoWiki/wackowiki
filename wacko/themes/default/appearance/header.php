@@ -67,7 +67,7 @@ if ($user = $this->get_user())
 		$doubleclick = true;
 	}
 }
-else if($this->has_access("write"))
+else if($this->has_access('write'))
 {
 	$doubleclick = true;
 }
@@ -165,7 +165,7 @@ else
 		{
 			if ($image)
 			{
-				$tab = "<li class=\"$method active\"><img src=\"".$engine->config["theme_url"]."icons/$image\" alt=\"$title\" /></li>\n";
+				$tab = "<li class=\"$method active\"><img src=\"".$engine->config['theme_url']."icons/$image\" alt=\"$title\" /></li>\n";
 			}
 			else
 			{
@@ -178,7 +178,7 @@ else
 
 			if ($image)
 			{
-				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->config["theme_url"]."icons/$image\" alt=\"$title\" /></a></li>\n";
+				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->config['theme_url']."icons/$image\" alt=\"$title\" /></a></li>\n";
 			}
 			else
 			{

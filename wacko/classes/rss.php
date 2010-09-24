@@ -61,7 +61,7 @@ class RSS
 			foreach ($pages as $i => $page)
 			{
 				if ($this->engine->config['hide_locked'])
-					$access = $this->engine->has_access("read", $page['page_id'], GUEST);
+					$access = $this->engine->has_access('read', $page['page_id'], GUEST);
 
 				if ($access && ($count < 30))
 				{
@@ -214,7 +214,7 @@ class RSS
 
 		if ( $pages = $this->engine->load_recently_comment() ) {
 			foreach ($pages as $i => $page) {
-				if ($this->engine->config['hide_locked']) $access =$this->engine->has_access("read",$page['page_id'],GUEST);
+				if ($this->engine->config['hide_locked']) $access =$this->engine->has_access('read',$page['page_id'],GUEST);
 				if ( $access && ($count < 30) ) {
 					$count++;
 					$xml .= "<item>\n";
@@ -246,7 +246,7 @@ class RSS
 		{
 			foreach ($pages as $i => $page)
 			{
-				if ($this->engine->config['hide_locked'] ? $this->engine->has_access("read", $page['page_id'], GUEST) : true)
+				if ($this->engine->config['hide_locked'] ? $this->engine->has_access('read', $page['page_id'], GUEST) : true)
 				{
 					$xml .= "<url>\n";
 					$xml .= "<loc>".$this->engine->href("", $page['tag'])."</loc>\n";

@@ -170,6 +170,14 @@ $wackoTranslation = array(
 	"CategoryNotExists"	=> "Category does not exist.",
 	"CategoryEmpty"	=> "Category empty.",
 
+	// source handler
+	"TitleSource"			=> "source text of document",
+	"SourceFrom"			=> "original is located at: ",
+	"SourceFromLink"		=> "reference",
+	"SourceCopyToClipboard"	=> "copy to clipboard",
+	"Source"				=> "view the source text",
+	"SourceDesc"			=> "the source text will be shown with exception of those fragments which are hidden by formatters <nobr><tt>%%(comments)..%%</tt></nobr>",
+
 	"MetaUpdated" => "Meta data guardadas",
 	"MetaStoreButton" => "Guardar",
 	"MetaCancelButton" => "Cancelar",
@@ -519,7 +527,7 @@ $wackoTranslation = array(
 	"UploadNoFile" => "El formulario no tiene archivo.",
 	"UploadMaxSizeReached" => "El tamaño del archivo es mayor que el límite!",
 	"UploadNotAPicture" => "Solo se permite subir imágenes.",
-	"UploadMaxFileCount" => "Has llegado a tu límite de archivos subidos.",
+	"UploadMaxFileQuota" => "Has llegado a tu límite de archivos subidos.",
 	"UploadDone" => "El archivo se ha subido con exito.",
 	"UploadKB" => "KB",
 	"UploadFileNotFound" => "Archivo no encontrado",

@@ -29,7 +29,7 @@ if ($registered
 	}
 	else
 	{
-		if (isset($_POST['newname']) && $_POST["rename"] == "1")
+		if (isset($_POST['newname']) && $_POST['rename'] == "1")
 		{
 			// rename or massrename
 			$need_massrename = 0;
@@ -111,7 +111,7 @@ if ($registered
 			?> <input type="hidden" name="rename" value="1" /><input type="text"
 	name="newname" value="<?php echo $this->tag;?>" size="40" /><br />
 <br />
-			<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" "; if ($this->config["default_rename_redirect"] == 1){echo "checked=\"checked\"";}; echo " /> <label for=\"redirect\">".$this->get_translation("NeedRedirect")."</label>"; ?>
+			<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" "; if ($this->config['default_rename_redirect'] == 1){echo "checked=\"checked\"";}; echo " /> <label for=\"redirect\">".$this->get_translation("NeedRedirect")."</label>"; ?>
 <br />
 			<?php if ($this->check_acl($user,$this->config['rename_globalacl']))
 			{

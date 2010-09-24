@@ -43,13 +43,13 @@ if (isset($_POST["_user_bookmarks"]))
 		$b[$k]['bm_title']		= $v['bm_title'];
 		$b[$k]['tag']			= $v['tag'];
 	}
-	$object->data["user_menu"] = &$b;
+	$object->data['user_menu'] = &$b;
 
-	if (isset($_POST["update_bookmarks"]))
+	if (isset($_POST['update_bookmarks']))
 	{
 		// repos
 		$data = array();
-		foreach( $object->data["user_menu"] as $k => $item )
+		foreach( $object->data['user_menu'] as $k => $item )
 			$data[] = array( "bookmark_id" => $item['bookmark_id'], "bm_position"=> 1 * $_POST["pos_".$item['bookmark_id']] );
 		usort ($data, "bookmark_sorting");
 		foreach( $data as $k => $item )
@@ -65,17 +65,17 @@ if (isset($_POST["_user_bookmarks"]))
 				"LIMIT 1");
 		}
 	}
-	else if (isset($_POST["delete_bookmarks"]))
+	else if (isset($_POST['delete_bookmarks']))
 	{
 		$deletion = "";
-		foreach( $object->data["user_menu"] as $item )
+		foreach( $object->data['user_menu'] as $item )
 		{
 			if (isset($_POST["delete_".$item['bookmark_id']]))
 			{
-				if ($deletion != "") $deletion.=", ";
+				if ($deletion != '') $deletion.=", ";
 				$deletion.= quote($this->dblink, $item['bookmark_id']);
 			}
-			if ($deletion != "")
+			if ($deletion != '')
 			{
 				$this->query(
 					"DELETE FROM ".$this->config['table_prefix']."bookmark ".

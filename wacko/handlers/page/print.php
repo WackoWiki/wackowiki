@@ -7,7 +7,7 @@ if (!$this->page) $this->redirect($this->href("show"));
 // deny for comment
 if ($this->page['comment_on_id']) $this->redirect($this->href("", $this->page['tag']));
 
-if ($this->has_access("read"))
+if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{

@@ -170,6 +170,14 @@ $wackoTranslation = array(
 	"CategoryNotExists"	=> "Category does not exist.",
 	"CategoryEmpty"	=> "Category empty.",
 
+	// source handler
+	"TitleSource"			=> "source text of document",
+	"SourceFrom"			=> "original is located at: ",
+	"SourceFromLink"		=> "reference",
+	"SourceCopyToClipboard"	=> "copy to clipboard",
+	"Source"				=> "view the source text",
+	"SourceDesc"			=> "the source text will be shown with exception of those fragments which are hidden by formatters <nobr><tt>%%(comments)..%%</tt></nobr>",
+
 	"MetaUpdated" => "Zaktualizowano meta data",
 	"MetaStoreButton" => "Zachowaj",
 	"MetaCancelButton" => "Anuluj",
@@ -519,7 +527,7 @@ $wackoTranslation = array(
 	"UploadNoFile" => "Z jakiego¶ powodu nie by³o pliku w formularzu.",
 	"UploadMaxSizeReached" => "Rozmiar pliku wykracza poza dozwolony limit!",
 	"UploadNotAPicture" => "Mo¿na wgrywaæ jedynie zdjêcia, a ty co próbujesz wgraæ?",
-	"UploadMaxFileCount" => "Osi±gn±³e¶ swój limit wgrywania, ten plik nie mo¿e zostaæ wgrany",
+	"UploadMaxFileQuota" => "Osi±gn±³e¶ swój limit wgrywania, ten plik nie mo¿e zostaæ wgrany",
 	"UploadDone" => "Plik wgrany pomy¶lnie",
 	"UploadKB" => "KB",
 	"UploadFileNotFound" => "Nie znaleziono pliku",

@@ -94,7 +94,7 @@ if (list ($pages, $pagination) = load_recently_commented($this, $root, (int)$max
 		foreach ($pages as $page)
 		{
 			if ($this->config['hide_locked'])
-				$access = $this->has_access("read", $page['comment_on_id']);
+				$access = $this->has_access('read', $page['comment_on_id']);
 			else
 				$access = true;
 

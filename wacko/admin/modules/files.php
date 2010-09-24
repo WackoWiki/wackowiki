@@ -42,8 +42,8 @@ function admin_files(&$engine, &$module)
 		<li><?php echo $engine->link( 'file:'.$_GET['file'] ); ?></li>
 	</ul>
 	<br />
-	<input type="hidden" name="remove" value="<?php echo $_GET["remove"]?>" />
-	<input type="hidden" name="file" value="<?php echo $_GET["file"]?>" />
+	<input type="hidden" name="remove" value="<?php echo $_GET['remove']?>" />
+	<input type="hidden" name="file" value="<?php echo $_GET['file']?>" />
 	<input id="submit" name="submit" type="submit" value="<?php echo $engine->get_translation('RemoveButton'); ?>" />
 	<input id="button" type="button" value="<?php echo str_replace("\n", ' ', $engine->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes(rawurldecode($engine->href('upload')))?>';" />
 	<br /><br />

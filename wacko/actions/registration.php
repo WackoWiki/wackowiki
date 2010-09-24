@@ -15,17 +15,17 @@ if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTT
 }
 
 // is user trying to confirm email, login or register?
-if (isset($_GET["confirm"]))
+if (isset($_GET['confirm']))
 {
 	if ($temp = $this->load_single(
 		"SELECT user_name, email, email_confirm ".
 		"FROM ".$this->config['user_table']." ".
-		"WHERE email_confirm = '".quote($this->dblink, $_GET["confirm"])."'"))
+		"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."'"))
 	{
 		$this->query(
 			"UPDATE ".$this->config['user_table']." ".
 			"SET email_confirm = '' ".
-			"WHERE email_confirm = '".quote($this->dblink, $_GET["confirm"])."'");
+			"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."'");
 
 		echo "<div class=\"info\">".$this->get_translation("EmailConfirmed")."</div><br />";
 
@@ -39,23 +39,23 @@ if (isset($_GET["confirm"]))
 		echo "<div class=\"info\">".str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation("SettingsText"), 0), $this->get_translation("EmailNotConfirmed"))."</div><br />";
 	}
 }
-else if (isset($_POST["action"]) && $_POST["action"] == "login")
+else if (isset($_POST['action']) && $_POST['action'] == "login")
 {
 	// create new account if possible
-	if ($this->config["allow_registration"] || $this->is_admin())
+	if ($this->config['allow_registration'] || $this->is_admin())
 	{
 		// passing vars from user input
-		$user_name		= trim($_POST["name"]);
+		$user_name		= trim($_POST['name']);
 		$email			= trim($_POST['email']);
 		$password		= $_POST['password'];
-		$confpassword	= $_POST["confpassword"];
+		$confpassword	= $_POST['confpassword'];
 		$lang			= $_POST['lang'];
 		$complexity		= $this->password_complexity($user_name, $password);
 
 		// Start Registration Captcha
 
 		// Only show captcha if the admin enabled it in the config file
-		if(!$this->is_admin() && $this->config["captcha_registration"])
+		if(!$this->is_admin() && $this->config['captcha_registration'])
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
 			if(extension_loaded('gd'))
@@ -100,7 +100,7 @@ else if (isset($_POST["action"]) && $_POST["action"] == "login")
 		}
 		// End Comment Captcha
 
-		if (($word_ok) || $this->is_admin() || !$this->config["captcha_registration"])
+		if (($word_ok) || $this->is_admin() || !$this->config['captcha_registration'])
 		{
 			// check if name is WikiName style
 			if (!$this->is_wiki_name($user_name))
@@ -209,7 +209,7 @@ else if (isset($_POST["action"]) && $_POST["action"] == "login")
 
 if (!isset($_POST["confirm"]))
 {
-	if ($this->config["allow_registration"] || $this->is_admin())
+	if ($this->config['allow_registration'] || $this->is_admin())
 	{
 		if ($error) $this->set_message($this->format($error));
 
@@ -250,25 +250,25 @@ for ($i = 0; $i < count($langs); $i++)
 <p><label for="password"><?php echo $this->get_translation("RegistrationPassword");?>:</label>
 <input type="password" id="password" name="password" size="24" value="<?php echo $password ?>" />
 <?php
-if ($this->config["pwd_char_classes"] > 0)
+if ($this->config['pwd_char_classes'] > 0)
 {
 	$PwdCplxText = $this->get_translation("PwdCplxDesc4");
-	if 		($this->config["pwd_char_classes"] == 1)
+	if 		($this->config['pwd_char_classes'] == 1)
 		$PwdCplxText .= $this->get_translation("PwdCplxDesc41");
-	else if ($this->config["pwd_char_classes"] == 2)
+	else if ($this->config['pwd_char_classes'] == 2)
 		$PwdCplxText .= $this->get_translation("PwdCplxDesc42");
-	else if ($this->config["pwd_char_classes"] == 3)
+	else if ($this->config['pwd_char_classes'] == 3)
 		$PwdCplxText .= $this->get_translation("PwdCplxDesc43");
 	$PwdCplxText .= ". ".$this->get_translation("PwdCplxDesc5");
 }
 echo "<br /><small>".
 	 $this->get_translation("PwdCplxDesc1").
-	 str_replace("%1", $this->config["pwd_min_chars"],
+	 str_replace("%1", $this->config['pwd_min_chars'],
 		$this->get_translation("PwdCplxDesc2")).
-	 ($this->config["pwd_unlike_login"] > 0
+	 ($this->config['pwd_unlike_login'] > 0
 		? ", ".$this->get_translation("PwdCplxDesc3")
 		: "").
-	 ($this->config["pwd_char_classes"] > 0
+	 ($this->config['pwd_char_classes'] > 0
 		? ", ".$PwdCplxText
 		: "")."</small>";
 ?>
@@ -286,7 +286,7 @@ echo "<br /><small>".
 		// captcha code starts
 
 		// Only show captcha if the admin enabled it in the config file
-		if($this->config["captcha_registration"])
+		if($this->config['captcha_registration'])
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
 			if(extension_loaded('gd'))

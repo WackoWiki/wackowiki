@@ -47,7 +47,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 	foreach ($pages as $i => $page)
 	{
 		if ($this->config['hide_locked'])
-			$access = $this->has_access("read", $page['page_id']);
+			$access = $this->has_access('read', $page['page_id']);
 		else
 			$access = true;
 

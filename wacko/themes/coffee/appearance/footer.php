@@ -4,7 +4,7 @@
 <ul>
 <?php
 // If User has rights to edit page, show Edit link
-echo ($this->has_access("write") && ($this->method != 'edit')) ? "<li><a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a></li>\n" : "";
+echo ($this->has_access('write') && ($this->method != 'edit')) ? "<li><a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a></li>\n" : "";
 
 // If this page exists
 if ($this->page)
@@ -66,7 +66,7 @@ if ($this->page)
 		print("<li><a href=\"".$this->href("permissions")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a></li>\n");
 	}
 
-	if($this->has_access("write") && $this->get_user() || $this->is_admin())
+	if($this->has_access('write') && $this->get_user() || $this->is_admin())
 	{
 		// Page  settings link
 		print("<li><a href=\"".$this->href("properties"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditPropertiesConfirm")."');\"":"").">".$this->get_translation("PropertiesText")."</a></li>\n");

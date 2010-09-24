@@ -27,11 +27,11 @@ if (sizeof($what) > 0)
 {
 	// 2. check rights
 	if ($this->is_admin() || (isset($desc['upload_id']) && ($this->page['owner_id'] == $this->get_user_id())) ||
-	($this->has_access("read")) || ($desc['user_id'] == $this->get_user_id()) )
+	($this->has_access('read')) || ($desc['user_id'] == $this->get_user_id()) )
 	{
-		$filepath = $this->config["upload_path".($page_id ? "_per_page" : "")]."/".
+		$filepath = $this->config['upload_path'.($page_id ? '_per_page' : '')]."/".
 		($page_id ? ("@".$this->page['page_id']."@") : "").
-		$what[0]["filename"];
+		$what[0]['filename'];
 	}
 	else
 	{

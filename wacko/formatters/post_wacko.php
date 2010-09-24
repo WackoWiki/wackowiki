@@ -10,9 +10,9 @@ $text = preg_replace_callback("/(<!--link:begin-->(\S+?)([^\n]*?)==([^\n]*?)<!--
 
 array( &$parser, "postcallback"), $text);
 
-if (!isset($options["stripnotypo"])) $options["stripnotypo"] = "";
+if (!isset($options['stripnotypo'])) $options['stripnotypo'] = '';
 
-if ($options["stripnotypo"])
+if ($options['stripnotypo'])
 {
 	$text = str_replace("<!--notypo-->", "", $text);
 	$text = str_replace("<!--/notypo-->", "", $text);

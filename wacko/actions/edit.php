@@ -14,7 +14,7 @@ if (!$page)
 	{$editpage = $this->href("edit");}
 if (!$text)
 	$text = $this->get_translation("EditText");
-	$output .= $this->has_access("write") ? "<a href=\"".$editpage."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$text."</a>\n" : "";
+	$output .= $this->has_access('write') ? "<a href=\"".$editpage."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$text."</a>\n" : "";
 
 	echo ($output);
 

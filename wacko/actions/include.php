@@ -17,7 +17,7 @@ if (in_array($page, $this->context)) return;
 if ($page == $this->tag) return;
 
 $page_id = $this->get_page_id($page);
-if (! $this->has_access("read", $page_id))
+if (! $this->has_access('read', $page_id))
 {
 	if ($nowarning != 1) echo $this->get_translation("NoAccessToSourcePage");
 }
@@ -52,7 +52,7 @@ else
 		$strings = preg_replace("/.*<!--action:begin-->a name=\"?$first_anchor\"?<!--action:end-->(.*)<!--action:begin-->a name=\"?$last_anchor\"?<!--action:end-->.*$/is", "\$1", $strings);
 
 		// header
-		if (($this->method != "print") && ($nomark != 1) && ($nomark != 2 || $this->has_access("write", $page_id)))
+		if (($this->method != "print") && ($nomark != 1) && ($nomark != 2 || $this->has_access('write', $page_id)))
 		{
 			echo "<div class=\"include\">"."<div class=\"name\">".$this->link("/".$inc_page['tag'])."&nbsp;&nbsp;::&nbsp;".
 				"<a href=\"".$this->href("edit", $inc_page['tag'])."\">".$this->get_translation("EditIcon")."</a></div>";
@@ -67,7 +67,7 @@ else
 		$this->start_link_tracking();
 
 		// footer
-		if (($this->method != "print") && ($nomark !=1 ) && ($nomark != 2 || $this->has_access("write", $page_id)))
+		if (($this->method != "print") && ($nomark !=1 ) && ($nomark != 2 || $this->has_access('write', $page_id)))
 		{
 			echo "<div class=\"name\">".$this->link("/".$inc_page['tag'])."&nbsp;&nbsp;::&nbsp;".
 				"<a href=\"".$this->href("edit", $inc_page['tag'])."\">".$this->get_translation("EditIcon")."</a></div></div>";

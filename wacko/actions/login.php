@@ -6,31 +6,31 @@ $output = "";
 
 // reconnect securely in ssl mode
 #if ($this->config['ssl'] == true && $this->config['ssl_implicit'] == true && ( ($_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
-if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
+if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
 {
 	$this->redirect(str_replace("http://", "https://".(!empty($this->config['ssl_proxy']) ? $this->config['ssl_proxy'].'/' : ""), $this->href()));
 }
 
 // actions
-if (isset($_GET["action"]) && $_GET["action"] == "clearcookies")
+if (isset($_GET['action']) && $_GET['action'] == "clearcookies")
 {
 	foreach ($_COOKIE as $name => $value)
 	{
 		$this->delete_cookie($name, false, false);
 	}
-	$_POST["action"] = "logout";
+	$_POST['action'] = "logout";
 }
 
-if (isset($_GET["action"]) && $_GET["action"] == "logout")
+if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
 	$this->log(5, str_replace("%1", $this->get_user_name(), $this->get_translation("LogUserLoggedOut", $this->config['language'])));
 	$this->logout_user();
 	$this->set_bookmarks(BM_DEFAULT);
 	//$this->set_message($this->get_translation("LoggedOut"));
-	$this->context[++$this->current_context] = "";
+	$this->context[++$this->current_context] = '';
 
-	if ($_GET["goback"] != "")
-		$this->redirect($this->href("", stripslashes($_GET["goback"])));
+	if ($_GET['goback'] != '')
+		$this->redirect($this->href('', stripslashes($_GET['goback'])));
 	else
 		$this->redirect($this->href());
 }
@@ -93,10 +93,10 @@ else
 	$focus = 0;
 
 	// is user trying to log in or register?
-	if (isset($_POST["action"]) && $_POST["action"] == "login")
+	if (isset($_POST['action']) && $_POST['action'] == "login")
 	{
 		// if user name already exists, check password
-		if ($existingUser = $this->load_user($_POST["name"]))
+		if ($existingUser = $this->load_user($_POST['name']))
 		{
 			// check for disabled account
 			if (($existingUser['enabled'] == false) || $existingUser["account_type"] != 0 )
@@ -114,23 +114,23 @@ else
 					}
 					if (strlen($existingUser['password']) == 40) // only for dev versions
 					{
-						$_processed_password = hash('sha1', $_POST["name"].$existingUser["salt"].$_POST['password']);
+						$_processed_password = hash('sha1', $_POST['name'].$existingUser["salt"].$_POST['password']);
 					}
 					if ($existingUser['password'] == $_processed_password)
 					{
 						$salt = $this->random_password(10, 3);
-						$password = hash('sha256', $_POST["name"].$salt.$_POST['password']);
+						$password = hash('sha256', $_POST['name'].$salt.$_POST['password']);
 
 						// update database with the sha256 password for future logins
 						$this->query("UPDATE ".$this->config['table_prefix']."user SET ".
 									"password	= '".$password."', ".
 									"salt		= '".$salt."' ".
-									"WHERE user_name = '".$_POST["name"]."'");
+									"WHERE user_name = '".$_POST['name']."'");
 					}
 				}
 				else
 				{
-					$_processed_password = hash('sha256', $_POST["name"].$existingUser["salt"].$_POST['password']);
+					$_processed_password = hash('sha256', $_POST['name'].$existingUser["salt"].$_POST['password']);
 				}
 
 				// check password
@@ -171,21 +171,21 @@ else
 						$this->config['base_url'] = str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
 					}
 
-					if ($_POST["goback"] != "")
-						$this->redirect($this->href("", stripslashes($_POST["goback"]), "cache=".rand(0,1000)));
+					if ($_POST['goback'] != "")
+						$this->redirect($this->href("", stripslashes($_POST['goback']), "cache=".rand(0,1000)));
 					else
 						$this->redirect($this->href("", "", "cache=".rand(0,1000)));
 				}
 				else
 				{
 					$error = $this->get_translation("WrongPassword");
-					$name = $_POST["name"];
+					$name = $_POST['name'];
 					$focus = 1;
 
 					$this->set_failed_user_login_count($existingUser['user_id']);
 
 					// log failed attempt
-					$this->log(2, str_replace("%1", $_POST["name"], $this->get_translation("LogUserLoginFailed", $this->config['language'])));
+					$this->log(2, str_replace("%1", $_POST['name'], $this->get_translation("LogUserLoginFailed", $this->config['language'])));
 				}
 			}
 		}
@@ -196,7 +196,7 @@ else
 	print($this->form_open());
 	?>
 <input type="hidden" name="action" value="login" />
-<input type="hidden" name="goback" value="<?php echo (isset($_GET["goback"]) ? stripslashes($_GET["goback"]) : '');?>" />
+<input type="hidden" name="goback" value="<?php echo (isset($_GET['goback']) ? stripslashes($_GET['goback']) : '');?>" />
 <div class="cssform">
 	<h3><?php echo $this->get_translation("LoginWelcome"); ?></h3>
 	<p>

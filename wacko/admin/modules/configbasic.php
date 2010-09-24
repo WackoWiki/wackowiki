@@ -36,7 +36,7 @@ function admin_configbasic(&$engine, &$module)
 		$config['multilanguage']			= (int)$_POST['multilanguage'];
 		$config['upload_images_only']		= (int)$_POST['upload_images_only'];
 		$config['upload_max_size']			= (int)$_POST['upload_max_size'];
-		$config['upload_max_per_user']		= (int)$_POST['upload_max_per_user'];
+		$config['upload_quota_per_user']		= (int)$_POST['upload_quota_per_user'];
 		$config['hide_comments']			= (int)$_POST['hide_comments'];
 		$config['hide_files']				= (int)$_POST['hide_files'];
 		$config['hide_rating']				= (int)$_POST['hide_rating'];
@@ -201,9 +201,9 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="upload_max_per_user"><strong>Restricting files to a user:</strong><br />
+				<td class="label"><label for="upload_quota_per_user"><strong>Restricting files to a user:</strong><br />
 				<small>Restriction on the number of files that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="upload_max_per_user" name="upload_max_per_user" value="<?php echo htmlspecialchars($engine->config['upload_max_per_user']);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo htmlspecialchars($engine->config['upload_quota_per_user']);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">

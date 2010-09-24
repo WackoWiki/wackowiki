@@ -62,7 +62,7 @@ if ($user = $this->get_user())
 <?php
          }
    }
-else if($this->has_access("write"))
+else if($this->has_access('write'))
    {
 ?>
 
@@ -177,7 +177,7 @@ if ($this->page)
    }
  }
 // If User has rights to edit page, show Edit link
-echo $this->has_access("write") ? "<br /><a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a>" : "";
+echo $this->has_access('write') ? "<br /><a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a>" : "";
 ?>
   <br />
   <?php

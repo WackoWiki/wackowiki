@@ -42,7 +42,7 @@ if (!$nomark)
 	print "<div class=\"layout-box\"><p class=\"layout-box\"><span> ".$this->get_translation("TOCTitle")." ".$this->link($ppage, "", $title)."  </span></p>";
 }
 
-if (!$this->has_access("read",$_page['page_id']))
+if (!$this->has_access('read',$_page['page_id']))
 	print $this->get_translation("ReadAccessDenied");
 
 else

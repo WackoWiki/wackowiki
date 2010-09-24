@@ -7,7 +7,7 @@ echo "<h2>Upgrade Utilities -> Migration Routines for R4.3.rc1 to R4.4.rc1 Upgra
 
 if ($this->is_admin())
 {
-	if (!isset($_POST["rename"]))
+	if (!isset($_POST['rename']))
 	{
 		echo "<h3>1. Renames files in \\files\perpage folder to @page_id@filename:</h3>";
 
@@ -20,7 +20,7 @@ if ($this->is_admin())
 		echo $this->form_close();
 	}
 	// rename files in \files\perpage folder to @page_id@filename
-	else if (isset($_POST["rename"]))
+	else if (isset($_POST['rename']))
 	{
 		@set_time_limit(0);
 
@@ -30,7 +30,7 @@ if ($this->is_admin())
 			"INNER JOIN ".$this->config['table_prefix']."page p ON (u.page_id = p.page_id) ".
 			"WHERE u.page_id != '0'");
 
-		$dir = $this->config["upload_path_per_page"]."/";
+		$dir = $this->config['upload_path_per_page']."/";
 		echo "<table><th>old name</th><th></th><th>new name</th>";
 
 		foreach ($files as $file)
