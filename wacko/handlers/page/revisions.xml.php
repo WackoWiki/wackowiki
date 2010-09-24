@@ -19,7 +19,7 @@ $xml .= "<language>en-us</language>\n";
 $xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 $xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
-if ($this->has_access("read"))
+if ($this->has_access('read'))
 {
 	// load revisions for this page
 	if ($pages = $this->load_revisions($this->page['page_id']))

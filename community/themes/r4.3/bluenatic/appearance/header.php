@@ -57,7 +57,7 @@ if ($user = $this->get_user())
 <?php
          }
    }
-else if($this->has_access("write"))
+else if($this->has_access('write'))
    {
 ?>
 
@@ -101,7 +101,7 @@ else if($this->has_access("write"))
 			<?php // If logged in, show quick actions, else show login box ?>
 			<?php if($user = $this->get_user()) { ?>
 			<?php // Show edit button only if user has privileges ?>
-			<?php if($this->has_access("write")) { ?>
+			<?php if($this->has_access('write')) { ?>
 			<a href="<?php echo $this->href("edit"); ?>" accesskey="E">
 				<img src="<?php echo $this->config['theme_url']; ?>images/qa-edit.gif" alt="<?php echo $this->get_translation("EditTip"); ?>" title="<?php echo $this->get_translation("EditTip"); ?>" />
 			</a>&nbsp;&nbsp;&nbsp;

@@ -16,7 +16,7 @@ if ($this->page['comment_on_id'])
 else if ($this->forum === true && !$this->is_admin())
 	$this->redirect($this->href());
 
-if ($this->user_is_owner() || $this->is_admin() || $this->has_access("write", $this->page['page_id']))
+if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id']))
 {
 	if ($_POST)
 	{

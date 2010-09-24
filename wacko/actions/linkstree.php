@@ -20,18 +20,18 @@ if (!function_exists('links_tree_view'))
 
 			if (is_array($pages))
 			{
-				if (isset($wacko->config["default_bookmarks"]))
-					$head = explode(" / ",str_replace("))", "", str_replace("((", "", $wacko->config["default_bookmarks"])));
+				if (isset($wacko->config['default_bookmarks']))
+					$head = explode(" / ",str_replace("))", "", str_replace("((", "", $wacko->config['default_bookmarks'])));
 
 				foreach ($pages as $page)
 				{
-					$wacko->cache_page($page["to_tag"]);
+					$wacko->cache_page($page['to_tag']);
 
 					// we don't want page from the header. we don't want root_page (!!!!!!!)
 					if ((!in_array($node, $head, TRUE) && $wacko->config['root_page'] != $node) || $indent == 0)
 					{
-						if ($wacko->has_access("read", $page["to_tag"]))
-						links_tree_view($wacko, $page["to_tag"], $level - 1, $indent + 1);
+						if ($wacko->has_access('read', $page['to_tag']))
+						links_tree_view($wacko, $page['to_tag'], $level - 1, $indent + 1);
 					}
 				}
 			}

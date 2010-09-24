@@ -44,7 +44,7 @@ if (!$global)
 			$page_id = $_page_id;
 	}
 
-	$can_view   = $this->has_access("read", $page_id) || $this->is_admin() || $this->user_is_owner($page_id);
+	$can_view   = $this->has_access('read', $page_id) || $this->is_admin() || $this->user_is_owner($page_id);
 	$can_delete = $this->is_admin() || $this->user_is_owner($page_id);
 }
 else
@@ -112,7 +112,7 @@ if ($can_view)
 
 		if ($fileext != "gif" && $fileext != "jpg" && $fileext != "png")
 		{
-			$hits	= ", ".$file["hits"]." ".( $file["hits"] === 1 ? "hit" : "hits" );
+			$hits	= ", ".$file['hits']." ".( $file['hits'] === 1 ? 'hit' : 'hits' );
 		}
 		else
 		{
@@ -168,7 +168,7 @@ if ($can_view)
 }
 else
 {
-	echo "<em>".$this->get_translation("ActionDenied")."</em> ";
+	echo "<em>".$this->get_translation('ActionDenied')."</em> ";
 }
 
 ?>

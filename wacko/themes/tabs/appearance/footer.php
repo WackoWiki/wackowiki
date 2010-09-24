@@ -47,10 +47,10 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 	width="5" height="1" alt="" align="left" border="0" /><img
 	src="<?php echo $this->config['base_url'];?>images/z.gif"
 	width="5" height="1" alt="" align="right" border="0" /> <?php echo_tab( $this->href("show"),  $this->get_translation("ShowTip"),
-	$this->has_access("read") ? $this->get_translation("ShowText") : "",
+	$this->has_access('read') ? $this->get_translation("ShowText") : "",
 	$this->method != "show"
 	) ?> <?php echo_tab( $this->href("edit"),  $this->get_translation("EditTip"),
-	$this->has_access("write") ? $this->get_translation("EditText") : "",
+	$this->has_access('write') ? $this->get_translation("EditText") : "",
 	$this->method != "edit"
 	) ?> <?php echo_tab( $this->href("revisions"),  $this->get_translation("RevisionTip"),
 	$this->page['modified'] ? $this->get_page_time_formatted() : "",
@@ -59,7 +59,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 	// if this page exists
 	if ($this->page)
 	{
-		if($this->has_access("write") && $this->get_user() || $this->is_admin())
+		if($this->has_access('write') && $this->get_user() || $this->is_admin())
 		{
 			echo_tab( $this->href("properties"),  $this->get_translation("SettingsTip"),
 			$this->get_translation("PropertiesText"),
@@ -89,7 +89,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 	if ($this->get_user())
 	{
 		echo_tab( $this->href("new"), $this->get_translation("CreateNewPage"),
-		$this->has_access("write") ? $this->get_translation("CreateNewPage") : "",
+		$this->has_access('write') ? $this->get_translation("CreateNewPage") : "",
 		$this->method != "new",
 		"2"
 		);
@@ -127,7 +127,7 @@ if ($this->method == "show") {
 
 
 	// files code starts
-	if ($this->has_access("read") && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->get_user()))
+	if ($this->has_access('read') && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->get_user()))
 	{
 		// store files display in session
 		$tag = $this->tag;
@@ -207,7 +207,7 @@ switch (count($files))
 	}
 	// end files
 	// comments code starts
-	if ($this->has_access("read") && $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->get_user()))
+	if ($this->has_access('read') && $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->get_user()))
 	{
 		// load comments for this page
 		$comments = $this->load_comments($this->get_page_id());
@@ -258,7 +258,7 @@ switch (count($files))
 			}
 
 			// display comment form
-			if ($this->has_access("comment"))
+			if ($this->has_access('comment'))
 			{
 				print("<div class=\"commentform\">\n");
 

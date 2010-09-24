@@ -170,6 +170,14 @@ $wackoTranslation = array(
 	"CategoryNotExists"	=> "Kategori eksisterer ikke.",
 	"CategoryEmpty"	=> "Kategori tom.",
 
+	// source handler
+	"TitleSource"			=> "source text of document",
+	"SourceFrom"			=> "original is located at: ",
+	"SourceFromLink"		=> "reference",
+	"SourceCopyToClipboard"	=> "copy to clipboard",
+	"Source"				=> "view the source text",
+	"SourceDesc"			=> "the source text will be shown with exception of those fragments which are hidden by formatters <nobr><tt>%%(comments)..%%</tt></nobr>",
+
 	"MetaUpdated" => "Meta data opdateret",
 	"MetaStoreButton" => "Gem",
 	"MetaCancelButton" => "Fortryd",
@@ -519,7 +527,7 @@ $wackoTranslation = array(
 	"UploadNoFile" => "Hmmm, der var ikke nogen fil.",
 	"UploadMaxSizeReached" => "Filen er for stor!",
 	"UploadNotAPicture" => "Kan desværre ikke genkende filformatet, og kan derfor ikke tillade upload",
-	"UploadMaxFileCount" => "Sikke mange filer du uploader. Snak med administrator.",
+	"UploadMaxFileQuota" => "Sikke mange filer du uploader. Snak med administrator.",
 	"UploadDone" => "Filupload lykkedes",
 	"UploadKB" => "Kb",
 	"UploadFileNotFound" => "Ingen fil",

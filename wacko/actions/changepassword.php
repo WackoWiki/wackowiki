@@ -97,25 +97,25 @@ if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
 					<label for="confpassword"><?php echo $this->get_translation("ConfirmPassword");?>:</label>
 					<input type="password" id="confpassword" name="confpassword" size="24" />
 					<?php
-							if ($this->config["pwd_char_classes"] > 0)
+							if ($this->config['pwd_char_classes'] > 0)
 							{
 								$PwdCplxText = $this->get_translation("PwdCplxDesc4");
-								if 		($this->config["pwd_char_classes"] == 1)
+								if 		($this->config['pwd_char_classes'] == 1)
 									$PwdCplxText .= $this->get_translation("PwdCplxDesc41");
-								else if ($this->config["pwd_char_classes"] == 2)
+								else if ($this->config['pwd_char_classes'] == 2)
 									$PwdCplxText .= $this->get_translation("PwdCplxDesc42");
-								else if ($this->config["pwd_char_classes"] == 3)
+								else if ($this->config['pwd_char_classes'] == 3)
 									$PwdCplxText .= $this->get_translation("PwdCplxDesc43");
 								$PwdCplxText .= ". ".$this->get_translation("PwdCplxDesc5");
 							}
 							echo "<br /><small>".
 								 $this->get_translation("PwdCplxDesc1").
-								 str_replace("%1", $this->config["pwd_min_chars"],
+								 str_replace("%1", $this->config['pwd_min_chars'],
 									$this->get_translation("PwdCplxDesc2")).
-								 ($this->config["pwd_unlike_login"] > 0
+								 ($this->config['pwd_unlike_login'] > 0
 									? ", ".$this->get_translation("PwdCplxDesc3")
 									: "").
-								 ($this->config["pwd_char_classes"] > 0
+								 ($this->config['pwd_char_classes'] > 0
 									? ", ".$PwdCplxText
 									: "")."</small>";
 					?>
@@ -137,7 +137,7 @@ if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
 else if (!isset($forgot) && $user = $this->get_user())
 {
 	// is user trying to update?
-	if (isset($_POST["action"]) && $_POST["action"] == "change")
+	if (isset($_POST['action']) && $_POST['action'] == "change")
 	{
 		//Simple change password
 		$password = $_POST['password'];
@@ -225,25 +225,25 @@ else if (!isset($forgot) && $user = $this->get_user())
 			<label for="newpassword"><?php echo $this->get_translation("NewPassword");?>:</label>
 			<input type="password" id="newpassword" name="newpassword" size="24" />
 			<?php
-			if ($this->config["pwd_char_classes"] > 0)
+			if ($this->config['pwd_char_classes'] > 0)
 			{
 				$PwdCplxText = $this->get_translation("PwdCplxDesc4");
-				if 		($this->config["pwd_char_classes"] == 1)
+				if 		($this->config['pwd_char_classes'] == 1)
 					$PwdCplxText .= $this->get_translation("PwdCplxDesc41");
-				else if ($this->config["pwd_char_classes"] == 2)
+				else if ($this->config['pwd_char_classes'] == 2)
 					$PwdCplxText .= $this->get_translation("PwdCplxDesc42");
-				else if ($this->config["pwd_char_classes"] == 3)
+				else if ($this->config['pwd_char_classes'] == 3)
 					$PwdCplxText .= $this->get_translation("PwdCplxDesc43");
 				$PwdCplxText .= ". ".$this->get_translation("PwdCplxDesc5");
 			}
 			echo "<br /><small>".
 				 $this->get_translation("PwdCplxDesc1").
-				 str_replace("%1", $this->config["pwd_min_chars"],
+				 str_replace("%1", $this->config['pwd_min_chars'],
 					$this->get_translation("PwdCplxDesc2")).
-				 ($this->config["pwd_unlike_login"] > 0
+				 ($this->config['pwd_unlike_login'] > 0
 					? ", ".$this->get_translation("PwdCplxDesc3")
 					: "").
-				 ($this->config["pwd_char_classes"] > 0
+				 ($this->config['pwd_char_classes'] > 0
 					? ", ".$PwdCplxText
 					: "")."</small>";
 			?>
@@ -262,7 +262,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 //Password forgotten. Send mail
 else
 {
-	if ($_POST["action"] == "send")
+	if ($_POST['action'] == "send")
 	{
 		$name = str_replace(" ","", $_POST["loginormail"]);
 		$user = $this->load_single(
@@ -320,7 +320,7 @@ else
 		}
 	}
 	// View password forgot form
-	if ($error || $_POST["action"] != "send")
+	if ($error || $_POST['action'] != "send")
 	{
 		if ($error)
 		{

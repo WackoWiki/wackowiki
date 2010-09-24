@@ -66,7 +66,7 @@ if ($user = $this->get_user())
 <?php
          }
    }
-else if ($this->has_access("write"))
+else if ($this->has_access('write'))
    {
 ?>
    <script type="text/javascript">
@@ -169,7 +169,7 @@ echo $this->compose_link_to_page($this->get_translation("YouArePanelLink"), "", 
   <h1><span class="Main"><?php echo $this->config['wacko_name'] ?>:</span> <?php echo $this->get_page_path(); ?> <a class="Search"
 	title="<?php echo $this->get_translation("SearchTitleTip")?>"
 	href="<?php echo $this->config['base_url'] ?>TextSearch<?php echo ($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a> </h1>
-<?php if (($this->method != "edit") || !$this->has_access("write")) { ?>
+<?php if (($this->method != "edit") || !$this->has_access('write')) { ?>
   <div style="background-image:url(<?php echo $this->config['theme_url'] ?>icons/shade2.gif);" class="Shade"><img
 	src="<?php echo $this->config['theme_url'] ?>icons/shade1.gif"
 	width="106" height="6" alt="" /></div>

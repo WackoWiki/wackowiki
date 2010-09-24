@@ -28,7 +28,7 @@ if ($comments = load_recent_comments($this, $root, (int)$max))
 
 	foreach ($comments as $comment)
 	{
-		if ($this->config['hide_locked']) $access = $this->has_access("read",$comment['comment_on_id']);
+		if ($this->config['hide_locked']) $access = $this->has_access('read',$comment['comment_on_id']);
 		else $access = true;
 
 		if ($access && $this->user_allowed_comments())

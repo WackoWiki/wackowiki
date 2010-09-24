@@ -170,6 +170,14 @@ $wackoTranslation = array(
 	"CategoryNotExists"	=> "Category does not exist.",
 	"CategoryEmpty"	=> "Category empty.",
 
+	// source handler
+	"TitleSource"			=> "source text of document",
+	"SourceFrom"			=> "original is located at: ",
+	"SourceFromLink"		=> "reference",
+	"SourceCopyToClipboard"	=> "copy to clipboard",
+	"Source"				=> "view the source text",
+	"SourceDesc"			=> "the source text will be shown with exception of those fragments which are hidden by formatters <nobr><tt>%%(comments)..%%</tt></nobr>",
+
 	"MetaUpdated" => "Meta data uuendatud",
 	"MetaStoreButton" => "Save",
 	"MetaCancelButton" => "Cancel",
@@ -520,7 +528,7 @@ $wackoTranslation = array(
 	"UploadNoFile" => "Mingil põhjusel ei olnud vormil faili.",
 	"UploadMaxSizeReached" => "Faili suurus ületab lubatud piiri!",
 	"UploadNotAPicture" => "Ainult pilte on lubatud üles laadida. Ja mida sina üritad teha?",
-	"UploadMaxFileCount" => "Sa oled ületanud üleslaadimise piiri, seda faili enam kahjuks ei saa üles laadida",
+	"UploadMaxFileQuota" => "Sa oled ületanud üleslaadimise piiri, seda faili enam kahjuks ei saa üles laadida",
 	"UploadDone" => "Fail on edukalt üles laetud",
 	"UploadKB" => "Kb",
 	"UploadFileNotFound" => "Faili ei leitud",

@@ -217,6 +217,14 @@ $wackoTranslation = array(
 	"UsersRenameInfo"	=> "* Note: Change will affect all pages that are assigned to that user.",
 	"UsersRenamed"		=> "User successfully renamed.",
 
+	// source handler
+	"TitleSource"			=> "source text of document",
+	"SourceFrom"			=> "original is located at: ",
+	"SourceFromLink"		=> "reference",
+	"SourceCopyToClipboard"	=> "copy to clipboard",
+	"Source"				=> "view the source text",
+	"SourceDesc"			=> "the source text will be shown with exception of those fragments which are hidden by formatters <nobr><tt>%%(comments)..%%</tt></nobr>",
+
 	"MetaUpdated" => "Meta data updated",
 	"MetaStoreButton" => "Save",
 	"MetaCancelButton" => "Cancel",
@@ -618,7 +626,7 @@ $wackoTranslation = array(
 	"UploadNoFile" => "There was not file in form, for some reason.",
 	"UploadMaxSizeReached" => "File size is over allowed limit!",
 	"UploadNotAPicture" => "There is allowed to upload pictures only, and what do you trying to upload?",
-	"UploadMaxFileCount" => "You have reached your upload limit, this file can not be uploaded",
+	"UploadMaxFileQuota" => "You have reached your upload limit, this file can not be uploaded",
 	"UploadDone" => "File upload successful",
 	"UploadKB" => "Kb",
 	"UploadFileNotFound" => "File not found",

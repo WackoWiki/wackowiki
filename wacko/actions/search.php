@@ -65,7 +65,7 @@ if ($form)
 <br />
 <input
 	name="phrase" id="searchfor" size="40"
-	value="<?php echo htmlspecialchars(isset($_GET["phrase"])? $_GET["phrase"] : ""); ?>" />
+	value="<?php echo htmlspecialchars(isset($_GET['phrase'])? $_GET['phrase'] : ""); ?>" />
 <input
 	type="submit"
 	value="<?php echo $this->get_translation("SearchButtonText"); ?>" />
@@ -79,7 +79,7 @@ if ($form)
 	echo $this->form_close();
 }
 
-if ($phrase == "") $phrase = (isset($_GET["phrase"]) ? $_GET["phrase"] : NULL);
+if ($phrase == "") $phrase = (isset($_GET['phrase']) ? $_GET['phrase'] : NULL);
 if ($phrase)
 {
 	if ($form) print "<br />";
@@ -105,7 +105,7 @@ if ($phrase)
 
 			foreach ($results as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->has_access("read",$page['tag']) )
+				if (!$this->config['hide_locked'] || $this->has_access('read',$page['tag']) )
 				{
 					// Don't show it if it's a comment and we're hiding comments from this user
 					if($page['comment_on_id'] == '0' || ($page['comment_on_id'] != '0' && $this->user_allowed_comments()))

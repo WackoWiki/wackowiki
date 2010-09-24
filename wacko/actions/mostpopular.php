@@ -76,7 +76,7 @@ foreach ($pages as $page)
 {
 	if ($num < $max)
 	{
-		if ($this->config['hide_locked']) $access = $this->has_access("read",$page['page_id']);
+		if ($this->config['hide_locked']) $access = $this->has_access('read',$page['page_id']);
 		else $access = true;
 		if ($access)
 		{
@@ -84,7 +84,7 @@ foreach ($pages as $page)
 			$num++;
 			print("<tr><td>&nbsp;&nbsp;".$num.".&nbsp;".$this->link("/".$page['tag'],"",$page['tag'])."</td><td>".
 			$this->get_translation("Shown")."</td><td>".
-			$page["hits"]."</td></tr>\n");
+			$page['hits'']."</td></tr>\n");
 		}
 	}
 }

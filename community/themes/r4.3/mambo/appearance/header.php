@@ -57,7 +57,7 @@ if ($user = $this->get_user())
 <?php
          }
    }
-else if($this->has_access("write"))
+else if($this->has_access('write'))
    {
 ?>
 
@@ -150,7 +150,7 @@ else if($this->has_access("write"))
 echo $this->page['modified'] ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->get_translation("RevisionTip")."\">".$this->get_page_time_formatted()."</a>\n" : "";
         					echo "<hr />";
 
-                            if ($this->has_access("write")) {
+                            if ($this->has_access('write')) {
 								echo "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a>\n";
 							}
 							echo '<br />';

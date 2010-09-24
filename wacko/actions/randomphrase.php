@@ -4,7 +4,7 @@ if (!isset($useemptystring)) $useemptystring = "";
 
 $vars[0] = $this->unwrap_link($vars[0]);
 $page_id = $this->get_page_id($vars[0]);
-if (! $this->has_access("read", $page_id))
+if (! $this->has_access('read', $page_id))
 {
 	echo $this->get_translation("NoAccessToSourcePage");
 }

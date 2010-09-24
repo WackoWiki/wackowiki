@@ -164,9 +164,9 @@ if ($this->user_is_owner() || $this->is_admin())
 	else
 	{
 		// load acls
-		$readACL = $this->load_acl($this->get_page_id(), "read");
-		$writeACL = $this->load_acl($this->get_page_id(), "write");
-		$commentACL = $this->load_acl($this->get_page_id(), "comment");
+		$readACL = $this->load_acl($this->get_page_id(), "read", 1, 0);
+		$writeACL = $this->load_acl($this->get_page_id(), "write", 1, 0);
+		$commentACL = $this->load_acl($this->get_page_id(), "comment", 1, 0);
 
 		// show form
 		?>

@@ -14,7 +14,7 @@ if ($linking_to = (isset($_GET["linking_to"]) ? $_GET["linking_to"] : ""))
 
 		foreach ($pages as $page)
 		{
-			if (!$this->config['hide_locked'] || $this->has_access("read", $page['page_id']))
+			if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 			{
 				echo "<li>".$this->link("/".$page['tag'],"","/".$page['tag'])."</li>\n";
 			}
@@ -53,7 +53,7 @@ else
 			{
 				$page_parent = substr($page["wanted_tag"], 0, strrpos($page["wanted_tag"], "/"));
 
-				if(!$this->config['hide_locked'] || $this->has_access("read", $page_parent))
+				if(!$this->config['hide_locked'] || $this->has_access('read', $page_parent))
 				{
 					// Update the referrer count for the WantedPage, we need to take pages the user is not allowed to view out of the total
 					$count = 0;
@@ -62,7 +62,7 @@ else
 					{
 						foreach ($referring_pages as $referrer_page)
 						{
-							if(!$this->config['hide_locked'] || $this->has_access("read", $referrer_page['tag']))
+							if(!$this->config['hide_locked'] || $this->has_access('read', $referrer_page['tag']))
 							{
 								$count++;
 							}

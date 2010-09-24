@@ -10,10 +10,10 @@ class Wacko
 	var $tag;
 	var $forum;
 	var $iswatched;
-	var $queryTime;
-	var $queryLog				= array();
-	var $interWiki				= array();
-	var $aclCache				= array();
+	var $query_time;
+	var $query_log				= array();
+	var $inter_wiki				= array();
+	var $acl_cache				= array();
 	var $context				= array();
 	var $current_context		= 0;
 	var $pages_meta				= "page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description";
@@ -26,8 +26,8 @@ class Wacko
 	var $_langlist				= NULL;
 	var $languages				= NULL;
 	var $resources				= NULL;
-	var $wantedCache			= NULL;
-	var $pageCache				= NULL;
+	var $wanted_cache			= NULL;
+	var $page_cache				= NULL;
 	var $_formatter_noautolinks	= NULL;
 	var $numerate_links			= NULL;
 	var $post_wacko_action		= NULL;
@@ -60,7 +60,7 @@ class Wacko
 		"right"  => array("_before"),
 		"left"  => array("_before"),
 	);
-	var $NpjMacros = array(
+	var $npj_macros = array(
 		"вики" => "wiki", "вака" => "wacko", "веб" => "web"
 	);
 
@@ -85,11 +85,11 @@ class Wacko
 		if ($this->config['debug'] >= 2)
 		{
 			$time = $this->get_micro_time() - $start;
-			$this->queryTime += $time;
+			$this->query_time += $time;
 
 			if ($this->config['debug'] >= 3)
 			{
-				$this->queryLog[] = array(
+				$this->query_log[] = array(
 					'query'		=> $query,
 					'time'		=> $time
 				);
@@ -603,11 +603,11 @@ class Wacko
 
 		if ($strtolow)
 		{
-			$tag = @strtr($_tag, $this->NpjMacros);
+			$tag = @strtr($_tag, $this->npj_macros);
 		}
 		else
 		{
-			foreach($this->NpjMacros as $macro => $value)
+			foreach($this->npj_macros as $macro => $value)
 			{
 				while (($pos = strpos($_tag, $macro)) !== false)
 				{
@@ -765,11 +765,11 @@ class Wacko
 
 	function get_cached_page($supertag, $metadataonly = 0)
 	{
-		if (isset($this->pageCache[$supertag]))
+		if (isset($this->page_cache[$supertag]))
 		{
-			if ($this->pageCache[$supertag]['mdonly'] == 0 || $metadataonly == $this->pageCache[$supertag]['mdonly'])
+			if ($this->page_cache[$supertag]['mdonly'] == 0 || $metadataonly == $this->page_cache[$supertag]['mdonly'])
 			{
-				return $this->pageCache[$supertag];
+				return $this->page_cache[$supertag];
 			}
 		}
 		else return false;
@@ -779,27 +779,27 @@ class Wacko
 	{
 		if (!$page['supertag']) $page['supertag'] = $this->npj_translit($page['tag'], TRAN_LOWERCASE, TRAN_DONTLOAD);
 
-		$this->pageCache[$page['supertag']] = $page;
-		$this->pageCache[$page['supertag']]['mdonly'] = $metadataonly;
+		$this->page_cache[$page['supertag']] = $page;
+		$this->page_cache[$page['supertag']]['mdonly'] = $metadataonly;
 	}
 
 	function cache_wanted_page($tag, $check = 0)
 	{
 		if ($check == 0)
-			$this->wantedCache[$this->language['code']][$tag] = 1;
+			$this->wanted_cache[$this->language['code']][$tag] = 1;
 		else if ($this->old_load_page($tag, '', 1, false, 1) == '')
-			$this->wantedCache[$this->language['code']][$tag] = 1;
+			$this->wanted_cache[$this->language['code']][$tag] = 1;
 	}
 
 	function clear_cache_wanted_page($tag)
 	{
-		$this->wantedCache[$this->language['code']][$tag] = 0;
+		$this->wanted_cache[$this->language['code']][$tag] = 0;
 	}
 
 	function get_cached_wanted_page($tag)
 	{
-		if (isset( $this->wantedCache[$this->language['code']][$tag] ))
-			return $this->wantedCache[$this->language['code']][$tag];
+		if (isset( $this->wanted_cache[$this->language['code']][$tag] ))
+			return $this->wanted_cache[$this->language['code']][$tag];
 		else
 			return '';
 	}
@@ -1396,7 +1396,7 @@ class Wacko
 						}
 						else continue;	// skip current watcher
 
-						if ($this->has_access("read", $comment_on_id, $watcher['user_name']))
+						if ($this->has_access('read', $comment_on_id, $watcher['user_name']))
 						{
 							$_user = $this->load_single(
 								"SELECT u.email, p.lang, p.email_confirm, u.enabled, p.send_watchmail ".
@@ -1482,10 +1482,10 @@ class Wacko
 						"FROM ".$this->config['table_prefix']."revision ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
 						"ORDER BY modified DESC");
-					$_GET["a"] = -1;
-					$_GET["b"] = $page['page_id'];
-					$_GET["fastdiff"] = 1;
-					$diff = $this->include_buffered("handlers/page/diff.php", "oops", array("source" => 1));
+					$_GET['a'] = -1;
+					$_GET['b'] = $page['page_id'];
+					$_GET['fastdiff'] = 1;
+					$diff = $this->include_buffered('handlers/page/diff.php', 'oops', array('source' => 1));
 
 					// notifying watchers
 					$page_id	= $this->get_page_id($tag);
@@ -1503,7 +1503,7 @@ class Wacko
 						foreach ($watchers as $watcher)
 						if ($watcher['user_id'] !=  $user_id)
 						{
-							if ($this->has_access("read", $page_id, $watcher['user_name']))
+							if ($this->has_access('read', $page_id, $watcher['user_name']))
 							{
 								$_user = $this->load_single(
 									"SELECT u.email, p.lang, p.email_confirm, u.enabled, p.send_watchmail ".
@@ -2430,7 +2430,7 @@ class Wacko
 				if ($line = trim($line))
 				{
 					list($wikiName, $wikiUrl) = explode(' ', trim($line));
-					$this->interWiki[strtolower($wikiName)] = $wikiUrl;
+					$this->inter_wiki[strtolower($wikiName)] = $wikiUrl;
 				}
 			}
 		}
@@ -2438,7 +2438,7 @@ class Wacko
 
 	function get_inter_wiki_url($name, $tag)
 	{
-		$url = (isset($this->interWiki[strtolower($name)]) ? $this->interWiki[strtolower($name)] : '');
+		$url = (isset($this->inter_wiki[strtolower($name)]) ? $this->inter_wiki[strtolower($name)] : '');
 		if ($url)
 		{
 			// xhtmlisation
@@ -3230,8 +3230,8 @@ class Wacko
 
 	function get_cached_acl($page_id, $privilege, $useDefaults)
 	{
-		if (isset( $this->aclCache[$page_id."#".$privilege."#".$useDefaults] ))
-			return $this->aclCache[$page_id."#".$privilege."#".$useDefaults];
+		if (isset( $this->acl_cache[$page_id."#".$privilege."#".$useDefaults] ))
+			return $this->acl_cache[$page_id."#".$privilege."#".$useDefaults];
 		else
 			return '';
 	}
@@ -3239,7 +3239,7 @@ class Wacko
 	// $acl array must reflect acls table row structure
 	function cache_acl($page_id, $privilege, $useDefaults, $acl)
 	{
-		$this->aclCache[$page_id."#".$privilege."#".$useDefaults] = $acl;
+		$this->acl_cache[$page_id."#".$privilege."#".$useDefaults] = $acl;
 	}
 
 	function load_acl($page_id, $privilege, $useDefaults = 1, $useCache = 1, $useParent = 1)

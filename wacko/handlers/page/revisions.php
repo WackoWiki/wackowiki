@@ -27,7 +27,7 @@ if (!isset($this->page['page_id']))
 	echo "BACKUP of deleted page!"; // TODO: localize and add description: to restore the page you ...
 }
 
-if ($this->has_access("read"))
+if ($this->has_access('read'))
 {
 	// load revisions for this page
 	if ($pages = $this->load_revisions($this->page['page_id'], $hide_minor_edit))
@@ -91,7 +91,7 @@ if ($this->has_access("read"))
 		}
 		$output .= "</ul>\n<br />\n";
 
-		if (!$this->config["revisions_hide_cancel"]) $output .= "<input type=\"button\" value=\"".$this->get_translation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
+		if (!$this->config['revisions_hide_cancel']) $output .= "<input type=\"button\" value=\"".$this->get_translation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
 		$output .= $this->form_close()."\n";
 	}
 	print($output);

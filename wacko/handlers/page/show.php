@@ -3,7 +3,7 @@
 
 if (!isset ($this->config['comments_count'])) $this->config['comments_count'] = 15;
 
-if ($this->config['hide_rating'] != 1 && ($this->config["hide_rating"] != 2 || $this->get_user()))
+if ($this->config['hide_rating'] != 1 && ($this->config['hide_rating'] != 2 || $this->get_user()))
 {
 	// registering local functions
 	// determine if user has rated a given page
@@ -37,7 +37,7 @@ if ($this->page['comment_on_id'])
 }
 
 // display page body
-if ($this->has_access("read"))
+if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{
@@ -45,7 +45,7 @@ if ($this->has_access("read"))
 		// if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
 		header("HTTP/1.0 404 Not Found");
 
-		print($this->get_translation("DoesNotExists") ." ".( $this->has_access("write") ?  str_replace("%1", $this->href("edit", "", "", 1), $this->get_translation("PromptCreate")) : ""));
+		print($this->get_translation("DoesNotExists") ." ".( $this->has_access('write') ?  str_replace("%1", $this->href("edit", "", "", 1), $this->get_translation("PromptCreate")) : ""));
 	}
 	else
 	{
@@ -65,7 +65,7 @@ if ($this->has_access("read"))
 			$this->get_translation("Revision")))));
 
 			// if this is an old revision, display ReEdit button
-			if ($this->has_access("write"))
+			if ($this->has_access('write'))
 			{
 				$latest = $this->load_page($this->tag);
 				?>
@@ -150,7 +150,7 @@ if ($this->page)
 	if ($this->config['footer_files'])
 	{
 
-		if ($this->has_access("read") && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->get_user()))
+		if ($this->has_access('read') && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->get_user()))
 		{
 
 			// store files display in session
@@ -243,14 +243,14 @@ if ($this->page)
 	// files form output ends
 	?>
 	<?php
-	if ($this->config["footer_comments"])
+	if ($this->config['footer_comments'])
 	{
 	// pagination
 	$pagination = $this->pagination($this->get_comments_count(), $this->config['comments_count'], 'p', 'show_comments=1#comments');
 
 	// comments form output begins
 
-		if ($this->has_access("read") && $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->get_user()))
+		if ($this->has_access('read') && $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->get_user()))
 		{
 			// load comments for this page
 			$comments = $this->load_comments($this->page['page_id'], $pagination['offset'], $this->config['comments_count']);
@@ -328,7 +328,7 @@ if ($this->page)
 				echo '<div style="text-align:right;padding-right:10px;border-top:solid 1px #BABFC7;"><small>'.$pagination['text'].'</small></div>';
 
 			// display comment form
-			if ($this->has_access("comment"))
+			if ($this->has_access('comment'))
 			{
 				print("<div class=\"commentform\">\n");
 
@@ -342,7 +342,7 @@ if ($this->page)
 					// captcha code starts
 
 					// Only show captcha if the admin enabled it in the config file
-					if($this->config["captcha_new_comment"])
+					if($this->config['captcha_new_comment'])
 					{
 						// Don't load the captcha at all if the GD extension isn't enabled
 						if(extension_loaded('gd'))
@@ -395,7 +395,7 @@ if ($this->page)
 	}
 
 	// rating form output begins
-	if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 1 && ($this->config["hide_rating"] != 2 || $this->get_user()))
+	if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 1 && ($this->config['hide_rating'] != 2 || $this->get_user()))
 	{
 		// determine if user has rated this page
 		if (handler_show_page_is_rated($this, $this->page['page_id']) === false && $_GET['show_rating'] != 1)

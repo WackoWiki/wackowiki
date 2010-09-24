@@ -12,17 +12,17 @@ if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTT
 }
 
 // email confirmation
-if (isset($_GET["confirm"]))
+if (isset($_GET['confirm']))
 {
 	if ($temp = $this->load_single(
 			"SELECT user_name, email, email_confirm ".
 			"FROM ".$this->config['user_table']." ".
-			"WHERE email_confirm = '".quote($this->dblink, $_GET["confirm"])."'"))
+			"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."'"))
 	{
 		$this->query(
 			"UPDATE ".$this->config['user_table']." ".
 			"SET email_confirm = '' ".
-			"WHERE email_confirm = '".quote($this->dblink, $_GET["confirm"])."'");
+			"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."'");
 
 		echo "<br /><br />".$this->get_translation("EmailConfirmed")."<br /><br />";
 
@@ -36,7 +36,7 @@ if (isset($_GET["confirm"]))
 		echo "<br /><br />".str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation("SettingsText"), 0), $this->get_translation("EmailNotConfirmed"))."<br /><br />";
 	}
 }
-else if (isset($_POST["action"]) && $_POST["action"] == "logout")
+else if (isset($_POST['action']) && $_POST['action'] == "logout")
 {
 	$this->logout_user();
 	$this->set_bookmarks(BM_DEFAULT);
@@ -48,7 +48,7 @@ else if ($user = $this->get_user())
 	$this->set_page_lang($this->userlang);
 
 	// is user trying to update?
-	if (isset($_POST["action"]) && $_POST["action"] == "update")
+	if (isset($_POST['action']) && $_POST['action'] == "update")
 	{
 		// no email given
 		if (!$_POST['email'])
@@ -85,12 +85,12 @@ else if ($user = $this->get_user())
 		}
 	}
 
-	if (isset($_POST["action"]) && ($_POST["action"] == "update_extended" || $_POST["action"] == "update"))
+	if (isset($_POST['action']) && ($_POST['action'] == "update_extended" || $_POST['action'] == "update"))
 	{
 		// update user_setting table
 		$this->query(
 			"UPDATE ".$this->config['table_prefix']."user_setting SET ".
-			($_POST["action"] == "update_extended"
+			($_POST['action'] == "update_extended"
 				?	"doubleclick_edit	= '".quote($this->dblink, $_POST['doubleclick_edit'])."', ".
 					"show_comments		= '".quote($this->dblink, $_POST['show_comments'])."', ".
 					"show_spaces		= '".quote($this->dblink, $_POST['show_spaces'])."', ".
@@ -152,7 +152,7 @@ else if ($user = $this->get_user())
 	}
 
 	// reload user data
-	if ( (isset($_POST["action"]) && ($_POST["action"] == "update" || $_POST["action"] == "update_extended")) || (isset($_GET["resend_code"]) && $_GET["resend_code"] == 1))
+	if ( (isset($_POST['action']) && ($_POST['action'] == "update" || $_POST['action'] == "update_extended")) || (isset($_GET["resend_code"]) && $_GET["resend_code"] == 1))
 	{
 		$this->set_user($this->load_user($user['user_name']), 0, 1);
 		$this->set_bookmarks(BM_USER);
@@ -160,7 +160,7 @@ else if ($user = $this->get_user())
 		// forward
 		$this->set_message($this->get_translation("UserSettingsStored",$_POST['lang']));
 
-		$this->redirect(($_POST["action"] == "update_extended" ? $this->href("", "", "extended") : $this->href()));
+		$this->redirect(($_POST['action'] == "update_extended" ? $this->href("", "", "extended") : $this->href()));
 		$user = $this->get_user();
 	}
 
@@ -175,7 +175,7 @@ else if ($user = $this->get_user())
 	}
 
 	// EXTENDED
-	else if (isset($_GET['extended']) || (isset($_POST['action'])&& $_POST["action"] == "update_extended"))
+	else if (isset($_GET['extended']) || (isset($_POST['action'])&& $_POST['action'] == "update_extended"))
 	{
 		echo "<h3>".$this->get_translation("UserSettings")." &raquo; ".$this->get_translation("UserSettingsExtended")."</h3>";
 		echo "<ul class=\"menu\"><li><a href=\"".$this->href("", "", "")."\">".$this->get_translation("UserSettingsGeneral")."</a></li><li><a href=\"".$this->href("", "", "bookmarks")."\">".$this->get_translation("Bookmarks")."</a></li><li class=\"active\">".$this->get_translation("UserSettingsExtended")."</li></ul><br /><br />\n";
@@ -316,7 +316,7 @@ else if ($user = $this->get_user())
 <tbody>
 	<tr class="lined">
 		<th class="form_left" scope="row"><?php echo $this->get_translation("UserName");?></th>
-		<td><strong><?php echo "<a href=\"".$this->href("", $this->config["users_page"], "profile=".$user['user_name'])."\">".$user['user_name']."</a>";?></strong></td>
+		<td><strong><?php echo "<a href=\"".$this->href("", $this->config['users_page'], "profile=".$user['user_name'])."\">".$user['user_name']."</a>";?></strong></td>
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="real_name"><?php echo $this->get_translation("RealName");?></label></th>

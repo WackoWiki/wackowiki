@@ -12,7 +12,7 @@ $xml .= "\t\t<language></language>\n";//!!!
 $xml .= "\t\t<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 $xml .= "\t\t<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
-if ($this->has_access("read"))
+if ($this->has_access('read'))
 {
 	$numOfSlashes = substr_count($this->tag, "/");
 
@@ -25,7 +25,7 @@ if ($this->has_access("read"))
 	foreach ($pages as $num => $page)
 	{
 		// check ACLS
-		if (!$this->has_access("write", $page['page_id'])) continue;
+		if (!$this->has_access('write', $page['page_id'])) continue;
 		// output page
 		$tag = $page['tag'];
 
