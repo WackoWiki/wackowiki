@@ -25,9 +25,9 @@ echo htmlspecialchars($this->config['wacko_name'])." : ".$this->add_spaces($this
 <link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
 <?php if ($this->config['allow_x11colors']) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" /><?php } ?>
 <link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -57,7 +57,7 @@ if ($user = $this->get_user())
          {
 ?>
   <script type="text/javascript">
-   var edit = "<?php echo $this->href("edit");?>";
+   var edit = "<?php echo $this->href('edit');?>";
   </script>
 <?php
          }
@@ -67,7 +67,7 @@ else if($this->has_access('write'))
 ?>
 
       <script type="text/javascript">
-      var edit = "<?php echo $this->href("edit");?>";
+      var edit = "<?php echo $this->href('edit');?>";
      </script>
 <?php
    }
@@ -124,7 +124,7 @@ if ($this->get_user()) { ?>
   <?php
       echo $this->compose_link_to_page($this->get_translation("YouArePanelLink"), "", $this->get_translation("YouArePanelAccount"), 0); ?>
   <br />
-  <a onclick="return confirm('<?php echo $this->get_translation("LogoutAreYouSure");?>');" href="<?php echo $this->href("",$this->get_translation("LoginPage")).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation("LogoutLink"); ?></a></small>
+  <a onclick="return confirm('<?php echo $this->get_translation("LogoutAreYouSure");?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation("LogoutLink"); ?></a></small>
   <?php
 // Else Wacko shows login's controls
 } else {
@@ -160,10 +160,10 @@ if ($this->page)
    print($this->get_translation("YouAreOwner")."<br /> \n");
 
    // Rename link
-   print(" <a href=\"".$this->href("rename")."\">".$this->get_translation("RenameText")."</a><br /> \n");
+   print(" <a href=\"".$this->href('rename')."\">".$this->get_translation("RenameText")."</a><br /> \n");
 
    //Edit ACLs link
-   print("<a href=\"".$this->href("permissions")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a>");
+   print("<a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a>");
  }
  // If owner is NOT current user
  else
@@ -173,35 +173,35 @@ if ($this->page)
    {
      print($this->get_translation("Owner").": ".$this->link($owner));
    } else if (!$this->page['comment_on']) {
-     print($this->get_translation("Nobody").($this->get_user() ? " (<a href=\"".$this->href("claim")."\">".$this->get_translation("TakeOwnership")."</a>)" : ""));
+     print($this->get_translation("Nobody").($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation("TakeOwnership")."</a>)" : ""));
    }
  }
 // If User has rights to edit page, show Edit link
-echo $this->has_access('write') ? "<br /><a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a>" : "";
+echo $this->has_access('write') ? "<br /><a href=\"".$this->href('edit')."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a>" : "";
 ?>
   <br />
   <?php
 // Watch/Unwatch icon
-echo ($this->is_watched($this->get_user_name(), $this->tag) ? "<a href=\"".$this->href("watch")."\">".$this->get_translation("RemoveWatch")."</a>" : "<a href=\"".$this->href("watch")."\">".$this->get_translation("SetWatch")."</a>" );
+echo ($this->is_watched($this->get_user_name(), $this->tag) ? "<a href=\"".$this->href('watch')."\">".$this->get_translation("RemoveWatch")."</a>" : "<a href=\"".$this->href('watch')."\">".$this->get_translation("SetWatch")."</a>" );
 ?>
   <br />
   <?php
  // Rename link
  if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->user_is_owner())
  {
-   print("<a href=\"".$this->href("rename")."\">".$this->get_translation("RenameText")."</a><br />");
+   print("<a href=\"".$this->href('rename')."\">".$this->get_translation("RenameText")."</a><br />");
  }
  // Page  settings link
- print("<a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("SettingsText")."</a><br />");
+ print("<a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("SettingsText")."</a><br />");
 }
 // Remove link (shows only for Admins)
 if ($this->is_admin()){
-	print("<a href=\"".$this->href("remove")."\">".$this->get_translation("DeleteTip")."</a>");
+	print("<a href=\"".$this->href('remove')."\">".$this->get_translation("DeleteTip")."</a>");
 }
 ?><hr noshade="noshade" />
 <?php
 // Revisions link
-echo $this->page['modified'] ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->get_translation("RevisionTip")."\">".$this->get_page_time_formatted()."</a>\n" : "";
+echo $this->page['modified'] ? "<a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation("RevisionTip")."\">".$this->get_page_time_formatted()."</a>\n" : "";
 ?>
 </div>
 <div id="content">

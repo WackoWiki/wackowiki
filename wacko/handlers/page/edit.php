@@ -172,7 +172,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 
 				if ($this->page['comment_on_id'] != 0)
 				{
-					$this->redirect($this->href("", $this->get_comment_on_tag($this->page['comment_on_id']), "show_comments=1#".$this->page['tag']));
+					$this->redirect($this->href('', $this->get_comment_on_tag($this->page['comment_on_id']), 'show_comments=1#'.$this->page['tag']));
 				}
 				else
 				{
@@ -224,7 +224,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 		&nbsp;
 		<input name="preview" type="submit" value="<?php echo $this->get_translation("EditPreviewButton"); ?>" />
 		&nbsp;
-		<input type="button" value="<?php echo $this->get_translation("EditCancelButton"); ?>" onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
+		<input type="button" value="<?php echo $this->get_translation("EditCancelButton"); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 <?php
 		$preview = $this->format($body, "preformat");
 		$preview = $this->format($preview, "wacko");
@@ -271,7 +271,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 		&nbsp;
 		<input name="preview" type="submit" value="<?php echo $this->get_translation("EditPreviewButton"); ?>" />
 		&nbsp;
-		<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation("EditCancelButton")); ?>" onclick="document.location='<?php echo addslashes($this->href("", "", "", 1))?>';" />
+		<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation("EditCancelButton")); ?>" onclick="document.location='<?php echo addslashes($this->href('', '', '', 1))?>';" />
 		<br />
 		<noscript><div class="errorbox_js"><?php echo $this->get_translation("WikiEditInactiveJs"); ?></div></noscript>
 <?php
@@ -383,7 +383,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 	if ($user["autocomplete"])
 	{
 ?>
-		if (AutoComplete) { wEaC = new AutoComplete( wE, "<?php echo $this->href("edit");?>" ); }
+		if (AutoComplete) { wEaC = new AutoComplete( wE, "<?php echo $this->href('edit');?>" ); }
 <?php
 	}
 ?>
@@ -393,7 +393,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 		&nbsp;
 		<input name="preview" type="submit" value="<?php echo $this->get_translation("EditPreviewButton"); ?>" />
 		&nbsp;
-		<input type="button" value="<?php echo $this->get_translation("EditCancelButton"); ?>" onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
+		<input type="button" value="<?php echo $this->get_translation("EditCancelButton"); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 <?php
 	print ($this->form_close());
 }

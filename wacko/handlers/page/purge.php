@@ -3,11 +3,11 @@
 <?php
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href("show"));
+if (!$this->page) $this->redirect($this->href('show'));
 
 // deny for comment
 if ($this->page['comment_on_id'])
-	$this->redirect($this->href("", $this->get_comment_on_tag($this->page['comment_on_id']), "show_comments=1")."#".$this->page['tag']);
+	$this->redirect($this->href('', $this->get_comment_on_tag($this->page['comment_on_id']), 'show_comments=1')."#".$this->page['tag']);
 // and for forum page
 else if ($this->forum === true)
 	$this->redirect($this->href());

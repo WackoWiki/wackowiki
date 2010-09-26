@@ -22,10 +22,10 @@ if ($page)
 				print ("<br /><br /><br />".$this->get_translation("PageMoved")." ".$this->link("/".$page)."<br /><br /><br />");
 			}
 			else
-			$this->redirect($this->href("", $page));
+			$this->redirect($this->href('', $page));
 		}
 		else
-			$this->redirect($this->href("", $page));
+			$this->redirect($this->href('', $page));
 	}
 	else
 	{

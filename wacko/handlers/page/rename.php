@@ -25,7 +25,7 @@ if ($registered
 {
 	if (!$this->page)
 	{
-		print(str_replace("%1", $this->href("edit"), $this->get_translation("DoesNotExists")));
+		print(str_replace("%1", $this->href('edit'), $this->get_translation("DoesNotExists")));
 	}
 	else
 	{
@@ -126,7 +126,7 @@ if ($registered
 <br />
 <input name="submit" type="submit" value="<?php echo $this->get_translation("RenameButton"); ?>" /> &nbsp;
 <input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation("EditCancelButton")); ?>"
-	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
+	onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 <br />
 <br />
 			<?php echo $this->form_close();

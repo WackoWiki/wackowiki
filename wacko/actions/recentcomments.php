@@ -46,7 +46,7 @@ if ($comments = load_recent_comments($this, $root, (int)$max))
 			}
 
 			// print entry
-			print("<li><span class=\"dt\">".$time2."</span> &mdash; (<a href=\"".$this->href("", $comment['tag'], "")."\">".$comment["comment_on_page"]."</a>) . . . . . . . . . . . . . . . . <small>".
+			print("<li><span class=\"dt\">".$time2."</span> &mdash; (<a href=\"".$this->href('', $comment['tag'], '')."\">".$comment["comment_on_page"]."</a>) . . . . . . . . . . . . . . . . <small>".
 			($this->is_wiki_name($comment['user'])?$this->link("/".$comment['user'],"",$comment['user']):$comment['user'])."</small></li>\n");
 		}
 	}

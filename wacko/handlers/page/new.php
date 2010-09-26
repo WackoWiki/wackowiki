@@ -40,7 +40,7 @@ if (isset($_POST['tag']) && $newtag = trim($_POST['tag'], '/ '))
 		if ($this->has_access('write', $this->get_page_id($prefix.$newtag)))
 		{
 			// str_replace: fixed newPage&amp;add=1
-			$this->redirect(str_replace("&amp;", "&", ($this->href("edit", $prefix.$newtag, "", 1))));
+			$this->redirect(str_replace('&amp;', '&', ($this->href('edit', $prefix.$newtag, '', 1))));
 		}
 		else
 		{

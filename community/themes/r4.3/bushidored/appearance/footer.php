@@ -1,7 +1,7 @@
 </div>
 <div align="right"><?php
 // Revisions link
-echo $this->page['modified'] ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->get_translation("RevisionTip")."\">".$this->get_page_time_formatted()."</a>" : "";
+echo $this->page['modified'] ? "<a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation("RevisionTip")."\">".$this->get_page_time_formatted()."</a>" : "";
 ?></div>
 <?php
 

@@ -56,7 +56,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 
 		// reload page
 		$this->set_message($this->get_translation("MetaUpdated")."!");
-		$this->redirect((isset($_POST['extended']) ? $this->href("properties", "", "extended") : $this->href("properties")));
+		$this->redirect((isset($_POST['extended']) ? $this->href('properties', '', 'extended') : $this->href('properties')));
 	}
 
 	// load settings
@@ -80,7 +80,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	// EXTENDED
 	if (isset($_GET['extended']) || isset($_POST['extended']))
 	{
-		echo "<ul class=\"menu\"><li><a href=\"".$this->href("properties", "", "")."\">".$this->get_translation("UserSettingsGeneral")."</a></li><li class=\"menu\">".$this->get_translation("UserSettingsExtended")."</li></ul><br /><br />\n";
+		echo "<ul class=\"menu\"><li><a href=\"".$this->href('properties', '', '')."\">".$this->get_translation("UserSettingsGeneral")."</a></li><li class=\"menu\">".$this->get_translation("UserSettingsExtended")."</li></ul><br /><br />\n";
 
 		echo "<div class=\"page_settings\">";
 
@@ -185,7 +185,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	// GENERAL
 	else
 	{
-		echo "<ul class=\"menu\"><li class=\"menu\">".$this->get_translation("UserSettingsGeneral")."</li><li><a href=\"".$this->href("properties", "", "extended")."\">".$this->get_translation("UserSettingsExtended")."</a></li></ul><br /><br />\n";
+		echo "<ul class=\"menu\"><li class=\"menu\">".$this->get_translation("UserSettingsGeneral")."</li><li><a href=\"".$this->href('properties', '', 'extended')."\">".$this->get_translation("UserSettingsExtended")."</a></li></ul><br /><br />\n";
 
 		echo "<div class=\"page_settings\">";
 
@@ -287,7 +287,7 @@ if ($langs = $this->available_languages())
 	echo "<td class=\"form_right\">".$this->page['page_id']."</td>";
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('Owner')."</th>";
-	echo "<td class=\"form_right\">"."<a href=\"".$this->href("", $this->config['users_page'], "profile=".$this->page['owner_name'])."\">".$this->page['owner_name']."</a>"."</td>";
+	echo "<td class=\"form_right\">"."<a href=\"".$this->href('', $this->config['users_page'], "profile=".$this->page['owner_name'])."\">".$this->page['owner_name']."</a>"."</td>";
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsCreated')."</th>";
 	echo "<td class=\"form_right\">".$this->get_time_string_formatted($this->page['created'])."</td>";
@@ -299,7 +299,7 @@ if ($langs = $this->available_languages())
 	echo "<td class=\"form_right\" title=\"".$this->get_translation('SettingsSizeTip')."\">".ceil(strlen($this->page['body']) / 1000).' kB / '.ceil(strlen($this->page['body_r']) / 1000)." kB"."</td>";
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsTotalRevs')."</th>";
-	echo "<td class=\"form_right\"><a href=\"".$this->href("revisions")."\" title=\"".$this->get_translation("RevisionTip")."\">".(int)$revs['total']."</a></td>";
+	echo "<td class=\"form_right\"><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation("RevisionTip")."\">".(int)$revs['total']."</a></td>";
 	unset($revs);
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsTotalComs')."</th>";
@@ -322,39 +322,39 @@ if ($langs = $this->available_languages())
 	<br />
 
 <ul>
-	<li><a href="<?php echo $this->href("edit");?>"><?php echo $this->get_translation("SettingsEdit"); ?></a></li>
-	<li><a href="<?php echo $this->href("revisions");?>"><?php echo $this->get_translation("SettingsRevisions"); ?></a></li>
-	<li><a href="<?php echo $this->href("clone");?>"><?php echo $this->get_translation("SettingsClone"); ?></a></li>
+	<li><a href="<?php echo $this->href('edit');?>"><?php echo $this->get_translation("SettingsEdit"); ?></a></li>
+	<li><a href="<?php echo $this->href('revisions');?>"><?php echo $this->get_translation("SettingsRevisions"); ?></a></li>
+	<li><a href="<?php echo $this->href('clone');?>"><?php echo $this->get_translation("SettingsClone"); ?></a></li>
 	<?php
 	// Rename link (shows only if owner is current user or Admin)
 	if ($this->user_is_owner() || $this->is_admin())
 	{
-		echo("<li><a href=\"".$this->href("rename")."\">".$this->get_translation("SettingsRename")."</a>
+		echo("<li><a href=\"".$this->href('rename')."\">".$this->get_translation("SettingsRename")."</a>
 	</li>");
 	}
 	?>
 	<?php // Remove link (shows only for page owner if allowed)
 	if ($this->user_is_owner() && !$this->config['remove_onlyadmins'] || $this->is_admin())
 	{
-		echo("<li><a href=\"".$this->href("remove")."\">".$this->get_translation("SettingsRemove")."</a></li>\n");
-		echo("<li><a href=\"".$this->href("purge")."\">".$this->get_translation("SettingsPurge")."</a></li>\n");
+		echo("<li><a href=\"".$this->href('remove')."\">".$this->get_translation("SettingsRemove")."</a></li>\n");
+		echo("<li><a href=\"".$this->href('purge')."\">".$this->get_translation("SettingsPurge")."</a></li>\n");
 	}
 	?>
 	<?php
 	// ACL link (shows only if owner is current user or Admin)
 	if ($this->user_is_owner() || $this->is_admin())
 	{
-		echo("<li><a href=\"".$this->href("permissions")."\">".$this->get_translation("SettingsAcls")."</a></li>\n");
+		echo("<li><a href=\"".$this->href('permissions')."\">".$this->get_translation("SettingsAcls")."</a></li>\n");
 	}
 	?>
-	<li><a href="<?php echo $this->href("categories"); ?>"><?php echo $this->get_translation("SettingsCategories"); ?></a></li>
-	<li><a href="<?php echo $this->href("upload"); ?>"><?php echo $this->get_translation("SettingsUpload"); ?></a></li>
-	<li><a href="<?php echo $this->href("referrers"); ?>"><?php echo $this->get_translation("SettingsReferrers"); ?></a></li>
-	<li><a href="<?php echo $this->href("watch"); ?>"><?php echo ($this->iswatched === true ? $this->get_translation("RemoveWatch") : $this->get_translation("SetWatch")); ?></a></li>
-	<li><a href="<?php echo $this->href("print");?>"><?php echo $this->get_translation("SettingsPrint"); ?></a></li>
-	<li><a href="<?php echo $this->href("msword");?>"><?php echo $this->get_translation("SettingsMsword"); ?></a></li>
-	<li><a href="<?php echo $this->href("latex");?>"><?php echo $this->get_translation("SettingsLatex"); ?></a></li>
-	<li><a href="<?php echo $this->href("export.xml");?>"><?php echo $this->get_translation("SettingsXML"); ?></a></li>
+	<li><a href="<?php echo $this->href('categories'); ?>"><?php echo $this->get_translation("SettingsCategories"); ?></a></li>
+	<li><a href="<?php echo $this->href('upload'); ?>"><?php echo $this->get_translation("SettingsUpload"); ?></a></li>
+	<li><a href="<?php echo $this->href('referrers'); ?>"><?php echo $this->get_translation("SettingsReferrers"); ?></a></li>
+	<li><a href="<?php echo $this->href('watch'); ?>"><?php echo ($this->iswatched === true ? $this->get_translation("RemoveWatch") : $this->get_translation("SetWatch")); ?></a></li>
+	<li><a href="<?php echo $this->href('print');?>"><?php echo $this->get_translation("SettingsPrint"); ?></a></li>
+	<li><a href="<?php echo $this->href('msword');?>"><?php echo $this->get_translation("SettingsMsword"); ?></a></li>
+	<li><a href="<?php echo $this->href('latex');?>"><?php echo $this->get_translation("SettingsLatex"); ?></a></li>
+	<li><a href="<?php echo $this->href('export.xml');?>"><?php echo $this->get_translation("SettingsXML"); ?></a></li>
 </ul>
 
 

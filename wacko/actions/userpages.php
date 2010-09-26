@@ -3,10 +3,10 @@
 if ($this->get_user_name())
 {
 	echo "<ul>";
-	echo "<li><a href=\"".$this->href("", "", "mode=mypages")."#list\">".$this->get_translation("ListMyPages")."</a></li>";
-	echo "<li><a href=\"".$this->href("", "", "mode=mychanges")."#list\">".$this->get_translation("ListMyChanges")."</a></li>";
-	echo "<li><a href=\"".$this->href("", "", "mode=mywatches")."#list\">".$this->get_translation("ListMyWatches")."</a></li>";
-	echo "<li><a href=\"".$this->href("", "", "mode=mychangeswatches")."#list\">".$this->get_translation("ListMyChangesWatches")."</a></li>";
+	echo "<li><a href=\"".$this->href('', '', 'mode=mypages')."#list\">".$this->get_translation("ListMyPages")."</a></li>";
+	echo "<li><a href=\"".$this->href('', '', 'mode=mychanges')."#list\">".$this->get_translation("ListMyChanges")."</a></li>";
+	echo "<li><a href=\"".$this->href('', '', 'mode=mywatches')."#list\">".$this->get_translation("ListMyWatches")."</a></li>";
+	echo "<li><a href=\"".$this->href('', '', 'mode=mychangeswatches')."#list\">".$this->get_translation("ListMyChangesWatches")."</a></li>";
 	echo "</ul>";
 
 	if (isset($_GET['mode']) && $_GET['mode'] == "mypages")

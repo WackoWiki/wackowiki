@@ -2,17 +2,17 @@
 <?php
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href("show"));
+if (!$this->page) $this->redirect($this->href('show'));
 
 // deny for comment
 if ($this->page['comment_on_id'])
-	$this->redirect($this->href("", $this->get_comment_on_tag($this->page['comment_on_id']), "show_comments=1")."#".$this->page['tag']);
+	$this->redirect($this->href('', $this->get_comment_on_tag($this->page['comment_on_id']), 'show_comments=1')."#".$this->page['tag']);
 
 if ($user = $this->get_user())
 {
 	if ($global = isset($_GET["global"]))
 	{
-		$title = str_replace("%1", $this->href("referrers_sites", "", "global=1"), $this->get_translation("ExternalPagesGlobal"));
+		$title = str_replace("%1", $this->href('referrers_sites', '', 'global=1'), $this->get_translation("ExternalPagesGlobal"));
 		$referrers = $this->load_referrers();
 	}
 	else
@@ -49,7 +49,7 @@ if ($user = $this->get_user())
 		$this->get_translation("Last24Hours") :
 		str_replace("%1",$this->config['referrers_purge_time'],
 		$this->get_translation("LastDays"))): ""),
-		str_replace("%3",$this->href("referrers_sites"),$this->get_translation("ExternalPages"))));
+		str_replace("%3",$this->href('referrers_sites'),$this->get_translation("ExternalPages"))));
 
 		$referrers = $this->load_referrers($this->page['page_id']);
 	}
@@ -76,11 +76,11 @@ if ($user = $this->get_user())
 
 	if ($global)
 	{
-		print("<br />[".str_replace("%1",$this->href("referrers_sites"),str_replace("%2",$this->tag,$this->get_translation("ViewReferringSites")))." | ".str_replace("%1",$this->href("referrers"),str_replace("%2",$this->tag,$this->get_translation("ViewReferrersFor")))."]");
+		print("<br />[".str_replace("%1",$this->href('referrers_sites'),str_replace("%2",$this->tag,$this->get_translation("ViewReferringSites")))." | ".str_replace("%1",$this->href('referrers'),str_replace("%2",$this->tag,$this->get_translation("ViewReferrersFor")))."]");
 	}
 	else
 	{
-		print("<br />[".str_replace("%1",$this->href("referrers_sites", "", "global=1"),$this->get_translation("ViewReferringSitesGlobal")) ." | ".str_replace("%1",$this->href("referrers", "", "global=1"),$this->get_translation("ViewReferrersForGlobal"))."]");
+		print("<br />[".str_replace("%1",$this->href('referrers_sites', '', 'global=1'),$this->get_translation("ViewReferringSitesGlobal")) ." | ".str_replace("%1",$this->href('referrers', '', 'global=1'),$this->get_translation("ViewReferrersForGlobal"))."]");
 	}
 }
 else

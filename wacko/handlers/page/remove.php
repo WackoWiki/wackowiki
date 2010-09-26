@@ -16,7 +16,7 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 {
 	if (!$this->page)
 	{
-		print(str_replace("%1",$this->href("edit"),$this->get_translation("DoesNotExists")));
+		print(str_replace("%1",$this->href('edit'),$this->get_translation("DoesNotExists")));
 	}
 	else
 	{
@@ -187,7 +187,7 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 		<br /><br />
 		<input type="hidden" name="delete" value="1" />
 		<input id="submit" name="submit" type="submit" value="<?php echo $this->get_translation("RemoveButton"); ?>" />&nbsp;
-		<input id="button" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation("EditCancelButton")); ?>" onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
+		<input id="button" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation("EditCancelButton")); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 		<br />
 <?php echo $this->form_close();
 		}

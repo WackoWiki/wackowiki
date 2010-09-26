@@ -51,13 +51,13 @@ if (isset($test) || ($user = $this->get_user()))
 	else
 	{
 		// redirect to random page
-		$this->redirect($this->href("", $pages[$page]['supertag']));
+		$this->redirect($this->href('', $pages[$page]['supertag']));
 	}
 }
 else
 {
 	// redirect to random page
-	$this->redirect($this->href("", $pages[$page]['supertag']));
+	$this->redirect($this->href('', $pages[$page]['supertag']));
 }
 
 ?>

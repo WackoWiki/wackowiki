@@ -78,7 +78,7 @@ else if ($user = $this->get_user())
 ?>
   <p>
     <input type="button" value="<?php echo $this->get_translation("LogoutButton"); ?>"
-			onclick="document.location='<?php echo $this->href("", "", "action=logout"); ?>'" />
+			onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" />
   </p>
   <p>
 		<?php echo $this->compose_link_to_page($this->get_translation("YouArePanelLink"), "", $this->get_translation("YouArePanelAccount"), 0); ?> | <a href="?action=clearcookies">Delete all cookies</a>
@@ -172,13 +172,13 @@ else
 					}
 
 					if ($_POST['goback'] != "")
-						$this->redirect($this->href("", stripslashes($_POST['goback']), "cache=".rand(0,1000)));
+						$this->redirect($this->href('', stripslashes($_POST['goback']), 'cache='.rand(0,1000)));
 					else
-						$this->redirect($this->href("", "", "cache=".rand(0,1000)));
+						$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
 				}
 				else
 				{
-					$error = $this->get_translation("WrongPassword");
+					$error = $this->get_translation('WrongPassword');
 					$name = $_POST['name'];
 					$focus = 1;
 

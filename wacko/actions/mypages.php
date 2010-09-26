@@ -16,8 +16,8 @@ if ($user_id = $this->get_user_id())
 	if ((isset($_GET["bydate"]) && $_GET["bydate"] == 1) || $bydate == 1)
 	{
 		echo $this->get_translation("ListOwnedPages2");
-		print("<br />[<a href=\"".$this->href("", "", "mode=mypages")."#list"."\">".
-		$this->get_translation("OrderABC")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
+		print("<br />[<a href=\"".$this->href('', '', 'mode=mypages')."#list"."\">".
+		$this->get_translation("OrderABC")."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1')."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
 		$this->get_translation("OrderChange")."</a>] <br /><br />\n");
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
@@ -138,8 +138,8 @@ if ($user_id = $this->get_user_id())
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages#list');
 
 		echo $this->get_translation("ListOwnedPages");
-		print("<br />[<a href=\"".$this->href("", "", "mode=mypages&amp;bydate=1")."#list"."\">".
-		$this->get_translation("OrderDate")."</a>] [<a href=\"".$this->href("", "", "mode=mypages&amp;bychange=1")."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
+		print("<br />[<a href=\"".$this->href('', '', 'mode=mypages&amp;bydate=1')."#list"."\">".
+		$this->get_translation("OrderDate")."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1')."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
 		$this->get_translation("OrderChange")."</a>] <br /><br />\n");
 
 		if ($pages = $this->load_all(

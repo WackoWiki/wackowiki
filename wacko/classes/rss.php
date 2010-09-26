@@ -68,8 +68,8 @@ class RSS
 					$count++;
 					$xml .= "<item>\n";
 					$xml .= "<title>".$page['tag']."</title>\n";
-					$xml .= "<link>".$this->engine->href("show", $page['tag'], "time=".urlencode($page['modified']))."</link>\n";
-					$xml .= "<guid>".$this->engine->href("show", $page['tag'], "time=".urlencode($page['modified']))."</guid>\n";
+					$xml .= "<link>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</link>\n";
+					$xml .= "<guid>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
 					$xml .= "<description>".$page['modified']." ".$this->engine->get_translation("By")." ".$page['user'].($page['edit_note'] ? " [".$page['edit_note']."]" : "")."</description>\n";
 					$xml .= "</item>\n";
@@ -219,8 +219,8 @@ class RSS
 					$count++;
 					$xml .= "<item>\n";
 					$xml .= "<title>".$page['title']." ".$this->engine->get_translation("To")." ".$this->engine->get_comment_on_tag($page['comment_on_id'])." ".$this->engine->get_translation("From")." ".$page['user']."</title>\n";
-					$xml .= "<link>".$this->engine->href("show", $page['tag'], "time=".urlencode($page['modified']))."</link>\n";
-					$xml .= "<guid>".$this->engine->href("show", $page['tag'], "time=".urlencode($page['modified']))."</guid>\n";
+					$xml .= "<link>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</link>\n";
+					$xml .= "<guid>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
 					$xml .= "<dc:creator>".$page['user']."</dc:creator>\n";
 					$text = $this->engine->format($page['body_r'], "post_wacko");
@@ -249,7 +249,7 @@ class RSS
 				if ($this->engine->config['hide_locked'] ? $this->engine->has_access('read', $page['page_id'], GUEST) : true)
 				{
 					$xml .= "<url>\n";
-					$xml .= "<loc>".$this->engine->href("", $page['tag'])."</loc>\n";
+					$xml .= "<loc>".$this->engine->href('', $page['tag'])."</loc>\n";
 					$xml .= "<lastmod>". substr($page['modified'], 0, 10) ."</lastmod>\n";
 
 					$daysSinceLastChanged = floor((time() - strtotime(substr($page['modified'], 0, 10)))/86400);

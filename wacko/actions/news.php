@@ -137,7 +137,7 @@ if (!empty($this->config['news_cluster']))
 		// displaying XML icon
 	if (!(int)$noxml)
 		{
-			echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/news_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation("RecentNewsXMLTip")."\" alt=\"XML\" /></a></span>\n";
+			echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/news_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation("RecentNewsXMLTip")."\" alt=\"XML\" /></a></span>\n";
 		}
 
 	// displaying articles

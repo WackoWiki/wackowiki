@@ -1,7 +1,7 @@
 <div id="page"><?php
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href("show"));
+if (!$this->page) $this->redirect($this->href('show'));
 
 // deny for comment
 if ($this->page['comment_on_id'])
@@ -125,7 +125,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				{
 					$newowner_id = $this->get_user_id_by_name($newowner);
 					$this->set_page_owner($page['page_id'], $newowner_id);
-					$ownedpages .= $this->href("", $page['tag'])."\n";
+					$ownedpages .= $this->href('', $page['tag'])."\n";
 
 					// log event
 					$this->log(2, str_replace("%2", $exists['user_name'], str_replace("%1", $page['tag']." ".$page['title'], $this->get_translation("LogOwnershipChanged", $this->config['language']))));
@@ -200,7 +200,7 @@ if ($this->user_is_owner() || $this->is_admin())
 	value="<?php echo $this->get_translation("ACLStoreButton"); ?>"
 	accesskey="s" /> &nbsp; <input id="button" type="button"
 	value="<?php echo $this->get_translation("ACLCancelButton"); ?>"
-	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
+	onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 </p>
 </div>
 	<?php

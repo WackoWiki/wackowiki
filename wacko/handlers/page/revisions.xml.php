@@ -38,8 +38,8 @@ if ($this->has_access('read'))
 
 				$xml .= "<item>\n";
 				$xml .= "<title>".$this->get_time_string_formatted($page['modified'])."</title>\n";
-				$xml .= "<link>".$this->href("show").($this->config['rewrite_mode'] ? "?" : "&amp;")."time=".urlencode($page['modified'])."</link>\n";
-				$xml .= "<guid isPermaLink=\"true\">".$this->href("", $etag)."</guid>\n";
+				$xml .= "<link>".$this->href('show').($this->config['rewrite_mode'] ? "?" : "&amp;")."time=".urlencode($page['modified'])."</link>\n";
+				$xml .= "<guid isPermaLink=\"true\">".$this->href('', $etag)."</guid>\n";
 
 				$_GET["a"] = $_GET["b"];
 				$_GET["b"] = $page['page_id'];
@@ -56,7 +56,7 @@ else
 {
 	$xml .= "<item>\n";
 	$xml .= "<title>Error</title>\n";
-	$xml .= "<link>".$this->href("show")."</link>\n";
+	$xml .= "<link>".$this->href('show')."</link>\n";
 	$xml .= "<description>".$this->get_translation("AccessDeniedXML")."</description>\n";
 	$xml .= "</item>\n";
 }

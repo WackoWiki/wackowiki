@@ -59,7 +59,7 @@ else
 {
 	$xml .= "\t\t<item>\n";
 	$xml .= "\t\t\t<title>Error</title>\n";
-	$xml .= "\t\t\t<link>".$this->href("show")."</link>\n";
+	$xml .= "\t\t\t<link>".$this->href('show')."</link>\n";
 	$xml .= "\t\t\t<description>".$this->get_translation("AccessDeniedXML")."</description>\n";
 	$xml .= "\t\t</item>\n";
 }

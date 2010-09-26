@@ -15,19 +15,19 @@ if (!isset($title)) $title = "";
 if ($for) $page = $for;
 if ($page)
 {
-	$page = $this->unwrap_link($page);
-	$ppage = "/".$page;
-	$context = $page;
-	$_page = $this->load_page($page);
+	$page		= $this->unwrap_link($page);
+	$ppage		= '/'.$page;
+	$context	= $page;
+	$_page		= $this->load_page($page);
 	if (!$title) $title = $page;
-	$link = $this->href("",$_page['tag']);
+	$link		= $this->href('', $_page['tag']);
 }
 else
 {
-	$page = ""; $ppage="";
-	$context = $this->tag;
-	$_page = $this->page;
-	$link = "";
+	$page		= ''; $ppage = '';
+	$context	= $this->tag;
+	$_page		= $this->page;
+	$link		= '';
 }
 
 if (!$from) $from = "h2";
@@ -87,7 +87,7 @@ else
 		echo '<a href="'.$v[3].'#'.$v[0].'">'.strip_tags($v[1]).'</a>';
 		echo '</div>';
 	}
-	//$this->tocRecursion( ($ppage?$this->href("",$ppage):""), $toc_body, 2 );
+	//$this->tocRecursion( ($ppage ? $this->href('',$ppage) : ''), $toc_body, 2 );
 }
 if (!$nomark)
 {

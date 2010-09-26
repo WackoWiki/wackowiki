@@ -111,7 +111,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	<br /><br />
 	<input name="submit" type="submit" value="<?php echo $this->get_translation("CloneButton"); ?>" /> &nbsp;
 	<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation("EditCancelButton")); ?>"
-	onclick="document.location='<?php echo addslashes($this->href(""))?>';" />
+	onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 
 	<?php
 	print ($this->form_close());

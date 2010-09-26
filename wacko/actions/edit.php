@@ -9,9 +9,9 @@ if (!isset($output)) $output = "";
 if (!isset($text)) $text = "";
 
 if ($for) $page=$for;
-	$editpage = $this->href("", $page."/edit");
+	$editpage = $this->href('', $page.'/edit');
 if (!$page)
-	{$editpage = $this->href("edit");}
+	{$editpage = $this->href('edit');}
 if (!$text)
 	$text = $this->get_translation("EditText");
 	$output .= $this->has_access('write') ? "<a href=\"".$editpage."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$text."</a>\n" : "";
