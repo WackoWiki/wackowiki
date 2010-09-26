@@ -29,19 +29,20 @@ if ($max > 500) $max = 500;
 if ($for) $page = $for;
 if ($page)
 {
-	$page = $this->unwrap_link($page);
-	$ppage = "/".$page;
-	$context = $page;
-	$_page = $this->load_page($page);
+	$page		= $this->unwrap_link($page);
+	$ppage		= '/'.$page;
+	$context	= $page;
+	$_page		= $this->load_page($page);
 	if (!$title) $title = $page;
-	$link = $this->href("",$_page['tag']);
+	$link		= $this->href('', $_page['tag']);
 }
 else
 {
-	$page = ""; $ppage="";
-	$context = $this->tag;
-	$_page = $this->page;
-	$link = "";
+	$page		= '';
+	$ppage		= '';
+	$context	= $this->tag;
+	$_page		= $this->page;
+	$link		= '';
 }
 
 if(!$nomark)

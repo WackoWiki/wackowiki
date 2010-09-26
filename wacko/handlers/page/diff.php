@@ -29,7 +29,7 @@ if (!function_exists('handler_diff_load_page_by_id'))
 }
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href("show"));
+if (!$this->page) $this->redirect($this->href('show'));
 
 	$a = $_GET["a"];
 	$b = $_GET["b"];
@@ -56,8 +56,8 @@ if ($this->has_access('read')) {
 			$deleted = array_diff($bodyB, $bodyA);
 
 			$output .=
-			str_replace("%1", "<a href=\"".$this->href("", "", ($b != -1 ? "time=".urlencode($pageA['modified']) : ""))."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
-			str_replace("%2", "<a href=\"".$this->href("", "", ($a != -1 ? "time=".urlencode($pageB['modified']) : ""))."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
+			str_replace("%1", "<a href=\"".$this->href('', '', ($b != -1 ? 'time='.urlencode($pageA['modified']) : ''))."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
+			str_replace("%2", "<a href=\"".$this->href('', '', ($a != -1 ? 'time='.urlencode($pageB['modified']) : ''))."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
 			str_replace("%3", $this->compose_link_to_page($this->tag, "", "", 0),
 			"<div class=\"diffinfo\">".$this->get_translation("Comparison"))))."</div><br />\n";
 
@@ -173,8 +173,8 @@ if ($this->has_access('read')) {
 			$sideB->copy_until_ordinal($count_total_right,$output);
 			$sideB->copy_whitespace($output);
 			$out=$this->format($output);
-			$out = str_replace("%1", "<a href=\"".$this->href("", "", "time=".urlencode($pageB['modified']))."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
-			str_replace("%2", "<a href=\"".$this->href("", "", "time=".urlencode($pageA['modified']))."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
+			$out = str_replace("%1", "<a href=\"".$this->href('', '', 'time='.urlencode($pageB['modified']))."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
+			str_replace("%2", "<a href=\"".$this->href('', '', 'time='.urlencode($pageA['modified']))."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
 			str_replace("%3", $this->compose_link_to_page($this->tag, "", "", 0),
 			"<div class=\"diffinfo\">".$this->get_translation("Comparison"))))."</div><br />\n<br />\n".$out;
 			print $out;

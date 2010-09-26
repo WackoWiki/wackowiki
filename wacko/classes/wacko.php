@@ -1415,7 +1415,7 @@ class Wacko
 								$message = $this->get_translation("EmailHello", $lang). $watcher['user_name'].".\n\n".
 											$username.
 											$this->get_translation("SomeoneCommented", $lang)."\n".
-											$this->href("",$this->get_comment_on_tag($comment_on_id),"")."\n\n".
+											$this->href('', $this->get_comment_on_tag($comment_on_id), '')."\n\n".
 											"----------------------------------------------------------------------\n\n".
 											$this->format($body_r, "post_wacko")."\n\n".
 											"----------------------------------------------------------------------\n\n".
@@ -4124,7 +4124,7 @@ class Wacko
 		$page = $this->load_page($tag);
 
 		if ($link === -1)
-			$_link = ($this->page['tag'] != $page['tag']) ? $this->href("",$page['tag']) : "";
+			$_link = ($this->page['tag'] != $page['tag']) ? $this->href('', $page['tag']) : '';
 		else
 			$_link = $link;
 

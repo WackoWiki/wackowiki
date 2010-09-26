@@ -27,10 +27,10 @@ if ($this->method != 'show' || $this->page['latest'] == "0" || $this->page['noin
 	<link media="print" rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
 	<link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" />
 	<link title="<?php echo $this->config['root_page'];?>" href="<?php echo $this->config['base_url'];?>" rel="start"/>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentNewsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentNewsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -60,7 +60,7 @@ if ($user = $this->get_user())
 	{
 ?>
 	<script type="text/javascript">
-	var edit = "<?php echo $this->href("edit");?>";
+	var edit = "<?php echo $this->href('edit');?>";
 	</script>
 <?php
 	}
@@ -70,7 +70,7 @@ else if($this->has_access('write'))
 ?>
 
 	<script type="text/javascript">
-	var edit = "<?php echo $this->href("edit");?>";
+	var edit = "<?php echo $this->href('edit');?>";
 	</script>
 <?php
 }
@@ -96,7 +96,7 @@ else if($this->has_access('write'))
 if ($this->get_user())
 { ?> <span class="nobr"><?php echo $this->get_translation("YouAre")." ".$this->link($this->get_user_name()) ?></span><small> ( <span class="nobr Tune"><?php
 echo $this->compose_link_to_page($this->get_translation("YouArePanelLink"), "", $this->get_translation("YouArePanelAccount"), 0); ?>
- | <a onclick="return confirm('<?php echo $this->get_translation("LogoutAreYouSure");?>');" href="<?php echo $this->href("",$this->get_translation("LoginPage")).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation("LogoutLink"); ?></a></span>
+ | <a onclick="return confirm('<?php echo $this->get_translation("LogoutAreYouSure");?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation("LogoutLink"); ?></a></span>
 )</small>
 <?php
 // Else Wacko shows login's controls

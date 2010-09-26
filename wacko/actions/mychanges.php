@@ -16,7 +16,7 @@ if ($user_id = $this->get_user_id())
 	if(isset($_GET["bydate"]) && $_GET["bydate"] == 1)
 	{
 		print($this->get_translation("MyChangesTitle1")." [<a href=\"".
-			$this->href("", "", "mode=mychanges")."#list\">".$this->get_translation("OrderABC")."</a>].<br /><br />\n");
+			$this->href('', '', 'mode=mychanges')."#list\">".$this->get_translation("OrderABC")."</a>].<br /><br />\n");
 			#.($this->config['rewrite_mode'] ? "?" : "&amp;").
 
 		$count	= $this->load_single(
@@ -79,7 +79,7 @@ if ($user_id = $this->get_user_id())
 	else
 	{
 		print($this->get_translation("MyChangesTitle2")." [<a href=\"".
-			$this->href("", "", "mode=mychanges&amp;bydate=1")."#list\">". #($this->config['rewrite_mode'] ? "?" : "&amp;")."bydate=true\">".
+			$this->href('', '', 'mode=mychanges&amp;bydate=1')."#list\">". #($this->config['rewrite_mode'] ? "?" : "&amp;")."bydate=true\">".
 			$this->get_translation("OrderChange")."</a>].</strong><br /><br />\n");
 
 		$count	= $this->load_single(

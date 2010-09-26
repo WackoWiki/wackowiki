@@ -3,18 +3,18 @@
 
 <div id="footer"><?php // Show only if page exists ?> <?php if ($this->page) {
 	echo $this->get_translation("SettingsRevisions");
-	echo ":"; ?> <a href="<?php echo $this->href("revisions"); ?>"><?php echo $this->get_page_time_formatted(); ?></a>
+	echo ":"; ?> <a href="<?php echo $this->href('revisions'); ?>"><?php echo $this->get_page_time_formatted(); ?></a>
 &nbsp;|&nbsp; <?php // Check if page has an owner - if not, add the claim text ?>
 	<?php if($owner = $this->get_page_owner()) {
 		echo $this->get_translation("Owner");
 		echo $this->link($owner);
 	} else if(!$this->page['comment_on_id']) {
 		echo $this->get_translation("Nobody"); ?> <a
-	href="<?php echo $this->href("claim"); ?>"><?php echo $this->get_translation("TakeOwnership"); ?></a>
+	href="<?php echo $this->href('claim'); ?>"><?php echo $this->get_translation("TakeOwnership"); ?></a>
 		<?php } ?> &nbsp;|&nbsp; <a
-	href="<?php echo $this->href("settings"); ?>"><?php echo $this->get_translation("SettingsText"); ?></a>
+	href="<?php echo $this->href('properties'); ?>"><?php echo $this->get_translation("SettingsText"); ?></a>
 &nbsp;|&nbsp; <?php // Watch page ?> <a
-	href="<?php echo $this->href("watch"); ?>"> <?php if($this->iswatched === true) { ?>
+	href="<?php echo $this->href('watch'); ?>"> <?php if($this->iswatched === true) { ?>
 <img
 	src="<?php echo $this->config['theme_url']; ?>images/watch-remove.gif"
 	alt="<?php echo $this->get_translation("RemoveWatch"); ?>"

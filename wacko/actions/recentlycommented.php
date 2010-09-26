@@ -56,7 +56,7 @@ if (!isset($noxml)) $noxml	= 0;
 
 if ($user = $this->get_user())
 {
-	$usermax = $user["changes_count"];
+	$usermax = $user['changes_count'];
 	if ($usermax == 0) $usermax = 10;
 }
 else
@@ -82,7 +82,7 @@ if (list ($pages, $pagination) = load_recently_commented($this, $root, (int)$max
 	}
 	if ($root == "" && !(int)$noxml)
 	{
-		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/comments_".preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation("RecentCommentsXMLTip")."\" alt=\"XML\" /></a></span><br /><br />\n";
+		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/comments_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation("RecentCommentsXMLTip")."\" alt=\"XML\" /></a></span><br /><br />\n";
 	}
 	// pagination
 	if (isset($pagination['text']))
@@ -118,12 +118,12 @@ if (list ($pages, $pagination) = load_recently_commented($this, $root, (int)$max
 
 				// print entry
 				echo "<li ".$viewed."><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (<a href=\"".
-				$this->href("", $page["comment_tag"], "")."\">".$page["comment_on_tag"]."</a>".
+				$this->href('', $page['comment_tag'], '')."\">".$page['comment_on_tag']."</a>".
 				") . . . . . . . . . . . . . . . . <small>".$this->get_translation("LatestCommentBy")." ".
-				($page["comment_user"]
-					? ($this->is_wiki_name($page["comment_user"])
-						? $this->link("/".$page["comment_user"],"",$page["comment_user"] )
-						: $page["comment_user"])
+				($page['comment_user']
+					? ($this->is_wiki_name($page['comment_user'])
+						? $this->link("/".$page['comment_user'],"",$page['comment_user'] )
+						: $page['comment_user'])
 					: $this->get_translation("Guest")).
 				"</small></li>\n";
 			}

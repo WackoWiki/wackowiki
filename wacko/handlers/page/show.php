@@ -33,7 +33,7 @@ if ($this->page['comment_on_id'])
 	$p = ceil($count["n"] / $this->config['comments_count']);
 
 	// forcibly open page
-	$this->redirect($this->href("", $this->get_comment_on_tag($this->page['comment_on_id']), 'show_comments=1&p='.$p).'#'.$this->page['tag']);
+	$this->redirect($this->href('', $this->get_comment_on_tag($this->page['comment_on_id']), 'show_comments=1&p='.$p).'#'.$this->page['tag']);
 }
 
 // display page body
@@ -45,7 +45,7 @@ if ($this->has_access('read'))
 		// if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
 		header("HTTP/1.0 404 Not Found");
 
-		print($this->get_translation("DoesNotExists") ." ".( $this->has_access('write') ?  str_replace("%1", $this->href("edit", "", "", 1), $this->get_translation("PromptCreate")) : ""));
+		print($this->get_translation("DoesNotExists") ." ".( $this->has_access('write') ?  str_replace("%1", $this->href('edit', '', '', 1), $this->get_translation("PromptCreate")) : ""));
 	}
 	else
 	{
@@ -178,7 +178,7 @@ if ($this->page)
 				?>
 	<a name="files" id="files"></a>
 	<div id="filesheader"><?php echo $this->get_translation("Files_all") ?>
-	<?php echo "[<a href=\"".$this->href("", "", "show_files=0")."\">".$this->get_translation("HideFiles")."</a>]"; ?>
+	<?php echo "[<a href=\"".$this->href('', '', 'show_files=0')."\">".$this->get_translation("HideFiles")."</a>]"; ?>
 	</div>
 
 			<?php
@@ -235,7 +235,7 @@ if ($this->page)
 				default:
 					print(str_replace("%1", $c, $this->get_translation("Files_n")));
 			}
-			echo "[<a href=\"".$this->href("", "", "show_files=1#files")."\">".$this->get_translation("ShowFiles")."</a>]";
+			echo "[<a href=\"".$this->href('', '', 'show_files=1#files')."\">".$this->get_translation("ShowFiles")."</a>]";
 			echo "</div>\n";
 		}
 	}
@@ -282,7 +282,7 @@ if ($this->page)
 		<div id="commentsheader">
 		<?php if (isset($pagination['text']))
 				echo '<div style="float:right; letter-spacing:normal;"><small>'.$pagination['text'].'</small></div>'; ?>
-		<?php echo $this->get_translation("Comments_all")." [<a href=\"".$this->href("", "", "show_comments=0")."\">".$this->get_translation("HideComments")."</a>]"; ?>
+		<?php echo $this->get_translation("Comments_all")." [<a href=\"".$this->href('', '', 'show_comments=0')."\">".$this->get_translation("HideComments")."</a>]"; ?>
 			</div>
 			<?php
 
@@ -297,14 +297,14 @@ if ($this->page)
 					$del = "";
 					if ($this->is_admin() || $this->user_is_owner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->page['page_id'])))
 					{
-						print("<a href=\"".$this->href("remove", $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/delete_comment.gif\" title=\"".$this->get_translation("DeleteCommentTip")."\" alt=\"".$this->get_translation("DeleteText")."\" align=\"right\" border=\"0\" /></a>");
-						print("<a href=\"".$this->href("edit", $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/edit.gif\" title=\"".$this->get_translation("EditCommentTip")."\" alt=\"".$this->get_translation("EditComment")."\" align=\"right\" border=\"0\" /></a>");
+						print("<a href=\"".$this->href('remove', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/delete_comment.gif\" title=\"".$this->get_translation("DeleteCommentTip")."\" alt=\"".$this->get_translation("DeleteText")."\" align=\"right\" border=\"0\" /></a>");
+						print("<a href=\"".$this->href('edit', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/edit.gif\" title=\"".$this->get_translation("EditCommentTip")."\" alt=\"".$this->get_translation("EditComment")."\" align=\"right\" border=\"0\" /></a>");
 					}
 					if ($comment['body_r']) $strings = $comment['body_r'];
 
 					else $strings = $this->format($comment['body'], "wacko");
 					echo "<div class=\"commenttext\">\n";
-					print("<div class=\"commenttitle\">\n<a href=\"".$this->href("", "", "show_comments=1")."#".$comment['tag']."\">".$comment['title']."</a>\n</div>\n");
+					print("<div class=\"commenttitle\">\n<a href=\"".$this->href('', '', 'show_comments=1')."#".$comment['tag']."\">".$comment['title']."</a>\n</div>\n");
 					print($this->format($strings,"post_wacko")."\n");
 					echo "</div>\n";
 					print("<ul class=\"commentinfo\">\n".
@@ -388,7 +388,7 @@ if ($this->page)
 
 			//TODO: show link to show comment only if there is one or/and user has the right to add a new one
 		?>
-			[<a href="<?php echo $this->href("", "", "show_comments=1#comments")?>"><?php echo $this->get_translation("ShowComments"); ?></a>]</div>
+			[<a href="<?php echo $this->href('', '', 'show_comments=1#comments')?>"><?php echo $this->get_translation("ShowComments"); ?></a>]</div>
 		<?php
 			}
 		}

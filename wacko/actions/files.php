@@ -130,7 +130,7 @@ if ($can_view)
 			$remove_mode = 0;
 		}
 
-		$remove_href = $this->href("upload", $page, "remove=".($global ? "global" : "local")."&amp;file=".$filename);
+		$remove_href = $this->href('upload', $page, 'remove='.($global ? 'global' : 'local')."&amp;file=".$filename);
 ?>
 		<tr>
 			<td class="dt-"><span class="dt2-"><?php echo $this->get_time_string_formatted($dt) ?></span>&nbsp;</td>

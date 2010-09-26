@@ -19,9 +19,9 @@
 		<?php if ($this->config['allow_x11colors']) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" /><?php } ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/left.css" />
 		<link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" />
-		<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
-		<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace("/[^a-zA-Z0-9]/", "", strtolower($this->config['wacko_name']));?>.xml" />
-		<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href("revisions.xml");?>" />
+		<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+		<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+		<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -52,7 +52,7 @@ if ($user = $this->get_user())
          {
 ?>
   <script type="text/javascript">
-   var edit = "<?php echo $this->href("edit");?>";
+   var edit = "<?php echo $this->href('edit');?>";
   </script>
 <?php
          }
@@ -62,7 +62,7 @@ else if($this->has_access('write'))
 ?>
 
       <script type="text/javascript">
-      var edit = "<?php echo $this->href("edit");?>";
+      var edit = "<?php echo $this->href('edit');?>";
      </script>
 <?php
    }
@@ -147,41 +147,41 @@ else if($this->has_access('write'))
     				<td class="modulecontent">
 						<div class="modulecontent">
 						<?php
-echo $this->page['modified'] ? "<a href=\"".$this->href("revisions")."\" title=\"".$this->get_translation("RevisionTip")."\">".$this->get_page_time_formatted()."</a>\n" : "";
+echo $this->page['modified'] ? "<a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation("RevisionTip")."\">".$this->get_page_time_formatted()."</a>\n" : "";
         					echo "<hr />";
 
                             if ($this->has_access('write')) {
-								echo "<a href=\"".$this->href("edit")."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a>\n";
+								echo "<a href=\"".$this->href('edit')."\" accesskey=\"E\" title=\"".$this->get_translation("EditTip")."\">".$this->get_translation("EditText")."</a>\n";
 							}
 							echo '<br />';
                             if ($this->page['modified']) {
-								echo "<a href=\"".$this->href("revisions")."\" title=\"".$this->get_translation("RevisionTip")."\">".$this->get_translation('SettingsRevisions')."</a>\n";
+								echo "<a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation("RevisionTip")."\">".$this->get_translation('SettingsRevisions')."</a>\n";
                             }
 							// if this page exists
 							if ($this->page) {
 								// if owner is current user
 							    if ($this->user_is_owner()) {
 									echo '<br />';
-							    	print(" <a href=\"".$this->href("rename")."\">".$this->get_translation("RenameText")."</a>");
+							    	print(" <a href=\"".$this->href('rename')."\">".$this->get_translation("RenameText")."</a>");
 									echo '<br />';
-							    	print("<a href=\"".$this->href("permissions")."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a>");
+							    	print("<a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("ACLText")."</a>");
 							    }
 
 							    if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->user_is_owner()) {
 									echo '<br />';
-							    	print(" <a href=\"".$this->href("rename")."\">".$this->get_translation("RenameText")."</a>");
+							    	print(" <a href=\"".$this->href('rename')."\">".$this->get_translation("RenameText")."</a>");
 							    }
 
 							    if ($this->is_admin()) {
 									echo '<br />';
-									print(" <a href=\"".$this->href("remove")."\">".$this->get_translation("DeleteText")."</a>");
+									print(" <a href=\"".$this->href('remove')."\">".$this->get_translation("DeleteText")."</a>");
 							    }
 
 								echo '<br />';
-							    print("<a href=\"".$this->href("settings"). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("SettingsText")."</a>");
+							    print("<a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation("EditACLConfirm")."');\"":"").">".$this->get_translation("SettingsText")."</a>");
 
 								echo '<br />';
-								print "<a href=\"".$this->href("export.xml")."\" title=\"Click to view recent page revisions in XML format.\" target=\"_blank\">Export to XML</a>\n";
+								print "<a href=\"".$this->href('export.xml')."\" title=\"Click to view recent page revisions in XML format.\" target=\"_blank\">Export to XML</a>\n";
 
 								//print $this->format( '{{TOC}}' );
 
@@ -193,7 +193,7 @@ echo $this->page['modified'] ? "<a href=\"".$this->href("revisions")."\" title=\
 							    	if ($owner = $this->get_page_owner()) {
 							        print($this->get_translation("Owner").": ".$this->link($owner));
 							      } else if (!$this->page['comment_on_id']) {
-							        print($this->get_translation("Nobody").($this->get_user() ? " (<a href=\"".$this->href("claim")."\">".$this->get_translation("TakeOwnership")."</a>)" : ""));
+							        print($this->get_translation("Nobody").($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation("TakeOwnership")."</a>)" : ""));
 							      }
 								}
 							}
@@ -211,9 +211,9 @@ echo $this->page['modified'] ? "<a href=\"".$this->href("revisions")."\" title=\
 
 <div class="header">
 	<?php echo ($this->iswatched === true
-			? "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation("RemoveWatch")."\" alt=\"".$this->get_translation("RemoveWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>"
-			: "<a href=\"".$this->href("watch")."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation("SetWatch")."\" alt=\"".$this->get_translation("SetWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?> |
-  	<?php echo "<a href=\"".$this->href("print")."\" target=\"_new\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation("PrintVersion")."\" alt=\"".$this->get_translation("PrintVersion")."\"  align=\"absmiddle\" border=\"0\" /></a>";?> |
+			? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation("RemoveWatch")."\" alt=\"".$this->get_translation("RemoveWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>"
+			: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation("SetWatch")."\" alt=\"".$this->get_translation("SetWatch")."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?> |
+  	<?php echo "<a href=\"".$this->href('print')."\" target=\"_new\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation("PrintVersion")."\" alt=\"".$this->get_translation("PrintVersion")."\"  align=\"absmiddle\" border=\"0\" /></a>";?> |
     <?php
 		if ($this->get_user()) { ?>
             <span class="nobr">
@@ -225,7 +225,7 @@ echo $this->page['modified'] ? "<a href=\"".$this->href("revisions")."\" title=\
 				(
 				<span class="nobr Tune">
 					<?php echo $this->compose_link_to_page($this->get_translation("YouArePanelLink"), "", $this->get_translation("YouArePanelAccount"), 0); ?> |
-					<a onclick="return confirm('<?php echo $this->get_translation("LogoutAreYouSure");?>');" href="<?php echo $this->href("",$this->get_translation("LoginPage")).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>">
+					<a onclick="return confirm('<?php echo $this->get_translation("LogoutAreYouSure");?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>">
 						<?php echo $this->get_translation("LogoutLink"); ?>
 					</a>
 				</span>

@@ -330,6 +330,6 @@ if ($this->has_access('read'))
 	echo $this->action('files', array())."<br />";
 }
 if (!$this->config['revisions_hide_cancel'])
-	echo "<input type=\"button\" value=\"".$this->get_translation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(""))."';\" />\n";
+	echo "<input type=\"button\" value=\"".$this->get_translation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
 ?>
 </div>
