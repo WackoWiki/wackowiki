@@ -18,10 +18,10 @@
 <link href="<?php echo $this->config['theme_url'] ?>css/default.css" rel="stylesheet" type="text/css" media="screen" />
 <link rel="start" href="/" />
 <link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page'])); ?>" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentNewsRSS");?>" href="/xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentCommentsRSS");?>" href="/xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentChangesRSS");?>" href="/xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentNewsRSS');?>" href="/xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentCommentsRSS');?>" href="/xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentChangesRSS');?>" href="/xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('HistoryRevisionsRSS');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 <script type="text/javascript" src="<?php echo $this->config['base_url'] ?>js/controls.js"></script>
 <script type="text/javascript" src="<?php echo $this->config['base_url'] ?>js/protoedit.js"></script>
 <script type="text/javascript" src="<?php echo $this->config['base_url'] ?>js/wikiedit2.js"></script>
@@ -47,7 +47,7 @@
 	if ($this->get_user())
 	{
 ?>
-							id: <?php echo $this->get_user_name() ;?> &nbsp; <a href="<?php echo $this->href('', $this->config['settings_page']); ?>" title="Account Settings"><?php echo $this->get_translation("YouArePanelAccount"); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->config['login_page']); ?>" title="parameters of current session">Session</a> &nbsp; <a onclick="return confirm('Do you really want to leave the system?');" href="<?php echo $this->href('', $this->config['login_page'], 'action=logout&amp;goback='.$this->slim_url($this->tag)); ?>" title="Logout">Logout</a><br />
+							id: <?php echo $this->get_user_name() ;?> &nbsp; <a href="<?php echo $this->href('', $this->config['settings_page']); ?>" title="Account Settings"><?php echo $this->get_translation('YouArePanelAccount'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->config['login_page']); ?>" title="parameters of current session">Session</a> &nbsp; <a onclick="return confirm('Do you really want to leave the system?');" href="<?php echo $this->href('', $this->config['login_page'], 'action=logout&amp;goback='.$this->slim_url($this->tag)); ?>" title="Logout">Logout</a><br />
 <?php
 	}
 	else
@@ -295,7 +295,7 @@
 	echo echo_tab(
 		$this->href('show'),
 		$this->get_translation('ShowTip'),
-		$this->has_access('read') ? $this->get_translation("ShowText") : '',
+		$this->has_access('read') ? $this->get_translation('ShowText') : '',
 		$this->method == 'show',
 		'v');
 
@@ -306,7 +306,7 @@
 		((!$this->page && $this->has_access('create')) || $this->is_admin() ||
 			($this->forum === false && $this->has_access('write')) ||
 			($this->forum === true && ($this->user_is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
-			? $this->get_translation("EditText") : '',
+			? $this->get_translation('EditText') : '',
 		$this->method == 'edit',
 		'e');
 
@@ -332,7 +332,7 @@
 	echo echo_tab(
 		$this->href('referrers'),
 		$this->get_translation('ReferrersTip'),
-		($this->page && $this->has_access('read')) ? $this->get_translation("ReferrersText") : '',
+		($this->page && $this->has_access('read')) ? $this->get_translation('ReferrersText') : '',
 		$this->method == 'referrers' || $this->method == 'referrers_sites',
 		'l');
 
@@ -348,7 +348,7 @@
 	echo echo_tab(
 		$this->href('properties'),
 		$this->get_translation('PropertiesTip'),
-		(/* $this->forum === false && $this->page && */ ($this->is_admin() /*|| $this->is_moderator() */|| $this->user_is_owner())) ? $this->get_translation("PropertiesText") : '',
+		(/* $this->forum === false && $this->page && */ ($this->is_admin() /*|| $this->is_moderator() */|| $this->user_is_owner())) ? $this->get_translation('PropertiesText') : '',
 		$this->method == 'properties' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
 		's');
 
@@ -364,7 +364,7 @@
 	echo echo_tab(
 		$this->href('permissions'),
 		$this->get_translation('ACLTip'),
-		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation("ACLText") : '',
+		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('ACLText') : '',
 		$this->method == 'permissions',
 		'a');
 ?>

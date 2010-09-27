@@ -68,7 +68,7 @@ if ($form)
 	value="<?php echo htmlspecialchars(isset($_GET['phrase'])? $_GET['phrase'] : ""); ?>" />
 <input
 	type="submit"
-	value="<?php echo $this->get_translation("SearchButtonText"); ?>" />
+	value="<?php echo $this->get_translation('SearchButtonText'); ?>" />
 <br />
 <input
 	type="checkbox" name="topic"

@@ -218,7 +218,7 @@ class RSS
 				if ( $access && ($count < 30) ) {
 					$count++;
 					$xml .= "<item>\n";
-					$xml .= "<title>".$page['title']." ".$this->engine->get_translation("To")." ".$this->engine->get_comment_on_tag($page['comment_on_id'])." ".$this->engine->get_translation("From")." ".$page['user']."</title>\n";
+					$xml .= "<title>".$page['title']." ".$this->engine->get_translation("To")." ".$this->engine->get_comment_on_tag($page['comment_on_id'])." ".$this->engine->get_translation('From')." ".$page['user']."</title>\n";
 					$xml .= "<link>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</link>\n";
 					$xml .= "<guid>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";

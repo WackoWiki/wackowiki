@@ -30,12 +30,12 @@ if ($this->method != 'show' || $this->page['latest'] == "0" || $this->page['noin
 	<?php if ($this->config['policy_page']) {?>
 	<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page'])); ?>" title="Copyright" />
 	<?php } ?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentChangesRSS');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentCommentsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
 	<?php if ($this->config['news_cluster']) {?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentNewsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentNewsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
 	<?php } ?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('HistoryRevisionsRSS');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -93,15 +93,15 @@ if ($doubleclick == true)
 	<div id="header">
 		<div id="header-main">
 			<div id="header-top">
-			<span class="main"><?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['wacko_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['wacko_name']."</a>") ?>: </span><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?> <a class="Search" title="<?php echo $this->get_translation("SearchTitleTip")?>" href="<?php echo $this->config['base_url'].$this->get_translation("TextSearchPage").($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
+			<span class="main"><?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['wacko_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['wacko_name']."</a>") ?>: </span><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?> <a class="Search" title="<?php echo $this->get_translation('SearchTitleTip')?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
 		</div>
 		<div id="login">
 <?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user())
-{ ?> <span class="nobr"><?php echo $this->get_translation("YouAre")." ".$this->link($this->get_user_name()) ?></span><small> ( <span class="nobr Tune"><?php
-echo $this->compose_link_to_page($this->get_translation("YouArePanelLink"), "", $this->get_translation("YouArePanelAccount"), 0); ?>
- | <a onclick="return confirm('<?php echo $this->get_translation("LogoutAreYouSure");?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation("LogoutLink"); ?></a></span>
+{ ?> <span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->get_user_name()) ?></span><small> ( <span class="nobr Tune"><?php
+echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), "", $this->get_translation('YouArePanelAccount'), 0); ?>
+ | <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span>
 )</small>
 <?php
 // Else Wacko shows login's controls
@@ -109,7 +109,7 @@ echo $this->compose_link_to_page($this->get_translation("YouArePanelLink"), "", 
 else
 {
 	// Show Register / Login link
-	echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation("LoginPage").($this->config['rewrite_mode'] ? "?" : "&amp;")."goback=".$this->slim_url($this->tag), "", $this->get_translation("LoginPage"), 0)."</li>\n";
+	echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation('LoginPage').($this->config['rewrite_mode'] ? "?" : "&amp;")."goback=".$this->slim_url($this->tag), "", $this->get_translation('LoginPage'), 0)."</li>\n";
 	echo "<li>".$this->compose_link_to_page($this->get_translation("RegistrationPage"), "", $this->get_translation("RegistrationPage"), 0)."</li>\n";
 	// echo "<li>".$this->compose_link_to_page($this->get_translation("RegistrationPage"), "", $this->get_translation("Help"), 0)."</li>\n";
 	echo "</ul>\n";
@@ -140,12 +140,12 @@ else
 				echo '<li><a href="'. $this->href('', '', "addbookmark=yes")
 					.'"><img src="'. $this->config['theme_url']
 					.'icons/bookmark1.gif" alt="+" title="'.
-					$this->get_translation("AddToBookmarks") .'"/></a></li>';
+					$this->get_translation('AddToBookmarks') .'"/></a></li>';
 			else
 				echo '<li><a href="'. $this->href('', '', "removebookmark=yes")
 					.'"><img src="'. $this->config['theme_url']
 					.'icons/bookmark2.gif" alt="-" title="'.
-					$this->get_translation("RemoveFromBookmarks") .'"/></a></li>';
+					$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
 			}
 	echo "\n</ol></div>";
 ?>
@@ -194,7 +194,7 @@ else
 	echo echo_tab(
 		$this->href('show'),
 		$this->get_translation('ShowTip'),
-		$this->has_access('read') ? $this->get_translation("ShowText") : '',
+		$this->has_access('read') ? $this->get_translation('ShowText') : '',
 		$this->method == 'show',
 		1,
 		'v');
@@ -206,7 +206,7 @@ else
 		((!$this->page && $this->has_access('create')) || $this->is_admin() ||
 			($this->forum === false && $this->has_access('write')) ||
 			($this->forum === true && ($this->user_is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
-			? $this->get_translation("EditText") : '',
+			? $this->get_translation('EditText') : '',
 		$this->method == 'edit',
 		1,
 		'e');
@@ -256,7 +256,7 @@ else
 	echo echo_tab(
 		$this->href('permissions'),
 		$this->get_translation('ACLTip'),
-		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation("ACLText") : '',
+		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('ACLText') : '',
 		$this->method == 'permissions',
 		1,
 		'a');
@@ -274,7 +274,7 @@ else
 	#echo echo_tab(
 	#	$this->href('referrers'),
 	#	$this->get_translation('ReferrersTip'),
-	#	($this->page && $this->has_access('read')) ? $this->get_translation("ReferrersText") : '',
+	#	($this->page && $this->has_access('read')) ? $this->get_translation('ReferrersText') : '',
 	#	$this->method == 'referrers' || $this->method == 'referrers_sites',
 	#	0,
 	#	'l');
@@ -282,8 +282,8 @@ else
 	// watch tab
 	echo echo_tab(
 		$this->href('watch'),
-		($this->iswatched === true ? $this->get_translation("RemoveWatch") : $this->get_translation("SetWatch")),
-		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation("SetWatch") : '',
+		($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
+		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('SetWatch') : '',
 		$this->method == 'watch',
 		($this->iswatched === true ? "watch-on.png" : "watch-off.png"),
 		'a');
@@ -292,7 +292,7 @@ else
 	echo echo_tab(
 		$this->href('properties'),
 		$this->get_translation('PropertiesTip'),
-		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation("PropertiesText") : '',
+		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('PropertiesText') : '',
 		$this->method == 'properties' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
 		1,
 		's');
@@ -313,12 +313,12 @@ else
 <div id="search">
 <?php
 // Opens Search form
-echo $this->form_open("", $this->get_translation("TextSearchPage"), "get");
+echo $this->form_open("", $this->get_translation('TextSearchPage'), "get");
 
 // Searchbar
 ?>
-<span class="search nobr"><label for="phrase"><?php echo $this->get_translation("SearchText"); ?></label><input
-	type="text" name="phrase" id="phrase" size="20" /><input class="submitinput" type="submit" title="<?php echo $this->get_translation("SearchButtonText") ?>" alt="<?php echo $this->get_translation("SearchButtonText") ?>" value="<?php echo $this->get_translation("SearchButtonText") ?>"/></span>
+<span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label><input
+	type="text" name="phrase" id="phrase" size="20" /><input class="submitinput" type="submit" title="<?php echo $this->get_translation('SearchButtonText') ?>" alt="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>"/></span>
 <?php
 
 // Search form close

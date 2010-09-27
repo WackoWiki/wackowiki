@@ -36,7 +36,7 @@ if (isset($_GET['confirm']))
 	}
 	else
 	{
-		echo "<div class=\"info\">".str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation("SettingsText"), 0), $this->get_translation("EmailNotConfirmed"))."</div><br />";
+		echo "<div class=\"info\">".str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation("EmailNotConfirmed"))."</div><br />";
 	}
 }
 else if (isset($_POST['action']) && $_POST['action'] == "login")
@@ -201,7 +201,7 @@ else if (isset($_POST['action']) && $_POST['action'] == "login")
 					$this->config['wacko_name'].". ".
 					$this->get_translation("SiteEmailConfirm"));
 				$this->context[++$this->current_context] = "";
-				$this->redirect($this->href('', $this->get_translation("LoginPage")));
+				$this->redirect($this->href('', $this->get_translation('LoginPage')));
 			}
 		}
 	}
