@@ -299,7 +299,7 @@ if ($langs = $this->available_languages())
 	echo "<td class=\"form_right\" title=\"".$this->get_translation('SettingsSizeTip')."\">".ceil(strlen($this->page['body']) / 1000).' kB / '.ceil(strlen($this->page['body_r']) / 1000)." kB"."</td>";
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsTotalRevs')."</th>";
-	echo "<td class=\"form_right\"><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation("RevisionTip")."\">".(int)$revs['total']."</a></td>";
+	echo "<td class=\"form_right\"><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".(int)$revs['total']."</a></td>";
 	unset($revs);
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsTotalComs')."</th>";
@@ -323,7 +323,7 @@ if ($langs = $this->available_languages())
 
 <ul>
 	<li><a href="<?php echo $this->href('edit');?>"><?php echo $this->get_translation("SettingsEdit"); ?></a></li>
-	<li><a href="<?php echo $this->href('revisions');?>"><?php echo $this->get_translation("SettingsRevisions"); ?></a></li>
+	<li><a href="<?php echo $this->href('revisions');?>"><?php echo $this->get_translation('SettingsRevisions'); ?></a></li>
 	<li><a href="<?php echo $this->href('clone');?>"><?php echo $this->get_translation("SettingsClone"); ?></a></li>
 	<?php
 	// Rename link (shows only if owner is current user or Admin)
@@ -350,7 +350,7 @@ if ($langs = $this->available_languages())
 	<li><a href="<?php echo $this->href('categories'); ?>"><?php echo $this->get_translation("SettingsCategories"); ?></a></li>
 	<li><a href="<?php echo $this->href('upload'); ?>"><?php echo $this->get_translation("SettingsUpload"); ?></a></li>
 	<li><a href="<?php echo $this->href('referrers'); ?>"><?php echo $this->get_translation("SettingsReferrers"); ?></a></li>
-	<li><a href="<?php echo $this->href('watch'); ?>"><?php echo ($this->iswatched === true ? $this->get_translation("RemoveWatch") : $this->get_translation("SetWatch")); ?></a></li>
+	<li><a href="<?php echo $this->href('watch'); ?>"><?php echo ($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')); ?></a></li>
 	<li><a href="<?php echo $this->href('print');?>"><?php echo $this->get_translation("SettingsPrint"); ?></a></li>
 	<li><a href="<?php echo $this->href('msword');?>"><?php echo $this->get_translation("SettingsMsword"); ?></a></li>
 	<li><a href="<?php echo $this->href('latex');?>"><?php echo $this->get_translation("SettingsLatex"); ?></a></li>

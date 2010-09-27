@@ -39,7 +39,7 @@ if ($this->has_access('read'))
 		#$output .= "<input type=\"button\" value=\"".$this->get_translation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"fastdiff\" name=\"fastdiff\" />\n <label for=\"fastdiff\">".$this->get_translation("SimpleDiff")."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"source\" name=\"source\" />\n <label for=\"source\">".$this->get_translation("SourceDiff")."</label>";
-		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href('revisions.xml')."\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation("RevisionXMLTip")."\" alt=\"XML\" /></a>";
+		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href('revisions.xml')."\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RevisionXMLTip')."\" alt=\"XML\" /></a>";
 		if ($this->config['minor_edit'])
 		{
 			$output .= "<br />".((isset($_GET['minor_edit']) && !$_GET['minor_edit'] == '1') ? "<a href=\"".$this->href('revisions', '', 'minor_edit=1')."\">".$this->get_translation("MinorEditHide")."</a>" : "<a href=\"".$this->href('revisions', '', 'minor_edit=0')."\">".$this->get_translation("MinorEditShow")."</a>");

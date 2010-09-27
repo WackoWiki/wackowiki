@@ -47,12 +47,12 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 	width="5" height="1" alt="" align="left" border="0" /><img
 	src="<?php echo $this->config['base_url'];?>images/z.gif"
 	width="5" height="1" alt="" align="right" border="0" /> <?php echo_tab( $this->href('show'),  $this->get_translation("ShowTip"),
-	$this->has_access('read') ? $this->get_translation("ShowText") : "",
+	$this->has_access('read') ? $this->get_translation('ShowText') : "",
 	$this->method != "show"
-	) ?> <?php echo_tab( $this->href('edit'),  $this->get_translation("EditTip"),
-	$this->has_access('write') ? $this->get_translation("EditText") : "",
+	) ?> <?php echo_tab( $this->href('edit'),  $this->get_translation('EditTip'),
+	$this->has_access('write') ? $this->get_translation('EditText') : "",
 	$this->method != "edit"
-	) ?> <?php echo_tab( $this->href('revisions'),  $this->get_translation("RevisionTip"),
+	) ?> <?php echo_tab( $this->href('revisions'),  $this->get_translation('RevisionTip'),
 	$this->page['modified'] ? $this->get_page_time_formatted() : "",
 	$this->method != "revisions"
 	) ?> <?php
@@ -62,7 +62,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 		if($this->has_access('write') && $this->get_user() || $this->is_admin())
 		{
 			echo_tab( $this->href('properties'),  $this->get_translation("SettingsTip"),
-			$this->get_translation("PropertiesText"),
+			$this->get_translation('PropertiesText'),
 			$this->method != "properties"
 			);
 		}
@@ -70,15 +70,15 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 		// if owner is current user
 		if ($this->user_is_owner())
 		{
-			echo_tab( $this->href('permissions'),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->get_translation("EditACLConfirm")."\");":""),
-			$this->get_translation("ACLText"),
+			echo_tab( $this->href('permissions'),  "".(($this->method=='edit')?"' onclick='return window.confirm(\"".$this->get_translation('EditACLConfirm')."\");":""),
+			$this->get_translation('ACLText'),
 			$this->method != "permissions"
 			);
 		}
 		if ($this->is_admin() || (!$this->config['remove_onlyadmins'] && $this->user_is_owner()))
 		{
-			echo_tab( $this->href('remove'),  $this->get_translation("DeleteTip")."",
-				'<img src="'.$this->config['theme_url'].'icons/del'.($this->method != "remove"?"":"_").'.gif" width="14" height="15" alt="" />'.$this->get_translation("DeleteText"),
+			echo_tab( $this->href('remove'),  $this->get_translation('DeleteTip')."",
+				'<img src="'.$this->config['theme_url'].'icons/del'.($this->method != "remove"?"":"_").'.gif" width="14" height="15" alt="" />'.$this->get_translation('DeleteText'),
 			$this->method != "remove",
 				"2a"
 				);
@@ -97,8 +97,8 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 	<?php
 	if ($this->get_user())
 	{
-		echo_tab( $this->href('referrers'), $this->get_translation("ReferrersTip"),
-		$this->get_translation("ReferrersText"),
+		echo_tab( $this->href('referrers'), $this->get_translation('ReferrersTip'),
+		$this->get_translation('ReferrersText'),
 		$this->method != "referrers",
 		"2"
 		);
@@ -110,12 +110,12 @@ if ($this->page)
 {
 	// if owner is current user
 	if ($this->user_is_owner())
-	print($this->get_translation("YouAreOwner"));
+	print($this->get_translation('YouAreOwner'));
 	else
 	if ($owner = $this->get_page_owner())
-	print($this->get_translation("Owner").": ".$this->link($owner));
+	print($this->get_translation('Owner').": ".$this->link($owner));
 	else if (!$this->page['comment_on_id'])
-	print($this->get_translation("Nobody").($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation("TakeOwnership")."</a>)" : ""));
+	print($this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)" : ""));
 }
 ?></div>
 </div>
@@ -150,7 +150,7 @@ if ($this->method == "show") {
 			// display files header
 			?>
 <a name="files"></a>
-<div id="filesheader"><?php echo $this->get_translation("Files_all") ?> <?php echo "[<a href=\"".$this->href('', '', 'show_files=0')."\">".$this->get_translation("HideFiles")."</a>]"; ?>
+<div id="filesheader"><?php echo $this->get_translation('Files_all') ?> <?php echo "[<a href=\"".$this->href('', '', 'show_files=0')."\">".$this->get_translation("HideFiles")."</a>]"; ?>
 </div>
 			<?php
 
@@ -248,8 +248,8 @@ switch (count($files))
 					$del = "";
 					if ($this->is_admin() || $this->user_is_owner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->get_page_id())))
 					print("<div style=\"float:right;\" style='background:#ffcfa8; border: solid 1px; border-color:#cccccc'>".
-				"<a href=\"".$this->href('remove', $comment['tag'])."\" title=\"".$this->get_translation("DeleteTip")."\">".
-				"<img src=\"".$this->config['theme_url']."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->get_translation("DeleteText")."\" /></a>".
+				"<a href=\"".$this->href('remove', $comment['tag'])."\" title=\"".$this->get_translation('DeleteTip')."\">".
+				"<img src=\"".$this->config['theme_url']."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->get_translation('DeleteText')."\" /></a>".
 				"</div>");
 					print($this->format($comment['body'])."\n");
 					print("<div class=\"commentinfo\">\n-- ".($this->is_wiki_name($comment['user'])?$this->link("/".$comment['user'],"",$comment['user']):$comment['user'])." (".$comment['modified'].")\n</div>\n");
@@ -315,13 +315,13 @@ switch (count($files))
 switch (count($comments))
 {
 	case 0:
-		print($this->get_translation("Comments_0"));
+		print($this->get_translation('Comments_0'));
 		break;
 	case 1:
-		print($this->get_translation("Comments_1"));
+		print($this->get_translation('Comments_1'));
 		break;
 	default:
-		print(str_replace("%1",count($comments), $this->get_translation("Comments_n")));
+		print(str_replace("%1",count($comments), $this->get_translation('Comments_n')));
 }
 ?> <?php echo "[<a href=\"".$this->href('', '', 'show_comments=1#comments')."\">".$this->get_translation("ShowComments")."</a>]"; ?>
 
@@ -337,7 +337,7 @@ switch (count($comments))
 
 <div id="credits"><?php
 if ($this->get_user()){
-	echo $this->get_translation("PoweredBy")." ".$this->link("WackoWiki:HomePage", "", "WackoWiki ".$this->get_wacko_version())." :: Redesign by Mendokusee";
+	echo $this->get_translation('PoweredBy')." ".$this->link("WackoWiki:HomePage", "", "WackoWiki ".$this->get_wacko_version())." :: Redesign by Mendokusee";
 }
 ?></div>
 <?php

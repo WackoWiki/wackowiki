@@ -177,7 +177,7 @@ if ($this->page)
 				// display files header
 				?>
 	<a name="files" id="files"></a>
-	<div id="filesheader"><?php echo $this->get_translation("Files_all") ?>
+	<div id="filesheader"><?php echo $this->get_translation('Files_all') ?>
 	<?php echo "[<a href=\"".$this->href('', '', 'show_files=0')."\">".$this->get_translation("HideFiles")."</a>]"; ?>
 	</div>
 
@@ -297,7 +297,7 @@ if ($this->page)
 					$del = "";
 					if ($this->is_admin() || $this->user_is_owner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->page['page_id'])))
 					{
-						print("<a href=\"".$this->href('remove', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/delete_comment.gif\" title=\"".$this->get_translation("DeleteCommentTip")."\" alt=\"".$this->get_translation("DeleteText")."\" align=\"right\" border=\"0\" /></a>");
+						print("<a href=\"".$this->href('remove', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/delete_comment.gif\" title=\"".$this->get_translation("DeleteCommentTip")."\" alt=\"".$this->get_translation('DeleteText')."\" align=\"right\" border=\"0\" /></a>");
 						print("<a href=\"".$this->href('edit', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/edit.gif\" title=\"".$this->get_translation("EditCommentTip")."\" alt=\"".$this->get_translation("EditComment")."\" align=\"right\" border=\"0\" /></a>");
 					}
 					if ($comment['body_r']) $strings = $comment['body_r'];

@@ -75,7 +75,7 @@ if (isset($_GET["secret_code"]) || isset($_POST["secret_code"]))
 
 				// forward
 				$this->set_message($this->get_translation("PasswordChanged"));
-				$this->redirect($this->href('', $this->get_translation("LoginPage")));
+				$this->redirect($this->href('', $this->get_translation('LoginPage')));
 			}
 
 			if ($error) $this->set_message($error);
@@ -202,7 +202,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 
 			// forward
 			$this->set_message($this->get_translation("PasswordChanged"));
-			$this->redirect($this->href('', $this->get_translation("LoginPage")));
+			$this->redirect($this->href('', $this->get_translation('LoginPage')));
 		}
 	}
 
@@ -306,7 +306,7 @@ else
 				$this->log(3, str_replace("%2", $user['email'], str_replace("%1", $user['user_name'], $this->get_translation("LogUserPasswordReminded", $this->config['language']))));
 
 				$this->set_message($this->get_translation("CodeWasSent"));
-				$this->redirect($this->href('', $this->get_translation("LoginPage")));
+				$this->redirect($this->href('', $this->get_translation('LoginPage')));
 
 			}
 			else

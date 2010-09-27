@@ -28,9 +28,9 @@ Common header file.
 <link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
 <?php if ($this->config['allow_x11colors']) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" /><?php } ?>
 <link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentChangesRSS');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentCommentsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('HistoryRevisionsRSS');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -88,12 +88,12 @@ else if($this->has_access('write'))
     <td width="378" valign="bottom" style="white-space: nowrap;"><span class="main"><a href="<?php echo $this->config['base_url']?>"class="main"><?php echo $this->config['wacko_name'] ?></a></span></td>
     <td width="100%"><div align="right"><?php
 // Opens Search form
-echo $this->form_open("", $this->get_translation("TextSearchPage"), "get");
+echo $this->form_open("", $this->get_translation('TextSearchPage'), "get");
 
 // Searchbar
 ?>
-<span class="searchbar nobr"><label for="phrase"><?php echo $this->get_translation("SearchText"); ?></label><input
-	type="text" name="phrase" id="phrase" size="15" /><input class="submitinput" type="submit" title="<?php echo $this->get_translation("SearchButtonText") ?>" alt="<?php echo $this->get_translation("SearchButtonText") ?>" value="»"/></span>
+<span class="searchbar nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label><input
+	type="text" name="phrase" id="phrase" size="15" /><input class="submitinput" type="submit" title="<?php echo $this->get_translation('SearchButtonText') ?>" alt="<?php echo $this->get_translation('SearchButtonText') ?>" value="»"/></span>
 <?php
 
 // Search form close
@@ -113,16 +113,16 @@ echo $this->form_close();
   <tr bgcolor="#85a43c">
     <td height="20" colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td><div class="navText"><strong><?php echo $this->compose_link_to_page($this->config['root_page']);?>:</strong> <?php echo $this->get_page_path(); ?> <a title="<?php echo $this->get_translation("SearchTitleTip")?>"
-     href="<?php echo $this->config['base_url'].$this->get_translation("TextSearchPage").($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></div></td>
+          <td><div class="navText"><strong><?php echo $this->compose_link_to_page($this->config['root_page']);?>:</strong> <?php echo $this->get_page_path(); ?> <a title="<?php echo $this->get_translation('SearchTitleTip')?>"
+     href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></div></td>
           <td align="right"><?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user()) {
 ?>
-            <span class="nobr"><?php echo $this->get_translation("YouAre")." ".$this->link($this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
+            <span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
             <?php
-      echo $this->compose_link_to_page($this->get_translation("YouArePanelLink"), "", $this->get_translation("YouArePanelAccount"), 0); ?>
-            | <a onclick="return confirm('<?php echo $this->get_translation("LogoutAreYouSure");?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation("LogoutLink"); ?></a></span> )</small>
+      echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), "", $this->get_translation('YouArePanelAccount'), 0); ?>
+            | <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span> )</small>
             <?php
 // Else Wacko shows login's controls
 }
@@ -165,9 +165,9 @@ echo "</li></ul></div>";
 		echo '<br />';
        if ($this->get_user()) {
 			if (!in_array($this->tag, $this->get_bookmark_links())) {?>
-            <a href="<?php echo $this->href('', '', "addbookmark=yes")?>"> <img src="<?php echo $this->config['theme_url'] ?>icons/bookmark1.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->get_translation("Bookmarks"); ?> </a>
+            <a href="<?php echo $this->href('', '', "addbookmark=yes")?>"> <img src="<?php echo $this->config['theme_url'] ?>icons/bookmark1.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->get_translation('Bookmarks'); ?> </a>
             <?php } else { ?>
-            <a href="<?php echo $this->href('', '', "removebookmark=yes")?>"> <img src="<?php echo $this->config['theme_url'] ?>icons/bookmark2.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->get_translation("Bookmarks");
+            <a href="<?php echo $this->href('', '', "removebookmark=yes")?>"> <img src="<?php echo $this->config['theme_url'] ?>icons/bookmark2.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->get_translation('Bookmarks');
 ?> </a>
             <?php
 }
@@ -181,13 +181,13 @@ echo "</div>";
               <?php
         					#    if ($this->user_is_owner()) {
 		                    #   		echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
-							#		print($this->get_translation("YouAreOwner"));
+							#		print($this->get_translation('YouAreOwner'));
 							#    } else {
 		                    #  		echo "<hr noshade=\"noshade\" size=\"1\" />";
 							#    	if ($owner = $this->get_page_owner()) {
-							#        print($this->get_translation("Owner").": ".$this->link($owner));
+							#        print($this->get_translation('Owner').": ".$this->link($owner));
 							#      } else if (!$this->page['comment_on_id']) {
-							#        print($this->get_translation("Nobody").($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation("TakeOwnership")."</a>)" : ""));
+							#        print($this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)" : ""));
 							#      }
 
 							# }

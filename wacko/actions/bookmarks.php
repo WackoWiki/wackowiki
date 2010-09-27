@@ -93,7 +93,7 @@ if ($user)
 
 	if ($_bookmarks)
 	{
-		// echo "<h4>".$this->get_translation("YourBookmarks")."</h4>";
+		// echo "<h4>".$this->get_translation('YourBookmarks')."</h4>";
 
 		// user is logged in; display config form
 		echo $this->form_open();

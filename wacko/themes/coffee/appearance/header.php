@@ -27,10 +27,10 @@ if ($this->method != 'show' || $this->page['latest'] == "0" || $this->page['noin
 	<link media="print" rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
 	<link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" />
 	<link title="<?php echo $this->config['root_page'];?>" href="<?php echo $this->config['base_url'];?>" rel="start"/>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentChangesRSS");?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentCommentsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("RecentNewsRSS");?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation("HistoryRevisionsRSS");?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentChangesRSS');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentCommentsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentNewsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('HistoryRevisionsRSS');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -85,28 +85,28 @@ else if ($this->has_access('write'))
 ?>
 <body onload="all_init();">
 
-	<?php echo $this->form_open("", $this->get_translation("LoginPage"), "post"); ?>
+	<?php echo $this->form_open("", $this->get_translation('LoginPage'), "post"); ?>
 <input type="hidden" name="action" value="login" />
 
 <div class="header">
-<div class="user"><?php if ($this->get_user()) { ?> <span class="nobr"><?php echo $this->get_translation("YouAre"); ?>
+<div class="user"><?php if ($this->get_user()) { ?> <span class="nobr"><?php echo $this->get_translation('YouAre'); ?>
 <img
 	src="<?php echo $this->config['theme_url'] ?>icons/user.gif"
 	width="12" height="12" border="0" style="vertical-align: baseline;"
 	alt="" /><?php echo $this->link($this->get_user_name()) ?></span><br />
-<span class="small">( <span class="nobr Tune"><?php echo $this->compose_link_to_page($this->get_translation("YouArePanelLink"), "", $this->get_translation("YouArePanelAccount"), 0); ?>
+<span class="small">( <span class="nobr Tune"><?php echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), "", $this->get_translation('YouArePanelAccount'), 0); ?>
 | <a
-	onclick="return confirm('<?php echo $this->get_translation("LogoutAreYouSure");?>');"
-	href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation("LogoutLink"); ?></a></span>
+	onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');"
+	href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span>
 )</span> <?php } else { ?> <span class="nobr"><input type="hidden"
-	name="goback" value="<?php echo $this->slim_url($this->tag);?>" /><strong><?php echo $this->get_translation("LoginWelcome") ?>:&nbsp;</strong><input
-	type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->get_translation("LoginPassword") ?>:&nbsp;<input
+	name="goback" value="<?php echo $this->slim_url($this->tag);?>" /><strong><?php echo $this->get_translation('LoginWelcome') ?>:&nbsp;</strong><input
+	type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->get_translation('LoginPassword') ?>:&nbsp;<input
 	type="password" name="password" class="login" size="8" />&nbsp;<input
 	type="submit" value="Ok" /></span> <?php } ?></div>
 <div class="title"><?php echo $this->config['wacko_name'] ?>: <?php echo $this->get_page_path(); ?>
 <a class="Search"
-	title="<?php echo $this->get_translation("SearchTitleTip")?>"
-	href="<?php echo $this->config['base_url'].$this->get_translation("TextSearchPage").($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
+	title="<?php echo $this->get_translation('SearchTitleTip')?>"
+	href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
 </div>
 </div>
 
@@ -130,12 +130,12 @@ else if ($this->has_access('write'))
 				echo '<li><a href="'. $this->href('', '', "addbookmark=yes")
 					.'"><img src="'. $this->config['theme_url']
 					.'icons/bookmark1.gif" alt="+" title="'.
-					$this->get_translation("AddToBookmarks") .'"/></a></li>';
+					$this->get_translation('AddToBookmarks') .'"/></a></li>';
 			else
 				echo '<li><a href="'. $this->href('', '', "removebookmark=yes")
 					.'"><img src="'. $this->config['theme_url']
 					.'icons/bookmark2.gif" alt="-" title="'.
-					$this->get_translation("RemoveFromBookmarks") .'"/></a></li>';
+					$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
 			}
 	echo "\n</ol></div>"; ?><br style="clear: both;"></div>
 
