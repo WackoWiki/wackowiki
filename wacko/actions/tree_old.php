@@ -3,16 +3,16 @@ if (!isset($page)) $page = $this->page['tag'];
 $root = (isset($vars[$page]) ? $vars[$page] : '');
 
 // input
-if (!isset($owner)) $owner = "";
+if (!isset($owner)) $owner = '';
 $owner_id = $this->get_user_id_by_name($owner);
-if (!isset($nomark)) $nomark = "";
-if (!isset($abc)) $abc = "";
-if (!isset($filter)) $filter = "";
+if (!isset($nomark)) $nomark = '';
+if (!isset($abc)) $abc = '';
+if (!isset($filter)) $filter = '';
 if (!isset($style)) $style="indent";
 if (!isset($root) && !isset($page))
 					$root = "/".$this->page['tag'];
 if ($page)			$root = $page;
-if ($root == "/") 	$root = "";
+if ($root == "/") 	$root = '';
 if ($root) 			$root = $this->unwrap_link($root);
 
 if (!isset($depth)) $depth = 0;
@@ -71,7 +71,7 @@ if (!function_exists('create_cluster_tree'))
 			if ($depth > 0)
 			{
 				//We have to calculate tag for this supertag
-				$sub_tag = "";
+				$sub_tag = '';
 				$exists = 0;
 
 				if ($tree_pages_array[$sub_supertag])
@@ -140,7 +140,7 @@ if (!function_exists('print_cluster_tree'))
 		{
 			ksort ( $tree, SORT_STRING );
 
-			static $letter = "";
+			static $letter = '';
 			static $need_letter = 0;
 			static $newletter = "!";
 
@@ -261,7 +261,7 @@ if ($pages)
 		$page_id_list[] = $page['page_id'];
 	}
 
-	$acl_str = "";
+	$acl_str = '';
 
 	//Constituent line request for acl
 	for ($i = 0; $i < count($page_id_list); $i++)

@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($max)) $max = "";
+if (!isset($max)) $max = '';
 
 if ($user_id = $this->get_user_id())
 {

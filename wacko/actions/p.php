@@ -6,14 +6,14 @@
 	}}
 */
 
-$name = "";
-$style = "";
-$start_depth = "";
-$end_depth = "";
-$numerate = "";
-$link = "";
+$name = '';
+$style = '';
+$start_depth = '';
+$end_depth = '';
+$numerate = '';
+$link = '';
 
-$page = ""; $ppage="";
+$page = ''; $ppage="";
 $context = $this->tag;
 $_page = $this->page;
 

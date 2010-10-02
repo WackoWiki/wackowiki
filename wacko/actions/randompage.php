@@ -10,8 +10,8 @@ Random Page Action
  }}
  */
 
-if (!isset($for)) $for = "";
-if (!isset($page)) $page = "";
+if (!isset($for)) $for = '';
+if (!isset($page)) $page = '';
 if (!isset($max)) $max = 500;
 
 if ($page) $for = $page;

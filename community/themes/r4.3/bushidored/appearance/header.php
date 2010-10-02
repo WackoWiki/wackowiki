@@ -127,7 +127,7 @@ if ($this->get_user()) { ?>
   <div class="nobr"> <br />
     <?php
 // Begin Login form
-echo $this->form_open("", $this->get_translation('LoginPage'), "post"); ?>
+echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
     <input type="hidden" name="action" value="login" />
     <input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag);?>" />
     <?php echo $this->get_translation('LoginWelcome') ?>:<br />
@@ -201,7 +201,7 @@ if ($this->is_admin()){
 }
 // Searchbar
 // Opens Search form
-echo $this->form_open("", $this->get_translation('TextSearchPage'), "get"); ?>
+echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
   <p><?php echo $this->get_translation('SearchText') ?><br />
     <input type="text" name="phrase" size="15" class="searchbar" alt="searchbar" />
   </p>

@@ -7,14 +7,14 @@
 //								useful with "moderation='true'".
 //								Default: null
 
-$moderation = "";
-$stop_mod = "";
-$error = "";
-$message = "";
-$mode_file = "";
-$topic = "";
-$plural = "";
-$startmod = "";
+$moderation = '';
+$stop_mod = '';
+$error = '';
+$message = '';
+$mode_file = '';
+$topic = '';
+$plural = '';
+$startmod = '';
 
 // create polls object
 $this->use_class("polls");

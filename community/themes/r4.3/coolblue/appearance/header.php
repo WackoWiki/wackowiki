@@ -83,7 +83,7 @@ else if($this->has_access('write'))
 <div id="head">
   <?php
 // Searchbar
-echo $this->form_open("", $this->get_translation('TextSearchPage'), "get"); ?>
+echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
   <input name="phrase" type="text" id="search" />
   <?php
 // Search form close
@@ -132,7 +132,7 @@ if ($this->get_user()) { ?>
   <br />
   <?php
 // Begin Login form
-echo $this->form_open("", $this->get_translation('LoginPage'), "post"); ?>
+echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
   <input type="hidden" name="action" value="login" />
   <input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag);?>" />
   <?php echo $this->get_translation('LoginWelcome') ?>:<br />

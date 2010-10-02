@@ -1,9 +1,9 @@
 <?php
 
-if (!isset($isimage)) $isimage = "";
-if (!isset($isplain)) $isplain = "";
-if (!isset($desc))$desc  = "";
-$error = "";
+if (!isset($isimage)) $isimage = '';
+if (!isset($isplain)) $isplain = '';
+if (!isset($desc))$desc  = '';
+$error = '';
 $file404 = "images/upload404.gif";
 $file403 = "images/upload403.gif";
 

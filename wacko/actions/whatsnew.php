@@ -1,9 +1,9 @@
 <?php
 
-if (!isset($max)) $max = "";
-if (!isset($noxml)) $noxml = "";
-if (!isset($printed)) $printed = "";
-if (!isset($curday)) $curday = "";
+if (!isset($max)) $max = '';
+if (!isset($noxml)) $noxml = '';
+if (!isset($printed)) $printed = '';
+if (!isset($curday)) $curday = '';
 
 if (!$max || $max > 100) $max = 100;
 
@@ -67,7 +67,7 @@ if ($pages = array_merge($pages1, $pages2))
 		else
 			$access = true;
 
-		if (!isset($printed[$page['tag']])) $printed[$page['tag']] = "";
+		if (!isset($printed[$page['tag']])) $printed[$page['tag']] = '';
 
 		if ($access && ($printed[$page['tag']] != $page['date']) && ($count++ < $max))
 		{

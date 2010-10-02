@@ -10,7 +10,7 @@
 if (!isset($_POST["_to"]))
 {
 	// show FORM
-	echo $this->form_open("", "", "post", "", " enctype='multipart/form-data' ");
+	echo $this->form_open('', '', 'post', '', ' enctype="multipart/form-data" ');
 	?>
 
 <div class="cssform">

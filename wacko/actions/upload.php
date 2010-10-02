@@ -35,7 +35,7 @@ if ($registered
 )
 {
 	// displaying
-	echo $this->form_open('upload', '', 'post', '', " enctype='multipart/form-data' ");
+	echo $this->form_open('upload', '', 'post', '', ' enctype="multipart/form-data" ');
 
 	if ($maxsize)
 	echo "<input type=\"hidden\" name=\"maxsize\" value=\"".floor(1 * $maxsize)."\" />";

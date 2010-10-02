@@ -31,12 +31,12 @@ if ($this->has_access('read'))
 
 		if ($numOfSlashes == substr_count($tag, "/"))
 		{
-			$tag = "";
+			$tag = '';
 		}
 		else
 		{
 			$_tag = explode("/", $tag);
-			$tag = "";
+			$tag = '';
 
 			for ($i = 0; $i < count($_tag); $i++)
 			{

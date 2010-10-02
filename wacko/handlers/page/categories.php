@@ -13,9 +13,9 @@
 <br />
 <?php
 
-$selected = "";
-$group = "";
-$options = "";
+$selected = '';
+$group = '';
+$options = '';
 
 // redirect to show method if page don't exists
 if (!$this->page) $this->redirect($this->href('show'));
@@ -300,7 +300,7 @@ if ($this->user_is_owner() || $this->is_admin())
 	// print categories list
 	if (is_array($categories))
 	{
-		$i = "";
+		$i = '';
 
 		foreach ($categories as $id => $word)
 		{

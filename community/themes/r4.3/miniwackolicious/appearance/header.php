@@ -110,7 +110,7 @@ else if($this->has_access('write'))
                 </ul>
 
                 <div class="search">
-                    <?php echo $this->form_open("", $this->get_translation('TextSearchPage'), "get"); ?>
+                    <?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
                         <fieldset>
                             <label for="phrase">Search: </label>
                             <input name="phrase" id="phrase" size="15" class="textinput" type="text"/>

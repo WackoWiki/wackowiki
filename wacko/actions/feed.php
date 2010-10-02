@@ -23,10 +23,10 @@
 //   * local image cache
 //   * feed_acl
 
-if (!isset($nomark)) $nomark = "";
-if (!isset($title)) $title = "";
-if (!isset($max)) $max = "";
-if (!isset($time)) $time = "";
+if (!isset($nomark)) $nomark = '';
+if (!isset($title)) $title = '';
+if (!isset($max)) $max = '';
+if (!isset($time)) $time = '';
 
 // Include SimplePie
 include_once("lib/SimplePie/simplepie.class.php");

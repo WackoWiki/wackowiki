@@ -1,6 +1,6 @@
 <?php
 
-$root = "";
+$root = '';
 include("actions/wanted.php")
 
 ?>

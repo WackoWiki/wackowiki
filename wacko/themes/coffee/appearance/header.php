@@ -85,7 +85,7 @@ else if ($this->has_access('write'))
 ?>
 <body onload="all_init();">
 
-	<?php echo $this->form_open("", $this->get_translation('LoginPage'), "post"); ?>
+	<?php echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
 <input type="hidden" name="action" value="login" />
 
 <div class="header">

@@ -220,7 +220,7 @@ class Polls
 	// print survey results
 	function ShowPollResults($id)
 	{
-		$total = "";
+		$total = '';
 
 		// load poll data
 		$header		= $this->GetPollTitle($id);

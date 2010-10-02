@@ -17,7 +17,7 @@ if (!empty($this->config['news_cluster']))
 	if (!isset($limit))	$limit = 10;
 	else				$limit = (int)$limit;
 
-	$pages = "";
+	$pages = '';
 	$prefix			= $this->config['table_prefix'];
 	$newscluster	= $this->config['news_cluster'];
 	$newslevels		= $this->config['news_levels'];

@@ -67,7 +67,7 @@ if (isset($_POST["_user_bookmarks"]))
 	}
 	else if (isset($_POST['delete_bookmarks']))
 	{
-		$deletion = "";
+		$deletion = '';
 		foreach( $object->data['user_menu'] as $item )
 		{
 			if (isset($_POST["delete_".$item['bookmark_id']]))

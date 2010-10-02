@@ -70,7 +70,7 @@ if ($this->has_access('read'))
 				$latest = $this->load_page($this->tag);
 				?>
 				<br />
-				<?php echo $this->form_open("edit") ?>
+				<?php echo $this->form_open('edit') ?>
 				<input type="hidden" name="previous" value="<?php echo $latest['modified'] ?>" />
 				<input type="hidden" name="id" value="<?php echo htmlspecialchars($this->page['page_id']) ?>" />
 				<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page['body']) ?>" />
@@ -294,7 +294,7 @@ if ($this->page)
 				foreach ($comments as $comment)
 				{
 					echo "<li id=\"".$comment['tag']."\" class=\"comment\">\n";
-					$del = "";
+					$del = '';
 					if ($this->is_admin() || $this->user_is_owner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->page['page_id'])))
 					{
 						print("<a href=\"".$this->href('remove', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/delete_comment.gif\" title=\"".$this->get_translation("DeleteCommentTip")."\" alt=\"".$this->get_translation('DeleteText')."\" align=\"right\" border=\"0\" /></a>");
@@ -332,7 +332,7 @@ if ($this->page)
 			{
 				print("<div class=\"commentform\">\n");
 
-				echo $this->form_open("addcomment"); ?>
+				echo $this->form_open('addcomment'); ?>
 					<label for="addcomment"><?php echo $this->get_translation("AddComment");?></label><br />
 					<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?></textarea>
 

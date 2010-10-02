@@ -1,8 +1,8 @@
 <div id="page">
 <?php
 
-$output = "";
-$source = "";
+$output = '';
+$source = '';
 
 if (!function_exists('handler_diff_load_page_by_id'))
 {

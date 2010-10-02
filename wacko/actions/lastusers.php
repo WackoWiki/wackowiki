@@ -1,7 +1,7 @@
 <?php
 
-if (!isset($stat)) $stat = "";
-if (!isset($max)) $max = "";
+if (!isset($stat)) $stat = '';
+if (!isset($max)) $max = '';
 
 if (isset($stat) && $stat == 0)
 	$limit = 1000;

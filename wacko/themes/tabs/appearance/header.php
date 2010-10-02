@@ -85,7 +85,7 @@ else if ($this->has_access('write'))
 ?>
 <body onload="all_init();">
 <div class="Top<?php if (!$this->get_user()) echo "LoggedOut";?>">
-  <div class="TopRight"><?php echo $this->form_open("", $this->get_translation('TextSearchPage'), "get"); ?> <span class="nobr"> <?php echo $this->compose_link_to_page($this->config['root_page']) ?>&nbsp;|&nbsp; <?php echo $this->format($this->format(str_replace("\n", '&nbsp;|&nbsp;', $this->get_default_bookmarks($user['lang'], 'site'))), 'post_wacko'); ?></span> | <?php echo $this->get_translation('SearchText') ?>
+  <div class="TopRight"><?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?> <span class="nobr"> <?php echo $this->compose_link_to_page($this->config['root_page']) ?>&nbsp;|&nbsp; <?php echo $this->format($this->format(str_replace("\n", '&nbsp;|&nbsp;', $this->get_default_bookmarks($user['lang'], 'site'))), 'post_wacko'); ?></span> | <?php echo $this->get_translation('SearchText') ?>
     <input name="phrase" size="15" class="ShSearch" />
     <?php echo $this->form_close(); ?> </div>
   <div class="TopLeft">
@@ -102,7 +102,7 @@ echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), "", 
     <table cellspacing="0" cellpadding="0" border="0">
       <tr>
         <td>
-        	<?php echo $this->form_open("", "Login", "post"); ?>
+        	<?php echo $this->form_open('', 'Login', 'post'); ?>
       		<input type="hidden" name="action" value="login" />
         	<img
 				src="<?php echo $this->config['theme_url'] ?>icons/norole.gif"

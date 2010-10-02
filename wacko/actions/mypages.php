@@ -1,11 +1,11 @@
 <?php
 
 // actions/mypages.php
-if (!isset($bydate)) $bydate = "";
-if (!isset($max)) $max = "";
-if (!isset($bychange)) $bychange = "";
-$curChar = "";
-$curday = "";
+if (!isset($bydate)) $bydate = '';
+if (!isset($max)) $max = '';
+if (!isset($bychange)) $bychange = '';
+$curChar = '';
+$curday = '';
 
 if ($user_id = $this->get_user_id())
 {

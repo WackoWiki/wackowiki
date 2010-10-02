@@ -2,8 +2,8 @@
 
 function array_to_str ($arr, $name="")
 {
-	if (!isset($entries)) $entries = "";
-	if (!isset($arrays)) $arrays = "";
+	if (!isset($entries)) $entries = '';
+	if (!isset($arrays)) $arrays = '';
 
 	$str = "\$wackoConfig".($name ? "[\"".$name."\"]" : "")." = array(\n";
 

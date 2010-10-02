@@ -164,7 +164,7 @@ if ($this->has_access('read') && $this->config['hide_comments'] != 1)
       {
         print("<a name=\"".$comment['tag']."\"></a>\n");
         print("<div class=\"comment\">\n");
-        $del = "";
+        $del = '';
         if ($this->is_admin() || $this->user_is_owner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->get_page_id())))
           print("<div style=\"float:right;\" style='background:#ffcfa8; border: solid 1px; border-color:#cccccc'>".
           "<a href=\"".$this->href('remove', $comment['tag'])."\" title=\"".$this->get_translation('DeleteTip')."\">".
@@ -182,7 +182,7 @@ if ($this->has_access('read') && $this->config['hide_comments'] != 1)
     {
       ?>
         <?php echo $this->get_translation("AddComment"); ?><br />
-        <?php echo $this->form_open("addcomment"); ?>
+        <?php echo $this->form_open('addcomment'); ?>
           <textarea name="body" rows="6" style="width: 95%"></textarea><br />
           <input type="submit" value="<?php echo $this->get_translation("AddCommentButton"); ?>" accesskey="s" />
         <?php echo $this->form_close(); ?>
@@ -228,7 +228,7 @@ if ($this->has_access('read') && $this->config['hide_comments'] != 1)
 <!-- !!! -->
 <?php
 // Opens Search form
-echo $this->form_open("", $this->get_translation('TextSearchPage'), "get"); ?>
+echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
 <div class="footer">
 <?php
 

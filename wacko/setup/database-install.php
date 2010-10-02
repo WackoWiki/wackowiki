@@ -272,7 +272,7 @@ switch($config['database_driver'])
 			print("         </ul>\n");
 			print("         <br />\n");
 
-			if ( !isset ( $config['wacko_version'] ) ) $config['wacko_version'] = "";
+			if ( !isset ( $config['wacko_version'] ) ) $config['wacko_version'] = '';
 			if (!$version = trim($config['wacko_version'])) $version = "0";
 			if ( isset ( $config['wacko_version'] ) )
 			if ( trim ( $config['wacko_version'] ) ) $version = trim($config['wacko_version']);
@@ -881,7 +881,7 @@ switch($config['database_driver'])
 					}
 					break;
 							default:
-								$dsn = "";
+								$dsn = '';
 								switch($config['database_driver'])
 								{
 									case "firebird":

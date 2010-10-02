@@ -118,7 +118,7 @@ else if ($user = $this->get_user())
 		$this->log(6, str_replace("%1", $user['user_name'], $this->get_translation("LogUserSettingsUpdate", $this->config['language'])));
 	}
 
-	$email_changed = "";
+	$email_changed = '';
 
 	// (re)send email confirmation code
 	if ((isset($_GET['resend_code']) && $_GET['resend_code'] == 1) || $email_changed === true)

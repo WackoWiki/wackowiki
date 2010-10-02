@@ -2,10 +2,10 @@
 
 // {{MyChanges [max="Number"] [bydate="1"]}}
 
-if (!isset($bydate)) $bydate = "";
-if (!isset($max)) $max = "";
-$curChar = "";
-$curday = "";
+if (!isset($bydate)) $bydate = '';
+if (!isset($max)) $max = '';
+$curChar = '';
+$curday = '';
 
 if ($user_id = $this->get_user_id())
 {
@@ -57,7 +57,7 @@ if ($user_id = $this->get_user_id())
 				}
 				else
 				{
-					$edit_note = "";
+					$edit_note = '';
 				}
 
 				// print entry

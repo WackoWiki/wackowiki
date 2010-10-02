@@ -92,7 +92,7 @@ else if($this->has_access('write'))
       <li><a href="#content">zum Seiteninhalt spingen</a></li>
       <li><a href="#navigation">zur Navigation springen</a></li>
       <?php // Opens Search form ?>
-      <li id="search"><?php echo $this->form_open("", $this->get_translation('TextSearchPage'), "get"); ?>
+      <li id="search"><?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
         <fieldset>
         <label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label>
         <input type="text" name="phrase" id="phrase" size="15" class="textinput" />
@@ -168,7 +168,7 @@ echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), "", 
 else
    {
    // Begin Login form
-	echo $this->form_open("", $this->get_translation('LoginPage'), "post"); ?>
+	echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
       <input type="hidden" name="action" value="login" />
    <span class="nobr"><input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag);?>" /><strong><strong><?php echo $this->get_translation('LoginWelcome') ?></strong>:&nbsp;</strong>
    <input type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->get_translation('LoginPassword') ?>:&nbsp;<input type="password" name="password" class="login" size="8" />&nbsp;<input type="image" src="<?php echo $this->config['theme_url'] ?>icons/login.gif" alt=">>>" style="vertical-align:top" /></span> <?php

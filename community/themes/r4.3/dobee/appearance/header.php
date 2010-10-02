@@ -87,7 +87,7 @@ else if($this->has_access('write'))
 			title="<?php echo $this->get_translation('SearchTitleTip')?>"
 			href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
 		</td>
-		<td class="searchArea" align="right" valign="bottom"><?php echo $this->form_open("", $this->get_translation('TextSearchPage'), "get"); ?>
+		<td class="searchArea" align="right" valign="bottom"><?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
 		<input name="phrase" type="text"
 			style="border: none; border-bottom: 1px solid #FFFFFF; padding: 0px; margin: 0px; background-color: #FFFFFF;"
 			size="21" /> <?php echo $this->form_close(); ?></td>
@@ -229,7 +229,7 @@ else if($this->has_access('write'))
 			</tr>
 		</table>
 		</td>
-		<td><!-- wrapper --> <?php echo $this->form_open("", $this->get_translation('LoginPage'), "post"); ?>
+		<td><!-- wrapper --> <?php echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
 		<input type="hidden" name="action" value="login" />
 
 		<div class="header"><?php echo ($this->iswatched === true

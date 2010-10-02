@@ -35,7 +35,7 @@ class RSS
 	{
 		$limit	= 30;
 		$name	= "changes";
-		$count	= "";
+		$count	= '';
 
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->get_charset()."\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
@@ -189,7 +189,7 @@ class RSS
 	{
 		$limit	= 20;
 		$name	= "comments";
-		$count	= "";
+		$count	= '';
 
 		// build output
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->get_charset()."\"?>\n";

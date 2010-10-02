@@ -9,9 +9,9 @@
 //					or vertical.
 //					Default: "h"
 
-$align = "";
-$results = "";
-$vote = "";
+$align = '';
+$results = '';
+$vote = '';
 
 // create polls object
 $this->use_class("polls");

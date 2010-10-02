@@ -1,11 +1,11 @@
 <?php
 
-if (!isset($topic)) $topic = "";
-if (!isset($title)) $title = "";
-if (!isset($filter)) $filter = "";
-if (!isset($style)) $style = "";
-if (!isset($nomark)) $nomark = "";
-if (!isset($for)) $for = "";
+if (!isset($topic)) $topic = '';
+if (!isset($title)) $title = '';
+if (!isset($filter)) $filter = '';
+if (!isset($style)) $style = '';
+if (!isset($nomark)) $nomark = '';
+if (!isset($for)) $for = '';
 
 if (!function_exists('FullTextSearch'))
 {
@@ -52,13 +52,13 @@ if (!isset($clean)) $clean = false;
 if (isset($vars[$for])) $phrase = $vars[$for];
 else
 {
-	$phrase = "";
+	$phrase = '';
 	$form = 1;
 }
 
 if ($form)
 {
-	echo $this->form_open("", "", "get") ?>
+	echo $this->form_open('', '', 'get') ?>
 
 <label for="searchfor"><?php echo $this->get_translation("SearchFor");?></label>
 :&nbsp;
@@ -148,7 +148,7 @@ if ($phrase)
 function getLineWithPhrase($phrase, $string, $cleanup)
 {
 	$lines = explode("\n", $string);
-	$result = "";
+	$result = '';
 	foreach ($lines as $line)
 	{
 		if (strpos($line, $phrase))

@@ -59,7 +59,7 @@ if ($this->method == 'edit')
 <?php
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
-$doubleclick = "";
+$doubleclick = '';
 if ($user = $this->get_user())
 {
 	if ($user['doubleclick_edit'] == "1")
@@ -313,7 +313,7 @@ else
 <div id="search">
 <?php
 // Opens Search form
-echo $this->form_open("", $this->get_translation('TextSearchPage'), "get");
+echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
 
 // Searchbar
 ?>

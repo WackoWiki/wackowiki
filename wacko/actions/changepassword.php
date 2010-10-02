@@ -195,7 +195,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 			// reinitialize user session
 			$this->logout_user();
 			$this->set_bookmarks(BM_DEFAULT);
-			$this->context[++$this->current_context] = "";
+			$this->context[++$this->current_context] = '';
 
 			// log event
 			$this->log(3, str_replace("%1", $user['user_name'], $this->get_translation("LogUserPasswordChanged", $this->config['language'])));

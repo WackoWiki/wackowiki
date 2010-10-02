@@ -168,7 +168,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 				}
 
 				// forward
-				$this->page_cache[$this->supertag] = "";
+				$this->page_cache[$this->supertag] = '';
 
 				if ($this->page['comment_on_id'] != 0)
 				{
@@ -204,7 +204,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 		$this->set_message("<div class=\"error\">$error</div>\n");
 
 	// "cf" attribute: it is for so called "critical fields" in the form. It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog "You are going to leave this page, but there are some changes you made but not saved yet." Is used by this script to determine which changes it need to monitor.
-	$output .= $this->form_open("edit", "", "post", "edit", " cf='true' ");
+	$output .= $this->form_open('edit', '', 'post', 'edit', ' cf="true" ');
 
 	if (isset($_REQUEST['add']))
 		$output .=	'<input name="lang" type="hidden" value="'.$this->pagelang.'" />'.
@@ -213,8 +213,8 @@ if ($this->has_access('write') && $this->has_access('read'))
 
 	print($output);
 
-	$output		= "";
-	$preview	= "";
+	$output		= '';
+	$preview	= '';
 
 	// preview?
 	if (isset($_POST["preview"]))
@@ -243,7 +243,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 		print($output);
 
 		// edit
-		$output = "";
+		$output = '';
 		#$title	= $_POST['title'];
 	}
 

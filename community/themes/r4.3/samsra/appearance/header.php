@@ -107,7 +107,7 @@ Commented by Roman Ivanov.
 */
 
 // Opens Search form
-echo $this->form_open("", $this->get_translation('TextSearchPage'), "get"); ?>
+echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
 <div align="right">
 <?php
 // Searchbar
@@ -124,7 +124,7 @@ echo $this->form_close();
 </table>
 <?php
 // Begin Login form
-echo $this->form_open("", $this->get_translation('LoginPage'), "post"); ?>
+echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
       <input type="hidden" name="action" value="login" />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>

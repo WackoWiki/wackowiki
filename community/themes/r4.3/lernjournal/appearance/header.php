@@ -85,7 +85,7 @@ else if($this->has_access('write'))
   <div id="wikititle"><?php echo $this->config['wacko_name'] ?></div>
   <?php
 // Searchbar
-echo $this->form_open("", $this->get_translation('TextSearchPage'), "get"); ?>
+echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
   <div id="search"><?php echo $this->get_translation('SearchText') ?><input name="phrase" type="text" size="12" style="border: none; padding: 0px; margin: 0px;" /></div>
   <?php
 // Search form close
@@ -130,7 +130,7 @@ if ($this->get_user()) { ?>
 ?><br />
   <?php
 // Begin Login form
-echo $this->form_open("", $this->get_translation('LoginPage'), "post"); ?>
+echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
   <input type="hidden" name="action" value="login" />
   <input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag);?>" />
   <?php echo $this->get_translation('LoginWelcome') ?>:<br />
