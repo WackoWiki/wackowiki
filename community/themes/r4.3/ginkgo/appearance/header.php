@@ -88,7 +88,7 @@ else if($this->has_access('write'))
     <td width="378" valign="bottom" style="white-space: nowrap;"><span class="main"><a href="<?php echo $this->config['base_url']?>"class="main"><?php echo $this->config['wacko_name'] ?></a></span></td>
     <td width="100%"><div align="right"><?php
 // Opens Search form
-echo $this->form_open("", $this->get_translation('TextSearchPage'), "get");
+echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
 
 // Searchbar
 ?>

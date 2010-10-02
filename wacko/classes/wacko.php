@@ -3496,7 +3496,7 @@ class Wacko
 
 	function get_user_bookmarks($user_id)
 	{
-		$user_bm = "";
+		$user_bm = '';
 
 		// avoid results if $user_id is 0 (user does not exists)
 		if ($user_id)
@@ -3584,7 +3584,7 @@ class Wacko
 						"bm_title		= '".quote($this->dblink, $title)."', ".
 						"bm_position		= '".quote($this->dblink, ($key + 1))."' ");
 				}
-				$bm_lang = "";
+				$bm_lang = '';
 			}
 		}
 	}
@@ -3989,8 +3989,8 @@ class Wacko
 		{
 			if (stristr($_SERVER['HTTP_USER_AGENT'], $engine))
 			{
-				$this->resource['OuterLink2']	= "";
-				$this->resource['outericon']	= "";
+				$this->resource['OuterLink2']	= '';
+				$this->resource['outericon']	= '';
 			}
 		}
 

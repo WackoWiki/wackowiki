@@ -12,7 +12,7 @@ if ($max) $limit = $max;
 
 $offset = ( isset($_GET["offset"]) ) ? (int)$_GET["offset"] : 0;
 if(!$limit) $limit = 50;
-if (!isset($letter)) $letter = "";
+if (!isset($letter)) $letter = '';
 if(isset($letter)) $letter = strtoupper(substr($letter, 0, 1));
 
 // Get tags for all the pages, even if they're not being displayed on this index page
@@ -21,9 +21,9 @@ $pages = $this->load_all($sql, 1);
 
 $total = 0;
 $total_visible = 0;
-$top_links = "";
+$top_links = '';
 $top_links_array = array();
-$page_links = "";
+$page_links = '';
 $letter_count = 0;
 
 $page_links .= "<ul>\n";

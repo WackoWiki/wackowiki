@@ -1,8 +1,8 @@
 <div id="page">
 <?php
 
-$max = "";
-$output = "";
+$max = '';
+$output = '';
 
 // redirect to show method if page don't exists
 #if (!$this->page) $this->redirect($this->href('show'));
@@ -32,8 +32,8 @@ if ($this->has_access('read'))
 	// load revisions for this page
 	if ($pages = $this->load_revisions($this->page['page_id'], $hide_minor_edit))
 	{
-		$this->context[++$this->current_context] = "";
-		$output .= $this->form_open("diff", "", "get");
+		$this->context[++$this->current_context] = '';
+		$output .= $this->form_open('diff', '', 'get');
 		$output .= "<p>\n";
 		$output .= "<input type=\"submit\" value=\"".$this->get_translation("ShowDifferencesButton")."\" />";
 		#$output .= "<input type=\"button\" value=\"".$this->get_translation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
@@ -67,7 +67,7 @@ if ($this->has_access('read'))
 			}
 			else
 			{
-				$edit_note = "";
+				$edit_note = '';
 			}
 
 			if (++$c <= $max || !$max)

@@ -78,7 +78,7 @@ else if($this->has_access('write'))
 			<a class="Search" title="<?php echo $this->get_translation('SearchTitleTip')?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
 		</td>
 	  	<td class="searchArea" align="right" valign="bottom">
-			<?php echo $this->form_open("", $this->get_translation('TextSearchPage'), "get"); ?>
+			<?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
 			<?php echo $this->get_translation('SearchText') ?>
 			<input type="text" name="phrase" size="15" style="border: none; border-bottom: 1px solid #CCCCAA; padding: 0px; margin: 0px;" />
 			<?php echo $this->form_close(); ?>
@@ -206,7 +206,7 @@ echo $this->page['modified'] ? "<a href=\"".$this->href('revisions')."\" title=\
 		<td>
 <!-- wrapper -->
 
-<?php echo $this->form_open("", $this->get_translation('LoginPage'), "post"); ?>
+<?php echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
 <input type="hidden" name="action" value="login" />
 
 <div class="header">

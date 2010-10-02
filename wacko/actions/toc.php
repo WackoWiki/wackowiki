@@ -4,13 +4,13 @@
 */
 // 1. check for first param (for what TOC is built)
 
-if (!isset($nomark)) $nomark = "";
-if (!isset($for)) $for = "";
-if (!isset($from)) $from = "";
-if (!isset($page)) $page = "";
-if (!isset($numerate)) $numerate = "";
-if (!isset($to)) $to = "";
-if (!isset($title)) $title = "";
+if (!isset($nomark)) $nomark = '';
+if (!isset($for)) $for = '';
+if (!isset($from)) $from = '';
+if (!isset($page)) $page = '';
+if (!isset($numerate)) $numerate = '';
+if (!isset($to)) $to = '';
+if (!isset($title)) $title = '';
 
 if ($for) $page = $for;
 if ($page)

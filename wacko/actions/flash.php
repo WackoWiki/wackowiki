@@ -40,30 +40,30 @@
 	align
 	}}
 */
-if (!isset($play)) $play = "";
-if (!isset($loop)) $loop = "";
-if (!isset($menu)) $menu = "";
-if (!isset($quality)) $quality = "";
-if (!isset($scale)) $scale = "";
-if (!isset($salign)) $salign = "";
-if (!isset($wmode)) $wmode = "";
-if (!isset($bgcolor)) $bgcolor = "";
-if (!isset($base)) $base = "";
-if (!isset($swliveconnect)) $swliveconnect = "";
-if (!isset($devicefont)) $devicefont = "";
-if (!isset($allowscriptaccess)) $allowscriptaccess = "";
-if (!isset($seamlesstabbing)) $seamlesstabbing = "";
-if (!isset($allowfullscreen)) $allowfullscreen = "";
-if (!isset($allownetworking)) $allownetworking = "";
+if (!isset($play)) $play = '';
+if (!isset($loop)) $loop = '';
+if (!isset($menu)) $menu = '';
+if (!isset($quality)) $quality = '';
+if (!isset($scale)) $scale = '';
+if (!isset($salign)) $salign = '';
+if (!isset($wmode)) $wmode = '';
+if (!isset($bgcolor)) $bgcolor = '';
+if (!isset($base)) $base = '';
+if (!isset($swliveconnect)) $swliveconnect = '';
+if (!isset($devicefont)) $devicefont = '';
+if (!isset($allowscriptaccess)) $allowscriptaccess = '';
+if (!isset($seamlesstabbing)) $seamlesstabbing = '';
+if (!isset($allowfullscreen)) $allowfullscreen = '';
+if (!isset($allownetworking)) $allownetworking = '';
 
-if (!isset($url)) $url = "";
-if (!isset($width)) $width = "";
-if (!isset($height)) $height = "";
-if (!isset($name)) $name = "";
-if (!isset($version)) $version = "";
-if (!isset($id)) $id = "";
-if (!isset($styleclass)) $styleclass = "";
-if (!isset($align)) $align = "";
+if (!isset($url)) $url = '';
+if (!isset($width)) $width = '';
+if (!isset($height)) $height = '';
+if (!isset($name)) $name = '';
+if (!isset($version)) $version = '';
+if (!isset($id)) $id = '';
+if (!isset($styleclass)) $styleclass = '';
+if (!isset($align)) $align = '';
 
 if (!$url) $url = isset($vars['url']) ? $vars['url'] : "";
 $url = htmlspecialchars($url);

@@ -1,7 +1,7 @@
 <?php
 
-if (!isset($page)) $page = "";
-if (!isset($nomark)) $nomark = "";
+if (!isset($page)) $page = '';
+if (!isset($nomark)) $nomark = '';
 
 if ($page)
 	$tag = $this->unwrap_link($page);

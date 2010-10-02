@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($nomark)) $nomark = "";
+if (!isset($nomark)) $nomark = '';
 
 if (!function_exists('links_tree_view'))
 {
@@ -40,7 +40,7 @@ if (!function_exists('links_tree_view'))
 }
 
 $root = (isset($vars[0]) ? $vars[0] : NULL);
-if ($root == "/") $root = "";
+if ($root == "/") $root = '';
 if (!isset($root)) $root = $this->page['tag'];
 $root = $this->unwrap_link($root);
 

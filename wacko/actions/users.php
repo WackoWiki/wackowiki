@@ -1,10 +1,10 @@
 <?php
 
-$where = "";
-$order = "";
-$param = "";
-$groups = "";
-$usergroups = "";
+$where = '';
+$order = '';
+$param = '';
+$groups = '';
+$usergroups = '';
 
 // display user profile
 if (isset($_GET['profile']) && $_GET['profile'] == true)

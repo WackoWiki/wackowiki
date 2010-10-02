@@ -188,11 +188,11 @@ class Cache
 
 			foreach($_query as $k => $v)
 			{
-				if (!isset($query)) $query = "";
+				if (!isset($query)) $query = '';
 				$query .= urlencode($k)."=".urlencode($v)."&";
 			}
 		}
-		if (!isset($query)) $query = "";
+		if (!isset($query)) $query = '';
 		$this->log("check_http_request query=".$query);
 
 		//check cache

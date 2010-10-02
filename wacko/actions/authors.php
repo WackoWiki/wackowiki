@@ -14,9 +14,9 @@ print document and revisions' authors.
 	cluster	= consider all cluster subpages (if = 1) or current page only (0, default)
 */
 
-if (!isset($add)) $add = "";
-if (!isset($license)) $license = "";
-if (!isset($cluster)) $cluster = "";
+if (!isset($add)) $add = '';
+if (!isset($license)) $license = '';
+if (!isset($cluster)) $cluster = '';
 
 echo '<small>';
 

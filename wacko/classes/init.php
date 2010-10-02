@@ -247,7 +247,7 @@ class Init
 
 						foreach ($groups_array as $user_group_pairs)
 						{
-							if (!isset($_groups[$user_group_pairs['group_name']])) $_groups[$user_group_pairs['group_name']] = "";
+							if (!isset($_groups[$user_group_pairs['group_name']])) $_groups[$user_group_pairs['group_name']] = '';
 
 							// Then we make old fashioned UserName1\nUserName2\n lines for each group
 							$_groups[$user_group_pairs['group_name']] .= $user_group_pairs['user_name'].'\n';
@@ -296,7 +296,7 @@ class Init
 
 		// remove leading slash
 		$this->request	= preg_replace("/^\//", "", $this->request);
-		$this->method	= "";
+		$this->method	= '';
 
 		// split into page/method
 		$p = strrpos($this->request, "/");
@@ -313,7 +313,7 @@ class Init
 			if (!@file_exists($this->config['handler_path']."/page/".$this->method.".php"))
 			{
 				$this->page		= $this->request;
-				$this->method	= "";
+				$this->method	= '';
 			}
 			else if (preg_match("/^(.*?)\/(".$this->config['standard_handlers'].")($|\/(.*)$)/i", $this->page, $match))
 			{

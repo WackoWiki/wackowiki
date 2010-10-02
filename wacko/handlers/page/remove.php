@@ -1,8 +1,8 @@
 <div id="page">
 <?php
 
-$comment_on_id = "";
-$dontkeep = "";
+$comment_on_id = '';
+$dontkeep = '';
 
 // obviously do not allow to remove non-existent pages
 if (!$this->page) $this->redirect($this->href());
@@ -164,7 +164,7 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 
 			echo "</div>";
 
-			echo $this->form_open("remove");
+			echo $this->form_open('remove');
 
 			// admin privileged removal options
 			if ($this->is_admin())

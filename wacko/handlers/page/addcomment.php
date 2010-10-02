@@ -76,7 +76,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 							// defeats re-use of known image with spoofed session id
 							$_SESSION['freecap_attempts'] = 0;
 							$_SESSION['freecap_word_hash'] = false;
-							$_SESSION['freecap_old_comment'] = "";
+							$_SESSION['freecap_old_comment'] = '';
 
 							// now process form
 							$word_ok = true;

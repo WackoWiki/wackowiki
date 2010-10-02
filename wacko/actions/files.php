@@ -10,14 +10,14 @@
 	}}
  */
 
-$page_id = "";
+$page_id = '';
 
-if (!isset($nomark)) $nomark = "";
-if (!isset($order)) $order = "";
-if (!isset($global)) $global = "";
-if (!isset($tag)) $tag = "";
-if (!isset($owner)) $owner = "";
-if (!isset($page)) $page = "";
+if (!isset($nomark)) $nomark = '';
+if (!isset($order)) $order = '';
+if (!isset($global)) $global = '';
+if (!isset($tag)) $tag = '';
+if (!isset($owner)) $owner = '';
+if (!isset($page)) $page = '';
 if (!isset($pictures)) $pictures = NULL;
 
 $orderby = "filename ASC";
@@ -27,7 +27,7 @@ if ($order == "size_desc") $orderby = "filesize DESC";
 if ($order == "ext") $orderby = "file_ext ASC";
 
 if ($owner) $user_add = "AND u.user_name='".quote($this->dblink, $owner)."' ";
-else		$user_add = "";
+else		$user_add = '';
 
 // do we allowed to see?
 if (!$global)
@@ -80,7 +80,7 @@ if ($can_view)
 	$del = $this->get_translation("UploadRemove");
 
 	if (!$global)	$path = "@".$filepage['page_id']."@";
-	else			$path = "";
+	else			$path = '';
 
 	if (!$global) 	$path2 = "file:/".($this->slim_url($page))."/";
 	else			$path2 = "file:";
@@ -116,7 +116,7 @@ if ($can_view)
 		}
 		else
 		{
-			$hits	= "";
+			$hits	= '';
 		}
 
 		if ($this->is_admin() || (!isset($is_global) &&

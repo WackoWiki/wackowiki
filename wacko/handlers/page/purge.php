@@ -43,7 +43,7 @@ if ($this->user_is_owner() || $this->is_admin())
 	else
 	{
 		echo "<div class=\"warning\">".$this->get_translation("ReallyPurge")."</div><br />";
-		echo $this->form_open("purge");
+		echo $this->form_open('purge');
 ?>
 
 		<strong><?php echo $this->get_translation("SelectPurgeOptions") ?></strong><br />

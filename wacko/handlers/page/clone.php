@@ -3,7 +3,7 @@
 <br />
 <?php
 
-$output = "";
+$output = '';
 
 // redirect to show method if page don't exists
 if (!$this->page) $this->redirect($this->href('show'));
@@ -90,8 +90,8 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	else
 	{
 
-	echo $this->get_translation("CloneName");
-	print($this->form_open("clone"));
+	echo $this->get_translation('CloneName');
+	print($this->form_open('clone'));
 
 	?>
 	<input type="hidden" name="clone" value="1" />

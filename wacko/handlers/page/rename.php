@@ -106,7 +106,7 @@ if ($registered
 		else
 		{
 			echo $this->get_translation("NewName");
-			echo $this->form_open("rename");
+			echo $this->form_open('rename');
 
 			?> <input type="hidden" name="rename" value="1" /><input type="text"
 	name="newname" value="<?php echo $this->tag;?>" size="40" /><br />

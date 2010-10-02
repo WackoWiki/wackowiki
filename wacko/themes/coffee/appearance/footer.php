@@ -90,7 +90,7 @@ if ($this->page)
 </div>
 </div>
 	<div class="searchbar">
-		<?php echo $this->form_open("", $this->get_translation('TextSearchPage'), "get"); ?>
+		<?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
 			<span class="nobr"><?php echo $this->get_translation('SearchText') ?>
 				<input type="text" name="phrase" size="15" />
 			</span>

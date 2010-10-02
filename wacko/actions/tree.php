@@ -11,18 +11,18 @@ $style	= 'ul';
 // input
 if (!isset($root) && !isset($page))
 					$root	= '/'.$this->page['tag'];
-if (!isset($page)) $page = "";
+if (!isset($page)) $page = '';
 if ($page)			$root	= $page;
 if ($root == '/')	$root	= '';
 if ($root)			$root	= $this->unwrap_link($root).'/';
 
-if (!isset($depth)) $depth = "";
+if (!isset($depth)) $depth = '';
 if (!$depth || $depth < 1)
 					$depth	= 1;
 else				$depth	= (int)$depth;;
 
-if (!isset($nomark)) $nomark = "";
-if (!isset($title)) $title = "";
+if (!isset($nomark)) $nomark = '';
+if (!isset($title)) $title = '';
 
 // collect pages
 if ($pages = $this->load_all(
@@ -37,7 +37,7 @@ if ($pages = $this->load_all(
 	{
 		$maxlevel = substr_count($root, '/') + $depth;
 		reset($pages);
-		$_pages = "";
+		$_pages = '';
 
 		do
 		{

@@ -1,12 +1,12 @@
 <!--notypo-->
 <?php
 
-$user_name = "";
-$email = "";
-$password = "";
-$confpassword = "";
-$error = "";
-$word_ok = "";
+$user_name = '';
+$email = '';
+$password = '';
+$confpassword = '';
+$error = '';
+$word_ok = '';
 
 // reconnect securely in ssl mode
 if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
@@ -200,7 +200,7 @@ else if (isset($_POST['action']) && $_POST['action'] == "login")
 				$this->set_message($this->get_translation("SiteRegistered").
 					$this->config['wacko_name'].". ".
 					$this->get_translation("SiteEmailConfirm"));
-				$this->context[++$this->current_context] = "";
+				$this->context[++$this->current_context] = '';
 				$this->redirect($this->href('', $this->get_translation('LoginPage')));
 			}
 		}

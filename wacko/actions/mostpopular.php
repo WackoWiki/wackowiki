@@ -15,11 +15,11 @@
 
 // TODO: should also work with parameter 'page', but didn't
 
-if (!isset($for)) $for = "";
-if (!isset($page)) $page = "";
-if (!isset($nomark)) $nomark = "";
-if (!isset($max)) $max = "";
-if (!isset($title)) $title = "";
+if (!isset($for)) $for = '';
+if (!isset($page)) $page = '';
+if (!isset($nomark)) $nomark = '';
+if (!isset($max)) $max = '';
+if (!isset($title)) $title = '';
 if (!isset($dontrecurse)) $dontrecurse = false;
 
 if (!$max)  $max = 25;

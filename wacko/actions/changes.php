@@ -57,7 +57,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 
 			// day header
 			list($day, $time) = explode(" ", $page['modified']);
-			if (!isset($curday)) $curday = "";
+			if (!isset($curday)) $curday = '';
 
 			if ($day != $curday)
 			{
@@ -76,7 +76,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 			}
 			else
 			{
-				$edit_note = "";
+				$edit_note = '';
 			}
 
 			$viewed = ( $user['last_mark'] == true && $page['user'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' class="viewed"' : '' );

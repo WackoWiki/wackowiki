@@ -2,7 +2,7 @@
 
 // actions/mygroups.php
 
-if (!isset($nomark)) $nomark = "";
+if (!isset($nomark)) $nomark = '';
 
 if (!function_exists('MyGroups'))
 {

@@ -4,10 +4,10 @@ if (!function_exists('load_recently_commented'))
 {
 	function load_recently_commented(&$wacko, $for = "", $limit = 50)
 	{
-		$_ids = "";
+		$_ids = '';
 		$limit = (int) $limit;
-		$comments = "";
-		$pagination = "";
+		$comments = '';
+		$pagination = '';
 
 		// NOTE: this is really stupid. Maybe my SQL-Fu is too weak, but apparently there is no easier way
 		if ($ids = $wacko->load_all(
@@ -103,7 +103,7 @@ if (list ($pages, $pagination) = load_recently_commented($this, $root, (int)$max
 				// day header
 				list($day, $time) = explode(" ", $page["comment_time"]);
 
-				if (!isset($curday)) $curday = "";
+				if (!isset($curday)) $curday = '';
 				if ($day != $curday)
 				{
 					if ($curday)

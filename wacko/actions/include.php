@@ -2,12 +2,12 @@
 
 if (!isset($page))			$page = NULL;
 if (!isset($page)) return;
-if (!isset($nomark))		$nomark = "";
+if (!isset($nomark))		$nomark = '';
 
 $page = $this->unwrap_link($page);
-if (!isset($first_anchor))		$first_anchor = "";
-if (!isset($last_anchor))		$last_anchor = "";
-if (!isset($track))				$track = "";
+if (!isset($first_anchor))		$first_anchor = '';
+if (!isset($last_anchor))		$last_anchor = '';
+if (!isset($track))				$track = '';
 
 if ($_SESSION[$this->config['session_prefix'].'_'."linktracking"] && $track)
 	$this->track_link_to($page);
@@ -24,7 +24,7 @@ if (! $this->has_access('read', $page_id))
 else
 {
 	if (isset($_GET['time'])) $time = $_GET['time'];
-	else $time = "";
+	else $time = '';
 
 	if (!$inc_page = $this->load_page($page, $time))
 	{

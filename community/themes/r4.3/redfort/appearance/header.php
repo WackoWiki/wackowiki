@@ -105,7 +105,7 @@ else if($this->has_access('write'))
         <tr>
           <td align="left" valign="top" height="29"><div class="menu-top">
 <?php
-  echo $this->form_open("", $this->get_translation('LoginPage'), "post"); ?>
+  echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
 <input type="hidden" name="action" value="login" />
   <?php
 // Outputs Bookmarks AKA QuickLinks

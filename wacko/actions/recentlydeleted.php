@@ -22,7 +22,7 @@ if ($pages == true)
 		{
 			// day header
 			list($day, $time) = explode(" ", $page["date"]);
-			if (!isset($curday)) $curday = "";
+			if (!isset($curday)) $curday = '';
 
 			if ($day != $curday)
 			{

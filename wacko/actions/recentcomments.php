@@ -19,7 +19,7 @@ if (!function_exists('load_recent_comments'))
 
 if (!isset($root)) $root = (isset($vars['for']) ? $this->unwrap_link($vars['for']) : "");
 if (!isset($root)) $root = $this->page['tag'];
-if (!isset($max)) $max = "";
+if (!isset($max)) $max = '';
 if (!$max) $max = 50;
 
 if ($comments = load_recent_comments($this, $root, (int)$max))

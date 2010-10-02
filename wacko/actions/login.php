@@ -1,8 +1,8 @@
 <!--notypo-->
 <?php
 
-$error = "";
-$output = "";
+$error = '';
+$output = '';
 
 // reconnect securely in ssl mode
 #if ($this->config['ssl'] == true && $this->config['ssl_implicit'] == true && ( ($_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
@@ -157,7 +157,7 @@ else
 					$this->set_user($existingUser, 1);
 					$this->update_session_time($existingUser);
 					$this->set_bookmarks(BM_USER);
-					$this->context[++$this->current_context] = "";
+					$this->context[++$this->current_context] = '';
 
 					$this->login_count($existingUser['user_id']);
 					$this->reset_failed_user_login_count($existingUser['user_id']);
