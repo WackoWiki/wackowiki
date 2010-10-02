@@ -74,7 +74,7 @@ if ($this->user_is_owner() || $this->is_admin())
 					// new owner doesn't exists
 					$message .= str_replace('%1', $newowner, $this->get_translation('ACLNoNewOwner'));
 					$this->set_message($message);
-					$this->redirect($this->href('acls'));
+					$this->redirect($this->href('permissions'));
 				}
 			}
 
