@@ -52,7 +52,7 @@ if ($user_id = $this->get_user_id())
 				}
 
 				// print entry
-				echo "<li>$time (".$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation("History"), 0).") ".$this->compose_link_to_page($page['tag'], "", "", 0)."</li>\n";
+				echo "<li>$time (".$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], "", "", 0)."</li>\n";
 
 
 			}
@@ -114,7 +114,7 @@ if ($user_id = $this->get_user_id())
 				}
 
 				// print entry
-				echo "<li>".$this->get_time_string_formatted($time)." (".$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation("History"), 0).") ".$this->compose_link_to_page($page['tag'], "", "", 0)."</li>\n";
+				echo "<li>".$this->get_time_string_formatted($time)." (".$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], "", "", 0)."</li>\n";
 
 			}
 			echo "</ul>\n</li>\n</ul>\n";

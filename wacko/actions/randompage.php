@@ -43,7 +43,7 @@ is_array ( $pages )
 
 if (isset($test) || ($user = $this->get_user()))
 {
-	if (isset($test) || $user["dont_redirect"] == "1" || $_POST['redirect'] == "no")
+	if (isset($test) || $user['dont_redirect'] == '1' || $_POST['redirect'] == 'no')
 	{
 		// show only result
 		echo $this->compose_link_to_page($pages[$page]['supertag']);

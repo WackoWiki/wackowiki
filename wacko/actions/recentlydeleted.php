@@ -21,13 +21,13 @@ if ($pages == true)
 		if ($access === true)
 		{
 			// day header
-			list($day, $time) = explode(" ", $page["date"]);
+			list($day, $time) = explode(' ', $page['date']);
 			if (!isset($curday)) $curday = '';
 
 			if ($day != $curday)
 			{
 				if ($curday) print("</ul>\n<br /></li>\n");
-				echo "<li><strong>".date($this->config['date_format'],strtotime($day)).":</strong>\n<ul>\n";
+				echo "<li><strong>".date($this->config['date_format'], strtotime($day)).":</strong>\n<ul>\n";
 				$curday = $day;
 			}
 
@@ -35,7 +35,7 @@ if ($pages == true)
 			echo "<li>".
 					"<span style=\"text-align:left\">".
 						"<small>".date($this->config['time_format_seconds'], strtotime($time))."</small>  &mdash; ".
-						$this->compose_link_to_page($page['tag'], "revisions", "", 0).
+						$this->compose_link_to_page($page['tag'], 'revisions', '', 0).
 					"</span>".
 				"</li>\n";
 		}
@@ -45,7 +45,7 @@ if ($pages == true)
 }
 else
 {
-	echo $this->get_translation("NoRecentlyDeleted");
+	echo $this->get_translation('NoRecentlyDeleted');
 }
 
 ?>

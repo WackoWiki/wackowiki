@@ -11,7 +11,7 @@ if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{
-		print(str_replace("%1",$this->href('edit'),$this->get_translation("DoesNotExists")));
+		print(str_replace("%1",$this->href('edit'),$this->get_translation('DoesNotExists')));
 	}
 	else
 	{
@@ -22,17 +22,17 @@ if ($this->has_access('read'))
 			str_replace("%1",$this->href(),
 			str_replace("%2",$this->tag,
 			str_replace("%3",$this->page['modified'],
-			$this->get_translation("Revision")))).".</div>");
+			$this->get_translation('Revision')))).".</div>");
 		}*/
 
 		// start enumerating links
 		$this->numerate_links = array();
 
 		// build html body
-		$data = $this->format($this->page['body'], "wacko");
+		$data = $this->format($this->page['body'], 'wacko');
 
 		// display page
-		$data = $this->format($data, "post_wacko", array("bad" => "good"));
+		$data = $this->format($data, 'post_wacko', array("bad" => "good"));
 		$data = $this->numerate_toc($data); //  numerate toc if needed
 		echo $data;
 
@@ -45,7 +45,7 @@ if ($this->has_access('read'))
 				echo "<br /><br />";
 				echo "<div id=\"commentsfiles\">";
 				echo "<div class=\"commentsheader\">";
-				echo $this->get_translation("Comments_all");
+				echo $this->get_translation('Comments_all');
 				echo "</div>\n";
 
 				foreach ($comments as $comment)
@@ -54,10 +54,10 @@ if ($this->has_access('read'))
 
 					echo "<div class=\"comment\">".
 							"<span class=\"commentinfo\">".
-								"<strong>&#8212; ".( $comment['user'] == GUEST ? "<em>".$this->get_translation("Guest")."</em>" : $comment['user'] )."</strong> (".$this->get_time_string_formatted($comment['created']).
-								($comment['modified'] != $comment['created'] ? ", ".$this->get_translation("CommentEdited")." ".$this->get_time_string_formatted($comment['modified']) : "").")".
+								"<strong>&#8212; ".( $comment['user'] == GUEST ? "<em>".$this->get_translation('Guest')."</em>" : $comment['user'] )."</strong> (".$this->get_time_string_formatted($comment['created']).
+								($comment['modified'] != $comment['created'] ? ", ".$this->get_translation('CommentEdited')." ".$this->get_time_string_formatted($comment['modified']) : "").")".
 							"&nbsp;&nbsp;&nbsp;</span><br />".
-							$this->format($comment['body_r'], "post_wacko").
+							$this->format($comment['body_r'], 'post_wacko').
 						"</div>\n";
 				}
 				echo "</div>\n";
@@ -72,7 +72,7 @@ if ($this->has_access('read'))
 			echo "<br />";
 			echo "<div id=\"commentsfiles\">";
 			echo "<div class=\"linksheader\">";
-			echo $this->get_translation("Links");
+			echo $this->get_translation('Links');
 			echo "</div>\n";
 
 			$i = 0;
@@ -92,7 +92,7 @@ if ($this->has_access('read'))
 }
 else
 {
-	print($this->get_translation("ReadAccessDenied"));
+	print($this->get_translation('ReadAccessDenied'));
 }
 ?>
 </div>

@@ -364,7 +364,7 @@ if ($langs = $this->available_languages())
 
 else
 {
-	print($this->get_translation("ReadAccessDenied"));
+	print($this->get_translation('ReadAccessDenied'));
 }
 ?>
 <br style="clear: both;" />

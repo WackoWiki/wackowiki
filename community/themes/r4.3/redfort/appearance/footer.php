@@ -46,7 +46,7 @@ if ($this->has_access('read') && $this->config['hide_files'] != 1)
         <tr>
           <td height="29" bgcolor="#6E0000">
     <div id="filesheader">
-      <?php echo $this->get_translation('Files_all') ?> [<a href="<?php echo $this->href('', '', 'show_files=0')."\">".$this->get_translation("HideFiles"); ?></a>]
+      <?php echo $this->get_translation('Files_all') ?> [<a href="<?php echo $this->href('', '', 'show_files=0')."\">".$this->get_translation('HideFiles'); ?></a>]
     </div>
 	</td>
         </tr>
@@ -95,17 +95,17 @@ if ($this->has_access('read') && $this->config['hide_files'] != 1)
       switch (count($files))
       {
       case 0:
-        print($this->get_translation("Files_0"));
+        print($this->get_translation('Files_0'));
         break;
       case 1:
-        print($this->get_translation("Files_1"));
+        print($this->get_translation('Files_1'));
         break;
       default:
-        print(str_replace("%1",count($files), $this->get_translation("Files_n")));
+        print(str_replace("%1",count($files), $this->get_translation('Files_n')));
       }
     ?>
 
-    [<a href="<?php echo $this->href('', '', 'show_files=1#files')."\">".$this->get_translation("ShowFiles"); ?></a>]
+    [<a href="<?php echo $this->href('', '', 'show_files=1#files')."\">".$this->get_translation('ShowFiles'); ?></a>]
 
     </div>	</td>
         </tr>
@@ -148,7 +148,7 @@ if ($this->has_access('read') && $this->config['hide_comments'] != 1)
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td height="29" bgcolor="#6E0000">    <div id="commentsheader">
-      <?php echo $this->get_translation("Comments_all") ?> [<a href="<?php echo $this->href('', '', 'show_comments=0')."\">".$this->get_translation("HideComments"); ?></a>]
+      <?php echo $this->get_translation('Comments_all') ?> [<a href="<?php echo $this->href('', '', 'show_comments=0')."\">".$this->get_translation('HideComments'); ?></a>]
     </div></td>
         </tr>
         <tr>
@@ -181,10 +181,10 @@ if ($this->has_access('read') && $this->config['hide_comments'] != 1)
     if ($this->has_access('comment'))
     {
       ?>
-        <?php echo $this->get_translation("AddComment"); ?><br />
+        <?php echo $this->get_translation('AddComment'); ?><br />
         <?php echo $this->form_open('addcomment'); ?>
           <textarea name="body" rows="6" style="width: 95%"></textarea><br />
-          <input type="submit" value="<?php echo $this->get_translation("AddCommentButton"); ?>" accesskey="s" />
+          <input type="submit" value="<?php echo $this->get_translation('AddCommentButton'); ?>" accesskey="s" />
         <?php echo $this->form_close(); ?>
       <?php
     }
@@ -210,7 +210,7 @@ if ($this->has_access('read') && $this->config['hide_comments'] != 1)
       }
     ?>
 
-    [<a href="<?php echo $this->href('', '', 'show_comments=1#comments')."\">".$this->get_translation("ShowComments"); ?></a>]
+    [<a href="<?php echo $this->href('', '', 'show_comments=1#comments')."\">".$this->get_translation('ShowComments'); ?></a>]
 
     </div></td>
         </tr>

@@ -1,1 +1,1 @@
-<?php include("actions/anchor.php") ?>
+<?php include('actions/anchor.php') ?>

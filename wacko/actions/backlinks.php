@@ -12,7 +12,7 @@ if ($pages = $this->load_pages_linking_to($tag))
 {
 	if(!$nomark)
 	{
-		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation("ReferringPages").":</span></p>\n");
+		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('ReferringPages').":</span></p>\n");
 	}
 
 	foreach ($pages as $page)
@@ -26,7 +26,7 @@ if ($pages = $this->load_pages_linking_to($tag))
 
 			if ($access)
 			{
-				$lnk = $this->link("/".$page['tag']."#".$this->npj_translit($tag), "", $page['tag']);
+				$lnk = $this->link('/'.$page['tag']."#".$this->npj_translit($tag), '', $page['tag']);
 				if (strpos($lnk, 'span class="missingpage"') === false)
 				echo($lnk."<br />\n");
 			}
@@ -40,6 +40,6 @@ if ($pages = $this->load_pages_linking_to($tag))
 }
 else
 {
-	echo $this->get_translation("NoReferringPages");
+	echo $this->get_translation('NoReferringPages');
 }
 ?>

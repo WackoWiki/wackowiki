@@ -174,7 +174,7 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
 
 	//session_destroy();   // destroy session data in storage
 	//session_unset();     // unset $_SESSION variable for the runtime
-	$engine->set_message($engine->get_translation("LoggedOut"));
+	$engine->set_message($engine->get_translation('LoggedOut'));
 	$engine->redirect('admin.php');
 }
 

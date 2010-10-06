@@ -89,7 +89,7 @@ if ($pages_to_display)
 }
 else
 {
-	echo $this->get_translation("NoPagesFound");
+	echo $this->get_translation('NoPagesFound');
 }
 
 ?>

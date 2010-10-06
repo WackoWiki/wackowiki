@@ -32,7 +32,7 @@ else		$user_add = '';
 // do we allowed to see?
 if (!$global)
 {
-	if ($page == "")
+	if ($page == '')
 	{
 		$page = $this->tag;
 		$page_id = $this->page['page_id'];
@@ -72,12 +72,12 @@ if ($can_view)
 
 	if (!$nomark)
 	{
-		$title = $this->get_translation("UploadTitle".($global ? "Global" : ""));
+		$title = $this->get_translation('UploadTitle'.($global ? 'Global' : ''));
 		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.": </span></p>\n");
 	}
 
 	// display
-	$del = $this->get_translation("UploadRemove");
+	$del = $this->get_translation('UploadRemove');
 
 	if (!$global)	$path = "@".$filepage['page_id']."@";
 	else			$path = '';
@@ -97,18 +97,18 @@ if ($can_view)
 
 	foreach($files as $file)
 	{
-		$this->filesCache[$file['page_id']][$file["filename"]] = &$file;
+		$this->filesCache[$file['page_id']][$file['filename']] = &$file;
 
 		$dt = $file["uploaded_dt"];
-		$desc = $this->format($file['description'], "typografica" );
+		$desc = $this->format($file['description'], 'typografica' );
 
 		if ($desc == "") $desc = "&nbsp;";
 
-		$filename	= $file["filename"];
+		$filename	= $file['filename'];
 		$text		= ($pictures == false) ? $filename : '';
 		$filesize	= $this->binary_multiples($file['filesize'], true, true, true);
 		$fileext	= substr($filename, strrpos($filename, ".") + 1);
-		$link		= $this->link($path2.$filename, "", $text);
+		$link		= $this->link($path2.$filename, '', $text);
 
 		if ($fileext != "gif" && $fileext != "jpg" && $fileext != "png")
 		{

@@ -15,7 +15,7 @@ if ($this->is_admin())
 		?>
 		<input
 		type="submit" name="rename"
-		value="<?php echo $this->get_translation("KeywordsSaveButton");?>" />
+		value="<?php echo $this->get_translation('KeywordsSaveButton');?>" />
 		<?php
 		echo $this->form_close();
 	}
@@ -88,19 +88,19 @@ if (!function_exists('DecomposeOptions'))
 
 if ($this->is_admin())
 {
-	if (!isset($_POST["migrate_user_otions"]))
+	if (!isset($_POST['migrate_user_otions']))
 	{
 		echo "<h3>2. Migrates user otions to user_setting table:</h3>";
 		echo $this->form_open();
 		?>
 		<input
 		type="submit" name="migrate_user_otions"
-		value="<?php echo $this->get_translation("KeywordsSaveButton");?>" />
+		value="<?php echo $this->get_translation('KeywordsSaveButton');?>" />
 		<?php
 		echo $this->form_close();
 	}
 	// rename files in \files\perpage folder to @page_id@filename
-	else if (isset($_POST["migrate_user_otions"]))
+	else if (isset($_POST['migrate_user_otions']))
 	{
 		$_users = $this->load_all(
 			"SELECT user_id, doubleclick_edit, show_comments, bookmarks, motto, revisions_count, changes_count, lang, show_spaces, typografica, more ".
@@ -110,7 +110,7 @@ if ($this->is_admin())
 
 		foreach ($_users as $_user)
 		{
-			$_user['options'] = $this->DecomposeOptions($_user["more"]);
+			$_user['options'] = $this->DecomposeOptions($_user['more']);
 			// user_id, doubleclick_edit, show_comments, bookmarks, motto, revisions_count, changes_count, lang, show_spaces, typografica
 			// $_user['options'] : theme, autocomplete, dont_redirect, send_watchmail, show_files, allow_intercom, hide_lastsession, validate_ip, noid_pubs
 

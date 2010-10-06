@@ -16,59 +16,59 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 {
 	if (!$this->page)
 	{
-		print(str_replace("%1",$this->href('edit'),$this->get_translation("DoesNotExists")));
+		print(str_replace('%1', $this->href('edit'),$this->get_translation('DoesNotExists')));
 	}
 	else
 	{
 		if ($this->page['comment_on_id'])
 			$comment_on_id = $this->page['comment_on_id'];
 
-		if (isset($_POST["delete"]) && $_POST["delete"] == 1)
+		if (isset($_POST['delete']) && $_POST['delete'] == 1)
 		{
 			if ($this->page['comment_on_id'])
 				$comment_on_id = $this->page['comment_on_id'];
 
-			if (isset($_POST["dontkeep"]) && $this->is_admin())
+			if (isset($_POST['dontkeep']) && $this->is_admin())
 				$dontkeep = 1;
 
 			// Remove page
 			if ($this->remove_referrers($this->tag))
 			{
-				print(str_replace("%1", $this->tag, $this->get_translation("ReferrersRemoved"))."<br />\n");
+				print(str_replace('%1', $this->tag, $this->get_translation('ReferrersRemoved'))."<br />\n");
 			}
 			if ($this->remove_links($this->tag))
 			{
-				print(str_replace("%1", $this->tag, $this->get_translation("LinksRemoved"))."<br />\n");
+				print(str_replace('%1', $this->tag, $this->get_translation('LinksRemoved'))."<br />\n");
 			}
 			if ($this->remove_categories($this->tag))
 			{
-				print($this->get_translation("CategoriesRemoved")."<br />\n");
+				print($this->get_translation('CategoriesRemoved')."<br />\n");
 			}
 			if ($this->remove_acls($this->tag))
 			{
-				print(str_replace("%1", $this->tag, $this->get_translation("AclsRemoved"))."<br />\n");
+				print(str_replace('%1', $this->tag, $this->get_translation('AclsRemoved'))."<br />\n");
 			}
 			if (!$comment_on_id)
 			{
 				if ($this->remove_bookmarks($this->tag))
 				{
-					print(str_replace("%1", $this->tag, $this->get_translation("BookmarksRemoved"))."<br />\n");
+					print(str_replace('%1', $this->tag, $this->get_translation('BookmarksRemoved'))."<br />\n");
 				}
 				if ($this->remove_watches($this->tag))
 				{
-					print(str_replace("%1", $this->tag, $this->get_translation("WatchesRemoved"))."<br />\n");
+					print(str_replace('%1', $this->tag, $this->get_translation('WatchesRemoved'))."<br />\n");
 				}
 				if ($this->remove_ratings($this->tag))
 				{
-					print($this->get_translation("RatingRemoved")."<br />\n");
+					print($this->get_translation('RatingRemoved')."<br />\n");
 				}
 				if ($this->remove_comments($this->tag, false, $dontkeep))
 				{
-					print(str_replace("%1", $this->tag, $this->get_translation("CommentsRemoved"))."<br />\n");
+					print(str_replace('%1', $this->tag, $this->get_translation('CommentsRemoved'))."<br />\n");
 				}
 				if ($this->remove_files($this->tag))
 				{
-					print(str_replace("%1", $this->tag, $this->get_translation("FilesRemoved"))."<br />\n");
+					print(str_replace('%1', $this->tag, $this->get_translation('FilesRemoved'))."<br />\n");
 				}
 			}
 			if ($this->remove_page($this->tag, $comment_on_id, $dontkeep))
@@ -80,15 +80,15 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 				{
 					$xml->changes();
 				}
-				print(str_replace("%1", $this->tag, $this->get_translation("PageRemoved"))."<br />\n");
+				print(str_replace('%1', $this->tag, $this->get_translation('PageRemoved'))."<br />\n");
 			}
 
-			if ($this->is_admin() && (isset($_POST["revisions"]) && $_POST["revisions"] == 1) && !$comment_on_id)
+			if ($this->is_admin() && (isset($_POST['revisions']) && $_POST['revisions'] == 1) && !$comment_on_id)
 			{
 				$this->remove_revisions($this->tag);
-				echo $this->get_translation("RevisionsRemoved")."<br />\n";
+				echo $this->get_translation('RevisionsRemoved')."<br />\n";
 			}
-			if ($this->is_admin() && (isset($_POST["cluster"]) && $_POST["cluster"] == 1))
+			if ($this->is_admin() && (isset($_POST['cluster']) && $_POST['cluster'] == 1))
 			{
 				$this->remove_referrers	($this->tag, true);
 				$this->remove_links		($this->tag, true);
@@ -107,14 +107,14 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 				"WHERE tag LIKE '".quote($this->dblink, $this->tag.'/%')."'"))
 				{
 					// remove by one page at a time
-					foreach ($list as $row) $this->remove_page($row['tag'], "", $dontkeep);
+					foreach ($list as $row) $this->remove_page($row['tag'], '', $dontkeep);
 					unset($list, $row);
 				}
 
-				if ((isset($_POST["revisions"]) && $_POST["revisions"] == 1) || $comment_on_id)
+				if ((isset($_POST['revisions']) && $_POST['revisions'] == 1) || $comment_on_id)
 					$this->remove_revisions($this->tag, true);
 
-				echo "<em>".$this->get_translation("ClusterRemoved")."</em><br />\n";
+				echo "<em>".$this->get_translation('ClusterRemoved')."</em><br />\n";
 			}
 
 			// update user statistics
@@ -133,19 +133,19 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 			// log event
 			if (!$comment_on_id)
 			{
-				$this->log(1, str_replace("%2", $this->page['user_name'], str_replace("%1", $this->tag, ( isset($_POST["cluster"]) && $_POST["cluster"] == 1 ? $this->get_translation("LogRemovedCluster", $this->config['language']) : $this->get_translation("LogRemovedPage", $this->config['language']) ))));
+				$this->log(1, str_replace("%2", $this->page['user_name'], str_replace("%1", $this->tag, ( isset($_POST['cluster']) && $_POST['cluster'] == 1 ? $this->get_translation('LogRemovedCluster', $this->config['language']) : $this->get_translation('LogRemovedPage', $this->config['language']) ))));
 			}
 			else
 			{
-				$this->log(1, str_replace("%3", $this->get_time_string_formatted($this->page['created']), str_replace("%2", $this->page['user_name'], str_replace("%1", $comment_on_id." ".$this->get_page_title($comment_on_id), $this->get_translation("LogRemovedComment", $this->config['language'])))));
+				$this->log(1, str_replace("%3", $this->get_time_string_formatted($this->page['created']), str_replace("%2", $this->page['user_name'], str_replace("%1", $comment_on_id." ".$this->get_page_title($comment_on_id), $this->get_translation('LogRemovedComment', $this->config['language'])))));
 			}
 
-			echo "<br />".$this->get_translation("ThisActionHavenotUndo")."<br />\n";
+			echo "<br />".$this->get_translation('ThisActionHavenotUndo')."<br />\n";
 
 			// return to commented page
 			if ($comment_on_id)
 			{
-				echo "<br />".$this->compose_link_to_page($this->get_comment_on_tag($comment_on_id)."#comments", "", "&laquo; ".$this->get_translation("ReturnToCommented"), 0);
+				echo "<br />".$this->compose_link_to_page($this->get_comment_on_tag($comment_on_id)."#comments", "", "&laquo; ".$this->get_translation('ReturnToCommented'), 0);
 			}
 		}
 		else
@@ -155,11 +155,11 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 
 			if ($comment_on_id)
 			{
-				echo $this->get_translation("ReallyDeleteComment");
+				echo $this->get_translation('ReallyDeleteComment');
 			}
 			else
 			{
-				echo $this->get_translation("ReallyDelete");
+				echo $this->get_translation('ReallyDelete');
 			}
 
 			echo "</div>";
@@ -172,22 +172,22 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 				if (!$comment_on_id)
 				{
 					echo "<input id=\"removerevisions\" type=\"checkbox\" name=\"revisions\" value=\"1\" />";
-					echo "<label for=\"removerevisions\">".$this->get_translation("remove_revisions")."</label><br />";
+					echo "<label for=\"removerevisions\">".$this->get_translation('remove_revisions')."</label><br />";
 					echo "<input id=\"removecluster\" type=\"checkbox\" name=\"cluster\" value=\"1\" />";
-					echo "<label for=\"removecluster\">".$this->get_translation("RemoveCluster")."</label><br />";
+					echo "<label for=\"removecluster\">".$this->get_translation('RemoveCluster')."</label><br />";
 					echo "<input id=\"dontkeep\" type=\"checkbox\" name=\"dontkeep\" value=\"1\" />";
-					echo "<label for=\"dontkeep\">".$this->get_translation("RemoveDontKeep")."</label><br />";
+					echo "<label for=\"dontkeep\">".$this->get_translation('RemoveDontKeep')."</label><br />";
 				}
 			}
 
 		// show backlinks
 		echo "<br />";
-		echo $this->action("backlinks", array("nomark" => 0));
+		echo $this->action('backlinks', array('nomark' => 0));
 ?>
 		<br /><br />
 		<input type="hidden" name="delete" value="1" />
-		<input id="submit" name="submit" type="submit" value="<?php echo $this->get_translation("RemoveButton"); ?>" />&nbsp;
-		<input id="button" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation("EditCancelButton")); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+		<input id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />&nbsp;
+		<input id="button" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 		<br />
 <?php echo $this->form_close();
 		}
@@ -195,7 +195,7 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 }
 else
 {
-	print($this->get_translation("NotOwnerAndCanDelete"));
+	print($this->get_translation('NotOwnerAndCanDelete'));
 }
 ?>
 </div>

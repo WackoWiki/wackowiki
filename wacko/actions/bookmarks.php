@@ -29,7 +29,7 @@ if (!function_exists('load_userBookmarks'))
 $user = $this->get_user();
 
 /// Processing of our special form
-if (isset($_POST["_user_bookmarks"]))
+if (isset($_POST['_user_bookmarks']))
 {
 	$_bookmarks = load_userBookmarks($this, $user['user_id']);
 	$a = $_bookmarks;
@@ -70,7 +70,7 @@ if (isset($_POST["_user_bookmarks"]))
 		$deletion = '';
 		foreach( $object->data['user_menu'] as $item )
 		{
-			if (isset($_POST["delete_".$item['bookmark_id']]))
+			if (isset($_POST['delete_'.$item['bookmark_id']]))
 			{
 				if ($deletion != '') $deletion.=", ";
 				$deletion.= quote($this->dblink, $item['bookmark_id']);
@@ -100,7 +100,7 @@ if ($user)
 		echo "<input type=\"hidden\" name=\"_user_bookmarks\" value=\"yes\" />";
 
 		echo "<table>";
-		echo "<tr><th>".$this->get_translation("BookmarkNo")."</th><th>".$this->get_translation("BookmarkTitle")."</th><th>".$this->get_translation("BookmarkPage")."</th><th>".$this->get_translation("BookmarkMark")."</th><!--<th>Display</th><th>Lang</th>--></tr>";
+		echo "<tr><th>".$this->get_translation('BookmarkNo')."</th><th>".$this->get_translation('BookmarkTitle')."</th><th>".$this->get_translation('BookmarkPage')."</th><th>".$this->get_translation('BookmarkMark')."</th><!--<th>Display</th><th>Lang</th>--></tr>";
 
 		foreach($_bookmarks as $_bookmark)
 		{
@@ -123,9 +123,9 @@ if ($user)
 		}
 		echo "<tfoot>";
 		echo "<tr>\n<td colspan=\"2\">\n";
-		echo "<input name=\"update_bookmarks\" type=\"submit\" value=\"".$this->get_translation("BookmarkSaveChanges")."\" />";
+		echo "<input name=\"update_bookmarks\" type=\"submit\" value=\"".$this->get_translation('BookmarkSaveChanges')."\" />";
 		echo "</td><td>";
-		echo "<input name=\"delete_bookmarks\" type=\"submit\" value=\"".$this->get_translation("BookmarkDeleteSelected")."\" />";
+		echo "<input name=\"delete_bookmarks\" type=\"submit\" value=\"".$this->get_translation('BookmarkDeleteSelected')."\" />";
 		echo "</td>\n</tr>\n";
 		echo "</tfoot>";
 		echo "</table>";

@@ -35,22 +35,22 @@ if ($this->has_access('read'))
 		$this->context[++$this->current_context] = '';
 		$output .= $this->form_open('diff', '', 'get');
 		$output .= "<p>\n";
-		$output .= "<input type=\"submit\" value=\"".$this->get_translation("ShowDifferencesButton")."\" />";
-		#$output .= "<input type=\"button\" value=\"".$this->get_translation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
-		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"fastdiff\" name=\"fastdiff\" />\n <label for=\"fastdiff\">".$this->get_translation("SimpleDiff")."</label>";
-		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"source\" name=\"source\" />\n <label for=\"source\">".$this->get_translation("SourceDiff")."</label>";
+		$output .= "<input type=\"submit\" value=\"".$this->get_translation('ShowDifferencesButton')."\" />";
+		#$output .= "<input type=\"button\" value=\"".$this->get_translation('CancelDifferencesButton')."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
+		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"fastdiff\" name=\"fastdiff\" />\n <label for=\"fastdiff\">".$this->get_translation('SimpleDiff')."</label>";
+		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"source\" name=\"source\" />\n <label for=\"source\">".$this->get_translation('SourceDiff')."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href('revisions.xml')."\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RevisionXMLTip')."\" alt=\"XML\" /></a>";
 		if ($this->config['minor_edit'])
 		{
-			$output .= "<br />".((isset($_GET['minor_edit']) && !$_GET['minor_edit'] == '1') ? "<a href=\"".$this->href('revisions', '', 'minor_edit=1')."\">".$this->get_translation("MinorEditHide")."</a>" : "<a href=\"".$this->href('revisions', '', 'minor_edit=0')."\">".$this->get_translation("MinorEditShow")."</a>");
+			$output .= "<br />".((isset($_GET['minor_edit']) && !$_GET['minor_edit'] == '1') ? "<a href=\"".$this->href('revisions', '', 'minor_edit=1')."\">".$this->get_translation('MinorEditHide')."</a>" : "<a href=\"".$this->href('revisions', '', 'minor_edit=0')."\">".$this->get_translation('MinorEditShow')."</a>");
 		}
 		$output .= "</p>\n<ul class=\"revisions\">\n";
 
-		if (isset($_GET["show"]) && $_GET["show"] == "all")
+		if (isset($_GET['show']) && $_GET['show'] == 'all')
 			$max = 0;
 		else if ($user = $this->get_user())
 		{
-			$max = $user["revisions_count"];
+			$max = $user['revisions_count'];
 		}
 		else
 		{
@@ -78,12 +78,12 @@ if ($this->has_access('read'))
 				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"b\" value=\"".($c == 1 ? "-1" : $page["revision_m_id"])."\" ".($c == 2 ? "checked=\"checked\"" : "")." />";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"".$this->href('show').($this->config['rewrite_mode'] ? "?" : "&amp;")."time=".urlencode($page['modified'])."\">".$this->get_time_string_formatted($page['modified'])."</a>";
 				$output .= " — id ".$page["revision_m_id"]." ";
-				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->get_translation("By")." ".
+				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->get_translation('By')." ".
 				($page['user']
 					? ($this->is_wiki_name($page['user'])
-						? $this->link("/".$page['user'],"",$page['user'])
+						? $this->link('/'.$page['user'], '', $page['user'])
 						: $page['user'])
-					: $this->get_translation("Guest"))."";
+					: $this->get_translation('Guest'))."";
 				$output .= "".$edit_note."";
 				$output .= " ".($page['minor_edit'] ? "m" : "");
 				$output .= "</li>\n";
@@ -91,18 +91,18 @@ if ($this->has_access('read'))
 		}
 		$output .= "</ul>\n<br />\n";
 
-		if (!$this->config['revisions_hide_cancel']) $output .= "<input type=\"button\" value=\"".$this->get_translation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
+		if (!$this->config['revisions_hide_cancel']) $output .= "<input type=\"button\" value=\"".$this->get_translation('CancelDifferencesButton')."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
 		$output .= $this->form_close()."\n";
 	}
 	print($output);
 	$this->current_context--;
 
 	if ($max && $a > $max)
-		echo "<a href=\"".$this->href('revisions', '', 'show=all')."\">".$this->get_translation("RevisionsShowAll")."</a>";
+		echo "<a href=\"".$this->href('revisions', '', 'show=all')."\">".$this->get_translation('RevisionsShowAll')."</a>";
 }
 else
 {
-	echo $this->get_translation("ReadAccessDenied");
+	echo $this->get_translation('ReadAccessDenied');
 }
 ?>
 </div>

@@ -7,7 +7,7 @@
 	i.e. no relative addressing
 */
 
-if (!isset($_POST["_to"]))
+if (!isset($_POST['_to']))
 {
 	// show FORM
 	echo $this->form_open('', '', 'post', '', ' enctype="multipart/form-data" ');
@@ -15,16 +15,16 @@ if (!isset($_POST["_to"]))
 
 <div class="cssform">
   <p>
-    <label for="importto"><?php echo $this->get_translation("ImportTo"); ?>:</label>
+    <label for="importto"><?php echo $this->get_translation('ImportTo'); ?>:</label>
     <input type="text" id="importto" name="_to" size="40" value="" />
   </p>
   <p>
-    <label for="importwhat"><?php echo $this->get_translation("ImportWhat"); ?>:</label>
+    <label for="importwhat"><?php echo $this->get_translation('ImportWhat'); ?>:</label>
     <input type="file" id="importwhat" name="_import" />
   </p>
   <p>
     <input type="submit"
-			value="<?php echo $this->get_translation("ImportButtonText"); ?>" />
+			value="<?php echo $this->get_translation('ImportButtonText'); ?>" />
   </p>
 </div>
 <?php
@@ -32,7 +32,7 @@ if (!isset($_POST["_to"]))
 }
 else
 {
-		if ($_FILES["_import"]["error"] == 0)
+		if ($_FILES['_import']['error'] == 0)
 		{
 			$fd = fopen($_FILES['_import']['tmp_name'], "r");
 
@@ -47,24 +47,24 @@ else
 			$contents = fread($fd, filesize($_FILES['_import']['tmp_name']));
 			fclose($fd);
 
-			require_once("classes/utility.php");
+			require_once('classes/utility.php');
 
-			$base_addr = Utility::untag($contents, "title");
+			$base_addr = Utility::untag($contents, 'title');
 
-			$items = explode("<item>", $contents);
+			$items = explode('<item>', $contents);
 
 			array_shift($items);
 
 			foreach ($items as $item)
 			{
-				$root_tag	= trim($_POST["_to"], "/ ");
-				$rel_tag	= trim(Utility::untag($item, "guid"), "/ ");
-				$tag		= $root_tag.( $root_tag && $rel_tag ? "/" : "" ).$rel_tag;
+				$root_tag	= trim($_POST['_to'], '/ ');
+				$rel_tag	= trim(Utility::untag($item, 'guid'), '/ ');
+				$tag		= $root_tag.( $root_tag && $rel_tag ? '/' : '' ).$rel_tag;
 				$page_id	= $this->get_page_id($tag);
-				$owner		= Utility::untag($item, "author");
+				$owner		= Utility::untag($item, 'author');
 				$owner_id	= $this->get_user_id_by_name($user);
-				$body = str_replace("]]&gt;", "]]>", Utility::untag($item, "description"));
-				$title		= html_entity_decode(Utility::untag($item, "title"));
+				$body = str_replace(']]&gt;', ']]>', Utility::untag($item, 'description'));
+				$title		= html_entity_decode(Utility::untag($item, 'title'));
 
 				$body_r = $this->save_page($tag, $title, $body, '');
 				$this->set_page_owner($page_id, $owner_id);
@@ -80,14 +80,14 @@ else
 				$this->current_context--;
 
 				// log import
-				$this->log(4, str_replace("%1", $tag, $this->get_translation("LogPageImported", $this->config['language'])));
+				$this->log(4, str_replace('%1', $tag, $this->get_translation('LogPageImported', $this->config['language'])));
 
 				// count page
 				$t++;
 				$pages[] = $tag;
 			}
 
-			echo "<em>".str_replace('%1', $t, $this->get_translation("ImportSuccess"))."</em><br />";
+			echo "<em>".str_replace('%1', $t, $this->get_translation('ImportSuccess'))."</em><br />";
 
 			foreach ($pages as $page)
 			{

@@ -217,7 +217,7 @@ if ($root)
 {
 	if (!$nomark)
 	{
-		$title = $this->get_translation("TreeClusterTitle");
+		$title = $this->get_translation('TreeClusterTitle');
 		$title = str_replace("%1",  $this->link("/".$root, "", $root), $title);
 		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.":</span></p>\n");
 	}
@@ -225,7 +225,7 @@ if ($root)
 }
 else
 {
-	if (!$nomark)  print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation("TreeSiteTitle")."</span></p>\n");
+	if (!$nomark)  print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('TreeSiteTitle')."</span></p>\n");
 	$query = "'%'";
 }
 
@@ -303,7 +303,7 @@ if ($pages)
 }
 else
 {
-	$empty_string = $this->get_translation("TreeEmpty");
+	$empty_string = $this->get_translation('TreeEmpty');
 	$empty_string = str_replace("%1", $this->link("/".$root,"",$root), $empty_string);
 	print($empty_string."<br />");
 }

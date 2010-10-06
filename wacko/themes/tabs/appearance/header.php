@@ -164,7 +164,7 @@ echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), "", 
 	alt="<?php echo $this->get_translation('PrintVersion') ?>" /></a> :: <?php echo"<a href=\"".$this->href('msword')."\" target=\"_blank\">" ?><img
 	src="<?php echo $this->config['theme_url'] ?>icons/msword.gif"
 	width="16" height="16"
-	alt="<?php echo $this->get_translation("MsWordVersion") ?>" /></a></div>
+	alt="<?php echo $this->get_translation('MsWordVersion') ?>" /></a></div>
 <div class="header">
   <h1><span class="Main"><?php echo $this->config['wacko_name'] ?>:</span> <?php echo $this->get_page_path(); ?> <a class="Search"
 	title="<?php echo $this->get_translation('SearchTitleTip')?>"

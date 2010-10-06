@@ -5,7 +5,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	// find number
 	if ($latestComment = $this->load_single("SELECT tag, page_id FROM ".$this->config['table_prefix']."page WHERE comment_on_id != '0' ORDER BY page_id DESC LIMIT 1"))
 	{
-		preg_match("/^Comment([0-9]+)$/", $latestComment['tag'], $matches);
+		preg_match('/^Comment([0-9]+)$/', $latestComment['tag'], $matches);
 		$num = $matches[1] + 1;
 	}
 	else
@@ -14,7 +14,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	}
 
 	$user = $this->get_user();
-	$body = str_replace("\r", "", $_POST['body']);
+	$body = str_replace("\r", '', $_POST['body']);
 	$body = trim($_POST['body']);
 
 	if(isset($_POST['title']))
@@ -31,7 +31,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	if (!$body)
 	{
 		if (!$user) $this->cache->cache_invalidate($this->supertag);
-		$this->set_message($this->get_translation("EmptyComment"));
+		$this->set_message($this->get_translation('EmptyComment'));
 	}
 	else if ($_POST['preview'])
 	{
@@ -46,7 +46,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	{
 		// posting flood protection
 		if (!$user) $this->cache->cache_invalidate($this->supertag);
-		$this->set_message('<div class="error">'.str_replace('%1', $this->config['comment_delay'], $this->GetRes('CommentFlooded')).'</div>');
+		$this->set_message('<div class="error">'.str_replace('%1', $this->config['comment_delay'], $this->get_translation('CommentFlooded')).'</div>');
 		$_SESSION['body']			= $body;
 		$_SESSION['comment_delay']	= time();
 		$this->redirect($this->href('', '', 'show_comments=1&p=last'));
@@ -94,8 +94,8 @@ if ($this->has_access('comment') && $this->has_access('read'))
 					if (!$word_ok)
 					{
 						//not the right word
-						$error = $this->get_translation("SpamAlert");
-						$this->set_message($this->get_translation("SpamAlert"));
+						$error = $this->get_translation('SpamAlert');
+						$this->set_message($this->get_translation('SpamAlert'));
 						$_SESSION['freecap_old_comment'] = $body;
 					}
 				}
@@ -120,10 +120,10 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		{
 			$comment_on_id = $this->get_page_id();
 			// store new comment
-			$this->save_page("Comment".$num, $title, $body, $edit_note = "", $minor_edit = "0", $comment_on_id);
+			$this->save_page("Comment".$num, $title, $body, $edit_note = '', $minor_edit = '0', $comment_on_id);
 
 			// log event
-			$this->log(5, str_replace("%2", $this->tag." ".$this->page['title'], str_replace("%1", "Comment".$num, $this->get_translation("LogCommentPosted", $this->config['language']))));
+			$this->log(5, str_replace('%2', $this->tag." ".$this->page['title'], str_replace('%1', "Comment".$num, $this->get_translation('LogCommentPosted', $this->config['language']))));
 
 		// restore username after anonymous publication
 		if ($_POST['noid_publication'] == $this->tag)
@@ -141,7 +141,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$this->write_link_table('Comment'.$num);
 		$this->clear_link_table();
 
-			$this->set_message($this->get_translation("CommentAdded"));
+			$this->set_message($this->get_translation('CommentAdded'));
 		}
 
 		// End Comment Captcha
@@ -152,7 +152,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 }
 else
 {
-	print("<div id=\"page\">".$this->get_translation("CommentAccessDenied")."</div>\n");
+	print("<div id=\"page\">".$this->get_translation('CommentAccessDenied')."</div>\n");
 }
 
 ?>

@@ -110,7 +110,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" ";  echo " /> <label for=\"redirect\">".$this->get_translation("ClonedRedirect")."</label>"; ?>
 	<br /><br />
 	<input name="submit" type="submit" value="<?php echo $this->get_translation("CloneButton"); ?>" /> &nbsp;
-	<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation("EditCancelButton")); ?>"
+	<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"
 	onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 
 	<?php
@@ -121,7 +121,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 else
 {
 	#print("<div class=\"error\">Warning: The page handler \"clone\" is only for Wiki Admin</div>");
-	print($this->get_translation("ReadAccessDenied"));
+	print($this->get_translation('ReadAccessDenied'));
 }
 
 //$this->redirect($this->href());

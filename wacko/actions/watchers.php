@@ -23,15 +23,15 @@ if ($this->user_is_owner($page_id))
 
 	if ($watchers)
 	{
-		$title = $this->get_translation("Watchers");
-		$title = str_replace("%1",  $this->link("/".$tag,"",$tag),  $title);
+		$title = $this->get_translation('Watchers');
+		$title = str_replace('%1', $this->link('/'.$tag, '', $tag),  $title);
 		if (!$nomark)
 			echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.":</span></p>\n";
 
 		foreach ($watchers as $watcher)
 		{
 			$user = $watcher['user_name'];
-			echo $this->link("/".$user, "", $user)."<br />";
+			echo $this->link('/'.$user, '', $user)."<br />";
 		}
 		if (!$nomark)
 			echo "</div>\n";
@@ -39,13 +39,13 @@ if ($this->user_is_owner($page_id))
 	else
 	{
 		if (!$nomark)
-			echo str_replace("%1",  $this->link("/".$tag,"",$tag), $this->get_translation("NoWatchers"));
+			echo str_replace('%1',  $this->link('/'.$tag, '', $tag), $this->get_translation('NoWatchers'));
 	}
 }
 else
 {
 	if (!$nomark)
-		echo str_replace("%1",  $this->link("/".$tag,"",$tag), $this->get_translation("NotOwnerAndViewWatchers"));
+		echo str_replace('%1',  $this->link('/'.$tag, '', $tag), $this->get_translation('NotOwnerAndViewWatchers'));
 }
 
 ?>

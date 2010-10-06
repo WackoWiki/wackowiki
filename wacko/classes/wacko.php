@@ -1411,15 +1411,15 @@ class Wacko
 								$this->set_resource ($lang);
 								$this->set_language ($lang);
 
-								$subject = "[".$this->config['wacko_name']."] ".$this->get_translation("CommentForWatchedPage", $lang)."'".$title."'";
-								$message = $this->get_translation("EmailHello", $lang). $watcher['user_name'].".\n\n".
+								$subject = "[".$this->config['wacko_name']."] ".$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
+								$message = $this->get_translation('EmailHello', $lang). $watcher['user_name'].".\n\n".
 											$username.
-											$this->get_translation("SomeoneCommented", $lang)."\n".
+											$this->get_translation('SomeoneCommented', $lang)."\n".
 											$this->href('', $this->get_comment_on_tag($comment_on_id), '')."\n\n".
 											"----------------------------------------------------------------------\n\n".
-											$this->format($body_r, "post_wacko")."\n\n".
+											$this->format($body_r, 'post_wacko')."\n\n".
 											"----------------------------------------------------------------------\n\n".
-											$this->get_translation("EmailGoodbye", $lang)."\n".
+											$this->get_translation('EmailGoodbye', $lang)."\n".
 											$this->config['wacko_name']."\n".
 											$this->config['base_url'];
 
@@ -1518,16 +1518,16 @@ class Wacko
 									$this->set_resource ($lang);
 									$this->set_language ($lang);
 
-									$subject = "[".$this->config['wacko_name']."] ".$this->get_translation("WatchedPageChanged", $lang)."'".$tag."'";
-									$message = $this->get_translation("EmailHello", $lang). $watcher['user_name']."\n\n".
+									$subject = "[".$this->config['wacko_name']."] ".$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
+									$message = $this->get_translation('EmailHello', $lang). $watcher['user_name']."\n\n".
 										$username.
-										$this->get_translation("SomeoneChangedThisPage", $lang)."\n".
+										$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
 										$title."\n".
 										$this->href('', $tag)."\n\n".
 										"======================================================================".
-										$this->format($diff, "html2mail").
+										$this->format($diff, 'html2mail').
 										"\n======================================================================\n\n".
-										$this->get_translation("EmailGoodbye", $lang)."\n".
+										$this->get_translation('EmailGoodbye', $lang)."\n".
 										$this->config['wacko_name']."\n".
 										$this->config['base_url'];
 
@@ -1639,7 +1639,7 @@ class Wacko
 	// HTTP/REQUEST/LINK RELATED
 	function set_message($message)
 	{
-		$_SESSION[$this->config['session_prefix'].'_'."message"] = $message;
+		$_SESSION[$this->config['session_prefix'].'_'.'message'] = $message;
 	}
 
 	function get_message()
@@ -2225,7 +2225,7 @@ class Wacko
 
 				if ($this->config['youarehere_text'])
 					if ($this->npj_translit($tag) == $this->npj_translit($this->context[$this->current_context]))
-						$res	= str_replace("####", $text, $this->config['youarehere_text']);
+						$res	= str_replace('####', $text, $this->config['youarehere_text']);
 
 				// numerated wiki-links. initialize property as an array to make it work
 				if (is_array($this->numerate_links) && $pagelink != $text && $title != $this->get_translation('CreatePage'))
@@ -2582,11 +2582,11 @@ class Wacko
 		}
 	}
 
-	function action($action, $params = '', $forceLinkTracking = 0)
+	function action($action, $params = '', $force_link_tracking = 0)
 	{
 		$action = trim($action);
 
-		if (!$forceLinkTracking)
+		if (!$force_link_tracking)
 			$this->stop_link_tracking();
 
 		$result = $this->include_buffered(strtolower($action).'.php', "<i>".$this->get_translation('UnknownAction')." \"$action\"</i>", $params, $this->config['action_path']);
@@ -2726,7 +2726,7 @@ class Wacko
 
 	function get_user_name()
 	{
-		if ($username = $this->get_user_setting("user_name"))
+		if ($username = $this->get_user_setting('user_name'))
 		{
 			return $username;
 		}
@@ -3270,7 +3270,7 @@ class Wacko
 					// First look for parent ACL, so that clusters/subpages
 					// work correctly.
 					$tag = $this->get_page_tag_by_id($page_id);
-					if ( strstr($tag, "/") )
+					if ( strstr($tag, '/') )
 					{
 						$parent = preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $tag);
 
@@ -3286,8 +3286,8 @@ class Wacko
 						$acl = array(
 							"page_id" => $page_id,
 							"privilege" => $privilege,
-							"list" => $this->config["default_".$privilege."_acl"],
-							"time" => date("YmdHis"),
+							"list" => $this->config['default_'.$privilege.'_acl'],
+							"time" => date('YmdHis'),
 							"default" => 1
 						);
 					}
@@ -3391,7 +3391,7 @@ class Wacko
 			{
 				$linel = $line;
 				// check for inversion character "!"
-				if (preg_match("/^\!(.*)$/", $line, $matches))
+				if (preg_match('/^\!(.*)$/', $line, $matches))
 				{
 					$negate	= 1;
 					$linel	= $matches[1];
@@ -3456,7 +3456,7 @@ class Wacko
 	}
 
 	// BOOKMARKS
-	function get_default_bookmarks($lang, $what = "default")
+	function get_default_bookmarks($lang, $what = 'default')
 	{
 		if (!isset($lang))
 		{
@@ -3476,21 +3476,21 @@ class Wacko
 			}
 		}
 
-		if (isset($this->config[$what."_bookmarks"]) &&
-		is_array($this->config[$what."_bookmarks"]) &&
-		isset($this->config[$what."_bookmarks"][$lang]))
+		if (isset($this->config[$what.'_bookmarks']) &&
+		is_array($this->config[$what.'_bookmarks']) &&
+		isset($this->config[$what.'_bookmarks'][$lang]))
 		{
-			return $this->config[$what."_bookmarks"][$lang];
+			return $this->config[$what.'_bookmarks'][$lang];
 		}
-		else if (isset($this->config[$what."_bookmarks"]) &&
-		!is_array($this->config[$what."_bookmarks"]) &&
+		else if (isset($this->config[$what.'_bookmarks']) &&
+		!is_array($this->config[$what.'_bookmarks']) &&
 		($this->config['language'] == $lang))
 		{
-			return $this->config[$what."_bookmarks"];
+			return $this->config[$what.'_bookmarks'];
 		}
 		else
 		{
-			return $this->get_translation($what."_bookmarks", $lang, false);
+			return $this->get_translation($what.'_bookmarks', $lang, false);
 		}
 	}
 
@@ -3540,29 +3540,29 @@ class Wacko
 			foreach($_bookmarks as $key => $_bookmark)
 			{
 				// links ((link desc @@lang))
-				if ((preg_match("/^\[\[(\S+)(\s+(.+))?\]\]$/", $_bookmark, $matches)) ||
-					(preg_match("/^\(\((\S+)(\s+(.+))?\)\)$/", $_bookmark, $matches)) ||
-					(preg_match("/^(\S+)(\s+(.+))?$/", $thing, $matches)) ) // without brackets at last!
+				if ((preg_match('/^\[\[(\S+)(\s+(.+))?\]\]$/', $_bookmark, $matches)) ||
+					(preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/', $_bookmark, $matches)) ||
+					(preg_match('/^(\S+)(\s+(.+))?$/', $thing, $matches)) ) // without brackets at last!
 				{
 					list (, $url, $text) = $matches;
 					if ($url)
 					{
-						$url = str_replace(" ", "", $url);
-						if ($url{0} == "/")
+						$url = str_replace(' ', '', $url);
+						if ($url{0} == '/')
 						{
 							$url = substr($url, 1);
 						}
 
-						if (stristr($text, "@@"))
+						if (stristr($text, '@@'))
 						{
-							$t = explode("@@", $text);
+							$t = explode('@@', $text);
 							$text = $t[0];
 							$bm_lang = $t[1];
 						}
 
-						$title = trim(preg_replace("/|__|\[\[|\(\(/","",$text));
+						$title = trim(preg_replace('/|__|\[\[|\(\(/', '', $text));
 						$page_id = $this->get_page_id($url);
-						$page_title = $this->get_page_title("", $page_id);
+						$page_title = $this->get_page_title('', $page_id);
 
 						if ( $page_title !== $title )
 						{
@@ -3625,16 +3625,16 @@ class Wacko
 				}
 			}
 
-			$_SESSION[$this->config['session_prefix'].'_'."bookmarks"]		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'."bookmarklinks"]	= $bmlinks;
-			$_SESSION[$this->config['session_prefix'].'_'."bookmarksfmt"]	= $this->format(implode("\n", $bookmarks), "wacko");
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmarks']		= $bookmarks;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bmlinks;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt']	= $this->format(implode("\n", $bookmarks), 'wacko');
 		}
 
 		// adding new bookmark
 		if (!empty($_GET['addbookmark']) && $user)
 		{
 			// writing bookmark
-			$bookmark = "((".$this->tag." ".$this->get_page_title().($user['lang'] != $this->pagelang ? " @@".$this->pagelang : "")."))";
+			$bookmark = '(('.$this->tag.' '.$this->get_page_title().($user['lang'] != $this->pagelang ? ' @@'.$this->pagelang : '').'))';
 
 			if (!in_array($bookmark, $bookmarks))
 			{
@@ -3674,11 +3674,11 @@ class Wacko
 				}
 			}
 
-			$this->set_user_setting("bookmarks", implode("\n", $bookmarks));
+			$this->set_user_setting('bookmarks', implode("\n", $bookmarks));
 
-			$_SESSION[$this->config['session_prefix'].'_'."bookmarks"]		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'."bookmarklinks"]	= $bmlinks;
-			$_SESSION[$this->config['session_prefix'].'_'."bookmarksfmt"]	= $this->format(implode("\n", $bookmarks), "wacko");
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmarks']		= $bookmarks;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bmlinks;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt']	= $this->format(implode("\n", $bookmarks), 'wacko');
 		}
 
 		// removing bookmark
@@ -3721,30 +3721,30 @@ class Wacko
 				}
 			}
 
-			$this->set_user_setting("bookmarks", ( $bookmarks ? implode("\n", $bookmarks) : "" ));
+			$this->set_user_setting('bookmarks', ( $bookmarks ? implode("\n", $bookmarks) : '' ));
 
-			$_SESSION[$this->config['session_prefix'].'_'."bookmarks"]		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'."bookmarklinks"]	= $bmlinks;
-			$_SESSION[$this->config['session_prefix'].'_'."bookmarksfmt"]	= ( $bookmarks ? $this->format(implode("\n", $bookmarks), "wacko") : "" );
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmarks']		= $bookmarks;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bmlinks;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt']	= ( $bookmarks ? $this->format(implode("\n", $bookmarks), 'wacko') : '' );
 		}
 	}
 
 	function get_bookmarks()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'."bookmarks"]))
-			return $_SESSION[$this->config['session_prefix'].'_'."bookmarks"];
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmarks']))
+			return $_SESSION[$this->config['session_prefix'].'_'.'bookmarks'];
 	}
 
 	function get_bookmarks_formatted()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'."bookmarksfmt"]))
-			return $_SESSION[$this->config['session_prefix'].'_'."bookmarksfmt"];
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt']))
+			return $_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt'];
 	}
 
 	function get_bookmark_links()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'."bookmarklinks"]))
-			return $_SESSION[$this->config['session_prefix'].'_'."bookmarklinks"];
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']))
+			return $_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks'];
 	}
 
 	// MAINTENANCE
@@ -3869,7 +3869,7 @@ class Wacko
 	function run($tag, $method = '')
 	{
 		// mandatory ssl?
-		if ($this->config['ssl'] == true && $this->config['ssl_implicit'] == true && ( ($_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
+		if ($this->config['ssl'] == true && $this->config['ssl_implicit'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 		{
 			$this->redirect(str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->href($method, $tag)));
 		}
@@ -3891,11 +3891,11 @@ class Wacko
 		$user = $this->load_user($auth['user_name'], 0, $auth['password']);
 
 		// run in ssl mode?
-		if ($this->config['ssl'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on" && !empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
+		if ($this->config['ssl'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
 		{
 			$this->config['open_url']	= $this->config['base_url'];
-			$this->config['base_url']	= str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
-			$this->config['theme_url']	= $this->config['base_url']."themes/".$this->config['theme']."/";
+			$this->config['base_url']	= str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
+			$this->config['theme_url']	= $this->config['base_url'].'themes/'.$this->config['theme'].'/';
 			$this->config['cookie_path'] = preg_replace('|https?://[^/]+|i', '', $this->config['base_url'].'');
 		}
 
@@ -3932,7 +3932,7 @@ class Wacko
 		}
 
 		// check IP validity
-		if ($this->get_user_setting("validate_ip", 1) == '1' && $this->get_user_setting("ip") != (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['ssl_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) )
+		if ($this->get_user_setting('validate_ip', 1) == '1' && $this->get_user_setting('ip') != (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['ssl_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) )
 		{
 			$this->log(1, '<strong><span class="cite">User in-session IP change detected</span></strong>');
 			$this->logout_user();
@@ -3972,7 +3972,7 @@ class Wacko
 		if (is_array($user) && isset($user['theme']))
 		{
 			$this->config['theme']		= $user['theme'];
-			$this->config['theme_url']	= $this->config['base_url']."themes/".$this->config['theme']."/";
+			$this->config['theme_url']	= $this->config['base_url'].'themes/'.$this->config['theme'].'/';
 		}
 
 		if (!$this->config['multilanguage'])
@@ -4039,7 +4039,7 @@ class Wacko
 			{
 				if ($key && $val == true) $this->config[$key] = $val;
 			}
-			$this->config['theme_url']	= $this->config['base_url']."themes/".$this->config['theme']."/";
+			$this->config['theme_url']	= $this->config['base_url'].'themes/'.$this->config['theme'].'/';
 
 			// set page keywords. this defines $keywords (array) object property
 			// consisting of keywords ids as keys and corresponding names as values
@@ -4320,11 +4320,11 @@ class Wacko
 
 	// CLONE / RENAMING / MOVING
 
-	function clone_page($tag, $clonetag, $cloneSuperTag = "", $edit_note)
+	function clone_page($tag, $clonetag, $cloneSuperTag = '', $edit_note)
 	{
 		if (!$tag || !$clonetag) return false;
 
-		if ($cloneSuperTag == "")
+		if ($cloneSuperTag == '')
 			$cloneSuperTag = $this->npj_translit($clonetag);
 
 		// load page and site information

@@ -8,7 +8,7 @@ if ($this->is_admin())
 		?>
 <input
 	type="submit" name="clear"
-	value="<?php echo $this->get_translation("ClearCache");?>" />
+	value="<?php echo $this->get_translation('ClearCache');?>" />
 		<?php
 		echo $this->form_close();
 	}
@@ -18,7 +18,7 @@ if ($this->is_admin())
 		@set_time_limit(0);
 
 		// pages
-		$handle = opendir(rtrim($this->config['cache_dir'].CACHE_PAGE_DIR,"/"));
+		$handle = opendir(rtrim($this->config['cache_dir'].CACHE_PAGE_DIR, '/'));
 		while (false !== ($file = readdir($handle)))
 		{
 			if ($file != "." && $file != ".." && !is_dir($this->config['cache_dir'].CACHE_PAGE_DIR.$file))
@@ -40,7 +40,7 @@ if ($this->is_admin())
 		}
 		closedir($handle);
 
-		echo $this->get_translation("CacheCleared");
+		echo $this->get_translation('CacheCleared');
 	}
 }
 
