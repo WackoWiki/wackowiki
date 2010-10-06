@@ -110,8 +110,8 @@ else
 {
 	// Show Register / Login link
 	echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation('LoginPage').($this->config['rewrite_mode'] ? "?" : "&amp;")."goback=".$this->slim_url($this->tag), "", $this->get_translation('LoginPage'), 0)."</li>\n";
-	echo "<li>".$this->compose_link_to_page($this->get_translation("RegistrationPage"), "", $this->get_translation("RegistrationPage"), 0)."</li>\n";
-	// echo "<li>".$this->compose_link_to_page($this->get_translation("RegistrationPage"), "", $this->get_translation("Help"), 0)."</li>\n";
+	echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('RegistrationPage'), 0)."</li>\n";
+	// echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation("Help"), 0)."</li>\n";
 	echo "</ul>\n";
 }
 
@@ -127,7 +127,7 @@ else
 		#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 		echo "<li>";
 		// Bookmarks
-		$formatedBMs = $this->format($this->get_bookmarks_formatted(), "post_wacko");
+		$formatedBMs = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
 		$formatedBMs = str_replace ("\n", "</li>\n<li>", $formatedBMs);
 		echo $formatedBMs;
 
@@ -137,12 +137,12 @@ else
 		{
 			// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
 			if (!in_array($this->tag, $this->get_bookmark_links()))
-				echo '<li><a href="'. $this->href('', '', "addbookmark=yes")
+				echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 					.'"><img src="'. $this->config['theme_url']
 					.'icons/bookmark1.gif" alt="+" title="'.
 					$this->get_translation('AddToBookmarks') .'"/></a></li>';
 			else
-				echo '<li><a href="'. $this->href('', '', "removebookmark=yes")
+				echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 					.'"><img src="'. $this->config['theme_url']
 					.'icons/bookmark2.gif" alt="-" title="'.
 					$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';

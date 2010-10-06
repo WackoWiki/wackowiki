@@ -6,7 +6,7 @@ $error = '';
 $output = '';
 
 // invoke autocomplete if needed
-if ((isset($_GET["_autocomplete"])) && $_GET["_autocomplete"])
+if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 {
 	include( dirname(__FILE__)."/_autocomplete.php" );
 	return;
@@ -50,8 +50,8 @@ if ($this->has_access('write') && $this->has_access('read'))
 				$title = trim($_POST['title']);
 			}
 			// check for overwriting
-			if ($this->page && $this->page['modified'] != $_POST["previous"])
-				$error = $this->get_translation("OverwriteAlert");
+			if ($this->page && $this->page['modified'] != $_POST['previous'])
+				$error = $this->get_translation('OverwriteAlert');
 
 			// check text length
 			#if ($textchars > $maxchars)
@@ -59,7 +59,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 
 			// check for edit note
 			if (($this->config['edit_summary'] == 2) && $_POST['edit_note'] == "" && $this->page['comment_on_id'] == 0)
-				$error .= $this->get_translation("EditNoteMissing");
+				$error .= $this->get_translation('EditNoteMissing');
 
 			// check categories
 			#if (!$this->page && $this->get_categories_list($this->pagelang, 1) && $this->save_categories_list($this->page['page_id'], 1) !== true)
@@ -103,7 +103,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 						if(!$word_ok)
 						{
 							//not the right word
-							$error = $this->get_translation("SpamAlert");
+							$error = $this->get_translation('SpamAlert');
 						}
 					}
 				}
@@ -113,7 +113,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 
 			// You're not allowed to have empty comments as they would be kinda pointless.
 			if (!$body && $this->page['comment_on_id'] != 0)
-			$error .= $this->get_translation("EmptyComment");
+			$error .= $this->get_translation('EmptyComment');
 
 			// store
 			if (!$error)
@@ -133,7 +133,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 				if ($this->page['comment_on_id'] != 0)
 				{
 					// comment modified
-					$this->log(6, str_replace("%1", $this->tag." ".$this->page['title'], $this->get_translation("LogCommentEdited", $this->config['language'])));
+					$this->log(6, str_replace("%1", $this->tag." ".$this->page['title'], $this->get_translation('LogCommentEdited', $this->config['language'])));
 				}
 				else
 				{
@@ -142,12 +142,12 @@ if ($this->has_access('write') && $this->has_access('read'))
 					{
 						// new page created
 						$this->save_categories_list($this->get_page_id($this->tag));
-						$this->log(4, str_replace("%1", $this->tag." ".$_POST['title'], $this->get_translation("LogPageCreated", $this->config['language'])));
+						$this->log(4, str_replace("%1", $this->tag." ".$_POST['title'], $this->get_translation('LogPageCreated', $this->config['language'])));
 					}
 					else
 					{
 						// old page modified
-						$this->log(6, str_replace("%1", $this->tag." ".$this->page['title'], $this->get_translation("LogPageEdited", $this->config['language'])));
+						$this->log(6, str_replace("%1", $this->tag." ".$this->page['title'], $this->get_translation('LogPageEdited', $this->config['language'])));
 					}
 
 					// restore username after anonymous publication
@@ -161,7 +161,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 					// now we render it internally so we can write the updated link table.
 					$this->clear_link_table();
 					$this->start_link_tracking();
-					$dummy = $this->format($body_r, "post_wacko");
+					$dummy = $this->format($body_r, 'post_wacko');
 					$this->stop_link_tracking();
 					$this->write_link_table($this->page['page_id']);
 					$this->clear_link_table();
@@ -181,7 +181,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 			}
 		}
 		// saving blank document
-		else if ($_POST['body'] == "")
+		else if ($_POST['body'] == '')
 		{
 			$this->redirect($this->href());
 		}
@@ -190,7 +190,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 	$this->no_cache();
 
 	// fetch fields
-	$previous = isset($_POST["previous"]) ? $_POST["previous"] : $this->page['modified'];
+	$previous = isset($_POST['previous']) ? $_POST['previous'] : $this->page['modified'];
 	$body = isset($_POST['body']) ? $_POST['body'] : $this->page['body'];
 	$body = html_entity_decode($body);
 	$title = isset($_POST['title']) ? $_POST['title'] : $this->page['title'];
@@ -217,20 +217,20 @@ if ($this->has_access('write') && $this->has_access('read'))
 	$preview	= '';
 
 	// preview?
-	if (isset($_POST["preview"]))
+	if (isset($_POST['preview']))
 	{
 ?>
-		<input name="save" type="submit" value="<?php echo $this->get_translation("EditStoreButton"); ?>" />
+		<input name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
 		&nbsp;
-		<input name="preview" type="submit" value="<?php echo $this->get_translation("EditPreviewButton"); ?>" />
+		<input name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
 		&nbsp;
-		<input type="button" value="<?php echo $this->get_translation("EditCancelButton"); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+		<input type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 <?php
-		$preview = $this->format($body, "preformat");
-		$preview = $this->format($preview, "wacko");
-		$preview = $this->format($preview, "post_wacko");
+		$preview = $this->format($body, 'preformat');
+		$preview = $this->format($preview, 'wacko');
+		$preview = $this->format($preview, 'post_wacko');
 
-		$output = "<div class=\"preview\"><p class=\"preview\"><span>".$textchars." ".$this->get_translation("EditPreview")."</span></p>\n";
+		$output = "<div class=\"preview\"><p class=\"preview\"><span>".$textchars." ".$this->get_translation('EditPreview')."</span></p>\n";
 
 		if ($this->config['edit_summary'] != 0)
 		{
@@ -267,13 +267,13 @@ if ($this->has_access('write') && $this->has_access('read'))
 		$title = $this->page['title'];
 	}
 ?>
-		<input name="save" type="submit" value="<?php echo $this->get_translation("EditStoreButton"); ?>" />
+		<input name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
 		&nbsp;
-		<input name="preview" type="submit" value="<?php echo $this->get_translation("EditPreviewButton"); ?>" />
+		<input name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
 		&nbsp;
-		<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation("EditCancelButton")); ?>" onclick="document.location='<?php echo addslashes($this->href('', '', '', 1))?>';" />
+		<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href('', '', '', 1))?>';" />
 		<br />
-		<noscript><div class="errorbox_js"><?php echo $this->get_translation("WikiEditInactiveJs"); ?></div></noscript>
+		<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
 <?php
 		$output .= "<input type=\"hidden\" name=\"previous\" value=\"".htmlspecialchars($previous)."\" /><br />";
 		$output .= "<textarea id=\"postText\" name=\"body\" rows=\"40\" cols=\"60\" class=\"TextArea\">";
@@ -282,7 +282,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 		// comment title
 		if ($this->page['comment_on_id'] != 0)
 		{
-			$output .= "<label for=\"addcomment_title\">".$this->get_translation("AddCommentTitle").":</label><br />";
+			$output .= "<label for=\"addcomment_title\">".$this->get_translation('AddCommentTitle').":</label><br />";
 			$output .= "<input id=\"addcomment_title\" maxlength=\"100\" value=\"".htmlspecialchars($title)."\" size=\"60\" name=\"title\" />";
 			$output .= "<br />";
 		}
@@ -291,13 +291,13 @@ if ($this->has_access('write') && $this->has_access('read'))
 		 if (!$this->page)
 			{
 				// new page title field
-				$output .= "<label for=\"addpage_title\">".$this->get_translation("MetaTitle").":</label><br />";
+				$output .= "<label for=\"addpage_title\">".$this->get_translation('MetaTitle').":</label><br />";
 				$output .= "<input id=\"addpage_title\" value=\"".htmlspecialchars($title)."\" size=\"60\" maxlength=\"100\" name=\"title\" /><br />";
 			}
 			// edit note
 			if ($this->config['edit_summary'] != 0)
 			{
-				$output .= "<label for=\"edit_note\">".$this->get_translation("EditNote").":</label><br />";
+				$output .= "<label for=\"edit_note\">".$this->get_translation('EditNote').":</label><br />";
 				$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
 				$output .= "&nbsp;&nbsp;&nbsp;"; // "<br />";
 			}
@@ -306,7 +306,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 			if ($this->page && $this->config['minor_edit'] != 0)
 			{
 				$output .= "<input id=\"minor_edit\" type=\"checkbox\" value=\"1\" name=\"minor_edit\"/>";
-				$output .= "<label for=\"minor_edit\">".$this->get_translation("EditMinor")."</label>";
+				$output .= "<label for=\"minor_edit\">".$this->get_translation('EditMinor')."</label>";
 				$output .= "<br />";
 			}
 
@@ -315,14 +315,14 @@ if ($this->has_access('write') && $this->has_access('read'))
 				// publish anonymously
 				if (($this->page && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 				{
-					$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".htmlspecialchars($this->tag)."\"".( $this->get_user_setting("noid_pubs", 1) == "1" ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">".$this->get_translation("PostAnonymously")."</label></small>";
+					$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".htmlspecialchars($this->tag)."\"".( $this->get_user_setting('noid_pubs', 1) == '1' ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">".$this->get_translation('PostAnonymously')."</label></small>";
 					$output .= "<br />";
 				}
 
 				// watch a page
 				if ($this->page && $this->iswatched !== true)
 				{
-					$output .= "<input type=\"checkbox\" name=\"watchpage\" id=\"watchpage\" value=\"1\"".( $this->get_user_setting("send_watchmail", 1) == "1" ? "checked=\"checked\"" : "" )." /> <small><label for=\"watchpage\">".$this->get_translation("NotifyMe")."</label></small>";
+					$output .= "<input type=\"checkbox\" name=\"watchpage\" id=\"watchpage\" value=\"1\"".( $this->get_user_setting('send_watchmail', 1) == '1' ? "checked=\"checked\"" : "" )." /> <small><label for=\"watchpage\">".$this->get_translation('NotifyMe')."</label></small>";
 					$output .= "<br />";
 				}
 			}
@@ -345,7 +345,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 				}
 			}
 
-			$output .= "<br />".$this->get_translation("Categories").':<small><br /><br />'.substr(implode(' ', $_words), 6).'</small><br /><br />';
+			$output .= "<br />".$this->get_translation('Categories').':<small><br /><br />'.substr(implode(' ', $_words), 6).'</small><br /><br />';
 		}
 		print($output);
 
@@ -363,9 +363,9 @@ if ($this->has_access('write') && $this->has_access('read'))
 				if($this->get_user_name() == false)
 				{
 ?>
-		<label for="captcha"><?php echo $this->get_translation("Captcha");?>:</label>
+		<label for="captcha"><?php echo $this->get_translation('Captcha');?>:</label>
 		<br />
-		<img src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->get_translation("Captcha");?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->get_translation("CaptchaReload"); ?>"><img src="<?php echo $this->config['base_url'];?>images/reload.png" width="18" height="17" alt="<?php echo $this->get_translation("CaptchaReload"); ?>" /></a>
+		<img src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->get_translation('Captcha');?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->get_translation('CaptchaReload'); ?>"><img src="<?php echo $this->config['base_url'];?>images/reload.png" width="18" height="17" alt="<?php echo $this->get_translation('CaptchaReload'); ?>" /></a>
 		<br />
 		<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
 		<br />
@@ -380,7 +380,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 		wE = new WikiEdit();
 <?php
 	if ($user = $this->get_user())
-	if ($user["autocomplete"])
+	if ($user['autocomplete'])
 	{
 ?>
 		if (AutoComplete) { wEaC = new AutoComplete( wE, "<?php echo $this->href('edit');?>" ); }
@@ -389,18 +389,18 @@ if ($this->has_access('write') && $this->has_access('read'))
 ?>
 		wE.init('postText','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>images/wikiedit/');
 		</script><br />
-		<input name="save" type="submit" value="<?php echo $this->get_translation("EditStoreButton"); ?>" />
+		<input name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
 		&nbsp;
-		<input name="preview" type="submit" value="<?php echo $this->get_translation("EditPreviewButton"); ?>" />
+		<input name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
 		&nbsp;
-		<input type="button" value="<?php echo $this->get_translation("EditCancelButton"); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+		<input type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 <?php
 	print ($this->form_close());
 }
 else
 {
 	echo "<div id=\"page\">";
-	echo $this->get_translation("WriteAccessDenied");
+	echo $this->get_translation('WriteAccessDenied');
 	echo "</div>";
 }
 ?>

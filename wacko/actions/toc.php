@@ -30,8 +30,8 @@ else
 	$link		= '';
 }
 
-if (!$from) $from = "h2";
-if (!$to)   $to   = "h9";
+if (!$from) $from = 'h2';
+if (!$to)   $to   = 'h9';
 
 $start_depth = $from{1};
 $end_depth   = $to{1};
@@ -39,11 +39,11 @@ $end_depth   = $to{1};
 // 3. output
 if (!$nomark)
 {
-	print "<div class=\"layout-box\"><p class=\"layout-box\"><span> ".$this->get_translation("TOCTitle")." ".$this->link($ppage, "", $title)."  </span></p>";
+	print "<div class=\"layout-box\"><p class=\"layout-box\"><span> ".$this->get_translation('TOCTitle')." ".$this->link($ppage, '', $title)."  </span></p>";
 }
 
-if (!$this->has_access('read',$_page['page_id']))
-	print $this->get_translation("ReadAccessDenied");
+if (!$this->has_access('read', $_page['page_id']))
+	print $this->get_translation('ReadAccessDenied');
 
 else
 {

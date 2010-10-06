@@ -10,21 +10,21 @@ if ($this->page['comment_on_id'])
 
 if ($user = $this->get_user())
 {
-	if ($global = isset($_GET["global"]))
+	if ($global = isset($_GET['global']))
 	{
-		$title = str_replace("%1",$this->href('referrers', '', 'global=1'),$this->get_translation("DomainsSitesPagesGlobal"));
+		$title = str_replace('%1', $this->href('referrers', '', 'global=1'),$this->get_translation('DomainsSitesPagesGlobal'));
 		$referrers = $this->load_referrers();
 	}
 	else
 	{
-		$title = str_replace("%1", $this->compose_link_to_page($this->tag),
-		str_replace("%2",
+		$title = str_replace('%1', $this->compose_link_to_page($this->tag),
+		str_replace('%2',
 		($this->config['referrers_purge_time'] ?
 		($this->config['referrers_purge_time'] == 1 ?
-		$this->get_translation("Last24Hours") :
-		str_replace("%1",$this->config['referrers_purge_time'],
-		$this->get_translation("LastDays"))): ""),
-		str_replace("%3",$this->href('referrers'),$this->get_translation("DomainsSitesPages"))));
+		$this->get_translation('Last24Hours') :
+		str_replace('%1', $this->config['referrers_purge_time'],
+		$this->get_translation('LastDays'))): ''),
+		str_replace('%3', $this->href('referrers'),$this->get_translation('DomainsSitesPages'))));
 
 		$referrers = $this->load_referrers($this->page['page_id']);
 	}
@@ -34,16 +34,16 @@ if ($user = $this->get_user())
 	{
 		for ($a = 0; $a < count($referrers); $a++)
 		{
-			$temp_parse_url = parse_url($referrers[$a]["referrer"]);
-			$temp_parse_url = ($temp_parse_url["host"] != "") ? strtolower(preg_replace("/^www\./Ui", "", $temp_parse_url["host"])) : "unknown";
+			$temp_parse_url = parse_url($referrers[$a]['referrer']);
+			$temp_parse_url = ($temp_parse_url['host'] != '') ? strtolower(preg_replace('/^www\./Ui', '', $temp_parse_url['host'])) : 'unknown';
 
-			if (isset($referrer_sites["$temp_parse_url"]))
+			if (isset($referrer_sites['$temp_parse_url']))
 			{
-				$referrer_sites["$temp_parse_url"] += $referrers[$a]["num"];
+				$referrer_sites['$temp_parse_url'] += $referrers[$a]['num'];
 			}
 			else
 			{
-				$referrer_sites["$temp_parse_url"] = $referrers[$a]["num"];
+				$referrer_sites['$temp_parse_url'] = $referrers[$a]['num'];
 			}
 		}
 
@@ -58,26 +58,26 @@ if ($user = $this->get_user())
 		<?php
 		}
 		?>
-	  </div>
-	  <?php
+	</div>
+	<?php
 	}
 	else
 	{
-		print($this->get_translation("NoneReferrers")."<br />\n");
+		print($this->get_translation('NoneReferrers')."<br />\n");
 	}
 
 	if ($global)
 	{
-		print("<br />[".str_replace("%1",$this->href('referrers_sites'),str_replace("%2",$this->tag,$this->get_translation("ViewReferringSites")))." | ".str_replace("%1",$this->href('referrers'),str_replace("%2",$this->tag,$this->get_translation("ViewReferrersFor")))."]");
+		print("<br />[".str_replace('%1',$this->href('referrers_sites'),str_replace('%2', $this->tag, $this->get_translation('ViewReferringSites')))." | ".str_replace('%1', $this->href('referrers'), str_replace('%2', $this->tag, $this->get_translation('ViewReferrersFor')))."]");
 	}
 	else
 	{
-		print("<br />[".str_replace("%1",$this->href('referrers_sites', '', 'global=1'),$this->get_translation("ViewReferringSitesGlobal")) ." | ".str_replace("%1",$this->href('referrers', '', 'global=1'),$this->get_translation("ViewReferrersForGlobal"))."]");
+		print("<br />[".str_replace('%1', $this->href('referrers_sites', '', 'global=1'), $this->get_translation('ViewReferringSitesGlobal')) ." | ".str_replace('%1', $this->href('referrers', '', 'global=1'), $this->get_translation('ViewReferrersForGlobal'))."]");
 	}
 }
 else
 {
-	print($this->get_translation("ReadAccessDenied"));
+	print($this->get_translation('ReadAccessDenied'));
 }
 ?>
 </div>

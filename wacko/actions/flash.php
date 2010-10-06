@@ -75,7 +75,7 @@ if(!$version) $version = '10.0.0';
 
 if (!$url)
 {
-	echo "<p><i>".$this->get_translation("FlashNoURL")."</i></p>\n";
+	echo "<p><i>".$this->get_translation('FlashNoURL')."</i></p>\n";
 }
 else if($url)
 {

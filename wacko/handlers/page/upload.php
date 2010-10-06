@@ -127,7 +127,7 @@ if ($registered
 				$real_filename = ($page_id
 					? ($this->config['upload_path_per_page'].'/@'.$page_id.'@')
 					: ($this->config['upload_path'].'/')).
-					$what[0]["filename"];
+					$what[0]['filename'];
 
 				if (@unlink($real_filename))
 					$message .= $this->get_translation('UploadRemovedFromFS');
@@ -269,11 +269,11 @@ if ($registered
 						// log event
 						if ($is_global)
 						{
-							$this->log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, $this->get_translation('LogFileUploadedGlobal', $this->config['language']))));
+							$this->log(4, str_replace('%3', $file_size_kb, str_replace('%2', $small_name, $this->get_translation('LogFileUploadedGlobal', $this->config['language']))));
 						}
 						else
 						{
-							$this->log(4, str_replace("%3", $file_size_kb, str_replace("%2", $small_name, str_replace("%1", $this->page['tag']." ".$this->page['title'], $this->get_translation('LogFileUploadedLocal', $this->config['language'])))));
+							$this->log(4, str_replace('%3', $file_size_kb, str_replace('%2', $small_name, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogFileUploadedLocal', $this->config['language'])))));
 						}
 						?>
 	<br />
@@ -302,7 +302,7 @@ if ($registered
 			else
 			{
 				if (isset($_FILES['file']['error']) && ($_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE || $_FILES['file']['error'] == UPLOAD_ERR_FORM_SIZE))
-					$error = $this->get_translation("UploadMaxSizeReached");
+					$error = $this->get_translation('UploadMaxSizeReached');
 				else if (isset($_FILES['file']['error']) && ($_FILES['file']['error'] == UPLOAD_ERR_PARTIAL || $_FILES['file']['error'] == UPLOAD_ERR_NO_FILE))
 					$error = $this->get_translation('UploadNoFile');
 				else
@@ -330,6 +330,6 @@ if ($this->has_access('read'))
 	echo $this->action('files', array())."<br />";
 }
 if (!$this->config['revisions_hide_cancel'])
-	echo "<input type=\"button\" value=\"".$this->get_translation("CancelDifferencesButton")."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
+	echo "<input type=\"button\" value=\"".$this->get_translation('CancelDifferencesButton')."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
 ?>
 </div>

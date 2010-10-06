@@ -1,14 +1,14 @@
 <?php
 
-if (!isset($root)) $root = $this->unwrap_link(isset($vars['for']) ? $vars['for'] : "");
+if (!isset($root)) $root = $this->unwrap_link(isset($vars['for']) ? $vars['for'] : '');
 if (!isset($root)) $root = $this->page['tag'];
-if (!isset($date)) $date = isset($_GET["date"]) ? $_GET["date"] :"";
-if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET['minor_edit']) ? $_GET['minor_edit'] :"";
+if (!isset($date)) $date = isset($_GET["date"]) ? $_GET['date'] : '';
+if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET['minor_edit']) ? $_GET['minor_edit'] : '';
 if (!isset($noxml)) $noxml = 0;
 
 if ($user = $this->get_user())
 {
-	$usermax = $user["changes_count"];
+	$usermax = $user['changes_count'];
 	if ($usermax == 0) $usermax = 10;
 }
 else
@@ -35,7 +35,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 	}
 	if ($root == "" && !(int)$noxml)
 	{
-		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/changes_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation("RecentChangesXMLTip")."\" alt=\"XML\" /></a></span><br /><br />\n";
+		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/changes_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RecentChangesXMLTip')."\" alt=\"XML\" /></a></span><br /><br />\n";
 	}
 
 	// pagination
@@ -56,7 +56,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 			$count++;
 
 			// day header
-			list($day, $time) = explode(" ", $page['modified']);
+			list($day, $time) = explode(' ', $page['modified']);
 			if (!isset($curday)) $curday = '';
 
 			if ($day != $curday)
@@ -66,7 +66,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 					print("</ul>\n<br /></li>\n");
 				}
 
-				print("<li><b>".date($this->config['date_format'],strtotime($day)).":</b>\n<ul>\n");
+				print("<li><b>".date($this->config['date_format'], strtotime($day)).":</b>\n<ul>\n");
 				$curday = $day;
 			}
 
@@ -83,13 +83,13 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 
 			// print entry
 			echo "<li ".$viewed."><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (".
-			$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation("History"), 0).") ".
-			$this->link( "/".$page['tag'], "", $page['tag'] )." . . . . . . . . . . . . . . . . <small>".
+			$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".
+			$this->link( '/'.$page['tag'], '', $page['tag'] )." . . . . . . . . . . . . . . . . <small>".
 			($page['user']
 				? ($this->is_wiki_name($page['user'])
-					? $this->link("/".$page['user'], "", $page['user'])
+					? $this->link('/'.$page['user'], '', $page['user'])
 					: $page['user'])
-				: $this->get_translation("Guest")).
+				: $this->get_translation('Guest')).
 			$edit_note.
 			"</small></li>\n";
 		}
@@ -102,7 +102,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 }
 else
 {
-	echo $this->get_translation("NoPagesFound");
+	echo $this->get_translation('NoPagesFound');
 }
 
 ?>

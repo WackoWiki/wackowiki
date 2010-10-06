@@ -13,10 +13,10 @@ if ($user_id = $this->get_user_id())
 	else $limit	= 100;
 	$prefix = $this->config['table_prefix'];
 
-	if(isset($_GET["bydate"]) && $_GET["bydate"] == 1)
+	if(isset($_GET['bydate']) && $_GET['bydate'] == 1)
 	{
-		print($this->get_translation("MyChangesTitle1")." [<a href=\"".
-			$this->href('', '', 'mode=mychanges')."#list\">".$this->get_translation("OrderABC")."</a>].<br /><br />\n");
+		print($this->get_translation('MyChangesTitle1')." [<a href=\"".
+			$this->href('', '', 'mode=mychanges')."#list\">".$this->get_translation('OrderABC')."</a>].<br /><br />\n");
 			#.($this->config['rewrite_mode'] ? "?" : "&amp;").
 
 		$count	= $this->load_single(
@@ -61,7 +61,7 @@ if ($user_id = $this->get_user_id())
 				}
 
 				// print entry
-				print("<li>$time (".$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation("History"), 0).") ".$this->compose_link_to_page($page['tag'], "", "", 0).$edit_note."</li>\n");
+				print("<li>$time (".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], '', '', 0).$edit_note."</li>\n");
 
 
 			}
@@ -73,14 +73,14 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			echo $this->get_translation("DidntEditAnyPage");
+			echo $this->get_translation('DidntEditAnyPage');
 		}
 	}
 	else
 	{
-		print($this->get_translation("MyChangesTitle2")." [<a href=\"".
+		print($this->get_translation('MyChangesTitle2')." [<a href=\"".
 			$this->href('', '', 'mode=mychanges&amp;bydate=1')."#list\">". #($this->config['rewrite_mode'] ? "?" : "&amp;")."bydate=true\">".
-			$this->get_translation("OrderChange")."</a>].</strong><br /><br />\n");
+			$this->get_translation('OrderChange')."</a>].</strong><br /><br />\n");
 
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
@@ -104,9 +104,9 @@ if ($user_id = $this->get_user_id())
 			{
 				$firstChar = strtoupper($page['tag'][0]);
 
-				if (!preg_match("/".$this->language['ALPHA']."/", $firstChar))
+				if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))
 				{
-					$firstChar = "#";
+					$firstChar = '#';
 				}
 
 				if ($firstChar != $curChar)
@@ -120,7 +120,7 @@ if ($user_id = $this->get_user_id())
 				}
 
 				// print entry
-				print("<li>".$this->get_time_string_formatted($page['modified'])." (".$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation("History"), 0).") ".$this->compose_link_to_page($page['tag'], "", "", 0)."</li>\n");
+				print("<li>".$this->get_time_string_formatted($page['modified'])." (".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n");
 
 
 			}
@@ -132,13 +132,13 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			echo $this->get_translation("DidntEditAnyPage");
+			echo $this->get_translation('DidntEditAnyPage');
 		}
 	}
 }
 else
 {
-	echo $this->get_translation("NotLoggedInThusEdited");
+	echo $this->get_translation('NotLoggedInThusEdited');
 }
 
 ?>

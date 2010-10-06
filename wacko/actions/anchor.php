@@ -7,9 +7,9 @@ if(isset($vars[0]))
 	$text = '';
 	if(isset($vars['text']))
 	{
-		if(strpos($vars['text'], "~") !== false)
+		if(strpos($vars['text'], '~') !== false)
 		{
-			$vars['text'] = str_replace("~", $href, $vars['text']);
+			$vars['text'] = str_replace('~', $href, $vars['text']);
 		}
 		$text = htmlspecialchars($vars['text']);
 	}

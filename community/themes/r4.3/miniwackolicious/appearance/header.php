@@ -125,7 +125,7 @@ else if($this->has_access('write'))
             <div class="nav-breadcrumb">
            		<hr class="onlyAural"/>
                 <p>
-                    <span class="onlyAural"><?php echo $this->get_translation("YouAreHere"); ?>: </span>
+                    <span class="onlyAural"><?php echo $this->get_translation('YouAreHere'); ?>: </span>
                     <?php
                         if (strpos($this->tag, $this->config['root_page'].'/') !== 0)
                             echo '<a href="'.$this->config['base_url'].'">'.$this->config['root_page'].'</a> /';

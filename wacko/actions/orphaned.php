@@ -2,7 +2,7 @@
 
 if (!function_exists('LoadOrphanedPages'))
 {
-	function LoadOrphanedPages(&$engine, $for = "")
+	function LoadOrphanedPages(&$engine, $for = '')
 	{
 		$pref = $engine->config['table_prefix'];
 		$sql = "SELECT DISTINCT page_id, tag FROM ".$pref."page p ".
@@ -32,15 +32,15 @@ if ($pages = LoadOrphanedPages($this, $root))
 	//!!!! unoptimized
 	if (is_array($pages))
 	foreach ($pages as $page)
-	if (!$this->config['hide_locked'] || $this->has_access('read',$page['page_id']))
+	if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 	{
-		print("<li>".$this->link("/".$page['tag'], "", "", 0)."</li>\n");
+		print("<li>".$this->link('/'.$page['tag'], '', '', 0)."</li>\n");
 	}
 	echo "</ol>\n";
 }
 else
 {
-	echo $this->get_translation("NoOrphaned");
+	echo $this->get_translation('NoOrphaned');
 }
 
 ?>

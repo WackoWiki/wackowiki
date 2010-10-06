@@ -150,7 +150,7 @@ if ($this->method == "show") {
 			// display files header
 			?>
 <a name="files"></a>
-<div id="filesheader"><?php echo $this->get_translation('Files_all') ?> <?php echo "[<a href=\"".$this->href('', '', 'show_files=0')."\">".$this->get_translation("HideFiles")."</a>]"; ?>
+<div id="filesheader"><?php echo $this->get_translation('Files_all') ?> <?php echo "[<a href=\"".$this->href('', '', 'show_files=0')."\">".$this->get_translation('HideFiles')."</a>]"; ?>
 </div>
 			<?php
 
@@ -191,15 +191,15 @@ else $files = array();
 switch (count($files))
 {
 	case 0:
-		print($this->get_translation("Files_0"));
+		print($this->get_translation('Files_0'));
 		break;
 	case 1:
-		print($this->get_translation("Files_1"));
+		print($this->get_translation('Files_1'));
 		break;
 	default:
-		print(str_replace("%1",count($files), $this->get_translation("Files_n")));
+		print(str_replace("%1",count($files), $this->get_translation('Files_n')));
 }
-?> <?php echo "[<a href=\"".$this->href('', '', 'show_files=1#files')."\">".$this->get_translation("ShowFiles")."</a>]"; ?>
+?> <?php echo "[<a href=\"".$this->href('', '', 'show_files=1#files')."\">".$this->get_translation('ShowFiles')."</a>]"; ?>
 
 </div>
 <?php
@@ -233,8 +233,8 @@ switch (count($files))
 			// display comments header
 			?>
 <a name="comments"></a>
-<div id="commentsheader"><?php echo $this->get_translation("Comments_all") ?>
-			<?php echo "[<a href=\"".$this->href('', '', 'show_comments=0')."\">".$this->get_translation("HideComments")."</a>]"; ?>
+<div id="commentsheader"><?php echo $this->get_translation('Comments_all') ?>
+			<?php echo "[<a href=\"".$this->href('', '', 'show_comments=0')."\">".$this->get_translation('HideComments')."</a>]"; ?>
 </div>
 			<?php
 
@@ -278,16 +278,16 @@ switch (count($files))
 						if(strpos($this->get_user_name(), '.'))
 						{
 							?>
-<label for="captcha"><?php echo $this->get_translation("Captcha");?>:</label>
+<label for="captcha"><?php echo $this->get_translation('Captcha');?>:</label>
 <br />
 <img
 	src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php"
-	id="freecap" alt="<?php echo $this->get_translation("Captcha");?>" />
+	id="freecap" alt="<?php echo $this->get_translation('Captcha');?>" />
 <a href="" onclick="this.blur(); new_freecap(); return false;"
-	title="<?php echo $this->get_translation("CaptchaReload"); ?>"><img
+	title="<?php echo $this->get_translation('CaptchaReload'); ?>"><img
 	src="<?php echo $this->config['base_url'];?>images/reload.png"
 	width="18" height="17"
-	alt="<?php echo $this->get_translation("CaptchaReload"); ?>" /></a>
+	alt="<?php echo $this->get_translation('CaptchaReload'); ?>" /></a>
 <br />
 <input id="captcha" type="text" name="word"
 	maxlength="6" style="width: 273px;" />
@@ -300,7 +300,7 @@ switch (count($files))
 				// end captcha
 				?>
 <input type="submit"
-	value="<?php echo $this->get_translation("AddCommentButton"); ?>"
+	value="<?php echo $this->get_translation('AddCommentButton'); ?>"
 	accesskey="s" />
 				<?php echo $this->form_close(); ?>
 				<?php
@@ -323,7 +323,7 @@ switch (count($comments))
 	default:
 		print(str_replace("%1",count($comments), $this->get_translation('Comments_n')));
 }
-?> <?php echo "[<a href=\"".$this->href('', '', 'show_comments=1#comments')."\">".$this->get_translation("ShowComments")."</a>]"; ?>
+?> <?php echo "[<a href=\"".$this->href('', '', 'show_comments=1#comments')."\">".$this->get_translation('ShowComments')."</a>]"; ?>
 
 </div>
 <?php

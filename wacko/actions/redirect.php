@@ -13,13 +13,13 @@ if ($page)
 		header("HTTP/1.0 301 Moved Permanently");
 	}
 
-	if ($this->load_page($page, "", LOAD_CACHE, LOAD_META))
+	if ($this->load_page($page, '', LOAD_CACHE, LOAD_META))
 	{
 		if ($user = $this->get_user())
 		{
-			if ($user["dont_redirect"] == "1" || $_POST['redirect'] == "no")
+			if ($user['dont_redirect'] == '1' || $_POST['redirect'] == 'no')
 			{
-				print ("<br /><br /><br />".$this->get_translation("PageMoved")." ".$this->link("/".$page)."<br /><br /><br />");
+				print ("<br /><br /><br />".$this->get_translation('PageMoved')." ".$this->link('/'.$page)."<br /><br /><br />");
 			}
 			else
 			$this->redirect($this->href('', $page));
@@ -29,7 +29,7 @@ if ($page)
 	}
 	else
 	{
-		print ("<i>".$this->get_translation("WrongPage4Redirect")."</i>");
+		print ("<i>".$this->get_translation('WrongPage4Redirect')."</i>");
 	};
 };
 ?>

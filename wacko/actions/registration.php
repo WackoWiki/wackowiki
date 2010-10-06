@@ -9,9 +9,9 @@ $error = '';
 $word_ok = '';
 
 // reconnect securely in ssl mode
-if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
+if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 {
-	$this->redirect(str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->href()));
+	$this->redirect(str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->href()));
 }
 
 // is user trying to confirm email, login or register?
@@ -27,19 +27,19 @@ if (isset($_GET['confirm']))
 			"SET email_confirm = '' ".
 			"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."'");
 
-		echo "<div class=\"info\">".$this->get_translation("EmailConfirmed")."</div><br />";
+		echo "<div class=\"info\">".$this->get_translation('EmailConfirmed')."</div><br />";
 
 		// log event
-		$this->log(4, str_replace("%2", $temp['user_name'], str_replace("%1", $temp['email'], $this->get_translation("LogUserEmailActivated", $this->config['language']))));
+		$this->log(4, str_replace('%2', $temp['user_name'], str_replace('%1', $temp['email'], $this->get_translation('LogUserEmailActivated', $this->config['language']))));
 
 		unset($temp);
 	}
 	else
 	{
-		echo "<div class=\"info\">".str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation("EmailNotConfirmed"))."</div><br />";
+		echo "<div class=\"info\">".str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation('EmailNotConfirmed'))."</div><br />";
 	}
 }
-else if (isset($_POST['action']) && $_POST['action'] == "login")
+else if (isset($_POST['action']) && $_POST['action'] == 'login')
 {
 	// create new account if possible
 	if ($this->config['allow_registration'] || $this->is_admin())
@@ -92,8 +92,8 @@ else if (isset($_POST['action']) && $_POST['action'] == "login")
 					if(!$word_ok)
 					{
 						//not the right word
-						$error = $this->get_translation("SpamAlert");
-						$this->set_message($this->get_translation("SpamAlert"));
+						$error = $this->get_translation('SpamAlert');
+						$this->set_message($this->get_translation('SpamAlert'));
 					}
 				}
 			}
@@ -104,44 +104,44 @@ else if (isset($_POST['action']) && $_POST['action'] == "login")
 		{
 			// check if name is WikiName style
 			if (!$this->is_wiki_name($user_name))
-				$error .= $this->get_translation("MustBeWikiName")." ";
+				$error .= $this->get_translation('MustBeWikiName')." ";
 			// if user name already exists
 			else if ($this->user_name_exists($user_name) === true)
 			{
-				$error .= $this->get_translation("RegistrationNameOwned");
+				$error .= $this->get_translation('RegistrationNameOwned');
 
 				// log event
-				$this->log(2, str_replace("%1", $user_name, $this->get_translation("LogUserSimiliarName", $this->config['language'])));
+				$this->log(2, str_replace('%1', $user_name, $this->get_translation('LogUserSimiliarName', $this->config['language'])));
 			}
 			// no email given
-			else if ($email == "")
-				$error .= $this->get_translation("SpecifyEmail")." ";
+			else if ($email == '')
+				$error .= $this->get_translation('SpecifyEmail')." ";
 			// invalid email
 			else if (!preg_match("/^.+?\@.+$/", $email))
-				$error .= $this->get_translation("NotAEmail")." ";
+				$error .= $this->get_translation('NotAEmail')." ";
 
 			// confirmed password mismatch
 			else if ($confpassword != $password)
-				$error .= $this->get_translation("PasswordsDidntMatch")." ";
+				$error .= $this->get_translation('PasswordsDidntMatch')." ";
 			// spaces in password
 			else if (preg_match("/ /", $password))
-				$error .= $this->get_translation("SpacesArentAllowed")." ";
+				$error .= $this->get_translation('SpacesArentAllowed')." ";
 			// password complexity validation
 			else if ($complexity > 0)
 			{
 				if ($complexity >= 5)
 				{
-					$error .= $this->get_translation("PwdCplxWeak")." ";
+					$error .= $this->get_translation('PwdCplxWeak')." ";
 					$complexity -= 5;
 				}
 				if ($complexity >= 2)
 				{
-					$error .= $this->get_translation("PwdCplxShort")." ";
+					$error .= $this->get_translation('PwdCplxShort')." ";
 					$complexity -= 2;
 				}
 				if ($complexity >= 1)
 				{
-					$error .= $this->get_translation("PwdCplxEquals")." ";
+					$error .= $this->get_translation('PwdCplxEquals')." ";
 					$complexity -= 1;
 				}
 			}
@@ -180,26 +180,26 @@ else if (isset($_POST['action']) && $_POST['action'] == "login")
 				// INSERT USER Bookmarks
 				$this->convert_into_bookmark_table($this->get_default_bookmarks($lang), $_user_id['user_id']);
 
-				$subject = 	$this->get_translation("EmailWelcome").
+				$subject = 	$this->get_translation('EmailWelcome').
 							$this->config['wacko_name'];
-				$message = 	$this->get_translation("EmailHello"). $user_name.".\n\n".
+				$message = 	$this->get_translation('EmailHello'). $user_name.".\n\n".
 							str_replace('%1', $this->config['wacko_name'],
 							str_replace('%2', $user_name,
 							str_replace('%3', $this->href().
 							($this->config['rewrite_mode'] ? "?" : "&amp;")."confirm=".$confirm,
-							$this->get_translation("EmailRegistered"))))."\n\n".
-							$this->get_translation("EmailGoodbye")."\n".
+							$this->get_translation('EmailRegistered'))))."\n\n".
+							$this->get_translation('EmailGoodbye')."\n".
 							$this->config['wacko_name']."\n".
 							$this->config['base_url'];
 				$this->send_mail($email, $subject, $message);
 
 				// log event
-				$this->log(4, str_replace("%2", $email, str_replace("%1", $user_name, $this->get_translation("LogUserRegistered", $this->config['language']))));
+				$this->log(4, str_replace('%2', $email, str_replace('%1', $user_name, $this->get_translation('LogUserRegistered', $this->config['language']))));
 
 				// forward
-				$this->set_message($this->get_translation("SiteRegistered").
+				$this->set_message($this->get_translation('SiteRegistered').
 					$this->config['wacko_name'].". ".
-					$this->get_translation("SiteEmailConfirm"));
+					$this->get_translation('SiteEmailConfirm'));
 				$this->context[++$this->current_context] = '';
 				$this->redirect($this->href('', $this->get_translation('LoginPage')));
 			}
@@ -207,7 +207,7 @@ else if (isset($_POST['action']) && $_POST['action'] == "login")
 	}
 }
 
-if (!isset($_POST["confirm"]))
+if (!isset($_POST['confirm']))
 {
 	if ($this->config['allow_registration'] || $this->is_admin())
 	{
@@ -218,13 +218,13 @@ if (!isset($_POST["confirm"]))
 <input type="hidden"
 	name="action" value="login" />
 <div class="cssform">
-<h3><?php echo $this->format_translation("RegistrationWelcome"); ?></h3>
+<h3><?php echo $this->format_translation('RegistrationWelcome'); ?></h3>
 		<?php
 
 		if ($this->config['multilanguage'])
 		{
 			?>
-<p><label for="lang"><?php echo $this->format_translation("RegistrationLang");?>:</label>
+<p><label for="lang"><?php echo $this->format_translation('RegistrationLang');?>:</label>
 <select id="lang" name="lang">
 
 <?php
@@ -245,41 +245,41 @@ for ($i = 0; $i < count($langs); $i++)
 <?php
 		}
 		?>
-<p><label for="name"><?php echo $this->format_translation("RegistrationName");?>:</label>
+<p><label for="name"><?php echo $this->format_translation('RegistrationName');?>:</label>
 <input id="name" name="name" size="27" value="<?php echo htmlspecialchars($user_name); ?>" /></p>
-<p><label for="password"><?php echo $this->get_translation("RegistrationPassword");?>:</label>
+<p><label for="password"><?php echo $this->get_translation('RegistrationPassword');?>:</label>
 <input type="password" id="password" name="password" size="24" value="<?php echo $password ?>" />
 <?php
 if ($this->config['pwd_char_classes'] > 0)
 {
-	$PwdCplxText = $this->get_translation("PwdCplxDesc4");
+	$PwdCplxText = $this->get_translation('PwdCplxDesc4');
 	if 		($this->config['pwd_char_classes'] == 1)
-		$PwdCplxText .= $this->get_translation("PwdCplxDesc41");
+		$PwdCplxText .= $this->get_translation('PwdCplxDesc41');
 	else if ($this->config['pwd_char_classes'] == 2)
-		$PwdCplxText .= $this->get_translation("PwdCplxDesc42");
+		$PwdCplxText .= $this->get_translation('PwdCplxDesc42');
 	else if ($this->config['pwd_char_classes'] == 3)
-		$PwdCplxText .= $this->get_translation("PwdCplxDesc43");
-	$PwdCplxText .= ". ".$this->get_translation("PwdCplxDesc5");
+		$PwdCplxText .= $this->get_translation('PwdCplxDesc43');
+	$PwdCplxText .= ". ".$this->get_translation('PwdCplxDesc5');
 }
 echo "<br /><small>".
-	 $this->get_translation("PwdCplxDesc1").
+	 $this->get_translation('PwdCplxDesc1').
 	 str_replace("%1", $this->config['pwd_min_chars'],
-		$this->get_translation("PwdCplxDesc2")).
+		$this->get_translation('PwdCplxDesc2')).
 	 ($this->config['pwd_unlike_login'] > 0
-		? ", ".$this->get_translation("PwdCplxDesc3")
+		? ", ".$this->get_translation('PwdCplxDesc3')
 		: "").
 	 ($this->config['pwd_char_classes'] > 0
 		? ", ".$PwdCplxText
 		: "")."</small>";
 ?>
 </p>
-<p><label for="confpassword"><?php echo $this->get_translation("ConfirmPassword");?>:</label>
+<p><label for="confpassword"><?php echo $this->get_translation('ConfirmPassword');?>:</label>
 <input type="password" id="confpassword" name="confpassword" size="24"
 	value="<?php echo $confpassword ?>" /></p>
 <p>
 <?php
 /* TODO: add message -> A valid e-mail address. All e-mails from the system will be sent to this address. The e-mail address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by e-mail. */ ?>
-<label for="email"><?php echo $this->get_translation("Email");?>:</label>
+<label for="email"><?php echo $this->get_translation('Email');?>:</label>
 <input id="email" name="email" size="30"
 	value="<?php echo htmlspecialchars($email); ?>" /></p>
 		<?php
@@ -297,15 +297,15 @@ echo "<br /><small>".
 				if($this->get_user_name() == false)
 				{
 					?>
-<p><label for="captcha"><?php echo $this->get_translation("Captcha");?>:</label>
+<p><label for="captcha"><?php echo $this->get_translation('Captcha');?>:</label>
 <img
 	src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php"
-	id="freecap" alt="<?php echo $this->get_translation("Captcha");?>" /> <a
+	id="freecap" alt="<?php echo $this->get_translation('Captcha');?>" /> <a
 	href="" onclick="this.blur(); new_freecap(); return false;"
-	title="<?php echo $this->get_translation("CaptchaReload"); ?>"><img
+	title="<?php echo $this->get_translation('CaptchaReload'); ?>"><img
 	src="<?php echo $this->config['base_url'];?>images/reload.png"
 	width="18" height="17"
-	alt="<?php echo $this->get_translation("CaptchaReload"); ?>" /></a> <br />
+	alt="<?php echo $this->get_translation('CaptchaReload'); ?>" /></a> <br />
 <input id="captcha" type="text" name="word" maxlength="6"
 	style="width: 273px;" /></p>
 					<?php
@@ -314,14 +314,14 @@ echo "<br /><small>".
 		}
 		// end captcha
 		?>
-<p><input type="submit" value="<?php echo $this->get_translation("RegistrationButton"); ?>" /></p>
+<p><input type="submit" value="<?php echo $this->get_translation('RegistrationButton'); ?>" /></p>
 </div>
 		<?php
 		print($this->form_close());
 	}
 	else
 	{
-		echo($this->get_translation("RegistrationClosed"));
+		echo($this->get_translation('RegistrationClosed'));
 	}
 }
 ?>

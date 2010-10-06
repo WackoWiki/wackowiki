@@ -35,18 +35,18 @@ if (!function_exists('TagSearch'))
 }
 
 if (($topic == 1) || ($title == 1))
-	$mode = "topic";
+	$mode = 'topic';
 else
-	$mode = "full";
+	$mode = 'full';
 
-if (isset($_GET["topic"]) && $_GET["topic"] == "on") $mode = "topic";
+if (isset($_GET['topic']) && $_GET['topic'] == 'on') $mode = 'topic';
 
 //if (!$delim) $delim="---";
-if (!in_array($style, array("br","ul","ol","comma"))) $style = "ol";
+if (!in_array($style, array("br","ul","ol","comma"))) $style = 'ol';
 
 $i = 0;
 
-if ($filter != "pages") $filter = "all";
+if ($filter != 'pages') $filter = 'all';
 if (!isset($clean)) $clean = false;
 
 if (isset($vars[$for])) $phrase = $vars[$for];
@@ -60,62 +60,62 @@ if ($form)
 {
 	echo $this->form_open('', '', 'get') ?>
 
-<label for="searchfor"><?php echo $this->get_translation("SearchFor");?></label>
+<label for="searchfor"><?php echo $this->get_translation('SearchFor');?></label>
 :&nbsp;
 <br />
 <input
 	name="phrase" id="searchfor" size="40"
-	value="<?php echo htmlspecialchars(isset($_GET['phrase'])? $_GET['phrase'] : ""); ?>" />
+	value="<?php echo htmlspecialchars(isset($_GET['phrase'])? $_GET['phrase'] : ''); ?>" />
 <input
 	type="submit"
 	value="<?php echo $this->get_translation('SearchButtonText'); ?>" />
 <br />
 <input
 	type="checkbox" name="topic"
-	<?php if ($mode == "topic") echo "CHECKED"; ?> id="checkboxSearch" />
-<label for="checkboxSearch"><?php echo $this->get_translation("TopicSearchText"); ?></label>
+	<?php if ($mode == 'topic') echo "CHECKED"; ?> id="checkboxSearch" />
+<label for="checkboxSearch"><?php echo $this->get_translation('TopicSearchText'); ?></label>
 
 	<?php
 	echo $this->form_close();
 }
 
-if ($phrase == "") $phrase = (isset($_GET['phrase']) ? $_GET['phrase'] : NULL);
+if ($phrase == '') $phrase = (isset($_GET['phrase']) ? $_GET['phrase'] : NULL);
 if ($phrase)
 {
 	if ($form) print "<br />";
 
 	if (strlen($phrase) >= 3)
 	{
-		if ($mode == "topic")
+		if ($mode == 'topic')
 			$results = TagSearch($this, $phrase);
 		else
-			$results = FullTextSearch($this, $phrase, ($filter == "all" ? 0 : 1));
+			$results = FullTextSearch($this, $phrase, ($filter == 'all' ? 0 : 1));
 
 		$phrase = htmlspecialchars($phrase);
 
 		// make and display results
 		if ($results)
 		{
-			if (!$nomark) print(  "<div class=\"layout-box\"><p class=\"layout-box\"><span>".
-			$this->get_translation(($mode == "topic" ? "Topic" : "")."SearchResults").
+			if (!$nomark) print( "<div class=\"layout-box\"><p class=\"layout-box\"><span>".
+			$this->get_translation(($mode == 'topic' ? 'Topic' : '')."SearchResults").
 			" \"$phrase\":</span></p>");
 			// open list
-			if ($style == "ul") print "<ul id=\"search_results\">\n";
-			if ($style == "ol") print "<ol id=\"search_results\">\n";
+			if ($style == 'ul') print "<ul id=\"search_results\">\n";
+			if ($style == 'ol') print "<ol id=\"search_results\">\n";
 
 			foreach ($results as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->has_access('read',$page['tag']) )
+				if (!$this->config['hide_locked'] || $this->has_access('read', $page['tag']) )
 				{
 					// Don't show it if it's a comment and we're hiding comments from this user
 					if($page['comment_on_id'] == '0' || ($page['comment_on_id'] != '0' && $this->user_allowed_comments()))
 					{
 						// open item
-						if ($style == "ul" || $style == "ol") print "<li>";
-						if ($style == "comma" && $i > 0) print ",\n";
+						if ($style == 'ul' || $style == 'ol') print "<li>";
+						if ($style == 'comma' && $i > 0) print ",\n";
 
-						print("<h3>".$this->link("/".$page['tag'],"",$page['tag'])."</h3>");
-						if ($mode !== "topic")
+						print("<h3>".$this->link('/'.$page['tag'], '', $page['tag'])."</h3>");
+						if ($mode !== 'topic')
 						{
 							$context = getLineWithPhrase($phrase, $page['body'], $clean);
 							$context = preview_text($TEXT = $context, $LIMIT = 500, $TAGS = 0);
@@ -124,24 +124,24 @@ if ($phrase)
 						}
 
 						// close item
-						if ($style == "br") print "<br />\n";
-						if ($style == "ul" || $style == "ol") print "</li>\n";
+						if ($style == 'br') print "<br />\n";
+						if ($style == 'ul' || $style == 'ol') print "</li>\n";
 						$i++;
 					}
 				}
 			}
 
 			// close list
-			if ($style=="ul") print "</ul>";
-			if ($style=="ol") print "</ol>";
+			if ($style == 'ul') print "</ul>";
+			if ($style == 'ol') print "</ol>";
 			if (!$nomark) print("</div>");
 		}
 		else
-		if (!$nomark) echo $this->get_translation("NoResultsFor")."\"$phrase\".";
+		if (!$nomark) echo $this->get_translation('NoResultsFor')."\"$phrase\".";
 	}
 	else
 	{
-		if (!$nomark) echo $this->get_translation("NoResultsFor")."\"$phrase\".";
+		if (!$nomark) echo $this->get_translation('NoResultsFor')."\"$phrase\".";
 	}
 }
 
@@ -154,7 +154,7 @@ function getLineWithPhrase($phrase, $string, $cleanup)
 		if (strpos($line, $phrase))
 		{
 			if ($result) $result .= "<br/>\n";
-			$result .= $cleanup ? str_replace("$phrase", "", $line) : $line;
+			$result .= $cleanup ? str_replace("$phrase", '', $line) : $line;
 		}
 	}
 	return $result;
@@ -177,14 +177,14 @@ function preview_text($TEXT, $LIMIT, $TAGS = 0)
 		$COUNTER = 0;
 		for ($i = 0; $i<= strlen($TEXT); $i++)
 		{
-			if ($TEXT{$i} == "<") $STOP = 1;
+			if ($TEXT{$i} == '<') $STOP = 1;
 
 			if ($STOP != 1)
 			{
 				$COUNTER++;
 			}
 
-			if ($TEXT{$i} == ">") $STOP = 0;
+			if ($TEXT{$i} == '>') $STOP = 0;
 			$RETURN .= $TEXT{$i};
 
 			if ($COUNTER >= $LIMIT && $TEXT{$i} == " ") break;

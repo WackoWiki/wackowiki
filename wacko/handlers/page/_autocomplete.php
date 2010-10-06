@@ -49,12 +49,12 @@ function _unescape_callback($p)
 
 // Getting a query
 _parse_query_string();
-$q		= $_GET["q"];
-$ta_id	= $_GET["ta_id"];
+$q		= $_GET['q'];
+$ta_id	= $_GET['ta_id'];
 
 
 // 1. convert into supertag and unwrap
-$q = ltrim($q, "/");
+$q = ltrim($q, '/');
 $supertag1 = $this->npj_translit( $this->unwrap_link($q) );
 $supertag2 = $this->npj_translit( $q );
 
@@ -81,7 +81,7 @@ $cnt = 0;
 if ($pages1)
 	foreach ($pages1 as $page)
 	{
-		if ($this->config['hide_locked']) $access = $this->has_access('read',$page['page_id']);
+		if ($this->config['hide_locked']) $access = $this->has_access('read', $page['page_id']);
 		else $access = true;
 		if ($access)
 		{
@@ -95,7 +95,7 @@ if ($pages1)
 if ($pages2)
 	foreach ($pages2 as $page)
 	{
-		if ($this->config['hide_locked']) $access = $this->has_access('read',$page['page_id']);
+		if ($this->config['hide_locked']) $access = $this->has_access('read', $page['page_id']);
 		else $access = true;
 		if ($access)
 		{
@@ -112,11 +112,11 @@ if ($pages2)
 
 // counting context
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-$local_supertag_sliced = explode("/", $this->page['supertag']);
-$local_supertag        = $this->page['supertag']."/";
-$local_context_sliced  = array_slice( $local_supertag_sliced, 0,
+$local_supertag_sliced	= explode('/', $this->page['supertag']);
+$local_supertag			= $this->page['supertag'].'/';
+$local_context_sliced	= array_slice( $local_supertag_sliced, 0,
 sizeof($local_supertag_sliced)-1 );
-$local_context  = implode("/", $local_context_sliced )."/";
+$local_context  = implode('/', $local_context_sliced ).'/';
 
 // preparing to output
 $out = array();
@@ -124,24 +124,24 @@ foreach( $pages as $page )
 {
 	if ($page[">local"])
 	{
-		$tag_sliced = explode("/", $page['tag'] );
+		$tag_sliced = explode('/', $page['tag'] );
 		if (strpos( $page['supertag'], $local_supertag ) === 0)
-		$out[] = "!/".implode("/", array_slice( $tag_sliced, sizeof($local_supertag_sliced) ));
+		$out[] = "!/".implode('/', array_slice( $tag_sliced, sizeof($local_supertag_sliced) ));
 		else
 		if (strpos( $page['supertag'], $local_context ) === 0)
-		$out[] = implode("/", array_slice( $tag_sliced, sizeof($local_context_sliced) ));
+		$out[] = implode('/', array_slice( $tag_sliced, sizeof($local_context_sliced) ));
 		else
-		if ($local_context == "/")
+		if ($local_context == '/')
 		$out[] = $page['tag'];
 		else
-		$out[] = "/".$page['tag'];
+		$out[] = '/'.$page['tag'];
 	}
 	else
 	{
-		if ($local_context == "/")
+		if ($local_context == '/')
 		$out[] = $page['tag'];
 		else
-		$out[] = "/".$page['tag'];
+		$out[] = '/'.$page['tag'];
 	}
 }
 
@@ -153,8 +153,8 @@ header("HTTP/1.0 200 Ok");
 //header("Content-type: text/javascript; charset=windows-1251");
 header("Last-Modified: ".(string)(gmdate('D, d M Y H:i:s \G\M\T', time()) ));
 echo $ta_id;
-echo "~~~";
-echo implode("~~~", $out);
+echo '~~~';
+echo implode('~~~', $out);
 die();
 
 ?>

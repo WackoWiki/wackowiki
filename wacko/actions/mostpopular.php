@@ -47,7 +47,7 @@ else
 
 if(!$nomark)
 {
-	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation("MostPopularPages").": ".$this->link($ppage, "", $title)."</span></p>\n");
+	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('MostPopularPages').": ".$this->link($ppage, "", $title)."</span></p>\n");
 }
 
 if(!$for)
@@ -77,15 +77,15 @@ foreach ($pages as $page)
 {
 	if ($num < $max)
 	{
-		if ($this->config['hide_locked']) $access = $this->has_access('read',$page['page_id']);
+		if ($this->config['hide_locked']) $access = $this->has_access('read', $page['page_id']);
 		else $access = true;
 		if ($access)
 		{
 			// print entry
 			$num++;
-			print("<tr><td>&nbsp;&nbsp;".$num.".&nbsp;".$this->link("/".$page['tag'],"",$page['tag'])."</td><td>".
-			$this->get_translation("Shown")."</td><td>".
-			$page['hits'']."</td></tr>\n");
+			print("<tr><td>&nbsp;&nbsp;".$num.".&nbsp;".$this->link('/'.$page['tag'], '', $page['tag'])."</td><td>".
+			$this->get_translation('Shown')."</td><td>".
+			$page['hits']."</td></tr>\n");
 		}
 	}
 }

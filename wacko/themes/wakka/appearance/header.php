@@ -105,7 +105,7 @@ else
 {
 	// Show Register / Login link
 	echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation('LoginPage').($this->config['rewrite_mode'] ? "?" : "&amp;")."goback=".$this->slim_url($this->tag), "", $this->get_translation('LoginPage'), 0)."</li>\n";
-	echo "<li>".$this->compose_link_to_page($this->get_translation("RegistrationPage"), "", $this->get_translation("RegistrationPage"), 0)."</li>\n</ul>";
+	echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('RegistrationPage'), 0)."</li>\n</ul>";
 }
 
 // End if

@@ -31,21 +31,21 @@ if (!function_exists('handler_diff_load_page_by_id'))
 // redirect to show method if page don't exists
 if (!$this->page) $this->redirect($this->href('show'));
 
-	$a = $_GET["a"];
-	$b = $_GET["b"];
+	$a = $_GET['a'];
+	$b = $_GET['b'];
 
 // If asked, call original diff
-if ($this->has_access('read')) {
-
+if ($this->has_access('read'))
+{
 	$pageA = handler_diff_load_page_by_id($this, $b);
 	$pageB = handler_diff_load_page_by_id($this, $a);
 
-	if ($this->has_access('read', $pageA['page_id']) && $this->has_access('read', $pageB['page_id']) ) {
+	if ($this->has_access('read', $pageA['page_id']) && $this->has_access('read', $pageB['page_id']) )
+	{
+		if (isset($_GET['source'])) $source = 1;
 
-		if (isset($_GET["source"])) $source = 1;
-
-		if (isset($_GET["fastdiff"]) || $source == 1) {
-
+		if (isset($_GET['fastdiff']) || $source == 1)
+		{
 			// This is a really cheap way to do it.
 
 			// prepare bodies
@@ -59,12 +59,12 @@ if ($this->has_access('read')) {
 			str_replace("%1", "<a href=\"".$this->href('', '', ($b != -1 ? 'time='.urlencode($pageA['modified']) : ''))."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
 			str_replace("%2", "<a href=\"".$this->href('', '', ($a != -1 ? 'time='.urlencode($pageB['modified']) : ''))."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
 			str_replace("%3", $this->compose_link_to_page($this->tag, "", "", 0),
-			"<div class=\"diffinfo\">".$this->get_translation("Comparison"))))."</div><br />\n";
+			"<div class=\"diffinfo\">".$this->get_translation('Comparison'))))."</div><br />\n";
 
 			if ($added)
 			{
 				// remove blank lines
-				$output .= "<br />\n".$this->get_translation("SimpleDiffAdditions")."<br />\n\n";
+				$output .= "<br />\n".$this->get_translation('SimpleDiffAdditions')."<br />\n\n";
 				$output .= "<div class=\"additions\">".($source == 1
 															? '<pre>'.wordwrap(implode("\n", $added), 70, "\n", 1).'</pre>'
 															: $this->format(implode("\n", $added))
@@ -73,7 +73,7 @@ if ($this->has_access('read')) {
 
 			if ($deleted)
 			{
-				$output .= "<br />\n\n".$this->get_translation("SimpleDiffDeletions")."<br />\n\n";
+				$output .= "<br />\n\n".$this->get_translation('SimpleDiffDeletions')."<br />\n\n";
 				$output .= "<div class=\"deletions\">".($source == 1
 															? '<pre>'.wordwrap(implode("\n", $deleted), 70, "\n", 1).'</pre>'
 															: $this->format(implode("\n", $deleted))
@@ -82,15 +82,14 @@ if ($this->has_access('read')) {
 
 			if (!$added && !$deleted)
 			{
-				$output .= "<br />\n".$this->get_translation("NoDifferences");
+				$output .= "<br />\n".$this->get_translation('NoDifferences');
 			}
 			print($output);
 
 		}
-
-		else {
-
-			require_once("handlers/page/_diff.php");
+		else
+		{
+			require_once('handlers/page/_diff.php');
 			// load pages
 
 			// extract text from bodies
@@ -124,15 +123,17 @@ if ($this->has_access('read')) {
 
 			$output='';
 
-			while (1) {
-
+			while (1)
+			{
 				$sideO->skip_line();
 				if ($sideO->isend()) break;
 
-				if ($sideO->decode_directive_line()) {
+				if ($sideO->decode_directive_line())
+				{
 					$argument=$sideO->getargument();
 					$letter=$sideO->getdirective();
-					switch ($letter) {
+					switch ($letter)
+					{
 						case 'a':
 							$resync_left = $argument[0];
 							$resync_right = $argument[2] - 1;
@@ -176,19 +177,19 @@ if ($this->has_access('read')) {
 			$out = str_replace("%1", "<a href=\"".$this->href('', '', 'time='.urlencode($pageB['modified']))."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
 			str_replace("%2", "<a href=\"".$this->href('', '', 'time='.urlencode($pageA['modified']))."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
 			str_replace("%3", $this->compose_link_to_page($this->tag, "", "", 0),
-			"<div class=\"diffinfo\">".$this->get_translation("Comparison"))))."</div><br />\n<br />\n".$out;
+			"<div class=\"diffinfo\">".$this->get_translation('Comparison'))))."</div><br />\n<br />\n".$out;
 			print $out;
-
 		}
 	}
 	else
 	{
-		print($this->get_translation("ReadAccessDenied"));
+		print($this->get_translation('ReadAccessDenied'));
 	}
 }
 else
 {
-	print($this->get_translation("ReadAccessDenied"));
+	print($this->get_translation('ReadAccessDenied'));
 }
+
 ?>
 </div>

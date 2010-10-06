@@ -34,7 +34,7 @@ class RSS
 	function changes()
 	{
 		$limit	= 30;
-		$name	= "changes";
+		$name	= 'changes';
 		$count	= '';
 
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->get_charset()."\"?>\n";
@@ -71,7 +71,7 @@ class RSS
 					$xml .= "<link>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</link>\n";
 					$xml .= "<guid>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
-					$xml .= "<description>".$page['modified']." ".$this->engine->get_translation("By")." ".$page['user'].($page['edit_note'] ? " [".$page['edit_note']."]" : "")."</description>\n";
+					$xml .= "<description>".$page['modified']." ".$this->engine->get_translation('By')." ".$page['user'].($page['edit_note'] ? " [".$page['edit_note']."]" : "")."</description>\n";
 					$xml .= "</item>\n";
 				}
 			}
@@ -188,7 +188,7 @@ class RSS
 	function comments()
 	{
 		$limit	= 20;
-		$name	= "comments";
+		$name	= 'comments';
 		$count	= '';
 
 		// build output
@@ -276,7 +276,7 @@ class RSS
 
 		$xml .= "</urlset>\n";
 
-		$filename = "sitemap.xml";
+		$filename = 'sitemap.xml';
 
 		file_put_contents($filename, $xml);
 		@chmod($filename, 0644);

@@ -9,13 +9,13 @@
 
 ?>
 <div id="page">
-<h3><?php echo $this->get_translation("CategoriesFor")." ".$this->compose_link_to_page($this->tag, "", "", 0) ?></h3>
+<h3><?php echo $this->get_translation('CategoriesFor')." ".$this->compose_link_to_page($this->tag, '', '', 0) ?></h3>
 <br />
 <?php
 
-$selected = '';
-$group = '';
-$options = '';
+$selected	= '';
+$group		= '';
+$options	= '';
 
 // redirect to show method if page don't exists
 if (!$this->page) $this->redirect($this->href('show'));

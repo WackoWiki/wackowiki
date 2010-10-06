@@ -55,7 +55,7 @@ if ($pages = $this->load_all(
 		$pages = $_pages;
 		unset($_pages);
 	}
-	
+
 	// check results for given $depth
 	if (!empty($pages))
 	{
@@ -103,7 +103,7 @@ if ($pages = $this->load_all(
 		else
 		{
 			if (!$nomark)
-				echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation("TreeSiteTitle")."</span></p>\n";
+				echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('TreeSiteTitle')."</span></p>\n";
 		}
 
 		// tree

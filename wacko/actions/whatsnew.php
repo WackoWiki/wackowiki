@@ -105,7 +105,7 @@ if ($pages = array_merge($pages1, $pages2))
 			else
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $subtag);
-				echo "<img src=\"".$this->config['theme_url']."icons/edit.gif"."\" title=\"".$this->get_translation("NewRevisionAdded")."\" alt=\"[changed]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], 0, 1).' ('.$this->link('/'.$page['tag'], 'revisions', $this->get_translation("History"), 0, 1).') &nbsp;&nbsp;&rarr; '.$this->get_translation("Cluster").' '.$subtag[0].$separator.$author.'';
+				echo "<img src=\"".$this->config['theme_url']."icons/edit.gif"."\" title=\"".$this->get_translation("NewRevisionAdded")."\" alt=\"[changed]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], 0, 1).' ('.$this->link('/'.$page['tag'], 'revisions', $this->get_translation('History'), 0, 1).') &nbsp;&nbsp;&rarr; '.$this->get_translation("Cluster").' '.$subtag[0].$separator.$author.'';
 			}
 
 			echo "</li>\n";

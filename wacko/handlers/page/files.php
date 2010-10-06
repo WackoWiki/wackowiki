@@ -8,7 +8,7 @@ $file404 = "images/upload404.gif";
 $file403 = "images/upload403.gif";
 
 // 1. check existence
-if (isset($_GET["global"]))
+if (isset($_GET['global']))
 {
 	$page_id = 0;
 }
@@ -44,7 +44,7 @@ else
 }
 
 // 3. passthru
-$extension = strtolower($what[0]["file_ext"]);
+$extension = strtolower($what[0]['file_ext']);
 
 if (($extension == "gif") || ($extension == "jpg") || ($extension == "jpeg") || ($extension == "png"))
 {
@@ -75,7 +75,7 @@ else
 
 if ($filepath)
 {
-	header("Content-Disposition:".( $isimage || $isplain ? "" : " attachment;" )." filename=".$what[0]["filename"]);
+	header("Content-Disposition:".( $isimage || $isplain ? "" : " attachment;" )." filename=".$what[0]['filename']);
 
 	if (!isset($isimage))
 	{
@@ -86,7 +86,7 @@ if ($filepath)
 			"WHERE upload_id = '".quote($this->dblink, $what[0]['upload_id'])."'");
 	}
 
-	$f = @fopen( $filepath, "rb" );
+	$f = @fopen( $filepath, 'rb' );
 	@fpassthru ($f);
 }
 else if ($error == 404)
@@ -95,7 +95,7 @@ else if ($error == 404)
 	// if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
 	header("HTTP/1.0 404 Not Found");
 
-	print($this->get_translation("UploadFileNotFound"));
+	print($this->get_translation('UploadFileNotFound'));
 }
 else
 {
@@ -103,7 +103,7 @@ else
 	// if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
 	header("HTTP/1.0 403 Forbidden");
 
-	print($this->get_translation("UploadFileForbidden"));
+	print($this->get_translation('UploadFileForbidden'));
 }
 
 // 4. die

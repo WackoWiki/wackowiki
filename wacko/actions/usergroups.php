@@ -13,7 +13,7 @@ if($user = $this->get_user())
 	if (is_array($this->config['aliases']))
 	{
 		if (!$nomark)
-		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation("UserGroups").":</span></p>");
+		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('UserGroups').":</span></p>");
 
 		print ("<table border=\"0\" cellspacing=\"5\" cellpadding=\"5\"><tr>");
 
@@ -41,7 +41,7 @@ if($user = $this->get_user())
 				print "<td valign=\"top\">";
 
 				foreach ($arr as $k => $v)
-				$allowed_groups[] = $this->link("/".$v,"",$v);
+				$allowed_groups[] = $this->link('/'.$v, '', $v);
 
 				sort($allowed_groups);
 

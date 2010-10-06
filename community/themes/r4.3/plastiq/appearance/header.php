@@ -287,7 +287,7 @@
 	echo echo_tab(
 		$this->href('new'),
 		$this->get_translation('CreateNewPageTip'),
-		$this->get_translation("CreatePageButton"),
+		$this->get_translation('CreatePageButton'),
 		$this->method == 'new',
 		'n');
 
