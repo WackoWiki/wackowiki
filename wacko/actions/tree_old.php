@@ -196,18 +196,18 @@ if (!function_exists('print_cluster_tree'))
 					else
 						$_tag = $sub_supertag;
 
-					print($wacko->link("/".$_tag, "", $linktext)."\n");
+					print($wacko->link('/'.$_tag, '', $linktext)."\n");
 
-					if ($style == "indent" || $style == "br")
+					if ($style == 'indent' || $style == 'br')
 						print "<br />";
 				}
 
 				print_cluster_tree($wacko, $sub_tag_array['subtree'], $style, $current_depth + 1, $abc, $filter);
 			}
 
-			if ($style == "ul") print "</ul>";
-			if ($style == "ol") print "</ol>";
-			if ($style == "indent") print "</div>";
+			if ($style == 'ul') print "</ul>";
+			if ($style == 'ol') print "</ol>";
+			if ($style == 'indent') print "</div>";
 		}
 	}
 }
@@ -218,7 +218,7 @@ if ($root)
 	if (!$nomark)
 	{
 		$title = $this->get_translation('TreeClusterTitle');
-		$title = str_replace("%1",  $this->link("/".$root, "", $root), $title);
+		$title = str_replace("%1",  $this->link('/'.$root, '', $root), $title);
 		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.":</span></p>\n");
 	}
 	$query = "'".quote($this->dblink, $this->npj_translit($root))."/%'";

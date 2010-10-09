@@ -122,7 +122,7 @@ if (list ($pages, $pagination) = load_recently_commented($this, $root, (int)$max
 				") . . . . . . . . . . . . . . . . <small>".$this->get_translation('LatestCommentBy')." ".
 				($page['comment_user']
 					? ($this->is_wiki_name($page['comment_user'])
-						? $this->link("/".$page['comment_user'],"",$page['comment_user'] )
+						? $this->link('/'.$page['comment_user'], '', $page['comment_user'] )
 						: $page['comment_user'])
 					: $this->get_translation('Guest')).
 				"</small></li>\n";
