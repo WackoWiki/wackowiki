@@ -104,8 +104,8 @@ function admin_lock(&$engine, &$module)
 		<input type="hidden" name="action" value="cache" />
 		<table border="0" cellspacing="1" cellpadding="4" style="max-width:200px" class="formation">
 			<tr>
-				<td class="label" style="white-space:nowrap"><?php echo $engine->get_translation("ClearCache");?></td>
-				<td align="center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->get_translation("CacheCleared") : '<input id="submit" type="submit" value="clean" />');?></td>
+				<td class="label" style="white-space:nowrap"><?php echo $engine->get_translation('ClearCache');?></td>
+				<td align="center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->get_translation('CacheCleared') : '<input id="submit" type="submit" value="clean" />');?></td>
 			</tr>
 		</table>
 	</form>

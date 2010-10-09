@@ -111,7 +111,7 @@ else
 	// Show Register / Login link
 	echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation('LoginPage').($this->config['rewrite_mode'] ? "?" : "&amp;")."goback=".$this->slim_url($this->tag), "", $this->get_translation('LoginPage'), 0)."</li>\n";
 	echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('RegistrationPage'), 0)."</li>\n";
-	// echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation("Help"), 0)."</li>\n";
+	// echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('Help'), 0)."</li>\n";
 	echo "</ul>\n";
 }
 
@@ -218,7 +218,7 @@ else
 		((!$this->page && $this->has_access('create')) || $this->is_admin() ||
 			($this->forum === false && $this->has_access('write')) ||
 			($this->forum === true && ($this->user_is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
-			? $this->get_translation("CreateNewPageText") : '',
+			? $this->get_translation('CreateNewPageText') : '',
 		$this->method == 'new',
 		1,
 		'n');
@@ -265,7 +265,7 @@ else
 	echo echo_tab(
 		$this->href('categories'),
 		$this->get_translation('CategoriesTip'),
-		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation("CategoriesText") : '',
+		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('CategoriesText') : '',
 		$this->method == 'categories',
 		1,
 		'c');

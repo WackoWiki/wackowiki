@@ -50,7 +50,7 @@ if (isset($_POST['_user_bookmarks']))
 		// repos
 		$data = array();
 		foreach( $object->data['user_menu'] as $k => $item )
-			$data[] = array( "bookmark_id" => $item['bookmark_id'], "bm_position"=> 1 * $_POST["pos_".$item['bookmark_id']] );
+			$data[] = array( "bookmark_id" => $item['bookmark_id'], "bm_position"=> 1 * $_POST['pos_'.$item['bookmark_id']] );
 		usort ($data, "bookmark_sorting");
 		foreach( $data as $k => $item )
 			$data[$k]['bm_position'] = $k + 1;
@@ -60,7 +60,7 @@ if (isset($_POST['_user_bookmarks']))
 			$this->query(
 				"UPDATE ".$this->config['table_prefix']."bookmark SET ".
 				"bm_position = '".quote($this->dblink, $item['bm_position'])."', ".
-				"bm_title = '".quote($this->dblink, substr($_POST["title_".$item['bookmark_id']],0,250))."' ".
+				"bm_title = '".quote($this->dblink, substr($_POST['title_'.$item['bookmark_id']],0,250))."' ".
 				"WHERE bookmark_id = '".quote($this->dblink, $item['bookmark_id'])."' ".
 				"LIMIT 1");
 		}

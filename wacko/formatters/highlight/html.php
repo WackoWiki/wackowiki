@@ -156,7 +156,7 @@ $xhtml_tags = array(
   $source);
 
   $source = preg_replace( "/([a-z-]+)=(&quot;|\')(.*?)\\2/i",
-             '<span style="color: ' .$options['color']['attributes']. ';font-weight:bold;">$1=</span><span style="color: ' 
+             '<span style="color: ' .$options['color']['attributes']. ';font-weight:bold;">$1=</span><span style="color: '
              .$options['color']['attributevalues']. ';">$2$3$2</span>', $source);
              $source = preg_replace("/&amp;([a-z0-9]*?;)/i", '&amp;<span style="color: ' .$options['color']['entities']. ';">$1</span>', $source);
 

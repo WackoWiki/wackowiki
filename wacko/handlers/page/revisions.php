@@ -15,7 +15,7 @@ if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET['minor_edit']) ? $_
 // get page_id for deleted but stored page
 if (!isset($this->page['page_id']))
 {
-	$tag = trim($_GET['page'],'/revisions'); //
+	$tag = trim($_GET['page'], '/revisions'); //
 	// Returns Array ( [id] => Value )
 	$get_page_ID = $this->load_single(
 			"SELECT page_id ".
@@ -74,10 +74,10 @@ if ($this->has_access('read'))
 			{
 				$output .= "<li>";
 				$output .= "".($t--).".";
-				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"a\" value=\"".($c == 1 ? "-1" : $page["revision_m_id"])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";
-				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"b\" value=\"".($c == 1 ? "-1" : $page["revision_m_id"])."\" ".($c == 2 ? "checked=\"checked\"" : "")." />";
+				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"a\" value=\"".($c == 1 ? "-1" : $page['revision_m_id'])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";
+				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"b\" value=\"".($c == 1 ? "-1" : $page['revision_m_id'])."\" ".($c == 2 ? "checked=\"checked\"" : "")." />";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"".$this->href('show').($this->config['rewrite_mode'] ? "?" : "&amp;")."time=".urlencode($page['modified'])."\">".$this->get_time_string_formatted($page['modified'])."</a>";
-				$output .= " — id ".$page["revision_m_id"]." ";
+				$output .= " — id ".$page['revision_m_id']." ";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->get_translation('By')." ".
 				($page['user']
 					? ($this->is_wiki_name($page['user'])

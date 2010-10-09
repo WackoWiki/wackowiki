@@ -107,7 +107,7 @@ if ($registered
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-			"AND f.filename='".quote($this->dblink, $_POST["file"])."'");
+			"AND f.filename='".quote($this->dblink, $_POST['file'])."'");
 
 		if (sizeof($what) > 0)
 		{

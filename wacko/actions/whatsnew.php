@@ -55,7 +55,7 @@ if ($pages = array_merge($pages1, $pages2))
 
 	if (!(int)$noxml)
 	{
-		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/changes_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation("RecentChangesXMLTip")."\" alt=\"XML\" /></a></span><br /><br />\n";
+		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/changes_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RecentChangesXMLTip')."\" alt=\"XML\" /></a></span><br /><br />\n";
 	}
 
 	echo "<ul class=\"ul_list\">\n";
@@ -93,19 +93,19 @@ if ($pages = array_merge($pages1, $pages2))
 			if ($page['comment_on_id'])
 			{
 				preg_match('/^[^\/]+/', $page['comment_on_page'], $subtag);
-				echo "<img src=\"".$this->config['theme_url']."icons/comment.png"."\" title=\"".$this->get_translation("NewCommentAdded")."\" alt=\"[comment]\" /> ".''.$this->link('/'.$page['tag'], '', $this->get_translation("Comment"), 0, 1).' '.$this->get_translation("To").' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title("" , $page['comment_on_id']), 1).' &nbsp;&nbsp;&rarr; '.$this->get_translation("Cluster").' '.$subtag[0].$separator.$author.'';
+				echo "<img src=\"".$this->config['theme_url']."icons/comment.png"."\" title=\"".$this->get_translation('NewCommentAdded')."\" alt=\"[comment]\" /> ".''.$this->link('/'.$page['tag'], '', $this->get_translation('Comment'), 0, 1).' '.$this->get_translation('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['comment_on_id']), 1).' &nbsp;&nbsp;&rarr; '.$this->get_translation('Cluster').' '.$subtag[0].$separator.$author.'';
 			}
 			// new page
 			else if ($page['created'] == $page['modified'])
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $subtag);
-				echo "<img src=\"".$this->config['theme_url']."icons/add.gif"."\" title=\"".$this->get_translation("NewPageCreated")."\" alt=\"[new]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], 0, 1).' &nbsp;&nbsp;&rarr; '.$this->get_translation("Cluster").' '.$subtag[0].$separator.$author.'';
+				echo "<img src=\"".$this->config['theme_url']."icons/add.gif"."\" title=\"".$this->get_translation('NewPageCreated')."\" alt=\"[new]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], 0, 1).' &nbsp;&nbsp;&rarr; '.$this->get_translation('Cluster').' '.$subtag[0].$separator.$author.'';
 			}
 			// new revision
 			else
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $subtag);
-				echo "<img src=\"".$this->config['theme_url']."icons/edit.gif"."\" title=\"".$this->get_translation("NewRevisionAdded")."\" alt=\"[changed]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], 0, 1).' ('.$this->link('/'.$page['tag'], 'revisions', $this->get_translation('History'), 0, 1).') &nbsp;&nbsp;&rarr; '.$this->get_translation("Cluster").' '.$subtag[0].$separator.$author.'';
+				echo "<img src=\"".$this->config['theme_url']."icons/edit.gif"."\" title=\"".$this->get_translation('NewRevisionAdded')."\" alt=\"[changed]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], 0, 1).' ('.$this->link('/'.$page['tag'], 'revisions', $this->get_translation('History'), 0, 1).') &nbsp;&nbsp;&rarr; '.$this->get_translation('Cluster').' '.$subtag[0].$separator.$author.'';
 			}
 
 			echo "</li>\n";

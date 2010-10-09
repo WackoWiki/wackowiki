@@ -30,7 +30,7 @@ if ($this->page['comment_on_id'])
 		"LIMIT 1", 1);
 
 	// determine comments page number where this comment is located
-	$p = ceil($count["n"] / $this->config['comments_count']);
+	$p = ceil($count['n'] / $this->config['comments_count']);
 
 	// forcibly open page
 	$this->redirect($this->href('', $this->get_comment_on_tag($this->page['comment_on_id']), 'show_comments=1&p='.$p).'#'.$this->page['tag']);

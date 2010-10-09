@@ -1,8 +1,8 @@
 <?php
 
-if (!isset($options["wrapper_width"])) $options["wrapper_width"] = "800";
+if (!isset($options['wrapper_width'])) $options['wrapper_width'] = "800";
 
-echo '<div style="width:'.$options["wrapper_width"].'px">';
+echo '<div style="width:'.$options['wrapper_width'].'px">';
 echo $text;
 echo '</div>';
 ?>

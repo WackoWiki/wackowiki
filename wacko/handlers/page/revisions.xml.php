@@ -41,8 +41,8 @@ if ($this->has_access('read'))
 				$xml .= "<link>".$this->href('show').($this->config['rewrite_mode'] ? "?" : "&amp;")."time=".urlencode($page['modified'])."</link>\n";
 				$xml .= "<guid isPermaLink=\"true\">".$this->href('', $etag)."</guid>\n";
 
-				$_GET["a"] = $_GET['b'];
-				$_GET["b"] = $page['page_id'];
+				$_GET['a'] = $_GET['b'];
+				$_GET['b'] = $page['page_id'];
 				$diff = $this->include_buffered("handlers/page/diff.php", "oops");
 
 				$xml .= "<description>".str_replace('<', '&lt;', str_replace('&', '&amp;', $diff))."</description>\n";

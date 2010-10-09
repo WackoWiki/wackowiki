@@ -97,14 +97,14 @@ if (!function_exists('create_cluster_tree'))
 				}
 
 				$sub_pages_tree[$sub_tag]['supertag'] = $sub_supertag;
-				$sub_pages_tree[$sub_tag]["exists"] = $exists;
+				$sub_pages_tree[$sub_tag]['exists'] = $exists;
 			}
 
 			$sub_tree = create_cluster_tree($wacko, $sub_supertag, "", $depth - 1);
 
 			if ($depth > 0)
 			{
-				$sub_pages_tree[$sub_tag]["subtree"] = $sub_tree;
+				$sub_pages_tree[$sub_tag]['subtree'] = $sub_tree;
 			}
 
 		}
@@ -119,8 +119,8 @@ if (!function_exists('test_page_existance'))
 {
 	function test_page_existance($page_array)
 	{
-		if ($page_array["exists"]) return true;
-			$sub_tree = $page_array["subtree"];
+		if ($page_array['exists']) return true;
+			$sub_tree = $page_array['subtree'];
 		if (is_array($sub_tree))
 		{
 			foreach ( $sub_tree as $sub_tag => $sub_page_array )
@@ -154,7 +154,7 @@ if (!function_exists('print_cluster_tree'))
 			foreach ($tree as $sub_tag => $sub_tag_array )
 			{
 				$sub_supertag = $sub_tag_array['supertag'];
-				$sub_exists = $sub_tag_array["exists"];
+				$sub_exists = $sub_tag_array['exists'];
 
 				$linktext = $sub_tag;
 				if ($style != "br" && (!strpos($linktext,"/") === false))
@@ -202,7 +202,7 @@ if (!function_exists('print_cluster_tree'))
 						print "<br />";
 				}
 
-				print_cluster_tree($wacko, $sub_tag_array["subtree"], $style, $current_depth + 1, $abc, $filter);
+				print_cluster_tree($wacko, $sub_tag_array['subtree'], $style, $current_depth + 1, $abc, $filter);
 			}
 
 			if ($style == "ul") print "</ul>";
@@ -287,14 +287,14 @@ if ($pages)
 	{
 		if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 		{
-			$tree_pages_array["/".$page['supertag']] = $page['tag'];
+			$tree_pages_array['/'.$page['supertag']] = $page['tag'];
 		}
 	}
 
 	//Sort in order supertag
 	ksort ( $tree_pages_array, SORT_STRING );
 
-	$tree = create_cluster_tree($this,"/".$this->npj_translit($root),$root,$depth);
+	$tree = create_cluster_tree($this, '/'.$this->npj_translit($root), $root, $depth);
 
 	print_cluster_tree($this, $tree, $style, 1, $abc, $filter);
 
@@ -304,7 +304,7 @@ if ($pages)
 else
 {
 	$empty_string = $this->get_translation('TreeEmpty');
-	$empty_string = str_replace("%1", $this->link("/".$root,"",$root), $empty_string);
+	$empty_string = str_replace('%1', $this->link('/'.$root, '', $root), $empty_string);
 	print($empty_string."<br />");
 }
 

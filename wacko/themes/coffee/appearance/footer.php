@@ -20,7 +20,7 @@ if ($this->page)
 		// Add page link
 		(($this->method == 'new')
 			? ""
-			: print("<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation("CreateNewPageTip")."\" alt=\"".$this->get_translation("CreateNewPageTip")."\" /></a></li>\n")
+			: print("<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation('CreateNewPageTip')."\" alt=\"".$this->get_translation('CreateNewPageTip')."\" /></a></li>\n")
 		);
 
 		// Rename link
@@ -48,7 +48,7 @@ if ($this->page)
 		// Add page link
 		(($this->method == 'new')
 			? ""
-			: print("<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation("CreateNewPageTip")."\" alt=\"".$this->get_translation("CreateNewPageTip")."\" /></a></li>\n")
+			: print("<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation('CreateNewPageTip')."\" alt=\"".$this->get_translation('CreateNewPageTip')."\" /></a></li>\n")
 		);
 	}
 

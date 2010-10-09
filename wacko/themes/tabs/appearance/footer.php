@@ -46,7 +46,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 	src="<?php echo $this->config['base_url'];?>images/z.gif"
 	width="5" height="1" alt="" align="left" border="0" /><img
 	src="<?php echo $this->config['base_url'];?>images/z.gif"
-	width="5" height="1" alt="" align="right" border="0" /> <?php echo_tab( $this->href('show'),  $this->get_translation("ShowTip"),
+	width="5" height="1" alt="" align="right" border="0" /> <?php echo_tab( $this->href('show'),  $this->get_translation('ShowTip'),
 	$this->has_access('read') ? $this->get_translation('ShowText') : "",
 	$this->method != "show"
 	) ?> <?php echo_tab( $this->href('edit'),  $this->get_translation('EditTip'),
@@ -61,7 +61,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 	{
 		if($this->has_access('write') && $this->get_user() || $this->is_admin())
 		{
-			echo_tab( $this->href('properties'),  $this->get_translation("SettingsTip"),
+			echo_tab( $this->href('properties'),  $this->get_translation('SettingsTip'),
 			$this->get_translation('PropertiesText'),
 			$this->method != "properties"
 			);
@@ -88,8 +88,8 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 	<?php
 	if ($this->get_user())
 	{
-		echo_tab( $this->href('new'), $this->get_translation("CreateNewPage"),
-		$this->has_access('write') ? $this->get_translation("CreateNewPage") : "",
+		echo_tab( $this->href('new'), $this->get_translation('CreateNewPage'),
+		$this->has_access('write') ? $this->get_translation('CreateNewPage') : "",
 		$this->method != "new",
 		"2"
 		);

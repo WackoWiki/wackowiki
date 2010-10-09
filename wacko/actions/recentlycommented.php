@@ -101,7 +101,7 @@ if (list ($pages, $pagination) = load_recently_commented($this, $root, (int)$max
 			if ($access && $this->user_allowed_comments())
 			{
 				// day header
-				list($day, $time) = explode(" ", $page["comment_time"]);
+				list($day, $time) = explode(' ', $page['comment_time']);
 
 				if (!isset($curday)) $curday = '';
 				if ($day != $curday)

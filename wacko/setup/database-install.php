@@ -77,7 +77,7 @@ function random_seed($length, $seed_complexity)
 }
 
 // test configuration
-print("         <h2>".$lang["TestingConfiguration"]."</h2>\n");
+print("         <h2>".$lang['TestingConfiguration']."</h2>\n");
 
 // Generic Default Inserts
 if ($config['system_seed'] == "")
@@ -242,7 +242,7 @@ switch($config['database_driver'])
 
 		print("         <ul>\n");
 
-		if(!test($lang["TestConnectionString"], $dblink = @mysql_connect($config['database_host'].($port == "" ? '' : ':'.$port), $config['database_user'], $config['database_password']), $lang["ErrorDBConnection"]))
+		if(!test($lang['TestConnectionString'], $dblink = @mysql_connect($config['database_host'].($port == "" ? '' : ':'.$port), $config['database_user'], $config['database_password']), $lang['ErrorDBConnection']))
 		{
 			/*
 			 There was a problem with the connection string
@@ -253,7 +253,7 @@ switch($config['database_driver'])
 
 			$fatal_error = true;
 		}
-		else if(!test($lang["TestDatabaseExists"], @mysql_select_db($config['database_database'], $dblink), $lang["ErrorDBExists"]))
+		else if(!test($lang['TestDatabaseExists'], @mysql_select_db($config['database_database'], $dblink), $lang['ErrorDBExists']))
 		{
 			/*
 			 There was a problem with the specified database name
@@ -334,19 +334,19 @@ switch($config['database_driver'])
 
 					test($lang['InstallingSystemAccount'], @mysql_query($insert_system, $dblink), str_replace("%1","system account",$lang['ErrorAlreadyExists']));
 					test($lang['InstallingAdmin'], @mysql_query($insert_admin, $dblink), str_replace("%1","admin user",$lang['ErrorAlreadyExists']));
-					test($lang["InstallingAdminSetting"], @mysql_query($insert_admin_setting, $dblink), str_replace("%1","admin user settings",$lang['ErrorAlreadyExists']));
-					test($lang["InstallingAdminGroup"], @mysql_query($insert_admin_group, $dblink), str_replace("%1","admin group",$lang['ErrorAlreadyExists']));
-					test($lang["InstallingAdminGroupMember"], @mysql_query($insert_admin_group_member, $dblink), str_replace("%1","admin group member",$lang['ErrorAlreadyExists']));
+					test($lang['InstallingAdminSetting'], @mysql_query($insert_admin_setting, $dblink), str_replace("%1","admin user settings",$lang['ErrorAlreadyExists']));
+					test($lang['InstallingAdminGroup'], @mysql_query($insert_admin_group, $dblink), str_replace("%1","admin group",$lang['ErrorAlreadyExists']));
+					test($lang['InstallingAdminGroupMember'], @mysql_query($insert_admin_group_member, $dblink), str_replace("%1","admin group member",$lang['ErrorAlreadyExists']));
 					print("            </ul>\n");
 					print("            <br />\n");
-					print("            <h2>".$lang["InstallingDefaultData"]."</h2>\n");
+					print("            <h2>".$lang['InstallingDefaultData']."</h2>\n");
 					print("            <ul>\n");
-					print("               <li>".$lang["InstallingPagesBegin"]);
+					print("               <li>".$lang['InstallingPagesBegin']);
 					require_once("setup/inserts.php");
 					print("</li>\n");
-					print("            <li>".$lang["InstallingPagesEnd"]."</li>\n");
+					print("            <li>".$lang['InstallingPagesEnd']."</li>\n");
 
-					test($lang["InstallingLogoImage"], @mysql_query($insert_logo_image, $dblink), str_replace("%1","logo image",$lang['ErrorAlreadyExists']));
+					test($lang['InstallingLogoImage'], @mysql_query($insert_logo_image, $dblink), str_replace("%1","logo image",$lang['ErrorAlreadyExists']));
 					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace("%1","config values",$lang['ErrorAlreadyExists']));
 
 					break;
@@ -358,7 +358,7 @@ switch($config['database_driver'])
 
 				// upgrade from R4.2 to R4.3.rc1
 				case "R4.2":
-					print("         <h2>Wacko R4.2 ".$lang["To"]." R4.3.rc1</h2>\n");
+					print("         <h2>Wacko R4.2 ".$lang['To']." R4.3.rc1</h2>\n");
 					print("         <ul>\n");
 
 					test(str_replace("%1","page",$lang['AlterTable']), @mysql_query($alter_page_r4_2_1, $dblink), str_replace("%1", "page", $lang['ErrorAlteringTable']));
@@ -367,11 +367,11 @@ switch($config['database_driver'])
 					test(str_replace("%1","revision",$lang['AlterTable']), @mysql_query($alter_revision_r4_2_1, $dblink), str_replace("%1", "revision", $lang['ErrorAlteringTable']));
 					test(str_replace("%1","revision",$lang['AlterTable']), @mysql_query($alter_revision_r4_2_2, $dblink), str_replace("%1", "revision", $lang['ErrorAlteringTable']));
 
-					test($lang["InstallingLogoImage"], @mysql_query($insert_logo_image, $dblink), str_replace("%1","logo image",$lang['ErrorAlreadyExists']));
+					test($lang['InstallingLogoImage'], @mysql_query($insert_logo_image, $dblink), str_replace("%1","logo image",$lang['ErrorAlreadyExists']));
 
 				// upgrade from R4.3.rc1 to R4.4.rc1
 				case "R4.3":
-					print("         <h2>Wacko R4.3.rc1 ".$lang["To"]." R4.4.rc1</h2>\n");
+					print("         <h2>Wacko R4.3.rc1 ".$lang['To']." R4.4.rc1</h2>\n");
 					print("         <ul>\n");
 
 					// rename tables
@@ -399,10 +399,10 @@ switch($config['database_driver'])
 					test(str_replace("%1","user",$lang['AlterTable']), @mysql_query($alter_user_r4_3_13, $dblink), str_replace("%1", "user", $lang['ErrorAlteringTable']));
 					test(str_replace("%1","user",$lang['AlterTable']), @mysql_query($alter_user_r4_3_14, $dblink), str_replace("%1", "user", $lang['ErrorAlteringTable']));
 
-					test(str_replace("%1","user",$lang['UpdateTable']), @mysql_query($update_user_r4_3, $dblink), str_replace("%1", "user", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","user",$lang['UpdateTable']), @mysql_query($update_user_r4_3_1, $dblink), str_replace("%1", "user", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","user",$lang['UpdateTable']), @mysql_query($update_user_r4_3_2, $dblink), str_replace("%1", "user", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","user",$lang['UpdateTable']), @mysql_query($update_user_r4_3_4, $dblink), str_replace("%1", "user", $lang["ErrorUpdatingTable"]));
+					test(str_replace("%1","user",$lang['UpdateTable']), @mysql_query($update_user_r4_3, $dblink), str_replace("%1", "user", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","user",$lang['UpdateTable']), @mysql_query($update_user_r4_3_1, $dblink), str_replace("%1", "user", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","user",$lang['UpdateTable']), @mysql_query($update_user_r4_3_2, $dblink), str_replace("%1", "user", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","user",$lang['UpdateTable']), @mysql_query($update_user_r4_3_4, $dblink), str_replace("%1", "user", $lang['ErrorUpdatingTable']));
 
 					// rename id after upate!
 					test(str_replace("%1","user",$lang['AlterTable']), @mysql_query($alter_user_r4_3_15, $dblink), str_replace("%1", "user", $lang['ErrorAlteringTable']));
@@ -419,7 +419,7 @@ switch($config['database_driver'])
 					test(str_replace("%1","acl",$lang['AlterTable']), @mysql_query($alter_acl_r4_3_1, $dblink), str_replace("%1", "acl", $lang['ErrorAlteringTable']));
 					test(str_replace("%1","acl",$lang['AlterTable']), @mysql_query($alter_acl_r4_3_2, $dblink), str_replace("%1", "acl", $lang['ErrorAlteringTable']));
 
-					test(str_replace("%1","acl",$lang['UpdateTable']), @mysql_query($update_acl_r4_3, $dblink), str_replace("%1", "acl", $lang["ErrorUpdatingTable"]));
+					test(str_replace("%1","acl",$lang['UpdateTable']), @mysql_query($update_acl_r4_3, $dblink), str_replace("%1", "acl", $lang['ErrorUpdatingTable']));
 
 					// Drop obsolete fields
 					test(str_replace("%1","acl",$lang['AlterTable']), @mysql_query($alter_acl_r4_3_3, $dblink), str_replace("%1", "acl", $lang['ErrorAlteringTable']));
@@ -444,8 +444,8 @@ switch($config['database_driver'])
 					test(str_replace("%1","link",$lang['AlterTable']), @mysql_query($alter_link_r4_3_2, $dblink), str_replace("%1", "link", $lang['ErrorAlteringTable']));
 					test(str_replace("%1","link",$lang['AlterTable']), @mysql_query($alter_link_r4_3_3, $dblink), str_replace("%1", "link", $lang['ErrorAlteringTable']));
 
-					test(str_replace("%1","link",$lang['UpdateTable']), @mysql_query($update_link_r4_3, $dblink), str_replace("%1", "link", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","link",$lang['UpdateTable']), @mysql_query($update_link_r4_3_1, $dblink), str_replace("%1", "link", $lang["ErrorUpdatingTable"]));
+					test(str_replace("%1","link",$lang['UpdateTable']), @mysql_query($update_link_r4_3, $dblink), str_replace("%1", "link", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","link",$lang['UpdateTable']), @mysql_query($update_link_r4_3_1, $dblink), str_replace("%1", "link", $lang['ErrorUpdatingTable']));
 
 					// drop last!
 					test(str_replace("%1","link",$lang['AlterTable']), @mysql_query($alter_link_r4_3_4, $dblink), str_replace("%1", "link", $lang['ErrorAlteringTable']));
@@ -464,14 +464,14 @@ switch($config['database_driver'])
 					test(str_replace("%1","page",$lang['AlterTable']), @mysql_query($alter_page_r4_3_10, $dblink), str_replace("%1", "page", $lang['ErrorAlteringTable']));
 					test(str_replace("%1","page",$lang['AlterTable']), @mysql_query($alter_page_r4_3_11, $dblink), str_replace("%1", "page", $lang['ErrorAlteringTable']));
 
-					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3, $dblink), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_1, $dblink), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_2, $dblink), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_3, $dblink), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_4, $dblink), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_5, $dblink), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_6, $dblink), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_7, $dblink), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
+					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3, $dblink), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_1, $dblink), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_2, $dblink), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_3, $dblink), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_4, $dblink), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_5, $dblink), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_6, $dblink), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","page",$lang['UpdateTable']), @mysql_query($update_page_r4_3_7, $dblink), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
 
 					// drop last!
 					test(str_replace("%1","page",$lang['AlterTable']), @mysql_query($alter_page_r4_3_12, $dblink), str_replace("%1", "page", $lang['ErrorAlteringTable']));
@@ -502,8 +502,8 @@ switch($config['database_driver'])
 					test(str_replace("%1","watch",$lang['AlterTable']), @mysql_query($alter_watch_r4_3_2, $dblink), str_replace("%1", "watch", $lang['ErrorAlteringTable']));
 					test(str_replace("%1","watch",$lang['AlterTable']), @mysql_query($alter_watch_r4_3_3, $dblink), str_replace("%1", "watch", $lang['ErrorAlteringTable']));
 
-					test(str_replace("%1","watch",$lang['UpdateTable']), @mysql_query($update_watch_r4_3, $dblink), str_replace("%1", "watch", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","watch",$lang['UpdateTable']), @mysql_query($update_watch_r4_3_1, $dblink), str_replace("%1", "watch", $lang["ErrorUpdatingTable"]));
+					test(str_replace("%1","watch",$lang['UpdateTable']), @mysql_query($update_watch_r4_3, $dblink), str_replace("%1", "watch", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","watch",$lang['UpdateTable']), @mysql_query($update_watch_r4_3_1, $dblink), str_replace("%1", "watch", $lang['ErrorUpdatingTable']));
 
 					// drop last!
 					test(str_replace("%1","watch",$lang['AlterTable']), @mysql_query($alter_watch_r4_3_4, $dblink), str_replace("%1", "watch", $lang['ErrorAlteringTable']));
@@ -526,11 +526,11 @@ switch($config['database_driver'])
 					test(str_replace("%1","revision",$lang['AlterTable']), @mysql_query($alter_revision_r4_3_10, $dblink), str_replace("%1", "revision", $lang['ErrorAlteringTable']));
 					test(str_replace("%1","revision",$lang['AlterTable']), @mysql_query($alter_revision_r4_3_13, $dblink), str_replace("%1", "revision", $lang['ErrorAlteringTable']));
 
-					test(str_replace("%1","revision",$lang['UpdateTable']), @mysql_query($update_revision_r4_3, $dblink), str_replace("%1", "revision", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","revision",$lang['UpdateTable']), @mysql_query($update_revision_r4_3_1, $dblink), str_replace("%1", "revision", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","revision",$lang['UpdateTable']), @mysql_query($update_revision_r4_3_2, $dblink), str_replace("%1", "revision", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","revision",$lang['UpdateTable']), @mysql_query($update_revision_r4_3_3, $dblink), str_replace("%1", "revision", $lang["ErrorUpdatingTable"]));
-					test(str_replace("%1","revision",$lang['UpdateTable']), @mysql_query($update_revision_r4_3_4, $dblink), str_replace("%1", "revision", $lang["ErrorUpdatingTable"]));
+					test(str_replace("%1","revision",$lang['UpdateTable']), @mysql_query($update_revision_r4_3, $dblink), str_replace("%1", "revision", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","revision",$lang['UpdateTable']), @mysql_query($update_revision_r4_3_1, $dblink), str_replace("%1", "revision", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","revision",$lang['UpdateTable']), @mysql_query($update_revision_r4_3_2, $dblink), str_replace("%1", "revision", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","revision",$lang['UpdateTable']), @mysql_query($update_revision_r4_3_3, $dblink), str_replace("%1", "revision", $lang['ErrorUpdatingTable']));
+					test(str_replace("%1","revision",$lang['UpdateTable']), @mysql_query($update_revision_r4_3_4, $dblink), str_replace("%1", "revision", $lang['ErrorUpdatingTable']));
 
 					// drop last!
 					test(str_replace("%1","revision",$lang['AlterTable']), @mysql_query($alter_revision_r4_3_11, $dblink), str_replace("%1", "revision", $lang['ErrorAlteringTable']));
@@ -544,7 +544,7 @@ switch($config['database_driver'])
 
 					test(str_replace("%1","upload",$lang['AlterTable']), @mysql_query($alter_upload_r4_3, $dblink), str_replace("%1", "upload", $lang['ErrorAlteringTable']));
 
-					test(str_replace("%1","upload",$lang['UpdateTable']), @mysql_query($update_upload_r4_3, $dblink), str_replace("%1", "upload", $lang["ErrorUpdatingTable"]));
+					test(str_replace("%1","upload",$lang['UpdateTable']), @mysql_query($update_upload_r4_3, $dblink), str_replace("%1", "upload", $lang['ErrorUpdatingTable']));
 
 					// drop last!
 					test(str_replace("%1","upload",$lang['AlterTable']), @mysql_query($alter_upload_r4_3_1, $dblink), str_replace("%1", "upload", $lang['ErrorAlteringTable']));
@@ -566,7 +566,7 @@ switch($config['database_driver'])
 
 					print("         <ul>\n");
 
-					if(!test($lang["TestConnectionString"], $dblink = @mysqli_connect($config['database_host'], $config['database_user'], $config['database_password'], null, $port), $lang["ErrorDBConnection"]))
+					if(!test($lang['TestConnectionString'], $dblink = @mysqli_connect($config['database_host'], $config['database_user'], $config['database_password'], null, $port), $lang['ErrorDBConnection']))
 					{
 						/*
 						 There was a problem with the connection string
@@ -577,7 +577,7 @@ switch($config['database_driver'])
 
 						$fatal_error = true;
 					}
-					else if(!test($lang["TestDatabaseExists"], @mysqli_select_db($dblink, $config['database_database']), $lang["ErrorDBExists"]))
+					else if(!test($lang['TestDatabaseExists'], @mysqli_select_db($dblink, $config['database_database']), $lang['ErrorDBExists']))
 					{
 						/*
 						 There was a problem with the specified database name
@@ -658,19 +658,19 @@ switch($config['database_driver'])
 
 								test($lang['InstallingSystemAccount'], @mysqli_query($dblink, $insert_system), str_replace("%1","system account",$lang['ErrorAlreadyExists']));
 								test($lang['InstallingAdmin'], @mysqli_query($dblink, $insert_admin), str_replace("%1","admin user",$lang['ErrorAlreadyExists']));
-								test($lang["InstallingAdminSetting"], @mysqli_query($dblink, $insert_admin_setting), str_replace("%1","admin user settings",$lang['ErrorAlreadyExists']));
-								test($lang["InstallingAdminGroup"], @mysqli_query($dblink, $insert_admin_group), str_replace("%1","admin group",$lang['ErrorAlreadyExists']));
-								test($lang["InstallingAdminGroupMember"], @mysqli_query($dblink, $insert_admin_group_member), str_replace("%1","admin group member",$lang['ErrorAlreadyExists']));
+								test($lang['InstallingAdminSetting'], @mysqli_query($dblink, $insert_admin_setting), str_replace("%1","admin user settings",$lang['ErrorAlreadyExists']));
+								test($lang['InstallingAdminGroup'], @mysqli_query($dblink, $insert_admin_group), str_replace("%1","admin group",$lang['ErrorAlreadyExists']));
+								test($lang['InstallingAdminGroupMember'], @mysqli_query($dblink, $insert_admin_group_member), str_replace("%1","admin group member",$lang['ErrorAlreadyExists']));
 								print("         </ul>\n");
 								print("         <br />\n");
-								print("         <h2>".$lang["InstallingDefaultData"]."</h2>\n");
+								print("         <h2>".$lang['InstallingDefaultData']."</h2>\n");
 								print("         <ul>\n");
-								print("            <li>".$lang["InstallingPagesBegin"]);
+								print("            <li>".$lang['InstallingPagesBegin']);
 								require_once("setup/inserts.php");
 								print("</li>\n");
-								print("            <li>".$lang["InstallingPagesEnd"]."</li>\n");
+								print("            <li>".$lang['InstallingPagesEnd']."</li>\n");
 
-								test($lang["InstallingLogoImage"], @mysqli_query($dblink, $insert_logo_image), str_replace("%1","logo image",$lang['ErrorAlreadyExists']));
+								test($lang['InstallingLogoImage'], @mysqli_query($dblink, $insert_logo_image), str_replace("%1","logo image",$lang['ErrorAlreadyExists']));
 								test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace("%1","config values",$lang['ErrorAlreadyExists']));
 								break;
 
@@ -681,7 +681,7 @@ switch($config['database_driver'])
 
 							// upgrade from R4.2 to R4.3.rc1
 							case "R4.2":
-								print("         <h2>Wacko R4.2 ".$lang["To"]." R4.3.rc1</h2>\n");
+								print("         <h2>Wacko R4.2 ".$lang['To']." R4.3.rc1</h2>\n");
 								print("         <ul>\n");
 
 								test(str_replace("%1","page",$lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_2_1), str_replace("%1", "page", $lang['ErrorAlteringTable']));
@@ -690,11 +690,11 @@ switch($config['database_driver'])
 								test(str_replace("%1","revision",$lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_2_2), str_replace("%1", "revision", $lang['ErrorAlteringTable']));
 								test(str_replace("%1","revision",$lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_2_3), str_replace("%1", "revision", $lang['ErrorAlteringTable']));
 
-								test($lang["InstallingLogoImage"], @mysqli_query($dblink, $insert_logo_image), str_replace("%1","logo image",$lang['ErrorAlreadyExists']));
+								test($lang['InstallingLogoImage'], @mysqli_query($dblink, $insert_logo_image), str_replace("%1","logo image",$lang['ErrorAlreadyExists']));
 
 							// upgrade from R4.3.rc1 to R4.4.rc1
 							case "R4.3":
-								print("         <h2>Wacko R4.3.rc1 ".$lang["To"]." R4.4.rc1</h2>\n");
+								print("         <h2>Wacko R4.3.rc1 ".$lang['To']." R4.4.rc1</h2>\n");
 								print("         <ul>\n");
 
 								// rename tables
@@ -722,10 +722,10 @@ switch($config['database_driver'])
 								test(str_replace("%1","user",$lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_13), str_replace("%1", "user", $lang['ErrorAlteringTable']));
 								test(str_replace("%1","user",$lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_14), str_replace("%1", "user", $lang['ErrorAlteringTable']));
 
-								test(str_replace("%1","user",$lang['UpdateTable']), @mysqli_query($dblink, $update_user_r4_3), str_replace("%1", "user", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","user",$lang['UpdateTable']), @mysqli_query($dblink, $update_user_r4_3_1), str_replace("%1", "user", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","user",$lang['UpdateTable']), @mysqli_query($dblink, $update_user_r4_3_2), str_replace("%1", "user", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","user",$lang['UpdateTable']), @mysqli_query($dblink, $update_user_r4_3_4), str_replace("%1", "user", $lang["ErrorUpdatingTable"]));
+								test(str_replace("%1","user",$lang['UpdateTable']), @mysqli_query($dblink, $update_user_r4_3), str_replace("%1", "user", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","user",$lang['UpdateTable']), @mysqli_query($dblink, $update_user_r4_3_1), str_replace("%1", "user", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","user",$lang['UpdateTable']), @mysqli_query($dblink, $update_user_r4_3_2), str_replace("%1", "user", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","user",$lang['UpdateTable']), @mysqli_query($dblink, $update_user_r4_3_4), str_replace("%1", "user", $lang['ErrorUpdatingTable']));
 
 								// rename id after upate!
 								test(str_replace("%1","user",$lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_15), str_replace("%1", "user", $lang['ErrorAlteringTable']));
@@ -742,7 +742,7 @@ switch($config['database_driver'])
 								test(str_replace("%1","acl",$lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_1), str_replace("%1", "acl", $lang['ErrorAlteringTable']));
 								test(str_replace("%1","acl",$lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_2), str_replace("%1", "acl", $lang['ErrorAlteringTable']));
 
-								test(str_replace("%1","acl",$lang['UpdateTable']), @mysqli_query($dblink, $update_acl_r4_3), str_replace("%1", "acl", $lang["ErrorUpdatingTable"]));
+								test(str_replace("%1","acl",$lang['UpdateTable']), @mysqli_query($dblink, $update_acl_r4_3), str_replace("%1", "acl", $lang['ErrorUpdatingTable']));
 
 								// Drop obsolete fields
 								test(str_replace("%1","acl",$lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_3), str_replace("%1", "acl", $lang['ErrorAlteringTable']));
@@ -767,8 +767,8 @@ switch($config['database_driver'])
 								test(str_replace("%1","link",$lang['AlterTable']), @mysqli_query($dblink, $alter_link_r4_3_2), str_replace("%1", "link", $lang['ErrorAlteringTable']));
 								test(str_replace("%1","link",$lang['AlterTable']), @mysqli_query($dblink, $alter_link_r4_3_3), str_replace("%1", "link", $lang['ErrorAlteringTable']));
 
-								test(str_replace("%1","link",$lang['UpdateTable']), @mysqli_query($dblink, $update_link_r4_3), str_replace("%1", "link", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","link",$lang['UpdateTable']), @mysqli_query($dblink, $update_link_r4_3_1), str_replace("%1", "link", $lang["ErrorUpdatingTable"]));
+								test(str_replace("%1","link",$lang['UpdateTable']), @mysqli_query($dblink, $update_link_r4_3), str_replace("%1", "link", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","link",$lang['UpdateTable']), @mysqli_query($dblink, $update_link_r4_3_1), str_replace("%1", "link", $lang['ErrorUpdatingTable']));
 
 								// drop last!
 								test(str_replace("%1","link",$lang['AlterTable']), @mysqli_query($dblink, $alter_link_r4_3_4), str_replace("%1", "link", $lang['ErrorAlteringTable']));
@@ -787,14 +787,14 @@ switch($config['database_driver'])
 								test(str_replace("%1","page",$lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_10), str_replace("%1", "page", $lang['ErrorAlteringTable']));
 								test(str_replace("%1","page",$lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_11), str_replace("%1", "page", $lang['ErrorAlteringTable']));
 
-								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_1), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_2), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_3), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_4), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_5), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_6), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_7), str_replace("%1", "page", $lang["ErrorUpdatingTable"]));
+								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_1), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_2), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_3), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_4), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_5), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_6), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","page",$lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_7), str_replace("%1", "page", $lang['ErrorUpdatingTable']));
 
 								// drop last!
 								test(str_replace("%1","page",$lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_12), str_replace("%1", "page", $lang['ErrorAlteringTable']));
@@ -825,8 +825,8 @@ switch($config['database_driver'])
 								test(str_replace("%1","watch",$lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_2), str_replace("%1", "watch", $lang['ErrorAlteringTable']));
 								test(str_replace("%1","watch",$lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_3), str_replace("%1", "watch", $lang['ErrorAlteringTable']));
 
-								test(str_replace("%1","watch",$lang['UpdateTable']), @mysqli_query($dblink, $update_watch_r4_3), str_replace("%1", "watch", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","watch",$lang['UpdateTable']), @mysqli_query($dblink, $update_watch_r4_3_1), str_replace("%1", "watch", $lang["ErrorUpdatingTable"]));
+								test(str_replace("%1","watch",$lang['UpdateTable']), @mysqli_query($dblink, $update_watch_r4_3), str_replace("%1", "watch", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","watch",$lang['UpdateTable']), @mysqli_query($dblink, $update_watch_r4_3_1), str_replace("%1", "watch", $lang['ErrorUpdatingTable']));
 
 								// drop last!
 								test(str_replace("%1","watch",$lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_4), str_replace("%1", "watch", $lang['ErrorAlteringTable']));
@@ -849,11 +849,11 @@ switch($config['database_driver'])
 								test(str_replace("%1","revision",$lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_10), str_replace("%1", "revision", $lang['ErrorAlteringTable']));
 								test(str_replace("%1","revision",$lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_13), str_replace("%1", "revision", $lang['ErrorAlteringTable']));
 
-								test(str_replace("%1","revision",$lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3), str_replace("%1", "revision", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","revision",$lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_1), str_replace("%1", "revision", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","revision",$lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_2), str_replace("%1", "revision", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","revision",$lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_3), str_replace("%1", "revision", $lang["ErrorUpdatingTable"]));
-								test(str_replace("%1","revision",$lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_4), str_replace("%1", "revision", $lang["ErrorUpdatingTable"]));
+								test(str_replace("%1","revision",$lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3), str_replace("%1", "revision", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","revision",$lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_1), str_replace("%1", "revision", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","revision",$lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_2), str_replace("%1", "revision", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","revision",$lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_3), str_replace("%1", "revision", $lang['ErrorUpdatingTable']));
+								test(str_replace("%1","revision",$lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_4), str_replace("%1", "revision", $lang['ErrorUpdatingTable']));
 
 								// drop last!
 								test(str_replace("%1","revision",$lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_11), str_replace("%1", "revision", $lang['ErrorAlteringTable']));
@@ -867,7 +867,7 @@ switch($config['database_driver'])
 
 								test(str_replace("%1","upload",$lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3), str_replace("%1", "upload", $lang['ErrorAlteringTable']));
 
-								test(str_replace("%1","upload",$lang['UpdateTable']), @mysqli_query($dblink, $update_upload_r4_3), str_replace("%1", "upload", $lang["ErrorUpdatingTable"]));
+								test(str_replace("%1","upload",$lang['UpdateTable']), @mysqli_query($dblink, $update_upload_r4_3), str_replace("%1", "upload", $lang['ErrorUpdatingTable']));
 								// drop last!
 								test(str_replace("%1","upload",$lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_1), str_replace("%1", "upload", $lang['ErrorAlteringTable']));
 								test(str_replace("%1","upload",$lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_2), str_replace("%1", "upload", $lang['ErrorAlteringTable']));
@@ -979,19 +979,19 @@ switch($config['database_driver'])
 
 									test_pdo($lang['InstallingSystemAccount'], $insert_system, str_replace("%1","system account",$lang['ErrorAlreadyExists']));
 									test_pdo($lang['InstallingAdmin'], $insert_admin, str_replace("%1","admin user",$lang['ErrorAlreadyExists']));
-									test_pdo($lang["InstallingAdminSetting"], $insert_admin_setting, str_replace("%1","admin user settings",$lang['ErrorAlreadyExists']));
-									test_pdo($lang["InstallingAdminGroup"], $insert_admin_group, str_replace("%1","admin group",$lang['ErrorAlreadyExists']));
-									test_pdo($lang["InstallingAdminGroupMember"], $insert_admin_group_member, str_replace("%1","admin group member",$lang['ErrorAlreadyExists']));
+									test_pdo($lang['InstallingAdminSetting'], $insert_admin_setting, str_replace("%1","admin user settings",$lang['ErrorAlreadyExists']));
+									test_pdo($lang['InstallingAdminGroup'], $insert_admin_group, str_replace("%1","admin group",$lang['ErrorAlreadyExists']));
+									test_pdo($lang['InstallingAdminGroupMember'], $insert_admin_group_member, str_replace("%1","admin group member",$lang['ErrorAlreadyExists']));
 									print("         </ul>\n");
 									print("         <br />\n");
-									print("         <h2>".$lang["InstallingDefaultData"]."</h2>\n");
+									print("         <h2>".$lang['InstallingDefaultData']."</h2>\n");
 									print("         <ul>\n");
-									print("            <li>".$lang["InstallingPagesBegin"]);
-									require_once("setup/inserts.php");
+									print("            <li>".$lang['InstallingPagesBegin']);
+									require_once('setup/inserts.php');
 									print("</li>\n");
-									print("            <li>".$lang["InstallingPagesEnd"]."</li>\n");
+									print("            <li>".$lang['InstallingPagesEnd']."</li>\n");
 
-									test_pdo($lang["InstallingLogoImage"], $insert_logo_image, str_replace("%1","logo image",$lang['ErrorAlreadyExists']));
+									test_pdo($lang['InstallingLogoImage'], $insert_logo_image, str_replace("%1","logo image",$lang['ErrorAlreadyExists']));
 									test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace("%1","config values",$lang['ErrorAlreadyExists']));
 									print("         </ul>\n");
 								}
@@ -1001,20 +1001,20 @@ switch($config['database_driver'])
 if(!$fatal_error)
 {
 ?>
-<p><?php echo $lang["NextStep"];?></p>
+<p><?php echo $lang['NextStep'];?></p>
 <form action="<?php echo myLocation(); ?>?installAction=write-config" method="post">
 <?php
 	writeConfigHiddenNodes(array('DeleteTables' => ''));
 ?>
-	<input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />
+	<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" />
 </form>
 <?php
 }
 else
 {
 ?>
-<input type="submit" value="<?php echo $lang["Back"];?>" class="next" onclick="javascript: history.go(-1);" />
-<input type="button" value="<?php echo $lang["TryAgain"];?>" class="next" onClick="window.location.reload( true );" />
+<input type="submit" value="<?php echo $lang['Back'];?>" class="next" onclick="javascript: history.go(-1);" />
+<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );" />
 <?php
 }
 ?>

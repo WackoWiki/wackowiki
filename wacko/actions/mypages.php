@@ -13,12 +13,12 @@ if ($user_id = $this->get_user_id())
 	else $limit	= 100;
 	$prefix = $this->config['table_prefix'];
 
-	if ((isset($_GET["bydate"]) && $_GET["bydate"] == 1) || $bydate == 1)
+	if ((isset($_GET['bydate']) && $_GET['bydate'] == 1) || $bydate == 1)
 	{
-		echo $this->get_translation("ListOwnedPages2");
+		echo $this->get_translation('ListOwnedPages2');
 		print("<br />[<a href=\"".$this->href('', '', 'mode=mypages')."#list"."\">".
-		$this->get_translation("OrderABC")."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1')."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
-		$this->get_translation("OrderChange")."</a>] <br /><br />\n");
+		$this->get_translation('OrderABC')."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1')."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
+		$this->get_translation('OrderChange')."</a>] <br /><br />\n");
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
@@ -40,7 +40,7 @@ if ($user_id = $this->get_user_id())
 			foreach ($pages as $page)
 			{
 				// day header
-				list($day, $time) = explode(" ", $page['created']);
+				list($day, $time) = explode(' ', $page['created']);
 				if ($day != $curday)
 				{
 					if ($curday)
@@ -63,10 +63,10 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			echo $this->get_translation("NoPagesFound");
+			echo $this->get_translation('NoPagesFound');
 		}
 	}
-	else if ((isset($_GET["bychange"]) && $_GET["bychange"] == 1) || $bychange == 1)
+	else if ((isset($_GET['bychange']) && $_GET['bychange'] == 1) || $bychange == 1)
 	{
 		$count	= $this->load_single(
 			"SELECT COUNT( DISTINCT p.tag ) AS n ".
@@ -102,7 +102,7 @@ if ($user_id = $this->get_user_id())
 			foreach ($pages as $page)
 			{
 				// day header
-				list($day, $time) = explode(" ", $page['modified']);
+				list($day, $time) = explode(' ', $page['modified']);
 				if ($day != $curday)
 				{
 					if ($curday)
@@ -114,7 +114,7 @@ if ($user_id = $this->get_user_id())
 				}
 
 				// print entry
-				echo "<li>".$this->get_time_string_formatted($time)." (".$this->compose_link_to_page($page['tag'], "revisions", $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], "", "", 0)."</li>\n";
+				echo "<li>".$this->get_time_string_formatted($time)." (".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
 
 			}
 			echo "</ul>\n</li>\n</ul>\n";
@@ -124,7 +124,7 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			echo $this->get_translation("NoPagesFound");
+			echo $this->get_translation('NoPagesFound');
 		}
 	}
 	else
@@ -137,10 +137,10 @@ if ($user_id = $this->get_user_id())
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages#list');
 
-		echo $this->get_translation("ListOwnedPages");
+		echo $this->get_translation('ListOwnedPages');
 		print("<br />[<a href=\"".$this->href('', '', 'mode=mypages&amp;bydate=1')."#list"."\">".
-		$this->get_translation("OrderDate")."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1')."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
-		$this->get_translation("OrderChange")."</a>] <br /><br />\n");
+		$this->get_translation('OrderDate')."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1')."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
+		$this->get_translation('OrderChange')."</a>] <br /><br />\n");
 
 		if ($pages = $this->load_all(
 			"SELECT tag, modified ".
@@ -180,18 +180,18 @@ if ($user_id = $this->get_user_id())
 		}
 		else
 		{
-			echo $this->get_translation("NoPagesFound");
+			echo $this->get_translation('NoPagesFound');
 		}
 	}
 
 	if ($pages == false)
 	{
-		echo $this->get_translation("YouDontOwn");
+		echo $this->get_translation('YouDontOwn');
 	}
 }
 else
 {
-	echo $this->get_translation("NotLoggedInThusOwned");
+	echo $this->get_translation('NotLoggedInThusOwned');
 }
 
 ?>
