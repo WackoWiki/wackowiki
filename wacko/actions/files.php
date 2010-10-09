@@ -99,7 +99,7 @@ if ($can_view)
 	{
 		$this->filesCache[$file['page_id']][$file['filename']] = &$file;
 
-		$dt = $file["uploaded_dt"];
+		$dt = $file['uploaded_dt'];
 		$desc = $this->format($file['description'], 'typografica' );
 
 		if ($desc == "") $desc = "&nbsp;";

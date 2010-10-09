@@ -29,7 +29,7 @@ if ($this->page)
 		// Add page link
 		(($this->method == 'new')
 			? ""
-			: print("<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation("CreateNewPageTip")."\" alt=\"".$this->get_translation("CreateNewPage")."\" /></a></li>\n")
+			: print("<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation('CreateNewPageTip')."\" alt=\"".$this->get_translation('CreateNewPage')."\" /></a></li>\n")
 		);
 
 		// Rename link
@@ -60,7 +60,7 @@ if ($this->page)
 		// Add page link
 		(($this->method == 'new')
 			? ""
-			: print("<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation("CreateNewPageTip")."\" alt=\"".$this->get_translation("CreateNewPage")."\" /></a></li>\n")
+			: print("<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation('CreateNewPageTip')."\" alt=\"".$this->get_translation('CreateNewPage')."\" /></a></li>\n")
 		);
 	}
 
@@ -86,7 +86,7 @@ if ($this->page)
 		if ($this->user_is_owner() || $this->is_admin())
 		{
 			// Add Categories link (shows only for page owner if allowed)
-			print("<li><a href=\"".$this->href('categories')."\"".(($this->method=='categories') ? " onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"" : "")."><img src=\"".$this->config['theme_url']."icons/add_tag.png\" title=\"".$this->get_translation("CategoriesTip")."\" alt=\"".$this->get_translation("CategoriesTip")."\" /></a></li>\n");
+			print("<li><a href=\"".$this->href('categories')."\"".(($this->method=='categories') ? " onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"" : "")."><img src=\"".$this->config['theme_url']."icons/add_tag.png\" title=\"".$this->get_translation('CategoriesTip')."\" alt=\"".$this->get_translation('CategoriesTip')."\" /></a></li>\n");
 		}
 
 		// referrers icon

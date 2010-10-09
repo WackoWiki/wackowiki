@@ -86,7 +86,7 @@ if ($pages1)
 		if ($access)
 		{
 			$pages[$page['tag']] = $page;
-			$pages[$page['tag']][">local"] = true;
+			$pages[$page['tag']]['>local'] = true;
 			$cnt++;
 		}
 
@@ -102,7 +102,7 @@ if ($pages2)
 			if (!isset($pages[$page['tag']]))
 			{
 				$pages[$page['tag']] = $page;
-				$pages[$page['tag']][">local"] = false;
+				$pages[$page['tag']]['>local'] = false;
 				$cnt++;
 			}
 		}
@@ -122,7 +122,7 @@ $local_context  = implode('/', $local_context_sliced ).'/';
 $out = array();
 foreach( $pages as $page )
 {
-	if ($page[">local"])
+	if ($page['>local'])
 	{
 		$tag_sliced = explode('/', $page['tag'] );
 		if (strpos( $page['supertag'], $local_supertag ) === 0)

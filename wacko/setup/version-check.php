@@ -3,7 +3,7 @@
 writeConfigHiddenNodes(array('none' => ''));
 
 ?>
-<p><?php echo $lang["Requirements"]; ?></p>
+<p><?php echo $lang['Requirements']; ?></p>
 	<?php
 	/*
 		Check PHP Version
@@ -11,15 +11,15 @@ writeConfigHiddenNodes(array('none' => ''));
 
 	$php_version_result = version_compare("5.2.0", PHP_VERSION, "<");
 	?>
-<h2><?php echo $lang["PHPVersion"]; ?></h2>
-<p class="notop"><?php echo $lang["PHPDetected"]; ?> <?php print phpversion().'   '.output_image($php_version_result); ?></p>
+<h2><?php echo $lang['PHPVersion']; ?></h2>
+<p class="notop"><?php echo $lang['PHPDetected']; ?> <?php print phpversion().'   '.output_image($php_version_result); ?></p>
 	<?php
 	/*
 		Check if mod_rewrite is installed
 	*/
 	?>
-<h2><?php echo $lang["ModRewrite"]; ?></h2>
-<p class="notop"><?php echo $lang["ModRewriteInstalled"]; ?>   <?php if(function_exists('apache_get_modules')) { print output_image(in_array('mod_rewrite', apache_get_modules())); } else { print($lang["ModRewriteStatusUnknown"]); } ?></p>
+<h2><?php echo $lang['ModRewrite']; ?></h2>
+<p class="notop"><?php echo $lang['ModRewriteInstalled']; ?>   <?php if(function_exists('apache_get_modules')) { print output_image(in_array('mod_rewrite', apache_get_modules())); } else { print($lang['ModRewriteStatusUnknown']); } ?></p>
 	<?php
 	/*
 	 Check which database extensions are installed and what versions of the db are there
@@ -58,7 +58,7 @@ writeConfigHiddenNodes(array('none' => ''));
 		}
 	}
 	?>
-<h2><?php echo $lang["Database"]; ?></h2>
+<h2><?php echo $lang['Database']; ?></h2>
 <ul>
 	<li>MySQL   <?php print output_image(extension_loaded("mysql")); ?></li>
 	<li>MySQLi   <?php print output_image(extension_loaded("mysqli")); ?></li>
@@ -82,7 +82,7 @@ writeConfigHiddenNodes(array('none' => ''));
 
 	$file_permissions_result = is__writable('config/config.php') && is__writable('_cache/') && is__writable('xml/') && is__writable('files/') && is__writable('files/perpage/') && is__writable('sitemap.xml');
 	?>
-<h2><?php echo $lang["Permissions"]; ?></h2>
+<h2><?php echo $lang['Permissions']; ?></h2>
 <ul>
 	<li>config/config.php   <?php print output_image(is__writable('config/config.php')); ?></li>
 	<li>_cache   <?php print output_image(is__writable('_cache/')); ?></li>
@@ -96,37 +96,37 @@ writeConfigHiddenNodes(array('none' => ''));
 		End of checks, are we ready to install?
 	*/
 	?>
-<h2><?php echo $lang["ReadyToInstall"]; ?></h2>
+<h2><?php echo $lang['ReadyToInstall']; ?></h2>
 	<?php
 	if($php_version_result && $database_result && $file_permissions_result)
 	{
 		?>
-<p><?php echo $lang["Ready"];?></p>
-<p><?php echo $lang["NotePermissions"];?></p>
-<input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />
+<p><?php echo $lang['Ready'];?></p>
+<p><?php echo $lang['NotePermissions'];?></p>
+<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" />
 <?php
 	}
 	else if(!$php_version_result)
 	{
 ?>
-<p><?php echo $lang["ErrorMinPHPVersion"]; ?></p>
-<input type="button" value="<?php echo $lang["TryAgain"];?>" class="next" onClick="window.location.reload( true );" />
+<p><?php echo $lang['ErrorMinPHPVersion']; ?></p>
+<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );" />
 <?php
 	}
 	else if(!$database_result)
 	{
 ?>
-<p><?php echo $lang["ErrorNoDbDriverDetected"]; ?></p>
-<input type="button" value="<?php echo $lang["TryAgain"];?>" class="next" onClick="window.location.reload( true );" />
+<p><?php echo $lang['ErrorNoDbDriverDetected']; ?></p>
+<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );" />
 <?php
 	}
 	else if(!$file_permissions_result)
 	{
 ?>
-<p><?php echo $lang["NotePermissions"]; ?></p>
-<p><?php echo $lang["ErrorPermissions"]; ?></p>
-<input type="button" value="<?php echo $lang["TryAgain"];?>" class="next" onClick="window.location.reload( true );" />
-<input type="submit" value="<?php echo $lang["Continue"];?>" class="next" />
+<p><?php echo $lang['NotePermissions']; ?></p>
+<p><?php echo $lang['ErrorPermissions']; ?></p>
+<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );" />
+<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" />
 <?php
 	}
 ?>

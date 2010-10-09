@@ -32,7 +32,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 		}
 
 		// only if saving:
-		if (isset($_POST["save"]) && $_POST['body'] != "")
+		if (isset($_POST['save']) && $_POST['body'] != "")
 		{
 			if(isset($_POST['edit_note']))
 			{

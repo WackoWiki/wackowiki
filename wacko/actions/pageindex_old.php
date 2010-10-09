@@ -10,7 +10,7 @@
 
 if ($max) $limit = $max;
 
-$offset = ( isset($_GET["offset"]) ) ? (int)$_GET["offset"] : 0;
+$offset = ( isset($_GET['offset']) ) ? (int)$_GET['offset'] : 0;
 if(!$limit) $limit = 50;
 if (!isset($letter)) $letter = '';
 if(isset($letter)) $letter = strtoupper(substr($letter, 0, 1));
@@ -95,14 +95,14 @@ if(!$letter)
 	{
 		foreach($top_links_array as $link_data)
 		{
-			$top_links.="<a href=\"".$this->href('', '', 'offset=').(floor($link_data["ind"] / $limit) * $limit)."#letter_".$link_data["link"]."\"><strong>".$link_data["char"]."</strong></a>\n";
+			$top_links.="<a href=\"".$this->href('', '', 'offset=').(floor($link_data['ind'] / $limit) * $limit)."#letter_".$link_data['link']."\"><strong>".$link_data['char']."</strong></a>\n";
 		}
 	}
 	else
 	{
 		foreach($top_links_array as $link_data)
 		{
-			$top_links.="<a href=\"#letter_".$link_data["link"]."\"><li><strong>".$link_data["char"]."</strong></a>\n";
+			$top_links.="<a href=\"#letter_".$link_data['link']."\"><li><strong>".$link_data['char']."</strong></a>\n";
 		}
 	}
 

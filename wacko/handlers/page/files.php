@@ -21,7 +21,7 @@ $what = $this->load_all(
 	"FROM ".$this->config['table_prefix']."upload f ".
 		"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 	"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-	"AND f.filename='".quote($this->dblink, $_GET["get"])."'");
+	"AND f.filename='".quote($this->dblink, $_GET['get'])."'");
 
 if (sizeof($what) > 0)
 {

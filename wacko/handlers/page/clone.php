@@ -1,5 +1,5 @@
 <div id="page">
-<h3><?php echo $this->get_translation("clone_page") ?> <?php echo $this->compose_link_to_page($this->tag, "", "", 0) ?></h3>
+<h3><?php echo $this->get_translation('clone_page') ?> <?php echo $this->compose_link_to_page($this->tag, '', '', 0) ?></h3>
 <br />
 <?php
 
@@ -23,7 +23,7 @@ if ($user = $this->get_user())
 else
 $user = GUEST;
 
-$edit_note = str_replace("%1", $this->tag, $this->get_translation("ClonedFrom"));
+$edit_note = str_replace("%1", $this->tag, $this->get_translation('ClonedFrom'));
 
 if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id']))
 {
@@ -44,27 +44,27 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 
 			if (!preg_match("/^([\_\.\-".$this->language['ALPHANUM_P']."]+)$/", $new_name))
 			{
-				print($this->get_translation("BadName")."<br />\n");
+				print($this->get_translation('BadName')."<br />\n");
 			}
 			//     if ($this->supertag == $supernewname)
 			else if ($this->tag == $new_name)
 			{
-				print(str_replace("%1", $this->compose_link_to_page($new_name, "", "", 0), $this->get_translation("AlreadyNamed"))."<br />\n");
+				print(str_replace("%1", $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlreadyNamed'))."<br />\n");
 			}
 			else
 			{
 				if ($this->supertag != $supernewname && $page=$this->load_page($supernewname, "", LOAD_CACHE, LOAD_META))
 				{
-					print(str_replace("%1", $this->compose_link_to_page($new_name, "", "", 0), $this->get_translation("AlredyExists"))."<br />\n");
+					print(str_replace("%1", $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlredyExists'))."<br />\n");
 				}
 				else
 				{
 					if ($this->clone_page($this->tag, $new_name, $supernewname, $edit_note))
 					{
 						// log event
-						$this->log(4, str_replace("%2", $new_name, str_replace("%1", $this->tag, $this->get_translation("LogClonedPage", $this->config['language']))) );
+						$this->log(4, str_replace('%2', $new_name, str_replace('%1', $this->tag, $this->get_translation('LogClonedPage', $this->config['language']))) );
 
-						if (isset($_POST['redirect']) && $_POST['redirect'] == "on") $need_redirect = 1;
+						if (isset($_POST['redirect']) && $_POST['redirect'] == 'on') $need_redirect = 1;
 
 						if ($need_redirect == 1)
 						{
@@ -73,7 +73,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 						}
 						else
 						{
-							print(str_replace("%1", $new_name, $this->get_translation("PageCloned"))."<br />\n");
+							print(str_replace("%1", $new_name, $this->get_translation('PageCloned'))."<br />\n");
 						}
 					}
 				}
@@ -83,7 +83,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 		if ($need_massclone == 1)
 		{
 			// ToDo: clone all sheeps and optional ACLs
-			print "<p><b>".$this->get_translation("MassCloning")."</b><p>";   //!!!
+			print "<p><b>".$this->get_translation('MassCloning')."</b><p>";   //!!!
 			#recursive_move($this, $this->tag );
 		}
 	}
@@ -100,16 +100,16 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	// edit note
 	if ($this->config['edit_summary'] != 0)
 	{
-		$output .= "<label for=\"edit_note\">".$this->get_translation("EditNote").":</label><br />";
+		$output .= "<label for=\"edit_note\">".$this->get_translation('EditNote').":</label><br />";
 		$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
 
 		echo $output;
 	}
 	?>
 	<br />
-	<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" ";  echo " /> <label for=\"redirect\">".$this->get_translation("ClonedRedirect")."</label>"; ?>
+	<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" ";  echo " /> <label for=\"redirect\">".$this->get_translation('ClonedRedirect')."</label>"; ?>
 	<br /><br />
-	<input name="submit" type="submit" value="<?php echo $this->get_translation("CloneButton"); ?>" /> &nbsp;
+	<input name="submit" type="submit" value="<?php echo $this->get_translation('CloneButton'); ?>" /> &nbsp;
 	<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"
 	onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 

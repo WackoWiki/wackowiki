@@ -93,13 +93,13 @@ else
 	$focus = 0;
 
 	// is user trying to log in or register?
-	if (isset($_POST['action']) && $_POST['action'] == "login")
+	if (isset($_POST['action']) && $_POST['action'] == 'login')
 	{
 		// if user name already exists, check password
 		if ($existingUser = $this->load_user($_POST['name']))
 		{
 			// check for disabled account
-			if (($existingUser['enabled'] == false) || $existingUser["account_type"] != 0 )
+			if (($existingUser['enabled'] == false) || $existingUser['account_type'] != 0 )
 			{
 				$error = $this->get_translation('AccountDisabled');
 			}

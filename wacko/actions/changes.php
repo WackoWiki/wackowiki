@@ -2,7 +2,7 @@
 
 if (!isset($root)) $root = $this->unwrap_link(isset($vars['for']) ? $vars['for'] : '');
 if (!isset($root)) $root = $this->page['tag'];
-if (!isset($date)) $date = isset($_GET["date"]) ? $_GET['date'] : '';
+if (!isset($date)) $date = isset($_GET['date']) ? $_GET['date'] : '';
 if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET['minor_edit']) ? $_GET['minor_edit'] : '';
 if (!isset($noxml)) $noxml = 0;
 
