@@ -68,7 +68,7 @@ foreach($pages as $page)
 						$oldChar = $firstChar;
 					}
 
-					$page_links .= "<li>".$this->link("/".$page['tag'],"",$page['tag'])."</li>\n";
+					$page_links .= "<li>".$this->link('/'.$page['tag'], '', $page['tag'])."</li>\n";
 
 					$total_visible++;
 				}

@@ -252,7 +252,7 @@ switch (count($files))
 				"<img src=\"".$this->config['theme_url']."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->get_translation('DeleteText')."\" /></a>".
 				"</div>");
 					print($this->format($comment['body'])."\n");
-					print("<div class=\"commentinfo\">\n-- ".($this->is_wiki_name($comment['user'])?$this->link("/".$comment['user'],"",$comment['user']):$comment['user'])." (".$comment['modified'].")\n</div>\n");
+					print("<div class=\"commentinfo\">\n-- ".($this->is_wiki_name($comment['user']) ? $this->link('/'.$comment['user'], '', $comment['user']) : $comment['user'])." (".$comment['modified'].")\n</div>\n");
 					print("</div>\n");
 				}
 			}

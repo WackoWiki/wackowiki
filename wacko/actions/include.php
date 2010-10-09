@@ -54,7 +54,7 @@ else
 		// header
 		if (($this->method != 'print') && ($nomark != 1) && ($nomark != 2 || $this->has_access('write', $page_id)))
 		{
-			echo "<div class=\"include\">"."<div class=\"name\">".$this->link("/".$inc_page['tag'])."&nbsp;&nbsp;::&nbsp;".
+			echo "<div class=\"include\">"."<div class=\"name\">".$this->link('/'.$inc_page['tag'])."&nbsp;&nbsp;::&nbsp;".
 				"<a href=\"".$this->href('edit', $inc_page['tag'])."\">".$this->get_translation('EditIcon')."</a></div>";
 		}
 

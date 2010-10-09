@@ -1,6 +1,6 @@
 <div id="page">
 
-<h3><?php echo str_replace("%1",$this->link("/".$this->tag),$this->get_translation('PropertiesFor')); ?></h3>
+<h3><?php echo str_replace('%1', $this->link('/'.$this->tag), $this->get_translation('PropertiesFor')); ?></h3>
 
 <?php
 
