@@ -93,7 +93,7 @@ $insert_system = "INSERT INTO ".$config['table_prefix']."user (user_name, passwo
 $insert_admin = "INSERT INTO ".$config['table_prefix']."user (user_name, password, salt, email, signup_time) VALUES ('".$config['admin_name']."', '".$password_encrypted."', '".$salt."', '".$config['admin_email']."', NOW())";
 $insert_admin_setting = "INSERT INTO ".$config['table_prefix']."user_setting (user_id, theme, lang) VALUES ((SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), '".$config['theme']."', '".$config['language']."')";
 // TODO: for Upgrade insert other aliases also in group table
-// $config['aliases'] = array("Admins" => $config['admin_name']);
+// $config['aliases'] = array('Admins' => $config['admin_name']);
 
 
 $insert_admin_group = "INSERT INTO ".$config['table_prefix']."group (group_name, description, moderator, created) VALUES ('Admins', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";

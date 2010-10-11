@@ -155,7 +155,7 @@ if ($this->method == "show") {
 			<?php
 
 			echo "<div class=\"files\">";
-			echo $this->action("files",array("nomark"=>1));
+			echo $this->action('files', array('nomark' => 1));
 			echo "</div>";
 			// display form
 			print("<div class=\"filesform\">\n");
@@ -174,7 +174,7 @@ if ($this->method == "show") {
 			($this->check_acl($user,$this->config['upload']))
 			)
 			)
-			echo $this->action("upload",array("nomark"=>1));
+			echo $this->action('upload', array('nomark' => 1));
 			print("</div>\n");
 		}
 		else

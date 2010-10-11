@@ -18,7 +18,7 @@ if ($root) 			$root = $this->unwrap_link($root);
 if (!isset($depth)) $depth = 0;
 if (!is_numeric($depth)) $depth = 0;
 if ($depth == 0) $depth = 2147483647; //Which means unlimitedly
-if (!in_array($style, array("br", "ul", "ol", "indent"))) $style = "indent";
+if (!in_array($style, array('br', 'ul', 'ol', 'indent'))) $style = 'indent';
 
 global $tree_pages_array;
 

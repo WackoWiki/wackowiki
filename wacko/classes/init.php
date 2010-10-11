@@ -140,7 +140,7 @@ class Init
 			// primary settings
 			if ($this->config == false && !isset($this->dblink))
 			{
-				$found_rewrite_extension = function_exists("apache_get_modules") ? in_array("mod_rewrite", apache_get_modules()) : false;
+				$found_rewrite_extension = function_exists("apache_get_modules") ? in_array('mod_rewrite', apache_get_modules()) : false;
 
 			/*
 				VERY IMPORTANT NOTE
@@ -572,7 +572,7 @@ class Init
 						if ($query['time'] < $this->config['debug_sql_threshold']) continue;
 
 						echo "<li>";
-						echo str_replace(array("<", ">"), array("&lt;", "&gt;"), $query['query'])."<br />";
+						echo str_replace(array('<', '>'), array('&lt;', '&gt;'), $query['query'])."<br />";
 						echo "[".number_format($query['time'], 4)." sec.]";
 						echo "</li>\n";
 					}

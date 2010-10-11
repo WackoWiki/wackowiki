@@ -3,7 +3,7 @@
 function myLocation()
 {
 	global $config;
-	list($url, ) = explode("?", $config['base_url']);
+	list($url, ) = explode('?', $config['base_url']);
 	return $url;
 }
 

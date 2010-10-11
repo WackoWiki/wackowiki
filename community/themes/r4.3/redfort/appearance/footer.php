@@ -57,7 +57,7 @@ if ($this->has_access('read') && $this->config['hide_files'] != 1)
     <?php
 
     echo "<div class=\"files\">";
-    echo $this->action("files",array("nomark"=>1));
+    echo $this->action('files', array('nomark' => 1));
     echo "</div>";
     // display form
     print("<div class=\"filesform\">\n");
@@ -76,7 +76,7 @@ if ($this->has_access('read') && $this->config['hide_files'] != 1)
          ($this->check_acl($user,$this->config['upload']))
         )
        )
-    echo $this->action("upload",array("nomark"=>1));
+    echo $this->action('upload', array('nomark' => 1));
     print("</div>\n");
   }
   else
