@@ -35,7 +35,7 @@ foreach($pages as $page)
 	// Create alphabet links at top of page - Don't display this menu if the user specified a particluar letter
 	if($firstChar != $curChar)
 	{
-		$top_links_array[] = array("char" => $firstChar, "ind" => $total, "link" => $letter_count);
+		$top_links_array[] = array('char' => $firstChar, 'ind' => $total, 'link' => $letter_count);
 
 		$oldChar = $curChar;
 		$curChar = $firstChar;

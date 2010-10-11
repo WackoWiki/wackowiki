@@ -22,7 +22,7 @@ class Wacko
 	var $unicode_entities		= array();	//common unicode array
 	var $timer;
 	var $toc_context			= array();
-	var $search_engines			= array("bot", "rambler", "yandex", "crawl", "search", "archiver", "slurp", "aport", "crawler", "google", "inktomi", "spider", );
+	var $search_engines			= array('bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider', );
 	var $_langlist				= NULL;
 	var $languages				= NULL;
 	var $resources				= NULL;
@@ -55,10 +55,10 @@ class Wacko
 						"after"		=> ""),
 	);
 	var $paragrafica_patches = array(
-		"before" => array("before"),
-		"after"  => array("after"),
-		"right"  => array("_before"),
-		"left"  => array("_before"),
+		"before" => array('before'),
+		"after"  => array('after'),
+		"right"  => array('_before'),
+		"left"  => array('_before'),
 	);
 	var $npj_macros = array(
 		"вики" => "wiki", "вака" => "wacko", "веб" => "web"

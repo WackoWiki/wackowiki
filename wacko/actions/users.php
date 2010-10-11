@@ -62,7 +62,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				$message	= str_replace('%5', $_POST['mail_body'], $message);
 
 				// compose headers
-				$headers	= array("Message-ID: <$msgID>");
+				$headers	= array('Message-ID: <$msgID>');
 				if ($_POST['ref'] == true)
 				{
 					$headers[] = "In-Reply-To: <{$_POST['ref']}>";

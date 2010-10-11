@@ -1,7 +1,7 @@
 <?php
 if(array_key_exists("wacko_version", $config))
 {
-	echo '<p>'.preg_replace(array("/%1/", "/%2/"), array($config['wacko_version'], WACKO_VERSION), $lang['UpgradeFromWacko'])."</p>\n";
+	echo '<p>'.preg_replace(array('/%1/', '/%2/'), array($config['wacko_version'], WACKO_VERSION), $lang['UpgradeFromWacko'])."</p>\n";
 	echo '<p>'.$lang['PleaseBackup']."</p>\n";
 }
 else

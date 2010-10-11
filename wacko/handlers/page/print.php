@@ -32,7 +32,7 @@ if ($this->has_access('read'))
 		$data = $this->format($this->page['body'], 'wacko');
 
 		// display page
-		$data = $this->format($data, 'post_wacko', array("bad" => "good"));
+		$data = $this->format($data, 'post_wacko', array('bad' => 'good'));
 		$data = $this->numerate_toc($data); //  numerate toc if needed
 		echo $data;
 

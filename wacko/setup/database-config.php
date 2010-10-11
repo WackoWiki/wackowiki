@@ -71,14 +71,14 @@
  */
 
 $drivers = array();
-$drivers[] = array("mysql", "mysql_legacy", "MySQL");
-$drivers[] = array("mysqli", "mysqli_legacy", "MySQLi");
-$drivers[] = array("pdo", "mysql_pdo", "PDO MySQL");
-// $drivers[] = array("pdo", "mssql", "PDO MS SQL");
-// $drivers[] = array("pdo", "pgsql", "PDO PostgreSQL");
-// $drivers[] = array("pdo", "sqlite", "PDO SQLite");
-// $drivers[] = array("pdo", "sqlite2", "PDO SQLite2");
-// $drivers[] = array("pdo", "oci", "PDO Oracle");
+$drivers[] = array('mysql', 'mysql_legacy', 'MySQL');
+$drivers[] = array('mysqli', 'mysqli_legacy', 'MySQLi');
+$drivers[] = array('pdo', 'mysql_pdo', 'PDO MySQL');
+// $drivers[] = array('pdo', 'mssql', 'PDO MS SQL');
+// $drivers[] = array('pdo', 'pgsql', 'PDO PostgreSQL');
+// $drivers[] = array('pdo', 'sqlite', 'PDO SQLite');
+// $drivers[] = array('pdo', 'sqlite2', 'PDO SQLite2');
+// $drivers[] = array('pdo', 'oci', 'PDO Oracle');
 
 $detected = 0;
 for($count = 0; $count < count($drivers); $count++)

@@ -121,7 +121,7 @@ if ($registered
 <br />
 			<?php
 			// show backlinks
-			echo $this->action('backlinks', array("nomark" => 0));
+			echo $this->action('backlinks', array('nomark' => 0));
 			?> <br />
 <br />
 <input name="submit" type="submit" value="<?php echo $this->get_translation('RenameButton'); ?>" /> &nbsp;

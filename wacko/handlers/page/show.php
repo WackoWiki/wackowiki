@@ -119,7 +119,7 @@ if ($this->has_access('read'))
 		}
 
 		// display page
-		$data = $this->format($this->page['body_r'], 'post_wacko', array("bad" => "good"));
+		$data = $this->format($this->page['body_r'], 'post_wacko', array('bad' => 'good'));
 		$data = $this->numerate_toc( $data ); //  numerate toc if needed
 		echo $data;
 
@@ -183,7 +183,7 @@ if ($this->page)
 
 			<?php
 			echo "<div class=\"files\">";
-			echo $this->action("files",array("nomark" => 1));
+			echo $this->action("files",array('nomark' => 1));
 			echo "</div>";
 			// display form
 			if ($user = $this->get_user())
@@ -203,7 +203,7 @@ if ($this->page)
 				)
 			{
 				echo "<div class=\"filesform\">\n";
-				echo $this->action('upload', array("nomark" => 1));
+				echo $this->action('upload', array('nomark' => 1));
 				echo "</div>\n";
 			}
 		}

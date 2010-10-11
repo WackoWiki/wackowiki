@@ -42,7 +42,7 @@ else
 if (isset($_GET['topic']) && $_GET['topic'] == 'on') $mode = 'topic';
 
 //if (!$delim) $delim="---";
-if (!in_array($style, array("br","ul","ol","comma"))) $style = 'ol';
+if (!in_array($style, array('br', 'ul', 'ol', 'comma'))) $style = 'ol';
 
 $i = 0;
 
@@ -204,7 +204,7 @@ function highlight_this($text, $words, $the_place)
 		if(strlen(trim($word)) != 0)
 
 		//exclude these words from being replaced
-		$exclude_list = array("word1", "word2", "word3");
+		$exclude_list = array('word1', 'word2', 'word3');
 
 		// Check if it's excluded
 		if ( in_array( strtolower($word), $exclude_list ) )
