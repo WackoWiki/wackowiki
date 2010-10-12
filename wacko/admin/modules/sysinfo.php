@@ -41,19 +41,19 @@ function admin_sysinfo(&$engine, &$module)
 	$_php_ram = $memory;
 
 	// Sysinfo in array
-	$sysinfo['app_version'] = array('Wacko version', $engine->config['wacko_version']);
-	$sysinfo['os'] = array('OS', PHP_OS.' ('.@php_uname().')');
-	#$sysinfo['os_extended'] = array('OS extended', @php_uname());
-	$sysinfo['mysql_version'] = array('MySQL version', $mysql_version);
-	$sysinfo['php_version'] = array('PHP Version', PHP_VERSION);
-	$sysinfo['memory'] = array('Memory', $engine->binary_multiples($_php_ram*1024*1024, 0, true, true));
-	$sysinfo['upload_max_filesize'] = array('Upload max filesize', $engine->binary_multiples($upload_max_filesize*1024*1024, 0, true, true));
-	$sysinfo['max_execution_time'] = array('Max execution time', get_cfg_var('max_execution_time').' seconds');
-	$sysinfo['php_extentions'] = array('PHP extentions', implode(', ',get_loaded_extensions()));
-	$sysinfo['server_name'] = array('Server name', $_SERVER['SERVER_NAME']);
+	$sysinfo['app_version']			= array('Wacko version', $engine->config['wacko_version']);
+	$sysinfo['os']					= array('OS', PHP_OS.' ('.@php_uname().')');
+	#$sysinfo['os_extended']		= array('OS extended', @php_uname());
+	$sysinfo['mysql_version']		= array('MySQL version', $mysql_version);
+	$sysinfo['php_version']			= array('PHP Version', PHP_VERSION);
+	$sysinfo['memory']				= array('Memory', $engine->binary_multiples($_php_ram*1024*1024, 0, true, true));
+	$sysinfo['upload_max_filesize']	= array('Upload max filesize', $engine->binary_multiples($upload_max_filesize*1024*1024, 0, true, true));
+	$sysinfo['max_execution_time']	= array('Max execution time', get_cfg_var('max_execution_time').' seconds');
+	$sysinfo['php_extentions']		= array('PHP extentions', implode(', ',get_loaded_extensions()));
+	$sysinfo['server_name']			= array('Server name', $_SERVER['SERVER_NAME']);
 
 	// add additional system parameters
-	#$sysinfo['other'] = addwhatyourmissing;
+	#$sysinfo['other']				= addwhatyourmissing;
 
 	foreach ($sysinfo as $param => $value)
 	{
