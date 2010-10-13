@@ -5,6 +5,6 @@
   $this->config['footer_files'] = 0;
 // ============================
 $themeResource = array(
-  "" => "",
+  '' => '',
 );
 ?>

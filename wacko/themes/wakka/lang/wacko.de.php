@@ -1,5 +1,5 @@
 <?php
 $themeResource = array(
-	"SettingsPage" => "Einstellungen",
+	'SettingsPage' => 'Einstellungen',
 );
 ?>
