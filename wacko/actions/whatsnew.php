@@ -24,6 +24,7 @@ $pages1 = $this->load_all(
 	"FROM {$this->config['table_prefix']}page p ".
 		"LEFT JOIN {$this->config['table_prefix']}page c ON (p.comment_on_id = c.page_id) ".
 		"LEFT JOIN {$this->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
+	"WHERE u.account_type = '0' ".
 	"ORDER BY p.created DESC ".
 	"LIMIT ".($max * 2), 1);
 // loading revisions
@@ -32,7 +33,8 @@ $pages2 = $this->load_all(
 	"FROM {$this->config['table_prefix']}page p ".
 		"LEFT JOIN {$this->config['table_prefix']}page c ON (p.comment_on_id = c.page_id) ".
 		"LEFT JOIN {$this->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
-	"WHERE p.comment_on_id = '' ".
+	"WHERE p.comment_on_id = '0' ".
+	"AND u.account_type = '0' ".
 	"ORDER BY modified DESC ".
 	"LIMIT ".($max * 2), 1);
 
