@@ -1,8 +1,8 @@
 <?php
 $themeResource = array(
-  "TextSearchPage" => "Ricerca",
-  "LoginPage" => "Connessione",
-  "SettingsPage" => "Preferenze",
+  'TextSearchPage' => 'Ricerca',
+  'LoginPage' => 'Connessione',
+  'SettingsPage' => 'Preferenze',
 
 );
 ?>

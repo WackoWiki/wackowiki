@@ -1,7 +1,7 @@
 <?php
 $themeResource = array(
-  "TextSearchPage" => "TextSearch",
-  "LoginPage" => "Login",
+  'TextSearchPage' => 'TextSearch',
+  'LoginPage' => 'Login',
 
 );
 ?>

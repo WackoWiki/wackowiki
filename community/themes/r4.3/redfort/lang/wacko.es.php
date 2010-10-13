@@ -1,6 +1,6 @@
 <?php
 $themeResource = array(
-  "TextSearchPage" => "BusquedaTextual",
-  "LoginPage" => "Conectar",
+  'TextSearchPage' => 'BusquedaTextual',
+  'LoginPage' => 'Conectar',
 );
 ?>

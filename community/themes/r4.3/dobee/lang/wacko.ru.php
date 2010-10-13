@@ -1,6 +1,6 @@
 <?php
 $themeResource = array(
-  "ThisPage" => "Ёта страница",
-  "ExportToXML" => "Ёкспорт в XML",
+  'ThisPage' => 'Ёта страница',
+  'ExportToXML' => 'Ёкспорт в XML',
 );
 ?>
