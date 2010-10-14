@@ -6,8 +6,8 @@
 <html>
 <head>
   <title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".$this->tag; ?></title>
-<?php if ($this->method != 'show')
-       echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
+<?php // do not index alternative print pages
+  echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
   <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
   <meta name="keywords" content="<?php echo $this->config['meta_keywords'] ?>" />
   <meta name="description" content="<?php echo $this->config['meta_description'] ?>" />

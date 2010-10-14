@@ -165,6 +165,7 @@ $configDb['multilanguage'] = $config['multilanguage'];
 $configDb['name_date_macro'] = $config['name_date_macro'];
 $configDb['news_cluster'] = $config['news_cluster'];
 $configDb['news_levels'] = $config['news_levels'];
+$configDb['noindex'] = $config['noindex'];
 $configDb['outlook_workaround'] = $config['outlook_workaround'];
 $configDb['owners_can_change_categories'] = $config['owners_can_change_categories'];
 $configDb['owners_can_remove_comments'] = $config['owners_can_remove_comments'];

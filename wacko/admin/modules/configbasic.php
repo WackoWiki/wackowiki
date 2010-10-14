@@ -52,6 +52,7 @@ function admin_configbasic(&$engine, &$module)
 		$config['keep_deleted_time']		= (string)$_POST['keep_deleted_time'];
 		$config['pages_purge_time']			= (string)$_POST['pages_purge_time'];
 		$config['referrers_purge_time']		= (string)$_POST['referrers_purge_time'];
+		$config['noindex']					= (int)$_POST['noindex'];
 		$config['xml_sitemap']				= (int)$_POST['xml_sitemap'];
 
 		foreach($config as $key => $value)
@@ -80,7 +81,7 @@ function admin_configbasic(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="wacko_desc"><strong>Site Description:</strong><br />
-				<small>Supplement to the title of a site that appears in the pages header.</small></label></td>
+				<small>Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="wacko_desc" name="wacko_desc" value="<?php echo htmlspecialchars($engine->config['wacko_desc']);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -202,7 +203,7 @@ function admin_configbasic(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="upload_quota_per_user"><strong>Restricting files to a user:</strong><br />
-				<small>Restriction on the number of files that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
+				<small>Restriction on the quota of storage that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo htmlspecialchars($engine->config['upload_quota_per_user']);?>" /></td>
 			</tr>
 			<tr>
@@ -354,6 +355,14 @@ function admin_configbasic(&$engine, &$module)
 				<td class="label"><label for="referrers_purge_time"><strong>Storage time of referrers:</strong><br />
 				<small>Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="referrers_purge_time" name="referrers_purge_time" value="<?php echo htmlspecialchars($engine->config['referrers_purge_time']);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="noindex"><strong>Site Visibility :</strong><br />
+				<small>I would like to block search engines, but allow normal visitors</small></label></td>
+				<td><input type="checkbox" id="noindex" name="noindex" value="1"<?php echo ( $engine->config['noindex'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

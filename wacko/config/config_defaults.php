@@ -119,6 +119,7 @@ $wackoConfig = array(
 	'meta_description' => '',
 	'meta_keywords' => '',
 
+	'noindex' => 0,
 	'xml_sitemap' => 0,
 
 	'cache' => 0,

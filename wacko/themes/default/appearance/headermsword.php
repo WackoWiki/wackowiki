@@ -6,7 +6,7 @@ header("Content-Type: text/html; charset=".$this->get_charset());
 <html>
 <head>
 <title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".$this->tag; ?></title>
-<?php if ($this->method != 'show')
+<?php // do not index alternative print pages
 echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <meta http-equiv="content-type"
 	content="text/html; charset=<?php echo $this->get_charset(); ?>" />

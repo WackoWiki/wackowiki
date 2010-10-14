@@ -13,9 +13,9 @@ header("Content-Type: text/html; charset=".$this->get_charset());
 	<title><?php echo $this->add_spaces($this->tag).($this->method != "show" ? " (".$this->method.")" : "");
 echo " (@".htmlspecialchars($this->config['wacko_name']).")" ?></title>
 <?php
-// We don't need search robots to index subordinate pages
-if ($this->method != 'show' || $this->page['latest'] == "0" || $this->page['noindex'] == "1")
-echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
+// We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
+if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noindex'] == 1 || $this->page['noindex'] == 1)
+	echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 ?>
 	<meta name="keywords" content="<?php echo $this->get_keywords(); ?>" />
 	<meta name="description" content="<?php echo $this->get_description(); ?>" />

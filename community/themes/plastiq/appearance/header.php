@@ -5,9 +5,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title><?php echo htmlspecialchars($this->config['wacko_name']); ?> : <?php echo $this->get_page_path(true, $separator = "/", false); ?></title>
-<?php if ($this->method != 'show' || $this->page['latest'] == '0') { ?>
-<meta name="robots" content="noindex, nofollow" />
-<?php } ?>
+<?php
+// We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
+if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noindex'] == 1 || $this->page['noindex'] == 1)
+	echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
+?>
 <meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords()); ?>" />
 <meta name="description" content="<?php echo htmlspecialchars($this->get_description()); ?>" />
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
