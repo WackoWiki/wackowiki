@@ -133,7 +133,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 				if ($this->page['comment_on_id'] != 0)
 				{
 					// comment modified
-					$this->log(6, str_replace("%1", $this->tag." ".$this->page['title'], $this->get_translation('LogCommentEdited', $this->config['language'])));
+					$this->log(6, str_replace('%1', $this->tag." ".$this->page['title'], $this->get_translation('LogCommentEdited', $this->config['language'])));
 				}
 				else
 				{
@@ -142,12 +142,12 @@ if ($this->has_access('write') && $this->has_access('read'))
 					{
 						// new page created
 						$this->save_categories_list($this->get_page_id($this->tag));
-						$this->log(4, str_replace("%1", $this->tag." ".$_POST['title'], $this->get_translation('LogPageCreated', $this->config['language'])));
+						$this->log(4, str_replace('%1', $this->tag." ".$_POST['title'], $this->get_translation('LogPageCreated', $this->config['language'])));
 					}
 					else
 					{
 						// old page modified
-						$this->log(6, str_replace("%1", $this->tag." ".$this->page['title'], $this->get_translation('LogPageEdited', $this->config['language'])));
+						$this->log(6, str_replace('%1', $this->tag." ".$this->page['title'], $this->get_translation('LogPageEdited', $this->config['language'])));
 					}
 
 					// restore username after anonymous publication

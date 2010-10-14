@@ -23,7 +23,7 @@ if (isset($_GET['action']) && $_GET['action'] == "clearcookies")
 
 if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
-	$this->log(5, str_replace("%1", $this->get_user_name(), $this->get_translation('LogUserLoggedOut', $this->config['language'])));
+	$this->log(5, str_replace('%1', $this->get_user_name(), $this->get_translation('LogUserLoggedOut', $this->config['language'])));
 	$this->logout_user();
 	$this->set_bookmarks(BM_DEFAULT);
 	//$this->set_message($this->get_translation('LoggedOut'));
@@ -163,7 +163,7 @@ else
 					$this->reset_failed_user_login_count($existingUser['user_id']);
 					$this->reset_lost_password_count($existingUser['user_id']);
 
-					$this->log(3, str_replace("%1", $existingUser['user_name'], $this->get_translation('LogUserLoginOK', $this->config['language'])));
+					$this->log(3, str_replace('%1', $existingUser['user_name'], $this->get_translation('LogUserLoginOK', $this->config['language'])));
 
 					// run in ssl mode?
 					if ($this->config['ssl'] == true)

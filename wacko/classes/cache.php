@@ -3,7 +3,7 @@
 class Cache
 {
 	var $cache_ttl	= 600;
-	var $cache_dir	= "_cache/";
+	var $cache_dir	= '_cache/';
 	var $debug		= 0;
 
 	//Constructor
@@ -73,10 +73,10 @@ class Cache
 
 	function construct_id($page, $method, $query)
 	{
-		$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", rawurldecode($page)))));
+		$page = strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', rawurldecode($page)))));
 
-		$this->log("construct_id page=".$page);
-		$this->log("construct_id md5=".hash('md5', $page."_".$method."_".$query));
+		$this->log('construct_id page='.$page);
+		$this->log('construct_id md5='.hash('md5', $page."_".$method."_".$query));
 
 		$filename = $this->cache_dir.CACHE_PAGE_DIR.hash('md5', $page."_".$method."_".$query);
 		return $filename;
@@ -103,7 +103,7 @@ class Cache
 		if (!$method) $method = $this->method;
 		if (!$query)  $query  = $this->query;
 
-		$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", $page))));
+		$page = strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
 		$filename = $this->construct_id($page, $method, $query);
 
 		file_put_contents($filename, $data);
@@ -125,9 +125,9 @@ class Cache
 	{
 		if ($this->wacko)
 		{
-			$page = strtolower(str_replace("\\", "", str_replace("'", "", str_replace("_", "", $page))));
-			$this->log("cache_invalidate page=".$page);
-			$this->log("cache_invalidate query=".
+			$page = strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
+			$this->log('cache_invalidate page='.$page);
+			$this->log('cache_invalidate query='.
 				"SELECT * ".
 				"FROM ".$this->wacko->config['table_prefix']."cache ".
 				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
@@ -137,13 +137,13 @@ class Cache
 				"FROM ".$this->wacko->config['table_prefix']."cache ".
 				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
 
-			$this->log("cache_invalidate count params=".count($params));
+			$this->log('cache_invalidate count params='.count($params));
 
 			foreach ($params as $param)
 			{
 				$filename = $this->construct_id($page, $param['method'], $param['query']);
 
-				$this->log("cache_invalidate delete=".$filename);
+				$this->log('cache_invalidate delete='.$filename);
 
 				if (@file_exists($filename))
 					@unlink($filename);
@@ -153,7 +153,7 @@ class Cache
 				"DELETE FROM ".$this->wacko->config['table_prefix']."cache ".
 				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
 
-			$this->log("cache_invalidate end");
+			$this->log('cache_invalidate end');
 
 			return true;
 		}
@@ -193,12 +193,12 @@ class Cache
 			}
 		}
 		if (!isset($query)) $query = '';
-		$this->log("check_http_request query=".$query);
+		$this->log('check_http_request query='.$query);
 
 		//check cache
 		if ($mtime = $this->get_cached_time($page, $method, $query))
 		{
-			$this->log("check_http_request incache mtime=".$mtime);
+			$this->log('check_http_request incache mtime='.$mtime);
 
 			$gmt = gmdate('D, d M Y H:i:s \G\M\T', $mtime);
 			$etag = (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? $_SERVER['HTTP_IF_NONE_MATCH'] : "");
@@ -270,7 +270,7 @@ class Cache
 
 	function get_micro_time()
 	{
-		list($usec, $sec) = explode(" ", microtime());
+		list($usec, $sec) = explode(' ', microtime());
 		return ((float)$usec + (float)$sec);
 	}
 

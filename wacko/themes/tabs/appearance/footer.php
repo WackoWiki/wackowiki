@@ -197,7 +197,7 @@ switch (count($files))
 		print($this->get_translation('Files_1'));
 		break;
 	default:
-		print(str_replace("%1",count($files), $this->get_translation('Files_n')));
+		print(str_replace('%1',count($files), $this->get_translation('Files_n')));
 }
 ?> <?php echo "[<a href=\"".$this->href('', '', 'show_files=1#files')."\">".$this->get_translation('ShowFiles')."</a>]"; ?>
 
@@ -321,7 +321,7 @@ switch (count($comments))
 		print($this->get_translation('Comments_1'));
 		break;
 	default:
-		print(str_replace("%1",count($comments), $this->get_translation('Comments_n')));
+		print(str_replace('%1',count($comments), $this->get_translation('Comments_n')));
 }
 ?> <?php echo "[<a href=\"".$this->href('', '', 'show_comments=1#comments')."\">".$this->get_translation('ShowComments')."</a>]"; ?>
 
@@ -337,7 +337,7 @@ switch (count($comments))
 
 <div id="credits"><?php
 if ($this->get_user()){
-	echo $this->get_translation('PoweredBy')." ".$this->link("WackoWiki:HomePage", "", "WackoWiki ".$this->get_wacko_version())." :: Redesign by Mendokusee";
+	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki '.$this->get_wacko_version())." :: Redesign by Mendokusee";
 }
 ?></div>
 <?php

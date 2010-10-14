@@ -8,7 +8,7 @@ if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{
-		print(str_replace("%1",$this->href('edit'),$this->get_translation('DoesNotExists')));
+		print(str_replace('%1',$this->href('edit'),$this->get_translation('DoesNotExists')));
 	}
 	else
 	{
@@ -21,15 +21,15 @@ if ($this->has_access('read'))
 		if ($this->page['latest'] == "0")
 		{
 			print("<div class=\"revisioninfo\">".
-			str_replace("%1",$this->href(),
-			str_replace("%2",$this->tag,
-			str_replace("%3",$this->page['modified'],
+			str_replace('%1',$this->href(),
+			str_replace('%2',$this->tag,
+			str_replace('%3',$this->page['modified'],
 			$this->get_translation('Revision')))).".</div>");
 		}
 
 		// display page
 		$this->context[++$this->current_context] = $this->tag;
-		$text = preg_replace("/{{(tableofcontents|toc).*?}}/i", "", $this->page['body']);
+		$text = preg_replace('/{{(tableofcontents|toc).*?}}/i', '', $this->page['body']);
 		$data = $this->format($text, "wiki");
 
 		// Convert everything that doesn't need regexps

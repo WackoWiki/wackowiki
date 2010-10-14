@@ -360,7 +360,7 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="noindex"><strong>Site Visibility :</strong><br />
+				<td class="label"><label for="noindex"><strong>Block search engines:</strong><br />
 				<small>I would like to block search engines, but allow normal visitors</small></label></td>
 				<td><input type="checkbox" id="noindex" name="noindex" value="1"<?php echo ( $engine->config['noindex'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>

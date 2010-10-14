@@ -42,7 +42,7 @@ if ($this->has_access('read'))
 	if (!$this->page)
 	{
 		// Not sure what the point of wrapping it in the conditional was
-		// if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
+		// if (function_exists('virtual')) header("HTTP/1.0 404 Not Found");
 		header("HTTP/1.0 404 Not Found");
 
 		print($this->get_translation('DoesNotExists') ." ".( $this->has_access('write') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : ''));
@@ -59,9 +59,9 @@ if ($this->has_access('read'))
 		if ($this->page['latest'] == 0)
 		{
 			print("<div class=\"revisioninfo\">".
-			str_replace("%1",$this->href(),
-			str_replace("%2",$this->tag,
-			str_replace("%3",$this->get_page_time_formatted(),
+			str_replace('%1',$this->href(),
+			str_replace('%2',$this->tag,
+			str_replace('%3',$this->get_page_time_formatted(),
 			$this->get_translation('Revision')))));
 
 			// if this is an old revision, display ReEdit button
@@ -135,7 +135,7 @@ if ($this->has_access('read'))
 else
 {
 	// Not sure what the point of wrapping it in the conditional was
-	// if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
+	// if (function_exists('virtual')) header("HTTP/1.0 403 Forbidden");
 	header("HTTP/1.0 403 Forbidden");
 
 	print($this->get_translation('ReadAccessDenied'));
@@ -183,7 +183,7 @@ if ($this->page)
 
 			<?php
 			echo "<div class=\"files\">";
-			echo $this->action("files",array('nomark' => 1));
+			echo $this->action('files', array('nomark' => 1));
 			echo "</div>";
 			// display form
 			if ($user = $this->get_user())

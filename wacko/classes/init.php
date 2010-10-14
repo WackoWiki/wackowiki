@@ -30,9 +30,9 @@
 */
 
 // constants
-if ( @file_exists("config/constants.php") )
+if ( @file_exists('config/constants.php') )
 {
-	require_once("config/constants.php");
+	require_once('config/constants.php');
 }
 else
 {
@@ -71,15 +71,15 @@ class Init
 		// start execution timer
 		$this->timer = $this->get_micro_time();
 
-		if (ini_get("zlib.output_compression"))
+		if (ini_get('zlib.output_compression'))
 			ob_start();
 		else
-			ob_start("ob_gzhandler");
+			ob_start('ob_gzhandler');
 
 		if (!isset($_REQUEST)) die('$_REQUEST[] not found. WackoWiki requires PHP 5.2.0 or higher!');
 
 		// Check for function because it is deprecated in PHP 5.3 and removed in PHP 6
-		if (function_exists("set_magic_quotes_runtime"))
+		if (function_exists('set_magic_quotes_runtime'))
 		{
 			@set_magic_quotes_runtime(false);
 		}
@@ -93,13 +93,13 @@ class Init
 			$this->parse_mq($_REQUEST);
 		}
 
-		if (strstr($_SERVER['SERVER_SOFTWARE'], "IIS")) $_SERVER['REQUEST_URI'] = $_SERVER['PATH_INFO'];
+		if (strstr($_SERVER['SERVER_SOFTWARE'], 'IIS')) $_SERVER['REQUEST_URI'] = $_SERVER['PATH_INFO'];
 	}
 
 	// INT TIMER
 	function get_micro_time()
 	{
-		list($usec, $sec) = explode(" ", microtime());
+		list($usec, $sec) = explode(' ', microtime());
 		return ((float)$usec + (float)$sec);
 	}
 
@@ -140,7 +140,7 @@ class Init
 			// primary settings
 			if ($this->config == false && !isset($this->dblink))
 			{
-				$found_rewrite_extension = function_exists("apache_get_modules") ? in_array('mod_rewrite', apache_get_modules()) : false;
+				$found_rewrite_extension = function_exists('apache_get_modules') ? in_array('mod_rewrite', apache_get_modules()) : false;
 
 			/*
 				VERY IMPORTANT NOTE
@@ -150,9 +150,9 @@ class Init
 			*/
 
 				// load default configuration values
-				if ( @file_exists("config/config_defaults.php") )
+				if ( @file_exists('config/config_defaults.php') )
 				{
-					require_once("config/config_defaults.php");
+					require_once('config/config_defaults.php');
 				}
 				else
 				{
@@ -160,12 +160,12 @@ class Init
 				}
 
 				// load primary config
-				if ( @file_exists("wakka.config.php") )
+				if ( @file_exists('wakka.config.php') )
 				{
 					// It's an old WackoWiki or WakkaWiki install so load the data and start the upgrader.
-					if ( @filesize("wakka.config.php") > 0)
+					if ( @filesize('wakka.config.php') > 0)
 					{
-						require("wakka.config.php");
+						require('wakka.config.php');
 						$this->config = $wakkaConfig;
 					}
 					else
@@ -174,15 +174,15 @@ class Init
 						$this->config = $wackoConfig;
 					}
 				}
-				else if ( @file_exists("config/config.php") )
+				else if ( @file_exists('config/config.php') )
 				{
 					// If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R4.3
-					if ( @filesize("config/config.php") > 0)
+					if ( @filesize('config/config.php') > 0)
 					{
-						require("config/config.php");
+						require('config/config.php');
 						$this->config = $wackoConfig;
 
-						if ($wackoConfig['wacko_version'] != "R4.3.rc" && (!$wackoConfig['system_seed'] || strlen($wackoConfig['system_seed']) < 20))
+						if ($wackoConfig['wacko_version'] != 'R4.3.rc' && (!$wackoConfig['system_seed'] || strlen($wackoConfig['system_seed']) < 20))
 							die("WackoWiki fatal error: system_seed in config.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
 
 						$wackoConfig['system_seed']	= hash('sha1', $wackoConfig['system_seed']);
@@ -282,24 +282,24 @@ class Init
 		if ($this->config == false) die("Error processing request: WackoWiki config data must be initialized.");
 
 		// fetch wacko location
-		if (isset($_SERVER['PATH_INFO']) && function_exists("virtual"))
+		if (isset($_SERVER['PATH_INFO']) && function_exists('virtual'))
 			$this->request = $_SERVER['PATH_INFO'];
 		else
 			$this->request = @$_REQUEST['page'];
 
 		// fix win32 apache 1 bug
-		if (stristr($_SERVER['SERVER_SOFTWARE'], "Apache/1") && stristr($_SERVER['SERVER_SOFTWARE'], "Win32") && $this->config['rewrite_mode'])
+		if (stristr($_SERVER['SERVER_SOFTWARE'], 'Apache/1') && stristr($_SERVER['SERVER_SOFTWARE'], 'Win32') && $this->config['rewrite_mode'])
 		{
-			$dir			= str_replace("http://".$_SERVER['SERVER_NAME'].($_SERVER['SERVER_PORT'] != 80 ? ":".$_SERVER['SERVER_PORT'] : ""), "", $this->config['base_url']);
-			$this->request	= preg_replace("+^".preg_quote(rtrim($dir,"/"))."+i", "", $_SERVER['REDIRECT_URL']);//$request);
+			$dir			= str_replace('http://'.$_SERVER['SERVER_NAME'].($_SERVER['SERVER_PORT'] != 80 ? ':'.$_SERVER['SERVER_PORT'] : ''), '', $this->config['base_url']);
+			$this->request	= preg_replace('+^'.preg_quote(rtrim($dir, '/')).'+i', '', $_SERVER['REDIRECT_URL']); //$request);
 		}
 
 		// remove leading slash
-		$this->request	= preg_replace("/^\//", "", $this->request);
+		$this->request	= preg_replace('/^\//', '', $this->request);
 		$this->method	= '';
 
 		// split into page/method
-		$p = strrpos($this->request, "/");
+		$p = strrpos($this->request, '/');
 
 		if ($p === false)
 		{
@@ -310,12 +310,12 @@ class Init
 			$this->page			= substr($this->request, 0, $p);
 			$m1	= $this->method = strtolower(substr($this->request, $p - strlen($this->request) + 1));
 
-			if (!@file_exists($this->config['handler_path']."/page/".$this->method.".php"))
+			if (!@file_exists($this->config['handler_path'].'/page/'.$this->method.'.php'))
 			{
 				$this->page		= $this->request;
 				$this->method	= '';
 			}
-			else if (preg_match("/^(.*?)\/(".$this->config['standard_handlers'].")($|\/(.*)$)/i", $this->page, $match))
+			else if (preg_match('/^(.*?)\/('.$this->config['standard_handlers'].')($|\/(.*)$)/i', $this->page, $match))
 			{
 				//translit case
 				$this->page		= $match[1];
@@ -333,7 +333,7 @@ class Init
 		// run in ssl mode?
 		if ($this->config['ssl'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on" && !empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) ))
 		{
-			$this->config['base_url']	= str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
+			$this->config['base_url']	= str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
 			$_secure = true;
 		}
 		$_cookie_path = preg_replace('|https?://[^/]+|i', '', $this->config['base_url'].'');
@@ -399,11 +399,11 @@ class Init
 	function is_locked()
 	{
 		clearstatcache();
-		if (@file_exists("lock"))
+		if (@file_exists('lock'))
 		{
-			$access = file("lock");
+			$access = file('lock');
 
-			if ($access[0] == "1")
+			if ($access[0] == '1')
 				return true;
 			else
 				return false;
@@ -420,12 +420,12 @@ class Init
 		// compare versions, start installer if necessary
 		if (!isset($this->config['wacko_version']) || $this->config['wacko_version'] != WACKO_VERSION)
 		{
-			if (!isset($_REQUEST['installAction']) && !strstr($_SERVER['SERVER_SOFTWARE'], "IIS"))
+			if (!isset($_REQUEST['installAction']) && !strstr($_SERVER['SERVER_SOFTWARE'], 'IIS'))
 			{
 				$req = $_SERVER['REQUEST_URI'];
-				if ($req{strlen($req) - 1} != "/" && strstr($req, ".php") != ".php")
+				if ($req{strlen($req) - 1} != '/' && strstr($req, '.php') != '.php')
 				{
-					header("Location: http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']."/");
+					header("Location: http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'].'/');
 					exit;
 				}
 			}
@@ -434,14 +434,14 @@ class Init
 			global $config;
 			$config = $this->config;
 
-			if (!$installAction = trim($_REQUEST['installAction'])) $installAction = "lang";
-			include("setup/header.php");
+			if (!$installAction = trim($_REQUEST['installAction'])) $installAction = 'lang';
+			include('setup/header.php');
 
-			if (@file_exists("setup/".$installAction.".php"))
-			include("setup/".$installAction.".php");
+			if (@file_exists('setup/'.$installAction.'.php'))
+			include('setup/'.$installAction.'.php');
 
 			else print("<em>Invalid action</em>");
-			include("setup/footer.php");
+			include('setup/footer.php');
 
 			exit;
 		}
@@ -454,27 +454,27 @@ class Init
 	//		log		= Log
 	//		check	= check_http_request
 	//		store	= store_to_cache
-	function cache($op = "")
+	function cache($op = '')
 	{
 		// check config data
 		if ($this->config == false) die("Error starting WackoWiki cache engine: config data must be initialized.");
 
 		if ($this->cache == false || $op == false)
 		{
-			require("classes/cache.php");
+			require('classes/cache.php');
 			return $this->cache = new cache($this->config['cache_dir'], $this->config['cache_ttl']);
 		}
-		else if ($this->cache == true && $op == "check")
+		else if ($this->cache == true && $op == 'check')
 		{
-			if ($this->config['cache'] && $_SERVER['REQUEST_METHOD'] != "POST" && $this->method != "edit" && $this->method != "watch")
+			if ($this->config['cache'] && $_SERVER['REQUEST_METHOD'] != 'POST' && $this->method != 'edit' && $this->method != 'watch')
 			{
-				if (!isset($_COOKIE[$this->config['cookie_prefix']."auth"."_".$this->config['cookie_hash']]))	// anonymous user
+				if (!isset($_COOKIE[$this->config['cookie_prefix'].'auth'.'_'.$this->config['cookie_hash']]))	// anonymous user
 				{
 					return $this->cacheval = $this->cache->check_http_request($this->page, $this->method);
 				}
 			}
 		}
-		else if ($this->cache == true && $op == "store")
+		else if ($this->cache == true && $op == 'store')
 		{
 			if ($this->cacheval == true)
 			{
@@ -482,7 +482,7 @@ class Init
 				return $this->cache->store_to_cache($data);
 			}
 		}
-		else if ($this->cache == true && $op == "log")
+		else if ($this->cache == true && $op == 'log')
 		{
 			return $this->cache->log("Before Run WackoWiki=".$this->engine->config['wacko_version']);
 		}
@@ -498,7 +498,7 @@ class Init
 	//		run		= Main execution routine (open start page)
 	//		res		= Load and register locale string resources
 	//				  only (for $lang or for default language)
-	function engine($op = "", $lang = "")
+	function engine($op = '', $lang = '')
 	{
 		// check config data
 		if ($this->config == false)	die("Error starting WackoWiki engine: config data must be initialized.");
@@ -508,7 +508,7 @@ class Init
 			// check DB connection
 			if ($this->dblink == false) die("Error starting WackoWiki engine: no database connection established.");
 
-			require("classes/wacko.php");
+			require('classes/wacko.php');
 			$this->engine = new Wacko($this->config, $this->dblink);
 			$this->engine->headerCount = 0;
 
@@ -519,11 +519,11 @@ class Init
 			}
 			return $this->engine;
 		}
-		else if ($this->engine == true && $op == "run")
+		else if ($this->engine == true && $op == 'run')
 		{
 			return $this->engine->run($this->page, $this->method);
 		}
-		else if ($this->engine == true && $op == "res")
+		else if ($this->engine == true && $op == 'res')
 		{
 			if ($lang == false) $lang = $this->config['language'];
 
@@ -542,7 +542,7 @@ class Init
 	// DEBUG INFO
 	function debug()
 	{
-		if ($this->config['debug'] >= 1 && strpos($this->method, ".xml") === false && $this->method != "print" && $this->method != "msword")
+		if ($this->config['debug'] >= 1 && strpos($this->method, '.xml') === false && $this->method != "print" && $this->method != "msword")
 		{
 			if (($this->config['debug_admin_only'] == true && $this->engine->is_admin() === true) || $this->config['debug_admin_only'] == false)
 			{
@@ -551,7 +551,7 @@ class Init
 				echo "<div id=\"debug\">".
 					 "<p class=\"debug\">Program execution statistics</p>\n<ul>\n";
 
-				if (function_exists("memory_get_usage")) if ($execmem = memory_get_usage())
+				if (function_exists('memory_get_usage')) if ($execmem = memory_get_usage())
 					echo "<li>Memory allocated: ".(number_format(($execmem / (1024*1024)), 3))." MB </li>\n";
 
 				echo "<li>Overall time taken: ".(number_format(($overall_time), 3))." sec. </li>\n";

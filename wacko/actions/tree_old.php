@@ -218,7 +218,7 @@ if ($root)
 	if (!$nomark)
 	{
 		$title = $this->get_translation('TreeClusterTitle');
-		$title = str_replace("%1",  $this->link('/'.$root, '', $root), $title);
+		$title = str_replace('%1',  $this->link('/'.$root, '', $root), $title);
 		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.":</span></p>\n");
 	}
 	$query = "'".quote($this->dblink, $this->npj_translit($root))."/%'";

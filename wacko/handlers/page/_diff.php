@@ -99,7 +99,7 @@ class Side {
 	}
 
 	function isspace($char) {
-		if (preg_match("/([[:space:]]|\*)/",$char)) return true;
+		if (preg_match('/([[:space:]]|\*)/', $char)) return true;
 		return false;
 	}
 

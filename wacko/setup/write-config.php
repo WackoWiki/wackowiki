@@ -24,7 +24,7 @@ function array_to_str ($arr, $name="")
 if ( ( $config['database_driver'] == "mysqli_legacy" ) && empty( $config['database_port'] ) )
 $config['database_port'] = $config['database_port'] = "3306";
 
-if(!array_key_exists("wacko_version", $config))
+if(!array_key_exists('wacko_version', $config))
 {
 	$config['cookie_prefix'] = $config['table_prefix'];
 }
@@ -133,7 +133,7 @@ print("         </ul>\n");
 	if($fp)
 	{
 		print("         <h2>".$lang['InstallationComplete']."</h2>\n");
-		print("         <p>".str_replace("%1", $config['base_url'], $lang['ThatsAll'])."</p>\n");
+		print("         <p>".str_replace('%1', $config['base_url'], $lang['ThatsAll'])."</p>\n");
 	}
 	else
 	{

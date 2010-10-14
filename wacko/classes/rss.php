@@ -156,7 +156,7 @@ class RSS
 			$cat	= substr_replace ($page['tag'], '', 0, strlen ($newscluster) + 1); // removes news cluster name
 			$cat	= substr_replace ($cat, '', strpos ($cat, '/')); // removes news page name
 			$link	= $this->engine->href('', $page['tag']);
-			$pdate	= date("r", strtotime($page['modified']));
+			$pdate	= date('r', strtotime($page['modified']));
 			$coms	= $link.'?show_comments=1#comments';
 			$body	= $this->engine->load_page($page['tag']);
 			$text	= $this->engine->format($page['body_r'], 'post_wacko');

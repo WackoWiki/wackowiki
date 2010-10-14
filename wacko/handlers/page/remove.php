@@ -133,11 +133,11 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 			// log event
 			if (!$comment_on_id)
 			{
-				$this->log(1, str_replace("%2", $this->page['user_name'], str_replace("%1", $this->tag, ( isset($_POST['cluster']) && $_POST['cluster'] == 1 ? $this->get_translation('LogRemovedCluster', $this->config['language']) : $this->get_translation('LogRemovedPage', $this->config['language']) ))));
+				$this->log(1, str_replace('%2', $this->page['user_name'], str_replace('%1', $this->tag, ( isset($_POST['cluster']) && $_POST['cluster'] == 1 ? $this->get_translation('LogRemovedCluster', $this->config['language']) : $this->get_translation('LogRemovedPage', $this->config['language']) ))));
 			}
 			else
 			{
-				$this->log(1, str_replace("%3", $this->get_time_string_formatted($this->page['created']), str_replace("%2", $this->page['user_name'], str_replace("%1", $comment_on_id." ".$this->get_page_title($comment_on_id), $this->get_translation('LogRemovedComment', $this->config['language'])))));
+				$this->log(1, str_replace('%3', $this->get_time_string_formatted($this->page['created']), str_replace('%2', $this->page['user_name'], str_replace('%1', $comment_on_id." ".$this->get_page_title($comment_on_id), $this->get_translation('LogRemovedComment', $this->config['language'])))));
 			}
 
 			echo "<br />".$this->get_translation('ThisActionHavenotUndo')."<br />\n";

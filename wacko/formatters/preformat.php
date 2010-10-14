@@ -22,37 +22,37 @@ if (!class_exists('preformatter'))
 
 			$thing = $things[1];
 
-			if (preg_match("/^\%\%(.*)\%\%$/s", $thing, $matches))
+			if (preg_match('/^\%\%(.*)\%\%$/s', $thing, $matches))
 			{
 				return "%%".$matches[1]."%%";
 			}
-			else if (preg_match("/^\"\"(.*)\"\"$/s", $thing, $matches))
+			else if (preg_match('/^\"\"(.*)\"\"$/s', $thing, $matches))
 			{
 				return "\"\"".$matches[1]."\"\"";
 			}
-			else if ($thing == ":::::")
+			else if ($thing == ':::::')
 			{
 				return "((/".$wacko->get_user_name()." ".$wacko->get_user_name().")):";
 			}
-			else if ($thing == "::::")
+			else if ($thing == '::::')
 			{
 				return "((/".$wacko->get_user_name()." ".$wacko->get_user_name()."))";
 			}
-			else if ($thing == "::@::")
+			else if ($thing == '::@::')
 			{
 				return sprintf($wacko->config['name_date_macro'], "((/".$wacko->get_user_name()." ".$wacko->get_user_name()."))", date($wacko->config['date_macro_format']));
 			}
-			else if ($thing == "::+::")
+			else if ($thing == '::+::')
 			{
 				return date($wacko->config['date_macro_format']);
 			}
-			else if ((preg_match("/^(\[\[)(.+)(\]\])$/", $thing, $matches)) ||
-					(preg_match("/^(\(\()(.+)(\)\))$/", $thing, $matches)))
+			else if ((preg_match('/^(\[\[)(.+)(\]\])$/', $thing, $matches)) ||
+					(preg_match('/^(\(\()(.+)(\)\))$/', $thing, $matches)))
 			{
 				list (, $b1, $cont, $b2) = $matches;
-				if (preg_match("/\&\#\d+;/", $cont, $matches))
+				if (preg_match('/\&\#\d+;/', $cont, $matches))
 				{
-					$thing = $b1.@strtr($cont, $this->object->unicode_entities)." @@".$this->object->userlang.$b2;
+					$thing = $b1.@strtr($cont, $this->object->unicode_entities).' @@'.$this->object->userlang.$b2;
 				}
 				return $thing;
 			}
@@ -62,7 +62,7 @@ if (!class_exists('preformatter'))
 }
 
 $parser	= new preformatter($this);
-$text	= preg_replace_callback($parser->PREREGEXP, array(&$parser, "precallback"), $text);
+$text	= preg_replace_callback($parser->PREREGEXP, array(&$parser, 'precallback'), $text);
 
 print($text);
 

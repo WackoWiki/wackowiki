@@ -22,7 +22,7 @@ if ($this->user_is_owner() || $this->is_admin())
 		if (isset($_POST['comments']) && $_POST['comments'] == 1)
 		{
 			$this->remove_comments($this->tag);
-			$this->log(1, str_replace("%1", $this->tag." ".$this->page['title'], $this->get_translation('LogRemovedAllComments', $this->config['language'])));
+			$this->log(1, str_replace('%1', $this->tag." ".$this->page['title'], $this->get_translation('LogRemovedAllComments', $this->config['language'])));
 			echo $this->get_translation('CommentsPurged')."<br />\n";
 		}
 		if (isset($_POST['files']) && $_POST['files'] == 1)
@@ -34,7 +34,7 @@ if ($this->user_is_owner() || $this->is_admin())
 		if (isset($_POST['revisions']) && $_POST['revisions'] == 1 && $this->is_admin())
 		{
 			$this->remove_revisions($this->tag);
-			$this->log(1, str_replace("%1", $this->tag." ".$this->page['title'], $this->get_translation('LogRemovedAllRevisions', $this->config['language'])));
+			$this->log(1, str_replace('%1', $this->tag." ".$this->page['title'], $this->get_translation('LogRemovedAllRevisions', $this->config['language'])));
 			echo $this->get_translation('RevisionsPurged')."<br />\n";
 		}
 		print('</em>');

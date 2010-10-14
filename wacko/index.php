@@ -15,7 +15,7 @@ $init->settings('cookie_hash',	hash('md5', $init->config['base_url'].$init->conf
 #echo "<br />base_url 1: ".$init->config['base_url'];
 if ($init->config['ssl'] == true && (( ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") && !empty($init->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') ) ))
 {
-	$init->settings('base_url',	str_replace("http://", "https://".($init->config['ssl_proxy'] ? $init->config['ssl_proxy'].'/' : ''), $init->config['base_url']));
+	$init->settings('base_url',	str_replace('http://', 'https://'.($init->config['ssl_proxy'] ? $init->config['ssl_proxy'].'/' : ''), $init->config['base_url']));
 }
 $init->settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
 #echo "<br />base_url 2: ".$init->config['base_url'];
