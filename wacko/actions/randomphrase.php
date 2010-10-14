@@ -16,7 +16,7 @@ else
 	}
 	else
 	{
-		$strings = preg_replace("/\{\{[^\}]+\}\}/","",$phrase_page['body']);
+		$strings = preg_replace('/\{\{[^\}]+\}\}/', '', $phrase_page['body']);
 		$strings = $this->format($strings);
 		$splitexpr = "|<br />|";
 		if ($useemptystring == 1) $splitexpr = "|<br />[\n\r ]*<br />|";

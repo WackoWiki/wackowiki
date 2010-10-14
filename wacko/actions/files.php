@@ -79,14 +79,14 @@ if ($can_view)
 	// display
 	$del = $this->get_translation('UploadRemove');
 
-	if (!$global)	$path = "@".$filepage['page_id']."@";
+	if (!$global)	$path = '@'.$filepage['page_id'].'@';
 	else			$path = '';
 
-	if (!$global) 	$path2 = "file:/".($this->slim_url($page))."/";
-	else			$path2 = "file:";
+	if (!$global) 	$path2 = 'file:/'.($this->slim_url($page)).'/';
+	else			$path2 = 'file:';
 
 	// !!!!! patch link not to show pictures when not needed
-	if ($pictures == false) $path2 = str_replace("file:", "_file:", $path2);
+	if ($pictures == false) $path2 = str_replace('file:', '_file:', $path2);
 
 	if (count($files))
 	{
@@ -102,7 +102,7 @@ if ($can_view)
 		$dt = $file['uploaded_dt'];
 		$desc = $this->format($file['description'], 'typografica' );
 
-		if ($desc == "") $desc = "&nbsp;";
+		if ($desc == '') $desc = "&nbsp;";
 
 		$filename	= $file['filename'];
 		$text		= ($pictures == false) ? $filename : '';
@@ -110,7 +110,7 @@ if ($can_view)
 		$fileext	= substr($filename, strrpos($filename, ".") + 1);
 		$link		= $this->link($path2.$filename, '', $text);
 
-		if ($fileext != "gif" && $fileext != "jpg" && $fileext != "png")
+		if ($fileext != 'gif' && $fileext != 'jpg' && $fileext != 'png')
 		{
 			$hits	= ", ".$file['hits']." ".( $file['hits'] === 1 ? 'hit' : 'hits' );
 		}

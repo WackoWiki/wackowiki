@@ -3,7 +3,7 @@
 // {{Redirect to="!/NewPage" permanent="0 or 1"}}
 
 if (isset($vars['page'])) $vars['to'] = $vars['page'];
-$page = $this->unwrap_link(isset($vars['to']) ? $vars['to'] : "");
+$page = $this->unwrap_link(isset($vars['to']) ? $vars['to'] : '');
 $is_permanent = (isset($vars['permanent']) ? $vars['permanent'] : 0);
 
 if ($page)

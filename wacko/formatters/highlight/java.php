@@ -1,6 +1,6 @@
 <?php
 
-$this->use_class("javahighlighter", "formatters/classes/");
+$this->use_class('javahighlighter', 'formatters/classes/');
 
 $DH = new JavaHighlighter();
 echo "<!--no"."typo-->";
