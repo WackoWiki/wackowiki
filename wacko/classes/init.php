@@ -259,8 +259,8 @@ class Init
 						// Finally we put the proper Group => UserName1\nUserName2\n to the config
 						// when we make trim($users, '\n') we get UserName1\nUserName2 without trailing '\n'
 						// Made so to prevent system from trimming 'n\n' (like TestMan\n ->  TestMa)
-						$trimone = rtrim($users,'n');
-						$this->config['aliases'][$group] = trim($trimone,'\\');
+						$trimone = rtrim($users, 'n');
+						$this->config['aliases'][$group] = trim($trimone, '\\');
 					}
 
 				}
@@ -367,14 +367,14 @@ class Init
 
 		switch($this->config['database_driver'])
 		{
-			case "mysql_pdo":
-				$dbfile = "db/pdo.php";
+			case 'mysql_pdo':
+				$dbfile = 'db/pdo.php';
 				break;
-			case "mysqli_legacy":
-				$dbfile = "db/mysqli.php";
+			case 'mysqli_legacy':
+				$dbfile = 'db/mysqli.php';
 				break;
 			default:
-				$dbfile = "db/mysql.php";
+				$dbfile = 'db/mysql.php';
 				break;
 		}
 

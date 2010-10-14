@@ -12,7 +12,7 @@ if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTT
 }
 
 // actions
-if (isset($_GET['action']) && $_GET['action'] == "clearcookies")
+if (isset($_GET['action']) && $_GET['action'] == 'clearcookies')
 {
 	foreach ($_COOKIE as $name => $value)
 	{

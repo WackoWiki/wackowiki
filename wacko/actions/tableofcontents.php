@@ -1,1 +1,1 @@
-<?php include("actions/toc.php");?>
+<?php include('actions/toc.php');?>

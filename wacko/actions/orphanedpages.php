@@ -1,6 +1,6 @@
 <?php
 
 $root = '';
-include("actions/orphaned.php")
+include('actions/orphaned.php')
 
 ?>

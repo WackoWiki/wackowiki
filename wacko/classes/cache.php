@@ -63,7 +63,7 @@ class Cache
 		if ((time() - ($timestamp = @filemtime($filename))) > $this->cache_ttl)
 			return false;
 
-		$fp			= fopen($filename, "r");
+		$fp			= fopen($filename, 'r');
 		$contents	= fread($fp, filesize($filename));
 		$contents	= "<!-- WackoWiki Caching Engine: page cached at ".date('Y-m-d H:i:s', $timestamp).", contents follows -->\n".$contents;
 		fclose($fp);
@@ -76,9 +76,9 @@ class Cache
 		$page = strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', rawurldecode($page)))));
 
 		$this->log('construct_id page='.$page);
-		$this->log('construct_id md5='.hash('md5', $page."_".$method."_".$query));
+		$this->log('construct_id md5='.hash('md5', $page.'_'.$method.'_'.$query));
 
-		$filename = $this->cache_dir.CACHE_PAGE_DIR.hash('md5', $page."_".$method."_".$query);
+		$filename = $this->cache_dir.CACHE_PAGE_DIR.hash('md5', $page.'_'.$method.'_'.$query);
 		return $filename;
 	}
 
@@ -164,7 +164,7 @@ class Cache
 	{
 		if ($this->debug > 1)
 		{
-			$filename = $this->cache_dir."log";
+			$filename = $this->cache_dir.'log';
 
 			file_put_contents($filename, $msg."\n", FILE_APPEND);
 		}
@@ -177,7 +177,7 @@ class Cache
 
 		foreach ($_GET as $k => $v)
 		{
-			if ($k != "v" && $k != "page")
+			if ($k != 'v' && $k != 'page')
 				$_query[$k] = $v;
 		}
 
@@ -189,7 +189,7 @@ class Cache
 			foreach($_query as $k => $v)
 			{
 				if (!isset($query)) $query = '';
-				$query .= urlencode($k)."=".urlencode($v)."&";
+				$query .= urlencode($k).'='.urlencode($v).'&';
 			}
 		}
 		if (!isset($query)) $query = '';
@@ -201,12 +201,12 @@ class Cache
 			$this->log('check_http_request incache mtime='.$mtime);
 
 			$gmt = gmdate('D, d M Y H:i:s \G\M\T', $mtime);
-			$etag = (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? $_SERVER['HTTP_IF_NONE_MATCH'] : "");
-			$lastm = (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : "");
+			$etag = (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? $_SERVER['HTTP_IF_NONE_MATCH'] : '');
+			$lastm = (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : '');
 
 			if ($p = strpos($lastm, ";")) $lastm = substr($lastm, 0, $p);
 
-			if ($_SERVER['REQUEST_METHOD'] == "GET") //may be we need HEAD support ???
+			if ($_SERVER['REQUEST_METHOD'] == 'GET') //may be we need HEAD support ???
 			{
 				if (!$lastm && !$etag);
 				else if ($lastm && $gmt != $lastm);
@@ -227,14 +227,14 @@ class Cache
 				echo ($cached);
 
 				// how much time script take
-				if ($this->debug >= 1 && strpos($method,".xml") === false)
+				if ($this->debug >= 1 && strpos($method, '.xml') === false)
 				{
 					$ddd = $this->get_micro_time();
 					echo ("<div class=\"debug\">cache time: ".(number_format(($ddd-$this->timer),3))." s<br />");
 					echo "</div>";
 				}
 
-				if (strpos($method,".xml") === false)
+				if (strpos($method, '.xml') === false)
 					echo "</body></html>";
 
 				die();

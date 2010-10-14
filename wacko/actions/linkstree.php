@@ -59,7 +59,7 @@ if ($levels > 4)
 
 print($this->link('/'.$root, '', $root)."<br />\n");//<br/>
 
-links_tree_view($this,$root,$levels,0);
+links_tree_view($this, $root, $levels, 0);
 
 if (!$nomark)
 {

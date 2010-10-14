@@ -4,7 +4,7 @@
 // reconnect securely in ssl mode
 if ($this->config['ssl'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 {
-	$this->redirect(str_replace("http://", "https://".($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->href()));
+	$this->redirect(str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->href()));
 }
 
 if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
@@ -23,7 +23,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 
 	if ($user)
 	{
-		if ($_POST['newpassword'])
+		if (isset($_POST['newpassword']))
 		{
 
 			//Password forgotten. Provided secret code and new password. Change password.
@@ -38,7 +38,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 				$error = $this->get_translation('PasswordsDidntMatch');
 			}
 			// spaces in password
-			else if (preg_match("/ /", $newpassword))
+			else if (preg_match('/ /', $newpassword))
 			{
 				$error = $this->get_translation('SpacesArentAllowed');
 			}
@@ -160,7 +160,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 			$error = $this->get_translation('PasswordsDidntMatch');
 		}
 		// spaces in password
-		else if (preg_match("/ /", $newpassword))
+		else if (preg_match('/ /', $newpassword))
 		{
 			$error = $this->get_translation('SpacesArentAllowed');
 		}
@@ -262,9 +262,9 @@ else if (!isset($forgot) && $user = $this->get_user())
 //Password forgotten. Send mail
 else
 {
-	if ($_POST['action'] == 'send')
+	if (isset($_POST['action']) && $_POST['action'] == 'send')
 	{
-		$name = str_replace(' ','', $_POST['loginormail']);
+		$name = str_replace(' ', '', $_POST['loginormail']);
 		$user = $this->load_single(
 			"SELECT * ".
 			"FROM ".$this->config['user_table']." ".
@@ -320,9 +320,9 @@ else
 		}
 	}
 	// View password forgot form
-	if ($error || $_POST['action'] != 'send')
+	if (isset($error) || $_POST['action'] != 'send')
 	{
-		if ($error)
+		if (isset($error))
 		{
 			$this->set_message($error);
 		}
