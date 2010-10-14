@@ -145,6 +145,7 @@ $alter_page_r4_3_29 = "ALTER TABLE {$pref}page ADD allow_rawhtml TINYINT(1) UNSI
 $alter_page_r4_3_30 = "ALTER TABLE {$pref}page ADD disable_safehtml TINYINT(1) UNSIGNED DEFAULT NULL";
 $alter_page_r4_3_31 = "ALTER TABLE {$pref}page ADD noindex TINYINT(1) UNSIGNED DEFAULT NULL";
 $alter_page_r4_3_32 = "ALTER TABLE {$pref}page ADD theme VARCHAR(20) DEFAULT NULL AFTER hits";
+$alter_page_r4_3_33 = "ALTER TABLE {$pref}page ADD formatting VARCHAR(20) DEFAULT NULL AFTER body_r";
 
 $update_page_r4_3 = "UPDATE {$pref}page SET body_r=''";
 $update_page_r4_3_1 = "UPDATE {$pref}page AS page, (SELECT user_id, user_name FROM {$pref}users) AS users SET page.owner_id = users.user_id WHERE page.owner = users.user_name";
@@ -207,6 +208,7 @@ $alter_revision_r4_3_16 = "ALTER TABLE {$pref}revision ADD ip VARCHAR(15) NOT NU
 $alter_revision_r4_3_17 = "ALTER TABLE {$pref}revision CHANGE id revision_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
 $alter_revision_r4_3_18 = "ALTER TABLE {$pref}revision CHANGE time modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
 $alter_revision_r4_3_19 = "ALTER TABLE {$pref}revision DROP INDEX idx_time , ADD INDEX idx_modified ( modified )";
+$alter_revision_r4_3_20 = "ALTER TABLE {$pref}revision ADD formatting VARCHAR(20) DEFAULT NULL AFTER body_r";
 
 $update_revision_r4_3 = "UPDATE {$pref}revision AS revisions, (SELECT user_id, user_name FROM {$pref}users) AS users SET revisions.owner_id = users.user_id WHERE revisions.owner = users.user_name";
 $update_revision_r4_3_1 = "UPDATE {$pref}revision AS revisions, (SELECT user_id, user_name FROM {$pref}users) AS users SET revisions.user_id = users.user_id WHERE revisions.user = users.user_name";
