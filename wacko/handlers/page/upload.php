@@ -183,7 +183,7 @@ if ($registered
 				if ($is_global)
 				{
 					$dir = $this->config['upload_path'].'/';
-					$banned = explode("|", $this->config['upload_banned_exts']);
+					$banned = explode('|', $this->config['upload_banned_exts']);
 					if (in_array(strtolower($ext), $banned))
 						$ext = $ext.".txt";
 				}
@@ -318,7 +318,7 @@ if ($registered
 	}
 	echo $this->action('upload', array())."<br />";
 
-// if (!$error) echo "<br /><hr />".$this->action("upload", array())."<hr /><br />";
+// if (!$error) echo "<br /><hr />".$this->action('upload', array())."<hr /><br />";
 }
 else
 {

@@ -103,7 +103,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = "Admins", $cri
 					$error = $dblink_global->errorInfo();
 					if($error[0] != "00000")
 					{
-						output_error(str_replace("%1", $tag, $lang_global['ErrorInsertingPage'])." - ".($error[2]));
+						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPage'])." - ".($error[2]));
 					}
 
 					@$dblink_global->query($perm_read_insert);

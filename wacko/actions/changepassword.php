@@ -71,7 +71,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 					"LIMIT 1");
 
 				// log event
-				$this->log(3, str_replace("%1", $user['user_name'], $this->get_translation('LogUserPasswordRecovered', $this->config['language'])));
+				$this->log(3, str_replace('%1', $user['user_name'], $this->get_translation('LogUserPasswordRecovered', $this->config['language'])));
 
 				// forward
 				$this->set_message($this->get_translation('PasswordChanged'));
@@ -110,7 +110,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 							}
 							echo "<br /><small>".
 								 $this->get_translation('PwdCplxDesc1').
-								 str_replace("%1", $this->config['pwd_min_chars'],
+								 str_replace('%1', $this->config['pwd_min_chars'],
 									$this->get_translation('PwdCplxDesc2')).
 								 ($this->config['pwd_unlike_login'] > 0
 									? ", ".$this->get_translation('PwdCplxDesc3')
@@ -152,7 +152,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 		{
 			$error = $this->get_translation('WrongPassword');
 			// log event
-			$this->log(3, str_replace("%1", $user['user_name'], $this->get_translation('LogUserPasswordMismatch', $this->config['language'])));
+			$this->log(3, str_replace('%1', $user['user_name'], $this->get_translation('LogUserPasswordMismatch', $this->config['language'])));
 		}
 		// confirmed password mismatch
 		else if ($confpassword != $newpassword)
@@ -198,7 +198,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 			$this->context[++$this->current_context] = '';
 
 			// log event
-			$this->log(3, str_replace("%1", $user['user_name'], $this->get_translation('LogUserPasswordChanged', $this->config['language'])));
+			$this->log(3, str_replace('%1', $user['user_name'], $this->get_translation('LogUserPasswordChanged', $this->config['language'])));
 
 			// forward
 			$this->set_message($this->get_translation('PasswordChanged'));
@@ -238,7 +238,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 			}
 			echo "<br /><small>".
 				 $this->get_translation('PwdCplxDesc1').
-				 str_replace("%1", $this->config['pwd_min_chars'],
+				 str_replace('%1', $this->config['pwd_min_chars'],
 					$this->get_translation('PwdCplxDesc2')).
 				 ($this->config['pwd_unlike_login'] > 0
 					? ", ".$this->get_translation('PwdCplxDesc3')

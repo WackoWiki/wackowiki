@@ -27,7 +27,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			$this->save_acl($this->get_page_id(), 'comment', $_POST['comment_acl']);
 
 			// log event
-			$this->log(2, str_replace("%1", $this->page['tag']." ".$this->page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
+			$this->log(2, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
 
 			$message = $this->get_translation('ACLUpdated');
 
@@ -65,7 +65,7 @@ if ($this->user_is_owner() || $this->is_admin())
 					}
 
 					// log event
-					$this->log(2, str_replace("%2", $newowner, str_replace("%1", $this->page['tag']." ".$this->page['title'], $this->get_translation('LogOwnershipChanged', $this->config['language']))));
+					$this->log(2, str_replace('%2', $newowner, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogOwnershipChanged', $this->config['language']))));
 
 					$message .= $this->get_translation('ACLGaveOwnership').$newowner;
 				}
@@ -118,7 +118,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				$this->save_acl($page['page_id'], 'comment', $_POST['comment_acl']);
 
 				// log event
-				$this->log(2, str_replace("%1", $page['tag']." ".$page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
+				$this->log(2, str_replace('%1', $page['tag']." ".$page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
 
 				// change owner?
 				if ($newowner = $_POST['newowner'])
@@ -128,7 +128,7 @@ if ($this->user_is_owner() || $this->is_admin())
 					$ownedpages .= $this->href('', $page['tag'])."\n";
 
 					// log event
-					$this->log(2, str_replace("%2", $exists['user_name'], str_replace("%1", $page['tag']." ".$page['title'], $this->get_translation('LogOwnershipChanged', $this->config['language']))));
+					$this->log(2, str_replace('%2', $exists['user_name'], str_replace('%1', $page['tag']." ".$page['title'], $this->get_translation('LogOwnershipChanged', $this->config['language']))));
 				}
 			}
 

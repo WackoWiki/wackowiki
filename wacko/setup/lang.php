@@ -6,7 +6,7 @@ if(array_key_exists("wacko_version", $config))
 }
 else
 {
-	echo '<p>'.str_replace("%1", WACKO_VERSION, $lang['FreshInstall'])."</p>\n";
+	echo '<p>'.str_replace('%1', WACKO_VERSION, $lang['FreshInstall'])."</p>\n";
 }
 ?>
 <form action="<?php echo myLocation() ?>?installAction=version-check" method="post">

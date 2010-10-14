@@ -36,7 +36,7 @@
 	width="16" height="16" /> <?php } ?> </a> <?php }
 	// End of "Page exists" ?> <?php
 	if ($this->get_user()){
-		echo "&nbsp;|&nbsp;".$this->get_translation('PoweredBy')." ".$this->link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->get_wacko_version());
+		echo "&nbsp;|&nbsp;".$this->get_translation('PoweredBy').' '.$this->link('WackoWiki:WackoWiki', '', 'WackoWiki '.$this->get_wacko_version());
 	}
 	?></div>
 </div>

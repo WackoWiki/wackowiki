@@ -71,7 +71,7 @@
         <div class="footer">
             <p><?php
 if ($this->get_user()){
-	echo $this->get_translation('PoweredBy')." ".$this->link("WackoWiki:HomePage", "", "WackoWiki ".$this->get_wacko_version());
+	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki '.$this->get_wacko_version());
 	echo " &amp; <a href=\"http://eye48.com/go/miniwackolicious\">MiniWackoLicious Theme</a> | ";
 
 	/*show user name and preferences*/

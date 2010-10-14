@@ -12,7 +12,7 @@ if ($user = $this->get_user())
 {
 	if ($global = isset($_GET['global']))
 	{
-		$title = str_replace("%1", $this->href('referrers_sites', '', 'global=1'), $this->get_translation('ExternalPagesGlobal'));
+		$title = str_replace('%1', $this->href('referrers_sites', '', 'global=1'), $this->get_translation('ExternalPagesGlobal'));
 		$referrers = $this->load_referrers();
 	}
 	else
@@ -76,11 +76,11 @@ if ($user = $this->get_user())
 
 	if ($global)
 	{
-		print("<br />[".str_replace("%1",$this->href('referrers_sites'),str_replace("%2",$this->tag,$this->get_translation('ViewReferringSites')))." | ".str_replace('%1', $this->href('referrers'),str_replace('%2', $this->tag, $this->get_translation('ViewReferrersFor')))."]");
+		print("<br />[".str_replace('%1',$this->href('referrers_sites'),str_replace('%2',$this->tag,$this->get_translation('ViewReferringSites')))." | ".str_replace('%1', $this->href('referrers'),str_replace('%2', $this->tag, $this->get_translation('ViewReferrersFor')))."]");
 	}
 	else
 	{
-		print("<br />[".str_replace("%1",$this->href('referrers_sites', '', 'global=1'),$this->get_translation('ViewReferringSitesGlobal')) ." | ".str_replace('%1', $this->href('referrers', '', 'global=1'), $this->get_translation('ViewReferrersForGlobal'))."]");
+		print("<br />[".str_replace('%1',$this->href('referrers_sites', '', 'global=1'),$this->get_translation('ViewReferringSitesGlobal')) ." | ".str_replace('%1', $this->href('referrers', '', 'global=1'), $this->get_translation('ViewReferrersForGlobal'))."]");
 	}
 }
 else

@@ -25,7 +25,7 @@ if ($registered
 {
 	if (!$this->page)
 	{
-		print(str_replace("%1", $this->href('edit'), $this->get_translation('DoesNotExists')));
+		print(str_replace('%1', $this->href('edit'), $this->get_translation('DoesNotExists')));
 	}
 	else
 	{
@@ -43,20 +43,20 @@ if ($registered
 				$new_name		= trim($new_name, "/");
 				$supernewname	= $this->npj_translit($new_name);
 
-				if (!preg_match("/^([\_\.\-".$this->language['ALPHANUM_P']."]+)$/", $new_name))
+				if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
 				{
 					print($this->get_translation('BadName')."<br />\n");
 				}
 				//     if ($this->supertag == $supernewname)
 				else if ($this->tag == $new_name)
 				{
-					print(str_replace("%1", $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlreadyNamed'))."<br />\n");
+					print(str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlreadyNamed'))."<br />\n");
 				}
 				else
 				{
 					if ($this->supertag != $supernewname && $page=$this->load_page($supernewname, "", LOAD_CACHE, LOAD_META))
 					{
-						print(str_replace("%1", $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlredyExists'))."<br />\n");
+						print(str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlredyExists'))."<br />\n");
 					}
 					else
 					{
@@ -82,7 +82,7 @@ if ($registered
 							$this->cache_wanted_page($this->supertag);
 
 							if ($this->save_page($this->tag, "{{Redirect page=\"/".$new_name."\"}}"))
-								print(str_replace("%1", $this->tag, $this->get_translation('RedirectCreated'))."<br />\n");
+								print(str_replace('%1', $this->tag, $this->get_translation('RedirectCreated'))."<br />\n");
 
 							$this->clear_cache_wanted_page($this->tag);
 							$this->clear_cache_wanted_page($this->supertag);
@@ -174,7 +174,7 @@ function move(&$parent, $OldPage, $new_name )
 	{
 		$supernewname = $parent->npj_translit($new_name);
 
-		if (!preg_match("/^([\_\.\-".$parent->language['ALPHANUM_P']."]+)$/", $new_name))
+		if (!preg_match('/^([\_\.\-'.$parent->language['ALPHANUM_P'].']+)$/', $new_name))
 		{
 			print($parent->get_translation('BadName')."<br />\n");
 		}
@@ -221,7 +221,7 @@ function move(&$parent, $OldPage, $new_name )
 				print("<br />".$parent->get_translation('NewNameOfPage').$parent->link('/'.$new_name));
 
 				// log event
-				$engine->log(3, str_replace("%2", $new_name, str_replace('%1', $OldPage['tag'], $engine->get_translation('LogRenamedPage', $this->config['language']))).( $need_redirect == 1 ? $engine->get_translation('LogRenamedPage2', $this->config['language']) : ''' ));
+				$engine->log(3, str_replace('%2', $new_name, str_replace('%1', $OldPage['tag'], $engine->get_translation('LogRenamedPage', $this->config['language']))).( $need_redirect == 1 ? $engine->get_translation('LogRenamedPage2', $this->config['language']) : ''' ));
 			}
 		}
 	}

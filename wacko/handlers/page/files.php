@@ -92,7 +92,7 @@ if ($filepath)
 else if ($error == 404)
 {
 	// Not sure what the point of wrapping it in the conditional was
-	// if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
+	// if (function_exists('virtual')) header("HTTP/1.0 404 Not Found");
 	header("HTTP/1.0 404 Not Found");
 
 	print($this->get_translation('UploadFileNotFound'));
@@ -100,7 +100,7 @@ else if ($error == 404)
 else
 {
 	// Not sure what the point of wrapping it in the conditional was
-	// if (function_exists("virtual")) header("HTTP/1.0 403 Forbidden");
+	// if (function_exists('virtual')) header("HTTP/1.0 403 Forbidden");
 	header("HTTP/1.0 403 Forbidden");
 
 	print($this->get_translation('UploadFileForbidden'));

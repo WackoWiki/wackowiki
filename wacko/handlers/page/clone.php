@@ -23,39 +23,39 @@ if ($user = $this->get_user())
 else
 $user = GUEST;
 
-$edit_note = str_replace("%1", $this->tag, $this->get_translation('ClonedFrom'));
+$edit_note = str_replace('%1', $this->tag, $this->get_translation('ClonedFrom'));
 
 if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id']))
 {
-	if (isset($_POST['newname']) && $_POST['clone'] == "1")
+	if (isset($_POST['newname']) && $_POST['clone'] == '1')
 	{
 		// clone or massclone
 		$need_massclone = 0;
-		if (isset($_POST['massclone']) && $_POST['massclone'] == "on") $need_massclone = 1;
+		if (isset($_POST['massclone']) && $_POST['massclone'] == 'on') $need_massclone = 1;
 
 		// clone
 		if ($need_massclone == 0)
 		{
 			// strip whitespaces
 			$new_name		= preg_replace('/\s+/', '', $_POST['newname']);
-			$new_name		= trim($new_name, "/");
+			$new_name		= trim($new_name, '/');
 			$supernewname	= $this->npj_translit($new_name);
 			$edit_note = isset($_POST['edit_note']) ? $_POST['edit_note'] : $edit_note;
 
-			if (!preg_match("/^([\_\.\-".$this->language['ALPHANUM_P']."]+)$/", $new_name))
+			if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
 			{
 				print($this->get_translation('BadName')."<br />\n");
 			}
 			//     if ($this->supertag == $supernewname)
 			else if ($this->tag == $new_name)
 			{
-				print(str_replace("%1", $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlreadyNamed'))."<br />\n");
+				print(str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlreadyNamed'))."<br />\n");
 			}
 			else
 			{
 				if ($this->supertag != $supernewname && $page=$this->load_page($supernewname, "", LOAD_CACHE, LOAD_META))
 				{
-					print(str_replace("%1", $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlredyExists'))."<br />\n");
+					print(str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlredyExists'))."<br />\n");
 				}
 				else
 				{
@@ -73,7 +73,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 						}
 						else
 						{
-							print(str_replace("%1", $new_name, $this->get_translation('PageCloned'))."<br />\n");
+							print(str_replace('%1', $new_name, $this->get_translation('PageCloned'))."<br />\n");
 						}
 					}
 				}
@@ -110,7 +110,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" ";  echo " /> <label for=\"redirect\">".$this->get_translation('ClonedRedirect')."</label>"; ?>
 	<br /><br />
 	<input name="submit" type="submit" value="<?php echo $this->get_translation('CloneButton'); ?>" /> &nbsp;
-	<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"
+	<input type="button" value="<?php echo str_replace("\n", " ", $this->get_translation('EditCancelButton')); ?>"
 	onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 
 	<?php

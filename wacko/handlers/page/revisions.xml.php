@@ -43,9 +43,9 @@ if ($this->has_access('read'))
 
 				$_GET['a'] = $_GET['b'];
 				$_GET['b'] = $page['page_id'];
-				$diff = $this->include_buffered("handlers/page/diff.php", "oops");
+				$diff = $this->include_buffered('handlers/page/diff.php', 'oops');
 
-				$xml .= "<description>".str_replace('<', '&lt;', str_replace('&', '&amp;', $diff))."</description>\n";
+				$xml .= "<description>".str_replace('<', "&lt;", str_replace('&', '&amp;', $diff))."</description>\n";
 				$xml .= "<pubDate>".date ('r', strtotime ($page['modified']))."</pubDate>\n";
 				$xml .= "</item>\n";
 			}

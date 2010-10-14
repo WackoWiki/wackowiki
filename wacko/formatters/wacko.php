@@ -10,7 +10,7 @@ $parser	= new WackoFormatter($this);
 $this->headerCount = 0;
 
 $text	= preg_replace_callback($parser->NOTLONGREGEXP, array(&$parser, 'wacko_preprocess'), $text);
-$texts	= explode("<!--escaped-->", $text);
+$texts	= explode('<!--escaped-->', $text);
 $wtext	= $texts[0];
 
 for ($i = 2; $i < count($texts); $i = $i + 2)
@@ -20,15 +20,15 @@ for ($i = 2; $i < count($texts); $i = $i + 2)
 
 $wtext	= preg_replace_callback($parser->MOREREGEXP, array(&$parser, 'wacko_middleprocess'), $wtext);
 $wtext	= preg_replace_callback($parser->LONGREGEXP, array(&$parser, 'wacko_callback'), $wtext);
-$wtexts	= explode("\xa6", $wtext);
+$wtexts	= explode('\xa6', $wtext);
 $text	= '';
 
 for ($i = 0; $i < count($wtexts); $i++)
 {
-	$text = $text.((isset($wtexts[$i])) ? $wtexts[$i] : "").((isset($texts[2 * $i + 1])) ? $texts[2 * $i + 1] : "");
+	$text = $text.((isset($wtexts[$i])) ? $wtexts[$i] : '').((isset($texts[2 * $i + 1])) ? $texts[2 * $i + 1] : '');
 }
 
-//$text	= implode("", $texts);
+//$text	= implode('', $texts);
 $text	= str_replace("\177"."<br />\n", '', $text);
 $text	= str_replace("\177"."", '', $text);
 

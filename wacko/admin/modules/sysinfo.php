@@ -19,7 +19,7 @@ function admin_sysinfo(&$engine, &$module)
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
-	Versions informations:<br />
+	Version informations:<br />
 	<br />
 	<table border="0" cellspacing="1" cellpadding="4" style="max-width:600px" class="formation">
 		<tr>

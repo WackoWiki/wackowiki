@@ -1,5 +1,5 @@
 <?php
 
-include("formatters/wiki.php");
+include('formatters/wiki.php');
 
 ?>

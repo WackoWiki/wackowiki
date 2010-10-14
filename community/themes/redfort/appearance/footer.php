@@ -101,7 +101,7 @@ if ($this->has_access('read') && $this->config['hide_files'] != 1)
         print($this->get_translation('Files_1'));
         break;
       default:
-        print(str_replace("%1",count($files), $this->get_translation('Files_n')));
+        print(str_replace('%1',count($files), $this->get_translation('Files_n')));
       }
     ?>
 
@@ -206,7 +206,7 @@ if ($this->has_access('read') && $this->config['hide_comments'] != 1)
         print($this->get_translation('Comments_1'));
         break;
       default:
-        print(str_replace("%1",count($comments), $this->get_translation('Comments_n')));
+        print(str_replace('%1',count($comments), $this->get_translation('Comments_n')));
       }
     ?>
 
@@ -301,7 +301,7 @@ echo $this->form_close();
 </div>
 <div id="credits"><?php
 if ($this->get_user()){
-	echo $this->get_translation('PoweredBy')." ".$this->link("WackoWiki:HomePage", "", "WackoWiki ".$this->get_wacko_version());
+	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki '.$this->get_wacko_version());
 }
 ?>
 </div>

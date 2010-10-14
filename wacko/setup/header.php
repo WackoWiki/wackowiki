@@ -58,8 +58,8 @@ if ( isset ( $_POST['config'] ) )
 	$config = $_POST['config'];
 }
 
-if (!isset($config['language']) || !@file_exists("setup/lang/installer.".$config['language'].".php")) $config['language'] = "en";
-require_once("setup/lang/installer.".$config['language'].".php");
+if (!isset($config['language']) || !@file_exists('setup/lang/installer.'.$config['language'].'.php')) $config['language'] = 'en';
+require_once('setup/lang/installer.'.$config['language'].'.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $config['language']; ?>" lang="<?php echo $config['language']; ?>">

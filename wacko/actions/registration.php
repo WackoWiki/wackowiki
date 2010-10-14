@@ -263,7 +263,7 @@ if ($this->config['pwd_char_classes'] > 0)
 }
 echo "<br /><small>".
 	 $this->get_translation('PwdCplxDesc1').
-	 str_replace("%1", $this->config['pwd_min_chars'],
+	 str_replace('%1', $this->config['pwd_min_chars'],
 		$this->get_translation('PwdCplxDesc2')).
 	 ($this->config['pwd_unlike_login'] > 0
 		? ", ".$this->get_translation('PwdCplxDesc3')

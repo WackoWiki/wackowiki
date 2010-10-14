@@ -76,7 +76,7 @@ echo"<a href=\"".$this->href('print')."\" target=\"_new\"><img src=\"".$this->co
 <?php
 /*
 if ($this->get_user()){
-	echo $this->get_translation('PoweredBy')." ".$this->link("WackoWiki:WackoWiki", "", "WackoWiki ".$this->get_wacko_version());
+	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:WackoWiki', '', 'WackoWiki '.$this->get_wacko_version());
 }
 */
 ?>

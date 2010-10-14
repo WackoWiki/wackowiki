@@ -49,7 +49,7 @@
    echo '   <input type="hidden" name="password" value="'.$_POST['password'].'" />' . "\n";
 
 	// If none of the PHP SQL extensions are loaded then let the user know there is a problem
-	if(!extension_loaded("mysql") && !extension_loaded("mysqli") && !extension_loaded("pdo"))
+	if(!extension_loaded('mysql') && !extension_loaded('mysqli') && !extension_loaded('pdo'))
 	{
 ?>
    <p class="notop"><?php print $lang['ErrorNoDbDriverDetected']; ?></p>

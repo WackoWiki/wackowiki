@@ -88,7 +88,7 @@
 <?php
 
 // 4.3rc1 -> 4.3.rc2: remove obsolete appendix 'index.php?page='
-$config['base_url'] = preg_replace("#/[^/]*$#","/", $config['base_url']);
+$config['base_url'] = preg_replace('#/[^/]*$#', '/', $config['base_url']);
 
 ?>
    <h2><?php echo $lang['Base'];?></h2>

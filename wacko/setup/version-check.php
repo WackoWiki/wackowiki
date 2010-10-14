@@ -9,7 +9,7 @@ writeConfigHiddenNodes(array('none' => ''));
 		Check PHP Version
 	*/
 
-	$php_version_result = version_compare("5.2.0", PHP_VERSION, "<");
+	$php_version_result = version_compare('5.2.0', PHP_VERSION, '<');
 	?>
 <h2><?php echo $lang['PHPVersion']; ?></h2>
 <p class="notop"><?php echo $lang['PHPDetected']; ?> <?php print phpversion().'   '.output_image($php_version_result); ?></p>
@@ -24,7 +24,7 @@ writeConfigHiddenNodes(array('none' => ''));
 	/*
 	 Check which database extensions are installed and what versions of the db are there
 	 */
-	$database_result = extension_loaded("mysql") || extension_loaded("mysqli") || extension_loaded("pdo");
+	$database_result = extension_loaded('mysql') || extension_loaded('mysqli') || extension_loaded('pdo');
 
 	/*
 		With PDO it is not enough that we can just say "ok we've detected PDO".
@@ -36,11 +36,11 @@ writeConfigHiddenNodes(array('none' => ''));
 	*/
 
 	$accepted_pdo_drivers = array();
-	$accepted_pdo_drivers[] = "mysql";
+	$accepted_pdo_drivers[] = 'mysql';
 
 	$detected = 0;
 
-	if(extension_loaded("pdo"))
+	if(extension_loaded('pdo'))
 	{
 		// mssql mysql sqlite
 		$drivers = PDO::getAvailableDrivers();
@@ -60,8 +60,8 @@ writeConfigHiddenNodes(array('none' => ''));
 	?>
 <h2><?php echo $lang['Database']; ?></h2>
 <ul>
-	<li>MySQL   <?php print output_image(extension_loaded("mysql")); ?></li>
-	<li>MySQLi   <?php print output_image(extension_loaded("mysqli")); ?></li>
+	<li>MySQL   <?php print output_image(extension_loaded('mysql')); ?></li>
+	<li>MySQLi   <?php print output_image(extension_loaded('mysqli')); ?></li>
 	<li>PDO   <?php print output_image($detected > 0); ?></li>
 </ul>
 	<?php
@@ -70,12 +70,12 @@ writeConfigHiddenNodes(array('none' => ''));
 	 */
 
 	// Try applying the correct permissions now and then display whether it worked or not, if they fail then the user will have to manually set the permissions
-	@chmod ("_cache", 0777);
-	@chmod ("xml", 0777);
-	@chmod ("files", 0777);
-	@chmod ("files/perpage", 0777);
-	@chmod ("sitemap.xml", 0777);
-	@chmod ("config/config.php", 0777);
+	@chmod ('_cache', 0777);
+	@chmod ('xml', 0777);
+	@chmod ('files', 0777);
+	@chmod ('files/perpage', 0777);
+	@chmod ('sitemap.xml', 0777);
+	@chmod ('config/config.php', 0777);
 
 	// If the cache directory is writable then we can enable caching as default
 	print("            <input type=\"hidden\" name=\"config[cache]\" value=\"".(is__writable('_cache/') ? "1" : $config['cache'])."\" />\n");
