@@ -13,7 +13,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 	<meta name="robots" content="noindex, nofollow" /> <!-- do not index alternative print pages -->
- 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>../default/css/default.css.php" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>../default/css/default.css.php" />
 	<link media="screen,projection,print" rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>layout/print.css" />
 	<style media="screen,projection,print">
 		body {margin:1.875cm 2.5cm 3.75cm 1.5cm}

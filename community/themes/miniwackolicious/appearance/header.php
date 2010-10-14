@@ -14,9 +14,9 @@
 	<meta name="description" content="<?php echo $this->get_description(); ?>" />
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 <?php
-	// We don't need search robots to index subordinate pages
-	if ($this->method != 'show' || $this->page['latest'] == "0" || $this->page['noindex'] == "1")
-		echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
+// We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
+if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noindex'] == 1 || $this->page['noindex'] == 1)
+	echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 ?>
 	<link href="<?php echo $this->config['theme_url'] ?>../default/css/default.css.php" rel="stylesheet" type="text/css" />
 	<?php if ($this->config['allow_x11colors']) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" /><?php } ?>
