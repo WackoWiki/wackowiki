@@ -1800,7 +1800,7 @@ class Wacko
 		if ($imgurl == 1)
 			return "<!--imglink:begin-->".str_replace(' ', '+', urldecode($tag)).' =='.$text."<!--imglink:end-->";
 		else
-			return "<!--link:begin-->".str_replace(' ', '+', urldecode($tag))." ==".($this->format_safe ? str_replace('>', '&gt;', str_replace('<', '&lt;', $text)) : $text)."<!--link:end-->";
+			return "<!--link:begin-->".str_replace(' ', '+', urldecode($tag))." ==".($this->format_safe ? str_replace('>', "&gt;", str_replace('<', "&lt;", $text)) : $text)."<!--link:end-->";
 	}
 
 	function link($tag, $method = '', $text = '', $track = 1, $safe = 0, $linklang = '', $anchorlink = 1)
