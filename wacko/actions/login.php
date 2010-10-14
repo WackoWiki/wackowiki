@@ -96,27 +96,27 @@ else
 	if (isset($_POST['action']) && $_POST['action'] == 'login')
 	{
 		// if user name already exists, check password
-		if ($existingUser = $this->load_user($_POST['name']))
+		if ($existing_user = $this->load_user($_POST['name']))
 		{
 			// check for disabled account
-			if (($existingUser['enabled'] == false) || $existingUser['account_type'] != 0 )
+			if (($existing_user['enabled'] == false) || $existing_user['account_type'] != 0 )
 			{
 				$error = $this->get_translation('AccountDisabled');
 			}
 			else
 			{
 				// check for old md5 password
-				if (strlen($existingUser['password']) < 64)
+				if (strlen($existing_user['password']) < 64)
 				{
-					if (strlen($existingUser['password']) == 32)
+					if (strlen($existing_user['password']) == 32)
 					{
 						$_processed_password = hash('md5', $_POST['password']);
 					}
-					if (strlen($existingUser['password']) == 40) // only for dev versions
+					if (strlen($existing_user['password']) == 40) // only for dev versions
 					{
-						$_processed_password = hash('sha1', $_POST['name'].$existingUser['salt'].$_POST['password']);
+						$_processed_password = hash('sha1', $_POST['name'].$existing_user['salt'].$_POST['password']);
 					}
-					if ($existingUser['password'] == $_processed_password)
+					if ($existing_user['password'] == $_processed_password)
 					{
 						$salt = $this->random_password(10, 3);
 						$password = hash('sha256', $_POST['name'].$salt.$_POST['password']);
@@ -130,11 +130,11 @@ else
 				}
 				else
 				{
-					$_processed_password = hash('sha256', $_POST['name'].$existingUser['salt'].$_POST['password']);
+					$_processed_password = hash('sha256', $_POST['name'].$existing_user['salt'].$_POST['password']);
 				}
 
 				// check password
-				if ($existingUser['password'] == $_processed_password)
+				if ($existing_user['password'] == $_processed_password)
 				{
 					// define session duration in days
 					$_session = isset($_POST['session']) ? $_POST['session'] : NULL ;
@@ -153,17 +153,17 @@ else
 							$session = $this->config['session_expiration'];
 					}
 
-					$this->log_user_in($existingUser, $_POST['persistent'], $session);
-					$this->set_user($existingUser, 1);
-					$this->update_session_time($existingUser);
+					$this->log_user_in($existing_user, $_POST['persistent'], $session);
+					$this->set_user($existing_user, 1);
+					$this->update_session_time($existing_user);
 					$this->set_bookmarks(BM_USER);
 					$this->context[++$this->current_context] = '';
 
-					$this->login_count($existingUser['user_id']);
-					$this->reset_failed_user_login_count($existingUser['user_id']);
-					$this->reset_lost_password_count($existingUser['user_id']);
+					$this->login_count($existing_user['user_id']);
+					$this->reset_failed_user_login_count($existing_user['user_id']);
+					$this->reset_lost_password_count($existing_user['user_id']);
 
-					$this->log(3, str_replace('%1', $existingUser['user_name'], $this->get_translation('LogUserLoginOK', $this->config['language'])));
+					$this->log(3, str_replace('%1', $existing_user['user_name'], $this->get_translation('LogUserLoginOK', $this->config['language'])));
 
 					// run in ssl mode?
 					if ($this->config['ssl'] == true)
@@ -182,7 +182,7 @@ else
 					$name = $_POST['name'];
 					$focus = 1;
 
-					$this->set_failed_user_login_count($existingUser['user_id']);
+					$this->set_failed_user_login_count($existing_user['user_id']);
 
 					// log failed attempt
 					$this->log(2, str_replace('%1', $_POST['name'], $this->get_translation('LogUserLoginFailed', $this->config['language'])));
@@ -200,14 +200,13 @@ else
 <div class="cssform">
 	<h3><?php echo $this->get_translation('LoginWelcome'); ?></h3>
 	<p>
-		<label for="name"><?php echo $this->format_translation("LoginName");?>:</label>
+		<label for="name"><?php echo $this->format_translation('LoginName');?>:</label>
 		<input id="name" name="name" size="25" maxlength="25" value="<?php echo isset($name) ? $name : ""; ?>" tabindex="1" />
 
 	</p>
 	<p>
 		<label for="password"><?php echo $this->get_translation('LoginPassword');?>:</label>
 		<input id="password" type="password" name="password" size="25" tabindex="2" autocomplete="off" />
-
 	</p>
 </div>
 <?php
