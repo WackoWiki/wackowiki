@@ -117,7 +117,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"body MEDIUMTEXT NOT NULL,".
 					"body_r MEDIUMTEXT NOT NULL,".
 					"body_toc TEXT NOT NULL,".
-					"formatting VARCHAR(20) DEFAULT NULL,".
+					"formatting VARCHAR(20) NOT NULL DEFAULT 'wacko',".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 					"ip VARCHAR(15) NOT NULL,".

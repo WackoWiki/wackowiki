@@ -145,7 +145,7 @@ $alter_page_r4_3_29 = "ALTER TABLE {$pref}page ADD allow_rawhtml TINYINT(1) UNSI
 $alter_page_r4_3_30 = "ALTER TABLE {$pref}page ADD disable_safehtml TINYINT(1) UNSIGNED DEFAULT NULL";
 $alter_page_r4_3_31 = "ALTER TABLE {$pref}page ADD noindex TINYINT(1) UNSIGNED DEFAULT NULL";
 $alter_page_r4_3_32 = "ALTER TABLE {$pref}page ADD theme VARCHAR(20) DEFAULT NULL AFTER hits";
-$alter_page_r4_3_33 = "ALTER TABLE {$pref}page ADD formatting VARCHAR(20) DEFAULT NULL AFTER body_r";
+$alter_page_r4_3_33 = "ALTER TABLE {$pref}page ADD formatting VARCHAR(20) NOT NULL DEFAULT 'wacko' AFTER body_r";
 
 $update_page_r4_3 = "UPDATE {$pref}page SET body_r=''";
 $update_page_r4_3_1 = "UPDATE {$pref}page AS page, (SELECT user_id, user_name FROM {$pref}users) AS users SET page.owner_id = users.user_id WHERE page.owner = users.user_name";
