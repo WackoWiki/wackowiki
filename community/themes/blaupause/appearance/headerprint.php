@@ -5,8 +5,8 @@
 <html>
 <head>
 <title><?php echo $this->GetWakkaName()." : ".$this->GetPageTag(); ?></title>
-<?php if ($this->GetMethod() != 'show')
-       echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
+<?php // do not index alternative print pages
+echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
 <meta name="keywords" content="<?php echo $this->GetConfigValue("meta_keywords") ?>" />
 <meta name="description" content="<?php echo $this->GetConfigValue("meta_description") ?>" />

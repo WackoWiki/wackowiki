@@ -6,8 +6,8 @@
 <html>
 <head>
   <title><?php echo $this->GetWakkaName()." : ".$this->GetPageTag(); ?></title>
-<?php if ($this->GetMethod() != 'show')
-       echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
+<?php // do not index alternative print pages
+  echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
   <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->GetCharset(); ?>" />
   <meta name="keywords" content="<?php echo $this->GetConfigValue("meta_keywords") ?>" />
   <meta name="description" content="<?php echo $this->GetConfigValue("meta_description") ?>" />
@@ -18,7 +18,7 @@
 
 <div class="header">
   <h1>
-  <?php echo $this->config["wakka_name"] ?>: 
-  <a href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->GetPageTag()); ?>"><?php echo $this->GetPageTag(); ?></a> 
+  <?php echo $this->config["wakka_name"] ?>:
+  <a href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->GetPageTag()); ?>"><?php echo $this->GetPageTag(); ?></a>
   </h1>
 </div>
