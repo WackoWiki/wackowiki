@@ -1511,7 +1511,7 @@ class Wacko
 										"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 									"WHERE u.user_id = '".quote($this->dblink, $watcher['user_id'])."'");
 
-								if ($_user['enabled'] == true && $_user['email_confirm'] == "" && $_user['send_watchmail'] != "0")
+								if ($_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
 								{
 									$lang = $_user['lang'];
 									$this->load_resource($lang);

@@ -10,7 +10,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	}
 	else
 	{
-		$num = "1";
+		$num = 1;
 	}
 
 	$user = $this->get_user();

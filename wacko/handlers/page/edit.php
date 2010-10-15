@@ -8,7 +8,7 @@ $output = '';
 // invoke autocomplete if needed
 if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 {
-	include( dirname(__FILE__)."/_autocomplete.php" );
+	include( dirname(__FILE__).'/_autocomplete.php' );
 	return;
 }
 
@@ -32,7 +32,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 		}
 
 		// only if saving:
-		if (isset($_POST['save']) && $_POST['body'] != "")
+		if (isset($_POST['save']) && $_POST['body'] != '')
 		{
 			if(isset($_POST['edit_note']))
 			{
@@ -58,7 +58,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 			#	$error .= str_replace('%1', $textchars - $maxchars, $this->get_translation('TextDBOversize')).' ';
 
 			// check for edit note
-			if (($this->config['edit_summary'] == 2) && $_POST['edit_note'] == "" && $this->page['comment_on_id'] == 0)
+			if (($this->config['edit_summary'] == 2) && $_POST['edit_note'] == '' && $this->page['comment_on_id'] == 0)
 				$error .= $this->get_translation('EditNoteMissing');
 
 			// check categories
@@ -109,7 +109,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 				}
 			}
 
-			$body = str_replace("\r", "", $_POST['body']);
+			$body = str_replace("\r", '', $_POST['body']);
 
 			// You're not allowed to have empty comments as they would be kinda pointless.
 			if (!$body && $this->page['comment_on_id'] != 0)

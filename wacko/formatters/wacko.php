@@ -7,7 +7,7 @@ $text	= "\177\n".$text."\n";
 
 $parser	= new WackoFormatter($this);
 
-$this->headerCount = 0;
+$this->header_count = 0;
 
 $text	= preg_replace_callback($parser->NOTLONGREGEXP, array(&$parser, 'wacko_preprocess'), $text);
 $texts	= explode('<!--escaped-->', $text);

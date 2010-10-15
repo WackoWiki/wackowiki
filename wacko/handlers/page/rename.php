@@ -40,7 +40,7 @@ if ($registered
 			{
 				// strip whitespaces
 				$new_name		= preg_replace('/\s+/', '', $_POST['newname']);
-				$new_name		= trim($new_name, "/");
+				$new_name		= trim($new_name, '/');
 				$supernewname	= $this->npj_translit($new_name);
 
 				if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
@@ -54,7 +54,7 @@ if ($registered
 				}
 				else
 				{
-					if ($this->supertag != $supernewname && $page=$this->load_page($supernewname, "", LOAD_CACHE, LOAD_META))
+					if ($this->supertag != $supernewname && $page=$this->load_page($supernewname, '', LOAD_CACHE, LOAD_META))
 					{
 						print(str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlredyExists'))."<br />\n");
 					}
@@ -185,7 +185,7 @@ function move(&$parent, $OldPage, $new_name )
 		}
 		else
 		{
-			if ($OldPage['supertag'] != $supernewname && $page=$parent->load_page($supernewname, "", LOAD_CACHE, LOAD_META))
+			if ($OldPage['supertag'] != $supernewname && $page=$parent->load_page($supernewname, '', LOAD_CACHE, LOAD_META))
 			{
 				print(str_replace('%1', $parent->link($new_name), $parent->get_translation('AlredyExists'))."<br />\n");
 			}
@@ -221,7 +221,7 @@ function move(&$parent, $OldPage, $new_name )
 				print("<br />".$parent->get_translation('NewNameOfPage').$parent->link('/'.$new_name));
 
 				// log event
-				$engine->log(3, str_replace('%2', $new_name, str_replace('%1', $OldPage['tag'], $engine->get_translation('LogRenamedPage', $this->config['language']))).( $need_redirect == 1 ? $engine->get_translation('LogRenamedPage2', $this->config['language']) : ''' ));
+				$engine->log(3, str_replace('%2', $new_name, str_replace('%1', $OldPage['tag'], $engine->get_translation('LogRenamedPage', $this->config['language']))).( $need_redirect == 1 ? $engine->get_translation('LogRenamedPage2', $this->config['language']) : '' ));
 			}
 		}
 	}

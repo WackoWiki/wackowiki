@@ -8,10 +8,10 @@ WackoFormatter.
 class WackoFormatter
 {
 	var $object;
-	var $oldIndentLevel		= 0;
-	var $indentClosers		= array();
-	var $tdoldIndentLevel	= 0;
-	var $tdindentClosers	= array();
+	var $old_indent_level		= 0;
+	var $indent_closers		= array();
+	var $tdold_indent_level	= 0;
+	var $tdindent_closers	= array();
 	var $br					= 1;
 	var $intable			= 0;
 	var $intablebr			= 0;
@@ -231,16 +231,16 @@ class WackoFormatter
 	{
 		$result = '';
 
-		if ($this->intable)	$Closers = &$this->tdindentClosers;
-		else				$Closers = &$this->indentClosers;
+		if ($this->intable)	$closers = &$this->tdindent_closers;
+		else				$closers = &$this->indent_closers;
 
-		$c = count($Closers);
+		$c = count($closers);
 
 		for ($i = 0; $i < $c; $i++)
-			$result .= array_pop($Closers);
+			$result .= array_pop($closers);
 
-		if ($this->intable)	$this->tdoldIndentLevel	= 0;
-		else				$this->oldIndentLevel	= 0;
+		if ($this->intable)	$this->tdold_indent_level	= 0;
+		else				$this->old_indent_level	= 0;
 
 		return $result;
 	}
@@ -399,7 +399,7 @@ class WackoFormatter
 			$this->br			= 0;
 			$this->cols			= 0;
 			$this->intablebr	= true;
-			$this->tableScope	= true;
+			$this->table_scope	= true;
 			return '<table class="dtable" border="0">';
 		}
 		else if ($thing == '#|')
@@ -407,19 +407,19 @@ class WackoFormatter
 			$this->br			= 0;
 			$this->cols			= 0;
 			$this->intablebr	= true;
-			$this->tableScope	= true;
+			$this->table_scope	= true;
 			return '<table class="usertable" border="1">';
 		}
 		//table end
-		else if (($thing == '|#' || $thing == '||#') && $this->tableScope)
+		else if (($thing == '|#' || $thing == '||#') && $this->table_scope)
 		{
 			$this->br			= 0;
 			$this->intablebr	= false;
-			$this->tableScope	= false;
+			$this->table_scope	= false;
 			return '</table>';
 		}
 		//table head
-		else if (preg_match('/^\*\|(.*?)\|\*$/s', $thing, $matches) && $this->tableScope)
+		else if (preg_match('/^\*\|(.*?)\|\*$/s', $thing, $matches) && $this->table_scope)
 		{
 			$this->br			= 1;
 			$this->intable		= true;
@@ -432,8 +432,8 @@ class WackoFormatter
 
 			for ($i = 0; $i < $count; $i++)
 			{
-				$this->tdoldIndentLevel	= 0;
-				$this->tdindentClosers	= array();
+				$this->tdold_indent_level	= 0;
+				$this->tdindent_closers	= array();
 
 				if ($cells[$i]{0} == "\n")
 					$cells[$i] = substr($cells[$i], 1);
@@ -444,8 +444,8 @@ class WackoFormatter
 			}
 			if (($this->cols <> 0) and ($count < $this->cols))
 			{
-				$this->tdoldIndentLevel	= 0;
-				$this->tdindentClosers	= array();
+				$this->tdold_indent_level	= 0;
+				$this->tdindent_closers	= array();
 
 				if ($cells[$i]{0} == "\n")
 					$cells[$count] = substr($cells[$count], 1);
@@ -456,8 +456,8 @@ class WackoFormatter
 			}
 			else
 			{
-				$this->tdoldIndentLevel	= 0;
-				$this->tdindentClosers	= array();
+				$this->tdold_indent_level	= 0;
+				$this->tdindent_closers	= array();
 
 				if ($cells[$i]{0} == "\n")
 					$cells[$count] = substr($cells[$count], 1);
@@ -477,7 +477,7 @@ class WackoFormatter
 			return $output;
 		}
 		//table row and cells
-		else if (preg_match('/^\|\|(.*?)\|\|$/s', $thing, $matches) && $this->tableScope)
+		else if (preg_match('/^\|\|(.*?)\|\|$/s', $thing, $matches) && $this->table_scope)
 		{
 			$this->br			= 1;
 			$this->intable		= true;
@@ -490,8 +490,8 @@ class WackoFormatter
 
 			for ($i = 0; $i < $count; $i++)
 			{
-				$this->tdoldIndentLevel	= 0;
-				$this->tdindentClosers	= array();
+				$this->tdold_indent_level	= 0;
+				$this->tdindent_closers	= array();
 
 				if ($cells[$i]{0} == "\n")
 					$cells[$i] = substr($cells[$i], 1);
@@ -502,8 +502,8 @@ class WackoFormatter
 			}
 			if (($this->cols <> 0) and ($count < $this->cols))
 			{
-				$this->tdoldIndentLevel	= 0;
-				$this->tdindentClosers	= array();
+				$this->tdold_indent_level	= 0;
+				$this->tdindent_closers	= array();
 
 				if ($cells[$i]{0} == "\n")
 					$cells[$count] = substr($cells[$count], 1);
@@ -514,8 +514,8 @@ class WackoFormatter
 			}
 			else
 			{
-				$this->tdoldIndentLevel	= 0;
-				$this->tdindentClosers	= array();
+				$this->tdold_indent_level	= 0;
+				$this->tdindent_closers	= array();
 
 				if ($cells[$i]{0} == "\n")
 					$cells[$count] = substr($cells[$count], 1);
@@ -660,43 +660,43 @@ class WackoFormatter
 		{
 			$result		= $this->indent_close();
 			$this->br	= 0;
-			$wacko->headerCount++;
-			return $result.'<a name="h'.$this->page_id.'-'.$wacko->headerCount.'"></a><h6>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h6>';
+			$wacko->header_count++;
+			return $result.'<a name="h'.$this->page_id.'-'.$wacko->header_count.'"></a><h6>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h6>';
 		}
 		else if (preg_match("/\n[ \t]*======(.*?)={2,7}$/", $thing, $matches))
 		{
 			$result		= $this->indent_close();
 			$this->br	= 0;
-			$wacko->headerCount++;
-			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h5>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h5>";
+			$wacko->header_count++;
+			return $result."<a name=\"h".$this->page_id."-".$wacko->header_count."\"></a><h5>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h5>";
 		}
 		else if (preg_match("/\n[ \t]*=====(.*?)={2,7}$/", $thing, $matches))
 		{
 			$result		= $this->indent_close();
 			$this->br	= 0;
-			$wacko->headerCount++;
-			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h4>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h4>";
+			$wacko->header_count++;
+			return $result."<a name=\"h".$this->page_id."-".$wacko->header_count."\"></a><h4>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h4>";
 		}
 		else if (preg_match("/\n[ \t]*====(.*?)={2,7}$/", $thing, $matches))
 		{
 			$result		= $this->indent_close();
 			$this->br	= 0;
-			$wacko->headerCount++;
-			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h3>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h3>";
+			$wacko->header_count++;
+			return $result."<a name=\"h".$this->page_id."-".$wacko->header_count."\"></a><h3>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h3>";
 		}
 		else if (preg_match("/\n[ \t]*===(.*?)={2,7}$/", $thing, $matches))
 		{
 			$result		= $this->indent_close();
 			$this->br	= 0;
-			$wacko->headerCount++;
-			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h2>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h2>";
+			$wacko->header_count++;
+			return $result."<a name=\"h".$this->page_id."-".$wacko->header_count."\"></a><h2>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h2>";
 		}
 		else if (preg_match("/\n[ \t]*==(.*?)={2,7}$/", $thing, $matches))
 		{
 			$result	= $this->indent_close();
 			$this->br	= 0;
-			$wacko->headerCount++;
-			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h1>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h1>";
+			$wacko->header_count++;
+			return $result."<a name=\"h".$this->page_id."-".$wacko->header_count."\"></a><h1>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h1>";
 		}
 		// separators
 		else if (preg_match('/^[-]{4,}$/', $thing))
@@ -850,15 +850,15 @@ class WackoFormatter
 			//intable or not?
 			if ($this->intable)
 			{
-				$Closers	= &$this->tdindentClosers;
-				$oldlevel	= &$this->tdoldIndentLevel;
-				$oldtype	= &$this->tdoldIndentType;
+				$closers	= &$this->tdindent_closers;
+				$oldlevel	= &$this->tdold_indent_level;
+				$oldtype	= &$this->tdold_indent_type;
 			}
 			else
 			{
-				$Closers	= &$this->indentClosers;
-				$oldlevel	= &$this->oldIndentLevel;
-				$oldtype	= &$this->oldIndentType;
+				$closers	= &$this->indent_closers;
+				$oldlevel	= &$this->old_indent_level;
+				$oldtype	= &$this->old_indent_type;
 			}
 
 			// we definitely want no line break in this one.
@@ -898,33 +898,33 @@ class WackoFormatter
 
 			// get new indent level
 			if ($matches[2][0] == ' ')
-				$newIndentLevel = (int)strlen($matches[2]) / 2;
+				$new_indent_level = (int)strlen($matches[2]) / 2;
 			else
-				$newIndentLevel = strlen($matches[2]);
+				$new_indent_level = strlen($matches[2]);
 
-			if ($newIndentLevel > $oldlevel)
+			if ($new_indent_level > $oldlevel)
 			{
-				for ($i = 0; $i < $newIndentLevel - $oldlevel; $i++)
+				for ($i = 0; $i < $new_indent_level - $oldlevel; $i++)
 				{
 					$result .= $opener;
-					array_push($Closers, $closer);
+					array_push($closers, $closer);
 				}
 			}
-			else if ($newIndentLevel < $oldlevel)
+			else if ($new_indent_level < $oldlevel)
 			{
-				for ($i = 0; $i < $oldlevel - $newIndentLevel; $i++)
+				for ($i = 0; $i < $oldlevel - $new_indent_level; $i++)
 				{
-					$result .= array_pop($Closers);
+					$result .= array_pop($closers);
 				}
 			}
-			else if ($newIndentLevel == $oldlevel && $oldtype != $newtype)
+			else if ($new_indent_level == $oldlevel && $oldtype != $newtype)
 			{
-				$result .= array_pop($Closers);
+				$result .= array_pop($closers);
 				$result .= $opener;
-				array_push($Closers, $closer);
+				array_push($closers, $closer);
 			}
 
-			$oldlevel	= $newIndentLevel;
+			$oldlevel	= $new_indent_level;
 			$oldtype	= $newtype;
 
 			if ($li && !preg_match("/".str_replace(")", "\)", $opener)."$/", $result))

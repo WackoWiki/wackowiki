@@ -5,7 +5,7 @@ $error = '';
 $output = '';
 
 // reconnect securely in ssl mode
-#if ($this->config['ssl'] == true && $this->config['ssl_implicit'] == true && ( ($_SERVER['HTTPS'] != "on" && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
+#if ($this->config['ssl'] == true && $this->config['ssl_implicit'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
 {
 	$this->redirect(str_replace('http://', 'https://'.(!empty($this->config['ssl_proxy']) ? $this->config['ssl_proxy'].'/' : ''), $this->href()));
@@ -71,7 +71,7 @@ else if ($user = $this->get_user())
 
 				if ($this->config['ssl'] == true || $this->config['ssl_proxy'] == true)
 				{
-					$output .= "Traffic Protection <tt>". ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on" ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' )."</tt>.";
+					$output .= "Traffic Protection <tt>". ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' )."</tt>.";
 				}
 
 				$this->set_message($output);

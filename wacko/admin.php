@@ -40,7 +40,7 @@ $init->engine('res');
 // reconnect securely in ssl mode
 if ($engine->config['ssl'] == true)
 {
-	if ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "on" && empty($engine->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ))
+	if ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($engine->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ))
 	{
 		$engine->redirect(str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->config['base_url']).'admin.php');
 	}

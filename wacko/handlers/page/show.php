@@ -59,9 +59,9 @@ if ($this->has_access('read'))
 		if ($this->page['latest'] == 0)
 		{
 			print("<div class=\"revisioninfo\">".
-			str_replace('%1',$this->href(),
-			str_replace('%2',$this->tag,
-			str_replace('%3',$this->get_page_time_formatted(),
+			str_replace('%1', $this->href(),
+			str_replace('%2', $this->tag,
+			str_replace('%3', $this->get_page_time_formatted(),
 			$this->get_translation('Revision')))));
 
 			// if this is an old revision, display ReEdit button
@@ -162,10 +162,10 @@ if ($this->page)
 			{
 				switch($_GET['show_files'])
 				{
-					case "0":
+					case '0':
 						$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$tag] = 0;
 						break;
-					case "1":
+					case '1':
 						$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$tag] = 1;
 						break;
 				}
@@ -197,7 +197,7 @@ if ($this->page)
 			if (isset($registered)
 				&&
 					(
-						($this->config['upload'] === true) || ($this->config['upload'] == "1") ||
+						($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
 						($this->check_acl($user,$this->config['upload']))
 					)
 				)

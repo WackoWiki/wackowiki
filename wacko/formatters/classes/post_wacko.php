@@ -7,7 +7,7 @@ class post_wacko
 	{
 		$this->object  = &$object;
 		$this->options = &$options;
-		$this->actions = explode(", ", ACTIONS4DIFF);
+		$this->actions = explode(', ', ACTIONS4DIFF);
 	}
 
 	function postcallback($things)
@@ -24,14 +24,14 @@ class post_wacko
 			if ($url)
 			{
 				$url	= str_replace(' ', '%20', trim($url));
-				$text	= trim(preg_replace("/<!--markup:1:[\w]+-->|__|\[\[|\(\(/", "", $text));
+				$text	= trim(preg_replace("/<!--markup:1:[\w]+-->|__|\[\[|\(\(/", '', $text));
 				if (stristr($text, '@@'))
 				{
 					$t		= explode('@@', $text);
 					$text	= $t[0];
 					$lang	= $t[1];
 				}
-				return $wacko->link($url, "", $text, 1, 1, $lang);
+				return $wacko->link($url, '', $text, 1, 1, $lang);
 			}
 			else return '';
 		}
@@ -60,7 +60,7 @@ class post_wacko
 			if ($matches[1] && (!isset($this->options['diff']) || in_array(strtolower($matches[1]), $this->actions)))
 			{
 				// check for action' parameters
-				$sep = strpos( $matches[1], " " );
+				$sep = strpos( $matches[1], ' ' );
 				if ($sep === false)
 				{
 					$action	= $matches[1];
@@ -69,14 +69,14 @@ class post_wacko
 				else
 				{
 					$action		= substr( $matches[1], 0, $sep );
-					$p			= " ".substr( $matches[1], $sep )." ";
+					$p			= ' '.substr( $matches[1], $sep ).' ';
 					$paramcount	= preg_match_all( "/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/", $p, $matches, PREG_SET_ORDER );
 					$params		= array();
 					$c = 0;
 
 					foreach( $matches as $m )
 					{
-						$value				= isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : "1";
+						$value				= isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : '1';
 						$params[$c]			= $value;
 						$params[ $m[2] ]	= $value;
 						$c++;
@@ -84,10 +84,10 @@ class post_wacko
 				}
 				return $wacko->action($action, $params);
 			}
-			else if ($this->options["diff"])
-				return "{{".$matches[1]."}}";
+			else if ($this->options['diff'])
+				return '{{'.$matches[1].'}}';
 			else
-				return "{{}}";
+				return '{{}}';
 		}
 		// if we reach this point, it must have been an accident.
 		return $thing;

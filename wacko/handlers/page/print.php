@@ -16,7 +16,7 @@ if ($this->has_access('read'))
 	else
 	{
 		/* obsolete code - or do we need an ability to print old revisions?
-		if ($this->page['latest'] == "0")
+		if ($this->page['latest'] == 0)
 		{
 			print("<div class=\"revisioninfo\">".
 			str_replace('%1',$this->href(),

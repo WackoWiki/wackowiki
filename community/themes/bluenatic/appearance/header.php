@@ -52,7 +52,7 @@ if ($this->method == 'edit')
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->get_user())
    {
-      if ($user['doubleclick_edit'] == "1")
+      if ($user['doubleclick_edit'] == 1)
          {
 ?>
   <script type="text/javascript">

@@ -18,7 +18,7 @@ if ($this->has_access('read'))
 			print("<div class=\"commentinfo\">".$this->get_translation('ThisIsCommentOn')." ".$this->compose_link_to_page($this->get_comment_on_tag($this->page['comment_on_id']), "", "", 0).", ".$this->get_translation('PostedBy')." ".($this->is_wiki_name($this->page['user_name'])?$this->link($this->page['user_name']):$this->page['user_name'])." ".$this->get_translation('At')." ".$this->page['modified']."</div>");
 		}
 
-		if ($this->page['latest'] == "0")
+		if ($this->page['latest'] == 0)
 		{
 			print("<div class=\"revisioninfo\">".
 			str_replace('%1',$this->href(),
