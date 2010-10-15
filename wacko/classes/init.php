@@ -121,7 +121,7 @@ class Init
 	// DEFINE WACKO SETTINGS
 	// First must be called without parameters to initialize default
 	// settings. Additional settings can be added afterwards.
-	function settings($name = "", $value = "", $override = 0)
+	function settings($name = '', $value = '', $override = 0)
 	{
 		// specific definition
 		if ($name == true)
@@ -355,7 +355,7 @@ class Init
 	// Initialize DBAL for basic DB operations and connect to selected DB.
 	// Default DB is 'mysql_database' config value, however any other value may
 	// be passed. All DBs must be on the server specified in the config file.
-	function dbal($dbname = "")
+	function dbal($dbname = '')
 	{
 		if (isset($this->dblink)) return;
 

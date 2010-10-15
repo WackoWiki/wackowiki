@@ -86,7 +86,7 @@ if ($pages = array_merge($pages1, $pages2))
 			}
 
 			// print entry
-			$separator = " . . . . . . . . . . . . . . . . ";
+			$separator = ' . . . . . . . . . . . . . . . . ';
 			$author = ( $page['user_name'] == GUEST ? '<em title="'.( $admin ? $page['ip'] : '' ).'">'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['user_name']).'" title="'.( $admin ? $page['ip'] : '' ).'">'.$page['user_name'].'</a>' );
 			$viewed = ( $user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['date'] > $user['last_mark'] ? ' class="viewed"' : '' );
 			echo '<li'.$viewed.'><span class=\"dt\">'.date($this->config['time_format_seconds'], strtotime($time)).'&nbsp;&nbsp;</span>';

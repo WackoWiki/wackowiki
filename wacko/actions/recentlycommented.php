@@ -2,7 +2,7 @@
 
 if (!function_exists('load_recently_commented'))
 {
-	function load_recently_commented(&$wacko, $for = "", $limit = 50)
+	function load_recently_commented(&$wacko, $for = '', $limit = 50)
 	{
 		$_ids = '';
 		$limit = (int) $limit;
@@ -80,7 +80,7 @@ if (list ($pages, $pagination) = load_recently_commented($this, $root, (int)$max
 	{
 		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
 	}
-	if ($root == "" && !(int)$noxml)
+	if ($root == '' && !(int)$noxml)
 	{
 		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/comments_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RecentCommentsXMLTip')."\" alt=\"XML\" /></a></span><br /><br />\n";
 	}

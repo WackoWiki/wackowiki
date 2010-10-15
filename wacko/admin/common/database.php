@@ -276,10 +276,10 @@ function GetTable(&$engine, $table, $drop = true)
 		if (!empty($row['Default']) && $row['Type'] != 'timestamp')
 			$schema_create .= ' DEFAULT \'' . $row['Default'] . '\'';
 
-		if ($row['Null'] != "YES")
+		if ($row['Null'] != 'YES')
 			$schema_create .= ' NOT NULL';
 
-		if ($row['Extra'] != "")
+		if ($row['Extra'] != '')
 			$schema_create .= ' ' . $row['Extra'];
 
 		$schema_create .= ",\n";
@@ -335,9 +335,9 @@ function GetTable(&$engine, $table, $drop = true)
 // $tables var is a tables definition array
 function GetData(&$engine, &$tables, $pack, $table, $root = '')
 {
-	$where = "";
-	$tweak = "";
-	
+	$where = '';
+	$tweak = '';
+
 	// sql clauses
 	if ($root == true && $tables[$engine->config['table_prefix'].$table]['where'] == true)
 	{

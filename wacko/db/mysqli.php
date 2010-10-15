@@ -36,7 +36,7 @@ function free_result($rs)
 	return mysqli_free_result($rs);
 }
 
-function connect($host, $user, $passw, $db, $collation = false, $driver, $port = "")
+function connect($host, $user, $passw, $db, $collation = false, $driver, $port = '')
 {
 	$dblink = mysqli_connect($host, $user, $passw, $db, $port);
 

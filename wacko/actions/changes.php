@@ -33,7 +33,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 	{
 		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
 	}
-	if ($root == "" && !(int)$noxml)
+	if ($root == '' && !(int)$noxml)
 	{
 		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/changes_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RecentChangesXMLTip')."\" alt=\"XML\" /></a></span><br /><br />\n";
 	}

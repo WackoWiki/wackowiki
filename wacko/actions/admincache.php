@@ -21,7 +21,7 @@ if ($this->is_admin())
 		$handle = opendir(rtrim($this->config['cache_dir'].CACHE_PAGE_DIR, '/'));
 		while (false !== ($file = readdir($handle)))
 		{
-			if ($file != "." && $file != ".." && !is_dir($this->config['cache_dir'].CACHE_PAGE_DIR.$file))
+			if ($file != '.' && $file != '..' && !is_dir($this->config['cache_dir'].CACHE_PAGE_DIR.$file))
 			{
 				unlink($this->config['cache_dir'].CACHE_PAGE_DIR.$file);
 			}
@@ -33,7 +33,7 @@ if ($this->is_admin())
 		$handle = opendir(rtrim($this->config['cache_dir'].CACHE_SQL_DIR, "/"));
 		while (false !== ($file = readdir($handle)))
 		{
-			if ($file != "." && $file != ".." && !is_dir($this->config['cache_dir'].CACHE_SQL_DIR.$file))
+			if ($file != '.' && $file != '..' && !is_dir($this->config['cache_dir'].CACHE_SQL_DIR.$file))
 			{
 				unlink($this->config['cache_dir'].CACHE_SQL_DIR.$file);
 			}

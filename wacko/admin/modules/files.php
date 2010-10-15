@@ -16,8 +16,8 @@ $module['files'] = array(
 
 function admin_files(&$engine, &$module)
 {
-	$order = "";
-	$error = "";
+	$order = '';
+	$error = '';
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />

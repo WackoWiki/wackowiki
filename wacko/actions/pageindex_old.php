@@ -30,7 +30,7 @@ $page_links .= "<ul>\n";
 foreach($pages as $page)
 {
 	$firstChar = strtoupper($page['tag'][0]);
-	if(!preg_match("/".$this->language['ALPHA']."/", $firstChar)) { $firstChar = "#"; }
+	if(!preg_match('/'.$this->language['ALPHA'].'/', $firstChar)) { $firstChar = '#'; }
 
 	// Create alphabet links at top of page - Don't display this menu if the user specified a particluar letter
 	if($firstChar != $curChar)
@@ -111,7 +111,7 @@ if(!$letter)
 
 print($page_links);
 
-if($page_links != "")
+if($page_links != '')
 {
 	if(!$no_arr)
 	{

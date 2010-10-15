@@ -2,7 +2,7 @@
 
 global $dblink;
 
-function test_pdo($text, $query, $errorText = "")
+function test_pdo($text, $query, $errorText = '')
 {
 	global $dblink;
 

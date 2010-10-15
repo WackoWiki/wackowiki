@@ -1,6 +1,6 @@
 <?php
 
-if ($text == "") return;
+if ($text == '') return;
 
 // remove tags <br />
 $text = str_replace('<br />', '', $text);

@@ -16,7 +16,7 @@ $module['deletedpages'] = array(
 
 function admin_deletedpages(&$engine, &$module)
 {
-	$curday = "";
+	$curday = '';
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />

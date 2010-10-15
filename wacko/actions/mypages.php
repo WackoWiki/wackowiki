@@ -156,9 +156,9 @@ if ($user_id = $this->get_user_id())
 			{
 				$firstChar = strtoupper($page['tag'][0]);
 
-				if (!preg_match("/".$this->language['ALPHA']."/", $firstChar))
+				if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))
 				{
-					$firstChar = "#";
+					$firstChar = '#';
 				}
 
 				if ($firstChar != $curChar)

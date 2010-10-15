@@ -67,7 +67,7 @@ else if ($user = $this->get_user())
 				$output .= '<br />';
 				// Only allow your session to be used from this IP address.
 
-				$output .= "Bind session to the IP-address ". ( $user['validate_ip'] == '1' ? 'enabled (the current IP <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).".<br />";
+				$output .= "Bind session to the IP-address ". ( $user['validate_ip'] == 1 ? 'enabled (the current IP <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).".<br />";
 
 				if ($this->config['ssl'] == true || $this->config['ssl_proxy'] == true)
 				{

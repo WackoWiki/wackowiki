@@ -17,7 +17,7 @@ if ($page)
 	{
 		if ($user = $this->get_user())
 		{
-			if ($user['dont_redirect'] == '1' || $_POST['redirect'] == 'no')
+			if ($user['dont_redirect'] == 1 || $_POST['redirect'] == 'no')
 			{
 				print ("<br /><br /><br />".$this->get_translation('PageMoved')." ".$this->link('/'.$page)."<br /><br /><br />");
 			}

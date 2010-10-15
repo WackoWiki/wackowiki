@@ -10,7 +10,7 @@ header("Content-Type: text/html; charset=".$this->get_charset());
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page['lang'] ?>" lang="<?php echo $this->page['lang'] ?>">
 <head>
-	<title><?php echo $this->add_spaces($this->tag).($this->method != "show" ? " (".$this->method.")" : "");
+	<title><?php echo $this->add_spaces($this->tag).($this->method != 'show' ? ' ('.$this->method.')' : '');
 echo " (@".htmlspecialchars($this->config['wacko_name']).")" ?></title>
 <?php
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
@@ -139,7 +139,7 @@ echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), "", 
 	src="<?php echo $this->config['base_url'];?>images/z.gif"
 	width="1" height="1" alt="" /></div>
 <div class="Wrapper"
-<?php if ($this->method == "edit") echo "style=\"margin-bottom:0;padding-bottom:0\""?>>
+<?php if ($this->method == 'edit') echo "style=\"margin-bottom:0;padding-bottom:0\""?>>
 <div class="Print">
 <?php if ($this->get_user()) { ?>
 <?php echo ($this->iswatched === true ?
@@ -169,7 +169,7 @@ echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), "", 
   <h1><span class="Main"><?php echo $this->config['wacko_name'] ?>:</span> <?php echo $this->get_page_path(); ?> <a class="Search"
 	title="<?php echo $this->get_translation('SearchTitleTip')?>"
 	href="<?php echo $this->config['base_url'] ?>TextSearch<?php echo ($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a> </h1>
-<?php if (($this->method != "edit") || !$this->has_access('write')) { ?>
+<?php if (($this->method != 'edit') || !$this->has_access('write')) { ?>
   <div style="background-image:url(<?php echo $this->config['theme_url'] ?>icons/shade2.gif);" class="Shade"><img
 	src="<?php echo $this->config['theme_url'] ?>icons/shade1.gif"
 	width="106" height="6" alt="" /></div>

@@ -21,10 +21,10 @@ if (!isset($page)) $page = '';
 if (!isset($pictures)) $pictures = NULL;
 
 $orderby = "filename ASC";
-if ($order == "time") $orderby = "uploaded_dt DESC";
-if ($order == "size") $orderby = "filesize ASC";
-if ($order == "size_desc") $orderby = "filesize DESC";
-if ($order == "ext") $orderby = "file_ext ASC";
+if ($order == 'time') $orderby = "uploaded_dt DESC";
+if ($order == 'size') $orderby = "filesize ASC";
+if ($order == 'size_desc') $orderby = "filesize DESC";
+if ($order == 'ext') $orderby = "file_ext ASC";
 
 if ($owner) $user_add = "AND u.user_name='".quote($this->dblink, $owner)."' ";
 else		$user_add = '';

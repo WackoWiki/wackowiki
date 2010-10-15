@@ -44,7 +44,7 @@ if ($this->is_admin())
 			{
 				while(false !== ($file = readdir($handle)))
 				{
-					if($file != "." && $file != "..")
+					if($file != '.' && $file != '..')
 					{
 						$pos = stristr($file, $old_name);
 						if ($pos !== false)

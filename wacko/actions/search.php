@@ -108,7 +108,7 @@ if ($phrase)
 				if (!$this->config['hide_locked'] || $this->has_access('read', $page['tag']) )
 				{
 					// Don't show it if it's a comment and we're hiding comments from this user
-					if($page['comment_on_id'] == '0' || ($page['comment_on_id'] != '0' && $this->user_allowed_comments()))
+					if($page['comment_on_id'] == 0 || ($page['comment_on_id'] != 0 && $this->user_allowed_comments()))
 					{
 						// open item
 						if ($style == 'ul' || $style == 'ol') print "<li>";
@@ -187,7 +187,7 @@ function preview_text($TEXT, $LIMIT, $TAGS = 0)
 			if ($TEXT{$i} == '>') $STOP = 0;
 			$RETURN .= $TEXT{$i};
 
-			if ($COUNTER >= $LIMIT && $TEXT{$i} == " ") break;
+			if ($COUNTER >= $LIMIT && $TEXT{$i} == ' ') break;
 		}
 
 		return $RETURN . "...";

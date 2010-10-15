@@ -16,8 +16,8 @@ $module['users'] = array(
 
 function admin_users(&$engine, &$module)
 {
-	$where = "";
-	$order = "";
+	$where = '';
+	$order = '';
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />

@@ -73,7 +73,7 @@ require_once('setup/lang/installer.'.$config['language'].'.php');
       <div class="installer">
          <h1><?php echo $lang['Title'];?></h1>
          <h1 class="white">&nbsp;:&nbsp;</h1>
-         <h1><?php echo $installAction == "lang" ? $lang['Lang'] : $lang[$installAction]; ?></h1>
+         <h1><?php echo $installAction == 'lang' ? $lang['Lang'] : $lang[$installAction]; ?></h1>
          <ul class="menu">
             <li class="<?php echo $installAction == 'lang' ? 'current' : 'item'; ?>"><?php echo $lang['Lang']; ?></li>
             <li>&gt;</li>

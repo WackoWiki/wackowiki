@@ -8,11 +8,11 @@ $owner_id = $this->get_user_id_by_name($owner);
 if (!isset($nomark)) $nomark = '';
 if (!isset($abc)) $abc = '';
 if (!isset($filter)) $filter = '';
-if (!isset($style)) $style="indent";
+if (!isset($style)) $style = 'indent';
 if (!isset($root) && !isset($page))
-					$root = "/".$this->page['tag'];
+					$root = '/'.$this->page['tag'];
 if ($page)			$root = $page;
-if ($root == "/") 	$root = '';
+if ($root == '/') 	$root = '';
 if ($root) 			$root = $this->unwrap_link($root);
 
 if (!isset($depth)) $depth = 0;
@@ -40,7 +40,7 @@ if (!function_exists('create_cluster_tree'))
 				continue;
 			}
 
-			if ( $supertag <> "/" && !( strpos($page_supertag,$supertag."/") === 0) )
+			if ( $supertag <> '/' && !( strpos($page_supertag,$supertag.'/') === 0) )
 			{
 				//Ended “our” leaves.
 				break;
@@ -49,7 +49,7 @@ if (!function_exists('create_cluster_tree'))
 			//We believe supertag sub
 
 			//Relative
-			if ($supertag != "/"){
+			if ($supertag != '/'){
 				$rel_supertag = substr($page_supertag,strlen($supertag) + 1);
 			}
 			else
@@ -57,15 +57,15 @@ if (!function_exists('create_cluster_tree'))
 				$rel_supertag = substr($page_supertag,1);
 			}
 
-			if (!strpos($rel_supertag,"/") === FALSE){$rel_supertag = substr($rel_supertag, 0, strpos($rel_supertag, "/"));};
+			if (!strpos($rel_supertag, '/') === FALSE){$rel_supertag = substr($rel_supertag, 0, strpos($rel_supertag, '/'));};
 			//And the absolute
-			if ($supertag != "/")
+			if ($supertag != '/')
 			{
 				$sub_supertag = $supertag."/".$rel_supertag;
 			}
 			else
 			{
-				$sub_supertag = "/".$rel_supertag;
+				$sub_supertag = '/'.$rel_supertag;
 			}
 
 			if ($depth > 0)
@@ -89,18 +89,18 @@ if (!function_exists('create_cluster_tree'))
 					$scount = substr_count($sub_supertag,"/");
 					for ($i = 0; $i < $scount - 1; $i++)
 					{
-						$sub_tag = $sub_tag.substr($sub_sub_tag, 0, strpos($sub_sub_tag, "/") + 1);;
-						$sub_sub_tag = substr($sub_sub_tag, strpos($sub_sub_tag, "/") + 1);
+						$sub_tag = $sub_tag.substr($sub_sub_tag, 0, strpos($sub_sub_tag, '/') + 1);;
+						$sub_sub_tag = substr($sub_sub_tag, strpos($sub_sub_tag, '/') + 1);
 					}
 					//Reject everything after the next slash.
-					$sub_tag = $sub_tag.substr($sub_sub_tag, 0, strpos($sub_sub_tag, "/"));
+					$sub_tag = $sub_tag.substr($sub_sub_tag, 0, strpos($sub_sub_tag, '/'));
 				}
 
 				$sub_pages_tree[$sub_tag]['supertag'] = $sub_supertag;
 				$sub_pages_tree[$sub_tag]['exists'] = $exists;
 			}
 
-			$sub_tree = create_cluster_tree($wacko, $sub_supertag, "", $depth - 1);
+			$sub_tree = create_cluster_tree($wacko, $sub_supertag, '', $depth - 1);
 
 			if ($depth > 0)
 			{
@@ -144,11 +144,11 @@ if (!function_exists('print_cluster_tree'))
 			static $need_letter = 0;
 			static $newletter = "!";
 
-			if ($style == "ul")
+			if ($style == 'ul')
 				print "<ul>";
-			if ($style == "ol")
+			if ($style == 'ol')
 				print "<ol>";
-			if ($style == "indent")
+			if ($style == 'indent')
 				print "<div class=\"indent\">";
 
 			foreach ($tree as $sub_tag => $sub_tag_array )
@@ -157,16 +157,16 @@ if (!function_exists('print_cluster_tree'))
 				$sub_exists = $sub_tag_array['exists'];
 
 				$linktext = $sub_tag;
-				if ($style != "br" && (!strpos($linktext,"/") === false))
+				if ($style != 'br' && (!strpos($linktext, '/') === false))
 				{
 					//Displaying only the last word
-					$linktext = substr($linktext, strrpos($linktext, "/") + 1);
+					$linktext = substr($linktext, strrpos($linktext, '/') + 1);
 				}
 
 				if ($abc && ( $current_depth == 1 ))
 				{
 					$newletter = strtoupper(substr($linktext, 0, 1));
-					if (!preg_match("/[".$wacko->language['ALPHA_P']."]/", $newletter)) { $newletter = "#"; }
+					if (!preg_match('/['.$wacko->language['ALPHA_P'].']/', $newletter)) { $newletter = '#'; }
 					if ($newletter == '') $newletter = $linktext{0};
 					if ($letter <> $newletter)
 					{
@@ -174,11 +174,11 @@ if (!function_exists('print_cluster_tree'))
 					}
 				};
 
-				if ($sub_exists || ($style != "br" && ( $filter == "all" || test_page_existance($sub_tag_array))))
+				if ($sub_exists || ($style != 'br' && ( $filter == 'all' || test_page_existance($sub_tag_array))))
 				{
 					if ($need_letter == 1)
 					{ //Convenient case to print the letter
-						if (($style == "ul" || $style == "ol" ) && $letter)
+						if (($style == 'ul' || $style == 'ol' ) && $letter)
 							print "<br />";
 						if ($letter)
 							print "<br />";
@@ -187,7 +187,7 @@ if (!function_exists('print_cluster_tree'))
 						$need_letter = 0;
 					}
 
-					if ($style == "ul" || $style == "ol")
+					if ($style == 'ul' || $style == 'ol')
 						print "<li>";
 
 					$_page = $wacko->load_page(ltrim($sub_supertag, "/"));
@@ -242,10 +242,10 @@ if ($pages)
 {
 	//Check the pages, according to the desired depth ($depth)  at all to be displayed
 	$i = 0;
-	$current_depth = count(explode("/", $query));
+	$current_depth = count(explode('/', $query));
 	foreach($pages as $page)
 	{
-		$page_depth = count(explode("/", $page['supertag']));
+		$page_depth = count(explode('/', $page['supertag']));
 		if ($page_depth <= $depth + $current_depth - 1)
 		{
 			$new_pages[$i] = $page;

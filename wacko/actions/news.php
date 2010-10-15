@@ -24,7 +24,7 @@ if (!empty($this->config['news_cluster']))
 
 	// collect data
 	// heavy lifting here (watch out for REGEXPs!)
-	if ($mode == "latest")
+	if ($mode == 'latest')
 	{
 		$count	= $this->load_single(
 				"SELECT COUNT(tag) AS n ".

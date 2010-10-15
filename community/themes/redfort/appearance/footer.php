@@ -16,7 +16,7 @@ Updated by Pavel Fedotov.
 
 <!-- !! -->
 <?php
-  if ($this->method == "show") {
+  if ($this->method == 'show') {
 ?>
 <?php
 if ($this->has_access('read') && $this->config['hide_files'] != 1)
@@ -72,7 +72,7 @@ if ($this->has_access('read') && $this->config['hide_files'] != 1)
     if ($registered
         &&
         (
-         ($this->config['upload'] === true) || ($this->config['upload'] == "1") ||
+         ($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
          ($this->check_acl($user,$this->config['upload']))
         )
        )

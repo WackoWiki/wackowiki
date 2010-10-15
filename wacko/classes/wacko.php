@@ -1145,7 +1145,7 @@ class Wacko
 	// $lang		- page language
 	// $mute		- supress email reminders and xml rss recompilation
 	// $user		- attach guest pseudonym
-	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = '0', $comment_on_id = '0', $lang = false, $mute = false, $user = false)
+	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $comment_on_id = 0, $lang = false, $mute = false, $user = false)
 	{
 		$desc = '';
 		// user data
@@ -1404,7 +1404,7 @@ class Wacko
 									"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 								"WHERE u.user_id = '".quote($this->dblink, $watcher['user_id'])."'");
 
-							if ($_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != '0')
+							if ($_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
 							{
 								$lang = $_user['lang'];
 								$this->load_resource($lang);
@@ -1865,7 +1865,7 @@ class Wacko
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->get_translation('FileLink');
 			$icon	= $this->get_translation('fileicon');
-			$tpl	= "file";
+			$tpl	= 'file';
 		}
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/', $tag)) {
 			// this is a PDF link
@@ -2285,10 +2285,10 @@ class Wacko
 
 	function add_spaces($text)
 	{
-		$show = '1';
+		$show = 1;
 		if ($user = $this->get_user())	$show = (isset($user['show_spaces']) ? $user['show_spaces'] : NULL);
 		if (!$show)						$show = $this->config['show_spaces'];
-		if ($show != '0')
+		if ($show != 0)
 		{
 			$text = preg_replace('/('.$this->language['ALPHANUM'].')('.$this->language['UPPERNUM'].')/', '\\1&nbsp;\\2', $text);
 			$text = preg_replace('/('.$this->language['UPPERNUM'].')('.$this->language['UPPERNUM'].')/', '\\1&nbsp;\\2', $text);
@@ -3009,7 +3009,7 @@ class Wacko
 	{
 		if (!$user = $this->get_user())
 			return false;
-		return ($user['show_comments'] == '1');
+		return ($user['show_comments'] == 1);
 	}
 
 	function user_wants_files()
@@ -3017,7 +3017,7 @@ class Wacko
 		if (!$user = $this->get_user())
 			return false;
 
-		return (isset($user['show_files']) && $user['show_files'] == '1');
+		return (isset($user['show_files']) && $user['show_files'] == 1);
 	}
 
 	// Returns boolean indicating if the current user is allowed to see comments at all
@@ -3230,8 +3230,8 @@ class Wacko
 
 	function get_cached_acl($page_id, $privilege, $useDefaults)
 	{
-		if (isset( $this->acl_cache[$page_id."#".$privilege."#".$useDefaults] ))
-			return $this->acl_cache[$page_id."#".$privilege."#".$useDefaults];
+		if (isset( $this->acl_cache[$page_id.'#'.$privilege.'#'.$useDefaults] ))
+			return $this->acl_cache[$page_id.'#'.$privilege.'#'.$useDefaults];
 		else
 			return '';
 	}
@@ -3239,7 +3239,7 @@ class Wacko
 	// $acl array must reflect acls table row structure
 	function cache_acl($page_id, $privilege, $useDefaults, $acl)
 	{
-		$this->acl_cache[$page_id."#".$privilege."#".$useDefaults] = $acl;
+		$this->acl_cache[$page_id.'#'.$privilege.'#'.$useDefaults] = $acl;
 	}
 
 	function load_acl($page_id, $privilege, $useDefaults = 1, $useCache = 1, $useParent = 1)
@@ -3932,7 +3932,7 @@ class Wacko
 		}
 
 		// check IP validity
-		if ($this->get_user_setting('validate_ip', 1) == '1' && $this->get_user_setting('ip') != (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['ssl_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) )
+		if ($this->get_user_setting('validate_ip', 1) == 1 && $this->get_user_setting('ip') != (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['ssl_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) )
 		{
 			$this->log(1, '<strong><span class="cite">User in-session IP change detected</span></strong>');
 			$this->logout_user();
@@ -3955,7 +3955,7 @@ class Wacko
 		// user settings
 		if(isset($user['lang']))
 		{
-			if($user['lang'] == "")
+			if($user['lang'] == '')
 			{
 				$this->userlang = $this->config['language'];
 			}
@@ -4023,16 +4023,16 @@ class Wacko
 		{
 			// override perpage settings
 			$this->page['options'] = array(
-				"hide_comments"		=> $this->page['hide_comments'],
-				"hide_files"		=> $this->page['hide_files'],
-				"hide_rating"		=> $this->page['hide_rating'],
-				"hide_toc"			=> $this->page['hide_toc'],
-				"hide_index"		=> $this->page['hide_index'],
-				"lower_index"		=> $this->page['lower_index'],
-				"upper_index"		=> $this->page['upper_index'],
-				"allow_rawhtml"		=> $this->page['allow_rawhtml'],
-				"disable_safehtml"	=> $this->page['disable_safehtml'],
-				"theme"				=> $this->page['theme']
+				'hide_comments'		=> $this->page['hide_comments'],
+				'hide_files'		=> $this->page['hide_files'],
+				'hide_rating'		=> $this->page['hide_rating'],
+				'hide_toc'			=> $this->page['hide_toc'],
+				'hide_index'		=> $this->page['hide_index'],
+				'lower_index'		=> $this->page['lower_index'],
+				'upper_index'		=> $this->page['upper_index'],
+				'allow_rawhtml'		=> $this->page['allow_rawhtml'],
+				'disable_safehtml'	=> $this->page['disable_safehtml'],
+				'theme'				=> $this->page['theme']
 				);
 
 			foreach ($this->page['options'] as $key => $val)
@@ -4333,7 +4333,7 @@ class Wacko
 
 		return
 			// save
-			$this->save_page($new, $title = $page['title'], $page['body'], $edit_note, $minor_edit = '0', $comment_on_id = '0', $lang = $page['lang'], $mute = false, $user = false);
+			$this->save_page($new, $title = $page['title'], $page['body'], $edit_note, $minor_edit = 0, $comment_on_id = 0, $lang = $page['lang'], $mute = false, $user = false);
 	}
 
 	function rename_page($tag, $NewTag, $NewSuperTag = '')
@@ -4641,10 +4641,10 @@ class Wacko
 	// $pwd_complexity = 3 -- password consists of uppercase, lowercase, digits and symbols
 	function random_password($length, $pwd_complexity)
 	{
-		$chars_uc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$chars_lc = 'abcdefghijklmnopqrstuvwxyz';
-		$digits = '0123456789';
-		$symbols = '-_!@#%^&*(){}[]|~'; // removed '$'
+		$chars_uc	= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$chars_lc	= 'abcdefghijklmnopqrstuvwxyz';
+		$digits		= '0123456789';
+		$symbols	= '-_!@#%^&*(){}[]|~'; // removed '$'
 		$uc = 0;
 		$lc = 0;
 		$di = 0;
@@ -4652,9 +4652,11 @@ class Wacko
 
 		if ($pwd_complexity == 2) $sy = 100;
 
-		while ($uc == 0 || $lc == 0 || $di == 0 || $sy == 0) {
+		while ($uc == 0 || $lc == 0 || $di == 0 || $sy == 0)
+		{
 			$password = '';
-			for ($i = 0; $i < $length; $i++) {
+			for ($i = 0; $i < $length; $i++)
+			{
 				$k = rand(0, $pwd_complexity);  //randomly choose what's next
 				if ($k == 0) {   //uppercase
 					$password .= substr(str_shuffle($chars_uc), rand(0, sizeof($chars_uc) - 2), 1);
@@ -4981,7 +4983,6 @@ class Wacko
 		echo '<pre>';
 		print_r($array);
 		echo '</pre>';
-
 	}
 
 }
