@@ -8,168 +8,168 @@ WackoFormatter.
 class WackoFormatter
 {
 	var $object;
-	var $oldIndentLevel = 0;
-	var $indentClosers = array();
-	var $tdoldIndentLevel = 0;
-	var $tdindentClosers = array();
-	var $br = 1;
-	var $intable = 0;
-	var $intablebr = 0;
-	var $cols = 0;
-	var $z_gif = "&nbsp;";
-	var $colors = array(
-	"red" => "red",
-	"green" => "green",
-	"blue" => "blue",
-	"yellow" => "yellow",
-	);
-	var $x11_colors = array(
-	"indianred" => "indianred",
-	"lightcoral" => "lightcoral",
-	"orangered" => "orangered",
-	"crimson" => "crimson",
-	"darkred" => "darkred",
-	"pink" => "pink",
-	"hotpink" => "hotpink",
-	"palevioletred" => "palevioletred",
-	"khaki" => "khaki",
-	"lightgoldenrodyellow" => "lightgoldenrodyellow",
-	"lemonchiffon" => "lemonchiffon",
-	"gold" => "gold",
-	"moccasin" => "moccasin",
-	"cyan" => "cyan",
-	"aquamarine" => "aquamarine",
-	"mediumturquoise" => "mediumturquoise",
-	"cadetblue" => "cadetblue",
-	"lightcyan" => "lightcyan",
-	"powderblue" => "powderblue",
-	"steelblue" => "steelblue",
-	"skyblue" => "skyblue",
-	"deepskyblue" => "deepskyblue",
-	"royalblue" => "royalblue",
-	"dodgerblue" => "dodgerblue",
-	"mediumblue" => "mediumblue",
-	"navy" => "navy",
-	"lightsalmon" => "lightsalmon",
-	"darkorange" => "darkorange",
-	"tomato" => "tomato",
-	"aquamarine" => "aquamarine",
-	"springgreen" => "springgreen",
-	"greenyellow" => "greenyellow",
-	"lawngreen" => "lawngreen",
-	"lightgreen" => "lightgreen",
-	"limegreen" => "limegreen",
-	"darkseagreen" => "darkseagreen",
-	"seagreen" => "seagreen",
-	"olivedrab" => "olivedrab",
-	"darkolivegreen" => "darkolivegreen",
-	"mediumaquamarine" => "mediumaquamarine",
-	"lightseagreen" => "lightseagreen",
-	"teal" => "teal",
-	"thistle" => "thistle",
-	"violet" => "violet",
-	"magenta" => "magenta",
-	"mediumorchid" => "mediumorchid",
-	"blueviolet" => "blueviolet",
-	"mediumpurple" => "mediumpurple",
-	"purple" => "purple",
-	"darkslateblue" => "darkslateblue",
-	"honeydew" => "honeydew",
-	"azure" => "azure",
-	"ghostwhite" => "ghostwhite",
-	"lavenderblush" => "lavenderblush",
-	"antiquewhite" => "antiquewhite",
-	"snow" => "snow",
-	"beige" => "beige",
-	"oldlace" => "oldlace",
-	"ivory" => "ivory",
-	"lightgrey" => "lightgrey",
-	"darkgray" => "darkgray",
-	"dimgray" => "dimgray",
-	"lightslategray" => "lightslategray",
-	"cornsilk" => "cornsilk",
-	"bisque" => "bisque",
-	"wheat" => "wheat",
-	"goldenrod" => "goldenrod",
-	"peru" => "peru",
-	"maroon" => "maroon",
-	"brown" => "brown",
-	"darkred" => "darkred",
-	"tan" => "tan",
-	"black" => "black",
-	"darksalmon" => "darksalmon",
-	"salmon" => "salmon",
-	"red" => "red",
-	"firebrick" => "firebrick",
-	"mediumvioletred" => "mediumvioletred",
-	"lightpink" => "lightpink",
-	"deeppink" => "deeppink",
-	"darkkhaki" => "darkkhaki",
-	"palegoldenrod" => "palegoldenrod",
-	"lightyellow" => "lightyellow",
-	"yellow" => "yellow",
-	"papayawhip" => "papayawhip",
-	"peachpuff" => "peachpuff",
-	"aqua" => "aqua",
-	"turquoise" => "turquoise",
-	"darkturquoise" => "darkturquoise",
-	"slategray" => "slategray",
-	"paleturquoise" => "paleturquoise",
-	"lightsteelblue" => "lightsteelblue",
-	"lightblue" => "lightblue",
-	"lightskyblue" => "lightskyblue",
-	"cornflowerblue" => "cornflowerblue",
-	"mediumslateblue" => "mediumslateblue",
-	"blue" => "blue",
-	"darkblue" => "darkblue",
-	"midnightblue" => "midnightblue",
-	"orange" => "orange",
-	"coral" => "coral",
-	"orangered" => "orangered",
-	"mediumspringgreen" => "mediumspringgreen",
-	"palegreen" => "palegreen",
-	"chartreuse" => "chartreuse",
-	"lime" => "lime",
-	"yellowgreen" => "yellowgreen",
-	"mediumseagreen" => "mediumseagreen",
-	"forestgreen" => "forestgreen",
-	"green" => "green",
-	"olive" => "olive",
-	"darkgreen" => "darkgreen",
-	"turquoise" => "turquoise",
-	"darkcyan" => "darkcyan",
-	"lavender" => "lavender",
-	"plum" => "plum",
-	"fuchsia" => "fuchsia",
-	"orchid" => "orchid",
-	"darkorchid" => "darkorchid",
-	"darkviolet" => "darkviolet",
-	"slateblue" => "slateblue",
-	"darkmagenta" => "darkmagenta",
-	"indigo" => "indigo",
-	"mintcream" => "mintcream",
-	"aliceblue" => "aliceblue",
-	"whitesmoke" => "whitesmoke",
-	"mistyrose" => "mistyrose",
-	"seashell" => "seashell",
-	"white" => "white",
-	"linen" => "linen",
-	"floralwhite" => "floralwhite",
-	"gainsboro" => "gainsboro",
-	"silver" => "silver",
-	"gray" => "gray",
-	"darkslategray" => "darkslategray",
-	"slategray" => "slategray",
-	"blanchedalmond" => "blanchedalmond",
-	"navajowhite" => "navajowhite",
-	"sandybrown" => "sandybrown",
-	"darkgoldenrod" => "darkgoldenrod",
-	"chocolate" => "chocolate",
-	"saddlebrown" => "saddlebrown",
-	"sienna" => "sienna",
-	"burlywood" => "burlywood",
-	"rosybrown" => "rosybrown",
-	);
+	var $oldIndentLevel		= 0;
+	var $indentClosers		= array();
+	var $tdoldIndentLevel	= 0;
+	var $tdindentClosers	= array();
+	var $br					= 1;
+	var $intable			= 0;
+	var $intablebr			= 0;
+	var $cols				= 0;
+	var $z_gif				= '&nbsp;';
+	var $colors				= array(
+								'red' => 'red',
+								'green' => 'green',
+								'blue' => 'blue',
+								'yellow' => 'yellow',
+								);
+	var $x11_colors			= array(
+								'indianred' => 'indianred',
+								'lightcoral' => 'lightcoral',
+								'orangered' => 'orangered',
+								'crimson' => 'crimson',
+								'darkred' => 'darkred',
+								'pink' => 'pink',
+								'hotpink' => 'hotpink',
+								'palevioletred' => 'palevioletred',
+								'khaki' => 'khaki',
+								'lightgoldenrodyellow' => 'lightgoldenrodyellow',
+								'lemonchiffon' => 'lemonchiffon',
+								'gold' => 'gold',
+								'moccasin' => 'moccasin',
+								'cyan' => 'cyan',
+								'aquamarine' => 'aquamarine',
+								'mediumturquoise' => 'mediumturquoise',
+								'cadetblue' => 'cadetblue',
+								'lightcyan' => 'lightcyan',
+								'powderblue' => 'powderblue',
+								'steelblue' => 'steelblue',
+								'skyblue' => 'skyblue',
+								'deepskyblue' => 'deepskyblue',
+								'royalblue' => 'royalblue',
+								'dodgerblue' => 'dodgerblue',
+								'mediumblue' => 'mediumblue',
+								'navy' => 'navy',
+								'lightsalmon' => 'lightsalmon',
+								'darkorange' => 'darkorange',
+								'tomato' => 'tomato',
+								'aquamarine' => 'aquamarine',
+								'springgreen' => 'springgreen',
+								'greenyellow' => 'greenyellow',
+								'lawngreen' => 'lawngreen',
+								'lightgreen' => 'lightgreen',
+								'limegreen' => 'limegreen',
+								'darkseagreen' => 'darkseagreen',
+								'seagreen' => 'seagreen',
+								'olivedrab' => 'olivedrab',
+								'darkolivegreen' => 'darkolivegreen',
+								'mediumaquamarine' => 'mediumaquamarine',
+								'lightseagreen' => 'lightseagreen',
+								'teal' => 'teal',
+								'thistle' => 'thistle',
+								'violet' => 'violet',
+								'magenta' => 'magenta',
+								'mediumorchid' => 'mediumorchid',
+								'blueviolet' => 'blueviolet',
+								'mediumpurple' => 'mediumpurple',
+								'purple' => 'purple',
+								'darkslateblue' => 'darkslateblue',
+								'honeydew' => 'honeydew',
+								'azure' => 'azure',
+								'ghostwhite' => 'ghostwhite',
+								'lavenderblush' => 'lavenderblush',
+								'antiquewhite' => 'antiquewhite',
+								'snow' => 'snow',
+								'beige' => 'beige',
+								'oldlace' => 'oldlace',
+								'ivory' => 'ivory',
+								'lightgrey' => 'lightgrey',
+								'darkgray' => 'darkgray',
+								'dimgray' => 'dimgray',
+								'lightslategray' => 'lightslategray',
+								'cornsilk' => 'cornsilk',
+								'bisque' => 'bisque',
+								'wheat' => 'wheat',
+								'goldenrod' => 'goldenrod',
+								'peru' => 'peru',
+								'maroon' => 'maroon',
+								'brown' => 'brown',
+								'darkred' => 'darkred',
+								'tan' => 'tan',
+								'black' => 'black',
+								'darksalmon' => 'darksalmon',
+								'salmon' => 'salmon',
+								'red' => 'red',
+								'firebrick' => 'firebrick',
+								'mediumvioletred' => 'mediumvioletred',
+								'lightpink' => 'lightpink',
+								'deeppink' => 'deeppink',
+								'darkkhaki' => 'darkkhaki',
+								'palegoldenrod' => 'palegoldenrod',
+								'lightyellow' => 'lightyellow',
+								'yellow' => 'yellow',
+								'papayawhip' => 'papayawhip',
+								'peachpuff' => 'peachpuff',
+								'aqua' => 'aqua',
+								'turquoise' => 'turquoise',
+								'darkturquoise' => 'darkturquoise',
+								'slategray' => 'slategray',
+								'paleturquoise' => 'paleturquoise',
+								'lightsteelblue' => 'lightsteelblue',
+								'lightblue' => 'lightblue',
+								'lightskyblue' => 'lightskyblue',
+								'cornflowerblue' => 'cornflowerblue',
+								'mediumslateblue' => 'mediumslateblue',
+								'blue' => 'blue',
+								'darkblue' => 'darkblue',
+								'midnightblue' => 'midnightblue',
+								'orange' => 'orange',
+								'coral' => 'coral',
+								'orangered' => 'orangered',
+								'mediumspringgreen' => 'mediumspringgreen',
+								'palegreen' => 'palegreen',
+								'chartreuse' => 'chartreuse',
+								'lime' => 'lime',
+								'yellowgreen' => 'yellowgreen',
+								'mediumseagreen' => 'mediumseagreen',
+								'forestgreen' => 'forestgreen',
+								'green' => 'green',
+								'olive' => 'olive',
+								'darkgreen' => 'darkgreen',
+								'turquoise' => 'turquoise',
+								'darkcyan' => 'darkcyan',
+								'lavender' => 'lavender',
+								'plum' => 'plum',
+								'fuchsia' => 'fuchsia',
+								'orchid' => 'orchid',
+								'darkorchid' => 'darkorchid',
+								'darkviolet' => 'darkviolet',
+								'slateblue' => 'slateblue',
+								'darkmagenta' => 'darkmagenta',
+								'indigo' => 'indigo',
+								'mintcream' => 'mintcream',
+								'aliceblue' => 'aliceblue',
+								'whitesmoke' => 'whitesmoke',
+								'mistyrose' => 'mistyrose',
+								'seashell' => 'seashell',
+								'white' => 'white',
+								'linen' => 'linen',
+								'floralwhite' => 'floralwhite',
+								'gainsboro' => 'gainsboro',
+								'silver' => 'silver',
+								'gray' => 'gray',
+								'darkslategray' => 'darkslategray',
+								'slategray' => 'slategray',
+								'blanchedalmond' => 'blanchedalmond',
+								'navajowhite' => 'navajowhite',
+								'sandybrown' => 'sandybrown',
+								'darkgoldenrod' => 'darkgoldenrod',
+								'chocolate' => 'chocolate',
+								'saddlebrown' => 'saddlebrown',
+								'sienna' => 'sienna',
+								'burlywood' => 'burlywood',
+								'rosybrown' => 'rosybrown',
+								);
 
 	function WackoFormatter( &$object )
 	{
@@ -258,21 +258,21 @@ class WackoFormatter
 				return '~~'.$this->wacko_preprocess(array(0, substr($thing, 2)));
 
 		// escaped text
-		if (preg_match("/^<!--escaped-->(.*)<!--escaped-->$/s", $thing, $matches))
+		if (preg_match('/^<!--escaped-->(.*)<!--escaped-->$/s', $thing, $matches))
 		{
 			return $matches[1];
 		}
 		// escaped text
-		else if (preg_match("/^\"\"(.*)\"\"$/s", $thing, $matches))
+		else if (preg_match('/^\"\"(.*)\"\"$/s', $thing, $matches))
 		{
-			return "<!--escaped--><!--notypo-->".str_replace("\n", '<br />', htmlspecialchars($matches[1]))."<!--/notypo--><!--escaped-->";
+			return '<!--escaped--><!--notypo-->'.str_replace("\n", '<br />', htmlspecialchars($matches[1])).'<!--/notypo--><!--escaped-->';
 		}
 		// code text
-		else if (preg_match("/^\%\%(.*)\%\%$/s", $thing, $matches))
+		else if (preg_match('/^\%\%(.*)\%\%$/s', $thing, $matches))
 		{
 			// check if a formatter has been specified
 			$code = $matches[1];
-			if (preg_match("/^\(([^\n]+?)\)(.*)$/s", $code, $matches))
+			if (preg_match('/^\(([^\n]+?)\)(.*)$/s', $code, $matches))
 			{
 				$code = $matches[2];
 
@@ -290,7 +290,7 @@ class WackoFormatter
 					{
 						$formatter	= substr($matches[1], 0, $sep);
 						$p			= ' '.substr($matches[1], $sep).' ';
-						$paramcount	= preg_match_all("/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/", $p, $matches, PREG_SET_ORDER);
+						$paramcount	= preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p, $matches, PREG_SET_ORDER);
 						$params		= array();
 						$c			= 0;
 
@@ -323,13 +323,13 @@ class WackoFormatter
 
 			$output .= $res;
 
-			return "<!--escaped-->".$output."<!--escaped-->";
+			return '<!--escaped-->'.$output.'<!--escaped-->';
 		}
 		// actions
-		else if (preg_match("/^\{\{(.*?)\}\}$/s", $thing, $matches))
+		else if (preg_match('/^\{\{(.*?)\}\}$/s', $thing, $matches))
 		{
 			// used in paragrafica, too
-			return "<!--escaped--><!--notypo--><!--action:begin-->".$matches[1]."<!--action:end--><!--/notypo--><!--escaped-->";
+			return '<!--escaped--><!--notypo--><!--action:begin-->'.$matches[1].'<!--action:end--><!--/notypo--><!--escaped-->';
 		}
 
 		// if we reach this point, it must have been an accident
@@ -346,7 +346,7 @@ class WackoFormatter
 		if ($thing{1} == '~') return '~~'.$this->wacko_middleprocess( array(0, substr($thing, 2)) );
 
 		// escaped text
-		if (preg_match("/^<!--escaped-->(.*)<!--escaped-->$/s", $thing, $matches))
+		if (preg_match('/^<!--escaped-->(.*)<!--escaped-->$/s', $thing, $matches))
 		{
 			return $matches[1];
 		}
@@ -381,12 +381,12 @@ class WackoFormatter
 			return '&gt;';
 		}
 		// escaped text
-		else if (preg_match("/^<!--escaped-->(.*)<!--escaped-->$/s", $thing, $matches))
+		else if (preg_match('/^<!--escaped-->(.*)<!--escaped-->$/s', $thing, $matches))
 		{
 			return $matches[1];
 		}
 		// escaped html
-		else if (preg_match("/^\<\#(.*)\#\>$/s", $thing, $matches))
+		else if (preg_match('/^\<\#(.*)\#\>$/s', $thing, $matches))
 		{
 			if ($this->object->config['disable_safehtml'])
 				return '<!--notypo-->'.$matches[1].'<!--/notypo-->';
@@ -419,14 +419,14 @@ class WackoFormatter
 			return '</table>';
 		}
 		//table head
-		else if (preg_match("/^\*\|(.*?)\|\*$/s", $thing, $matches) && $this->tableScope)
+		else if (preg_match('/^\*\|(.*?)\|\*$/s', $thing, $matches) && $this->tableScope)
 		{
 			$this->br			= 1;
 			$this->intable		= true;
 			$this->intablebr	= false;
 
 			$output		= '<tr class="userrow">';
-			$cells		= preg_split("/\|/", $matches[1]);
+			$cells		= preg_split('/\|/', $matches[1]);
 			$count		= count($cells);
 			$count--;
 
@@ -477,7 +477,7 @@ class WackoFormatter
 			return $output;
 		}
 		//table row and cells
-		else if (preg_match("/^\|\|(.*?)\|\|$/s", $thing, $matches) && $this->tableScope)
+		else if (preg_match('/^\|\|(.*?)\|\|$/s', $thing, $matches) && $this->tableScope)
 		{
 			$this->br			= 1;
 			$this->intable		= true;
@@ -537,46 +537,46 @@ class WackoFormatter
 			return $output;
 		}
 		// Deleted
-		else if (preg_match("/^<!--markup:1:begin-->((\S.*?\S)|(\S))<!--markup:1:end-->$/s", $thing, $matches))
+		else if (preg_match('/^<!--markup:1:begin-->((\S.*?\S)|(\S))<!--markup:1:end-->$/s', $thing, $matches))
 		{
 			$this->br = 0;
 			return '<del class="diff">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</del>';
 		}
 		// Inserted
-		else if (preg_match("/^<!--markup:2:begin-->((\S.*?\S)|(\S))<!--markup:2:end-->$/s", $thing, $matches))
+		else if (preg_match('/^<!--markup:2:begin-->((\S.*?\S)|(\S))<!--markup:2:end-->$/s', $thing, $matches))
 		{
 			$this->br = 0;
 			return '<ins class="diff">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</ins>';
 		}
 		// bold
-		else if (preg_match("/^\*\*(.*?)\*\*$/", $thing, $matches))
+		else if (preg_match('/^\*\*(.*?)\*\*$/', $thing, $matches))
 		{
 			return '<strong>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</strong>';
 		}
 		// italic
-		else if (preg_match("/^\/\/(.*?)\/\/$/", $thing, $matches))
+		else if (preg_match('/^\/\/(.*?)\/\/$/', $thing, $matches))
 		{
 			return '<em>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</em>';
 		}
 		// underline
-		else if (preg_match("/^__(.*?)__$/", $thing, $matches))
+		else if (preg_match('/^__(.*?)__$/', $thing, $matches))
 		{
 			return '<span class="underline">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</span>';
 		}
 		// monospace
-		else if (preg_match("/^\#\#(.*?)\#\#$/", $thing, $matches) ||
-				 preg_match("/^\¹\¹(.*?)\¹\¹$/", $thing, $matches))
+		else if (preg_match('/^\#\#(.*?)\#\#$/', $thing, $matches) ||
+				 preg_match('/^\¹\¹(.*?)\¹\¹$/', $thing, $matches))
 		{
 			return '<tt>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</tt>';
 		}
 		// small
-		else if (preg_match("/^\+\+(.*?)\+\+$/", $thing, $matches))
+		else if (preg_match('/^\+\+(.*?)\+\+$/', $thing, $matches))
 		{
 			return '<small>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</small>';
 		}
 		// cite
-		else if (preg_match("/^\'\'(.*?)\'\'$/s", $thing, $matches) ||
-				 preg_match("/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/s", $thing, $matches))
+		else if (preg_match('/^\'\'(.*?)\'\'$/s', $thing, $matches) ||
+				 preg_match('/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/s', $thing, $matches))
 		{
 			$this->br = 1;
 			if ($matches[3] && $color = ($this->object->config['allow_x11colors'] == 1 ? $this->x11_colors[$matches[3]] : $this->colors[$matches[3]]))
@@ -586,7 +586,7 @@ class WackoFormatter
 			return '<span class="cite">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</span>';
 		}
 		// mark
-		else if (preg_match("/^\?\?((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\?\?$/s", $thing, $matches))
+		else if (preg_match('/^\?\?((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\?\?$/s', $thing, $matches))
 		{
 			$this->br = 1;
 			if ($matches[3] && $color = ($this->object->config['allow_x11colors'] == 1 ? $this->x11_colors[$matches[3]] : $this->colors[$matches[3]]))
@@ -622,7 +622,6 @@ class WackoFormatter
 		// lan path
 		else if (preg_match("/^\\\\\\\\([".$wacko->language['ALPHANUM_P']."\\\!\.\-\_]+)$/", $thing, $matches))
 		{
-			//[[:alnum:]\\\!\.\_\-]+\\
 			return "<a href=\"file://///".str_replace("\\", "/", $matches[1])."\">\\\\".$matches[1]."</a>";
 		}
 		// citated
@@ -631,15 +630,15 @@ class WackoFormatter
 			return "<div class=\"email".strlen($matches[1])." email-".(strlen($matches[1]) % 2 ? "odd" : "even")."\">".htmlspecialchars($matches[1]).preg_replace_callback($this->LONGREGEXP, $callback, $matches[2])."</div>";
 		}
 		// blockquote
-		else if (preg_match("/^<\[(.*)\]>$/s", $thing, $matches))
+		else if (preg_match('/^<\[(.*)\]>$/s', $thing, $matches))
 		{
 			// trivial substitution (is there a security hole?)
-			$matches[0] = str_replace('<[', "<!--escaped--><blockquote><!--escaped-->", $matches[0]);
-			$matches[0] = str_replace(']>', "<!--escaped--></blockquote><!--escaped-->", $matches[0]);
-			//$this->br = 0;
+			$matches[0] = str_replace('<[', '<!--escaped--><blockquote><!--escaped-->', $matches[0]);
+			$matches[0] = str_replace(']>', '<!--escaped--></blockquote><!--escaped-->', $matches[0]);
+
 			$result = preg_replace_callback($this->LONGREGEXP, $callback, $matches[0]);
-			$result = preg_replace( "/^(<br \/>)+/i", "", $result );
-			$result = preg_replace( "/(<br \/>)+$/i", "", $result );
+			$result = preg_replace('/^(<br \/>)+/i', '', $result );
+			$result = preg_replace('/(<br \/>)+$/i', '', $result );
 
 			// These regexp needed for workaround MSIE bug (</ul></blockquote>)
 			if (preg_match( "/<\/ul>[\s\r\t\n]*$/i", $result)) $result.= $this->z_gif;
@@ -647,12 +646,12 @@ class WackoFormatter
 			return '<blockquote>'.$result.'</blockquote>';
 		}
 		// super
-		else if (preg_match("/^\^\^(.*)\^\^$/", $thing, $matches))
+		else if (preg_match('/^\^\^(.*)\^\^$/', $thing, $matches))
 		{
 			return '<sup>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</sup>';
 		}
 		// sub
-		else if (preg_match("/^vv(.*)vv$/", $thing, $matches))
+		else if (preg_match('/^vv(.*)vv$/', $thing, $matches))
 		{
 			return '<sub>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</sub>';
 		}
@@ -700,42 +699,42 @@ class WackoFormatter
 			return $result."<a name=\"h".$this->page_id."-".$wacko->headerCount."\"></a><h1>".preg_replace_callback($this->LONGREGEXP, $callback, $matches[1])."</h1>";
 		}
 		// separators
-		else if (preg_match("/^[-]{4,}$/", $thing))
+		else if (preg_match('/^[-]{4,}$/', $thing))
 		{
 			$this->br = 0;
 			return "<hr />";
 		}
 		// forced line breaks
-		else if (preg_match("/^---\n?\s*$/", $thing, $matches))
+		else if (preg_match('/^---\n?\s*$/', $thing, $matches))
 		{
 			return "<br />\n";
 		}
 		// strike
-		else if (preg_match("/^--((\S.*?\S)|(\S))--$/s", $thing, $matches))    //NB: wrong
+		else if (preg_match('/^--((\S.*?\S)|(\S))--$/s', $thing, $matches))    //NB: wrong
 		{
 			return '<del>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</del>';
 		}
 		// definitions
-		else if (preg_match("/^\(\?(.+?)(==|\|\|)(.*)\?\)$/", $thing, $matches) ||
-				 preg_match("/^\(\?(\S+)(\s+(.+))?\?\)$/", $thing, $matches))
+		else if (preg_match('/^\(\?(.+?)(==|\|\|)(.*)\?\)$/', $thing, $matches) ||
+				 preg_match('/^\(\?(\S+)(\s+(.+))?\?\)$/', $thing, $matches))
 		{
 			list (, $def, ,$text) = $matches;
 			if ($def)
 			{
-				if ($text == "")
+				if ($text == '')
 					$text = $def;
 
-				$text = preg_replace("/<!--markup:1:[\w]+-->|__|\[\[|\(\(/", "", $text);
+				$text = preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/', '', $text);
 
 				return "<dfn title=\"".htmlspecialchars($text)."\">".$def."</dfn>";
 			}
 			return "";
 		}
 		// forced links & footnotes
-		else if (preg_match("/^\[\[(.+)(==|\|)(.*)\]\]$/", $thing, $matches) ||
-				 preg_match("/^\(\((.+)(==|\|)(.*)\)\)$/", $thing, $matches) ||
-				 preg_match("/^\[\[(\S+)(\s+(.+))?\]\]$/", $thing, $matches) ||
-				 preg_match("/^\(\((\S+)(\s+(.+))?\)\)$/", $thing, $matches))
+		else if (preg_match('/^\[\[(.+)(==|\|)(.*)\]\]$/', $thing, $matches) ||
+				 preg_match('/^\(\((.+)(==|\|)(.*)\)\)$/', $thing, $matches) ||
+				 preg_match('/^\[\[(\S+)(\s+(.+))?\]\]$/', $thing, $matches) ||
+				 preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/', $thing, $matches))
 		{
 			$url	= isset($matches[1]) ? $matches[1] : '';
 			$text	= isset($matches[3]) ? $matches[3] : '';
@@ -746,14 +745,14 @@ class WackoFormatter
 				{
 					$sup = 1;
 
-					if (preg_match("/^\*+$/", $url))
+					if (preg_match('/^\*+$/', $url))
 					{
-						$aname	= "ftn".strlen($url);
+						$aname	= 'ftn'.strlen($url);
 						if (!$text) $text = $url;
 					}
-					else if (preg_match("/^\*\d+$/", $url))
+					else if (preg_match('/^\*\d+$/', $url))
 					{
-						$aname	= "ftnd".substr($url, 1);
+						$aname	= 'ftnd'.substr($url, 1);
 					}
 					else
 					{
@@ -765,18 +764,18 @@ class WackoFormatter
 
 					return ($sup ? '<sup>' : '')."<a href=\"#o".$aname."\" name=\"".$aname."\">".$text."</a>".($sup ? '</sup>' : '');
 				}
-				else if ($url{0} == "#")
+				else if ($url{0} == '#')
 				{
 					$anchor	= substr($url, 1);
 					$sup	= 1;
 
-					if (preg_match("/^\*+$/", $anchor))
+					if (preg_match('/^\*+$/', $anchor))
 					{
-						$ahref	= "ftn".strlen($anchor);
+						$ahref	= 'ftn'.strlen($anchor);
 					}
-					else if (preg_match("/^\d+$/", $anchor))
+					else if (preg_match('/^\d+$/', $anchor))
 					{
-						$ahref	= "ftnd".$anchor;
+						$ahref	= 'ftnd'.$anchor;
 					}
 					else
 					{
@@ -790,27 +789,27 @@ class WackoFormatter
 				}
 				else
 				{
-					if ($url != ($url = (preg_replace("/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/", "", $url))))
+					if ($url != ($url = (preg_replace('/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/', '', $url))))
 					{
-						$result	= "</span>";
+						$result	= '</span>';
 					}
 
-					if ($url{0} == "(")
+					if ($url{0} == '(')
 					{
 						$url	= substr($url, 1);
-						$result	.= "(";
+						$result	.= '(';
 					}
 
-					if ($url{0} == "[")
+					if ($url{0} == '[')
 					{
 						$url	= substr($url, 1);
-						$result	.= "[";
+						$result	.= '[';
 					}
 
 					if (!$text) $text = $url;
 
-					$url	= str_replace(" ", "", $url);
-					$text	= preg_replace("/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/", "", $text);
+					$url	= str_replace(' ', '', $url);
+					$text	= preg_replace('/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/', '', $text);
 
 					return $result.$wacko->pre_link($url, $text);
 				}
@@ -825,7 +824,7 @@ class WackoFormatter
 			$img	= isset($matches[3]) ? $matches[3] : '';
 			if ($url && $img)
 			{
-				if ($url != ($url = (preg_replace("/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(/", '', $url))))
+				if ($url != ($url = (preg_replace('/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(/', '', $url))))
 					$result	= '</span>';
 				if ($url{0} == '(')
 				{
@@ -837,7 +836,7 @@ class WackoFormatter
 					$url=substr($url, 1);
 					$result.= '[';
 				}
-				$img		= preg_replace("/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(|/", '', $img);
+				$img		= preg_replace('/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(|/', '', $img);
 				return $result.$wacko->pre_link($url, $img, 1, 1);
 			}
 			else return '';
@@ -965,7 +964,7 @@ class WackoFormatter
 		}
 		// npj links
 		else if ((!$wacko->_formatter_noautolinks) &&
-				(preg_match("/^(~?)(".$wacko->language['ALPHANUM']."+\@".$wacko->language['ALPHA']."*(\:".$wacko->language['ALPHANUM']."*)?|".$wacko->language['ALPHANUM']."+\:\:".$wacko->language['ALPHANUM']."+)$/s", $thing, $matches)))
+				(preg_match('/^(~?)('.$wacko->language['ALPHANUM']."+\@".$wacko->language['ALPHA']."*(\:".$wacko->language['ALPHANUM']."*)?|".$wacko->language['ALPHANUM']."+\:\:".$wacko->language['ALPHANUM']."+)$/s", $thing, $matches)))
 		{
 			if ($matches[1] == "~")
 				return $matches[2];
@@ -973,15 +972,15 @@ class WackoFormatter
 		}
 		// wacko links!
 		else if ((!$wacko->_formatter_noautolinks) &&
-				(preg_match("/^(((\.\.)|!)?\/?|~)?(".$wacko->language['UPPER'].$wacko->language['LOWER']."+".$wacko->language['UPPERNUM'].$wacko->language['ALPHANUM']."*)$/s", $thing, $matches)))
+				(preg_match('/^(((\.\.)|!)?\/?|~)?('.$wacko->language['UPPER'].$wacko->language['LOWER']."+".$wacko->language['UPPERNUM'].$wacko->language['ALPHANUM']."*)$/s", $thing, $matches)))
 		{
-			if ($matches[1] == "~")
+			if ($matches[1] == '~')
 				return $matches[4];
 			return $wacko->pre_link($thing);
 		}
 
-		if (($thing[0] == "~") && ($thing[1] != "~")) $thing=ltrim($thing, "~");
-		if (($thing[0] == "~") && ($thing[1] == "~")) return "~".preg_replace_callback($this->LONGREGEXP, $callback, substr($thing, 2));
+		if (($thing[0] == '~') && ($thing[1] != '~')) $thing=ltrim($thing, '~');
+		if (($thing[0] == '~') && ($thing[1] == '~')) return '~'.preg_replace_callback($this->LONGREGEXP, $callback, substr($thing, 2));
 
 		// if we reach this point, it must have been an accident.
 		return htmlspecialchars($thing);
