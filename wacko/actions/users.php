@@ -34,7 +34,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 
 		// prepare and send personal message
 		if (isset($_POST['send_pm']) && $_POST['mail_body'] == true && $this->get_user() &&
-		$user['allow_intercom'] == '1' && $user['email'] && !$user['email_confirm'])
+		$user['allow_intercom'] == 1 && $user['email'] && !$user['email_confirm'])
 		{
 			// check for errors
 			// message is too long
@@ -114,7 +114,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 			</tr>
 			<tr>
 				<td style="width:100px; white-space:nowrap; padding-right:20px;" valign="top"><strong><?php echo $this->get_translation('UsersLastSession'); ?></strong></td>
-				<td><?php echo ( $user['hide_lastsession'] == '1'
+				<td><?php echo ( $user['hide_lastsession'] == 1
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
 					: ( !$user['session_time'] || $user['session_time'] == SQL_NULLDATE
 						? '<em>'.$this->get_translation('UsersSessionNA').'</em>'
@@ -160,7 +160,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 		<table cellspacing="3" class="formation">
 <?php
 			// user must allow incoming messages, and needs confirmed email address set
-			if ($user['allow_intercom'] == '1' && $user['email'] && !$user['email_confirm'])
+			if ($user['allow_intercom'] == 1 && $user['email'] && !$user['email_confirm'])
 			{
 ?>
 			<tr>
@@ -400,7 +400,7 @@ else
 					'<td align="center">'.$user['total_comments'].'</td>'.
 					'<td align="center">'.$user['total_revisions'].'</td>'.
 					'<td align="center">'.$this->get_time_string_formatted($user['signup_time']).'</td>'.
-					'<td align="center">'.( $user['hide_lastsession'] == '1'
+					'<td align="center">'.( $user['hide_lastsession'] == 1
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
 					: ( !$user['session_time'] || $user['session_time'] == SQL_NULLDATE
 						? '<em>'.$this->get_translation('UsersSessionNA').'</em>'

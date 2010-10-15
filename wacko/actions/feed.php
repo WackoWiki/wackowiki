@@ -126,7 +126,7 @@ if (!$nomark)
 		// Make nice if $nomark == 1
 		if ($nomark)
 		{
-			if ($title != "" && $counturlset == 1)
+			if ($title != '' && $counturlset == 1)
 			{
 				echo "<h3 class=\"feed_element_title\">".$this->link($feed->get_permalink(), '', $title, 1, 1)."</h3>";
 			}

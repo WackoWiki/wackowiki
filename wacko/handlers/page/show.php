@@ -109,7 +109,7 @@ if ($this->has_access('read'))
 			}
 
 			// store to DB
-			if ($this->page['latest'] != '0')
+			if ($this->page['latest'] != 0)
 				$this->query(
 					"UPDATE ".$this->config['table_prefix']."page SET ".
 						"body_r = '".quote($this->dblink, $this->page['body_r'])."', ".

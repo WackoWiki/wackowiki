@@ -26,7 +26,7 @@ else
 if ($registered
 &&
 (
-($this->config['upload'] === true) || ($this->config['upload'] == '1') ||
+($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
 ($this->check_acl($user, $this->config['upload']))
 )
 &&

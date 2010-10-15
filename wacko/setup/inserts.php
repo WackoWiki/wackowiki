@@ -6,7 +6,7 @@ $config_global = $config;
 $dblink_global = $dblink;
 $lang_global = $lang;
 
-function insert_page($tag, $title = false, $body, $lng, $rights = "Admins", $critical = false)
+function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $critical = false)
 {
 	global $config_global, $dblink_global, $lang_global;
 
@@ -161,7 +161,7 @@ function set_language($lng)
 
 	if ( !isset($languages[$lng]) )
 	{
-		$resourcefile = "lang/lang.".$lng.".php";
+		$resourcefile = 'lang/lang.'.$lng.'.php';
 		if (@file_exists($resourcefile)) include($resourcefile);
 		$languages[$lng] = $wackoLanguage;
 	}

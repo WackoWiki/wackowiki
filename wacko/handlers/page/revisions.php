@@ -42,7 +42,7 @@ if ($this->has_access('read'))
 		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href('revisions.xml')."\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RevisionXMLTip')."\" alt=\"XML\" /></a>";
 		if ($this->config['minor_edit'])
 		{
-			$output .= "<br />".((isset($_GET['minor_edit']) && !$_GET['minor_edit'] == '1') ? "<a href=\"".$this->href('revisions', '', 'minor_edit=1')."\">".$this->get_translation('MinorEditHide')."</a>" : "<a href=\"".$this->href('revisions', '', 'minor_edit=0')."\">".$this->get_translation('MinorEditShow')."</a>");
+			$output .= "<br />".((isset($_GET['minor_edit']) && !$_GET['minor_edit'] == 1) ? "<a href=\"".$this->href('revisions', '', 'minor_edit=1')."\">".$this->get_translation('MinorEditHide')."</a>" : "<a href=\"".$this->href('revisions', '', 'minor_edit=0')."\">".$this->get_translation('MinorEditShow')."</a>");
 		}
 		$output .= "</p>\n<ul class=\"revisions\">\n";
 

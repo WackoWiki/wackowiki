@@ -54,7 +54,7 @@ if ($user = $this->get_user())
 		<?php
 		foreach ($referrer_sites as $site => $site_count)
 		{ ?>
-		<span class="site_count"><?php echo $site_count; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;<?php print((($site != "unknown") ? "<a href=\"http://$site\">$site</a>" : $site)); ?><br />
+		<span class="site_count"><?php echo $site_count; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;<?php print((($site != 'unknown') ? "<a href=\"http://$site\">$site</a>" : $site)); ?><br />
 		<?php
 		}
 		?>

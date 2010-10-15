@@ -966,7 +966,7 @@ class WackoFormatter
 		else if ((!$wacko->_formatter_noautolinks) &&
 				(preg_match('/^(~?)('.$wacko->language['ALPHANUM']."+\@".$wacko->language['ALPHA']."*(\:".$wacko->language['ALPHANUM']."*)?|".$wacko->language['ALPHANUM']."+\:\:".$wacko->language['ALPHANUM']."+)$/s", $thing, $matches)))
 		{
-			if ($matches[1] == "~")
+			if ($matches[1] == '~')
 				return $matches[2];
 			return $wacko->pre_link($thing);
 		}

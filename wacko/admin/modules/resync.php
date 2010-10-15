@@ -130,7 +130,7 @@ function admin_resync(&$engine, &$module)
 						$page['body_r'] = $engine->format($engine->format(( $body_t ? $body_t : $page['body'] ), 'bbcode'), 'wacko');
 
 						// build toc
-						if ($engine->config['paragrafica'] && $page['comment_on_id'] == '0' && $page['body_toc'] == '')
+						if ($engine->config['paragrafica'] && $page['comment_on_id'] == 0 && $page['body_toc'] == '')
 						{
 							$page['body_r']		= $engine->format($page['body_r'], 'paragrafica');
 							$page['body_toc']	= $engine->body_toc;

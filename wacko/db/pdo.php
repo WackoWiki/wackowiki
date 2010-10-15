@@ -60,19 +60,19 @@ function connect($host, $user, $password, $db, $collation = false, $driver, $por
 	switch($driver)
 	{
 		case "firebird":
-			$dsn = $driver.":dbname=".$host.":".$db.($port != "" ? ";port=".$port : "");
+			$dsn = $driver.":dbname=".$host.":".$db.($port != '' ? ";port=".$port : '');
 			break;
 		case "ibm":
-			$dsn = $driver.":DATABASE=".$host.";HOSTNAME=".$db.($port != "" ? ";PORT=".$port : "");
+			$dsn = $driver.":DATABASE=".$host.";HOSTNAME=".$db.($port != '' ? ";PORT=".$port : '');
 			break;
 		case "informix":
-			$dsn = $driver.":database=".$host.";host=".$db.($port != "" ? ";service=".$port : "");
+			$dsn = $driver.":database=".$host.";host=".$db.($port != '' ? ";service=".$port : '');
 			break;
 		case "oci":
-			$dsn = $driver.":dbname=//".$host.($port != "" ? ":".$port : "")."/".$db;
+			$dsn = $driver.":dbname=//".$host.($port != '' ? ":".$port : '')."/".$db;
 			break;
 		default:
-			$dsn = $driver.":dbname=".$db.";host=".$host.($port != "" ? ";port=".$port : "");
+			$dsn = $driver.":dbname=".$db.";host=".$host.($port != '' ? ";port=".$port : '');
 			break;
 	}
 

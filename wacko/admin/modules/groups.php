@@ -16,10 +16,10 @@ $module['groups'] = array(
 
 function admin_groups(&$engine, &$module)
 {
-	$where = "";
-	$order = "";
-	$group = "";
-	$orderuser = "";
+	$where = '';
+	$order = '';
+	$group = '';
+	$orderuser = '';
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />

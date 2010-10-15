@@ -36,7 +36,7 @@ function _unescape_callback($p)
 		}
 	} else
 	{
-		if ($p[2] === "26" && $SCRIPT_DECODE_MODE == 'entities')
+		if ($p[2] === '26' && $SCRIPT_DECODE_MODE == 'entities')
 		{
 			$c = "&amp;";
 		} else

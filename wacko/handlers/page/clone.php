@@ -27,7 +27,7 @@ $edit_note = str_replace('%1', $this->tag, $this->get_translation('ClonedFrom'))
 
 if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id']))
 {
-	if (isset($_POST['newname']) && $_POST['clone'] == '1')
+	if (isset($_POST['newname']) && $_POST['clone'] == 1)
 	{
 		// clone or massclone
 		$need_massclone = 0;

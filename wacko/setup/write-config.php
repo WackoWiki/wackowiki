@@ -21,8 +21,8 @@ function array_to_str ($arr, $name="")
 }
 
 // config values
-if ( ( $config['database_driver'] == "mysqli_legacy" ) && empty( $config['database_port'] ) )
-$config['database_port'] = $config['database_port'] = "3306";
+if ( ( $config['database_driver'] == 'mysqli_legacy' ) && empty( $config['database_port'] ) )
+$config['database_port'] = $config['database_port'] = '3306';
 
 if(!array_key_exists('wacko_version', $config))
 {

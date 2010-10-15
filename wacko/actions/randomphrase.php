@@ -18,7 +18,7 @@ else
 	{
 		$strings = preg_replace('/\{\{[^\}]+\}\}/', '', $phrase_page['body']);
 		$strings = $this->format($strings);
-		$splitexpr = "|<br />|";
+		$splitexpr = '|<br />|';
 		if ($useemptystring == 1) $splitexpr = "|<br />[\n\r ]*<br />|";
 		$lines = preg_split($splitexpr,$strings);
 		$lines = array_values(array_filter( $lines, "trim"));
