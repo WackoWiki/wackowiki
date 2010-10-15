@@ -43,7 +43,7 @@ if (!empty($this->config['news_cluster']))
 	echo $this->form_open();
 ?>
 	<input type="hidden" name="action" value="newsadd" />
-	<label for="newstitle"><?php echo $this->get_translation('NewsName''); ?>:</label>
+	<label for="newstitle"><?php echo $this->get_translation('NewsName'); ?>:</label>
 	<input id="newstitle" name="title" size="50" maxlength="100" value="" />
 	<input id="submit" type="submit" value="<?php echo $this->get_translation('NewsSubmit'); ?>" />
 
