@@ -363,7 +363,7 @@ class Init
 		if ($this->config == false) die("Error loading WackoWiki DBAL: config data must be initialized.");
 
 		// Load the correct database connector
-		if (!isset( $this->config['database_driver'] )) $this->settings("database_driver", "mysql_legacy");
+		if (!isset( $this->config['database_driver'] )) $this->settings('database_driver', 'mysql_legacy');
 
 		switch($this->config['database_driver'])
 		{
@@ -542,7 +542,7 @@ class Init
 	// DEBUG INFO
 	function debug()
 	{
-		if ($this->config['debug'] >= 1 && strpos($this->method, '.xml') === false && $this->method != "print" && $this->method != "msword")
+		if ($this->config['debug'] >= 1 && strpos($this->method, '.xml') === false && $this->method != 'print' && $this->method != 'msword')
 		{
 			if (($this->config['debug_admin_only'] == true && $this->engine->is_admin() === true) || $this->config['debug_admin_only'] == false)
 			{

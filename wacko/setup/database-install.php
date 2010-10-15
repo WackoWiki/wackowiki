@@ -653,7 +653,7 @@ switch($config['database_driver'])
 								test(str_replace('%1', 'poll', $lang['CreatingTable']), @mysqli_query($dblink, $table_poll), str_replace('%1', 'poll', $lang['ErrorCreatingTable']));
 								test(str_replace('%1', 'rating', $lang['CreatingTable']), @mysqli_query($dblink, $table_rating), str_replace('%1', 'rating', $lang['ErrorCreatingTable']));
 								test(str_replace('%1', 'referrer', $lang['CreatingTable']), @mysqli_query($dblink, $table_referrer), str_replace('%1', 'referrer', $lang['ErrorCreatingTable']));
-								test(str_replace('%1', "revision" ,$lang['CreatingTable']), @mysqli_query($dblink, $table_revision), str_replace('%1', 'revision', $lang['ErrorCreatingTable']));
+								test(str_replace('%1', 'revision', $lang['CreatingTable']), @mysqli_query($dblink, $table_revision), str_replace('%1', 'revision', $lang['ErrorCreatingTable']));
 								test(str_replace('%1', 'upload', $lang['CreatingTable']), @mysqli_query($dblink, $table_upload), str_replace('%1', 'upload', $lang['ErrorCreatingTable']));
 								test(str_replace('%1', 'user', $lang['CreatingTable']), @mysqli_query($dblink, $table_user), str_replace('%1', 'user', $lang['ErrorCreatingTable']));
 								test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $table_user_setting), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
