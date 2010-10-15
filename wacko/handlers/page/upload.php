@@ -176,7 +176,7 @@ if ($registered
 
 				// 1.5. +write @page_id@ to name
 				if ($_POST['to'] != 'global')
-					$name = "@".$this->page['page_id'].'@'.$name;
+					$name = '@'.$this->page['page_id'].'@'.$name;
 				else
 					$is_global = 1;
 
@@ -185,14 +185,14 @@ if ($registered
 					$dir = $this->config['upload_path'].'/';
 					$banned = explode('|', $this->config['upload_banned_exts']);
 					if (in_array(strtolower($ext), $banned))
-						$ext = $ext.".txt";
+						$ext = $ext.'.txt';
 				}
 				else
 				$dir = $this->config['upload_path_per_page'].'/';
 
 				$_name = $name;
 				$count = 1;
-				while (file_exists($dir.$name.".".$ext))
+				while (file_exists($dir.$name.'.'.$ext))
 				{
 					if ($name === $_name)
 						$name = $_name.$count;
@@ -200,7 +200,7 @@ if ($registered
 						$name = $_name.(++$count);
 				}
 
-				$result_name	= $name.".".$ext;
+				$result_name	= $name.'.'.$ext;
 				$file_size		= $_FILES['file']['size'];
 
 				// 1.6. check filesize, if asked
@@ -243,7 +243,7 @@ if ($registered
 						$uploaded_dt	= date('Y-m-d H:i:s');
 
 						$description = substr(quote($this->dblink, $_POST['description']),0,250);
-						$description = rtrim( $description, "\\" );
+						$description = rtrim( $description, '\\' );
 
 						// Make HTML in the description redundant ;¬)
 						$description = $this->format($description, 'preformat');

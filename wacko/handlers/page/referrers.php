@@ -44,11 +44,11 @@ if ($user = $this->get_user())
 
 		$title = str_replace('%1', $this->compose_link_to_page($this->tag),
 		str_replace('%2',
-		($this->config['referrers_purge_time'] ?
-		($this->config['referrers_purge_time'] == 1 ?
-		$this->get_translation('Last24Hours') :
-		str_replace('%1', $this->config['referrers_purge_time'],
-		$this->get_translation('LastDays'))): ""),
+		($this->config['referrers_purge_time']
+		? ($this->config['referrers_purge_time'] == 1
+			? $this->get_translation('Last24Hours')
+			: str_replace('%1', $this->config['referrers_purge_time'], $this->get_translation('LastDays')))
+		: ''),
 		str_replace('%3', $this->href('referrers_sites'), $this->get_translation('ExternalPages'))));
 
 		$referrers = $this->load_referrers($this->page['page_id']);
@@ -76,11 +76,11 @@ if ($user = $this->get_user())
 
 	if ($global)
 	{
-		print("<br />[".str_replace('%1',$this->href('referrers_sites'),str_replace('%2',$this->tag,$this->get_translation('ViewReferringSites')))." | ".str_replace('%1', $this->href('referrers'),str_replace('%2', $this->tag, $this->get_translation('ViewReferrersFor')))."]");
+		print("<br />[".str_replace('%1', $this->href('referrers_sites'), str_replace('%2', $this->tag, $this->get_translation('ViewReferringSites')))." | ".str_replace('%1', $this->href('referrers'),str_replace('%2', $this->tag, $this->get_translation('ViewReferrersFor')))."]");
 	}
 	else
 	{
-		print("<br />[".str_replace('%1',$this->href('referrers_sites', '', 'global=1'),$this->get_translation('ViewReferringSitesGlobal')) ." | ".str_replace('%1', $this->href('referrers', '', 'global=1'), $this->get_translation('ViewReferrersForGlobal'))."]");
+		print("<br />[".str_replace('%1', $this->href('referrers_sites', '', 'global=1'),$this->get_translation('ViewReferringSitesGlobal')) ." | ".str_replace('%1', $this->href('referrers', '', 'global=1'), $this->get_translation('ViewReferrersForGlobal'))."]");
 	}
 }
 else

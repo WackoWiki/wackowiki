@@ -62,7 +62,7 @@ if ($this->method == 'edit')
 $doubleclick = '';
 if ($user = $this->get_user())
 {
-	if ($user['doubleclick_edit'] == "1")
+	if ($user['doubleclick_edit'] == 1)
 	{
 		$doubleclick = true;
 	}
@@ -157,7 +157,7 @@ else
 	{
 		global $engine;
 		if ($title == '') return; // no tab;
-		if ($image == 1) $image = "spacer.gif";
+		if ($image == 1) $image = 'spacer.gif';
 
 		$method = substr($link, strrpos($link, '/') + 1);
 

@@ -16,13 +16,13 @@ class typografica
 {
 
 	var $wacko;
-	var $skipTags = true;
-	var $pPrefix = "<p class=typo>";
-	var $pPostfix = "</p>";
-	var $Asoft = true;
-	var $Indent1 = "images/z.gif width=25 height=1 border=0 alt=\'\' align=top />"; // <->
-	var $Indent2 = "images/z.gif width=50 height=1 border=0 alt=\'\' align=top />"; // <-->
-	var $FixedSize = 80; // maximum width
+	var $skip_tags = true;
+	var $p_prefix = "<p class=typo>";
+	var $p_postfix = "</p>";
+	var $asoft = true;
+	var $indent1 = "images/z.gif width=25 height=1 border=0 alt=\'\' align=top />"; // <->
+	var $indent2 = "images/z.gif width=50 height=1 border=0 alt=\'\' align=top />"; // <-->
+	var $fixed_size = 80; // maximum width
 	var $ignore = "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex to be ignored
 	var $de_nobr = true;
 
@@ -55,31 +55,31 @@ class typografica
 							)
 						);
 
-	var $glueleft = array( "ğèñ\.", "òàáë\.", "ñì\.", "èì\.", "óë\.", "ïåğ\.", "êâ\.", "îôèñ", "îô\.", "ã\." ); // contains some Russian abberviations, also see below (by Freeman)
+	var $glueleft = array( "ğèñ\.", "òàáë\.", "ñì\.", "èì\.", "óë\.", "ïåğ\.", "êâ\.", "îôèñ", "îô\.", "ã\." ); // contains some Russian abberviations, also see below
 	var $glueright = array( "ğóá\.", "êîï\.", "ó\.å\.", "ìèí\." );
 
-	var $settings = array ( "inches" => 1, // convert inches into &quot;
-							"apostroph" => 1, // apostroph convertor
-							"laquo" => 0,  // angle quotes
-							"farlaquo" => 0,  // angle quotes for FAR (greater&less characters)
-							"quotes" => 0, // English quotes
-							"dash" => 1,   // (150) - middle dash
-							"emdash" => 1, // (151) - long dash by two minus
-							"(c)" => 1, "(r)" => 1, "(tm)" => 1, "(p)" => 1, "+-" => 1, // special characters, as you know
-							"degrees" => 1, // degree character
-							"[--]" => 1,    // indents like $Indent*
-							"dashglue" => 1, "wordglue" => 1, // dash and word glues
-							"spacing" => 1, // comma and spacing, exchange
-							"phones" => 0,  // phone number processing
-							"fixed" => 0,   // fit to fixed width
-							"html" => 0     // HTML tags ban
+	var $settings = array ( 'inches' => 1, // convert inches into &quot;
+							'apostroph' => 1, // apostroph convertor
+							'laquo' => 0,  // angle quotes
+							'farlaquo' => 0,  // angle quotes for FAR (greater&less characters)
+							'quotes' => 0, // English quotes
+							'dash' => 1,   // (150) - middle dash
+							'emdash' => 1, // (151) - long dash by two minus
+							'(c)' => 1, '(r)' => 1, '(tm)' => 1, '(p)' => 1, '+-' => 1, // special characters, as you know
+							'degrees' => 1, // degree character
+							'[--]' => 1,    // indents like $Indent*
+							'dashglue' => 1, 'wordglue' => 1, // dash and word glues
+							'spacing' => 1, // comma and spacing, exchange
+							'phones' => 0,  // phone number processing
+							'fixed' => 0,   // fit to fixed width
+							'html' => 0     // HTML tags ban
 	);
 
 	function typografica ( &$wacko )
 	{
 		$this->wacko = &$wacko;
-		$this->Indent1 = "<img src=".$wacko->config['base_url'].$this->Indent1;
-		$this->Indent2 = "<img src=".$wacko->config['base_url'].$this->Indent2;
+		$this->indent1 = "<img src=".$wacko->config['base_url'].$this->indent1;
+		$this->indent2 = "<img src=".$wacko->config['base_url'].$this->indent2;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,7 +98,7 @@ class typografica
 		}
 
 		// -1. HTML tags ban
-		if ($this->settings["html"])
+		if ($this->settings['html'])
 			$data = str_replace( "&", "&amp;", $data );
 		// 0. Stripping tags
 		// actulally, tag similarity is a problem.
@@ -114,7 +114,7 @@ class typografica
 		//  will change all tags with special character, simultaneously store them into an array.
 		//  and then beleive, there are no special characters in the wild world (unexplored wilderness?).
 		$tags = array();
-		if ($this->skipTags)
+		if ($this->skip_tags)
 		{
 			$re =  "/<\/?[a-z0-9]+(". // tag name
 									"\s+(". // repeatable statement: if only one delimiter and little body
@@ -128,14 +128,14 @@ class typografica
 
 			for ($i = 0; $i < $total; $i++)
 			{
-				if ($this->settings["html"])
+				if ($this->settings['html'])
 					$matches[0][$i] = "&lt;"+substr($matches[0][$i],1);
 				$tags[] = $matches[0][$i];
 			}
 		}
 
 		// 1. Commas and spaces
-		if ($this->settings["spacing"])
+		if ($this->settings['spacing'])
 		{
 			$data = preg_replace( "/(\s*)([,]*)/i", "\\2\\1", $data );
 			$data = preg_replace( "/(\s*)([\.?!]*)(\s*[¨À-ßA-Z])/", "\\2\\1\\3", $data );
@@ -149,7 +149,7 @@ class typografica
 		$data = $this->replace_specials( $data );
 
 		// 4. Short words and &nbsp;
-		if ($this->settings["wordglue"])
+		if ($this->settings['wordglue'])
 		{
 
 			$data = " ".$data." ";
@@ -167,7 +167,7 @@ class typografica
 		}
 
 		// 5. Sticking flippers together. Psaw! Concatenation of hyphens
-		if ($this->settings["dashglue"])
+		if ($this->settings['dashglue'])
 		{
 			$data = preg_replace( "/([a-zà-ÿÀ-ß0-9]+(\-[a-zà-ÿÀ-ß0-9]+)+)/i", "<nobr>\\1</nobr>", $data );
 		}
@@ -180,9 +180,9 @@ class typografica
 		// --- not ported to wacko ---
 
 		// INFINITY. Inserting tags back.
-		if ($this->skipTags)
+		if ($this->skip_tags)
 		{
-			$data .= " ";
+			$data .= ' ';
 			$a = explode( "{:typo:markup:1:}", $data );
 			if ($a)
 			{
@@ -197,7 +197,7 @@ class typografica
 
 		// INFINITY-2. inserting a (next?) ignored regexp
 		{
-			$data .= " ";
+			$data .= ' ';
 			$a = explode( "{:typo:markup:2:}", $data );
 			if ($a)
 			{
@@ -226,15 +226,15 @@ class typografica
 	{
 		//print "(($data))";
 		// 0. inches with digits
-		if ($this->settings["inches"])
+		if ($this->settings['inches'])
 			$data = preg_replace( "/(?<=\s)(([0-9]{1,2}([\.,][0-9]{1,2})?))\"/i", "\\1&quot;", $data );
 
 		// 0a. apostroph
-		if ($this->settings["apostroph"])
+		if ($this->settings['apostroph'])
 			$data = preg_replace( "/([\s\"][~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+)'([~ºª³²¿¯àÀåÅèÈîÎóÓşŞÿß][~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+[\s\.,:;\)<=\"])/i", "\\1’\\2", $data );
 
 		// 1. English quotes
-		if ($this->settings["quotes"])
+		if ($this->settings['quotes'])
 		{
 			$data = preg_replace("/\"\"/i", "&quot;&quot;", $data);
 			$data = preg_replace("/\"\.\"/i", "&quot;.&quot;", $data);
@@ -248,7 +248,7 @@ class typografica
 		}
 
 		// 2. angle quotes
-		if ($this->settings["laquo"])
+		if ($this->settings['laquo'])
 		{
 			$data = preg_replace("/\"\"/i", "&quot;&quot;", $data );
 			$data = preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
@@ -270,37 +270,37 @@ class typografica
 		// --- not ported to wacko ---
 
 		// 2b. angle and English quotes together
-		if (($this->settings["quotes"]) && (($this->settings["laquo"]) || ($this->settings["farlaquo"])))
+		if (($this->settings['quotes']) && (($this->settings['laquo']) || ($this->settings['farlaquo'])))
 		{
 			$data = preg_replace("/(\&\#147\;(([A-Za-z0-9'!\.?,\-&;:]|\s|{:typo:markup:1:}|{:typo:markup:2:})*)&laquo;(.*)&raquo;)&raquo;/i", "\\1&#148;", $data);
 		}
 
 		// 3. dash
-		if ($this->settings["dash"])
+		if ($this->settings['dash'])
 			$data = preg_replace("/(\s|;)\-(\s)/i", "\\1&ndash;\\2", $data);
 		// 3a. long dash
-		if ($this->settings["emdash"])
+		if ($this->settings['emdash'])
 			$data = preg_replace("/(\s|;)\-\-(\s)/i", "\\1&mdash;\\2", $data);
 
 		// 4. (ñ)
-		if ($this->settings["(c)"])
+		if ($this->settings['(c)'])
 			$data = preg_replace("/\([cCñÑ]\)/i", "&copy;", $data);
 			# $data = preg_replace("/\([cCñÑ]\)((?=\w)|(?=\s[0-9]+))/i", "&copy;", $data); // not working (?)
 		// 4a. (r)
-		if ($this->settings["(r)"])
+		if ($this->settings['(r)'])
 			$data = preg_replace("/\(r\)/i", "<sup>&#174;</sup>", $data);
 		// 4b. (tm)
-		if ($this->settings["(tm)"])
+		if ($this->settings['(tm)'])
 			$data = preg_replace("/\(tm\)|\(òì\)/i", "&#153;", $data);
 		// 4c. (p)
-		if ($this->settings["(p)"])
+		if ($this->settings['(p)'])
 			$data = preg_replace("/\(p\)/i", "&#167;", $data);
 
 		// 5. +/-
-		if ($this->settings["+-"])
+		if ($this->settings['+-'])
 			$data = preg_replace("/\+\-/i", "&#177;", $data);
 		// 5a. 12^C
-		if ($this->settings["degrees"])
+		if ($this->settings['degrees'])
 		{
 			$data = preg_replace("/-([0-9])+\^([FCÑK])/", "&ndash;\\1&#176\\2", $data);
 			$data = preg_replace("/\+([0-9])+\^([FCÑK])/", "+\\1&#176\\2", $data);
@@ -308,7 +308,7 @@ class typografica
 		}
 
 		// 6. phones
-		if ($this->settings["phones"])
+		if ($this->settings['phones'])
 		{
 			foreach ($this->phonemasks[0] as $i => $v)
 			$data = preg_replace( $v, $this->phonemasks[1][$i], $data );
@@ -324,10 +324,10 @@ class typografica
 		// 1. Paragraphs
 		// --- not ported to wacko ---
 		// 2. Paragpaph indent (indented line)
-		if ($this->settings["[--]"])
+		if ($this->settings['[--]'])
 		{
-			$data = preg_replace( "/\[--\]/i", $this->Indent1, $data );
-			$data = preg_replace( "/\[---\]/i", $this->Indent2, $data );
+			$data = preg_replace( '/\[--\]/i', $this->indent1, $data );
+			$data = preg_replace( '/\[---\]/i', $this->indent2, $data );
 		}
 		// 3. mailto:
 		// --- not ported to wacko ---

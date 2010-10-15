@@ -4,8 +4,8 @@ if (!isset($isimage)) $isimage = '';
 if (!isset($isplain)) $isplain = '';
 if (!isset($desc))$desc  = '';
 $error = '';
-$file404 = "images/upload404.gif";
-$file403 = "images/upload403.gif";
+$file404 = 'images/upload404.gif';
+$file403 = 'images/upload403.gif';
 
 // 1. check existence
 if (isset($_GET['global']))
@@ -29,8 +29,8 @@ if (sizeof($what) > 0)
 	if ($this->is_admin() || (isset($desc['upload_id']) && ($this->page['owner_id'] == $this->get_user_id())) ||
 	($this->has_access('read')) || ($desc['user_id'] == $this->get_user_id()) )
 	{
-		$filepath = $this->config['upload_path'.($page_id ? '_per_page' : '')]."/".
-		($page_id ? ("@".$this->page['page_id']."@") : "").
+		$filepath = $this->config['upload_path'.($page_id ? '_per_page' : '')].'/'.
+		($page_id ? ('@'.$this->page['page_id'].'@') : '').
 		$what[0]['filename'];
 	}
 	else
@@ -46,23 +46,23 @@ else
 // 3. passthru
 $extension = strtolower($what[0]['file_ext']);
 
-if (($extension == "gif") || ($extension == "jpg") || ($extension == "jpeg") || ($extension == "png"))
+if (($extension == 'gif') || ($extension == 'jpg') || ($extension == 'jpeg') || ($extension == 'png'))
 {
 	$isimage = true;
 	header("Content-Type: image/".$extension);
 
 	if ($error)
 	{
-		$filepath = "images/upload".$error.".gif";
+		$filepath = 'images/upload'.$error.'.gif';
 		header("HTTP/1.0 404 Not Found");
 	}
 }
-else if ($extension == "txt")
+else if ($extension == 'txt')
 {
 	$isplain = true;
 	header("Content-Type: text/plain");
 }
-else if ($extension == "pdf")
+else if ($extension == 'pdf')
 {
 	header("Cache-control: private");
 	header("Content-Type: application/pdf");

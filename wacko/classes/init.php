@@ -331,7 +331,7 @@ class Init
 		$_secure = '';
 
 		// run in ssl mode?
-		if ($this->config['ssl'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on" && !empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) ))
+		if ($this->config['ssl'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) ))
 		{
 			$this->config['base_url']	= str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
 			$_secure = true;
@@ -510,7 +510,7 @@ class Init
 
 			require('classes/wacko.php');
 			$this->engine = new Wacko($this->config, $this->dblink);
-			$this->engine->headerCount = 0;
+			$this->engine->header_count = 0;
 
 			if ($this->cache == true)
 			{
