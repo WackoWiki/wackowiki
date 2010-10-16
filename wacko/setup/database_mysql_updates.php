@@ -155,6 +155,7 @@ $update_page_r4_3_4 = "UPDATE {$pref}page AS page, (SELECT comment_on_id, COUNT(
 $update_page_r4_3_5 = "UPDATE {$pref}page as page, (SELECT tag, MIN(time) AS oldest FROM wacko_revisions GROUP BY tag) AS revisions SET page.created = revisions.oldest WHERE page.tag = revisions.tag AND page.created IS NULL";
 $update_page_r4_3_6 = "UPDATE {$pref}page as page SET page.created = page.time WHERE pages.id = page.id AND page.created IS NULL";
 $update_page_r4_3_7 = "UPDATE {$pref}page as page SET minor_edit = '0' WHERE page.minor_edit IS NULL";
+$update_page_r4_3_8 = "UPDATE {$pref}page SET formatting = 'wacko' WHERE formatting = ''";
 
 // POLL
 $table_poll_r4_3 = "CREATE TABLE {$pref}poll (".
@@ -216,6 +217,7 @@ $update_revision_r4_3_2 = "UPDATE {$pref}revision SET latest = '0'";
 $update_revision_r4_3_3 = "UPDATE {$pref}revision AS revisions, (SELECT id, tag FROM {$pref}pages) AS pages SET revisions.page_id = pages.id WHERE revisions.tag = pages.tag";
 # $update_revision_r4_3_x = "UPDATE {$pref}revision AS revisions, (SELECT id, tag FROM {$pref}pages) AS pages2 SET revisions.comment_on_id = pages2.id WHERE revisions.comment_on = pages2.tag";
 $update_revision_r4_3_4 = "UPDATE {$pref}revision revisions AS revisions SET minor_edit = '0' WHERE revisions.minor_edit IS NULL";
+$update_revision_r4_3_5 = "UPDATE {$pref}revision SET formatting = 'wacko' WHERE formatting = ''";
 
 // UPLOAD
 $alter_upload_r4_3 = "ALTER TABLE {$pref}upload CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
