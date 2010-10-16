@@ -694,7 +694,7 @@ class Wacko
 
 		// load page
 		if ($metadataonly)
-			$what = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.keywords, p.description, p.noindex, u.user_name, o.user_name AS owner_name';
+			$what = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.keywords, p.description, p.noindex, u.user_name, o.user_name AS owner_name';
 		else
 			$what = 'p.*, u.user_name, o.user_name AS owner_name';
 
@@ -1236,7 +1236,7 @@ class Wacko
 			}
 
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
-			if (!$oldPage = $this->load_page($tag))
+			if (!$old_page = $this->load_page($tag))
 			{
 				if (!isset($lang))
 				{
@@ -1442,15 +1442,15 @@ class Wacko
 				$this->set_language($this->pagelang);
 
 				// aha! page isn't new. keep owner!
-				$owner_id = $oldPage['owner_id'];
+				$owner_id = $old_page['owner_id'];
 
 				// only if page has been actually changed
-				if ($oldPage['body'] != $body || $oldPage['title'] != $title)
+				if ($old_page['body'] != $body || $old_page['title'] != $title)
 				{
 					// Dont save revisions for comments.  Personally I think we should.
-					if (!$oldPage['comment_on_id'])
+					if (!$old_page['comment_on_id'])
 					{
-						$this->save_revision($oldPage);
+						$this->save_revision($old_page);
 					}
 
 					// update current page copy
@@ -1458,10 +1458,10 @@ class Wacko
 						"UPDATE ".$this->config['table_prefix']."page SET ".
 							"comment_on_id	= '".quote($this->dblink, $comment_on_id)."', ".
 							"modified			= NOW(), ".
-							"created		= '".quote($this->dblink, $oldPage['created'])."', ".
+							"created		= '".quote($this->dblink, $old_page['created'])."', ".
 							"owner_id		= '".quote($this->dblink, $owner_id)."', ".
 							"user_id		= '".quote($this->dblink, $user_id)."', ".
-							"description	= '".quote($this->dblink, ($oldPage['comment_on_id'] || $oldPage['description'] ? $oldPage['description'] : $desc ))."', ".
+							"description	= '".quote($this->dblink, ($old_page['comment_on_id'] || $old_page['description'] ? $old_page['description'] : $desc ))."', ".
 							"supertag		= '".$this->npj_translit($tag)."', ".
 							"body			= '".quote($this->dblink, $body)."', ".
 							"body_r			= '".quote($this->dblink, $body_r)."', ".
@@ -1547,7 +1547,7 @@ class Wacko
 
 		if ($mute === false)
 		{
-			if (!$oldPage['comment_on_id'] || !$comment_on_id)
+			if (!$old_page['comment_on_id'] || !$comment_on_id)
 			{
 				$this->use_class('rss');
 				$xml = new rss($this);
@@ -1573,20 +1573,20 @@ class Wacko
 	}
 
 	// create revision of a given page
-	function save_revision($oldPage)
+	function save_revision($old_page)
 	{
-		if (!$oldPage) return false;
+		if (!$old_page) return false;
 
 		// prepare input
-		foreach ($oldPage as $key => $val)
+		foreach ($old_page as $key => $val)
 		{
-			$oldPage[$key] = quote($this->dblink, $oldPage[$key]);
+			$old_page[$key] = quote($this->dblink, $old_page[$key]);
 		}
 
 		// move revision
 		$this->query(
-			"INSERT INTO {$this->config['table_prefix']}revision (page_id, tag, modified, body, edit_note, minor_edit, owner_id, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
-			"VALUES ('{$oldPage['page_id']}','{$oldPage['tag']}', '{$oldPage['modified']}', '{$oldPage['body']}', '{$oldPage['edit_note']}', '{$oldPage['minor_edit']}', '{$oldPage['owner_id']}', '{$oldPage['user_id']}', '0', '{$oldPage['handler']}', '{$oldPage['comment_on_id']}', '{$oldPage['supertag']}', '{$oldPage['title']}', '{$oldPage['keywords']}', '{$oldPage['description']}')");
+			"INSERT INTO {$this->config['table_prefix']}revision (page_id, tag, modified, body, formatting, edit_note, minor_edit, owner_id, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
+			"VALUES ('{$old_page['page_id']}','{$old_page['tag']}', '{$old_page['modified']}', '{$old_page['body']}', '{$old_page['formatting']}', '{$old_page['edit_note']}', '{$old_page['minor_edit']}', '{$old_page['owner_id']}', '{$old_page['user_id']}', '0', '{$old_page['handler']}', '{$old_page['comment_on_id']}', '{$old_page['supertag']}', '{$old_page['title']}', '{$old_page['keywords']}', '{$old_page['description']}')");
 
 		// update user statistics for revisions made
 		if ($user = $this->get_user()) $this->query(
