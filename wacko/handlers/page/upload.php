@@ -246,7 +246,7 @@ if ($registered
 						$description = rtrim( $description, '\\' );
 
 						// Make HTML in the description redundant ;¬)
-						$description = $this->format($description, 'preformat');
+						$description = $this->format($description, 'pre_wacko');
 						$description = $this->format($description, 'safehtml');
 						$description = htmlentities($description, ENT_COMPAT, $this->get_charset());
 

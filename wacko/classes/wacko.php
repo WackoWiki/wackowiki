@@ -33,35 +33,35 @@ class Wacko
 	var $post_wacko_action		= NULL;
 	var $_userhost				= NULL;
 	var $paragrafica_styles		= array(
-		"before"	=> array(
-						"_before"	=> "",
-						"_after"	=> "",
-						"before"	=> "<span class='pmark'>[##]</span><br />",
-						"after"		=> ""),
-		"after"		=> array(
-						"_before"	=> "",
-						"_after"	=> "",
-						"before"	=> "",
-						"after"		=> "<span class='pmark'>[##]</span>"),
-		"right"		=> array(
-						"_before"	=> "<div class='pright'><div class='p-'>&nbsp;<span class='pmark'>[##]</span></div><div class='pbody-'>",
-						"_after"	=> "</div></div>",
-						"before"	=> "",
-						"after"		=> ""),
-		"left"		=> array(
-						"_before"	=> "<div class='pleft'><div class='p-'><span class='pmark'>[##]</span>&nbsp;</div><div class='pbody-'>",
-						"_after"	=> "</div></div>",
-						"before"	=> "",
-						"after"		=> ""),
+		'before'	=> array(
+						'_before'	=> '',
+						'_after'	=> '',
+						'before'	=> '<span class="pmark">[##]</span><br />',
+						'after'		=> ''),
+		'after'		=> array(
+						'_before'	=> '',
+						'_after'	=> '',
+						'before'	=> '',
+						'after'		=> '<span class="pmark">[##]</span>'),
+		'right'		=> array(
+						'_before'	=> '<div class="pright"><div class="p-">&nbsp;<span class="pmark">[##]</span></div><div class="pbody-">',
+						'_after'	=> '</div></div>',
+						'before'	=> '',
+						'after'		=> ''),
+		'left'		=> array(
+						'_before'	=> '<div class="pleft"><div class="p-"><span class="pmark">[##]</span>&nbsp;</div><div class="pbody-">',
+						'_after'	=> '</div></div>',
+						'before'	=> '',
+						'after'		=> ''),
 	);
 	var $paragrafica_patches = array(
-		"before" => array('before'),
-		"after"  => array('after'),
-		"right"  => array('_before'),
-		"left"  => array('_before'),
+		'before'	=> array('before'),
+		'after'		=> array('after'),
+		'right'		=> array('_before'),
+		'left'		=> array('_before'),
 	);
 	var $npj_macros = array(
-		"вики" => "wiki", "вака" => "wacko", "веб" => "web"
+		'вики' => 'wiki', 'вака' => 'wacko', 'веб' => 'web'
 	);
 
 	// CONSTRUCTOR
@@ -1224,7 +1224,7 @@ class Wacko
 			#}
 
 			// preformatter (macros and such)
-			$body = $this->format($body, 'preformat');
+			$body = $this->format($body, 'pre_wacko');
 
 			// making page body components
 			$body_r = $this->format($body, 'wacko');

@@ -1,4 +1,5 @@
 <?php
+
 class post_wacko
 {
 	var $object;

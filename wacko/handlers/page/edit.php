@@ -226,7 +226,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 		&nbsp;
 		<input type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 <?php
-		$preview = $this->format($body, 'preformat');
+		$preview = $this->format($body, 'pre_wacko');
 		$preview = $this->format($preview, 'wacko');
 		$preview = $this->format($preview, 'post_wacko');
 
