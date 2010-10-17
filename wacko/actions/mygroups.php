@@ -6,13 +6,13 @@ if (!isset($nomark)) $nomark = '';
 
 if (!function_exists('MyGroups'))
 {
-	function MyGroups($username, $al)
+	function MyGroups($user_name, $al)
 	{
 		$my_groups_count = 0;
 		foreach($al as $group => $members)
 		{
 			$groupmembers = explode("\\n", $members);
-			if(in_array ($username, $groupmembers))
+			if(in_array ($user_name, $groupmembers))
 			{
 				print $group.'<br />';
 				$my_groups_count++;
