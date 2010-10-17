@@ -58,7 +58,7 @@ class post_wacko
 		{
 			if ($matches[1] && (!isset($this->options['diff']) || in_array(strtolower($matches[1]), $this->actions)))
 			{
-				// check for action' parameters
+				// check for action parameters
 				$sep = strpos( $matches[1], ' ' );
 				if ($sep === false)
 				{
