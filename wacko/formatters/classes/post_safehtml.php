@@ -35,11 +35,10 @@ class post_safehtml
 		else if (preg_match('/^<!--action:begin-->\s*([^\n]+?)<!--action:end-->$/s', $thing, $matches))
 		{
 			// disassembly of the parameters
-			$p = ' '.$matches[1].' ';
-			$paramcount = preg_match_all( '/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p,
-											$matches, PREG_SET_ORDER );
-			$params = array();
-			$c=0;
+			$p			= ' '.$matches[1].' ';
+			$paramcount	= preg_match_all( '/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p, $matches, PREG_SET_ORDER );
+			$params		= array();
+			$c			=0;
 
 			foreach( $matches as $m )
 			{

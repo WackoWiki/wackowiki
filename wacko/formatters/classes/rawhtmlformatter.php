@@ -16,18 +16,17 @@ class RawHtmlFormatter
 
 		if (preg_match('/^<format ([^>]*?)>(.*?)<\/format>$/s', $thing, $matches))
 		{
-			$code = preg_replace('/<br *\/?>/', "\n", $matches[2]);
-			$p = " ".$matches[1]." ";
-			$paramcount = preg_match_all( '/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p,
-											$matches, PREG_SET_ORDER );
-			$params = array();
-			$c = 0;
+			$code		= preg_replace('/<br *\/?>/', "\n", $matches[2]);
+			$p			= ' '.$matches[1].' ';
+			$paramcount	= preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p, $matches, PREG_SET_ORDER);
+			$params		= array();
+			$c			= 0;
 
 			foreach( $matches as $m )
 			{
-				$value = $m[3] ? ($m[5] ? $m[6] : $m[7]) : "1";
-				$params[$c] = $value;
-				$params[ $m[2] ] = $value;
+				$value				= isset($m[3]) && $m[3] ? ($m[5] ? $m[6] : $m[7]) : "1";
+				$params[$c]			= $value;
+				$params[ $m[2] ]	= $value;
 				$c++;
 			}
 
