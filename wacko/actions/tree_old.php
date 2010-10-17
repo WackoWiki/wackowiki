@@ -111,7 +111,7 @@ if (!function_exists('create_cluster_tree'))
 		if (isset($sub_pages_tree))
 			return $sub_pages_tree;
 		else
-			return NULL;
+			return null;
 	}
 }
 

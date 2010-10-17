@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($page))			$page = NULL;
+if (!isset($page))			$page = null;
 if (!isset($page)) return;
 if (!isset($nomark))		$nomark = '';
 

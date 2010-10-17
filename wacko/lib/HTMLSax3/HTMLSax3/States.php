@@ -136,7 +136,7 @@ class XML_HTMLSax3_OpeningTagState {
 		$context->ignoreWhitespace();
 		$attributename = $context->scanUntilCharacters("=/> \n\r\t");
 		while ($attributename != '') {
-			$attributevalue = NULL;
+			$attributevalue = null;
 			$context->ignoreWhitespace();
 			$char = $context->scanCharacter();
 			if ($char == '=') {
@@ -153,8 +153,8 @@ class XML_HTMLSax3_OpeningTagState {
 					$attributevalue =
 					$context->scanUntilCharacters("> \n\r\t");
 				}
-			} else if ($char !== NULL) {
-				$attributevalue = NULL;
+			} else if ($char !== null) {
+				$attributevalue = null;
 				$context->unscanCharacter();
 			}
 			$Attributes[$attributename] = $attributevalue;

@@ -113,7 +113,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		{
 			// undefine username
 			$remember_name = $this->get_user_name();
-			$this->set_user_setting('user_name', NULL);
+			$this->set_user_setting('user_name', null);
 		}
 
 		if (!$error)

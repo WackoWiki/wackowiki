@@ -123,7 +123,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 				{
 					// undefine username
 					$remember_name = $this->get_user_name();
-					$this->set_user_setting('user_name', NULL);
+					$this->set_user_setting('user_name', null);
 				}
 
 				// add page (revisions)

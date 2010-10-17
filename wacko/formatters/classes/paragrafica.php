@@ -142,7 +142,7 @@ class paragrafica
 		if (isset($mark1))
 			$sizeof_mark1 = sizeof($mark1);
 		else
-			$sizeof_mark1 = NULL;
+			$sizeof_mark1 = null;
 
 		foreach( $pieces as $k=>$v )
 		if ($k > 0)

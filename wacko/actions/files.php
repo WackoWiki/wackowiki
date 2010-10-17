@@ -18,7 +18,7 @@ if (!isset($global)) $global = '';
 if (!isset($tag)) $tag = '';
 if (!isset($owner)) $owner = '';
 if (!isset($page)) $page = '';
-if (!isset($pictures)) $pictures = NULL;
+if (!isset($pictures)) $pictures = null;
 
 $orderby = "filename ASC";
 if ($order == 'time') $orderby = "uploaded_dt DESC";

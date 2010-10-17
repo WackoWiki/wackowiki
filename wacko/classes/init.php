@@ -43,8 +43,8 @@ class Init
 {
 	// WRAPPER VARIABLES
 	var $config		= array();
-	var $dblink		= NULL;
-	var $cacheval	= NULL;
+	var $dblink		= null;
+	var $cacheval	= null;
 	var $cache;
 	var $engine;
 	var $page;
@@ -484,7 +484,7 @@ class Init
 		}
 		else if ($this->cache == true && $op == 'log')
 		{
-			return $this->cache->log("Before Run WackoWiki=".$this->engine->config['wacko_version']);
+			return $this->cache->log('Before Run WackoWiki='.$this->engine->config['wacko_version']);
 		}
 		else
 		{
