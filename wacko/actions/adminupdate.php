@@ -79,7 +79,7 @@ if (!function_exists('DecomposeOptions'))
 		foreach ($opts as $o)
 		{
 			$params			= explode($valueSplitter, trim($o));
-			$b[$params[0]]	= (isset($params[1]) ? $params[1] : NULL) ;
+			$b[$params[0]]	= (isset($params[1]) ? $params[1] : null) ;
 		}
 		return $b;
 	}

@@ -36,7 +36,6 @@ class post_wacko
 			}
 			else return '';
 		}
-
 		// image link
 		else if (preg_match("/^<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->$/", $thing, $matches))
 		{
@@ -52,8 +51,7 @@ class post_wacko
 
 				return '<a href="'.$url.'">'.$img.'</a>';
 			}
-			else
-				return '';
+			else return '';
 		}
 		// actions
 		else if (preg_match("/^<!--action:begin-->\s*([^\n]+?)<!--action:end-->$/s", $thing, $matches))

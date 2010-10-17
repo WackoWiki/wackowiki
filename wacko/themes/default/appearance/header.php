@@ -285,7 +285,7 @@ else
 		($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
 		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('SetWatch') : '',
 		$this->method == 'watch',
-		($this->iswatched === true ? "watch-on.png" : "watch-off.png"),
+		($this->iswatched === true ? 'watch-on.png' : 'watch-off.png'),
 		'a');
 
 	// properties tab

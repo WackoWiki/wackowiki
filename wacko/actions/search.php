@@ -79,7 +79,7 @@ if ($form)
 	echo $this->form_close();
 }
 
-if ($phrase == '') $phrase = (isset($_GET['phrase']) ? $_GET['phrase'] : NULL);
+if ($phrase == '') $phrase = (isset($_GET['phrase']) ? $_GET['phrase'] : null);
 if ($phrase)
 {
 	if ($form) print "<br />";

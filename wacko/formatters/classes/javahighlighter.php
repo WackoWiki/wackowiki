@@ -183,7 +183,7 @@ class JavaHighlighter{
 					// On replace l'indice au bon endroit
 					$this->i = $delimiterend + strlen($delimiter2);
 					// Enfin on recupere le caractere en cours
-					if ($this->i > $this->codelength) $this->char = NULL;
+					if ($this->i > $this->codelength) $this->char = null;
 					else $this->char = $this->code[$this->i];
 					// On precise qu'on a trouve
 					return TRUE;
@@ -230,7 +230,7 @@ class JavaHighlighter{
 		// Initialize variables
 		$this->newcode = "";
 		$this->tok = "";
-		$this->char = NULL;
+		$this->char = null;
 		$this->code = $text;
 		$this->codelength = strlen($this->code);
 
@@ -244,7 +244,7 @@ class JavaHighlighter{
 			// On regarde si on tombe sur un cas special
 			$this->parsearrays();
 			// On regarde si on est arrive au bout de la chaine
-			if ($this->char == NULL) return $this->newcode;
+			if ($this->char == null) return $this->newcode;
 			// On a fini d'analyser les commentaires, on regarde si on a un mot complet
 			if (is_integer(strpos($this->tokdelimiters, $this->char))) {
 				// On tombe sur un delimiteur, on coupe le mot

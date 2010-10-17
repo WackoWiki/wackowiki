@@ -87,7 +87,7 @@ if ($this->has_access('read'))
 		}
 
 		// stop enumerating links
-		$this->numerate_links = NULL;
+		$this->numerate_links = null;
 	}
 }
 else

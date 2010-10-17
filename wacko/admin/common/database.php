@@ -390,7 +390,7 @@ function GetData(&$engine, &$tables, $pack, $table, $root = '')
 //			// prepare data
 //			foreach ($row as $name => $cell)
 //			{
-//				$row[$name] = ( $cell == '' ? 'NULL' : $cell );
+//				$row[$name] = ( $cell == '' ? 'null' : $cell );
 //			}
 
 			// construct output
@@ -537,7 +537,7 @@ function PutData(&$engine, $pack, $table, $mode)
 			$j = 0;
 			foreach ($row as $cell)
 			{
-				$row[$j++] = "'".quote($engine->dblink, $cell)."'";//( $cell == 'NULL' ? $cell :  "'".quote($engine->dblink, $cell)."'" );
+				$row[$j++] = "'".quote($engine->dblink, $cell)."'";//( $cell == 'null' ? $cell :  "'".quote($engine->dblink, $cell)."'" );
 			}
 
 			// run and count sql query

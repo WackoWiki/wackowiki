@@ -39,7 +39,7 @@ if (!function_exists('links_tree_view'))
 	}
 }
 
-$root = (isset($vars[0]) ? $vars[0] : NULL);
+$root = (isset($vars[0]) ? $vars[0] : null);
 if ($root == '/') $root = '';
 if (!isset($root)) $root = $this->page['tag'];
 $root = $this->unwrap_link($root);

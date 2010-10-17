@@ -719,7 +719,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			if ($_POST['accept'] && $forumCluster === true)
 			{
 				$pos		= strrpos($this->tag, '/');
-				$section	= substr($this->tag, 0, ( $pos ? $pos : NULL ));
+				$section	= substr($this->tag, 0, ( $pos ? $pos : null ));
 				$tag		= trim($_POST['title'], " \t");
 				$title		= $tag;
 				$tag 		= ucwords($tag);

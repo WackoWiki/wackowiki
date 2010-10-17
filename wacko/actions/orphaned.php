@@ -14,7 +14,7 @@ if (!function_exists('LoadOrphanedPages'))
 			($for
 				? "p.tag LIKE '".quote($engine->dblink, $for)."/%' AND "
 				: "").
-			"l.to_page_id is NULL ".
+			"l.to_page_id IS NULL ".
 			"AND p.comment_on_id = '0' ".
 		"ORDER BY tag ".
 		"LIMIT 200";

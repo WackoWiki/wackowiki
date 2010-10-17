@@ -23,15 +23,15 @@ class Wacko
 	var $timer;
 	var $toc_context			= array();
 	var $search_engines			= array('bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider', );
-	var $_langlist				= NULL;
-	var $languages				= NULL;
-	var $resources				= NULL;
-	var $wanted_cache			= NULL;
-	var $page_cache				= NULL;
-	var $_formatter_noautolinks	= NULL;
-	var $numerate_links			= NULL;
-	var $post_wacko_action		= NULL;
-	var $_userhost				= NULL;
+	var $_langlist				= null;
+	var $languages				= null;
+	var $resources				= null;
+	var $wanted_cache			= null;
+	var $page_cache				= null;
+	var $_formatter_noautolinks	= null;
+	var $numerate_links			= null;
+	var $post_wacko_action		= null;
+	var $_userhost				= null;
 	var $paragrafica_styles		= array(
 		'before'	=> array(
 						'_before'	=> '',
@@ -126,7 +126,7 @@ class Wacko
 		if (isset($data))
 			return $data;
 		else
-			return NULL;
+			return null;
 	}
 
 	function load_single($query, $docache = 0)
@@ -139,7 +139,7 @@ class Wacko
 			}
 			else
 			{
-				return NULL;
+				return null;
 			}
 	}
 
@@ -439,7 +439,7 @@ class Wacko
 			else
 				$lang = $this->userlang;
 			else
-				$lang = (isset($this->pagelang) ? $this->pagelang : NULL);
+				$lang = (isset($this->pagelang) ? $this->pagelang : null);
 
 		return $lang;
 	}
@@ -460,7 +460,7 @@ class Wacko
 		if (isset($this->languages[$lang]['charset']))
 			return $this->languages[$lang]['charset'];
 		else
-			NULL;
+			null;
 	}
 
 	function do_unicode_entities($string, $lang)
@@ -576,7 +576,7 @@ class Wacko
 			return $npj_cache[$cach_key];
 		}
 
-		$_lang = NULL;
+		$_lang = null;
 
 		if (!$this->config['multilanguage']) $donotload = 1;
 
@@ -681,7 +681,7 @@ class Wacko
 	{
 		if ($tag == '') return '';
 
-		$page = NULL;
+		$page = null;
 
 		if (!$supertagged)
 			$supertag = $this->npj_translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD);
@@ -779,8 +779,8 @@ class Wacko
 	{
 		if (!$page['supertag']) $page['supertag'] = $this->npj_translit($page['tag'], TRAN_LOWERCASE, TRAN_DONTLOAD);
 
-		$this->page_cache[$page['supertag']] = $page;
-		$this->page_cache[$page['supertag']]['mdonly'] = $metadataonly;
+		$this->page_cache[$page['supertag']]			= $page;
+		$this->page_cache[$page['supertag']]['mdonly']	= $metadataonly;
 	}
 
 	function cache_wanted_page($tag, $check = 0)
@@ -1030,7 +1030,7 @@ class Wacko
 			{
 				for ($i = 0; $i < count($read_acls); $i++)
 				{
-					$this->cache_acl($read_acls[$i]['page_id'], "read", 1,$read_acls[$i]);
+					$this->cache_acl($read_acls[$i]['page_id'], 'read', 1,$read_acls[$i]);
 				}
 			}
 			return array($pages, $pagination);
@@ -1075,7 +1075,7 @@ class Wacko
 
 			for ($i = 0; $i < count($read_acls); $i++)
 			{
-				$this->cache_acl($read_acls[$i]['page_id'], "read", 1, $read_acls[$i]);
+				$this->cache_acl($read_acls[$i]['page_id'], 'read', 1, $read_acls[$i]);
 			}
 			return $pages;
 		}
@@ -1092,7 +1092,7 @@ class Wacko
 
 	function load_recently_deleted($limit = 1000, $cache = 1)
 	{
-		$meta = "r.page_id, r.owner_id, r.user_id, r.tag, r.supertag, r.created, r.modified, r.edit_note, r.minor_edit, r.latest, r.handler, r.comment_on_id, r.lang, r.title, r.keywords, r.description";
+		$meta = 'r.page_id, r.owner_id, r.user_id, r.tag, r.supertag, r.created, r.modified, r.edit_note, r.minor_edit, r.latest, r.handler, r.comment_on_id, r.lang, r.title, r.keywords, r.description';
 
 		#$_metaArr	= explode(',', $this->pages_meta);
 		#foreach($_metaArr as $_metaStr) $meta[] = $this->config['table_prefix'].'revision.'.trim($_metaStr);
@@ -1136,15 +1136,15 @@ class Wacko
 	}
 
 	// PAGE SAVING ROUTINE
-	// $tag			- page address
-	// $title		- page name (metadata)
-	// $body		- page body (plain text)
-	// $edit_note	- edit summary
-	// $minor_edit	- minor edit
+	// $tag				- page address
+	// $title			- page name (metadata)
+	// $body			- page body (plain text)
+	// $edit_note		- edit summary
+	// $minor_edit		- minor edit
 	// $comment_on_id	- commented page id
-	// $lang		- page language
-	// $mute		- supress email reminders and xml rss recompilation
-	// $user		- attach guest pseudonym
+	// $lang			- page language
+	// $mute			- supress email reminders and xml rss recompilation
+	// $user			- attach guest pseudonym
 	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $comment_on_id = 0, $lang = false, $mute = false, $user = false)
 	{
 		$desc = '';
@@ -1411,7 +1411,7 @@ class Wacko
 								$this->set_resource ($lang);
 								$this->set_language ($lang);
 
-								$subject = "[".$this->config['wacko_name']."] ".$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
+								$subject = '['.$this->config['wacko_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
 								$message = $this->get_translation('EmailHello', $lang). $watcher['user_name'].".\n\n".
 											$user_name.
 											$this->get_translation('SomeoneCommented', $lang)."\n".
@@ -1457,7 +1457,7 @@ class Wacko
 					$this->query(
 						"UPDATE ".$this->config['table_prefix']."page SET ".
 							"comment_on_id	= '".quote($this->dblink, $comment_on_id)."', ".
-							"modified			= NOW(), ".
+							"modified		= NOW(), ".
 							"created		= '".quote($this->dblink, $old_page['created'])."', ".
 							"owner_id		= '".quote($this->dblink, $owner_id)."', ".
 							"user_id		= '".quote($this->dblink, $user_id)."', ".
@@ -1518,7 +1518,7 @@ class Wacko
 									$this->set_resource ($lang);
 									$this->set_language ($lang);
 
-									$subject = "[".$this->config['wacko_name']."] ".$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
+									$subject = '['.$this->config['wacko_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
 									$message = $this->get_translation('EmailHello', $lang). $watcher['user_name']."\n\n".
 										$user_name.
 										$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
@@ -1597,7 +1597,7 @@ class Wacko
 	}
 
 	// COOKIES
-	function set_session_cookie($name, $value, $dummy = NULL, $secure = 0, $httponly = 1)
+	function set_session_cookie($name, $value, $dummy = null, $secure = 0, $httponly = 1)
 	{
 		setcookie($this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash'], $value, 0, $this->config['cookie_path'], '', ( $secure ? true : false ), ( $httponly ? true : false ));
 		$_COOKIE[$this->config['cookie_prefix'].$name.'_'.$this->config['cookie_hash']] = $value;
@@ -1652,7 +1652,7 @@ class Wacko
 		}
 		else
 		{
-			return NULL;
+			return null;
 		}
 	}
 
@@ -2036,7 +2036,7 @@ class Wacko
 
 			$regex_handlers	= '/^(.*?)\/('.$this->config['standard_handlers'].')\/(.*)$/i';
 			$ptag			= $this->npj_translit($unwtag);
-			$handler		= NULL;
+			$handler		= null;
 
 			if (preg_match( $regex_handlers, '/'.$ptag.'/', $match ))
 			{
@@ -2286,7 +2286,7 @@ class Wacko
 	function add_spaces($text)
 	{
 		$show = 1;
-		if ($user = $this->get_user())	$show = (isset($user['show_spaces']) ? $user['show_spaces'] : NULL);
+		if ($user = $this->get_user())	$show = (isset($user['show_spaces']) ? $user['show_spaces'] : null);
 		if (!$show)						$show = $this->config['show_spaces'];
 		if ($show != 0)
 		{
@@ -2332,7 +2332,7 @@ class Wacko
 	function validate_reserved_words( $data )
 	{
 		$_data = $this->npj_translit( $data );
-		$_data = "/".$_data."/";
+		$_data = '/'.$_data.'/';
 
 		// Find the string of text
 		# $this->REGEX_WACKO_FUNCTIONS = '/^(.*?)\/'.STANDARD_HANDLERS.'\/(.*)$/i';
@@ -2352,7 +2352,7 @@ class Wacko
 		  /// !!! to messageset, subspace found
 		}
 
-		if (preg_match( "/^\/[0-9]+/", $_data, $match ))
+		if (preg_match( '/^\/[0-9]+/', $_data, $match ))
 		{
 		  return "It is not possible to create pages, whose name consists of numbers or begins on them.";
 		  /// !!! to messageset, begins with 0-9
@@ -2732,7 +2732,7 @@ class Wacko
 		}
 		else
 		{
-			return NULL;
+			return null;
 		}
 	}
 
@@ -2755,7 +2755,7 @@ class Wacko
 		if (isset( $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user'] ))
 			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user'];
 		else
-			return NULL;
+			return null;
 	}
 
 	// extract specific element from user session array
@@ -2846,9 +2846,9 @@ class Wacko
 		// code in user data table
 		$this->query(
 			"UPDATE {$this->config['user_table']} SET ".
-				"session_expire	= '".quote($this->dblink, $ses_time)."', ".
+				"session_expire		= '".quote($this->dblink, $ses_time)."', ".
 				"change_password	= '' ".
-			"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
+			"WHERE user_name		= '".quote($this->dblink, $user['user_name'])."' ".
 			"LIMIT 1");
 
 		// restart logged in user session with specific session id
@@ -2894,7 +2894,7 @@ class Wacko
 				'recalc_mac'	=> $recalc_mac
 			);
 		}
-		else return NULL;
+		else return null;
 	}
 
 	// end user session and free session vars
@@ -2987,12 +2987,12 @@ class Wacko
 
 	function get_user_id()
 	{
-		if ($user = $this->get_user()) $user_id = (isset($user['user_id']) ? $user['user_id'] : NULL);
+		if ($user = $this->get_user()) $user_id = (isset($user['user_id']) ? $user['user_id'] : null);
 
 		if (isset($user_id))
 			return $user_id;
 		else
-			return NULL;
+			return null;
 	}
 
 	function get_user_id_by_name($user = '')
@@ -3222,9 +3222,9 @@ class Wacko
 		{
 			$this->query(
 				"INSERT INTO ".$this->config['table_prefix']."acl SET ".
-					"list = '".quote($this->dblink, trim(str_replace("\r", "", $list)))."', ".
-					"page_id = '".quote($this->dblink, $page_id)."', ".
-					"privilege = '".quote($this->dblink, $privilege)."'");
+					"list		= '".quote($this->dblink, trim(str_replace("\r", "", $list)))."', ".
+					"page_id	= '".quote($this->dblink, $page_id)."', ".
+					"privilege	= '".quote($this->dblink, $privilege)."'");
 		}
 	}
 
@@ -3429,8 +3429,8 @@ class Wacko
 	{
 		return $this->load_single(
 			"SELECT * FROM ".$this->config['table_prefix']."watch ".
-			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
-				"AND page_id = '".quote($this->dblink, $page_id)."'");
+			"WHERE user_id		= '".quote($this->dblink, $user_id)."' ".
+				"AND page_id	= '".quote($this->dblink, $page_id)."'");
 	}
 
 	function set_watch($user_id, $page_id)
@@ -3451,8 +3451,8 @@ class Wacko
 	{
 		return $this->query(
 			"DELETE FROM ".$this->config['table_prefix']."watch ".
-			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
-				"AND page_id = '".quote($this->dblink, $page_id)."'");
+			"WHERE user_id		= '".quote($this->dblink, $user_id)."' ".
+				"AND page_id	= '".quote($this->dblink, $page_id)."'");
 	}
 
 	// BOOKMARKS
@@ -3570,7 +3570,7 @@ class Wacko
 						}
 						else
 						{
-							$title = NULL;
+							$title = null;
 						}
 					}
 				}
@@ -3578,10 +3578,10 @@ class Wacko
 				{
 					$this->query(
 						"INSERT INTO ".$this->config['table_prefix']."bookmark SET ".
-						"user_id		= '".quote($this->dblink, $user_id)."', ".
-						"page_id		= '".quote($this->dblink, $page_id)."', ".
-						"lang			= '".quote($this->dblink, $bm_lang)."', ".
-						"bm_title		= '".quote($this->dblink, $title)."', ".
+						"user_id			= '".quote($this->dblink, $user_id)."', ".
+						"page_id			= '".quote($this->dblink, $page_id)."', ".
+						"lang				= '".quote($this->dblink, $bm_lang)."', ".
+						"bm_title			= '".quote($this->dblink, $title)."', ".
 						"bm_position		= '".quote($this->dblink, ($key + 1))."' ");
 				}
 				$bm_lang = '';
@@ -3648,9 +3648,9 @@ class Wacko
 
 				$this->query(
 					"INSERT INTO ".$this->config['table_prefix']."bookmark SET ".
-					"user_id		= '".quote($this->dblink, $user['user_id'])."', ".
-					"page_id		= '".quote($this->dblink, $this->page['page_id'])."', ".
-					"lang			= '".quote($this->dblink, ($user['lang'] != $this->pagelang ? $this->pagelang : ""))."', ".
+					"user_id			= '".quote($this->dblink, $user['user_id'])."', ".
+					"page_id			= '".quote($this->dblink, $this->page['page_id'])."', ".
+					"lang				= '".quote($this->dblink, ($user['lang'] != $this->pagelang ? $this->pagelang : ""))."', ".
 					"bm_position		= '".quote($this->dblink, ($_bm_count + 1))."'");
 			}
 
@@ -3877,7 +3877,7 @@ class Wacko
 		// url lang selection
 		$url	= explode('@@', $tag);
 		$tag	= trim($url[0]);
-		$lang	= (isset($url[1]) ? trim($url[1]) : NULL);
+		$lang	= (isset($url[1]) ? trim($url[1]) : null);
 
 		if (!trim($tag)) $tag = $this->config['root_page'];
 
@@ -3893,10 +3893,10 @@ class Wacko
 		// run in ssl mode?
 		if ($this->config['ssl'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
 		{
-			$this->config['open_url']	= $this->config['base_url'];
-			$this->config['base_url']	= str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
-			$this->config['theme_url']	= $this->config['base_url'].'themes/'.$this->config['theme'].'/';
-			$this->config['cookie_path'] = preg_replace('|https?://[^/]+|i', '', $this->config['base_url'].'');
+			$this->config['open_url']		= $this->config['base_url'];
+			$this->config['base_url']		= str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
+			$this->config['theme_url']		= $this->config['base_url'].'themes/'.$this->config['theme'].'/';
+			$this->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $this->config['base_url'].'');
 		}
 
 		// in strong cookie mode check session validity
@@ -4348,13 +4348,13 @@ class Wacko
 				"UPDATE ".$this->config['table_prefix']."revision SET ".
 					"tag		= '".quote($this->dblink, $new_tag)."', ".
 					"supertag	= '".quote($this->dblink, $new_supertag)."' ".
-				"WHERE tag = '".quote($this->dblink, $tag)."' ")
+				"WHERE tag		= '".quote($this->dblink, $tag)."' ")
 			&&
 			$this->query(
 				"UPDATE ".$this->config['table_prefix']."page  SET ".
 					"tag		= '".quote($this->dblink, $new_tag)."', ".
 					"supertag	= '".quote($this->dblink, $new_supertag)."' ".
-				"WHERE tag = '".quote($this->dblink, $tag)."' ");
+				"WHERE tag		= '".quote($this->dblink, $tag)."' ");
 	}
 
 	// REMOVALS
@@ -4390,8 +4390,8 @@ class Wacko
 			$this->save_revision($page);
 			// saving updated for the current user
 			$page['modified']	= date(SQL_DATE_FORMAT);
-			$page['user']	= $this->get_user_name();
-			$page['ip']		= $this->get_user_ip();
+			$page['user']		= $this->get_user_name();
+			$page['ip']			= $this->get_user_ip();
 			$this->save_revision($page);
 		}
 
@@ -4415,7 +4415,7 @@ class Wacko
 				"UPDATE {$this->config['table_prefix']}page SET ".
 					"comments	= '".(int)$this->count_comments($comment_on_id)."' ".
 					"commented	= '".quote($this->dblink, $comment['created'])."' ".
-				"WHERE tag = '".quote($this->dblink, $this->get_comment_on_tag($comment_on_id))."' ".
+				"WHERE tag		= '".quote($this->dblink, $this->get_comment_on_tag($comment_on_id))."' ".
 				"LIMIT 1");
 		}
 
@@ -4817,17 +4817,17 @@ class Wacko
 			return true;
 		}
 
-		$html = $this->config['allow_rawhtml'];
+		$html		= $this->config['allow_rawhtml'];
 		$this->config['allow_rawhtml'] = 0;
-		$message = ( isset($this->language) ? $this->format($message, 'wacko') : $message );
-		$user_id = $this->get_user_id();
+		$message	= ( isset($this->language) ? $this->format($message, 'wacko') : $message );
+		$user_id	= $this->get_user_id();
 		$this->config['allow_rawhtml'] = $html;
 
 		// current timestamp set automatically
 		return $this->query(
 			"INSERT INTO {$this->config['table_prefix']}log SET ".
 				"level		= '".quote($this->dblink, $level)."', ".
-				"user_id		= '".quote($this->dblink, $user_id ? $user_id : 0 )."', ".
+				"user_id	= '".quote($this->dblink, $user_id ? $user_id : 0 )."', ".
 				"ip			= '".quote($this->dblink, $this->get_user_ip())."', ".
 				"message	= '".quote($this->dblink, $message)."'");
 	}
