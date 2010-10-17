@@ -171,7 +171,7 @@ class Init
 					else
 					{
 						// Else it's an empty file so use the default settings, this is quite unlikely to occur.
-						$this->config = $wackoConfig;
+						$this->config = $wacko_config;
 					}
 				}
 				else if ( @file_exists('config/config.php') )
@@ -180,22 +180,22 @@ class Init
 					if ( @filesize('config/config.php') > 0)
 					{
 						require('config/config.php');
-						$this->config = $wackoConfig;
+						$this->config = $wacko_config;
 
-						if ($wackoConfig['wacko_version'] != 'R4.3.rc' && (!$wackoConfig['system_seed'] || strlen($wackoConfig['system_seed']) < 20))
+						if ($wacko_config['wacko_version'] != 'R4.3.rc' && (!$wacko_config['system_seed'] || strlen($wacko_config['system_seed']) < 20))
 							die("WackoWiki fatal error: system_seed in config.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
 
-						$wackoConfig['system_seed']	= hash('sha1', $wackoConfig['system_seed']);
+						$wacko_config['system_seed']	= hash('sha1', $wacko_config['system_seed']);
 					}
 					else
 					{
 						// Else it's an empty file so use the default settings.  This is typical on a fresh install.
-						$this->config = $wackoConfig;
+						$this->config = $wacko_config;
 					}
 				}
 				else
 				{
-					$this->config = $wackoConfig;
+					$this->config = $wacko_config;
 				}
 
 				$this->installer();
@@ -528,7 +528,7 @@ class Init
 			if ($lang == false) $lang = $this->config['language'];
 
 			$this->engine->load_all_languages();
-			$this->engine->load_resource($lang);
+			$this->engine->load_translation($lang);
 			$this->engine->set_resource ($lang);
 			$this->engine->set_language ($lang);
 			return true;

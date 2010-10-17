@@ -1,6 +1,6 @@
 <?php
 
-$wackoAllResource = array(
+$wacko_all_resource = array(
 	//link templates
 	"tpl.childpage" => '<a {aname} href="{pagelink}" class="{class}">{accicon}{icon}{page}</a>',
 	"tpl.parentpage" => '<a {aname} href="{pagelink}" class="{class}">{accicon}{icon}{page}</a>',

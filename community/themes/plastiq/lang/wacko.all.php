@@ -4,7 +4,7 @@
   $this->config['footer_comments'] = 0;
   $this->config['footer_files'] = 0;
 // ============================
-$themeResource = array(
+$theme_translation = array(
   '' => '',
 );
 ?>

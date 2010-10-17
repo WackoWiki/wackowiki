@@ -2,7 +2,7 @@
 
 // Default configuration values
 
-$wackoConfig = array(
+$wacko_config = array(
 	'database_driver' => '',
 	'database_host' => 'localhost',
 	'database_port' => '',

@@ -1,6 +1,6 @@
 <?php
 
-$wackoTranslation = array(
+$wacko_translation = array(
 	// logged in panel
 	'YouAre' => '',
 	'YouArePanelLink' => 'Ustawienia',
