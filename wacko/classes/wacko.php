@@ -25,7 +25,7 @@ class Wacko
 	var $search_engines			= array('bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider', );
 	var $_langlist				= null;
 	var $languages				= null;
-	var $resources				= null;
+	var $translations				= null;
 	var $wanted_cache			= null;
 	var $page_cache				= null;
 	var $_formatter_noautolinks	= null;
@@ -265,9 +265,9 @@ class Wacko
 	}
 
 	// LANG FUNCTIONS
-	function set_resource($lang)
+	function set_translation($lang)
 	{
-		$this->resource = & $this->resources[$lang];
+		$this->resource = & $this->translations[$lang];
 	}
 
 	function set_language($lang)
@@ -288,20 +288,20 @@ class Wacko
 
 	function load_translation($lang)
 	{
-		if (!isset($this->resources[$lang]))
+		if (!isset($this->translations[$lang]))
 		{
 			$resourcefile = 'lang/wacko.'.$lang.'.php';
 			if (@file_exists($resourcefile)) include($resourcefile);
 
 			// wacko.all
 			$resourcefile = 'lang/wacko.all.php';
-			if (!$this->resources['all'])
+			if (!$this->translations['all'])
 			{
 				if (@file_exists($resourcefile)) include($resourcefile);
-				$this->resources['all'] = & $wacko_all_resource;
+				$this->translations['all'] = & $wacko_all_resource;
 			}
 			if (!isset($wacko_translation)) $wacko_translation = array();
-			$wacko_resource = array_merge($wacko_translation, $this->resources['all']);
+			$wacko_resource = array_merge($wacko_translation, $this->translations['all']);
 
 			// theme
 			$resourcefile = 'themes/'.$this->config['theme'].'/lang/wacko.'.$lang.'.php';
@@ -314,7 +314,7 @@ class Wacko
 			if (@file_exists($resourcefile)) include($resourcefile);
 			$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
 
-			$this->resources[$lang] = $wacko_resource;
+			$this->translations[$lang] = $wacko_resource;
 
 			$this->load_lang($lang);
 		}
@@ -409,12 +409,12 @@ class Wacko
 		if ($lang != '')
 		{
 			$this->load_translation($lang);
-			if (isset($this->resources[$lang][$name]))
-				return (is_array($this->resources[$lang][$name]))
-					? $this->resources[$lang][$name]
+			if (isset($this->translations[$lang][$name]))
+				return (is_array($this->translations[$lang][$name]))
+					? $this->translations[$lang][$name]
 					: ($dounicode
-						? $this->do_unicode_entities($this->resources[$lang][$name], $lang)
-						: $this->resources[$lang][$name]);
+						? $this->do_unicode_entities($this->translations[$lang][$name], $lang)
+						: $this->translations[$lang][$name]);
 		}
 		if (isset($this->resource[$name]))
 			return $this->resource[$name];
@@ -1408,7 +1408,7 @@ class Wacko
 							{
 								$lang = $_user['lang'];
 								$this->load_translation($lang);
-								$this->set_resource ($lang);
+								$this->set_translation ($lang);
 								$this->set_language ($lang);
 
 								$subject = '['.$this->config['wacko_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
@@ -1432,7 +1432,7 @@ class Wacko
 						} // end of hasAccess
 					} // end of watchers
 					$this->load_translation($this->userlang);
-					$this->set_resource ($this->userlang);
+					$this->set_translation ($this->userlang);
 					$this->set_language ($this->userlang);
 				} // end of comment_on
 			} // end of new page
@@ -1515,7 +1515,7 @@ class Wacko
 								{
 									$lang = $_user['lang'];
 									$this->load_translation($lang);
-									$this->set_resource ($lang);
+									$this->set_translation ($lang);
 									$this->set_language ($lang);
 
 									$subject = '['.$this->config['wacko_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
@@ -1536,7 +1536,7 @@ class Wacko
 							} // end of hasaccess
 						} // end of watchers
 						$this->load_translation($this->userlang);
-						$this->set_resource ($this->userlang);
+						$this->set_translation ($this->userlang);
 						$this->set_language ($this->userlang);
 					}
 				} // end of new != old
@@ -3978,10 +3978,10 @@ class Wacko
 		if (!$this->config['multilanguage'])
 			$this->set_language($this->config['language']);
 
-		// registering resources
+		// registering translations
 		$this->load_all_languages();
 		$this->load_translation($this->userlang);
-		$this->set_resource($this->userlang);
+		$this->set_translation($this->userlang);
 		$this->set_language($this->userlang);
 
 		// SEO
@@ -4788,7 +4788,7 @@ class Wacko
 	}
 
 	// log event into the system journal. $message may use wiki
-	// syntax, however if used before locale resources registration,
+	// syntax, however if used before locale translations registration,
 	// will be saved in plain text only.
 	// $level denotes event priority with 1 = highest.
 	// event classes are:
