@@ -496,7 +496,7 @@ class Wacko
 		$decrement[4] = 240; $decrement[3] = 224;
 		$decrement[2] = 192; $decrement[1] = 0;
 
-		// the number of bits to shift each charNum by
+		// the number of bits to shift each char_num by
 		$shift[1][0] = 0;  $shift[2][0] = 6;
 		$shift[2][1] = 0;  $shift[3][0] = 12;
 		$shift[3][1] = 6;  $shift[3][2] = 0;
@@ -505,63 +505,63 @@ class Wacko
 
 		$pos = 0;
 		$len = strlen ($source);
-		$encodedString = '';
+		$encoded_string = '';
 		while ($pos < $len)
 		{
-			$asciiPos = ord (substr ($source, $pos, 1));
-			if (($asciiPos >= 240) && ($asciiPos <= 255))
+			$ascii_pos = ord (substr ($source, $pos, 1));
+			if (($ascii_pos >= 240) && ($ascii_pos <= 255))
 			{
 				// 4 chars representing one unicode character
-				$thisLetter = substr ($source, $pos, 4);
+				$this_letter = substr ($source, $pos, 4);
 				$pos += 4;
 			}
-			else if (($asciiPos >= 224) && ($asciiPos <= 239))
+			else if (($ascii_pos >= 224) && ($ascii_pos <= 239))
 			{
 				// 3 chars representing one unicode character
-				$thisLetter = substr ($source, $pos, 3);
+				$this_letter = substr ($source, $pos, 3);
 				$pos += 3;
 			}
-			else if (($asciiPos >= 192) && ($asciiPos <= 223))
+			else if (($ascii_pos >= 192) && ($ascii_pos <= 223))
 			{
 				// 2 chars representing one unicode character
-				$thisLetter = substr ($source, $pos, 2);
+				$this_letter = substr ($source, $pos, 2);
 				$pos += 2;
 			}
 			else
 			{
 				// 1 char (lower ascii)
-				$thisLetter = substr ($source, $pos, 1);
+				$this_letter = substr ($source, $pos, 1);
 				$pos += 1;
 			}
 
 			// process the string representing the letter to a unicode entity
-			$thisLen = strlen ($thisLetter);
-			if ($thisLen > 1)
+			$this_len = strlen ($this_letter);
+			if ($this_len > 1)
 			{
-				$thisPos = 0;
-				$decimalCode = 0;
-				while ($thisPos < $thisLen)
+				$this_pos = 0;
+				$decimal_code = 0;
+				while ($this_pos < $this_len)
 				{
-					$thisCharOrd = ord (substr ($thisLetter, $thisPos, 1));
-					if ($thisPos == 0)
+					$this_char_ord = ord (substr ($this_letter, $this_pos, 1));
+					if ($this_pos == 0)
 					{
-						$charNum = intval ($thisCharOrd - $decrement[$thisLen]);
-						$decimalCode += ($charNum << $shift[$thisLen][$thisPos]);
+						$char_num = intval ($this_char_ord - $decrement[$this_len]);
+						$decimal_code += ($char_num << $shift[$this_len][$this_pos]);
 					}
 					else
 					{
-						$charNum = intval ($thisCharOrd - 128);
-						$decimalCode += ($charNum << $shift[$thisLen][$thisPos]);
+						$char_num = intval ($this_char_ord - 128);
+						$decimal_code += ($char_num << $shift[$this_len][$this_pos]);
 					}
-					$thisPos++;
+					$this_pos++;
 				}
-				$encodedLetter = '&#'. $decimalCode . ';';
+				$encoded_letter = '&#'. $decimal_code . ';';
 			}
 			else
-				$encodedLetter = $thisLetter;
-				$encodedString .= $encodedLetter;
+				$encoded_letter = $this_letter;
+				$encoded_string .= $encoded_letter;
 		}
-		return $encodedString;
+		return $encoded_string;
 	}
 
 	// PAGES
@@ -689,8 +689,8 @@ class Wacko
 			$supertag = $tag;
 
 		// retrieve from cache
-		if (!$time && $cache && ($cachedPage = $this->get_cached_page($supertag, $metadataonly)))
-			$page = $cachedPage;
+		if (!$time && $cache && ($cached_page = $this->get_cached_page($supertag, $metadataonly)))
+			$page = $cached_page;
 
 		// load page
 		if ($metadataonly)
@@ -758,7 +758,7 @@ class Wacko
 			}
 		}
 		// cache result
-		if (!$time && !$cachedPage) $this->cache_page($page, $metadataonly);
+		if (!$time && !$cached_page) $this->cache_page($page, $metadataonly);
 
 		return $page;
 	}
@@ -4320,12 +4320,12 @@ class Wacko
 
 	// CLONE / RENAMING / MOVING
 
-	function clone_page($tag, $clonetag, $cloneSuperTag = '', $edit_note)
+	function clone_page($tag, $clonetag, $clone_supertag = '', $edit_note)
 	{
 		if (!$tag || !$clonetag) return false;
 
-		if ($cloneSuperTag == '')
-			$cloneSuperTag = $this->npj_translit($clonetag);
+		if ($clone_supertag == '')
+			$clone_supertag = $this->npj_translit($clonetag);
 
 		// load page and site information
 		$page = $this->load_page($tag);
@@ -4336,24 +4336,24 @@ class Wacko
 			$this->save_page($new, $title = $page['title'], $page['body'], $edit_note, $minor_edit = 0, $comment_on_id = 0, $lang = $page['lang'], $mute = false, $user = false);
 	}
 
-	function rename_page($tag, $NewTag, $NewSuperTag = '')
+	function rename_page($tag, $new_tag, $new_supertag = '')
 	{
-		if (!$tag || !$NewTag) return false;
+		if (!$tag || !$new_tag) return false;
 
-		if ($NewSuperTag == '')
-			$NewSuperTag = $this->npj_translit($NewTag);
+		if ($new_supertag == '')
+			$new_supertag = $this->npj_translit($new_tag);
 
 		return
 			$this->query(
 				"UPDATE ".$this->config['table_prefix']."revision SET ".
-					"tag		= '".quote($this->dblink, $NewTag)."', ".
-					"supertag	= '".quote($this->dblink, $NewSuperTag)."' ".
+					"tag		= '".quote($this->dblink, $new_tag)."', ".
+					"supertag	= '".quote($this->dblink, $new_supertag)."' ".
 				"WHERE tag = '".quote($this->dblink, $tag)."' ")
 			&&
 			$this->query(
 				"UPDATE ".$this->config['table_prefix']."page  SET ".
-					"tag		= '".quote($this->dblink, $NewTag)."', ".
-					"supertag	= '".quote($this->dblink, $NewSuperTag)."' ".
+					"tag		= '".quote($this->dblink, $new_tag)."', ".
+					"supertag	= '".quote($this->dblink, $new_supertag)."' ".
 				"WHERE tag = '".quote($this->dblink, $tag)."' ");
 	}
 
