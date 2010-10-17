@@ -1,5 +1,5 @@
 <?php
-$themeResource = array(
+$theme_translation = array(
   'ACLStoreButton'  => 'сохранить',
   'ACLCancelButton' => 'отмена',
   'EditStoreButton' => 'сохранить',

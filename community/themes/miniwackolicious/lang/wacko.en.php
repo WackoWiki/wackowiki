@@ -1,5 +1,5 @@
 <?php
-$themeResource = array(
+$theme_translation = array(
     'TextSearchPage' => 'TextSearch',
     'LoginPage' => 'Login',
     'SettingsPage' => 'Settings',

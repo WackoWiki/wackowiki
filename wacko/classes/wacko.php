@@ -272,7 +272,7 @@ class Wacko
 
 	function set_language($lang)
 	{
-		$this->load_resource($lang);
+		$this->load_translation($lang);
 		$this->language = &$this->languages[$lang];
 
 		setlocale(LC_CTYPE, $this->language['locale']);
@@ -286,7 +286,7 @@ class Wacko
 		$this->language['ALPHANUM_P']	= '0-9'.$this->language['ALPHA_P'];
 	}
 
-	function load_resource($lang)
+	function load_translation($lang)
 	{
 		if (!isset($this->resources[$lang]))
 		{
@@ -298,23 +298,23 @@ class Wacko
 			if (!$this->resources['all'])
 			{
 				if (@file_exists($resourcefile)) include($resourcefile);
-				$this->resources['all'] = & $wackoAllResource;
+				$this->resources['all'] = & $wacko_all_resource;
 			}
-			if (!isset($wackoTranslation)) $wackoTranslation = array();
-			$wackoResource = array_merge($wackoTranslation, $this->resources['all']);
+			if (!isset($wacko_translation)) $wacko_translation = array();
+			$wacko_resource = array_merge($wacko_translation, $this->resources['all']);
 
 			// theme
 			$resourcefile = 'themes/'.$this->config['theme'].'/lang/wacko.'.$lang.'.php';
 			if (@file_exists($resourcefile)) include($resourcefile);
-			if (!isset($themeResource)) $themeResource = '';
-			$wackoResource = array_merge((array)$wackoResource, (array)$themeResource);
+			if (!isset($theme_translation)) $theme_translation = '';
+			$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
 
 			// wacko.all theme
 			$resourcefile = 'themes/'.$this->config['theme'].'/lang/wacko.all.php';
 			if (@file_exists($resourcefile)) include($resourcefile);
-			$wackoResource = array_merge((array)$wackoResource, (array)$themeResource);
+			$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
 
-			$this->resources[$lang] = $wackoResource;
+			$this->resources[$lang] = $wacko_resource;
 
 			$this->load_lang($lang);
 		}
@@ -408,7 +408,7 @@ class Wacko
 
 		if ($lang != '')
 		{
-			$this->load_resource($lang);
+			$this->load_translation($lang);
 			if (isset($this->resources[$lang][$name]))
 				return (is_array($this->resources[$lang][$name]))
 					? $this->resources[$lang][$name]
@@ -456,7 +456,7 @@ class Wacko
 	function get_charset()
 	{
 		$lang = $this->determine_lang();
-		$this->load_resource($lang);
+		$this->load_translation($lang);
 		if (isset($this->languages[$lang]['charset']))
 			return $this->languages[$lang]['charset'];
 		else
@@ -471,7 +471,7 @@ class Wacko
 
 		if ($lang == $_lang) return $string;
 
-		$this->load_resource($lang);
+		$this->load_translation($lang);
 
 		if (is_array($this->languages[$lang]['unicode_entities']))
 			return @strtr($string, $this->languages[$lang]['unicode_entities']);
@@ -1407,7 +1407,7 @@ class Wacko
 							if ($_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
 							{
 								$lang = $_user['lang'];
-								$this->load_resource($lang);
+								$this->load_translation($lang);
 								$this->set_resource ($lang);
 								$this->set_language ($lang);
 
@@ -1431,7 +1431,7 @@ class Wacko
 							$this->clear_watch($watcher['user_id'], $comment_on_id);
 						} // end of hasAccess
 					} // end of watchers
-					$this->load_resource($this->userlang);
+					$this->load_translation($this->userlang);
 					$this->set_resource ($this->userlang);
 					$this->set_language ($this->userlang);
 				} // end of comment_on
@@ -1514,7 +1514,7 @@ class Wacko
 								if ($_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
 								{
 									$lang = $_user['lang'];
-									$this->load_resource($lang);
+									$this->load_translation($lang);
 									$this->set_resource ($lang);
 									$this->set_language ($lang);
 
@@ -1535,7 +1535,7 @@ class Wacko
 								}
 							} // end of hasaccess
 						} // end of watchers
-						$this->load_resource($this->userlang);
+						$this->load_translation($this->userlang);
 						$this->set_resource ($this->userlang);
 						$this->set_language ($this->userlang);
 					}
@@ -3980,7 +3980,7 @@ class Wacko
 
 		// registering resources
 		$this->load_all_languages();
-		$this->load_resource($this->userlang);
+		$this->load_translation($this->userlang);
 		$this->set_resource($this->userlang);
 		$this->set_language($this->userlang);
 

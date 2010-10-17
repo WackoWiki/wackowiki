@@ -18,7 +18,7 @@ class RSS
 	function rss(&$engine)
 	{
 		$this->engine = & $engine;
-		$this->engine->load_resource($this->engine->config['language']);
+		$this->engine->load_translation($this->engine->config['language']);
 		$this->charset = $this->engine->languages[$this->engine->config['language']]['charset'];
 	}
 

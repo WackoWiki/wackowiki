@@ -1,5 +1,5 @@
 <?php
-$themeResource = array(
+$theme_translation = array(
 	'EditIcon' => '<img src="'.$this->config['theme_url'].'icons/edit.gif" alt="Редактировать вложенную страницу" border="0" />',
 	'ACLStoreButton'  => 'Сохранить',
 	'ACLCancelButton' => 'Отменить\nи вернуться',

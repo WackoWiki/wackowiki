@@ -1,5 +1,5 @@
 <?php
-$themeResource = array(
+$theme_translation = array(
   'ThisPage' => 'Ёта страница',
   'ExportToXML' => 'Ёкспорт в XML',
 );
