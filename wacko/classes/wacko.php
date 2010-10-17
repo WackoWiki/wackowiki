@@ -1365,7 +1365,7 @@ class Wacko
 				if ($comment_on_id)
 				{
 					// notifying watchers
-					$username	= $user;
+					$user_name	= $user;
 					$title		= $this->get_page_title(0, $comment_on_id);
 					$watchers	= $this->load_all(
 									"SELECT DISTINCT w.user_id, u.user_name ".
@@ -1413,7 +1413,7 @@ class Wacko
 
 								$subject = "[".$this->config['wacko_name']."] ".$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
 								$message = $this->get_translation('EmailHello', $lang). $watcher['user_name'].".\n\n".
-											$username.
+											$user_name.
 											$this->get_translation('SomeoneCommented', $lang)."\n".
 											$this->href('', $this->get_comment_on_tag($comment_on_id), '')."\n\n".
 											"----------------------------------------------------------------------\n\n".
@@ -1490,7 +1490,7 @@ class Wacko
 					// notifying watchers
 					$page_id	= $this->get_page_id($tag);
 					$title		= $this->get_page_title(0, $page_id);
-					$username	= $user;
+					$user_name	= $user;
 
 					$watchers	= $this->load_all(
 						"SELECT DISTINCT w.user_id, u.user_name ".
@@ -1520,7 +1520,7 @@ class Wacko
 
 									$subject = "[".$this->config['wacko_name']."] ".$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
 									$message = $this->get_translation('EmailHello', $lang). $watcher['user_name']."\n\n".
-										$username.
+										$user_name.
 										$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
 										$title."\n".
 										$this->href('', $tag)."\n\n".
@@ -2726,9 +2726,9 @@ class Wacko
 
 	function get_user_name()
 	{
-		if ($username = $this->get_user_setting('user_name'))
+		if ($user_name = $this->get_user_setting('user_name'))
 		{
-			return $username;
+			return $user_name;
 		}
 		else
 		{
@@ -2822,13 +2822,13 @@ class Wacko
 		if ($this->config['session_encrypt_cookie'] == true)
 		{
 			$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
-			$username	= $user['user_name'];
+			$user_name	= $user['user_name'];
 			$password	= base64_encode(hash('sha1', $this->config['system_seed'] ^ $time_pad) ^ $user['password']);
 			// authenticating cookie data:
 			// seed | username | composed pwd | raw session time | raw password
-			$cookie_mac	= hash('sha1', $this->config['system_seed'].$username.$password.$ses_time.$user['password']);
+			$cookie_mac	= hash('sha1', $this->config['system_seed'].$user_name.$password.$ses_time.$user['password']);
 			// construct and set cookie
-			$cookie		= implode(';', array($username, $password, $ses_time, $cookie_mac));
+			$cookie		= implode(';', array($user_name, $password, $ses_time, $cookie_mac));
 		}
 		else
 		{
@@ -2876,18 +2876,18 @@ class Wacko
 		{
 			if ($this->config['session_encrypt_cookie'] == true)
 			{
-				list($username, $b64password, $ses_time, $cookie_mac) = explode(';', $cookie);
+				list($user_name, $b64password, $ses_time, $cookie_mac) = explode(';', $cookie);
 				$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
 				$password	= hash('sha1', $this->config['system_seed'] ^ $time_pad) ^ base64_decode($b64password);
-				$recalc_mac	= hash('sha1', $this->config['system_seed'].$username.$b64password.$ses_time.$password);
+				$recalc_mac	= hash('sha1', $this->config['system_seed'].$user_name.$b64password.$ses_time.$password);
 			}
 			else
 			{
-				list($username, $password, $ses_time) = explode(';', $cookie);
+				list($user_name, $password, $ses_time) = explode(';', $cookie);
 			}
 
 			return array(
-				'user_name'		=> $username,
+				'user_name'		=> $user_name,
 				'password'		=> $password,
 				'ses_time'		=> $ses_time,
 				'cookie_mac'	=> $cookie_mac,
@@ -3302,9 +3302,9 @@ class Wacko
 	// returns true if $user (defaults to the current user) has access to $privilege on $page_tag (defaults to the current page)
 	function has_access($privilege, $page_id = '', $user = '', $useParent = 1)
 	{
-		if ($user == '') $username = strtolower($this->get_user_name());
-		else if ($user == GUEST) $username = GUEST;
-		else $username = $user;
+		if ($user == '') $user_name = strtolower($this->get_user_name());
+		else if ($user == GUEST) $user_name = GUEST;
+		else $user_name = $user;
 
 		if (!$page_id = trim($page_id)) $page_id = $this->page['page_id'];
 
@@ -3315,11 +3315,11 @@ class Wacko
 		$this->_acl = $acl;
 
 		// if current user is owner or admin, return true. they can do anything!
-		if ($user == '' && $username != GUEST)
+		if ($user == '' && $user_name != GUEST)
 			if ($this->user_is_owner($page_id) || $this->is_admin())
 				return true;
 
-		return $this->check_acl($username, $acl['list'], true);
+		return $this->check_acl($user_name, $acl['list'], true);
 	}
 
 	function check_acl($user, $acl_list, $copy_to_this_acl = false, $debug = 0)
@@ -4320,16 +4320,16 @@ class Wacko
 
 	// CLONE / RENAMING / MOVING
 
-	function clone_page($tag, $clonetag, $clone_supertag = '', $edit_note)
+	function clone_page($tag, $clone_tag, $clone_supertag = '', $edit_note)
 	{
-		if (!$tag || !$clonetag) return false;
+		if (!$tag || !$clone_tag) return false;
 
 		if ($clone_supertag == '')
-			$clone_supertag = $this->npj_translit($clonetag);
+			$clone_supertag = $this->npj_translit($clone_tag);
 
 		// load page and site information
 		$page = $this->load_page($tag);
-		$new = $clonetag;
+		$new = $clone_tag;
 
 		return
 			// save
