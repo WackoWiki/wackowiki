@@ -529,7 +529,7 @@ class Init
 
 			$this->engine->load_all_languages();
 			$this->engine->load_translation($lang);
-			$this->engine->set_resource ($lang);
+			$this->engine->set_translation ($lang);
 			$this->engine->set_language ($lang);
 			return true;
 		}

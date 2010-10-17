@@ -871,16 +871,16 @@ class WackoFormatter
 				$start = '';
 
 			// find out which indent type we want
-			$newIndentType = isset($matches[3][0]) ? $matches[3][0] : "";
+			$new_indent_type = isset($matches[3][0]) ? $matches[3][0] : "";
 
-			if (!$newIndentType)
+			if (!$new_indent_type)
 			{
 				$opener		= '<div class="indent">';
 				$closer		= '</div>';
 				$this->br	= 1;
 				$newtype	= 'i';
 			}
-			else if ($newIndentType == '-' || $newIndentType == '*')
+			else if ($new_indent_type == '-' || $new_indent_type == '*')
 			{
 				$opener		= '<ul><li>';
 				$closer		= '</li></ul>';
@@ -889,7 +889,7 @@ class WackoFormatter
 			}
 			else
 			{
-				$opener		= '<ol type="'.$newIndentType.'"><li'.
+				$opener		= '<ol type="'.$new_indent_type.'"><li'.
 							  ($start ? ' value="'.$start.'"' : '').'>';
 				$closer		= '</li></ol>';
 				$newtype	= '1';
