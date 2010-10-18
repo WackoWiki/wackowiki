@@ -32,7 +32,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 <?php
 	echo '	<link rel="start" href="'.$base_url.'Homepage" />'."\n";
 	// Echoes Title of the page.
-	echo "	<title>" . $this->config['wacko_name']." : ".$this->add_spaces($this->tag).($this->method!="show"?" (".$this->method.")":"");
+	echo "	<title>" . $this->config['wacko_name']." : ".(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '');
 	echo "</title>\n";
 ?>
 	<!-- link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" / -->

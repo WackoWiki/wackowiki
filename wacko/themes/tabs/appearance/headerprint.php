@@ -5,22 +5,18 @@ header("Content-Type: text/html; charset=".$this->get_charset());
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page['lang'] ?>" lang="<?php echo $this->page['lang'] ?>">
 <head>
-<title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".$this->tag; ?></title>
+<title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".(isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></title>
 <?php // do not index alternative print pages
 echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
-<meta http-equiv="content-type"
-	content="text/html; charset=<?php echo $this->get_charset(); ?>" />
-<meta name="keywords"
-	content="<?php echo $this->config['meta_keywords'] ?>" />
-<meta name="description"
-	content="<?php echo $this->config['meta_description'] ?>" />
-<link rel="stylesheet" type="text/css"
-	href="<?php echo $this->config['theme_url'] ?>css/print.css" />
+<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
+<meta name="keywords" content="<?php echo $this->config['meta_keywords'] ?>" />
+<meta name="description" content="<?php echo $this->config['meta_description'] ?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
 </head>
 
 <body>
 
 <div class="header">
-<h1><?php echo $this->config['wacko_name'] ?>: <?php echo $this->compose_link_to_page($this->npj_translit($this->tag), "", $this->tag); ?>
-(<?php echo $this->get_translation('PrintVersion');?>)</h1>
+<h1><?php echo $this->config['wacko_name'] ?>: <?php echo $this->compose_link_to_page($this->npj_translit($this->tag), '', (isset($this->page['title']) ? $this->page['title'] : $this->tag)); ?>
+ (<?php echo $this->get_translation('PrintVersion');?>)</h1>
 </div>

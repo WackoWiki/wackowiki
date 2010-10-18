@@ -13,7 +13,7 @@ Common header file.
 <title>
 <?php
 // Echoes Title of the page.
-  echo htmlspecialchars($this->config['wacko_name'])." : ".$this->add_spaces($this->tag).($this->method!="show"?" (".$this->method.")":"");
+  echo htmlspecialchars($this->config['wacko_name'])." : ".(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '');
 ?>
 </title>
 <?php
@@ -55,25 +55,25 @@ if ($this->method == 'edit')
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->get_user())
-   {
-      if ($user['doubleclick_edit'] == 1)
-         {
+{
+	if ($user['doubleclick_edit'] == 1)
+	{
 ?>
   <script type="text/javascript">
    var edit = "<?php echo $this->href('edit');?>";
   </script>
 <?php
-         }
-   }
+	}
+}
 else if($this->has_access('write'))
-   {
+{
 ?>
 
       <script type="text/javascript">
       var edit = "<?php echo $this->href('edit');?>";
      </script>
 <?php
-   }
+}
 ?>
 </head>
 <?php
@@ -101,7 +101,7 @@ echo $this->form_close();
 ?></div></td>
   </tr>
   <tr>
-    <td valign="top"><div class="tagline">Placeholder</div></td>
+    <td valign="top"><div class="tagline"><?php $this->config['wacko_desc']; ?></div></td>
     <td width="100%">&nbsp;</td>
   </tr>
   <tr>
@@ -117,19 +117,20 @@ echo $this->form_close();
      href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></div></td>
           <td align="right"><?php
 // If user are logged, Wacko shows "You are UserName"
-if ($this->get_user()) {
+if ($this->get_user())
+{
 ?>
             <span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
-            <?php
+<?php
       echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), "", $this->get_translation('YouArePanelAccount'), 0); ?>
             | <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span> )</small>
-            <?php
+<?php
 // Else Wacko shows login's controls
 }
 // End if
 ?></td>
         </tr>
-        <?php
+<?php
 // Closing Login form, If user are logged
 # if ($this->get_user()) {
 # echo $this->form_close();
@@ -150,9 +151,9 @@ if ($this->get_user()) {
   <td valign="top" class="left" width="185" style="white-space: nowrap;"><table width="185" border="0" align="left" cellpadding="0" cellspacing="0">
       <tr align="left">
         <td><div>
-            <?php
+<?php
 		# echo '<br />';
-        # echo "<hr color=#CCCCCC noshade size=1 />";
+		# echo "<hr color=#CCCCCC noshade size=1 />";
 		echo '<div class="leftNav"><ul class="leftNav"><li>';
 
 // Bookmarks
@@ -161,15 +162,15 @@ $formatedBMs =  $this->format($this->format(implode("| ", $BMs), "wacko"), "post
 $formatedBMs = str_replace ( "\n", "</li><li>\n", $formatedBMs );
 echo $formatedBMs;
 echo "</li></ul></div>";
-        # echo "<hr color=#CCCCCC noshade size=1 />";
+		# echo "<hr color=#CCCCCC noshade size=1 />";
 		echo '<br />';
-       if ($this->get_user()) {
+		if ($this->get_user()) {
 			if (!in_array($this->tag, $this->get_bookmark_links())) {?>
             <a href="<?php echo $this->href('', '', "addbookmark=yes")?>"> <img src="<?php echo $this->config['theme_url'] ?>icons/bookmark1.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->get_translation('Bookmarks'); ?> </a>
             <?php } else { ?>
             <a href="<?php echo $this->href('', '', "removebookmark=yes")?>"> <img src="<?php echo $this->config['theme_url'] ?>icons/bookmark2.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->get_translation('Bookmarks');
 ?> </a>
-            <?php
+<?php
 }
 echo "<hr noshade=\"noshade\" size=\"1\" />";
 echo "<div class=\"credits\">";
@@ -178,12 +179,12 @@ echo "</div>";
 }
 ?>
             <div>
-              <?php
-        					#    if ($this->user_is_owner()) {
-		                    #   		echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
+<?php
+							#    if ($this->user_is_owner()) {
+							#   		echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 							#		print($this->get_translation('YouAreOwner'));
 							#    } else {
-		                    #  		echo "<hr noshade=\"noshade\" size=\"1\" />";
+							#  		echo "<hr noshade=\"noshade\" size=\"1\" />";
 							#    	if ($owner = $this->get_page_owner()) {
 							#        print($this->get_translation('Owner').": ".$this->link($owner));
 							#      } else if (!$this->page['comment_on_id']) {

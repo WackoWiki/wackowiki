@@ -20,7 +20,7 @@
 		br {display:inline;}
 	</style>
 	<link rel="start" href="<?php echo $this->config['base_url']; ?>" />
-	<title><?php echo $this->config['wacko_name'] ?> : <?php echo $this->add_spaces($this->tag).($this->method!="show"?" (".$this->method.")":""); ?></title>
+	<title><?php echo $this->config['wacko_name'] ?> : <?php echo $this->add_spaces($this->tag).($this->method != 'show' ? ' ('.$this->method.')' : ''); ?></title>
 	<link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" />
 
 <body>
