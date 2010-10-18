@@ -117,14 +117,14 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 			else if ($email == '')
 				$error .= $this->get_translation('SpecifyEmail')." ";
 			// invalid email
-			else if (!preg_match("/^.+?\@.+$/", $email))
+			else if (!preg_match('/^.+?\@.+$/', $email))
 				$error .= $this->get_translation('NotAEmail')." ";
 
 			// confirmed password mismatch
 			else if ($confpassword != $password)
 				$error .= $this->get_translation('PasswordsDidntMatch')." ";
 			// spaces in password
-			else if (preg_match("/ /", $password))
+			else if (preg_match('/ /', $password))
 				$error .= $this->get_translation('SpacesArentAllowed')." ";
 			// password complexity validation
 			else if ($complexity > 0)

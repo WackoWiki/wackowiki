@@ -19,13 +19,13 @@ class post_wacko
 		$wacko	= &$this->object;
 
 		// forced links ((link link == desc desc))
-		if (preg_match("/^<!--link:begin-->([^\n]+)==([^\n]*)<!--link:end-->$/", $thing, $matches))
+		if (preg_match('/^<!--link:begin-->([^\n]+)==([^\n]*)<!--link:end-->$/', $thing, $matches))
 		{
 			list (, $url, $text) = $matches;
 			if ($url)
 			{
 				$url	= str_replace(' ', '%20', trim($url));
-				$text	= trim(preg_replace("/<!--markup:1:[\w]+-->|__|\[\[|\(\(/", '', $text));
+				$text	= trim(preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/', '', $text));
 				if (stristr($text, '@@'))
 				{
 					$t		= explode('@@', $text);
@@ -37,7 +37,7 @@ class post_wacko
 			else return '';
 		}
 		// image link
-		else if (preg_match("/^<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->$/", $thing, $matches))
+		else if (preg_match('/^<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->$/', $thing, $matches))
 		{
 			list ( , $url, $img) = $matches;
 			if ($url && $img)
@@ -46,7 +46,7 @@ class post_wacko
 				$url	= $wacko->link($url, '', '', 1, 1);
 				if (!$url = preg_replace('/.*href="(.*?)".*|.*src="(.*?)".*/', '\\1\\2', $url)) return $url;
 				$img	= str_replace(' ', '', $img);
-				$img	= trim(preg_replace("/<!--imgprelink:[\w]+-->|__|\[\*\[|\(\*\(/", '', $img));
+				$img	= trim(preg_replace('/<!--imgprelink:[\w]+-->|__|\[\*\[|\(\*\(/', '', $img));
 				$img	= $wacko->link($img, '', '', 1, 1);
 
 				return '<a href="'.$url.'">'.$img.'</a>';
@@ -54,7 +54,7 @@ class post_wacko
 			else return '';
 		}
 		// actions
-		else if (preg_match("/^<!--action:begin-->\s*([^\n]+?)<!--action:end-->$/s", $thing, $matches))
+		else if (preg_match('/^<!--action:begin-->\s*([^\n]+?)<!--action:end-->$/s', $thing, $matches))
 		{
 			if ($matches[1] && (!isset($this->options['diff']) || in_array(strtolower($matches[1]), $this->actions)))
 			{

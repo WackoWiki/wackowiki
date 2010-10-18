@@ -412,8 +412,8 @@ class SafeHTML
             return true;
         }
 
-        if (!preg_match("/^[a-z0-9]+$/i", $name)) {
-            if (preg_match("!(?:\@|://)!i", $name)) {
+        if (!preg_match('/^[a-z0-9]+$/i', $name)) {
+            if (preg_match('!(?:\@|://)!i', $name)) {
                 $this->xhtml .= '&lt;' . $name . '&gt;';
             }
             return true;
@@ -637,7 +637,7 @@ class SafeHTML
         $result = '';
 
         // Save all '<' symbols
-        $doc = preg_replace("/<(?=[^a-zA-Z\/\!\?\%])/", '&lt;', $doc);
+        $doc = preg_replace('/<(?=[^a-zA-Z\/\!\?\%])/', '&lt;', $doc);
 
         // Web documents shouldn't contains \x00 symbol
         $doc = str_replace("\x00", '', $doc);

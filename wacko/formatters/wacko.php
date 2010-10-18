@@ -28,12 +28,11 @@ for ($i = 0; $i < count($wtexts); $i++)
 	$text = $text.((isset($wtexts[$i])) ? $wtexts[$i] : '').((isset($texts[2 * $i + 1])) ? $texts[2 * $i + 1] : '');
 }
 
-//$text	= implode('', $texts);
 $text	= str_replace("\177"."<br />\n", '', $text);
 $text	= str_replace("\177"."", '', $text);
 
 // we're cutting the last <br />
-$text	= preg_replace('/<br \/>$/', '', $text); //trim($text));
+$text	= preg_replace('/<br \/>$/', '', $text);
 
 // close all open tables
 $opens	= preg_match_all('/<table/', $text, $matches);
