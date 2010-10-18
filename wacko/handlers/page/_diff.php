@@ -128,7 +128,7 @@ class Side {
 
 	function skip_line()  {
 		while (!$this->isend() && !$this->isdigit($this->character)) {
-			while (!$this->isend() && $this->character!="\n")
+			while (!$this->isend() && $this->character != "\n")
 			$this->nextchar();
 			if($this->character=="\n")
 			$this->nextchar();

@@ -172,7 +172,7 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 				if (!$comment_on_id)
 				{
 					echo "<input id=\"removerevisions\" type=\"checkbox\" name=\"revisions\" value=\"1\" />";
-					echo "<label for=\"removerevisions\">".$this->get_translation('remove_revisions')."</label><br />";
+					echo "<label for=\"removerevisions\">".$this->get_translation('RemoveRevisions')."</label><br />";
 					echo "<input id=\"removecluster\" type=\"checkbox\" name=\"cluster\" value=\"1\" />";
 					echo "<label for=\"removecluster\">".$this->get_translation('RemoveCluster')."</label><br />";
 					echo "<input id=\"dontkeep\" type=\"checkbox\" name=\"dontkeep\" value=\"1\" />";
