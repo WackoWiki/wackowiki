@@ -160,7 +160,7 @@ if ($registered
 			"FROM ".$this->config['table_prefix']."upload ".
 			"WHERE user_id = '".quote($this->dblink, $user['user_id'])."'");
 
-		if (!$this->config['upload_quota_per_user'] || ($files < $this->config['upload_quota_per_user']))
+		if (!$this->config['upload_quota_per_user'] || ($files[0]['used_quota'] < $this->config['upload_quota_per_user']))
 		{
 			if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) // there is file
 			{
