@@ -14,7 +14,7 @@ lernjournal theme.
 <title>
 <?php
 // Echoes Title of the page.
-  echo htmlspecialchars($this->config['wacko_name'])." : ".$this->add_spaces($this->tag).($this->method!="show"?" (".$this->method.")":"");
+  echo htmlspecialchars($this->config['wacko_name'])." : ".(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '');
 ?>
 </title>
 <?php

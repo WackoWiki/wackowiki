@@ -5,7 +5,7 @@
 
 <html>
 <head>
-  <title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".$this->tag; ?></title>
+  <title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".(isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></title>
 <?php // do not index alternative print pages
   echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
   <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
@@ -19,6 +19,6 @@
 <div class="header">
   <h1>
   <?php echo $this->config['wacko_name'] ?>:
-  <a href="<?php echo $this->config['base_url'] ?>TextSearch?phrase=<?php echo urlencode($this->tag); ?>"><?php echo $this->tag; ?></a>
+  <a href="<?php echo $this->config['base_url'] ?>TextSearch?phrase=<?php echo urlencode($this->tag); ?>"><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></a>
   </h1>
 </div>

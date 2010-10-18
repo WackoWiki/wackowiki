@@ -25,7 +25,7 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 	if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noindex'] == 1 || $this->page['noindex'] == 1)
 		echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 	?>
-	<title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".$this->add_spaces($this->tag).($this->method!="show"?" (".$this->method.")":""); ?></title>
+	<title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : ''); ?></title>
 	<!-- JavaScript used by WackoWiki -->
 	<?php
 // JS files.
