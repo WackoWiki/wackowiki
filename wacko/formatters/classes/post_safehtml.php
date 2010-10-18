@@ -25,7 +25,7 @@ class post_safehtml
 			if ($url)
 			{
 				$url	= str_replace(' ', '%20', trim($url));
-				$text	= trim(preg_replace("/<!--markup:1:[\w]+-->|__|\[\[|\(\(/", '', $text));
+				$text	= trim(preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/', '', $text));
 				return $wacko->link($url, ($this->options["feed"]?"no404": ''), $text);
 			}
 			else return '';
