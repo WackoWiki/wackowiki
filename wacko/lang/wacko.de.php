@@ -39,9 +39,9 @@ $wacko_translation = array(
 	'SomeoneChangedThisPage' => ' änderte diese von dir beobachtete Seite: ',
 	'ActionDenied' => 'Diese Aktion ist hier nicht erlaubt.',
 	'TOCTitle' => 'Inhalt ',
-	'OuterLink2' => 'externer Verweis'."\n".'(in neuem Fenster)',
+	'OuterLink2' => 'externer Verweis',
 	'FileLink' => '',
-	'PDFLink' => 'PDF Dokument (in neuem Fenster)',
+	'PDFLink' => 'PDF Dokument',
 	'RDFLink' => 'RDF Dokument',
 	'EmailLink' => 'Schreibe E-Mail'."\n".'(E-Mailprogramm wird gestartet)',
 

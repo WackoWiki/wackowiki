@@ -41,9 +41,9 @@ $wacko_translation = array(
 	'ActionDenied' => 'See tegevus on keelatud.',
 	'TOCTitle' => 'Sisukord ',
 	'SearchButtonText' => 'Otsi',
-	'OuterLink2' => 'Väline viide (avaneb uues aknas)',
+	'OuterLink2' => 'Väline viide',
 	'FileLink' => '',
-	'PDFLink' => 'PDF Document (avaneb uues aknas)',
+	'PDFLink' => 'PDF Document',
 	'RDFLink' => 'RDF Document',
 	'EmailLink' => 'Koosta e-kiri (mailiprogramm avaneb)',
 

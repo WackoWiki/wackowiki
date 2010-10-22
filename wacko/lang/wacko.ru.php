@@ -41,9 +41,9 @@ $wacko_translation = array(
 	'ActionDenied' => 'Вызов действия запрещён',
 	'TOCTitle' => 'Оглавление ',
 	'SearchButtonText' => 'Поиск',
-	'OuterLink2' => 'Внешняя ссылка (откроется в новом окне)',
+	'OuterLink2' => 'Внешняя ссылка',
 	'FileLink' => '',
-	'PDFLink' => 'Документ PDF (откроется в новом окне)',
+	'PDFLink' => 'Документ PDF',
 	'RDFLink' => 'Документ RDF',
 	'EmailLink' => 'Написать письмо (вызов почтовой программы)',
 

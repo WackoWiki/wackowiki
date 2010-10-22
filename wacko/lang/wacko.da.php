@@ -41,9 +41,9 @@ $wacko_translation = array(
 	'ActionDenied' => 'Nej, nej, nej, det må du ikke!',
 	'TOCTitle' => 'Indhold ',
 	'SearchButtonText' => 'Søg',
-	'OuterLink2' => 'Udgående link (i nyt vindue)',
+	'OuterLink2' => 'Udgående link',
 	'FileLink' => '',
-	'PDFLink' => 'PDF Document (i nyt vindue)',
+	'PDFLink' => 'PDF Document',
 	'RDFLink' => 'RDF Document',
 	'EmailLink' => 'Skriv en email (mailprogram opstartes)',
 
