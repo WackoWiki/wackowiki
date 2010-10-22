@@ -225,7 +225,7 @@ if (!$nomark)
 			#echo "<a target=\"_blank\" href=\"$href\" class=\"outerlink\">$title</a>";
 			echo "<".$headertag.">".$this->link($href, '', $title, 1, 1)."</".$headertag.">";
 
-			if (($time == 'yes'') && ($date != 0))
+			if (($time == 'yes') && ($date != 0))
 				echo "<p class=\"note\"><span>".intervalCalc($date)."</span></p>";
 
 			echo "<p class=\"feed-content\">".$item->get_content()."</p>";
