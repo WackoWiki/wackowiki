@@ -137,8 +137,8 @@ class typografica
 		// 1. Commas and spaces
 		if ($this->settings['spacing'])
 		{
-			$data = preg_replace( "/(\s*)([,]*)/i", "\\2\\1", $data );
-			$data = preg_replace( "/(\s*)([\.?!]*)(\s*[¨À-ßA-Z])/", "\\2\\1\\3", $data );
+			$data = preg_replace('/(\s*)([,]*)/i', '\\2\\1', $data );
+			$data = preg_replace('/(\s*)([\.?!]*)(\s*[¨À-ßA-Z])/', '\\2\\1\\3', $data );
 		}
 
 		// 2. Splitting to strings with length no more than XX characters
@@ -157,19 +157,19 @@ class typografica
 			while ($_data != $data)
 			{
 				$_data = $data;
-				$data = preg_replace( "/(\s+)([a-zà-ÿÀ-ß]{1,2})(\s+)([^\\s$])/i", "\\1\\2&nbsp;\\4", $data );
-				$data = preg_replace( "/(\s+)([a-zà-ÿÀ-ß]{3})(\s+)([^\\s$])/i",   "\\1\\2&nbsp;\\4", $data );
+				$data = preg_replace('/(\s+)([a-zà-ÿÀ-ß]{1,2})(\s+)([^\\s$])/i', '\\1\\2&nbsp;\\4', $data );
+				$data = preg_replace('/(\s+)([a-zà-ÿÀ-ß]{3})(\s+)([^\\s$])/i',   '\\1\\2&nbsp;\\4', $data );
 			}
 			foreach ($this->glueleft as $i)
-				$data = preg_replace( "/([\\s]+)(".$i.")(\s+)/i", "\\1\\2&nbsp;", $data );
+				$data = preg_replace('/([\\s]+)(".$i.")(\s+)/i', "\\1\\2&nbsp;", $data );
 			foreach ($this->glueright as $i)
-				$data = preg_replace( "/([\\s]+)(".$i.")(\s+)/i", "&nbsp;\\2\\3", $data );
+				$data = preg_replace('/([\\s]+)(".$i.")(\s+)/i', "&nbsp;\\2\\3", $data );
 		}
 
 		// 5. Sticking flippers together. Psaw! Concatenation of hyphens
 		if ($this->settings['dashglue'])
 		{
-			$data = preg_replace( "/([a-zà-ÿÀ-ß0-9]+(\-[a-zà-ÿÀ-ß0-9]+)+)/i", "<nobr>\\1</nobr>", $data );
+			$data = preg_replace('/([a-zà-ÿÀ-ß0-9]+(\-[a-zà-ÿÀ-ß0-9]+)+)/i', '<nobr>\\1</nobr>', $data );
 		}
 
 		// 6. Macros
@@ -183,7 +183,7 @@ class typografica
 		if ($this->skip_tags)
 		{
 			$data .= ' ';
-			$a = explode( "{:typo:markup:1:}", $data );
+			$a = explode('{:typo:markup:1:}', $data );
 			if ($a)
 			{
 				$data = $a[0];
@@ -198,7 +198,7 @@ class typografica
 		// INFINITY-2. inserting a (next?) ignored regexp
 		{
 			$data .= ' ';
-			$a = explode( "{:typo:markup:2:}", $data );
+			$a = explode('{:typo:markup:2:}', $data );
 			if ($a)
 			{
 				$data = $a[0];
@@ -215,8 +215,8 @@ class typografica
 		// --- not ported to wacko ---
 
 		// ooh, finished
-		if ($this->de_nobr) $data = str_replace( "<nobr>", "<span class=\"nobr\">", str_replace( "</nobr>", "</span>", $data ));
-		return preg_replace( "/^(\s)+/", "",  preg_replace( "/(\s)+$/", "", $data));
+		if ($this->de_nobr) $data = str_replace('<nobr>', '<span class="nobr">', str_replace('</nobr>', '</span>', $data ));
+		return preg_replace('/^(\s)+/', '',  preg_replace('/(\s)+$/', '', $data));
 	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -227,7 +227,7 @@ class typografica
 		//print "(($data))";
 		// 0. inches with digits
 		if ($this->settings['inches'])
-			$data = preg_replace( "/(?<=\s)(([0-9]{1,2}([\.,][0-9]{1,2})?))\"/i", "\\1&quot;", $data );
+			$data = preg_replace('/(?<=\s)(([0-9]{1,2}([\.,][0-9]{1,2})?))\"/i', '\\1&quot;', $data );
 
 		// 0a. apostroph
 		if ($this->settings['apostroph'])
@@ -236,21 +236,21 @@ class typografica
 		// 1. English quotes
 		if ($this->settings['quotes'])
 		{
-			$data = preg_replace("/\"\"/i", "&quot;&quot;", $data);
-			$data = preg_replace("/\"\.\"/i", "&quot;.&quot;", $data);
+			$data = preg_replace('/\"\"/i', '&quot;&quot;', $data);
+			$data = preg_replace('/\"\.\"/i', '&quot;.&quot;', $data);
 			$_data = "\"\"";
 			while ($_data != $data)
 			{
 				$_data = $data;
-				$data = preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>)\"([0-9A-Za-z\'\!\s\.\?\,\-\&\;\:\_{:typo:markup:1:}{:typo:markup:2:}]+(\"|&#148;))/i", "\\1&#147;\\2", $data);
-				$data = preg_replace("/(\&\#147\;([A-Za-z0-9\'\!\s\.\?\,\-\&\;\:{:typo:markup:1:}{:typo:markup:2:}\_]*).*[A-Za-z0-9][{:typo:markup:1:}{:typo:markup:2:}\?\.\!\,]*)\"/i", "\\1&#148;", $data);
+				$data = preg_replace('/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>)\"([0-9A-Za-z\'\!\s\.\?\,\-\&\;\:\_{:typo:markup:1:}{:typo:markup:2:}]+(\"|&#148;))/i', "\\1&#147;\\2", $data);
+				$data = preg_replace('/(\&\#147\;([A-Za-z0-9\'\!\s\.\?\,\-\&\;\:{:typo:markup:1:}{:typo:markup:2:}\_]*).*[A-Za-z0-9][{:typo:markup:1:}{:typo:markup:2:}\?\.\!\,]*)\"/i', "\\1&#148;", $data);
 			}
 		}
 
 		// 2. angle quotes
 		if ($this->settings['laquo'])
 		{
-			$data = preg_replace("/\"\"/i", "&quot;&quot;", $data );
+			$data = preg_replace('/\"\"/i', '&quot;&quot;', $data );
 			$data = preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
 			// nb: wacko only regexp follows:
 			$data = preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/&nbsp;|\/|\!)*[~0-9¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
@@ -319,15 +319,15 @@ class typografica
 
 	// -----------------------------------------------------------------------------------
 	// Method is only for internal use. Checks only macros
-	function replace_macros( $data, $noParagraph )
+	function replace_macros($data, $noParagraph)
 	{
 		// 1. Paragraphs
 		// --- not ported to wacko ---
 		// 2. Paragpaph indent (indented line)
 		if ($this->settings['[--]'])
 		{
-			$data = preg_replace( '/\[--\]/i', $this->indent1, $data );
-			$data = preg_replace( '/\[---\]/i', $this->indent2, $data );
+			$data = preg_replace('/\[--\]/i', $this->indent1, $data);
+			$data = preg_replace('/\[---\]/i', $this->indent2, $data);
 		}
 		// 3. mailto:
 		// --- not ported to wacko ---
