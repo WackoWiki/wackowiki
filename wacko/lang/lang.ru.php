@@ -1,6 +1,6 @@
 <?php
 
-$wackoLanguage = array(
+$wacko_language = array(
 	"name" => "Russian",
 	"code" => "ru",
 	"charset" => "windows-1251",

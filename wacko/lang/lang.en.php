@@ -1,6 +1,6 @@
 <?php
 
-$wackoLanguage = array(
+$wacko_language = array(
 	"name" => "English",
 	"code" => "en",
 	"charset" => "iso-8859-1",
