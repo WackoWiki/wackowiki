@@ -36,21 +36,21 @@ AutoComplete.prototype.addButton = function()
   var we = this.wikiedit;
   this.id = "autocomplete_"+this.wikiedit.id;
   we.addButton("customhtml",
-              '<td id="'+this.id+'_td" style="display:none"><div style="font:bold 12px Arial; margin:0; padding:1px 4px;" id="'+this.id + '" '
+              '<li id="'+this.id+'_li" style="display:none"><div style="font:bold 12px Arial; margin:0; padding:1px 4px;" id="'+this.id + '" '
             + ' onmouseover=\'this.className="btn-pressed";\' '
             + ' onmouseout=\'this.className="btn-";\' class="btn-" '
             + ' onclick="document.getElementById('+"'"+we.id+"')._owner.autocomplete.insertFound();return false;" +'" '
             + ' title="Insert Autocomplete">Autocomplete'
             + '</div>'
             + (isIE?'<div style="display:none" class="autocomplete-inplace" id="'+this.id+'_inplace"><hr /></div>':'')
-            + '</td>'
-            + '<td id="'+this.id+'_reset" style="display:none"><div style="font:14px Arial; margin: 2px 0; padding: 0 2px;" '
+            + '</li>'
+            + '<li id="'+this.id+'_reset" style="display:none"><div style="font:14px Arial; margin: 2px 0; padding: 0 2px;" '
             + 'onmouseover=\'this.className="btn-hover";\' '
             + 'onmouseout=\'this.className="btn-";\' class="btn-" '
             + ' title="Hide Autocomplete" '
             + 'onclick="document.getElementById('+"'"+we.id+"')._owner.autocomplete.reset();return false;" +'" '
             + '>&times;</div>'
-            + '</td>'
+            + '</li>'
             );
 }
 
@@ -398,20 +398,20 @@ AutoComplete.prototype.getPattern = function ()
 AutoComplete.prototype.visualState =  function( to )
 {
   var reset  = document.getElementById( this.id+"_reset" );
-  var td     = document.getElementById( this.id+"_td" );
+  var li     = document.getElementById( this.id+"_li" );
   var ac     = document.getElementById( this.id );
 
   switch (to)
   {
     case "seeking" : 
                       if (this.visual_state == "found") break;
-                      td.style.display    = "";
+                      li.style.display    = "";
                       reset.style.display = "";
                       ac.innerHTML     = "...";
                       ac.style.color   = "#888888";
                       break;
     case "found" : 
-                      td.style.display    = "";
+                      li.style.display    = "";
                       reset.style.display = "";
                       ac.innerHTML     = this.found_pattern;
                       ac.style.color   = "#ffffff";
@@ -419,7 +419,7 @@ AutoComplete.prototype.visualState =  function( to )
                       this.redrawInplace();
                       break;
     case "404" : 
-                      td.style.display    = "";
+                      li.style.display    = "";
                       reset.style.display = "";
                       ac.innerHTML     = this.request_pattern;
                       ac.style.color   = "#ffffff";
@@ -428,7 +428,7 @@ AutoComplete.prototype.visualState =  function( to )
                       break;
 
     case "hidden" :   
-                      td.style.display    = "none";
+                      li.style.display    = "none";
                       reset.style.display = "none";
                       this.hideInplace();
                       break;
