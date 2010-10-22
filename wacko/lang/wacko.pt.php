@@ -41,9 +41,9 @@ $wacko_translation = array(
 	'ActionDenied' => 'Acção negada aqui.',
 	'TOCTitle' => 'Conteúdos ',
 	'SearchButtonText' => 'Pesquisa',
-	'OuterLink2' => 'Outgoing link'."\n".'(in new window)',
+	'OuterLink2' => 'Outgoing link',
 	'FileLink' => '',
-	'PDFLink' => 'PDF Document'."\n".'(in new window)',
+	'PDFLink' => 'PDF Document',
 	'RDFLink' => 'RDF Document',
 	'EmailLink' => 'Escrever um Email'."\n".'(mail client launch)',
 

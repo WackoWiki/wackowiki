@@ -41,9 +41,9 @@ $wacko_translation = array(
 	'ActionDenied' => 'Отказан достъп до действието',
 	'TOCTitle' => 'Заглавие на документа',
 	'SearchButtonText' => 'Търси',
-	'OuterLink2' => 'Външна препратка'."\n".'(появява се в нов прозорец)',
+	'OuterLink2' => 'Външна препратка',
 	'FileLink' => '',
-	'PDFLink' => 'PDF Document'."\n".'(появява се в нов прозорец)',
+	'PDFLink' => 'PDF Document',
 	'RDFLink' => 'RDF Document',
 	'EmailLink' => 'Напиши писмо'."\n".'(извикване на пощенската програма)',
 

@@ -41,9 +41,9 @@ $wacko_translation = array(
 	'ActionDenied' => 'Η ενέργεια δεν επιτρέπετε εδώ.',
 	'TOCTitle' => 'Περιεχόμενα ',
 	'SearchButtonText' => 'Αναζήτηση',
-	'OuterLink2' => 'Εξωτερικός σύνδεσμος (σε νέο παράθυρο)',
+	'OuterLink2' => 'Εξωτερικός σύνδεσμος',
 	'FileLink' => '',
-	'PDFLink' => 'Έγγραφο PDF (σε νέο παράθυρο)',
+	'PDFLink' => 'Έγγραφο PDF',
 	'RDFLink' => 'Έγγραφο RDF',
 	'EmailLink' => 'Συγγραφή ενός email (εκκίνηση mail εφαρμογής)',
 

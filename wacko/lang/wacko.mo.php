@@ -41,9 +41,9 @@ $wacko_translation = array(
 	'ActionDenied' => 'Actiune interzisa',
 	'TOCTitle' => 'Antetul documentului',
 	'SearchButtonText' => 'Cauta',
-	'OuterLink2' => 'Link extern (in geam nou)',
+	'OuterLink2' => 'Link extern',
 	'FileLink' => '',
-	'PDFLink' => 'PDF Document (in geam nou)',
+	'PDFLink' => 'PDF Document',
 	'RDFLink' => 'RDF Document',
 	'EmailLink' => 'Scrie scrisoare (deschide programul Dvs. postal)',
 
