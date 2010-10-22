@@ -1,6 +1,6 @@
 <?php
 
-$wackoLanguage = array(
+$wacko_language = array(
 	"name" => "Moldavian",
 	"code" => "mo",
 	"charset" => "windows-1251",

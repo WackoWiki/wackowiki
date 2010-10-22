@@ -1,5 +1,5 @@
 <?php
-$wackoLanguage = array(
+$wacko_language = array(
 	"name" => "Estonian",
 	"code" => "et",
 	"charset" => "windows-1257",

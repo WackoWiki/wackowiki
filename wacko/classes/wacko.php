@@ -322,16 +322,16 @@ class Wacko
 
 	function load_lang($lang)
 	{
-		$wackoLanguage = '';
+		$wacko_language = '';
 
 		if (!isset($this->languages[$lang]))
 		{
 			$resourcefile = 'lang/lang.'.$lang.'.php';
 			if (@file_exists($resourcefile)) include($resourcefile);
 
-			$this->languages[$lang] = $wackoLanguage;
+			$this->languages[$lang] = $wacko_language;
 			$ue = array();
-			$ue = @array_flip($wackoLanguage['unicode_entities']);
+			$ue = @array_flip($wacko_language['unicode_entities']);
 			if (!isset($ue)) $ue = array();
 
 			$this->unicode_entities = array_merge($this->unicode_entities, (array)$ue);
