@@ -32,7 +32,7 @@ $wacko_config = array(
 	'handler_path' => 'handlers',
 
 	'language' => 'en',
-	'multilanguage' => 1,
+	'multilanguage' => 0,
 
 	'theme' => 'default',
 	'allow_themes' => 0,

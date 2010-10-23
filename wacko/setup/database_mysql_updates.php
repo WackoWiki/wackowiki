@@ -222,7 +222,8 @@ $update_revision_r4_3_5 = "UPDATE {$pref}revision SET formatting = 'wacko' WHERE
 // UPLOAD
 $alter_upload_r4_3 = "ALTER TABLE {$pref}upload CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 																	CHANGE page_id page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-																	CHANGE filesize filesize INT(10) UNSIGNED NOT NULL DEFAULT '0',
+																	CHANGE filename file_name VARCHAR(250) NOT NULL DEFAULT '',
+																	CHANGE filesize file_size INT(10) UNSIGNED NOT NULL DEFAULT '0',
 																	CHANGE picture_w picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0',
 																	CHANGE picture_h picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0',
 																	ADD user_id INT(10) UNSIGNED NOT NULL AFTER page_id,

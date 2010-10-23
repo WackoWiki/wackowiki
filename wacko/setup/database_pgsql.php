@@ -121,10 +121,10 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"upload_id serial,".
 					"page_id integer NOT NULL DEFAULT 0,".
 					"user_id integer NOT NULL DEFAULT 0,".
-					"filename character varying(250) NOT NULL DEFAULT '',".
+					"file_name character varying(250) NOT NULL DEFAULT '',".
 					"description character varying(250) NOT NULL DEFAULT '',".
 					"uploaded_dt timestamp without time zone NOT NULL DEFAULT now(),".
-					"filesize integer NOT NULL DEFAULT 0,".
+					"file_size integer NOT NULL DEFAULT 0,".
 					"picture_w integer NOT NULL DEFAULT 0,".
 					"picture_h integer NOT NULL DEFAULT 0,".
 					"file_ext character varying(10) NOT NULL DEFAULT '',".

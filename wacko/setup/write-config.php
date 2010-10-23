@@ -1,6 +1,6 @@
 <?php
 
-function array_to_str ($arr, $name="")
+function array_to_str ($arr, $name = '')
 {
 	if (!isset($entries)) $entries = '';
 	if (!isset($arrays)) $arrays = '';
@@ -12,7 +12,7 @@ function array_to_str ($arr, $name="")
 		if(is_array($v))
 		$arrays .= array_to_str($v, $k);
 		else
-		$entries .= "\t\"".$k."\" => \"".str_replace("\n","\\n",$v)."\",\n";
+		$entries .= "\t\'".$k.'\' => \''.str_replace("\n", "\\n", $v)."\',\n";
 	}
 
 	$str .= $entries.");\n";
@@ -35,36 +35,36 @@ $config['wacko_version'] = WACKO_VERSION;
 ///////////////////////////////////////////////////////////////////////////////////////////
 //	BEGIN MANDATORY CONFIGURATION
 ///////////////////////////////////////////////////////////////////////////////////////////
-$configFile['base_url'] = $config['base_url'];
+$config_file['base_url'] = $config['base_url'];
 // database connection
-$configFile['database_collation'] = $config['database_collation'];
-$configFile['database_driver'] = $config['database_driver'];
-$configFile['database_host'] = $config['database_host'];
-$configFile['database_port'] = $config['database_port'];
-$configFile['database_database'] = $config['database_database'];
-$configFile['database_user'] = $config['database_user'];
-$configFile['database_password'] = $config['database_password'];
-$configFile['table_prefix'] = $config['table_prefix'];
+$config_file['database_collation'] = $config['database_collation'];
+$config_file['database_driver'] = $config['database_driver'];
+$config_file['database_host'] = $config['database_host'];
+$config_file['database_port'] = $config['database_port'];
+$config_file['database_database'] = $config['database_database'];
+$config_file['database_user'] = $config['database_user'];
+$config_file['database_password'] = $config['database_password'];
+$config_file['table_prefix'] = $config['table_prefix'];
 // security values
-$configFile['system_seed'] = $config['system_seed'];
-$configFile['recovery_password'] = $config['recovery_password'];
+$config_file['system_seed'] = $config['system_seed'];
+$config_file['recovery_password'] = $config['recovery_password'];
 // paths
-$configFile['cache_dir'] = $config['cache_dir'];
-$configFile['classes_path'] = $config['classes_path'];
-$configFile['action_path'] = $config['action_path'];
-$configFile['handler_path'] = $config['handler_path'];
-$configFile['upload_path'] = $config['upload_path'];
-$configFile['upload_path_per_page'] = $config['upload_path_per_page'];
-$configFile['upload_path_backup'] = $config['upload_path_backup'];
-$configFile['header_action'] = $config['header_action'];
-$configFile['footer_action'] = $config['footer_action'];
+$config_file['cache_dir'] = $config['cache_dir'];
+$config_file['classes_path'] = $config['classes_path'];
+$config_file['action_path'] = $config['action_path'];
+$config_file['handler_path'] = $config['handler_path'];
+$config_file['upload_path'] = $config['upload_path'];
+$config_file['upload_path_per_page'] = $config['upload_path_per_page'];
+$config_file['upload_path_backup'] = $config['upload_path_backup'];
+$config_file['header_action'] = $config['header_action'];
+$config_file['footer_action'] = $config['footer_action'];
 // version
-$configFile['wacko_version'] = $config['wacko_version'];
-#$configFile[''] = $config[''];
+$config_file['wacko_version'] = $config['wacko_version'];
+#$config_file[''] = $config[''];
 
 // convert config array into PHP code
-$configCode = "<?php\n// config.php ".$lang['WrittenAt'].strftime("%c")."\n// ".$lang['ConfigDescription']."\n// ".$lang['DontChange']."\n\n";
-$configCode .= array_to_str($configFile)."\n?>";
+$config_code = "<?php\n// config.php ".$lang['WrittenAt'].strftime("%c")."\n// ".$lang['ConfigDescription']."\n// ".$lang['DontChange']."\n\n";
+$config_code .= array_to_str($config_file)."\n?>";
 
 // try to write configuration file
 print("         <h2>".$lang['FinalStep']."</h2>\n");
@@ -74,7 +74,7 @@ print("            <li>".$lang['Writing']." - ");
 $perm_changed	= true;
 $filename		= 'config/config.php';
 
-if (file_put_contents($filename, $configCode) == true)
+if (file_put_contents($filename, $config_code) == true)
 {
 	// Try and make it non-writable
 	@chmod($filename, 0644);
@@ -144,7 +144,7 @@ print("         </ul>\n");
 	<?php
 	if(!$fp)
 	{
-		print("         <div id=\"config_code\" class=\"config_code\"><pre>".htmlentities($configCode)."</pre></div>\n");
+		print("         <div id=\"config_code\" class=\"config_code\"><pre>".htmlentities($config_code)."</pre></div>\n");
 	}
 	?>
 <br />
