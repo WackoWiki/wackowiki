@@ -21,7 +21,7 @@ if (!function_exists('links_tree_view'))
 			if (is_array($pages))
 			{
 				if (isset($wacko->config['default_bookmarks']))
-					$head = explode(" / ",str_replace("))", "", str_replace("((", "", $wacko->config['default_bookmarks'])));
+					$head = explode(' / ',str_replace('))', '', str_replace('((', '', $wacko->config['default_bookmarks'])));
 
 				foreach ($pages as $page)
 				{

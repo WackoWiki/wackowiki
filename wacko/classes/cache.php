@@ -14,7 +14,9 @@ class Cache
 		$this->timer		= $this->get_micro_time();
 
 		if (isset($this->wacko->config['debug']))
+		{
 			$this->debug = $this->wacko->config['debug'];
+		}
 	}
 
 	// save serialized sql results
@@ -35,10 +37,14 @@ class Cache
 		$filename = $this->sql_cache_id($query);
 
 		if (!@file_exists($filename))
+		{
 			return false;
+		}
 
 		if ((time() - @filemtime($filename)) > $this->wacko->config['cache_sql_ttl'])
+		{
 			return false;
+		}
 
 		$fp		= fopen($filename, 'r');
 		$data	= fread($fp, filesize($filename));
@@ -58,10 +64,14 @@ class Cache
 		$filename = $this->construct_id($page, $method, $query);
 
 		if (!@file_exists($filename))
+		{
 			return false;
+		}
 
 		if ((time() - ($timestamp = @filemtime($filename))) > $this->cache_ttl)
+		{
 			return false;
+		}
 
 		$fp			= fopen($filename, 'r');
 		$contents	= fread($fp, filesize($filename));
@@ -88,10 +98,14 @@ class Cache
 		$filename = $this->construct_id($page, $method, $query);
 
 		if (!@file_exists($filename))
+		{
 			return false;
+		}
 
 		if ((time() - @filemtime($filename)) > $this->cache_ttl)
+		{
 			return false;
+		}
 
 		return @filemtime($filename);
 	}
@@ -99,21 +113,33 @@ class Cache
 	//Store content to cache
 	function store_to_cache($data, $page = false, $method = false, $query = false)
 	{
-		if (!$page)   $page   = $this->page;
-		if (!$method) $method = $this->method;
-		if (!$query)  $query  = $this->query;
+		if (!$page)
+		{
+			$page   = $this->page;
+		}
+		if (!$method)
+		{
+			$method = $this->method;
+		}
+		if (!$query)
+		{
+			$query  = $this->query;
+		}
 
 		$page = strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
 		$filename = $this->construct_id($page, $method, $query);
 
 		file_put_contents($filename, $data);
 
-		if ($this->wacko) $this->wacko->query(
-			"INSERT INTO ".$this->wacko->config['table_prefix']."cache SET ".
-			"name  ='".quote($this->wacko->dblink, hash('md5', $page))."', ".
-			"method='".quote($this->wacko->dblink, $method)."', ".
-			"query ='".quote($this->wacko->dblink, $query)."'");
-			// TIMESTAMP type is filled automatically by MySQL
+		if ($this->wacko)
+		{
+			$this->wacko->query(
+				"INSERT INTO ".$this->wacko->config['table_prefix']."cache SET ".
+				"name  ='".quote($this->wacko->dblink, hash('md5', $page))."', ".
+				"method='".quote($this->wacko->dblink, $method)."', ".
+				"query ='".quote($this->wacko->dblink, $query)."'");
+				// TIMESTAMP type is filled automatically by MySQL
+		}
 
 		@chmod($filename, octdec('0644'));
 
@@ -146,7 +172,9 @@ class Cache
 				$this->log('cache_invalidate delete='.$filename);
 
 				if (@file_exists($filename))
+				{
 					@unlink($filename);
+				}
 			}
 
 			$this->wacko->query(
@@ -173,12 +201,17 @@ class Cache
 	//Check http-request. May be, output cached version.
 	function check_http_request($page, $method)
 	{
-		if (!$page) return false;
+		if (!$page)
+		{
+			return false;
+		}
 
 		foreach ($_GET as $k => $v)
 		{
 			if ($k != 'v' && $k != 'page')
+			{
 				$_query[$k] = $v;
+			}
 		}
 
 		if (isset($_query))
@@ -188,11 +221,17 @@ class Cache
 
 			foreach($_query as $k => $v)
 			{
-				if (!isset($query)) $query = '';
+				if (!isset($query))
+				{
+					$query = '';
+				}
 				$query .= urlencode($k).'='.urlencode($v).'&';
 			}
 		}
-		if (!isset($query)) $query = '';
+		if (!isset($query))
+		{
+			$query = '';
+		}
 		$this->log('check_http_request query='.$query);
 
 		//check cache
@@ -204,7 +243,10 @@ class Cache
 			$etag = (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? $_SERVER['HTTP_IF_NONE_MATCH'] : '');
 			$lastm = (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : '');
 
-			if ($p = strpos($lastm, ";")) $lastm = substr($lastm, 0, $p);
+			if ($p = strpos($lastm, ";"))
+			{
+				$lastm = substr($lastm, 0, $p);
+			}
 
 			if ($_SERVER['REQUEST_METHOD'] == 'GET') //may be we need HEAD support ???
 			{
@@ -235,16 +277,18 @@ class Cache
 				}
 
 				if (strpos($method, '.xml') === false)
+				{
 					echo "</body></html>";
+				}
 
 				die();
 			}
 		}
 
 		//We have no valid cached page
-		$this->page = $page;
-		$this->method = $method;
-		$this->query = $query;
+		$this->page		= $page;
+		$this->method	= $method;
+		$this->query	= $query;
 		return true;
 	}
 
@@ -253,7 +297,9 @@ class Cache
 		clearstatcache();
 
 		if (!($mtime = $this->get_cached_time($this->page, $this->method, $this->query)))
+		{
 			$mtime = time();
+		}
 
 		$gmt = gmdate('D, d M Y H:i:s \G\M\T', $mtime);
 		$res = &$this->result;

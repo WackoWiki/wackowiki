@@ -61,7 +61,9 @@ class RSS
 			foreach ($pages as $i => $page)
 			{
 				if ($this->engine->config['hide_locked'])
+				{
 					$access = $this->engine->has_access('read', $page['page_id'], GUEST);
+				}
 
 				if ($access && ($count < 30))
 				{
@@ -71,7 +73,7 @@ class RSS
 					$xml .= "<link>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</link>\n";
 					$xml .= "<guid>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
-					$xml .= "<description>".$page['modified']." ".$this->engine->get_translation('By')." ".$page['user'].($page['edit_note'] ? " [".$page['edit_note']."]" : "")."</description>\n";
+					$xml .= "<description>".$page['modified']." ".$this->engine->get_translation('By')." ".$page['user'].($page['edit_note'] ? ' ['.$page['edit_note'].']' : '')."</description>\n";
 					$xml .= "</item>\n";
 				}
 			}
@@ -176,7 +178,10 @@ class RSS
 			$xml .= 	( $coms != '' ? '<comments>'.$coms.'</comments>'."\n" : '' ).
 					'</item>'."\n";
 
-			if ($i >= $limit) break;
+			if ($i >= $limit)
+			{
+				break;
+			}
 		}
 
 		$xml .= 	'</channel>'."\n".
@@ -212,9 +217,14 @@ class RSS
 		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
-		if ( $pages = $this->engine->load_recently_comment() ) {
-			foreach ($pages as $i => $page) {
-				if ($this->engine->config['hide_locked']) $access =$this->engine->has_access('read',$page['page_id'],GUEST);
+		if ($pages = $this->engine->load_recently_comment())
+		{
+			foreach ($pages as $i => $page)
+			{
+				if ($this->engine->config['hide_locked'])
+				{
+					$access = $this->engine->has_access('read', $page['page_id'], GUEST);
+				}
 				if ( $access && ($count < 30) ) {
 					$count++;
 					$xml .= "<item>\n";

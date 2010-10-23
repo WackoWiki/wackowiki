@@ -44,7 +44,9 @@ $init->debug();
 
 // closing tags
 if (strpos($init->method, '.xml') === false)
+{
 	echo "\n</body>\n</html>";
+}
 
 // out
 header('Cache-Control: public');

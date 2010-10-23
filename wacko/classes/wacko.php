@@ -192,7 +192,10 @@ class Wacko
 			return $new_page_id;
 		}
 	}
-	function get_wacko_version() { return WACKO_VERSION; }
+	function get_wacko_version()
+	{
+		return WACKO_VERSION;
+	}
 
 	function check_file_exists($filename, $unwrapped_tag = '' )
 	{
@@ -232,7 +235,9 @@ class Wacko
 		while (false !== ($file = readdir($handle)))
 		{
 			if ($file != '.' && $file != '..' && is_dir('themes/'.$file) && $file != '_common')
+			{
 				$themelist[] = $file;
+			}
 		}
 		closedir($handle);
 		sort($themelist, SORT_STRING);
@@ -242,7 +247,9 @@ class Wacko
 			$ath = explode(',', $allow);
 
 			if (is_array($ath) && $ath[0])
+			{
 				$themelist = array_intersect ($ath, $themelist);
+			}
 		}
 		return $themelist;
 	}
@@ -291,27 +298,45 @@ class Wacko
 		if (!isset($this->translations[$lang]))
 		{
 			$resourcefile = 'lang/wacko.'.$lang.'.php';
-			if (@file_exists($resourcefile)) include($resourcefile);
+			if (@file_exists($resourcefile))
+			{
+				include($resourcefile);
+			}
 
 			// wacko.all
 			$resourcefile = 'lang/wacko.all.php';
 			if (!$this->translations['all'])
 			{
-				if (@file_exists($resourcefile)) include($resourcefile);
+				if (@file_exists($resourcefile))
+				{
+					include($resourcefile);
+				}
 				$this->translations['all'] = & $wacko_all_resource;
 			}
-			if (!isset($wacko_translation)) $wacko_translation = array();
+			if (!isset($wacko_translation))
+			{
+				$wacko_translation = array();
+			}
 			$wacko_resource = array_merge($wacko_translation, $this->translations['all']);
 
 			// theme
 			$resourcefile = 'themes/'.$this->config['theme'].'/lang/wacko.'.$lang.'.php';
-			if (@file_exists($resourcefile)) include($resourcefile);
-			if (!isset($theme_translation)) $theme_translation = '';
+			if (@file_exists($resourcefile))
+			{
+				include($resourcefile);
+			}
+			if (!isset($theme_translation))
+			{
+				$theme_translation = '';
+			}
 			$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
 
 			// wacko.all theme
 			$resourcefile = 'themes/'.$this->config['theme'].'/lang/wacko.all.php';
-			if (@file_exists($resourcefile)) include($resourcefile);
+			if (@file_exists($resourcefile))
+			{
+				include($resourcefile);
+			}
 			$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
 
 			$this->translations[$lang] = $wacko_resource;
@@ -327,12 +352,18 @@ class Wacko
 		if (!isset($this->languages[$lang]))
 		{
 			$resourcefile = 'lang/lang.'.$lang.'.php';
-			if (@file_exists($resourcefile)) include($resourcefile);
+			if (@file_exists($resourcefile))
+			{
+				include($resourcefile);
+			}
 
 			$this->languages[$lang] = $wacko_language;
 			$ue = array();
 			$ue = @array_flip($wacko_language['unicode_entities']);
-			if (!isset($ue)) $ue = array();
+			if (!isset($ue))
+			{
+				$ue = array();
+			}
 
 			$this->unicode_entities = array_merge($this->unicode_entities, (array)$ue);
 			unset($this->unicode_entities[0]);
@@ -341,11 +372,16 @@ class Wacko
 
 	function load_all_languages()
 	{
-		if (!$this->config['multilanguage']) return;
+		if (!$this->config['multilanguage'])
+		{
+			return;
+		}
 
 		$langs = $this->available_languages();
 		foreach ($langs as $lang)
-		$this->load_lang($lang);
+		{
+			$this->load_lang($lang);
+		}
 	}
 
 	function available_languages()
@@ -393,7 +429,10 @@ class Wacko
 				$this->userlang = $lang = $this->config['language'];
 			}
 		}
-		else if (!$lang) $this->userlang = $lang = $this->config['language'];
+		else if (!$lang)
+		{
+			$this->userlang = $lang = $this->config['language'];
+		}
 
 		return $lang;
 	}
@@ -401,23 +440,31 @@ class Wacko
 	function get_translation($name, $lang = '', $dounicode = true)
 	{
 		if (!$this->config['multilanguage'])
+		{
 			return $this->resource[$name];
+		}
 
 		if (!$lang && (isset($this->userlang) && $this->userlang != $this->pagelang))
+		{
 			$lang = $this->userlang;
+		}
 
 		if ($lang != '')
 		{
 			$this->load_translation($lang);
 			if (isset($this->translations[$lang][$name]))
+			{
 				return (is_array($this->translations[$lang][$name]))
 					? $this->translations[$lang][$name]
 					: ($dounicode
 						? $this->do_unicode_entities($this->translations[$lang][$name], $lang)
 						: $this->translations[$lang][$name]);
+			}
 		}
 		if (isset($this->resource[$name]))
+		{
 			return $this->resource[$name];
+		}
 	}
 
 	function format_translation($name, $lang = '')
@@ -3215,7 +3262,7 @@ class Wacko
 		{
 			$this->query(
 				"UPDATE ".$this->config['table_prefix']."acl SET ".
-					"list = '".quote($this->dblink, trim(str_replace("\r", "", $list)))."' ".
+					"list = '".quote($this->dblink, trim(str_replace("\r", '', $list)))."' ".
 				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
 					"AND privilege = '".quote($this->dblink, $privilege)."' ");
 		}
@@ -3223,7 +3270,7 @@ class Wacko
 		{
 			$this->query(
 				"INSERT INTO ".$this->config['table_prefix']."acl SET ".
-					"list		= '".quote($this->dblink, trim(str_replace("\r", "", $list)))."', ".
+					"list		= '".quote($this->dblink, trim(str_replace("\r", '', $list)))."', ".
 					"page_id	= '".quote($this->dblink, $page_id)."', ".
 					"privilege	= '".quote($this->dblink, $privilege)."'");
 		}

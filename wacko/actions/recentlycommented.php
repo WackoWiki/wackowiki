@@ -50,7 +50,7 @@ if (!function_exists('load_recently_commented'))
 	}
 }
 
-if (!isset($root))	$root	= $this->unwrap_link(isset($vars['for']) ? $vars['for'] : "");
+if (!isset($root))	$root	= $this->unwrap_link(isset($vars['for']) ? $vars['for'] : '');
 if (!isset($root))	$root	= $this->page['tag'];
 if (!isset($noxml)) $noxml	= 0;
 

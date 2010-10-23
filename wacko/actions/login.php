@@ -81,7 +81,7 @@ else if ($user = $this->get_user())
 			onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" />
   </p>
   <p>
-		<?php echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), "", $this->get_translation('YouArePanelAccount'), 0); ?> | <a href="?action=clearcookies">Delete all cookies</a>
+		<?php echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), '', $this->get_translation('YouArePanelAccount'), 0); ?> | <a href="?action=clearcookies">Delete all cookies</a>
   </p>
 </div>
 <?php
@@ -201,7 +201,7 @@ else
 	<h3><?php echo $this->get_translation('LoginWelcome'); ?></h3>
 	<p>
 		<label for="name"><?php echo $this->format_translation('LoginName');?>:</label>
-		<input id="name" name="name" size="25" maxlength="25" value="<?php echo isset($name) ? $name : ""; ?>" tabindex="1" />
+		<input id="name" name="name" size="25" maxlength="25" value="<?php echo isset($name) ? $name : ''; ?>" tabindex="1" />
 
 	</p>
 	<p>
