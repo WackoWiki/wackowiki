@@ -25,7 +25,7 @@ foreach($last_users as $user)
 				"FROM ".$this->config['table_prefix']."page ".
 				"WHERE owner_id='".quote($this->dblink, $user['user_id'])."'");
 
-	print("(<span class=\"dt\">".$this->get_time_string_formatted($user['signup_time']).")</span> ".$this->link('/'.$user['user_name'], '', $user['user_name']).($stat !== 0 ? " . . . (".$num["n"].") ": "")."<br />\n");
+	print("(<span class=\"dt\">".$this->get_time_string_formatted($user['signup_time']).")</span> ".$this->link('/'.$user['user_name'], '', $user['user_name']).($stat !== 0 ? ' . . . ('.$num['n'].') ': '')."<br />\n");
 }
 
 ?>

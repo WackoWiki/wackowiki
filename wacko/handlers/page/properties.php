@@ -84,7 +84,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 
 		echo "<div class=\"page_settings\">";
 
-		echo $this->form_open('properties'); // , "", "", "", "", "extended"
+		echo $this->form_open('properties'); // , '', '', '', '', "extended"
 		echo "<input type=\"hidden\" name=\"extended\" value=\"yes\" />";
 		echo "\n<table class=\"form_tbl\">\n";
 

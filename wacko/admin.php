@@ -144,9 +144,11 @@ if ($user == false)
 	<body>
 		<?php
 		// here we show messages
-		if ($message = $engine->get_message()) echo "<div class=\"info\">$message</div>";
+		if ($message = $engine->get_message())
+		{
+			echo "<div class=\"info\">$message</div>";
+		}
 		?>
-
 		<strong><?php echo $engine->get_translation('Authorization'); ?></strong><br />
 		<?php echo $engine->get_translation('AuthorizationTip'); ?>
 		<br /><br />
@@ -304,7 +306,10 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 <div id="page">
 <?php
 // here we show messages
-if ($message = $engine->get_message()) echo "<div class=\"info\">$message</div>";
+if ($message = $engine->get_message())
+{
+	echo "<div class=\"info\">$message</div>";
+}
 ?>
 <!-- begin page output -->
 

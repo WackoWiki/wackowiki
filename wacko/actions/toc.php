@@ -65,7 +65,7 @@ else
 				$depth = $toc[$i][2];
 				$numbers[ $depth ]++;
 				// collect numbering on the array of $ numbers from start to the current depth, allowing zero
-				$num="";
+				$num = '';
 				for($j = 1; $j <= $depth; $j++)
 				if (isset($numbers[$j]) && $numbers[$j] > 0)
 				$num .= $numbers[$j].".";

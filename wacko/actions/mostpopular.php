@@ -47,7 +47,7 @@ else
 
 if(!$nomark)
 {
-	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('MostPopularPages').": ".$this->link($ppage, "", $title)."</span></p>\n");
+	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('MostPopularPages').": ".$this->link($ppage, '', $title)."</span></p>\n");
 }
 
 if(!$for)

@@ -84,7 +84,7 @@ class typografica
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	function correct( $data, $noParagraph=false )
+	function correct($data, $noParagraph = false)
 	{
 		// -2. ignoring a (or next?) regexp
 		$ignored = array();
@@ -173,7 +173,7 @@ class typografica
 		}
 
 		// 6. Macros
-		$data = $this->replace_macros( $data, $noParagraph );
+		$data = $this->replace_macros($data, $noParagraph);
 
 		// 7. Line feeds
 		// --- not ported to wacko ---

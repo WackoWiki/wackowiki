@@ -72,11 +72,18 @@ class Init
 		$this->timer = $this->get_micro_time();
 
 		if (ini_get('zlib.output_compression'))
+		{
 			ob_start();
+		}
 		else
+		{
 			ob_start('ob_gzhandler');
+		}
 
-		if (!isset($_REQUEST)) die('$_REQUEST[] not found. WackoWiki requires PHP 5.2.0 or higher!');
+		if (!isset($_REQUEST))
+		{
+			die('$_REQUEST[] not found. WackoWiki requires PHP 5.2.0 or higher!');
+		}
 
 		// Check for function because it is deprecated in PHP 5.3 and removed in PHP 6
 		if (function_exists('set_magic_quotes_runtime'))
@@ -93,7 +100,10 @@ class Init
 			$this->parse_mq($_REQUEST);
 		}
 
-		if (strstr($_SERVER['SERVER_SOFTWARE'], 'IIS')) $_SERVER['REQUEST_URI'] = $_SERVER['PATH_INFO'];
+		if (strstr($_SERVER['SERVER_SOFTWARE'], 'IIS'))
+		{
+			$_SERVER['REQUEST_URI'] = $_SERVER['PATH_INFO'];
+		}
 	}
 
 	// INT TIMER
@@ -111,9 +121,13 @@ class Init
 			foreach ($a as $k => $v)
 			{
 				if (is_array($v))
+				{
 					$this->parse_mq($a[$k]);
+				}
 				else
+				{
 					$a[$k] = stripslashes($v);
+				}
 			}
 		}
 	}
@@ -177,13 +191,15 @@ class Init
 				else if ( @file_exists('config/config.php') )
 				{
 					// If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R4.3
-					if ( @filesize('config/config.php') > 0)
+					if (@filesize('config/config.php') > 0)
 					{
 						require('config/config.php');
 						$this->config = $wacko_config;
 
 						if ($wacko_config['wacko_version'] != 'R4.3.rc' && (!$wacko_config['system_seed'] || strlen($wacko_config['system_seed']) < 20))
+						{
 							die("WackoWiki fatal error: system_seed in config.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
+						}
 
 						$wacko_config['system_seed']	= hash('sha1', $wacko_config['system_seed']);
 					}
@@ -247,7 +263,10 @@ class Init
 
 						foreach ($groups_array as $user_group_pairs)
 						{
-							if (!isset($_groups[$user_group_pairs['group_name']])) $_groups[$user_group_pairs['group_name']] = '';
+							if (!isset($_groups[$user_group_pairs['group_name']]))
+							{
+								$_groups[$user_group_pairs['group_name']] = '';
+							}
 
 							// Then we make old fashioned UserName1\nUserName2\n lines for each group
 							$_groups[$user_group_pairs['group_name']] .= $user_group_pairs['user_name'].'\n';
@@ -262,7 +281,6 @@ class Init
 						$trimone = rtrim($users, 'n');
 						$this->config['aliases'][$group] = trim($trimone, '\\');
 					}
-
 				}
 				else
 				{
@@ -279,13 +297,20 @@ class Init
 	function request()
 	{
 		// check config data
-		if ($this->config == false) die("Error processing request: WackoWiki config data must be initialized.");
+		if ($this->config == false)
+		{
+			die("Error processing request: WackoWiki config data must be initialized.");
+		}
 
 		// fetch wacko location
 		if (isset($_SERVER['PATH_INFO']) && function_exists('virtual'))
+		{
 			$this->request = $_SERVER['PATH_INFO'];
+		}
 		else
+		{
 			$this->request = @$_REQUEST['page'];
+		}
 
 		// fix win32 apache 1 bug
 		if (stristr($_SERVER['SERVER_SOFTWARE'], 'Apache/1') && stristr($_SERVER['SERVER_SOFTWARE'], 'Win32') && $this->config['rewrite_mode'])
@@ -340,7 +365,7 @@ class Init
 
 		($_secure == true ? $secure = true : $secure = false );
 
-		session_set_cookie_params(0, $_cookie_path, "", $secure, true);
+		session_set_cookie_params(0, $_cookie_path, '', $secure, true);
 		session_name($this->config['cookie_prefix'].SESSION_HANDLER_ID);
 
 		// Save session information where specified or with PHP's default
@@ -357,13 +382,22 @@ class Init
 	// be passed. All DBs must be on the server specified in the config file.
 	function dbal($dbname = '')
 	{
-		if (isset($this->dblink)) return;
+		if (isset($this->dblink))
+		{
+			return;
+		}
 
 		// check config data
-		if ($this->config == false) die("Error loading WackoWiki DBAL: config data must be initialized.");
+		if ($this->config == false)
+		{
+			die("Error loading WackoWiki DBAL: config data must be initialized.");
+		}
 
 		// Load the correct database connector
-		if (!isset( $this->config['database_driver'] )) $this->settings('database_driver', 'mysql_legacy');
+		if (!isset( $this->config['database_driver'] ))
+		{
+			$this->settings('database_driver', 'mysql_legacy');
+		}
 
 		switch($this->config['database_driver'])
 		{
@@ -380,19 +414,30 @@ class Init
 
 		// load DBAL
 		if (@file_exists($dbfile))
+		{
 			require($dbfile);
+		}
 		else
+		{
 			die("Error loading WackoWiki DBAL: file ".$dbfile." not found.");
+		}
 
 		// connect to DB
-		if ($dbname == false) $dbname = $this->config['database_database'];
+		if ($dbname == false)
+		{
+			$dbname = $this->config['database_database'];
+		}
 
 		$this->dblink = connect($this->config['database_host'], $this->config['database_user'], $this->config['database_password'], $this->config['database_database'], $this->config['database_collation'], $this->config['database_driver'], $this->config['database_port']);
 
 		if ($this->dblink)
+		{
 			return $this->dblink;
+		}
 		else
+		{
 			die("Error loading WackoWiki DBAL: could not establish database connection.");
+		}
 	}
 
 	// CHECK WEBSITE LOCKING
@@ -404,9 +449,13 @@ class Init
 			$access = file('lock');
 
 			if ($access[0] == '1')
+			{
 				return true;
+			}
 			else
+			{
 				return false;
+			}
 		}
 		else
 		{
@@ -434,13 +483,22 @@ class Init
 			global $config;
 			$config = $this->config;
 
-			if (!$installAction = trim($_REQUEST['installAction'])) $installAction = 'lang';
+			if (!$installAction = trim($_REQUEST['installAction']))
+			{
+				$installAction = 'lang';
+			}
+
 			include('setup/header.php');
 
 			if (@file_exists('setup/'.$installAction.'.php'))
-			include('setup/'.$installAction.'.php');
+			{
+				include('setup/'.$installAction.'.php');
+			}
+			else
+			{
+				print("<em>Invalid action</em>");
+			}
 
-			else print("<em>Invalid action</em>");
 			include('setup/footer.php');
 
 			exit;
@@ -457,7 +515,10 @@ class Init
 	function cache($op = '')
 	{
 		// check config data
-		if ($this->config == false) die("Error starting WackoWiki cache engine: config data must be initialized.");
+		if ($this->config == false)
+		{
+			die("Error starting WackoWiki cache engine: config data must be initialized.");
+		}
 
 		if ($this->cache == false || $op == false)
 		{
@@ -501,12 +562,18 @@ class Init
 	function engine($op = '', $lang = '')
 	{
 		// check config data
-		if ($this->config == false)	die("Error starting WackoWiki engine: config data must be initialized.");
+		if ($this->config == false)
+		{
+			die("Error starting WackoWiki engine: config data must be initialized.");
+		}
 
 		if ($this->engine == false || $op == false)
 		{
 			// check DB connection
-			if ($this->dblink == false) die("Error starting WackoWiki engine: no database connection established.");
+			if ($this->dblink == false)
+			{
+				die("Error starting WackoWiki engine: no database connection established.");
+			}
 
 			require('classes/wacko.php');
 			$this->engine = new Wacko($this->config, $this->dblink);
@@ -525,7 +592,10 @@ class Init
 		}
 		else if ($this->engine == true && $op == 'res')
 		{
-			if ($lang == false) $lang = $this->config['language'];
+			if ($lang == false)
+			{
+				$lang = $this->config['language'];
+			}
 
 			$this->engine->load_all_languages();
 			$this->engine->load_translation($lang);
@@ -569,7 +639,10 @@ class Init
 
 					foreach ($this->engine->query_log as $query)
 					{
-						if ($query['time'] < $this->config['debug_sql_threshold']) continue;
+						if ($query['time'] < $this->config['debug_sql_threshold'])
+						{
+							continue;
+						}
 
 						echo "<li>";
 						echo str_replace(array('<', '>'), array('&lt;', '&gt;'), $query['query'])."<br />";
@@ -590,9 +663,9 @@ class Init
 					echo "<li>HTTP_ACCEPT_LANGUAGE value: ".$_SERVER['HTTP_ACCEPT_LANGUAGE']."</li>\n";
 					echo "<li>HTTP_ACCEPT_LANGUAGE chopped value: ".strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2))."</li>\n";
 					echo "<li>User language set: ".(isset($user['lang']) ? 'true' : 'false')."</li>\n";
-					echo "<li>User language value: ".(isset($user['lang']) ? $user['lang'] : "")."</li>\n";
+					echo "<li>User language value: ".(isset($user['lang']) ? $user['lang'] : '')."</li>\n";
 					echo "<li>Config language: ".$this->config['language']."</li>\n";
-					echo "<li>User selected language: ".(isset($this->engine->userlang) ? $this->engine->userlang : "")."</li>\n";
+					echo "<li>User selected language: ".(isset($this->engine->userlang) ? $this->engine->userlang : '')."</li>\n";
 					echo "</ul>\n";
 				}
 
@@ -606,7 +679,7 @@ class Init
 					echo "<li>SSL: ".(isset($this->config['ssl']) ? 'on' : 'off')."</li>\n";
 					echo "<li>SSL Proxy: ".(!empty($this->config['ssl_proxy']) ? $this->config['ssl_proxy'] : "false")."</li>\n";
 					echo "<li>SSL implicit: ".(($this->config['ssl_implicit'] == true) ? 'on' : 'off')."</li>\n";
-					echo "<li>Cookie hash: ".(isset($this->config['cookie_hash']) ? $this->config['cookie_hash'] : "")."</li>\n";
+					echo "<li>Cookie hash: ".(isset($this->config['cookie_hash']) ? $this->config['cookie_hash'] : '')."</li>\n";
 					echo "<li>Cookie path: ".$this->config['cookie_path']."</li>\n";
 					echo "</ul>\n";
 				}
