@@ -191,10 +191,10 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"upload_id number(10) not null /*AUTO_INCREMENT*/,".
 					"page_id number(10) default 0 not null,".
 					"user_id number(10) default 0 not null,".
-					"filename varchar2(250) not null,".
+					"file_name varchar2(250) not null,".
 					"description varchar2(250) not null,".
 					"uploaded_dt date default sysdate not null,".
-					"filesize number(11) default 0 not null,".
+					"file_size number(11) default 0 not null,".
 					"picture_w number(11) default 0 not null,".
 					"picture_h number(11) default 0 not null,".
 					"file_ext varchar2(10) not null,".

@@ -230,12 +230,12 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"upload_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"filename VARCHAR(250) NOT NULL DEFAULT '',".
+					"file_name VARCHAR(250) NOT NULL DEFAULT '',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"uploaded_dt DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"filesize INT(11) UNSIGNED NOT NULL DEFAULT '0',".
-					"picture_w INT(11) UNSIGNED NOT NULL DEFAULT '0',".
-					"picture_h INT(11) UNSIGNED NOT NULL DEFAULT '0',".
+					"file_size INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"file_ext VARCHAR(10) NOT NULL DEFAULT '',".
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (upload_id),".

@@ -27,10 +27,10 @@ function admin_files(&$engine, &$module)
 	if (isset($_GET['remove'])) // show the form
 	{
 		$what = $engine->load_all(
-			"SELECT user_id, upload_id, filename, filesize, description ".
+			"SELECT user_id, upload_id, file_name, file_size, description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
-				"AND filename='".quote($engine->dblink, $_GET['file'])."'");
+				"AND file_name='".quote($engine->dblink, $_GET['file'])."'");
 
 		if (sizeof($what) > 0)
 		{
@@ -60,10 +60,10 @@ function admin_files(&$engine, &$module)
 	{
 		// 1. where, existence
 		$what = $engine->load_all(
-			"SELECT user_id, upload_id, filename, filesize, description ".
+			"SELECT user_id, upload_id, file_name, file_size, description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
-				"AND filename='".quote($engine->dblink, $_POST['file'])."'");
+				"AND file_name='".quote($engine->dblink, $_POST['file'])."'");
 
 		if (sizeof($what) > 0)
 		{
@@ -83,7 +83,7 @@ function admin_files(&$engine, &$module)
 			else
 				print('<div class="error">'.$engine->get_translation('UploadRemovedFromFSError').'</div><br /><br /> ');
 
-			$engine->log(1, str_replace('%2', $what[0]['filename'], str_replace('%1', $engine->tag.' global storage', $engine->get_translation('LogRemovedFile', $engine->config['language']))));
+			$engine->log(1, str_replace('%2', $what[0]['file_name'], str_replace('%1', $engine->tag.' global storage', $engine->get_translation('LogRemovedFile', $engine->config['language']))));
 		}
 		else
 		{
@@ -150,9 +150,9 @@ function admin_files(&$engine, &$module)
 			// 5. insert line into DB
 			$engine->query("INSERT INTO {$engine->config['table_prefix']}upload SET ".
 				"page_id		= '".quote($engine->dblink, '0')."', ".
-				"filename		= '".quote($engine->dblink, $small_name)."', ".
+				"file_name		= '".quote($engine->dblink, $small_name)."', ".
 				"description	= '".quote($engine->dblink, $description)."', ".
-				"filesize		= '".quote($engine->dblink, $file_size)."',".
+				"file_size		= '".quote($engine->dblink, $file_size)."',".
 				"picture_w		= '".quote($engine->dblink, $size[0])."',".
 				"picture_h		= '".quote($engine->dblink, $size[1])."',".
 				"file_ext		= '".quote($engine->dblink, substr($ext, 0, 10))."',".
@@ -226,15 +226,15 @@ function admin_files(&$engine, &$module)
 
 	echo '<br />';
 
-	$orderby = 'filename ASC';
+	$orderby = 'file_name ASC';
 	if ($order == 'time')		$orderby = 'uploaded_dt DESC';
-	if ($order == 'size')		$orderby = 'filesize ASC';
-	if ($order == 'size_desc')	$orderby = 'filesize DESC';
+	if ($order == 'size')		$orderby = 'file_size ASC';
+	if ($order == 'size_desc')	$orderby = 'file_size DESC';
 	if ($order == 'ext')		$orderby = 'file_ext ASC';
 
 	// load files list
 	$files = $engine->load_all(
-		"SELECT upload_id, page_id, user_id, filesize, picture_w, picture_h, filename, description, uploaded_dt ".
+		"SELECT upload_id, page_id, user_id, file_size, picture_w, picture_h, file_name, description, uploaded_dt ".
 		"FROM {$engine->config['table_prefix']}upload ".
 		"WHERE page_id = 0 ".
 		"ORDER BY ".$orderby);
@@ -260,22 +260,22 @@ function admin_files(&$engine, &$module)
 
 	foreach($files as $file)
 	{
-		$engine->filesCache[$file['page_id']][$file['filename']] = &$file;
+		$engine->filesCache[$file['page_id']][$file['file_name']] = &$file;
 
 		$dt		= $file['uploaded_dt'];
 		$desc	= $engine->format($file['description'], 'typografica');
 
 		if ($desc == '') $desc = '&nbsp;';
 
-		$filename	= $file['filename'];
-		$filesize	= $engine->binary_multiples($file['filesize'], true, true, true);
-		$fileext	= substr($filename, strrpos($filename, '.') + 1);
-		$link		= $engine->link($path2.$filename, '', $filename);
-		$remove_href = $engine->tag.'&amp;remove=global&amp;file='.$filename;
+		$file_name	= $file['file_name'];
+		$file_size	= $engine->binary_multiples($file['file_size'], true, true, true);
+		$file_ext	= substr($file_name, strrpos($file_name, '.') + 1);
+		$link		= $engine->link($path2.$file_name, '', $file_name);
+		$remove_href = $engine->tag.'&amp;remove=global&amp;file='.$file_name;
 ?>
 		<tr>
 			<td style=""><?php echo $link; ?></td>
-			<td>(<?php echo $filesize; ?>)</td>
+			<td>(<?php echo $file_size; ?>)</td>
 			<td><?php echo $desc ?></td>
 			<td style="white-space:nowrap;"><?php echo $dt ?></td>
 			<td><a href="<?php echo $remove_href; ?>"><?php echo $engine->get_translation('RemoveButton') ?></a></td>

@@ -17,11 +17,11 @@ else
 	$page_id = $this->page['page_id'];
 }
 $what = $this->load_all(
-	"SELECT u.user_name AS user, f.upload_id, f.filename, f.file_ext, f.filesize, f.description, f.hits ".
+	"SELECT u.user_name AS user, f.upload_id, f.file_name, f.file_ext, f.file_size, f.description, f.hits ".
 	"FROM ".$this->config['table_prefix']."upload f ".
 		"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 	"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-	"AND f.filename='".quote($this->dblink, $_GET['get'])."'");
+	"AND f.file_name='".quote($this->dblink, $_GET['get'])."'");
 
 if (sizeof($what) > 0)
 {
@@ -31,7 +31,7 @@ if (sizeof($what) > 0)
 	{
 		$filepath = $this->config['upload_path'.($page_id ? '_per_page' : '')].'/'.
 		($page_id ? ('@'.$this->page['page_id'].'@') : '').
-		$what[0]['filename'];
+		$what[0]['file_name'];
 	}
 	else
 	{
@@ -75,7 +75,7 @@ else
 
 if ($filepath)
 {
-	header("Content-Disposition:".( $isimage || $isplain ? "" : " attachment;" )." filename=".$what[0]['filename']);
+	header("Content-Disposition:".( $isimage || $isplain ? "" : " attachment;" )." filename=".$what[0]['file_name']);
 
 	if (!isset($isimage))
 	{

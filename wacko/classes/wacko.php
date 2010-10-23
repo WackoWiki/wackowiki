@@ -197,7 +197,7 @@ class Wacko
 		return WACKO_VERSION;
 	}
 
-	function check_file_exists($filename, $unwrapped_tag = '' )
+	function check_file_exists($file_name, $unwrapped_tag = '' )
 	{
 		if ($unwrapped_tag == '')
 		{
@@ -211,20 +211,20 @@ class Wacko
 			if (!$page_id) return false;
 		}
 
-		$file = (isset($this->filesCache[$page_id][$filename]) ? $this->filesCache[$page_id][$filename] : '');
+		$file = (isset($this->filesCache[$page_id][$file_name]) ? $this->filesCache[$page_id][$file_name] : '');
 		if (!($file))
 		{
 			$what = $this->load_all(
-				"SELECT upload_id, filename, filesize, description, picture_w, picture_h, file_ext ".
+				"SELECT upload_id, file_name, file_size, description, picture_w, picture_h, file_ext ".
 				"FROM ".$this->config['table_prefix']."upload ".
 				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
-					"AND filename = '".quote($this->dblink, $filename)."'");
+					"AND file_name = '".quote($this->dblink, $file_name)."'");
 
 			if (sizeof($what) == 0)
 				return false;
 
 			$file = $what[0];
-			$this->filesCache[$page_id][$filename] = $file;
+			$this->filesCache[$page_id][$file_name] = $file;
 		}
 		return $file;
 	}
@@ -2163,7 +2163,8 @@ class Wacko
 
 				if (is_array($desc))
 				{
-					$title	= $desc['description'].' ('.$this->binary_multiples($desc['filesize'], true, true, true).')';
+					$title	= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], true, true, true).')';
+					#$alt	= $desc['description'];
 					$url	= $this->config['base_url'].$this->config['upload_path'].'/'.$thing;
 					$icon	= $this->get_translation('fileicon');
 					$imlink	= false;
@@ -2186,7 +2187,8 @@ class Wacko
 
 				if (is_array($desc))
 				{
-					$title	= $desc['description'].' ('.$this->binary_multiples($desc['filesize'], true, true, true).')';
+					$title	= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], true, true, true).')';
+					#$alt	= $desc['description'];
 					$url	= $this->config['base_url'].$this->config['upload_path'].$thing;
 					$icon	= $this->get_translation('fileicon');
 					$imlink	= false;
@@ -2235,7 +2237,8 @@ class Wacko
 					$this->has_access('read', $page_id)) || (
 					$desc['user_id'] == $this->get_user_id()))
 					{
-						$title	= $desc['description'].' ('.$this->binary_multiples($desc['filesize'], true, true, true).')';
+						$title	= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], true, true, true).')';
+						#$alt	= $desc['description'];
 						$url	= $this->href('files', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
 						$imlink	= false;
 						if ($desc['file_ext'] == 'pdf')
@@ -2259,7 +2262,7 @@ class Wacko
 								return '<a href="'.$this->href('files', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" title="'.$title.'">'.$text.'</a>';
 							}
 						}
-						$this->debug_print_r($desc);
+						# $this->debug_print_r($desc);
 					}
 					else //403
 					{
@@ -5230,16 +5233,16 @@ class Wacko
 		{
 			// get filenames
 			$files = $this->load_all(
-				"SELECT filename ".
+				"SELECT file_name ".
 				"FROM {$this->config['table_prefix']}upload ".
 				"WHERE page_id = '".quote($this->dblink, $page['page_id'])."'");
 
 			foreach ($files as $file)
 			{
 				// remove from FS
-				$filename = $this->config['upload_path_per_page'].'/@'.
-					$page['page_id'].'@'.$file['filename'];
-				@unlink($filename);
+				$file_name = $this->config['upload_path_per_page'].'/@'.
+					$page['page_id'].'@'.$file['file_name'];
+				@unlink($file_name);
 			}
 			// remove from DB
 			$this->query(

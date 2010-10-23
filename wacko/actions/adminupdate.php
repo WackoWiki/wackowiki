@@ -9,7 +9,7 @@ if ($this->is_admin())
 {
 	if (!isset($_POST['rename']))
 	{
-		echo "<h3>1. Renames files in \\files\perpage folder to @page_id@filename:</h3>";
+		echo "<h3>1. Renames files in \\files\perpage folder to @page_id@file_name:</h3>";
 
 		echo $this->form_open();
 		?>
@@ -19,13 +19,13 @@ if ($this->is_admin())
 		<?php
 		echo $this->form_close();
 	}
-	// rename files in \files\perpage folder to @page_id@filename
+	// rename files in \files\perpage folder to @page_id@file_name
 	else if (isset($_POST['rename']))
 	{
 		@set_time_limit(0);
 
 		$files = $this->load_all(
-			"SELECT u.page_id, filename, supertag ".
+			"SELECT u.page_id, file_name, supertag ".
 			"FROM {$this->config['table_prefix']}upload u ".
 			"INNER JOIN ".$this->config['table_prefix']."page p ON (u.page_id = p.page_id) ".
 			"WHERE u.page_id != '0'");
@@ -35,10 +35,10 @@ if ($this->is_admin())
 
 		foreach ($files as $file)
 		{
-			// rename from @PageSupertag@SubPage@filename to @page_id@filename
+			// rename from @PageSupertag@SubPage@file_name to @page_id@file_name
 			$old_name = '@'.str_replace('/', '@', $file['supertag']).'@';
 			$new_name = '@'.$file['page_id'].'@';
-			$file_name = $file['filename'];
+			$file_name = $file['file_name'];
 
 			if($handle = opendir($dir))
 			{
@@ -99,7 +99,7 @@ if ($this->is_admin())
 		<?php
 		echo $this->form_close();
 	}
-	// rename files in \files\perpage folder to @page_id@filename
+	// rename files in \files\perpage folder to @page_id@file_name
 	else if (isset($_POST['migrate_user_otions']))
 	{
 		$_users = $this->load_all(
