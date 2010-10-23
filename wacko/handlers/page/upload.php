@@ -80,7 +80,7 @@ if ($registered
 	</ul>
 	<br />
 	<input type="hidden" name="remove" value="<?php echo $_GET['remove']?>" />
-	<input type="hidden" name="file" value="<?php echo $_GET['file_id']?>" />
+	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
 	<input name="submit" type="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />
 	&nbsp;
 	<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
@@ -121,7 +121,7 @@ if ($registered
 				"FROM ".$this->config['table_prefix']."upload f ".
 					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 				"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-					"AND f.upload_id ='".quote($this->dblink, $_POST['file'])."'");
+					"AND f.upload_id ='".quote($this->dblink, $_POST['file_id'])."'");
 
 			if (sizeof($what) > 0)
 			{
