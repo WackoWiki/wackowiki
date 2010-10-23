@@ -43,7 +43,7 @@ function admin_files(&$engine, &$module)
 	</ul>
 	<br />
 	<input type="hidden" name="remove" value="<?php echo $_GET['remove']?>" />
-	<input type="hidden" name="file" value="<?php echo $_GET['file']?>" />
+	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
 	<input id="submit" name="submit" type="submit" value="<?php echo $engine->get_translation('RemoveButton'); ?>" />
 	<input id="button" type="button" value="<?php echo str_replace("\n", ' ', $engine->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes(rawurldecode($engine->href('upload')))?>';" />
 	<br /><br />
@@ -63,7 +63,7 @@ function admin_files(&$engine, &$module)
 			"SELECT user_id, upload_id, file_name, file_size, description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
-				"AND file_name='".quote($engine->dblink, $_POST['file'])."'");
+				"AND file_name='".quote($engine->dblink, $_POST['file_id'])."'");
 
 		if (sizeof($what) > 0)
 		{
@@ -267,11 +267,12 @@ function admin_files(&$engine, &$module)
 
 		if ($desc == '') $desc = '&nbsp;';
 
+		$file_id	= $file['upload_id'];
 		$file_name	= $file['file_name'];
 		$file_size	= $engine->binary_multiples($file['file_size'], true, true, true);
 		$file_ext	= substr($file_name, strrpos($file_name, '.') + 1);
 		$link		= $engine->link($path2.$file_name, '', $file_name);
-		$remove_href = $engine->tag.'&amp;remove=global&amp;file='.$file_name;
+		$remove_href = $engine->tag.'&amp;remove=global&amp;file_id='.$file_name;
 ?>
 		<tr>
 			<td style=""><?php echo $link; ?></td>
