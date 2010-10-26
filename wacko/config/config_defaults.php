@@ -79,6 +79,7 @@ $wacko_config = array(
 
 	'users_page' => 'Users',
 	'policy_page' => '',
+	'license' => '',
 
 	'default_write_acl' => '$',
 	'default_read_acl' => '*',

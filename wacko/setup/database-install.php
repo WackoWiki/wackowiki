@@ -154,6 +154,7 @@ $config_db['hide_rating'] = $config['hide_rating'];
 $config_db['hide_toc'] = $config['hide_toc'];
 $config_db['keep_deleted_time'] = $config['keep_deleted_time'];
 $config_db['language'] = $config['language'];
+$config_db['license'] = $config['license'];
 $config_db['log_default_show'] = $config['log_default_show'];
 $config_db['log_level'] = $config['log_level'];
 $config_db['log_purge_time'] = $config['log_purge_time'];
