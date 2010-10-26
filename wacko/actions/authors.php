@@ -8,14 +8,17 @@ print document and revisions' authors.
 	license	= some free-form text (wiki-formatting applies) or one of predefined constants:
 				- CC-BY-ND         (CreativeCommons-Attribution-NoDerivatives)
 				- CC-BY-NC-SA      (CreativeCommons-Attribution-NonCommercial-ShareAlike)
+				- CC-BY-NC-ND      (CreativeCommons-Attribution-Non-Commercial No Derivatives)
 				- CC-BY-SA         (CreativeCommons-Attribution-ShareAlike)
+				- CC-BY-NC         (CreativeCommons-Attribution Non-Commercial)
+				- CC-BY            (CreativeCommons-Attribution)
 				- GNU-FDL          (GNU Free Documentation License)
 				- PD               (Public Domain)
 	cluster	= consider all cluster subpages (if = 1) or current page only (0, default)
 */
 
 if (!isset($add)) $add = '';
-if (!isset($license)) $license = '';
+if (!isset($license)) $license = (isset($this->config['license']) ? $this->config['license'] : '');
 if (!isset($cluster)) $cluster = '';
 
 echo '<small>';
@@ -133,9 +136,12 @@ else
 		$licenses = array(
 			'CC-BY-ND'		=> array('http://creativecommons.org/licenses/by-nd/3.0/',		'CreativeCommons-Attribution-NoDerivatives'),
 			'CC-BY-NC-SA'	=> array('http://creativecommons.org/licenses/by-nc-sa/3.0/',	'CreativeCommons-Attribution-NonCommercial-ShareAlike'),
+			'CC-BY-NC-ND'	=> array('http://creativecommons.org/licenses/by-nc-nd/3.0/',	'CreativeCommons-Attribution-Non-Commercial No Derivatives'),
 			'CC-BY-SA'		=> array('http://creativecommons.org/licenses/by-sa/3.0/',		'CreativeCommons-Attribution-ShareAlike'),
+			'CC-BY-NC'		=> array('http://creativecommons.org/licenses/by-nc/3.0/',		'CreativeCommons-Attribution-Non-Commercial'),
+			'CC-BY'		=> array('http://creativecommons.org/licenses/by/3.0/',		'Creative Commons Attribution License'),
 			'GNU-FDL'		=> array('http://www.gnu.org/licenses/fdl.html',				'GNU Free Documentation License'),
-			'PD'			=> array('http://en.wikipedia.org/wiki/Public_domain',			'Public Domain / Free Use'),
+			'PD'			=> array('http://creativecommons.org/publicdomain/mark/1.0/',			'Public Domain / Free Use'),
 		);
 
 		if (isset($licenses[$license]))
@@ -143,7 +149,7 @@ else
 			// constant license
 			$license = '<br />Material is distributed under<br />'. // ru]: ћатериал распростран€етс€ на услови€х
 				$this->link($licenses[$license][0], '', $licenses[$license][1]).'<br />'.
-				$this->link('file:'.strtolower($license).'.png', '', $licenses[$license][1]);
+				$this->link('file:'.strtolower(str_replace('-', '_', $license)).'.png', '', $licenses[$license][1]);
 		}
 		else
 		{
