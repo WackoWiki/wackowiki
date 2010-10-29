@@ -7,50 +7,61 @@
 	i.e. no relative addressing
 */
 
-if (!isset($_POST['_to']))
-{
-	// show FORM
-	echo $this->form_open('', '', 'post', '', ' enctype="multipart/form-data" ');
-	?>
+// TODO: add a step for warning / confirmation (do you want overwrite? / Will add Import under ... [submit] [cancel])
+// add better description
+// finally localize all new message sets
 
-<div class="cssform">
-  <p>
-    <label for="importto"><?php echo $this->get_translation('ImportTo'); ?>:</label>
-    <input type="text" id="importto" name="_to" size="40" value="" />
-  </p>
-  <p>
-    <label for="importwhat"><?php echo $this->get_translation('ImportWhat'); ?>:</label>
-    <input type="file" id="importwhat" name="_import" />
-  </p>
-  <p>
-    <input type="submit"
-			value="<?php echo $this->get_translation('ImportButtonText'); ?>" />
-  </p>
-</div>
-<?php
-	echo $this->form_close();
-}
-else
+$t = '';
+
+if ($this->is_admin())
 {
+	if (!isset($_POST['_to']) || empty($_POST['_to']))
+	{
+		if (isset($_POST['_to']))
+		{
+			echo 'Pls. provide an cluster you want to import to, no relative addressing.<br /><br />';
+		}
+		else
+		{
+			echo 'Attention: overwrites the same pages in the cluster<br /><br />';
+		}
+		// show FORM
+		echo rawurldecode($this->form_open('', '', 'post', '', ' enctype="multipart/form-data" '));
+		?>
+		<div class="cssform">
+			<p>
+				<label for="importto"><?php echo $this->get_translation('ImportTo'); ?>:</label>
+				<input type="text" id="importto" name="_to" size="40" value="" />
+			</p>
+			<p>
+				<label for="importwhat"><?php echo $this->get_translation('ImportWhat'); ?>:</label>
+				<input type="file" id="importwhat" name="_import" />
+			</p>
+			<p>
+				<input type="submit" value="<?php echo $this->get_translation('ImportButtonText'); ?>" />
+			</p>
+		</div>
+		<?php
+		echo $this->form_close();
+	}
+	if (!empty($_POST['_to']))
+	{
 		if ($_FILES['_import']['error'] == 0)
 		{
-			$fd = fopen($_FILES['_import']['tmp_name'], "r");
+			$fd = fopen($_FILES['_import']['tmp_name'], 'r');
 
 			if (!$fd)
 			{
-				echo "<pre>";
+				echo '<pre>';
 				print_r($_FILES);
 				print_r($_POST);
-				die("</pre><br />IMPORT failed");
+				die('</pre><br />IMPORT failed');
 			}
 
 			$contents = fread($fd, filesize($_FILES['_import']['tmp_name']));
 			fclose($fd);
 
-			require_once('classes/utility.php');
-
-			$base_addr = Utility::untag($contents, 'title');
-
+			$this->use_class('utility');
 			$items = explode('<item>', $contents);
 
 			array_shift($items);
@@ -62,8 +73,8 @@ else
 				$tag		= $root_tag.( $root_tag && $rel_tag ? '/' : '' ).$rel_tag;
 				$page_id	= $this->get_page_id($tag);
 				$owner		= Utility::untag($item, 'author');
-				$owner_id	= $this->get_user_id_by_name($user);
-				$body = str_replace(']]&gt;', ']]>', Utility::untag($item, 'description'));
+				$owner_id	= $this->get_user_id_by_name($owner);
+				$body		= str_replace(']]&gt;', ']]>', Utility::untag($item, 'description'));
 				$title		= html_entity_decode(Utility::untag($item, 'title'));
 
 				$body_r = $this->save_page($tag, $title, $body, '');
@@ -87,7 +98,7 @@ else
 				$pages[] = $tag;
 			}
 
-			echo "<em>".str_replace('%1', $t, $this->get_translation('ImportSuccess'))."</em><br />";
+			echo '<em>'.str_replace('%1', $t, $this->get_translation('ImportSuccess')).'</em><br />';
 
 			foreach ($pages as $page)
 			{
@@ -96,11 +107,12 @@ else
 		}
 		else
 		{
-			echo "<pre>";
+			echo '<pre>';
 			print_r($_FILES);
 			print_r($_POST);
-			die("</pre><br />IMPORT failed");
+			die('</pre><br />IMPORT failed');
 		}
+	}
 }
 
 ?>

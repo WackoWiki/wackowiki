@@ -2738,6 +2738,8 @@ class Wacko
 
 	function write_link_table($from_page_id = '')
 	{
+		$query = '';
+
 		// delete old link table
 		if ($from_page_id == '')
 		{
@@ -2754,7 +2756,7 @@ class Wacko
 			{
 				$lower_to_tag = strtolower($to_tag);
 
-				if (!$written[$lower_to_tag])
+				if (!isset($written[$lower_to_tag]))
 				{
 					$query .= "('".quote($this->dblink, $from_page_id)."','".quote($this->dblink, $this->get_page_id($to_tag))."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->npj_translit($to_tag))."'),";
 					$written[$lower_to_tag] = 1;
