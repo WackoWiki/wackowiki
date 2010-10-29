@@ -643,7 +643,7 @@ class WackoFormatter
 			// These regexp needed for workaround MSIE bug (</ul></blockquote>)
 			if (preg_match('/<\/ul>[\s\r\t\n]*$/i', $result)) $result.= $this->z_gif;
 
-			return '<blockquote>'.$result.'</blockquote>';
+			return $result; // '<blockquote>'.$result.'</blockquote>';
 		}
 		// super
 		else if (preg_match('/^\^\^(.*)\^\^$/', $thing, $matches))
