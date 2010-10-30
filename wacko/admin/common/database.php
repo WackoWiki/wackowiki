@@ -15,6 +15,12 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'page_id',
 				'limit' => 1000
 			),
+			$engine->config['table_prefix'].'bookmark' => array(
+				'name'	=> $engine->config['table_prefix'].'bookmark',
+				'where'	=> false,
+				'order'	=> 'bookmark_id',
+				'limit' => 1000
+			),
 			$engine->config['table_prefix'].'cache' => array(
 				'name'	=> $engine->config['table_prefix'].'cache',
 				'where'	=> false,
