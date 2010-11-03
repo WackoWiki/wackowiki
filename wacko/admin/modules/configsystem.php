@@ -28,10 +28,10 @@ function admin_configsystem(&$engine, &$module)
 
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$config['debug']			= (int)$_POST['debug'];
+		$config['debug']				= (int)$_POST['debug'];
 		$config['debug_sql_threshold']			= (float)$_POST['debug_sql_threshold'];
 		$config['debug_admin_only']			= (int)$_POST['debug_admin_only'];
-		$config['cache']			= (int)$_POST['cache'];
+		$config['cache']				= (int)$_POST['cache'];
 		$config['cache_ttl']			= (int)$_POST['cache_ttl'];
 		$config['cache_sql']			= (int)$_POST['cache_sql'];
 		$config['cache_sql_ttl']			= (int)$_POST['cache_sql_ttl'];
@@ -253,7 +253,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr>
 				<td class="label"><label for="rewrite_mode"><strong>Use <tt>mod_rewrite</tt>:</strong><br />
 				<small>If your web server supports this feature, turn to get "beautiful" the addresses of pages.</small></label></td>
-				<td><input type="checkbox" id="rewrite_mode" name="rewrite_mode" value="1"<?php echo ( $engine->config['rewrite_mode'] ? ' checked="checked"' : '' );?> /></td>
+				<td><input type="checkbox" id="rewrite_mode" name="rewrite_mode" value="1"<?php echo ( $engine->config['rewrite_mode'] == 1 ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 		</table>
 		<br />

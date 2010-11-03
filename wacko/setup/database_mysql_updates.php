@@ -69,6 +69,7 @@ $table_group_r4_3 = "CREATE TABLE {$pref}group (".
 					"description VARCHAR(255) NOT NULL,".
 					"moderator INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
+					"is_system TINYINT(1) UNSIGNED NOT NULL,".
 					"open TINYINT(1) UNSIGNED NOT NULL,".
 					"active TINYINT(1) UNSIGNED NOT NULL,".
 					// "special TINYINT(1) UNSIGNED NOT NULL,".

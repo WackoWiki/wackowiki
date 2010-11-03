@@ -66,6 +66,7 @@ $table_group = "CREATE TABLE {$pref}group (".
 					"description VARCHAR(255) NOT NULL,".
 					"moderator INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
+					"is_system TINYINT(1) UNSIGNED NOT NULL,".
 					"open TINYINT(1) UNSIGNED NOT NULL,".
 					"active TINYINT(1) UNSIGNED NOT NULL,".
 					// "special TINYINT(1) UNSIGNED NOT NULL,".
@@ -239,7 +240,7 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"file_ext VARCHAR(10) NOT NULL DEFAULT '',".
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (upload_id),".
-					"KEY page_id (page_id,filename),".
+					"KEY page_id (page_id,file_name),".
 					"KEY page_id_2 (page_id,uploaded_dt),".
 					"KEY idx_user_id (user_id)".
 				") TYPE=MyISAM";
