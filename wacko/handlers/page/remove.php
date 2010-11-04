@@ -8,7 +8,7 @@ $dontkeep = '';
 if (!$this->page) $this->redirect($this->href());
 
 // check user permissions to delete
-// ToDo: config->owners_can_remove_comments ?
+// TODO: config->owners_can_remove_comments ?
 if ($this->is_admin() ||
 (!$this->config['remove_onlyadmins'] &&
 ($this->get_page_owner($this->tag) == $this->get_user_name() ||

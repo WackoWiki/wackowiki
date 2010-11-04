@@ -1326,9 +1326,9 @@ class Wacko
 		// current user is owner; if user is logged in! otherwise, no owner.
 		if ($this->get_user_name())
 		{
-			$owner	= $user = $this->get_user_name();
-			$owner_id	= $user_id = $this->get_user_id();
-			$reg	= true;
+			$owner		= $user		= $this->get_user_name();
+			$owner_id	= $user_id	= $this->get_user_id();
+			$reg		= true;
 		}
 		else if ($this->forum === true || $comment_on_id)
 		{
@@ -1790,8 +1790,8 @@ class Wacko
 
 		// move revision
 		$this->query(
-			"INSERT INTO {$this->config['table_prefix']}revision (page_id, tag, modified, body, formatting, edit_note, minor_edit, owner_id, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
-			"VALUES ('{$old_page['page_id']}','{$old_page['tag']}', '{$old_page['modified']}', '{$old_page['body']}', '{$old_page['formatting']}', '{$old_page['edit_note']}', '{$old_page['minor_edit']}', '{$old_page['owner_id']}', '{$old_page['user_id']}', '0', '{$old_page['handler']}', '{$old_page['comment_on_id']}', '{$old_page['supertag']}', '{$old_page['title']}', '{$old_page['keywords']}', '{$old_page['description']}')");
+			"INSERT INTO {$this->config['table_prefix']}revision (page_id, tag, modified, body, formatting, edit_note, minor_edit, ip, owner_id, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
+			"VALUES ('{$old_page['page_id']}','{$old_page['tag']}', '{$old_page['modified']}', '{$old_page['body']}', '{$old_page['formatting']}', '{$old_page['edit_note']}', '{$old_page['minor_edit']}', '{$old_page['ip']}', '{$old_page['owner_id']}', '{$old_page['user_id']}', '0', '{$old_page['handler']}', '{$old_page['comment_on_id']}', '{$old_page['supertag']}', '{$old_page['title']}', '{$old_page['keywords']}', '{$old_page['description']}')");
 
 		// update user statistics for revisions made
 		if ($user = $this->get_user())
@@ -5080,7 +5080,7 @@ class Wacko
 
 			$this->query(
 				"UPDATE {$this->config['table_prefix']}page SET ".
-					"comments	= '".(int)$this->count_comments($comment_on_id)."' ".
+					"comments	= '".(int)$this->count_comments($comment_on_id)."', ".
 					"commented	= '".quote($this->dblink, $comment['created'])."' ".
 				"WHERE tag		= '".quote($this->dblink, $this->get_comment_on_tag($comment_on_id))."' ".
 				"LIMIT 1");
