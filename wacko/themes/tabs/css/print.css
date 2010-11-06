@@ -46,10 +46,10 @@ cite {color:#888800;font-style:normal;}
 .include { padding: 4px; }
 
 .toc1 { margin-left:0px; padding-left:0px; font-weight:bold; list-style-type:none;  } 
-.toc2 { margin-left:0px; padding-left:15px; list-style-type:none;  } 
-.toc3 { margin-left:0px; padding-left:30px; list-style-type:none;  } 
-.toc4 { margin-left:0px; padding-left:45px; list-style-type:none;  } 
-.toc5 { margin-left:0px; padding-left:60px; list-style-type:none;  } 
+.toc2 { margin-left:0px; padding-left:15px; list-style-type:none;  }
+.toc3 { margin-left:0px; padding-left:30px; list-style-type:none;  }
+.toc4 { margin-left:0px; padding-left:45px; list-style-type:none;  }
+.toc5 { margin-left:0px; padding-left:60px; list-style-type:none;  }
 .toc6 { margin-left:0px; padding-left:75px; list-style-type:none;  }
 
 .Toc1 A, .Toc2 A, .Toc3 A, .Toc4 A, .Toc5 A, .Toc6 A
@@ -65,4 +65,8 @@ border-width:1px 0 0;
 .nobr {white-space: nowrap}
 
 div.action           { margin:2px; background: #eeeeee }
-div.action-content   { padding:10px 10px 25px 10px; } 
+div.action-content   { padding:10px 10px 25px 10px; }
+
+.refnum {
+	font-weight:	bold;
+}

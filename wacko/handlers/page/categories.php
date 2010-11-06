@@ -80,7 +80,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			}
 		}
 		// rename item
-		else if (isset($_POST['rename']) && $_POST['newname'] && $_POST['id'])
+		else if (isset($_POST['rename']) && isset($_POST['newname']) && isset($_POST['id']))
 		{
 			// do we have identical names?
 			if ($this->load_single(
@@ -104,7 +104,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			}
 		}
 		// (un)group item
-		else if (isset($_POST['ugroup']) && isset($_POST['parent']) && $_POST['id'])
+		else if (isset($_POST['ugroup']) && isset($_POST['parent']) && isset($_POST['id']))
 		{
 			// in or out?
 			if ($_POST['parent'] == 0)
@@ -143,7 +143,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			}
 		}
 		// delete item
-		else if (isset($_POST['delete']) && $_POST['id'])
+		else if (isset($_POST['delete']) && isset($_POST['id']))
 		{
 			$this->query(
 				"DELETE FROM {$this->config['table_prefix']}category ".
@@ -220,7 +220,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			echo $this->form_close();
 		}
 		// rename item
-		else if (isset($_POST['rename']) && $_POST['change'])
+		else if (isset($_POST['rename']) && isset($_POST['change']))
 		{
 			if ($word = $this->load_single("SELECT category FROM {$this->config['table_prefix']}category WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1"))
 			{
@@ -229,7 +229,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				echo '<table class="formation">';
 				echo '<tr><td><label for="">'.
 					$this->get_translation('CategoriesRename').' \'<tt>'.htmlspecialchars($word['category']).'</tt>\' in</label> '.
-					'<input name="newname" value="'.( $_POST['newname'] ? htmlspecialchars($_POST['newname']) : htmlspecialchars($word['category']) ).'" size="20" maxlength="100" /> '.
+					'<input name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : htmlspecialchars($word['category']) ).'" size="20" maxlength="100" /> '.
 					'<input id="submit" type="submit" name="rename" value="'.$this->get_translation('CategoriesSaveButton').'" /> '.
 					'<input id="button" type="button" value="'.$this->get_translation('CategoriesCancelButton').'" onclick="document.location=\''.addslashes($this->href('categories')).'\';" />'.
 					'<br /><small>'.$this->get_translation('CategoriesRenameInfo').'</small>'.
