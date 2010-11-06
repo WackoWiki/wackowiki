@@ -15,7 +15,9 @@ if (!isset($ids)) 			$ids	= '';
 if (!isset($lang))			$lang	= $this->page['lang'];
 if (!isset($inline)) 		$inline	= '';
 if (!isset($sort) || !in_array($sort, array('abc', 'date')))
+{
 	$sort = 'abc';
+}
 if (!isset($nomark)) $nomark = '';
 
 $root = $this->unwrap_link($root);
@@ -35,7 +37,10 @@ if ($list && ($ids || isset($_GET['category'])))
 	{
 		if ($_words)
 		{
-			foreach ($_words as $word) $words[] = $word['category'];
+			foreach ($_words as $word)
+			{
+				$words[] = $word['category'];
+			}
 			$words = strtolower(implode(', ', $words));
 		}
 		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('PagesCategory').( $words ? ' &laquo;<b>'.$words.'</b>&raquo;' : '' ).":</span></p>\n";
@@ -56,7 +61,7 @@ if ($list && ($ids || isset($_GET['category'])))
 		"SELECT category FROM {$this->config['table_prefix']}category ".
 		"WHERE category_id IN ( ".quote($this->dblink, $category)." )", 1))
 		{
-			echo '<ul>';
+			echo '<ol>';
 
 			foreach ($pages as $page)
 			{
@@ -66,7 +71,7 @@ if ($list && ($ids || isset($_GET['category'])))
 					echo '<li>'.( $sort == 'date' ? '<small>('.date('d/m/Y', strtotime($page['created'])).')</small> ' : '' ).$this->link('/'.$page['tag'], '', $page['title'], 0, 1)."</li>\n";
 			}
 
-			echo '</ul>';
+			echo '</ol>';
 		}
 		else
 		{

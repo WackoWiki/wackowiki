@@ -37,6 +37,10 @@ $wacko_all_resource = array(
 	'RootLinkIcon'	=> '/',
 	'SubLinkIcon'	=> '!/',
 	'UpLinkIcon'	=> '../',
+
+	// mime (temp)
+	'texticon'  => '<img src="{theme}icons/txt.png" alt="Text" />',
+	'imageicon'  => '<img src="{theme}icons/image.png" alt="Image" />',
 );
 
 ?>

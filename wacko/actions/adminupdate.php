@@ -136,7 +136,7 @@ if ($this->is_admin())
 {
 	if (!isset($_POST['migrate_acls']))
 	{
-		echo "<h3>2. Migrates acls to new scheme:</h3>";
+		echo "<h3>3. Migrates acls to new scheme:</h3>";
 		echo $this->form_open();
 		?>
 		<input type="submit" name="migrate_acls" value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
