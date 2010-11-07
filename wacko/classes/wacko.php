@@ -9,6 +9,7 @@ class Wacko
 	var $page;
 	var $tag;
 	var $forum;
+	var $keywords;
 	var $iswatched;
 	var $query_time;
 	var $query_log				= array();
@@ -726,19 +727,24 @@ class Wacko
 	{
 		$meta_keywords = '';
 
-		if ($this->page['keywords'])
+		if (isset($this->page['keywords']))
 		{
-			$meta_keywords .= htmlspecialchars($this->page['keywords']);
+			$meta_keywords = htmlspecialchars($this->page['keywords']);
 		}
-		else
+		else if ($this->config['meta_keywords'])
 		{
 			$meta_keywords = htmlspecialchars($this->config['meta_keywords']);
 		}
 		// add assigned categories
-		if ($this->keywords)
+		if (isset($this->keywords))
 		{
-			$meta_keywords .= ', '.strtolower(implode(', ', $this->keywords));
+			if (!empty($meta_keywords))
+			{
+				$meta_keywords .= ', ';
+			}
+			$meta_keywords .= strtolower(implode(', ', $this->keywords));
 		}
+
 		return $meta_keywords;
 	}
 
@@ -4699,9 +4705,8 @@ class Wacko
 			$this->config['theme_url']	= $this->config['base_url'].'themes/'.$this->config['theme'].'/';
 
 			// set page keywords. this defines $keywords (array) object property
-			// consisting of keywords ids as keys and corresponding names as values
-			if ($this->page['keywords'])
-			{
+			#if ($this->page['keywords'])
+			#{
 				$keywords = $this->load_all(
 					"SELECT k.category_id, k.category
 					FROM {$this->config['table_prefix']}category k
@@ -4713,7 +4718,7 @@ class Wacko
 					$this->keywords[$word['category_id']] = $word['category'];
 				}
 				unset($keywords, $word);
-			}
+			#}
 		}
 
 		if (!$user && $this->page['modified'])
