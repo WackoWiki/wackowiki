@@ -110,7 +110,7 @@ if ($this->page)
 <div id="credits"><?php
 
 // comment this out for not showing website policy link at the bottom of your pages
-if ($this->config['policy_page']) echo '<a href="'.$this->href('', $this->config['policy_page']).'">'.$this->get_translation('StandardTerms').'</a><br />';
+if ($this->config['policy_page']) echo '<a href="'.htmlspecialchars($this->href('', $this->config['policy_page'])).'">'.$this->get_translation('StandardTerms').'</a><br />';
 
 if ($this->get_user())
 {

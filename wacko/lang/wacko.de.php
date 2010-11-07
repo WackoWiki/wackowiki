@@ -163,9 +163,10 @@ $wacko_translation = array(
 	'CategoriesRemoveButton'	=> 'Entfernen',
 	'CategoriesEditInfo'		=> 'Um die Kategorie-Liste zu bearbeiten wähle das Optionsfeld.',
 	'NoCategoriesForThisLanguage'	=> 'Kategorien für diese Sprache wurden nicht definiert.',
-	'PagesCategory'			=> 'Seiten Kategorie',
+	'PagesCategory'			=> 'Seiten der Kategorie',
 	'CategoryNotExists'		=> 'Kategorie gibt es nicht.',
 	'CategoryEmpty'			=> 'Kategorie leer.',
+	'TagCloud'				=> 'Wortwolke',
 
 	// source handler
 	'TitleSource'			=> 'source text of document',
