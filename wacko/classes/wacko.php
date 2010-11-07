@@ -724,14 +724,22 @@ class Wacko
 
 	function get_keywords()
 	{
+		$meta_keywords = '';
+
 		if ($this->page['keywords'])
 		{
-			return htmlspecialchars($this->page['keywords']);
+			$meta_keywords .= htmlspecialchars($this->page['keywords']);
 		}
 		else
 		{
-			return htmlspecialchars($this->config['meta_keywords']);
+			$meta_keywords = htmlspecialchars($this->config['meta_keywords']);
 		}
+		// add assigned categories
+		if ($this->keywords)
+		{
+			$meta_keywords .= ', '.strtolower(implode(', ', $this->keywords));
+		}
+		return $meta_keywords;
 	}
 
 	function get_description()

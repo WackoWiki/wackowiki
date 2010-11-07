@@ -10,6 +10,7 @@ header("Content-Type: text/html; charset=".$this->get_charset());
 <link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
 
 <link rel="start" href="/" />
+<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page'])); ?>" />
 <link rel="prev" href="<?php echo $this->href() ?>" />
 </head>
 <body id="print">

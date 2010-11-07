@@ -16,8 +16,8 @@ header("Content-Type: text/html; charset=".$this->get_charset());
 if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noindex'] == 1 || $this->page['noindex'] == 1)
 	echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 ?>
-	<meta name="keywords" content="<?php echo $this->get_keywords(); ?>" />
-	<meta name="description" content="<?php echo $this->get_description(); ?>" />
+	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords()); ?>" />
+	<meta name="description" content="<?php echo htmlspecialchars($this->get_description()); ?>" />
 	<meta name="language" content="<?php echo $this->page['lang'] ?>" />
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/default.css" />

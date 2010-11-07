@@ -169,6 +169,7 @@ $wacko_translation = array(
 	'PagesCategory'	=> 'Pages category',
 	'CategoryNotExists'	=> 'Category does not exist.',
 	'CategoryEmpty'	=> 'Category empty.',
+	'TagCloud'				=> 'Woordwolk',
 
 	// source handler
 	'TitleSource'			=> 'source text of document',

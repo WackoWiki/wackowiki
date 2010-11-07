@@ -166,9 +166,10 @@ $wacko_translation = array(
 	'CategoriesRemoveButton'	=> 'Remove',
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
 	'NoCategoriesForThisLanguage'	=> 'Categories for this language are not specified.',
-	'PagesCategory'	=> 'Pages category',
-	'CategoryNotExists'	=> 'Category does not exist.',
-	'CategoryEmpty'	=> 'Category empty.',
+	'PagesCategory'			=> 'Pages category',
+	'CategoryNotExists'		=> 'Category does not exist.',
+	'CategoryEmpty'			=> 'Category empty.',
+	'TagCloud'				=> 'Tag Cloud',
 
 	// source handler
 	'TitleSource'			=> 'source text of document',

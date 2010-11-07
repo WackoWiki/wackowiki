@@ -169,6 +169,7 @@ $wacko_translation = array(
 	'PagesCategory'	=> 'Документы категории',
 	'CategoryNotExists'	=> 'Категория не существует.',
 	'CategoryEmpty'	=> 'Категория пуста.',
+	'TagCloud'				=> 'Облако тегов',
 
 	// source handler
 	'TitleSource'			=> 'source text of document',

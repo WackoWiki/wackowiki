@@ -169,6 +169,7 @@ $wacko_translation = array(
 	'PagesCategory'	=> 'Catégorie de pages',
 	'CategoryNotExists'	=> 'Catégorie inexistante.',
 	'CategoryEmpty'	=> 'Catégorie vide.',
+	'TagCloud'				=> 'Nuage de mots-clés',
 
 	// source handler
 	'TitleSource'			=> 'source text of document',
