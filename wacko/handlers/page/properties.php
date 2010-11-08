@@ -44,9 +44,9 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 					"noindex			= '".quote($this->dblink, (int)$_POST['noindex'])."' "
 				: 	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
 					"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
-					"title				= '".quote($this->dblink, htmlspecialchars($_POST['title']))."', ".
-					"keywords			= '".quote($this->dblink, htmlspecialchars($_POST['keywords']))."', ".
-					"description		= '".quote($this->dblink, htmlspecialchars($_POST['description']))."' "
+					"title				= '".quote($this->dblink, htmlspecialchars(trim($_POST['title'])))."', ".
+					"keywords			= '".quote($this->dblink, htmlspecialchars(trim($_POST['keywords'])))."', ".
+					"description		= '".quote($this->dblink, htmlspecialchars(trim($_POST['description'])))."' "
 				).
 			"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
 			"LIMIT 1");

@@ -729,11 +729,11 @@ class Wacko
 
 		if (isset($this->page['keywords']))
 		{
-			$meta_keywords = htmlspecialchars($this->page['keywords']);
+			$meta_keywords = $this->page['keywords'];
 		}
 		else if ($this->config['meta_keywords'])
 		{
-			$meta_keywords = htmlspecialchars($this->config['meta_keywords']);
+			$meta_keywords = $this->config['meta_keywords'];
 		}
 		// add assigned categories
 		if (isset($this->keywords))
@@ -745,19 +745,23 @@ class Wacko
 			$meta_keywords .= strtolower(implode(', ', $this->keywords));
 		}
 
-		return $meta_keywords;
+		return htmlspecialchars($meta_keywords);
 	}
 
 	function get_description()
 	{
+		$meta_description = '';
+
 		if ($this->page['description'])
 		{
-			return htmlspecialchars($this->page['description']);
+			$meta_description = $this->page['description'];
 		}
-		else
+		else if ($this->config['meta_description'])
 		{
-			return htmlspecialchars($this->config['meta_description']);
+			$meta_description = $this->config['meta_description'];
 		}
+
+		return htmlspecialchars($meta_description);
 	}
 
 	function get_tag_by_id($page_id, $old = 0)
