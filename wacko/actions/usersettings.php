@@ -72,7 +72,7 @@ else if ($user = $this->get_user())
 				// update users table
 				$this->query(
 					"UPDATE ".$this->config['user_table']." SET ".
-						"real_name			= '".quote($this->dblink, $_POST['real_name'])."', ".
+						"real_name			= '".quote($this->dblink, trim($_POST['real_name']))."', ".
 						"email				= '".quote($this->dblink, $_POST['email'])."' ".
 					"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"LIMIT 1");
@@ -91,23 +91,23 @@ else if ($user = $this->get_user())
 		$this->query(
 			"UPDATE ".$this->config['table_prefix']."user_setting SET ".
 			($_POST['action'] == 'update_extended'
-				?	"doubleclick_edit	= '".quote($this->dblink, $_POST['doubleclick_edit'])."', ".
-					"show_comments		= '".quote($this->dblink, $_POST['show_comments'])."', ".
-					"show_spaces		= '".quote($this->dblink, $_POST['show_spaces'])."', ".
-					#"typografica		= '".quote($this->dblink, $_POST['typografica'])."', ".
-					"autocomplete		= '".quote($this->dblink, $_POST['autocomplete'])."', ".
-					"dont_redirect		= '".quote($this->dblink, $_POST['dont_redirect'])."', ".
-					"send_watchmail		= '".quote($this->dblink, $_POST['send_watchmail'])."', ".
-					"show_files			= '".quote($this->dblink, $_POST['show_files'])."', ".
-					"allow_intercom		= '".quote($this->dblink, $_POST['allow_intercom'])."', ".
-					"hide_lastsession	= '".quote($this->dblink, $_POST['hide_lastsession'])."', ".
-					"validate_ip		= '".quote($this->dblink, $_POST['validate_ip'])."', ".
-					"noid_pubs			= '".quote($this->dblink, $_POST['noid_pubs'])."' "
-				:	"motto				= '".quote($this->dblink, $_POST['motto'])."', ".
+				?	"doubleclick_edit	= '".quote($this->dblink, (int)$_POST['doubleclick_edit'])."', ".
+					"show_comments		= '".quote($this->dblink, (int)$_POST['show_comments'])."', ".
+					"show_spaces		= '".quote($this->dblink, (int)$_POST['show_spaces'])."', ".
+					#"typografica		= '".quote($this->dblink, (int)$_POST['typografica'])."', ".
+					"autocomplete		= '".quote($this->dblink, (int)$_POST['autocomplete'])."', ".
+					"dont_redirect		= '".quote($this->dblink, (int)$_POST['dont_redirect'])."', ".
+					"send_watchmail		= '".quote($this->dblink, (int)$_POST['send_watchmail'])."', ".
+					"show_files			= '".quote($this->dblink, (int)$_POST['show_files'])."', ".
+					"allow_intercom		= '".quote($this->dblink, (int)$_POST['allow_intercom'])."', ".
+					"hide_lastsession	= '".quote($this->dblink, (int)$_POST['hide_lastsession'])."', ".
+					"validate_ip		= '".quote($this->dblink, (int)$_POST['validate_ip'])."', ".
+					"noid_pubs			= '".quote($this->dblink, (int)$_POST['noid_pubs'])."' "
+				:	"motto				= '".quote($this->dblink, trim($_POST['motto']))."', ".
 					"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
 					"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
-					"revisions_count	= '".quote($this->dblink, $_POST['revisions_count'])."', ".
-					"changes_count		= '".quote($this->dblink, $_POST['changes_count'])."' "
+					"revisions_count	= '".quote($this->dblink, (int)$_POST['revisions_count'])."', ".
+					"changes_count		= '".quote($this->dblink, (int)$_POST['changes_count'])."' "
 				).
 			"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 			"LIMIT 1");
