@@ -213,7 +213,6 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"salt varchar2(40) not null,".
 					"email varchar2(50) not null,".
 					"enabled number(1) default 1 not null,".
-					"motto varchar2(4000) not null,".
 					"revisions_count number(10) default 20 not null,".
 					"changes_count number(10) default 50 not null,".
 					"doubleclick_edit number(1) default 1 not null,".

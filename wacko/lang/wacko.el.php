@@ -299,7 +299,6 @@ $wacko_translation = array(
 	'UserName' => 'Όνομα χρήστη',
 	'YourEmail' => 'Η ηλεκτρονική σας διεύθυνση',
 	'RealName' => 'Πραγματικό όνομα',
-	'YourMotto' => 'Η υπογραφή σας',
 	'RevisionListLimit' => 'Όριο λίστας αναθεωρήσεων',
 	'RecentChangesLimit' => 'Όριο προσφάτων αλλαγών',
 	'ShowComments?' => 'Εμφάνιση σχολίων εξ\' ορισμού',

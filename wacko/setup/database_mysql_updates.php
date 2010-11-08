@@ -286,7 +286,6 @@ $table_user_setting_r4_3 = "CREATE TABLE {$pref}user_setting (".
 					"user_id INT(10) UNSIGNED NOT NULL,".
 					"theme VARCHAR(20) DEFAULT NULL,".
 					"lang VARCHAR(2) DEFAULT NULL,".
-					"motto TEXT,".
 					"changes_count INTEGER(10) UNSIGNED NOT NULL DEFAULT '50',".
 					"revisions_count INTEGER(10) UNSIGNED NOT NULL DEFAULT '20',".
 					"dont_redirect TINYINT(1) UNSIGNED DEFAULT NULL,".

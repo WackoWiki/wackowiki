@@ -3169,7 +3169,7 @@ class Wacko
 	function load_user($user_name, $user_id = 0, $password = 0)
 	{
 		$user = $this->load_single(
-			"SELECT u.*, s.doubleclick_edit, s.show_comments, s.motto, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs ".
+			"SELECT u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs ".
 			"FROM ".$this->config['user_table']." u ".
 				"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE ".( $user_id != 0

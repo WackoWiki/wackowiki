@@ -299,7 +299,6 @@ $wacko_translation = array(
 	'UserName' => 'User name',
 	'YourEmail' => 'Адрес на електонната поща',
 	'RealName' => 'Real name',
-	'YourMotto' => 'Вашият девиз',
 	'RevisionListLimit' => 'Ограничение на списъка на поправките в страницата',
 	'RecentChangesLimit' => 'Ограничение на списъка на променените страници',
 	'ShowComments?' => 'Покажи коментариите по подразбиране',
