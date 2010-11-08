@@ -1,10 +1,6 @@
 <!--notypo-->
 <?php
 
-#	echo "  <script type=\"text/javascript\" src=\"".$this->config['base_url']."js/protoedit.js\"></script>\n";
-#	echo "  <script type=\"text/javascript\" src=\"".$this->config['base_url']."js/wikiedit2.js\"></script>\n";
-#	echo "  <script type=\"text/javascript\" src=\"".$this->config['base_url']."js/autocomplete.js\"></script>\n";
-
 // reconnect securely in ssl mode
 if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 {
@@ -103,8 +99,7 @@ else if ($user = $this->get_user())
 					"hide_lastsession	= '".quote($this->dblink, (int)$_POST['hide_lastsession'])."', ".
 					"validate_ip		= '".quote($this->dblink, (int)$_POST['validate_ip'])."', ".
 					"noid_pubs			= '".quote($this->dblink, (int)$_POST['noid_pubs'])."' "
-				:	"motto				= '".quote($this->dblink, trim($_POST['motto']))."', ".
-					"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
+				:	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
 					"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
 					"revisions_count	= '".quote($this->dblink, (int)$_POST['revisions_count'])."', ".
 					"changes_count		= '".quote($this->dblink, (int)$_POST['changes_count'])."' "
@@ -333,17 +328,6 @@ else if ($user = $this->get_user())
 				$this->get_translation('EmailNotVerified')."</strong><br />".
 				"<small>".$this->get_translation('EmailNotVerifiedDesc')."<strong><a href=\"?resend_code=1\">".$this->get_translation('HereLink')."</a></strong>.</small></div>";
 ?></td>
-	</tr>
-	<tr class="lined">
-		<th class="form_left" scope="row"><label for="motto"><?php echo $this->get_translation('YourMotto');?></label></th>
-		<td class="form_right"><textarea id="motto" name="motto" cols="80" rows="2"><?php echo htmlspecialchars($user['motto']) ?></textarea>
-<?php /*
-		<script type="text/javascript">
-					wE = new WikiEdit();
-					wE.init('motto','<a href="<?php echo $this->href('', $this->config['wiki_docs']); ?>" title="<?php echo $this->get_translation('WikiEditTitle'); ?>">WikiEdit</a>','edname-w','<?php echo $this->config['base_url']; ?>images/wikiedit/');
-				</script>
-*/ ?>
-	</td>
 	</tr>
 	<tr>
 		<td></td>

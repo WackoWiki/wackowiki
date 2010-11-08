@@ -260,10 +260,6 @@ function admin_users(&$engine, &$module)
 					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['email'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
-					'<th valign="top" align="center">'.$engine->get_translation('YourMotto').'</th>'.
-					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['motto'].'</td>'.
-				'</tr>'.
-				'<tr class="lined">'."\n".
 					'<th valign="top" align="center">'.$engine->get_translation('YourLanguage').'</th>'.
 					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['user_name'].'</td>'.
 				'</tr>'.

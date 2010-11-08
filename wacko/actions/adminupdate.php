@@ -104,7 +104,7 @@ if ($this->is_admin())
 	else if (isset($_POST['migrate_user_otions']))
 	{
 		$_users = $this->load_all(
-			"SELECT user_id, doubleclick_edit, show_comments, bookmarks, motto, revisions_count, changes_count, lang, show_spaces, typografica, more ".
+			"SELECT user_id, doubleclick_edit, show_comments, bookmarks, revisions_count, changes_count, lang, show_spaces, typografica, more ".
 			"FROM {$this->config['table_prefix']}user ");
 
 		$count = count($_users);
@@ -112,12 +112,12 @@ if ($this->is_admin())
 		foreach ($_users as $_user)
 		{
 			$_user['options'] = $this->DecomposeOptions($_user['more']);
-			// user_id, doubleclick_edit, show_comments, bookmarks, motto, revisions_count, changes_count, lang, show_spaces, typografica
+			// user_id, doubleclick_edit, show_comments, bookmarks, revisions_count, changes_count, lang, show_spaces, typografica
 			// $_user['options'] : theme, autocomplete, dont_redirect, send_watchmail, show_files, allow_intercom, hide_lastsession, validate_ip, noid_pubs
 
 			$sql =	"INSERT INTO {$this->config['table_prefix']}user_setting
-					(user_id, doubleclick_edit, show_comments, motto, revisions_count, changes_count, lang, show_spaces, typografica, theme, autocomplete, dont_redirect, send_watchmail, show_files, allow_intercom, hide_lastsession, validate_ip, noid_pubs)
-					VALUES ('{$_user['user_id']}', '{$_user['doubleclick_edit']}', '{$_user['show_comments']}', '{$_user['motto']}', '{$_user['revisions_count']}', '{$_user['changes_count']}', '{$_user['lang']}', '{$_user['show_spaces']}', '{$_user['typografica']}', '{$_user['options']['theme']}', '{$_user['options']['autocomplete']}', '{$_user['options']['dont_redirect']}', '{$_user['options']['send_watchmail']}', '{$_user['options']['show_files']}', '{$_user['options']['allow_intercom']}', '{$_user['options']['hide_lastsession']}', '{$_user['options']['validate_ip']}', '{$_user['options']['noid_pubs']}')";
+					(user_id, doubleclick_edit, show_comments, revisions_count, changes_count, lang, show_spaces, typografica, theme, autocomplete, dont_redirect, send_watchmail, show_files, allow_intercom, hide_lastsession, validate_ip, noid_pubs)
+					VALUES ('{$_user['user_id']}', '{$_user['doubleclick_edit']}', '{$_user['show_comments']}', '{$_user['revisions_count']}', '{$_user['changes_count']}', '{$_user['lang']}', '{$_user['show_spaces']}', '{$_user['typografica']}', '{$_user['options']['theme']}', '{$_user['options']['autocomplete']}', '{$_user['options']['dont_redirect']}', '{$_user['options']['send_watchmail']}', '{$_user['options']['show_files']}', '{$_user['options']['allow_intercom']}', '{$_user['options']['hide_lastsession']}', '{$_user['options']['validate_ip']}', '{$_user['options']['noid_pubs']}')";
 			$this->query($sql);
 
 			// Bookmarks

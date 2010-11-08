@@ -93,7 +93,6 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"\"password\" character varying(40) NOT NULL DEFAULT '',".
 					"salt character varying(40) NOT NULL DEFAULT '',".
 					"email character varying(50) NOT NULL DEFAULT '',".
-					"motto text NOT NULL DEFAULT '',".
 					"revisions_count integer NOT NULL DEFAULT 20,".
 					"changes_count integer NOT NULL DEFAULT 50,".
 					"doubleclick_edit int(1) NOT NULL DEFAULT '1',".

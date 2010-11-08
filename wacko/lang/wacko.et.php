@@ -299,7 +299,6 @@ $wacko_translation = array(
 	'UserName' => 'User name',
 	'YourEmail' => 'E-posti aadress',
 	'RealName' => 'Real name',
-	'YourMotto' => 'Juhtlause',
 	'RevisionListLimit' => 'Redigeerimise limiit',
 	'RecentChangesLimit' => 'Viimaste muudatuste limiit',
 	'ShowComments?' => 'Näita vaikimisi kommentaare',

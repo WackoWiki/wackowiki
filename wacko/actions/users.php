@@ -131,15 +131,6 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 			</tr>
 		</table>
 <?php
-		// user wiki-style info
-		if ($user['motto'] == true)
-		{
-			$this->stop_link_tracking();
-			echo '<h3>'.$this->get_translation('UsersPersonalInfo').'</h3>'."\n";
-			echo $this->format($this->format($user['motto'], 'wacko'), 'post_wacko')."\n";
-			$this->start_link_tracking();
-		}
-
 		// contact form
 		echo '<h2>'.$this->get_translation('UsersContact').'</h2>'."\n";
 
