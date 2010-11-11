@@ -1,4 +1,5 @@
 <?php
+
 // SQL language highlighter
 
 // Delimiters
@@ -43,4 +44,5 @@ $text = preg_replace('#(\-\-.*)$#m', "<span style=\"color:#888888\"><em>$1</em><
 $text = preg_replace("#\001#s",'', $text );
 
 print("<!--no"."typo--><pre class=\"code\">".$text."</pre><!--/no"."typo-->");
+
 ?>

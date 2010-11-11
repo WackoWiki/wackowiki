@@ -6,14 +6,16 @@
  TODO: add COMMENT 'field description'
  */
 
-$pref = $config['table_prefix'];
+$pref		= $config['table_prefix'];
+$charset	= 'DEFAULT CHARSET=utf8';
+$engine		= 'TYPE=MyISAM';
 
 $table_acl = "CREATE TABLE {$pref}acl (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"privilege VARCHAR(10) NOT NULL DEFAULT '',".
 					"list TEXT NOT NULL,".
 					"UNIQUE KEY idx_page_id (page_id,privilege)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_bookmark = "CREATE TABLE {$pref}bookmark (".
 					"bookmark_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -24,7 +26,7 @@ $table_bookmark = "CREATE TABLE {$pref}bookmark (".
 					"bm_position SMALLINT(2) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (bookmark_id),".
 					"UNIQUE KEY idx_user_id (user_id,page_id)".
-				") TYPE=MyISAM;";
+				") {$engine} {$charset};";
 
 $table_cache = "CREATE TABLE {$pref}cache (".
 					"name VARCHAR(32) NOT NULL,".
@@ -34,7 +36,7 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 					"cache_time TIMESTAMP NOT NULL,".
 					"INDEX (name),".
 					"KEY timestamp (cache_time)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_category = "CREATE TABLE {$pref}category (".
 					"category_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -43,13 +45,13 @@ $table_category = "CREATE TABLE {$pref}category (".
 					"category VARCHAR(100) NOT NULL,".
 					"PRIMARY KEY (category_id),".
 					"UNIQUE KEY idx_category (lang,category)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_category_page = "CREATE TABLE {$pref}category_page (".
 						"category_id INT(10) unsigned NOT NULL,".
 						"page_id INT(10) unsigned NOT NULL,".
 						"UNIQUE KEY idx_pageword (category_id,page_id)".
-					") TYPE=MyISAM";
+					") TYPE=MyISAM {$charset}";
 
 $table_config = "CREATE TABLE {$pref}config (".
 					"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -58,7 +60,7 @@ $table_config = "CREATE TABLE {$pref}config (".
 					// "updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,".
 					"PRIMARY KEY (config_id),".
 					"UNIQUE KEY idx_config_name (config_name)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_group = "CREATE TABLE {$pref}group (".
 					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -72,13 +74,13 @@ $table_group = "CREATE TABLE {$pref}group (".
 					// "special TINYINT(1) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (group_id),".
 					"UNIQUE KEY idx_name (group_name)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_group_member = "CREATE TABLE {$pref}group_member (".
 					"group_id INTEGER(10) UNSIGNED NOT NULL,".
 					"user_id INTEGER(10) UNSIGNED NOT NULL,".
 					"UNIQUE KEY idx_group_id (group_id, user_id)".
-				")TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_link = "CREATE TABLE {$pref}link (".
 					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,".
@@ -90,7 +92,7 @@ $table_link = "CREATE TABLE {$pref}link (".
 					"KEY from_tag (from_page_id,to_tag(78)),".
 					"KEY idx_from_page_id (from_page_id),".
 					"KEY idx_to (to_tag)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_log = "CREATE TABLE {$pref}log (".
 					"log_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -104,7 +106,7 @@ $table_log = "CREATE TABLE {$pref}log (".
 					"KEY idx_user_id (user_id),".
 					"KEY idx_ip (ip),".
 					"KEY idx_time (log_time)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_page = "CREATE TABLE {$pref}page (".
 					"page_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -154,7 +156,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"KEY idx_comment_on_id (comment_on_id),".
 					"KEY idx_commented (commented),".
 					"KEY idx_title (title)".
-				") TYPE=MyISAM;";
+				") {$engine} {$charset};";
 
 $table_poll = "CREATE TABLE {$pref}poll (".
 					"poll_id INT(10) UNSIGNED NOT NULL,".
@@ -167,7 +169,7 @@ $table_poll = "CREATE TABLE {$pref}poll (".
 					"end DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"KEY idx_poll_id (poll_id),".
 					"KEY idx_time_frame (start,end)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_rating = "CREATE TABLE {$pref}rating (".
 					"page_id INT(10) UNSIGNED NOT NULL,".
@@ -176,7 +178,7 @@ $table_rating = "CREATE TABLE {$pref}rating (".
 					"rating_time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (page_id),".
 					"KEY idx_voters_rate (voters)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_referrer = "CREATE TABLE {$pref}referrer (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -184,7 +186,7 @@ $table_referrer = "CREATE TABLE {$pref}referrer (".
 					"referrer_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"KEY idx_page_id (page_id),".
 					"KEY idx_referrer_time (referrer_time)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_revision = "CREATE TABLE {$pref}revision (".
 					"revision_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -216,16 +218,16 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"KEY idx_modified (modified),".
 					"KEY idx_minor_edit (minor_edit),".
 					"KEY idx_comment_on_id (comment_on_id)".
-				") TYPE=MyISAM;";
+				") {$engine} {$charset};";
 
-$table_session = "CREATE TABLE {$pref}session (".
+/*$table_session = "CREATE TABLE {$pref}session (".
 					"session_id varchar( 40 ) DEFAULT '0' NOT NULL ,".
 					"ip_address varchar( 16 ) DEFAULT '0' NOT NULL ,".
 					"user_agent varchar( 50 ) NOT NULL ,".
 					"last_activity int( 10 ) unsigned DEFAULT 0 NOT NULL ,".
 					"user_data text NOT NULL ,".
 					"PRIMARY KEY ( session_id )".
-					") TYPE=MyISAM;";
+					") {$engine} {$charset};";*/
 
 $table_upload = "CREATE TABLE {$pref}upload (".
 					"upload_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -240,10 +242,10 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"file_ext VARCHAR(10) NOT NULL DEFAULT '',".
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (upload_id),".
-					"KEY page_id (page_id,file_name),".
-					"KEY page_id_2 (page_id,uploaded_dt),".
+					"KEY page_id (page_id, file_name),".
+					"KEY page_id_2 (page_id, uploaded_dt),".
 					"KEY idx_user_id (user_id)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_user = "CREATE TABLE {$pref}user (".
 					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -271,7 +273,7 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"KEY idx_account_type (account_type),".
 					"KEY idx_enabled (enabled),".
 					"KEY idx_signup_time (signup_time)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_user_setting = "CREATE TABLE {$pref}user_setting (".
 					"setting_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -296,7 +298,7 @@ $table_user_setting = "CREATE TABLE {$pref}user_setting (".
 					"PRIMARY KEY (setting_id),".
 					"UNIQUE KEY idx_user_id (user_id),".
 					"KEY idx_send_watchmail (send_watchmail)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_watch = "CREATE TABLE {$pref}watch (".
 					"watch_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -304,30 +306,31 @@ $table_watch = "CREATE TABLE {$pref}watch (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"watch_time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (watch_id)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 /*
  Wacko Wiki MySQL Table Deletion Script
 */
 
-$table_acl_drop = "DROP TABLE {$pref}acl";
-$table_bookmark_drop = "DROP TABLE {$pref}bookmark";
-$table_cache_drop = "DROP TABLE {$pref}cache";
-$table_config_drop = "DROP TABLE {$pref}config";
-$table_group_drop = "DROP TABLE {$pref}group";
-$table_group_member_drop = "DROP TABLE {$pref}group_member";
-$table_category_drop = "DROP TABLE {$pref}category";
-$table_category_page_drop = "DROP TABLE {$pref}category_page";
-$table_link_drop = "DROP TABLE {$pref}link";
-$table_log_drop = "DROP TABLE {$pref}log";
-$table_page_drop = "DROP TABLE {$pref}page";
-$table_poll_drop = "DROP TABLE {$pref}poll";
-$table_rating_drop = "DROP TABLE {$pref}rating";
-$table_referrer_drop = "DROP TABLE {$pref}referrer";
-$table_revision_drop = "DROP TABLE {$pref}revision";
-$table_upload_drop = "DROP TABLE {$pref}upload";
-$table_user_drop = "DROP TABLE {$pref}user";
-$table_user_setting_drop = "DROP TABLE {$pref}user_setting";
-$table_watch_drop = "DROP TABLE {$pref}watch";
+$table_acl_drop				= "DROP TABLE {$pref}acl";
+$table_bookmark_drop		= "DROP TABLE {$pref}bookmark";
+$table_cache_drop			= "DROP TABLE {$pref}cache";
+$table_config_drop			= "DROP TABLE {$pref}config";
+$table_group_drop			= "DROP TABLE {$pref}group";
+$table_group_member_drop	= "DROP TABLE {$pref}group_member";
+$table_category_drop		= "DROP TABLE {$pref}category";
+$table_category_page_drop	= "DROP TABLE {$pref}category_page";
+$table_link_drop			= "DROP TABLE {$pref}link";
+$table_log_drop				= "DROP TABLE {$pref}log";
+$table_page_drop			= "DROP TABLE {$pref}page";
+$table_poll_drop			= "DROP TABLE {$pref}poll";
+$table_rating_drop			= "DROP TABLE {$pref}rating";
+$table_referrer_drop		= "DROP TABLE {$pref}referrer";
+$table_revision_drop		= "DROP TABLE {$pref}revision";
+/*$table_session_drop			= "DROP TABLE {$pref}session";*/
+$table_upload_drop			= "DROP TABLE {$pref}upload";
+$table_user_drop			= "DROP TABLE {$pref}user";
+$table_user_setting_drop	= "DROP TABLE {$pref}user_setting";
+$table_watch_drop			= "DROP TABLE {$pref}watch";
 
 ?>

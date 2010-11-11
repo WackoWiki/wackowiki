@@ -6,7 +6,9 @@
 	These are all the updates that need to applied to earlier Wacko version to bring them up to 4.3 specs
 */
 
-$pref = $config['table_prefix'];
+$pref		= $config['table_prefix'];
+$charset	= 'DEFAULT CHARSET=utf8';
+$engine		= 'TYPE=MyISAM';
 
 // ACL
 $rename_acl_r4_3_1 = "RENAME TABLE {$pref}acls TO {$pref}acl";
@@ -30,7 +32,7 @@ $table_bookmark_r4_3 = "CREATE TABLE {$pref}bookmark (".
 					"bm_position SMALLINT(2) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (bookmark_id),".
 					"UNIQUE KEY idx_user_id (user_id,page_id)".
-				") TYPE=MyISAM;";
+				") {$engine} {$charset};";
 
 // CACHE
 $alter_cache_r4_3 = "ALTER TABLE {$pref}cache ADD cache_time TIMESTAMP NOT NULL, ADD INDEX timestamp (cache_time)";
@@ -44,13 +46,13 @@ $table_category_r4_3 = "CREATE TABLE {$pref}category (".
 					"category VARCHAR(100) NOT NULL,".
 					"PRIMARY KEY (category_id),".
 					"UNIQUE KEY idx_category (lang,category)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_category_page_r4_3 = "CREATE TABLE {$pref}category_page (".
 						"category_id INT(10) UNSIGNED NOT NULL,".
 						"page_id INT(10) UNSIGNED NOT NULL,".
 						"UNIQUE KEY idx_pageword (category_id,page_id)".
-					") ENGINE=MyISAM";
+					") {$engine} {$charset}";
 
 // CONFIG
 $table_config_r4_3 = "CREATE TABLE {$pref}config (".
@@ -60,7 +62,7 @@ $table_config_r4_3 = "CREATE TABLE {$pref}config (".
 					// "updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,".
 					"PRIMARY KEY (config_id),".
 					"UNIQUE KEY idx_config_name (config_name)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 // GROUP
 $table_group_r4_3 = "CREATE TABLE {$pref}group (".
@@ -75,13 +77,13 @@ $table_group_r4_3 = "CREATE TABLE {$pref}group (".
 					// "special TINYINT(1) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (group_id),".
 					"UNIQUE KEY idx_name (group_name)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 $table_group_member_r4_3 = "CREATE TABLE {$pref}group_member (".
 					"group_id INTEGER(10) UNSIGNED NOT NULL,".
 					"user_id INTEGER(10) UNSIGNED NOT NULL,".
 					"UNIQUE KEY idx_group_id (group_id, user_id)".
-				")ENGINE=MyISAM";
+				") {$engine} {$charset}";
 
 // LINK
 $rename_link_r4_3_1 = "RENAME TABLE {$pref}links TO {$pref}link";
@@ -109,7 +111,7 @@ $table_log_r4_3 = "CREATE TABLE {$pref}log (".
 				"KEY idx_user (user),".
 				"KEY idx_ip (ip),".
 				"KEY idx_time (log_time)".
-			") TYPE=MyISAM";
+			") {$engine} {$charset}";
 
 // PAGE
 $rename_page_r4_2_1 = "RENAME TABLE {$pref}pages TO {$pref}page";
@@ -170,7 +172,7 @@ $table_poll_r4_3 = "CREATE TABLE {$pref}poll (".
 					"end DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"KEY idx_poll_id (poll_id),".
 					"KEY idx_time_frame (start,end)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 // RATING
 $table_rating_r4_3 = "CREATE TABLE {$pref}rating (".
@@ -180,7 +182,7 @@ $table_rating_r4_3 = "CREATE TABLE {$pref}rating (".
 					"rating_time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (page_id),".
 					"KEY idx_voters_rate (voters)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 // REFERRER
 $rename_referrer_r4_3_1 = "RENAME TABLE {$pref}referrers TO {$pref}referrer";
@@ -304,7 +306,7 @@ $table_user_setting_r4_3 = "CREATE TABLE {$pref}user_setting (".
 					"PRIMARY KEY (setting_id),".
 					"UNIQUE KEY idx_user_id (user_id),".
 					"KEY idx_send_watchmail (send_watchmail)".
-				") TYPE=MyISAM";
+				") {$engine} {$charset}";
 
 // WATCH
 $rename_watch_r4_3_1 = "RENAME TABLE {$pref}pagewatches TO {$pref}watch";
