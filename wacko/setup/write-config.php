@@ -12,7 +12,7 @@ function array_to_str ($arr, $name = '')
 		if(is_array($v))
 		$arrays .= array_to_str($v, $k);
 		else
-		$entries .= "\t\'".$k.'\' => \''.str_replace("\n", "\\n", $v)."\',\n";
+		$entries .= "\t'".$k.'\' => \''.str_replace("\n", "\\n", $v)."',\n";
 	}
 
 	$str .= $entries.");\n";
