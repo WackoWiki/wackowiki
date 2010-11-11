@@ -10,9 +10,13 @@ function array_to_str ($arr, $name = '')
 	foreach ($arr as $k => $v)
 	{
 		if(is_array($v))
-		$arrays .= array_to_str($v, $k);
+		{
+			$arrays .= array_to_str($v, $k);
+		}
 		else
-		$entries .= "\t'".$k.'\' => \''.str_replace("\n", "\\n", $v)."',\n";
+		{
+			$entries .= "\t'".$k.'\' => \''.str_replace("\n", "\\n", $v)."',\n";
+		}
 	}
 
 	$str .= $entries.");\n";
@@ -73,13 +77,13 @@ print("            <li>".$lang['Writing']." - ");
 
 $perm_changed	= true;
 $filename		= 'config/config.php';
+$write_file		= file_put_contents($filename, $config_code);
 
-if (file_put_contents($filename, $config_code) == true)
+if ($write_file == true)
 {
 	// Try and make it non-writable
 	@chmod($filename, 0644);
 	$perm_changed = !is__writable($filename);
-
 
 	print(output_image(true)."</li>\n");
 
@@ -117,7 +121,7 @@ if(!$deleted_old_wakka_config_file)
 	print("            <li>".$lang['RemoveWakkaConfigFile']."</li>\n");
 }
 
-if(!$fp)
+if($write_file == false)
 {
 	print("            <li>".$lang['ErrorGivePrivileges']."</li>\n");
 }
@@ -130,7 +134,7 @@ print("         </ul>\n");
 	writeConfigHiddenNodes(array('none' => ''));
 
 	// If there was a problem then show the "Try Again" button.
-	if($fp)
+	if($write_file == true)
 	{
 		print("         <h2>".$lang['InstallationComplete']."</h2>\n");
 		print("         <p>".str_replace('%1', $config['base_url'], $lang['ThatsAll'])."</p>\n");
@@ -142,7 +146,7 @@ print("         </ul>\n");
 	}
 	?></form>
 	<?php
-	if(!$fp)
+	if($write_file = false)
 	{
 		print("         <div id=\"config_code\" class=\"config_code\"><pre>".htmlentities($config_code)."</pre></div>\n");
 	}
