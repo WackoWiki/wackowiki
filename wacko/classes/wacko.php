@@ -9,7 +9,7 @@ class Wacko
 	var $page;
 	var $tag;
 	var $forum;
-	var $keywords;
+	var $categories;
 	var $iswatched;
 	var $query_time;
 	var $query_log				= array();
@@ -736,13 +736,13 @@ class Wacko
 			$meta_keywords = $this->config['meta_keywords'];
 		}
 		// add assigned categories
-		if (isset($this->keywords))
+		if (isset($this->categories))
 		{
 			if (!empty($meta_keywords))
 			{
 				$meta_keywords .= ', ';
 			}
-			$meta_keywords .= strtolower(implode(', ', $this->keywords));
+			$meta_keywords .= strtolower(implode(', ', $this->categories));
 		}
 
 		return htmlspecialchars($meta_keywords);
@@ -4708,20 +4708,20 @@ class Wacko
 			}
 			$this->config['theme_url']	= $this->config['base_url'].'themes/'.$this->config['theme'].'/';
 
-			// set page keywords. this defines $keywords (array) object property
-			#if ($this->page['keywords'])
+			// set page categories. this defines $categories (array) object property
+			#if ($this->page['categories'])
 			#{
-				$keywords = $this->load_all(
+				$categories = $this->load_all(
 					"SELECT k.category_id, k.category
 					FROM {$this->config['table_prefix']}category k
 						INNER JOIN {$this->config['table_prefix']}category_page kp ON (k.category_id = kp.category_id)
 					WHERE kp.page_id = '{$this->page['page_id']}' ");
 
-				foreach ($keywords as $word)
+				foreach ($categories as $word)
 				{
-					$this->keywords[$word['category_id']] = $word['category'];
+					$this->categories[$word['category_id']] = $word['category'];
 				}
-				unset($keywords, $word);
+				unset($categories, $word);
 			#}
 		}
 
