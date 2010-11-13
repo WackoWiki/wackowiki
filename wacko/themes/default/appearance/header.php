@@ -14,12 +14,15 @@ header("Content-Type: text/html; charset=".$this->get_charset());
 <?php
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noindex'] == 1 || $this->page['noindex'] == 1)
+{
 	echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
+}
 ?>
 	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords()); ?>" />
 	<meta name="description" content="<?php echo htmlspecialchars($this->get_description()); ?>" />
 	<meta name="language" content="<?php echo $this->page['lang'] ?>" />
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
+
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
 	<?php if ($this->config['allow_x11colors']) {?>
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" />
@@ -308,7 +311,6 @@ else
 
 	#echo "</ul>\n";
 ?>
-
 <li class="search">
 <div id="search">
 <?php
@@ -317,8 +319,10 @@ echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
 
 // Searchbar
 ?>
-<span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label><input
-	type="text" name="phrase" id="phrase" size="20" /><input class="submitinput" type="submit" title="<?php echo $this->get_translation('SearchButtonText') ?>" alt="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>"/></span>
+<span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label>
+<input type="text" name="phrase" id="phrase" size="20" />
+<input class="submitinput" type="submit" title="<?php echo $this->get_translation('SearchButtonText') ?>" alt="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>"/>
+</span>
 <?php
 
 // Search form close
@@ -337,5 +341,8 @@ echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = tru
 <div id="content">
 <?php
 // here we show messages
-if ($message = $this->get_message()) echo "<div class=\"info\">$message</div>";
+if ($message = $this->get_message())
+{
+	echo "<div class=\"info\">$message</div>";
+}
 ?>

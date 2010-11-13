@@ -120,9 +120,13 @@ if (!empty($this->config['news_cluster']))
 	if ($title == 1)
 	{
 		if (isset($category_title))
+		{
 			$_category_title = ' '.$this->get_translation('For').' '.$this->get_translation('Category').' &laquo;'.$category_title['category'].'&raquo;';
+		}
 		else
+		{
 			$_category_title = '';
+		}
 		if ($this->page['tag'] == $this->config['news_cluster'])
 		{
 			$_title = $this->get_translation('News').$_category_title;
@@ -134,18 +138,21 @@ if (!empty($this->config['news_cluster']))
 
 		echo "<h1>".$_title."</h1>";
 	}
-		// displaying XML icon
+
+	// displaying XML icon
 	if (!(int)$noxml)
-		{
-			echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/news_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RecentNewsXMLTip')."\" alt=\"XML\" /></a></span>\n";
-		}
+	{
+		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/news_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RecentNewsXMLTip')."\" alt=\"XML\" /></a></span>\n";
+	}
 
 	// displaying articles
 	if ($pages)
 	{
 		// pagination
 		if (isset($pagination['text']))
+		{
 			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+		}
 
 		foreach ($pages as $page)
 		{
@@ -162,7 +169,11 @@ if (!empty($this->config['news_cluster']))
 
 			foreach ($categories as $id => $category)
 			{
-				if ($id > 0) $_category .= ', ';
+				if ($id > 0)
+				{
+					$_category .= ', ';
+				}
+
 				$_category .= '<a href="'.$this->href('', '', 'category='.$category['category_id']).'">' .htmlspecialchars($category['category']).'</a>';
 			}
 			$_category = !empty($_category) ? $this->get_translation('Category').': '.$_category.' | ' : '';
@@ -179,7 +190,9 @@ if (!empty($this->config['news_cluster']))
 		}
 		// pagination
 		if (isset($pagination['text']))
+		{
 			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+		}
 	}
 	else
 	{
