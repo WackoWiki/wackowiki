@@ -29,17 +29,20 @@ else
 	}
 }
 
-foreach($this->categories as $id => $category)
+if ($this->categories)
 {
-	$_category = '<a href="'.$this->href('', $path, 'category='.$id).'">'.htmlspecialchars($category).'</a>';
-	if ($list)
+	foreach($this->categories as $id => $category)
 	{
-		$output .= '<li>'.$_category.'</li>';
-	}
-	else
-	{
-		if ($i++ > 0) $output .= ', ';
-		$output .= $_category;
+		$_category = '<a href="'.$this->href('', $path, 'category='.$id).'">'.htmlspecialchars($category).'</a>';
+		if ($list)
+		{
+			$output .= '<li>'.$_category.'</li>';
+		}
+		else
+		{
+			if ($i++ > 0) $output .= ', ';
+			$output .= $_category;
+		}
 	}
 }
 
