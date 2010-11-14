@@ -8,6 +8,7 @@ class Wacko
 	var $dblink;
 	var $page;
 	var $tag;
+	var $supertag;
 	var $forum;
 	var $categories;
 	var $iswatched;

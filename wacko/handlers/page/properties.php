@@ -236,6 +236,7 @@ if ($langs = $this->available_languages())
 <td class="form_right"><select id="theme" name="theme">
 
 <?php
+	echo '<option value="">--</option>';
 	$themes = $this->available_themes();
 	for ($i = 0; $i < count($themes); $i++)
 	{
