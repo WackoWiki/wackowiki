@@ -30,11 +30,11 @@ else
 	$link		= '';
 }
 
-if (!$from) $from = 'h2';
-if (!$to)   $to   = 'h9';
+if (!$from)	$from	= 'h2';
+if (!$to)	$to		= 'h9';
 
-$start_depth = $from{1};
-$end_depth   = $to{1};
+$start_depth	= $from{1};
+$end_depth		= $to{1};
 
 // 3. output
 if (!$nomark)
@@ -48,13 +48,15 @@ if (!$this->has_access('read', $_page['page_id']))
 else
 {
 	$toc = $this->build_toc( $context, $start_depth, $end_depth, $numerate, $link );
-	{ // ---------------------- toc numeration ------------------------
+	{
+		// ---------------------- toc numeration ------------------------
 		// identify what size where faces
 		$toc_len = sizeof($toc);
 		$numbers = array(); $depth = 0;
 		for($i = 0; $i < $toc_len; $i++)
 		if ($toc[$i][2] < 66666)
-		{ // normalized depth immersion
+		{
+			// normalized depth immersion
 			$toc[$i][4] = $toc[$i][2] - $start_depth + 1;
 			if ($numerate)
 			{

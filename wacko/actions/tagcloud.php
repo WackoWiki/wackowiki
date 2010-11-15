@@ -1,10 +1,10 @@
 <?php
 if (!function_exists('print_tag_cloud'))
 {
-	function print_tag_cloud($tags)
+	function print_tag_cloud(&$wacko, $tags)
 	{
 		// TODO: add name space 'category'
-		$tag_path = 'category?category=';
+		$tag_path = $wacko->config['base_url'].'/Category?category=';
 
 		$max_size = 32; // max font size in pixels
 		$min_size = 12; // min font size in pixels
@@ -94,7 +94,7 @@ if ($tags)
 		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('TagCloud').":</span></p>\n");
 	}
 
-	print_tag_cloud($this->cloud);
+	print_tag_cloud($this, $this->cloud);
 
 	if(!$nomark)
 	{
