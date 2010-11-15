@@ -30,7 +30,10 @@ if ($this->has_access('read'))
 		// display page
 		$this->context[++$this->current_context] = $this->tag;
 		$data = $this->format($this->page['body'], "msword");
-		if ($this->tocAutoNumerate == 1) $data = $this->tocEnumerate($data,2); // TOC, Automatic numeration of headings
+		if ($this->tocAutoNumerate == 1)
+		{
+			$data = $this->tocEnumerate($data, 2); // TOC, Automatic numeration of headings
+		}
 		print($data);
 		$this->current_context--;
 
