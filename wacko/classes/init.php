@@ -621,8 +621,20 @@ class Init
 				echo "<div id=\"debug\">".
 					 "<p class=\"debug\">Program execution statistics</p>\n<ul>\n";
 
-				if (function_exists('memory_get_usage')) if ($execmem = memory_get_usage())
+				// get memory usage
+				if(function_exists('memory_get_peak_usage'))
+				{
+					$execmem = memory_get_peak_usage(true);
+				}
+				else if(function_exists("memory_get_usage"))
+				{
+					// PHP < 5.2.0)
+					$execmem = memory_get_usage(true);
+				}
+				if ($execmem)
+				{
 					echo "<li>Memory allocated: ".(number_format(($execmem / (1024*1024)), 3))." MB </li>\n";
+				}
 
 				echo "<li>Overall time taken: ".(number_format(($overall_time), 3))." sec. </li>\n";
 
