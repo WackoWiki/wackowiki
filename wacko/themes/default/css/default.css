@@ -241,6 +241,9 @@ width:320px;
 	line-height: 22px;
 	font-weight: bold;
 }
+.commentpreview {
+	width: 800px;
+}
 
 /* Change summary */
 .editnote {

@@ -193,7 +193,7 @@ form input.submitinput {
 
 .comment:target {
 	border: 2px solid #FF6600;
-	padding: 0.5em 0.5em 0.5em 25px;
+	/*padding: 0.5em 0.5em 0.5em 25px;*/
 }
 
 /* Comment author and date */
@@ -230,6 +230,10 @@ width:320px;
 .commenttitle {
 	line-height: 22px;
 	font-weight: bold;
+}
+
+.commentpreview {
+	width: 800px;
 }
 
 /* Change summary */

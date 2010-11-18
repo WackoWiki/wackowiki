@@ -154,17 +154,31 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 #if ($this->page)
 {
 	// revoking payload
-	if ($_SESSION['guest'])
+	if (isset($_SESSION['guest']))
 	{
-		$guest	= $_SESSION['guest'];		$_SESSION['guest']		= '';
+		$guest					= $_SESSION['guest'];
+		$_SESSION['guest']		= '';
 	}
 	else
 	{
-		$guest	= $this->get_cookie('guest');
+		$guest					= $this->get_cookie('guest');
 	}
-	$payload	= $_SESSION['body'];		$_SESSION['body']		= '';
-	$title		= $_SESSION['title'];		$_SESSION['title']		= '';
-	$preview	= $_SESSION['preview'];		$_SESSION['preview']	= '';
+
+	if (isset($_SESSION['body']))
+	{
+		$payload				= $_SESSION['body'];
+		$_SESSION['body']		= '';
+	}
+	if (isset($_SESSION['title']))
+	{
+		$title					= $_SESSION['title'];
+		$_SESSION['title']		= '';
+	}
+	if (isset($_SESSION['preview']))
+	{
+		$preview				= $_SESSION['preview'];
+		$_SESSION['preview']	= '';
+	}
 
 	// files code starts
 	if ($this->config['footer_files'])
@@ -176,7 +190,9 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 			// store files display in session
 			$tag = $this->tag;
 			if (!isset($_SESSION[$this->config['session_prefix'].'_'.'show_files'][$tag]))
-			$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$tag] = ($this->user_wants_files() ? '1' : '0');
+			{
+				$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$tag] = ($this->user_wants_files() ? '1' : '0');
+			}
 
 			if(isset($_GET['show_files']))
 			{
@@ -355,14 +371,17 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 				echo $this->form_open('addcomment');
 
 				// preview
-				if ($preview)
+				if (!empty($preview))
 				{
 					$preview = $this->Format($preview);
 
 					echo "<a name=\"preview\"></a><div class=\"preview\"><p class=\"preview\"><span>".$this->get_translation('EditPreviewSlim')."</span></p>\n".
+						 '<div class="commentpreview">'."\n".
+						 '<div class="commenttitle">'.$title."</div>\n".
 						 $preview.
-						 "</div><br />\n";
-				}?>
+						 "</div></div><br />\n";
+				}
+				?>
 				<?php
 				// load WikiEdit
 					echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/protoedit.js\"></script>\n";
@@ -372,7 +391,7 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 					<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
 
 					<label for="addcomment"><?php echo $this->get_translation('AddComment');?></label><br />
-					<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?><?php if ($payload) print($payload) ?></textarea>
+					<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?><?php if (isset($payload)) print($payload) ?></textarea>
 
 					<label for="addcomment_title"><?php echo $this->get_translation('AddCommentTitle');?></label><br />
 					<input id="addcomment_title" name="title" size="60" maxlength="100" value="<?php if (isset($title)) print($title); ?>" ><br />
