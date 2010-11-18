@@ -12,8 +12,13 @@ if ($this->config['hide_rating'] != 1 && ($this->config['hide_rating'] != 2 || $
 		$cookie	= $engine->get_cookie('rating');
 		$ids	= explode(';', $cookie);
 		if ($id = array_search($id, $ids))
+		{
 			return true;
-		else return false;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
 
@@ -45,7 +50,9 @@ if ($this->has_access('read'))
 		// if (function_exists('virtual')) header("HTTP/1.0 404 Not Found");
 		header("HTTP/1.0 404 Not Found");
 
-		print($this->get_translation('DoesNotExists') ." ".( $this->has_access('write') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : ''));
+		echo '<br /><div class="info">'.
+			$this->get_translation('DoesNotExists') ." ".( $this->has_access('write') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
+			'</div>';
 	}
 	else
 	{
@@ -104,16 +111,16 @@ if ($this->has_access('read'))
 			// build toc
 			if ($this->config['paragrafica'])
 			{
-				$this->page['body_r']   = $this->format($this->page['body_r'], 'paragrafica');
-				$this->page['body_toc'] = $this->body_toc;
+				$this->page['body_r']	= $this->format($this->page['body_r'], 'paragrafica');
+				$this->page['body_toc']	= $this->body_toc;
 			}
 
 			// store to DB
 			if ($this->page['latest'] != 0)
 				$this->query(
 					"UPDATE ".$this->config['table_prefix']."page SET ".
-						"body_r = '".quote($this->dblink, $this->page['body_r'])."', ".
-						"body_toc = '".quote($this->dblink, $this->page['body_toc'])."' ".
+						"body_r		= '".quote($this->dblink, $this->page['body_r'])."', ".
+						"body_toc	= '".quote($this->dblink, $this->page['body_toc'])."' ".
 					"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
 					"LIMIT 1");
 		}
@@ -129,7 +136,6 @@ if ($this->has_access('read'))
 			var dbclick = "page";
 		</script>
 		<?php
-
 	}
 }
 else
@@ -143,9 +149,23 @@ else
 ?>
 <br style="clear: both" />&nbsp;</div>
 <?php
-// If this page exists
-if ($this->page)
+// page comments and files
+if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comment_on_id'])
+#if ($this->page)
 {
+	// revoking payload
+	if ($_SESSION['guest'])
+	{
+		$guest	= $_SESSION['guest'];		$_SESSION['guest']		= '';
+	}
+	else
+	{
+		$guest	= $this->get_cookie('guest');
+	}
+	$payload	= $_SESSION['body'];		$_SESSION['body']		= '';
+	$title		= $_SESSION['title'];		$_SESSION['title']		= '';
+	$preview	= $_SESSION['preview'];		$_SESSION['preview']	= '';
+
 	// files code starts
 	if ($this->config['footer_files'])
 	{
@@ -332,12 +352,30 @@ if ($this->page)
 			{
 				print("<div class=\"commentform\">\n");
 
-				echo $this->form_open('addcomment'); ?>
+				echo $this->form_open('addcomment');
+
+				// preview
+				if ($preview)
+				{
+					$preview = $this->Format($preview);
+
+					echo "<a name=\"preview\"></a><div class=\"preview\"><p class=\"preview\"><span>".$this->get_translation('EditPreviewSlim')."</span></p>\n".
+						 $preview.
+						 "</div><br />\n";
+				}?>
+				<?php
+				// load WikiEdit
+					echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/protoedit.js\"></script>\n";
+					echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/wikiedit2.js\"></script>\n";
+					echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/autocomplete.js\"></script>\n";
+				?>
+					<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
+
 					<label for="addcomment"><?php echo $this->get_translation('AddComment');?></label><br />
-					<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?></textarea>
+					<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?><?php if ($payload) print($payload) ?></textarea>
 
 					<label for="addcomment_title"><?php echo $this->get_translation('AddCommentTitle');?></label><br />
-					<input id="addcomment_title" name="title" size="60" maxlength="100"></input><br />
+					<input id="addcomment_title" name="title" size="60" maxlength="100" value="<?php if (isset($title)) print($title); ?>" ><br />
 		<?php
 					// captcha code starts
 
@@ -367,8 +405,21 @@ if ($this->page)
 						}
 					}
 					// end captcha
-		?>
-		<input type="submit" value="<?php echo $this->get_translation('AddCommentButton'); ?>" accesskey="s" />
+		?><script type="text/javascript">
+		wE = new WikiEdit();
+<?php
+	if ($user = $this->get_user())
+	if ($user['autocomplete'])
+	{
+?>
+		if (AutoComplete) { wEaC = new AutoComplete( wE, "<?php echo $this->href('edit');?>" ); }
+<?php
+	}
+?>
+		wE.init('addcomment','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>images/wikiedit/');
+		</script><br />
+		<input name="save" type="submit" value="<?php echo $this->get_translation('AddCommentButton'); ?>" accesskey="s" />
+		<input name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
 		<?php echo $this->form_close(); ?>
 		<?php
 				print("</div>\n");
