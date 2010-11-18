@@ -39,6 +39,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		if (!$user) $this->cache->cache_invalidate($this->supertag);
 		$_SESSION['preview']	= $body;
 		$_SESSION['body']		= $body;
+		$_SESSION['title']		= $title;
 		$_SESSION['guest']		= $guest;
 		$this->redirect($this->href('', '', 'show_comments=1&p=last').'#preview');
 	}
@@ -105,6 +106,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		// everything's okay
 		$_SESSION['preview']		= '';
 		$_SESSION['body']			= '';
+		$_SESSION['title']			= '';
 		$_SESSION['guest']			= '';
 		$_SESSION['comment_delay']	= time();
 
@@ -118,9 +120,11 @@ if ($this->has_access('comment') && $this->has_access('read'))
 
 		if (!$error)
 		{
+			// find number
 			$comment_on_id = $this->get_page_id();
+
 			// store new comment
-			$this->save_page('Comment'.$num, $title, $body, $edit_note = '', $minor_edit = '0', $comment_on_id);
+			$body_r	= $this->save_page('Comment'.$num, $title, $body, $edit_note = '', $minor_edit = '0', $comment_on_id);
 
 			// log event
 			$this->log(5, str_replace('%2', $this->tag." ".$this->page['title'], str_replace('%1', "Comment".$num, $this->get_translation('LogCommentPosted', $this->config['language']))));

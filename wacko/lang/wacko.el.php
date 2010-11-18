@@ -187,6 +187,7 @@ $wacko_translation = array(
 	'EditCancelButton' => 'Ακύρωση',
 	'EditPreviewButton' => 'Προβολή',
 	'EditPreview' => 'Προβολή',
+	'EditPreviewSlim'	=> 'Προβολή',
 	'EditNote' 			=> 'Σύνοψη επεξεργασίας',
 	'EditNoteMissing'	=> 'Επεξεργασία περίληψη που λείπουν',
 	'EditMinor' => 'Μικρή αλλαγή',
