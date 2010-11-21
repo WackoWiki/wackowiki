@@ -12,7 +12,7 @@
 		echo $this->get_translation('Nobody'); ?> <a
 	href="<?php echo $this->href('claim'); ?>"><?php echo $this->get_translation('TakeOwnership'); ?></a>
 		<?php } ?> &nbsp;|&nbsp; <a
-	href="<?php echo $this->href('properties'); ?>"><?php echo $this->get_translation('SettingsText'); ?></a>
+	href="<?php echo $this->href('properties'); ?>"><?php echo $this->get_translation('PropertiesText'); ?></a>
 &nbsp;|&nbsp; <?php // Watch page ?> <a
 	href="<?php echo $this->href('watch'); ?>"> <?php if($this->iswatched === true) { ?>
 <img
