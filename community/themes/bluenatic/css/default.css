@@ -388,6 +388,9 @@ width:0;
 .editnote {
   color: #555555;
 }
+.review {
+	font-weight:bold;
+}
 /* User input form for comments */
 .commentform {
 	background-color:	#eee;

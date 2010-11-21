@@ -95,7 +95,7 @@ if ($this->has_access('read'))
 					}
 					else if ($page['reviewed'] == 1)
 					{
-						$output .=  " <span class=\"review\">[".$this->get_translation('ReviewedBy')." ".$page['reviewer']."]</span>";;
+						$output .= ' <span class="review">['.$this->get_translation('ReviewedBy').' <a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['reviewer']).'">'.$page['reviewer'].'</a>'.']</span>';
 					}
 				}
 

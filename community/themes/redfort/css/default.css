@@ -157,6 +157,9 @@ A:VISITED {
 .editnote {
   color: #555555;
 }
+.review {
+	font-weight:bold;
+}
 .filesform, .commentform {
 	background-color: #990000;
 	padding: 10px;

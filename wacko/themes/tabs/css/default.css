@@ -111,6 +111,9 @@ del A.outerlink:HOVER { color:#cc3300 }
 .editnote {
 	color: #555555;
 }
+.review {
+	font-weight:bold;
+}
 .commentform, .filesform {
   background-color: #EEEEEE;
   padding: 10px 50px;

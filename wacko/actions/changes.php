@@ -74,7 +74,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 			{
 				if ($page['reviewed'] == 0)
 				{
-					$review = " <span class=\"review\">[".$this->get_translation('Review')."]</span>";
+					$review = " <span class=\"review\">[".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('Review'), 0)."]</span>";
 				}
 				else
 				{

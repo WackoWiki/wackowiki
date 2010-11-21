@@ -32,6 +32,9 @@ color:#AAA;
 .editnote {
   color: #555555;
 }
+.review {
+	font-weight:bold;
+}
 #credits {
 color:#AAA;
 font-size:11px;

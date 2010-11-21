@@ -250,6 +250,10 @@ width:320px;
 	color: #555555;
 }
 
+.review {
+	font-weight:bold;
+}
+
 .filesform,.commentform {
 	padding: 10px 20px;
 	border-top: 1px solid #CCCCCC;
