@@ -892,7 +892,7 @@ class WackoFormatter
 				$opener		= '<ol type="'.$new_indent_type.'"><li'.
 							  ($start ? ' value="'.$start.'"' : '').'>';
 				$closer		= '</li></ol>';
-				$newtype	= '1';
+				$newtype	= 1;
 				$li			= 1;
 			}
 

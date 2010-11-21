@@ -226,12 +226,12 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 			// forum index
 			echo $this->action('tree', array('page' => $this->config['forum_cluster'], 'depth' => 1, 'nomark' => 1));
 		}
-		else */ if ($this->config['lower_index'] == 1)
+		else */ if ($this->config['tree_level'] == 1)
 		{
 			// lower index
 			echo $this->action('tree', array('page' => $this->tag, 'depth' => 1, 'nomark' => 1));
 		}
-		else if ($this->config['upper_index'] == 1)
+		else if ($this->config['tree_level'] == 2)
 		{
 			// upper index
 			$page = '/'.substr($this->tag, 0, ( strrpos($this->tag, '/') ? strrpos($this->tag, '/') : strlen($this->tag) ));
