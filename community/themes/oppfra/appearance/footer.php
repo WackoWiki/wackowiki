@@ -220,12 +220,12 @@ if ($this->get_user())
 			// tag cloud
 			# echo $this->action('tagcloud');
 			// tree
-			if ($this->config['lower_index'] == 1)
+			if ($this->config['tree_level'] == 1)
 			{
 				// lower index
 				echo $this->action('tree', array('page' => $this->tag, 'depth' => 1, 'nomark' => 1));
 			}
-			else if ($this->config['upper_index'] == 1)
+			else if ($this->config['tree_level'] == 2)
 			{
 				// upper index
 				$page = '/'.substr($this->tag, 0, ( strrpos($this->tag, '/') ? strrpos($this->tag, '/') : strlen($this->tag) ));

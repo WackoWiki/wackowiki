@@ -134,7 +134,7 @@ if ($this->method == 'show') {
 		if (!isset($_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag]))
 		$_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag] = ($this->user_wants_files() ? "1" : "0");
 
-		switch($_GET['show_files'])
+		switch(isset($_GET['show_files']))
 		{
 			case "0":
 				$_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag] = 0;
@@ -217,7 +217,7 @@ switch (count($files))
 		if (!isset($_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag]))
 		$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag] = ($this->user_wants_comments() ? "1" : "0");
 
-		switch($_GET['show_comments'])
+		switch(isset($_GET['show_comments']))
 		{
 			case "0":
 				$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag] = 0;
