@@ -81,6 +81,9 @@ div.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-
 .editnote {
   color: #555555;
 }
+.review {
+	font-weight:bold;
+}
 #credits a { color: #4C4749 }
 
 /* Page main area */

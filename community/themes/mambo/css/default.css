@@ -72,6 +72,9 @@ div.searchbar { float: right; padding: 10px; border: 1px solid #ccc; background-
   color: #555555;
 }
 
+.review {
+	font-weight:bold;
+}
 /* Forms */
 fieldset { padding: 10px; border: 1px solid black }
 legend {font-weight: normal; padding: 0 5px;}

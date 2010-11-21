@@ -133,6 +133,9 @@ A:Active  {
 .editnote {
   color: #555555;
 }
+.review {
+	font-weight:bold;
+}
 .filesform, .commentform {
   background-color: #EEEEEE;
   padding: 10px;

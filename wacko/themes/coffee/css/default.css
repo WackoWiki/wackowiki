@@ -36,6 +36,9 @@ span.small {font-size: 80%}
 .editnote {
   color: #555555;
 }
+.review {
+	font-weight:bold;
+}
 #credits a { color: #AAAAAA;}
 
 /* form */
