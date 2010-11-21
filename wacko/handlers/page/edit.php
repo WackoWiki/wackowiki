@@ -41,7 +41,12 @@ if ($this->has_access('write') && $this->has_access('read'))
 
 			if(isset($_POST['minor_edit']))
 			{
-				$minor_edit = $_POST['minor_edit'];
+				$minor_edit = (int)$_POST['minor_edit'];
+			}
+
+			if(isset($_POST['reviewed']))
+			{
+				$reviewed = (int)$_POST['reviewed'];
 			}
 
 			$title = $this->page['title'];
@@ -127,7 +132,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 				}
 
 				// add page (revisions)
-				$body_r = $this->save_page($this->tag, $title, $body, $edit_note, $minor_edit, $this->page['comment_on_id']);
+				$body_r = $this->save_page($this->tag, $title, $body, $edit_note, $minor_edit, $reviewed, $this->page['comment_on_id']);
 
 				// log event
 				if ($this->page['comment_on_id'] != 0)
@@ -312,6 +317,14 @@ if ($this->has_access('write') && $this->has_access('read'))
 
 			if ($user)
 			{
+				// reviewed
+				if ($this->page && $this->config['review'] != 0 && $this->is_reviewer())
+				{
+					$output .= "<input id=\"reviewed\" type=\"checkbox\" value=\"1\" name=\"reviewed\"/>";
+					$output .= "<label for=\"reviewed\">".$this->get_translation('Reviewed')."</label>";
+					$output .= "<br />";
+				}
+
 				// publish anonymously
 				if (($this->page && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 				{

@@ -720,6 +720,14 @@ $wacko_translation = array(
 	'NewsNoClusterDefined'	=> 'No News cluster defined.',
 	'NewsDiscuss'	=> 'Обсудить новость…',
 
+	// Review
+	'Reviewer'			=> 'Reviewer',
+	'Reviewed'			=> 'reviewed',
+	'Review'			=> 'review',
+	'ReviewedBy'		=> 'reviewed by',
+	'RemoveReview'		=> 'Remove review for this page',
+	'SetReview'			=> 'Reviewed this page',
+
 	// moderation handler
 	'Moderation'			=> 'Модерация',
 	'Topics'				=> 'темы',

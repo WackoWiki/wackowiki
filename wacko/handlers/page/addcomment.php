@@ -129,7 +129,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$comment_on_id = $this->get_page_id();
 
 			// store new comment
-			$body_r	= $this->save_page('Comment'.$num, $title, $body, $edit_note = '', $minor_edit = 0, $comment_on_id);
+			$body_r	= $this->save_page('Comment'.$num, $title, $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id);
 
 			// log event
 			$this->log(5, str_replace('%2', $this->tag.' '.$this->page['title'], str_replace('%1', 'Comment'.$num, $this->get_translation('LogCommentPosted', $this->config['language']))));

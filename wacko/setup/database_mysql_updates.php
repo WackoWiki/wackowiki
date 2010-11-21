@@ -142,13 +142,15 @@ $alter_page_r4_3_23 = "ALTER TABLE {$pref}page ADD hide_files TINYINT(1) UNSIGNE
 $alter_page_r4_3_24 = "ALTER TABLE {$pref}page ADD hide_rating TINYINT(1) UNSIGNED DEFAULT NULL";
 $alter_page_r4_3_25 = "ALTER TABLE {$pref}page ADD hide_toc TINYINT(1) UNSIGNED DEFAULT NULL";
 $alter_page_r4_3_26 = "ALTER TABLE {$pref}page ADD hide_index TINYINT(1) UNSIGNED DEFAULT NULL";
-$alter_page_r4_3_27 = "ALTER TABLE {$pref}page ADD lower_index TINYINT(1) UNSIGNED DEFAULT NULL";
-$alter_page_r4_3_28 = "ALTER TABLE {$pref}page ADD upper_index TINYINT(1) UNSIGNED DEFAULT NULL";
+$alter_page_r4_3_27 = "ALTER TABLE {$pref}page ADD reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER hide_index";
+$alter_page_r4_3_28 = "ALTER TABLE {$pref}page ADD tree_level TINYINT(1) UNSIGNED NOT NULL DEFAULT '0'";
 $alter_page_r4_3_29 = "ALTER TABLE {$pref}page ADD allow_rawhtml TINYINT(1) UNSIGNED DEFAULT NULL";
 $alter_page_r4_3_30 = "ALTER TABLE {$pref}page ADD disable_safehtml TINYINT(1) UNSIGNED DEFAULT NULL";
 $alter_page_r4_3_31 = "ALTER TABLE {$pref}page ADD noindex TINYINT(1) UNSIGNED DEFAULT NULL";
 $alter_page_r4_3_32 = "ALTER TABLE {$pref}page ADD theme VARCHAR(20) DEFAULT NULL AFTER hits";
 $alter_page_r4_3_33 = "ALTER TABLE {$pref}page ADD formatting VARCHAR(20) NOT NULL DEFAULT 'wacko' AFTER body_r";
+$alter_page_r4_3_34 = "ALTER TABLE {$pref}page ADD reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER reviewed";
+$alter_page_r4_3_35 = "ALTER TABLE {$pref}page ADD reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER reviewed";
 
 $update_page_r4_3 = "UPDATE {$pref}page SET body_r=''";
 $update_page_r4_3_1 = "UPDATE {$pref}page AS page, (SELECT user_id, user_name FROM {$pref}users) AS users SET page.owner_id = users.user_id WHERE page.owner = users.user_name";
@@ -159,6 +161,8 @@ $update_page_r4_3_5 = "UPDATE {$pref}page as page, (SELECT tag, MIN(time) AS old
 $update_page_r4_3_6 = "UPDATE {$pref}page as page SET page.created = page.time WHERE pages.id = page.id AND page.created IS NULL";
 $update_page_r4_3_7 = "UPDATE {$pref}page as page SET minor_edit = '0' WHERE page.minor_edit IS NULL";
 $update_page_r4_3_8 = "UPDATE {$pref}page SET formatting = 'wacko' WHERE formatting = ''";
+$update_page_r4_3_9 = "UPDATE {$pref}page as page SET reviewed = '0' WHERE page.reviewed IS NULL";
+$update_page_r4_3_10 = "UPDATE {$pref}page as page SET tree_level = '0' WHERE page.tree_level IS NULL";
 
 // POLL
 $table_poll_r4_3 = "CREATE TABLE {$pref}poll (".
@@ -213,6 +217,9 @@ $alter_revision_r4_3_17 = "ALTER TABLE {$pref}revision CHANGE id revision_id INT
 $alter_revision_r4_3_18 = "ALTER TABLE {$pref}revision CHANGE time modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
 $alter_revision_r4_3_19 = "ALTER TABLE {$pref}revision DROP INDEX idx_time , ADD INDEX idx_modified ( modified )";
 $alter_revision_r4_3_20 = "ALTER TABLE {$pref}revision ADD formatting VARCHAR(20) DEFAULT NULL AFTER body_r";
+$alter_revision_r4_3_21 = "ALTER TABLE {$pref}revision ADD reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER minor_edit, ADD INDEX idx_reviewed (reviewed)";
+$alter_revision_r4_3_22 = "ALTER TABLE {$pref}revision ADD reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER reviewed";
+$alter_revision_r4_3_23 = "ALTER TABLE {$pref}revision ADD reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER reviewed";
 
 $update_revision_r4_3 = "UPDATE {$pref}revision AS revisions, (SELECT user_id, user_name FROM {$pref}users) AS users SET revisions.owner_id = users.user_id WHERE revisions.owner = users.user_name";
 $update_revision_r4_3_1 = "UPDATE {$pref}revision AS revisions, (SELECT user_id, user_name FROM {$pref}users) AS users SET revisions.user_id = users.user_id WHERE revisions.user = users.user_name";

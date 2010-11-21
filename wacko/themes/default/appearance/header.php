@@ -291,6 +291,15 @@ else
 		($this->iswatched === true ? 'watch-on.png' : 'watch-off.png'),
 		'a');
 
+	// review tab
+	echo echo_tab(
+		$this->href('review'),
+		($this->page['reviewed'] == 1 ? $this->get_translation('RemoveReview') : $this->get_translation('SetReview').' '.$this->page['reviewed']),
+		($this->forum === false && $this->page && ($this->is_reviewer())) ? $this->get_translation('SetReview') : '',
+		$this->method == 'review',
+		($this->page['reviewed'] == 1 ? 'review2.png' : 'review1.png'),
+		'z');
+
 	// properties tab
 	echo echo_tab(
 		$this->href('properties'),

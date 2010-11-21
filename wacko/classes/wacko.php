@@ -828,7 +828,7 @@ class Wacko
 		// load page
 		if ($metadataonly)
 		{
-			$what = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.keywords, p.description, p.noindex, u.user_name, o.user_name AS owner_name';
+			$what = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.keywords, p.description, p.noindex, u.user_name, o.user_name AS owner_name';
 		}
 		else
 		{
@@ -1086,12 +1086,13 @@ class Wacko
 	// STANDARD QUERIES
 	function load_revisions($page_id, $minor_edit = '')
 	{
-		$pages_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.user_name as user ';
+		$pages_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.user_name as user, o.user_name as reviewer ';
 
 		$rev = $this->load_all(
 			"SELECT p.revision_id AS revision_m_id, ".$pages_meta." ".
 			"FROM ".$this->config['table_prefix']."revision p ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+				"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
 			"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
 				($minor_edit
 					? "AND p.minor_edit = '0' "
@@ -1104,6 +1105,7 @@ class Wacko
 				"SELECT p.page_id AS revision_m_id, ".$pages_meta." ".
 				"FROM ".$this->config['table_prefix']."page p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
 				"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
 					($minor_edit
 						? "AND p.minor_edit = '0' "
@@ -1120,6 +1122,7 @@ class Wacko
 				"SELECT p.page_id AS revision_m_id, ".$pages_meta." ".
 				"FROM ".$this->config['table_prefix']."page p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
 				"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
 				"ORDER BY p.modified DESC ".
 				"LIMIT 1");
@@ -1147,7 +1150,7 @@ class Wacko
 
 		// count pages
 		$count_pages = $this->load_all(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.user_name as user ".
+		"SELECT p.page_id, u.user_name as user ".
 		"FROM ".$this->config['table_prefix']."page p ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".
@@ -1169,7 +1172,7 @@ class Wacko
 		$pagination = $this->pagination($count, $limit);
 
 		if ($pages = $this->load_all(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.user_name as user ".
+		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.user_name as user ".
 		"FROM ".$this->config['table_prefix']."page p ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".
@@ -1331,7 +1334,7 @@ class Wacko
 	// $lang			- page language
 	// $mute			- supress email reminders and xml rss recompilation
 	// $user			- attach guest pseudonym
-	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $comment_on_id = 0, $lang = false, $mute = false, $user = false)
+	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = false, $mute = false, $user = false)
 	{
 		$desc = '';
 		// user data
@@ -1511,22 +1514,25 @@ class Wacko
 					"INSERT INTO ".$this->config['table_prefix']."page SET ".
 						"comment_on_id 	= '".quote($this->dblink, $comment_on_id)."', ".
 						#(!$comment_on_id ? "description = '".quote($this->dblink, $desc)."', " : "").
-						"created 		= NOW(), ".
-						"modified 		= NOW(), ".
+						"created		= NOW(), ".
+						"modified		= NOW(), ".
 						"commented		= NOW(), ".
-						"owner_id 		= '".quote($this->dblink, $owner_id)."', ".
-						"user_id 		= '".quote($this->dblink, $user_id)."', ".
-						"ip 			= '".quote($this->dblink, $ip)."', ".
-						"latest 		= '1', ".
-						"supertag 		= '".quote($this->dblink, $this->npj_translit($tag))."', ".
-						"body 			= '".quote($this->dblink, $body)."', ".
-						"body_r 		= '".quote($this->dblink, $body_r)."', ".
-						"body_toc 		= '".quote($this->dblink, $body_toc)."', ".
-						"edit_note 		= '".quote($this->dblink, $edit_note)."', ".
-						"minor_edit 	= '".quote($this->dblink, $minor_edit)."', ".
-						"lang 			= '".quote($this->dblink, $lang)."', ".
-						"tag 			= '".quote($this->dblink, $tag)."', ".
-						"title 			= '".quote($this->dblink, htmlspecialchars($title))."'");
+						"owner_id		= '".quote($this->dblink, $owner_id)."', ".
+						"user_id		= '".quote($this->dblink, $user_id)."', ".
+						"ip				= '".quote($this->dblink, $ip)."', ".
+						"latest			= '1', ".
+						"supertag		= '".quote($this->dblink, $this->npj_translit($tag))."', ".
+						"body			= '".quote($this->dblink, $body)."', ".
+						"body_r			= '".quote($this->dblink, $body_r)."', ".
+						"body_toc		= '".quote($this->dblink, $body_toc)."', ".
+						"edit_note		= '".quote($this->dblink, $edit_note)."', ".
+						"minor_edit		= '".quote($this->dblink, $minor_edit)."', ".
+						"reviewed		= '".quote($this->dblink, $reviewed)."', ".
+						"reviewed_time	= '".quote($this->dblink, $reviewed_time)."', ".
+						"reviewer_id	= '".quote($this->dblink, $reviewer_id)."', ".
+						"lang			= '".quote($this->dblink, $lang)."', ".
+						"tag			= '".quote($this->dblink, $tag)."', ".
+						"title			= '".quote($this->dblink, htmlspecialchars($title))."'");
 
 				// saving acls
 				$page_id = $this->get_page_id($tag);
@@ -1685,6 +1691,9 @@ class Wacko
 							"body_toc		= '".quote($this->dblink, $body_toc)."', ".
 							"edit_note		= '".quote($this->dblink, $edit_note)."', ".
 							"minor_edit		= '".quote($this->dblink, $minor_edit)."', ".
+							"reviewed		= '".quote($this->dblink, $reviewed)."', ".
+							"reviewed_time	= '".quote($this->dblink, $reviewed_time)."', ".
+							"reviewer_id	= '".quote($this->dblink, $reviewer_id)."', ".
 							"title			= '".quote($this->dblink, htmlspecialchars($title))."' ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
 						"LIMIT 1");
@@ -1809,8 +1818,27 @@ class Wacko
 
 		// move revision
 		$this->query(
-			"INSERT INTO {$this->config['table_prefix']}revision (page_id, tag, modified, body, formatting, edit_note, minor_edit, ip, owner_id, user_id, latest, handler, comment_on_id, supertag, title, keywords, description) ".
-			"VALUES ('{$old_page['page_id']}','{$old_page['tag']}', '{$old_page['modified']}', '{$old_page['body']}', '{$old_page['formatting']}', '{$old_page['edit_note']}', '{$old_page['minor_edit']}', '{$old_page['ip']}', '{$old_page['owner_id']}', '{$old_page['user_id']}', '0', '{$old_page['handler']}', '{$old_page['comment_on_id']}', '{$old_page['supertag']}', '{$old_page['title']}', '{$old_page['keywords']}', '{$old_page['description']}')");
+			"INSERT INTO {$this->config['table_prefix']}revision SET ".
+			"page_id		= '{$old_page['page_id']}', ".
+			"tag			= '{$old_page['tag']}', ".
+			"modified		= '{$old_page['modified']}', ".
+			"body			= '{$old_page['body']}', ".
+			"formatting		= '{$old_page['formatting']}', ".
+			"edit_note		= '{$old_page['edit_note']}', ".
+			"minor_edit		= '{$old_page['minor_edit']}', ".
+			"reviewed		= '{$old_page['reviewed']}', ".
+			"reviewed_time	= '{$old_page['reviewed_time']}', ".
+			"reviewer_id	= '{$old_page['reviewer_id']}', ".
+			"ip				= '{$old_page['ip']}', ".
+			"owner_id		= '{$old_page['owner_id']}', ".
+			"user_id		= '{$old_page['user_id']}', ".
+			"latest			= '0', ".
+			"handler		= '{$old_page['handler']}', ".
+			"comment_on_id	= '{$old_page['comment_on_id']}', ".
+			"supertag		= '{$old_page['supertag']}', ".
+			"title			= '{$old_page['title']}', ".
+			"keywords		= '{$old_page['keywords']}', ".
+			"description	= '{$old_page['description']}'");
 
 		// update user statistics for revisions made
 		if ($user = $this->get_user())
@@ -2946,7 +2974,7 @@ class Wacko
 	function load_referrers($page_id = '')
 	{
 		return $this->load_all(
-			"SELECT referrer, count(referrer) AS num ".
+			"SELECT page_id, referrer, count(referrer) AS num ".
 			"FROM ".$this->config['table_prefix']."referrer ".
 			($page_id = trim($page_id)
 				? "WHERE page_id = '".quote($this->dblink, $page_id)."'"
@@ -3653,7 +3681,28 @@ class Wacko
 		if (is_array($this->config['aliases']))
 		{
 			$al  = $this->config['aliases'];
-			$mod = explode("\\n", $al['Moderators']);
+			$mod = explode("\\n", $al['Moderator']);
+
+			if ($mod == true && in_array($this->get_user_name(), $mod))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	function is_reviewer()
+	{
+		if (!$this->get_user())
+		{
+			return false;
+		}
+
+		if (is_array($this->config['aliases']))
+		{
+			$al  = $this->config['aliases'];
+			$mod = explode("\\n", $al['Reviewer']);
 
 			if ($mod == true && in_array($this->get_user_name(), $mod))
 			{
@@ -4074,6 +4123,28 @@ class Wacko
 				"AND page_id	= '".quote($this->dblink, $page_id)."'");
 	}
 
+	// REVIEW
+	function set_review($reviewer_id, $page_id)
+	{
+		// set unset review
+		$this->page['reviewed'] == 1 ? $reviewed = 0 : $reviewed = 1;
+
+		if ($this->has_access('read', $page_id))
+		{
+			return $this->query(
+				"UPDATE ".$this->config['table_prefix']."page SET ".
+					"reviewed		= '".quote($this->dblink, $reviewed)."', ".
+					"reviewed_time	= NOW(), ".
+					"reviewer_id	= '".quote($this->dblink, $reviewer_id)."' ".
+				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
+				"LIMIT 1");
+
+		}
+		else
+		{
+			return false;
+		}
+	}
 	// BOOKMARKS
 	function get_default_bookmarks($lang, $what = 'default')
 	{
@@ -4693,8 +4764,7 @@ class Wacko
 				'hide_rating'		=> $this->page['hide_rating'],
 				'hide_toc'			=> $this->page['hide_toc'],
 				'hide_index'		=> $this->page['hide_index'],
-				'lower_index'		=> $this->page['lower_index'],
-				'upper_index'		=> $this->page['upper_index'],
+				'tree_level'		=> $this->page['tree_level'],
 				'allow_rawhtml'		=> $this->page['allow_rawhtml'],
 				'disable_safehtml'	=> $this->page['disable_safehtml'],
 				'theme'				=> $this->page['theme']
@@ -4734,9 +4804,12 @@ class Wacko
 		$this->http_security_headers();
 
 		// check page watching
-		if ($user && $this->page) if ($this->is_watched($user['user_id'], $this->page['page_id']))
+		if ($user && $this->page)
 		{
-			$this->iswatched = true;
+			if ($this->is_watched($user['user_id'], $this->page['page_id']))
+			{
+				$this->iswatched = true;
+			}
 		}
 
 		// forum page
@@ -5056,7 +5129,7 @@ class Wacko
 
 		return
 			// save
-			$this->save_page($new, $title = $page['title'], $page['body'], $edit_note, $minor_edit = 0, $comment_on_id = 0, $lang = $page['lang'], $mute = false, $user = false);
+			$this->save_page($new, $title = $page['title'], $page['body'], $edit_note, $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = $page['lang'], $mute = false, $user = false);
 	}
 
 	function rename_page($tag, $new_tag, $new_supertag = '')
@@ -5708,7 +5781,7 @@ class Wacko
 			{
 				$set[] = $ids[1];
 
-				if ($ids[2] != '0' && !in_array($ids[2], $set))
+				if ($ids[2] != 0 && !in_array($ids[2], $set))
 				{
 					$set[] = $ids[2];
 				}

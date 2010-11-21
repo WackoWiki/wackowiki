@@ -664,6 +664,14 @@ $wacko_translation = array(
 	'NewsNoClusterDefined'	=> 'No News cluster defined.',
 	'NewsDiscuss'	=> 'Discuter cet article...',
 
+	// Review
+	'Reviewer'			=> 'Reviewer',
+	'Reviewed'			=> 'reviewed',
+	'Review'			=> 'review',
+	'ReviewedBy'		=> 'reviewed by',
+	'RemoveReview'		=> 'Remove review for this page',
+	'SetReview'			=> 'Reviewed this page',
+
 	// password complexity
 	'PwdCplxShort'		=> 'Le mot de passe est trop court.',
 	'PwdCplxEquals'		=> 'Le mot de passe contient le nom d&rsquo;utilisateur.',

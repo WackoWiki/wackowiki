@@ -70,6 +70,22 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 				$curday = $day;
 			}
 
+			if ($this->config['review'])
+			{
+				if ($page['reviewed'] == 0)
+				{
+					$review = " <span class=\"review\">[".$this->get_translation('Review')."]</span>";
+				}
+				else
+				{
+					$review = '';
+				}
+			}
+			else
+			{
+				$review = '';
+			}
+
 			if ($page['edit_note'])
 			{
 				$edit_note = " <span class=\"editnote\">[".$page['edit_note']."]</span>";
@@ -90,6 +106,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 					? $this->link('/'.$page['user'], '', $page['user'])
 					: $page['user'])
 				: $this->get_translation('Guest')).
+			$review.' '.
 			$edit_note.
 			"</small></li>\n";
 		}

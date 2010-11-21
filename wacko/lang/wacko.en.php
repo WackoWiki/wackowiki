@@ -763,6 +763,14 @@ $wacko_translation = array(
 	'NewsNoClusterDefined'	=> 'No News cluster defined.',
 	'NewsDiscuss'	=> 'Discuss this article...',
 
+	// Review
+	'Reviewer'			=> 'Reviewer',
+	'Reviewed'			=> 'reviewed',
+	'Review'			=> 'review',
+	'ReviewedBy'		=> 'reviewed by',
+	'RemoveReview'		=> 'Remove review for this page',
+	'SetReview'			=> 'Reviewed this page',
+
 	// moderation handler
 	'Moderation'			=> 'Moderation',
 	'Topics'				=> 'topics',
@@ -790,7 +798,7 @@ $wacko_translation = array(
 	'ModerateMoveConfirm'	=> 'Select the forum or specify the cluster to move these topics. To move a page to the root of the site, type &quot;/&quot;',
 	'ModeratePgMoveConfirm'	=> 'Specify the name of the cluster, in which to place the page. To move a page to the root of the site, type &quot;/&quot;',
 	'ModerateMoveExists'	=> 'Operation aborted: in this section already exists topics with the same name %1. If you still need to transfer the above-mentioned topics, please rename them first.',
-	'ModerateMoveNotExists'	=> 'The document / cluster does not exist. Please check the name and try again.',
+	'ModerateMoveNotExists'	=> 'The page / cluster does not exist. Please check the name and try again.',
 	'ModerateMergeConfirm'	=> 'Choose a topic, which should combine the remaining',
 	'ModerateMerge2Min'		=> 'To join you must select at least two topics!',
 	'ModerateComDelConfirm'	=> 'Are you sure you want to <u>remove</u> %1 %2?',
@@ -801,7 +809,6 @@ $wacko_translation = array(
 	'ModerateSplitAllAfter'	=> 'Detach all the comments after the first selected (and including)',
 	'ModerateSplitSelected'	=> 'Separated only selected comments (total %1)',
 	'ModerateUserProfile'	=> 'profile',
-
 
 	// forum
 	'ForumSubforums'	=> 'Forum Topics',

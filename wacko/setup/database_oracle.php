@@ -121,8 +121,8 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"hide_rating number(1) null,".
 					"hide_toc number(1) null,".
 					"hide_index number(1) null,".
-					"lower_index number(1) null,".
-					"upper_index number(1) null,".
+					"reviewed number(1) default 0,".
+					"tree_level number(1) default 0,".
 					"allow_rawhtml number(1) null,".
 					"disable_safehtml number(1) null,".
 					"constraint {$pref}page_pk primary key (page_id)/*,".

@@ -59,7 +59,7 @@ if ($this->has_access('read'))
 
 		$c = 0;
 		$t = $a = count($pages);
-		foreach ($pages as $page)
+		foreach ($pages as $num => $page)
 		{
 			if ($page['edit_note'])
 			{
@@ -83,9 +83,22 @@ if ($this->has_access('read'))
 					? ($this->is_wiki_name($page['user'])
 						? $this->link('/'.$page['user'], '', $page['user'])
 						: $page['user'])
-					: $this->get_translation('Guest'))."";
-				$output .= "".$edit_note."";
-				$output .= " ".($page['minor_edit'] ? "m" : "");
+					: $this->get_translation('Guest')).'';
+				$output .= ''.$edit_note.'';
+				$output .= ' '.($page['minor_edit'] ? 'm' : '');
+				if ($this->config['review'])
+				{
+					if ($page['reviewed'] == 0)
+					{
+						if ($num == 0)
+							$output .= " <span class=\"review\">[".$this->get_translation('Review')."]</span>";
+					}
+					else if ($page['reviewed'] == 1)
+					{
+						$output .=  " <span class=\"review\">[".$this->get_translation('ReviewedBy')." ".$page['reviewer']."]</span>";;
+					}
+				}
+
 				$output .= "</li>\n";
 			}
 		}
