@@ -71,6 +71,47 @@
 #quicklinks .bookmarks {
 	float: left;
 }
+.bookmarks {
+	margin: 0 auto 0;
+	overflow: hidden;
+	float: left;
+	text-align: left;
+	position: relative;
+}
+
+.bookmarks ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.bookmarks li {
+	border-left: 1px solid #aaa;
+	float: left;
+	line-height: 1.2em;
+	margin: 0 .5em 0 -.5em;
+	padding: 0 .5em 0 .5em;
+	white-space: nowrap;
+}
+
+.bookmarks li a {
+	display: inline;
+	border: none;
+	text-decoration: none;
+}
+
+.bookmarks li a:visited {
+	color: #003399;
+}
+
+.bookmarks li a:hover {
+	color: #B90022;
+	text-decoration: underline;
+}
+
+.bookmarks li a:active {
+	color: #FF0000;
+}
 /* Username if logged in */
 #quicklinks .user {
 	text-align: right;

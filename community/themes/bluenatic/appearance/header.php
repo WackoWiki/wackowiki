@@ -51,25 +51,25 @@ if ($this->method == 'edit')
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->get_user())
-   {
-      if ($user['doubleclick_edit'] == 1)
-         {
+{
+	if ($user['doubleclick_edit'] == 1)
+	{
 ?>
-  <script type="text/javascript">
-   var edit = "<?php echo $this->href('edit');?>";
-  </script>
+	<script type="text/javascript">
+	var edit = "<?php echo $this->href('edit');?>";
+	</script>
 <?php
-         }
-   }
+	}
+}
 else if($this->has_access('write'))
-   {
+{
 ?>
 
-      <script type="text/javascript">
-      var edit = "<?php echo $this->href('edit');?>";
-     </script>
+	<script type="text/javascript">
+	var edit = "<?php echo $this->href('edit');?>";
+	</script>
 <?php
-   }
+}
 ?>
 </head>
 
@@ -89,8 +89,14 @@ else if($this->has_access('write'))
 		<div id="quicklinks">
 			<div class="bookmarks">
 				<?php // Insert links to root page and personal bookmarks ?>
-				<?php echo $this->compose_link_to_page($this->config['root_page']); ?> |
-				<?php echo $this->format($this->get_bookmarks_formatted(), "post_wacko"); ?>
+				<?php echo "<ol>\n"; ?>
+				<?php echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n"; ?>
+				<?php echo "<li>"; ?>
+				<?php $formatedBMs = $this->format($this->get_bookmarks_formatted(), 'post_wacko'); ?>
+				<?php $formatedBMs = str_replace ("\n", "</li>\n<li>", $formatedBMs); ?>
+				<?php echo $formatedBMs; ?>
+				<?php echo "</li>\n"; ?>
+				<?php echo "</ol>\n"; ?>
 			</div>
 			<?php // If logged in, show username, settings and logout ?>
 			<?php if($user = $this->get_user()) { ?>
