@@ -43,6 +43,7 @@ $wacko_config = array(
 
 	'edit_summary' => 0,
 	'minor_edit' => 0,
+	'review' => 0,
 
 	'hide_comments' => 0,
 	'hide_files' => 0,
@@ -50,8 +51,7 @@ $wacko_config = array(
 
 	'hide_toc' => 0,
 	'hide_index' => 0,
-	'lower_index' => 0,
-	'upper_index' => 0,
+	'tree_level' => 0,
 
 	'footer_comments' => 1,
 	'footer_files' => 1,
@@ -96,7 +96,7 @@ $wacko_config = array(
 	'allow_registration' => 1,
 	'disable_autosubscribe' => 0,
 
-	'standard_handlers' => 'addcomment|categories|claim|clone|diff|edit|latex|msword|new|permissions|print|properties|rate|referrers|referrers_sites|remove|rename|revisions|revisions\.xml|show|source|watch',
+	'standard_handlers' => 'addcomment|categories|claim|clone|diff|edit|latex|msword|new|permissions|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|show|source|watch',
 
 	'upload' => 'admins',
 	'upload_images_only' => 0,

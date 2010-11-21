@@ -36,16 +36,16 @@ function admin_configbasic(&$engine, &$module)
 		$config['multilanguage']			= (int)$_POST['multilanguage'];
 		$config['upload_images_only']		= (int)$_POST['upload_images_only'];
 		$config['upload_max_size']			= (int)$_POST['upload_max_size'];
-		$config['upload_quota_per_user']		= (int)$_POST['upload_quota_per_user'];
+		$config['upload_quota_per_user']	= (int)$_POST['upload_quota_per_user'];
 		$config['hide_comments']			= (int)$_POST['hide_comments'];
 		$config['hide_files']				= (int)$_POST['hide_files'];
 		$config['hide_rating']				= (int)$_POST['hide_rating'];
 		$config['hide_toc']					= (int)$_POST['hide_toc'];
 		$config['hide_index']				= (int)$_POST['hide_index'];
-		$config['lower_index']				= $_POST['index_mode'] == 'l' ? 1 : 0 ;
-		$config['upper_index']				= $_POST['index_mode'] == 'u' ? 1 : 0 ;
+		$config['tree_level']				= (int)$_POST['index_mode'];
 		$config['edit_summary']				= (int)$_POST['edit_summary'];
 		$config['minor_edit']				= (int)$_POST['minor_edit'];
+		$config['review']					= (int)$_POST['review'];
 		$config['disable_autosubscribe']	= (int)$_POST['disable_autosubscribe'];
 		$config['default_rename_redirect']	= (int)$_POST['default_rename_redirect'];
 		$config['store_deleted_pages']		= (int)$_POST['store_deleted_pages'];
@@ -274,9 +274,9 @@ function admin_configbasic(&$engine, &$module)
 				<td class="label"><strong>Displaying sections:</strong><br />
 				<small>When the previous options, whether to display only daughter of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).</small></td>
 				<td>
-					<input type="radio" id="full_index" name="index_mode" value="f"<?php echo ( !$engine->config['lower_index'] && !$engine->config['upper_index'] ? ' checked="checked"' : '' );?> /><label for="full_index">Tree</label>
-					<input type="radio" id="lower_index" name="index_mode" value="l"<?php echo ( $engine->config['lower_index'] ? ' checked="checked"' : '' );?> /><label for="lower_index">Lower</label>
-					<input type="radio" id="upper_index" name="index_mode" value="u"<?php echo ( $engine->config['upper_index'] ? ' checked="checked"' : '' );?> /><label for="upper_index">Upper</label>
+					<input type="radio" id="full_index" name="index_mode" value="0"<?php echo ( $engine->config['tree_level'] == 0 ? ' checked="checked"' : '' );?> /><label for="full_index">Tree</label>
+					<input type="radio" id="lower_index" name="index_mode" value="1"<?php echo ( $engine->config['tree_level'] == 1 ? ' checked="checked"' : '' );?> /><label for="lower_index">Lower</label>
+					<input type="radio" id="upper_index" name="index_mode" value="2"<?php echo ( $engine->config['tree_level'] == 2 ? ' checked="checked"' : '' );?> /><label for="upper_index">Upper</label>
 				</td>
 			</tr>
 			<tr>
@@ -303,6 +303,17 @@ function admin_configbasic(&$engine, &$module)
 				<td>
 					<input type="radio" id="minor_edit_on" name="minor_edit" value="1"<?php echo ( $engine->config['minor_edit'] ? ' checked="checked"' : '' );?> /><label for="minor_edit_on">On.</label>
 					<input type="radio" id="minor_edit_off" name="minor_edit" value="0"<?php echo ( !$engine->config['minor_edit'] ? ' checked="checked"' : '' );?> /><label for="minor_edit_off">Off.</label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><strong>Review:</strong><br />
+				<small>Enables review option in the edit mode.</small></td>
+				<td>
+					<input type="radio" id="review_on" name="review" value="1"<?php echo ( $engine->config['review'] ? ' checked="checked"' : '' );?> /><label for="review_on">On.</label>
+					<input type="radio" id="review_off" name="review" value="0"<?php echo ( !$engine->config['review'] ? ' checked="checked"' : '' );?> /><label for="review_off">Off.</label>
 				</td>
 			</tr>
 			<tr class="lined">

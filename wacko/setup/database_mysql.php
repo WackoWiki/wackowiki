@@ -123,6 +123,9 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"formatting VARCHAR(20) NOT NULL DEFAULT 'wacko',".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
+					"reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
+					"reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"ip VARCHAR(15) NOT NULL,".
 					"latest TINYINT(1) UNSIGNED DEFAULT '1',".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
@@ -139,8 +142,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"hide_rating TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"hide_toc TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"hide_index TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
-					"lower_index TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
-					"upper_index TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"tree_level TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"allow_rawhtml TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"disable_safehtml TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"noindex TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
@@ -153,6 +155,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"KEY idx_created (created),".
 					"KEY idx_modified (modified),".
 					"KEY idx_minor_edit (minor_edit),".
+					"KEY idx_reviewed (reviewed),".
 					"KEY idx_comment_on_id (comment_on_id),".
 					"KEY idx_commented (commented),".
 					"KEY idx_title (title)".
@@ -203,6 +206,9 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"formatting VARCHAR(20) DEFAULT NULL,".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
+					"reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
+					"reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"latest TINYINT(1) UNSIGNED DEFAULT '0',".
 					"ip VARCHAR(15) NOT NULL,".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
@@ -217,6 +223,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"KEY idx_supertag (supertag),".
 					"KEY idx_modified (modified),".
 					"KEY idx_minor_edit (minor_edit),".
+					"KEY idx_reviewed (reviewed),".
 					"KEY idx_comment_on_id (comment_on_id)".
 				") {$engine} {$charset};";
 
