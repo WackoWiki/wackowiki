@@ -58,17 +58,17 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 		if(!$this->is_admin() && $this->config['captcha_registration'])
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
-			if(extension_loaded('gd'))
+			if (extension_loaded('gd'))
 			{
 				// check whether anonymous user
 				// anonymous user has no name
 				// if false, we assume it's anonymous
-				if($this->get_user_name() == false)
+				if ($this->get_user_name() == false)
 				{
 					//anonymous user, check the captcha
-					if(!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
+					if (!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
 					{
-						if($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
+						if ($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
 						{
 							// reset freecap session vars
 							// cannot stress enough how important it is to do this
@@ -89,7 +89,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 						$word_ok = false;
 					}
 
-					if(!$word_ok)
+					if (!$word_ok)
 					{
 						//not the right word
 						$error = $this->get_translation('SpamAlert');
@@ -286,15 +286,15 @@ echo "<br /><small>".
 		// captcha code starts
 
 		// Only show captcha if the admin enabled it in the config file
-		if($this->config['captcha_registration'])
+		if ($this->config['captcha_registration'])
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
-			if(extension_loaded('gd'))
+			if (extension_loaded('gd'))
 			{
 				// check whether anonymous user
 				// anonymous user has no name
 				// if false, we assume it's anonymous
-				if($this->get_user_name() == false)
+				if ($this->get_user_name() == false)
 				{
 					?>
 <p><label for="captcha"><?php echo $this->get_translation('Captcha');?>:</label>

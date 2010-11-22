@@ -28,7 +28,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	}
 
 	// watch page
-	if ($this->page && $_POST['watchpage'] && $_POST['noid_publication'] != $this->tag && $user && $this->iswatched !== true)
+	if ($this->page && isset($_POST['watchpage']) && $_POST['noid_publication'] != $this->tag && $user && $this->iswatched !== true)
 	{
 		$this->set_watch($user['user_id'], $this->page['page_id']);
 	}
@@ -38,7 +38,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		if (!$user) $this->cache->cache_invalidate($this->supertag);
 		$this->set_message($this->get_translation('EmptyComment'));
 	}
-	else if ($_POST['preview'])
+	else if (isset($_POST['preview']))
 	{
 		// comment preview
 		if (!$user) $this->cache->cache_invalidate($this->supertag);
@@ -48,7 +48,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$_SESSION['guest']		= $guest;
 		$this->redirect($this->href('', '', 'show_comments=1&p=last').'#preview');
 	}
-	else if ($_SESSION['comment_delay'] && ((time() - $_SESSION['comment_delay']) < $this->config['comment_delay']))
+	else if (isset($_SESSION['comment_delay']) && ((time() - $_SESSION['comment_delay']) < $this->config['comment_delay']))
 	{
 		// posting flood protection
 		if (!$user) $this->cache->cache_invalidate($this->supertag);
@@ -70,11 +70,13 @@ if ($this->has_access('comment') && $this->has_access('read'))
 				//check whether anonymous user
 				//anonymous user has the IP or host name as name
 				//if name contains '.', we assume it's anonymous
-				if (strpos($this->get_user_name(), '.'))
+				#if (strpos($this->get_user_name(), '.'))
+				if ($this->get_user_name()== false)
 				{
 					//anonymous user, check the captcha
 					if (!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
 					{
+						echo '++++++++';
 						if ($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
 						{
 							// reset freecap session vars
@@ -116,7 +118,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$_SESSION['comment_delay']	= time();
 
 		// publish anonymously
-		if ($_POST['noid_publication'] == $this->tag)
+		if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->tag)
 		{
 			// undefine username
 			$remember_name = $this->get_user_name();
