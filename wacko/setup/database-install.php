@@ -345,7 +345,7 @@ switch($config['database_driver'])
 					test($lang['InstallingAdminGroup'], @mysql_query($insert_admin_group, $dblink), str_replace('%1', 'admin group', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingAdminGroupMember'], @mysql_query($insert_admin_group_member, $dblink), str_replace('%1', 'admin group member', $lang['ErrorAlreadyExists']));
 
-					test($lang['InstallingEverybodyGroup'], @mysql_query(insert_everybody_group, $dblink), str_replace('%1', 'everybody group', $lang['ErrorAlreadyExists']));
+					test($lang['InstallingEverybodyGroup'], @mysql_query($insert_everybody_group, $dblink), str_replace('%1', 'everybody group', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingRegisteredGroup'], @mysql_query($insert_registered_group, $dblink), str_replace('%1', 'registered group', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingModeratorGroup'], @mysql_query($insert_moderator_group, $dblink), str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingReviewerGroup'], @mysql_query($insert_reviewer_group, $dblink), str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
