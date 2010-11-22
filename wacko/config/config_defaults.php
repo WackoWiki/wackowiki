@@ -131,6 +131,7 @@ $wacko_config = array(
 	'cache_sql_ttl' => 600,
 
 	'spam_filter' => 1,
+	'comment_delay' => 1,
 
 	'pwd_unlike_login' => 1,
 	'pwd_char_classes' => 0,

@@ -71,20 +71,20 @@ if ($this->has_access('write') && $this->has_access('read'))
 			#	$error .= 'Select at least one referring category (field) to the page. ';
 
 			// captcha code starts
-			if(($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
+			if (($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
 			{
 				// Don't load the captcha at all if the GD extension isn't enabled
-				if(extension_loaded('gd'))
+				if (extension_loaded('gd'))
 				{
 					// check whether anonymous user
 					// anonymous user has no name
 					// if false, we assume it's anonymous
-					if($this->get_user_name() == false)
+					if ($this->get_user_name() == false)
 					{
 						//anonymous user, check the captcha
-						if(!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
+						if (!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
 						{
-							if($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
+							if ($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
 							{
 								// reset freecap session vars
 								// cannot stress enough how important it is to do this
@@ -105,7 +105,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 							$word_ok = false;
 						}
 
-						if(!$word_ok)
+						if (!$word_ok)
 						{
 							//not the right word
 							$error = $this->get_translation('SpamAlert');
@@ -365,15 +365,15 @@ if ($this->has_access('write') && $this->has_access('read'))
 		// captcha code starts
 
 		// Only show captcha if the admin enabled it in the config file
-		if(($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
+		if (($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
 		{
 			// Don't load the captcha at all if the GD extension isn't enabled
-			if(extension_loaded('gd'))
+			if (extension_loaded('gd'))
 			{
 				// check whether anonymous user
 				// anonymous user has no name
 				// if false, we assume it's anonymous
-				if($this->get_user_name() == false)
+				if ($this->get_user_name() == false)
 				{
 ?>
 		<label for="captcha"><?php echo $this->get_translation('Captcha');?>:</label>

@@ -54,7 +54,7 @@ function admin_configsecurity(&$engine, &$module)
 		$config['log_level']					= (int)$_POST['log_level'];
 		$config['log_default_show']				= (int)$_POST['log_default_show'];
 		$config['log_purge_time']				= (int)$_POST['log_purge_time'];
-		$config['session_expiration']				= (int)$_POST['session_expiration'];
+		$config['session_expiration']			= (int)$_POST['session_expiration'];
 		$config['comment_delay']				= (int)$_POST['comment_delay'];
 		$config['intercom_delay']				= (int)$_POST['intercom_delay'];
 

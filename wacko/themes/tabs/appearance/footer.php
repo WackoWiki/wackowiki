@@ -270,12 +270,13 @@ switch (count($files))
 				// captcha code starts
 
 				// Only show captcha if the admin enabled it in the config file
-				if($this->config['captcha_new_comment'])
+				if ($this->config['captcha_new_comment'])
 				{
 					// Don't load the captcha at all if the GD extension isn't enabled
-					if(extension_loaded('gd'))
+					if (extension_loaded('gd'))
 					{
-						if(strpos($this->get_user_name(), '.'))
+						#if(strpos($this->get_user_name(), '.'))
+						if ($this->get_user_name()== false)
 						{
 							?>
 <label for="captcha"><?php echo $this->get_translation('Captcha');?>:</label>
