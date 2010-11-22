@@ -184,6 +184,7 @@ $config_db['pwd_unlike_login'] = $config['pwd_unlike_login'];
 $config_db['referrers_purge_time'] = $config['referrers_purge_time'];
 $config_db['remove_onlyadmins'] = $config['remove_onlyadmins'];
 $config_db['rename_globalacl'] = $config['rename_globalacl'];
+$config_db['review'] = $config['review'];
 $config_db['revisions_hide_cancel'] = $config['revisions_hide_cancel'];
 $config_db['rewrite_mode'] = $config['rewrite_mode'];
 $config_db['root_page'] = $config['root_page'];
