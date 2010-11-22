@@ -1620,7 +1620,7 @@ class Wacko
 								if ($this->has_access('read', $comment_on_id, $watcher['user_name']))
 								{
 									$_user = $this->load_single(
-										"SELECT u.email, p.lang, p.email_confirm, u.enabled, p.send_watchmail ".
+										"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
 										"FROM " .$this->config['user_table']." u ".
 											"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 										"WHERE u.user_id = '".quote($this->dblink, $watcher['user_id'])."'");
@@ -1733,7 +1733,7 @@ class Wacko
 								if ($this->has_access('read', $page_id, $watcher['user_name']))
 								{
 									$_user = $this->load_single(
-										"SELECT u.email, p.lang, p.email_confirm, u.enabled, p.send_watchmail ".
+										"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
 										"FROM " .$this->config['user_table']." u ".
 											"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 										"WHERE u.user_id = '".quote($this->dblink, $watcher['user_id'])."'");
@@ -5852,7 +5852,7 @@ class Wacko
 				$size /= $factor;
 				$x++;
 			}
-			// ToDo: $this->get_translation($norm[$x])
+			// TODO: $this->get_translation($norm[$x])
 			if ($rounded === true)
 			{
 				$size = round($size, 0) . '&nbsp;' . $norm[$x];
