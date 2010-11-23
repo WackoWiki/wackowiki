@@ -2,7 +2,7 @@
 
 // WackoWiki ADMINISTRATION SUBSYSTEM
 
-// ToDo:
+// TODO:
 // - rewrite backup/restore modules for more granulated backups,
 //   and to span very big tables (> 2-5 Mb) across several
 //   backup files

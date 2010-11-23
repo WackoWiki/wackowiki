@@ -12,7 +12,7 @@ if ($this->page['comment_on_id'])
 else if ($this->forum === true)
 	$this->redirect($this->href());
 
-// ToDo: config->owners_can_remove_comments ?
+// TODO: config->owners_can_remove_comments ?
 if ($this->user_is_owner() || $this->is_admin())
 {
 	if (isset($_POST['purge']) && $_POST['purge'] == 1)

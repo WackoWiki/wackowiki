@@ -1,7 +1,7 @@
 <?php
 
 // Categories tags tagging annotation
-// ToDo:
+// TODO:
 //	- multilevel hierarchical categories (first we need to
 //	  find a way to unwrap table-structured SQL data array
 //	  into a tree-structured multilevel array)

@@ -82,7 +82,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 		//massclone
 		if ($need_massclone == 1)
 		{
-			// ToDo: clone all sheeps and optional ACLs
+			// TODO: clone all sheeps and optional ACLs
 			print "<p><b>".$this->get_translation('MassCloning')."</b><p>";   //!!!
 			#recursive_move($this, $this->tag );
 		}
