@@ -86,9 +86,11 @@ if ($this->has_access('read'))
 					: $this->get_translation('Guest')).'';
 				$output .= ''.$edit_note.'';
 				$output .= ' '.($page['minor_edit'] ? 'm' : '');
+
+				// review
 				if ($this->config['review'])
 				{
-					if ($page['reviewed'] == 0)
+					if ($page['reviewed'] == 0 &&  $this->is_reviewer())
 					{
 						if ($num == 0)
 							$output .= " <span class=\"review\">[".$this->get_translation('Review')."]</span>";

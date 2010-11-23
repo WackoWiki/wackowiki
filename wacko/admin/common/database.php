@@ -329,7 +329,7 @@ function GetTable(&$engine, $table, $drop = true)
 			$schema_create .= "	KEY `$x` (" . implode($columns, ', ') . ')';
 	}
 
-	$schema_create .= "\n) ENGINE=MyISAM DEFAULT CHARSET={$collation_db['@@collation_database']};"; // ToDo: CHARSET per table
+	$schema_create .= "\n) ENGINE=MyISAM DEFAULT CHARSET={$collation_db['@@collation_database']};"; // TODO: CHARSET per table
 
 	if (get_magic_quotes_runtime())
 		return (stripslashes($schema_create));

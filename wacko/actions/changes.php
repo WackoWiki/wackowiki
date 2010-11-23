@@ -70,7 +70,8 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 				$curday = $day;
 			}
 
-			if ($this->config['review'])
+			// review
+			if ($this->config['review'] && $this->is_reviewer())
 			{
 				if ($page['reviewed'] == 0)
 				{
