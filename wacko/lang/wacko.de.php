@@ -726,6 +726,8 @@ $wacko_translation = array(
 	'ReviewedBy'		=> 'gesichtet von',
 	'RemoveReview'		=> 'Revidiere diese Version',
 	'SetReview'			=> 'Vidiere diese Version',
+	'SetAsReviewed'		=> 'Seite als geprüft gesetzt',
+	'SetAsUnreviewed'	=> 'Seite als ungeprüfed gesetzt',
 
 	// moderation handler
 	'Moderation'			=> 'Moderation',
