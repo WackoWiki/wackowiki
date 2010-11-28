@@ -2,6 +2,7 @@
 
 $edit_note = '';
 $minor_edit = '';
+$reviewed = '';
 $error = '';
 $output = '';
 

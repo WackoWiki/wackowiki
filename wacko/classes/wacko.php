@@ -4238,7 +4238,7 @@ class Wacko
 					if ($url)
 					{
 						$url = str_replace(' ', '', $url);
-						if ($url{0} == '/')
+						if ($url[0] == '/')
 						{
 							$url = substr($url, 1);
 						}

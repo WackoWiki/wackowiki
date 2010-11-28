@@ -33,8 +33,8 @@ else
 if (!$from)	$from	= 'h2';
 if (!$to)	$to		= 'h9';
 
-$start_depth	= $from{1};
-$end_depth		= $to{1};
+$start_depth	= $from[1];
+$end_depth		= $to[1];
 
 // 3. output
 if (!$nomark)

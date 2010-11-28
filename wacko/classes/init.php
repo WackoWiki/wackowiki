@@ -626,11 +626,7 @@ class Init
 				{
 					$execmem = memory_get_peak_usage(true);
 				}
-				else if(function_exists("memory_get_usage"))
-				{
-					// PHP < 5.2.0)
-					$execmem = memory_get_usage(true);
-				}
+
 				if ($execmem)
 				{
 					echo "<li>Memory allocated: ".(number_format(($execmem / (1024*1024)), 3))." MB </li>\n";

@@ -6,17 +6,17 @@
 	}}
 */
 
-$name = '';
-$style = '';
-$start_depth = '';
-$end_depth = '';
-$numerate = '';
-$link = '';
+$name			= '';
+$style			= '';
+$start_depth	= '';
+$end_depth		= '';
+$numerate		= '';
+$link			= '';
 
-$page = '';
-$ppage = '';
-$context = $this->tag;
-$_page = $this->page;
+$page			= '';
+$ppage			= '';
+$context		= $this->tag;
+$_page			= $this->page;
 
 
 if (!$name)  $name  = 'document-relative';
@@ -38,7 +38,7 @@ if (!$style) $style = 'before';
 			// normalizing submersion depth
 			$pnum++;
 			if ($name == 'document-relative')	$num = $pnum;
-			else								$num = str_replace("-", "&#0150;&sect;",
+			else								$num = str_replace('-', "&#0150;&sect;",
 			str_replace("p", "¹", $toc[$i][0] ));
 			// editing TOC @66 contains
 			$toc[$i][66] = $num;
