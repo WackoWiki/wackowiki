@@ -96,7 +96,7 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
 // this.addButton("code","Code","'%% ',' %%',2");
  this.addButton("hr","Line","'','\\n----\\n',2");
 // this.addButton("signature","Signature","'::@::',' ',1");
- this.addButton("quote","Quote","'\\n<[',']>\\n',2");
+ this.addButton("quote","Quote","'<[',']>',2");
  this.addButton("textred","Marked text","'!!','!!',2");
  this.addButton("highlightcolor","Highlight text","'??','??',2");
  this.addButton("createlink","Hyperlink","","document.getElementById('" + this.id + "')._owner.createLink");
@@ -669,8 +669,8 @@ WikiEdit.prototype.createLink = function (isAlt)
 
 WikiEdit.prototype.help = function ()
 {
- s =  "         WikiEdit 3.03 \n";
- s += "  (c) Roman Ivanov, 2003-2005   \n";
+ s =  "         WikiEdit 3.08 \n";
+ s += "  (c) Roman Ivanov, 2003-2010   \n";
  s += "  http://wackowiki.org/Dev/Projects/WikiEdit \n";
  s += "\n";
  s += " Shortcuts:\n";

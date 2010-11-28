@@ -167,7 +167,7 @@ if (!function_exists('print_cluster_tree'))
 				{
 					$newletter = strtoupper(substr($linktext, 0, 1));
 					if (!preg_match('/['.$wacko->language['ALPHA_P'].']/', $newletter)) { $newletter = '#'; }
-					if ($newletter == '') $newletter = $linktext{0};
+					if ($newletter == '') $newletter = $linktext[0];
 					if ($letter <> $newletter)
 					{
 						$need_letter = 1; //Print at the first opportunity
