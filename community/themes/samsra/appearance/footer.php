@@ -65,7 +65,7 @@ echo ($this->iswatched === true ? "<a href=\"".$this->href('watch')."\"><img src
 ?> |
 <?php
 // Print icon
-echo"<a href=\"".$this->href('print')."\" target=\"_new\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a>";
+echo"<a href=\"".$this->href('print')."\" target=\"_blank\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a>";
 ?>
 
 </div>

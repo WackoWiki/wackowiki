@@ -194,7 +194,7 @@ echo ($this->is_watched($this->get_user_name(), $this->tag) ? "<a href=\"".$this
 // print("<a href=\"".$this->href('referrers')."\"><img src=\"".$this->config['theme_url']."icons/referer.gif\" title=\"".$this->get_translation('ReferrersTip')."\" alt=\"".$this->get_translation('ReferrersText')."\" border=\"0\" align=\"middle\" /></a> |");
 }
 // Print icon
-echo"<a href=\"".$this->href('print')."\" target=\"_new\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->get_translation('PrintVersion')."</a><br />";
+echo"<a href=\"".$this->href('print')."\" target=\"_blank\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->get_translation('PrintVersion')."</a><br />";
 // Remove link (shows only for Admins)
 if ($this->is_admin()){
 	print("<a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->get_translation('DeleteTip')."\" alt=\"".$this->get_translation('DeleteText')."\"  align=\"middle\" border=\"0\" />&nbsp;".$this->get_translation('DeleteTip')."</a>");
