@@ -129,6 +129,7 @@ $lang = array(
 "ErrorInsertingPageReadPermission" => "Error al establecer permisos de lectura para <tt>%1</tt> página",
 "ErrorInsertingPageWritePermission" => "Error al establecer permisos de escritura para <tt>%1</tt> página",
 "ErrorInsertingPageCommentPermission" => "Error al establecer permisos de comentario para <tt>%1</tt> página",
+"ErrorInsertingDefaultBookmark" => "Error setting page <tt>%1</tt> as default bookmark",
 "ErrorPageAlreadyExists" => "<tt>%1</tt> página ya existe",
 "ErrorAlteringTable" => "Error alterando <tt>%1</tt> tabla",
 "ErrorRenamingTable" => "Error renaming <tt>%1</tt> table",

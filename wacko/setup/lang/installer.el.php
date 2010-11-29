@@ -133,6 +133,7 @@ $lang = array(
 "ErrorInsertingPageReadPermission" => "Σφάλμα ρύθμισης δικαιώματος ανάγνωσης για την <tt>%1</tt> σελίδα",
 "ErrorInsertingPageWritePermission" => "Σφάλμα ρύθμισης δικαιώματος εγγραφής για την <tt>%1</tt> σελίδα",
 "ErrorInsertingPageCommentPermission" => "Σφάλμα ρύθμισης δικαιώματος σχόλιου για την <tt>%1</tt> σελίδα",
+"ErrorInsertingDefaultBookmark" => "Error setting page <tt>%1</tt> as default bookmark",
 "ErrorPageAlreadyExists" => "Η <tt>%1</tt> σελίδα ήδη υπάρχει",
 "ErrorAlteringTable" => "Σφάλμα αλλαγής <tt>%1</tt> πίνακα",
 "ErrorRenamingTable" => "Error renaming <tt>%1</tt> table",
