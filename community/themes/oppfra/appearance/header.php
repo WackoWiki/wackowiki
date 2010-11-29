@@ -105,7 +105,7 @@ if ($doubleclick == true)
 </div></div>
 <!--ENDE: KOPF-->
 <!--BEGINN: MENUE-->
-<div class="cap" id="menu"><input type="image" src="<?php echo $this->get_translation("theme_url") ?>icons/logo.png" alt="alternativ Text" align="middle" />
+<div class="cap" id="menu"><img src="<?php echo $this->config['theme_url'] ?>icons/logo.png" alt="alternativ Text" align="middle" />
 
 </div>
 <!--ENDE: MENUE-->

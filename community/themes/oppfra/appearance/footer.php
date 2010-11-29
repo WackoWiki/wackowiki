@@ -169,56 +169,52 @@ echo $this->form_close();
 ?>
 
 <?php
-		# echo '<br />';
-		# echo "<hr color=#CCCCCC noshade size=1 />";
-		echo '<div class="newsNav"><ul class="newsNav"><li>';
 
+echo '<div class="newsNav"><ul class="newsNav">';
 // Bookmarks
-$BMs = $this->get_bookmarks();
-$formatedBMs =  $this->format($this->format(implode('| ', $BMs), 'wacko'), 'post_wacko');
-$formatedBMs = str_replace ( "| ", "</li><li>\n", $formatedBMs );
-echo $formatedBMs;
-echo "</li></ul></div>";
+		// Main page
+		#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
+		echo "<li>";
 
-		# echo "<hr color=#CCCCCC noshade size=1 />";
-		echo '<br />';
-if ($this->get_user())
-{
-			if (!in_array($this->supertag, $this->get_bookmark_links()))
-			{?>
-				<a href="<?php echo $this->href('', '', 'addbookmark=yes')?>">
-				<img src="<?php echo $this->config['theme_url'] ?>icons/bookmark1.gif" border="0" align="bottom" style="vertical-align: middle; "/>
-	<?php echo $this->get_translation("Bookmarks"); ?>				</a>
-	<?php }
-	else
-	{ ?>
-	<a href="<?php echo $this->href('', '', 'removebookmark=yes')?>">
-	<img src="<?php echo $this->config['theme_url'] ?>icons/bookmark2.gif" border="0" align="bottom" style="vertical-align: middle; "/>
-	<?php echo $this->get_translation('Bookmarks'); ?>			</a>
-	<?php }
-}
+$formatedBMs = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
+$formatedBMs = str_replace ("<br />", "", $formatedBMs);
+$formatedBMs = str_replace ("\n", "</li>\n<li>", $formatedBMs);
+echo $formatedBMs;
+echo "</li>\n";
+		if ($this->get_user())
+		{
+			// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
+			if (!in_array($this->tag, $this->get_bookmark_links()))
+				echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
+					.'"><img src="'. $this->config['theme_url']
+					.'icons/bookmark1.gif" alt="+" title="'.
+					$this->get_translation('AddToBookmarks') .'"/></a></li>';
+			else
+				echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
+					.'"><img src="'. $this->config['theme_url']
+					.'icons/bookmark2.gif" alt="-" title="'.
+					$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
+			}
+echo "</ul></div>";
+echo '<br />';
+
 ?>
 
 	<div>
-					<?php
-				#    if ($this->user_is_owner()) {
-	#		echo "<hr color=#CCCCCC noshade size=1 />";
-						#		print($this->get_translation("YouAreOwner"));
-						#    } else {
-			echo "<hr noshade=\"noshade\" size=\"1\" />";
-						#    	if ($owner = $this->get_page_owner()) {
-						#        print($this->get_translation("Owner").$this->link($owner));
-						#      } else if (!$this->page["comment_on"]) {
-						#        print($this->get_translation("Nobody").($this->get_user() ? " (<a href=\"".$this->href("claim")."\">".$this->get_translation("TakeOwnership")."</a>)" : ""));
-						#      }
-
-						# }
-						# echo '<br />';
+<?php
+			// toc
+			if (!$this->config['hide_toc'])
+			{
+				// show table of content
+				echo $this->action('toc', array('from' => 'h2', 'to' => 'h3', 'numerate' => 1, 'nomark' => 0));
+			}
 
 			// categories
 			echo $this->action('category', array('list' => 1));
+
 			// tag cloud
 			# echo $this->action('tagcloud');
+
 			// tree
 			if ($this->config['tree_level'] == 1)
 			{
@@ -237,7 +233,9 @@ if ($this->get_user())
 				$page = '/'.substr($this->tag, 0, ( strrpos($this->tag, '/') ? strrpos($this->tag, '/') : strlen($this->tag) ));
 				echo $this->action('tree', array('page' => $page, 'depth' => 2, 'nomark' => 1));
 			}
-						?>
+
+
+			?>
 
 <div class="copyright">
 <?php
@@ -246,7 +244,7 @@ if ($this->get_user())
 <div id="credits"><?php
 
 // comment this out for not showing website policy link at the bottom of your pages
-if ($this->config['policy_page']) echo '<a href="'.htmlspecialchars($this->href('', $this->config['policy_page'])).'">'.$this->get_translation('StandardTerms').'</a><br />';
+if ($this->config['policy_page']) echo '<a href="'.htmlspecialchars($this->href('', $this->config['policy_page'])).'">'.$this->get_translation('TermsOfUse').'</a><br />';
 
 if ($this->get_user())
 {
@@ -258,8 +256,6 @@ if ($this->get_user())
 	</div>
 <!--ENDE: LEISTE-->
 <?php
-
-
 
 // Revisions link
 echo $this->page['modified'] ? $this->get_translation('LastModification') .": <a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->page['modified']."</a> ".$this->get_translation('By')." ".$this->link($this->page['user_name'])."\n" : "";

@@ -131,6 +131,7 @@ else if($this->has_access('write'))
 		// Bookmarks
 		$BMs = $this->get_bookmarks();
 		$formatedBMs = $this->format($this->format(implode("| ", $BMs), "wacko"), "post_wacko");
+		$formatedBMs = str_replace ("<br />", "", $formatedBMs);
 		$formatedBMs = str_replace ( "\n", "</li>\n<li>", $formatedBMs );
 		//echo "<ol><li>".$formatedBMs."</li></ol>";
 		echo $formatedBMs;
