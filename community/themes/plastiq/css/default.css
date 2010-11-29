@@ -202,6 +202,17 @@ textarea {
 	background-position: top left;
 	padding: 0px;
 }
+#buttons_1 {
+	clear:none;
+	float:left;
+	padding:0 0 0 0;
+}
+#buttons_1 li {
+	float:left;
+	padding-right:0.3em;
+	white-space:nowrap;
+	list-style:none outside none;
+}
 #postText {
 	padding: 0px;
 }

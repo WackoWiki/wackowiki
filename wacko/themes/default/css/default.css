@@ -423,6 +423,19 @@ p.layout-box span {
 	padding: 0 1px;
 }
 
+.layout-box dd {
+	margin:-20px 0 0 50px;
+	padding:0;
+	line-height:25px;
+}
+.layout-box dd:target {
+	background-color:#FFEEEE;
+}
+
+.footnote *:target {
+	background-color:#FFEEEE;
+}
+
 .buttonsspacer {
 	width: 10px;
 	height: 1px;

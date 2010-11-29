@@ -152,17 +152,15 @@ if ($this->get_user())
       <tr align="left">
         <td><div>
 <?php
-		# echo '<br />';
-		# echo "<hr color=#CCCCCC noshade size=1 />";
 		echo '<div class="leftNav"><ul class="leftNav"><li>';
 
 // Bookmarks
 $BMs = $this->get_bookmarks();
 $formatedBMs =  $this->format($this->format(implode("| ", $BMs), "wacko"), "post_wacko");
+$formatedBMs = str_replace ("<br />", "", $formatedBMs);
 $formatedBMs = str_replace ( "\n", "</li><li>\n", $formatedBMs );
 echo $formatedBMs;
 echo "</li></ul></div>";
-		# echo "<hr color=#CCCCCC noshade size=1 />";
 		echo '<br />';
 		if ($this->get_user()) {
 			if (!in_array($this->tag, $this->get_bookmark_links())) {?>
@@ -179,21 +177,6 @@ echo "</div>";
 }
 ?>
             <div>
-<?php
-							#    if ($this->user_is_owner()) {
-							#   		echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
-							#		print($this->get_translation('YouAreOwner'));
-							#    } else {
-							#  		echo "<hr noshade=\"noshade\" size=\"1\" />";
-							#    	if ($owner = $this->get_page_owner()) {
-							#        print($this->get_translation('Owner').": ".$this->link($owner));
-							#      } else if (!$this->page['comment_on_id']) {
-							#        print($this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)" : ""));
-							#      }
-
-							# }
-							# echo '<br />';
-							?>
             </div>
           </div></td>
       </tr>

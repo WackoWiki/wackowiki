@@ -703,8 +703,8 @@ td.form_left, th.form_left {
 
 /*Handlers --------------------------------------------------*/
 #content {
-	clear: both;
-}
+	/*clear: both;
+*/}
 
 #usermenu {
 	margin: 0 auto 0;

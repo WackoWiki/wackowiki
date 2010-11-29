@@ -121,6 +121,7 @@ else
 		echo "<li>";
 		// Bookmarks
 		$formatedBMs = $this->format($this->get_bookmarks_formatted(), "post_wacko");
+		$formatedBMs = str_replace ("<br />", "", $formatedBMs);
 		$formatedBMs = str_replace ("\n", "</li>\n<li>", $formatedBMs);
 		echo $formatedBMs;
 
