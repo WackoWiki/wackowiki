@@ -129,6 +129,7 @@ $lang = array(
 "ErrorInsertingPageReadPermission" => "Fehler beim Setzen der Lese-Rechte für <tt>%1</tt> Seite",
 "ErrorInsertingPageWritePermission" => "Fehler beim Setzen der Schreib-Rechte für <tt>%1</tt> Seite",
 "ErrorInsertingPageCommentPermission" => "Fehler beim Setzen der Kommentar-Rechte für <tt>%1</tt> Seite",
+"ErrorInsertingDefaultBookmark" => "Fehler beim Setzen der Seite <tt>%1</tt> als Default-Lesezeichen",
 "ErrorPageAlreadyExists" => "Diese <tt>%1</tt> Seite besteht bereits",
 "ErrorAlteringTable" => "Fehler beim Ändern der <tt>%1</tt> Tabelle",
 "ErrorRenamingTable" => "Fehler beim Umbenennen der <tt>%1</tt> Tabelle",

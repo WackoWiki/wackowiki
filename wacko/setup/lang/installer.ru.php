@@ -129,6 +129,7 @@ $lang = array(
 "ErrorInsertingPageReadPermission" => "Ошибка установки прав на чтение страницы <tt>%1</tt>",
 "ErrorInsertingPageWritePermission" => "Ошибка установки прав на запись страницы <tt>%1</tt>",
 "ErrorInsertingPageCommentPermission" => "Ошибка установки прав на комментирование страницы <tt>%1</tt>",
+"ErrorInsertingDefaultBookmark" => "Error setting page <tt>%1</tt> as default bookmark",
 "ErrorPageAlreadyExists" => "Страница <tt>%1</tt> уже существует",
 "ErrorAlteringTable" => "Ошибка изменения структуры таблицы <tt>%1</tt>",
 "ErrorRenamingTable" => "Error renaming <tt>%1</tt> table",
