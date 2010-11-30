@@ -35,7 +35,11 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 				mysql_query($perm_read_insert, $dblink_global);
 				mysql_query($perm_write_insert, $dblink_global);
 				mysql_query($perm_comment_insert, $dblink_global);
-				mysql_query($default_bookmark, $dblink_global);
+
+				if($is_bookmark)
+				{
+					mysql_query($default_bookmark, $dblink_global);
+				}
 			}
 			break;
 		case "mysqli_legacy":
@@ -72,10 +76,13 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCommentPermission'])." - ".mysqli_error($dblink_global));
 					}
 
-					mysqli_query($dblink_global, $default_bookmark);
-					if(mysqli_errno($dblink_global) != 0)
+					if($is_bookmark)
 					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingDefaultBookmark'])." - ".mysqli_error($dblink_global));
+						mysqli_query($dblink_global, $default_bookmark);
+						if(mysqli_errno($dblink_global) != 0)
+						{
+							output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingDefaultBookmark'])." - ".mysqli_error($dblink_global));
+						}
 					}
 				}
 				else
@@ -84,7 +91,11 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 					mysqli_query($dblink_global, $perm_read_insert);
 					mysqli_query($dblink_global, $perm_write_insert);
 					mysqli_query($dblink_global, $perm_comment_insert);
-					mysqli_query($dblink_global, $default_bookmark);
+
+					if($is_bookmark)
+					{
+						mysqli_query($dblink_global, $default_bookmark);
+					}
 				}
 			}
 			else if($critical)
@@ -138,11 +149,14 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCommentPermission'])." - ".($error[2]));
 					}
 
-					@$dblink_global->query($default_bookmark);
-					$error = $dblink_global->errorInfo();
-					if($error[0] != "00000")
+					if($is_bookmark)
 					{
-						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingDefaultBookmark'])." - ".($error[2]));
+						@$dblink_global->query($default_bookmark);
+						$error = $dblink_global->errorInfo();
+						if($error[0] != "00000")
+						{
+							output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingDefaultBookmark'])." - ".($error[2]));
+						}
 					}
 				}
 				else
@@ -151,7 +165,11 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 					@$dblink_global->query($perm_read_insert);
 					@$dblink_global->query($perm_write_insert);
 					@$dblink_global->query($perm_comment_insert);
-					@$dblink_global->query($default_bookmark);
+
+					if($is_bookmark)
+					{
+						@$dblink_global->query($default_bookmark);
+					}
 				}
 			}
 			break;
@@ -196,7 +214,7 @@ $error_inserting_pages = false;
 
 require_once('setup/lang/inserts.'.$config['language'].'.php');
 
-if ( $config['multilanguage'] )
+if ( isset($config['multilanguage']) )
 {
 	$handle = opendir('setup/lang');
 	while (false !== ($file = readdir($handle)))
