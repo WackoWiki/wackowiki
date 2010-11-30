@@ -591,9 +591,6 @@ $wacko_translation = array(
 	'NextAcr' => 'Next',
 	'PrevAcr' => 'Prev',
 
-	'default_bookmarks' => '((PaginaIndex Index))'."\n".'((LaatsteWijzigingen Wijzigingen))'."\n".'((LaatsteOpmerkingen Opmerkingen))',
-	'site_bookmarks' => '((PaginaIndex Index))'."\n".'((LaatsteWijzigingen Wijzigingen))'."\n".'((LaatsteOpmerkingen Opmerkingen))',
-
 	//icons
 	'outericon' => '<img src="{theme}icons/web.gif" alt="" />',
 	'fileicon' => '<img src="{theme}icons/file.gif" alt="" />',
