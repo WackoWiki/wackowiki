@@ -11,9 +11,9 @@ if ($config['language'] == $lng)
 	insert_page('МоиПромени', 'Мои Промени', '{{MyChanges}}', $lng, 'Admins', true, false);
 }
 
-insert_page('Каталог', 'Каталог', '{{PageIndex}}', $lng, 'Admins', false, true);
-insert_page('ПоследниПромени', 'Последни Промени', '{{changes}}', $lng, 'Admins', false, true);
-insert_page('НовиКоментари', 'Нови Коментари', '{{RecentlyCommented}}', $lng, 'Admins', false, true);
+insert_page('Каталог', 'Каталог', '{{PageIndex}}', $lng, 'Admins', false, true, 'Каталог');
+insert_page('ПоследниПромени', 'Последни Промени', '{{changes}}', $lng, 'Admins', false, true, 'Промени');
+insert_page('НовиКоментари', 'Нови Коментари', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Коментари');
 
 insert_page('Потребители', 'Потребители', '{{LastUsers}}', $lng, 'Admins', false, false);
 insert_page('Регистрация', 'Регистрация', '{{Registration}}', $lng, 'Admins', false, false);

@@ -4180,11 +4180,15 @@ class Wacko
 		}
 		else
 		{
-			return $this->get_translation($what.'_bookmarks', $lang, false);
+			$user_id = $this->get_user_id_by_name('System');
+			$dbm = $this->get_user_bookmarks($user_id, $lang);
+			#$this->debug_print_r($dbm);
+			#$this->debug_print_r($this->get_translation($what.'_bookmarks', $lang, false));
+			return $dbm;
 		}
 	}
 
-	function get_user_bookmarks($user_id)
+	function get_user_bookmarks($user_id, $lang = '')
 	{
 		$user_bm = '';
 
@@ -4196,6 +4200,9 @@ class Wacko
 					"FROM ".$this->config['table_prefix']."bookmark b ".
 						"LEFT JOIN ".$this->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
 					"WHERE b.user_id = '".quote($this->dblink, $user_id)."' ".
+						($lang
+							? "AND b.lang = '".quote($this->dblink, $lang)."' "
+							: "").
 					"ORDER BY b.bm_position", 1);
 
 			if ($_bookmarks)

@@ -11,9 +11,9 @@ if ($config['language'] == $lng)
 	insert_page('MisCambios', 'Mis Cambios', '{{MyChanges}}', $lng, 'Admins', true, false);
 }
 
-insert_page('UltimasModificaciones', 'Ultimas Modificaciones', '{{changes}}', $lng, 'Admins', false, true);
-insert_page('UltimosCommentarios', 'Ultimos Commentarios', '{{RecentlyCommented}}', $lng, 'Admins', false, true);
-insert_page('IndiceDePaginas', 'Indice De Paginas', '{{PageIndex}}', $lng, 'Admins', false, true);
+insert_page('UltimasModificaciones', 'Ultimas Modificaciones', '{{changes}}', $lng, 'Admins', false, true, 'Modificaciones');
+insert_page('UltimosCommentarios', 'Ultimos Commentarios', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Commentarios');
+insert_page('IndiceDePaginas', 'Indice De Paginas', '{{PageIndex}}', $lng, 'Admins', false, true, 'Indice');
 
 insert_page('Usuarios', 'Usuarios', '{{LastUsers}}', $lng, 'Admins', false, false);
 insert_page('Registrarse', 'Registrarse', '{{Registration}}', $lng, 'Admins', false, false);

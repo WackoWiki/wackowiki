@@ -646,8 +646,6 @@ $wacko_translation = array(
 	'NextAcr' => 'След',
 	'PrevAcr' => 'Пред',
 
-	'default_bookmarks' => '((Каталог))'."\n".'((Изменения))'."\n".'((НовыеКомментарии Комментарии @@ru))',
-	'site_bookmarks' => '((Каталог))'."\n".'((Изменения))'."\n".'((НовыеКомментарии Комментарии @@ru))',
 	//icons
 	'outericon' => '<img src="{theme}icons/web.gif" alt="" />',
 	'fileicon' => '<img src="{theme}icons/file.gif" alt="" />',
