@@ -191,10 +191,10 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 
 		// user-owned pages
 		$limit = 20;
-		echo '<h2>'.$this->get_translation('UsersPages').'</a></h2>'."\n";
+		echo '<h2 id="pages">'.$this->get_translation('UsersPages').'</a></h2>'."\n";
 		echo '<div class="indent"><small>'.$this->get_translation('UsersOwnedPages').': '.$user['total_pages'].'&nbsp;&nbsp;&nbsp; '.$this->get_translation('UsersRevisionsMade').': '.$user['total_revisions']."</small></div><br />\n";
 
-		$pagination = $this->pagination($user['total_pages'], $limit, 'd', 'profile='.$user['user_name'].'&amp;sort='.( isset($_GET['sort']) && $_GET['sort'] != 'name' ? 'date' : 'name' ).'#documents');
+		$pagination = $this->pagination($user['total_pages'], $limit, 'd', 'profile='.$user['user_name'].'&amp;sort='.( isset($_GET['sort']) && $_GET['sort'] != 'name' ? 'date' : 'name' ).'#pages');
 
 		if ($user['total_pages'])
 		{
@@ -207,7 +207,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				"LIMIT {$pagination['offset']}, $limit");
 
 			// sorting and pagination
-			echo '<small>'.( isset($_GET['sort']) && $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=date').'#documents">'.$this->get_translation('UsersDocsSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=name').'#documents">'.$this->get_translation('UsersDocsSortName').'</a>' ).'</small>';
+			echo '<small>'.( isset($_GET['sort']) && $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=date').'#pages">'.$this->get_translation('UsersDocsSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$user['user_name'].'&amp;sort=name').'#pages">'.$this->get_translation('UsersDocsSortName').'</a>' ).'</small>';
 			if (isset($pagination['text']))
 				echo " <span class=\"pagination\">".$pagination['text']."</span>\n";
 
@@ -234,7 +234,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 
 		// last user comments
 		$limit = 20;
-		echo '<h2>'.$this->get_translation('UsersComments').'</h2>'."\n";
+		echo '<h2 id="comments">'.$this->get_translation('UsersComments').'</h2>'."\n";
 		echo '<div class="indent"><small>'.$this->get_translation('UsersCommentsPosted').': '.$user['total_comments']."</small></div>\n";
 
 		$pagination = $this->pagination($user['total_comments'], $limit, 'c', 'profile='.$user['user_name'].'#comments');
