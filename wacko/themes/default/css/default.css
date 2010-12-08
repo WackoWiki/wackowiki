@@ -89,6 +89,17 @@ form input.submitinput {
 	color: #CC3333;
 	font-weight: bold;
 }
+.notice {
+	background-color: #FFFFEF;
+	border: 1px dotted #DDDDAA;
+	font-size: 0.75em;
+	height: 35px;
+	line-height: 35px;
+	margin: 0 0 10px;
+	overflow: hidden;
+	padding: 0 10px;
+}
+
 
 /* Debugging informations*/
 .time {
@@ -887,9 +898,33 @@ td.form_left, th.form_left {
 	padding-left: 20px;
 }
 
+.ul_letters {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ul_letters ul {
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+}
+.ul_letters li {
+	border-left: 1px dotted #AAAAAA;
+	float: left;
+	line-height: 1.2em;
+	margin: 0 0.5em 0 -0.5em;
+	padding: 0 0.5em;
+	white-space: nowrap;
+}
+
+.ul_letters li.active   {
+	background: #CCFFCC;
+
+}
+
 .revisions li:hover {background: #CCFFCC}
 /* #FCFCFC #FFCC99 #CCFFCC */
-
 
 /* settings */
 .lined td, .lined th {
