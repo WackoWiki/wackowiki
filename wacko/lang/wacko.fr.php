@@ -589,6 +589,9 @@ $wacko_translation = array(
 	'NextAcr' => 'Suivant',
 	'PrevAcr' => 'Précédent',
 
+	// filter
+	'Any'					=> 'Any',
+
 	//icons
 	'outericon' => '<img src="{theme}icons/web.gif" alt="Document externe" />',
 	'fileicon' => '<img src="{theme}icons/file.gif" alt="Fichier" />',

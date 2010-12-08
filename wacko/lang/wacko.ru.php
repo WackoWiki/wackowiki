@@ -646,6 +646,9 @@ $wacko_translation = array(
 	'NextAcr' => 'След',
 	'PrevAcr' => 'Пред',
 
+	// filter
+	'Any'					=> 'Any',
+
 	//icons
 	'outericon' => '<img src="{theme}icons/web.gif" alt="" />',
 	'fileicon' => '<img src="{theme}icons/file.gif" alt="" />',

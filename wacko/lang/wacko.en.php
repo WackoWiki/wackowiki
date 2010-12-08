@@ -69,7 +69,7 @@ $wacko_translation = array(
 	'HereLink' => 'here',
 
 	'DoesNotExists' => 'This page doesn\'t exist.',
-	'PromptCreate' => 'Maybe you want to <a href="%1">create</a> it?',
+	'PromptCreate' => 'Maybe you want to <b><a href="%1">create</a></b> it?',
 	'Revision' => 'This is an old revision of <a href="%1">%2</a> from %3.',
 	'ReadAccessDenied' => '<em>You aren\'t allowed to read this page.</em>',
 	'YouAreOwner' => 'You are the owner of this page.',
@@ -687,6 +687,9 @@ $wacko_translation = array(
 	'Prev' => 'Prev',
 	'NextAcr' => 'Next',
 	'PrevAcr' => 'Prev',
+
+	// filter
+	'Any'					=> 'Any',
 
 	//icons
 	'outericon' => '<img src="{theme}icons/web.gif" alt="www" />',
