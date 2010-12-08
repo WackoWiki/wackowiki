@@ -3197,8 +3197,12 @@ class Wacko
 
 	function load_user($user_name, $user_id = 0, $password = 0)
 	{
+		$fiels_default = 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs';
+		// TODO: add option for session to load only a subset of fields
+		$fields_session = 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.email_confirm, u.session_time, u.session_time, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs';
+
 		$user = $this->load_single(
-			"SELECT u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs ".
+			"SELECT {$fiels_default} ".
 			"FROM ".$this->config['user_table']." u ".
 				"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE ".( $user_id != 0
@@ -4180,11 +4184,11 @@ class Wacko
 		}
 		else
 		{
-			$user_id = $this->get_user_id_by_name('System');
-			$dbm = $this->get_user_bookmarks($user_id, $lang);
-			#$this->debug_print_r($dbm);
-			#$this->debug_print_r($this->get_translation($what.'_bookmarks', $lang, false));
-			return $dbm;
+			$user_id	= $this->get_user_id_by_name('System');
+			$default_bm	= $this->get_user_bookmarks($user_id, $lang);
+			#$this->debug_print_r($default_bm);
+
+			return $default_bm;
 		}
 	}
 
@@ -4293,9 +4297,9 @@ class Wacko
 		// initial bookmarks table construction
 		if ($set || !($bookmarks = $this->get_bookmarks()))
 		{
-			$userbm = $this->get_user_bookmarks($user['user_id']);
-			$bookmarks = ( $userbm
-				? $userbm
+			$user_bm = $this->get_user_bookmarks($user['user_id']);
+			$bookmarks = ( $user_bm
+				? $user_bm
 				: $this->get_default_bookmarks($user['lang']) );
 
 			if ($set == BM_DEFAULT)
@@ -4305,28 +4309,7 @@ class Wacko
 
 			// parsing bookmarks into link table
 			$bookmarks	= explode("\n", $bookmarks);
-			$bmlinks	= $bookmarks;
-			for ($i = 0; $i < count($bmlinks); $i++)
-			{
-				if (strpos($bmlinks[$i], '[') === 0 || strpos($bmlinks[$i], '(') === 0)
-				{
-					if (($space = strpos($bmlinks[$i], ' ')) == true)
-					{
-						$bmlinks[$i] = substr($bmlinks[$i], 0, $space);
-					}
-					else
-					{
-						$bmlinks[$i] = substr($bmlinks[$i], 0);
-					}
-
-					$bmlinks[$i] = trim($bmlinks[$i], '[( )]');
-					#$bmlinks[$i] = $this->npj_translit($bmlinks[$i]);
-				}
-				else
-				{
-					$bmlinks[$i] = '';
-				}
-			}
+			$bmlinks = $this->parsing_bookmarks($bookmarks);
 
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmarks']		= $bookmarks;
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bmlinks;
@@ -4358,28 +4341,7 @@ class Wacko
 			}
 
 			// parsing bookmarks into link table
-			$bmlinks = $bookmarks;
-			for ($i = 0; $i < count($bmlinks); $i++)
-			{
-				if (strpos($bmlinks[$i], '[') === 0 || strpos($bmlinks[$i], '(') === 0)
-				{
-					if (($space = strpos($bmlinks[$i], ' ')) == true)
-					{
-						$bmlinks[$i] = substr($bmlinks[$i], 0, $space);
-					}
-					else
-					{
-						$bmlinks[$i] = substr($bmlinks[$i], 0);
-					}
-
-					$bmlinks[$i] = trim($bmlinks[$i], '[( )]');
-					#$bmlinks[$i] = $this->npj_translit($bmlinks[$i]);
-				}
-				else
-				{
-					$bmlinks[$i] = '';
-				}
-			}
+			$bmlinks = $this->parsing_bookmarks($bookmarks);
 
 			$this->set_user_setting('bookmarks', implode("\n", $bookmarks));
 
@@ -4414,28 +4376,7 @@ class Wacko
 				"LIMIT 1");
 
 			// parsing bookmarks into link table
-			$bmlinks = $bookmarks;
-			for ($i = 0; $i < count($bmlinks); $i++)
-			{
-				if (strpos($bmlinks[$i], '[') === 0 || strpos($bmlinks[$i], '(') === 0)
-				{
-					if (($space = strpos($bmlinks[$i], ' ')) == true)
-					{
-						$bmlinks[$i] = substr($bmlinks[$i], 0, $space);
-					}
-					else
-					{
-						$bmlinks[$i] = substr($bmlinks[$i], 0);
-					}
-
-					$bmlinks[$i] = trim($bmlinks[$i], '[( )]');
-					#$bmlinks[$i] = $this->npj_translit($bmlinks[$i]);
-				}
-				else
-				{
-					$bmlinks[$i] = '';
-				}
-			}
+			$bmlinks = $this->parsing_bookmarks($bookmarks);
 
 			$this->set_user_setting('bookmarks', ( $bookmarks ? implode("\n", $bookmarks) : '' ));
 
@@ -4443,6 +4384,36 @@ class Wacko
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bmlinks;
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt']	= ( $bookmarks ? $this->format(implode("\n", $bookmarks), 'wacko') : '' );
 		}
+	}
+
+	function parsing_bookmarks($bookmarks)
+	{
+		// parsing bookmarks into link table
+		$bmlinks = $bookmarks;
+
+		for ($i = 0; $i < count($bmlinks); $i++)
+		{
+			if (strpos($bmlinks[$i], '[') === 0 || strpos($bmlinks[$i], '(') === 0)
+			{
+				if (($space = strpos($bmlinks[$i], ' ')) == true)
+				{
+					$bmlinks[$i] = substr($bmlinks[$i], 0, $space);
+				}
+				else
+				{
+					$bmlinks[$i] = substr($bmlinks[$i], 0);
+				}
+
+				$bmlinks[$i] = trim($bmlinks[$i], '[( )]');
+				#$bmlinks[$i] = $this->npj_translit($bmlinks[$i]);
+			}
+			else
+			{
+				$bmlinks[$i] = '';
+			}
+		}
+
+		return $bmlinks;
 	}
 
 	function get_bookmarks()
