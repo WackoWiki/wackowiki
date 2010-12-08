@@ -1,11 +1,20 @@
 <?php
 
+/*
+ Page Index Action
+ {{pageindex
+	 [max="50"] // optional - number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
+	 [letter="a"] // optional - only display pages whose name starts with this letter
+	 [title=1] // optional - takes title inplace of tag
+ }}
+ */
+
 $cnt		= '';
 $first_char	= '';
 $cur_char	= '';
 if (!isset($title))		$title = '';
 if (!isset($letter))	$letter = '';
-$_letter	= ( isset($_GET['letter']) ) ? $_GET['letter'] : '';
+$_letter	= ( isset($_GET['letter']) ) ? $_GET['letter'] : $letter;
 if(isset($_letter))		$_letter = strtoupper(substr($_letter, 0, 1));
 if (!isset($max))		$max = '';
 if ($max)				$limit = $max;
