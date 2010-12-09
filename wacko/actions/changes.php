@@ -9,12 +9,21 @@ if (!isset($noxml)) $noxml = 0;
 if ($user = $this->get_user())
 {
 	$usermax = $user['changes_count'];
-	if ($usermax == 0) $usermax = 10;
+
+	if ($usermax == 0)
+	{
+		$usermax = 10;
+	}
 }
 else
+{
 	$usermax = 50;
+}
+
 if (!isset($max) || $usermax < $max)
+{
 	$max = $usermax;
+}
 
 $admin	= ( $this->is_admin() ? true : false );
 
@@ -40,16 +49,23 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 
 	// pagination
 	if (isset($pagination['text']))
+	{
 		echo "<span class=\"pagination\">{$pagination['text']}</span>\n";
+	}
+
 	echo "<ul class=\"ul_list\">\n";
 	$access = true;
 
 	foreach ($pages as $i => $page)
 	{
 		if ($this->config['hide_locked'])
+		{
 			$access = $this->has_access('read', $page['page_id']);
+		}
 		else
+		{
 			$access = true;
+		}
 
 		if ($access && ($count < $max))
 		{
@@ -57,7 +73,11 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 
 			// day header
 			list($day, $time) = explode(' ', $page['modified']);
-			if (!isset($curday)) $curday = '';
+
+			if (!isset($curday))
+			{
+				$curday = '';
+			}
 
 			if ($day != $curday)
 			{
@@ -116,7 +136,9 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 
 	// pagination
 	if (isset($pagination['text']))
+	{
 		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+	}
 }
 else
 {

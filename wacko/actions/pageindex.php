@@ -3,9 +3,9 @@
 /*
  Page Index Action
  {{pageindex
-	 [max="50"] // optional - number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
-	 [letter="a"] // optional - only display pages whose name starts with this letter
-	 [title=1] // optional - takes title inplace of tag
+	[max="50"] // optional - number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
+	[letter="a"] // optional - only display pages whose name starts with this letter
+	[title=1] // optional - takes title inplace of tag
  }}
  */
 
@@ -16,6 +16,8 @@ if (!isset($title))		$title = '';
 if (!isset($letter))	$letter = '';
 $_letter	= ( isset($_GET['letter']) ) ? $_GET['letter'] : $letter;
 if(isset($_letter))		$_letter = strtoupper(substr($_letter, 0, 1));
+if (!isset($for)) $for = (isset($vars['for']) ? $this->unwrap_link($vars['for']) : '');
+if (!isset($for)) $for = $this->page['tag'];
 if (!isset($max))		$max = '';
 if ($max)				$limit = $max;
 else $limit	= 50;
@@ -24,6 +26,9 @@ $count = $this->load_single(
 	"SELECT COUNT(tag) AS n ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
+		($for
+			? "AND supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
+			: "").
 		($_letter
 			? "AND ".
 				($title == 1
@@ -40,6 +45,9 @@ if ($pages = $this->load_all(
 	"SELECT page_id, tag, title ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
+		($for
+			? "AND supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
+			: "").
 	"ORDER BY ".
 		($title == 1
 			? "title ASC "
@@ -83,6 +91,9 @@ if ($pages = $this->load_all(
 	"SELECT page_id, tag, title ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
+		($for
+			? "AND supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
+			: "").
 		($_letter
 			? "AND ".
 				($title == 1
