@@ -126,7 +126,9 @@ if ($pages = $this->load_all(
 				// check read privilege and current page tag
 				if ($page['tag'] == $root ||
 				($this->config['hide_locked'] && !$this->has_access('read', $page['page_id'])))
+				{
 					continue;
+				}
 
 				// check page level
 				$curlevel	= substr_count($page['tag'], '/');
@@ -160,12 +162,18 @@ if ($pages = $this->load_all(
 				// begin element
 				echo '<li>';
 				# if ($curlevel == $rootlevel && $curlevel < 2)	echo '<strong>';
-				if ($this->tag == $page['tag'])					echo '<em>';
+				if ($this->tag == $page['tag'])
+				{
+					echo '<em>';
+				}
 
 				echo $this->link('/'.$page['tag'], '', $page['title'], 0, 1, '', 0);
 
 				// end element
-				if ($this->tag == $page['tag'])					echo '</em>';
+				if ($this->tag == $page['tag'])
+				{
+					echo '</em>';
+				}
 				# if ($curlevel == $rootlevel && $curlevel < 2)	echo '</strong>';
 				echo "</li>\n";
 
@@ -177,17 +185,23 @@ if ($pages = $this->load_all(
 			}
 
 			// close all opened <ul> tags
-			if ($ul > 0) while ($ul > 0)
+			if ($ul > 0)
 			{
-				echo "</ul>\n";
-				$ul--;
+				while ($ul > 0)
+				{
+					echo "</ul>\n";
+					$ul--;
+				}
 			}
 
 			// end list
 			echo "</ul>\n";
 		}
 		// footer
-		if (!$nomark) echo "</div>\n";
+		if (!$nomark)
+		{
+			echo "</div>\n";
+		}
 	}
 	else
 	{
