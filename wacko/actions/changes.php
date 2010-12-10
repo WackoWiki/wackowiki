@@ -5,6 +5,7 @@ if (!isset($root)) $root = $this->page['tag'];
 if (!isset($date)) $date = isset($_GET['date']) ? $_GET['date'] : '';
 if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET['minor_edit']) ? $_GET['minor_edit'] : '';
 if (!isset($noxml)) $noxml = 0;
+if (!isset($title))		$title = '';
 
 if ($user = $this->get_user())
 {
@@ -121,7 +122,11 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 			// print entry
 			echo "<li ".$viewed."><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (".
 			$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".
-			$this->link( '/'.$page['tag'], '', $page['tag'] )." . . . . . . . . . . . . . . . . <small>".
+			($title == 1
+				? $this->link('/'.$page['tag'], '', $page['title'], 0, 1, '', 0)
+				: $this->link('/'.$page['tag'], '', $page['tag'])
+			).
+			" . . . . . . . . . . . . . . . . <small>".
 			($page['user']
 				? ($this->is_wiki_name($page['user'])
 					? $this->link('/'.$page['user'], '', $page['user'])

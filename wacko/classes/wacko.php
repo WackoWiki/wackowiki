@@ -27,7 +27,7 @@ class Wacko
 	var $search_engines			= array('bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider', );
 	var $_langlist				= null;
 	var $languages				= null;
-	var $translations				= null;
+	var $translations			= null;
 	var $wanted_cache			= null;
 	var $page_cache				= null;
 	var $_formatter_noautolinks	= null;
@@ -77,10 +77,15 @@ class Wacko
 	// DATABASE
 	function query($query, $debug = 0)
 	{
-		if ($debug) echo "(QUERY: $query)";
+		if ($debug)
+		{
+			echo "(QUERY: $query)";
+		}
 
 		if ($this->config['debug'] >= 2)
+		{
 			$start = $this->get_micro_time();
+		}
 
 		$result = query($this->dblink, $query, $this->config['debug']);
 
@@ -108,13 +113,19 @@ class Wacko
 		// retrieving from cache
 		if ($this->config['cache_sql'] && $docache)
 		{
-			if ($data = $this->cache->load_sql($query)) return $data;
+			if ($data = $this->cache->load_sql($query))
+			{
+				return $data;
+			}
 		}
 
 		// retrieving from db
 		if ($r = $this->query($query))
 		{
-			while ($row = fetch_assoc($r)) $data[] = $row;
+			while ($row = fetch_assoc($r))
+			{
+				$data[] = $row;
+			}
 
 			free_result($r);
 		}
@@ -126,9 +137,13 @@ class Wacko
 		}
 
 		if (isset($data))
+		{
 			return $data;
+		}
 		else
+		{
 			return null;
+		}
 	}
 
 	function load_single($query, $docache = 0)
@@ -362,6 +377,7 @@ class Wacko
 			$this->languages[$lang] = $wacko_language;
 			$ue = array();
 			$ue = @array_flip($wacko_language['unicode_entities']);
+
 			if (!isset($ue))
 			{
 				$ue = array();
@@ -380,6 +396,7 @@ class Wacko
 		}
 
 		$langs = $this->available_languages();
+
 		foreach ($langs as $lang)
 		{
 			$this->load_lang($lang);
@@ -391,6 +408,7 @@ class Wacko
 		if (!$this->_langlist)
 		{
 			$handle = opendir('lang');
+
 			while (false !== ($file = readdir($handle)))
 			{
 				if ($file != '.'
@@ -454,6 +472,7 @@ class Wacko
 		if ($lang != '')
 		{
 			$this->load_translation($lang);
+
 			if (isset($this->translations[$lang][$name]))
 			{
 				return (is_array($this->translations[$lang][$name]))
@@ -463,6 +482,7 @@ class Wacko
 						: $this->translations[$lang][$name]);
 			}
 		}
+
 		if (isset($this->resource[$name]))
 		{
 			return $this->resource[$name];
@@ -582,6 +602,7 @@ class Wacko
 		$pos = 0;
 		$len = strlen ($source);
 		$encoded_string = '';
+
 		while ($pos < $len)
 		{
 			$ascii_pos = ord (substr ($source, $pos, 1));
@@ -612,13 +633,16 @@ class Wacko
 
 			// process the string representing the letter to a unicode entity
 			$this_len = strlen ($this_letter);
+
 			if ($this_len > 1)
 			{
 				$this_pos = 0;
 				$decimal_code = 0;
+
 				while ($this_pos < $this_len)
 				{
 					$this_char_ord = ord (substr ($this_letter, $this_pos, 1));
+
 					if ($this_pos == 0)
 					{
 						$char_num = intval ($this_char_ord - $decrement[$this_len]);
@@ -736,6 +760,7 @@ class Wacko
 		{
 			$meta_keywords = $this->config['meta_keywords'];
 		}
+
 		// add assigned categories
 		if (isset($this->categories))
 		{
@@ -966,6 +991,7 @@ class Wacko
 			"WHERE from_page_id='".quote($this->dblink, $this->page['page_id'])."'"))
 		{
 			$cl = count($links);
+
 			if (!isset($cl))
 			{
 				$cl = 0;
@@ -978,15 +1004,16 @@ class Wacko
 		}
 
 		$user		= $this->get_user();
-		$userbm		= $this->get_user_bookmarks($user['user_id']);
+		$user_bm		= $this->get_user_bookmarks($user['user_id']);
+
 		if (!isset($cl))
 		{
 			$cl = 0;
 		}
 		$pages[$cl]	= $user['user_name'];
 		$bookm		= $this->get_default_bookmarks($user['lang'], 'site')."\n".
-					($userbm
-						? $userbm
+					($user_bm
+						? $user_bm
 						: $this->get_default_bookmarks($user['lang']));
 		$bookmarks	= explode("\n", $bookm);
 
@@ -996,6 +1023,7 @@ class Wacko
 			{
 				$cl = 0;
 			}
+
 			if (preg_match('/^[\(\[]/', (isset($bookmarks[$i])) ? ($bookmarks[$i]) : '' ))
 			{
 				$pages[$cl+$i] = preg_replace('/^(.*?)\s.*$/', '\\1', preg_replace('/[\[\]\(\)]/', '', $bookmarks[$i]));
@@ -1032,6 +1060,7 @@ class Wacko
 		}
 
 		$notexists = @array_values(@array_diff($spages, $exists));
+
 		if (!isset($acl))
 		{
 			$acl = '';
@@ -1134,7 +1163,7 @@ class Wacko
 	function load_pages_linking_to($tag, $for = '')
 	{
 		return $this->load_all(
-			"SELECT p.page_id, p.tag AS tag ".
+			"SELECT p.page_id, p.tag AS tag, p.title ".
 			"FROM ".$this->config['table_prefix']."link l ".
 				"INNER JOIN ".$this->config['table_prefix']."page p ON (p.page_id = l.from_page_id) ".
 			"WHERE ".($for
@@ -1150,23 +1179,23 @@ class Wacko
 
 		// count pages
 		$count_pages = $this->load_all(
-		"SELECT p.page_id, u.user_name as user ".
-		"FROM ".$this->config['table_prefix']."page p ".
-			"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-		"WHERE p.comment_on_id = '0' ".
-			($from
-				? "AND p.modified <= '".quote($this->dblink, $from)." 23:59:59'"
-				: "").
-			($for
-				? "AND p.supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
-				: "").
-			($minor_edit
-				? "AND p.minor_edit = '0' "
-				: "").
-			($default_pages == false
-				? "AND u.account_type = '0' "
-				: "")
-		);
+			"SELECT p.page_id, u.user_name as user ".
+			"FROM ".$this->config['table_prefix']."page p ".
+				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+			"WHERE p.comment_on_id = '0' ".
+				($from
+					? "AND p.modified <= '".quote($this->dblink, $from)." 23:59:59'"
+					: "").
+				($for
+					? "AND p.supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
+					: "").
+				($minor_edit
+					? "AND p.minor_edit = '0' "
+					: "").
+				($default_pages == false
+					? "AND u.account_type = '0' "
+					: "")
+			);
 
 		$count		= count($count_pages);
 		$pagination = $this->pagination($count, $limit);
@@ -1276,10 +1305,6 @@ class Wacko
 	function load_recently_deleted($limit = 1000, $cache = 1)
 	{
 		$meta = 'r.page_id, r.owner_id, r.user_id, r.tag, r.supertag, r.created, r.modified, r.edit_note, r.minor_edit, r.latest, r.handler, r.comment_on_id, r.lang, r.title, r.keywords, r.description';
-
-		#$_metaArr	= explode(',', $this->pages_meta);
-		#foreach($_metaArr as $_metaStr) $meta[] = $this->config['table_prefix'].'revision.'.trim($_metaStr);
-		#$meta		= implode(', ', $meta);
 
 		return $this->load_all(
 			"SELECT DISTINCT $meta, MAX(r.modified) AS date ".
@@ -1448,6 +1473,7 @@ class Wacko
 						$lang = $this->userlang;
 					}
 				}
+
 				if (!$lang)
 				{
 					$lang = $this->config['language'];
@@ -2053,6 +2079,7 @@ class Wacko
 	{
 		# $text = $this->npj_translit($text, TRAN_DONTCHANGE);
 		$text = str_replace('_', "'", $text);
+
 		if ($this->config['urls_underscores'] == 1)
 		{
 			$text = preg_replace('/('.$this->language['ALPHANUM'].')('.$this->language['UPPERNUM'].')/', '\\1¶\\2', $text);
@@ -2151,6 +2178,7 @@ class Wacko
 		{
 			// external image
 			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
+
 			if ($text == $tag)
 			{
 				return '<img src="'.str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)).'" '.($text ? 'alt="'.$text.'" title="'.$text.'"' : '').' />';
@@ -2233,6 +2261,7 @@ class Wacko
 
 					$imlink	= false;
 					$tpl	= 'localfile';
+
 					if ($desc['picture_w'] && !$noimg)
 					{
 						if (!$text)
@@ -2275,6 +2304,7 @@ class Wacko
 
 					$imlink	= false;
 					$tpl	= 'localfile';
+
 					if ($desc['picture_w'] && !$noimg)
 					{
 						if (!$text)
@@ -2343,6 +2373,7 @@ class Wacko
 						}
 
 						$tpl	= 'localfile';
+
 						if ($desc['picture_w'] != 0 && !$noimg)
 						{
 							if (!$text)
@@ -2380,6 +2411,7 @@ class Wacko
 		{
 			// it`s a Tiki link!
 			$tag	= '/'.$matches[1].'/'.$matches[2];
+
 			if (!$text)
 			{
 				$text = $this->add_spaces($tag);
@@ -2418,6 +2450,7 @@ class Wacko
 			if (preg_match( $regex_handlers, '/'.$ptag.'/', $match ))
 			{
 				$handler	= $match[2];
+
 				if (!isset($_ptag))
 				{
 					$_ptag = '';
@@ -2703,6 +2736,7 @@ class Wacko
 	function add_spaces($text)
 	{
 		$show = 1;
+
 		if ($user = $this->get_user())
 		{
 			$show = (isset($user['show_spaces']) ? $user['show_spaces'] : null);
@@ -2781,6 +2815,7 @@ class Wacko
 		$this->REGEX_WACKO_FUNCTIONS = '/\b('.STANDARD_HANDLERS.')\b/i';
 
 		echo $this->REGEX_WACKO_FUNCTIONS;
+
 		if (preg_match( $this->REGEX_WACKO_FUNCTIONS, $_data, $match ))
 		{
 			return $message = "As the part of the address you used the reserved word, do not make thus.";
@@ -2884,6 +2919,7 @@ class Wacko
 	function get_inter_wiki_url($name, $tag)
 	{
 		$url = (isset($this->inter_wiki[strtolower($name)]) ? $this->inter_wiki[strtolower($name)] : '');
+
 		if ($url)
 		{
 			// xhtmlisation
@@ -3046,6 +3082,7 @@ class Wacko
 			{
 				$file_name = strtolower($class_name);
 			}
+
 			if ($class_dir == '')
 			{
 				$class_dir = $this->config['classes_path'];
@@ -3151,12 +3188,19 @@ class Wacko
 		// substitution positions as keys, and corresponding table positions
 		// as array values
 		$p = array();
+
 		foreach ($name as $pos => &$char)
 		{
 			if (isset($p[$pos]) === false)
 			{
-				if		(false !== $sub = strpos($table['lat'], $char))	$p[$pos] = $sub;
-				else if	(false !== $sub = strpos($table['cyr'], $char))	$p[$pos] = $sub;
+				if (false !== $sub = strpos($table['lat'], $char))
+				{
+					$p[$pos] = $sub;
+				}
+				else if (false !== $sub = strpos($table['cyr'], $char))
+				{
+					$p[$pos] = $sub;
+				}
 			}
 		}
 
@@ -3512,7 +3556,10 @@ class Wacko
 
 	function get_user_id()
 	{
-		if ($user = $this->get_user()) $user_id = (isset($user['user_id']) ? $user['user_id'] : null);
+		if ($user = $this->get_user())
+		{
+			$user_id = (isset($user['user_id']) ? $user['user_id'] : null);
+		}
 
 		if (isset($user_id))
 		{
@@ -3569,6 +3616,7 @@ class Wacko
 			"FROM {$this->config['table_prefix']}page ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id <> '0'");
+
 		return (int)$count['n'];
 	}
 
@@ -3580,6 +3628,7 @@ class Wacko
 			"FROM {$this->config['table_prefix']}page ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'");
+
 		return (int)$count['n'];
 	}
 
@@ -3591,6 +3640,7 @@ class Wacko
 			"FROM {$this->config['table_prefix']}revision ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0'");
+
 		return (int)$count['n'];
 	}
 
@@ -3618,6 +3668,7 @@ class Wacko
 				"FROM {$this->config['table_prefix']}page ".
 				"WHERE tag = '".quote($this->dblink, $tag)."' ".
 				"LIMIT 1");
+
 			return $count['comments'];
 		}
 		return false;
@@ -3786,6 +3837,7 @@ class Wacko
 			}
 		}
 		$tag = $this->get_page_tag_by_id($page_id);
+
 		if ($page = $this->load_page($tag, $time, LOAD_CACHE, LOAD_META))
 		{
 			return $page['owner_id'];
@@ -3882,6 +3934,7 @@ class Wacko
 					// First look for parent ACL, so that clusters/subpages
 					// work correctly.
 					$tag = $this->get_page_tag_by_id($page_id);
+
 					if ( strstr($tag, '/') )
 					{
 						$parent = preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $tag);
@@ -4047,7 +4100,9 @@ class Wacko
 		}
 
 		foreach ($this->config['aliases'] as $key => $val)
+		{
 			$aliases[strtolower($key)] = $val;
+		}
 
 		do
 		{
@@ -4058,6 +4113,7 @@ class Wacko
 			foreach ($lines as $line)
 			{
 				$linel = $line;
+
 				// check for inversion character "!"
 				if (preg_match('/^\!(.*)$/', $line, $matches))
 				{
@@ -4968,8 +5024,8 @@ class Wacko
 
 		$len	= strlen($this->post_wacko_maxp);
 		$link	= '<a href="#'.$matches[2].'">'.
-		str_pad($this->post_wacko_toc_hash[$matches[2]][66], $len, '0', STR_PAD_LEFT).
-		'</a>';
+			str_pad($this->post_wacko_toc_hash[$matches[2]][66], $len, '0', STR_PAD_LEFT).
+			'</a>';
 
 		foreach ($this->paragrafica_patches[$this->post_wacko_action['p']] as $v)
 		{
@@ -5173,6 +5229,7 @@ class Wacko
 
 			// saving original
 			$this->save_revision($page);
+
 			// saving updated for the current user
 			$page['modified']	= date(SQL_DATE_FORMAT);
 			$page['user']		= $this->get_user_name();
@@ -5209,7 +5266,10 @@ class Wacko
 
 	function remove_revisions($tag, $cluster = false)
 	{
-		if (!$tag) return false;
+		if (!$tag)
+		{
+			return false;
+		}
 
 		return $this->query(
 			"DELETE FROM {$this->config['table_prefix']}revision ".
@@ -5218,14 +5278,20 @@ class Wacko
 
 	function remove_comments($tag, $cluster = false, $dontkeep = 0)
 	{
-		if (!$tag) return false;
+		if (!$tag)
+		{
+			return false;
+		}
 
 		if ($comments = $this->load_all(
 		"SELECT a.tag FROM ".$this->config['table_prefix']."page a ".
 			"INNER JOIN ".$this->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 		"WHERE b.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' "))
 		{
-			foreach ($comments as $comment) $this->remove_page($comment['tag'], '', $dontkeep);
+			foreach ($comments as $comment)
+			{
+				$this->remove_page($comment['tag'], '', $dontkeep);
+			}
 		}
 
 		// reset comments count
@@ -5389,6 +5455,7 @@ class Wacko
 
 		$l = strlen($login);
 		$p = strlen($pwd);
+
 		if ($l == 0 || $p == 0)
 		{
 			$r = 0;
@@ -5481,9 +5548,11 @@ class Wacko
 		while ($uc == 0 || $lc == 0 || $di == 0 || $sy == 0)
 		{
 			$password = '';
+
 			for ($i = 0; $i < $length; $i++)
 			{
-				$k = rand(0, $pwd_complexity);  //randomly choose what's next
+				$k = rand(0, $pwd_complexity); //randomly choose what's next
+
 				if ($k == 0)
 				{
 					//uppercase
@@ -5825,11 +5894,13 @@ class Wacko
 			$count = count($norm) -1;
 
 			$x = 0;
+
 			while ($size >= $factor && $x < $count)
 			{
 				$size /= $factor;
 				$x++;
 			}
+
 			// TODO: $this->get_translation($norm[$x])
 			if ($rounded === true)
 			{
