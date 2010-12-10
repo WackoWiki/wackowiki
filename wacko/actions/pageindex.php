@@ -3,7 +3,8 @@
 /*
  Page Index Action
  {{pageindex
-	[max="50"] // optional - number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
+	[for="Cluster"] // optional - show page index only for a certain cluster
+	[max=50] // optional - number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
 	[letter="a"] // optional - only display pages whose name starts with this letter
 	[title=1] // optional - takes title inplace of tag
  }}

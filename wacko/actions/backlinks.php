@@ -1,12 +1,17 @@
 <?php
 
-if (!isset($page)) $page = '';
-if (!isset($nomark)) $nomark = '';
+if (!isset($page))		$page = '';
+if (!isset($nomark))	$nomark = '';
+if (!isset($title))		$title = '';
 
 if ($page)
+{
 	$tag = $this->unwrap_link($page);
+}
 else
+{
 	$tag = $this->tag;
+}
 
 if ($pages = $this->load_pages_linking_to($tag))
 {
@@ -20,15 +25,29 @@ if ($pages = $this->load_pages_linking_to($tag))
 		if ($page['tag'])
 		{
 			if ($this->config['hide_locked'])
-				$access = $this->has_access('read',$page['page_id']);
+			{
+				$access = $this->has_access('read', $page['page_id']);
+			}
 			else
+			{
 				$access = true;
+			}
 
 			if ($access)
 			{
-				$lnk = $this->link('/'.$page['tag']."#".$this->npj_translit($tag), '', $page['tag']);
-				if (strpos($lnk, 'span class="missingpage"') === false)
-				echo($lnk."<br />\n");
+				if ($title == 1)
+				{
+					$_link = $this->link('/'.$page['tag']."#".$this->npj_translit($tag), '', $page['title']);
+				}
+				else
+				{
+					$_link = $this->link('/'.$page['tag']."#".$this->npj_translit($tag), '', $page['tag']);
+				}
+
+				if (strpos($_link, 'span class="missingpage"') === false)
+				{
+					echo($_link."<br />\n");
+				}
 			}
 		}
 	}
