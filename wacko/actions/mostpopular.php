@@ -15,25 +15,27 @@
 
 // TODO: should also work with parameter 'page', but didn't
 
-if (!isset($for)) $for = '';
-if (!isset($page)) $page = '';
-if (!isset($nomark)) $nomark = '';
-if (!isset($max)) $max = '';
-if (!isset($title)) $title = '';
+if (!isset($for))		$for = '';
+if (!isset($page))		$page = '';
+if (!isset($nomark))	$nomark = '';
+if (!isset($max))		$max = '';
+if (!isset($legend))	$legend = '';
+if (!isset($title))		$title = '';
 if (!isset($dontrecurse)) $dontrecurse = false;
 
-if (!$max)  $max = 25;
-if ($max > 500) $max = 500;
+if (!$max)				$max = 25;
+if ($max > 500)			$max = 500;
 
 // check for first param (for what mostpopular is built)
-if ($for) $page = $for;
+if ($for)				$page = $for;
+
 if ($page)
 {
 	$page		= $this->unwrap_link($page);
 	$ppage		= '/'.$page;
 	$context	= $page;
 	$_page		= $this->load_page($page);
-	if (!$title) $title = $page;
+	if (!$legend) $legend = $page;
 	$link		= $this->href('', $_page['tag']);
 }
 else
@@ -47,12 +49,16 @@ else
 
 if(!$nomark)
 {
-	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('MostPopularPages').": ".$this->link($ppage, '', $title)."</span></p>\n");
+	echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('MostPopularPages').": ".$this->link($ppage, '', $legend)."</span></p>\n";
 }
 
 if(!$for)
 {
-	$pages = $this->load_all("SELECT page_id, tag, hits FROM ".$this->config['table_prefix']."page ORDER BY hits DESC LIMIT ".$max);
+	$pages = $this->load_all(
+		"SELECT page_id, tag, title, hits ".
+		"FROM ".$this->config['table_prefix']."page ".
+		"ORDER BY hits DESC ".
+		"LIMIT ".$max);
 }
 else
 {
@@ -61,35 +67,70 @@ else
 	if(!$dontrecurse || strtolower($dontrecurse) == 'false')
 	{
 		// We want to recurse and include all the sub pages of sub pages (and so on) in the listing
-		$pages = $this->load_all("SELECT DISTINCT page_id, tag, hits FROM ".$this->config['table_prefix']."page, ".$this->config['table_prefix']."link WHERE tag <> '".$for."' AND tag = to_tag AND INSTR(from_tag, '".$for."') = 1 AND INSTR(to_tag, '".$for."') = 1 ORDER BY hits DESC LIMIT ".$max);
+		$pages = $this->load_all(
+			"SELECT DISTINCT page_id, tag, title, hits ".
+			"FROM ".$this->config['table_prefix']."page, ".$this->config['table_prefix']."link ".
+			"WHERE tag <> '".$for."' ".
+				"AND tag = to_tag ".
+				"AND INSTR(from_tag, '".$for."') = 1 ".
+				"AND INSTR(to_tag, '".$for."') = 1 ".
+			"ORDER BY hits DESC ".
+			"LIMIT ".$max);
 	}
 	else
 	{
 		// The only pages we want to display are those directly under the selected page, not their kids and grandkids
-		$pages = $this->load_all("SELECT DISTINCT page_id, tag, hits FROM ".$this->config['table_prefix']."page, ".$this->config['table_prefix']."link WHERE tag <> '".$for."' AND tag = to_tag AND from_tag = '".$for."' AND INSTR(to_tag, '".$for."') = 1 ORDER BY hits DESC LIMIT ".$max);
+		$pages = $this->load_all(
+			"SELECT DISTINCT page_id, tag, title, hits ".
+			"FROM ".$this->config['table_prefix']."page, ".$this->config['table_prefix']."link ".
+			"WHERE tag <> '".$for."' ".
+				"AND tag = to_tag ".
+				"AND from_tag = '".$for."' ".
+				"AND INSTR(to_tag, '".$for."') = 1 ".
+			"ORDER BY hits DESC ".
+			"LIMIT ".$max);
 	}
 }
 
 $num = 0;
 
-print("<table>");
+echo "<table>";
+
 foreach ($pages as $page)
 {
 	if ($num < $max)
 	{
-		if ($this->config['hide_locked']) $access = $this->has_access('read', $page['page_id']);
-		else $access = true;
+		if ($this->config['hide_locked'])
+		{
+			$access = $this->has_access('read', $page['page_id']);
+		}
+		else
+		{
+			$access = true;
+		}
+
 		if ($access)
 		{
 			// print entry
 			$num++;
-			print("<tr><td>&nbsp;&nbsp;".$num.".&nbsp;".$this->link('/'.$page['tag'], '', $page['tag'])."</td><td>".
-			$this->get_translation('Shown')."</td><td>".
-			$page['hits']."</td></tr>\n");
+
+			if ($title == 1)
+			{
+				$_link = $this->link('/'.$page['tag'], '', $page['title']);
+			}
+			else
+			{
+				$_link = $this->link('/'.$page['tag'], '', $page['tag']);
+			}
+
+			echo "<tr><td>&nbsp;&nbsp;".$num.".&nbsp;".$_link."</td><td>".
+				$this->get_translation('Shown')."</td><td>".
+				$page['hits']."</td></tr>\n";
 		}
 	}
 }
-print("</table>");
+
+echo "</table>\n";
 
 if(!$nomark)
 {
