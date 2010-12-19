@@ -26,7 +26,7 @@ else
 	if (isset($_GET['time'])) $time = $_GET['time'];
 	else $time = '';
 
-	if (!$inc_page = $this->load_page($page, $time))
+	if (!$inc_page = $this->load_page($page, 0, $time))
 	{
 		echo "<em> ".$this->get_translation('SourcePageDoesntExist')."(".$this->link('/'.$page).")</em>";
 	}

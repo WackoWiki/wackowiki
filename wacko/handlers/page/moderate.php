@@ -368,7 +368,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				foreach ($set as $id)
 				{
-					$page = $this->load_page($this->get_tag_by_id($id), '', LOAD_NOCACHE, LOAD_META);
+					$page = $this->load_page($this->get_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
 					moderate_delete_page($this, $page['tag']);
 					$this->log(1, str_replace('%2', $page['user_id'], str_replace('%1', $page['tag'], $this->get_translation('LogRemovedPage', $this->config['language']))));
 				}
@@ -486,7 +486,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			foreach ($set as $id)
 			{
-				$page = $this->load_page($this->get_tag_by_id($id), '', LOAD_NOCACHE, LOAD_META);
+				$page = $this->load_page($this->get_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
 				$this->log(2, str_replace('%1', $page['tag'].' '.$page['title'], $this->get_translation('LogTopicLocked', $this->config['language'])));
 				// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 				$this->save_acl($id, 'comment', '!*');
@@ -500,7 +500,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			foreach ($set as $id)
 			{
-				$page = $this->load_page($this->get_tag_by_id($id), '', LOAD_NOCACHE, LOAD_META);
+				$page = $this->load_page($this->get_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
 				$this->log(2, str_replace('%1', $page['tag'].' '.$page['title'], $this->get_translation('LogTopicUnlocked', $this->config['language'])));
 				$this->save_acl($id, 'comment', '*');
 			}
@@ -512,7 +512,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// make counter query
 		$sql = "SELECT COUNT(p.tag) AS n ".
 			"FROM {$this->config['table_prefix']}page AS p, ".
-				"{$this->config['table_prefix']}acl AS a ".
+				#"{$this->config['table_prefix']}acl AS a ".
 			"WHERE p.page_id = a.page_id ".
 				#"AND a.`create` = '' ".
 				"AND p.tag LIKE '{$this->tag}/%'";
@@ -526,7 +526,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			"FROM {$this->config['table_prefix']}page AS p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id), ".
-				"{$this->config['table_prefix']}acl AS a ".
+				#"{$this->config['table_prefix']}acl AS a ".
 			"WHERE p.page_id = a.page_id ".
 				#"AND a.`create` = '' ".
 				"AND p.tag LIKE '{$this->tag}/%' ".
@@ -571,7 +571,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$sections = $this->load_all(
 				"SELECT p.tag, p.title ".
 				"FROM {$this->config['table_prefix']}page AS p, ".
-					"{$this->config['table_prefix']}acl AS a ".
+					#"{$this->config['table_prefix']}acl AS a ".
 				"WHERE p.page_id = a.page_id ".
 					#"AND a.`comment` = '' ".
 					"AND p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
@@ -838,7 +838,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				foreach ($set as $id)
 				{
-					$page = $this->load_page($this->get_tag_by_id($id), '', LOAD_NOCACHE, LOAD_META);
+					$page = $this->load_page($this->get_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
 					moderate_delete_page($this, $page['tag']);
 					$this->log(1, str_replace('%3', $this->get_time_string_formatted($page['created']), str_replace('%2', $page['user'], str_replace('%1', $page['comment_on'].' '.$this->get_page_title($page['comment_on']), $this->get_translation('LogRemovedComment', $this->config['language'])))));
 				}
@@ -1050,7 +1050,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$sections = $this->load_all(
 					"SELECT p.tag, p.title ".
 					"FROM {$this->config['table_prefix']}page AS p, ".
-						"{$this->config['table_prefix']}acl AS a ".
+						#"{$this->config['table_prefix']}acl AS a ".
 					"WHERE p.page_id = a.page_id ".
 						#"AND a.`comment` = '' ".
 						"AND p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".

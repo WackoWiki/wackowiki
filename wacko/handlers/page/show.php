@@ -50,7 +50,7 @@ if ($this->has_access('read'))
 		// if (function_exists('virtual')) header("HTTP/1.0 404 Not Found");
 		header("HTTP/1.0 404 Not Found");
 
-		echo '<br /><div class="info">'.
+		echo '<br /><div class="notice">'.
 			$this->get_translation('DoesNotExists') ." ".( $this->has_access('write') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
 			'</div>';
 	}
@@ -99,7 +99,7 @@ if ($this->has_access('read'))
 				"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."'");
 		}
 
-		$this->set_language($this->pagelang);
+		$this->set_language($this->page_lang);
 
 		// recompile if necessary
 		if (($this->page['body_r'] == '') ||
@@ -130,7 +130,7 @@ if ($this->has_access('read'))
 		$data = $this->numerate_toc( $data ); //  numerate toc if needed
 		echo $data;
 
-		$this->set_language($this->userlang);
+		$this->set_language($this->user_lang);
 		?>
 		<script type="text/javascript">
 			var dbclick = "page";

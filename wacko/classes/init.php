@@ -673,7 +673,7 @@ class Init
 					echo "<li>User language set: ".(isset($user['lang']) ? 'true' : 'false')."</li>\n";
 					echo "<li>User language value: ".(isset($user['lang']) ? $user['lang'] : '')."</li>\n";
 					echo "<li>Config language: ".$this->config['language']."</li>\n";
-					echo "<li>User selected language: ".(isset($this->engine->userlang) ? $this->engine->userlang : '')."</li>\n";
+					echo "<li>User selected language: ".(isset($this->engine->user_lang) ? $this->engine->user_lang : '')."</li>\n";
 					echo "</ul>\n";
 				}
 
