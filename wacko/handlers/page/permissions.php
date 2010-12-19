@@ -47,12 +47,12 @@ if ($this->user_is_owner() || $this->is_admin())
 					$newowner_id = $this->get_user_id_by_name($newowner);
 					$this->set_page_owner($this->get_page_id(), $newowner_id);
 
-					$User = $this->load_single(
+					$user = $this->load_single(
 							"SELECT email, email_confirm ".
 							"FROM {$this->config['user_table']} ".
 							"WHERE user_name = '".quote($this->dblink, $newowner)."'");
 
-					if ($User['email_confirm'] == '')
+					if ($user['email_confirm'] == '')
 					{
 						$subject = $this->config['wacko_name'].'. '.$this->get_translation('NewPageOwnership');
 						$email  = $this->get_translation('EmailHello').$newowner.".\n\n";
@@ -61,7 +61,7 @@ if ($this->user_is_owner() || $this->is_admin())
 						$email .= $this->get_translation('PageOwnershipInfo')."\n";
 						//$email .= $this->href('', '', '')."\n\n";
 						$email .= $this->get_translation('EmailGoodbye')."\n".$this->config['wacko_name']."\n".$this->config['base_url'];
-						$this->send_mail($User['email'], $subject, $email);
+						$this->send_mail($user['email'], $subject, $email);
 					}
 
 					// log event
@@ -80,8 +80,12 @@ if ($this->user_is_owner() || $this->is_admin())
 
 			// Change permissions for all comments on this page
 			$comments = $this->load_all(
-					"SELECT page_id FROM ".$this->config['table_prefix']."page WHERE comment_on_id = '".$this->get_page_id()."' AND owner_id='".quote($this->dblink, $this->get_user_id())."'");
-			foreach ($comments as $num=>$page)
+					"SELECT page_id ".
+					"FROM ".$this->config['table_prefix']."page ".
+					"WHERE comment_on_id = '".$this->get_page_id()."' ".
+						"AND owner_id='".quote($this->dblink, $this->get_user_id())."'");
+
+			foreach ($comments as $num => $page)
 			{
 				$this->save_acl($page['page_id'], 'read', $_POST['read_acl']);
 				$this->save_acl($page['page_id'], 'write', $_POST['write_acl']);
@@ -89,7 +93,10 @@ if ($this->user_is_owner() || $this->is_admin())
 
 				// change owner?
 				if ($newowner = $_POST['newowner'])
-				$newowner_id = $this->get_user_id_by_name($newowner);
+				{
+					$newowner_id = $this->get_user_id_by_name($newowner);
+				}
+
 				$this->set_page_owner($page['page_id'], $newowner_id);
 			}
 		}
@@ -138,21 +145,21 @@ if ($this->user_is_owner() || $this->is_admin())
 			{
 				$message .= $this->get_translation('ACLGaveOwnership').$newowner;
 
-				$User = $this->load_single(
+				$user = $this->load_single(
 					"SELECT email, email_confirm ".
 					"FROM {$this->config['user_table']} ".
 					"WHERE user_name = '".quote($newowner)."'");
 
-				if ($User['email_confirm'] == '')
+				if ($user['email_confirm'] == '')
 				{
 					$subject = $this->config['wacko_name'].'. '.$this->get_translation('NewPageOwnership');
-					$email  = $this->GetRes('EmailHello').$newowner.".\n\n";
+					$email  = $this->get_translation('EmailHello').$newowner.".\n\n";
 					$email .= str_replace('%2', $this->config['wacko_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
 					$email .= $ownedpages."\n";
 					$email .= $this->get_translation('PageOwnershipInfo')."\n";
 					//$email .= $this->href('', '', '')."\n\n";
 					$email .= $this->get_translation('EmailGoodbye')."\n".$this->config['wacko_name']."\n".$this->config['base_url'];
-					$this->send_mail($User['email'], $subject, $email);
+					$this->send_mail($user['email'], $subject, $email);
 				}
 			}
 		}

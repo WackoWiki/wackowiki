@@ -13,7 +13,7 @@ if ($page)
 		header("HTTP/1.0 301 Moved Permanently");
 	}
 
-	if ($this->load_page($page, '', LOAD_CACHE, LOAD_META))
+	if ($this->load_page($page, 0, '', LOAD_CACHE, LOAD_META))
 	{
 		if ($user = $this->get_user())
 		{

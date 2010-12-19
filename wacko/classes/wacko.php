@@ -18,7 +18,7 @@ class Wacko
 	var $acl_cache				= array();
 	var $context				= array();
 	var $current_context		= 0;
-	var $pages_meta				= "page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description";
+	var $pages_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description';
 	var $first_inclusion		= array();	// for backlinks
 	var $format_safe			= true;		//for htmlspecialchars() in pre_link
 	var $unicode_entities		= array();	//common unicode array
@@ -195,16 +195,17 @@ class Wacko
 			return $this->page['page_id'];
 		}
 		else
-		//Soon we'll need to have page ID when saving a new page to continue working with $ID instead of $tag
+		//Soon we'll need to have page_id when saving a new page to continue working with $page_id instead of $tag
 		{
 			// Returns Array ( [id] => Value )
-			$get_page_ID = $this->load_single(
+			$get_page_id = $this->load_single(
 				"SELECT page_id ".
 				"FROM ".$this->config['table_prefix']."page ".
-				"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
+				"WHERE tag = '".quote($this->dblink, $tag)."' ".
+				"LIMIT 1");
 
-			// Get the_ID value
-			$new_page_id = $get_page_ID['page_id'];
+			// Get page_ID value
+			$new_page_id = $get_page_id['page_id'];
 
 			return $new_page_id;
 		}
@@ -222,7 +223,7 @@ class Wacko
 		}
 		else
 		{
-			$page		= $this->load_page($unwrapped_tag, '', LOAD_CACHE, LOAD_META);
+			$page		= $this->load_page($unwrapped_tag, 0, '', LOAD_CACHE, LOAD_META);
 			$page_id	= $page['page_id'];
 
 			if (!$page_id) return false;
@@ -435,23 +436,23 @@ class Wacko
 		{
 			if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
 			{
-				$this->userlang = $lang = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
+				$this->user_lang = $lang = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
 
 				// Check whether we have language files for this language
-				if(!in_array($this->userlang, $this->available_languages()))
+				if(!in_array($this->user_lang, $this->available_languages()))
 				{
 					// The HTTP_ACCEPT_LANGUAGE language doesn't have any language files so use the admin set language instead
-					$this->userlang = $lang = $this->config['language'];
+					$this->user_lang = $lang = $this->config['language'];
 				}
 			}
 			else
 			{
-				$this->userlang = $lang = $this->config['language'];
+				$this->user_lang = $lang = $this->config['language'];
 			}
 		}
 		else if (!$lang)
 		{
-			$this->userlang = $lang = $this->config['language'];
+			$this->user_lang = $lang = $this->config['language'];
 		}
 
 		return $lang;
@@ -464,9 +465,9 @@ class Wacko
 			return $this->resource[$name];
 		}
 
-		if (!$lang && (isset($this->userlang) && $this->userlang != $this->pagelang))
+		if (!$lang && (isset($this->user_lang) && $this->user_lang != $this->page_lang))
 		{
-			$lang = $this->userlang;
+			$lang = $this->user_lang;
 		}
 
 		if ($lang != '')
@@ -510,12 +511,12 @@ class Wacko
 			}
 			else
 			{
-				$lang = $this->userlang;
+				$lang = $this->user_lang;
 			}
 		}
 		else
 		{
-			$lang = (isset($this->pagelang) ? $this->pagelang : null);
+			$lang = (isset($this->page_lang) ? $this->page_lang : null);
 		}
 
 		return $lang;
@@ -528,7 +529,7 @@ class Wacko
 			return false;
 		}
 
-		$this->pagelang = $lang;
+		$this->page_lang = $lang;
 		$this->set_language($lang);
 		return true;
 	}
@@ -537,6 +538,7 @@ class Wacko
 	{
 		$lang = $this->determine_lang();
 		$this->load_translation($lang);
+
 		if (isset($this->languages[$lang]['charset']))
 		{
 			return $this->languages[$lang]['charset'];
@@ -577,6 +579,7 @@ class Wacko
 	{
 		$t1 = $this->utf8_to_unicode_entities($string);
 		$t2 = @strtr($t1, $this->unicode_entities);
+
 		if (!preg_match('/\&\#[0-9]+\;/', $t2))
 		{
 			$string = $t2;
@@ -606,6 +609,7 @@ class Wacko
 		while ($pos < $len)
 		{
 			$ascii_pos = ord (substr ($source, $pos, 1));
+
 			if (($ascii_pos >= 240) && ($ascii_pos <= 255))
 			{
 				// 4 chars representing one unicode character
@@ -688,7 +692,7 @@ class Wacko
 
 		if (!$donotload)
 		{
-			if ($page = $this->load_page($tag, '', LOAD_CACHE, LOAD_META))
+			if ($page = $this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
 			{
 				$_lang = $this->language['code'];
 
@@ -801,51 +805,76 @@ class Wacko
 	}
 
 	// wrapper for old_load_page
-	function load_page($tag, $time = '', $cache = LOAD_CACHE, $metadataonly = LOAD_ALL)
+	function load_page($tag, $page_id = 0, $time = '', $cache = LOAD_CACHE, $metadataonly = LOAD_ALL)
 	{
-		if ($this->get_cached_wanted_page($tag) == 1)
+		$page = '';
+
+		if ($page_id != 0)
 		{
-			return '';
+			if ($this->get_cached_wanted_page('', $page_id) == 1)
+			{
+				return '';
+			}
+		}
+		else
+		{
+			if ($this->get_cached_wanted_page($tag) == 1)
+			{
+				return '';
+			}
 		}
 
-		// 1. search for supertag
-		$page = $this->old_load_page($this->npj_translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), $time, $cache, true, $metadataonly);
-
-		// 2. if not found, search for tag
-		if (!$page)
+		// 1. search for page_id (... is preferred, $supertag next)
+		if ($page_id != 0)
 		{
-			$page = $this->old_load_page($tag, $time, $cache, false, $metadataonly);
+			$page = $this->old_load_page('', $page_id, $time, $cache, false, $metadataonly);
 		}
 
-		// 3. still nothing? file under wanted
+		// 2. search for supertag
 		if (!$page)
 		{
-			$this->cache_wanted_page($tag);
+			$page = $this->old_load_page($this->npj_translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), 0, $time, $cache, true, $metadataonly);
+		}
+
+		// 3. if not found, search for tag
+		if (!$page)
+		{
+			$page = $this->old_load_page($tag, 0, $time, $cache, false, $metadataonly);
+		}
+
+		// 4. still nothing? file under wanted
+		if (!$page)
+		{
+			($page_id != 0
+				? $this->cache_wanted_page('', $page_id)
+				: $this->cache_wanted_page($tag)
+			);
 		}
 
 		return $page;
 	}
 
-	function old_load_page($tag, $time = '', $cache = 1, $supertagged = false, $metadataonly = 0)
+	function old_load_page($tag, $page_id = 0, $time = '', $cache = 1, $supertagged = false, $metadataonly = 0)
 	{
-		if ($tag == '')
+		$supertag = '';
+
+		if ($page_id == 0 && $tag == '')
 		{
 			return '';
 		}
 
 		$page = null;
 
-		if (!$supertagged)
+		if ($page_id == 0)
 		{
-			$supertag = $this->npj_translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD);
-		}
-		else
-		{
-			$supertag = $tag;
+			(!$supertagged
+				? $supertag = $this->npj_translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD)
+				: $supertag = $tag
+			);
 		}
 
 		// retrieve from cache
-		if (!$time && $cache && ($cached_page = $this->get_cached_page($supertag, $metadataonly)))
+		if (!$time && $cache && ($cached_page = $this->get_cached_page($supertag, $page_id, $metadataonly)))
 		{
 			$page = $cached_page;
 		}
@@ -862,28 +891,32 @@ class Wacko
 
 		if (!$page)
 		{
-			if ($supertagged)
+			if ($supertagged || $page_id)
 			{
 				$page = $this->load_single(
 					"SELECT ".$what." ".
 					"FROM ".$this->config['table_prefix']."page p ".
 						"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 						"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-					"WHERE supertag = '".quote($this->dblink, $supertag)."' ".
+					"WHERE ".( $page_id != 0
+						? "page_id  = '".quote($this->dblink, $page_id)."' "
+						: "supertag = '".quote($this->dblink, $supertag)."' " ).
 					"LIMIT 1");
 
 				$owner_id = $page['owner_id'];
 
 				if ($time && $time != $page['modified'])
 				{
-					$this->cache_page($page, $metadataonly);
+					$this->cache_page($page, $page_id, $metadataonly);
 
 					$page = $this->load_single(
 						"SELECT ".$what." ".
 						"FROM ".$this->config['table_prefix']."revision p ".
 							"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 							"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-						"WHERE supertag = '".quote($this->dblink, $supertag)."' ".
+						"WHERE ".( $page_id != 0
+							? "page_id  = '".quote($this->dblink, $page_id)."' "
+							: "supertag = '".quote($this->dblink, $supertag)."' " ).
 							"AND modified = '".quote($this->dblink, $time)."' ".
 						"LIMIT 1");
 
@@ -904,7 +937,7 @@ class Wacko
 
 				if ($time && $time != $page['modified'])
 				{
-					$this->cache_page($page, $metadataonly);
+					$this->cache_page($page, $page_id, $metadataonly);
 
 					$page = $this->load_single(
 						"SELECT ".$what." ".
@@ -922,64 +955,113 @@ class Wacko
 		// cache result
 		if (!$time && !$cached_page)
 		{
-			$this->cache_page($page, $metadataonly);
+			$this->cache_page($page, $page_id, $metadataonly);
 		}
 
 		return $page;
 	}
 
-	function get_cached_page($supertag, $metadataonly = 0)
+	function get_cached_page($supertag, $page_id = 0, $metadataonly = 0)
 	{
-		if (isset($this->page_cache[$supertag]))
+		if ($page_id != 0)
 		{
-			if ($this->page_cache[$supertag]['mdonly'] == 0 || $metadataonly == $this->page_cache[$supertag]['mdonly'])
+			if (isset($this->page_cache['page_id'][$page_id]))
 			{
-				return $this->page_cache[$supertag];
+				if ($this->page_cache['page_id'][$page_id]['mdonly'] == 0 || $metadataonly == $this->page_cache['page_id'][$page_id]['mdonly'])
+				{
+					return $this->page_cache['page_id'][$page_id];
+				}
+			}
+			else
+			{
+				return false;
 			}
 		}
 		else
 		{
-			return false;
+			if (isset($this->page_cache['supertag'][$supertag]))
+			{
+				if ($this->page_cache['supertag'][$supertag]['mdonly'] == 0 || $metadataonly == $this->page_cache['supertag'][$supertag]['mdonly'])
+				{
+					return $this->page_cache['supertag'][$supertag];
+				}
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 
-	function cache_page($page, $metadataonly = 0)
+	function cache_page($page, $page_id = 0, $metadataonly = 0)
 	{
-		if (!$page['supertag'])
+		if ($page_id != 0)
 		{
-			$page['supertag'] = $this->npj_translit($page['tag'], TRAN_LOWERCASE, TRAN_DONTLOAD);
-		}
-
-		$this->page_cache[$page['supertag']]			= $page;
-		$this->page_cache[$page['supertag']]['mdonly']	= $metadataonly;
-	}
-
-	function cache_wanted_page($tag, $check = 0)
-	{
-		if ($check == 0)
-		{
-			$this->wanted_cache[$this->language['code']][$tag] = 1;
-		}
-		else if ($this->old_load_page($tag, '', 1, false, 1) == '')
-		{
-			$this->wanted_cache[$this->language['code']][$tag] = 1;
-		}
-	}
-
-	function clear_cache_wanted_page($tag)
-	{
-		$this->wanted_cache[$this->language['code']][$tag] = 0;
-	}
-
-	function get_cached_wanted_page($tag)
-	{
-		if (isset( $this->wanted_cache[$this->language['code']][$tag] ))
-		{
-			return $this->wanted_cache[$this->language['code']][$tag];
+			$this->page_cache['page_id'][$page['page_id']]				= $page;
+			$this->page_cache['page_id'][$page['page_id']]['mdonly']	= $metadataonly;
 		}
 		else
 		{
-			return '';
+			if (!$page['supertag'])
+			{
+				$page['supertag'] = $this->npj_translit($page['tag'], TRAN_LOWERCASE, TRAN_DONTLOAD);
+			}
+
+			$this->page_cache['supertag'][$page['supertag']]			= $page;
+			$this->page_cache['supertag'][$page['supertag']]['mdonly']	= $metadataonly;
+		}
+	}
+
+	function cache_wanted_page($tag, $page_id = 0, $check = 0)
+	{
+		if ($check == 0)
+		{
+			($page_id != 0
+				? $this->wanted_cache['page_id'][$page_id] = 1
+				: $this->wanted_cache['tag'][$this->language['code']][$tag] = 1
+			);
+
+		}
+		else if ($this->old_load_page($tag, $page_id, '', 1, false, 1) == '')
+		{
+			($page_id != 0
+				? $this->wanted_cache['page_id'][$page_id] = 1
+				: $this->wanted_cache['tag'][$this->language['code']][$tag] = 1
+			);
+		}
+	}
+
+	function clear_cache_wanted_page($tag, $page_id = 0)
+	{
+		($page_id != 0
+			? $this->wanted_cache['page_id'][$page_id] = 0
+			: $this->wanted_cache['tag'][$this->language['code']][$tag] = 0
+		);
+	}
+
+	function get_cached_wanted_page($tag, $page_id = 0)
+	{
+		if ($page_id != 0)
+		{
+			if (isset( $this->wanted_cache['page_id'][$page_id] ))
+			{
+				return $this->wanted_cache['page_id'][$page_id];
+			}
+			else
+			{
+				return '';
+			}
+		}
+		else
+		{
+			if (isset( $this->wanted_cache['tag'][$this->language['code']][$tag] ))
+			{
+				return $this->wanted_cache['tag'][$this->language['code']][$tag];
+			}
+			else
+			{
+				return '';
+			}
 		}
 	}
 
@@ -988,7 +1070,7 @@ class Wacko
 		if ($links = $this->load_all(
 			"SELECT * ".
 			"FROM ".$this->config['table_prefix']."link ".
-			"WHERE from_page_id='".quote($this->dblink, $this->page['page_id'])."'"))
+			"WHERE from_page_id = '".quote($this->dblink, $this->page['page_id'])."'"))
 		{
 			$cl = count($links);
 
@@ -1004,7 +1086,7 @@ class Wacko
 		}
 
 		$user		= $this->get_user();
-		$user_bm		= $this->get_user_bookmarks($user['user_id']);
+		$user_bm	= $this->get_user_bookmarks($user['user_id']);
 
 		if (!isset($cl))
 		{
@@ -1026,7 +1108,7 @@ class Wacko
 
 			if (preg_match('/^[\(\[]/', (isset($bookmarks[$i])) ? ($bookmarks[$i]) : '' ))
 			{
-				$pages[$cl+$i] = preg_replace('/^(.*?)\s.*$/', '\\1', preg_replace('/[\[\]\(\)]/', '', $bookmarks[$i]));
+				$pages[$cl + $i] = preg_replace('/^(.*?)\s.*$/', '\\1', preg_replace('/[\[\]\(\)]/', '', $bookmarks[$i]));
 			}
 		}
 
@@ -1054,7 +1136,7 @@ class Wacko
 		{
 			for ($i = 0; $i < count($links); $i++)
 			{
-				$this->cache_page($links[$i], 1);
+				$this->cache_page($links[$i], 0, 1);
 				$exists[] = $links[$i]['supertag'];
 			}
 		}
@@ -1068,8 +1150,8 @@ class Wacko
 
 		for ($i = 0; $i < count($notexists); $i++)
 		{
-			$this->cache_wanted_page($pages[array_search($notexists[$i], $spages)], 1);
-			$this->cache_acl($this->get_page_id($notexists[$i]), "read", 1, $acl);
+			$this->cache_wanted_page($pages[array_search($notexists[$i], $spages)], 0, 1);
+			$this->cache_acl($this->get_page_id($notexists[$i]), 'read', 1, $acl);
 		}
 
 		if ($read_acls = $this->load_all(
@@ -1079,7 +1161,7 @@ class Wacko
 		{
 			for ($i = 0; $i < count($read_acls); $i++)
 			{
-				$this->cache_acl($read_acls[$i]['page_id'], "read", 1, $read_acls[$i]);
+				$this->cache_acl($read_acls[$i]['page_id'], 'read', 1, $read_acls[$i]);
 			}
 		}
 	}
@@ -1096,19 +1178,19 @@ class Wacko
 
 		if ($page['lang'])
 		{
-			$this->pagelang = $page['lang'];
+			$this->page_lang = $page['lang'];
 		}
 		else if (isset($_REQUEST['add']) && isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], $langlist))
 		{
-			$this->pagelang = $_REQUEST['lang'];
+			$this->page_lang = $_REQUEST['lang'];
 		}
 		else if (isset($_REQUEST['add']))
 		{
-			$this->pagelang = $this->userlang;
+			$this->page_lang = $this->user_lang;
 		}
 		else
 		{
-			$this->pagelang = $this->config['language'];
+			$this->page_lang = $this->config['language'];
 		}
 	}
 
@@ -1222,7 +1304,7 @@ class Wacko
 		{
 			foreach ($pages as $page)
 			{
-				$this->cache_page($page, 1);
+				$this->cache_page($page, 0, 1);
 			}
 
 			if ($read_acls = $this->load_all(
@@ -1267,7 +1349,7 @@ class Wacko
 
 			foreach ($pages as $page)
 			{
-				$this->cache_page($page, 1);
+				$this->cache_page($page, 0, 1);
 			}
 
 			if ($read_acls = $this->load_all(
@@ -1470,7 +1552,7 @@ class Wacko
 					}
 					else
 					{
-						$lang = $this->userlang;
+						$lang = $this->user_lang;
 					}
 				}
 
@@ -1574,7 +1656,7 @@ class Wacko
 						"UPDATE {$this->config['table_prefix']}page SET ".
 							"comments	= '".(int)$this->count_comments($comment_on_id)."', ".
 							"commented	= NOW() ".
-						"WHERE tag = '".quote($this->dblink, $this->get_comment_on_tag($comment_on_id))."' ".
+						"WHERE page_id = '".quote($this->dblink, $comment_on_id)."' ".
 						"LIMIT 1");
 
 					// update user comments count
@@ -1680,15 +1762,15 @@ class Wacko
 							}
 						}// end of watchers
 					}
-					$this->load_translation($this->userlang);
-					$this->set_translation ($this->userlang);
-					$this->set_language ($this->userlang);
+					$this->load_translation($this->user_lang);
+					$this->set_translation ($this->user_lang);
+					$this->set_language ($this->user_lang);
 				} // end of comment_on
 			} // end of new page
 			// RESAVING AN OLD PAGE, CREATING REVISION
 			else
 			{
-				$this->set_language($this->pagelang);
+				$this->set_language($this->page_lang);
 
 				// aha! page isn't new. keep owner!
 				$owner_id = $old_page['owner_id'];
@@ -1789,9 +1871,9 @@ class Wacko
 								} // end of hasaccess
 							} // end of watchers
 						}
-						$this->load_translation($this->userlang);
-						$this->set_translation ($this->userlang);
-						$this->set_language ($this->userlang);
+						$this->load_translation($this->user_lang);
+						$this->set_translation ($this->user_lang);
+						$this->set_language ($this->user_lang);
 					}
 				} // end of new != old
 			} // end of existing page
@@ -2490,13 +2572,13 @@ class Wacko
 				$method		= $handler;
 			}
 
-			$thispage		= $this->load_page($unwtag, '', LOAD_CACHE, LOAD_META);
+			$thispage		= $this->load_page($unwtag, 0, '', LOAD_CACHE, LOAD_META);
 
 			if (!$thispage && $linklang)
 			{
 				$this->set_language($linklang);
 				$lang		= $linklang;
-				$thispage	= $this->load_page($unwtag, '', LOAD_CACHE, LOAD_META);
+				$thispage	= $this->load_page($unwtag, 0, '', LOAD_CACHE, LOAD_META);
 			}
 
 			if ($thispage)
@@ -3816,7 +3898,7 @@ class Wacko
 			}
 		}
 
-		if ($page = $this->load_page($tag, $time, LOAD_CACHE, LOAD_META))
+		if ($page = $this->load_page($tag, 0, $time, LOAD_CACHE, LOAD_META))
 		{
 			return $page['owner_name'];
 		}
@@ -3836,9 +3918,8 @@ class Wacko
 				$page_id = $this->page['page_id'];
 			}
 		}
-		$tag = $this->get_page_tag_by_id($page_id);
 
-		if ($page = $this->load_page($tag, $time, LOAD_CACHE, LOAD_META))
+		if ($page = $this->load_page('', $page_id, $time, LOAD_CACHE, LOAD_META))
 		{
 			return $page['owner_id'];
 		}
@@ -4376,7 +4457,7 @@ class Wacko
 		if (!empty($_GET['addbookmark']) && $user)
 		{
 			// writing bookmark
-			$bookmark = '(('.$this->tag.' '.$this->get_page_title().($user['lang'] != $this->pagelang ? ' @@'.$this->pagelang : '').'))';
+			$bookmark = '(('.$this->tag.' '.$this->get_page_title().($user['lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))';
 
 			if (!in_array($bookmark, $bookmarks))
 			{
@@ -4392,7 +4473,7 @@ class Wacko
 					"INSERT INTO ".$this->config['table_prefix']."bookmark SET ".
 					"user_id			= '".quote($this->dblink, $user['user_id'])."', ".
 					"page_id			= '".quote($this->dblink, $this->page['page_id'])."', ".
-					"lang				= '".quote($this->dblink, ($user['lang'] != $this->pagelang ? $this->pagelang : ""))."', ".
+					"lang				= '".quote($this->dblink, ($user['lang'] != $this->page_lang ? $this->page_lang : ""))."', ".
 					"bm_position		= '".quote($this->dblink, ($_bm_count + 1))."'");
 			}
 
@@ -4720,11 +4801,11 @@ class Wacko
 		{
 			if($user['lang'] == '')
 			{
-				$this->userlang = $this->config['language'];
+				$this->user_lang = $this->config['language'];
 			}
 			else
 			{
-				$this->userlang = $user['lang'];
+				$this->user_lang = $user['lang'];
 			}
 		}
 		else
@@ -4745,9 +4826,9 @@ class Wacko
 
 		// registering translations
 		$this->load_all_languages();
-		$this->load_translation($this->userlang);
-		$this->set_translation($this->userlang);
-		$this->set_language($this->userlang);
+		$this->load_translation($this->user_lang);
+		$this->set_translation($this->user_lang);
+		$this->set_language($this->user_lang);
 
 		// SEO
 		foreach ($this->search_engines as $engine)
@@ -4778,11 +4859,11 @@ class Wacko
 
 		$time = isset($_GET['time']) ? $_GET['time'] : '';
 
-		$page = $this->load_page($this->tag, $time);
+		$page = $this->load_page($this->tag, 0, $time);
 
 		if ($this->config['outlook_workaround'] && !$page)
 		{
-			$page = $this->load_page($this->supertag."'", $time);
+			$page = $this->load_page($this->supertag."'", 0, $time);
 		}
 
 		$this->set_page($page);
@@ -5257,7 +5338,7 @@ class Wacko
 				"UPDATE {$this->config['table_prefix']}page SET ".
 					"comments	= '".(int)$this->count_comments($comment_on_id)."', ".
 					"commented	= '".quote($this->dblink, $comment['created'])."' ".
-				"WHERE tag		= '".quote($this->dblink, $this->get_comment_on_tag($comment_on_id))."' ".
+				"WHERE page_id	= '".quote($this->dblink, $comment_on_id)."' ".
 				"LIMIT 1");
 		}
 

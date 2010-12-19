@@ -190,7 +190,7 @@ if (!function_exists('print_cluster_tree'))
 					if ($style == 'ul' || $style == 'ol')
 						print "<li>";
 
-					$_page = $wacko->load_page(ltrim($sub_supertag, "/"));
+					$_page = $wacko->load_page(ltrim($sub_supertag, '/'));
 					if ($_page['tag'])
 						$_tag = $_page['tag'];
 					else
@@ -257,7 +257,7 @@ if ($pages)
 	//Cache page and prepare a list for caching acl
 	foreach($pages as $page)
 	{
-		$this->cache_page($page, 1);
+		$this->cache_page($page, 0, 1);
 		$page_id_list[] = $page['page_id'];
 	}
 

@@ -10,7 +10,7 @@ if (!isset($from)) $from = '';
 if (!isset($page)) $page = '';
 if (!isset($numerate)) $numerate = '';
 if (!isset($to)) $to = '';
-if (!isset($title)) $title = '';
+if (!isset($legend)) $legend = '';
 
 if ($for) $page = $for;
 if ($page)
@@ -19,7 +19,7 @@ if ($page)
 	$ppage		= '/'.$page;
 	$context	= $page;
 	$_page		= $this->load_page($page);
-	if (!$title) $title = $page;
+	if (!$legend) $legend = $page;
 	$link		= $this->href('', $_page['tag']);
 }
 else
@@ -39,12 +39,12 @@ $end_depth		= $to[1];
 // 3. output
 if (!$nomark)
 {
-	print "<div class=\"layout-box\"><p class=\"layout-box\"><span> ".$this->get_translation('TOCTitle')." ".$this->link($ppage, '', $title)."  </span></p>";
+	echo "<div class=\"layout-box\"><p class=\"layout-box\"><span> ".$this->get_translation('TOCTitle')." ".$this->link($ppage, '', $legend)." </span></p>";
 }
 
 if (!$this->has_access('read', $_page['page_id']))
 {
-	print $this->get_translation('ReadAccessDenied');
+	echo $this->get_translation('ReadAccessDenied');
 }
 else
 {

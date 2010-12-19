@@ -37,8 +37,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 						: "").
 					"hide_toc			= '".quote($this->dblink, (int)$_POST['hide_toc'])."', ".
 					"hide_index			= '".quote($this->dblink, (int)$_POST['hide_index'])."', ".
-					"lower_index		= '".quote($this->dblink, ( $_POST['index_mode'] == 'l' ? 1 : 0 ))."', ".
-					"upper_index		= '".quote($this->dblink, ( $_POST['index_mode'] == 'u' ? 1 : 0 ))."', ".
+					"tree_level			= '".quote($this->dblink, (int)$_POST['tree_level'])."', ".
 					"allow_rawhtml		= '".quote($this->dblink, $allow_rawhtml)."', ".
 					"disable_safehtml	= '".quote($this->dblink, $disable_safehtml)."', ".
 					"noindex			= '".quote($this->dblink, (int)$_POST['noindex'])."' "
@@ -124,7 +123,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaToc')."</th>";
 			echo "<td class=\"form_right\">";
 			echo "<input type=\"radio\" id=\"tocOn\" name=\"hide_toc\" value=\"0\" ".( !$this->config['hide_toc'] ? "checked=\"checked\"" : "" )."/><label for=\"tocOn\">".$this->get_translation('MetaOn')."</label>";
-			echo "<input type=\"radio\" id=\"tocOff\" name=\"hide_toc\" value=\"1\" ".( $this->config['hide_toc'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"tocOff\">".$this->get_translation('MetaOff')."</label>";
+			echo "<input type=\"radio\" id=\"tocOff\" name=\"hide_toc\" value=\"1\" ".( $this->config['hide_toc'] ? "checked=\"checked\"" : "" )."/><label for=\"tocOff\">".$this->get_translation('MetaOff')."</label>";
 			echo "</td>";
 			echo "</tr>\n";
 			echo "<tr class=\"lined\">";
@@ -137,9 +136,9 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 			echo "<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaIndexMode')."</th>";
 			echo "<td class=\"form_right\">";
-			echo "<input type=\"radio\" id=\"indexmodeF\" name=\"index_mode\" value=\"f\" ".( !$this->config['lower_index'] && !$this->config['upper_index'] ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeF\">".$this->get_translation('MetaIndexFull')."</label>";
-			echo "<input type=\"radio\" id=\"indexmodeL\" name=\"index_mode\" value=\"l\" ".( $this->config['lower_index'] ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeL\">".$this->get_translation('MetaIndexLower')."</label>";
-			echo "<input type=\"radio\" id=\"indexmodeU\" name=\"index_mode\" value=\"u\" ".( $this->config['upper_index'] ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeU\">".$this->get_translation('MetaIndexUpper')."</label>";
+			echo "<input type=\"radio\" id=\"indexmodeF\" name=\"index_mode\" value=\"0\" ".( $this->config['tree_level'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeF\">".$this->get_translation('MetaIndexFull')."</label>";
+			echo "<input type=\"radio\" id=\"indexmodeL\" name=\"index_mode\" value=\"1\" ".( $this->config['tree_level'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeL\">".$this->get_translation('MetaIndexLower')."</label>";
+			echo "<input type=\"radio\" id=\"indexmodeU\" name=\"index_mode\" value=\"2\" ".( $this->config['tree_level'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeU\">".$this->get_translation('MetaIndexUpper')."</label>";
 			echo "</td>";
 			echo "</tr>\n";
 

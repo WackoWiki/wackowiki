@@ -19,7 +19,7 @@ if (isset($_POST['tag']) && $newtag = trim($_POST['tag'], '/ '))
 	}
 
 	// check target page existance
-	if ($page = $this->load_page($prefix.$newtag, '', LOAD_CACHE, LOAD_META))
+	if ($page = $this->load_page($prefix.$newtag, 0, '', LOAD_CACHE, LOAD_META))
 	{
 		$message = $this->get_translation('PageAlreadyExists')." &laquo;".$page['tag']."&raquo;. ";
 

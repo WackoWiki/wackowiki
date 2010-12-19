@@ -67,7 +67,7 @@ if ($pages = $this->load_all(
 		{
 			for ($i = 0; $i < count($links); $i++)
 			{
-				$this->cache_page($links[$i], 1);
+				$this->cache_page($links[$i], 0, 1);
 			}
 		}
 

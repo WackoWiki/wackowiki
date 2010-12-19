@@ -1,12 +1,12 @@
 <!--notypo-->
 <?php
 
-$user_name = '';
-$email = '';
-$password = '';
-$confpassword = '';
-$error = '';
-$word_ok = '';
+$user_name		= '';
+$email			= '';
+$password		= '';
+$confpassword	= '';
+$error			= '';
+$word_ok		= '';
 
 // reconnect securely in ssl mode
 if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))

@@ -54,7 +54,7 @@ if ($registered
 				}
 				else
 				{
-					if ($this->supertag != $supernewname && $page=$this->load_page($supernewname, '', LOAD_CACHE, LOAD_META))
+					if ($this->supertag != $supernewname && $page=$this->load_page($supernewname, 0, '', LOAD_CACHE, LOAD_META))
 					{
 						print(str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlredyExists'))."<br />\n");
 					}
@@ -185,7 +185,7 @@ function move(&$parent, $old_page, $new_name )
 		}
 		else
 		{
-			if ($old_page['supertag'] != $supernewname && $page=$parent->load_page($supernewname, '', LOAD_CACHE, LOAD_META))
+			if ($old_page['supertag'] != $supernewname && $page=$parent->load_page($supernewname, 0, '', LOAD_CACHE, LOAD_META))
 			{
 				print(str_replace('%1', $parent->link($new_name), $parent->get_translation('AlredyExists'))."<br />\n");
 			}

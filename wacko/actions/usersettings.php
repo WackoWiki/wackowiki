@@ -41,7 +41,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'logout')
 }
 else if ($user = $this->get_user())
 {
-	$this->set_page_lang($this->userlang);
+	$this->set_page_lang($this->user_lang);
 
 	// is user trying to update?
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
