@@ -1,17 +1,23 @@
 <div id="page">
 <?php
 
-$max = '';
-$output = '';
+$max	= '';
+$output	= '';
 
 // redirect to show method if page don't exists
 #if (!$this->page) $this->redirect($this->href('show'));
 
 // deny for comment
 if ($this->page['comment_on_id'])
+{
 	$this->redirect($this->href('', $this->get_comment_on_tag($this->page['comment_on_id']), 'show_comments=1')."#".$this->page['tag']);
+}
 
-if (!isset($hide_minor_edit)) $hide_minor_edit = isset($_GET['minor_edit']) ? $_GET['minor_edit'] :"";
+if (!isset($hide_minor_edit))
+{
+	$hide_minor_edit = isset($_GET['minor_edit']) ? $_GET['minor_edit'] :"";
+}
+
 // get page_id for deleted but stored page
 if (!isset($this->page['page_id']))
 {
@@ -20,7 +26,8 @@ if (!isset($this->page['page_id']))
 	$get_page_id = $this->load_single(
 			"SELECT page_id ".
 			"FROM ".$this->config['table_prefix']."revision ".
-			"WHERE tag = '".quote($this->dblink, $tag)."' LIMIT 1");
+			"WHERE tag = '".quote($this->dblink, $tag)."' ".
+			"LIMIT 1");
 
 	// Get the_ID value
 	$this->page['page_id'] = $get_page_id['page_id'];
@@ -40,14 +47,18 @@ if ($this->has_access('read'))
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"fastdiff\" name=\"fastdiff\" />\n <label for=\"fastdiff\">".$this->get_translation('SimpleDiff')."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"source\" name=\"source\" />\n <label for=\"source\">".$this->get_translation('SourceDiff')."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href('revisions.xml')."\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RevisionXMLTip')."\" alt=\"XML\" /></a>";
+
 		if ($this->config['minor_edit'])
 		{
 			$output .= "<br />".((isset($_GET['minor_edit']) && !$_GET['minor_edit'] == 1) ? "<a href=\"".$this->href('revisions', '', 'minor_edit=1')."\">".$this->get_translation('MinorEditHide')."</a>" : "<a href=\"".$this->href('revisions', '', 'minor_edit=0')."\">".$this->get_translation('MinorEditShow')."</a>");
 		}
+
 		$output .= "</p>\n<ul class=\"revisions\">\n";
 
 		if (isset($_GET['show']) && $_GET['show'] == 'all')
+		{
 			$max = 0;
+		}
 		else if ($user = $this->get_user())
 		{
 			$max = $user['revisions_count'];
@@ -59,6 +70,7 @@ if ($this->has_access('read'))
 
 		$c = 0;
 		$t = $a = count($pages);
+
 		foreach ($pages as $num => $page)
 		{
 			if ($page['edit_note'])
@@ -93,7 +105,9 @@ if ($this->has_access('read'))
 					if ($page['reviewed'] == 0 &&  $this->is_reviewer())
 					{
 						if ($num == 0)
+						{
 							$output .= " <span class=\"review\">[".$this->get_translation('Review')."]</span>";
+						}
 					}
 					else if ($page['reviewed'] == 1)
 					{
@@ -106,18 +120,26 @@ if ($this->has_access('read'))
 		}
 		$output .= "</ul>\n<br />\n";
 
-		if (!$this->config['revisions_hide_cancel']) $output .= "<input type=\"button\" value=\"".$this->get_translation('CancelDifferencesButton')."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
+		if (!$this->config['revisions_hide_cancel'])
+		{
+			$output .= "<input type=\"button\" value=\"".$this->get_translation('CancelDifferencesButton')."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
+		}
+
 		$output .= $this->form_close()."\n";
 	}
+
 	print($output);
 	$this->current_context--;
 
 	if ($max && $a > $max)
+	{
 		echo "<a href=\"".$this->href('revisions', '', 'show=all')."\">".$this->get_translation('RevisionsShowAll')."</a>";
+	}
 }
 else
 {
 	echo $this->get_translation('ReadAccessDenied');
 }
+
 ?>
 </div>
