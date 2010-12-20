@@ -1,10 +1,10 @@
 <?php
 
-$edit_note = '';
-$minor_edit = '';
-$reviewed = '';
-$error = '';
-$output = '';
+$edit_note		= '';
+$minor_edit		= '';
+$reviewed		= '';
+$error			= '';
+$output			= '';
 
 // invoke autocomplete if needed
 if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
@@ -20,6 +20,7 @@ if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 if ($this->has_access('write') && $this->has_access('read'))
 {
 	$user	= $this->get_user();
+
 	if ($_POST)
 	{
 		$textchars	= strlen($_POST['body']);
@@ -27,7 +28,6 @@ if ($this->has_access('write') && $this->has_access('read'))
 		// watch page
 		if ($this->page && isset($_POST['watchpage']) && $_POST['noid_publication'] != $this->tag && $user && $this->iswatched !== true)
 		{
-
 			$this->set_watch($user['user_id'], $this->page['page_id']);
 			$this->iswatched = true;
 		}
@@ -51,25 +51,35 @@ if ($this->has_access('write') && $this->has_access('read'))
 			}
 
 			$title = $this->page['title'];
+
 			if(isset($_POST['title']))
 			{
 				$title = trim($_POST['title']);
 			}
+
 			// check for overwriting
 			if ($this->page && $this->page['modified'] != $_POST['previous'])
+			{
 				$error = $this->get_translation('OverwriteAlert');
+			}
 
 			// check text length
 			#if ($textchars > $maxchars)
+			#{
 			#	$error .= str_replace('%1', $textchars - $maxchars, $this->get_translation('TextDBOversize')).' ';
+			#}
 
 			// check for edit note
 			if (($this->config['edit_summary'] == 2) && $_POST['edit_note'] == '' && $this->page['comment_on_id'] == 0)
+			{
 				$error .= $this->get_translation('EditNoteMissing');
+			}
 
 			// check categories
-			#if (!$this->page && $this->get_categories_list($this->pagelang, 1) && $this->save_categories_list($this->page['page_id'], 1) !== true)
+			#if (!$this->page && $this->get_categories_list($this->page_lang, 1) && $this->save_categories_list($this->page['page_id'], 1) !== true)
+			#{
 			#	$error .= 'Select at least one referring category (field) to the page. ';
+			#}
 
 			// captcha code starts
 			if (($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
@@ -119,7 +129,9 @@ if ($this->has_access('write') && $this->has_access('read'))
 
 			// You're not allowed to have empty comments as they would be kinda pointless.
 			if (!$body && $this->page['comment_on_id'] != 0)
-			$error .= $this->get_translation('EmptyComment');
+			{
+				$error .= $this->get_translation('EmptyComment');
+			}
 
 			// store
 			if (!$error)
@@ -161,7 +173,11 @@ if ($this->has_access('write') && $this->has_access('read'))
 					{
 						$this->set_user_setting('user_name', $remember_name);
 						unset($remember_name);
-						if ($body_r) $this->set_user_setting('noid_protect', true);
+
+						if ($body_r)
+						{
+							$this->set_user_setting('noid_protect', true);
+						}
 					}
 
 					// now we render it internally so we can write the updated link table.
@@ -174,7 +190,8 @@ if ($this->has_access('write') && $this->has_access('read'))
 				}
 
 				// forward
-				$this->page_cache[$this->supertag] = '';
+				$this->page_cache['supertag'][$this->supertag]			= '';
+				$this->page_cache['page_id'][$this->page['page_id']]	= '';
 
 				if ($this->page['comment_on_id'] != 0)
 				{
@@ -196,26 +213,30 @@ if ($this->has_access('write') && $this->has_access('read'))
 	$this->no_cache();
 
 	// fetch fields
-	$previous = isset($_POST['previous']) ? $_POST['previous'] : $this->page['modified'];
-	$body = isset($_POST['body']) ? $_POST['body'] : $this->page['body'];
-	$body = html_entity_decode($body);
-	$title = isset($_POST['title']) ? $_POST['title'] : $this->page['title'];
-	$title = html_entity_decode($title);
-	if (isset($_POST['edit_note']))			$edit_note	= $_POST['edit_note'];
-	if (isset($_POST['minor_edit']))		$minor_edit	= $_POST['minor_edit'];
+	$previous	= isset($_POST['previous']) ? $_POST['previous'] : $this->page['modified'];
+	$body		= isset($_POST['body']) ? $_POST['body'] : $this->page['body'];
+	$body		= html_entity_decode($body);
+	$title		= isset($_POST['title']) ? $_POST['title'] : $this->page['title'];
+	$title		= html_entity_decode($title);
 
+	if (isset($_POST['edit_note']))		$edit_note	= $_POST['edit_note'];
+	if (isset($_POST['minor_edit']))	$minor_edit	= $_POST['minor_edit'];
 
 	// display form
 	if ($error)
+	{
 		$this->set_message("<div class=\"error\">$error</div>\n");
+	}
 
 	// "cf" attribute: it is for so called "critical fields" in the form. It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog "You are going to leave this page, but there are some changes you made but not saved yet." Is used by this script to determine which changes it need to monitor.
 	$output .= $this->form_open('edit', '', 'post', 'edit', ' cf="true" ');
 
 	if (isset($_REQUEST['add']))
-		$output .=	'<input name="lang" type="hidden" value="'.$this->pagelang.'" />'.
+	{
+		$output .=	'<input name="lang" type="hidden" value="'.$this->page_lang.'" />'.
 					'<input name="tag" type="hidden" value="'.$this->tag.'" />'.
 					'<input name="add" type="hidden" value="1" />';
+	}
 
 	print($output);
 
@@ -294,12 +315,13 @@ if ($this->has_access('write') && $this->has_access('read'))
 		}
 		else
 		{
-		 if (!$this->page)
+			if (!$this->page)
 			{
 				// new page title field
 				$output .= "<label for=\"addpage_title\">".$this->get_translation('MetaTitle').":</label><br />";
 				$output .= "<input id=\"addpage_title\" value=\"".htmlspecialchars($title)."\" size=\"60\" maxlength=\"100\" name=\"title\" /><br />";
 			}
+
 			// edit note
 			if ($this->config['edit_summary'] != 0)
 			{
@@ -341,10 +363,12 @@ if ($this->has_access('write') && $this->has_access('read'))
 				}
 			}
 			else
+			{
 				$output .= "<br />";
+			}
 		}
 
-		if (!$this->page && $words = $this->get_categories_list($this->pagelang, 1))
+		if (!$this->page && $words = $this->get_categories_list($this->page_lang, 1))
 		{
 			foreach ($words as $id => $word)
 			{
@@ -359,7 +383,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 				}
 			}
 
-			$output .= "<br />".$this->get_translation('Categories').':<small><br /><br />'.substr(implode(' ', $_words), 6).'</small><br /><br />';
+			$output .= "<br />".$this->get_translation('Categories').':<div class="setcategory"><small><br /><br />'.substr(implode(' ', $_words), 6).'</small></div><br /><br />';
 		}
 		print($output);
 
@@ -391,17 +415,21 @@ if ($this->has_access('write') && $this->has_access('read'))
 		// end captcha
 ?>
 		<script type="text/javascript">
-		wE = new WikiEdit();
+			wE = new WikiEdit();
 <?php
 	if ($user = $this->get_user())
-	if ($user['autocomplete'])
-	{
+
+		if ($user['autocomplete'])
+		{
 ?>
-		if (AutoComplete) { wEaC = new AutoComplete( wE, "<?php echo $this->href('edit');?>" ); }
+			if (AutoComplete)
+			{
+				 wEaC = new AutoComplete( wE, "<?php echo $this->href('edit');?>" );
+			}
 <?php
-	}
+		}
 ?>
-		wE.init('postText','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>images/wikiedit/');
+			wE.init('postText','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>images/wikiedit/');
 		</script><br />
 		<input name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
 		&nbsp;
@@ -409,13 +437,14 @@ if ($this->has_access('write') && $this->has_access('read'))
 		&nbsp;
 		<input type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 <?php
-	print ($this->form_close());
-}
-else
-{
-	echo "<div id=\"page\">";
-	echo $this->get_translation('WriteAccessDenied');
-	echo "</div>";
-}
+		print ($this->form_close());
+	}
+	else
+	{
+		echo "<div id=\"page\">";
+		echo $this->get_translation('WriteAccessDenied');
+		echo "</div>";
+	}
+
 ?>
 </div>
