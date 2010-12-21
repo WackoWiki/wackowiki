@@ -2038,13 +2038,13 @@ class Wacko
 	}
 
 	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
-	#	if (isset($this->config['xframeoptions']))
 	function http_security_headers()
 	{
 		if ( !headers_sent() )
 		{
+			#	if (isset($this->config['xframeoptions']))
 			header( 'X-Frame-Options: DENY' ); // or SAMEORIGIN
-			header( "X-Content-Security-Policy: allow 'self'; img-src *;" );
+			header( "X-Content-Security-Policy: allow 'self'; script-src 'self'; options inline-script; img-src *;" );
 		}
 	}
 
