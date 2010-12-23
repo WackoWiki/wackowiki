@@ -223,13 +223,15 @@ class Init
 				$this->dbal();
 
 				// retrieving configuration data
-				 $wackoDBQuery = "SELECT config_name, value FROM {$this->config['table_prefix']}config";
-				if ($result = query($this->dblink, $wackoDBQuery , 0))
+				$wacko_db_query = "SELECT config_name, value FROM {$this->config['table_prefix']}config";
+
+				if ($result = query($this->dblink, $wacko_db_query , 0))
 				{
 					while ($row = fetch_assoc($result))
 					{
 						$this->config[$row['config_name']] = $row['value'];
 					}
+
 					free_result($result);
 				}
 				else
@@ -238,7 +240,7 @@ class Init
 				}
 
 				// retrieving usergroups data
-				$wackoDBQuery = "SELECT
+				$wacko_db_query = "SELECT
 									g.group_name,
 									u.user_name
 								FROM
@@ -248,13 +250,14 @@ class Init
 
 				$groups_array = array();
 
-				if ($result = query($this->dblink, $wackoDBQuery, 0))
+				if ($result = query($this->dblink, $wacko_db_query, 0))
 				{
 					while ($row = fetch_assoc($result))
 					{
 						// Here we join our stuff in a single array
 						array_push($groups_array, $row);
 					}
+
 					free_result($result);
 
 					if (!empty($groups_array))
@@ -307,17 +310,14 @@ class Init
 		{
 			$this->request = $_SERVER['PATH_INFO'];
 		}
-		else
+		else if(isset($_REQUEST['page']))
 		{
 			$this->request = @$_REQUEST['page'];
 		}
-
-		// fix win32 apache 1 bug
-		if (stristr($_SERVER['SERVER_SOFTWARE'], 'Apache/1') && stristr($_SERVER['SERVER_SOFTWARE'], 'Win32') && $this->config['rewrite_mode'])
+		/*else if(isset($_REQUEST['page_id']))
 		{
-			$dir			= str_replace('http://'.$_SERVER['SERVER_NAME'].($_SERVER['SERVER_PORT'] != 80 ? ':'.$_SERVER['SERVER_PORT'] : ''), '', $this->config['base_url']);
-			$this->request	= preg_replace('+^'.preg_quote(rtrim($dir, '/')).'+i', '', $_SERVER['REDIRECT_URL']); //$request);
-		}
+			$this->request = @$_REQUEST['page_id'];
+		}*/
 
 		// remove leading slash
 		$this->request	= preg_replace('/^\//', '', $this->request);
@@ -361,6 +361,7 @@ class Init
 			$this->config['base_url']	= str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
 			$_secure = true;
 		}
+
 		$_cookie_path = preg_replace('|https?://[^/]+|i', '', $this->config['base_url'].'');
 
 		($_secure == true ? $secure = true : $secure = false );
@@ -444,6 +445,7 @@ class Init
 	function is_locked()
 	{
 		clearstatcache();
+
 		if (@file_exists('lock'))
 		{
 			$access = file('lock');
@@ -472,6 +474,7 @@ class Init
 			if (!isset($_REQUEST['installAction']) && !strstr($_SERVER['SERVER_SOFTWARE'], 'IIS'))
 			{
 				$req = $_SERVER['REQUEST_URI'];
+
 				if ($req{strlen($req) - 1} != '/' && strstr($req, '.php') != '.php')
 				{
 					header("Location: http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'].'/');
@@ -681,7 +684,7 @@ class Init
 				{
 					echo "<p class=\"debug\">Session data</p>\n<ul>\n";
 					echo "<li>Base URL: ".$this->config['base_url']."</li>\n";
-					echo "<li>HTTPS: ".$_SERVER['HTTPS']."</li>\n";
+					echo "<li>HTTPS: ".(isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : '')."</li>\n";
 					echo "<li>IP-address: ".$this->engine->get_user_ip()."</li>\n";
 					echo "<li>SERVER_PORT: ".$_SERVER['SERVER_PORT']."</li>\n";
 					echo "<li>SSL: ".(isset($this->config['ssl']) ? 'on' : 'off')."</li>\n";
