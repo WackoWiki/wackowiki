@@ -2250,6 +2250,14 @@ class Wacko
 			$icon	= $this->get_translation('emailicon');
 			$tpl	= 'email';
 		}
+		else if (preg_match('/^(xmpp[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/', $tag, $matches))
+		{
+			// this is a valid XMPP
+			$url	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:'.$tag);
+			$title	= $this->get_translation('JabberLink');
+			$icon	= $this->get_translation('jabbericon');
+			$tpl	= 'jabber';
+		}
 		else if (preg_match('/^#/', $tag))
 		{
 			// html-anchor
@@ -2670,7 +2678,7 @@ class Wacko
 				}
 				else
 				{
-					$access	= true;
+					$access		= true;
 					$this->_acl['list'] == '*';
 				}
 

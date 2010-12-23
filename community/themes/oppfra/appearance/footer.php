@@ -219,19 +219,19 @@ echo '<br />';
 			if ($this->config['tree_level'] == 1)
 			{
 				// lower index
-				echo $this->action('tree', array('page' => $this->tag, 'depth' => 1, 'nomark' => 1));
+				echo $this->action('tree', array('page' => $this->tag, 'depth' => 1, 'nomark' => 0));
 			}
 			else if ($this->config['tree_level'] == 2)
 			{
 				// upper index
 				$page = '/'.substr($this->tag, 0, ( strrpos($this->tag, '/') ? strrpos($this->tag, '/') : strlen($this->tag) ));
-				echo $this->action('tree', array('page' => $page, 'depth' => 1, 'nomark' => 1));
+				echo $this->action('tree', array('page' => $page, 'depth' => 1, 'nomark' => 0));
 			}
 			else
 			{
 				// default index
 				$page = '/'.substr($this->tag, 0, ( strrpos($this->tag, '/') ? strrpos($this->tag, '/') : strlen($this->tag) ));
-				echo $this->action('tree', array('page' => $page, 'depth' => 2, 'nomark' => 1));
+				echo $this->action('tree', array('page' => $page, 'depth' => 2, 'nomark' => 0));
 			}
 
 
