@@ -195,6 +195,7 @@ class RSS
 		$limit	= 20;
 		$name	= 'comments';
 		$count	= '';
+		$access	= '';
 
 		// build output
 		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->get_charset()."\"?>\n";

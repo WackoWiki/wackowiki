@@ -26,8 +26,14 @@ $root = $this->unwrap_link($root);
 
 if ($list && ($ids || isset($_GET['category'])))
 {
-	if ($ids) $category = preg_replace('/[^\d, ]/', '', $ids);
-	else $category = (int)$_GET['category'];
+	if ($ids)
+	{
+		$category = preg_replace('/[^\d, ]/', '', $ids);
+	}
+	else
+	{
+		$category = (int)$_GET['category'];
+	}
 
 	if ($_words = $this->load_all(
 	"SELECT category FROM {$this->config['table_prefix']}category ".
@@ -41,13 +47,21 @@ if ($list && ($ids || isset($_GET['category'])))
 			{
 				$words[] = $word['category'];
 			}
+
 			$words = strtolower(implode(', ', $words));
 		}
+
 		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('PagesCategory').( $words ? ' &laquo;<b>'.$words.'</b>&raquo;' : '' ).":</span></p>\n";
 	}
 
-	if		($sort == 'abc')	$order = 'title ASC';
-	else if ($sort == 'date')	$order = 'created DESC';
+	if ($sort == 'abc')
+	{
+		$order = 'title ASC';
+	}
+	else if ($sort == 'date')
+	{
+		$order = 'created DESC';
+	}
 
 	if ($pages = $this->load_all(
 	"SELECT p.page_id, p.tag, p.title, p.created ".
@@ -66,9 +80,13 @@ if ($list && ($ids || isset($_GET['category'])))
 			foreach ($pages as $page)
 			{
 				if ($this->has_access('read', $page['page_id']) !== true)
+				{
 					continue;
+				}
 				else
+				{
 					echo '<li>'.( $sort == 'date' ? '<small>('.date('d/m/Y', strtotime($page['created'])).')</small> ' : '' ).$this->link('/'.$page['tag'], '', $page['title'], 0, 1)."</li>\n";
+				}
 			}
 
 			echo '</ol>';
@@ -118,11 +136,15 @@ if (!$ids)
 				{
 					echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'">' : '' ).htmlspecialchars($word['category']).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."</li>\n";
 				}
+
 				echo "</ul>\n</li>\n";
 			}
 			else
-			echo "</li>\n";
+			{
+				echo "</li>\n";
+			}
 		}
+
 		echo "</ul>\n";
 	}
 	else
