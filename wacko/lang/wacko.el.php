@@ -46,6 +46,7 @@ $wacko_translation = array(
 	'PDFLink' => 'Έγγραφο PDF',
 	'RDFLink' => 'Έγγραφο RDF',
 	'EmailLink' => 'Συγγραφή ενός email (εκκίνηση mail εφαρμογής)',
+	'JabberLink' => 'Chat via XMPP (Jabber client launch)',
 
 	'ShowTip' => 'Πάτησε εδώ για να επιστρέψεις στην κατάσταση εμφάνισης',
 	'ShowText' => 'Εμφάνιση',
@@ -599,6 +600,7 @@ $wacko_translation = array(
 	'pdficon' => '<img src="{theme}icons/pdf.gif" alt="PDF Document" />',
 	'rdficon'  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',
 	'emailicon' => '<img src="{theme}icons/mail.gif" alt="" />',
+	'jabbericon' => '<img src="{theme}icons/jabber.png" alt="xmpp" />',
 	'lockicon' => '<img src="{theme}icons/lock.gif" alt="Access denied" />',
 	'keyicon' => '<img src="{theme}icons/key.gif" alt="Page with custom access" />',
 	'wantedicon' => '?',

@@ -46,6 +46,7 @@ $wacko_translation = array(
 	'PDFLink' => 'PDF Document',
 	'RDFLink' => 'RDF Document',
 	'EmailLink' => 'Scrie scrisoare (deschide programul Dvs. postal)',
+	'JabberLink' => 'Chat via XMPP (Jabber client launch)',
 
 	'ShowTip' => 'Apasati, pentru intoarcere la vizualizare',
 	'ShowText' => 'Vizualizare',
@@ -600,6 +601,7 @@ $wacko_translation = array(
 	'pdficon'  => '<img src="{theme}icons/pdf.gif" alt="PDF Document" />',
 	'rdficon'  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',
 	'emailicon' => '<img src="{theme}icons/mail.gif" alt="" />',
+	'jabbericon' => '<img src="{theme}icons/jabber.png" alt="xmpp" />',
 	'lockicon' => '<img src="{theme}icons/lock.gif" alt="Nu aveti acces" />',
 	'keyicon'  => '<img src="{theme}icons/key.gif" alt="Pagina cu acces limitat" />',
 	'wantedicon' => '?',
