@@ -26,7 +26,7 @@ if ($pages == true)
 
 			if ($day != $curday)
 			{
-				if ($curday) print("</ul>\n<br /></li>\n");
+				if ($curday) echo "</ul>\n<br /></li>\n";
 				echo "<li><strong>".date($this->config['date_format'], strtotime($day)).":</strong>\n<ul>\n";
 				$curday = $day;
 			}

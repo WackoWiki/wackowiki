@@ -48,7 +48,7 @@ function admin_deletedpages(&$engine, &$module)
 
 			if ($day != $curday)
 			{
-				if ($curday) print("\n");
+				if ($curday) echo "\n";
 				echo '<tr class="lined"><td colspan="2"><br /><strong>'.date($engine->config['date_format'],strtotime($day)).":</strong></td></tr>\n";
 				$curday = $day;
 			}

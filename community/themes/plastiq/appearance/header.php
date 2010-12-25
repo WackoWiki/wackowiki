@@ -8,14 +8,19 @@
 <?php
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noindex'] == 1 || $this->page['noindex'] == 1)
+{
 	echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
+}
 ?>
 <meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords()); ?>" />
 <meta name="description" content="<?php echo htmlspecialchars($this->get_description()); ?>" />
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 <meta http-equiv="imagetoolbar" content="no" />
 <link href="<?php echo $this->config['theme_url'] ?>css/atom.css" rel="stylesheet" type="text/css" media="screen" />
-<?php if ($this->config['allow_x11colors']) {?><link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" /><?php } ?>
+<?php if ($this->config['allow_x11colors'])
+{?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" />
+<?php } ?>
 <link href="<?php echo $this->config['theme_url'] ?>css/wacko.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo $this->config['theme_url'] ?>css/default.css" rel="stylesheet" type="text/css" media="screen" />
 <link rel="start" href="/" />
@@ -45,19 +50,20 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 						<div id="controls">
 							<a name="top"></a>
 <?php
-	if ($this->get_user())
-	{
+$user = '';
+if ($this->get_user())
+{
 ?>
-							id: <?php echo $this->get_user_name() ;?> &nbsp; <a href="<?php echo $this->href('', $this->config['settings_page']); ?>" title="Account Settings"><?php echo $this->get_translation('YouArePanelAccount'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->config['login_page']); ?>" title="parameters of current session">Session</a> &nbsp; <a onclick="return confirm('Do you really want to leave the system?');" href="<?php echo $this->href('', $this->config['login_page'], 'action=logout&amp;goback='.$this->slim_url($this->tag)); ?>" title="Logout">Logout</a><br />
+	id: <?php echo $this->get_user_name() ;?> &nbsp; <a href="<?php echo $this->href('', $this->config['settings_page']); ?>" title="Account Settings"><?php echo $this->get_translation('YouArePanelAccount'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->config['login_page']); ?>" title="parameters of current session">Session</a> &nbsp; <a onclick="return confirm('Do you really want to leave the system?');" href="<?php echo $this->href('', $this->config['login_page'], 'action=logout&amp;goback='.$this->slim_url($this->tag)); ?>" title="Logout">Logout</a><br />
 <?php
-	}
-	else
-	{
+}
+else
+{
 ?>
-							id: <em><?php echo $this->get_translation('Guest') ;?></em> &nbsp; <a href="<?php echo $this->href('', $this->config['login_page']); ?>" title="log and log in">login</a> &nbsp; <a href="<?php echo $this->href('', $this->config['registration_page']); ?>" title="log in">Registration</a><br />
+	id: <em><?php echo $this->get_translation('Guest') ;?></em> &nbsp; <a href="<?php echo $this->href('', $this->config['login_page']); ?>" title="log and log in">login</a> &nbsp; <a href="<?php echo $this->href('', $this->config['registration_page']); ?>" title="log in">Registration</a><br />
 <?php
-	}
-	echo "\n";
+}
+echo "\n";
 ?>
 							current time <?php echo date($this->config['time_format_seconds'].' '.$this->config['date_format'], time()); ?>
 						</div>

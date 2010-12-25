@@ -1,14 +1,21 @@
 <div id="page"><?php
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href('show'));
+if (!$this->page)
+{
+	$this->redirect($this->href('show'));
+}
 
 // deny for comment
 if ($this->page['comment_on_id'])
-$this->redirect($this->href('', $this->get_comment_on_tag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
+{
+	$this->redirect($this->href('', $this->get_comment_on_tag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
+}
 // and for forum page
 else if ($this->forum === true && !$this->is_admin())
+{
 	$this->redirect($this->href());
+}
 
 if ($this->user_is_owner() || $this->is_admin())
 {
@@ -16,15 +23,19 @@ if ($this->user_is_owner() || $this->is_admin())
 	{
 		// acls for page or entire cluster
 		$need_massacls = 0;
-		if ($_POST['massacls'] == 'on') $need_massacls = 1;
+
+		if ($_POST['massacls'] == 'on')
+		{
+			$need_massacls = 1;
+		}
 
 		// acls page
 		if ($need_massacls == 0)
 		{
 			// store lists
-			$this->save_acl($this->get_page_id(), 'read', $_POST['read_acl']);
-			$this->save_acl($this->get_page_id(), 'write', $_POST['write_acl']);
-			$this->save_acl($this->get_page_id(), 'comment', $_POST['comment_acl']);
+			$this->save_acl($this->page['page_id'], 'read', $_POST['read_acl']);
+			$this->save_acl($this->page['page_id'], 'write', $_POST['write_acl']);
+			$this->save_acl($this->page['page_id'], 'comment', $_POST['comment_acl']);
 
 			// log event
 			$this->log(2, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
@@ -35,22 +46,17 @@ if ($this->user_is_owner() || $this->is_admin())
 			if ($newowner = $_POST['newowner'])
 			{
 				// check user exists
-				$exists = $this->load_single(
-						"SELECT user_name ".
+				$user = $this->load_single(
+						"SELECT user_id, user_name, email, email_confirm ".
 						"FROM {$this->config['user_table']} ".
 						"WHERE user_name = '".quote($this->dblink, $newowner)."' ".
 						"LIMIT 1");
 
-				if ($exists == true)
+				if ($user == true)
 				{
-					$newowner = $exists['user_name'];
-					$newowner_id = $this->get_user_id_by_name($newowner);
-					$this->set_page_owner($this->get_page_id(), $newowner_id);
-
-					$user = $this->load_single(
-							"SELECT email, email_confirm ".
-							"FROM {$this->config['user_table']} ".
-							"WHERE user_name = '".quote($this->dblink, $newowner)."'");
+					$newowner		= $user['user_name'];
+					$newowner_id	= $user['user_id'];
+					$this->set_page_owner($this->page['page_id'], $newowner_id);
 
 					if ($user['email_confirm'] == '')
 					{
@@ -82,7 +88,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			$comments = $this->load_all(
 					"SELECT page_id ".
 					"FROM ".$this->config['table_prefix']."page ".
-					"WHERE comment_on_id = '".$this->get_page_id()."' ".
+					"WHERE comment_on_id = '".$this->page['page_id']."' ".
 						"AND owner_id='".quote($this->dblink, $this->get_user_id())."'");
 
 			foreach ($comments as $num => $page)
@@ -95,9 +101,8 @@ if ($this->user_is_owner() || $this->is_admin())
 				if ($newowner = $_POST['newowner'])
 				{
 					$newowner_id = $this->get_user_id_by_name($newowner);
+					$this->set_page_owner($page['page_id'], $newowner_id);
 				}
-
-				$this->set_page_owner($page['page_id'], $newowner_id);
 			}
 		}
 
@@ -117,7 +122,7 @@ if ($this->user_is_owner() || $this->is_admin())
 					? ""
 					: "AND p.owner_id = '".quote($this->dblink, $this->get_user_id())."'"));
 
-			foreach ($pages as $num=>$page)
+			foreach ($pages as $num => $page)
 			{
 				// store lists
 				$this->save_acl($page['page_id'], 'read', $_POST['read_acl']);
@@ -135,7 +140,7 @@ if ($this->user_is_owner() || $this->is_admin())
 					$ownedpages .= $this->href('', $page['tag'])."\n";
 
 					// log event
-					$this->log(2, str_replace('%2', $exists['user_name'], str_replace('%1', $page['tag']." ".$page['title'], $this->get_translation('LogOwnershipChanged', $this->config['language']))));
+					$this->log(2, str_replace('%2', $user['user_name'], str_replace('%1', $page['tag']." ".$page['title'], $this->get_translation('LogOwnershipChanged', $this->config['language']))));
 				}
 			}
 
@@ -171,9 +176,9 @@ if ($this->user_is_owner() || $this->is_admin())
 	else
 	{
 		// load acls
-		$readACL = $this->load_acl($this->get_page_id(), 'read', 1, 0);
-		$writeACL = $this->load_acl($this->get_page_id(), 'write', 1, 0);
-		$commentACL = $this->load_acl($this->get_page_id(), 'comment', 1, 0);
+		$readACL	= $this->load_acl($this->page['page_id'], 'read', 1, 0);
+		$writeACL	= $this->load_acl($this->page['page_id'], 'write', 1, 0);
+		$commentACL	= $this->load_acl($this->page['page_id'], 'comment', 1, 0);
 
 		// show form
 		?>
@@ -198,7 +203,7 @@ if ($this->user_is_owner() || $this->is_admin())
 	{
 		foreach($users as $user)
 		{
-			print("<option value=\"".htmlspecialchars($user['user_name'])."\">".$user['user_name']."</option>\n");
+			echo "<option value=\"".htmlspecialchars($user['user_name'])."\">".$user['user_name']."</option>\n";
 		}
 	}
 	?>
@@ -211,12 +216,12 @@ if ($this->user_is_owner() || $this->is_admin())
 </p>
 </div>
 	<?php
-	print($this->form_close());
+	echo $this->form_close();
 	}
 }
 else
 {
-	print($this->get_translation('ACLAccessDenied'));
+	echo $this->get_translation('ACLAccessDenied');
 }
 
 ?></div>

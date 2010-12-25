@@ -3970,11 +3970,11 @@ class Wacko
 		}
 	}
 
-	function get_cached_acl($page_id, $privilege, $useDefaults)
+	function get_cached_acl($page_id, $privilege, $use_defaults)
 	{
-		if (isset( $this->acl_cache[$page_id.'#'.$privilege.'#'.$useDefaults] ))
+		if (isset( $this->acl_cache[$page_id.'#'.$privilege.'#'.$use_defaults] ))
 		{
-			return $this->acl_cache[$page_id.'#'.$privilege.'#'.$useDefaults];
+			return $this->acl_cache[$page_id.'#'.$privilege.'#'.$use_defaults];
 		}
 		else
 		{
@@ -3983,29 +3983,29 @@ class Wacko
 	}
 
 	// $acl array must reflect acls table row structure
-	function cache_acl($page_id, $privilege, $useDefaults, $acl)
+	function cache_acl($page_id, $privilege, $use_defaults, $acl)
 	{
-		$this->acl_cache[$page_id.'#'.$privilege.'#'.$useDefaults] = $acl;
+		$this->acl_cache[$page_id.'#'.$privilege.'#'.$use_defaults] = $acl;
 	}
 
-	function load_acl($page_id, $privilege, $useDefaults = 1, $useCache = 1, $useParent = 1)
+	function load_acl($page_id, $privilege, $use_defaults = 1, $use_cache = 1, $use_parent = 1)
 	{
 		if (!isset($acl))
 		{
 			$acl = '';
 		}
 
-		if ($useCache && $useParent)
-			if ($cachedACL = $this->get_cached_acl($page_id, $privilege, $useDefaults))
+		if ($use_cache && $use_parent)
+			if ($cached_acl = $this->get_cached_acl($page_id, $privilege, $use_defaults))
 			{
-				$acl = $cachedACL;
+				$acl = $cached_acl;
 			}
 
 		if (!$acl)
 		{
-			if ($cachedACL = $this->get_cached_acl($page_id, $privilege, $useDefaults))
+			if ($cached_acl = $this->get_cached_acl($page_id, $privilege, $use_defaults))
 			{
-				$acl = $cachedACL;
+				$acl = $cached_acl;
 			}
 
 			if (!$acl)
@@ -4018,7 +4018,7 @@ class Wacko
 								"LIMIT 1");
 
 				// if still no acl, use config defaults
-				if (!$acl && $useDefaults)
+				if (!$acl && $use_defaults)
 				{
 					// First look for parent ACL, so that clusters/subpages
 					// work correctly.
@@ -4031,8 +4031,8 @@ class Wacko
 						// By letting it fetch defaults, it will automatically recurse
 						// up the tree of parent pages... fetching the ACL on the root
 						// page if necessary.
-						$parent_id = $this->get_page_id($parent);
-						$acl = $this->load_acl( $parent_id, $privilege, 1 );
+						$parent_id	= $this->get_page_id($parent);
+						$acl		= $this->load_acl($parent_id, $privilege, 1);
 					}
 
 					if (!$acl)
@@ -4047,14 +4047,14 @@ class Wacko
 					}
 				}
 
-				$this->cache_acl($page_id, $privilege, $useDefaults, $acl);
+				$this->cache_acl($page_id, $privilege, $use_defaults, $acl);
 			}
 		}
 		return $acl;
 	}
 
 	// returns true if $user (defaults to the current user) has access to $privilege on $page_tag (defaults to the current page)
-	function has_access($privilege, $page_id = '', $user = '', $useParent = 1)
+	function has_access($privilege, $page_id = '', $user = '', $use_parent = 1)
 	{
 		if ($user == '')
 		{
@@ -4076,11 +4076,11 @@ class Wacko
 
 		if ($privilege == 'write')
 		{
-			$useParent = 0;
+			$use_parent = 0;
 		}
 
 		// load acl
-		$acl = $this->load_acl($page_id, $privilege, 1, 1, $useParent);
+		$acl = $this->load_acl($page_id, $privilege, 1, 1, $use_parent);
 		$this->_acl = $acl;
 
 		// if current user is owner or admin, return true. they can do anything!
@@ -4949,7 +4949,7 @@ class Wacko
 		// display page contents
 		if (preg_match('/(\.xml)$/', $this->method))
 		{
-			print($this->method($this->method));
+			echo $this->method($this->method);
 		}
 		else
 		{
@@ -4976,7 +4976,7 @@ class Wacko
 			$this->context[$this->current_context] = $this->tag;
 			$data .= $this->method($this->method);
 			$this->current_context--;
-			print($this->header($mod).$data.$this->footer($mod));
+			echo $this->header($mod).$data.$this->footer($mod);
 		}
 		return $this->tag;
 	}

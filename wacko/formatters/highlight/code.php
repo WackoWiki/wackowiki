@@ -8,5 +8,5 @@ if ($this->method != 'print')
 else
 	$wrap = 'on';
 
-print("<!--notypo--><pre class=\"code\">".htmlspecialchars($text)."</pre><!--/notypo-->");
+echo "<!--notypo--><pre class=\"code\">".htmlspecialchars($text)."</pre><!--/notypo-->";
 ?>

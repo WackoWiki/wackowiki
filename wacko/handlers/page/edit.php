@@ -238,7 +238,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 					'<input name="add" type="hidden" value="1" />';
 	}
 
-	print($output);
+	echo $output;
 
 	$output		= '';
 	$preview	= '';
@@ -267,7 +267,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 		$output .= $preview;
 		$output .= "</div><br />\n";
 
-		print($output);
+		echo $output;
 
 		// edit
 		$output = '';
@@ -385,7 +385,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 
 			$output .= "<br />".$this->get_translation('Categories').':<div class="setcategory"><small><br /><br />'.substr(implode(' ', $_words), 6).'</small></div><br /><br />';
 		}
-		print($output);
+		echo $output;
 
 		// captcha code starts
 
@@ -437,7 +437,7 @@ if ($this->has_access('write') && $this->has_access('read'))
 		&nbsp;
 		<input type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 <?php
-		print ($this->form_close());
+		echo $this->form_close();
 	}
 	else
 	{

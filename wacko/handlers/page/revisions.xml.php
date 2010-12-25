@@ -64,6 +64,6 @@ else
 $xml .= "</channel>\n";
 $xml .= "</rss>\n";
 
-print($xml);
+echo $xml;
 
 ?>

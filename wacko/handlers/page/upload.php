@@ -96,7 +96,7 @@ if ($registered
 		}
 		else
 		{
-			print($this->get_translation('UploadFileNotFound'));
+			echo $this->get_translation('UploadFileNotFound');
 		}
 
 		echo "</div>";
@@ -156,6 +156,7 @@ if ($registered
 					{
 						$this->set_message($message);
 					}
+
 					// log event
 					$this->log(1, str_replace('%2', $what[0]['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogRemovedFile', $this->config['language']))));
 				}
@@ -198,6 +199,7 @@ if ($registered
 					// 3. extensions
 					$ext	= strtolower($ext);
 					$banned = explode('|', $this->config['upload_banned_exts']);
+
 					if (in_array($ext, $banned))
 					{
 						$ext = $ext.'.txt';
@@ -391,6 +393,7 @@ if ($this->has_access('read'))
 {
 	echo $this->action('files', array())."<br />";
 }
+
 if (!$this->config['revisions_hide_cancel'])
 {
 	echo "<input type=\"button\" value=\"".$this->get_translation('CancelDifferencesButton')."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";

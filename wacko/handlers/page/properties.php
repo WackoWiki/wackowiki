@@ -222,7 +222,7 @@ if ($langs = $this->available_languages())
 {
 	foreach ($langs as $lang)
 	{
-		print("<option value=\"".$lang."\" ".($clang==$lang ? "selected=\"selected\"" : "").">".$lang."</option>\n");
+		echo "<option value=\"".$lang."\" ".($clang==$lang ? "selected=\"selected\"" : "").">".$lang."</option>\n";
 	}
 }
 ?>
@@ -364,7 +364,7 @@ if ($langs = $this->available_languages())
 
 else
 {
-	print($this->get_translation('ReadAccessDenied'));
+	echo $this->get_translation('ReadAccessDenied');
 }
 ?>
 <br style="clear: both;" />

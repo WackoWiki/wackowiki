@@ -499,7 +499,7 @@ class Init
 			}
 			else
 			{
-				print("<em>Invalid action</em>");
+				echo "<em>Invalid action</em>";
 			}
 
 			include('setup/footer.php');

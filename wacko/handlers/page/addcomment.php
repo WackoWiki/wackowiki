@@ -41,7 +41,11 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	else if (isset($_POST['preview']))
 	{
 		// comment preview
-		if (!$user) $this->cache->cache_invalidate($this->supertag);
+		if (!$user)
+		{
+			$this->cache->cache_invalidate($this->supertag);
+		}
+
 		$_SESSION['preview']	= $body;
 		$_SESSION['body']		= $body;
 		$_SESSION['title']		= $title;
@@ -51,7 +55,11 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	else if (isset($_SESSION['comment_delay']) && ((time() - $_SESSION['comment_delay']) < $this->config['comment_delay']))
 	{
 		// posting flood protection
-		if (!$user) $this->cache->cache_invalidate($this->supertag);
+		if (!$user)
+		{
+			$this->cache->cache_invalidate($this->supertag);
+		}
+
 		$this->set_message('<div class="error">'.str_replace('%1', $this->config['comment_delay'], $this->get_translation('CommentFlooded')).'</div>');
 		$_SESSION['body']			= $body;
 		$_SESSION['comment_delay']	= time();
@@ -77,6 +85,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 					if (!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
 					{
 						echo '++++++++';
+
 						if ($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
 						{
 							// reset freecap session vars
@@ -136,21 +145,25 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			// log event
 			$this->log(5, str_replace('%2', $this->tag.' '.$this->page['title'], str_replace('%1', 'Comment'.$num, $this->get_translation('LogCommentPosted', $this->config['language']))));
 
-		// restore username after anonymous publication
-		if ($_POST['noid_publication'] == $this->tag)
-		{
-			$this->set_user_setting('user_name', $remember_name);
-			unset($remember_name);
-			if ($body_r) $this->set_user_setting('noid_protect', true);
-		}
+			// restore username after anonymous publication
+			if ($_POST['noid_publication'] == $this->tag)
+			{
+				$this->set_user_setting('user_name', $remember_name);
+				unset($remember_name);
 
-		// now we render it internally so we can write the updated link table.
-		$this->clear_link_table();
-		$this->start_link_tracking();
-		$dummy = $this->format($body_r, 'post_wacko');
-		$this->stop_link_tracking();
-		$this->write_link_table('Comment'.$num);
-		$this->clear_link_table();
+				if ($body_r)
+				{
+					$this->set_user_setting('noid_protect', true);
+				}
+			}
+
+			// now we render it internally so we can write the updated link table.
+			$this->clear_link_table();
+			$this->start_link_tracking();
+			$dummy = $this->format($body_r, 'post_wacko');
+			$this->stop_link_tracking();
+			$this->write_link_table('Comment'.$num);
+			$this->clear_link_table();
 
 			$this->set_message($this->get_translation('CommentAdded'));
 		}
@@ -163,7 +176,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 }
 else
 {
-	print("<div id=\"page\">".$this->get_translation('CommentAccessDenied')."</div>\n");
+	echo "<div id=\"page\">".$this->get_translation('CommentAccessDenied')."</div>\n";
 }
 
 ?>

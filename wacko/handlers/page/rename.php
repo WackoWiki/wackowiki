@@ -1,14 +1,21 @@
 <div id="page"><?php
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href('show'));
+if (!$this->page)
+{
+	$this->redirect($this->href('show'));
+}
 
 // deny for comment
 if ($this->page['comment_on_id'])
+{
 	$this->redirect($this->href('', $this->get_comment_on_tag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
+}
 // and for forum page
 else if ($this->forum === true && !$this->is_admin())
+{
 	$this->redirect($this->href());
+}
 
 if ($user = $this->get_user())
 {
@@ -16,7 +23,9 @@ if ($user = $this->get_user())
 	$registered = true;
 }
 else
-$user = GUEST;
+{
+	$user = GUEST;
+}
 
 if ($registered
 &&
@@ -33,7 +42,11 @@ if ($registered
 		{
 			// rename or massrename
 			$need_massrename = 0;
-			if (isset($_POST['massrename']) && $_POST['massrename'] == 'on') $need_massrename = 1;
+
+			if (isset($_POST['massrename']) && $_POST['massrename'] == 'on')
+			{
+				$need_massrename = 1;
+			}
 
 			// rename
 			if ($need_massrename == 0)
@@ -63,15 +76,22 @@ if ($registered
 						// Rename page
 						$need_redirect = 0;
 
-						if (isset($_POST['redirect']) && $_POST['redirect'] == 'on') $need_redirect = 1;
+						if (isset($_POST['redirect']) && $_POST['redirect'] == 'on')
+						{
+							$need_redirect = 1;
+						}
 
 						if ($need_redirect == 0)
 						{
 							if ($this->remove_referrers($this->tag))
-									print(str_replace('%1', $this->tag, $this->get_translation('ReferrersRemoved'))."<br />\n");
+							{
+								print(str_replace('%1', $this->tag, $this->get_translation('ReferrersRemoved'))."<br />\n");
+							}
 
 							if ($this->rename_page($this->tag, $new_name, $supernewname))
+							{
 								print(str_replace('%1', $this->tag, $this->get_translation('PageRenamed'))."<br />\n");
+							}
 
 							$this->clear_cache_wanted_page($new_name);
 							$this->clear_cache_wanted_page($supernewname);
@@ -82,7 +102,9 @@ if ($registered
 							$this->cache_wanted_page($this->supertag);
 
 							if ($this->save_page($this->tag, "{{Redirect page=\"/".$new_name."\"}}"))
+							{
 								print(str_replace('%1', $this->tag, $this->get_translation('RedirectCreated'))."<br />\n");
+							}
 
 							$this->clear_cache_wanted_page($this->tag);
 							$this->clear_cache_wanted_page($this->supertag);
@@ -135,7 +157,7 @@ if ($registered
 }
 else
 {
-	print($this->get_translation('NotOwnerAndCantRename'));
+	echo $this->get_translation('NotOwnerAndCantRename');
 }
 ?></div>
 <?php
@@ -144,7 +166,10 @@ function recursive_move(&$parent, $root)
 {
 	$new_root = trim($_POST['newname'], '/');
 
-	if($root == '/') exit; // who and where did intend to move root???
+	if($root == '/')
+	{
+		exit; // who and where did intend to move root???
+	}
 
 	$query = "'".quote($parent->dblink, $parent->npj_translit($root))."%'";
 	$pages = $parent->load_all(
@@ -193,15 +218,23 @@ function move(&$parent, $old_page, $new_name )
 			{
 				// Rename page
 				$need_redirect = 0;
-				if ($_POST['redirect'] == 'on') $need_redirect = 1;
+
+				if ($_POST['redirect'] == 'on')
+				{
+					$need_redirect = 1;
+				}
 
 				if ($need_redirect == 0)
 				{
 					if ($parent->remove_referrers($old_page['tag']))
+					{
 						print("<br />".str_replace('%1', $old_page['tag'], $parent->get_translation('ReferrersRemoved'))."<br />\n");
+					}
 
 					if ($parent->rename_page($old_page['tag'], $new_name, $supernewname))
+					{
 						print(str_replace('%1', $old_page['tag'], $parent->get_translation('PageRenamed'))."<br />\n");
+					}
 
 					$parent->clear_cache_wanted_page($new_name);
 					$parent->clear_cache_wanted_page($supernewname);
@@ -212,7 +245,9 @@ function move(&$parent, $old_page, $new_name )
 					$parent->cache_wanted_page($old_page['supertag']);
 
 					if ($parent->save_page($old_page['tag'], '', "{{Redirect page=\"/".$new_name."\"}}"))
+					{
 						print(str_replace('%1', $old_page['tag'], $parent->get_translation('RedirectCreated'))."<br />\n");
+					}
 
 					$parent->clear_cache_wanted_page($old_page['tag']);
 					$parent->clear_cache_wanted_page($old_page['supertag']);

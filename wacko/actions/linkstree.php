@@ -9,7 +9,7 @@ if (!function_exists('links_tree_view'))
 		if ($level > 0)
 		{
 			if ($indent)
-			print((str_repeat("&nbsp;",$indent*7)).$wacko->link('/'.$node, '', $node)."<br/>\n");
+			echo (str_repeat("&nbsp;",$indent*7)).$wacko->link('/'.$node, '', $node)."<br/>\n";
 
 			$pages = $wacko->load_all(
 				"SELECT to_tag ".
@@ -46,7 +46,7 @@ $root = $this->unwrap_link($root);
 
 if (!$nomark)
 {
-	print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('LinksTreeTitle')."</span></p>\n");
+	echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('LinksTreeTitle')."</span></p>\n";
 }
 
 if (!isset($levels)) $levels = 3;
@@ -54,16 +54,16 @@ else $levels = (int)$levels;
 if ($levels > 4)
 {
 	$levels = 4;
-	print("<em>".$this->get_translation('LinksTreeLevel4Warning')."</em><br />");
+	echo "<em>".$this->get_translation('LinksTreeLevel4Warning')."</em><br />";
 }
 
-print($this->link('/'.$root, '', $root)."<br />\n");//<br/>
+echo $this->link('/'.$root, '', $root)."<br />\n";//<br/>
 
 links_tree_view($this, $root, $levels, 0);
 
 if (!$nomark)
 {
-	print("</div>\n");
+	echo "</div>\n";
 }
 
 ?>

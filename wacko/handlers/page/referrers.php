@@ -27,8 +27,14 @@ if ($user = $this->get_user())
 			{
 				if ($page['tag'])
 				{
-					if ($this->config['hide_locked']) $access = $this->has_access('read',$page['page_id']);
-					else $access = true;
+					if ($this->config['hide_locked'])
+					{
+						$access = $this->has_access('read',$page['page_id']);
+					}
+					else
+					{
+						$access = true;
+					}
 					if ($access)
 					{
 						$links[] = $this->link('/'.$page['tag']);

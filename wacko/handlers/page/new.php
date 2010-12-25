@@ -32,6 +32,7 @@ if (isset($_POST['tag']) && $newtag = trim($_POST['tag'], '/ '))
 		{
 			$message .= $this->get_translation('PageAlreadyExistsEditDenied');
 		}
+
 		$this->set_message($message);
 	}
 	else
@@ -87,6 +88,7 @@ if (substr_count($this->tag, '/') > 0)
 	{
 		echo "<em>".$this->get_translation('CreatePageDenied')."</em>";
 	}
+
 	echo "";
 	echo $this->form_close();
 	echo "<br />";

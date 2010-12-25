@@ -17,8 +17,11 @@ if (!function_exists('formatter_source_callback'))
 		$m		= $matches[1];
 		$nbsp	= "&nbsp;";
 		$result	= '';
+
 		for( $i = strlen($m); $i > 0; $i-- )
+		{
 			$result .= $nbsp;
+		}
 
 		return $result;
 	}

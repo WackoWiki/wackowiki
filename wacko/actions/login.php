@@ -37,7 +37,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 else if ($user = $this->get_user())
 {
 	// user is logged in; display logout form
-	print($this->form_open());
+	echo $this->form_open();
 	?>
 
 <input type="hidden" name="action" value="logout" />
@@ -85,7 +85,7 @@ else if ($user = $this->get_user())
   </p>
 </div>
 <?php
-	print($this->form_close());
+	echo $this->form_close();
 }
 else
 {
@@ -193,7 +193,7 @@ else
 
 	if ($error) $this->set_message($error);
 
-	print($this->form_open());
+	echo $this->form_open();
 	?>
 <input type="hidden" name="action" value="login" />
 <input type="hidden" name="goback" value="<?php echo (isset($_GET['goback']) ? stripslashes($_GET['goback']) : '');?>" />
@@ -237,7 +237,7 @@ else
 	document.getElementById("f<?php echo $focus;?>").focus();
 </script>
 <?php
-	print($this->form_close());
+	echo $this->form_close();
 }
 ?>
 <!--/notypo-->

@@ -2,27 +2,33 @@
 <?php
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href('show'));
+if (!$this->page)
+{
+	$this->redirect($this->href('show'));
+}
 
 // deny for comment
-if ($this->page['comment_on_id']) $this->redirect($this->href('', $this->page['tag']));
+if ($this->page['comment_on_id'])
+{
+	$this->redirect($this->href('', $this->page['tag']));
+}
 
 if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{
-		print(str_replace('%1',$this->href('edit'),$this->get_translation('DoesNotExists')));
+		echo str_replace('%1',$this->href('edit'),$this->get_translation('DoesNotExists'));
 	}
 	else
 	{
 		/* obsolete code - or do we need an ability to print old revisions?
 		if ($this->page['latest'] == 0)
 		{
-			print("<div class=\"revisioninfo\">".
+			echo "<div class=\"revisioninfo\">".
 			str_replace('%1',$this->href(),
 			str_replace('%2',$this->tag,
 			str_replace('%3',$this->page['modified'],
-			$this->get_translation('Revision')))).".</div>");
+			$this->get_translation('Revision')))).".</div>";
 		}*/
 
 		// start enumerating links
@@ -50,7 +56,10 @@ if ($this->has_access('read'))
 
 				foreach ($comments as $comment)
 				{
-					if (!$comment['body_r']) $comment['body_r'] = $this->format($comment['body']);
+					if (!$comment['body_r'])
+					{
+						$comment['body_r'] = $this->format($comment['body']);
+					}
 
 					echo "<div class=\"comment\">".
 							"<span class=\"commentinfo\">".
@@ -80,7 +89,11 @@ if ($this->has_access('read'))
 			foreach ($this->numerate_links as $l => $n)
 			{
 				echo "<small><strong><sup><a name=\"reflink\">$n</a></sup></strong> $l</small>\n";
-				if (++$i < $c) echo "<br /><br />\n";
+
+				if (++$i < $c)
+				{
+					echo "<br /><br />\n";
+				}
 			}
 
 			echo "</div>\n";
@@ -92,7 +105,7 @@ if ($this->has_access('read'))
 }
 else
 {
-	print($this->get_translation('ReadAccessDenied'));
+	echo $this->get_translation('ReadAccessDenied');
 }
 ?>
 </div>

@@ -213,7 +213,7 @@ if (!isset($_POST['confirm']))
 	{
 		if ($error) $this->set_message($this->format($error));
 
-		print($this->form_open());
+		echo $this->form_open();
 		?>
 <input type="hidden"
 	name="action" value="login" />
@@ -317,7 +317,7 @@ echo "<br /><small>".
 <p><input type="submit" value="<?php echo $this->get_translation('RegistrationButton'); ?>" /></p>
 </div>
 		<?php
-		print($this->form_close());
+		echo $this->form_close();
 	}
 	else
 	{

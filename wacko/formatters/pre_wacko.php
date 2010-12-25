@@ -50,12 +50,15 @@ if (!class_exists('preformatter'))
 					(preg_match('/^(\(\()(.+)(\)\))$/', $thing, $matches)))
 			{
 				list (, $b1, $cont, $b2) = $matches;
+
 				if (preg_match('/\&\#\d+;/', $cont, $matches))
 				{
 					$thing = $b1.@strtr($cont, $this->object->unicode_entities).' @@'.$this->object->user_lang.$b2;
 				}
+
 				return $thing;
 			}
+
 			return $thing;
 		}
 	}
@@ -64,6 +67,6 @@ if (!class_exists('preformatter'))
 $parser	= new preformatter($this);
 $text	= preg_replace_callback($parser->PREREGEXP, array(&$parser, 'precallback'), $text);
 
-print($text);
+echo $text;
 
 ?>

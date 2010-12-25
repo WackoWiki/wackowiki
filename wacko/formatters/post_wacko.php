@@ -18,6 +18,6 @@ if ($options['stripnotypo'])
 	$text = str_replace('<!--/notypo-->', '', $text);
 }
 
-print($text);
+echo $text;
 
 ?>

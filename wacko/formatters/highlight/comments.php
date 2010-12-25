@@ -1,4 +1,4 @@
 <?php
 //comments
-# print("<!--notypo--><!-- ".str_replace('-->', '--&gt;', $text)." --><!--/notypo-->");
+# echo "<!--notypo--><!-- ".str_replace('-->', '--&gt;', $text)." --><!--/notypo-->";
 ?>

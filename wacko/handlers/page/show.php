@@ -1,7 +1,10 @@
 <div id="page" class="page">
 <?php
 
-if (!isset ($this->config['comments_count'])) $this->config['comments_count'] = 15;
+if (!isset ($this->config['comments_count']))
+{
+	$this->config['comments_count'] = 15;
+}
 
 if ($this->config['hide_rating'] != 1 && ($this->config['hide_rating'] != 2 || $this->get_user()))
 {
@@ -11,6 +14,7 @@ if ($this->config['hide_rating'] != 1 && ($this->config['hide_rating'] != 2 || $
 	{
 		$cookie	= $engine->get_cookie('rating');
 		$ids	= explode(';', $cookie);
+
 		if ($id = array_search($id, $ids))
 		{
 			return true;
@@ -59,17 +63,17 @@ if ($this->has_access('read'))
 		// comment header?
 		if ($this->page['comment_on_id'])
 		{
-			print("<div class=\"commentinfo\">".$this->get_translation('ThisIsCommentOn')." ".$this->compose_link_to_page($this->get_comment_on_tag($this->page['comment_on_id']), '', '', 0).", ".$this->get_translation('PostedBy')." ".($this->is_wiki_name($this->page['user_name'])?$this->link($this->page['user_name']):$this->page['user_name'])." ".$this->get_translation('At')." ".$this->get_time_string_formatted($this->page['modified'])."</div>");
+			echo "<div class=\"commentinfo\">".$this->get_translation('ThisIsCommentOn')." ".$this->compose_link_to_page($this->get_comment_on_tag($this->page['comment_on_id']), '', '', 0).", ".$this->get_translation('PostedBy')." ".($this->is_wiki_name($this->page['user_name'])?$this->link($this->page['user_name']):$this->page['user_name'])." ".$this->get_translation('At')." ".$this->get_time_string_formatted($this->page['modified'])."</div>";
 		}
 
 		// revision header
 		if ($this->page['latest'] == 0)
 		{
-			print("<div class=\"revisioninfo\">".
+			echo "<div class=\"revisioninfo\">".
 			str_replace('%1', $this->href(),
 			str_replace('%2', $this->tag,
 			str_replace('%3', $this->get_page_time_formatted(),
-			$this->get_translation('Revision')))));
+			$this->get_translation('Revision'))));
 
 			// if this is an old revision, display ReEdit button
 			if ($this->has_access('write'))
@@ -117,12 +121,14 @@ if ($this->has_access('read'))
 
 			// store to DB
 			if ($this->page['latest'] != 0)
+			{
 				$this->query(
 					"UPDATE ".$this->config['table_prefix']."page SET ".
 						"body_r		= '".quote($this->dblink, $this->page['body_r'])."', ".
 						"body_toc	= '".quote($this->dblink, $this->page['body_toc'])."' ".
 					"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
 					"LIMIT 1");
+			}
 		}
 
 		// display page
@@ -144,7 +150,7 @@ else
 	// if (function_exists('virtual')) header("HTTP/1.0 403 Forbidden");
 	header("HTTP/1.0 403 Forbidden");
 
-	print($this->get_translation('ReadAccessDenied'));
+	echo $this->get_translation('ReadAccessDenied');
 }
 ?>
 <br style="clear: both" />&nbsp;</div>
@@ -183,12 +189,11 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 	// files code starts
 	if ($this->config['footer_files'])
 	{
-
 		if ($this->has_access('read') && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->get_user()))
 		{
-
 			// store files display in session
 			$tag = $this->tag;
+
 			if (!isset($_SESSION[$this->config['session_prefix'].'_'.'show_files'][$tag]))
 			{
 				$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$tag] = ($this->user_wants_files() ? '1' : '0');
@@ -221,6 +226,7 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 			echo "<div class=\"files\">";
 			echo $this->action('files', array('nomark' => 1));
 			echo "</div>";
+
 			// display form
 			if ($user = $this->get_user())
 			{
@@ -228,7 +234,9 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 				$registered = true;
 			}
 			else
+			{
 				$user = GUEST;
+			}
 
 			if (isset($registered)
 				&&
@@ -263,29 +271,27 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 			switch ($c = count($files))
 			{
 				case 0:
-					print($this->get_translation('Files_0'));
+					echo $this->get_translation('Files_0');
 					break;
 				case 1:
-					print($this->get_translation('Files_1'));
+					echo $this->get_translation('Files_1');
 					break;
 				default:
-					print(str_replace('%1', $c, $this->get_translation('Files_n')));
+					echo str_replace('%1', $c, $this->get_translation('Files_n'));
 			}
+
 			echo "[<a href=\"".$this->href('', '', 'show_files=1#files')."\">".$this->get_translation('ShowFiles')."</a>]";
 			echo "</div>\n";
 		}
 	}
 	}
 	// files form output ends
-	?>
-	<?php
 	if ($this->config['footer_comments'])
 	{
-	// pagination
-	$pagination = $this->pagination($this->get_comments_count(), $this->config['comments_count'], 'p', 'show_comments=1#comments');
+		// pagination
+		$pagination = $this->pagination($this->get_comments_count(), $this->config['comments_count'], 'p', 'show_comments=1#comments');
 
-	// comments form output begins
-
+		// comments form output begins
 		if ($this->has_access('read') && $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->get_user()))
 		{
 			// load comments for this page
@@ -293,8 +299,11 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 
 			// store comments display in session
 			$tag = $this->tag;
+
 			if (!isset($_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$tag]))
-			$_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$tag] = ($this->user_wants_comments() ? '1' : '0');
+			{
+				$_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$tag] = ($this->user_wants_comments() ? '1' : '0');
+			}
 
 			if(isset($_GET['show_comments']))
 			{
@@ -314,12 +323,17 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 			{
 				// display comments header
 				?>
-			<a name="comments"></a>
-		<div id="commentsheader">
-		<?php if (isset($pagination['text']))
-				echo '<div style="float:right; letter-spacing:normal;"><small>'.$pagination['text'].'</small></div>'; ?>
-		<?php echo $this->get_translation('Comments_all')." [<a href=\"".$this->href('', '', 'show_comments=0')."\">".$this->get_translation('HideComments')."</a>]"; ?>
-			</div>
+				<a name="comments"></a>
+				<div id="commentsheader">
+				<?php
+				if (isset($pagination['text']))
+				{
+					echo '<div style="float:right; letter-spacing:normal;"><small>'.$pagination['text'].'</small></div>';
+				}
+
+				echo $this->get_translation('Comments_all')." [<a href=\"".$this->href('', '', 'show_comments=0')."\">".$this->get_translation('HideComments')."</a>]";
+				?>
+					</div>
 			<?php
 
 			// display comments themselves
@@ -331,19 +345,27 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 				{
 					echo "<li id=\"".$comment['tag']."\" class=\"comment\">\n";
 					$del = '';
+
 					if ($this->is_admin() || $this->user_is_owner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->page['page_id'])))
 					{
-						print("<a href=\"".$this->href('remove', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/delete_comment.gif\" title=\"".$this->get_translation('DeleteCommentTip')."\" alt=\"".$this->get_translation('DeleteText')."\" align=\"right\" border=\"0\" /></a>");
-						print("<a href=\"".$this->href('edit', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/edit.gif\" title=\"".$this->get_translation('EditCommentTip')."\" alt=\"".$this->get_translation('EditComment')."\" align=\"right\" border=\"0\" /></a>");
+						echo "<a href=\"".$this->href('remove', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/delete_comment.gif\" title=\"".$this->get_translation('DeleteCommentTip')."\" alt=\"".$this->get_translation('DeleteText')."\" align=\"right\" border=\"0\" /></a>";
+						echo "<a href=\"".$this->href('edit', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/edit.gif\" title=\"".$this->get_translation('EditCommentTip')."\" alt=\"".$this->get_translation('EditComment')."\" align=\"right\" border=\"0\" /></a>";
 					}
-					if ($comment['body_r']) $strings = $comment['body_r'];
 
-					else $strings = $this->format($comment['body'], 'wacko');
+					if ($comment['body_r'])
+					{
+						$strings = $comment['body_r'];
+					}
+					else
+					{
+						$strings = $this->format($comment['body'], 'wacko');
+					}
+
 					echo "<div class=\"commenttext\">\n";
-					print("<div class=\"commenttitle\">\n<a href=\"".$this->href('', '', 'show_comments=1')."#".$comment['tag']."\">".$comment['title']."</a>\n</div>\n");
-					print($this->format($strings, 'post_wacko')."\n");
+					echo "<div class=\"commenttitle\">\n<a href=\"".$this->href('', '', 'show_comments=1')."#".$comment['tag']."\">".$comment['title']."</a>\n</div>\n";
+					echo $this->format($strings, 'post_wacko')."\n";
 					echo "</div>\n";
-					print("<ul class=\"commentinfo\">\n".
+					echo "<ul class=\"commentinfo\">\n".
 								"<li>".($comment['user']
 										? ($this->is_wiki_name($comment['user'])
 											? $this->link('/'.$comment['user'], '', $comment['user'])
@@ -353,7 +375,7 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 								($comment['modified'] != $comment['created']
 									? "<li>".$this->get_time_string_formatted($comment['modified'])." ".$this->get_translation('CommentEdited')."</li>\n"
 									: '').
-							"</ul>\n");
+							"</ul>\n";
 					echo "</li>";
 				}
 
@@ -361,12 +383,14 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 			}
 
 			if (isset($pagination['text']))
+			{
 				echo '<div style="text-align:right;padding-right:10px;border-top:solid 1px #BABFC7;"><small>'.$pagination['text'].'</small></div>';
+			}
 
 			// display comment form
 			if ($this->has_access('comment'))
 			{
-				print("<div class=\"commentform\">\n");
+				echo "<div class=\"commentform\">\n";
 
 				echo $this->form_open('addcomment');
 
@@ -381,8 +405,7 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 						 $preview.
 						 "</div></div><br />\n";
 				}
-				?>
-				<?php
+
 				// load WikiEdit
 					echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/protoedit.js\"></script>\n";
 					echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/wikiedit2.js\"></script>\n";
@@ -391,10 +414,10 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 					<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
 
 					<label for="addcomment"><?php echo $this->get_translation('AddComment');?></label><br />
-					<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?><?php if (isset($payload)) print($payload) ?></textarea>
+					<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?><?php if (isset($payload)) echo $payload ?></textarea>
 
 					<label for="addcomment_title"><?php echo $this->get_translation('AddCommentTitle');?></label><br />
-					<input id="addcomment_title" name="title" size="60" maxlength="100" value="<?php if (isset($title)) print($title); ?>" ><br />
+					<input id="addcomment_title" name="title" size="60" maxlength="100" value="<?php if (isset($title)) echo $title; ?>" ><br />
 		<?php
 					// captcha code starts
 
@@ -439,9 +462,8 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 		</script><br />
 		<input name="save" type="submit" value="<?php echo $this->get_translation('AddCommentButton'); ?>" accesskey="s" />
 		<input name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
-		<?php echo $this->form_close(); ?>
-		<?php
-				print("</div>\n");
+		<?php echo $this->form_close();
+				echo "</div>\n";
 				}
 			// end comment form
 			}

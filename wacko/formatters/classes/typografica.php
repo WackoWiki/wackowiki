@@ -91,6 +91,7 @@ class typografica
 		{
 			$total = preg_match_all($this->ignore, $data, $matches);
 			$data = preg_replace($this->ignore, "{:typo:markup:2:}", $data);
+
 			for ($i = 0; $i < $total; $i++)
 			{
 				$ignored[] = $matches[0][$i];
@@ -99,7 +100,9 @@ class typografica
 
 		// -1. HTML tags ban
 		if ($this->settings['html'])
+		{
 			$data = str_replace( "&", "&amp;", $data );
+		}
 		// 0. Stripping tags
 		// actulally, tag similarity is a problem.
 		//   case 1, simple (ending tag) </abcz>
@@ -114,6 +117,7 @@ class typografica
 		//  will change all tags with special character, simultaneously store them into an array.
 		//  and then beleive, there are no special characters in the wild world (unexplored wilderness?).
 		$tags = array();
+
 		if ($this->skip_tags)
 		{
 			$re =  "/<\/?[a-z0-9]+(". // tag name
@@ -129,7 +133,10 @@ class typografica
 			for ($i = 0; $i < $total; $i++)
 			{
 				if ($this->settings['html'])
+				{
 					$matches[0][$i] = "&lt;"+substr($matches[0][$i],1);
+				}
+
 				$tags[] = $matches[0][$i];
 			}
 		}
@@ -151,9 +158,9 @@ class typografica
 		// 4. Short words and &nbsp;
 		if ($this->settings['wordglue'])
 		{
-
 			$data = " ".$data." ";
 			$_data = " ".$data." ";
+
 			while ($_data != $data)
 			{
 				$_data = $data;
@@ -161,9 +168,13 @@ class typografica
 				$data = preg_replace('/(\s+)([a-zà-ÿÀ-ß]{3})(\s+)([^\\s$])/i',   '\\1\\2&nbsp;\\4', $data );
 			}
 			foreach ($this->glueleft as $i)
+			{
 				$data = preg_replace('/([\\s]+)(".$i.")(\s+)/i', "\\1\\2&nbsp;", $data );
+			}
 			foreach ($this->glueright as $i)
+			{
 				$data = preg_replace('/([\\s]+)(".$i.")(\s+)/i', "&nbsp;\\2\\3", $data );
+			}
 		}
 
 		// 5. Sticking flippers together. Psaw! Concatenation of hyphens
@@ -184,10 +195,12 @@ class typografica
 		{
 			$data .= ' ';
 			$a = explode('{:typo:markup:1:}', $data );
+
 			if ($a)
 			{
 				$data = $a[0];
 				$size = count($a);
+
 				for ($i = 1; $i < $size; $i++)
 				{
 					$data= $data.$tags[$i-1].$a[$i];
@@ -199,10 +212,12 @@ class typografica
 		{
 			$data .= ' ';
 			$a = explode('{:typo:markup:2:}', $data );
+
 			if ($a)
 			{
 				$data = $a[0];
 				$size = count($a);
+
 				for ($i = 1; $i < $size; $i++)
 				{
 					$data= $data.$ignored[$i-1].$a[$i];
@@ -215,7 +230,11 @@ class typografica
 		// --- not ported to wacko ---
 
 		// ooh, finished
-		if ($this->de_nobr) $data = str_replace('<nobr>', '<span class="nobr">', str_replace('</nobr>', '</span>', $data ));
+		if ($this->de_nobr)
+		{
+			$data = str_replace('<nobr>', '<span class="nobr">', str_replace('</nobr>', '</span>', $data ));
+		}
+
 		return preg_replace('/^(\s)+/', '',  preg_replace('/(\s)+$/', '', $data));
 	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -227,11 +246,15 @@ class typografica
 		//print "(($data))";
 		// 0. inches with digits
 		if ($this->settings['inches'])
+		{
 			$data = preg_replace('/(?<=\s)(([0-9]{1,2}([\.,][0-9]{1,2})?))\"/i', '\\1&quot;', $data );
+		}
 
 		// 0a. apostroph
 		if ($this->settings['apostroph'])
+		{
 			$data = preg_replace( "/([\s\"][~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+)'([~ºª³²¿¯àÀåÅèÈîÎóÓşŞÿß][~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+[\s\.,:;\)<=\"])/i", "\\1’\\2", $data );
+		}
 
 		// 1. English quotes
 		if ($this->settings['quotes'])
@@ -239,6 +262,7 @@ class typografica
 			$data = preg_replace('/\"\"/i', '&quot;&quot;', $data);
 			$data = preg_replace('/\"\.\"/i', '&quot;.&quot;', $data);
 			$_data = "\"\"";
+
 			while ($_data != $data)
 			{
 				$_data = $data;
@@ -255,6 +279,7 @@ class typografica
 			// nb: wacko only regexp follows:
 			$data = preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/&nbsp;|\/|\!)*[~0-9¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
 			$_data = "\"\"";
+
 			while ($_data != $data)
 			{
 				$_data = $data;
@@ -277,28 +302,42 @@ class typografica
 
 		// 3. dash
 		if ($this->settings['dash'])
+		{
 			$data = preg_replace("/(\s|;)\-(\s)/i", "\\1&ndash;\\2", $data);
+		}
 		// 3a. long dash
 		if ($this->settings['emdash'])
+		{
 			$data = preg_replace("/(\s|;)\-\-(\s)/i", "\\1&mdash;\\2", $data);
+		}
 
 		// 4. (ñ)
 		if ($this->settings['(c)'])
+		{
 			$data = preg_replace("/\([cCñÑ]\)/i", "&copy;", $data);
 			# $data = preg_replace("/\([cCñÑ]\)((?=\w)|(?=\s[0-9]+))/i", "&copy;", $data); // not working (?)
+		}
 		// 4a. (r)
 		if ($this->settings['(r)'])
+		{
 			$data = preg_replace("/\(r\)/i", "<sup>&#174;</sup>", $data);
+		}
 		// 4b. (tm)
 		if ($this->settings['(tm)'])
+		{
 			$data = preg_replace("/\(tm\)|\(òì\)/i", "&#153;", $data);
+		}
 		// 4c. (p)
 		if ($this->settings['(p)'])
+		{
 			$data = preg_replace("/\(p\)/i", "&#167;", $data);
+		}
 
 		// 5. +/-
 		if ($this->settings['+-'])
+		{
 			$data = preg_replace("/\+\-/i", "&#177;", $data);
+		}
 		// 5a. 12^C
 		if ($this->settings['degrees'])
 		{
@@ -311,7 +350,9 @@ class typografica
 		if ($this->settings['phones'])
 		{
 			foreach ($this->phonemasks[0] as $i => $v)
-			$data = preg_replace( $v, $this->phonemasks[1][$i], $data );
+			{
+				$data = preg_replace( $v, $this->phonemasks[1][$i], $data );
+			}
 		}
 
 		return $data;

@@ -351,7 +351,7 @@ if ($this->user_is_owner() || $this->is_admin())
 }
 else
 {
-	print($this->get_translation('ACLAccessDenied'));
+	echo $this->get_translation('ACLAccessDenied');
 }
 
 ?>

@@ -93,7 +93,7 @@ if ($can_view)
 	if (!$nomark)
 	{
 		$title = $this->get_translation('UploadTitle'.($global ? 'Global' : ''));
-		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.": </span></p>\n");
+		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.": </span></p>\n";
 	}
 
 	// display

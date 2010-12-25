@@ -29,7 +29,7 @@ else
 	}
 }
 
-if ($this->categories)
+if (isset($this->categories))
 {
 	foreach($this->categories as $id => $category)
 	{

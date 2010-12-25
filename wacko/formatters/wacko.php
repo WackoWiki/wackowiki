@@ -63,6 +63,6 @@ if (!empty($parser->auto_fn['content']))
 	$parser->auto_fn['content'] = '';
 }
 
-print($text);
+echo $text;
 
 ?>
