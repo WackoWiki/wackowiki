@@ -1,8 +1,8 @@
 <div id="page">
 <?php
 
-$comment_on_id = '';
-$dontkeep = '';
+$comment_on_id	= '';
+$dontkeep		= '';
 
 // obviously do not allow to remove non-existent pages
 if (!$this->page) $this->redirect($this->href());
@@ -21,15 +21,16 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 	else
 	{
 		if ($this->page['comment_on_id'])
+		{
 			$comment_on_id = $this->page['comment_on_id'];
+		}
 
 		if (isset($_POST['delete']) && $_POST['delete'] == 1)
 		{
-			if ($this->page['comment_on_id'])
-				$comment_on_id = $this->page['comment_on_id'];
-
 			if (isset($_POST['dontkeep']) && $this->is_admin())
+			{
 				$dontkeep = 1;
+			}
 
 			// Remove page
 			if ($this->remove_referrers($this->tag))
@@ -76,10 +77,12 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 				$this->use_class('rss');
 				$xml = new rss($this);
 				$xml->comments();
+
 				if (!$comment_on_id)
 				{
 					$xml->changes();
 				}
+
 				print(str_replace('%1', $this->tag, $this->get_translation('PageRemoved'))."<br />\n");
 			}
 
@@ -88,17 +91,18 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 				$this->remove_revisions($this->tag);
 				echo $this->get_translation('RevisionsRemoved')."<br />\n";
 			}
+
 			if ($this->is_admin() && (isset($_POST['cluster']) && $_POST['cluster'] == 1))
 			{
-				$this->remove_referrers	($this->tag, true);
-				$this->remove_links		($this->tag, true);
+				$this->remove_referrers		($this->tag, true);
+				$this->remove_links			($this->tag, true);
 				$this->remove_categories	($this->tag, true);
-				$this->remove_acls		($this->tag, true);
-				$this->remove_bookmarks	($this->tag, true);
-				$this->remove_watches	($this->tag, true);
-				$this->remove_ratings	($this->tag, true);
-				$this->remove_comments	($this->tag, true, $dontkeep);
-				$this->remove_files		($this->tag, true);
+				$this->remove_acls			($this->tag, true);
+				$this->remove_bookmarks		($this->tag, true);
+				$this->remove_watches		($this->tag, true);
+				$this->remove_ratings		($this->tag, true);
+				$this->remove_comments		($this->tag, true, $dontkeep);
+				$this->remove_files			($this->tag, true);
 
 				// get list of pages in the cluster
 				if ($list = $this->load_all(
@@ -107,12 +111,18 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 				"WHERE tag LIKE '".quote($this->dblink, $this->tag.'/%')."'"))
 				{
 					// remove by one page at a time
-					foreach ($list as $row) $this->remove_page($row['tag'], '', $dontkeep);
+					foreach ($list as $row)
+					{
+						$this->remove_page($row['tag'], '', $dontkeep);
+					}
+
 					unset($list, $row);
 				}
 
 				if ((isset($_POST['revisions']) && $_POST['revisions'] == 1) || $comment_on_id)
+				{
 					$this->remove_revisions($this->tag, true);
+				}
 
 				echo "<em>".$this->get_translation('ClusterRemoved')."</em><br />\n";
 			}
@@ -195,7 +205,7 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 }
 else
 {
-	print($this->get_translation('NotOwnerAndCanDelete'));
+	echo $this->get_translation('NotOwnerAndCanDelete');
 }
 ?>
 </div>

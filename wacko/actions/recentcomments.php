@@ -39,15 +39,15 @@ if ($comments = load_recent_comments($this, $root, (int)$max))
 			{
 				if ($curday)
 				{
-					print("</ul>\n<br /></li>\n");
+					echo "</ul>\n<br /></li>\n";
 				}
-				print("<li><strong>$day:</strong><ul>\n");
+				echo "<li><strong>$day:</strong><ul>\n";
 				$curday = $day;
 			}
 
 			// print entry
-			print("<li><span class=\"dt\">".$time2."</span> &mdash; (<a href=\"".$this->href('', $comment['tag'], '')."\">".$comment['comment_on_page']."</a>) . . . . . . . . . . . . . . . . <small>".
-			($this->is_wiki_name($comment['user']) ? $this->link('/'.$comment['user'], '', $comment['user']) : $comment['user'])."</small></li>\n");
+			echo "<li><span class=\"dt\">".$time2."</span> &mdash; (<a href=\"".$this->href('', $comment['tag'], '')."\">".$comment['comment_on_page']."</a>) . . . . . . . . . . . . . . . . <small>".
+			($this->is_wiki_name($comment['user']) ? $this->link('/'.$comment['user'], '', $comment['user']) : $comment['user'])."</small></li>\n";
 		}
 	}
 	echo "</ul>\n</li>\n</ul>\n";

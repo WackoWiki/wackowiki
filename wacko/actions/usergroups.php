@@ -13,9 +13,9 @@ if($user = $this->get_user())
 	if (is_array($this->config['aliases']))
 	{
 		if (!$nomark)
-		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('UserGroups').":</span></p>");
+		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('UserGroups').":</span></p>";
 
-		print ("<table border=\"0\" cellspacing=\"5\" cellpadding=\"5\"><tr>");
+		echo "<table border=\"0\" cellspacing=\"5\" cellpadding=\"5\"><tr>";
 
 		$i = 1;
 
@@ -23,7 +23,7 @@ if($user = $this->get_user())
 		{
 			if($i == $cols + 1)
 			{
-				print "</tr><tr>";
+				echo "</tr><tr>";
 				$i = 1;
 			}
 
@@ -38,7 +38,7 @@ if($user = $this->get_user())
 			 */
 			if($this->is_admin() || in_array($user['user_name'], $arr))
 			{
-				print "<td valign=\"top\">";
+				echo "<td valign=\"top\">";
 
 				foreach ($arr as $k => $v)
 				$allowed_groups[] = $this->link('/'.$v, '', $v);
@@ -48,17 +48,17 @@ if($user = $this->get_user())
 				$gusers = implode("<br />", $allowed_groups);
 
 				// Print out the group name and then a list of the users under it
-				print "<strong>$gname</strong>:<br />".str_replace("\n","<br />",$gusers)."<br />";
-				print "</td>";
+				echo "<strong>$gname</strong>:<br />".str_replace("\n","<br />",$gusers)."<br />";
+				echo "</td>";
 
 				$i++;
 			}
 		}
 
-		print ("</tr></table>");
+		echo "</tr></table>";
 
 		if(!$nomark)
-		print ("</div>");
+		echo "</div>";
 	}
 }
 

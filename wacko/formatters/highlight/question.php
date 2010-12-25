@@ -1,8 +1,8 @@
 <?php
 
 // question box
-print("<div class=\"quest\">");
+echo "<div class=\"quest\">";
 include('formatters/wiki.php');
-print("</div>");
+echo "</div>";
 
 ?>

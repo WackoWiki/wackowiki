@@ -83,7 +83,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 		else
 		{
 			//Password forgotten. Provided secret code only. Print password change form.
-			print($this->form_open());
+			echo $this->form_open();
 			echo "<input type=\"hidden\" name=\"secret_code\" value=\"".$code."\" />";
 			?>
 
@@ -125,7 +125,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 				</p>
 			</div>
 			<?php
-			print($this->form_close());
+			echo $this->form_close();
 		}
 	}
 	else
@@ -207,7 +207,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 	}
 
 	//Print simple change password form
-	print($this->form_open());
+	echo $this->form_open();
 
 	if (isset($error))
 	{
@@ -257,7 +257,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 		</p>
 	</div>
 <?php
-	print($this->form_close());
+	echo $this->form_close();
 }
 //Password forgotten. Send mail
 else
@@ -328,7 +328,7 @@ else
 		}
 
 		//View password forgot form
-		print($this->form_open());
+		echo $this->form_open();
 ?>
 		<input type="hidden" name="action" value="send" />
 		<div class="cssform">
@@ -343,7 +343,7 @@ else
 		</p>
 		</div>
 		<?php
-		print($this->form_close());
+		echo $this->form_close();
 	}
 }
 

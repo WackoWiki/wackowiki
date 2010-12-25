@@ -112,9 +112,9 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"page_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
-					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".
@@ -196,9 +196,9 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
-					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".

@@ -118,6 +118,7 @@ if ($this->has_access('read'))
 				$output .= "</li>\n";
 			}
 		}
+
 		$output .= "</ul>\n<br />\n";
 
 		if (!$this->config['revisions_hide_cancel'])
@@ -128,7 +129,7 @@ if ($this->has_access('read'))
 		$output .= $this->form_close()."\n";
 	}
 
-	print($output);
+	echo $output;
 	$this->current_context--;
 
 	if ($max && $a > $max)

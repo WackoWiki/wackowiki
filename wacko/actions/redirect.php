@@ -19,7 +19,7 @@ if ($page)
 		{
 			if ($user['dont_redirect'] == 1 || $_POST['redirect'] == 'no')
 			{
-				print ("<br /><br /><br />".$this->get_translation('PageMoved')." ".$this->link('/'.$page)."<br /><br /><br />");
+				echo "<br /><br /><br />".$this->get_translation('PageMoved')." ".$this->link('/'.$page)."<br /><br /><br />";
 			}
 			else
 			$this->redirect($this->href('', $page));
@@ -29,7 +29,7 @@ if ($page)
 	}
 	else
 	{
-		print ("<i>".$this->get_translation('WrongPage4Redirect')."</i>");
+		echo "<i>".$this->get_translation('WrongPage4Redirect')."</i>";
 	};
 };
 ?>

@@ -8,7 +8,7 @@ $text = preg_replace("/\b(https?|ftp|file|nntp|telnet):\/\/\S+/","<a href='\\0'>
 preg_match_all( "/".
              "^(\[[0-9]{1,2}:[0-9]{1,2}\])\s*(.*?)\s*:".
              "(\s*(.*?))".
-             "(?=^(\[[0-9]{1,2}:[0-9]{1,2}\]))/ims", 
+             "(?=^(\[[0-9]{1,2}:[0-9]{1,2}\]))/ims",
 $text,
 $matches, PREG_SET_ORDER);
 $names = array();
@@ -24,7 +24,7 @@ $text.= "\n$endstr\n";
 $text = preg_replace( "/".
              "^(\[[0-9]{1,2}:[0-9]{1,2}\])\s*(.*?)\s*:".
              "(\s*(.*?))".
-             "(?=^(\[[0-9]{1,2}:[0-9]{1,2}\]))/ims", 
+             "(?=^(\[[0-9]{1,2}:[0-9]{1,2}\]))/ims",
              "<tr style='$2'><td class='micq1'>$2</td><td class='micq3'>$4</td><td class='micq2'>$1</td></tr>", $text );
 $text = str_replace( "\n", "<br />", $text );
 
@@ -47,5 +47,5 @@ foreach( $names as $name=>$v )
 
 $text = str_replace( $endstr, "", $text );
 
-print "<pre class=\"code\"><table>".$text."</table></pre>";
+echo "<pre class=\"code\"><table>".$text."</table></pre>";
 ?>

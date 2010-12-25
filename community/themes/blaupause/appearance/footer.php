@@ -19,7 +19,7 @@ if ($this->page)
 	// If owner is current user
 	if ($this->user_is_owner())
 	{
-		print("<li>".$this->get_translation('YouAreOwner')."</li>\n");
+		echo "<li>".$this->get_translation('YouAreOwner')."</li>\n";
 
 		// Rename link
 		print("<li><a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icons/rename.gif\" title=\"".$this->get_translation('RenameText')."\" alt=\"".$this->get_translation('RenameText')."\" /></a></li>\n");

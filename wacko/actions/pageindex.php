@@ -186,7 +186,7 @@ if ($pages_to_display)
 			}
 		}
 
-		print($top_links."</ul><br /><br />\n");
+		echo $top_links."</ul><br /><br />\n";
 	}
 
 	echo "<ul class=\"ul_list\">\n";

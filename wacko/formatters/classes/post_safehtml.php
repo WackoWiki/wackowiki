@@ -8,8 +8,11 @@ class post_safehtml
 	{
 		$this->object  = &$object;
 		$this->options = &$options;
+
 		if ($this->options['feed'])
+		{
 			$this->actions = explode(', ', ACTIONS4DIFF);
+		}
 	}
 
 	function postcallback($things)
@@ -22,13 +25,17 @@ class post_safehtml
 		{
 /*
 			list (, $url, $text) = $matches;
+
 			if ($url)
 			{
 				$url	= str_replace(' ', '%20', trim($url));
 				$text	= trim(preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/', '', $text));
 				return $wacko->link($url, ($this->options["feed"]?"no404": ''), $text);
 			}
-			else return '';
+			else
+			{
+				return '';
+			}
 */
 		}
 		// actions
@@ -53,14 +60,22 @@ class post_safehtml
 			if ($action && (!$this->options['feed'] || in_array(strtolower($action), $this->actions)))
 			{
 				if ($action == $params[0])
+				{
 					$params[0] = $params[1];
+				}
+
 				return $wacko->action($action, $params);
 			}
 			else if ($this->options['feed'])
+			{
 				return '';
+			}
 			else
+			{
 				return $thing;
+			}
 		}
+
 		// if we reach this point, it must have been an accident.
 		return $thing;
 	}

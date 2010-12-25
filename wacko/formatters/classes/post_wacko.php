@@ -26,6 +26,7 @@ class post_wacko
 			{
 				$url	= str_replace(' ', '%20', trim($url));
 				$text	= trim(preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/', '', $text));
+
 				if (stristr($text, '@@'))
 				{
 					$t		= explode('@@', $text);
@@ -40,18 +41,27 @@ class post_wacko
 		else if (preg_match('/^<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->$/', $thing, $matches))
 		{
 			list ( , $url, $img) = $matches;
+
 			if ($url && $img)
 			{
 				$url	= str_replace(' ', '', $url);
 				$url	= $wacko->link($url, '', '', 1, 1);
-				if (!$url = preg_replace('/.*href="(.*?)".*|.*src="(.*?)".*/', '\\1\\2', $url)) return $url;
+
+				if (!$url = preg_replace('/.*href="(.*?)".*|.*src="(.*?)".*/', '\\1\\2', $url))
+				{
+					return $url;
+				}
+
 				$img	= str_replace(' ', '', $img);
 				$img	= trim(preg_replace('/<!--imgprelink:[\w]+-->|__|\[\*\[|\(\*\(/', '', $img));
 				$img	= $wacko->link($img, '', '', 1, 1);
 
 				return '<a href="'.$url.'">'.$img.'</a>';
 			}
-			else return '';
+			else
+			{
+				return '';
+			}
 		}
 		// actions
 		else if (preg_match('/^<!--action:begin-->\s*([^\n]+?)<!--action:end-->$/s', $thing, $matches))
@@ -60,6 +70,7 @@ class post_wacko
 			{
 				// check for action parameters
 				$sep = strpos( $matches[1], ' ' );
+
 				if ($sep === false)
 				{
 					$action	= $matches[1];
@@ -81,13 +92,19 @@ class post_wacko
 						$c++;
 					}
 				}
+
 				return $wacko->action($action, $params);
 			}
 			else if ($this->options['diff'])
+			{
 				return '{{'.$matches[1].'}}';
+			}
 			else
+			{
 				return '{{}}';
+			}
 		}
+
 		// if we reach this point, it must have been an accident.
 		return $thing;
 	}

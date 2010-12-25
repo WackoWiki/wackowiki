@@ -1,8 +1,8 @@
 <?php
 
 // info box
-print("<div class=\"inf\">");
+echo "<div class=\"inf\">";
 include('formatters/wiki.php');
-print("</div>");
+echo "</div>";
 
 ?>

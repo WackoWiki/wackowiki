@@ -84,7 +84,8 @@ if ($this->has_access('read'))
 			{
 				$output .= "<br />\n".$this->get_translation('NoDifferences');
 			}
-			print($output);
+
+			echo $output;
 
 		}
 		else
@@ -178,17 +179,17 @@ if ($this->has_access('read'))
 			str_replace('%2', "<a href=\"".$this->href('', '', 'time='.urlencode($pageA['modified']))."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
 			str_replace('%3', $this->compose_link_to_page($this->tag, "", "", 0),
 			"<div class=\"diffinfo\">".$this->get_translation('Comparison'))))."</div><br />\n<br />\n".$out;
-			print $out;
+			echo $out;
 		}
 	}
 	else
 	{
-		print($this->get_translation('ReadAccessDenied'));
+		echo $this->get_translation('ReadAccessDenied');
 	}
 }
 else
 {
-	print($this->get_translation('ReadAccessDenied'));
+	echo $this->get_translation('ReadAccessDenied');
 }
 
 ?>

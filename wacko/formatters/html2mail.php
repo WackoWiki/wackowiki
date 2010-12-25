@@ -23,6 +23,6 @@ $text = str_replace('&mdash;', '--', $text);
 // break up long lines
 $text = wordwrap($text, 74, "\n", 1);
 
-print ($text);
+echo $text;
 
 ?>

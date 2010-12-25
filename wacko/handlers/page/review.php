@@ -1,5 +1,6 @@
 <?php
 
+// Approval feature
 // TODO: delete sql cache ?
 
 if ($this->config['review'] && $this->is_reviewer() && $this->page)

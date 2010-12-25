@@ -6,7 +6,7 @@ $parser = new bbcode($this);
 
 $text	= preg_replace_callback($parser->template, array(&$parser, 'wrapper'), $text);
 
-print($text);
+echo $text;
 
 
 ?>

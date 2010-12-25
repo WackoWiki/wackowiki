@@ -8,27 +8,33 @@
 */
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href('show'));
+if (!$this->page)
+{
+	$this->redirect($this->href('show'));
+}
 
 // deny for comment
-if ($this->page['comment_on_id']) $this->redirect($this->href('', $this->page['tag']));
+if ($this->page['comment_on_id'])
+{
+	$this->redirect($this->href('', $this->page['tag']));
+}
 
 if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{
-		print(str_replace('%1', $this->href('edit'), $this->get_translation('DoesNotExists')));
+		echo str_replace('%1', $this->href('edit'), $this->get_translation('DoesNotExists'));
 	}
 	else
 	{
 		/* obsolete code - or do we need an ability to print old revisions?
 		if ($this->page['latest'] == 0)
 		{
-			print("<div class=\"revisioninfo\">".
+			echo "<div class=\"revisioninfo\">".
 			str_replace('%1', $this->href(),
 			str_replace('%2', $this->tag,
 			str_replace('%3', $this->page['modified'],
-			$this->get_translation('Revision')))).".</div>");
+			$this->get_translation('Revision')))).".</div>";
 		}*/
 
 		// build html body
@@ -37,12 +43,11 @@ if ($this->has_access('read'))
 		// display page
 		$data = $this->format($data, 'source', array('bad' => 'good'));
 		echo $data;
-
 	}
 }
 else
 {
-	print($this->get_translation('ReadAccessDenied'));
+	echo $this->get_translation('ReadAccessDenied');
 }
 
 ?>

@@ -95,10 +95,10 @@ if ($this->has_access('read') && $this->config['hide_files'] != 1)
       switch (count($files))
       {
       case 0:
-        print($this->get_translation('Files_0'));
+        echo $this->get_translation('Files_0');
         break;
       case 1:
-        print($this->get_translation('Files_1'));
+        echo $this->get_translation('Files_1');
         break;
       default:
         print(str_replace('%1',count($files), $this->get_translation('Files_n')));

@@ -7,10 +7,14 @@ if (!$this->page) $this->redirect($this->href('show'));
 
 // deny for comment
 if ($this->page['comment_on_id'])
+{
 	$this->redirect($this->href('', $this->get_comment_on_tag($this->page['comment_on_id']), 'show_comments=1')."#".$this->page['tag']);
+}
 // and for forum page
 else if ($this->forum === true)
+{
 	$this->redirect($this->href());
+}
 
 // TODO: config->owners_can_remove_comments ?
 if ($this->user_is_owner() || $this->is_admin())
@@ -18,7 +22,8 @@ if ($this->user_is_owner() || $this->is_admin())
 	if (isset($_POST['purge']) && $_POST['purge'] == 1)
 	{
 		// Purge page
-		print("<br /><em>");
+		echo "<br /><em>";
+
 		if (isset($_POST['comments']) && $_POST['comments'] == 1)
 		{
 			$this->remove_comments($this->tag);
@@ -37,8 +42,8 @@ if ($this->user_is_owner() || $this->is_admin())
 			$this->log(1, str_replace('%1', $this->tag." ".$this->page['title'], $this->get_translation('LogRemovedAllRevisions', $this->config['language'])));
 			echo $this->get_translation('RevisionsPurged')."<br />\n";
 		}
-		print('</em>');
-		print($this->get_translation('ThisActionHavenotUndo')."\n");
+		echo '</em>';
+		echo $this->get_translation('ThisActionHavenotUndo')."\n";
 	}
 	else
 	{

@@ -7,7 +7,7 @@ $parser = new RawHtmlFormatter( $this );
 $text = preg_replace_callback('/(<format [^>]*?>.*?<\/format>|<a [^>]*>)/ism', array( &$parser, 'process'), $text);
 
 //$text = $this->Format($text, "safehtml");
-//print("rawhtml: ".$text);
+//echo "rawhtml: ".$text;
 include('safehtml.php');
 
 ?>

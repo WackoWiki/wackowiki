@@ -24,7 +24,7 @@ if ($this->page)
 	// If owner is current user
 	if ($this->user_is_owner())
 	{
-		print("<li>".$this->get_translation('YouAreOwner')."</li>\n");
+		echo "<li>".$this->get_translation('YouAreOwner')."</li>\n";
 
 		// Add page link
 		(($this->method == 'new')

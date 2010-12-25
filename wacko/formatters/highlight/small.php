@@ -1,5 +1,5 @@
 <?php
 
-print("<small>".htmlspecialchars($text)."</small>");
+echo "<small>".htmlspecialchars($text)."</small>";
 
 ?>

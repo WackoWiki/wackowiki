@@ -101,7 +101,7 @@ function admin_groups(&$engine, &$module)
 						{
 							foreach($users as $user)
 							{
-								print("<option value=\"".htmlspecialchars($user['user_id'])."\">".$user['user_name']."</option>\n");
+								echo "<option value=\"".htmlspecialchars($user['user_id'])."\">".$user['user_name']."</option>\n";
 							}
 						}
 
@@ -231,7 +231,7 @@ function admin_groups(&$engine, &$module)
 					{
 						foreach($users as $user)
 						{
-							print("<option value=\"".htmlspecialchars($user['user_id'])."\">".$user['user_name']."</option>\n");
+							echo "<option value=\"".htmlspecialchars($user['user_id'])."\">".$user['user_name']."</option>\n";
 						}
 					}
 
@@ -267,7 +267,7 @@ function admin_groups(&$engine, &$module)
 					{
 						foreach($users as $user)
 						{
-							print("<option value=\"".$user['user_id']."\" ".($group['moderator'] == $user['user_id'] ? " selected=\"selected\"" : "").">".$user['user_name']."</option>\n");
+							echo "<option value=\"".$user['user_id']."\" ".($group['moderator'] == $user['user_id'] ? " selected=\"selected\"" : "").">".$user['user_name']."</option>\n";
 						}
 					}
 

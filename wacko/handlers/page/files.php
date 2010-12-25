@@ -16,12 +16,13 @@ else
 {
 	$page_id = $this->page['page_id'];
 }
+
 $what = $this->load_all(
 	"SELECT u.user_name AS user, f.upload_id, f.file_name, f.file_ext, f.file_size, f.description, f.hits ".
 	"FROM ".$this->config['table_prefix']."upload f ".
 		"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 	"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-	"AND f.file_name='".quote($this->dblink, $_GET['get'])."'");
+		"AND f.file_name='".quote($this->dblink, $_GET['get'])."'");
 
 if (sizeof($what) > 0)
 {
@@ -95,7 +96,7 @@ else if ($error == 404)
 	// if (function_exists('virtual')) header("HTTP/1.0 404 Not Found");
 	header("HTTP/1.0 404 Not Found");
 
-	print($this->get_translation('UploadFileNotFound'));
+	echo $this->get_translation('UploadFileNotFound');
 }
 else
 {
@@ -103,7 +104,7 @@ else
 	// if (function_exists('virtual')) header("HTTP/1.0 403 Forbidden");
 	header("HTTP/1.0 403 Forbidden");
 
-	print($this->get_translation('UploadFileForbidden'));
+	echo $this->get_translation('UploadFileForbidden');
 }
 
 // 4. die

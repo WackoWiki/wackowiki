@@ -21,46 +21,46 @@ class paragrafica
 
 	);
 	var $t1 = array( // terminators like <-t>$1
-	array( // rightinators
-		"!(<table)!si",
-		"!(<a[^>]*></a><h[1-9]>)!si",
-		"!(<(u|o)l)!si",
-		"!(<div)!si",
-		"!(<p)!si",
-		"!(<form)!si",
-		"!(<textarea)!si",
-		"!(<blockquote)!si",
-	),
-	array( // wronginators
-		"!(</td>)!si",
-	),
-	array( // wronginators-2
-		"!(</li>)!si",
-	),
-	array( // wronginators-3
-	"!(</pre>)!si",
-	),
+		array( // rightinators
+			"!(<table)!si",
+			"!(<a[^>]*></a><h[1-9]>)!si",
+			"!(<(u|o)l)!si",
+			"!(<div)!si",
+			"!(<p)!si",
+			"!(<form)!si",
+			"!(<textarea)!si",
+			"!(<blockquote)!si",
+		),
+		array( // wronginators
+			"!(</td>)!si",
+		),
+		array( // wronginators-2
+			"!(</li>)!si",
+		),
+		array( // wronginators-3
+		"!(</pre>)!si",
+		),
 	);
 	var $t2 = array( // terminators like $1<t->
-	array( // rightinators
-		"!(</table>)!si",
-		"!(</h[1-9]>)!si",
-		"!(</(u|o)l>)!si",
-		"!(</div>)!si",
-		"!(</p>)!si",
-		"!(</form>)!si",
-		"!(</textarea>)!si",
-		"!(</blockquote>)!si",
-	),
-	array( // wronginators
-		"!(<td[^>]*>)!si",
-	),
-	array( // wronginators-2
-		"!(<li[^>]*>)!is",
-	),
-	array( // wronginators-3
-		"!(<pre[^>]*>)!is",
-	),
+		array( // rightinators
+			"!(</table>)!si",
+			"!(</h[1-9]>)!si",
+			"!(</(u|o)l>)!si",
+			"!(</div>)!si",
+			"!(</p>)!si",
+			"!(</form>)!si",
+			"!(</textarea>)!si",
+			"!(</blockquote>)!si",
+		),
+		array( // wronginators
+			"!(<td[^>]*>)!si",
+		),
+		array( // wronginators-2
+			"!(<li[^>]*>)!is",
+		),
+		array( // wronginators-3
+			"!(<pre[^>]*>)!is",
+		),
 	);
 
 	var $mark_prefix	= '{:typo:markup:1:}';
@@ -79,15 +79,18 @@ class paragrafica
 	var $postfix		= '</p>';
 
 	function paragrafica( &$wacko )
-	{ $this->wacko = &$wacko; }
+	{
+		$this->wacko = &$wacko;
+	}
 
 	function correct( $what )
 	{
 		// -2. ignoring a regexp (or ignoring next regexp)
 		$ignored = array();
 		{
-			$total = preg_match_all($this->ignore, $what, $matches);
-			$what = preg_replace($this->ignore, '{:typo:markup:3:}', $what);
+			$total	= preg_match_all($this->ignore, $what, $matches);
+			$what	= preg_replace($this->ignore, '{:typo:markup:3:}', $what);
+
 			for ($i = 0; $i < $total; $i++)
 			{
 				$ignored[] = $matches[0][$i];
@@ -95,31 +98,49 @@ class paragrafica
 		}
 
 		// -1. remove t-prefix;
-		$what = str_replace( $this->mark_prefix, "", $what );
+		$what = str_replace( $this->mark_prefix, '', $what );
 
 		if(isset($this->wacko->data))
 		{
 			if (is_array($this->wacko->data) && isset($this->wacko->data['record_id']))
+			{
 				$page_id = $this->wacko->data['record_id'];
+			}
 		}
 		else
+		{
 			$page_id = substr(crc32(time()), 0, 5);
+		}
 
 		// 1. insert terminators appropriately
 		foreach ($this->t0 as $t)
-		$what = preg_replace( $t, $this->mark1.'$1'.$this->mark2, $what );
+		{
+			$what = preg_replace( $t, $this->mark1.'$1'.$this->mark2, $what );
+		}
 		foreach ($this->t1[0] as $t)
-		$what = preg_replace( $t, $this->mark1.'$1', $what );
+		{
+			$what = preg_replace( $t, $this->mark1.'$1', $what );
+		}
 		foreach ($this->t2[0] as $t)
-		$what = preg_replace( $t, '$1'.$this->mark2, $what );
+		{
+			$what = preg_replace( $t, '$1'.$this->mark2, $what );
+		}
 		foreach ($this->t1[1] as $t)
-		$what = preg_replace( $t, $this->mark3.$this->mark1.'$1', $what );
+		{
+			$what = preg_replace( $t, $this->mark3.$this->mark1.'$1', $what );
+		}
 		foreach ($this->t2[1] as $t)
-		$what = preg_replace( $t, '$1'.$this->mark2.$this->mark3, $what );
+		{
+			$what = preg_replace( $t, '$1'.$this->mark2.$this->mark3, $what );
+		}
 		foreach ($this->t1[2] as $t)
-		$what = preg_replace( $t, $this->mark4.$this->mark1.'$1', $what );
+		{
+			$what = preg_replace( $t, $this->mark4.$this->mark1.'$1', $what );
+		}
 		foreach ($this->t2[2] as $t)
-		$what = preg_replace( $t, '$1'.$this->mark2.$this->mark4, $what );
+		{
+			$what = preg_replace( $t, '$1'.$this->mark2.$this->mark4, $what );
+		}
 
 		// wrap whole text in terminator pair
 		$what = $this->mark2.$what.$this->mark1;
@@ -139,31 +160,47 @@ class paragrafica
 		// 3. replace each <t->....<-t> to <p class="auto">....</p>
 		$pcount = 0;
 		$pieces = explode( $this->mark2, $what );
+
 		if (isset($mark1))
+		{
 			$sizeof_mark1 = sizeof($mark1);
+		}
 		else
+		{
 			$sizeof_mark1 = null;
+		}
 
 		foreach( $pieces as $k=>$v )
+
 		if ($k > 0)
 		{
 			$pos	= strpos($v, $this->mark1);
 			$pos2	= strpos($v, $this->mark3);
 			$pos_u	= strpos($v, $this->mark4);
+
 			if (($pos !== false) && ($pos_u === false))
 			{
 				$insert_p = false;
-				if ($pos2 === false) $insert_p = true;
+
+				if ($pos2 === false)
+				{
+					$insert_p = true;
+				}
 				else
 				{
 					$pieces_inside = explode( $this->mark3, $v );
-					if (sizeof($pieces_inside) < 3) $insert_p = true;
+
+					if (sizeof($pieces_inside) < 3)
+					{
+						$insert_p = true;
+					}
 				}
 
 				if ($insert_p)
 				{
 					$inside = substr($v, 0, $pos);
 					$inside = str_replace( $this->mark3, '', $inside );
+
 					if (strlen($inside))
 					{
 						$pcount++;
@@ -177,6 +214,7 @@ class paragrafica
 				}
 			}
 		}
+
 		$what = implode('', $pieces);
 		// 4. remove unused <t-> & <-t>
 		$what = str_replace( $this->mark1, '', $what );
@@ -189,10 +227,12 @@ class paragrafica
 		{
 			$what .= ' ';
 			$a = explode( '{:typo:markup:3:}', $what );
+
 			if ($a)
 			{
 				$what = $a[0];
 				$size = count($a);
+
 				for ($i = 1; $i < $size; $i++)
 				{
 					$what= $what.$ignored[$i-1].$a[$i];
@@ -224,14 +264,22 @@ class paragrafica
 		if ((isset($matches[7])) && $matches[7] != '')
 		{
 			if (isset($matches[8]) && $matches[8] == '')
-			$this->toc[] = array($this->wacko->unwrap_link(trim($matches[7],'"')), '(include)', 99999);
+			{
+				$this->toc[] = array($this->wacko->unwrap_link(trim($matches[7],'"')), '(include)', 99999);
+			}
 		}
 		else
 		// id, text, depth
+
 		if ((isset($matches[6])) && $matches[6] != '')
+		{
 			$this->toc[] = array($matches[6], '(p)', 77777);
+		}
 		else
+		{
 			$this->toc[] = array($matches[2],$matches[4],$matches[3]);
+		}
+
 		return $matches[0];
 	}
 }

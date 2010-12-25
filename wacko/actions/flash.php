@@ -82,9 +82,9 @@ else if($url)
 	// Load swfobject with header
 	$this->config['allow_swfobject'] = 1;
 
-	print "<script type=\"text/javascript\">\n";
-	print "		// <![CDATA[\n";
-	print "		swfobject.embedSWF(\"".$url."\", \"".$name."\", \"".$width."\", \"".$height."\", \"".$version."\", \"".$this->config['base_url']."themes/_common/expressInstall.swf\", {}, {";
+	echo "<script type=\"text/javascript\">\n";
+	echo "		// <![CDATA[\n";
+	echo "		swfobject.embedSWF(\"".$url."\", \"".$name."\", \"".$width."\", \"".$height."\", \"".$version."\", \"".$this->config['base_url']."themes/_common/expressInstall.swf\", {}, {";
 
 	// Write Params
 	$written = 0;
@@ -95,15 +95,15 @@ else if($url)
 		{
 			if($written > 0)
 			{
-				print ', ';
+				echo ', ';
 			}
 
-			print (${$params[$i]} ? $params[$i].':"'.${$params[$i]}.'"' : '');
+			echo (${$params[$i]} ? $params[$i].':"'.${$params[$i]}.'"' : '');
 			$written++;
 		}
 	}
 
-	print '}, {';
+	echo '}, {';
 
 	// Write Attributes
 	$written = 0;
@@ -114,18 +114,18 @@ else if($url)
 		{
 			if($written > 0)
 			{
-				print ', ';
+				echo ', ';
 			}
 
-			print (${$attributes[$i]} ? $attributes[$i].':"'.${$attributes[$i]}.'"' : '');
+			echo (${$attributes[$i]} ? $attributes[$i].':"'.${$attributes[$i]}.'"' : '');
 			$written++;
 		}
 	}
 
-	print "});\n";
-	print "   // ]]>\n";
-	print "</script>\n";
-	print "<div id=\"".$name."\"></div>\n";
+	echo "});\n";
+	echo "   // ]]>\n";
+	echo "</script>\n";
+	echo "<div id=\"".$name."\"></div>\n";
 }
 
 ?>

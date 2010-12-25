@@ -115,7 +115,7 @@ else
 }
 if (!$nomark)
 {
-	print "</div>";
+	echo "</div>";
 }
 
 ?>

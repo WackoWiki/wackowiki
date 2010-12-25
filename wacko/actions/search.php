@@ -82,7 +82,7 @@ if ($form)
 if ($phrase == '') $phrase = (isset($_GET['phrase']) ? $_GET['phrase'] : null);
 if ($phrase)
 {
-	if ($form) print "<br />";
+	if ($form) echo "<br />";
 
 	if (strlen($phrase) >= 3)
 	{
@@ -96,12 +96,12 @@ if ($phrase)
 		// make and display results
 		if ($results)
 		{
-			if (!$nomark) print( "<div class=\"layout-box\"><p class=\"layout-box\"><span>".
+			if (!$nomark) echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".
 			$this->get_translation(($mode == 'topic' ? 'Topic' : '')."SearchResults").
-			" \"$phrase\":</span></p>");
+			" \"$phrase\":</span></p>";
 			// open list
-			if ($style == 'ul') print "<ul id=\"search_results\">\n";
-			if ($style == 'ol') print "<ol id=\"search_results\">\n";
+			if ($style == 'ul') echo "<ul id=\"search_results\">\n";
+			if ($style == 'ol') echo "<ol id=\"search_results\">\n";
 
 			foreach ($results as $page)
 			{
@@ -111,30 +111,31 @@ if ($phrase)
 					if($page['comment_on_id'] == 0 || ($page['comment_on_id'] != 0 && $this->user_allowed_comments()))
 					{
 						// open item
-						if ($style == 'ul' || $style == 'ol') print "<li>";
-						if ($style == 'comma' && $i > 0) print ",\n";
+						if ($style == 'ul' || $style == 'ol') echo "<li>";
+						if ($style == 'comma' && $i > 0) echo ",\n";
 
-						print("<h3>".$this->link('/'.$page['tag'], '', $page['tag'])."</h3>");
+						echo "<h3>".$this->link('/'.$page['tag'], '', $page['tag'])."</h3>";
+
 						if ($mode !== 'topic')
 						{
 							$context = getLineWithPhrase($phrase, $page['body'], $clean);
 							$context = preview_text($TEXT = $context, $LIMIT = 500, $TAGS = 0);
 							$context = highlight_this($text = $context, $words = $phrase, $the_place = 0);
-							print("<div>".str_replace("\n", '<br />', $context)."</div>");
+							echo "<div>".str_replace("\n", '<br />', $context)."</div>";
 						}
 
 						// close item
-						if ($style == 'br') print "<br />\n";
-						if ($style == 'ul' || $style == 'ol') print "</li>\n";
+						if ($style == 'br') echo "<br />\n";
+						if ($style == 'ul' || $style == 'ol') echo "</li>\n";
 						$i++;
 					}
 				}
 			}
 
 			// close list
-			if ($style == 'ul') print "</ul>";
-			if ($style == 'ol') print "</ol>";
-			if (!$nomark) print("</div>");
+			if ($style == 'ul') echo "</ul>";
+			if ($style == 'ol') echo "</ol>";
+			if (!$nomark) echo "</div>";
 		}
 		else
 		if (!$nomark) echo $this->get_translation('NoResultsFor')."\"$phrase\".";
