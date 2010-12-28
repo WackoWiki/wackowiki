@@ -115,7 +115,7 @@ echo "\n";
 	}
 	echo "\n";
 
-	$wordsHeight = ( $this->keywords ? 'height:42px;' : 'height:29px;' );
+	$wordsHeight = ( isset($this->keywords) ? 'height:42px;' : 'height:29px;' );
 ?>
 									</div>
 								</td>
@@ -184,7 +184,7 @@ echo "\n";
 									</tr>
 								</table>
 <?php
-	if ($this->keywords)
+	if (isset($this->keywords))
 	{
 		echo '<div style="white-space:normal;">Categories: ';
 		foreach ($this->keywords as $word)

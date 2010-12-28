@@ -155,7 +155,7 @@ $this->get_page_owner_from_comment() == $this->get_user_name())))
 			// return to commented page
 			if ($comment_on_id)
 			{
-				echo "<br />".$this->compose_link_to_page($this->get_comment_on_tag($comment_on_id)."#comments", "", "&laquo; ".$this->get_translation('ReturnToCommented'), 0);
+				echo "<br />".$this->compose_link_to_page($this->get_page_tag_by_id($comment_on_id)."#comments", "", "&laquo; ".$this->get_translation('ReturnToCommented'), 0);
 			}
 		}
 		else
