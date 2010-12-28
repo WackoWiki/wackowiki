@@ -167,17 +167,6 @@ class Wacko
 		return ((float)$usec + (float)$sec);
 	}
 
-	function get_comment_on_tag($comment_on_id = 0)
-	{
-		$comment_on_tag = $this->load_single(
-					"SELECT tag FROM ".$this->config['table_prefix']."page WHERE page_id = '".$comment_on_id."' LIMIT 1");
-					// Get tag value
-					$comment_on_tag = $comment_on_tag['tag'];
-
-					return $comment_on_tag;
-	}
-
-	// TODO: same as function get_comment_on_tag, but uses other variable names and this one will probably obsolete if we use page_id in acls table ( ? )
 	function get_page_tag_by_id($page_id = 0)
 	{
 		$tag = $this->load_single(
@@ -210,6 +199,7 @@ class Wacko
 			return $new_page_id;
 		}
 	}
+
 	function get_wacko_version()
 	{
 		return WACKO_VERSION;
@@ -226,10 +216,14 @@ class Wacko
 			$page		= $this->load_page($unwrapped_tag, 0, '', LOAD_CACHE, LOAD_META);
 			$page_id	= $page['page_id'];
 
-			if (!$page_id) return false;
+			if (!$page_id)
+			{
+				return false;
+			}
 		}
 
 		$file = (isset($this->filesCache[$page_id][$file_name]) ? $this->filesCache[$page_id][$file_name] : '');
+
 		if (!($file))
 		{
 			$what = $this->load_all(
@@ -239,17 +233,21 @@ class Wacko
 					"AND file_name = '".quote($this->dblink, $file_name)."'");
 
 			if (sizeof($what) == 0)
+			{
 				return false;
+			}
 
 			$file = $what[0];
 			$this->filesCache[$page_id][$file_name] = $file;
 		}
+
 		return $file;
 	}
 
 	function available_themes()
 	{
 		$handle	= opendir('themes');
+
 		while (false !== ($file = readdir($handle)))
 		{
 			if ($file != '.' && $file != '..' && is_dir('themes/'.$file) && $file != '_common')
@@ -257,6 +255,7 @@ class Wacko
 				$themelist[] = $file;
 			}
 		}
+
 		closedir($handle);
 		sort($themelist, SORT_STRING);
 
@@ -269,6 +268,7 @@ class Wacko
 				$themelist = array_intersect ($ath, $themelist);
 			}
 		}
+
 		return $themelist;
 	}
 
@@ -316,6 +316,7 @@ class Wacko
 		if (!isset($this->translations[$lang]))
 		{
 			$resourcefile = 'lang/wacko.'.$lang.'.php';
+
 			if (@file_exists($resourcefile))
 			{
 				include($resourcefile);
@@ -323,22 +324,27 @@ class Wacko
 
 			// wacko.all
 			$resourcefile = 'lang/wacko.all.php';
+
 			if (!$this->translations['all'])
 			{
 				if (@file_exists($resourcefile))
 				{
 					include($resourcefile);
 				}
+
 				$this->translations['all'] = & $wacko_all_resource;
 			}
+
 			if (!isset($wacko_translation))
 			{
 				$wacko_translation = array();
 			}
+
 			$wacko_resource = array_merge($wacko_translation, $this->translations['all']);
 
 			// theme
 			$resourcefile = 'themes/'.$this->config['theme'].'/lang/wacko.'.$lang.'.php';
+
 			if (@file_exists($resourcefile))
 			{
 				include($resourcefile);
@@ -347,18 +353,20 @@ class Wacko
 			{
 				$theme_translation = '';
 			}
+
 			$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
 
 			// wacko.all theme
 			$resourcefile = 'themes/'.$this->config['theme'].'/lang/wacko.all.php';
+
 			if (@file_exists($resourcefile))
 			{
 				include($resourcefile);
 			}
+
 			$wacko_resource = array_merge((array)$wacko_resource, (array)$theme_translation);
 
 			$this->translations[$lang] = $wacko_resource;
-
 			$this->load_lang($lang);
 		}
 	}
@@ -370,6 +378,7 @@ class Wacko
 		if (!isset($this->languages[$lang]))
 		{
 			$resourcefile = 'lang/lang.'.$lang.'.php';
+
 			if (@file_exists($resourcefile))
 			{
 				include($resourcefile);
@@ -421,10 +430,12 @@ class Wacko
 					$langlist[] = $match[1];
 				}
 			}
+
 			closedir($handle);
 			sort($langlist, SORT_STRING);
 			$this->_langlist = $langlist;
 		}
+
 		return $this->_langlist;
 	}
 
@@ -502,6 +513,7 @@ class Wacko
 	function determine_lang()
 	{
 		$langlist = $this->available_languages();
+
 		//!!!! wrong code, maybe!
 		if ((isset($this->method) && $this->method == 'edit') && (isset($_GET['add']) && $_GET['add'] == 1))
 		{
@@ -657,8 +669,10 @@ class Wacko
 						$char_num = intval ($this_char_ord - 128);
 						$decimal_code += ($char_num << $shift[$this_len][$this_pos]);
 					}
+
 					$this_pos++;
 				}
+
 				$encoded_letter = '&#'. $decimal_code . ';';
 			}
 			else
@@ -668,6 +682,7 @@ class Wacko
 
 			$encoded_string .= $encoded_letter;
 		}
+
 		return $encoded_string;
 	}
 
@@ -772,6 +787,7 @@ class Wacko
 			{
 				$meta_keywords .= ', ';
 			}
+
 			$meta_keywords .= strtolower(implode(', ', $this->categories));
 		}
 
@@ -1092,6 +1108,7 @@ class Wacko
 		{
 			$cl = 0;
 		}
+
 		$pages[$cl]	= $user['user_name'];
 		$bookm		= $this->get_default_bookmarks($user['lang'], 'site')."\n".
 					($user_bm
@@ -1508,7 +1525,7 @@ class Wacko
 		{
 			if ($comment_on_id)
 			{
-				$this->cache->cache_invalidate($this->get_comment_on_tag($comment_on_tag));
+				$this->cache->cache_invalidate($this->get_page_tag_by_id($comment_on_tag));
 			}
 			else
 			{
@@ -1744,7 +1761,7 @@ class Wacko
 										$message = $this->get_translation('EmailHello', $lang). $watcher['user_name'].".\n\n".
 													$user_name.
 													$this->get_translation('SomeoneCommented', $lang)."\n".
-													$this->href('', $this->get_comment_on_tag($comment_on_id), '')."\n\n".
+													$this->href('', $this->get_page_tag_by_id($comment_on_id), '')."\n\n".
 													"----------------------------------------------------------------------\n\n".
 													$this->format($body_r, 'post_wacko')."\n\n".
 													"----------------------------------------------------------------------\n\n".
@@ -4394,6 +4411,7 @@ class Wacko
 					if ($url)
 					{
 						$url = str_replace(' ', '', $url);
+
 						if ($url[0] == '/')
 						{
 							$url = substr($url, 1);
@@ -4430,6 +4448,7 @@ class Wacko
 						"bm_title			= '".quote($this->dblink, $title)."', ".
 						"bm_position		= '".quote($this->dblink, ($key + 1))."' ");
 				}
+
 				$bm_lang = '';
 			}
 		}
@@ -4800,6 +4819,7 @@ class Wacko
 			$this->update_session_time($user);
 			unset($user);
 		}
+
 		$user = $this->get_user();
 
 		unset($auth);
@@ -4866,7 +4886,6 @@ class Wacko
 		$this->supertag	= $this->npj_translit($tag);
 
 		$time = isset($_GET['time']) ? $_GET['time'] : '';
-
 		$page = $this->load_page($this->tag, 0, $time);
 
 		if ($this->config['outlook_workaround'] && !$page)
@@ -4990,6 +5009,7 @@ class Wacko
 		{
 			$toc[$k] = implode('<poloskuns,col>', $v);
 		}
+
 		$this->body_toc = implode('<poloskuns,row>', $toc);
 	}
 
@@ -5052,6 +5072,7 @@ class Wacko
 				}
 			}
 		}
+
 		$this->tocs[$tag] = $_toc;
 		return $_toc;
 	}
@@ -5081,6 +5102,7 @@ class Wacko
 			$what = preg_replace_callback("!(<a name=\"(h[0-9]+-[0-9]+)\"></a><h([0-9])>(.*?)</h\\3>)!i",
 				array(&$this, 'numerate_toc_callback_toc'), $what);
 		}
+
 		if (isset($this->post_wacko_action['p']))
 		{
 			// #2. find all <a></a><p...> & guide them in subroutine
@@ -5088,6 +5110,7 @@ class Wacko
 			$what = preg_replace_callback("!(<a name=\"(p[0-9]+-[0-9]+)\"></a><p([^>]+)>(.+?)</p>)!is",
 				array(&$this, 'numerate_toc_callback_p'), $what);
 		}
+
 		return $what;
 	}
 
@@ -5899,9 +5922,13 @@ class Wacko
 					unset($categories[$id]);
 				}
 			}
+
 			return $categories;
 		}
-		else return false;
+		else
+		{
+			return false;
+		}
 	}
 
 	// save categories selected in webform. ids are
@@ -5981,7 +6008,6 @@ class Wacko
 			}
 
 			$count = count($norm) -1;
-
 			$x = 0;
 
 			while ($size >= $factor && $x < $count)
