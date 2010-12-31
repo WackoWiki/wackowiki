@@ -8,7 +8,7 @@ $output = '';
 #if ($this->config['ssl'] == true && $this->config['ssl_implicit'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
 {
-	$this->redirect(str_replace('http://', 'https://'.(!empty($this->config['ssl_proxy']) ? $this->config['ssl_proxy'].'/' : ''), $this->href()));
+	$this->redirect(str_replace('http://', 'https://'.(!empty($this->config['ssl_proxy']) ? $this->config['ssl_proxy'].'/' : ''), $this->href('', $this->get_translation('LoginPage'), "goback=".stripslashes($_GET['goback']))));
 }
 
 // actions
@@ -18,6 +18,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'clearcookies')
 	{
 		$this->delete_cookie($name, false, false);
 	}
+
 	$_POST['action'] = 'logout';
 }
 
@@ -26,13 +27,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 	$this->log(5, str_replace('%1', $this->get_user_name(), $this->get_translation('LogUserLoggedOut', $this->config['language'])));
 	$this->logout_user();
 	$this->set_bookmarks(BM_DEFAULT);
-	//$this->set_message($this->get_translation('LoggedOut'));
+	$this->set_message($this->get_translation('LoggedOut'));
 	$this->context[++$this->current_context] = '';
 
 	if ($_GET['goback'] != '')
-		$this->redirect($this->href('', stripslashes($_GET['goback'])));
+	{
+		$this->redirect($this->href('', stripslashes($_GET['goback']), 'cache='.rand(0,1000)));
+	}
 	else
-		$this->redirect($this->href());
+	{
+		$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
+	}
 }
 else if ($user = $this->get_user())
 {
@@ -58,11 +63,17 @@ else if ($user = $this->get_user())
 				$time_diff = $cookie[2] - time();
 
 				if ($time_diff > 2 * 24 * 3600)
+				{
 					$output .= '(in '.ceil($time_diff / 24 / 3600).' days).';
+				}
 				else if ($time_diff > 5 * 3600)
+				{
 					$output .= '(in '.ceil($time_diff / 3600).' hours).';
+				}
 				else
+				{
 					$output .= '(in '.ceil($time_diff / 60).' minutes).';
+				}
 
 				$output .= '<br />';
 				// Only allow your session to be used from this IP address.
@@ -118,8 +129,8 @@ else
 					}
 					if ($existing_user['password'] == $_processed_password)
 					{
-						$salt = $this->random_password(10, 3);
-						$password = hash('sha256', $_POST['name'].$salt.$_POST['password']);
+						$salt		= $this->random_password(10, 3);
+						$password	= hash('sha256', $_POST['name'].$salt.$_POST['password']);
 
 						// update database with the sha256 password for future logins
 						$this->query("UPDATE ".$this->config['table_prefix']."user SET ".
@@ -138,6 +149,7 @@ else
 				{
 					// define session duration in days
 					$_session = isset($_POST['session']) ? $_POST['session'] : null;
+
 					switch ($_session)
 					{
 						case '1d':
@@ -172,15 +184,19 @@ else
 					}
 
 					if ($_POST['goback'] != '')
+					{
 						$this->redirect($this->href('', stripslashes($_POST['goback']), 'cache='.rand(0,1000)));
+					}
 					else
+					{
 						$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
+					}
 				}
 				else
 				{
-					$error = $this->get_translation('WrongPassword');
-					$name = $_POST['name'];
-					$focus = 1;
+					$error	= $this->get_translation('WrongPassword');
+					$name	= $_POST['name'];
+					$focus	= 1;
 
 					$this->set_failed_user_login_count($existing_user['user_id']);
 
@@ -191,7 +207,10 @@ else
 		}
 	}
 
-	if ($error) $this->set_message($error);
+	if ($error)
+	{
+		$this->set_message($error);
+	}
 
 	echo $this->form_open();
 	?>
@@ -202,7 +221,6 @@ else
 	<p>
 		<label for="name"><?php echo $this->format_translation('LoginName');?>:</label>
 		<input id="name" name="name" size="25" maxlength="25" value="<?php echo isset($name) ? $name : ''; ?>" tabindex="1" />
-
 	</p>
 	<p>
 		<label for="password"><?php echo $this->get_translation('LoginPassword');?>:</label>

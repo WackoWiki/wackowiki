@@ -191,7 +191,7 @@ function moderate_split_topic(&$engine, $comment_ids, $oldtag, $newtag, $title)
 	$engine->forum	= true;
 
 	// resave first comment as new topic page
-	$first_tag		= $engine->get_tag_by_id(array_shift($comment_ids));
+	$first_tag		= $engine->get_page_tag_by_id(array_shift($comment_ids));
 	$page			= $engine->load_page($first_tag);
 
 	// resave modified body
@@ -368,7 +368,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				foreach ($set as $id)
 				{
-					$page = $this->load_page($this->get_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
+					$page = $this->load_page($this->get_page_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
 					moderate_delete_page($this, $page['tag']);
 					$this->log(1, str_replace('%2', $page['user_id'], str_replace('%1', $page['tag'], $this->get_translation('LogRemovedPage', $this->config['language']))));
 				}
@@ -390,7 +390,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$i = 0;
 				foreach ($set as $id)
 				{
-					$oldtags[] = $this->get_tag_by_id($id);
+					$oldtags[] = $this->get_page_tag_by_id($id);
 					$newtags[] = $_POST['section'].substr($oldtags[$i], strrpos($oldtags[$i], '/'));
 
 					if (moderate_page_exists($this, $newtags[$i++]) === true)
@@ -429,7 +429,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// perform accepted rename
 			if ($_POST['accept'])
 			{
-				$oldtag		= $this->get_tag_by_id($set[0]);
+				$oldtag		= $this->get_page_tag_by_id($set[0]);
 				$tag		= trim($_POST['title'], " \t");
 				$title		= $tag;
 				$tag 		= ucwords($tag);
@@ -470,7 +470,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				foreach ($set as $id)
 				{
-					$topics[] = $this->get_tag_by_id($id);
+					$topics[] = $this->get_page_tag_by_id($id);
 				}
 				moderate_merge_topics($this, $_POST['base'], $topics);
 				$this->log(3, str_replace('%2', $_POST['base'], str_replace('%1', '##'.implode('##, ##', $topics).'##', $this->get_translation('LogMergedPages', $this->config['language']))));
@@ -486,7 +486,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			foreach ($set as $id)
 			{
-				$page = $this->load_page($this->get_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
+				$page = $this->load_page($this->get_page_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
 				$this->log(2, str_replace('%1', $page['tag'].' '.$page['title'], $this->get_translation('LogTopicLocked', $this->config['language'])));
 				// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 				$this->save_acl($id, 'comment', '!*');
@@ -500,7 +500,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			foreach ($set as $id)
 			{
-				$page = $this->load_page($this->get_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
+				$page = $this->load_page($this->get_page_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
 				$this->log(2, str_replace('%1', $page['tag'].' '.$page['title'], $this->get_translation('LogTopicUnlocked', $this->config['language'])));
 				$this->save_acl($id, 'comment', '*');
 			}
@@ -618,7 +618,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			foreach ($set as $id)
 			{
 				$acceptText[] = '&laquo;'.$this->get_page_title('', $id).'&raquo;';
-				$topicsList[] = $this->get_tag_by_id($id);
+				$topicsList[] = $this->get_page_tag_by_id($id);
 			}
 
 			for ($i = 0; $i < count($topicsList); $i++)
@@ -838,7 +838,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				foreach ($set as $id)
 				{
-					$page = $this->load_page($this->get_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
+					$page = $this->load_page($this->get_page_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
 					moderate_delete_page($this, $page['tag']);
 					$this->log(1, str_replace('%3', $this->get_time_string_formatted($page['created']), str_replace('%2', $page['user'], str_replace('%1', $page['comment_on'].' '.$this->get_page_title($page['comment_on']), $this->get_translation('LogRemovedComment', $this->config['language'])))));
 				}
@@ -904,7 +904,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$_set = $set;
 						sort($_set);
 
-						$first_comment	= $this->load_page($this->get_tag_by_id($_set[0]));
+						$first_comment	= $this->load_page($this->get_page_tag_by_id($_set[0]));
 						$_comments		= $this->load_all(
 							"SELECT page_id ".
 							"FROM {$this->config['table_prefix']}page ".

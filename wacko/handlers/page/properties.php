@@ -42,7 +42,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 					"disable_safehtml	= '".quote($this->dblink, $disable_safehtml)."', ".
 					"noindex			= '".quote($this->dblink, (int)$_POST['noindex'])."' "
 				: 	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
-					"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
+					"theme				= '".quote($this->dblink, (isset($_POST['theme']) ? $_POST['theme'] : ''))."', ".
 					"title				= '".quote($this->dblink, htmlspecialchars(trim($_POST['title'])))."', ".
 					"keywords			= '".quote($this->dblink, htmlspecialchars(trim($_POST['keywords'])))."', ".
 					"description		= '".quote($this->dblink, htmlspecialchars(trim($_POST['description'])))."' "
