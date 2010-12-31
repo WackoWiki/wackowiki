@@ -114,6 +114,7 @@ $config_db['allow_rawhtml'] = $config['allow_rawhtml'];
 $config_db['allow_registration'] = $config['allow_registration'];
 $config_db['allow_swfobject'] = $config['allow_swfobject'];
 $config_db['allow_themes'] = $config['allow_themes'];
+$config_db['allow_themes_per_page'] = $config['allow_themes_per_page'];
 $config_db['allow_x11colors'] = $config['allow_x11colors'];
 $config_db['antidupe'] = $config['antidupe'];
 $config_db['cache'] = $config['cache'];

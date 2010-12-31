@@ -32,7 +32,7 @@ function admin_configsecurity(&$engine, &$module)
 		$config['captcha_new_page']				= (int)$_POST['captcha_new_page'];
 		$config['captcha_edit_page']			= (int)$_POST['captcha_edit_page'];
 		$config['captcha_registration']			= (int)$_POST['captcha_registration'];
-		$config['session_encrypt_cookie']				= (int)$_POST['session_encrypt_cookie'];
+		$config['session_encrypt_cookie']		= (int)$_POST['session_encrypt_cookie'];
 		$config['antidupe']						= (int)$_POST['antidupe'];
 		$config['default_read_acl']				= (string)$_POST['default_read_acl'];
 		$config['default_write_acl']			= (string)$_POST['default_write_acl'];

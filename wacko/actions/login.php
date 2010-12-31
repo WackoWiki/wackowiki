@@ -165,7 +165,9 @@ else
 							$session = $this->config['session_expiration'];
 					}
 
-					$this->log_user_in($existing_user, $_POST['persistent'], $session);
+					$_persistent = isset($_POST['persistent']) ? $_POST['persistent'] : 0;
+
+					$this->log_user_in($existing_user, $_persistent, $session);
 					$this->set_user($existing_user, 1);
 					$this->update_session_time($existing_user);
 					$this->set_bookmarks(BM_USER);
