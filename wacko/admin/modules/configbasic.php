@@ -29,6 +29,7 @@ function admin_configbasic(&$engine, &$module)
 		$config['meta_keywords']			= (string)$_POST['meta_keywords'];
 		$config['theme']					= (string)$_POST['theme'];
 		$config['allow_themes']				= (string)$_POST['allow_themes'];
+		$config['allow_themes_per_page']	= (string)$_POST['themes_per_page'];
 		$config['admin_name']				= (string)$_POST['admin_name'];
 		$config['admin_email']				= (string)$_POST['admin_email'];
 		$config['abuse_email']				= (string)$_POST['abuse_email'];
@@ -122,9 +123,20 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="allow_themes"><strong>Allow Themes:</strong><br />
+				<td class="label"><label for="allow_themes"><strong>Allowed Themes:</strong><br />
 				<small>Allowed themes, which the user can choose: "0" – all available themes are allowed (default), <br />"default,coffee" – here only these both themes are allowed.</small></label></td>
 				<td><input maxlength="25" style="width:200px;" id="allow_themes" name="allow_themes" value="<?php echo htmlspecialchars($engine->config['allow_themes']);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><strong>Themes per page:</strong><br />
+				<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
+				<td>
+					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ( $engine->config['allow_themes_per_page'] == 1 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_on">On.</label>
+					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ( $engine->config['allow_themes_per_page'] == 0 ? ' checked="checked"' : '' );?> /><label for="themes_per_page_off">Off.</label>
+				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

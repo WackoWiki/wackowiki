@@ -6,15 +6,20 @@
 
 // redirect to show method if page don't exists
 if (!$this->page)
+{
 	$this->redirect($this->href('show'));
+}
 
 // deny for comment
 if ($this->page['comment_on_id'])
+{
 	$this->redirect($this->href('', $this->get_page_tag_by_id($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
-
+}
 // and for forum page
 else if ($this->forum === true && !$this->is_admin())
+{
 	$this->redirect($this->href());
+}
 
 if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id']))
 {
@@ -216,7 +221,9 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 <td class="form_right"><select id="lang" name="lang">
 <?php
 if (!($clang = $this->page['lang']))
-$clang = $this->config['language'];
+{
+	$clang = $this->config['language'];
+}
 
 if ($langs = $this->available_languages())
 {
@@ -230,13 +237,17 @@ if ($langs = $this->available_languages())
 
 <div class="BewareChangeLang"><?php echo $this->get_translation('BewareChangeLang'); ?></div>
 </td>
-</tr><tr class="lined">
-<th class="form_left" scope="row"><label for="theme"><?php echo $this->get_translation('ChooseTheme');?></label></th>
-<td class="form_right"><select id="theme" name="theme">
-
+</tr>
 <?php
+if ($this->config['allow_themes_per_page'])
+{
+	echo "<tr class=\"lined\">\n";
+	echo "<th class=\"form_left\" scope=\"row\"><label for=\"theme\">".$this->get_translation('ChooseTheme')."</label></th>\n";
+	echo "<td class=\"form_right\"><select id=\"theme\" name=\"theme\">\n";
+
 	echo '<option value="">--</option>';
 	$themes = $this->available_themes();
+
 	for ($i = 0; $i < count($themes); $i++)
 	{
 		echo '<option value="'.$themes[$i].'" '.
@@ -247,10 +258,13 @@ if ($langs = $this->available_languages())
 					: "")
 			).">".$themes[$i]."</option>\n";
 	}
-	?>
-		</select></td>
 
-<?php echo "</tr>\n<tr>"; ?>
+	echo "</select></td>\n";
+	echo "</tr>\n";
+}
+
+echo "<tr>\n";
+?>
 <th class="form_left"></th>
 <td class="form_right"><input type="submit"
 	value="<?php echo $this->get_translation('MetaStoreButton'); ?>"
@@ -344,7 +358,7 @@ if ($langs = $this->available_languages())
 	// ACL link (shows only if owner is current user or Admin)
 	if ($this->user_is_owner() || $this->is_admin())
 	{
-		echo("<li><a href=\"".$this->href('permissions')."\">".$this->get_translation('SettingsAcls')."</a></li>\n");
+		echo("<li><a href=\"".$this->href('permissions')."\">".$this->get_translation('SettingsPermissions')."</a></li>\n");
 	}
 	?>
 	<li><a href="<?php echo $this->href('categories'); ?>"><?php echo $this->get_translation('SettingsCategories'); ?></a></li>

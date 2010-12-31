@@ -36,6 +36,7 @@ $wacko_config = array(
 
 	'theme' => 'default',
 	'allow_themes' => 0,
+	'allow_themes_per_page' => 0,
 	'allow_swfobject' => 0,
 
 	'header_action' => 'header',

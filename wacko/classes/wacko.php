@@ -1547,6 +1547,12 @@ class Wacko
 				$body_toc	= $this->body_toc;
 			}
 
+			// review
+			if (isset($reviewed))
+			{
+				$reviewer_id	= $user_id;
+			}
+
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
 			if (!$old_page = $this->load_page($tag))
 			{
@@ -1637,17 +1643,20 @@ class Wacko
 						"user_id		= '".quote($this->dblink, $user_id)."', ".
 						"ip				= '".quote($this->dblink, $ip)."', ".
 						"latest			= '1', ".
+						"tag			= '".quote($this->dblink, $tag)."', ".
 						"supertag		= '".quote($this->dblink, $this->npj_translit($tag))."', ".
 						"body			= '".quote($this->dblink, $body)."', ".
 						"body_r			= '".quote($this->dblink, $body_r)."', ".
 						"body_toc		= '".quote($this->dblink, $body_toc)."', ".
 						"edit_note		= '".quote($this->dblink, $edit_note)."', ".
 						"minor_edit		= '".quote($this->dblink, $minor_edit)."', ".
-						"reviewed		= '".quote($this->dblink, $reviewed)."', ".
-						"reviewed_time	= '".quote($this->dblink, $reviewed_time)."', ".
-						"reviewer_id	= '".quote($this->dblink, $reviewer_id)."', ".
+						(isset($reviewed)
+							?	"reviewed		= '".quote($this->dblink, $reviewed)."', ".
+								"reviewed_time	= NOW(), ".
+								"reviewer_id	= '".quote($this->dblink, $reviewer_id)."', "
+							:	"").
 						"lang			= '".quote($this->dblink, $lang)."', ".
-						"tag			= '".quote($this->dblink, $tag)."', ".
+
 						"title			= '".quote($this->dblink, htmlspecialchars($title))."'");
 
 				// saving acls
@@ -1807,9 +1816,11 @@ class Wacko
 							"body_toc		= '".quote($this->dblink, $body_toc)."', ".
 							"edit_note		= '".quote($this->dblink, $edit_note)."', ".
 							"minor_edit		= '".quote($this->dblink, $minor_edit)."', ".
-							"reviewed		= '".quote($this->dblink, $reviewed)."', ".
-							"reviewed_time	= '".quote($this->dblink, $reviewed_time)."', ".
-							"reviewer_id	= '".quote($this->dblink, $reviewer_id)."', ".
+							(isset($reviewed)
+								?	"reviewed		= '".quote($this->dblink, $reviewed)."', ".
+									"reviewed_time	= NOW(), ".
+									"reviewer_id	= '".quote($this->dblink, $reviewer_id)."', "
+								:	"").
 							"title			= '".quote($this->dblink, htmlspecialchars($title))."' ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
 						"LIMIT 1");
@@ -1935,26 +1946,26 @@ class Wacko
 		// move revision
 		$this->query(
 			"INSERT INTO {$this->config['table_prefix']}revision SET ".
-			"page_id		= '{$old_page['page_id']}', ".
-			"tag			= '{$old_page['tag']}', ".
-			"modified		= '{$old_page['modified']}', ".
-			"body			= '{$old_page['body']}', ".
-			"formatting		= '{$old_page['formatting']}', ".
-			"edit_note		= '{$old_page['edit_note']}', ".
-			"minor_edit		= '{$old_page['minor_edit']}', ".
-			"reviewed		= '{$old_page['reviewed']}', ".
-			"reviewed_time	= '{$old_page['reviewed_time']}', ".
-			"reviewer_id	= '{$old_page['reviewer_id']}', ".
-			"ip				= '{$old_page['ip']}', ".
-			"owner_id		= '{$old_page['owner_id']}', ".
-			"user_id		= '{$old_page['user_id']}', ".
-			"latest			= '0', ".
-			"handler		= '{$old_page['handler']}', ".
-			"comment_on_id	= '{$old_page['comment_on_id']}', ".
-			"supertag		= '{$old_page['supertag']}', ".
-			"title			= '{$old_page['title']}', ".
-			"keywords		= '{$old_page['keywords']}', ".
-			"description	= '{$old_page['description']}'");
+				"page_id		= '{$old_page['page_id']}', ".
+				"tag			= '{$old_page['tag']}', ".
+				"modified		= '{$old_page['modified']}', ".
+				"body			= '{$old_page['body']}', ".
+				"formatting		= '{$old_page['formatting']}', ".
+				"edit_note		= '{$old_page['edit_note']}', ".
+				"minor_edit		= '{$old_page['minor_edit']}', ".
+				"reviewed		= '{$old_page['reviewed']}', ".
+				"reviewed_time	= '{$old_page['reviewed_time']}', ".
+				"reviewer_id	= '{$old_page['reviewer_id']}', ".
+				"ip				= '{$old_page['ip']}', ".
+				"owner_id		= '{$old_page['owner_id']}', ".
+				"user_id		= '{$old_page['user_id']}', ".
+				"latest			= '0', ".
+				"handler		= '{$old_page['handler']}', ".
+				"comment_on_id	= '{$old_page['comment_on_id']}', ".
+				"supertag		= '{$old_page['supertag']}', ".
+				"title			= '{$old_page['title']}', ".
+				"keywords		= '{$old_page['keywords']}', ".
+				"description	= '{$old_page['description']}'");
 
 		// update user statistics for revisions made
 		if ($user = $this->get_user())
@@ -5928,6 +5939,8 @@ class Wacko
 	//	false	- if list was empty
 	function save_categories_list($page_id, $dryrun = 0)
 	{
+		$set = '';
+
 		// what's selected
 		foreach ($_POST as $key => $val)
 		{
@@ -5998,8 +6011,8 @@ class Wacko
 				$factor = 1024;
 			}
 
-			$count = count($norm) -1;
-			$x = 0;
+			$count	= count($norm) -1;
+			$x		= 0;
 
 			while ($size >= $factor && $x < $count)
 			{
