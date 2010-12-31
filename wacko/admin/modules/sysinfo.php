@@ -44,6 +44,7 @@ function admin_sysinfo(&$engine, &$module)
 	$sysinfo['app_version']			= array('Wacko version', $engine->config['wacko_version']);
 	$sysinfo['os']					= array('OS', PHP_OS.' ('.@php_uname().')');
 	#$sysinfo['os_extended']		= array('OS extended', @php_uname());
+	$sysinfo['server_software']		= array('Web server', $_SERVER['SERVER_SOFTWARE']);
 	$sysinfo['mysql_version']		= array('MySQL version', $mysql_version);
 	$sysinfo['php_version']			= array('PHP Version', PHP_VERSION);
 	$sysinfo['memory']				= array('Memory', $engine->binary_multiples($_php_ram*1024*1024, 0, true, true));

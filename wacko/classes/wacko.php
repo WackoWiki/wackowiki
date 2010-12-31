@@ -169,12 +169,13 @@ class Wacko
 
 	function get_page_tag_by_id($page_id = 0)
 	{
-		$tag = $this->load_single(
-					"SELECT tag FROM ".$this->config['table_prefix']."page WHERE page_id = '".$page_id."' LIMIT 1");
-					// Get tag value
-					$tag = $tag['tag'];
+		$page = $this->load_single(
+					"SELECT tag ".
+					"FROM ".$this->config['table_prefix']."page ".
+					"WHERE page_id = '".$page_id."' ".
+					"LIMIT 1");
 
-					return $tag;
+		return $page['tag'];;
 	}
 
 	function get_page_id($tag = 0)
@@ -808,16 +809,6 @@ class Wacko
 		}
 
 		return htmlspecialchars($meta_description);
-	}
-
-	function get_tag_by_id($page_id, $old = 0)
-	{
-		$page = $this->load_single(
-			"SELECT tag ".
-			"FROM {$this->config['table_prefix']}".( !$old ? 'page' : 'revision' )." ".
-			"WHERE page_id = ".quote($this->dblink, (int)$page_id)." ".
-			"LIMIT 1");
-		return $page['tag'];
 	}
 
 	// wrapper for old_load_page
