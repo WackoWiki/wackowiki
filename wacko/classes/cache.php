@@ -47,7 +47,13 @@ class Cache
 		}
 
 		$fp		= fopen($filename, 'r');
-		$data	= fread($fp, filesize($filename));
+
+		// check for false and empty strings
+		if(($data	= fread($fp, filesize($filename))) === '')
+		{
+			return false;
+		}
+
 		fclose($fp);
 
 		return unserialize($data);
@@ -74,7 +80,13 @@ class Cache
 		}
 
 		$fp			= fopen($filename, 'r');
-		$contents	= fread($fp, filesize($filename));
+
+		// check for false and empty strings
+		if(($contents = fread($fp, filesize($filename))) === '')
+		{
+			return false;
+		}
+
 		$contents	= "<!-- WackoWiki Caching Engine: page cached at ".date('Y-m-d H:i:s', $timestamp).", contents follows -->\n".$contents;
 		fclose($fp);
 

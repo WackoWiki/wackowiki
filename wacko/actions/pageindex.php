@@ -231,7 +231,8 @@ if ($pages_to_display)
 		}
 		else
 		{
-			echo $this->compose_link_to_page($page['tag'], '', $page['tag'], 0);
+			echo $this->link('/'.$page['tag'], '', $page['tag'], 0, 1, '', 0);
+			#echo $this->compose_link_to_page($page['tag'], '', $page['tag'], 0);
 		}
 
 		echo "</li>\n";
