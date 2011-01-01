@@ -51,6 +51,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 							<a name="top"></a>
 <?php
 $user = '';
+
 if ($this->get_user())
 {
 ?>

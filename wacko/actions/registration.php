@@ -104,7 +104,9 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 		{
 			// check if name is WikiName style
 			if (!$this->is_wiki_name($user_name))
+			{
 				$error .= $this->get_translation('MustBeWikiName')." ";
+			}
 			// if user name already exists
 			else if ($this->user_name_exists($user_name) === true)
 			{
@@ -115,17 +117,24 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 			}
 			// no email given
 			else if ($email == '')
+			{
 				$error .= $this->get_translation('SpecifyEmail')." ";
+			}
 			// invalid email
 			else if (!preg_match('/^.+?\@.+$/', $email))
+			{
 				$error .= $this->get_translation('NotAEmail')." ";
-
+			}
 			// confirmed password mismatch
 			else if ($confpassword != $password)
+			{
 				$error .= $this->get_translation('PasswordsDidntMatch')." ";
+			}
 			// spaces in password
 			else if (preg_match('/ /', $password))
+			{
 				$error .= $this->get_translation('SpacesArentAllowed')." ";
+			}
 			// password complexity validation
 			else if ($complexity > 0)
 			{
@@ -134,11 +143,13 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 					$error .= $this->get_translation('PwdCplxWeak')." ";
 					$complexity -= 5;
 				}
+
 				if ($complexity >= 2)
 				{
 					$error .= $this->get_translation('PwdCplxShort')." ";
 					$complexity -= 2;
 				}
+
 				if ($complexity >= 1)
 				{
 					$error .= $this->get_translation('PwdCplxEquals')." ";
@@ -198,8 +209,8 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 
 				// forward
 				$this->set_message($this->get_translation('SiteRegistered').
-					$this->config['wacko_name'].". ".
-					$this->get_translation('SiteEmailConfirm'));
+				$this->config['wacko_name'].". ".
+				$this->get_translation('SiteEmailConfirm'));
 				$this->context[++$this->current_context] = '';
 				$this->redirect($this->href('', $this->get_translation('LoginPage')));
 			}
@@ -211,7 +222,10 @@ if (!isset($_POST['confirm']))
 {
 	if ($this->config['allow_registration'] || $this->is_admin())
 	{
-		if ($error) $this->set_message($this->format($error));
+		if ($error)
+		{
+			$this->set_message($this->format($error));
+		}
 
 		echo $this->form_open();
 		?>
@@ -252,14 +266,22 @@ for ($i = 0; $i < count($langs); $i++)
 <?php
 if ($this->config['pwd_char_classes'] > 0)
 {
-	$PwdCplxText = $this->get_translation('PwdCplxDesc4');
-	if 		($this->config['pwd_char_classes'] == 1)
-		$PwdCplxText .= $this->get_translation('PwdCplxDesc41');
+	$pwd_cplx_text = $this->get_translation('PwdCplxDesc4');
+
+	if ($this->config['pwd_char_classes'] == 1)
+	{
+		$pwd_cplx_text .= $this->get_translation('PwdCplxDesc41');
+	}
 	else if ($this->config['pwd_char_classes'] == 2)
-		$PwdCplxText .= $this->get_translation('PwdCplxDesc42');
+	{
+		$pwd_cplx_text .= $this->get_translation('PwdCplxDesc42');
+	}
 	else if ($this->config['pwd_char_classes'] == 3)
-		$PwdCplxText .= $this->get_translation('PwdCplxDesc43');
-	$PwdCplxText .= ". ".$this->get_translation('PwdCplxDesc5');
+	{
+		$pwd_cplx_text .= $this->get_translation('PwdCplxDesc43');
+	}
+
+	$pwd_cplx_text .= ". ".$this->get_translation('PwdCplxDesc5');
 }
 echo "<br /><small>".
 	 $this->get_translation('PwdCplxDesc1').
@@ -269,13 +291,12 @@ echo "<br /><small>".
 		? ", ".$this->get_translation('PwdCplxDesc3')
 		: "").
 	 ($this->config['pwd_char_classes'] > 0
-		? ", ".$PwdCplxText
+		? ", ".$pwd_cplx_text
 		: "")."</small>";
 ?>
 </p>
 <p><label for="confpassword"><?php echo $this->get_translation('ConfirmPassword');?>:</label>
-<input type="password" id="confpassword" name="confpassword" size="24"
-	value="<?php echo $confpassword ?>" /></p>
+<input type="password" id="confpassword" name="confpassword" size="24" value="<?php echo $confpassword ?>" /></p>
 <p>
 <?php
 /* TODO: add message -> A valid e-mail address. All e-mails from the system will be sent to this address. The e-mail address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by e-mail. */ ?>

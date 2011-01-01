@@ -83,7 +83,7 @@ print("         <h2>".$lang['TestingConfiguration']."</h2>\n");
 if ($config['system_seed'] == '')
 	$config['system_seed'] = random_seed(20, 3);
 
-$salt = random_seed(4, 3);
+$salt = random_seed(10, 3);
 $password_encrypted = hash('sha256', $config['admin_name'].$salt.$_POST['password']);
 
 $config_insert = '';

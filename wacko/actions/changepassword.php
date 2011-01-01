@@ -11,9 +11,13 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 {
 	// Password forgotten. Provided secret code
 	if ($_GET['secret_code'])
+	{
 		$code = $_GET['secret_code'];
+	}
 	elseif ($_POST['secret_code'])
+	{
 		$code = $_POST['secret_code'];
+	}
 
 	$user = $this->load_single(
 		"SELECT * ".
@@ -32,6 +36,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 
 			// check all conditions
 			$complexity		= $this->password_complexity($user, $newpassword);
+
 			// confirmed password mismatch
 			if ($confpassword != $newpassword)
 			{
@@ -78,7 +83,10 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 				$this->redirect($this->href('', $this->get_translation('LoginPage')));
 			}
 
-			if ($error) $this->set_message($error);
+			if ($error)
+			{
+				$this->set_message($error);
+			}
 		}
 		else
 		{
@@ -99,14 +107,22 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 					<?php
 							if ($this->config['pwd_char_classes'] > 0)
 							{
-								$PwdCplxText = $this->get_translation('PwdCplxDesc4');
-								if 		($this->config['pwd_char_classes'] == 1)
-									$PwdCplxText .= $this->get_translation('PwdCplxDesc41');
+								$pwd_cplx_text = $this->get_translation('PwdCplxDesc4');
+
+								if ($this->config['pwd_char_classes'] == 1)
+								{
+									$pwd_cplx_text .= $this->get_translation('PwdCplxDesc41');
+								}
 								else if ($this->config['pwd_char_classes'] == 2)
-									$PwdCplxText .= $this->get_translation('PwdCplxDesc42');
+								{
+									$pwd_cplx_text .= $this->get_translation('PwdCplxDesc42');
+								}
 								else if ($this->config['pwd_char_classes'] == 3)
-									$PwdCplxText .= $this->get_translation('PwdCplxDesc43');
-								$PwdCplxText .= ". ".$this->get_translation('PwdCplxDesc5');
+								{
+									$pwd_cplx_text .= $this->get_translation('PwdCplxDesc43');
+								}
+
+								$pwd_cplx_text .= ". ".$this->get_translation('PwdCplxDesc5');
 							}
 							echo "<br /><small>".
 								 $this->get_translation('PwdCplxDesc1').
@@ -116,7 +132,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 									? ", ".$this->get_translation('PwdCplxDesc3')
 									: "").
 								 ($this->config['pwd_char_classes'] > 0
-									? ", ".$PwdCplxText
+									? ", ".$pwd_cplx_text
 									: "")."</small>";
 					?>
 				</p>
@@ -227,15 +243,24 @@ else if (!isset($forgot) && $user = $this->get_user())
 			<?php
 			if ($this->config['pwd_char_classes'] > 0)
 			{
-				$PwdCplxText = $this->get_translation('PwdCplxDesc4');
+				$pwd_cplx_text = $this->get_translation('PwdCplxDesc4');
+
 				if 		($this->config['pwd_char_classes'] == 1)
-					$PwdCplxText .= $this->get_translation('PwdCplxDesc41');
+				{
+					$pwd_cplx_text .= $this->get_translation('PwdCplxDesc41');
+				}
 				else if ($this->config['pwd_char_classes'] == 2)
-					$PwdCplxText .= $this->get_translation('PwdCplxDesc42');
+				{
+					$pwd_cplx_text .= $this->get_translation('PwdCplxDesc42');
+				}
 				else if ($this->config['pwd_char_classes'] == 3)
-					$PwdCplxText .= $this->get_translation('PwdCplxDesc43');
-				$PwdCplxText .= ". ".$this->get_translation('PwdCplxDesc5');
+				{
+					$pwd_cplx_text .= $this->get_translation('PwdCplxDesc43');
+				}
+
+				$pwd_cplx_text .= ". ".$this->get_translation('PwdCplxDesc5');
 			}
+
 			echo "<br /><small>".
 				 $this->get_translation('PwdCplxDesc1').
 				 str_replace('%1', $this->config['pwd_min_chars'],
@@ -244,7 +269,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 					? ", ".$this->get_translation('PwdCplxDesc3')
 					: "").
 				 ($this->config['pwd_char_classes'] > 0
-					? ", ".$PwdCplxText
+					? ", ".$pwd_cplx_text
 					: "")."</small>";
 			?>
 		</p>
@@ -319,8 +344,9 @@ else
 			$error = $this->get_translation('UserNotFound');
 		}
 	}
+
 	// View password forgot form
-	if (isset($error) || $_POST['action'] != 'send')
+	if (isset($error) || (isset($_POST['action']) && $_POST['action'] != 'send'))
 	{
 		if (isset($error))
 		{
