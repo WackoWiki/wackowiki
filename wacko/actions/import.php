@@ -58,7 +58,12 @@ if ($this->is_admin())
 				die('</pre><br />IMPORT failed');
 			}
 
-			$contents = fread($fd, filesize($_FILES['_import']['tmp_name']));
+			// check for false and empty strings
+			if(($contents = fread($fd, filesize($_FILES['_import']['tmp_name']))) === '')
+			{
+				return false;
+			}
+
 			fclose($fd);
 
 			$this->use_class('utility');

@@ -15,6 +15,7 @@ class Wacko
 	var $query_time;
 	var $query_log				= array();
 	var $inter_wiki				= array();
+	var $_acl					= array();
 	var $acl_cache				= array();
 	var $context				= array();
 	var $current_context		= 0;
@@ -1780,8 +1781,8 @@ class Wacko
 						}// end of watchers
 					}
 					$this->load_translation($this->user_lang);
-					$this->set_translation ($this->user_lang);
-					$this->set_language ($this->user_lang);
+					$this->set_translation($this->user_lang);
+					$this->set_language($this->user_lang);
 				} // end of comment_on
 			} // end of new page
 			// RESAVING AN OLD PAGE, CREATING REVISION
@@ -2170,7 +2171,7 @@ class Wacko
 		}
 		if ($params)
 		{
-			$href  .= ($this->config['rewrite_mode'] ? '?' : '&amp;').$params;
+			$href .= ($this->config['rewrite_mode'] ? '?' : '&amp;').$params;
 		}
 
 		return $href;
@@ -2689,19 +2690,25 @@ class Wacko
 			if ($thispage)
 			{
 				$pagelink	= $this->href($method, $thispage['tag']).($anchor ? $anchor : '');
+				$page_id	= $this->get_page_id($tag);
 
 				if ($this->config['hide_locked'])
 				{
-					$page_id	= $this->get_page_id($tag);
 					$access		= $this->has_access('read', $page_id);
 				}
 				else
 				{
 					$access		= true;
-					$this->_acl['list'] == '*';
+
+					if ($this->has_access('read', $page_id) == false)
+					{
+						$this->_acl['list'] = '';
+					}
+					#$_denied = true;
+					#$this->_acl['list'] = '*';
 				}
 
-				if (!$access)
+				if (!$access || $this->_acl['list'] == '')
 				{
 					$class		= 'denied';
 					$accicon	= $this->get_translation('lockicon');
