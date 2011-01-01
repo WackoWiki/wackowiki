@@ -1,6 +1,6 @@
 <?php
 /*
-	{{toc page|for="!/SubTag" from="h2" to="h4" numerate="0|1|..." title="alternate title" nomark="0|1" }}
+	{{toc page|for="!/SubTag" from="h2" to="h4" numerate="0|1|..." legend="alternate legend" nomark="0|1" }}
 */
 // 1. check for first param (for what TOC is built)
 

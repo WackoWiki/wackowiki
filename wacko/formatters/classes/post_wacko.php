@@ -33,7 +33,7 @@ class post_wacko
 					$text	= $t[0];
 					$lang	= $t[1];
 				}
-				return $wacko->link($url, '', $text, 1, 1, $lang);
+				return $wacko->link($url, '', $text, '', 1, 1, $lang);
 			}
 			else return '';
 		}
@@ -45,7 +45,7 @@ class post_wacko
 			if ($url && $img)
 			{
 				$url	= str_replace(' ', '', $url);
-				$url	= $wacko->link($url, '', '', 1, 1);
+				$url	= $wacko->link($url, '', '', '', 1, 1);
 
 				if (!$url = preg_replace('/.*href="(.*?)".*|.*src="(.*?)".*/', '\\1\\2', $url))
 				{
@@ -54,7 +54,7 @@ class post_wacko
 
 				$img	= str_replace(' ', '', $img);
 				$img	= trim(preg_replace('/<!--imgprelink:[\w]+-->|__|\[\*\[|\(\*\(/', '', $img));
-				$img	= $wacko->link($img, '', '', 1, 1);
+				$img	= $wacko->link($img, '', '', '', 1, 1);
 
 				return '<a href="'.$url.'">'.$img.'</a>';
 			}

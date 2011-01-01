@@ -217,7 +217,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 			{
 				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id'], $this->get_user_name()) === true)
 				{
-					echo '<small>'.$this->get_time_string_formatted($page['created']).'</small>  &mdash; '.$this->link('/'.$page['tag'], '', $page['title'], 0)."<br />\n";
+					echo '<small>'.$this->get_time_string_formatted($page['created']).'</small>  &mdash; '.$this->link('/'.$page['tag'], '', $page['title'], '', 0)."<br />\n";
 
 					$i = 0;
 					if (++$i >= $limit) break 1;

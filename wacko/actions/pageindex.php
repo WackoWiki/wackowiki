@@ -227,11 +227,11 @@ if ($pages_to_display)
 
 		if ($title == 1)
 		{
-			echo $this->link('/'.$page['tag'], '', $page['title'], 0, 1, '', 0);
+			echo $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, '', 0);
 		}
 		else
 		{
-			echo $this->link('/'.$page['tag'], '', $page['tag'], 0, 1, '', 0);
+			echo $this->link('/'.$page['tag'], '', $page['tag'], $page['title'], 0, 1, '', 0);
 			#echo $this->compose_link_to_page($page['tag'], '', $page['tag'], 0);
 		}
 

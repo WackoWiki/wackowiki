@@ -128,7 +128,7 @@ if (!$nomark)
 		{
 			if ($title != '' && $counturlset == 1)
 			{
-				echo "<h3 class=\"feed_element_title\">".$this->link($feed->get_permalink(), '', $title, 1, 1)."</h3>";
+				echo "<h3 class=\"feed_element_title\">".$this->link($feed->get_permalink(), '', $title, '', 1, 1)."</h3>";
 			}
 			if ($title != '' && $counturlset > 1)
 			{
@@ -136,7 +136,7 @@ if (!$nomark)
 			}
 			elseif (!$title && $counturlset == 1)
 			{
-				echo "<h3 class=\"feed_element_title\">".$this->link($feed->get_permalink(), '', $feed->get_title(), 1, 1)."</h3>";
+				echo "<h3 class=\"feed_element_title\">".$this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1)."</h3>";
 			}
 			elseif (!$title && $counturlset > 1)
 			{
@@ -150,7 +150,7 @@ if (!$nomark)
 		{
 			if ($title != '' && $counturlset == 1)
 			{
-				echo "<p class=\"layout-box\"><span>".$this->get_translation('FeedTitle').": <strong>".$this->link($feed->get_permalink(), '', $title, 1, 1)."</strong>".$lastitems."<span></p>";
+				echo "<p class=\"layout-box\"><span>".$this->get_translation('FeedTitle').": <strong>".$this->link($feed->get_permalink(), '', $title, '', 1, 1)."</strong>".$lastitems."<span></p>";
 			}
 			if ($title != '' && $counturlset > 1)
 			{
@@ -158,7 +158,7 @@ if (!$nomark)
 			}
 			elseif (!$title && $counturlset == 1)
 			{
-				echo "<p class=\"layout-box\"><span>".$this->get_translation('FeedTitle').": <strong>".$this->link($feed->get_permalink(), '', $feed->get_title(), 1, 1)."</strong>".$lastitems."</span></p>";
+				echo "<p class=\"layout-box\"><span>".$this->get_translation('FeedTitle').": <strong>".$this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1)."</strong>".$lastitems."</span></p>";
 			}
 			elseif (!$title && $counturlset > 1)
 			{
@@ -188,8 +188,8 @@ if (!$nomark)
 			if($nomark)
 				echo " class=\"feed_element_title\"";
 
-			echo ">".$this->link($item->get_permalink(), '', $item->get_title(), 1, 1)."</".$headertag.">";
-			echo "<p class=\"note\"><span>".$this->get_translation('FeedSource')." ".$this->link($xfeed->get_permalink(), '', $xfeed->get_title(), 1, 1)." | ".$item->get_date('d.m.Y g:i')." | ";
+			echo ">".$this->link($item->get_permalink(), '', $item->get_title(), '', 1, 1)."</".$headertag.">";
+			echo "<p class=\"note\"><span>".$this->get_translation('FeedSource')." ".$this->link($xfeed->get_permalink(), '', $xfeed->get_title(), '', 1, 1)." | ".$item->get_date('d.m.Y g:i')." | ";
 
 			if (($time == 'yes') && ($date != 0))
 				echo intervalCalc($date);
@@ -223,7 +223,7 @@ if (!$nomark)
 
 			// headline
 			#echo "<a target=\"_blank\" href=\"$href\" class=\"outerlink\">$title</a>";
-			echo "<".$headertag.">".$this->link($href, '', $title, 1, 1)."</".$headertag.">";
+			echo "<".$headertag.">".$this->link($href, '', $title, '', 1, 1)."</".$headertag.">";
 
 			if (($time == 'yes') && ($date != 0))
 				echo "<p class=\"note\"><span>".intervalCalc($date)."</span></p>";

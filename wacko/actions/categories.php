@@ -85,7 +85,7 @@ if ($list && ($ids || isset($_GET['category'])))
 				}
 				else
 				{
-					echo '<li>'.( $sort == 'date' ? '<small>('.date('d/m/Y', strtotime($page['created'])).')</small> ' : '' ).$this->link('/'.$page['tag'], '', $page['title'], 0, 1)."</li>\n";
+					echo '<li>'.( $sort == 'date' ? '<small>('.date('d/m/Y', strtotime($page['created'])).')</small> ' : '' ).$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1)."</li>\n";
 				}
 			}
 
@@ -112,7 +112,7 @@ if (!$ids)
 	// header
 	if (!$nomark)
 	{
-		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('Categories').( $root ? " of cluster ".$this->link('/'.$root, '', '', 0) : '' ).":</span></p>\n";
+		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('Categories').( $root ? " of cluster ".$this->link('/'.$root, '', '', '', 0) : '' ).":</span></p>\n";
 	}
 
 	// categories list
