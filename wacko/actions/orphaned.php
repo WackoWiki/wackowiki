@@ -34,7 +34,7 @@ if ($pages = LoadOrphanedPages($this, $root))
 	foreach ($pages as $page)
 	if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 	{
-		echo "<li>".$this->link('/'.$page['tag'], '', '', 0)."</li>\n";
+		echo "<li>".$this->link('/'.$page['tag'], '', '', '', 0)."</li>\n";
 	}
 	echo "</ol>\n";
 }

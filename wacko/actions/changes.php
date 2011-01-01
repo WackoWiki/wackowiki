@@ -123,8 +123,8 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 			echo "<li ".$viewed."><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (".
 			$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".
 			($title == 1
-				? $this->link('/'.$page['tag'], '', $page['title'], 0, 1, '', 0)
-				: $this->link('/'.$page['tag'], '', $page['tag'])
+				? $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, '', 0)
+				: $this->link('/'.$page['tag'], '', $page['tag'], $page['title'])
 			).
 			" . . . . . . . . . . . . . . . . <small>".
 			($page['user']

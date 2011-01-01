@@ -147,10 +147,9 @@ if (list ($pages, $pagination) = load_recently_commented($this, $root, (int)$max
 				// print entry
 				echo "<li ".$viewed."><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (".
 				($title == 1
-					? $this->link('/'.$page['comment_tag'], '', $page['page_title'], 0, 1, '', 0)
-					: $this->link('/'.$page['comment_tag'], '', $page['comment_on_tag'])
+					? $this->link('/'.$page['comment_tag'], '', $page['page_title'], '', 0, 1, '', 0)
+					: $this->link('/'.$page['comment_tag'], '', $page['comment_on_tag'], $page['page_title'])
 				).
-				#$this->href('', $page['comment_tag'], '')."\">".$page['comment_on_tag']."</a>".
 				") . . . . . . . . . . . . . . . . <small>".$this->get_translation('LatestCommentBy')." ".
 				($page['comment_user']
 					? ($this->is_wiki_name($page['comment_user'])

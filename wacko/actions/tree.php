@@ -1,7 +1,7 @@
 <?php
 
 // shows tree list
-// {{tree [page="tag"] [depth="3"] [nomark="0"] [title=""]}}
+// {{tree [page="tag"] [depth="3"] [nomark="0"] [legend=""]}}
 // use [page="/"] to get the entire root
 
 // constants
@@ -18,11 +18,16 @@ if ($root)			$root	= $this->unwrap_link($root).'/';
 
 if (!isset($depth)) $depth = '';
 if (!$depth || $depth < 1)
-					$depth	= 1;
-else				$depth	= (int)$depth;;
+{
+	$depth	= 1;
+}
+else
+{
+	$depth	= (int)$depth;;
+}
 
 if (!isset($nomark)) $nomark = '';
-if (!isset($title)) $title = '';
+if (!isset($legend)) $legend = '';
 
 // collect pages
 if ($pages = $this->load_all(
@@ -50,6 +55,7 @@ if ($pages = $this->load_all(
 				$sup_str[]	= $pages[$k]['supertag'];
 			}
 		}
+
 		while (false !== next($pages));
 
 		$pages = $_pages;
@@ -87,23 +93,25 @@ if ($pages = $this->load_all(
 		{
 			if (!$nomark)
 			{
-				if ($title)
+				if ($legend)
 				{
-					$title = $this->format($title);
+					$legend = $this->format($legend);
 				}
 				else
 				{
-					$title = $this->get_translation('TreeClusterTitle');
-					$title = str_replace('%1', $this->link('/'.$root, '', rtrim($root, '/')), $title).':';
+					$legend = $this->get_translation('TreeClusterTitle');
+					$legend = str_replace('%1', $this->link('/'.$root, '', rtrim($root, '/')), $legend).':';
 				}
 
-				echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title."</span></p>\n";
+				echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$legend."</span></p>\n";
 			}
 		}
 		else
 		{
 			if (!$nomark)
+			{
 				echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('TreeSiteTitle')."</span></p>\n";
+			}
 		}
 
 		// tree
@@ -161,22 +169,23 @@ if ($pages = $this->load_all(
 
 				// begin element
 				echo '<li>';
+
 				# if ($curlevel == $rootlevel && $curlevel < 2)	echo '<strong>';
+
 				if ($this->tag == $page['tag'])
 				{
-					echo '<em>';
+					// do not link the page to itself
+					echo isset($page['title']) ? $page['title'] : $page['tag'];
+					#echo $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, '', 0);
 				}
-
-				echo $this->link('/'.$page['tag'], '', $page['title'], 0, 1, '', 0);
-
-				// end element
-				if ($this->tag == $page['tag'])
+				else
 				{
-					echo '</em>';
+					echo $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, '', 0);
 				}
+
 				# if ($curlevel == $rootlevel && $curlevel < 2)	echo '</strong>';
-				echo "</li>\n";
 
+				echo "</li>\n";
 
 				// recheck page level
 				$prevlevel	= substr_count($page['tag'], '/');

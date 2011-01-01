@@ -2232,11 +2232,10 @@ class Wacko
 		}
 	}
 
-	function link($tag, $method = '', $text = '', $track = 1, $safe = 0, $linklang = '', $anchorlink = 1)
+	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $linklang = '', $anchorlink = 1)
 	{
 		$class	= '';
 		$icon	= '';
-		$title	= '';
 		$lang	= '';
 		$desc	= '';
 		$url	= '';
@@ -2272,7 +2271,7 @@ class Wacko
 		}
 		else if (preg_match('/^(xmpp[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/', $tag, $matches))
 		{
-			// this is a valid XMPP
+			// this is a valid XMPP address
 			$url	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:'.$tag);
 			$title	= $this->get_translation('JabberLink');
 			$icon	= $this->get_translation('jabbericon');
@@ -2309,14 +2308,16 @@ class Wacko
 			$icon	= $this->get_translation('fileicon');
 			$tpl	= 'file';
 		}
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/', $tag)) {
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/', $tag))
+		{
 			// this is a PDF link
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->get_translation('PDFLink');
 			$icon	= $this->get_translation('pdficon');
 			$tpl	= 'file';
 		}
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rdf)$/', $tag)) {
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rdf)$/', $tag))
+		{
 			// this is a RDF link
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->get_translation('RDFLink');
@@ -2328,6 +2329,7 @@ class Wacko
 			// this is a valid external URL
 			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$tpl	= 'outerlink';
+
 			if (!stristr($tag, $this->config['base_url']))
 			{
 				$title	= $this->get_translation('OuterLink2');
@@ -2526,7 +2528,8 @@ class Wacko
 			{
 				$text = $this->add_spaces($tag);
 			}
-			return $this->link( $tag, $method, $text, $track, 1);
+
+			return $this->link( $tag, $method, $text, $title, $track, 1);
 		}
 		else if (preg_match('/^([[:alnum:]]+)[:](['.$this->language['ALPHANUM_P'].'\-\_\.\+\&\=\#]*)$/', $tag, $matches))
 		{
@@ -2581,6 +2584,7 @@ class Wacko
 					{
 						$data = '';
 					}
+
 					$opar	= '/'.$untag.'/';
 
 					for ($i = 0; $i < substr_count($data, '/') + 2; $i++)
@@ -2821,6 +2825,7 @@ class Wacko
 				{
 					$class	= 'outerlink';
 				}
+
 				if (isset($this->method) && $this->method == 'print')
 				{
 					$icon	= '';
@@ -2840,6 +2845,7 @@ class Wacko
 						$refnum = '[link'.((string)count($this->numerate_links) + 1).']';
 						$this->numerate_links[$url] = $refnum;
 					}
+
 					$res .= '<sup class="refnum">'.$refnum.'</sup>';
 				}
 
