@@ -49,43 +49,43 @@ else if ($user = $this->get_user())
 <div class="cssform">
   <h3><?php echo $this->get_translation('Hello').", ".$this->compose_link_to_page($user['user_name']) ?>!</h3>
 <?php
-				if ($user['session_time'] == true)
-				{
-					$output .= "Last visit was recorded <tt>". $this->get_time_string_formatted($user['session_time'])."</tt>.<br />";
-				}
+	if ($user['session_time'] == true)
+	{
+		$output .= "Last visit was recorded <tt>". $this->get_time_string_formatted($user['session_time'])."</tt>.<br />";
+	}
 
-				$output .= "The current session ends <tt>";
+	$output .= "The current session ends <tt>";
 
-				$cookie = explode(';', $this->get_cookie('auth'));
-				// session expiry date
-				$output .= $this->get_unix_time_formatted($cookie[2]).'</tt> ';
-				// session time left
-				$time_diff = $cookie[2] - time();
+	$cookie = explode(';', $this->get_cookie('auth'));
+	// session expiry date
+	$output .= $this->get_unix_time_formatted($cookie[2]).'</tt> ';
+	// session time left
+	$time_diff = $cookie[2] - time();
 
-				if ($time_diff > 2 * 24 * 3600)
-				{
-					$output .= '(in '.ceil($time_diff / 24 / 3600).' days).';
-				}
-				else if ($time_diff > 5 * 3600)
-				{
-					$output .= '(in '.ceil($time_diff / 3600).' hours).';
-				}
-				else
-				{
-					$output .= '(in '.ceil($time_diff / 60).' minutes).';
-				}
+	if ($time_diff > 2 * 24 * 3600)
+	{
+		$output .= '(in '.ceil($time_diff / 24 / 3600).' days).';
+	}
+	else if ($time_diff > 5 * 3600)
+	{
+		$output .= '(in '.ceil($time_diff / 3600).' hours).';
+	}
+	else
+	{
+		$output .= '(in '.ceil($time_diff / 60).' minutes).';
+	}
 
-				$output .= '<br />';
-				// Only allow your session to be used from this IP address.
+	$output .= '<br />';
 
-				$output .= "Bind session to the IP-address ". ( $user['validate_ip'] == 1 ? 'enabled (the current IP <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).".<br />";
+	// Only allow your session to be used from this IP address.
+	$output .= "Bind session to the IP-address ". ( $user['validate_ip'] == 1 ? 'enabled (the current IP <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).".<br />";
 
-				if ($this->config['ssl'] == true || $this->config['ssl_proxy'] == true)
-				{
-					$output .= "Traffic Protection <tt>". ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' )."</tt>.";
-				}
+	if ($this->config['ssl'] == true || $this->config['ssl_proxy'] == true)
+	{
+		$output .= "Traffic Protection <tt>". ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' )."</tt>.";
+	}
 
-				$this->set_message($output);
+	$this->set_message($output);
 ?>
   <p>
     <input type="button" value="<?php echo $this->get_translation('LogoutButton'); ?>"
@@ -211,7 +211,8 @@ else
 
 	if ($error)
 	{
-		$this->set_message($error);
+		# $this->set_message($error);
+		echo '<div class="error">'.$this->Format($error).'</div>';
 	}
 
 	echo $this->form_open();
