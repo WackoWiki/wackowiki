@@ -3880,11 +3880,14 @@ class Wacko
 		{
 			$al  = $this->config['aliases'];
 
-			$mod = explode("\\n", $al['Reviewer']);
-
-			if ($mod == true && in_array($this->get_user_name(), $mod))
+			if (isset($al['Reviewer']))
 			{
-				return true;
+				$mod = explode("\\n", $al['Reviewer']);
+
+				if ($mod == true && in_array($this->get_user_name(), $mod))
+				{
+					return true;
+				}
 			}
 		}
 
