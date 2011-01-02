@@ -15,7 +15,7 @@ class RSS
 	var $charset;
 
 	// CONSTRUCTOR
-	function rss(&$engine)
+	function __construct(&$engine)
 	{
 		$this->engine = & $engine;
 		$this->engine->load_translation($this->engine->config['language']);

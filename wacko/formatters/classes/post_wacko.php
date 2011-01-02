@@ -4,7 +4,7 @@ class post_wacko
 {
 	var $object;
 
-	function post_wacko( &$object, &$options )
+	function __construct( &$object, &$options )
 	{
 		$this->object  = &$object;
 		$this->options = &$options;

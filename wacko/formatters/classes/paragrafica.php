@@ -78,7 +78,7 @@ class paragrafica
 	var $prefix2		= '">';
 	var $postfix		= '</p>';
 
-	function paragrafica( &$wacko )
+	function __construct( &$wacko )
 	{
 		$this->wacko = &$wacko;
 	}

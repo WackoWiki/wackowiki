@@ -75,7 +75,7 @@ class typografica
 							'html' => 0     // HTML tags ban
 	);
 
-	function typografica ( &$wacko )
+	function __construct( &$wacko )
 	{
 		$this->wacko = &$wacko;
 		$this->indent1 = "<img src=".$wacko->config['base_url'].$this->indent1;

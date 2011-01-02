@@ -68,7 +68,7 @@ class Wacko
 	);
 
 	// CONSTRUCTOR
-	function wacko($config, $dblink)
+	function __construct($config, $dblink)
 	{
 		$this->timer	= $this->get_micro_time();
 		$this->config	= $config;
@@ -3879,6 +3879,7 @@ class Wacko
 		if (is_array($this->config['aliases']))
 		{
 			$al  = $this->config['aliases'];
+
 			$mod = explode("\\n", $al['Reviewer']);
 
 			if ($mod == true && in_array($this->get_user_name(), $mod))

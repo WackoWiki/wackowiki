@@ -172,7 +172,7 @@ class WackoFormatter
 								'rosybrown' => 'rosybrown',
 								);
 
-	function WackoFormatter( &$object )
+	function __construct( &$object )
 	{
 		$this->object = &$object;
 

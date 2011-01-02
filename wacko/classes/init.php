@@ -54,7 +54,7 @@ class Init
 
 	// CONSTRUCTOR
 	// Mandatory runs and checks.
-	function init()
+	function __construct()
 	{
 		// setting PHP error reporting
 		switch(PHP_ERROR_REPORTING)
