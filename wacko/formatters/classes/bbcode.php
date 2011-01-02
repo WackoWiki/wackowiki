@@ -5,7 +5,7 @@ class bbcode
 {
 	var $object;
 
-	function bbcode(&$object)
+	function __construct(&$object)
 	{
 		$this->object	= &$object;
 		// this template is equally applicable to the "raw" bbcode

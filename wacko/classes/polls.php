@@ -15,7 +15,7 @@ class Polls
 	var $engine;
 
 	// CONSTRUCTOR
-	function Polls(&$engine)
+	function __construct(&$engine)
 	{
 		$this->engine = & $engine;
 	}

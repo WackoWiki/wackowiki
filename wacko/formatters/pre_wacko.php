@@ -6,7 +6,7 @@ if (!class_exists('preformatter'))
 	{
 		var $object;
 
-		function preformatter(&$object)
+		function __construct(&$object)
 		{
 			$this->object = &$object;
 			$this->PREREGEXP = "/(\%\%.*?\%\%|\"\".*?\"\"|::(\S)?::".

@@ -3,7 +3,7 @@
 class Utility
 {
 	//Constructor
-	function utility(&$wacko)
+	function __construct(&$wacko)
 	{
 		$this->wacko = &$wacko;
 	}

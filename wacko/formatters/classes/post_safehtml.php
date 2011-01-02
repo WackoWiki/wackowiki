@@ -4,7 +4,7 @@ class post_safehtml
 {
 	var $object;
 
-	function post_safehtml( &$object, &$options )
+	function __construct( &$object, &$options )
 	{
 		$this->object  = &$object;
 		$this->options = &$options;

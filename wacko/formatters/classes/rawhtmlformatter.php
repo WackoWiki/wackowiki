@@ -4,7 +4,7 @@ class RawHtmlFormatter
 {
 	var $object;
 
-	function RawHtmlFormatter( &$object )
+	function __construct( &$object )
 	{
 		$this->object = &$object;
 	}

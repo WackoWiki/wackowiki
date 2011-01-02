@@ -7,7 +7,7 @@ class Cache
 	var $debug		= 0;
 
 	//Constructor
-	function cache($cache_dir, $cache_ttl)
+	function __construct($cache_dir, $cache_ttl)
 	{
 		$this->cache_dir	= $cache_dir;
 		$this->cache_ttl	= $cache_ttl;
