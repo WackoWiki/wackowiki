@@ -50,11 +50,13 @@ function admin_files(&$engine, &$module)
 <?php
 			echo $engine->form_close();
 		}
-		else print($engine->get_translation('UploadFileNotFound'));
+		else
+		{
+			print($engine->get_translation('UploadFileNotFound'));
+		}
 
 		echo '</div>';
 		return true;
-
 	}
 	else if (isset($_POST['remove'])) // delete
 	{
@@ -79,9 +81,13 @@ function admin_files(&$engine, &$module)
 			$real_filename = $engine->config['upload_path'].'/'.$what[0]['filename'];
 
 			if (@unlink($real_filename))
+			{
 				print('<div><em>'.$engine->get_translation('UploadRemovedFromFS').'</em></div><br /><br /> ');
+			}
 			else
+			{
 				print('<div class="error">'.$engine->get_translation('UploadRemovedFromFSError').'</div><br /><br /> ');
+			}
 
 			$engine->log(1, str_replace('%2', $what[0]['file_name'], str_replace('%1', $engine->tag.' global storage', $engine->get_translation('LogRemovedFile', $engine->config['language']))));
 		}
@@ -110,16 +116,24 @@ function admin_files(&$engine, &$module)
 			$dir	= $engine->config['upload_path'].'/';
 			$banned	= explode('|', $engine->config['upload_banned_exts']);
 
-			if (in_array(strtolower($ext), $banned)) $ext = $ext.'.txt';
+			if (in_array(strtolower($ext), $banned))
+			{
+				$ext = $ext.'.txt';
+			}
 
 			$_name	= $name;
 			$count	= 1;
+
 			while (file_exists($dir.$name.'.'.$ext))
 			{
 				if ($name === $_name)
+				{
 					$name	= $_name.$count;
+				}
 				else
+				{
 					$name	= $_name.(++$count);
+				}
 			}
 
 			$result_name	= $name.'.'.$ext;
@@ -177,16 +191,25 @@ function admin_files(&$engine, &$module)
 			if (isset($_FILES['file']['error']))
 			{
 				if ($_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE || $_FILES['file']['error'] == UPLOAD_ERR_FORM_SIZE)
+				{
 					$error = $engine->get_translation('UploadMaxSizeReached');
+				}
 				else if ($_FILES['file']['error'] == UPLOAD_ERR_PARTIAL || $_FILES['file']['error'] == UPLOAD_ERR_NO_FILE)
+				{
 					$error = $engine->get_translation('UploadNoFile');
+				}
 			}
+
 			else
+			{
 				$error = '';
+			}
 		}
 	}
 	if ($error)
+	{
 		echo $error.'<br /><br />';
+	}
 
 	// displaying
 	echo $engine->form_open('', '', 'post', '', ' enctype="multipart/form-data" ');
@@ -234,7 +257,7 @@ function admin_files(&$engine, &$module)
 
 	// load files list
 	$files = $engine->load_all(
-		"SELECT upload_id, page_id, user_id, file_size, picture_w, picture_h, file_name, description, uploaded_dt ".
+		"SELECT upload_id, page_id, user_id, file_size, picture_w, picture_h, file_ext, file_name, description, uploaded_dt ".
 		"FROM {$engine->config['table_prefix']}upload ".
 		"WHERE page_id = 0 ".
 		"ORDER BY ".$orderby);
