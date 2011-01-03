@@ -297,6 +297,7 @@ $table_user_setting = "CREATE TABLE {$pref}user_setting (".
 					"show_spaces TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"typografica TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"autocomplete TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"numerate_links TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"allow_intercom TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"hide_lastsession TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"validate_ip TINYINT(1) UNSIGNED DEFAULT NULL,".

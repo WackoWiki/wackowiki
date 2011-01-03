@@ -92,6 +92,7 @@ else if ($user = $this->get_user())
 					"show_spaces		= '".quote($this->dblink, (int)$_POST['show_spaces'])."', ".
 					#"typografica		= '".quote($this->dblink, (int)$_POST['typografica'])."', ".
 					"autocomplete		= '".quote($this->dblink, (int)$_POST['autocomplete'])."', ".
+					"numerate_links		= '".quote($this->dblink, (int)$_POST['numerate_links'])."', ".
 					"dont_redirect		= '".quote($this->dblink, (int)$_POST['dont_redirect'])."', ".
 					"send_watchmail		= '".quote($this->dblink, (int)$_POST['send_watchmail'])."', ".
 					"show_files			= '".quote($this->dblink, (int)$_POST['show_files'])."', ".
@@ -192,6 +193,13 @@ else if ($user = $this->get_user())
 		<td class="form_right"><input type="hidden" name="autocomplete" value="0" />
 			<input type="checkbox" id="autocomplete" name="autocomplete" value="1" <?php echo (isset($user['autocomplete']) && $user['autocomplete'] == 1) ? "checked=\"checked\"" : '' ?> />
 			<label for="autocomplete"><?php echo $this->get_translation('WikieditAutocomplete');?></label>
+		</td>
+	</tr>
+		<tr class="lined">
+		<td class="form_left">&nbsp;</td>
+		<td class="form_right"><input type="hidden" name="numerate_links" value="0" />
+			<input type="checkbox" id="numerate_links" name="numerate_links" value="1" <?php echo (isset($user['numerate_links']) && $user['numerate_links'] == 1) ? "checked=\"checked\"" : '' ?> />
+			<label for="numerate_links"><?php echo $this->get_translation('NumerateLinks');?></label>
 		</td>
 	</tr>
 	<tr class="lined">

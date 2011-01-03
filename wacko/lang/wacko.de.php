@@ -50,6 +50,7 @@ $wacko_translation = array(
 	'ShowText'				=> 'Ansicht',
 	'WikieditAutocomplete'	=> 'Vervollständige Wikilinks mit Strg+Leertaste',
 	'WikiEditInactiveJs'	=> 'Um WikiEdit nutzen zu können, aktiviere bitte JavaScript in deinem Browser.',
+	'NumerateLinks'			=> 'Aufzählen der Links in der Druckansicht',
 	'Typografica'			=> 'Autokorrektur im Ansichtsmodus',
 	'Comment'				=> 'Kommentar',
 	'Comments_0'			=> 'Kein Kommentar.',

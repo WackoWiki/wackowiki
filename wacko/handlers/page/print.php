@@ -31,8 +31,27 @@ if ($this->has_access('read'))
 			$this->get_translation('Revision')))).".</div>";
 		}*/
 
-		// start enumerating links
-		$this->numerate_links = array();
+		if ($user = $this->get_user())
+		{
+			if ($user['numerate_links'] == 0)
+			{
+				$_numerate_links = false;
+			}
+			else
+			{
+				$_numerate_links = true;
+			}
+		}
+		else
+		{
+			$_numerate_links = true;
+		}
+
+		if ($_numerate_links == true)
+		{
+			// start enumerating links
+			$this->numerate_links = array();
+		}
 
 		// build html body
 		$data = $this->format($this->page['body'], 'wacko');
@@ -76,34 +95,37 @@ if ($this->has_access('read'))
 			}
 		}
 
-		// numerated links
-		if (($c = count($this->numerate_links)) > 0)
+		if ($_numerate_links == true)
 		{
-			if (!isset($comments)) echo "<br />";
-
-			echo "<br />";
-			echo "<div id=\"commentsfiles\">";
-			echo "<div class=\"linksheader\">";
-			echo $this->get_translation('Links');
-			echo "</div>\n";
-
-			$i = 0;
-
-			foreach ($this->numerate_links as $l => $n)
+			// numerated links
+			if (($c = count($this->numerate_links)) > 0)
 			{
-				echo "<small><strong><sup><a name=\"reflink\">$n</a></sup></strong> $l</small>\n";
+				if (!isset($comments)) echo "<br />";
 
-				if (++$i < $c)
+				echo "<br />";
+				echo "<div id=\"commentsfiles\">";
+				echo "<div class=\"linksheader\">";
+				echo $this->get_translation('Links');
+				echo "</div>\n";
+
+				$i = 0;
+
+				foreach ($this->numerate_links as $l => $n)
 				{
-					echo "<br /><br />\n";
+					echo "<small><strong><sup><a name=\"reflink\">$n</a></sup></strong> $l</small>\n";
+
+					if (++$i < $c)
+					{
+						echo "<br /><br />\n";
+					}
 				}
+
+				echo "</div>\n";
 			}
 
-			echo "</div>\n";
+			// stop enumerating links
+			$this->numerate_links = null;
 		}
-
-		// stop enumerating links
-		$this->numerate_links = null;
 	}
 }
 else

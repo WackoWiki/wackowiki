@@ -2,9 +2,13 @@
 
 // {{Redirect to="!/NewPage" permanent="0 or 1"}}
 
-if (isset($vars['page'])) $vars['to'] = $vars['page'];
-$page = $this->unwrap_link(isset($vars['to']) ? $vars['to'] : '');
-$is_permanent = (isset($vars['permanent']) ? $vars['permanent'] : 0);
+if (isset($vars['page']))
+{
+	$vars['to'] = $vars['page'];
+}
+
+$page			= $this->unwrap_link(isset($vars['to']) ? $vars['to'] : '');
+$is_permanent	= (isset($vars['permanent']) ? $vars['permanent'] : 0);
 
 if ($page)
 {
@@ -22,14 +26,18 @@ if ($page)
 				echo "<br /><br /><br />".$this->get_translation('PageMoved')." ".$this->link('/'.$page)."<br /><br /><br />";
 			}
 			else
-			$this->redirect($this->href('', $page));
+			{
+				$this->redirect($this->href('', $page));
+			}
 		}
 		else
+		{
 			$this->redirect($this->href('', $page));
+		}
 	}
 	else
 	{
 		echo "<i>".$this->get_translation('WrongPage4Redirect')."</i>";
-	};
+	}
 };
 ?>
