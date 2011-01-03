@@ -443,6 +443,12 @@ div .action-content {
 	font-size:		x-small;
 }
 
+/* Hiding Unfriendly Content *************************************************/
+.pagination {
+	display:none !important;
+}
+
+
 /* Page Breaks ***************************************************************/
 
 h1,h2,h3,h4,h5,h6 {page-break-after: avoid;}

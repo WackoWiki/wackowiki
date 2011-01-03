@@ -52,6 +52,7 @@ $wacko_translation = array(
 	'ShowText' => 'Bekijk',
 	'WikieditAutocomplete' => 'Complete wikilinks by Ctrl+Space',
 	'WikiEditInactiveJs' => 'In order to be able to use WikiEdit, please enable JavaScript in your browser.',
+	'NumerateLinks' => 'Numerate links in print view',
 	'Typografica' => 'Corrigeer typfouten automatisch',
 	'Comment' => 'Reactie',
 	'Comments_0' => 'Er zijn geen reacties op deze pagina.',
