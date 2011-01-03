@@ -138,8 +138,8 @@ class Cache
 			$query  = $this->query;
 		}
 
-		$page = strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
-		$filename = $this->construct_id($page, $method, $query);
+		$page		= strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
+		$filename	= $this->construct_id($page, $method, $query);
 
 		file_put_contents($filename, $data);
 
@@ -197,7 +197,10 @@ class Cache
 
 			return true;
 		}
-		else return false;
+		else
+		{
+			return false;
+		}
 	}
 
 	function log($msg)
@@ -237,13 +240,16 @@ class Cache
 				{
 					$query = '';
 				}
+
 				$query .= urlencode($k).'='.urlencode($v).'&';
 			}
 		}
+
 		if (!isset($query))
 		{
 			$query = '';
 		}
+
 		$this->log('check_http_request query='.$query);
 
 		//check cache
@@ -251,9 +257,9 @@ class Cache
 		{
 			$this->log('check_http_request incache mtime='.$mtime);
 
-			$gmt = gmdate('D, d M Y H:i:s \G\M\T', $mtime);
-			$etag = (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? $_SERVER['HTTP_IF_NONE_MATCH'] : '');
-			$lastm = (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : '');
+			$gmt	= gmdate('D, d M Y H:i:s \G\M\T', $mtime);
+			$etag	= (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? $_SERVER['HTTP_IF_NONE_MATCH'] : '');
+			$lastm	= (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : '');
 
 			if ($p = strpos($lastm, ";"))
 			{

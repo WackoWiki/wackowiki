@@ -442,3 +442,11 @@ div .action-content {
 	font-weight:	bold;
 	font-size:		x-small;
 }
+
+/* Page Breaks ***************************************************************/
+
+h1,h2,h3,h4,h5,h6 {page-break-after: avoid;}
+ul, ol, li, blockquote {page-break-inside: avoid;}
+table table,tr,td {page-break-before: avoid;page-break-after: avoid;}
+
+#footnotes { page-break-before: always; }

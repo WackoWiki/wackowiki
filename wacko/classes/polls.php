@@ -318,7 +318,9 @@ class Polls
 				}
 			}
 		}
+
 		$new = $header['votes'] + 1; //$total;
+
 		$this->engine->query(
 			"UPDATE {$this->engine->config['table_prefix']}poll ".
 			"SET votes = '".quote($this->engine->dblink, $new)."' ".

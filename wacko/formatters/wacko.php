@@ -58,7 +58,7 @@ if (!empty($parser->auto_fn['content']))
 	}
 
 	// write the footnotes
-	$text .= "<br /><br /><div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('Footnotes').":</span></p>\n".$footnotes."</div><br />";
+	$text .= "<br /><br /><div class=\"layout-box\" id=\"footnotes\"><p class=\"layout-box\"><span>".$this->get_translation('Footnotes').":</span></p>\n".$footnotes."</div><br />";
 
 	$parser->auto_fn['content'] = '';
 }

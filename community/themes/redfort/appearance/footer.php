@@ -122,7 +122,7 @@ if ($this->has_access('read') && $this->config['hide_files'] != 1)
 if ($this->has_access('read') && $this->config['hide_comments'] != 1)
 {
   // load comments for this page
-  $comments = $this->load_comments($this->get_page_id());
+  $comments = $this->load_comments($this->page['page_id']);
 
   // store comments display in session
   $tag = $this->tag;
@@ -165,7 +165,7 @@ if ($this->has_access('read') && $this->config['hide_comments'] != 1)
         print("<a name=\"".$comment['tag']."\"></a>\n");
         print("<div class=\"comment\">\n");
         $del = '';
-        if ($this->is_admin() || $this->user_is_owner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->get_page_id())))
+        if ($this->is_admin() || $this->user_is_owner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->page['page_id'])))
           print("<div style=\"float:right;\" style='background:#ffcfa8; border: solid 1px; border-color:#cccccc'>".
           "<a href=\"".$this->href('remove', $comment['tag'])."\" title=\"".$this->get_translation('DeleteTip')."\">".
           "<img src=\"".$this->config['theme_url']."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->get_translation('DeleteText')."\"  align=\"absmiddle\" border=\"0\" /></a>".

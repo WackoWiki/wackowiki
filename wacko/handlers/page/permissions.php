@@ -115,7 +115,7 @@ if ($this->user_is_owner() || $this->is_admin())
 					"LEFT JOIN ".$this->config['table_prefix']."page c ON (p.comment_on_id = c.page_id) ".
 				"WHERE (p.supertag = '".quote($this->dblink, $this->supertag)."'".
 				" OR p.supertag LIKE '".quote($this->dblink, $this->supertag."/%")."'".
-				" OR p.comment_on_id = '".quote($this->dblink, $this->get_page_id())."'".
+				" OR p.comment_on_id = '".quote($this->dblink, $this->page['page_id'])."'".
 				" OR c.supertag LIKE '".quote($this->dblink, $this->supertag."/%")."'".
 					") ".
 				($this->is_admin()
