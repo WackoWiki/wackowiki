@@ -587,6 +587,7 @@ class Init
 				$this->cache->wacko		= & $this->engine;
 				$this->engine->cache	= & $this->cache;
 			}
+
 			return $this->engine;
 		}
 		else if ($this->engine == true && $op == 'run')
@@ -699,8 +700,10 @@ class Init
 
 				echo "</div >\n";
 			}
+
 			else return;
 		}
+
 		else return;
 	}
 }

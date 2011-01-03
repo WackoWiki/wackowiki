@@ -239,7 +239,7 @@ if ($langs = $this->available_languages())
 </td>
 </tr>
 <?php
-if ($this->config['allow_themes_per_page'])
+if (isset($this->config['allow_themes_per_page']))
 {
 	echo "<tr class=\"lined\">\n";
 	echo "<th class=\"form_left\" scope=\"row\"><label for=\"theme\">".$this->get_translation('ChooseTheme')."</label></th>\n";

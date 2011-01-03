@@ -43,33 +43,36 @@ if ($this->has_access('read'))
 		echo $data;
 
 		// display comments
-		if (isset($_SESSION[$this->config['session_prefix'].'_'."show_comments"][$this->tag]) || $this->forum)
+		if ( (isset($_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->tag]) && $_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->tag] == 1) || $this->forum)
 		{
-			if ($comments = $this->load_comments($this->get_page_id()));
+			if ($comments = $this->load_comments($this->page['page_id']));
 			{
-				// display comments header
-				echo "<br /><br />";
-				echo "<div id=\"commentsfiles\">";
-				echo "<div class=\"commentsheader\">";
-				echo $this->get_translation('Comments_all');
-				echo "</div>\n";
-
-				foreach ($comments as $comment)
+				if (!empty($comments))
 				{
-					if (!$comment['body_r'])
-					{
-						$comment['body_r'] = $this->format($comment['body']);
-					}
+					// display comments header
+					echo "<br /><br />";
+					echo "<div id=\"commentsfiles\">";
+					echo "<div class=\"commentsheader\">";
+					echo $this->get_translation('Comments_all');
+					echo "</div>\n";
 
-					echo "<div class=\"comment\">".
-							"<span class=\"commentinfo\">".
-								"<strong>&#8212; ".( $comment['user'] == GUEST ? "<em>".$this->get_translation('Guest')."</em>" : $comment['user'] )."</strong> (".$this->get_time_string_formatted($comment['created']).
-								($comment['modified'] != $comment['created'] ? ", ".$this->get_translation('CommentEdited')." ".$this->get_time_string_formatted($comment['modified']) : "").")".
-							"&nbsp;&nbsp;&nbsp;</span><br />".
-							$this->format($comment['body_r'], 'post_wacko').
-						"</div>\n";
+					foreach ($comments as $comment)
+					{
+						if (!$comment['body_r'])
+						{
+							$comment['body_r'] = $this->format($comment['body']);
+						}
+
+						echo "<div class=\"comment\">".
+								"<span class=\"commentinfo\">".
+									"<strong>&#8212; ".( $comment['user'] == GUEST ? "<em>".$this->get_translation('Guest')."</em>" : $comment['user'] )."</strong> (".$this->get_time_string_formatted($comment['created']).
+									($comment['modified'] != $comment['created'] ? ", ".$this->get_translation('CommentEdited')." ".$this->get_time_string_formatted($comment['modified']) : "").")".
+								"&nbsp;&nbsp;&nbsp;</span><br />".
+								$this->format($comment['body_r'], 'post_wacko').
+							"</div>\n";
+					}
+					echo "</div>\n";
 				}
-				echo "</div>\n";
 			}
 		}
 

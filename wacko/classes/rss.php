@@ -140,6 +140,7 @@ class RSS
 		$xml .= "</image>\n";
 
 		$i = 0;
+
 		foreach ($news_pages as $page)
 		{
 			$i++;
@@ -226,6 +227,7 @@ class RSS
 				{
 					$access = $this->engine->has_access('read', $page['page_id'], GUEST);
 				}
+
 				if ( $access && ($count < 30) ) {
 					$count++;
 					$xml .= "<item>\n";

@@ -29,10 +29,13 @@ if (!function_exists('handler_diff_load_page_by_id'))
 }
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href('show'));
+if (!$this->page)
+{
+	$this->redirect($this->href('show'));
+}
 
-	$a = $_GET['a'];
-	$b = $_GET['b'];
+$a = $_GET['a'];
+$b = $_GET['b'];
 
 // If asked, call original diff
 if ($this->has_access('read'))
@@ -42,7 +45,10 @@ if ($this->has_access('read'))
 
 	if ($this->has_access('read', $pageA['page_id']) && $this->has_access('read', $pageB['page_id']) )
 	{
-		if (isset($_GET['source'])) $source = 1;
+		if (isset($_GET['source']))
+		{
+			$source = 1;
+		}
 
 		if (isset($_GET['fastdiff']) || $source == 1)
 		{
@@ -86,7 +92,6 @@ if ($this->has_access('read'))
 			}
 
 			echo $output;
-
 		}
 		else
 		{
@@ -127,12 +132,17 @@ if ($this->has_access('read'))
 			while (1)
 			{
 				$sideO->skip_line();
-				if ($sideO->isend()) break;
+
+				if ($sideO->isend())
+				{
+					break;
+				}
 
 				if ($sideO->decode_directive_line())
 				{
 					$argument=$sideO->getargument();
 					$letter=$sideO->getdirective();
+
 					switch ($letter)
 					{
 						case 'a':
@@ -154,7 +164,9 @@ if ($this->has_access('read'))
 					$sideA->skip_until_ordinal($resync_left);
 					$sideB->copy_until_ordinal($resync_right,$output);
 
-					if ($letter == 'd' || $letter == 'c') {// deleted word
+					if ($letter == 'd' || $letter == 'c')
+					{
+						// deleted word
 						$sideA->copy_whitespace($output);
 						$output .= "<!--markup:1:begin-->";
 						$sideA->copy_word($output);
@@ -162,7 +174,9 @@ if ($this->has_access('read'))
 						$output .= "<!--markup:1:end-->";
 					}
 
-					if ($letter == 'a' || $letter == 'c') {// inserted word
+					if ($letter == 'a' || $letter == 'c')
+					{
+						// inserted word
 						$sideB->copy_whitespace($output);
 						$output .= "<!--markup:2:begin-->";
 						$sideB->copy_word($output);

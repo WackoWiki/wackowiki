@@ -2708,8 +2708,6 @@ class Wacko
 					{
 						$this->_acl['list'] = '';
 					}
-					#$_denied = true;
-					#$this->_acl['list'] = '*';
 				}
 
 				if (!$access || $this->_acl['list'] == '')
@@ -3159,6 +3157,7 @@ class Wacko
 			{
 				$dir .= '/';
 			}
+
 			$fullfilename = $dir.$filename;
 			$fullfilename = trim($fullfilename, './');
 
@@ -4259,6 +4258,7 @@ class Wacko
 						$item	= trim($item);
 						$list[]	= ($negate ? '!'.$item : $item);
 					}
+
 					$replaced++;
 				}
 				else
