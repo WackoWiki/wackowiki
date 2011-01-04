@@ -11,7 +11,16 @@ if (! $this->has_access('read', $page_id))
 }
 else
 {
-	if (!$phrase_page = $this->load_page($vars[0], 0, $_GET['time']))
+	if (isset($_GET['revision_id']))
+	{
+		$revision_id = $_GET['revision_id'];
+	}
+	else
+	{
+		$revision_id = '';
+	}
+
+	if (!$phrase_page = $this->load_page($vars[0], 0, $revision_id))
 	{
 		echo "<em> ".$this->get_translation('SourcePageDoesntExist')."(".$vars[0].")</em>";
 	}

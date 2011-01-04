@@ -813,7 +813,7 @@ class Wacko
 	}
 
 	// wrapper for old_load_page
-	function load_page($tag, $page_id = 0, $time = '', $cache = LOAD_CACHE, $metadataonly = LOAD_ALL)
+	function load_page($tag, $page_id = 0, $revision_id = '', $cache = LOAD_CACHE, $metadataonly = LOAD_ALL)
 	{
 		$page = '';
 
@@ -835,19 +835,19 @@ class Wacko
 		// 1. search for page_id (... is preferred, $supertag next)
 		if ($page_id != 0)
 		{
-			$page = $this->old_load_page('', $page_id, $time, $cache, false, $metadataonly);
+			$page = $this->old_load_page('', $page_id, $revision_id, $cache, false, $metadataonly);
 		}
 
 		// 2. search for supertag
 		if (!$page)
 		{
-			$page = $this->old_load_page($this->npj_translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), 0, $time, $cache, true, $metadataonly);
+			$page = $this->old_load_page($this->npj_translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), 0, $revision_id, $cache, true, $metadataonly);
 		}
 
 		// 3. if not found, search for tag
 		if (!$page)
 		{
-			$page = $this->old_load_page($tag, 0, $time, $cache, false, $metadataonly);
+			$page = $this->old_load_page($tag, 0, $revision_id, $cache, false, $metadataonly);
 		}
 
 		// 4. still nothing? file under wanted
@@ -862,7 +862,7 @@ class Wacko
 		return $page;
 	}
 
-	function old_load_page($tag, $page_id = 0, $time = '', $cache = 1, $supertagged = false, $metadataonly = 0)
+	function old_load_page($tag, $page_id = 0, $revision_id = '', $cache = 1, $supertagged = false, $metadataonly = 0)
 	{
 		$supertag = '';
 
@@ -882,7 +882,7 @@ class Wacko
 		}
 
 		// retrieve from cache
-		if (!$time && $cache && ($cached_page = $this->get_cached_page($supertag, $page_id, $metadataonly)))
+		if (!$revision_id && $cache && ($cached_page = $this->get_cached_page($supertag, $page_id, $metadataonly)))
 		{
 			$page = $cached_page;
 		}
@@ -913,19 +913,19 @@ class Wacko
 
 				$owner_id = $page['owner_id'];
 
-				if ($time && $time != $page['modified'])
+				if ($revision_id)
 				{
 					$this->cache_page($page, $page_id, $metadataonly);
 
 					$page = $this->load_single(
-						"SELECT ".$what." ".
+						"SELECT p.revision_id, ".$what." ".
 						"FROM ".$this->config['table_prefix']."revision p ".
 							"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 							"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 						"WHERE ".( $page_id != 0
 							? "page_id  = '".quote($this->dblink, $page_id)."' "
 							: "supertag = '".quote($this->dblink, $supertag)."' " ).
-							"AND modified = '".quote($this->dblink, $time)."' ".
+							"AND revision_id = '".quote($this->dblink, $revision_id)."' ".
 						"LIMIT 1");
 
 					$page['owner_id'] = $owner_id;
@@ -943,7 +943,7 @@ class Wacko
 
 				$owner_id = $page['owner_id'];
 
-				if ($time && $time != $page['modified'])
+				if ($revision_id)
 				{
 					$this->cache_page($page, $page_id, $metadataonly);
 
@@ -953,7 +953,7 @@ class Wacko
 							"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 							"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
-							"AND modified = '".quote($this->dblink, $time)."' ".
+							"AND revision_id = '".quote($this->dblink, $revision_id)."' ".
 						"LIMIT 1");
 
 					$page['owner_id'] = $owner_id;
@@ -961,7 +961,7 @@ class Wacko
 			}
 		}
 		// cache result
-		if (!$time && !$cached_page)
+		if (!$revision_id && !$cached_page)
 		{
 			$this->cache_page($page, $page_id, $metadataonly);
 		}
@@ -3937,11 +3937,11 @@ class Wacko
 		}
 	}
 
-	function get_page_owner($tag = '', $time = '')
+	function get_page_owner($tag = '', $revision_id = '')
 	{
 		if (!$tag = trim($tag))
 		{
-			if (!$time)
+			if (!$revision_id)
 			{
 				return $this->page['owner_name'];
 			}
@@ -3951,18 +3951,18 @@ class Wacko
 			}
 		}
 
-		if ($page = $this->load_page($tag, 0, $time, LOAD_CACHE, LOAD_META))
+		if ($page = $this->load_page($tag, 0, $revision_id, LOAD_CACHE, LOAD_META))
 		{
 			return $page['owner_name'];
 		}
 	}
 
-	function get_page_owner_id($page_id = '', $time = '')
+	function get_page_owner_id($page_id = '', $revision_id = '')
 	{
 
 		if (!$page_id = trim($page_id))
 		{
-			if (!$time)
+			if (!$revision_id)
 			{
 				return $this->page['owner_id'];
 			}
@@ -3972,7 +3972,7 @@ class Wacko
 			}
 		}
 
-		if ($page = $this->load_page('', $page_id, $time, LOAD_CACHE, LOAD_META))
+		if ($page = $this->load_page('', $page_id, $revision_id, LOAD_CACHE, LOAD_META))
 		{
 			return $page['owner_id'];
 		}
@@ -4918,12 +4918,12 @@ class Wacko
 		$this->tag		= $tag;
 		$this->supertag	= $this->npj_translit($tag);
 
-		$time = isset($_GET['time']) ? $_GET['time'] : '';
-		$page = $this->load_page($this->tag, 0, $time);
+		$revision_id = isset($_GET['revision_id']) ? $_GET['revision_id'] : '';
+		$page = $this->load_page($this->tag, 0, $revision_id);
 
 		if ($this->config['outlook_workaround'] && !$page)
 		{
-			$page = $this->load_page($this->supertag."'", 0, $time);
+			$page = $this->load_page($this->supertag."'", 0, $revision_id);
 		}
 
 		$this->set_page($page);
