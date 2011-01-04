@@ -1527,7 +1527,9 @@ class Wacko
 		}
 
 		// check privileges
-		if ($this->has_access('write', $page_id) || ($comment_on_id && $this->has_access('comment', $comment_on_id)))
+		if ( ($this->page && $this->has_access('write', $page_id))
+			|| (!$this->page && $this->has_access('create', $tag))
+			|| ($comment_on_id && $this->has_access('comment', $comment_on_id)) )
 		{
 			// for forum topic prepare description
 			#if (!$comment_on_id)
@@ -1602,10 +1604,12 @@ class Wacko
 					{
 						$_root		= $root;
 						$root		= preg_replace( '/^(.*)\\/([^\\/]+)$/', '$1', $root );
+
 						if ($root == $_root)
 						{
 							break;
 						}
+
 						# $root_id	= $this->get_page_id($root); // do we need this?
 						$write_acl	= $this->load_acl($root_id, 'write');
 					}
@@ -1615,6 +1619,10 @@ class Wacko
 					$read_acl		= $read_acl['list'];
 					$comment_acl	= $this->load_acl($root_id, 'comment');
 					$comment_acl	= $comment_acl['list'];
+					$create_acl		= $this->load_acl($root_id, 'create');
+					$create_acl		= $create_acl['list'];
+					$upload_acl		= $this->load_acl($root_id, 'upload');
+					$upload_acl		= $upload_acl['list'];
 				}
 				else if ($comment_on_id)
 				{
@@ -1631,6 +1639,8 @@ class Wacko
 					$read_acl		= $this->config['default_read_acl'];
 					$write_acl		= $this->config['default_write_acl'];
 					$comment_acl	= $this->config['default_comment_acl'];
+					$create_acl		= $this->config['default_create_acl'];
+					$upload_acl		= $this->config['default_upload_acl'];
 				}
 
 				$this->query(
@@ -1661,10 +1671,11 @@ class Wacko
 						"title			= '".quote($this->dblink, htmlspecialchars($title))."'");
 
 				// saving acls
-				$page_id = $this->get_page_id($tag);
 				$this->save_acl($page_id, 'write', $write_acl);
 				$this->save_acl($page_id, 'read', $read_acl);
 				$this->save_acl($page_id, 'comment', $comment_acl);
+				$this->save_acl($page_id, 'create', $create_acl);
+				$this->save_acl($page_id, 'upload', $upload_acl);
 
 				// counters
 				if ($comment_on_id)
@@ -1842,7 +1853,6 @@ class Wacko
 					$diff = $this->include_buffered('handlers/page/diff.php', 'oops', array('source' => 1));
 
 					// notifying watchers
-					$page_id	= $this->get_page_id($tag);
 					$title		= $this->get_page_title(0, $page_id);
 					$user_name	= $user;
 
@@ -4031,10 +4041,12 @@ class Wacko
 		}
 
 		if ($use_cache && $use_parent)
+		{
 			if ($cached_acl = $this->get_cached_acl($page_id, $privilege, $use_defaults))
 			{
 				$acl = $cached_acl;
 			}
+		}
 
 		if (!$acl)
 		{
@@ -4046,11 +4058,11 @@ class Wacko
 			if (!$acl)
 			{
 				$acl = $this->load_single(
-								"SELECT * ".
-								"FROM ".$this->config['table_prefix']."acl ".
-								"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
-									"AND privilege = '".quote($this->dblink, $privilege)."' ".
-								"LIMIT 1");
+					"SELECT * ".
+					"FROM ".$this->config['table_prefix']."acl ".
+					"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
+						"AND privilege = '".quote($this->dblink, $privilege)."' ".
+					"LIMIT 1");
 
 				// if still no acl, use config defaults
 				if (!$acl && $use_defaults)
@@ -4061,15 +4073,16 @@ class Wacko
 
 					if ( strstr($tag, '/') )
 					{
-						$parent = preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $tag);
+						$parent_tag = preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $tag);
 
 						// By letting it fetch defaults, it will automatically recurse
 						// up the tree of parent pages... fetching the ACL on the root
 						// page if necessary.
-						$parent_id	= $this->get_page_id($parent);
+						$parent_id	= $this->get_page_id($parent_tag);
 						$acl		= $this->load_acl($parent_id, $privilege, 1);
 					}
 
+					// if still no acl, use config defaults
 					if (!$acl)
 					{
 						$acl = array(
@@ -4085,6 +4098,7 @@ class Wacko
 				$this->cache_acl($page_id, $privilege, $use_defaults, $acl);
 			}
 		}
+
 		return $acl;
 	}
 
@@ -4115,8 +4129,8 @@ class Wacko
 		}
 
 		// load acl
-		$acl = $this->load_acl($page_id, $privilege, 1, 1, $use_parent);
-		$this->_acl = $acl;
+		$acl		= $this->load_acl($page_id, $privilege, 1, 1, $use_parent);
+		$this->_acl	= $acl;
 
 		// if current user is owner or admin, return true. they can do anything!
 		if ($user == '' && $user_name != GUEST)

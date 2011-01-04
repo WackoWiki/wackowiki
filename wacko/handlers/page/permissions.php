@@ -36,6 +36,8 @@ if ($this->user_is_owner() || $this->is_admin())
 			$this->save_acl($this->page['page_id'], 'read', $_POST['read_acl']);
 			$this->save_acl($this->page['page_id'], 'write', $_POST['write_acl']);
 			$this->save_acl($this->page['page_id'], 'comment', $_POST['comment_acl']);
+			$this->save_acl($this->page['page_id'], 'create', $_POST['create_acl']);
+			$this->save_acl($this->page['page_id'], 'upload', $_POST['upload_acl']);
 
 			// log event
 			$this->log(2, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
@@ -128,6 +130,8 @@ if ($this->user_is_owner() || $this->is_admin())
 				$this->save_acl($page['page_id'], 'read', $_POST['read_acl']);
 				$this->save_acl($page['page_id'], 'write', $_POST['write_acl']);
 				$this->save_acl($page['page_id'], 'comment', $_POST['comment_acl']);
+				$this->save_acl($page['page_id'], 'create', $_POST['create_acl']);
+				$this->save_acl($page['page_id'], 'upload', $_POST['upload_acl']);
 
 				// log event
 				$this->log(2, str_replace('%1', $page['tag']." ".$page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
@@ -176,9 +180,11 @@ if ($this->user_is_owner() || $this->is_admin())
 	else
 	{
 		// load acls
-		$readACL	= $this->load_acl($this->page['page_id'], 'read', 1, 0);
-		$writeACL	= $this->load_acl($this->page['page_id'], 'write', 1, 0);
-		$commentACL	= $this->load_acl($this->page['page_id'], 'comment', 1, 0);
+		$read_acl	= $this->load_acl($this->page['page_id'], 'read', 1, 0);
+		$write_acl	= $this->load_acl($this->page['page_id'], 'write', 1, 0);
+		$comment_acl= $this->load_acl($this->page['page_id'], 'comment', 1, 0);
+		$create_acl	= $this->load_acl($this->page['page_id'], 'create', 1, 0);
+		$upload_acl	= $this->load_acl($this->page['page_id'], 'upload', 1, 0);
 
 		// show form
 		?>
@@ -187,13 +193,19 @@ if ($this->user_is_owner() || $this->is_admin())
 <br />
 <div class="cssform">
 <p><label for="read_acl"><?php echo $this->get_translation('ACLRead'); ?></label>
-<textarea id="read_acl" name="read_acl" rows="4" cols="20"><?php echo $readACL['list'] ?></textarea>
+<textarea id="read_acl" name="read_acl" rows="4" cols="20"><?php echo $read_acl['list'] ?></textarea>
 </p>
 <p><label for="write_acl"><?php echo $this->get_translation('ACLWrite'); ?></label>
-<textarea id="write_acl" name="write_acl" rows="4" cols="20"><?php echo $writeACL['list'] ?></textarea>
+<textarea id="write_acl" name="write_acl" rows="4" cols="20"><?php echo $write_acl['list'] ?></textarea>
 </p>
 <p><label for="comment_acl"><?php echo $this->get_translation('ACLComment'); ?></label>
-<textarea id="comment_acl" name="comment_acl" rows="4" cols="20"><?php echo $commentACL['list'] ?></textarea>
+<textarea id="comment_acl" name="comment_acl" rows="4" cols="20"><?php echo $comment_acl['list'] ?></textarea>
+</p>
+<p><label for="create_acl"><?php echo $this->get_translation('ACLCreate'); ?></label>
+<textarea id="create_acl" name="create_acl" rows="4" cols="20"><?php echo $create_acl['list'] ?></textarea>
+</p>
+<p><label for="upload_acl"><?php echo $this->get_translation('ACLUpload'); ?></label>
+<textarea id="upload_acl" name="upload_acl" rows="4" cols="20"><?php echo $upload_acl['list'] ?></textarea>
 </p>
 <p><label for="newowner"><?php echo $this->get_translation('SetOwner'); ?></label>
 <select id="newowner" name="newowner">
@@ -224,4 +236,5 @@ else
 	echo $this->get_translation('ACLAccessDenied');
 }
 
-?></div>
+?>
+</div>

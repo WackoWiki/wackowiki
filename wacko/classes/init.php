@@ -196,7 +196,7 @@ class Init
 						require('config/config.php');
 						$this->config = $wacko_config;
 
-						if ($wacko_config['wacko_version'] != 'R4.3.rc' && (!$wacko_config['system_seed'] || strlen($wacko_config['system_seed']) < 20))
+						if ($wacko_config['wacko_version'] != 'R4.3.dev' && (!$wacko_config['system_seed'] || strlen($wacko_config['system_seed']) < 20))
 						{
 							die("WackoWiki fatal error: system_seed in config.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
 						}
