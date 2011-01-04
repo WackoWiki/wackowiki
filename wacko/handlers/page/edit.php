@@ -17,7 +17,7 @@ if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 <div id="pageedit">
 <?php
 
-if ($this->has_access('write') && $this->has_access('read'))
+if ($this->has_access('read') && (($this->page && $this->has_access('write')) || (!$this->page && $this->has_access('create'))))
 {
 	$user	= $this->get_user();
 

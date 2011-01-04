@@ -55,7 +55,7 @@ if ($this->has_access('read'))
 		header("HTTP/1.0 404 Not Found");
 
 		echo '<br /><div class="notice">'.
-			$this->get_translation('DoesNotExists') ." ".( $this->has_access('write') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
+			$this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
 			'</div>';
 	}
 	else

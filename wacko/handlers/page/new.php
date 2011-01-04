@@ -38,7 +38,7 @@ if (isset($_POST['tag']) && $newtag = trim($_POST['tag'], '/ '))
 	else
 	{
 		// check new page write access
-		if ($this->has_access('write', $this->get_page_id($prefix.$newtag)))
+		if ($this->has_access('create', $this->get_page_id($prefix.$newtag)))
 		{
 			// str_replace: fixed newPage&amp;add=1
 			$this->redirect(str_replace('&amp;', '&', ($this->href('edit', $prefix.$newtag, '', 1))));
@@ -56,7 +56,7 @@ if (isset($_POST['tag']) && $newtag = trim($_POST['tag'], '/ '))
 echo $this->form_open('new');
 echo "<input type=\"hidden\" name=\"option\" value=\"1\" />";
 echo "<label for=\"create_subpage\">".$this->get_translation('CreateSubPage').":</label><br />";
-if ($this->has_access('write', $this->get_page_id($this->tag)))
+if ($this->has_access('create', $this->get_page_id($this->tag)))
 {
 	echo "<tt>".( strlen($this->tag) > 50 ? "...".substr($this->tag, -50) : $this->tag )."/</tt>".
 		"<input id=\"create_subpage\" name=\"tag\" value=\"".( isset($_POST['option']) && $_POST['option'] === 1 ? htmlspecialchars($newtag) : "" )."\" size=\"20\" maxlength=\"255\" /> ".
@@ -78,7 +78,7 @@ if (substr_count($this->tag, '/') > 0)
 	echo $this->form_open('new');
 	echo "<input type=\"hidden\" name=\"option\" value=\"2\" />";
 	echo "<label for=\"create_pageparentcluster\">".$this->get_translation('CreatePageParentCluster').":</label><br />";
-	if ($this->has_access('write', $this->get_page_id($parent)))
+	if ($this->has_access('create', $this->get_page_id($parent)))
 	{
 		echo "<tt>".( strlen($parent) > 50 ? "...".substr($parent, -50) : $parent )."/</tt>".
 			"<input id=\"create_pageparentcluster\" name=\"tag\" value=\"".( isset($_POST['option']) && $_POST['option'] === 2 ? htmlspecialchars($newtag) : "" )."\" size=\"20\" maxlength=\"255\" /> ".

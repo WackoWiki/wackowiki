@@ -86,6 +86,7 @@ $wacko_config = array(
 	'default_read_acl' => '*',
 	'default_comment_acl' => '$',
 	'default_create_acl' => '$',
+	'default_upload_acl' => 'Admins',
 
 	'rename_globalacl' => 'Admins',
 	'owners_can_change_categories' => 1,
@@ -101,8 +102,8 @@ $wacko_config = array(
 
 	'upload' => 'admins',
 	'upload_images_only' => 0,
-	'upload_max_size' => 190,
-	'upload_quota_per_user' => 19000,
+	'upload_max_size' => 256,
+	'upload_quota_per_user' => 500000,
 	'upload_path' => 'files',
 	'upload_path_per_page' => 'files/perpage',
 	'upload_banned_exts' => 'php|cgi|js|php|php3|php4|php5|pl|ssi|jsp|phtm|phtml|shtm|shtml|xhtm|xht|asp|aspx|htw|ida|idq|cer|cdx|asa|htr|idc|stm|printer|asax|ascx|ashx|asmx|axd|vdisco|rem|soap|config|cs|csproj|vb|vbproj|webinfo|licx|resx|resources',

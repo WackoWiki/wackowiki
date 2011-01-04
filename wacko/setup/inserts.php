@@ -22,6 +22,8 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 	$perm_read_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'read', '*')";
 	$perm_write_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'write', '".$rights."')";
 	$perm_comment_insert	= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'comment', '$')";
+	$perm_create_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'create', '$')";
+	$perm_upload_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'upload', '')";
 
 	$default_bookmark		= "INSERT INTO ".$config_global['table_prefix']."bookmark (user_id, page_id, lang, bm_title) VALUES ((".$owner_id."), (".$page_id."), '".$lng."', '".$bm_title."')";
 	#$site_bookmark			= "INSERT INTO ".$config_global['table_prefix']."bookmark (user_id, page_id, lang, bm_title) VALUES ((".$owner_id."), (".$page_id."), '".$lng."', '".$bm_title."')";
@@ -31,10 +33,14 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 		case "mysql_legacy":
 			if (0 == mysql_num_rows(mysql_query($page_select, $dblink_global)))
 			{
+				// page
 				mysql_query($page_insert, $dblink_global);
+				// rights
 				mysql_query($perm_read_insert, $dblink_global);
 				mysql_query($perm_write_insert, $dblink_global);
 				mysql_query($perm_comment_insert, $dblink_global);
+				mysql_query($perm_create_insert, $dblink_global);
+				mysql_query($perm_upload_insert, $dblink_global);
 
 				if($is_bookmark)
 				{
@@ -76,6 +82,18 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCommentPermission'])." - ".mysqli_error($dblink_global));
 					}
 
+					mysqli_query($dblink_global, $perm_create_insert);
+					if(mysqli_errno($dblink_global) != 0)
+					{
+						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCreatePermission'])." - ".mysqli_error($dblink_global));
+					}
+
+					mysqli_query($dblink_global, $perm_upload_insert);
+					if(mysqli_errno($dblink_global) != 0)
+					{
+						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageUploadPermission'])." - ".mysqli_error($dblink_global));
+					}
+
 					if($is_bookmark)
 					{
 						mysqli_query($dblink_global, $default_bookmark);
@@ -87,10 +105,14 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 				}
 				else
 				{
+					// page
 					mysqli_query($dblink_global, $page_insert);
+					// rights
 					mysqli_query($dblink_global, $perm_read_insert);
 					mysqli_query($dblink_global, $perm_write_insert);
 					mysqli_query($dblink_global, $perm_comment_insert);
+					mysqli_query($dblink_global, $perm_create_insert);
+					mysqli_query($dblink_global, $perm_upload_insert);
 
 					if($is_bookmark)
 					{
@@ -149,6 +171,20 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCommentPermission'])." - ".($error[2]));
 					}
 
+					@$dblink_global->query($perm_create_insert);
+					$error = $dblink_global->errorInfo();
+					if($error[0] != "00000")
+					{
+						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCreatePermission'])." - ".($error[2]));
+					}
+
+					@$dblink_global->query($perm_upload_insert);
+					$error = $dblink_global->errorInfo();
+					if($error[0] != "00000")
+					{
+						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageUploadPermission'])." - ".($error[2]));
+					}
+
 					if($is_bookmark)
 					{
 						@$dblink_global->query($default_bookmark);
@@ -161,10 +197,14 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 				}
 				else
 				{
+					// page
 					@$dblink_global->query($page_insert);
+					// rights
 					@$dblink_global->query($perm_read_insert);
 					@$dblink_global->query($perm_write_insert);
 					@$dblink_global->query($perm_comment_insert);
+					@$dblink_global->query($perm_create_insert);
+					@$dblink_global->query($perm_upload_insert);
 
 					if($is_bookmark)
 					{

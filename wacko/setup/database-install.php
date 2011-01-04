@@ -140,6 +140,7 @@ $config_db['default_create_acl'] = $config['default_create_acl'];
 $config_db['default_read_acl'] = $config['default_read_acl'];
 $config_db['default_rename_redirect'] = $config['default_rename_redirect'];
 $config_db['default_typografica'] = $config['default_typografica'];
+$config_db['default_upload_acl'] = $config['default_read_acl'];
 $config_db['default_write_acl'] = $config['default_write_acl'];
 $config_db['disable_autosubscribe'] = $config['disable_autosubscribe'];
 $config_db['disable_bracketslinks'] = $config['disable_bracketslinks'];
