@@ -17,16 +17,23 @@ if (in_array($page, $this->context)) return;
 if ($page == $this->tag) return;
 
 $page_id = $this->get_page_id($page);
+
 if (! $this->has_access('read', $page_id))
 {
 	if ($nowarning != 1) echo $this->get_translation('NoAccessToSourcePage');
 }
 else
 {
-	if (isset($_GET['time'])) $time = $_GET['time'];
-	else $time = '';
+	if (isset($_GET['revision_id']))
+	{
+		$revision_id = $_GET['revision_id'];
+	}
+	else
+	{
+		$revision_id = '';
+	}
 
-	if (!$inc_page = $this->load_page($page, 0, $time))
+	if (!$inc_page = $this->load_page($page, 0, $revision_id))
 	{
 		echo "<em> ".$this->get_translation('SourcePageDoesntExist')."(".$this->link('/'.$page).")</em>";
 	}
