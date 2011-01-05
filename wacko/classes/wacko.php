@@ -890,19 +890,24 @@ class Wacko
 		// load page
 		if ($metadataonly)
 		{
-			$what = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.keywords, p.description, p.noindex, u.user_name, o.user_name AS owner_name';
+			$what_p = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.keywords, p.description, p.noindex, u.user_name, o.user_name AS owner_name';
+			$what_r = $what_p;
 		}
 		else
 		{
-			$what = 'p.*, u.user_name, o.user_name AS owner_name';
+			$what_p = 'p.*, u.user_name, o.user_name AS owner_name';
+			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.reviewed_time, p.reviewer_id, p.ip, p.latest, p.handler, p.comment_on_id, p.lang, p.description, p.keywords, s.hide_comments, s.hide_files, s.hide_rating, s.hide_toc, s.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.theme, u.user_name, o.user_name AS owner_name';
 		}
+
+		//
+		$settings = '';
 
 		if (!$page)
 		{
 			if ($supertagged || $page_id)
 			{
 				$page = $this->load_single(
-					"SELECT ".$what." ".
+					"SELECT ".$what_p." ".
 					"FROM ".$this->config['table_prefix']."page p ".
 						"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 						"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
@@ -918,13 +923,14 @@ class Wacko
 					$this->cache_page($page, $page_id, $metadataonly);
 
 					$page = $this->load_single(
-						"SELECT p.revision_id, ".$what." ".
+						"SELECT p.revision_id, ".$what_r." ".
 						"FROM ".$this->config['table_prefix']."revision p ".
 							"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 							"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+							"LEFT JOIN ".$this->config['table_prefix']."page s ON (p.page_id = s.page_id) ".
 						"WHERE ".( $page_id != 0
-							? "page_id  = '".quote($this->dblink, $page_id)."' "
-							: "supertag = '".quote($this->dblink, $supertag)."' " ).
+							? "p.page_id  = '".quote($this->dblink, $page_id)."' "
+							: "p.supertag = '".quote($this->dblink, $supertag)."' " ).
 							"AND revision_id = '".quote($this->dblink, $revision_id)."' ".
 						"LIMIT 1");
 
@@ -934,7 +940,7 @@ class Wacko
 			else if (!preg_match('/[^'.$this->language['ALPHANUM_P'].'\_\-]/', $tag))
 			{
 				$page = $this->load_single(
-					"SELECT ".$what." ".
+					"SELECT ".$what_p." ".
 					"FROM ".$this->config['table_prefix']."page p ".
 						"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 						"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
@@ -948,11 +954,12 @@ class Wacko
 					$this->cache_page($page, $page_id, $metadataonly);
 
 					$page = $this->load_single(
-						"SELECT ".$what." ".
+						"SELECT ".$what_r." ".
 						"FROM ".$this->config['table_prefix']."revision p ".
 							"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 							"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-						"WHERE tag = '".quote($this->dblink, $tag)."' ".
+							"LEFT JOIN ".$this->config['table_prefix']."page s ON (p.page_id = s.page_id) ".
+						"WHERE p.tag = '".quote($this->dblink, $tag)."' ".
 							"AND revision_id = '".quote($this->dblink, $revision_id)."' ".
 						"LIMIT 1");
 
@@ -4918,8 +4925,8 @@ class Wacko
 		$this->tag		= $tag;
 		$this->supertag	= $this->npj_translit($tag);
 
-		$revision_id = isset($_GET['revision_id']) ? $_GET['revision_id'] : '';
-		$page = $this->load_page($this->tag, 0, $revision_id);
+		$revision_id	= isset($_GET['revision_id']) ? $_GET['revision_id'] : '';
+		$page			= $this->load_page($this->tag, 0, $revision_id);
 
 		if ($this->config['outlook_workaround'] && !$page)
 		{
@@ -4952,6 +4959,7 @@ class Wacko
 					$this->config[$key] = $val;
 				}
 			}
+
 			$this->config['theme_url']	= $this->config['base_url'].'themes/'.$this->config['theme'].'/';
 
 			// set page categories. this defines $categories (array) object property
