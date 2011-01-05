@@ -25,15 +25,56 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 <link href="<?php echo $this->config['theme_url'] ?>css/default.css" rel="stylesheet" type="text/css" media="screen" />
 <link rel="start" href="/" />
 <link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page'])); ?>" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentNewsRSS');?>" href="/xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentCommentsRSS');?>" href="/xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentChangesRSS');?>" href="/xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentNewsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentCommentsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentChangesRSS');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('HistoryRevisionsRSS');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
-<script type="text/javascript" src="<?php echo $this->config['base_url'] ?>js/controls.js"></script>
-<script type="text/javascript" src="<?php echo $this->config['base_url'] ?>js/protoedit.js"></script>
-<script type="text/javascript" src="<?php echo $this->config['base_url'] ?>js/wikiedit2.js"></script>
+<?php
+// JS files.
+// default.js contains common procedures and should be included everywhere
+?>
+<script type="text/javascript" src="<?php echo $this->config['base_url'];?>js/default.js"></script>
+<?php
+// load swfobject with flash action (e.g. $this->config['allow_swfobject'] = 1), by default it is set off
+if ($this->config['allow_swfobject'])
+{
+	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/swfobject.js\"></script>\n";
+}
+// autocomplete.js, protoedit & wikiedit2.js contain classes for WikiEdit editor. We may include them only on method==edit pages.
+if ($this->method == 'edit')
+{
+	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/protoedit.js\"></script>\n";
+	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/wikiedit2.js\"></script>\n";
+	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/autocomplete.js\"></script>\n";
+}
+?>
+<script type="text/javascript" src="<?php echo $this->config['base_url'];?>js/captcha.js"></script>
+<?php
+// Doubleclick edit feature.
+// Enabled only for registered users who don't swith it off (requires class=page in show handler).
+$doubleclick = '';
+if ($user = $this->get_user())
+{
+	if ($user['doubleclick_edit'] == 1)
+	{
+		$doubleclick = true;
+	}
+}
+else if($this->has_access('write'))
+{
+	$doubleclick = true;
+}
+if ($doubleclick == true)
+{
+?>
+	<script type="text/javascript">
+	var edit = "<?php echo $this->href('edit');?>";
+	</script>
+<?php
+}
+?>
 </head>
-<body>
+<body onload="all_init();">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="50" height="64" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_1.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.gif" width="50" height="1" /></td>
@@ -52,7 +93,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 <?php
 $user = '';
 
-if ($this->get_user())
+if ($user = $this->get_user())
 {
 ?>
 	id: <?php echo $this->get_user_name() ;?> &nbsp; <a href="<?php echo $this->href('', $this->config['settings_page']); ?>" title="Account Settings"><?php echo $this->get_translation('YouArePanelAccount'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->config['login_page']); ?>" title="parameters of current session">Session</a> &nbsp; <a onclick="return confirm('Do you really want to leave the system?');" href="<?php echo $this->href('', $this->config['login_page'], 'action=logout&amp;goback='.$this->slim_url($this->tag)); ?>" title="Logout">Logout</a><br />
