@@ -71,10 +71,10 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 		"GROUP BY tag");
 
 	$rating = $this->load_single(
-			"SELECT page_id, value, voters ".
-			"FROM {$this->config['table_prefix']}rating ".
-			"WHERE page_id = {$this->page['page_id']} ".
-			"LIMIT 1");
+		"SELECT page_id, value, voters ".
+		"FROM {$this->config['table_prefix']}rating ".
+		"WHERE page_id = {$this->page['page_id']} ".
+		"LIMIT 1");
 
 	if ($rating['voters'] > 0)			$rating['ratio'] = $rating['value'] / $rating['voters'];
 	if (is_float($rating['ratio']))		$rating['ratio'] = round($rating['ratio'], 2);
@@ -251,11 +251,9 @@ if (isset($this->config['allow_themes_per_page']))
 	for ($i = 0; $i < count($themes); $i++)
 	{
 		echo '<option value="'.$themes[$i].'" '.
-			(isset($user['theme']) && $user['theme'] == $themes[$i]
+			(isset($this->page['theme']) && $this->page['theme'] == $themes[$i]
 				? "selected=\"selected\""
-				: ($this->config['theme'] == $themes[$i]
-					? "selected=\"selected\""
-					: "")
+				: ""
 			).">".$themes[$i]."</option>\n";
 	}
 
