@@ -918,7 +918,7 @@ class Wacko
 
 				$owner_id = $page['owner_id'];
 
-				if ($revision_id)
+				if ($revision_id && $revision_id != $page['page_id'])
 				{
 					$this->cache_page($page, $page_id, $metadataonly);
 
@@ -949,7 +949,7 @@ class Wacko
 
 				$owner_id = $page['owner_id'];
 
-				if ($revision_id)
+				if ($revision_id && $revision_id != $page['page_id'])
 				{
 					$this->cache_page($page, $page_id, $metadataonly);
 
