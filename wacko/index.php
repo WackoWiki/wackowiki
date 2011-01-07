@@ -12,10 +12,10 @@ $init->settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['
 $init->settings('user_table',	$init->config['table_prefix'].'user');
 $init->settings('cookie_hash',	hash('md5', $init->config['base_url'].$init->config['system_seed']));
 
-// run in ssl mode?
-if ($init->config['ssl'] == true && (( ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') && !empty($init->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') ) ))
+// run in tls mode?
+if ($init->config['tls'] == true && (( ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') && !empty($init->config['tls_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') ) ))
 {
-	$init->settings('base_url',	str_replace('http://', 'https://'.($init->config['ssl_proxy'] ? $init->config['ssl_proxy'].'/' : ''), $init->config['base_url']));
+	$init->settings('base_url',	str_replace('http://', 'https://'.($init->config['tls_proxy'] ? $init->config['tls_proxy'].'/' : ''), $init->config['base_url']));
 }
 
 $init->settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));

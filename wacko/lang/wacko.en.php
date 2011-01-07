@@ -30,6 +30,13 @@ $wacko_translation = array(
 	'SessionDuration' => 'Session duration',
 	'LoggedInAs' => 'You are logged in as',
 
+	'ClearCookies' => 'Delete all cookies',
+	'BindSessionIp' => 'Bind session to the IP-address',// ''
+	'BindSessionIpOn' => 'enabled (the current IP',
+	'TrafficProtection' => 'Traffic Protection',
+	'SessionEnds' => 'The current session ends',
+	'LastVisit' => 'Last visit was recorded',
+
 	// other
 	'Guest' => 'Guest',
 	'Help' => 'Help',
@@ -396,7 +403,7 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'This page is referred to by these pages',
 	'UnknownAction' => 'Unknown action',
 	'MarkRead'		=> 'Mark all as read',
-	'CurrentTime'	=> 'current time',
+	'CurrentTime'	=> 'It is currently',
 	'Created'		=> 'created',
 	'Modified'		=> 'modified',
 

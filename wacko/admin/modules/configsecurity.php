@@ -45,9 +45,9 @@ function admin_configsecurity(&$engine, &$module)
 		$config['owners_can_remove_comments']	= (int)$_POST['owners_can_remove_comments'];
 		$config['owners_can_change_categories']	= (int)$_POST['owners_can_change_categories'];
 		$config['moders_can_edit']				= (int)$_POST['moders_can_edit'];
-		$config['ssl']							= (int)$_POST['ssl'];
-		$config['ssl_implicit']					= (int)$_POST['ssl_implicit'];
-		$config['ssl_proxy']					= trim((string)$_POST['ssl_proxy']);
+		$config['tls']							= (int)$_POST['tls'];
+		$config['tls_implicit']					= (int)$_POST['tls_implicit'];
+		$config['tls_proxy']					= trim((string)$_POST['tls_proxy']);
 		$config['pwd_min_chars']				= (int)$_POST['pwd_min_chars'];
 		$config['pwd_char_classes']				= (int)$_POST['pwd_char_classes'];
 		$config['pwd_unlike_login']				= (int)$_POST['pwd_unlike_login'];
@@ -224,29 +224,29 @@ function admin_configsecurity(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br />
-					SSL Settings
+					TLS Settings
 				</th>
 			</tr>
 			<tr>
-				<td class="label"><label for="ssl"><strong>SSL-Connection:</strong><br />
-				<small>Use SSL-secured connection. <span class="cite">Activate the required pre-installed SSL-certificate on the server , otherwise you will lose access to the admin panel!</span></small></label></td>
-				<td><input type="checkbox" id="ssl" name="ssl" value="1"<?php echo ( $engine->config['ssl'] ? ' checked="checked"' : '' );?> /></td>
+				<td class="label"><label for="tls"><strong>TLS-Connection:</strong><br />
+				<small>Use TLS-secured connection. <span class="cite">Activate the required pre-installed TLS-certificate on the server , otherwise you will lose access to the admin panel!</span></small></label></td>
+				<td><input type="checkbox" id="tls" name="tls" value="1"<?php echo ( $engine->config['tls'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="ssl_implicit"><strong>Forced SSL:</strong><br />
+				<td class="label"><label for="tls_implicit"><strong>Forced TLS:</strong><br />
 				<small>Force client reconnection from HTTP to HTTPS. When this option the customer can view the site for open HTTP-channel.</small></label></td>
-				<td><input type="checkbox" id="ssl_implicit" name="ssl_implicit" value="1"<?php echo ( $engine->config['ssl_implicit'] ? ' checked="checked"' : '' );?> /></td>
+				<td><input type="checkbox" id="tls_implicit" name="tls_implicit" value="1"<?php echo ( $engine->config['tls_implicit'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="ssl_proxy"><strong>SSL Proxy:</strong><br />
-				<small>Uses the provided SSL Proxy inplace of SSL. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash.</small></label></td>
-				<td><input maxlength="100" style="width:200px;" id="ssl_proxy" name="ssl_proxy" value="<?php echo htmlspecialchars($engine->config['ssl_proxy']);?>" /></td>
+				<td class="label"><label for="tls_proxy"><strong>TLS Proxy:</strong><br />
+				<small>Uses the provided TLS Proxy inplace of TLS. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash.</small></label></td>
+				<td><input maxlength="100" style="width:200px;" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->config['tls_proxy']);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">

@@ -355,10 +355,10 @@ class Init
 	{
 		$_secure = '';
 
-		// run in ssl mode?
-		if ($this->config['ssl'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) ))
+		// run in tls mode?
+		if ($this->config['tls'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) ))
 		{
-			$this->config['base_url']	= str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
+			$this->config['base_url']	= str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->config['base_url']);
 			$_secure = true;
 		}
 
@@ -688,15 +688,16 @@ class Init
 					echo "<li>HTTPS: ".(isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : '')."</li>\n";
 					echo "<li>IP-address: ".$this->engine->get_user_ip()."</li>\n";
 					echo "<li>SERVER_PORT: ".$_SERVER['SERVER_PORT']."</li>\n";
-					echo "<li>SSL: ".(isset($this->config['ssl']) ? 'on' : 'off')."</li>\n";
-					echo "<li>SSL Proxy: ".(!empty($this->config['ssl_proxy']) ? $this->config['ssl_proxy'] : "false")."</li>\n";
-					echo "<li>SSL implicit: ".(($this->config['ssl_implicit'] == true) ? 'on' : 'off')."</li>\n";
+					echo "<li>TLS: ".(isset($this->config['tls']) ? 'on' : 'off')."</li>\n";
+					echo "<li>TLS Proxy: ".(!empty($this->config['tls_proxy']) ? $this->config['tls_proxy'] : "false")."</li>\n";
+					echo "<li>TLS implicit: ".(($this->config['tls_implicit'] == true) ? 'on' : 'off')."</li>\n";
 					echo "<li>Cookie hash: ".(isset($this->config['cookie_hash']) ? $this->config['cookie_hash'] : '')."</li>\n";
 					echo "<li>Cookie path: ".$this->config['cookie_path']."</li>\n";
 					echo "</ul>\n";
 				}
 
 				$this->engine->debug_print_r($_SESSION);
+				#$this->engine->debug_print_r($this->config);
 
 				echo "</div >\n";
 			}

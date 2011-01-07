@@ -1420,8 +1420,8 @@ class Wacko
 	// $subject, $message 	- self-explaining
 	// $from				- place specific address into the 'From:' field
 	// $charset				- send message in specific charset (w/o actual re-encoding)
-	// $supress_ssl			- don't change all http links to https links in the message body
-	function send_mail($email, $subject, $message, $from = '', $charset = '', $supress_ssl = false)
+	// $supress_tls			- don't change all http links to https links in the message body
+	function send_mail($email, $subject, $message, $from = '', $charset = '', $supress_tls = false)
 	{
 		if (!$email)
 		{
@@ -1437,10 +1437,10 @@ class Wacko
 		#$subject =  "=?".$this->get_charset()."?B?" . base64_encode($subject) . "?=";
 		$subject = ( $subject ? "=?".( $charset ? $charset : $this->get_charset() )."?B?" . base64_encode($subject) . "?=" : '' );
 
-		// in ssl mode substitute protocol name in links substrings
-		if ($this->config['ssl'] == true && $supress_ssl === false)
+		// in tls mode substitute protocol name in links substrings
+		if ($this->config['tls'] == true && $supress_tls === false)
 		{
-			$message = str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $message);
+			$message = str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $message);
 		}
 
 		$message = wordwrap($message, 74, "\n", 0);
@@ -3062,8 +3062,8 @@ class Wacko
 			// xhtmlisation
 			$url = str_replace('&', '&amp;', $url);
 
-			// ssl'ing internal links
-			if ($this->config['ssl'] == true)
+			// tls'ing internal links
+			if ($this->config['tls'] == true)
 			{
 				if (isset($this->config['open_url']) && strpos($url, $this->config['open_url']) !== false)
 				{
@@ -3106,9 +3106,9 @@ class Wacko
 			$result .= '<input type="hidden" name="page" value="'.$this->mini_href($method, $tag, $add)."\" />\n";
 		}
 
-		if ($this->config['ssl'] == true)
+		if ($this->config['tls'] == true)
 		{
-			$result = str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $result);
+			$result = str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $result);
 		}
 
 		return $result;
@@ -3425,8 +3425,8 @@ class Wacko
 		}
 		else
 		{
-			//only accept http_x for ssl-proxy
-			return $this->_userhost = (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['ssl_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
+			//only accept http_x for tls-proxy
+			return $this->_userhost = (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['tls_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
 		}
 	}
 
@@ -3485,7 +3485,7 @@ class Wacko
 		// define current IP for foregoing checks
 		if ($ip == true)
 		{
-			$this->set_user_setting('ip', (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['ssl_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) );
+			$this->set_user_setting('ip', (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['tls_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) );
 		}
 
 		return true;
@@ -3539,11 +3539,11 @@ class Wacko
 			$cookie		= implode(';', array($user['user_name'], $user['password'], $ses_time));
 		}
 
-		$this->set_session_cookie('auth', $cookie, '', ( $this->config['ssl'] == true ? 1 : 0 ));
+		$this->set_session_cookie('auth', $cookie, '', ( $this->config['tls'] == true ? 1 : 0 ));
 
 		if ($persistent)
 		{
-			$this->set_persistent_cookie('auth', $cookie, $session, ( $this->config['ssl'] == true ? 1 : 0 ));
+			$this->set_persistent_cookie('auth', $cookie, $session, ( $this->config['tls'] == true ? 1 : 0 ));
 		}
 
 		// update session expiry and clear password recovery
@@ -4332,7 +4332,7 @@ class Wacko
 	// REVIEW
 	function set_review($reviewer_id, $page_id)
 	{
-		// set unset review
+		// set / unset review
 		$this->page['reviewed'] == 1 ? $reviewed = 0 : $reviewed = 1;
 
 		if ($this->has_access('read', $page_id))
@@ -4351,6 +4351,7 @@ class Wacko
 			return false;
 		}
 	}
+
 	// BOOKMARKS
 	function get_default_bookmarks($lang, $what = 'default')
 	{
@@ -4372,26 +4373,11 @@ class Wacko
 			}
 		}
 
-		if (isset($this->config[$what.'_bookmarks']) &&
-		is_array($this->config[$what.'_bookmarks']) &&
-		isset($this->config[$what.'_bookmarks'][$lang]))
-		{
-			return $this->config[$what.'_bookmarks'][$lang];
-		}
-		else if (isset($this->config[$what.'_bookmarks']) &&
-		!is_array($this->config[$what.'_bookmarks']) &&
-		($this->config['language'] == $lang))
-		{
-			return $this->config[$what.'_bookmarks'];
-		}
-		else
-		{
-			$user_id	= $this->get_user_id_by_name('System');
-			$default_bm	= $this->get_user_bookmarks($user_id, $lang);
-			#$this->debug_print_r($default_bm);
+		$user_id	= $this->get_user_id_by_name('System');
+		$default_bm	= $this->get_user_bookmarks($user_id, $lang);
+		#$this->debug_print_r($default_bm);
 
-			return $default_bm;
-		}
+		return $default_bm;
 	}
 
 	function get_user_bookmarks($user_id, $lang = '')
@@ -4429,13 +4415,14 @@ class Wacko
 					"))\n";
 				}
 			}
+
 			return $user_bm;
 		}
 	}
 
 	function convert_into_bookmark_table($bookmarks, $user_id)
 	{
-		// Bookmarks
+		// bookmarks
 		$_bookmarks	= explode("\n", $bookmarks);
 
 		if ($_bookmarks)
@@ -4448,33 +4435,34 @@ class Wacko
 					(preg_match('/^(\S+)(\s+(.+))?$/', $thing, $matches)) ) // without brackets at last!
 				{
 					list (, $url, $text) = $matches;
+
 					if ($url)
 					{
 						$url = str_replace(' ', '', $url);
 
 						if ($url[0] == '/')
 						{
-							$url = substr($url, 1);
+							$url		= substr($url, 1);
 						}
 
 						if (stristr($text, '@@'))
 						{
-							$t = explode('@@', $text);
-							$text = $t[0];
-							$bm_lang = $t[1];
+							$t			= explode('@@', $text);
+							$text		= $t[0];
+							$bm_lang	= $t[1];
 						}
 
-						$title = trim(preg_replace('/|__|\[\[|\(\(/', '', $text));
-						$page_id = $this->get_page_id($url);
-						$page_title = $this->get_page_title('', $page_id);
+						$title			= trim(preg_replace('/|__|\[\[|\(\(/', '', $text));
+						$page_id		= $this->get_page_id($url);
+						$page_title		= $this->get_page_title('', $page_id);
 
-						if ( $page_title !== $title )
+						if ($page_title !== $title)
 						{
-							$title = $title;
+							$title		= $title;
 						}
 						else
 						{
-							$title = null;
+							$title		= null;
 						}
 					}
 				}
@@ -4513,10 +4501,10 @@ class Wacko
 
 			// parsing bookmarks into link table
 			$bookmarks	= explode("\n", $bookmarks);
-			$bmlinks = $this->parsing_bookmarks($bookmarks);
+			$bm_links = $this->parsing_bookmarks($bookmarks);
 
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmarks']		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bmlinks;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bm_links;
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt']	= $this->format(implode("\n", $bookmarks), 'wacko');
 		}
 
@@ -4545,12 +4533,12 @@ class Wacko
 			}
 
 			// parsing bookmarks into link table
-			$bmlinks = $this->parsing_bookmarks($bookmarks);
+			$bm_links = $this->parsing_bookmarks($bookmarks);
 
 			$this->set_user_setting('bookmarks', implode("\n", $bookmarks));
 
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmarks']		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bmlinks;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bm_links;
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt']	= $this->format(implode("\n", $bookmarks), 'wacko');
 		}
 
@@ -4580,12 +4568,12 @@ class Wacko
 				"LIMIT 1");
 
 			// parsing bookmarks into link table
-			$bmlinks = $this->parsing_bookmarks($bookmarks);
+			$bm_links = $this->parsing_bookmarks($bookmarks);
 
 			$this->set_user_setting('bookmarks', ( $bookmarks ? implode("\n", $bookmarks) : '' ));
 
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmarks']		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bmlinks;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bm_links;
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt']	= ( $bookmarks ? $this->format(implode("\n", $bookmarks), 'wacko') : '' );
 		}
 	}
@@ -4593,31 +4581,31 @@ class Wacko
 	function parsing_bookmarks($bookmarks)
 	{
 		// parsing bookmarks into link table
-		$bmlinks = $bookmarks;
+		$bm_links = $bookmarks;
 
-		for ($i = 0; $i < count($bmlinks); $i++)
+		for ($i = 0; $i < count($bm_links); $i++)
 		{
-			if (strpos($bmlinks[$i], '[') === 0 || strpos($bmlinks[$i], '(') === 0)
+			if (strpos($bm_links[$i], '[') === 0 || strpos($bm_links[$i], '(') === 0)
 			{
-				if (($space = strpos($bmlinks[$i], ' ')) == true)
+				if (($space = strpos($bm_links[$i], ' ')) == true)
 				{
-					$bmlinks[$i] = substr($bmlinks[$i], 0, $space);
+					$bm_links[$i] = substr($bm_links[$i], 0, $space);
 				}
 				else
 				{
-					$bmlinks[$i] = substr($bmlinks[$i], 0);
+					$bm_links[$i] = substr($bm_links[$i], 0);
 				}
 
-				$bmlinks[$i] = trim($bmlinks[$i], '[( )]');
-				#$bmlinks[$i] = $this->npj_translit($bmlinks[$i]);
+				$bm_links[$i] = trim($bm_links[$i], '[( )]');
+				#$bm_links[$i] = $this->npj_translit($bm_links[$i]);
 			}
 			else
 			{
-				$bmlinks[$i] = '';
+				$bm_links[$i] = '';
 			}
 		}
 
-		return $bmlinks;
+		return $bm_links;
 	}
 
 	function get_bookmarks()
@@ -4767,10 +4755,10 @@ class Wacko
 	// MAIN EXECUTION ROUTINE
 	function run($tag, $method = '')
 	{
-		// mandatory ssl?
-		if ($this->config['ssl'] == true && $this->config['ssl_implicit'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
+		// mandatory tls?
+		if ($this->config['tls'] == true && $this->config['tls_implicit'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 		{
-			$this->redirect(str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->href($method, $tag)));
+			$this->redirect(str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->href($method, $tag)));
 		}
 
 		// url lang selection
@@ -4795,11 +4783,11 @@ class Wacko
 		$auth = $this->decompose_auth_cookie();
 		$user = $this->load_user($auth['user_name'], 0, $auth['password']);
 
-		// run in ssl mode?
-		if ($this->config['ssl'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
+		// run in tls mode?
+		if ($this->config['tls'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
 		{
 			$this->config['open_url']		= $this->config['base_url'];
-			$this->config['base_url']		= str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
+			$this->config['base_url']		= str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->config['base_url']);
 			$this->config['theme_url']		= $this->config['base_url'].'themes/'.$this->config['theme'].'/';
 			$this->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $this->config['base_url'].'');
 		}
@@ -4843,7 +4831,7 @@ class Wacko
 		}
 
 		// check IP validity
-		if ($this->get_user_setting('validate_ip', 1) == 1 && $this->get_user_setting('ip') != (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['ssl_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) )
+		if ($this->get_user_setting('validate_ip', 1) == 1 && $this->get_user_setting('ip') != (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['tls_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) )
 		{
 			$this->log(1, '<strong><span class="cite">User in-session IP change detected</span></strong>');
 			$this->logout_user();

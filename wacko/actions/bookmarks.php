@@ -117,12 +117,12 @@ if (isset($_POST['_user_bookmarks']))
 					}
 
 					// parsing bookmarks into link table
-					$bmlinks = $this->parsing_bookmarks($bookmarks);
+					$bm_links = $this->parsing_bookmarks($bookmarks);
 
 					$this->set_user_setting('bookmarks', implode("\n", $bookmarks));
 
 					$_SESSION[$this->config['session_prefix'].'_'.'bookmarks']		= $bookmarks;
-					$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bmlinks;
+					$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bm_links;
 					$_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt']	= $this->format(implode("\n", $bookmarks), 'wacko');
 				}
 				else
@@ -171,11 +171,6 @@ if (isset($_POST['_user_bookmarks']))
 	// reload user data
 	$this->set_user($this->load_user($user['user_name']), 0, 1);
 	$this->set_bookmarks(BM_USER);
-}
-
-if (isset($_POST['_user_bookmarks2']))
-{
-
 }
 
 if ($user)
