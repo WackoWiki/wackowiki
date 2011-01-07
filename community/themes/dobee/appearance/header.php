@@ -242,7 +242,7 @@ else if($this->has_access('write'))
 			src="<?php echo $this->config['theme_url'] ?>icons/user.gif"
 			alt="" width="16" height="16" border="0" align="middle"
 			style="vertical-align: baseline;" /> <?php echo $this->link($this->get_user_name()) ?>
-		</span> <small> ( <span class="nobr Tune"> <?php echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), "", $this->get_translation('YouArePanelAccount'), 0); ?>
+		</span> <small> ( <span class="nobr Tune"> <?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
 		| <a
 			onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');"
 			href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>">

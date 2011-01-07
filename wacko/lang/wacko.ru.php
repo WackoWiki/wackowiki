@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre' => 'Вы ',
-	'YouArePanelLink' => 'Настройки',
-	'YouArePanelAccount' => 'Учётная запись',
+	'AccountLink' => 'Настройки',
+	'AccountText' => 'Учётная запись',
+	'AccountTip' => 'Account Settings',
 	'LogoutLink'  => 'Выход',
 	'LogoutButton' => 'Выйти из системы',
 	'LogoutAreYouSure'  => 'Выйти из системы?',
@@ -249,6 +250,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo' => 'Удаление нельзя отменить.',
 
 	'PrintVersion' => 'Версия для печати',
+	'PrintText' => 'Печать',
 	'ReferringPages' => 'Страницы, ссылающиеся на данную',
 	'NoReferringPages' => '<em>Ссылок на эту страницу нет</em>',
 	'Footnotes' => 'Footnotes',
@@ -332,6 +334,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches' => 'Изменения наблюдаемых страниц',
 	'SeeListOfPages' => 'Список ваших страниц и страниц, которые вы редактировали.',
 	'AddToBookmarks' => 'Добавить в личное меню',
+	'RemoveFromBookmarks' => 'Удалить из личного меню',
+	'CantAddBookmarks' => 'вы должны быть зарегистрированы, чтобы работать с системой закладок.',
 	'YourBookmarks' => 'Ваше личное меню',
 	'YourLanguage' => 'Выберите язык',
 	'ShowSpaces' => 'Показывать пробелы в ВикиИменах',
@@ -343,6 +347,9 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'Ссылки на данную страницу есть на страницах',
 	'UnknownAction' => 'Неизвестное действие',
 	'MarkRead'		=> 'Отметить все как прочитанные',
+	'CurrentTime'	=> 'текущее время',
+	'Created'		=> 'создано',
+	'Modified'		=> 'редакция от',
 
 	'EditIcon' => 'правка',
 	'LinksTreeLevel4Warning' => 'Дерево ссылок не может иметь больше 4 уровней',
@@ -395,7 +402,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'Отредактировать',
 	'PageAlreadyExistsEditDenied' => 'Вы не можете отредактировать её.',
 
-	'RemoveFromBookmarks' => 'Удалить из личного меню',
 	'DontRedirect' => 'Не давать действию Redirect автоматически перенаправлять',
 	'SendWatchEmail' => 'Отсылать уведомления при обновлении наблюдаемых страниц',
 	'AllowIntercom' => 'Разрешить личные сообщения от пользователей системы',

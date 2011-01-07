@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre' => 'Voçê é ',
-	'YouArePanelLink' => 'Settings',
-	'YouArePanelAccount' => 'Conta Pessoal',
+	'AccountLink' => 'Settings',
+	'AccountText' => 'Conta Pessoal',
+	'AccountTip' => 'Account Settings',
 	'LogoutLink' => 'Desligar',
 	'LogoutButton' => 'Desligar',
 	'LogoutAreYouSure' => 'Quer mesmo desligar?',
@@ -249,6 +250,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo' => 'Esta acção não pode ser anulada.',
 
 	'PrintVersion' => 'Versão Impressora',
+	'PrintText' => 'Print',
 	'ReferringPages' => 'Páginas Referenciadoras',
 	'NoReferringPages' => '<em>Não existem Páginas Referenciadoras</em>',
 	'Footnotes' => 'Footnotes',
@@ -332,6 +334,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches' => 'Changes among watched pages',
 	'SeeListOfPages' => 'Veja uma lista das páginas que possui(MyPages) e das páginas que editou (MyChanges).',
 	'AddToBookmarks' => 'Adicionar página actual aos QuickLinks',
+	'RemoveFromBookmarks' => 'Remover dos favoritos',
+	'CantAddBookmarks' => 'You must be registered to work with the bookmarks system.',
 	'YourBookmarks' => 'Os seus QuickLinks',
 	'YourLanguage' => 'Seleccione Idioma',
 	'ShowSpaces' => 'Mostrar espaço em WikiNames',
@@ -343,6 +347,9 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'Esta página é referenciada por estas páginas',
 	'UnknownAction' => 'Unknown action',
 	'MarkRead'		=> 'Mark all as read',
+	'CurrentTime'	=> 'current time',
+	'Created'	=> 'created',
+	'Modified'	=> 'modified',
 
 	'EditIcon' => 'edit',
 	'LinksTreeLevel4Warning' => 'A árvore de Links não suporta mais de 4 niveis',
@@ -395,7 +402,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
 
-	'RemoveFromBookmarks' => 'Remover dos favoritos',
 	'DontRedirect' => 'Não permitir redireccionamento automático por acção de redirecionamento.',
 	'SendWatchEmail' => 'Enviar notificação por email quando alguém (excepto voçê) alterar a página que estiver a acompanhar',
 	'AllowIntercom' => 'Allow private messages from users of the system',

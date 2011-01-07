@@ -10,28 +10,38 @@ if (!isset($last_anchor))		$last_anchor = '';
 if (!isset($track))				$track = '';
 
 if ($_SESSION[$this->config['session_prefix'].'_'.'linktracking'] && $track)
+{
 	$this->track_link_to($page);
+}
 
-if (in_array($page, $this->context)) return;
+if (in_array($page, $this->context))
+{
+	return;
+}
 
-if ($page == $this->tag) return;
+if ($page == $this->tag)
+{
+	return;
+}
 
 $page_id = $this->get_page_id($page);
 
-if (! $this->has_access('read', $page_id))
+if (!$this->has_access('read', $page_id))
 {
 	if ($nowarning != 1) echo $this->get_translation('NoAccessToSourcePage');
 }
 else
 {
-	if (isset($_GET['revision_id']))
+	/*if (isset($_GET['revision_id']))
 	{
+		// ??? how this could construct a relation to the included pages - somehow absurd
 		$revision_id = $_GET['revision_id'];
 	}
 	else
 	{
 		$revision_id = '';
-	}
+	}*/
+	$revision_id = '';
 
 	if (!$inc_page = $this->load_page($page, 0, $revision_id))
 	{

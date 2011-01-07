@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre' => 'You are ',
-	'YouArePanelLink' => 'Settings',
-	'YouArePanelAccount' => 'Account',
+	'AccountLink' => 'Settings',
+	'AccountText' => 'Account',
+	'AccountTip' => 'Account Settings',
 	'LogoutLink' => 'Logout',
 	'LogoutButton' => 'Log out',
 	'LogoutAreYouSure' => 'Do you really want to log out?',
@@ -298,6 +299,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo' => 'This action cannot be undone.',
 
 	'PrintVersion' => 'Print version',
+	'PrintText' => 'Print',
 	'ReferringPages' => 'Referring pages',
 	'NoReferringPages' => '<em>There are no referring pages</em>',
 	'Footnotes' => 'Footnotes',
@@ -381,6 +383,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches' => 'Changes among watched pages',
 	'SeeListOfPages' => 'See a list of pages you own (MyPages) and pages you\'ve edited (MyChanges).',
 	'AddToBookmarks' => 'Add current page to Bookmarks',
+	'RemoveFromBookmarks' => 'Remove from bookmarks',
+	'CantAddBookmarks' => 'You must be registered to work with the bookmarks system.',
 	'YourBookmarks' => 'Your Bookmarks',
 	'YourLanguage' => 'Select language',
 	'ShowSpaces' => 'Show spaces in WikiNames',
@@ -392,6 +396,9 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'This page is referred to by these pages',
 	'UnknownAction' => 'Unknown action',
 	'MarkRead'		=> 'Mark all as read',
+	'CurrentTime'	=> 'current time',
+	'Created'		=> 'created',
+	'Modified'		=> 'modified',
 
 	'EditIcon' => 'edit',
 	'LinksTreeLevel4Warning' => 'Links tree does not support more than 4 levels',
@@ -445,7 +452,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
 
-	'RemoveFromBookmarks' => 'Remove from bookmarks',
 	'DontRedirect' => 'Do not allow automatic redirection by action Redirect.',
 	'SendWatchEmail' => 'Send notifying email when someone (except you) change any page you are watching',
 	'AllowIntercom' => 'Allow private messages from users of the system',

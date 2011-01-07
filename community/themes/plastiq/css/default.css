@@ -86,7 +86,7 @@ ul {
 	padding-left: 50px;
 	padding-right: 50px;
 }
-.debug, #debug li {
+.debug, #debug li, #debug pre {
 	font-size: 11px;
 	color: #ffffff;
 	font-family:"Lucida Console","Courier New",monospace;

@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre'				=> 'Du bist ',
-	'YouArePanelLink'		=> 'Einstellungen',
-	'YouArePanelAccount'	=> 'Konto',
+	'AccountLink'			=> 'Einstellungen',
+	'AccountText'			=> 'Konto',
+	'AccountTip'			=> 'Konto Einstellungen',
 	'LogoutLink'			=> 'Abmelden',
 	'LogoutButton'			=> 'Abmelden',
 	'LogoutAreYouSure'		=> 'Willst du dich wirklich abmelden?',
@@ -246,6 +247,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo'	=> 'Diese Aktion kann nicht rückgängig gemacht werden.',
 
 	'PrintVersion'			=> 'Druckversion',
+	'PrintText'				=> 'Drucken',
 	'ReferringPages'		=> 'referenzierende Seiten',
 	'NoReferringPages'		=> '<em>keine verweisenden Seiten</em>',
 	'Footnotes'				=> 'Fußnoten',
@@ -333,6 +335,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches'	=> 'Änderungen an den von dir beobachteten Seiten',
 	'SeeListOfPages'		=> 'Zeige Liste meiner Seiten (MeineSeiten) und die Seiten, die ich editiert haben (MeineAenderungen).',
 	'AddToBookmarks'		=> 'Füge aktuelle Seite zu Lesezeichen hinzu',
+	'RemoveFromBookmarks'	=> 'Entferne aktuelle Seite aus den Lesezeichen',
+	'CantAddBookmarks'		=> 'You must be registered to work with the bookmarks system.',
 	'YourBookmarks'			=> 'Deine Lesezeichen',
 	'YourLanguage'			=> 'Wähle Sprache',
 	'ShowSpaces'			=> 'Zeige Leerzeichen in WikiNamen',
@@ -344,6 +348,9 @@ $wacko_translation = array(
 	'AlertReferringPages'	=> 'Auf diese Seite wird von folgenden Seiten verwiesen',
 	'UnknownAction'			=> 'Unbekannte Aktion',
 	'MarkRead'				=> 'Als gelesen markieren',
+	'CurrentTime'			=> 'aktuelle Zeit',
+	'Created'				=> 'erstellt',
+	'Modified'				=> 'geändert',
 
 	'EditIcon'				=> 'Editieren',
 	'LinksTreeLevel4Warning'	=> 'die Baumansicht unterstützt nicht mehr als 4 Ebenen',
@@ -395,7 +402,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2'	=> 'editieren',
 	'PageAlreadyExistsEditDenied'	=> 'Du kannst sie nicht editieren',
 
-	'RemoveFromBookmarks'	=> 'Entferne aktuelle Seite aus den Lesezeichen',
 	'DontRedirect'			=> 'Keine automatische Weiterleitung erlauben, obwohl eine gesetzt ist.',
 	'SendWatchEmail'		=> 'Bestätigunsmail senden, wenn jemand (außer dir) Seiten verändert, die du beobachtest',
 	'AllowIntercom'			=> 'Erlaube persönliche Nachrichten von Nutzern des Systems',

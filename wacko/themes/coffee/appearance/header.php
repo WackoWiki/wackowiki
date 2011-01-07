@@ -94,7 +94,7 @@ else if ($this->has_access('write'))
 	src="<?php echo $this->config['theme_url'] ?>icons/user.gif"
 	width="12" height="12" border="0" style="vertical-align: baseline;"
 	alt="" /><?php echo $this->link($this->get_user_name()) ?></span><br />
-<span class="small">( <span class="nobr Tune"><?php echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), "", $this->get_translation('YouArePanelAccount'), 0); ?>
+<span class="small">( <span class="nobr Tune"><?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
 | <a
 	onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');"
 	href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span>

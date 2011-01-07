@@ -163,7 +163,7 @@ else if ($user = $this->get_user())
 	#echo "<h3>".$this->get_translation('UserSettings')."</h3>";
 
 	// BOOKMARKS
-	if (isset($_GET['bookmarks']) || isset($_POST['_user_bookmarks']))
+	if (isset($_GET['bookmarks']) || isset($_POST['_user_bookmarks']) )
 	{
 		echo "<h3>".$this->get_translation('UserSettings')." &raquo; ".$this->get_translation('Bookmarks')."</h3>";
 		echo "<ul class=\"menu\"><li><a href=\"".$this->href('', '', '')."\">".$this->get_translation('UserSettingsGeneral')."</a></li><li class=\"active\">".$this->get_translation('Bookmarks')."</li><li><a href=\"".$this->href('', '', 'extended')."\">".$this->get_translation('UserSettingsExtended')."</a></li></ul><br /><br />\n";
