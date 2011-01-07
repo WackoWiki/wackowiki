@@ -30,6 +30,13 @@ $wacko_translation = array(
 	'SessionDuration' => 'Длительность сессии',
 	'LoggedInAs' => 'Вы авторизованы в системе как ',
 
+	'ClearCookies' => 'Delete all cookies',
+	'BindSessionIp' => 'Bind session to the IP-address',// ''
+	'BindSessionIpOn' => 'enabled (the current IP',
+	'TrafficProtection' => 'Traffic Protection',
+	'SessionEnds' => 'The current session ends',
+	'LastVisit' => 'Last visit was recorded',
+
 	// other
 	'Guest' => 'Гость',
 	'Help' => 'Помощь',

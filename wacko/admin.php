@@ -37,16 +37,16 @@ $engine	= $init->engine();
 // register locale resources
 $init->engine('res');
 
-// reconnect securely in ssl mode
-if ($engine->config['ssl'] == true)
+// reconnect securely in tls mode
+if ($engine->config['tls'] == true)
 {
-	if ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($engine->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ))
+	if ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($engine->config['tls_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ))
 	{
-		$engine->redirect(str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->config['base_url']).'admin.php');
+		$engine->redirect(str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->config['base_url']).'admin.php');
 	}
 	else
 	{
-		$engine->config['base_url'] = str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->config['base_url']);
+		$engine->config['base_url'] = str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->config['base_url']);
 	}
 }
 
@@ -64,7 +64,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
 	$engine->delete_cookie('admin', true, true);
 	$engine->log(1, $engine->get_translation('LogAdminLogout', $engine->config['language']));
-	$engine->redirect(( $engine->config['ssl'] == true ? str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->href()) : $engine->href() ));
+	$engine->redirect(( $engine->config['tls'] == true ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href()) : $engine->href() ));
 	exit;
 }
 
@@ -112,11 +112,11 @@ if (isset($_POST['password']))
 {
 	if (hash('sha256', $_POST['password']) == $pwd)
 	{
-		$engine->set_session_cookie('admin', hash('sha256', $_POST['password']), '', ( $engine->config['ssl'] == true ? 1 : 0 ));
+		$engine->set_session_cookie('admin', hash('sha256', $_POST['password']), '', ( $engine->config['tls'] == true ? 1 : 0 ));
 		$_SESSION['created'] = time();
 		$_SESSION['last_activity'] = time();
 		$engine->log(1, $engine->get_translation('LogAdminLoginSuccess', $engine->config['language']));
-		$engine->redirect(( $engine->config['ssl'] == true ? str_replace('http://', 'https://'.($engine->config['ssl_proxy'] ? $engine->config['ssl_proxy'].'/' : ''), $engine->href('admin.php')) : $engine->href('admin.php') ));
+		$engine->redirect(( $engine->config['tls'] == true ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href('admin.php')) : $engine->href('admin.php') ));
 	}
 	else
 	{

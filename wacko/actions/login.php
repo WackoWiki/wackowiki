@@ -4,11 +4,11 @@
 $error = '';
 $output = '';
 
-// reconnect securely in ssl mode
-#if ($this->config['ssl'] == true && $this->config['ssl_implicit'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['ssl_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
-if ($this->config['ssl'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['ssl_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
+// reconnect securely in tls mode
+#if ($this->config['tls'] == true && $this->config['tls_implicit'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
+if ($this->config['tls'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
 {
-	$this->redirect(str_replace('http://', 'https://'.(!empty($this->config['ssl_proxy']) ? $this->config['ssl_proxy'].'/' : ''), $this->href('', $this->get_translation('LoginPage'), "goback=".stripslashes($_GET['goback']))));
+	$this->redirect(str_replace('http://', 'https://'.(!empty($this->config['tls_proxy']) ? $this->config['tls_proxy'].'/' : ''), $this->href('', $this->get_translation('LoginPage'), "goback=".stripslashes($_GET['goback']))));
 }
 
 // actions
@@ -51,10 +51,10 @@ else if ($user = $this->get_user())
 <?php
 	if ($user['session_time'] == true)
 	{
-		$output .= "Last visit was recorded <tt>". $this->get_time_string_formatted($user['session_time'])."</tt>.<br />";
+		$output .= $this->get_translation('LastVisit').' <tt>'. $this->get_time_string_formatted($user['session_time'])."</tt>.<br />";
 	}
 
-	$output .= "The current session ends <tt>";
+	$output .= $this->get_translation('SessionEnds').' <tt>';
 
 	$cookie = explode(';', $this->get_cookie('auth'));
 	// session expiry date
@@ -78,11 +78,11 @@ else if ($user = $this->get_user())
 	$output .= '<br />';
 
 	// Only allow your session to be used from this IP address.
-	$output .= "Bind session to the IP-address ". ( $user['validate_ip'] == 1 ? 'enabled (the current IP <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).".<br />";
+	$output .= $this->get_translation('BindSessionIp').' '. ( $user['validate_ip'] == 1 ? $this->get_translation('BindSessionIpOn').' <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).".<br />";
 
-	if ($this->config['ssl'] == true || $this->config['ssl_proxy'] == true)
+	if ($this->config['tls'] == true || $this->config['tls_proxy'] == true)
 	{
-		$output .= "Traffic Protection <tt>". ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' )."</tt>.";
+		$output .= $this->get_translation('TrafficProtection').' <tt>'. ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' )."</tt>.";
 	}
 
 	$this->set_message($output);
@@ -92,7 +92,7 @@ else if ($user = $this->get_user())
 			onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" />
   </p>
   <p>
-		<?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0); ?> | <a href="?action=clearcookies">Delete all cookies</a>
+		<?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0); ?> | <a href="?action=clearcookies"><?php echo $this->get_translation('ClearCookies'); ?></a>
   </p>
 </div>
 <?php
@@ -179,10 +179,10 @@ else
 
 					$this->log(3, str_replace('%1', $existing_user['user_name'], $this->get_translation('LogUserLoginOK', $this->config['language'])));
 
-					// run in ssl mode?
-					if ($this->config['ssl'] == true)
+					// run in tls mode?
+					if ($this->config['tls'] == true)
 					{
-						$this->config['base_url'] = str_replace('http://', 'https://'.($this->config['ssl_proxy'] ? $this->config['ssl_proxy'].'/' : ''), $this->config['base_url']);
+						$this->config['base_url'] = str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->config['base_url']);
 					}
 
 					if ($_POST['goback'] != '')
