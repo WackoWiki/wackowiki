@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre'      => 'Είσαι ο ',
-	'YouArePanelLink' => 'Settings',
-	'YouArePanelAccount' => 'Ο λογαριασμός μου',
+	'AccountLink' => 'Settings',
+	'AccountText' => 'Ο λογαριασμός μου',
+	'AccountTip' => 'Account Settings',
 	'LogoutLink'  => 'Αποσύνδεση',
 	'LogoutButton'  => 'Αποσύνδεση',
 	'LogoutAreYouSure'  => 'Είσαι σίγουρος;',
@@ -249,6 +250,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo' => 'Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.',
 
 	'PrintVersion' => 'Έκδοση προς εκτύπωση',
+	'PrintText' => 'Print',
 	'ReferringPages' => 'Σελίδες παραπομπών',
 	'NoReferringPages' => '<em>Δεν υπάρχει καμία σελίδα παραπομπής</em>',
 	'Footnotes' => 'Footnotes',
@@ -332,6 +334,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches' => 'Changes among watched pages',
 	'SeeListOfPages' => 'Δείτε μία λίστα των σελίδων που σας ανήκουν (MyPages) και των σελίδων που έχετε τροποποιήσει (MyChanges).',
 	'AddToBookmarks' => 'Προσθήκη της τρέχουσας σελίδας στα QuickLinks',
+	'RemoveFromBookmarks' => 'Αφαίρεση από τους σελιδοδείκτες',
+	'CantAddBookmarks' => 'You must be registered to work with the bookmarks system.',
 	'YourBookmarks' => 'Οι συντομεύσεις σας',
 	'YourLanguage' => 'Επέλεξε γλώσσα',
 	'ShowSpaces' => 'Εμφάνιση κενών στα WikiNames',
@@ -343,6 +347,9 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'Αυτή η σελίδα αναφέρεται από αυτές τις σελίδες',
 	'UnknownAction' => 'Άγνωστη ενέργεια',
 	'MarkRead'		=> 'Σημειώστε όλα τα ως αναγνωσμένα',
+	'CurrentTime'	=> 'current time',
+	'Created'		=> 'created',
+	'Modified'		=> 'modified',
 
 	'EditIcon' => 'edit',
 	'LinksTreeLevel4Warning' => 'Links tree does not support more than 4 levels',
@@ -395,7 +402,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
 
-	'RemoveFromBookmarks' => 'Αφαίρεση από τους σελιδοδείκτες',
 	'DontRedirect' => 'Να μην επιτρέπονται αυτόματες ανακατευθύνσεις από ενέργεια Ανακατεύθυνσης.',
 	'SendWatchEmail' => 'Απόστειλε ηλεκτρονικό μήνυμα ενημέρωσης όταν κάποιος <br /> (εκτός από εσένα) τροποποιεί τις σελίδες που παρακολουθείς',
 	'AllowIntercom' => 'Allow private messages from users of the system',

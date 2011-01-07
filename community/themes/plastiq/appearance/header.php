@@ -53,6 +53,7 @@ if ($this->method == 'edit')
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 $doubleclick = '';
+
 if ($user = $this->get_user())
 {
 	if ($user['doubleclick_edit'] == 1)
@@ -64,6 +65,7 @@ else if($this->has_access('write'))
 {
 	$doubleclick = true;
 }
+
 if ($doubleclick == true)
 {
 ?>
@@ -95,19 +97,18 @@ $user = '';
 
 if ($user = $this->get_user())
 {
-?>
-	id: <?php echo $this->get_user_name() ;?> &nbsp; <a href="<?php echo $this->href('', $this->config['settings_page']); ?>" title="Account Settings"><?php echo $this->get_translation('YouArePanelAccount'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->config['login_page']); ?>" title="parameters of current session">Session</a> &nbsp; <a onclick="return confirm('Do you really want to leave the system?');" href="<?php echo $this->href('', $this->config['login_page'], 'action=logout&amp;goback='.$this->slim_url($this->tag)); ?>" title="Logout">Logout</a><br />
+	echo 'id: '.$this->get_user_name() ;?> &nbsp; <a href="<?php echo $this->href('', $this->get_translation('AccountLink')); ?>" title="<?php echo $this->get_translation('AccountTip'); ?>"><?php echo $this->get_translation('AccountText'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->get_translation('LoginPage')); ?>" title="parameters of current session">Session</a> &nbsp; <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag)); ?>" title="Logout"><?php echo $this->get_translation('LogoutLink'); ?></a><br />
 <?php
 }
 else
 {
 ?>
-	id: <em><?php echo $this->get_translation('Guest') ;?></em> &nbsp; <a href="<?php echo $this->href('', $this->config['login_page']); ?>" title="log and log in">login</a> &nbsp; <a href="<?php echo $this->href('', $this->config['registration_page']); ?>" title="log in">Registration</a><br />
+	id: <em><?php echo $this->get_translation('Guest') ;?></em> &nbsp; <a href="<?php echo $this->href('', $this->get_translation('LoginPage')); ?>" title="log and log in"><?php echo $this->get_translation('LoginPage'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->get_translation('RegistrationPage')); ?>" title="log in">Registration</a><br />
 <?php
 }
 echo "\n";
 ?>
-							current time <?php echo date($this->config['time_format_seconds'].' '.$this->config['date_format'], time()); ?>
+							<?php echo $this->get_translation('CurrentTime').' '. date($this->config['time_format_seconds'].' '.$this->config['date_format'], time()); ?>
 						</div>
 					</td>
 				</tr>
@@ -144,20 +145,20 @@ echo "\n";
 	{
 		if (in_array($this->tag, $this->get_bookmark_links()))
 		{
-			echo '<div class="bookmark_out"><a href="'.$this->href('', '', 'removebookmark=yes').'" title="remove this page from the Bookmarks menu"><img src="'.$this->config['theme_url'].'images/spacer.gif" /></a></div>';
+			echo '<div class="bookmark_out"><a href="'.$this->href('', '', 'removebookmark=yes').'" title="'.$this->get_translation('RemoveFromBookmarks').'"><img src="'.$this->config['theme_url'].'images/spacer.gif" /></a></div>';
 		}
 		else
 		{
-			echo '<div class="bookmark_in"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="Add this page to the bookmark menu"><img src="'.$this->config['theme_url'].'images/spacer.gif" /></a></div>';
+			echo '<div class="bookmark_in"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'images/spacer.gif" /></a></div>';
 		}
 	}
 	else
 	{
-		echo '<div class="bookmark_in"><img src="'.$this->config['theme_url'].'images/spacer.gif" title="You must be registered to work with the system bookmarks" /></div>';
+		echo '<div class="bookmark_in"><img src="'.$this->config['theme_url'].'images/spacer.gif" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
 	}
 	echo "\n";
 
-	$wordsHeight = ( isset($this->keywords) ? 'height:42px;' : 'height:29px;' );
+	$wordsHeight = ( isset($this->categories) ? 'height:42px;' : 'height:29px;' );
 ?>
 									</div>
 								</td>
@@ -178,26 +179,46 @@ echo "\n";
 		if ($this->forum === true)
 		{
 			if ($this->user_is_owner())
+			{
 				echo 'Thread poster: You, ';
+			}
 			else if ($owner = $this->get_page_owner())
-				echo 'By topic: '.( $owner == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$owner).'">'.$owner.'</a>' ).', ';
+			{
+				echo 'By topic: '.( $owner == GUEST
+					? '<em>'.$this->get_translation('Guest').'</em>'
+					: '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$owner).'">'.$owner.'</a>'
+				).', ';
+			}
 
-			if ($this->page['created'] != SQL_NULLDATE) echo 'Theme open '.$this->get_time_string_formatted($this->page['created']);
+			if ($this->page['created'] != SQL_NULLDATE)
+			{
+				echo 'Theme open '.$this->get_time_string_formatted($this->page['created']);
+			}
 		}
 		else
 		{
 			if ($this->user_is_owner())
-				echo 'Owner: You ';
+			{
+				echo $this->get_translation('Owner').': '.$this->get_translation('YouAreOwner');
+			}
 			else if ($owner = $this->get_page_owner())
-				echo 'Owner: '.( $owner == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$owner).'">'.$owner.'</a>' ).' ';
+			{
+				echo $this->get_translation('Owner').': '.( $owner == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$owner).'">'.$owner.'</a>' ).' ';
+			}
 			else
+			{
 				echo ( substr($this->tag, 0, strlen($this->config['news_cluster'])) == $this->config['news_cluster']
-					? 'Holder No '
-					: '<a href="'.$this->href('claim').'">Possession</a> ' );
+					? $this->get_translation('Nobody').' '
+					: '<a href="'.$this->href('claim').'">'.$this->get_translation('TakeOwnership').'</a> '
+				);
+			}
 
-			if ($this->page['created'] != SQL_NULLDATE) echo '(created '.$this->get_time_string_formatted($this->page['created']).'), ';
+			if ($this->page['created'] != SQL_NULLDATE)
+			{
+				echo '('.$this->get_translation('Created').' '.$this->get_time_string_formatted($this->page['created']).'), ';
+			}
 
-			echo 'modified '.$this->get_time_string_formatted($this->page['modified']).' ('.$this->get_translation('By').': '.( $this->page['user_id'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $this->page['user_name'] == $this->get_user_name() ? 'You' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>' ) ).')';
+			echo $this->get_translation('Modified').' '.$this->get_time_string_formatted($this->page['modified']).' ('.$this->get_translation('By').': '.( $this->page['user_id'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $this->page['user_name'] == $this->get_user_name() ? 'You' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>' ) ).')';
 		}
 	}
 	echo "\n";
@@ -218,7 +239,7 @@ echo "\n";
 				?><a href="<?php echo $this->href('watch') ?>" title="monitor homepage">Watch</a> &nbsp;&nbsp; <?php
 			}
 		}
-		?><a href="<?php echo $this->href('print') ?>" title="Print">Print</a><?php
+		?><a href="<?php echo $this->href('print') ?>" title="Print"><?php echo $this->get_translation('PrintText'); ?></a><?php
 	}
 	echo "\n";
 ?>
@@ -226,19 +247,22 @@ echo "\n";
 									</tr>
 								</table>
 <?php
-	if (isset($this->keywords))
+	if (isset($this->categories))
 	{
-		echo '<div style="white-space:normal;">Categories: ';
-		foreach ($this->keywords as $word)
+		$i = '';
+		echo '<div style="white-space:normal;">'.$this->get_translation('Categories').': ';
+
+		foreach ($this->categories as $word)
 		{
-			if ($i++ > 0) echo ",\n";
-			echo '<a href="'.$this->href('', $this->config['search_page'], 'filter=pages&amp;keywords='.rawurlencode($word)).'">'.strtolower($word).'</a>';
+			if ($i++ > 0) echo ", ";
+			echo '<a href="'.$this->href('', $this->get_translation('TextSearchPage'), 'filter=pages&amp;keywords='.rawurlencode($word)).'">'.strtolower($word).'</a>';
 		}
+
 		echo '</div>';
 	}
 ?>
 								<div class="path" title="Path to current document">
-									<a href="/"><?php echo trim($this->config['base_url'], '/'); ?></a>/<?php echo $this->get_page_path() ?> <a title="look like in other documents" href="<?php echo $this->href('', $this->config['search_page'], 'phrase='.urlencode($this->get_page_title())); ?>">&gt;&gt;&gt;</a>
+									<a href="/"><?php echo trim($this->config['base_url'], '/'); ?></a>/<?php echo $this->get_page_path() ?> <a title="<?php echo $this->get_translation('SearchTitleTip'); ?>" href="<?php echo $this->href('', $this->get_translation('TextSearchPage'), 'phrase='.urlencode($this->get_page_title())); ?>">&gt;&gt;&gt;</a>
 								</div>
 							</div>
 						</div>

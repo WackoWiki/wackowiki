@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre' => 'Tere tulemast, ',
-	'YouArePanelLink' => 'Settings',
-	'YouArePanelAccount' => 'Minu andmed',
+	'AccountLink' => 'Settings',
+	'AccountText' => 'Minu andmed',
+	'AccountTip' => 'Account Settings',
 	'LogoutLink' => 'Logout',
 	'LogoutButton' => 'Logi välja',
 	'LogoutAreYouSure' => 'Kas oled kindel, et tahad välja logida?',
@@ -249,6 +250,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo' => 'See tegevus pole taastatav.',
 
 	'PrintVersion' => 'Prinditav versioon',
+	'PrintText' => 'Print',
 	'ReferringPages' => 'Viidatud lehed',
 	'NoReferringPages' => '<em>Viidatud lehti pole</em>',
 	'Footnotes' => 'Footnotes',
@@ -332,6 +334,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches' => 'Changes among watched pages',
 	'SeeListOfPages' => 'Vaade su oma lehtede nimekirjale (MinuLehed) ja lehtedele mida sa oled redigeerinud (MinuMuudatused).',
 	'AddToBookmarks' => 'Lisa see leht kiirvalikutesse',
+	'RemoveFromBookmarks' => 'Eemalda kiirvalikute hulgast',
+	'CantAddBookmarks' => 'You must be registered to work with the bookmarks system.',
 	'YourBookmarks' => 'Sinu kiirvalikud',
 	'YourLanguage' => 'Vali keel',
 	'ShowSpaces' => 'Näita WikiNimedes tühikuid',
@@ -343,6 +347,9 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'Sellele lehele viidavad järgmised lehed',
 	'UnknownAction' => 'Unknown action',
 	'MarkRead'		=> 'Mark all as read',
+	'CurrentTime'	=> 'current time',
+	'Created'		=> 'created',
+	'Modified'		=> 'modified',
 
 	'EditIcon' => 'redigeeri',
 	'LinksTreeLevel4Warning' => 'Ühenduste puus on võimalik maksimaalselt 4 taset',
@@ -395,7 +402,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
 
-	'RemoveFromBookmarks' => 'Eemalda kiirvalikute hulgast',
 	'DontRedirect' => 'Ära võimalda automaatset ümbersuunamist',
 	'SendWatchEmail' => 'Saada e-postiga teade, kui keegi (väljaarvatud sa ise) muudab neid lehti mida sa vaatad',
 	'AllowIntercom' => 'Allow private messages from users of the system',

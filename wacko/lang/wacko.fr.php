@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre' => 'Vous êtes ',
-	'YouArePanelLink' => 'Préférences',
-	'YouArePanelAccount' => 'Mon compte',
+	'AccountLink' => 'Préférences',
+	'AccountText' => 'Mon compte',
+	'AccountTip' => 'Account Settings',
 	'LogoutLink' => 'Déconnexion',
 	'LogoutButton' => 'Vous déconnecter',
 	'LogoutAreYouSure' => 'Êtes-vous sûr de vouloir vous déconnecter&nbsp;?',
@@ -249,6 +250,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo' => 'Cette action ne peut être annulée.',
 
 	'PrintVersion' => 'Version pour impression',
+	'PrintText' => 'Print',
 	'ReferringPages' => 'Pages qui renvoient à celle-ci',
 	'NoReferringPages' => '<em>Aucune page ne renvoie à celle-ci</em>',
 	'Footnotes' => 'Footnotes',
@@ -332,6 +334,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches' => 'Modifications parmi les pages surveillées',
 	'SeeListOfPages' => 'Voir la liste des pages dont vous êtes le propriétaire (MesPages) et les pages que vous avez modifiées (MesModifications).',
 	'AddToBookmarks' => 'Ajouter la page courante aux Signets',
+	'RemoveFromBookmarks' => 'Supprimer des signets',
+	'CantAddBookmarks' => 'You must be registered to work with the bookmarks system.',
 	'YourBookmarks' => 'Vos Signets&nbsp;',
 	'YourLanguage' => 'Choisissez votre langue&nbsp;',
 	'ShowSpaces' => 'Insérer des espaces dans les NomWiki&nbsp;',
@@ -343,6 +347,9 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'Cette page est référencée depuis les pages suivantes ',
 	'UnknownAction' => 'Action inconnue',
 	'MarkRead'		=> 'Mark all as read',
+	'CurrentTime'	=> 'heure actuelle',
+	'Created'		=> 'created',
+	'Modified'		=> 'modified',
 
 	'EditIcon' => '&Eacute;dition',
 	'LinksTreeLevel4Warning' => 'L&rsquo;arbre des liens ne supporte que 4 niveaux',
@@ -395,7 +402,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'l&rsquo;éditer',
 	'PageAlreadyExistsEditDenied' => 'Vous ne pouvez pas l&rsquo;éditer.',
 
-	'RemoveFromBookmarks' => 'Supprimer des signets',
 	'DontRedirect' => 'Ne pas autoriser la redirection automatique par l&rsquo;action de redirection {{Redirect}}&nbsp;',
 	'SendWatchEmail' => 'Envoyer un courriel de notification quand quelqu&rsquo;un<br /> (à part vous) a modifié une page que vous surveillez&nbsp;',
 	'AllowIntercom' => 'Autoriser les autres utilisateurs à vous envoyer des messages privés',

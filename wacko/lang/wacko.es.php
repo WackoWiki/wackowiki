@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre' => 'Eres ',
-	'YouArePanelLink' => 'Preferencias',
-	'YouArePanelAccount' => 'Mi Cuenta',
+	'AccountLink' => 'Preferencias',
+	'AccountText' => 'Mi Cuenta',
+	'AccountTip' => 'Account Settings',
 	'LogoutLink' => 'Desconectar',
 	'LogoutButton' => 'Desconectar',
 	'LogoutAreYouSure' => 'Estás seguro de querer desconectarte?',
@@ -249,6 +250,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo' => 'Esta acción es definitiva!',
 
 	'PrintVersion' => 'Versión para impresora',
+	'PrintText' => 'Print',
 	'ReferringPages' => 'Páginas referenciadas',
 	'NoReferringPages' => '<em>No hay páginas referenciadas</em>',
 	'Footnotes' => 'Footnotes',
@@ -332,6 +334,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches' => 'Changes among watched pages',
 	'SeeListOfPages' => 'Ver lista de tus páginas (MyPages MisPáginas) y páginas cambiadas por tí (MyChanges MisCambios).',
 	'AddToBookmarks' => 'Añade esta página a tus favoritos',
+	'RemoveFromBookmarks' => 'Eliminar de los favoritos',
+	'CantAddBookmarks' => 'You must be registered to work with the bookmarks system.',
 	'YourBookmarks' => 'Tus Favoritos',
 	'YourLanguage' => 'Selecciona tu idioma',
 	'ShowSpaces' => 'Mostrar los WikiNames con espacios',
@@ -343,6 +347,9 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'Esta página esta vinculada de estas páginas',
 	'UnknownAction' => 'Unknown action',
 	'MarkRead'		=> 'Mark all as read',
+	'CurrentTime'	=> 'current time',
+	'Created'		=> 'created',
+	'Modified'		=> 'modified',
 
 	'EditIcon' => 'editar',
 	'LinksTreeLevel4Warning' => 'El arbol de vínculos no soporta mas de 4 niveles',
@@ -395,7 +402,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
 
-	'RemoveFromBookmarks' => 'Eliminar de los favoritos',
 	'DontRedirect' => 'No autorizar la redirección automática.',
 	'SendWatchEmail' => 'Enviar un mail de notificación cuando alguien (excepto tu) cambie la página que vigilas',
 	'AllowIntercom' => 'Allow private messages from users of the system',

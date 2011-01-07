@@ -92,7 +92,7 @@ else if ($user = $this->get_user())
 			onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" />
   </p>
   <p>
-		<?php echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), '', $this->get_translation('YouArePanelAccount'), 0); ?> | <a href="?action=clearcookies">Delete all cookies</a>
+		<?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0); ?> | <a href="?action=clearcookies">Delete all cookies</a>
   </p>
 </div>
 <?php

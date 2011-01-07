@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre' => 'Du er ',
-	'YouArePanelLink' => 'Indstillinger',
-	'YouArePanelAccount' => 'Min konto',
+	'AccountLink' => 'Indstillinger',
+	'AccountText' => 'Min konto',
+	'AccountTip' => 'Account Settings',
 	'LogoutLink' => 'Log af',
 	'LogoutButton' => 'Log af',
 	'LogoutAreYouSure' => 'Er du sikker på, at du vil logge af?',
@@ -249,6 +250,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo' => 'Denne handling kan du ikke fortryde!',
 
 	'PrintVersion' => 'Udskrivningsversion',
+	'PrintText' => 'Udskrivning',
 	'ReferringPages' => 'Henvisningssider',
 	'NoReferringPages' => '<em>Der er ingen henvisninger.</em>',
 	'Footnotes' => 'Footnotes',
@@ -332,6 +334,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches' => 'Changes among watched pages',
 	'SeeListOfPages' => 'Se en oversigt over sider du ejer (MyPages) og sider du har ændret (MyChanges).',
 	'AddToBookmarks' => 'Tilføj til HurtigLinks',
+	'RemoveFromBookmarks' => 'Fjern fra bookmarks',
+	'CantAddBookmarks' => 'You must be registered to work with the bookmarks system.',
 	'YourBookmarks' => 'Dine HurtigkLinks',
 	'YourLanguage' => 'Vælg sprog',
 	'ShowSpaces' => 'Vis mellemrum i WikiNavne',
@@ -343,6 +347,9 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'Følgende sider henviser til denne',
 	'UnknownAction' => 'Unknown action',
 	'MarkRead'		=> 'Mark all as read',
+	'CurrentTime'	=> 'current time',
+	'Created'		=> 'created',
+	'Modified'		=> 'modified',
 
 	'EditIcon' => 'ret',
 	'LinksTreeLevel4Warning' => 'Vi kan kun klare fire niveauer',
@@ -395,7 +402,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
 
-	'RemoveFromBookmarks' => 'Fjern fra bookmarks',
 	'DontRedirect' => 'Tillad ikke viderestilling ved handlingen Viderestil.',
 	'SendWatchEmail' => 'Send notifikationsmail når nogen ændrer en side du overvåger.',
 	'AllowIntercom' => 'Allow private messages from users of the system',

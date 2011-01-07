@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre' => '',
-	'YouArePanelLink' => 'Ustawienia',
-	'YouArePanelAccount' => 'Moje konto',
+	'AccountLink' => 'Ustawienia',
+	'AccountText' => 'Moje konto',
+	'AccountTip' => 'Account Settings',
 	'LogoutLink'  => 'Wyloguj',
 	'LogoutButton'  => 'Wyloguj',
 	'LogoutAreYouSure'  => 'Czy na pewno chcesz siê wylogowaæ?',
@@ -249,6 +250,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo' => 'UWAGA: Ta czynno¶æ nie mo¿e zostaæ cofniêta!',
 
 	'PrintVersion' => 'Wersja do druku',
+	'PrintText' => 'Print',
 	'ReferringPages' => 'Dokumenty Wiki, zawieraj±ce odno¶nik tej strony',
 	'NoReferringPages' => '<em>W tej chwili ¿aden dokument nie zawiera odno¶nika do tej strony</em>',
 	'Footnotes' => 'Footnotes',
@@ -332,6 +334,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches' => 'Changes among watched pages',
 	'SeeListOfPages' => 'Wy¶wietl listê stron, których jeste¶ autorem (MyPages) lub ostatnio by³y edytowane przez Ciebie (MyChanges).',
 	'AddToBookmarks' => 'Dodaj bie¿±c± stronê do listy szybkiego dostêpu',
+	'RemoveFromBookmarks' => 'Usuñ z listy szybkiego dostêpu',
+	'CantAddBookmarks' => 'You must be registered to work with the bookmarks system.',
 	'YourBookmarks' => 'Lista szybkiego dostêpu',
 	'YourLanguage' => 'Zmieñ jêzyk',
 	'ShowSpaces' => 'Wy¶wietlaj NazwyWiki z odstêpem',
@@ -343,6 +347,9 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'Do tej strony odwo³uj± siê nastêpuj±ce dokumenty',
 	'UnknownAction' => 'Unknown action',
 	'MarkRead'		=> 'Mark all as read',
+	'CurrentTime'	=> 'current time',
+	'Created'		=> 'created',
+	'Modified'		=> 'modified',
 
 	'EditIcon' => 'edytuj',
 	'LinksTreeLevel4Warning' => 'Drzewo odno¶ników nie obs³uguje zagnie¿d¿ania powy¿ej 4 poziomów',
@@ -395,7 +402,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
 
-	'RemoveFromBookmarks' => 'Usuñ z listy szybkiego dostêpu',
 	'DontRedirect' => 'Wy³±cz funkcjê automatycznego przekierowania.',
 	'SendWatchEmail' => 'Wy¶lij powiadomienie, gdy kto¶ (poza Tob±) zmieni zawarto¶æ obserwowanych stron.',
 	'AllowIntercom' => 'Allow private messages from users of the system',

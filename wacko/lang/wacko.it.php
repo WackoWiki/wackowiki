@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre' => 'Tu sei ',
-	'YouArePanelLink' => 'Settings',
-	'YouArePanelAccount' => 'Account',
+	'AccountLink' => 'Settings',
+	'AccountText' => 'Account',
+	'AccountTip' => 'Account Settings',
 	'LogoutLink'  => 'Disconnessione',
 	'LogoutButton' => 'Disconnessione',
 	'LogoutAreYouSure' => 'Vuoi davvero sconnetterti?',
@@ -249,6 +250,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo' => 'Questa azione non può essere annullata.',
 
 	'PrintVersion' => 'Versione di stampa',
+	'PrintText' => 'Print',
 	'ReferringPages' => 'Pagine di riferimento',
 	'NoReferringPages' => '<em>Non vi sono pagine di riferimento</em>',
 	'Footnotes' => 'Footnotes',
@@ -332,6 +334,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches' => 'Changes among watched pages',
 	'SeeListOfPages' => 'Vedi l\'elenco delle pagine di tua proprietà (MiePagine) e da te editate (MieModifiche).',
 	'AddToBookmarks' => 'Aggiungi pagina corrente ai QuickLink',
+	'RemoveFromBookmarks' => 'Rimuovere dai segnalibri',
+	'CantAddBookmarks' => 'You must be registered to work with the bookmarks system.',
 	'YourBookmarks' => 'I tuoi QuickLink',
 	'YourLanguage' => 'Scegli la lingua',
 	'ShowSpaces' => 'Mostra gli spazi nei NomiWiki',
@@ -343,6 +347,9 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'La pagina è richiamata da queste altre pagine',
 	'UnknownAction' => 'Sconosciuto azione',
 	'MarkRead'		=> 'Mark all as read',
+	'CurrentTime'	=> 'current time',
+	'Created'		=> 'created',
+	'Modified'		=> 'modified',
 
 	'EditIcon' => 'edizione',
 	'LinksTreeLevel4Warning' => ' L\'albero dei link supporta al massimo 4 livelli',
@@ -395,7 +402,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
 
-	'RemoveFromBookmarks' => 'Rimuovere dai segnalibri',
 	'DontRedirect' => 'Non consentire il reindirizzo automatico dall\'azione di Reindirizzo.',
 	'SendWatchEmail' => 'Spedisci una mail di notifica quando qualcuno (tranne te) modifica una pagina da te  controllata',
 	'AllowIntercom' => 'Allow private messages from users of the system',

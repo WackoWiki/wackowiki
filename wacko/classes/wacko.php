@@ -4524,7 +4524,7 @@ class Wacko
 		if (!empty($_GET['addbookmark']) && $user)
 		{
 			// writing bookmark
-			$bookmark = '(('.$this->tag.' '.$this->get_page_title().($user['lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))';
+			$bookmark = '(('.$this->tag.' '.($this->get_page_title() ? $this->get_page_title() : $this->tag).($user['lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))';
 
 			if (!in_array($bookmark, $bookmarks))
 			{

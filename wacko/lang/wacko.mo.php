@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre' => 'Voi ',
-	'YouArePanelLink' => 'Settings',
-	'YouArePanelAccount' => 'Account',
+	'AccountLink' => 'Settings',
+	'AccountText' => 'Account',
+	'AccountTip' => 'Account Settings',
 	'LogoutLink' => 'Iesire',
 	'LogoutAreYouSure' => 'Iesire din sistem?',
 	'LogoutButton' => 'Iesire din sistem',
@@ -250,6 +251,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo' => 'Lichidarea nu poate fi oprita!',
 
 	'PrintVersion' => 'Versiune pentru imprimare',
+	'PrintText' => 'Print',
 	'ReferringPages' => 'Paginile, ce se adreseaza la pagina data',
 	'NoReferringPages' => '<em>Referinte la pagina data nu sunt</em>',
 	'Footnotes' => 'Footnotes',
@@ -335,6 +337,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches' => 'Changes among watched pages',
 	'SeeListOfPages' => 'Lista paginilor voastre, shi lista paginilor kare lea-tzi redactat.',
 	'AddToBookmarks' => 'Adauga in meniul personal',
+	'RemoveFromBookmarks' => 'Удалить из личного меню',
+	'CantAddBookmarks' => 'You must be registered to work with the bookmarks system.',
 	'YourBookmarks' => 'Meniul dumneavoastra personal',
 	'YourLanguage' => 'Alegetzi limba',
 	'ShowSpaces' => 'Arata spatziile libere in в ВикиИменах',
@@ -346,6 +350,9 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'Referintele la pagina data sunt pe paginile',
 	'UnknownAction' => 'Unknown action',
 	'MarkRead'		=> 'Mark all as read',
+	'CurrentTime'	=> 'current time',
+	'Created'		=> 'created',
+	'Modified'		=> 'modified',
 
 	'EditIcon' => 'editare',
 	'LinksTreeLevel4Warning' => 'Дерево ссылок не может иметь больше 4 уровней',
@@ -398,7 +405,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
 
-	'RemoveFromBookmarks' => 'Удалить из личного меню',
 	'DontRedirect' => 'Не давать действию Redirect автоматически перенаправлять',
 	'SendWatchEmail' => 'Отсылать уведомления при обновлении наблюдаемых Вами страниц',
 	'AllowIntercom' => 'Allow private messages from users of the system',

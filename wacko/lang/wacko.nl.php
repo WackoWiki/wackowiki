@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre' => 'Jij bent ',
-	'YouArePanelLink' => 'Instellingen',
-	'YouArePanelAccount' => 'Mijn gebruiker',
+	'AccountLink' => 'Instellingen',
+	'AccountText' => 'Mijn gebruiker',
+	'AccountTip' => 'Account Settings',
 	'LogoutLink' => 'Uitloggen',
 	'LogoutButton' => 'Log uit',
 	'LogoutAreYouSure' => 'Weet u zeker dat u wilt uitloggen ?',
@@ -249,6 +250,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo' => 'Deze handeling kan niet ongedaan worden gemaakt.',
 
 	'PrintVersion' => 'Print versie',
+	'PrintText' => 'Print',
 	'ReferringPages' => 'Verwijzende pagina\'s',
 	'NoReferringPages' => '<em>Er zijn geen verwijzende pagina\'s.</em>',
 	'Footnotes' => 'Footnotes',
@@ -332,6 +334,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches' => 'Changes among watched pages',
 	'SeeListOfPages' => 'Bekijk een lijst van pagina\'s waarvan u eigenaar bent (MyPages) en pagina\'s die u heeft gewijzigd (MyChanges).',
 	'AddToBookmarks' => 'Voeg de huidige pagina toe aan uw QuickLinks',
+	'RemoveFromBookmarks' => 'Verwijder uit bookmarks',
+	'CantAddBookmarks' => 'You must be registered to work with the bookmarks system.',
 	'YourBookmarks' => 'Uw QuickLinks',
 	'YourLanguage' => 'Selecteer taal',
 	'ShowSpaces' => 'Toon spaties in WikiNames',
@@ -343,6 +347,9 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'Voor deze pagina zijn er verwijzingen vanaf de volgende pagina',
 	'UnknownAction' => 'Unknown action',
 	'MarkRead'		=> 'Mark all as read',
+	'CurrentTime'	=> 'current time',
+	'Created'		=> 'created',
+	'Modified'		=> 'modified',
 
 	'EditIcon' => 'Bewerk',
 	'LinksTreeLevel4Warning' => 'Verwijzingenboom ondersteunt niet meer dan 4 niveaus',
@@ -395,7 +402,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
 
-	'RemoveFromBookmarks' => 'Verwijder uit bookmarks',
 	'DontRedirect' => 'Sta automatische doorverwijzing niet toe.',
 	'SendWatchEmail' => 'Stuur een e-mail wanneer iemand (behalve uzelf) een pagina die u in de gaten houdt verandert.',
 	'AllowIntercom' => 'Allow private messages from users of the system',

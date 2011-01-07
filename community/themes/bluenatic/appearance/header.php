@@ -102,7 +102,7 @@ else if($this->has_access('write'))
 			<?php if($user = $this->get_user()) { ?>
 			<div class="user">
 				<?php echo $this->link($this->get_user_name()); ?>
-				<small>( <?php echo $this->compose_link_to_page($this->get_translation('YouArePanelLink'), "", $this->get_translation('YouArePanelAccount'), 0); ?> |
+				<small>( <?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?> |
 				<a href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a> )</small>
 			</div>
 			<?php } ?>

@@ -32,11 +32,11 @@ else
 
 		if ($useemptystring == 1)
 		{
-			$splitexpr = "|<br />[\n\r ]*<br />|";
+			$splitexpr = '|<br />[\n\r ]*<br />|';
 		}
 
-		$lines = preg_split($splitexpr,$strings);
-		$lines = array_values(array_filter( $lines, "trim"));
+		$lines = preg_split($splitexpr, $strings);
+		$lines = array_values(array_filter($lines, 'trim'));
 		srand ((double) microtime() * 1000000);
 		echo $lines[rand(0, count($lines) - 1)];
 	};

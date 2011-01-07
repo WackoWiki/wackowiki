@@ -3,8 +3,9 @@
 $wacko_translation = array(
 	// logged in panel
 	'YouAre' => 'Вие сте ',
-	'YouArePanelLink' => 'Settings',
-	'YouArePanelAccount' => 'Личен профил',
+	'AccountLink' => 'Settings',
+	'AccountText' => 'Личен профил',
+	'AccountTip' => 'Account Settings',
 	'LogoutLink' => 'Изход',
 	'LogoutButton' => 'Изход от системата',
 	'LogoutAreYouSure' => 'Излизате ли от системата?',
@@ -249,6 +250,7 @@ $wacko_translation = array(
 	'ThisActionHavenotUndo' =>'Изтриването не може да се отмени.',
 
 	'PrintVersion' => 'Версия за печат',
+	'PrintText' => 'Версия за печат',
 	'ReferringPages' => 'Страници, препращащи на дадената',
 	'NoReferringPages' => '<em>Няма препратки на тази страница</em>',
 	'Footnotes' => 'Footnotes',
@@ -332,6 +334,8 @@ $wacko_translation = array(
 	'ListMyChangesWatches' => 'Changes among watched pages',
 	'SeeListOfPages' => 'Списък на Вашите страници и тези, които сте редактирали.',
 	'AddToBookmarks' => 'Добави в личното меню',
+	'RemoveFromBookmarks' => 'Изтрий от личното меню',
+	'CantAddBookmarks' => 'You must be registered to work with the bookmarks system.',
 	'YourBookmarks' => 'Вашето лично меню',
 	'YourLanguage' => 'Изберете език',
 	'ShowSpaces' => 'Покажи празните символи в УикиИмента',
@@ -343,6 +347,9 @@ $wacko_translation = array(
 	'AlertReferringPages' => 'Препратка на дадената страница е на страница',
 	'UnknownAction' => 'Unknown action',
 	'MarkRead'		=> 'Mark all as read',
+	'CurrentTime'	=> 'current time',
+	'Created'		=> 'created',
+	'Modified'		=> 'modified',
 
 	'EditIcon' => 'редактиране',
 	'LinksTreeLevel4Warning' => 'Линковете са макс. 4 нива',
@@ -395,7 +402,6 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
 
-	'RemoveFromBookmarks' => 'Изтрий от личното меню',
 	'DontRedirect' => 'Забрани действие Redirect автоматично пренасочване',
 	'SendWatchEmail' => 'Email при промяна на наблюдаваните страници',
 	'AllowIntercom' => 'Allow private messages from users of the system',
