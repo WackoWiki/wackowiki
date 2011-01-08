@@ -6,7 +6,7 @@ $pollsObj = new Polls($this);
 
 // polls for moderation
 echo '<table cellspacing="3" class="formation">';
-$list = $pollsObj->GetPollsList('moderation');
+$list = $pollsObj->get_polls_list('moderation');
 if (empty($list))
 {
 	echo '<tr><th>'.$this->get_translation('PollsModeration').'</th></tr>';
@@ -24,7 +24,7 @@ else
 			echo '<td valign="top">'.$user.'</td>';
 		echo '</tr>';
 		echo '<tr>';
-			$vars	= $pollsObj->GetPollVars($row['poll_id']);
+			$vars	= $pollsObj->get_poll_vars($row['poll_id']);
 			echo '<td></td>';
 			echo '<td><table>';
 			foreach ($vars as $var)

@@ -40,10 +40,10 @@ $b = $_GET['b'];
 // If asked, call original diff
 if ($this->has_access('read'))
 {
-	$pageA = handler_diff_load_page_by_id($this, $b);
-	$pageB = handler_diff_load_page_by_id($this, $a);
+	$page_a = handler_diff_load_page_by_id($this, $b);
+	$page_b = handler_diff_load_page_by_id($this, $a);
 
-	if ($this->has_access('read', $pageA['page_id']) && $this->has_access('read', $pageB['page_id']) )
+	if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $page_b['page_id']) )
 	{
 		if (isset($_GET['source']))
 		{
@@ -55,15 +55,15 @@ if ($this->has_access('read'))
 			// This is a really cheap way to do it.
 
 			// prepare bodies
-			$bodyA = explode("\n", $pageB['body']);
-			$bodyB = explode("\n", $pageA['body']);
+			$body_a = explode("\n", $page_b['body']);
+			$body_b = explode("\n", $page_a['body']);
 
-			$added = array_diff($bodyA, $bodyB);
-			$deleted = array_diff($bodyB, $bodyA);
+			$added = array_diff($body_a, $body_b);
+			$deleted = array_diff($body_b, $body_a);
 
 			$output .=
-			str_replace('%1', "<a href=\"".$this->href('', '', ($b != -1 ? 'revision_id='.$pageA['revision_id'] : ''))."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
-			str_replace('%2', "<a href=\"".$this->href('', '', ($a != -1 ? 'revision_id='.$pageB['revision_id'] : ''))."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
+			str_replace('%1', "<a href=\"".$this->href('', '', ($b != -1 ? 'revision_id='.$page_a['revision_id'] : ''))."\">".$this->get_time_string_formatted($page_a['modified'])."</a>",
+			str_replace('%2', "<a href=\"".$this->href('', '', ($a != -1 ? 'revision_id='.$page_b['revision_id'] : ''))."\">".$this->get_time_string_formatted($page_b['modified'])."</a>",
 			str_replace('%3', $this->compose_link_to_page($this->tag, "", "", 0),
 			"<div class=\"diffinfo\">".$this->get_translation('Comparison'))))."</div><br />\n";
 
@@ -99,49 +99,49 @@ if ($this->has_access('read'))
 			// load pages
 
 			// extract text from bodies
-			$textA = $pageA['body'];
-			$textB = $pageB['body'];
+			$text_a = $page_a['body'];
+			$text_b = $page_b['body'];
 
-			$sideA = new Side($textA);
-			$sideB = new Side($textB);
+			$side_a = new Side($text_a);
+			$side_b = new Side($text_b);
 
-			$bodyA = '';
-			$sideA->split_file_into_words($bodyA);
+			$body_a = '';
+			$side_a->split_file_into_words($body_a);
 
-			$bodyB = '';
-			$sideB->split_file_into_words($bodyB);
+			$body_b = '';
+			$side_b->split_file_into_words($body_b);
 
 			// diff on these two file
-			$diff = new Diff(explode("\n", $bodyA), explode("\n", $bodyB));
+			$diff = new Diff(explode("\n", $body_a), explode("\n", $body_b));
 
 			// format output
 			$fmt = new DiffFormatter();
 
-			$sideO = new Side($fmt->format($diff));
+			$side_o = new Side($fmt->format($diff));
 
 			$resync_left = 0;
 			$resync_right = 0;
 
-			$count_total_right = $sideB->getposition();
+			$count_total_right = $side_b->getposition();
 
-			$sideA->init();
-			$sideB->init();
+			$side_a->init();
+			$side_b->init();
 
 			$output = '';
 
 			while (1)
 			{
-				$sideO->skip_line();
+				$side_o->skip_line();
 
-				if ($sideO->isend())
+				if ($side_o->isend())
 				{
 					break;
 				}
 
-				if ($sideO->decode_directive_line())
+				if ($side_o->decode_directive_line())
 				{
-					$argument = $sideO->getargument();
-					$letter = $sideO->getdirective();
+					$argument = $side_o->getargument();
+					$letter = $side_o->getdirective();
 
 					switch ($letter)
 					{
@@ -161,36 +161,36 @@ if ($this->has_access('read'))
 							break;
 					}
 
-					$sideA->skip_until_ordinal($resync_left);
-					$sideB->copy_until_ordinal($resync_right,$output);
+					$side_a->skip_until_ordinal($resync_left);
+					$side_b->copy_until_ordinal($resync_right,$output);
 
 					if ($letter == 'd' || $letter == 'c')
 					{
 						// deleted word
-						$sideA->copy_whitespace($output);
+						$side_a->copy_whitespace($output);
 						$output .= "<!--markup:1:begin-->";
-						$sideA->copy_word($output);
-						$sideA->copy_until_ordinal($argument[1],$output);
+						$side_a->copy_word($output);
+						$side_a->copy_until_ordinal($argument[1],$output);
 						$output .= "<!--markup:1:end-->";
 					}
 
 					if ($letter == 'a' || $letter == 'c')
 					{
 						// inserted word
-						$sideB->copy_whitespace($output);
+						$side_b->copy_whitespace($output);
 						$output .= "<!--markup:2:begin-->";
-						$sideB->copy_word($output);
-						$sideB->copy_until_ordinal($argument[3],$output);
+						$side_b->copy_word($output);
+						$side_b->copy_until_ordinal($argument[3],$output);
 						$output .= "<!--markup:2:end-->";
 					}
 				}
 			}
 
-			$sideB->copy_until_ordinal($count_total_right,$output);
-			$sideB->copy_whitespace($output);
+			$side_b->copy_until_ordinal($count_total_right,$output);
+			$side_b->copy_whitespace($output);
 			$out = $this->format($output);
-			$out = str_replace('%1', "<a href=\"".$this->href('', '', 'revision_id='.$pageB['revision_id'])."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
-			str_replace('%2', "<a href=\"".$this->href('', '', 'revision_id='.$pageA['revision_id'])."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
+			$out = str_replace('%1', "<a href=\"".$this->href('', '', 'revision_id='.$page_b['revision_id'])."\">".$this->get_time_string_formatted($page_b['modified'])."</a>",
+			str_replace('%2', "<a href=\"".$this->href('', '', 'revision_id='.$page_a['revision_id'])."\">".$this->get_time_string_formatted($page_a['modified'])."</a>",
 			str_replace('%3', $this->compose_link_to_page($this->tag, "", "", 0),
 			"<div class=\"diffinfo\">".$this->get_translation('Comparison'))))."</div><br />\n<br />\n".$out;
 			echo $out;

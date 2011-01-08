@@ -25,7 +25,10 @@ if ($this->has_access('read'))
 	foreach ($pages as $num => $page)
 	{
 		// check ACLS
-		if (!$this->has_access('write', $page['page_id'])) continue;
+		if (!$this->has_access('write', $page['page_id']))
+		{
+			continue;
+		}
 		// output page
 		$tag = $page['tag'];
 
@@ -53,7 +56,6 @@ if ($this->has_access('read'))
 		$xml .= "\t\t\t<pubDate>".gmdate('D, d M Y H:i:s \G\M\T', strtotime($page['created']))."</pubDate>\n";
 		$xml .= "\t\t</item>\n";
 	}
-
 }
 else
 {

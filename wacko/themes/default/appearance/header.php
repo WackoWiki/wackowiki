@@ -63,6 +63,7 @@ if ($this->method == 'edit')
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 $doubleclick = '';
+
 if ($user = $this->get_user())
 {
 	if ($user['doubleclick_edit'] == 1)
@@ -74,6 +75,7 @@ else if($this->has_access('write'))
 {
 	$doubleclick = true;
 }
+
 if ($doubleclick == true)
 {
 ?>
@@ -125,31 +127,31 @@ else
 <?php
 // Outputs Bookmarks AKA QuickLinks
 	echo '<div id="usermenu">';
-		echo "<ol>\n";
-		// Main page
-		#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
-		echo "<li>";
-		// Bookmarks
-		$formatedBMs = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
-		$formatedBMs = str_replace ("<br />", "", $formatedBMs);
-		$formatedBMs = str_replace ("\n", "</li>\n<li>", $formatedBMs);
-		echo $formatedBMs;
-		echo "</li>\n";
+	echo "<ol>\n";
+	// Main page
+	#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
+	echo "<li>";
+	// Bookmarks
+	$formated_bm = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
+	$formated_bm = str_replace ("<br />", "", $formated_bm);
+	$formated_bm = str_replace ("\n", "</li>\n<li>", $formated_bm);
+	echo $formated_bm;
+	echo "</li>\n";
 
-		if ($this->get_user())
-		{
-			// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
-			if (!in_array($this->tag, $this->get_bookmark_links()))
-				echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
-					.'"><img src="'. $this->config['theme_url']
-					.'icons/bookmark1.gif" alt="+" title="'.
-					$this->get_translation('AddToBookmarks') .'"/></a></li>';
-			else
-				echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
-					.'"><img src="'. $this->config['theme_url']
-					.'icons/bookmark2.gif" alt="-" title="'.
-					$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
-			}
+	if ($this->get_user())
+	{
+		// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
+		if (!in_array($this->tag, $this->get_bookmark_links()))
+			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
+				.'"><img src="'. $this->config['theme_url']
+				.'icons/bookmark1.gif" alt="+" title="'.
+				$this->get_translation('AddToBookmarks') .'"/></a></li>';
+		else
+			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
+				.'"><img src="'. $this->config['theme_url']
+				.'icons/bookmark2.gif" alt="-" title="'.
+				$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
+	}
 	echo "\n</ol></div>";
 ?>
 <div id="handler">
@@ -313,7 +315,7 @@ else
 	echo echo_tab(
 		$this->href('upload'),
 		$this->get_translation('FilesTip'),
-		($this->forum === false && $this->page /*&& $this->has_access('upload')*/) ? $this->get_translation('FilesText') : '',
+		($this->forum === false && $this->page && $this->has_access('upload')) ? $this->get_translation('FilesText') : '',
 		$this->method == 'upload',
 		1,
 		'u');
@@ -344,7 +346,8 @@ echo $this->form_close();
 <div class="breadcrumb">
 <?php
 // Shows breadcrumbs
-echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true, true); ?>
+echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true, true);
+?>
 </div>
 </div>
 <div id="content">

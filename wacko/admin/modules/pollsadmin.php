@@ -47,14 +47,14 @@ function admin_pollsadmin(&$engine, &$module)
 		if (isset($_POST['remove']) && $_POST['id'])
 		{
 			$remove_id		= $_POST['id'];
-			$title			= $pollsObj->GetPollTitle($remove_id);
+			$title			= $pollsObj->get_poll_title($remove_id);
 			$title			= $title['text'];
 			$confirmation	= true;
 		}
 		// approvely delete a survey
 		else if (isset($_POST['delete']) && $_POST['yes'])
 		{
-			$pollsObj->RemovePoll($_POST['delete']);
+			$pollsObj->remove_poll($_POST['delete']);
 			$engine->log(1, str_replace('%1', (int)$_POST['delete'], $engine->get_translation('LogRemovedPoll', $engine->config['language'])));
 		}
 		// stop current survey
@@ -76,7 +76,7 @@ function admin_pollsadmin(&$engine, &$module)
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0");
 			$engine->query(	// reset votes and update servey id
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
-					"poll_id		= ".($pollsObj->GetLastPollID() + 1).", ".
+					"poll_id		= ".($pollsObj->get_last_poll_id() + 1).", ".
 					"votes	= 0 ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id']));
 			$xml->news(); // update news feed
@@ -96,7 +96,7 @@ function admin_pollsadmin(&$engine, &$module)
 		else if (isset($_POST['edit']) && $_POST['id'])
 		{
 			$edit_id		= $_POST['id'];
-			$header			= $pollsObj->GetPollTitle($edit_id);
+			$header			= $pollsObj->get_poll_title($edit_id);
 			if ($header['start'] == SQL_NULLDATE && $header['end'] == SQL_NULLDATE)
 				$moderation	= true;
 		}
@@ -115,7 +115,7 @@ function admin_pollsadmin(&$engine, &$module)
 		// show poll results
 		if (isset($_GET['poll']) && $_GET['results'] == 1)
 		{
-			echo $pollsObj->ShowPollResults($_GET['poll']);
+			echo $pollsObj->show_poll_results($_GET['poll']);
 		}
 
 		// poll remove confirmation dialog
@@ -144,7 +144,7 @@ function admin_pollsadmin(&$engine, &$module)
 		echo $engine->form_open('', $mode_file);
 		echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 		echo '<table cellspacing="3" class="formation">';
-		$list = $pollsObj->GetPollsList('current');
+		$list = $pollsObj->get_polls_list('current');
 		if (empty($list))
 		{
 			echo '<tr><th>'.$engine->get_translation('PollsCurrent').'</th></tr>';
@@ -161,7 +161,7 @@ function admin_pollsadmin(&$engine, &$module)
 						rawurldecode($engine->href('', $mode_file, $mode_http.'poll='.$row['poll_id'].'&amp;results=1')).'">'.
 						date('d/m', strtotime($row['start'])).': '.$row['text'].'</a></td>';
 					echo '<td>'.$row['user_id'].'</td>';
-					echo '<td style="white-space:nowrap;">'.$pollsObj->PollTime($row['start'], time()).'</td>';
+					echo '<td style="white-space:nowrap;">'.$pollsObj->poll_time($row['start'], time()).'</td>';
 				echo '</tr>';
 			}
 			echo '<tr><td colspan="4">'.
@@ -177,7 +177,7 @@ function admin_pollsadmin(&$engine, &$module)
 		echo $engine->form_open('', $mode_file);
 		echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 		echo '<table cellspacing="3" class="formation">';
-		$list = $pollsObj->GetPollsList('moderation');
+		$list = $pollsObj->get_polls_list('moderation');
 		if (empty($list))
 		{
 			echo '<tr><th>'.$engine->get_translation('PollsModeration').'</th></tr>';
@@ -194,7 +194,7 @@ function admin_pollsadmin(&$engine, &$module)
 					echo '<td valign="top">'.$row['user'].'</td>';
 				echo '</tr>';
 				echo '<tr>';
-					$vars	= $pollsObj->GetPollVars($row['poll_id']);
+					$vars	= $pollsObj->get_poll_vars($row['poll_id']);
 					echo '<td></td>';
 					echo '<td><table>';
 					foreach ($vars as $var)
@@ -220,9 +220,9 @@ function admin_pollsadmin(&$engine, &$module)
 		echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 		echo '<table cellspacing="3" class="formation">';
 		// make list
-		if ($year != 0)	$list	= $pollsObj->GetPollsList('archive', $year);
-		else			$list	= $pollsObj->GetPollsList('ended');
-						$years	= $pollsObj->PollYears();
+		if ($year != 0)	$list	= $pollsObj->get_polls_list('archive', $year);
+		else			$list	= $pollsObj->get_polls_list('ended');
+						$years	= $pollsObj->poll_years();
 		if (empty($list))
 		{
 			echo '<tr><th>'.$engine->get_translation('PollsEnded').'</th></tr>';
@@ -240,7 +240,7 @@ function admin_pollsadmin(&$engine, &$module)
 						rawurldecode($engine->href('', $mode_file, $mode_http.'year='.$year.'&amp;poll='.$row['poll_id'].'&amp;results=1')).'">'.
 						date('d/m/y', strtotime($row['start'])).': '.$row['text'].'</a></td>';
 					echo '<td>'.$row['user_id'].'</td>';
-					echo '<td style="white-space:nowrap;">'.$pollsObj->PollTime($row['start'], $row['end']).'</td>';
+					echo '<td style="white-space:nowrap;">'.$pollsObj->poll_time($row['start'], $row['end']).'</td>';
 				echo '</tr>';
 			}
 		}

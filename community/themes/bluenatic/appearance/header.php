@@ -92,9 +92,9 @@ else if($this->has_access('write'))
 				<?php echo "<ol>\n"; ?>
 				<?php echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n"; ?>
 				<?php echo "<li>"; ?>
-				<?php $formatedBMs = $this->format($this->get_bookmarks_formatted(), 'post_wacko'); ?>
-				<?php $formatedBMs = str_replace ("\n", "</li>\n<li>", $formatedBMs); ?>
-				<?php echo $formatedBMs; ?>
+				<?php $formated_bm = $this->format($this->get_bookmarks_formatted(), 'post_wacko'); ?>
+				<?php $formated_bm = str_replace ("\n", "</li>\n<li>", $formated_bm); ?>
+				<?php echo $formated_bm; ?>
 				<?php echo "</li>\n"; ?>
 				<?php echo "</ol>\n"; ?>
 			</div>

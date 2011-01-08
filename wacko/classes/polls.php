@@ -6,7 +6,6 @@
 ##                Polls common methods                ##
 ########################################################
 
-
 */
 
 class Polls
@@ -21,7 +20,7 @@ class Polls
 	}
 
 	// id number of the latest poll
-	function GetLastPollID()
+	function get_last_poll_id()
 	{
 		$id = $this->engine->load_single(
 			'SELECT poll_id '.
@@ -33,7 +32,7 @@ class Polls
 	}
 
 	// title information for a given poll
-	function GetPollTitle($id)
+	function get_poll_title($id)
 	{
 		$title = $this->engine->load_single(
 			"SELECT p.poll_id, p.text, p.user_id, p.plural, p.votes, p.start, p.end, u.user_name ".
@@ -45,7 +44,7 @@ class Polls
 
 	// variants data for a given poll
 	// sorts by total votes if "$votes = 1"
-	function GetPollVars($id, $votes = 0)
+	function get_poll_vars($id, $votes = 0)
 	{
 		$vars = $this->engine->load_all(
 			"SELECT poll_id, v_id, text, votes ".
@@ -56,7 +55,7 @@ class Polls
 	}
 
 	// all years when new surveys was started
-	function PollYears()
+	function poll_years()
 	{
 		$years = '';
 
@@ -74,7 +73,7 @@ class Polls
 	}
 
 	// the duration of a poll in days
-	function PollTime($start, $end)
+	function poll_time($start, $end)
 	{
 		if (is_string($start))	$start	= strtotime($start);
 		if (is_string($end))	$end	= strtotime($end);
@@ -82,7 +81,7 @@ class Polls
 	}
 
 	// various polls lists
-	function GetPollsList($mode, $year = 0)
+	function get_polls_list($mode, $year = 0)
 	{
 		switch ($mode)
 		{
@@ -130,7 +129,7 @@ class Polls
 	}
 
 	// add a new poll into the database
-	function SubmitPoll($id, $topic, $plural, $answers, $user, $start = 0)
+	function submit_poll($id, $topic, $plural, $answers, $user, $start = 0)
 	{
 		$topic	= quote($this->engine->dblink, $topic);
 		$user	= quote($this->engine->dblink, $user);
@@ -160,7 +159,7 @@ class Polls
 	}
 
 	// remove a given poll from the datebase
-	function RemovePoll($id)
+	function remove_poll($id)
 	{
 		return $this->engine->query(
 			"DELETE FROM {$this->engine->config['table_prefix']}poll ".
@@ -170,14 +169,14 @@ class Polls
 	// print voting form
 	// tag parameter specifies wiki page
 	// for form action url if necessary
-	function ShowPollVote($id, $tag = '')
+	function show_poll_vote($id, $tag = '')
 	{
 		if ($tag != '') $tag = str_replace('%2F', '/', rawurlencode($tag));
 
 		// load poll data
-		$header		= $this->GetPollTitle($id);
-		$vars		= $this->GetPollVars($id);
-		$duration	= $this->PollTime($header['start'], ($header['end'] == SQL_NULLDATE ? time() : $header['end']));
+		$header		= $this->get_poll_title($id);
+		$vars		= $this->get_poll_vars($id);
+		$duration	= $this->poll_time($header['start'], ($header['end'] == SQL_NULLDATE ? time() : $header['end']));
 		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->get_translation('PollsGuest').'</em>' : $header['user_name'] );
 
 		if ($header['start'] == SQL_NULLDATE)
@@ -218,16 +217,16 @@ class Polls
 	}
 
 	// print survey results
-	function ShowPollResults($id)
+	function show_poll_results($id)
 	{
 		$total = '';
 
 		// load poll data
-		$header		= $this->GetPollTitle($id);
-		$vars		= $this->GetPollVars($id, 1);
-		$duration	= $this->PollTime($header['start'], ($header['end'] == SQL_NULLDATE ? time() : $header['end']));
+		$header		= $this->get_poll_title($id);
+		$vars		= $this->get_poll_vars($id, 1);
+		$duration	= $this->poll_time($header['start'], ($header['end'] == SQL_NULLDATE ? time() : $header['end']));
 		$user		= ( strpos($header['user_id'], '.') ? '<em>'.$this->engine->get_translation('PollsGuest').'</em>' : $header['user_name'] );
-		$voters	= $header['votes'];
+		$voters		= $header['votes'];
 
 		if ($header['plural'] != 1)		$total  = $header['votes'];
 		else foreach ($vars as $var)	$total += $var['votes'];
@@ -272,19 +271,28 @@ class Polls
 	}
 
 	// determine if user has voted a given poll
-	function PollIsVoted($id)
+	function poll_is_voted($id)
 	{
 		$cookie	= $this->engine->get_cookie('poll');
 		$ids	= explode(';', $cookie);
 
-		if (in_array($id, $ids) === true || $id == $cookie) return true;
-		else return false;
+		if (in_array($id, $ids) === true || $id == $cookie)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	// set poll cookie
-	function SetPollCookie($id)
+	function set_poll_cookie($id)
 	{
-		if ($cookie = $this->engine->get_cookie('poll')) $ids = explode(';', $cookie);
+		if ($cookie = $this->engine->get_cookie('poll'))
+		{
+			$ids = explode(';', $cookie);
+		}
 		$ids[]	= $id;
 		$cookie	= implode(';', $ids);
 		$this->engine->set_session_cookie('poll', $cookie);
@@ -295,12 +303,15 @@ class Polls
 	// vote a given poll
 	// if $ballot is an array it is
 	// presumed that survey is plural
-	function VotePoll($id, $ballot)
+	function vote_poll($id, $ballot)
 	{
-		$header	= $this->GetPollTitle($id);
-		$vars	= $this->GetPollVars($id, 1);
+		$header	= $this->get_poll_title($id);
+		$vars	= $this->get_poll_vars($id, 1);
 
-		if (!is_array($ballot)) $ballot = array($ballot);
+		if (!is_array($ballot))
+		{
+			$ballot = array($ballot);
+		}
 
 		foreach ($vars as $var)
 		{
