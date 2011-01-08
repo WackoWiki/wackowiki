@@ -36,13 +36,13 @@ class Side
 
 	function __construct($content)
 	{
-		$this->content=$content;
-		$this->position=0;
-		$this->cursor=0;
-		$this->directive='';
-		$this->argument=array();
-		$this->length=strlen($this->content);
-		$this->character=substr($this->content,0,1);
+		$this->content = $content;
+		$this->position = 0;
+		$this->cursor = 0;
+		$this->directive = '';
+		$this->argument = array();
+		$this->length = strlen($this->content);
+		$this->character = substr($this->content,0,1);
 	}
 
 	function getposition()
@@ -67,7 +67,7 @@ class Side
 	function nextchar()
 	{
 		$this->cursor++;
-		$this->character=substr($this->content,$this->cursor,1);
+		$this->character = substr($this->content,$this->cursor,1);
 	}
 
 	function copy_until_ordinal($ordinal,&$out)
@@ -161,7 +161,7 @@ class Side
 	{
 		while (!$this->isend() && !($this->isspace($this->character)))
 		{
-			$out.=$this->character;
+			$out .= $this->character;
 			$this->nextchar();
 		}
 		$this->position++;
@@ -181,9 +181,9 @@ class Side
 	function decode_directive_line()
 	{
 
-		$value=0;
-		$state=0;
-		$error=0;
+		$value = 0;
+		$state = 0;
+		$error = 0;
 
 		while (!$error && $state < 4)
 		{
@@ -825,7 +825,8 @@ class DiffFormatter
 					}
 				}
 			}
-			else {
+			else
+			{
 				if (! is_array($block))
 				{
 					$x0 = $xi;

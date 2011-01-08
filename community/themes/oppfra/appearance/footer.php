@@ -176,10 +176,10 @@ echo '<div class="newsNav"><ul class="newsNav">';
 		#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 		echo "<li>";
 
-$formatedBMs = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
-$formatedBMs = str_replace ("<br />", "", $formatedBMs);
-$formatedBMs = str_replace ("\n", "</li>\n<li>", $formatedBMs);
-echo $formatedBMs;
+$formated_bm = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
+$formated_bm = str_replace ("<br />", "", $formated_bm);
+$formated_bm = str_replace ("\n", "</li>\n<li>", $formated_bm);
+echo $formated_bm;
 echo "</li>\n";
 		if ($this->get_user())
 		{

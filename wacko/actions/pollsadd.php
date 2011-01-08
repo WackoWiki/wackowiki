@@ -30,8 +30,8 @@ if ($moderation === true)
 {
 	if ($edit_id)
 	{
-		$header			= $pollsObj->GetPollTitle($edit_id);
-		$vars			= $pollsObj->GetPollVars($edit_id);
+		$header			= $pollsObj->get_poll_title($edit_id);
+		$vars			= $pollsObj->get_poll_vars($edit_id);
 		$topic			= $header['text'];
 		$user			= $header['user'];
 		$plural			= $header['plural'];
@@ -76,7 +76,7 @@ foreach ($_POST as $key => $value)
 }
 
 // parsing and validating submitted poll
-if (isset($_POST['submitpoll']))
+if (isset($_POST['submit_poll']))
 {
 	//parsing input
 	$strip = array('<', '>', '[', ']', '\\', "'", '"');
@@ -103,11 +103,11 @@ if (isset($_POST['submitpoll']))
 	{
 		if (!$user)		$user		= $this->get_user_id();
 		if (!$user)		$user		= $this->get_user_ip();
-		if (!$edit_id)	$edit_id	= $pollsObj->GetLastPollID() + 1;
+		if (!$edit_id)	$edit_id	= $pollsObj->get_last_poll_id() + 1;
 		// remove moderated poll
-		if ($moderation === true)	  $pollsObj->RemovePoll($edit_id);
+		if ($moderation === true)	  $pollsObj->remove_poll($edit_id);
 		// save new or update moderated poll
-		$pollsObj->SubmitPoll($edit_id, $topic, $plural, $answers, $user, ($startmod == 1 && $admin ? 1 : 0));
+		$pollsObj->submit_poll($edit_id, $topic, $plural, $answers, $user, ($startmod == 1 && $admin ? 1 : 0));
 		// update page cache
 		if ($this->tag) $this->cache->cache_invalidate($this->supertag);
 		// update news RSS feed
@@ -224,7 +224,7 @@ else if ($stop_mod !== true)
 		'</td></tr>';
 	echo '<tr><td colspan="2">';
 	// begin captcha output
-	echo '<input name="submitpoll" id="submit" type="submit" value="'.$this->get_translation('PollsSubmit').'" /> ',
+	echo '<input name="submit_poll" id="submit" type="submit" value="'.$this->get_translation('PollsSubmit').'" /> ',
 		( $this->get_user() ? false : true );
 	// end captcha output
 		echo ($moderation === true ? '<input name="cancel" id="button" type="button" value="'.$this->get_translation('PollsCancel').'" onclick="document.location=\''.addslashes($this->href('', $mode_file, $mode_http)).'\';" />' : '').

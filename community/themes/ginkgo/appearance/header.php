@@ -156,10 +156,10 @@ if ($this->get_user())
 
 // Bookmarks
 $BMs = $this->get_bookmarks();
-$formatedBMs =  $this->format($this->format(implode("| ", $BMs), "wacko"), "post_wacko");
-$formatedBMs = str_replace ("<br />", "", $formatedBMs);
-$formatedBMs = str_replace ( "\n", "</li><li>\n", $formatedBMs );
-echo $formatedBMs;
+$formated_bm =  $this->format($this->format(implode("| ", $BMs), "wacko"), "post_wacko");
+$formated_bm = str_replace ("<br />", "", $formated_bm);
+$formated_bm = str_replace ( "\n", "</li><li>\n", $formated_bm );
+echo $formated_bm;
 echo "</li></ul></div>";
 		echo '<br />';
 		if ($this->get_user()) {

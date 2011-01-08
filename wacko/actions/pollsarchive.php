@@ -19,14 +19,14 @@ else						$year	= (int)$_GET['year'];
 // print results
 if (isset($_GET['poll']) && (isset($_GET['results']) && $_GET['results'] == 1))
 {
-	echo $pollsObj->ShowPollResults((int)$_GET['poll']);
+	echo $pollsObj->show_poll_results((int)$_GET['poll']);
 	echo '<br />';
 }
 
 // make list
-if ($year != 0)	$list	= $pollsObj->GetPollsList('archive', $year);
-else			$list	= $pollsObj->GetPollsList('all');
-				$years	= $pollsObj->PollYears();
+if ($year != 0)	$list	= $pollsObj->get_polls_list('archive', $year);
+else			$list	= $pollsObj->get_polls_list('all');
+				$years	= $pollsObj->poll_years();
 
 
 // print list

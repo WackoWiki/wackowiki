@@ -130,11 +130,11 @@ else if($this->has_access('write'))
 		echo "<li>";
 		// Bookmarks
 		$BMs = $this->get_bookmarks();
-		$formatedBMs = $this->format($this->format(implode("| ", $BMs), "wacko"), "post_wacko");
-		$formatedBMs = str_replace ("<br />", "", $formatedBMs);
-		$formatedBMs = str_replace ( "\n", "</li>\n<li>", $formatedBMs );
-		//echo "<ol><li>".$formatedBMs."</li></ol>";
-		echo $formatedBMs;
+		$formated_bm = $this->format($this->format(implode("| ", $BMs), "wacko"), "post_wacko");
+		$formated_bm = str_replace ("<br />", "", $formated_bm);
+		$formated_bm = str_replace ( "\n", "</li>\n<li>", $formated_bm );
+		//echo "<ol><li>".$formated_bm."</li></ol>";
+		echo $formated_bm;
 
 		echo "</li>\n";
 

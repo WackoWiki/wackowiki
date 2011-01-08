@@ -58,9 +58,9 @@
 				echo '<!-- li><a href="'.$base_url.'Intern">Intern</a></li -->';
 				// Bookmarks
 				$BMs = $this->get_bookmarks();
-				$formatedBMs =  $this->format($this->format(implode("| ", $BMs), "wacko"), "post_wacko");
-				$formatedBMs = str_replace ( "\n", "</li>\n<li>", $formatedBMs );
-				echo '<li>'.$formatedBMs.'</li>';
+				$formated_bm =  $this->format($this->format(implode("| ", $BMs), "wacko"), "post_wacko");
+				$formated_bm = str_replace ( "\n", "</li>\n<li>", $formated_bm );
+				echo '<li>'.$formated_bm.'</li>';
 				echo "</ol>";
 			echo '</div> <!-- /bookmarks -->';
 		}
