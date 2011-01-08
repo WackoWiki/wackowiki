@@ -12,7 +12,7 @@ if (!function_exists('handler_diff_load_page_by_id'))
 		if ($id != "-1")
 		{
 			return $wacko->load_single(
-				"SELECT page_id, modified, body ".
+				"SELECT page_id, revision_id, modified, body ".
 				"FROM ".$wacko->config['table_prefix']."revision ".
 				"WHERE revision_id = '".quote($wacko->dblink, $id)."' ".
 				"LIMIT 1");
@@ -20,7 +20,7 @@ if (!function_exists('handler_diff_load_page_by_id'))
 		else
 		{
 			return $wacko->load_single(
-				"SELECT page_id, modified, body ".
+				"SELECT page_id, page_id AS revision_id, modified, body ".
 				"FROM ".$wacko->config['table_prefix']."page ".
 				"WHERE page_id = '".quote($wacko->dblink, $wacko->get_page_id())."' ".
 				"LIMIT 1");
@@ -62,8 +62,8 @@ if ($this->has_access('read'))
 			$deleted = array_diff($bodyB, $bodyA);
 
 			$output .=
-			str_replace('%1', "<a href=\"".$this->href('', '', ($b != -1 ? 'time='.urlencode($pageA['modified']) : ''))."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
-			str_replace('%2', "<a href=\"".$this->href('', '', ($a != -1 ? 'time='.urlencode($pageB['modified']) : ''))."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
+			str_replace('%1', "<a href=\"".$this->href('', '', ($b != -1 ? 'revision_id='.$pageA['revision_id'] : ''))."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
+			str_replace('%2', "<a href=\"".$this->href('', '', ($a != -1 ? 'revision_id='.$pageB['revision_id'] : ''))."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
 			str_replace('%3', $this->compose_link_to_page($this->tag, "", "", 0),
 			"<div class=\"diffinfo\">".$this->get_translation('Comparison'))))."</div><br />\n";
 
@@ -108,7 +108,7 @@ if ($this->has_access('read'))
 			$bodyA = '';
 			$sideA->split_file_into_words($bodyA);
 
-			$bodyB='';
+			$bodyB = '';
 			$sideB->split_file_into_words($bodyB);
 
 			// diff on these two file
@@ -127,7 +127,7 @@ if ($this->has_access('read'))
 			$sideA->init();
 			$sideB->init();
 
-			$output='';
+			$output = '';
 
 			while (1)
 			{
@@ -140,8 +140,8 @@ if ($this->has_access('read'))
 
 				if ($sideO->decode_directive_line())
 				{
-					$argument=$sideO->getargument();
-					$letter=$sideO->getdirective();
+					$argument = $sideO->getargument();
+					$letter = $sideO->getdirective();
 
 					switch ($letter)
 					{
@@ -188,9 +188,9 @@ if ($this->has_access('read'))
 
 			$sideB->copy_until_ordinal($count_total_right,$output);
 			$sideB->copy_whitespace($output);
-			$out=$this->format($output);
-			$out = str_replace('%1', "<a href=\"".$this->href('', '', 'time='.urlencode($pageB['modified']))."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
-			str_replace('%2', "<a href=\"".$this->href('', '', 'time='.urlencode($pageA['modified']))."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
+			$out = $this->format($output);
+			$out = str_replace('%1', "<a href=\"".$this->href('', '', 'revision_id='.$pageB['revision_id'])."\">".$this->get_time_string_formatted($pageB['modified'])."</a>",
+			str_replace('%2', "<a href=\"".$this->href('', '', 'revision_id='.$pageA['revision_id'])."\">".$this->get_time_string_formatted($pageA['modified'])."</a>",
 			str_replace('%3', $this->compose_link_to_page($this->tag, "", "", 0),
 			"<div class=\"diffinfo\">".$this->get_translation('Comparison'))))."</div><br />\n<br />\n".$out;
 			echo $out;

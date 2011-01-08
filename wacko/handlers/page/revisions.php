@@ -85,11 +85,11 @@ if ($this->has_access('read'))
 			if (++$c <= $max || !$max)
 			{
 				$output .= "<li>";
-				$output .= "".($t--).".";
-				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"a\" value=\"".($c == 1 ? "-1" : $page['revision_m_id'])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";
+				$output .= '<span style="display: inline-block; width:40px;">'.($t--).'.</span>';
+				$output .= "<input type=\"radio\" name=\"a\" value=\"".($c == 1 ? "-1" : $page['revision_m_id'])."\" ".($c == 1 ? "checked=\"checked\"" : "")." />";
 				$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" name=\"b\" value=\"".($c == 1 ? "-1" : $page['revision_m_id'])."\" ".($c == 2 ? "checked=\"checked\"" : "")." />";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"".$this->href('show').($this->config['rewrite_mode'] ? "?" : "&amp;")."revision_id=".$page['revision_m_id']."\">".$this->get_time_string_formatted($page['modified'])."</a>";
-				$output .= " — id ".$page['revision_m_id']." ";
+				$output .= '<span style="display: inline-block; width:80px;">'."&nbsp; — id ".$page['revision_m_id']."</span> ";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->get_translation('By')." ".
 				($page['user']
 					? ($this->is_wiki_name($page['user'])

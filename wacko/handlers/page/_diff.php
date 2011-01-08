@@ -24,7 +24,8 @@
  */
 // Side : a string for wdiff
 
-class Side {
+class Side
+{
 	var $position;
 	var $cursor;
 	var $content;
@@ -33,7 +34,8 @@ class Side {
 	var $argument;
 	var $length;
 
-	function Side($content) {
+	function __construct($content)
+	{
 		$this->content=$content;
 		$this->position=0;
 		$this->cursor=0;
@@ -41,10 +43,10 @@ class Side {
 		$this->argument=array();
 		$this->length=strlen($this->content);
 		$this->character=substr($this->content,0,1);
-
 	}
 
-	function getposition() {
+	function getposition()
+	{
 		return $this->position;
 	}
 
@@ -52,37 +54,47 @@ class Side {
 		return $this->character;
 	}
 
-	function getdirective() {
+	function getdirective()
+	{
 		return $this->directive;
 	}
 
-	function getargument() {
+	function getargument()
+	{
 		return $this->argument;
 	}
 
-	function nextchar() {
+	function nextchar()
+	{
 		$this->cursor++;
 		$this->character=substr($this->content,$this->cursor,1);
 	}
 
-	function copy_until_ordinal($ordinal,&$out)  {
-		while ($this->position < $ordinal) {
+	function copy_until_ordinal($ordinal,&$out)
+	{
+		while ($this->position < $ordinal)
+		{
 			$this->copy_whitespace($out);
 			$this->copy_word($out);
 		}
 	}
 
-	function skip_until_ordinal($ordinal) {
-		while ($this->position < $ordinal) {
+	function skip_until_ordinal($ordinal)
+	{
+		while ($this->position < $ordinal)
+		{
 			$this->skip_whitespace();
 			$this->skip_word();
 		}
 	}
 
-	function split_file_into_words (&$out) {
-		while (!$this->isend()) {
+	function split_file_into_words (&$out)
+	{
+		while (!$this->isend())
+		{
 			$this->skip_whitespace();
-			if ($this->isend()) {
+			if ($this->isend())
+			{
 				break;
 			}
 			$this->copy_word($out);
@@ -90,44 +102,54 @@ class Side {
 		}
 	}
 
-	function init() {
-		$this->position=0;
-		$this->cursor=0;
-		$this->directive='';
-		$this->argument=array();
-		$this->character=substr($this->content,0,1);
+	function init()
+	{
+		$this->position = 0;
+		$this->cursor = 0;
+		$this->directive = '';
+		$this->argument = array();
+		$this->character = substr($this->content, 0, 1);
 	}
 
-	function isspace($char) {
+	function isspace($char)
+	{
 		if (preg_match('/([[:space:]]|\*)/', $char)) return true;
 		return false;
 	}
 
-	function isdigit($char) {
+	function isdigit($char)
+	{
 		if (preg_match('/[[:digit:]]/',$char)) return true;
 		return false;
 	}
 
-	function isend() {
+	function isend()
+	{
 		if (($this->cursor)>=($this->length)) return true;
 		return false;
 	}
 
-	function copy_whitespace(&$out)  {
-		while (!$this->isend() && $this->isspace($this->character)) {
+	function copy_whitespace(&$out)
+	{
+		while (!$this->isend() && $this->isspace($this->character))
+		{
 			$out .=$this->character;
 			$this->nextchar();
 		}
 	}
 
-	function skip_whitespace()  {
-		while (!$this->isend() && $this->isspace($this->character)) {
+	function skip_whitespace()
+	{
+		while (!$this->isend() && $this->isspace($this->character))
+		{
 			$this->nextchar();
 		}
 	}
 
-	function skip_line()  {
-		while (!$this->isend() && !$this->isdigit($this->character)) {
+	function skip_line()
+	{
+		while (!$this->isend() && !$this->isdigit($this->character))
+		{
 			while (!$this->isend() && $this->character != "\n")
 			$this->nextchar();
 			if($this->character=="\n")
@@ -135,33 +157,41 @@ class Side {
 		}
 	}
 
-	function copy_word(&$out) {
-		while (!$this->isend() && !($this->isspace($this->character))) {
+	function copy_word(&$out)
+	{
+		while (!$this->isend() && !($this->isspace($this->character)))
+		{
 			$out.=$this->character;
 			$this->nextchar();
 		}
 		$this->position++;
 	}
 
-	function skip_word() {
+	function skip_word()
+	{
 
-		while (!$this->isend() && !($this->isspace($this->character))) {
+		while (!$this->isend() && !($this->isspace($this->character)))
+		{
 			$this->nextchar();
 		}
 		$this->position++;
 	}
 
 
-	function decode_directive_line() {
+	function decode_directive_line()
+	{
 
 		$value=0;
 		$state=0;
 		$error=0;
 
-		while (!$error && $state < 4) {
-			if ($this->isdigit($this->character)) {
+		while (!$error && $state < 4)
+		{
+			if ($this->isdigit($this->character))
+			{
 				$value = 0;
-				while($this->isdigit($this->character)) {
+				while($this->isdigit($this->character))
+				{
 					$value = 10 * $value + $this->character - '0';
 					$this->nextchar();
 				}
@@ -175,7 +205,8 @@ class Side {
 
 			/* Skip the following character.  */
 
-			switch ($state) {
+			switch ($state)
+			{
 				case 0:
 				case 2:
 					if ($this->character == ',')
@@ -183,7 +214,8 @@ class Side {
 					break;
 
 				case 1:
-					if ($this->character == 'a' || $this->character == 'd' || $this->character == 'c') {
+					if ($this->character == 'a' || $this->character == 'd' || $this->character == 'c')
+					{
 						$this->directive = $this->character;
 						$this->nextchar();
 					}
@@ -201,7 +233,8 @@ class Side {
 
 		/* Complete reading of the line and return success value.  */
 
-		while ((!$this->isend()) && ($this->character != "\n")) {
+		while ((!$this->isend()) && ($this->character != "\n"))
+		{
 			$this->nextchar();
 		}
 		if ($this->character == "\n")
@@ -223,24 +256,29 @@ class Side {
 // PHP3 does not have assert()
 define('USE_ASSERTS', function_exists('assert'));
 
-class _DiffOp {
+class _DiffOp
+{
 	var $type;
 	var $orig;
 	var $final;
 
-	function norig() {
+	function norig()
+	{
 		return $this->orig ? sizeof($this->orig) : 0;
 	}
 
-	function nfinal() {
+	function nfinal()
+	{
 		return $this->final ? sizeof($this->final) : 0;
 	}
 }
 
-class _DiffOp_Copy extends _DiffOp {
+class _DiffOp_Copy extends _DiffOp
+{
 	var $type = 'copy';
 
-	function _DiffOp_Copy ($orig, $final = false) {
+	function __construct($orig, $final = false)
+	{
 		if (!is_array($final))
 		$final = $orig;
 		$this->orig = $orig;
@@ -249,30 +287,36 @@ class _DiffOp_Copy extends _DiffOp {
 
 }
 
-class _DiffOp_Delete extends _DiffOp {
+class _DiffOp_Delete extends _DiffOp
+{
 	var $type = 'delete';
 
-	function _DiffOp_Delete ($lines) {
+	function __construct($lines)
+	{
 		$this->orig = $lines;
 		$this->final = false;
 	}
 
 }
 
-class _DiffOp_Add extends _DiffOp {
+class _DiffOp_Add extends _DiffOp
+{
 	var $type = 'add';
 
-	function _DiffOp_Add ($lines) {
+	function __construct($lines)
+	{
 		$this->final = $lines;
 		$this->orig = false;
 	}
 
 }
 
-class _DiffOp_Change extends _DiffOp {
+class _DiffOp_Change extends _DiffOp
+{
 	var $type = 'change';
 
-	function _DiffOp_Change ($orig, $final) {
+	function __construct($orig, $final)
+	{
 		$this->orig = $orig;
 		$this->final = $final;
 	}
@@ -301,7 +345,8 @@ class _DiffOp_Change extends _DiffOp {
  */
 class _DiffEngine
 {
-	function diff ($from_lines, $to_lines) {
+	function diff ($from_lines, $to_lines)
+	{
 		$n_from = sizeof($from_lines);
 		$n_to = sizeof($to_lines);
 
@@ -313,14 +358,16 @@ class _DiffEngine
 		unset($this->lcs);
 
 		// Skip leading common lines.
-		for ($skip = 0; $skip < $n_from && $skip < $n_to; $skip++) {
+		for ($skip = 0; $skip < $n_from && $skip < $n_to; $skip++)
+		{
 			if ($from_lines[$skip] != $to_lines[$skip])
 			break;
 			$this->xchanged[$skip] = $this->ychanged[$skip] = false;
 		}
 		// Skip trailing common lines.
 		$xi = $n_from; $yi = $n_to;
-		for ($endskip = 0; --$xi > $skip && --$yi > $skip; $endskip++) {
+		for ($endskip = 0; --$xi > $skip && --$yi > $skip; $endskip++)
+		{
 			if ($from_lines[$xi] != $to_lines[$yi])
 			break;
 			$this->xchanged[$xi] = $this->ychanged[$yi] = false;
@@ -329,7 +376,8 @@ class _DiffEngine
 		// Ignore lines which do not exist in both files.
 		for ($xi = $skip; $xi < $n_from - $endskip; $xi++)
 		$xhash[$from_lines[$xi]] = 1;
-		for ($yi = $skip; $yi < $n_to - $endskip; $yi++) {
+		for ($yi = $skip; $yi < $n_to - $endskip; $yi++)
+		{
 			$line = $to_lines[$yi];
 			if ( ($this->ychanged[$yi] = empty($xhash[$line])) )
 			continue;
@@ -337,7 +385,8 @@ class _DiffEngine
 			$this->yv[] = $line;
 			$this->yind[] = $yi;
 		}
-		for ($xi = $skip; $xi < $n_from - $endskip; $xi++) {
+		for ($xi = $skip; $xi < $n_from - $endskip; $xi++)
+		{
 			$line = $from_lines[$xi];
 			if ( ($this->xchanged[$xi] = empty($yhash[$line])) )
 			continue;
@@ -355,14 +404,17 @@ class _DiffEngine
 		// Compute the edit operations.
 		$edits = array();
 		$xi = $yi = 0;
-		while ($xi < $n_from || $yi < $n_to) {
+
+		while ($xi < $n_from || $yi < $n_to)
+		{
 			USE_ASSERTS && assert($yi < $n_to || $this->xchanged[$xi]);
 			USE_ASSERTS && assert($xi < $n_from || $this->ychanged[$yi]);
 
 			// Skip matching "snake".
 			$copy = array();
 			while ( $xi < $n_from && $yi < $n_to
-			&& !$this->xchanged[$xi] && !$this->ychanged[$yi]) {
+			&& !$this->xchanged[$xi] && !$this->ychanged[$yi])
+			{
 				$copy[] = $from_lines[$xi++];
 				++$yi;
 			}
@@ -404,10 +456,12 @@ class _DiffEngine
 	 * match.  The caller must trim matching lines from the beginning and end
 	 * of the portions it is going to specify.
 	 */
-	function _diag ($xoff, $xlim, $yoff, $ylim, $nchunks) {
+	function _diag ($xoff, $xlim, $yoff, $ylim, $nchunks)
+	{
 		$flip = false;
 
-		if ($xlim - $xoff > $ylim - $yoff) {
+		if ($xlim - $xoff > $ylim - $yoff)
+		{
 			// Things seems faster (I'm not sure I understand why)
 			// when the shortest sequence in X.
 			$flip = true;
@@ -429,27 +483,32 @@ class _DiffEngine
 
 		$numer = $xlim - $xoff + $nchunks - 1;
 		$x = $xoff;
-		for ($chunk = 0; $chunk < $nchunks; $chunk++) {
+		for ($chunk = 0; $chunk < $nchunks; $chunk++)
+		{
 			if ($chunk > 0)
 			for ($i = 0; $i <= $this->lcs; $i++)
 			$ymids[$i][$chunk-1] = $this->seq[$i];
 
 			$x1 = $xoff + (int)(($numer + ($xlim-$xoff)*$chunk) / $nchunks);
-			for ( ; $x < $x1; $x++) {
+			for ( ; $x < $x1; $x++)
+			{
 				$line = $flip ? $this->yv[$x] : $this->xv[$x];
 				if (empty($ymatches[$line]))
 				continue;
 				$matches = $ymatches[$line];
 				reset($matches);
 				while (list ($junk, $y) = each($matches))
-				if (empty($this->in_seq[$y])) {
+				if (empty($this->in_seq[$y]))
+				{
 					$k = $this->_lcs_pos($y);
 					USE_ASSERTS && assert($k > 0);
 					$ymids[$k] = $ymids[$k-1];
 					break;
 				}
-				while (list ($junk, $y) = each($matches)) {
-					if ($y > $this->seq[$k-1]) {
+				while (list ($junk, $y) = each($matches))
+				{
+					if ($y > $this->seq[$k-1])
+					{
 						USE_ASSERTS && assert($y < $this->seq[$k]);
 						// Optimization: this is a common case:
 						//  next match is just replacing previous match.
@@ -457,7 +516,8 @@ class _DiffEngine
 						$this->seq[$k] = $y;
 						$this->in_seq[$y] = 1;
 					}
-					else if (empty($this->in_seq[$y])) {
+					else if (empty($this->in_seq[$y]))
+					{
 						$k = $this->_lcs_pos($y);
 						USE_ASSERTS && assert($k > 0);
 						$ymids[$k] = $ymids[$k-1];
@@ -468,7 +528,8 @@ class _DiffEngine
 
 		$seps[] = $flip ? array($yoff, $xoff) : array($xoff, $yoff);
 		$ymid = $ymids[$this->lcs];
-		for ($n = 0; $n < $nchunks - 1; $n++) {
+		for ($n = 0; $n < $nchunks - 1; $n++)
+		{
 			$x1 = $xoff + (int)(($numer + ($xlim - $xoff) * $n) / $nchunks);
 			$y1 = $ymid[$n] + 1;
 			$seps[] = $flip ? array($y1, $x1) : array($x1, $y1);
@@ -478,16 +539,20 @@ class _DiffEngine
 		return array($this->lcs, $seps);
 	}
 
-	function _lcs_pos ($ypos) {
+	function _lcs_pos ($ypos)
+	{
 		$end = $this->lcs;
-		if ($end == 0 || $ypos > $this->seq[$end]) {
+
+		if ($end == 0 || $ypos > $this->seq[$end])
+		{
 			$this->seq[++$this->lcs] = $ypos;
 			$this->in_seq[$ypos] = 1;
 			return $this->lcs;
 		}
 
 		$beg = 1;
-		while ($beg < $end) {
+		while ($beg < $end)
+		{
 			$mid = (int)(($beg + $end) / 2);
 			if ( $ypos > $this->seq[$mid] )
 			$beg = $mid + 1;
@@ -514,24 +579,28 @@ class _DiffEngine
 	 * Note that XLIM, YLIM are exclusive bounds.
 	 * All line numbers are origin-0 and discarded lines are not counted.
 	 */
-	function _compareseq ($xoff, $xlim, $yoff, $ylim) {
+	function _compareseq ($xoff, $xlim, $yoff, $ylim)
+	{
 		// Slide down the bottom initial diagonal.
 		while ($xoff < $xlim && $yoff < $ylim
-		&& $this->xv[$xoff] == $this->yv[$yoff]) {
+		&& $this->xv[$xoff] == $this->yv[$yoff])
+		{
 			++$xoff;
 			++$yoff;
 		}
 
 		// Slide up the top initial diagonal.
 		while ($xlim > $xoff && $ylim > $yoff
-		&& $this->xv[$xlim - 1] == $this->yv[$ylim - 1]) {
+		&& $this->xv[$xlim - 1] == $this->yv[$ylim - 1])
+		{
 			--$xlim;
 			--$ylim;
 		}
 
 		if ($xoff == $xlim || $yoff == $ylim)
 		$lcs = 0;
-		else {
+		else
+		{
 			// This is ad hoc but seems to work well.
 			//$nchunks = sqrt(min($xlim - $xoff, $ylim - $yoff) / 2.5);
 			//$nchunks = max(2,min(8,(int)$nchunks));
@@ -540,7 +609,8 @@ class _DiffEngine
 			= $this->_diag($xoff,$xlim,$yoff, $ylim,$nchunks);
 		}
 
-		if ($lcs == 0) {
+		if ($lcs == 0)
+		{
 			// X and Y sequences have no common subsequence:
 			// mark all changed.
 			while ($yoff < $ylim)
@@ -548,11 +618,13 @@ class _DiffEngine
 			while ($xoff < $xlim)
 			$this->xchanged[$this->xind[$xoff++]] = 1;
 		}
-		else {
+		else
+		{
 			// Use the partitions to split this problem into subproblems.
 			reset($seps);
 			$pt1 = $seps[0];
-			while ($pt2 = next($seps)) {
+			while ($pt2 = next($seps))
+			{
 				$this->_compareseq ($pt1[0], $pt2[0], $pt1[1], $pt2[1]);
 				$pt1 = $pt2;
 			}
@@ -571,7 +643,8 @@ class _DiffEngine
 	 *
 	 * This is extracted verbatim from analyze.c (GNU diffutils-2.7).
 	 */
-	function _shift_boundaries ($lines, &$changed, $other_changed) {
+	function _shift_boundaries ($lines, &$changed, $other_changed)
+	{
 		$i = 0;
 		$j = 0;
 
@@ -579,7 +652,8 @@ class _DiffEngine
 		$len = sizeof($lines);
 		$other_len = sizeof($other_changed);
 
-		while (1) {
+		while (1)
+		{
 			/*
 			 * Scan forwards to find beginning of another run of changes.
 			 * Also keep track of the corresponding point in the other file.
@@ -594,7 +668,8 @@ class _DiffEngine
 			while ($j < $other_len && $other_changed[$j])
 			$j++;
 
-			while ($i < $len && ! $changed[$i]) {
+			while ($i < $len && ! $changed[$i])
+			{
 				USE_ASSERTS && assert('$j < $other_len && ! $other_changed[$j]');
 				$i++; $j++;
 				while ($j < $other_len && $other_changed[$j])
@@ -610,7 +685,8 @@ class _DiffEngine
 			while (++$i < $len && $changed[$i])
 			continue;
 
-			do {
+			do
+			{
 				/*
 				 * Record the length of this run of changes, so that
 				 * we can later determine whether the run has grown.
@@ -622,7 +698,8 @@ class _DiffEngine
 				 * previous unchanged line matches the last changed one.
 				 * This merges with previous changed regions.
 				 */
-				while ($start > 0 && $lines[$start - 1] == $lines[$i - 1]) {
+				while ($start > 0 && $lines[$start - 1] == $lines[$i - 1])
+				{
 					$changed[--$start] = 1;
 					$changed[--$i] = false;
 					while ($start > 0 && $changed[$start - 1])
@@ -647,7 +724,8 @@ class _DiffEngine
 				 * Do this second, so that if there are no merges,
 				 * the changed region is moved forward as far as possible.
 				 */
-				while ($i < $len && $lines[$start] == $lines[$i]) {
+				while ($i < $len && $lines[$start] == $lines[$i])
+				{
 					$changed[$start++] = false;
 					$changed[$i++] = 1;
 					while ($i < $len && $changed[$i])
@@ -655,7 +733,8 @@ class _DiffEngine
 
 					USE_ASSERTS && assert('$j < $other_len && ! $other_changed[$j]');
 					$j++;
-					if ($j < $other_len && $other_changed[$j]) {
+					if ($j < $other_len && $other_changed[$j])
+					{
 						$corresponding = $i;
 						while ($j < $other_len && $other_changed[$j])
 						$j++;
@@ -667,7 +746,8 @@ class _DiffEngine
 			 * If possible, move the fully-merged run of changes
 			 * back to a corresponding run in the other file.
 			 */
-			while ($corresponding < $i) {
+			while ($corresponding < $i)
+			{
 				$changed[--$start] = 1;
 				$changed[--$i] = 0;
 				USE_ASSERTS && assert('$j > 0');
@@ -694,7 +774,8 @@ class Diff
 	 *        (Typically these are lines from a file.)
 	 * @param $to_lines array An array of strings.
 	 */
-	function Diff($from_lines, $to_lines) {
+	function __construct($from_lines, $to_lines)
+	{
 		$eng = new _DiffEngine;
 		$this->edits = $eng->diff($from_lines, $to_lines);
 	}
@@ -710,14 +791,14 @@ class Diff
  */
 class DiffFormatter
 {
-
 	/**
 	 * Format a diff.
 	 *
 	 * @param $diff object A Diff object.
 	 * @return string The formatted output.
 	 */
-	function format($diff) {
+	function format($diff)
+	{
 
 		$xi = $yi = 1;
 		$block = false;
@@ -725,13 +806,18 @@ class DiffFormatter
 
 		$this->_start_diff();
 
-		foreach ($diff->edits as $edit) {
-			if ($edit->type == 'copy') {
-				if (is_array($block)) {
-					if (sizeof($edit->orig) <= 0) {
+		foreach ($diff->edits as $edit)
+		{
+			if ($edit->type == 'copy')
+			{
+				if (is_array($block))
+				{
+					if (sizeof($edit->orig) <= 0)
+					{
 						$block[] = $edit;
 					}
-					else{
+					else
+					{
 						$this->_block($x0, + $xi - $x0,
 						$y0, + $yi - $y0,
 						$block);
@@ -740,7 +826,8 @@ class DiffFormatter
 				}
 			}
 			else {
-				if (! is_array($block)) {
+				if (! is_array($block))
+				{
 					$x0 = $xi;
 					$y0 = $yi;
 					$block = array();
@@ -762,21 +849,25 @@ class DiffFormatter
 		return $this->_end_diff();
 	}
 
-	function _block($xbeg, $xlen, $ybeg, $ylen, &$edits) {
+	function _block($xbeg, $xlen, $ybeg, $ylen, &$edits)
+	{
 		$this->_start_block($this->_block_header($xbeg, $xlen, $ybeg, $ylen));
 	}
 
-	function _start_diff() {
+	function _start_diff()
+	{
 		ob_start();
 	}
 
-	function _end_diff() {
+	function _end_diff()
+	{
 		$val = ob_get_contents();
 		ob_end_clean();
 		return $val;
 	}
 
-	function _block_header($xbeg, $xlen, $ybeg, $ylen) {
+	function _block_header($xbeg, $xlen, $ybeg, $ylen)
+	{
 		if ($xlen > 1)
 		$xbeg .= "," . ($xbeg + $xlen - 1);
 		if ($ylen > 1)
@@ -785,7 +876,8 @@ class DiffFormatter
 		return $xbeg . ($xlen ? ($ylen ? 'c' : 'd') : 'a') . $ybeg;
 	}
 
-	function _start_block($header) {
+	function _start_block($header)
+	{
 		echo $header."\n";
 	}
 

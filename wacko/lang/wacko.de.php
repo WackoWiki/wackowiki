@@ -30,12 +30,12 @@ $wacko_translation = array(
 	'SessionDuration'		=> 'Sitzungsdauer',
 	'LoggedInAs'			=> 'Du bist angemeldet als',
 
-	'ClearCookies' => 'Alle Cookies löschen',
-	'BindSessionIp' => 'Sizung an die IP-Adresse binden',// ''
-	'BindSessionIpOn' => 'aktiviert (die aktuelle IP',
-	'TrafficProtection' => 'Traffic Protection',
-	'SessionEnds' => 'Die aktuelle Sitzung endet',
-	'LastVisit' => 'Dein letzter Besuch',
+	'ClearCookies'			=> 'Alle Cookies löschen',
+	'BindSessionIp'			=> 'Sizung an die IP-Adresse binden',// ''
+	'BindSessionIpOn'		=> 'aktiviert (die aktuelle IP',
+	'TrafficProtection'		=> 'Traffic Protection',
+	'SessionEnds'			=> 'Die aktuelle Sitzung endet',
+	'LastVisit'				=> 'Dein letzter Besuch',
 
 	// other
 	'Guest'					=> 'Gast',
@@ -53,6 +53,8 @@ $wacko_translation = array(
 	'RDFLink'				=> 'RDF Dokument',
 	'EmailLink'				=> 'Schreibe E-Mail'."\n".'(E-Mailprogramm wird gestartet)',
 	'JabberLink'			=> 'Chatte über XMPP (Jabber client  wird gestartet)',
+	'PermaLink'				=> 'Permanenter Link',
+	'PermaLinkTip'		=> 'Dauerhafter Link zu dieser Seite',
 
 	'ShowTip'				=> 'In Ansichtsmodus zurückzukehren',
 	'ShowText'				=> 'Ansicht',
@@ -238,7 +240,7 @@ $wacko_translation = array(
 	// remove
 	'RemoveRevisions'		=> 'Lösche alle Revisionen',
 	'RemoveCluster'			=> 'Lösche alle Seiten des Clusters',
-	'RemoveDontKeep'		=> 'Speichere keine Kopie der entfernten Seiten und Kommentare',
+	'RemoveDontKeep'		=> 'Speichere keine Sicherungs-Kopie der entfernten Seiten und Kommentare',
 	'ReferrersRemoved'		=> '<i>Referenzen auf Seite %1 gelöscht.</i>',
 	'LinksRemoved'			=> '<i>Verweise von Seite %1 gelöscht.</i>',
 	'CategoriesRemoved'		=> '<em>Kategorien gelöscht.</em>',
