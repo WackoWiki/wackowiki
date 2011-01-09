@@ -8,7 +8,7 @@
 
 // create polls object
 $this->use_class('polls');
-$pollsObj = new Polls($this);
+$polls_obj = new Polls($this);
 
 // parameters
 if (!isset($nomark))		$nomark	= 0;
@@ -19,14 +19,14 @@ else						$year	= (int)$_GET['year'];
 // print results
 if (isset($_GET['poll']) && (isset($_GET['results']) && $_GET['results'] == 1))
 {
-	echo $pollsObj->show_poll_results((int)$_GET['poll']);
+	echo $polls_obj->show_poll_results((int)$_GET['poll']);
 	echo '<br />';
 }
 
 // make list
-if ($year != 0)	$list	= $pollsObj->get_polls_list('archive', $year);
-else			$list	= $pollsObj->get_polls_list('all');
-				$years	= $pollsObj->poll_years();
+if ($year != 0)	$list	= $polls_obj->get_polls_list('archive', $year);
+else			$list	= $polls_obj->get_polls_list('all');
+				$years	= $polls_obj->poll_years();
 
 
 // print list
@@ -73,6 +73,6 @@ if(!$nomark)
 }
 
 // destroy polls object
-unset($pollsObj);
+unset($polls_obj);
 
 ?>
