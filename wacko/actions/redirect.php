@@ -21,9 +21,9 @@ if ($page)
 	{
 		if ($user = $this->get_user())
 		{
-			if ($user['dont_redirect'] == 1 || $_POST['redirect'] == 'no')
+			if ($user['dont_redirect'] == 1 || (isset($_POST['redirect']) && $_POST['redirect'] == 'no'))
 			{
-				echo "<br /><br /><br />".$this->get_translation('PageMoved')." ".$this->link('/'.$page)."<br /><br /><br />";
+				echo '<div class="info">'.$this->get_translation('PageMoved')." ".$this->link('/'.$page).'</div>';
 			}
 			else
 			{
@@ -37,7 +37,7 @@ if ($page)
 	}
 	else
 	{
-		echo "<i>".$this->get_translation('WrongPage4Redirect')."</i>";
+		echo '<div class="info"><i>'.$this->get_translation('WrongPage4Redirect').'</i></div>';
 	}
 };
 ?>

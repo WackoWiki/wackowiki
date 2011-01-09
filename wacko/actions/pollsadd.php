@@ -18,7 +18,7 @@ $startmod = '';
 
 // create polls object
 $this->use_class('polls');
-$pollsObj = new Polls($this);
+$polls_obj = new Polls($this);
 
 // define context
 $admin = $this->is_admin();
@@ -30,8 +30,8 @@ if ($moderation === true)
 {
 	if ($edit_id)
 	{
-		$header			= $pollsObj->get_poll_title($edit_id);
-		$vars			= $pollsObj->get_poll_vars($edit_id);
+		$header			= $polls_obj->get_poll_title($edit_id);
+		$vars			= $polls_obj->get_poll_vars($edit_id);
 		$topic			= $header['text'];
 		$user			= $header['user'];
 		$plural			= $header['plural'];
@@ -103,11 +103,11 @@ if (isset($_POST['submit_poll']))
 	{
 		if (!$user)		$user		= $this->get_user_id();
 		if (!$user)		$user		= $this->get_user_ip();
-		if (!$edit_id)	$edit_id	= $pollsObj->get_last_poll_id() + 1;
+		if (!$edit_id)	$edit_id	= $polls_obj->get_last_poll_id() + 1;
 		// remove moderated poll
-		if ($moderation === true)	  $pollsObj->remove_poll($edit_id);
+		if ($moderation === true)	  $polls_obj->remove_poll($edit_id);
 		// save new or update moderated poll
-		$pollsObj->submit_poll($edit_id, $topic, $plural, $answers, $user, ($startmod == 1 && $admin ? 1 : 0));
+		$polls_obj->submit_poll($edit_id, $topic, $plural, $answers, $user, ($startmod == 1 && $admin ? 1 : 0));
 		// update page cache
 		if ($this->tag) $this->cache->cache_invalidate($this->supertag);
 		// update news RSS feed
@@ -236,6 +236,6 @@ else if ($stop_mod !== true)
 }
 
 // destroy polls object
-unset($pollsObj);
+unset($polls_obj);
 
 ?>
