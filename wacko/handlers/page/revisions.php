@@ -4,6 +4,9 @@
 $max	= '';
 $output	= '';
 
+// redirect to show method if hide_revisions is true (1 - guests, 2 - registered users)
+#if ($this->config['hide_revisions']) $this->redirect($this->href('show'));
+
 // redirect to show method if page don't exists
 #if (!$this->page) $this->redirect($this->href('show'));
 

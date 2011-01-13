@@ -37,12 +37,6 @@ function admin_configemail(&$engine, &$module)
 
 		$config['phpmailer']					= (int)$_POST['phpmailer'];
 		$config['phpmailer_method']				= (string)$_POST['phpmailer_method'];
-		#$config['captcha_registration']			= (int)$_POST['captcha_registration'];
-		#$config['session_encrypt_cookie']		= (int)$_POST['session_encrypt_cookie'];
-		#$config['antidupe']						= (int)$_POST['antidupe'];
-		#$config['default_read_acl']				= (string)$_POST['default_read_acl'];
-		#$config['default_write_acl']			= (string)$_POST['default_write_acl'];
-
 
 		foreach($config as $key => $value)
 		{

@@ -24,13 +24,14 @@ $init->settings(); // initialize DBAL and populate from config table
 $init->dbal();
 $init->settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
 $init->settings('user_table',	$init->config['table_prefix'].'user');
-$init->settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
 $init->settings('cookie_hash',	hash('md5', $init->config['base_url'].$init->config['system_seed']));
+
+$init->settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
 
 // misc
 $init->session();
 
-// start engine
+// engine start
 $cache	= $init->cache();
 $engine	= $init->engine();
 
@@ -112,6 +113,7 @@ if (isset($_POST['password']))
 {
 	if (hash('sha256', $_POST['password']) == $pwd)
 	{
+		$engine->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $engine->config['base_url'].'');
 		$engine->set_session_cookie('admin', hash('sha256', $_POST['password']), '', ( $engine->config['tls'] == true ? 1 : 0 ));
 		$_SESSION['created'] = time();
 		$_SESSION['last_activity'] = time();
@@ -126,6 +128,7 @@ if (isset($_POST['password']))
 
 // check authorization
 $user = '';
+
 if (isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']]) && $_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']] == $pwd)
 {
 	$user = array('user_name' => $engine->config['admin_name']);

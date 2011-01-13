@@ -33,7 +33,7 @@ if ($this->has_access('read'))
 
 		if ($user = $this->get_user())
 		{
-			if ($user['numerate_links'] == 0)
+			if ($user['numerate_links'] == 0 || $this->config['numerate_links'] == 0)
 			{
 				$_numerate_links = false;
 			}
