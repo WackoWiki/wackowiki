@@ -31,6 +31,21 @@ $wacko_config = array(
 	'action_path' => 'actions',
 	'handler_path' => 'handlers',
 
+	'phpmailer' => 0,
+	'phpmailer_method' => 'mail',
+
+	'smtp_host' => 'localhost',
+	'smtp_username' => '',
+	'smtp_password' => '',
+	'smtp_port' => 25,
+	'smtp_connection_mode' => '',
+	'email_priority' => 3,
+
+	'enable_email_notification' => 1,
+	'limit_email_domain' => '',
+	'check_mx_record' => 0,
+	'validate_email' => 1,
+
 	'language' => 'en',
 	'multilanguage' => 0,
 
