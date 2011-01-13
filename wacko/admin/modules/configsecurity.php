@@ -9,7 +9,7 @@ $module['configsecurity'] = array(
 		'cat'	=> 'Preferences',
 		'mode'	=> 'configsecurity',
 		'name'	=> 'Security',
-		'title'	=> 'security subsystems settings',
+		'title'	=> 'Security subsystems settings',
 	);
 
 ########################################################

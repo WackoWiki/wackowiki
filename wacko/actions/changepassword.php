@@ -304,13 +304,13 @@ else
 
 				$subject =	$this->get_translation('EmailForgotSubject').
 							$this->config['wacko_name'];
-				$message =	$this->get_translation('EmailHello'). $name.".\n\n".
+				$body =	$this->get_translation('EmailHello'). $name.".\n\n".
 							str_replace('%1', $this->config['wacko_name'],
 							str_replace('%2', $user['user_name'],
 							str_replace('%3', $this->href().
 							($this->config['rewrite_mode'] ? "?" : "&amp;")."secret_code=".$code,
 							$this->get_translation('EmailForgotMessage'))))."\n";
-				$message.=	"\n".$this->get_translation('EmailGoodbye').
+				$body.=	"\n".$this->get_translation('EmailGoodbye').
 							"\n".$this->config['wacko_name'].
 							"\n".$this->config['base_url'];
 
@@ -322,7 +322,7 @@ else
 					"LIMIT 1");
 
 				// send code
-				$this->send_mail($user['email'], $subject, $message);
+				$this->send_mail($user['email'], $subject, $body);
 
 				// count attempt
 				$this->set_lost_password_count($user['user_id']);

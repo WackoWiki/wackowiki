@@ -678,6 +678,7 @@ class Init
 					echo "<li>User language value: ".(isset($user['lang']) ? $user['lang'] : '')."</li>\n";
 					echo "<li>Config language: ".$this->config['language']."</li>\n";
 					echo "<li>User selected language: ".(isset($this->engine->user_lang) ? $this->engine->user_lang : '')."</li>\n";
+					echo "<li>Charset: ".$this->engine->get_charset()."</li>\n";
 					echo "</ul>\n";
 				}
 
@@ -698,6 +699,7 @@ class Init
 
 				$this->engine->debug_print_r($_SESSION);
 				#$this->engine->debug_print_r($this->config);
+
 
 				echo "</div >\n";
 			}

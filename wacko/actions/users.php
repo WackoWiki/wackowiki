@@ -55,11 +55,11 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				$prefix		= rtrim(str_replace(array('https://www.', 'https://', 'http://www.', 'http://'), '', $this->config['base_url']), '/');
 				$msgID		= date('ymdHi').'.'.mt_rand(100000, 999999).'@'.$prefix;
 				$subject	= ( strpos($_POST['mail_subject'], '['.$prefix.'] ') === false ? '['.$prefix.'] ' : '' ).( $_POST['mail_subject'] ? $_POST['mail_subject'] : '(no subject)' );
-				$message	= str_replace('%1', $this->get_user_name(), $this->get_translation('UsersPMBody'));
-				$message	= str_replace('%2', rtrim($this->config['base_url'], '/'), $message);
-				$message	= str_replace('%3', $this->href('', $this->tag, 'profile='.$this->get_user_name().'&ref='.rawurlencode(base64_encode($msgID.'@@'.$subject)).'#contacts'), $message);
-				$message	= str_replace('%4', $this->config['abuse_email'], $message);
-				$message	= str_replace('%5', $_POST['mail_body'], $message);
+				$body	= str_replace('%1', $this->get_user_name(), $this->get_translation('UsersPMBody'));
+				$body	= str_replace('%2', rtrim($this->config['base_url'], '/'), $body);
+				$body	= str_replace('%3', $this->href('', $this->tag, 'profile='.$this->get_user_name().'&ref='.rawurlencode(base64_encode($msgID.'@@'.$subject)).'#contacts'), $body);
+				$body	= str_replace('%4', $this->config['abuse_email'], $body);
+				$body	= str_replace('%5', $_POST['mail_body'], $body);
 
 				// compose headers
 				$headers	= array('Message-ID: <$msgID>');
@@ -81,9 +81,9 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				}
 				else
 				{
-					$message .= "\n\n".$this->get_translation('MailGoodbye')."\n".$this->config['wacko_name']."\n".$this->config['base_url'];
+					$body .= "\n\n".$this->get_translation('MailGoodbye')."\n".$this->config['wacko_name']."\n".$this->config['base_url'];
 
-					$this->send_mail($user['email'], $subject, $message, 'no-reply@'.$prefix, '', $headers, true);
+					$this->send_mail($user['email'], $subject, $body, 'no-reply@'.$prefix, '', $headers, true);
 					$this->set_message($notice);
 					$this->log(4, str_replace('%2', $user['user_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('LogPMSent', $this->config['language']))));
 					$_SESSION['intercom_delay']	= time();
@@ -93,7 +93,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				}
 			}
 
-			unset($error, $notice, $message, $subject, $referrer, $prefix, $headers, $msgID);
+			unset($error, $notice, $body, $subject, $referrer, $prefix, $headers, $msgID);
 		}
 
 		// header and profile data

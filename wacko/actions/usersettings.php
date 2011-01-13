@@ -130,7 +130,7 @@ else if ($user = $this->get_user())
 				"LIMIT 1");
 
 			$subject = $this->config['wacko_name'].". ".$this->get_translation('EmailConfirm');
-			$message = $this->get_translation('EmailHello'). $user['user_name'].".\n\n".
+			$body = $this->get_translation('EmailHello'). $user['user_name'].".\n\n".
 						str_replace('%1', $this->config['wacko_name'],
 						str_replace('%2', $user['user_name'],
 						str_replace('%3', $this->href().
@@ -139,7 +139,7 @@ else if ($user = $this->get_user())
 						$this->get_translation('EmailGoodbye')."\n".
 						$this->config['wacko_name']."\n".
 						$this->config['base_url'];
-			$this->send_mail($email, $subject, $message);
+			$this->send_mail($email, $subject, $body);
 		}
 		else
 		{

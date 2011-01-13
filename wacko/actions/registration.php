@@ -193,7 +193,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 
 				$subject = 	$this->get_translation('EmailWelcome').
 							$this->config['wacko_name'];
-				$message = 	$this->get_translation('EmailHello'). $user_name.".\n\n".
+				$body = 	$this->get_translation('EmailHello'). $user_name.".\n\n".
 							str_replace('%1', $this->config['wacko_name'],
 							str_replace('%2', $user_name,
 							str_replace('%3', $this->href().
@@ -202,7 +202,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 							$this->get_translation('EmailGoodbye')."\n".
 							$this->config['wacko_name']."\n".
 							$this->config['base_url'];
-				$this->send_mail($email, $subject, $message);
+				$this->send_mail($email, $subject, $body);
 
 				// log event
 				$this->log(4, str_replace('%2', $email, str_replace('%1', $user_name, $this->get_translation('LogUserRegistered', $this->config['language']))));

@@ -11,8 +11,8 @@ if (!$this->page) $this->redirect($this->href());
 // TODO: config->owners_can_remove_comments ?
 if ($this->is_admin() ||
 (!$this->config['remove_onlyadmins'] &&
-($this->get_page_owner($this->tag) == $this->get_user_name() ||
-$this->get_page_owner_from_comment() == $this->get_user_name())))
+((!$this->page['comment_on_id'] && $this->get_page_owner($this->tag) == $this->get_user_name()) ||
+($this->page['comment_on_id'] && $this->get_page_owner_from_comment() == $this->get_user_name()))))
 {
 	if (!$this->page)
 	{
