@@ -31,8 +31,6 @@ function admin_configbasic(&$engine, &$module)
 		$config['allow_themes']				= (string)$_POST['allow_themes'];
 		$config['allow_themes_per_page']	= (string)$_POST['themes_per_page'];
 		$config['admin_name']				= (string)$_POST['admin_name'];
-		$config['admin_email']				= (string)$_POST['admin_email'];
-		$config['abuse_email']				= (string)$_POST['abuse_email'];
 		$config['language']					= (string)$_POST['language'];
 		$config['multilanguage']			= (int)$_POST['multilanguage'];
 		$config['upload_images_only']		= (int)$_POST['upload_images_only'];
@@ -146,23 +144,6 @@ function admin_configbasic(&$engine, &$module)
 				<small>User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.</small></label></td>
 				<td><input maxlength="25" style="width:200px;" id="admin_name" name="admin_name" value="<?php echo htmlspecialchars($engine->config['admin_name']);?>" /></td>
 			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr>
-				<td class="label"><label for="admin_email"><strong>Email of the site owner:</strong><br />
-				<small>This address will appear as the<tt>"From:"</tt> all the email-notification site.</small></label></td>
-				<td><input maxlength="100" style="width:200px;" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->config['admin_email']);?>" /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr>
-				<td class="label"><label for="abuse_email"><strong>Email service abuse:</strong><br />
-				<small>Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.</small></label></td>
-				<td><input maxlength="100" style="width:200px;" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->config['abuse_email']);?>" /></td>
-			</tr>
-			<tr>
 				<th colspan="2">
 					<br />
 					Language settings
@@ -198,8 +179,8 @@ function admin_configbasic(&$engine, &$module)
 				</th>
 			</tr>
 			<tr>
-				<td class="label"><label for="upload_images_only"><strong>Please only upload an image:</strong><br />
-				<small>Allow uploading of image files only on the page.</small></label></td>
+				<td class="label"><label for="upload_images_only"><strong>Allow only upload of images:</strong><br />
+				<small>Allow only uploading of image files on the page.</small></label></td>
 				<td><input type="checkbox" id="upload_images_only" name="upload_images_only" value="1"<?php echo ( $engine->config['upload_images_only'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
@@ -214,7 +195,7 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="upload_quota_per_user"><strong>Restricting files to a user:</strong><br />
+				<td class="label"><label for="upload_quota_per_user"><strong>Restricting quota of storage to a user:</strong><br />
 				<small>Restriction on the quota of storage that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo htmlspecialchars($engine->config['upload_quota_per_user']);?>" /></td>
 			</tr>
@@ -359,7 +340,7 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="keep_deleted_time"><strong>Storage time of remote pages:</strong><br />
+				<td class="label"><label for="keep_deleted_time"><strong>Storage time of deleted pages:</strong><br />
 				<small>The period in days. It makes sense only if the previous option. Zero indicates the eternal possession (in this case the administrator can clear the "cart" manually).</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="keep_deleted_time" name="keep_deleted_time" value="<?php echo htmlspecialchars($engine->config['keep_deleted_time']);?>" /></td>
 			</tr>

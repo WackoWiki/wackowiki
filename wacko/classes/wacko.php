@@ -188,15 +188,24 @@ class Wacko
 		else
 		//Soon we'll need to have page_id when saving a new page to continue working with $page_id instead of $tag
 		{
-			// Returns Array ( [id] => Value )
-			$get_page_id = $this->load_single(
-				"SELECT page_id ".
-				"FROM ".$this->config['table_prefix']."page ".
-				"WHERE tag = '".quote($this->dblink, $tag)."' ".
-				"LIMIT 1");
+			if (!isset($this->page_id_cache[$tag]))
+			{
+				// Returns Array ( [id] => Value )
+				$get_page_id = $this->load_single(
+					"SELECT page_id ".
+					"FROM ".$this->config['table_prefix']."page ".
+					"WHERE tag = '".quote($this->dblink, $tag)."' ".
+					"LIMIT 1");
 
-			// Get page_ID value
-			$new_page_id = $get_page_id['page_id'];
+				// Get page_ID value
+				$new_page_id = $get_page_id['page_id'];
+
+				$this->page_id_cache[$tag] = $new_page_id;
+			}
+			else
+			{
+				$new_page_id = $this->page_id_cache[$tag];
+			}
 
 			return $new_page_id;
 		}
@@ -205,6 +214,17 @@ class Wacko
 	function get_wacko_version()
 	{
 		return WACKO_VERSION;
+	}
+
+	// checks if the parameter is an empty string or a string containing only whitespace
+	function is_blank( $variable )
+	{
+		if( trim( $variable ) == '' )
+		{
+			return true;
+		}
+
+		return false;
 	}
 
 	function check_file_exists($file_name, $unwrapped_tag = '' )
@@ -1416,35 +1436,52 @@ class Wacko
 	}
 
 	// MAILER
-	// $email				- recipient address
+	// $email_to			- recipient address
 	// $subject, $message 	- self-explaining
-	// $from				- place specific address into the 'From:' field
+	// $email_from			- place specific address into the 'From:' field
 	// $charset				- send message in specific charset (w/o actual re-encoding)
+	// $xtra_headers		- (array) insert additional mail headers
 	// $supress_tls			- don't change all http links to https links in the message body
-	function send_mail($email, $subject, $message, $from = '', $charset = '', $supress_tls = false)
+	function send_mail($email_to, $subject, $body, $email_from = '', $charset = '', $xtra_headers = '', $supress_tls = false)
 	{
-		if (!$email)
+		if (!$email_to || !$subject || !$body)
 		{
 			return;
 		}
 
-		$headers = 'From: =?'. $this->get_charset() ."?B?". base64_encode($this->config['wacko_name']) ."?= <".$this->config['admin_email'].">\r\n";
-		#$headers = 'From: '.( $from ? $from : '"'.$this->config['wacko_name'].'" <'.$this->config['admin_email'].'>' )."\n";
-		$headers .= "X-Mailer: PHP/".phpversion()."\r\n"; //mailer
-		$headers .= "X-Priority: 3\r\n"; //1 UrgentMessage, 3 Normal
-		$headers .= "X-Wacko: ".$this->config['base_url']."\r\n";
-		$headers .= "Content-Type: text/plain; charset=".$this->get_charset()."\r\n";
-		#$subject =  "=?".$this->get_charset()."?B?" . base64_encode($subject) . "?=";
-		$subject = ( $subject ? "=?".( $charset ? $charset : $this->get_charset() )."?B?" . base64_encode($subject) . "?=" : '' );
+		if (empty($charset)) $charset = $this->get_charset();
+		$name_to		= '';
+		$email_from		= $this->config['admin_email'];
+		$name_from		= $this->config['wacko_name'];
 
 		// in tls mode substitute protocol name in links substrings
 		if ($this->config['tls'] == true && $supress_tls === false)
 		{
-			$message = str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $message);
+			$body = str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $body);
 		}
 
-		$message = wordwrap($message, 74, "\n", 0);
-		@mail($email, $subject, $message, $headers);
+		// use phpmailer class
+		if ($this->config['phpmailer'] == true)
+		{
+			// $this->config['phpMailer_method']
+			$this->use_class('email');
+			$email = new email($this);
+			$email->php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset, $xtra_headers);
+		}
+		else
+		{
+			// use mail() function
+			$headers = 'From: =?'. $charset ."?B?". base64_encode($this->config['wacko_name']) ."?= <".$this->config['admin_email'].">\r\n";
+			$headers .= "X-Mailer: PHP/".phpversion()."\r\n"; //mailer
+			$headers .= "X-Priority: 3\r\n"; //1 UrgentMessage, 3 Normal
+			$headers .= "X-Wacko: ".$this->config['base_url']."\r\n";
+			$headers .= "Content-Type: text/plain; charset=".$charset."\r\n";
+			$headers .= ( is_array($xtra_headers) ? implode("\n", $xtra_headers)."\n" : '' );	// additional headers
+			$subject = ($subject ? "=?".$charset."?B?" . base64_encode($subject) . "?=" : '');
+
+			$body = wordwrap($body, 74, "\n", 0);
+			@mail($email_to, $subject, $body, $headers);
+		}
 	}
 
 	// PAGE SAVING ROUTINE
@@ -1777,7 +1814,7 @@ class Wacko
 										$this->set_language ($lang);
 
 										$subject = '['.$this->config['wacko_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
-										$message = $this->get_translation('EmailHello', $lang). $watcher['user_name'].".\n\n".
+										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].".\n\n".
 													$user_name.
 													$this->get_translation('SomeoneCommented', $lang)."\n".
 													$this->href('', $this->get_page_tag_by_id($comment_on_id), '')."\n\n".
@@ -1788,7 +1825,7 @@ class Wacko
 													$this->config['wacko_name']."\n".
 													$this->config['base_url'];
 
-										$this->send_mail($_user['email'], $subject, $message);
+										$this->send_mail($_user['email'], $subject, $body);
 									}
 								}
 								else
@@ -1891,7 +1928,7 @@ class Wacko
 										$this->set_language ($lang);
 
 										$subject = '['.$this->config['wacko_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
-										$message = $this->get_translation('EmailHello', $lang). $watcher['user_name']."\n\n".
+										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name']."\n\n".
 											$user_name.
 											$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
 											$title."\n".
@@ -1903,9 +1940,9 @@ class Wacko
 											$this->config['wacko_name']."\n".
 											$this->config['base_url'];
 
-										$this->send_mail($_user['email'], $subject, $message);
+										$this->send_mail($_user['email'], $subject, $body);
 									}
-								} // end of hasaccess
+								} // end of has_access()
 							} // end of watchers
 						}
 						$this->load_translation($this->user_lang);
@@ -1917,7 +1954,6 @@ class Wacko
 		}
 
 		// writing xmls
-
 		if ($mute === false)
 		{
 			if (!$old_page['comment_on_id'] || !$comment_on_id)
@@ -3936,7 +3972,7 @@ class Wacko
 	{
 		if($this->page['comment_on_id'])
 		{
-			return $this->get_page_owner($this->page['comment_on_id']);
+			return $this->get_page_owner('', $this->page['comment_on_id']);
 		}
 		else
 		{
@@ -3944,7 +3980,7 @@ class Wacko
 		}
 	}
 
-	function get_page_owner($tag = '', $revision_id = '')
+	function get_page_owner($tag = '', $page_id = 0, $revision_id = '')
 	{
 		if (!$tag = trim($tag))
 		{
@@ -3958,7 +3994,7 @@ class Wacko
 			}
 		}
 
-		if ($page = $this->load_page($tag, 0, $revision_id, LOAD_CACHE, LOAD_META))
+		if ($page = $this->load_page($tag, $page_id, $revision_id, LOAD_CACHE, LOAD_META))
 		{
 			return $page['owner_name'];
 		}
@@ -4432,7 +4468,7 @@ class Wacko
 				// links ((link desc @@lang))
 				if ((preg_match('/^\[\[(\S+)(\s+(.+))?\]\]$/', $_bookmark, $matches)) ||
 					(preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/', $_bookmark, $matches)) ||
-					(preg_match('/^(\S+)(\s+(.+))?$/', $thing, $matches)) ) // without brackets at last!
+					(preg_match('/^(\S+)(\s+(.+))?$/', $_bookmark, $matches)) ) // without brackets at last!
 				{
 					list (, $url, $text) = $matches;
 
