@@ -38,9 +38,9 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	if ($this->has_access('write') === true) $access = true;
 
 	// checking new topic input if any
-	if ($_POST['action'] == 'topicadd' && $access === true)
+	if (isset($_POST['action']) && $_POST['action'] == 'topicadd' && $access === true)
 	{
-		if ($_POST['title'] == true)
+		if (isset($_POST['title']) && $_POST['title'] == true)
 		{
 			$name		= trim($_POST['title'], ". \t");
 			$title		= $name;
@@ -48,7 +48,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			$name		= preg_replace('/[^- \\w]/', '', $name);
 			$name		= str_replace(array(' ', "\t"), '', $name);
 
-			if ($name == '') $error = $this->get_translation('ForumNoTopicName');
+			if ($name == '')
+			{
+				$error = $this->get_translation('ForumNoTopicName');
+			}
 		}
 		else
 		{
@@ -74,7 +77,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	$admin = $this->is_admin();
 
 	// parse subforums list if any
-	if (!empty($pages)) $pages = trim(explode(',', $pages), '/ ');
+	if (!empty($pages))
+	{
+		$pages = trim(explode(',', $pages), '/ ');
+	}
 
 	// make counter query
 	$sql = "SELECT COUNT(p.tag) AS n ".
@@ -83,10 +89,13 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		"WHERE p.page_id = a.page_id ".
 			"AND a.privilege = 'write' AND a.list = '$' ".
 			"AND p.tag LIKE '{$this->tag}/%' ";
+
 	if (isset($pages))
 	{
 		foreach ($pages as $page)
+		{
 			$sql .= "AND tag NOT LIKE '".quote($this->dblink, $page)."/%' ";
+		}
 	}
 
 	// count topics and make pagination
@@ -102,11 +111,15 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		"WHERE p.page_id = a.page_id ".
 			"AND a.privilege = 'write' AND a.list = '$' ".
 			"AND p.tag LIKE '{$this->tag}/%' ";
+
 	if (isset($pages))
 	{
 		foreach ($pages as $page)
+		{
 			$sql .= "AND p.tag NOT LIKE '".quote($this->dblink, $page)."/%' ";
+		}
 	}
+
 	$sql .= "ORDER BY p.commented DESC ".
 		"LIMIT {$pagination['offset']}, {$this->config['forum_topics']}";
 
@@ -146,7 +159,9 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 		// check new comments
 		if ($user['last_mark'] == true && ( ($comment['user'] != $user['user_name'] && $comment['created'] > $user['last_mark']) || ($topic['owner'] != $user['user_name'] && $topic['created'] > $user['last_mark']) ))
+		{
 			$updated = true;
+		}
 
 		// print
 		echo '<tr>'.
@@ -165,6 +180,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				'<td align="center"><small>'.$topic['hits'].'</small></td>'.
 				'<td>&nbsp;&nbsp;&nbsp;</td>'.
 				'<td align="center">';
+
 		if ($comment == true)
 		{
 			echo '<small'.( $updated === true ? ' style="font-weight:600;"' : '' ).' title="'.( $admin ? $comment['ip'] : '' ).'">'.

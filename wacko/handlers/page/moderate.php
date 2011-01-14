@@ -17,7 +17,7 @@ function moderate_page_exists(&$engine, $tag)
 	if ($page = $engine->load_single(
 	"SELECT page_id ".
 	"FROM {$engine->config['table_prefix']}page ".
-	"WHERE tag = '".quote($this->dblink, $tag)."' ".
+	"WHERE tag = '".quote($engine->dblink, $tag)."' ".
 	"LIMIT 1"))
 	{
 		return true;
@@ -46,29 +46,29 @@ function moderate_delete_page(&$engine, $tag)
 	return true;
 }
 
-function moderate_rename_topic(&$engine, $oldtag, $newtag, $title = '')
+function moderate_rename_topic(&$engine, $old_tag, $new_tag, $title = '')
 {
 	// set forum context
 	$forum_context	= $engine->forum;
 	$engine->forum	= true;
 
-	$supertag = $engine->npj_translit($newtag);
+	$supertag = $engine->npj_translit($new_tag);
 
-	$engine->rename_page($oldtag, $newtag, $supertag);
-	$engine->remove_referrers($oldtag);
-	$engine->remove_links($oldtag);
-	$engine->clear_cache_wanted_page($newtag);
+	$engine->rename_page($old_tag, $new_tag, $supertag);
+	$engine->remove_referrers($old_tag);
+	$engine->remove_links($old_tag);
+	$engine->clear_cache_wanted_page($new_tag);
 	$engine->clear_cache_wanted_page($supertag);
 
 	// rerender page and update link table in new context
-	$page = $engine->load_page($newtag);
+	$page = $engine->load_page($new_tag);
 	$engine->current_context++;
-	$engine->context[$engine->current_context] = $newtag;
+	$engine->context[$engine->current_context] = $new_tag;
 	$engine->clear_link_table();
 	$engine->start_link_tracking();
 	$dummy = $engine->format($page['body_r'], 'post_wacko');
 	$engine->stop_link_tracking();
-	$engine->write_link_table($newtag);
+	$engine->write_link_table($new_tag);
 	$engine->clear_link_table();
 	$engine->current_context--;
 
@@ -77,12 +77,12 @@ function moderate_rename_topic(&$engine, $oldtag, $newtag, $title = '')
 	{
 		// resave modified body
 		$page['body'] = preg_replace('/^==.*?==/', '=='.$title.'==', $page['body']);
-		$engine->save_page($newtag, false, $page['body'], '', '', '', '', true);
+		$engine->save_page($new_tag, false, $page['body'], '', '', '', '', true);
 
 		$engine->query(
 			"UPDATE {$engine->config['table_prefix']}page ".
-			"SET title = '".quote($this->dblink, $title)."' ".
-			"WHERE tag = '".quote($this->dblink, $newtag)."' ".
+			"SET title = '".quote($engine->dblink, $title)."' ".
+			"WHERE tag = '".quote($engine->dblink, $new_tag)."' ".
 			"LIMIT 1");
 	}
 
@@ -98,7 +98,10 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 	$forum_context	= $engine->forum;
 	$engine->forum	= true;
 
-	if ($topics == false || $base == false) return false;
+	if ($topics == false || $base == false)
+	{
+		return false;
+	}
 
 	foreach ($topics as $topic)
 	{
@@ -108,8 +111,8 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 			// move comments to the base topic
 			$engine->query(
 				"UPDATE {$engine->config['table_prefix']}page SET ".
-					"comment_on_id = '".quote($this->dblink, $base)."', ".
-				"WHERE comment_on_id = '".quote($this->dblink, $topic)."'");
+					"comment_on_id = '".quote($engine->dblink, $base)."' ".
+				"WHERE comment_on_id = '".quote($engine->dblink, $topic)."'");
 
 			// for the forum moderation only
 			if ($movetopics === true)
@@ -133,13 +136,13 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 				// restore creation date
 				$engine->query(
 					"UPDATE {$engine->config['table_prefix']}page SET ".
-						"modified		= '".quote($this->dblink, $page['modified'])."', ".
-						"created		= '".quote($this->dblink, $page['created'])."', ".
-						"commented		= '".quote($this->dblink, $page['commented'])."', ".
-						"owner_id		= '".quote($this->dblink, $page['owner_id'])."', ".
-						"user_id		= '".quote($this->dblink, $page['user_id'])."', ".
-						"ip			= '".quote($this->dblink, $page['ip'])."' ".
-					"WHERE tag = '".quote($this->dblink, 'Comment'.$num)."'");
+						"modified		= '".quote($engine->dblink, $page['modified'])."', ".
+						"created		= '".quote($engine->dblink, $page['created'])."', ".
+						"commented		= '".quote($engine->dblink, $page['commented'])."', ".
+						"owner_id		= '".quote($engine->dblink, $page['owner_id'])."', ".
+						"user_id		= '".quote($engine->dblink, $page['user_id'])."', ".
+						"ip				= '".quote($engine->dblink, $page['ip'])."' ".
+					"WHERE tag = '".quote($engine->dblink, 'Comment'.$num)."'");
 
 				// remove old page remnants
 				moderate_delete_page($engine, $topic);
@@ -151,7 +154,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 	$comments = $engine->load_all(
 		"SELECT tag, body_r ".
 		"FROM {$engine->config['table_prefix']}page ".
-		"WHERE comment_on_id = '".quote($this->dblink, $base)."'");
+		"WHERE comment_on_id = '".quote($engine->dblink, $base)."'");
 
 	foreach ($comments as $comment)
 	{
@@ -170,7 +173,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"comments	= '".(int)$engine->count_comments($base)."', ".
 			"commented	= NOW() ".
-		"WHERE tag = '".quote($this->dblink, $base)."' ".
+		"WHERE tag = '".quote($engine->dblink, $base)."' ".
 		"LIMIT 1");
 
 	// restore forum context
@@ -179,7 +182,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 	return true;
 }
 
-function moderate_split_topic(&$engine, $comment_ids, $oldtag, $newtag, $title)
+function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title)
 {
 	if (is_array($comment_ids) === false)
 	{
@@ -196,12 +199,12 @@ function moderate_split_topic(&$engine, $comment_ids, $oldtag, $newtag, $title)
 
 	// resave modified body
 	$page['body']	= '=='.$title."==\n\n".$page['body'];
-	$engine->save_page($newtag, false, $page['body'], '', '', '', $title, true);
+	$engine->save_page($new_tag, false, $page['body'], '', '', '', $title, true);
 
 	// bug-resistent check: has page been really resaved?
 	if ($engine->load_single(
 	"SELECT page_id FROM {$engine->config['table_prefix']}page ".
-	"WHERE tag = '".quote($this->dblink, $newtag)."'") != true)
+	"WHERE tag = '".quote($engine->dblink, $new_tag)."'") != true)
 	{
 		$engine->forum = $forum_context;
 		return false;
@@ -210,48 +213,48 @@ function moderate_split_topic(&$engine, $comment_ids, $oldtag, $newtag, $title)
 	// restore original metadata
 	$engine->query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
-			"modified		= '".quote($this->dblink, $page['modified'])."', ".
-			"created	= '".quote($this->dblink, $page['created'])."', ".
-			"owner_id		= '".quote($this->dblink, $page['owner_id'])."', ".
-			"user_id		= '".quote($this->dblink, $page['user_id'])."', ".
-			"ip			= '".quote($this->dblink, $page['ip'])."' ".
-		"WHERE tag = '".quote($this->dblink, $newtag)."'");
+			"modified		= '".quote($engine->dblink, $page['modified'])."', ".
+			"created	= '".quote($engine->dblink, $page['created'])."', ".
+			"owner_id		= '".quote($engine->dblink, $page['owner_id'])."', ".
+			"user_id		= '".quote($engine->dblink, $page['user_id'])."', ".
+			"ip			= '".quote($engine->dblink, $page['ip'])."' ".
+		"WHERE tag = '".quote($engine->dblink, $new_tag)."'");
 
 	// move remaining comments to the new topic
 	foreach ($comment_ids as $id)
 	{
 		$engine->query(
 			"UPDATE {$engine->config['table_prefix']}page SET ".
-				"comment_on_id = '".quote($this->dblink, $newtag)."', ".
-			"WHERE page_id = '".quote($this->dblink, $id)."'");
+				"comment_on_id = '".quote($engine->dblink, $new_tag)."' ".
+			"WHERE page_id = '".quote($engine->dblink, $id)."'");
 	}
 
 	// remove old first comment
 	moderate_delete_page($engine, $first_tag);
 
 	// update link table
-	$page = $engine->load_page($newtag);
+	$page = $engine->load_page($new_tag);
 	$engine->current_context++;
-	$engine->context[$engine->current_context] = $newtag;
+	$engine->context[$engine->current_context] = $new_tag;
 	$engine->clear_link_table();
 	$engine->start_link_tracking();
 	$dummy = $engine->format($page['body_r'], 'post_wacko');
 	$engine->stop_link_tracking();
-	$engine->write_link_table($newtag);
+	$engine->write_link_table($new_tag);
 	$engine->clear_link_table();
 	$engine->current_context--;
 
 	// recount comments for old and new topics
 	$engine->query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
-			"comments	= '".(int)$engine->count_comments($newtag)."', ".
+			"comments	= '".(int)$engine->count_comments($new_tag)."', ".
 			"commented	= NOW() ".
-		"WHERE tag = '".quote($this->dblink, $newtag)."' ".
+		"WHERE tag = '".quote($engine->dblink, $new_tag)."' ".
 		"LIMIT 1");
 	$engine->query(
 		"UPDATE {$engine->config['table_prefix']}page ".
-		"SET comments = '".(int)$engine->count_comments($oldtag)."' ".
-		"WHERE tag = '".quote($this->dblink, $oldtag)."' ".
+		"SET comments = '".(int)$engine->count_comments($old_tag)."' ".
+		"WHERE tag = '".quote($engine->dblink, $old_tag)."' ".
 		"LIMIT 1");
 
 	// restore forum context
@@ -268,16 +271,16 @@ if (!$this->page || $this->page['comment_on_id'] == true)
 
 if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 {
-	$acceptAction = '';
+	$accept_action = '';
 	$error = '';
 
 	if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->config['forum_cluster'])
 	{
-		$forumCluster = true;
+		$forum_cluster = true;
 	}
 	else
 	{
-		$forumCluster = false;
+		$forum_cluster = false;
 	}
 
 	// simple and rude input sanitization
@@ -352,27 +355,27 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	$xml = new rss($this);
 
 ////// BEGIN SUBFORUM MODERATION //////
-	if ($this->forum !== true && $forumCluster === true)
+	if ($this->forum !== true && $forum_cluster === true)
 	{
 		// number of topics to display
 		$limit = 40;
 
 		// PROCESS INPUT
 		// delete selected topic(s)
-		if ($_POST['delete'] && $set == true)
+		if (isset($_POST['delete']) && $set == true)
 		{
-			$acceptAction	= 'delete';
+			$accept_action	= 'delete';
 
 			// actually remove topics
-			if ($_POST['accept'])
+			if (isset($_POST['accept']))
 			{
 				foreach ($set as $id)
 				{
-					$page = $this->load_page($this->get_page_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
+					$page = $this->load_page('', $id, '', LOAD_NOCACHE, LOAD_META);
 					moderate_delete_page($this, $page['tag']);
 					$this->log(1, str_replace('%2', $page['user_id'], str_replace('%1', $page['tag'], $this->get_translation('LogRemovedPage', $this->config['language']))));
 				}
-				unset($acceptAction);
+				unset($accept_action);
 				$xml->comments();
 				$set = array();
 				$this->set_message('Selected topics successfully deleted.'); // ru: Выбранные темы успешно удалены.
@@ -380,20 +383,20 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 		}
 		// move selected topics elsewhere
-		else if ($_POST['move'] && $set == true)
+		else if (isset($_POST['move']) && $set == true)
 		{
-			$acceptAction	= 'move';
+			$accept_action	= 'move';
 
 			// processing...
-			if ($_POST['accept'] && $_POST['section'])
+			if (isset($_POST['accept']) && isset($_POST['section']))
 			{
 				$i = 0;
 				foreach ($set as $id)
 				{
-					$oldtags[] = $this->get_page_tag_by_id($id);
-					$newtags[] = $_POST['section'].substr($oldtags[$i], strrpos($oldtags[$i], '/'));
+					$old_tags[] = $this->get_page_tag_by_id($id);
+					$new_tags[] = $_POST['section'].substr($old_tags[$i], strrpos($old_tags[$i], '/'));
 
-					if (moderate_page_exists($this, $newtags[$i++]) === true)
+					if (moderate_page_exists($this, $new_tags[$i++]) === true)
 					{
 						$error[] = '<u>&laquo;'.$this->get_page_title('', $id).'&raquo;</u>';
 					}
@@ -409,11 +412,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$i = 0;
 					foreach ($set as $id)
 					{
-						moderate_rename_topic($this, $oldtags[$i], $newtags[$i]);
-						$this->log(3, str_replace('%2', $newtags[$i], str_replace('%1', $oldtags[$i], $this->get_translation('LogRenamedPage', $this->config['language']))));
+						moderate_rename_topic($this, $old_tags[$i], $new_tags[$i]);
+						$this->log(3, str_replace('%2', $new_tags[$i], str_replace('%1', $old_tags[$i], $this->get_translation('LogRenamedPage', $this->config['language']))));
 						$i++;
 					}
-					unset($acceptAction, $i, $oldtags, $newtags);
+					unset($accept_action, $i, $old_tags, $new_tags);
 					$xml->comments();
 					$set = array();
 					$this->set_message('Selected topics successfully relocated.'); // ru: Выбранные темы успешно перемещены.
@@ -422,14 +425,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 		}
 		// rename topics
-		else if ($_POST['rename'] && $set == true)
+		else if (isset($_POST['rename']) && $set == true)
 		{
-			$acceptAction	= 'rename';
+			$accept_action	= 'rename';
 
 			// perform accepted rename
-			if ($_POST['accept'])
+			if (isset($_POST['accept']))
 			{
-				$oldtag		= $this->get_page_tag_by_id($set[0]);
+				$old_tag	= $this->get_page_tag_by_id($set[0]);
 				$tag		= trim($_POST['title'], " \t");
 				$title		= $tag;
 				$tag 		= ucwords($tag);
@@ -437,7 +440,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tag		= str_replace(array(' ', "\t"), '', $tag);
 
 				// check new tag existance
-				if ($oldtag != $this->tag.'/'.$tag && moderate_page_exists($this, $this->tag.'/'.$tag) === true)
+				if ($old_tag != $this->tag.'/'.$tag && moderate_page_exists($this, $this->tag.'/'.$tag) === true)
 				{
 					$error = $this->get_translation('ModerateRenameExists');
 				}
@@ -445,9 +448,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				// okey, then rename page
 				if ($tag != '' && $error != true)
 				{
-					moderate_rename_topic($this, $oldtag, $this->tag.'/'.$tag, $title);
-					$this->log(3, str_replace('%2', $this->tag.'/'.$tag.' '.$title, str_replace('%1', $oldtag, $this->get_translation('LogRenamedPage', $this->config['language']))));
-					unset($acceptAction, $oldtag, $tag, $title);
+					moderate_rename_topic($this, $old_tag, $this->tag.'/'.$tag, $title);
+					$this->log(3, str_replace('%2', $this->tag.'/'.$tag.' '.$title, str_replace('%1', $old_tag, $this->get_translation('LogRenamedPage', $this->config['language']))));
+					unset($accept_action, $old_tag, $tag, $title);
 					$xml->comments();
 					$set = array();
 					$this->set_message('Subject successfully renamed. Note: if the subject signed electronically, its title on the same.'); // ru: Тема успешно переименована. Заметьте: если тема электронно подписана, ее заголовок оставлен неизменным.
@@ -456,9 +459,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 		}
 		// merge several topics into a single topic
-		else if ($_POST['merge'] && $set == true)
+		else if (isset($_POST['merge']) && $set == true)
 		{
-			$acceptAction	= 'merge';
+			$accept_action	= 'merge';
 
 			if (count($set) < 2)
 			{
@@ -466,7 +469,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 
 			// perform accepted action
-			if ($_POST['accept'] && $_POST['base'] && !$error)
+			if (isset($_POST['accept']) && isset($_POST['base']) && !$error)
 			{
 				foreach ($set as $id)
 				{
@@ -474,7 +477,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 				moderate_merge_topics($this, $_POST['base'], $topics);
 				$this->log(3, str_replace('%2', $_POST['base'], str_replace('%1', '##'.implode('##, ##', $topics).'##', $this->get_translation('LogMergedPages', $this->config['language']))));
-				unset($acceptAction, $topics);
+				unset($accept_action, $topics);
 				$xml->comments();
 				$set = array();
 				$this->set_message('Selected topics successfully merged.'); // ru: Выбранные темы успешно склеены.
@@ -482,11 +485,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 		}
 		// lock topics
-		else if ($_POST['lock'] && $set == true)
+		else if (isset($_POST['lock']) && $set == true)
 		{
 			foreach ($set as $id)
 			{
-				$page = $this->load_page($this->get_page_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
+				$page = $this->load_page('', $id, '', LOAD_NOCACHE, LOAD_META);
 				$this->log(2, str_replace('%1', $page['tag'].' '.$page['title'], $this->get_translation('LogTopicLocked', $this->config['language'])));
 				// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 				$this->save_acl($id, 'comment', '!*');
@@ -496,11 +499,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$this->redirect($this->href('moderate'));
 		}
 		// unlock topics
-		else if ($_POST['unlock'] && $set == true)
+		else if (isset($_POST['unlock']) && $set == true)
 		{
 			foreach ($set as $id)
 			{
-				$page = $this->load_page($this->get_page_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
+				$page = $this->load_page('', $id, '', LOAD_NOCACHE, LOAD_META);
 				$this->log(2, str_replace('%1', $page['tag'].' '.$page['title'], $this->get_translation('LogTopicUnlocked', $this->config['language'])));
 				$this->save_acl($id, 'comment', '*');
 			}
@@ -538,34 +541,37 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// display list
 		echo $this->form_open('moderate');
-		echo '<table><tr>'.
-				'<td align="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</td>'.
-			'</tr></table>'."\n";
+
+		// pagination
+		if (isset($pagination['text']))
+		{
+			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+		}
 
 		// confirm deletion
-		if ($acceptAction == 'delete')
+		if ($accept_action == 'delete')
 		{
 			foreach ($set as $id)
 			{
-				$acceptText[] = '&laquo;'.$this->get_page_title('', $id).'&raquo;';
+				$accept_text[] = '&laquo;'.$this->get_page_title('', $id).'&raquo;';
 			}
 
-			echo '<input name="'.$acceptAction.'" type="hidden" value="1" />'.
+			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
 				'<table cellspacing="1" cellpadding="4" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateDeleteConfirm').'</th></td>'.
 					'<tr><td>'.
-						'<em>'.implode('<br />', $acceptText).'</em><br />'.
+						'<em>'.implode('<br />', $accept_text).'</em><br />'.
 						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
 						'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
 		// select target forum section
-		else if ($acceptAction == 'move')
+		else if ($accept_action == 'move')
 		{
 			foreach ($set as $id)
 			{
-				$acceptText[] = '&laquo;'.$this->get_page_title('', $id).'&raquo;';
+				$accept_text[] = '&laquo;'.$this->get_page_title('', $id).'&raquo;';
 			}
 
 			$sections = $this->load_all(
@@ -582,12 +588,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$list .= "<option value=\"{$section['tag']}\">{$section['title']}</option>\n";
 			}
 
-			echo '<input name="'.$acceptAction.'" type="hidden" value="1" />'.
+			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
 				'<table cellspacing="1" cellpadding="4" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateMovesConfirm').'</th></td>'.
 					'<tr><td>'.
 						( $error == true ? '<span class="cite"><strong>'.$error.'</strong></span><br />' : '' ).
-						'<em>'.implode('<br />', $acceptText).'</em><br />'.
+						'<em>'.implode('<br />', $accept_text).'</em><br />'.
 						'<select name="section">'.
 							'<option selected="selected"></option>'.
 							$list.
@@ -598,9 +604,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				'</table><br />'."\n";
 		}
 		// enter a new name for the renamed topic
-		else if ($acceptAction == 'rename')
+		else if ($accept_action == 'rename')
 		{
-			echo '<input name="'.$acceptAction.'" type="hidden" value="1" />'.
+			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
 				'<table cellspacing="1" cellpadding="4" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateRenameConfirm').'</th></td>'.
 					'<tr><td>'.
@@ -613,25 +619,25 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				'</table><br />'."\n";
 		}
 		// select base for merging topics
-		else if ($acceptAction == 'merge')
+		else if ($accept_action == 'merge')
 		{
 			foreach ($set as $id)
 			{
-				$acceptText[] = '&laquo;'.$this->get_page_title('', $id).'&raquo;';
-				$topicsList[] = $this->get_page_tag_by_id($id);
+				$accept_text[] = '&laquo;'.$this->get_page_title('', $id).'&raquo;';
+				$topics_list[] = $this->get_page_tag_by_id($id);
 			}
 
-			for ($i = 0; $i < count($topicsList); $i++)
+			for ($i = 0; $i < count($topics_list); $i++)
 			{
-				$list .= "<option value=\"{$topicsList[$i]}\">{$acceptText[$i]}</option>\n";
+				$list .= "<option value=\"{$topics_list[$i]}\">{$accept_text[$i]}</option>\n";
 			}
 
-			echo '<input name="'.$acceptAction.'" type="hidden" value="1" />'.
+			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
 				'<table cellspacing="1" cellpadding="4" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateMergeConfirm').'</th></td>'.
 					'<tr><td>'.
 						( $error == true ? '<span class="cite"><strong>'.$error.'</strong></span><br />' : '' ).
-						'<em>'.implode('<br />', $acceptText).'</em><br />'."\n".
+						'<em>'.implode('<br />', $accept_text).'</em><br />'."\n".
 						'<select name="base">'.
 							'<option selected="selected"></option>'.
 							$list.
@@ -644,7 +650,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// print moderation controls...
 		echo '<input name="ids" type="hidden" value="'.implode('-', $set).'" />'.
-			'<input name="p" type="hidden" value="'.$_GET['p'].'" />'."\n";
+			'<input name="p" type="hidden" value="'.(isset($_GET['p']) ? $_GET['p'] : '').'" />'."\n";
 		echo '<table cellspacing="1" cellpadding="4">'.
 				'<tr class="lined">'.
 					'<td colspan="5">'.
@@ -689,9 +695,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		}
 
 		echo '</table>'."\n";
-		echo '<table><tr>'.
-				'<td align="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</td>'.
-			'</tr></table>'."\n";
+
+		// pagination
+		if (isset($pagination['text']))
+		{
+			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+		}
+
 		echo $this->form_close();
 	}
 ////// END SUBFORUM MODERATION //////
@@ -705,14 +715,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// delete topic
 		if (isset($_POST['topic_delete']))
 		{
-			$acceptAction	= 'topic_delete';
+			$accept_action	= 'topic_delete';
 
 			// actually remove topics
-			if ($_POST['accept'])
+			if (isset($_POST['accept']))
 			{
 				$this->log(1, str_replace('%2', $this->page['user_id'], str_replace('%1', $this->page['tag'], $this->get_translation('LogRemovedPage', $this->config['language']))));
 				moderate_delete_page($this, $this->tag);
-				unset($acceptAction);
+				unset($accept_action);
 				$xml->comments();
 				$this->set_message('Topic has been successfully removed.'); // ru: Тема успешно удалена.
 				$this->redirect($this->href('moderate', substr($this->tag, 0, strrpos($this->tag, '/'))));
@@ -721,28 +731,28 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// move topic elsewhere
 		else if (isset($_POST['topic_move']))
 		{
-			$acceptAction	= 'topic_move';
+			$accept_action	= 'topic_move';
 
 			// processing...
-			if ($_POST['accept'] && ($_POST['section'] || $_POST['cluster']))
+			if (isset($_POST['accept']) && (isset($_POST['section']) || isset($_POST['cluster'])))
 			{
 				$pos		= strrpos($this->tag, '/');
-				$subtag		= substr($this->tag, ( $pos ? $pos+1 : 0 ));
-				$oldtag		= $this->tag;
-				$newtag		= ( $_POST['cluster'] ? ( $_POST['cluster'] == '/' ? '' : trim($_POST['cluster'], '/').'/' ) : $_POST['section'].'/' ).$subtag;
+				$sub_tag	= substr($this->tag, ( $pos ? $pos+1 : 0 ));
+				$old_tag	= $this->tag;
+				$new_tag	= ( $_POST['cluster'] ? ( $_POST['cluster'] == '/' ? '' : trim($_POST['cluster'], '/').'/' ) : $_POST['section'].'/' ).$sub_tag;
 
-				if ($forumCluster === true)
+				if ($forum_cluster === true)
 				{
-					if ($_POST['cluster'] && $_POST['cluster'] != '/')
+					if (isset($_POST['cluster']) && $_POST['cluster'] != '/')
 					{
 						if (moderate_page_exists($this, $_POST['cluster']) === false)
 						{
 							$error = $this->get_translation('ModerateMoveNotExists');
 						}
 					}
-					else if ($_POST['section'])
+					else if (isset($_POST['section']))
 					{
-						if (moderate_page_exists($this, $newtag) === true)
+						if (moderate_page_exists($this, $new_tag) === true)
 						{
 							$error = '<u>&laquo;'.$this->page['title'].'&raquo;</u>';
 						}
@@ -759,29 +769,29 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				// in case no errors, move...
 				if ($error == true)
 				{
-					if ($forumCluster === true && $_POST['section'])
+					if ($forum_cluster === true && $_POST['section'])
 					{
 						$error = str_replace('%1', $error, $this->get_translation('ModerateMoveExists'));
 					}
 				}
 				else
 				{
-					moderate_rename_topic($this, $oldtag, $newtag);
-					$this->log(3, str_replace('%2', $newtag, str_replace('%1', $oldtag, $this->get_translation('LogRenamedPage', $this->config['language']))));
-					unset($acceptAction);
+					moderate_rename_topic($this, $old_tag, $new_tag);
+					$this->log(3, str_replace('%2', $new_tag, str_replace('%1', $old_tag, $this->get_translation('LogRenamedPage', $this->config['language']))));
+					unset($accept_action);
 					$xml->comments();
 					$this->set_message('Page successfully moved.'); // ru: Документ успешно перемещен.
-					$this->redirect($this->href('moderate', $newtag));
+					$this->redirect($this->href('moderate', $new_tag));
 				}
 			}
 		}
 		// rename topic
 		else if (isset($_POST['topic_rename']))
 		{
-			$acceptAction	= 'topic_rename';
+			$accept_action	= 'topic_rename';
 
 			// perform accepted rename
-			if ($_POST['accept'] && $forumCluster === true)
+			if (isset($_POST['accept']) && $forum_cluster === true)
 			{
 				$pos		= strrpos($this->tag, '/');
 				$section	= substr($this->tag, 0, ( $pos ? $pos : null ));
@@ -790,11 +800,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tag 		= ucwords($tag);
 				$tag		= preg_replace('/[^- \\w]/', '', $tag);
 				$tag		= str_replace(array(' ', "\t"), '', $tag);
-				$oldtag		= $this->tag;
-				$newtag		= ( $section ? $section.'/' : '' ).$tag;
+				$old_tag	= $this->tag;
+				$new_tag	= ( $section ? $section.'/' : '' ).$tag;
 
 				// check new tag existance
-				if ($oldtag == $newtag || moderate_page_exists($this, $newtag) === true)
+				if ($old_tag == $new_tag || moderate_page_exists($this, $new_tag) === true)
 				{
 					$error = $this->get_translation('ModerateRenameExists');
 				}
@@ -802,17 +812,17 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				// okey, then rename page
 				if ($tag != '' && $error != true)
 				{
-					moderate_rename_topic($this, $oldtag, $newtag, $title);
-					$this->log(3, str_replace('%2', $newtag.' '.$title, str_replace('%1', $oldtag, $this->get_translation('LogRenamedPage', $this->config['language']))));
-					unset($acceptAction);
+					moderate_rename_topic($this, $old_tag, $new_tag, $title);
+					$this->log(3, str_replace('%2', $new_tag.' '.$title, str_replace('%1', $old_tag, $this->get_translation('LogRenamedPage', $this->config['language']))));
+					unset($accept_action);
 					$xml->comments();
 					$this->set_message('Topic successfully renamed. Note: if the topic signed electronically, its title on the same.'); // ru: Тема успешно переименована. Заметьте: если тема электронно подписана, ее заголовок оставлен неизменным.
-					$this->redirect($this->href('moderate', $newtag));
+					$this->redirect($this->href('moderate', $new_tag));
 				}
 			}
 		}
 		// lock topic
-		else if (isset($_POST['topic_lock']) && $forumCluster === true)
+		else if (isset($_POST['topic_lock']) && $forum_cluster === true)
 		{
 			// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 			$this->save_acl($this->page['page_id'], 'comment', '!*');
@@ -821,7 +831,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$this->redirect($this->href('moderate'));
 		}
 		// unlock topic
-		else if (isset($_POST['topic_unlock']) && $forumCluster === true)
+		else if (isset($_POST['topic_unlock']) && $forum_cluster === true)
 		{
 			$this->save_acl($this->page['page_id'], 'comment', '*');
 			$this->log(2, str_replace('%1', $this->page['tag'].' '.$this->page['title'], $this->get_translation('LogTopicUnlocked', $this->config['language'])));
@@ -831,14 +841,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// delete selected comments
 		else if (isset($_POST['posts_delete']) && $set == true)
 		{
-			$acceptAction	= 'posts_delete';
+			$accept_action	= 'posts_delete';
 
 			// actually remove topics
-			if ($_POST['accept'])
+			if (isset($_POST['accept']))
 			{
 				foreach ($set as $id)
 				{
-					$page = $this->load_page($this->get_page_tag_by_id($id), 0, '', LOAD_NOCACHE, LOAD_META);
+					$page = $this->load_page('', $id, '', LOAD_NOCACHE, LOAD_META);
 					moderate_delete_page($this, $page['tag']);
 					$this->log(1, str_replace('%3', $this->get_time_string_formatted($page['created']), str_replace('%2', $page['user'], str_replace('%1', $page['comment_on'].' '.$this->get_page_title($page['comment_on']), $this->get_translation('LogRemovedComment', $this->config['language'])))));
 				}
@@ -851,7 +861,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					"WHERE tag = '".quote($this->dblink, $this->tag)."' ".
 					"LIMIT 1");
 
-				unset($acceptAction);
+				unset($accept_action);
 				$xml->comments();
 				$set = array();
 				$this->set_message('Selected comments removed successfully.'); // ru: Выбранные комментарии успешно удалены.
@@ -861,23 +871,24 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// split topic
 		else if (isset($_POST['posts_split']) && $set == true)
 		{
-			$acceptAction	= 'posts_split';
+			$accept_action	= 'posts_split';
 
 			// perform accepted splitting
 			if (isset($_POST['accept']) && isset($_POST['title']))
 			{
 				$section	= substr($this->tag, 0, strrpos($this->tag, '/'));
-				$oldtag		= $this->tag;
+				$old_tag	= $this->tag;
 				$tag		= trim($_POST['title'], "/ \t");
 				$title		= $tag;
+				$page_id	= $this->get_page_id($tag);
 				$tag 		= ucwords($tag);
 				$tag		= preg_replace('/[^- \\w]/', '', $tag);
 				$tag		= str_replace(array(' ', "\t"), '', $tag);
 
-				if ($forumCluster === true)
+				if ($forum_cluster === true)
 				{
 					// check new tag existance
-					if ($oldtag != $section.'/'.$tag && moderate_page_exists($this, $section.'/'.$tag) === true)
+					if ($old_tag != $section.'/'.$tag && moderate_page_exists($this, $section.'/'.$tag) === true)
 					{
 						$error = $this->get_translation('ModerateRenameExists');
 					}
@@ -904,7 +915,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$_set = $set;
 						sort($_set);
 
-						$first_comment	= $this->load_page($this->get_page_tag_by_id($_set[0]));
+						$first_comment	= $this->load_page('', $_set[0]);
 						$_comments		= $this->load_all(
 							"SELECT page_id ".
 							"FROM {$this->config['table_prefix']}page ".
@@ -920,12 +931,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						unset($first_comment, $_set, $_comments, $_comment);
 					}
 
-					if ($forumCluster === true)
+					if ($forum_cluster === true)
 					{
-						if (moderate_split_topic($this, $comment_ids, $oldtag, $section.'/'.$tag, $title) === true)
+						if (moderate_split_topic($this, $comment_ids, $old_tag, $section.'/'.$tag, $title) === true)
 						{
 							$this->log(3, str_replace('%2', $section.'/'.$tag.' '.$title, str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogSplittedPage', $this->config['language']))));
-							unset($acceptAction);
+							unset($accept_action);
 							$xml->comments();
 							$this->set_message('Selected comments successfully separated in a new topic.'); // ru: Выбранные комментарии успешно отделены в новую тему.
 							$this->redirect($this->href('moderate', $section.'/'.$tag));
@@ -942,21 +953,21 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					{
 						foreach ($comment_ids as $id)
 						{
-							$idsStr .= "'".quote($this->dblink, $id)."', ";
+							$ids_str .= "'".quote($this->dblink, $id)."', ";
 						}
-						$idsStr = substr($idsStr, 0, strlen($idsStr)-2);
+						$ids_str = substr($ids_str, 0, strlen($ids_str)-2);
 
 						// move
 						$this->query(
 							"UPDATE {$this->config['table_prefix']}page SET ".
-								"comment_on_id = '".quote($this->dblink, $title)."', ".
-							"WHERE page_id IN ( $idsStr )");
+								"comment_on_id = '".quote($this->dblink, $page_id)."' ".
+							"WHERE page_id IN ( $ids_str )");
 
 						// update link table
 						$comments = $this->load_all(
 							"SELECT tag, body_r ".
 							"FROM {$this->config['table_prefix']}page ".
-							"WHERE page_id IN ( $idsStr )");
+							"WHERE page_id IN ( $ids_str )");
 
 						foreach ($comments as $comment)
 						{
@@ -984,7 +995,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							"LIMIT 1");
 
 						$this->log(3, str_replace('%2', $title.' '.$this->get_page_title($title), str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogSplittedPage', $this->config['language']))));
-						unset($acceptAction);
+						unset($accept_action);
 						$xml->comments();
 						$this->set_message('Selected comments successfully migrated to a given page.'); // ru: Выбранные комментарии успешно перенесены в заданный документ.
 						$this->redirect($this->href('moderate'));
@@ -1021,31 +1032,34 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// display list
 		echo $this->form_open('moderate');
-		echo '<table><tr>'.
-				'<td align="right">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</td>'.
-			'</tr></table>'."\n";
+
+		// pagination
+		if (isset($pagination['text']))
+		{
+			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+		}
 
 		// confirm topic deletion
-		if ($acceptAction == 'topic_delete')
+		if ($accept_action == 'topic_delete')
 		{
-			$acceptText = '&laquo;'.$this->page['title'].'&raquo;';
+			$accept_text = '&laquo;'.$this->page['title'].'&raquo;';
 
-			echo '<input name="'.$acceptAction.'" type="hidden" value="1" />'.
+			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
 				'<table cellspacing="1" cellpadding="4" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateDeleteConfirm').'</th></td>'.
 					'<tr><td>'.
-						'<em>'.$acceptText.'</em><br />'.
+						'<em>'.$accept_text.'</em><br />'.
 						'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
 						'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
 					'</td></tr>'.
 				'</table><br />'."\n";
 		}
 		// select target forum section / cluster for topic/page moving
-		else if ($acceptAction == 'topic_move')
+		else if ($accept_action == 'topic_move')
 		{
-			$acceptText = '&laquo;'.$this->page['title'].'&raquo;';
+			$accept_text = '&laquo;'.$this->page['title'].'&raquo;';
 
-			if ($forumCluster === true)
+			if ($forum_cluster === true)
 			{
 				$sections = $this->load_all(
 					"SELECT p.tag, p.title ".
@@ -1061,12 +1075,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$list .= "<option value=\"{$section['tag']}\">{$section['title']}</option>\n";
 				}
 
-				echo '<input name="'.$acceptAction.'" type="hidden" value="1" />'.
+				echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
 					'<table cellspacing="1" cellpadding="4" class="formation">'.
 						'<tr><th>'.$this->get_translation('ModerateMoveConfirm').'</th></td>'.
 						'<tr><td>'.
 							( $error == true ? '<span class="cite"><strong>'.$error.'</strong></span><br />' : '' ).
-							'<em>'.$acceptText.'</em><br />'.
+							'<em>'.$accept_text.'</em><br />'.
 							'<select name="section">'.
 								'<option selected="selected"></option>'.
 								$list.
@@ -1078,12 +1092,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 			else
 			{
-				echo '<input name="'.$acceptAction.'" type="hidden" value="1" />'.
+				echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
 					'<table cellspacing="1" cellpadding="4" class="formation">'.
 						'<tr><th>'.$this->get_translation('ModeratePgMoveConfirm').'</th></td>'.
 						'<tr><td>'.
 							( $error == true ? '<span class="cite"><strong>'.$error.'</strong></span><br />' : '' ).
-							'<em>'.$acceptText.'</em><br />'.
+							'<em>'.$accept_text.'</em><br />'.
 							'<input name="cluster" size="50" maxlength="250" /> '.
 							'<input name="accept" id="submit" type="submit" value="'.$this->get_translation('ModerateAccept').'" /> '.
 							'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
@@ -1092,9 +1106,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 		}
 		// enter a new name for topic renaming
-		else if ($acceptAction == 'topic_rename')
+		else if ($accept_action == 'topic_rename')
 		{
-			echo '<input name="'.$acceptAction.'" type="hidden" value="1" />'.
+			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
 				'<table cellspacing="1" cellpadding="4" class="formation">'.
 					'<tr><th>'.$this->get_translation('ModerateRenameConfirm').'</th></td>'.
 					'<tr><td>'.
@@ -1106,9 +1120,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				'</table><br />'."\n";
 		}
 		// confirm comments deletion
-		else if ($acceptAction == 'posts_delete')
+		else if ($accept_action == 'posts_delete')
 		{
-			echo '<input name="'.$acceptAction.'" type="hidden" value="1" />'.
+			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
 				'<table cellspacing="1" cellpadding="4" class="formation">'.
 					'<tr><th>'.str_replace('%2', ( count($set) > 1 ? $this->get_translation('ModerateComments') : $this->get_translation('ModerateComment') ), str_replace('%1', count($set), $this->get_translation('ModerateComDelConfirm'))).'</th></td>'.
 					'<tr><td>'.
@@ -1118,11 +1132,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				'</table><br />'."\n";
 		}
 		// enter a new name for the detached topic
-		else if ($acceptAction == 'posts_split')
+		else if ($accept_action == 'posts_split')
 		{
-			echo '<input name="'.$acceptAction.'" type="hidden" value="1" />'.
+			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
 				'<table cellspacing="1" cellpadding="4" class="formation">'.
-					'<tr><th>'.( $forumCluster === true ? $this->get_translation('ModerateSplitNewName') : $this->get_translation('ModerateSplitPageName') ).'</th></td>'.
+					'<tr><th>'.( $forum_cluster === true ? $this->get_translation('ModerateSplitNewName') : $this->get_translation('ModerateSplitPageName') ).'</th></td>'.
 					'<tr><td>'.
 						( $error == true ? '<span class="cite"><strong>'.$error.'</strong></span><br />' : '' ).
 						'<input name="title" size="50" maxlength="250" value="" /> '.
@@ -1130,8 +1144,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<input name="cancel" id="button" type="button" value="'.$this->get_translation('ModerateDecline').'" onclick="document.location=\''.addslashes($this->href('moderate')).'\';" />'.
 						'<br />'.
 						'<small>'.
-						'<input type="radio" name="scheme" value="after" id="after" '.( $_POST['scheme'] != 'selected' ? 'checked="checked" ' : '' ).'/> <label for="after">'.$this->get_translation('ModerateSplitAllAfter').'</label><br />'.
-						'<input type="radio" name="scheme" value="selected" id="selected" '.( $_POST['scheme'] == 'selected' ? 'checked="checked" ' : '' ).'/> <label for="selected">'.str_replace('%1', count($set), $this->get_translation('ModerateSplitSelected')).'</label>'.
+						'<input type="radio" name="scheme" value="after" id="after" '.( isset($_POST['scheme']) && $_POST['scheme'] != 'selected' ? 'checked="checked" ' : '' ).'/> <label for="after">'.$this->get_translation('ModerateSplitAllAfter').'</label><br />'.
+						'<input type="radio" name="scheme" value="selected" id="selected" '.( isset($_POST['scheme']) && $_POST['scheme'] == 'selected' ? 'checked="checked" ' : '' ).'/> <label for="selected">'.str_replace('%1', count($set), $this->get_translation('ModerateSplitSelected')).'</label>'.
 						'</small>'.
 					'</td></tr>'.
 				'</table><br />'."\n";
@@ -1145,11 +1159,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					'<td colspan="2">'.
 						'<input name="topic_delete" id="submit" type="submit" value="'.$this->get_translation('ModerateDeleteTopic').'" /> '.
 						'<input name="topic_move" id="submit" type="submit" value="'.$this->get_translation('ModerateMove').'" /> '.
-						( $forumCluster === true
+						( $forum_cluster === true
 							? '<input name="topic_rename" id="submit" type="submit" value="'.$this->get_translation('ModerateRename').'" /> '
 							: ''
 						).
-						( $forumCluster === true
+						( $forum_cluster === true
 							? ( $this->has_access('comment', $this->page['page_id'], GUEST) === true
 								? '<input name="topic_lock" id="submit" type="submit" value="'.$this->get_translation('ModerateLock').'" /> '
 								: '<input name="topic_unlock" id="submit" type="submit" value="'.$this->get_translation('ModerateUnlock').'" /> '
@@ -1164,7 +1178,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				'</tr>'."\n".
 				'<tr class="lined">'.
 					'<td colspan="2" style="padding-bottom:30px;">'.
-						'<strong><small><span'.( $this->is_admin() ? ' title="'.$this->page['ip'].'"' : '' ).'>'.( $forumCluster === false ? $this->page['owner_name'] : ( $this->page['user'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $this->page['user'] ) ).'</span> ('.$this->get_time_string_formatted($this->page['created']).')</small></strong>'.
+						'<strong><small><span'.( $this->is_admin() ? ' title="'.$this->page['ip'].'"' : '' ).'>'.( $forum_cluster === false ? $this->page['owner_name'] : ( $this->page['user'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $this->page['user'] ) ).'</span> ('.$this->get_time_string_formatted($this->page['created']).')</small></strong>'.
 						'<br />'.$body.
 					'</td>'.
 				'</tr>'."\n";
@@ -1209,9 +1223,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		}
 
 		echo '</table>'."\n";
-		echo '<table><tr>'.
-				'<td align="right">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</td>'.
-			'</tr></table>'."\n";
+
+		// pagination
+		if (isset($pagination['text']))
+		{
+			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+		}
+
 		echo $this->form_close();
 	}
 }
@@ -1221,7 +1239,10 @@ else
 }
 
 // set forum context
-if ($forumCluster === true) $this->forum = true;
+if ($forum_cluster === true)
+{
+	$this->forum = true;
+}
 
 ?>
 </div>

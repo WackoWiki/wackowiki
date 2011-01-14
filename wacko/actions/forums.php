@@ -24,7 +24,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	}
 
 	// parse subforums list if any
-	if (!empty($pages)) $pages = trim(explode(',', $pages), '/ ');
+	if (!empty($pages))
+	{
+		$pages = trim(explode(',', $pages), '/ ');
+	}
 
 	// make query
 	$sql = "SELECT p.page_id, p.tag, p.title, p.description ".
@@ -32,6 +35,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			"{$this->config['table_prefix']}acl AS a ".
 		"WHERE p.page_id = a.page_id ".
 		"AND a.privilege = 'comment' AND a.list = '*' ";
+
 	if (!isset($pages))
 	{
 		$sql .= "AND p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ";
@@ -39,8 +43,11 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	else
 	{
 		foreach ($pages as $page)
+		{
 			$sql .= "AND p.tag = '".quote($this->dblink, $page)."' ";
+		}
 	}
+
 	$sql .= "ORDER BY p.modified ASC";
 
 	// load subforums data
@@ -83,23 +90,28 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				echo '<td style="text-align:left" valign="top">';
 
 				if ($comment['comment_on_id'] == true)
+				{
 					echo '<small><a href="'.$this->href('', $comment['comment_on'], 'p=last').'#'.$comment['tag'].'">'.$this->get_page_title($comment['comment_on']).'</a><br />'.
 						( $comment['user'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user'] ).' ('.$this->get_time_string_formatted($comment['created']).')</small>';
+				}
 				else
+				{
 					echo '<small><a href="'.$this->href('', $comment['tag']).'">'.$comment['title'].'</a><br />'.
 						( $comment['user'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user'] ).' ('.$this->get_time_string_formatted($comment['created']).')</small>';
+				}
 			}
 			else
 			{
 				echo '<td>';
 				echo '<small><em>'.$this->get_translation('ForumNoComments').'</em></small>';
 			}
+
 			echo	'</td>'.
 				'</tr>'."\n";
 		}
 	}
-	echo '</table>'."\n";
 
+	echo '</table>'."\n";
 	echo '<table>'.
 			'<tr>'.
 				'<td>'.

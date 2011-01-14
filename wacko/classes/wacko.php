@@ -2144,7 +2144,7 @@ class Wacko
 			return $this->context[$this->current_context];
 		}
 
-		$newtag = $tag;
+		$new_tag = $tag;
 
 		if (isset($this->context[$this->current_context]) && strstr($this->context[$this->current_context], '/'))
 		{
@@ -2162,16 +2162,16 @@ class Wacko
 		else if (preg_match('/^\/(.*)$/', $tag, $matches))
 		{
 			$root	= '';
-			$newtag	= $matches[1];
+			$new_tag	= $matches[1];
 		}
 		else if (preg_match('/^\!\/(.*)$/', $tag, $matches))
 		{
 			$root	= $this->context[$this->current_context];
-			$newtag	= $matches[1];
+			$new_tag	= $matches[1];
 		}
 		else if (preg_match('/^\.\.\/(.*)$/', $tag, $matches))
 		{
-			$newtag	= $matches[1];
+			$new_tag	= $matches[1];
 
 			if (strstr($root, '/'))
 			{
@@ -2185,10 +2185,10 @@ class Wacko
 
 		if ($root != '')
 		{
-			$newtag = '/'.$newtag;
+			$new_tag = '/'.$new_tag;
 		}
 
-		$tag = $root.$newtag;
+		$tag = $root.$new_tag;
 		$tag = str_replace('//', '/', $tag);
 
 		return $tag;
@@ -3910,11 +3910,15 @@ class Wacko
 		if (is_array($this->config['aliases']))
 		{
 			$al  = $this->config['aliases'];
-			$mod = explode("\\n", $al['Moderator']);
 
-			if ($mod == true && in_array($this->get_user_name(), $mod))
+			if(isset($al['Moderator']))
 			{
-				return true;
+				$mod = explode("\\n", $al['Moderator']);
+
+				if ($mod == true && in_array($this->get_user_name(), $mod))
+				{
+					return true;
+				}
 			}
 		}
 

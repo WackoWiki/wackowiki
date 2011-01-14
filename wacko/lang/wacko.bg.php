@@ -55,7 +55,7 @@ $wacko_translation = array(
 	'RDFLink' => 'RDF Document',
 	'EmailLink' => 'Напиши писмо'."\n".'(извикване на пощенската програма)',
 	'JabberLink' => 'Chat via XMPP (Jabber client launch)',
-	'PermaLink' => 'Permanent link',
+	'PermaLink' => 'Permalink',
 	'PermaLinkTip' => 'Permanent link to this page',
 
 	'ShowTip' => 'Кликнете, за да се върнете към прегледа',
