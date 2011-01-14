@@ -790,7 +790,23 @@ $wacko_translation = array(
 	'ModerateSplitAllAfter'	=> 'Отделить все комментарии после первого выбранного (и включая его)',
 	'ModerateSplitSelected'	=> 'Отделить только выбранные комментарии (всего %1)',
 	'ModerateUserProfile'	=> 'профиль',
-
+	
+	'ModerateSection2'		=> 'модерировать раздел...',
+	'ModerateTopicsDeleted'	=> 'Выбранные темы успешно удалены.',
+	'ModerateTopicsRelocated'	=> 'Выбранные темы успешно перемещены.',
+	'ModerateTopicRenamed'	=> 'Тема успешно переименована.',
+	'ModerateTopicsMerged'	=> 'Выбранные темы успешно склеены.',
+	'ModerateTopicsBlocked'	=> 'Выбранные темы успешно заблокированы.',
+	'ModerateTopicsUnlocked'	=> 'Выбранные темы успешно разблокированы.',
+	'ModerateTopicDeleted'	=> 'Тема успешно удалена.',
+	'ModeratePageMoved'		=> 'Документ успешно перемещен.',
+	'ModerateTopicRenamed'	=> 'Тема успешно переименована.',
+	'ModerateTopicBlocked'	=> 'Тема успешно заблокирована.',
+	'ModerateTopicUnlocked'	=> 'Тема успешно разблокирована.',
+	'ModerateCommentsDeleted'	=> 'Выбранные комментарии успешно удалены.',
+	'ModerateCommentsSplited'	=> 'Выбранные комментарии успешно отделены в новую тему.',
+	'ModerateCommentsSplitFailed'	=> 'Внимание: по какой-то причине не удалось отделить выбранные сообщения в новую тему.<br />Обычно такое не должно случаться, поэтому сообщите о происшедшем администратору сайта.<br />В качестве меры предосторожности тема была сохранена в исходном виде.',
+	'ModerateCommentsMoved'	=> 'Выбранные комментарии успешно перенесены в заданный документ.',
 
 	// forum
 	'ForumSubforums'	=> 'Разделы форума',

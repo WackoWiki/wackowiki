@@ -833,6 +833,23 @@ $wacko_translation = array(
 	'ModerateSplitAllAfter'	=> 'Detach all the comments after the first selected (and including)',
 	'ModerateSplitSelected'	=> 'Separated only selected comments (total %1)',
 	'ModerateUserProfile'	=> 'profile',
+	
+	'ModerateSection2'		=> 'moderate section...',
+	'ModerateTopicsDeleted'	=> 'Selected topics successfully deleted.',
+	'ModerateTopicsRelocated'	=> 'Selected topics successfully relocated.',
+	'ModerateTopicsRenamed'	=> 'Topic successfully renamed.',
+	'ModerateTopicsMerged'	=> 'Selected topics successfully merged.',
+	'ModerateTopicsBlocked'	=> 'Selected topics successfully blocked',
+	'ModerateTopicsUnlocked'	=> 'Selected topics successfully unlocked.',
+	'ModerateTopicDeleted'	=> 'Topic has been successfully removed.',
+	'ModeratePageMoved'		=> 'Page successfully moved.',
+	'ModerateTopicRenamed'	=> 'Topic successfully renamed.',
+	'ModerateTopicBlocked'	=> 'Topic successfully blocked',
+	'ModerateTopicUnlocked'	=> 'Topic successfully unlocked.',
+	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
+	'ModerateCommentsSplited'	=> 'Selected comments successfully separated in a new topic.',
+	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br />Usually this should not happen, so let the incident site administrator.<br />As a precaution, issue has been preserved in its original form.',
+	'ModerateCommentsMoved'	=> 'Selected comments successfully migrated to a given page.',
 
 	// forum
 	'ForumSubforums'	=> 'Forum Topics',
