@@ -22,6 +22,7 @@ if (!function_exists('FullTextSearch'))
 				" )");
 	}
 }
+
 if (!function_exists('TagSearch'))
 {
 	function TagSearch(&$wacko, $phrase)
@@ -34,6 +35,93 @@ if (!function_exists('TagSearch'))
 	}
 }
 
+if (!function_exists('getLineWithPhrase'))
+{
+	function getLineWithPhrase($phrase, $string, $cleanup)
+	{
+		$lines = explode("\n", $string);
+		$result = '';
+		foreach ($lines as $line)
+		{
+			if (strpos($line, $phrase))
+			{
+				if ($result) $result .= "<br/>\n";
+				$result .= $cleanup ? str_replace("$phrase", '', $line) : $line;
+			}
+		}
+		return $result;
+	}
+}
+
+if (!function_exists('preview_text'))
+{
+	function preview_text($TEXT, $LIMIT, $TAGS = 0)
+	{
+		// TRIM TEXT
+		$TEXT = trim($TEXT);
+
+		// STRIP TAGS IF PREVIEW IS WITHOUT HTML
+		if ($TAGS == 0) $TEXT = preg_replace('/\s\s+/', ' ', strip_tags($TEXT));
+
+		// IF STRLEN IS SMALLER THAN LIMIT RETURN
+		if (strlen($TEXT) < $LIMIT) return $TEXT;
+
+		if ($TAGS == 0) return substr($TEXT, 0, $LIMIT) . " ...";
+		else
+		{
+			$COUNTER = 0;
+			for ($i = 0; $i<= strlen($TEXT); $i++)
+			{
+				if ($TEXT{$i} == '<') $STOP = 1;
+
+				if ($STOP != 1)
+				{
+					$COUNTER++;
+				}
+
+				if ($TEXT{$i} == '>') $STOP = 0;
+				$RETURN .= $TEXT{$i};
+
+				if ($COUNTER >= $LIMIT && $TEXT{$i} == ' ') break;
+			}
+
+			return $RETURN . "...";
+		}
+	}
+}
+
+if (!function_exists('highlight_this'))
+{
+	function highlight_this($text, $words, $the_place)
+	{
+		$words = trim($words);
+		$the_count = 0;
+		$wordsArray = explode(' ', $words);
+		foreach($wordsArray as $word)
+		{
+			if(strlen(trim($word)) != 0)
+
+			//exclude these words from being replaced
+			$exclude_list = array('word1', 'word2', 'word3');
+
+			// Check if it's excluded
+			if ( in_array( strtolower($word), $exclude_list ) )
+			{
+
+			}
+			else
+			{
+				$text = str_ireplace($word, "<span class=\"highlight\">".$word."</span>", $text, $count);
+				$the_count = $count + $the_count;
+			}
+
+		}
+		//added to show how many keywords were found
+		#echo "<br /><div class=\"emphasis\">A search for <strong>" . $words. "</strong> found <strong>" . $the_count . "</strong> matches within the " . $the_place. ".</div><br />";
+
+		return $text;
+	}
+}
 if (($topic == 1) || ($title == 1))
 	$mode = 'topic';
 else
@@ -146,83 +234,6 @@ if ($phrase)
 	}
 }
 
-function getLineWithPhrase($phrase, $string, $cleanup)
-{
-	$lines = explode("\n", $string);
-	$result = '';
-	foreach ($lines as $line)
-	{
-		if (strpos($line, $phrase))
-		{
-			if ($result) $result .= "<br/>\n";
-			$result .= $cleanup ? str_replace("$phrase", '', $line) : $line;
-		}
-	}
-	return $result;
-}
 
-function preview_text($TEXT, $LIMIT, $TAGS = 0)
-{
-	// TRIM TEXT
-	$TEXT = trim($TEXT);
-
-	// STRIP TAGS IF PREVIEW IS WITHOUT HTML
-	if ($TAGS == 0) $TEXT = preg_replace('/\s\s+/', ' ', strip_tags($TEXT));
-
-	// IF STRLEN IS SMALLER THAN LIMIT RETURN
-	if (strlen($TEXT) < $LIMIT) return $TEXT;
-
-	if ($TAGS == 0) return substr($TEXT, 0, $LIMIT) . " ...";
-	else
-	{
-		$COUNTER = 0;
-		for ($i = 0; $i<= strlen($TEXT); $i++)
-		{
-			if ($TEXT{$i} == '<') $STOP = 1;
-
-			if ($STOP != 1)
-			{
-				$COUNTER++;
-			}
-
-			if ($TEXT{$i} == '>') $STOP = 0;
-			$RETURN .= $TEXT{$i};
-
-			if ($COUNTER >= $LIMIT && $TEXT{$i} == ' ') break;
-		}
-
-		return $RETURN . "...";
-	}
-}
-
-function highlight_this($text, $words, $the_place)
-{
-	$words = trim($words);
-	$the_count = 0;
-	$wordsArray = explode(' ', $words);
-	foreach($wordsArray as $word)
-	{
-		if(strlen(trim($word)) != 0)
-
-		//exclude these words from being replaced
-		$exclude_list = array('word1', 'word2', 'word3');
-
-		// Check if it's excluded
-		if ( in_array( strtolower($word), $exclude_list ) )
-		{
-
-		}
-		else
-		{
-			$text = str_ireplace($word, "<span class=\"highlight\">".$word."</span>", $text, $count);
-			$the_count = $count + $the_count;
-		}
-
-	}
-	//added to show how many keywords were found
-	#echo "<br /><div class=\"emphasis\">A search for <strong>" . $words. "</strong> found <strong>" . $the_count . "</strong> matches within the " . $the_place. ".</div><br />";
-
-	return $text;
-}
 
 ?>

@@ -83,12 +83,12 @@ if (isset($_POST['_user_bookmarks']))
 		// process input
 		if (!empty($_POST['tag']))
 		{
-			$newtag = trim($_POST['tag'], '/ ');
+			$new_tag = trim($_POST['tag'], '/ ');
 
 			// check target page existance
-			if ($page = $this->load_page($newtag, 0, '', LOAD_CACHE, LOAD_META))
+			if ($page = $this->load_page($new_tag, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$_page_id = $this->get_page_id($newtag);
+				$_page_id = $this->get_page_id($new_tag);
 
 				// check existing page write access
 				if ($this->has_access('write', $_page_id))
