@@ -28,7 +28,7 @@
 				<tr>
 					<td width="25" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_bottom_1.png); background-repeat:no-repeat;"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.gif" width="25" height="1" /></td>
 					<td>
-						<div id="copyright">
+						<div id="credits">
 <?php
 							// comment this out for not showing website policy link at the bottom of your pages
 							if ($this->config['policy_page']) echo '<a href="'.$this->href('', $this->config['policy_page']).'">'.$this->get_translation('TermsOfUse').'</a><br />';

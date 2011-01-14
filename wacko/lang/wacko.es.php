@@ -27,6 +27,8 @@ $wacko_translation = array(
 	'LoginButton' => 'Conectar',
 	'LoginPage' => 'Conectar',
 	'PersistentCookie' => 'No cerrar sesión',
+	'Session'				=> 'Session',
+	'SessionTip'			=> 'parameters of current session',
 	'SessionDuration' => 'Session duration',
 	'LoggedInAs' => 'You are logged in as',
 
@@ -309,6 +311,8 @@ $wacko_translation = array(
 	'NoWantedPages' => '<em>No hay páginas deseadas. Muy bien!</em>',
 	'RemoveWatch' => 'Dejar de  vigilar página',
 	'SetWatch' => 'Vigilar esta página',
+	'WatchText'				=> 'Watch',
+	'UnWatchText'			=> 'Not follow',
 	'UserSettingsStored' => 'Preferencias de usuario guardadas!',
 	'LoggedOut' => 'Ahora estás desconectado/a.',
 

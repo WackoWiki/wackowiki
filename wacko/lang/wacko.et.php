@@ -27,6 +27,8 @@ $wacko_translation = array(
 	'LoginButton' => 'Sisse',
 	'LoginPage' => 'Login',
 	'PersistentCookie' => 'Stay signed in',
+	'Session'				=> 'Session',
+	'SessionTip'			=> 'parameters of current session',
 	'SessionDuration' => 'Session duration',
 	'LoggedInAs' => 'You are logged in as',
 
@@ -309,6 +311,8 @@ $wacko_translation = array(
 	'NoWantedPages' => '<em>Soovitud lehti ei ole. Hästi!</em>',
 	'RemoveWatch' => 'Lõpeta selle lehe jälgimine',
 	'SetWatch' => 'Jälgi seda lehte',
+	'WatchText'				=> 'Watch',
+	'UnWatchText'			=> 'Not follow',
 	'UserSettingsStored' => 'Kasutaja seaded salvesatud!',
 	'LoggedOut' => 'Oled välja logitud.',
 

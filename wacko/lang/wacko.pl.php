@@ -27,6 +27,8 @@ $wacko_translation = array(
 	'LoginButton' => 'Zaloguj',
 	'LoginPage' => 'Login',
 	'PersistentCookie' => 'Stay signed in',
+	'Session'				=> 'Session',
+	'SessionTip'			=> 'parameters of current session',
 	'SessionDuration' => 'Session duration',
 	'LoggedInAs' => 'You are logged in as',
 
@@ -309,6 +311,8 @@ $wacko_translation = array(
 	'NoWantedPages' => '<em>W tej chwili nie ma stron, które nale¿a³oby utworzyæ</em>',
 	'RemoveWatch' => 'Zakoñcz obserwowanie zmian tej strony',
 	'SetWatch' => 'Obserwuj zmiany wprowadzane na tej stronie',
+	'WatchText'				=> 'Watch',
+	'UnWatchText'			=> 'Not follow',
 	'UserSettingsStored' => 'Twoje ustawienia zosta³y zachowane!',
 	'LoggedOut' => 'Zosta³e¶ wylogowany.',
 

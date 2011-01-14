@@ -27,6 +27,8 @@ $wacko_translation = array(
 	'LoginButton' => 'Войти в систему',
 	'LoginPage' => 'Вход',
 	'PersistentCookie' => 'Оставаться в системе',
+	'Session'				=> 'сессия',
+	'SessionTip'			=> 'параметры текущего сеанса работы',
 	'SessionDuration' => 'Длительность сессии',
 	'LoggedInAs' => 'Вы авторизованы в системе как ',
 
@@ -309,6 +311,8 @@ $wacko_translation = array(
 
 	'RemoveWatch' => 'Снять наблюдение',
 	'SetWatch' => 'Наблюдать',
+	'WatchText'				=> 'Следить',
+	'UnWatchText'			=> 'Не следить',
 	'UserSettingsStored' => 'Ваши настройки сохранены',
 	'LoggedOut' => 'Вы вышли из системы',
 
@@ -790,7 +794,7 @@ $wacko_translation = array(
 	'ModerateSplitAllAfter'	=> 'Отделить все комментарии после первого выбранного (и включая его)',
 	'ModerateSplitSelected'	=> 'Отделить только выбранные комментарии (всего %1)',
 	'ModerateUserProfile'	=> 'профиль',
-	
+
 	'ModerateSection2'		=> 'модерировать раздел...',
 	'ModerateTopicsDeleted'	=> 'Выбранные темы успешно удалены.',
 	'ModerateTopicsRelocated'	=> 'Выбранные темы успешно перемещены.',

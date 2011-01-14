@@ -27,6 +27,8 @@ $wacko_translation = array(
 	'LoginButton' => 'Login',
 	'LoginPage' => 'Login',
 	'PersistentCookie' => 'Stay signed in',
+	'Session'				=> 'Session',
+	'SessionTip'			=> 'parameters of current session',
 	'SessionDuration' => 'Session duration',
 	'LoggedInAs' => 'You are logged in as',
 
@@ -358,6 +360,8 @@ $wacko_translation = array(
 	'NoWantedPages' => '<em>No wanted pages. Good.</em>',
 	'RemoveWatch' => 'Remove watch for this page',
 	'SetWatch' => 'Watch this page',
+	'WatchText'				=> 'Watch',
+	'UnWatchText'			=> 'Not follow',
 	'UserSettingsStored' => 'User settings saved.',
 	'LoggedOut' => 'You are now logged out.',
 
@@ -833,7 +837,7 @@ $wacko_translation = array(
 	'ModerateSplitAllAfter'	=> 'Detach all the comments after the first selected (and including)',
 	'ModerateSplitSelected'	=> 'Separated only selected comments (total %1)',
 	'ModerateUserProfile'	=> 'profile',
-	
+
 	'ModerateSection2'		=> 'moderate section...',
 	'ModerateTopicsDeleted'	=> 'Selected topics successfully deleted.',
 	'ModerateTopicsRelocated'	=> 'Selected topics successfully relocated.',

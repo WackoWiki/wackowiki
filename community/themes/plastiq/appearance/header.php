@@ -24,7 +24,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 <link href="<?php echo $this->config['theme_url'] ?>css/wacko.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo $this->config['theme_url'] ?>css/default.css" rel="stylesheet" type="text/css" media="screen" />
 <link rel="start" href="/" />
-<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page'])); ?>" />
+<link rel="credits" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page'])); ?>" />
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentNewsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentCommentsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentChangesRSS');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name'])); ?>.xml" />
@@ -97,13 +97,12 @@ $user = '';
 
 if ($user = $this->get_user())
 {
-	echo 'id: '.$this->get_user_name() ;?> &nbsp; <a href="<?php echo $this->href('', $this->get_translation('AccountLink')); ?>" title="<?php echo $this->get_translation('AccountTip'); ?>"><?php echo $this->get_translation('AccountText'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->get_translation('LoginPage')); ?>" title="parameters of current session">Session</a> &nbsp; <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag)); ?>" title="Logout"><?php echo $this->get_translation('LogoutLink'); ?></a><br />
-<?php
+	echo 'id: '.$this->get_user_name().' &nbsp; <a href="'.$this->href('', $this->get_translation('AccountLink')).'" title="'.$this->get_translation('AccountTip').'">'.$this->get_translation('AccountText').'</a> &nbsp; <a href="'.$this->href('', $this->get_translation('LoginPage')).'" title="'.$this->get_translation('SessionTip').'">'.$this->get_translation('Session').'</a> &nbsp; <a onclick="return confirm(\''.$this->get_translation('LogoutAreYouSure').'\');" href="'.$this->href('', $this->get_translation('LoginPage'), 'action=logout&amp;goback='.$this->slim_url($this->tag)).'" title="'.$this->get_translation('LogoutButton').'">'.$this->get_translation('LogoutLink').'</a><br />';
 }
 else
 {
 ?>
-	id: <em><?php echo $this->get_translation('Guest') ;?></em> &nbsp; <a href="<?php echo $this->href('', $this->get_translation('LoginPage')); ?>" title="log and log in"><?php echo $this->get_translation('LoginPage'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->get_translation('RegistrationPage')); ?>" title="log in">Registration</a><br />
+	id: <em><?php echo $this->get_translation('Guest') ;?></em> &nbsp; <a href="<?php echo $this->href('', $this->get_translation('LoginPage')); ?>" title="log and log in"><?php echo $this->get_translation('LoginPage'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->get_translation('RegistrationPage')); ?>" title="log in"><?php echo $this->get_translation('RegistrationPage'); ?></a><br />
 <?php
 }
 echo "\n";
@@ -232,14 +231,14 @@ echo "\n";
 		{
 			if ($this->iswatched === true)
 			{
-				?><a href="<?php echo $this->href('watch') ?>" title="stop monitor page">Not follow</a> &nbsp;&nbsp; <?php
+				?><a href="<?php echo $this->href('watch') ?>" title="<?php echo $this->get_translation('RemoveWatch'); ?>"><?php echo $this->get_translation('UnWatchText'); ?></a> &nbsp;&nbsp; <?php
 			}
 			else
 			{
-				?><a href="<?php echo $this->href('watch') ?>" title="monitor homepage">Watch</a> &nbsp;&nbsp; <?php
+				?><a href="<?php echo $this->href('watch') ?>" title="<?php echo $this->get_translation('SetWatch'); ?>"><?php echo $this->get_translation('WatchText'); ?></a> &nbsp;&nbsp; <?php
 			}
 		}
-		?><a href="<?php echo $this->href('print') ?>" title="Print"><?php echo $this->get_translation('PrintText'); ?></a><?php
+		?><a href="<?php echo $this->href('print') ?>" title="<?php echo $this->get_translation('PrintVersion'); ?>"><?php echo $this->get_translation('PrintText'); ?></a><?php
 	}
 	echo "\n";
 ?>
