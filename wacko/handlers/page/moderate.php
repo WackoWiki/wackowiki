@@ -7,7 +7,7 @@
 
 <div class="page">
 <h3><?php echo $this->get_translation('Moderation').' '.( $this->forum === true ? $this->get_translation('Topics') : $this->get_translation('ModerateSection') ).' '.$this->compose_link_to_page($this->tag, '', $this->page['title'], 0);
-	echo ( $this->forum === true ? '<br />['.$this->compose_link_to_page(substr($this->tag, 0, strrpos($this->tag, '/')), 'moderate', 'moderate section...', 0).']' : '' ) // ru: модерировать раздел ?></h3>
+	echo ( $this->forum === true ? '<br />['.$this->compose_link_to_page(substr($this->tag, 0, strrpos($this->tag, '/')), 'moderate', $this->get_translation('ModerateSection2'), 0).']' : '' ) ?></h3>
 
 <?php
 
@@ -378,7 +378,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				unset($accept_action);
 				$xml->comments();
 				$set = array();
-				$this->set_message('Selected topics successfully deleted.'); // ru: Выбранные темы успешно удалены.
+				$this->set_message($this->get_translation('ModerateTopicsDeleted'));
 				$this->redirect($this->href('moderate'));
 			}
 		}
@@ -419,7 +419,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					unset($accept_action, $i, $old_tags, $new_tags);
 					$xml->comments();
 					$set = array();
-					$this->set_message('Selected topics successfully relocated.'); // ru: Выбранные темы успешно перемещены.
+					$this->set_message($this->get_translation('ModerateTopicsRelocated'));
 					$this->redirect($this->href('moderate'));
 				}
 			}
@@ -453,7 +453,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					unset($accept_action, $old_tag, $tag, $title);
 					$xml->comments();
 					$set = array();
-					$this->set_message('Subject successfully renamed. Note: if the subject signed electronically, its title on the same.'); // ru: Тема успешно переименована. Заметьте: если тема электронно подписана, ее заголовок оставлен неизменным.
+					$this->set_message($this->get_translation('ModerateTopicsRenamed'));
 					$this->redirect($this->href('moderate'));
 				}
 			}
@@ -480,7 +480,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				unset($accept_action, $topics);
 				$xml->comments();
 				$set = array();
-				$this->set_message('Selected topics successfully merged.'); // ru: Выбранные темы успешно склеены.
+				$this->set_message($this->get_translation('ModerateTopicsMerged'));
 				$this->redirect($this->href('moderate'));
 			}
 		}
@@ -495,7 +495,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$this->save_acl($id, 'comment', '!*');
 			}
 			$set = array();
-			$this->set_message('Selected topics successfully blocked.'); // ru: Выбранные темы успешно заблокированы.
+			$this->set_message($this->get_translation('ModerateTopicsBlocked'));
 			$this->redirect($this->href('moderate'));
 		}
 		// unlock topics
@@ -508,7 +508,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$this->save_acl($id, 'comment', '*');
 			}
 			$set = array();
-			$this->set_message('Selected topics successfully unlocked.'); // ru: Выбранные темы успешно разблокированы.
+			$this->set_message($this->get_translation('ModerateTopicsUnlocked'));
 			$this->redirect($this->href('moderate'));
 		}
 
@@ -724,7 +724,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				moderate_delete_page($this, $this->tag);
 				unset($accept_action);
 				$xml->comments();
-				$this->set_message('Topic has been successfully removed.'); // ru: Тема успешно удалена.
+				$this->set_message($this->get_translation('ModerateTopicDeleted'));
 				$this->redirect($this->href('moderate', substr($this->tag, 0, strrpos($this->tag, '/'))));
 			}
 		}
@@ -780,7 +780,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$this->log(3, str_replace('%2', $new_tag, str_replace('%1', $old_tag, $this->get_translation('LogRenamedPage', $this->config['language']))));
 					unset($accept_action);
 					$xml->comments();
-					$this->set_message('Page successfully moved.'); // ru: Документ успешно перемещен.
+					$this->set_message($this->get_translation('ModeratePageMoved'));
 					$this->redirect($this->href('moderate', $new_tag));
 				}
 			}
@@ -816,7 +816,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$this->log(3, str_replace('%2', $new_tag.' '.$title, str_replace('%1', $old_tag, $this->get_translation('LogRenamedPage', $this->config['language']))));
 					unset($accept_action);
 					$xml->comments();
-					$this->set_message('Topic successfully renamed. Note: if the topic signed electronically, its title on the same.'); // ru: Тема успешно переименована. Заметьте: если тема электронно подписана, ее заголовок оставлен неизменным.
+					$this->set_message($this->get_translation('ModerateTopicRenamed'));
 					$this->redirect($this->href('moderate', $new_tag));
 				}
 			}
@@ -827,7 +827,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 			$this->save_acl($this->page['page_id'], 'comment', '!*');
 			$this->log(2, str_replace('%1', $this->page['tag'].' '.$this->page['title'], $this->get_translation('LogTopicLocked', $this->config['language'])));
-			$this->set_message('Topic successfully blocked.'); // ru: Тема успешно заблокирована.
+			$this->set_message($this->get_translation('ModerateTopicBlocked'));
 			$this->redirect($this->href('moderate'));
 		}
 		// unlock topic
@@ -835,7 +835,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			$this->save_acl($this->page['page_id'], 'comment', '*');
 			$this->log(2, str_replace('%1', $this->page['tag'].' '.$this->page['title'], $this->get_translation('LogTopicUnlocked', $this->config['language'])));
-			$this->set_message('Topic successfully unlocked.'); // ru: Тема успешно разблокирована.
+			$this->set_message($this->get_translation('ModerateTopicUnlocked'));
 			$this->redirect($this->href('moderate'));
 		}
 		// delete selected comments
@@ -864,7 +864,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				unset($accept_action);
 				$xml->comments();
 				$set = array();
-				$this->set_message('Selected comments removed successfully.'); // ru: Выбранные комментарии успешно удалены.
+				$this->set_message($this->get_translation('ModerateCommentsDeleted'));
 				$this->redirect($this->href('moderate'));
 			}
 		}
@@ -938,14 +938,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							$this->log(3, str_replace('%2', $section.'/'.$tag.' '.$title, str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogSplittedPage', $this->config['language']))));
 							unset($accept_action);
 							$xml->comments();
-							$this->set_message('Selected comments successfully separated in a new topic.'); // ru: Выбранные комментарии успешно отделены в новую тему.
+							$this->set_message($this->get_translation('ModerateCommentsSplited'));
 							$this->redirect($this->href('moderate', $section.'/'.$tag));
 						}
 						else
 						{
-							$this->set_message('Note: For some reason to separate the selected messages to a new topic failed. '.
-								'Usually this should not happen, so let the incident site administrator. '.
-								'As a precaution, issue has been preserved in its original form.'); // ru: Внимание: по какой-то причине не удалось отделить выбранные сообщения в новую тему.     Обычно такое не должно случаться, поэтому сообщите о происшедшем администратору сайта.     В качестве меры предосторожности тема была сохранена в исходном виде.
+							$this->set_message($this->get_translation('ModerateCommentsSplitFailed'));
 							$this->log(2, 'Error when separating comments from the topic ((/'.$this->tag.')) a new topic '.$section.'/'.$tag.': page was not created');  // ru: Ошибка при отделении комментариев из темы     в новую тему        документ не был создан
 						}
 					}
@@ -997,7 +995,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$this->log(3, str_replace('%2', $title.' '.$this->get_page_title($title), str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogSplittedPage', $this->config['language']))));
 						unset($accept_action);
 						$xml->comments();
-						$this->set_message('Selected comments successfully migrated to a given page.'); // ru: Выбранные комментарии успешно перенесены в заданный документ.
+						$this->set_message($this->get_translation('ModerateCommentsMoved'));
 						$this->redirect($this->href('moderate'));
 					}
 				}

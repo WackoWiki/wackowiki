@@ -1,0 +1,21 @@
+This directory contains a copy the 3rd party libraries used by WackoWiki
+
+The version and status of each is summarized below:
+
+directory			| project			| version	| status
+-----------------------------------------------------------------
+captcha				| freeCap			| 1.4.1		| patched: various, see repo
+htmlsax3			| HTMLSAX3			| 3.0.0		| unpatched
+phpmailer			| PHPMailer			| 5.1		| unpatched
+safehtml			| SafeHTML			| 1.3.7		| unpatched
+simplepie			| SimplePie			| 1.3		| unpatched
+text_highlighter	| Text_Highlighter	| 0.7.1		| unpatched
+
+Upstream projects
+==================
+freecap				- http://www.puremango.co.uk/cm_php_captcha_script_113.php
+htmlsax3			- http://pear.php.net/package/XML_HTMLSax3/
+phpmailer			- http://phpmailer.codeworxtech.com/
+safehtml			- http://wackowiki.org/Dev/Projects/SafeHTML
+simplepie			- http://simplepie.org/
+text_highlighter	- http://pear.php.net/package/Text_Highlighter/
