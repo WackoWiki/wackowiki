@@ -131,7 +131,7 @@ echo "\n";
 <?php
 	$this->context[++$this->current_context] = '/';
 	$this->stop_link_tracking();
-	echo $this->format($this->format(strtolower(str_replace("\n", ' ', $this->get_default_bookmarks($user['lang'], 'site')))), 'post_wacko');
+	echo $this->format($this->format(strtolower(str_replace("\n", ' ', $this->get_default_bookmarks($user['lang'])))), 'post_wacko');
 	$this->start_link_tracking();
 	$this->current_context--;
 	echo "\n";

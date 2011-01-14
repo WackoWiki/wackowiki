@@ -70,9 +70,9 @@ if ($this->is_admin())
 ##            MIGRATE user settings                   ##
 ########################################################
 
-if (!function_exists('DecomposeOptions'))
+if (!function_exists('decompose_options'))
 {
-	function DecomposeOptions($more)
+	function decompose_options($more)
 	{
 		$optionSplitter			= "\n";		// if you change this two symbols, settings for all users will be lost.
 		$valueSplitter			= "=";
@@ -86,6 +86,72 @@ if (!function_exists('DecomposeOptions'))
 			$b[$params[0]]	= (isset($params[1]) ? $params[1] : null) ;
 		}
 		return $b;
+	}
+}
+
+if (!function_exists('convert_into_bookmark_table'))
+{
+	function convert_into_bookmark_table($bookmarks, $user_id)
+	{
+		// bookmarks
+		$_bookmarks	= explode("\n", $bookmarks);
+
+		if ($_bookmarks)
+		{
+			foreach($_bookmarks as $key => $_bookmark)
+			{
+				// links ((link desc @@lang))
+				if ((preg_match('/^\[\[(\S+)(\s+(.+))?\]\]$/', $_bookmark, $matches)) ||
+					(preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/', $_bookmark, $matches)) ||
+					(preg_match('/^(\S+)(\s+(.+))?$/', $_bookmark, $matches)) ) // without brackets at last!
+				{
+					list (, $url, $text) = $matches;
+
+					if ($url)
+					{
+						$url = str_replace(' ', '', $url);
+
+						if ($url[0] == '/')
+						{
+							$url		= substr($url, 1);
+						}
+
+						if (stristr($text, '@@'))
+						{
+							$t			= explode('@@', $text);
+							$text		= $t[0];
+							$bm_lang	= $t[1];
+						}
+
+						$title			= trim(preg_replace('/|__|\[\[|\(\(/', '', $text));
+						$page_id		= $this->get_page_id($url);
+						$page_title		= $this->get_page_title('', $page_id);
+
+						if ($page_title !== $title)
+						{
+							$title		= $title;
+						}
+						else
+						{
+							$title		= null;
+						}
+					}
+				}
+
+				if (isset($page_id))
+				{
+					$this->query(
+						"INSERT INTO ".$this->config['table_prefix']."bookmark SET ".
+						"user_id			= '".quote($this->dblink, $user_id)."', ".
+						"page_id			= '".quote($this->dblink, $page_id)."', ".
+						"lang				= '".quote($this->dblink, $bm_lang)."', ".
+						"bm_title			= '".quote($this->dblink, $title)."', ".
+						"bm_position		= '".quote($this->dblink, ($key + 1))."' ");
+				}
+
+				$bm_lang = '';
+			}
+		}
 	}
 }
 
@@ -111,7 +177,7 @@ if ($this->is_admin())
 
 		foreach ($_users as $_user)
 		{
-			$_user['options'] = $this->DecomposeOptions($_user['more']);
+			$_user['options'] = decompose_options($_user['more']);
 			// user_id, doubleclick_edit, show_comments, bookmarks, revisions_count, changes_count, lang, show_spaces, typografica
 			// $_user['options'] : theme, autocomplete, dont_redirect, send_watchmail, show_files, allow_intercom, hide_lastsession, validate_ip, noid_pubs
 
@@ -121,7 +187,7 @@ if ($this->is_admin())
 			$this->query($sql);
 
 			// Bookmarks
-			$this->convert_into_bookmark_table($_user['bookmarks'], $_user['user_id']);
+			convert_into_bookmark_table($_user['bookmarks'], $_user['user_id']);
 		}
 
 		echo "<br />".$count." user settings inserted.";

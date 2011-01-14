@@ -189,7 +189,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 						"send_watchmail	= '".quote($this->dblink, 1)."'");
 
 				// INSERT USER Bookmarks
-				$this->convert_into_bookmark_table($this->get_default_bookmarks($lang), $_user_id['user_id']);
+				#$this->convert_into_bookmark_table($this->get_default_bookmarks($lang), $_user_id['user_id']);
 
 				$subject = 	$this->get_translation('EmailWelcome').
 							$this->config['wacko_name'];

@@ -1129,10 +1129,10 @@ class Wacko
 		}
 
 		$pages[$cl]	= $user['user_name'];
-		$bookm		= $this->get_default_bookmarks($user['lang'], 'site')."\n".
+		$bookm		= $this->get_default_bookmarks($user['lang'])."\n".
 					($user_bm
 						? $user_bm
-						: $this->get_default_bookmarks($user['lang']));
+						: '');
 		$bookmarks	= explode("\n", $bookm);
 
 		for ($i = 0; $i <= count($bookmarks); $i++)
@@ -4389,7 +4389,7 @@ class Wacko
 	}
 
 	// BOOKMARKS
-	function get_default_bookmarks($lang, $what = 'default')
+	function get_default_bookmarks($lang)
 	{
 		if (!isset($lang))
 		{
@@ -4453,68 +4453,6 @@ class Wacko
 			}
 
 			return $user_bm;
-		}
-	}
-
-	function convert_into_bookmark_table($bookmarks, $user_id)
-	{
-		// bookmarks
-		$_bookmarks	= explode("\n", $bookmarks);
-
-		if ($_bookmarks)
-		{
-			foreach($_bookmarks as $key => $_bookmark)
-			{
-				// links ((link desc @@lang))
-				if ((preg_match('/^\[\[(\S+)(\s+(.+))?\]\]$/', $_bookmark, $matches)) ||
-					(preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/', $_bookmark, $matches)) ||
-					(preg_match('/^(\S+)(\s+(.+))?$/', $_bookmark, $matches)) ) // without brackets at last!
-				{
-					list (, $url, $text) = $matches;
-
-					if ($url)
-					{
-						$url = str_replace(' ', '', $url);
-
-						if ($url[0] == '/')
-						{
-							$url		= substr($url, 1);
-						}
-
-						if (stristr($text, '@@'))
-						{
-							$t			= explode('@@', $text);
-							$text		= $t[0];
-							$bm_lang	= $t[1];
-						}
-
-						$title			= trim(preg_replace('/|__|\[\[|\(\(/', '', $text));
-						$page_id		= $this->get_page_id($url);
-						$page_title		= $this->get_page_title('', $page_id);
-
-						if ($page_title !== $title)
-						{
-							$title		= $title;
-						}
-						else
-						{
-							$title		= null;
-						}
-					}
-				}
-				if (isset($page_id))
-				{
-					$this->query(
-						"INSERT INTO ".$this->config['table_prefix']."bookmark SET ".
-						"user_id			= '".quote($this->dblink, $user_id)."', ".
-						"page_id			= '".quote($this->dblink, $page_id)."', ".
-						"lang				= '".quote($this->dblink, $bm_lang)."', ".
-						"bm_title			= '".quote($this->dblink, $title)."', ".
-						"bm_position		= '".quote($this->dblink, ($key + 1))."' ");
-				}
-
-				$bm_lang = '';
-			}
 		}
 	}
 
@@ -4600,7 +4538,7 @@ class Wacko
 			$this->query(
 				"DELETE FROM ".$this->config['table_prefix']."bookmark ".
 				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
-				"AND page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
+					"AND page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
 				"LIMIT 1");
 
 			// parsing bookmarks into link table
