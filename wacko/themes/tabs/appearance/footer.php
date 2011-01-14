@@ -337,7 +337,8 @@ switch (count($comments))
 <!-- !!! -->
 
 <div id="credits"><?php
-if ($this->get_user()){
+if ($this->get_user())
+{
 	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki '.$this->get_wacko_version())." :: Redesign by Mendokusee";
 }
 ?></div>

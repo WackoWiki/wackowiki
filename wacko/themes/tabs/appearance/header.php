@@ -85,14 +85,14 @@ else if ($this->has_access('write'))
 ?>
 <body onload="all_init();">
 <div class="Top<?php if (!$this->get_user()) echo "LoggedOut";?>">
-  <div class="TopRight"><?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?> <span class="nobr"> <?php echo $this->compose_link_to_page($this->config['root_page']) ?>&nbsp;|&nbsp; <?php echo $this->format($this->format(str_replace("\n", '&nbsp;|&nbsp;', $this->get_default_bookmarks($user['lang'], 'site'))), 'post_wacko'); ?></span> | <?php echo $this->get_translation('SearchText') ?>
+  <div class="TopRight"><?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?> <span class="nobr"> <?php echo $this->compose_link_to_page($this->config['root_page']) ?>&nbsp;|&nbsp; <?php echo $this->format($this->format(str_replace("\n", '&nbsp;|&nbsp;', $this->get_default_bookmarks($user['lang']))), 'post_wacko'); ?></span> | <?php echo $this->get_translation('SearchText') ?>
     <input name="phrase" size="15" class="ShSearch" />
     <?php echo $this->form_close(); ?> </div>
   <div class="TopLeft">
     <?php if ($this->get_user()) { ?>
     <img
 	src="<?php echo $this->config['theme_url'] ?>icons/role.gif"
-	hspace="5" vspace="5" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
+	width="9" height="15" alt="" /><span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
     <?php
 echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
     | <a
@@ -102,11 +102,9 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
     <table cellspacing="0" cellpadding="0" border="0">
       <tr>
         <td>
-        	<?php echo $this->form_open('', 'Login', 'post'); ?>
-      		<input type="hidden" name="action" value="login" />
-        	<img
-				src="<?php echo $this->config['theme_url'] ?>icons/norole.gif"
-				hspace="5" vspace="5" width="9" height="15" alt="" /></td>
+			<?php echo $this->form_open('', 'Login', 'post'); ?>
+			<input type="hidden" name="action" value="login" />
+			<img src="<?php echo $this->config['theme_url'] ?>icons/norole.gif" width="9" height="15" alt="" /></td>
         <td><strong><?php echo $this->get_translation('LoginWelcome') ?>:&nbsp;</strong> </td>
         <td><input type="text" name="name" size="18" /></td>
         <td>&nbsp;&nbsp;&nbsp;<?php echo $this->get_translation('LoginPassword') ?>:&nbsp; </td>
@@ -115,7 +113,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
           <input
 			type="password" name="password" size="8" />
           &nbsp;</td>
-        <td><input type="submit" value="&nbsp;&nbsp;&raquo;&nbsp;&nbsp;" />
+        <td><input type="submit" value="" />
         </td>
       </tr>
       <?php echo $this->form_close(); ?>
