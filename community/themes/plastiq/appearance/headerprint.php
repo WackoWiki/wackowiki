@@ -14,7 +14,7 @@
 <link href="<?php echo $this->config['theme_url'] ?>css/print.css" rel="stylesheet" type="text/css" media="screen, print" />
 <!-- nav destinations -->
 <link rel="start" href="/" />
-<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page'])); ?>" />
+<link rel="credits" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page'])); ?>" />
 <link rel="prev" href="<?php echo $this->href() ?>" />
 </head>
 <body id="print">

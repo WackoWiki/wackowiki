@@ -27,6 +27,8 @@ $wacko_translation = array(
 	'LoginButton'			=> 'Benutzer anmelden',
 	'LoginPage'				=> 'Anmeldung',
 	'PersistentCookie'		=> 'Angemeldet bleiben',
+	'Session'				=> 'Sitzung',
+	'SessionTip'			=> 'Parameter der aktuellen Sitzung',
 	'SessionDuration'		=> 'Sitzungsdauer',
 	'LoggedInAs'			=> 'Du bist angemeldet als',
 
@@ -145,7 +147,7 @@ $wacko_translation = array(
 	'PurgeButton'			=> 'löschen',
 
 	// categories handler
-	'Categories'				=> 'Kategorien',
+	'Categories'			=> 'Kategorien',
 	'Category'				=> 'Kategorie',
 	'CategoriesFor'			=> 'Kategorien für',
 	'CategoriesTip'			=> 'Kategorien bearbeiten',
@@ -310,6 +312,8 @@ $wacko_translation = array(
 	'NoWantedPages'			=> '<em>Keine offenen Seiten. Gut.</em>',
 	'RemoveWatch'			=> 'Beobachte die Seite nicht mehr',
 	'SetWatch'				=> 'Beobachte die Seite',
+	'WatchText'				=> 'Beobachten',
+	'UnWatchText'			=> 'Nicht beobachten',
 	'UserSettingsStored'	=> 'Benutzereinstellungen gespeichert!',
 	'LoggedOut'				=> 'Du bist jetzt abgemeldet.',
 

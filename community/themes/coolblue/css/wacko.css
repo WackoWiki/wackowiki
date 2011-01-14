@@ -68,11 +68,11 @@ padding:0;
 width:100%;
 }
 
-.commentinfo,.copyright a {
+.commentinfo,.credits a {
 color:#AAA;
 }
 
-.copyright {
+.credits {
 color:#AAA;
 font-size:11px;
 text-align:right;

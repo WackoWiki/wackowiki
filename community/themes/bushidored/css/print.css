@@ -14,18 +14,6 @@ H3 { font-family: Verdana; font-size: 17px; padding-top:15px; padding-bottom:5px
 H4 { font-family: Arial;   font-size: 16px; padding-top:15px; padding-bottom:5px }
 H5 { font-family: Arial;   font-size: 14px; padding-top:10px; padding-bottom:5px }
 
-/* overrall design */
-.ShHeader H1 { margin:0px; padding:0px; color:#000000; font-family:Arial; font-size:15px }
-.ShPage { background:#ffffff; padding:10px 10px 50px 10px;  }
-
-.ShCopyright {
-  font-size: 11px;
-  color: #AAAAAA;
-  text-align: right;
-  padding:25px 5px 5px 5px
-}
-
-
 /* fonts */
 BODY, TD, P, LI, .ShPage { font-family: Georgia, Verdana; font-size:95% }
 TEXTAREA { font-family: MonoCondensedCTT, Lucida Console, sans; color:#222222; line-height: 1.3em; }

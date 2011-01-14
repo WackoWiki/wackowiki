@@ -27,6 +27,8 @@ $wacko_translation = array(
 	'LoginButton' => 'Log ind',
 	'LoginPage' => 'Login',
 	'PersistentCookie' => 'Forbliv logget ind',
+	'Session'				=> 'Session',
+	'SessionTip'			=> 'parameters of current session',
 	'SessionDuration' => 'Session duration',
 	'LoggedInAs' => 'You are logged in as',
 
@@ -309,6 +311,8 @@ $wacko_translation = array(
 	'NoWantedPages' => '<em>Ingen eftersøgte sider. Godt!</em>',
 	'RemoveWatch' => 'Fjern overvågning af denne side',
 	'SetWatch' => 'Overvåg denne side',
+	'WatchText'				=> 'Watch',
+	'UnWatchText'			=> 'Not follow',
 	'UserSettingsStored' => 'Brugeropsætningen gemt!',
 	'LoggedOut' => 'Du er nu logget ud.',
 

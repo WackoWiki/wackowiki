@@ -237,7 +237,7 @@ echo '<br />';
 
 			?>
 
-<div class="copyright">
+<div class="credits">
 <?php
 # print $this->format( '{{hits}} Aufrufe' );
 ?>

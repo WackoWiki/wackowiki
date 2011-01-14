@@ -27,6 +27,8 @@ $wacko_translation = array(
 	'LoginButton' => 'Intrarea in sistem',
 	'LoginPage' => 'Login',
 	'PersistentCookie' => 'Stay signed in',
+	'Session'				=> 'Session',
+	'SessionTip'			=> 'parameters of current session',
 	'SessionDuration' => 'Session duration',
 	'LoggedInAs' => 'You are logged in as',
 
@@ -310,6 +312,8 @@ $wacko_translation = array(
 
 	'RemoveWatch' => 'Scoate monitorizarea',
 	'SetWatch' => 'Monitorizeaza',
+	'WatchText'				=> 'Watch',
+	'UnWatchText'			=> 'Not follow',
 	'UserSettingsStored' => 'Preferintele Dvs. sunt salvate',
 	'LoggedOut' => 'Ati iesit din sistema',
 

@@ -482,7 +482,7 @@ textarea {
 	}
 
 
-#copyright {
+#credits {
 	color: #B8C0C4;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10px;
@@ -490,12 +490,15 @@ textarea {
 	height: 50px;
 	padding-top: 25px;
 }
-	#copyright a {
-		color: #B8C0C4;
-		text-decoration: underline;
-	}
-	#copyright a:hover, #copyright a:active {
-		color: #B8C0C4;
-		text-decoration: none;
-	}
+#credits a {
+	color: #B8C0C4;
+	text-decoration: underline;
+}
+#credits a:hover, #credits a:active {
+	color: #B8C0C4;
+	text-decoration: none;
+}
 
+.pagination {
+	float: right;
+}
