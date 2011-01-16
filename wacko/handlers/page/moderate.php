@@ -77,7 +77,7 @@ function moderate_rename_topic(&$engine, $old_tag, $new_tag, $title = '')
 	{
 		// resave modified body
 		$page['body'] = preg_replace('/^==.*?==/', '=='.$title.'==', $page['body']);
-		$engine->save_page($new_tag, false, $page['body'], '', '', '', '', true);
+		$engine->save_page($new_tag, false, $page['body'], '', '', '', '', '', true, false);
 
 		$engine->query(
 			"UPDATE {$engine->config['table_prefix']}page ".
@@ -207,7 +207,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 
 	// resave modified body
 	$page['body']	= '=='.$title."==\n\n".$page['body'];
-	$engine->save_page($new_tag, false, $page['body'], '', '', '', $title_id, true);
+	$engine->save_page($new_tag, false, $page['body'], '', '', '', $title_id, '', true);
 
 	// bug-resistent check: has page been really resaved?
 	if ($engine->load_single(
