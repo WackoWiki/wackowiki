@@ -641,6 +641,7 @@ $wacko_translation = array(
 	'BookmarkTitle'			=> 'Lesezeichen Titel',
 	'BookmarkPage'			=> 'Seite',
 	'BookmarkSaveChanges'	=> 'Speichere Änderungen',
+	'BookmarksAddPage' => 'Add following page to bookmarks',
 
 	'MeasuredTime'			=> 'Zeit',
 	'MeasuredMemory'		=> 'Speicher',

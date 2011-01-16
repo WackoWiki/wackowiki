@@ -215,15 +215,16 @@ if ($user)
 		echo "</td>\n</tr>\n";
 		echo "</tfoot>";
 		echo "</table>";
+	}
 
+		echo $this->form_open();
+		echo "<input type=\"hidden\" name=\"_user_bookmarks\" value=\"yes\" />";
 		echo "<br /><br />";
-
-		echo "<label for=\"add_bookmark\">".$this->get_translation('CreateRandomPage').":</label><br />";
+		echo "<label for=\"add_bookmark\">".$this->get_translation('BookmarksAddPage').":</label><br />";
 		echo "<input id=\"add_bookmark\" name=\"tag\" value=\"\" size=\"60\" maxlength=\"255\" /> ".
 			"<input name=\"add_bookmarks\" type=\"submit\" value=\"".$this->get_translation('CreatePageButton')."\" />";
 
 		echo $this->form_close();
-	}
 }
 
 ?>
