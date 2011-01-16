@@ -1,6 +1,6 @@
 <?php
 
-// TODO:
+// TODO: Fix acl checks in sql WHERE clauses, just commented them out
 //
 
 ?>
@@ -103,16 +103,20 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 		return false;
 	}
 
+	$base_id = $engine->get_page_id($base);
+
 	foreach ($topics as $topic)
 	{
 		// we don't really want to touch the base topic
 		if ($topic != $base)
 		{
+			$topic_id = $engine->get_page_id($topic);
+
 			// move comments to the base topic
 			$engine->query(
 				"UPDATE {$engine->config['table_prefix']}page SET ".
-					"comment_on_id = '".quote($engine->dblink, $base)."' ".
-				"WHERE comment_on_id = '".quote($engine->dblink, $topic)."'");
+					"comment_on_id = '".quote($engine->dblink, $base_id)."' ".
+				"WHERE comment_on_id = '".quote($engine->dblink, $topic_id)."'");
 
 			// for the forum moderation only
 			if ($movetopics === true)
@@ -131,7 +135,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 				$page = $engine->load_page($topic);
 
 				$page['body'] = preg_replace('/^==.*?==(\\n)*/', '', str_replace("\r", '', $page['body']));
-				$engine->save_page('Comment'.$num, false, $page['body'], '', '', $base, '', true);
+				$engine->save_page('Comment'.$num, false, $page['body'], '', '', '', $base_id, '', true);
 
 				// restore creation date
 				$engine->query(
@@ -154,7 +158,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 	$comments = $engine->load_all(
 		"SELECT tag, body_r ".
 		"FROM {$engine->config['table_prefix']}page ".
-		"WHERE comment_on_id = '".quote($engine->dblink, $base)."'");
+		"WHERE comment_on_id = '".quote($engine->dblink, $base_id)."'");
 
 	foreach ($comments as $comment)
 	{
@@ -171,7 +175,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 	// recount comments for the base topic
 	$engine->query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
-			"comments	= '".(int)$engine->count_comments($base)."', ".
+			"comments	= '".(int)$engine->count_comments($base_id)."', ".
 			"commented	= NOW() ".
 		"WHERE tag = '".quote($engine->dblink, $base)."' ".
 		"LIMIT 1");
@@ -189,6 +193,10 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 		return false;
 	}
 
+	$old_tag_id = $engine->get_page_id($old_tag);
+	$new_tag_id = $engine->get_page_id($new_tag);
+	$title_id = $engine->get_page_id($title);
+
 	// set forum context
 	$forum_context	= $engine->forum;
 	$engine->forum	= true;
@@ -199,7 +207,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 
 	// resave modified body
 	$page['body']	= '=='.$title."==\n\n".$page['body'];
-	$engine->save_page($new_tag, false, $page['body'], '', '', '', $title, true);
+	$engine->save_page($new_tag, false, $page['body'], '', '', '', $title_id, true);
 
 	// bug-resistent check: has page been really resaved?
 	if ($engine->load_single(
@@ -214,10 +222,10 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$engine->query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"modified		= '".quote($engine->dblink, $page['modified'])."', ".
-			"created	= '".quote($engine->dblink, $page['created'])."', ".
+			"created		= '".quote($engine->dblink, $page['created'])."', ".
 			"owner_id		= '".quote($engine->dblink, $page['owner_id'])."', ".
 			"user_id		= '".quote($engine->dblink, $page['user_id'])."', ".
-			"ip			= '".quote($engine->dblink, $page['ip'])."' ".
+			"ip				= '".quote($engine->dblink, $page['ip'])."' ".
 		"WHERE tag = '".quote($engine->dblink, $new_tag)."'");
 
 	// move remaining comments to the new topic
@@ -225,7 +233,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	{
 		$engine->query(
 			"UPDATE {$engine->config['table_prefix']}page SET ".
-				"comment_on_id = '".quote($engine->dblink, $new_tag)."' ".
+				"comment_on_id = '".quote($engine->dblink, $new_tag_id)."' ".
 			"WHERE page_id = '".quote($engine->dblink, $id)."'");
 	}
 
@@ -247,13 +255,13 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	// recount comments for old and new topics
 	$engine->query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
-			"comments	= '".(int)$engine->count_comments($new_tag)."', ".
+			"comments	= '".(int)$engine->count_comments($new_tag_id)."', ".
 			"commented	= NOW() ".
 		"WHERE tag = '".quote($engine->dblink, $new_tag)."' ".
 		"LIMIT 1");
 	$engine->query(
 		"UPDATE {$engine->config['table_prefix']}page ".
-		"SET comments = '".(int)$engine->count_comments($old_tag)."' ".
+		"SET comments = '".(int)$engine->count_comments($old_tag_id)."' ".
 		"WHERE tag = '".quote($engine->dblink, $old_tag)."' ".
 		"LIMIT 1");
 
@@ -268,6 +276,8 @@ if (!$this->page || $this->page['comment_on_id'] == true)
 {
 	$this->redirect($this->href('show'));
 }
+
+$forum_cluster = '';
 
 if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 {
@@ -514,25 +524,27 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// make counter query
 		$sql = "SELECT COUNT(p.tag) AS n ".
-			"FROM {$this->config['table_prefix']}page AS p, ".
+			"FROM {$this->config['table_prefix']}page AS p ".
 				#"{$this->config['table_prefix']}acl AS a ".
-			"WHERE p.page_id = a.page_id ".
+			"WHERE". # p.page_id = a.page_id ".
 				#"AND a.`create` = '' ".
-				"AND p.tag LIKE '{$this->tag}/%'";
+				#"AND
+				"p.tag LIKE '{$this->tag}/%'";
 
 		// count topics and make pagination
 		$count		= $this->load_single($sql);
 		$pagination	= $this->pagination($count['n'], $limit, 'p', 'ids='.implode('-', $set), 'moderate');
 
 		// make collector query
-		$sql = "SELECT p.page_id, p.tag, title, p.owner_id, p.user_id, ip, comments, created, u.user_name AS user,  o.user_name as owner ".
+		$sql = "SELECT p.page_id, p.tag, title, p.owner_id, p.user_id, ip, comments, created, u.user_name AS user, o.user_name as owner ".
 			"FROM {$this->config['table_prefix']}page AS p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id), ".
+					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 				#"{$this->config['table_prefix']}acl AS a ".
-			"WHERE p.page_id = a.page_id ".
+			"WHERE ".// p.page_id = a.page_id ".
 				#"AND a.`create` = '' ".
-				"AND p.tag LIKE '{$this->tag}/%' ".
+				#"AND
+				"p.tag LIKE '{$this->tag}/%' ".
 			"ORDER BY commented DESC ".
 			"LIMIT {$pagination['offset']}, $limit";
 
@@ -576,11 +588,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			$sections = $this->load_all(
 				"SELECT p.tag, p.title ".
-				"FROM {$this->config['table_prefix']}page AS p, ".
+				"FROM {$this->config['table_prefix']}page AS p ".
 					#"{$this->config['table_prefix']}acl AS a ".
-				"WHERE p.page_id = a.page_id ".
+				"WHERE ". #p.page_id = a.page_id ".
 					#"AND a.`comment` = '' ".
-					"AND p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
+					#"AND
+					"p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
 				"ORDER BY time ASC", 1);
 
 			foreach ($sections as $section)
@@ -627,6 +640,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$topics_list[] = $this->get_page_tag_by_id($id);
 			}
 
+			$list = '';
 			for ($i = 0; $i < count($topics_list); $i++)
 			{
 				$list .= "<option value=\"{$topics_list[$i]}\">{$accept_text[$i]}</option>\n";
@@ -982,14 +996,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						// recount comments for the old and new page
 						$this->query(
 							"UPDATE {$this->config['table_prefix']}page ".
-							"SET comments = '".(int)$this->count_comments($this->tag)."' ".
-							"WHERE tag = '".quote($this->dblink, $this->tag)."' ".
+							"SET comments = '".(int)$this->count_comments($this->page['page_id'])."' ".
+							"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
 							"LIMIT 1");
 						$this->query(
 							"UPDATE {$this->config['table_prefix']}page SET ".
-								"comments	= '".(int)$this->count_comments($title)."', ".
+								"comments	= '".(int)$this->count_comments($page_id)."', ".
 								"commented	= NOW() ".
-							"WHERE tag = '".quote($this->dblink, $title)."' ".
+							"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
 							"LIMIT 1");
 
 						$this->log(3, str_replace('%2', $title.' '.$this->get_page_title($title), str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogSplittedPage', $this->config['language']))));
@@ -1061,11 +1075,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				$sections = $this->load_all(
 					"SELECT p.tag, p.title ".
-					"FROM {$this->config['table_prefix']}page AS p, ".
+					"FROM {$this->config['table_prefix']}page AS p ".
 						#"{$this->config['table_prefix']}acl AS a ".
-					"WHERE p.page_id = a.page_id ".
+					"WHERE ". #p.page_id = a.page_id ".
 						#"AND a.`comment` = '' ".
-						"AND p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
+						#"AND
+						"p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
 					"ORDER BY time ASC", 1);
 
 				foreach ($sections as $section)
@@ -1176,7 +1191,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				'</tr>'."\n".
 				'<tr class="lined">'.
 					'<td colspan="2" style="padding-bottom:30px;">'.
-						'<strong><small><span'.( $this->is_admin() ? ' title="'.$this->page['ip'].'"' : '' ).'>'.( $forum_cluster === false ? $this->page['owner_name'] : ( $this->page['user'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $this->page['user'] ) ).'</span> ('.$this->get_time_string_formatted($this->page['created']).')</small></strong>'.
+						'<strong><small><span'.( $this->is_admin() ? ' title="'.$this->page['ip'].'"' : '' ).'>'.( $forum_cluster === false ? $this->page['owner_name'] : ( $this->page['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $this->page['user_name'] ) ).'</span> ('.$this->get_time_string_formatted($this->page['created']).')</small></strong>'.
 						'<br />'.$body.
 					'</td>'.
 				'</tr>'."\n";
