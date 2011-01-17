@@ -27,8 +27,15 @@ class Polls
 			'FROM '.$this->engine->config['table_prefix'].'poll '.
 			'ORDER BY poll_id DESC '.
 			'LIMIT 1');
-		if ($id['id'] == false) return 0;
-		else return $id['id'];
+
+		if ($id['poll_id'] == false)
+		{
+			return 0;
+		}
+		else
+		{
+			return $id['poll_id'];
+		}
 	}
 
 	// title information for a given poll
@@ -39,6 +46,7 @@ class Polls
 			"FROM {$this->engine->config['table_prefix']}poll p ".
 				"LEFT JOIN {$this->engine->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
 			"WHERE p.poll_id = $id AND p.v_id = 0");
+
 		return $title;
 	}
 
@@ -51,6 +59,7 @@ class Polls
 			"FROM {$this->engine->config['table_prefix']}poll ".
 			"WHERE poll_id = $id AND v_id <> 0 ".
 			"ORDER BY ".($votes == 1 ? "votes DESC, " : "")."v_id ASC");
+
 		return $vars;
 	}
 
@@ -65,10 +74,12 @@ class Polls
 			"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
 			"GROUP BY years ".
 			"ORDER BY years DESC");
+
 		foreach ($list as $item)
 		{
 			$years[] = $item['years'];
 		}
+
 		return $years;
 	}
 
@@ -77,6 +88,7 @@ class Polls
 	{
 		if (is_string($start))	$start	= strtotime($start);
 		if (is_string($end))	$end	= strtotime($end);
+
 		return ceil((($end - $start) / 3600) / 24);
 	}
 
@@ -88,40 +100,49 @@ class Polls
 			case 'active':
 			case 'current':
 				$list = $this->engine->load_all(
-					"SELECT poll_id, text, user_id, plural, start ".
-					"FROM {$this->engine->config['table_prefix']}poll ".
+					"SELECT poll_id, text, p.user_id, plural, start, u.user_name as user ".
+					"FROM {$this->engine->config['table_prefix']}poll p ".
+						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' AND end = '".SQL_NULLDATE."' ".
 					"ORDER BY start DESC");
 				break;
+
 			case 'mod':
 			case 'moderation':
 				$list = $this->engine->load_all(
-					"SELECT poll_id, text, user_id, plural ".
-					"FROM {$this->engine->config['table_prefix']}poll ".
+					"SELECT poll_id, text, p.user_id, plural, u.user_name as user ".
+					"FROM {$this->engine->config['table_prefix']}poll p ".
+						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start = '".SQL_NULLDATE."' AND end = '".SQL_NULLDATE."' ".
 					"ORDER BY poll_id ASC");
 				break;
+
 			case 'ended':
 				$list = $this->engine->load_all(
-					"SELECT poll_id, text, user_id, plural, start, end ".
-					"FROM {$this->engine->config['table_prefix']}poll ".
+					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
+					"FROM {$this->engine->config['table_prefix']}poll p ".
+						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' AND end <> '".SQL_NULLDATE."' ".
 					"ORDER BY end DESC");
 				break;
+
 			case 'archive':
 				if ($year == 0) $year = date('Y');
 				$list = $this->engine->load_all(
-					"SELECT poll_id, text, user_id, plural, start, end ".
-					"FROM {$this->engine->config['table_prefix']}poll ".
+					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
+					"FROM {$this->engine->config['table_prefix']}poll p ".
+						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
 						"AND end <> '".SQL_NULLDATE."' AND YEAR(start) = $year ".
 					"ORDER BY end DESC");
 				break;
+
 			default:
 			case 'all':
 				$list = $this->engine->load_all(
-					"SELECT poll_id, text, user_id, plural, start, end ".
-					"FROM {$this->engine->config['table_prefix']}poll ".
+					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name as user ".
+					"FROM {$this->engine->config['table_prefix']}poll p ".
+						"LEFT OUTER JOIN ".$this->engine->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"WHERE v_id = 0 AND start <> '".SQL_NULLDATE."' ".
 					"ORDER BY start DESC");
 		}
@@ -133,6 +154,7 @@ class Polls
 	{
 		$topic	= quote($this->engine->dblink, $topic);
 		$user	= quote($this->engine->dblink, $user);
+
 		if ($plural != 1) $plural = 0;
 
 		// submitting title
@@ -193,7 +215,8 @@ class Polls
 					'<a name="poll'.$id.'_form"></a>'.
 					'<input name="poll" type="hidden" value="'.$id.'" />'.
 					'<table cellspacing="3" class="formation">'.
-					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (id'.((int)$id).'): '.$header['text'].'</th></tr>';
+					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int)$id).'): '.$header['text'].'</th></tr>';
+
 			foreach ($vars as $var)
 			{
 				$poll	.= '<tr><td class="label">'.
@@ -204,6 +227,7 @@ class Polls
 						'<td style="width:95%;text-align:left;">'.$var['text'].'</td></tr>'.
 						'<tr class="lined"><td colspan="2"></td></tr>';
 			}
+
 			$poll	.= '<tr><td colspan="2"><small>'.$this->engine->get_translation('PollsLasts').': '.$duration.
 						'<br />'.$this->engine->get_translation('PollsAdded').': '.( strpos($header['user_id'], '.') ? $user : '<a href="'.$this->engine->href('', $this->engine->config['users_page'], 'profile='.$user).'">'.$user.'</a>' ).'</small></td></tr>'.
 					'<tr><td colspan="2" style="white-space:nowrap;">'.
@@ -244,7 +268,8 @@ class Polls
 					'<a name="p'.date('dm', strtotime($header['start'])).'"></a>'.
 					'<a name="poll'.$id.'_form"></a>'.
 					'<table cellspacing="3" class="formation">'.
-					'<tr><th colspan="3" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (id'.((int)$id).'): '.$header['text'].'</th></tr>';
+					'<tr><th colspan="3" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int)$id).'): '.$header['text'].'</th></tr>';
+
 			foreach ($vars as $var)
 			{
 				$percent = ($total == 0 ? 0 : round($var['votes'] / $total * 100, 1));
@@ -252,6 +277,7 @@ class Polls
 						'<td>&nbsp;<strong>'.$var['votes'].'</strong>&nbsp;</td>'.
 						'<td>&nbsp;<strong>'.$percent.'%</strong></td></tr>';
 			}
+
 			$poll	.= '<tr><td colspan="3"><small>'.$this->engine->get_translation('PollsTotalVotes').': '.$voters.
 						'<br />'.($header['end'] != SQL_NULLDATE ? $this->engine->get_translation('PollsLasted') :
 							$this->engine->get_translation('PollsLasts')).': '.$duration.
@@ -293,6 +319,7 @@ class Polls
 		{
 			$ids = explode(';', $cookie);
 		}
+
 		$ids[]	= $id;
 		$cookie	= implode(';', $ids);
 		$this->engine->set_session_cookie('poll', $cookie);
