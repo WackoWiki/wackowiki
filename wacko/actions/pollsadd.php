@@ -101,11 +101,11 @@ if (isset($_POST['submit_poll']))
 	// in case no errors found submit poll or changes to the db
 	if (!$error)
 	{
-		if (!$user)		$user		= $this->get_user_id();
-		if (!$user)		$user		= $this->get_user_ip();
-		if (!$edit_id)	$edit_id	= $polls_obj->get_last_poll_id() + 1;
+		if (!isset($user))		$user		= $this->get_user_id();
+		if (!$user)				$user		= $this->get_user_ip();
+		if (!isset($edit_id))	$edit_id	= $polls_obj->get_last_poll_id() + 1;
 		// remove moderated poll
-		if ($moderation === true)	  $polls_obj->remove_poll($edit_id);
+		if ($moderation === true)	$polls_obj->remove_poll($edit_id);
 		// save new or update moderated poll
 		$polls_obj->submit_poll($edit_id, $topic, $plural, $answers, $user, ($startmod == 1 && $admin ? 1 : 0));
 		// update page cache

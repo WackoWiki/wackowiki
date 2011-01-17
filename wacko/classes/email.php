@@ -28,7 +28,7 @@ class Email
 
 		$mail = new PHPMailer(true); // the true param means it will throw exceptions on errors, which we need to catch
 
-		$mail->SetLanguage($this->engine->config['lang'], 'language/');
+		$mail->SetLanguage($this->engine->config['language'], 'language/');
 
 		// Select the method to send mail
 		switch( $this->engine->config['phpmailer_method'] )

@@ -11,8 +11,22 @@ writeConfigHiddenNodes(array('none' => ''));
 
 	$php_version_result = version_compare('5.2.0', PHP_VERSION, '<');
 	?>
-<h2><?php echo $lang['PHPVersion']; ?></h2>
-<p class="notop"><?php echo $lang['PHPDetected']; ?> <?php echo phpversion().'   '.output_image($php_version_result); ?></p>
+	<h2><?php echo $lang['PHPVersion']; ?></h2>
+	<p class="notop"><?php echo $lang['PHPDetected']; ?> <?php echo phpversion().'   '.output_image($php_version_result); ?></p>
+	<?php
+	/*
+		Check Apache version
+	*/
+	?>
+	<?php
+	if (preg_match('|Apache\/(\d+)\.(\d+)\.(\d+)|', $_SERVER['SERVER_SOFTWARE'], $apver))
+	{
+		echo "Apache Version Number: ${apver[1]}.${apver[2]}.${apver[3]}<br>\n";
+	}
+	echo "<pre>\n"; print_r($apver); echo "</pre>\n";
+	?>
+	<h2><?php echo $lang['ApacheVersion']; ?></h2>
+	<p class="notop"><?php echo $lang['ApacheDetected']; ?> <?php echo phpversion().'   '.output_image($php_version_result); ?></p>
 	<?php
 	/*
 		Check if mod_rewrite is installed
