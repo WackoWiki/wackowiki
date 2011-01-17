@@ -188,15 +188,14 @@ $wacko_translation = array(
 	'TagCloud'				=> 'Tag Cloud',
 
 	// source handler
-	'TitleSource'			=> 'source text of document',
+	'TitleSource'			=> 'source of the page',
 	'SourceFrom'			=> 'original is located at: ',
 	'SourceFromLink'		=> 'reference',
 	'SourceCopyToClipboard'	=> 'copy to clipboard',
-	'Source'				=> 'view the source text',
-	'SourceDesc'			=> 'the source text will be shown with exception of those fragments which are hidden by formatters <nobr><tt>%%(comments)..%%</tt></nobr>',
+	'Source'				=> 'view the source',
+	'SourceDesc'			=> 'the source will be shown with exception of those fragments which are hidden by formatters <nobr><tt>%%(comments)..%%</tt></nobr>',
 
 	// groups handler
-	'Groups'				=> 'Groups',
 	'GroupsMembers'			=> 'Members for Group',
 	'GroupsDescription'	=> 'Description',
 	'GroupsModerator'	=> 'Moderator',
@@ -233,14 +232,6 @@ $wacko_translation = array(
 	'UsersRename'		=> 'Rename the user',
 	'UsersRenameInfo'	=> '* Note: Change will affect all pages that are assigned to that user.',
 	'UsersRenamed'		=> 'User successfully renamed.',
-
-	// source handler
-	'TitleSource'			=> 'source text of document',
-	'SourceFrom'			=> 'original is located at: ',
-	'SourceFromLink'		=> 'reference',
-	'SourceCopyToClipboard'	=> 'copy to clipboard',
-	'Source'				=> 'view the source text',
-	'SourceDesc'			=> 'the source text will be shown with exception of those fragments which are hidden by formatters <nobr><tt>%%(comments)..%%</tt></nobr>',
 
 	'MetaUpdated' => 'Meta data updated',
 	'MetaStoreButton' => 'Save',
@@ -687,11 +678,12 @@ $wacko_translation = array(
 
 	'BookmarkDeleteSelected' => 'Delete Selected',
 	'BookmarkMark' => 'Mark',
-	'BookmarkNo' => 'No.',
+	'BookmarkNumber' => 'No.',
+	'BookmarkNone' => 'You have no bookmarks.',
 	'BookmarkTitle' => 'Bookmark Title',
 	'BookmarkPage' => 'Page',
 	'BookmarkSaveChanges' => 'Save Changes',
-	'BookmarksAddPage' => 'Add following page to bookmarks',
+	'BookmarksAddPage' => 'Set a bookmark for the following page',
 
 	'MeasuredTime' => 'Time',
 	'MeasuredMemory' => 'Memory',

@@ -128,13 +128,13 @@ if (isset($_POST['_user_bookmarks']))
 				else
 				{
 					// no access rights
-					#$message .= $this->get_translation('PageAlreadyExistsEditDenied');
+					$message .= $this->get_translation('ReadAccessDenied');
 				}
 			}
 			else
 			{
 				// page does not exits
-				#$message .= $this->get_translation('PageAlreadyExistsEditDenied');
+				$message .= $this->get_translation('DoesNotExists');
 			}
 		}
 		else
@@ -186,7 +186,7 @@ if ($user)
 		echo "<input type=\"hidden\" name=\"_user_bookmarks\" value=\"yes\" />";
 
 		echo "<table>";
-		echo "<tr><th>".$this->get_translation('BookmarkNo')."</th><th>".$this->get_translation('BookmarkTitle')."</th><th>".$this->get_translation('BookmarkPage')."</th><th>".$this->get_translation('BookmarkMark')."</th><!--<th>Display</th><th>Lang</th>--></tr>";
+		echo "<tr><th>".$this->get_translation('BookmarkNumber')."</th><th>".$this->get_translation('BookmarkTitle')."</th><th>".$this->get_translation('BookmarkPage')."</th><th>".$this->get_translation('BookmarkMark')."</th><!--<th>Display</th><th>Lang</th>--></tr>";
 
 		foreach($_bookmarks as $_bookmark)
 		{
@@ -216,15 +216,19 @@ if ($user)
 		echo "</tfoot>";
 		echo "</table>";
 	}
+	else
+	{
+		echo $this->get_translation('BookmarkNone');
+	}
 
-		echo $this->form_open();
-		echo "<input type=\"hidden\" name=\"_user_bookmarks\" value=\"yes\" />";
-		echo "<br /><br />";
-		echo "<label for=\"add_bookmark\">".$this->get_translation('BookmarksAddPage').":</label><br />";
-		echo "<input id=\"add_bookmark\" name=\"tag\" value=\"\" size=\"60\" maxlength=\"255\" /> ".
-			"<input name=\"add_bookmarks\" type=\"submit\" value=\"".$this->get_translation('CreatePageButton')."\" />";
+	echo $this->form_open();
+	echo "<input type=\"hidden\" name=\"_user_bookmarks\" value=\"yes\" />";
+	echo "<br /><br />";
+	echo "<label for=\"add_bookmark\">".$this->get_translation('BookmarksAddPage').":</label><br />";
+	echo "<input id=\"add_bookmark\" name=\"tag\" value=\"\" size=\"60\" maxlength=\"255\" /> ".
+		"<input name=\"add_bookmarks\" type=\"submit\" value=\"".$this->get_translation('CreatePageButton')."\" />";
 
-		echo $this->form_close();
+	echo $this->form_close();
 }
 
 ?>
