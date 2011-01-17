@@ -7,7 +7,7 @@
 //								useful with "moderation='true'".
 //								Default: null
 
-$moderation = '';
+if (!isset($moderation)) $moderation = '';
 $stop_mod = '';
 $error = '';
 $message = '';
@@ -25,6 +25,7 @@ $admin = $this->is_admin();
 
 // basic privilege check for moderation mode
 if ($moderation === true && !$admin) $moderation === false;
+
 // preloading poll data for moderation purposes
 if ($moderation === true)
 {
@@ -33,7 +34,7 @@ if ($moderation === true)
 		$header			= $polls_obj->get_poll_title($edit_id);
 		$vars			= $polls_obj->get_poll_vars($edit_id);
 		$topic			= $header['text'];
-		$user			= $header['user'];
+		$user			= $header['user_name'];
 		$plural			= $header['plural'];
 	}
 
@@ -70,6 +71,7 @@ foreach ($_POST as $key => $value)
 		$vars[] = array('v_id' => $i, 'text' => $value);
 		$i++;
 	}
+
 	// strange bug with inserted keys
 	unset($vars['moderation']);
 	unset($vars['edit_id']);
@@ -80,6 +82,7 @@ if (isset($_POST['submit_poll']))
 {
 	//parsing input
 	$strip = array('<', '>', '[', ']', '\\', "'", '"');
+
 	foreach ($_POST as $key => $value)
 	{
 		if		($key == 'user')		$user		= str_replace($strip, '', $value);
@@ -92,22 +95,24 @@ if (isset($_POST['submit_poll']))
 
 	// missing poll topic
 	if ($topic == '') $error = $this->get_translation('PollsNeedTopic');
+
 	// we need at least two alternate answers
 	if (count($answers) < 2) $error .= ' '.$this->get_translation('PollsNeedAnswers');
+
 	// captcha validation
-	if (!$this->get_user() && $this->ValidateCAPTCHA() === false)
-		$error .= ' '.$this->get_translation('CaptchaFailed');
+	#if (!$this->get_user() && $this->ValidateCAPTCHA() === false)
+	#	$error .= ' '.$this->get_translation('CaptchaFailed');
 
 	// in case no errors found submit poll or changes to the db
 	if (!$error)
 	{
-		if (!isset($user))		$user		= $this->get_user_id();
-		if (!$user)				$user		= $this->get_user_ip();
+		if (!isset($user_id))		$user_id		= $this->get_user_id();
+		#if (!$user)				$user		= $this->get_user_ip();
 		if (!isset($edit_id))	$edit_id	= $polls_obj->get_last_poll_id() + 1;
 		// remove moderated poll
 		if ($moderation === true)	$polls_obj->remove_poll($edit_id);
 		// save new or update moderated poll
-		$polls_obj->submit_poll($edit_id, $topic, $plural, $answers, $user, ($startmod == 1 && $admin ? 1 : 0));
+		$polls_obj->submit_poll($edit_id, $topic, $plural, $answers, $user_id, ($startmod == 1 && $admin ? 1 : 0));
 		// update page cache
 		if ($this->tag) $this->cache->cache_invalidate($this->supertag);
 		// update news RSS feed
