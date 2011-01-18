@@ -20,7 +20,7 @@ if (isset($_GET['confirm']))
 			"SET email_confirm = '' ".
 			"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."'");
 
-		echo "<br /><br />".$this->get_translation('EmailConfirmed')."<br /><br />";
+		echo '<div class="info">'.$this->get_translation('EmailConfirmed').'</div>';
 
 		// log event
 		$this->log(4, str_replace('%2', $temp['user_name'], str_replace('%1', $temp['email'], $this->get_translation('LogUserEmailActivated', $this->config['language']))));
@@ -41,6 +41,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'logout')
 }
 else if ($user = $this->get_user())
 {
+	$email_changed = '';
 	$this->set_page_lang($this->user_lang);
 
 	// is user trying to update?
@@ -48,10 +49,14 @@ else if ($user = $this->get_user())
 	{
 		// no email given
 		if (!$_POST['email'])
+		{
 			$error .= $this->get_translation('SpecifyEmail')." ";
+		}
 		// invalid email
 		else if (!preg_match('/^[\w.-]+?\@[\w.-]+?\.[\w]+$/', $_POST['email']))
+		{
 			$error .= $this->get_translation('NotAEmail')." ";
+		}
 
 		// check for errors and store
 		if ($error)
@@ -60,10 +65,13 @@ else if ($user = $this->get_user())
 		}
 		else
 		{
-			if ($user['email'] != $_POST['email']) $email_changed = true;
+			if ($user['email'] != $_POST['email'])
+			{
+				$email_changed = true;
+			}
 
 			// store if email hasn't been changed otherwise request authorization
-			if (!$email_changed)
+			if ($email_changed = true || isset($_POST['real_name']))
 			{
 				// update users table
 				$this->query(
@@ -113,8 +121,6 @@ else if ($user = $this->get_user())
 		// log event
 		$this->log(6, str_replace('%1', $user['user_name'], $this->get_translation('LogUserSettingsUpdate', $this->config['language'])));
 	}
-
-	$email_changed = '';
 
 	// (re)send email confirmation code
 	if ((isset($_GET['resend_code']) && $_GET['resend_code'] == 1) || $email_changed === true)
