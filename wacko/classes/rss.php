@@ -228,7 +228,8 @@ class RSS
 					$access = $this->engine->has_access('read', $page['page_id'], GUEST);
 				}
 
-				if ( $access && ($count < 30) ) {
+				if ( $access && ($count < 30) )
+				{
 					$count++;
 					$xml .= "<item>\n";
 					$xml .= "<title>".$page['title']." ".$this->engine->get_translation('To')." ".$this->engine->get_page_tag_by_id($page['comment_on_id'])." ".$this->engine->get_translation('From')." ".$page['user']."</title>\n";

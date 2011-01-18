@@ -1,7 +1,5 @@
 <?php
 
-if (!isset($nomark)) $nomark = '';
-
 if (!function_exists('links_tree_view'))
 {
 	function links_tree_view(&$wacko, $node, $level, $indent = 0)
@@ -9,19 +7,24 @@ if (!function_exists('links_tree_view'))
 		if ($level > 0)
 		{
 			if ($indent)
-			echo (str_repeat("&nbsp;",$indent*7)).$wacko->link('/'.$node, '', $node)."<br/>\n";
+			{
+				echo (str_repeat("&nbsp;", $indent * 7)).$wacko->link('/'.$node, '', $node)."<br/>\n";
+			}
 
 			$pages = $wacko->load_all(
-				"SELECT to_tag ".
-				"FROM ".$wacko->config['table_prefix']."link, ".$wacko->config['table_prefix']."page ".
-				"WHERE from_tag='".quote($wacko->dblink, $node)."' ".
-					"AND ".$wacko->config['table_prefix']."link.to_tag = ".$wacko->config['table_prefix']."page.tag ".
-				"ORDER BY to_tag ASC");
+				"SELECT l.to_tag, l.to_page_id ".
+				"FROM ".$wacko->config['table_prefix']."link l, ".$wacko->config['table_prefix']."page a ".
+					"INNER JOIN ".$wacko->config['table_prefix']."page b ON (l.from_page_id = b.page_id) ".
+				"WHERE b.tag='".quote($wacko->dblink, $node)."' ".
+					"AND l.to_page_id = a.page_id ".
+				"ORDER BY l.to_tag ASC");
 
 			if (is_array($pages))
 			{
-				if (isset($wacko->config['default_bookmarks']))
-					$head = explode(' / ',str_replace('))', '', str_replace('((', '', $wacko->config['default_bookmarks'])));
+				if ($wacko->get_default_bookmarks())
+				{
+					$head = explode(' / ',str_replace('))', '', str_replace('((', '', $wacko->get_default_bookmarks())));
+				}
 
 				foreach ($pages as $page)
 				{
@@ -30,8 +33,10 @@ if (!function_exists('links_tree_view'))
 					// we don't want page from the header. we don't want root_page (!!!!!!!)
 					if ((!in_array($node, $head, TRUE) && $wacko->config['root_page'] != $node) || $indent == 0)
 					{
-						if ($wacko->has_access('read', $page['to_tag']))
-						links_tree_view($wacko, $page['to_tag'], $level - 1, $indent + 1);
+						if ($wacko->has_access('read', $page['to_page_id']))
+						{
+							links_tree_view($wacko, $page['to_tag'], $level - 1, $indent + 1);
+						}
 					}
 				}
 			}
@@ -39,10 +44,12 @@ if (!function_exists('links_tree_view'))
 	}
 }
 
+
 $root = (isset($vars[0]) ? $vars[0] : null);
 if ($root == '/') $root = '';
 if (!isset($root)) $root = $this->page['tag'];
 $root = $this->unwrap_link($root);
+if (!isset($nomark)) $nomark = '';
 
 if (!$nomark)
 {

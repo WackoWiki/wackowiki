@@ -36,7 +36,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 // JS files.
 // default.js contains common procedures and should be included everywhere
 ?>
-  <script type="text/javascript" src="<?php echo $this->config['base_url'];?>js/default.js"></script>
+<script type="text/javascript" src="<?php echo $this->config['base_url'];?>js/default.js"></script>
 <?php
 // load swfobject with flash action (e.g. $this->config['allow_swfobject'] = 1), by default it is set off
 if ($this->config['allow_swfobject'])
@@ -56,9 +56,9 @@ if ($this->method == 'edit')
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->get_user())
-   {
-      if ($user['doubleclick_edit'] == 1)
-      {
+{
+	if ($user['doubleclick_edit'] == 1)
+	{
 ?>
    <script type="text/javascript">
       var edit = "<?php echo $this->href('edit');?>";
@@ -121,11 +121,8 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
     <?php } ?>
   </div>
   <br clear="all" />
-  <img src="<?php echo $this->config['base_url'] ?>images/z.gif"
-	width="1" height="1" alt="" /></div>
-<div class="TopDiv"><img
-	src="<?php echo $this->config['base_url'];?>images/z.gif"
-	width="1" height="1" alt="" /></div>
+  <img src="<?php echo $this->config['base_url'] ?>images/z.gif" width="1" height="1" alt="" /></div>
+<div class="TopDiv"><img src="<?php echo $this->config['base_url'];?>images/z.gif" width="1" height="1" alt="" /></div>
 <table cellspacing="0" cellpadding="0" border="0" width="100%">
   <tr>
     <td valign="top" class="Bookmarks">&nbsp;&nbsp;<strong><?php echo $this->get_translation('Bookmarks') ?>:</strong>&nbsp;&nbsp;</td>
@@ -133,9 +130,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
       <?php echo $this->format(implode(" | ", $this->get_bookmarks())); ?>&nbsp;&nbsp;</td>
   </tr>
 </table>
-<div class="TopDiv2"><img
-	src="<?php echo $this->config['base_url'];?>images/z.gif"
-	width="1" height="1" alt="" /></div>
+<div class="TopDiv2"><img src="<?php echo $this->config['base_url'];?>images/z.gif" width="1" height="1" alt="" /></div>
 <div class="Wrapper"
 <?php if ($this->method == 'edit') echo "style=\"margin-bottom:0;padding-bottom:0\""?>>
 <div class="Print">
@@ -144,10 +139,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
       "<a href=\"".$this->href('watch')."\">".$this->get_translation('RemoveWatch')."</a>" :
       "<a href=\"".$this->href('watch')."\">".$this->get_translation('SetWatch')."</a>" ) ?> ::
   <?php if (!in_array($this->tag, $this->get_bookmark_links())) {?>
-  <a href="<?php echo $this->href('', '', "addbookmark=yes")?>"><img
-	src="<?php echo $this->config['theme_url'] ?>icons/bookmark.gif"
-	width="12" height="12"
-	alt="<?php echo $this->get_translation('AddToBookmarks') ?>" /></a> ::
+  <a href="<?php echo $this->href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->config['theme_url'] ?>icons/bookmark.gif" width="12" height="12" alt="<?php echo $this->get_translation('AddToBookmarks') ?>" /></a> ::
 <?php } else { ?>
   <a
 	href="<?php echo $this->href('', '', "removebookmark=yes")?>"><img
