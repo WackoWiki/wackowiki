@@ -168,6 +168,7 @@ if (isset($_POST['_user_bookmarks']))
 			}
 		}
 	}
+
 	// reload user data
 	$this->set_user($this->load_user($user['user_name']), 0, 1);
 	$this->set_bookmarks(BM_USER);

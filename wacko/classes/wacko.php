@@ -4393,7 +4393,7 @@ class Wacko
 	}
 
 	// BOOKMARKS
-	function get_default_bookmarks($lang)
+	function get_default_bookmarks($lang = false)
 	{
 		if (!isset($lang))
 		{
@@ -4963,7 +4963,7 @@ class Wacko
 
 		// forum page
 		if (preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->tag) ||
-		preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->page['comment_on_id'])) // TODO: get real comment_on
+		($this->page['comment_on_id'] ? preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->get_page_tag_by_id($this->page['comment_on_id'])) : ''))
 		{
 			$this->forum = true;
 		}

@@ -25,6 +25,9 @@ if (isset($_GET['confirm']))
 		// log event
 		$this->log(4, str_replace('%2', $temp['user_name'], str_replace('%1', $temp['email'], $this->get_translation('LogUserEmailActivated', $this->config['language']))));
 
+		// TODO: reset user (session data)
+		#$this->set_user($this->load_user($user['user_name']), 0, 1);
+
 		unset($temp);
 	}
 	else
@@ -71,7 +74,7 @@ else if ($user = $this->get_user())
 			}
 
 			// store if email hasn't been changed otherwise request authorization
-			if ($email_changed = true || isset($_POST['real_name']))
+			if ($email_changed === true || isset($_POST['real_name']))
 			{
 				// update users table
 				$this->query(

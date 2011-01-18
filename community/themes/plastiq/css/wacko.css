@@ -191,8 +191,6 @@ table.upload img {
 	border: none;
 }
 
-
-
 /*	Specific look styles	*/
 
 #path .missingpage {
@@ -375,7 +373,6 @@ table.dtable th.userhead, table.dtable td.usercell {
 .hl-builtin    { color:#996633; }
 
 
-
 /*	diff	*/
 
 .add {
@@ -402,5 +399,3 @@ table.dtable th.userhead, table.dtable td.usercell {
 .additions, .deletions {
 	padding: 3px;
 }
-
-

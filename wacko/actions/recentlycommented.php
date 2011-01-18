@@ -40,13 +40,13 @@ if (!function_exists('load_recently_commented'))
 
 					// load complete comments
 					$comments = $wacko->load_all(
-							"SELECT b.tag as comment_on_tag, b.title as page_title, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.user_id, u.user_name AS comment_user, a.modified AS comment_time ".
-							"FROM ".$wacko->config['table_prefix']."page a ".
-								"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
-								"LEFT OUTER JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
-							"WHERE a.page_id IN ( ".$_ids." ) ".
-							"ORDER BY comment_time DESC ".
-							"LIMIT {$pagination['offset']}, {$limit}");
+						"SELECT b.tag as comment_on_tag, b.title as page_title, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.user_id, u.user_name AS comment_user, a.modified AS comment_time ".
+						"FROM ".$wacko->config['table_prefix']."page a ".
+							"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
+							"LEFT OUTER JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
+						"WHERE a.page_id IN ( ".$_ids." ) ".
+						"ORDER BY comment_time DESC ".
+						"LIMIT {$pagination['offset']}, {$limit}");
 				}
 		}
 

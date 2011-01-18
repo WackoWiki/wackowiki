@@ -147,7 +147,14 @@ textarea {
 	text-align: right;
 }
 .code {
-	letter-spacing: normal;
+.code {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #888888;
+    font-family: "Courier New";
+    font-size: 10pt;
+    margin: 1em 1.75em;
+    overflow: auto;
+    padding: 0.25em;	letter-spacing: normal;
 	word-spacing: normal;		
 	background-color: #EDEDED;
 	background-image: none;
