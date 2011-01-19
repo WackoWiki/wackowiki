@@ -121,7 +121,7 @@ $wacko_config = array(
 	'upload_images_only' => 0,
 	'upload_max_size' => 256,
 	'upload_quota_per_user' => 500000,
-	'upload_path' => 'files',
+	'upload_path' => 'files/global',
 	'upload_path_per_page' => 'files/perpage',
 	'upload_banned_exts' => 'php|cgi|js|php|php3|php4|php5|pl|ssi|jsp|phtm|phtml|shtm|shtml|xhtm|xht|asp|aspx|htw|ida|idq|cer|cdx|asa|htr|idc|stm|printer|asax|ascx|ashx|asmx|axd|vdisco|rem|soap|config|cs|csproj|vb|vbproj|webinfo|licx|resx|resources',
 
