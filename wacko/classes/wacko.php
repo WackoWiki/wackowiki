@@ -4116,7 +4116,7 @@ class Wacko
 				{
 					// First look for parent ACL, so that clusters/subpages
 					// work correctly.
-					$tag = $this->get_page_tag_by_id($page_id);
+					$tag = strtolower($this->get_page_tag_by_id($page_id));
 
 					if ( strstr($tag, '/') )
 					{
