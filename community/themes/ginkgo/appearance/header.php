@@ -152,21 +152,22 @@ if ($this->get_user())
       <tr align="left">
         <td><div>
 <?php
-		echo '<div class="leftNav"><ul class="leftNav"><li>';
+echo '<div class="leftNav"><ul class="leftNav"><li>';
 
 // Bookmarks
-$BMs = $this->get_bookmarks();
-$formated_bm =  $this->format($this->format(implode("| ", $BMs), "wacko"), "post_wacko");
+$formated_bm = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
 $formated_bm = str_replace ("<br />", "", $formated_bm);
 $formated_bm = str_replace ( "\n", "</li><li>\n", $formated_bm );
 echo $formated_bm;
 echo "</li></ul></div>";
-		echo '<br />';
-		if ($this->get_user()) {
-			if (!in_array($this->tag, $this->get_bookmark_links())) {?>
-            <a href="<?php echo $this->href('', '', "addbookmark=yes")?>"> <img src="<?php echo $this->config['theme_url'] ?>icons/bookmark1.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->get_translation('Bookmarks'); ?> </a>
-            <?php } else { ?>
-            <a href="<?php echo $this->href('', '', "removebookmark=yes")?>"> <img src="<?php echo $this->config['theme_url'] ?>icons/bookmark2.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->get_translation('Bookmarks');
+echo '<br />';
+if ($this->get_user())
+{
+	if (!in_array($this->tag, $this->get_bookmark_links()))
+	{?>
+<a href="<?php echo $this->href('', '', "addbookmark=yes")?>"> <img src="<?php echo $this->config['theme_url'] ?>icons/bookmark1.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->get_translation('Bookmarks'); ?> </a>
+<?php } else { ?>
+<a href="<?php echo $this->href('', '', "removebookmark=yes")?>"> <img src="<?php echo $this->config['theme_url'] ?>icons/bookmark2.gif" border="0" align="bottom" style="vertical-align: middle; "/> <?php echo $this->get_translation('Bookmarks');
 ?> </a>
 <?php
 }

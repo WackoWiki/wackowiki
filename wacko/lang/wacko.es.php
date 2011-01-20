@@ -61,6 +61,8 @@ $wacko_translation = array(
 	'PermaLinkTip' => 'Enlace permanente de la página',
 	'PermaLinkRedirected' => 'Redirected Permalink',
 	'PermaLinkEmpty' => 'No reference for redirect provided (e.g. ?page_id=506).',
+	'PermaLinkRecent' => 'Permalink address to ',
+	'PermaLinkRevision' => 'Permalink address to revision of ',
 
 	'ShowTip' => 'Pulsa para volver al modo de lectura',
 	'ShowText' => 'Ver',

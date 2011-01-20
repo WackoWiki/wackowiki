@@ -60,13 +60,13 @@ if ( isset($page_id) )
 				else
 				{
 					$this->set_message($this->get_translation('PermaLinkRedirected').': '.$page_id);
-					$this->redirect($this->href('', $page_tag, 'revision_id='.$revision_id));
+					$this->redirect($this->href('', $page_tag, (!empty($revision_id) ? 'revision_id='.$revision_id : '') ));
 				}
 			}
 			else
 			{
 				#$this->set_message($this->get_translation('PermaLinkRedirected').': '.$page_id);
-				$this->redirect($this->href('', $page_tag, $revision_id));
+				$this->redirect($this->href('', $page_tag, (!empty($revision_id) ? 'revision_id='.$revision_id : '') ));
 			}
 		}
 		else
