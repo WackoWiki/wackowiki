@@ -182,6 +182,7 @@ $config_db['owners_can_change_categories'] = $config['owners_can_change_categori
 $config_db['owners_can_remove_comments'] = $config['owners_can_remove_comments'];
 $config_db['pages_purge_time'] = $config['pages_purge_time'];
 $config_db['paragrafica'] = $config['paragrafica'];
+$config_db['permalink_page'] = $config['permalink_page'];
 $config_db['phpmailer'] = $config['phpmailer'];
 $config_db['phpmailer_method'] = $config['phpmailer_method'];
 $config_db['policy_page'] = $config['policy_page'];

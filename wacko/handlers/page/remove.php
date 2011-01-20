@@ -83,6 +83,11 @@ if ($this->is_admin() ||
 					$xml->changes();
 				}
 
+				if (preg_match('/'.$this->config['news_cluster'].'\/.+?\/.+/', $this->tag))
+				{
+					$xml->news();
+				}
+
 				print(str_replace('%1', $this->tag, $this->get_translation('PageRemoved'))."<br />\n");
 			}
 
