@@ -59,6 +59,10 @@ $wacko_translation = array(
 	'JabberLink' => 'Chat via XMPP (Jabber client launch)',
 	'PermaLink' => 'Permalink',
 	'PermaLinkTip' => 'Permanent link to this page',
+	'PermaLinkRedirected' => 'Redirected Permalink',
+	'PermaLinkEmpty' => 'No reference for redirect provided (e.g. ?page_id=506).',
+	'PermaLinkRecent' => 'Permalink address to ',
+	'PermaLinkRevision' => 'Permalink address to revision of ',
 
 	'ShowTip' => 'Return in view mode',
 	'ShowText' => 'View',
@@ -84,7 +88,7 @@ $wacko_translation = array(
 
 	'DoesNotExists' => 'This page doesn\'t exist.',
 	'PromptCreate' => 'Maybe you want to <b><a href="%1">create</a></b> it?',
-	'Revision' => 'This is an old revision of <a href="%1">%2</a> from %3.',
+	'Revision' => 'This is an old revision of <a href="%1">%2</a> from %3 edited by %4.',
 	'ReadAccessDenied' => '<em>You aren\'t allowed to read this page.</em>',
 	'YouAreOwner' => 'You are the owner of this page.',
 	'Owner' => 'Owner',

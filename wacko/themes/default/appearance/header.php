@@ -24,21 +24,22 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/default.css" />
-	<?php if ($this->config['allow_x11colors']) {?>
+<?php if ($this->config['allow_x11colors']) {?>
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['base_url'] ?>themes/_common/X11colors.css" />
-	<?php } ?>
+<?php } ?>
 	<link media="print" rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
 	<link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" />
 	<link  rel="start" title="<?php echo $this->config['root_page'];?>" href="<?php echo $this->config['base_url'];?>"/>
-	<?php if ($this->config['policy_page']) {?>
+<?php if ($this->config['policy_page']) {?>
 	<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page'])); ?>" title="Copyright" />
-	<?php } ?>
+<?php } ?>
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentChangesRSS');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentCommentsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
-	<?php if ($this->config['news_cluster']) {?>
+<?php if ($this->config['news_cluster']) {?>
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentNewsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
-	<?php } ?>
+<?php } ?>
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('HistoryRevisionsRSS');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
+
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -86,6 +87,7 @@ if ($doubleclick == true)
 }
 ?>
 </head>
+
 <?php
 // all_init() initializes all js features:
 //	* WikiEdit

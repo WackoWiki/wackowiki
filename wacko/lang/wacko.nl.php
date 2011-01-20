@@ -59,6 +59,10 @@ $wacko_translation = array(
 	'JabberLink' => 'Chat via XMPP (Jabber client launch)',
 	'PermaLink' => 'Permanente verwijzing',
 	'PermaLinkTip' => 'Permanente verwijzing van de pagina',
+	'PermaLinkRedirected' => 'Redirected Permalink',
+	'PermaLinkEmpty' => 'No reference for redirect provided (e.g. ?page_id=506).',
+	'PermaLinkRecent' => 'Permalink address to ',
+	'PermaLinkRevision' => 'Permalink address to revision of ',
 
 	'ShowTip' => 'Klik hier om terug te gaan naar leesmodus',
 	'ShowText' => 'Bekijk',

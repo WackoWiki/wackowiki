@@ -1,8 +1,9 @@
 <?php
 
 if (!isset($page))			$page = null;
-if (!isset($page)) return;
+if (!isset($page)) 			return;
 if (!isset($nomark))		$nomark = '';
+if (!isset($revision_id))	$revision_id = '';
 
 $page = $this->unwrap_link($page);
 if (!isset($first_anchor))		$first_anchor = '';
@@ -34,14 +35,9 @@ else
 {
 	/*if (isset($_GET['revision_id']))
 	{
-		// ??? how this could construct a relation to the included pages - somehow absurd
+		// ??? how this could construct a relation to the included pages?
 		$revision_id = $_GET['revision_id'];
-	}
-	else
-	{
-		$revision_id = '';
 	}*/
-	$revision_id = '';
 
 	if (!$inc_page = $this->load_page($page, 0, $revision_id))
 	{

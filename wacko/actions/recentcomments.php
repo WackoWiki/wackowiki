@@ -34,8 +34,10 @@ if (!function_exists('load_recent_comments'))
 					: "a.comment_on_id != '0' ").
 				"ORDER BY a.modified DESC ".
 				"LIMIT {$pagination['offset']}, {$limit}");
+
+			return array($comments, $pagination);
 		}
-		return array($comments, $pagination);
+
 	}
 }
 
@@ -57,6 +59,7 @@ else
 {
 	$usermax = 50;
 }
+
 if (!isset($max) || $usermax < $max)
 {
 	$max = $usermax;
@@ -94,6 +97,7 @@ if (list ($comments, $pagination) = load_recent_comments($this, $root, (int)$max
 	}
 
 	echo "<ul class=\"ul_list\">\n";
+
 	$curday = '';
 
 	foreach ($comments as $page)
@@ -140,6 +144,7 @@ if (list ($comments, $pagination) = load_recent_comments($this, $root, (int)$max
 			"</small></li>\n";
 		}
 	}
+
 	echo "</ul>\n</li>\n</ul>\n";
 
 	// pagination

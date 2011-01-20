@@ -96,6 +96,7 @@ $wacko_config = array(
 	'urls_underscores' => 0,
 
 	'users_page' => 'Users',
+	'permalink_page' => 'Permalink',
 	'policy_page' => '',
 	'license' => '',
 

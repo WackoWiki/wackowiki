@@ -64,6 +64,10 @@ class RSS
 				{
 					$access = $this->engine->has_access('read', $page['page_id'], GUEST);
 				}
+				else
+				{
+					$access = true;
+				}
 
 				if ($access && ($count < 30))
 				{
@@ -226,6 +230,10 @@ class RSS
 				if ($this->engine->config['hide_locked'])
 				{
 					$access = $this->engine->has_access('read', $page['page_id'], GUEST);
+				}
+				else
+				{
+					$access = true;
 				}
 
 				if ( $access && ($count < 30) )
