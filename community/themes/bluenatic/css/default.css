@@ -298,8 +298,8 @@ ol li {
 }
 
 .toolbar li {
-	background: ButtonFace;
-}
+	/*background: ButtonFace;
+*/}
 .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
 	background-color:	#eee;
 	border:			1px solid #eee;

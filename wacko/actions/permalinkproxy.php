@@ -1,6 +1,6 @@
 <?php
 
-// {{permalinks page_id=[number] preview=[0|1] permanent="0 or 1"}}
+// {{permalinkproxy page_id=[number] preview=[0|1] permanent="0 or 1"}}
 
 if (isset($_GET['page_id']))
 {
@@ -15,7 +15,7 @@ else
 {
 	$revision_id = 0;
 }
-//https://localhost/wacko_test/wacko/PermaLink?page_id=506&rev_id=1262
+
 if (!isset($preview)) $preview = 0;
 
 if ( isset($page_id) )
