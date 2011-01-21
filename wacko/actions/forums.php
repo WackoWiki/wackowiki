@@ -19,7 +19,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	{
 		$this->update_last_mark($user);
 		$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
-		$user = $this->get_user();
+		#$user = $this->get_user();
 		$user_id = $this->get_user_id(); //xxx
 	}
 

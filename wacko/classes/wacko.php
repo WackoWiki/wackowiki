@@ -1576,11 +1576,11 @@ class Wacko
 			|| ($comment_on_id && $this->has_access('comment', $comment_on_id)) )
 		{
 			// for forum topic prepare description
-			#if (!$comment_on_id)
-			#{
-			#	$desc = $this->format(substr($body, 0, 500), 'cleanwacko');
-			#	$desc = ( strlen($desc) > 240 ? substr($desc, 0, 240).'...' : $desc.' (-)' );
-			#}
+			if (!$comment_on_id)
+			{
+				$desc = $this->format(substr($body, 0, 500), 'cleanwacko');
+				$desc = ( strlen($desc) > 240 ? substr($desc, 0, 240).'...' : $desc.' (-)' );
+			}
 
 			// preformatter (macros and such)
 			$body = $this->format($body, 'pre_wacko');
@@ -1654,7 +1654,7 @@ class Wacko
 							break;
 						}
 
-						# $root_id	= $this->get_page_id($root); // do we need this?
+						$root_id	= $this->get_page_id($root); // do we need this?
 						$write_acl	= $this->load_acl($root_id, 'write');
 					}
 
@@ -1690,7 +1690,7 @@ class Wacko
 				$this->query(
 					"INSERT INTO ".$this->config['table_prefix']."page SET ".
 						"comment_on_id 	= '".quote($this->dblink, $comment_on_id)."', ".
-						#(!$comment_on_id ? "description = '".quote($this->dblink, $desc)."', " : "").
+						(!$comment_on_id ? "description = '".quote($this->dblink, $desc)."', " : "").
 						"created		= NOW(), ".
 						"modified		= NOW(), ".
 						"commented		= NOW(), ".
@@ -1713,6 +1713,9 @@ class Wacko
 						"lang			= '".quote($this->dblink, $lang)."', ".
 
 						"title			= '".quote($this->dblink, htmlspecialchars($title))."'");
+
+				// IMPORTANT! lookup newly created page_id
+				$page_id = $this->get_page_id($tag);
 
 				// saving acls
 				$this->save_acl($page_id, 'write', $write_acl);
@@ -1956,7 +1959,7 @@ class Wacko
 		// writing xmls
 		if ($mute === false)
 		{
-			if (!$old_page['comment_on_id'] || !$comment_on_id)
+			if (!isset($old_page['comment_on_id']) || !$comment_on_id)
 			{
 				$this->use_class('rss');
 				$xml = new rss($this);

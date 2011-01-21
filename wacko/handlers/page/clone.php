@@ -68,6 +68,8 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 				{
 					if ($this->clone_page($this->tag, $new_name, $supernewname, $edit_note))
 					{
+						$need_redirect = '';
+
 						// log event
 						$this->log(4, str_replace('%2', $new_name, str_replace('%1', $this->tag, $this->get_translation('LogClonedPage', $this->config['language']))) );
 
