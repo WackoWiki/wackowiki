@@ -544,6 +544,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_5, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_6, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_7, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_8, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'rating', $lang['CreatingTable']), @mysql_query($table_rating_r4_3, $dblink), str_replace('%1', 'rating', $lang['ErrorCreatingTable']));
 
@@ -886,6 +887,7 @@ switch($config['database_driver'])
 								test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_5), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 								test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_6), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 								test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_7), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
+								test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_8), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 
 								test(str_replace('%1', 'rating', $lang['CreatingTable']), @mysqli_query($dblink, $table_rating_r4_3), str_replace('%1', 'rating', $lang['ErrorCreatingTable']));
 

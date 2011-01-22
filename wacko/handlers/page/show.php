@@ -26,6 +26,34 @@ if ($this->config['hide_rating'] != 1 && ($this->config['hide_rating'] != 2 || $
 	}
 }
 
+// get number of user's pages, revisions and comments
+function handler_show_get_user_stats(&$engine, $user_id)
+{
+	if ($user_id == 0)
+	{
+		return array();
+	}
+	else if (isset($engine->cached_stats[$user_id]))
+	{
+		return $engine->cached_stats[$user_id];
+	}
+
+	$stats = $engine->load_single(
+		"SELECT user_name, ".
+			"total_pages AS pages, ".
+			"total_revisions AS revisions, ".
+			"total_comments AS comments ".
+		"FROM {$engine->config['user_table']} ".
+		"WHERE user_id = '".quote($engine->dblink, $user_id)."' ".
+		"LIMIT 1");
+
+	$engine->cached_stats[$user_id] = $stats;
+
+	#if ($stats['fingerprint']) $engine->cached_fingers[$stats['fingerprint']] = & $engine->cached_stats[user_id]['name'];
+
+	return $stats;
+}
+
 // redirect from comment page to the commented one
 if ($this->page['comment_on_id'])
 {
@@ -158,7 +186,6 @@ else
 <?php
 // page comments and files
 if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comment_on_id'])
-#if ($this->page)
 {
 	// revoking payload
 	if (isset($_SESSION['guest']))
@@ -176,11 +203,13 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 		$payload				= $_SESSION['body'];
 		$_SESSION['body']		= '';
 	}
+
 	if (isset($_SESSION['title']))
 	{
 		$title					= $_SESSION['title'];
 		$_SESSION['title']		= '';
 	}
+
 	if (isset($_SESSION['preview']))
 	{
 		$preview				= $_SESSION['preview'];
@@ -193,11 +222,9 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 		if ($this->has_access('read') && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->get_user()))
 		{
 			// store files display in session
-			$tag = $this->tag;
-
-			if (!isset($_SESSION[$this->config['session_prefix'].'_'.'show_files'][$tag]))
+			if (!isset($_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->tag]))
 			{
-				$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$tag] = ($this->user_wants_files() ? '1' : '0');
+				$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->tag] = ($this->user_wants_files() ? '1' : '0');
 			}
 
 			if(isset($_GET['show_files']))
@@ -205,16 +232,16 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 				switch($_GET['show_files'])
 				{
 					case '0':
-						$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$tag] = 0;
+						$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->tag] = 0;
 						break;
 					case '1':
-						$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$tag] = 1;
+						$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->tag] = 1;
 						break;
 				}
 			}
 
 			// display files!
-			if ($this->page && $_SESSION[$this->config['session_prefix'].'_'.'show_files'][$tag])
+			if ($this->page && $_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->tag])
 			{
 				// display files header
 				?>
@@ -223,70 +250,71 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 	<?php echo "[<a href=\"".$this->href('', '', 'show_files=0')."\">".$this->get_translation('HideFiles')."</a>]"; ?>
 	</div>
 
-			<?php
-			echo "<div class=\"files\">";
-			echo $this->action('files', array('nomark' => 1));
-			echo "</div>";
+				<?php
+				echo "<div class=\"files\">";
+				echo $this->action('files', array('nomark' => 1));
+				echo "</div>";
 
-			// display form
-			if ($user = $this->get_user())
-			{
-				$user = strtolower($this->get_user_name());
-				$registered = true;
+				// display form
+				if ($user = $this->get_user())
+				{
+					$user = strtolower($this->get_user_name());
+					$registered = true;
+				}
+				else
+				{
+					$user = GUEST;
+				}
+
+				if (isset($registered)
+					&&
+						(
+							($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
+							($this->check_acl($user,$this->config['upload']))
+						)
+					)
+				{
+					echo "<div class=\"filesform\">\n";
+					echo $this->action('upload', array('nomark' => 1));
+					echo "</div>\n";
+				}
 			}
 			else
 			{
-				$user = GUEST;
-			}
+				echo "<div id=\"filesheader\">";
 
-			if (isset($registered)
-				&&
-					(
-						($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
-						($this->check_acl($user,$this->config['upload']))
-					)
-				)
-			{
-				echo "<div class=\"filesform\">\n";
-				echo $this->action('upload', array('nomark' => 1));
+				if ($this->page['page_id'])
+				{
+					// load files for this page
+					$files = $this->load_all(
+						"SELECT upload_id ".
+						"FROM ".$this->config['table_prefix']."upload ".
+						"WHERE page_id = '". quote($this->dblink, $this->page['page_id']) ."'");
+				}
+				else
+				{
+					$files = array();
+				}
+
+				switch ($c = count($files))
+				{
+					case 0:
+						echo $this->get_translation('Files_0');
+						break;
+					case 1:
+						echo $this->get_translation('Files_1');
+						break;
+					default:
+						echo str_replace('%1', $c, $this->get_translation('Files_n'));
+				}
+
+				echo "[<a href=\"".$this->href('', '', 'show_files=1#files')."\">".$this->get_translation('ShowFiles')."</a>]";
 				echo "</div>\n";
 			}
 		}
-		else
-		{
-			echo "<div id=\"filesheader\">";
-
-			if ($this->page['page_id'])
-			{
-				// load files for this page
-				$files = $this->load_all(
-					"SELECT upload_id ".
-					"FROM ".$this->config['table_prefix']."upload ".
-					"WHERE page_id = '". quote($this->dblink, $this->page['page_id']) ."'");
-			}
-			else
-			{
-				$files = array();
-			}
-
-			switch ($c = count($files))
-			{
-				case 0:
-					echo $this->get_translation('Files_0');
-					break;
-				case 1:
-					echo $this->get_translation('Files_1');
-					break;
-				default:
-					echo str_replace('%1', $c, $this->get_translation('Files_n'));
-			}
-
-			echo "[<a href=\"".$this->href('', '', 'show_files=1#files')."\">".$this->get_translation('ShowFiles')."</a>]";
-			echo "</div>\n";
-		}
-	}
 	}
 	// files form output ends
+
 	if ($this->config['footer_comments'])
 	{
 		// pagination
@@ -299,11 +327,9 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 			$comments = $this->load_comments($this->page['page_id'], $pagination['offset'], $this->config['comments_count']);
 
 			// store comments display in session
-			$tag = $this->tag;
-
-			if (!isset($_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$tag]))
+			if (!isset($_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->tag]))
 			{
-				$_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$tag] = ($this->user_wants_comments() ? '1' : '0');
+				$_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->tag] = ($this->user_wants_comments() ? '1' : '0');
 			}
 
 			if(isset($_GET['show_comments']))
@@ -311,31 +337,43 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 				switch($_GET['show_comments'])
 				{
 					case '0':
-						$_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$tag] = 0;
+						$_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->tag] = 0;
 						break;
 					case '1':
-						$_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$tag] = 1;
+						$_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->tag] = 1;
 						break;
 				}
 			}
 
-			// display comments!
-			if ($this->page && $_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$tag])
+			// display comments
+			if ($this->page && $_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->tag] || $this->forum === true)
 			{
+				$user			= $this->get_user();
+				$admin			= $this->is_admin();
+				$moder			= $this->is_moderator();
+				$noid_protect	= $this->get_user_setting('noid_protect');
+
+				// clear new comments for watched page
+				if ($user && $comments && !$noid_protect) $this->query(
+					"UPDATE {$this->config['table_prefix']}watch ".
+					"SET comment_id = '0' ".
+					"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
+						"AND user_id = '".quote($this->dblink, $user['user_id'])."'");
+
+				// clear anonymous publication uncorrelator
+				if ($noid_protect === true) $this->get_user_setting('noid_protect', false);
+
 				// display comments header
-				?>
-				<a name="comments"></a>
-				<div id="commentsheader">
-				<?php
+				echo '<a name="comments"></a>';
+				echo '<div id="commentsheader">';
+
 				if (isset($pagination['text']))
 				{
 					echo '<div style="float:right; letter-spacing:normal;"><small>'.$pagination['text'].'</small></div>';
 				}
 
 				echo $this->get_translation('Comments_all')." [<a href=\"".$this->href('', '', 'show_comments=0')."\">".$this->get_translation('HideComments')."</a>]";
-				?>
-					</div>
-			<?php
+				echo "</div>\n";
 
 			// display comments themselves
 			if ($comments)
@@ -362,19 +400,26 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 						$strings = $this->format($comment['body'], 'wacko');
 					}
 
+					$user_stats = handler_show_get_user_stats($this, $comment['user_id']);
+
+					// print comment
+					// header
 					echo "<div class=\"commenttext\">\n";
 					echo "<div class=\"commenttitle\">\n<a href=\"".$this->href('', '', 'show_comments=1')."#".$comment['tag']."\">".$comment['title']."</a>\n</div>\n";
 					echo $this->format($strings, 'post_wacko')."\n";
 					echo "</div>\n";
 					echo "<ul class=\"commentinfo\">\n".
-								"<li>".($comment['user']
-										? ($this->is_wiki_name($comment['user'])
-											? $this->link('/'.$comment['user'], '', $comment['user'])
-											: $comment['user'])."</li>\n"
+								"<li>".($comment['user_name'] // TODO: <a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['user_name']).'">'.$comment['user_name'].'</a>'
+										? ($this->is_wiki_name($comment['user_name'])
+											? $this->link('/'.$comment['user_name'], '', $comment['user_name'])
+											: $comment['user_name'])."</li>\n"
 										: $this->get_translation('Guest')).
 								"<li>".$this->get_time_string_formatted($comment['created'])."</li>\n".
 								($comment['modified'] != $comment['created']
 									? "<li>".$this->get_time_string_formatted($comment['modified'])." ".$this->get_translation('CommentEdited')."</li>\n"
+									: '').
+								($user_stats == true
+									? "<li>".$this->get_translation('UsersComments').': '.$user_stats['comments'].'&nbsp;&nbsp; '.$this->get_translation('UsersPages').': '.$user_stats['pages'].'&nbsp;&nbsp; '.$this->get_translation('UsersRevisions').': '.$user_stats['revisions']."</li>\n"
 									: '').
 							"</ul>\n";
 					echo "</li>";

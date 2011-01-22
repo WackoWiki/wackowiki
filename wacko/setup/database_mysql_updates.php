@@ -327,6 +327,7 @@ $alter_watch_r4_3_4 = "ALTER TABLE {$pref}watch DROP user";
 $alter_watch_r4_3_5 = "ALTER TABLE {$pref}watch DROP tag";
 $alter_watch_r4_3_6 = "ALTER TABLE {$pref}watch CHANGE id watch_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
 $alter_watch_r4_3_7 = "ALTER TABLE {$pref}watch CHANGE time watch_time TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
+$alter_watch_r4_3_8 = "ALTER TABLE {$pref}watch ADD comment_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER page_id";
 
 $update_watch_r4_3 = "UPDATE {$pref}watch AS watch, (SELECT user_id, user_name FROM {$pref}user) AS user SET watch.user_id = user.user_id WHERE watch.user = user.name";
 $update_watch_r4_3_1 = "UPDATE {$pref}watch AS watch, (SELECT id, tag FROM {$pref}page) AS page SET watch.page_id = page.id WHERE watch.tag = page.tag";

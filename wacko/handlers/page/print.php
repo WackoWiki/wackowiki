@@ -84,7 +84,7 @@ if ($this->has_access('read'))
 
 						echo "<div class=\"comment\">".
 								"<span class=\"commentinfo\">".
-									"<strong>&#8212; ".( $comment['user'] == GUEST ? "<em>".$this->get_translation('Guest')."</em>" : $comment['user'] )."</strong> (".$this->get_time_string_formatted($comment['created']).
+									"<strong>&#8212; ".( $comment['user_name'] == GUEST ? "<em>".$this->get_translation('Guest')."</em>" : $comment['user_name'] )."</strong> (".$this->get_time_string_formatted($comment['created']).
 									($comment['modified'] != $comment['created'] ? ", ".$this->get_translation('CommentEdited')." ".$this->get_time_string_formatted($comment['modified']) : "").")".
 								"&nbsp;&nbsp;&nbsp;</span><br />".
 								$this->format($comment['body_r'], 'post_wacko').
