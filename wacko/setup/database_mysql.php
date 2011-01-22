@@ -115,6 +115,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
+					#"menu_tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".
@@ -199,6 +200,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
+					#"menu_tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".
@@ -312,6 +314,7 @@ $table_watch = "CREATE TABLE {$pref}watch (".
 					"watch_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"comment_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"watch_time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (watch_id)".
 				") {$engine} {$charset}";

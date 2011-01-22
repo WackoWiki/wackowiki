@@ -147,14 +147,7 @@ textarea {
 	text-align: right;
 }
 .code {
-.code {
-    background: none repeat scroll 0 0 #FFFFFF;
-    border: 1px solid #888888;
-    font-family: "Courier New";
-    font-size: 10pt;
-    margin: 1em 1.75em;
-    overflow: auto;
-    padding: 0.25em;	letter-spacing: normal;
+	letter-spacing: normal;
 	word-spacing: normal;		
 	background-color: #EDEDED;
 	background-image: none;
@@ -233,8 +226,3 @@ table.forum th {
 #content fieldset legend strong {
 	font-weight: normal;
 }
-
-
-
-
-

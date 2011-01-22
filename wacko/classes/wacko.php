@@ -3872,7 +3872,7 @@ class Wacko
 		if ($page_id)
 		{
 			return $this->load_all(
-					"SELECT p.page_id, p.tag, p.created, p.modified, p.body, p.body_r, p.title, u.user_name AS user ".
+					"SELECT p.page_id, p.user_id, p.title, p.tag, p.created, p.modified, p.body, p.body_r, u.user_name ".
 					"FROM ".$this->config['table_prefix']."page p ".
 						"LEFT OUTER JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"WHERE p.comment_on_id = '".quote($this->dblink, $page_id)."' ".
