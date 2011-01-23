@@ -68,7 +68,8 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 		"SELECT COUNT(tag) AS total ".
 		"FROM {$this->config['table_prefix']}revision ".
 		"WHERE tag = '".quote($this->dblink, $this->tag)."' ".
-		"GROUP BY tag");
+		"GROUP BY tag ".
+		"LIMIT 1");
 
 	$rating = $this->load_single(
 		"SELECT page_id, value, voters ".

@@ -157,7 +157,8 @@ if ($this->user_is_owner() || $this->is_admin())
 				$user = $this->load_single(
 					"SELECT email, email_confirm ".
 					"FROM {$this->config['user_table']} ".
-					"WHERE user_name = '".quote($newowner)."'");
+					"WHERE user_name = '".quote($newowner)."' ".
+					"LIMIT 1");
 
 				if ($user['email_confirm'] == '')
 				{

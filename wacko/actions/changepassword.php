@@ -294,7 +294,8 @@ else
 			"SELECT * ".
 			"FROM ".$this->config['user_table']." ".
 			"WHERE user_name = '".quote($this->dblink, $name)."' ".
-				"OR email = '".quote($this->dblink, $name)."'");
+				"OR email = '".quote($this->dblink, $name)."' ".
+			"LIMIT 1");
 
 		if ($user)
 		{

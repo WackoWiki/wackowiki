@@ -20,7 +20,8 @@ if (isset($_GET['confirm']))
 	if ($temp = $this->load_single(
 		"SELECT user_name, email, email_confirm ".
 		"FROM ".$this->config['user_table']." ".
-		"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."'"))
+		"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."' ".
+		"LIMIT 1"))
 	{
 		$this->query(
 			"UPDATE ".$this->config['user_table']." ".
@@ -176,7 +177,11 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 						"password		= '".quote($this->dblink, $password_encrypted)."', ".
 						"salt			= '".quote($this->dblink, $salt)."'");
 
-				$_user_id = $this->load_single("SELECT user_id FROM ".$this->config['table_prefix']."user WHERE user_name = '".quote($this->dblink, $user_name)."'");
+				$_user_id = $this->load_single(
+					"SELECT user_id ".
+					"FROM ".$this->config['table_prefix']."user ".
+					"WHERE user_name = '".quote($this->dblink, $user_name)."' ".
+					"LIMIT 1");
 
 				// INSERT USER Settings
 				$this->query(

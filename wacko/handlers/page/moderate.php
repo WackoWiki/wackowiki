@@ -529,7 +529,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			"WHERE". # p.page_id = a.page_id ".
 				#"AND a.`create` = '' ".
 				#"AND
-				"p.tag LIKE '{$this->tag}/%'";
+				"p.tag LIKE '{$this->tag}/%' ".
+			"LIMIT 1";
 
 		// count topics and make pagination
 		$count		= $this->load_single($sql);
@@ -1019,7 +1020,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// make counter query
 		$sql = "SELECT COUNT(tag) AS n ".
 			"FROM {$this->config['table_prefix']}page ".
-			"WHERE comment_on_id = '{$this->page['page_id']}'";
+			"WHERE comment_on_id = '{$this->page['page_id']}' ".
+			"LIMIT 1";
 
 		// count posts and make pagination
 		$count		= $this->load_single($sql);

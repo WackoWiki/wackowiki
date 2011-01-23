@@ -294,128 +294,129 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		$title = $this->page['title'];
 	}
 ?>
-		<input name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
-		&nbsp;
-		<input name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
-		&nbsp;
-		<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href('', '', '', 1))?>';" />
-		<br />
-		<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
+	<input name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
+	&nbsp;
+	<input name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
+	&nbsp;
+	<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href('', '', '', 1))?>';" />
+	<br />
+	<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
 <?php
-		$output .= "<input type=\"hidden\" name=\"previous\" value=\"".htmlspecialchars($previous)."\" /><br />";
-		$output .= "<textarea id=\"postText\" name=\"body\" rows=\"40\" cols=\"60\" class=\"TextArea\">";
-		$output .= htmlspecialchars($body)."</textarea><br />\n";
+	$output .= "<input type=\"hidden\" name=\"previous\" value=\"".htmlspecialchars($previous)."\" /><br />";
+	$output .= "<textarea id=\"postText\" name=\"body\" rows=\"40\" cols=\"60\" class=\"TextArea\">";
+	$output .= htmlspecialchars($body)."</textarea><br />\n";
 
-		// comment title
-		if ($this->page['comment_on_id'] != 0)
+	// comment title
+	if ($this->page['comment_on_id'] != 0)
+	{
+		$output .= "<label for=\"addcomment_title\">".$this->get_translation('AddCommentTitle').":</label><br />";
+		$output .= "<input id=\"addcomment_title\" maxlength=\"100\" value=\"".htmlspecialchars($title)."\" size=\"60\" name=\"title\" />";
+		$output .= "<br />";
+	}
+	else
+	{
+		if (!$this->page)
 		{
-			$output .= "<label for=\"addcomment_title\">".$this->get_translation('AddCommentTitle').":</label><br />";
-			$output .= "<input id=\"addcomment_title\" maxlength=\"100\" value=\"".htmlspecialchars($title)."\" size=\"60\" name=\"title\" />";
+			// new page title field
+			$output .= "<label for=\"addpage_title\">".$this->get_translation('MetaTitle').":</label><br />";
+			$output .= "<input id=\"addpage_title\" value=\"".htmlspecialchars($title)."\" size=\"60\" maxlength=\"100\" name=\"title\" /><br />";
+		}
+
+		// edit note
+		if ($this->config['edit_summary'] != 0)
+		{
+			$output .= "<label for=\"edit_note\">".$this->get_translation('EditNote').":</label><br />";
+			$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
+			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br />";
+		}
+
+		// minor edit
+		if ($this->page && $this->config['minor_edit'] != 0)
+		{
+			$output .= "<input id=\"minor_edit\" type=\"checkbox\" value=\"1\" name=\"minor_edit\"/>";
+			$output .= "<label for=\"minor_edit\">".$this->get_translation('EditMinor')."</label>";
 			$output .= "<br />";
+		}
+
+		if ($user)
+		{
+			// reviewed
+			if ($this->page && $this->config['review'] != 0 && $this->is_reviewer())
+			{
+				$output .= "<input id=\"reviewed\" type=\"checkbox\" value=\"1\" name=\"reviewed\"/>";
+				$output .= "<label for=\"reviewed\">".$this->get_translation('Reviewed')."</label>";
+				$output .= "<br />";
+			}
+
+			// publish anonymously
+			if (($this->page && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
+			{
+				$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".htmlspecialchars($this->tag)."\"".( $this->get_user_setting('noid_pubs', 1) == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">".$this->get_translation('PostAnonymously')."</label></small>";
+				$output .= "<br />";
+			}
+
+			// watch a page
+			if ($this->page && $this->iswatched !== true)
+			{
+				$output .= "<input type=\"checkbox\" name=\"watchpage\" id=\"watchpage\" value=\"1\"".( $this->get_user_setting('send_watchmail', 1) == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"watchpage\">".$this->get_translation('NotifyMe')."</label></small>";
+				$output .= "<br />";
+			}
 		}
 		else
 		{
-			if (!$this->page)
-			{
-				// new page title field
-				$output .= "<label for=\"addpage_title\">".$this->get_translation('MetaTitle').":</label><br />";
-				$output .= "<input id=\"addpage_title\" value=\"".htmlspecialchars($title)."\" size=\"60\" maxlength=\"100\" name=\"title\" /><br />";
-			}
+			$output .= "<br />";
+		}
+	}
 
-			// edit note
-			if ($this->config['edit_summary'] != 0)
-			{
-				$output .= "<label for=\"edit_note\">".$this->get_translation('EditNote').":</label><br />";
-				$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
-				$output .= "&nbsp;&nbsp;&nbsp;"; // "<br />";
-			}
+	if (!$this->page && $words = $this->get_categories_list($this->page_lang, 1))
+	{
+		foreach ($words as $id => $word)
+		{
+			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="category'.$id.'"><strong>'.htmlspecialchars($word['category']).'</strong></label></span> ';
 
-			// minor edit
-			if ($this->page && $this->config['minor_edit'] != 0)
+			if (isset($word['childs']) && $word['childs'] == true)
 			{
-				$output .= "<input id=\"minor_edit\" type=\"checkbox\" value=\"1\" name=\"minor_edit\"/>";
-				$output .= "<label for=\"minor_edit\">".$this->get_translation('EditMinor')."</label>";
-				$output .= "<br />";
-			}
-
-			if ($user)
-			{
-				// reviewed
-				if ($this->page && $this->config['review'] != 0 && $this->is_reviewer())
+				foreach ($word['childs'] as $id => $word)
 				{
-					$output .= "<input id=\"reviewed\" type=\"checkbox\" value=\"1\" name=\"reviewed\"/>";
-					$output .= "<label for=\"reviewed\">".$this->get_translation('Reviewed')."</label>";
-					$output .= "<br />";
+					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="category'.$id.'">'.htmlspecialchars($word['category']).'</label></span> ';
 				}
-
-				// publish anonymously
-				if (($this->page && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
-				{
-					$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".htmlspecialchars($this->tag)."\"".( $this->get_user_setting('noid_pubs', 1) == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">".$this->get_translation('PostAnonymously')."</label></small>";
-					$output .= "<br />";
-				}
-
-				// watch a page
-				if ($this->page && $this->iswatched !== true)
-				{
-					$output .= "<input type=\"checkbox\" name=\"watchpage\" id=\"watchpage\" value=\"1\"".( $this->get_user_setting('send_watchmail', 1) == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"watchpage\">".$this->get_translation('NotifyMe')."</label></small>";
-					$output .= "<br />";
-				}
-			}
-			else
-			{
-				$output .= "<br />";
 			}
 		}
 
-		if (!$this->page && $words = $this->get_categories_list($this->page_lang, 1))
+		$output .= "<br />".$this->get_translation('Categories').':<div class="setcategory"><small><br /><br />'.substr(implode(' ', $_words), 6).'</small></div><br /><br />';
+	}
+
+	echo $output;
+
+	// captcha code starts
+
+	// Only show captcha if the admin enabled it in the config file
+	if (($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
+	{
+		// Don't load the captcha at all if the GD extension isn't enabled
+		if (extension_loaded('gd'))
 		{
-			foreach ($words as $id => $word)
+			// check whether anonymous user
+			// anonymous user has no name
+			// if false, we assume it's anonymous
+			if ($this->get_user_name() == false)
 			{
-				$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="category'.$id.'"><strong>'.htmlspecialchars($word['category']).'</strong></label></span> ';
-
-				if (isset($word['childs']) && $word['childs'] == true)
-				{
-					foreach ($word['childs'] as $id => $word)
-					{
-						$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="category'.$id.'">'.htmlspecialchars($word['category']).'</label></span> ';
-					}
-				}
-			}
-
-			$output .= "<br />".$this->get_translation('Categories').':<div class="setcategory"><small><br /><br />'.substr(implode(' ', $_words), 6).'</small></div><br /><br />';
-		}
-		echo $output;
-
-		// captcha code starts
-
-		// Only show captcha if the admin enabled it in the config file
-		if (($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
-		{
-			// Don't load the captcha at all if the GD extension isn't enabled
-			if (extension_loaded('gd'))
-			{
-				// check whether anonymous user
-				// anonymous user has no name
-				// if false, we assume it's anonymous
-				if ($this->get_user_name() == false)
-				{
 ?>
-		<label for="captcha"><?php echo $this->get_translation('Captcha');?>:</label>
-		<br />
-		<img src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->get_translation('Captcha');?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->get_translation('CaptchaReload'); ?>"><img src="<?php echo $this->config['base_url'];?>images/reload.png" width="18" height="17" alt="<?php echo $this->get_translation('CaptchaReload'); ?>" /></a>
-		<br />
-		<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
-		<br />
-		<br />
+	<label for="captcha"><?php echo $this->get_translation('Captcha');?>:</label>
+	<br />
+	<img src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->get_translation('Captcha');?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->get_translation('CaptchaReload'); ?>"><img src="<?php echo $this->config['base_url'];?>images/reload.png" width="18" height="17" alt="<?php echo $this->get_translation('CaptchaReload'); ?>" /></a>
+	<br />
+	<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
+	<br />
+	<br />
 <?php
-				}
 			}
 		}
-		// end captcha
+	}
+	// end captcha
 ?>
-		<script type="text/javascript">
-			wE = new WikiEdit();
+	<script type="text/javascript">
+		wE = new WikiEdit();
 <?php
 	if ($user = $this->get_user())
 
@@ -429,22 +430,22 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 <?php
 		}
 ?>
-			wE.init('postText','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>images/wikiedit/');
-		</script><br />
-		<input name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
-		&nbsp;
-		<input name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
-		&nbsp;
-		<input type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+		wE.init('postText','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>images/wikiedit/');
+	</script><br />
+	<input name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
+	&nbsp;
+	<input name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
+	&nbsp;
+	<input type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 <?php
-		echo $this->form_close();
-	}
-	else
-	{
-		echo "<div id=\"page\">";
-		echo $this->get_translation('WriteAccessDenied');
-		echo "</div>";
-	}
+	echo $this->form_close();
+}
+else
+{
+	echo "<div id=\"page\">";
+	echo $this->get_translation('WriteAccessDenied');
+	echo "</div>";
+}
 
 ?>
 </div>

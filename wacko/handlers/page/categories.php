@@ -47,7 +47,8 @@ if ($this->user_is_owner() || $this->is_admin())
 			$word = $this->load_single(
 				"SELECT category_id, parent, category ".
 				"FROM {$this->config['table_prefix']}category ".
-				"WHERE category_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
+				"WHERE category_id = '".quote($this->dblink, $_POST['id'])."' ".
+				"LIMIT 1");
 		}
 
 		// add item
@@ -57,7 +58,8 @@ if ($this->user_is_owner() || $this->is_admin())
 			if ($this->load_single(
 			"SELECT category_id ".
 			"FROM {$this->config['table_prefix']}category ".
-			"WHERE category = '".quote($this->dblink, $_POST['newname'])."' LIMIT 1"))
+			"WHERE category = '".quote($this->dblink, $_POST['newname'])."' ".
+			"LIMIT 1"))
 			{
 				$this->set_message($this->get_translation('CategoriesAlreadyExists'));
 				$_POST['change'] = $_POST['id'];
@@ -86,7 +88,8 @@ if ($this->user_is_owner() || $this->is_admin())
 			if ($this->load_single(
 			"SELECT category_id ".
 			"FROM {$this->config['table_prefix']}category ".
-			"WHERE category = '".quote($this->dblink, $_POST['newname'])."' AND category_id <> '".quote($this->dblink, $_POST['id'])."' LIMIT 1"))
+			"WHERE category = '".quote($this->dblink, $_POST['newname'])."' AND category_id <> '".quote($this->dblink, $_POST['id'])."' ".
+			"LIMIT 1"))
 			{
 				$this->set_message($this->get_translation('CategoriesAlreadyExists'));
 				$_POST['change'] = $_POST['id'];
@@ -121,7 +124,8 @@ if ($this->user_is_owner() || $this->is_admin())
 				$parent = $this->load_single(
 					"SELECT parent, category ".
 					"FROM {$this->config['table_prefix']}category ".
-					"WHERE category_id = '".quote($this->dblink, $_POST['parent'])."' LIMIT 1");
+					"WHERE category_id = '".quote($this->dblink, $_POST['parent'])."' ".
+					"LIMIT 1");
 
 				if ($parent['parent'] == 0)
 				{
@@ -198,7 +202,8 @@ if ($this->user_is_owner() || $this->is_admin())
 				$word = $this->load_single(
 					"SELECT category_id, parent, category ".
 					"FROM {$this->config['table_prefix']}category ".
-					"WHERE category_id = '".quote($this->dblink, $_POST['change'])."' LIMIT 1");
+					"WHERE category_id = '".quote($this->dblink, $_POST['change'])."' ".
+					"LIMIT 1");
 				$group = ( $word['parent'] == 0 ? $word['category_id'] : $group = $word['parent'] );
 			}
 
