@@ -1572,7 +1572,7 @@ class Wacko
 
 		// check privileges
 		if ( ($this->page && $this->has_access('write', $page_id))
-			|| (!$this->page && $this->has_access('create', $tag))
+			|| (!$this->page && $this->has_access('create')) // TODO: (!$this->page && $this->has_access('create', $tag))
 			|| ($comment_on_id && $this->has_access('comment', $comment_on_id)) )
 		{
 			// for forum topic prepare description
@@ -1760,6 +1760,45 @@ class Wacko
 					{
 						$this->set_watch($user_id, $page_id);
 					}
+
+					// subscribe & notify moderators
+					/*if (is_array($this->config['aliases']))
+					{
+						$list	= $this->config['aliases'];
+						$moders	= explode("\n", $list['Moders']);
+
+						if (!$mute) foreach ($moders as $moder)
+						{
+							if ($user != $moder)
+							{
+								$moder_id = $this->get_user_id_by_name($moder);
+
+								$_user = $this->load_single(
+									"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
+									"FROM " .$this->config['user_table']." u ".
+										"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
+									"WHERE u.user_id = '".quote($this->dblink, $moder_id)."' ".
+									"LIMIT 1");
+
+								if ($_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
+								{
+									$subject = $this->config['wacko_name'].'. '.$this->get_translation('NewPageCreatedSubj')." '$title'";
+									$body = $this->get_translation('EmailHello'). $this->get_translation('EmailModerator').$moder.".\n\n".
+											str_replace('%1', ( $user == GUEST ? $this->get_translation('Guest') : $user ), $this->get_translation('NewPageCreatedBody'))."\n".
+											"'$title'\n".
+											$this->href('', $tag)."\n\n".
+											$this->get_translation('EmailGoodbye')."\n".
+											$this->config['wacko_name']."\n".
+											$this->config['base_url'];
+
+									$this->send_mail($_user['email'], $subject, $body);
+									$this->set_watch($moder_id, $page_id);
+								}
+							}
+						}
+
+						unset($list, $moders, $moder, $moder_id);
+					}*/
 				}
 
 				if ($comment_on_id)
@@ -1818,16 +1857,16 @@ class Wacko
 										$this->set_language ($lang);
 
 										$subject = '['.$this->config['wacko_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
-										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].".\n\n".
-													$user_name.
-													$this->get_translation('SomeoneCommented', $lang)."\n".
-													$this->href('', $this->get_page_tag_by_id($comment_on_id), '')."\n\n".
-													"----------------------------------------------------------------------\n\n".
-													$this->format($body_r, 'post_wacko')."\n\n".
-													"----------------------------------------------------------------------\n\n".
-													$this->get_translation('EmailGoodbye', $lang)."\n".
-													$this->config['wacko_name']."\n".
-													$this->config['base_url'];
+										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
+												$user_name.
+												$this->get_translation('SomeoneCommented', $lang)."\n".
+												$this->href('', $this->get_page_tag_by_id($comment_on_id), '')."\n\n".
+												"----------------------------------------------------------------------\n\n".
+												$body."\n\n".
+												"----------------------------------------------------------------------\n\n".
+												$this->get_translation('EmailGoodbye', $lang)."\n".
+												$this->config['wacko_name']."\n".
+												$this->config['base_url'];
 
 										$this->send_mail($_user['email'], $subject, $body);
 									}
@@ -1897,14 +1936,14 @@ class Wacko
 						"ORDER BY modified DESC ".
 						"LIMIT 1");
 
-					$_GET['a'] = -1;
-					$_GET['b'] = $page['revision_id'];
-					$_GET['fastdiff'] = 1;
-					$diff = $this->include_buffered('handlers/page/diff.php', 'oops', array('source' => 1));
+					$_GET['a']			= -1;
+					$_GET['b']			= $page['revision_id'];
+					$_GET['fastdiff']	= 1;
+					$diff				= $this->include_buffered('handlers/page/diff.php', 'oops', array('source' => 1));
 
 					// notifying watchers
-					$title		= $this->get_page_title(0, $page_id);
-					$user_name	= $user;
+					$title				= $this->get_page_title(0, $page_id);
+					$user_name			= $user;
 
 					$watchers	= $this->load_all(
 						"SELECT DISTINCT w.user_id, u.user_name ".
@@ -1935,17 +1974,17 @@ class Wacko
 										$this->set_language ($lang);
 
 										$subject = '['.$this->config['wacko_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
-										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name']."\n\n".
-											$user_name.
-											$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
-											(isset($title) ? $title : $tag)."\n".
-											$this->href('', $tag)."\n\n".
-											"======================================================================".
-											$this->format($diff, 'html2mail').
-											"\n======================================================================\n\n".
-											$this->get_translation('EmailGoodbye', $lang)."\n".
-											$this->config['wacko_name']."\n".
-											$this->config['base_url'];
+										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
+												$user_name.
+												$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
+												(isset($title) ? $title : $tag)."\n".
+												$this->href('', $tag)."\n\n".
+												"======================================================================".
+												$this->format($diff, 'html2mail').
+												"\n======================================================================\n\n".
+												$this->get_translation('EmailGoodbye', $lang)."\n".
+												$this->config['wacko_name']."\n".
+												$this->config['base_url'];
 
 										$this->send_mail($_user['email'], $subject, $body);
 									}

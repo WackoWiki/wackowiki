@@ -169,7 +169,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 					}
 
 					// restore username after anonymous publication
-					if ($_POST['noid_publication'] == $this->tag)
+					if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->tag)
 					{
 						$this->set_user_setting('user_name', $remember_name);
 						unset($remember_name);

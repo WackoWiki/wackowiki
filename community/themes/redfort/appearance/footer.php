@@ -171,7 +171,7 @@ if ($this->has_access('read') && $this->config['hide_comments'] != 1)
           "<img src=\"".$this->config['theme_url']."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->get_translation('DeleteText')."\"  align=\"absmiddle\" border=\"0\" /></a>".
           "</div>");
         print($this->format($comment['body'])."\n");
-        print("<div class=\"commentinfo\">\n-- ".($this->is_wiki_name($comment['user']) ? $this->link('/'.$comment['user'], '', $comment['user']) : $comment['user'])." (".$comment['time'].")\n</div>\n");
+        print("<div class=\"commentinfo\">\n-- ".($this->is_wiki_name($comment['user_name']) ? $this->link('/'.$comment['user_name'], '', $comment['user_name']) : $comment['user_name'])." (".$comment['time'].")\n</div>\n");
         print("</div>\n");
       }
     }
