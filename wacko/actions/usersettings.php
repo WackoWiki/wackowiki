@@ -13,7 +13,8 @@ if (isset($_GET['confirm']))
 	if ($temp = $this->load_single(
 			"SELECT user_name, email, email_confirm ".
 			"FROM ".$this->config['user_table']." ".
-			"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."'"))
+			"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."' ".
+			"LIMIT 1"))
 	{
 		$this->query(
 			"UPDATE ".$this->config['user_table']." ".
@@ -313,7 +314,8 @@ else if ($user = $this->get_user())
 		$code = $this->load_single(
 			"SELECT email_confirm ".
 			"FROM {$this->config['user_table']} ".
-			"WHERE user_name = '".quote($this->dblink, $user['user_name'])."'");
+			"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
+			"LIMIT 1");
 
 		echo "<h3>".$this->get_translation('UserSettings')." &raquo; ".$this->get_translation('UserSettingsGeneral')."</h3>";
 		echo "<ul class=\"menu\"><li class=\"active\">".$this->get_translation('UserSettingsGeneral')."</li><li><a href=\"".$this->href('', '', 'bookmarks')."\">".$this->get_translation('Bookmarks')."</a></li><li><a href=\"".$this->href('', '', 'extended')."\">".$this->get_translation('UserSettingsExtended')."</a></li></ul><br /><br />\n";

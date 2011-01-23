@@ -1807,7 +1807,8 @@ class Wacko
 										"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
 										"FROM " .$this->config['user_table']." u ".
 											"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-										"WHERE u.user_id = '".quote($this->dblink, $watcher['user_id'])."'");
+										"WHERE u.user_id = '".quote($this->dblink, $watcher['user_id'])."' ".
+										"LIMIT 1");
 
 									if ($_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
 									{
@@ -1890,12 +1891,14 @@ class Wacko
 				{
 					// revisions diff
 					$page = $this->load_single(
-						"SELECT ".$this->pages_meta." ".
+						"SELECT revision_id ".
 						"FROM ".$this->config['table_prefix']."revision ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
-						"ORDER BY modified DESC");
+						"ORDER BY modified DESC ".
+						"LIMIT 1");
+
 					$_GET['a'] = -1;
-					$_GET['b'] = $page['page_id'];
+					$_GET['b'] = $page['revision_id'];
 					$_GET['fastdiff'] = 1;
 					$diff = $this->include_buffered('handlers/page/diff.php', 'oops', array('source' => 1));
 
@@ -1921,7 +1924,8 @@ class Wacko
 										"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
 										"FROM " .$this->config['user_table']." u ".
 											"LEFT JOIN ".$this->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-										"WHERE u.user_id = '".quote($this->dblink, $watcher['user_id'])."'");
+										"WHERE u.user_id = '".quote($this->dblink, $watcher['user_id'])."' ".
+										"LIMIT 1");
 
 									if ($_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
 									{
@@ -1934,7 +1938,7 @@ class Wacko
 										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name']."\n\n".
 											$user_name.
 											$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
-											$title."\n".
+											(isset($title) ? $title : $tag)."\n".
 											$this->href('', $tag)."\n\n".
 											"======================================================================".
 											$this->format($diff, 'html2mail').
@@ -3341,7 +3345,8 @@ class Wacko
 		{
 			if ($this->load_single(
 			"SELECT * FROM {$this->config['user_table']} ".
-			"WHERE user_name = '".quote($this->dblink, $name)."'"))
+			"WHERE user_name = '".quote($this->dblink, $name)."' ".
+			"LIMIT 1"))
 			{
 				return true;
 			}
@@ -3406,7 +3411,8 @@ class Wacko
 		// checking database
 		if ($this->load_single(
 		"SELECT * FROM {$this->config['user_table']} ".
-		"WHERE user_name REGEXP '".quote($this->dblink, implode('', $name))."'", 1))
+		"WHERE user_name REGEXP '".quote($this->dblink, implode('', $name))."' ".
+		"LIMIT 1", 1))
 		{
 			return true;
 		}
@@ -3751,7 +3757,11 @@ class Wacko
 	function get_user_id_by_name($user = '')
 	{
 		$user = $this->load_single(
-					"SELECT user_id FROM ".$this->config['table_prefix']."user WHERE user_name = '".$user."' LIMIT 1");
+					"SELECT user_id ".
+					"FROM ".$this->config['table_prefix']."user ".
+					"WHERE user_name = '".$user."' ".
+					"LIMIT 1");
+
 					// Get user value
 					$user_id = $user['user_id'];
 
@@ -3792,7 +3802,8 @@ class Wacko
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$this->config['table_prefix']}page ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
-				"AND comment_on_id <> '0'");
+				"AND comment_on_id <> '0' ".
+			"LIMIT 1");
 
 		return (int)$count['n'];
 	}
@@ -3804,7 +3815,8 @@ class Wacko
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$this->config['table_prefix']}page ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
-				"AND comment_on_id = '0'");
+				"AND comment_on_id = '0' ".
+			"LIMIT 1");
 
 		return (int)$count['n'];
 	}
@@ -3816,7 +3828,8 @@ class Wacko
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$this->config['table_prefix']}revision ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
-				"AND comment_on_id = '0'");
+				"AND comment_on_id = '0' ".
+			"LIMIT 1");
 
 		return (int)$count['n'];
 	}
@@ -3827,7 +3840,9 @@ class Wacko
 		$count = $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$this->config['table_prefix']}page ".
-			"WHERE comment_on_id = '".quote($this->dblink, $comment_on_id)."'");
+			"WHERE comment_on_id = '".quote($this->dblink, $comment_on_id)."' ".
+			"LIMIT 1");
+
 		return (int)$count['n'];
 	}
 
@@ -4083,7 +4098,7 @@ class Wacko
 		$this->acl_cache[$page_id.'#'.$privilege.'#'.$use_defaults] = $acl;
 	}
 
-	function load_acl($page_id, $privilege, $use_defaults = 1, $use_cache = 1, $use_parent = 1)
+	function load_acl($page_id, $privilege, $use_defaults = 1, $use_cache = 1, $use_parent = 1, $new_tag = '')
 	{
 		if (!isset($acl))
 		{
@@ -4107,19 +4122,30 @@ class Wacko
 
 			if (!$acl)
 			{
-				$acl = $this->load_single(
-					"SELECT * ".
-					"FROM ".$this->config['table_prefix']."acl ".
-					"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
-						"AND privilege = '".quote($this->dblink, $privilege)."' ".
-					"LIMIT 1");
+				if (!$new_tag)
+				{
+					$acl = $this->load_single(
+						"SELECT * ".
+						"FROM ".$this->config['table_prefix']."acl ".
+						"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
+							"AND privilege = '".quote($this->dblink, $privilege)."' ".
+						"LIMIT 1");
+				}
 
 				// if still no acl, use config defaults
 				if (!$acl && $use_defaults)
 				{
 					// First look for parent ACL, so that clusters/subpages
 					// work correctly.
-					$tag = strtolower($this->get_page_tag_by_id($page_id));
+					if (!empty($page_id))
+					{
+						$tag = strtolower($this->get_page_tag_by_id($page_id));
+					}
+					else
+					{
+						// new page which is to be created
+						$tag = strtolower($new_tag);
+					}
 
 					if ( strstr($tag, '/') )
 					{
@@ -4173,13 +4199,24 @@ class Wacko
 			$page_id = $this->page['page_id'];
 		}
 
+		// if still no page_id, use tag
+		if (empty($page_id))
+		{
+			// new page which is to be created
+			$new_tag = $this->tag;
+		}
+		else
+		{
+			$new_tag = '';
+		}
+
 		if ($privilege == 'write')
 		{
 			$use_parent = 0;
 		}
 
 		// load acl
-		$acl		= $this->load_acl($page_id, $privilege, 1, 1, $use_parent);
+		$acl		= $this->load_acl($page_id, $privilege, 1, 1, $use_parent, $new_tag);
 		$this->_acl	= $acl;
 
 		// if current user is owner or admin, return true. they can do anything!
@@ -4343,7 +4380,8 @@ class Wacko
 		return $this->load_single(
 			"SELECT * FROM ".$this->config['table_prefix']."watch ".
 			"WHERE user_id		= '".quote($this->dblink, $user_id)."' ".
-				"AND page_id	= '".quote($this->dblink, $page_id)."'");
+				"AND page_id	= '".quote($this->dblink, $page_id)."' ".
+			"LIMIT 1");
 	}
 
 	function set_watch($user_id, $page_id)
