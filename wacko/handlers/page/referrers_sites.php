@@ -37,13 +37,13 @@ if ($user = $this->get_user())
 			$temp_parse_url = parse_url($referrers[$a]['referrer']);
 			$temp_parse_url = ($temp_parse_url['host'] != '') ? strtolower(preg_replace('/^www\./Ui', '', $temp_parse_url['host'])) : 'unknown';
 
-			if (isset($referrer_sites['$temp_parse_url']))
+			if (isset($referrer_sites[$temp_parse_url]))
 			{
-				$referrer_sites['$temp_parse_url'] += $referrers[$a]['num'];
+				$referrer_sites[$temp_parse_url] += $referrers[$a]['num'];
 			}
 			else
 			{
-				$referrer_sites['$temp_parse_url'] = $referrers[$a]['num'];
+				$referrer_sites[$temp_parse_url] = $referrers[$a]['num'];
 			}
 		}
 
