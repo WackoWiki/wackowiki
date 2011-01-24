@@ -637,7 +637,8 @@ class WackoFormatter
 				 preg_match('/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/s', $thing, $matches))
 		{
 			$this->br = 1;
-			if (isset($matches[3]) && $color = ($this->object->config['allow_x11colors'] == 1 ? $this->x11_colors[$matches[3]] : $this->colors[$matches[3]]))
+
+			if (isset($matches[3]) && $color = ($this->object->config['allow_x11colors'] == 1 ? $this->x11_colors[$matches[3]] : isset($this->colors[$matches[3]]) ? $this->colors[$matches[3]] : ''))
 			{
 				return '<span class="cl-'.$color.'">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[4]).'</span>';
 			}
