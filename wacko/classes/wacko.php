@@ -1762,7 +1762,7 @@ class Wacko
 					}
 
 					// subscribe & notify moderators
-					/*if (is_array($this->config['aliases']))
+					if (is_array($this->config['aliases']))
 					{
 						$list	= $this->config['aliases'];
 						$moders	= explode("\n", $list['Moders']);
@@ -1798,7 +1798,7 @@ class Wacko
 						}
 
 						unset($list, $moders, $moder, $moder_id);
-					}*/
+					}
 				}
 
 				if ($comment_on_id)
@@ -1858,15 +1858,15 @@ class Wacko
 
 										$subject = '['.$this->config['wacko_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
 										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
-												$user_name.
-												$this->get_translation('SomeoneCommented', $lang)."\n".
-												$this->href('', $this->get_page_tag_by_id($comment_on_id), '')."\n\n".
-												"----------------------------------------------------------------------\n\n".
-												$body."\n\n".
-												"----------------------------------------------------------------------\n\n".
-												$this->get_translation('EmailGoodbye', $lang)."\n".
-												$this->config['wacko_name']."\n".
-												$this->config['base_url'];
+													$user_name.
+													$this->get_translation('SomeoneCommented', $lang)."\n".
+													$this->href('', $this->get_page_tag_by_id($comment_on_id), '')."\n\n".
+													"----------------------------------------------------------------------\n\n".
+													$body."\n\n".
+													"----------------------------------------------------------------------\n\n".
+													$this->get_translation('EmailGoodbye', $lang)."\n".
+													$this->config['wacko_name']."\n".
+													$this->config['base_url'];
 
 										$this->send_mail($_user['email'], $subject, $body);
 									}
@@ -1975,16 +1975,16 @@ class Wacko
 
 										$subject = '['.$this->config['wacko_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
 										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
-												$user_name.
-												$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
-												(isset($title) ? $title : $tag)."\n".
-												$this->href('', $tag)."\n\n".
-												"======================================================================".
-												$this->format($diff, 'html2mail').
-												"\n======================================================================\n\n".
-												$this->get_translation('EmailGoodbye', $lang)."\n".
-												$this->config['wacko_name']."\n".
-												$this->config['base_url'];
+											$user_name.
+											$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
+											(isset($title) ? $title : $tag)."\n".
+											$this->href('', $tag)."\n\n".
+											"======================================================================".
+											$this->format($diff, 'html2mail').
+											"\n======================================================================\n\n".
+											$this->get_translation('EmailGoodbye', $lang)."\n".
+											$this->config['wacko_name']."\n".
+											$this->config['base_url'];
 
 										$this->send_mail($_user['email'], $subject, $body);
 									}
@@ -5084,6 +5084,7 @@ class Wacko
 			$this->current_context--;
 			echo $this->header($mod).$data.$this->footer($mod);
 		}
+
 		return $this->tag;
 	}
 
@@ -5129,32 +5130,35 @@ class Wacko
 
 		foreach ($toc as $k => $v)
 		{
-			if ($v[2] == 99999)
+			if (isset($v[2]))
 			{
-				if (!in_array($v[0], $this->toc_context))
+				if ($v[2] == 99999)
 				{
-					if (!($v[0] == $this->tag))
+					if (!in_array($v[0], $this->toc_context))
 					{
-						array_push($this->toc_context, $v[0]);
-						$_toc = array_merge($_toc, $this->build_toc($v[0], $from, $to, $num, $link));
-						array_pop($this->toc_context);
+						if (!($v[0] == $this->tag))
+						{
+							array_push($this->toc_context, $v[0]);
+							$_toc = array_merge($_toc, $this->build_toc($v[0], $from, $to, $num, $link));
+							array_pop($this->toc_context);
+						}
 					}
-				}
-			}
-			else
-			{
-				if ($v[2] == 77777)
-				{
-					$toc[$k][3] = $_link;
-					$_toc[] = &$toc[$k];
 				}
 				else
 				{
-					if (($v[2] >= $from) && ($v[2] <= $to))
+					if ($v[2] == 77777)
 					{
-						$toc[$k][3] = $_link;
-						$_toc[] = &$toc[$k];
-						$toc[$k][1] = $this->format($toc[$k][1], 'post_wacko');
+						$toc[$k][3]	= $_link;
+						$_toc[]		= &$toc[$k];
+					}
+					else
+					{
+						if (($v[2] >= $from) && ($v[2] <= $to))
+						{
+							$toc[$k][3]	= $_link;
+							$_toc[]		= &$toc[$k];
+							$toc[$k][1]	= $this->format($toc[$k][1], 'post_wacko');
+						}
 					}
 				}
 			}

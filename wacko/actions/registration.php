@@ -198,7 +198,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 
 				$subject = 	$this->get_translation('EmailWelcome').
 							$this->config['wacko_name'];
-				$body = 	$this->get_translation('EmailHello'). $user_name.".\n\n".
+				$body = 	$this->get_translation('EmailHello'). $user_name.",\n\n".
 							str_replace('%1', $this->config['wacko_name'],
 							str_replace('%2', $user_name,
 							str_replace('%3', $this->href().

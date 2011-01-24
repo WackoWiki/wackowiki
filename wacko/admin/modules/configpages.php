@@ -36,6 +36,8 @@ function admin_configpages(&$engine, &$module)
 		$config['settings_page']		= trim((string)$_POST['settings_page'], '/');
 		$config['password_page']		= trim((string)$_POST['password_page'], '/');
 		$config['users_page']			= trim((string)$_POST['users_page'], '/');
+		$config['permalink_page']		= trim((string)$_POST['permalink_page'], '/');
+		$config['category_page']		= trim((string)$_POST['category_page'], '/');
 		$config['groups_page']			= trim((string)$_POST['groups_page'], '/');
 		$config['changes_page']			= trim((string)$_POST['changes_page'], '/');
 		$config['comments_page']		= trim((string)$_POST['comments_page'], '/');
@@ -169,6 +171,22 @@ function admin_configpages(&$engine, &$module)
 				<td class="label"><label for="users_page"><strong>User list:</strong><br />
 				<small>Page with a list of registered users (action <tt>{{Users}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="users_page" name="users_page" value="<?php echo htmlspecialchars($engine->config['users_page']);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="permalink_page"><strong>Permalink:</strong><br />
+				<small>Page with a list of registered users (action <tt>{{permalinkproxy}}</tt>).</small></label></td>
+				<td><input maxlength="255" style="width:200px;" id="permalink_page" name="permalink_page" value="<?php echo htmlspecialchars($engine->config['permalink_page']);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="category_page"><strong>Category :</strong><br />
+				<small>Page with a list of registered users (action <tt>{{categories}}</tt>).</small></label></td>
+				<td><input maxlength="255" style="width:200px;" id="category_page" name="category_page" value="<?php echo htmlspecialchars($engine->config['category_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

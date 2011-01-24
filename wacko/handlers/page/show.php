@@ -49,8 +49,6 @@ function handler_show_get_user_stats(&$engine, $user_id)
 
 	$engine->cached_stats[$user_id] = $stats;
 
-	#if ($stats['fingerprint']) $engine->cached_fingers[$stats['fingerprint']] = & $engine->cached_stats[user_id]['name'];
-
 	return $stats;
 }
 
@@ -400,7 +398,7 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 						$strings = $this->format($comment['body'], 'wacko');
 					}
 
-					$user_stats = handler_show_get_user_stats($this, $comment['user_id']);
+					# $user_stats = handler_show_get_user_stats($this, $comment['user_id']);
 
 					// print comment
 					// header
@@ -418,9 +416,9 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 								($comment['modified'] != $comment['created']
 									? "<li>".$this->get_time_string_formatted($comment['modified'])." ".$this->get_translation('CommentEdited')."</li>\n"
 									: '').
-								($user_stats == true
+								/*($user_stats == true
 									? "<li>".$this->get_translation('UsersComments').': '.$user_stats['comments'].'&nbsp;&nbsp; '.$this->get_translation('UsersPages').': '.$user_stats['pages'].'&nbsp;&nbsp; '.$this->get_translation('UsersRevisions').': '.$user_stats['revisions']."</li>\n"
-									: '').
+									: '').*/
 							"</ul>\n";
 					echo "</li>";
 				}
