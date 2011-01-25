@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit('No direct script access allowed');
+}
+
 class Cache
 {
 	var $cache_ttl	= 600;

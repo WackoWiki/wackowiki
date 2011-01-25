@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 $wacko_language = array(
 	"name" => "Dansk",
 	"code" => "da",
@@ -13,7 +18,7 @@ $wacko_language = array(
 	"NpjLettersTo"   => "aaaaaceeeeiiiioooouuuyAAAAACEEEEIIIIOOOOUUUY",
 	"NpjBiLetters" => array(
 		"ä"=>"ae", "ñ"=>"ny", "ö"=>"oe", "ø"=>"oe", "ü"=>"ue", "æ"=>"ae", "Ä"=>"Ae",
-		"Ñ"=>"Ny", "Ö"=>"Oe", "Ø"=>"Oe", "Ü"=>"Ue", "Æ"=>"Ae", "ÿ"=>"yu", "ß"=>"ss", 
+		"Ñ"=>"Ny", "Ö"=>"Oe", "Ø"=>"Oe", "Ü"=>"Ue", "Æ"=>"Ae", "ÿ"=>"yu", "ß"=>"ss",
 	),
 	"unicode_entities" => array(
 		"À"=>"&#192;", "Á"=>"&#193;", "Â"=>"&#194;", "Ã"=>"&#195;", "Ä"=>"&#196;", "Å"=>"&#197;", "Æ"=>"&#198;",

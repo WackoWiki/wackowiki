@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 /*
  Page Index Action
  {{pageindex

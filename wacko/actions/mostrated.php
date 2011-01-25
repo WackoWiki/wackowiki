@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!isset($top))		$top	= 5;
 if (!isset($bottom))	$bottom	= 5;
 
@@ -20,7 +25,7 @@ if (isset($top))
 		"GROUP BY p.tag ".
 		"ORDER BY ratio DESC, votes DESC ".
 		"LIMIT ".(int)$top);
-		
+
 	echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('RatingTopPages').":</span></p>\n";
 	if ($pages)
 	{
@@ -52,7 +57,7 @@ if (isset($bottom))
 		"GROUP BY p.tag ".
 		"ORDER BY ratio DESC, votes DESC ".
 		"LIMIT ".(int)$bottom);
-		
+
 	echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('RatingBottomPages').":</span></p>\n";
 	if ($pages)
 	{

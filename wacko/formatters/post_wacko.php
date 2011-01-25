@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 $this->use_class('post_wacko', 'formatters/classes/');
 
 $parser = new post_wacko($this, $options);

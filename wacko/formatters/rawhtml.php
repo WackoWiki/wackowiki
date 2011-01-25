@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 $this->use_class('rawhtmlformatter', 'formatters/classes/');
 
 $parser = new RawHtmlFormatter( $this );

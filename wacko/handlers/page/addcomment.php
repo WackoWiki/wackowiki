@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if ($this->has_access('comment') && $this->has_access('read'))
 {
 	// find number

@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 /*
 	Flash Action
 	Uses SWFObject 2: http://code.google.com/p/swfobject/

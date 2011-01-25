@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 $rh->use_class('post_safehtml', 'formatters/classes/');
 
 $parser = new post_safehtml($this, &$options);

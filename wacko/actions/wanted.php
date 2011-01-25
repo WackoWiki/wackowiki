@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!isset($root))
 	$root = $this->page['tag'];
 else

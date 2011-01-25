@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!isset($isimage)) $isimage = '';
 if (!isset($isplain)) $isplain = '';
 if (!isset($desc))$desc  = '';

@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // Action parameters:
 // moderation=["true","false"]	Run action in moderation context.
 //								Default: "false"

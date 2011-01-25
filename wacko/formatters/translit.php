@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // Translit
 $NpjLettersFrom = "абвгдезиклмнопрстуфцы";
 $NpjLettersTo   = "abvgdeziklmnoprstufcy";

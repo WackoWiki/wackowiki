@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!isset($max) || $max > 1000) $max = 1000;
 
 $pages = $this->load_recently_deleted($max);

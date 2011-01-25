@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 $wacko_translation = array(
 	// logged in panel
 	'YouAre' => 'Tu sei ',

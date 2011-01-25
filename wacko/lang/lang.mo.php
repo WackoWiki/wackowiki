@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 $wacko_language = array(
 	"name" => "Moldavian",
 	"code" => "mo",

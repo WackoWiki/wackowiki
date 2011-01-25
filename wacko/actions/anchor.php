@@ -1,4 +1,10 @@
 <?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // Param name
 if(isset($vars[0]))
 {

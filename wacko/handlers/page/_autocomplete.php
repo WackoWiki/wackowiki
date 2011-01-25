@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // Parse & decode QUERY_STRING.
 function _parse_query_string()
 {

@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // actions/feed.php - WackoWiki Action to integrate RSS/Atom Feeds
 // requires SimplePie: http://simplepie.org
 /* USAGE:

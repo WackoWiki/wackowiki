@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // TODO: Fix acl checks in sql WHERE clauses, just commented them out
 //
 

@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!isset($page))			$page = null;
 if (!isset($page)) 			return;
 if (!isset($nomark))		$nomark = '';

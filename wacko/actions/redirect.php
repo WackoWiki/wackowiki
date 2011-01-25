@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // {{Redirect to="!/NewPage" permanent="0 or 1"}}
 
 if (isset($vars['page']))

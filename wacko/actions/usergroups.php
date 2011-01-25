@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // You have to be logged in to use this action
 
 if (!isset($nomark)) $nomark = '';

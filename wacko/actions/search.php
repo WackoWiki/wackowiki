@@ -1,13 +1,19 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!function_exists('full_text_search'))
 {
 	function full_text_search(&$wacko, $phrase, $filter)
 	{
 		return $wacko->load_all(
-			"SELECT tag, body, comment_on_id ".
+			"SELECT title, tag, body, comment_on_id ".
 			"FROM ".$wacko->config['table_prefix']."page ".
 			"WHERE (( match(body) against('".quote($wacko->dblink, $phrase)."') ".
+				"OR lower(title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
 				"OR lower(tag) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
 				($filter
 					? "AND comment_on_id = '0'"
@@ -59,11 +65,14 @@ if (!function_exists('preview_text'))
 		// trim text
 		$text = trim($text);
 
-		// STRIP TAGS IF PREVIEW IS WITHOUT HTML
+		// strip tags if preview is without HTML
 		if ($tags == 0) $text = preg_replace('/\s\s+/', ' ', strip_tags($text));
 
-		// IF STRLEN IS SMALLER THAN LIMIT RETURN
-		if (strlen($text) < $limit) return $text;
+		// if strlen is smaller than limit return
+		if (strlen($text) < $limit)
+		{
+			return $text;
+		}
 
 		if ($tags == 0)
 		{
@@ -145,7 +154,7 @@ if (!isset($style)) $style = '';
 if (!isset($nomark)) $nomark = '';
 if (!isset($for)) $for = '';
 
-if (($topic == 1) || ($title == 1))
+if ($topic == 1)
 {
 	$mode = 'topic';
 }
@@ -193,7 +202,7 @@ if ($form)
 <input name="phrase" id="searchfor" size="40" value="<?php echo htmlspecialchars(isset($_GET['phrase'])? $_GET['phrase'] : ''); ?>" />
 <input type="submit" value="<?php echo $this->get_translation('SearchButtonText'); ?>" />
 <br />
-<input type="checkbox" name="topic" <?php if ($mode == 'topic') echo "CHECKED"; ?> id="checkboxSearch" />
+<input type="checkbox" name="topic" <?php if ($mode == 'topic') echo "checked"; ?> id="checkboxSearch" />
 <label for="checkboxSearch"><?php echo $this->get_translation('TopicSearchText'); ?></label>
 	<?php
 	echo $this->form_close();
@@ -227,9 +236,12 @@ if ($phrase)
 		// make and display results
 		if ($results)
 		{
-			if (!$nomark) echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".
-			$this->get_translation(($mode == 'topic' ? 'Topic' : '')."SearchResults").
-			" \"$phrase\":</span></p>";
+			if (!$nomark)
+			{
+				echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".
+					$this->get_translation(($mode == 'topic' ? 'Topic' : '')."SearchResults").
+					" \"$phrase\":</span></p>";
+			}
 			// open list
 			if ($style == 'ul') echo "<ul id=\"search_results\">\n";
 			if ($style == 'ol') echo "<ol id=\"search_results\">\n";
@@ -245,7 +257,7 @@ if ($phrase)
 						if ($style == 'ul' || $style == 'ol') echo "<li>";
 						if ($style == 'comma' && $i > 0) echo ",\n";
 
-						echo "<h3>".$this->link('/'.$page['tag'], '', $page['tag'])."</h3>";
+						echo "<h3>".$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']) )."</h3>";
 
 						if ($mode !== 'topic')
 						{

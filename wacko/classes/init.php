@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit('No direct script access allowed');
+}
+
 /*
 
 ########################################################
@@ -190,7 +195,7 @@ class Init
 				}
 				else if ( @file_exists('config/config.php') )
 				{
-					// If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R4.3
+					// If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R4.4
 					if (@filesize('config/config.php') > 0)
 					{
 						require('config/config.php');
@@ -699,7 +704,7 @@ class Init
 
 				$this->engine->debug_print_r($_SESSION);
 				#$this->engine->debug_print_r($this->config);
-
+				#$this->engine->debug_print_r($this->engine->page);
 
 				echo "</div >\n";
 			}

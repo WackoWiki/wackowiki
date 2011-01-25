@@ -1,4 +1,10 @@
 <?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 //     <a name="p1249-1"></a><p...>
 //     <a name="h1249-1"></a><hX..>
 

@@ -14,6 +14,8 @@
 ##                  Wacko engine init                 ##
 ########################################################
 
+define('IN_WACKO', true);
+
 // initialize engine api
 require('classes/init.php');
 $init = new init();
@@ -192,7 +194,7 @@ if (!isset($_SESSION['created']))
 else if (time() - $_SESSION['created'] > 1800)
 {
 	// session started more than 30 minates ago
-	$engine->restart_user_session();
+	$engine->restart_user_session(); // TODO: we need extra user session here, hence we need a session table
 	//session_regenerate_id(true);    // change session ID for the current session an invalidate old session ID
 	$_SESSION['created'] = time();  // update creation time
 }
@@ -220,7 +222,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 	<div id="pane">
 		<div class="left"></div>
 		<div class="middle">
-			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php"><img src="<?php echo rtrim($engine->config['base_url']); ?>files/wacko4.png" alt="WackoWiki" width="108" height="50"></img></a>
+			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php"><img src="<?php echo rtrim($engine->config['base_url']).$engine->config['upload_path'].'/'; ?>wacko4.png" alt="WackoWiki" width="108" height="50"></a>
 		</div>
 		<div id="tools">
 			<span style="font-family: 'Lucida Console', 'Courier New', monospace;">

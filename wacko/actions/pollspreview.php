@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // create polls object
 $this->use_class('polls');
 $polls_obj = new Polls($this);

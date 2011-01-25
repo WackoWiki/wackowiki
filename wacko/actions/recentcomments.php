@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!function_exists('load_recent_comments'))
 {
 	function load_recent_comments(&$wacko, $for = '', $limit = 50)

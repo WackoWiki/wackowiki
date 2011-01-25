@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!function_exists('LoadOrphanedPages'))
 {
 	function LoadOrphanedPages(&$engine, $for = '')

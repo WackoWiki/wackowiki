@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if ($this->get_user_name())
 {
 	echo "<ul>";

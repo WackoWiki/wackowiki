@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 $edit_note		= '';
 $minor_edit		= '';
 $reviewed		= '';

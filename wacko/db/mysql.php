@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 //Primitive DBAL for mysql
 
 function quote($dblink, $string)

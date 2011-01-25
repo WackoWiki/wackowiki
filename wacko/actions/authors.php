@@ -1,4 +1,10 @@
 <?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 /*
 print document and revisions' authors.
 	{{authors [add="(c) 2009 Ivan Ivanov[;(c) 2010 John Smith[;...]]"] [license="CC-BY-NC-SA"] [cluster=0]}}

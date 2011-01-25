@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!isset($max)) $max = '';
 
 if ($user_id = $this->get_user_id())

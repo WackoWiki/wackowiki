@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // settings:
 //	root		- where to start counting from (defaults to current tag)
 //	list		- make categories a clickable links which display pages of a given category (1 (default) or 0)

@@ -1,4 +1,10 @@
 <?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!isset($page)) $page = $this->page['tag'];
 $root = (isset($vars[$page]) ? $vars[$page] : '');
 

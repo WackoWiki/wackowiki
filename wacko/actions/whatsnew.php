@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!isset($max)) $max = '';
 if (!isset($noxml)) $noxml = '';
 if (!isset($printed)) $printed = '';

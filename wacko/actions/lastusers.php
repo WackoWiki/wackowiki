@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!isset($stat)) $stat = '';
 if (!isset($max)) $max = '';
 

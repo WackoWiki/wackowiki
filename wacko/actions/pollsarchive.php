@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // Action parameters:
 // nomark=[1,0]			Show legend and fieldset frame.
 //						Default: 0

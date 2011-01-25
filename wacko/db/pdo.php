@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 function quote($dblink, $string)
 {
 	// return $dblink->quote($string);

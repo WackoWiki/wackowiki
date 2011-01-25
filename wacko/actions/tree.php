@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // shows tree list
 // {{tree [page="tag"] [depth="3"] [nomark="0"] [legend=""]}}
 // use [page="/"] to get the entire root

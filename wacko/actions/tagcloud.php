@@ -1,4 +1,10 @@
 <?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!function_exists('print_tag_cloud'))
 {
 	function print_tag_cloud(&$wacko, $tags)

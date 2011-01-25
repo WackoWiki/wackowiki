@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // Action parameters:
 // id=[id]			Only show given survey voting form.
 //					Default: null
