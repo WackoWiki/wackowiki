@@ -24,17 +24,30 @@ function is__writable($path)
 	// see http://bugs.php.net/bug.php?id=30931
 
 	if($path{strlen($path) - 1} == '/') // recursively return a temporary file path
+	{
 		return is__writable($path.uniqid(mt_rand()).'.tmp');
+	}
 	else if (is_dir($path))
+	{
 		return is__writable($path.'/'.uniqid(mt_rand()).'.tmp');
+	}
+
 	// check tmp file for read/write capabilities
 	$rm = file_exists($path);
 	$f = @fopen($path, 'a');
+
 	if ($f === false)
+	{
 		return false;
+	}
+
 	fclose($f);
+
 	if(!$rm)
+	{
 		unlink($path);
+	}
+
 	return true;
 }
 
@@ -58,7 +71,11 @@ if ( isset ( $_POST['config'] ) )
 	$config = $_POST['config'];
 }
 
-if (!isset($config['language']) || !@file_exists('setup/lang/installer.'.$config['language'].'.php')) $config['language'] = 'en';
+if (!isset($config['language']) || !@file_exists('setup/lang/installer.'.$config['language'].'.php'))
+{
+	$config['language'] = 'en';
+}
+
 require_once('setup/lang/installer.'.$config['language'].'.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
