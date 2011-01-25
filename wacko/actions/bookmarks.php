@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!function_exists('bookmark_sorting'))
 {
 	function bookmark_sorting ($a, $b)

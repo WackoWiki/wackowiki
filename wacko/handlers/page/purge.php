@@ -1,3 +1,11 @@
+<?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
+?>
 <div id="page">
 <h3><?php echo $this->get_translation('PurgePage') ?> <?php echo $this->compose_link_to_page($this->tag, '', '', 0) ?></h3>
 <?php

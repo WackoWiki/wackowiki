@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 $this->use_class('wackoformatter', 'formatters/classes/');
 
 $text	= str_replace("\r", '', $text);

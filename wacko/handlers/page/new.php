@@ -1,3 +1,11 @@
+<?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
+?>
 <div id="page" class="page">
 <h3><?php echo $this->get_translation('CreateNewPage') ?></h3>
 <br />

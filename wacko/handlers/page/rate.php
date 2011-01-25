@@ -1,12 +1,17 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // registering local functions
 // determine if user has rated a given page
 function handler_rate_page_is_rated(&$engine, $id)
 {
 	$cookie	= $engine->get_cookie('rating');
 	$ids	= explode(';', $cookie);
-	
+
 	if (in_array($id, $ids) === true || $id == $cookie)
 		return true;
 	else return false;
@@ -30,10 +35,10 @@ if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 
 	{
 		$id		= $this->page['page_id'];
 		$value	= round((int)$_POST['value']);
-		
+
 		if ($value >  3) $value =  3;
 		if ($value < -3) $value = -3;
-	
+
 		// determine if user has rated this page
 		if (handler_rate_page_is_rated($this, $id) === false)
 		{
@@ -61,10 +66,10 @@ if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 
 					"voters	= 1");
 					// time is set automatically
 			}
-		
+
 			// set cookie
 			handler_rate_set_rate_cookie($this, $id);
-		
+
 			// rated successfully
 			$this->set_message($this->get_translation('RatingSuccess'));
 			$this->redirect($this->href('', '', 'show_rating=1').'#rating');

@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // actions/mypages.php
 if (!isset($bydate)) $bydate = '';
 if (!isset($max)) $max = '';

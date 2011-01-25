@@ -1,3 +1,11 @@
+<?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
+?>
 <div id="page">
 
 <h3><?php echo str_replace('%1', $this->link('/'.$this->tag), $this->get_translation('PropertiesFor')); ?></h3>

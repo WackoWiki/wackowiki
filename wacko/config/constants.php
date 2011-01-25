@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 define('BACKUP_COMPRESSION_RATE',		9);					// gzip compression rate
 define('BACKUP_MEMORY_STEP',			1048576);			// max bytes to process per cycle (make sure it's at least 10 times less than PHP memory limit!)
 define('BACKUP_FILE_LOG',				'backup.log');		// backup log filename

@@ -1,6 +1,11 @@
 <?php
 
-//you can click comments inside from bookmarks or wikipages
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
+// enables you to click comments inside from wikipages
 //{{comments [page="CommentThisPage"] [text="your text"]}}
 
 if (!isset($for)) $for = '';

@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!isset($useemptystring)) $useemptystring = '';
 
 $vars[0] = $this->unwrap_link($vars[0]);

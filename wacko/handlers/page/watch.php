@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if ($this->get_user() && $this->page)
 {
 	$page_id = $this->page['page_id'];

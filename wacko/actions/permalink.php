@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // {{permalink}}
 
 if (isset($_GET['revision_id']))

@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!isset($root)) $root = $this->unwrap_link(isset($vars['for']) ? $vars['for'] : '');
 if (!isset($root)) $root = $this->page['tag'];
 if (!isset($date)) $date = isset($_GET['date']) ? $_GET['date'] : '';

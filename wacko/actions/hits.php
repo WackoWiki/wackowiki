@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // {{hits}}
 // take $this->page['hits'] in the first place
 

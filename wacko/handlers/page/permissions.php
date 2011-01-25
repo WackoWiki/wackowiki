@@ -1,3 +1,11 @@
+<?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
+?>
 <div id="page"><?php
 
 // redirect to show method if page don't exists

@@ -1,4 +1,10 @@
 <?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 header("Content-type: text/xml");
 
 $xml = "<?xml version=\"1.0\" encoding=\"".$this->get_charset()."\"?>\n";

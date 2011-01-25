@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // {{MyChanges [max="Number"] [bydate="1"]}}
 
 if (!isset($bydate)) $bydate = '';

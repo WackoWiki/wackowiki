@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // status: alpha
 //
 // for testing and improvement - thought for upgrade routine of the installer

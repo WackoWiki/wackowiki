@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // actions/mygroups.php
 
 if (!isset($nomark)) $nomark = '';

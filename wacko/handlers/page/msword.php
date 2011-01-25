@@ -1,3 +1,11 @@
+<?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
+?>
 <div id="page">
 <?php
 

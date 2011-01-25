@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // Categories tags tagging annotation
 // TODO:
 //	- multilevel hierarchical categories (first we need to

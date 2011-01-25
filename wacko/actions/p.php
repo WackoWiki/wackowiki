@@ -1,4 +1,10 @@
 <?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 /*
 	{{P style="BEFORE|after|left|right"				// table-type "left/right" don't implemented yet
 	// styles can be found in /classes/wacko.php

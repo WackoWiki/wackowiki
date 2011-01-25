@@ -1,4 +1,10 @@
 <?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 /*
 	{{toc page|for="!/SubTag" from="h2" to="h4" numerate="0|1|..." legend="alternate legend" nomark="0|1" }}
 */

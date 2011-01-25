@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 // shows subforums list
 // {{forums [pages="subtag1, subtag2, ..."]}}
 //		pages	= to create multilevel forums this optional parameter passes

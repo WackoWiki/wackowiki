@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if (!function_exists('links_tree_view'))
 {
 	function links_tree_view(&$wacko, $node, $level, $indent = 0)

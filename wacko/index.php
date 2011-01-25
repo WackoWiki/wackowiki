@@ -1,5 +1,7 @@
 <?php
 
+define('IN_WACKO', true);
+
 // initialize engine api
 require('classes/init.php');
 $init = new init();

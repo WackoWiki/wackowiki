@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit('No direct script access allowed');
+}
+
 ########################################################
 ##   Common database backup variables and functions   ##
 ########################################################

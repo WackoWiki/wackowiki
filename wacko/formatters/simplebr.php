@@ -1,4 +1,10 @@
 <?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 //!!! much room for optimization :-)
 
 $text = preg_replace ('/ {2, }/', ' ', $text);

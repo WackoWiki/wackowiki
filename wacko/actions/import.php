@@ -1,4 +1,10 @@
 <?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 /*
 	{{import}}
 	http://wackowiki.org/somecluster/import --> {{import}}, to = "Test".
