@@ -6,7 +6,7 @@ $config_global = $config;
 $dblink_global = $dblink;
 $lang_global = $lang;
 
-function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $critical = false, $is_bookmark = false, $bm_title = false)
+function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $critical = false, $is_menu = false, $menu_title = false)
 {
 	global $config_global, $dblink_global, $lang_global;
 
@@ -25,8 +25,8 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 	$perm_create_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'create', '$')";
 	$perm_upload_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'upload', '')";
 
-	$default_bookmark		= "INSERT INTO ".$config_global['table_prefix']."bookmark (user_id, page_id, lang, bm_title) VALUES ((".$owner_id."), (".$page_id."), '".$lng."', '".$bm_title."')";
-	#$site_bookmark			= "INSERT INTO ".$config_global['table_prefix']."bookmark (user_id, page_id, lang, bm_title) VALUES ((".$owner_id."), (".$page_id."), '".$lng."', '".$bm_title."')";
+	$default_bookmark		= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lng."', '".$menu_title."')";
+	#$site_bookmark			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lng."', '".$menu_title."')";
 
 	switch($config_global['database_driver'])
 	{

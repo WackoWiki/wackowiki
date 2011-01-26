@@ -96,7 +96,7 @@ if (!function_exists('decompose_options'))
 
 if (!function_exists('convert_into_bookmark_table'))
 {
-	function convert_into_bookmark_table($bookmarks, $user_id)
+	function convert_into_menu_table($bookmarks, $user_id)
 	{
 		// bookmarks
 		$_bookmarks	= explode("\n", $bookmarks);
@@ -146,12 +146,12 @@ if (!function_exists('convert_into_bookmark_table'))
 				if (isset($page_id))
 				{
 					$this->query(
-						"INSERT INTO ".$this->config['table_prefix']."bookmark SET ".
+						"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 						"user_id			= '".quote($this->dblink, $user_id)."', ".
 						"page_id			= '".quote($this->dblink, $page_id)."', ".
 						"lang				= '".quote($this->dblink, $bm_lang)."', ".
-						"bm_title			= '".quote($this->dblink, $title)."', ".
-						"bm_position		= '".quote($this->dblink, ($key + 1))."' ");
+						"menu_title			= '".quote($this->dblink, $title)."', ".
+						"menu_position		= '".quote($this->dblink, ($key + 1))."' ");
 				}
 
 				$bm_lang = '';
@@ -192,7 +192,7 @@ if ($this->is_admin())
 			$this->query($sql);
 
 			// Bookmarks
-			convert_into_bookmark_table($_user['bookmarks'], $_user['user_id']);
+			convert_into_menu_table($_user['bookmarks'], $_user['user_id']);
 		}
 
 		echo "<br />".$count." user settings inserted.";

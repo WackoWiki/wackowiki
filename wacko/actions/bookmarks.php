@@ -9,11 +9,11 @@ if (!function_exists('bookmark_sorting'))
 {
 	function bookmark_sorting ($a, $b)
 	{
-		if ($a['bm_position'] == $b['bm_position'])
+		if ($a['menu_position'] == $b['menu_position'])
 		{
 			return 0;
 		}
-		return ($a['bm_position'] < $b['bm_position'])
+		return ($a['menu_position'] < $b['menu_position'])
 			? -1
 			: 1;
 	}
@@ -24,11 +24,11 @@ if (!function_exists('load_user_bookmarks'))
 	function load_user_bookmarks(&$wacko, $user_id)
 	{
 		$_bookmarks = $wacko->load_all(
-							"SELECT p.tag, p.title, b.bookmark_id, b.user_id, b.bm_title, b.lang, b.bm_position ".
-							"FROM ".$wacko->config['table_prefix']."bookmark b ".
+							"SELECT p.tag, p.title, b.menu_id, b.user_id, b.menu_title, b.lang, b.menu_position ".
+							"FROM ".$wacko->config['table_prefix']."menu b ".
 								"LEFT JOIN ".$wacko->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
 							"WHERE b.user_id = '".quote($wacko->dblink, $user_id)."' ".
-							"ORDER BY b.bm_position", 0);
+							"ORDER BY b.menu_position", 0);
 
 		return $_bookmarks;
 	}
@@ -47,9 +47,9 @@ if (isset($_POST['_user_bookmarks']))
 	foreach($a as $k => $v)
 	{
 		$b[$k]['user_id']		= $v['user_id'];
-		$b[$k]['bookmark_id']	= $v['bookmark_id'];
-		$b[$k]['bm_position']	= $v['bm_position'];
-		$b[$k]['bm_title']		= $v['bm_title'];
+		$b[$k]['menu_id']		= $v['menu_id'];
+		$b[$k]['menu_position']	= $v['menu_position'];
+		$b[$k]['menu_title']	= $v['menu_title'];
 		$b[$k]['tag']			= $v['tag'];
 	}
 
@@ -62,24 +62,24 @@ if (isset($_POST['_user_bookmarks']))
 
 		foreach( $object->data['user_menu'] as $k => $item )
 		{
-			$data[] = array( "bookmark_id" => $item['bookmark_id'], "bm_position"=> 1 * $_POST['pos_'.$item['bookmark_id']] );
+			$data[] = array( "menu_id" => $item['menu_id'], "menu_position"=> 1 * $_POST['pos_'.$item['menu_id']] );
 		}
 
 		usort ($data, "bookmark_sorting");
 
 		foreach( $data as $k => $item )
 		{
-			$data[$k]['bm_position'] = $k + 1;
+			$data[$k]['menu_position'] = $k + 1;
 		}
 
 		// save
 		foreach( $data as $item )
 		{
 			$this->query(
-				"UPDATE ".$this->config['table_prefix']."bookmark SET ".
-					"bm_position	= '".quote($this->dblink, $item['bm_position'])."', ".
-					"bm_title		= '".quote($this->dblink, substr(trim($_POST['title_'.$item['bookmark_id']]),0,250))."' ".
-				"WHERE bookmark_id = '".quote($this->dblink, $item['bookmark_id'])."' ".
+				"UPDATE ".$this->config['table_prefix']."menu SET ".
+					"menu_position	= '".quote($this->dblink, $item['menu_position'])."', ".
+					"menu_title		= '".quote($this->dblink, substr(trim($_POST['title_'.$item['menu_id']]),0,250))."' ".
+				"WHERE menu_id = '".quote($this->dblink, $item['menu_id'])."' ".
 				"LIMIT 1");
 		}
 	}
@@ -106,19 +106,19 @@ if (isset($_POST['_user_bookmarks']))
 					{
 						$bookmarks[] = $bookmark;
 
-						$_bm_position = $this->load_all(
-							"SELECT b.bookmark_id ".
-							"FROM ".$this->config['table_prefix']."bookmark b ".
+						$_menu_position = $this->load_all(
+							"SELECT b.menu_id ".
+							"FROM ".$this->config['table_prefix']."menu b ".
 							"WHERE b.user_id = '".quote($this->dblink, $user['user_id'])."' ", 0);
 
-						$_bm_count = count($_bm_position);
+						$_bm_count = count($_menu_position);
 
 						$this->query(
-							"INSERT INTO ".$this->config['table_prefix']."bookmark SET ".
+							"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 							"user_id			= '".quote($this->dblink, $user['user_id'])."', ".
 							"page_id			= '".quote($this->dblink, $_page_id)."', ".
 							"lang				= '".quote($this->dblink, ($user['lang'] != $page['lang'] ? $page['lang'] : ""))."', ".
-							"bm_position		= '".quote($this->dblink, ($_bm_count + 1))."'");
+							"menu_position		= '".quote($this->dblink, ($_bm_count + 1))."'");
 					}
 
 					// parsing bookmarks into link table
@@ -168,8 +168,8 @@ if (isset($_POST['_user_bookmarks']))
 			if ($deletion != '')
 			{
 				$this->query(
-					"DELETE FROM ".$this->config['table_prefix']."bookmark ".
-					"WHERE bookmark_id IN (".$deletion.")");
+					"DELETE FROM ".$this->config['table_prefix']."menu ".
+					"WHERE menu_id IN (".$deletion.")");
 			}
 		}
 	}
@@ -198,17 +198,17 @@ if ($user)
 		{
 			echo "<tr class=\"lined\">\n
 			<td class=\"\">
-			<input name=\"pos_".$_bookmark['bookmark_id']."\" type=\"text\" size=\"2\" value=\"".$_bookmark['bm_position']."\" />
+			<input name=\"pos_".$_bookmark['menu_id']."\" type=\"text\" size=\"2\" value=\"".$_bookmark['menu_position']."\" />
 			</td><td>
-			<input name=\"title_".$_bookmark['bookmark_id']."\" type=\"text\" size=\"40\" value=\"".$_bookmark['bm_title']."\" />
+			<input name=\"title_".$_bookmark['menu_id']."\" type=\"text\" size=\"40\" value=\"".$_bookmark['menu_title']."\" />
 			</td><td>
-			<!--<input type=\"radio\" id=\"bookmark".$_bookmark['bookmark_id']."\" name=\"change\" value=\"".$_bookmark['bookmark_id']."\" /> -->
-			<label for=\"bookmark".$_bookmark['bookmark_id']."\" title=\"".$_bookmark['title']."\">&raquo; ".$_bookmark['tag']."</label>
+			<!--<input type=\"radio\" id=\"bookmark".$_bookmark['menu_id']."\" name=\"change\" value=\"".$_bookmark['menu_id']."\" /> -->
+			<label for=\"bookmark".$_bookmark['menu_id']."\" title=\"".$_bookmark['title']."\">&raquo; ".$_bookmark['tag']."</label>
 			</td><td>
-			<input id=\"bookmark".$_bookmark['bookmark_id']."\" name=\"delete_".$_bookmark['bookmark_id']."\" type=\"checkbox\" />
+			<input id=\"bookmark".$_bookmark['menu_id']."\" name=\"delete_".$_bookmark['menu_id']."\" type=\"checkbox\" />
 			</td><!--<td>
 
-			".(!empty($_bookmark['bm_title']) ? $_bookmark['bm_title'] : $_bookmark['title'])."
+			".(!empty($_bookmark['menu_title']) ? $_bookmark['menu_title'] : $_bookmark['title'])."
 			</td><td>
 			".(!empty($_bookmark['lang']) ? $_bookmark['lang'] : "")."-->
 			</td>\n</tr>\n";

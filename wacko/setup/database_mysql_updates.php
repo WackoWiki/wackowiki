@@ -22,15 +22,15 @@ $alter_acl_r4_3_6 = "ALTER TABLE {$pref}acl DROP supertag";
 
 $update_acl_r4_3 = "UPDATE {$pref}acl AS acl, (SELECT id, tag FROM {$pref}pages) AS pages SET acl.page_id = pages.id WHERE acl.page_tag = pages.tag";
 
-// BOOKMARK
-$table_bookmark_r4_3 = "CREATE TABLE {$pref}bookmark (".
-					"bookmark_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+// MENU
+$table_menu_r4_3 = "CREATE TABLE {$pref}menu (".
+					"menu_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL,".
 					"page_id INT(10) UNSIGNED NOT NULL,".
 					"lang VARCHAR(2) NOT NULL,".
-					"bm_title VARCHAR(100) NOT NULL,".
-					"bm_position SMALLINT(2) UNSIGNED NOT NULL,".
-					"PRIMARY KEY (bookmark_id),".
+					"menu_title VARCHAR(100) NOT NULL,".
+					"menu_position SMALLINT(2) UNSIGNED NOT NULL,".
+					"PRIMARY KEY (menu_id),".
 					"UNIQUE KEY idx_user_id (user_id,page_id)".
 				") {$engine} {$charset};";
 

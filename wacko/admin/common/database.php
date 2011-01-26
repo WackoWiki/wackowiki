@@ -20,10 +20,10 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'page_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'bookmark' => array(
-				'name'	=> $engine->config['table_prefix'].'bookmark',
+			$engine->config['table_prefix'].'menu' => array(
+				'name'	=> $engine->config['table_prefix'].'menu',
 				'where'	=> false,
-				'order'	=> 'bookmark_id',
+				'order'	=> 'menu_id',
 				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'cache' => array(
