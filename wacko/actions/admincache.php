@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 if ($this->is_admin())
 {
 	if (!isset($_POST['clear']))

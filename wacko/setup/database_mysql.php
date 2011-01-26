@@ -17,14 +17,14 @@ $table_acl = "CREATE TABLE {$pref}acl (".
 					"UNIQUE KEY idx_page_id (page_id,privilege)".
 				") {$engine} {$charset}";
 
-$table_bookmark = "CREATE TABLE {$pref}bookmark (".
-					"bookmark_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+$table_menu = "CREATE TABLE {$pref}menu (".
+					"menu_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL,".
 					"page_id INT(10) UNSIGNED NOT NULL,".
 					"lang VARCHAR(2) NOT NULL,".
-					"bm_title VARCHAR(100) NOT NULL,".
-					"bm_position SMALLINT(2) UNSIGNED NOT NULL,".
-					"PRIMARY KEY (bookmark_id),".
+					"menu_title VARCHAR(100) NOT NULL,".
+					"menu_position SMALLINT(2) UNSIGNED NOT NULL,".
+					"PRIMARY KEY (menu_id),".
 					"UNIQUE KEY idx_user_id (user_id,page_id)".
 				") {$engine} {$charset};";
 
@@ -324,7 +324,7 @@ $table_watch = "CREATE TABLE {$pref}watch (".
 */
 
 $table_acl_drop				= "DROP TABLE {$pref}acl";
-$table_bookmark_drop		= "DROP TABLE {$pref}bookmark";
+$table_menu_drop		= "DROP TABLE {$pref}menu";
 $table_cache_drop			= "DROP TABLE {$pref}cache";
 $table_config_drop			= "DROP TABLE {$pref}config";
 $table_group_drop			= "DROP TABLE {$pref}group";

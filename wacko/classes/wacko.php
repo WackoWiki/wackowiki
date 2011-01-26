@@ -4513,22 +4513,22 @@ class Wacko
 		if ($user_id)
 		{
 			$_bookmarks = $this->load_all(
-					"SELECT p.tag, p.title, b.bm_title, b.lang ".
-					"FROM ".$this->config['table_prefix']."bookmark b ".
+					"SELECT p.tag, p.title, b.menu_title, b.lang ".
+					"FROM ".$this->config['table_prefix']."menu b ".
 						"LEFT JOIN ".$this->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
 					"WHERE b.user_id = '".quote($this->dblink, $user_id)."' ".
 						($lang
 							? "AND b.lang = '".quote($this->dblink, $lang)."' "
 							: "").
-					"ORDER BY b.bm_position", 1);
+					"ORDER BY b.menu_position", 1);
 
 			if ($_bookmarks)
 			{
 				foreach($_bookmarks as $_bookmark)
 				{
 					$user_bm .= "((".$_bookmark['tag'].
-						(!empty($_bookmark['bm_title'])
-							? " ".$_bookmark['bm_title']
+						(!empty($_bookmark['menu_title'])
+							? " ".$_bookmark['menu_title']
 							: (!empty($_bookmark['title'])
 								? " ".$_bookmark['title']
 								: " ".$_bookmark['tag']
@@ -4581,18 +4581,19 @@ class Wacko
 			{
 				$bookmarks[] = $bookmark;
 
-				$_bm_position = $this->load_all(
-					"SELECT b.bookmark_id ".
-					"FROM ".$this->config['table_prefix']."bookmark b ".
+				$_menu_position = $this->load_all(
+					"SELECT b.menu_id ".
+					"FROM ".$this->config['table_prefix']."menu b ".
 					"WHERE b.user_id = '".quote($this->dblink, $user['user_id'])."' ", 0);
-				$_bm_count = count($_bm_position);
+
+				$_bm_count = count($_menu_position);
 
 				$this->query(
-					"INSERT INTO ".$this->config['table_prefix']."bookmark SET ".
+					"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 					"user_id			= '".quote($this->dblink, $user['user_id'])."', ".
 					"page_id			= '".quote($this->dblink, $this->page['page_id'])."', ".
 					"lang				= '".quote($this->dblink, ($user['lang'] != $this->page_lang ? $this->page_lang : ""))."', ".
-					"bm_position		= '".quote($this->dblink, ($_bm_count + 1))."'");
+					"menu_position		= '".quote($this->dblink, ($_bm_count + 1))."'");
 			}
 
 			// parsing bookmarks into link table
@@ -4625,7 +4626,7 @@ class Wacko
 			$bookmarks = $newbookmarks;
 
 			$this->query(
-				"DELETE FROM ".$this->config['table_prefix']."bookmark ".
+				"DELETE FROM ".$this->config['table_prefix']."menu ".
 				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"AND page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
 				"LIMIT 1");
@@ -5521,7 +5522,7 @@ class Wacko
 
 		return $this->query(
 			"DELETE b.* ".
-			"FROM ".$this->config['table_prefix']."bookmark b ".
+			"FROM ".$this->config['table_prefix']."menu b ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ".
 					"ON (b.page_id = p.page_id) ".
 			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
