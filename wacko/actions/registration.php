@@ -204,18 +204,23 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 				// INSERT USER Bookmarks
 				#$this->convert_into_bookmark_table($this->get_default_bookmarks($lang), $_user_id['user_id']);
 
-				$subject = 	$this->get_translation('EmailWelcome').
-							$this->config['wacko_name'];
-				$body = 	$this->get_translation('EmailHello'). $user_name.",\n\n".
-							str_replace('%1', $this->config['wacko_name'],
-							str_replace('%2', $user_name,
-							str_replace('%3', $this->href().
-							($this->config['rewrite_mode'] ? "?" : "&amp;")."confirm=".$confirm,
-							$this->get_translation('EmailRegistered'))))."\n\n".
-							$this->get_translation('EmailGoodbye')."\n".
-							$this->config['wacko_name']."\n".
-							$this->config['base_url'];
-				$this->send_mail($email, $subject, $body);
+				// Send Email
+				if ($this->config['enable_email'] == true)
+				{
+					$subject = 	$this->get_translation('EmailWelcome').
+								$this->config['wacko_name'];
+					$body = 	$this->get_translation('EmailHello'). $user_name.",\n\n".
+								str_replace('%1', $this->config['wacko_name'],
+								str_replace('%2', $user_name,
+								str_replace('%3', $this->href().
+								($this->config['rewrite_mode'] ? "?" : "&amp;")."confirm=".$confirm,
+								$this->get_translation('EmailRegistered'))))."\n\n".
+								$this->get_translation('EmailGoodbye')."\n".
+								$this->config['wacko_name']."\n".
+								$this->config['base_url'];
+
+					$this->send_mail($email, $subject, $body);
+				}
 
 				// log event
 				$this->log(4, str_replace('%2', $email, str_replace('%1', $user_name, $this->get_translation('LogUserRegistered', $this->config['language']))));

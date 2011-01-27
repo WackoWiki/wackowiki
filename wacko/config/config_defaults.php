@@ -46,10 +46,14 @@ $wacko_config = array(
 	'smtp_connection_mode' => '',
 	'email_priority' => 3,
 
+	'email_from' => 'WackoWiki',
+	'enable_email' => 1,
 	'enable_email_notification' => 1,
+
 	'limit_email_domain' => '',
 	'check_mx_record' => 0,
 	'validate_email' => 1,
+	'notify_new_user_created' => 1,
 
 	'language' => 'en',
 	'multilanguage' => 0,

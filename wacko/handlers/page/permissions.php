@@ -68,7 +68,7 @@ if ($this->user_is_owner() || $this->is_admin())
 					$newowner_id	= $user['user_id'];
 					$this->set_page_owner($this->page['page_id'], $newowner_id);
 
-					if ($user['email_confirm'] == '')
+					if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')
 					{
 						$subject = $this->config['wacko_name'].'. '.$this->get_translation('NewPageOwnership');
 						$body  = $this->get_translation('EmailHello').$newowner.".\n\n";
@@ -168,7 +168,7 @@ if ($this->user_is_owner() || $this->is_admin())
 					"WHERE user_name = '".quote($newowner)."' ".
 					"LIMIT 1");
 
-				if ($user['email_confirm'] == '')
+				if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')
 				{
 					$subject = $this->config['wacko_name'].'. '.$this->get_translation('NewPageOwnership');
 					$body  = $this->get_translation('EmailHello').$newowner.".\n\n";

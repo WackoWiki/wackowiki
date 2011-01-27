@@ -32,6 +32,7 @@ function admin_configemail(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
+		$config['email_from']					= (string)$_POST['email_from'];
 		$config['admin_email']					= (string)$_POST['admin_email'];
 		$config['abuse_email']					= (string)$_POST['abuse_email'];
 		$config['smtp_connection_mode']			= (string)$_POST['smtp_connection_mode'];
@@ -39,7 +40,8 @@ function admin_configemail(&$engine, &$module)
 		$config['smtp_password']				= (string)$_POST['smtp_password'];
 		$config['smtp_port']					= (int)$_POST['smtp_port'];
 		$config['smtp_username']				= (string)$_POST['smtp_username'];
-
+		$config['enable_email']					= (int)$_POST['enable_email'];
+		$config['enable_email_notification']	= (int)$_POST['enable_email_notification'];
 		$config['phpmailer']					= (int)$_POST['phpmailer'];
 		$config['phpmailer_method']				= (string)$_POST['phpmailer_method'];
 
@@ -58,6 +60,30 @@ function admin_configemail(&$engine, &$module)
 		<table cellspacing="3" class="formation">
 			<tr>
 				<th colspan="2">Basic parameters</th>
+			</tr>
+			<tr>
+				<td class="label"><label for="enable_email"><strong>Email:</strong><br />
+				<small>Enabling email</small></label></td>
+				<td style="width:40%;">
+					<input type="radio" id="enable_email_on" name="enable_email" value="1"<?php echo ( $engine->config['enable_email'] == 1 ? ' checked="checked"' : '' );?> /><label for="enable_email_on">Enabled.</label>
+					<input type="radio" id="enable_email_off" name="enable_email" value="0"<?php echo ( $engine->config['enable_email'] == 0 ? ' checked="checked"' : '' );?> /><label for="enable_email_off">Disabled.</label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="enable_email_notification"><strong>Email Notification:</strong><br />
+				<small>Allow email notification. Set to ON to enable email notifications, OFF to disable them. Note that
+	 					disabling email notifications has no effect on emails generated as part
+	 					of the user signup process.</small></label></td>
+				<td style="width:40%;">
+					<input type="radio" id="enable_email_notification_on" name="enable_email_notification" value="1"<?php echo ( $engine->config['enable_email_notification'] == 1 ? ' checked="checked"' : '' );?> /><label for="enable_email_notification_on">Enabled.</label>
+					<input type="radio" id="enable_email_notification_off" name="enable_email_notification" value="0"<?php echo ( $engine->config['enable_email_notification'] == 0 ? ' checked="checked"' : '' );?> /><label for="enable_email_notification_off">Disabled.</label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
 			</tr>
 			<tr>
 				<td class="label"><label for="phpmailer"><strong>Phpmailer:</strong><br />
@@ -80,6 +106,14 @@ function admin_configemail(&$engine, &$module)
 						<option value="smtp"<?php echo ( (string)$engine->config['phpmailer_method'] === 'smpt' ? ' selected="selected"' : '' );?>>SMTP</option>
 					</select>
 				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="email_from"><strong>Sender name of the site owner:</strong><br />
+				<small>The sender name, part of <tt>"From:"</tt> header in emails for all the email-notification site.</small></label></td>
+				<td><input maxlength="100" style="width:200px;" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->config['email_from']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

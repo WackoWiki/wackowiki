@@ -1449,7 +1449,7 @@ class Wacko
 	// $supress_tls			- don't change all http links to https links in the message body
 	function send_mail($email_to, $subject, $body, $email_from = '', $charset = '', $xtra_headers = '', $supress_tls = false)
 	{
-		if (!$email_to || !$subject || !$body)
+		if ($this->config['enable_email'] == false || ( !$email_to || !$subject || !$body) )
 		{
 			return;
 		}
@@ -1457,7 +1457,7 @@ class Wacko
 		if (empty($charset)) $charset = $this->get_charset();
 		$name_to		= '';
 		$email_from		= $this->config['admin_email'];
-		$name_from		= $this->config['wacko_name'];
+		$name_from		= $this->config['email_from'];
 
 		// in tls mode substitute protocol name in links substrings
 		if ($this->config['tls'] == true && $supress_tls === false)
@@ -1785,7 +1785,7 @@ class Wacko
 									"WHERE u.user_id = '".quote($this->dblink, $moderator_id)."' ".
 									"LIMIT 1");
 
-								if ($_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
+								if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
 								{
 									$subject = $this->config['wacko_name'].'. '.$this->get_translation('NewPageCreatedSubj')." '$title'";
 									$body = $this->get_translation('EmailHello'). $this->get_translation('EmailModerator').$moderator.".\n\n".
@@ -1854,7 +1854,7 @@ class Wacko
 										"WHERE u.user_id = '".quote($this->dblink, $watcher['user_id'])."' ".
 										"LIMIT 1");
 
-									if ($_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
+									if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
 									{
 										$lang = $_user['lang'];
 										$this->load_translation($lang);
@@ -1971,7 +1971,7 @@ class Wacko
 										"WHERE u.user_id = '".quote($this->dblink, $watcher['user_id'])."' ".
 										"LIMIT 1");
 
-									if ($_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
+									if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
 									{
 										$lang = $_user['lang'];
 										$this->load_translation($lang);

@@ -38,7 +38,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 		}
 
 		// prepare and send personal message
-		if (isset($_POST['send_pm']) && $_POST['mail_body'] == true && $this->get_user() &&
+		if ($this->config['enable_email'] == true && isset($_POST['send_pm']) && $_POST['mail_body'] == true && $this->get_user() &&
 		$user['allow_intercom'] == 1 && $user['email'] && !$user['email_confirm'])
 		{
 			// check for errors
@@ -156,7 +156,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 		<table cellspacing="3" class="formation">
 <?php
 			// user must allow incoming messages, and needs confirmed email address set
-			if ($user['allow_intercom'] == 1 && $user['email'] && !$user['email_confirm'])
+			if ($this->config['enable_email'] == true && $user['allow_intercom'] == 1 && $user['email'] && !$user['email_confirm'])
 			{
 ?>
 			<tr>
@@ -365,7 +365,7 @@ else
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo '<tr><td colspan="5"><small>'.$pagination['text'].'</small></td></tr>'."\n";
+		echo '<tr><td colspan="6"><span class="pagination">'.$pagination['text'].'</span></td></tr>'."\n";
 	}
 
 	// list header
@@ -409,7 +409,7 @@ else
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo "<tr><td colspan=\"5\"><span class=\"pagination\">".$pagination['text']."</span></td></tr>"."\n";
+		echo '<tr><td colspan="6"><span class="pagination">'.$pagination['text'].'</span></td></tr>'."\n";
 	}
 
 	echo "</table>\n";
