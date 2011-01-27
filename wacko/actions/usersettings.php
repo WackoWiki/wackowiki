@@ -136,7 +136,7 @@ else if ($user = $this->get_user())
 	}
 
 	// (re)send email confirmation code
-	if ((isset($_GET['resend_code']) && $_GET['resend_code'] == 1) || $email_changed === true)
+	if ($this->config['enable_email'] == true && ( (isset($_GET['resend_code']) && $_GET['resend_code'] == 1) || $email_changed === true) )
 	{
 		if ($email = ( $_GET['resend_code'] == 1 ? $user['email'] : $_POST['email'] ))
 		{
@@ -249,6 +249,11 @@ else if ($user = $this->get_user())
 			<label for="dont_redirect"><?php echo $this->get_translation('DontRedirect');?></label>
 		</td>
 	</tr>
+	<?php
+
+	if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true)
+	{
+	?>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right">
@@ -264,6 +269,9 @@ else if ($user = $this->get_user())
 			<label for="allow_intercom"><?php echo $this->get_translation('AllowIntercom');?></label>
 		</td>
 	</tr>
+	<?php
+	}
+	?>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right">

@@ -307,7 +307,7 @@ else
 
 		if ($user)
 		{
-			if ($user['email_confirm'] == '')
+			if ($this->config['enable_email'] == true && $user['email_confirm'] == '')
 			{
 				$code = hash('sha256', $user['password'].date("D d M Y H:i:s").$user['email'].mt_rand());
 
