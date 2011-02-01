@@ -10,7 +10,7 @@ $table_pagewatches_r0 = "CREATE TABLE ".$config2["table_prefix"]."pagewatches ("
                         "user varchar(80) NOT NULL default '', ".
                         "tag varchar(50) binary NOT NULL default '', ".
                         "time timestamp(14) NOT NULL, ".
-                        "PRIMARY KEY  (id)) TYPE=MyISAM";
+                        "PRIMARY KEY  (id)) ENGINE=MyISAM";
 
 $table_revisions_r2 = "CREATE TABLE ".$config2["table_prefix"]."revisions (".
                      "id int(10) unsigned NOT NULL auto_increment,".
@@ -31,7 +31,7 @@ $table_revisions_r2 = "CREATE TABLE ".$config2["table_prefix"]."revisions (".
                      "KEY idx_latest (latest),".
                      "KEY idx_comment_on (comment_on),".
                      "KEY supertag (supertag)".
-                     ") TYPE=MyISAM;";
+                     ") ENGINE=MyISAM;";
 
 $insert_revisions_r2_1 = "INSERT INTO ".$config2["table_prefix"]."revisions ( id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on ) SELECT id, tag, supertag, time, body, body_r, owner, user, latest, handler, comment_on FROM ".$config2["table_prefix"]."pages WHERE latest='N';";
 

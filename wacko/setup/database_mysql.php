@@ -29,7 +29,7 @@ $table_pages = "CREATE TABLE ".$config2["table_prefix"]."pages (".
                  "KEY idx_latest (latest),".
                  "KEY idx_comment_on (comment_on),".
                  "KEY idx_super_comment_on (super_comment_on)".
-               ") TYPE=MyISAM;";
+               ") ENGINE=MyISAM;";
 
 $table_revisions = "CREATE TABLE ".$config2["table_prefix"]."revisions (".
                     "id int(10) unsigned NOT NULL auto_increment,".
@@ -53,7 +53,7 @@ $table_revisions = "CREATE TABLE ".$config2["table_prefix"]."revisions (".
                     "KEY idx_time (time),".
                     "KEY idx_latest (latest),".
                     "KEY idx_comment_on (comment_on)".
-                  ") TYPE=MyISAM;";
+                  ") ENGINE=MyISAM;";
 
 $table_acls = "CREATE TABLE ".$config2["table_prefix"]."acls (".
                  "page_tag varchar(250) binary NOT NULL default '',".
@@ -62,7 +62,7 @@ $table_acls = "CREATE TABLE ".$config2["table_prefix"]."acls (".
                  "list text NOT NULL,".
                  "PRIMARY KEY  (page_tag,privilege),".
                  "KEY supertag (supertag)".
-              ") TYPE=MyISAM";
+              ") ENGINE=MyISAM";
 
 $table_links = "CREATE TABLE ".$config2["table_prefix"]."links (".
                  "from_tag varchar(250) binary NOT NULL default '',".
@@ -71,7 +71,7 @@ $table_links = "CREATE TABLE ".$config2["table_prefix"]."links (".
                  "KEY from_tag (from_tag,to_tag(78)),".
                  "KEY idx_from (from_tag),".
                  "KEY idx_to (to_tag)".
-               ") TYPE=MyISAM";
+               ") ENGINE=MyISAM";
 
 $table_referrers = "CREATE TABLE ".$config2["table_prefix"]."referrers (".
                     "page_tag char(250) binary NOT NULL default '',".
@@ -79,7 +79,7 @@ $table_referrers = "CREATE TABLE ".$config2["table_prefix"]."referrers (".
                     "time datetime NOT NULL default '0000-00-00 00:00:00',".
                     "KEY idx_page_tag (page_tag),".
                     "KEY idx_time (time)".
-                  ") TYPE=MyISAM";
+                  ") ENGINE=MyISAM";
 
 $table_users = "CREATE TABLE ".$config2["table_prefix"]."users (".
                  "name varchar(80) NOT NULL default '',".
@@ -102,7 +102,7 @@ $table_users = "CREATE TABLE ".$config2["table_prefix"]."users (".
                  "PRIMARY KEY  (name),".
                  "KEY idx_name (name),".
                  "KEY idx_signuptime (signuptime)".
-               ") TYPE=MyISAM";
+               ") ENGINE=MyISAM";
 
 $table_pagewatches = "CREATE TABLE ".$config2["table_prefix"]."pagewatches (".
                         "id int(10) NOT NULL auto_increment,".
@@ -110,7 +110,7 @@ $table_pagewatches = "CREATE TABLE ".$config2["table_prefix"]."pagewatches (".
                         "tag varchar(250) binary NOT NULL default '',".
                         "time timestamp(14) NOT NULL,".
                         "PRIMARY KEY  (id)".
-                     ") TYPE=MyISAM";
+                     ") ENGINE=MyISAM";
 
 $table_upload = "CREATE TABLE ".$config2["table_prefix"]."upload (".
                   "id int(11) NOT NULL auto_increment,".
@@ -127,12 +127,12 @@ $table_upload = "CREATE TABLE ".$config2["table_prefix"]."upload (".
                   "KEY page_id (page_id,filename),".
                   "KEY page_id_2 (page_id,uploaded_dt),".
                   "KEY user_id (user,page_id)".
-               ") TYPE=MyISAM";
+               ") ENGINE=MyISAM";
 
 $table_cache = "CREATE TABLE ".$config2["table_prefix"]."cache (".
                   "name VARCHAR( 32 ) NOT NULL,".
                   "method VARCHAR( 20 ) NOT NULL,".
                   "query VARCHAR( 100 ) NOT NULL,".
                   "INDEX (name)".
-               ") TYPE=MyISAM";
+               ") ENGINE=MyISAM";
 ?>
