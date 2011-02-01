@@ -48,9 +48,13 @@ if ($this->page)
 		if ($owner = $this->get_page_owner())
 		{
 			if ($owner == 'System')
+			{
 				echo "<li>".$this->get_translation('Owner').": ".$owner."</li>\n";
+			}
 			else
-				echo "<li>".$this->get_translation('Owner').": ".$this->link($owner)."</li>\n";
+			{
+				echo "<li>".$this->get_translation('Owner').": "."<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$owner)."\">".$owner."</a>"."</li>\n";
+			}
 		}
 		else if (!$this->page['comment_on_id'])
 		{
