@@ -577,6 +577,7 @@ $wacko_translation = array(
 	'SettingsMassRename' => 'voor de gehele cluster',
 	'SettingsRemove' => 'Verwijderen',
 	'SettingsPurge' => 'Purge',
+	'SettingsModerate' => 'Moderate',
 	'SettingsPermissions' => 'Rechten',
 	'AclForEntireCluster' => 'voor de gehele cluster',
 	'SettingsUpload' => 'Uploaden',
@@ -589,6 +590,7 @@ $wacko_translation = array(
 	'SettingsXML' => 'Export to XML',
 	'BewareChangeLang' => 'Verander de taal van de pagina niet, tenzij u precies weet wat u aan het doen bent. Het hernoemen van deze pagina leidt ertoe dat links in de oorspronkelijke taal ongeldig worden. U kunt dit terugdraaien door de pagina in te stellen op de oorspronkelijke taal.',
 	'SetLang' => 'Taal van deze pagina',
+	'SetMenuLabel' => 'Menu label',
 
 	// upload
 	'UploadFor' => 'Upload bestand',

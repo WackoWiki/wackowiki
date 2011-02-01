@@ -577,6 +577,7 @@ $wacko_translation = array(
 	'SettingsMassRename' => 'for hele området',
 	'SettingsRemove' => 'Slet',
 	'SettingsPurge' => 'Purge',
+	'SettingsModerate' => 'Moderate',
 	'SettingsPermissions' => 'Tilladelser',
 	'AclForEntireCluster' => 'for hele området',
 	'SettingsUpload' => 'Upload',
@@ -589,6 +590,7 @@ $wacko_translation = array(
 	'SettingsXML' => 'Export to XML',
 	'BewareChangeLang' => 'Vær opmærksom på at ændring af sidens sprog vil ændre sprogformatet og eventuelt kan betyde at eksisterende tekst bliver noget rod.',
 	'SetLang' => 'Sidens sprog',
+	'SetMenuLabel' => 'Menu label',
 
 	// upload
 	'UploadFor' => 'Filupload',

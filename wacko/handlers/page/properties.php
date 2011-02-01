@@ -56,6 +56,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 					"noindex			= '".quote($this->dblink, (int)$_POST['noindex'])."' "
 				: 	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
 					"theme				= '".quote($this->dblink, (isset($_POST['theme']) ? $_POST['theme'] : ''))."', ".
+					"menu_tag			= '".quote($this->dblink, htmlspecialchars(trim($_POST['menu_tag'])))."', ".
 					"title				= '".quote($this->dblink, htmlspecialchars(trim($_POST['title'])))."', ".
 					"keywords			= '".quote($this->dblink, htmlspecialchars(trim($_POST['keywords'])))."', ".
 					"description		= '".quote($this->dblink, htmlspecialchars(trim($_POST['description'])))."' "
@@ -199,36 +200,34 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	else
 	{
 		echo "<ul class=\"menu\"><li class=\"menu\">".$this->get_translation('UserSettingsGeneral')."</li><li><a href=\"".$this->href('properties', '', 'extended')."\">".$this->get_translation('UserSettingsExtended')."</a></li></ul><br /><br />\n";
-
 		echo "<div class=\"page_settings\">";
-
 		echo $this->form_open('properties');
-
 		echo "<table class=\"form_tbl\">";
 
 		// show form
 		// load settings (shows only if owner is current user or Admin)
 		if ($this->user_is_owner() || $this->is_admin())
 		{
-			?> <?php echo "<tr class=\"lined\">"; ?>
-<th class="form_left" scope="row"><label for="title"><?php echo $this->get_translation('MetaTitle'); ?></label></th>
-<td class="form_right"><input id="title" name="title"
-	value="<?php echo $this->page['title'] ?>" size="60" maxlength="100" /></td>
+			echo '<tr class="lined">';
+			echo '<th class="form_left" scope="row"><label for="title">'.$this->get_translation('MetaTitle').'</label></th>';
+			echo '<td class="form_right"><input id="title" name="title" value="'.$this->page['title'].'" size="60" maxlength="100" /></td>';
 
-			<?php echo "</tr>\n<tr class=\"lined\">"; ?>
-<th class="form_left" scope="row"><label for="keywords"><?php echo $this->get_translation('MetaKeywords'); ?></label></th>
-<td class="form_right"><textarea id="keywords" name="keywords" rows="4"
-	cols="51"><?php echo $this->page['keywords'] ?></textarea></td>
+			echo "</tr>\n".'<tr class="lined">';
+			echo '<th class="form_left" scope="row"><label for="keywords">'.$this->get_translation('MetaKeywords').'</label></th>';
+			echo '<td class="form_right"><textarea id="keywords" name="keywords" rows="4" cols="51">'.$this->page['keywords'].'</textarea></td>';
 
-			<?php echo "</tr>\n<tr class=\"lined\">"; ?>
-<th class="form_left" scope="row"><label for="description"><?php echo $this->get_translation('MetaDescription'); ?></label></th>
-<td class="form_right"><textarea id="description" name="description"
-	rows="4" cols="51"><?php echo $this->page['description'] ?></textarea></td>
+			echo "</tr>\n<tr class=\"lined\">";
+			echo '<th class="form_left" scope="row"><label for="description">'.$this->get_translation('MetaDescription').'</label></th>';
+			echo '<td class="form_right"><textarea id="description" name="description" rows="4" cols="51">'.$this->page['description'].'</textarea></td>';
 
-			<?php echo "</tr>\n<tr class=\"lined\">"; ?>
-<th class="form_left" scope="row"><label for="lang"><?php echo $this->get_translation('SetLang'); ?></label></th>
-<td class="form_right"><select id="lang" name="lang">
-<?php
+			echo '<tr class="lined">';
+			echo '<th class="form_left" scope="row"><label for="menu_tag">'.$this->get_translation('SetMenuLabel').'</label></th>';
+			echo '<td class="form_right"><input id="menu_tag" name="menu_tag" value="'.(isset($this->page['menu_tag']) ? $this->page['menu_tag'] : '').'" size="60" maxlength="100" /></td>';
+
+			echo "</tr>\n<tr class=\"lined\">";
+			echo '<th class="form_left" scope="row"><label for="lang">'.$this->get_translation('SetLang').'</label></th>';
+			echo '<td class="form_right"><select id="lang" name="lang">';
+
 if (!($clang = $this->page['lang']))
 {
 	$clang = $this->config['language'];
@@ -359,6 +358,13 @@ echo "<tr>\n";
 	{
 		echo("<li><a href=\"".$this->href('remove')."\">".$this->get_translation('SettingsRemove')."</a></li>\n");
 		echo("<li><a href=\"".$this->href('purge')."\">".$this->get_translation('SettingsPurge')."</a></li>\n");
+	}
+	?>
+	<?php
+	// Moderate link (shows only if current user is Moderator or Admin)
+	if ($this->is_moderator() || $this->is_admin())
+	{
+		echo("<li><a href=\"".$this->href('moderate')."\">".$this->get_translation('SettingsModerate')."</a></li>\n");
 	}
 	?>
 	<?php

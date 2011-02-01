@@ -109,16 +109,16 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 		// basic info
 ?>
 		<table border="0" cellspacing="3">
-			<tr>
-				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->get_translation('RealName'); ?></strong></td>
+			<tr class="lined">
+				<td class="userprofil"><?php echo $this->get_translation('RealName'); ?></td>
 				<td><?php echo $user['real_name']; ?></td>
 			</tr>
-			<tr>
-				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->get_translation('UsersSignupDate'); ?></strong></td>
+			<tr class="lined">
+				<td class="userprofil"><?php echo $this->get_translation('UsersSignupDate'); ?></td>
 				<td><?php echo $this->get_time_string_formatted($user['signup_time']); ?></td>
 			</tr>
-			<tr>
-				<td style="width:100px; white-space:nowrap; padding-right:20px;" valign="top"><strong><?php echo $this->get_translation('UsersLastSession'); ?></strong></td>
+			<tr class="lined">
+				<td class="userprofil"><?php echo $this->get_translation('UsersLastSession'); ?></td>
 				<td><?php echo ( $user['hide_lastsession'] == 1
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
 					: ( !$user['session_time'] || $user['session_time'] == SQL_NULLDATE
@@ -126,12 +126,12 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 						: $this->get_time_string_formatted($user['session_time']) )
 					); ?></td>
 			</tr>
-			<tr><?php // Have all user pages as sub pages of the current Users page. ?>
-				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><?php echo $this->get_translation('UserSpace'); // TODO: this might be placed somewhere else, just put it here for testing ?></strong></td>
+			<tr class="lined"><?php // Have all user pages as sub pages of the current Users page. ?>
+				<td class="userprofil"><?php echo $this->get_translation('UserSpace'); // TODO: this might be placed somewhere else, just put it here for testing ?></td>
 				<td><a href="<?php echo $this->href('', ($this->config['users_page'].'/'.$user['user_name'])); ?>"><?php echo $this->config['users_page'].'/'.$user['user_name']; ?></a></td>
 			</tr>
-			<tr>
-				<td style="width:100px; white-space:nowrap; padding-right:20px;"><strong><a href="<?php echo $this->href('', $this->config['groups_page']); ?>"><?php echo $this->get_translation('UsersGroupMembership'); ?></a></strong></td>
+			<tr class="lined">
+				<td class="userprofil"><a href="<?php echo $this->href('', $this->config['groups_page']); ?>"><?php echo $this->get_translation('UsersGroupMembership'); ?></a></td>
 				<td><?php echo ( $usergroups == true ? $usergroups : '<em>'.$this->get_translation('UsersNA2').'</em>' ); ?></td>
 			</tr>
 		</table>
