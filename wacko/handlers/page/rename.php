@@ -27,8 +27,8 @@ else if ($this->forum === true && !$this->is_admin())
 
 if ($user = $this->get_user())
 {
-	$user = strtolower($this->get_user_name());
-	$registered = true;
+	$user		= strtolower($this->get_user_name());
+	$registered	= true;
 }
 else
 {
@@ -179,6 +179,7 @@ function recursive_move(&$parent, $root)
 		exit; // who and where did intend to move root???
 	}
 
+	// FIXME: missing $owner_id
 	$query = "'".quote($parent->dblink, $parent->npj_translit($root))."%'";
 	$pages = $parent->load_all(
 		"SELECT page_id, tag, supertag ".
@@ -227,7 +228,7 @@ function move(&$parent, $old_page, $new_name )
 				// Rename page
 				$need_redirect = 0;
 
-				if ($_POST['redirect'] == 'on')
+				if (isset($_POST['redirect']) && $_POST['redirect'] == 'on')
 				{
 					$need_redirect = 1;
 				}
@@ -264,7 +265,7 @@ function move(&$parent, $old_page, $new_name )
 				print("<br />".$parent->get_translation('NewNameOfPage').$parent->link('/'.$new_name));
 
 				// log event
-				$engine->log(3, str_replace('%2', $new_name, str_replace('%1', $old_page['tag'], $engine->get_translation('LogRenamedPage', $this->config['language']))).( $need_redirect == 1 ? $engine->get_translation('LogRenamedPage2', $this->config['language']) : '' ));
+				$parent->log(3, str_replace('%2', $new_name, str_replace('%1', $old_page['tag'], $parent->get_translation('LogRenamedPage', $parent->config['language']))).( $need_redirect == 1 ? $parent->get_translation('LogRenamedPage2', $parent->config['language']) : '' ));
 			}
 		}
 	}

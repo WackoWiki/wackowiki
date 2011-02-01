@@ -142,9 +142,7 @@ if (list ($comments, $pagination) = load_recent_comments($this, $root, (int)$max
 			).
 			") . . . . . . . . . . . . . . . . <small>"./*$this->get_translation('LatestCommentBy').*/" ".
 			($page['comment_user']
-				? ($this->is_wiki_name($page['comment_user'])
-					? $this->link('/'.$page['comment_user'], '', $page['comment_user'] )
-					: $page['comment_user'])
+				? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$page['comment_user'])."\">".$page['comment_user']."</a>"
 				: $this->get_translation('Guest')).
 			"</small></li>\n";
 		}

@@ -416,9 +416,7 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 					echo "</div>\n";
 					echo "<ul class=\"commentinfo\">\n".
 								"<li>".($comment['user_name'] // TODO: <a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['user_name']).'">'.$comment['user_name'].'</a>'
-										? ($this->is_wiki_name($comment['user_name'])
-											? $this->link('/'.$comment['user_name'], '', $comment['user_name'])
-											: $comment['user_name'])."</li>\n"
+										? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$comment['user_name'])."\">".$comment['user_name']."</a>"
 										: $this->get_translation('Guest')).
 								"<li>".$this->get_time_string_formatted($comment['created'])."</li>\n".
 								($comment['modified'] != $comment['created']

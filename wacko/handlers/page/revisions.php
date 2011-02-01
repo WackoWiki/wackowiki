@@ -103,9 +103,7 @@ if ($this->has_access('read'))
 				$output .= '<span style="display: inline-block; width:80px;">'."&nbsp; — id ".$page['revision_m_id']."</span> ";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->get_translation('By')." ".
 				($page['user']
-					? ($this->is_wiki_name($page['user'])
-						? $this->link('/'.$page['user'], '', $page['user'])
-						: $page['user'])
+					? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$page['user'])."\">".$page['user']."</a>"
 					: $this->get_translation('Guest')).'';
 				$output .= ''.$edit_note.'';
 				$output .= ' '.($page['minor_edit'] ? 'm' : '');

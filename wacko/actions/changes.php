@@ -133,9 +133,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 			).
 			" . . . . . . . . . . . . . . . . <small>".
 			($page['user']
-				? ($this->is_wiki_name($page['user'])
-					? $this->link('/'.$page['user'], '', $page['user'])
-					: $page['user'])
+				? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$page['user'])."\">".$page['user']."</a>"
 				: $this->get_translation('Guest')).
 			$review.' '.
 			$edit_note.
