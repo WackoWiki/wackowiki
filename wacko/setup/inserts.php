@@ -42,7 +42,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 				mysql_query($perm_create_insert, $dblink_global);
 				mysql_query($perm_upload_insert, $dblink_global);
 
-				if($is_bookmark)
+				if($is_menu)
 				{
 					mysql_query($default_bookmark, $dblink_global);
 				}
@@ -94,7 +94,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageUploadPermission'])." - ".mysqli_error($dblink_global));
 					}
 
-					if($is_bookmark)
+					if($is_menu)
 					{
 						mysqli_query($dblink_global, $default_bookmark);
 						if(mysqli_errno($dblink_global) != 0)
@@ -114,7 +114,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 					mysqli_query($dblink_global, $perm_create_insert);
 					mysqli_query($dblink_global, $perm_upload_insert);
 
-					if($is_bookmark)
+					if($is_menu)
 					{
 						mysqli_query($dblink_global, $default_bookmark);
 					}
@@ -185,7 +185,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageUploadPermission'])." - ".($error[2]));
 					}
 
-					if($is_bookmark)
+					if($is_menu)
 					{
 						@$dblink_global->query($default_bookmark);
 						$error = $dblink_global->errorInfo();
@@ -206,7 +206,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 					@$dblink_global->query($perm_create_insert);
 					@$dblink_global->query($perm_upload_insert);
 
-					if($is_bookmark)
+					if($is_menu)
 					{
 						@$dblink_global->query($default_bookmark);
 					}
