@@ -89,7 +89,7 @@ if ($pages = $this->load_all(
 		{
 			for ($i = 0; $i < count($acls); $i++)
 			{
-				$this->cache_acl($acls[$i]['page_id'], "read", 1, $acls[$i]);
+				$this->cache_acl($acls[$i]['page_id'], 'read', 1, $acls[$i]);
 			}
 		}
 

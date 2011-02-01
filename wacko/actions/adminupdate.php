@@ -75,6 +75,8 @@ if ($this->is_admin())
 ##            MIGRATE user settings                   ##
 ########################################################
 
+// requires the old 4.3 user table
+
 if (!function_exists('decompose_options'))
 {
 	function decompose_options($more)
@@ -203,6 +205,8 @@ if ($this->is_admin())
 ##            MIGRATE ACLs to new scheme              ##
 ########################################################
 
+// rename the old 'acl' table to 'acl_old' first
+
 if ($this->is_admin())
 {
 	if (!isset($_POST['migrate_acls']))
@@ -229,19 +233,19 @@ if ($this->is_admin())
 			echo $_acl['privilege'].'<br />';
 			// get object_right_id (e.g. 'write' -> 1, 'read' -> 2)
 			$_object_right_id = $this->load_single(
-				"SELECT acl_right_id ".
+				"SELECT object_right_id ".
 				"FROM {$this->config['table_prefix']}acl_right ".
 				"WHERE object_right = '{$_acl['privilege']}'
 				");
-			$object_right_id = $_object_right_id['acl_right_id'];
+			$object_right_id = $_object_right_id['object_right_id'];
 
 			// get object_type_id (e.g. 'page' -> 1) / there is only 'page' so far
 			$_object_type_id = $this->load_single(
-				"SELECT acl_type_id ".
+				"SELECT object_type_id ".
 				"FROM {$this->config['table_prefix']}acl_type ".
 				"WHERE object_type = 'page'
 				");
-			$object_type_id = $_object_type_id['acl_type_id'];
+			$object_type_id = $_object_type_id['object_type_id'];
 
 			// INSERT rights in 'acl' table
 			$sql =	"INSERT INTO {$this->config['table_prefix']}acl
