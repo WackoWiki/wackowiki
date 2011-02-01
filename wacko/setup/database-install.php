@@ -43,27 +43,32 @@ function random_seed($length, $seed_complexity)
 	while ($uc == 0 || $lc == 0 || $di == 0 || $sy == 0)
 	{
 		$seed = '';
+
 		for ($i = 0; $i < $length; $i++)
 		{
 			$k = rand(0, $seed_complexity);  //randomly choose what's next
+
 			if ($k == 0)
 			{
 				//uppercase
 				$seed .= substr(str_shuffle($chars_uc), rand(0, sizeof($chars_uc) - 2), 1);
 				$uc++;
 			}
+
 			if ($k == 1)
 			{
 				//lowercase
 				$seed .= substr(str_shuffle($chars_lc), rand(0, sizeof($chars_lc) - 2), 1);
 				$lc++;
 			}
+
 			if ($k == 2)
 			{
 				//digits
 				$seed .= substr(str_shuffle($digits), rand(0, sizeof($digits) - 2), 1);
 				$di++;
 			}
+
 			if ($k == 3)
 			{
 				//symbols
@@ -254,9 +259,9 @@ $insert_config = "INSERT INTO ".$config['table_prefix']."config (config_id, conf
  mysqli_legacy
  or pdo which is the default clause
  */
-$port = trim($config['database_port']);
 
-$fatal_error = false;
+$port			= trim($config['database_port']);
+$fatal_error	= false;
 
 switch($config['database_driver'])
 {
@@ -969,6 +974,7 @@ switch($config['database_driver'])
 									case 'sqlite2':
 									case 'mysql_pdo':
 										require_once('setup/database_mysql.php');
+										if ($config['database_driver'] == 'mysql_pdo') $config['database_driver'] = 'mysql';
 										$dsn = $config['database_driver'].":dbname=".$config['database_database'].";host=".$config['database_host'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
 										break;
 									case 'mssql':

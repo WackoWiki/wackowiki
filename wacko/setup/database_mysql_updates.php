@@ -8,7 +8,7 @@
 
 $pref		= $config['table_prefix'];
 $charset	= 'DEFAULT CHARSET=utf8';
-$engine		= 'TYPE=MyISAM';
+$engine		= 'ENGINE=MyISAM';
 
 // ACL
 $rename_acl_r4_3_1 = "RENAME TABLE {$pref}acls TO {$pref}acl";

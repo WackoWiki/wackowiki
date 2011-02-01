@@ -57,7 +57,7 @@
    <h2><?php echo $lang['MultiLang'];?></h2>
    <p class="notop"><?php echo $lang['MultiLangDesc'];?></p>
    <label class="indented_label" for="wiki_multilanguage"><?php echo $lang['Enabled'];?></label>
-   <input type="checkbox" id="wiki_multilanguage" name="config[multilanguage]" <?php echo $config['multilanguage'] ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
+   <input type="checkbox" id="wiki_multilanguage" name="config[multilanguage]" <?php echo isset($config['multilanguage']) ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
    <br />
    <div class="fake_hr_seperator">
       <hr />
@@ -101,7 +101,7 @@ $config['base_url'] = preg_replace('#/[^/]*$#', '/', $config['base_url']);
    <h2><?php echo $lang['Rewrite'];?></h2>
    <p class="notop"><?php echo $lang['RewriteDesc'];?></p>
    <label class="indented_label" for="wiki_rewrite"><?php echo $lang['Enabled'];?></label>
-   <input type="checkbox" id="wiki_rewrite" name="config[rewrite_mode]" <?php echo $config['rewrite_mode'] ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
+   <input type="checkbox" id="wiki_rewrite" name="config[rewrite_mode]" <?php echo isset($config['rewrite_mode']) ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
    <br />
    <div class="fake_hr_seperator">
       <hr />
