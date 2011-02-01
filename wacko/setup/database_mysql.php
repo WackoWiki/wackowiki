@@ -8,7 +8,7 @@
 
 $pref		= $config['table_prefix'];
 $charset	= 'DEFAULT CHARSET=utf8';
-$engine		= 'TYPE=MyISAM';
+$engine		= 'ENGINE=MyISAM';
 
 $table_acl = "CREATE TABLE {$pref}acl (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -26,7 +26,7 @@ $table_menu = "CREATE TABLE {$pref}menu (".
 					"menu_position SMALLINT(2) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (menu_id),".
 					"UNIQUE KEY idx_user_id (user_id,page_id)".
-				") {$engine} {$charset};";
+				") {$engine} {$charset}";
 
 $table_cache = "CREATE TABLE {$pref}cache (".
 					"name VARCHAR(32) NOT NULL,".
@@ -51,7 +51,7 @@ $table_category_page = "CREATE TABLE {$pref}category_page (".
 						"category_id INT(10) unsigned NOT NULL,".
 						"page_id INT(10) unsigned NOT NULL,".
 						"UNIQUE KEY idx_pageword (category_id,page_id)".
-					") TYPE=MyISAM {$charset}";
+					") {$engine} {$charset}";
 
 $table_config = "CREATE TABLE {$pref}config (".
 					"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -71,7 +71,6 @@ $table_group = "CREATE TABLE {$pref}group (".
 					"is_system TINYINT(1) UNSIGNED NOT NULL,".
 					"open TINYINT(1) UNSIGNED NOT NULL,".
 					"active TINYINT(1) UNSIGNED NOT NULL,".
-					// "special TINYINT(1) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (group_id),".
 					"UNIQUE KEY idx_name (group_name)".
 				") {$engine} {$charset}";
@@ -160,7 +159,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"KEY idx_comment_on_id (comment_on_id),".
 					"KEY idx_commented (commented),".
 					"KEY idx_title (title)".
-				") {$engine} {$charset};";
+				") {$engine} {$charset}";
 
 $table_poll = "CREATE TABLE {$pref}poll (".
 					"poll_id INT(10) UNSIGNED NOT NULL,".
@@ -227,7 +226,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"KEY idx_minor_edit (minor_edit),".
 					"KEY idx_reviewed (reviewed),".
 					"KEY idx_comment_on_id (comment_on_id)".
-				") {$engine} {$charset};";
+				") {$engine} {$charset}";
 
 /*$table_session = "CREATE TABLE {$pref}session (".
 					"session_id varchar( 40 ) DEFAULT '0' NOT NULL ,".
@@ -236,7 +235,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"last_activity int( 10 ) unsigned DEFAULT 0 NOT NULL ,".
 					"user_data text NOT NULL ,".
 					"PRIMARY KEY ( session_id )".
-					") {$engine} {$charset};";*/
+					") {$engine} {$charset}";*/
 
 $table_upload = "CREATE TABLE {$pref}upload (".
 					"upload_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
