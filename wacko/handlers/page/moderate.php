@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 
 ?>
 
-<div class="page">
+<div id="page">
 <h3><?php echo $this->get_translation('Moderation').' '.( $this->forum === true ? $this->get_translation('Topics') : $this->get_translation('ModerateSection') ).' '.$this->compose_link_to_page($this->tag, '', $this->page['title'], 0);
 	echo ( $this->forum === true ? '<br />['.$this->compose_link_to_page(substr($this->tag, 0, strrpos($this->tag, '/')), 'moderate', $this->get_translation('ModerateSection2'), 0).']' : '' ) ?></h3>
 

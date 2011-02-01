@@ -283,7 +283,7 @@ if ($pages)
 	{
 		for ($i = 0; $i < count($read_acls); $i++)
 		{
-			$this->cache_acl($read_acls[$i]['page_id'], "read", 1, $read_acls[$i]);
+			$this->cache_acl($read_acls[$i]['page_id'], 'read', 1, $read_acls[$i]);
 		}
 	}
 

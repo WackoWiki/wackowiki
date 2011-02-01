@@ -10,7 +10,7 @@ if (!function_exists('full_text_search'))
 	function full_text_search(&$wacko, $phrase, $filter)
 	{
 		return $wacko->load_all(
-			"SELECT title, tag, body, comment_on_id ".
+			"SELECT page_id, title, tag, body, comment_on_id ".
 			"FROM ".$wacko->config['table_prefix']."page ".
 			"WHERE (( match(body) against('".quote($wacko->dblink, $phrase)."') ".
 				"OR lower(title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
@@ -27,7 +27,7 @@ if (!function_exists('tag_search'))
 	function tag_search(&$wacko, $phrase)
 	{
 		return $wacko->load_all(
-			"SELECT tag, comment_on_id ".
+			"SELECT page_id, tag, comment_on_id ".
 			"FROM ".$wacko->config['table_prefix']."page ".
 			"WHERE lower(tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
 			"ORDER BY supertag");
@@ -38,8 +38,8 @@ if (!function_exists('get_line_with_phrase'))
 {
 	function get_line_with_phrase($phrase, $string, $cleanup)
 	{
-		$lines = explode("\n", $string);
-		$result = '';
+		$lines	= explode("\n", $string);
+		$result	= '';
 
 		foreach ($lines as $line)
 		{
@@ -248,7 +248,7 @@ if ($phrase)
 
 			foreach ($results as $page)
 			{
-				if (!$this->config['hide_locked'] || $this->has_access('read', $page['tag']) )
+				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']) )
 				{
 					// Don't show it if it's a comment and we're hiding comments from this user
 					if($page['comment_on_id'] == 0 || ($page['comment_on_id'] != 0 && $this->user_allowed_comments()))
@@ -259,7 +259,7 @@ if ($phrase)
 
 						echo "<h3>".$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']) )."</h3>";
 
-						if ($mode !== 'topic')
+						if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
 						{
 							$context = get_line_with_phrase($phrase, $page['body'], $clean);
 							$context = preview_text($text = $context, $limit = 500, $tags = 0);

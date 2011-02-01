@@ -10,7 +10,6 @@ if (!defined('IN_WACKO'))
 //	- multilevel hierarchical categories (first we need to
 //	  find a way to unwrap table-structured SQL data array
 //	  into a tree-structured multilevel array)
-//	localize message sets
 
 ?>
 <div id="page">
@@ -327,9 +326,14 @@ if ($this->user_is_owner() || $this->is_admin())
 			}
 
 			if ($i > 0)
+			{
 				echo "</div>\n";
+			}
 			else
+			{
 				echo "<br />\n";
+			}
+			
 			$i = 0;
 		}
 
