@@ -115,7 +115,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
-					#"menu_tag VARCHAR(250) NOT NULL DEFAULT '',".
+					"menu_tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".
@@ -200,7 +200,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"title VARCHAR(100) NOT NULL DEFAULT '',".
 					"tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
-					#"menu_tag VARCHAR(250) NOT NULL DEFAULT '',".
+					"menu_tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".

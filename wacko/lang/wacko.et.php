@@ -577,6 +577,7 @@ $wacko_translation = array(
 	'SettingsMassRename'  => 'for entire cluster',
 	'SettingsRemove' => 'Eemalda',
 	'SettingsPurge' => 'Purge',
+	'SettingsModerate' => 'Moderate',
 	'SettingsPermissions' => 'Kasutaja õiguste loend',
 	'SettingsUpload' => 'Üleslaadimine',
 	'SettingsCategories' => 'Categories',
@@ -589,6 +590,7 @@ $wacko_translation = array(
 	'AclForEntireCluster' => 'Kogu grupi kasutaja õiguste loend',
 	'BewareChangeLang' => 'Ära muuda keelt, kui sa ei ole päris kindel selles, mida sa teed. Kogu mitte-inglisekeelne sisu võib muuta loetamatuks. Sa saad seda tegevust tagasi pöörata, kui muudad keeleseadistuse tagasi selle algolekusse. ',
 	'SetLang' => 'Selle lehe keel',
+	'SetMenuLabel' => 'Menu label',
 
 	// upload
 	'UploadFor' => 'Faili üleslaadimine',

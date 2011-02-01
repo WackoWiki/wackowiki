@@ -632,6 +632,7 @@ $wacko_translation = array(
 	'SettingsMassRename' => 'for entire cluster',
 	'SettingsRemove' => 'Remove',
 	'SettingsPurge' => 'Purge',
+	'SettingsModerate' => 'Moderate',
 	'SettingsPermissions' => 'Permissions',
 	'AclForEntireCluster' => 'for entire cluster',
 	'SettingsUpload' => 'Upload',
@@ -644,6 +645,7 @@ $wacko_translation = array(
 	'SettingsXML' => 'Export to XML',
 	'BewareChangeLang' => 'Don\'t change language, if you don\'t know exactly, what are you doing. Change of language setting will lead to renaming of the page according to transliteration rules of selected language. All non-english content will become unreadable also. You could turn those effects backward by returning language setting to its initial value.',
 	'SetLang' => 'Language of this page',
+	'SetMenuLabel' => 'Menu label',
 
 	// upload
 	'UploadFor' => 'File upload',

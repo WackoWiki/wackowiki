@@ -637,6 +637,7 @@ $wacko_translation = array(
 	'SettingsMassRename' => 'для всех страниц кластера',
 	'SettingsRemove' => 'Удаление',
 	'SettingsPurge' => 'Чистка',
+	'SettingsModerate' => 'Moderate',
 	'SettingsPermissions' => 'Доступ',
 	'AclForEntireCluster' => 'для всех страниц кластера',
 	'SettingsUpload' => 'Загрузка файлов',
@@ -649,6 +650,7 @@ $wacko_translation = array(
 	'SettingsXML' => 'Экспорт в XML',
 	'BewareChangeLang' => 'Не меняйте язык, если вы не понимаете, что делаете. Смена языка приведёт к переименованию страницы согласно правил транслита нового языка и нечитабельности её неанглийского содержимого. Отменить это действие можно при помощи обратной смены языка.',
 	'SetLang' => 'Смена языка страницы',
+	'SetMenuLabel' => 'Menu label',
 
 	// upload
 	'UploadFor' => 'Загрузка файла',

@@ -574,6 +574,7 @@ $wacko_translation = array(
 	'SettingsMassRename' => 'для всех страниц кластера',
 	'SettingsRemove' => 'Изртиване',
 	'SettingsPurge' => 'Purge',
+	'SettingsModerate' => 'Moderate',
 	'SettingsPermissions' => 'Достъп',
 	'AclForEntireCluster' => 'Права за целия СЕКТОР',
 	'SettingsUpload' => 'Качване на файлове',
@@ -586,6 +587,7 @@ $wacko_translation = array(
 	'SettingsXML' => 'Export to XML',
 	'BewareChangeLang' => 'Не променяйте езика. След подобна промяна е възможно да не разберете как да върнете нещата обратно.',
 	'SetLang' => 'Език на тази страница',
+	'SetMenuLabel' => 'Menu label',
 
 	// upload
 	'UploadFor' => 'Качване на файл',

@@ -577,6 +577,7 @@ $wacko_translation = array(
 	'SettingsMassRename' => 'για ολόκληρο το cluster',
 	'SettingsRemove' => 'Αφαίρεση',
 	'SettingsPurge' => 'Purge',
+	'SettingsModerate' => 'Moderate',
 	'SettingsPermissions' => 'ACLs',
 	'AclForEntireCluster' => 'για ολόκληρο το cluster',
 	'SettingsUpload' => 'Ανέβασμα',
@@ -589,6 +590,7 @@ $wacko_translation = array(
 	'SettingsXML' => 'Έκδοση XML',
 	'BewareChangeLang' => 'Μην αλλάζετε την γλώσσα, εάν δεν γνωρίζεται ακριβώς, τι κάνετε. Η αλλαγή της ρύθμισης της γλώσσας θα οδηγήσει στην μετονομασία της σελίδας ανάλογα με τους κανόνες μετάφρασης της επιλεγμένης γλώσσας. Όλα τα μη-αγγλικά περιεχόμενα θα γίνουν μη-αναγνώσιμα επίσης. Μπορείτε να γυρίσετε πίσω σε αυτές τις ιδιότητες με το επιλέγοντας την ρύθμιση της γλώσσας στον αρχική τιμή.',
 	'SetLang' => 'Η γλώσσα αυτής της σελίδας',
+	'SetMenuLabel' => 'Menu label',
 
 	// upload
 	'UploadFor' => 'Ανέβασε αρχείο',

@@ -577,6 +577,7 @@ $wacko_translation = array(
 	'SettingsMassRename' => 'tout le groupe de pages',
 	'SettingsRemove' => 'Supprimer',
 	'SettingsPurge' => 'Purge',
+	'SettingsModerate' => 'Moderate',
 	'SettingsPermissions' => 'Droits',
 	'AclForEntireCluster' => 'Pour tout le groupe de pages',
 	'SettingsUpload' => 'Déposer un fichier',
@@ -589,6 +590,7 @@ $wacko_translation = array(
 	'SettingsXML' => 'Export en XML',
 	'BewareChangeLang' => 'Ne changez pas la langue de cette page si vous n&rsquo;êtes pas sûr de ce que vous faites. Changer de langue conduira à renommer la page conformément aux règles de translittération de la langue choisie. Les caractères propres à la langue précédente deviendront illisibles. Vous pourrez cependant revenir au réglage de langue initial.',
 	'SetLang' => 'Langue de cette page',
+	'SetMenuLabel' => 'Menu label',
 
 	// upload
 	'UploadFor' => 'Déposer un fichier&nbsp;',
