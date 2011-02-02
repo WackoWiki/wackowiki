@@ -25,8 +25,10 @@ function array_to_str ($arr, $name = '')
 }
 
 // config values
-if ( ( $config['database_driver'] == 'mysqli_legacy' ) && empty( $config['database_port'] ) )
-$config['database_port'] = $config['database_port'] = '3306';
+if ( ( $config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo') ) && empty( $config['database_port'] ) )
+{
+	$config['database_port'] = $config['database_port'] = '3306';
+}
 
 if(!array_key_exists('wacko_version', $config))
 {
@@ -97,7 +99,7 @@ else
 
 // try to delete wakka config file
 $deleted_old_wakka_config_file = true;
-if(isset($was_wakka_upgrade) && is_file('wakka.config.php'))
+if(is_file('wakka.config.php'))
 {
 	@chown('wakka.config.php', 666);
 	$deleted_old_wakka_config_file = unlink('wakka.config.php');

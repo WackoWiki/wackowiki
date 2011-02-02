@@ -606,6 +606,8 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_1, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_2, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 
+					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysql_query($table_user_setting_r4_3, $dblink), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
+
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingSystemAccount'], @mysql_query($insert_system, $dblink), str_replace('%1', 'system account', $lang['ErrorAlreadyExists']));
@@ -950,6 +952,8 @@ switch($config['database_driver'])
 					// drop last!
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_1), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_2), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+
+					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $table_user_setting_r4_3), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
