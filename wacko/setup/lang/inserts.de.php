@@ -16,11 +16,11 @@ insert_page('LetzteKommentare', 'Letzte Kommentare', '{{RecentlyCommented}}', $l
 insert_page('SeitenIndex', 'Seiten Index', '{{PageIndex}}', $lng, 'Admins', false, true, 'Index');
 
 insert_page('Benutzer', 'Benutzer', '{{LastUsers}}', $lng, 'Admins', false, false);
-insert_page('Registrierung', 'Registrierung', '{{Registration}}', $lng, 'Admins', false, false);
+insert_page('Registrierung', 'Registrierung', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Passwort', 'Passwort', '{{ChangePassword}}', $lng, 'Admins', false, false);
-insert_page('TextSuche', 'TextSuche', '{{Search}}\n\n\n  * ++4 Buchstaben Minimum für die Suche im Text der Seiten. Das ist eine ~MySQL Beschränkung.++\n  * ++3 Buchstaben Minimum für die Suche in Seitennamen.++\n  * ++Bei der Suche im Text verwenden wir die Volltextsuche Funktion von ~MySQL. Es wird  nur nach ganzen Worten gesucht.++\n\n', $lng, 'Admins', false, false);
-insert_page('Anmeldung', 'Anmeldung', '{{Login}}', $lng, 'Admins', false, false);
+insert_page('TextSuche', 'TextSuche', '{{search}}\n\n\n  * ++4 Buchstaben Minimum für die Suche im Text der Seiten. Das ist eine ~MySQL Beschränkung.++\n  * ++3 Buchstaben Minimum für die Suche in Seitennamen.++\n  * ++Bei der Suche im Text verwenden wir die Volltextsuche Funktion von ~MySQL. Es wird  nur nach ganzen Worten gesucht.++\n\n', $lng, 'Admins', false, false);
+insert_page('Anmeldung', 'Anmeldung', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Einstellungen', 'Einstellungen', '{{UserSettings}}', $lng, 'Admins', false, false);
 
 ?>

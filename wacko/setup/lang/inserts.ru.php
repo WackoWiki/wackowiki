@@ -16,12 +16,12 @@ insert_page('Изменения', 'Изменения', '{{changes}}', $lng, 'Admins', false, true
 insert_page('НовыеКомментарии', 'Новые Комментарии', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Комментарии');
 
 insert_page('Пользователи', 'Пользователи', '{{LastUsers}}', $lng, 'Admins', false, false);
-insert_page('Регистрация', 'Регистрация', '{{Registration}}', $lng, 'Admins', false, false);
+insert_page('Регистрация', 'Регистрация', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Password', 'Password', '{{ChangePassword}}', $lng, 'Admins', false, false);
 insert_page('Пароль', 'Пароль', '{{Redirect to=Password}}', $lng, 'Admins', false, false);
-insert_page('Поиск', 'Поиск', '{{Search}}', $lng, 'Admins', false, false);
-insert_page('Вход', 'Вход', '{{Login}}', $lng, 'Admins', false, false);
+insert_page('Поиск', 'Поиск', '{{search}}', $lng, 'Admins', false, false);
+insert_page('Вход', 'Вход', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Настройки', 'Настройки', '{{UserSettings}}', $lng, 'Admins', false, false);
 
 ?>

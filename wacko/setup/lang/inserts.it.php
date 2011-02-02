@@ -16,11 +16,11 @@ insert_page('UltimiCommenti', 'Ultimi Commenti', '{{RecentlyCommented}}', $lng, 
 insert_page('IndicePagine', 'Indice Pagine', '{{PageIndex}}', $lng, 'Admins', false, true, 'Indice');
 
 insert_page('Utenti', 'Utenti', '{{LastUsers}}', $lng, 'Admins', false, false);
-insert_page('Registrazione', 'Registrazione', '{{Registration}}', $lng, 'Admins', false, false);
+insert_page('Registrazione', 'Registrazione', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Password', 'Password', '{{ChangePassword}}', $lng, 'Admins', false, false);
-insert_page('Ricerca', 'Ricerca', '{{Search}}', $lng, 'Admins', false, false);
-insert_page('Connessione', 'Connessione', '{{Login}}', $lng, 'Admins', false, false);
+insert_page('Ricerca', 'Ricerca', '{{search}}', $lng, 'Admins', false, false);
+insert_page('Connessione', 'Connessione', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Preferenze', 'Preferenze', '{{UserSettings}}', $lng, 'Admins', false, false);
 
 ?>
