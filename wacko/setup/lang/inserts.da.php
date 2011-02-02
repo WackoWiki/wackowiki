@@ -16,11 +16,11 @@ insert_page('Kommentarer', 'Kommentarer', '{{RecentlyCommented}}', $lng, 'Admins
 insert_page('Indhold', 'Indhold', '{{PageIndex}}', $lng, 'Admins', false, true, 'Indhold');
 
 insert_page('Brugere', 'Brugere', '{{LastUsers}}', $lng, 'Admins', false, false);
-insert_page('Registrering', 'Registrering', '{{Registration}}', $lng, 'Admins', false, false);
+insert_page('Registrering', 'Registrering', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Password', 'Password', '{{ChangePassword}}', $lng, 'Admins', false, false);
-insert_page('Søgning', 'Søgning', '{{Search}}', $lng, 'Admins', false, false);
-insert_page('Login', 'Login', '{{Login}}', $lng, 'Admins', false, false);
+insert_page('Søgning', 'Søgning', '{{search}}', $lng, 'Admins', false, false);
+insert_page('Login', 'Login', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Indstillinger', 'Indstillinger', '{{UserSettings}}', $lng, 'Admins', false, false);
 
 ?>

@@ -16,11 +16,11 @@ insert_page('LaatsteWijzigingen', 'Laatste Wijzigingen', '{{changes}}', $lng, 'A
 insert_page('LaatsteOpmerkingen', 'Laatste Opmerkingen', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Opmerkingen');
 
 insert_page('Gebruikers', 'Gebruikers', '{{LastUsers}}', $lng, 'Admins', false, false);
-insert_page('Registratie', 'Registratie', '{{Registration}}', $lng, 'Admins', false, false);
+insert_page('Registratie', 'Registratie', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Paswoord', 'Paswoord', '{{ChangePassword}}', $lng, 'Admins', false, false);
-insert_page('TekstZoeken', 'Tekst Zoeken', '{{Search}}', $lng, 'Admins', false, false);
-insert_page('Inloggen', 'Inloggen', '{{Login}}', $lng, 'Admins', false, false);
+insert_page('TekstZoeken', 'Tekst Zoeken', '{{search}}', $lng, 'Admins', false, false);
+insert_page('Inloggen', 'Inloggen', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Instellingen', 'Instellingen', '{{UserSettings}}', $lng, 'Admins', false, false);
 
 ?>
