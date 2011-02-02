@@ -70,25 +70,32 @@ writeConfigHiddenNodes(array('none' => ''));
 	 */
 
 	// Try applying the correct permissions now and then display whether it worked or not, if they fail then the user will have to manually set the permissions
-	@chmod ('_cache', 0777);
-	@chmod ('xml', 0777);
-	@chmod ('files', 0777);
-	@chmod ('files/perpage', 0777);
-	@chmod ('sitemap.xml', 0777);
+	@chmod ('_cache/config', 0777);
+	@chmod ('_cache/feeds', 0777);
+	@chmod ('_cache/pages', 0777);
+	@chmod ('_cache/queries', 0777);
 	@chmod ('config/config.php', 0777);
+	@chmod ('files/global', 0777);
+	@chmod ('files/perpage', 0777);
+	@chmod ('xml', 0777);
+	@chmod ('sitemap.xml', 0777);
+
 
 	// If the cache directory is writable then we can enable caching as default
 	echo "            <input type=\"hidden\" name=\"config[cache]\" value=\"".(is__writable('_cache/') ? "1" : $config['cache'])."\" />\n";
 
-	$file_permissions_result = is__writable('config/config.php') && is__writable('_cache/') && is__writable('xml/') && is__writable('files/') && is__writable('files/perpage/') && is__writable('sitemap.xml');
+	$file_permissions_result = is__writable('config/config.php') && is__writable('_cache/config/') && is__writable('_cache/feeds/') && is__writable('_cache/pages/') && is__writable('_cache/queries/') && is__writable('xml/') && is__writable('files/global/') && is__writable('files/perpage/') && is__writable('sitemap.xml');
 	?>
 <h2><?php echo $lang['Permissions']; ?></h2>
 <ul>
+	<li>_cache/config   <?php echo output_image(is__writable('_cache/config/')); ?></li>
+	<li>_cache/feeds   <?php echo output_image(is__writable('_cache/feeds/')); ?></li>
+	<li>_cache/pages   <?php echo output_image(is__writable('_cache/pages/')); ?></li>
+	<li>_cache/queries   <?php echo output_image(is__writable('_cache/queries/')); ?></li>
 	<li>config/config.php   <?php echo output_image(is__writable('config/config.php')); ?></li>
-	<li>_cache   <?php echo output_image(is__writable('_cache/')); ?></li>
-	<li>xml   <?php echo output_image(is__writable('xml/')); ?></li>
-	<li>files   <?php echo output_image(is__writable('files/')); ?></li>
+	<li>files/global   <?php echo output_image(is__writable('files/global/')); ?></li>
 	<li>files/perpage   <?php echo output_image(is__writable('files/perpage/')); ?></li>
+	<li>xml   <?php echo output_image(is__writable('xml/')); ?></li>
 	<li>sitemap.xml   <?php echo output_image(is__writable('sitemap.xml')); ?></li>
 </ul>
 	<?php

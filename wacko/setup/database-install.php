@@ -38,7 +38,10 @@ function random_seed($length, $seed_complexity)
 	$di = 0;
 	$sy = 0;
 
-	if ($seed_complexity == 2) $sy = 100;
+	if ($seed_complexity == 2)
+	{
+		$sy = 100;
+	}
 
 	while ($uc == 0 || $lc == 0 || $di == 0 || $sy == 0)
 	{

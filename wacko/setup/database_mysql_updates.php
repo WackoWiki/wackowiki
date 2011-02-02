@@ -20,7 +20,7 @@ $alter_acl_r4_3_4 = "ALTER TABLE {$pref}acl ADD UNIQUE idx_page_id (page_id,priv
 $alter_acl_r4_3_5 = "ALTER TABLE {$pref}acl DROP page_tag";
 $alter_acl_r4_3_6 = "ALTER TABLE {$pref}acl DROP supertag";
 
-$update_acl_r4_3 = "UPDATE {$pref}acl AS acl, (SELECT id, tag FROM {$pref}pages) AS pages SET acl.page_id = pages.id WHERE acl.page_tag = pages.tag";
+$update_acl_r4_3 = "UPDATE {$pref}acl AS acl, (SELECT id, tag FROM {$pref}page) AS pages SET acl.page_id = pages.id WHERE acl.page_tag = pages.tag";
 
 // MENU
 $table_menu_r4_3 = "CREATE TABLE {$pref}menu (".
@@ -95,8 +95,8 @@ $alter_link_r4_3_4 = "ALTER TABLE {$pref}link DROP from_tag";
 $alter_link_r4_3_5 = "ALTER TABLE {$pref}link DROP INDEX from_tag, ADD INDEX from_tag (from_page_id, to_tag (78))";
 $alter_link_r4_3_6 = "ALTER TABLE {$pref}link ADD INDEX idx_from_page_id (from_page_id)";
 
-$update_link_r4_3 = "UPDATE {$pref}link AS link, (SELECT id, tag FROM {$pref}pages) AS pages SET link.from_page_id = pages.id WHERE link.from_tag = pages.tag";
-$update_link_r4_3_1 = "UPDATE {$pref}link AS link, (SELECT id, tag FROM {$pref}pages) AS pages SET link.to_page_id = pages.id WHERE link.to_tag = pages.tag";
+$update_link_r4_3 = "UPDATE {$pref}link AS link, (SELECT id, tag FROM {$pref}page) AS pages SET link.from_page_id = pages.id WHERE link.from_tag = pages.tag";
+$update_link_r4_3_1 = "UPDATE {$pref}link AS link, (SELECT id, tag FROM {$pref}page) AS pages SET link.to_page_id = pages.id WHERE link.to_tag = pages.tag";
 
 // LOG
 $table_log_r4_3 = "CREATE TABLE {$pref}log (".
@@ -154,14 +154,14 @@ $alter_page_r4_3_35 = "ALTER TABLE {$pref}page ADD reviewed_time DATETIME NOT NU
 $alter_page_r4_3_36 = "ALTER TABLE {$pref}page ADD menu_tag VARCHAR(250) NOT NULL DEFAULT '' AFTER supertag";
 
 $update_page_r4_3 = "UPDATE {$pref}page SET body_r=''";
-$update_page_r4_3_1 = "UPDATE {$pref}page AS page, (SELECT user_id, user_name FROM {$pref}users) AS users SET page.owner_id = users.user_id WHERE page.owner = users.user_name";
-$update_page_r4_3_2 = "UPDATE {$pref}page AS page, (SELECT user_id, user_name FROM {$pref}users) AS users SET page.user_id = users.user_id WHERE page.user = users.user_name";
-$update_page_r4_3_3 = "UPDATE {$pref}page AS page, (SELECT id, tag FROM {$pref}pages) AS pages2 SET page.comment_on_id = pages2.id WHERE page.comment_on = pages2.tag";
+$update_page_r4_3_1 = "UPDATE {$pref}page AS page, (SELECT user_id, user_name FROM {$pref}user) AS users SET page.owner_id = users.user_id WHERE page.owner = users.user_name";
+$update_page_r4_3_2 = "UPDATE {$pref}page AS page, (SELECT user_id, user_name FROM {$pref}user) AS users SET page.user_id = users.user_id WHERE page.user = users.user_name";
+$update_page_r4_3_3 = "UPDATE {$pref}page AS page, (SELECT id, tag FROM {$pref}page) AS pages2 SET page.comment_on_id = pages2.id WHERE page.comment_on = pages2.tag";
 $update_page_r4_3_4 = "UPDATE {$pref}page AS page, (SELECT comment_on_id, COUNT(comment_on_id) as n FROM {$pref}page WHERE comment_on_id != '0' GROUP BY comment_on_id) AS comments_on SET page.comments = comments_on.n WHERE page.id = comments_on.comment_on_id";
-$update_page_r4_3_5 = "UPDATE {$pref}page as page, (SELECT tag, MIN(time) AS oldest FROM wacko_revisions GROUP BY tag) AS revisions SET page.created = revisions.oldest WHERE page.tag = revisions.tag AND page.created IS NULL";
-$update_page_r4_3_6 = "UPDATE {$pref}page as page SET page.created = page.time WHERE pages.id = page.id AND page.created IS NULL";
+$update_page_r4_3_5 = "UPDATE {$pref}page as page, (SELECT tag, MIN(time) AS oldest FROM {$pref}revision GROUP BY tag) AS revisions SET page.created = revisions.oldest WHERE page.tag = revisions.tag AND page.created IS NULL";
+$update_page_r4_3_6 = "UPDATE {$pref}page as page SET page.created = page.time WHERE page.created IS NULL";
 $update_page_r4_3_7 = "UPDATE {$pref}page as page SET minor_edit = '0' WHERE page.minor_edit IS NULL";
-$update_page_r4_3_8 = "UPDATE {$pref}page SET formatting = 'wacko' WHERE formatting = ''";
+$update_page_r4_3_8 = "UPDATE {$pref}page SET formatting = 'wacko' WHERE formatting IS NULL";
 $update_page_r4_3_9 = "UPDATE {$pref}page as page SET reviewed = '0' WHERE page.reviewed IS NULL";
 $update_page_r4_3_10 = "UPDATE {$pref}page as page SET tree_level = '0' WHERE page.tree_level IS NULL";
 
@@ -223,13 +223,13 @@ $alter_revision_r4_3_22 = "ALTER TABLE {$pref}revision ADD reviewer_id INT(10) U
 $alter_revision_r4_3_23 = "ALTER TABLE {$pref}revision ADD reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER reviewed";
 $alter_revision_r4_3_24 = "ALTER TABLE {$pref}revision ADD menu_tag VARCHAR(250) NOT NULL DEFAULT '' AFTER supertag";
 
-$update_revision_r4_3 = "UPDATE {$pref}revision AS revisions, (SELECT user_id, user_name FROM {$pref}users) AS users SET revisions.owner_id = users.user_id WHERE revisions.owner = users.user_name";
-$update_revision_r4_3_1 = "UPDATE {$pref}revision AS revisions, (SELECT user_id, user_name FROM {$pref}users) AS users SET revisions.user_id = users.user_id WHERE revisions.user = users.user_name";
+$update_revision_r4_3 = "UPDATE {$pref}revision AS revisions, (SELECT user_id, user_name FROM {$pref}user) AS users SET revisions.owner_id = users.user_id WHERE revisions.owner = users.user_name";
+$update_revision_r4_3_1 = "UPDATE {$pref}revision AS revisions, (SELECT user_id, user_name FROM {$pref}user) AS users SET revisions.user_id = users.user_id WHERE revisions.user = users.user_name";
 $update_revision_r4_3_2 = "UPDATE {$pref}revision SET latest = '0'";
-$update_revision_r4_3_3 = "UPDATE {$pref}revision AS revisions, (SELECT id, tag FROM {$pref}pages) AS pages SET revisions.page_id = pages.id WHERE revisions.tag = pages.tag";
-# $update_revision_r4_3_x = "UPDATE {$pref}revision AS revisions, (SELECT id, tag FROM {$pref}pages) AS pages2 SET revisions.comment_on_id = pages2.id WHERE revisions.comment_on = pages2.tag";
-$update_revision_r4_3_4 = "UPDATE {$pref}revision revisions AS revisions SET minor_edit = '0' WHERE revisions.minor_edit IS NULL";
-$update_revision_r4_3_5 = "UPDATE {$pref}revision SET formatting = 'wacko' WHERE formatting = ''";
+$update_revision_r4_3_3 = "UPDATE {$pref}revision AS revisions, (SELECT page_id, tag FROM {$pref}page) AS pages SET revisions.page_id = pages.page_id WHERE revisions.tag = pages.tag";
+# $update_revision_r4_3_x = "UPDATE {$pref}revision AS revisions, (SELECT page_id, tag FROM {$pref}page) AS pages2 SET revisions.comment_on_id = pages2.page_id WHERE revisions.comment_on = pages2.tag";
+$update_revision_r4_3_4 = "UPDATE {$pref}revision AS revisions SET minor_edit = '0' WHERE revisions.minor_edit IS NULL";
+$update_revision_r4_3_5 = "UPDATE {$pref}revision SET formatting = 'wacko' WHERE formatting IS NULL";
 
 // UPLOAD
 $alter_upload_r4_3 = "ALTER TABLE {$pref}upload CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -246,7 +246,7 @@ $alter_upload_r4_3 = "ALTER TABLE {$pref}upload CHANGE id id INT(10) UNSIGNED NO
 $alter_upload_r4_3_1 = "ALTER TABLE {$pref}upload DROP user";
 $alter_upload_r4_3_2 = "ALTER TABLE {$pref}upload CHANGE id upload_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
 
-$update_upload_r4_3 = "UPDATE {$pref}upload AS upload, (SELECT user_id, user_name FROM {$pref}users) AS users SET upload.user_id = users.user_id WHERE upload.user = users.user_name";
+$update_upload_r4_3 = "UPDATE {$pref}upload AS upload, (SELECT user_id, user_name FROM {$pref}user) AS users SET upload.user_id = users.user_id WHERE upload.user = users.user_name";
 
 // USER
 $rename_user_r4_3_1 = "RENAME TABLE {$pref}users TO {$pref}user";
@@ -331,7 +331,7 @@ $alter_watch_r4_3_6 = "ALTER TABLE {$pref}watch CHANGE id watch_id INT(10) UNSIG
 $alter_watch_r4_3_7 = "ALTER TABLE {$pref}watch CHANGE time watch_time TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
 $alter_watch_r4_3_8 = "ALTER TABLE {$pref}watch ADD comment_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER page_id";
 
-$update_watch_r4_3 = "UPDATE {$pref}watch AS watch, (SELECT user_id, user_name FROM {$pref}user) AS user SET watch.user_id = user.user_id WHERE watch.user = user.name";
-$update_watch_r4_3_1 = "UPDATE {$pref}watch AS watch, (SELECT id, tag FROM {$pref}page) AS page SET watch.page_id = page.id WHERE watch.tag = page.tag";
+$update_watch_r4_3 = "UPDATE {$pref}watch AS watch, (SELECT user_id, user_name FROM {$pref}user) AS user SET watch.user_id = user.user_id WHERE watch.user = user.user_name";
+$update_watch_r4_3_1 = "UPDATE {$pref}watch AS watch, (SELECT page_id, tag FROM {$pref}page) AS page SET watch.page_id = page.page_id WHERE watch.tag = page.tag";
 
 ?>
