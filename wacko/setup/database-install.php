@@ -98,14 +98,14 @@ $password_encrypted		= hash('sha256', $config['admin_name'].$salt.$_POST['passwo
 
 $config_insert = '';
 
-// system holds all default pages
+// user 'system' holds all default pages
 $insert_system				= "INSERT INTO ".$config['table_prefix']."user (user_name, password, salt, email, account_type, signup_time) VALUES ('System', '', '', '', '1', '')";
 $insert_admin				= "INSERT INTO ".$config['table_prefix']."user (user_name, password, salt, email, signup_time) VALUES ('".$config['admin_name']."', '".$password_encrypted."', '".$salt."', '".$config['admin_email']."', NOW())";
 $insert_admin_setting		= "INSERT INTO ".$config['table_prefix']."user_setting (user_id, theme, lang) VALUES ((SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), '".$config['theme']."', '".$config['language']."')";
 // TODO: for Upgrade insert other aliases also in group table
 // $config['aliases'] = array('Admins' => $config['admin_name']);
 
-
+// default groups
 $insert_admin_group			= "INSERT INTO ".$config['table_prefix']."group (group_name, description, moderator, created) VALUES ('Admins', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
 $insert_admin_group_member	= "INSERT INTO ".$config['table_prefix']."group_member (group_id, user_id) VALUES ((SELECT group_id FROM ".$config['table_prefix']."group WHERE group_name = 'Admins' LIMIT 1), (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1))";
 
@@ -118,6 +118,8 @@ $insert_logo_image = "INSERT INTO ".$config['table_prefix']."upload (page_id, us
 
 // set back theme to default, just a precaution
 $config['theme'] = 'default';
+
+$config['show_spaces']= ($config['show_spaces'] == 'N' ? 0 : 1);
 
 // inserting config values
 $config_db['abuse_email'] = $config['admin_email'];
@@ -617,6 +619,16 @@ switch($config['database_driver'])
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingSystemAccount'], @mysql_query($insert_system, $dblink), str_replace('%1', 'system account', $lang['ErrorAlreadyExists']));
+
+					#test($lang['InstallingAdmin'], @mysql_query($insert_admin, $dblink), str_replace('%1', 'admin user', $lang['ErrorAlreadyExists']));
+					test($lang['InstallingAdminSetting'], @mysql_query($insert_admin_setting, $dblink), str_replace('%1', 'admin user settings', $lang['ErrorAlreadyExists']));
+					test($lang['InstallingAdminGroup'], @mysql_query($insert_admin_group, $dblink), str_replace('%1', 'admin group', $lang['ErrorAlreadyExists']));
+					test($lang['InstallingAdminGroupMember'], @mysql_query($insert_admin_group_member, $dblink), str_replace('%1', 'admin group member', $lang['ErrorAlreadyExists']));
+
+					test($lang['InstallingEverybodyGroup'], @mysql_query($insert_everybody_group, $dblink), str_replace('%1', 'everybody group', $lang['ErrorAlreadyExists']));
+					test($lang['InstallingRegisteredGroup'], @mysql_query($insert_registered_group, $dblink), str_replace('%1', 'registered group', $lang['ErrorAlreadyExists']));
+					test($lang['InstallingModeratorGroup'], @mysql_query($insert_moderator_group, $dblink), str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
+					test($lang['InstallingReviewerGroup'], @mysql_query($insert_reviewer_group, $dblink), str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
 			}
 			print("            </ul>\n");
 		}
@@ -967,6 +979,16 @@ switch($config['database_driver'])
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingSystemAccount'], @mysqli_query($dblink, $insert_system), str_replace('%1', 'system account', $lang['ErrorAlreadyExists']));
+
+					#test($lang['InstallingAdmin'], @mysqli_query($dblink, $insert_admin), str_replace('%1', 'admin user', $lang['ErrorAlreadyExists']));
+					test($lang['InstallingAdminSetting'], @mysqli_query($dblink, $insert_admin_setting), str_replace('%1', 'admin user settings', $lang['ErrorAlreadyExists']));
+					test($lang['InstallingAdminGroup'], @mysqli_query($dblink, $insert_admin_group), str_replace('%1', 'admin group', $lang['ErrorAlreadyExists']));
+					test($lang['InstallingAdminGroupMember'], @mysqli_query($dblink, $insert_admin_group_member), str_replace('%1', 'admin group member', $lang['ErrorAlreadyExists']));
+
+					test($lang['InstallingEverybodyGroup'], @mysqli_query($dblink, $insert_everybody_group), str_replace('%1', 'everybody group', $lang['ErrorAlreadyExists']));
+					test($lang['InstallingRegisteredGroup'], @mysqli_query($dblink, $insert_registered_group), str_replace('%1', 'registered group', $lang['ErrorAlreadyExists']));
+					test($lang['InstallingModeratorGroup'], @mysqli_query($dblink, $insert_moderator_group), str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
+					test($lang['InstallingReviewerGroup'], @mysqli_query($dblink, $insert_reviewer_group), str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
 
 			}
 			print("         </ul>\n");

@@ -98,7 +98,7 @@ if (!function_exists('decompose_options'))
 
 if (!function_exists('convert_into_menu_table'))
 {
-	function convert_into_menu_table($bookmarks, $user_id)
+	function convert_into_menu_table(&$wacko, $bookmarks, $user_id)
 	{
 		// bookmarks
 		$_bookmarks	= explode("\n", $bookmarks);
@@ -131,8 +131,8 @@ if (!function_exists('convert_into_menu_table'))
 						}
 
 						$title			= trim(preg_replace('/|__|\[\[|\(\(/', '', $text));
-						$page_id		= $this->get_page_id($url);
-						$page_title		= $this->get_page_title('', $page_id);
+						$page_id		= $wacko->get_page_id($url);
+						$page_title		= $wacko->get_page_title('', $page_id);
 
 						if ($page_title !== $title)
 						{
@@ -147,13 +147,13 @@ if (!function_exists('convert_into_menu_table'))
 
 				if (isset($page_id))
 				{
-					$this->query(
-						"INSERT INTO ".$this->config['table_prefix']."menu SET ".
-						"user_id			= '".quote($this->dblink, $user_id)."', ".
-						"page_id			= '".quote($this->dblink, $page_id)."', ".
-						"lang				= '".quote($this->dblink, $bm_lang)."', ".
-						"menu_title			= '".quote($this->dblink, $title)."', ".
-						"menu_position		= '".quote($this->dblink, ($key + 1))."' ");
+					$wacko->query(
+						"INSERT INTO ".$wacko->config['table_prefix']."menu SET ".
+						"user_id			= '".quote($wacko->dblink, $user_id)."', ".
+						"page_id			= '".quote($wacko->dblink, $page_id)."', ".
+						"lang				= '".quote($wacko->dblink, $bm_lang)."', ".
+						"menu_title			= '".quote($wacko->dblink, $title)."', ".
+						"menu_position		= '".quote($wacko->dblink, ($key + 1))."' ");
 				}
 
 				$bm_lang = '';
@@ -173,7 +173,7 @@ if ($this->is_admin())
 		<?php
 		echo $this->form_close();
 	}
-	// rename files in \files\perpage folder to @page_id@file_name
+	// migrates user settings to 'user_setting' table
 	else if (isset($_POST['migrate_user_otions']))
 	{
 		$_users = $this->load_all(
@@ -199,10 +199,36 @@ if ($this->is_admin())
 			$this->query($sql);
 
 			// Bookmarks
-			convert_into_menu_table($_user['bookmarks'], $_user['user_id']);
+			convert_into_menu_table($this, $_user['bookmarks'], $_user['user_id']);
 		}
 
 		echo "<br />".$count." user settings inserted.";
+		echo "<br />bookmarks inserted in new menu table.";
+
+		// DROP obsolete fields in user table after successful data migration
+		$sql_drop_1 = "ALTER TABLE ".$this->config['table_prefix']."user DROP changes_count";
+		$sql_drop_2 = "ALTER TABLE ".$this->config['table_prefix']."user DROP doubleclick_edit";
+		$sql_drop_3 = "ALTER TABLE ".$this->config['table_prefix']."user DROP show_comments";
+		$sql_drop_4 = "ALTER TABLE ".$this->config['table_prefix']."user DROP bookmarks";
+		$sql_drop_5 = "ALTER TABLE ".$this->config['table_prefix']."user DROP lang";
+		$sql_drop_6 = "ALTER TABLE ".$this->config['table_prefix']."user DROP show_spaces";
+		$sql_drop_7 = "ALTER TABLE ".$this->config['table_prefix']."user DROP typografica";
+		$sql_drop_8 = "ALTER TABLE ".$this->config['table_prefix']."user DROP more";
+		$sql_drop_9 = "ALTER TABLE ".$this->config['table_prefix']."user DROP motto";
+		$sql_drop_10 = "ALTER TABLE ".$this->config['table_prefix']."user DROP revisions_count";
+
+		$this->query($sql_drop_1);
+		$this->query($sql_drop_2);
+		$this->query($sql_drop_3);
+		$this->query($sql_drop_4);
+		$this->query($sql_drop_5);
+		$this->query($sql_drop_6);
+		$this->query($sql_drop_7);
+		$this->query($sql_drop_8);
+		$this->query($sql_drop_9);
+		$this->query($sql_drop_10);
+
+		echo "<br />DROPed obsolete fields in user table after successful data migration.";
 	}
 }
 
@@ -210,8 +236,10 @@ if ($this->is_admin())
 ##            MIGRATE ACLs to new scheme              ##
 ########################################################
 
-// rename the old 'acl' table to 'acl_old' first
+# postponed -> R4.5
 
+// rename the old 'acl' table to 'acl_old' first
+/*
 if ($this->is_admin())
 {
 	if (!isset($_POST['migrate_acls']))
@@ -400,6 +428,6 @@ if ($this->is_admin())
 
 		echo '<br />'.$old_acl_count.' acl and '.$privilege_count.' privilege settings inserted.';
 	}
-}
+}*/
 
 ?>
