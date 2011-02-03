@@ -35,7 +35,7 @@ if (isset($_GET['confirm']))
 		$this->log(4, str_replace('%2', $temp['user_name'], str_replace('%1', $temp['email'], $this->get_translation('LogUserEmailActivated', $this->config['language']))));
 
 		// TODO: reset user (session data)
-		#$this->set_user($this->load_user($user['user_name']), 0, 1);
+		#$this->set_user($this->load_user($user['user_name']), 0, 1, true);
 
 		unset($temp);
 	}
@@ -169,14 +169,16 @@ else if ($user = $this->get_user())
 	// reload user data
 	if ( (isset($_POST['action']) && ($_POST['action'] == 'update' || $_POST['action'] == 'update_extended')) || (isset($_GET['resend_code']) && $_GET['resend_code'] == 1))
 	{
-		$this->set_user($this->load_user($user['user_name']), 0, 1);
+		$_session_time = $user['session_time'];
+		$this->set_user($this->load_user($user['user_name']), 0, 1, true);
 		$this->set_bookmarks(BM_USER);
+		$this->set_user_setting('session_time', $_session_time);
+		$user = $this->get_user();
 
 		// forward
 		$this->set_message($this->get_translation('UserSettingsStored', $_POST['lang']));
-
 		$this->redirect(($_POST['action'] == 'update_extended' ? $this->href('', '', 'extended') : $this->href()));
-		$user = $this->get_user();
+
 	}
 
 	#echo "<h3>".$this->get_translation('UserSettings')."</h3>";
