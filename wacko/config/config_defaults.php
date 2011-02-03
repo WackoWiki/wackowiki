@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // Default configuration values
 
-$wacko_config = array(
+$wacko_config_defaults = array(
 	'database_driver' => '',
 	'database_host' => 'localhost',
 	'database_port' => '',

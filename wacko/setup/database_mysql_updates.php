@@ -276,16 +276,20 @@ $alter_user_r4_3_22 = "ALTER TABLE {$pref}user ADD salt VARCHAR(40) NOT NULL DEF
 $alter_user_r4_3_23 = "ALTER TABLE {$pref}user ADD account_type TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER email, ADD INDEX idx_account_type (account_type)";
 $alter_user_r4_3_24 = "ALTER TABLE {$pref}user ADD last_mark DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER session_expire";
 $alter_user_r4_3_25 = "ALTER TABLE {$pref}user CHANGE email_confirm email_confirm VARCHAR(64) NOT NULL DEFAULT ''";
-$alter_user_r4_3_26 = "ALTER TABLE {$pref}user DROP changes_count"; // TODO: drop first after successful data migration
-$alter_user_r4_3_27 = "ALTER TABLE {$pref}user DROP doubleclick_edit";
-$alter_user_r4_3_28 = "ALTER TABLE {$pref}user DROP show_comments";
-$alter_user_r4_3_29 = "ALTER TABLE {$pref}user DROP bookmarks";
-$alter_user_r4_3_30 = "ALTER TABLE {$pref}user DROP lang";
-$alter_user_r4_3_31 = "ALTER TABLE {$pref}user DROP show_spaces";
-$alter_user_r4_3_32 = "ALTER TABLE {$pref}user DROP typografica";
-$alter_user_r4_3_33 = "ALTER TABLE {$pref}user DROP more";
-$alter_user_r4_3_34 = "ALTER TABLE {$pref}user DROP motto";
-$alter_user_r4_3_35 = "ALTER TABLE {$pref}user DROP revisions_count";
+$alter_user_r4_3_26 = "ALTER TABLE {$pref}user ADD login_count INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER last_mark";
+$alter_user_r4_3_27 = "ALTER TABLE {$pref}user ADD lost_password_request_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0' AFTER login_count";
+$alter_user_r4_3_28 = "ALTER TABLE {$pref}user ADD failed_login_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0' AFTER lost_password_request_count";
+
+$alter_user_r4_3_29 = "ALTER TABLE {$pref}user DROP changes_count"; // TODO: drop first after successful data migration
+$alter_user_r4_3_30 = "ALTER TABLE {$pref}user DROP doubleclick_edit";
+$alter_user_r4_3_31 = "ALTER TABLE {$pref}user DROP show_comments";
+$alter_user_r4_3_32 = "ALTER TABLE {$pref}user DROP bookmarks";
+$alter_user_r4_3_33 = "ALTER TABLE {$pref}user DROP lang";
+$alter_user_r4_3_34 = "ALTER TABLE {$pref}user DROP show_spaces";
+$alter_user_r4_3_35 = "ALTER TABLE {$pref}user DROP typografica";
+$alter_user_r4_3_36 = "ALTER TABLE {$pref}user DROP more";
+$alter_user_r4_3_37 = "ALTER TABLE {$pref}user DROP motto";
+$alter_user_r4_3_38 = "ALTER TABLE {$pref}user DROP revisions_count";
 
 $update_user_r4_3 = "UPDATE {$pref}user SET doubleclick_edit = '0' WHERE doubleclick_edit = '2'";
 $update_user_r4_3_1 = "UPDATE {$pref}user SET show_comments = '0' WHERE show_comments = '2'";

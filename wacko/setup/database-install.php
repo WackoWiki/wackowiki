@@ -116,6 +116,9 @@ $insert_reviewer_group		= "INSERT INTO ".$config['table_prefix']."group (group_n
 
 $insert_logo_image = "INSERT INTO ".$config['table_prefix']."upload (page_id, user_id, file_name, description, uploaded_dt, file_size, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1),'wacko4.png', 'WackoWiki', NOW(), '1580', '108', '50', 'png')";
 
+// set back theme to default, just a precaution
+$config['theme'] = 'default';
+
 // inserting config values
 $config_db['abuse_email'] = $config['admin_email'];
 $config_db['admin_email'] = $config['admin_email'];
@@ -219,7 +222,7 @@ $config_db['smtp_host'] = $config['smtp_host'];
 $config_db['smtp_password'] = $config['smtp_password'];
 $config_db['smtp_port'] = $config['smtp_port'];
 $config_db['smtp_username'] = $config['smtp_username'];
-$config_db['show_spaces'] = $config['show_spaces'];
+$config_db['show_spaces'] = $config['show_spaces']; // TODO: int -> Y
 $config_db['spam_filter'] = $config['spam_filter'];
 $config_db['tls'] = $config['tls'];
 $config_db['tls_implicit'] = $config['tls_implicit'];
@@ -455,6 +458,9 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_23, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_24, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_25, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_26, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_27, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_28, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_1, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_2, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
@@ -803,6 +809,9 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_23), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_24), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_25), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_26), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_27), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_28), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_1), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_2), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
