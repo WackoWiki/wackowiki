@@ -540,7 +540,7 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 	if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 1 && ($this->config['hide_rating'] != 2 || $this->get_user()))
 	{
 		// determine if user has rated this page
-		if (handler_show_page_is_rated($this, $this->page['page_id']) === false && $_GET['show_rating'] != 1)
+		if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isset($_GET['show_rating']) && $_GET['show_rating'] != 1) )
 		{
 			// display rating header
 			echo '<a name="rating"></a>';

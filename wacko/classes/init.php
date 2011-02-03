@@ -164,7 +164,7 @@ class Init
 			/*
 				VERY IMPORTANT NOTE
 
-				The name of the array "wakkaConfig" is very important for backwards compatibility when we are upgrading an ancient wakka install.
+				The name of the array "wakkaConfig" is very important for backwards compatibility when we are upgrading an old Wacko install.
 				For that reason this can never change although internally the config data is referred to as $this->config
 			*/
 
@@ -181,16 +181,18 @@ class Init
 				// load primary config
 				if ( @file_exists('wakka.config.php') )
 				{
-					// It's an old WackoWiki or WakkaWiki install so load the data and start the upgrader.
+					// It's an old WackoWiki install so load the data and start the upgrader.
 					if ( @filesize('wakka.config.php') > 0)
 					{
 						require('wakka.config.php');
-						$this->config = $wakkaConfig;
+						// merge with config defaults
+						$_wacko_config = array_merge($wacko_config_defaults, (array)$wakkaConfig);
+						$this->config = $_wacko_config;
 					}
 					else
 					{
 						// Else it's an empty file so use the default settings, this is quite unlikely to occur.
-						$this->config = $wacko_config;
+						$this->config = $wacko_config_defaults;
 					}
 				}
 				else if ( @file_exists('config/config.php') )
@@ -199,7 +201,9 @@ class Init
 					if (@filesize('config/config.php') > 0)
 					{
 						require('config/config.php');
-						$this->config = $wacko_config;
+						// merge with config defaults
+						$_wacko_config = array_merge($wacko_config_defaults, (array)$wacko_config);
+						$this->config = $_wacko_config;
 
 						if ($wacko_config['wacko_version'] != 'R4.3.dev' && (!$wacko_config['system_seed'] || strlen($wacko_config['system_seed']) < 20))
 						{
@@ -211,12 +215,12 @@ class Init
 					else
 					{
 						// Else it's an empty file so use the default settings.  This is typical on a fresh install.
-						$this->config = $wacko_config;
+						$this->config = $wacko_config_defaults;
 					}
 				}
 				else
 				{
-					$this->config = $wacko_config;
+					$this->config = $wacko_config_defaults;
 				}
 
 				$this->installer();
