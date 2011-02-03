@@ -3466,14 +3466,16 @@ class Wacko
 		}
 	}
 
-	function load_user($user_name, $user_id = 0, $password = 0)
+	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false)
 	{
-		$fiels_default = 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs';
-		// TODO: add option for session to load only a subset of fields
-		$fields_session = 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.email_confirm, u.session_time, u.session_time, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs';
+		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs';
+		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.email_confirm, u.session_time, u.session_time, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs';
 
 		$user = $this->load_single(
-			"SELECT {$fiels_default} ".
+			"SELECT ".($session_data
+				? "{$fields_session} "
+				: "{$fiels_default} "
+				).
 			"FROM ".$this->config['user_table']." u ".
 				"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
 			"WHERE ".( $user_id != 0
@@ -3948,7 +3950,7 @@ class Wacko
 			return false;
 		}
 
-		if (is_array($this->config['aliases']))
+		if (isset($this->config['aliases']) && is_array($this->config['aliases']))
 		{
 			$al = $this->config['aliases'];
 			$adm = explode("\\n", $al['Admins']);
@@ -3969,7 +3971,7 @@ class Wacko
 			return false;
 		}
 
-		if (is_array($this->config['aliases']))
+		if (isset($this->config['aliases']) && is_array($this->config['aliases']))
 		{
 			$al  = $this->config['aliases'];
 
@@ -3994,7 +3996,7 @@ class Wacko
 			return false;
 		}
 
-		if (is_array($this->config['aliases']))
+		if (isset($this->config['aliases']) && is_array($this->config['aliases']))
 		{
 			$al  = $this->config['aliases'];
 
@@ -4105,7 +4107,6 @@ class Wacko
 
 	function save_acl($page_id, $privilege, $list)
 	{
-
 		if ($this->load_acl($page_id, $privilege, 0, 0, 0))
 		{
 			$this->query(
@@ -4121,6 +4122,8 @@ class Wacko
 					"list		= '".quote($this->dblink, trim(str_replace("\r", '', $list)))."', ".
 					"page_id	= '".quote($this->dblink, $page_id)."', ".
 					"privilege	= '".quote($this->dblink, $privilege)."'");
+
+
 		}
 	}
 
@@ -4206,11 +4209,11 @@ class Wacko
 					if (!$acl)
 					{
 						$acl = array(
-							"page_id" => $page_id,
-							"privilege" => $privilege,
-							"list" => $this->config['default_'.$privilege.'_acl'],
-							"time" => date('YmdHis'),
-							"default" => 1
+							'page_id' => $page_id,
+							'privilege' => $privilege,
+							'list' => $this->config['default_'.$privilege.'_acl'],
+							'time' => date('YmdHis'),
+							'default' => 1
 						);
 					}
 				}
@@ -4363,7 +4366,7 @@ class Wacko
 	// aliases stuff
 	function replace_aliases($acl)
 	{
-		if (!is_array($this->config['aliases']))
+		if (!isset($this->config['aliases']) || !is_array($this->config['aliases']))
 		{
 			return $acl;
 		}
@@ -4845,7 +4848,7 @@ class Wacko
 
 		// parse authentication cookie and get user data
 		$auth = $this->decompose_auth_cookie();
-		$user = $this->load_user($auth['user_name'], 0, $auth['password']);
+		$user = $this->load_user($auth['user_name'], 0, $auth['password'], true);
 
 		// run in tls mode?
 		if ($this->config['tls'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) || $user == true))
@@ -5409,12 +5412,14 @@ class Wacko
 			return false;
 		}
 
-		return $this->query(
+		$this->query(
 			"DELETE a.* ".
 			"FROM ".$this->config['table_prefix']."acl a ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ".
 					"ON (a.page_id = p.page_id) ".
 			"WHERE p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
+
+		return true;
 	}
 
 	function remove_page($tag, $comment_on_id = 0, $dontkeep = 0)
