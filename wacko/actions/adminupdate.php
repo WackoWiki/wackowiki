@@ -151,7 +151,7 @@ if (!function_exists('convert_into_menu_table'))
 						"INSERT INTO ".$wacko->config['table_prefix']."menu SET ".
 						"user_id			= '".quote($wacko->dblink, $user_id)."', ".
 						"page_id			= '".quote($wacko->dblink, $page_id)."', ".
-						"lang				= '".quote($wacko->dblink, $bm_lang)."', ".
+						"lang				= '".quote($wacko->dblink, (isset($bm_lang) ? $bm_lang : '') )."', ".
 						"menu_title			= '".quote($wacko->dblink, $title)."', ".
 						"menu_position		= '".quote($wacko->dblink, ($key + 1))."' ");
 				}
@@ -188,7 +188,7 @@ if ($this->is_admin())
 			// user_id, doubleclick_edit, show_comments, bookmarks, revisions_count, changes_count, lang, show_spaces, typografica
 			// $_user['options'] : theme, autocomplete, dont_redirect, send_watchmail, show_files, allow_intercom, hide_lastsession, validate_ip, noid_pubs
 
-			if ($_user['options']['theme'] == '' || !isset($_user['options']['theme']))
+			if (!isset($_user['options']['theme']) || $_user['options']['theme'] == '')
 			{
 				$_user['options']['theme'] = $this->config['theme'];
 			}

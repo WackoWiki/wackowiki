@@ -99,8 +99,8 @@ if (isset($_POST['_user_bookmarks']))
 				if ($this->has_access('write', $_page_id))
 				{
 					// writing bookmark
-					$bookmark = '(('.$page['tag'].' '.$this->get_page_title($page['tag']).($user['lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))';
-					$bookmarks = $this->get_bookmarks();
+					$bookmark	= '(('.$page['tag'].' '.$this->get_page_title($page['tag']).($user['lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))';
+					$bookmarks	= $this->get_bookmarks();
 
 					if (!in_array($bookmark, $bookmarks))
 					{
@@ -175,7 +175,7 @@ if (isset($_POST['_user_bookmarks']))
 	}
 
 	// reload user data
-	$this->set_user($this->load_user($user['user_name']), 0, 1);
+	$this->set_user($this->load_user($user['user_name']), 0, 1, true);
 	$this->set_bookmarks(BM_USER);
 }
 
