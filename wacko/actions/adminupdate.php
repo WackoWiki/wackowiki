@@ -96,7 +96,7 @@ if (!function_exists('decompose_options'))
 	}
 }
 
-if (!function_exists('convert_into_bookmark_table'))
+if (!function_exists('convert_into_menu_table'))
 {
 	function convert_into_menu_table($bookmarks, $user_id)
 	{
@@ -187,6 +187,11 @@ if ($this->is_admin())
 			$_user['options'] = decompose_options($_user['more']);
 			// user_id, doubleclick_edit, show_comments, bookmarks, revisions_count, changes_count, lang, show_spaces, typografica
 			// $_user['options'] : theme, autocomplete, dont_redirect, send_watchmail, show_files, allow_intercom, hide_lastsession, validate_ip, noid_pubs
+
+			if ($_user['options']['theme'] == '' || !isset($_user['options']['theme']))
+			{
+				$_user['options']['theme'] = $this->config['theme'];
+			}
 
 			$sql =	"INSERT INTO {$this->config['table_prefix']}user_setting
 					(user_id, doubleclick_edit, show_comments, revisions_count, changes_count, lang, show_spaces, typografica, theme, autocomplete, dont_redirect, send_watchmail, show_files, allow_intercom, hide_lastsession, validate_ip, noid_pubs)
