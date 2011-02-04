@@ -413,8 +413,6 @@ $wacko_translation = array(
 	'Modified'				=> 'geändert',
 
 	'EditIcon'				=> 'Editieren',
-	'LinksTreeLevel4Warning'	=> 'die Baumansicht unterstützt nicht mehr als 4 Ebenen',
-	'LinksTreeTitle'		=> 'Baumansicht',
 	'TreeClusterTitle'		=> 'Baumansicht des Clusters %1',
 	'TreeSiteTitle'			=> 'Baumansicht der Seite',
 	'TreeEmpty'				=> '%1&nbsp;hat keine Unterseiten',

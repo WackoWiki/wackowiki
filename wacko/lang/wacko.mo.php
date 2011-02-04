@@ -415,8 +415,6 @@ $wacko_translation = array(
 	'Modified'		=> 'modified',
 
 	'EditIcon' => 'editare',
-	'LinksTreeLevel4Warning' => 'Дерево ссылок не может иметь больше 4 уровней',
-	'LinksTreeTitle' => 'Lista de lincuri',
 	'TreeClusterTitle' => 'Дерево кластера %1',
 	'TreeSiteTitle' => 'Structura saitului',
 	'TreeEmpty' => '%1&nbsp;не содержит подстраниц.',

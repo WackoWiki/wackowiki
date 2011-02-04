@@ -412,8 +412,6 @@ $wacko_translation = array(
 	'Modified'		=> 'modified',
 
 	'EditIcon' => '&Eacute;dition',
-	'LinksTreeLevel4Warning' => 'L&rsquo;arbre des liens ne supporte que 4 niveaux',
-	'LinksTreeTitle' => 'Arbre des liens',
 	'TreeClusterTitle' => 'Arbre du groupe %1',
 	'TreeSiteTitle' => 'Arbre du site',
 	'TreeEmpty' => '%1&nbsp;n&rsquo;a pas de pages subordonnées ou sous-pages',

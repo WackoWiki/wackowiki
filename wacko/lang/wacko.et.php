@@ -412,8 +412,6 @@ $wacko_translation = array(
 	'Modified'		=> 'modified',
 
 	'EditIcon' => 'redigeeri',
-	'LinksTreeLevel4Warning' => 'Ühenduste puus on võimalik maksimaalselt 4 taset',
-	'LinksTreeTitle' => 'Ühenduste puu',
 	'TreeClusterTitle' =>'Grupi %1 puu',
 	'TreeSiteTitle' =>'Saitide puu',
 	'TreeEmpty' => '%1&nbsp;-el ei ole alamlehti',

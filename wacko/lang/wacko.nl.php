@@ -412,8 +412,6 @@ $wacko_translation = array(
 	'Modified'		=> 'modified',
 
 	'EditIcon' => 'Bewerk',
-	'LinksTreeLevel4Warning' => 'Verwijzingenboom ondersteunt niet meer dan 4 niveaus',
-	'LinksTreeTitle' => 'Verwijzingenboom',
 	'TreeClusterTitle' => 'Verwijzingenboom van cluster %1',
 	'TreeSiteTitle' => 'Boom van alle pagina\'s',
 	'TreeEmpty' => '%1&nbsp;heeft geen subpagina\'s',
