@@ -252,8 +252,8 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 				// display files header
 				?>
 	<a name="files" id="files"></a>
-	<div id="filesheader"><?php echo $this->get_translation('Files_all') ?>
-	<?php echo "[<a href=\"".$this->href('', '', 'show_files=0')."\">".$this->get_translation('HideFiles')."</a>]"; ?>
+	<div id="filesheader">
+	<?php echo "<a href=\"".$this->href('', '', 'show_files=0')."\" title=\"".$this->get_translation('HideFiles')."\">".$this->get_translation('Files_all')."</a>"; ?>
 	</div>
 
 				<?php
@@ -305,16 +305,16 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 				switch ($c = count($files))
 				{
 					case 0:
-						echo $this->get_translation('Files_0');
+						$show_files = $this->get_translation('Files_0');
 						break;
 					case 1:
-						echo $this->get_translation('Files_1');
+						$show_files = $this->get_translation('Files_1');
 						break;
 					default:
-						echo str_replace('%1', $c, $this->get_translation('Files_n'));
+						$show_files = str_replace('%1', $c, $this->get_translation('Files_n'));
 				}
 
-				echo "[<a href=\"".$this->href('', '', 'show_files=1#files')."\">".$this->get_translation('ShowFiles')."</a>]";
+				echo "<a href=\"".$this->href('', '', 'show_files=1#files')."\" title=\"".$this->get_translation('ShowFiles')."\">".$show_files."</a>";
 				echo "</div>\n";
 			}
 		}
@@ -378,7 +378,7 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 					echo '<div style="float:right; letter-spacing:normal;"><small>'.$pagination['text'].'</small></div>';
 				}
 
-				echo $this->get_translation('Comments_all')." [<a href=\"".$this->href('', '', 'show_comments=0')."\">".$this->get_translation('HideComments')."</a>]";
+				echo "<a href=\"".$this->href('', '', 'show_comments=0')."\" title=\"".$this->get_translation('HideComments')."\">".$this->get_translation('Comments_all')."</a>";
 				echo "</div>\n";
 
 			// display comments themselves
@@ -524,14 +524,12 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 		<?php
 				$c = (int)$this->page['comments'];
 
-				if		($c  <  1)	echo $this->get_translation('Comments_0');
-				else if	($c === 1)	echo $this->get_translation('Comments_1');
-				else if	($c  >  1)	echo str_replace('%1', $c, $this->get_translation('Comments_n'));
+				if		($c  <  1)	$show_comments = $this->get_translation('Comments_0');
+				else if	($c === 1)	$show_comments = $this->get_translation('Comments_1');
+				else if	($c  >  1)	$show_comments = str_replace('%1', $c, $this->get_translation('Comments_n'));
 
-			//TODO: show link to show comment only if there is one or/and user has the right to add a new one
-		?>
-			[<a href="<?php echo $this->href('', '', 'show_comments=1#comments')?>"><?php echo $this->get_translation('ShowComments'); ?></a>]</div>
-		<?php
+				//TODO: show link to show comment only if there is one or/and user has the right to add a new one
+				echo "<a href=\"".$this->href('', '', 'show_comments=1#comments')."\" title=\"".$this->get_translation('ShowComments')."\">".$show_comments."</a></div>";
 			}
 		}
 	}

@@ -15,7 +15,7 @@ insert_page('Каталог', 'Каталог', '{{PageIndex}}', $lng, 'Admins', false, true, 
 insert_page('Изменения', 'Изменения', '{{changes}}', $lng, 'Admins', false, true, 'Изменения');
 insert_page('НовыеКомментарии', 'Новые Комментарии', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Комментарии');
 
-insert_page('Пользователи', 'Пользователи', '{{LastUsers}}', $lng, 'Admins', false, false);
+insert_page('Users', 'Пользователи', '{{users}}', $lng, 'Admins', false, false);
 insert_page('Регистрация', 'Регистрация', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Password', 'Password', '{{ChangePassword}}', $lng, 'Admins', false, false);

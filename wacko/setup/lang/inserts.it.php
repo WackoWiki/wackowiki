@@ -15,7 +15,7 @@ insert_page('UltimeModifiche', 'Ultime Modifiche', '{{changes}}', $lng, 'Admins'
 insert_page('UltimiCommenti', 'Ultimi Commenti', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Commenti');
 insert_page('IndicePagine', 'Indice Pagine', '{{PageIndex}}', $lng, 'Admins', false, true, 'Indice');
 
-insert_page('Utenti', 'Utenti', '{{LastUsers}}', $lng, 'Admins', false, false);
+insert_page('Users', 'Utenti', '{{users}}', $lng, 'Admins', false, false);
 insert_page('Registrazione', 'Registrazione', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Password', 'Password', '{{ChangePassword}}', $lng, 'Admins', false, false);

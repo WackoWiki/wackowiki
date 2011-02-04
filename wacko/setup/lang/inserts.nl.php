@@ -15,7 +15,7 @@ insert_page('PaginaIndex', 'Pagina Index', '{{PageIndex}}', $lng, 'Admins', fals
 insert_page('LaatsteWijzigingen', 'Laatste Wijzigingen', '{{changes}}', $lng, 'Admins', false, true, 'Wijzigingen');
 insert_page('LaatsteOpmerkingen', 'Laatste Opmerkingen', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Opmerkingen');
 
-insert_page('Gebruikers', 'Gebruikers', '{{LastUsers}}', $lng, 'Admins', false, false);
+insert_page('Users', 'Gebruikers', '{{users}}', $lng, 'Admins', false, false);
 insert_page('Registratie', 'Registratie', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Paswoord', 'Paswoord', '{{ChangePassword}}', $lng, 'Admins', false, false);
