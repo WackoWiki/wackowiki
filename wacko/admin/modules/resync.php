@@ -80,7 +80,7 @@ function admin_resync(&$engine, &$module)
 			$engine->log(1, 'Synchronized user statistics');
 ?>
 			<p>
-				<em>Statistics users synchronized.</em>
+				<em>User Statistics synchronized.</em>
 			</p>
 			<br />
 <?php
@@ -91,10 +91,12 @@ function admin_resync(&$engine, &$module)
 			$xml = new rss($engine);
 			$xml->changes();
 			$xml->comments();
+
 			if ($engine->config['news_cluster'])
 			{
 				$xml->news();
 			}
+
 			$engine->log(1, 'Synchronized RSS feeds');
 			unset($xml);
 ?>
@@ -162,7 +164,7 @@ function admin_resync(&$engine, &$module)
 					$engine->clear_link_table();
 					$engine->current_context--;
 				}
-				$engine->redirect('/admin.php?mode='.$module['mode'].'&start=1&action=wikilinks&i='.(++$i));
+				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&action=wikilinks&i='.(++$i))));
 			}
 			else
 			{

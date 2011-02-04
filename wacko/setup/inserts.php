@@ -2,9 +2,9 @@
 
 //  Needed (for some reason) to allow config variables to be accessed within insert_pages.
 global $config_global, $dblink_global, $lang_global;
-$config_global = $config;
-$dblink_global = $dblink;
-$lang_global = $lang;
+$config_global	= $config;
+$dblink_global	= $dblink;
+$lang_global	= $lang;
 
 function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $critical = false, $is_menu = false, $menu_title = false)
 {

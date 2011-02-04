@@ -5,26 +5,26 @@
 function test($text, $condition, $errorText = '')
 {
 	global $lang;
-	print("            <li>".$text."   ".output_image($condition));
+	echo "            <li>".$text."   ".output_image($condition);
 
 	if(!$condition)
 	{
 		if($errorText)
 		{
-			print("<ul class=\"install_error\"><li>".$errorText."</li></ul>");
+			echo "<ul class=\"install_error\"><li>".$errorText."</li></ul>";
 		}
 
-		print("</li>\n");
+		echo "</li>\n";
 		return false;
 	}
 
-	print("</li>\n");
+	echo "</li>\n";
 	return true;
 }
 
 function output_error($errorText = '')
 {
-	print("<ul class=\"install_error\"><li>".$errorText."</li></ul>");
+	echo "<ul class=\"install_error\"><li>".$errorText."</li></ul>";
 }
 
 function random_seed($length, $seed_complexity)
@@ -85,7 +85,7 @@ function random_seed($length, $seed_complexity)
 }
 
 // test configuration
-print("         <h2>".$lang['TestingConfiguration']."</h2>\n");
+echo "         <h2>".$lang['TestingConfiguration']."</h2>\n";
 
 // Generic Default Inserts
 if ($config['system_seed'] == '')
@@ -279,7 +279,7 @@ switch($config['database_driver'])
 		require_once('setup/database_mysql.php');
 		require_once('setup/database_mysql_updates.php');
 
-		print("         <ul>\n");
+		echo "         <ul>\n";
 
 		if(!test($lang['TestConnectionString'], $dblink = @mysql_connect($config['database_host'].($port == '' ? '' : ':'.$port), $config['database_user'], $config['database_password']), $lang['ErrorDBConnection']))
 		{
@@ -287,8 +287,8 @@ switch($config['database_driver'])
 			 There was a problem with the connection string
 			 */
 
-			print("         </ul>\n");
-			print("         <br />\n");
+			echo "         </ul>\n";
+			echo "         <br />\n";
 
 			$fatal_error = true;
 		}
@@ -298,8 +298,8 @@ switch($config['database_driver'])
 			 There was a problem with the specified database name
 			 */
 
-			print("         </ul>\n");
-			print("         <br />\n");
+			echo "         </ul>\n";
+			echo "         <br />\n";
 
 			$fatal_error = true;
 		}
@@ -308,8 +308,8 @@ switch($config['database_driver'])
 			/*
 			 The connection string and the database name are ok, proceed
 			 */
-			print("         </ul>\n");
-			print("         <br />\n");
+			echo "         </ul>\n";
+			echo "         <br />\n";
 
 			if ( !isset ( $config['wacko_version'] ) ) $config['wacko_version'] = '';
 			if (!$version = trim($config['wacko_version'])) $version = '0';
@@ -318,8 +318,8 @@ switch($config['database_driver'])
 
 			if ($config['DeleteTables'] == 'on')
 			{
-				print("<h2>".$lang['DeletingTables']."</h2>\n");
-				print("            <ul>\n");
+				echo "<h2>".$lang['DeletingTables']."</h2>\n";
+				echo "            <ul>\n";
 				test(str_replace('%1', 'acl', $lang['DeletingTable']), @mysql_query($table_acl_drop, $dblink), str_replace('%1', 'acl', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'menu', $lang['DeletingTable']), @mysql_query($table_menu_drop, $dblink), str_replace('%1', 'menu', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'cache', $lang['DeletingTable']), @mysql_query($table_cache_drop, $dblink), str_replace('%1', 'cache', $lang['ErrorDeletingTable']));
@@ -339,9 +339,9 @@ switch($config['database_driver'])
 				test(str_replace('%1', 'user', $lang['DeletingTable']), @mysql_query($table_user_drop, $dblink), str_replace('%1', 'user', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'user_setting', $lang['DeletingTable']), @mysql_query($table_user_setting_drop, $dblink), str_replace('%1', 'user_setting', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'watch', $lang['DeletingTable']), @mysql_query($table_watch_drop, $dblink), str_replace('%1', 'watch', $lang['ErrorDeletingTable']));
-				print("            <li>".$lang['DeletingTablesEnd']."</li>\n");
-				print("         </ul>\n");
-				print("         <br />\n");
+				echo "            <li>".$lang['DeletingTablesEnd']."</li>\n";
+				echo "         </ul>\n";
+				echo "         <br />\n";
 				$version = 0;
 			}
 
@@ -349,8 +349,8 @@ switch($config['database_driver'])
 			{
 				// new installation
 				case '0':
-					print("<h2>".$lang['InstallingTables']."</h2>\n");
-					print("            <ul>\n");
+					echo "<h2>".$lang['InstallingTables']."</h2>\n";
+					echo "            <ul>\n";
 					test(str_replace('%1', 'acl', $lang['CreatingTable']), @mysql_query($table_acl, $dblink), str_replace('%1', 'acl', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'menu', $lang['CreatingTable']), @mysql_query($table_menu, $dblink), str_replace('%1', 'menu', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'cache', $lang['CreatingTable']), @mysql_query($table_cache, $dblink), str_replace('%1', 'cache', $lang['ErrorCreatingTable']));
@@ -381,14 +381,15 @@ switch($config['database_driver'])
 					test($lang['InstallingRegisteredGroup'], @mysql_query($insert_registered_group, $dblink), str_replace('%1', 'registered group', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingModeratorGroup'], @mysql_query($insert_moderator_group, $dblink), str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingReviewerGroup'], @mysql_query($insert_reviewer_group, $dblink), str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
-					print("            </ul>\n");
-					print("            <br />\n");
-					print("            <h2>".$lang['InstallingDefaultData']."</h2>\n");
-					print("            <ul>\n");
-					print("               <li>".$lang['InstallingPagesBegin']);
+
+					echo "            </ul>\n";
+					echo "            <br />\n";
+					echo "            <h2>".$lang['InstallingDefaultData']."</h2>\n";
+					echo "            <ul>\n";
+					echo "               <li>".$lang['InstallingPagesBegin'];
 					require_once('setup/inserts.php');
-					print("</li>\n");
-					print("            <li>".$lang['InstallingPagesEnd']."</li>\n");
+					echo "</li>\n";
+					echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
 
 					test($lang['InstallingLogoImage'], @mysql_query($insert_logo_image, $dblink), str_replace('%1', 'logo image', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -402,8 +403,8 @@ switch($config['database_driver'])
 
 				// upgrade from R4.2 to R4.3.rc1
 				case 'R4.2':
-					print("         <h2>Wacko R4.2 ".$lang['To']." R4.3.rc1</h2>\n");
-					print("         <ul>\n");
+					echo "         <h2>Wacko R4.2 ".$lang['To']." R4.3.rc1</h2>\n";
+					echo "         <ul>\n";
 
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_2_1, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_2_2, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
@@ -415,8 +416,8 @@ switch($config['database_driver'])
 
 				// upgrade from R4.3.rc1 to R4.4.rc1
 				case 'R4.3':
-					print("         <h2>Wacko R4.3.rc1 ".$lang['To']." R4.4.rc1</h2>\n");
-					print("         <ul>\n");
+					echo "         <h2>Wacko R4.3.rc1 ".$lang['To']." R4.4.rc1</h2>\n";
+					echo "         <ul>\n";
 
 					// rename tables
 					test(str_replace('%1', 'acl', $lang['RenameTable']), @mysql_query($rename_acl_r4_3_1, $dblink), str_replace('%1', 'acl', $lang['ErrorRenamingTable']));
@@ -630,8 +631,10 @@ switch($config['database_driver'])
 					test($lang['InstallingModeratorGroup'], @mysql_query($insert_moderator_group, $dblink), str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingReviewerGroup'], @mysql_query($insert_reviewer_group, $dblink), str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
 			}
-			print("            </ul>\n");
+
+			echo "            </ul>\n";
 		}
+
 		break;
 
 	case 'mysqli_legacy':
@@ -641,7 +644,7 @@ switch($config['database_driver'])
 		if ( !isset ( $config['database_port'] ) ) $config['database_port'] = '3306';
 		if (!$port = trim($config['database_port'])) $port = '3306';
 
-		print("         <ul>\n");
+		echo "         <ul>\n";
 
 		if(!test($lang['TestConnectionString'], $dblink = @mysqli_connect($config['database_host'], $config['database_user'], $config['database_password'], null, $port), $lang['ErrorDBConnection']))
 		{
@@ -649,8 +652,8 @@ switch($config['database_driver'])
 			 There was a problem with the connection string
 			 */
 
-			print("         </ul>\n");
-			print("         <br />\n");
+			echo "         </ul>\n";
+			echo "         <br />\n";
 
 			$fatal_error = true;
 		}
@@ -660,8 +663,8 @@ switch($config['database_driver'])
 			 There was a problem with the specified database name
 			 */
 
-			print("         </ul>\n");
-			print("         <br />\n");
+			echo "         </ul>\n";
+			echo "         <br />\n";
 
 			$fatal_error = true;
 		}
@@ -670,8 +673,8 @@ switch($config['database_driver'])
 			/*
 			 The connection string and the database name are ok, proceed
 			 */
-			print("         </ul>\n");
-			print("         <br />\n");
+			echo "         </ul>\n";
+			echo "         <br />\n";
 
 
 			if ( !isset( $config['wacko_version'] ) ) $config['wacko_version'] = '0';
@@ -680,8 +683,8 @@ switch($config['database_driver'])
 
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
-				print("<h2>".$lang['DeletingTables']."</h2>\n");
-				print("            <ul>\n");
+				echo "<h2>".$lang['DeletingTables']."</h2>\n";
+				echo "            <ul>\n";
 				test(str_replace('%1', 'acl', $lang['DeletingTable']), @mysqli_query($dblink, $table_acl_drop), str_replace('%1', 'acl', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'menu', $lang['DeletingTable']), @mysqli_query($dblink, $table_menu_drop), str_replace('%1', 'menu', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'cache', $lang['DeletingTable']), @mysqli_query($dblink, $table_cache_drop), str_replace('%1', 'cache', $lang['ErrorDeletingTable']));
@@ -701,9 +704,9 @@ switch($config['database_driver'])
 				test(str_replace('%1', 'user', $lang['DeletingTable']), @mysqli_query($dblink, $table_user_drop), str_replace('%1', 'user', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'user_setting', $lang['DeletingTable']), @mysqli_query($dblink, $table_user_setting_drop), str_replace('%1', 'user_setting', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'watch', $lang['DeletingTable']), @mysqli_query($dblink, $table_watch_drop), str_replace('%1', 'watch', $lang['ErrorDeletingTable']));
-				print("            <li>".$lang['DeletingTablesEnd']."</li>\n");
-				print("         </ul>\n");
-				print("         <br />\n");
+				echo "            <li>".$lang['DeletingTablesEnd']."</li>\n";
+				echo "         </ul>\n";
+				echo "         <br />\n";
 				$version = 0;
 			}
 
@@ -711,8 +714,8 @@ switch($config['database_driver'])
 			{
 				// new installation
 				case '0':
-					print("         <h2>".$lang['InstallingTables']."</h2>\n");
-					print("         <ul>\n");
+					echo "         <h2>".$lang['InstallingTables']."</h2>\n";
+					echo "         <ul>\n";
 					test(str_replace('%1', 'acl', $lang['CreatingTable']), @mysqli_query($dblink, $table_acl), str_replace('%1', 'acl', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'menu', $lang['CreatingTable']), @mysqli_query($dblink, $table_menu), str_replace('%1', 'menu', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'cache', $lang['CreatingTable']), @mysqli_query($dblink, $table_cache), str_replace('%1', 'cache', $lang['ErrorCreatingTable']));
@@ -743,14 +746,14 @@ switch($config['database_driver'])
 					test($lang['InstallingRegisteredGroup'], @mysqli_query($dblink, $insert_registered_group), str_replace('%1', 'registered group', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingModeratorGroup'], @mysqli_query($dblink, $insert_moderator_group), str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingReviewerGroup'], @mysqli_query($dblink, $insert_reviewer_group), str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
-					print("         </ul>\n");
-					print("         <br />\n");
-					print("         <h2>".$lang['InstallingDefaultData']."</h2>\n");
-					print("         <ul>\n");
-					print("            <li>".$lang['InstallingPagesBegin']);
+					echo "         </ul>\n";
+					echo "         <br />\n";
+					echo "         <h2>".$lang['InstallingDefaultData']."</h2>\n";
+					echo "         <ul>\n";
+					echo "            <li>".$lang['InstallingPagesBegin'];
 					require_once('setup/inserts.php');
-					print("</li>\n");
-					print("            <li>".$lang['InstallingPagesEnd']."</li>\n");
+					echo "</li>\n";
+					echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
 
 					test($lang['InstallingLogoImage'], @mysqli_query($dblink, $insert_logo_image), str_replace('%1', 'logo image', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -763,8 +766,8 @@ switch($config['database_driver'])
 
 				// upgrade from R4.2 to R4.3.rc1
 				case 'R4.2':
-					print("         <h2>Wacko R4.2 ".$lang['To']." R4.3.rc1</h2>\n");
-					print("         <ul>\n");
+					echo "         <h2>Wacko R4.2 ".$lang['To']." R4.3.rc1</h2>\n";
+					echo "         <ul>\n";
 
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_2_1), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_2_2), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
@@ -776,8 +779,8 @@ switch($config['database_driver'])
 
 				// upgrade from R4.3.rc1 to R4.4.rc1
 				case 'R4.3':
-					print("         <h2>Wacko R4.3.rc1 ".$lang['To']." R4.4.rc1</h2>\n");
-					print("         <ul>\n");
+					echo "         <h2>Wacko R4.3.rc1 ".$lang['To']." R4.4.rc1</h2>\n";
+					echo "         <ul>\n";
 
 					// rename tables
 					test(str_replace('%1', 'acl', $lang['RenameTable']), @mysqli_query($dblink, $rename_acl_r4_3_1), str_replace('%1', 'acl', $lang['ErrorRenamingTable']));
@@ -991,8 +994,10 @@ switch($config['database_driver'])
 					test($lang['InstallingReviewerGroup'], @mysqli_query($dblink, $insert_reviewer_group), str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
 
 			}
-			print("         </ul>\n");
+
+			echo "         </ul>\n";
 		}
+
 		break;
 
 	default:
@@ -1030,22 +1035,22 @@ switch($config['database_driver'])
 				break;
 		}
 
-		print("         <ul>\n");
+		echo "         <ul>\n";
 		/*
 			PHP4 doesn't support try/catch blocks so we put the PDO code in a seperate file.
 			Since we don't support PDO in PHP4 they can never come down this route without PHP5.
 			i.e. they don't see this as a selection on the previous page.
 		*/
 		require_once('setup/database-install-pdo.php');
-		print("         </ul>\n");
-		print("         <br />\n");
+		echo "         </ul>\n";
+		echo "         <br />\n";
 
 		if(!$fatal_error)
 		{
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
-				print("<h2>".$lang['DeletingTables']."</h2>\n");
-				print("            <ul>\n");
+				echo "<h2>".$lang['DeletingTables']."</h2>\n";
+				echo "            <ul>\n";
 				test_pdo(str_replace('%1', 'acl', $lang['DeletingTable']), $table_acl_drop, str_replace('%1', 'acl', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'menu', $lang['DeletingTable']), $table_menu_drop, str_replace('%1', 'menu', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'cache', $lang['DeletingTable']), $table_cache_drop, str_replace('%1', 'cache', $lang['ErrorDeletingTable']));
@@ -1065,14 +1070,14 @@ switch($config['database_driver'])
 				test_pdo(str_replace('%1', 'user', $lang['DeletingTable']), $table_user_drop, str_replace('%1', 'user', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'user_setting', $lang['DeletingTable']), $table_user_setting_drop, str_replace('%1', 'user_setting', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'watch', $lang['DeletingTable']), $table_watch_drop, str_replace('%1', 'watch', $lang['ErrorDeletingTable']));
-				print("            <li>".$lang['DeletingTablesEnd']."</li>\n");
-				print("         </ul>\n");
-				print("         <br />\n");
+				echo "            <li>".$lang['DeletingTablesEnd']."</li>\n";
+				echo "         </ul>\n";
+				echo "         <br />\n";
 			}
 
 			// No need to check the past versions since PDO SQL is only officially supported in this release (v4.3)
-			print("         <h2>".$lang['InstallingTables']."</h2>\n");
-			print("         <ul>\n");
+			echo "         <h2>".$lang['InstallingTables']."</h2>\n";
+			echo "         <ul>\n";
 			test_pdo(str_replace('%1', 'acl', $lang['CreatingTable']), $table_acl, str_replace('%1', 'acl', $lang['ErrorCreatingTable']));
 			test_pdo(str_replace('%1', 'menu', $lang['CreatingTable']), $table_menu, str_replace('%1', 'menu', $lang['ErrorCreatingTable']));
 			test_pdo(str_replace('%1', 'cache', $lang['CreatingTable']), $table_cache, str_replace('%1', 'cache', $lang['ErrorCreatingTable']));
@@ -1103,18 +1108,18 @@ switch($config['database_driver'])
 			test_pdo($lang['InstallingRegisteredGroup'], $insert_registered_group, str_replace('%1', 'registered group', $lang['ErrorAlreadyExists']));
 			test_pdo($lang['InstallingModeratorGroup'], $insert_moderator_group, str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
 			test_pdo($lang['InstallingReviewerGroup'], $insert_reviewer_group, str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
-			print("         </ul>\n");
-			print("         <br />\n");
-			print("         <h2>".$lang['InstallingDefaultData']."</h2>\n");
-			print("         <ul>\n");
-			print("            <li>".$lang['InstallingPagesBegin']);
+			echo "         </ul>\n";
+			echo "         <br />\n";
+			echo "         <h2>".$lang['InstallingDefaultData']."</h2>\n";
+			echo "         <ul>\n";
+			echo "            <li>".$lang['InstallingPagesBegin'];
 			require_once('setup/inserts.php');
-			print("</li>\n");
-			print("            <li>".$lang['InstallingPagesEnd']."</li>\n");
+			echo "</li>\n";
+			echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
 
 			test_pdo($lang['InstallingLogoImage'], $insert_logo_image, str_replace('%1', 'logo image', $lang['ErrorAlreadyExists']));
 			test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
-			print("         </ul>\n");
+			echo "         </ul>\n";
 		}
 
 		break;
