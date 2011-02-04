@@ -15,7 +15,7 @@ insert_page('Opdateringer', 'Opdateringer', '{{changes}}', $lng, 'Admins', false
 insert_page('Kommentarer', 'Kommentarer', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Kommentarer');
 insert_page('Indhold', 'Indhold', '{{PageIndex}}', $lng, 'Admins', false, true, 'Indhold');
 
-insert_page('Brugere', 'Brugere', '{{LastUsers}}', $lng, 'Admins', false, false);
+insert_page('Users', 'Brugere', '{{users}}', $lng, 'Admins', false, false);
 insert_page('Registrering', 'Registrering', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Password', 'Password', '{{ChangePassword}}', $lng, 'Admins', false, false);

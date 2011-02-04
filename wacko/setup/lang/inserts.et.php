@@ -15,7 +15,7 @@ insert_page('ViimasedMuudatused', 'Viimased Muudatused', '{{changes}}', $lng, 'A
 insert_page('ViimatiKommenteeritud', 'Viimati Kommenteeritud', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Kommenteeritud');
 insert_page('SisuKord', 'Sisu Kord', '{{PageIndex}}', $lng, 'Admins', false, true, 'Index');
 
-insert_page('Users', 'Users', '{{LastUsers}}', $lng, 'Admins', false, false);
+insert_page('Users', 'Users', '{{users}}', $lng, 'Admins', false, false);
 insert_page('Registration', 'Registration', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Password', 'Password', '{{ChangePassword}}', $lng, 'Admins', false, false);
