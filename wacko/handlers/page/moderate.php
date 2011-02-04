@@ -207,7 +207,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$engine->forum	= true;
 
 	// resave first comment as new topic page
-	$first_tag		= $engine->get_page_tag_by_id(array_shift($comment_ids));
+	$first_tag		= $engine->get_page_tag(array_shift($comment_ids));
 	$page			= $engine->load_page($first_tag);
 
 	// resave modified body
@@ -408,7 +408,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$i = 0;
 				foreach ($set as $id)
 				{
-					$old_tags[] = $this->get_page_tag_by_id($id);
+					$old_tags[] = $this->get_page_tag($id);
 					$new_tags[] = $_POST['section'].substr($old_tags[$i], strrpos($old_tags[$i], '/'));
 
 					if (moderate_page_exists($this, $new_tags[$i++]) === true)
@@ -447,7 +447,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// perform accepted rename
 			if (isset($_POST['accept']))
 			{
-				$old_tag	= $this->get_page_tag_by_id($set[0]);
+				$old_tag	= $this->get_page_tag($set[0]);
 				$tag		= trim($_POST['title'], " \t");
 				$title		= $tag;
 				$tag 		= ucwords($tag);
@@ -488,7 +488,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				foreach ($set as $id)
 				{
-					$topics[] = $this->get_page_tag_by_id($id);
+					$topics[] = $this->get_page_tag($id);
 				}
 				moderate_merge_topics($this, $_POST['base'], $topics);
 				$this->log(3, str_replace('%2', $_POST['base'], str_replace('%1', '##'.implode('##, ##', $topics).'##', $this->get_translation('LogMergedPages', $this->config['language']))));
@@ -643,7 +643,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			foreach ($set as $id)
 			{
 				$accept_text[] = '&laquo;'.$this->get_page_title('', $id).'&raquo;';
-				$topics_list[] = $this->get_page_tag_by_id($id);
+				$topics_list[] = $this->get_page_tag($id);
 			}
 
 			$list = '';

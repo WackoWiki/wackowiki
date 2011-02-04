@@ -200,7 +200,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 
 				if ($this->page['comment_on_id'] != 0)
 				{
-					$this->redirect($this->href('', $this->get_page_tag_by_id($this->page['comment_on_id']), 'show_comments=1#'.$this->page['tag']));
+					$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1#'.$this->page['tag']));
 				}
 				else
 				{

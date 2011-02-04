@@ -25,7 +25,7 @@ if (!isset($preview)) $preview = 0;
 
 if ( isset($page_id) )
 {
-	$page_tag = $this->get_page_tag_by_id($page_id);
+	$page_tag = $this->get_page_tag($page_id);
 
 	#$is_permanent	= (isset($vars['permanent']) ? $vars['permanent'] : 0);
 

@@ -173,7 +173,7 @@ class Wacko
 		return ((float)$usec + (float)$sec);
 	}
 
-	function get_page_tag_by_id($page_id = 0)
+	function get_page_tag($page_id = 0)
 	{
 		$page = $this->load_single(
 					"SELECT tag ".
@@ -1499,7 +1499,7 @@ class Wacko
 	// $lang			- page language
 	// $mute			- supress email reminders and xml rss recompilation
 	// $user			- attach guest pseudonym
-	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = false, $mute = false, $user = false)
+	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = false, $mute = false, $user = false, $user_page = false)
 	{
 		$desc = '';
 		// user data
@@ -1510,8 +1510,14 @@ class Wacko
 			$user = GUEST;
 		}
 
+		if ($user && $user != GUEST)
+		{
+			$owner		= $user;
+			$owner_id	= $user_id	= $this->get_user_id($user);
+			$reg		= true;
+		}
 		// current user is owner; if user is logged in! otherwise, no owner.
-		if ($this->get_user_name())
+		else if ($this->get_user_name())
 		{
 			$owner		= $user		= $this->get_user_name();
 			$owner_id	= $user_id	= $this->get_user_id();
@@ -1566,7 +1572,7 @@ class Wacko
 		{
 			if ($comment_on_id)
 			{
-				$this->cache->cache_invalidate($this->get_page_tag_by_id($comment_on_tag));
+				$this->cache->cache_invalidate($this->get_page_tag($comment_on_tag));
 			}
 			else
 			{
@@ -1577,8 +1583,9 @@ class Wacko
 
 		// check privileges
 		if ( ($this->page && $this->has_access('write', $page_id))
-			|| (!$this->page && $this->has_access('create')) // TODO: (!$this->page && $this->has_access('create', $tag))
-			|| ($comment_on_id && $this->has_access('comment', $comment_on_id)) )
+			|| (!$this->page && $this->has_access('create', '', $user)) // TODO: (!$this->page && $this->has_access('create', $tag))
+			|| ($comment_on_id && $this->has_access('comment', $comment_on_id))
+			|| $user_page == true)
 		{
 			// for forum topic prepare description
 			if (!$comment_on_id)
@@ -1776,7 +1783,7 @@ class Wacko
 						{
 							if ($user != $moderator)
 							{
-								$moderator_id = $this->get_user_id_by_name($moderator);
+								$moderator_id = $this->get_user_id($moderator);
 
 								$_user = $this->load_single(
 									"SELECT u.email, p.lang, u.email_confirm, u.enabled, p.send_watchmail ".
@@ -1865,7 +1872,7 @@ class Wacko
 										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
 												$user_name.
 												$this->get_translation('SomeoneCommented', $lang)."\n".
-												$this->href('', $this->get_page_tag_by_id($comment_on_id), '')."\n\n".
+												$this->href('', $this->get_page_tag($comment_on_id), '')."\n\n".
 												"----------------------------------------------------------------------\n\n".
 												$body."\n\n".
 												"----------------------------------------------------------------------\n\n".
@@ -3783,11 +3790,24 @@ class Wacko
 			"SELECT * FROM ".$this->config['user_table']." ORDER BY binary user_name");
 	}
 
-	function get_user_id()
+	function get_user_id($user = '')
 	{
-		if ($user = $this->get_user())
+		if (!empty($user))
 		{
-			$user_id = (isset($user['user_id']) ? $user['user_id'] : null);
+			$user = $this->load_single(
+					"SELECT user_id ".
+					"FROM ".$this->config['table_prefix']."user ".
+					"WHERE user_name = '".$user."' ".
+					"LIMIT 1");
+
+					// Get user value
+					$user_id = $user['user_id'];
+
+			return $user_id;
+		}
+		else if($_user = $this->get_user())
+		{
+			$user_id = (isset($_user['user_id']) ? $_user['user_id'] : null);
 		}
 
 		if (isset($user_id))
@@ -3798,20 +3818,6 @@ class Wacko
 		{
 			return null;
 		}
-	}
-
-	function get_user_id_by_name($user = '')
-	{
-		$user = $this->load_single(
-					"SELECT user_id ".
-					"FROM ".$this->config['table_prefix']."user ".
-					"WHERE user_name = '".$user."' ".
-					"LIMIT 1");
-
-					// Get user value
-					$user_id = $user['user_id'];
-
-		return $user_id;
 	}
 
 	function user_wants_comments()
@@ -4186,7 +4192,7 @@ class Wacko
 					// work correctly.
 					if (!empty($page_id))
 					{
-						$tag = strtolower($this->get_page_tag_by_id($page_id));
+						$tag = strtolower($this->get_page_tag($page_id));
 					}
 					else
 					{
@@ -4501,7 +4507,7 @@ class Wacko
 			}
 		}
 
-		$user_id	= $this->get_user_id_by_name('System');
+		$user_id	= $this->get_user_id('System');
 		$default_bm	= $this->get_user_bookmarks($user_id, $lang);
 		#$this->debug_print_r($default_bm);
 
@@ -4567,11 +4573,11 @@ class Wacko
 
 			// parsing bookmarks into link table
 			$bookmarks	= explode("\n", $bookmarks);
-			$bm_links = $this->parsing_bookmarks($bookmarks);
+			$bookmark_links = $this->parsing_bookmarks($bookmarks);
 
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmarks']		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bm_links;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt']	= $this->format(implode("\n", $bookmarks), 'wacko');
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmarks;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_links']	= $bookmark_links;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']	= $this->format(implode("\n", $bookmarks), 'wacko');
 		}
 
 		// adding new bookmark
@@ -4600,13 +4606,13 @@ class Wacko
 			}
 
 			// parsing bookmarks into link table
-			$bm_links = $this->parsing_bookmarks($bookmarks);
+			$bookmark_links = $this->parsing_bookmarks($bookmarks);
 
 			$this->set_user_setting('bookmarks', implode("\n", $bookmarks));
 
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmarks']		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bm_links;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt']	= $this->format(implode("\n", $bookmarks), 'wacko');
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmarks;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_links']	= $bookmark_links;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']	= $this->format(implode("\n", $bookmarks), 'wacko');
 		}
 
 		// removing bookmark
@@ -4635,67 +4641,67 @@ class Wacko
 				"LIMIT 1");
 
 			// parsing bookmarks into link table
-			$bm_links = $this->parsing_bookmarks($bookmarks);
+			$bookmark_links = $this->parsing_bookmarks($bookmarks);
 
 			$this->set_user_setting('bookmarks', ( $bookmarks ? implode("\n", $bookmarks) : '' ));
 
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmarks']		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']	= $bm_links;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt']	= ( $bookmarks ? $this->format(implode("\n", $bookmarks), 'wacko') : '' );
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmarks;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_links']	= $bookmark_links;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']	= ( $bookmarks ? $this->format(implode("\n", $bookmarks), 'wacko') : '' );
 		}
 	}
 
 	function parsing_bookmarks($bookmarks)
 	{
 		// parsing bookmarks into link table
-		$bm_links = $bookmarks;
+		$bookmark_links = $bookmarks;
 
-		for ($i = 0; $i < count($bm_links); $i++)
+		for ($i = 0; $i < count($bookmark_links); $i++)
 		{
-			if (strpos($bm_links[$i], '[') === 0 || strpos($bm_links[$i], '(') === 0)
+			if (strpos($bookmark_links[$i], '[') === 0 || strpos($bookmark_links[$i], '(') === 0)
 			{
-				if (($space = strpos($bm_links[$i], ' ')) == true)
+				if (($space = strpos($bookmark_links[$i], ' ')) == true)
 				{
-					$bm_links[$i] = substr($bm_links[$i], 0, $space);
+					$bookmark_links[$i] = substr($bookmark_links[$i], 0, $space);
 				}
 				else
 				{
-					$bm_links[$i] = substr($bm_links[$i], 0);
+					$bookmark_links[$i] = substr($bookmark_links[$i], 0);
 				}
 
-				$bm_links[$i] = trim($bm_links[$i], '[( )]');
-				#$bm_links[$i] = $this->npj_translit($bm_links[$i]);
+				$bookmark_links[$i] = trim($bookmark_links[$i], '[( )]');
+				#$bookmark_links[$i] = $this->npj_translit($bookmark_links[$i]);
 			}
 			else
 			{
-				$bm_links[$i] = '';
+				$bookmark_links[$i] = '';
 			}
 		}
 
-		return $bm_links;
+		return $bookmark_links;
 	}
 
 	function get_bookmarks()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmarks']))
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmark']))
 		{
-			return $_SESSION[$this->config['session_prefix'].'_'.'bookmarks'];
+			return $_SESSION[$this->config['session_prefix'].'_'.'bookmark'];
 		}
 	}
 
 	function get_bookmarks_formatted()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt']))
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']))
 		{
-			return $_SESSION[$this->config['session_prefix'].'_'.'bookmarksfmt'];
+			return $_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted'];
 		}
 	}
 
 	function get_bookmark_links()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks']))
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmark_links']))
 		{
-			return $_SESSION[$this->config['session_prefix'].'_'.'bookmarklinks'];
+			return $_SESSION[$this->config['session_prefix'].'_'.'bookmark_links'];
 		}
 	}
 
@@ -5052,7 +5058,7 @@ class Wacko
 
 		// forum page
 		if (preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->tag) ||
-		($this->page['comment_on_id'] ? preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->get_page_tag_by_id($this->page['comment_on_id'])) : ''))
+		($this->page['comment_on_id'] ? preg_match('/'.$this->config['forum_cluster'].'\/.+?\/.+/', $this->get_page_tag($this->page['comment_on_id'])) : ''))
 		{
 			$this->forum = true;
 		}

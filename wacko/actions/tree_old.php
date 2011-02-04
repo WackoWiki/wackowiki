@@ -10,7 +10,7 @@ $root = (isset($vars[$page]) ? $vars[$page] : '');
 
 // input
 if (!isset($owner)) $owner = '';
-$owner_id = $this->get_user_id_by_name($owner);
+$owner_id = $this->get_user_id($owner);
 if (!isset($nomark)) $nomark = '';
 if (!isset($abc)) $abc = '';
 if (!isset($filter)) $filter = '';

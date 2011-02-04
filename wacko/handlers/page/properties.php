@@ -21,7 +21,7 @@ if (!$this->page)
 // deny for comment
 if ($this->page['comment_on_id'])
 {
-	$this->redirect($this->href('', $this->get_page_tag_by_id($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
+	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
 }
 // and for forum page
 else if ($this->forum === true && !$this->is_admin())
