@@ -18,9 +18,10 @@ echo 'Recent Wacko version '.$this->format('**!!(green)'.$this->config['wacko_ve
 
 if ($this->is_admin())
 {
+	echo "<h3>1. Renames files in \\files\perpage folder to @page_id@file_name:</h3>";
+
 	if (!isset($_POST['rename']))
 	{
-		echo "<h3>1. Renames files in \\files\perpage folder to @page_id@file_name:</h3>";
 		echo $this->form_open();
 		?>
 		<input type="submit" name="rename"  value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
@@ -164,9 +165,10 @@ if (!function_exists('convert_into_menu_table'))
 
 if ($this->is_admin())
 {
+	echo "<h3>2. Migrates user options to user_setting table:</h3>";
+
 	if (!isset($_POST['migrate_user_otions']))
 	{
-		echo "<h3>2. Migrates user options to user_setting table:</h3>";
 		echo $this->form_open();
 		?>
 		<input type="submit" name="migrate_user_otions" value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
@@ -232,6 +234,79 @@ if ($this->is_admin())
 	}
 }
 
+########################################################
+##            UPDATE user statistics                  ##
+########################################################
+
+if ($this->is_admin())
+{
+	echo "<h3>2. Update User statistics:</h3>";
+
+	if (!isset($_POST['build_user_stats']))
+	{
+		echo $this->form_open();
+		?>
+		<input type="submit" name="build_user_stats" value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
+		<?php
+		echo $this->form_close();
+	}
+	// updates user statistics in 'user' table
+	else if (isset($_POST['build_user_stats']))
+	{
+					// total pages in ownership
+			$users = $this->load_all(
+				"SELECT p.owner_id, COUNT(p.tag) AS n ".
+				"FROM {$this->config['table_prefix']}page AS p, {$this->config['user_table']} AS u ".
+				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' ".
+				"GROUP BY p.owner_id");
+
+			foreach ($users as $user)
+			{
+				$this->query(
+					"UPDATE {$this->config['user_table']} ".
+					"SET total_pages = ".(int)$user['n']." ".
+					"WHERE user_id = '".quote($this->dblink, $user['owner_id'])."' ".
+					"LIMIT 1");
+			}
+
+			// total comments posted
+			$users = $this->load_all(
+				"SELECT p.user_id, COUNT(p.tag) AS n ".
+				"FROM {$this->config['table_prefix']}page AS p, {$this->config['user_table']} AS u ".
+				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' ".
+				"GROUP BY p.user_id");
+
+			foreach ($users as $user)
+			{
+				$this->query(
+					"UPDATE {$this->config['user_table']} ".
+					"SET total_comments = ".(int)$user['n']." ".
+					"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
+					"LIMIT 1");
+			}
+
+			// total revisions made
+			$users = $this->load_all(
+				"SELECT r.user_id, COUNT(r.tag) AS n ".
+				"FROM {$this->config['table_prefix']}revision AS r, {$this->config['user_table']} AS u ".
+				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' ".
+				"GROUP BY r.user_id");
+
+			foreach ($users as $user)
+			{
+				$this->query(
+					"UPDATE {$this->config['user_table']} ".
+					"SET total_revisions = ".(int)$user['n']." ".
+					"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
+					"LIMIT 1");
+			}
+
+			$this->log(1, 'Synchronized user statistics');
+
+			echo	'<p><em>User Statistics synchronized.</em></p><br />';
+
+	}
+}
 ########################################################
 ##            MIGRATE ACLs to new scheme              ##
 ########################################################

@@ -44,7 +44,7 @@ function admin_sysupdate(&$engine, &$module)
 					#	"SET supertag = '".$engine->npj_translit($page['tag'])."' ".
 					#	"WHERE tag = '".$page['tag']."'");
 				}
-				$engine->redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
+				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i))));
 			}
 			else
 			{
@@ -73,7 +73,7 @@ function admin_sysupdate(&$engine, &$module)
 						"SET to_supertag = '".$engine->npj_translit($page['to_tag'])."' ".
 						"WHERE to_tag = '".$page['to_tag']."'");
 				}
-				$engine->redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
+				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i))));
 			}
 			else
 			{
@@ -102,7 +102,7 @@ function admin_sysupdate(&$engine, &$module)
 							"supertag = '".$engine->npj_translit($page['tag'])."' ".
 						"WHERE page_id = ".$page['page_id']);
 				}
-				$engine->redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
+				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i))));
 			}
 			else
 			{
@@ -131,7 +131,7 @@ function admin_sysupdate(&$engine, &$module)
 						"SET supertag = '".$engine->npj_translit($page['tag'])."' ".
 						"WHERE revision_id = ".$page['revision_id']);
 				}
-				$engine->redirect('/admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i));
+				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i))));
 			}
 			else
 			{
