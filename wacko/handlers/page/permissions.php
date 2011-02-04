@@ -17,7 +17,7 @@ if (!$this->page)
 // deny for comment
 if ($this->page['comment_on_id'])
 {
-	$this->redirect($this->href('', $this->get_page_tag_by_id($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
+	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1').'#'.$this->page['tag']);
 }
 // and for forum page
 else if ($this->forum === true && !$this->is_admin())
@@ -110,7 +110,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				// change owner?
 				if ($newowner = $_POST['newowner'])
 				{
-					$newowner_id = $this->get_user_id_by_name($newowner);
+					$newowner_id = $this->get_user_id($newowner);
 					$this->set_page_owner($page['page_id'], $newowner_id);
 				}
 			}
@@ -147,7 +147,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				// change owner?
 				if ($newowner = $_POST['newowner'])
 				{
-					$newowner_id = $this->get_user_id_by_name($newowner);
+					$newowner_id = $this->get_user_id($newowner);
 					$this->set_page_owner($page['page_id'], $newowner_id);
 					$ownedpages .= $this->href('', $page['tag'])."\n";
 

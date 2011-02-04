@@ -169,12 +169,12 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 			// submitting input to DB
 			else
 			{
-				$salt_length = 10;
-				$salt = $this->random_password($salt_length, 3);
-				$confirm = hash('sha256', $password.$salt.mt_rand().time().mt_rand().$email.mt_rand());
-				$password_encrypted = hash('sha256', $user_name.$salt.$_POST['password']);
+				$salt_length		= 10;
+				$salt				= $this->random_password($salt_length, 3);
+				$confirm			= hash('sha256', $password.$salt.mt_rand().time().mt_rand().$email.mt_rand());
+				$password_encrypted	= hash('sha256', $user_name.$salt.$_POST['password']);
 
-				// INSERT USER
+				// INSERT user
 				$this->query(
 					"INSERT INTO ".$this->config['user_table']." ".
 					"SET ".
@@ -185,13 +185,14 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 						"password		= '".quote($this->dblink, $password_encrypted)."', ".
 						"salt			= '".quote($this->dblink, $salt)."'");
 
+				// get new user_id
 				$_user_id = $this->load_single(
 					"SELECT user_id ".
 					"FROM ".$this->config['table_prefix']."user ".
 					"WHERE user_name = '".quote($this->dblink, $user_name)."' ".
 					"LIMIT 1");
 
-				// INSERT USER Settings
+				// INSERT user settings
 				$this->query(
 					"INSERT INTO ".$this->config['table_prefix']."user_setting ".
 					"SET ".
@@ -201,8 +202,11 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 						"theme			= '".quote($this->dblink, $this->config['theme'])."', ".
 						"send_watchmail	= '".quote($this->dblink, 1)."'");
 
-				// INSERT USER Bookmarks
+				// INSERT user bookmarks
 				#$this->convert_into_bookmark_table($this->get_default_bookmarks($lang), $_user_id['user_id']);
+
+				// add user page
+				#$this->save_page($this->config['users_page'].'/'.$user_name, '', 'your page', 'auto created', '', '', '', ($lang ? $lang : $this->config['language']), '', $user_name);
 
 				// Send Email
 				if ($this->config['enable_email'] == true)
@@ -230,7 +234,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 				$this->config['wacko_name'].". ".
 				$this->get_translation('SiteEmailConfirm'));
 				$this->context[++$this->current_context] = '';
-				$this->redirect($this->href('', $this->get_translation('LoginPage')));
+				#$this->redirect($this->href('', $this->get_translation('LoginPage')));
 			}
 		}
 	}

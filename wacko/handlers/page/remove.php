@@ -168,7 +168,7 @@ if ($this->is_admin() ||
 			// return to commented page
 			if ($comment_on_id)
 			{
-				echo "<br />".$this->compose_link_to_page($this->get_page_tag_by_id($comment_on_id)."#comments", "", "&laquo; ".$this->get_translation('ReturnToCommented'), 0);
+				echo "<br />".$this->compose_link_to_page($this->get_page_tag($comment_on_id)."#comments", "", "&laquo; ".$this->get_translation('ReturnToCommented'), 0);
 			}
 		}
 		else

@@ -79,7 +79,7 @@ $wacko_translation = array(
 	'NumerateLinks' => 'Numerate links in print view',
 	'Typografica' => 'Autocorrect typografica when viewing',
 	'Comment' => 'Comment',
-	'Comments_0' => 'Add your comment.',
+	'Comments_0' => 'Add your comment',
 	'Comments_1' => 'Read comment (1 comment)',
 	'Comments_n' => 'Read comments (%1 comments)',
 	'Comments_all' => 'Comments',
@@ -670,7 +670,7 @@ $wacko_translation = array(
 	'UploadRemoveDenied' => 'You are not allowed to remove this file',
 	'UploadMax' => 'No more than ',
 
-	'Files_0' => 'There are no files on this page.',
+	'Files_0' => 'Attach Files',
 	'Files_1' => 'Show Files (1 file)',
 	'Files_n' => 'Show Files (%1 files)',
 	'Files_all' => 'Files',

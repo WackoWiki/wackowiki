@@ -84,7 +84,7 @@ if ($this->is_admin())
 				$tag		= $root_tag.( $root_tag && $rel_tag ? '/' : '' ).$rel_tag;
 				$page_id	= $this->get_page_id($tag);
 				$owner		= Utility::untag($item, 'author');
-				$owner_id	= $this->get_user_id_by_name($owner);
+				$owner_id	= $this->get_user_id($owner);
 				$body		= str_replace(']]&gt;', ']]>', Utility::untag($item, 'description'));
 				$title		= html_entity_decode(Utility::untag($item, 'title'));
 
