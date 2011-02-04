@@ -410,8 +410,6 @@ $wacko_translation = array(
 	'Modified'		=> 'modified',
 
 	'EditIcon' => 'редактиране',
-	'LinksTreeLevel4Warning' => 'Линковете са макс. 4 нива',
-	'LinksTreeTitle' => 'Дърво на линковете',
 	'TreeClusterTitle' => 'Дърво на СЕКТОР %1',
 	'TreeSiteTitle' => 'Дърво на сайта',
 	'TreeEmpty' => '%1&nbsp;няма подстраници',

@@ -412,8 +412,6 @@ $wacko_translation = array(
 	'Modified'		=> 'modified',
 
 	'EditIcon' => 'edytuj',
-	'LinksTreeLevel4Warning' => 'Drzewo odno¶ników nie obs³uguje zagnie¿d¿ania powy¿ej 4 poziomów',
-	'LinksTreeTitle' => 'Drzewo odno¶ników',
 	'TreeClusterTitle' => 'Drzewo klastra %1',
 	'TreeSiteTitle' => 'Drzewo odno¶ników witryny',
 	'TreeEmpty' => '%1 nie zawiera podstron',

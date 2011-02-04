@@ -412,8 +412,6 @@ $wacko_translation = array(
 	'Modified'		=> 'modified',
 
 	'EditIcon' => 'ret',
-	'LinksTreeLevel4Warning' => 'Vi kan kun klare fire niveauer',
-	'LinksTreeTitle' => 'Henvisningstræ',
 	'TreeClusterTitle' =>'Træ for området %1',
 	'TreeSiteTitle' =>'Træ for ',
 	'TreeEmpty' => '%1&nbsp;har ingen undersider',
