@@ -57,10 +57,10 @@
 				echo '<ol id="usermenu" class="normal">';
 				echo '<!-- li><a href="'.$base_url.'Intern">Intern</a></li -->';
 				// Bookmarks
-				$formated_bm = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
-				$formated_bm = str_replace ("<br />", "", $formated_bm);
-				$formated_bm = str_replace ( "\n", "</li><li>\n", $formated_bm );
-				echo '<li>'.$formated_bm.'</li>';
+				$formatted_bookmarks = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
+				$formatted_bookmarks = str_replace ("<br />", "", $formatted_bookmarks);
+				$formatted_bookmarks = str_replace ( "\n", "</li><li>\n", $formatted_bookmarks );
+				echo '<li>'.$formatted_bookmarks.'</li>';
 				echo "</ol>";
 			echo '</div> <!-- /bookmarks -->';
 		}

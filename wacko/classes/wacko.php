@@ -1126,7 +1126,7 @@ class Wacko
 		}
 
 		$user		= $this->get_user();
-		$user_bm	= $this->get_user_bookmarks($user['user_id']);
+		$user_bookmarks	= $this->get_user_bookmarks($user['user_id']);
 
 		if (!isset($cl))
 		{
@@ -1134,11 +1134,11 @@ class Wacko
 		}
 
 		$pages[$cl]	= $user['user_name'];
-		$bookm		= $this->get_default_bookmarks($user['lang'])."\n".
-					($user_bm
-						? $user_bm
+		$_bookmarks		= $this->get_default_bookmarks($user['lang'])."\n".
+					($user_bookmarks
+						? $user_bookmarks
 						: '');
-		$bookmarks	= explode("\n", $bookm);
+		$bookmarks	= explode("\n", $_bookmarks);
 
 		for ($i = 0; $i <= count($bookmarks); $i++)
 		{
@@ -4508,15 +4508,15 @@ class Wacko
 		}
 
 		$user_id	= $this->get_user_id('System');
-		$default_bm	= $this->get_user_bookmarks($user_id, $lang);
-		#$this->debug_print_r($default_bm);
+		$default_bookmarks	= $this->get_user_bookmarks($user_id, $lang);
+		#$this->debug_print_r($default_bookmarks);
 
-		return $default_bm;
+		return $default_bookmarks;
 	}
 
 	function get_user_bookmarks($user_id, $lang = '')
 	{
-		$user_bm = '';
+		$user_bookmarks = '';
 
 		// avoid results if $user_id is 0 (user does not exists)
 		if ($user_id)
@@ -4535,7 +4535,7 @@ class Wacko
 			{
 				foreach($_bookmarks as $_bookmark)
 				{
-					$user_bm .= "((".$_bookmark['tag'].
+					$user_bookmarks .= "((".$_bookmark['tag'].
 						(!empty($_bookmark['menu_title'])
 							? " ".$_bookmark['menu_title']
 							: (!empty($_bookmark['title'])
@@ -4550,23 +4550,23 @@ class Wacko
 				}
 			}
 
-			return $user_bm;
+			return $user_bookmarks;
 		}
 	}
 
-	function set_bookmarks($set = BM_AUTO)
+	function set_bookmarks($set = BOOKMARK_AUTO)
 	{
 		$user = $this->get_user();
 
 		// initial bookmarks table construction
 		if ($set || !($bookmarks = $this->get_bookmarks()))
 		{
-			$user_bm = $this->get_user_bookmarks($user['user_id']);
-			$bookmarks = ( $user_bm
-				? $user_bm
+			$user_bookmarks = $this->get_user_bookmarks($user['user_id']);
+			$bookmarks = ( $user_bookmarks
+				? $user_bookmarks
 				: $this->get_default_bookmarks($user['lang']) );
 
-			if ($set == BM_DEFAULT)
+			if ($set == BOOKMARK_DEFAULT)
 			{
 				$bookmarks = $this->get_default_bookmarks($user['lang']);
 			}
@@ -4576,7 +4576,7 @@ class Wacko
 			$bookmark_links = $this->parsing_bookmarks($bookmarks);
 
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_links']	= $bookmark_links;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']	= $bookmark_links;
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']	= $this->format(implode("\n", $bookmarks), 'wacko');
 		}
 
@@ -4595,14 +4595,14 @@ class Wacko
 					"FROM ".$this->config['table_prefix']."menu b ".
 					"WHERE b.user_id = '".quote($this->dblink, $user['user_id'])."' ", 0);
 
-				$_bm_count = count($_menu_position);
+				$_bookmark_count = count($_menu_position);
 
 				$this->query(
 					"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 					"user_id			= '".quote($this->dblink, $user['user_id'])."', ".
 					"page_id			= '".quote($this->dblink, $this->page['page_id'])."', ".
 					"lang				= '".quote($this->dblink, ($user['lang'] != $this->page_lang ? $this->page_lang : ""))."', ".
-					"menu_position		= '".quote($this->dblink, ($_bm_count + 1))."'");
+					"menu_position		= '".quote($this->dblink, ($_bookmark_count + 1))."'");
 			}
 
 			// parsing bookmarks into link table
@@ -4611,7 +4611,7 @@ class Wacko
 			$this->set_user_setting('bookmarks', implode("\n", $bookmarks));
 
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_links']	= $bookmark_links;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']	= $bookmark_links;
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']	= $this->format(implode("\n", $bookmarks), 'wacko');
 		}
 
@@ -4646,7 +4646,7 @@ class Wacko
 			$this->set_user_setting('bookmarks', ( $bookmarks ? implode("\n", $bookmarks) : '' ));
 
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_links']	= $bookmark_links;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']	= $bookmark_links;
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']	= ( $bookmarks ? $this->format(implode("\n", $bookmarks), 'wacko') : '' );
 		}
 	}
@@ -4699,9 +4699,9 @@ class Wacko
 
 	function get_bookmark_links()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmark_links']))
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']))
 		{
-			return $_SESSION[$this->config['session_prefix'].'_'.'bookmark_links'];
+			return $_SESSION[$this->config['session_prefix'].'_'.'bookmark_link'];
 		}
 	}
 

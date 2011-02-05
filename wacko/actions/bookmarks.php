@@ -111,14 +111,14 @@ if (isset($_POST['_user_bookmarks']))
 							"FROM ".$this->config['table_prefix']."menu b ".
 							"WHERE b.user_id = '".quote($this->dblink, $user['user_id'])."' ", 0);
 
-						$_bm_count = count($_menu_position);
+						$_bookmark_count = count($_menu_position);
 
 						$this->query(
 							"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 							"user_id			= '".quote($this->dblink, $user['user_id'])."', ".
 							"page_id			= '".quote($this->dblink, $_page_id)."', ".
 							"lang				= '".quote($this->dblink, ($user['lang'] != $page['lang'] ? $page['lang'] : ""))."', ".
-							"menu_position		= '".quote($this->dblink, ($_bm_count + 1))."'");
+							"menu_position		= '".quote($this->dblink, ($_bookmark_count + 1))."'");
 					}
 
 					// parsing bookmarks into link table
@@ -127,7 +127,7 @@ if (isset($_POST['_user_bookmarks']))
 					$this->set_user_setting('bookmarks', implode("\n", $bookmarks));
 
 					$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmarks;
-					$_SESSION[$this->config['session_prefix'].'_'.'bookmark_links']	= $bookmark_links;
+					$_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']	= $bookmark_links;
 					$_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']	= $this->format(implode("\n", $bookmarks), 'wacko');
 				}
 				else
@@ -176,7 +176,7 @@ if (isset($_POST['_user_bookmarks']))
 
 	// reload user data
 	$this->set_user($this->load_user($user['user_name']), 0, 1, true);
-	$this->set_bookmarks(BM_USER);
+	$this->set_bookmarks(BOOKMARK_USER);
 }
 
 if ($user)
