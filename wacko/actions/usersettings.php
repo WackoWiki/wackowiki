@@ -47,7 +47,7 @@ if (isset($_GET['confirm']))
 else if (isset($_POST['action']) && $_POST['action'] == 'logout')
 {
 	$this->logout_user();
-	$this->set_bookmarks(BM_DEFAULT);
+	$this->set_bookmarks(BOOKMARK_DEFAULT);
 	$this->set_message($this->get_translation('LoggedOut'));
 	$this->redirect($this->href());
 }
@@ -171,7 +171,7 @@ else if ($user = $this->get_user())
 	{
 		$_session_time = $user['session_time'];
 		$this->set_user($this->load_user($user['user_name']), 0, 1, true);
-		$this->set_bookmarks(BM_USER);
+		$this->set_bookmarks(BOOKMARK_USER);
 		$this->set_user_setting('session_time', $_session_time);
 		$user = $this->get_user();
 

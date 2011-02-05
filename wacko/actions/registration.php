@@ -206,7 +206,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 				#$this->convert_into_bookmark_table($this->get_default_bookmarks($lang), $_user_id['user_id']);
 
 				// add user page
-				#$this->save_page($this->config['users_page'].'/'.$user_name, '', 'your page', 'auto created', '', '', '', ($lang ? $lang : $this->config['language']), '', $user_name);
+				$this->save_page($this->config['users_page'].'/'.$user_name, '', 'your page', 'auto created', '', '', '', ($lang ? $lang : $this->config['language']), '', $user_name, true);
 
 				// Send Email
 				if ($this->config['enable_email'] == true)
@@ -234,7 +234,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 				$this->config['wacko_name'].". ".
 				$this->get_translation('SiteEmailConfirm'));
 				$this->context[++$this->current_context] = '';
-				#$this->redirect($this->href('', $this->get_translation('LoginPage')));
+				$this->redirect($this->href('', $this->get_translation('LoginPage')));
 			}
 		}
 	}

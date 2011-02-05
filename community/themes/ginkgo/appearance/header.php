@@ -80,10 +80,10 @@ if ($this->get_user())
 echo '<div class="leftNav"><ul class="leftNav"><li>';
 
 // Bookmarks
-$formated_bm = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
-$formated_bm = str_replace ("<br />", "", $formated_bm);
-$formated_bm = str_replace ( "\n", "</li><li>\n", $formated_bm );
-echo $formated_bm;
+$formatted_bookmarks = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
+$formatted_bookmarks = str_replace ("<br />", "", $formatted_bookmarks);
+$formatted_bookmarks = str_replace ( "\n", "</li><li>\n", $formatted_bookmarks );
+echo $formatted_bookmarks;
 echo "</li></ul></div>";
 echo '<br />';
 if ($this->get_user())

@@ -11,9 +11,9 @@ define('BACKUP_FILE_LOG',				'backup.log');		// backup log filename
 define('BACKUP_FILE_STRUCTURE',			'structure.sql');	// tables structure filename
 define('BACKUP_FILE_DUMP_SUFFIX',		'.dat.gz');			// tables dump filename suffix
 define('BACKUP_FILE_GZIP_SUFFIX',		'.gz');				// regular compressed files suffix
-define('BM_AUTO',						0);
-define('BM_USER',						1);
-define('BM_DEFAULT',					2);
+define('BOOKMARK_AUTO',						0);
+define('BOOKMARK_USER',						1);
+define('BOOKMARK_DEFAULT',					2);
 define('CACHE_FEED_DIR',				'feeds/');
 define('CACHE_PAGE_DIR',				'pages/');
 define('CACHE_SQL_DIR',					'queries/');

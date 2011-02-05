@@ -57,12 +57,12 @@ require ('themes/_common/_header.php');
 		echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 		echo "<li>";
 		// Bookmarks
-		$BMs = $this->get_bookmarks();
-		$formated_bm = $this->format($this->format(implode("| ", $BMs), "wacko"), "post_wacko");
-		$formated_bm = str_replace ("<br />", "", $formated_bm);
-		$formated_bm = str_replace ( "\n", "</li>\n<li>", $formated_bm );
-		//echo "<ol><li>".$formated_bm."</li></ol>";
-		echo $formated_bm;
+		$bookmarks = $this->get_bookmarks();
+		$formatted_bookmarks = $this->format($this->format(implode("| ", $bookmarks), "wacko"), "post_wacko");
+		$formatted_bookmarks = str_replace ("<br />", "", $formatted_bookmarks);
+		$formatted_bookmarks = str_replace ( "\n", "</li>\n<li>", $formatted_bookmarks );
+		//echo "<ol><li>".$formatted_bookmarks."</li></ol>";
+		echo $formatted_bookmarks;
 
 		echo "</li>\n";
 
