@@ -43,7 +43,7 @@
                   }
             // -->
          </script>
-<form action="<?php echo myLocation() ?>?installAction=database-install" method="post" name="form1">
+<form action="<?php echo my_location() ?>?installAction=database-install" method="post" name="form1">
 <?php
    writeConfigHiddenNodes(array('database_driver' => '', 'database_host' => '', 'database_port' => '', 'database_database' => '', 'database_user' => '', 'database_password' => '', 'table_prefix' => ''));
    echo '   <input type="hidden" name="password" value="'.$_POST['password'].'" />' . "\n";

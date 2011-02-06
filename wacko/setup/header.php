@@ -1,6 +1,6 @@
 <?php
 
-function myLocation()
+function my_location()
 {
 	global $config;
 	list($url, ) = explode('?', $config['base_url']);
@@ -11,7 +11,7 @@ function myLocation()
 function output_image($ok)
 {
 	global $lang;
-	return "<img src=\"".myLocation()."setup/images/".($ok ? "tick" : "cross").".png\" width=\"20\" height=\"20\" alt=\"".($ok ? $lang['OK'] : $lang['Problem'])."\" title=\"".($ok ? $lang['OK'] : $lang['Problem'])."\" class=\"tickcross\" />";
+	return "<img src=\"".my_location()."setup/images/".($ok ? "tick" : "cross").".png\" width=\"20\" height=\"20\" alt=\"".($ok ? $lang['OK'] : $lang['Problem'])."\" title=\"".($ok ? $lang['OK'] : $lang['Problem'])."\" class=\"tickcross\" />";
 }
 
 function is__writable($path)
@@ -83,8 +83,8 @@ require_once('setup/lang/installer.'.$config['language'].'.php');
    <head>
       <title><?php echo $lang['Title'];?> - <?php echo WACKO_VERSION; ?></title>
       <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $lang['Charset']; ?>" />
-      <link rel="stylesheet" href="<?php echo myLocation() ?>setup/css/installer.css" type="text/css" />
-      <link rel="shortcut icon" href="<?php echo myLocation() ?>setup/images/favicon.ico" type="image/x-icon" />
+      <link rel="stylesheet" href="<?php echo my_location() ?>setup/css/installer.css" type="text/css" />
+      <link rel="shortcut icon" href="<?php echo my_location() ?>setup/images/favicon.ico" type="image/x-icon" />
    </head>
    <body>
       <div class="installer">
