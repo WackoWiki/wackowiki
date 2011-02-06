@@ -9,7 +9,7 @@ else
 	echo '<p>'.str_replace('%1', WACKO_VERSION, $lang['FreshInstall'])."</p>\n";
 }
 ?>
-<form action="<?php echo myLocation() ?>?installAction=version-check" method="post">
+<form action="<?php echo my_location() ?>?installAction=version-check" method="post">
 <?php
 	writeConfigHiddenNodes(array('language' => 0));
 ?>

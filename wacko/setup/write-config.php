@@ -131,7 +131,7 @@ if($write_file == false)
 print("         </ul>\n");
 
 ?>
-<form action="<?php echo myLocation() ?>?installAction=write-config"
+<form action="<?php echo my_location() ?>?installAction=write-config"
 	method="post"><?php
 	writeConfigHiddenNodes(array('none' => ''));
 

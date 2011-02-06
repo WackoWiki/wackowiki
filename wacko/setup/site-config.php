@@ -36,7 +36,7 @@
             // -->
          </script>
 
-<form action="<?php echo myLocation() ?>?installAction=<?php echo "database-config" ; ?>" method="post" name="form1">
+<form action="<?php echo my_location() ?>?installAction=<?php echo "database-config" ; ?>" method="post" name="form1">
 <?php
    writeConfigHiddenNodes(array('wacko_name' => '', 'root_page' => '', 'multilanguage' => '', 'admin_name' => '', 'password' => '', 'admin_email' => '', 'base_url' => '', 'rewrite_mode' => ''));
 ?>

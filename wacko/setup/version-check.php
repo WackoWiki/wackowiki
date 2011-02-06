@@ -1,4 +1,4 @@
-<form action="<?php echo myLocation() ?>?installAction=site-config" method="post">
+<form action="<?php echo my_location() ?>?installAction=site-config" method="post">
 <?php
 writeConfigHiddenNodes(array('none' => ''));
 

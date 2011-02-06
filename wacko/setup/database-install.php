@@ -316,7 +316,7 @@ switch($config['database_driver'])
 			if ( isset ( $config['wacko_version'] ) )
 			if ( trim ( $config['wacko_version'] ) ) $version = trim($config['wacko_version']);
 
-			if ($config['DeleteTables'] == 'on')
+			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
 				echo "<h2>".$lang['DeletingTables']."</h2>\n";
 				echo "            <ul>\n";
@@ -1129,7 +1129,7 @@ if(!$fatal_error)
 {
 ?>
 <p><?php echo $lang['NextStep'];?></p>
-<form action="<?php echo myLocation(); ?>?installAction=write-config" method="post">
+<form action="<?php echo my_location(); ?>?installAction=write-config" method="post">
 <?php
 	writeConfigHiddenNodes(array('DeleteTables' => ''));
 ?>

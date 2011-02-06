@@ -1572,7 +1572,7 @@ class Wacko
 		{
 			if ($comment_on_id)
 			{
-				$this->cache->cache_invalidate($this->get_page_tag($comment_on_tag));
+				$this->cache->cache_invalidate($this->get_page_tag($comment_on_id));
 			}
 			else
 			{
