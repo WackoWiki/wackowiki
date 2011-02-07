@@ -16,10 +16,11 @@ $wacko_translation = array(
 	'LogoutAreYouSure' => 'Er du sikker på, at du vil logge af?',
 	// registration panel
 	'RegistrationWelcome' => 'Ny bruger registrering:',
-	'RegistrationName' => 'Vælg dit wikinavn ((WackoWiki:Doc/English/WikiName NameSurname))',
+	'RegistrationUserName' => 'Vælg dit wikinavn ((WackoWiki:Doc/English/WikiName NameSurname))',
+	'RegistrationRealName' => 'Show Name',
 	'RegistrationPassword' => 'Password',
 	'RegistrationButton' => 'Registrer mig!',
-	'RegistrationNameOwned' => 'Dette brugernavn er allerede i brug. Vælg et andet.',
+	'RegistrationUserNameOwned' => 'Dette brugernavn er allerede i brug. Vælg et andet.',
 	'RegistrationPage' => 'Registrering',
 	'SiteRegistered' => 'You have successfully registered on the site ',
 	'SiteEmailConfirm' => '<br />Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',

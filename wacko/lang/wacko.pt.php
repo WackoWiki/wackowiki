@@ -16,10 +16,11 @@ $wacko_translation = array(
 	'LogoutAreYouSure' => 'Quer mesmo desligar?',
 	// registration panel
 	'RegistrationWelcome' => 'Registo de Novo Utilizador:',
-	'RegistrationName' => 'Dê a si mesmo um ((WackoWiki:Doc/English/WikiName NameSurname))',
+	'RegistrationUserName' => 'Dê a si mesmo um ((WackoWiki:Doc/English/WikiName NameSurname))',
+	'RegistrationRealName' => 'Show Name',
 	'RegistrationPassword' => 'Password',
 	'RegistrationButton' => 'Registe-me!',
-	'RegistrationNameOwned' => 'Este Nome de Utilizador já está registado. Por favor escolha outro.',
+	'RegistrationUserNameOwned' => 'Este Nome de Utilizador já está registado. Por favor escolha outro.',
 	'RegistrationPage' => 'Registration',
 	'SiteRegistered' => 'You have successfully registered on the site ',
 	'SiteEmailConfirm' => '<br />Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',

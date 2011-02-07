@@ -13,12 +13,12 @@ if (!class_exists('preformatter'))
 
 		function __construct(&$object)
 		{
-			$this->object = &$object;
-			$this->PREREGEXP = "/(\%\%.*?\%\%|\"\".*?\"\"|::(\S)?::".
+			$this->object		= &$object;
+			$this->PREREGEXP	= '/(\%\%.*?\%\%|\"\".*?\"\"|::(\S)?::'.
 				($this->object->user_lang != $this->object->page_lang
-					? "|\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)"
-					: "").
-				")/sm";
+					? '|\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)'
+					: '').
+				')/sm';
 		}
 
 		function precallback($things)
@@ -29,30 +29,30 @@ if (!class_exists('preformatter'))
 
 			if (preg_match('/^\%\%(.*)\%\%$/s', $thing, $matches))
 			{
-				return "%%".$matches[1]."%%";
+				return '%%'.$matches[1].'%%';
 			}
 			else if (preg_match('/^\"\"(.*)\"\"$/s', $thing, $matches))
 			{
-				return "\"\"".$matches[1]."\"\"";
+				return '""'.$matches[1].'""';
 			}
 			else if ($thing == ':::::')
 			{
-				return "((/".$wacko->get_user_name()." ".$wacko->get_user_name().")):";
+				return '((User:'.$wacko->get_user_name().' '.$wacko->get_user_name().')):';
 			}
 			else if ($thing == '::::')
 			{
-				return "((/".$wacko->get_user_name()." ".$wacko->get_user_name()."))";
+				return '((User:'.$wacko->get_user_name().' '.$wacko->get_user_name().'))';
 			}
 			else if ($thing == '::@::')
 			{
-				return sprintf($wacko->config['name_date_macro'], "((/".$wacko->get_user_name()." ".$wacko->get_user_name()."))", date($wacko->config['date_macro_format']));
+				return sprintf($wacko->config['name_date_macro'], '((User:'.$wacko->get_user_name().' '.$wacko->get_user_name().'))', date($wacko->config['date_macro_format']));
 			}
 			else if ($thing == '::+::')
 			{
 				return date($wacko->config['date_macro_format']);
 			}
-			else if ((preg_match('/^(\[\[)(.+)(\]\])$/', $thing, $matches)) ||
-					(preg_match('/^(\(\()(.+)(\)\))$/', $thing, $matches)))
+			else if (preg_match('/^(\[\[)(.+)(\]\])$/', $thing, $matches) ||
+					 preg_match('/^(\(\()(.+)(\)\))$/', $thing, $matches))
 			{
 				list (, $b1, $cont, $b2) = $matches;
 

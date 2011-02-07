@@ -16,10 +16,11 @@ $wacko_translation = array(
 	'LogoutAreYouSure' => 'Kas oled kindel, et tahad välja logida?',
 	// registration panel
 	'RegistrationWelcome' => 'Uue kasutaja registreerimine:',
-	'RegistrationName' => 'Omista ((WackoWiki:Doc/English/WikiName WikiNimi))',
+	'RegistrationUserName' => 'Omista ((WackoWiki:Doc/English/WikiName WikiNimi))',
+	'RegistrationRealName' => 'Show Name',
 	'RegistrationPassword' => 'Parool',
 	'RegistrationButton' => 'Registreerun',
-	'RegistrationNameOwned' => 'Valitud kasutajanimi on juba kasutusel. Palun vali mõni teine.',
+	'RegistrationUserNameOwned' => 'Valitud kasutajanimi on juba kasutusel. Palun vali mõni teine.',
 	'RegistrationPage' => 'Registration',
 	'SiteRegistered' => 'You have successfully registered on the site ',
 	'SiteEmailConfirm' => '<br />Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',
