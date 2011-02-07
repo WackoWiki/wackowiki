@@ -16,10 +16,11 @@ $wacko_translation = array(
 	'LogoutAreYouSure'  => 'Выйти из системы?',
 	// registration panel
 	'RegistrationWelcome' => 'Регистрация нового пользователя:',
-	'RegistrationName' => 'Придумайте себе ((WackoWiki:Doc/Russian/ЧтоТакоеИмяФамилия ИмяФамилию))',
+	'RegistrationUserName' => 'Придумайте себе ((WackoWiki:Doc/Russian/ЧтоТакоеИмяФамилия ИмяФамилию))',
+	'RegistrationRealName' => 'Show Name',
 	'RegistrationPassword' => 'Пароль',
 	'RegistrationButton' => 'Поехали!',
-	'RegistrationNameOwned' => 'Данное имя уже зарегистрировано. Выберите другое.',
+	'RegistrationUserNameOwned' => 'Данное имя уже зарегистрировано. Выберите другое.',
 	'RegistrationPage' => 'Регистрация',
 	'SiteRegistered' => 'Вы успешно зарегистрировались на сайте ',
 	'SiteEmailConfirm' => '<br />Пожалуйста, подтвердите свой почтовый адрес согласно высланным инструкциям. <br />Обратите внимание, что, не подтвердив адрес, вы не сможете восстановить забытый пароль!',

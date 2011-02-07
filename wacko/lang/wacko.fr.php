@@ -16,10 +16,11 @@ $wacko_translation = array(
 	'LogoutAreYouSure' => 'Êtes-vous sûr de vouloir vous déconnecter&nbsp;?',
 	// registration panel
 	'RegistrationWelcome' => 'Enregistrement d&rsquo;un nouvel utilisateur&nbsp;:',
-	'RegistrationName' => 'Identifiez-vous sous la forme ((WackoWiki:Doc/Francophone/PrenomNom PrénomNom))&nbsp;',
+	'RegistrationUserName' => 'Identifiez-vous sous la forme ((WackoWiki:Doc/Francophone/PrenomNom PrénomNom))&nbsp;',
+	'RegistrationRealName' => 'Show Name',
 	'RegistrationPassword' => 'Mot de Passe&nbsp;',
 	'RegistrationButton' => 'Enregistrez-moi&nbsp;!',
-	'RegistrationNameOwned' => 'Ce nom est déjà utilisé. Merci d&rsquo;en choisir un autre.',
+	'RegistrationUserNameOwned' => 'Ce nom est déjà utilisé. Merci d&rsquo;en choisir un autre.',
 	'RegistrationPage' => 'Enregistrement',
 	'SiteRegistered' => 'Vous êtes bien enregistré sur le site ',
 	'SiteEmailConfirm' => '<br />Merci de confirmer votre adresse courriel en suivant les instructions qui vous ont été envoyées. <br /> Notez que sans vérification de cette adresse, vous ne pourrez pas récupérer votre mot de passe&nbsp;!',

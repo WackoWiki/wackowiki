@@ -16,10 +16,11 @@ $wacko_translation = array(
 	'LogoutButton' => 'Iesire din sistem',
 	// registration panel
 	'RegistrationWelcome' => 'Registrarea utilizatorului nou:',
-	'RegistrationName' => 'Alegeti NumePrenume ((WackoWiki:Doc/Документация/ЧтоТакоеИмяФамилия NumePrenume))',
+	'RegistrationUserName' => 'Alegeti NumePrenume ((WackoWiki:Doc/Документация/ЧтоТакоеИмяФамилия NumePrenume))',
+	'RegistrationRealName' => 'Show Name',
 	'RegistrationPassword' => 'Parola',
 	'RegistrationButton' => 'Inainte!',
-	'RegistrationNameOwned' => 'Numele deja este ocupat!',
+	'RegistrationUserNameOwned' => 'Numele deja este ocupat!',
 	'RegistrationPage' => 'Registration',
 	'SiteRegistered' => 'You have successfully registered on the site ',
 	'SiteEmailConfirm' => '<br />Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',

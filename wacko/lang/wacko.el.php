@@ -16,10 +16,11 @@ $wacko_translation = array(
 	'LogoutAreYouSure'  => 'Είσαι σίγουρος;',
 	// registration panel
 	'RegistrationWelcome' => 'Εγγραφή Νέου Χρήστη:',
-	'RegistrationName' => 'Δώσε ένα ((WackoWiki:Doc/English/WikiName NameSurname))',
+	'RegistrationUserName' => 'Δώσε ένα ((WackoWiki:Doc/English/WikiName NameSurname))',
+	'RegistrationRealName' => 'Show Name',
 	'RegistrationPassword' => 'Συνθηματικό',
 	'RegistrationButton' => 'Έγγραψέ με!',
-	'RegistrationNameOwned' => 'Αυτό το όνομα χρήστη είναι ήδη καταχωρημένο. Παρακαλώ επιλέξτε ένα διαφορετικό.',
+	'RegistrationUserNameOwned' => 'Αυτό το όνομα χρήστη είναι ήδη καταχωρημένο. Παρακαλώ επιλέξτε ένα διαφορετικό.',
 	'RegistrationPage' => 'Registration',
 	'SiteRegistered' => 'You have successfully registered on the site ',
 	'SiteEmailConfirm' => '<br />Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',

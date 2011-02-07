@@ -16,10 +16,11 @@ $wacko_translation = array(
 	'LogoutAreYouSure'		=> 'Willst du dich wirklich abmelden?',
 	// registration panel
 	'RegistrationWelcome'	=> 'Registrierung eines neuen Benutzers:',
-	'RegistrationName'		=> '((WackoWiki:Doc/Deutsch/WikiName Benutzername))',
+	'RegistrationUserName'	=> '((WackoWiki:Doc/Deutsch/WikiName Benutzername))',
+	'RegistrationRealName'	=> 'Show Name',
 	'RegistrationPassword'	=> 'Passwort',
 	'RegistrationButton'	=> 'Benutzer registrieren',
-	'RegistrationNameOwned'	=> 'Dieser Name ist bereits vergeben. Bitte wähle einen anderen Namen.',
+	'RegistrationUserNameOwned'	=> 'Dieser Name ist bereits vergeben. Bitte wähle einen anderen Namen.',
 	'RegistrationPage'		=> 'Registrierung',
 	'SiteRegistered'		=> 'Du hast dich erfolgreich auf der Website registriert ',
 	'SiteEmailConfirm'		=> '<br />Bitte bestätige deine E-Mailadresse gemäß der dir zugesanden Anleitung. <br />Notice that not verify the address, you can not retrieve password!',

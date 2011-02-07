@@ -23,7 +23,7 @@ $xml .= "<height>50</height>\n";
 $xml .= "</image>\n";
 $xml .= "<language>en-us</language>\n";
 $xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
+#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
 if ($this->has_access('read'))
 {

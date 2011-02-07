@@ -205,7 +205,7 @@ class Init
 						$_wacko_config = array_merge($wacko_config_defaults, (array)$wacko_config);
 						$this->config = $_wacko_config;
 
-						if ($wacko_config['wacko_version'] != 'R4.3.dev' && (!$wacko_config['system_seed'] || strlen($wacko_config['system_seed']) < 20))
+						if ($wacko_config['wacko_version'] != WACKO_VERSION && (!$wacko_config['system_seed'] || strlen($wacko_config['system_seed']) < 20))
 						{
 							die("WackoWiki fatal error: system_seed in config.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
 						}
@@ -245,7 +245,7 @@ class Init
 				}
 				else
 				{
-				#	die("Error loading WackoWiki config data: database `config` table is empty.");
+					die("Error loading WackoWiki config data: database `config` table is empty.");
 				}
 
 				// retrieving usergroups data
@@ -299,7 +299,7 @@ class Init
 				}
 				else
 				{
-					#die("Error loading WackoWiki usergroups data: database `group` table is empty.");
+					die("Error loading WackoWiki usergroups data: database `group` table is empty.");
 				}
 
 				return $this->config;
