@@ -11,6 +11,7 @@ if (!defined('IN_WACKO'))
 
 $error = '';
 $output = '';
+$user_name = '';
 
 // reconnect securely in tls mode
 #if ($this->config['tls'] == true && $this->config['tls_implicit'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
@@ -51,12 +52,11 @@ else if ($user = $this->get_user())
 {
 	// user is logged in; display logout form
 	echo $this->form_open();
-	?>
 
-<input type="hidden" name="action" value="logout" />
-<div class="cssform">
-  <h3><?php echo $this->get_translation('Hello').", ".$this->compose_link_to_page($user['user_name']) ?>!</h3>
-<?php
+	echo '<input type="hidden" name="action" value="logout" />';
+	echo '<div class="cssform">';
+	echo '<h3>'.$this->get_translation('Hello').", ".$this->compose_link_to_page($user['user_name']).'!</h3>';
+
 	if ($user['session_time'] == true)
 	{
 		$output .= $this->get_translation('LastVisit').' <tt>'. $this->get_time_string_formatted($user['session_time'])."</tt>.<br />";
@@ -94,16 +94,11 @@ else if ($user = $this->get_user())
 	}
 
 	$this->set_message($output);
-?>
-  <p>
-    <input type="button" value="<?php echo $this->get_translation('LogoutButton'); ?>"
-			onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" />
-  </p>
-  <p>
-		<?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0); ?> | <a href="?action=clearcookies"><?php echo $this->get_translation('ClearCookies'); ?></a>
-  </p>
-</div>
-<?php
+
+	echo "<p><input type=\"button\" value=\"".$this->get_translation('LogoutButton')."\" onclick=\"document.location='".$this->href('', '', 'action=logout')."'\" /></p>";
+	echo '<p>'.$this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0).' | <a href="?action=clearcookies">'.$this->get_translation('ClearCookies').'</a></p>';
+	echo '</div>';
+
 	echo $this->form_close();
 }
 else
@@ -115,7 +110,7 @@ else
 	if (isset($_POST['action']) && $_POST['action'] == 'login')
 	{
 		// if user name already exists, check password
-		if ($existing_user = $this->load_user($_POST['name']))
+		if ($existing_user = $this->load_user($_POST['user_name']))
 		{
 			// check for disabled account
 			if (($existing_user['enabled'] == false) || $existing_user['account_type'] != 0 )
@@ -133,23 +128,24 @@ else
 					}
 					if (strlen($existing_user['password']) == 40) // only for dev versions
 					{
-						$_processed_password = hash('sha1', $_POST['name'].$existing_user['salt'].$_POST['password']);
+						$_processed_password = hash('sha1', $_POST['user_name'].$existing_user['salt'].$_POST['password']);
 					}
 					if ($existing_user['password'] == $_processed_password)
 					{
 						$salt		= $this->random_password(10, 3);
-						$password	= hash('sha256', $_POST['name'].$salt.$_POST['password']);
+						$password	= hash('sha256', $_POST['user_name'].$salt.$_POST['password']);
 
 						// update database with the sha256 password for future logins
-						$this->query("UPDATE ".$this->config['table_prefix']."user SET ".
-									"password	= '".$password."', ".
-									"salt		= '".$salt."' ".
-									"WHERE user_name = '".$_POST['name']."'");
+						$this->query(
+							"UPDATE ".$this->config['table_prefix']."user SET ".
+								"password	= '".$password."', ".
+								"salt		= '".$salt."' ".
+							"WHERE user_name = '".$_POST['user_name']."'");
 					}
 				}
 				else
 				{
-					$_processed_password = hash('sha256', $_POST['name'].$existing_user['salt'].$_POST['password']);
+					$_processed_password = hash('sha256', $_POST['user_name'].$existing_user['salt'].$_POST['password']);
 				}
 
 				// check password
@@ -205,13 +201,13 @@ else
 				else
 				{
 					$error	= $this->get_translation('WrongPassword');
-					$name	= $_POST['name'];
+					$user_name	= $_POST['user_name'];
 					$focus	= 1;
 
 					$this->set_failed_user_login_count($existing_user['user_id']);
 
 					// log failed attempt
-					$this->log(2, str_replace('%1', $_POST['name'], $this->get_translation('LogUserLoginFailed', $this->config['language'])));
+					$this->log(2, str_replace('%1', $_POST['user_name'], $this->get_translation('LogUserLoginFailed', $this->config['language'])));
 				}
 			}
 		}
@@ -223,22 +219,22 @@ else
 		echo '<div class="error">'.$this->Format($error).'</div>';
 	}
 
+	echo '<div class="cssform">'."\n";
+	echo '<h3>'.$this->get_translation('LoginWelcome').'</h3>'."\n";
+
 	echo $this->form_open();
-	?>
-<input type="hidden" name="action" value="login" />
-<input type="hidden" name="goback" value="<?php echo (isset($_GET['goback']) ? stripslashes($_GET['goback']) : '');?>" />
-<div class="cssform">
-	<h3><?php echo $this->get_translation('LoginWelcome'); ?></h3>
-	<p>
-		<label for="name"><?php echo $this->format_translation('LoginName');?>:</label>
-		<input id="name" name="name" size="25" maxlength="25" value="<?php echo isset($name) ? $name : ''; ?>" tabindex="1" />
-	</p>
-	<p>
-		<label for="password"><?php echo $this->get_translation('LoginPassword');?>:</label>
-		<input id="password" type="password" name="password" size="25" tabindex="2" autocomplete="off" />
-	</p>
-</div>
-<?php
+	echo '<input type="hidden" name="action" value="login" />'."\n";
+	echo '<input type="hidden" name="goback" value="'.(isset($_GET['goback']) ? stripslashes($_GET['goback']) : '').'" />'."\n";
+	echo '<p>';
+	echo '<label for="user_name">'.$this->format_translation('LoginName').':</label>';
+	echo '<input id="user_name" name="user_name" size="25" maxlength="25" value="'.(isset($user_name) ? $user_name : '').'" tabindex="1" />'."\n";
+	echo '</p>'."\n";
+	echo '<p>';
+	echo '<label for="password">'.$this->get_translation('LoginPassword').':</label>'."\n";
+	echo '<input id="password" type="password" name="password" size="25" tabindex="2" autocomplete="off" />'."\n";
+	echo '</p>';
+
+
 /*
 	<p>
 		<label for=""><?php echo $this->get_translation('SessionDuration');?>:</label>
@@ -249,24 +245,24 @@ else
 		</small>
 	</p>
 	*/
-?>
-<div class="cssform">
-	<p>
-		<input id="persistent" name="persistent" value="1" type="checkbox" tabindex="3"/>
-		<label for="persistent"><?php echo $this->get_translation('PersistentCookie'); ?></label>
-	</p>
-	<p>
-		<input type="submit" value="<?php echo $this->get_translation('LoginButton'); ?>" tabindex="4" />
-		&nbsp;&nbsp;&nbsp;<small><a href="?action=clearcookies">Delete all cookies</a></small>
-	</p>
-	<p><?php echo $this->format_translation('ForgotLink'); ?></p>
-	<p><?php echo $this->format_translation('LoginWelcome2'); ?></p>
-</div>
-<script type="text/javascript">
-	document.getElementById("f<?php echo $focus;?>").focus();
-</script>
-<?php
+
+	echo '<p>'."\n";
+	echo '<input id="persistent" name="persistent" value="1" type="checkbox" tabindex="3"/>'."\n";
+	echo '<label for="persistent">'.$this->get_translation('PersistentCookie').'</label>'."\n";
+	echo '</p>'."\n";
+	echo '<p>'."\n";
+	echo '<input type="submit" value="'.$this->get_translation('LoginButton').'" tabindex="4" />'."\n";
+	#echo '&nbsp;&nbsp;&nbsp;<small><a href="?action=clearcookies">Delete all cookies</a></small>';
+	echo '</p>."\n"';
+	echo '<p>'.$this->format_translation('ForgotLink').'</p>'."\n";
+	echo '<p>'.$this->format_translation('LoginWelcome2').'</p>'."\n";
+
+	echo '<script type="text/javascript">';
+	echo '	document.getElementById("f'.$focus.'").focus();';
+	echo '</script>';
+
 	echo $this->form_close();
+	echo '</div>'."\n";
 }
 ?>
 <!--/notypo-->
