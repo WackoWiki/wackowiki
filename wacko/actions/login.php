@@ -253,7 +253,7 @@ else
 	echo '<p>'."\n";
 	echo '<input type="submit" value="'.$this->get_translation('LoginButton').'" tabindex="4" />'."\n";
 	#echo '&nbsp;&nbsp;&nbsp;<small><a href="?action=clearcookies">Delete all cookies</a></small>';
-	echo '</p>."\n"';
+	echo '</p>'."\n";
 	echo '<p>'.$this->format_translation('ForgotLink').'</p>'."\n";
 	echo '<p>'.$this->format_translation('LoginWelcome2').'</p>'."\n";
 

@@ -651,7 +651,7 @@ $wacko_translation = array(
 	'ImportWhat' => 'XML-file for import',
 	'ImportButtonText' => 'Import',
 	'ImportSuccess' => 'Imported succesfully.',
-	'MassRenaming' => 'Rename all cluster',
+	'MassRenaming' => 'Rename entire cluster',
 	'MassNewName' => 'Enter new name for this cluster',
 	'MassNeedRedirect' => 'Create redirect to the new pages on the old pages',
 

@@ -64,20 +64,23 @@ if ($registered
 				$new_name		= trim($new_name, '/');
 				$supernewname	= $this->npj_translit($new_name);
 
+				echo "<b>".$this->tag."</b>\n";
+				echo "<ol>";
+
 				if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
 				{
-					echo $this->get_translation('BadName')."<br />\n";
+					echo "<li>".$this->get_translation('BadName')."</li>\n";
 				}
 				//     if ($this->supertag == $supernewname)
 				else if ($this->tag == $new_name)
 				{
-					echo str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlreadyNamed'))."<br />\n";
+					echo "<li>".str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlreadyNamed'))."</li>\n";
 				}
 				else
 				{
 					if ($this->supertag != $supernewname && $page=$this->load_page($supernewname, 0, '', LOAD_CACHE, LOAD_META))
 					{
-						echo str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlredyExists'))."<br />\n";
+						echo "<li>".str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlredyExists'))."</li>\n";
 					}
 					else
 					{
@@ -93,12 +96,12 @@ if ($registered
 						{
 							if ($this->remove_referrers($this->tag))
 							{
-								echo str_replace('%1', $this->tag, $this->get_translation('ReferrersRemoved'))."<br />\n";
+								echo "<li>".str_replace('%1', $this->tag, $this->get_translation('ReferrersRemoved'))."</li>\n";
 							}
 
 							if ($this->rename_page($this->tag, $new_name, $supernewname))
 							{
-								echo str_replace('%1', $this->tag, $this->get_translation('PageRenamed'))."<br />\n";
+								echo "<li>".str_replace('%1', $this->tag, $this->get_translation('PageRenamed'))."</li>\n";
 							}
 
 							$this->clear_cache_wanted_page($new_name);
@@ -111,26 +114,29 @@ if ($registered
 
 							if ($this->save_page($this->tag, '', '{{redirect page="/'.$new_name.'"}}'))
 							{
-								echo str_replace('%1', $this->tag, $this->get_translation('RedirectCreated'))."<br />\n";
+								echo "<li>".str_replace('%1', $this->tag, $this->get_translation('RedirectCreated'))."</li>\n";
 							}
 
 							$this->clear_cache_wanted_page($this->tag);
 							$this->clear_cache_wanted_page($this->supertag);
 						}
 
-						echo "<br />".$this->get_translation('NewNameOfPage').$this->link('/'.$new_name);
+						echo "<li>".$this->get_translation('NewNameOfPage').$this->link('/'.$new_name)."</li>\n";
+
 
 						// log event
 						$this->log(3, str_replace('%2', $new_name, str_replace('%1', $this->tag, $this->get_translation('LogRenamedPage', $this->config['language']))).( $need_redirect == 1 ? $this->get_translation('LogRenamedPage2', $this->config['language']) : '' ));
 					}
 				}
+
+				echo "</ol>";
 			}
 
 			//massrename
 			if ($need_massrename == 1)
 			{
 				echo "<p><b>".$this->get_translation('MassRenaming')."</b><p>";   //!!!
-				recursive_move($this, $this->tag );
+				recursive_move($this, $this->tag);
 			}
 		}
 		else
@@ -138,8 +144,7 @@ if ($registered
 			echo $this->get_translation('NewName');
 			echo $this->form_open('rename');
 
-			?> <input type="hidden" name="rename" value="1" /><input type="text"
-	name="newname" value="<?php echo $this->tag;?>" size="40" /><br />
+			?> <input type="hidden" name="rename" value="1" /><input type="text" name="newname" value="<?php echo $this->tag;?>" size="40" /><br />
 <br />
 			<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" "; if ($this->config['default_rename_redirect'] == 1){echo "checked=\"checked\"";}; echo " /> <label for=\"redirect\">".$this->get_translation('NeedRedirect')."</label>"; ?>
 <br />
@@ -190,12 +195,20 @@ function recursive_move(&$parent, $root)
 			: "").
 		" AND comment_on_id = '0'");
 
+	echo "<ol>";
+
 	foreach( $pages as $page )
 	{
+		echo "<li><b>".$page['tag']."</b>\n";
+
 		// $new_name = str_replace( $root, $new_root, $page['tag'] );
 		$new_name = preg_replace('/'.preg_quote($root, '/').'/', preg_quote($new_root), $page['tag'], 1);
 		move( $parent, $page, $new_name );
+
+		echo "</li>\n";
 	}
+
+	echo "</ol>\n";
 }
 
 function move(&$parent, $old_page, $new_name )
@@ -208,20 +221,22 @@ function move(&$parent, $old_page, $new_name )
 	{
 		$supernewname = $parent->npj_translit($new_name);
 
+		echo "<ul>";
+
 		if (!preg_match('/^([\_\.\-'.$parent->language['ALPHANUM_P'].']+)$/', $new_name))
 		{
-			echo $parent->get_translation('BadName')."<br />\n";
+			echo "<li>".$parent->get_translation('BadName')."</li>\n";
 		}
 		//     if ($old_page['supertag'] == $supernewname)
 		else if ($old_page['tag'] == $new_name)
 		{
-			echo str_replace('%1', $parent->link($new_name), $parent->get_translation('AlreadyNamed'))."<br />\n";
+			echo "<li>".str_replace('%1', $parent->link($new_name), $parent->get_translation('AlreadyNamed'))."</li>\n";
 		}
 		else
 		{
 			if ($old_page['supertag'] != $supernewname && $page=$parent->load_page($supernewname, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				echo str_replace('%1', $parent->link($new_name), $parent->get_translation('AlredyExists'))."<br />\n";
+				echo "<li>".str_replace('%1', $parent->link($new_name), $parent->get_translation('AlredyExists'))."</li>\n";
 			}
 			else
 			{
@@ -237,12 +252,12 @@ function move(&$parent, $old_page, $new_name )
 				{
 					if ($parent->remove_referrers($old_page['tag']))
 					{
-						echo "<br />".str_replace('%1', $old_page['tag'], $parent->get_translation('ReferrersRemoved'))."<br />\n";
+						echo "<li>".str_replace('%1', $old_page['tag'], $parent->get_translation('ReferrersRemoved'))."</li>\n";
 					}
 
 					if ($parent->rename_page($old_page['tag'], $new_name, $supernewname))
 					{
-						echo str_replace('%1', $old_page['tag'], $parent->get_translation('PageRenamed'))."<br />\n";
+						echo "<li>".str_replace('%1', $old_page['tag'], $parent->get_translation('PageRenamed'))."</li>\n";
 					}
 
 					$parent->clear_cache_wanted_page($new_name);
@@ -255,19 +270,20 @@ function move(&$parent, $old_page, $new_name )
 
 					if ($parent->save_page($old_page['tag'], '', '{{redirect page="/'.$new_name.'"}}'))
 					{
-						echo str_replace('%1', $old_page['tag'], $parent->get_translation('RedirectCreated'))."<br />\n";
+						echo "<li>".str_replace('%1', $old_page['tag'], $parent->get_translation('RedirectCreated'))."</li>\n";
 					}
 
 					$parent->clear_cache_wanted_page($old_page['tag']);
 					$parent->clear_cache_wanted_page($old_page['supertag']);
 				}
 
-				echo "<br />".$parent->get_translation('NewNameOfPage').$parent->link('/'.$new_name);
+				echo "<li>".$parent->get_translation('NewNameOfPage').$parent->link('/'.$new_name)."</li>\n";
 
 				// log event
 				$parent->log(3, str_replace('%2', $new_name, str_replace('%1', $old_page['tag'], $parent->get_translation('LogRenamedPage', $parent->config['language']))).( $need_redirect == 1 ? $parent->get_translation('LogRenamedPage2', $parent->config['language']) : '' ));
 			}
 		}
+		echo "</ul>";
 	}
 }
 
