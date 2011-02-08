@@ -18,6 +18,8 @@ if (!defined('IN_WACKO'))
 $cnt		= '';
 $first_char	= '';
 $cur_char	= '';
+$pages_to_display = '';
+
 if (!isset($title))		$title = '';
 if (!isset($letter))	$letter = '';
 $_letter	= ( isset($_GET['letter']) ) ? $_GET['letter'] : $letter;
