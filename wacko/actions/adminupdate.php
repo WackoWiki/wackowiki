@@ -242,7 +242,7 @@ if ($this->is_admin())
 
 if ($this->is_admin())
 {
-	echo "<h3>2. Update User statistics:</h3>";
+	echo "<h3>3. Update User statistics:</h3>";
 
 	if (!isset($_POST['build_user_stats']))
 	{
@@ -309,6 +309,166 @@ if ($this->is_admin())
 
 	}
 }
+
+########################################################
+##            Move user pages into user name space    ##
+########################################################
+
+if ($this->is_admin())
+{
+	if (!function_exists('recursive_move'))
+	{
+		function recursive_move(&$parent, $root, $new_root)
+		{
+			#$new_root = trim($_POST['newname'], '/');
+
+			if($root == '/')
+			{
+				exit; // who and where did intend to move root???
+			}
+
+			// FIXME: missing $owner_id
+			if (!isset($owner_id)) $owner_id = '';
+
+			$query = "'".quote($parent->dblink, $parent->npj_translit($root))."%'";
+			$pages = $parent->load_all(
+				"SELECT page_id, tag, supertag ".
+				"FROM ".$parent->config['table_prefix']."page ".
+				"WHERE supertag LIKE ".$query.
+				($owner_id
+					? " AND owner_id ='".quote($parent->dblink, $owner_id)."'"
+					: "").
+				" AND comment_on_id = '0'");
+
+			echo "<ol>";
+
+			foreach( $pages as $page )
+			{
+				echo "<li><b>".$page['tag']."</b>\n";
+
+				// $new_name = str_replace( $root, $new_root, $page['tag'] );
+				$new_name = preg_replace('/'.preg_quote($root, '/').'/', preg_quote($new_root), $page['tag'], 1);
+				move( $parent, $page, $new_name );
+
+				echo "</li>\n";
+			}
+
+			echo "</ol>\n";
+		}
+	}
+
+	if (!function_exists('move'))
+	{
+		function move(&$parent, $old_page, $new_name )
+		{
+			//     $new_name = trim($_POST['newname'], '/');
+			$user = $parent->get_user();
+
+			if (($parent->check_acl($user,$parent->config['rename_globalacl'])
+			|| strtolower($parent->get_page_owner($old_page['tag'])) == $user))
+			{
+				$supernewname = $parent->npj_translit($new_name);
+
+				echo "<ul>";
+
+				if (!preg_match('/^([\_\.\-'.$parent->language['ALPHANUM_P'].']+)$/', $new_name))
+				{
+					echo "<li>".$parent->get_translation('BadName')."</li>\n";
+				}
+				//     if ($old_page['supertag'] == $supernewname)
+				else if ($old_page['tag'] == $new_name)
+				{
+					echo "<li>".str_replace('%1', $parent->link($new_name), $parent->get_translation('AlreadyNamed'))."</li>\n";
+				}
+				else
+				{
+					if ($old_page['supertag'] != $supernewname && $page=$parent->load_page($supernewname, 0, '', LOAD_CACHE, LOAD_META))
+					{
+						echo "<li>".str_replace('%1', $parent->link($new_name), $parent->get_translation('AlredyExists'))."</li>\n";
+					}
+					else
+					{
+						// Rename page
+						$need_redirect = 0;
+
+						if (isset($_POST['redirect']) && $_POST['redirect'] == 'on')
+						{
+							$need_redirect = 1;
+						}
+
+						if ($need_redirect == 0)
+						{
+							if ($parent->remove_referrers($old_page['tag']))
+							{
+								echo "<li>".str_replace('%1', $old_page['tag'], $parent->get_translation('ReferrersRemoved'))."</li>\n";
+							}
+
+							if ($parent->rename_page($old_page['tag'], $new_name, $supernewname))
+							{
+								echo "<li>".str_replace('%1', $old_page['tag'], $parent->get_translation('PageRenamed'))."</li>\n";
+							}
+
+							$parent->clear_cache_wanted_page($new_name);
+							$parent->clear_cache_wanted_page($supernewname);
+						}
+						if ($need_redirect == 1)
+						{
+							$parent->cache_wanted_page($old_page['tag']);
+							$parent->cache_wanted_page($old_page['supertag']);
+
+							if ($parent->save_page($old_page['tag'], '', '{{redirect page="/'.$new_name.'"}}'))
+							{
+								echo "<li>".str_replace('%1', $old_page['tag'], $parent->get_translation('RedirectCreated'))."</li>\n";
+							}
+
+							$parent->clear_cache_wanted_page($old_page['tag']);
+							$parent->clear_cache_wanted_page($old_page['supertag']);
+						}
+
+						echo "<li>".$parent->get_translation('NewNameOfPage').$parent->link('/'.$new_name)."</li>\n";
+
+						// log event
+						$parent->log(3, str_replace('%2', $new_name, str_replace('%1', $old_page['tag'], $parent->get_translation('LogRenamedPage', $parent->config['language']))).( $need_redirect == 1 ? $parent->get_translation('LogRenamedPage2', $parent->config['language']) : '' ));
+					}
+				}
+				echo "</ul>";
+			}
+		}
+	}
+
+	echo "<h3>4. Moves users pages into user name space: ".$this->config['users_page'].'/'."</h3>";
+
+	if (!isset($_POST['userspace']))
+	{
+		echo $this->form_open();
+		?>
+		<input type="submit" name="userspace"  value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
+		<?php
+		echo $this->form_close();
+	}
+	// rename files in \files\perpage folder to @page_id@file_name
+	else if (isset($_POST['userspace']))
+	{
+		$pages = $this->load_all(
+			"SELECT p.tag ".
+			"FROM {$this->config['table_prefix']}page p ".
+			"INNER JOIN ".$this->config['table_prefix']."user u ON (u.user_id = p.owner_id) ".
+			"WHERE p.tag = u.user_name");
+
+		$namespace = $this->config['users_page'].'/';
+
+
+		foreach ($pages as $page)
+		{
+
+			// rename from /UserName to /Users/UserName
+			recursive_move($this, $page['tag'], $namespace.$page['tag']);
+		}
+
+		echo "<br />Moved user pages into user name space";
+	}
+}
+
 ########################################################
 ##            MIGRATE ACLs to new scheme              ##
 ########################################################
