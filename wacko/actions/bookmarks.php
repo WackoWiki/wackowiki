@@ -156,14 +156,14 @@ if (isset($_POST['_user_bookmarks']))
 
 		foreach( $object->data['user_menu'] as $item )
 		{
-			if (isset($_POST['delete_'.$item['bookmark_id']]))
+			if (isset($_POST['delete_'.$item['menu_id']]))
 			{
 				if ($deletion != '')
 				{
 					$deletion .= ", ";
 				}
 
-				$deletion.= quote($this->dblink, $item['bookmark_id']);
+				$deletion.= quote($this->dblink, $item['menu_id']);
 			}
 			if ($deletion != '')
 			{
