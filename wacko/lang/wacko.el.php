@@ -23,7 +23,8 @@ $wacko_translation = array(
 	'RegistrationUserNameOwned' => 'Αυτό το όνομα χρήστη είναι ήδη καταχωρημένο. Παρακαλώ επιλέξτε ένα διαφορετικό.',
 	'RegistrationPage' => 'Registration',
 	'SiteRegistered' => 'You have successfully registered on the site ',
-	'SiteEmailConfirm' => '<br />Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',
+	'RegistrationEmailInfo'	=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
+	'SiteEmailConfirm' => 'Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',
 
 	// login panel
 	'LoginWelcome' => 'Σύνδεση',

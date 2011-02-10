@@ -23,7 +23,8 @@ $wacko_translation = array(
 	'RegistrationUserNameOwned' => 'Ce nom est déjà utilisé. Merci d&rsquo;en choisir un autre.',
 	'RegistrationPage' => 'Enregistrement',
 	'SiteRegistered' => 'Vous êtes bien enregistré sur le site ',
-	'SiteEmailConfirm' => '<br />Merci de confirmer votre adresse courriel en suivant les instructions qui vous ont été envoyées. <br /> Notez que sans vérification de cette adresse, vous ne pourrez pas récupérer votre mot de passe&nbsp;!',
+	'RegistrationEmailInfo'	=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
+	'SiteEmailConfirm' => 'Merci de confirmer votre adresse courriel en suivant les instructions qui vous ont été envoyées. <br /> Notez que sans vérification de cette adresse, vous ne pourrez pas récupérer votre mot de passe&nbsp;!',
 
 	// login panel
 	'LoginWelcome' => 'Connexion',
