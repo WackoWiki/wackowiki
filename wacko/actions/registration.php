@@ -234,7 +234,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 
 				// forward
 				$this->set_message($this->get_translation('SiteRegistered').
-				$this->config['wacko_name'].". ".
+				$this->config['wacko_name'].". <br />".
 				$this->get_translation('SiteEmailConfirm'));
 				$this->context[++$this->current_context] = '';
 				$this->redirect($this->href('', $this->get_translation('LoginPage')));
@@ -280,7 +280,7 @@ if (!isset($_POST['confirm']))
 			echo '</select></p>';
 		}
 
-		echo '<p><label for="user_name">'.$this->format_translation('RegistrationUserName').':</label>';
+		echo '<p><label for="user_name">'.$this->format_translation('UserName').':</label>';
 		echo '<input id="user_name" name="user_name" size="27" value="'.htmlspecialchars($user_name).'" /></p>';
 		#echo '<p><label for="real_name">'.$this->format_translation('RegistrationRealName').':</label>';
 		#echo '<input id="real_name" name="real_name" size="27" value="'.htmlspecialchars($real_name).'" /></p>';
@@ -322,11 +322,10 @@ if (!isset($_POST['confirm']))
 		echo '<p><label for="confpassword">'.$this->get_translation('ConfirmPassword').':</label>';
 		echo '<input type="password" id="confpassword" name="confpassword" size="24" value="'.$confpassword.'" /></p>';
 
-		/* TODO: add message -> A valid e-mail address. All e-mails from the system will be sent to this address. The e-mail address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by e-mail. */
 		echo '<p>';
 		echo '<label for="email">'.$this->get_translation('Email').':</label>';
-		echo '<input id="email" name="email" size="30" value="'.htmlspecialchars($email).'" /></p>';
-
+		echo '<input id="email" name="email" size="30" value="'.htmlspecialchars($email).'" />';
+		echo '<small> <a title="'.$this->get_translation('RegistrationEmailInfo').'">(?)</a></small></p>';
 		// captcha code starts
 
 		// Only show captcha if the admin enabled it in the config file
