@@ -25,21 +25,6 @@ if ($this->page)
 	if ($this->user_is_owner())
 	{
 		echo "<li>".$this->get_translation('YouAreOwner')."</li>\n";
-
-		// Add page link
-		(($this->method == 'new')
-			? ""
-			: print "<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation('CreateNewPageTip')."\" alt=\"".$this->get_translation('CreateNewPage')."\" /></a></li>\n"
-		);
-
-		// Rename link
-		echo "<li><a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icons/rename.gif\" title=\"".$this->get_translation('RenameText')."\" alt=\"".$this->get_translation('RenameText')."\" /></a></li>\n";
-
-		// Remove link (shows only for page owner if allowed)
-		if (!$this->config['remove_onlyadmins']) echo "<li><a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->get_translation('DeleteTip')."\" alt=\"".$this->get_translation('DeleteText')."\" /></a></li>\n";
-
-		// Edit ACLs link
-		echo "<li><a href=\"".$this->href('permissions')."\"".(($this->method=='edit') ? " onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"" : "").">".$this->get_translation('ACLText')."</a></li>\n";
 	}
 	// If owner is NOT current user
 	else
@@ -60,39 +45,10 @@ if ($this->page)
 		{
 			echo "<li>".$this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a></li>\n)" : "");
 		}
-
-		// Add page link
-		#(($this->method == 'new')
-		#	? ""
-		#	: print "<li><a href=\"".$this->href('new')."\"><img src=\"".$this->config['theme_url']."icons/add_page.gif\" title=\"".$this->get_translation('CreateNewPageTip')."\" alt=\"".$this->get_translation('CreateNewPage')."\" /></a></li>\n"
-		#);
-	}
-
-	// Rename link
-	if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->user_is_owner())
-	{
-		echo "<li><a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icons/rename.gif\" title=\"".$this->get_translation('RenameText')."\" alt=\"".$this->get_translation('RenameText')."\" /></a></li>\n";
-	}
-	// Remove link (shows only for Admins)
-	if ($this->is_admin() && !$this->user_is_owner())
-	{
-		echo "<li><a href=\"".$this->href('remove')."\"><img src=\"".$this->config['theme_url']."icons/delete.gif\" title=\"".$this->get_translation('DeleteTip')."\" alt=\"".$this->get_translation('DeleteText')."\" /></a></li>\n";
-
-		// Edit ACLs link (shows also for Admins)
-		echo "<li><a href=\"".$this->href('permissions')."\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"").">".$this->get_translation('ACLText')."</a></li>\n";
 	}
 
 	if($this->has_access('write') && $this->get_user() || $this->is_admin())
 	{
-		// Page  settings link
-		echo "<li><a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditPropertiesConfirm')."');\"":"").">".$this->get_translation('PropertiesText')."</a></li>\n";
-
-		if ($this->user_is_owner() || $this->is_admin())
-		{
-			// Add Categories link (shows only for page owner if allowed)
-			echo "<li><a href=\"".$this->href('categories')."\"".(($this->method=='categories') ? " onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"" : "")."><img src=\"".$this->config['theme_url']."icons/add_tag.png\" title=\"".$this->get_translation('CategoriesTip')."\" alt=\"".$this->get_translation('CategoriesTip')."\" /></a></li>\n";
-		}
-
 		// referrers icon
 		echo "<li><a href=\"".$this->href('referrers')."\"><img src=\"".$this->config['theme_url']."icons/referer.gif\" title=\"".$this->get_translation('ReferrersTip')."\" alt=\"".$this->get_translation('ReferrersText')."\" /></a></li>\n";
 	}
@@ -117,7 +73,10 @@ if ($this->page)
 <div id="credits"><?php
 
 // comment this out for not showing website policy link at the bottom of your pages
-if ($this->config['policy_page']) echo '<a href="'.htmlspecialchars($this->href('', $this->config['policy_page'])).'">'.$this->get_translation('TermsOfUse').'</a><br />';
+if ($this->config['policy_page'])
+{
+	echo '<a href="'.htmlspecialchars($this->href('', $this->config['policy_page'])).'">'.$this->get_translation('TermsOfUse').'</a><br />';
+}
 
 if ($this->get_user())
 {
