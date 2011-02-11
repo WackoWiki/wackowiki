@@ -17,7 +17,7 @@ require ('themes/_common/_header.php');
 	<tr>
   		<td>
 <!-- <h1>-->
-     <span class="main"><?php echo $this->config['wacko_name'] ?>:</span>
+     <span class="main"><?php echo $this->config['site_name'] ?>:</span>
      <span class="pagetitle"><?php echo $this->get_page_path(); ?></span>
      <a class="Search" title="<?php echo $this->get_translation('SearchTitleTip')?>"
      href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a><br />

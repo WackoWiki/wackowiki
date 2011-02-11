@@ -312,15 +312,15 @@ else
 				$code = hash('sha256', $user['password'].date("D d M Y H:i:s").$user['email'].mt_rand());
 
 				$subject =	$this->get_translation('EmailForgotSubject').
-							$this->config['wacko_name'];
+							$this->config['site_name'];
 				$body =	$this->get_translation('EmailHello'). $name.".\n\n".
-							str_replace('%1', $this->config['wacko_name'],
+							str_replace('%1', $this->config['site_name'],
 							str_replace('%2', $user['user_name'],
 							str_replace('%3', $this->href().
 							($this->config['rewrite_mode'] ? "?" : "&amp;")."secret_code=".$code,
 							$this->get_translation('EmailForgotMessage'))))."\n";
 				$body.=	"\n".$this->get_translation('EmailGoodbye').
-							"\n".$this->config['wacko_name'].
+							"\n".$this->config['site_name'].
 							"\n".$this->config['base_url'];
 
 				// update table

@@ -32,7 +32,7 @@ require ('themes/_common/_header.php');
   <div id="infomenu">
     <div id="breadcrumb">
       <!-- <h1>-->
-      <span class="main"><a href="<?php echo $this->config['base_url']; ?>"><?php echo $this->config['wacko_name'] ?></a>:</span> <span class="pagetitle"><?php echo $this->get_page_path(); ?></span> <a class="Search" title="<?php echo $this->get_translation('SearchTitleTip')?>"
+      <span class="main"><a href="<?php echo $this->config['base_url']; ?>"><?php echo $this->config['site_name'] ?></a>:</span> <span class="pagetitle"><?php echo $this->get_page_path(); ?></span> <a class="Search" title="<?php echo $this->get_translation('SearchTitleTip')?>"
      href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a><br />
       <!-- </h1> -->
     </div>

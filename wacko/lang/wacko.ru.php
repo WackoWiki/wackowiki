@@ -89,6 +89,7 @@ $wacko_translation = array(
 	'Links' => 'Ссылки',
 	'Version' => 'редакция',
 	'TermsOfUse' => 'Нормы использования',
+	'AcceptTermsOfUse' => ' I accept',
 	'ShowComments' => 'Показать комментарии/форму',
 	'HideComments' => 'Скрыть комментарии/форму',
 	'AddComment' => 'Добавить комментарий:',

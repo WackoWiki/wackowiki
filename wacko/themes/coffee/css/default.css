@@ -350,3 +350,12 @@ color:#FF0000;
 	background-position:0 1px;
 	padding-left:20px;
 }
+
+.userprofil {
+	color: #444444;
+	font-weight: bold;
+	width:100px;
+	white-space:nowrap;
+	vertical-align: top;
+	padding-right:20px;
+}

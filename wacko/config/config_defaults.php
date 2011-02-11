@@ -19,11 +19,11 @@ $wacko_config_defaults = array(
 	'table_prefix' => 'wacko_',
 	'cookie_prefix' => 'wacko_',
 	'session_expiration' => 30, // cookie_expire_days
-	'session_prefix' => 'wacko43_',
+	'session_prefix' => 'wacko44',
 
 	'root_page' => 'HomePage',
-	'wacko_name' => 'MyWackoSite',
-	'wacko_desc' => 'A light and handy Wiki-engine',
+	'site_name' => 'MyWackoSite',
+	'site_desc' => 'A light and handy Wiki-engine',
 	'base_url' => ($_SERVER['SERVER_PORT'] == 443 ? 'https' : 'http').'://'.$_SERVER['SERVER_NAME'].
 		($_SERVER['SERVER_PORT'] != 80 ? ':'.$_SERVER['SERVER_PORT'] : '').
 		preg_replace('/(\?|&)installAction=site-config/','',$_SERVER['REQUEST_URI']),

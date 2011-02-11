@@ -737,3 +737,12 @@ width: 0;
 	border-bottom-width: 0px;
 	border-bottom-style: none;
 }
+
+.userprofil {
+	color: #444444;
+	font-weight: bold;
+	width:100px;
+	white-space:nowrap;
+	vertical-align: top;
+	padding-right:20px;
+}

@@ -28,8 +28,8 @@ function admin_configbasic(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$config['wacko_name']				= (string)$_POST['wacko_name'];
-		$config['wacko_desc']				= (string)$_POST['wacko_desc'];
+		$config['site_name']				= (string)$_POST['site_name'];
+		$config['site_desc']				= (string)$_POST['site_desc'];
 		$config['meta_description']			= (string)$_POST['meta_description'];
 		$config['meta_keywords']			= (string)$_POST['meta_keywords'];
 		$config['theme']					= (string)$_POST['theme'];
@@ -76,17 +76,17 @@ function admin_configbasic(&$engine, &$module)
 				<th colspan="2">Basic parameters</th>
 			</tr>
 			<tr>
-				<td class="label"><label for="wacko_name"><strong>Site Name:</strong><br />
+				<td class="label"><label for="site_name"><strong>Site Name:</strong><br />
 				<small>The title that appears on this site, email-notification, etc.</small></label></td>
-				<td style="width:40%;"><input maxlength="255" style="width:200px;" id="wacko_name" name="wacko_name" value="<?php echo htmlspecialchars($engine->config['wacko_name']);?>" /></td>
+				<td style="width:40%;"><input maxlength="255" style="width:200px;" id="site_name" name="site_name" value="<?php echo htmlspecialchars($engine->config['site_name']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="wacko_desc"><strong>Site Description:</strong><br />
+				<td class="label"><label for="site_desc"><strong>Site Description:</strong><br />
 				<small>Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.</small></label></td>
-				<td><input maxlength="255" style="width:200px;" id="wacko_desc" name="wacko_desc" value="<?php echo htmlspecialchars($engine->config['wacko_desc']);?>" /></td>
+				<td><input maxlength="255" style="width:200px;" id="site_desc" name="site_desc" value="<?php echo htmlspecialchars($engine->config['site_desc']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

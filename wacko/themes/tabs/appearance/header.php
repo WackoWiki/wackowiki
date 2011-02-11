@@ -5,7 +5,7 @@
 */
 
 // TODO: isset($meta_title) ... else ... in common _header.php
-#$meta_title = (isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '')." (@".htmlspecialchars($this->config['wacko_name']).")";
+#$meta_title = (isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '')." (@".htmlspecialchars($this->config['site_name']).")";
 
 require ('themes/_common/_header.php');
 
@@ -83,7 +83,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 	width="16" height="16"
 	alt="<?php echo $this->get_translation('MsWordVersion') ?>" /></a></div>
 <div class="header">
-  <h1><span class="Main"><?php echo $this->config['wacko_name'] ?>:</span> <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path()); ?> <a class="Search"
+  <h1><span class="Main"><?php echo $this->config['site_name'] ?>:</span> <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path()); ?> <a class="Search"
 	title="<?php echo $this->get_translation('SearchTitleTip')?>"
 	href="<?php echo $this->config['base_url'] ?>TextSearch<?php echo ($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a> </h1>
 <?php if (($this->method != 'edit') || !$this->has_access('write')) { ?>

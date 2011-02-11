@@ -27,7 +27,7 @@ require ('themes/_common/_header.php');
 	type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->get_translation('LoginPassword') ?>:&nbsp;<input
 	type="password" name="password" class="login" size="8" />&nbsp;<input
 	type="submit" value="Ok" /></span> <?php } ?></div>
-<div class="title"><?php echo $this->config['wacko_name'] ?>: <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path()); ?>
+<div class="title"><?php echo $this->config['site_name'] ?>: <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path()); ?>
 <a class="Search"
 	title="<?php echo $this->get_translation('SearchTitleTip')?>"
 	href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>

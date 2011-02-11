@@ -10,7 +10,7 @@ require ('themes/_common/_header.php');
 <body onload="all_init();">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="378" valign="bottom" style="white-space: nowrap;"><span class="main"><a href="<?php echo $this->config['base_url']?>"class="main"><?php echo $this->config['wacko_name'] ?></a></span></td>
+    <td width="378" valign="bottom" style="white-space: nowrap;"><span class="main"><a href="<?php echo $this->config['base_url']?>"class="main"><?php echo $this->config['site_name'] ?></a></span></td>
     <td width="100%"><div align="right"><?php
 // Opens Search form
 echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
@@ -26,7 +26,7 @@ echo $this->form_close();
 ?></div></td>
   </tr>
   <tr>
-    <td valign="top"><div class="tagline"><?php $this->config['wacko_desc']; ?></div></td>
+    <td valign="top"><div class="tagline"><?php $this->config['site_desc']; ?></div></td>
     <td width="100%">&nbsp;</td>
   </tr>
   <tr>

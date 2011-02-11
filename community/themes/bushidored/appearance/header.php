@@ -144,5 +144,5 @@ if ($message = $this->get_message()) echo "<div class=\"info\">$message</div>";
 ?>
 <div id="text">
 <div class="Text">
-<span class="main"><?php echo $this->config['wacko_name'] ?>:</span> <?php echo $this->get_page_path(); ?> <a class="Search" title="<?php echo $this->config['search_title_help']?>"
+<span class="main"><?php echo $this->config['site_name'] ?>:</span> <?php echo $this->get_page_path(); ?> <a class="Search" title="<?php echo $this->config['search_title_help']?>"
      href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;") ?>phrase=<?php echo urlencode($this->tag); ?>">...</a>

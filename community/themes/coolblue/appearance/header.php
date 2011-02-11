@@ -137,4 +137,4 @@ echo $this->page['modified'] ? "<a href=\"".$this->href('revisions')."\" title=\
 // here we show messages
 if ($message = $this->get_message()) echo "<div class=\"info\">$message</div>";
 ?>
-<loc><?php echo $this->config['wacko_name'] ?>: <?php echo $this->get_page_path(); ?><a title="<?php echo $this->config['search_title_help']?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></loc>
+<loc><?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?><a title="<?php echo $this->config['search_title_help']?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></loc>
