@@ -215,15 +215,15 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 				if ($this->config['enable_email'] == true)
 				{
 					$subject = 	$this->get_translation('EmailWelcome').
-								$this->config['wacko_name'];
+								$this->config['site_name'];
 					$body = 	$this->get_translation('EmailHello'). $user_name.",\n\n".
-								str_replace('%1', $this->config['wacko_name'],
+								str_replace('%1', $this->config['site_name'],
 								str_replace('%2', $user_name,
 								str_replace('%3', $this->href().
 								($this->config['rewrite_mode'] ? "?" : "&amp;")."confirm=".$confirm,
 								$this->get_translation('EmailRegistered'))))."\n\n".
 								$this->get_translation('EmailGoodbye')."\n".
-								$this->config['wacko_name']."\n".
+								$this->config['site_name']."\n".
 								$this->config['base_url'];
 
 					$this->send_mail($email, $subject, $body);
@@ -234,7 +234,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 
 				// forward
 				$this->set_message($this->get_translation('SiteRegistered').
-				$this->config['wacko_name'].". <br />".
+				$this->config['site_name'].". <br />".
 				$this->get_translation('SiteEmailConfirm'));
 				$this->context[++$this->current_context] = '';
 				$this->redirect($this->href('', $this->get_translation('LoginPage')));
@@ -252,10 +252,11 @@ if (!isset($_POST['confirm']))
 			$this->set_message($this->format($error));
 		}
 
+		echo '<div class="cssform">';
 		echo $this->form_open();
 
 		echo '<input type="hidden" name="action" value="login" />';
-		echo '<div class="cssform">';
+
 		echo '<h3>'.$this->format_translation('RegistrationWelcome').'</h3>';
 
 		if ($this->config['multilanguage'])
@@ -326,6 +327,15 @@ if (!isset($_POST['confirm']))
 		echo '<label for="email">'.$this->get_translation('Email').':</label>';
 		echo '<input id="email" name="email" size="30" value="'.htmlspecialchars($email).'" />';
 		echo '<small> <a title="'.$this->get_translation('RegistrationEmailInfo').'">(?)</a></small></p>';
+
+		/*if ($this->config['policy_page'])
+		{
+			echo '<p>';
+			echo '<label for="terms_of_use">'.$this->get_translation('TermsOfUse').':</label>';
+			echo '<input id="terms_of_use" name="terms_of_use" type="checkbox" value="1" />';
+			echo '<small> '.$this->get_translation('AcceptTermsOfUse').' '.$this->config['site_name'].' <a href="'.htmlspecialchars($this->href('', $this->config['policy_page'])).'">'.$this->get_translation('TermsOfUse').'</a><br /></small></p>';
+		}*/
+
 		// captcha code starts
 
 		// Only show captcha if the admin enabled it in the config file
@@ -350,9 +360,9 @@ if (!isset($_POST['confirm']))
 		// end captcha
 
 		echo '<p><input type="submit" value="'.$this->get_translation('RegistrationButton').'" /></p>';
-		echo '</div>';
 
 		echo $this->form_close();
+		echo '</div>';
 	}
 	else
 	{

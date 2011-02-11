@@ -17,15 +17,15 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url']; ?>css/page.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url']; ?>css/wacko.css" media="screen" />
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->config['theme_url']; ?>icons/icon.gif" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentChangesRSS');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentCommentsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['wacko_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentChangesRSS');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentCommentsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('HistoryRevisionsRSS');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
 	<?php
 	// We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 	if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noindex'] == 1 || $this->page['noindex'] == 1)
 		echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 	?>
-	<title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : ''); ?></title>
+	<title><?php echo htmlspecialchars($this->config['site_name'])." : ".(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : ''); ?></title>
 	<!-- JavaScript used by WackoWiki -->
 	<?php
 // JS files.
@@ -82,7 +82,7 @@ else if($this->has_access('write'))
 			<?php echo $this->form_close(); ?>
 
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
-			<b><?php echo $this->config['wacko_name']; ?>:</b>
+			<b><?php echo $this->config['site_name']; ?>:</b>
 			<?php echo $this->get_page_path(); ?>
 			<a title="<?php echo $this->get_translation('SearchTitleTip'); ?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
 		</div>

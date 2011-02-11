@@ -9,7 +9,7 @@ require ('themes/_common/_header.php');
 <table class="topbody" align="center" border="0" cellpadding="0"
 	cellspacing="0" width="100%">
 	<tr>
-		<td><?php echo $this->config['wacko_name'] ?>: <?php echo $this->get_page_path(); ?>
+		<td><?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?>
 		<a class="Search"
 			title="<?php echo $this->get_translation('SearchTitleTip')?>"
 			href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>

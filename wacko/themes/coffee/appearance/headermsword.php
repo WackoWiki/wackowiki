@@ -5,7 +5,7 @@ header("Content-Type: text/html; charset=".$this->get_charset());
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page['lang'] ?>" lang="<?php echo $this->page['lang'] ?>">
 <head>
-<title><?php echo htmlspecialchars($this->config['wacko_name'])." : ".(isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></title>
+<title><?php echo htmlspecialchars($this->config['site_name'])." : ".(isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></title>
 <?php // do not index alternative print pages
 echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
@@ -17,7 +17,7 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <body>
 
 <div class="header">
-<h1><?php echo $this->config['wacko_name'] ?>: <a
+<h1><?php echo $this->config['site_name'] ?>: <a
 	href="<?php echo $this->config['base_url'] ?>TextSearch?phrase=<?php echo urlencode($this->tag); ?>"><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></a>
 </h1>
 </div>

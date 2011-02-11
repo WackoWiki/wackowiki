@@ -86,6 +86,7 @@ $wacko_translation = array(
 	'Links' => 'Links',
 	'Version' => 'Version',
 	'TermsOfUse' => 'Terms of Use',
+	'AcceptTermsOfUse' => ' I accept',
 	'ShowComments' => 'Dodaj/Wy¶wietl komentarze',
 	'HideComments' => 'Ukryj komentarze',
 	'AddComment' => 'Skomentuj tê stronê:',

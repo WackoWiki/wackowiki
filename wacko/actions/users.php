@@ -44,10 +44,14 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 			// check for errors
 			// message is too long
 			if (strlen($_POST['mail_body']) > INTERCOM_MAX_SIZE)
+			{
 				$error = str_replace('%1', strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE, $this->get_translation('UsersPMOversized'));
+			}
 			// personal messages flood control
 			else if ($_SESSION['intercom_delay'] && ((time() - $_SESSION['intercom_delay']) < $this->config['intercom_delay']))
+			{
 				$error = str_replace('%1', $this->config['intercom_delay'], $this->get_translation('UsersPMFlooded'));
+			}
 
 			// proceed if no error encountered
 			if ($error)
@@ -60,20 +64,20 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				$prefix		= rtrim(str_replace(array('https://www.', 'https://', 'http://www.', 'http://'), '', $this->config['base_url']), '/');
 				$msgID		= date('ymdHi').'.'.mt_rand(100000, 999999).'@'.$prefix;
 				$subject	= ( strpos($_POST['mail_subject'], '['.$prefix.'] ') === false ? '['.$prefix.'] ' : '' ).( $_POST['mail_subject'] ? $_POST['mail_subject'] : '(no subject)' );
-				$body	= str_replace('%1', $this->get_user_name(), $this->get_translation('UsersPMBody'));
-				$body	= str_replace('%2', rtrim($this->config['base_url'], '/'), $body);
-				$body	= str_replace('%3', $this->href('', $this->tag, 'profile='.$this->get_user_name().'&ref='.rawurlencode(base64_encode($msgID.'@@'.$subject)).'#contacts'), $body);
-				$body	= str_replace('%4', $this->config['abuse_email'], $body);
-				$body	= str_replace('%5', $_POST['mail_body'], $body);
+				$body		= str_replace('%1', $this->get_user_name(), $this->get_translation('UsersPMBody'));
+				$body		= str_replace('%2', rtrim($this->config['base_url'], '/'), $body);
+				$body		= str_replace('%3', $this->href('', $this->tag, 'profile='.$this->get_user_name().'&ref='.rawurlencode(base64_encode($msgID.'@@'.$subject)).'#contacts'), $body);
+				$body		= str_replace('%4', $this->config['abuse_email'], $body);
+				$body		= str_replace('%5', $_POST['mail_body'], $body);
 
 				// compose headers
 				$headers	= array('Message-ID: <$msgID>');
+
 				if ($_POST['ref'] == true)
 				{
 					$headers[] = "In-Reply-To: <{$_POST['ref']}>";
 					$headers[] = "References: <{$_POST['ref']}>";
 				}
-
 				else
 				{
 					$notice = $this->get_translation('UsersPMSent');
@@ -86,7 +90,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				}
 				else
 				{
-					$body .= "\n\n".$this->get_translation('MailGoodbye')."\n".$this->config['wacko_name']."\n".$this->config['base_url'];
+					$body .= "\n\n".$this->get_translation('MailGoodbye')."\n".$this->config['site_name']."\n".$this->config['base_url'];
 
 					$this->send_mail($user['email'], $subject, $body, 'no-reply@'.$prefix, '', $headers, true);
 					$this->set_message($notice);

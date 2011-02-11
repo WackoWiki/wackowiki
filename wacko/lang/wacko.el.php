@@ -86,6 +86,7 @@ $wacko_translation = array(
 	'Links' => 'Links',
 	'Version' => 'Version',
 	'TermsOfUse' => 'Βασικοί Όροι',
+	'AcceptTermsOfUse' => ' I accept',
 	'ShowComments' => 'Εμφάνιση σχόλια/φόρμες',
 	'HideComments' => 'Απόκρυψη σχόλια/φόρμες',
 	'AddComment' => 'Πρόσθεσε ένα σχόλιο σε αυτήν την σελίδα:',

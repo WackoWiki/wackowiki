@@ -86,6 +86,7 @@ $wacko_translation = array(
 	'Links' => 'Links',
 	'Version' => 'Version',
 	'TermsOfUse' => 'Terms of Use',
+	'AcceptTermsOfUse' => ' I accept',
 	'ShowComments' => 'Mostrar comentarios/formulario',
 	'HideComments' => 'Ocultar comentarios/formulario',
 	'AddComment' => 'Añadir un comentario a esta página:',
