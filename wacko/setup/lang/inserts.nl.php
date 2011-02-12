@@ -23,4 +23,6 @@ insert_page('TekstZoeken', 'Tekst Zoeken', '{{search}}', $lng, 'Admins', false, 
 insert_page('Inloggen', 'Inloggen', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Instellingen', 'Instellingen', '{{UserSettings}}', $lng, 'Admins', false, false);
 
+insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
+
 ?>
