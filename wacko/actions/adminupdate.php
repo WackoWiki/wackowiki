@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// status: alpha
+// status: beta
 //
 // for testing and improvement - thought for upgrade routine of the installer
 
@@ -113,6 +113,7 @@ if (!function_exists('convert_into_menu_table'))
 					(preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/', $_bookmark, $matches)) ||
 					(preg_match('/^(\S+)(\s+(.+))?$/', $_bookmark, $matches)) ) // without brackets at last!
 				{
+					$wacko->debug_print_r($matches);
 					list (, $url, $text) = $matches;
 
 					if ($url)
@@ -197,19 +198,19 @@ if ($this->is_admin())
 			}
 
 			$sql =	"INSERT INTO {$this->config['table_prefix']}user_setting SET ".
-				"user_id			= '".quote($this->dblink, $_user['user_id'])."', ".
-				"doubleclick_edit	= '".quote($this->dblink, $_user['doubleclick_edit'])."', ".
-				"show_comments		= '".quote($this->dblink, $_user['show_comments'])."', ".
-				"revisions_count	= '".quote($this->dblink, $_user['revisions_count'])."', ".
-				"changes_count		= '".quote($this->dblink, $_user['changes_count'])."', ".
-				"lang				= '".quote($this->dblink, $_user['lang'])."', ".
-				"show_spaces		= '".quote($this->dblink, $_user['show_spaces'])."', ".
-				"typografica		= '".quote($this->dblink, $_user['typografica'])."', ".
-				"theme				= '".quote($this->dblink, $_user['options']['theme'])."', ".
-				"autocomplete		= '".quote($this->dblink, $_user['options']['autocomplete'])."', ".
-				"dont_redirect		= '".quote($this->dblink, $_user['options']['dont_redirect'])."', ".
-				"send_watchmail		= '".quote($this->dblink, $_user['options']['send_watchmail'])."', ".
-				"show_files			= '".quote($this->dblink, $_user['options']['show_files'])."'";
+				"user_id			= '".quote($this->dblink, isset($_user['user_id']) ? $_user['user_id'] : '')."', ".
+				"doubleclick_edit	= '".quote($this->dblink, isset($_user['doubleclick_edit']) ? $_user['doubleclick_edit'] : '')."', ".
+				"show_comments		= '".quote($this->dblink, isset($_user['show_comments']) ? $_user['show_comments'] : '')."', ".
+				"revisions_count	= '".quote($this->dblink, isset($_user['revisions_count']) ? $_user['revisions_count'] : '')."', ".
+				"changes_count		= '".quote($this->dblink, isset($_user['changes_count']) ? $_user['changes_count'] : '')."', ".
+				"lang				= '".quote($this->dblink, isset($_user['lang']) ? $_user['lang'] : '')."', ".
+				"show_spaces		= '".quote($this->dblink, isset($_user['show_spaces']) ? $_user['show_spaces'] : '')."', ".
+				"typografica		= '".quote($this->dblink, isset($_user['typografica']) ? $_user['typografica'] : '')."', ".
+				"theme				= '".quote($this->dblink, isset($_user['options']['theme']) ? $_user['options']['theme'] : 'default')."', ".
+				"autocomplete		= '".quote($this->dblink, isset($_user['options']['autocomplete']) ? $_user['options']['autocomplete'] : '')."', ".
+				"dont_redirect		= '".quote($this->dblink, isset($_user['options']['dont_redirect']) ? $_user['options']['dont_redirect'] : '')."', ".
+				"send_watchmail		= '".quote($this->dblink, isset($_user['options']['send_watchmail']) ? $_user['options']['send_watchmail'] : '')."', ".
+				"show_files			= '".quote($this->dblink, isset($_user['options']['show_files']) ? $_user['options']['show_files'] : '')."'";
 
 			$this->query($sql);
 
