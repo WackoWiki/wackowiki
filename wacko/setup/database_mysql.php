@@ -324,7 +324,7 @@ $table_watch = "CREATE TABLE {$pref}watch (".
 */
 
 $table_acl_drop				= "DROP TABLE {$pref}acl";
-$table_menu_drop		= "DROP TABLE {$pref}menu";
+$table_menu_drop			= "DROP TABLE {$pref}menu";
 $table_cache_drop			= "DROP TABLE {$pref}cache";
 $table_config_drop			= "DROP TABLE {$pref}config";
 $table_group_drop			= "DROP TABLE {$pref}group";

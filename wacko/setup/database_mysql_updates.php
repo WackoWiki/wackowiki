@@ -153,17 +153,25 @@ $alter_page_r4_3_34 = "ALTER TABLE {$pref}page ADD reviewer_id INT(10) UNSIGNED 
 $alter_page_r4_3_35 = "ALTER TABLE {$pref}page ADD reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER reviewed";
 $alter_page_r4_3_36 = "ALTER TABLE {$pref}page ADD menu_tag VARCHAR(250) NOT NULL DEFAULT '' AFTER supertag";
 
-$update_page_r4_3 = "UPDATE {$pref}page SET body_r=''";
-$update_page_r4_3_1 = "UPDATE {$pref}page AS page, (SELECT user_id, user_name FROM {$pref}user) AS users SET page.owner_id = users.user_id WHERE page.owner = users.user_name";
-$update_page_r4_3_2 = "UPDATE {$pref}page AS page, (SELECT user_id, user_name FROM {$pref}user) AS users SET page.user_id = users.user_id WHERE page.user = users.user_name";
-$update_page_r4_3_3 = "UPDATE {$pref}page AS page, (SELECT id, tag FROM {$pref}page) AS pages2 SET page.comment_on_id = pages2.id WHERE page.comment_on = pages2.tag";
-$update_page_r4_3_4 = "UPDATE {$pref}page AS page, (SELECT comment_on_id, COUNT(comment_on_id) as n FROM {$pref}page WHERE comment_on_id != '0' GROUP BY comment_on_id) AS comments_on SET page.comments = comments_on.n WHERE page.id = comments_on.comment_on_id";
-$update_page_r4_3_5 = "UPDATE {$pref}page as page, (SELECT tag, MIN(time) AS oldest FROM {$pref}revision GROUP BY tag) AS revisions SET page.created = revisions.oldest WHERE page.tag = revisions.tag AND page.created IS NULL";
-$update_page_r4_3_6 = "UPDATE {$pref}page as page SET page.created = page.time WHERE page.created IS NULL";
-$update_page_r4_3_7 = "UPDATE {$pref}page as page SET minor_edit = '0' WHERE page.minor_edit IS NULL";
-$update_page_r4_3_8 = "UPDATE {$pref}page SET formatting = 'wacko' WHERE formatting IS NULL";
-$update_page_r4_3_9 = "UPDATE {$pref}page as page SET reviewed = '0' WHERE page.reviewed IS NULL";
-$update_page_r4_3_10 = "UPDATE {$pref}page as page SET tree_level = '0' WHERE page.tree_level IS NULL";
+$update_page_r4_3_1 = "UPDATE {$pref}page SET body_r=''";
+
+// FIXME: breaks somewhat the naming rules
+$update_page_r4_3_2_1 = "DELETE {$pref}link.* FROM {$pref}link INNER JOIN {$pref}page ON ({$pref}link.to_tag = {$pref}page.tag) WHERE {$pref}page.user = 'WackoInstaller'";
+$update_page_r4_3_2_2 = "DELETE {$pref}acl.* FROM {$pref}page INNER JOIN {$pref}acl ON ({$pref}page.id = {$pref}acl.page_id) WHERE {$pref}page.user = 'WackoInstaller'";
+$update_page_r4_3_2_3 = "DELETE {$pref}watch.* FROM {$pref}page INNER JOIN {$pref}watch ON ({$pref}page.tag = {$pref}watch.tag) WHERE {$pref}page.user = 'WackoInstaller'";
+$update_page_r4_3_2_4 = "DELETE {$pref}referrer.* FROM {$pref}referrer INNER JOIN {$pref}page ON ({$pref}referrer.page_tag = {$pref}page.tag) WHERE {$pref}page.user = 'WackoInstaller'";
+$update_page_r4_3_2_5 = "DELETE {$pref}page.* FROM {$pref}page WHERE {$pref}page.user = 'WackoInstaller'";
+
+$update_page_r4_3_4 = "UPDATE {$pref}page AS page, (SELECT user_id, user_name FROM {$pref}user) AS users SET page.owner_id = users.user_id WHERE page.owner = users.user_name";
+$update_page_r4_3_5 = "UPDATE {$pref}page AS page, (SELECT user_id, user_name FROM {$pref}user) AS users SET page.user_id = users.user_id WHERE page.user = users.user_name";
+$update_page_r4_3_6 = "UPDATE {$pref}page AS page, (SELECT id, tag FROM {$pref}page) AS pages2 SET page.comment_on_id = pages2.id WHERE page.comment_on = pages2.tag";
+$update_page_r4_3_7 = "UPDATE {$pref}page AS page, (SELECT comment_on_id, COUNT(comment_on_id) as n FROM {$pref}page WHERE comment_on_id != '0' GROUP BY comment_on_id) AS comments_on SET page.comments = comments_on.n WHERE page.id = comments_on.comment_on_id";
+$update_page_r4_3_8 = "UPDATE {$pref}page AS page, (SELECT tag, MIN(time) AS oldest FROM {$pref}revision GROUP BY tag) AS revisions SET page.created = revisions.oldest WHERE page.tag = revisions.tag AND page.created IS NULL";
+$update_page_r4_3_9 = "UPDATE {$pref}page AS page SET page.created = page.time WHERE page.created IS NULL";
+$update_page_r4_3_10 = "UPDATE {$pref}page AS page SET minor_edit = '0' WHERE page.minor_edit IS NULL";
+$update_page_r4_3_11 = "UPDATE {$pref}page SET formatting = 'wacko' WHERE formatting IS NULL";
+$update_page_r4_3_12 = "UPDATE {$pref}page AS page SET reviewed = '0' WHERE page.reviewed IS NULL";
+$update_page_r4_3_13 = "UPDATE {$pref}page AS page SET tree_level = '0' WHERE page.tree_level IS NULL";
 
 // POLL
 $table_poll_r4_3 = "CREATE TABLE {$pref}poll (".
@@ -281,16 +289,17 @@ $alter_user_r4_3_27 = "ALTER TABLE {$pref}user ADD lost_password_request_count S
 $alter_user_r4_3_28 = "ALTER TABLE {$pref}user ADD failed_login_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0' AFTER lost_password_request_count";
 $alter_user_r4_3_29 = "ALTER TABLE {$pref}user ADD fingerprint VARCHAR(40) AFTER total_comments";
 
-$alter_user_r4_3_30 = "ALTER TABLE {$pref}user DROP changes_count"; // TODO: drop after successful data migration
-$alter_user_r4_3_31 = "ALTER TABLE {$pref}user DROP doubleclick_edit";
-$alter_user_r4_3_32 = "ALTER TABLE {$pref}user DROP show_comments";
-$alter_user_r4_3_33 = "ALTER TABLE {$pref}user DROP bookmarks";
-$alter_user_r4_3_34 = "ALTER TABLE {$pref}user DROP lang";
-$alter_user_r4_3_35 = "ALTER TABLE {$pref}user DROP show_spaces";
-$alter_user_r4_3_36 = "ALTER TABLE {$pref}user DROP typografica";
-$alter_user_r4_3_37 = "ALTER TABLE {$pref}user DROP more";
-$alter_user_r4_3_38 = "ALTER TABLE {$pref}user DROP motto";
-$alter_user_r4_3_39 = "ALTER TABLE {$pref}user DROP revisions_count";
+// see adminupdate action
+#$alter_user_r4_3_30 = "ALTER TABLE {$pref}user DROP changes_count"; // TODO: drop after successful data migration
+#$alter_user_r4_3_31 = "ALTER TABLE {$pref}user DROP doubleclick_edit";
+#$alter_user_r4_3_32 = "ALTER TABLE {$pref}user DROP show_comments";
+#$alter_user_r4_3_33 = "ALTER TABLE {$pref}user DROP bookmarks";
+#$alter_user_r4_3_34 = "ALTER TABLE {$pref}user DROP lang";
+#$alter_user_r4_3_35 = "ALTER TABLE {$pref}user DROP show_spaces";
+#$alter_user_r4_3_36 = "ALTER TABLE {$pref}user DROP typografica";
+#$alter_user_r4_3_37 = "ALTER TABLE {$pref}user DROP more";
+#$alter_user_r4_3_38 = "ALTER TABLE {$pref}user DROP motto";
+#$alter_user_r4_3_39 = "ALTER TABLE {$pref}user DROP revisions_count";
 
 $update_user_r4_3 = "UPDATE {$pref}user SET doubleclick_edit = '0' WHERE doubleclick_edit = '2'";
 $update_user_r4_3_1 = "UPDATE {$pref}user SET show_comments = '0' WHERE show_comments = '2'";
