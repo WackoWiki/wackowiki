@@ -78,7 +78,10 @@ $table_group_member_r4_3 = "CREATE TABLE {$pref}group_member (".
 // LINK
 $rename_link_r4_3_1 = "RENAME TABLE {$pref}links TO {$pref}link";
 
-$alter_link_r4_3_0 = "ALTER TABLE {$pref}link CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
+// this is necessary to prevent: #1071 – Specified key was too long; max key length is 1000 bytes
+$alter_link_r4_3_0 = "ALTER TABLE {$pref}link DROP INDEX from_tag,
+						ADD INDEX `from_tag` ( `from_tag` , `to_tag` ( 78 ) ),
+						CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
 $alter_link_r4_3_1 = "ALTER TABLE {$pref}link ADD id INT(10) UNSIGNED NOT NULL auto_increment FIRST, ADD PRIMARY KEY (id)";
 $alter_link_r4_3_2 = "ALTER TABLE {$pref}link ADD from_page_id INT(10) UNSIGNED NOT NULL AFTER from_tag";
 $alter_link_r4_3_3 = "ALTER TABLE {$pref}link ADD to_page_id INT(10) UNSIGNED NOT NULL AFTER from_page_id";
@@ -299,8 +302,8 @@ $alter_user_r4_3_27 = "ALTER TABLE {$pref}user ADD lost_password_request_count S
 $alter_user_r4_3_28 = "ALTER TABLE {$pref}user ADD failed_login_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0' AFTER lost_password_request_count";
 $alter_user_r4_3_29 = "ALTER TABLE {$pref}user ADD fingerprint VARCHAR(40) AFTER total_comments";
 
-// see adminupdate action
-#$alter_user_r4_3_30 = "ALTER TABLE {$pref}user DROP changes_count"; // TODO: drop after successful data migration
+// see adminupdate action which will do this after successful data migration
+#$alter_user_r4_3_30 = "ALTER TABLE {$pref}user DROP changes_count";
 #$alter_user_r4_3_31 = "ALTER TABLE {$pref}user DROP doubleclick_edit";
 #$alter_user_r4_3_32 = "ALTER TABLE {$pref}user DROP show_comments";
 #$alter_user_r4_3_33 = "ALTER TABLE {$pref}user DROP bookmarks";
