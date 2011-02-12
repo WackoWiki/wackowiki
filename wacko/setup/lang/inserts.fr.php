@@ -23,4 +23,6 @@ insert_page('Recherche', 'Recherche', '{{search}}', $lng, 'Admins', false, false
 insert_page('Connexion', 'Connexion', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Préférences', 'Préférences', '{{UserSettings}}', $lng, 'Admins', false, false);
 
+insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
+
 ?>

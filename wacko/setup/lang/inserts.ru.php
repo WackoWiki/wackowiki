@@ -24,4 +24,6 @@ insert_page('Поиск', 'Поиск', '{{search}}', $lng, 'Admins', false, false);
 insert_page('Вход', 'Вход', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Настройки', 'Настройки', '{{UserSettings}}', $lng, 'Admins', false, false);
 
+insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
+
 ?>

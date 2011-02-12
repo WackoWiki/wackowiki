@@ -23,4 +23,6 @@ insert_page('TextSearch', 'Text Search', '{{search}}', $lng, 'Admins', false, fa
 insert_page('Login', 'Login', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Settings', 'Settings', '{{UserSettings}}', $lng, 'Admins', false, false);
 
+insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
+
 ?>

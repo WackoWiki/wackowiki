@@ -23,4 +23,6 @@ insert_page('TextSuche', 'TextSuche', '{{search}}\n\n\n  * ++4 Buchstaben Minimu
 insert_page('Anmeldung', 'Anmeldung', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Einstellungen', 'Einstellungen', '{{UserSettings}}', $lng, 'Admins', false, false);
 
+insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
+
 ?>

@@ -18,9 +18,9 @@ $lang = array(
 /*
    Language Selection Page
 */
-'UpgradeFromWacko' => 'Wilkommen bei WackoWiki, es scheint das du von WackoWiki <tt>%1</tt> auf <tt>%2</tt> aktualisierst.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.',
+'UpgradeFromWacko' => 'Wilkommen bei WackoWiki, es scheint das du von WackoWiki <b><tt>%1</tt></b> auf <b><tt>%2</tt></b> aktualisierst.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.',
 'FreshInstall' => 'Wilkommen bei WackoWiki, du installierst gerade WackoWiki <tt>%1</tt>.  Die nächsten Seiten werden dich durch den Installationsvorgang führen.',
-'PleaseBackup' => 'Bitte, erstelle eine Sicherungskopie von deiner Datenbank, der Konfigurationsdatei config.php und aller geänderter Dateien (ggf. auch Layouts) bevor du den Aktualisierungs-Vorgang beginnst. Das kann dir im Problemfall viel Ärger ersparen.',
+'PleaseBackup' => 'Bitte erstelle eine Sicherungskopie von deiner Datenbank, der Konfigurationsdatei config.php und aller geänderter Dateien (ggf. auch Layouts) bevor du den Aktualisierungs-Vorgang beginnst. Das kann dir im Problemfall viel Ärger ersparen.',
 'Lang' => 'Spracheinstellungen',
 'LangDesc' => 'Wähle eine Sprache für die Installation aus. Das wird die Standardsprache für deine WackoWiki Installation.',
 
