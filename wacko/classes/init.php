@@ -326,10 +326,6 @@ class Init
 		{
 			$this->request = @$_REQUEST['page'];
 		}
-		/*else if(isset($_REQUEST['page_id']))
-		{
-			$this->request = @$_REQUEST['page_id'];
-		}*/
 
 		// remove leading slash
 		$this->request	= preg_replace('/^\//', '', $this->request);
