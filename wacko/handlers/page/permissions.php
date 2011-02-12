@@ -70,13 +70,13 @@ if ($this->user_is_owner() || $this->is_admin())
 
 					if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')
 					{
-						$subject = $this->config['wacko_name'].'. '.$this->get_translation('NewPageOwnership');
+						$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageOwnership');
 						$body  = $this->get_translation('EmailHello').$newowner.".\n\n";
-						$body .= str_replace('%2', $this->config['wacko_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
+						$body .= str_replace('%2', $this->config['site_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
 						$body .= $this->href('', $this->tag, '')."\n\n";
 						$body .= $this->get_translation('PageOwnershipInfo')."\n";
 						//$email .= $this->href('', '', '')."\n\n";
-						$body .= $this->get_translation('EmailGoodbye')."\n".$this->config['wacko_name']."\n".$this->config['base_url'];
+						$body .= $this->get_translation('EmailGoodbye')."\n".$this->config['site_name']."\n".$this->config['base_url'];
 						$this->send_mail($user['email'], $subject, $body);
 					}
 
@@ -170,13 +170,13 @@ if ($this->user_is_owner() || $this->is_admin())
 
 				if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')
 				{
-					$subject = $this->config['wacko_name'].'. '.$this->get_translation('NewPageOwnership');
+					$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageOwnership');
 					$body  = $this->get_translation('EmailHello').$newowner.".\n\n";
-					$body .= str_replace('%2', $this->config['wacko_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
+					$body .= str_replace('%2', $this->config['site_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
 					$body .= $ownedpages."\n";
 					$body .= $this->get_translation('PageOwnershipInfo')."\n";
 					//$body .= $this->href('', '', '')."\n\n";
-					$body .= $this->get_translation('EmailGoodbye')."\n".$this->config['wacko_name']."\n".$this->config['base_url'];
+					$body .= $this->get_translation('EmailGoodbye')."\n".$this->config['site_name']."\n".$this->config['base_url'];
 					$this->send_mail($user['email'], $subject, $body);
 				}
 			}
