@@ -45,9 +45,9 @@ if ($this->is_admin())
 		foreach ($files as $file)
 		{
 			// rename from @PageSupertag@SubPage@file_name to @page_id@file_name
-			$old_name = '@'.str_replace('/', '@', $file['supertag']).'@';
-			$new_name = '@'.$file['page_id'].'@';
-			$file_name = $file['file_name'];
+			$old_name	= '@'.str_replace('/', '@', $file['supertag']).'@';
+			$new_name	= '@'.$file['page_id'].'@';
+			$file_name	= $file['file_name'];
 
 			if($handle = opendir($dir))
 			{
@@ -126,8 +126,8 @@ if (!function_exists('convert_into_menu_table'))
 
 						if (stristr($text, '@@'))
 						{
-							$t			= explode('@@', $text);
-							$text		= $t[0];
+							$t				= explode('@@', $text);
+							$text			= $t[0];
 							$bookmark_lang	= $t[1];
 						}
 
@@ -181,7 +181,7 @@ if ($this->is_admin())
 		$_users = $this->load_all(
 			"SELECT user_id, doubleclick_edit, show_comments, bookmarks, revisions_count, changes_count, lang, show_spaces, typografica, more ".
 			"FROM {$this->config['table_prefix']}user ".
-			"WHERE user_name NOT LIKE {$this->config['admin_name']}");
+			"WHERE user_name NOT LIKE '{$this->config['admin_name']}'");
 
 		$count = count($_users);
 
@@ -196,10 +196,21 @@ if ($this->is_admin())
 				$_user['options']['theme'] = $this->config['theme'];
 			}
 
+			$sql =	"INSERT INTO {$this->config['table_prefix']}user_setting SET ".
+				"user_id			= '".quote($this->dblink, $_user['user_id'])."', ".
+				"doubleclick_edit	= '".quote($this->dblink, $_user['doubleclick_edit'])."', ".
+				"show_comments		= '".quote($this->dblink, $_user['show_comments'])."', ".
+				"revisions_count	= '".quote($this->dblink, $_user['revisions_count'])."', ".
+				"changes_count		= '".quote($this->dblink, $_user['changes_count'])."', ".
+				"lang				= '".quote($this->dblink, $_user['lang'])."', ".
+				"show_spaces		= '".quote($this->dblink, $_user['show_spaces'])."', ".
+				"typografica		= '".quote($this->dblink, $_user['typografica'])."', ".
+				"theme				= '".quote($this->dblink, $_user['options']['theme'])."', ".
+				"autocomplete		= '".quote($this->dblink, $_user['options']['autocomplete'])."', ".
+				"dont_redirect		= '".quote($this->dblink, $_user['options']['dont_redirect'])."', ".
+				"send_watchmail		= '".quote($this->dblink, $_user['options']['send_watchmail'])."', ".
+				"show_files			= '".quote($this->dblink, $_user['options']['show_files'])."'";
 
-			$sql =	"INSERT INTO {$this->config['table_prefix']}user_setting
-					(user_id, doubleclick_edit, show_comments, revisions_count, changes_count, lang, show_spaces, typografica, theme, autocomplete, dont_redirect, send_watchmail, show_files)
-					VALUES ('{$_user['user_id']}', '{$_user['doubleclick_edit']}', '{$_user['show_comments']}', '{$_user['revisions_count']}', '{$_user['changes_count']}', '{$_user['lang']}', '{$_user['show_spaces']}', '{$_user['typografica']}', '{$_user['options']['theme']}', '{$_user['options']['autocomplete']}', '{$_user['options']['dont_redirect']}', '{$_user['options']['send_watchmail']}', '{$_user['options']['show_files']}')";
 			$this->query($sql);
 
 			// bookmarks
