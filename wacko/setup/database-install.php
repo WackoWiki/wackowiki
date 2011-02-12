@@ -29,10 +29,10 @@ function output_error($errorText = '')
 
 function random_seed($length, $seed_complexity)
 {
-	$chars_uc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	$chars_lc = 'abcdefghijklmnopqrstuvwxyz';
-	$digits = '0123456789';
-	$symbols = '-_!@#%^&*(){}[]|~'; // removed '$'
+	$chars_uc	= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$chars_lc	= 'abcdefghijklmnopqrstuvwxyz';
+	$digits		= '0123456789';
+	$symbols	= '-_!@#%^&*(){}[]|~'; // removed '$'
 	$uc = 0;
 	$lc = 0;
 	$di = 0;
@@ -97,6 +97,8 @@ $salt					= random_seed(10, 3);
 $password_encrypted		= hash('sha256', $config['admin_name'].$salt.$_POST['password']);
 
 $config_insert = '';
+// set back theme to default, just a precaution
+$config['theme'] = 'default';
 
 // user 'system' holds all default pages
 $insert_system				= "INSERT INTO ".$config['table_prefix']."user (user_name, password, salt, email, account_type, signup_time) VALUES ('System', '', '', '', '1', '')";
@@ -115,9 +117,6 @@ $insert_moderator_group		= "INSERT INTO ".$config['table_prefix']."group (group_
 $insert_reviewer_group		= "INSERT INTO ".$config['table_prefix']."group (group_name, description, moderator, created) VALUES ('Reviewer', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
 
 $insert_logo_image = "INSERT INTO ".$config['table_prefix']."upload (page_id, user_id, file_name, description, uploaded_dt, file_size, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1),'wacko4.png', 'WackoWiki', NOW(), '1580', '108', '50', 'png')";
-
-// set back theme to default, just a precaution
-$config['theme'] = 'default';
 
 $config['show_spaces']= ($config['show_spaces'] == 'N' ? 0 : 1);
 
