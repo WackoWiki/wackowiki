@@ -1476,7 +1476,7 @@ class Wacko
 		else
 		{
 			// use mail() function
-			$headers = 'From: =?'. $charset ."?B?". base64_encode($this->config['wacko_name']) ."?= <".$this->config['admin_email'].">\r\n";
+			$headers = 'From: =?'. $charset ."?B?". base64_encode($this->config['site_name']) ."?= <".$this->config['admin_email'].">\r\n";
 			$headers .= "X-Mailer: PHP/".phpversion()."\r\n"; //mailer
 			$headers .= "X-Priority: 3\r\n"; //1 UrgentMessage, 3 Normal
 			$headers .= "X-Wacko: ".$this->config['base_url']."\r\n";
@@ -1794,13 +1794,13 @@ class Wacko
 
 								if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $_user['enabled'] == true && $_user['email_confirm'] == '' && $_user['send_watchmail'] != 0)
 								{
-									$subject = $this->config['wacko_name'].'. '.$this->get_translation('NewPageCreatedSubj')." '$title'";
+									$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageCreatedSubj')." '$title'";
 									$body = $this->get_translation('EmailHello'). $this->get_translation('EmailModerator').$moderator.".\n\n".
 											str_replace('%1', ( $user == GUEST ? $this->get_translation('Guest') : $user ), $this->get_translation('NewPageCreatedBody'))."\n".
 											"'$title'\n".
 											$this->href('', $tag)."\n\n".
 											$this->get_translation('EmailGoodbye')."\n".
-											$this->config['wacko_name']."\n".
+											$this->config['site_name']."\n".
 											$this->config['base_url'];
 
 									$this->send_mail($_user['email'], $subject, $body);
@@ -1868,7 +1868,7 @@ class Wacko
 										$this->set_translation ($lang);
 										$this->set_language ($lang);
 
-										$subject = '['.$this->config['wacko_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
+										$subject = '['.$this->config['site_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
 										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
 												$user_name.
 												$this->get_translation('SomeoneCommented', $lang)."\n".
@@ -1877,7 +1877,7 @@ class Wacko
 												$body."\n\n".
 												"----------------------------------------------------------------------\n\n".
 												$this->get_translation('EmailGoodbye', $lang)."\n".
-												$this->config['wacko_name']."\n".
+												$this->config['site_name']."\n".
 												$this->config['base_url'];
 
 										$this->send_mail($_user['email'], $subject, $body);
@@ -1985,7 +1985,7 @@ class Wacko
 										$this->set_translation ($lang);
 										$this->set_language ($lang);
 
-										$subject = '['.$this->config['wacko_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
+										$subject = '['.$this->config['site_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
 										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
 												$user_name.
 												$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
@@ -1995,7 +1995,7 @@ class Wacko
 												$this->format($diff, 'html2mail').
 												"\n======================================================================\n\n".
 												$this->get_translation('EmailGoodbye', $lang)."\n".
-												$this->config['wacko_name']."\n".
+												$this->config['site_name']."\n".
 												$this->config['base_url'];
 
 										$this->send_mail($_user['email'], $subject, $body);
