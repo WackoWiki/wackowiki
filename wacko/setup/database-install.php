@@ -1053,6 +1053,7 @@ switch($config['database_driver'])
 			case 'sqlite2':
 			case 'mysql_pdo':
 				require_once('setup/database_mysql.php');
+				require_once('setup/database_mysql_updates.php'); // mysql only
 				if ($config['database_driver'] == 'mysql_pdo') $config['database_driver'] = 'mysql';
 				$dsn = $config['database_driver'].":dbname=".$config['database_database'].";host=".$config['database_host'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
 				break;
