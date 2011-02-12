@@ -38,11 +38,11 @@
 
 <form action="<?php echo my_location() ?>?installAction=<?php echo "database-config" ; ?>" method="post" name="form1">
 <?php
-   writeConfigHiddenNodes(array('wacko_name' => '', 'root_page' => '', 'multilanguage' => '', 'admin_name' => '', 'password' => '', 'admin_email' => '', 'base_url' => '', 'rewrite_mode' => ''));
+   writeConfigHiddenNodes(array('site_name' => '', 'root_page' => '', 'multilanguage' => '', 'admin_name' => '', 'password' => '', 'admin_email' => '', 'base_url' => '', 'rewrite_mode' => ''));
 ?>
    <h2><?php echo $lang['Name'];?></h2>
    <p class="notop"><?php echo $lang['NameDesc'];?></p>
-   <input type="text" maxlength="250" name="config[wacko_name]" value="<?php !isset ( $config['wakka_name'] ) ? print $config['wacko_name'] : print $config['wakka_name'] ; ?>" class="text_input" />
+   <input type="text" maxlength="250" name="config[site_name]" value="<?php !isset ( $config['wakka_name'] ) ? print $config['site_name'] : print $config['wakka_name'] ; ?>" class="text_input" />
    <div class="fake_hr_seperator">
       <hr />
    </div>

@@ -31,4 +31,5 @@ catch(PDOException $e)
 	test($lang['TestConnectionString'], false, "PDO Error: ".$e->getMessage());
 	$fatal_error = true;
 }
+
 ?>
