@@ -11,17 +11,16 @@ require ('themes/_common/_header.php');
 	<div id="header">
 		<div id="header-main">
 			<div id="header-top">
-			<span class="main"><?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['wacko_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['wacko_name']."</a>") ?>: </span><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?> <a class="Search" title="<?php echo $this->get_translation('SearchTitleTip')?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
+			<span class="main"><?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['site_name']."</a>") ?>: </span><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?> <a class="Search" title="<?php echo $this->get_translation('SearchTitleTip')?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
 		</div>
 		<div id="login">
 <?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user())
-{ ?> <span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->get_user_name()) ?></span><small> ( <span class="nobr Tune"><?php
-echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
- | <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span>
-)</small>
-<?php
+{
+	echo '<span class="nobr">'.$this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()).'</span><small> ( <span class="nobr Tune">'.
+		$this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0).
+		" | <a onclick=\"return confirm('".$this->get_translation('LogoutAreYouSure')."');\" href=\"".$this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;")."action=logout&amp;goback=".$this->slim_url($this->tag)."\">".$this->get_translation('LogoutLink')."</a></span>)</small>";
 // Else Wacko shows login's controls
 }
 else
@@ -45,10 +44,10 @@ else
 	#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 	echo "<li>";
 	// Bookmarks
-	$formated_bm = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
-	$formated_bm = str_replace ("<br />", "", $formated_bm);
-	$formated_bm = str_replace ("\n", "</li>\n<li>", $formated_bm);
-	echo $formated_bm;
+	$formatted_bookmarks = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
+	$formatted_bookmarks = str_replace ("<br />", "", $formatted_bookmarks);
+	$formatted_bookmarks = str_replace ("\n", "</li>\n<li>", $formatted_bookmarks);
+	echo $formatted_bookmarks;
 	echo "</li>\n";
 
 	if ($this->get_user())
@@ -71,11 +70,17 @@ else
 
 <?php
 	// defining tabs constructor
+	// image - 1 image only, 2 image and text
 	function echo_tab($link, $hint, $title, $active = false, $image, $accesskey = '')
 	{
 		global $engine;
+
+		$_image = '';
+		$_title = '';
+
 		if ($title == '') return; // no tab;
-		if ($image == 1) $image = 'spacer.gif';
+		if ($image <> 0) $_image = 'spacer.gif';
+		else $_image = $image;
 
 		$method = substr($link, strrpos($link, '/') + 1);
 
@@ -83,7 +88,11 @@ else
 		{
 			if ($image)
 			{
-				$tab = "<li class=\"$method active\"><img src=\"".$engine->config['theme_url']."icons/$image\" alt=\"$title\" /></li>\n";
+				if ($image != 1)
+				{
+					$_title = $title;
+				}
+				$tab = "<li class=\"$method active\"><img src=\"".$engine->config['theme_url']."icons/$_image\" alt=\"$title\" />".$_title."</li>\n";
 			}
 			else
 			{
@@ -96,17 +105,23 @@ else
 
 			if ($image)
 			{
-				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->config['theme_url']."icons/$image\" alt=\"$title\" /></a></li>\n";
+				if ($image != 1)
+				{
+					$_title = ' '.$title;
+				}
+				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"".$engine->config['theme_url']."icons/$_image\" alt=\"$title\" />".$_title."</a></li>\n";
 			}
 			else
 			{
 				$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\">$title</a></li>\n";
 			}
 		}
+
 		return $tab;
 	}
 
-	echo "<ul>\n";
+	echo '<ul class="submenu">'."\n";
+	// find order of
 
 	// show tab
 	echo echo_tab(
@@ -129,18 +144,6 @@ else
 		1,
 		'e');
 
-	// create tab
-	echo echo_tab(
-		$this->href('new'),
-		$this->get_translation('CreateNewPageTip'),
-		((!$this->page && $this->has_access('create')) || $this->is_admin() ||
-			($this->forum === false && $this->has_access('write')) ||
-			($this->forum === true && ($this->user_is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
-			? $this->get_translation('CreateNewPageText') : '',
-		$this->method == 'new',
-		1,
-		'n');
-
 	// revisions tab
 	echo echo_tab(
 		$this->href('revisions'),
@@ -150,25 +153,68 @@ else
 		1,
 		'r');
 
+	// show more tab
+	// TODO: add translation ... $this->get_translation('PageHandlerMoreTip')
+	// display more icon and text
+	# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icons/more.png\" title=\"".$this->get_translation('PageHandlerMoreTip')."\" alt=\"".$this->get_translation('PageHandlerMoreTip')."\" /> more</a> \n";
+	// only display 'more' text that shows handler list on hover
+	echo "<li class=''><a href='#' id='more'>more</a> \n";
+	echo "<ul class='dropdown_menu'>\n";
+
+	// print tab
+	// TODO: should add 'PrintTip' to the language file
+	echo echo_tab(
+		$this->href('print'),
+		$this->get_translation('PrintVersion'),
+		$this->has_access('read') ? $this->get_translation('PrintText') : '',
+		$this->method == 'print',
+		2,
+		'v');
+
+	// create tab
+	echo echo_tab(
+		$this->href('new'),
+		$this->get_translation('CreateNewPageTip'),
+		((!$this->page && $this->has_access('create')) || $this->is_admin() ||
+			($this->forum === false && $this->has_access('write')) ||
+			($this->forum === true && ($this->user_is_owner() || $this->is_moderator()) && (int)$this->page['comments'] == 0))
+			? $this->get_translation('CreateNewPageText') : '',
+		$this->method == 'new',
+		2,
+		'n');
+
 	// remove tab
-	#echo echo_tab(
-	#	$this->href('remove'),
-	#	$this->get_translation('DeleteTip'),
-	#	($this->page && ($this->is_admin() || !$this->config['remove_onlyadmins'] && (
-	#		($this->forum === true && $this->user_is_owner() && (int)$this->page['comments'] == 0) ||
-	#		($this->forum === false && $this->user_is_owner()))))
-	#		? $this->get_translation('DeleteText') : '',
-	#	0,
-	#	$this->method == 'remove');
+	echo echo_tab(
+		$this->href('remove'),
+		$this->get_translation('DeleteTip'),
+		($this->page && ($this->is_admin() || !$this->config['remove_onlyadmins'] && (
+			($this->forum === true && $this->user_is_owner() && (int)$this->page['comments'] == 0) ||
+			($this->forum === false && $this->user_is_owner()))))
+			? $this->get_translation('DeleteText') : '',
+		$this->method == 'remove',
+		2,
+		'');
+
+	// rename tab
+	echo echo_tab(
+		$this->href('rename'),
+		$this->get_translation('RenameText'),
+		($this->page && ($this->user_is_owner() && (
+			($this->forum === true && $this->user_is_owner() && (int)$this->page['comments'] == 0) ||
+			($this->forum === false && $this->user_is_owner()))))
+			? $this->get_translation('RenameText') : '',
+		$this->method == 'rename',
+		2,
+		'');
 
 	// moderation tab
-	#echo echo_tab(
-	#	$this->href('moderate'),
-	#	$this->get_translation('ModerateTip'),
-	#	($this->is_moderator() && $this->has_access('read')) ? $this->get_translation('ModerateText') : '',
-	#	$this->method == 'moderate',
-	#	0,
-	#	'm');
+	echo echo_tab(
+		$this->href('moderate'),
+		$this->get_translation('ModerateTip'),
+		($this->is_moderator() && $this->has_access('read')) ? $this->get_translation('ModerateText') : '',
+		$this->method == 'moderate',
+		2,
+		'm');
 
 	// permissions tab
 	echo echo_tab(
@@ -176,7 +222,7 @@ else
 		$this->get_translation('ACLTip'),
 		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('ACLText') : '',
 		$this->method == 'permissions',
-		1,
+		2,
 		'a');
 
 	// categories tab
@@ -185,23 +231,23 @@ else
 		$this->get_translation('CategoriesTip'),
 		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('CategoriesText') : '',
 		$this->method == 'categories',
-		1,
+		2,
 		'c');
 
 	// referrers tab
-	#echo echo_tab(
-	#	$this->href('referrers'),
-	#	$this->get_translation('ReferrersTip'),
-	#	($this->page && $this->has_access('read')) ? $this->get_translation('ReferrersText') : '',
-	#	$this->method == 'referrers' || $this->method == 'referrers_sites',
-	#	0,
-	#	'l');
+	echo echo_tab(
+		$this->href('referrers'),
+		$this->get_translation('ReferrersTip'),
+		($this->page && $this->has_access('read') && $this->get_user()) ? $this->get_translation('ReferrersText') : '',
+		$this->method == 'referrers' || $this->method == 'referrers_sites',
+		2,
+		'l');
 
 	// watch tab
 	echo echo_tab(
 		$this->href('watch'),
 		($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')),
-		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('SetWatch') : '',
+		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? ($this->iswatched === true ? $this->get_translation('UnWatchText') : $this->get_translation('WatchText') ) : '',
 		$this->method == 'watch',
 		($this->iswatched === true ? 'watch-on.png' : 'watch-off.png'),
 		'a');
@@ -210,7 +256,7 @@ else
 	echo echo_tab(
 		$this->href('review'),
 		($this->page['reviewed'] == 1 ? $this->get_translation('RemoveReview') : $this->get_translation('SetReview')),
-		($this->forum === false && $this->page && ($this->config['review'] && $this->is_reviewer())) ? $this->get_translation('SetReview') : '',
+		($this->forum === false && $this->page && ($this->config['review'] && $this->is_reviewer())) ? $this->get_translation('Review') : '',
 		$this->method == 'review',
 		($this->page['reviewed'] == 1 ? 'review2.png' : 'review1.png'),
 		'z');
@@ -221,7 +267,7 @@ else
 		$this->get_translation('PropertiesTip'),
 		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('PropertiesText') : '',
 		$this->method == 'properties' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
-		1,
+		2,
 		's');
 
 	// upload tab
@@ -230,9 +276,11 @@ else
 		$this->get_translation('FilesTip'),
 		($this->forum === false && $this->page && $this->has_access('upload')) ? $this->get_translation('FilesText') : '',
 		$this->method == 'upload',
-		1,
+		2,
 		'u');
 
+		echo "</ul>\n";
+		echo "</li>\n";
 	#echo "</ul>\n";
 ?>
 <li class="search">
