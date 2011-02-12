@@ -110,6 +110,7 @@ form input.submitinput {
 
 #debug {
 	padding: 0 20px 20px 20px;
+	float: left;
 }
 .debug, #debug li, #debug pre {
 	font-size: 11px;
@@ -119,45 +120,85 @@ form input.submitinput {
 
 #header {
 	padding: 0px;
+	float: left;
+	width: 100%;
 }
 
 #header-main {
 	clear: both;
 	overflow: hidden;
+	float: left;
 	padding: 20px 20px 5px 20px;
 	background: #FFFFFF;
+	width: 100%;
 }
 
 #navigation {
 	padding: 5px 20px 0;
-	overflow: hidden;
+	float: left;
+	/*overflow: hidden;
+	*/
+	height: 25px;
 	background:#FFFFFF;
+	width: 100%;
+}
+
+.breadcrumb {
+	/*overflow:hidden;#F6F6F6*/
+	/* background: #D2D0D0; */
+	border-bottom:1px dotted #B2B0B0;
+	border-top:1px dotted #B2B0B0;
+	/*clear:both;
+	*/color:#333333;
+	font-size:0.75em;
+	font-weight:normal;
+	margin:0;
+	padding: 0.1em 20px;
+	float:left;
+	 width: 100%;
 }
 
 /** Styles for the main content in the page. *********************************/
 	/* Default settings */
+	
+#mainwrapper {
+	width: 980px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #content {
 	background-color: #FFFFFF;
 	padding: 9px 0px 0px;
-	border-top-width: 1px;
+	/*border-top-width: 1px;
 	border-top-style: dotted;
 	border-top-color: #CCCCCC;
+	*/float: left;
 }
 
 #page {
 	background-color: #FFFFFF;
 	padding: 5px 20px 20px 20px;
+	float: left;
+	width: 100%;
 }
 
 #pageedit {
 	background-color: #FFFFFF;
 	border-bottom: none;
 	padding: 5px 20px 20px 20px;
+	float: left;
+	width: 100%;
 }
 
 #pageedit form textarea {
 	width: 100%;
 	height: 400px;
+}
+
+#footer {
+	float: left;
+	width: 100%;
 }
 
 .footer {
@@ -169,8 +210,10 @@ form input.submitinput {
 
 .footer {
 	margin: 0;
+	float: left;
 	overflow: hidden;
 	clear: both;
+	width: 100%;
 }
 
 .footerlist {
@@ -204,12 +247,16 @@ form input.submitinput {
 	background-color: #F0F4F5;
 	padding: 2px 20px;
 	border-top: 1px dotted #CCCCCC;
+	float: left;
+	width: 100%;
 }
 
 .files,.comment,.rating {
 	background-color: #FFFFFF;
 	padding: 10px 20px;
 	border-bottom: 1px solid #EEEEEE;
+	float: left;
+	width: 100%;
 }
 
 .comment:target {
@@ -269,6 +316,8 @@ width:320px;
 	padding: 10px 20px;
 	border-top: 1px solid #CCCCCC;
 	background-color: #FCFCFC;
+	float: left;
+	width: 100%;
 }
 
 .commentform form {
@@ -285,6 +334,8 @@ width:320px;
 	color: #AAAAAA;
 	text-align: right;
 	padding:0px 20px;
+	float: left;
+	width: 100%;
 }
 
 #credits a {
@@ -731,6 +782,8 @@ td.form_left, th.form_left {
 /*Handlers --------------------------------------------------*/
 #content {
 	clear: both;
+	float: left;
+	width: 100%;
 }
 
 #usermenu {
@@ -975,6 +1028,7 @@ td.form_left, th.form_left {
 	margin: 0;
 	overflow: hidden;
 	padding: 0;
+	width: 100%;
 	/*width: 570px;*/
 }
 
@@ -1058,156 +1112,241 @@ table.formation th, tr.formation th {
 .inf .sign, .inf .text {
 	border-color: #BABFC7;
 }
+
 #handler {
-float:right;
-margin:0 auto;
-overflow:hidden;
-position:relative;
-text-align:left;
+	float:right;
+	margin:0 auto;
+	position:relative;
+	text-align:left;
 }
 #handler ul {
-list-style:none outside none;
-margin:0;
-padding:0;
+	list-style:none outside none;
+	margin:0;
+	padding:0;
 }
+
 #handler li {
-float:left;
-margin:0;
-padding:1px 0.5em 4px;
-white-space:nowrap;
+	float:left;
+	margin:0;
+	padding:1px 0.5em 4px;
+	white-space:nowrap;
 }
+
 #handler li.search{
-padding-bottom: 0px;
+	padding-bottom: 0px;
 }
+
 #handler li:hover {
-
-background-color: #FFFFFF;
+	background-color: #FFFFFF;
 }
+
 #handler li.active {
-border-color: #AAAAAA;
-border-style:solid;
-border-width:1px 1px 0;
-background-color: #FCFCFC;
+	border-color: #AAAAAA;
+	border-style:solid;
+	border-width:1px 1px 0;
+	background-color: #FCFCFC;
 }
 
-#handler {
-/*background-color:#646464;
-width:35px;*/
+#handler ul.dropdown_menu {
+	border-top: 0.5em solid transparent;
 }
+
+.dropdown_menu a {
+	background: none repeat scroll 0 0 transparent !important;
+	display: block;
+}
+
+.dropdown_menu ul {
+	padding-top: 4px !important;
+}
+
+.dropdown_menu li {
+	background: none repeat scroll 0 0 white;
+	float: none !important;
+	text-transform: none;
+	vertical-align: baseline;
+}
+
+#handler .dropdown_menu {
+	left: 0;
+	background: none repeat scroll 0 0 transparent;
+	top: 0;
+	display: none;
+	position: absolute;
+	white-space: nowrap;
+	z-index: 30;
+	border: 1px solid #CCCCCC;
+}
+
+#handler ul.dropdown_menu {
+	display: none;
+	float: none;
+}
+
+#handler ul.dropdown_menu {
+	top: 1.42em;
+	left: 7em;
+}
+
+#handler li.dropdown_menu {
+	border: 1px solid #F2F2F2;
+	margin-left: 2px;
+	padding: 0 2px;
+}
+
+#handler  li:hover ul.dropdown_menu {
+	display: block;
+	float: none;
+}
+	
+#handler #more-icon {
+}
+
 #handler img, #handler  a img {
-border:medium none;
-height:16px;
-width:16px;
+	border:medium none;
+	height:16px;
+	width:16px;
 }
 
 #handler li.new img {
-background-image:url("./../icons/add_page.gif");
-background-repeat: no-repeat;
+	background-image:url("./../icons/add_page.gif");
+	background-repeat: no-repeat;
 }
 #handler li.new a img {
-background-image:url("./../icons/add_page.gif");
-background-repeat: no-repeat;
+	background-image:url("./../icons/add_page.gif");
+	background-repeat: no-repeat;
 }
 #handler li.new a:hover img {
-background-image:url("./../icons/add_page.gif");
-background-repeat: no-repeat;
+	background-image:url("./../icons/add_page.gif");
+	background-repeat: no-repeat;
 }
 #handler li.categories img {
-background-image:url("./../icons/add_tag.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/add_tag.png");
+	background-repeat: no-repeat;
 }
 #handler li.categories a img {
-background-image:url("./../icons/add_tag.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/add_tag.png");
+	background-repeat: no-repeat;
 }
 #handler li.categories a:hover img {
-background-image:url("./../icons/add_tag.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/add_tag.png");
+	background-repeat: no-repeat;
 }
 #handler li.upload img {
-background-image:url("./../icons/attachment.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/attachment.png");
+	background-repeat: no-repeat;
 }
 #handler li.upload a img {
-background-image:url("./../icons/attachment.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/attachment.png");
+	background-repeat: no-repeat;
 }
 #handler li.upload a:hover img {
-background-image:url("./../icons/attachment.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/attachment.png");
+	background-repeat: no-repeat;
 }
 #handler li.edit img {
-background-image:url("./../icons/edit.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/edit.png");
+	background-repeat: no-repeat;
 }
 #handler li.edit a img {
-background-image:url("./../icons/edit.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/edit.png");
+	background-repeat: no-repeat;
 }
 #handler li.edit a:hover img {
-background-image:url("./../icons/edit.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/edit.png");
+	background-repeat: no-repeat;
+}
+#handler li.referrers a img {
+	background-image:url("./../icons/referer.gif");
+	background-repeat: no-repeat;
+}
+#handler li.referrers a:hover img {
+	background-image:url("./../icons/referer.gif");
+	background-repeat: no-repeat;
 }
 #handler li.revisions img {
-background-image:url("./../icons/revisions.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/revisions.png");
+	background-repeat: no-repeat;
 }
 #handler li.revisions a img {
-background-image:url("./../icons/revisions.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/revisions.png");
+	background-repeat: no-repeat;
 }
 #handler li.revisions a:hover img {
-background-image:url("./../icons/revisions.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/revisions.png");
+	background-repeat: no-repeat;
+}
+#handler li.remove img {
+	background-image: url("./../icons/delete.gif");
+	background-repeat: no-repeat;
+}
+#handler li.remove a img {
+	background-image: url("./../icons/delete.gif");
+	background-repeat: no-repeat;
+}
+#handler li.remove a:hover img {
+	background-image: url("./../icons/delete.gif");
+	background-repeat: no-repeat;
+}
+#handler li.rename img {
+	background-image: url("./../icons/rename.gif");
+	background-repeat: no-repeat;
+}
+#handler li.rename a img {
+	background-image: url("./../icons/rename.gif");
+	background-repeat: no-repeat;
+}
+#handler li.rename a:hover img {
+	background-image: url("./../icons/rename.gif");
+	background-repeat: no-repeat;
+}
+#handler li.moderate img {
+	background-image: url("./../icons/moderate.png");
+	background-repeat: no-repeat;
 }
 #handler li.properties img {
-background-image:url("./../icons/properties.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/properties.png");
+	background-repeat: no-repeat;
 }
 #handler li.properties a img {
-background-image:url("./../icons/properties.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/properties.png");
+	background-repeat: no-repeat;
 }
 #handler li.properties a:hover img {
-background-image:url("./../icons/properties.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/properties.png");
+	background-repeat: no-repeat;
 }
 #handler li.permissions img {
-background-image:url("./../icons/permissions.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/permissions.png");
+	background-repeat: no-repeat;
 }
 #handler li.permissions a img {
-background-image:url("./../icons/permissions.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/permissions.png");
+	background-repeat: no-repeat;
 }
 #handler li.permissions a:hover img {
-background-image:url("./../icons/permissions.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/permissions.png");
+	background-repeat: no-repeat;
 }
 #handler li.show img {
-background-image:url("./../icons/show.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/show.png");
+	background-repeat: no-repeat;
 }
 #handler li.show a img {
-background-image:url("./../icons/show.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/show.png");
+	background-repeat: no-repeat;
 }
 #handler li.show a:hover img {
-background-image:url("./../icons/show.png");
-background-repeat: no-repeat;
+	background-image:url("./../icons/show.png");
+	background-repeat: no-repeat;
 }
-
-.breadcrumb {
-/*overflow:hidden;*/
-/* background: #D2D0D0; */
-border-bottom:1px dotted #F6F6F6;
-border-top:1px dotted #B2B0B0;
-clear:both;
-color:#333333;
-font-size:0.75em;
-font-weight:normal;
-margin:0;
-padding: 0.1em 20px;
+#handler li.moderate img {
+	background-image:url("./../icons/comment.png");
+	background-repeat: no-repeat;
+}
+#handler li.print img {
+	background-image:url("./../icons/print.gif");
+	background-repeat: no-repeat;
 }
 
 .desc_rss_feed {
@@ -1226,4 +1365,13 @@ padding: 0.1em 20px;
 	margin-bottom:27px;
 	overflow:auto;
 	width:auto;
+}
+
+.userprofil {
+	color: #444444;
+	font-weight: bold;
+	width:100px;
+	white-space:nowrap;
+	vertical-align: top;
+	padding-right:20px;
 }
