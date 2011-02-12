@@ -2894,7 +2894,7 @@ class Wacko
 
 				if ($this->config['youarehere_text'])
 				{
-					if ($this->npj_translit($tag) == $this->npj_translit($this->context[$this->current_context]))
+					if (isset($this->context[$this->current_context]) && ($this->npj_translit($tag) == $this->npj_translit($this->context[$this->current_context])) )
 					{
 						$res	= str_replace('####', $text, $this->config['youarehere_text']);
 					}
