@@ -273,6 +273,12 @@ $insert_config = "INSERT INTO ".$config['table_prefix']."config (config_id, conf
 $port			= trim($config['database_port']);
 $fatal_error	= false;
 
+// check WackoWiki version
+if ( !isset ( $config['wacko_version'] ) ) $config['wacko_version'] = '';
+if (!$version = trim($config['wacko_version'])) $version = '0';
+if ( isset ( $config['wacko_version'] ) )
+if ( trim ( $config['wacko_version'] ) ) $version = trim($config['wacko_version']);
+
 switch($config['database_driver'])
 {
 	case 'mysql_legacy':
@@ -310,11 +316,6 @@ switch($config['database_driver'])
 			 */
 			echo "         </ul>\n";
 			echo "         <br />\n";
-
-			if ( !isset ( $config['wacko_version'] ) ) $config['wacko_version'] = '';
-			if (!$version = trim($config['wacko_version'])) $version = '0';
-			if ( isset ( $config['wacko_version'] ) )
-			if ( trim ( $config['wacko_version'] ) ) $version = trim($config['wacko_version']);
 
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
@@ -694,11 +695,6 @@ switch($config['database_driver'])
 			 */
 			echo "         </ul>\n";
 			echo "         <br />\n";
-
-
-			if ( !isset( $config['wacko_version'] ) ) $config['wacko_version'] = '0';
-			if (!$version = trim($config['wacko_version'])) $version = '0';
-			if (trim($config['wacko_version'])) $version = trim($config['wacko_version']);
 
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
