@@ -104,7 +104,9 @@ $wacko_config_defaults = array(
 	'disable_safehtml' => 0,
 	'urls_underscores' => 0,
 
+	'groups_page' => 'Groups',
 	'users_page' => 'Users',
+	'category_page' => 'Category',
 	'permalink_page' => 'Permalink',
 	'policy_page' => '',
 	'license' => '',

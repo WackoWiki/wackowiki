@@ -139,6 +139,7 @@ $config_db['captcha_edit_page'] = $config['captcha_edit_page'];
 $config_db['captcha_new_comment'] = $config['captcha_new_comment'];
 $config_db['captcha_new_page'] = $config['captcha_new_page'];
 $config_db['captcha_registration'] = $config['captcha_registration'];
+$config_db['category_page'] = $config['category_page'];
 $config_db['comments_count'] = $config['comments_count'];
 $config_db['comment_delay'] = $config['comment_delay'];
 $config_db['cookie_prefix'] = $config['cookie_prefix'];
