@@ -134,7 +134,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="search_page"><strong>Search:</strong><br />
-				<small>Page with the search form (action <tt>{{Search}}</tt>).</small></label></td>
+				<small>Page with the search form (action <tt>{{search}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="search_page" name="search_page" value="<?php echo htmlspecialchars($engine->config['search_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -142,7 +142,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="registration_page"><strong>Register on our site:</strong><br />
-				<small>Page new user registration (action <tt>{{Registration}}</tt>).</small></label></td>
+				<small>Page new user registration (action <tt>{{registration}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="registration_page" name="registration_page" value="<?php echo htmlspecialchars($engine->config['registration_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -150,7 +150,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="login_page"><strong>User login:</strong><br />
-				<small>Login page on the site (action <tt>{{Login}}</tt>).</small></label></td>
+				<small>Login page on the site (action <tt>{{login}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="login_page" name="login_page" value="<?php echo htmlspecialchars($engine->config['login_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -174,7 +174,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="users_page"><strong>User list:</strong><br />
-				<small>Page with a list of registered users (action <tt>{{Users}}</tt>).</small></label></td>
+				<small>Page with a list of registered users (action <tt>{{users}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="users_page" name="users_page" value="<?php echo htmlspecialchars($engine->config['users_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -197,8 +197,8 @@ function admin_configpages(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td class="label"><label for="groups_page"><strong>List groups:</strong><br />
-				<small>Page with a list of working groups (action <tt>{{UserGroups}}</tt>).</small></label></td>
+				<td class="label"><label for="groups_page"><strong>Groups:</strong><br />
+				<small>Page with a list of working groups (action <tt>{{usergroups}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="groups_page" name="groups_page" value="<?php echo htmlspecialchars($engine->config['groups_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -206,7 +206,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="changes_page"><strong>Recent changes:</strong><br />
-				<small>Page with a list of the last modified pages (action <tt>{{RecentChanges}}</tt>).</small></label></td>
+				<small>Page with a list of the last modified pages (action <tt>{{changes}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="changes_page" name="changes_page" value="<?php echo htmlspecialchars($engine->config['changes_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -222,7 +222,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="removals_page"><strong>Deleted pages:</strong><br />
-				<small>Page with a list of recently deleted pages (action <tt>{{RecentlyDeleted}}</tt>).</small></label></td>
+				<small>Page with a list of recently deleted pages (action <tt>{{deleted}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="removals_page" name="removals_page" value="<?php echo htmlspecialchars($engine->config['removals_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -230,7 +230,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="wanted_page"><strong>Wanted pages:</strong><br />
-				<small>Page with a list of missing pages that are referenced (action <tt>{{WantedPages}}</tt>).</small></label></td>
+				<small>Page with a list of missing pages that are referenced (action <tt>{{wanted}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="wanted_page" name="wanted_page" value="<?php echo htmlspecialchars($engine->config['wanted_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -238,7 +238,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="orphaned_page"><strong>Orphaned pages:</strong><br />
-				<small>Page with a list of existing pages are not related links with the rest (action <tt>{{OrphanedPages}}</tt>).</small></label></td>
+				<small>Page with a list of existing pages are not related links with the rest (action <tt>{{orphaned}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="orphaned_page" name="orphaned_page" value="<?php echo htmlspecialchars($engine->config['orphaned_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
