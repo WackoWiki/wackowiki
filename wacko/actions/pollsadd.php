@@ -135,6 +135,7 @@ if (isset($_POST['submit_poll']))
 										: ' '.$this->get_translation('PollsSubmittedMod'));
 		// stopping moderation
 		if ($moderation === true)	  $stop_mod = true;
+
 		// notify wiki owner & log event
 		if ($this->config['enable_email'] == true && $user != $this->config['admin_name'] && $moderation !== true)
 		{

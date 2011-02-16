@@ -38,7 +38,7 @@ $cache	= $init->cache();
 $engine	= $init->engine();
 
 // register locale resources
-$init->engine('res');
+$init->engine('lang');
 
 // reconnect securely in tls mode
 if ($engine->config['tls'] == true)
@@ -90,6 +90,7 @@ foreach ($dirs as $dir)
 				include($dir.'/'.$filename);
 			}
 		}
+
 		closedir($dh);
 	}
 }

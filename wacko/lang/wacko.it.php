@@ -93,6 +93,7 @@ $wacko_translation = array(
 	'AddCommentTitle' => 'Title of the comment:',
 	'AddCommentButton' => 'Aggiungi un commento',
 	'HereLink' => 'here',
+	'PageHandlerMoreTip' => 'more',
 
 	'DoesNotExists' => 'Questa pagina non esiste al momento.',
 	'PromptCreate' => 'Vuoi forse <a href="%1">crearla</a>?',

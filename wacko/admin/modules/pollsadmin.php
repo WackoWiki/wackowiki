@@ -70,6 +70,7 @@ function admin_pollsadmin(&$engine, &$module)
 				"SET end = NOW() ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0 ".
 				"LIMIT 1");
+
 			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->get_translation('LogPollStopped', $engine->config['language'])));
 		}
 		// reset current survey
@@ -84,7 +85,8 @@ function admin_pollsadmin(&$engine, &$module)
 					"poll_id		= ".($polls_obj->get_last_poll_id() + 1).", ".
 					"votes	= 0 ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id']));
-			$xml->news(); // update news feed
+
+			#$xml->news(); // update news feed
 			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->get_translation('LogPollReset', $engine->config['language'])));
 		}
 		// activate new survey
@@ -95,7 +97,7 @@ function admin_pollsadmin(&$engine, &$module)
 				"SET start = NOW() ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0");
 
-			$engine->$xml->news(); // update news feed
+			#$engine->$xml->news(); // update news feed
 			$engine->log(4, str_replace('%1', (int)$_POST['id'], $engine->get_translation('LogPollStarted', $engine->config['language'])));
 		}
 		// edit/moderate new survey
@@ -103,8 +105,11 @@ function admin_pollsadmin(&$engine, &$module)
 		{
 			$edit_id		= $_POST['id'];
 			$header			= $polls_obj->get_poll_title($edit_id);
+
 			if ($header['start'] == SQL_NULLDATE && $header['end'] == SQL_NULLDATE)
+			{
 				$moderation	= true;
+			}
 		}
 		// continued moderation
 		else if (isset($_POST['moderation']))
@@ -150,13 +155,14 @@ function admin_pollsadmin(&$engine, &$module)
 		}
 
 		// current active polls
-			#echo $engine->form_open('', $mode_file);
-			#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
-			echo '	<form action="admin.php" method="post" name="polls">';
-			echo '<input type="hidden" name="mode" value="pollsadmin" />';
+		#echo $engine->form_open('', $mode_file);
+		#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
+		echo '	<form action="admin.php" method="post" name="polls">';
+		echo '<input type="hidden" name="mode" value="pollsadmin" />';
 
 		echo '<table cellspacing="3" class="formation">';
 		$list = $polls_obj->get_polls_list('current');
+
 		if (empty($list))
 		{
 			echo '<tr><th>'.$engine->get_translation('PollsCurrent').'</th></tr>';
@@ -165,6 +171,7 @@ function admin_pollsadmin(&$engine, &$module)
 		else
 		{
 			echo '<tr><th colspan="4">'.$engine->get_translation('PollsCurrent').'</th></tr>';
+
 			foreach ($list as $row)
 			{
 				echo '<tr class="lined">';
@@ -176,12 +183,14 @@ function admin_pollsadmin(&$engine, &$module)
 					echo '<td style="white-space:nowrap;">'.$polls_obj->poll_time($row['start'], time()).'</td>';
 				echo '</tr>';
 			}
+
 			echo '<tr><td colspan="4">'.
 				'<input name="stop" id="submit" type="submit" value="'.$engine->get_translation('PollsStop').'" /> '.
 				'<input name="reset" id="submit" type="submit" value="'.$engine->get_translation('PollsReset').'" /> '.
 				'<input name="remove" id="submit" type="submit" value="'.$engine->get_translation('PollsRemove').'" />'.
 				'</td></tr>';
 		}
+
 		echo '</table>';
 		echo $engine->form_close();
 
@@ -193,6 +202,7 @@ function admin_pollsadmin(&$engine, &$module)
 
 		echo '<table cellspacing="3" class="formation">';
 		$list = $polls_obj->get_polls_list('moderation');
+
 		if (empty($list))
 		{
 			echo '<tr><th>'.$engine->get_translation('PollsModeration').'</th></tr>';
@@ -271,10 +281,15 @@ function admin_pollsadmin(&$engine, &$module)
 		echo '<tr><td colspan="4">';
 		// pagination
 		echo '<small><strong>'.$engine->get_translation('PollsShow').':</strong> ';
+
 		if ($year == 0)
+		{
 			echo $engine->get_translation('PollsAll').' ';
+		}
 		else
+		{
 			echo '<a href="'.rawurldecode($engine->href('', $mode_file, $mode_http.'year=0')).'">'.$engine->get_translation('PollsAll').'</a> ';
+		}
 
 		if (!empty($years))
 		{

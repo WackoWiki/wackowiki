@@ -602,7 +602,7 @@ class Init
 		{
 			return $this->engine->run($this->page, $this->method);
 		}
-		else if ($this->engine == true && $op == 'res')
+		else if ($this->engine == true && $op == 'lang')
 		{
 			if ($lang == false)
 			{

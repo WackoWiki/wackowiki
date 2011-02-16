@@ -13,7 +13,7 @@ $module['dboptimize'] = array(
 		'order'	=> 10,
 		'cat'	=> 'Database',
 		'mode'	=> 'dboptimize',
-		'name'	=> 'Optimization framework',
+		'name'	=> 'Optimization',
 		'title'	=> 'Optimizing the database',
 		'vars'	=> array(&$tables),
 	);
