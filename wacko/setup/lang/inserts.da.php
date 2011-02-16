@@ -2,27 +2,31 @@
 
 $lng = "da";
 
+// insert these pages only for default language
 if ($config['language'] == $lng)
 {
-	insert_page($config['root_page'], '', "((file:wacko4.png WackoWiki))\n**Velkommen til din ((WackoWiki:Doc/English/WackoWiki WackoWiki)) installation!**\n\nKlik på \"Rediger siden\" linket nederst for at rette denne side.\n\nDokumentation finder du på WackoWiki:Doc/English.\n\nSærlige wikisider: ((WackoWiki:Doc/English/Formatting Formatting)), OrphanedPages, WantedPages, ((Søgning)), MyPages, MyChanges.\n\n", $lng, 'Admins', true, false);
-	insert_page('WantedPages', 'Wanted Pages', '{{wanted}}', $lng, 'Admins', true, false);
-	insert_page('OrphanedPages', 'Orphaned Pages', '{{orphaned}}', $lng, 'Admins', true, false);
-	insert_page('MineSider', 'Mine Sider', '{{MyPages}}', $lng, 'Admins', true, false);
-	insert_page('MineOpdateringer', 'Mine Opdateringer', '{{MyChanges}}', $lng, 'Admins', true, false);
+	insert_page($config['root_page'], '', "((file:wacko4.png WackoWiki))\n**Velkommen til din ((WackoWiki:Doc/English/WackoWiki WackoWiki)) installation!**\n\nKlik på \"Rediger siden\" linket nederst for at rette denne side.\n\nDokumentation finder du på WackoWiki:Doc/English.\n\nSærlige wikisider: ((WackoWiki:Doc/English/Formatting Formatting)), ((Søgning)).\n\n", $lng, 'Admins', true, false);
+
+	#insert_page('WantedPages', 'Wanted Pages', '{{wanted}}', $lng, 'Admins', true, false);
+	#insert_page('OrphanedPages', 'Orphaned Pages', '{{orphaned}}', $lng, 'Admins', true, false);
+	#insert_page('MineSider', 'Mine Sider', '{{MyPages}}', $lng, 'Admins', true, false);
+	#insert_page('MineOpdateringer', 'Mine Opdateringer', '{{MyChanges}}', $lng, 'Admins', true, false);
+
+	insert_page('Category', 'Category', '{{category}}', $lng, 'Admins', false, false);
+	insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
+	insert_page('Groups', 'Groups', '{{usergroups}}', $lng, 'Admins', false, false);
+	insert_page('Users', 'Users', '{{users}}', $lng, 'Admins', false, false);
 }
 
 insert_page('Opdateringer', 'Opdateringer', '{{changes}}', $lng, 'Admins', false, true, 'Opdateringer');
 insert_page('Kommentarer', 'Kommentarer', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Kommentarer');
 insert_page('Indhold', 'Indhold', '{{PageIndex}}', $lng, 'Admins', false, true, 'Indhold');
 
-insert_page('Users', 'Brugere', '{{users}}', $lng, 'Admins', false, false);
 insert_page('Registrering', 'Registrering', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Password', 'Password', '{{ChangePassword}}', $lng, 'Admins', false, false);
 insert_page('Søgning', 'Søgning', '{{search}}', $lng, 'Admins', false, false);
 insert_page('Login', 'Login', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Indstillinger', 'Indstillinger', '{{UserSettings}}', $lng, 'Admins', false, false);
-
-insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
 
 ?>
