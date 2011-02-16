@@ -173,6 +173,7 @@ $config_db['footer_comments'] = $config['footer_comments'];
 $config_db['footer_files'] = $config['footer_files'];
 $config_db['forum_cluster'] = $config['forum_cluster'];
 $config_db['forum_topics'] = $config['forum_topics'];
+$config_db['groups_page'] = $config['groups_page'];
 $config_db['hide_comments'] = $config['hide_comments'];
 $config_db['hide_files'] = $config['hide_files'];
 $config_db['hide_index'] = $config['hide_index'];
