@@ -93,6 +93,7 @@ $wacko_translation = array(
 	'AddCommentTitle' => 'Title of the comment:',
 	'AddCommentButton' => 'Lisa kommentaar',
 	'HereLink' => 'here',
+	'PageHandlerMoreTip' => 'more',
 
 	'DoesNotExists' => 'Seda lehte ei eksisteeri veel.',
 	'PromptCreate' => 'Soovid sa seda <a href="%1">luua</a>?',

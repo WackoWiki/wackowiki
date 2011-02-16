@@ -34,13 +34,26 @@ if (!function_exists('load_user_bookmarks'))
 	}
 }
 
-$message = '';
-$user = $this->get_user();
+// {{bookmarks system=[0|1]}}
+
+if (!isset($system)) $system = 0;
+$message	= '';
+
+// get default bookmarks
+if ($this->is_admin() && $system == true)
+{
+	$_user_id	= $this->get_user_id('System');
+}
+else
+{
+	$user		= $this->get_user();
+	$_user_id	= $user['user_id'];
+}
 
 /// Processing of our special form
 if (isset($_POST['_user_bookmarks']))
 {
-	$_bookmarks	= load_user_bookmarks($this, $user['user_id']);
+	$_bookmarks	= load_user_bookmarks($this, $_user_id);
 	$a			= $_bookmarks;
 	$b			= array();
 
@@ -99,7 +112,7 @@ if (isset($_POST['_user_bookmarks']))
 				if ($this->has_access('write', $_page_id))
 				{
 					// writing bookmark
-					$bookmark	= '(('.$page['tag'].' '.$this->get_page_title($page['tag']).($user['lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))';
+					$bookmark	= '(('.$page['tag'].' '.$this->get_page_title($page['tag']).($user['lang'] != $page['lang'] ? ' @@'.$page['lang'] : '').'))';
 					$bookmarks	= $this->get_bookmarks();
 
 					if (!in_array($bookmark, $bookmarks))
@@ -109,13 +122,13 @@ if (isset($_POST['_user_bookmarks']))
 						$_menu_position = $this->load_all(
 							"SELECT b.menu_id ".
 							"FROM ".$this->config['table_prefix']."menu b ".
-							"WHERE b.user_id = '".quote($this->dblink, $user['user_id'])."' ", 0);
+							"WHERE b.user_id = '".quote($this->dblink, $_user_id)."' ", 0);
 
 						$_bookmark_count = count($_menu_position);
 
 						$this->query(
 							"INSERT INTO ".$this->config['table_prefix']."menu SET ".
-							"user_id			= '".quote($this->dblink, $user['user_id'])."', ".
+							"user_id			= '".quote($this->dblink, $_user_id)."', ".
 							"page_id			= '".quote($this->dblink, $_page_id)."', ".
 							"lang				= '".quote($this->dblink, ($user['lang'] != $page['lang'] ? $page['lang'] : ""))."', ".
 							"menu_position		= '".quote($this->dblink, ($_bookmark_count + 1))."'");
@@ -175,13 +188,13 @@ if (isset($_POST['_user_bookmarks']))
 	}
 
 	// reload user data
-	$this->set_user($this->load_user($user['user_name']), 0, 1, true);
+	$this->set_user($this->load_user('', $_user_id, '', true), 0, 1, true);
 	$this->set_bookmarks(BOOKMARK_USER);
 }
 
-if ($user)
+if ($_user_id)
 {
-	$_bookmarks = load_user_bookmarks($this, $user['user_id']);
+	$_bookmarks = load_user_bookmarks($this, $_user_id);
 
 	if ($_bookmarks)
 	{

@@ -1133,7 +1133,7 @@ class Wacko
 			$cl = 0;
 		}
 
-		$pages[$cl]	= $user['user_name'];
+		$pages[$cl]		= $user['user_name'];
 		$_bookmarks		= $this->get_default_bookmarks($user['lang'])."\n".
 					($user_bookmarks
 						? $user_bookmarks
@@ -3958,10 +3958,10 @@ class Wacko
 
 		if (isset($this->config['aliases']) && is_array($this->config['aliases']))
 		{
-			$al = $this->config['aliases'];
-			$adm = explode("\\n", $al['Admins']);
+			$alias = $this->config['aliases'];
+			$admin = explode("\\n", $alias['Admins']);
 
-			if ($adm == true && in_array($this->get_user_name(), $adm))
+			if ($admin == true && in_array($this->get_user_name(), $admin))
 			{
 				return true;
 			}
@@ -3979,13 +3979,13 @@ class Wacko
 
 		if (isset($this->config['aliases']) && is_array($this->config['aliases']))
 		{
-			$al  = $this->config['aliases'];
+			$alias = $this->config['aliases'];
 
-			if(isset($al['Moderator']))
+			if(isset($alias['Moderator']))
 			{
-				$mod = explode("\\n", $al['Moderator']);
+				$moderator = explode("\\n", $alias['Moderator']);
 
-				if ($mod == true && in_array($this->get_user_name(), $mod))
+				if ($moderator == true && in_array($this->get_user_name(), $moderator))
 				{
 					return true;
 				}
@@ -4004,13 +4004,13 @@ class Wacko
 
 		if (isset($this->config['aliases']) && is_array($this->config['aliases']))
 		{
-			$al  = $this->config['aliases'];
+			$alias = $this->config['aliases'];
 
-			if (isset($al['Reviewer']))
+			if (isset($alias['Reviewer']))
 			{
-				$mod = explode("\\n", $al['Reviewer']);
+				$reviewer = explode("\\n", $alias['Reviewer']);
 
-				if ($mod == true && in_array($this->get_user_name(), $mod))
+				if ($reviewer == true && in_array($this->get_user_name(), $reviewer))
 				{
 					return true;
 				}
