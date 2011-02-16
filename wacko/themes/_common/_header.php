@@ -63,7 +63,7 @@ $doubleclick = '';
 
 if ($user = $this->get_user())
 {
-	if ($user['doubleclick_edit'] == 1)
+	if (isset($user['doubleclick_edit']) && $user['doubleclick_edit'] == 1)
 	{
 		$doubleclick = true;
 	}
