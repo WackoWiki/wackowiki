@@ -10,7 +10,7 @@ if (!function_exists('print_tag_cloud'))
 	function print_tag_cloud(&$wacko, $tags)
 	{
 		// TODO: add name space 'category'
-		$tag_path = $wacko->config['base_url'].'Category?category=';
+		$tag_path = $wacko->config['base_url'].$wacko->config['category_page'].'?category=';
 
 		$max_size = 32; // max font size in pixels
 		$min_size = 12; // min font size in pixels

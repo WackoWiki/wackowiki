@@ -5,162 +5,64 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// settings:
-//	root		- where to start counting from (defaults to current tag)
-//	list		- make categories a clickable links which display pages of a given category (1 (default) or 0)
-//	ids			- display pages which belong to these comma-separated categories ids (default none)
-//	lang		- categories language if necessary (defaults to current page lang)
-//	inline		- display all categories on one line and not emphisize main categories (1 or 0 (default))
-//	sort		- order pages alphabetically ('abc', default) or creation date ('date')
-//	nomark		- display header and fieldset (1, 2 (no header even in 'categories' mode) or 0 (default))
+// list -
+// nomark -
+// path -
 
-if (!isset($root))			$root	= '/';
-if (!isset($list))			$list	= 1;
-if (!isset($ids)) 			$ids	= '';
-if (!isset($lang))			$lang	= $this->page['lang'];
-if (!isset($inline)) 		$inline	= '';
-if (!isset($sort) || !in_array($sort, array('abc', 'date')))
-{
-	$sort = 'abc';
-}
+$path = $this->config['category_page'];
+if (!isset($list)) $list = 0;
+if (!isset($path)) $path = 'Category';
 if (!isset($nomark)) $nomark = '';
 
-$root = $this->unwrap_link($root);
+$output = '';
+$i = '';
 
-//echo '<br />';
-
-if ($list && ($ids || isset($_GET['category'])))
+if ($list)
 {
-	if ($ids)
+	if (!$nomark)
 	{
-		$category = preg_replace('/[^\d, ]/', '', $ids);
-	}
-	else
-	{
-		$category = (int)$_GET['category'];
+		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('Categories').":</span></p>\n";
 	}
 
-	if ($_words = $this->load_all(
-	"SELECT category FROM {$this->config['table_prefix']}category ".
-	"WHERE category_id IN ( ".quote($this->dblink, $category)." )", 1));
-
-	if ($nomark != 2)
+	echo '<ol>';
+}
+else
+{
+	if (!$nomark)
 	{
-		if ($_words)
+		echo "<div class=\"layout-box\">\n";
+	}
+}
+
+if (isset($this->categories))
+{
+	foreach($this->categories as $id => $category)
+	{
+		$_category = '<a href="'.$this->href('', $path, 'category='.$id).'">'.htmlspecialchars($category).'</a>';
+		if ($list)
 		{
-			foreach ($_words as $word)
-			{
-				$words[] = $word['category'];
-			}
-
-			$words = strtolower(implode(', ', $words));
-		}
-
-		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('PagesCategory').( $words ? ' &laquo;<b>'.$words.'</b>&raquo;' : '' ).":</span></p>\n";
-	}
-
-	if ($sort == 'abc')
-	{
-		$order = 'title ASC';
-	}
-	else if ($sort == 'date')
-	{
-		$order = 'created DESC';
-	}
-
-	if ($pages = $this->load_all(
-	"SELECT p.page_id, p.tag, p.title, p.created ".
-	"FROM {$this->config['table_prefix']}category_page AS k ".
-		"INNER JOIN {$this->config['table_prefix']}page AS p ON (k.page_id = p.page_id) ".
-	"WHERE k.category_id IN ( ".quote($this->dblink, $category)." ) AND k.page_id = p.page_id ".
-		( $root ? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) " : '' ).
-	"ORDER BY p.$order ", 1))
-	{
-		if ($_words = $this->load_all(
-		"SELECT category FROM {$this->config['table_prefix']}category ".
-		"WHERE category_id IN ( ".quote($this->dblink, $category)." )", 1))
-		{
-			echo '<ol>';
-
-			foreach ($pages as $page)
-			{
-				if ($this->has_access('read', $page['page_id']) !== true)
-				{
-					continue;
-				}
-				else
-				{
-					echo '<li>'.( $sort == 'date' ? '<small>('.date('d/m/Y', strtotime($page['created'])).')</small> ' : '' ).$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1)."</li>\n";
-				}
-			}
-
-			echo '</ol>';
+			$output .= '<li>'.$_category.'</li>';
 		}
 		else
 		{
-			echo '<em>'.$this->get_translation('CategoryNotExists').'</em><br />';
+			if ($i++ > 0) $output .= ', ';
+			$output .= $_category;
 		}
-	}
-	else
-	{
-		echo '<em>'.$this->get_translation('CategoryEmpty').'</em><br />';
-	}
-
-	if ($nomark != 2)
-	{
-		echo '</div><br />';
 	}
 }
 
-if (!$ids)
+echo (!empty($_category) && (!$list) ? $this->get_translation('Categories').': ' : '').$output;
+
+if ($list)
 {
-	// header
-	if (!$nomark)
-	{
-		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('Categories').( $root ? " of cluster ".$this->link('/'.$root, '', '', '', 0) : '' ).":</span></p>\n";
-	}
+	echo '</ol>';
 
-	// categories list
-	if ($categories = $this->get_categories_list($lang, 1, $root))
-	{
-		echo "<ul>\n";
-
-		foreach ($categories as $id => $word)
-		{
-			$spacer = '&nbsp;&nbsp;&nbsp;';
-
-			# if (!$inline && $i++ > 0) echo '<br />';
-
-			echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'">' : '' ).htmlspecialchars($word['category']).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."";
-
-			if (isset($word['childs']) && $word['childs'] == true)
-			{
-				echo "<ul>\n";
-
-				foreach ($word['childs'] as $id => $word)
-				{
-					echo '<li class="'.( !$inline ? 'inline' : '' ).'"> '.( $list ? '<a href="'.$this->href('', '', 'category='.$id).'">' : '' ).htmlspecialchars($word['category']).( $list ? '</a>'.' ('.(int)$word['n'].')' : '' )."</li>\n";
-				}
-
-				echo "</ul>\n</li>\n";
-			}
-			else
-			{
-				echo "</li>\n";
-			}
-		}
-
-		echo "</ul>\n";
-	}
-	else
-	{
-		echo '<em>'.$this->get_translation('NoCategoriesForThisLanguage').'</em>';
-	}
-
-	if (!$nomark)
-	{
-		echo "</div>\n";
-	}
 }
+if (!$nomark)
+{
+	echo "</div>\n";
+}
+
+# $this->debug_print_r($this->categories);
 
 ?>

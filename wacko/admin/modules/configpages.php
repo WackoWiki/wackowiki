@@ -190,7 +190,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="category_page"><strong>Category :</strong><br />
-				<small>Page with a list of registered users (action <tt>{{categories}}</tt>).</small></label></td>
+				<small>Page with a list of registered users (action <tt>{{category}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="category_page" name="category_page" value="<?php echo htmlspecialchars($engine->config['category_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
