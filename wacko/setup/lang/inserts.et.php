@@ -18,7 +18,7 @@ if ($config['language'] == $lng)
 }
 
 insert_page('ViimasedMuudatused', 'Viimased Muudatused', '{{changes}}', $lng, 'Admins', false, true, 'Muudatused');
-insert_page('ViimatiKommenteeritud', 'Viimati Kommenteeritud', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Kommenteeritud');
+insert_page('ViimatiKommenteeritud', 'Viimati Kommenteeritud', '{{commented}}', $lng, 'Admins', false, true, 'Kommenteeritud');
 insert_page('SisuKord', 'Sisu Kord', '{{PageIndex}}', $lng, 'Admins', false, true, 'Index');
 
 insert_page('Registration', 'Registration', '{{registration}}', $lng, 'Admins', false, false);

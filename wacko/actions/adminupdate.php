@@ -73,6 +73,65 @@ if ($this->is_admin())
 }
 
 ########################################################
+##            Move global files to /files/global      ##
+########################################################
+
+if ($this->is_admin())
+{
+	echo "<h3>1. Move global files from \\files to \\files\global folder:</h3>";
+
+	if (!isset($_POST['move']))
+	{
+		echo $this->form_open();
+		?>
+		<input type="submit" name="move"  value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
+		<?php
+		echo $this->form_close();
+	}
+	// move global files from \\files to \\files\global folder
+	else if (isset($_POST['move']))
+	{
+		@set_time_limit(0);
+
+		$files = $this->load_all(
+			"SELECT page_id, file_name ".
+			"FROM {$this->config['table_prefix']}upload ".
+			"WHERE page_id = '0'");
+
+		$dir = $this->config['upload_path']."/";
+		echo "<table><th>old name</th><th></th><th>new name</th>";
+
+		foreach ($files as $file)
+		{
+			// move from /file/file_name to /file/global/file_name
+			$old_dir	= '@'.str_replace('/', '@', $file['supertag']).'@';
+			$new_name	= '@'.$file['page_id'].'@';
+			$file_name	= $file['file_name'];
+
+			if($handle = opendir($dir))
+			{
+				while(false !== ($file = readdir($handle)))
+				{
+					if($file != '.' && $file != '..')
+					{
+						$pos = stristr($file, $old_name);
+						if ($pos !== false)
+						{
+							rename($dir.$file, $dir.$new_name.substr($file, strlen($old_name)));
+						}
+					}
+				}
+				closedir($handle);
+
+				echo "<tr><td>".$old_name."".$file_name."</td><td> </td><td>".$new_name."".$file_name."</td></tr>";
+			}
+		}
+		echo "</table>";
+		echo "<br />Files moved";
+	}
+}
+
+########################################################
 ##            MIGRATE user settings                   ##
 ########################################################
 

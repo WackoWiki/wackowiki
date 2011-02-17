@@ -18,7 +18,7 @@ if ($config['language'] == $lng)
 }
 
 insert_page('OstatnieZmiany', 'Ostatnie Zmiany', '{{changes}}', $lng, 'Admins', false, true, 'Zmiany');
-insert_page('OstatnioKomentowane', 'Ostatnio Komentowane', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Komentowane');
+insert_page('OstatnioKomentowane', 'Ostatnio Komentowane', '{{commented}}', $lng, 'Admins', false, true, 'Komentowane');
 insert_page('IndexStron', 'Index Stron', '{{PageIndex}}', $lng, 'Admins', false, true, 'Index');
 
 insert_page('Rejestracja', 'Rejestracja', '{{registration}}', $lng, 'Admins', false, false);
