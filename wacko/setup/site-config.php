@@ -64,7 +64,7 @@ else
 <?php
    }
 ?>
-         <form action="<?php echo myLocation() ?>?installAction=<?php print !$wakkaConfig["wakka_version"] ? "database-config" : "database-install" ?>" method="post" name="form1">
+         <form action="<?php echo myLocation() ?>?installAction=database-config" method="post" name="form1">
             <input type="hidden" name="config[language]" value="<?php echo $config["language"];?>" />
             <input type="hidden" name="config[cache]" value="<?php echo $config["cache"];?>" />
             <h2><?php echo $lang["Name"];?></h2>
