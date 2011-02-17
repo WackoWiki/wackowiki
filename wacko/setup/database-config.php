@@ -57,6 +57,18 @@
       }
    else
       {
+		// is this an upgrade?
+		if (isset($wakkaConfig["wakka_version"]))
+		{
+			// overwrite default value, default is PDO but no upgrade is supported with PDO
+			$config['database_driver'] = 'mysqli_legacy';
+
+			// upgrade: assign old to new config names (overwrite default values)
+			if (isset($config['mysql_host']))		$config['database_host']		= $config['mysql_host'];
+			if (isset($config['mysql_database']))	$config['database_database']	= $config['mysql_database'];
+			if (isset($config['mysql_user']))		$config['database_user']		= $config['mysql_user'];
+			if (isset($config['mysql_password']))	$config['database_password']	= $config['mysql_password'];
+		}
 ?>
             <h2><?php echo $lang["DBDriver"];?></h2>
             <p class="notop"><?php print $lang["DBDriverDesc"]; ?></p>
