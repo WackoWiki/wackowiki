@@ -19,7 +19,7 @@ if ($config['language'] == $lng)
 }
 
 insert_page('Opdateringer', 'Opdateringer', '{{changes}}', $lng, 'Admins', false, true, 'Opdateringer');
-insert_page('Kommentarer', 'Kommentarer', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Kommentarer');
+insert_page('Kommentarer', 'Kommentarer', '{{commented}}', $lng, 'Admins', false, true, 'Kommentarer');
 insert_page('Indhold', 'Indhold', '{{PageIndex}}', $lng, 'Admins', false, true, 'Indhold');
 
 insert_page('Registrering', 'Registrering', '{{registration}}', $lng, 'Admins', false, false);

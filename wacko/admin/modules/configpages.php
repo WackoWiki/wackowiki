@@ -214,7 +214,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr>
 				<td class="label"><label for="comments_page"><strong>Recent comments:</strong><br />
-				<small>Page with a list of recent comment on the page (action <tt>{{RecentlyCommented}}</tt>).</small></label></td>
+				<small>Page with a list of recent comment on the page (action <tt>{{commented}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="comments_page" name="comments_page" value="<?php echo htmlspecialchars($engine->config['comments_page']);?>" /></td>
 			</tr>
 			<tr class="lined">

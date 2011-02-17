@@ -19,7 +19,7 @@ if ($config['language'] == $lng)
 
 insert_page('PaginaIndex', 'Pagina Index', '{{PageIndex}}', $lng, 'Admins', false, true, 'Index');
 insert_page('LaatsteWijzigingen', 'Laatste Wijzigingen', '{{changes}}', $lng, 'Admins', false, true, 'Wijzigingen');
-insert_page('LaatsteOpmerkingen', 'Laatste Opmerkingen', '{{RecentlyCommented}}', $lng, 'Admins', false, true, 'Opmerkingen');
+insert_page('LaatsteOpmerkingen', 'Laatste Opmerkingen', '{{commented}}', $lng, 'Admins', false, true, 'Opmerkingen');
 
 insert_page('Registratie', 'Registratie', '{{registration}}', $lng, 'Admins', false, false);
 
