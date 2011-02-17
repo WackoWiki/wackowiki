@@ -51,7 +51,7 @@ function is__writable($path)
 	return true;
 }
 
-function writeConfigHiddenNodes($skip_values)
+function write_config_hidden_nodes($skip_values)
 {
 	global $config;
 

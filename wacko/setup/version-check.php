@@ -1,6 +1,7 @@
 <form action="<?php echo my_location() ?>?installAction=site-config" method="post">
 <?php
-writeConfigHiddenNodes(array('none' => ''));
+
+write_config_hidden_nodes(array('none' => ''));
 
 ?>
 <p><?php echo $lang['Requirements']; ?></p>
@@ -35,8 +36,8 @@ writeConfigHiddenNodes(array('none' => ''));
 		This is a copy of the array from database-config.php
 	*/
 
-	$accepted_pdo_drivers = array();
-	$accepted_pdo_drivers[] = 'mysql';
+	$accepted_pdo_drivers	= array();
+	$accepted_pdo_drivers[]	= 'mysql';
 
 	$detected = 0;
 
