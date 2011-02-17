@@ -2,16 +2,16 @@
 @set_time_limit(0);
 @ignore_user_abort(true);
 
-function test($text, $condition, $errorText = '')
+function test($text, $condition, $error_text = '')
 {
 	global $lang;
 	echo "            <li>".$text."   ".output_image($condition);
 
 	if(!$condition)
 	{
-		if($errorText)
+		if($error_text)
 		{
-			echo "<ul class=\"install_error\"><li>".$errorText."</li></ul>";
+			echo "<ul class=\"install_error\"><li>".$error_text."</li></ul>";
 		}
 
 		echo "</li>\n";
@@ -22,9 +22,9 @@ function test($text, $condition, $errorText = '')
 	return true;
 }
 
-function output_error($errorText = '')
+function output_error($error_text = '')
 {
-	echo "<ul class=\"install_error\"><li>".$errorText."</li></ul>";
+	echo "<ul class=\"install_error\"><li>".$error_text."</li></ul>";
 }
 
 function random_seed($length, $seed_complexity)
@@ -403,9 +403,9 @@ switch($config['database_driver'])
 					 And yes, there are no (switch) breaks here. This is on purpose.
 					 */
 
-				// upgrade from R4.2 to R4.3.rc1
+				// upgrade from R4.2 to R4.3
 				case 'R4.2':
-					echo "         <h2>Wacko R4.2 ".$lang['To']." R4.3.rc1</h2>\n";
+					echo "         <h2>Wacko R4.2 ".$lang['To']." R4.3</h2>\n";
 					echo "         <ul>\n";
 
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_2_1, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
@@ -416,9 +416,9 @@ switch($config['database_driver'])
 
 					test($lang['InstallingLogoImage'], @mysql_query($insert_logo_image, $dblink), str_replace('%1',"logo image",$lang['ErrorAlreadyExists']));
 
-				// upgrade from R4.3.rc1 to R4.4.rc1
+				// upgrade from R4.3 to R4.4.rc1
 				case 'R4.3':
-					echo "         <h2>Wacko R4.3.rc1 ".$lang['To']." R4.4.rc1</h2>\n";
+					echo "         <h2>Wacko R4.3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ul>\n";
 
 					// rename tables
@@ -791,9 +791,9 @@ switch($config['database_driver'])
 					 And yes, there are no (switch) breaks here. This is on purpose.
 					 */
 
-				// upgrade from R4.2 to R4.3.rc1
+				// upgrade from R4.2 to R4.3
 				case 'R4.2':
-					echo "         <h2>Wacko R4.2 ".$lang['To']." R4.3.rc1</h2>\n";
+					echo "         <h2>Wacko R4.2 ".$lang['To']." R4.3</h2>\n";
 					echo "         <ul>\n";
 
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_2_1), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
@@ -804,9 +804,9 @@ switch($config['database_driver'])
 
 					test($lang['InstallingLogoImage'], @mysqli_query($dblink, $insert_logo_image), str_replace('%1',"logo image",$lang['ErrorAlreadyExists']));
 
-				// upgrade from R4.3.rc1 to R4.4.rc1
+				// upgrade from R4.3 to R4.4.rc1
 				case 'R4.3':
-					echo "         <h2>Wacko R4.3.rc1 ".$lang['To']." R4.4.rc1</h2>\n";
+					echo "         <h2>Wacko R4.3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ul>\n";
 
 					// rename tables
@@ -1188,9 +1188,9 @@ switch($config['database_driver'])
 					 And yes, there are no (switch) breaks here. This is on purpose.
 					 */
 
-				// upgrade from R4.2 to R4.3.rc1
+				// upgrade from R4.2 to R4.3
 				case 'R4.2':
-					echo "         <h2>Wacko R4.2 ".$lang['To']." R4.3.rc1</h2>\n";
+					echo "         <h2>Wacko R4.2 ".$lang['To']." R4.3</h2>\n";
 					echo "         <ul>\n";
 
 					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_2_1, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
@@ -1201,9 +1201,9 @@ switch($config['database_driver'])
 
 					test_pdo($lang['InstallingLogoImage'], $insert_logo_image, str_replace('%1',"logo image",$lang['ErrorAlreadyExists']));
 
-				// upgrade from R4.3.rc1 to R4.4.rc1
+				// upgrade from R4.3 to R4.4.rc1
 				case 'R4.3':
-					echo "         <h2>Wacko R4.3.rc1 ".$lang['To']." R4.4.rc1</h2>\n";
+					echo "         <h2>Wacko R4.3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ul>\n";
 
 					// rename tables
@@ -1460,7 +1460,7 @@ if(!$fatal_error)
 <p><?php echo $lang['NextStep'];?></p>
 <form action="<?php echo my_location(); ?>?installAction=write-config" method="post">
 <?php
-	writeConfigHiddenNodes(array('DeleteTables' => ''));
+	write_config_hidden_nodes(array('DeleteTables' => ''));
 ?>
 	<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" />
 </form>

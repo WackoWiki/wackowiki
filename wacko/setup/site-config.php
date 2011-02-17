@@ -34,11 +34,11 @@
                      return true;
                   }
             // -->
-         </script>
+</script>
 
-<form action="<?php echo my_location() ?>?installAction=<?php echo "database-config" ; ?>" method="post" name="form1">
+<form action="<?php echo my_location() ?>?installAction=database-config" method="post" name="form1">
 <?php
-   writeConfigHiddenNodes(array('site_name' => '', 'root_page' => '', 'multilanguage' => '', 'admin_name' => '', 'password' => '', 'admin_email' => '', 'base_url' => '', 'rewrite_mode' => ''));
+   write_config_hidden_nodes(array('site_name' => '', 'root_page' => '', 'multilanguage' => '', 'admin_name' => '', 'password' => '', 'admin_email' => '', 'base_url' => '', 'rewrite_mode' => ''));
 ?>
    <h2><?php echo $lang['Name'];?></h2>
    <p class="notop"><?php echo $lang['NameDesc'];?></p>

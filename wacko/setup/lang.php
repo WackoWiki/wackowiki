@@ -11,7 +11,7 @@ else
 ?>
 <form action="<?php echo my_location() ?>?installAction=version-check" method="post">
 <?php
-	writeConfigHiddenNodes(array('language' => 0));
+	write_config_hidden_nodes(array('language' => 0));
 ?>
 	<p><?php echo $lang['LangDesc'];?></p>
 <?php
