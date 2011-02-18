@@ -41,10 +41,12 @@ else
 	{
 		// FYI: in principle, new-lines can be separated with wiki-syntax triple-dash: ---
 		$add = explode(';', $add);
+
 		foreach ($add as $i => $str)
 		{
 			$add[$i] = $this->format($this->format($str, 'wacko'), 'post_wacko');
 		}
+
 		$output[] = implode('<br />', $add);
 	}
 
@@ -83,17 +85,22 @@ else
 					{
 						// ...consequent, this will be a years range
 						if (substr($authors[$author['name']]['years'], -5, 1) != '-')
+						{
 							// print range for the first time
 							$authors[$author['name']]['years'] .= '-'.$author['year'];
+						}
 						else
+						{
 							// we already have years range, let's rewrite a second year in the range
 							$authors[$author['name']]['years'] = substr($authors[$author['name']]['years'], 0, -4).$author['year'];
+						}
 					}
 					else
 					{
 						// ...not consequent, this will be a list of years instead of a range
 						$authors[$author['name']]['years'] .= ', '.$author['year'];
 					}
+
 					$authors[$author['name']]['total']++;
 				}
 			}
@@ -122,6 +129,7 @@ else
 					{
 						$all_authors[$author['years']] .= ', ';
 					}
+
 					$all_authors[$author['years']] .= '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$author['name']).'">'.$author['name'].'</a>';
 				}
 				else
@@ -131,7 +139,11 @@ else
 				}
 			}
 
-			if (isset($guest_authors)) $all_authors[] = $guest_authors;
+			if (isset($guest_authors))
+			{
+				$all_authors[] = $guest_authors;
+			}
+
 			$output[] = implode('<br />', $all_authors);
 		}
 	}
@@ -145,7 +157,7 @@ else
 			'CC-BY-NC-ND'	=> array('http://creativecommons.org/licenses/by-nc-nd/3.0/',	'CreativeCommons-Attribution-Non-Commercial No Derivatives'),
 			'CC-BY-SA'		=> array('http://creativecommons.org/licenses/by-sa/3.0/',		'CreativeCommons-Attribution-ShareAlike'),
 			'CC-BY-NC'		=> array('http://creativecommons.org/licenses/by-nc/3.0/',		'CreativeCommons-Attribution-Non-Commercial'),
-			'CC-BY'		=> array('http://creativecommons.org/licenses/by/3.0/',		'Creative Commons Attribution License'),
+			'CC-BY'			=> array('http://creativecommons.org/licenses/by/3.0/',		'Creative Commons Attribution License'),
 			'GNU-FDL'		=> array('http://www.gnu.org/licenses/fdl.html',				'GNU Free Documentation License'),
 			'PD'			=> array('http://creativecommons.org/publicdomain/mark/1.0/',			'Public Domain / Free Use'),
 		);
@@ -154,8 +166,9 @@ else
 		{
 			// constant license
 			$license = '<br />Material is distributed under<br />'. // ru]: ћатериал распростран€етс€ на услови€х
-				$this->link($licenses[$license][0], '', $licenses[$license][1]).'<br />'.
-				$this->link('file:'.strtolower(str_replace('-', '_', $license)).'.png', '', $licenses[$license][1]);
+
+			$this->link($licenses[$license][0], '', $licenses[$license][1]).'<br />'.
+			$this->link('file:'.strtolower(str_replace('-', '_', $license)).'.png', '', $licenses[$license][1]);
 		}
 		else
 		{
@@ -167,7 +180,10 @@ else
 	}
 
 	// print results
-	if ($output) echo implode('<br />', $output);
+	if ($output)
+	{
+		echo implode('<br />', $output);
+	}
 }
 
 echo '</small>';
