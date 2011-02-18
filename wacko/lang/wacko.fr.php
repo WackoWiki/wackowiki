@@ -37,6 +37,9 @@ $wacko_translation = array(
 	'Session'				=> 'Session',
 	'SessionTip'			=> 'parameters of current session',
 	'SessionDuration' => 'Durée de la session',
+	'SessionDurationDay' => '1 day',
+	'SessionDurationWeek' => '1 week',
+	'SessionDurationMonth' => '1 month',
 	'LoggedInAs' => 'Vous êtes connecté en tant que ',
 
 	'ClearCookies' => 'Delete all cookies',

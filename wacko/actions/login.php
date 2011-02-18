@@ -126,10 +126,11 @@ else
 					{
 						$_processed_password = hash('md5', $_POST['password']);
 					}
-					if (strlen($existing_user['password']) == 40) // only for dev versions
+					else if (strlen($existing_user['password']) == 40) // only for dev versions / can be removed after successful migration of all passwords
 					{
 						$_processed_password = hash('sha1', $_POST['user_name'].$existing_user['salt'].$_POST['password']);
 					}
+
 					if ($existing_user['password'] == $_processed_password)
 					{
 						$salt		= $this->random_password(10, 3);
@@ -154,19 +155,13 @@ else
 					// define session duration in days
 					$_session = isset($_POST['session']) ? $_POST['session'] : null;
 
-					switch ($_session)
+					if (!empty($existing_user['session_expiration']))
 					{
-						case '1d':
-							$session = 1;
-							break;
-						case '7d':
-							$session = 7;
-							break;
-						case '30d':
-							$session = 30;
-							break;
-						default:
-							$session = $this->config['session_expiration'];
+						$session = $existing_user['session_expiration'];
+					}
+					else
+					{
+						$session = $this->config['session_expiration'];
 					}
 
 					$_persistent = isset($_POST['persistent']) ? $_POST['persistent'] : 0;
@@ -200,9 +195,9 @@ else
 				}
 				else
 				{
-					$error	= $this->get_translation('WrongPassword');
+					$error		= $this->get_translation('WrongPassword');
 					$user_name	= $_POST['user_name'];
-					$focus	= 1;
+					$focus		= 1;
 
 					$this->set_failed_user_login_count($existing_user['user_id']);
 
@@ -233,19 +228,6 @@ else
 	echo '<label for="password">'.$this->get_translation('LoginPassword').':</label>'."\n";
 	echo '<input id="password" type="password" name="password" size="25" tabindex="2" autocomplete="off" />'."\n";
 	echo '</p>';
-
-
-/*
-	<p>
-		<label for=""><?php echo $this->get_translation('SessionDuration');?>:</label>
-		<small>
-			<input id="1d" name="session" value="1d" type="radio" /><label for="1d">1 day</label> &nbsp;&nbsp;
-			<input id="7d" name="session" value="7d" type="radio" /><label for="7d">7 days</label> &nbsp;&nbsp;
-			<input id="30d" name="session" value="30d" type="radio" checked="checked" /><label for="30d">30 days</label>
-		</small>
-	</p>
-	*/
-
 	echo '<p>'."\n";
 	echo '<input id="persistent" name="persistent" value="1" type="checkbox" tabindex="3"/>'."\n";
 	echo '<label for="persistent">'.$this->get_translation('PersistentCookie').'</label>'."\n";

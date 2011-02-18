@@ -44,7 +44,7 @@ if (isset($_GET['confirm']))
 		echo "<br /><br />".str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation('EmailNotConfirmed'))."<br /><br />";
 	}
 }
-else if (isset($_POST['action']) && $_POST['action'] == 'logout')
+else if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
 	$this->logout_user();
 	$this->set_bookmarks(BOOKMARK_DEFAULT);
@@ -120,7 +120,8 @@ else if ($user = $this->get_user())
 					"allow_intercom		= '".quote($this->dblink, (int)$_POST['allow_intercom'])."', ".
 					"hide_lastsession	= '".quote($this->dblink, (int)$_POST['hide_lastsession'])."', ".
 					"validate_ip		= '".quote($this->dblink, (int)$_POST['validate_ip'])."', ".
-					"noid_pubs			= '".quote($this->dblink, (int)$_POST['noid_pubs'])."' "
+					"noid_pubs			= '".quote($this->dblink, (int)$_POST['noid_pubs'])."', ".
+					"session_expiration	= '".quote($this->dblink, (int)$_POST['session_expiration'])."' "
 				:	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
 					"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
 					"revisions_count	= '".quote($this->dblink, (int)$_POST['revisions_count'])."', ".
@@ -252,7 +253,6 @@ else if ($user = $this->get_user())
 		</td>
 	</tr>
 	<?php
-
 	if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true)
 	{
 	?>
@@ -298,6 +298,16 @@ else if ($user = $this->get_user())
 			<label for="noid_pubs"><?php echo $this->get_translation('ProfileAnonymousPub');?></label>
 		</td>
 	</tr>
+	<tr class="lined">
+		<th class="form_left"><label for="session_expiration"><?php echo $this->get_translation('SessionDuration');?></label></th>
+		<td class="form_right">
+			<?php
+			echo "<input type=\"radio\" id=\"duration1\" name=\"session_expiration\" value=\"1\" ".( $user['session_expiration'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"duration1\">".$this->get_translation('SessionDurationDay')."</label>";
+			echo "<input type=\"radio\" id=\"duration7\" name=\"session_expiration\" value=\"7\" ".( $user['session_expiration'] == 7 ? "checked=\"checked\"" : "" )."/><label for=\"duration7\">".$this->get_translation('SessionDurationWeek')."</label>";
+			echo "<input type=\"radio\" id=\"duration30\" name=\"session_expiration\" value=\"30\" ".( $user['session_expiration'] == 30 ? "checked=\"checked\"" : "" )."/><label for=\"duration30\">".$this->get_translation('SessionDurationMonth')."</label>";
+			?>
+		</td>
+	</tr>
 	<!--<tr>
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right">
@@ -314,7 +324,7 @@ else if ($user = $this->get_user())
 	<td class="form_right">
 		<input id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
 		&nbsp;
-		<input id="button" name="button" type="button" onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" value="<?php echo $this->get_translation('LogoutButton'); ?>" />
+		<input id="logout" name="logout" type="button" onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" value="<?php echo $this->get_translation('LogoutButton'); ?>" />
 	</td>
 	</tr>
 	</tbody>
@@ -410,13 +420,11 @@ else if ($user = $this->get_user())
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="changes_count"><?php echo $this->get_translation('RecentChangesLimit');?></label></th>
-		<td class="form_right"><input id="changes_count" name="changes_count"
-	value="<?php echo htmlentities($user['changes_count']) ?>" size="40" /></td>
+		<td class="form_right"><input id="changes_count" name="changes_count" value="<?php echo $user['changes_count'] ?>" size="40" /></td>
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="revisions_count"><?php echo $this->get_translation('RevisionListLimit');?></label></th>
-		<td class="form_right"><input id="revisions_count" name="revisions_count"
-	value="<?php echo htmlentities($user['revisions_count']) ?>" size="40" /></td>
+		<td class="form_right"><input id="revisions_count" name="revisions_count" value="<?php echo $user['revisions_count'] ?>" size="40" /></td>
 	</tr>
 	<tr>
 		<td></td>
@@ -427,7 +435,7 @@ else if ($user = $this->get_user())
 	<td class="form_right">
 		<input id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
 		&nbsp;
-		<input id="button" name="button" type="button" onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" value="<?php echo $this->get_translation('LogoutButton'); ?>" />
+		<input id="logout" name="logout" type="button" onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" value="<?php echo $this->get_translation('LogoutButton'); ?>" />
 	</td>
 	</tr>
 	</tbody>
