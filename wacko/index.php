@@ -47,7 +47,7 @@ $found_rewrite_extension = function_exists('apache_get_modules') ? in_array('mod
 $wakkaDefaultConfig = array(
   "database_driver" => "",
   "database_host" => "localhost",
-  "database_port" => "",
+  "database_port" => "3306",
   "database_database" => "wacko",
   "database_user" => "",
   "database_password" => "",
@@ -129,7 +129,7 @@ $wakkaDefaultConfig = array(
   "disable_autosubscribe" => 0,
   "allow_gethostbyaddr" => 1,
 
-  "multilanguage" => 1,
+  "multilanguage" => 0,
 
   "cache" => 0,
   "cache_dir" => "_cache/",
