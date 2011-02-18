@@ -2,6 +2,9 @@
 
 require_once 'simplepie.class.php';
 
+// Ensure constants are loaded
+class_exists('SimplePie') or die("Couldn't load SimplePie");
+
 function normalize_character_set($charset)
 {
 	return strtolower(preg_replace('/(?:[^a-zA-Z0-9]+|([^0-9])0+)/', '\1', $charset));
@@ -44,7 +47,7 @@ function build_character_set_list()
 				if ($match[1] !== 'None')
 				{
 					$aliases[] = $match[1];
-					if ($match[2])
+					if (isset($match[2]))
 					{
 						$preferred = $match[1];
 					}
