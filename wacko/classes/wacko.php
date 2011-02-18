@@ -176,10 +176,10 @@ class Wacko
 	function get_page_tag($page_id = 0)
 	{
 		$page = $this->load_single(
-					"SELECT tag ".
-					"FROM ".$this->config['table_prefix']."page ".
-					"WHERE page_id = '".$page_id."' ".
-					"LIMIT 1");
+			"SELECT tag ".
+			"FROM ".$this->config['table_prefix']."page ".
+			"WHERE page_id = '".$page_id."' ".
+			"LIMIT 1");
 
 		return $page['tag'];;
 	}
@@ -1366,6 +1366,7 @@ class Wacko
 					$this->cache_acl($read_acls[$i]['page_id'], 'read', 1,$read_acls[$i]);
 				}
 			}
+
 			return array($pages, $pagination);
 		}
 	}
@@ -1454,7 +1455,11 @@ class Wacko
 			return;
 		}
 
-		if (empty($charset)) $charset = $this->get_charset();
+		if (empty($charset))
+		{
+			$charset = $this->get_charset();
+		}
+
 		$name_to		= '';
 		$email_from		= $this->config['admin_email'];
 		$name_from		= $this->config['email_from'];
@@ -1890,6 +1895,7 @@ class Wacko
 							}
 						}// end of watchers
 					}
+
 					$this->load_translation($this->user_lang);
 					$this->set_translation($this->user_lang);
 					$this->set_language($this->user_lang);
@@ -2003,6 +2009,7 @@ class Wacko
 								} // end of has_access()
 							} // end of watchers
 						}
+
 						$this->load_translation($this->user_lang);
 						$this->set_translation ($this->user_lang);
 						$this->set_language ($this->user_lang);
@@ -3008,16 +3015,16 @@ class Wacko
 
 	function add_spaces_title($text)
 	{
-		$text = preg_replace("/(".$this->language['ALPHANUM'].")(".$this->language['UPPERNUM'].")/", "\\1 \\2", $text);
-		$text = preg_replace("/(".$this->language['UPPERNUM'].")(".$this->language['UPPERNUM'].")/", "\\1 \\2", $text);
-		$text = preg_replace("/(".$this->language['ALPHANUM'].")\//", "\\1 /", $text);
-		$text = preg_replace("/(".$this->language['UPPER'].")&nbsp;(?=".$this->language['UPPER']."&nbsp;".$this->language['UPPERNUM'].")/", "\\1", $text);
-		$text = preg_replace("/(".$this->language['UPPER'].")&nbsp;(?=".$this->language['UPPER']."&nbsp;\/)/", "\\1", $text);
-		$text = preg_replace("/\/(".$this->language['ALPHANUM'].")/", "/&nbsp;\\1", $text);
-		$text = preg_replace("/(".$this->language['UPPERNUM'].")&nbsp;(".$this->language['UPPERNUM'].")($|\b)/", "\\1\\2", $text);
-		$text = preg_replace("/([0-9])(".$this->language['ALPHA'].")/", "\\1 \\2", $text);
-		$text = preg_replace("/(".$this->language['ALPHA'].")([0-9])/", "\\1 \\2", $text);
-		$text = preg_replace("/([0-9]) (?!".$this->language['ALPHA'].")/", "\\1", $text);
+		$text = preg_replace('/('.$this->language['ALPHANUM'].')('.$this->language['UPPERNUM'].')/', '\\1 \\2', $text);
+		$text = preg_replace('/('.$this->language['UPPERNUM'].')('.$this->language['UPPERNUM'].')/', '\\1 \\2', $text);
+		$text = preg_replace('/('.$this->language['ALPHANUM'].')\//', '\\1 /', $text);
+		$text = preg_replace('/('.$this->language['UPPER'].')&nbsp;(?='.$this->language['UPPER'].'&nbsp;'.$this->language['UPPERNUM'].')/', '\\1', $text);
+		$text = preg_replace('/('.$this->language['UPPER'].')&nbsp;(?='.$this->language['UPPER'].'&nbsp;\/)/', '\\1', $text);
+		$text = preg_replace('/\/('.$this->language['ALPHANUM'].')/', '/&nbsp;\\1', $text);
+		$text = preg_replace('/('.$this->language['UPPERNUM'].')&nbsp;('.$this->language['UPPERNUM'].')($|\b)/', '\\1\\2', $text);
+		$text = preg_replace('/([0-9])('.$this->language['ALPHA'].')/', '\\1 \\2', $text);
+		$text = preg_replace('/('.$this->language['ALPHA'].')([0-9])/', '\\1 \\2', $text);
+		$text = preg_replace('/([0-9]) (?!'.$this->language['ALPHA'].')/', '\\1', $text);
 
 		if (strpos($text, '/')   === 0)
 		{
@@ -3140,8 +3147,8 @@ class Wacko
 			{
 				if ($line = trim($line))
 				{
-					list($wikiName, $wikiUrl) = explode(' ', trim($line));
-					$this->inter_wiki[strtolower($wikiName)] = $wikiUrl;
+					list($wiki_name, $wiki_url) = explode(' ', trim($line));
+					$this->inter_wiki[strtolower($wiki_name)] = $wiki_url;
 				}
 			}
 		}
@@ -5376,8 +5383,8 @@ class Wacko
 		}
 
 		// load page and site information
-		$page = $this->load_page($tag);
-		$new = $clone_tag;
+		$page	= $this->load_page($tag);
+		$new	= $clone_tag;
 
 		return
 			// save
