@@ -236,6 +236,9 @@ switch($config2["database_driver"])
          require_once("setup/database_mysql.php");
          require_once("setup/database_mysql_updates.php");
 
+         if ( !isset ( $config2['database_port'] ) ) $config2['database_port'] = '3306';
+         if (!$port = trim($config2['database_port'])) $port = '3306';
+
          print("         <ul>\n");
 
          if(!test($lang["TestConnectionString"], $dblink = @mysqli_connect($config2["database_host"], $config2["database_user"], $config2["database_password"], null, $port), $lang["ErrorDBConnection"]))
