@@ -122,8 +122,8 @@ $table_menu_r4_3 = "CREATE TABLE {$pref}menu (".
 // PAGE
 $rename_page_r4_3_1 = "RENAME TABLE {$pref}pages TO {$pref}page";
 
-$alter_page_r4_2_1 = "ALTER TABLE {$pref}page MODIFY COLUMN body MEDIUMTEXT NOT NULL";
-$alter_page_r4_2_2 = "ALTER TABLE {$pref}page MODIFY COLUMN body_r MEDIUMTEXT NOT NULL";
+$alter_page_r4_2_1 = "ALTER TABLE {$pref}pages MODIFY COLUMN body MEDIUMTEXT NOT NULL";
+$alter_page_r4_2_2 = "ALTER TABLE {$pref}pages MODIFY COLUMN body_r MEDIUMTEXT NOT NULL";
 
 $alter_page_r4_3_0 = "ALTER TABLE {$pref}page CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
 $alter_page_r4_3_3 = "ALTER TABLE {$pref}page ADD created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER supertag, ADD INDEX idx_created (created), DROP INDEX idx_latest";
@@ -215,8 +215,8 @@ $alter_referrer_r4_3_2 = "ALTER TABLE {$pref}referrer CHANGE time referrer_time 
 // REVISION
 $rename_revision_r4_3_1 = "RENAME TABLE {$pref}revisions TO {$pref}revision";
 
-$alter_revision_r4_2_1 = "ALTER TABLE {$pref}revision MODIFY COLUMN body MEDIUMTEXT NOT NULL";
-$alter_revision_r4_2_2 = "ALTER TABLE {$pref}revision MODIFY COLUMN body_r MEDIUMTEXT NOT NULL";
+$alter_revision_r4_2_1 = "ALTER TABLE {$pref}revisions MODIFY COLUMN body MEDIUMTEXT NOT NULL";
+$alter_revision_r4_2_2 = "ALTER TABLE {$pref}revisions MODIFY COLUMN body_r MEDIUMTEXT NOT NULL";
 
 $alter_revision_r4_3_0 = "ALTER TABLE {$pref}revision CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
 $alter_revision_r4_3_1 = "ALTER TABLE {$pref}revision ADD created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER supertag, DROP INDEX idx_latest";

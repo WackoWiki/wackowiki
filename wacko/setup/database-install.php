@@ -799,8 +799,8 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_2_1), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_2_2), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 
+					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_2_1), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_2_2), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_2_3), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 
 					test($lang['InstallingLogoImage'], @mysqli_query($dblink, $insert_logo_image), str_replace('%1',"logo image",$lang['ErrorAlreadyExists']));
 
@@ -1196,8 +1196,8 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_2_1, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_2_2, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 
+					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_2_1, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_2_2, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_2_3, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 
 					test_pdo($lang['InstallingLogoImage'], $insert_logo_image, str_replace('%1',"logo image",$lang['ErrorAlreadyExists']));
 
