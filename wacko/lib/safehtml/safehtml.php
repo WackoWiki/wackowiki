@@ -639,14 +639,8 @@ class SafeHTML
         // Save all '<' symbols
         $doc = preg_replace('/<(?=[^a-zA-Z\/\!\?\%])/', '&lt;', $doc);
 
-        // Web documents shouldn't contains \x00 symbol
-        $doc = str_replace("\x00", '', $doc);
-
-        // Opera6 bug workaround
-        $doc = str_replace("\xC0\xBC", '&lt;', $doc);
-
         // UTF7 pack
-        //$doc = $this->repackUTF7($doc);
+        $doc = $this->repackUTF7($doc);
 
         // Instantiate the parser
         $parser = new XML_HTMLSax3;
