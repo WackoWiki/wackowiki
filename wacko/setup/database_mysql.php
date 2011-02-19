@@ -5,7 +5,7 @@
 
 $table_pages = "CREATE TABLE ".$config2["table_prefix"]."pages (".
                  "id int(10) unsigned NOT NULL auto_increment,".
-                 "tag varchar(250) character set latin1 collate latin1_swedish_ci NOT NULL default '',".
+                 "tag varchar(250) NOT NULL default '',".
                  "supertag varchar(250) NOT NULL default '',".
                  "time datetime NOT NULL default '0000-00-00 00:00:00',".
                  "body mediumtext NOT NULL,".
