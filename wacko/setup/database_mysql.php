@@ -261,7 +261,7 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"real_name VARCHAR(80) NOT NULL DEFAULT '',".
 					"password VARCHAR(64) NOT NULL DEFAULT '',".
 					"salt VARCHAR(40) NOT NULL DEFAULT '',".
-					"email VARCHAR(50) NOT NULL DEFAULT '',".
+					"email VARCHAR(100) NOT NULL DEFAULT '',".
 					"account_type TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
