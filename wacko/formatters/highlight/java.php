@@ -2,12 +2,12 @@
 
 $this->use_class('javahighlighter', 'formatters/classes/');
 
-$DH = new JavaHighlighter();
+$dh = new JavaHighlighter();
 echo "<!--no"."typo-->";
 echo "<pre class=\"code\">";
-echo $DH->analysecode($text);
+echo $dh->analysecode($text);
 echo "</pre>";
 echo "<!--/no"."typo-->";
-unset($DH);
+unset($dh);
 
 ?>

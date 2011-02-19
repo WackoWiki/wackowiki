@@ -2,12 +2,12 @@
 
 $this->use_class('delphihightlighter', 'formatters/classes/');
 
-$DH = new DelphiHightlighter();
+$dh = new DelphiHightlighter();
 echo "<!--no"."typo-->";
 echo "<pre class=\"code\">";
-echo $DH->analysecode($text);
+echo $dh->analysecode($text);
 echo "</pre>";
 echo "<!--/no"."typo-->";
-unset($DH);
+unset($dh);
 
 ?>

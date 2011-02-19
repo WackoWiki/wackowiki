@@ -126,8 +126,10 @@ class bbcode
 				else if	($g >= $r && $g >= $b)	return '!!(green)'.preg_replace_callback($this->template, $rewrite, $substring[3]).'!!';
 				else if	($b >= $r && $b >= $g)	return '!!(blue)'.preg_replace_callback($this->template, $rewrite, $substring[3]).'!!';
 			}
+
 			return preg_replace_callback($this->template, $rewrite, $substring[3]);
 		}
+
 		return $string;
 	}
 }

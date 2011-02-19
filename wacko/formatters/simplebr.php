@@ -22,6 +22,6 @@ if (!$options['no<p>'])
 */
 
 include('rawhtml.php');
-// echo "simplebr: ".$this->Format($text, 'rawhtml');
+// echo "simplebr: ".$this->format($text, 'rawhtml');
 
 ?>

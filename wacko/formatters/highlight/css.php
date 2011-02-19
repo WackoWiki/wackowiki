@@ -13,6 +13,7 @@ $options['color']['attributevalues'] = "blue";
 $options['color']['entities'] = "orange";
 $options['color']['digits'] = "green";
 $options['line_numbers'] = false;
+
 if (isset($options['notypo']) && $options['notypo'] !== false) $options['notypo'] = true;
 
 $css = htmlspecialchars($text);
@@ -160,44 +161,43 @@ $special_keywords = array(	'color',
 
 	foreach($special_keyword2 as $i)
 	{
-		$css = preg_replace(
-		'/[^-y]' . $i . '/',
-		'<span style="color: ##oct##;">' .$i. '</span>',
-		$css);
+		$css = preg_replace('/[^-y]' . $i . '/', '<span style="color: ##oct##;">' .$i. '</span>', $css);
 	}
 
 	$css = preg_replace('/(\.?)(.*)(\s?\{?)/s', "&nbsp;<span style=\"color: ##ocv##;\">$1$2</span>$3", $css);
 
-	$css = preg_replace("/(\#[0-9a-fA-F]+|\d+(px))/", "<span style=\"color: ".$options['color']['digits'].";\">$1</span>",$css);
+	$css = preg_replace("/(\#[0-9a-fA-F]+|\d+(px))/", "<span style=\"color: ".$options['color']['digits'].";\">$1</span>", $css);
 
-	$css = str_replace("\:","<span style=\"color: ".$options['color']['attributes']."; font-weight: bold;\">:</span>",$css);
-	$css = str_replace("{", "<span style=\"color: ".$options['color']['attributes']."; font-weight: bold;\">{</span>",$css);
-	$css = str_replace("}", "<span style=\"color: ".$options['color']['attributes']."; font-weight: bold;\">}</span>",$css);
+	$css = str_replace("\:", "<span style=\"color: ".$options['color']['attributes']."; font-weight: bold;\">:</span>", $css);
+	$css = str_replace("{", "<span style=\"color: ".$options['color']['attributes']."; font-weight: bold;\">{</span>", $css);
+	$css = str_replace("}", "<span style=\"color: ".$options['color']['attributes']."; font-weight: bold;\">}</span>", $css);
 
-	$css = preg_replace(
-				 '!/\*(.*?)\*/!es',
-				 '"<span style=\"color: '.$options['color']['comment'].';\">/*".strip_tags("$1")."*/</span>"',
-	$css);
+	$css = preg_replace('!/\*(.*?)\*/!es', '"<span style=\"color: '.$options['color']['comment'].';\">/*".strip_tags("$1")."*/</span>"', $css);
 
 	$css = str_replace("##oct##", $options['color']['tags'], $css);
 	$css = str_replace("##ocv##", $options['color']['attributevalues'], $css);
 
-	if ($options['line_numbers'] == true) {
+	if ($options['line_numbers'] == true)
+	{
 		$lines = preg_split("/(\n|<br \/>)/s",$css);
 		$source = '<ol>';
 		$i = 0;
+
 		foreach ($lines as $line)
 		{
 			$i += 1;
 			$source .= '<li id="l' .$i. '">' .trim($line). "</li>";
 		}
+
 		$source .= '</ol>';
 	}
 
 	if (isset($options['notypo'])) echo "<!--no"."typo-->";
 	if (!isset($options['nopre'])) echo "<pre class=\"code\">";
+
 	echo preg_replace("/\&nbsp\;/", "", str_replace("\t","	",$css), 1);
+
 	if (!isset($options['nopre'])) echo "</pre>";
 	if (isset($options['notypo'])) echo "<!--/no"."typo-->";
 
-	?>
+?>

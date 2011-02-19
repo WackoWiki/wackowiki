@@ -47,6 +47,7 @@ if ($options['default'] == 'wacko')
 	$output = $this->format( $output, 'simplebr', null, 0, array('no<p>' => 1) );
 }
 else
+{
 	if ($options['default'] == 'rawhtml')
 	{
 		// insert about the source
@@ -66,6 +67,7 @@ else
 
 		$output = htmlspecialchars( $text );
 	}
+}
 
 $div_id = "document_source_".md5($options['source']);
 echo "<!--no"."typo-->";

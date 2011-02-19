@@ -18,7 +18,6 @@ class paragrafica
 	var $t0 = array( // terminators like <-t>$1<t->
 		"/(<br[^>]*>)(\s*<br[^>]*>)+/si",
 		"/(<hr[^>]*>)/si",
-
 	);
 	var $t1 = array( // terminators like <-t>$1
 		array( // rightinators

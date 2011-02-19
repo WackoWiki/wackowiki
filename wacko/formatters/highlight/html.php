@@ -144,7 +144,8 @@ $xhtml_tags = array(
              "&lt;/style&gt;"',
   $source);
 
-  foreach($xhtml_tags as $i) {
+  foreach($xhtml_tags as $i)
+  {
    $source = preg_replace('/&lt;' . $i . '(&gt;|[[:space:]])/', '<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">&lt;' .$i. '\\1</span>', $source);
    $source = str_replace('&lt;/' .$i. '&gt;','<span style="color: ' .$options['color']['tags']. ';font-weight:bold;">&lt;/' .$i. '&gt;</span>',$source);
   }
@@ -160,14 +161,18 @@ $xhtml_tags = array(
              .$options['color']['attributevalues']. ';">$2$3$2</span>', $source);
              $source = preg_replace("/&amp;([a-z0-9]*?;)/i", '&amp;<span style="color: ' .$options['color']['entities']. ';">$1</span>', $source);
 
-             if ($options['line_numbers'] == true) {
+             if ($options['line_numbers'] == true)
+             {
              	$lines = preg_split("/(\n|<br \/>)/s",$source);
              	$source = '<ol>';
              	$i = 0;
-             	foreach ($lines as $line) {
+
+             	foreach ($lines as $line)
+             	{
              		$i += 1;
              		$source .= '<li id="l' .$i. '">' .rtrim($line). "</li>";
              	}
+
              	$source .= '</ol>';
              }
 
