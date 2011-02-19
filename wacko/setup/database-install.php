@@ -478,6 +478,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_27, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_28, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_29, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_30, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_1, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_2, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
@@ -866,6 +867,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_27), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_28), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_29), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_30), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_1), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_2), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
@@ -1263,6 +1265,7 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_27, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_28, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_29, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_30, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 
 					test_pdo(str_replace('%1', 'acl', $lang['AlterTable']), $alter_acl_r4_3_1, str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'acl', $lang['AlterTable']), $alter_acl_r4_3_2, str_replace('%1', 'acl', $lang['ErrorAlteringTable']));

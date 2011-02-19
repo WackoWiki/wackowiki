@@ -301,18 +301,19 @@ $alter_user_r4_3_26 = "ALTER TABLE {$pref}user ADD login_count INT(10) UNSIGNED 
 $alter_user_r4_3_27 = "ALTER TABLE {$pref}user ADD lost_password_request_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0' AFTER login_count";
 $alter_user_r4_3_28 = "ALTER TABLE {$pref}user ADD failed_login_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0' AFTER lost_password_request_count";
 $alter_user_r4_3_29 = "ALTER TABLE {$pref}user ADD fingerprint VARCHAR(40) AFTER total_comments";
+$alter_user_r4_3_30 = "ALTER TABLE {$pref}user CHANGE email email VARCHAR(100) NOT NULL DEFAULT ''";
 
 // see adminupdate action which will do this after successful data migration
-#$alter_user_r4_3_30 = "ALTER TABLE {$pref}user DROP changes_count";
-#$alter_user_r4_3_31 = "ALTER TABLE {$pref}user DROP doubleclick_edit";
-#$alter_user_r4_3_32 = "ALTER TABLE {$pref}user DROP show_comments";
-#$alter_user_r4_3_33 = "ALTER TABLE {$pref}user DROP bookmarks";
-#$alter_user_r4_3_34 = "ALTER TABLE {$pref}user DROP lang";
-#$alter_user_r4_3_35 = "ALTER TABLE {$pref}user DROP show_spaces";
-#$alter_user_r4_3_36 = "ALTER TABLE {$pref}user DROP typografica";
-#$alter_user_r4_3_37 = "ALTER TABLE {$pref}user DROP more";
-#$alter_user_r4_3_38 = "ALTER TABLE {$pref}user DROP motto";
-#$alter_user_r4_3_39 = "ALTER TABLE {$pref}user DROP revisions_count";
+#$alter_user_r4_3_31 = "ALTER TABLE {$pref}user DROP changes_count";
+#$alter_user_r4_3_32 = "ALTER TABLE {$pref}user DROP doubleclick_edit";
+#$alter_user_r4_3_33 = "ALTER TABLE {$pref}user DROP show_comments";
+#$alter_user_r4_3_34 = "ALTER TABLE {$pref}user DROP bookmarks";
+#$alter_user_r4_3_35 = "ALTER TABLE {$pref}user DROP lang";
+#$alter_user_r4_3_36 = "ALTER TABLE {$pref}user DROP show_spaces";
+#$alter_user_r4_3_37 = "ALTER TABLE {$pref}user DROP typografica";
+#$alter_user_r4_3_38 = "ALTER TABLE {$pref}user DROP more";
+#$alter_user_r4_3_39 = "ALTER TABLE {$pref}user DROP motto";
+#$alter_user_r4_3_40 = "ALTER TABLE {$pref}user DROP revisions_count";
 
 $update_user_r4_3_1 = "UPDATE {$pref}user SET doubleclick_edit = '0' WHERE doubleclick_edit = '2'";
 $update_user_r4_3_2 = "UPDATE {$pref}user SET show_comments = '0' WHERE show_comments = '2'";
