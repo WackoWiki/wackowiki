@@ -37,15 +37,15 @@ if (!class_exists('preformatter'))
 			}
 			else if ($thing == ':::::')
 			{
-				return '((User:'.$wacko->get_user_name().' '.$wacko->get_user_name().')):';
+				return '((user:'.$wacko->get_user_name().' '.$wacko->get_user_name().')):';
 			}
 			else if ($thing == '::::')
 			{
-				return '((User:'.$wacko->get_user_name().' '.$wacko->get_user_name().'))';
+				return '((user:'.$wacko->get_user_name().' '.$wacko->get_user_name().'))';
 			}
 			else if ($thing == '::@::')
 			{
-				return sprintf($wacko->config['name_date_macro'], '((User:'.$wacko->get_user_name().' '.$wacko->get_user_name().'))', date($wacko->config['date_macro_format']));
+				return sprintf($wacko->config['name_date_macro'], '((user:'.$wacko->get_user_name().' '.$wacko->get_user_name().'))', date($wacko->config['date_macro_format']));
 			}
 			else if ($thing == '::+::')
 			{
