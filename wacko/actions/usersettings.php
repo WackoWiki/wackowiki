@@ -24,7 +24,7 @@ if (isset($_GET['confirm']))
 			"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."' ".
 			"LIMIT 1"))
 	{
-		$this->query(
+		$this->sql_query(
 			"UPDATE ".$this->config['user_table']." ".
 			"SET email_confirm = '' ".
 			"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."'");
@@ -86,7 +86,7 @@ else if ($user = $this->get_user())
 			if ($email_changed === true || isset($_POST['real_name']))
 			{
 				// update users table
-				$this->query(
+				$this->sql_query(
 					"UPDATE ".$this->config['user_table']." SET ".
 						"real_name			= '".quote($this->dblink, trim($_POST['real_name']))."', ".
 						"email				= '".quote($this->dblink, $_POST['email'])."' ".
@@ -105,7 +105,7 @@ else if ($user = $this->get_user())
 	if (isset($_POST['action']) && ($_POST['action'] == 'update_extended' || $_POST['action'] == 'update'))
 	{
 		// update user_setting table
-		$this->query(
+		$this->sql_query(
 			"UPDATE ".$this->config['table_prefix']."user_setting SET ".
 			($_POST['action'] == 'update_extended'
 				?	"doubleclick_edit	= '".quote($this->dblink, (int)$_POST['doubleclick_edit'])."', ".
@@ -143,7 +143,7 @@ else if ($user = $this->get_user())
 		{
 			$confirm = hash('sha256', $user['password'].mt_rand().time().mt_rand().$email.mt_rand());
 
-			$this->query(
+			$this->sql_query(
 				"UPDATE {$this->config['user_table']} ".
 				"SET email_confirm = '".quote($this->dblink, $confirm)."' ".
 				"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".

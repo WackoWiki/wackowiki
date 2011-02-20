@@ -75,7 +75,7 @@ function admin_files(&$engine, &$module)
 		if (sizeof($what) > 0)
 		{
 			// 2. remove from DB
-			$engine->query(
+			$engine->sql_query(
 				"DELETE FROM ".$engine->config['table_prefix']."upload ".
 				"WHERE upload_id = '". quote($engine->dblink, $what[0]['upload_id'])."'");
 
@@ -167,7 +167,7 @@ function admin_files(&$engine, &$module)
 			$description = htmlspecialchars($description);
 
 			// 5. insert line into DB
-			$engine->query("INSERT INTO {$engine->config['table_prefix']}upload SET ".
+			$engine->sql_query("INSERT INTO {$engine->config['table_prefix']}upload SET ".
 				"page_id		= '".quote($engine->dblink, '0')."', ".
 				"file_name		= '".quote($engine->dblink, $small_name)."', ".
 				"description	= '".quote($engine->dblink, $description)."', ".

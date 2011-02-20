@@ -64,7 +64,7 @@ function admin_groups(&$engine, &$module)
 				}
 				else
 				{
-					$engine->query(
+					$engine->sql_query(
 						"INSERT INTO {$engine->config['table_prefix']}group_member SET ".
 							"group_id	= '".quote($engine->dblink, $_POST['group_id'])."', ".
 							"user_id	= '".quote($engine->dblink, (int)$_POST['newmember'])."'");
@@ -78,7 +78,7 @@ function admin_groups(&$engine, &$module)
 			// delete member
 			else if (isset($_POST['removemember']) && isset($_POST['member_id']))
 			{
-				$engine->query(
+				$engine->sql_query(
 					"DELETE FROM {$engine->config['table_prefix']}group_member ".
 					"WHERE group_id = '".quote($engine->dblink, $_POST['group_id'])."' ".
 						"AND user_id = '".quote($engine->dblink, $_POST['member_id'])."'");
@@ -155,7 +155,7 @@ function admin_groups(&$engine, &$module)
 			}
 			else
 			{
-				$engine->query(
+				$engine->sql_query(
 					"INSERT INTO {$engine->config['table_prefix']}group SET ".
 						"created		= NOW(), ".
 						"description	= '".quote($engine->dblink, $_POST['description'])."', ".
@@ -184,7 +184,7 @@ function admin_groups(&$engine, &$module)
 			}
 			else
 			{
-				$engine->query(
+				$engine->sql_query(
 					"UPDATE {$engine->config['table_prefix']}group SET ".
 					"group_name		= '".quote($engine->dblink, $_POST['newname'])."', ".
 					"description	= '".quote($engine->dblink, $_POST['newdescription'])."', ".
@@ -202,10 +202,10 @@ function admin_groups(&$engine, &$module)
 		// delete group
 		else if (isset($_POST['delete']) && isset($_POST['group_id']))
 		{
-			$engine->query(
+			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}group ".
 				"WHERE group_id = '".quote($engine->dblink, $_POST['group_id'])."'");
-			$engine->query(
+			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}group_member ".
 				"WHERE group_id = '".quote($engine->dblink, $_POST['group_id'])."'");
 

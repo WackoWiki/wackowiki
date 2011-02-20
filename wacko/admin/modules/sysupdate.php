@@ -39,7 +39,7 @@ function admin_sysupdate(&$engine, &$module)
 			{
 				foreach ($pages as $page)
 				{
-					#$engine->query(
+					#$engine->sql_query(
 					#	"UPDATE {$engine->config['table_prefix']}acl ".
 					#	"SET supertag = '".$engine->npj_translit($page['tag'])."' ".
 					#	"WHERE tag = '".$page['tag']."'");
@@ -68,7 +68,7 @@ function admin_sysupdate(&$engine, &$module)
 			{
 				foreach ($pages as $page)
 				{
-					$engine->query(
+					$engine->sql_query(
 						"UPDATE {$engine->config['table_prefix']}link ".
 						"SET to_supertag = '".$engine->npj_translit($page['to_tag'])."' ".
 						"WHERE to_tag = '".$page['to_tag']."'");
@@ -97,7 +97,7 @@ function admin_sysupdate(&$engine, &$module)
 			{
 				foreach ($pages as $page)
 				{
-					$engine->query(
+					$engine->sql_query(
 						"UPDATE {$engine->config['table_prefix']}page SET ".
 							"supertag = '".$engine->npj_translit($page['tag'])."' ".
 						"WHERE page_id = ".$page['page_id']);
@@ -126,7 +126,7 @@ function admin_sysupdate(&$engine, &$module)
 			{
 				foreach ($pages as $page)
 				{
-					$engine->query(
+					$engine->sql_query(
 						"UPDATE {$engine->config['table_prefix']}revision ".
 						"SET supertag = '".$engine->npj_translit($page['tag'])."' ".
 						"WHERE revision_id = ".$page['revision_id']);
@@ -167,7 +167,7 @@ function admin_sysupdate(&$engine, &$module)
 
 			$version = '4.3.rc2';
 
-			$engine->query(
+			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}config ".
 				"SET wackowiki_version = '$version'");
 			$engine->log(1, 'Upgrading to version WackoWiki '.$version);

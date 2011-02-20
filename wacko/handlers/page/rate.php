@@ -50,7 +50,7 @@ if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 
 				"LIMIT 1"))
 			{
 				// update entry
-				$this->query(
+				$this->sql_query(
 					"UPDATE {$this->config['table_prefix']}rating SET ".
 					"value	= {$rating['value']} + '".quote($this->dblink, $value)."', ".
 					"voters	= {$rating['voters']} + 1 ".
@@ -59,7 +59,7 @@ if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 
 			else
 			{
 				// create entry
-				$this->query(
+				$this->sql_query(
 					"INSERT INTO {$this->config['table_prefix']}rating SET ".
 					"page_id		= $id, ".
 					"value	= '".quote($this->dblink, $value)."', ".

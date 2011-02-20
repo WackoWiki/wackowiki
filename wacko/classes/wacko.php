@@ -81,7 +81,7 @@ class Wacko
 	}
 
 	// DATABASE
-	function query($query, $debug = 0)
+	function sql_query($query, $debug = 0)
 	{
 		if ($debug)
 		{
@@ -126,7 +126,7 @@ class Wacko
 		}
 
 		// retrieving from db
-		if ($r = $this->query($query))
+		if ($r = $this->sql_query($query))
 		{
 			while ($row = fetch_assoc($r))
 			{
@@ -1704,7 +1704,7 @@ class Wacko
 					$upload_acl		= $this->config['default_upload_acl'];
 				}
 
-				$this->query(
+				$this->sql_query(
 					"INSERT INTO ".$this->config['table_prefix']."page SET ".
 						"comment_on_id 	= '".quote($this->dblink, $comment_on_id)."', ".
 						(!$comment_on_id ? "description = '".quote($this->dblink, $desc)."', " : "").
@@ -1745,7 +1745,7 @@ class Wacko
 				if ($comment_on_id)
 				{
 					// updating comments count for commented page
-					$this->query(
+					$this->sql_query(
 						"UPDATE {$this->config['table_prefix']}page SET ".
 							"comments	= '".(int)$this->count_comments($comment_on_id)."', ".
 							"commented	= NOW() ".
@@ -1753,7 +1753,7 @@ class Wacko
 						"LIMIT 1");
 
 					// update user comments count
-					$this->query(
+					$this->sql_query(
 						"UPDATE {$this->config['user_table']} ".
 						"SET total_comments = total_comments + 1 ".
 						"WHERE user_id = '".quote($this->dblink, $owner_id)."' ".
@@ -1762,7 +1762,7 @@ class Wacko
 				else
 				{
 					// update user pages count
-					$this->query(
+					$this->sql_query(
 						"UPDATE {$this->config['user_table']} ".
 						"SET total_pages = total_pages + 1 ".
 						"WHERE user_id = '".quote($this->dblink, $owner_id)."' ".
@@ -1846,7 +1846,7 @@ class Wacko
 								// ...and add one if so
 								if ($pending['comment_id'] == false)
 								{
-									$this->query(
+									$this->sql_query(
 										"UPDATE {$this->config['table_prefix']}watch ".
 										"SET comment_id = '".quote($this->dblink, $page_id)."' ".
 										"WHERE page_id = '".quote($this->dblink, $comment_on_id)."' ".
@@ -1919,7 +1919,7 @@ class Wacko
 					}
 
 					// update current page copy
-					$this->query(
+					$this->sql_query(
 						"UPDATE ".$this->config['table_prefix']."page SET ".
 							"comment_on_id	= '".quote($this->dblink, $comment_on_id)."', ".
 							"modified		= NOW(), ".
@@ -2063,7 +2063,7 @@ class Wacko
 		}
 
 		// move revision
-		$this->query(
+		$this->sql_query(
 			"INSERT INTO {$this->config['table_prefix']}revision SET ".
 				"page_id		= '{$old_page['page_id']}', ".
 				"tag			= '{$old_page['tag']}', ".
@@ -2089,7 +2089,7 @@ class Wacko
 		// update user statistics for revisions made
 		if ($user = $this->get_user())
 		{
-			$this->query(
+			$this->sql_query(
 				"UPDATE {$this->config['user_table']} ".
 				"SET total_revisions = total_revisions + 1 ".
 				"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
@@ -3115,7 +3115,7 @@ class Wacko
 			$from_page_id = $this->page['page_id'];
 		}
 
-		$this->query(
+		$this->sql_query(
 			"DELETE FROM ".$this->config['table_prefix']."link ".
 			"WHERE from_page_id = '".quote($this->dblink, $from_page_id)."'");
 
@@ -3131,7 +3131,7 @@ class Wacko
 					$written[$lower_to_tag] = 1;
 				}
 			}
-			$this->query(
+			$this->sql_query(
 				"INSERT INTO ".$this->config['table_prefix']."link ".
 					"(from_page_id, to_page_id, to_tag, to_supertag) ".
 				"VALUES ".rtrim($query, ','));
@@ -3237,7 +3237,7 @@ class Wacko
 		// check if it's coming from another site
 		if ($referrer && !preg_match('/^'.preg_quote($this->config['base_url'], '/').'/', $referrer) && isset($_GET['sid']) === false) // TODO: isset($_GET['PHPSESSID']) === false
 		{
-			$this->query(
+			$this->sql_query(
 				"INSERT INTO ".$this->config['table_prefix']."referrer SET ".
 					"page_id		= '".quote($this->dblink, $page_id)."', ".
 					"referrer		= '".quote($this->dblink, $referrer)."', ".
@@ -3601,7 +3601,7 @@ class Wacko
 	{
 		if ($user['user_name'] == true)
 		{
-			return $this->query(
+			return $this->sql_query(
 				"UPDATE {$this->config['user_table']} ".
 				"SET session_time = NOW() ".
 				"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
@@ -3613,7 +3613,7 @@ class Wacko
 	{
 		if ($user['user_name'] == true)
 		{
-			return $this->query(
+			return $this->sql_query(
 				"UPDATE {$this->config['user_table']} ".
 				"SET last_mark = NOW() ".
 				"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
@@ -3653,7 +3653,7 @@ class Wacko
 
 		// update session expiry and clear password recovery
 		// code in user data table
-		$this->query(
+		$this->sql_query(
 			"UPDATE {$this->config['user_table']} SET ".
 				"session_expire		= '".quote($this->dblink, $ses_time)."', ".
 				"change_password	= '' ".
@@ -3713,7 +3713,7 @@ class Wacko
 	function logout_user()
 	{
 		// clear session expiry in user data table
-		$this->query(
+		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET session_expire = 0 ".
 			"WHERE user_name = '".quote($this->dblink, $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'user']['user_name'])."' ".
@@ -3734,7 +3734,7 @@ class Wacko
 	// Increment the number of times the user has logegd in
 	function login_count($user_id)
 	{
-		$this->query(
+		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET login_count = login_count+1 ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
@@ -3746,7 +3746,7 @@ class Wacko
 	// Increment the failed login count by 1
 	function set_failed_user_login_count($user_id)
 	{
-		$this->query(
+		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET failed_login_count = failed_login_count+1 ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
@@ -3758,7 +3758,7 @@ class Wacko
 	// Reset to zero the failed login attempts
 	function reset_failed_user_login_count($user_id)
 	{
-		$this->query(
+		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET failed_login_count = 0 ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
@@ -3770,7 +3770,7 @@ class Wacko
 	// Increment the failed login count by 1
 	function set_lost_password_count($user_id)
 	{
-		$this->query(
+		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET lost_password_request_count = lost_password_request_count+1 ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
@@ -3782,7 +3782,7 @@ class Wacko
 	// Reset to zero the 'lost password' in progress attempts
 	function reset_lost_password_count($user_id)
 	{
-		$this->query(
+		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET lost_password_request_count = 0 ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
@@ -4111,7 +4111,7 @@ class Wacko
 		}
 
 		// updated latest revision with new owner
-		$this->query(
+		$this->sql_query(
 			"UPDATE ".$this->config['table_prefix']."page ".
 			"SET owner_id = '".quote($this->dblink, $user_id)."' ".
 			"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
@@ -4122,7 +4122,7 @@ class Wacko
 	{
 		if ($this->load_acl($page_id, $privilege, 0, 0, 0))
 		{
-			$this->query(
+			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."acl SET ".
 					"list = '".quote($this->dblink, trim(str_replace("\r", '', $list)))."' ".
 				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
@@ -4130,7 +4130,7 @@ class Wacko
 		}
 		else
 		{
-			$this->query(
+			$this->sql_query(
 				"INSERT INTO ".$this->config['table_prefix']."acl SET ".
 					"list		= '".quote($this->dblink, trim(str_replace("\r", '', $list)))."', ".
 					"page_id	= '".quote($this->dblink, $page_id)."', ".
@@ -4451,7 +4451,7 @@ class Wacko
 
 		if ($this->has_access('read', $page_id))
 		{
-			return $this->query(
+			return $this->sql_query(
 				"INSERT INTO ".$this->config['table_prefix']."watch (user_id, page_id) ".
 				"VALUES ( '".quote($this->dblink, $user_id)."', '".quote($this->dblink, $page_id)."')" );
 				// TIMESTAMP type is filled automatically by MySQL
@@ -4464,7 +4464,7 @@ class Wacko
 
 	function clear_watch($user_id, $page_id)
 	{
-		return $this->query(
+		return $this->sql_query(
 			"DELETE FROM ".$this->config['table_prefix']."watch ".
 			"WHERE user_id		= '".quote($this->dblink, $user_id)."' ".
 				"AND page_id	= '".quote($this->dblink, $page_id)."'");
@@ -4478,7 +4478,7 @@ class Wacko
 
 		if ($this->has_access('read', $page_id))
 		{
-			return $this->query(
+			return $this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."page SET ".
 					"reviewed		= '".quote($this->dblink, $reviewed)."', ".
 					"reviewed_time	= NOW(), ".
@@ -4604,7 +4604,7 @@ class Wacko
 
 				$_bookmark_count = count($_menu_position);
 
-				$this->query(
+				$this->sql_query(
 					"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 					"user_id			= '".quote($this->dblink, $user['user_id'])."', ".
 					"page_id			= '".quote($this->dblink, $this->page['page_id'])."', ".
@@ -4641,7 +4641,7 @@ class Wacko
 
 			$bookmarks = $newbookmarks;
 
-			$this->query(
+			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."menu ".
 				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"AND page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
@@ -4712,17 +4712,29 @@ class Wacko
 		}
 	}
 
+	// set config value
+	function set_config($config_name, $config_value, $is_dynamic = false)
+	{
+		$sql = "UPDATE {$this->config['table_prefix']}config
+			SET config_value = '".quote($this->dblink, $config_value)."'
+			WHERE config_name = '" . quote($this->dblink, $config_name) . "'";
+
+		$this->sql_query($sql);
+
+		$this->config[$config_name] = $config_value;
+	}
+
 	// MAINTENANCE
 	function maintenance()
 	{
 		// purge referrers (once a day)
 		if (($days = $this->config['referrers_purge_time']) && (time() > ($this->config['maint_last_refs'] + 1 * 86400)))
 		{
-			$this->query(
+			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."referrer ".
 				"WHERE referrer_time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
-			$this->query("UPDATE {$this->config['table_prefix']}config SET value = '".time()."' WHERE config_name = 'maint_last_refs'");
+			$this->set_config('maint_last_refs', time());
 
 			$this->log(7, 'Maintenance: referrers purged');
 		}
@@ -4730,11 +4742,11 @@ class Wacko
 		// purge outdated pages revisions (once a week)
 		if (($days = $this->config['pages_purge_time']) && (time() > ($this->config['maint_last_oldpages'] + 7 * 86400)))
 		{
-			$this->query(
+			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."revision ".
 				"WHERE modified < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
-			$this->query("UPDATE {$this->config['table_prefix']}config SET value = '".time()."' WHERE config_name = 'maint_last_oldpages'");
+			$this->set_config('maint_last_oldpages', time());
 
 			$this->log(7, 'Maintenance: outdated pages revisions purged');
 		}
@@ -4755,13 +4767,13 @@ class Wacko
 
 			if ($remove)
 			{
-				$this->query(
+				$this->sql_query(
 					"DELETE FROM {$this->config['table_prefix']}revision ".
 					"WHERE tag IN ( ".implode(', ', $remove)." )");
 				unset($remove);
 			}
 
-			$this->query("UPDATE {$this->config['table_prefix']}config SET value = '".time()."' WHERE config_name = 'maint_last_delpages'");
+			$this->set_config('maint_last_delpages', time());
 
 			$this->log(7, 'Maintenance: deleted pages purged');
 		}
@@ -4769,11 +4781,11 @@ class Wacko
 		// purge system log entries (once per 3 days)
 		if (($days = $this->config['log_purge_time']) && (time() > ($this->config['maint_last_log'] + 3 * 86400)))
 		{
-			$this->query(
+			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}log ".
 				"WHERE log_time < DATE_SUB( NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY )");
 
-			$this->query("UPDATE {$this->config['table_prefix']}config SET value = '".time()."' WHERE config_name = 'maint_last_log'");
+			$this->set_config('maint_last_log', time());
 
 			$this->log(7, 'Maintenance: system log purged');
 		}
@@ -4785,7 +4797,7 @@ class Wacko
 			if ($ttl = $this->config['cache_ttl'])
 			{
 				// clear from db
-				$this->query(
+				$this->sql_query(
 					"DELETE FROM ".$this->config['table_prefix']."cache ".
 					"WHERE cache_time < DATE_SUB( NOW(), INTERVAL '".quote($this->dblink, $ttl)."' SECOND )");
 
@@ -4828,7 +4840,7 @@ class Wacko
 				//$this->log(7, 'Maintenance: cached sql results purged');
 			}
 
-			$this->query("UPDATE {$this->config['table_prefix']}config SET value = '".time()."' WHERE config_name = 'maint_last_cache'");
+			$this->set_config('maint_last_cache', time());
 		}
 	}
 
@@ -5404,13 +5416,13 @@ class Wacko
 		}
 
 		return
-			$this->query(
+			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."revision SET ".
 					"tag		= '".quote($this->dblink, $new_tag)."', ".
 					"supertag	= '".quote($this->dblink, $new_supertag)."' ".
 				"WHERE tag		= '".quote($this->dblink, $tag)."' ")
 			&&
-			$this->query(
+			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."page  SET ".
 					"tag		= '".quote($this->dblink, $new_tag)."', ".
 					"supertag	= '".quote($this->dblink, $new_supertag)."' ".
@@ -5425,7 +5437,7 @@ class Wacko
 			return false;
 		}
 
-		$this->query(
+		$this->sql_query(
 			"DELETE a.* ".
 			"FROM ".$this->config['table_prefix']."acl a ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ".
@@ -5465,7 +5477,7 @@ class Wacko
 		}
 
 		// delete page
-		$this->query(
+		$this->sql_query(
 			"DELETE FROM ".$this->config['table_prefix']."page ".
 			"WHERE tag = '".quote($this->dblink, $tag)."' ");
 
@@ -5480,7 +5492,7 @@ class Wacko
 				"ORDER BY created DESC ".
 				"LIMIT 1");
 
-			$this->query(
+			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}page SET ".
 					"comments	= '".(int)$this->count_comments($comment_on_id)."', ".
 					"commented	= '".quote($this->dblink, $comment['created'])."' ".
@@ -5498,7 +5510,7 @@ class Wacko
 			return false;
 		}
 
-		return $this->query(
+		return $this->sql_query(
 			"DELETE FROM {$this->config['table_prefix']}revision ".
 			"WHERE tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
@@ -5522,7 +5534,7 @@ class Wacko
 		}
 
 		// reset comments count
-		$this->query(
+		$this->sql_query(
 			"UPDATE {$this->config['table_prefix']}page SET ".
 				"comments	= '0', ".
 				"commented	= created ".
@@ -5538,7 +5550,7 @@ class Wacko
 			return false;
 		}
 
-		return $this->query(
+		return $this->sql_query(
 			"DELETE b.* ".
 			"FROM ".$this->config['table_prefix']."menu b ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ".
@@ -5553,7 +5565,7 @@ class Wacko
 			return false;
 		}
 
-		return $this->query(
+		return $this->sql_query(
 			"DELETE w.* ".
 			"FROM ".$this->config['table_prefix']."watch w ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ".
@@ -5574,7 +5586,7 @@ class Wacko
 
 		foreach ($ids as $id)
 		{
-			$this->query(
+			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}rating ".
 				"WHERE page_id = '{$id['page_id']}'");
 		}
@@ -5588,7 +5600,7 @@ class Wacko
 			return false;
 		}
 
-		return $this->query(
+		return $this->sql_query(
 			"DELETE l.* ".
 			"FROM ".$this->config['table_prefix']."link l ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ".
@@ -5603,7 +5615,7 @@ class Wacko
 			return false;
 		}
 
-		$this->query(
+		$this->sql_query(
 			"DELETE k.* ".
 			"FROM {$this->config['table_prefix']}category_page k ".
 				"LEFT JOIN ".$this->config['table_prefix']."page p ".
@@ -5620,7 +5632,7 @@ class Wacko
 			return false;
 		}
 
-		return $this->query(
+		return $this->sql_query(
 			"DELETE ".
 				"r.* ".
 			"FROM ".
@@ -5658,7 +5670,7 @@ class Wacko
 				@unlink($file_name);
 			}
 			// remove from DB
-			$this->query(
+			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}upload ".
 				"WHERE page_id = '".quote($this->dblink, $page['page_id'])."'");
 		}
@@ -5976,7 +5988,7 @@ class Wacko
 		$this->config['allow_rawhtml'] = $html;
 
 		// current timestamp set automatically
-		return $this->query(
+		return $this->sql_query(
 			"INSERT INTO {$this->config['table_prefix']}log SET ".
 				"level		= '".quote($this->dblink, $level)."', ".
 				"user_id	= '".quote($this->dblink, $user_id ? $user_id : 0 )."', ".
@@ -6078,7 +6090,7 @@ class Wacko
 					$values[] = "(".quote($this->dblink, (int)$id).", '".quote($this->dblink, $page_id)."')";
 				}
 
-				$this->query(
+				$this->sql_query(
 					"INSERT INTO {$this->config['table_prefix']}category_page (category_id, page_id) ".
 					"VALUES ".implode(', ', $values));
 			}

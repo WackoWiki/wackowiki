@@ -69,7 +69,7 @@ function admin_users(&$engine, &$module)
 			}
 			else
 			{
-				$engine->query(
+				$engine->sql_query(
 					"INSERT INTO {$engine->config['table_prefix']}user SET ".
 						"signup_time		= NOW(), ".
 						"email	= '".quote($engine->dblink, $_POST['email'])."', ".
@@ -98,7 +98,7 @@ function admin_users(&$engine, &$module)
 			}
 			else
 			{
-				$engine->query(
+				$engine->sql_query(
 					"UPDATE {$engine->config['table_prefix']}user SET ".
 					"user_name		= '".quote($engine->dblink, $_POST['newname'])."', ".
 					"email	= '".quote($engine->dblink, $_POST['newemail'])."', ".
@@ -107,7 +107,7 @@ function admin_users(&$engine, &$module)
 					"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."' ".
 					"LIMIT 1");
 
-				$engine->query(
+				$engine->sql_query(
 					"UPDATE {$engine->config['table_prefix']}user_setting SET ".
 					"lang		= '".quote($engine->dblink, $_POST['lang'])."' ".
 					"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."' ".
@@ -121,10 +121,10 @@ function admin_users(&$engine, &$module)
 		// delete user
 		else if (isset($_POST['delete']) && isset($_POST['user_id']))
 		{
-			$engine->query(
+			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}user ".
 				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
-			$engine->query(
+			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}group_member ".
 				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
 

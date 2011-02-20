@@ -71,7 +71,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			}
 			else
 			{
-				$this->query(
+				$this->sql_query(
 					"INSERT INTO {$this->config['table_prefix']}category SET ".
 						( $_POST['id'] && $_POST['group'] == 1
 							? "parent = '".quote($this->dblink, (int)( $word['parent'] != 0 ? $word['parent'] : $word['category_id'] ))."', "
@@ -101,7 +101,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			}
 			else
 			{
-				$this->query(
+				$this->sql_query(
 					"UPDATE {$this->config['table_prefix']}category ".
 					"SET category = '".quote($this->dblink, $_POST['newname'])."' ".
 					"WHERE category_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
@@ -116,7 +116,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			// in or out?
 			if ($_POST['parent'] == 0)
 			{
-				$this->query(
+				$this->sql_query(
 					"UPDATE {$this->config['table_prefix']}category ".
 					"SET parent = 0 ".
 					"WHERE category_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
@@ -133,11 +133,11 @@ if ($this->user_is_owner() || $this->is_admin())
 
 				if ($parent['parent'] == 0)
 				{
-					$this->query(
+					$this->sql_query(
 						"UPDATE {$this->config['table_prefix']}category ".
 						"SET parent = '".quote($this->dblink, $_POST['parent'])."' ".
 						"WHERE category_id = '".quote($this->dblink, $_POST['id'])."' LIMIT 1");
-					$this->query(
+					$this->sql_query(
 						"UPDATE {$this->config['table_prefix']}category ".
 						"SET parent = 0 ".
 						"WHERE parent = '".quote($this->dblink, $_POST['id'])."'");
@@ -153,13 +153,13 @@ if ($this->user_is_owner() || $this->is_admin())
 		// delete item
 		else if (isset($_POST['delete']) && isset($_POST['id']))
 		{
-			$this->query(
+			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}category ".
 				"WHERE category_id = '".quote($this->dblink, $_POST['id'])."'");
-			$this->query(
+			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}category_page ".
 				"WHERE category_id = '".quote($this->dblink, $_POST['id'])."'");
-			$this->query(
+			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}category ".
 				"SET parent = 0 ".
 				"WHERE parent = '".quote($this->dblink, $_POST['id'])."'");

@@ -32,7 +32,7 @@ if (isset($_GET['confirm']))
 		"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."' ".
 		"LIMIT 1"))
 	{
-		$this->query(
+		$this->sql_query(
 			"UPDATE ".$this->config['user_table']." ".
 			"SET email_confirm = '' ".
 			"WHERE email_confirm = '".quote($this->dblink, $_GET['confirm'])."'");
@@ -177,7 +177,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 				$password_encrypted	= hash('sha256', $user_name.$salt.$_POST['password']);
 
 				// INSERT user
-				$this->query(
+				$this->sql_query(
 					"INSERT INTO ".$this->config['user_table']." ".
 					"SET ".
 						"signup_time	= NOW(), ".
@@ -196,7 +196,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 					"LIMIT 1");
 
 				// INSERT user settings
-				$this->query(
+				$this->sql_query(
 					"INSERT INTO ".$this->config['table_prefix']."user_setting ".
 					"SET ".
 						"user_id		= '".quote($this->dblink, $_user_id['user_id'])."', ".

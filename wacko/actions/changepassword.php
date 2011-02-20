@@ -76,7 +76,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 			}
 			else
 			{
-				$this->query(
+				$this->sql_query(
 					"UPDATE ".$this->config['user_table']." SET ".
 						"password			= '".quote($this->dblink, hash('sha256', $newpassword))."', ".
 						"change_password	= '' ".
@@ -210,7 +210,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 		else
 		{
 			// store new password
-			$this->query(
+			$this->sql_query(
 				"UPDATE ".$this->config['user_table']." ".
 				"SET password = '".quote($this->dblink, hash('sha256', $newpassword))."' ".
 				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
@@ -324,7 +324,7 @@ else
 							"\n".$this->config['base_url'];
 
 				// update table
-				$this->query(
+				$this->sql_query(
 					"UPDATE ".$this->config['user_table']." ".
 					"SET change_password = '".quote($this->dblink, $code)."' ".
 					"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".

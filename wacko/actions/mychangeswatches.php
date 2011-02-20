@@ -31,7 +31,7 @@ if ($user_id = $this->get_user_id())
 	if ((isset($_GET['reset']) && $_GET['reset'] == 1) && $pages == true)
 	{
 		foreach ($pages as $page)
-			$this->query(
+			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}watch ".
 				"SET watch_time = NOW() ".
 				"WHERE page_id = '".quote($this->dblink, $page['page_id'])."' ".

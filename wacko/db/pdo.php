@@ -23,9 +23,9 @@ function quote($dblink, $string)
 					));
 }
 
-function query($dblink, $query, $debug)
+function sql_query($dblink, $query, $debug)
 {
-	$result = $dblink->query($query);
+	$result = $dblink->sql_query($query);
 
 	if($result)
 	{
@@ -92,7 +92,7 @@ function connect($host, $user, $password, $db, $collation = false, $driver, $por
 
 	if ($collation)
 	{
-		$dblink->query("SET NAMES '".$collation."'");
+		$dblink->sql_query("SET NAMES '".$collation."'");
 	}
 
 	return $dblink;

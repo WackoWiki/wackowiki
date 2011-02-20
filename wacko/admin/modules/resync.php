@@ -38,7 +38,7 @@ function admin_resync(&$engine, &$module)
 
 			foreach ($users as $user)
 			{
-				$engine->query(
+				$engine->sql_query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_pages = ".(int)$user['n']." ".
 					"WHERE user_id = '".quote($engine->dblink, $user['owner_id'])."' ".
@@ -54,7 +54,7 @@ function admin_resync(&$engine, &$module)
 
 			foreach ($users as $user)
 			{
-				$engine->query(
+				$engine->sql_query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_comments = ".(int)$user['n']." ".
 					"WHERE user_id = '".quote($engine->dblink, $user['user_id'])."' ".
@@ -70,7 +70,7 @@ function admin_resync(&$engine, &$module)
 
 			foreach ($users as $user)
 			{
-				$engine->query(
+				$engine->sql_query(
 					"UPDATE {$engine->config['user_table']} ".
 					"SET total_revisions = ".(int)$user['n']." ".
 					"WHERE user_id = '".quote($engine->dblink, $user['user_id'])."' ".
@@ -118,7 +118,7 @@ function admin_resync(&$engine, &$module)
 			{
 				// truncate table
 				$i = 0;
-				$engine->query("DELETE FROM {$engine->config['table_prefix']}link");
+				$engine->sql_query("DELETE FROM {$engine->config['table_prefix']}link");
 			}
 
 			$engine->set_user_setting('dont_redirect', '1', 1);
@@ -144,7 +144,7 @@ function admin_resync(&$engine, &$module)
 						}
 
 						// store to DB
-						$engine->query(
+						$engine->sql_query(
 							"UPDATE {$engine->config['table_prefix']}page SET ".
 								"body_r		= '".quote($engine->dblink, $page['body_r'])."', ".
 								"body_toc	= '".quote($engine->dblink, $page['body_toc'])."' ".

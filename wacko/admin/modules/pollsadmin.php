@@ -65,7 +65,7 @@ function admin_pollsadmin(&$engine, &$module)
 		// stop current survey
 		else if (isset($_POST['stop']) && $_POST['id'])
 		{
-			$engine->query(
+			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}poll ".
 				"SET end = NOW() ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0 ".
@@ -76,11 +76,11 @@ function admin_pollsadmin(&$engine, &$module)
 		// reset current survey
 		else if (isset($_POST['reset']) && $_POST['id'])
 		{
-			$engine->query(	// reset start date
+			$engine->sql_query(	// reset start date
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
 					"start	= NOW() ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0");
-			$engine->query(	// reset votes and update servey id
+			$engine->sql_query(	// reset votes and update servey id
 				"UPDATE {$engine->config['table_prefix']}poll SET ".
 					"poll_id		= ".($polls_obj->get_last_poll_id() + 1).", ".
 					"votes	= 0 ".
@@ -92,7 +92,7 @@ function admin_pollsadmin(&$engine, &$module)
 		// activate new survey
 		else if (isset($_POST['activate']) && $_POST['id'])
 		{
-			$engine->query(
+			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}poll ".
 				"SET start = NOW() ".
 				"WHERE poll_id = ".quote($engine->dblink, (int)$_POST['id'])." AND v_id = 0");

@@ -54,7 +54,7 @@ function admin_dboptimize(&$engine, &$module)
 		$sql = implode(",\n\t", $elements);
 		$sql = "OPTIMIZE TABLE $sql";
 
-		$engine->query($sql);
+		$engine->sql_query($sql);
 
 		$engine->log(1, 'Optimize database');
 ?>
