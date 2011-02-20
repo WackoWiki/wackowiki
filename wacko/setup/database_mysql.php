@@ -56,7 +56,7 @@ $table_category_page = "CREATE TABLE {$pref}category_page (".
 $table_config = "CREATE TABLE {$pref}config (".
 					"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"config_name VARCHAR(100) NOT NULL DEFAULT '',".
-					"value TEXT,".
+					"config_value TEXT,".
 					// "updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,".
 					"PRIMARY KEY (config_id),".
 					"UNIQUE KEY idx_config_name (config_name)".

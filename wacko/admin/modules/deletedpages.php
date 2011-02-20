@@ -29,7 +29,7 @@ function admin_deletedpages(&$engine, &$module)
 	// clear specific page revisions
 	if (isset($_GET['remove']))
 	{
-		$engine->query(
+		$engine->sql_query(
 			"DELETE FROM {$engine->config['table_prefix']}revision ".
 			"WHERE tag = '".quote($engine->dblink, $_GET['remove'])."'");
 	}

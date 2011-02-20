@@ -132,7 +132,7 @@ if ($this->has_access('read'))
 		// count page hit (we don't count for page owner)
 		if ($this->get_user_id() != $this->page['owner_id'])
 		{
-			$this->query(
+			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."page ".
 				"SET hits = hits + 1 ".
 				"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."'");
@@ -157,7 +157,7 @@ if ($this->has_access('read'))
 			// store to DB
 			if ($this->page['latest'] != 0)
 			{
-				$this->query(
+				$this->sql_query(
 					"UPDATE ".$this->config['table_prefix']."page SET ".
 						"body_r		= '".quote($this->dblink, $this->page['body_r'])."', ".
 						"body_toc	= '".quote($this->dblink, $this->page['body_toc'])."' ".
@@ -360,7 +360,7 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 				$noid_protect	= $this->get_user_setting('noid_protect');
 
 				// clear new comments for watched page
-				if ($user && $comments && !$noid_protect) $this->query(
+				if ($user && $comments && !$noid_protect) $this->sql_query(
 					"UPDATE {$this->config['table_prefix']}watch ".
 					"SET comment_id = '0' ".
 					"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".

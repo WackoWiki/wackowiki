@@ -32,7 +32,7 @@ if ($this->is_admin())
 			}
 		}
 		closedir($handle);
-		$this->query("DELETE FROM ".$this->config['table_prefix']."cache");
+		$this->sql_query("DELETE FROM ".$this->config['table_prefix']."cache");
 
 		// queries
 		$handle = opendir(rtrim($this->config['cache_dir'].CACHE_SQL_DIR, "/"));

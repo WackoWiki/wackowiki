@@ -40,7 +40,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 		}
 
 		// update page metadata
-		$this->query(
+		$this->sql_query(
 			"UPDATE ".$this->config['table_prefix']."page SET ".
 				(isset($_POST['extended'])
 				?	"hide_comments		= '".quote($this->dblink, (int)$_POST['hide_comments'])."', ".

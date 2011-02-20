@@ -137,7 +137,7 @@ else
 						$password	= hash('sha256', $_POST['user_name'].$salt.$_POST['password']);
 
 						// update database with the sha256 password for future logins
-						$this->query(
+						$this->sql_query(
 							"UPDATE ".$this->config['table_prefix']."user SET ".
 								"password	= '".$password."', ".
 								"salt		= '".$salt."' ".

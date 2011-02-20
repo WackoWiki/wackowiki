@@ -503,7 +503,7 @@ function PutTable(&$engine, $pack)
 	$t = 0;
 	foreach ($sql as $instruction)
 	{
-		$engine->query($instruction);
+		$engine->sql_query($instruction);
 		$t++;
 	}
 
@@ -552,7 +552,7 @@ function PutData(&$engine, $pack, $table, $mode)
 			}
 
 			// run and count sql query
-			$engine->query("$mode INTO $table VALUES ( ".implode(', ', $row)." )");
+			$engine->sql_query("$mode INTO $table VALUES ( ".implode(', ', $row)." )");
 			$t++;	// rows processed
 		}
 		// set read pointer to the beginning of the next slack row

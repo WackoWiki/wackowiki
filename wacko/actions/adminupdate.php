@@ -208,7 +208,7 @@ if (!function_exists('convert_into_menu_table'))
 
 				if (isset($page_id))
 				{
-					$wacko->query(
+					$wacko->sql_query(
 						"INSERT INTO ".$wacko->config['table_prefix']."menu SET ".
 						"user_id			= '".quote($wacko->dblink, $user_id)."', ".
 						"page_id			= '".quote($wacko->dblink, $page_id)."', ".
@@ -271,7 +271,7 @@ if ($this->is_admin())
 				"send_watchmail		= '".quote($this->dblink, isset($_user['options']['send_watchmail']) ? $_user['options']['send_watchmail'] : '')."', ".
 				"show_files			= '".quote($this->dblink, isset($_user['options']['show_files']) ? $_user['options']['show_files'] : '')."'";
 
-			$this->query($sql);
+			$this->sql_query($sql);
 
 			// bookmarks
 			convert_into_menu_table($this, $_user['bookmarks'], $_user['user_id']);
@@ -292,16 +292,16 @@ if ($this->is_admin())
 		$sql_drop_9 = "ALTER TABLE ".$this->config['table_prefix']."user DROP motto";
 		$sql_drop_10 = "ALTER TABLE ".$this->config['table_prefix']."user DROP revisions_count";
 
-		$this->query($sql_drop_1);
-		$this->query($sql_drop_2);
-		$this->query($sql_drop_3);
-		$this->query($sql_drop_4);
-		$this->query($sql_drop_5);
-		$this->query($sql_drop_6);
-		$this->query($sql_drop_7);
-		$this->query($sql_drop_8);
-		$this->query($sql_drop_9);
-		$this->query($sql_drop_10);
+		$this->sql_query($sql_drop_1);
+		$this->sql_query($sql_drop_2);
+		$this->sql_query($sql_drop_3);
+		$this->sql_query($sql_drop_4);
+		$this->sql_query($sql_drop_5);
+		$this->sql_query($sql_drop_6);
+		$this->sql_query($sql_drop_7);
+		$this->sql_query($sql_drop_8);
+		$this->sql_query($sql_drop_9);
+		$this->sql_query($sql_drop_10);
 
 		echo "<br />DROPed obsolete fields in user table after successful data migration.";
 	}
@@ -335,7 +335,7 @@ if ($this->is_admin())
 
 			foreach ($users as $user)
 			{
-				$this->query(
+				$this->sql_query(
 					"UPDATE {$this->config['user_table']} ".
 					"SET total_pages = ".(int)$user['n']." ".
 					"WHERE user_id = '".quote($this->dblink, $user['owner_id'])."' ".
@@ -351,7 +351,7 @@ if ($this->is_admin())
 
 			foreach ($users as $user)
 			{
-				$this->query(
+				$this->sql_query(
 					"UPDATE {$this->config['user_table']} ".
 					"SET total_comments = ".(int)$user['n']." ".
 					"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
@@ -367,7 +367,7 @@ if ($this->is_admin())
 
 			foreach ($users as $user)
 			{
-				$this->query(
+				$this->sql_query(
 					"UPDATE {$this->config['user_table']} ".
 					"SET total_revisions = ".(int)$user['n']." ".
 					"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
@@ -593,7 +593,7 @@ if ($this->is_admin())
 					(object_id, object_type_id, object_right_id)
 					VALUES ('{$_acl['page_id']}', '{$object_type_id}', '{$object_right_id}')";
 
-			$this->query($sql);
+			$this->sql_query($sql);
 
 			// get new created $acl_id
 			$acl_id = $this->load_single(
@@ -729,7 +729,7 @@ if ($this->is_admin())
 							(acl_id, grant_type_id, grant_id, deny)
 							VALUES ('{$acl_id}', '{$grant_type_id}', '{$grant_id}', '{$deny}')";
 
-					$this->query($sql);
+					$this->sql_query($sql);
 				}
 			}
 		}

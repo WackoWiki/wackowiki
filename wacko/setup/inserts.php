@@ -128,7 +128,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 		default:
 			$page_exists = false;
 
-			if($result = @$dblink_global->query($page_select))
+			if($result = @$dblink_global->sql_query($page_select))
 			{
 				if ($result->fetchColumn() > 0)
 				{
@@ -143,42 +143,42 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 			{
 				if($critical)
 				{
-					@$dblink_global->query($page_insert);
+					@$dblink_global->sql_query($page_insert);
 					$error = $dblink_global->errorInfo();
 					if($error[0] != "00000")
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPage'])." - ".($error[2]));
 					}
 
-					@$dblink_global->query($perm_read_insert);
+					@$dblink_global->sql_query($perm_read_insert);
 					$error = $dblink_global->errorInfo();
 					if($error[0] != "00000")
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageReadPermission'])." - ".($error[2]));
 					}
 
-					@$dblink_global->query($perm_write_insert);
+					@$dblink_global->sql_query($perm_write_insert);
 					$error = $dblink_global->errorInfo();
 					if($error[0] != "00000")
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageWritePermission'])." - ".($error[2]));
 					}
 
-					@$dblink_global->query($perm_comment_insert);
+					@$dblink_global->sql_query($perm_comment_insert);
 					$error = $dblink_global->errorInfo();
 					if($error[0] != "00000")
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCommentPermission'])." - ".($error[2]));
 					}
 
-					@$dblink_global->query($perm_create_insert);
+					@$dblink_global->sql_query($perm_create_insert);
 					$error = $dblink_global->errorInfo();
 					if($error[0] != "00000")
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCreatePermission'])." - ".($error[2]));
 					}
 
-					@$dblink_global->query($perm_upload_insert);
+					@$dblink_global->sql_query($perm_upload_insert);
 					$error = $dblink_global->errorInfo();
 					if($error[0] != "00000")
 					{
@@ -187,7 +187,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 
 					if($is_menu)
 					{
-						@$dblink_global->query($default_bookmark);
+						@$dblink_global->sql_query($default_bookmark);
 						$error = $dblink_global->errorInfo();
 						if($error[0] != "00000")
 						{
@@ -198,17 +198,17 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 				else
 				{
 					// page
-					@$dblink_global->query($page_insert);
+					@$dblink_global->sql_query($page_insert);
 					// rights
-					@$dblink_global->query($perm_read_insert);
-					@$dblink_global->query($perm_write_insert);
-					@$dblink_global->query($perm_comment_insert);
-					@$dblink_global->query($perm_create_insert);
-					@$dblink_global->query($perm_upload_insert);
+					@$dblink_global->sql_query($perm_read_insert);
+					@$dblink_global->sql_query($perm_write_insert);
+					@$dblink_global->sql_query($perm_comment_insert);
+					@$dblink_global->sql_query($perm_create_insert);
+					@$dblink_global->sql_query($perm_upload_insert);
 
 					if($is_menu)
 					{
-						@$dblink_global->query($default_bookmark);
+						@$dblink_global->sql_query($default_bookmark);
 					}
 				}
 			}

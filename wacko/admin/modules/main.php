@@ -61,7 +61,7 @@ function admin_lock(&$engine, &$module)
 			}
 		}
 		closedir($handle);
-		$engine->query("DELETE FROM {$engine->config['table_prefix']}cache");
+		$engine->sql_query("DELETE FROM {$engine->config['table_prefix']}cache");
 
 		// queries
 		$handle = opendir(rtrim($engine->config['cache_dir'].CACHE_SQL_DIR, '/'));

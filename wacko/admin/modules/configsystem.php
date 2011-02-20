@@ -58,8 +58,8 @@ function admin_configsystem(&$engine, &$module)
 
 		foreach($config as $key => $value)
 		{
-			$engine->query(
-				"UPDATE {$engine->config['table_prefix']}config SET value = '$value' WHERE config_name = '$key'");
+			$engine->sql_query(
+				"UPDATE {$engine->config['table_prefix']}config SET config_value = '$value' WHERE config_name = '$key'");
 		}
 		$engine->log(1, 'Updated config parameters');
 		$engine->redirect(rawurldecode($engine->href()));

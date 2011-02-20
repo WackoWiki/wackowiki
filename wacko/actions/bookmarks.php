@@ -88,7 +88,7 @@ if (isset($_POST['_user_bookmarks']))
 		// save
 		foreach( $data as $item )
 		{
-			$this->query(
+			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."menu SET ".
 					"menu_position	= '".quote($this->dblink, $item['menu_position'])."', ".
 					"menu_title		= '".quote($this->dblink, substr(trim($_POST['title_'.$item['menu_id']]),0,250))."' ".
@@ -126,7 +126,7 @@ if (isset($_POST['_user_bookmarks']))
 
 						$_bookmark_count = count($_menu_position);
 
-						$this->query(
+						$this->sql_query(
 							"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 							"user_id			= '".quote($this->dblink, $_user_id)."', ".
 							"page_id			= '".quote($this->dblink, $_page_id)."', ".
@@ -180,7 +180,7 @@ if (isset($_POST['_user_bookmarks']))
 			}
 			if ($deletion != '')
 			{
-				$this->query(
+				$this->sql_query(
 					"DELETE FROM ".$this->config['table_prefix']."menu ".
 					"WHERE menu_id IN (".$deletion.")");
 			}
@@ -209,7 +209,7 @@ if ($_user_id)
 
 		foreach($_bookmarks as $_bookmark)
 		{
-			echo "<tr class=\"lined\">\n
+			echo "<tr class=\"lined\">
 			<td class=\"\">
 			<input name=\"pos_".$_bookmark['menu_id']."\" type=\"text\" size=\"2\" value=\"".$_bookmark['menu_position']."\" />
 			</td><td>

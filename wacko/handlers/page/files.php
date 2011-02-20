@@ -86,7 +86,7 @@ if ($filepath)
 	if (!isset($isimage))
 	{
 		// count file download
-		$this->query(
+		$this->sql_query(
 			"UPDATE {$this->config['table_prefix']}upload ".
 			"SET hits = '".quote($this->dblink, $what[0]['hits'] + 1)."' ".
 			"WHERE upload_id = '".quote($this->dblink, $what[0]['upload_id'])."'");

@@ -140,14 +140,14 @@ class Init
 	// DEFINE WACKO SETTINGS
 	// First must be called without parameters to initialize default
 	// settings. Additional settings can be added afterwards.
-	function settings($name = '', $value = '', $override = 0)
+	function settings($config_name = '', $config_value = '', $override = 0)
 	{
 		// specific definition
-		if ($name == true)
+		if ($config_name == true)
 		{
-			if (!isset($this->config[$name]) || $override == 1)
+			if (!isset($this->config[$config_name]) || $override == 1)
 			{
-				return $this->config[$name] = $value;
+				return $this->config[$config_name] = $config_value;
 			}
 			else
 			{
@@ -231,14 +231,14 @@ class Init
 				// connecting to db
 				$this->dbal();
 
-				// retrieving configuration data
-				$wacko_db_query = "SELECT config_name, value FROM {$this->config['table_prefix']}config";
+				// retrieving configuration data from db
+				$wacko_db_query = "SELECT config_name, config_value FROM {$this->config['table_prefix']}config";
 
 				if ($result = query($this->dblink, $wacko_db_query , 0))
 				{
 					while ($row = fetch_assoc($result))
 					{
-						$this->config[$row['config_name']] = $row['value'];
+						$this->config[$row['config_name']] = $row['config_value'];
 					}
 
 					free_result($result);
@@ -248,7 +248,7 @@ class Init
 					die("Error loading WackoWiki config data: database `config` table is empty.");
 				}
 
-				// retrieving usergroups data
+				// retrieving usergroups data from db
 				$wacko_db_query = "SELECT
 									g.group_name,
 									u.user_name

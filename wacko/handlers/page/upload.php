@@ -139,7 +139,7 @@ if ($registered
 					$what[0]['user_id'] == $this->get_user_id()))
 				{
 					// 2. remove from DB
-					$this->query(
+					$this->sql_query(
 						"DELETE FROM ".$this->config['table_prefix']."upload ".
 						"WHERE upload_id = '". quote($this->dblink, $what[0]['upload_id'])."'" );
 
@@ -310,7 +310,7 @@ if ($registered
 							$description = htmlentities($description, ENT_COMPAT, $this->get_charset());
 
 							// 5. insert line into DB
-							$this->query(
+							$this->sql_query(
 								"INSERT INTO ".$this->config['table_prefix']."upload SET ".
 									"page_id		= '".quote($this->dblink, $is_global ? "0" : $this->page['page_id'])."', ".
 									"user_id		= '".quote($this->dblink, $user['user_id'])."',".

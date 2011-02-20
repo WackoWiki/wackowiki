@@ -163,7 +163,7 @@ class Polls
 		if ($plural != 1) $plural = 0;
 
 		// submitting title
-		$this->engine->query(
+		$this->engine->sql_query(
 			"INSERT INTO {$this->engine->config['table_prefix']}poll SET ".
 				"poll_id	= $id, ".
 				"text		= '".quote($this->engine->dblink, rtrim($topic, '.'))."', ".
@@ -176,7 +176,7 @@ class Polls
 		{
 			$v_id	+= 1;
 			$v_text	= quote($this->engine->dblink, $v_text);
-			$this->engine->query(
+			$this->engine->sql_query(
 				"INSERT INTO {$this->engine->config['table_prefix']}poll SET ".
 					"poll_id	= $id, ".
 					"v_id		= $v_id, ".
@@ -188,7 +188,7 @@ class Polls
 	// remove a given poll from the datebase
 	function remove_poll($id)
 	{
-		return $this->engine->query(
+		return $this->engine->sql_query(
 			"DELETE FROM {$this->engine->config['table_prefix']}poll ".
 			"WHERE poll_id = $id");
 	}
@@ -352,7 +352,7 @@ class Polls
 				if ($var['v_id'] == $vote_id)
 				{
 					$new = $var['votes'] + 1;
-					$this->engine->query(
+					$this->engine->sql_query(
 						"UPDATE {$this->engine->config['table_prefix']}poll ".
 						"SET votes = '".quote($this->engine->dblink, $new)."' ".
 						"WHERE poll_id = '".quote($this->engine->dblink, $id)."' ".
@@ -364,7 +364,7 @@ class Polls
 
 		$new = $header['votes'] + 1; //$total;
 
-		$this->engine->query(
+		$this->engine->sql_query(
 			"UPDATE {$this->engine->config['table_prefix']}poll ".
 			"SET votes = '".quote($this->engine->dblink, $new)."' ".
 			"WHERE poll_id = '".quote($this->engine->dblink, $id)."' ".

@@ -150,7 +150,7 @@ class Cache
 
 		if ($this->wacko)
 		{
-			$this->wacko->query(
+			$this->wacko->sql_query(
 				"INSERT INTO ".$this->wacko->config['table_prefix']."cache SET ".
 				"name  ='".quote($this->wacko->dblink, hash('md5', $page))."', ".
 				"method='".quote($this->wacko->dblink, $method)."', ".
@@ -194,7 +194,7 @@ class Cache
 				}
 			}
 
-			$this->wacko->query(
+			$this->wacko->sql_query(
 				"DELETE FROM ".$this->wacko->config['table_prefix']."cache ".
 				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
 
