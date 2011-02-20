@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // status: beta
 //
-// for testing and improvement - thought for upgrade routine of the installer
+// for testing and improvement - thought as upgrade routine for the installer
 
 echo "<h2>Upgrade Utilities -> Migration Routines for R4.3 to R4.4.rc1 Upgrade</h2>";
 echo 'Recent Wacko version '.$this->format('**!!(green)'.$this->config['wacko_version'].'!!**', 'wacko');
@@ -69,6 +69,7 @@ if ($this->is_admin())
 				closedir($handle);
 			}
 		}
+
 		echo "</table>";
 		echo "<br />Files renamed";
 	}
@@ -80,7 +81,7 @@ if ($this->is_admin())
 
 if ($this->is_admin())
 {
-	echo "<h3>1. Move global files from \\files to \\files\global folder:</h3>";
+	echo "<h3>2. Move global files from \\files to \\files\global folder:</h3>";
 
 	if (!isset($_POST['move']))
 	{
@@ -130,6 +131,7 @@ if ($this->is_admin())
 				closedir($handle);
 			}
 		}
+
 		echo "</table>";
 		echo "<br />Files moved";
 	}
@@ -229,7 +231,7 @@ if (!function_exists('convert_into_menu_table'))
 
 if ($this->is_admin())
 {
-	echo "<h3>2. Migrates user options to user_setting table:</h3>";
+	echo "<h3>3. Migrates user options to user_setting table:</h3>";
 
 	if (!isset($_POST['migrate_user_otions']))
 	{
@@ -317,7 +319,7 @@ if ($this->is_admin())
 
 if ($this->is_admin())
 {
-	echo "<h3>3. Update User statistics:</h3>";
+	echo "<h3>4. Update User statistics:</h3>";
 
 	if (!isset($_POST['build_user_stats']))
 	{
@@ -511,7 +513,7 @@ if ($this->is_admin())
 		}
 	}
 
-	echo "<h3>4. Moves users pages into user name space: ".$this->config['users_page'].'/'."</h3>";
+	echo "<h3>5. Moves users pages into user name space: ".$this->config['users_page'].'/'."</h3>";
 
 	if (!isset($_POST['userspace']))
 	{
@@ -545,6 +547,65 @@ if ($this->is_admin())
 }
 
 ########################################################
+##            Set page title based on tag             ##
+########################################################
+
+if ($this->is_admin())
+{
+	echo "<h3>6. Set page title based on tag if empty:</h3>";
+
+	if (!isset($_POST['set_title']))
+	{
+		echo $this->form_open();
+		?>
+		<input type="submit" name="set_title"  value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
+		<?php
+		echo $this->form_close();
+	}
+	// move global files from \\files to \\files\global folder
+	else if (isset($_POST['set_title']))
+	{
+		$pages = $this->load_all(
+			"SELECT page_id, tag, lang ".
+			"FROM {$this->config['table_prefix']}page ".
+			"WHERE title = ''");
+
+		if (!empty($pages))
+		{
+			echo "<table><tr><th>page_id</th><th>tag</th><th>new title</th></tr>";
+
+			foreach ($pages as $page)
+			{
+				$this->load_translation($page['lang']);
+				$this->set_translation ($page['lang']);
+				$this->set_page_lang($page['lang']);
+				// tag to title
+				$title = $this->add_spaces_title(trim(substr($page['tag'], strrpos($page['tag'], '/')), '/'));
+
+				$this->sql_query(
+					"UPDATE {$this->config['table_prefix']}page ".
+					"SET title = '".quote($this->dblink, $title)."' ".
+					"WHERE page_id = '".quote($this->dblink, $page['page_id'])."' ".
+					"LIMIT 1");
+
+				echo "<tr><td>".$page['page_id']."</td><td>".$page['tag']."</td><td>".$title."</td></tr>";
+			}
+
+			$this->load_translation($this->user_lang);
+			$this->set_translation($this->user_lang);
+			$this->set_language($this->user_lang);
+
+			echo "</table>";
+			echo "<br />Titles set";
+		}
+		else
+		{
+			echo "No empty title field found.";
+		}
+	}
+}
+
+########################################################
 ##            MIGRATE ACLs to new scheme              ##
 ########################################################
 
@@ -556,7 +617,7 @@ if ($this->is_admin())
 {
 	if (!isset($_POST['migrate_acls']))
 	{
-		echo "<h3>3. Migrates acls to new scheme:</h3>";
+		echo "<h3>7. Migrates acls to new scheme:</h3>";
 		echo $this->form_open();
 		?>
 		<input type="submit" name="migrate_acls" value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
