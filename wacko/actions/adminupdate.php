@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 //
 // for testing and improvement - thought for upgrade routine of the installer
 
-echo "<h2>Upgrade Utilities -> Migration Routines for R4.3.rc1 to R4.4.rc1 Upgrade</h2>";
+echo "<h2>Upgrade Utilities -> Migration Routines for R4.3 to R4.4.rc1 Upgrade</h2>";
 echo 'Recent Wacko version '.$this->format('**!!(green)'.$this->config['wacko_version'].'!!**', 'wacko');
 
 ########################################################
@@ -40,7 +40,7 @@ if ($this->is_admin())
 			"WHERE u.page_id != '0'");
 
 		$dir = $this->config['upload_path_per_page']."/";
-		echo "<table><th>old name</th><th></th><th>new name</th>";
+		echo "<table><tr><th>old name</th><th></th><th>new name</th></tr>";
 
 		foreach ($files as $file)
 		{
@@ -56,15 +56,17 @@ if ($this->is_admin())
 					if($file != '.' && $file != '..')
 					{
 						$pos = stristr($file, $old_name);
+
 						if ($pos !== false)
 						{
 							rename($dir.$file, $dir.$new_name.substr($file, strlen($old_name)));
+
+							echo "<tr><td>".$old_name."".$file_name."</td><td> </td><td>".$new_name."".$file_name."</td></tr>";
 						}
 					}
 				}
-				closedir($handle);
 
-				echo "<tr><td>".$old_name."".$file_name."</td><td> </td><td>".$new_name."".$file_name."</td></tr>";
+				closedir($handle);
 			}
 		}
 		echo "</table>";
@@ -98,32 +100,34 @@ if ($this->is_admin())
 			"FROM {$this->config['table_prefix']}upload ".
 			"WHERE page_id = '0'");
 
-		$dir = $this->config['upload_path']."/";
-		echo "<table><th>old name</th><th></th><th>new name</th>";
+		echo "<table><tr><th>old dir</th><th></th><th>new dir</th></tr>";
 
 		foreach ($files as $file)
 		{
 			// move from /file/file_name to /file/global/file_name
-			$old_dir	= '@'.str_replace('/', '@', $file['supertag']).'@';
-			$new_name	= '@'.$file['page_id'].'@';
-			$file_name	= $file['file_name'];
+			$new_dir		= $this->config['upload_path']."/";
+			$new_subfolder	= 'global';
+			$old_dir		= substr($new_dir, 0, -(strlen($new_subfolder) + 1));
+			$file_name		= $file['file_name'];
 
-			if($handle = opendir($dir))
+			if($handle = opendir($old_dir))
 			{
 				while(false !== ($file = readdir($handle)))
 				{
 					if($file != '.' && $file != '..')
 					{
-						$pos = stristr($file, $old_name);
+						$pos = stristr($file, $file_name);
+
 						if ($pos !== false)
 						{
-							rename($dir.$file, $dir.$new_name.substr($file, strlen($old_name)));
+							rename($old_dir.$file, $new_dir.$file);
+
+							echo "<tr><td>".$old_dir.$file_name."</td><td> </td><td>".$new_dir.$file_name."</td></tr>";
 						}
 					}
 				}
-				closedir($handle);
 
-				echo "<tr><td>".$old_name."".$file_name."</td><td> </td><td>".$new_name."".$file_name."</td></tr>";
+				closedir($handle);
 			}
 		}
 		echo "</table>";
