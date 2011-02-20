@@ -234,7 +234,7 @@ class Init
 				// retrieving configuration data from db
 				$wacko_db_query = "SELECT config_name, config_value FROM {$this->config['table_prefix']}config";
 
-				if ($result = query($this->dblink, $wacko_db_query , 0))
+				if ($result = sql_query($this->dblink, $wacko_db_query , 0))
 				{
 					while ($row = fetch_assoc($result))
 					{
@@ -259,7 +259,7 @@ class Init
 
 				$groups_array = array();
 
-				if ($result = query($this->dblink, $wacko_db_query, 0))
+				if ($result = sql_query($this->dblink, $wacko_db_query, 0))
 				{
 					while ($row = fetch_assoc($result))
 					{

@@ -93,7 +93,7 @@ class Wacko
 			$start = $this->get_micro_time();
 		}
 
-		$result = query($this->dblink, $query, $this->config['debug']);
+		$result = sql_query($this->dblink, $query, $this->config['debug']);
 
 		if ($this->config['debug'] >= 2)
 		{
