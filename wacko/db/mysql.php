@@ -13,7 +13,7 @@ function quote($dblink, $string)
 }
 
 //All DBALs (mysql excluded) must replace LIMIT with some other instruction.
-function query($dblink, $query, $debug)
+function sql_query($dblink, $query, $debug)
 {
 	$result = mysql_query($query, $dblink);
 

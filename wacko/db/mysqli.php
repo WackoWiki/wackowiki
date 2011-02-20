@@ -11,7 +11,7 @@ function quote($dblink, $string)
 		return mysqli_real_escape_string($dblink, $string);
 }
 
-function query($dblink, $query, $debug)
+function sql_query($dblink, $query, $debug)
 {
 	$result = mysqli_query($dblink, $query);
 
