@@ -56,7 +56,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 	{
 		// passing vars from user input
 		$user_name		= trim($_POST['user_name']);
-		$real_name		= trim($_POST['real_name']);
+		#$real_name		= trim($_POST['real_name']);
 		$email			= trim($_POST['email']);
 		$password		= $_POST['password'];
 		$confpassword	= $_POST['confpassword'];
@@ -109,7 +109,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 				}
 			}
 		}
-		// End Comment Captcha
+		// End Registration Captcha
 
 		if (($word_ok) || $this->is_admin() || !$this->config['captcha_registration'])
 		{
