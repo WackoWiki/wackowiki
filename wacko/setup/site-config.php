@@ -1,39 +1,39 @@
 <script type="text/javascript">
-            <!--
-               function check()
-                  {
-                     var f = document.forms.form1;
-                     var re = new RegExp("^[A-Z][a-z]+[A-Z0-9][A-Za-z0-9]*$");
+	<!--
+		function check()
+		{
+			var f = document.forms.form1;
+			var re = new RegExp("^[A-Z][a-z]+[A-Z0-9][A-Za-z0-9]*$");
 
-                     if (f.elements["config[admin_name]"].value.search(re) == -1)
-                        {
-                           alert('<?php echo $lang['ErrorAdminName'];?>');
-                           return false;
-                        }
+			if (f.elements["config[admin_name]"].value.search(re) == -1)
+			{
+				alert('<?php echo $lang['ErrorAdminName'];?>');
+				return false;
+			}
 
-                     if (f.elements['password'].value.length<8)
-                        {
-                           alert('<?php echo $lang['ErrorAdminPasswordShort'];?>');
-                           return false;
-                        }
+			if (f.elements['password'].value.length<8)
+			{
+				alert('<?php echo $lang['ErrorAdminPasswordShort'];?>');
+				return false;
+			}
 
-                     if (f.elements['password'].value!=f.elements["password2"].value)
-                        {
-                           alert('<?php echo $lang['ErrorAdminPasswordMismatch'];?>');
-                           return false;
-                        }
+			if (f.elements['password'].value!=f.elements["password2"].value)
+			{
+				alert('<?php echo $lang['ErrorAdminPasswordMismatch'];?>');
+				return false;
+			}
 
-                     re = new RegExp("[a-zA-Z0-9_\-]+@[a-zA-Z0-9_\-]+\.[a-zA-Z]+", "i");
+			re = new RegExp("[a-zA-Z0-9_\-]+@[a-zA-Z0-9_\-]+\.[a-zA-Z]+", "i");
 
-                     if (f.elements["config[admin_email]"].value.search(re) == -1)
-                        {
-                           alert('<?php echo $lang['ErrorAdminEmail'];?>');
-                           return false;
-                        }
+			if (f.elements["config[admin_email]"].value.search(re) == -1)
+			{
+				alert('<?php echo $lang['ErrorAdminEmail'];?>');
+				return false;
+			}
 
-                     return true;
-                  }
-            // -->
+			return true;
+		}
+	// -->
 </script>
 
 <form action="<?php echo my_location() ?>?installAction=database-config" method="post" name="form1">
@@ -87,7 +87,7 @@
    </div>
 <?php
 
-// 4.3rc1 -> 4.3.rc2: remove obsolete appendix 'index.php?page='
+// 4.3 -> 4.4: remove obsolete appendix 'index.php?page='
 $config['base_url'] = preg_replace('#/[^/]*$#', '/', $config['base_url']);
 
 ?>

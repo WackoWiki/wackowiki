@@ -1,53 +1,63 @@
 <script type="text/javascript">
-            <!--
-               function check()
-                  {
-                     var f = document.forms.form1;
-                     var re = new RegExp("^[A-Z][a-z]+[A-Z0-9][A-Za-z0-9]*$");
+	<!--
+		function check()
+		{
+			var f = document.forms.form1;
+			var re = new RegExp("^[A-Z][a-z]+[A-Z0-9][A-Za-z0-9]*$");
 
-                     // Ensure a database driver is selected
-                     var db_driver_selected = false;
+			// Ensure a database driver is selected
+			var db_driver_selected = false;
 
-                     // If there is no value property then we have an array of possible database driver radio boxes
-                     if(f.elements["config[database_driver]"].value == undefined)
-                        {
-                           for (var i = 0; i < f.elements["config[database_driver]"].length; i++)
-                              {
-                                 if(f.elements["config[database_driver]"][i].checked)
-                                    {
-                                       db_driver_selected = true;
-                                       break;
-                                    }
-                              }
-                        }
-                     else
-                        {
-                           // Else there is only one database driver radio box available and it will already be selected
-                           db_driver_selected = true;
-                        }
+			// If there is no value property then we have an array of possible database driver radio boxes
+			if(f.elements["config[database_driver]"].value == undefined)
+			{
+				for (var i = 0; i < f.elements["config[database_driver]"].length; i++)
+				{
+					if(f.elements["config[database_driver]"][i].checked)
+					{
+						db_driver_selected = true;
+						break;
+					}
+				}
+			}
+			else
+			{
+				// Else there is only one database driver radio box available and it will already be selected
+				db_driver_selected = true;
+			}
 
-                     if(!db_driver_selected)
-                        {
-                           alert('<?php echo $lang['ErrorNoDbDriverSelected'];?>');
-                           db_driver_selected = false;
-                        }
-                     else if(f.elements["config[DeleteTables]"].checked)
-                        {
-                           if(!confirm('<?php echo $lang['ConfirmTableDeletion'];?>'))
-                              {
-                                 db_driver_selected = false;
-                              }
-                        }
+			if(!db_driver_selected)
+			{
+				alert('<?php echo $lang['ErrorNoDbDriverSelected'];?>');
+				db_driver_selected = false;
+			}
+			else if(f.elements["config[DeleteTables]"].checked)
+			{
+				if(!confirm('<?php echo $lang['ConfirmTableDeletion'];?>'))
+				{
+					db_driver_selected = false;
+				}
+			}
 
-                     return db_driver_selected;
-                  }
-            // -->
+			return db_driver_selected;
+		}
+	// -->
 </script>
 
 <form action="<?php echo my_location() ?>?installAction=database-install" method="post" name="form1">
 <?php
-   write_config_hidden_nodes(array('database_driver' => '', 'database_host' => '', 'database_port' => '', 'database_database' => '', 'database_user' => '', 'database_password' => '', 'table_prefix' => ''));
-   echo '   <input type="hidden" name="password" value="'.$_POST['password'].'" />' . "\n";
+
+write_config_hidden_nodes(array(
+	'database_driver' => '',
+	'database_host' => '',
+	'database_port' => '',
+	'database_database' => '',
+	'database_user' => '',
+	'database_password' => '',
+	'table_prefix' => '')
+);
+
+echo '   <input type="hidden" name="password" value="'.$_POST['password'].'" />' . "\n";
 
 	// If none of the PHP SQL extensions are loaded then let the user know there is a problem
 	if(!extension_loaded('mysql') && !extension_loaded('mysqli') && !extension_loaded('pdo'))
@@ -59,7 +69,7 @@
 	else
 	{
 		// is this an upgrade?
-		if (isset($config["wakka_version"]))
+		if (isset($config['wakka_version']))
 		{
 			// overwrite default value, default is PDO but no upgrade is supported with PDO
 			$config['database_driver'] = 'mysqli_legacy';
