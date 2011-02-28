@@ -1,13 +1,18 @@
 <?php
+
+// Check if Upgrade or Fresh Install
 if(array_key_exists("wacko_version", $config))
 {
+	$config['is_update'] = true;
 	echo '<p>'.preg_replace(array('/%1/', '/%2/'), array($config['wacko_version'], WACKO_VERSION), $lang['UpgradeFromWacko'])."</p>\n";
 	echo '<p>'.$lang['PleaseBackup']."</p>\n";
 }
 else
 {
+	$config['is_update'] = false;
 	echo '<p>'.str_replace('%1', WACKO_VERSION, $lang['FreshInstall'])."</p>\n";
 }
+
 ?>
 <form action="<?php echo my_location() ?>?installAction=version-check" method="post">
 <?php

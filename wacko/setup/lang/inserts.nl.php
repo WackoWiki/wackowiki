@@ -5,7 +5,12 @@ $lng = "nl";
 // insert these pages only for default language
 if ($config['language'] == $lng)
 {
-	insert_page($config['root_page'], '', "((file:wacko4.png WackoWiki))\n**Welcome to your ((WackoWiki:Doc/English/WackoWiki WackoWiki)) site!**\n\nClick on the \"Edit this page\" link at the bottom to get started.\n\nDocumentation can be found at WackoWiki:Doc/English.\n\nUseful pages: ((WackoWiki:Doc/English/Formatting Formatting)), TekstZoeken.\n\n", $lng, 'Admins', true, false);
+	if ($config['is_update'] = false)
+	{
+		insert_page($config['root_page'], '', "((file:wacko4.png WackoWiki))\n**Welcome to your ((WackoWiki:Doc/English/WackoWiki WackoWiki)) site!**\n\nClick on the \"Edit this page\" link at the bottom to get started.\n\nDocumentation can be found at WackoWiki:Doc/English.\n\nUseful pages: ((WackoWiki:Doc/English/Formatting Formatting)), TekstZoeken.\n\n", $lng, 'Admins', true, false);
+		insert_page($config['users_page'].'/'.$config['admin_name'], $config['admin_name'], "{{adminupdate}}\n\n", $lng, $config['admin_name'], true, false);
+	}
+
 	#insert_page('GewenstePaginas', 'Gewenste Paginas', '{{wanted}}', $lng, 'Admins', true, false);
 	#insert_page('AlleenstaandePaginas', 'Alleenstaande Paginas', '{{orphaned}}', $lng, 'Admins', true, false);
 	#insert_page('MijnPaginas', 'Mijn Paginas', '{{MyPages}}', $lng, 'Admins', true, false);

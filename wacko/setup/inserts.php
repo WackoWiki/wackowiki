@@ -12,7 +12,6 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 
 	$page_select			= "SELECT * FROM ".$config_global['table_prefix']."page WHERE tag='".$tag."'";
 	$owner_id				= "SELECT user_id FROM ".$config_global['table_prefix']."user WHERE user_name = 'System' LIMIT 1";
-	# if ($title == false) $title = add_spaces_title(trim(substr($tag, strrpos($tag, '/')), '/'), $lng);
 
 	// user_id for user System
 	$page_insert			= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, lang, hide_comments, hide_files, hide_rating) VALUES ('".$tag."', '".npj_translit($tag, $lng)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lng."', '1', '1', '1')";
@@ -257,9 +256,14 @@ require_once('setup/lang/inserts.'.$config['language'].'.php');
 if ( isset($config['multilanguage']) )
 {
 	$handle = opendir('setup/lang');
+
 	while (false !== ($file = readdir($handle)))
-	if(1 == preg_match('/^inserts\.(.*?)\.php$/', $file, $match))
-		$langlist[] = $match[1];
+	{
+		if(1 == preg_match('/^inserts\.(.*?)\.php$/', $file, $match))
+		{
+			$langlist[] = $match[1];
+		}
+	}
 
 	closedir($handle);
 
