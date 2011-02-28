@@ -38,7 +38,18 @@
 
 <form action="<?php echo my_location() ?>?installAction=database-config" method="post" name="form1">
 <?php
-   write_config_hidden_nodes(array('site_name' => '', 'root_page' => '', 'multilanguage' => '', 'admin_name' => '', 'password' => '', 'admin_email' => '', 'base_url' => '', 'rewrite_mode' => ''));
+
+write_config_hidden_nodes(array(
+	'site_name' => '',
+	'root_page' => '',
+	'multilanguage' => '',
+	'admin_name' => '',
+	'password' => '',
+	'admin_email' => '',
+	'base_url' => '',
+	'rewrite_mode' => '')
+);
+
 ?>
    <h2><?php echo $lang['Name'];?></h2>
    <p class="notop"><?php echo $lang['NameDesc'];?></p>
@@ -57,7 +68,7 @@
    <h2><?php echo $lang['MultiLang'];?></h2>
    <p class="notop"><?php echo $lang['MultiLangDesc'];?></p>
    <label class="indented_label" for="wiki_multilanguage"><?php echo $lang['Enabled'];?></label>
-   <input type="checkbox" id="wiki_multilanguage" name="config[multilanguage]" value="1" <?php echo isset($config['multilanguage']) ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
+   <input type="checkbox" id="wiki_multilanguage" name="config[multilanguage]" value="1" <?php echo !empty($config['multilanguage']) ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
    <br />
    <div class="fake_hr_seperator">
       <hr />
