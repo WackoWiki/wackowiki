@@ -15,17 +15,17 @@ require ('themes/_common/_header.php');
 		</div>
 		<div id="login">
 <?php
-// If user are logged, Wacko shows "You are UserName"
+// if user are logged, shows "You are UserName"
 if ($this->get_user())
 {
 	echo '<span class="nobr">'.$this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()).'</span><small> ( <span class="nobr Tune">'.
 		$this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0).
 		" | <a onclick=\"return confirm('".$this->get_translation('LogoutAreYouSure')."');\" href=\"".$this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;")."action=logout&amp;goback=".$this->slim_url($this->tag)."\">".$this->get_translation('LogoutLink')."</a></span>)</small>";
-// Else Wacko shows login's controls
+// else shows login's controls
 }
 else
 {
-	// Show Register / Login link
+	// show Register / Login link
 	echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation('LoginPage').($this->config['rewrite_mode'] ? "?" : "&amp;")."goback=".$this->slim_url($this->tag), "", $this->get_translation('LoginPage'), 0)."</li>\n";
 	echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('RegistrationPage'), 0)."</li>\n";
 	// echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('Help'), 0)."</li>\n";
@@ -37,13 +37,13 @@ else
 		</div>
 <div id="navigation">
 <?php
-// Outputs Bookmarks AKA QuickLinks
+// outputs bookmarks menu
 	echo '<div id="usermenu">';
 	echo "<ol>\n";
-	// Main page
+	// main page
 	#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 	echo "<li>";
-	// Bookmarks
+	// bookmarks
 	$formatted_bookmarks = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
 	$formatted_bookmarks = str_replace ("<br />", "", $formatted_bookmarks);
 	$formatted_bookmarks = str_replace ("\n", "</li>\n<li>", $formatted_bookmarks);
@@ -52,7 +52,7 @@ else
 
 	if ($this->get_user())
 	{
-		// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
+		// determines what it should show: "add to bookmarks" or "remove from bookmarks" icon
 		if (!in_array($this->tag, $this->get_bookmark_links()))
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
@@ -158,8 +158,8 @@ else
 	// display more icon and text
 	# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icons/more.png\" title=\"".$this->get_translation('PageHandlerMoreTip')."\" alt=\"".$this->get_translation('PageHandlerMoreTip')."\" /> more</a> \n";
 	// only display 'more' text that shows handler list on hover
-	echo "<li class=''><a href='#' id='more'>more</a> \n";
-	echo "<ul class='dropdown_menu'>\n";
+	echo '<li class=""><a href="#" id="more">'.$this->get_translation('PageHandlerMoreTip').'</a>'." \n";
+	echo '<ul class="dropdown_menu">'."\n";
 
 	// print tab
 	// TODO: should add 'PrintTip' to the language file
@@ -286,10 +286,10 @@ else
 <li class="search">
 <div id="search">
 <?php
-// Opens Search form
+// opens search form
 echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
 
-// Searchbar
+// searchbar
 ?>
 <span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label>
 <input type="text" name="phrase" id="phrase" size="20" />
@@ -297,7 +297,7 @@ echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
 </span>
 <?php
 
-// Search form close
+// search form close
 echo $this->form_close();
 ?>
 </div>
@@ -306,7 +306,7 @@ echo $this->form_close();
 </div>
 <div class="breadcrumb">
 <?php
-// Shows breadcrumbs
+// shows breadcrumbs
 echo $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true, true);
 ?>
 </div>
