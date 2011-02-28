@@ -11,7 +11,7 @@ if ($config['language'] == $lng)
 		insert_page($config['users_page'].'/'.$config['admin_name'], $config['admin_name'], "{{adminupdate}}\n\n", $lng, $config['admin_name'], true, false);
 	}
 
-		#insert_page('WantedPages', 'Wanted Pages', '{{wanted}}', $lng, 'Admins', true, false);
+	#insert_page('WantedPages', 'Wanted Pages', '{{wanted}}', $lng, 'Admins', true, false);
 	#insert_page('OrphanedPages', 'Orphaned Pages', '{{orphaned}}', $lng, 'Admins', true, false);
 	#insert_page('MyPages', 'My Pages', '{{MyPages}}', $lng, 'Admins', true, false);
 	#insert_page('MyChanges', 'My Changes', '{{MyChanges}}', $lng, 'Admins', true, false);
