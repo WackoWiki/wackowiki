@@ -255,7 +255,7 @@ foreach($config_db as $key => $value)
 	$config_insert .= "(0, '$key', '$value'),";
 }
 
-$insert_config = "INSERT INTO ".$config['table_prefix']."config (config_id, config_name, value) VALUES
+$insert_config = "INSERT INTO ".$config['table_prefix']."config (config_id, config_name, config_value) VALUES
 	".$config_insert."
 	(0, 'maint_last_cache', NULL),
 	(0, 'maint_last_log', NULL),
