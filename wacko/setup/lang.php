@@ -1,7 +1,12 @@
 <?php
 
+write_config_hidden_nodes(array(
+	'language' => 0,
+	'is_update' => '')
+);
+
 // Check if Upgrade or Fresh Install
-if(array_key_exists("wacko_version", $config))
+if(array_key_exists('wacko_version', $config))
 {
 	$config['is_update'] = true;
 	echo '<p>'.preg_replace(array('/%1/', '/%2/'), array($config['wacko_version'], WACKO_VERSION), $lang['UpgradeFromWacko'])."</p>\n";
@@ -15,9 +20,7 @@ else
 
 ?>
 <form action="<?php echo my_location() ?>?installAction=version-check" method="post">
-<?php
-	write_config_hidden_nodes(array('language' => 0));
-?>
+
 	<p><?php echo $lang['LangDesc'];?></p>
 <?php
 // http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
