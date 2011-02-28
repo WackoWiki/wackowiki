@@ -5,7 +5,12 @@ $lng = "ru";
 // insert these pages only for default language
 if ($config['language'] == $lng)
 {
-	insert_page($config['root_page'], '', "((file:wacko4.png WackoWiki))\n**Добро пожаловать в волшебный мир ((WackoWiki:Doc/Russian WackoWiki)).**\n\nНажмите \"Правка\" внизу страницы, чтобы изменить её (между прочим, вы можете просто совершить двойной щелчок мышкой -- это приведёт к тому же результату).\n\nДокументация по ~WackoWiki доступна на WackoWiki:Doc/Russian.\n\nПолезные страницы: ((WackoWiki:Doc/Russian/WackoSintaksis Форматирование)), ((Поиск)).\n", $lng, 'Admins', true, false);
+	if ($config['is_update'] = false)
+	{
+		insert_page($config['root_page'], '', "((file:wacko4.png WackoWiki))\n**Добро пожаловать в волшебный мир ((WackoWiki:Doc/Russian WackoWiki)).**\n\nНажмите \"Правка\" внизу страницы, чтобы изменить её (между прочим, вы можете просто совершить двойной щелчок мышкой -- это приведёт к тому же результату).\n\nДокументация по ~WackoWiki доступна на WackoWiki:Doc/Russian.\n\nПолезные страницы: ((WackoWiki:Doc/Russian/WackoSintaksis Форматирование)), ((Поиск)).\n", $lng, 'Admins', true, false);
+		insert_page($config['users_page'].'/'.$config['admin_name'], $config['admin_name'], "{{adminupdate}}\n\n", $lng, $config['admin_name'], true, false);
+	}
+
 	#insert_page('ПропущенныеСтраницы', 'Пропущенные Страницы', '{{wanted}}', $lng, 'Admins', true, false);
 	#insert_page('ЗабытыеСтраницы', 'Забытые Страницы', '{{orphaned}}', $lng, 'Admins', true, false);
 	#insert_page('МоиСтраницы', 'Мои Страницы', '{{MyPages}}', $lng, 'Admins', true, false);

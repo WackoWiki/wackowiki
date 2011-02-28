@@ -5,7 +5,12 @@ $lng = "it";
 // insert these pages only for default language
 if ($config['language'] == $lng)
 {
-	insert_page($config['root_page'], '', "((file:wacko4.png WackoWiki))\n**Benvenuto sul tuo sito ((WackoWiki:Doc/English/WackoWiki WackoWiki)) site!**\n\nPer cominciare clicca su \"Edita questa pagina\" nella pagina in basso.\n\nLa documentazione, in inglese, può essere trovata  in WackoWiki:Doc/English.\n\nPagine utili: ((WackoWiki:Doc/English/Formatting Formatting)), ((Ricerca)).\n\n", $lng, 'Admins', true, false);
+	if ($config['is_update'] = false)
+	{
+		insert_page($config['root_page'], '', "((file:wacko4.png WackoWiki))\n**Benvenuto sul tuo sito ((WackoWiki:Doc/English/WackoWiki WackoWiki)) site!**\n\nPer cominciare clicca su \"Edita questa pagina\" nella pagina in basso.\n\nLa documentazione, in inglese, può essere trovata  in WackoWiki:Doc/English.\n\nPagine utili: ((WackoWiki:Doc/English/Formatting Formatting)), ((Ricerca)).\n\n", $lng, 'Admins', true, false);
+		insert_page($config['users_page'].'/'.$config['admin_name'], $config['admin_name'], "{{adminupdate}}\n\n", $lng, $config['admin_name'], true, false);
+	}
+
 	#insert_page('PagineRichieste', 'Pagine Richieste', '{{wanted}}', $lng, 'Admins', true, false);
 	#insert_page('PagineOrfane', 'Pagine Orfane', '{{orphaned}}', $lng, 'Admins', true, false);
 	#insert_page('MiePagine', 'Mie Pagine', '{{MyPages}}', $lng, 'Admins', true, false);
