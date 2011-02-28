@@ -72,16 +72,17 @@ if ($this->page)
 </div>
 <div id="credits"><?php
 
+if ($this->get_user())
+{
+	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki '.$this->get_wacko_version()).'<br />';
+}
+
 // comment this out for not showing website policy link at the bottom of your pages
 if ($this->config['policy_page'])
 {
 	echo '<a href="'.htmlspecialchars($this->href('', $this->config['policy_page'])).'">'.$this->get_translation('TermsOfUse').'</a><br />';
 }
 
-if ($this->get_user())
-{
-	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki '.$this->get_wacko_version());
-}
 ?></div>
 </div>
 </div>
