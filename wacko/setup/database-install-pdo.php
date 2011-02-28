@@ -8,7 +8,7 @@ function test_pdo($text, $query, $errorText = '')
 
 	try
 	{
-		test($text, $dblink->sql_query($query), $errorText);
+		test($text, $dblink->query($query), $errorText);
 	}
 	catch(PDOException $e)
 	{
