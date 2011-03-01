@@ -71,7 +71,7 @@ p.notop {
 	margin-top: 0px;
 }
 
-ul {
+ul, ol {
 	position: relative;
 	left: 43px;
 	margin: 0;
