@@ -160,6 +160,9 @@ for($count = 0; $count < count($drivers); $count++)
    <div class="fake_hr_seperator">
       <hr />
    </div>
+<?php
+if ($config['is_update'] == false)
+{?>
    <h2><?php echo $lang['DeleteTables'];?></h2>
    <p class="notop"><?php echo $lang['DeleteTablesDesc']; ?></p>
    <label class="indented_label" for="wiki_delete_tables"><?php echo $lang['DeleteTables'];?></label>
@@ -168,6 +171,13 @@ for($count = 0; $count < count($drivers); $count++)
    <div class="fake_hr_seperator">
       <hr />
    </div>
+<?php
+}
+else
+{
+	echo '<input type="hidden" value="off" name="config[DeleteTables]">';
+}
+?>
    <input type="submit" value="<?php echo $lang['Continue'];?>" class="next" onclick="return check();" />
 <?php
 	}
