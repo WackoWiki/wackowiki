@@ -19,8 +19,9 @@ else
 	echo '<p>'.str_replace('%1', WACKO_VERSION, $lang['FreshInstall'])."</p>\n";
 }
 
+echo '<input type="hidden" value="'.$config['is_update'].'" name="config[is_update]">';
+
 ?>
-	<input type="hidden" value="<?php echo $config['is_update'];?>" name="config[is_update]">
 	<p><?php echo $lang['LangDesc'];?></p>
 <?php
 // http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes

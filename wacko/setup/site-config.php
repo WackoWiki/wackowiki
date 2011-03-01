@@ -70,9 +70,9 @@ write_config_hidden_nodes(array(
    <label class="indented_label" for="wiki_multilanguage"><?php echo $lang['Enabled'];?></label>
    <input type="checkbox" id="wiki_multilanguage" name="config[multilanguage]" value="1" <?php echo !empty($config['multilanguage']) ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
    <br />
-   <?php
-   if ($config['is_update'] == false)
-   {?>
+<?php
+if ($config['is_update'] == false)
+{?>
    <div class="fake_hr_seperator">
       <hr />
    </div>
@@ -96,7 +96,14 @@ write_config_hidden_nodes(array(
    <p class="notop"><?php echo $lang['MailDesc'];?></p>
    <input type="text" maxlength="320" name="config[admin_email]" value="<?php if ( isset ( $config['admin_email'] ) ) echo $config['admin_email']; ?>" class="text_input" />
    <br />
-   <?php } ?>
+<?php
+}
+else
+{
+	echo '<input type="hidden" value="'.$config['admin_name'].'" name="config[admin_name]">';
+	echo '<input type="hidden" value="'.$config['admin_email'].'" name="config[admin_email]">';
+}
+?>
    <div class="fake_hr_seperator">
       <hr />
    </div>
