@@ -178,7 +178,7 @@ if (!function_exists('convert_into_menu_table'))
 					(preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/', $_bookmark, $matches)) ||
 					(preg_match('/^(\S+)(\s+(.+))?$/', $_bookmark, $matches)) ) // without brackets at last!
 				{
-					$wacko->debug_print_r($matches);
+					#$wacko->debug_print_r($matches);
 					list (, $url, $text) = $matches;
 
 					if ($url)
