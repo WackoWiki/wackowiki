@@ -12,19 +12,27 @@ if (!isset($cols)) $cols = '';
 
 if($user = $this->get_user())
 {
-	if (!$cols) $cols = 4; //number of table columns
-	else $cols = intval($cols);
+	if (!$cols)
+	{
+		$cols = 4; //number of table columns
+	}
+	else
+	{
+		$cols = intval($cols);
+	}
 
 	if (is_array($this->config['aliases']))
 	{
 		if (!$nomark)
-		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('UserGroups').":</span></p>";
+		{
+			echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('UserGroups').":</span></p>";
+		}
 
 		echo "<table border=\"0\" cellspacing=\"5\" cellpadding=\"5\"><tr>";
 
 		$i = 1;
 
-		foreach($this->config['aliases'] as $gname => $gusers)
+		foreach($this->config['aliases'] as $group_name => $gusers)
 		{
 			if($i == $cols + 1)
 			{
@@ -46,14 +54,16 @@ if($user = $this->get_user())
 				echo "<td valign=\"top\">";
 
 				foreach ($arr as $k => $v)
-				$allowed_groups[] = $this->link('/'.$v, '', $v);
+				{
+					$allowed_groups[] = $this->link('/'.$this->config['users_page'].'/'.$v, '', $v);
+				}
 
 				sort($allowed_groups);
 
 				$gusers = implode("<br />", $allowed_groups);
 
 				// Print out the group name and then a list of the users under it
-				echo "<strong>$gname</strong>:<br />".str_replace("\n","<br />",$gusers)."<br />";
+				echo "<strong>$group_name</strong>:<br />".str_replace("\n","<br />",$gusers)."<br />";
 				echo "</td>";
 
 				$i++;
@@ -63,7 +73,9 @@ if($user = $this->get_user())
 		echo "</tr></table>";
 
 		if(!$nomark)
-		echo "</div>";
+		{
+			echo "</div>";
+		}
 	}
 }
 
