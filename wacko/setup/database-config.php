@@ -57,7 +57,7 @@ write_config_hidden_nodes(array(
 	'table_prefix' => '')
 );
 
-echo '   <input type="hidden" name="password" value="'.$_POST['password'].'" />' . "\n";
+echo '   <input type="hidden" name="password" value="'.(isset($_POST['password']) ? $_POST['password'] : '').'" />' . "\n";
 
 	// If none of the PHP SQL extensions are loaded then let the user know there is a problem
 	if(!extension_loaded('mysql') && !extension_loaded('mysqli') && !extension_loaded('pdo'))
