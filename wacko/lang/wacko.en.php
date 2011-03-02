@@ -276,6 +276,7 @@ $wacko_translation = array(
 	'CommentAdded' => 'Comment added.',
 	'YouAreNowTheOwner' => 'You are now the owner of this page.',
 
+	'FullDiff' => 'Full diff',
 	'SimpleDiff' => 'Simple diff',
 	'SourceDiff' => 'Source',
 	'RevisionsShowAll' => 'Show all revisions...',

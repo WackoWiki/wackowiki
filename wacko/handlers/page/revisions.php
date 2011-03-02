@@ -13,7 +13,10 @@ $max	= '';
 $output	= '';
 
 // redirect to show method if hide_revisions is true (1 - guests, 2 - registered users)
-#if ($this->config['hide_revisions']) $this->redirect($this->href('show'));
+if ($this->config['hide_revisions'])
+{
+	$this->redirect($this->href('show'));
+}
 
 // redirect to show method if page don't exists
 #if (!$this->page) $this->redirect($this->href('show'));
@@ -55,8 +58,9 @@ if ($this->has_access('read'))
 		$output .= "<p>\n";
 		$output .= "<input type=\"submit\" value=\"".$this->get_translation('ShowDifferencesButton')."\" />";
 		#$output .= "<input type=\"button\" value=\"".$this->get_translation('CancelDifferencesButton')."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
-		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"fastdiff\" name=\"fastdiff\" />\n <label for=\"fastdiff\">".$this->get_translation('SimpleDiff')."</label>";
-		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" id=\"source\" name=\"source\" />\n <label for=\"source\">".$this->get_translation('SourceDiff')."</label>";
+		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" id=\"fulldiff\" name=\"diffmode\" value=\"0\" checked=\"checked\" />\n <label for=\"fulldiff\">".$this->get_translation('FullDiff')."</label>";
+		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" id=\"fastdiff\" name=\"diffmode\" value=\"1\" />\n <label for=\"fastdiff\">".$this->get_translation('SimpleDiff')."</label>";
+		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" id=\"source\" name=\"diffmode\" value=\"2\" />\n <label for=\"source\">".$this->get_translation('SourceDiff')."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href('revisions.xml')."\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RevisionXMLTip')."\" alt=\"XML\" /></a>";
 
 		if ($this->config['minor_edit'])

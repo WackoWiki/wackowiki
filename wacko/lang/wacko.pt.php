@@ -272,6 +272,8 @@ $wacko_translation = array(
 	'CommentFlooded' => 'The interval between the publication of the messages shall not be less than %1 seconds.',
 	'CommentAdded' => 'Comment added.',
 	'YouAreNowTheOwner' => 'Voçê é agora o dono desta página.',
+
+	'FullDiff' => 'Full diff',
 	'SimpleDiff' => 'Diferenças simples',
 	'SourceDiff' => 'Source',
 	'RevisionsShowAll' => 'Show all revisions...',

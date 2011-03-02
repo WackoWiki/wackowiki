@@ -269,6 +269,8 @@ $wacko_translation = array(
 	'CommentFlooded'		=> 'Der Abstand zwischen der Veröffentlichung der Nachrichten darf nicht kleiner sein als %1 Sekunden.',
 	'CommentAdded'			=> 'Kommentar hinzugefügt.',
 	'YouAreNowTheOwner'		=> 'Du bist nicht der Besitzer dieser Seite.',
+
+	'FullDiff'				=> 'Full diff',
 	'SimpleDiff'			=> 'einfacher Vergleich',
 	'SourceDiff'			=> 'Quelltext',
 	'RevisionsShowAll'		=> 'Alle Revisionen anzeigen...',

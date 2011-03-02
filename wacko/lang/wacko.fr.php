@@ -272,6 +272,8 @@ $wacko_translation = array(
 	'CommentFlooded' => 'Les publications de messages doivent être espacées d\'au moins une seconde.',
 	'CommentAdded' => 'Commentaires ajoutés.',
 	'YouAreNowTheOwner' => 'Vous n&rsquo;êtes pas le propriétaire de cette page.',
+
+	'FullDiff' => 'Full diff',
 	'SimpleDiff' => 'Simple différence entre les deux versions',
 	'SourceDiff' => 'Source',
 	'RevisionsShowAll' => 'Montrer toutes les révisions...',
