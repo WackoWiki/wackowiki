@@ -53,12 +53,16 @@ if ($this->has_access('read'))
 
 	if ($this->has_access('read', $page_a['page_id']) && $this->has_access('read', $page_b['page_id']) )
 	{
-		if (isset($_GET['source']))
+		// diffmode
+		// 0 - full diff
+		// 1 - simple diff
+		// 2 - source diff
+		if (isset($_GET['diffmode']) & $_GET['diffmode'] == 2)
 		{
 			$source = 1;
 		}
 
-		if (isset($_GET['fastdiff']) || $source == 1)
+		if (isset($_GET['diffmode']) && $_GET['diffmode'] >= 1)
 		{
 			// This is a really cheap way to do it.
 

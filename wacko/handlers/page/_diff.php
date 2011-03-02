@@ -36,13 +36,13 @@ class Side
 
 	function __construct($content)
 	{
-		$this->content = $content;
-		$this->position = 0;
-		$this->cursor = 0;
-		$this->directive = '';
-		$this->argument = array();
-		$this->length = strlen($this->content);
-		$this->character = substr($this->content,0,1);
+		$this->content		= $content;
+		$this->position		= 0;
+		$this->cursor		= 0;
+		$this->directive	= '';
+		$this->argument		= array();
+		$this->length		= strlen($this->content);
+		$this->character	= substr($this->content, 0, 1);
 	}
 
 	function getposition()
@@ -104,11 +104,11 @@ class Side
 
 	function init()
 	{
-		$this->position = 0;
-		$this->cursor = 0;
-		$this->directive = '';
-		$this->argument = array();
-		$this->character = substr($this->content, 0, 1);
+		$this->position		= 0;
+		$this->cursor		= 0;
+		$this->directive	= '';
+		$this->argument		= array();
+		$this->character	= substr($this->content, 0, 1);
 	}
 
 	function isspace($char)
