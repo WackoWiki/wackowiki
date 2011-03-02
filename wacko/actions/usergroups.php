@@ -32,7 +32,7 @@ if($user = $this->get_user())
 
 		$i = 1;
 
-		foreach($this->config['aliases'] as $group_name => $gusers)
+		foreach($this->config['aliases'] as $group_name => $group_users)
 		{
 			if($i == $cols + 1)
 			{
@@ -40,7 +40,7 @@ if($user = $this->get_user())
 				$i = 1;
 			}
 
-			$arr = explode("\\n", $gusers);
+			$arr = explode("\\n", $group_users);
 			$allowed_groups = array();
 
 			sort($arr);
@@ -53,17 +53,17 @@ if($user = $this->get_user())
 			{
 				echo "<td valign=\"top\">";
 
-				foreach ($arr as $k => $v)
+				foreach ($arr as $k => $_user)
 				{
-					$allowed_groups[] = $this->link('/'.$this->config['users_page'].'/'.$v, '', $v);
+					$allowed_groups[] = "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$_user)."\">".$_user."</a>";
 				}
 
 				sort($allowed_groups);
 
-				$gusers = implode("<br />", $allowed_groups);
+				$group_users = implode('<br />', $allowed_groups);
 
 				// Print out the group name and then a list of the users under it
-				echo "<strong>$group_name</strong>:<br />".str_replace("\n","<br />",$gusers)."<br />";
+				echo "<strong>$group_name</strong>:<br />".str_replace("\n","<br />",$group_users)."<br />";
 				echo "</td>";
 
 				$i++;
