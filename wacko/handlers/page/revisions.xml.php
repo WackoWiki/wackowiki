@@ -34,11 +34,13 @@ if ($this->has_access('read'))
 
 		$c = 0;
 		$_GET['b'] = -1;
-		$_GET['fastdiff'] = 1;
+		$_GET['diffmode'] = 1;
+
 		foreach ($pages as $page)
 		{
 			$c++;
-			if (($c <= $max) && $c>1)
+
+			if (($c <= $max) && $c > 1)
 			{
 				$etag = str_replace('%2F', '/', rawurlencode($page['tag']));
 
@@ -48,7 +50,7 @@ if ($this->has_access('read'))
 				$xml .= "<guid isPermaLink=\"true\">".$this->href('', $etag)."</guid>\n";
 
 				$_GET['a'] = $_GET['b'];
-				$_GET['b'] = $page['page_id'];
+				$_GET['b'] = $page['revision_m_id'];
 				$diff = $this->include_buffered('handlers/page/diff.php', 'oops');
 
 				$xml .= "<description>".str_replace('<', "&lt;", str_replace('&', '&amp;', $diff))."</description>\n";
