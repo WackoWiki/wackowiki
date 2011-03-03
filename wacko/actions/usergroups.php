@@ -32,7 +32,7 @@ if($user = $this->get_user())
 
 		$i = 1;
 
-		foreach($this->config['aliases'] as $group_name => $group_users)
+		foreach($this->config['aliases'] as $group_name => $group_members)
 		{
 			if($i == $cols + 1)
 			{
@@ -40,7 +40,7 @@ if($user = $this->get_user())
 				$i = 1;
 			}
 
-			$arr = explode("\\n", $group_users);
+			$arr = explode("\\n", $group_members);
 			$allowed_groups = array();
 
 			sort($arr);
@@ -60,10 +60,10 @@ if($user = $this->get_user())
 
 				sort($allowed_groups);
 
-				$group_users = implode('<br />', $allowed_groups);
+				$group_members = implode('<br />', $allowed_groups);
 
 				// Print out the group name and then a list of the users under it
-				echo "<strong>$group_name</strong>:<br />".str_replace("\n","<br />",$group_users)."<br />";
+				echo "<strong>$group_name</strong>:<br />".str_replace("\n","<br />",$group_members)."<br />";
 				echo "</td>";
 
 				$i++;
