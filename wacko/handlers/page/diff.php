@@ -17,7 +17,7 @@ if (!function_exists('handler_diff_load_page_by_id'))
 	function handler_diff_load_page_by_id($wacko, $id)
 	{
 		// extracting
-		if ($id != "-1")
+		if ($id != '-1')
 		{
 			return $wacko->load_single(
 				"SELECT page_id, revision_id, modified, body ".
@@ -37,10 +37,10 @@ if (!function_exists('handler_diff_load_page_by_id'))
 }
 
 // redirect to show method if page don't exists
-if (!$this->page)
-{
-	$this->redirect($this->href('show'));
-}
+#if (!$this->page)
+#{
+#	$this->redirect($this->href('show'));
+#}
 
 $a = $_GET['a'];
 $b = $_GET['b'];
