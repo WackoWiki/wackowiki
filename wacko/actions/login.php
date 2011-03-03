@@ -55,7 +55,7 @@ else if ($user = $this->get_user())
 
 	echo '<input type="hidden" name="action" value="logout" />';
 	echo '<div class="cssform">';
-	echo '<h3>'.$this->get_translation('Hello').", ".$this->compose_link_to_page($user['user_name']).'!</h3>';
+	echo '<h3>'.$this->get_translation('Hello').", ".$this->compose_link_to_page($this->config['users_page'].'/'.$user['user_name'], '', $user['user_name']).'!</h3>';
 
 	if ($user['session_time'] == true)
 	{
