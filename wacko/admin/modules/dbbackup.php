@@ -204,7 +204,7 @@ function admin_dbbackup(&$engine, &$module)
 			if ($table['name'] != 'cache' && $table['name'] != 'referrer' && $table['name'] != 'log')
 				$check = true;
 
-			echo '<tr>'.
+			echo '<tr class="hl_setting">'.
 					'<td class="label"><strong>'.$table['name'].'</strong></td>'.
 					'<td align="center">&nbsp;&nbsp;<input name="__str__'.$table['name'].'" type="checkbox" value="structure"'.( $scheme['structure'] == true ? 'checked="checked"' : '' ).' /></td>'.
 					'<td align="center"><input name="__dat__'.$table['name'].'" type="checkbox" value="data"'.( $check === true && $scheme['data'] == true ? 'checked="checked"' : '' ).' /></td>'.

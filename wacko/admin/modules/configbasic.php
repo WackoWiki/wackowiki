@@ -44,6 +44,7 @@ function admin_configbasic(&$engine, &$module)
 		$config['hide_comments']			= (int)$_POST['hide_comments'];
 		$config['hide_files']				= (int)$_POST['hide_files'];
 		$config['hide_rating']				= (int)$_POST['hide_rating'];
+		$config['hide_revisions']			= (int)$_POST['hide_revisions'];
 		$config['hide_toc']					= (int)$_POST['hide_toc'];
 		$config['hide_index']				= (int)$_POST['hide_index'];
 		$config['tree_level']				= (int)$_POST['index_mode'];
@@ -75,7 +76,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr>
 				<th colspan="2">Basic parameters</th>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="site_name"><strong>Site Name:</strong><br />
 				<small>The title that appears on this site, email-notification, etc.</small></label></td>
 				<td style="width:40%;"><input maxlength="255" style="width:200px;" id="site_name" name="site_name" value="<?php echo htmlspecialchars($engine->config['site_name']);?>" /></td>
@@ -83,7 +84,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="site_desc"><strong>Site Description:</strong><br />
 				<small>Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="site_desc" name="site_desc" value="<?php echo htmlspecialchars($engine->config['site_desc']);?>" /></td>
@@ -91,7 +92,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label" valign="top"><label for="meta_description"><strong>Description of the document by default:</strong><br />
 				<small>The text used by default for meta-tags <tt>description</tt> (maximum of 255 characters).</small></label></td>
 				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="meta_description" name="meta_description"><?php echo htmlspecialchars($engine->config['meta_description']);?></textarea></td>
@@ -99,7 +100,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label" valign="top"><label for="meta_keywords"><strong>Keywords page default:</strong><br />
 				<small>Key words used by default for meta-tags <tt>keywords</tt> (maximum of 255 characters).</small></label></td>
 				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="meta_keywords" name="meta_keywords"><?php echo htmlspecialchars($engine->config['meta_keywords']);?></textarea></td>
@@ -107,7 +108,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="theme"><strong>Theme:</strong><br />
 				<small>Template design the site uses by default.</small></label></td>
 				<td>
@@ -125,7 +126,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="allow_themes"><strong>Allowed Themes:</strong><br />
 				<small>Allowed themes, which the user can choose: "0" – all available themes are allowed (default), <br />"default,coffee" – here only these both themes are allowed.</small></label></td>
 				<td><input maxlength="25" style="width:200px;" id="allow_themes" name="allow_themes" value="<?php echo htmlspecialchars($engine->config['allow_themes']);?>" /></td>
@@ -133,7 +134,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><strong>Themes per page:</strong><br />
 				<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
 				<td>
@@ -144,7 +145,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="admin_name"><strong>Admin of Site:</strong><br />
 				<small>User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.</small></label></td>
 				<td><input maxlength="25" style="width:200px;" id="admin_name" name="admin_name" value="<?php echo htmlspecialchars($engine->config['admin_name']);?>" /></td>
@@ -154,7 +155,7 @@ function admin_configbasic(&$engine, &$module)
 					Language settings
 				</th>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="language"><strong>Default language:</strong><br />
 				<small>Specifies the language for mapping unregistered guests, as well as the locale settings and the rules of transliteration of addresses of pages.</small></label></td>
 				<td>
@@ -172,18 +173,18 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="multilanguage"><strong>Multilanguage support:</strong><br />
 				<small>Include a choice of language on the page by page basis.</small></label></td>
 				<td><input type="checkbox" id="multilanguage" name="multilanguage" value="1"<?php echo ( $engine->config['multilanguage'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<th colspan="2">
 					<br />
 					File uploads
 				</th>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="upload_images_only"><strong>Allow only upload of images:</strong><br />
 				<small>Allow only uploading of image files on the page.</small></label></td>
 				<td><input type="checkbox" id="upload_images_only" name="upload_images_only" value="1"<?php echo ( $engine->config['upload_images_only'] ? ' checked="checked"' : '' );?> /></td>
@@ -191,7 +192,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="upload_max_size"><strong>Maximum file size (Kb):</strong><br />
 				<small>Limiting the size of files uploaded by users.</small></label></td>
 				<td><input maxlength="7" style="width:200px;" id="upload_max_size" name="upload_max_size" value="<?php echo htmlspecialchars($engine->config['upload_max_size']);?>" /></td>
@@ -199,7 +200,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="upload_quota_per_user"><strong>Restricting quota of storage to a user:</strong><br />
 				<small>Restriction on the quota of storage that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo htmlspecialchars($engine->config['upload_quota_per_user']);?>" /></td>
@@ -210,9 +211,9 @@ function admin_configbasic(&$engine, &$module)
 					Toolbar
 				</th>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><strong>Comments panel:</strong><br />
-				<small>The default display in the bottom of the cover pages of comments.</small></td>
+				<small>The default display  of comments in the bottom of the page.</small></td>
 				<td>
 					<input type="radio" id="hide_comments_on" name="hide_comments" value="0"<?php echo ( !$engine->config['hide_comments'] ? ' checked="checked"' : '' );?> /><label for="hide_comments_on">On.</label>
 					<input type="radio" id="hide_comments_guest" name="hide_comments" value="2"<?php echo ( $engine->config['hide_comments'] == 2 ? ' checked="checked"' : '' );?> /><label for="hide_comments_guest">Registered.</label>
@@ -222,9 +223,9 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><strong>File panel:</strong><br />
-				<small>The default display in the bottom of the cover pages of attachments.</small></td>
+				<small>The default display of attachments in the bottom of the page .</small></td>
 				<td>
 					<input type="radio" id="hide_files_on" name="hide_files" value="0"<?php echo ( !$engine->config['hide_files'] ? ' checked="checked"' : '' );?> /><label for="hide_files_on">On.</label>
 					<input type="radio" id="hide_files_guest" name="hide_files" value="2"<?php echo ( $engine->config['hide_files'] == 2 ? ' checked="checked"' : '' );?> /><label for="hide_files_guest">Registered.</label>
@@ -234,9 +235,9 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><strong>Rating panel :</strong><br />
-				<small>The default display in the bottom of the panel rating of the document.</small></td>
+				<small>The default display of the rating panel in the bottom of the page.</small></td>
 				<td>
 					<input type="radio" id="hide_rating_on" name="hide_rating" value="0"<?php echo ( !$engine->config['hide_rating'] ? ' checked="checked"' : '' );?> /><label for="hide_rating_on">On.</label>
 					<input type="radio" id="hide_rating_guest" name="hide_rating" value="2"<?php echo ( $engine->config['hide_rating'] == 2 ? ' checked="checked"' : '' );?> /><label for="hide_rating_guest">Registered.</label>
@@ -246,9 +247,21 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
+				<td class="label"><strong>Hide Revisions:</strong><br />
+				<small>The default display of revisions of the page.</small></td>
+				<td>
+					<input type="radio" id="hide_revisions_on" name="hide_revisions" value="2"<?php echo ( !$engine->config['hide_revisions'] == 2 ? ' checked="checked"' : '' );?> /><label for="hide_revisions_on">On.</label>
+					<input type="radio" id="hide_revisions_guest" name="hide_revisions" value="1"<?php echo ( $engine->config['hide_revisions'] == 1 ? ' checked="checked"' : '' );?> /><label for="hide_revisions_guest">Registered.</label>
+					<input type="radio" id="hide_revisions_off" name="hide_revisions" value="0"<?php echo ( $engine->config['hide_revisions'] == 0 ? ' checked="checked"' : '' );?> /><label for="hide_revisions_off">Off.</label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
 				<td class="label"><strong>Table of contents panel :</strong><br />
-				<small>The default display panel table of contents of document (may need support in the templates).</small></td>
+				<small>The default display table of contents panel of a page (may need support in the templates).</small></td>
 				<td>
 					<input type="radio" id="hide_toc_on" name="hide_toc" value="0"<?php echo ( !$engine->config['hide_toc'] ? ' checked="checked"' : '' );?> /><label for="hide_toc_on">On.</label>
 					<input type="radio" id="hide_toc_off" name="hide_toc" value="1"<?php echo ( $engine->config['hide_toc'] ? ' checked="checked"' : '' );?> /><label for="hide_toc_off">Off.</label>
@@ -257,7 +270,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><strong>The panel sections:</strong><br />
 				<small>By default the display panel adjacent documents (requires support in the templates).</small></td>
 				<td>
@@ -268,7 +281,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><strong>Displaying sections:</strong><br />
 				<small>When the previous options, whether to display only daughter of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).</small></td>
 				<td>
@@ -283,7 +296,7 @@ function admin_configbasic(&$engine, &$module)
 					Miscellaneous
 				</th>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><strong>Edit summary:</strong><br />
 				<small>Shows change summary in the edit mode.</small></td>
 				<td>
@@ -295,7 +308,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><strong>Minor edit:</strong><br />
 				<small>Enables minor edit option in the edit mode.</small></td>
 				<td>
@@ -306,7 +319,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><strong>Review:</strong><br />
 				<small>Enables review option in the edit mode.</small></td>
 				<td>
@@ -317,7 +330,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><strong>Autosubscribe:</strong><br />
 				<small>Automatically sign a new page in the owner's notice of its changes.</small></td>
 				<td>
@@ -328,7 +341,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="default_rename_redirect"><strong>When renaming put redirection:</strong><br />
 				<small>By default, propose to redirect the old address pereimenuemoy page.</small></label></td>
 				<td><input type="checkbox" id="default_rename_redirect" name="default_rename_redirect" value="1"<?php echo ( $engine->config['default_rename_redirect'] ? ' checked="checked"' : '' );?> /></td>
@@ -336,7 +349,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="store_deleted_pages"><strong>Keep deleted pages:</strong><br />
 				<small>When you delete a page (the comment) put her in a special section where she had some time (below) will be available for viewing and recovery.</small></label></td>
 				<td><input type="checkbox" id="store_deleted_pages" name="store_deleted_pages" value="1"<?php echo ( $engine->config['store_deleted_pages'] ? ' checked="checked"' : '' );?> /></td>
@@ -344,7 +357,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="keep_deleted_time"><strong>Storage time of deleted pages:</strong><br />
 				<small>The period in days. It makes sense only if the previous option. Zero indicates the eternal possession (in this case the administrator can clear the "cart" manually).</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="keep_deleted_time" name="keep_deleted_time" value="<?php echo htmlspecialchars($engine->config['keep_deleted_time']);?>" /></td>
@@ -352,7 +365,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="pages_purge_time"><strong>Storage time of page revisions:</strong><br />
 				<small>Automatically delete the older edition of the number of days. If you enter zero, the old edition will not be removed.</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="pages_purge_time" name="pages_purge_time" value="<?php echo htmlspecialchars($engine->config['pages_purge_time']);?>" /></td>
@@ -360,7 +373,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="referrers_purge_time"><strong>Storage time of referrers:</strong><br />
 				<small>Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="referrers_purge_time" name="referrers_purge_time" value="<?php echo htmlspecialchars($engine->config['referrers_purge_time']);?>" /></td>
@@ -368,7 +381,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="noindex"><strong>Block search engines:</strong><br />
 				<small>I would like to block search engines, but allow normal visitors</small></label></td>
 				<td><input type="checkbox" id="noindex" name="noindex" value="1"<?php echo ( $engine->config['noindex'] ? ' checked="checked"' : '' );?> /></td>
@@ -376,7 +389,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="xml_sitemap"><strong>XML Sitemap:</strong><br />
 				<small>Create an XML file called "sitemap-wackowiki.xml" inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder.</small></label></td>
 				<td><input type="checkbox" id="xml_sitemap" name="xml_sitemap" value="1"<?php echo ( $engine->config['xml_sitemap'] ? ' checked="checked"' : '' );?> /></td>

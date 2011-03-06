@@ -191,7 +191,11 @@ tr.lined td {
 }
 
 .lined:hover {
-background:none repeat scroll 0 0 #CCFFCC;
+	background:none repeat scroll 0 0 #CCFFCC;
+}
+
+.hl_setting:hover {
+	background:none repeat scroll 0 0 #CCFFCC;
 }
 
 table.forum th {

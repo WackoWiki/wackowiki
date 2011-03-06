@@ -61,7 +61,7 @@ function admin_configemail(&$engine, &$module)
 			<tr>
 				<th colspan="2">Basic parameters</th>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="enable_email"><strong>Email:</strong><br />
 				<small>Enabling email</small></label></td>
 				<td style="width:40%;">
@@ -72,7 +72,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="enable_email_notification"><strong>Email Notification:</strong><br />
 				<small>Allow email notification. Set to ON to enable email notifications, OFF to disable them. Note that
 	 					disabling email notifications has no effect on emails generated as part
@@ -85,7 +85,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="phpmailer"><strong>Phpmailer:</strong><br />
 				<small>Use the Phpmailer class. Enabling this option ...</small></label></td>
 				<td style="width:40%;">
@@ -96,7 +96,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="phpmailer_method"><strong>E-mail function name:</strong><br />
 				<small>The e-mail function used to send mails through PHP.</small></label></td>
 				<td><select style="width:200px;" id="phpmailer_method" name="phpmailer_method">
@@ -110,7 +110,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="email_from"><strong>Sender name of the site owner:</strong><br />
 				<small>The sender name, part of <tt>"From:"</tt> header in emails for all the email-notification site.</small></label></td>
 				<td><input maxlength="100" style="width:200px;" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->config['email_from']);?>" /></td>
@@ -118,7 +118,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="admin_email"><strong>Email of the site owner:</strong><br />
 				<small>This address will appear as the<tt>"From:"</tt> all the email-notification site.</small></label></td>
 				<td><input maxlength="100" style="width:200px;" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->config['admin_email']);?>" /></td>
@@ -126,7 +126,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="abuse_email"><strong>Email service abuse:</strong><br />
 				<small>Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.</small></label></td>
 				<td><input maxlength="100" style="width:200px;" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->config['abuse_email']);?>" /></td>
@@ -139,14 +139,14 @@ function admin_configemail(&$engine, &$module)
 					SMTP Settings
 				</th>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="smtp_host"><strong>SMTP server address:</strong></label></td>
 				<td><input maxlength="50" style="width:200px;" id="smtp_host" name="smtp_host" value="<?php echo htmlspecialchars($engine->config['smtp_host']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="smtp_port"><strong>SMTP server port:</strong><br />
 				<small>Only change this if you know your SMTP server is on a different port. (default 25 or 587)</small></label></td>
 				<td><input maxlength="5" style="width:200px;" id="smtp_port" name="smtp_port" value="<?php echo htmlspecialchars($engine->config['smtp_port']);?>" /></td>
@@ -154,7 +154,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="smtp_connection_mode"><strong>Connection mode for SMTP:</strong><br />
 				<small>Only used if a username/password is set, ask your provider if you are unsure which method to use.</small></label></td>
 				<td><select style="width:200px;" id="smtp_connection_mode" name="smtp_connection_mode">
@@ -167,7 +167,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="smtp_username"><strong>SMTP username:</strong><br />
 				<small>Only enter a username if your SMTP server requires it.</small></label></td>
 				<td>
@@ -177,7 +177,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="smtp_password"><strong>SMTP password:</strong><br />
 				<small>Only enter a password if your SMTP server requires it.<br />
 				<b>Warning:</b> <em>This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em></small></label></td>

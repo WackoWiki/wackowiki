@@ -302,7 +302,7 @@ function admin_files(&$engine, &$module)
 		$link		= $engine->link($path2.$file_name, '', $file_name);
 		$remove_href = $engine->tag.'&amp;remove=global&amp;file_id='.$file_name;
 ?>
-		<tr>
+		<tr class="hl_setting">
 			<td style=""><?php echo $link; ?></td>
 			<td>(<?php echo $file_size; ?>)</td>
 			<td><?php echo $desc ?></td>

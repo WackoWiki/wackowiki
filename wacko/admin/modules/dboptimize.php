@@ -90,8 +90,8 @@ function admin_dboptimize(&$engine, &$module)
 			{
 				if ($table['Name'] == $wtable['name'])
 				{
-					echo '<tr>'.
-							'<tr><td class="label"><input name="'.$table['Name'].'" type="checkbox" value="table" '.( $table['Data_free'] > 0 || (isset($scheme['all']) && $scheme['all'] == true) ? 'checked="checked"' : '' ).'/></td>'.
+					echo '<tr class="hl_setting">'.
+							'<td class="label"><input name="'.$table['Name'].'" type="checkbox" value="table" '.( $table['Data_free'] > 0 || (isset($scheme['all']) && $scheme['all'] == true) ? 'checked="checked"' : '' ).'/></td>'.
 							'<td>&nbsp;&nbsp;<strong>'.$table['Name'].'&nbsp;&nbsp;</strong></td>'.
 							'<td>'.( $table['Data_free'] > 0 ? '<strong class="red">' : '' ).ceil($table['Data_free'] / 1000).' Kb'.( $table['Data_free'] > 0 ? '</strong>' : '' ).'</td>'.
 						'</tr>'.
