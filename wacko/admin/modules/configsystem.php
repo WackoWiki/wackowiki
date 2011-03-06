@@ -72,7 +72,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr>
 				<th colspan="2">Debug mode</th>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="debug_mode"><strong>Debug mode:</strong><br />
 				<small>Fixation and the withdrawal of telemetry data on the time of the program. Note: the full detail of the regime imposes high demands on available memory, especially in demanding operations such as backup and restore the database.</small></label></td>
 				<td style="width:40%;">
@@ -87,7 +87,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="debug_sql_threshold"><strong>Threshold performance RDBMS:</strong><br />
 				<small>In the detailed debug mode to record only the queries take longer than the number of seconds.</small></label></td>
 				<td><input maxlength="10" style="width:200px;" id="debug_sql_threshold" name="debug_sql_threshold" value="<?php echo htmlspecialchars($engine->config['debug_sql_threshold']);?>" /></td>
@@ -95,7 +95,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="debug_admin_only"><strong>Closed diagnosis:</strong><br />
 				<small>Show debug data of the program (and DBMS) only for the administrator.</small></label></td>
 				<td><input type="checkbox" id="debug_admin_only" name="debug_admin_only" value="1"<?php echo ( $engine->config['debug_admin_only'] ? ' checked="checked"' : '' );?> /></td>
@@ -106,7 +106,7 @@ function admin_configsystem(&$engine, &$module)
 					Caching Options
 				</th>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="cache"><strong>Cache rendered pages:</strong><br />
 				<small>Save rendered pages in the local cache to speed up the subsequent boot. Valid only for unregistered visitors.</small></label></td>
 				<td><input type="checkbox" id="cache" name="cache" value="1"<?php echo ( $engine->config['cache'] ? ' checked="checked"' : '' );?> /></td>
@@ -114,7 +114,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="cache_ttl"><strong>Term relevance cached pages:</strong><br />
 				<small>Cache pages no more than a specified number of seconds.</small></label></td>
 				<td><input maxlength="5" style="width:200px;" id="cache_ttl" name="cache_ttl" value="<?php echo htmlspecialchars($engine->config['cache_ttl']);?>" /></td>
@@ -122,7 +122,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="cache_sql"><strong>Cache DBMS queries:</strong><br />
 				<small>Maintain a local cache the results of certain resource-SQL-queries.</small></label></td>
 				<td><input type="checkbox" id="cache_sql" name="cache_sql" value="1"<?php echo ( $engine->config['cache_sql'] ? ' checked="checked"' : '' );?> /></td>
@@ -130,7 +130,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="cache_sql_ttl"><strong>Term relevance Cache Database:</strong><br />
 				<small>Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.</small></label></td>
 				<td><input maxlength="5" style="width:200px;" id="cache_sql_ttl" name="cache_sql_ttl" value="<?php echo htmlspecialchars($engine->config['cache_sql_ttl']);?>" /></td>
@@ -141,14 +141,14 @@ function admin_configsystem(&$engine, &$module)
 					Text Handler
 				</th>
 			</tr>
-			<!--<tr>
+			<!--<tr class="hl_setting">
 				<td class="label"><label for="bbcode"><strong>Parser BBCode:</strong></label></td>
 				<td><input type="checkbox" id="bbcode" name="bbcode" value="1" <?php echo ( $engine->config['bbcode'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>-->
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="allow_x11colors"><strong>X11 Colors Usage:</strong><br />
 				<small>Extents the available colors for <tt>??(color) background??</tt> and <tt>!!(color) text!!</tt> Unsetting slightly speed up the process of adding comments and save the page.</small></label></td>
 				<td><input type="checkbox" id="allow_x11colors" name="allow_x11colors" value="1"<?php echo ( $engine->config['allow_x11colors'] ? ' checked="checked"' : '' );?> /></td>
@@ -156,7 +156,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="default_typografica"><strong>Typographical Proofreader:</strong><br />
 				<small>Unsetting slightly speed up the process of adding comments and save the page.</small></label></td>
 				<td><input type="checkbox" id="default_typografica" name="default_typografica" value="1"<?php echo ( $engine->config['default_typografica'] ? ' checked="checked"' : '' );?> /></td>
@@ -164,7 +164,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="paragrafica"><strong>Paragrafica markings:</strong><br />
 				<small>Similar to the previous option, but will lead to disconnection of inoperable automatic table of contents: <tt>{{toc}}</tt>.</small></label></td>
 				<td><input type="checkbox" id="paragrafica" name="paragrafica" value="1"<?php echo ( $engine->config['paragrafica'] ? ' checked="checked"' : '' );?> /></td>
@@ -172,7 +172,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="allow_rawhtml"><strong>Global HTML Support:</strong><br />
 				<small>Use this option to open a potentially unsafe site.</small></label></td>
 				<td><input type="checkbox" id="allow_rawhtml" name="allow_rawhtml" value="1"<?php echo ( $engine->config['allow_rawhtml'] ? ' checked="checked"' : '' );?> /></td>
@@ -180,7 +180,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><strong>Filtering HTML:</strong><br />
 				<small>Blocks dangerous HTML-conservation facilities. Turn off the filter to open the site when the support HTML <u>very</u> undesirable!</small></td>
 				<td>
@@ -194,42 +194,42 @@ function admin_configsystem(&$engine, &$module)
 					Date Formats
 				</th>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="date_format"><strong>The format of the date (day, month, year):</strong></label></td>
 				<td><input maxlength="50" style="width:200px;" id="date_format" name="date_format" value="<?php echo htmlspecialchars($engine->config['date_format']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="time_format"><strong>The format of time (hour, minute):</strong></label></td>
 				<td><input maxlength="50" style="width:200px;" id="time_format" name="time_format" value="<?php echo htmlspecialchars($engine->config['time_format']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="time_format_seconds"><strong>The format of the exact time (hours, minutes, seconds):</strong></label></td>
 				<td><input maxlength="50" style="width:200px;" id="time_format_seconds" name="time_format_seconds" value="<?php echo htmlspecialchars($engine->config['time_format_seconds']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="name_date_macro"><strong>The format of a macro (name, time):</strong></label></td>
 				<td><input maxlength="50" style="width:200px;" id="name_date_macro" name="name_date_macro" value="<?php echo htmlspecialchars($engine->config['name_date_macro']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="date_macro_format"><strong>Format Date / Time for a macro:</strong></label></td>
 				<td><input maxlength="50" style="width:200px;" id="date_macro_format" name="date_macro_format" value="<?php echo htmlspecialchars($engine->config['date_macro_format']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="date_precise_format"><strong>The format of the exact time / date for a macro:</strong></label></td>
 				<td><input maxlength="50" style="width:200px;" id="date_precise_format" name="date_precise_format" value="<?php echo htmlspecialchars($engine->config['date_precise_format']);?>" /></td>
 			</tr>
@@ -239,7 +239,7 @@ function admin_configsystem(&$engine, &$module)
 					Miscellaneous
 				</th>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="cookie_prefix"><strong>The prefix for the names of cookies:</strong><br />
 				<small>Special prefix used for all the cookies platform.</small></label></td>
 				<td><input maxlength="50" style="width:200px;" id="cookie_prefix" name="cookie_prefix" value="<?php echo htmlspecialchars($engine->config['cookie_prefix']);?>" /></td>
@@ -247,7 +247,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="session_prefix"><strong>The prefix for the names of session:</strong><br />
 				<small>Special prefix used for all the session platform.</small></label></td>
 				<td><input maxlength="50" style="width:200px;" id="session_prefix" name="session_prefix" value="<?php echo htmlspecialchars($engine->config['session_prefix']);?>" /></td>
@@ -255,7 +255,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="rewrite_mode"><strong>Use <tt>mod_rewrite</tt>:</strong><br />
 				<small>If your web server supports this feature, turn to get "beautiful" the addresses of pages.</small></label></td>
 				<td><input type="checkbox" id="rewrite_mode" name="rewrite_mode" value="1"<?php echo ( $engine->config['rewrite_mode'] == 1 ? ' checked="checked"' : '' );?> /></td>
