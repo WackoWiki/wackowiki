@@ -14,7 +14,10 @@ echo $this->has_access('write') ? "<li><a href=\"".$this->href('edit')."\" acces
 if ($this->page)
 {
 	// Revisions link
-	echo $this->page['modified'] ? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_page_time_formatted()."</a></li>\n" : "";
+	echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->user_is_owner()) || $this->is_admin() )
+			? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_string_formatted($this->page['modified'])."</a></li>\n"
+			: "<li>".$this->get_time_string_formatted($this->page['modified'])."</li>\n"
+		);
 
 	// If owner is current user
 	if ($this->user_is_owner())

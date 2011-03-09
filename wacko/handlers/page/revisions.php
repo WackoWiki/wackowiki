@@ -16,8 +16,7 @@ $output	= '';
 if ($this->config['hide_revisions'])
 {
 	if ( ($this->config['hide_revisions'] == 1 && !$this->get_user())
-	|| ($this->config['hide_revisions'] == 2 && !$this->user_is_owner())
-	|| $this->is_admin() )
+	|| ($this->config['hide_revisions'] == 2 && (!$this->user_is_owner() || !$this->is_admin()) ) )
 	{
 		$this->redirect($this->href('show'));
 	}
