@@ -70,16 +70,20 @@ require ('themes/_common/_header.php');
 		{
 			// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
 			if (!in_array($this->tag, $this->get_bookmark_links()))
+			{
 				echo '<li><a href="'. $this->href('', '', "addbookmark=yes")
 					.'"><img src="'. $this->config['theme_url']
 					.'icons/bookmark1.gif" alt="+" title="'.
 					$this->get_translation('AddToBookmarks') .'"/></a></li>';
+			}
 			else
+			{
 				echo '<li><a href="'. $this->href('', '', "removebookmark=yes")
 					.'"><img src="'. $this->config['theme_url']
 					.'icons/bookmark2.gif" alt="-" title="'.
 					$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
 			}
+		}
 	echo "\n</ol></div>";
 ?>
 
@@ -87,7 +91,7 @@ require ('themes/_common/_header.php');
 <?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user())
-   { ?> <span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->get_user_name()) ?></span><small> ( <span class="nobr Tune"><?php
+   { ?> <span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span><small> ( <span class="nobr Tune"><?php
 echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
  | <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span>
 )</small>

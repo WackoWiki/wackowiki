@@ -168,7 +168,7 @@ require ('themes/_common/_header.php');
 		<img
 			src="<?php echo $this->config['theme_url'] ?>icons/user.gif"
 			alt="" width="16" height="16" border="0" align="middle"
-			style="vertical-align: baseline;" /> <?php echo $this->link($this->get_user_name()) ?>
+			style="vertical-align: baseline;" /> <?php echo $this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?>
 		</span> <small> ( <span class="nobr Tune"> <?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
 		| <a
 			onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');"

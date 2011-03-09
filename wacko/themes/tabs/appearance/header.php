@@ -19,7 +19,7 @@ require ('themes/_common/_header.php');
     <?php if ($this->get_user()) { ?>
     <img
 	src="<?php echo $this->config['theme_url'] ?>icons/role.gif"
-	width="9" height="15" alt="" /><span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
+	width="9" height="15" alt="" /><span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
     <?php
 echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
     | <a

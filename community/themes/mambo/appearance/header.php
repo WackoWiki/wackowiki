@@ -153,7 +153,7 @@ echo $this->page['modified'] ? "<a href=\"".$this->href('revisions')."\" title=\
             <span class="nobr">
 				<?php echo $this->get_translation('YouAre'); ?>
 				<img src="<?php echo $this->config['theme_url'] ?>icons/user.gif" width="12" height="12" border="0" style="vertical-align: baseline; " alt=""/>
-				<?php echo $this->link($this->get_user_name()) ?>
+				<?php echo $this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?>
 			</span>
             <small>
 				(
