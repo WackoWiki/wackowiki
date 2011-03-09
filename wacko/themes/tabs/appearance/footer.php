@@ -18,15 +18,30 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 	$ysize = $selected ? 25 : 30;
 	if ($text == '') return; // no tab;
 	if ($selected) $text = "<a href=\"$link\" title=\"$hint\">".$text."</a>";
-	if (!$selected) echo "<div class='TabSelected$bonus' style='background-image:url(".$engine->config['theme_url']."icons/tabbg.gif);' >";
-	else echo "<div class='Tab$bonus' style='background-image:url(".$engine->config['theme_url']."icons/tabbg".($bonus=="2a" ? "del" : "1").".gif);'>";
+	if (!$selected)
+	{
+		echo "<div class='TabSelected$bonus' style='background-image:url(".$engine->config['theme_url']."icons/tabbg.gif);' >";
+	}
+	else
+	{
+		echo "<div class='Tab$bonus' style='background-image:url(".$engine->config['theme_url']."icons/tabbg".($bonus=="2a" ? "del" : "1").".gif);'>";
+	}
+
 	$bonus2 = $bonus=="2a"?"del":"";
 
 	echo '<table cellspacing="0" cellpadding="0" border="0" ><tr>';
 	echo "<td><img src='".
 	$engine->config['theme_url'].
 		"icons/tabr$selected".$bonus2.".gif' width='$xsize' align='top' hspace='0' vspace='0' height='$ysize' alt='' border='0' /></td>";
-	if (!$selected) echo "<td>"; else echo "<td valign='top'>";
+	if (!$selected)
+	{
+		echo "<td>";
+	}
+	else
+	{
+		echo "<td valign='top'>";
+	}
+
 	echo "<div class='TabText'>".$text."</div>";
 	echo "</td>";
 	echo "<td><img src='".
@@ -46,16 +61,21 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 	src="<?php echo $this->config['base_url'];?>images/z.gif"
 	width="5" height="1" alt="" align="left" border="0" /><img
 	src="<?php echo $this->config['base_url'];?>images/z.gif"
-	width="5" height="1" alt="" align="right" border="0" /> <?php echo_tab( $this->href('show'),  $this->get_translation('ShowTip'),
+	width="5" height="1" alt="" align="right" border="0" />
+<?php
+	echo_tab( $this->href('show'),  $this->get_translation('ShowTip'),
 	$this->has_access('read') ? $this->get_translation('ShowText') : "",
 	$this->method != 'show'
-	) ?> <?php echo_tab( $this->href('edit'),  $this->get_translation('EditTip'),
+	);
+	echo_tab( $this->href('edit'),  $this->get_translation('EditTip'),
 	$this->has_access('write') ? $this->get_translation('EditText') : "",
 	$this->method != 'edit'
-	) ?> <?php echo_tab( $this->href('revisions'),  $this->get_translation('RevisionTip'),
+	);
+	echo_tab( $this->href('revisions'),  $this->get_translation('RevisionTip'),
 	$this->page['modified'] ? $this->get_page_time_formatted() : "",
 	$this->method != 'revisions'
-	) ?> <?php
+	);
+
 	// if this page exists
 	if ($this->page)
 	{
@@ -75,6 +95,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 			$this->method != 'permissions'
 			);
 		}
+
 		if ($this->is_admin() || (!$this->config['remove_onlyadmins'] && $this->user_is_owner()))
 		{
 			echo_tab( $this->href('remove'),  $this->get_translation('DeleteTip')."",
@@ -84,8 +105,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 				);
 		}
 	}
-	?>
-	<?php
+
 	if ($this->get_user())
 	{
 		echo_tab( $this->href('new'), $this->get_translation('CreateNewPage'),
@@ -93,8 +113,8 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 		$this->method != 'new',
 		"2"
 		);
-	} ?>
-	<?php
+	}
+
 	if ($this->get_user())
 	{
 		echo_tab( $this->href('referrers'), $this->get_translation('ReferrersTip'),

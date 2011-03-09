@@ -314,7 +314,7 @@ echo "\n";
 	echo echo_tab(
 		$this->href('revisions'),
 		$this->get_translation('RevisionTip'),
-		(/* $this->forum === false && */ $this->page && $this->has_access('read')) ? $this->get_translation('RevisionText') : '',
+		((($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->user_is_owner()) || $this->is_admin() ) && $this->forum === false && $this->page && $this->has_access('read')) ? $this->get_translation('RevisionText') : '',
 		$this->method == 'revisions' || $this->method == 'diff',
 		'r');
 

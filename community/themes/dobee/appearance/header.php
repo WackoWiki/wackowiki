@@ -97,7 +97,12 @@ require ('themes/_common/_header.php');
 					<tr>
 						<td class="modulecontent">
 						<div class="modulecontent"><?php
-						echo $this->page['modified'] ? "<a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_page_time_formatted()."</a>\n" : "";
+							// Revisions link
+								echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->user_is_owner()) || $this->is_admin() )
+									? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_string_formatted($this->page['modified'])."</a></li>\n"
+									: "<li>".$this->get_time_string_formatted($this->page['modified'])."</li>\n"
+								);
+
 						echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
 
 						if ($this->has_access('write')) {
