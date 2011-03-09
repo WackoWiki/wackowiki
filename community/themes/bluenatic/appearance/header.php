@@ -23,7 +23,9 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 	<?php
 	// We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 	if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noindex'] == 1 || $this->page['noindex'] == 1)
+	{
 		echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
+	}
 	?>
 	<title><?php echo htmlspecialchars($this->config['site_name'])." : ".(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : ''); ?></title>
 	<!-- JavaScript used by WackoWiki -->
@@ -47,7 +49,7 @@ if ($this->method == 'edit')
 }
 ?>
 	<script type="text/javascript" src="<?php echo $this->config['base_url'];?>js/captcha.js"></script>
-	<?php
+<?php
 // Doubleclick edit feature.
 // Enabled only for registered users who don't swith it off (requires class=page in show handler).
 if ($user = $this->get_user())
@@ -101,7 +103,7 @@ else if($this->has_access('write'))
 			<?php // If logged in, show username, settings and logout ?>
 			<?php if($user = $this->get_user()) { ?>
 			<div class="user">
-				<?php echo $this->link($this->get_user_name()); ?>
+				<?php echo $this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()); ?>
 				<small>( <?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?> |
 				<a href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a> )</small>
 			</div>

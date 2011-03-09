@@ -47,7 +47,7 @@ if ($this->get_user())
   <?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user()) { ?>
-  <?php echo $this->get_translation('YouAre')." ".$this->link($this->get_user_name()) ?><br />
+  <?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?><br />
   <small>
   <?php
       echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>

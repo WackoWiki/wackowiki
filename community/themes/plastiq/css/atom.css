@@ -148,11 +148,11 @@ textarea {
 }
 .code {
 	letter-spacing: normal;
-	word-spacing: normal;		
-	background-color: #EDEDED;
-	background-image: none;
+	word-spacing: normal;
+	background: none repeat scroll 0 0 #EDEDED;
 	height: auto;
 	border: none;
+	overflow: auto;
 }
 .banner {
 	height: 60px;
