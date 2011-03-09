@@ -138,7 +138,7 @@ function admin_lock(&$engine, &$module)
 		{
 			if ($table['Name'] == $wtable['name'])
 			{
-				echo '<tr>'.
+				echo '<tr class="hl_setting">'.
 						'<td class="label"><strong>'.$table['Name'].'</strong></td>'.
 						'<td>&nbsp;&nbsp;&nbsp;'.$table['Rows'].'</td>'.
 						'<td>'.ceil($table['Data_length'] / 1000).' kB</td>'.
