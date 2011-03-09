@@ -32,6 +32,7 @@ $pages1 = $this->load_all(
 	"WHERE u.account_type = '0' ".
 	"ORDER BY p.created DESC ".
 	"LIMIT ".($max * 2), 1);
+
 // loading revisions
 $pages2 = $this->load_all(
 	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, c.tag as comment_on_page, user_name ".
@@ -70,9 +71,13 @@ if ($pages = array_merge($pages1, $pages2))
 	foreach ($pages as $page)
 	{
 		if ($this->config['hide_locked'])
+		{
 			$access = ( $page['comment_on_id'] ? $this->has_access('read', $page['comment_on_id']) : $this->has_access('read', $page['page_id']) );
+		}
 		else
+		{
 			$access = true;
+		}
 
 		if (!isset($printed[$page['tag']])) $printed[$page['tag']] = '';
 
@@ -85,15 +90,25 @@ if ($pages = array_merge($pages1, $pages2))
 
 			if ($day != $curday)
 			{
-				if ($curday) echo "</ul>\n<br /></li>\n";
+				if ($curday)
+				{
+					echo "</ul>\n<br /></li>\n";
+				}
+
 				echo '<li><strong>'.date($this->config['date_format'],strtotime($day)).":</strong>\n<ul>\n";
 				$curday = $day;
 			}
 
 			// print entry
-			$separator = ' . . . . . . . . . . . . . . . . ';
-			$author = ( $page['user_name'] == GUEST ? '<em title="'.( $admin ? $page['ip'] : '' ).'">'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['user_name']).'" title="'.( $admin ? $page['ip'] : '' ).'">'.$page['user_name'].'</a>' );
-			$viewed = ( $user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['date'] > $user['last_mark'] ? ' class="viewed"' : '' );
+			$separator	= ' . . . . . . . . . . . . . . . . ';
+			$author		= ( $page['user_name'] == GUEST ? '<em title="'.( $admin ? $page['ip'] : '' ).'">'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['user_name']).'" title="'.( $admin ? $page['ip'] : '' ).'">'.$page['user_name'].'</a>' );
+			$viewed		= ( $user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['date'] > $user['last_mark'] ? ' class="viewed"' : '' );
+			$revisions	= ($this->config['hide_revisions']
+				? (($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->user_is_owner()) || $this->is_admin() )
+					? ' ('.$this->link('/'.$page['tag'], 'revisions', $this->get_translation('History'), 0, 1).')'
+					: ''
+				: ' ('.$this->link('/'.$page['tag'], 'revisions', $this->get_translation('History'), 0, 1).')');
+
 			echo '<li'.$viewed.'><span class=\"dt\">'.date($this->config['time_format_seconds'], strtotime($time)).'&nbsp;&nbsp;</span>';
 
 			// new comment
@@ -112,12 +127,13 @@ if ($pages = array_merge($pages1, $pages2))
 			else
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
-				echo "<img src=\"".$this->config['theme_url']."icons/edit.png"."\" title=\"".$this->get_translation('NewRevisionAdded')."\" alt=\"[changed]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1).' ('.$this->link('/'.$page['tag'], 'revisions', $this->get_translation('History'), 0, 1).') &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>';
+				echo "<img src=\"".$this->config['theme_url']."icons/edit.png"."\" title=\"".$this->get_translation('NewRevisionAdded')."\" alt=\"[changed]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1).$revisions.' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>';
 			}
 
 			echo "</li>\n";
 		}
 	}
+
 	echo "</ul>\n</li>\n</ul>\n";
 }
 
