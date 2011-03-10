@@ -4,7 +4,7 @@
 	$base_url = $this->config['base_url'];
 
 	// HTTP header with right Charset settings
-	header("Content-Type: text/html; charset=".$this->get_charset());
+	header('Content-Type: text/html; charset='.$this->get_charset());
 ?>
 <!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
