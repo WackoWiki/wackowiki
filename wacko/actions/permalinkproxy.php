@@ -36,7 +36,7 @@ if ( isset($page_id) )
 	{
 		if (isset($is_permanent))
 		{
-			header("HTTP/1.0 301 Moved Permanently");
+			header('HTTP/1.0 301 Moved Permanently');
 		}
 
 		if ($_page = $this->load_page('', $page_id, $revision_id, LOAD_CACHE, LOAD_META))
