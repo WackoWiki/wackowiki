@@ -55,33 +55,33 @@ $extension = strtolower($what[0]['file_ext']);
 if (($extension == 'gif') || ($extension == 'jpg') || ($extension == 'jpeg') || ($extension == 'png'))
 {
 	$isimage = true;
-	header("Content-Type: image/".$extension);
+	header('Content-Type: image/'.$extension);
 
 	if ($error)
 	{
 		$filepath = 'images/upload'.$error.'.gif';
-		header("HTTP/1.0 404 Not Found");
+		header('HTTP/1.0 404 Not Found');
 	}
 }
 else if ($extension == 'txt')
 {
 	$isplain = true;
-	header("Content-Type: text/plain");
+	header('Content-Type: text/plain');
 }
 else if ($extension == 'pdf')
 {
-	header("Cache-control: private");
-	header("Content-Type: application/pdf");
+	header('Cache-control: private');
+	header('Content-Type: application/pdf');
 }
 else
 {
-	header("Cache-control: private");
-	header("Content-Type: application/download");
+	header('Cache-control: private');
+	header('Content-Type: application/download');
 }
 
 if ($filepath)
 {
-	header("Content-Disposition:".( $isimage || $isplain ? "" : " attachment;" )." filename=".$what[0]['file_name']);
+	header('Content-Disposition:'.( $isimage || $isplain ? '' : ' attachment;' ).' filename='.$what[0]['file_name']);
 
 	if (!isset($isimage))
 	{
@@ -98,16 +98,16 @@ if ($filepath)
 else if ($error == 404)
 {
 	// Not sure what the point of wrapping it in the conditional was
-	// if (function_exists('virtual')) header("HTTP/1.0 404 Not Found");
-	header("HTTP/1.0 404 Not Found");
+	// if (function_exists('virtual')) header('HTTP/1.0 404 Not Found');
+	header('HTTP/1.0 404 Not Found');
 
 	echo $this->get_translation('UploadFileNotFound');
 }
 else
 {
 	// Not sure what the point of wrapping it in the conditional was
-	// if (function_exists('virtual')) header("HTTP/1.0 403 Forbidden");
-	header("HTTP/1.0 403 Forbidden");
+	// if (function_exists('virtual')) header('HTTP/1.0 403 Forbidden');
+	header('HTTP/1.0 403 Forbidden');
 
 	echo $this->get_translation('UploadFileForbidden');
 }
