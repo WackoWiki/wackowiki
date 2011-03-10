@@ -16,7 +16,7 @@ if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{
-		echo str_replace('%1',$this->href('edit'),$this->get_translation('DoesNotExists'));
+		echo str_replace('%1', $this->href('edit'), $this->get_translation('DoesNotExists'));
 	}
 	else
 	{
@@ -29,15 +29,15 @@ if ($this->has_access('read'))
 		if ($this->page['latest'] == 0)
 		{
 			echo "<div class=\"revisioninfo\">".
-			str_replace('%1',$this->href(),
-			str_replace('%2',$this->tag,
-			str_replace('%3',$this->page['modified'],
+			str_replace('%1', $this->href(),
+			str_replace('%2', $this->tag,
+			str_replace('%3', $this->page['modified'],
 			$this->get_translation('Revision')))).".</div>";
 		}
 
 		// display page
 		$this->context[++$this->current_context] = $this->tag;
-		$data = $this->format($this->page['body'], "msword");
+		$data = $this->format($this->page['body'], 'msword');
 		if ($this->tocAutoNumerate == 1)
 		{
 			$data = $this->tocEnumerate($data, 2); // TOC, Automatic numeration of headings

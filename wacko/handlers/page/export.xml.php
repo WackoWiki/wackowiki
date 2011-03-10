@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-header("Content-type: text/xml");
+header('Content-type: text/xml');
 
 $xml = "<?xml version=\"1.0\" encoding=\"".$this->get_charset()."\"?>\n";
 $xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
