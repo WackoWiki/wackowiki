@@ -85,9 +85,15 @@ class Cache
 		}
 
 		$fp			= fopen($filename, 'r');
+		$size		= filesize($filename);
+
+		if (empty($size))
+		{
+			return false;
+		}
 
 		// check for false and empty strings
-		if(($contents = fread($fp, filesize($filename))) === '')
+		if(($contents = fread($fp, $size)) === '')
 		{
 			return false;
 		}
