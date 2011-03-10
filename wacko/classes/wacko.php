@@ -1956,7 +1956,7 @@ class Wacko
 
 					$_GET['a']			= -1;
 					$_GET['b']			= $page['revision_id'];
-					$_GET['fastdiff']	= 1;
+					$_GET['diffmode']	= 1;
 					$diff				= $this->include_buffered('handlers/page/diff.php', 'oops', array('source' => 1));
 
 					// notifying watchers
