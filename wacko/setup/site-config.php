@@ -109,7 +109,7 @@ else
    </div>
 <?php
 
-// 4.3 -> 4.4: remove obsolete appendix 'index.php?page='
+// 4.3 -> 5.0: remove obsolete appendix 'index.php?page='
 $config['base_url'] = preg_replace('#/[^/]*$#', '/', $config['base_url']);
 
 ?>
