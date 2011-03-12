@@ -9,8 +9,9 @@ if (!defined('IN_WACKO'))
 //
 // for testing and improvement - thought as upgrade routine for the installer
 
-echo "<h2>Upgrade Utilities -> Migration Routines for R4.3 to R4.4.rc1 Upgrade</h2>";
+echo '<h2>Upgrade Utilities</h2>';
 echo 'Recent Wacko version '.$this->format('**!!(green)'.$this->config['wacko_version'].'!!**', 'wacko');
+echo '<h3>Migration Routines for R4.3 to R5.0.rc1 Upgrade</h3>';
 
 ########################################################
 ##            RENAME files to @page_id@file_name      ##
@@ -18,7 +19,7 @@ echo 'Recent Wacko version '.$this->format('**!!(green)'.$this->config['wacko_ve
 
 if ($this->is_admin())
 {
-	echo "<h3>1. Renames files in \\files\perpage folder to @page_id@file_name:</h3>";
+	echo "<h4>1. Renames files in \\files\perpage folder to @page_id@file_name:</h4>";
 
 	if (!isset($_POST['rename']))
 	{
@@ -81,7 +82,7 @@ if ($this->is_admin())
 
 if ($this->is_admin())
 {
-	echo "<h3>2. Move global files from \\files to \\files\global folder:</h3>";
+	echo "<h4>2. Move global files from \\files to \\files\global folder:</h4>";
 
 	if (!isset($_POST['move']))
 	{
@@ -231,7 +232,7 @@ if (!function_exists('convert_into_menu_table'))
 
 if ($this->is_admin())
 {
-	echo "<h3>3. Migrates user options to user_setting table:</h3>";
+	echo "<h4>3. Migrates user options to user_setting table:</h4>";
 
 	if (!isset($_POST['migrate_user_otions']))
 	{
@@ -319,7 +320,7 @@ if ($this->is_admin())
 
 if ($this->is_admin())
 {
-	echo "<h3>4. Update User statistics:</h3>";
+	echo "<h4>4. Update User statistics:</h4>";
 
 	if (!isset($_POST['build_user_stats']))
 	{
@@ -513,7 +514,7 @@ if ($this->is_admin())
 		}
 	}
 
-	echo "<h3>5. Moves users pages into user name space: ".$this->config['users_page'].'/'."</h3>";
+	echo "<h4>5. Moves users pages into user name space: ".$this->config['users_page'].'/'."</h4>";
 
 	if (!isset($_POST['userspace']))
 	{
@@ -552,7 +553,7 @@ if ($this->is_admin())
 
 if ($this->is_admin())
 {
-	echo "<h3>6. Set page title based on tag if empty:</h3>";
+	echo "<h4>6. Set page title based on tag if empty:</h4>";
 
 	if (!isset($_POST['set_title']))
 	{

@@ -422,7 +422,7 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R4.3 to R4.4.rc1
+				// upgrade from R4.3 to R5.0.rc1
 				case 'R4.3':
 					echo "         <h2>Wacko R4.3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
@@ -815,7 +815,7 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R4.3 to R4.4.rc1
+				// upgrade from R4.3 to R5.0.rc1
 				case 'R4.3':
 					echo "         <h2>Wacko R4.3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
@@ -1217,7 +1217,7 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R4.3 to R4.4.rc1
+				// upgrade from R4.3 to R5.0.rc1
 				case 'R4.3':
 					echo "         <h2>Wacko R4.3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";

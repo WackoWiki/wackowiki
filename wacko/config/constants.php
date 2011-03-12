@@ -14,6 +14,7 @@ define('BACKUP_FILE_GZIP_SUFFIX',		'.gz');				// regular compressed files suffix
 define('BOOKMARK_AUTO',					0);
 define('BOOKMARK_USER',					1);
 define('BOOKMARK_DEFAULT',				2);
+define('CACHE_CONFIG_DIR',				'config/');
 define('CACHE_FEED_DIR',				'feeds/');
 define('CACHE_PAGE_DIR',				'pages/');
 define('CACHE_SQL_DIR',					'queries/');
@@ -35,7 +36,7 @@ define('TRAN_DONTLOAD',					1);
 define('STANDARD_HANDLERS',				'addcomment|categories|claim|diff|edit|latex|msword|new|permissions|print|properties|rate|referrers|referrers_sites|remove|rename|revisions|show|watch');
 
 // do not change this two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-define('WACKO_VERSION',					'R4.4.dev');
+define('WACKO_VERSION',					'R5.0.dev');
 define('XML_HTMLSAX3',					'lib/HTMLSax3/');
 #define('XML_HTMLSAX3',					dirname(__FILE__).'/lib/HTMLSax3/');
 define('ACTIONS4DIFF',					'a, anchor, toc'); //allowed actions in DIFF
