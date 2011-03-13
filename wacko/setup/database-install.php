@@ -184,6 +184,7 @@ $config_db['hide_locked']					= $config['hide_locked'];
 $config_db['hide_rating']					= $config['hide_rating'];
 $config_db['hide_revisions']				= $config['hide_revisions'];
 $config_db['hide_toc']						= $config['hide_toc'];
+$config_db['intercom_delay']				= $config['intercom_delay'];
 $config_db['keep_deleted_time']				= $config['keep_deleted_time'];
 $config_db['language']						= $config['language'];
 $config_db['license']						= $config['license'];
