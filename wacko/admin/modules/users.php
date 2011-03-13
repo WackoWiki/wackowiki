@@ -36,8 +36,8 @@ function admin_users(&$engine, &$module)
 	if (isset($_POST['save']))
 	{
 
-		#$this->log(4, "Updated group members ");
-		#$this->set_message($this->get_translation('GroupsUpdated'));
+		#$engine->log(4, "Updated group members ");
+		#$engine->set_message($engine->get_translation('GroupsUpdated'));
 
 	}
 	else
@@ -74,9 +74,25 @@ function admin_users(&$engine, &$module)
 						"signup_time		= NOW(), ".
 						"email	= '".quote($engine->dblink, $_POST['email'])."', ".
 						"real_name		= '".quote($engine->dblink, $_POST['newrealname'])."', ".
-						"lang			= '".quote($engine->dblink, $_POST['lang'])."', ".
 						"enabled			= '".quote($engine->dblink, (int)$_POST['enabled'])."', ".
 						"user_name		= '".quote($engine->dblink, $_POST['newname'])."'");
+
+				// get new user_id
+				$_user_id = $engine->load_single(
+					"SELECT user_id ".
+					"FROM ".$engine->config['table_prefix']."user ".
+					"WHERE user_name = '".quote($engine->dblink, $user_name)."' ".
+					"LIMIT 1");
+
+				// INSERT user settings
+				$engine->sql_query(
+					"INSERT INTO ".$engine->config['table_prefix']."user_setting ".
+					"SET ".
+						"user_id		= '".quote($engine->dblink, $_user_id['user_id'])."', ".
+						"typografica	= '".(($engine->config['default_typografica'] == 1) ? 1 : 0)."', ".
+						"lang			= '".quote($engine->dblink, ($lang ? $lang : $engine->config['language']))."', ".
+						"theme			= '".quote($engine->dblink, $engine->config['theme'])."', ".
+						"send_watchmail	= '".quote($engine->dblink, 1)."'");
 
 				$engine->set_message($engine->get_translation('UsersAdded'));
 				$engine->log(4, "Created a new user //'{$_POST['newname']}'//");
@@ -113,7 +129,6 @@ function admin_users(&$engine, &$module)
 					"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."' ".
 					"LIMIT 1");
 
-
 				$engine->set_message($engine->get_translation('UsersRenamed'));
 				$engine->log(4, "User //'{$user['user_name']}'// renamed //'{$_POST['newname']}'//");
 			}
@@ -123,6 +138,9 @@ function admin_users(&$engine, &$module)
 		{
 			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}user ".
+				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
+			$engine->sql_query(
+				"DELETE FROM {$engine->config['table_prefix']}user_setting ".
 				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
 			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}group_member ".
@@ -137,19 +155,62 @@ function admin_users(&$engine, &$module)
 	//   edit forms
 	/////////////////////////////////////////////
 
-		// add new user
-		if (isset($_POST['create']))
+	// add new user
+	if (isset($_POST['create']))
+	{
+		echo "<form action=\"admin.php\" method=\"post\" name=\"users\">";
+		echo "<input type=\"hidden\" name=\"mode\" value=\"users\" />";
+		echo "<h2>".$engine->get_translation('UsersAddNew')."</h2>";
+		echo '<table class="formation">';
+		echo '<tr><td><label for="newname">'.$engine->get_translation('UserName').'</label></td>'.
+			'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : '' ).'" size="20" maxlength="100" /></td></tr>'.
+			'<tr><td><label for="newrealname">'.$engine->get_translation('RealName').'</label></td>'.
+			'<td><input id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname']) : '' ).'" size="20" maxlength="100" /></td></tr>'.
+			'<tr><td><label for="email">'.$engine->get_translation('Email').'</label></td>'.
+			'<td><input id="email" name="email" value="'.( isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ).'" size="50" maxlength="100" /></td></tr>'.
+			'<tr><td><label for="lang">'.$engine->get_translation('YourLanguage').'</label></td>'.
+			'<td><select id="lang" name="lang">';?>
+				<option value=""></option>
+				<?php
+				if ($langs = $engine->available_languages())
+				{
+					for ($i = 0; $i < count($langs); $i++)
+					{
+						echo "<option value=\"".$langs[$i]."\" ".($user['lang'] == $langs[$i] ? " selected=\"selected\"" : "").">".$langs[$i]."</option>\n";
+					}
+				}
+
+		echo '</select></td></tr>';
+		echo '<tr><td><label for="enabled">'.$engine->get_translation('UserEnabled').'</label></td>'.
+			'<td><input type="checkbox" id="enabled" name="enabled" value="1" '. ( !isset($_POST['enabled']) ? ' checked="checked"' : '' ).' /></td></tr>';
+		echo '<tr><td><br /><input id="submit" type="submit" name="create" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
+			'<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
+			'</td></tr>';
+		echo '</table><br />';
+		echo "</form>";
+	}
+	// edit user
+	else if (isset($_POST['edit']) && isset($_POST['change']))
+	{
+		if ($user = $engine->load_single(
+			"SELECT u.user_name, u.real_name, u.email, p.lang, u.enabled ".
+			"FROM {$engine->config['table_prefix']}user u ".
+				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
+			"WHERE u.user_id = '".quote($engine->dblink, $_POST['change'])."' ".
+				"AND u.account_type = '0' ".
+			"LIMIT 1"))
 		{
 			echo "<form action=\"admin.php\" method=\"post\" name=\"users\">";
 			echo "<input type=\"hidden\" name=\"mode\" value=\"users\" />";
-			echo "<h2>".$engine->get_translation('UsersAddNew')."</h2>";
+			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
 			echo '<table class="formation">';
-			echo '<tr><td><label for="newname">'.$engine->get_translation('UserName').'</label></td>'.
-				'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : '' ).'" size="20" maxlength="100" /></td></tr>'.
-				'<tr><td><label for="newrealname">'.$engine->get_translation('RealName').'</label></td>'.
-				'<td><input id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname']) : '' ).'" size="20" maxlength="100" /></td></tr>'.
-				'<tr><td><label for="email">'.$engine->get_translation('Email').'</label></td>'.
-				'<td><input id="email" name="email" value="'.( isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ).'" size="50" maxlength="100" /></td></tr>'.
+			echo '<tr><td><label for="newname">'.$engine->get_translation('UsersRename').' \'<tt>'.htmlspecialchars($user['user_name']).'</tt>\' in</label></td>'.
+				'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : htmlspecialchars($user['user_name']) ).'" size="20" maxlength="100" /></td></tr>'.
+				'<tr><td><label for="newrealname">'.$engine->get_translation('RealName').'</label> '.
+				'<td><input id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname']) : htmlspecialchars($user['real_name']) ).'" size="50" maxlength="100" /></td></tr>'.
+				'</td></tr>'.
+				'<tr><td><label for="newemail">'.$engine->get_translation('Email').'</label> '.
+				'<td><input id="newemail" name="newemail" value="'.( isset($_POST['newdescription']) ? htmlspecialchars($_POST['newemail']) : htmlspecialchars($user['email']) ).'" size="50" maxlength="100" /></td></tr>'.
 				'<tr><td><label for="lang">'.$engine->get_translation('YourLanguage').'</label></td>'.
 				'<td><select id="lang" name="lang">';?>
 					<option value=""></option>
@@ -162,81 +223,36 @@ function admin_users(&$engine, &$module)
 						}
 					}
 
-			echo '</select></td></tr>';
-			echo '<tr><td><label for="enabled">'.$engine->get_translation('UserEnabled').'</label></td>'.
-				'<td><input type="checkbox" id="enabled" name="enabled" value="1" '. ( !isset($_POST['enabled']) ? ' checked="checked"' : '' ).' /></td></tr>';
-			echo '<tr><td><br /><input id="submit" type="submit" name="create" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
+				echo '</select></td></tr>';
+				echo '<tr><td><label for="enabled">'.$engine->get_translation('UserEnabled').'</label></td>'.
+					'<td><input type="checkbox" id="enabled" name="enabled" value="1" '. ( isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked="checked"' : '' ).' /></td></tr>';
+				echo '<tr><td><br /><input id="submit" type="submit" name="edit" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
 				'<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
+				'<br /><small>'.$engine->get_translation('UsersRenameInfo').'</small>'.
 				'</td></tr>';
 			echo '</table><br />';
 			echo "</form>";
 		}
-		// edit user
-		else if (isset($_POST['edit']) && isset($_POST['change']))
-		{
-			if ($user = $engine->load_single(
-				"SELECT u.user_name, u.real_name, u.email, p.lang, u.enabled ".
-				"FROM {$engine->config['table_prefix']}user u ".
-					"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
-				"WHERE u.user_id = '".quote($engine->dblink, $_POST['change'])."' ".
-					"AND u.account_type = '0' ".
-				"LIMIT 1"))
-			{
-				echo "<form action=\"admin.php\" method=\"post\" name=\"users\">";
-				echo "<input type=\"hidden\" name=\"mode\" value=\"users\" />";
-				echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
-				echo '<table class="formation">';
-				echo '<tr><td><label for="newname">'.$engine->get_translation('UsersRename').' \'<tt>'.htmlspecialchars($user['user_name']).'</tt>\' in</label></td>'.
-					'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : htmlspecialchars($user['user_name']) ).'" size="20" maxlength="100" /></td></tr>'.
-					'<tr><td><label for="newrealname">'.$engine->get_translation('RealName').'</label> '.
-					'<td><input id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname']) : htmlspecialchars($user['real_name']) ).'" size="50" maxlength="100" /></td></tr>'.
-					'</td></tr>'.
-					'<tr><td><label for="newemail">'.$engine->get_translation('Email').'</label> '.
-					'<td><input id="newemail" name="newemail" value="'.( isset($_POST['newdescription']) ? htmlspecialchars($_POST['newemail']) : htmlspecialchars($user['email']) ).'" size="50" maxlength="100" /></td></tr>'.
-					'<tr><td><label for="lang">'.$engine->get_translation('YourLanguage').'</label></td>'.
-					'<td><select id="lang" name="lang">';?>
-						<option value=""></option>
-						<?php
-						if ($langs = $engine->available_languages())
-						{
-							for ($i = 0; $i < count($langs); $i++)
-							{
-								echo "<option value=\"".$langs[$i]."\" ".($user['lang'] == $langs[$i] ? " selected=\"selected\"" : "").">".$langs[$i]."</option>\n";
-							}
-						}
+	}
 
-					echo '</select></td></tr>';
-					echo '<tr><td><label for="enabled">'.$engine->get_translation('UserEnabled').'</label></td>'.
-						'<td><input type="checkbox" id="enabled" name="enabled" value="1" '. ( isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked="checked"' : '' ).' /></td></tr>';
-					echo '<tr><td><br /><input id="submit" type="submit" name="edit" value="'.$engine->get_translation('GroupsSaveButton').'" /> '.
-					'<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
-					'<br /><small>'.$engine->get_translation('UsersRenameInfo').'</small>'.
-					'</td></tr>';
-				echo '</table><br />';
-				echo "</form>";
-			}
-		}
-		// delete user
-		if (isset($_POST['delete']) && isset($_POST['change']))
+	// delete user
+	if (isset($_POST['delete']) && isset($_POST['change']))
+	{
+		if ($user = $engine->load_single("SELECT user_name FROM {$engine->config['table_prefix']}user WHERE user_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
 		{
-			if ($user = $engine->load_single("SELECT user_name FROM {$engine->config['table_prefix']}user WHERE user_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
-			{
-				echo "<form action=\"admin.php\" method=\"post\" name=\"users\">";
-				echo "<input type=\"hidden\" name=\"mode\" value=\"users\" />";
-				echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
-				echo '<table class="formation">';
-				echo '<tr><td><label for="">'.$engine->get_translation('UsersDelete').' \'<tt>'.htmlspecialchars($user['user_name']).'</tt>\'?</label> '.
-					'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
-					'<input id="button" type="button" value="no" style="width:40px;" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
-					'<br /><small>'.$engine->get_translation('UsersDeleteInfo').'</small>'.
-					'</td></tr>';
-				echo '</table><br />';
-				echo "</form>";
-			}
+			echo "<form action=\"admin.php\" method=\"post\" name=\"users\">";
+			echo "<input type=\"hidden\" name=\"mode\" value=\"users\" />";
+			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
+			echo '<table class="formation">';
+			echo '<tr><td><label for="">'.$engine->get_translation('UsersDelete').' \'<tt>'.htmlspecialchars($user['user_name']).'</tt>\'?</label> '.
+				'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
+				'<input id="button" type="button" value="no" style="width:40px;" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
+				'<br /><small>'.$engine->get_translation('UsersDeleteInfo').'</small>'.
+				'</td></tr>';
+			echo '</table><br />';
+			echo "</form>";
 		}
-?>
-
-<?php
+	}
 
 	// get user
 	if (isset($_GET['user_id']))
@@ -266,17 +282,17 @@ function admin_users(&$engine, &$module)
 				'</tr>'.
 				'<tr class="lined">'."\n".
 					'<th valign="top" align="center">'.$engine->get_translation('YourLanguage').'</th>'.
-					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['user_name'].'</td>'.
+					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['lang'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
 					'<th valign="top" align="center">'.$engine->get_translation('ChooseTheme').'</th>'.
-					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['user_name'].'</td>'.
+					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['theme'].'</td>'.
 				'</tr>'.
 				'<tr class="lined">'."\n".
 					'<th valign="top" align="center">'.$engine->get_translation('UserEnabled').'</th>'.
 					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$user['enabled'].'</td>'.
 				'</tr>';
-			?>
+?>
 		</table>
 		<?php
 
@@ -287,9 +303,9 @@ function admin_users(&$engine, &$module)
 		echo '<br /><input id="button" type="submit" name="addmember" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
 		echo '<input id="button" type="submit" name="removemember" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
 		echo '<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />';
-	 ?>
+?>
 		</form>
-		<?php
+<?php
 	}
 	else
 	{
@@ -432,7 +448,7 @@ function admin_users(&$engine, &$module)
 				"u.account_type = '0' ".
 			( $order ? $order : 'ORDER BY u.user_id DESC ' ).
 			"LIMIT {$pagination['offset']}, $limit");
-	?>
+?>
 		<form action="admin.php" method="post" name="users">
 		<input type="hidden" name="mode" value="users" />
 
@@ -453,7 +469,7 @@ function admin_users(&$engine, &$module)
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $signup_time; ?>">Signuptime</a></th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $session_time; ?>">Sessiontime</a></th>
 				</tr>
-	<?php
+<?php
 		if ($users)
 		{
 			foreach ($users as $row)
@@ -478,7 +494,7 @@ function admin_users(&$engine, &$module)
 		{
 			echo '<tr><td colspan="5" align="center"><br /><em>No users that meet the criteria</em></td></tr>';
 		}
-	?>
+?>
 			</table>
 			<?php if (isset($pagination['text'])) echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</div>'."\n";
 
@@ -489,7 +505,7 @@ function admin_users(&$engine, &$module)
 			echo '<br /><input id="button" type="submit" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
 			echo '<input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
 			echo '<input id="button" type="submit" name="delete" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
-		 ?>
+?>
 		</form>
 
 <?php

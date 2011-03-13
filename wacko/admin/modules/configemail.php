@@ -50,7 +50,7 @@ function admin_configemail(&$engine, &$module)
 			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}config SET config_value = '$value' WHERE config_name = '$key'");
 		}
-		$engine->log(1, '!!Updated security settings!!');
+		$engine->log(1, '!!Updated email settings!!');
 		$engine->redirect(rawurldecode($engine->href()));
 	}
 ?>
