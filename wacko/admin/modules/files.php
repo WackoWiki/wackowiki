@@ -288,7 +288,7 @@ function admin_files(&$engine, &$module)
 
 	foreach($files as $file)
 	{
-		$engine->filesCache[$file['page_id']][$file['file_name']] = &$file;
+		$engine->files_cache[$file['page_id']][$file['file_name']] = &$file;
 
 		$dt		= $file['uploaded_dt'];
 		$desc	= $engine->format($file['description'], 'typografica');
