@@ -371,6 +371,7 @@ $wacko_translation = array(
 	'UnWatchText'			=> 'Not follow',
 	'UserSettingsStored' => 'Preferencias de usuario guardadas!',
 	'LoggedOut' => 'Ahora estás desconectado/a.',
+	'LoggedOutAuto'			=> 'For security, your session has ended. Please log in again.',
 
 	// user settings
 	'Hello' => 'Hola',

@@ -371,6 +371,7 @@ $wacko_translation = array(
 	'UnWatchText'			=> 'Not follow',
 	'UserSettingsStored' => 'Brugeropsætningen gemt!',
 	'LoggedOut' => 'Du er nu logget ud.',
+	'LoggedOutAuto'			=> 'For security, your session has ended. Please log in again.',
 
 	// user settings
 	'Hello' => 'Hej',

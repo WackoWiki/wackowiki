@@ -10,14 +10,15 @@ $order = '';
 $param = '';
 $groups = '';
 $usergroups = '';
+$error = '';
 
 // display user profile
-if (isset($_GET['profile']) && $_GET['profile'] == true)
+if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 {
 	// does requested user exists?
-	if (false == $user = $this->load_user($_GET['profile']))
+	if (false == $user = $this->load_user($_REQUEST['profile']))
 	{
-		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_GET['profile']), str_replace('%1', $this->supertag, $this->get_translation('UsersNotFound'))).'</div>';
+		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_REQUEST['profile']), str_replace('%1', $this->supertag, $this->get_translation('UsersNotFound'))).'</div>';
 	}
 	else
 	{
@@ -48,7 +49,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				$error = str_replace('%1', strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE, $this->get_translation('UsersPMOversized'));
 			}
 			// personal messages flood control
-			else if ($_SESSION['intercom_delay'] && ((time() - $_SESSION['intercom_delay']) < $this->config['intercom_delay']))
+			else if (isset($_SESSION['intercom_delay']) && ((time() - $_SESSION['intercom_delay']) < $this->config['intercom_delay']))
 			{
 				$error = str_replace('%1', $this->config['intercom_delay'], $this->get_translation('UsersPMFlooded'));
 			}
@@ -73,7 +74,7 @@ if (isset($_GET['profile']) && $_GET['profile'] == true)
 				// compose headers
 				$headers	= array('Message-ID: <$msgID>');
 
-				if ($_POST['ref'] == true)
+				if (isset($_POST['ref']) && $_POST['ref'] == true)
 				{
 					$headers[] = "In-Reply-To: <{$_POST['ref']}>";
 					$headers[] = "References: <{$_POST['ref']}>";
@@ -391,7 +392,7 @@ else
 	{
 		foreach ($users as $user)
 		{
-			// Users inactive for ONE year - highlighted stricken through and with pink background on hover
+			// users inactive for ONE year
 			if ((time()-strtotime($user['session_time']))>=31536000)  echo '<tr class="lined-strike">';
 			else  echo '<tr class="lined">';
 
