@@ -158,9 +158,9 @@ class Cache
 		{
 			$this->wacko->sql_query(
 				"INSERT INTO ".$this->wacko->config['table_prefix']."cache SET ".
-				"name  ='".quote($this->wacko->dblink, hash('md5', $page))."', ".
-				"method='".quote($this->wacko->dblink, $method)."', ".
-				"query ='".quote($this->wacko->dblink, $query)."'");
+				"name	='".quote($this->wacko->dblink, hash('md5', $page))."', ".
+				"method	='".quote($this->wacko->dblink, $method)."', ".
+				"query	='".quote($this->wacko->dblink, $query)."'");
 				// TIMESTAMP type is filled automatically by MySQL
 		}
 
