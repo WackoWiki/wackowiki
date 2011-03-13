@@ -197,7 +197,7 @@ class Init
 				}
 				else if ( @file_exists('config/config.php') )
 				{
-					// If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R4.4
+					// If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R5.0
 					if (@filesize('config/config.php') > 0)
 					{
 						require('config/config.php');
@@ -485,7 +485,7 @@ class Init
 
 				if ($req{strlen($req) - 1} != '/' && strstr($req, '.php') != '.php')
 				{
-					header("Location: http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'].'/');
+					header('Location: http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'].'/');
 					exit;
 				}
 			}
@@ -694,6 +694,7 @@ class Init
 				if ($this->config['debug'] >= 3)
 				{
 					echo "<p class=\"debug\">Session data</p>\n<ul>\n";
+					echo "<li>session_id(): ".session_id()."</li>\n";
 					echo "<li>Base URL: ".$this->config['base_url']."</li>\n";
 					echo "<li>HTTPS: ".(isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : '')."</li>\n";
 					echo "<li>IP-address: ".$this->engine->get_user_ip()."</li>\n";
