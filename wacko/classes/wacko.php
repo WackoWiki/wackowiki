@@ -249,7 +249,7 @@ class Wacko
 			}
 		}
 
-		$file = (isset($this->filesCache[$page_id][$file_name]) ? $this->filesCache[$page_id][$file_name] : '');
+		$file = (isset($this->files_cache[$page_id][$file_name]) ? $this->files_cache[$page_id][$file_name] : '');
 
 		if (!($file))
 		{
@@ -265,7 +265,7 @@ class Wacko
 			}
 
 			$file = $what[0];
-			$this->filesCache[$page_id][$file_name] = $file;
+			$this->files_cache[$page_id][$file_name] = $file;
 		}
 
 		return $file;
@@ -3727,7 +3727,14 @@ class Wacko
 
 		session_destroy(); // destroy session data in storage
 
-		session_start();
+		$ok = @session_start();
+
+		if(!$ok)
+		{
+			session_regenerate_id(true); // replace the Session ID
+			session_start(); // restart the session (since previous start failed)
+		}
+
 		session_id($session_id);
 	}
 
@@ -5073,6 +5080,16 @@ class Wacko
 			{
 				$this->iswatched = true;
 			}
+		}
+
+		// check revision hideing (1 - guests, 2 - registered users)
+		if ( $this->page && ( $this->config['hide_revisions'] === true || ($this->config['hide_revisions'] == 1 && !$this->get_user()) || ($this->config['hide_revisions'] == 2 && !$this->user_is_owner())  ) )
+		{
+			$this->hide_revisions = true;
+		}
+		else
+		{
+			$this->hide_revisions = false;
 		}
 
 		// forum page
