@@ -126,11 +126,9 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 
 			// print entry
 			echo "<li ".$viewed."><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; ".
-			($this->config['hide_revisions']
-				? (($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->user_is_owner()) || $this->is_admin() )
-					? "(".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") "
-					: ""
-				: "(".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") "
+			($this->hide_revisions === false || $this->is_admin()
+				? "(".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") "
+				: ""
 			).
 			($title == 1
 				? $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, '', 0)
