@@ -163,6 +163,7 @@ $wacko_config_defaults = array(
 
 	'spam_filter' => 1,
 	'comment_delay' => 1,
+	'intercom_delay' => 1,
 
 	'pwd_unlike_login' => 1,
 	'pwd_char_classes' => 0,

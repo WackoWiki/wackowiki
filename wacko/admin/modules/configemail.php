@@ -103,7 +103,7 @@ function admin_configemail(&$engine, &$module)
 						<option value=""<?php echo ( (string)$engine->config['phpmailer_method'] === '' ? ' selected="selected"' : '' );?>>default</option>
 						<option value="mail"<?php echo ( (string)$engine->config['phpmailer_method'] === 'mail' ? ' selected="selected"' : '' );?>>mail</option>
 						<option value="sendmail"<?php echo ( (string)$engine->config['phpmailer_method'] === 'sendmail' ? ' selected="selected"' : '' );?>>sendmail</option>
-						<option value="smtp"<?php echo ( (string)$engine->config['phpmailer_method'] === 'smpt' ? ' selected="selected"' : '' );?>>SMTP</option>
+						<option value="smtp"<?php echo ( (string)$engine->config['phpmailer_method'] === 'smtp' ? ' selected="selected"' : '' );?>>SMTP</option>
 					</select>
 				</td>
 			</tr>
