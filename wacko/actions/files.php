@@ -136,7 +136,7 @@ if ($can_view)
 
 	foreach($files as $file)
 	{
-		$this->filesCache[$file['page_id']][$file['file_name']] = &$file;
+		$this->files_cache[$file['page_id']][$file['file_name']] = &$file;
 
 		$dt			= $file['uploaded_dt'];
 		$desc		= $this->format($file['description'], 'typografica' );

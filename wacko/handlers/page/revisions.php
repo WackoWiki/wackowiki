@@ -12,14 +12,10 @@ if (!defined('IN_WACKO'))
 $max	= '';
 $output	= '';
 
-// redirect to show method if hide_revisions is true (1 - guests, 2 - registered users)
-if ($this->config['hide_revisions'])
+// redirect to show method if hide_revisions is true
+if ($this->hide_revisions === true)
 {
-	if ( ($this->config['hide_revisions'] == 1 && !$this->get_user())
-	|| ($this->config['hide_revisions'] == 2 && (!$this->user_is_owner() || !$this->is_admin()) ) )
-	{
-		$this->redirect($this->href('show'));
-	}
+	$this->redirect($this->href('show'));
 }
 
 // redirect to show method if page don't exists
