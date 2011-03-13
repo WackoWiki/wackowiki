@@ -132,8 +132,6 @@ function admin_configemail(&$engine, &$module)
 				<td><input maxlength="100" style="width:200px;" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->config['abuse_email']);?>" /></td>
 			</tr>
 			<tr>
-			<tr>
-			<tr>
 				<th colspan="2">
 					<br />
 					SMTP Settings
