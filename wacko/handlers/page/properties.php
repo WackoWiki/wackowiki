@@ -151,9 +151,9 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 			echo "<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaIndexMode')."</th>";
 			echo "<td class=\"form_right\">";
-			echo "<input type=\"radio\" id=\"indexmodeF\" name=\"index_mode\" value=\"0\" ".( $this->config['tree_level'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeF\">".$this->get_translation('MetaIndexFull')."</label>";
-			echo "<input type=\"radio\" id=\"indexmodeL\" name=\"index_mode\" value=\"1\" ".( $this->config['tree_level'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeL\">".$this->get_translation('MetaIndexLower')."</label>";
-			echo "<input type=\"radio\" id=\"indexmodeU\" name=\"index_mode\" value=\"2\" ".( $this->config['tree_level'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeU\">".$this->get_translation('MetaIndexUpper')."</label>";
+			echo "<input type=\"radio\" id=\"indexmodeF\" name=\"tree_level\" value=\"0\" ".( $this->config['tree_level'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeF\">".$this->get_translation('MetaIndexFull')."</label>";
+			echo "<input type=\"radio\" id=\"indexmodeL\" name=\"tree_level\" value=\"1\" ".( $this->config['tree_level'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeL\">".$this->get_translation('MetaIndexLower')."</label>";
+			echo "<input type=\"radio\" id=\"indexmodeU\" name=\"tree_level\" value=\"2\" ".( $this->config['tree_level'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"indexmodeU\">".$this->get_translation('MetaIndexUpper')."</label>";
 			echo "</td>";
 			echo "</tr>\n";
 
