@@ -529,6 +529,55 @@ $wacko_translation = array(
 	'NewRevisionAdded'		=> 'Page modifiée',
 	'Cluster'				=> 'groupe',
 
+	// users action
+	'UsersSearch'			=> 'Find Users',
+	'UsersFilter'			=> 'Search',
+	'UsersOpenProfile'		=> 'View Profile',
+	'UsersNoMatching'		=> 'Matching users not found. Try a softer search criteria.',
+	'UsersName'				=> 'Name',
+	'UsersPages'			=> 'Pages',
+	'UsersComments'			=> 'Comments',
+	'UsersRevisions'		=> 'Revisions',
+	'UsersSignup'			=> 'Signup',
+	'UsersLastSession'		=> 'Last session',
+	'UsersNotFound'			=> 'User <tt>%2</tt> not found. Click <a href="%1">here</a>, to go to the main list.',
+	'UsersProfile'			=> 'Profile',
+	'UsersContact'			=> 'Contact',
+	'UsersList'				=> 'View the entire list of users',
+	'UsersNA'				=> '[not set]',
+	'UsersNA2'				=> '[No]',
+	'UsersSignupDate'		=> 'Signup date',
+	'UsersGroupMembership'	=> 'Group membership',
+	'UsersPersonalInfo'		=> 'Personal info',
+	'UsersOwnedPages'		=> 'Owned pages',
+	'UsersCommentsPosted'	=> 'Comments posted',
+	'UsersRevisionsMade'	=> 'Revisions made',
+	'UsersDocsSortName'		=> '[Sort by name]',
+	'UsersDocsSortDate'		=> '[Sort by creation date]',
+	'UsersSessionNA'		=> '[not recorded]',
+	'UsersSessionHidden'	=> '[hidden]',
+	'UsersIntercomSubject'	=> 'Subject',
+	'UsersIntercomSubjectN'	=> '[start a new topic]',
+	'UsersIntercomDisabled'	=> 'Sorry, you do not want or can not receive private messages.',
+	'UsersIntercomSend'		=> 'submit',
+	'UsersIntercomDesc'		=> 'Note: Sending personal messages carried on the email-address '.
+							   'recipient without disclosing your address. The recipient will be able to respond to you, using '.
+							   'similar form on your profile page. ',
+	'UsersPMOversized'		=> 'The length of your message exceeds the maximum permissible to %1 characters. Please shorten your message and submit again.',
+	'UsersPMFlooded'		=> 'The interval between sending personal messages should not be less than %1 seconds.',
+	'UsersPMSent'			=> 'Personal message was successfully sent to the user.',
+	'UsersPMPlnSent'		=> 'Personal message sent to the user in plain text.',
+	'UsersPMBody'			=> 'This message has been sent to you by the user %1 from %2. To answer '.
+							   'this email, click on the following link (do not use the Reply button / Reply '.
+							   'in mailer):'."\n".'%3'."\n\n".''.
+							   '----------------------------------------------------------------------'."\n".''.
+							   '%5'."\n".''.
+							   '----------------------------------------------------------------------'."\n\n".''.
+							   'Note: If this message is spam, contains abusive or otherwise '.
+							   'violates the rules of the site %2, please send it (using the button Forward /'.
+							   'Forward your mail program) to address %4.',
+	'UsersPMNotLoggedIn'	=> 'You are not registered in the system and can not send private messages to users.',
+
 	// rating handler
 	'RatingDenied'			=> 'Vous ne pouvez pas noter cette page.',
 	'RatingSuccess'			=> 'Morci de votre évaluation',
