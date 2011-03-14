@@ -539,7 +539,7 @@ $wacko_translation = array(
 	'UsersFilter'			=> 'Search',
 	'UsersOpenProfile'		=> 'View Profile',
 	'UsersNoMatching'		=> 'Matching users not found. Try a softer search criteria.',
-	'UsersName'			=> 'Name',
+	'UsersName'				=> 'Name',
 	'UsersPages'			=> 'Pages',
 	'UsersComments'			=> 'Comments',
 	'UsersRevisions'		=> 'Revisions',
@@ -548,9 +548,9 @@ $wacko_translation = array(
 	'UsersNotFound'			=> 'User <tt>%2</tt> not found. Click <a href="%1">here</a>, to go to the main list.',
 	'UsersProfile'			=> 'Profile',
 	'UsersContact'			=> 'Contact',
-	'UsersList'			=> 'View the entire list of users',
-	'UsersNA'			=> '[not set]',
-	'UsersNA2'			=> '[No]',
+	'UsersList'				=> 'View the entire list of users',
+	'UsersNA'				=> '[not set]',
+	'UsersNA2'				=> '[No]',
 	'UsersSignupDate'		=> 'Signup date',
 	'UsersGroupMembership'	=> 'Group membership',
 	'UsersPersonalInfo'		=> 'Personal info',
@@ -573,7 +573,7 @@ $wacko_translation = array(
 	'UsersPMSent'			=> 'Personal message was successfully sent to the user.',
 	'UsersPMPlnSent'		=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'			=> 'This message has been sent to you by the user %1 from %2. To answer '.
-							   'this letter, click on the following link (do not use the Reply button / Reply '.
+							   'this email, click on the following link (do not use the Reply button / Reply '.
 							   'in mailer):'."\n".'%3'."\n\n".''.
 							   '----------------------------------------------------------------------'."\n".''.
 							   '%5'."\n".''.
