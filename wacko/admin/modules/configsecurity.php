@@ -62,6 +62,9 @@ function admin_configsecurity(&$engine, &$module)
 		$config['session_expiration']			= (int)$_POST['session_expiration'];
 		$config['comment_delay']				= (int)$_POST['comment_delay'];
 		$config['intercom_delay']				= (int)$_POST['intercom_delay'];
+		$config['enable_security_headers']		= (int)$_POST['enable_security_headers'];
+		#$config['x_frame_option']				= (int)$_POST['x_frame_option'];
+		#$config['x_csp']				= (int)$_POST['x_csp'];
 
 		foreach($config as $key => $value)
 		{
@@ -190,7 +193,7 @@ function admin_configsecurity(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="hide_locked"><strong>Hide inaccessible page:</strong><br />
+				<td class="label"><label for="hide_locked"><strong>Hide inaccessible pages:</strong><br />
 				<small>If the user does not have permission to read the page, hide it in different lists of documents (placed in the link text, however, will still be visible).</small></label></td>
 				<td><input type="checkbox" id="hide_locked" name="hide_locked" value="1"<?php echo ( $engine->config['hide_locked'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
@@ -207,14 +210,14 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="owners_can_remove_comments"><strong>Owners of pages can delete comments:</strong><br />
-				<small>Allow owners of documents moderate comments on their pages.</small></label></td>
+				<small>Allow page owners to moderate comments on their pages.</small></label></td>
 				<td><input type="checkbox" id="owners_can_remove_comments" name="owners_can_remove_comments" value="1"<?php echo ( $engine->config['owners_can_remove_comments'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="owners_can_change_categories"><strong>Owners can edit pages categories:</strong><br />
+				<td class="label"><label for="owners_can_change_categories"><strong>Owners can edit page categories:</strong><br />
 				<small>Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.</small></label></td>
 				<td><input type="checkbox" id="owners_can_change_categories" name="owners_can_change_categories" value="1"<?php echo ( $engine->config['owners_can_change_categories'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
@@ -252,6 +255,36 @@ function admin_configsecurity(&$engine, &$module)
 				<td class="label"><label for="tls_proxy"><strong>TLS Proxy:</strong><br />
 				<small>Uses the provided TLS Proxy inplace of TLS. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash.</small></label></td>
 				<td><input maxlength="100" style="width:200px;" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->config['tls_proxy']);?>" /></td>
+			</tr>
+			<tr class="hl_setting">
+				<th colspan="2">
+					<br />
+					HTTP Security Headers
+				</th>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="enable_security_headers"><strong>Enable Security Headers:</strong><br />
+				<small>Set security headers (frame busting, clickjacking/XSS/CSRF protection).</small></label></td>
+					<td>
+						<input type="radio" id="security_headers_on" name="enable_security_headers" value="1"<?php echo ( $engine->config['enable_security_headers'] == 1 ? ' checked="checked"' : '' );?> /><label for="security_headers_on">On.</label>
+						<input type="radio" id="security_headers_off" name="enable_security_headers" value="0"<?php echo ( $engine->config['enable_security_headers'] == 0 ? ' checked="checked"' : '' );?> /><label for="security_headers_off">Off.</label>
+					</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="x_frame_option"><strong>X-Frame-Options:</strong><br />
+				<small>The X-Frame-Options HTTP response header can be used to indicate whether or not a browser should be allowed to render a page in a &lt;frame&gt; or &lt;iframe&gt;. Use this to avoid clickjacking attacks, by ensuring that the content is not embedded into other sites. frame busting (DENY or SAMEORIGIN).</small></label></td>
+				<td><input maxlength="4" style="width:200px;" id="x_frame_option" name="x_frame_option" value="<?php echo htmlspecialchars($engine->config['x_frame_option']);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="x_csp"><strong>X-Content-Security-Policy (CSP):</strong><br />
+				<small>Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using X-Content-Security-Policy to establish your policy.</small></label></td>
+				<td><input maxlength="4" style="width:200px;" id="x_csp" name="x_csp" value="<?php echo htmlspecialchars($engine->config['x_csp']);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
