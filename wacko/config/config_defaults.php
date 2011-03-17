@@ -77,7 +77,7 @@ $wacko_config_defaults = array(
 
 	'hide_toc' => 0,
 	'hide_index' => 0,
-	'tree_level' => 0,
+	'tree_level' => 1,
 
 	'footer_comments' => 1,
 	'footer_files' => 1,
@@ -164,6 +164,7 @@ $wacko_config_defaults = array(
 	'spam_filter' => 1,
 	'comment_delay' => 30,
 	'intercom_delay' => 30,
+	'moders_can_edit' => 3,
 
 	'pwd_unlike_login' => 1,
 	'pwd_char_classes' => 0,
@@ -182,6 +183,10 @@ $wacko_config_defaults = array(
 	'session_match_useragent' => TRUE,
 	'session_use_db' => FALSE,
 	'session_time_to_update' => 300,
+
+	'enable_security_headers' => 1,
+	'x_frame_option' => '',
+	'x_csp' => '',
 
 	'system_seed' => '', // installer autogenerate random one
 	'recovery_password' => '',

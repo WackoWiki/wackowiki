@@ -213,9 +213,17 @@ if ($this->user_is_owner() || $this->is_admin())
 <p><label for="create_acl"><?php echo $this->get_translation('ACLCreate'); ?></label>
 <textarea id="create_acl" name="create_acl" rows="4" cols="20"><?php echo $create_acl['list'] ?></textarea>
 </p>
+<?php
+// only Admins
+if ($this->is_admin())
+{
+?>
 <p><label for="upload_acl"><?php echo $this->get_translation('ACLUpload'); ?></label>
 <textarea id="upload_acl" name="upload_acl" rows="4" cols="20"><?php echo $upload_acl['list'] ?></textarea>
 </p>
+<?php
+}
+?>
 <p><label for="newowner"><?php echo $this->get_translation('SetOwner'); ?></label>
 <select id="newowner" name="newowner">
 	<option value=""><?php echo $this->get_translation('OwnerDontChange'); ?></option>

@@ -47,7 +47,7 @@ function admin_configbasic(&$engine, &$module)
 		$config['hide_revisions']			= (int)$_POST['hide_revisions'];
 		$config['hide_toc']					= (int)$_POST['hide_toc'];
 		$config['hide_index']				= (int)$_POST['hide_index'];
-		$config['tree_level']				= (int)$_POST['index_mode'];
+		$config['tree_level']				= (int)$_POST['tree_level'];
 		$config['edit_summary']				= (int)$_POST['edit_summary'];
 		$config['minor_edit']				= (int)$_POST['minor_edit'];
 		$config['review']					= (int)$_POST['review'];
@@ -285,9 +285,9 @@ function admin_configbasic(&$engine, &$module)
 				<td class="label"><strong>Displaying sections:</strong><br />
 				<small>When the previous options, whether to display only daughter of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).</small></td>
 				<td>
-					<input type="radio" id="full_index" name="index_mode" value="0"<?php echo ( $engine->config['tree_level'] == 0 ? ' checked="checked"' : '' );?> /><label for="full_index">Tree</label>
-					<input type="radio" id="lower_index" name="index_mode" value="1"<?php echo ( $engine->config['tree_level'] == 1 ? ' checked="checked"' : '' );?> /><label for="lower_index">Lower</label>
-					<input type="radio" id="upper_index" name="index_mode" value="2"<?php echo ( $engine->config['tree_level'] == 2 ? ' checked="checked"' : '' );?> /><label for="upper_index">Upper</label>
+					<input type="radio" id="full_index" name="tree_level" value="0"<?php echo ( $engine->config['tree_level'] == 0 ? ' checked="checked"' : '' );?> /><label for="full_index">Tree</label>
+					<input type="radio" id="lower_index" name="tree_level" value="1"<?php echo ( $engine->config['tree_level'] == 1 ? ' checked="checked"' : '' );?> /><label for="lower_index">Lower</label>
+					<input type="radio" id="upper_index" name="tree_level" value="2"<?php echo ( $engine->config['tree_level'] == 2 ? ' checked="checked"' : '' );?> /><label for="upper_index">Upper</label>
 				</td>
 			</tr>
 			<tr>
