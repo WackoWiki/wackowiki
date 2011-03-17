@@ -2170,6 +2170,7 @@ class Wacko
 			{
 				header('HTTP/1.1 301 Moved Permanently');
 			}
+
 			header("Location: $url");
 			exit();
 		}
@@ -2178,11 +2179,15 @@ class Wacko
 	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
 	function http_security_headers()
 	{
-		if ( !headers_sent() )
+		if ($this->config['enable_security_headers'])
 		{
-			#	if (isset($this->config['xframeoptions']))
-			header( 'X-Frame-Options: DENY' ); // or SAMEORIGIN
-			header( "X-Content-Security-Policy: allow 'self'; script-src 'self'; options inline-script; img-src *;" );
+			if ( !headers_sent() )
+			{
+				#	if (isset($this->config['x_frame_option']))
+				header( 'X-Frame-Options: DENY' ); // or SAMEORIGIN
+				#	if (isset($this->config['x_csp']))
+				header( "X-Content-Security-Policy: allow 'self'; script-src 'self'; options inline-script; img-src *;" );
+			}
 		}
 	}
 
@@ -5068,7 +5073,7 @@ class Wacko
 
 		if (!$user && $this->page['modified'])
 		{
-			header("Last-Modified: ".gmdate("D, d M Y H:i:s", strtotime($this->page['modified']) + 120)." GMT");
+			header('Last-Modified: '.gmdate('D, d M Y H:i:s', strtotime($this->page['modified']) + 120).' GMT');
 		}
 
 		$this->http_security_headers();
