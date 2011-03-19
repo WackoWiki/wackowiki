@@ -94,6 +94,7 @@ else if($url)
 	// Write Params
 	$written = 0;
 	$params = array('play', 'loop', 'menu', 'quality', 'scale', 'salign', 'wmode', 'bgcolor', 'base', 'quality', 'swliveconnect', 'devicefont', 'allowscriptaccess', 'seamlesstabbing', 'allowfullscreen', 'allownetworking');
+
 	for($i = 0; $i < count($params); $i++)
 	{
 		if(${$params[$i]})
@@ -113,6 +114,7 @@ else if($url)
 	// Write Attributes
 	$written = 0;
 	$attributes = array('id', 'name', 'styleclass', 'align');
+
 	for($i = 0; $i < count($attributes); $i++)
 	{
 		if(${$attributes[$i]})
