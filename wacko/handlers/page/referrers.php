@@ -77,7 +77,7 @@ if ($user = $this->get_user())
 			{
 				print("<tr>");
 				print("<td width=\"30\" align=\"right\" valign=\"top\" style=\"padding-right: 10px\">".$referrer['num']."</td>");
-				print("<td valign=\"top\"><a href=\"".$referrer['referrer']."\">".htmlspecialchars($referrer['referrer'])."</a></td>");
+				print("<td valign=\"top\"><a href=\"".htmlspecialchars($referrer['referrer'])."\">".htmlspecialchars($referrer['referrer'])."</a></td>");
 				print("</tr>\n");
 			}
 			print("</table>\n");

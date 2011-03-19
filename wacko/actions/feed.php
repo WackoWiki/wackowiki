@@ -41,7 +41,7 @@ if (!function_exists('intervalCalc'))
 {
 	function intervalCalc($postedtime)
 	{
-	global $engine;
+		global $engine;
 
 		$now = time();
 		$interval_secs = $now  - $postedtime;
@@ -76,17 +76,25 @@ if (!function_exists('intervalCalc'))
 			if ($interval == 1) $interval.= $engine->get_translation('FeedMinuteAgo');
 			else $interval.= $engine->get_translation('FeedMinutesAgo');
 		}
+
 		return  $interval;
 
 	}
 }
 
 if (!$url)
+{
 	echo "<p><i>".$this->get_translation('FeedNoURL')."</i></p>\n";
+}
 else
 {
-	$urlset = explode("|",$url);
-	if (count($urlset)==1) $urlset = $urlset[0];
+	$urlset = explode('|', $url);
+
+	if (count($urlset) == 1)
+	{
+		$urlset = $urlset[0];
+	}
+
 	// Initialize SimplePie (ONLY ONCE PER ACTION!!!! DO NOT WRITE IT AGAIN PLEASE;))
 	// Thus all configs will be same for all RSS-feeds
 	$feed = new SimplePie();
@@ -126,7 +134,10 @@ if (!$nomark)
 
 	if ($title != 'no')
 	{
-		if (($max)&&($max > 0)) $lastitems = " (last ".$max." items)";
+		if (($max)&&($max > 0))
+		{
+			$lastitems = " (last ".$max." items)";
+		}
 
 		// Make nice if $nomark == 1
 		if ($nomark)
@@ -147,6 +158,7 @@ if (!$nomark)
 			{
 				echo "<h3>".$this->get_translation('FeedMulti')."</h3>";
 			}
+
 			echo $lastitems;
 		}
 
