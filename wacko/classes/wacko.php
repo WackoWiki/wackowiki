@@ -2485,7 +2485,7 @@ class Wacko
 					{
 						$icon	= $this->get_translation('texticon');
 					}
-					else if ($desc['file_ext'] == ('png' || 'jpg' || 'gif'))
+					else if ($desc['file_ext'] == 'png' || $desc['file_ext'] == 'gif' || $desc['file_ext'] == 'jpg')
 					{
 						$icon	= $this->get_translation('imageicon');
 					}
@@ -2506,6 +2506,7 @@ class Wacko
 						return '<img src="'.$this->config['base_url'].$this->config['upload_path'].'/'.$thing.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$desc['picture_w'].'" height="'.$desc['picture_h'].'" />';
 					}
 				}
+
 				unset($desc);
 			}
 
@@ -2528,7 +2529,7 @@ class Wacko
 					{
 						$icon	= $this->get_translation('texticon');
 					}
-					else if ($desc['file_ext'] == ('png' || 'jpg' || 'gif'))
+					else if ($desc['file_ext'] == 'png' || $desc['file_ext'] == 'gif' || $desc['file_ext'] == 'jpg')
 					{
 						$icon	= $this->get_translation('imageicon');
 					}
@@ -2555,6 +2556,7 @@ class Wacko
 					$title	= '404: /'.$this->config['upload_path'].$thing;
 					$url	= '404';
 				}
+
 				unset($desc);
 			}
 
@@ -2598,7 +2600,7 @@ class Wacko
 						{
 							$icon	= $this->get_translation('texticon');
 						}
-						else if ($desc['file_ext'] == ('png' || 'jpg' || 'gif'))
+						else if ($desc['file_ext'] == 'png' || $desc['file_ext'] == 'gif' || $desc['file_ext'] == 'jpg')
 						{
 							$icon	= $this->get_translation('imageicon');
 						}
