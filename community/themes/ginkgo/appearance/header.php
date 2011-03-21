@@ -26,7 +26,7 @@ echo $this->form_close();
 ?></div></td>
   </tr>
   <tr>
-    <td valign="top"><div class="tagline"><?php $this->config['site_desc']; ?></div></td>
+    <td valign="top"><div class="tagline"><?php echo $this->config['site_desc']; ?></div></td>
     <td width="100%">&nbsp;</td>
   </tr>
   <tr>
@@ -38,8 +38,7 @@ echo $this->form_close();
   <tr bgcolor="#85a43c">
     <td height="20" colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td><div class="navText"><strong><?php echo $this->compose_link_to_page($this->config['root_page']);?>:</strong> <?php echo $this->get_page_path(); ?> <a title="<?php echo $this->get_translation('SearchTitleTip')?>"
-     href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></div></td>
+          <td><div class="navText"><?php echo $this->compose_link_to_page($this->config['root_page']);?> &gt; <?php echo $this->get_page_path(); ?></div></td>
           <td align="right"><?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user())
@@ -51,6 +50,10 @@ if ($this->get_user())
             | <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span> )</small>
 <?php
 // Else Wacko shows login's controls
+}
+else
+{
+	echo '<h1 class="navText" style="padding-right:10px;">'.$this->page['title'].'</h1>';
 }
 // End if
 ?></td>
