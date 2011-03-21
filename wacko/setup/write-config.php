@@ -38,6 +38,9 @@ if(!array_key_exists('wacko_version', $config))
 // set version to current version, yay!
 $config['wacko_version'] = WACKO_VERSION;
 
+// reset old default upload path to new location
+if ($config['upload_path'] == 'files') $config['upload_path'] = 'files/global';
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 //	BEGIN MANDATORY CONFIGURATION
 ///////////////////////////////////////////////////////////////////////////////////////////
