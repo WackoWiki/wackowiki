@@ -203,7 +203,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_quota_per_user"><strong>Restricting quota of storage to a user:</strong><br />
 				<small>Restriction on the quota of storage that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo htmlspecialchars($engine->config['upload_quota_per_user']);?>" /></td>
+				<td><input maxlength="9" style="width:200px;" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo htmlspecialchars($engine->config['upload_quota_per_user']);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -251,7 +251,7 @@ function admin_configbasic(&$engine, &$module)
 				<td class="label"><strong>Hide Revisions:</strong><br />
 				<small>The default display of revisions of the page.</small></td>
 				<td>
-					<input type="radio" id="hide_revisions_on" name="hide_revisions" value="2"<?php echo ( !$engine->config['hide_revisions'] == 2 ? ' checked="checked"' : '' );?> /><label for="hide_revisions_on">On.</label>
+					<input type="radio" id="hide_revisions_on" name="hide_revisions" value="2"<?php echo ( $engine->config['hide_revisions'] == 2 ? ' checked="checked"' : '' );?> /><label for="hide_revisions_on">On.</label>
 					<input type="radio" id="hide_revisions_guest" name="hide_revisions" value="1"<?php echo ( $engine->config['hide_revisions'] == 1 ? ' checked="checked"' : '' );?> /><label for="hide_revisions_guest">Registered.</label>
 					<input type="radio" id="hide_revisions_off" name="hide_revisions" value="0"<?php echo ( $engine->config['hide_revisions'] == 0 ? ' checked="checked"' : '' );?> /><label for="hide_revisions_off">Off.</label>
 				</td>

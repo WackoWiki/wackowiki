@@ -253,7 +253,7 @@ $error_inserting_pages = false;
 
 require_once('setup/lang/inserts.'.$config['language'].'.php');
 
-if ( isset($config['multilanguage']) )
+if ( isset($config['multilanguage']) && $config['multilanguage'] == 1)
 {
 	$handle = opendir('setup/lang');
 
