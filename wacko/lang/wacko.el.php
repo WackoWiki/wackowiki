@@ -666,6 +666,10 @@ $wacko_translation = array(
 	'UploadFileForbidden' => 'Η πρόσβαση του αρχείου είναι απαγορευμένη',
 	'UploadTitle' => 'Τα αρχεία που είναι προσβάσιμα από αυτή την σελίδα',
 	'UploadTitleGlobal' => 'Files accessible from anywhere',
+	'UploadEdit'			=> 'edit',
+	'UploadEditConfirm'			=> 'Edit the metadata of this file',
+	'UploadEditedMeta'		=> 'Updated metadata of this file',
+	'UploadEditDenied'		=> 'You are not allowed to edit this file',
 	'UploadRemove' => 'αφαίρεση',
 	'UploadRemovedFromDB' => 'Το αρχείο αφαιρέθηκε από την βάση δεδομένων',
 	'UploadRemovedFromFS' => 'Το αρχείο διαγράφτηκε από την φυσική τοποθεσία',
@@ -1000,6 +1004,7 @@ $wacko_translation = array(
 	'LogUserSettingsUpdate'		=> 'User ##%1## updated personal settings',
 	'LogPageEdited'				=> 'Edited page [[/%1]]',
 	'LogCommentEdited'			=> 'Edited comment [[/%1]]',
+	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
 );
 
 ?>

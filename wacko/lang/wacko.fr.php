@@ -666,6 +666,10 @@ $wacko_translation = array(
 	'UploadFileForbidden' => 'Accès interdit au fichier',
 	'UploadTitle' => 'Fichiers accessibles depuis de cette page',
 	'UploadTitleGlobal' => 'Fichiers accessibles de n&rsquo;importe quelle page',
+	'UploadEdit'			=> 'edit',
+	'UploadEditConfirm'			=> 'Edit the metadata of this file',
+	'UploadEditedMeta'		=> 'Updated metadata of this file',
+	'UploadEditDenied'		=> 'You are not allowed to edit this file',
 	'UploadRemove' => 'enlever',
 	'UploadRemovedFromDB' => 'Fichier enlevé de la base de données',
 	'UploadRemovedFromFS' => 'Fichier effacé de l&rsquo;ordinateur hôte',
@@ -998,7 +1002,8 @@ $wacko_translation = array(
 	'LogUserSessionContinued'	=> 'L&rsquo;utilisateur ##%1## a poursuivi la suspension de la session',
 	'LogUserSettingsUpdate'		=> 'L&rsquo;utilisateur ##%1## a mis à jour ses paramètres personnels',
 	'LogPageEdited'				=> 'Page [/%1]] modifiée',
-   'LogCommentEdited'				=> 'Commentaire [[/%1]] modifié',
+   'LogCommentEdited'			=> 'Commentaire [[/%1]] modifié',
+	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
 );
 
 ?>
