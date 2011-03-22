@@ -11,7 +11,8 @@ require ('themes/_common/_header.php');
 	<div id="header">
 		<div id="header-main">
 			<div id="header-top">
-			<span class="main"><?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['site_name']."</a>") ?>: </span><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?> <a class="Search" title="<?php echo $this->get_translation('SearchTitleTip')?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
+			<span class="main"><?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['site_name']."</a>") ?>: </span><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path() ); ?>
+			<?php #echo ' <a class="Search" title="'.$this->get_translation('SearchTitleTip').'" href="'.$this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;").'phrase='.urlencode($this->tag).'">...</a>'; ?>
 		</div>
 		<div id="login">
 <?php

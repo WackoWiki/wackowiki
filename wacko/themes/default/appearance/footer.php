@@ -24,30 +24,21 @@ if ($this->page)
 			: "<li>".$this->get_time_string_formatted($this->page['modified'])."</li>\n"
 		);
 
-	// If owner is current user
-	if ($this->user_is_owner())
+	// Show Owner of this page
+	if ($owner = $this->get_page_owner())
 	{
-		echo "<li>".$this->get_translation('YouAreOwner')."</li>\n";
+		if ($owner == 'System')
+		{
+			echo "<li>".$this->get_translation('Owner').": ".$owner."</li>\n";
+		}
+		else
+		{
+			echo "<li>".$this->get_translation('Owner').": "."<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$owner)."\">".$owner."</a>"."</li>\n";
+		}
 	}
-	// If owner is NOT current user
-	else
+	else if (!$this->page['comment_on_id'])
 	{
-		// Show Owner of this page
-		if ($owner = $this->get_page_owner())
-		{
-			if ($owner == 'System')
-			{
-				echo "<li>".$this->get_translation('Owner').": ".$owner."</li>\n";
-			}
-			else
-			{
-				echo "<li>".$this->get_translation('Owner').": "."<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$owner)."\">".$owner."</a>"."</li>\n";
-			}
-		}
-		else if (!$this->page['comment_on_id'])
-		{
-			echo "<li>".$this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a></li>\n)" : "");
-		}
+		echo "<li>".$this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a></li>\n)" : "");
 	}
 
 	if($this->has_access('write') && $this->get_user() || $this->is_admin())
