@@ -677,6 +677,10 @@ $wacko_translation = array(
 	'UploadFileForbidden' => 'Доступ к файлу запрещён',
 	'UploadTitle' => 'Файлы, доступные на данной странице',
 	'UploadTitleGlobal' => 'Файлы, доступные с любой страницы',
+	'UploadEdit'			=> 'edit',
+	'UploadEditConfirm'			=> 'Edit the metadata of this file',
+	'UploadEditedMeta'		=> 'Updated metadata of this file',
+	'UploadEditDenied'		=> 'You are not allowed to edit this file',
 	'UploadRemove' => 'удалить',
 	'UploadRemovedFromDB' => 'Файл удалён из базы данных.',
 	'UploadRemovedFromFS' => 'Файл стёрт с жёсткого диска сервера.',
@@ -1009,6 +1013,7 @@ $wacko_translation = array(
 	'LogUserSettingsUpdate'		=> 'Пользователь ##%1## обновил свои настройки',
 	'LogPageEdited'				=> 'Отредактирован документ [[/%1]]',
 	'LogCommentEdited'			=> 'Отредактирован комментарий [[/%1]]',
+	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
 );
 
 ?>

@@ -666,6 +666,10 @@ $wacko_translation = array(
 	'UploadFileForbidden' => 'Vietato l\'accesso ai file',
 	'UploadTitle' => 'Files accessible from this page',
 	'UploadTitleGlobal' => 'Files accessible from anywhere',
+	'UploadEdit'			=> 'edit',
+	'UploadEditConfirm'			=> 'Edit the metadata of this file',
+	'UploadEditedMeta'		=> 'Updated metadata of this file',
+	'UploadEditDenied'		=> 'You are not allowed to edit this file',
 	'UploadRemove' => 'rimuovere',
 	'UploadRemovedFromDB' => 'File removed from database',
 	'UploadRemovedFromFS' => 'File erased from physical hosting',
@@ -999,6 +1003,7 @@ $wacko_translation = array(
 	'LogUserSettingsUpdate'		=> 'User ##%1## updated personal settings',
 	'LogPageEdited'				=> 'Edited page [[/%1]]',
 	'LogCommentEdited'			=> 'Edited comment [[/%1]]',
+	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
 );
 
 ?>

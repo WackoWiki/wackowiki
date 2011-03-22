@@ -567,13 +567,13 @@ $wacko_translation = array(
 	'UsersPMFlooded'		=> 'Der Abstand zwischen dem Senden von persönlichen Nachrichten sollte nicht kleiner sein als %1 Sekunden.',
 	'UsersPMSent'			=> 'Persönliche Nachricht wurde erfolgreich an den Nutzer gesendet.',
 	'UsersPMPlnSent'		=> 'Persönliche Nachricht für den Benutzer im Klartext gesendet.',
-	'UsersPMBody'			=> 'This message has been sent to you by the user %1 from %2. To answer '.
-							   'this letter, click on the following link (do not use the Reply button / Reply '.
+	'UsersPMBody'			=> 'Diese Nachricht wurde dir durch den Benutzer %1 von %2 geschickt. Um auf diese Email-Nachricht zu antworten '.
+							   ', klicke den folgenden Link (do not use the Reply button / Reply '.
 							   'in mailer):'."\n".'%3'."\n\n".''.
 							   '----------------------------------------------------------------------'."\n".''.
 							   '%5'."\n".''.
 							   '----------------------------------------------------------------------'."\n\n".''.
-							   'Note: If this message is spam, contains abusive or otherwise '.
+							   'Hinweis: Falls diese Nachricht Spam ist, beleidigende oder anderweitig gegen die Regeln der Seite enthält '.
 							   'violates the rules of the site %2, please send it (using the button Forward /'.
 							   'Forward your mail program) to address %4.',
 	'UsersPMNotLoggedIn'	=> 'Du bist nicht im System angemeldet und kannst daher keine persönlichen Nachrichten an andere Nutzer übermitteln.',
@@ -666,6 +666,10 @@ $wacko_translation = array(
 	'UploadFileForbidden'	=> 'Datei-Zugriff verweigert',
 	'UploadTitle'			=> 'Dateien zu dieser Seite',
 	'UploadTitleGlobal'		=> 'Dateien, die global verwendet werden können',
+	'UploadEdit'			=> 'bearbeiten',
+	'UploadEditConfirm'		=> 'Bearbeite Metadaten dieser Datei',
+	'UploadEditedMeta'		=> 'Metadaten der Datei aktualisiert',
+	'UploadEditDenied'		=> 'Du hast keine Berechtigung, diese Datei zu bearbeiten',
 	'UploadRemove'			=> 'löschen',
 	'UploadRemovedFromDB'	=> 'Datei aus der Datenbank gelöscht',
 	'UploadRemovedFromFS'	=> 'Datei im Dateisystem gelöscht',
@@ -1000,6 +1004,7 @@ $wacko_translation = array(
 	'LogUserSettingsUpdate'		=> 'User ##%1## updated personal settings',
 	'LogPageEdited'				=> 'Edited page [[/%1]]',
 	'LogCommentEdited'			=> 'Edited comment [[/%1]]',
+	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
 );
 
 ?>

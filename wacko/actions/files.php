@@ -104,6 +104,7 @@ if ($can_view)
 
 	// display
 	$del = $this->get_translation('UploadRemove');
+	$edit = $this->get_translation('UploadEdit');
 
 	if (!$global)
 	{
@@ -170,7 +171,8 @@ if ($can_view)
 			$remove_mode = 0;
 		}
 
-		$remove_href = $this->href('upload', $page, 'remove='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
+		$remove_href	= $this->href('upload', $page, 'remove='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
+		$edit_href		= $this->href('upload', $page, 'edit='.($global ? 'global' : 'local')."&amp;file_id=".$file_id);
 ?>
 		<tr>
 			<td class="dt-"><span class="dt2-"><?php echo $this->get_time_string_formatted($dt) ?></span>&nbsp;</td>
@@ -178,6 +180,7 @@ if ($can_view)
 		if ($remove_mode)
 		{
 			echo '<td class="remove-"><a href="'.$remove_href.'" class="remove2-">'.$del.'</a>&nbsp;</td>';
+			echo '<td class="remove-"><a href="'.$edit_href.'" class="remove2-">'.$edit.'</a>&nbsp;</td>';
 		}
 		else
 		{
