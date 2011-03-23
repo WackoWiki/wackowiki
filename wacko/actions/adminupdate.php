@@ -440,10 +440,11 @@ if ($this->is_admin())
 		function move(&$parent, $old_page, $new_name )
 		{
 			//     $new_name = trim($_POST['newname'], '/');
-			$user = $parent->get_user();
+			$user		= $parent->get_user();
+			$user_id	= $parent->get_user_id();
 
 			if (($parent->check_acl($user,$parent->config['rename_globalacl'])
-			|| strtolower($parent->get_page_owner($old_page['tag'])) == $user))
+			|| strtolower($parent->get_page_owner_id($old_page['page_id'])) == $user_id))
 			{
 				$supernewname = $parent->npj_translit($new_name);
 

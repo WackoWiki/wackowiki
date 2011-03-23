@@ -179,8 +179,8 @@ if ($can_view)
 <?php
 		if ($remove_mode)
 		{
-			echo '<td class="remove-"><a href="'.$remove_href.'" class="remove2-">'.$del.'</a>&nbsp;</td>';
 			echo '<td class="remove-"><a href="'.$edit_href.'" class="remove2-">'.$edit.'</a>&nbsp;</td>';
+			echo '<td class="remove-"><a href="'.$remove_href.'" class="remove2-">'.$del.'</a>&nbsp;</td>';
 		}
 		else
 		{
