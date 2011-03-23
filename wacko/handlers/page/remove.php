@@ -13,13 +13,16 @@ $comment_on_id	= '';
 $dontkeep		= '';
 
 // obviously do not allow to remove non-existent pages
-if (!$this->page) $this->redirect($this->href());
+if (!$this->page)
+{
+	$this->redirect($this->href());
+}
 
 // check user permissions to delete
 // TODO: config->owners_can_remove_comments ?
 if ($this->is_admin() ||
 (!$this->config['remove_onlyadmins'] &&
-((!$this->page['comment_on_id'] && $this->get_page_owner($this->tag) == $this->get_user_name()) ||
+((!$this->page['comment_on_id'] && $this->get_page_owner_id($this->page['page_id']) == $this->get_user_id()) ||
 ($this->page['comment_on_id'] && $this->get_page_owner_from_comment() == $this->get_user_name()))))
 {
 	if (!$this->page)

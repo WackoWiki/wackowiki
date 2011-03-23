@@ -28,6 +28,7 @@ else if ($this->forum === true && !$this->is_admin())
 if ($user = $this->get_user())
 {
 	$user		= strtolower($this->get_user_name());
+	$user_id	= $this->get_user_id();
 	$registered	= true;
 }
 else
@@ -37,7 +38,7 @@ else
 
 if ($registered
 &&
-($this->check_acl($user, $this->config['rename_globalacl']) || strtolower($this->get_page_owner($this->tag)) == $user)
+($this->check_acl($user, $this->config['rename_globalacl']) || $this->get_page_owner_id($this->page['page_id']) == $user_id)
 )
 {
 	if (!$this->page)
@@ -195,7 +196,7 @@ function recursive_move(&$parent, $root)
 			: "").
 		" AND comment_on_id = '0'");
 
-	echo "<ol>";
+	echo "<ol>\n";
 
 	foreach( $pages as $page )
 	{
@@ -214,14 +215,15 @@ function recursive_move(&$parent, $root)
 function move(&$parent, $old_page, $new_name )
 {
 	//     $new_name = trim($_POST['newname'], '/');
-	$user = $parent->get_user();
+	$user		= $parent->get_user();
+	$user_id	= $parent->get_user_id();
 
-	if (($parent->check_acl($user,$parent->config['rename_globalacl'])
-	|| strtolower($parent->get_page_owner($old_page['tag'])) == $user))
+	if (($parent->check_acl($user, $parent->config['rename_globalacl'])
+	|| $parent->get_page_owner_id($old_page['page_id']) == $user_id))
 	{
 		$supernewname = $parent->npj_translit($new_name);
 
-		echo "<ul>";
+		echo "<ul>\n";
 
 		if (!preg_match('/^([\_\.\-'.$parent->language['ALPHANUM_P'].']+)$/', $new_name))
 		{
@@ -283,7 +285,7 @@ function move(&$parent, $old_page, $new_name )
 				$parent->log(3, str_replace('%2', $new_name, str_replace('%1', $old_page['tag'], $parent->get_translation('LogRenamedPage', $parent->config['language']))).( $need_redirect == 1 ? $parent->get_translation('LogRenamedPage2', $parent->config['language']) : '' ));
 			}
 		}
-		echo "</ul>";
+		echo "</ul>\n";
 	}
 }
 
