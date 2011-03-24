@@ -36,7 +36,7 @@ if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd')
 	else
 	{
 		// building news template
-		$template	= '===={{a name="'.date ('dm').'"}}""'.date ('d.m').' // '.$namehead.'""====
+		$template	= '===={{anchor name="'.date ('dm').'"}}""'.date ('d.m.').' // '.$namehead.'""====
 
 !!Delete this text and in its place enter your news.!!';
 
