@@ -531,7 +531,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$sql = "SELECT COUNT(p.tag) AS n ".
 			"FROM {$this->config['table_prefix']}page AS p ".
 				#"{$this->config['table_prefix']}acl AS a ".
-			"WHERE". # p.page_id = a.page_id ".
+			"WHERE ". # p.page_id = a.page_id ".
 				#"AND a.`create` = '' ".
 				#"AND
 				"p.tag LIKE '{$this->tag}/%' ".
