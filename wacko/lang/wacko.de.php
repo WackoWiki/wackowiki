@@ -704,6 +704,7 @@ $wacko_translation = array(
 	'BookmarkPage'			=> 'Seite',
 	'BookmarkSaveChanges'	=> 'Speichere Änderungen',
 	'BookmarksAddPage'		=> 'Setze ein Lesezeichen für die folgende Seite',
+	'BookmarkAlreadyExists' => 'Das Lesezeichen gibt es bereits.',
 
 	'MeasuredTime'			=> 'Zeit',
 	'MeasuredMemory'		=> 'Speicher',

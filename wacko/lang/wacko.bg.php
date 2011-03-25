@@ -701,6 +701,7 @@ $wacko_translation = array(
 	'BookmarkPage' => 'Page',
 	'BookmarkSaveChanges' => 'Save Changes',
 	'BookmarksAddPage' => 'Set a bookmark for the following page',
+	'BookmarkAlreadyExists' => 'The bookmark already exists.',
 
 	'MeasuredTime' => 'Време',
 	'MeasuredMemory' => 'Използвана памет',

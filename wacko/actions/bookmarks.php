@@ -75,7 +75,10 @@ if (isset($_POST['_user_bookmarks']))
 
 		foreach( $object->data['user_menu'] as $k => $item )
 		{
-			$data[] = array( "menu_id" => $item['menu_id'], "menu_position"=> 1 * $_POST['pos_'.$item['menu_id']] );
+			$data[] = array(
+				'menu_id'		=> $item['menu_id'],
+				'menu_position'	=> 1 * $_POST['pos_'.$item['menu_id']]
+			);
 		}
 
 		usort ($data, "bookmark_sorting");
@@ -111,37 +114,50 @@ if (isset($_POST['_user_bookmarks']))
 				// check existing page write access
 				if ($this->has_access('write', $_page_id))
 				{
-					// writing bookmark
-					$bookmark	= '(('.$page['tag'].' '.$this->get_page_title($page['tag']).($user['lang'] != $page['lang'] ? ' @@'.$page['lang'] : '').'))';
-					$bookmarks	= $this->get_bookmarks();
-
-					if (!in_array($bookmark, $bookmarks))
+					// check if bookmark already exists
+					if ($this->load_single(
+						"SELECT menu_id ".
+						"FROM ".$this->config['table_prefix']."menu ".
+						"WHERE user_id = '".quote($this->dblink, $_user_id)."' ".
+							"AND page_id = '".quote($this->dblink, $_page_id)."' ".
+						"LIMIT 1"))
 					{
-						$bookmarks[] = $bookmark;
-
-						$_menu_position = $this->load_all(
-							"SELECT b.menu_id ".
-							"FROM ".$this->config['table_prefix']."menu b ".
-							"WHERE b.user_id = '".quote($this->dblink, $_user_id)."' ", 0);
-
-						$_bookmark_count = count($_menu_position);
-
-						$this->sql_query(
-							"INSERT INTO ".$this->config['table_prefix']."menu SET ".
-							"user_id			= '".quote($this->dblink, $_user_id)."', ".
-							"page_id			= '".quote($this->dblink, $_page_id)."', ".
-							"lang				= '".quote($this->dblink, ($user['lang'] != $page['lang'] ? $page['lang'] : ""))."', ".
-							"menu_position		= '".quote($this->dblink, ($_bookmark_count + 1))."'");
+						$message .= $this->get_translation('BookmarkAlreadyExists');
 					}
+					else
+					{
+						// writing bookmark
+						$bookmark	= '(('.$page['tag'].' '.$this->get_page_title($page['tag']).($user['lang'] != $page['lang'] ? ' @@'.$page['lang'] : '').'))';
+						$bookmarks	= $this->get_bookmarks();
 
-					// parsing bookmarks into link table
-					$bookmark_links = $this->parsing_bookmarks($bookmarks);
+						if (!in_array($bookmark, $bookmarks))
+						{
+							$bookmarks[] = $bookmark;
 
-					$this->set_user_setting('bookmarks', implode("\n", $bookmarks));
+							$_menu_position = $this->load_all(
+								"SELECT b.menu_id ".
+								"FROM ".$this->config['table_prefix']."menu b ".
+								"WHERE b.user_id = '".quote($this->dblink, $_user_id)."' ", 0);
 
-					$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmarks;
-					$_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']	= $bookmark_links;
-					$_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']	= $this->format(implode("\n", $bookmarks), 'wacko');
+							$_bookmark_count = count($_menu_position);
+
+							$this->sql_query(
+								"INSERT INTO ".$this->config['table_prefix']."menu SET ".
+								"user_id			= '".quote($this->dblink, $_user_id)."', ".
+								"page_id			= '".quote($this->dblink, $_page_id)."', ".
+								"lang				= '".quote($this->dblink, ($user['lang'] != $page['lang'] ? $page['lang'] : ""))."', ".
+								"menu_position		= '".quote($this->dblink, ($_bookmark_count + 1))."'");
+						}
+
+						// parsing bookmarks into link table
+						$bookmark_links = $this->parsing_bookmarks($bookmarks);
+
+						$this->set_user_setting('bookmarks', implode("\n", $bookmarks));
+
+						$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmarks;
+						$_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']	= $bookmark_links;
+						$_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']	= $this->format(implode("\n", $bookmarks), 'wacko');
+					}
 				}
 				else
 				{
@@ -222,10 +238,16 @@ if ($_user_id)
 			</td><!--<td>
 
 			".(!empty($_bookmark['menu_title']) ? $_bookmark['menu_title'] : $_bookmark['title'])."
-			</td><td>
-			".(!empty($_bookmark['lang']) ? $_bookmark['lang'] : "")."-->
-			</td>\n</tr>\n";
+			</td>-->";
+
+			if ($system)
+			{
+				echo '<td>'.(!empty($_bookmark['lang']) ? $_bookmark['lang'] : "");
+			}
+
+			echo "</td>\n</tr>\n";
 		}
+
 		echo "<tfoot>";
 		echo "<tr>\n<td colspan=\"2\">\n";
 		echo "<input name=\"update_bookmarks\" type=\"submit\" value=\"".$this->get_translation('BookmarkSaveChanges')."\" />";
