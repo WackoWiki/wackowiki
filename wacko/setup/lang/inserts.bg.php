@@ -17,8 +17,8 @@ if ($config['language'] == $lng)
 
 	#insert_page('ПропуснатиСтраници', 'Пропуснати Страници', '{{wanted}}', $lng, 'Admins', true, false);
 	#insert_page('ЗабравениСтраници', 'Забравени Страници', '{{orphaned}}', $lng, 'Admins', true, false);
-	#insert_page('МоиСтраници', 'Мои Страници', '{{MyPages}}', $lng, 'Admins', true, false);
-	#insert_page('МоиПромени', 'Мои Промени', '{{MyChanges}}', $lng, 'Admins', true, false);
+	#insert_page('МоиСтраници', 'Мои Страници', '{{mypages}}', $lng, 'Admins', true, false);
+	#insert_page('МоиПромени', 'Мои Промени', '{{mychanges}}', $lng, 'Admins', true, false);
 
 	insert_page('Category', 'Category', '{{category}}', $lng, 'Admins', false, false);
 	insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
@@ -26,15 +26,15 @@ if ($config['language'] == $lng)
 	insert_page('Users', 'Users', '{{users}}', $lng, 'Admins', false, false);
 }
 
-insert_page('Каталог', 'Каталог', '{{PageIndex}}', $lng, 'Admins', false, true, 'Каталог');
+insert_page('Каталог', 'Каталог', '{{pageindex}}', $lng, 'Admins', false, true, 'Каталог');
 insert_page('ПоследниПромени', 'Последни Промени', '{{changes}}', $lng, 'Admins', false, true, 'Промени');
 insert_page('НовиКоментари', 'Нови Коментари', '{{commented}}', $lng, 'Admins', false, true, 'Коментари');
 
 insert_page('Регистрация', 'Регистрация', '{{registration}}', $lng, 'Admins', false, false);
 
-insert_page('Password', 'Password', '{{ChangePassword}}', $lng, 'Admins', false, false);
+insert_page('Password', 'Password', '{{changepassword}}', $lng, 'Admins', false, false);
 insert_page('TextSearch', 'Text Search', '{{search}}', $lng, 'Admins', false, false);
 insert_page('Login', 'Login', '{{login}}', $lng, 'Admins', false, false);
-insert_page('Settings', 'Settings', '{{UserSettings}}', $lng, 'Admins', false, false);
+insert_page('Settings', 'Settings', '{{usersettings}}', $lng, 'Admins', false, false);
 
 ?>

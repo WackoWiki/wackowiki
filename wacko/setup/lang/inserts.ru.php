@@ -17,8 +17,8 @@ if ($config['language'] == $lng)
 
 	#insert_page('ПропущенныеСтраницы', 'Пропущенные Страницы', '{{wanted}}', $lng, 'Admins', true, false);
 	#insert_page('ЗабытыеСтраницы', 'Забытые Страницы', '{{orphaned}}', $lng, 'Admins', true, false);
-	#insert_page('МоиСтраницы', 'Мои Страницы', '{{MyPages}}', $lng, 'Admins', true, false);
-	#insert_page('МоиИзменения', 'Мои Изменения', '{{MyChanges}}', $lng, 'Admins', true, false);
+	#insert_page('МоиСтраницы', 'Мои Страницы', '{{mypages}}', $lng, 'Admins', true, false);
+	#insert_page('МоиИзменения', 'Мои Изменения', '{{mychanges}}', $lng, 'Admins', true, false);
 
 	insert_page('Category', 'Category', '{{category}}', $lng, 'Admins', false, false);
 	insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
@@ -26,16 +26,16 @@ if ($config['language'] == $lng)
 	insert_page('Users', 'Пользователи', '{{users}}', $lng, 'Admins', false, false);
 }
 
-insert_page('Каталог', 'Каталог', '{{PageIndex}}', $lng, 'Admins', false, true, 'Каталог');
+insert_page('Каталог', 'Каталог', '{{pageindex}}', $lng, 'Admins', false, true, 'Каталог');
 insert_page('Изменения', 'Изменения', '{{changes}}', $lng, 'Admins', false, true, 'Изменения');
 insert_page('НовыеКомментарии', 'Новые Комментарии', '{{commented}}', $lng, 'Admins', false, true, 'Комментарии');
 
 insert_page('Регистрация', 'Регистрация', '{{registration}}', $lng, 'Admins', false, false);
 
-insert_page('Password', 'Password', '{{ChangePassword}}', $lng, 'Admins', false, false);
+insert_page('Password', 'Password', '{{changepassword}}', $lng, 'Admins', false, false);
 insert_page('Пароль', 'Пароль', '{{Redirect to=Password}}', $lng, 'Admins', false, false);
 insert_page('Поиск', 'Поиск', '{{search}}', $lng, 'Admins', false, false);
 insert_page('Вход', 'Вход', '{{login}}', $lng, 'Admins', false, false);
-insert_page('Настройки', 'Настройки', '{{UserSettings}}', $lng, 'Admins', false, false);
+insert_page('Настройки', 'Настройки', '{{usersettings}}', $lng, 'Admins', false, false);
 
 ?>

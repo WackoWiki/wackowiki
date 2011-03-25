@@ -17,8 +17,8 @@ if ($config['language'] == $lng)
 
 	#insert_page('PagesDemandées', 'Pages Demandées', '{{wanted}}', $lng, 'Admins', true, false);
 	#insert_page('PagesOrphelines', 'Pages Orphelines', '{{orphaned}}', $lng, 'Admins', true, false);
-	#insert_page('MesPages', 'Mes Pages', '{{MyPages}}', $lng, 'Admins', true, false);
-	#insert_page('MesModifications', 'Mes Modifications', '{{MyChanges}}', $lng, 'Admins', true, false);
+	#insert_page('MesPages', 'Mes Pages', '{{mypages}}', $lng, 'Admins', true, false);
+	#insert_page('MesModifications', 'Mes Modifications', '{{mychanges}}', $lng, 'Admins', true, false);
 
 	insert_page('Category', 'Category', '{{category}}', $lng, 'Admins', false, false);
 	insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
@@ -28,13 +28,13 @@ if ($config['language'] == $lng)
 
 insert_page('Modifications', 'Modifications', '{{changes}}', $lng, 'Admins', false, true, 'Modifications');
 insert_page('Commentaires', 'Commentaires', '{{commented}}', $lng, 'Admins', false, true, 'Commentaires');
-insert_page('Index', 'Index', '{{PageIndex}}', $lng, 'Admins', false, true, 'Index');
+insert_page('Index', 'Index', '{{pageindex}}', $lng, 'Admins', false, true, 'Index');
 
 insert_page('Enregistrement', 'Enregistrement', '{{registration}}', $lng, 'Admins', false, false);
 
-insert_page('MotDePasse', 'Mot De Passe', '{{ChangePassword}}', $lng, 'Admins', false, false);
+insert_page('MotDePasse', 'Mot De Passe', '{{changepassword}}', $lng, 'Admins', false, false);
 insert_page('Recherche', 'Recherche', '{{search}}', $lng, 'Admins', false, false);
 insert_page('Connexion', 'Connexion', '{{login}}', $lng, 'Admins', false, false);
-insert_page('Préférences', 'Préférences', '{{UserSettings}}', $lng, 'Admins', false, false);
+insert_page('Préférences', 'Préférences', '{{usersettings}}', $lng, 'Admins', false, false);
 
 ?>

@@ -17,8 +17,8 @@ if ($config['language'] == $lng)
 
 	#insert_page('GewenstePaginas', 'Gewenste Paginas', '{{wanted}}', $lng, 'Admins', true, false);
 	#insert_page('AlleenstaandePaginas', 'Alleenstaande Paginas', '{{orphaned}}', $lng, 'Admins', true, false);
-	#insert_page('MijnPaginas', 'Mijn Paginas', '{{MyPages}}', $lng, 'Admins', true, false);
-	#insert_page('MijnWijzigingen', 'Mijn Wijzigingen', '{{MyChanges}}', $lng, 'Admins', true, false);
+	#insert_page('MijnPaginas', 'Mijn Paginas', '{{mypages}}', $lng, 'Admins', true, false);
+	#insert_page('MijnWijzigingen', 'Mijn Wijzigingen', '{{mychanges}}', $lng, 'Admins', true, false);
 
 	insert_page('Category', 'Category', '{{category}}', $lng, 'Admins', false, false);
 	insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
@@ -26,15 +26,15 @@ if ($config['language'] == $lng)
 	insert_page('Users', 'Gebruikers', '{{users}}', $lng, 'Admins', false, false);
 }
 
-insert_page('PaginaIndex', 'Pagina Index', '{{PageIndex}}', $lng, 'Admins', false, true, 'Index');
+insert_page('PaginaIndex', 'Pagina Index', '{{pageindex}}', $lng, 'Admins', false, true, 'Index');
 insert_page('LaatsteWijzigingen', 'Laatste Wijzigingen', '{{changes}}', $lng, 'Admins', false, true, 'Wijzigingen');
 insert_page('LaatsteOpmerkingen', 'Laatste Opmerkingen', '{{commented}}', $lng, 'Admins', false, true, 'Opmerkingen');
 
 insert_page('Registratie', 'Registratie', '{{registration}}', $lng, 'Admins', false, false);
 
-insert_page('Paswoord', 'Paswoord', '{{ChangePassword}}', $lng, 'Admins', false, false);
+insert_page('Paswoord', 'Paswoord', '{{changepassword}}', $lng, 'Admins', false, false);
 insert_page('TekstZoeken', 'Tekst Zoeken', '{{search}}', $lng, 'Admins', false, false);
 insert_page('Inloggen', 'Inloggen', '{{login}}', $lng, 'Admins', false, false);
-insert_page('Instellingen', 'Instellingen', '{{UserSettings}}', $lng, 'Admins', false, false);
+insert_page('Instellingen', 'Instellingen', '{{usersettings}}', $lng, 'Admins', false, false);
 
 ?>
