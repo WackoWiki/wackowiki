@@ -29,7 +29,7 @@ $wacko_translation = array(
 	// login panel
 	'LoginWelcome' => 'Conectar',
 	'LoginWelcome2' => '[[/Registrarse Registrarse]]',
-	'LoginName' => '((WackoWiki:Doc/English/WikiName NombreDeUsuario))',
+	'LoginName' => 'NombreDeUsuario',
 	'LoginPassword' => 'Contraseña',
 	'LoginButton' => 'Conectar',
 	'LoginPage' => 'Conectar',

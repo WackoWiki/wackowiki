@@ -29,7 +29,7 @@ $wacko_translation = array(
 	// login panel
 	'LoginWelcome' => '¬ход',
 	'LoginWelcome2' => '((/–егистраци€ –егистраци€))',
-	'LoginName' => '((WackoWiki:Doc/Russian/„то“акое»м€‘амили€ »м€‘амили€ @@ru))',
+	'LoginName' => '»м€‘амили€',
 	'LoginPassword' => 'ѕароль',
 	'LoginButton' => '¬ойти в систему',
 	'LoginPage' => '¬ход',
