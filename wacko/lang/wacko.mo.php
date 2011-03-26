@@ -324,6 +324,7 @@ $wacko_translation = array(
 	'Footnotes' => 'Footnotes',
 	'Footnote' => 'Footnote',
 	'MostPopularPages' => 'Most popular pages',
+	'MostCommentedPages' => 'Most commented pages',
 	'NoAccessToSourcePage' => '<em>Acces la pagina, adresata din Actiuni este interzisa.</em>',
 	'SourcePageDoesntExist' => 'Pagina, adresata din Actiuni, inca nu exista.',
 	'NotLoggedInThusEdited' => '<em>Nu sunteti inregistrat(a) in sistem, paginile modificate de Dvs. nu pot fi gasite.</em>',

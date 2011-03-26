@@ -197,7 +197,7 @@ if ($this->user_is_owner() || $this->is_admin())
 
 		// show form
 		?>
-<h3><?php echo str_replace('%1',$this->link('/'.$this->tag), $this->get_translation('ACLFor')); ?></h3>
+<h3><?php echo str_replace('%1', $this->compose_link_to_page($this->tag, '', '', 0), $this->get_translation('ACLFor')); ?></h3>
 <?php echo $this->form_open('permissions') ?> <?php echo "<input type=\"checkbox\" id=\"massacls\" name=\"massacls\" "; echo " /> <label for=\"massacls\">".$this->get_translation('AclForEntireCluster')."</label>"; ?>
 <br />
 <div class="cssform">

@@ -105,11 +105,7 @@ echo "\n";
 	{
 		if ($this->forum === true)
 		{
-			if ($this->user_is_owner())
-			{
-				echo 'Thread poster: You, ';
-			}
-			else if ($owner = $this->get_page_owner())
+			if ($owner = $this->get_page_owner())
 			{
 				echo 'By topic: '.( $owner == GUEST
 					? '<em>'.$this->get_translation('Guest').'</em>'
@@ -124,11 +120,7 @@ echo "\n";
 		}
 		else
 		{
-			if ($this->user_is_owner())
-			{
-				echo $this->get_translation('Owner').': '.$this->get_translation('YouAreOwner');
-			}
-			else if ($owner = $this->get_page_owner())
+			if ($owner = $this->get_page_owner())
 			{
 				echo $this->get_translation('Owner').': '.( $owner == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$owner).'">'.$owner.'</a>' ).' ';
 			}
@@ -145,7 +137,7 @@ echo "\n";
 				echo '('.$this->get_translation('Created').' '.$this->get_time_string_formatted($this->page['created']).'), ';
 			}
 
-			echo $this->get_translation('Modified').' '.$this->get_time_string_formatted($this->page['modified']).' ('.$this->get_translation('By').': '.( $this->page['user_id'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $this->page['user_name'] == $this->get_user_name() ? 'You' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>' ) ).')';
+			echo $this->get_translation('Modified').' '.$this->get_time_string_formatted($this->page['modified']).' ('.$this->get_translation('By').': '.( $this->page['user_id'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$this->page['user_name']).'">'.$this->page['user_name'].'</a>' ) .')';
 		}
 	}
 	echo "\n";

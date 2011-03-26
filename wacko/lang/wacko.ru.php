@@ -326,6 +326,7 @@ $wacko_translation = array(
 	'Footnotes' => 'Footnotes',
 	'Footnote' => 'Footnote',
 	'MostPopularPages' => 'Популярные страницы',
+	'MostCommentedPages' => 'Most commented pages',
 	'NoAccessToSourcePage' => '<em>Недостаточно прав для чтения страницы, вызываемой из действия.</em>',
 	'SourcePageDoesntExist' => 'Страницы, вызываемая из действия, пока не существует.',
 	'NotLoggedInThusEdited' => '<em>Вы не зарегистрированы в системе, поэтому невозможно определить, какие страницы вы редактировали.</em>',
