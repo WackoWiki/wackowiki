@@ -411,11 +411,11 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 					// print comment
 					// header
 					echo "<div class=\"commenttext\">\n";
-					echo "<div class=\"commenttitle\">\n<a href=\"".$this->href('', '', 'show_comments=1')."#".$comment['tag']."\">".$comment['title']."</a>\n</div>\n";
+					echo "<div class=\"commenttitle\">\n<a href=\"".$this->href('', $comment['tag'])."\">".$comment['title']."</a>\n</div>\n";
 					echo $this->format($strings, 'post_wacko')."\n";
 					echo "</div>\n";
 					echo "<ul class=\"commentinfo\">\n".
-								"<li>".($comment['user_name'] // TODO: <a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['user_name']).'">'.$comment['user_name'].'</a>'
+								"<li>".($comment['user_name']
 										? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$comment['user_name'])."\">".$comment['user_name']."</a>"
 										: $this->get_translation('Guest')).
 								"<li>".$this->get_time_string_formatted($comment['created'])."</li>\n".
