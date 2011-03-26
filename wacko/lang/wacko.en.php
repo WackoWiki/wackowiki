@@ -327,6 +327,7 @@ $wacko_translation = array(
 	'Footnotes' => 'Footnotes',
 	'Footnote' => 'Footnote',
 	'MostPopularPages' => 'Most popular pages',
+	'MostCommentedPages' => 'Most commented pages',
 	'NoAccessToSourcePage' => '<em>You aren\'t allowed to read action source page.</em>',
 	'SourcePageDoesntExist' => 'Action source page doesn\'t exist yet',
 	'NotLoggedInThusEdited' => '<em>You are not logged in, hence we couldn\'t identify the pages you\'ve edited.</em>',

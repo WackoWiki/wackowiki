@@ -323,6 +323,7 @@ $wacko_translation = array(
 	'Footnotes' => 'Footnotes',
 	'Footnote' => 'Footnote',
 	'MostPopularPages' => 'Most popular pages',
+	'MostCommentedPages' => 'Most commented pages',
 	'NoAccessToSourcePage' => '<em>U heeft geen rechten om de bronpagina te bekijken.</em>',
 	'SourcePageDoesntExist' => 'Bronpagina bestaat niet.',
 	'NotLoggedInThusEdited' => '<em>U ben niet ingelogd, dus de lijst met door u gewijzigde pagina kon niet worden gemaakt.</em>',

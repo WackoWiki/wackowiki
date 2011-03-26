@@ -198,9 +198,9 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 		return false;
 	}
 
-	$old_tag_id = $engine->get_page_id($old_tag);
-	$new_tag_id = $engine->get_page_id($new_tag);
-	$title_id = $engine->get_page_id($title);
+	$old_tag_id		= $engine->get_page_id($old_tag);
+	$new_tag_id		= $engine->get_page_id($new_tag);
+	$title_id		= $engine->get_page_id($title);
 
 	// set forum context
 	$forum_context	= $engine->forum;

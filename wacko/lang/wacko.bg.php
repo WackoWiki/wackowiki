@@ -323,6 +323,7 @@ $wacko_translation = array(
 	'Footnotes' => 'Footnotes',
 	'Footnote' => 'Footnote',
 	'MostPopularPages' => 'Most popular pages',
+	'MostCommentedPages' => 'Most commented pages',
 	'NoAccessToSourcePage' => '<em>Достъп до препращащата страница е забранен от Действията.</em>',
 	'SourcePageDoesntExist' => 'Страница, извикана от Действията, засега не съществува.',
 	'NotLoggedInThusEdited' => '<em>Вие не сте регистрирани в системата, затова промените от Вас страници не могат да бъдат намерени.</em>',

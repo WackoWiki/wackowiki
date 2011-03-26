@@ -323,6 +323,7 @@ $wacko_translation = array(
 	'Footnotes' => 'Footnotes',
 	'Footnote' => 'Footnote',
 	'MostPopularPages' => 'Pages les plus lues',
+	'MostCommentedPages' => 'Most commented pages',
 	'NoAccessToSourcePage' => '<em>Vous n&rsquo;êtes pas autorisé(e) à voir la source des actions.</em>',
 	'SourcePageDoesntExist' => 'La page à laquelle se réfère cette fonction n&rsquo;existe pas encore',
 	'NotLoggedInThusEdited' => '<em>Vous n&rsquo;êtes pas connecté(e), nous ne savons donc pas quelles pages que vous avez modifiées.</em>',

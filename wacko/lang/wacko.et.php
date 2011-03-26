@@ -323,6 +323,7 @@ $wacko_translation = array(
 	'Footnotes' => 'Footnotes',
 	'Footnote' => 'Footnote',
 	'MostPopularPages' => 'Most popular pages',
+	'MostCommentedPages' => 'Most commented pages',
 	'NoAccessToSourcePage' => '<em>Sulle pole võimaldatud lähtelehe lugemist.</em>',
 	'SourcePageDoesntExist' => 'Lähtelehte ei eksisteeri veel',
 	'NotLoggedInThusEdited' => '<em>Sa ei ole sisse loginud, seega ei suuda tuvastada sinu muudetud lehti.</em>',

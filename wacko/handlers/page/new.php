@@ -64,6 +64,7 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 echo $this->form_open('new');
 echo "<input type=\"hidden\" name=\"option\" value=\"1\" />";
 echo "<label for=\"create_subpage\">".$this->get_translation('CreateSubPage').":</label><br />";
+
 if ($this->has_access('create', $this->get_page_id($this->tag)))
 {
 	echo "<tt>".( strlen($this->tag) > 50 ? "...".substr($this->tag, -50) : $this->tag )."/</tt>".
@@ -74,6 +75,7 @@ else
 {
 	echo "<em>".$this->get_translation('CreatePageDenied')."</em>";
 }
+
 echo "";
 echo $this->form_close();
 echo "<br />";

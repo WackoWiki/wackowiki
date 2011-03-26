@@ -323,6 +323,7 @@ $wacko_translation = array(
 	'Footnotes' => 'Footnotes',
 	'Footnote' => 'Footnote',
 	'MostPopularPages' => 'Οι πιο δημοφιλής σελίδες',
+	'MostCommentedPages' => 'Most commented pages',
 	'NoAccessToSourcePage' => '<em>Δεν σας επιτρέπεται να αναγνώσετε την σελίδα ενέργεια του πηγαίου κώδικα.</em>',
 	'SourcePageDoesntExist' => 'Η ενέργεια του πηγαίου κώδικα δεν υπάρχει ακόμα',
 	'NotLoggedInThusEdited' => '<em>Δεν έχετε συνδεθεί, ως εκ τούτου δεν μπορούμε να πιστοποιήσουμε ότι έχετε τροποποιήσει σελίδες.</em>',
