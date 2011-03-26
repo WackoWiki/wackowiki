@@ -258,6 +258,7 @@ $wacko_translation = array(
 	'EditPreviewButton' => 'Anteprima',
 	'EditPreview' => 'Anteprima',
 	'EditPreviewSlim'	=> 'Anteprima',
+	'Chars'					=> 'chars',
 	'EditNote' => 'Edit summary',
 	'EditNoteMissing' => 'Edit summary missing',
 	'EditMinor' => 'Minor edit',

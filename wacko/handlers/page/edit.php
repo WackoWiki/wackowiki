@@ -262,7 +262,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		$preview = $this->format($preview, 'wacko');
 		$preview = $this->format($preview, 'post_wacko');
 
-		$output = "<div class=\"preview\"><p class=\"preview\"><span>".$textchars." ".$this->get_translation('EditPreview')."</span></p>\n";
+		$output = "<div class=\"preview\"><p class=\"preview\"><span>".$this->get_translation('EditPreview')." (".$textchars." ".$this->get_translation('Chars').")</span></p>\n";
 
 		if ($this->config['edit_summary'] != 0)
 		{
