@@ -258,6 +258,7 @@ $wacko_translation = array(
 	'EditPreviewButton' => 'Eelvaade',
 	'EditPreview' => 'Eelvaade',
 	'EditPreviewSlim'	=> 'Eelvaade',
+	'Chars'					=> 'chars',
 	'EditNote' => 'Redigeeri kokkuvõte',
 	'EditNoteMissing' => 'Edit summary missing',
 	'EditMinor' => 'Minor edit',

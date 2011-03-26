@@ -261,6 +261,7 @@ $wacko_translation = array(
 	'EditPreviewButton' => 'Предварительный просмотр',
 	'EditPreview' => 'Предварительный просмотр',
 	'EditPreviewSlim'		=> 'Предварительный просмотр',
+	'Chars'					=> 'chars',
 	'EditNote' => 'Описание изменений',
 	'EditNoteMissing' => 'Пропущено описание изменений',
 	'EditMinor' => 'Незначительная правка',
