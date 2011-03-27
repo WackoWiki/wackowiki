@@ -169,7 +169,6 @@ if ($this->method == 'show') {
 		{
 			// display files header
 			?>
-<a name="files"></a>
 <div id="filesheader"><?php echo $this->get_translation('Files_all') ?> <?php echo "[<a href=\"".$this->href('', '', 'show_files=0')."\">".$this->get_translation('HideFiles')."</a>]"; ?>
 </div>
 			<?php
@@ -252,7 +251,6 @@ switch (count($files))
 		{
 			// display comments header
 			?>
-<a name="comments"></a>
 <div id="commentsheader"><?php echo $this->get_translation('Comments_all') ?>
 			<?php echo "[<a href=\"".$this->href('', '', 'show_comments=0')."\">".$this->get_translation('HideComments')."</a>]"; ?>
 </div>

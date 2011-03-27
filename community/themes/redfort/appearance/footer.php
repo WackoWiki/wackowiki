@@ -41,7 +41,6 @@ if ($this->has_access('read') && $this->config['hide_files'] != 1)
   {
     // display files header
     ?>
-    <a name="files"></a>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td height="29" bgcolor="#6E0000">
@@ -144,7 +143,6 @@ if ($this->has_access('read') && $this->config['hide_comments'] != 1)
   {
     // display comments header
     ?>
-    <a name="comments"></a>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td height="29" bgcolor="#6E0000">    <div id="commentsheader">

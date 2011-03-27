@@ -169,7 +169,7 @@ class RSS
 			$cat	= substr_replace ($cat, '', strpos ($cat, '/')); // removes news page name
 			$link	= $this->engine->href('', $page['tag']);
 			$pdate	= date('r', strtotime($page['modified']));
-			$coms	= $link.'?show_comments=1#comments';
+			$coms	= $link.'?show_comments=1#commentsheader';
 			$body	= $this->engine->load_page($page['tag']);
 			$text	= $this->engine->format($page['body_r'], 'post_wacko');
 
