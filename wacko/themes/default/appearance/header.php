@@ -154,10 +154,19 @@ else
 		1,
 		'r');
 
+	// properties tab
+	echo echo_tab(
+		$this->href('properties'),
+		$this->get_translation('PropertiesTip'),
+		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('PropertiesText') : '',
+		$this->method == 'properties' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
+		1,
+		's');
+
 	// show more tab
-	// TODO: add translation ... $this->get_translation('PageHandlerMoreTip')
+
 	// display more icon and text
-	# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icons/more.png\" title=\"".$this->get_translation('PageHandlerMoreTip')."\" alt=\"".$this->get_translation('PageHandlerMoreTip')."\" /> more</a> \n";
+	# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icons/more.png\" title=\"".$this->get_translation('PageHandlerMoreTip')."\" alt=\"".$this->get_translation('PageHandlerMoreTip')."\" /> ".$this->get_translation('PageHandlerMoreTip')."</a> \n";
 	// only display 'more' text that shows handler list on hover
 	echo '<li class=""><a href="#" id="more">'.$this->get_translation('PageHandlerMoreTip').'</a>'." \n";
 	echo '<ul class="dropdown_menu">'."\n";
@@ -261,15 +270,6 @@ else
 		$this->method == 'review',
 		($this->page['reviewed'] == 1 ? 'review2.png' : 'review1.png'),
 		'z');
-
-	// properties tab
-	echo echo_tab(
-		$this->href('properties'),
-		$this->get_translation('PropertiesTip'),
-		($this->forum === false && $this->page && ($this->is_admin() || $this->user_is_owner())) ? $this->get_translation('PropertiesText') : '',
-		$this->method == 'properties' || $this->method == 'rename' || $this->method == 'purge' || $this->method == 'keywords',
-		2,
-		's');
 
 	// upload tab
 	echo echo_tab(
