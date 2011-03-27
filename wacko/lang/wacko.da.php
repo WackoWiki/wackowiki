@@ -29,8 +29,8 @@ $wacko_translation = array(
 	// login panel
 	'LoginWelcome' => 'Log ind',
 	'LoginWelcome2' => '((/Registrering Registrering))',
-	'LoginName' => 'NameSurname',
-	'LoginPassword' => 'Password',
+	'LoginName' => 'Dit brugernavn',
+	'LoginPassword' => 'Din adgangskode',
 	'LoginButton' => 'Log ind',
 	'LoginPage' => 'Login',
 	'PersistentCookie' => 'Forbliv logget ind',

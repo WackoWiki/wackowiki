@@ -29,7 +29,7 @@ $wacko_translation = array(
 	// login panel
 	'LoginWelcome' => 'Вход',
 	'LoginWelcome2' => '((/Регистрация Регистрация))',
-	'LoginName' => 'ИмяФамилия',
+	'LoginName' => 'Имя участника',
 	'LoginPassword' => 'Пароль',
 	'LoginButton' => 'Войти в систему',
 	'LoginPage' => 'Вход',

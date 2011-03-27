@@ -34,7 +34,7 @@ insert_page('Registration', 'Registration', '{{registration}}', $lng, 'Admins', 
 
 insert_page('Password', 'Password', '{{changepassword}}', $lng, 'Admins', false, false);
 insert_page('TextSearch', 'Text Search', '{{search}}', $lng, 'Admins', false, false);
-insert_page('Login', 'Login', '{{login}}', $lng, 'Admins', false, false);
+insert_page('Autentificare', 'Autentificare', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Settings', 'Settings', '{{usersettings}}', $lng, 'Admins', false, false);
 
 ?>
