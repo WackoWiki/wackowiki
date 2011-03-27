@@ -251,7 +251,6 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 			{
 				// display files header
 				?>
-	<a name="files" id="files"></a>
 	<div id="filesheader">
 	<?php echo "<a href=\"".$this->href('', '', 'show_files=0')."\" title=\"".$this->get_translation('HideFiles')."\">".$this->get_translation('Files_all')."</a>"; ?>
 	</div>
@@ -314,7 +313,7 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 						$show_files = str_replace('%1', $c, $this->get_translation('Files_n'));
 				}
 
-				echo "<a href=\"".$this->href('', '', 'show_files=1#files')."\" title=\"".$this->get_translation('ShowFiles')."\">".$show_files."</a>";
+				echo "<a href=\"".$this->href('', '', 'show_files=1#filesheader')."\" title=\"".$this->get_translation('ShowFiles')."\">".$show_files."</a>";
 				echo "</div>\n";
 			}
 		}
@@ -324,7 +323,7 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 	if ($this->config['footer_comments'])
 	{
 		// pagination
-		$pagination = $this->pagination($this->get_comments_count(), $this->config['comments_count'], 'p', 'show_comments=1#comments');
+		$pagination = $this->pagination($this->get_comments_count(), $this->config['comments_count'], 'p', 'show_comments=1#commentsheader');
 
 		// comments form output begins
 		if ($this->has_access('read') && $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->get_user()))
@@ -370,7 +369,6 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 				if ($noid_protect === true) $this->get_user_setting('noid_protect', false);
 
 				// display comments header
-				echo '<a name="comments"></a>';
 				echo '<div id="commentsheader">';
 
 				if (isset($pagination['text']))
@@ -529,7 +527,7 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 				else if	($c  >  1)	$show_comments = str_replace('%1', $c, $this->get_translation('Comments_n'));
 
 				//TODO: show link to show comment only if there is one or/and user has the right to add a new one
-				echo "<a href=\"".$this->href('', '', 'show_comments=1#comments')."\" title=\"".$this->get_translation('ShowComments')."\">".$show_comments."</a></div>";
+				echo "<a href=\"".$this->href('', '', 'show_comments=1#commentsheader')."\" title=\"".$this->get_translation('ShowComments')."\">".$show_comments."</a></div>";
 			}
 		}
 	}

@@ -16,7 +16,7 @@ if (!isset($text)) $text = '';
 if ($for) $page=$for;
 if (!$page) {$page = '';}
 {
-	$output .= $this->href('', $page, 'show_comments=1#comments')."\">";
+	$output .= $this->href('', $page, 'show_comments=1#commentsheader')."\">";
 }
 
 if (!$text)
