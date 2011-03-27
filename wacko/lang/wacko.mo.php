@@ -29,10 +29,10 @@ $wacko_translation = array(
 	// login panel
 	'LoginWelcome' => 'Entrarea',
 	'LoginWelcome2' => '[[/Registration Inregistrarea]]',
-	'LoginName' => '»м€‘амили€',
+	'LoginName' => '»м€ участника',
 	'LoginPassword' => 'Parola',
 	'LoginButton' => 'Intrarea in sistem',
-	'LoginPage' => 'Login',
+	'LoginPage' => 'Autentificare',
 	'PersistentCookie' => 'Stay signed in',
 	'Session'				=> 'Session',
 	'SessionTip'			=> 'parameters of current session',

@@ -29,7 +29,7 @@ $wacko_translation = array(
 	// login panel
 	'LoginWelcome' => 'Zaloguj siê',
 	'LoginWelcome2' => 'a mo¿e potrzebujesz siê [[/Rejestracja zarejestrowaæ]]?',
-	'LoginName' => 'Twoje ImiêNazwisko',
+	'LoginName' => 'Nazwa u¿ytkownika',
 	'LoginPassword' => 'Has³o',
 	'LoginButton' => 'Zaloguj',
 	'LoginPage' => 'Login',
