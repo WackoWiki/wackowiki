@@ -549,3 +549,8 @@ textarea {
 	vertical-align: top;
 	padding-right:20px;
 }
+
+.commenttitle {
+	border-bottom: 1px solid #BABFC7;
+	letter-spacing: 1px;
+}

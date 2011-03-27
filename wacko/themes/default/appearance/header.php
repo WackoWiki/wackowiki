@@ -280,6 +280,8 @@ else
 		2,
 		'u');
 
+		// last empty
+		echo "<li></li>\n";
 		echo "</ul>\n";
 		echo "</li>\n";
 	#echo "</ul>\n";
