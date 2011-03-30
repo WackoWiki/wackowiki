@@ -13,13 +13,13 @@ if (!defined('IN_WACKO'))
 //								Default: null
 
 if (!isset($moderation)) $moderation = '';
-$stop_mod = '';
-$error = '';
-$message = '';
-$mode_file = '';
-$topic = '';
-$plural = '';
-$startmod = '';
+$stop_mod	= '';
+$error		= '';
+$message	= '';
+$mode_file	= '';
+$topic		= '';
+$plural		= '';
+$startmod	= '';
 
 // create polls object
 $this->use_class('polls');
@@ -63,12 +63,15 @@ if ($admin)
 		if (isset($_POST['moderation']))	$edit_id	= $_POST['moderation'];
 		if (isset($_POST['user']))			$user		= $_POST['user'];
 	}
+
 	if (isset($_POST['startmod']))			$startmod	= $_POST['startmod'];
 }
+
 if (isset($_POST['plural']))				$plural		= $_POST['plural'];
 if (isset($_POST['topic']))					$topic		= $_POST['topic'];
 
 $i = 1;
+
 foreach ($_POST as $key => $value)
 {
 	if (preg_match('/^[0-9]{1,2}$/', $key))
@@ -167,11 +170,14 @@ if ($stop_mod !== true)
 {
 	// managing number of survey answers
 	$total_vars = count($vars);
-	if (isset($_POST['addvar']) && $total_vars < 20) {
+	if (isset($_POST['addvar']) && $total_vars < 20)
+	{
 		$vars[] = array('v_id' => $total_vars + 1, 'text' => '');
 		$total_vars++;
 	}
-	if (isset($_POST['delvar']) && $total_vars > 5) {
+
+	if (isset($_POST['delvar']) && $total_vars > 5)
+	{
 		end($vars);
 		$i = key($vars);
 		unset($vars[$i]);
@@ -217,7 +223,7 @@ else if ($stop_mod !== true)
 	{
 		echo '<tr>';
 			echo '<td class="label">'.$this->get_translation('PollsVariant').' '.$var['v_id'].':</td>';
-			echo '<td><input name="'.$var['v_id'].'" type="text" size="40" maxlength="250" value="'.$var['text'].'" /></td>';
+			echo '<td><input name="'.$var['v_id'].'" type="text" size="40" maxlength="250" value="'.htmlspecialchars($var['text']).'" /></td>';
 		echo '</tr>';
 	}
 	echo '<tr class="lined">';
