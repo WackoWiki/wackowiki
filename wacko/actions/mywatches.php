@@ -33,7 +33,7 @@ if ($user_id = $this->get_user_id())
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mywatches&amp;unwatched=1#list');
 
 		echo $this->get_translation('UnwatchedPages').' (<a href="'.
-			$this->href('', '', 'mode='.$_GET['mode']).'#list">'.
+			$this->href('', '', 'mode='.htmlspecialchars($_GET['mode'])).'#list">'.
 			$this->get_translation('ViewWatchedPages').'</a>).<br /><br />';
 
 		$cnt = 0;
@@ -63,7 +63,7 @@ if ($user_id = $this->get_user_id())
 						$curChar = $firstChar;
 					}
 
-					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.$_GET['p'].'&amp;' : '').'mode=mywatches&amp;unwatched=1&amp;setwatch='.$page['page_id']).'#list">'.
+					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p']).'&amp;' : '').'mode=mywatches&amp;unwatched=1&amp;setwatch='.$page['page_id']).'#list">'.
 						"<img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\"  />".'</a> '.$this->compose_link_to_page($page['pagetag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
@@ -89,7 +89,7 @@ if ($user_id = $this->get_user_id())
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mywatches#list');
 
 		echo $this->get_translation('WatchedPages').' (<a href="'.
-			$this->href('', '', 'mode='.$_GET['mode'].'&amp;unwatched=1').'#list">'.
+			$this->href('', '', 'mode='.htmlspecialchars($_GET['mode']).'&amp;unwatched=1').'#list">'.
 			$this->get_translation('ViewUnwatchedPages').'</a>).<br /><br />';
 
 		$cnt = 0;
@@ -117,7 +117,7 @@ if ($user_id = $this->get_user_id())
 						$curChar = $firstChar;
 					}
 
-					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.$_GET['p'].'&amp;' : '').'mode=mywatches&amp;unwatch='.$page['page_id']).'#list">'.
+					echo '<a href="'.$this->href('', '', (isset($_GET['p']) ? 'p='.htmlspecialchars($_GET['p']).'&amp;' : '').'mode=mywatches&amp;unwatch='.$page['page_id']).'#list">'.
 						"<img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\"  />".'</a> '.$this->compose_link_to_page($page['tag'], '', '', 0)."<br />\n";
 					$cnt++;
 				}
