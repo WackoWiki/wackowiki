@@ -145,7 +145,7 @@ if ($registered
 				<li><?php echo $this->get_time_string_formatted($file[0]['uploaded_dt']); ?></li>
 				<li><?php echo "(".$this->binary_multiples($file[0]['file_size'], true, true, true).")"; ?></li>
 				<li><?php echo $file[0]['file_name']; ?></li>
-				<li><input name="description" id="UploadDesc" type="text" size="40" value="<?php echo $file[0]['description']; ?>"/></li>
+				<li><input name="description" id="UploadDesc" type="text" size="80" value="<?php echo $file[0]['description']; ?>"/></li>
 			</ul>
 		</li>
 	</ul>
