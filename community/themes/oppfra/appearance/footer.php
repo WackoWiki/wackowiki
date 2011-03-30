@@ -213,7 +213,7 @@ echo '<br />';
 			}
 
 			// categories
-			echo $this->action('category', array('list' => 1));
+			echo $this->action('categories', array('list' => 1));
 
 			// tag cloud
 			# echo $this->action('tagcloud');

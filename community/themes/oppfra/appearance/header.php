@@ -15,8 +15,8 @@ require ('themes/_common/_header.php');
 // Outputs page title
 ?>
 <ul>
-	<li><?php echo $this->compose_link_to_page($this->config["root_page"]);?>:</li>   <li><?php echo $this->get_page_path(); ?></li>
-	<li><a title="<?php echo $this->get_translation("SearchTitleTip")?>" href="<?php echo $this->config["base_url"].$this->get_translation("TextSearchPage").($this->config["rewrite_mode"] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></li>
+	<li><?php echo $this->compose_link_to_page($this->config['root_page']);?>:</li>   <li><?php echo $this->get_page_path(); ?></li>
+	<li><a title="<?php echo $this->get_translation('SearchTitleTip')?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></li>
 </ul>
 </div></div>
 <!--ENDE: KOPF-->
