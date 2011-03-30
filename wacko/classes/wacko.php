@@ -1376,14 +1376,15 @@ class Wacko
 		$limit = (int) $limit;
 
 		if ($pages = $this->load_all(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.body_r, u.user_name as user ".
-		"FROM ".$this->config['table_prefix']."page p ".
-			"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-		"WHERE p.comment_on_id != '0' ".
+		"SELECT c.page_id, c.owner_id, c.tag, c.supertag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest, c.handler, c.comment_on_id, c.lang, c.body_r, u.user_name as user, p.title AS page_title, p.tag AS page_tag ".
+		"FROM ".$this->config['table_prefix']."page c ".
+			"LEFT JOIN ".$this->config['table_prefix']."user u ON (c.user_id = u.user_id) ".
+			"LEFT JOIN ".$this->config['table_prefix']."page p ON (c.comment_on_id = p.page_id) ".
+		"WHERE c.comment_on_id != '0' ".
 			($for
 				? "AND p.supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
 				: "").
-		"ORDER BY p.modified DESC ".
+		"ORDER BY c.modified DESC ".
 		"LIMIT ".$limit))
 		{
 			#$count		= count($pages['page_id']);
@@ -2485,6 +2486,10 @@ class Wacko
 					{
 						$icon	= $this->get_translation('texticon');
 					}
+					else if ($desc['file_ext'] == 'odt')
+					{
+						$icon	= $this->get_translation('odticon');
+					}
 					else if ($desc['file_ext'] == 'png' || $desc['file_ext'] == 'gif' || $desc['file_ext'] == 'jpg')
 					{
 						$icon	= $this->get_translation('imageicon');
@@ -2528,6 +2533,10 @@ class Wacko
 					else if ($desc['file_ext'] == 'txt')
 					{
 						$icon	= $this->get_translation('texticon');
+					}
+					else if ($desc['file_ext'] == 'odt')
+					{
+						$icon	= $this->get_translation('odticon');
 					}
 					else if ($desc['file_ext'] == 'png' || $desc['file_ext'] == 'gif' || $desc['file_ext'] == 'jpg')
 					{
@@ -2599,6 +2608,10 @@ class Wacko
 						else if ($desc['file_ext'] == 'txt')
 						{
 							$icon	= $this->get_translation('texticon');
+						}
+						else if ($desc['file_ext'] == 'odt')
+						{
+							$icon	= $this->get_translation('odticon');
 						}
 						else if ($desc['file_ext'] == 'png' || $desc['file_ext'] == 'gif' || $desc['file_ext'] == 'jpg')
 						{
@@ -3409,7 +3422,7 @@ class Wacko
 		if (!$this->config['antidupe'])
 		{
 			if ($this->load_single(
-			"SELECT * FROM {$this->config['user_table']} ".
+			"SELECT user_id FROM {$this->config['user_table']} ".
 			"WHERE user_name = '".quote($this->dblink, $name)."' ".
 			"LIMIT 1"))
 			{
@@ -3475,7 +3488,7 @@ class Wacko
 
 		// checking database
 		if ($this->load_single(
-		"SELECT * FROM {$this->config['user_table']} ".
+		"SELECT user_id FROM {$this->config['user_table']} ".
 		"WHERE user_name REGEXP '".quote($this->dblink, implode('', $name))."' ".
 		"LIMIT 1", 1))
 		{
@@ -5019,7 +5032,7 @@ class Wacko
 		$this->tag		= $tag;
 		$this->supertag	= $this->npj_translit($tag);
 
-		$revision_id	= isset($_GET['revision_id']) ? $_GET['revision_id'] : '';
+		$revision_id	= isset($_GET['revision_id']) ? (int)$_GET['revision_id'] : '';
 		$page			= $this->load_page($this->tag, 0, $revision_id);
 
 		if ($this->config['outlook_workaround'] && !$page)
