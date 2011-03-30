@@ -670,7 +670,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// print moderation controls...
 		echo '<input name="ids" type="hidden" value="'.implode('-', $set).'" />'.
-			'<input name="p" type="hidden" value="'.(isset($_GET['p']) ? $_GET['p'] : '').'" />'."\n";
+			'<input name="p" type="hidden" value="'.(isset($_GET['p']) ? htmlspecialchars($_GET['p']) : '').'" />'."\n";
 		echo '<table cellspacing="1" cellpadding="4">'.
 				'<tr class="lined">'.
 					'<td colspan="5">'.
@@ -1173,7 +1173,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// print moderation controls...
 		echo '<input name="ids" type="hidden" value="'.implode('-', $set).'" />'.
-			'<input name="p" type="hidden" value="'.(isset($_GET['p']) ? $_GET['p'] : '').'" />'."\n";
+			'<input name="p" type="hidden" value="'.(isset($_GET['p']) ? htmlspecialchars($_GET['p']) : '').'" />'."\n";
 		echo '<table cellspacing="1" cellpadding="4">'.
 				'<tr class="lined">'.
 					'<td colspan="2">'.
