@@ -190,7 +190,7 @@ else
 					}
 					else
 					{
-					#	$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
+						$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
 					}
 				}
 				else
