@@ -56,7 +56,7 @@ else
 
 if(!$nomark)
 {
-	echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('MostPopularPages').": ".$this->link($ppage, '', $legend)."</span></p>\n";
+	echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('MostCommentedPages').": ".$this->link($ppage, '', $legend)."</span></p>\n";
 }
 
 if(!$for)
@@ -139,7 +139,7 @@ foreach ($pages as $page)
 
 			echo "<tr><td>&nbsp;&nbsp;".$num.".&nbsp;".$_link."</td><td>".
 				$this->get_translation('Shown')."</td><td>".
-				$page['comments']."</td></tr>\n";
+				'<a href="'.$this->href('', $page['tag'], 'show_comments=1').'#commentsheader">'.$page['comments'].'</a></td></tr>'."\n";
 		}
 	}
 }
