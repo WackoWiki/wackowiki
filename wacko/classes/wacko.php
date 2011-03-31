@@ -2027,7 +2027,7 @@ class Wacko
 				$this->use_class('rss');
 				$xml = new rss($this);
 
-				if ($this->config['allow_feeds'])
+				if ($this->config['enable_feeds'])
 				{
 					$xml->changes();
 					$xml->comments();
