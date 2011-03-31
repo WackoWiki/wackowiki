@@ -59,6 +59,7 @@ function admin_configbasic(&$engine, &$module)
 		$config['referrers_purge_time']		= (string)$_POST['referrers_purge_time'];
 		$config['noindex']					= (int)$_POST['noindex'];
 		$config['xml_sitemap']				= (int)$_POST['xml_sitemap'];
+		$config['enable_feeds']				= (int)$_POST['enable_feeds'];
 
 		foreach($config as $key => $value)
 		{
@@ -289,6 +290,20 @@ function admin_configbasic(&$engine, &$module)
 					<input type="radio" id="lower_index" name="tree_level" value="1"<?php echo ( $engine->config['tree_level'] == 1 ? ' checked="checked"' : '' );?> /><label for="lower_index">Lower</label>
 					<input type="radio" id="upper_index" name="tree_level" value="2"<?php echo ( $engine->config['tree_level'] == 2 ? ' checked="checked"' : '' );?> /><label for="upper_index">Upper</label>
 				</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<br />
+					Feeds
+				</th>
+			</tr>
+			<tr>
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="enable_feeds"><strong>Enable Feeds:</strong><br />
+				<small>Turns on or off RSS feeds for the entire wiki.</small></label></td>
+				<td><input type="checkbox" id="enable_feeds" name="enable_feeds" value="1"<?php echo ( $engine->config['enable_feeds'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr>
 				<th colspan="2">

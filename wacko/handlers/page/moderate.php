@@ -392,7 +392,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 				unset($accept_action);
 
-				if ($this->config['allow_feeds'])
+				if ($this->config['enable_feeds'])
 				{
 					$xml->comments();
 				}
@@ -438,7 +438,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					}
 					unset($accept_action, $i, $old_tags, $new_tags);
 
-					if ($this->config['allow_feeds'])
+					if ($this->config['enable_feeds'])
 					{
 						$xml->comments();
 					}
@@ -477,7 +477,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$this->log(3, str_replace('%2', $this->tag.'/'.$tag.' '.$title, str_replace('%1', $old_tag, $this->get_translation('LogRenamedPage', $this->config['language']))));
 					unset($accept_action, $old_tag, $tag, $title);
 
-					if ($this->config['allow_feeds'])
+					if ($this->config['enable_feeds'])
 					{
 						$xml->comments();
 					}
@@ -509,7 +509,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$this->log(3, str_replace('%2', $_POST['base'], str_replace('%1', '##'.implode('##, ##', $topics).'##', $this->get_translation('LogMergedPages', $this->config['language']))));
 				unset($accept_action, $topics);
 
-				if ($this->config['allow_feeds'])
+				if ($this->config['enable_feeds'])
 				{
 					$xml->comments();
 				}
@@ -764,7 +764,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				moderate_delete_page($this, $this->tag);
 				unset($accept_action);
 
-				if ($this->config['allow_feeds'])
+				if ($this->config['enable_feeds'])
 				{
 					$xml->comments();
 				}
@@ -825,7 +825,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$this->log(3, str_replace('%2', $new_tag, str_replace('%1', $old_tag, $this->get_translation('LogRenamedPage', $this->config['language']))));
 					unset($accept_action);
 
-					if ($this->config['allow_feeds'])
+					if ($this->config['enable_feeds'])
 					{
 						$xml->comments();
 					}
@@ -866,7 +866,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$this->log(3, str_replace('%2', $new_tag.' '.$title, str_replace('%1', $old_tag, $this->get_translation('LogRenamedPage', $this->config['language']))));
 					unset($accept_action);
 
-					if ($this->config['allow_feeds'])
+					if ($this->config['enable_feeds'])
 					{
 						$xml->comments();
 					}
@@ -918,7 +918,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				unset($accept_action);
 
-				if ($this->config['allow_feeds'])
+				if ($this->config['enable_feeds'])
 				{
 					$xml->comments();
 				}
@@ -998,7 +998,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							$this->log(3, str_replace('%2', $section.'/'.$tag.' '.$title, str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogSplittedPage', $this->config['language']))));
 							unset($accept_action);
 
-							if ($this->config['allow_feeds'])
+							if ($this->config['enable_feeds'])
 							{
 								$xml->comments();
 							}
@@ -1060,7 +1060,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$this->log(3, str_replace('%2', $title.' '.$this->get_page_title($title), str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogSplittedPage', $this->config['language']))));
 						unset($accept_action);
 
-						if ($this->config['allow_feeds'])
+						if ($this->config['enable_feeds'])
 						{
 							$xml->comments();
 						}

@@ -142,7 +142,7 @@ $wacko_config_defaults = array(
 	'upload_path_backup'	=> 'files/backup',
 
 	'outlook_workaround' => 1,
-	'allow_feeds' => 1,
+	'enable_feeds' => 1,
 
 	'forum_cluster' => 'Forum',
 	'forum_topics' => 10,
