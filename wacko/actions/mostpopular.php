@@ -136,7 +136,7 @@ foreach ($pages as $page)
 
 			echo "<tr><td>&nbsp;&nbsp;".$num.".&nbsp;".$_link."</td><td>".
 				$this->get_translation('Shown')."</td><td>".
-				$page['hits']."</td></tr>\n";
+				number_format($page['hits'], 0, ',', '.')."</td></tr>\n";
 		}
 	}
 }
