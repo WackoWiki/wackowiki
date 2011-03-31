@@ -2026,14 +2026,18 @@ class Wacko
 			{
 				$this->use_class('rss');
 				$xml = new rss($this);
-				$xml->changes();
-				$xml->comments();
 
-				if ($this->config['news_cluster'])
+				if ($this->config['allow_feeds'])
 				{
-					if (substr($this->tag, 0, strlen($this->config['news_cluster'].'/')) == $this->config['news_cluster'].'/')
+					$xml->changes();
+					$xml->comments();
+
+					if ($this->config['news_cluster'])
 					{
-						$xml->news();
+						if (substr($this->tag, 0, strlen($this->config['news_cluster'].'/')) == $this->config['news_cluster'].'/')
+						{
+							$xml->news();
+						}
 					}
 				}
 
@@ -2188,6 +2192,11 @@ class Wacko
 				header( 'X-Frame-Options: DENY' ); // or SAMEORIGIN
 				#	if (isset($this->config['x_csp']))
 				header( "X-Content-Security-Policy: allow 'self'; script-src 'self'; options inline-script; img-src *;" );
+
+				if ( isset( $_SERVER['HTTPS'] ) && ( $_SERVER['HTTPS'] != 'off' ) )
+				{
+					header( 'Strict-Transport-Security: max-age=7776000' );
+				}
 			}
 		}
 	}
