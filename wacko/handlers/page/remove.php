@@ -85,7 +85,7 @@ if ($this->is_admin() ||
 			}
 			if ($this->remove_page($this->tag, $comment_on_id, $dontkeep))
 			{
-				if ($this->config['allow_feeds'])
+				if ($this->config['enable_feeds'])
 				{
 					$this->use_class('rss');
 					$xml = new rss($this);
