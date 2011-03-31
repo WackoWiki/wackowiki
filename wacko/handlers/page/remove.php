@@ -85,18 +85,21 @@ if ($this->is_admin() ||
 			}
 			if ($this->remove_page($this->tag, $comment_on_id, $dontkeep))
 			{
-				$this->use_class('rss');
-				$xml = new rss($this);
-				$xml->comments();
-
-				if (!$comment_on_id)
+				if ($this->config['allow_feeds'])
 				{
-					$xml->changes();
-				}
+					$this->use_class('rss');
+					$xml = new rss($this);
+					$xml->comments();
 
-				if (preg_match('/'.$this->config['news_cluster'].'\/.+?\/.+/', $this->tag))
-				{
-					$xml->news();
+					if (!$comment_on_id)
+					{
+						$xml->changes();
+					}
+
+					if (preg_match('/'.$this->config['news_cluster'].'\/.+?\/.+/', $this->tag))
+					{
+						$xml->news();
+					}
 				}
 
 				print(str_replace('%1', $this->tag, $this->get_translation('PageRemoved'))."<br />\n");
