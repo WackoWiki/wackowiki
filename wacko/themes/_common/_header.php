@@ -29,13 +29,15 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 <?php if ($this->config['policy_page']) {?>
 	<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page'])); ?>" title="Copyright" />
 <?php } ?>
+<?php if ($this->config['allow_feeds']) {?>
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentChangesRSS');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentCommentsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/comments_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
-<?php if ($this->config['news_cluster']) {?>
+	<?php if ($this->config['news_cluster']) {?>
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentNewsRSS');?>" href="<?php echo $this->config['base_url'];?>xml/news_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />
-<?php } ?>
-<?php if ( $this->hide_revisions === false || $this->is_admin() ) {?>
+	<?php } ?>
+	<?php if ( $this->hide_revisions === false || $this->is_admin() ) {?>
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('HistoryRevisionsRSS');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
+	<?php } ?>
 <?php } ?>
 
 <?php
