@@ -39,6 +39,7 @@ function admin_configsecurity(&$engine, &$module)
 		$config['captcha_registration']			= (int)$_POST['captcha_registration'];
 		$config['session_encrypt_cookie']		= (int)$_POST['session_encrypt_cookie'];
 		$config['antidupe']						= (int)$_POST['antidupe'];
+		$config['disable_wikiname']				= (int)$_POST['disable_wikiname'];
 		$config['default_read_acl']				= (string)$_POST['default_read_acl'];
 		$config['default_write_acl']			= (string)$_POST['default_write_acl'];
 		$config['default_comment_acl']			= (string)$_POST['default_comment_acl'];
@@ -102,6 +103,14 @@ function admin_configsecurity(&$engine, &$module)
 				<td class="label"><label for="antidupe"><strong>Anti-clone:</strong><br />
 				<small>Disable register on the website under the names, <u>like</u> on the names of existing users (guests also can not use similar names for the signature comments). When this option is checked only <u>identical</u> names.</small></label></td>
 				<td><input type="checkbox" id="antidupe" name="antidupe" value="1"<?php echo ( $engine->config['antidupe'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="disable_wikiname"><strong>Disable WikiName:</strong><br />
+				<small>Disable the the madatoty use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.</label></td>
+				<td><input type="checkbox" id="disable_wikiname" name="disable_wikiname" value="1"<?php echo ( $engine->config['antidupe'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr>
 				<th colspan="2">

@@ -114,7 +114,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 		if (($word_ok) || $this->is_admin() || !$this->config['captcha_registration'])
 		{
 			// check if name is WikiName style
-			if (!$this->is_wiki_name($user_name))
+			if (!$this->is_wiki_name($user_name) && $this->config['disable_wikiname'] === false)
 			{
 				$error .= $this->get_translation('MustBeWikiName')." ";
 			}
@@ -309,13 +309,13 @@ if (!isset($_POST['confirm']))
 		}
 
 		echo "<br /><small>".
-			 $this->get_translation('PwdCplxDesc1').
-			 str_replace('%1', $this->config['pwd_min_chars'],
+			$this->get_translation('PwdCplxDesc1').
+			str_replace('%1', $this->config['pwd_min_chars'],
 				$this->get_translation('PwdCplxDesc2')).
-			 ($this->config['pwd_unlike_login'] > 0
+			($this->config['pwd_unlike_login'] > 0
 				? ", ".$this->get_translation('PwdCplxDesc3')
 				: "").
-			 ($this->config['pwd_char_classes'] > 0
+			($this->config['pwd_char_classes'] > 0
 				? ", ".$pwd_cplx_text
 				: "")."</small>";
 		echo '</p>';
