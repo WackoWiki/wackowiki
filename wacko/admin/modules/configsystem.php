@@ -33,28 +33,28 @@ function admin_configsystem(&$engine, &$module)
 
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$config['debug']				= (int)$_POST['debug'];
-		$config['debug_sql_threshold']			= (float)$_POST['debug_sql_threshold'];
+		$config['debug']					= (int)$_POST['debug'];
+		$config['debug_sql_threshold']		= (float)$_POST['debug_sql_threshold'];
 		$config['debug_admin_only']			= (int)$_POST['debug_admin_only'];
-		$config['cache']				= (int)$_POST['cache'];
-		$config['cache_ttl']			= (int)$_POST['cache_ttl'];
-		$config['cache_sql']			= (int)$_POST['cache_sql'];
+		$config['cache']					= (int)$_POST['cache'];
+		$config['cache_ttl']				= (int)$_POST['cache_ttl'];
+		$config['cache_sql']				= (int)$_POST['cache_sql'];
 		$config['cache_sql_ttl']			= (int)$_POST['cache_sql_ttl'];
-		// $config['bbcode']			= (int)$_POST['bbcode'];
+		// $config['bbcode']				= (int)$_POST['bbcode'];
 		$config['allow_x11colors']			= (int)$_POST['allow_x11colors'];
-		$config['default_typografica']			= (int)$_POST['default_typografica'];
-		$config['paragrafica']			= (int)$_POST['paragrafica'];
+		$config['default_typografica']		= (int)$_POST['default_typografica'];
+		$config['paragrafica']				= (int)$_POST['paragrafica'];
 		$config['allow_rawhtml']			= (int)$_POST['allow_rawhtml'];
 		$config['disable_safehtml']			= (int)$_POST['disable_safehtml'];
-		$config['date_format']			= (string)$_POST['date_format'];
-		$config['time_format']			= (string)$_POST['time_format'];
-		$config['time_format_seconds']			= (string)$_POST['time_format_seconds'];
+		$config['date_format']				= (string)$_POST['date_format'];
+		$config['time_format']				= (string)$_POST['time_format'];
+		$config['time_format_seconds']		= (string)$_POST['time_format_seconds'];
 		$config['name_date_macro']			= (string)$_POST['name_date_macro'];
-		$config['date_macro_format']			= (string)$_POST['date_macro_format'];
-		$config['date_precise_format']			= (string)$_POST['date_precise_format'];
+		$config['date_macro_format']		= (string)$_POST['date_macro_format'];
+		$config['date_precise_format']		= (string)$_POST['date_precise_format'];
 		$config['cookie_prefix']			= (string)$_POST['cookie_prefix'];
 		$config['session_prefix']			= (string)$_POST['session_prefix'];
-		$config['rewrite_mode']			= (int)$_POST['rewrite_mode'];
+		$config['rewrite_mode']				= (int)$_POST['rewrite_mode'];
 
 		foreach($config as $key => $value)
 		{

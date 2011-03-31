@@ -23,7 +23,7 @@ $wacko_config_defaults = array(
 
 	'root_page' => 'HomePage',
 	'site_name' => 'MyWackoSite',
-	'site_desc' => 'A light and handy Wiki-engine',
+	'site_desc' => 'Cover what you do best. Link to the rest!',
 	'base_url' => ($_SERVER['SERVER_PORT'] == 443 ? 'https' : 'http').'://'.$_SERVER['SERVER_NAME'].
 		($_SERVER['SERVER_PORT'] != 80 ? ':'.$_SERVER['SERVER_PORT'] : '').
 		preg_replace('/(\?|&)installAction=site-config/','',$_SERVER['REQUEST_URI']),
@@ -124,8 +124,10 @@ $wacko_config_defaults = array(
 	'store_deleted_pages' => 1,
 	'default_rename_redirect' => 1,
 
+
 	'allow_registration' => 1,
 	'disable_autosubscribe' => 0,
+	'disable_wikiname' => 1,
 
 	'standard_handlers' => 'addcomment|categories|claim|clone|diff|edit|latex|msword|new|permissions|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|show|source|watch',
 
