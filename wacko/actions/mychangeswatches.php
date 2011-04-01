@@ -19,7 +19,7 @@ if ($user_id = $this->get_user_id())
 
 	$pages = $this->load_all(
 			"SELECT p.page_id, p.tag, p.modified, w.user_id ".
-			"FROM {$pref}pages AS p, {$pref}watch AS w ".
+			"FROM {$pref}page AS p, {$pref}watch AS w ".
 			"WHERE p.page_id = w.page_id ".
 				"AND p.modified > w.watch_time ".
 				"AND w.user_id = '".quote($this->dblink, $user_id)."' ".
