@@ -89,7 +89,7 @@ if ($user_id = $this->get_user_id())
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mywatches#list');
 
 		echo $this->get_translation('WatchedPages').' (<a href="'.
-			$this->href('', '', 'mode='.htmlspecialchars($_GET['mode']).'&amp;unwatched=1').'#list">'.
+			$this->href('', '', (isset($_GET['mode']) ? 'mode='.htmlspecialchars($_GET['mode']).'&amp;unwatched=1' : '')).'#list">'.
 			$this->get_translation('ViewUnwatchedPages').'</a>).<br /><br />';
 
 		$cnt = 0;
