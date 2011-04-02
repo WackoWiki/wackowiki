@@ -63,11 +63,9 @@ else
 
 		// cleaning up
 		$strings = preg_replace('/<!--action:begin-->toc<!--action:end-->/i', '', $strings);
-		$strings = preg_replace('/<!--action:begin-->tableofcontents<!--action:end-->/i', '', $strings);
 		$strings = preg_replace('/<!--action:begin-->p<!--action:end-->/i', '', $strings);
-		$strings = preg_replace('/<!--action:begin-->showparagraphs<!--action:end-->/i', '', $strings);
 		$strings = preg_replace('/<!--action:begin-->redirect<!--action:end-->/i', '', $strings);
-		$strings = preg_replace('/.*<!--action:begin-->a name=\"?$first_anchor\"?<!--action:end-->(.*)<!--action:begin-->a name=\"?$last_anchor\"?<!--action:end-->.*$/is', '\$1', $strings);
+		$strings = preg_replace("/.*<!--action:begin-->anchor name=\"?$first_anchor\"?<!--action:end-->(.*)<!--action:begin-->anchor name=\"?$last_anchor\"?<!--action:end-->.*$/is", "\$1", $strings);
 
 		// header
 		if (($this->method != 'print') && ($nomark != 1) && ($nomark != 2 || $this->has_access('write', $page_id)))
