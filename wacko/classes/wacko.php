@@ -1125,7 +1125,7 @@ class Wacko
 			}
 		}
 
-		$user		= $this->get_user();
+		$user			= $this->get_user();
 		$user_bookmarks	= $this->get_user_bookmarks($user['user_id']);
 
 		if (!isset($cl))
@@ -4550,7 +4550,7 @@ class Wacko
 			}
 		}
 
-		$user_id	= $this->get_user_id('System');
+		$user_id			= $this->get_user_id('System');
 		$default_bookmarks	= $this->get_user_bookmarks($user_id, $lang);
 		#$this->debug_print_r($default_bookmarks);
 
@@ -4565,7 +4565,7 @@ class Wacko
 		if ($user_id)
 		{
 			$_bookmarks = $this->load_all(
-					"SELECT p.tag, p.title, b.menu_title, b.lang ".
+					"SELECT p.page_id, p.tag, p.title, b.menu_title, b.lang ".
 					"FROM ".$this->config['table_prefix']."menu b ".
 						"LEFT JOIN ".$this->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
 					"WHERE b.user_id = '".quote($this->dblink, $user_id)."' ".
@@ -4576,9 +4576,11 @@ class Wacko
 
 			if ($_bookmarks)
 			{
-				foreach($_bookmarks as $_bookmark)
+				foreach($_bookmarks as $c => $_bookmark)
 				{
-					$user_bookmarks .= "((".$_bookmark['tag'].
+					$user_bookmarks[$c] = array(
+						$_bookmark['page_id'],
+						"((".$_bookmark['tag'].
 						(!empty($_bookmark['menu_title'])
 							? " ".$_bookmark['menu_title']
 							: (!empty($_bookmark['title'])
@@ -4589,10 +4591,10 @@ class Wacko
 						(!empty($_bookmark['lang'])
 							? " @@".$_bookmark['lang']
 							: "").
-					"))\n";
+					"))");
 				}
 			}
-
+			#$this->debug_print_r($user_bookmarks);
 			return $user_bookmarks;
 		}
 	}
@@ -4604,8 +4606,8 @@ class Wacko
 		// initial bookmarks table construction
 		if ($set || !($bookmarks = $this->get_bookmarks()))
 		{
-			$user_bookmarks = $this->get_user_bookmarks($user['user_id']);
-			$bookmarks = ( $user_bookmarks
+			$user_bookmarks	= $this->get_user_bookmarks($user['user_id']);
+			$bookmarks		= ( $user_bookmarks
 				? $user_bookmarks
 				: $this->get_default_bookmarks($user['lang']) );
 
@@ -4615,23 +4617,28 @@ class Wacko
 			}
 
 			// parsing bookmarks into link table
-			$bookmarks	= explode("\n", $bookmarks);
-			$bookmark_links = $this->parsing_bookmarks($bookmarks);
+			foreach ($bookmarks as $_bookmark)
+			{
+				$bookmark_page_ids[] = $_bookmark[0];
+				$bookmark_formatted[] = array ($_bookmark[0], $_bookmark[1], $this->format($_bookmark[1], 'wacko'));
+			}
 
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']	= $bookmark_links;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']	= $this->format(implode("\n", $bookmarks), 'wacko');
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_page_id']	= $bookmark_page_ids;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']			= $bookmark_formatted;
 		}
 
 		// adding new bookmark
 		if (!empty($_GET['addbookmark']) && $user)
 		{
-			// writing bookmark
-			$bookmark = '(('.$this->tag.' '.($this->get_page_title() ? $this->get_page_title() : $this->tag).($user['lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))';
+			$_bookmark_page_ids = $this->get_bookmark_links();
 
-			if (!in_array($bookmark, $bookmarks))
+			// writing bookmark
+			if (!in_array($this->page['page_id'], $_bookmark_page_ids))
 			{
-				$bookmarks[] = $bookmark;
+				$bookmarks[] = array(
+					$this->page['page_id'],
+					'(('.$this->tag.' '.($this->get_page_title() ? $this->get_page_title() : $this->tag).($user['lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))'
+					);
 
 				$_menu_position = $this->load_all(
 					"SELECT b.menu_id ".
@@ -4649,13 +4656,16 @@ class Wacko
 			}
 
 			// parsing bookmarks into link table
-			$bookmark_links = $this->parsing_bookmarks($bookmarks);
+			foreach ($bookmarks as $_bookmark)
+			{
+				$bookmark_page_ids[] = $_bookmark[0];
+				$bookmark_formatted[] = array ($_bookmark[0], $_bookmark[1], $this->format($_bookmark[1], 'wacko'));
+			}
 
-			$this->set_user_setting('bookmarks', implode("\n", $bookmarks));
+			#$this->set_user_setting('bookmarks', implode("\n", $bookmarks)); // XXX: obsolete
 
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']	= $bookmark_links;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']	= $this->format(implode("\n", $bookmarks), 'wacko');
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_page_id']	= $bookmark_page_ids;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']			= $bookmark_formatted;
 		}
 
 		// removing bookmark
@@ -4664,7 +4674,7 @@ class Wacko
 			// rewriting bookmarks table except containing current page tag
 			foreach ($bookmarks as $bookmark)
 			{
-				if ($bookmark && substr($bookmark, 2, strpos($bookmark, ' ', 2) - 2) != $this->tag)
+				if ($bookmark[0] != $this->page['page_id'])
 				{
 					$newbookmarks[] = $bookmark;
 				}
@@ -4676,6 +4686,7 @@ class Wacko
 			}
 
 			$bookmarks = $newbookmarks;
+			#$this->debug_print_r($bookmarks);
 
 			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."menu ".
@@ -4684,44 +4695,17 @@ class Wacko
 				"LIMIT 1");
 
 			// parsing bookmarks into link table
-			$bookmark_links = $this->parsing_bookmarks($bookmarks);
-
-			$this->set_user_setting('bookmarks', ( $bookmarks ? implode("\n", $bookmarks) : '' ));
-
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmarks;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']	= $bookmark_links;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']	= ( $bookmarks ? $this->format(implode("\n", $bookmarks), 'wacko') : '' );
-		}
-	}
-
-	function parsing_bookmarks($bookmarks)
-	{
-		// parsing bookmarks into link table
-		$bookmark_links = $bookmarks;
-
-		for ($i = 0; $i < count($bookmark_links); $i++)
-		{
-			if (strpos($bookmark_links[$i], '[') === 0 || strpos($bookmark_links[$i], '(') === 0)
+			foreach ($bookmarks as $_bookmark)
 			{
-				if (($space = strpos($bookmark_links[$i], ' ')) == true)
-				{
-					$bookmark_links[$i] = substr($bookmark_links[$i], 0, $space);
-				}
-				else
-				{
-					$bookmark_links[$i] = substr($bookmark_links[$i], 0);
-				}
+				$bookmark_page_ids[] = $_bookmark[0];
+				$bookmark_formatted[] = array ($_bookmark[0], $_bookmark[1], $this->format($_bookmark[1], 'wacko'));
+			}
 
-				$bookmark_links[$i] = trim($bookmark_links[$i], '[( )]');
-				#$bookmark_links[$i] = $this->npj_translit($bookmark_links[$i]);
-			}
-			else
-			{
-				$bookmark_links[$i] = '';
-			}
+			#$this->set_user_setting('bookmarks', ( $bookmarks ? implode("\n", $bookmarks) : '' )); // XXX: obsolete
+
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_page_id']	= $bookmark_page_ids;
+			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']			= ( $bookmark_formatted ? $bookmark_formatted : '' );
 		}
-
-		return $bookmark_links;
 	}
 
 	function get_bookmarks()
@@ -4732,19 +4716,11 @@ class Wacko
 		}
 	}
 
-	function get_bookmarks_formatted()
-	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']))
-		{
-			return $_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted'];
-		}
-	}
-
 	function get_bookmark_links()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']))
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmark_page_id']))
 		{
-			return $_SESSION[$this->config['session_prefix'].'_'.'bookmark_link'];
+			return $_SESSION[$this->config['session_prefix'].'_'.'bookmark_page_id'];
 		}
 	}
 
