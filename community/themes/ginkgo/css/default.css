@@ -112,9 +112,10 @@ a.main:visited {
 	background-color: #FFFFFF;
 	padding: 9px 10px 10px;
 	/*   border: 1px inset;*/
-  border-top: none;
+	border-top: none;
 	border-bottom: none;
-	min-height:100%;
+	min-height: 500px;
+	height: 100%
 }
 #pageedit {
   background-color: #FFFFFF;
@@ -494,6 +495,10 @@ ul.leftNav, .leftNav li, .leftNavColumn ul {
 
 }
 
+li.active a{
+	background-color: #FFFFFF;
+}
+
 .leftNav a {
 	color: #000000;
 	display: block;
@@ -631,14 +636,14 @@ ul.leftNav { /* space at the bottom of the top left nav */
 
 /* feed action */
 .feed {
-    overflow:auto;
+	overflow:auto;
 }
 .feed .note {
-     font-size: 11px;
-     color: #777;
+	font-size: 11px;
+	color: #777;
 }
 .feed .note a {
-     color: #777;
+	color: #777;
 }
 .feed_element_title {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */

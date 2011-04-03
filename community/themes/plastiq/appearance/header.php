@@ -58,7 +58,23 @@ echo "\n";
 <?php
 	$this->context[++$this->current_context] = '/';
 	$this->stop_link_tracking();
-	echo $this->format($this->format(strtolower(str_replace("\n", ' ', $this->get_default_bookmarks($user['lang'])))), 'post_wacko');
+
+	foreach ($this->get_default_bookmarks($user['lang']) as $_bookmark)
+	{
+		$formatted_bookmarks = $this->format($this->format(strtolower($_bookmark[1])), 'post_wacko');
+
+		if ($this->page['page_id'] == $_bookmark[0])
+		{
+			echo '<span class="active">';
+		}
+		else
+		{
+			echo '<span>';
+		}
+
+		echo $formatted_bookmarks."</span>\n";
+	}
+
 	$this->start_link_tracking();
 	$this->current_context--;
 	echo "\n";
@@ -193,13 +209,36 @@ echo "\n";
 									<div id="sidepanel">
 										<div style="background-image:url(<?php echo $this->config['theme_url'] ?>images/glass_top.png); height:20px;"></div>
 										<div id="bookmarks">
-<?php
-	echo $this->format(implode(' ', $this->get_bookmarks())) . "\n";
-?>
+										<?php
+											// outputs bookmarks menu
+											echo "<ol>\n";
+
+											// bookmarks
+											foreach ($this->get_bookmarks() as $_bookmark)
+											{
+												$formatted_bookmarks = $this->format($_bookmark[2], 'post_wacko');
+
+												if ($this->page['page_id'] == $_bookmark[0])
+												{
+													echo '<li class="active">';
+												}
+												else
+												{
+													echo '<li>';
+												}
+
+												echo $formatted_bookmarks."</li>\n";
+											}
+
+
+											echo "\n</ol>";
+										?>
 										</div>
 <?php
 	if (preg_match('/^'.$this->config['news_cluster'].str_replace('/.+', '\/.+?', $this->config['news_levels']).'/', $this->tag))
+	{
 		$this->config['hide_index'] = 1;
+	}
 
 	if ($this->page && $this->config['hide_index'] == 0 && $this->method == 'show')
 	{
@@ -211,12 +250,12 @@ echo "\n";
 										<div style="background-image:url(<?php echo $this->config['theme_url'] ?>images/glass_sub_3.png); height:20px;"></div>
 										<div id="sections">
 <?php
-		/* if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->config['forum_cluster'])
+		if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->config['forum_cluster'])
 		{
 			// forum index
 			echo $this->action('tree', array('page' => $this->config['forum_cluster'], 'depth' => 1, 'nomark' => 1));
 		}
-		else */ if ($this->config['tree_level'] == 1)
+		else if ($this->config['tree_level'] == 1)
 		{
 			// lower index
 			echo $this->action('tree', array('page' => $this->tag, 'depth' => 1, 'nomark' => 1));

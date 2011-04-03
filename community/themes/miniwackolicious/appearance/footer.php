@@ -56,11 +56,24 @@
 				echo '<h1>'.$this->get_translation('Bookmarks').'</h1>';
 				echo '<ol id="usermenu" class="normal">';
 				echo '<!-- li><a href="'.$base_url.'Intern">Intern</a></li -->';
+
 				// Bookmarks
-				$formatted_bookmarks = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
-				$formatted_bookmarks = str_replace ("<br />", "", $formatted_bookmarks);
-				$formatted_bookmarks = str_replace ( "\n", "</li><li>\n", $formatted_bookmarks );
-				echo '<li>'.$formatted_bookmarks.'</li>';
+				foreach ($this->get_bookmarks() as $_bookmark)
+				{
+					$formatted_bookmarks = $this->format($_bookmark[2], 'post_wacko');
+
+					if ($this->page['page_id'] == $_bookmark[0])
+					{
+						echo '<li class="active">';
+					}
+					else
+					{
+						echo '<li>';
+					}
+
+					echo $formatted_bookmarks."</li>\n";
+				}
+
 				echo "</ol>";
 			echo '</div> <!-- /bookmarks -->';
 		}

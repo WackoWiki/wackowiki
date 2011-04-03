@@ -54,25 +54,50 @@ echo $this->form_open('', $this->get_translation('LoginPage'), 'post'); ?>
   <tr>
     <td>
       <?php
-// Outputs Bookmarks AKA QuickLinks
-  // Main page
-  echo $this->compose_link_to_page($this->config['root_page']); ?>
-|
-<?php
-  // All user's Bookmarks
-  echo $this->format($this->get_bookmarks_formatted(), "post_wacko"); ?>
-|
-<?php
-  // Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
-if ($this->get_user())
-{
- if (!in_array($this->tag, $this->get_bookmark_links()))
- {?>
-<a href="<?php echo $this->href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->config['theme_url'] ?>icons/bookmark1.gif" alt="+" title="<?php echo $this->get_translation('AddToBookmarks') ?>" /></a>
-<?php
- } else { ?>
-<a href="<?php echo $this->href('', '', "removebookmark=yes")?>"><img src="<?php echo $this->config['theme_url'] ?>icons/bookmark2.gif" alt="-" title="<?php echo $this->get_translation('RemoveFromBookmarks') ?>" /></a><?php  }
-} ?></td>
+	// outputs bookmarks menu
+	echo '<div id="usermenu">';
+	echo "<ol>\n";
+	// main page
+	echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
+
+	// bookmarks
+	foreach ($this->get_bookmarks() as $_bookmark)
+	{
+		$formatted_bookmarks = $this->format($_bookmark[2], 'post_wacko');
+
+		if ($this->page['page_id'] == $_bookmark[0])
+		{
+			echo '<li class="active">';
+		}
+		else
+		{
+			echo '<li>';
+		}
+
+		echo $formatted_bookmarks."</li>\n";
+	}
+
+	if ($this->get_user())
+	{
+		// determines what it should show: "add to bookmarks" or "remove from bookmarks" icon
+		if (!in_array($this->page['page_id'], $this->get_bookmark_links()))
+		{
+			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
+				.'"><img src="'. $this->config['theme_url']
+				.'icons/bookmark1.gif" alt="+" title="'.
+				$this->get_translation('AddToBookmarks') .'"/></a></li>';
+		}
+		else
+		{
+			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
+				.'"><img src="'. $this->config['theme_url']
+				.'icons/bookmark2.gif" alt="-" title="'.
+				$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
+		}
+	}
+	echo "\n</ol></div>";
+?>
+    </td>
     <td align="right"><?php
 
 
