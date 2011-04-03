@@ -17,14 +17,10 @@ require ('themes/_common/_header.php');
     <?php echo $this->form_close(); ?> </div>
   <div class="TopLeft">
     <?php if ($this->get_user()) { ?>
-    <img
-	src="<?php echo $this->config['theme_url'] ?>icons/role.gif"
-	width="9" height="15" alt="" /><span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
+    <img src="<?php echo $this->config['theme_url'] ?>icons/role.gif" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
     <?php
 echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
-    | <a
-	onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');"
-	href="<?php echo $this->href('', 'Login').($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span> )</small>
+    | <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', 'Login').($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span> )</small>
     <?php } else { ?>
     <table cellspacing="0" cellpadding="0" border="0">
       <tr>
@@ -35,10 +31,8 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
         <td><strong><?php echo $this->get_translation('LoginWelcome') ?>:&nbsp;</strong> </td>
         <td><input type="text" name="name" size="18" /></td>
         <td>&nbsp;&nbsp;&nbsp;<?php echo $this->get_translation('LoginPassword') ?>:&nbsp; </td>
-        <td><input type="hidden" name="goback"
-			value="<?php echo $this->slim_url($this->tag);?>" />
-          <input
-			type="password" name="password" size="8" />
+        <td><input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag);?>" />
+          <input type="password" name="password" size="8" />
           &nbsp;</td>
         <td><input type="submit" value="" />
         </td>
@@ -53,7 +47,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 <table cellspacing="0" cellpadding="0" border="0" width="100%">
   <tr>
     <td valign="top" class="Bookmarks">&nbsp;&nbsp;<strong><?php echo $this->get_translation('Bookmarks') ?>:</strong>&nbsp;&nbsp;</td>
-    <td width="100%" class="Bookmarks"><?php //echo $this->get_bookmarks_formatted(); ?>
+    <td width="100%" class="Bookmarks">
       <?php echo $this->format(implode(" | ", $this->get_bookmarks())); ?>&nbsp;&nbsp;</td>
   </tr>
 </table>

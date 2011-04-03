@@ -127,12 +127,14 @@ if (isset($_POST['_user_bookmarks']))
 					else
 					{
 						// writing bookmark
-						$bookmark	= '(('.$page['tag'].' '.$this->get_page_title($page['tag']).($user['lang'] != $page['lang'] ? ' @@'.$page['lang'] : '').'))';
-						$bookmarks	= $this->get_bookmarks();
+						$_bookmark_page_ids = $this->get_bookmark_links();
 
-						if (!in_array($bookmark, $bookmarks))
+						if (!in_array($_page_id, $_bookmark_page_ids))
 						{
-							$bookmarks[] = $bookmark;
+							$bookmarks[] = array(
+								$_page_id,
+								'(('.$page['tag'].' '.$this->get_page_title($page['tag']).($user['lang'] != $page['lang'] ? ' @@'.$page['lang'] : '').'))'
+								);
 
 							$_menu_position = $this->load_all(
 								"SELECT b.menu_id ".
@@ -150,13 +152,16 @@ if (isset($_POST['_user_bookmarks']))
 						}
 
 						// parsing bookmarks into link table
-						$bookmark_links = $this->parsing_bookmarks($bookmarks);
+						foreach ($bookmarks as $_bookmark)
+						{
+							$bookmark_page_ids[] = $_bookmark[0];
+							$bookmark_formatted[] = array ($_bookmark[0], $_bookmark[1], $this->format($_bookmark[1], 'wacko'));
+						}
 
-						$this->set_user_setting('bookmarks', implode("\n", $bookmarks));
+						#$this->set_user_setting('bookmarks', implode("\n", $bookmarks));// XXX: obsolete
 
-						$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmarks;
-						$_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']	= $bookmark_links;
-						$_SESSION[$this->config['session_prefix'].'_'.'bookmark_formatted']	= $this->format(implode("\n", $bookmarks), 'wacko');
+						$_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']	= $bookmark_page_ids;
+						$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmark_formatted;
 					}
 				}
 				else

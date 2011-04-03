@@ -175,29 +175,42 @@ echo $this->form_close();
 
 echo '<div class="newsNav"><ul class="newsNav">';
 // Bookmarks
-		// Main page
-		#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
-		echo "<li>";
+	// Main page
+	#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
+	foreach ($this->get_bookmarks() as $_bookmark)
+	{
+		$formatted_bookmarks = $this->format($_bookmark[2], 'post_wacko');
 
-$formatted_bookmarks = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
-$formatted_bookmarks = str_replace ("<br />", "", $formatted_bookmarks);
-$formatted_bookmarks = str_replace ("\n", "</li>\n<li>", $formatted_bookmarks);
-echo $formatted_bookmarks;
-echo "</li>\n";
-		if ($this->get_user())
+		if ($this->page['page_id'] == $_bookmark[0])
 		{
-			// Here Wacko determines what it should show: "add to Bookmarks" or "remove from Bookmarks" icon
-			if (!in_array($this->tag, $this->get_bookmark_links()))
-				echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
-					.'"><img src="'. $this->config['theme_url']
-					.'icons/bookmark1.gif" alt="+" title="'.
-					$this->get_translation('AddToBookmarks') .'"/></a></li>';
-			else
-				echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
-					.'"><img src="'. $this->config['theme_url']
-					.'icons/bookmark2.gif" alt="-" title="'.
-					$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
-			}
+			echo '<li class="active">';
+		}
+		else
+		{
+			echo '<li>';
+		}
+
+		echo $formatted_bookmarks."</li>\n";
+	}
+
+	if ($this->get_user())
+	{
+		// determines what it should show: "add to bookmarks" or "remove from bookmarks" icon
+		if (!in_array($this->page['page_id'], $this->get_bookmark_links()))
+		{
+			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
+				.'"><img src="'. $this->config['theme_url']
+				.'icons/bookmark1.gif" alt="+" title="'.
+				$this->get_translation('AddToBookmarks') .'"/></a></li>';
+		}
+		else
+		{
+			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
+				.'"><img src="'. $this->config['theme_url']
+				.'icons/bookmark2.gif" alt="-" title="'.
+				$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
+		}
+	}
 echo "</ul></div>";
 echo '<br />';
 

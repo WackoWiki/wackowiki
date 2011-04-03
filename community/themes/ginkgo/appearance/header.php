@@ -85,25 +85,45 @@ else
 		<tr align="left">
 			<td><div>
 <?php
-echo '<div class="leftNav"><ul class="leftNav"><li>';
+echo '<div class="leftNav"><ul class="leftNav">';
 
 // Bookmarks
-$formatted_bookmarks = $this->format($this->get_bookmarks_formatted(), 'post_wacko');
-$formatted_bookmarks = str_replace ("<br />", "", $formatted_bookmarks);
-$formatted_bookmarks = str_replace ( "\n", "</li><li>\n", $formatted_bookmarks );
-echo $formatted_bookmarks;
-echo "</li></ul></div>";
-echo '<br />';
+foreach ($this->get_bookmarks() as $_bookmark)
+{
+	$formatted_bookmarks = $this->format($_bookmark[2], 'post_wacko');
+
+	if ($this->page['page_id'] == $_bookmark[0])
+	{
+		echo '<li class="active">';
+	}
+	else
+	{
+		echo '<li>';
+	}
+
+	echo $formatted_bookmarks."</li>\n";
+}
+
 if ($this->get_user())
 {
-	if (!in_array($this->tag, $this->get_bookmark_links()))
-	{?>
-<a href="<?php echo $this->href('', '', "addbookmark=yes")?>"> <img src="<?php echo $this->config['theme_url'] ?>icons/bookmark1.gif" border="0" /> <?php echo $this->get_translation('Bookmarks'); ?> </a>
-<?php } else { ?>
-<a href="<?php echo $this->href('', '', "removebookmark=yes")?>"> <img src="<?php echo $this->config['theme_url'] ?>icons/bookmark2.gif" border="0" /> <?php echo $this->get_translation('Bookmarks');
-?> </a>
-<?php
-}
+	// determines what it should show: "add to bookmarks" or "remove from bookmarks" icon
+	if (!in_array($this->page['page_id'], $this->get_bookmark_links()))
+	{
+		echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
+			.'"><img src="'. $this->config['theme_url']
+			.'icons/bookmark1.gif" alt="+" title="'.
+			$this->get_translation('AddToBookmarks') .'"/></a></li>';
+	}
+	else
+	{
+		echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
+			.'"><img src="'. $this->config['theme_url']
+			.'icons/bookmark2.gif" alt="-" title="'.
+			$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
+	}
+
+echo "</ul></div>";
+
 echo "<hr noshade=\"noshade\" size=\"1\" />";
 echo "<div class=\"credits\">";
 echo $this->format( '{{hits}} Aufrufe' );

@@ -136,6 +136,8 @@ form input.submitinput {
 #page {
 	background-color: #FFFFFF;
 	padding: 5px 20px 20px 20px;
+	min-height: 500px;
+	height: 100%
 }
 
 #pageedit {
