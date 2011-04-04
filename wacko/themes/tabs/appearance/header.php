@@ -12,9 +12,39 @@ require ('themes/_common/_header.php');
 ?>
 <body onload="all_init();">
 <div class="Top<?php if (!$this->get_user()) echo "LoggedOut";?>">
-  <div class="TopRight"><?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?> <span class="nobr"> <?php echo $this->compose_link_to_page($this->config['root_page']) ?>&nbsp;|&nbsp; <?php echo $this->format($this->format(str_replace("\n", '&nbsp;|&nbsp;', $this->get_default_bookmarks($user['lang']))), 'post_wacko'); ?></span> | <?php echo $this->get_translation('SearchText') ?>
-    <input name="phrase" size="15" class="ShSearch" />
-    <?php echo $this->form_close(); ?> </div>
+  <div class="TopRight">
+<?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>
+  <span class="nobr">
+<?php
+
+	echo '<div id="usermenu">';
+	echo "<ol>\n";
+
+	echo '<li>'.$this->compose_link_to_page($this->config['root_page'])."</li>\n";
+
+	foreach ($this->get_default_bookmarks($user['lang']) as $_bookmark)
+	{
+		$formatted_bookmarks = $this->format($_bookmark[1], 'post_wacko');
+
+		if ($this->page['page_id'] == $_bookmark[0])
+		{
+			echo '<li class="active">';
+		}
+		else
+		{
+			echo '<li>';
+		}
+
+		echo $formatted_bookmarks."</li>\n";
+	}
+
+?>
+  </span> <li> <?php echo $this->get_translation('SearchText') ?>
+    <input name="phrase" size="15" class="ShSearch" /></li>
+<?php
+	echo $this->form_close();
+	echo "\n</ol></div>";
+?> </div>
   <div class="TopLeft">
     <?php if ($this->get_user()) { ?>
     <img src="<?php echo $this->config['theme_url'] ?>icons/role.gif" width="9" height="15" alt="" /><span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
@@ -48,7 +78,31 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
   <tr>
     <td valign="top" class="Bookmarks">&nbsp;&nbsp;<strong><?php echo $this->get_translation('Bookmarks') ?>:</strong>&nbsp;&nbsp;</td>
     <td width="100%" class="Bookmarks">
-      <?php echo $this->format(implode(" | ", $this->get_bookmarks())); ?>&nbsp;&nbsp;</td>
+<?php
+	echo '<div id="usermenu">';
+	echo "<ol>\n";
+
+	// bookmarks
+	foreach ($this->get_bookmarks() as $_bookmark)
+	{
+		$formatted_bookmarks = $this->format($_bookmark[1], 'post_wacko');
+
+		if ($this->page['page_id'] == $_bookmark[0])
+		{
+			echo '<li class="active">';
+		}
+		else
+		{
+			echo '<li>';
+		}
+
+		echo $formatted_bookmarks."</li>\n";
+	}
+
+	echo "\n</ol></div>";
+?>
+&nbsp;&nbsp;
+</td>
   </tr>
 </table>
 <div class="TopDiv2"><img src="<?php echo $this->config['base_url'];?>images/z.gif" width="1" height="1" alt="" /></div>
@@ -59,20 +113,17 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 <?php echo ($this->iswatched === true ?
       "<a href=\"".$this->href('watch')."\">".$this->get_translation('RemoveWatch')."</a>" :
       "<a href=\"".$this->href('watch')."\">".$this->get_translation('SetWatch')."</a>" ) ?> ::
-  <?php if (!in_array($this->tag, $this->get_bookmark_links())) {?>
+  <?php if (!in_array($this->page['page_id'], $this->get_bookmark_links())) {?>
   <a href="<?php echo $this->href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->config['theme_url'] ?>icons/bookmark.gif" width="12" height="12" alt="<?php echo $this->get_translation('AddToBookmarks') ?>" /></a> ::
 <?php } else { ?>
-  <a
-	href="<?php echo $this->href('', '', "removebookmark=yes")?>"><img
-	src="<?php echo $this->config['theme_url'] ?>icons/unbookmark.gif"
-	width="12" height="12"
-	alt="<?php echo $this->get_translation('RemoveFromBookmarks') ?>" /></a> ::
+  <a href="<?php echo $this->href('', '', "removebookmark=yes")?>">
+  <img src="<?php echo $this->config['theme_url'] ?>icons/unbookmark.gif" width="12" height="12" alt="<?php echo $this->get_translation('RemoveFromBookmarks') ?>" /></a> ::
 <?php } }
 ?>
-<?php echo"<a href=\"".$this->href('print')."\" target=\"_blank\">" ?><img
+<?php echo"<a href=\"".$this->href('print')."\">" ?><img
 	src="<?php echo $this->config['theme_url'] ?>icons/print.gif"
 	width="21" height="20"
-	alt="<?php echo $this->get_translation('PrintVersion') ?>" /></a> :: <?php echo"<a href=\"".$this->href('msword')."\" target=\"_blank\">" ?><img
+	alt="<?php echo $this->get_translation('PrintVersion') ?>" /></a> :: <?php echo"<a href=\"".$this->href('msword')."\">" ?><img
 	src="<?php echo $this->config['theme_url'] ?>icons/msword.gif"
 	width="16" height="16"
 	alt="<?php echo $this->get_translation('MsWordVersion') ?>" /></a></div>

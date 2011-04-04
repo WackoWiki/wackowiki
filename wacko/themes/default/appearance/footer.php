@@ -54,7 +54,7 @@ if ($this->page)
 	}
 
 	// Print icon
-	echo "<li><a href=\"".$this->href('print')."\" target=\"_blank\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a></li>\n";
+	echo "<li><a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a></li>\n";
 
 	// Permalink
 	echo "<li>".$this->action('permalink')."</li>\n";

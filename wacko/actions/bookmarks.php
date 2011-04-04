@@ -158,8 +158,6 @@ if (isset($_POST['_user_bookmarks']))
 							$bookmark_formatted[] = array ($_bookmark[0], $_bookmark[1], $this->format($_bookmark[1], 'wacko'));
 						}
 
-						#$this->set_user_setting('bookmarks', implode("\n", $bookmarks));// XXX: obsolete
-
 						$_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']	= $bookmark_page_ids;
 						$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmark_formatted;
 					}

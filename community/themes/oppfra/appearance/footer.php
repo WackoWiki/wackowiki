@@ -102,7 +102,7 @@ if ($this->page)
 	}
 
 	// Print icon
-	echo"<li><a href=\"".$this->href('print')."\" target=\"_blank\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a></li>\n";
+	echo"<li><a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a></li>\n";
 }
 
 ?>
@@ -179,7 +179,7 @@ echo '<div class="newsNav"><ul class="newsNav">';
 	#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 	foreach ($this->get_bookmarks() as $_bookmark)
 	{
-		$formatted_bookmarks = $this->format($_bookmark[2], 'post_wacko');
+		$formatted_bookmarks = $this->format($_bookmark[1], 'post_wacko');
 
 		if ($this->page['page_id'] == $_bookmark[0])
 		{
