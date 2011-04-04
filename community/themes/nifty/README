@@ -1,0 +1,55 @@
+--------------------------------------------------------------------------------
+Wacko Nifty Theme
+--------------------------------------------------------------------------------
+
+Nifty is a theme (a.k.a. template) for WackoWiki 5.0+ .
+Its still very alpha.
+
+
+DOWNLOAD AND INSTALLATION ------------------------------------------------------
+
+* Download Default as ZIP- or TAR.GZ archive, unzip it and copy the
+  'nifty' directory to your themes folder of the WackoWiki
+  installation.
+* Edit your config.php (or personal.config.php) and set
+  "theme" => "nifty".
+* WackoWiki users may also select this theme on their account settings page.
+
+
+FEATURES -----------------------------------------------------------------------
+
+The theme tries to make Wacko featues accesible within its context
+and should give you an opportunity to read the source code and start
+building your own theme. 
+
+CUSTOMIZATION ------------------------------------------------------------------
+
+To alternate the HTML just edit header.php and footer.php at the appearance
+folder. To change colors/etc and typographical formatting you can edit
+screen.css and typography.css at the layout folder.
+
+/* == Edit your main menu here ====================================== */
+ 
+$menu = array(
+    'WikiSite' => 'Name of Site',
+    'YourHomePage' => 'Homepage',
+    'http://externlink.com' => 'Go away'
+);
+ 
+/* == Stop here! ... and let it flow ================================ */
+
+You can add i18n features when you add those menu targets and their names to the
+translation files which you find at lang folder.
+
+
+BUGS, FEATURES & SUPPORT -------------------------------------------------------
+
+For bug reports and feature requests you can write to bugs.wackowiki.org.
+
+LICENSE ------------------------------------------------------------------------
+
+The Default Theme is part of the WackoWiki package.
+BSD licence.
+
+Some Icons were taken from the Oxygen Icons set.
+http://www.oxygen-icons.org
