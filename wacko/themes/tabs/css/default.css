@@ -342,6 +342,48 @@ width:0;
 	padding-left:20px;
 }
 
+#usermenu {
+	margin: 0 auto 0;
+	overflow: hidden;
+	float: left;
+	text-align: left;
+	position: relative;
+}
+
+#usermenu ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#usermenu li {
+	border-left: 1px dotted #aaa;
+	float: left;
+	/*line-height: 1.2em;
+	*/margin: 0 .5em 0 -.5em;
+	padding: 0 .5em 0 .5em;
+	white-space: nowrap;
+}
+
+#usermenu li a {
+	display: inline;
+	border: none;
+	text-decoration: none;
+}
+
+#usermenu li a:visited {
+	/*color: #003399;
+*/}
+
+#usermenu li a:hover {
+	/*color: #B90022;
+	*/text-decoration: underline;
+}
+
+#usermenu li a:active {
+	color: #FF0000;
+}
+
 .userprofil {
 	color: #444444;
 	font-weight: bold;

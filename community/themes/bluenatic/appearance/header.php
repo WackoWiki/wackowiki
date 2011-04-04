@@ -100,7 +100,7 @@ else if($this->has_access('write'))
 					// bookmarks
 					foreach ($this->get_bookmarks() as $_bookmark)
 					{
-						$formatted_bookmarks = $this->format($_bookmark[2], 'post_wacko');
+						$formatted_bookmarks = $this->format($_bookmark[1], 'post_wacko');
 
 						if ($this->page['page_id'] == $_bookmark[0])
 						{

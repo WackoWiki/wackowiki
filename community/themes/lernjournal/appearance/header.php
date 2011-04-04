@@ -30,7 +30,7 @@ echo $this->form_close();
 	// bookmarks
 	foreach ($this->get_bookmarks() as $_bookmark)
 	{
-		$formatted_bookmarks = $this->format($_bookmark[2], 'post_wacko');
+		$formatted_bookmarks = $this->format($_bookmark[1], 'post_wacko');
 
 		if ($this->page['page_id'] == $_bookmark[0])
 		{
@@ -145,7 +145,7 @@ if ($this->is_admin()){
 ?>
 <?php
 // Print icon
-echo"<a href=\"".$this->href('print')."\" target=\"_blank\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\"  align=\"middle\" border=\"0\" /></a>";
+echo"<a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\"  align=\"middle\" border=\"0\" /></a>";
 
 ?>
 

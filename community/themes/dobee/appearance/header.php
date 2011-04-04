@@ -58,7 +58,7 @@ require ('themes/_common/_header.php');
 						// bookmarks
 						foreach ($this->get_bookmarks() as $_bookmark)
 						{
-							$formatted_bookmarks = $this->format($_bookmark[2], 'post_wacko');
+							$formatted_bookmarks = $this->format($_bookmark[1], 'post_wacko');
 
 							if ($this->page['page_id'] == $_bookmark[0])
 							{
@@ -159,7 +159,7 @@ require ('themes/_common/_header.php');
 							print("<a href=\"".$this->href('properties'). "\"".(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"")."\"><img src=\"".$this->config['theme_url']."icons/prop.gif\""."style=\"vertical-align: middle\"".">".$this->get_translation('SettingsText')."</a>");
 
 							echo '<br />';
-							print "<a href=\"".$this->href('export.xml')."\" title=\"".$this->get_translation('RevisionXMLTip')."\"><img src=\"".$this->config['theme_url']."icons/1xml.gif\""."style=\"vertical-align: middle\""."\" target=\"_blank\">".$this->get_translation('ExportToXML')."</a>\n";
+							print "<a href=\"".$this->href('export.xml')."\" title=\"".$this->get_translation('RevisionXMLTip')."\"><img src=\"".$this->config['theme_url']."icons/1xml.gif\""."style=\"vertical-align: middle\""."\">".$this->get_translation('ExportToXML')."</a>\n";
 
 							//print $this->format( '{{TOC}}' );
 
@@ -189,7 +189,7 @@ require ('themes/_common/_header.php');
 		<div class="header"><?php echo ($this->iswatched === true
 		? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\"  align=\"absmiddle\" border=\"0\" /></a>"
 		: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?>
-		| <?php echo "<a href=\"".$this->href('print')."\" target=\"_blank\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\"  align=\"absmiddle\" border=\"0\" /></a>";?>
+		| <?php echo "<a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\"  align=\"absmiddle\" border=\"0\" /></a>";?>
 		| <?php
 		if ($this->get_user()) { ?> <span class="nobr"> <?php echo $this->get_translation('YouAre'); ?>
 		<img

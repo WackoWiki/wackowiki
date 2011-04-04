@@ -4552,9 +4552,17 @@ class Wacko
 
 		$user_id			= $this->get_user_id('System');
 		$default_bookmarks	= $this->get_user_bookmarks($user_id, $lang);
+
+		// parsing bookmarks into link table
+		foreach ($default_bookmarks as $_default_bookmark)
+		{
+			#$bookmark_page_ids[] = $_bookmark[0];
+			$default_bookmark_formatted[] = array ($_default_bookmark[0], $this->format($_default_bookmark[1], 'wacko'));
+		}
+
 		#$this->debug_print_r($default_bookmarks);
 
-		return $default_bookmarks;
+		return $default_bookmark_formatted;
 	}
 
 	function get_user_bookmarks($user_id, $lang = '')
@@ -4620,7 +4628,7 @@ class Wacko
 			foreach ($bookmarks as $_bookmark)
 			{
 				$bookmark_page_ids[] = $_bookmark[0];
-				$bookmark_formatted[] = array ($_bookmark[0], $_bookmark[1], $this->format($_bookmark[1], 'wacko'));
+				$bookmark_formatted[] = array ($_bookmark[0], $this->format($_bookmark[1], 'wacko'));
 			}
 
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_page_id']	= $bookmark_page_ids;
@@ -4659,10 +4667,8 @@ class Wacko
 			foreach ($bookmarks as $_bookmark)
 			{
 				$bookmark_page_ids[] = $_bookmark[0];
-				$bookmark_formatted[] = array ($_bookmark[0], $_bookmark[1], $this->format($_bookmark[1], 'wacko'));
+				$bookmark_formatted[] = array ($_bookmark[0], $this->format($_bookmark[1], 'wacko'));
 			}
-
-			#$this->set_user_setting('bookmarks', implode("\n", $bookmarks)); // XXX: obsolete
 
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_page_id']	= $bookmark_page_ids;
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']			= $bookmark_formatted;
@@ -4698,10 +4704,8 @@ class Wacko
 			foreach ($bookmarks as $_bookmark)
 			{
 				$bookmark_page_ids[] = $_bookmark[0];
-				$bookmark_formatted[] = array ($_bookmark[0], $_bookmark[1], $this->format($_bookmark[1], 'wacko'));
+				$bookmark_formatted[] = array ($_bookmark[0], $this->format($_bookmark[1], 'wacko'));
 			}
-
-			#$this->set_user_setting('bookmarks', ( $bookmarks ? implode("\n", $bookmarks) : '' )); // XXX: obsolete
 
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_page_id']	= $bookmark_page_ids;
 			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']			= ( $bookmark_formatted ? $bookmark_formatted : '' );

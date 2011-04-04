@@ -61,7 +61,7 @@ echo "\n";
 
 	foreach ($this->get_default_bookmarks($user['lang']) as $_bookmark)
 	{
-		$formatted_bookmarks = $this->format($this->format(strtolower($_bookmark[1])), 'post_wacko');
+		$formatted_bookmarks = $this->format(strtolower($_bookmark[1]), 'post_wacko');
 
 		if ($this->page['page_id'] == $_bookmark[0])
 		{
