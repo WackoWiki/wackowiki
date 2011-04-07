@@ -4557,7 +4557,7 @@ class Wacko
 		foreach ($default_bookmarks as $_default_bookmark)
 		{
 			#$bookmark_page_ids[] = $_bookmark[0];
-			$default_bookmark_formatted[] = array ($_default_bookmark[0], $this->format($_default_bookmark[1], 'wacko'));
+			$default_bookmark_formatted[] = array ($_default_bookmark[0], $_default_bookmark[1]);
 		}
 
 		#$this->debug_print_r($default_bookmarks);
