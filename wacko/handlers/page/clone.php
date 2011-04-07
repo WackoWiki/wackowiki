@@ -29,11 +29,13 @@ else if ($this->forum === true && !$this->is_admin())
 
 if ($user = $this->get_user())
 {
-	$user = strtolower($this->get_user_name());
-	$registered = true;
+	$user		= strtolower($this->get_user_name());
+	$registered	= true;
 }
 else
-$user = GUEST;
+{
+	$user		= GUEST;
+}
 
 $edit_note = str_replace('%1', $this->tag, $this->get_translation('ClonedFrom'));
 
@@ -43,6 +45,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	{
 		// clone or massclone
 		$need_massclone = 0;
+
 		if (isset($_POST['massclone']) && $_POST['massclone'] == 'on')
 		{
 			$need_massclone = 1;
@@ -54,27 +57,27 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 			// strip whitespaces
 			$new_name		= preg_replace('/\s+/', '', $_POST['newname']);
 			$new_name		= trim($new_name, '/');
-			$supernewname	= $this->npj_translit($new_name);
+			$super_new_name	= $this->npj_translit($new_name);
 			$edit_note		= isset($_POST['edit_note']) ? $_POST['edit_note'] : $edit_note;
 
 			if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
 			{
 				print($this->get_translation('BadName')."<br />\n");
 			}
-			//     if ($this->supertag == $supernewname)
+			// if ($this->supertag == $super_new_name)
 			else if ($this->tag == $new_name)
 			{
 				print(str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlreadyNamed'))."<br />\n");
 			}
 			else
 			{
-				if ($this->supertag != $supernewname && $page = $this->load_page($supernewname, 0, '', LOAD_CACHE, LOAD_META))
+				if ($this->supertag != $super_new_name && $page = $this->load_page($super_new_name, 0, '', LOAD_CACHE, LOAD_META))
 				{
 					print(str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlredyExists'))."<br />\n");
 				}
 				else
 				{
-					if ($this->clone_page($this->tag, $new_name, $supernewname, $edit_note))
+					if ($this->clone_page($this->tag, $new_name, $super_new_name, $edit_note))
 					{
 						$need_redirect = '';
 
@@ -93,12 +96,13 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 						}
 						else
 						{
-							print(str_replace('%1', $new_name, $this->get_translation('PageCloned'))."<br />\n");
+							print(str_replace('%1', $this->link('/'.$new_name), $this->get_translation('PageCloned'))."<br />\n");
 						}
 					}
 				}
 			}
 		}
+
 		//massclone
 		if ($need_massclone == 1)
 		{
