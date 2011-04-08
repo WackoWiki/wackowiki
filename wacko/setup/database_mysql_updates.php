@@ -96,13 +96,13 @@ $update_link_r4_3_2 = "UPDATE {$pref}link AS link, (SELECT id, tag FROM {$pref}p
 $table_log_r4_3 = "CREATE TABLE {$pref}log (".
 					"log_id INT(10) UNSIGNED NOT NULL auto_increment,".
 					"log_time TIMESTAMP NOT NULL,".
-					"level TINYINT(1) NOT NULL,".
-					"user VARCHAR(100) NOT NULL,".
+					"level TINYINT(1) UNSIGNED NOT NULL,".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"ip VARCHAR(15) NOT NULL,".
 					"message TEXT NOT NULL,".
 					"PRIMARY KEY (log_id),".
 					"KEY idx_level (level),".
-					"KEY idx_user (user),".
+					"KEY idx_user_id (user_id),".
 					"KEY idx_ip (ip),".
 					"KEY idx_time (log_time)".
 				") {$engine} {$charset}";

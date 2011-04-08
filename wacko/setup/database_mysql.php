@@ -96,7 +96,7 @@ $table_link = "CREATE TABLE {$pref}link (".
 $table_log = "CREATE TABLE {$pref}log (".
 					"log_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"log_time TIMESTAMP NOT NULL,".
-					"level TINYINT(1) NOT NULL,".
+					"level TINYINT(1) UNSIGNED NOT NULL,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"ip VARCHAR(15) NOT NULL,".
 					"message TEXT NOT NULL,".
