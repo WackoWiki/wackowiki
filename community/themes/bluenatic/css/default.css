@@ -471,6 +471,29 @@ width:0;
 	padding:		15px 30px 5px 15px;	
 }
 
+.footerlist {
+	margin: 0 auto;
+	overflow: hidden;
+}
+.footerlist ul {
+	list-style: none outside none;
+	
+	margin: 0;
+	padding: 0;
+}
+.footerlist li {
+	border-left: 2px solid #FFFFFF;
+	float: left;
+	list-style-image: none;
+	line-height: 1.2em;
+	margin: 0 0.5em 0 -0.5em;
+	padding: 0 0.5em;
+	white-space: nowrap;
+}
+.footerlist ul li form {
+	display: inline;
+}
+
 /* CSS form formater */
 .cssform p {
 	width: 300px;
@@ -549,14 +572,14 @@ width:0;
 
 /* feed action */
 .feed {
-    overflow:auto;
+	overflow:auto;
 }
 .feed .note {
-     font-size: 11px;
-     color: #777;
+	font-size: 11px;
+	color: #777;
 }
 .feed .note a {
-     color: #777;
+	color: #777;
 }
 .feed_element_title {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
@@ -573,4 +596,15 @@ width:0;
 	white-space:nowrap;
 	vertical-align: top;
 	padding-right:20px;
+}
+
+.desc_rss_feed {
+	float:right;
+	margin-right:20px;
+}
+
+.highlight {
+	background-color: #FFFEA1;
+	font-style: normal;
+	font-weight: bold;
 }
