@@ -3,7 +3,7 @@
 body{ padding:0; margin:0; background:#eeeeee; line-height: 130%; }
 img {
 	border-width: 0px;
-	}
+}
 /* Textareas */
 textarea { font-size:100%; font-family: Georgia, Courier New; color:#222222;   line-height: 1.5em;  }
 small { font-size:80% }
@@ -22,15 +22,14 @@ dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; curso
 .TopLeft { float:left; text-align:left; color:#444444 }
 .Bookmarks { background:#002080; color:#b5b5ff; padding:2px; font-size:75% }
 
-
-.Bookmarks A:LINK { font-weight: bold; color: #ffffff }
-.Bookmarks A:VISITED { font-weight: bold; color: #b5ffb5 }
-.Bookmarks A:HOVER { font-weight: bold; color: #ffb5b5 }
+.Bookmarks a:LINK { font-weight: bold; color: #ffffff }
+.Bookmarks a:VISITED { font-weight: bold; color: #b5ffb5 }
+.Bookmarks a:HOVER { font-weight: bold; color: #ffb5b5 }
 
 .Wrapper { margin: 20px 20px 20px 20px }
 .header { color:#444444; }
 .header .Main { color:#999999 }
-.header H1 { margin:0px; padding:0px; color:#000000; font-family:Arial; font-size: 100% }
+.header h1 { margin:0px; padding:0px; color:#000000; font-family:Arial; font-size: 100% }
 .Print { color:#999999; font-size:11px; float:right; }
 
 .Shade, #page { border-left: 1px solid #444444; border-right: 1px solid #444444; }
@@ -71,10 +70,10 @@ body, td, p, li, #page { font-family: Georgia, Verdana; font-size:95% }
 
 /* colors */
 #page { color:#444444 }
-del A:HOVER { color:#cc3300 }
-del A.outerlink:LINK { color:#999999 }
-del A.outerlink:VISITED { color:#999999 }
-del A.outerlink:HOVER { color:#cc3300 }
+del a:HOVER { color:#cc3300 }
+del a.outerlink:LINK { color:#999999 }
+del a.outerlink:VISITED { color:#999999 }
+del a.outerlink:HOVER { color:#cc3300 }
 
 .error { color: #CC3333; font-weight: bold; }
 .info {
@@ -136,8 +135,8 @@ a:ACTIVE { color:#ff0000; }
 a.denied:link, a.denied:visited { color: #666666; }
 a.denied:hover { color:#cc3300 }
 
-#credits A:link, #credits A:visited { color: #AAAAAA; }
-#credits A:hover { color:#cc3300 }
+#credits a:link, #credits a:visited { color: #AAAAAA; }
+#credits a:hover { color:#cc3300 }
 
 .outerlink:link, .outerlink:visited { font-size:90%; font-family:Verdana; color:#000080 }
 .outerlink:hover { color:#cc3300 }
@@ -161,18 +160,18 @@ a.Search:hover { color:#cc3300 }
 #commentsheader a:hover { color:#cc3300 }
 
 
-  .upload td { padding: 2px 5px 2px 5px; vertical-align:top }
-  .upload td.dt-,
-  .upload td.file- { white-space:nowrap; font-size: 80%; font-weight:bold; color:#000000 }
-  .upload td.dt-   { padding-right:0 }
-  .upload td.remove-   { padding-right:0 }
-  .upload td.size- { padding-right:0; text-align:right }
-  .upload td.desc- { font-size: 80%; color:#444444; width:100% }
-  .upload td.dt- .dt2-,
-  .upload td.remove- .remove2-,
-  .upload td.size- .size2- { font: 11px Tahoma; color:#666666;  }
-  .upload td.remove- a.remove2-:HOVER,
-  .upload td.remove- a.remove2-:ACTIVE { color:#ff0000 }
+.upload td { padding: 2px 5px 2px 5px; vertical-align:top }
+.upload td.dt-,
+.upload td.file- { white-space:nowrap; font-size: 80%; font-weight:bold; color:#000000 }
+.upload td.dt-   { padding-right:0 }
+.upload td.remove-   { padding-right:0 }
+.upload td.size- { padding-right:0; text-align:right }
+.upload td.desc- { font-size: 80%; color:#444444; width:100% }
+.upload td.dt- .dt2-,
+.upload td.remove- .remove2-,
+.upload td.size- .size2- { font: 11px Tahoma; color:#666666;  }
+.upload td.remove- a.remove2-:HOVER,
+.upload td.remove- a.remove2-:ACTIVE { color:#ff0000 }
 
 .preview {margin-top: .8em; margin-left: 2px; margin-bottom: 2px; margin-right: 2px; padding: 10px; border:red 2px solid;}
 .preview p {color:red; font-weight:bold; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
@@ -236,13 +235,12 @@ width:0;
  .edname-r  { background: #2A45D0; }
  .edname-s  { background: #D08C2A; }
 
- .autocomplete-inplace
- {
-   background: ButtonFace;
-   border: 1px solid ButtonShadow;
-   padding: 2px;
-   font: 12px Arial;
- }
+.autocomplete-inplace {
+	background: ButtonFace;
+	border: 1px solid ButtonShadow;
+	padding: 2px;
+	font: 12px Arial;
+}
  .autocomplete-inplace div          { padding: 2px 5px; cursor: pointer; cursor: hand; }
  .autocomplete-inplace div.ac-over- { color:#ffffff; background: #1E9905; }
 
@@ -325,14 +323,14 @@ width:0;
 
 /* feed action */
 .feed {
-    overflow:auto;
+	overflow:auto;
 }
 .feed .note {
-     font-size: 11px;
-     color: #777;
+	font-size: 11px;
+	color: #777;
 }
 .feed .note a {
-     color: #777;
+	color: #777;
 }
 .feed_element_title {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
@@ -391,4 +389,15 @@ width:0;
 	white-space:nowrap;
 	vertical-align: top;
 	padding-right:20px;
+}
+
+.desc_rss_feed {
+	float:right;
+	margin-right:20px;
+}
+
+.highlight {
+	background-color: #FFFEA1;
+	font-style: normal;
+	font-weight: bold;
 }

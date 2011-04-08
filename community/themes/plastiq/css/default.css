@@ -554,3 +554,14 @@ textarea {
 	border-bottom: 1px solid #BABFC7;
 	letter-spacing: 1px;
 }
+
+.desc_rss_feed {
+	float:right;
+	margin-right:20px;
+}
+
+.highlight {
+	background-color: #FFFEA1;
+	font-style: normal;
+	font-weight: bold;
+}

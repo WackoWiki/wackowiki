@@ -2,36 +2,36 @@
 
 /* Layout */
 .topbody {
-  background: url(../images/head_XPblue_normal_wl.jpg) repeat-y right;
-  height: 50px;
-  margin: 0;
+	background: url(../images/head_XPblue_normal_wl.jpg) repeat-y right;
+	height: 50px;
+	margin: 0;
 }
 
 .topbody td {
-  padding-left: 10px;
-  color: #6e89dd;
-  font-size: 18px;
-  font-weight: bold;
-  /*text-transform: uppercase;*/
-  font-style: italic;
-  vertical-align: middle;
+	padding-left: 10px;
+	color: #6e89dd;
+	font-size: 18px;
+	font-weight: bold;
+	/*text-transform: uppercase;*/
+	font-style: italic;
+	vertical-align: middle;
 }
 
 .topbody .searchArea {
-  font-size: 11px;
-  font-weight: normal;
-  text-transform: none;
-  font-style: normal;
-  padding-right: 15px;
-  color: white;
-  vertical-align: middle;
+	font-size: 11px;
+	font-weight: normal;
+	text-transform: none;
+	font-style: normal;
+	padding-right: 15px;
+	color: white;
+	vertical-align: middle;
 }
 
 .bottom {
-  background-repeat: no-repeat;
-  background-position: right;
-  background-image: url(../images/head_XPblue_bottom.jpg);
-  height: 18px;
+	background-repeat: no-repeat;
+	background-position: right;
+	background-image: url(../images/head_XPblue_bottom.jpg);
+	height: 18px;
 }
 
 
@@ -161,39 +161,39 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 .toolbar li {
 	background: ButtonFace;
 }
- .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
-  background: ButtonFace;
-  color: ButtonText;
-  border: 1px solid ButtonFace;
-  padding: 1px;  margin: 0px;
-  cursor: pointer; cursor: hand; 
- }
- .toolbar .btn- img{
-  width: 20px;
-  height: 20px;
- }
- .toolbar .btn-hover {
-  border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
- }
- .toolbar .btn-active,  .toolbar .btn-pressed {
-  border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
- }
- .toolbar .btn-pressed {
-  background: ButtonHighlight;
- }
- .toolbar .btn-separator {
-border-left:1px solid buttonshadow;
-border-right:1px solid buttonhighlight;
-height:18px;
-margin:3px;
-padding:0;
-width:0;
+.toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
+	background: ButtonFace;
+	color: ButtonText;
+	border: 1px solid ButtonFace;
+	padding: 1px;  margin: 0px;
+	cursor: pointer; cursor: hand; 
 }
- .edname-w, .edname-r, .edname-s  
-            { font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
- .edname-w  { background: #1E9905; }
- .edname-r  { background: #2A45D0; } 
- .edname-s  { background: #D08C2A; }
+.toolbar .btn- img{
+	width: 20px;
+	height: 20px;
+}
+.toolbar .btn-hover {
+	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+}
+.toolbar .btn-active,  .toolbar .btn-pressed {
+	border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+}
+.toolbar .btn-pressed {
+	background: ButtonHighlight;
+}
+.toolbar .btn-separator {
+	border-left:1px solid buttonshadow;
+	border-right:1px solid buttonhighlight;
+	height:18px;
+	margin:3px;
+	padding:0;
+	width:0;
+}
+.edname-w, .edname-r, .edname-s {
+	font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
+.edname-w  { background: #1E9905; }
+.edname-r  { background: #2A45D0; } 
+.edname-s  { background: #D08C2A; }
 
 
 
@@ -275,14 +275,14 @@ width:0;
 
 /* feed action */
 .feed {
-    overflow:auto;
+	overflow:auto;
 }
 .feed .note {
-     font-size: 11px;
-     color: #777;
+	font-size: 11px;
+	color: #777;
 }
 .feed .note a {
-     color: #777;
+	color: #777;
 }
 .feed_element_title {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
@@ -299,4 +299,15 @@ width:0;
 	white-space:nowrap;
 	vertical-align: top;
 	padding-right:20px;
+}
+
+.desc_rss_feed {
+	float:right;
+	margin-right:20px;
+}
+
+.highlight {
+	background-color: #FFFEA1;
+	font-style: normal;
+	font-weight: bold;
 }

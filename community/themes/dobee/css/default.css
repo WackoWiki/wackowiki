@@ -312,3 +312,14 @@ legend {font-weight: normal; padding: 0 5px;}
 	vertical-align: top;
 	padding-right:20px;
 }
+
+.desc_rss_feed {
+	float:right;
+	margin-right:20px;
+}
+
+.highlight {
+	background-color: #FFFEA1;
+	font-style: normal;
+	font-weight: bold;
+}

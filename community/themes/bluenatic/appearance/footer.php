@@ -1,19 +1,38 @@
 
 
+<div id="footer"><?php // Show only if page exists ?>
+<div class="footerlist">
+<ul>
+<?php
 
-<div id="footer"><?php // Show only if page exists ?> <?php if ($this->page) {
-	echo $this->get_translation('SettingsRevisions');
-	echo ":"; ?> <a href="<?php echo $this->href('revisions'); ?>"><?php echo $this->get_page_time_formatted(); ?></a>
-&nbsp;|&nbsp; <?php // Check if page has an owner - if not, add the claim text ?>
-	<?php if($owner = $this->get_page_owner()) {
-		echo $this->get_translation('Owner');
-		echo $this->link($owner);
-	} else if(!$this->page['comment_on_id']) {
-		echo $this->get_translation('Nobody'); ?> <a
-	href="<?php echo $this->href('claim'); ?>"><?php echo $this->get_translation('TakeOwnership'); ?></a>
-		<?php } ?> &nbsp;|&nbsp; <a
-	href="<?php echo $this->href('properties'); ?>"><?php echo $this->get_translation('PropertiesText'); ?></a>
-&nbsp;|&nbsp; <?php // Watch page ?> <a
+// If this page exists
+if ($this->page)
+{
+	// Revisions link
+	echo (( $this->hide_revisions === false || $this->is_admin() )
+			? "<li>".$this->get_translation('SettingsRevisions').": <a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_string_formatted($this->page['modified'])."</a></li>\n"
+			: "<li>".$this->get_time_string_formatted($this->page['modified'])."</li>\n"
+		);
+
+	// Show Owner of this page
+	if ($owner = $this->get_page_owner())
+	{
+		if ($owner == 'System')
+		{
+			echo "<li>".$this->get_translation('Owner').": ".$owner."</li>\n";
+		}
+		else
+		{
+			echo "<li>".$this->get_translation('Owner').": "."<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$owner)."\">".$owner."</a>"."</li>\n";
+		}
+	}
+	else if (!$this->page['comment_on_id'])
+	{
+		echo "<li>".$this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)</li>\n" : "");
+	}
+
+		?> <li><a href="<?php echo $this->href('properties'); ?>"><?php echo $this->get_translation('PropertiesText'); ?></a>
+</li><li> <?php // Watch page ?> <a
 	href="<?php echo $this->href('watch'); ?>"> <?php if($this->iswatched === true) { ?>
 <img
 	src="<?php echo $this->config['theme_url']; ?>images/watch-remove.gif"
@@ -23,7 +42,7 @@
 	src="<?php echo $this->config['theme_url']; ?>images/watch-add.gif"
 	alt="<?php echo $this->get_translation('SetWatch'); ?>"
 	title="<?php echo $this->get_translation('SetWatch'); ?>" width="16"
-	height="16" /> <?php } ?> </a> <?php // Bookmark page ?> <?php if(in_array($this->tag, $this->get_bookmark_links())) { ?>
+	height="16" /> <?php } ?> </a></li><li><?php // Bookmark page ?> <?php if(in_array($this->page['page_id'], $this->get_bookmark_links())) { ?>
 <a href="<?php echo $this->href('', '', "removebookmark=yes"); ?>"> <img
 	src="<?php echo $this->config['theme_url']; ?>images/bookmark-remove.gif"
 	alt="<?php echo $this->get_translation('RemoveFromBookmarks'); ?>"
@@ -33,12 +52,13 @@
 	src="<?php echo $this->config['theme_url']; ?>images/bookmark-add.gif"
 	alt="<?php echo $this->get_translation('AddToBookmarks'); ?>"
 	title="<?php echo $this->get_translation('AddToBookmarks'); ?>"
-	width="16" height="16" /> <?php } ?> </a> <?php }
+	width="16" height="16" /> <?php } ?> </a></li> <?php }
 	// End of "Page exists" ?> <?php
 	if ($this->get_user()){
-		echo "&nbsp;|&nbsp;".$this->get_translation('PoweredBy').' '.$this->link('WackoWiki:WackoWiki', '', 'WackoWiki '.$this->get_wacko_version());
+		echo "<li>".$this->get_translation('PoweredBy').' '.$this->link('WackoWiki:WackoWiki', '', 'WackoWiki '.$this->get_wacko_version())."</li>";
 	}
-	?></div>
+	?></ul>
+</div></div>
 </div>
 <?php
 	// Don't place final </body></html> here. Wacko closes HTML automatically.
