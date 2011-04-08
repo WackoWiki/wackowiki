@@ -102,7 +102,7 @@ function admin_systemlog(&$engine, &$module)
 	// collecting data
 	$count = $engine->load_single(
 		"SELECT COUNT(message) AS n ".
-		"FROM {$engine->config['table_prefix']}log ".
+		"FROM {$engine->config['table_prefix']}log l ".
 		( $where ? $where : 'WHERE level <= '.(int)$level.' ' ));
 
 	$pagination	= $engine->pagination($count['n'], $limit, 'p', 'mode=systemlog&order='.htmlspecialchars(isset($_GET['order']) && $_GET['order']), '', 'admin.php');
