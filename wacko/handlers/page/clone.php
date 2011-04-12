@@ -57,7 +57,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 			// strip whitespaces
 			$new_name		= preg_replace('/\s+/', '', $_POST['newname']);
 			$new_name		= trim($new_name, '/');
-			$super_new_name	= $this->npj_translit($new_name);
+			$super_new_name	= $this->translit($new_name);
 			$edit_note		= isset($_POST['edit_note']) ? $_POST['edit_note'] : $edit_note;
 
 			if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))

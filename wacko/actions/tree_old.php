@@ -227,7 +227,7 @@ if ($root)
 		$title = str_replace('%1',  $this->link('/'.$root, '', $root), $title);
 		print("<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.":</span></p>\n");
 	}
-	$query = "'".quote($this->dblink, $this->npj_translit($root))."/%'";
+	$query = "'".quote($this->dblink, $this->translit($root))."/%'";
 }
 else
 {
@@ -300,7 +300,7 @@ if ($pages)
 	//Sort in order supertag
 	ksort ( $tree_pages_array, SORT_STRING );
 
-	$tree = create_cluster_tree($this, '/'.$this->npj_translit($root), $root, $depth);
+	$tree = create_cluster_tree($this, '/'.$this->translit($root), $root, $depth);
 
 	print_cluster_tree($this, $tree, $style, 1, $abc, $filter);
 

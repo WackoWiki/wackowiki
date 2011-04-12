@@ -19,7 +19,7 @@ if (!function_exists('load_recent_comments'))
 				"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 			"WHERE ".
 			($for
-				? "b.supertag LIKE '".quote($wacko->dblink, $wacko->npj_translit($for))."/%' "
+				? "b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
 				: "a.comment_on_id != '0' ")
 			, 1));
 
@@ -35,7 +35,7 @@ if (!function_exists('load_recent_comments'))
 					"LEFT OUTER JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
 				"WHERE ".
 				($for
-					? "b.supertag LIKE '".quote($wacko->dblink, $wacko->npj_translit($for))."/%' "
+					? "b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
 					: "a.comment_on_id != '0' ").
 				"ORDER BY a.modified DESC ".
 				"LIMIT {$pagination['offset']}, {$limit}");

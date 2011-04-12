@@ -35,7 +35,7 @@ $count = $this->load_single(
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
 		($for
-			? "AND supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
+			? "AND supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 			: "").
 		($_letter
 			? "AND ".
@@ -54,7 +54,7 @@ if ($pages = $this->load_all(
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
 		($for
-			? "AND supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
+			? "AND supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 			: "").
 	"ORDER BY ".
 		($title == 1
@@ -100,7 +100,7 @@ if ($pages = $this->load_all(
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
 		($for
-			? "AND supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
+			? "AND supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 			: "").
 		($_letter
 			? "AND ".

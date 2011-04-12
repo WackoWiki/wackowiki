@@ -63,7 +63,7 @@ if ($registered
 				// strip whitespaces
 				$new_name		= preg_replace('/\s+/', '', $_POST['newname']);
 				$new_name		= trim($new_name, '/');
-				$super_new_name	= $this->npj_translit($new_name);
+				$super_new_name	= $this->translit($new_name);
 
 				echo "<b>".$this->tag."</b>\n";
 				echo "<ol>";
@@ -187,7 +187,7 @@ function recursive_move(&$parent, $root)
 	}
 
 	// FIXME: missing $owner_id
-	$query = "'".quote($parent->dblink, $parent->npj_translit($root))."%'";
+	$query = "'".quote($parent->dblink, $parent->translit($root))."%'";
 	$pages = $parent->load_all(
 		"SELECT page_id, tag, supertag ".
 		"FROM ".$parent->config['table_prefix']."page ".
@@ -222,7 +222,7 @@ function move(&$parent, $old_page, $new_name )
 	if (($parent->check_acl($user, $parent->config['rename_globalacl'])
 	|| $parent->get_page_owner_id($old_page['page_id']) == $user_id))
 	{
-		$super_new_name = $parent->npj_translit($new_name);
+		$super_new_name = $parent->translit($new_name);
 
 		echo "<ul>\n";
 

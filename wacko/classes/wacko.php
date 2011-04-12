@@ -714,7 +714,7 @@ class Wacko
 	}
 
 	// PAGES
-	function npj_translit($tag, $strtolow = TRAN_LOWERCASE, $donotload = TRAN_LOAD)
+	function translit($tag, $strtolow = TRAN_LOWERCASE, $donotload = TRAN_LOAD)
 	{
 		// Lookup transliteration result in the cache and return it if found
 		static $npj_cache;
@@ -866,7 +866,7 @@ class Wacko
 		// 2. search for supertag
 		if (!$page)
 		{
-			$page = $this->old_load_page($this->npj_translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), 0, $revision_id, $cache, true, $metadataonly);
+			$page = $this->old_load_page($this->translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), 0, $revision_id, $cache, true, $metadataonly);
 		}
 
 		// 3. if not found, search for tag
@@ -901,7 +901,7 @@ class Wacko
 		if ($page_id == 0)
 		{
 			(!$supertagged
-				? $supertag = $this->npj_translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD)
+				? $supertag = $this->translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD)
 				: $supertag = $tag
 			);
 		}
@@ -1044,7 +1044,7 @@ class Wacko
 		{
 			if (!$page['supertag'])
 			{
-				$page['supertag'] = $this->npj_translit($page['tag'], TRAN_LOWERCASE, TRAN_DONTLOAD);
+				$page['supertag'] = $this->translit($page['tag'], TRAN_LOWERCASE, TRAN_DONTLOAD);
 			}
 
 			$this->page_cache['supertag'][$page['supertag']]			= $page;
@@ -1162,7 +1162,7 @@ class Wacko
 		{
 			if ($page != '')
 			{
-				$spages_str	.= "'".quote($this->dblink, $this->npj_translit($page, TRAN_LOWERCASE, TRAN_DONTLOAD))."', ";
+				$spages_str	.= "'".quote($this->dblink, $this->translit($page, TRAN_LOWERCASE, TRAN_DONTLOAD))."', ";
 				$pages_str	.= "'".quote($this->dblink, $page)."', ";
 			}
 		}
@@ -1292,7 +1292,7 @@ class Wacko
 			"WHERE ".($for
 				? "p.tag LIKE '".quote($this->dblink, $for)."/%' AND "
 				: "").
-				"(l.to_supertag = '".quote($this->dblink, $this->npj_translit($tag))."')".
+				"(l.to_supertag = '".quote($this->dblink, $this->translit($tag))."')".
 			" ORDER BY tag", 1);
 	}
 
@@ -1310,7 +1310,7 @@ class Wacko
 					? "AND p.modified <= '".quote($this->dblink, $from)." 23:59:59'"
 					: "").
 				($for
-					? "AND p.supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
+					? "AND p.supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 					: "").
 				($minor_edit
 					? "AND p.minor_edit = '0' "
@@ -1332,7 +1332,7 @@ class Wacko
 				? "AND p.modified <= '".quote($this->dblink, $from)." 23:59:59'"
 				: "").
 			($for
-				? "AND p.supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
+				? "AND p.supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 				: "").
 			($minor_edit
 				? "AND p.minor_edit = '0' "
@@ -1355,7 +1355,7 @@ class Wacko
 			"WHERE p.comment_on_id = '0' ".
 				"AND a.page_id = p.page_id ".
 				($for
-					? "AND p.supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
+					? "AND p.supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 					: '').
 			"AND a.privilege = 'read' ".
 			"ORDER BY modified DESC ".
@@ -1382,7 +1382,7 @@ class Wacko
 			"LEFT JOIN ".$this->config['table_prefix']."page p ON (c.comment_on_id = p.page_id) ".
 		"WHERE c.comment_on_id != '0' ".
 			($for
-				? "AND p.supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
+				? "AND p.supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 				: "").
 		"ORDER BY c.modified DESC ".
 		"LIMIT ".$limit))
@@ -1402,7 +1402,7 @@ class Wacko
 			"WHERE p.comment_on_id = '0' ".
 				"AND a.page_id = p.page_id ".
 					($for
-						? "AND p.supertag LIKE '".quote($this->dblink, $this->npj_translit($for))."/%' "
+						? "AND p.supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 						: "").
 			"AND a.privilege = 'read' ".
 			"ORDER BY modified DESC ".
@@ -1565,10 +1565,10 @@ class Wacko
 		if(isset($_POST['tag']))
 		{
 			$this->tag		= $tag = $_POST['tag'];
-			$this->supertag	= $this->npj_translit($tag);
+			$this->supertag	= $this->translit($tag);
 		}
 
-		if (!$this->npj_translit($tag))
+		if (!$this->translit($tag))
 		{
 			return;
 		}
@@ -1717,7 +1717,7 @@ class Wacko
 						"ip				= '".quote($this->dblink, $ip)."', ".
 						"latest			= '1', ".
 						"tag			= '".quote($this->dblink, $tag)."', ".
-						"supertag		= '".quote($this->dblink, $this->npj_translit($tag))."', ".
+						"supertag		= '".quote($this->dblink, $this->translit($tag))."', ".
 						"body			= '".quote($this->dblink, $body)."', ".
 						"body_r			= '".quote($this->dblink, $body_r)."', ".
 						"body_toc		= '".quote($this->dblink, $body_toc)."', ".
@@ -1928,7 +1928,7 @@ class Wacko
 							"owner_id		= '".quote($this->dblink, $owner_id)."', ".
 							"user_id		= '".quote($this->dblink, $user_id)."', ".
 							"description	= '".quote($this->dblink, ($old_page['comment_on_id'] || $old_page['description'] ? $old_page['description'] : $desc ))."', ".
-							"supertag		= '".$this->npj_translit($tag)."', ".
+							"supertag		= '".$this->translit($tag)."', ".
 							"body			= '".quote($this->dblink, $body)."', ".
 							"body_r			= '".quote($this->dblink, $body_r)."', ".
 							"body_toc		= '".quote($this->dblink, $body_toc)."', ".
@@ -2285,7 +2285,7 @@ class Wacko
 		{
 			$tag = $this->slim_url($tag);
 		}
-		// if (!$addpage)		$tag = $this->npj_translit($tag);
+		// if (!$addpage)		$tag = $this->translit($tag);
 
 		$tag = trim($tag, '/.');
 		// $tag = str_replace(array('%2F', '%3F', '%3D'), array('/', '?', '='), rawurlencode($tag));
@@ -2312,7 +2312,7 @@ class Wacko
 
 	function slim_url($text)
 	{
-		# $text = $this->npj_translit($text, TRAN_DONTCHANGE);
+		# $text = $this->translit($text, TRAN_DONTCHANGE);
 		$text = str_replace('_', "'", $text);
 
 		if ($this->config['urls_underscores'] == 1)
@@ -2590,7 +2590,7 @@ class Wacko
 				}
 
 				//unwrap tag (check !/, ../ cases)
-				$pagetag	= rtrim($this->npj_translit($this->unwrap_link($_pagetag)), './');
+				$pagetag	= rtrim($this->translit($this->unwrap_link($_pagetag)), './');
 				$page_id	= $this->get_page_id($pagetag);
 
 				//try to find in local $tag storage
@@ -2704,7 +2704,7 @@ class Wacko
 			$untag	= $unwtag	= $this->unwrap_link($tag);
 
 			$regex_handlers	= '/^(.*?)\/('.$this->config['standard_handlers'].')\/(.*)$/i';
-			$ptag			= $this->npj_translit($unwtag);
+			$ptag			= $this->translit($unwtag);
 			$handler		= null;
 
 			if (preg_match( $regex_handlers, '/'.$ptag.'/', $match ))
@@ -2774,11 +2774,11 @@ class Wacko
 				}
 
 				$this->set_language($lang);
-				$supertag	= $this->npj_translit($untag);
+				$supertag	= $this->translit($untag);
 			}
 			else
 			{
-				$supertag	= $this->npj_translit($untag, TRAN_LOWERCASE, TRAN_DONTLOAD);
+				$supertag	= $this->translit($untag, TRAN_LOWERCASE, TRAN_DONTLOAD);
 			}
 
 			$aname = '';
@@ -2930,7 +2930,7 @@ class Wacko
 
 				if ($this->config['youarehere_text'])
 				{
-					if (isset($this->context[$this->current_context]) && ($this->npj_translit($tag) == $this->npj_translit($this->context[$this->current_context])) )
+					if (isset($this->context[$this->current_context]) && ($this->translit($tag) == $this->translit($this->context[$this->current_context])) )
 					{
 						$res	= str_replace('####', $text, $this->config['youarehere_text']);
 					}
@@ -3073,7 +3073,7 @@ class Wacko
 
 	function validate_reserved_words( $data )
 	{
-		$_data = $this->npj_translit( $data );
+		$_data = $this->translit( $data );
 		$_data = '/'.$_data.'/';
 
 		// Find the string of text
@@ -3156,7 +3156,7 @@ class Wacko
 
 				if (!isset($written[$lower_to_tag]))
 				{
-					$query .= "('".quote($this->dblink, $from_page_id)."','".quote($this->dblink, $this->get_page_id($to_tag))."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->npj_translit($to_tag))."'),";
+					$query .= "('".quote($this->dblink, $from_page_id)."','".quote($this->dblink, $this->get_page_id($to_tag))."', '".quote($this->dblink, $to_tag)."', '".quote($this->dblink, $this->translit($to_tag))."'),";
 					$written[$lower_to_tag] = 1;
 				}
 			}
@@ -3205,7 +3205,7 @@ class Wacko
 			if (strpos($url, $this->config['base_url']) !== false)
 			{
 				$sub = substr($url, strlen($this->config['base_url']));
-				$url = $this->config['base_url'].$this->npj_translit($sub);
+				$url = $this->config['base_url'].$this->translit($sub);
 			}
 
 			// tagging
@@ -5019,7 +5019,7 @@ class Wacko
 		$tag = preg_replace('/[^'.$this->language['ALPHANUM_P'].'\_\-\.]/', '', $tag);
 
 		$this->tag		= $tag;
-		$this->supertag	= $this->npj_translit($tag);
+		$this->supertag	= $this->translit($tag);
 
 		$revision_id	= isset($_GET['revision_id']) ? (int)$_GET['revision_id'] : '';
 		$page			= $this->load_page($this->tag, 0, $revision_id);
@@ -5417,7 +5417,7 @@ class Wacko
 
 		if ($clone_supertag == '')
 		{
-			$clone_supertag = $this->npj_translit($clone_tag);
+			$clone_supertag = $this->translit($clone_tag);
 		}
 
 		// load page and site information
@@ -5438,7 +5438,7 @@ class Wacko
 
 		if ($new_supertag == '')
 		{
-			$new_supertag = $this->npj_translit($new_tag);
+			$new_supertag = $this->translit($new_tag);
 		}
 
 		return

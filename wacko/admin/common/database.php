@@ -424,7 +424,7 @@ function GetFiles(&$engine, $pack, $dir, $root)
 {
 	// set file mask for cluster backup
 	if ($root == true && $dir == $engine->config['upload_path_per_page'])
-		$tag = '@'.str_replace('/', '@', $engine->npj_translit($root)).'@';
+		$tag = '@'.str_replace('/', '@', $engine->translit($root)).'@';
 
 	// create write (backup) subdir or restore path recursively if needed
 	if (strpos($dir, '/'))
