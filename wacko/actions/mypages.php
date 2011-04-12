@@ -14,13 +14,20 @@ $curday = '';
 
 if ($user_id = $this->get_user_id())
 {
-	if ($max) $limit = $max;
-	else $limit	= 100;
+	if ($max)
+	{
+		$limit = $max;
+	}
+	else
+	{
+		$limit	= 100;
+	}
+
 	$prefix = $this->config['table_prefix'];
 
 	if ((isset($_GET['bydate']) && $_GET['bydate'] == 1) || $bydate == 1)
 	{
-		echo $this->get_translation('ListOwnedPages2');
+		echo '<strong>'.$this->get_translation('ListOwnedPages2').'</strong>';
 		echo "<br />[<a href=\"".$this->href('', '', 'mode=mypages')."#list"."\">".
 		$this->get_translation('OrderABC')."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1')."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
 		$this->get_translation('OrderChange')."</a>] <br /><br />\n";
@@ -46,12 +53,14 @@ if ($user_id = $this->get_user_id())
 			{
 				// day header
 				list($day, $time) = explode(' ', $page['created']);
+
 				if ($day != $curday)
 				{
 					if ($curday)
 					{
 						echo "</ul>\n<br /></li>\n";
 					}
+
 					echo "<li><strong>$day:</strong><ul>\n";
 					$curday = $day;
 				}
@@ -84,7 +93,7 @@ if ($user_id = $this->get_user_id())
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bychange=1#list');
 
-		echo $this->get_translation('ListOwnedPages3').'.';
+		echo '<strong>'.$this->get_translation('ListOwnedPages3').'</strong>';
 		echo '<br />[<a href="'.
 			$this->href('', '', 'mode=mypages').'#list">'.$this->get_translation('OrderABC').
 			'</a>] [<a href="'.$this->href('', '', 'mode=mypages&amp;bydate=1').'#list">'.
@@ -142,7 +151,7 @@ if ($user_id = $this->get_user_id())
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages#list');
 
-		echo $this->get_translation('ListOwnedPages');
+		echo '<strong>'.$this->get_translation('ListOwnedPages').'</strong>';
 		echo "<br />[<a href=\"".$this->href('', '', 'mode=mypages&amp;bydate=1')."#list"."\">".
 		$this->get_translation('OrderDate')."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1')."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
 		$this->get_translation('OrderChange')."</a>] <br /><br />\n";

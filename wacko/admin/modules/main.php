@@ -127,10 +127,10 @@ function admin_lock(&$engine, &$module)
 			<th style="text-align:left;">Overhead</th>
 		</tr>
 <?php
-	$results = $engine->load_all("SHOW TABLE STATUS FROM `{$engine->config['database_database']}`");
-	$tdata = '';
-	$tindex = '';
-	$tfrag = '';
+	$results	= $engine->load_all("SHOW TABLE STATUS FROM `{$engine->config['database_database']}`");
+	$tdata		= '';
+	$tindex		= '';
+	$tfrag		= '';
 
 	foreach ($results as $table)
 	{
@@ -140,7 +140,7 @@ function admin_lock(&$engine, &$module)
 			{
 				echo '<tr class="hl_setting">'.
 						'<td class="label"><strong>'.$table['Name'].'</strong></td>'.
-						'<td>&nbsp;&nbsp;&nbsp;'.$table['Rows'].'</td>'.
+						'<td>&nbsp;&nbsp;&nbsp;'.number_format($table['Rows'], 0, ',', '.').'</td>'.
 						'<td>'.ceil($table['Data_length'] / 1000).' kB</td>'.
 						'<td>'.ceil($table['Index_length'] / 1000).' kB</td>'.
 						'<td>'.ceil($table['Data_free'] / 1000).' kB</td>'.

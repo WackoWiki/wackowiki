@@ -57,7 +57,7 @@ function moderate_rename_topic(&$engine, $old_tag, $new_tag, $title = '')
 	$forum_context	= $engine->forum;
 	$engine->forum	= true;
 
-	$supertag = $engine->npj_translit($new_tag);
+	$supertag = $engine->translit($new_tag);
 
 	$engine->rename_page($old_tag, $new_tag, $supertag);
 	$engine->remove_referrers($old_tag);

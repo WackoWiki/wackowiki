@@ -56,11 +56,9 @@ if ($this->is_admin())
 				{
 					if($file != '.' && $file != '..')
 					{
-						$pos = stristr($file, $old_name);
-
-						if ($pos !== false)
+						if ($file == $old_name.$file_name)
 						{
-							rename($dir.$file, $dir.$new_name.substr($file, strlen($old_name)));
+							rename($dir.$file, $dir.$new_name.$file_name);
 
 							echo "<tr><td>".$old_name."".$file_name."</td><td> </td><td>".$new_name."".$file_name."</td></tr>";
 						}
@@ -107,7 +105,7 @@ if ($this->is_admin())
 		foreach ($files as $file)
 		{
 			// move from /file/file_name to /file/global/file_name
-			$new_dir		= $this->config['upload_path']."/";
+			$new_dir		= $this->config['upload_path'].'/';
 			$new_subfolder	= 'global';
 			$old_dir		= substr($new_dir, 0, -(strlen($new_subfolder) + 1));
 			$file_name		= $file['file_name'];
@@ -408,7 +406,7 @@ if ($this->is_admin())
 			// FIXME: missing $owner_id
 			if (!isset($owner_id)) $owner_id = '';
 
-			$query = "'".quote($parent->dblink, $parent->npj_translit($root))."%'";
+			$query = "'".quote($parent->dblink, $parent->translit($root))."%'";
 			$pages = $parent->load_all(
 				"SELECT page_id, tag, supertag ".
 				"FROM ".$parent->config['table_prefix']."page ".
@@ -446,7 +444,7 @@ if ($this->is_admin())
 			if (($parent->check_acl($user,$parent->config['rename_globalacl'])
 			|| strtolower($parent->get_page_owner_id($old_page['page_id'])) == $user_id))
 			{
-				$supernewname = $parent->npj_translit($new_name);
+				$supernewname = $parent->translit($new_name);
 
 				echo "<ul>";
 

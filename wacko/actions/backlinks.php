@@ -42,11 +42,11 @@ if ($pages = $this->load_pages_linking_to($tag))
 			{
 				if ($title == 1)
 				{
-					$_link = $this->link('/'.$page['tag']."#".$this->npj_translit($tag), '', $page['title']);
+					$_link = $this->link('/'.$page['tag']."#".$this->translit($tag), '', $page['title']);
 				}
 				else
 				{
-					$_link = $this->link('/'.$page['tag']."#".$this->npj_translit($tag), '', $page['tag']);
+					$_link = $this->link('/'.$page['tag']."#".$this->translit($tag), '', $page['tag']);
 				}
 
 				if (strpos($_link, 'span class="missingpage"') === false)

@@ -21,7 +21,7 @@ if (!function_exists('load_recently_commented'))
 			($for
 				? 	"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 					"WHERE ".
-						"b.supertag LIKE '".quote($wacko->dblink, $wacko->npj_translit($for))."/%' "
+						"b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
 				: 	"WHERE a.comment_on_id <> '0' ").
 			($for
 				? 	"GROUP BY a.comment_on_id ORDER BY a.created DESC"

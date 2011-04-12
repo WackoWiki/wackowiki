@@ -6,16 +6,16 @@ if (!defined('IN_WACKO'))
 }
 
 // Translit
-$NpjLettersFrom = "אבגדהוחטךכלםמןנסעףפצû";
-$NpjLettersTo   = "abvgdeziklmnoprstufcy";
-$NpjBiLetters = array(
+$NpjLettersFrom	= "אבגדהוחטךכלםמןנסעףפû";
+$NpjLettersTo	= "abvgdeziklmnoprstufy";
+$NpjBiLetters	= array(
 	"י" => "jj", "¸" => "jo", "ז" => "zh", "ץ" => "kh", "ק" => "ch",
-	"ר" => "sh", "ש" => "shh", "‎" => "je", "‏" => "ju", "ÿ" => "ja",
-	"ת" => "", "ü" => "",
+	"צ"=>"oe", "ר" => "sh", "ש" => "shh", "‎" => "je", "‏" => "ju",
+	 "ÿ" => "ja", "ת" => "", "ü" => "ue",
 );
 
-$NpjCaps  = "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÚÛÝÞ‗";
-$NpjSmall = "אבגדהו¸זחטיךכלםמןנסעףפץצקרשüתû‎‏ÿ";
+$NpjCaps		= "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÚÛÝÞ‗";
+$NpjSmall		= "אבגדהו¸זחטיךכלםמןנסעףפץצקרשüתû‎‏ÿ";
 
 $tag = $text;
 //insert _ between words

@@ -67,8 +67,8 @@ $ta_id	= $_GET['ta_id'];
 
 // 1. convert into supertag and unwrap
 $q = ltrim($q, '/');
-$supertag1 = $this->npj_translit( $this->unwrap_link($q) );
-$supertag2 = $this->npj_translit( $q );
+$supertag1 = $this->translit( $this->unwrap_link($q) );
+$supertag2 = $this->translit( $q );
 
 // 2. going to DB two times
 $limit = 10;

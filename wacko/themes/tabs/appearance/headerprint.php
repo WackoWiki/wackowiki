@@ -17,6 +17,6 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <body>
 
 <div class="header">
-<h1><?php echo $this->config['site_name'] ?>: <?php echo $this->compose_link_to_page($this->npj_translit($this->tag), '', (isset($this->page['title']) ? $this->page['title'] : $this->tag)); ?>
+<h1><?php echo $this->config['site_name'] ?>: <?php echo $this->compose_link_to_page($this->translit($this->tag), '', (isset($this->page['title']) ? $this->page['title'] : $this->tag)); ?>
  (<?php echo $this->get_translation('PrintVersion');?>)</h1>
 </div>
