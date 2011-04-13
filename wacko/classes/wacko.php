@@ -68,7 +68,7 @@ class Wacko
 		'right'		=> array('_before'),
 		'left'		=> array('_before'),
 	);
-	var $npj_macros = array(
+	var $translit_macros = array(
 		'вики' => 'wiki', 'вака' => 'wacko', 'веб' => 'web'
 	);
 
@@ -717,12 +717,12 @@ class Wacko
 	function translit($tag, $strtolow = TRAN_LOWERCASE, $donotload = TRAN_LOAD)
 	{
 		// Lookup transliteration result in the cache and return it if found
-		static $npj_cache;
+		static $translit_cache;
 		$cach_key = $tag.$strtolow.$donotload;
 
-		if (isset($npj_cache[$cach_key]))
+		if (isset($translit_cache[$cach_key]))
 		{
-			return $npj_cache[$cach_key];
+			return $translit_cache[$cach_key];
 		}
 
 		$_lang = null;
@@ -759,11 +759,11 @@ class Wacko
 
 		if ($strtolow)
 		{
-			$tag = @strtr($_tag, $this->npj_macros);
+			$tag = @strtr($_tag, $this->translit_macros);
 		}
 		else
 		{
-			foreach($this->npj_macros as $macro => $value)
+			foreach($this->translit_macros as $macro => $value)
 			{
 				while (($pos = strpos($_tag, $macro)) !== false)
 				{
@@ -786,10 +786,10 @@ class Wacko
 			$this->set_language($_lang);
 		}
 
-		$result =  rtrim($tag, '/');
+		$result = rtrim($tag, '/');
 
 		// Put transliteration result in the cache
-		$npj_cache[$cach_key] = $result;
+		$translit_cache[$cach_key] = $result;
 
 		return $result;
 	}
