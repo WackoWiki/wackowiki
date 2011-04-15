@@ -314,7 +314,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	// comment title
 	if ($this->page['comment_on_id'] != 0)
 	{
-		$output .= "<label for=\"addcomment_title\">".$this->get_translation('AddCommentTitle').":</label><br />";
+		$output .= "<label for=\"addcomment_title\">".$this->get_translation('AddCommentTitle')."</label><br />";
 		$output .= "<input id=\"addcomment_title\" maxlength=\"100\" value=\"".htmlspecialchars($title)."\" size=\"60\" name=\"title\" />";
 		$output .= "<br />";
 	}
