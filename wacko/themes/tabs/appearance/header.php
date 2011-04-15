@@ -24,7 +24,7 @@ require ('themes/_common/_header.php');
 
 	foreach ($this->get_default_bookmarks($user['lang']) as $_bookmark)
 	{
-		$formatted_bookmarks = $this->format($_bookmark[1], 'post_wacko');
+		$formatted_bookmarks = $this->format($this->format($_bookmark[1]), 'post_wacko');
 
 		if ($this->page['page_id'] == $_bookmark[0])
 		{
