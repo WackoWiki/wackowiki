@@ -2241,12 +2241,12 @@ class Wacko
 		}
 		else if (preg_match('/^\/(.*)$/', $tag, $matches))
 		{
-			$root	= '';
+			$root		= '';
 			$new_tag	= $matches[1];
 		}
 		else if (preg_match('/^\!\/(.*)$/', $tag, $matches))
 		{
-			$root	= $this->context[$this->current_context];
+			$root		= $this->context[$this->current_context];
 			$new_tag	= $matches[1];
 		}
 		else if (preg_match('/^\.\.\/(.*)$/', $tag, $matches))
@@ -2312,7 +2312,7 @@ class Wacko
 
 	function slim_url($text)
 	{
-		# $text = $this->translit($text, TRAN_DONTCHANGE);
+		$text = $this->translit($text, TRAN_DONTCHANGE); // TODO: set config option ?
 		$text = str_replace('_', "'", $text);
 
 		if ($this->config['urls_underscores'] == 1)
@@ -2325,6 +2325,7 @@ class Wacko
 			$text = preg_replace('/\/¶('.$this->language['UPPERNUM'].')/', '/\\1', $text);
 			$text = str_replace('¶', '_', $text);
 		}
+
 		return $text;
 	}
 
@@ -3221,15 +3222,15 @@ class Wacko
 	}
 
 	// FORMS
-	function form_open($method = '', $tag = '', $formMethod = 'post', $formname = '', $formMore = '', $hrefParam = '')
+	function form_open($method = '', $tag = '', $form_method = 'post', $form_name = '', $form_more = '', $href_param = '')
 	{
-		if (!$formMethod)
+		if (!$form_method)
 		{
-			$formMethod = 'post';
+			$form_method = 'post';
 		}
 
 		$add	= isset($_REQUEST['add']) ? $_REQUEST['add'] : '';
-		$result	= '<form action="'.$this->href($method, $tag, $hrefParam, $add).'" '.$formMore.' method="'.$formMethod.'" '.($formname ? 'name="'.$formname.'" ' : '').">\n";
+		$result	= '<form action="'.$this->href($method, $tag, $href_param, $add).'" '.$form_more.' method="'.$form_method.'" '.($form_name ? 'name="'.$form_name.'" ' : '').">\n";
 
 		if (!$this->config['rewrite_mode'])
 		{
