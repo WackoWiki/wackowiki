@@ -11,9 +11,6 @@ define('BACKUP_FILE_LOG',				'backup.log');		// backup log filename
 define('BACKUP_FILE_STRUCTURE',			'structure.sql');	// tables structure filename
 define('BACKUP_FILE_DUMP_SUFFIX',		'.dat.gz');			// tables dump filename suffix
 define('BACKUP_FILE_GZIP_SUFFIX',		'.gz');				// regular compressed files suffix
-define('MENU_AUTO',					0);
-define('MENU_USER',					1);
-define('MENU_DEFAULT',				2);
 define('CACHE_CONFIG_DIR',				'config/');
 define('CACHE_FEED_DIR',				'feeds/');
 define('CACHE_PAGE_DIR',				'pages/');
@@ -24,6 +21,9 @@ define('LOAD_NOCACHE',					0);
 define('LOAD_CACHE',					1);
 define('LOAD_ALL',						0);
 define('LOAD_META',						1);
+define('MENU_AUTO',						0);
+define('MENU_USER',						1);
+define('MENU_DEFAULT',					2);
 define('SESSION_HANDLER_ID',			'sid');
 define('SESSION_HANDLER_PATH',			null);	// if you are using specific path (instead of system default /tmp) for session variables storing, define it here
 define('SQL_NULLDATE',					'0000-00-00 00:00:00');
