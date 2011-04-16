@@ -6,16 +6,16 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_language = array(
-	"name" => "Estonian",
-	"code" => "et",
-	"charset" => "windows-1257",
-	"utfdecode" => array(),
-	"UPPER_P"  => "A-Z\xc0-\xd6\xd8-\xdd",
-	"LOWER_P"  => "a-z\xdf-\xf6\xf8-\xfd\xff\/'",
-	"ALPHA_P"  => "A-Za-z\xc0-\xd6\xd8-\xdd\xdf-\xf6\xf8-\xfd\xff\_\-\/'",
-	"locale" => array("ee","et_EE","estonian"),
-	"NpjLettersFrom" => "äàáâãåçèéêëìíîïòóôõüöùúûýÄÀÁÂÃÅÇÈÉÊËÌÍÎÏÒÓÔÕÜÖÙÚÛÝ",
-	"NpjLettersTo"   => "aaiacaecezegkilnoooyolsuzAAIACAECEZEGKILNOOOYOLSUZ",
+	"name"				=> "Estonian",
+	"code"				=> "et",
+	"charset"			=> "windows-1257",
+	"locale"			=> array("ee","et_EE","estonian"),
+	"utfdecode"			=> array(),
+	"UPPER_P"			=> "A-Z\xc0-\xd6\xd8-\xdd",
+	"LOWER_P"			=> "a-z\xdf-\xf6\xf8-\xfd\xff\/'",
+	"ALPHA_P"			=> "A-Za-z\xc0-\xd6\xd8-\xdd\xdf-\xf6\xf8-\xfd\xff\_\-\/'",
+	"NpjLettersFrom"	=> "äàáâãåçèéêëìíîïòóôõüöùúûýÄÀÁÂÃÅÇÈÉÊËÌÍÎÏÒÓÔÕÜÖÙÚÛÝ",
+	"NpjLettersTo"		=> "aaiacaecezegkilnoooyolsuzAAIACAECEZEGKILNOOOYOLSUZ",
 	"NpjBiLetters" => array("þ"=>"zh", "ð"=>"sh", "Þ"=>"Zh", "Ð"=>"Sh", ),
 	"unicode_entities" => array(
 		"À"=>"&#192;", "Á"=>"&#193;", "Â"=>"&#194;", "Ã"=>"&#195;", "Ä"=>"&#196;", "Å"=>"&#197;", "Æ"=>"&#198;",

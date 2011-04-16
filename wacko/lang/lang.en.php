@@ -6,16 +6,18 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_language = array(
-	"name" => "English",
-	"code" => "en",
-	"charset" => "iso-8859-1",
-	"utfdecode" => array(),
-	"UPPER_P"  => "A-Z\xc0-\xd6\xd8-\xdd",
-	"LOWER_P"  => "a-z\xdf-\xf6\xf8-\xfd\xff\/'",
-	"ALPHA_P"  => "A-Za-z\xc0-\xd6\xd8-\xdd\xdf-\xf6\xf8-\xfd\xff\_\-\/'",
-	"locale" => "en_US",
-	"NpjLettersFrom" => "àáâãåçèéêëìíîïòóôõùúûıÀÁÂÃÅÇÈÉÊËÌÍÎÏÒÓÔÕÙÚÛİ",
-	"NpjLettersTo"   => "aaaaaceeeeiiiioooouuuyAAAAACEEEEIIIIOOOOUUUY",
+	"name"				=> "English",
+	"code"				=> "en",
+	"charset"			=> "iso-8859-1",
+	"locale"			=> "en_US",
+	"utfdecode"			=> array(),
+	"UPPER_P"			=> "A-Z\xc0-\xd6\xd8-\xdd",
+	"LOWER_P"			=> "a-z\xdf-\xf6\xf8-\xfd\xff\/'",
+	"ALPHA_P"			=> "A-Za-z\xc0-\xd6\xd8-\xdd\xdf-\xf6\xf8-\xfd\xff\_\-\/'",
+	"NpjLettersFrom"	=> "àáâãåçèéêëìíîïòóôõùúûıÀÁÂÃÅÇÈÉÊËÌÍÎÏÒÓÔÕÙÚÛİ",
+	"NpjLettersTo"		=> "aaaaaceeeeiiiioooouuuyAAAAACEEEEIIIIOOOOUUUY",
+	"NpjCaps"			=> "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖØÙÚÛÜİŞ",
+	"NpjSmall"			=> "abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïğñòóôõöøùúûüış",
 	"NpjBiLetters" => array(
 		"ä"=>"ae", "ñ"=>"ny", "ö"=>"oe", "ø"=>"oe", "ü"=>"ue", "æ"=>"ae", "Ä"=>"Ae",
 		"Ñ"=>"Ny", "Ö"=>"Oe", "Ø"=>"Oe", "Ü"=>"Ue", "Æ"=>"Ae", "ÿ"=>"yu", "ß"=>"ss",
