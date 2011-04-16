@@ -6,15 +6,18 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_language = array(
-	"name" => "Moldavian",
-	"code" => "mo",
-	"charset" => "windows-1251",
-	"UPPER_P"  => "A-Z\xc0-\xdf\xa8",
-	"LOWER_P"  => "a-z\xe0-\xff\xb8\/\'",
-	"ALPHA_P"  => "A-Za-z\xc0-\xff\xa8\xb8\_\/\'",
-	"locale" => array("ru_RU.CP1251","ru_RU.KOI8-r","ru_RU","russian","ru_SU","ru"),
-	"NpjLettersFrom" => "àáâãäåçèêëìíîïğñòóôõúüöûÀÁÂÃÄÅÇÈÊËÌÍÎÏĞÑÒÓÔÕÚÜÖÛ",
-	"NpjLettersTo"   => "abvgdeziklmnoprstufx__cyABVGDEZIKLMNOPRSTUFX__CY",
+	"name"				=> "Moldavian",
+	"code"				=> "mo",
+	"charset"			=> "windows-1251",
+	"locale"			=> array("ru_RU.CP1251","ru_RU.KOI8-r","ru_RU","russian","ru_SU","ru"),
+	"utfdecode"			=> array(),
+	"UPPER_P"			=> "A-Z\xc0-\xdf\xa8",
+	"LOWER_P"			=> "a-z\xe0-\xff\xb8\/\'",
+	"ALPHA_P"			=> "A-Za-z\xc0-\xff\xa8\xb8\_\/\'",
+	"NpjLettersFrom"	=> "àáâãäåçèêëìíîïğñòóôõúüöûÀÁÂÃÄÅÇÈÊËÌÍÎÏĞÑÒÓÔÕÚÜÖÛ",
+	"NpjLettersTo"		=> "abvgdeziklmnoprstufx__cyABVGDEZIKLMNOPRSTUFX__CY",
+	"NpjCaps"			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÜÚÛİŞß",
+	"NpjSmall"			=> "àáâãäå¸æçèéêëìíîïğñòóôõö÷øùüúûışÿ",
 	"NpjBiLetters" => array(
 		"é" => "jj", "¸" => "jo", "æ" => "zh", "÷" => "ch",
 		"ø" => "sh", "ù" => "shh", "ı" => "je", "ş" => "ju", "ÿ" => "ja",
