@@ -22,11 +22,11 @@ require ('themes/_common/_header.php');
 
 	echo '<li>'.$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 
-	foreach ($this->get_default_bookmarks($user['lang']) as $_bookmark)
+	foreach ($this->get_default_menu($user['lang']) as $menu_item)
 	{
-		$formatted_bookmarks = $this->format($this->format($_bookmark[1]), 'post_wacko');
+		$formatted_menu = $this->format($this->format($menu_item[1]), 'post_wacko');
 
-		if ($this->page['page_id'] == $_bookmark[0])
+		if ($this->page['page_id'] == $menu_item[0])
 		{
 			echo '<li class="active">';
 		}
@@ -35,7 +35,7 @@ require ('themes/_common/_header.php');
 			echo '<li>';
 		}
 
-		echo $formatted_bookmarks."</li>\n";
+		echo $formatted_menu."</li>\n";
 	}
 
 ?>
@@ -83,11 +83,11 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 	echo "<ol>\n";
 
 	// bookmarks
-	foreach ($this->get_bookmarks() as $_bookmark)
+	foreach ($this->get_menu() as $menu_item)
 	{
-		$formatted_bookmarks = $this->format($_bookmark[1], 'post_wacko');
+		$formatted_menu = $this->format($menu_item[1], 'post_wacko');
 
-		if ($this->page['page_id'] == $_bookmark[0])
+		if ($this->page['page_id'] == $menu_item[0])
 		{
 			echo '<li class="active">';
 		}
@@ -96,7 +96,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 			echo '<li>';
 		}
 
-		echo $formatted_bookmarks."</li>\n";
+		echo $formatted_menu."</li>\n";
 	}
 
 	echo "\n</ol></div>";
@@ -113,7 +113,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 <?php echo ($this->iswatched === true ?
       "<a href=\"".$this->href('watch')."\">".$this->get_translation('RemoveWatch')."</a>" :
       "<a href=\"".$this->href('watch')."\">".$this->get_translation('SetWatch')."</a>" ) ?> ::
-  <?php if (!in_array($this->page['page_id'], $this->get_bookmark_links())) {?>
+  <?php if (!in_array($this->page['page_id'], $this->get_menu_links())) {?>
   <a href="<?php echo $this->href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->config['theme_url'] ?>icons/bookmark.gif" width="12" height="12" alt="<?php echo $this->get_translation('AddToBookmarks') ?>" /></a> ::
 <?php } else { ?>
   <a href="<?php echo $this->href('', '', "removebookmark=yes")?>">

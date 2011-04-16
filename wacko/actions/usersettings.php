@@ -47,7 +47,7 @@ if (isset($_GET['confirm']))
 else if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
 	$this->logout_user();
-	$this->set_bookmarks(BOOKMARK_DEFAULT);
+	$this->set_menu(MENU_DEFAULT);
 	$this->set_message($this->get_translation('LoggedOut'));
 	$this->redirect($this->href());
 }
@@ -172,7 +172,7 @@ else if ($user = $this->get_user())
 	{
 		$_session_time = $user['session_time'];
 		$this->set_user($this->load_user($user['user_name']), 0, 1, true);
-		$this->set_bookmarks(BOOKMARK_USER);
+		$this->set_menu(MENU_USER);
 		$this->set_user_setting('session_time', $_session_time);
 		$user = $this->get_user();
 
@@ -184,12 +184,12 @@ else if ($user = $this->get_user())
 
 	#echo "<h3>".$this->get_translation('UserSettings')."</h3>";
 
-	// BOOKMARKS
+	// MENU
 	if (isset($_GET['bookmarks']) || isset($_POST['_user_bookmarks']) )
 	{
 		echo "<h3>".$this->get_translation('UserSettings')." &raquo; ".$this->get_translation('Bookmarks')."</h3>";
 		echo "<ul class=\"menu\"><li><a href=\"".$this->href('', '', '')."\">".$this->get_translation('UserSettingsGeneral')."</a></li><li class=\"active\">".$this->get_translation('Bookmarks')."</li><li><a href=\"".$this->href('', '', 'extended')."\">".$this->get_translation('UserSettingsExtended')."</a></li></ul><br /><br />\n";
-		echo $this->action('bookmarks');
+		echo $this->action('menu');
 	}
 
 	// EXTENDED

@@ -35,7 +35,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
 	$this->log(5, str_replace('%1', $this->get_user_name(), $this->get_translation('LogUserLoggedOut', $this->config['language'])));
 	$this->logout_user();
-	$this->set_bookmarks(BOOKMARK_DEFAULT);
+	$this->set_menu(MENU_DEFAULT);
 	$this->set_message($this->get_translation('LoggedOut'));
 	$this->context[++$this->current_context] = '';
 
@@ -169,7 +169,7 @@ else
 					$this->log_user_in($existing_user, $_persistent, $session);
 					$this->set_user($existing_user, 1);
 					$this->update_session_time($existing_user);
-					$this->set_bookmarks(BOOKMARK_USER);
+					$this->set_menu(MENU_USER);
 					$this->context[++$this->current_context] = '';
 
 					$this->login_count($existing_user['user_id']);

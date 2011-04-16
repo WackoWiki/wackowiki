@@ -47,14 +47,14 @@ if ($this->page)
 		echo "<li><a href=\"".$this->href('referrers')."\"><img src=\"".$this->config['theme_url']."icons/referer.gif\" title=\"".$this->get_translation('ReferrersTip')."\" alt=\"".$this->get_translation('ReferrersText')."\" /></a></li>\n";
 	}
 
-	if ($this->get_user())
-	{
+	#if ($this->get_user())
+	#{
 		// Watch/Unwatch icon
-		echo ($this->iswatched === true ? "<li><a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\"  /></a></li>\n" : "<li><a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\" /></a></li>\n");
-	}
+		#echo ($this->iswatched === true ? "<li><a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\"  /></a></li>\n" : "<li><a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\" /></a></li>\n");
+	#}
 
 	// Print icon
-	echo "<li><a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a></li>\n";
+	# echo "<li><a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a></li>\n";
 
 	// Permalink
 	echo "<li>".$this->action('permalink')."</li>\n";

@@ -37,7 +37,7 @@
 					<?php /* Edit ACLs link */ echo ($this->page && $this->get_user() && $this->user_is_owner()) ? '<li id="page_acls"><a href="'.$this->href('permissions').'"'.(($this->method=='edit')?" onclick=\"return window.confirm('".$this->get_translation('EditACLConfirm')."');\"":"").' title="'.$this->get_translation('ACLText').'"><span class="backendbutton"></span><img class="contexticon" src="'.$this->config['theme_url'].'icons/page_key.png" alt="" />'.$this->get_translation('ACLText').'</a><span class="sep">,</span></li>'."\n" : ''; ?>
 					<?php /* New page link */ echo ($this->has_access('write')) ? '<li id="page_new"><a href="'.$this->href('new').'" title="'.$this->get_translation('CreateNewPageTip').'"><span class="backendbutton"></span><img class="contexticon" src="'.$this->config['theme_url'].'icons/page_new.png" alt="" />'.$this->get_translation('CreateNewPage').'</a><span class="sep">,</span></li>'."\n" : ''; ?>
 					<?php /* Remove link (shows only for Admins) */ if ($this->is_admin()) print '<li id="page_remove"><a href="'.$this->href('remove').'" title="'.$this->get_translation('DeleteTip').'"><span class="backendbutton"></span><img class="contexticon" src="'.$this->config['theme_url'].'icons/page_delete.png" alt="" />'.$this->get_translation('DeleteTip').'</a><span class="sep">,</span></li>'."\n"; ?>
-					<?php /* Bookmark on/off */ if ($this->get_user()) {echo (in_array($this->tag, $this->get_bookmark_links())) ?  '<li id="page_bookmarkoff"><a href="'.$this->href('', '', "removebookmark=yes").'" title="'.$this->get_translation('RemoveFromBookmarks') .'"><span class="backendbutton"></span><img class="contexticon" src="'.$this->config['theme_url'].'icons/link_delete.png" alt="" />'.$this->get_translation('Bookmarks').' [-]</a><span class="sep">,</span></li>' : '<li id="page_bookmarkon"><a href="'.$this->href('', '', "addbookmark=yes").'" title="'.$this->get_translation('AddToBookmarks') .'"><span class="backendbutton"></span><img class="contexticon" src="'.$this->config['theme_url'].'icons/link_add.png" alt="" />'.$this->get_translation('Bookmarks').' [+]</a><span class="sep">,</span></li>'; echo "\n";} ?>
+					<?php /* Bookmark on/off */ if ($this->get_user()) {echo (in_array($this->tag, $this->get_menu_links())) ?  '<li id="page_bookmarkoff"><a href="'.$this->href('', '', "removebookmark=yes").'" title="'.$this->get_translation('RemoveFromBookmarks') .'"><span class="backendbutton"></span><img class="contexticon" src="'.$this->config['theme_url'].'icons/link_delete.png" alt="" />'.$this->get_translation('Bookmarks').' [-]</a><span class="sep">,</span></li>' : '<li id="page_bookmarkon"><a href="'.$this->href('', '', "addbookmark=yes").'" title="'.$this->get_translation('AddToBookmarks') .'"><span class="backendbutton"></span><img class="contexticon" src="'.$this->config['theme_url'].'icons/link_add.png" alt="" />'.$this->get_translation('Bookmarks').' [+]</a><span class="sep">,</span></li>'; echo "\n";} ?>
 					<?php /* Watch/Unwatch icon */ if ($this->get_user()) {echo ($this->iswatched === true ? '<li id="page_unwatch"><a href="'.$this->href('watch').'" title="'.$this->get_translation('RemoveWatch').'"><span class="backendbutton"></span><img class="contexticon" src="'.$this->config['theme_url'].'icons/transmit_delete.png" alt="" />'.$this->get_translation('RemoveWatch').'</a><span class="sep">,</span></li>' : '<li id="page_watch"><a href="'.$this->href('watch').'" title="'.$this->get_translation('SetWatch').'"><span class="backendbutton"></span><img class="contexticon" src="'.$this->config['theme_url'].'icons/transmit_add.png" alt="" />'.$this->get_translation('SetWatch').'</a><span class="sep">,</span></li>')."\n";} ?>
 					<?php /* Print icon */ echo '<li id="page_print"><a href="'.$this->href('print').'" title="'.$this->get_translation('PrintVersion').'"><span class="backendbutton"></span><img class="contexticon" src="'.$this->config['theme_url'].'icons/printer.png" alt="" />'.$this->get_translation('PrintVersion').'</a></li>'."\n"; ?>
 				</ul>
@@ -58,11 +58,11 @@
 				echo '<!-- li><a href="'.$base_url.'Intern">Intern</a></li -->';
 
 				// Bookmarks
-				foreach ($this->get_bookmarks() as $_bookmark)
+				foreach ($this->get_menu() as $menu_item)
 				{
-					$formatted_bookmarks = $this->format($_bookmark[1], 'post_wacko');
+					$formatted_menu = $this->format($menu_item[1], 'post_wacko');
 
-					if ($this->page['page_id'] == $_bookmark[0])
+					if ($this->page['page_id'] == $menu_item[0])
 					{
 						echo '<li class="active">';
 					}
@@ -71,7 +71,7 @@
 						echo '<li>';
 					}
 
-					echo $formatted_bookmarks."</li>\n";
+					echo $formatted_menu."</li>\n";
 				}
 
 				echo "</ol>";

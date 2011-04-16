@@ -163,19 +163,19 @@ if (!function_exists('decompose_options'))
 
 if (!function_exists('convert_into_menu_table'))
 {
-	function convert_into_menu_table(&$wacko, $bookmarks, $user_id)
+	function convert_into_menu_table(&$wacko, $menu, $user_id)
 	{
 		// bookmarks
-		$_bookmarks	= explode("\n", $bookmarks);
+		$_menu	= explode("\n", $menu);
 
-		if ($_bookmarks)
+		if ($_menu)
 		{
-			foreach($_bookmarks as $key => $_bookmark)
+			foreach($_menu as $key => $menu_item)
 			{
 				// links ((link desc @@lang))
-				if ((preg_match('/^\[\[(\S+)(\s+(.+))?\]\]$/', $_bookmark, $matches)) ||
-					(preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/', $_bookmark, $matches)) ||
-					(preg_match('/^(\S+)(\s+(.+))?$/', $_bookmark, $matches)) ) // without brackets at last!
+				if ((preg_match('/^\[\[(\S+)(\s+(.+))?\]\]$/', $menu_item, $matches)) ||
+					(preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/', $menu_item, $matches)) ||
+					(preg_match('/^(\S+)(\s+(.+))?$/', $menu_item, $matches)) ) // without brackets at last!
 				{
 					#$wacko->debug_print_r($matches);
 					list (, $url, $text) = $matches;
@@ -193,7 +193,7 @@ if (!function_exists('convert_into_menu_table'))
 						{
 							$t				= explode('@@', $text);
 							$text			= $t[0];
-							$bookmark_lang	= $t[1];
+							$menu_item_lang	= $t[1];
 						}
 
 						$title			= trim(preg_replace('/|__|\[\[|\(\(/', '', $text));
@@ -217,12 +217,12 @@ if (!function_exists('convert_into_menu_table'))
 						"INSERT INTO ".$wacko->config['table_prefix']."menu SET ".
 						"user_id			= '".quote($wacko->dblink, $user_id)."', ".
 						"page_id			= '".quote($wacko->dblink, $page_id)."', ".
-						"lang				= '".quote($wacko->dblink, (isset($bookmark_lang) ? $bookmark_lang : '') )."', ".
+						"lang				= '".quote($wacko->dblink, (isset($menu_item_lang) ? $menu_item_lang : '') )."', ".
 						"menu_title			= '".quote($wacko->dblink, $title)."', ".
 						"menu_position		= '".quote($wacko->dblink, ($key + 1))."' ");
 				}
 
-				$bookmark_lang = '';
+				$menu_item_lang = '';
 			}
 		}
 	}

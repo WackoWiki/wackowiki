@@ -98,11 +98,11 @@ else if($this->has_access('write'))
 					#echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 
 					// bookmarks
-					foreach ($this->get_bookmarks() as $_bookmark)
+					foreach ($this->get_menu() as $menu_item)
 					{
-						$formatted_bookmarks = $this->format($_bookmark[1], 'post_wacko');
+						$formatted_menu = $this->format($menu_item[1], 'post_wacko');
 
-						if ($this->page['page_id'] == $_bookmark[0])
+						if ($this->page['page_id'] == $menu_item[0])
 						{
 							echo '<li class="active">';
 						}
@@ -111,13 +111,13 @@ else if($this->has_access('write'))
 							echo '<li>';
 						}
 
-						echo $formatted_bookmarks."</li>\n";
+						echo $formatted_menu."</li>\n";
 					}
 
 /*					if ($this->get_user())
 					{
 						// determines what it should show: "add to bookmarks" or "remove from bookmarks" icon
-						if (!in_array($this->page['page_id'], $this->get_bookmark_links()))
+						if (!in_array($this->page['page_id'], $this->get_menu_links()))
 						{
 							echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 								.'"><img src="'. $this->config['theme_url']

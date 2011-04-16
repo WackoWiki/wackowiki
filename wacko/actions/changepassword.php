@@ -218,7 +218,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 
 			// reinitialize user session
 			$this->logout_user();
-			$this->set_bookmarks(BOOKMARK_DEFAULT);
+			$this->set_menu(MENU_DEFAULT);
 			$this->context[++$this->current_context] = '';
 
 			// log event

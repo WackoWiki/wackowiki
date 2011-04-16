@@ -9,23 +9,23 @@ if (!defined('IN_WACKO'))
 ##   XML Import                                       ##
 ########################################################
 
-$module['bookmarks'] = array(
+$module['menu'] = array(
 		'order'	=> 4,
 		'cat'	=> 'Content',
-		'mode'	=> 'bookmarks',
-		'name'	=> 'Bookmarks',
-		'title'	=> 'Add, edit or remove default bookmarks',
+		'mode'	=> 'menu',
+		'name'	=> 'menu',
+		'title'	=> 'Add, edit or remove default menu items',
 	);
 
 ########################################################
 
-function admin_bookmarks(&$engine, &$module)
+function admin_menu(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 <?php
-	echo $engine->action('bookmarks', array('system' => 1));
+	echo $engine->action('menu', array('system' => 1));
 }
 
 ?>
