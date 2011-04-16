@@ -5,9 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!function_exists('bookmark_sorting'))
+if (!function_exists('menu_sorting'))
 {
-	function bookmark_sorting ($a, $b)
+	function menu_sorting ($a, $b)
 	{
 		if ($a['menu_position'] == $b['menu_position'])
 		{
@@ -19,27 +19,27 @@ if (!function_exists('bookmark_sorting'))
 	}
 }
 
-if (!function_exists('load_user_bookmarks'))
+if (!function_exists('load_user_menu'))
 {
-	function load_user_bookmarks(&$wacko, $user_id)
+	function load_user_menu(&$wacko, $user_id)
 	{
-		$_bookmarks = $wacko->load_all(
+		$_menu = $wacko->load_all(
 							"SELECT p.tag, p.title, b.menu_id, b.user_id, b.menu_title, b.lang, b.menu_position ".
 							"FROM ".$wacko->config['table_prefix']."menu b ".
 								"LEFT JOIN ".$wacko->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
 							"WHERE b.user_id = '".quote($wacko->dblink, $user_id)."' ".
 							"ORDER BY b.menu_position", 0);
 
-		return $_bookmarks;
+		return $_menu;
 	}
 }
 
-// {{bookmarks system=[0|1]}}
+// {{menu system=[0|1]}}
 
 if (!isset($system)) $system = 0;
 $message	= '';
 
-// get default bookmarks
+// get default menu items
 if ($this->is_admin() && $system == true)
 {
 	$_user_id	= $this->get_user_id('System');
@@ -53,8 +53,8 @@ else
 /// Processing of our special form
 if (isset($_POST['_user_bookmarks']))
 {
-	$_bookmarks	= load_user_bookmarks($this, $_user_id);
-	$a			= $_bookmarks;
+	$_menu	= load_user_menu($this, $_user_id);
+	$a			= $_menu;
 	$b			= array();
 
 	foreach($a as $k => $v)
@@ -81,7 +81,7 @@ if (isset($_POST['_user_bookmarks']))
 			);
 		}
 
-		usort ($data, "bookmark_sorting");
+		usort ($data, "menu_sorting");
 
 		foreach( $data as $k => $item )
 		{
@@ -114,7 +114,7 @@ if (isset($_POST['_user_bookmarks']))
 				// check existing page write access
 				if ($this->has_access('write', $_page_id))
 				{
-					// check if bookmark already exists
+					// check if menu item already exists
 					if ($this->load_single(
 						"SELECT menu_id ".
 						"FROM ".$this->config['table_prefix']."menu ".
@@ -126,12 +126,12 @@ if (isset($_POST['_user_bookmarks']))
 					}
 					else
 					{
-						// writing bookmark
-						$_bookmark_page_ids = $this->get_bookmark_links();
+						// writing menu item
+						$_menu_page_ids = $this->get_menu_links();
 
-						if (!in_array($_page_id, $_bookmark_page_ids))
+						if (!in_array($_page_id, $_menu_page_ids))
 						{
-							$bookmarks[] = array(
+							$menu[] = array(
 								$_page_id,
 								'(('.$page['tag'].' '.$this->get_page_title($page['tag']).($user['lang'] != $page['lang'] ? ' @@'.$page['lang'] : '').'))'
 								);
@@ -141,25 +141,25 @@ if (isset($_POST['_user_bookmarks']))
 								"FROM ".$this->config['table_prefix']."menu b ".
 								"WHERE b.user_id = '".quote($this->dblink, $_user_id)."' ", 0);
 
-							$_bookmark_count = count($_menu_position);
+							$_menu_item_count = count($_menu_position);
 
 							$this->sql_query(
 								"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 								"user_id			= '".quote($this->dblink, $_user_id)."', ".
 								"page_id			= '".quote($this->dblink, $_page_id)."', ".
 								"lang				= '".quote($this->dblink, ($user['lang'] != $page['lang'] ? $page['lang'] : ""))."', ".
-								"menu_position		= '".quote($this->dblink, ($_bookmark_count + 1))."'");
+								"menu_position		= '".quote($this->dblink, ($_menu_item_count + 1))."'");
 						}
 
-						// parsing bookmarks into link table
-						foreach ($bookmarks as $_bookmark)
+						// parsing menu items into link table
+						foreach ($menu as $menu_item)
 						{
-							$bookmark_page_ids[] = $_bookmark[0];
-							$bookmark_formatted[] = array ($_bookmark[0], $_bookmark[1], $this->format($_bookmark[1], 'wacko'));
+							$menu_page_ids[] = $menu_item[0];
+							$menu_formatted[] = array ($menu_item[0], $menu_item[1], $this->format($menu_item[1], 'wacko'));
 						}
 
-						$_SESSION[$this->config['session_prefix'].'_'.'bookmark_link']	= $bookmark_page_ids;
-						$_SESSION[$this->config['session_prefix'].'_'.'bookmark']		= $bookmark_formatted;
+						$_SESSION[$this->config['session_prefix'].'_'.'menu_link']	= $menu_page_ids;
+						$_SESSION[$this->config['session_prefix'].'_'.'menu']		= $menu_formatted;
 					}
 				}
 				else
@@ -208,14 +208,14 @@ if (isset($_POST['_user_bookmarks']))
 
 	// reload user data
 	$this->set_user($this->load_user('', $_user_id, '', true), 0, 1, true);
-	$this->set_bookmarks(BOOKMARK_USER);
+	$this->set_menu(MENU_USER);
 }
 
 if ($_user_id)
 {
-	$_bookmarks = load_user_bookmarks($this, $_user_id);
+	$_menu = load_user_menu($this, $_user_id);
 
-	if ($_bookmarks)
+	if ($_menu)
 	{
 		// echo "<h4>".$this->get_translation('YourBookmarks')."</h4>";
 
@@ -226,26 +226,26 @@ if ($_user_id)
 		echo "<table>";
 		echo "<tr><th>".$this->get_translation('BookmarkNumber')."</th><th>".$this->get_translation('BookmarkTitle')."</th><th>".$this->get_translation('BookmarkPage')."</th><th>".$this->get_translation('BookmarkMark')."</th><!--<th>Display</th><th>Lang</th>--></tr>";
 
-		foreach($_bookmarks as $_bookmark)
+		foreach($_menu as $menu_item)
 		{
 			echo "<tr class=\"lined\">
 			<td class=\"\">
-			<input name=\"pos_".$_bookmark['menu_id']."\" type=\"text\" size=\"2\" value=\"".$_bookmark['menu_position']."\" />
+			<input name=\"pos_".$menu_item['menu_id']."\" type=\"text\" size=\"2\" value=\"".$menu_item['menu_position']."\" />
 			</td><td>
-			<input name=\"title_".$_bookmark['menu_id']."\" type=\"text\" size=\"40\" value=\"".$_bookmark['menu_title']."\" />
+			<input name=\"title_".$menu_item['menu_id']."\" type=\"text\" size=\"40\" value=\"".$menu_item['menu_title']."\" />
 			</td><td>
-			<!--<input type=\"radio\" id=\"bookmark".$_bookmark['menu_id']."\" name=\"change\" value=\"".$_bookmark['menu_id']."\" /> -->
-			<label for=\"bookmark".$_bookmark['menu_id']."\" title=\"".$_bookmark['title']."\">&raquo; ".$_bookmark['tag']."</label>
+			<!--<input type=\"radio\" id=\"bookmark".$menu_item['menu_id']."\" name=\"change\" value=\"".$menu_item['menu_id']."\" /> -->
+			<label for=\"bookmark".$menu_item['menu_id']."\" title=\"".$menu_item['title']."\">&raquo; ".$menu_item['tag']."</label>
 			</td><td>
-			<input id=\"bookmark".$_bookmark['menu_id']."\" name=\"delete_".$_bookmark['menu_id']."\" type=\"checkbox\" />
+			<input id=\"bookmark".$menu_item['menu_id']."\" name=\"delete_".$menu_item['menu_id']."\" type=\"checkbox\" />
 			</td><!--<td>
 
-			".(!empty($_bookmark['menu_title']) ? $_bookmark['menu_title'] : $_bookmark['title'])."
+			".(!empty($menu_item['menu_title']) ? $menu_item['menu_title'] : $menu_item['title'])."
 			</td>-->";
 
 			if ($system)
 			{
-				echo '<td>'.(!empty($_bookmark['lang']) ? $_bookmark['lang'] : "");
+				echo '<td>'.(!empty($menu_item['lang']) ? $menu_item['lang'] : "");
 			}
 
 			echo "</td>\n</tr>\n";

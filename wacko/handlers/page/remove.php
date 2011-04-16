@@ -62,7 +62,7 @@ if ($this->is_admin() ||
 			}
 			if (!$comment_on_id)
 			{
-				if ($this->remove_bookmarks($this->tag))
+				if ($this->remove_menu_items($this->tag))
 				{
 					print(str_replace('%1', $this->tag, $this->get_translation('BookmarksRemoved'))."<br />\n");
 				}
@@ -117,7 +117,7 @@ if ($this->is_admin() ||
 				$this->remove_links			($this->tag, true);
 				$this->remove_categories	($this->tag, true);
 				$this->remove_acls			($this->tag, true);
-				$this->remove_bookmarks		($this->tag, true);
+				$this->remove_menu_items	($this->tag, true);
 				$this->remove_watches		($this->tag, true);
 				$this->remove_ratings		($this->tag, true);
 				$this->remove_comments		($this->tag, true, $dontkeep);

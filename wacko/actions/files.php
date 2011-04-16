@@ -78,7 +78,7 @@ if ($can_view)
 		$filepage = $this->load_page($page);
 	}
 
-	if (!$global && !$filepage['page_id'])
+	if (!$global && !isset($filepage['page_id']))
 	{
 		return;
 	}

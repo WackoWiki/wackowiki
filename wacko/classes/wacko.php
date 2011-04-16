@@ -1126,7 +1126,7 @@ class Wacko
 		}
 
 		$user			= $this->get_user();
-		$user_bookmarks	= $this->get_user_bookmarks($user['user_id']);
+		$user_menu	= $this->get_user_menu($user['user_id']);
 
 		if (!isset($cl))
 		{
@@ -1134,22 +1134,22 @@ class Wacko
 		}
 
 		$pages[$cl]		= $user['user_name'];
-		$_bookmarks		= $this->get_default_bookmarks($user['lang'])."\n".
-					($user_bookmarks
-						? $user_bookmarks
+		$_menu		= $this->get_default_menu($user['lang'])."\n".
+					($user_menu
+						? $user_menu
 						: '');
-		$bookmarks	= explode("\n", $_bookmarks);
+		$menu		= explode("\n", $_menu);
 
-		for ($i = 0; $i <= count($bookmarks); $i++)
+		for ($i = 0; $i <= count($menu); $i++)
 		{
 			if (!isset($cl))
 			{
 				$cl = 0;
 			}
 
-			if (preg_match('/^[\(\[]/', (isset($bookmarks[$i])) ? ($bookmarks[$i]) : '' ))
+			if (preg_match('/^[\(\[]/', (isset($menu[$i])) ? ($menu[$i]) : '' ))
 			{
-				$pages[$cl + $i] = preg_replace('/^(.*?)\s.*$/', '\\1', preg_replace('/[\[\]\(\)]/', '', $bookmarks[$i]));
+				$pages[$cl + $i] = preg_replace('/^(.*?)\s.*$/', '\\1', preg_replace('/[\[\]\(\)]/', '', $menu[$i]));
 			}
 		}
 
@@ -4530,8 +4530,8 @@ class Wacko
 		}
 	}
 
-	// BOOKMARKS
-	function get_default_bookmarks($lang = false)
+	// MENUS
+	function get_default_menu($lang = false)
 	{
 		if (!isset($lang))
 		{
@@ -4552,28 +4552,28 @@ class Wacko
 		}
 
 		$user_id			= $this->get_user_id('System');
-		$default_bookmarks	= $this->get_user_bookmarks($user_id, $lang);
+		$default_menu	= $this->get_user_menu($user_id, $lang);
 
-		// parsing bookmarks into link table
-		foreach ($default_bookmarks as $_default_bookmark)
+		// parsing menu items into link table
+		foreach ($default_menu as $_default_menu)
 		{
-			#$bookmark_page_ids[] = $_bookmark[0];
-			$default_bookmark_formatted[] = array ($_default_bookmark[0], $_default_bookmark[1]);
+			#$menu_page_ids[] = $menu_item[0];
+			$default_menu_formatted[] = array ($_default_menu[0], $_default_menu[1]);
 		}
 
-		#$this->debug_print_r($default_bookmarks);
+		#$this->debug_print_r($default_menu);
 
-		return $default_bookmark_formatted;
+		return $default_menu_formatted;
 	}
 
-	function get_user_bookmarks($user_id, $lang = '')
+	function get_user_menu($user_id, $lang = '')
 	{
-		$user_bookmarks = '';
+		$user_menu = '';
 
 		// avoid results if $user_id is 0 (user does not exists)
 		if ($user_id)
 		{
-			$_bookmarks = $this->load_all(
+			$_menu = $this->load_all(
 					"SELECT p.page_id, p.tag, p.title, b.menu_title, b.lang ".
 					"FROM ".$this->config['table_prefix']."menu b ".
 						"LEFT JOIN ".$this->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
@@ -4583,68 +4583,68 @@ class Wacko
 							: "").
 					"ORDER BY b.menu_position", 1);
 
-			if ($_bookmarks)
+			if ($_menu)
 			{
-				foreach($_bookmarks as $c => $_bookmark)
+				foreach($_menu as $c => $menu_item)
 				{
-					$user_bookmarks[$c] = array(
-						$_bookmark['page_id'],
-						"((".$_bookmark['tag'].
-						(!empty($_bookmark['menu_title'])
-							? " ".$_bookmark['menu_title']
-							: (!empty($_bookmark['title'])
-								? " ".$_bookmark['title']
-								: " ".$_bookmark['tag']
+					$user_menu[$c] = array(
+						$menu_item['page_id'],
+						"((".$menu_item['tag'].
+						(!empty($menu_item['menu_title'])
+							? " ".$menu_item['menu_title']
+							: (!empty($menu_item['title'])
+								? " ".$menu_item['title']
+								: " ".$menu_item['tag']
 								)
 						).
-						(!empty($_bookmark['lang'])
-							? " @@".$_bookmark['lang']
+						(!empty($menu_item['lang'])
+							? " @@".$menu_item['lang']
 							: "").
 					"))");
 				}
 			}
-			#$this->debug_print_r($user_bookmarks);
-			return $user_bookmarks;
+			#$this->debug_print_r($user_menu);
+			return $user_menu;
 		}
 	}
 
-	function set_bookmarks($set = BOOKMARK_AUTO)
+	function set_menu($set = MENU_AUTO)
 	{
 		$user = $this->get_user();
 
-		// initial bookmarks table construction
-		if ($set || !($bookmarks = $this->get_bookmarks()))
+		// initial menu table construction
+		if ($set || !($menu = $this->get_menu()))
 		{
-			$user_bookmarks	= $this->get_user_bookmarks($user['user_id']);
-			$bookmarks		= ( $user_bookmarks
-				? $user_bookmarks
-				: $this->get_default_bookmarks($user['lang']) );
+			$user_menu	= $this->get_user_menu($user['user_id']);
+			$menu		= ( $user_menu
+				? $user_menu
+				: $this->get_default_menu($user['lang']) );
 
-			if ($set == BOOKMARK_DEFAULT)
+			if ($set == MENU_DEFAULT)
 			{
-				$bookmarks = $this->get_default_bookmarks($user['lang']);
+				$menu = $this->get_default_menu($user['lang']);
 			}
 
-			// parsing bookmarks into link table
-			foreach ($bookmarks as $_bookmark)
+			// parsing menu items into link table
+			foreach ($menu as $menu_item)
 			{
-				$bookmark_page_ids[] = $_bookmark[0];
-				$bookmark_formatted[] = array ($_bookmark[0], $this->format($_bookmark[1], 'wacko'));
+				$menu_page_ids[] = $menu_item[0];
+				$menu_formatted[] = array ($menu_item[0], $this->format($menu_item[1], 'wacko'));
 			}
 
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_page_id']	= $bookmark_page_ids;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']			= $bookmark_formatted;
+			$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
+			$_SESSION[$this->config['session_prefix'].'_'.'menu']			= $menu_formatted;
 		}
 
-		// adding new bookmark
+		// adding new menu item
 		if (!empty($_GET['addbookmark']) && $user)
 		{
-			$_bookmark_page_ids = $this->get_bookmark_links();
+			$_menu_page_ids = $this->get_menu_links();
 
-			// writing bookmark
-			if (!in_array($this->page['page_id'], $_bookmark_page_ids))
+			// writing menu item
+			if (!in_array($this->page['page_id'], $_menu_page_ids))
 			{
-				$bookmarks[] = array(
+				$menu[] = array(
 					$this->page['page_id'],
 					'(('.$this->tag.' '.($this->get_page_title() ? $this->get_page_title() : $this->tag).($user['lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))'
 					);
@@ -4654,46 +4654,46 @@ class Wacko
 					"FROM ".$this->config['table_prefix']."menu b ".
 					"WHERE b.user_id = '".quote($this->dblink, $user['user_id'])."' ", 0);
 
-				$_bookmark_count = count($_menu_position);
+				$_menu_item_count = count($_menu_position);
 
 				$this->sql_query(
 					"INSERT INTO ".$this->config['table_prefix']."menu SET ".
 					"user_id			= '".quote($this->dblink, $user['user_id'])."', ".
 					"page_id			= '".quote($this->dblink, $this->page['page_id'])."', ".
 					"lang				= '".quote($this->dblink, ($user['lang'] != $this->page_lang ? $this->page_lang : ""))."', ".
-					"menu_position		= '".quote($this->dblink, ($_bookmark_count + 1))."'");
+					"menu_position		= '".quote($this->dblink, ($_menu_item_count + 1))."'");
 			}
 
-			// parsing bookmarks into link table
-			foreach ($bookmarks as $_bookmark)
+			// parsing menu items into link table
+			foreach ($menu as $menu_item)
 			{
-				$bookmark_page_ids[] = $_bookmark[0];
-				$bookmark_formatted[] = array ($_bookmark[0], $this->format($_bookmark[1], 'wacko'));
+				$menu_page_ids[] = $menu_item[0];
+				$menu_formatted[] = array ($menu_item[0], $this->format($menu_item[1], 'wacko'));
 			}
 
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_page_id']	= $bookmark_page_ids;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']			= $bookmark_formatted;
+			$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
+			$_SESSION[$this->config['session_prefix'].'_'.'menu']			= $menu_formatted;
 		}
 
-		// removing bookmark
+		// removing menu item
 		if (!empty($_GET['removebookmark']) && $user)
 		{
-			// rewriting bookmarks table except containing current page tag
-			foreach ($bookmarks as $bookmark)
+			// rewriting menu table except containing current page tag
+			foreach ($menu as $menu_item)
 			{
-				if ($bookmark[0] != $this->page['page_id'])
+				if ($menu_item[0] != $this->page['page_id'])
 				{
-					$newbookmarks[] = $bookmark;
+					$new_menu[] = $menu_item;
 				}
 			}
 
-			if (count($newbookmarks) < 1)
+			if (count($new_menu) < 1)
 			{
-				$newbookmarks[] = '';
+				$new_menu[] = '';
 			}
 
-			$bookmarks = $newbookmarks;
-			#$this->debug_print_r($bookmarks);
+			$menu = $new_menu;
+			#$this->debug_print_r($menu);
 
 			$this->sql_query(
 				"DELETE FROM ".$this->config['table_prefix']."menu ".
@@ -4701,31 +4701,31 @@ class Wacko
 					"AND page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
 				"LIMIT 1");
 
-			// parsing bookmarks into link table
-			foreach ($bookmarks as $_bookmark)
+			// parsing menu items into link table
+			foreach ($menu as $menu_item)
 			{
-				$bookmark_page_ids[] = $_bookmark[0];
-				$bookmark_formatted[] = array ($_bookmark[0], $this->format($_bookmark[1], 'wacko'));
+				$menu_page_ids[] = $menu_item[0];
+				$menu_formatted[] = array ($menu_item[0], $this->format($menu_item[1], 'wacko'));
 			}
 
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark_page_id']	= $bookmark_page_ids;
-			$_SESSION[$this->config['session_prefix'].'_'.'bookmark']			= ( $bookmark_formatted ? $bookmark_formatted : '' );
+			$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
+			$_SESSION[$this->config['session_prefix'].'_'.'menu']			= ( $menu_formatted ? $menu_formatted : '' );
 		}
 	}
 
-	function get_bookmarks()
+	function get_menu()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmark']))
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.'menu']))
 		{
-			return $_SESSION[$this->config['session_prefix'].'_'.'bookmark'];
+			return $_SESSION[$this->config['session_prefix'].'_'.'menu'];
 		}
 	}
 
-	function get_bookmark_links()
+	function get_menu_links()
 	{
-		if (isset($_SESSION[$this->config['session_prefix'].'_'.'bookmark_page_id']))
+		if (isset($_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']))
 		{
-			return $_SESSION[$this->config['session_prefix'].'_'.'bookmark_page_id'];
+			return $_SESSION[$this->config['session_prefix'].'_'.'menu_page_id'];
 		}
 	}
 
@@ -5032,7 +5032,7 @@ class Wacko
 
 		$this->set_page($page);
 		$this->log_referrer();
-		$this->set_bookmarks();
+		$this->set_menu();
 
 		if ($this->page)
 		{
@@ -5570,7 +5570,7 @@ class Wacko
 		return true;
 	}
 
-	function remove_bookmarks($tag, $cluster = false)
+	function remove_menu_items($tag, $cluster = false)
 	{
 		if (!$tag)
 		{

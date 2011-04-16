@@ -205,8 +205,8 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 						"theme			= '".quote($this->dblink, $this->config['theme'])."', ".
 						"send_watchmail	= '".quote($this->dblink, 1)."'");
 
-				// INSERT user bookmarks
-				#$this->convert_into_bookmark_table($this->get_default_bookmarks($lang), $_user_id['user_id']);
+				// INSERT user menu items
+				#$this->convert_into_menu_table($this->get_default_menu($lang), $_user_id['user_id']);
 
 				// add user page
 				$this->save_page($this->config['users_page'].'/'.$user_name, '', 'your page', 'auto created', '', '', '', ($lang ? $lang : $this->config['language']), '', $user_name, true);

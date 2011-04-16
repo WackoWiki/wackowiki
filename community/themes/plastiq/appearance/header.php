@@ -59,11 +59,11 @@ echo "\n";
 	$this->context[++$this->current_context] = '/';
 	$this->stop_link_tracking();
 
-	foreach ($this->get_default_bookmarks($user['lang']) as $_bookmark)
+	foreach ($this->get_default_menu($user['lang']) as $menu_item)
 	{
-		$formatted_bookmarks = $this->format($this->format(strtolower($_bookmark[1])), 'post_wacko');
+		$formatted_menu = $this->format($this->format(strtolower($menu_item[1])), 'post_wacko');
 
-		if ($this->page['page_id'] == $_bookmark[0])
+		if ($this->page['page_id'] == $menu_item[0])
 		{
 			echo '<span class="active">';
 		}
@@ -72,7 +72,7 @@ echo "\n";
 			echo '<span>';
 		}
 
-		echo $formatted_bookmarks."</span>\n";
+		echo $formatted_menu."</span>\n";
 	}
 
 	$this->start_link_tracking();
@@ -86,7 +86,7 @@ echo "\n";
 <?php
 	if ($this->get_user())
 	{
-		if (in_array($this->tag, $this->get_bookmark_links()))
+		if (in_array($this->tag, $this->get_menu_links()))
 		{
 			echo '<div class="bookmark_out"><a href="'.$this->href('', '', 'removebookmark=yes').'" title="'.$this->get_translation('RemoveFromBookmarks').'"><img src="'.$this->config['theme_url'].'images/spacer.gif" /></a></div>';
 		}
@@ -214,11 +214,11 @@ echo "\n";
 											echo "<ol>\n";
 
 											// bookmarks
-											foreach ($this->get_bookmarks() as $_bookmark)
+											foreach ($this->get_menu() as $menu_item)
 											{
-												$formatted_bookmarks = $this->format($_bookmark[1], 'post_wacko');
+												$formatted_menu = $this->format($menu_item[1], 'post_wacko');
 
-												if ($this->page['page_id'] == $_bookmark[0])
+												if ($this->page['page_id'] == $menu_item[0])
 												{
 													echo '<li class="active">';
 												}
@@ -227,7 +227,7 @@ echo "\n";
 													echo '<li>';
 												}
 
-												echo $formatted_bookmarks."</li>\n";
+												echo $formatted_menu."</li>\n";
 											}
 
 

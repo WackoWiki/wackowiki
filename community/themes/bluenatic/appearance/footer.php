@@ -42,7 +42,7 @@ if ($this->page)
 	src="<?php echo $this->config['theme_url']; ?>images/watch-add.gif"
 	alt="<?php echo $this->get_translation('SetWatch'); ?>"
 	title="<?php echo $this->get_translation('SetWatch'); ?>" width="16"
-	height="16" /> <?php } ?> </a></li><li><?php // Bookmark page ?> <?php if(in_array($this->page['page_id'], $this->get_bookmark_links())) { ?>
+	height="16" /> <?php } ?> </a></li><li><?php // Bookmark page ?> <?php if(in_array($this->page['page_id'], $this->get_menu_links())) { ?>
 <a href="<?php echo $this->href('', '', "removebookmark=yes"); ?>"> <img
 	src="<?php echo $this->config['theme_url']; ?>images/bookmark-remove.gif"
 	alt="<?php echo $this->get_translation('RemoveFromBookmarks'); ?>"

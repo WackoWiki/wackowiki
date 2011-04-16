@@ -24,8 +24,8 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 	$perm_create_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'create', '$')";
 	$perm_upload_insert		= "INSERT INTO ".$config_global['table_prefix']."acl (page_id, privilege, list) VALUES ((".$page_id."), 'upload', '')";
 
-	$default_bookmark		= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lng."', '".$menu_title."')";
-	#$site_bookmark			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lng."', '".$menu_title."')";
+	$default_menu_item		= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lng."', '".$menu_title."')";
+	#$site_menu_item			= "INSERT INTO ".$config_global['table_prefix']."menu (user_id, page_id, lang, menu_title) VALUES ((".$owner_id."), (".$page_id."), '".$lng."', '".$menu_title."')";
 
 	switch($config_global['database_driver'])
 	{
@@ -43,7 +43,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 
 				if($is_menu)
 				{
-					mysql_query($default_bookmark, $dblink_global);
+					mysql_query($default_menu_item, $dblink_global);
 				}
 			}
 			break;
@@ -95,7 +95,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 
 					if($is_menu)
 					{
-						mysqli_query($dblink_global, $default_bookmark);
+						mysqli_query($dblink_global, $default_menu_item);
 						if(mysqli_errno($dblink_global) != 0)
 						{
 							output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingDefaultBookmark'])." - ".mysqli_error($dblink_global));
@@ -115,7 +115,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 
 					if($is_menu)
 					{
-						mysqli_query($dblink_global, $default_bookmark);
+						mysqli_query($dblink_global, $default_menu_item);
 					}
 				}
 			}
@@ -186,7 +186,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 
 					if($is_menu)
 					{
-						@$dblink_global->query($default_bookmark);
+						@$dblink_global->query($default_menu_item);
 						$error = $dblink_global->errorInfo();
 						if($error[0] != "00000")
 						{
@@ -207,7 +207,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 
 					if($is_menu)
 					{
-						@$dblink_global->query($default_bookmark);
+						@$dblink_global->query($default_menu_item);
 					}
 				}
 			}
