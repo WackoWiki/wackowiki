@@ -25,7 +25,7 @@ require ('themes/_common/_header.php');
 	// default menu
 	if ($menu = $this->get_default_menu($user['lang']))
 	{
-		foreach (menu as $menu_item)
+		foreach ($menu as $menu_item)
 		{
 			$formatted_menu = $this->format($this->format($menu_item[1]), 'post_wacko');
 
@@ -89,7 +89,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 	// menu
 	if ($menu = $this->get_menu())
 	{
-		foreach (menu as $menu_item)
+		foreach ($menu as $menu_item)
 		{
 			$formatted_menu = $this->format($menu_item[1], 'post_wacko');
 
