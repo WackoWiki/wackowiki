@@ -4551,7 +4551,7 @@ class Wacko
 			}
 		}
 
-		$user_id			= $this->get_user_id('System');
+		$user_id		= $this->get_user_id('System');
 		$default_menu	= $this->get_user_menu($user_id, $lang);
 
 		// parsing menu items into link table
@@ -4646,7 +4646,7 @@ class Wacko
 			{
 				$menu[] = array(
 					$this->page['page_id'],
-					'(('.$this->tag.' '.($this->get_page_title() ? $this->get_page_title() : $this->tag).($user['lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))'
+					$this->format('(('.$this->tag.' '.($this->get_page_title() ? $this->get_page_title() : $this->tag).($user['lang'] != $this->page_lang ? ' @@'.$this->page_lang : '').'))', 'wacko')
 					);
 
 				$_menu_position = $this->load_all(
@@ -4668,7 +4668,7 @@ class Wacko
 			foreach ($menu as $menu_item)
 			{
 				$menu_page_ids[] = $menu_item[0];
-				$menu_formatted[] = array ($menu_item[0], $this->format($menu_item[1], 'wacko'));
+				$menu_formatted[] = array ($menu_item[0], $menu_item[1]);
 			}
 
 			$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
@@ -4705,7 +4705,7 @@ class Wacko
 			foreach ($menu as $menu_item)
 			{
 				$menu_page_ids[] = $menu_item[0];
-				$menu_formatted[] = array ($menu_item[0], $this->format($menu_item[1], 'wacko'));
+				$menu_formatted[] = array ($menu_item[0], $menu_item[1]);
 			}
 
 			$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
