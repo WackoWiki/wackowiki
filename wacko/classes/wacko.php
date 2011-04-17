@@ -4554,16 +4554,20 @@ class Wacko
 		$user_id		= $this->get_user_id('System');
 		$default_menu	= $this->get_user_menu($user_id, $lang);
 
-		// parsing menu items into link table
-		foreach ($default_menu as $_default_menu)
+		if ($default_menu)
 		{
-			#$menu_page_ids[] = $menu_item[0];
-			$default_menu_formatted[] = array ($_default_menu[0], $_default_menu[1]);
+			// parsing menu items into link table
+			foreach ($default_menu as $_default_menu)
+			{
+				#$menu_page_ids[] = $menu_item[0];
+				$default_menu_formatted[] = array ($_default_menu[0], $_default_menu[1]);
+			}
+
+			#$this->debug_print_r($default_menu);
+			return $default_menu_formatted;
 		}
 
-		#$this->debug_print_r($default_menu);
 
-		return $default_menu_formatted;
 	}
 
 	function get_user_menu($user_id, $lang = '')
@@ -4625,15 +4629,19 @@ class Wacko
 				$menu = $this->get_default_menu($user['lang']);
 			}
 
-			// parsing menu items into link table
-			foreach ($menu as $menu_item)
+			if ($menu)
 			{
-				$menu_page_ids[] = $menu_item[0];
-				$menu_formatted[] = array ($menu_item[0], $this->format($menu_item[1], 'wacko'));
+				// parsing menu items into link table
+				foreach ($menu as $menu_item)
+				{
+					$menu_page_ids[] = $menu_item[0];
+					$menu_formatted[] = array ($menu_item[0], $this->format($menu_item[1], 'wacko'));
+				}
+
+				$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
+				$_SESSION[$this->config['session_prefix'].'_'.'menu']			= $menu_formatted;
 			}
 
-			$_SESSION[$this->config['session_prefix'].'_'.'menu_page_id']	= $menu_page_ids;
-			$_SESSION[$this->config['session_prefix'].'_'.'menu']			= $menu_formatted;
 		}
 
 		// adding new menu item
