@@ -100,7 +100,7 @@ else if($this->has_access('write'))
 						// menu
 						if ($menu = $this->get_menu())
 						{
-							foreach (menu as $menu_item)
+							foreach ($menu as $menu_item)
 							{
 								$formatted_menu = $this->format($menu_item[1], 'post_wacko');
 
