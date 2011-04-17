@@ -59,20 +59,24 @@ echo "\n";
 	$this->context[++$this->current_context] = '/';
 	$this->stop_link_tracking();
 
-	foreach ($this->get_default_menu($user['lang']) as $menu_item)
+	// default menu
+	if ($menu = $this->get_default_menu($user['lang']))
 	{
-		$formatted_menu = $this->format($this->format(strtolower($menu_item[1])), 'post_wacko');
-
-		if ($this->page['page_id'] == $menu_item[0])
+		foreach (menu as $menu_item)
 		{
-			echo '<span class="active">';
-		}
-		else
-		{
-			echo '<span>';
-		}
+			$formatted_menu = $this->format($this->format(strtolower($menu_item[1])), 'post_wacko');
 
-		echo $formatted_menu."</span>\n";
+			if ($this->page['page_id'] == $menu_item[0])
+			{
+				echo '<span class="active">';
+			}
+			else
+			{
+				echo '<span>';
+			}
+
+			echo $formatted_menu."</span>\n";
+		}
 	}
 
 	$this->start_link_tracking();
@@ -213,21 +217,24 @@ echo "\n";
 											// outputs bookmarks menu
 											echo "<ol>\n";
 
-											// bookmarks
-											foreach ($this->get_menu() as $menu_item)
+											// menu
+											if ($menu = $this->get_menu())
 											{
-												$formatted_menu = $this->format($menu_item[1], 'post_wacko');
-
-												if ($this->page['page_id'] == $menu_item[0])
+												foreach (menu as $menu_item)
 												{
-													echo '<li class="active">';
-												}
-												else
-												{
-													echo '<li>';
-												}
+													$formatted_menu = $this->format($menu_item[1], 'post_wacko');
 
-												echo $formatted_menu."</li>\n";
+													if ($this->page['page_id'] == $menu_item[0])
+													{
+														echo '<li class="active">';
+													}
+													else
+													{
+														echo '<li>';
+													}
+
+													echo $formatted_menu."</li>\n";
+												}
 											}
 
 
