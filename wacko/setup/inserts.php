@@ -98,7 +98,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 						mysqli_query($dblink_global, $default_menu_item);
 						if(mysqli_errno($dblink_global) != 0)
 						{
-							output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingDefaultBookmark'])." - ".mysqli_error($dblink_global));
+							output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingDefaultMenuItem'])." - ".mysqli_error($dblink_global));
 						}
 					}
 				}
@@ -190,7 +190,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 						$error = $dblink_global->errorInfo();
 						if($error[0] != "00000")
 						{
-							output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingDefaultBookmark'])." - ".($error[2]));
+							output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingDefaultMenuItem'])." - ".($error[2]));
 						}
 					}
 				}
