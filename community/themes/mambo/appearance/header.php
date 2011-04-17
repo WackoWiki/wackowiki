@@ -48,21 +48,24 @@ require ('themes/_common/_header.php');
 	// main page
 	echo "<li>".$this->compose_link_to_page($this->config['root_page'])."</li>\n";
 
-	// bookmarks
-	foreach ($this->get_menu() as $menu_item)
+	// menu
+	if ($menu = $this->get_menu())
 	{
-		$formatted_menu = $this->format($menu_item[1], 'post_wacko');
-
-		if ($this->page['page_id'] == $menu_item[0])
+		foreach (menu as $menu_item)
 		{
-			echo '<li class="active">';
-		}
-		else
-		{
-			echo '<li>';
-		}
+			$formatted_menu = $this->format($menu_item[1], 'post_wacko');
 
-		echo $formatted_menu."</li>\n";
+			if ($this->page['page_id'] == $menu_item[0])
+			{
+				echo '<li class="active">';
+			}
+			else
+			{
+				echo '<li>';
+			}
+
+			echo $formatted_menu."</li>\n";
+		}
 	}
 
 	if ($this->get_user())
