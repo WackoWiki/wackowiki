@@ -51,7 +51,7 @@ else
 }
 
 /// Processing of our special form
-if (isset($_POST['_user_bookmarks']))
+if (isset($_POST['_user_menu']))
 {
 	$_menu	= load_user_menu($this, $_user_id);
 	$a			= $_menu;
@@ -68,7 +68,7 @@ if (isset($_POST['_user_bookmarks']))
 
 	$object->data['user_menu'] = &$b;
 
-	if (isset($_POST['update_bookmarks']))
+	if (isset($_POST['update_menu']))
 	{
 		// repos
 		$data = array();
@@ -99,7 +99,7 @@ if (isset($_POST['_user_bookmarks']))
 				"LIMIT 1");
 		}
 	}
-	else if (isset($_POST['add_bookmarks']))
+	else if (isset($_POST['add_menu_item']))
 	{
 		// process input
 		if (!empty($_POST['tag']))
@@ -182,7 +182,7 @@ if (isset($_POST['_user_bookmarks']))
 
 		$this->set_message($message);
 	}
-	else if (isset($_POST['delete_bookmarks']))
+	else if (isset($_POST['delete_menu_item']))
 	{
 		$deletion = '';
 
@@ -221,7 +221,7 @@ if ($_user_id)
 
 		// user is logged in; display config form
 		echo $this->form_open();
-		echo "<input type=\"hidden\" name=\"_user_bookmarks\" value=\"yes\" />";
+		echo "<input type=\"hidden\" name=\"_user_menu\" value=\"yes\" />";
 
 		echo "<table>";
 		echo "<tr><th>".$this->get_translation('BookmarkNumber')."</th><th>".$this->get_translation('BookmarkTitle')."</th><th>".$this->get_translation('BookmarkPage')."</th><th>".$this->get_translation('BookmarkMark')."</th><!--<th>Display</th><th>Lang</th>--></tr>";
@@ -234,10 +234,10 @@ if ($_user_id)
 			</td><td>
 			<input name=\"title_".$menu_item['menu_id']."\" type=\"text\" size=\"40\" value=\"".$menu_item['menu_title']."\" />
 			</td><td>
-			<!--<input type=\"radio\" id=\"bookmark".$menu_item['menu_id']."\" name=\"change\" value=\"".$menu_item['menu_id']."\" /> -->
-			<label for=\"bookmark".$menu_item['menu_id']."\" title=\"".$menu_item['title']."\">&raquo; ".$menu_item['tag']."</label>
+			<!--<input type=\"radio\" id=\"menu_item".$menu_item['menu_id']."\" name=\"change\" value=\"".$menu_item['menu_id']."\" /> -->
+			<label for=\"menu_item".$menu_item['menu_id']."\" title=\"".$menu_item['title']."\">&raquo; ".$menu_item['tag']."</label>
 			</td><td>
-			<input id=\"bookmark".$menu_item['menu_id']."\" name=\"delete_".$menu_item['menu_id']."\" type=\"checkbox\" />
+			<input id=\"menu_item".$menu_item['menu_id']."\" name=\"delete_".$menu_item['menu_id']."\" type=\"checkbox\" />
 			</td><!--<td>
 
 			".(!empty($menu_item['menu_title']) ? $menu_item['menu_title'] : $menu_item['title'])."
@@ -253,9 +253,9 @@ if ($_user_id)
 
 		echo "<tfoot>";
 		echo "<tr>\n<td colspan=\"2\">\n";
-		echo "<input name=\"update_bookmarks\" type=\"submit\" value=\"".$this->get_translation('BookmarkSaveChanges')."\" />";
+		echo "<input name=\"update_menu\" type=\"submit\" value=\"".$this->get_translation('BookmarkSaveChanges')."\" />";
 		echo "</td><td>";
-		echo "<input name=\"delete_bookmarks\" type=\"submit\" value=\"".$this->get_translation('BookmarkDeleteSelected')."\" />";
+		echo "<input name=\"delete_menu_item\" type=\"submit\" value=\"".$this->get_translation('BookmarkDeleteSelected')."\" />";
 		echo "</td>\n</tr>\n";
 		echo "</tfoot>";
 		echo "</table>";
@@ -266,11 +266,11 @@ if ($_user_id)
 	}
 
 	echo $this->form_open();
-	echo "<input type=\"hidden\" name=\"_user_bookmarks\" value=\"yes\" />";
+	echo "<input type=\"hidden\" name=\"_user_menu\" value=\"yes\" />";
 	echo "<br /><br />";
-	echo "<label for=\"add_bookmark\">".$this->get_translation('BookmarksAddPage').":</label><br />";
-	echo "<input id=\"add_bookmark\" name=\"tag\" value=\"\" size=\"60\" maxlength=\"255\" /> ".
-		"<input name=\"add_bookmarks\" type=\"submit\" value=\"".$this->get_translation('CreatePageButton')."\" />";
+	echo "<label for=\"add_menu_item\">".$this->get_translation('BookmarksAddPage').":</label><br />";
+	echo "<input id=\"add_menu_item\" name=\"tag\" value=\"\" size=\"60\" maxlength=\"255\" /> ".
+		"<input name=\"add_menu_item\" type=\"submit\" value=\"".$this->get_translation('CreatePageButton')."\" />";
 
 	echo $this->form_close();
 }

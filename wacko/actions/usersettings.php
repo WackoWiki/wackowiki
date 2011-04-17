@@ -185,7 +185,7 @@ else if ($user = $this->get_user())
 	#echo "<h3>".$this->get_translation('UserSettings')."</h3>";
 
 	// MENU
-	if (isset($_GET['bookmarks']) || isset($_POST['_user_bookmarks']) )
+	if (isset($_GET['menu']) || isset($_POST['_user_menu']) )
 	{
 		echo "<h3>".$this->get_translation('UserSettings')." &raquo; ".$this->get_translation('Bookmarks')."</h3>";
 		echo "<ul class=\"menu\"><li><a href=\"".$this->href('', '', '')."\">".$this->get_translation('UserSettingsGeneral')."</a></li><li class=\"active\">".$this->get_translation('Bookmarks')."</li><li><a href=\"".$this->href('', '', 'extended')."\">".$this->get_translation('UserSettingsExtended')."</a></li></ul><br /><br />\n";
@@ -196,7 +196,7 @@ else if ($user = $this->get_user())
 	else if (isset($_GET['extended']) || (isset($_POST['action'])&& $_POST['action'] == 'update_extended'))
 	{
 		echo "<h3>".$this->get_translation('UserSettings')." &raquo; ".$this->get_translation('UserSettingsExtended')."</h3>";
-		echo "<ul class=\"menu\"><li><a href=\"".$this->href('', '', '')."\">".$this->get_translation('UserSettingsGeneral')."</a></li><li><a href=\"".$this->href('', '', 'bookmarks')."\">".$this->get_translation('Bookmarks')."</a></li><li class=\"active\">".$this->get_translation('UserSettingsExtended')."</li></ul><br /><br />\n";
+		echo "<ul class=\"menu\"><li><a href=\"".$this->href('', '', '')."\">".$this->get_translation('UserSettingsGeneral')."</a></li><li><a href=\"".$this->href('', '', 'menu')."\">".$this->get_translation('Bookmarks')."</a></li><li class=\"active\">".$this->get_translation('UserSettingsExtended')."</li></ul><br /><br />\n";
 		echo $this->form_open();
 		echo "<input type=\"hidden\" name=\"action\" value=\"update_extended\" />";
 		?>
@@ -347,7 +347,7 @@ else if ($user = $this->get_user())
 			"LIMIT 1");
 
 		echo "<h3>".$this->get_translation('UserSettings')." &raquo; ".$this->get_translation('UserSettingsGeneral')."</h3>";
-		echo "<ul class=\"menu\"><li class=\"active\">".$this->get_translation('UserSettingsGeneral')."</li><li><a href=\"".$this->href('', '', 'bookmarks')."\">".$this->get_translation('Bookmarks')."</a></li><li><a href=\"".$this->href('', '', 'extended')."\">".$this->get_translation('UserSettingsExtended')."</a></li></ul><br /><br />\n";
+		echo "<ul class=\"menu\"><li class=\"active\">".$this->get_translation('UserSettingsGeneral')."</li><li><a href=\"".$this->href('', '', 'menu')."\">".$this->get_translation('Bookmarks')."</a></li><li><a href=\"".$this->href('', '', 'extended')."\">".$this->get_translation('UserSettingsExtended')."</a></li></ul><br /><br />\n";
 ?>
 <input type="hidden" name="action" value="update" />
 <div class="page_settings">
