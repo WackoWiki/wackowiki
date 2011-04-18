@@ -17,6 +17,8 @@ $wacko_language = array(
 	"ALPHA_P"			=> "A-Za-z\xb6\xb8-\xba\xbc\xbe-\xfe\/'",
 	"NpjLettersFrom"	=> "¶¸¹º¼¾¿ÀÚÛÜÝÞßàúûüýþáâãäåæçéêëìíïðñóòôõö÷ùÁÂÃÄÅÆÇÉÊËÌÍÏÐÑÓÔÕÖ×Ù",
 	"NpjLettersTo"		=> "aehioywiiyaehiyiyoywavgdezhiklmnoprsstyfxwavgdezhiklmnoprstyfxw",
+	"NpjCaps"			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÚÛÝÞß",
+	"NpjSmall"			=> "àáâãäå¸æçèéêëìíîïðñòóôõö÷øùüúûýþÿ",
 	"NpjBiLetters" => array(
 		"è"=>"th", "È"=>"th", "î"=>"ks", "Î"=>"ks", "ø"=>"ps", "Ø"=>"ps"
 	),
