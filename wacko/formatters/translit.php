@@ -6,20 +6,15 @@ if (!defined('IN_WACKO'))
 }
 
 // Translit
+$this->set_language($this->user_lang);
+#$this->set_language($this->page_lang);
+#$this->set_language($this->config['language']);
+
 $NpjLettersFrom	= $this->language['NpjLettersFrom'];
-#$NpjLettersFrom	= "אבגדהוחטךכלםמןנסעףפû";
 $NpjLettersTo	= $this->language['NpjLettersTo'];
-#$NpjLettersTo	= "abvgdeziklmnoprstufy";
+$NpjCaps		= $this->language['NpjCaps'];
+$NpjSmall		= $this->language['NpjSmall'];
 $NpjBiLetters	= $this->language['NpjBiLetters'];
-/*$NpjBiLetters	= array(
-	"י" => "jj", "¸" => "jo", "ז" => "zh", "ץ" => "kh", "ק" => "ch",
-	"צ"=>"oe", "ר" => "sh", "ש" => "shh", "‎" => "je", "‏" => "ju",
-	 "ÿ" => "ja", "ת" => "", "ü" => "ue",
-);*/
-$NpjCaps	= $this->language['NpjCaps'];
-#$NpjCaps		= "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÚÛÝÞ‗";
-$NpjSmall	= $this->language['NpjSmall'];
-#$NpjSmall		= "אבגדהו¸זחטיךכלםמןנסעףפץצקרשüתû‎‏ÿ";
 
 $tag = $text;
 //insert _ between words
