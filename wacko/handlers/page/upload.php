@@ -33,7 +33,7 @@ if ($user = $this->get_user())
 }
 else
 {
-	$user = GUEST;
+	$user		= GUEST;
 }
 
 if ($registered
@@ -43,7 +43,7 @@ if ($registered
 	($this->check_acl($user, $this->config['upload']))
 	)
 	&&
-	($this->has_access('write') && $this->has_access('read') || ($_POST['to'] == 'global'))
+	($this->has_access('upload') && $this->has_access('write') && $this->has_access('read') || $this->user_is_owner() || $this->is_admin() || (isset($_POST['to']) && $_POST['to'] == 'global'))
 	)
 {
 	if (isset($_GET['remove'])) // show the form
@@ -424,6 +424,7 @@ if ($registered
 								$forbid = 1;
 							}
 						}
+
 						if (!$forbid)
 						{
 							// 3. save to permanent location
@@ -525,6 +526,7 @@ if ($registered
 				$error = $this->get_translation('UploadMaxFileQuota').'. <br />Storage in use '.$this->binary_multiples($files[0]['used_quota'], true, true, true).' ('.round(($files[0]['used_quota']/$this->config['upload_quota_per_user']*100), 2).'%) of '.$this->binary_multiples($this->config['upload_quota_per_user'], true, true, true);
 			}
 		}
+
 		if ($error)
 		{
 			$this->set_message("<div class=\"error\">".$error."</div>");
@@ -539,6 +541,7 @@ else
 {
 	$this->set_message($this->get_translation('UploadForbidden'));
 }
+
 // show uploaded files for current page
 if ($this->has_access('read'))
 {

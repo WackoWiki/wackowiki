@@ -211,7 +211,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 				// add user page
 				$this->save_page($this->config['users_page'].'/'.$user_name, '', 'your page', 'auto created', '', '', '', ($lang ? $lang : $this->config['language']), '', $user_name, true);
 
-				// Send Email
+				// send email
 				if ($this->config['enable_email'] == true)
 				{
 					$subject = 	$this->get_translation('EmailWelcome').
