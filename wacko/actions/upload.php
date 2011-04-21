@@ -38,6 +38,7 @@ if ($registered
 ($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
 ($this->check_acl($user, $this->config['upload']))
 )
+&& ($this->has_access('upload') && $this->has_access('write') && $this->has_access('read')) || $this->user_is_owner() || $this->is_admin()
 )
 {
 	// displaying
@@ -45,7 +46,7 @@ if ($registered
 
 	if ($maxsize)
 	{
-		echo "<input type=\"hidden\" name=\"maxsize\" value=\"".floor(1 * $maxsize)."\" />";
+		echo '<input type="hidden" name="maxsize" value="'.floor(1 * $maxsize).'" />';
 	}
 
 	// if you have no write access and you are not admin, you can upload only "global" file
@@ -126,7 +127,7 @@ if ($registered
 }
 else
 {
-	echo "<em>".$this->get_translation('ActionDenied')."</em> ";
+	echo "<em>".$this->get_translation('UploadForbidden')."</em> ";
 }
 
 ?>

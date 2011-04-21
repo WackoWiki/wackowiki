@@ -182,9 +182,9 @@ $wacko_config_defaults = array(
 
 	'session_encrypt_cookie' => 0,
 	'antidupe' => 0,
-	'session_match_ip' => FALSE,
-	'session_match_useragent' => TRUE,
-	'session_use_db' => FALSE,
+	'session_match_ip' => false,
+	'session_match_useragent' => true,
+	'session_use_db' => false,
 	'session_time_to_update' => 300,
 
 	'enable_security_headers' => 1,

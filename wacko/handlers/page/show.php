@@ -275,7 +275,7 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 					&&
 						(
 							($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
-							($this->check_acl($user,$this->config['upload']))
+							($this->check_acl($user, $this->config['upload']))
 						)
 					)
 				{
