@@ -442,6 +442,7 @@ $wacko_translation = array(
 	'PageCloned' => '<em>Page %1 cloned.</em>',
 	'ClonedFrom' => 'Cloned from %1.',
 	'ClonedRedirect' => 'Edit after creation',
+	'MassClone'				=> 'Clone entire cluster',
 
 	'RenameText' => 'Rename',
 	'NewName' => 'Enter new name for this page',
@@ -638,7 +639,7 @@ $wacko_translation = array(
 	'SettingsRevisions' => 'Revisions',
 	'SettingsClone' => 'Clone',
 	'SettingsRename' => 'Rename',
-	'SettingsMassRename' => 'for entire cluster',
+	'MassRename' => 'for entire cluster',
 	'SettingsRemove' => 'Remove',
 	'SettingsPurge' => 'Purge',
 	'SettingsModerate' => 'Moderate',

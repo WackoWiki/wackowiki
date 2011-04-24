@@ -5,6 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// TODO:
 ?>
 <div id="page">
 <h3><?php echo $this->get_translation('ClonePage') ?> <?php echo $this->compose_link_to_page($this->tag, '', '', 0) ?></h3>
@@ -108,7 +109,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 		{
 			// TODO: clone all sheeps and optional ACLs
 			print "<p><b>".$this->get_translation('MassCloning')."</b><p>";   //!!!
-			#recursive_move($this, $this->tag );
+			recursive_clone($this, $this->tag );
 		}
 	}
 	else
@@ -129,9 +130,17 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 			echo $output;
 		}
 		?>
-		<br />
-		<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" ";  echo " /> <label for=\"redirect\">".$this->get_translation('ClonedRedirect')."</label>"; ?>
 		<br /><br />
+		<?php
+				echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" />";
+				echo " <label for=\"redirect\">".$this->get_translation('ClonedRedirect')."</label>"; ?>
+		<br />
+		<?php if ($this->check_acl($user,$this->config['rename_globalacl']))
+			{
+				echo "<input type=\"checkbox\" id=\"massclone\" name=\"massclone\" />";
+				echo " <label for=\"massclone\">".$this->get_translation('MassClone')."</label>";
+			}
+		?><br /><br />
 		<input name="submit" type="submit" value="<?php echo $this->get_translation('CloneButton'); ?>" /> &nbsp;
 		<input type="button" value="<?php echo str_replace("\n", " ", $this->get_translation('EditCancelButton')); ?>"
 		onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
@@ -151,3 +160,44 @@ else
 
 ?>
 </div>
+<?php
+
+function recursive_clone(&$parent, $root)
+{
+	$new_root = trim($_POST['newname'], '/');
+
+	if($root == '/')
+	{
+		exit; // who and where did intend to move root???
+	}
+
+	// FIXME: missing $owner_id
+	$query = "'".quote($parent->dblink, $parent->translit($root))."%'";
+	$pages = $parent->load_all(
+		"SELECT page_id, tag, supertag ".
+		"FROM ".$parent->config['table_prefix']."page ".
+		"WHERE supertag LIKE ".$query.
+		($owner_id
+			? " AND owner_id ='".quote($parent->dblink, $owner_id)."'"
+			: "").
+		" AND comment_on_id = '0'");
+
+	echo "<ol>\n";
+
+	foreach( $pages as $page )
+	{
+		echo "<li><b>".$page['tag']."</b>\n";
+
+		// $new_name = str_replace( $root, $new_root, $page['tag'] );
+		$new_name		= preg_replace('/'.preg_quote($root, '/').'/', preg_quote($new_root), $page['tag'], 1);
+		$super_new_name	= $parent->translit($new_name);
+		$edit_note		= isset($_POST['edit_note']) ? $_POST['edit_note'] : $edit_note;
+
+		$parent->clone_page($page['tag'], $new_name, $super_new_name, $edit_note);
+
+		echo "</li>\n";
+	}
+
+	echo "</ol>\n";
+}
+?>

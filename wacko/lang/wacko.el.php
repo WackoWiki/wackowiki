@@ -438,6 +438,7 @@ $wacko_translation = array(
 	'PageCloned' => '<em>Σελίδα %1 κλωνοποιημένα.</em>',
 	'ClonedFrom' => 'Τα κλωνοποιημένα από %1.',
 	'ClonedRedirect' => 'Επεξεργασία από τη δημιουργία',
+	'MassClone'				=> 'Clone entire cluster',
 
 	'RenameText' => 'Μετονομασία',
 	'NewName' => 'Εισήγαγε ένα νέο όνομα σε αυτή την σελίδα',
@@ -633,7 +634,7 @@ $wacko_translation = array(
 	'SettingsRevisions' => 'Διαφορές',
 	'SettingsClone' => 'Κλώνος',
 	'SettingsRename' => 'Μετονομασία',
-	'SettingsMassRename' => 'για ολόκληρο το cluster',
+	'MassRename' => 'για ολόκληρο το cluster',
 	'SettingsRemove' => 'Αφαίρεση',
 	'SettingsPurge' => 'Purge',
 	'SettingsModerate' => 'Moderate',
