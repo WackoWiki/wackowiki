@@ -438,6 +438,7 @@ $wacko_translation = array(
 	'PageCloned' => '<em>Page %1 cloned.</em>',
 	'ClonedFrom' => 'Cloned from %1.',
 	'ClonedRedirect' => 'Edit after creation',
+	'MassClone' => 'Clone entire cluster',
 
 	'RenameText' => 'Omdøb',
 	'NewName' => 'Skriv nyt navn for siden',
@@ -633,7 +634,7 @@ $wacko_translation = array(
 	'SettingsRevisions' => 'Versioner',
 	'SettingsClone' => 'Clone',
 	'SettingsRename' => 'Omdøb',
-	'SettingsMassRename' => 'for hele området',
+	'MassRename' => 'for hele området',
 	'SettingsRemove' => 'Slet',
 	'SettingsPurge' => 'Purge',
 	'SettingsModerate' => 'Moderate',

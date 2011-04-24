@@ -72,7 +72,7 @@ if ($registered
 				{
 					echo "<li>".$this->get_translation('BadName')."</li>\n";
 				}
-				//     if ($this->supertag == $super_new_name)
+				// if ($this->supertag == $super_new_name)
 				else if ($this->tag == $new_name)
 				{
 					echo "<li>".str_replace('%1', $this->compose_link_to_page($new_name, '', '', 0), $this->get_translation('AlreadyNamed'))."</li>\n";
@@ -148,11 +148,21 @@ if ($registered
 
 			?> <input type="hidden" name="rename" value="1" /><input type="text" name="newname" value="<?php echo $this->tag;?>" size="40" /><br />
 <br />
-			<?php echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" "; if ($this->config['default_rename_redirect'] == 1){echo "checked=\"checked\"";}; echo " /> <label for=\"redirect\">".$this->get_translation('NeedRedirect')."</label>"; ?>
-<br />
-			<?php if ($this->check_acl($user,$this->config['rename_globalacl']))
+			<?php
+			echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" ";
+
+			if ($this->config['default_rename_redirect'] == 1)
 			{
-				echo "<input type=\"checkbox\" id=\"massrename\" name=\"massrename\" "; echo " /> <label for=\"massrename\">".$this->get_translation('SettingsMassRename')."</label>";
+				echo "checked=\"checked\"";
+			};
+
+			echo " /> <label for=\"redirect\">".$this->get_translation('NeedRedirect')."</label>"; ?>
+<br />
+			<?php
+			if ($this->check_acl($user,$this->config['rename_globalacl']))
+			{
+				echo "<input type=\"checkbox\" id=\"massrename\" name=\"massrename\" />";
+				echo " <label for=\"massrename\">".$this->get_translation('MassRename')."</label>";
 			}
 			?> <br />
 <br />
@@ -162,8 +172,7 @@ if ($registered
 			?> <br />
 <br />
 <input name="submit" type="submit" value="<?php echo $this->get_translation('RenameButton'); ?>" /> &nbsp;
-<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>"
-	onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 <br />
 <br />
 			<?php echo $this->form_close();
@@ -215,7 +224,7 @@ function recursive_move(&$parent, $root)
 
 function move(&$parent, $old_page, $new_name )
 {
-	//     $new_name = trim($_POST['newname'], '/');
+	// $new_name = trim($_POST['newname'], '/');
 	$user		= $parent->get_user();
 	$user_id	= $parent->get_user_id();
 
@@ -230,7 +239,7 @@ function move(&$parent, $old_page, $new_name )
 		{
 			echo "<li>".$parent->get_translation('BadName')."</li>\n";
 		}
-		//     if ($old_page['supertag'] == $super_new_name)
+		// if ($old_page['supertag'] == $super_new_name)
 		else if ($old_page['tag'] == $new_name)
 		{
 			echo "<li>".str_replace('%1', $parent->link($new_name), $parent->get_translation('AlreadyNamed'))."</li>\n";
