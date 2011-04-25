@@ -150,22 +150,21 @@ if ($this->method == 'show') {
 	if ($this->has_access('read') && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->get_user()))
 	{
 		// store files display in session
-		$tag = $this->tag;
-		if (!isset($_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag]))
-		$_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag] = ($this->user_wants_files() ? "1" : "0");
+		if (!isset($_SESSION[$this->config['session_prefix'].'_'."show_files"][$this->page['page_id']]))
+		$_SESSION[$this->config['session_prefix'].'_'."show_files"][$this->page['page_id']] = ($this->user_wants_files() ? "1" : "0");
 
 		switch(isset($_GET['show_files']))
 		{
 			case "0":
-				$_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag] = 0;
+				$_SESSION[$this->config['session_prefix'].'_'."show_files"][$this->page['page_id']] = 0;
 				break;
 			case "1":
-				$_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag] = 1;
+				$_SESSION[$this->config['session_prefix'].'_'."show_files"][$this->page['page_id']] = 1;
 				break;
 		}
 
 		// display files!
-		if ($this->page && $_SESSION[$this->config['session_prefix'].'_'."show_files"][$tag])
+		if ($this->page && $_SESSION[$this->config['session_prefix'].'_'."show_files"][$this->page['page_id']])
 		{
 			// display files header
 			?>
@@ -232,22 +231,21 @@ switch (count($files))
 		$comments = $this->load_comments($this->page['page_id']);
 
 		// store comments display in session
-		$tag = $this->tag;
-		if (!isset($_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag]))
-		$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag] = ($this->user_wants_comments() ? "1" : "0");
+		if (!isset($_SESSION[$this->config['session_prefix'].'_'."show_comments"][$this->page['page_id']]))
+		$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$this->page['page_id']] = ($this->user_wants_comments() ? "1" : "0");
 
 		switch(isset($_GET['show_comments']))
 		{
 			case "0":
-				$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag] = 0;
+				$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$this->page['page_id']] = 0;
 				break;
 			case "1":
-				$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag] = 1;
+				$_SESSION[$this->config['session_prefix'].'_'."show_comments"][$this->page['page_id']] = 1;
 				break;
 		}
 
 		// display comments!
-		if ($this->page && $_SESSION[$this->config['session_prefix'].'_'."show_comments"][$tag])
+		if ($this->page && $_SESSION[$this->config['session_prefix'].'_'."show_comments"][$this->page['page_id']])
 		{
 			// display comments header
 			?>

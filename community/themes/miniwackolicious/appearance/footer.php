@@ -22,8 +22,8 @@
 				<?php if ($this->get_user()) { ?>
 				<ul>
 					<?php /* Referer link */ echo '<li id="page_link"><a href="'.$this->href('referrers').'" title="'.$this->get_translation('ReferrersText').'"><span class="backendbutton"></span><img class="contexticon" src="'.$this->config['theme_url'].'icons/page_link.png" alt="" />'.$this->get_translation('ReferrersText').'</a><span class="sep">,</span></li>'."\n"; ?>
-					<?php /* Show uploads link*/ echo ($this->page && $this->get_user() && !isset($_SESSION['show_files'][$this->tag])) ? '<li id="page_attach"><a href="'.$this->href('', '', 'show_files=1#files') .'"><span class="backendbutton" title="'.$this->get_translation('ShowFiles').'"></span><img class="contexticon" src="'.$this->config['theme_url'].'icons/page_attach.png" alt="" />'.$this->get_translation('ShowFiles').'</a></li>'."\n":''; ?>
-					<?php /* Hide uploads link*/ echo ($this->page && $this->get_user() && isset($_SESSION['show_files'][$this->tag])) ? '<li><a href="'.$this->href('', '', 'show_files=0') .'">'.$this->get_translation('HideFiles').'</a></li>'."\n":''; ?>
+					<?php /* Show uploads link*/ echo ($this->page && $this->get_user() && !isset($_SESSION['show_files'][$this->page['page_id']])) ? '<li id="page_attach"><a href="'.$this->href('', '', 'show_files=1#files') .'"><span class="backendbutton" title="'.$this->get_translation('ShowFiles').'"></span><img class="contexticon" src="'.$this->config['theme_url'].'icons/page_attach.png" alt="" />'.$this->get_translation('ShowFiles').'</a></li>'."\n":''; ?>
+					<?php /* Hide uploads link*/ echo ($this->page && $this->get_user() && isset($_SESSION['show_files'][$this->page['page_id']])) ? '<li><a href="'.$this->href('', '', 'show_files=0') .'">'.$this->get_translation('HideFiles').'</a></li>'."\n":''; ?>
 				</ul>
 				<?php } ?>
 			</div> <!-- /pageinfo -->
