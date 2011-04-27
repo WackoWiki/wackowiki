@@ -160,6 +160,8 @@ $alter_page_r4_3_33 = "ALTER TABLE {$pref}page ADD formatting VARCHAR(20) NOT NU
 $alter_page_r4_3_34 = "ALTER TABLE {$pref}page ADD reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER reviewed";
 $alter_page_r4_3_35 = "ALTER TABLE {$pref}page ADD reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER reviewed";
 $alter_page_r4_3_36 = "ALTER TABLE {$pref}page ADD menu_tag VARCHAR(250) NOT NULL DEFAULT '' AFTER supertag";
+$alter_page_r4_3_37 = "ALTER TABLE {$pref}page ADD depth INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER menu_tag, ADD INDEX idx_depth(depth)";
+$alter_page_r4_3_38 = "ALTER TABLE {$pref}page ADD parent_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER depth";
 
 $update_page_r4_3_1 = "UPDATE {$pref}page SET body_r=''";
 
@@ -241,6 +243,7 @@ $alter_revision_r4_3_19 = "ALTER TABLE {$pref}revision ADD reviewed TINYINT(1) U
 $alter_revision_r4_3_20 = "ALTER TABLE {$pref}revision ADD reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER reviewed";
 $alter_revision_r4_3_21 = "ALTER TABLE {$pref}revision ADD reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER reviewed";
 $alter_revision_r4_3_22 = "ALTER TABLE {$pref}revision ADD menu_tag VARCHAR(250) NOT NULL DEFAULT '' AFTER supertag";
+$alter_revision_r4_3_23 = "ALTER TABLE {$pref}revision ADD version_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER page_id";
 
 $update_revision_r4_3_1 = "UPDATE {$pref}revision AS revisions, (SELECT user_id, user_name FROM {$pref}user) AS users SET revisions.owner_id = users.user_id WHERE revisions.owner = users.user_name";
 $update_revision_r4_3_2 = "UPDATE {$pref}revision AS revisions, (SELECT user_id, user_name FROM {$pref}user) AS users SET revisions.user_id = users.user_id WHERE revisions.user = users.user_name";

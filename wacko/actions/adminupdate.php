@@ -606,6 +606,121 @@ if ($this->is_admin())
 }
 
 ########################################################
+##            Set depth based on tag                  ##
+########################################################
+
+if ($this->is_admin())
+{
+	echo "<h4>7. Set page depth based on tag:</h4>";
+
+	if (!isset($_POST['set_depth']))
+	{
+		echo $this->form_open();
+		?>
+		<input type="submit" name="set_depth"  value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
+		<?php
+		echo $this->form_close();
+	}
+	// move global files from \\files to \\files\global folder
+	else if (isset($_POST['set_depth']))
+	{
+		$pages = $this->load_all(
+			"SELECT page_id, tag ".
+			"FROM {$this->config['table_prefix']}page ".
+			"WHERE comment_on_id = '0'");
+
+		if (!empty($pages))
+		{
+			echo "<table><tr><th>page_id</th><th>tag</th><th>depth</th></tr>";
+
+			foreach ($pages as $page)
+			{
+				// determine the depth
+				$_depth_array	= explode('/', $page['tag']);
+				$depth			= count( $_depth_array );
+
+				$this->sql_query(
+					"UPDATE {$this->config['table_prefix']}page ".
+					"SET depth = '".quote($this->dblink, $depth)."' ".
+					"WHERE page_id = '".quote($this->dblink, $page['page_id'])."' ".
+					"LIMIT 1");
+
+				echo "<tr><td>".$page['page_id']."</td><td>".$page['tag']."</td><td>".$depth."</td></tr>";
+			}
+
+			echo "</table>";
+			echo "<br />Depth set";
+		}
+		else
+		{
+			echo "No pages found.";
+		}
+	}
+}
+
+########################################################
+##            Set version_id for revision             ##
+########################################################
+
+if ($this->is_admin())
+{
+	echo "<h4>8. Set version_id:</h4>";
+
+	if (!isset($_POST['set_version_id']))
+	{
+		echo $this->form_open();
+		?>
+		<input type="submit" name="set_version_id"  value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
+		<?php
+		echo $this->form_close();
+	}
+	// move global files from \\files to \\files\global folder
+	else if (isset($_POST['set_version_id']))
+	{
+		$pages = $this->load_all(
+			"SELECT page_id ".
+			"FROM {$this->config['table_prefix']}revision ".
+			"GROUP BY page_id");
+
+		if (!empty($pages))
+		{
+			echo "<table><tr><th>page_id</th><th>tag</th><th>version</th></tr>";
+
+			foreach ($pages as $page)
+			{
+				$_revisions = $this->load_all(
+					"SELECT revision_id, page_id ".
+					"FROM {$this->config['table_prefix']}revision ".
+					"WHERE page_id = '".quote($this->dblink, $page['page_id'])."' ".
+					"ORDER BY modified DESC");
+
+				$t = count($_revisions);
+
+				foreach ($_revisions as $_revision)
+				{
+					$version_id = $t--;
+
+					$this->sql_query(
+						"UPDATE {$this->config['table_prefix']}revision ".
+						"SET version_id = '".quote($this->dblink, $version_id)."' ".
+						"WHERE revision_id = '".quote($this->dblink, $_revision['revision_id'])."' ".
+						"LIMIT 1");
+
+					echo "<tr><td>".$_revision['page_id']."</td><td>".$_revision['revision_id']."</td><td>".$version_id."</td></tr>";
+				}
+			}
+
+			echo "</table>";
+			echo "<br />Version_id set in revisions";
+		}
+		else
+		{
+			echo "No pages found.";
+		}
+	}
+}
+
+########################################################
 ##            MIGRATE ACLs to new scheme              ##
 ########################################################
 

@@ -115,6 +115,8 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"tag VARCHAR(250) NOT NULL DEFAULT '',".
 					"supertag VARCHAR(250) NOT NULL DEFAULT '',".
 					"menu_tag VARCHAR(250) NOT NULL DEFAULT '',".
+					"depth INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"parent_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".
@@ -152,6 +154,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"FULLTEXT KEY body (body),".
 					"UNIQUE KEY idx_tag (tag),".
 					"KEY idx_supertag (supertag),".
+					"KEY idx_depth(depth),".
 					"KEY idx_created (created),".
 					"KEY idx_modified (modified),".
 					"KEY idx_minor_edit (minor_edit),".
@@ -194,6 +197,7 @@ $table_referrer = "CREATE TABLE {$pref}referrer (".
 $table_revision = "CREATE TABLE {$pref}revision (".
 					"revision_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"version_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"title VARCHAR(100) NOT NULL DEFAULT '',".

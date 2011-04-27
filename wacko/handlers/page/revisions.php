@@ -51,7 +51,7 @@ if (!isset($this->page['page_id']))
 if ($this->has_access('read'))
 {
 	// load revisions for this page
-	if ($pages = $this->load_revisions($this->page['page_id'], $hide_minor_edit))
+	if ($revisions = $this->load_revisions($this->page['page_id'], $hide_minor_edit))
 	{
 		$this->context[++$this->current_context] = '';
 		$output .= $this->form_open('diff', '', 'get');
@@ -84,9 +84,9 @@ if ($this->has_access('read'))
 		}
 
 		$c = 0;
-		$t = $a = count($pages);
+		$t = $a = count($revisions);
 
-		foreach ($pages as $num => $page)
+		foreach ($revisions as $num => $page)
 		{
 			if ($page['edit_note'])
 			{

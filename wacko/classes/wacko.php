@@ -259,7 +259,7 @@ class Wacko
 				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
 					"AND file_name = '".quote($this->dblink, $file_name)."'");
 
-			if (sizeof($what) == 0)
+			if (count($what) == 0)
 			{
 				return false;
 			}
@@ -1238,7 +1238,7 @@ class Wacko
 	// STANDARD QUERIES
 	function load_revisions($page_id, $minor_edit = '')
 	{
-		$pages_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.user_name as user, o.user_name as reviewer ';
+		$pages_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name as user, o.user_name as reviewer ';
 
 		$rev = $this->load_all(
 			"SELECT p.revision_id AS revision_m_id, ".$pages_meta." ".
@@ -1435,12 +1435,21 @@ class Wacko
 			"SELECT DISTINCT $meta, MAX(r.modified) AS date ".
 			"FROM {$this->config['table_prefix']}revision r ".
 			"LEFT JOIN {$this->config['table_prefix']}page p ON ".
-				"(r.tag = p.tag) ".
-			"WHERE p.tag IS NULL ".
-			"GROUP BY r.tag ".
+				"(r.page_id = p.page_id) ".
+			"WHERE p.page_id IS NULL ".
+			"GROUP BY r.page_id ".
 			"ORDER BY date DESC, r.tag ASC ".
 			( $limit > 0 ? "LIMIT $limit" : '' ), $cache);
 	}
+
+	function get_parent_list()
+	{}
+
+	function get_sibling_list()
+	{}
+
+	function get_child_list()
+	{}
 
 	// MAILER
 	// $email_to			- recipient address
@@ -1705,6 +1714,10 @@ class Wacko
 					$upload_acl		= $this->config['default_upload_acl'];
 				}
 
+				// determine the depth
+				$_depth_array	= explode('/', $tag);
+				$depth			= count($_depth_array);
+
 				$this->sql_query(
 					"INSERT INTO ".$this->config['table_prefix']."page SET ".
 						"comment_on_id 	= '".quote($this->dblink, $comment_on_id)."', ".
@@ -1712,6 +1725,7 @@ class Wacko
 						"created		= NOW(), ".
 						"modified		= NOW(), ".
 						"commented		= NOW(), ".
+						"depth			= '".quote($this->dblink, $depth)."', ".
 						"owner_id		= '".quote($this->dblink, $owner_id)."', ".
 						"user_id		= '".quote($this->dblink, $user_id)."', ".
 						"ip				= '".quote($this->dblink, $ip)."', ".
@@ -2067,10 +2081,21 @@ class Wacko
 			$old_page[$key] = quote($this->dblink, $old_page[$key]);
 		}
 
+		// get new version_id
+		$_old_version = $this->load_single(
+			"SELECT version_id ".
+			"FROM {$this->config['table_prefix']}revision ".
+			"WHERE page_id = '".quote($this->dblink, $old_page['page_id'])."' ".
+			"ORDER BY version_id DESC ".
+			"LIMIT 1");
+
+		$version_id = $_old_version['version_id'] + 1;
+
 		// move revision
 		$this->sql_query(
 			"INSERT INTO {$this->config['table_prefix']}revision SET ".
 				"page_id		= '{$old_page['page_id']}', ".
+				"version_id		= '{$version_id}', ".
 				"tag			= '{$old_page['tag']}', ".
 				"modified		= '{$old_page['modified']}', ".
 				"body			= '{$old_page['body']}', ".
@@ -5450,11 +5475,16 @@ class Wacko
 			$new_supertag = $this->translit($new_tag);
 		}
 
+		// determine the depth
+		$_depth_array	= explode('/', $new_tag);
+		$new_depth		= count($_depth_array);
+
 		return
 			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."revision SET ".
 					"tag		= '".quote($this->dblink, $new_tag)."', ".
-					"supertag	= '".quote($this->dblink, $new_supertag)."' ".
+					"supertag	= '".quote($this->dblink, $new_supertag)."', ".
+					"depth	= '".quote($this->dblink, $new_depth)."' ".
 				"WHERE tag		= '".quote($this->dblink, $tag)."' ")
 			&&
 			$this->sql_query(
@@ -5830,25 +5860,25 @@ class Wacko
 				if ($k == 0)
 				{
 					//uppercase
-					$password .= substr(str_shuffle($chars_uc), rand(0, sizeof($chars_uc) - 2), 1);
+					$password .= substr(str_shuffle($chars_uc), rand(0, count($chars_uc) - 2), 1);
 					$uc++;
 				}
 				if ($k == 1)
 				{
 					//lowercase
-					$password .= substr(str_shuffle($chars_lc), rand(0, sizeof($chars_lc) - 2), 1);
+					$password .= substr(str_shuffle($chars_lc), rand(0, count($chars_lc) - 2), 1);
 					$lc++;
 				}
 				if ($k == 2)
 				{
 					//digits
-					$password .= substr(str_shuffle($digits), rand(0, sizeof($digits) - 2), 1);
+					$password .= substr(str_shuffle($digits), rand(0, count($digits) - 2), 1);
 					$di++;
 				}
 				if ($k == 3)
 				{
 					//symbols
-					$password .= substr(str_shuffle($symbols), rand(0, sizeof($symbols) - 2), 1);
+					$password .= substr(str_shuffle($symbols), rand(0, count($symbols) - 2), 1);
 					$sy++;
 				}
 			}
