@@ -28,7 +28,7 @@ $xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 if ($this->has_access('read') && $this->hide_revisions === false )
 {
 	// load revisions for this page
-	if ($pages = $this->load_revisions($this->page['page_id']))
+	if ($revisions = $this->load_revisions($this->page['page_id']))
 	{
 		$max = 10;
 
@@ -36,7 +36,7 @@ if ($this->has_access('read') && $this->hide_revisions === false )
 		$_GET['b'] = -1;
 		$_GET['diffmode'] = 1;
 
-		foreach ($pages as $page)
+		foreach ($revisions as $page)
 		{
 			$c++;
 

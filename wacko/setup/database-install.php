@@ -54,28 +54,28 @@ function random_seed($length, $seed_complexity)
 			if ($k == 0)
 			{
 				//uppercase
-				$seed .= substr(str_shuffle($chars_uc), rand(0, sizeof($chars_uc) - 2), 1);
+				$seed .= substr(str_shuffle($chars_uc), rand(0, count($chars_uc) - 2), 1);
 				$uc++;
 			}
 
 			if ($k == 1)
 			{
 				//lowercase
-				$seed .= substr(str_shuffle($chars_lc), rand(0, sizeof($chars_lc) - 2), 1);
+				$seed .= substr(str_shuffle($chars_lc), rand(0, count($chars_lc) - 2), 1);
 				$lc++;
 			}
 
 			if ($k == 2)
 			{
 				//digits
-				$seed .= substr(str_shuffle($digits), rand(0, sizeof($digits) - 2), 1);
+				$seed .= substr(str_shuffle($digits), rand(0, count($digits) - 2), 1);
 				$di++;
 			}
 
 			if ($k == 3)
 			{
 				//symbols
-				$seed .= substr(str_shuffle($symbols), rand(0, sizeof($symbols) - 2), 1);
+				$seed .= substr(str_shuffle($symbols), rand(0, count($symbols) - 2), 1);
 				$sy++;
 			}
 		}
@@ -581,6 +581,8 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_34, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_35, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_36, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_37, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_38, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_11, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_12, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
@@ -637,6 +639,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_20, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_21, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_22, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_23, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysql_query($update_revision_r4_3_6, $dblink), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
 
@@ -974,6 +977,8 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_34), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_35), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_36), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_37), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_38), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_11), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_12), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
@@ -1030,6 +1035,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_20), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_21), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_22), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_23), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_6), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
 
@@ -1376,6 +1382,8 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_34, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_35, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_36, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_37, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_38, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 
 					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_11, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_12, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
@@ -1432,6 +1440,7 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_20, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_21, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_22, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_23, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 
 					test_pdo(str_replace('%1', 'revision', $lang['UpdateTable']), $update_revision_r4_3_6, str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
 
