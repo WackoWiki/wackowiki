@@ -64,7 +64,7 @@ if ($registered
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
 				"AND f.upload_id ='".quote($this->dblink, $_GET['file_id'])."'");
 
-		if (sizeof($file) > 0)
+		if (count($file) > 0)
 		{
 			if ($this->is_admin() || (
 				$page_id && (
@@ -127,7 +127,7 @@ if ($registered
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
 				"AND f.upload_id ='".quote($this->dblink, $_GET['file_id'])."'");
 
-		if (sizeof($file) > 0)
+		if (count($file) > 0)
 		{
 			if ($this->is_admin() || (
 				$page_id && (
@@ -196,7 +196,7 @@ if ($registered
 				"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
 					"AND f.upload_id ='".quote($this->dblink, $_POST['file_id'])."'");
 
-			if (sizeof($file) > 0)
+			if (count($file) > 0)
 			{
 				if ($this->is_admin() || (
 					$page_id && (
@@ -262,7 +262,7 @@ if ($registered
 				"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
 					"AND f.upload_id ='".quote($this->dblink, $_POST['file_id'])."'");
 
-			if (sizeof($file) > 0)
+			if (count($file) > 0)
 			{
 				if ($this->is_admin() || (
 					$page_id && (
@@ -342,8 +342,8 @@ if ($registered
 				{
 					// 1. check out $data
 					$_data	= explode('.', $_FILES['file']['name']);
-					$ext	= $_data[ sizeof($_data)-1 ];
-					unset($_data[ sizeof($_data)-1 ]);
+					$ext	= $_data[ count($_data)-1 ];
+					unset($_data[ count($_data)-1 ]);
 
 					// 3. extensions
 					$ext	= strtolower($ext);
@@ -439,7 +439,7 @@ if ($registered
 							else
 							{
 								$small_name = explode('@', $result_name);
-								$small_name = $small_name[ sizeof($small_name) -1 ];
+								$small_name = $small_name[ count($small_name) -1 ];
 							}
 
 							$file_size_kb	= ceil($file_size / 1024);

@@ -183,7 +183,7 @@ if ($this->user_is_owner() || $this->is_admin())
 		}
 
 		// redirect back to page
-		$this->set_message($message."!");
+		$this->set_message($message.'!');
 		$this->redirect($this->href());
 	}
 	else

@@ -60,7 +60,7 @@ if ($_page)
 		{
 			// ---------------------- toc numeration ------------------------
 			// identify what size where faces
-			$toc_len	= sizeof($toc);
+			$toc_len	= count($toc);
 			$numbers	= array();
 			$depth		= 0;
 

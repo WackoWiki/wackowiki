@@ -146,7 +146,7 @@ if ($pages2)
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 $local_supertag_sliced	= explode('/', $this->page['supertag']);
 $local_supertag			= $this->page['supertag'].'/';
-$local_context_sliced	= array_slice( $local_supertag_sliced, 0, sizeof($local_supertag_sliced)-1 );
+$local_context_sliced	= array_slice( $local_supertag_sliced, 0, count($local_supertag_sliced)-1 );
 $local_context			= implode('/', $local_context_sliced ).'/';
 
 // preparing to output
@@ -160,13 +160,13 @@ foreach( $pages as $page )
 
 		if (strpos( $page['supertag'], $local_supertag ) === 0)
 		{
-			$out[] = "!/".implode('/', array_slice( $tag_sliced, sizeof($local_supertag_sliced) ));
+			$out[] = "!/".implode('/', array_slice( $tag_sliced, count($local_supertag_sliced) ));
 		}
 		else
 		{
 			if (strpos( $page['supertag'], $local_context ) === 0)
 			{
-				$out[] = implode('/', array_slice( $tag_sliced, sizeof($local_context_sliced) ));
+				$out[] = implode('/', array_slice( $tag_sliced, count($local_context_sliced) ));
 			}
 			else
 			{
@@ -196,7 +196,7 @@ foreach( $pages as $page )
 
 $found = false;
 
-if (sizeof($out) > 0)
+if (count($out) > 0)
 {
 	$found = $out[0];
 }

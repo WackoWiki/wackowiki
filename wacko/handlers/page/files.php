@@ -29,7 +29,7 @@ $what = $this->load_all(
 	"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
 		"AND f.file_name='".quote($this->dblink, $_GET['get'])."'");
 
-if (sizeof($what) > 0)
+if (count($what) > 0)
 {
 	// 2. check rights
 	if ($this->is_admin() || (isset($desc['upload_id']) && ($this->page['owner_id'] == $this->get_user_id())) ||
