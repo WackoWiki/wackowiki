@@ -36,7 +36,7 @@ if (!$style) $style = 'before';
 
 	{ // ---------------------- p numeration ------------------------
 		// clarifying, what numbers where is placed
-		$toc_len = sizeof($toc);
+		$toc_len = count($toc);
 		$numbers = array(); $depth = 0; $pnum=0;
 		for($i = 0; $i < $toc_len; $i++)
 		if ($toc[$i][2] > 66666)

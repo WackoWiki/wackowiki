@@ -134,6 +134,7 @@ if ($pages = $this->load_all(
 
 			$i	= 0;
 			$ul	= 0;
+
 			foreach ($pages as $page)
 			{
 				// check read privilege and current page tag
