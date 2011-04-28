@@ -525,6 +525,7 @@ $wacko_translation = array(
 
 	// whatsnew action
 	'NewCommentAdded'		=> 'Added new comment',
+	'NewFileAdded'			=> 'Added new file',
 	'NewPageCreated'		=> 'Created a new page',
 	'NewRevisionAdded'		=> 'Changed page',
 	'Cluster'				=> 'cluster',
