@@ -5,6 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// TODO: per cluster, pagination
+
 if (!isset($max)) $max = '';
 if (!isset($noxml)) $noxml = '';
 if (!isset($printed)) $printed = '';
@@ -25,7 +27,7 @@ if (isset($_GET['markread']) && $user == true)
 
 // loading new pages/comments
 $pages1 = $this->load_all(
-	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, c.tag as comment_on_page, user_name ".
+	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, c.tag as comment_on_page, user_name, 1 AS ctype ".
 	"FROM {$this->config['table_prefix']}page p ".
 		"LEFT JOIN {$this->config['table_prefix']}page c ON (p.comment_on_id = c.page_id) ".
 		"LEFT JOIN {$this->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
@@ -35,7 +37,7 @@ $pages1 = $this->load_all(
 
 // loading revisions
 $pages2 = $this->load_all(
-	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, c.tag as comment_on_page, user_name ".
+	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, c.tag as comment_on_page, user_name, 1 AS ctype ".
 	"FROM {$this->config['table_prefix']}page p ".
 		"LEFT JOIN {$this->config['table_prefix']}page c ON (p.comment_on_id = c.page_id) ".
 		"LEFT JOIN {$this->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
@@ -44,7 +46,17 @@ $pages2 = $this->load_all(
 	"ORDER BY modified DESC ".
 	"LIMIT ".($max * 2), 1);
 
-if ($pages = array_merge($pages1, $pages2))
+// loading uloads
+$files = $this->load_all(
+	"SELECT f.page_id, c.tag, f.uploaded_dt as created, f.uploaded_dt as modified, f.file_name as title, f.page_id as comment_on_id, f.hits as ip, f.uploaded_dt AS date, c.tag as comment_on_page, user_name, 2 AS ctype ".
+	"FROM {$this->config['table_prefix']}upload f ".
+		"LEFT JOIN {$this->config['table_prefix']}page c ON (f.page_id = c.page_id) ".
+		"LEFT JOIN {$this->config['table_prefix']}user u ON (f.user_id = u.user_id) ".
+	"WHERE u.account_type = '0' ".
+	"ORDER BY f.uploaded_dt DESC ".
+	"LIMIT ".($max * 2), 1);
+
+if ($pages = array_merge($pages1, $pages2, $files))
 {
 	// sort by dates
 	$sort_dates = create_function(
@@ -65,9 +77,9 @@ if ($pages = array_merge($pages1, $pages2))
 	{
 		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/changes_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RecentChangesXMLTip')."\" alt=\"XML\" /></a></span><br /><br />\n";
 	}
-
+#$this->debug_print_r($pages);
 	echo "<ul class=\"ul_list\">\n";
-
+echo count($pages);
 	foreach ($pages as $page)
 	{
 		if ($this->config['hide_locked'])
@@ -110,8 +122,26 @@ if ($pages = array_merge($pages1, $pages2))
 
 			echo '<li'.$viewed.'><span class=\"dt\">'.date($this->config['time_format_seconds'], strtotime($time)).'&nbsp;&nbsp;</span>';
 
+			// new file
+			if ($page['ctype'] == 2)
+			{
+				preg_match('/^[^\/]+/', $page['comment_on_page'], $sub_tag);
+
+				if ($page['page_id']) // !$global
+				{
+					$path2		= '_file:/'.($this->slim_url($page['tag'])).'/';
+					$on_page	= $this->get_translation('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['comment_on_id']), 1).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0];
+				}
+				else
+				{
+					$path2 = '_file:';
+					$on_page	= '&rarr; '.'global';
+				}
+
+				echo "<img src=\"".$this->config['theme_url']."icons/attachment.png"."\" title=\"".$this->get_translation('NewFileAdded')."\" alt=\"[file]\" /> ".''.$this->link($path2.$page['title'], '', $page['title'], '').' '.$on_page.$separator.$author.'</span>';
+			}
 			// new comment
-			if ($page['comment_on_id'])
+			else if ($page['comment_on_id'])
 			{
 				preg_match('/^[^\/]+/', $page['comment_on_page'], $sub_tag);
 				echo "<img src=\"".$this->config['theme_url']."icons/comment.png"."\" title=\"".$this->get_translation('NewCommentAdded')."\" alt=\"[comment]\" /> ".''.$this->link('/'.$page['tag'], '', $this->get_translation('Comment'), '', 0, 1).' '.$this->get_translation('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['comment_on_id']), 1).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>';
