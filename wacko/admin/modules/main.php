@@ -74,6 +74,19 @@ function admin_lock(&$engine, &$module)
 		}
 		closedir($handle);
 
+		// config
+		$handle = opendir(rtrim($engine->config['cache_dir'].CACHE_CONFIG_DIR, '/'));
+
+		while (false !== ($file = readdir($handle)))
+		{
+			if ($file != '.' && $file != '..' && !is_dir($engine->config['cache_dir'].CACHE_CONFIG_DIR.$file))
+			{
+				unlink($engine->config['cache_dir'].CACHE_CONFIG_DIR.$file);
+			}
+		}
+
+		closedir($handle);
+
 		// feeds
 		$handle = opendir(rtrim($engine->config['cache_dir'].CACHE_FEED_DIR, '/'));
 		while (false !== ($file = readdir($handle)))

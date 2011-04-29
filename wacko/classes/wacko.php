@@ -1941,6 +1941,7 @@ class Wacko
 							"created		= '".quote($this->dblink, $old_page['created'])."', ".
 							"owner_id		= '".quote($this->dblink, $owner_id)."', ".
 							"user_id		= '".quote($this->dblink, $user_id)."', ".
+							"latest			= '2', ".
 							"description	= '".quote($this->dblink, ($old_page['comment_on_id'] || $old_page['description'] ? $old_page['description'] : $desc ))."', ".
 							"supertag		= '".$this->translit($tag)."', ".
 							"body			= '".quote($this->dblink, $body)."', ".
@@ -4763,7 +4764,7 @@ class Wacko
 	}
 
 	// set config value
-	function set_config($config_name, $config_value, $is_dynamic = false)
+	function set_config($config_name, $config_value, $is_dynamic = false, $delete_cache = false)
 	{
 		$sql = "UPDATE {$this->config['table_prefix']}config
 			SET config_value = '".quote($this->dblink, $config_value)."'
@@ -4772,6 +4773,31 @@ class Wacko
 		$this->sql_query($sql);
 
 		$this->config[$config_name] = $config_value;
+
+		if (!$is_dynamic && $delete_cache)
+		{
+			$this->destroy_config_cache();
+		}
+	}
+
+	// destroy cache data #$cache->destroy('config');
+	function destroy_config_cache()
+	{
+		// delete from fs
+		clearstatcache();
+		$handle = opendir(rtrim($this->config['cache_dir'].CACHE_CONFIG_DIR, '/'));
+
+		while (false !== ($file = readdir($handle)))
+		{
+			if (is_file($this->config['cache_dir'].CACHE_CONFIG_DIR.$file))
+			{
+				@unlink($this->config['cache_dir'].CACHE_CONFIG_DIR.$file);
+			}
+		}
+
+		closedir($handle);
+
+		//$this->log(7, 'Maintenance: cached config destroyed');
 	}
 
 	// MAINTENANCE
@@ -5863,18 +5889,21 @@ class Wacko
 					$password .= substr(str_shuffle($chars_uc), rand(0, count($chars_uc) - 2), 1);
 					$uc++;
 				}
+
 				if ($k == 1)
 				{
 					//lowercase
 					$password .= substr(str_shuffle($chars_lc), rand(0, count($chars_lc) - 2), 1);
 					$lc++;
 				}
+
 				if ($k == 2)
 				{
 					//digits
 					$password .= substr(str_shuffle($digits), rand(0, count($digits) - 2), 1);
 					$di++;
 				}
+
 				if ($k == 3)
 				{
 					//symbols
