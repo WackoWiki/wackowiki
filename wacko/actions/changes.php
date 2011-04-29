@@ -44,10 +44,12 @@ if (isset($_GET['markread']) && $user == true)
 if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, $date, $hide_minor_edit))
 {
 	$count	= 0;
+
 	if ($user == true)
 	{
 		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
 	}
+
 	if ($root == '' && !(int)$noxml)
 	{
 		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/changes_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RecentChangesXMLTip')."\" alt=\"XML\" /></a></span><br /><br />\n";
@@ -122,10 +124,10 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 				$edit_note = '';
 			}
 
-			$viewed = ( $user['last_mark'] == true && $page['user'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' class="viewed"' : '' );
+			$viewed = ( $user['last_mark'] == true && $page['user'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' viewed' : '' );
 
 			// print entry
-			echo "<li ".$viewed."><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; ".
+			echo "<li class=\"lined".$viewed."\"><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; ".
 			($this->hide_revisions === false || $this->is_admin()
 				? "(".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") "
 				: ""
