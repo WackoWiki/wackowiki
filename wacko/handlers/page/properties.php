@@ -74,9 +74,9 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 
 	// load settings
 	$revs = $this->load_single(
-		"SELECT COUNT(tag) AS total ".
+		"SELECT COUNT(revision_id) AS total ".
 		"FROM {$this->config['table_prefix']}revision ".
-		"WHERE tag = '".quote($this->dblink, $this->tag)."' ".
+		"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
 		"GROUP BY tag ".
 		"LIMIT 1");
 

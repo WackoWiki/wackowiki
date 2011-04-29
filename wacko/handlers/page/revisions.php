@@ -38,10 +38,10 @@ if (!isset($this->page['page_id']))
 	$tag = trim($_GET['page'], '/revisions'); //
 	// Returns Array ( [id] => Value )
 	$get_page_id = $this->load_single(
-			"SELECT page_id ".
-			"FROM ".$this->config['table_prefix']."revision ".
-			"WHERE tag = '".quote($this->dblink, $tag)."' ".
-			"LIMIT 1");
+		"SELECT page_id ".
+		"FROM ".$this->config['table_prefix']."revision ".
+		"WHERE tag = '".quote($this->dblink, $tag)."' ".
+		"LIMIT 1");
 
 	// Get the_ID value
 	$this->page['page_id'] = $get_page_id['page_id'];
