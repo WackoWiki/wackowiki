@@ -228,12 +228,6 @@ class Init
 			// secondary settings
 			else if ($this->config == true && !isset($this->dblink))
 			{
-				// retrieving from cache
-				/*if ($data = $this->cache->load_sql($query))
-				{
-					return $data;
-				}*/
-
 				// connecting to db
 				$this->dbal();
 
@@ -331,14 +325,14 @@ class Init
 	// retrieve and unserialize cached settings data
 	function load_cached_settings($file_name)
 	{
-		$filename = $this->settings_cache_id($file_name);
+		$filename	= $this->settings_cache_id($file_name);
 
 		if (!@file_exists($filename))
 		{
 			return false;
 		}
 
-		$fp		= fopen($filename, 'r');
+		$fp			= fopen($filename, 'r');
 
 		// check for false and empty strings
 		if(($data	= fread($fp, filesize($filename))) === '')
