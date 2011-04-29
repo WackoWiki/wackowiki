@@ -684,7 +684,7 @@ if ($this->is_admin())
 
 		if (!empty($pages))
 		{
-			echo "<table><tr><th>page_id</th><th>tag</th><th>version</th></tr>";
+			echo "<table><tr><th>page_id</th><th>revision_id</th><th>version</th></tr>";
 
 			foreach ($pages as $page)
 			{
