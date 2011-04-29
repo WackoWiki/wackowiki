@@ -13,7 +13,7 @@ $module['menu'] = array(
 		'order'	=> 4,
 		'cat'	=> 'Content',
 		'mode'	=> 'menu',
-		'name'	=> 'menu',
+		'name'	=> 'Menu',
 		'title'	=> 'Add, edit or remove default menu items',
 	);
 

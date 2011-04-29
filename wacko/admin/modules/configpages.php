@@ -53,12 +53,12 @@ function admin_configpages(&$engine, &$module)
 		$config['sandbox']				= trim((string)$_POST['sandbox'], '/');
 		$config['wiki_docs']			= trim((string)$_POST['wiki_docs'], '/');
 
-
 		foreach($config as $key => $value)
 		{
-			$engine->sql_query(
-				"UPDATE {$engine->config['table_prefix']}config SET config_value = '$value' WHERE config_name = '$key'");
+			$engine->set_config($key, $value);
 		}
+
+		$engine->destroy_config_cache();
 		$engine->log(1, 'Updated settings base pages');
 		$engine->redirect(rawurldecode($engine->href()));
 	}

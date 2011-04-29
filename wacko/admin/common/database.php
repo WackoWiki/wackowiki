@@ -353,10 +353,15 @@ function GetData(&$engine, &$tables, $pack, $table, $root = '')
 	if ($root == true && $tables[$engine->config['table_prefix'].$table]['where'] == true)
 	{
 		if ($table != $engine->config['table_prefix'].'page')	// not page table
+		{
 			$where = "WHERE {$tables[$table]['where']} LIKE '".quote($engine->dblink, $root)."%' ";
+		}
 		else
+		{
 			$where = "WHERE tag LIKE '".quote($engine->dblink, $root)."%' OR comment_on_id LIKE '".quote($engine->dblink, $root)."%' ";
+		}
 	}
+
 	$order = "ORDER BY {$tables[$table]['order']} ";
 	$limit = "LIMIT %1, {$tables[$table]['limit']} ";
 
@@ -366,7 +371,11 @@ function GetData(&$engine, &$tables, $pack, $table, $root = '')
 	// check file existance
 	clearstatcache();
 	$filename = $pack.$table.BACKUP_FILE_DUMP_SUFFIX;
-	if (file_exists($filename) === true) unlink($filename);
+
+	if (file_exists($filename) === true)
+	{
+		unlink($filename);
+	}
 
 	// open file with writa access
 	$file = gzopen($filename, 'ab'.BACKUP_COMPRESSION_RATE);
@@ -374,6 +383,7 @@ function GetData(&$engine, &$tables, $pack, $table, $root = '')
 	// read table data until it's exhausted
 	$r = 0;
 	$t = 0;
+
 	while (true == $data = $engine->load_all(
 	"SELECT * FROM $table ".
 	( $where ? $where : "" ).
@@ -424,7 +434,9 @@ function GetFiles(&$engine, $pack, $dir, $root)
 {
 	// set file mask for cluster backup
 	if ($root == true && $dir == $engine->config['upload_path_per_page'])
+	{
 		$tag = '@'.str_replace('/', '@', $engine->translit($root)).'@';
+	}
 
 	// create write (backup) subdir or restore path recursively if needed
 	if (strpos($dir, '/'))
@@ -501,6 +513,7 @@ function PutTable(&$engine, $pack)
 
 	// perform
 	$t = 0;
+
 	foreach ($sql as $instruction)
 	{
 		$engine->sql_query($instruction);
@@ -546,6 +559,7 @@ function PutData(&$engine, $pack, $table, $mode)
 
 			// prepare data
 			$j = 0;
+
 			foreach ($row as $cell)
 			{
 				$row[$j++] = "'".quote($engine->dblink, $cell)."'";//( $cell == 'null' ? $cell :  "'".quote($engine->dblink, $cell)."'" );
@@ -555,9 +569,11 @@ function PutData(&$engine, $pack, $table, $mode)
 			$engine->sql_query("$mode INTO $table VALUES ( ".implode(', ', $row)." )");
 			$t++;	// rows processed
 		}
+
 		// set read pointer to the beginning of the next slack row
 		gzseek($file, $point);
 	}
+
 	// close file
 	gzclose($file);
 
@@ -590,6 +606,7 @@ function PutFiles(&$engine, $pack, $dir, $keep = false)
 
 	// open backup dir and run through all files
 	$total = array();
+
 	if ($dh = opendir($packdir))
 	{
 		while (false !== ($filename = readdir($dh)))
@@ -634,6 +651,7 @@ function PutFiles(&$engine, $pack, $dir, $keep = false)
 				$total[0]++;
 			}
 		}
+
 		closedir($dh);
 
 		return $total;

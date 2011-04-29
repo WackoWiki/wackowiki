@@ -47,6 +47,19 @@ if ($this->is_admin())
 
 		closedir($handle);
 
+		// config
+		$handle = opendir(rtrim($this->config['cache_dir'].CACHE_CONFIG_DIR, '/'));
+
+		while (false !== ($file = readdir($handle)))
+		{
+			if ($file != '.' && $file != '..' && !is_dir($this->config['cache_dir'].CACHE_CONFIG_DIR.$file))
+			{
+				unlink($this->config['cache_dir'].CACHE_CONFIG_DIR.$file);
+			}
+		}
+
+		closedir($handle);
+
 		echo $this->get_translation('CacheCleared');
 	}
 }

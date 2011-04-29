@@ -228,6 +228,12 @@ class Init
 			// secondary settings
 			else if ($this->config == true && !isset($this->dblink))
 			{
+				// retrieving from cache
+				/*if ($data = $this->cache->load_sql($query))
+				{
+					return $data;
+				}*/
+
 				// connecting to db
 				$this->dbal();
 
@@ -302,9 +308,52 @@ class Init
 					die("Error loading WackoWiki usergroups data: database `group` table is empty.");
 				}
 
+				// saving to cache
+				$this->cache_settings('config', $this->config);
+
 				return $this->config;
 			}
 		}
+	}
+
+	// save serialized settings results
+	function cache_settings($file_name, $data)
+	{
+		$filename	= $this->settings_cache_id($file_name);
+		$sqldata	= serialize($data);
+
+		file_put_contents($filename, $sqldata);
+		chmod($filename, 0644);
+
+		return true;
+	}
+
+	// retrieve and unserialize cached settings data
+	function load_cached_settings($file_name)
+	{
+		$filename = $this->settings_cache_id($file_name);
+
+		if (!@file_exists($filename))
+		{
+			return false;
+		}
+
+		$fp		= fopen($filename, 'r');
+
+		// check for false and empty strings
+		if(($data	= fread($fp, filesize($filename))) === '')
+		{
+			return false;
+		}
+
+		fclose($fp);
+
+		return unserialize($data);
+	}
+
+	function settings_cache_id($file_name)
+	{
+		return '_cache/'.CACHE_CONFIG_DIR.$file_name.'.php';
 	}
 
 	// REQUEST HANDLING

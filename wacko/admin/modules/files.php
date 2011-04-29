@@ -37,7 +37,7 @@ function admin_files(&$engine, &$module)
 			"WHERE page_id = 0 ".
 				"AND file_name='".quote($engine->dblink, $_GET['file'])."'");
 
-		if (sizeof($what) > 0)
+		if (count($what) > 0)
 		{
 			echo '<strong>'.$engine->get_translation('UploadRemoveConfirm').'</strong>';
 			echo $engine->form_open();
@@ -72,7 +72,7 @@ function admin_files(&$engine, &$module)
 			"WHERE page_id = 0 ".
 				"AND file_name='".quote($engine->dblink, $_POST['file_id'])."'");
 
-		if (sizeof($what) > 0)
+		if (count($what) > 0)
 		{
 			// 2. remove from DB
 			$engine->sql_query(
@@ -114,8 +114,8 @@ function admin_files(&$engine, &$module)
 		{
 			// 1. check out $data
 			$_data	= explode('.', $_FILES['file']['name'] );
-			$ext	= $_data[ sizeof($_data)-1 ];
-			unset($_data[ sizeof($_data)-1 ]);
+			$ext	= $_data[ count($_data)-1 ];
+			unset($_data[ count($_data)-1 ]);
 			$name	= implode( '.', $_data );
 			$name	= str_replace('@', '_', $name);
 			$dir	= $engine->config['upload_path'].'/';
