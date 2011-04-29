@@ -21,8 +21,15 @@ require('classes/init.php');
 $init = new init();
 
 // define settings
-$init->settings(); // populate from config.php
-$init->settings(); // initialize DBAL and populate from config table
+if ($cached_config = $init->load_cached_settings('config'))
+{
+	$init->config = $cached_config;	// retrieving from cache
+}
+else
+{
+	$init->settings();	// populate from config.php
+	$init->settings();	// initialize DBAL and populate from config table.
+}
 $init->dbal();
 $init->settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
 $init->settings('user_table',	$init->config['table_prefix'].'user');
