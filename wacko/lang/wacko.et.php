@@ -682,6 +682,11 @@ $wacko_translation = array(
 	'UploadRemoveDenied' => 'Sul ei ole lubatud seda faili eemaldada',
 	'UploadMax' => 'Mitte rohkem kui ',
 
+	'UploadBy' => 'Uploaded by',
+	'FileAdded' => 'Added',
+	'FileSize' => 'Size',
+	'FileName' => 'Name',
+
 	'Files_0' => 'Sellel lehel ei ole faile.',
 	'Files_1' => 'Siin lehel on üks fail.',
 	'Files_n' => 'Siin lehel on %1 faili.',

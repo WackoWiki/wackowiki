@@ -41,11 +41,11 @@ if ($this->page)
 		echo "<li>".$this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)</li>\n" : "");
 	}
 
-	if($this->has_access('write') && $this->get_user() || $this->is_admin())
-	{
+	#if($this->has_access('write') && $this->get_user() || $this->is_admin())
+	#{
 		// referrers icon
-		echo "<li><a href=\"".$this->href('referrers')."\"><img src=\"".$this->config['theme_url']."icons/referer.gif\" title=\"".$this->get_translation('ReferrersTip')."\" alt=\"".$this->get_translation('ReferrersText')."\" /></a></li>\n";
-	}
+	#	echo "<li><a href=\"".$this->href('referrers')."\"><img src=\"".$this->config['theme_url']."icons/referer.gif\" title=\"".$this->get_translation('ReferrersTip')."\" alt=\"".$this->get_translation('ReferrersText')."\" /></a></li>\n";
+	#}
 
 	#if ($this->get_user())
 	#{

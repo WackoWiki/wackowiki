@@ -79,10 +79,13 @@ if ($registered
 	<ul class="upload">
 		<li><?php echo $this->link('file:'.$file[0]['file_name'] ); ?>
 			<ul>
-				<li><?php echo $this->get_time_string_formatted($file[0]['uploaded_dt']); ?></li>
-				<li><?php echo "(".$this->binary_multiples($file[0]['file_size'], true, true, true).")"; ?></li>
-				<li><?php echo $file[0]['file_name']; ?></li>
-				<li><?php echo $file[0]['description']; ?></li>
+				<li><span>&nbsp;</span></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$file[0]['user'])."\">".$file[0]['user']."</a>"; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file[0]['uploaded_dt']); ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo "(".$this->binary_multiples($file[0]['file_size'], true, true, true).")"; ?></li>
+				<li><span>&nbsp;</span></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file[0]['file_name']; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $file[0]['description']; ?></li>
 			</ul>
 		</li>
 	</ul>
@@ -142,10 +145,13 @@ if ($registered
 	<ul class="upload">
 		<li><?php echo $this->link('file:'.$file[0]['file_name'] ); ?>
 			<ul>
-				<li><?php echo $this->get_time_string_formatted($file[0]['uploaded_dt']); ?></li>
-				<li><?php echo "(".$this->binary_multiples($file[0]['file_size'], true, true, true).")"; ?></li>
-				<li><?php echo $file[0]['file_name']; ?></li>
-				<li><input name="description" id="UploadDesc" type="text" size="80" value="<?php echo $file[0]['description']; ?>"/></li>
+				<li><span>&nbsp;</span></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$file[0]['user'])."\">".$file[0]['user']."</a>"; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file[0]['uploaded_dt']); ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo "(".$this->binary_multiples($file[0]['file_size'], true, true, true).")"; ?></li>
+				<li><span>&nbsp;</span></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file[0]['file_name']; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input name="description" id="UploadDesc" type="text" size="80" value="<?php echo $file[0]['description']; ?>"/></li>
 			</ul>
 		</li>
 	</ul>
@@ -484,10 +490,13 @@ if ($registered
 		<ul class="upload">
 			<li><?php echo $this->link('file:'.$small_name); ?>
 				<ul>
-					<li><?php echo $this->get_time_string_formatted($uploaded_dt); ?></li>
-					<li><?php echo "(".$file_size_kb." ".$this->get_translation('UploadKB').")"; ?></li>
-					<li><?php echo $small_name; ?></li>
-					<li><?php echo $description; ?></li>
+					<li><span>&nbsp;</span></li>
+
+					<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($uploaded_dt); ?></li>
+					<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo "(".$file_size_kb." ".$this->get_translation('UploadKB').")"; ?></li>
+					<li><span>&nbsp;</span></li>
+					<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $small_name; ?></li>
+					<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $description; ?></li>
 				</ul>
 			</li>
 		</ul>

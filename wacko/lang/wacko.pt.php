@@ -682,6 +682,11 @@ $wacko_translation = array(
 	'UploadRemoveDenied' => 'Não está autorizado a remover este ficheiro',
 	'UploadMax' => 'Não mais do que ',
 
+	'UploadBy' => 'Uploaded by',
+	'FileAdded' => 'Added',
+	'FileSize' => 'Size',
+	'FileName' => 'Name',
+
 	'Files_0' => 'Não existem ficheiros neste página.',
 	'Files_1' => 'Há um ficheiro nesta página.',
 	'Files_n' => 'Existem %1 ficheiros nesta página.',

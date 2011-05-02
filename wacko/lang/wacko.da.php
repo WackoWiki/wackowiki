@@ -682,6 +682,11 @@ $wacko_translation = array(
 	'UploadRemoveDenied' => 'Du har ikke tilladelse til at slette filen',
 	'UploadMax' => 'Højst ',
 
+	'UploadBy' => 'Uploaded by',
+	'FileAdded' => 'Added',
+	'FileSize' => 'Size',
+	'FileName' => 'Name',
+
 	'Files_0' => 'Der er ingen filer tilknyttet denne side.',
 	'Files_1' => 'Der er en fil tilknyttet denne side.',
 	'Files_n' => 'Der er %1 filer tilknyttet denne side.',

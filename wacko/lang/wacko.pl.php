@@ -682,6 +682,11 @@ $wacko_translation = array(
 	'UploadRemoveDenied' => 'Nie masz prawa do usuniêcia tego pliku',
 	'UploadMax' => 'Nie wiêcej ni¿ ',
 
+	'UploadBy' => 'Uploaded by',
+	'FileAdded' => 'Added',
+	'FileSize' => 'Size',
+	'FileName' => 'Name',
+
 	'Files_0' => 'Nie ma plików na tej stronie.',
 	'Files_1' => 'Jest jeden plik na tej stronie.',
 	'Files_n' => 'Liczba plików na tej stronie: %1.',

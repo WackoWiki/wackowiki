@@ -682,6 +682,11 @@ $wacko_translation = array(
 	'UploadRemoveDenied' => 'Vous n&rsquo;êtes pas autorisé à enlever ce fichier',
 	'UploadMax' => 'Pas plus de ',
 
+	'UploadBy' => 'Uploaded by',
+	'FileAdded' => 'Added',
+	'FileSize' => 'Size',
+	'FileName' => 'Name',
+
 	'Files_0' => 'Aucun fichier n&rsquo;est joint à cette page. ',
 	'Files_1' => 'Un seul fichier est joint à cette page.',
 	'Files_n' => '%1 fichiers sont joints à cette page.',

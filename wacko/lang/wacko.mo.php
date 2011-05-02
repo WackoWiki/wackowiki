@@ -684,6 +684,11 @@ $wacko_translation = array(
 	'UploadRemoveConfirm' => 'Sterge fisier?',
 	'UploadRemoveDenied' => 'Nu aveti permisiune de stergere a fisierului',
 
+	'UploadBy' => 'Uploaded by',
+	'FileAdded' => 'Added',
+	'FileSize' => 'Size',
+	'FileName' => 'Name',
+
 	'Files_0' => 'There is no files on this page.',
 	'Files_1' => 'There is one file on this page.',
 	'Files_n' => 'There are %1 files on this page.',

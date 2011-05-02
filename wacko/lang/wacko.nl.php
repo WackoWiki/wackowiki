@@ -682,6 +682,11 @@ $wacko_translation = array(
 	'UploadRemoveDenied' => 'U kunt dit bestand niet verwijderen.',
 	'UploadMax' => 'Maximaal ',
 
+	'UploadBy' => 'Uploaded by',
+	'FileAdded' => 'Added',
+	'FileSize' => 'Size',
+	'FileName' => 'Name',
+
 	'Files_0' => 'Geen bestanden op deze pagina.',
 	'Files_1' => 'E&eacute;n bestand op deze pagina.',
 	'Files_n' => '%1 bestanden op deze pagina.',
