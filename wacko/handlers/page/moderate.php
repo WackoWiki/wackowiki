@@ -905,7 +905,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				{
 					$page = $this->load_page('', $id, '', LOAD_NOCACHE, LOAD_META);
 					moderate_delete_page($this, $page['tag']);
-					$this->log(1, str_replace('%3', $this->get_time_string_formatted($page['created']), str_replace('%2', $page['user'], str_replace('%1', $page['comment_on'].' '.$this->get_page_title($page['comment_on']), $this->get_translation('LogRemovedComment', $this->config['language'])))));
+					$this->log(1, str_replace('%3', $this->get_time_string_formatted($page['created']), str_replace('%2', $page['user'], str_replace('%1', $this->get_page_tag($page['comment_on_id']).' '.$this->get_page_title('', $page['comment_on_id']), $this->get_translation('LogRemovedComment', $this->config['language'])))));
 				}
 
 				// recount comments for current topic
