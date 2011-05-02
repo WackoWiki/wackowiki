@@ -166,7 +166,7 @@ if ($this->is_admin() ||
 			}
 			else
 			{
-				$this->log(1, str_replace('%3', $this->get_time_string_formatted($this->page['created']), str_replace('%2', $this->page['user_name'], str_replace('%1', $comment_on_id." ".$this->get_page_title($comment_on_id), $this->get_translation('LogRemovedComment', $this->config['language'])))));
+				$this->log(1, str_replace('%3', $this->get_time_string_formatted($this->page['created']), str_replace('%2', $this->page['user_name'], str_replace('%1', $this->get_page_tag($comment_on_id)." ".$this->get_page_title('', $comment_on_id), $this->get_translation('LogRemovedComment', $this->config['language'])))));
 			}
 
 			echo "<br />".$this->get_translation('ThisActionHavenotUndo')."<br />\n";
