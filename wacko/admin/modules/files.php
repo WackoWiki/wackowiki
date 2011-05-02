@@ -35,7 +35,7 @@ function admin_files(&$engine, &$module)
 			"SELECT user_id, upload_id, file_name, file_size, description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
-				"AND file_name='".quote($engine->dblink, $_GET['file'])."'");
+				"AND upload_id = '".quote($engine->dblink, $_GET['file_id'])."'");
 
 		if (count($what) > 0)
 		{
@@ -44,7 +44,7 @@ function admin_files(&$engine, &$module)
 ?>
 	<br />
 	<ul>
-		<li><?php echo $engine->link( 'file:'.$_GET['file'] ); ?></li>
+		<li><?php echo $engine->link( 'file:'.$what[0]['file_name'] ); ?></li>
 	</ul>
 	<br />
 	<input type="hidden" name="remove" value="<?php echo $_GET['remove']?>" />
@@ -70,7 +70,7 @@ function admin_files(&$engine, &$module)
 			"SELECT user_id, upload_id, file_name, file_size, description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
-				"AND file_name='".quote($engine->dblink, $_POST['file_id'])."'");
+				"AND upload_id = '".quote($engine->dblink, $_POST['file_id'])."'");
 
 		if (count($what) > 0)
 		{
@@ -83,7 +83,7 @@ function admin_files(&$engine, &$module)
 			print('<div><em>'.$engine->get_translation('UploadRemovedFromDB').'</em></div>');
 
 			// 3. remove from FS
-			$real_filename = $engine->config['upload_path'].'/'.$what[0]['filename'];
+			$real_filename = $engine->config['upload_path'].'/'.$what[0]['file_name'];
 
 			if (@unlink($real_filename))
 			{
@@ -300,7 +300,7 @@ function admin_files(&$engine, &$module)
 		$file_size	= $engine->binary_multiples($file['file_size'], true, true, true);
 		$file_ext	= substr($file_name, strrpos($file_name, '.') + 1);
 		$link		= $engine->link($path2.$file_name, '', $file_name);
-		$remove_href = $engine->tag.'&amp;remove=global&amp;file_id='.$file_name;
+		$remove_href = $engine->tag.'&amp;remove=global&amp;file_id='.$file['upload_id'];
 ?>
 		<tr class="hl_setting">
 			<td style=""><?php echo $link; ?></td>

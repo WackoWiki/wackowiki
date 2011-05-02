@@ -196,7 +196,7 @@ function admin_configbasic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_max_size"><strong>Maximum file size (Kb):</strong><br />
-				<small>Limiting the size of files uploaded by users.</small></label></td>
+				<small>Maximum size of each file.</small></label></td>
 				<td><input maxlength="7" style="width:200px;" id="upload_max_size" name="upload_max_size" value="<?php echo htmlspecialchars($engine->config['upload_max_size']);?>" /></td>
 			</tr>
 			<tr class="lined">
