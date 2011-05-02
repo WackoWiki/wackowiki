@@ -52,9 +52,11 @@ function admin_users(&$engine, &$module)
 			$user_id = (isset($_GET['user_id']) ? $_GET['user_id'] : $_POST['user_id']);
 
 			$user = $engine->load_single(
-				"SELECT user_id, user_name, real_name, email, enabled FROM {$engine->config['table_prefix']}user ".
-				"WHERE user_id = '".quote($engine->dblink, $user_id)."' ".
-					"AND account_type = '0' ".
+				"SELECT u.user_name, u.real_name, u.email, p.theme, p.lang, u.enabled ".
+				"FROM {$engine->config['table_prefix']}user u ".
+					"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
+				"WHERE u.user_id = '".quote($engine->dblink, $user_id)."' ".
+					"AND u.account_type = '0' ".
 				"LIMIT 1");
 		}
 
