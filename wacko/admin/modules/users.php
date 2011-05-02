@@ -26,6 +26,10 @@ function admin_users(&$engine, &$module)
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
+	<p>
+		Here you can change your users information and certain specific options.
+	</p>
+	<br />
 <?php
 
 	/////////////////////////////////////////////
@@ -144,6 +148,12 @@ function admin_users(&$engine, &$module)
 				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
 			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}group_member ".
+				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
+			$engine->sql_query(
+				"DELETE FROM {$engine->config['table_prefix']}menu ".
+				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
+			$engine->sql_query(
+				"DELETE FROM {$engine->config['table_prefix']}watch ".
 				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
 
 			$engine->set_message($engine->get_translation('UsersDeleted'));

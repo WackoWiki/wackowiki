@@ -25,8 +25,20 @@ function admin_groups(&$engine, &$module)
 	$order = '';
 	$group = '';
 	$orderuser = '';
+
+/*	TODO:
+ * Pre-defined groups
+ * Pre-defined groups are special groups, they cannot be deleted or directly modified. However you can still add users and alter basic settings.
+ *
+ * User defined groups
+ * These are groups created by you or another admin on this board. You can manage memberships as well as edit group properties or even delete the group.
+*/
 ?>
 	<h1><?php echo $module['title']; ?></h1>
+	<br />
+	<p>
+		From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.
+	</p>
 	<br />
 <?php
 
