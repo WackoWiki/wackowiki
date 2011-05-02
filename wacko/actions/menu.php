@@ -224,7 +224,14 @@ if ($_user_id)
 		echo "<input type=\"hidden\" name=\"_user_menu\" value=\"yes\" />";
 
 		echo "<table>";
-		echo "<tr><th>".$this->get_translation('BookmarkNumber')."</th><th>".$this->get_translation('BookmarkTitle')."</th><th>".$this->get_translation('BookmarkPage')."</th><th>".$this->get_translation('BookmarkMark')."</th><!--<th>Display</th><th>Lang</th>--></tr>";
+		echo "<tr><th>".$this->get_translation('BookmarkNumber')."</th><th>".$this->get_translation('BookmarkTitle')."</th><th>".$this->get_translation('BookmarkPage')."</th><th>".$this->get_translation('BookmarkMark')."</th><!--<th>Display</th>-->";
+
+		if ($system)
+		{
+			echo "<th>Lang</th>";
+		}
+
+		echo "</tr>";
 
 		foreach($_menu as $menu_item)
 		{
