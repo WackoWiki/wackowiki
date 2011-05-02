@@ -4810,7 +4810,7 @@ class Wacko
 				"DELETE FROM ".$this->config['table_prefix']."referrer ".
 				"WHERE referrer_time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
-			$this->set_config('maint_last_refs', time());
+			$this->set_config('maint_last_refs', time(), '', true);
 
 			$this->log(7, 'Maintenance: referrers purged');
 		}
@@ -4822,7 +4822,7 @@ class Wacko
 				"DELETE FROM ".$this->config['table_prefix']."revision ".
 				"WHERE modified < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
-			$this->set_config('maint_last_oldpages', time());
+			$this->set_config('maint_last_oldpages', time(), '', true);
 
 			$this->log(7, 'Maintenance: outdated pages revisions purged');
 		}
@@ -4849,7 +4849,7 @@ class Wacko
 				unset($remove);
 			}
 
-			$this->set_config('maint_last_delpages', time());
+			$this->set_config('maint_last_delpages', time(), '', true);
 
 			$this->log(7, 'Maintenance: deleted pages purged');
 		}
@@ -4861,7 +4861,7 @@ class Wacko
 				"DELETE FROM {$this->config['table_prefix']}log ".
 				"WHERE log_time < DATE_SUB( NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY )");
 
-			$this->set_config('maint_last_log', time());
+			$this->set_config('maint_last_log', time(), '', true);
 
 			$this->log(7, 'Maintenance: system log purged');
 		}
@@ -4916,7 +4916,7 @@ class Wacko
 				//$this->log(7, 'Maintenance: cached sql results purged');
 			}
 
-			$this->set_config('maint_last_cache', time());
+			$this->set_config('maint_last_cache', time(), '', true);
 		}
 	}
 
