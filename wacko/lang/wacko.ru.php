@@ -693,6 +693,11 @@ $wacko_translation = array(
 	'UploadRemoveDenied' => 'Вам запрещено удалять этот файл',
 	'UploadMax' => 'Не более ',
 
+	'UploadBy' => 'Uploaded by',
+	'FileAdded' => 'Added',
+	'FileSize' => 'Size',
+	'FileName' => 'Name',
+
 	'Files_0' => 'Файлов нет.',
 	'Files_1' => 'Один файл.',
 	'Files_n' => 'Много файлов (%1).',
