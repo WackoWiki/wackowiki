@@ -254,7 +254,7 @@ class Wacko
 		if (!($file))
 		{
 			$what = $this->load_all(
-				"SELECT upload_id, file_name, file_size, description, picture_w, picture_h, file_ext ".
+				"SELECT upload_id, user_id, file_name, file_size, description, picture_w, picture_h, file_ext ".
 				"FROM ".$this->config['table_prefix']."upload ".
 				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
 					"AND file_name = '".quote($this->dblink, $file_name)."'");
