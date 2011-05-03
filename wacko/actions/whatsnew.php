@@ -78,8 +78,9 @@ if ($pages = array_merge($pages1, $pages2, $files))
 		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/changes_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RecentChangesXMLTip')."\" alt=\"XML\" /></a></span><br /><br />\n";
 	}
 #$this->debug_print_r($pages);
+#echo count($pages);
 	echo "<ul class=\"ul_list\">\n";
-echo count($pages);
+
 	foreach ($pages as $page)
 	{
 		if ($this->config['hide_locked'])
