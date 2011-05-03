@@ -191,7 +191,7 @@ else
 <br style="clear: both" />&nbsp;</div>
 <?php
 // page comments and files
-if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comment_on_id'])
+if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['comment_on_id'])
 {
 	// revoking payload
 	if (isset($_SESSION['guest']))
@@ -319,7 +319,6 @@ if ($this->method == 'show' && $this->page['latest'] == 1 && !$this->page['comme
 		}
 	}
 	// files form output ends
-
 	if ($this->config['footer_comments'])
 	{
 		// pagination
