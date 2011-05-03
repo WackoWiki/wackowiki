@@ -266,7 +266,7 @@ class WackoFormatter
 		$output		= '';
 		$thing		= $things[1];
 		$wacko		= &$this->object;
-		$callback	= array(&$this, 'wackoPreprocess');
+		$callback	= array(&$this, 'wacko_preprocess');
 
 		if ($thing[0] == '~')
 		{

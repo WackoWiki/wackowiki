@@ -116,26 +116,32 @@ class paragrafica
 		{
 			$what = preg_replace( $t, $this->mark1.'$1'.$this->mark2, $what );
 		}
+
 		foreach ($this->t1[0] as $t)
 		{
 			$what = preg_replace( $t, $this->mark1.'$1', $what );
 		}
+
 		foreach ($this->t2[0] as $t)
 		{
 			$what = preg_replace( $t, '$1'.$this->mark2, $what );
 		}
+
 		foreach ($this->t1[1] as $t)
 		{
 			$what = preg_replace( $t, $this->mark3.$this->mark1.'$1', $what );
 		}
+
 		foreach ($this->t2[1] as $t)
 		{
 			$what = preg_replace( $t, '$1'.$this->mark2.$this->mark3, $what );
 		}
+
 		foreach ($this->t1[2] as $t)
 		{
 			$what = preg_replace( $t, $this->mark4.$this->mark1.'$1', $what );
 		}
+
 		foreach ($this->t2[2] as $t)
 		{
 			$what = preg_replace( $t, '$1'.$this->mark2.$this->mark4, $what );
@@ -151,8 +157,8 @@ class paragrafica
 		// 2. cleanup <t->\s<-t>
 		do
 		{
-			$_w = $what;
-			$what = preg_replace( "!(".$this->mark2.")((\s|(<br[^>]*>|".$this->mark3."|".$this->mark4."))*)(".$this->mark1.")!si", '$2', $what );
+			$_w		= $what;
+			$what	= preg_replace( "!(".$this->mark2.")((\s|(<br[^>]*>|".$this->mark3."|".$this->mark4."))*)(".$this->mark1.")!si", '$2', $what );
 		}
 		while ($_w != $what);
 
@@ -170,45 +176,46 @@ class paragrafica
 		}
 
 		foreach( $pieces as $k=>$v )
-
-		if ($k > 0)
 		{
-			$pos	= strpos($v, $this->mark1);
-			$pos2	= strpos($v, $this->mark3);
-			$pos_u	= strpos($v, $this->mark4);
-
-			if (($pos !== false) && ($pos_u === false))
+			if ($k > 0)
 			{
-				$insert_p = false;
+				$pos	= strpos($v, $this->mark1);
+				$pos2	= strpos($v, $this->mark3);
+				$pos_u	= strpos($v, $this->mark4);
 
-				if ($pos2 === false)
+				if (($pos !== false) && ($pos_u === false))
 				{
-					$insert_p = true;
-				}
-				else
-				{
-					$pieces_inside = explode( $this->mark3, $v );
+					$insert_p = false;
 
-					if (sizeof($pieces_inside) < 3)
+					if ($pos2 === false)
 					{
 						$insert_p = true;
 					}
-				}
-
-				if ($insert_p)
-				{
-					$inside = substr($v, 0, $pos);
-					$inside = str_replace( $this->mark3, '', $inside );
-
-					if (strlen($inside))
+					else
 					{
-						$pcount++;
-						$pieces[$k] = '<a name="p'.$page_id.'-'.$pcount.'"></a>'.
-									$this->prefix1.
-									$page_id.'-'.$pcount.
-									$this->prefix2.
-									$inside.
-									$this->postfix.substr($v,$pos+$sizeof_mark1);
+						$pieces_inside = explode( $this->mark3, $v );
+
+						if (sizeof($pieces_inside) < 3)
+						{
+							$insert_p = true;
+						}
+					}
+
+					if ($insert_p)
+					{
+						$inside = substr($v, 0, $pos);
+						$inside = str_replace( $this->mark3, '', $inside );
+
+						if (strlen($inside))
+						{
+							$pcount++;
+							$pieces[$k] = '<a name="p'.$page_id.'-'.$pcount.'"></a>'.
+										$this->prefix1.
+										$page_id.'-'.$pcount.
+										$this->prefix2.
+										$inside.
+										$this->postfix.substr($v,$pos+$sizeof_mark1);
+						}
 					}
 				}
 			}
@@ -268,15 +275,16 @@ class paragrafica
 			}
 		}
 		else
-		// id, text, depth
-
-		if ((isset($matches[6])) && $matches[6] != '')
 		{
-			$this->toc[] = array($matches[6], '(p)', 77777);
-		}
-		else
-		{
-			$this->toc[] = array($matches[2],$matches[4],$matches[3]);
+			// id, text, depth
+			if ((isset($matches[6])) && $matches[6] != '')
+			{
+				$this->toc[] = array($matches[6], '(p)', 77777);
+			}
+			else
+			{
+				$this->toc[] = array($matches[2],$matches[4],$matches[3]);
+			}
 		}
 
 		return $matches[0];
