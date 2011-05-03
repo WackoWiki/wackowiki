@@ -700,7 +700,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<input name="merge" id="submit" type="submit" value="'.$this->get_translation('ModerateMerge').'" /> '.
 						'<input name="lock" id="submit" type="submit" value="'.$this->get_translation('ModerateLock').'" /> '.
 						'<input name="unlock" id="submit" type="submit" value="'.$this->get_translation('ModerateUnlock').'" /> '.
-						'&nbsp;&nbsp;&nbsp;<a href="'.$this->href('', $this->config['moders_docs']).'">'.$this->get_translation('Help').'...</a> '.
+						(isset($this->config['moders_docs']) ? '&nbsp;&nbsp;&nbsp;<a href="'.$this->href('', $this->config['moders_docs']).'">'.$this->get_translation('Help').'...</a>' : '').
 						'<br />'."\n".
 						'<input name="set" id="submit" type="submit" value="'.$this->get_translation('ModerateSet').'" /> '.
 						( $set
@@ -911,9 +911,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				// recount comments for current topic
 				$this->sql_query(
 					"UPDATE {$this->config['table_prefix']}page SET ".
-						"comments	= '".(int)$this->count_comments($this->tag)."', ".
+						"comments	= '".(int)$this->count_comments($this->page['page_id'])."', ".
 						"commented	= NOW() ".
-					"WHERE tag = '".quote($this->dblink, $this->tag)."' ".
+					"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
 					"LIMIT 1");
 
 				unset($accept_action);
@@ -1240,7 +1240,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							  )
 							: ''
 						).
-						'&nbsp;&nbsp;&nbsp;<a href="'.$this->href('', $this->config['moders_docs']).'">'.$this->get_translation('Help').'...</a> '.
+						(isset($this->config['moders_docs']) ? '&nbsp;&nbsp;&nbsp;<a href="'.$this->href('', $this->config['moders_docs']).'">'.$this->get_translation('Help').'...</a>' : '').
 					'</td>'.
 				'</tr>'."\n".
 				'<tr class="formation">'.
@@ -1259,7 +1259,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					'<td colspan="2">'.
 						'<input name="posts_delete" id="submit" type="submit" value="'.$this->get_translation('ModerateDeletePosts').'" /> '.
 						'<input name="posts_split" id="submit" type="submit" value="'.$this->get_translation('ModerateSplit').'" /> '.
-						'&nbsp;&nbsp;&nbsp;<a href="'.$this->href('', $this->config['moders_docs']).'">'.$this->get_translation('Help').'...</a> '.
+						(isset($this->config['moders_docs']) ? '&nbsp;&nbsp;&nbsp;<a href="'.$this->href('', $this->config['moders_docs']).'">'.$this->get_translation('Help').'...</a>' : '').
 						'<br />'."\n".
 						'<input name="set" id="submit" type="submit" value="'.$this->get_translation('ModerateSet').'" /> '.
 						( $set
