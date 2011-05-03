@@ -268,7 +268,7 @@ switch (count($files))
 				"<img src=\"".$this->config['theme_url']."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->get_translation('DeleteText')."\" /></a>".
 				"</div>");
 					print($this->format($comment['body'])."\n");
-					print("<div class=\"commentinfo\">\n-- ".($this->is_wiki_name($comment['user_name']) ? $this->link('/'.$comment['user_name'], '', $comment['user_name']) : $comment['user_name'])." (".$comment['modified'].")\n</div>\n");
+					print("<div class=\"commentinfo\">\n-- <a href=\"".$this->href('', $this->config['users_page'], 'profile='.$comment['user_name'])."\">".$comment['user_name']."</a> (".$comment['modified'].")\n</div>\n");
 					print("</div>\n");
 				}
 			}
@@ -281,7 +281,7 @@ switch (count($files))
 				echo $this->get_translation('AddComment'); ?>
 <br />
 				<?php echo $this->form_open('addcomment'); ?>
-<textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo $_SESSION[$this->config['session_prefix'].'_'.'freecap_old_comment']; ?></textarea>
+<textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo (isset($_SESSION[$this->config['session_prefix'].'_'.'freecap_old_comment']) ? $_SESSION[$this->config['session_prefix'].'_'.'freecap_old_comment'] : ''); ?></textarea>
 				<?php
 				// captcha code starts
 
