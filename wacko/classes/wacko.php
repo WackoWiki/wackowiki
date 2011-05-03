@@ -5096,7 +5096,7 @@ class Wacko
 		if ($this->page)
 		{
 			// override perpage settings
-			$this->page['options'] = array(
+			$page_options = array(
 				'hide_comments'		=> $this->page['hide_comments'],
 				'hide_files'		=> $this->page['hide_files'],
 				'hide_rating'		=> $this->page['hide_rating'],
@@ -5108,7 +5108,7 @@ class Wacko
 				'theme'				=> $this->page['theme']
 				);
 
-			foreach ($this->page['options'] as $key => $val)
+			foreach ($page_options as $key => $val)
 			{
 				if ($key && $val == true)
 				{
