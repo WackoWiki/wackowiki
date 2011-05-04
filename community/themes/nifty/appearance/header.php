@@ -133,12 +133,12 @@ if ($doubleclick == true)
 						#echo $formatedBMs;
 
 						// get default bookmarks - if not already displayed at global menu div
-						// $formated_default_bookmarks = $this->format($this->get_default_menu($user['lang']), 'wiki');
+						// $formated_default_bookmarks = $this->format($this->get_default_bookmarks($user['lang']), 'wiki');
 						// $formated_default_bookmarks = str_replace ("\n", "</li>\n\t\t\t\t\t<li>", $formated_default_bookmarks);
 						// echo $formated_default_bookmarks;
 
 						// get user bookmarks - old version
-						#$formated_user_bookmarks = $this->format($this->get_user_menu($user['user_id']), 'wiki');
+						#$formated_user_bookmarks = $this->format($this->get_user_bookmarks($user['user_id']), 'wiki');
 						#$formated_user_bookmarks = str_replace ("\n", "</li>\n\t\t\t\t\t<li>", $formated_user_bookmarks);
 						#echo $formated_user_bookmarks;
 
@@ -147,11 +147,11 @@ if ($doubleclick == true)
 
 						// bookmarks
 						// TODO: should be taken out of user session
-						foreach ($this->get_user_menu($user['user_id']) as $menu_item)
+						foreach ($this->get_user_menu($user['user_id']) as $_bookmark)
 						{
-						$formatted_user_bookmarks = $this->format($menu_item[1], 'wiki');
+						$formatted_user_menu = $this->format($_bookmark[1], 'wiki');
 
-						if ($this->page['page_id'] == $menu_item[0])
+						if ($this->page['page_id'] == $_bookmark[0])
 						{
 							echo '<li class="active">';
 						}
@@ -160,7 +160,7 @@ if ($doubleclick == true)
 							echo '<li>';
 						}
 
-							echo $formatted_user_bookmarks."</li>\n\t\t\t\t\t";
+							echo $formatted_user_menu."</li>\n\t\t\t\t\t";
 						}
 
 						// now show add or remove bookmark link
@@ -242,19 +242,19 @@ if ($doubleclick == true)
 					<?php
 					// display global bookmarks as a user menu, inline top
 					// use default bookmarks (owner is system-user)
-					#$formated_default_bookmarks = $this->format($this->get_default_menu($user['lang']), 'wiki');
-					#$formated_default_bookmarks = str_replace ("\n", "</li>\n\t\t\t\t\t<li>", $formated_default_bookmarks);
-					#echo $formated_default_bookmarks;
+					#$formated_default_menu = $this->format($this->get_default_menu($user['lang']), 'wiki');
+					#$formated_default_menu = str_replace ("\n", "</li>\n\t\t\t\t\t<li>", $formated_default_menu);
+					#echo $formated_default_menu;
 					#echo "</li>\n";
 
 					#$this->context[++$this->current_context] = '/';
 					#$this->stop_link_tracking();
 
-					foreach ($this->get_default_menu($user['lang']) as $menu_item)
+					foreach ($this->get_default_menu($user['lang']) as $_menu)
 					{
-						$formatted_menu = $this->format($this->format($menu_item[1]), 'post_wacko');
+						$formatted_menu = $this->format($this->format($_menu[1]), 'post_wacko');
 
-						if ($this->page['page_id'] == $menu_item[0])
+						if ($this->page['page_id'] == $_menu[0])
 						{
 							echo '<li class="active">';
 						}
@@ -415,11 +415,11 @@ if ($doubleclick == true)
 					// display the user bookmarks list and the add/remove-current-page-from-bookmarks-icon
 					echo "<ul>\n";
 						// TODO: should be taken out of user session
-						foreach ($this->get_user_menu($user['user_id']) as $menu_item)
+						foreach ($this->get_user_menu($user['user_id']) as $_menu)
 						{
-						$formatted_user_bookmarks = $this->format($menu_item[1], 'wiki');
+						$formatted_user_menu = $this->format($_menu[1], 'wiki');
 
-						if ($this->page['page_id'] == $menu_item[0])
+						if ($this->page['page_id'] == $_menu[0])
 						{
 							echo '<li class="active">';
 						}
@@ -428,11 +428,11 @@ if ($doubleclick == true)
 							echo '<li>';
 						}
 
-							echo $formatted_user_bookmarks."</li>\n\t\t\t\t\t";
+							echo $formatted_user_menu."</li>\n\t\t\t\t\t";
 						}
 
-						// now show add or remove bookmark link
-						// takes stuff out of user session unlike get_user_bookmarks above
+						// now show add or remove menu link
+						// takes stuff out of user session unlike get_user_menu above
 						if ($this->get_user())
 						{
 							if (in_array($this->page['page_id'], $this->get_menu_links()))
@@ -705,7 +705,7 @@ if ($doubleclick == true)
 						echo echo_tab(
 							$this->href('rename'),
 							$this->get_translation('RenameText'),
-							($this->page && ($this->user_is_owner() && (
+							($this->page && (($this->is_admin() || $this->user_is_owner()) && (
 								($this->forum === true && $this->user_is_owner() && (int)$this->page['comments'] == 0) ||
 								($this->forum === false && $this->user_is_owner()))))
 								? $this->get_translation('RenameText') : '',
