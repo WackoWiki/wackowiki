@@ -5509,14 +5509,14 @@ class Wacko
 			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."revision SET ".
 					"tag		= '".quote($this->dblink, $new_tag)."', ".
-					"supertag	= '".quote($this->dblink, $new_supertag)."', ".
-					"depth	= '".quote($this->dblink, $new_depth)."' ".
+					"supertag	= '".quote($this->dblink, $new_supertag)."' ".
 				"WHERE tag		= '".quote($this->dblink, $tag)."' ")
 			&&
 			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."page  SET ".
 					"tag		= '".quote($this->dblink, $new_tag)."', ".
-					"supertag	= '".quote($this->dblink, $new_supertag)."' ".
+					"supertag	= '".quote($this->dblink, $new_supertag)."', ".
+					"depth	= '".quote($this->dblink, $new_depth)."' ".
 				"WHERE tag		= '".quote($this->dblink, $tag)."' ");
 	}
 
