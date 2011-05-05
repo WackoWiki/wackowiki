@@ -501,7 +501,6 @@ $wacko_translation = array(
 
 	'ForgotComment' => 'Introdu loginul sau e-mailul'."\n".' si vei primi scrisoarea cu instructiuni.',
 	'ForgotMain' => 'Ai uitat parola?',
-	'ForgotField' => '((WackoWiki:Doc/Документация/ЧтоТакоеИмяФамилия ИмяФамилия)) или адрес электронной почты',
 	'SendButton' => 'Trimite',
 	'UserNotFound' => '<em>Nu exista utilizator cu asa login sau e-mail.</em>',
 	'NotConfirmedEmail' => '<em>Ваш электронный адрес не подтверждён.<br/>Невозможно выслать код по неподтверждённому адресу.</em>',

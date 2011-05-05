@@ -498,7 +498,6 @@ $wacko_translation = array(
 
 	'ForgotComment' => 'Wpisz swój login i adres e-mail,'."\n".'aby zosta³ przes³any do ciebie e-mail z instrukcjami.',
 	'ForgotMain' => 'Zapomnia³e¶ has³a?',
-	'ForgotField' => '((WackoWiki:Doc/English/WikiName NazwaWiki)) lub e-mail',
 	'SendButton' => 'Wy¶lij',
 	'UserNotFound' => '<em>U¿ytkownik z t± nazw± lub adresem e-mail nie zosta³ znaleziony.</em>',
 	'NotConfirmedEmail' => '<em>Twój adres e-mail nie zosta³ potwierdzony.<br />Mail nie mo¿e byæ wysy³any na niepotwierdzony adres.</em>',
@@ -681,6 +680,7 @@ $wacko_translation = array(
 	'UploadRemoveConfirm' => 'Jeste¶ pewien usuniêcia tego pliku?',
 	'UploadRemoveDenied' => 'Nie masz prawa do usuniêcia tego pliku',
 	'UploadMax' => 'Nie wiêcej ni¿ ',
+	'UploadUsedStorage'		=> 'Storage in use ',
 
 	'UploadBy' => 'Uploaded by',
 	'FileAdded' => 'Added',

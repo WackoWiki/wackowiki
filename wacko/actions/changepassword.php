@@ -5,6 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$error = '';
+
 ?>
 <!--notypo-->
 <?php
@@ -18,17 +20,17 @@ if ($this->config['tls'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTT
 if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 {
 	// Password forgotten. Provided secret code
-	if ($_GET['secret_code'])
+	if (isset($_GET['secret_code']))
 	{
 		$code = $_GET['secret_code'];
 	}
-	elseif ($_POST['secret_code'])
+	elseif (isset($_POST['secret_code']))
 	{
 		$code = $_POST['secret_code'];
 	}
 
 	$user = $this->load_single(
-		"SELECT * ".
+		"SELECT user_id, user_name ".
 		"FROM ".$this->config['user_table']." ".
 		"WHERE change_password='".quote($this->dblink, $code)."' ".
 		"LIMIT 1");
@@ -37,21 +39,20 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 	{
 		if (isset($_POST['newpassword']))
 		{
-
 			//Password forgotten. Provided secret code and new password. Change password.
-			$newpassword = $_POST['newpassword'];
-			$confpassword = $_POST['confpassword'];
+			$new_password	= $_POST['newpassword'];
+			$conf_password	= $_POST['confpassword'];
 
 			// check all conditions
-			$complexity		= $this->password_complexity($user, $newpassword);
+			$complexity		= $this->password_complexity($user['user_name'], $new_password);
 
 			// confirmed password mismatch
-			if ($confpassword != $newpassword)
+			if ($conf_password != $new_password)
 			{
 				$error = $this->get_translation('PasswordsDidntMatch');
 			}
 			// spaces in password
-			else if (preg_match('/ /', $newpassword))
+			else if (preg_match('/ /', $new_password))
 			{
 				$error = $this->get_translation('SpacesArentAllowed');
 			}
@@ -76,9 +77,14 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 			}
 			else
 			{
+				$salt_length		= 10;
+				$salt				= $this->random_password($salt_length, 3);
+				$password_encrypted	= hash('sha256', $user['user_name'].$salt.$new_password);
+
 				$this->sql_query(
 					"UPDATE ".$this->config['user_table']." SET ".
-						"password			= '".quote($this->dblink, hash('sha256', $newpassword))."', ".
+						"password			= '".quote($this->dblink, $password_encrypted)."', ".
+						"salt				= '".quote($this->dblink, $salt)."', ".
 						"change_password	= '' ".
 					"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"LIMIT 1");
@@ -88,7 +94,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 
 				// forward
 				$this->set_message($this->get_translation('PasswordChanged'));
-				$this->redirect($this->href('', $this->get_translation('LoginPage')));
+				$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.rand(0,1000)));
 			}
 
 			if ($error)
@@ -113,35 +119,36 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 					<label for="confpassword"><?php echo $this->get_translation('ConfirmPassword');?>:</label>
 					<input type="password" id="confpassword" name="confpassword" size="24" />
 					<?php
-							if ($this->config['pwd_char_classes'] > 0)
-							{
-								$pwd_cplx_text = $this->get_translation('PwdCplxDesc4');
+					if ($this->config['pwd_char_classes'] > 0)
+					{
+						$pwd_cplx_text = $this->get_translation('PwdCplxDesc4');
 
-								if ($this->config['pwd_char_classes'] == 1)
-								{
-									$pwd_cplx_text .= $this->get_translation('PwdCplxDesc41');
-								}
-								else if ($this->config['pwd_char_classes'] == 2)
-								{
-									$pwd_cplx_text .= $this->get_translation('PwdCplxDesc42');
-								}
-								else if ($this->config['pwd_char_classes'] == 3)
-								{
-									$pwd_cplx_text .= $this->get_translation('PwdCplxDesc43');
-								}
+						if ($this->config['pwd_char_classes'] == 1)
+						{
+							$pwd_cplx_text .= $this->get_translation('PwdCplxDesc41');
+						}
+						else if ($this->config['pwd_char_classes'] == 2)
+						{
+							$pwd_cplx_text .= $this->get_translation('PwdCplxDesc42');
+						}
+						else if ($this->config['pwd_char_classes'] == 3)
+						{
+							$pwd_cplx_text .= $this->get_translation('PwdCplxDesc43');
+						}
 
-								$pwd_cplx_text .= ". ".$this->get_translation('PwdCplxDesc5');
-							}
-							echo "<br /><small>".
-								 $this->get_translation('PwdCplxDesc1').
-								 str_replace('%1', $this->config['pwd_min_chars'],
-									$this->get_translation('PwdCplxDesc2')).
-								 ($this->config['pwd_unlike_login'] > 0
-									? ", ".$this->get_translation('PwdCplxDesc3')
-									: "").
-								 ($this->config['pwd_char_classes'] > 0
-									? ", ".$pwd_cplx_text
-									: "")."</small>";
+						$pwd_cplx_text .= ". ".$this->get_translation('PwdCplxDesc5');
+					}
+
+					echo "<br /><small>".
+						 $this->get_translation('PwdCplxDesc1').
+						 str_replace('%1', $this->config['pwd_min_chars'],
+							$this->get_translation('PwdCplxDesc2')).
+						 ($this->config['pwd_unlike_login'] > 0
+							? ", ".$this->get_translation('PwdCplxDesc3')
+							: "").
+						 ($this->config['pwd_char_classes'] > 0
+							? ", ".$pwd_cplx_text
+							: "")."</small>";
 					?>
 				</p>
 				<p>
@@ -164,27 +171,27 @@ else if (!isset($forgot) && $user = $this->get_user())
 	if (isset($_POST['action']) && $_POST['action'] == 'change')
 	{
 		//Simple change password
-		$password = $_POST['password'];
-		$newpassword = $_POST['newpassword'];
-		$confpassword = $_POST['confpassword'];
+		$password		= $_POST['password'];
+		$new_password	= $_POST['newpassword'];
+		$conf_password	= $_POST['confpassword'];
 
 		// check all conditions
-		$complexity		= $this->password_complexity($user['user_name'], $newpassword);
+		$complexity		= $this->password_complexity($user['user_name'], $new_password);
 
 		// wrong current password
-		if (hash('sha256', $password)!= $user['password'])
+		if (hash('sha256', $user['user_name'].$user['salt'].$password) != $user['password'])
 		{
 			$error = $this->get_translation('WrongPassword');
 			// log event
 			$this->log(3, str_replace('%1', $user['user_name'], $this->get_translation('LogUserPasswordMismatch', $this->config['language'])));
 		}
 		// confirmed password mismatch
-		else if ($confpassword != $newpassword)
+		else if ($conf_password != $new_password)
 		{
 			$error = $this->get_translation('PasswordsDidntMatch');
 		}
 		// spaces in password
-		else if (preg_match('/ /', $newpassword))
+		else if (preg_match('/ /', $new_password))
 		{
 			$error = $this->get_translation('SpacesArentAllowed');
 		}
@@ -209,10 +216,15 @@ else if (!isset($forgot) && $user = $this->get_user())
 		}
 		else
 		{
+			$salt_length		= 10;
+			$salt				= $this->random_password($salt_length, 3);
+			$password_encrypted	= hash('sha256', $user['user_name'].$salt.$new_password);
+
 			// store new password
 			$this->sql_query(
-				"UPDATE ".$this->config['user_table']." ".
-				"SET password = '".quote($this->dblink, hash('sha256', $newpassword))."' ".
+				"UPDATE ".$this->config['user_table']." SET ".
+					"password			= '".quote($this->dblink, $password_encrypted)."', ".
+					"salt				= '".quote($this->dblink, $salt)."' ".
 				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 				"LIMIT 1");
 
@@ -226,7 +238,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 
 			// forward
 			$this->set_message($this->get_translation('PasswordChanged'));
-			$this->redirect($this->href('', $this->get_translation('LoginPage')));
+			$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.rand(0,1000)));
 		}
 	}
 
@@ -270,13 +282,13 @@ else if (!isset($forgot) && $user = $this->get_user())
 			}
 
 			echo "<br /><small>".
-				 $this->get_translation('PwdCplxDesc1').
-				 str_replace('%1', $this->config['pwd_min_chars'],
+				$this->get_translation('PwdCplxDesc1').
+				str_replace('%1', $this->config['pwd_min_chars'],
 					$this->get_translation('PwdCplxDesc2')).
-				 ($this->config['pwd_unlike_login'] > 0
+				($this->config['pwd_unlike_login'] > 0
 					? ", ".$this->get_translation('PwdCplxDesc3')
 					: "").
-				 ($this->config['pwd_char_classes'] > 0
+				($this->config['pwd_char_classes'] > 0
 					? ", ".$pwd_cplx_text
 					: "")."</small>";
 			?>
@@ -297,12 +309,13 @@ else
 {
 	if (isset($_POST['action']) && $_POST['action'] == 'send')
 	{
-		$name = str_replace(' ', '', $_POST['loginormail']);
-		$user = $this->load_single(
-			"SELECT * ".
+		$user_name	= str_replace(' ', '', $_POST['user_name']);
+		$email		= str_replace(' ', '', $_POST['email']);
+		$user		= $this->load_single(
+			"SELECT user_id, user_name, email, password, email_confirm ".
 			"FROM ".$this->config['user_table']." ".
-			"WHERE user_name = '".quote($this->dblink, $name)."' ".
-				"OR email = '".quote($this->dblink, $name)."' ".
+			"WHERE user_name = '".quote($this->dblink, $user_name)."' ".
+				"AND email = '".quote($this->dblink, $email)."' ".
 			"LIMIT 1");
 
 		if ($user)
@@ -313,7 +326,7 @@ else
 
 				$subject =	$this->get_translation('EmailForgotSubject').
 							$this->config['site_name'];
-				$body =	$this->get_translation('EmailHello'). $name.".\n\n".
+				$body	=	$this->get_translation('EmailHello'). $user_name.".\n\n".
 							str_replace('%1', $this->config['site_name'],
 							str_replace('%2', $user['user_name'],
 							str_replace('%3', $this->href().
@@ -325,8 +338,8 @@ else
 
 				// update table
 				$this->sql_query(
-					"UPDATE ".$this->config['user_table']." ".
-					"SET change_password = '".quote($this->dblink, $code)."' ".
+					"UPDATE ".$this->config['user_table']." SET ".
+						"change_password = '".quote($this->dblink, $code)."' ".
 					"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
 					"LIMIT 1");
 
@@ -355,7 +368,7 @@ else
 	}
 
 	// View password forgot form
-	if (isset($error) || (isset($_POST['action']) && $_POST['action'] != 'send'))
+	if (isset($error) || (isset($_POST['action']) && $_POST['action'] != 'send') || (!isset($_POST['action'])) )
 	{
 		if (isset($error))
 		{
@@ -366,12 +379,15 @@ else
 		echo $this->form_open();
 ?>
 		<input type="hidden" name="action" value="send" />
-		<div class="cssform">
+
 		<h3><?php echo $this->format_translation('ForgotMain'); ?></h3>
 		<p><?php echo $this->format_translation('ForgotComment'); ?></p>
+		<div class="cssform">
 		<p>
-			<label for="loginormail"><?php echo $this->format_translation('ForgotField'); ?>:</label>
-			<input type="text" id="loginormail" name="loginormail" size="24" />
+			<label for="user_name"><?php echo $this->format_translation('UserName'); ?>:</label>
+			<input type="text" id="user_name" name="user_name" size="24" /><br />
+			<label for="email"><?php echo $this->format_translation('Email'); ?>:</label>
+			<input type="text" id="email" name="email" size="24" />
 		</p>
 		<p>
 			<input type="submit" value="<?php echo $this->get_translation('SendButton'); ?>" />
