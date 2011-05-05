@@ -496,9 +496,8 @@ $wacko_translation = array(
 							'until your email-address was confirmed, by following the link in the email sent to you. '.
 							'If, within days after registration You never got a email, ask for it again by clicking ',
 
-	'ForgotComment' => 'Sisetage oma kasutajanimi või e-posti aadress,'."\n".' siis saadetakse sulle e-postiga instruktsioonid.',
+	'ForgotComment' => 'Sisetage oma kasutajanimi ja e-posti aadress,'."\n".' siis saadetakse sulle e-postiga instruktsioonid.',
 	'ForgotMain' => 'Unustasid parooli?',
-	'ForgotField' => '((WackoWiki:Doc/English/WikiName WikiNimi)) või e-post',
 	'SendButton' => 'Saada',
 	'UserNotFound' => '<em>Sellist kasutajanimi või e-postii aadressi ei leitud.</em>',
 	'NotConfirmedEmail' => '<em>Sinu e-posti aadress ei leidnud kinnitust..<br />Kirja ei saa saata kinnitust leidmata aadressile.</em>',
@@ -681,6 +680,7 @@ $wacko_translation = array(
 	'UploadRemoveConfirm' => 'Oled sa kindel, et tahad kustutada?',
 	'UploadRemoveDenied' => 'Sul ei ole lubatud seda faili eemaldada',
 	'UploadMax' => 'Mitte rohkem kui ',
+	'UploadUsedStorage'		=> 'Storage in use ',
 
 	'UploadBy' => 'Uploaded by',
 	'FileAdded' => 'Added',

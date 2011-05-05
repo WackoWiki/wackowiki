@@ -496,9 +496,8 @@ $wacko_translation = array(
 							'confirmation de votre adresse de messagerie en suivant le lien contenu dans le courriel qui vous a été envoyé. '.
 							'Si, les jours suivant votre enregistrement vous n\'avez pas reçu ce courriel, demandez-le en cliquant ',
 
-	'ForgotComment' => 'Indiquez votre NomWiki ou votre adresse de messagerie,'."\n".'un courriel avec des instructions vous sera envoyé.',
+	'ForgotComment' => 'Indiquez votre NomWiki et votre adresse de messagerie,'."\n".'un courriel avec des instructions vous sera envoyé.',
 	'ForgotMain' => 'Avez-vous oublié votre mot de passe&nbsp;?',
-	'ForgotField' => '((WackoWiki:Doc/Francophone/PrenomNom PrénomNom)) ou adresse de messagerie',
 	'SendButton' => 'Envoyer',
 	'UserNotFound' => '<em>Aucun utilisateur avec ce nom ou cette adresse de messagerie n&rsquo;a été trouvé.</em>',
 	'NotConfirmedEmail' => '<em>Vous n&rsquo;avez pas confirmé votre adresse de messagerie suite au courriel que vous avez dû recevoir.<br />Aucun courriel ne peut être envoyé à une adresse non confirmée.</em>',
@@ -681,6 +680,7 @@ $wacko_translation = array(
 	'UploadRemoveConfirm' => '&Ecirc;tes-vous certain(e) de vouloir enlever ce fichier&nbsp;?',
 	'UploadRemoveDenied' => 'Vous n&rsquo;êtes pas autorisé à enlever ce fichier',
 	'UploadMax' => 'Pas plus de ',
+	'UploadUsedStorage'		=> 'Storage in use ',
 
 	'UploadBy' => 'Uploaded by',
 	'FileAdded' => 'Added',

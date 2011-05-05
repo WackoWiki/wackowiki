@@ -496,9 +496,8 @@ $wacko_translation = array(
 								'bis deine E-Mail-Adresse bestätigt wurde, indem du den Link in der dir zugesendeten E-Mail folgst.'.
 								'Wenn innerhalb weniger Tage nach der Registrierung du keine E-Mail erhalten hast, kannst du sie erneut anfragen, klicke dazu ',
 
-	'ForgotComment'			=> 'Benutzername oder E-Mailadresse angeben,'."\n".'du bekommst dann eine E-Mail mit weiteren Anweisungen.',
+	'ForgotComment'			=> 'Benutzername und E-Mailadresse angeben,'."\n".'du bekommst dann eine E-Mail mit weiteren Anweisungen.',
 	'ForgotMain'			=> 'Passwort vergessen?',
-	'ForgotField'			=> '((WackoWiki:Doc/Deutsch/WikiName VorUndNachname)) oder E-Mail',
 	'SendButton'			=> 'Senden',
 	'UserNotFound'			=> '<em>Ein Benutzer mit diesem Namen oder E-Mailadresse wurde nicht gefunden.</em>',
 	'NotConfirmedEmail'		=> '<em>Deine E-Mailadresse ist noch nicht bestätigt<br />E-Mails können nicht an unbestätigte E-Mailadressen verschickt werden.</em>',
@@ -681,6 +680,7 @@ $wacko_translation = array(
 	'UploadRemoveConfirm'	=> 'Sicher, dass diese Datei gelöscht werden soll?',
 	'UploadRemoveDenied'	=> 'Du hast keine Berechtigung, diese Datei zu löschen',
 	'UploadMax'				=> 'Nicht mehr als ',
+	'UploadUsedStorage'		=> 'Storage in use ',
 
 	'UploadBy'				=> 'Hochgeladen von',
 	'FileAdded'				=> 'Hinzugefügt',

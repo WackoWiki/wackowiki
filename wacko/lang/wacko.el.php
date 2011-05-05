@@ -496,9 +496,8 @@ $wacko_translation = array(
 							'until your email-address was confirmed, by following the link in the email sent to you. '.
 							'If, within days after registration You never got a email, ask for it again by clicking ',
 
-	'ForgotComment' => 'Πληκτρολόγησε το όνομα χρήσης σου ή την ηλεκτρονική σου διεύθυνση,'."\n".'και μετά ακολούθησε τις οδηγίες που θα σου σταλούν μέσω ηλεκτρονικού ταχυδρομείου ',
+	'ForgotComment' => 'Πληκτρολόγησε το όνομα χρήσης σου και την ηλεκτρονική σου διεύθυνση,'."\n".'και μετά ακολούθησε τις οδηγίες που θα σου σταλούν μέσω ηλεκτρονικού ταχυδρομείου ',
 	'ForgotMain' => 'Ξέχασες το συνθηματικό σου?',
-	'ForgotField' => '((WackoWiki:Doc/English/WikiName Όνομα Χρήσης)) ή ηλεκτρονική διεύθυνση',
 	'SendButton' => 'Αποστολή',
 	'UserNotFound' => '<em>Δεν υπάρχει χρήστης με αυτό το όνομα ή με αυτήν την ηλεκτρονική διεύθυνση.</em>',
 	'NotConfirmedEmail' => '<em>Your e-mail address is not confirmed.<br />Mail can\'t be send to non-confirmed address.</em>',
@@ -681,6 +680,7 @@ $wacko_translation = array(
 	'UploadRemoveConfirm' => 'Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το αρχείο;',
 	'UploadRemoveDenied' => 'Δεν επιτρέπεται να αφαιρέσετε αυτό το αρχείο',
 	'UploadMax' => 'Όχι μεγαλύτερο από ',
+	'UploadUsedStorage'		=> 'Storage in use ',
 
 	'UploadBy' => 'Uploaded by',
 	'FileAdded' => 'Added',

@@ -501,9 +501,8 @@ $wacko_translation = array(
 							'until your email-address was confirmed, by following the link in the email sent to you. '.
 							'If, within days after registration You never got a email, ask for it again by clicking ',
 
-	'ForgotComment' => 'Enter your login or email address,'."\n".'then email with instructions will be send to you.',
+	'ForgotComment' => 'Enter your login and email address,'."\n".'then email with instructions will be send to you.',
 	'ForgotMain' => 'Forgot password?',
-	'ForgotField' => '((WackoWiki:Doc/English/WikiName NameSurname)) or email',
 	'SendButton' => 'Send',
 	'UserNotFound' => '<em>User with this name or email address was not found.</em>',
 	'NotConfirmedEmail' => '<em>Your email address is not confirmed.<br />Mail can\'t be send to non-confirmed address.</em>',
@@ -686,6 +685,7 @@ $wacko_translation = array(
 	'UploadRemoveConfirm' => 'Sure to remove this file?',
 	'UploadRemoveDenied' => 'You are not allowed to remove this file',
 	'UploadMax' => 'No more than ',
+	'UploadUsedStorage'		=> 'Storage in use ',
 
 	'UploadBy' => 'Uploaded by',
 	'FileAdded' => 'Added',
