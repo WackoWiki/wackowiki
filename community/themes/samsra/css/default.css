@@ -1,10 +1,10 @@
 @import "wacko.css";
 
 /* basic -------------------------------------------------- */
-P, TD, LI, SELECT, TEXTAREA {
-  font-family: Verdana;
-  font-size: 13px;
-  line-height: 1.3em;
+p, td, li, select, textarea {
+	font-family: Verdana;
+	font-size: 13px;
+	line-height: 1.3em;
 }
 
 label {cursor:pointer;}
@@ -59,6 +59,30 @@ A:Active  {
 .time{ color:#999999; font-size: 9px; margin:5px 20px;}
 .debug { font-size: 11px; color: #888888;}
 
+#header {
+	padding-top: 0px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+	padding-left: 10px; /*line-height: 22px;*/
+}
+
+#header-main {
+	clear: both;
+	overflow: hidden;
+	padding: 10px 0px;
+}
+
+/** Styles for the main content in the page. *********************************/
+	/* Default settings */
+#content {
+	background-color: #FFFFFF;
+	padding: 9px 0px 0px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border: 1px inset;
+
+}
+
 .main {
   font-size: 22px;
 }
@@ -73,20 +97,19 @@ A:Active  {
 }
 
 #page {
-  background-color: #FFFFFF;
-  padding: 9px 10px 10px;
-  border: 1px inset;
-  border-top: none; 
-  border-bottom: none; 
+	background-color: #FFFFFF;
+	padding-top: 5px;
+	padding: 9px 10px 10px;
+	border-top: none;
+	border-bottom: none;
 }
 #pageedit {
-  background-color: #FFFFFF;
-  border: 1px inset;
-  border-bottom: none; 
+	background-color: #FFFFFF;
+	border-bottom: none;
 }
 #pageedit form textarea {
-  width: 100%;
-  height: 400px; 
+	width: 100%;
+	height: 400px;
 }
 .pagetitle {
   font-size: 23px;
@@ -104,25 +127,52 @@ A:Active  {
   border-top: 1px solid #CCCCCC;
 }
 
-#filesheader, #commentsheader {
-  background-color: #ECECFF;
-  padding: 2px 10px;
-  border-left: 1px inset;
-  border-right: 1px inset;
-  border-top: 1px solid #CCCCCC;
+.footerlist {
+	margin: 0 auto 0;
+	overflow: hidden;
+}
+
+.footerlist ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.footerlist li {
+	border-left: 1px solid;
+	border-left-style: solid;
+	float: left;
+	line-height: 1.2em;
+	margin: 0 .5em 0 -.5em;
+	padding: 0 .5em 0 .5em;
+	white-space: nowrap;
+}
+
+.footerlist ul li form {
+	display: inline;
+}
+
+/** File and comment-related *************************************************/
+	/* Headers (always visible) */
+#filesheader, #commentsheader, #rateheader {
+	background-color: #ECECFF;
+	padding: 2px 10px;
+	border-left: 1px inset;
+	border-right: 1px inset;
+	border-top: 1px solid #CCCCCC;
 }
 
 .files, .comment {
-  background-color: #EEEEEE;
-  padding: 10px;
-  border-left: 1px inset;
-  border-right: 1px inset;
-  border-top: 1px solid #CCCCCC;
-  border-bottom: 1px solid #EEEEEE;
+	background-color: #EEEEEE;
+	padding: 10px;
+	border-left: 1px inset;
+	border-right: 1px inset;
+	border-top: 1px solid #CCCCCC;
+	border-bottom: 1px solid #EEEEEE;
 }
 
 .comment:target {
-	border:2px solid #FF6600;
+	border: 2px solid #FF6600;
 	padding:0.5em 0.5em 0.5em 25px;
 }
 
@@ -131,46 +181,54 @@ A:Active  {
 }
 /* Change summary */
 .editnote {
-  color: #555555;
+	color: #555555;
 }
 .review {
 	font-weight:bold;
 }
 .filesform, .commentform {
-  background-color: #EEEEEE;
-  padding: 10px;
-  border-left: 1px inset;
-  border-right: 1px inset;
-  border-top: 1px solid #CCCCCC;
+	background-color: #EEEEEE;
+	padding: 10px;
+	border-left: 1px inset;
+	border-right: 1px inset;
+	border-top: 1px solid #CCCCCC;
 }
 .commentform form {width:100%;}
 .commentform form textarea {width:100%; padding:0;}
 
 
 #credits {
-  font-size: 11px;
-  color: #AAAAAA;
-  text-align: right;
+	font-size: 11px;
+	color: #AAAAAA;
+	text-align: right;
 }
 
-#credits A {
-  color: #AAAAAA;
+#credits a {
+	color: #AAAAAA;
+}
+
+#credits a:active {
+	color: #FF0000;
 }
 
 .name {
-  text-align: right;
-  font-size: 11px;
+	text-align: right;
+	font-size: 11px;
 }
 
+/* Included pages: SYNTAX {{include file="xyz"}} */
 .include {
-  background-color: #F5F5F5;
-  padding: 8px;
+	background-color: #F5F5F5;
+	padding: 8px;
 }
 
-.outerlink { color: #990000;}
+/* Outgoing hyperlinks: SYNTAX ((http://slashdot.org nerds)) */
+.outerlink {
+	color: #990000;
+}
 
-FIELDSET {
- padding: 10px;
+fieldset {
+	padding: 10px;
 }
 
 form input.submitinput {
@@ -230,7 +288,10 @@ visibility:hidden
 p.layout-box {background: transparent; margin: -1.5em 0px 10px 0px; padding: 0; border: 0;}
 p.layout-box span {background:#FFF; padding:0 1px;}
 
-.buttonsspacer{width:10px;height:1px;}
+.buttonsspacer {
+	width:10px;
+	height:1px;
+}
 
 /* WikiEdit Toolbar -------------------------------------- */
 
@@ -250,39 +311,77 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 .toolbar li {
 	background: ButtonFace;
 }
- .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
-  background: ButtonFace;
-  color: ButtonText;
-  border: 1px solid ButtonFace;
-  padding: 1px;  margin: 0px;
-  cursor: pointer; 
- }
- .toolbar img{
-  width: 20px;
-  height: 20px;
- }
- .toolbar .btn-hover {
-  border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
- }
- .toolbar .btn-active,  .toolbar .btn-pressed {
-  border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
- }
- .toolbar .btn-pressed {
-  background: ButtonHighlight;
- }
- .toolbar .btn-separator {
-border-left:1px solid buttonshadow;
-border-right:1px solid buttonhighlight;
-height:18px;
-margin:3px;
-padding:0;
-width:0;
+
+.toolbar .btn-, .toolbar .btn-hover, .toolbar .btn-active, .toolbar .btn-pressed {
+	background: ButtonFace;
+	color: ButtonText;
+	border: 1px solid ButtonFace;
+	padding: 1px;
+	margin: 0px;
+	cursor: pointer;
 }
- .edname-w, .edname-r, .edname-s  
-            { font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
- .edname-w  { background: #1E9905; }
- .edname-r  { background: #2A45D0; } 
- .edname-s  { background: #D08C2A; }
+
+.toolbar img {
+	width: 20px;
+	height: 20px;
+}
+.toolbar .btn-hover {
+	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+}
+
+.toolbar .btn-active, .toolbar .btn-pressed {
+	border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+}
+
+.toolbar .btn-pressed {
+	background: ButtonHighlight;
+}
+
+.toolbar .btn-separator {
+border-left: 1px solid buttonshadow;
+border-right: 1px solid buttonhighlight;
+height: 18px;
+margin: 3px;
+padding: 0;
+width: 0;
+}
+.edname-w, .edname-r, .edname-s {
+	font: bold 14px Arial;
+	border: 3px solid #D4D0C8;
+	padding: 0 7px;
+	color: #ffffff;
+	vertical-align: middle;
+}
+
+.edname-w {
+	background: #1E9905;
+}
+
+.edname-r {
+	background: #2A45D0;
+}
+
+.edname-s {
+	background: #D08C2A;
+}
+
+.autocomplete-inplace {
+	background: ButtonFace;
+	border: 1px solid ButtonShadow;
+	padding: 2px;
+	font: 12px Arial;
+}
+
+.autocomplete-inplace div {
+	padding: 2px 5px;
+	cursor: pointer;
+}
+
+.autocomplete-inplace div.ac-over- {
+	color:#ffffff;
+	background: #1E9905;
+}
+
 
 /* CSS form formater */
 .cssform p {
@@ -362,14 +461,14 @@ width:0;
 
 /* feed action */
 .feed {
-    overflow:auto;
+	overflow:auto;
 }
 .feed .note {
-     font-size: 11px;
-     color: #777;
+	font-size: 11px;
+	color: #777;
 }
 .feed .note a {
-     color: #777;
+	color: #777;
 }
 .feed_element_title {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
@@ -378,6 +477,167 @@ width:0;
 	background-position:0 1px;
 	padding-left:20px;
 }
+
+/*Handlers --------------------------------------------------*/
+#content {
+	clear: both;
+}
+
+#navigation {
+	padding: 0px 0px 0px 0px; /*overflow:hidden;*/
+}
+
+#usermenu {
+	margin: 0 auto 0;
+	overflow: hidden;
+	float: left;
+	text-align: left;
+	position: relative;
+}
+
+#usermenu ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#usermenu li {
+	border-left: 1px solid;
+	float: left;
+	line-height: 1.2em;
+	margin: 0 .5em 0 -.5em;
+	padding: 0 .5em 0 .5em;
+	white-space: nowrap;
+}
+
+#usermenu li a {
+	display: inline;
+	border: none;
+	text-decoration: none;
+}
+
+#usermenu li a:visited {
+	color: #990000;
+}
+
+#usermenu li a:hover {
+	color: #B90022;
+	text-decoration: underline;
+}
+
+#usermenu li a:active {
+	color: #FF0000;
+}
+
+#search {
+	margin: 0 auto 0;
+	overflow: hidden;
+	float: right;
+	text-align: left;
+	position: relative;
+}
+
+#search label {
+	display: none;
+}
+
+#header-top {
+	margin: 0 auto 0;
+	overflow: hidden;
+	float: left;
+	text-align: left;
+	position: relative;
+	font-size: 1.3em;
+}
+
+#login {
+	font-size: 12px;
+	margin: 0 auto 0;
+	overflow: hidden;
+	float: right;
+	text-align: left;
+	position: relative;
+}
+
+#login form {
+	display: inline;
+}
+
+#login ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#login li {
+	border-left: 1px solid #aaa;
+	float: left;
+	line-height: 1.2em;
+	margin: 0 .5em 0 -.5em;
+	padding: 0 .5em 0 .5em;
+	white-space: nowrap;
+}
+
+#login li a {
+	display: inline;
+	border: none;
+	text-decoration: none;
+}
+
+#login li a:visited {
+	color: #003399;
+}
+
+#login li a:hover {
+	color: #B90022;
+	text-decoration: underline;
+}
+
+#login li a:active {
+	color: #FF0000;
+}
+
+/* temp */
+.topnav {
+	float: right;
+	font-size: 0.6875em;
+	margin-top: 0.9375em;
+}
+
+.topnav ul,.topnav li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.topnav ul {
+	display: block;
+}
+
+.topnav li {
+	display: inline;
+	margin-right: 1.1em;
+}
+
+/*search*/
+.highlight {
+	background-color: #FFFEA1;
+}
+
+#search_results li {
+	margin: 1em 0;
+}
+
+#search_results li div { /*padding-left: 20px;*/
+	
+}
+
+#search_results h3 {
+	font-size: 14px;
+	border-bottom-width: 0px;
+	border-bottom-style: none;
+}
+
 
 .userprofil {
 	color: #444444;
@@ -393,8 +653,50 @@ width:0;
 	margin-right:20px;
 }
 
-.highlight {
-	background-color: #FFFEA1;
-	font-style: normal;
-	font-weight: bold;
+.ul_letters {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ul_letters li {
+	float: left;
+	line-height: 1.2em;
+	margin: 0 0.5em 0 -0.5em;
+	padding: 0 0.5em;
+	white-space: nowrap;
+}
+
+.pagination {
+	float: right;
+}
+
+.ul_list, .revisions {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ul_list ul {
+	list-style-type: none;
+	padding-left: 20px;
+}
+
+ul.upload, ul.upload ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.upload li {
+	display: block;
+	overflow: hidden;
+	padding-bottom: 5px;
+	text-align: left;
+}
+
+.info_title{
+	display: block;
+	float: left;
+	text-align: left;
+	width: 130px;
 }
