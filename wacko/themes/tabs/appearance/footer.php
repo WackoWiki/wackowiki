@@ -16,6 +16,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 
 	$xsize = $selected ? 7 : 8;
 	$ysize = $selected ? 25 : 30;
+
 	if ($text == '') return; // no tab;
 	if ($selected) $text = "<a href=\"$link\" title=\"$hint\">".$text."</a>";
 	if (!$selected)
@@ -44,9 +45,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 
 	echo "<div class='TabText'>".$text."</div>";
 	echo "</td>";
-	echo "<td><img src='".
-	$engine->config['theme_url'].
-		"icons/tabl$selected".$bonus2.".gif' width='$xsize' align='top' hspace='0' vspace='0' height='$ysize' alt='' border='0' /></td>";
+	echo "<td><img src='".$engine->config['theme_url']."icons/tabl$selected".$bonus2.".gif' width='$xsize' align='top' hspace='0' vspace='0' height='$ysize' alt='' border='0' /></td>";
 	echo '</tr></table>';
 	echo "</div>";
 }
@@ -57,11 +56,9 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
  */
 
 ?>
-<div class="Footer"><img
-	src="<?php echo $this->config['base_url'];?>images/z.gif"
-	width="5" height="1" alt="" align="left" border="0" /><img
-	src="<?php echo $this->config['base_url'];?>images/z.gif"
-	width="5" height="1" alt="" align="right" border="0" />
+<div class="Footer">
+<img src="<?php echo $this->config['base_url'];?>images/z.gif" width="5" height="1" alt="" align="left" border="0" />
+<img src="<?php echo $this->config['base_url'];?>images/z.gif" width="5" height="1" alt="" align="right" border="0" />
 <?php
 	echo_tab( $this->href('show'),  $this->get_translation('ShowTip'),
 	$this->has_access('read') ? $this->get_translation('ShowText') : "",
@@ -177,19 +174,22 @@ if ($this->method == 'show') {
 			echo "</div>";
 			// display form
 			print("<div class=\"filesform\">\n");
+
 			if ($user = $this->get_user())
 			{
-				$user = strtolower($this->get_user_name());
+				$user_name = strtolower($this->get_user_name());
 				$registered = true;
 			}
 			else
-			$user = GUEST;
+			{
+				$user_name = GUEST;
+			}
 
 			if ($registered
 			&&
 			(
 			($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
-			($this->check_acl($user,$this->config['upload']))
+			($this->check_acl($user_name, $this->config['upload']))
 			)
 			)
 			echo $this->action('upload', array('nomark' => 1));
@@ -297,17 +297,11 @@ switch (count($files))
 							?>
 <label for="captcha"><?php echo $this->get_translation('Captcha');?>:</label>
 <br />
-<img
-	src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php"
-	id="freecap" alt="<?php echo $this->get_translation('Captcha');?>" />
-<a href="" onclick="this.blur(); new_freecap(); return false;"
-	title="<?php echo $this->get_translation('CaptchaReload'); ?>"><img
-	src="<?php echo $this->config['base_url'];?>images/reload.png"
-	width="18" height="17"
-	alt="<?php echo $this->get_translation('CaptchaReload'); ?>" /></a>
+<img src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->get_translation('Captcha');?>" />
+<a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->get_translation('CaptchaReload'); ?>">
+<img src="<?php echo $this->config['base_url'];?>images/reload.png" width="18" height="17" alt="<?php echo $this->get_translation('CaptchaReload'); ?>" /></a>
 <br />
-<input id="captcha" type="text" name="word"
-	maxlength="6" style="width: 273px;" />
+<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
 <br />
 <br />
 							<?php
@@ -316,9 +310,7 @@ switch (count($files))
 				}
 				// end captcha
 				?>
-<input type="submit"
-	value="<?php echo $this->get_translation('AddCommentButton'); ?>"
-	accesskey="s" />
+<input type="submit" value="<?php echo $this->get_translation('AddCommentButton'); ?>" accesskey="s" />
 				<?php echo $this->form_close(); ?>
 				<?php
 				print("</div>\n");

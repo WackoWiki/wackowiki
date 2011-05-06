@@ -27,18 +27,18 @@ else if ($this->forum === true && !$this->is_admin())
 
 if ($user = $this->get_user())
 {
-	$user		= strtolower($this->get_user_name());
+	$user_name		= strtolower($this->get_user_name());
 	$user_id	= $this->get_user_id();
 	$registered	= true;
 }
 else
 {
-	$user = GUEST;
+	$user_name = GUEST;
 }
 
 if ($registered
 &&
-($this->check_acl($user, $this->config['rename_globalacl']) || $this->get_page_owner_id($this->page['page_id']) == $user_id)
+($this->check_acl($user_name, $this->config['rename_globalacl']) || $this->get_page_owner_id($this->page['page_id']) == $user_id)
 )
 {
 	if (!$this->page)
@@ -159,7 +159,7 @@ if ($registered
 			echo " /> <label for=\"redirect\">".$this->get_translation('NeedRedirect')."</label>"; ?>
 <br />
 			<?php
-			if ($this->check_acl($user,$this->config['rename_globalacl']))
+			if ($this->check_acl($user_name, $this->config['rename_globalacl']))
 			{
 				echo "<input type=\"checkbox\" id=\"massrename\" name=\"massrename\" />";
 				echo " <label for=\"massrename\">".$this->get_translation('MassRename')."</label>";
@@ -228,7 +228,7 @@ function move(&$parent, $old_page, $new_name )
 	$user		= $parent->get_user();
 	$user_id	= $parent->get_user_id();
 
-	if (($parent->check_acl($user, $parent->config['rename_globalacl'])
+	if (($parent->check_acl($user['user_name'], $parent->config['rename_globalacl'])
 	|| $parent->get_page_owner_id($old_page['page_id']) == $user_id))
 	{
 		$super_new_name = $parent->translit($new_name);
