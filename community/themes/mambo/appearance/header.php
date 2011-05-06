@@ -3,6 +3,8 @@
 require ('themes/_common/_header.php');
 
 ?>
+<script type="text/javascript" src="<?php echo $this->config['theme_url'] ?>js/leftframe.js"></script>
+
 <body onload="all_init();">
 
 <table class="topbody" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -112,8 +114,8 @@ require ('themes/_common/_header.php');
 						<?php
 	// Revisions link
 	echo (( $this->config['hide_revisions'] == false || ($this->config['hide_revisions'] == 1 && $this->get_user()) || ($this->config['hide_revisions'] == 2 && $this->user_is_owner()) || $this->is_admin() )
-			? "<li><a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_string_formatted($this->page['modified'])."</a></li>\n"
-			: "<li>".$this->get_time_string_formatted($this->page['modified'])."</li>\n"
+			? "<a href=\"".$this->href('revisions')."\" title=\"".$this->get_translation('RevisionTip')."\">".$this->get_time_string_formatted($this->page['modified'])."</a>\n"
+			: "".$this->get_time_string_formatted($this->page['modified'])."\n"
 		);
 
 							echo "<hr />";
@@ -168,7 +170,7 @@ require ('themes/_common/_header.php');
 									echo "<hr />";
 									if ($owner = $this->get_page_owner())
 									{
-										print($this->get_translation('Owner').": ".$this->link($owner));
+										print($this->get_translation('Owner').": "."<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$owner)."\">".$owner."</a>");
 									}
 									else if (!$this->page['comment_on_id'])
 									{

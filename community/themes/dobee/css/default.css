@@ -1,4 +1,5 @@
 @import "wacko.css";
+@import "left.css";
 
 /* Layout */
 .topbody {
@@ -323,3 +324,57 @@ legend {font-weight: normal; padding: 0 5px;}
 	font-style: normal;
 	font-weight: bold;
 }
+
+#usermenu ol {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ul_letters {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ul_letters li {
+	float: left;
+	line-height: 1.2em;
+	margin: 0 0.5em 0 -0.5em;
+	padding: 0 0.5em;
+	white-space: nowrap;
+}
+
+.pagination {
+	float: right;
+}
+
+.ul_list, .revisions {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ul_list ul {
+	list-style-type: none;
+	padding-left: 20px;
+}
+
+ul.upload, ul.upload ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.upload li {
+	display: block;
+	overflow: hidden;
+	padding-bottom: 5px;
+	text-align: left;
+}
+
+.info_title{
+	display: block;
+	float: left;
+	text-align: left;
+	width: 130px;
+	}
