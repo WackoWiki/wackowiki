@@ -30,12 +30,12 @@ else if ($this->forum === true && !$this->is_admin())
 
 if ($user = $this->get_user())
 {
-	$user		= strtolower($this->get_user_name());
+	$user_name		= strtolower($this->get_user_name());
 	$registered	= true;
 }
 else
 {
-	$user		= GUEST;
+	$user_name		= GUEST;
 }
 
 $edit_note = str_replace('%1', $this->tag, $this->get_translation('ClonedFrom'));
@@ -135,19 +135,18 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 				echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" />";
 				echo " <label for=\"redirect\">".$this->get_translation('ClonedRedirect')."</label>"; ?>
 		<br />
-		<?php if ($this->check_acl($user,$this->config['rename_globalacl']))
+		<?php if ($this->check_acl($user_name, $this->config['rename_globalacl']))
 			{
 				echo "<input type=\"checkbox\" id=\"massclone\" name=\"massclone\" />";
 				echo " <label for=\"massclone\">".$this->get_translation('MassClone')."</label>";
 			}
-		?><br /><br />
+		?>
+		<br /><br />
 		<input name="submit" type="submit" value="<?php echo $this->get_translation('CloneButton'); ?>" /> &nbsp;
-		<input type="button" value="<?php echo str_replace("\n", " ", $this->get_translation('EditCancelButton')); ?>"
-		onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+		<input type="button" value="<?php echo str_replace("\n", " ", $this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 
 		<?php
 		echo $this->form_close();
-
 	}
 }
 else

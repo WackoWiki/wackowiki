@@ -263,19 +263,19 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 				// display form
 				if ($user = $this->get_user())
 				{
-					$user = strtolower($this->get_user_name());
+					$user_name = strtolower($this->get_user_name());
 					$registered = true;
 				}
 				else
 				{
-					$user = GUEST;
+					$user_name = GUEST;
 				}
 
 				if (isset($registered)
 					&&
 						(
 							($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
-							($this->check_acl($user, $this->config['upload']))
+							($this->check_acl($user_name, $this->config['upload']))
 						)
 					)
 				{

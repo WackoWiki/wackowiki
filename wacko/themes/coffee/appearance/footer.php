@@ -63,7 +63,7 @@ if ($this->page)
 	}
 
 	// Rename link
-	if ($this->check_acl($this->get_user_name(),$this->config['rename_globalacl']) && !$this->user_is_owner())
+	if ($this->check_acl($this->get_user_name(), $this->config['rename_globalacl']) && !$this->user_is_owner())
 	{
 		print("<li><a href=\"".$this->href('rename')."\"><img src=\"".$this->config['theme_url']."icons/rename.gif\" title=\"".$this->get_translation('RenameText')."\" alt=\"".$this->get_translation('RenameText')."\" /></a></li>\n");
 	}

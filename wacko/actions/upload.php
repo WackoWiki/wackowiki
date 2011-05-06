@@ -24,19 +24,19 @@ if ($global) $global = 'global';
 // check who u are, can u upload?
 if ($user = $this->get_user())
 {
-	$user		= strtolower($this->get_user_name());
+	$user_name		= strtolower($this->get_user_name());
 	$registered	= true;
 }
 else
 {
-	$user		= GUEST;
+	$user_name		= GUEST;
 }
 
 if ($registered
 &&
 (
 ($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
-($this->check_acl($user, $this->config['upload']))
+($this->check_acl($user_name, $this->config['upload']))
 )
 && ($this->has_access('upload') && $this->has_access('write') && $this->has_access('read')) || $this->user_is_owner() || $this->is_admin()
 )
