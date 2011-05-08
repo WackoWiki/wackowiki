@@ -103,7 +103,7 @@ if ($this->has_access('read') && $this->config['hide_files'] != 1)
       }
     ?>
 
-    [<a href="<?php echo $this->href('', '', 'show_files=1#files')."\">".$this->get_translation('ShowFiles'); ?></a>]
+    [<a href="<?php echo $this->href('', '', 'show_files=1#filesheader')."\">".$this->get_translation('ShowFiles'); ?></a>]
 
     </div>	</td>
         </tr>
@@ -206,7 +206,7 @@ if ($this->has_access('read') && $this->config['hide_comments'] != 1)
       }
     ?>
 
-    [<a href="<?php echo $this->href('', '', 'show_comments=1#comments')."\">".$this->get_translation('ShowComments'); ?></a>]
+    [<a href="<?php echo $this->href('', '', 'show_comments=1#commentsheader')."\">".$this->get_translation('ShowComments'); ?></a>]
 
     </div></td>
         </tr>

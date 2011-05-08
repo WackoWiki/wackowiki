@@ -64,12 +64,13 @@ A:Active  {
 	padding-right: 10px;
 	padding-bottom: 5px;
 	padding-left: 10px; /*line-height: 22px;*/
+	overflow: hidden;
 }
 
 #header-main {
 	clear: both;
 	overflow: hidden;
-	padding: 10px 0px;
+	padding: 0 0 5px 0;
 }
 
 /** Styles for the main content in the page. *********************************/
@@ -124,7 +125,7 @@ A:Active  {
   padding: 5px 10px;
   border: 1px inset;
   border-top: none;
-  border-top: 1px solid #CCCCCC;
+  
 }
 
 .footerlist {
@@ -157,8 +158,8 @@ A:Active  {
 #filesheader, #commentsheader, #rateheader {
 	background-color: #ECECFF;
 	padding: 2px 10px;
-	border-left: 1px inset;
-	border-right: 1px inset;
+
+
 	border-top: 1px solid #CCCCCC;
 }
 
@@ -189,8 +190,8 @@ A:Active  {
 .filesform, .commentform {
 	background-color: #EEEEEE;
 	padding: 10px;
-	border-left: 1px inset;
-	border-right: 1px inset;
+
+
 	border-top: 1px solid #CCCCCC;
 }
 .commentform form {width:100%;}
@@ -538,8 +539,15 @@ width: 0;
 }
 
 #search label {
-	display: none;
-}
+	/*display: none;
+*/}
+
+input#phrase {
+	border: none;
+	border-bottom: 1px solid #CCCCAA;
+	padding: 0px;
+	margin: 0px;
+	}
 
 #header-top {
 	margin: 0 auto 0;
@@ -547,7 +555,7 @@ width: 0;
 	float: left;
 	text-align: left;
 	position: relative;
-	font-size: 1.3em;
+	font-size: 22px;
 }
 
 #login {
@@ -699,4 +707,39 @@ ul.upload, ul.upload ul {
 	float: left;
 	text-align: left;
 	width: 130px;
+}
+
+/* properties */
+.lined td, .lined th {
+	border-bottom: 1px dotted #BABFC7;
+}
+
+.lined:hover {
+	background: #CCFFCC;
+}
+
+.page_settings {
+	float: left;
+}
+.page_tools {
+	float: right;
+	padding: 0px 40px 10px 10px;
+	
+}
+
+.menu
+{
+	list-style:none outside none;
+	float:right;
+	margin:0;
+	padding:0;
+}
+
+.menu li {
+	border-left:1px dotted #CCCCCC;
+	float:left;
+	line-height:1.2em;
+	margin:0 0.5em 0 -0.5em;
+	padding:0 0.5em;
+	white-space:nowrap;
 }
