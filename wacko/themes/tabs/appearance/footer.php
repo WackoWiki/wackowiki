@@ -217,7 +217,7 @@ switch (count($files))
 	default:
 		print(str_replace('%1',count($files), $this->get_translation('Files_n')));
 }
-?> <?php echo "[<a href=\"".$this->href('', '', 'show_files=1#files')."\">".$this->get_translation('ShowFiles')."</a>]"; ?>
+?> <?php echo "[<a href=\"".$this->href('', '', 'show_files=1#filesheader')."\">".$this->get_translation('ShowFiles')."</a>]"; ?>
 
 </div>
 <?php
@@ -332,7 +332,7 @@ switch (count($comments))
 	default:
 		print(str_replace('%1',count($comments), $this->get_translation('Comments_n')));
 }
-?> <?php echo "[<a href=\"".$this->href('', '', 'show_comments=1#comments')."\">".$this->get_translation('ShowComments')."</a>]"; ?>
+?> <?php echo "[<a href=\"".$this->href('', '', 'show_comments=1#commentsheader')."\">".$this->get_translation('ShowComments')."</a>]"; ?>
 
 </div>
 <?php

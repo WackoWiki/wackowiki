@@ -12,30 +12,25 @@ require ('themes/_common/_header.php');
 	<div id="header">
 		<div id="header-main">
 			<div id="header-top">
-			<strong><?php echo $this->config['site_name'] ?>: </strong><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path()); ?> <a class="Search" title="<?php echo $this->get_translation('SearchTitleTip')?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
-		</div>
-		<div id="login">
+				<?php echo $this->config['site_name'] ?>: <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path()); ?> <a class="Search" title="<?php echo $this->get_translation('SearchTitleTip')?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
+			</div>
+			<div id="search">
 <?php
-// If user are logged, Wacko shows "You are UserName"
-if ($this->get_user())
-{ ?> <span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span><small> ( <span class="nobr Tune"><?php
-echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
- | <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span>
-)</small>
-<?php
-// Else Wacko shows login's controls
-}
-else
-{
-	// Show Register / Login link
-	echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation('LoginPage').($this->config['rewrite_mode'] ? "?" : "&amp;")."goback=".$this->slim_url($this->tag), "", $this->get_translation('LoginPage'), 0)."</li>\n";
-	echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('RegistrationPage'), 0)."</li>\n</ul>";
-}
+// Opens Search form
+echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
 
-// End if
-?></div>
+// Searchbar
+?>
+<span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label>
+<input type="text" name="phrase" id="phrase" size="20" /><input class="submitinput" type="submit" title="<?php echo $this->get_translation('SearchButtonText') ?>" alt="<?php echo $this->get_translation('SearchButtonText') ?>" value="&raquo;"/></span>
+<?php
+
+// Search form close
+echo $this->form_close();
+?>
+			</div>
 		</div>
-<div id="navigation">
+		<div id="navigation">
 <?php
 // Outputs Bookmarks AKA QuickLinks
 	echo '<div id="usermenu">';
@@ -81,25 +76,33 @@ else
 				$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
 		}
 	}
+
 	echo "\n</ol></div>";
 ?>
-<div id="search">
+			<div id="login">
 <?php
-// Opens Search form
-echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
-
-// Searchbar
-?>
-<span class="search nobr"><label for="phrase"><?php echo $this->get_translation('SearchText'); ?></label><input
-	type="text" name="phrase" id="phrase" size="20" /><input class="submitinput" type="submit" title="<?php echo $this->get_translation('SearchButtonText') ?>" alt="<?php echo $this->get_translation('SearchButtonText') ?>" value="<?php echo $this->get_translation('SearchButtonText') ?>"/></span>
+// If user are logged, Wacko shows "You are UserName"
+if ($this->get_user())
+{ ?> <span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span><small> ( <span class="nobr Tune"><?php
+echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
+ | <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span>
+)</small>
 <?php
+// Else Wacko shows login's controls
+}
+else
+{
+	// Show Register / Login link
+	echo "<ul>\n<li>".$this->compose_link_to_page($this->get_translation('LoginPage').($this->config['rewrite_mode'] ? "?" : "&amp;")."goback=".$this->slim_url($this->tag), "", $this->get_translation('LoginPage'), 0)."</li>\n";
+	echo "<li>".$this->compose_link_to_page($this->get_translation('RegistrationPage'), "", $this->get_translation('RegistrationPage'), 0)."</li>\n</ul>";
+}
 
-// Search form close
-echo $this->form_close();
+// End if
 ?>
-</div>
-</div>
-</div>
+			</div>
+		</div>
+	</div>
+
 <div id="content">
 <?php
 // here we show messages

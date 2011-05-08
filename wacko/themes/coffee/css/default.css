@@ -418,3 +418,38 @@ ul.upload, ul.upload ul {
 	text-align: left;
 	width: 130px;
 }
+
+/* properties */
+.lined td, .lined th {
+	border-bottom: 1px dotted #BABFC7;
+}
+
+.lined:hover {
+	background: #CCFFCC;
+}
+
+.page_settings {
+	float: left;
+}
+.page_tools {
+	float: right;
+	padding: 0px 40px 10px 10px;
+	
+}
+
+.menu
+{
+	list-style:none outside none;
+	float:right;
+	margin:0;
+	padding:0;
+}
+
+.menu li {
+	border-left:1px dotted #CCCCCC;
+	float:left;
+	line-height:1.2em;
+	margin:0 0.5em 0 -0.5em;
+	padding:0 0.5em;
+	white-space:nowrap;
+}
