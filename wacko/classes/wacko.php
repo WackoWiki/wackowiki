@@ -24,7 +24,7 @@ class Wacko
 	var $acl_cache				= array();
 	var $context				= array();
 	var $current_context		= 0;
-	var $pages_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description';
+	var $page_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, lang, title, keywords, description';
 	var $first_inclusion		= array();	// for backlinks
 	var $format_safe			= true;		//for htmlspecialchars() in pre_link
 	var $unicode_entities		= array();	//common unicode array
@@ -1171,7 +1171,7 @@ class Wacko
 		$pages_str	= substr($pages_str, 0, strlen($pages_str) - 2);
 
 		if ($links = $this->load_all(
-		"SELECT ".$this->pages_meta." ".
+		"SELECT ".$this->page_meta." ".
 		"FROM ".$this->config['table_prefix']."page ".
 		"WHERE supertag IN (".$spages_str.")", 1))
 		{
@@ -1238,10 +1238,10 @@ class Wacko
 	// STANDARD QUERIES
 	function load_revisions($page_id, $minor_edit = '')
 	{
-		$pages_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name as user, o.user_name as reviewer ';
+		$page_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name as user, o.user_name as reviewer ';
 
 		$rev = $this->load_all(
-			"SELECT p.revision_id AS revision_m_id, ".$pages_meta." ".
+			"SELECT p.revision_id AS revision_m_id, ".$page_meta." ".
 			"FROM ".$this->config['table_prefix']."revision p ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 				"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
@@ -1254,7 +1254,7 @@ class Wacko
 		if ($rev == true)
 		{
 			if ($cur = $this->load_single(
-				"SELECT p.page_id AS revision_m_id, ".$pages_meta." ".
+				"SELECT p.page_id AS revision_m_id, ".$page_meta." ".
 				"FROM ".$this->config['table_prefix']."page p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
@@ -1271,7 +1271,7 @@ class Wacko
 		else
 		{
 			$rev = $this->load_all(
-				"SELECT p.page_id AS revision_m_id, ".$pages_meta." ".
+				"SELECT p.page_id AS revision_m_id, ".$page_meta." ".
 				"FROM ".$this->config['table_prefix']."page p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".

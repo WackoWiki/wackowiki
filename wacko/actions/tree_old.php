@@ -236,7 +236,7 @@ else
 }
 
 $pages = $this->load_all(
-	"SELECT ".$this->pages_meta." ".
+	"SELECT ".$this->page_meta." ".
 	"FROM ".$this->config['table_prefix']."page ".
 	"WHERE supertag LIKE ".$query.
 		($owner_id
