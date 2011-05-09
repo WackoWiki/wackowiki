@@ -30,10 +30,16 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			{
 				$group_users = explode("\n", $group_str);
 
-				if (in_array($user['user_name'], $group_users)) $groups[] = $group_name;
+				if (in_array($user['user_name'], $group_users))
+				{
+					$groups[] = $group_name;
+				}
 			}
 
-			if ($groups == true) $usergroups = implode(', ', $groups);
+			if ($groups == true)
+			{
+				$usergroups = implode(', ', $groups);
+			}
 
 			unset($group_name, $group_str, $groups);
 		}
@@ -312,28 +318,39 @@ else
 	}
 	else if (isset($_GET['sort']) && $_GET['sort'] == 'pages')
 	{
-		$order = "ORDER BY total_pages DESC ";
+		$order = "ORDER BY total_pages ";
 		$param = "sort=".$_GET['sort'];
 	}
 	else if (isset($_GET['sort']) && $_GET['sort'] == 'comments')
 	{
-		$order = "ORDER BY total_comments DESC ";
+		$order = "ORDER BY total_comments ";
 		$param = "sort=".$_GET['sort'];
 	}
 	else if (isset($_GET['sort']) && $_GET['sort'] == 'revisions')
 	{
-		$order = "ORDER BY total_revisions DESC ";
+		$order = "ORDER BY total_revisions ";
 		$param = "sort=".$_GET['sort'];
 	}
 	else if (isset($_GET['sort']) && $_GET['sort'] == 'signup')
 	{
-		$order = "ORDER BY signup_time DESC ";
+		$order = "ORDER BY signup_time ";
 		$param = "sort=".$_GET['sort'];
 	}
 	else if (isset($_GET['sort']) && $_GET['sort'] == 'session')
 	{
-		$order = "ORDER BY session_time DESC ";
+		$order = "ORDER BY session_time ";
 		$param = "sort=".$_GET['sort'];
+	}
+
+	if (isset($_GET['order']) && $_GET['order'] == 'asc')
+	{
+		$order .= "ASC ";
+		$param .= "&amp;order=asc";
+	}
+	else if (isset($_GET['order']) && $_GET['order'] == 'desc')
+	{
+		$order .= "DESC ";
+		$param .= "&amp;order=desc";
 	}
 
 	$count = $this->load_single(
@@ -358,7 +375,7 @@ else
 	echo '<table border="0" cellspacing="3" class="formation"><tr><td class="label">';
 	echo $this->form_open('', '', 'get');
 	echo $this->get_translation('UsersSearch').': </td><td>';
-	echo '<input name="user" maxchars="40" size="40" value="'.htmlspecialchars(isset($_GET['user']) && $_GET['user']).'" /> ';
+	echo '<input name="user" maxchars="40" size="40" value="'.htmlspecialchars(isset($_GET['user']) ? $_GET['user'] : '').'" /> ';
 	echo '<input id="submit" type="submit" value="'.$this->get_translation('UsersFilter').'" /> ';
 	echo '<input id="button" type="submit" value="'.$this->get_translation('UsersOpenProfile').'" name="gotoprofile" />';
 	echo $this->form_close();
@@ -375,12 +392,12 @@ else
 
 	// list header
 	echo '<tr>'.
-			'<th><a href="'.$this->href('', '', 'sort=name').'">'.$this->get_translation('UsersName').( (isset($_GET['sort']) && $_GET['sort'] == 'name') || (isset($_REQUEST['user']) && $_REQUEST['user'] == true) ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="'.$this->href('', '', 'sort=pages').'">'.$this->get_translation('UsersPages').( (isset($_GET['sort']) && $_GET['sort'] == 'pages') || (isset($_GET['sort']) && $_GET['sort'] == false) ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="'.$this->href('', '', 'sort=comments').'">'.$this->get_translation('UsersComments').( isset($_GET['sort']) && $_GET['sort'] == 'comments' ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="'.$this->href('', '', 'sort=revisions').'">'.$this->get_translation('UsersRevisions').( isset($_GET['sort']) && $_GET['sort'] == 'revisions' ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="'.$this->href('', '', 'sort=signup').'">'.$this->get_translation('UsersSignup').( isset($_GET['sort']) && $_GET['sort'] == 'signup' ? '&nbsp;&darr;' : '' ).'</a></th>'.
-			'<th><a href="'.$this->href('', '', 'sort=session').'">'.$this->get_translation('UsersLastSession').( isset($_GET['sort']) && $_GET['sort'] == 'session' ? '&nbsp;&darr;' : '' ).'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=name'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersName').( (isset($_GET['sort']) && $_GET['sort'] == 'name') || (isset($_REQUEST['user']) && $_REQUEST['user'] == true) ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=pages'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersPages').( (isset($_GET['sort']) && $_GET['sort'] == 'pages') || (isset($_GET['sort']) && $_GET['sort'] == false) ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=comments'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersComments').( isset($_GET['sort']) && $_GET['sort'] == 'comments' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=revisions'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersRevisions').( isset($_GET['sort']) && $_GET['sort'] == 'revisions' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=signup'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersSignup').( isset($_GET['sort']) && $_GET['sort'] == 'signup' ? (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=session'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersLastSession').( isset($_GET['sort']) && $_GET['sort'] == 'session' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
 		"</tr>\n";
 
 	// list entries
