@@ -72,7 +72,7 @@ if ($pages = $this->load_all(
 	{
 		// cache links
 		if ($links = $this->load_all(
-		"SELECT {$this->pages_meta} ".
+		"SELECT {$this->page_meta} ".
 		"FROM {$this->config['table_prefix']}page ".
 		"WHERE supertag IN ( '".implode("', '", $sup_str)."' )", 1))
 		{
