@@ -121,18 +121,34 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 		);
 	} ?>
 <div class="TabSpace">
-<div class="TabText" style="padding-left: 10px"><?php
+<div class="TabText" style="padding-left: 10px">
+<?php
 // if this page exists
 if ($this->page)
 {
 	// if owner is current user
 	if ($this->user_is_owner())
-	print($this->get_translation('YouAreOwner'));
+	{
+		print($this->get_translation('YouAreOwner'));
+	}
 	else
-	if ($owner = $this->get_page_owner())
-	print($this->get_translation('Owner').": ".$this->link($owner));
-	else if (!$this->page['comment_on_id'])
-	print($this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)" : ""));
+	{
+		if ($owner = $this->get_page_owner())
+		{
+			if ($owner == 'System')
+			{
+				echo "<li>".$this->get_translation('Owner').": ".$owner."</li>\n";
+			}
+			else
+			{
+				print($this->get_translation('Owner').": "."<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$owner)."\">".$owner."</a>"."\n");
+			}
+		}
+		else if (!$this->page['comment_on_id'])
+		{
+			print($this->get_translation('Nobody').($this->get_user() ? " (<a href=\"".$this->href('claim')."\">".$this->get_translation('TakeOwnership')."</a>)" : ""));
+		}
+	}
 }
 ?></div>
 </div>

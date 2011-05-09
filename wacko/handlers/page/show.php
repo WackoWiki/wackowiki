@@ -372,7 +372,7 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 
 				if (isset($pagination['text']))
 				{
-					echo '<div style="float:right; letter-spacing:normal;"><small>'.$pagination['text'].'</small></div>';
+					echo '<div class="pagination"><small>'.$pagination['text'].'</small></div>';
 				}
 
 				echo "<a href=\"".$this->href('', '', 'show_comments=0')."\" title=\"".$this->get_translation('HideComments')."\">".$this->get_translation('Comments_all')."</a>";
@@ -431,7 +431,7 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 
 			if (isset($pagination['text']))
 			{
-				echo '<div style="text-align:right;padding-right:10px;border-top:solid 1px #BABFC7;"><small>'.$pagination['text'].'</small></div>';
+				echo '<div class="commentspagination"><span class="pagination"><small>'.$pagination['text'].'</small></span></div>';
 			}
 
 			// display comment form

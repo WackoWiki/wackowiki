@@ -169,16 +169,15 @@ form input.submitinput {
 
 #content {
 	background-color: #FFFFFF;
-	padding: 9px 0px 0px;
-	/*border-top-width: 1px;
-	border-top-style: dotted;
-	border-top-color: #CCCCCC;
-	*/float: left;
+	padding: 9px 20px 0px;
+	float: left;
+	width: 100%;
+	clear: both;
 }
 
 #page {
 	background-color: #FFFFFF;
-	padding: 5px 20px 20px 20px;
+	padding: 5px 0px 20px 0px;
 	float: left;
 	width: 100%;
 }
@@ -246,6 +245,7 @@ form input.submitinput {
 #filesheader, #commentsheader, #rateheader {
 	background-color: #F0F4F5;
 	padding: 2px 20px;
+	margin: 0 -20px;
 	border-top: 1px dotted #CCCCCC;
 	float: left;
 	width: 100%;
@@ -254,6 +254,7 @@ form input.submitinput {
 .files,.comment,.rating {
 	background-color: #FFFFFF;
 	padding: 10px 20px;
+	margin: 0 -20px;
 	border-bottom: 1px solid #EEEEEE;
 	float: left;
 	width: 100%;
@@ -314,6 +315,7 @@ width:320px;
 
 .filesform,.commentform {
 	padding: 10px 20px;
+	margin: 0 -20px;
 	border-top: 1px solid #CCCCCC;
 	background-color: #FCFCFC;
 	float: left;
@@ -780,11 +782,7 @@ td.form_left, th.form_left {
 }
 
 /*Handlers --------------------------------------------------*/
-#content {
-	clear: both;
-	float: left;
-	width: 100%;
-}
+
 
 #usermenu {
 	margin: 0 auto 0;
@@ -1058,6 +1056,13 @@ div.newsarticle:hover {
 
 .pagination {
 	float: right;
+}
+
+.commentspagination{
+	overflow: hidden;
+	padding: 0 20px;
+	width: 100%;
+	background-color: #FFF;
 }
 
 
