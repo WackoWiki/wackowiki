@@ -23,7 +23,7 @@ if (!$this->page)
 if ($this->is_admin() ||
 (!$this->config['remove_onlyadmins'] &&
 ((!$this->page['comment_on_id'] && $this->get_page_owner_id($this->page['page_id']) == $this->get_user_id()) ||
-($this->page['comment_on_id'] && $this->get_page_owner_from_comment() == $this->get_user_name()))))
+($this->page['comment_on_id'] && $this->get_page_owner_id($this->page['comment_on_id']) == $this->get_user_id()))))
 {
 	if (!$this->page)
 	{

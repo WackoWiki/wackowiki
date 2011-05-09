@@ -4112,18 +4112,6 @@ class Wacko
 		}
 	}
 
-	function get_page_owner_from_comment()
-	{
-		if($this->page['comment_on_id'])
-		{
-			return $this->get_page_owner('', $this->page['comment_on_id']);
-		}
-		else
-		{
-			return false;
-		}
-	}
-
 	function get_page_owner($tag = '', $page_id = 0, $revision_id = '')
 	{
 		if (!$tag = trim($tag))
@@ -4141,6 +4129,10 @@ class Wacko
 		if ($page = $this->load_page($tag, $page_id, $revision_id, LOAD_CACHE, LOAD_META))
 		{
 			return $page['owner_name'];
+		}
+		else
+		{
+			return false;
 		}
 	}
 
