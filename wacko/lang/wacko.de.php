@@ -160,7 +160,7 @@ $wacko_translation = array(
 	'FilesPurged'			=> 'Alle Dateianhänge wurden gelöscht.',
 	'PurgeRevisions'		=> 'Lösche alle Revisionen dieser Seite',
 	'RevisionsPurged'		=> 'Revisionen wurden gelöscht.',
-	'PurgeButton'			=> 'löschen',
+	'PurgeButton'			=> 'Löschen',
 
 	// categories handler
 	'Categories'			=> 'Kategorien',

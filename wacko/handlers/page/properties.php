@@ -323,7 +323,7 @@ echo "<tr>\n";
 	unset($revs);
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsTotalComs')."</th>";
-	echo "<td class=\"form_right\">".$this->page['comments']."</td>";
+	echo "<td class=\"form_right\"><a href=\"".$this->href('', '', 'show_comments=1#commentsheader')."\" title=\"".$this->get_translation('ShowComments')."\">".$this->page['comments']."</a></td>";
 	echo "</tr>\n<tr class=\"lined\">";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsHits')."</th>";
 	echo "<td class=\"form_right\">".number_format($this->page['hits'], 0, ',', '.')."</td>";
