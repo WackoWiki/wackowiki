@@ -465,6 +465,29 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 
 					<label for="addcomment_title"><?php echo $this->get_translation('AddCommentTitle');?></label><br />
 					<input id="addcomment_title" name="title" size="60" maxlength="100" value="<?php if (isset($title)) echo $title; ?>" ><br />
+
+					<?php
+					if ($user)
+					{
+						$output			= '';
+
+						// publish anonymously
+						if (($this->page && $this->config['publish_anonymously'] != 0 && $this->has_access('comment', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
+						{
+							$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".htmlspecialchars($this->tag)."\"".( $this->get_user_setting('noid_pubs', 1) == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">".$this->get_translation('PostAnonymously')."</label></small>";
+							$output .= "<br />";
+						}
+
+						// watch a page
+						if ($this->page && $this->iswatched !== true)
+						{
+							$output .= "<input type=\"checkbox\" name=\"watchpage\" id=\"watchpage\" value=\"1\"".( $this->get_user_setting('send_watchmail', 1) == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"watchpage\">".$this->get_translation('NotifyMe')."</label></small>";
+							$output .= "<br />";
+						}
+
+						echo '<br />'.$output;
+				}
+				?>
 		<?php
 					// captcha code starts
 
@@ -516,9 +539,8 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 			}
 			else
 			{
-		?>
-		<div id="commentsheader">
-		<?php
+				echo '<div id="commentsheader">';
+
 				$c = (int)$this->page['comments'];
 
 				if		($c  <  1)	$show_comments = $this->get_translation('Comments_0');

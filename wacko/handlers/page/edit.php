@@ -26,9 +26,10 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 {
 	$user	= $this->get_user();
 
-	if ($_POST)
+	if (isset($_POST))
 	{
-		$textchars	= strlen($_POST['body']);
+		$_body	= isset($_POST['body']) ? $_POST['body'] : '';
+		$textchars	= strlen($_body);
 
 		// watch page
 		if ($this->page && isset($_POST['watchpage']) && $_POST['noid_publication'] != $this->tag && $user && $this->iswatched !== true)
@@ -209,7 +210,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 			}
 		}
 		// saving blank document
-		else if ($_POST['body'] == '')
+		else if (isset($_POST['body']) && $_POST['body'] == '')
 		{
 			$this->redirect($this->href());
 		}
@@ -354,7 +355,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 			}
 
 			// publish anonymously
-			if (($this->page && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
+			if (($this->page && $this->config['publish_anonymously'] != 0 && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 			{
 				$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".htmlspecialchars($this->tag)."\"".( $this->get_user_setting('noid_pubs', 1) == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">".$this->get_translation('PostAnonymously')."</label></small>";
 				$output .= "<br />";
