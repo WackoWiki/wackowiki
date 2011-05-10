@@ -74,7 +74,7 @@ if ($registered
 	<tr>
 		<td><label for="FileUpload"><?php echo $this->get_translation('UploadFor');?>:&nbsp;</label>
 		<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize;?>" /></td>
-		<td style="white-space: nowrap;"><input name="file" id="FileUpload" type="file" />&nbsp;(<?php echo $this->get_translation('UploadMax').$this->binary_multiples(($this->config['upload_max_size'] * 1024), true, true, true);?>)</td>
+		<td style="white-space: nowrap;"><input name="file" id="FileUpload" type="file" />&nbsp;(<?php echo $this->get_translation('UploadMax').$this->binary_multiples(($this->config['upload_max_size'] * 1024), false, true, true);?>)</td>
 	</tr>
 	<?php
 	if ($global)

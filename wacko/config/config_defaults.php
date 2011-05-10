@@ -124,6 +124,7 @@ $wacko_config_defaults = array(
 	'store_deleted_pages' => 1,
 	'default_rename_redirect' => 1,
 
+	'publish_anonymously' => 0,
 
 	'allow_registration' => 1,
 	'disable_autosubscribe' => 0,

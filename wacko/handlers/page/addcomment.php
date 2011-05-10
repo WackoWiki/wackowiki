@@ -33,7 +33,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	}
 
 	// watch page
-	if ($this->page && isset($_POST['watchpage']) && $_POST['noid_publication'] != $this->tag && $user && $this->iswatched !== true)
+	if ($this->page && isset($_POST['watchpage']) && (isset($_POST['noid_publication']) && $_POST['noid_publication'] != $this->tag) && $user && $this->iswatched !== true)
 	{
 		$this->set_watch($user['user_id'], $this->page['page_id']);
 	}
@@ -89,7 +89,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 					//anonymous user, check the captcha
 					if (!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
 					{
-						echo '++++++++';
+						#echo '++++TEST++++';
 
 						if ($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
 						{
@@ -151,7 +151,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$this->log(5, str_replace('%2', $this->tag.' '.$this->page['title'], str_replace('%1', 'Comment'.$num, $this->get_translation('LogCommentPosted', $this->config['language']))));
 
 			// restore username after anonymous publication
-			if ($_POST['noid_publication'] == $this->tag)
+			if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->tag)
 			{
 				$this->set_user_setting('user_name', $remember_name);
 				unset($remember_name);

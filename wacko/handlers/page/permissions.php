@@ -29,10 +29,16 @@ if ($this->user_is_owner() || $this->is_admin())
 {
 	if ($_POST)
 	{
+		$_read_acl		= isset($_POST['read_acl']) ? $_POST['read_acl'] : '';
+		$_write_acl		= isset($_POST['write_acl']) ? $_POST['write_acl'] : '';
+		$_comment_acl	= isset($_POST['comment_acl']) ? $_POST['comment_acl'] : '';
+		$_create_acl	= isset($_POST['create_acl']) ? $_POST['create_acl'] : '';
+		$_upload_acl	= isset($_POST['upload_acl']) ? $_POST['upload_acl'] : '';
+		$_newowner		= isset($_POST['newowner']) ? $_POST['newowner'] : '';
 		// acls for page or entire cluster
-		$need_massacls = 0;
+		$need_massacls	= 0;
 
-		if ($_POST['massacls'] == 'on')
+		if (isset($_POST['massacls']) && $_POST['massacls'] == 'on')
 		{
 			$need_massacls = 1;
 		}
@@ -41,11 +47,11 @@ if ($this->user_is_owner() || $this->is_admin())
 		if ($need_massacls == 0)
 		{
 			// store lists
-			$this->save_acl($this->page['page_id'], 'read', $_POST['read_acl']);
-			$this->save_acl($this->page['page_id'], 'write', $_POST['write_acl']);
-			$this->save_acl($this->page['page_id'], 'comment', $_POST['comment_acl']);
-			$this->save_acl($this->page['page_id'], 'create', $_POST['create_acl']);
-			$this->save_acl($this->page['page_id'], 'upload', $_POST['upload_acl']);
+			$this->save_acl($this->page['page_id'], 'read', $_read_acl);
+			$this->save_acl($this->page['page_id'], 'write', $_write_acl);
+			$this->save_acl($this->page['page_id'], 'comment', $_comment_acl);
+			$this->save_acl($this->page['page_id'], 'create', $_create_acl);
+			$this->save_acl($this->page['page_id'], 'upload', $_upload_acl);
 
 			// log event
 			$this->log(2, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
@@ -53,7 +59,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			$message = $this->get_translation('ACLUpdated');
 
 			// change owner?
-			if ($newowner = $_POST['newowner'])
+			if ($newowner = $_newowner)
 			{
 				// check user exists
 				$user = $this->load_single(
@@ -103,12 +109,12 @@ if ($this->user_is_owner() || $this->is_admin())
 
 			foreach ($comments as $num => $page)
 			{
-				$this->save_acl($page['page_id'], 'read', $_POST['read_acl']);
-				$this->save_acl($page['page_id'], 'write', $_POST['write_acl']);
-				$this->save_acl($page['page_id'], 'comment', $_POST['comment_acl']);
+				$this->save_acl($page['page_id'], 'read', $_read_acl);
+				$this->save_acl($page['page_id'], 'write', $_write_acl);
+				$this->save_acl($page['page_id'], 'comment', $_comment_acl);
 
 				// change owner?
-				if ($newowner = $_POST['newowner'])
+				if ($newowner = $_newowner)
 				{
 					$newowner_id = $this->get_user_id($newowner);
 					$this->set_page_owner($page['page_id'], $newowner_id);
@@ -135,17 +141,17 @@ if ($this->user_is_owner() || $this->is_admin())
 			foreach ($pages as $num => $page)
 			{
 				// store lists
-				$this->save_acl($page['page_id'], 'read', $_POST['read_acl']);
-				$this->save_acl($page['page_id'], 'write', $_POST['write_acl']);
-				$this->save_acl($page['page_id'], 'comment', $_POST['comment_acl']);
-				$this->save_acl($page['page_id'], 'create', $_POST['create_acl']);
-				$this->save_acl($page['page_id'], 'upload', $_POST['upload_acl']);
+				$this->save_acl($page['page_id'], 'read', $_read_acl);
+				$this->save_acl($page['page_id'], 'write', $_write_acl);
+				$this->save_acl($page['page_id'], 'comment', $_comment_acl);
+				$this->save_acl($page['page_id'], 'create', $_create_acl);
+				$this->save_acl($page['page_id'], 'upload', $_upload_acl);
 
 				// log event
 				$this->log(2, str_replace('%1', $page['tag']." ".$page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
 
 				// change owner?
-				if ($newowner = $_POST['newowner'])
+				if ($newowner = $_newowner)
 				{
 					$newowner_id = $this->get_user_id($newowner);
 					$this->set_page_owner($page['page_id'], $newowner_id);
@@ -158,7 +164,7 @@ if ($this->user_is_owner() || $this->is_admin())
 
 			$message = $this->get_translation('ACLUpdated');
 
-			if ($newowner = $_POST['newowner'])
+			if ($newowner = $_newowner)
 			{
 				$message .= $this->get_translation('ACLGaveOwnership').$newowner;
 

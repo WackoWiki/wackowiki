@@ -3772,7 +3772,7 @@ class Wacko
 		$this->sql_query(
 			"UPDATE {$this->config['user_table']} ".
 			"SET session_expire = 0 ".
-			"WHERE user_name = '".quote($this->dblink, $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'user']['user_name'])."' ".
+			"WHERE user_name = '".quote($this->dblink, $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']['user_name'])."' ".
 			"LIMIT 1");
 
 		$this->delete_cookie('auth', true, true);
