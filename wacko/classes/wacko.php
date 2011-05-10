@@ -2510,7 +2510,7 @@ class Wacko
 
 				if (is_array($desc))
 				{
-					$title	= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], true, true, true).')';
+					$title	= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
 					$alt	= $desc['description'];
 					$url	= $this->config['base_url'].$this->config['upload_path'].'/'.$thing;
 
@@ -2558,7 +2558,7 @@ class Wacko
 
 				if (is_array($desc))
 				{
-					$title	= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], true, true, true).')';
+					$title	= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
 					$alt	= $desc['description'];
 					$url	= $this->config['base_url'].$this->config['upload_path'].$thing;
 
@@ -2632,7 +2632,7 @@ class Wacko
 					$this->has_access('read', $page_id)) || (
 					$desc['user_id'] == $this->get_user_id()))
 					{
-						$title	= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], true, true, true).')';
+						$title	= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
 						$alt	= $desc['description'];
 						$url	= $this->href('files', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
 						$imlink	= false;

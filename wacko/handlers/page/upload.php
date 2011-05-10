@@ -82,7 +82,7 @@ if ($registered
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$file[0]['user'])."\">".$file[0]['user']."</a>"; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file[0]['uploaded_dt']); ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo "(".$this->binary_multiples($file[0]['file_size'], true, true, true).")"; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo "(".$this->binary_multiples($file[0]['file_size'], false, true, true).")"; ?></li>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file[0]['file_name']; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $file[0]['description']; ?></li>
@@ -148,7 +148,7 @@ if ($registered
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$file[0]['user'])."\">".$file[0]['user']."</a>"; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file[0]['uploaded_dt']); ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo "(".$this->binary_multiples($file[0]['file_size'], true, true, true).")"; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo "(".$this->binary_multiples($file[0]['file_size'], false, true, true).")"; ?></li>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file[0]['file_name']; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input name="description" id="UploadDesc" type="text" size="80" value="<?php echo $file[0]['description']; ?>"/></li>
@@ -531,7 +531,7 @@ if ($registered
 			}
 			else
 			{
-				$error = $this->get_translation('UploadMaxFileQuota').'. <br />Storage in use '.$this->binary_multiples($files[0]['used_quota'], true, true, true).' ('.round(($files[0]['used_quota']/$this->config['upload_quota_per_user']*100), 2).'%) of '.$this->binary_multiples($this->config['upload_quota_per_user'], true, true, true);
+				$error = $this->get_translation('UploadMaxFileQuota').'. <br />Storage in use '.$this->binary_multiples($files[0]['used_quota'], false, true, true).' ('.round(($files[0]['used_quota']/$this->config['upload_quota_per_user']*100), 2).'%) of '.$this->binary_multiples($this->config['upload_quota_per_user'], true, true, true);
 			}
 		}
 

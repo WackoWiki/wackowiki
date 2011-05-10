@@ -297,7 +297,7 @@ function admin_files(&$engine, &$module)
 
 		$file_id	= $file['upload_id'];
 		$file_name	= $file['file_name'];
-		$file_size	= $engine->binary_multiples($file['file_size'], true, true, true);
+		$file_size	= $engine->binary_multiples($file['file_size'], false, true, true);
 		$file_ext	= substr($file_name, strrpos($file_name, '.') + 1);
 		$link		= $engine->link($path2.$file_name, '', $file_name);
 		$remove_href = $engine->tag.'&amp;remove=global&amp;file_id='.$file['upload_id'];

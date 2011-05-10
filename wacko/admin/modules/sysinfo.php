@@ -52,8 +52,8 @@ function admin_sysinfo(&$engine, &$module)
 	$sysinfo['server_software']		= array('Web server', $_SERVER['SERVER_SOFTWARE']);
 	$sysinfo['mysql_version']		= array('MySQL version', $mysql_version);
 	$sysinfo['php_version']			= array('PHP Version', PHP_VERSION);
-	$sysinfo['memory']				= array('Memory', $engine->binary_multiples($_php_ram*1024*1024, 0, true, true));
-	$sysinfo['upload_max_filesize']	= array('Upload max filesize', $engine->binary_multiples($upload_max_filesize*1024*1024, 0, true, true));
+	$sysinfo['memory']				= array('Memory', $engine->binary_multiples($_php_ram*1024*1024, false, true, true));
+	$sysinfo['upload_max_filesize']	= array('Upload max filesize', $engine->binary_multiples($upload_max_filesize*1024*1024, false, true, true));
 	$sysinfo['max_execution_time']	= array('Max execution time', get_cfg_var('max_execution_time').' seconds');
 	$sysinfo['php_extentions']		= array('PHP extentions', implode(', ',get_loaded_extensions()));
 	if ( function_exists( 'apache_get_modules' ) )

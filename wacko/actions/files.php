@@ -147,7 +147,7 @@ if ($can_view)
 		$file_id	= $file['upload_id'];
 		$file_name	= $file['file_name'];
 		$text		= ($pictures == false) ? $file_name : '';
-		$file_size	= $this->binary_multiples($file['file_size'], true, true, true);
+		$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
 		$file_ext	= substr($file_name, strrpos($file_name, ".") + 1);
 		$link		= $this->link($path2.$file_name, '', $text);
 
