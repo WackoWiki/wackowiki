@@ -327,8 +327,8 @@ if ($registered
 		}
 		else // process upload
 		{
-			$user = $this->get_user();
-			$files = $this->load_all(
+			$user	= $this->get_user();
+			$files	= $this->load_all(
 				"SELECT SUM(file_size) AS used_quota ".
 				"FROM ".$this->config['table_prefix']."upload ".
 				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."'");
@@ -342,7 +342,7 @@ if ($registered
 			}
 
 			// 1. upload quota
-			if (!$this->config['upload_quota_per_user'] || ($files[0]['used_quota'] < $this->config['upload_quota_per_user']))
+			if (!$this->config['upload_quota_per_user'] || ($files[0]['used_quota'] < $this->config['upload_quota_per_user'] * 1024))
 			{
 				if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) // there is file
 				{
@@ -353,7 +353,7 @@ if ($registered
 
 					// 3. extensions
 					$ext	= strtolower($ext);
-					$banned = explode('|', $this->config['upload_banned_exts']);
+					$banned	= explode('|', $this->config['upload_banned_exts']);
 
 					if (in_array($ext, $banned))
 					{
@@ -385,8 +385,8 @@ if ($registered
 						$dir = $this->config['upload_path_per_page'].'/';
 					}
 
-					$_name = $name;
-					$count = 1;
+					$_name	= $name;
+					$count	= 1;
 
 					while (file_exists($dir.$name.'.'.$ext))
 					{
@@ -434,9 +434,8 @@ if ($registered
 						if (!$forbid)
 						{
 							// 3. save to permanent location
-							move_uploaded_file($_FILES['file']['tmp_name'],
-							$dir.$result_name);
-							chmod( $dir.$result_name, 0644 );
+							move_uploaded_file($_FILES['file']['tmp_name'], $dir.$result_name);
+							chmod($dir.$result_name, 0644);
 
 							if ($is_global)
 							{
