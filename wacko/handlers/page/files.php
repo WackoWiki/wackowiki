@@ -83,7 +83,7 @@ if ($filepath)
 {
 	header('Content-Disposition:'.( $isimage || $isplain ? '' : ' attachment;' ).' filename="'.$what[0]['file_name'].'"');
 
-	if (!$isimage)
+	if ($isimage == false)
 	{
 		// count file download
 		$this->sql_query(
