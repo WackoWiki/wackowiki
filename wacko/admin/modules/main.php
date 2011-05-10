@@ -53,6 +53,7 @@ function admin_lock(&$engine, &$module)
 	{
 		// pages
 		$handle = opendir(rtrim($engine->config['cache_dir'].CACHE_PAGE_DIR, '/'));
+
 		while (false !== ($file = readdir($handle)))
 		{
 			if (!is_dir($engine->config['cache_dir'].CACHE_PAGE_DIR.$file))
@@ -60,11 +61,13 @@ function admin_lock(&$engine, &$module)
 				unlink($engine->config['cache_dir'].CACHE_PAGE_DIR.$file);
 			}
 		}
+
 		closedir($handle);
 		$engine->sql_query("DELETE FROM {$engine->config['table_prefix']}cache");
 
 		// queries
 		$handle = opendir(rtrim($engine->config['cache_dir'].CACHE_SQL_DIR, '/'));
+
 		while (false !== ($file = readdir($handle)))
 		{
 			if (!is_dir($engine->config['cache_dir'].CACHE_SQL_DIR.$file))
@@ -72,6 +75,7 @@ function admin_lock(&$engine, &$module)
 				unlink($engine->config['cache_dir'].CACHE_SQL_DIR.$file);
 			}
 		}
+
 		closedir($handle);
 
 		// config
@@ -89,6 +93,7 @@ function admin_lock(&$engine, &$module)
 
 		// feeds
 		$handle = opendir(rtrim($engine->config['cache_dir'].CACHE_FEED_DIR, '/'));
+
 		while (false !== ($file = readdir($handle)))
 		{
 			if (!is_dir($engine->config['cache_dir'].CACHE_FEED_DIR.$file))
@@ -96,6 +101,7 @@ function admin_lock(&$engine, &$module)
 				unlink($engine->config['cache_dir'].CACHE_FEED_DIR.$file);
 			}
 		}
+
 		closedir($handle);
 	}
 ?>
