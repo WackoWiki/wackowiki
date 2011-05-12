@@ -65,7 +65,7 @@ function admin_configsecurity(&$engine, &$module)
 		$config['intercom_delay']				= (int)$_POST['intercom_delay'];
 		$config['enable_security_headers']		= (int)$_POST['enable_security_headers'];
 		#$config['x_frame_option']				= (int)$_POST['x_frame_option'];
-		#$config['x_csp']				= (int)$_POST['x_csp'];
+		#$config['x_csp']						= (int)$_POST['x_csp'];
 
 		foreach($config as $key => $value)
 		{
@@ -171,7 +171,7 @@ function admin_configsecurity(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label" valign="top"><label for="default_comment_acl"><strong>Commenting on the Rights of the default:</strong><br />
+				<td class="label" valign="top"><label for="default_comment_acl"><strong>Comment rights by default:</strong><br />
 				<small>Typically used for putting the root pages, and pages for which we can not determine the parental rights.</small></label></td>
 				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_comment_acl" name="default_comment_acl"><?php echo htmlspecialchars($engine->config['default_comment_acl']);?></textarea></td>
 			</tr>
@@ -179,7 +179,7 @@ function admin_configsecurity(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label" valign="top"><label for="default_create_acl"><strong>Create rights of a sub-default:</strong><br />
+				<td class="label" valign="top"><label for="default_create_acl"><strong>Create rights of a sub page by default:</strong><br />
 				<small>Define the tolerance for the establishment of root pages and assign pages for which we can not determine the parental rights.</small></label></td>
 				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_create_acl" name="default_create_acl"><?php echo htmlspecialchars($engine->config['default_create_acl']);?></textarea></td>
 			</tr>
@@ -187,7 +187,7 @@ function admin_configsecurity(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label" valign="top"><label for="default_upload_acl"><strong>Rights uploading files by default:</strong><br />
+				<td class="label" valign="top"><label for="default_upload_acl"><strong>Upload rights by default:</strong><br />
 				<small>Typically used for putting the root pages, and pages for which we can not determine parental rights.</small></label></td>
 				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_upload_acl" name="default_upload_acl"><?php echo htmlspecialchars($engine->config['default_upload_acl']);?></textarea></td>
 			</tr>
@@ -195,7 +195,7 @@ function admin_configsecurity(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label" valign="top"><label for="rename_globalacl"><strong>Right global rename:</strong><br />
+				<td class="label" valign="top"><label for="rename_globalacl"><strong>Global rename right:</strong><br />
 				<small>List for admission to the possibility of free rename (move) pages.</small></label></td>
 				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="rename_globalacl" name="rename_globalacl"><?php echo htmlspecialchars($engine->config['rename_globalacl']);?></textarea></td>
 			</tr>
