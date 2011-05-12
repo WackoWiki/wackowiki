@@ -696,7 +696,7 @@ $wacko_translation = array(
 	'ShowFiles?' => 'Näita vaikimisi failide nimekirja',
 
 	'RegistrationLang' => 'Sinu keel',
-	'BadName' => 'Valitud nimi ei ole korrektne',
+	'InvalidWikiName' => 'Valitud nimi ei ole korrektne',
 	'PleaseLogin' => '((Seaded Logi sisee siin, palun))',
 	'Bookmarks' => 'Kiirvalikud',
 	'ReallyDeleteComment' => 'Kas sa tõesti tahad KUSTUTADA kommentaari?<br />Seda ei saa siis enam taastada!',
@@ -757,6 +757,10 @@ $wacko_translation = array(
 	// Cache
 	'ClearCache' => 'Clear cache',
 	'CacheCleared' => 'Cache cleared.',
+	'ConfigCache'			=> 'Config cache',
+	'FeedCache'				=> 'Feed cache',
+	'PageCache'				=> 'Page cache',
+	'SQLCache'				=> 'SQL cache',
 
 	// Flash
 	'FlashNoURL' => 'Please specify a Flash file with the Parameter url. (e.g. {{flash url="file:the_movie.swf"}} )',

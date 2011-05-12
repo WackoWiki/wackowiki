@@ -696,7 +696,7 @@ $wacko_translation = array(
 	'ShowFiles?' => 'Εμφάνιση λίστας αρχείων εξ\' ορισμού',
 
 	'RegistrationLang' => 'Η γλώσσα σας ',
-	'BadName' => 'Το επιλεγμένο όνομα είναι άκυρο',
+	'InvalidWikiName' => 'Το επιλεγμένο όνομα είναι άκυρο',
 	'PleaseLogin' => '((Settings Login here,please))',
 	'Bookmarks' => 'Σύνδεσμοι',
 	'ReallyDeleteComment' => 'Θέλετε σίγουρα να διαγράψετε αυτό το σχόλιο;<br />Δεν υπάρχει ενέργεια αναίρεσης για αυτό!',
@@ -758,6 +758,10 @@ $wacko_translation = array(
 	// Cache
 	'ClearCache' => 'Εκκαθάριση Προσωρινής μνήμης',
 	'CacheCleared' => 'Η προσωρινή μνήμη καθάρισε.',
+	'ConfigCache'			=> 'Config cache',
+	'FeedCache'				=> 'Feed cache',
+	'PageCache'				=> 'Page cache',
+	'SQLCache'				=> 'SQL cache',
 
 	// Flash
 	'FlashNoURL' => 'Please specify a Flash file with the Parameter url. (e.g. {{flash url="file:the_movie.swf"}} )',
