@@ -696,7 +696,7 @@ $wacko_translation = array(
 	'ShowFiles?'			=> 'Zeige Dateiliste',
 
 	'RegistrationLang'		=> 'Sprachauswahl',
-	'BadName'				=> 'Benutzername ist ungültig',
+	'InvalidWikiName'		=> 'Benutzername ist ungültig',
 	'PleaseLogin'			=> '((Einstellungen Bitte hier registrieren))',
 	'Bookmarks'				=> 'Lesezeichen',
 	'ReallyDeleteComment'	=> 'Willst du den Kommentar wirklich löschen?<br />Diese Aktion kann nicht rückgängig gemacht werden!',
@@ -758,6 +758,10 @@ $wacko_translation = array(
 	// Cache
 	'ClearCache'			=> 'Cache leeren',
 	'CacheCleared'			=> 'Cache geleert.',
+	'ConfigCache'			=> 'Config cache',
+	'FeedCache'				=> 'Feed cache',
+	'PageCache'				=> 'Page cache',
+	'SQLCache'				=> 'SQL cache',
 
 	// Flash
 	'FlashNoURL'			=> 'Bitte gib eine Flashdatei mit dem Parameter url an. (z.B. {{flash url="file:the_movie.swf"}} )',

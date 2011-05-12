@@ -15,7 +15,10 @@ if (!defined('IN_WACKO'))
 $output = '';
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href('show'));
+if (!$this->page)
+{
+	$this->redirect($this->href('show'));
+}
 
 // deny for comment
 if ($this->page['comment_on_id'])
@@ -63,7 +66,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 
 			if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
 			{
-				print($this->get_translation('BadName')."<br />\n");
+				print($this->get_translation('InvalidWikiName')."<br />\n");
 			}
 			// if ($this->supertag == $super_new_name)
 			else if ($this->tag == $new_name)

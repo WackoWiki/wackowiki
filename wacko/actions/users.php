@@ -410,8 +410,9 @@ else
 		foreach ($users as $user)
 		{
 			// users inactive for ONE year
-			if ((time()-strtotime($user['session_time']))>=31536000)  echo '<tr class="lined-strike">';
-			else  echo '<tr class="lined">';
+			#if ((time()-strtotime($user['session_time']))>=31536000)  echo '<tr class="lined-strike">';
+			#else
+			echo '<tr class="lined">';
 
 			echo	'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($user['user_name']).'').'">'.$user['user_name'].'</a></td>'.
 					'<td align="center">'.$user['total_pages'].'</td>'.

@@ -696,7 +696,7 @@ $wacko_translation = array(
 	'ShowFiles?' => 'Domy¶lnie poka¿ listê plików',
 
 	'RegistrationLang' => 'Twój jêzyk',
-	'BadName' => 'Wybrane imiê jest niepoprawne',
+	'InvalidWikiName' => 'Wybrane imiê jest niepoprawne',
 	'PleaseLogin' => '((Settings Zaloguj tutaj))',
 	'Bookmarks' => 'Zak³adki',
 	'ReallyDeleteComment' => 'Czy na pewno chcesz USUN¡Æ komentarz??<br />Nie mo¿na tego cofn±æ!',
@@ -757,6 +757,10 @@ $wacko_translation = array(
 	// Cache
 	'ClearCache' => 'Clear cache',
 	'CacheCleared' => 'Cache cleared.',
+	'ConfigCache'			=> 'Config cache',
+	'FeedCache'				=> 'Feed cache',
+	'PageCache'				=> 'Page cache',
+	'SQLCache'				=> 'SQL cache',
 
 	// Flash
 	'FlashNoURL' => 'Please specify a Flash file with the Parameter url. (e.g. {{flash url="file:the_movie.swf"}} )',

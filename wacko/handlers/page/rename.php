@@ -33,7 +33,7 @@ if ($user = $this->get_user())
 }
 else
 {
-	$user_name = GUEST;
+	$user_name		= GUEST;
 }
 
 if ($registered
@@ -70,7 +70,7 @@ if ($registered
 
 				if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
 				{
-					echo "<li>".$this->get_translation('BadName')."</li>\n";
+					echo "<li>".$this->get_translation('InvalidWikiName')."</li>\n";
 				}
 				// if ($this->supertag == $super_new_name)
 				else if ($this->tag == $new_name)
@@ -237,7 +237,7 @@ function move(&$parent, $old_page, $new_name )
 
 		if (!preg_match('/^([\_\.\-'.$parent->language['ALPHANUM_P'].']+)$/', $new_name))
 		{
-			echo "<li>".$parent->get_translation('BadName')."</li>\n";
+			echo "<li>".$parent->get_translation('InvalidWikiName')."</li>\n";
 		}
 		// if ($old_page['supertag'] == $super_new_name)
 		else if ($old_page['tag'] == $new_name)

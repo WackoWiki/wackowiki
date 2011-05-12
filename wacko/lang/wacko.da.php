@@ -696,7 +696,7 @@ $wacko_translation = array(
 	'ShowFiles?' => 'Vis altid filer',
 
 	'RegistrationLang' => 'Dit sprog',
-	'BadName' => 'Valgt navn er desværre ikke tilladt',
+	'InvalidWikiName' => 'Valgt navn er desværre ikke tilladt',
 	'PleaseLogin' => '((login))',
 	'Bookmarks' => 'Bookmarks',
 	'ReallyDeleteComment' => 'Er du sikker på, at du vil slette kommentaren?',
@@ -757,6 +757,10 @@ $wacko_translation = array(
 	// Cache
 	'ClearCache' => 'Clear cache',
 	'CacheCleared' => 'Cache cleared.',
+	'ConfigCache'			=> 'Config cache',
+	'FeedCache'				=> 'Feed cache',
+	'PageCache'				=> 'Page cache',
+	'SQLCache'				=> 'SQL cache',
 
 	// Flash
 	'FlashNoURL' => 'Please specify a Flash file with the Parameter url. (e.g. {{flash url="file:the_movie.swf"}} )',

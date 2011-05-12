@@ -693,7 +693,7 @@ $wacko_translation = array(
 	'ShowFiles?' => 'Покажи списъка на файловете по подразбиране',
 
 	'RegistrationLang' => 'Your language (Език)',
-	'BadName' => 'Избраното име е неправилно',
+	'InvalidWikiName' => 'Избраното име е неправилно',
 	'Bookmarks' => 'Предпочитано',
 	'PleaseLogin' => '((Settings Login Въведете име и парола))',
 	'ReallyDeleteComment' => 'Наистина  ИЗТРИВАНЕ на комментара? <br />Възстановяването след това е невъзможно.',
@@ -754,6 +754,10 @@ $wacko_translation = array(
 	// Cache
 	'ClearCache' => 'Clear cache',
 	'CacheCleared' => 'Cache cleared.',
+	'ConfigCache'			=> 'Config cache',
+	'FeedCache'				=> 'Feed cache',
+	'PageCache'				=> 'Page cache',
+	'SQLCache'				=> 'SQL cache',
 
 	// Flash
 	'FlashNoURL' => 'Please specify a Flash file with the Parameter url. (e.g. {{flash url="file:the_movie.swf"}} )',
