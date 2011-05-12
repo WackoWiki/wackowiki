@@ -152,6 +152,7 @@ function admin_configbasic(&$engine, &$module)
 				<small>User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.</small></label></td>
 				<td><input maxlength="25" style="width:200px;" id="admin_name" name="admin_name" value="<?php echo htmlspecialchars($engine->config['admin_name']);?>" /></td>
 			</tr>
+			<tr>
 				<th colspan="2">
 					<br />
 					Language settings
