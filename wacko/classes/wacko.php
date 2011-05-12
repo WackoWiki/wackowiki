@@ -3539,7 +3539,7 @@ class Wacko
 	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false)
 	{
 		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration';
-		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.email_confirm, u.session_time, u.session_time, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration';
+		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.email_confirm, u.session_time, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration';
 
 		$user = $this->load_single(
 			"SELECT ".($session_data
@@ -3688,7 +3688,7 @@ class Wacko
 		{
 			$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
 			$user_name	= $user['user_name'];
-			$password	= base64_encode(hash('sha1', $this->config['system_seed'] ^ $time_pad) ^ $user['password']);
+			$password	= base64_encode(hash('sha256', $this->config['system_seed'] ^ $time_pad) ^ $user['password']);
 			// authenticating cookie data:
 			// seed | username | composed pwd | raw session time | raw password
 			$cookie_mac	= hash('sha1', $this->config['system_seed'].$user_name.$password.$ses_time.$user['password']);
@@ -3724,7 +3724,7 @@ class Wacko
 	function restart_user_session($user, $session_time)
 	{
 		$this->delete_cookie('sid', true, false);
-		unset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'user']);
+		unset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.'user']);
 		session_destroy(); // destroy session data in storage
 
 		session_id(hash('sha1', $this->timer.$this->config['system_seed'].$session_time.$user['user_name'].$user['password']));
@@ -3743,7 +3743,7 @@ class Wacko
 			{
 				list($user_name, $b64password, $ses_time, $cookie_mac) = explode(';', $cookie);
 				$time_pad	= str_pad($ses_time, 32, '0', STR_PAD_LEFT);
-				$password	= hash('sha1', $this->config['system_seed'] ^ $time_pad) ^ base64_decode($b64password);
+				$password	= hash('sha256', $this->config['system_seed'] ^ $time_pad) ^ base64_decode($b64password);
 				$recalc_mac	= hash('sha1', $this->config['system_seed'].$user_name.$b64password.$ses_time.$password);
 			}
 			else
