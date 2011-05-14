@@ -230,7 +230,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 	<div id="pane">
 		<div class="left"></div>
 		<div class="middle">
-			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php"><img src="<?php echo rtrim($engine->config['base_url']).$engine->config['upload_path'].'/'; ?>wackowiki_logo.png" alt="WackoWiki" width="108" height="50"></a>
+			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php"><img src="<?php echo rtrim($engine->config['base_url']).$engine->config['upload_path'].'/'; ?>wacko_logo.png" alt="WackoWiki" width="108" height="50"></a>
 		</div>
 		<div id="tools">
 			<span style="font-family: 'Lucida Console', 'Courier New', monospace;">
