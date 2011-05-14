@@ -129,7 +129,7 @@ function admin_systemlog(&$engine, &$module)
 <?php
 	for ($i = 1; $i <= 7; $i++)
 	{
-		echo '<option value="'.$i.'"'.( (!isset($_POST['level']) && $level == $i) || $_POST['level'] == $i ? ' selected="selected"' : '' ).'>'.strtolower($engine->get_translation('LogLevel'.$i)).'</option>'."\n";
+		echo '<option value="'.$i.'"'.( (!isset($_POST['level']) && $level == $i) || (isset($_POST['level']) && $_POST['level'] == $i) ? ' selected="selected"' : '' ).'>'.strtolower($engine->get_translation('LogLevel'.$i)).'</option>'."\n";
 	}
 ?>
 			</select>

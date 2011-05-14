@@ -386,6 +386,7 @@ else if ($user = $this->get_user())
 	<td class="form_right"><select id="lang" name="lang">
 	<?php
 	$langs = $this->available_languages();
+
 	for ($i = 0; $i < count($langs); $i++)
 	{
 		echo "<option value=\"".$langs[$i]."\" ".
@@ -405,6 +406,7 @@ else if ($user = $this->get_user())
 
 <?php
 	$themes = $this->available_themes();
+
 	for ($i = 0; $i < count($themes); $i++)
 	{
 		echo '<option value="'.$themes[$i].'" '.
