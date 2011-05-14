@@ -144,7 +144,7 @@ function admin_configsystem(&$engine, &$module)
 			</tr>
 			<!--<tr class="hl_setting">
 				<td class="label"><label for="bbcode"><strong>Parser BBCode:</strong></label></td>
-				<td><input type="checkbox" id="bbcode" name="bbcode" value="1" <?php echo ( $engine->config['bbcode'] ? ' checked="checked"' : '' );?> /></td>
+				<td><input type="checkbox" id="bbcode" name="bbcode" value="1" <?php #echo ( $engine->config['bbcode'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>-->
 			<tr class="lined">
 				<td colspan="2"></td>

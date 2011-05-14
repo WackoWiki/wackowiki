@@ -739,3 +739,22 @@ ul.leftNav { /* space at the bottom of the top left nav */
 	font-style: normal;
 	font-weight: bold;
 }
+
+ul.upload, ul.upload ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.upload li {
+	display: block;
+	overflow: hidden;
+	padding-bottom: 5px;
+	text-align: left;
+}
+
+.info_title{
+	display: block;
+	float: left;
+	text-align: left;
+	width: 130px;
+	}
