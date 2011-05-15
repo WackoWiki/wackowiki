@@ -609,6 +609,7 @@ switch($config['database_driver'])
 
 					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysql_query($alter_referrer_r4_3_1, $dblink), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysql_query($alter_referrer_r4_3_2, $dblink), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysql_query($alter_referrer_r4_3_3, $dblink), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_1, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_2, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
@@ -1005,6 +1006,7 @@ switch($config['database_driver'])
 
 					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysqli_query($dblink, $alter_referrer_r4_3_1), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysqli_query($dblink, $alter_referrer_r4_3_2), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysqli_query($dblink, $alter_referrer_r4_3_3), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_1), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_2), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
@@ -1410,6 +1412,7 @@ switch($config['database_driver'])
 
 					test_pdo(str_replace('%1', 'referrer', $lang['AlterTable']), $alter_referrer_r4_3_1, str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'referrer', $lang['AlterTable']), $alter_referrer_r4_3_2, str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'referrer', $lang['AlterTable']), $alter_referrer_r4_3_3, str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
 
 					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_1, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_2, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));

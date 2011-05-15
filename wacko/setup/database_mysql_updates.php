@@ -36,13 +36,13 @@ $table_category_r4_3 = "CREATE TABLE {$pref}category (".
 					"category VARCHAR(100) NOT NULL,".
 					"PRIMARY KEY (category_id),".
 					"UNIQUE KEY idx_category (lang,category)".
-				") {$engine} {$charset}";
+				") {$engine} COMMENT='' {$charset}";
 
 $table_category_page_r4_3 = "CREATE TABLE {$pref}category_page (".
 						"category_id INT(10) UNSIGNED NOT NULL,".
 						"page_id INT(10) UNSIGNED NOT NULL,".
 						"UNIQUE KEY idx_pageword (category_id,page_id)".
-					") {$engine} {$charset}";
+					") {$engine} COMMENT='' {$charset}";
 
 // CONFIG
 $table_config_r4_3 = "CREATE TABLE {$pref}config (".
@@ -52,7 +52,7 @@ $table_config_r4_3 = "CREATE TABLE {$pref}config (".
 					// "updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,".
 					"PRIMARY KEY (config_id),".
 					"UNIQUE KEY idx_config_name (config_name)".
-				") {$engine} {$charset}";
+				") {$engine} COMMENT='' {$charset}";
 
 // GROUP
 $table_group_r4_3 = "CREATE TABLE {$pref}group (".
@@ -67,13 +67,13 @@ $table_group_r4_3 = "CREATE TABLE {$pref}group (".
 					// "special TINYINT(1) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (group_id),".
 					"UNIQUE KEY idx_name (group_name)".
-				") {$engine} {$charset}";
+				") {$engine} COMMENT='' {$charset}";
 
 $table_group_member_r4_3 = "CREATE TABLE {$pref}group_member (".
 					"group_id INTEGER(10) UNSIGNED NOT NULL,".
 					"user_id INTEGER(10) UNSIGNED NOT NULL,".
 					"UNIQUE KEY idx_group_id (group_id, user_id)".
-				") {$engine} {$charset}";
+				") {$engine} COMMENT='' {$charset}";
 
 // LINK
 $rename_link_r4_3_1 = "RENAME TABLE {$pref}links TO {$pref}link";
@@ -105,7 +105,7 @@ $table_log_r4_3 = "CREATE TABLE {$pref}log (".
 					"KEY idx_user_id (user_id),".
 					"KEY idx_ip (ip),".
 					"KEY idx_time (log_time)".
-				") {$engine} {$charset}";
+				") {$engine} COMMENT='' {$charset}";
 
 // MENU
 $table_menu_r4_3 = "CREATE TABLE {$pref}menu (".
@@ -117,7 +117,7 @@ $table_menu_r4_3 = "CREATE TABLE {$pref}menu (".
 					"menu_position SMALLINT(2) UNSIGNED NOT NULL,".
 					"PRIMARY KEY (menu_id),".
 					"UNIQUE KEY idx_user_id (user_id,page_id)".
-				") {$engine} {$charset};";
+				") {$engine} COMMENT='' {$charset};";
 
 // PAGE
 $rename_page_r4_3_1 = "RENAME TABLE {$pref}pages TO {$pref}page";
@@ -195,7 +195,7 @@ $table_poll_r4_3 = "CREATE TABLE {$pref}poll (".
 					"end DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"KEY idx_poll_id (poll_id),".
 					"KEY idx_time_frame (start,end)".
-				") {$engine} {$charset}";
+				") {$engine} COMMENT='' {$charset}";
 
 // RATING
 $table_rating_r4_3 = "CREATE TABLE {$pref}rating (".
@@ -205,7 +205,7 @@ $table_rating_r4_3 = "CREATE TABLE {$pref}rating (".
 					"rating_time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (page_id),".
 					"KEY idx_voters_rate (voters)".
-				") {$engine} {$charset}";
+				") {$engine} COMMENT='' {$charset}";
 
 // REFERRER
 $rename_referrer_r4_3_1 = "RENAME TABLE {$pref}referrers TO {$pref}referrer";
@@ -213,6 +213,7 @@ $rename_referrer_r4_3_1 = "RENAME TABLE {$pref}referrers TO {$pref}referrer";
 $alter_referrer_r4_3_0 = "ALTER TABLE {$pref}referrer CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
 $alter_referrer_r4_3_1 = "ALTER TABLE {$pref}referrer DROP INDEX idx_page_tag, CHANGE page_tag page_id INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD INDEX idx_page_id (page_id)";
 $alter_referrer_r4_3_2 = "ALTER TABLE {$pref}referrer CHANGE time referrer_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'";
+$alter_referrer_r4_3_3 = "ALTER TABLE {$pref}referrer CHANGE referrer referrer VARCHAR(255) NOT NULL DEFAULT ''";
 
 // REVISION
 $rename_revision_r4_3_1 = "RENAME TABLE {$pref}revisions TO {$pref}revision";
@@ -349,7 +350,7 @@ $table_user_setting_r4_3 = "CREATE TABLE {$pref}user_setting (".
 					"PRIMARY KEY (setting_id),".
 					"UNIQUE KEY idx_user_id (user_id),".
 					"KEY idx_send_watchmail (send_watchmail)".
-				") {$engine} {$charset}";
+				") {$engine} COMMENT='' {$charset}";
 
 // WATCH
 $rename_watch_r4_3_1 = "RENAME TABLE {$pref}pagewatches TO {$pref}watch";
