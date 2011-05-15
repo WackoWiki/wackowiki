@@ -12,6 +12,7 @@ $wacko_all_resource = array(
 	'tpl.equalpage'		=> '<a {aname} href="{pagelink}" class="{class}">{accicon}{icon}{page}</a>',
 	'tpl.rootpage'		=> '<a {aname} href="{pagelink}" class="{class}">{accicon}{icon}{page}</a>',
 	'tpl.descrpage'		=> '<a {aname} href="{pagelink}" class="{class}" title="{pagepath}{page}">{accicon}{text}</a>',
+	'tpl.descrpagealt'	=> '<a {aname} href="{pagelink}" class="{class}" title="{title}">{accicon}{text}</a>',
 	'tpl.wchildpage'	=> '<span class="missingpage">{icon}{page}</span><a href="{pagelink}" title="{title}">{accicon}</a>',
 	'tpl.wparentpage'	=> '<span class="missingpage">{icon}{page}</span><a href="{pagelink}" title="{title}">{accicon}</a>',
 	'tpl.wequalpage'	=> '<span class="missingpage">{icon}{page}</span><a href="{pagelink}" title="{title}">{accicon}</a>',

@@ -2846,7 +2846,17 @@ class Wacko
 
 			if ($text)
 			{
-				$tpl		= 'descrpage';
+				if ($title)
+				{
+					// title="{title}" - alternate title is provided
+					$tpl		= 'descrpagealt';
+				}
+				else
+				{
+					// title="{pagepath}{page}"
+					$tpl		= 'descrpage';
+				}
+
 				$icon		= '';
 			}
 
