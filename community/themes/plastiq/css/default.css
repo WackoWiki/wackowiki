@@ -203,6 +203,12 @@ textarea {
 	background-position: top left;
 	padding: 0px;
 }
+
+#pageedit form textarea {
+	height: 400px;
+	width: 100%;
+}
+
 #buttons_1 {
 	clear:none;
 	float:left;
@@ -565,3 +571,4 @@ textarea {
 	font-style: normal;
 	font-weight: bold;
 }
+
