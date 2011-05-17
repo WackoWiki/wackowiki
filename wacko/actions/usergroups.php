@@ -40,8 +40,8 @@ if($user = $this->get_user())
 				$i = 1;
 			}
 
-			$arr = explode("\\n", $group_members);
-			$allowed_groups = array();
+			$arr			= explode("\\n", $group_members);
+			$allowed_groups	= array();
 
 			sort($arr);
 
@@ -53,9 +53,9 @@ if($user = $this->get_user())
 			{
 				echo "<td valign=\"top\">";
 
-				foreach ($arr as $k => $_user)
+				foreach ($arr as $k => $user_name)
 				{
-					$allowed_groups[] = "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$_user)."\">".$_user."</a>";
+					$allowed_groups[] = "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$user_name)."\">".$user_name."</a>";
 				}
 
 				sort($allowed_groups);
