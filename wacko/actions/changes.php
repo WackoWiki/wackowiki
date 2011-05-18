@@ -58,7 +58,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo "<span class=\"pagination\">{$pagination['text']}</span>\n";
+		echo "<span class=\"pagination\">{$pagination['text']}</span><br />\n";
 	}
 
 	echo "<ul class=\"ul_list\">\n";
