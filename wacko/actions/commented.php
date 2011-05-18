@@ -45,7 +45,7 @@ if (!function_exists('load_recently_commented'))
 
 					// load complete comments
 					$comments = $wacko->load_all(
-						"SELECT b.tag as comment_on_tag, b.title as page_title, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.user_id, u.user_name AS comment_user, a.modified AS comment_time ".
+						"SELECT b.tag as comment_on_tag, b.title as page_title, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.title AS comment_title, a.user_id, u.user_name AS comment_user, a.modified AS comment_time ".
 						"FROM ".$wacko->config['table_prefix']."page a ".
 							"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 							"LEFT OUTER JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
@@ -110,7 +110,7 @@ if (list ($pages, $pagination) = load_recently_commented($this, $root, (int)$max
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo "<span class=\"pagination\">{$pagination['text']}</span>\n";
+		echo "<span class=\"pagination\">{$pagination['text']}</span><br />\n";
 	}
 
 	echo "<ul class=\"ul_list\">\n";
@@ -155,7 +155,7 @@ if (list ($pages, $pagination) = load_recently_commented($this, $root, (int)$max
 				echo "<li ".$viewed."><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (".
 				($title == 1
 					? $this->link('/'.$page['comment_tag'], '', $page['page_title'], '', 0, 1, '', 0)
-					: $this->link('/'.$page['comment_tag'], '', $page['comment_on_tag'], $page['page_title'])
+					: $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'])
 				).
 				") . . . . . . . . . . . . . . . . <small>".$this->get_translation('LatestCommentBy')." ".
 				($page['comment_user']

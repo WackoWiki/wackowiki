@@ -104,7 +104,7 @@ class RSS
 
 		//  collect data
 		$pages = $this->engine->load_all(
-			"SELECT page_id, tag, title, created, body_r ".
+			"SELECT page_id, tag, title, created, body_r, comments ".
 			"FROM {$prefix}page ".
 			"WHERE comment_on_id = '0' ".
 				"AND tag REGEXP '^{$newscluster}{$newslevels}$' ".
@@ -114,7 +114,7 @@ class RSS
 		foreach ($pages as $page)
 		{
 			$news_pages[]	= array('page_id' => $page['page_id'], 'tag' => $page['tag'], 'title' => $page['title'], 'modified' => $page['created'],
-				'body_r' => $page['body_r'], 'date' => date('Y/m-d', strtotime($page['created'])));
+				'body_r' => $page['body_r'], 'comments' => $page['comments'], 'date' => date('Y/m-d', strtotime($page['created'])));
 		}
 
 		// sorting function: sorts by dates
@@ -131,7 +131,7 @@ class RSS
 		$xml = '<?xml version="1.0" encoding="'.$this->charset.'"?>'."\n".
 				"<?xml-stylesheet type=\"text/css\" href=\"".$this->engine->config['theme_url']."css/wacko.css\" media=\"screen\"?>\n".
 				// TODO: atom.css
-				'<rss version="2.0">'."\n".
+				'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/"> '."\n".
 					'<channel>'."\n".
 						'<title>'.$this->engine->config['site_name'].$this->engine->get_translation('RecentNewsTitleXML').'</title>'."\n".
 						'<link>'.$this->engine->config['base_url'].str_replace('%2F', '/', rawurlencode($newscluster)).'</link>'."\n".
@@ -185,8 +185,9 @@ class RSS
 				$xml .= '<category>'.$category['category'].'</category>'."\n";
 			}
 
-			$xml .= 	( $coms != '' ? '<comments>'.$coms.'</comments>'."\n" : '' ).
-					'</item>'."\n";
+			$xml .= 	( $coms != '' ? '<comments>'.$coms.'</comments>'."\n" : '' );
+			$xml .= 	( $coms != '' ? '<slash:comments>'.$page['comments'].'</slash:comments>'."\n" : '' );
+			$xml .=  '</item>'."\n";
 
 			if ($i >= $limit)
 			{

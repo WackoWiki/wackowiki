@@ -98,7 +98,7 @@ if (list ($comments, $pagination) = load_recent_comments($this, $root, (int)$max
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo "<span class=\"pagination\">{$pagination['text']}</span>\n";
+		echo "<span class=\"pagination\">{$pagination['text']}</span><br />\n";
 	}
 
 	echo "<ul class=\"ul_list\">\n";
