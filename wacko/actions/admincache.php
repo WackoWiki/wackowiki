@@ -13,6 +13,7 @@ if ($this->is_admin())
 	{
 		echo $this->form_open();
 
+		echo '<div class="layout-box">';
 		// config cache
 		echo '<input id="purgeconfig_cache" type="checkbox" name="config_cache" value="1" />';
 		echo '<label for="purgeconfig_cache">'.$this->get_translation('ConfigCache').'</label><br />';
@@ -27,6 +28,7 @@ if ($this->is_admin())
 		echo '<label for="purgefeeds_cache">'.$this->get_translation('FeedCache').'</label><br /><br />';
 
 		echo '<input type="submit" name="clear_cache" value="'. $this->get_translation('ClearCache').'" />';
+		echo '</div>';
 
 		echo $this->form_close();
 	}
