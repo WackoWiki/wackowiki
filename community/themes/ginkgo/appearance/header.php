@@ -10,7 +10,7 @@ require ('themes/_common/_header.php');
 <body onload="all_init();">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
-		<td width="378" valign="bottom" style="white-space: nowrap;"><span class="main"><a href="<?php echo $this->config['base_url']?>"class="main"><?php echo $this->config['site_name'] ?></a></span></td>
+		<td width="100%" valign="bottom" style="white-space: nowrap;"><span class="main"><a href="<?php echo $this->config['base_url']?>"class="main"><?php echo $this->config['site_name'] ?></a></span></td>
 		<td width="100%"><div align="right"><?php
 // Opens Search form
 echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get');
@@ -52,7 +52,7 @@ if ($this->get_user())
 	<div class="navText"><span class="nobr"><?php echo $this->get_translation('YouAre')." ".$this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?></span> <small>( <span class="nobr Tune">
 <?php
 	echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
-            | <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span> )</small></div>
+		| <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->get_translation('LoginPage')).($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span> )</small></div>
 <?php
 // Else Wacko shows login's controls
 }
@@ -85,7 +85,7 @@ else
 		<tr align="left">
 			<td><div>
 <?php
-echo '<div class="leftNav"><ul class="leftNav">';
+echo '<div class="leftNav"><ul class="leftNav">'."\n";
 
 // menu
 if ($menu = $this->get_menu())
@@ -125,13 +125,18 @@ if ($this->get_user())
 			$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
 	}
 
-echo "</ul></div>";
+	echo "</ul></div>";
 
-echo "<hr noshade=\"noshade\" size=\"1\" />";
-echo "<div class=\"credits\">";
-echo $this->format( '{{hits}} Aufrufe' );
-echo "</div>";
+	echo "<hr noshade=\"noshade\" size=\"1\" />";
+	echo "<div class=\"credits\">";
+	echo $this->format( '{{hits}} Aufrufe' );
+	echo "</div>";
 }
+else
+{
+	echo "</ul></div>";
+}
+
 ?>
 		<div>
 			</div>
