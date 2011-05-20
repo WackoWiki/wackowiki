@@ -982,6 +982,12 @@ td.form_left, th.form_left {
 	border-bottom: 1px dotted #BABFC7;
 }
 
+.tree {
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+}
+
 .lined:hover {
 	background: #CCFFCC;
 }
