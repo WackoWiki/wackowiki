@@ -224,8 +224,8 @@ function translit($tag, $lng)
 	$tag = str_replace( ' ', '', $tag );
 	$tag = str_replace( "'", '_', $tag );
 
-	$tag = @strtr( $tag, $language['NpjLettersFrom'], $language['NpjLettersTo'] );
-	$tag = @strtr( $tag, $language['NpjBiLetters'] );
+	$tag = @strtr( $tag, $language['TranslitLettersFrom'], $language['TranslitLettersTo'] );
+	$tag = @strtr( $tag, $language['TranslitBiLetters'] );
 	$tag = strtolower( $tag );
 
 	return rtrim($tag, '/');

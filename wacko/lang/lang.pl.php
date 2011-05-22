@@ -14,11 +14,11 @@ $wacko_language = array(
 	"UPPER_P"			=> "A-Z\xa1\xa3\xa5\xa6\xa9-\xac\xae\xaf\xc0-\xd6\xd8-\xde",
 	"LOWER_P"			=> "a-z\xb1\xb3\xb5\xb6\xb9-\xbc\xbe\xbf\xdf-\xf6\xf8-\xfe\/'",
 	"ALPHA_P"			=> "A-Za-z\xa1\xa3\xa5\xa6\xa9-\xac\xae\xaf\xb1\xb3\xb5\xb6\xb9-\xbc\xbe-\xd6\xd8-\xf6\xf8-\xfe\_\-\/'",
-	"NpjLettersFrom"	=> "ÁÂÇÉËÍÎÓÔÚİáâçéëíîóôúıÃã¡±ÆæÈèÏïĞğÊêÌìÅå¥µ£³ÑñÒòÕõÀàØø¦¶ªº©¹Şş«»ÙùÛû¬¼¯¿®¾",
-	"NpjLettersTo"		=> "AACEEIIOOUYaaceeiioouyAaAaCcCcDdDdEeEeLlLlLlNnNnOoRrRrSsSsSsTtTtUuUuZzZzZz",
-	"NpjCaps"			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÜÚÛİŞß",
-	"NpjSmall"			=> "àáâãäå¸æçèéêëìíîïğñòóôõö÷øùüúûışÿ",
-	"NpjBiLetters" => array(
+	"TranslitLettersFrom"	=> "ÁÂÇÉËÍÎÓÔÚİáâçéëíîóôúıÃã¡±ÆæÈèÏïĞğÊêÌìÅå¥µ£³ÑñÒòÕõÀàØø¦¶ªº©¹Şş«»ÙùÛû¬¼¯¿®¾",
+	"TranslitLettersTo"		=> "AACEEIIOOUYaaceeiioouyAaAaCcCcDdDdEeEeLlLlLlNnNnOoRrRrSsSsSsTtTtUuUuZzZzZz",
+	"TranslitCaps"			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÜÚÛİŞß",
+	"TranslitSmall"			=> "àáâãäå¸æçèéêëìíîïğñòóôõö÷øùüúûışÿ",
+	"TranslitBiLetters" => array(
 		"ä"=>"ae", "ö"=>"oe", "ü"=>"ue", "Ä"=>"Ae",
 		"Ö"=>"Oe", "Ü"=>"Ue", "ß"=>"ss",
 	),

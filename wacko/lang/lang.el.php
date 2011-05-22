@@ -15,11 +15,11 @@ $wacko_language = array(
 	"UPPER_P"			=> "A-Z\xc1\xb6\xc2-\xc5\xb8\xc6\xc7\xb9\xc8\xc9\xba\xda\xca-\xcf\xbc\xd0-\xd5\xbe\xdb\xd6-\xd9\xbf",
 	"LOWER_P"			=> "a-z\xe1\xdc\xe2-\xe5\xdd\xe6\xe7\xde\xe8\xe9\xdf\xfa\xc0\xea-\xef\xfc\xf0-\xf5\xfd\xfb\xe0\xf6-\xf9\xfe\/'",
 	"ALPHA_P"			=> "A-Za-z\xb6\xb8-\xba\xbc\xbe-\xfe\/'",
-	"NpjLettersFrom"	=> "¶¸¹º¼¾¿ÀÚÛÜÝÞßàúûüýþáâãäåæçéêëìíïðñóòôõö÷ùÁÂÃÄÅÆÇÉÊËÌÍÏÐÑÓÔÕÖ×Ù",
-	"NpjLettersTo"		=> "aehioywiiyaehiyiyoywavgdezhiklmnoprsstyfxwavgdezhiklmnoprstyfxw",
-	"NpjCaps"			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÚÛÝÞß",
-	"NpjSmall"			=> "àáâãäå¸æçèéêëìíîïðñòóôõö÷øùüúûýþÿ",
-	"NpjBiLetters" => array(
+	"TranslitLettersFrom"	=> "¶¸¹º¼¾¿ÀÚÛÜÝÞßàúûüýþáâãäåæçéêëìíïðñóòôõö÷ùÁÂÃÄÅÆÇÉÊËÌÍÏÐÑÓÔÕÖ×Ù",
+	"TranslitLettersTo"		=> "aehioywiiyaehiyiyoywavgdezhiklmnoprsstyfxwavgdezhiklmnoprstyfxw",
+	"TranslitCaps"			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÚÛÝÞß",
+	"TranslitSmall"			=> "àáâãäå¸æçèéêëìíîïðñòóôõö÷øùüúûýþÿ",
+	"TranslitBiLetters" => array(
 		"è"=>"th", "È"=>"th", "î"=>"ks", "Î"=>"ks", "ø"=>"ps", "Ø"=>"ps"
 	),
 	// http://tlt.psu.edu/suggestions/international/bylanguage/greekchart.html
