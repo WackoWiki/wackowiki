@@ -773,8 +773,8 @@ class Wacko
 			}
 		}
 
-		$tag = @strtr($tag, $this->language['NpjLettersFrom'], $this->language['NpjLettersTo']);
-		$tag = @strtr($tag, $this->language['NpjBiLetters']);
+		$tag = @strtr($tag, $this->language['TranslitLettersFrom'], $this->language['TranslitLettersTo']);
+		$tag = @strtr($tag, $this->language['TranslitBiLetters']);
 
 		if ($strtolow)
 		{

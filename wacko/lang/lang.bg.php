@@ -14,11 +14,11 @@ $wacko_language = array(
 	"UPPER_P"			=> "A-Z\xc0-\xdf\xa8",
 	"LOWER_P"			=> "a-z\xe0-\xff\xb8\/\'",
 	"ALPHA_P"			=> "A-Za-z\xc0-\xff\xa8\xb8\_\/\'",
-	"NpjLettersFrom"	=> "àáâãäåçèêëìíîïðñòóôõúüöûÀÁÂÃÄÅÇÈÊËÌÍÎÏÐÑÒÓÔÕÚÜÖÛ",
-	"NpjLettersTo"		=> "abvgdeziklmnoprstufx__cyABVGDEZIKLMNOPRSTUFX__CY",
-	"NpjCaps"			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÚÛÝÞß",
-	"NpjSmall"			=> "àáâãäå¸æçèéêëìíîïðñòóôõö÷øùüúûýþÿ",
-	"NpjBiLetters" => array(
+	"TranslitLettersFrom"	=> "àáâãäåçèêëìíîïðñòóôõúüöûÀÁÂÃÄÅÇÈÊËÌÍÎÏÐÑÒÓÔÕÚÜÖÛ",
+	"TranslitLettersTo"		=> "abvgdeziklmnoprstufx__cyABVGDEZIKLMNOPRSTUFX__CY",
+	"TranslitCaps"			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÚÛÝÞß",
+	"TranslitSmall"			=> "àáâãäå¸æçèéêëìíîïðñòóôõö÷øùüúûýþÿ",
+	"TranslitBiLetters" => array(
 		"é" => "jj", "¸" => "jo", "æ" => "zh", "÷" => "ch",
 		"ø" => "sh", "ù" => "shh", "ý" => "je", "þ" => "ju", "ÿ" => "ja",
 		"É" => "Jj", "¨" => "Jo", "Æ" => "Zh", "×" => "Ch",

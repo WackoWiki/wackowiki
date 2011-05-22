@@ -10,20 +10,20 @@ $this->set_language($this->user_lang);
 #$this->set_language($this->page_lang);
 #$this->set_language($this->config['language']);
 
-$NpjLettersFrom	= $this->language['NpjLettersFrom'];
-$NpjLettersTo	= $this->language['NpjLettersTo'];
-$NpjCaps		= $this->language['NpjCaps'];
-$NpjSmall		= $this->language['NpjSmall'];
-$NpjBiLetters	= $this->language['NpjBiLetters'];
+$TranslitLettersFrom	= $this->language['TranslitLettersFrom'];
+$TranslitLettersTo	= $this->language['TranslitLettersTo'];
+$TranslitCaps		= $this->language['TranslitCaps'];
+$TranslitSmall		= $this->language['TranslitSmall'];
+$TranslitBiLetters	= $this->language['TranslitBiLetters'];
 
 $tag = $text;
 //insert _ between words
 $tag = preg_replace( '/\s+/ms', '_', $tag );
 
 $tag = strtolower( $tag );
-$tag = strtr( $tag, $NpjCaps, $NpjSmall );
-$tag = strtr( $tag, $NpjLettersFrom, $NpjLettersTo );
-$tag = strtr( $tag, $NpjBiLetters );
+$tag = strtr( $tag, $TranslitCaps, $TranslitSmall );
+$tag = strtr( $tag, $TranslitLettersFrom, $TranslitLettersTo );
+$tag = strtr( $tag, $TranslitBiLetters );
 
 $tag = preg_replace('/[^a-z0-9_.]+/mi', '', $tag);
 
