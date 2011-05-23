@@ -290,7 +290,7 @@ $wacko_translation = array(
 	'History' => 'История',
 	'ReEditOldRevision' => 'Редактировать эту старую версию',
 	'ExternalPages' => '<strong>Внешние страницы, ссылающеся на&nbsp;%1</strong><br /> (%2) (<a href="%3">список сайтов</a>):',
-	'ExternalPagesGlobal'=> '<strong>Внешние страницы, ссылающеся </strong><br /> (<a href="%1">список сайтов</a>):',
+	'ExternalPagesGlobal'=> '<strong>Внешние страницы, ссылающеся (%2) </strong><br /> (<a href="%1">список сайтов</a>):',
 	'DomainsSitesPages'  => '<strong>Сайты, на которых есть ссылки на&nbsp;%1</strong><br /> (%2)  (<a href="%3">список отдельных страниц</a>):',
 	'DomainsSitesPagesGlobal' => '<strong>Сайты, на которых есть ссылки </strong><br /> (<a href="%1">список отдельных страниц</a>):',
 	'Last24Hours' => 'за последние сутки',

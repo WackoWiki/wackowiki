@@ -291,7 +291,7 @@ $wacko_translation = array(
 	'ReEditOldRevision' => 'Re-edit this old revision',
 
 	'ExternalPages' => 'External pages linking to %1 (%2) (<a href="%3">see list of domains</a>):',
-	'ExternalPagesGlobal' => 'Sites linking to this WackoWiki (<a href="%1">see list of domains</a>):',
+	'ExternalPagesGlobal' => 'Sites linking to this WackoWiki (%2) (<a href="%1">see list of domains</a>):',
 	'Last24Hours' => 'last 24 hours',
 	'LastDays' => 'last %1 days',
 	'DomainsSitesPages' => 'Domains/sites pages linking to  %1 (%2)  (<a href="%3">see list of different URLs</a>):',

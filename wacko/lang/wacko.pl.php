@@ -287,7 +287,7 @@ $wacko_translation = array(
 	'History' => 'historia',
 	'ReEditOldRevision' => 'Edytuj ponownie poprzedni± wersjê',
 	'ExternalPages' => 'Zewnêtrzne dokumenty, zawieraj±ce odno¶nik do strony %1 - %2. (Poka¿ listê <a href="%3"> domen</a>):',
-	'ExternalPagesGlobal' => 'Lista wszystkich witryn zawieraj±cych odno¶nik do naszego systemu Wiki. (Wy¶wietl tylko  <a href="%1">domeny</a>):',
+	'ExternalPagesGlobal' => 'Lista wszystkich witryn zawieraj±cych odno¶nik do naszego systemu Wiki. (%2) (Wy¶wietl tylko  <a href="%1">domeny</a>):',
 	'Last24Hours' => 'dane z ostatnich 24h',
 	'LastDays' => 'dane z ostatnich %1 dni',
 	'DomainsSitesPages' => 'Witryny lub domeny zawieraj±ce odno¶nik do strony: %1 (%2)  (<a href="%3">Wy¶wietl listê adresów</a>):',

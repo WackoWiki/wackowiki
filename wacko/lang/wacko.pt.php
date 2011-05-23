@@ -287,7 +287,7 @@ $wacko_translation = array(
 	'History' => 'História',
 	'ReEditOldRevision' => 'Re-editar esta revisão antiga',
 	'ExternalPages' => 'Páginas externas com ligação a  %1 (%2) (<a href="%3">ver lista de domínios</a>):',
-	'ExternalPagesGlobal' => 'Sites com links para nós (<a href="%1">veja lista de domínios</a>):',
+	'ExternalPagesGlobal' => 'Sites com links para nós (%2) (<a href="%1">veja lista de domínios</a>):',
 	'Last24Hours' => 'Últimas 24 horas',
 	'LastDays' => 'Últimos %1 dias',
 	'DomainsSitesPages' => 'Domínios/páginas com ligações a   %1 (%2)  (<a href="%3">ver lista de URLs diferentes</a>):',

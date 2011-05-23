@@ -284,7 +284,7 @@ $wacko_translation = array(
 	'History'				=> 'Historie',
 	'ReEditOldRevision'		=> 'Editiere diese alte Version erneut',
 	'ExternalPages'			=> 'externe Seiten verlinkt zu %1 (%2) (<a href="%3">zeige Domänen</a>):',
-	'ExternalPagesGlobal'	=> 'Sites, die auf dieses WackoWiki verlinkt haben (<a href="%1">zeige Domänen</a>):',
+	'ExternalPagesGlobal'	=> 'Sites, die auf dieses WackoWiki verlinkt haben (%2) (<a href="%1">zeige Domänen</a>):',
 	'Last24Hours'			=> 'letzte 24 Stunden',
 	'LastDays'				=> 'letzte %1 Tage',
 	'DomainsSitesPages'		=> 'Domänen/Seiten verlinkt zu  %1 (%2)  (<a href="%3">zeige URLs</a>):',

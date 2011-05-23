@@ -287,7 +287,7 @@ $wacko_translation = array(
 	'History' => 'ajalugu',
 	'ReEditOldRevision' => 'Vana redigeeringu ümbermuutmine',
 	'ExternalPages' => 'Välised lehed on lingitud %1 (%2) (<a href="%3">vaata domeenide listi</a>):',
-	'ExternalPagesGlobal' => 'Saidid on lingitud Wiki lehele (<a href="%1">vaata domeenide listi</a>):',
+	'ExternalPagesGlobal' => 'Saidid on lingitud Wiki lehele (%2) (<a href="%1">vaata domeenide listi</a>):',
 	'Last24Hours' => 'viimased 24 tundi',
 	'LastDays' => 'viimased %1 paeva',
 	'DomainsSitesPages' => 'Domeenide/saitide lehed on lingitud  %1 (%2)  (<a href="%3">vaata erinevate URL\'ide nimekirja</a>):',
