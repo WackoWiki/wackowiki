@@ -287,7 +287,7 @@ $wacko_translation = array(
 	'History' => 'historie',
 	'ReEditOldRevision' => 'Bewerk deze oude revisie nogmaals',
 	'ExternalPages' => 'Externe pagina\'s met links naar %1 (%2) (<a href="%3">Bekijk een lijst van domeinen</a>):',
-	'ExternalPagesGlobal' => 'Sites met links naar deze WackoWiki (<a href="%1">Bekijk een lijst van domeinen</a>):',
+	'ExternalPagesGlobal' => 'Sites met links naar deze WackoWiki (%2) (<a href="%1">Bekijk een lijst van domeinen</a>):',
 	'Last24Hours' => 'laatste 24 uur',
 	'LastDays' => 'laatste %1 dagen',
 	'DomainsSitesPages' => 'Lokale domeinen/sites met links naar %1 (%2)  (<a href="%3">Bekijk een lijst van verschillende URLs</a>):',

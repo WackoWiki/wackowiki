@@ -288,7 +288,7 @@ $wacko_translation = array(
 	'History'  => 'Istoria modifarilor',
 	'ReEditOldRevision' => 'Redactarea versiunii date, vechi',
 	'ExternalPages' => '<strong>Pagini externe, ce se adreseaza la &nbsp;%1</strong><br /> (%2) (<a href="%3">lista site-urilor</a>):',
-	'ExternalPagesGlobal' => '<strong>Pagini externe, ce se adreseaza </strong><br /> (<a href="%1">lista site-urilor</a>):',
+	'ExternalPagesGlobal' => '<strong>Pagini externe, ce se adreseaza (%2) </strong><br /> (<a href="%1">lista site-urilor</a>):',
 	'DomainsSitesPages' => '<strong>Site-uri, на которых есть ссылки на&nbsp;%1</strong><br /> (%2) (<a href="%3">lista separata a paginilor</a>):',
 	'DomainsSitesPagesGlobal' => '<strong>Site-uri, pe care sunt link-uri</strong><br /> (<a href="%1">lista separata a paginilor</a>):',
 	'Last24Hours' => 'pentru ultimele 24 ore',

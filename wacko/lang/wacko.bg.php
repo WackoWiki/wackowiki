@@ -287,7 +287,7 @@ $wacko_translation = array(
 	'History' => 'История на промените',
 	'ReEditOldRevision' => 'Редактирай старата версия',
 	'ExternalPages' => '<strong>Външни страници, препращащи на&nbsp;%1</strong><br /> (%2) (<a href="%3">списък на сайтовете</a>):',
-	'ExternalPagesGlobal' => '<strong>Външни страници, препращащи </strong><br /> (<a href="%1">списък на сайтовете</a>):',
+	'ExternalPagesGlobal' => '<strong>Външни страници, препращащи (%2)</strong><br /> (<a href="%1">списък на сайтовете</a>):',
 	'DomainsSitesPages' => '<strong>Сайтове, на които има препратки&nbsp;%1</strong><br /> (%2)  (<a href="%3">списък на отделните страници</a>):',
 	'DomainsSitesPagesGlobal' => '<strong>Сайтове, на които има препратки</strong><br /> (<a href="%1">списък на отделните страници</a>):',
 	'Last24Hours' => 'за последното денонощие',

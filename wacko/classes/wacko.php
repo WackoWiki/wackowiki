@@ -3311,13 +3311,16 @@ class Wacko
 		}
 	}
 
-	function load_referrers($page_id = '')
+	function load_referrers($page_id = null)
 	{
 		return $this->load_all(
-			"SELECT page_id, referrer, count(referrer) AS num ".
+			"SELECT ".
+			(!isset($page_id)
+				? "referrer, count(referrer) AS num "
+				: "page_id, referrer, count(referrer) AS num ").
 			"FROM ".$this->config['table_prefix']."referrer ".
-			($page_id = trim($page_id)
-				? "WHERE page_id = '".quote($this->dblink, $page_id)."'"
+			(!is_null($page_id)
+				? "WHERE page_id = '".quote($this->dblink, $page_id)."' "
 				: "").
 			"GROUP BY referrer ".
 			"ORDER BY num DESC");

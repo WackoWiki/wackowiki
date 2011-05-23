@@ -287,7 +287,7 @@ $wacko_translation = array(
 	'History' => 'historique',
 	'ReEditOldRevision' => 'Rééditer cette ancienne version',
 	'ExternalPages' => 'Liens externes vers %1 (%2) (<a href="%3">Voir la liste des domaines</a>):',
-	'ExternalPagesGlobal' => 'Sites ayant des liens vers ce Wiki (<a href="%1">Voir la liste des domaines</a>):',
+	'ExternalPagesGlobal' => 'Sites ayant des liens vers ce Wiki (%2) (<a href="%1">Voir la liste des domaines</a>):',
 	'Last24Hours' => 'Dernières 24 heures',
 	'LastDays' => 'Derniers %1 jours',
 	'DomainsSitesPages' => 'Domaines/sites ayant des liens vers %1 (%2)  (<a href="%3">Voir la liste des différents URLs</a>):',

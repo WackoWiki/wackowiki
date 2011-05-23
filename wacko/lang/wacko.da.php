@@ -287,7 +287,7 @@ $wacko_translation = array(
 	'History' => 'historie',
 	'ReEditOldRevision' => 'Genrediger denne gamle version',
 	'ExternalPages' => 'Eksterne sider som linker til %1 (%2) (<a href="%3">se liste over domæner</a>):',
-	'ExternalPagesGlobal' => 'Netsteder som linker til denne WackoWiki (<a href="%1">se liste over domæner</a>):',
+	'ExternalPagesGlobal' => 'Netsteder som linker til denne WackoWiki (%2) (<a href="%1">se liste over domæner</a>):',
 	'Last24Hours' => 'seneste 24 timer',
 	'LastDays' => 'seneste %1 dage',
 	'DomainsSitesPages' => 'Domæner/netsteder som linker til  %1 (%2)  (<a href="%3">se liste over forskellige URLer</a>):',
