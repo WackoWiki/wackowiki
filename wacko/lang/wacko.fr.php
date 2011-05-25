@@ -293,9 +293,10 @@ $wacko_translation = array(
 	'DomainsSitesPages' => 'Domaines/sites ayant des liens vers %1 (%2)  (<a href="%3">Voir la liste des différents URLs</a>):',
 	'DomainsSitesPagesGlobal' => 'Domaines/sites ayant des liens vers ce Wiki (<a href="%1">Voir la liste des différents URLs</a>):',
 	'ViewReferringSites' => '<a href="%1">Voir les sites référents pour %2 seulement</a> ',
-	'ViewReferrersFor' => ' <a href="%1">Voir les référents pour %2 seulement</a>',
+	'ViewReferrersPage' => ' <a href="%1">Voir les référents pour %2 seulement</a>',
 	'ViewReferringSitesGlobal' => '<a href="%1">Voir les sites référents globaux</a>',
-	'ViewReferrersForGlobal' => '<a href="%1">Voir les référents globaux</a>',
+	'ViewReferrersGlobal' => '<a href="%1">Voir les référents globaux</a>',
+	'ViewReferrersPerPage'	=> '<a href="%1">View referrers per page</a>',
 	'NoneReferrers' => '<em>Aucun référent</em>',
 	'NotOwnerAndCanDelete' => '<i>Vous n&rsquo;êtes pas le propriétaire de cette page et ne pouvez la supprimer</i>',
 

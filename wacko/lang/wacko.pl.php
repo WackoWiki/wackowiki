@@ -293,9 +293,10 @@ $wacko_translation = array(
 	'DomainsSitesPages' => 'Witryny lub domeny zawieraj±ce odno¶nik do strony: %1 (%2)  (<a href="%3">Wy¶wietl listê adresów</a>):',
 	'DomainsSitesPagesGlobal' => 'Lista wszystkich witryn zawieraj±cych odno¶nik do naszego systemu Wiki. (Poka¿ listê <a href="%1">adresów</a>):',
 	'ViewReferringSites' => 'Poka¿ odsy³acze odwo³uj±ce siê do strony %2 z podzia³em na: <a href="%1">domeny</a> ',
-	'ViewReferrersFor' => ' <a href="%1">witryny</a>',
+	'ViewReferrersPage' => ' <a href="%1">witryny</a>',
 	'ViewReferringSitesGlobal' => 'Poka¿ wszystkie odsy³acze z podzia³em na: <a href="%1">domeny</a>',
-	'ViewReferrersForGlobal' => '<a href="%1">witryny</a>.',
+	'ViewReferrersGlobal' => '<a href="%1">witryny</a>.',
+	'ViewReferrersPerPage'	=> '<a href="%1">View referrers per page</a>',
 	'NoneReferrers' => '<em>Brak</em>',
 	'NotOwnerAndCanDelete' => '<i>Przepraszamy. Tê stronê mo¿e usun±æ tylko oryginalny autor.</i>',
 

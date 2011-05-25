@@ -293,9 +293,10 @@ $wacko_translation = array(
 	'DomainsSitesPages' => 'Domæner/netsteder som linker til  %1 (%2)  (<a href="%3">se liste over forskellige URLer</a>):',
 	'Domaines/SitesPages(Global)' => 'Domæner/netsteder som linker til denne WackoWiki (<a href="%1">se liste over forskellige URLer</a>):',
 	'ViewReferringSites' => '<a href="%1">Vis netsteder for %2</a> ',
-	'ViewReferrersFor' => ' <a href="%1">Vis links for %2</a>',
+	'ViewReferrersPage' => ' <a href="%1">Vis links for %2</a>',
 	'ViewReferringSitesGlobal' => '<a href="%1">Vis alle netsteder</a>',
-	'ViewReferrersForGlobal' => '<a href="%1">Vis alle links</a>',
+	'ViewReferrersGlobal' => '<a href="%1">Vis alle links</a>',
+	'ViewReferrersPerPage'	=> '<a href="%1">View referrers per page</a>',
 	'NoneReferrers' => '<em>Ingen</em>',
 	'NotOwnerAndCanDelete' => '<i>Du ejer ikke denne side og kan ikke slette den.</i>',
 

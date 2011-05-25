@@ -293,9 +293,10 @@ $wacko_translation = array(
 	'DomainsSitesPages' => 'Domeenide/saitide lehed on lingitud  %1 (%2)  (<a href="%3">vaata erinevate URL\'ide nimekirja</a>):',
 	'DomainsSitesPagesGlobal' => 'Domeenid/saidid on lingitud Wiki lehele (<a href="%1">vaata erinevate URL\'ide nimekirja</a>):',
 	'ViewReferringSites' => '<a href="%1">Vaata viidatud saite ainult %2 </a> ',
-	'ViewReferrersFor' => ' <a href="%1">Vaata viidatuid ainult %2 </a>',
+	'ViewReferrersPage' => ' <a href="%1">Vaata viidatuid ainult %2 </a>',
 	'ViewReferringSitesGlobal' => '<a href="%1">Vaata globaalselt viidatud saite</a>',
-	'ViewReferrersForGlobal' => '<a href="%1">Vaata globaalseid viiteid</a>',
+	'ViewReferrersGlobal' => '<a href="%1">Vaata globaalseid viiteid</a>',
+	'ViewReferrersPerPage'	=> '<a href="%1">View referrers per page</a>',
 	'NoneReferrers' => '<em>Ei</em>',
 	'NotOwnerAndCanDelete' => '<i>Sa ei ole selle lehe omanik, seega ei saa ka kustutada</i>',
 
