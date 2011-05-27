@@ -1171,6 +1171,11 @@ table.formation th, tr.formation th {
 	padding-top: 4px !important;
 }
 
+.dropdown_arrow {
+	font-size: 85%;
+	text-decoration: none;
+}
+
 .dropdown_menu li {
 	background: none repeat scroll 0 0 white;
 	float: none !important;
