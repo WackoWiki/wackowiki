@@ -294,10 +294,12 @@ $wacko_translation = array(
 	'Last24Hours' => 'pentru ultimele 24 ore',
 	'LastDays' => 'pentru ultimele %1 zile',
 	'ViewReferringSites' =>'<a href="%1">Site-uri, ce se adreseaza la %2</a>',
-	'ViewReferrersPage' => '<a href="%1">Link-uri la %2</a>',
+
 	'ViewReferringSitesGlobal' => '<a href="%1">Site-uri, ce se adreseaza</a>',
-	'ViewReferrersGlobal' => '<a href="%1">Link-uri</a>',
-	'ViewReferrersPerPage'	=> '<a href="%1">View referrers per page</a>',
+
+	'ViewReferrersPage' => 'to page',
+	'ViewReferrersPerPage'	=> 'per page',
+	'ViewReferrersGlobal' => 'global',
 	'NoneReferrers' => '<em>Nu</em>',
 	'NotOwnerAndCanDelete' => '<em>Nu sunteti posesorul paginii date si nu o puteti sterge</em>',
 

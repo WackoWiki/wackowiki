@@ -297,10 +297,12 @@ $wacko_translation = array(
 	'DomainsSitesPages' => 'Domains/sites pages linking to  %1 (%2)  (<a href="%3">see list of different URLs</a>):',
 	'DomainsSitesPagesGlobal' => 'Domains/sites linking to this WackoWiki (<a href="%1">see list of different URLs</a>):',
 	'ViewReferringSites' => '<a href="%1">View referring sites for %2 only</a> ',
-	'ViewReferrersPage' => ' <a href="%1">View referrers for %2 only</a>',
+
 	'ViewReferringSitesGlobal' => '<a href="%1">View global referring sites</a>',
-	'ViewReferrersGlobal' => '<a href="%1">View global referrers</a>',
-	'ViewReferrersPerPage'	=> '<a href="%1">View referrers per page</a>',
+	'ViewReferrersPage' => 'to page',
+	'ViewReferrersPerPage'	=> 'per page',
+	'ViewReferrersGlobal' => 'global',
+
 	'NoneReferrers' => '<em>None</em>',
 	'NotOwnerAndCanDelete' => '<i>You aren\'t owner of this page and can\'t delete it</i>',
 
