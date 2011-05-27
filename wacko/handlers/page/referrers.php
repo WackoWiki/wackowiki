@@ -24,7 +24,7 @@ if ($user = $this->get_user())
 	{
 		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('Referrers')."</h3>";
 		echo "<ul class=\"menu\">
-			<li><a href=\"".$this->href('referrers')."\">".str_replace('%1', $this->tag, $this->get_translation('ViewReferrersPage'))."</a></li>
+			<li><a href=\"".$this->href('referrers')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
 			<li><a href=\"".$this->href('referrers', '', 'perpage=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
 			<li class=\"active\">".$this->get_translation('ViewReferrersGlobal')."</li>
 		</ul><br /><br />\n";
@@ -33,7 +33,7 @@ if ($user = $this->get_user())
 	{
 		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('Referrers')."</h3>";
 		echo "<ul class=\"menu\">
-			<li><a href=\"".$this->href('referrers')."\">".str_replace('%1', $this->tag, $this->get_translation('ViewReferrersPage'))."</a></li>
+			<li><a href=\"".$this->href('referrers')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
 			<li class=\"active\">".$this->get_translation('ViewReferrersPerPage')."</li>
 			<li><a href=\"".$this->href('referrers', '', 'global=1')."\">".$this->get_translation('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
@@ -42,7 +42,7 @@ if ($user = $this->get_user())
 	{
 		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('Referrers')."</h3>";
 		echo "<ul class=\"menu\">
-			<li class=\"active\">".str_replace('%1', $this->tag, $this->get_translation('ViewReferrersPage'))."</li>
+			<li class=\"active\">".$this->get_translation('ViewReferrersPage')."</li>
 			<li><a href=\"".$this->href('referrers', '', 'perpage=1')."\">". $this->get_translation('ViewReferrersPerPage')."</a></li>
 			<li><a href=\"".$this->href('referrers', '', 'global=1')."\">". $this->get_translation('ViewReferrersGlobal')."</a></li>
 		</ul><br /><br />\n";
