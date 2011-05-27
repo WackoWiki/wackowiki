@@ -293,10 +293,12 @@ $wacko_translation = array(
 	'DomainsSitesPages' => 'Lokale domeinen/sites met links naar %1 (%2)  (<a href="%3">Bekijk een lijst van verschillende URLs</a>):',
 	'DomainsSitesPagesGlobal' =>'Domeinen/sites met links naar deze WackoWiki (<a href="%1">Bekijk een lijst van verschillende URLs</a>):',
 	'ViewReferringSites' =>'<a href="%1">Bekijk alleen verwijzende sites voor %2</a> ',
-	'ViewReferrersPage' =>' <a href="%1">Bekijk alleen verwijzingen voor %2</a>',
+
 	'ViewReferringSitesGlobal' => '<a href="%1">Bekijk globale verwijzende sites</a>',
-	'ViewReferrersGlobal' => '<a href="%1">Bekijk globale verwijzingen</a>',
-	'ViewReferrersPerPage'	=> '<a href="%1">View referrers per page</a>',
+
+	'ViewReferrersPage' =>'naar pagina',
+	'ViewReferrersPerPage'	=> 'per page',
+	'ViewReferrersGlobal' => 'global',
 	'NoneReferrers' => '<em>None</em>',
 	'NotOwnerAndCanDelete' => '<i>U ben niet de eigenaar van deze pagina en kunt deze niet verwijderen</i>',
 

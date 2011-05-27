@@ -293,10 +293,12 @@ $wacko_translation = array(
 	'Last24Hours' => 'за последното денонощие',
 	'LastDays' => 'за последните %1 дни',
 	'ViewReferringSites' => '<a href="%1">Сайтове, препращащи на %2</a>',
-	'ViewReferrersPage' => '<a href="%1">Препратки на %2</a>',
+
 	'ViewReferringSitesGlobal' => '<a href="%1">Сайтове, препращащи</a>',
-	'ViewReferrersGlobal' => '<a href="%1">Препратки</a>',
-	'ViewReferrersPerPage'	=> '<a href="%1">View referrers per page</a>',
+
+	'ViewReferrersPage' => 'to page',
+	'ViewReferrersPerPage'	=> 'per page',
+	'ViewReferrersGlobal' => 'Препратки',
 	'NoneReferrers' => '<em>Нет</em>',
 	'NotOwnerAndCanDelete' => '<em>Вие не сте собственик на тази страница и затова не можете да я изтриете</em>',
 

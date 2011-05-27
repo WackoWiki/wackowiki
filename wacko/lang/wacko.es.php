@@ -293,10 +293,12 @@ $wacko_translation = array(
 	'DomainsSitesPages' => 'Dominios/páginas vinculadas con  %1 (%2)  (<a href="%3">ver lista de URLs diferentes</a>):',
 	'DomainsSitesPagesGlobal' => 'Dominios/páginas vinculadas con este Wacko (<a href="%1">ver lista de URLs diferentes</a>):',
 	'ViewReferringSites' => '<a href="%1">Ver Webs referenciadas para %2 solo</a> ',
-	'ViewReferrersPage' => '<a href="%1">Ver referencias para %2 solo</a>',
+
 	'ViewReferringSitesGlobal' => '<a href="%1">Ver Webs referenciadas globales</a>',
-	'ViewReferrersGlobal' => '<a href="%1">Ver referencias globales</a>',
-	'ViewReferrersPerPage'	=> '<a href="%1">View referrers per page</a>',
+
+	'ViewReferrersPage' => 'a la página',
+	'ViewReferrersPerPage'	=> 'per page',
+	'ViewReferrersGlobal' => 'globales',
 	'NoneReferrers' => '<em>Ninguno</em>',
 	'NotOwnerAndCanDelete' => '<i>No eres propietario de esta página y no la puedes eliminar</i>',
 
