@@ -23,7 +23,21 @@
 *
 \************************************************************/
 
-session_start();
+define('SESSION_HANDLER_PATH',            '/tmp');    // Where to find session files. Same setting as in config/constants.php 
+define('COOKIE_PREFIX',            'wacko_');         // Part 1 of session_name - see init.php ln. 421 for details "  session_name($this->config['cookie_prefix'].SESSION_HANDLER_ID);  "
+define('SESSION_HANDLER_ID',            'sid');       // Part 2 of session_name - see previous . Same setting as in config/constants.php
+$catch_session_name = COOKIE_PREFIX.SESSION_HANDLER_ID;
+
+
+
+ 
+
+if(isset($_GET[$catch_session_name])) {
+    session_name($catch_session_name);
+    session_id($_GET[$catch_session_name]);
+    session_start();     // we don't actually start a new session - we open the existing one by name & id and add our variables
+}
+
 
 //////////////////////////////////////////////////////
 ////// User Defined Vars:
