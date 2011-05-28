@@ -313,7 +313,7 @@ switch (count($files))
 							?>
 <label for="captcha"><?php echo $this->get_translation('Captcha');?>:</label>
 <br />
-<img src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php" id="freecap" alt="<?php echo $this->get_translation('Captcha');?>" />
+<img src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php?<?php echo session_name();?>=<?php echo session_id(); ?>" id="freecap" alt="<?php echo $this->get_translation('Captcha');?>" />
 <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->get_translation('CaptchaReload'); ?>">
 <img src="<?php echo $this->config['base_url'];?>images/reload.png" width="18" height="17" alt="<?php echo $this->get_translation('CaptchaReload'); ?>" /></a>
 <br />

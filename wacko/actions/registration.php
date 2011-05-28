@@ -350,7 +350,7 @@ if (!isset($_POST['confirm']))
 				if ($this->get_user_name() == false)
 				{
 					echo '<p><label for="captcha">'.$this->get_translation('Captcha').':</label>';
-					echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php" id="freecap" alt="'.$this->get_translation('Captcha').'" />';
+					echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?'.session_name().'='.session_id().'" id="freecap" alt="'.$this->get_translation('Captcha').'" />';
 					echo '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->get_translation('CaptchaReload').'">';
 					echo '<img src="'.$this->config['base_url'].'images/reload.png" width="18" height="17" alt="'.$this->get_translation('CaptchaReload').'" /></a> <br />';
 					echo '<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" /></p>';
