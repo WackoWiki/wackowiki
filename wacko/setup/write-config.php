@@ -30,10 +30,11 @@ if ( ( $config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo') ) && empty
 	$config['database_port'] = $config['database_port'] = '3306';
 }
 
-if(!array_key_exists('wacko_version', $config))
+// XXX: obsolete
+/*if(!array_key_exists('wacko_version', $config))
 {
 	$config['cookie_prefix'] = $config['table_prefix'];
-}
+}*/
 
 // set version to current version, yay!
 $config['wacko_version'] = WACKO_VERSION;
