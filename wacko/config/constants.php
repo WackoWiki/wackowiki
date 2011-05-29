@@ -25,7 +25,7 @@ define('MENU_AUTO',						0);
 define('MENU_USER',						1);
 define('MENU_DEFAULT',					2);
 define('SESSION_HANDLER_ID',			'sid');
-define('SESSION_HANDLER_PATH',			'/tmp');	// if you are using specific path (instead of system default /tmp) for session variables storing, define it here
+define('SESSION_HANDLER_PATH',			null);	// if you are using specific path (instead of system default /tmp) for session variables storing, define it here
 define('SQL_NULLDATE',					'0000-00-00 00:00:00');
 define('SQL_DATE_FORMAT',				'Y-m-d H:i:s');
 define('TRAN_DONTCHANGE',				0);

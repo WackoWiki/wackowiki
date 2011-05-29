@@ -23,19 +23,21 @@
 *
 \************************************************************/
 
-define('SESSION_HANDLER_PATH',            '/tmp');    // Where to find session files. Same setting as in config/constants.php 
-define('COOKIE_PREFIX',            'wacko_');         // Part 1 of session_name - see init.php ln. 421 for details "  session_name($this->config['cookie_prefix'].SESSION_HANDLER_ID);  "
-define('SESSION_HANDLER_ID',            'sid');       // Part 2 of session_name - see previous . Same setting as in config/constants.php
+define('SESSION_HANDLER_PATH',		null);				// Where to find session files. Same setting as in config/constants.php
+define('COOKIE_PREFIX',				'wacko_');			// Part 1 of session_name - see init.php ln. 421 for details "  session_name($this->config['cookie_prefix'].SESSION_HANDLER_ID);  "
+define('SESSION_HANDLER_ID',		'sid');				// Part 2 of session_name - see previous . Same setting as in config/constants.php
+
 $catch_session_name = COOKIE_PREFIX.SESSION_HANDLER_ID;
 
+if(isset($_GET[$catch_session_name]))
+{
+	session_name($catch_session_name);
+	session_id($_GET[$catch_session_name]);
 
+	// Save session information where specified or with PHP's default
+	session_save_path(SESSION_HANDLER_PATH);
 
- 
-
-if(isset($_GET[$catch_session_name])) {
-    session_name($catch_session_name);
-    session_id($_GET[$catch_session_name]);
-    session_start();     // we don't actually start a new session - we open the existing one by name & id and add our variables
+	session_start();									// we don't actually start a new session - we open the existing one by name & id and add our variables
 }
 
 
@@ -140,13 +142,13 @@ if(pack('L', $abyz) == pack('N', $abyz))
 // so are not suitable for most other uses
 // to increase security, you really should add other fonts
 if($big_endian)
-   {
-      $font_locations = Array("./.ht_freecap_font1_big_e.gdf","./.ht_freecap_font2_big_e.gdf","./.ht_freecap_font3_big_e.gdf","./.ht_freecap_font4_big_e.gdf","./.ht_freecap_font5_big_e.gdf");
-   }
+{
+	$font_locations = Array("./.ht_freecap_font1_big_e.gdf","./.ht_freecap_font2_big_e.gdf","./.ht_freecap_font3_big_e.gdf","./.ht_freecap_font4_big_e.gdf","./.ht_freecap_font5_big_e.gdf");
+}
 else
-   {
-      $font_locations = Array("./.ht_freecap_font1.gdf","./.ht_freecap_font2.gdf","./.ht_freecap_font3.gdf","./.ht_freecap_font4.gdf","./.ht_freecap_font5.gdf");
-   }
+{
+	$font_locations = Array("./.ht_freecap_font1.gdf","./.ht_freecap_font2.gdf","./.ht_freecap_font3.gdf","./.ht_freecap_font4.gdf","./.ht_freecap_font5.gdf");
+}
 
 // background:
 // 0=transparent (if jpg, white)
