@@ -343,6 +343,10 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 			$output .= "<label for=\"minor_edit\">".$this->get_translation('EditMinor')."</label>";
 			$output .= "<br />";
 		}
+		else
+		{
+			$output .= "<br />";
+		}
 
 		if ($user)
 		{
