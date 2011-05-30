@@ -4022,9 +4022,10 @@ class Wacko
 		if ($page_id)
 		{
 			return $this->load_all(
-					"SELECT p.page_id, p.user_id, p.title, p.tag, p.created, p.modified, p.body, p.body_r, u.user_name ".
+					"SELECT p.page_id, p.user_id, p.title, p.tag, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name  ".
 					"FROM ".$this->config['table_prefix']."page p ".
-						"LEFT OUTER JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+						"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+						"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 					"WHERE p.comment_on_id = '".quote($this->dblink, $page_id)."' ".
 					"ORDER BY p.created ".
 					"LIMIT {$limit}, {$count}");
