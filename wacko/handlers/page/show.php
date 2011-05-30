@@ -412,8 +412,8 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 					echo $this->format($strings, 'post_wacko')."\n";
 					echo "</div>\n";
 					echo "<ul class=\"commentinfo\">\n".
-								"<li>".($comment['user_name']
-										? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$comment['user_name'])."\">".$comment['user_name']."</a>"
+								"<li>".($comment['owner_name']
+										? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name'])."\">".$comment['owner_name']."</a>"
 										: $this->get_translation('Guest')).
 								"<li>".$this->get_time_string_formatted($comment['created'])."</li>\n".
 								($comment['modified'] != $comment['created']
