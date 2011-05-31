@@ -319,13 +319,13 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 		}
 	}
 	// files form output ends
-	if ($this->config['footer_comments'])
+	if ($this->config['footer_comments'] > 0 && ($this->config['footer_comments'] != 2 || $this->get_user()))
 	{
 		// pagination
 		$pagination = $this->pagination($this->get_comments_count(), $this->config['comments_count'], 'p', 'show_comments=1#commentsheader');
 
 		// comments form output begins
-		if ($this->has_access('read') && $this->config['footer_comments'] != 0 && ($this->config['footer_comments'] != 2 || $this->get_user()))
+		if ($this->has_access('read'))
 		{
 			// load comments for this page
 			$comments = $this->load_comments($this->page['page_id'], $pagination['offset'], $this->config['comments_count']);
