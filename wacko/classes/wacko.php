@@ -3926,7 +3926,7 @@ class Wacko
 	// Returns boolean indicating if the current user is allowed to see comments at all
 	function user_allowed_comments()
 	{
-		return $this->config['disallow_comments'] != 1 && ($this->config['disallow_comments'] != 2 || $this->get_user());
+		return $this->config['disable_comments'] != 1 && ($this->config['disable_comments'] != 2 || $this->get_user());
 	}
 
 	// COMMENTS AND COUNTS
@@ -5116,7 +5116,8 @@ class Wacko
 
 			foreach ($page_options as $key => $val)
 			{
-				if ($key && $val == true)
+				// ignore perpage page settings with empty / null as value
+				if ($key && $val != null)
 				{
 					$this->config[$key] = $val;
 				}
