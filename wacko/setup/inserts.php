@@ -14,7 +14,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 	$owner_id				= "SELECT user_id FROM ".$config_global['table_prefix']."user WHERE user_name = 'System' LIMIT 1";
 
 	// user_id for user System
-	$page_insert			= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, lang, hide_comments, hide_files, hide_rating) VALUES ('".$tag."', '".translit($tag, $lng)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lng."', '1', '1', '1')";
+	$page_insert			= "INSERT INTO ".$config_global['table_prefix']."page (tag, supertag, title, body, user_id, owner_id, created, modified, latest, lang, footer_comments, footer_files, footer_rating) VALUES ('".$tag."', '".translit($tag, $lng)."', '".$title."' , '".$body."', (".$owner_id."), (".$owner_id."), NOW(), NOW(), '1', '".$lng."', '0', '0', '0')";
 
 	$page_id				= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag = '".$tag."' LIMIT 1";
 

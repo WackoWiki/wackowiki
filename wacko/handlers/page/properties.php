@@ -43,10 +43,10 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 		$this->sql_query(
 			"UPDATE ".$this->config['table_prefix']."page SET ".
 				(isset($_POST['extended'])
-				?	"hide_comments		= '".quote($this->dblink, (int)$_POST['hide_comments'])."', ".
-					"hide_files			= '".quote($this->dblink, (int)$_POST['hide_files'])."', ".
-					($this->config['hide_rating'] != 1
-						? "hide_rating		= '".quote($this->dblink, (int)$_POST['hide_rating'])."', "
+				?	"footer_comments	= '".quote($this->dblink, (int)$_POST['footer_comments'])."', ".
+					"footer_files		= '".quote($this->dblink, (int)$_POST['footer_files'])."', ".
+					($this->config['footer_rating'] != 0
+						? "footer_rating	= '".quote($this->dblink, (int)$_POST['footer_rating'])."', "
 						: "").
 					"hide_toc			= '".quote($this->dblink, (int)$_POST['hide_toc'])."', ".
 					"hide_index			= '".quote($this->dblink, (int)$_POST['hide_index'])."', ".
@@ -109,27 +109,29 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 			echo "<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaComments')."</th>";
 			echo "<td class=\"form_right\">";
-			echo "<input type=\"radio\" id=\"commentsOn\" name=\"hide_comments\" value=\"0\" ".( !$this->config['hide_comments'] ? "checked=\"checked\"" : "" )."/><label for=\"commentsOn\">".$this->get_translation('MetaOn')."</label>";
-			echo "<input type=\"radio\" id=\"commentsGuest\" name=\"hide_comments\" value=\"2\" ".( $this->config['hide_comments'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"commentsGuest\">".$this->get_translation('MetaRegistered')."</label>";
-			echo "<input type=\"radio\" id=\"commentsOff\" name=\"hide_comments\" value=\"1\" ".( $this->config['hide_comments'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"commentsOff\">".$this->get_translation('MetaOff')."</label>";
+			echo "<input type=\"radio\" id=\"commentsOff\"		name=\"footer_comments\" value=\"0\" ".( $this->config['footer_comments'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"commentsOff\">".$this->get_translation('MetaOff')."</label>";
+			echo "<input type=\"radio\" id=\"commentsOn\"		name=\"footer_comments\" value=\"1\" ".( $this->config['footer_comments'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"commentsOn\">".$this->get_translation('MetaOn')."</label>";
+			echo "<input type=\"radio\" id=\"commentsGuest\"	name=\"footer_comments\" value=\"2\" ".( $this->config['footer_comments'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"commentsGuest\">".$this->get_translation('MetaRegistered')."</label>";
+
 			echo "</td>";
 			echo "</tr>\n";
 			echo "<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaFiles')."</th>";
 			echo "<td class=\"form_right\">";
-			echo "<input type=\"radio\" id=\"filesOn\" name=\"hide_files\" value=\"0\" ".( !$this->config['hide_files'] ? "checked=\"checked\"" : "" )."/><label for=\"filesOn\">".$this->get_translation('MetaOn')."</label>";
-			echo "<input type=\"radio\" id=\"filesGuest\" name=\"hide_files\" value=\"2\" ".( $this->config['hide_files'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"filesGuest\">".$this->get_translation('MetaRegistered')."</label>";
-			echo "<input type=\"radio\" id=\"filesOff\" name=\"hide_files\" value=\"1\" ".( $this->config['hide_files'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"filesOff\">".$this->get_translation('MetaOff')."</label>";
+			echo "<input type=\"radio\" id=\"filesOn\" name=\"footer_files\" value=\"1\" ".( $this->config['footer_files'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"filesOn\">".$this->get_translation('MetaOn')."</label>";
+			echo "<input type=\"radio\" id=\"filesGuest\" name=\"footer_files\" value=\"2\" ".( $this->config['footer_files'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"filesGuest\">".$this->get_translation('MetaRegistered')."</label>";
+			echo "<input type=\"radio\" id=\"filesOff\" name=\"footer_files\" value=\"0\" ".( $this->config['footer_files'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"filesOff\">".$this->get_translation('MetaOff')."</label>";
 			echo "</td>";
 			echo "</tr>\n";
-			if ($this->config['hide_rating'] != 1)
+
+			if ($this->config['footer_rating'] != 0)
 			{
 				echo "<tr class=\"lined\">";
 				echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaRating')."</th>";
 				echo "<td class=\"form_right\">";
-				echo "<input type=\"radio\" id=\"ratingOn\" name=\"hide_rating\" value=\"0\" ".( !$this->config['hide_rating'] ? "checked=\"checked\"" : "" )."/><label for=\"ratingOn\">".$this->get_translation('MetaOn')."</label>";
-				echo "<input type=\"radio\" id=\"ratingGuest\" name=\"hide_rating\" value=\"2\" ".( $this->config['hide_rating'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"ratingGuest\">".$this->get_translation('MetaRegistered')."</label>";
-				echo "<input type=\"radio\" id=\"ratingOff\" name=\"hide_rating\" value=\"1\" ".( $this->config['hide_rating'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"ratingOff\">".$this->get_translation('MetaOff')."</label>";
+				echo "<input type=\"radio\" id=\"ratingOn\" name=\"footer_rating\" value=\"1\" ".( $this->config['footer_rating'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"ratingOn\">".$this->get_translation('MetaOn')."</label>";
+				echo "<input type=\"radio\" id=\"ratingGuest\" name=\"footer_rating\" value=\"2\" ".( $this->config['footer_rating'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"ratingGuest\">".$this->get_translation('MetaRegistered')."</label>";
+				echo "<input type=\"radio\" id=\"ratingOff\" name=\"footer_rating\" value=\"0\" ".( $this->config['footer_rating'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"ratingOff\">".$this->get_translation('MetaOff')."</label>";
 				echo "</td>";
 				echo "</tr>\n";
 			}
@@ -328,7 +330,7 @@ echo "<tr>\n";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsHits')."</th>";
 	echo "<td class=\"form_right\">".number_format($this->page['hits'], 0, ',', '.')."</td>";
 	echo "</tr>\n";
-	if ($this->config['hide_rating'] != 1)
+	if ($this->config['footer_rating'] != 0)
 	{
 		echo "<tr class=\"lined\">";
 		echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsRating')."</th>";

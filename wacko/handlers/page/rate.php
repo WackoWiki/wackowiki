@@ -29,7 +29,7 @@ function handler_rate_set_rate_cookie(&$engine, $id)
 }
 
 // update page rating
-if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 1)
+if ($this->has_access('read') && $this->page && $this->config['footer_rating'] != 0 && ($this->config['footer_rating'] != 2 || $this->get_user()))
 {
 	if (isset($_POST['value']))
 	{

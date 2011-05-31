@@ -160,7 +160,7 @@ if ($this->method == 'show') {
 
 
 	// files code starts
-	if ($this->has_access('read') && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->get_user()))
+	if ($this->has_access('read') && $this->config['footer_files'] != 0 && ($this->config['footer_files'] != 2 || $this->get_user()))
 	{
 		// store files display in session
 		if (!isset($_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->page['page_id']]))
@@ -241,7 +241,7 @@ switch (count($files))
 	}
 	// end files
 	// comments code starts
-	if ($this->has_access('read') && $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->get_user()))
+	if ($this->has_access('read') && $this->config['footer_comments'] != 0 && ($this->config['footer_comments'] != 2 || $this->get_user()))
 	{
 		// load comments for this page
 		$comments = $this->load_comments($this->page['page_id']);

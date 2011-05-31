@@ -41,9 +41,9 @@ function admin_configbasic(&$engine, &$module)
 		$config['upload_images_only']		= (int)$_POST['upload_images_only'];
 		$config['upload_max_size']			= (int)$_POST['upload_max_size'];
 		$config['upload_quota_per_user']	= (int)$_POST['upload_quota_per_user'];
-		$config['hide_comments']			= (int)$_POST['hide_comments'];
-		$config['hide_files']				= (int)$_POST['hide_files'];
-		$config['hide_rating']				= (int)$_POST['hide_rating'];
+		$config['footer_comments']			= (int)$_POST['footer_comments'];
+		$config['footer_files']				= (int)$_POST['footer_files'];
+		$config['footer_rating']			= (int)$_POST['footer_rating'];
 		$config['hide_revisions']			= (int)$_POST['hide_revisions'];
 		$config['hide_toc']					= (int)$_POST['hide_toc'];
 		$config['hide_index']				= (int)$_POST['hide_index'];
@@ -218,9 +218,9 @@ function admin_configbasic(&$engine, &$module)
 				<td class="label"><strong>Comments panel:</strong><br />
 				<small>The default display  of comments in the bottom of the page.</small></td>
 				<td>
-					<input type="radio" id="hide_comments_on" name="hide_comments" value="0"<?php echo ( !$engine->config['hide_comments'] ? ' checked="checked"' : '' );?> /><label for="hide_comments_on">On.</label>
-					<input type="radio" id="hide_comments_guest" name="hide_comments" value="2"<?php echo ( $engine->config['hide_comments'] == 2 ? ' checked="checked"' : '' );?> /><label for="hide_comments_guest">Registered.</label>
-					<input type="radio" id="hide_comments_off" name="hide_comments" value="1"<?php echo ( $engine->config['hide_comments'] == 1 ? ' checked="checked"' : '' );?> /><label for="hide_comments_off">Off.</label>
+					<input type="radio" id="footer_comments_on" name="footer_comments" value="1"<?php echo ( $engine->config['footer_comments'] == 1 ? ' checked="checked"' : '' );?> /><label for="footer_comments_on">On.</label>
+					<input type="radio" id="footer_comments_guest" name="footer_comments" value="2"<?php echo ( $engine->config['footer_comments'] == 2 ? ' checked="checked"' : '' );?> /><label for="footer_comments_guest">Registered.</label>
+					<input type="radio" id="footer_comments_off" name="footer_comments" value="0"<?php echo ( $engine->config['footer_comments'] == 0 ? ' checked="checked"' : '' );?> /><label for="footer_comments_off">Off.</label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -230,9 +230,9 @@ function admin_configbasic(&$engine, &$module)
 				<td class="label"><strong>File panel:</strong><br />
 				<small>The default display of attachments in the bottom of the page .</small></td>
 				<td>
-					<input type="radio" id="hide_files_on" name="hide_files" value="0"<?php echo ( !$engine->config['hide_files'] ? ' checked="checked"' : '' );?> /><label for="hide_files_on">On.</label>
-					<input type="radio" id="hide_files_guest" name="hide_files" value="2"<?php echo ( $engine->config['hide_files'] == 2 ? ' checked="checked"' : '' );?> /><label for="hide_files_guest">Registered.</label>
-					<input type="radio" id="hide_files_off" name="hide_files" value="1"<?php echo ( $engine->config['hide_files'] == 1 ? ' checked="checked"' : '' );?> /><label for="hide_files_off">Off.</label>
+					<input type="radio" id="footer_files_on" name="footer_files" value="1"<?php echo ( $engine->config['footer_files'] == 1 ? ' checked="checked"' : '' );?> /><label for="footer_files_on">On.</label>
+					<input type="radio" id="footer_files_guest" name="footer_files" value="2"<?php echo ( $engine->config['footer_files'] == 2 ? ' checked="checked"' : '' );?> /><label for="footer_files_guest">Registered.</label>
+					<input type="radio" id="footer_files_off" name="footer_files" value="0"<?php echo ( $engine->config['footer_files'] == 0 ? ' checked="checked"' : '' );?> /><label for="footer_files_off">Off.</label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -242,9 +242,9 @@ function admin_configbasic(&$engine, &$module)
 				<td class="label"><strong>Rating panel :</strong><br />
 				<small>The default display of the rating panel in the bottom of the page.</small></td>
 				<td>
-					<input type="radio" id="hide_rating_on" name="hide_rating" value="0"<?php echo ( !$engine->config['hide_rating'] ? ' checked="checked"' : '' );?> /><label for="hide_rating_on">On.</label>
-					<input type="radio" id="hide_rating_guest" name="hide_rating" value="2"<?php echo ( $engine->config['hide_rating'] == 2 ? ' checked="checked"' : '' );?> /><label for="hide_rating_guest">Registered.</label>
-					<input type="radio" id="hide_rating_off" name="hide_rating" value="1"<?php echo ( $engine->config['hide_rating'] == 1 ? ' checked="checked"' : '' );?> /><label for="hide_rating_off">Off.</label>
+					<input type="radio" id="footer_rating_on" name="footer_rating" value="1"<?php echo ( $engine->config['footer_rating'] == 1 ? ' checked="checked"' : '' );?> /><label for="footer_rating_on">On.</label>
+					<input type="radio" id="footer_rating_guest" name="footer_rating" value="2"<?php echo ( $engine->config['footer_rating'] == 2 ? ' checked="checked"' : '' );?> /><label for="footer_rating_guest">Registered.</label>
+					<input type="radio" id="footer_rating_off" name="footer_rating" value="0"<?php echo ( $engine->config['footer_rating'] == 0 ? ' checked="checked"' : '' );?> /><label for="footer_rating_off">Off.</label>
 				</td>
 			</tr>
 			<tr class="lined">
