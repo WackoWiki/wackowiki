@@ -14,7 +14,7 @@ if (!isset ($this->config['comments_count']))
 	$this->config['comments_count'] = 15;
 }
 
-if ($this->config['hide_rating'] != 1 && ($this->config['hide_rating'] != 2 || $this->get_user()))
+if ($this->config['footer_rating'] != 0 && ($this->config['footer_rating'] != 2 || $this->get_user()))
 {
 	// registering local functions
 	// determine if user has rated a given page
@@ -223,9 +223,9 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 	}
 
 	// files code starts
-	if ($this->config['footer_files'])
+	if ($this->config['footer_files'] != 0 && ($this->config['footer_files'] != 2 || $this->get_user()))
 	{
-		if ($this->has_access('read') && $this->config['hide_files'] != 1 && ($this->config['hide_files'] != 2 || $this->get_user()))
+		if ($this->has_access('read'))
 		{
 			// store files display in session
 			if (!isset($_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->page['page_id']]))
@@ -325,7 +325,7 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 		$pagination = $this->pagination($this->get_comments_count(), $this->config['comments_count'], 'p', 'show_comments=1#commentsheader');
 
 		// comments form output begins
-		if ($this->has_access('read') && $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->get_user()))
+		if ($this->has_access('read') && $this->config['footer_comments'] != 0 && ($this->config['footer_comments'] != 2 || $this->get_user()))
 		{
 			// load comments for this page
 			$comments = $this->load_comments($this->page['page_id'], $pagination['offset'], $this->config['comments_count']);
@@ -554,7 +554,7 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 	}
 
 	// rating form output begins
-	if ($this->has_access('read') && $this->page && $this->config['hide_rating'] != 1 && ($this->config['hide_rating'] != 2 || $this->get_user()))
+	if ($this->has_access('read') && $this->page && $this->config['footer_rating'] != 1 && ($this->config['footer_rating'] != 2 || $this->get_user()))
 	{
 		// determine if user has rated this page
 		if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isset($_GET['show_rating']) && $_GET['show_rating'] != 1) )

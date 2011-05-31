@@ -921,7 +921,7 @@ class Wacko
 		else
 		{
 			$what_p = 'p.*, u.user_name, o.user_name AS owner_name';
-			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.reviewed_time, p.reviewer_id, p.ip, p.latest, p.handler, p.comment_on_id, p.lang, p.description, p.keywords, s.hide_comments, s.hide_files, s.hide_rating, s.hide_toc, s.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, u.user_name, o.user_name AS owner_name';
+			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.reviewed_time, p.reviewer_id, p.ip, p.latest, p.handler, p.comment_on_id, p.lang, p.description, p.keywords, s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, s.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, u.user_name, o.user_name AS owner_name';
 		}
 
 		//
@@ -3926,7 +3926,7 @@ class Wacko
 	// Returns boolean indicating if the current user is allowed to see comments at all
 	function user_allowed_comments()
 	{
-		return $this->config['hide_comments'] != 1 && ($this->config['hide_comments'] != 2 || $this->get_user());
+		return $this->config['disallow_comments'] != 1 && ($this->config['disallow_comments'] != 2 || $this->get_user());
 	}
 
 	// COMMENTS AND COUNTS
@@ -4022,7 +4022,7 @@ class Wacko
 		if ($page_id)
 		{
 			return $this->load_all(
-					"SELECT p.page_id, p.user_id, p.title, p.tag, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name  ".
+					"SELECT p.page_id, p.user_id, p.title, p.tag, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name ".
 					"FROM ".$this->config['table_prefix']."page p ".
 						"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 						"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
@@ -5103,9 +5103,9 @@ class Wacko
 		{
 			// override perpage settings
 			$page_options = array(
-				'hide_comments'		=> $this->page['hide_comments'],
-				'hide_files'		=> $this->page['hide_files'],
-				'hide_rating'		=> $this->page['hide_rating'],
+				'footer_comments'	=> $this->page['footer_comments'],
+				'footer_files'		=> $this->page['footer_files'],
+				'footer_rating'		=> $this->page['footer_rating'],
 				'hide_toc'			=> $this->page['hide_toc'],
 				'hide_index'		=> $this->page['hide_index'],
 				'tree_level'		=> $this->page['tree_level'],

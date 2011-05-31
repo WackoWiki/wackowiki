@@ -70,9 +70,7 @@ $wacko_config_defaults = array(
 	'minor_edit' => 0,
 	'review' => 0,
 
-	'hide_comments' => 0,
-	'hide_files' => 0,
-	'hide_rating' => 1,
+	'disable_comments' => 0,
 	'hide_revisions' => 0,
 
 	'hide_toc' => 0,
@@ -81,6 +79,7 @@ $wacko_config_defaults = array(
 
 	'footer_comments' => 1,
 	'footer_files' => 1,
+	'footer_rating' => 1,
 
 	'revisions_hide_cancel' => 0,
 
