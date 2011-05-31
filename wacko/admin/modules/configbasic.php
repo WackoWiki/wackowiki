@@ -60,6 +60,7 @@ function admin_configbasic(&$engine, &$module)
 		$config['noindex']					= (int)$_POST['noindex'];
 		$config['xml_sitemap']				= (int)$_POST['xml_sitemap'];
 		$config['enable_feeds']				= (int)$_POST['enable_feeds'];
+		$config['enable_comments']			= (int)$_POST['enable_comments'];
 
 		foreach($config as $key => $value)
 		{
@@ -207,6 +208,21 @@ function admin_configbasic(&$engine, &$module)
 				<td class="label"><label for="upload_quota_per_user"><strong>Restricting quota of storage to a user:</strong><br />
 				<small>Restriction on the quota of storage that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
 				<td><input maxlength="9" style="width:200px;" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo htmlspecialchars($engine->config['upload_quota_per_user']);?>" /></td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<br />
+					Comments
+				</th>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><strong>Disable comments:</strong><br />
+				<small>Enable comments for guest or registered users only or disable them on the entire site.</small></td>
+				<td>
+					<input type="radio" id="enable_comments" name="enable_comments" value="1"<?php echo ( $engine->config['enable_comments'] == 1 ? ' checked="checked"' : '' );?> /><label for="enable_comments_on">On.</label>
+					<input type="radio" id="enable_comments_guest" name="enable_comments" value="2"<?php echo ( $engine->config['enable_comments'] == 2 ? ' checked="checked"' : '' );?> /><label for="enable_comments_guest">Registered.</label>
+					<input type="radio" id="enable_comments_off" name="enable_comments" value="0"<?php echo ( $engine->config['enable_comments'] == 0 ? ' checked="checked"' : '' );?> /><label for="enable_comments_off">Off.</label>
+				</td>
 			</tr>
 			<tr>
 				<th colspan="2">

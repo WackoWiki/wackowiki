@@ -70,7 +70,7 @@ $wacko_config_defaults = array(
 	'minor_edit' => 0,
 	'review' => 0,
 
-	'disable_comments' => 0,
+	'enable_comments' => 1,
 	'hide_revisions' => 0,
 
 	'hide_toc' => 0,
