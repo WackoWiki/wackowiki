@@ -6,9 +6,13 @@ if (!defined('IN_WACKO'))
 }
 
 if (!isset($root))
+{
 	$root = $this->page['tag'];
+}
 else
+{
 	$root = $this->unwrap_link($root);
+}
 
 if ($linking_to = (isset($_GET['linking_to']) ? $_GET['linking_to'] : ''))
 {
@@ -24,6 +28,7 @@ if ($linking_to = (isset($_GET['linking_to']) ? $_GET['linking_to'] : ''))
 				echo "<li>".$this->link('/'.$page['tag'], '', '/'.$page['tag'])."</li>\n";
 			}
 		}
+
 		echo "</ul>\n";
 	}
 	else
@@ -33,9 +38,9 @@ if ($linking_to = (isset($_GET['linking_to']) ? $_GET['linking_to'] : ''))
 }
 else
 {
-	$for = $root;
-	$pref = $this->config['table_prefix'];
-	$sql = "SELECT DISTINCT l.to_tag AS wanted_tag ".
+	$for	= $root;
+	$pref	= $this->config['table_prefix'];
+	$sql	= "SELECT DISTINCT l.to_tag AS wanted_tag ".
 		"FROM ".$pref."link l ".
 			"LEFT JOIN ".$pref."page p ON ".
 			"((l.to_tag = p.tag ".
@@ -81,6 +86,7 @@ else
 					}
 				}
 			}
+
 			echo "</ol>\n";
 		}
 	}

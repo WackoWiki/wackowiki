@@ -188,8 +188,8 @@ if (isset($vars[$for]))
 }
 else
 {
-	$phrase = '';
-	$form = 1;
+	$phrase	= '';
+	$form	= 1;
 }
 
 if ($form)
