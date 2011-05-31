@@ -124,7 +124,7 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 				$edit_note = '';
 			}
 
-			$viewed = ( $user['last_mark'] == true && $page['user'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' viewed' : '' );
+			$viewed = ( $user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' viewed' : '' );
 
 			// print entry
 			echo "<li class=\"lined".$viewed."\"><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; ".
@@ -137,8 +137,8 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 				: $this->link('/'.$page['tag'], '', $page['tag'], $page['title'])
 			).
 			" . . . . . . . . . . . . . . . . <small>".
-			($page['user']
-				? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$page['user'])."\">".$page['user']."</a>"
+			($page['user_name']
+				? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$page['user_name'])."\">".$page['user_name']."</a>"
 				: $this->get_translation('Guest')).
 			$review.' '.
 			$edit_note.

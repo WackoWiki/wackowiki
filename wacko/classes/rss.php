@@ -82,7 +82,7 @@ class RSS
 					$xml .= "<link>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</link>\n";
 					$xml .= "<guid>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
-					$xml .= "<description>".$page['modified']." ".$this->engine->get_translation('By')." ".$page['user'].($page['edit_note'] ? ' ['.$page['edit_note'].']' : '')."</description>\n";
+					$xml .= "<description>".$page['modified']." ".$this->engine->get_translation('By')." ".$page['user_name'].($page['edit_note'] ? ' ['.$page['edit_note'].']' : '')."</description>\n";
 					$xml .= "</item>\n";
 				}
 			}
@@ -246,11 +246,11 @@ class RSS
 				{
 					$count++;
 					$xml .= "<item>\n";
-					$xml .= "<title>".$page['title']." ".$this->engine->get_translation('To')." ".$this->engine->get_page_tag($page['comment_on_id'])." ".$this->engine->get_translation('From')." ".$page['user']."</title>\n";
+					$xml .= "<title>".$page['title']." ".$this->engine->get_translation('To')." ".$this->engine->get_page_tag($page['comment_on_id'])." ".$this->engine->get_translation('From')." ".$page['user_name']."</title>\n";
 					$xml .= "<link>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</link>\n";
 					$xml .= "<guid>".$this->engine->href('show', $page['tag'], 'time='.urlencode($page['modified']))."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
-					$xml .= "<dc:creator>".$page['user']."</dc:creator>\n";
+					$xml .= "<dc:creator>".$page['user_name']."</dc:creator>\n";
 					$text = $this->engine->format($page['body_r'], "post_wacko");
 					$xml .= "<description><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></description>\n";
 					#$xml .= "<content:encoded><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></content:encoded>\n";

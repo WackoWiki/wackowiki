@@ -1302,7 +1302,7 @@ class Wacko
 
 		// count pages
 		$count_pages = $this->load_all(
-			"SELECT p.page_id, u.user_name as user ".
+			"SELECT p.page_id, u.user_name ".
 			"FROM ".$this->config['table_prefix']."page p ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 			"WHERE p.comment_on_id = '0' ".
@@ -1324,7 +1324,7 @@ class Wacko
 		$pagination = $this->pagination($count, $limit);
 
 		if ($pages = $this->load_all(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.user_name as user ".
+		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.user_name ".
 		"FROM ".$this->config['table_prefix']."page p ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".
@@ -1338,7 +1338,7 @@ class Wacko
 				? "AND p.minor_edit = '0' "
 				: "").
 			($default_pages == false
-				? "AND u.account_type = '0' "
+				? "AND (u.account_type = '0' OR p.user_id = '0') "
 				: "").
 		"ORDER BY p.modified DESC ".
 		"LIMIT {$pagination['offset']}, {$limit}", 1))
@@ -1376,7 +1376,7 @@ class Wacko
 		$limit = (int) $limit;
 
 		if ($pages = $this->load_all(
-		"SELECT c.page_id, c.owner_id, c.tag, c.supertag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest, c.handler, c.comment_on_id, c.lang, c.body_r, u.user_name as user, p.title AS page_title, p.tag AS page_tag ".
+		"SELECT c.page_id, c.owner_id, c.tag, c.supertag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest, c.handler, c.comment_on_id, c.lang, c.body_r, u.user_name, p.title AS page_title, p.tag AS page_tag ".
 		"FROM ".$this->config['table_prefix']."page c ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (c.user_id = u.user_id) ".
 			"LEFT JOIN ".$this->config['table_prefix']."page p ON (c.comment_on_id = p.page_id) ".
