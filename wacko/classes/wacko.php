@@ -3926,7 +3926,7 @@ class Wacko
 	// Returns boolean indicating if the current user is allowed to see comments at all
 	function user_allowed_comments()
 	{
-		return $this->config['disable_comments'] != 1 && ($this->config['disable_comments'] != 2 || $this->get_user());
+		return $this->config['enable_comments'] != 0 && ($this->config['enable_comments'] != 2 || $this->get_user());
 	}
 
 	// COMMENTS AND COUNTS

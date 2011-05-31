@@ -109,9 +109,9 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 			echo "<tr class=\"lined\">";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('MetaComments')."</th>";
 			echo "<td class=\"form_right\">";
-			echo "<input type=\"radio\" id=\"commentsOff\"		name=\"footer_comments\" value=\"0\" ".( $this->config['footer_comments'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"commentsOff\">".$this->get_translation('MetaOff')."</label>";
 			echo "<input type=\"radio\" id=\"commentsOn\"		name=\"footer_comments\" value=\"1\" ".( $this->config['footer_comments'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"commentsOn\">".$this->get_translation('MetaOn')."</label>";
 			echo "<input type=\"radio\" id=\"commentsGuest\"	name=\"footer_comments\" value=\"2\" ".( $this->config['footer_comments'] == 2 ? "checked=\"checked\"" : "" )."/><label for=\"commentsGuest\">".$this->get_translation('MetaRegistered')."</label>";
+			echo "<input type=\"radio\" id=\"commentsOff\"		name=\"footer_comments\" value=\"0\" ".( $this->config['footer_comments'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"commentsOff\">".$this->get_translation('MetaOff')."</label>";
 
 			echo "</td>";
 			echo "</tr>\n";
