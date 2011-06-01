@@ -250,50 +250,59 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 		// last user comments
 		$limit = 20;
+
 		echo '<h2 id="comments">'.$this->get_translation('UsersComments').'</h2>'."\n";
-		echo '<div class="indent"><small>'.$this->get_translation('UsersCommentsPosted').': '.$user['total_comments']."</small></div>\n";
 
-		$pagination = $this->pagination($user['total_comments'], $limit, 'c', 'profile='.$user['user_name'].'#comments');
-
-		if ($user['total_comments'])
+		if ($this->user_allowed_comments())
 		{
-			$comments = $this->load_all(
-				"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag ".
-				"FROM {$this->config['table_prefix']}page c ".
-					"LEFT JOIN ".$this->config['table_prefix']."page p ON (c.comment_on_id = p.page_id) ".
-				"WHERE c.owner_id = '".quote($this->dblink, $user['user_id'])."' ".
-					"AND c.comment_on_id <> '0' ".
-				"ORDER BY c.created DESC ".
-				"LIMIT {$pagination['offset']}, $limit");
+			echo '<div class="indent"><small>'.$this->get_translation('UsersCommentsPosted').': '.$user['total_comments']."</small></div>\n";
 
-			// pagination
-			if (isset($pagination['text']))
+			$pagination = $this->pagination($user['total_comments'], $limit, 'c', 'profile='.$user['user_name'].'#comments');
+
+			if ($user['total_comments'])
 			{
-				echo "<span class=\"pagination\">".$pagination['text']."</span>\n";
-			}
+				$comments = $this->load_all(
+					"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag ".
+					"FROM {$this->config['table_prefix']}page c ".
+						"LEFT JOIN ".$this->config['table_prefix']."page p ON (c.comment_on_id = p.page_id) ".
+					"WHERE c.owner_id = '".quote($this->dblink, $user['user_id'])."' ".
+						"AND c.comment_on_id <> '0' ".
+					"ORDER BY c.created DESC ".
+					"LIMIT {$pagination['offset']}, $limit");
 
-			// comments list itself
-			echo '<div>'."\n";
-
-			foreach ($comments as $comment)
-			{
-				if (!$this->config['hide_locked'] || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()) === true)
+				// pagination
+				if (isset($pagination['text']))
 				{
-					echo '<small>'.$this->get_time_string_formatted($comment['created']).'</small>  &mdash; '.$this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'])."<br />\n";
-
-					$i = 0;
-
-					if (++$i >= $limit) break 1;
+					echo "<span class=\"pagination\">".$pagination['text']."</span>\n";
 				}
+
+				// comments list itself
+				echo '<div>'."\n";
+
+				foreach ($comments as $comment)
+				{
+					if (!$this->config['hide_locked'] || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()) === true)
+					{
+						echo '<small>'.$this->get_time_string_formatted($comment['created']).'</small>  &mdash; '.$this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'])."<br />\n";
+
+						$i = 0;
+
+						if (++$i >= $limit) break 1;
+					}
+				}
+
+				echo "</div>\n";
+
+				unset($comments, $comment, $limit, $i);
 			}
-
-			echo "</div>\n";
-
-			unset($comments, $comment, $limit, $i);
+			else
+			{
+				echo '<em>'.$this->get_translation('UsersNA2').'</em>';
+			}
 		}
 		else
 		{
-			echo '<em>'.$this->get_translation('UsersNA2').'</em>';
+			echo $this->get_translation('CommentsDisabled');
 		}
 	}
 }
