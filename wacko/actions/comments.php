@@ -75,90 +75,97 @@ if ($max > 100)
 	$max	= 100;
 }
 
-if (list ($comments, $pagination) = load_recent_comments($this, $root, (int)$max))
+if ($this->user_allowed_comments())
 {
-	// process 'mark read' - reset session time
-	if (isset($_GET['markread']) && $user == true)
+	if (list ($comments, $pagination) = load_recent_comments($this, $root, (int)$max))
 	{
-		$this->update_last_mark($user);
-		$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
-		$user = $this->get_user();
-	}
-
-	if ($user == true)
-	{
-		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
-	}
-
-	if ($root == '' && !(int)$noxml)
-	{
-		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/comments_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RecentCommentsXMLTip')."\" alt=\"XML\" /></a></span><br /><br />\n";
-	}
-
-	// pagination
-	if (isset($pagination['text']))
-	{
-		echo "<span class=\"pagination\">{$pagination['text']}</span><br />\n";
-	}
-
-	echo "<ul class=\"ul_list\">\n";
-
-	$curday = '';
-
-	foreach ($comments as $page)
-	{
-		if ($this->config['hide_locked'])
+		// process 'mark read' - reset session time
+		if (isset($_GET['markread']) && $user == true)
 		{
-			$access = $this->has_access('read', $page['comment_on_id']);
-		}
-		else
-		{
-			$access = true;
+			$this->update_last_mark($user);
+			$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
+			$user = $this->get_user();
 		}
 
-		if ($access && $this->user_allowed_comments())
+		if ($user == true)
 		{
-			// day header
-			list($day, $time) = explode(' ', $page['comment_time']);
+			echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
+		}
 
-			if ($day != $curday)
+		if ($root == '' && !(int)$noxml)
+		{
+			echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/comments_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RecentCommentsXMLTip')."\" alt=\"XML\" /></a></span><br /><br />\n";
+		}
+
+		// pagination
+		if (isset($pagination['text']))
+		{
+			echo "<span class=\"pagination\">{$pagination['text']}</span><br />\n";
+		}
+
+		echo "<ul class=\"ul_list\">\n";
+
+		$curday = '';
+
+		foreach ($comments as $page)
+		{
+			if ($this->config['hide_locked'])
 			{
-				if ($curday)
-				{
-					echo "</ul>\n<br /></li>\n";
-				}
-
-				echo "<li><strong>$day:</strong><ul>\n";
-				$curday = $day;
+				$access = $this->has_access('read', $page['comment_on_id']);
+			}
+			else
+			{
+				$access = true;
 			}
 
-			$viewed = ( $user['last_mark'] == true && $page['comment_user'] != $user['user_name'] && $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '' );
+			if ($access && $this->user_allowed_comments())
+			{
+				// day header
+				list($day, $time) = explode(' ', $page['comment_time']);
 
-			// print entry
-			echo "<li ".$viewed."><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (".
-			($title == 1
-				? $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['page_title'], 0, 1, '', 0)
-				: $this->link('/'.$page['comment_tag'], '', $page['comment_on_tag'], $page['page_title'])
-			).
-			") . . . . . . . . . . . . . . . . <small>"./*$this->get_translation('LatestCommentBy').*/" ".
-			($page['comment_user']
-				? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$page['comment_user'])."\">".$page['comment_user']."</a>"
-				: $this->get_translation('Guest')).
-			"</small></li>\n";
+				if ($day != $curday)
+				{
+					if ($curday)
+					{
+						echo "</ul>\n<br /></li>\n";
+					}
+
+					echo "<li><strong>$day:</strong><ul>\n";
+					$curday = $day;
+				}
+
+				$viewed = ( $user['last_mark'] == true && $page['comment_user'] != $user['user_name'] && $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '' );
+
+				// print entry
+				echo "<li ".$viewed."><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; (".
+				($title == 1
+					? $this->link('/'.$page['comment_tag'], '', $page['comment_title'], $page['page_title'], 0, 1, '', 0)
+					: $this->link('/'.$page['comment_tag'], '', $page['comment_on_tag'], $page['page_title'])
+				).
+				") . . . . . . . . . . . . . . . . <small>"./*$this->get_translation('LatestCommentBy').*/" ".
+				($page['comment_user']
+					? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$page['comment_user'])."\">".$page['comment_user']."</a>"
+					: $this->get_translation('Guest')).
+				"</small></li>\n";
+			}
+		}
+
+		echo "</ul>\n</li>\n</ul>\n";
+
+		// pagination
+		if (isset($pagination['text']))
+		{
+			echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 		}
 	}
-
-	echo "</ul>\n</li>\n</ul>\n";
-
-	// pagination
-	if (isset($pagination['text']))
+	else
 	{
-		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+		echo $this->get_translation('NoRecentComments');
 	}
 }
 else
 {
-	echo $this->get_translation('NoRecentComments');
+	echo $this->get_translation('CommentsDisabled');
 }
 
 ?>
