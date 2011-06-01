@@ -223,7 +223,7 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 	}
 
 	// files code starts
-	if ($this->config['footer_files'] != 0 && ($this->config['footer_files'] != 2 || $this->get_user()))
+	if ($this->config['footer_files'] == 1 || ($this->config['footer_files'] == 2 && $this->get_user()))
 	{
 		if ($this->has_access('read'))
 		{
@@ -319,7 +319,7 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 		}
 	}
 	// files form output ends
-	if ($this->config['footer_comments'] > 0 && ($this->config['footer_comments'] != 2 || $this->get_user()))
+	if ($this->config['footer_comments'] == 1 || ($this->config['footer_comments'] == 2 && $this->get_user()))
 	{
 		// pagination
 		$pagination = $this->pagination($this->get_comments_count(), $this->config['comments_count'], 'p', 'show_comments=1#commentsheader');
@@ -554,7 +554,7 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 	}
 
 	// rating form output begins
-	if ($this->has_access('read') && $this->page && $this->config['footer_rating'] != 1 && ($this->config['footer_rating'] != 2 || $this->get_user()))
+	if ($this->has_access('read') && $this->page && $this->config['footer_rating'] == 1 || ($this->config['footer_rating'] == 2 && $this->get_user()))
 	{
 		// determine if user has rated this page
 		if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isset($_GET['show_rating']) && $_GET['show_rating'] != 1) )
