@@ -36,9 +36,7 @@ if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd')
 	else
 	{
 		// building news template
-		$template	= '===={{anchor name="'.date ('dm').'"}}""'.date ('d.m.').' // '.$namehead.'""====
-
-!!Delete this text and in its place enter your news.!!';
+		$template	= '';
 
 		// redirecting to the edit form
 		$_SESSION['body']	= $template;
