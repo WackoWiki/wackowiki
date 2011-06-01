@@ -319,7 +319,7 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 		}
 	}
 	// files form output ends
-	if ($this->config['footer_comments'] == 1 || ($this->config['footer_comments'] == 2 && $this->get_user()))
+	if (($this->config['footer_comments'] == 1 || ($this->config['footer_comments'] == 2 && $this->get_user()) ) && $this->user_allowed_comments())
 	{
 		// pagination
 		$pagination = $this->pagination($this->get_comments_count(), $this->config['comments_count'], 'p', 'show_comments=1#commentsheader');

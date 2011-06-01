@@ -241,7 +241,7 @@ switch (count($files))
 	}
 	// end files
 	// comments code starts
-	if ($this->has_access('read') && $this->config['footer_comments'] != 0 && ($this->config['footer_comments'] != 2 || $this->get_user()))
+	if ($this->has_access('read') && ( $this->config['footer_comments'] == 1 && ($this->config['footer_comments'] == 2 || $this->get_user()) ) && $this->user_allowed_comments() )
 	{
 		// load comments for this page
 		$comments = $this->load_comments($this->page['page_id']);
