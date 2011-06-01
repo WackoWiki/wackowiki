@@ -139,9 +139,9 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"commented DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
-					"footer_comments TINYINT(1) UNSIGNED NULL DEFAULT '1',".
-					"footer_files TINYINT(1) UNSIGNED NULL DEFAULT '1',".
-					"footer_rating TINYINT(1) UNSIGNED NULL DEFAULT '1',".
+					"footer_comments TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"footer_files TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"footer_rating TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"hide_toc TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"hide_index TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"tree_level TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
