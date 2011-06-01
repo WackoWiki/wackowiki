@@ -36,11 +36,11 @@ define('TRAN_DONTLOAD',					1);
 define('STANDARD_HANDLERS',				'addcomment|categories|claim|diff|edit|latex|msword|new|permissions|print|properties|rate|referrers|referrers_sites|remove|rename|revisions|show|watch');
 
 // do not change this two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-define('WACKO_VERSION',					'R5.0.dev');
+define('WACKO_VERSION',					'R5.0.beta');
 define('XML_HTMLSAX3',					'lib/HTMLSax3/');
 #define('XML_HTMLSAX3',					dirname(__FILE__).'/lib/HTMLSax3/');
 define('ACTIONS4DIFF',					'a, anchor, toc'); //allowed actions in DIFF
 define('PHP_MIN_VERSION',				'5.2.0'); //minimum required PHP version
-define('PHP_ERROR_REPORTING',			5); // PHP error reporting: 0 - off, 5 - all
+define('PHP_ERROR_REPORTING',			0); // PHP error reporting: 0 - off, 5 - all
 
 ?>
