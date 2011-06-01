@@ -28,7 +28,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			// collecting group names where user takes membership
 			foreach ($this->config['aliases'] as $group_name => $group_str)
 			{
-				$group_users = explode("\n", $group_str);
+				$group_users = explode('\n', $group_str);
 
 				if (in_array($user['user_name'], $group_users))
 				{
