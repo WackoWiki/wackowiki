@@ -348,6 +348,7 @@ $wacko_translation = array(
 	'LatestCommentBy' => 'τελευταία σχόλια από',
 	'NoRecentlyCommented' => '<em>Δεν υπάρχουν πρόσφατες σελίδες με σχόλια</em>',
 	'NoRecentlyDeleted'		=> '<em>No deleted pages found.</em>',
+	'CommentsDisabled' => '<em>Comments are not available.</em>',
 
 	'SearchResults' => 'Αποτελέσματα αναζήτησης για ',
 	'NotFound' => 'δεν βρέθηκε',

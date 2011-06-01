@@ -348,6 +348,7 @@ $wacko_translation = array(
 	'LatestCommentBy' => 'viimati kommenteeris',
 	'NoRecentlyCommented' => '<em>Viimati kommenteeritud lehti pole.</em>',
 	'NoRecentlyDeleted'		=> '<em>No deleted pages found.</em>',
+	'CommentsDisabled' => '<em>Comments are not available.</em>',
 
 	'SearchResults' => 'Otsi tulemusi ',
 	'NotFound' => 'ei leitud',
