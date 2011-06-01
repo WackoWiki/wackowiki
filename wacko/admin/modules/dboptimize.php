@@ -26,18 +26,26 @@ function admin_dboptimize(&$engine, &$module)
 	$tables	= & $module['vars'][0];
 
 	// optimizatin scheme
-	if (isset($_GET['all']) && $_GET['all'] == 1) $scheme['all'] = 1;
+	if (isset($_GET['all']) && $_GET['all'] == 1)
+	{
+		$scheme['all'] = 1;
+	}
 
-	$scheme= '';
-	$getstr = '';
+	$scheme	= '';
+	$getstr	= '';
+
 	if (is_array($scheme))
 	{
 		foreach ($scheme as $key => $val)
 		{
 			if ($val == 1)
+			{
 				$getstr .= '&'.$key.'=1';
+			}
 			else
+			{
 				$getstr .= '&'.$key.'=0';
+			}
 		}
 	}
 ?>

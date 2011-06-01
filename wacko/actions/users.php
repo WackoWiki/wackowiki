@@ -5,12 +5,12 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$where = '';
-$order = '';
-$param = '';
-$groups = '';
-$usergroups = '';
-$error = '';
+$where			= '';
+$order			= '';
+$param			= '';
+$groups			= '';
+$usergroups		= '';
+$error			= '';
 
 // display user profile
 if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
@@ -258,29 +258,35 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 		if ($user['total_comments'])
 		{
 			$comments = $this->load_all(
-				"SELECT page_id, tag, created, comment_on_id ".
-				"FROM {$this->config['table_prefix']}page ".
-				"WHERE owner_id = '".quote($this->dblink, $user['user_id'])."' ".
-					"AND comment_on_id <> '0' ".
-				"ORDER BY created DESC ".
+				"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag ".
+				"FROM {$this->config['table_prefix']}page c ".
+					"LEFT JOIN ".$this->config['table_prefix']."page p ON (c.comment_on_id = p.page_id) ".
+				"WHERE c.owner_id = '".quote($this->dblink, $user['user_id'])."' ".
+					"AND c.comment_on_id <> '0' ".
+				"ORDER BY c.created DESC ".
 				"LIMIT {$pagination['offset']}, $limit");
 
 			// pagination
 			if (isset($pagination['text']))
+			{
 				echo "<span class=\"pagination\">".$pagination['text']."</span>\n";
+			}
 
 			// comments list itself
 			echo '<div>'."\n";
+
 			foreach ($comments as $comment)
 			{
 				if (!$this->config['hide_locked'] || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()) === true)
 				{
-					echo '<small>'.$this->get_time_string_formatted($comment['created']).'</small>  &mdash; '.$this->link('/'.$comment['tag'], '', $this->get_page_title(0, $comment['comment_on_id']))."<br />\n";
+					echo '<small>'.$this->get_time_string_formatted($comment['created']).'</small>  &mdash; '.$this->link('/'.$comment['tag'], '', $comment['title'], $comment['page_tag'])."<br />\n";
 
 					$i = 0;
+
 					if (++$i >= $limit) break 1;
 				}
 			}
+
 			echo "</div>\n";
 
 			unset($comments, $comment, $limit, $i);
