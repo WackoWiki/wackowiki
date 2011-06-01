@@ -398,6 +398,7 @@ class Init
 				$this->method	= $match[2];
 			}
 		}
+
 		return true;
 	}
 
