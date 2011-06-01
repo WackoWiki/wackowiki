@@ -352,6 +352,7 @@ $wacko_translation = array(
 	'LatestCommentBy' => 'ultimul a comentat',
 	'NoRecentlyCommented' => '<em>Comentarii nu sunt de demult.</em>',
 	'NoRecentlyDeleted'		=> '<em>No deleted pages found.</em>',
+	'CommentsDisabled' => '<em>Comments are not available.</em>',
 
 	'SearchResults' => 'Rezultatul cautarii frazei ',
 	'NotFound' => 'nu este gasit',

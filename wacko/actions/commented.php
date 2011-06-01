@@ -181,6 +181,9 @@ if ($this->user_allowed_comments())
 		}
 	}
 }
-else echo 'horray';
+else
+{
+	echo $this->get_translation('CommentsDisabled');
+}
 
 ?>

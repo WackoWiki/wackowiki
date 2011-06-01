@@ -354,6 +354,7 @@ $wacko_translation = array(
 	'LatestCommentBy' => 'автор последнего комментария',
 	'NoRecentlyCommented' => '<em>Комментариев давно не было.</em>',
 	'NoRecentlyDeleted'		=> '<em>Удаленных документов не найдено.</em>',
+	'CommentsDisabled' => '<em>Comments are not available.</em>',
 
 	'SearchResults' => 'Результаты поиска фразы ',
 	'NotFound' => 'не найден',

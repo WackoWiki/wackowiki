@@ -79,7 +79,7 @@ $wacko_config_defaults = array(
 
 	'footer_comments' => 1,
 	'footer_files' => 1,
-	'footer_rating' => 1,
+	'footer_rating' => 0,
 
 	'revisions_hide_cancel' => 0,
 

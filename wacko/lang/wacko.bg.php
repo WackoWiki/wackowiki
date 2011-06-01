@@ -351,6 +351,7 @@ $wacko_translation = array(
 	'LatestCommentBy' => 'последен коментирал',
 	'NoRecentlyCommented' => '<em>Коментари отдавна не е имало.</em>',
 	'NoRecentlyDeleted'		=> '<em>No deleted pages found.</em>',
+	'CommentsDisabled' => '<em>Comments are not available.</em>',
 
 	'SearchResults' => 'Резултати за търсената фраза ',
 	'NotFound' => 'не е намерен',

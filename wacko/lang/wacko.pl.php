@@ -348,6 +348,7 @@ $wacko_translation = array(
 	'LatestCommentBy' => ' ostatni komentarz u¿ytkownika ',
 	'NoRecentlyCommented' => '<em>¯adna ze stron nie zosta³a ostatnio skomentowana.</em>',
 	'NoRecentlyDeleted'		=> '<em>No deleted pages found.</em>',
+	'CommentsDisabled' => '<em>Comments are not available.</em>',
 
 	'SearchResults' => 'Wyniki wyszukiwania s³owa: ',
 	'NotFound' => 'nie zosta³o odnalezione',
