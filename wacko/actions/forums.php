@@ -31,7 +31,11 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	// parse subforums list if any
 	if (!empty($pages))
 	{
-		$pages = trim(explode(',', $pages), '/ ');
+		#$pages = trim($pages, '/ ');
+		#$this->debug_print_r($pages);
+		$pages = explode(',', $pages);
+		#$this->debug_print_r($pages);
+
 	}
 
 	// make query
@@ -47,10 +51,17 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	}
 	else
 	{
-		foreach ($pages as $page)
+		foreach ($pages as $num => $page)
 		{
-			$sql .= "AND p.tag = '".quote($this->dblink, $page)."' ";
+			if ($num <> 0)
+			{
+				$_pages .= "','";
+			}
+
+			$_pages .= quote($this->dblink, $page);
 		}
+
+		$sql .= "AND p.tag IN ('".$_pages."') ";
 	}
 
 	$sql .= "ORDER BY p.modified ASC";

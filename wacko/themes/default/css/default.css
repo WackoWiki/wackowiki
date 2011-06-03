@@ -1409,4 +1409,19 @@ ul.upload, ul.upload ul {
 	float: left;
 	text-align: left;
 	width: 130px;
-	}
+}
+
+/* forum extention ******************************************* */
+
+table.forum {
+	border: 0 none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+table.forum th {
+	font-size: 12px;
+	text-align: center;
+	white-space: nowrap;
+}
