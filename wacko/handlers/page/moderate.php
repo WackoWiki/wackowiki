@@ -505,6 +505,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				{
 					$topics[] = $this->get_page_tag($id);
 				}
+
 				moderate_merge_topics($this, $_POST['base'], $topics);
 				$this->log(3, str_replace('%2', $_POST['base'], str_replace('%1', '##'.implode('##, ##', $topics).'##', $this->get_translation('LogMergedPages', $this->config['language']))));
 				unset($accept_action, $topics);
@@ -529,6 +530,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 				$this->save_acl($id, 'comment', '!*');
 			}
+
 			$set = array();
 			$this->set_message($this->get_translation('ModerateTopicsBlocked'));
 			$this->redirect($this->href('moderate'));
@@ -542,6 +544,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$this->log(2, str_replace('%1', $page['tag'].' '.$page['title'], $this->get_translation('LogTopicUnlocked', $this->config['language'])));
 				$this->save_acl($id, 'comment', '*');
 			}
+
 			$set = array();
 			$this->set_message($this->get_translation('ModerateTopicsUnlocked'));
 			$this->redirect($this->href('moderate'));
@@ -667,6 +670,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 
 			$list = '';
+
 			for ($i = 0; $i < count($topics_list); $i++)
 			{
 				$list .= "<option value=\"{$topics_list[$i]}\">{$accept_text[$i]}</option>\n";
@@ -722,15 +726,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		if ($this->has_access('read', $topic['page_id']))
 		{
-			echo '<tr>'.
+			echo '<tr class="lined">'.
 					'<td valign="middle" style="width:10px;" class="label"><input name="'.$topic['page_id'].'" type="checkbox" value="id" '.( in_array($topic['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
 					'<td align="left" style="padding-left:5px;">'.( $this->has_access('comment', $topic['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']).' <strong>'.$this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0).'</strong></td>'.
 					'<td align="center"'.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.( $topic['owner'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner'] ? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner']).'">'.$topic['owner'].'</a>' : $topic['user'] ) ).'&nbsp;&nbsp;</small></td>'.
 					'<td align="center"><small>'.$topic['comments'].'</small></td>'.
 					'<td align="center" style="white-space:nowrap"><small>&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'</small></td>'.
-				'</tr>'."\n".
-				'<tr class="lined">'.
-					'<td colspan="5"></td>'.
 				'</tr>'."\n";
 		}
 
@@ -966,11 +967,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				if ($tag != '' && $error != true)
 				{
 					// get comments ids according to the splitting scheme
-					if ($_POST['scheme'] == 'selected')
+					if (isset($_POST['scheme']) && $_POST['scheme'] == 'selected')
 					{
 						$comment_ids = $set;
 					}
-					else if ($_POST['scheme'] == 'after')
+					else if (isset($_POST['scheme']) && $_POST['scheme'] == 'after')
 					{
 						$_set = $set;
 						sort($_set);
@@ -1281,13 +1282,10 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$desc = $this->format($comment['body'], 'cleanwacko');
 				$desc = ( strlen($desc) > 300 ? substr($desc, 0, 300).'...' : $desc.' (-)' );
 
-				echo '<tr>'.
+				echo '<tr class="lined">'.
 						'<td valign="middle" style="width:10px;" class="label"><input name="'.$comment['page_id'].'" type="checkbox" value="id" '.( in_array($comment['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
 						'<td align="left" style="padding-left:5px;"><strong><small><span'.( $this->is_admin() ? ' title="'.$comment['ip'].'"' : '' ).'>'.( $comment['user'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user'] ).'</span> ('.$this->get_time_string_formatted($comment['created']).') &nbsp;&nbsp; '.$this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner'] != GUEST ? ' &nbsp;&nbsp; <a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['owner']).'">'.$this->get_translation('ModerateUserProfile').'</a>' : '' ).'</small></strong>'.
 							'<br />'.$desc.'</td>'.
-					'</tr>'."\n".
-					'<tr class="lined">'.
-						'<td colspan="2"></td>'.
 					'</tr>'."\n";
 			}
 		}
