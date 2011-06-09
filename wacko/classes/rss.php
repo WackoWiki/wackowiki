@@ -82,7 +82,14 @@ class RSS
 					$xml .= "<link>".$this->engine->href('show', $page['tag'], '')."</link>\n";
 					$xml .= "<guid>".$this->engine->href('show', $page['tag'], '')."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
-					$xml .= "<description>".$page['modified']." ".$this->engine->get_translation('By')." ".$page['user_name'].($page['edit_note'] ? ' ['.$page['edit_note'].']' : '')."</description>\n";
+					$xml .= "<description>".$page['modified']." ".$this->engine->get_translation('By')." ".
+						($page['user_name']
+							? $page['user_name']
+							: $this->engine->get_translation('Guest')).
+						($page['edit_note']
+							? ' ['.$page['edit_note'].']'
+							: '').
+						"</description>\n";
 					$xml .= "</item>\n";
 				}
 			}
@@ -246,7 +253,11 @@ class RSS
 				{
 					$count++;
 					$xml .= "<item>\n";
-					$xml .= "<title>".$page['title']." ".$this->engine->get_translation('To')." ".$this->engine->get_page_tag($page['comment_on_id'])." ".$this->engine->get_translation('From')." ".$page['user_name']."</title>\n";
+					$xml .= "<title>".$page['title']." ".$this->engine->get_translation('To')." ".$page['page_tag']." ".$this->engine->get_translation('From')." ".
+						($page['user_name']
+							? $page['user_name']
+							: $this->engine->get_translation('Guest')).
+						"</title>\n";
 					$xml .= "<link>".$this->engine->href('show', $page['tag'], '')."</link>\n";
 					$xml .= "<guid>".$this->engine->href('show', $page['tag'], '')."</guid>\n";
 					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
