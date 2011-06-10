@@ -106,8 +106,8 @@ if ($this->has_access('read'))
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"".$this->href('show').($this->config['rewrite_mode'] ? "?" : "&amp;")."revision_id=".$page['revision_m_id']."\">".$this->get_time_string_formatted($page['modified'])."</a>";
 				$output .= '<span style="display: inline-block; width:80px;">'."&nbsp; — id ".$page['revision_m_id']."</span> ";
 				$output .= "&nbsp;&nbsp;&nbsp;&nbsp;".$this->get_translation('By')." ".
-				($page['user']
-					? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$page['user'])."\">".$page['user']."</a>"
+				($page['user_name']
+					? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$page['user_name'])."\">".$page['user_name']."</a>"
 					: $this->get_translation('Guest')).'';
 				$output .= ''.$edit_note.'';
 				$output .= ' '.($page['minor_edit'] ? 'm' : '');

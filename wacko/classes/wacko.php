@@ -1238,7 +1238,7 @@ class Wacko
 	// STANDARD QUERIES
 	function load_revisions($page_id, $minor_edit = '')
 	{
-		$page_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name as user, o.user_name as reviewer ';
+		$page_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
 
 		$rev = $this->load_all(
 			"SELECT p.revision_id AS revision_m_id, ".$page_meta." ".
@@ -1794,7 +1794,7 @@ class Wacko
 					}
 
 					// subscribe & notify moderators
-					/*if (is_array($this->config['aliases']))
+					if (is_array($this->config['aliases']))
 					{
 						$list		= $this->config['aliases'];
 						$moderators	= explode("\n", $list['Moderator']);
@@ -1830,7 +1830,7 @@ class Wacko
 						}
 
 						unset($list, $moderators, $moderator, $moderator_id);
-					}*/
+					}
 				}
 
 				if ($comment_on_id)

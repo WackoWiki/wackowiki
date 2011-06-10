@@ -30,11 +30,11 @@ if ($this->has_access('read') && $this->hide_revisions === false )
 	// load revisions for this page
 	if ($revisions = $this->load_revisions($this->page['page_id']))
 	{
-		$max = 10;
+		$max				= 10;
 
-		$c = 0;
-		$_GET['b'] = -1;
-		$_GET['diffmode'] = 1;
+		$c					= 0;
+		$_GET['b']			= -1;
+		$_GET['diffmode']	= 1;
 
 		foreach ($revisions as $page)
 		{
@@ -44,17 +44,21 @@ if ($this->has_access('read') && $this->hide_revisions === false )
 			{
 				$etag = str_replace('%2F', '/', rawurlencode($page['tag']));
 
-				$xml .= "<item>\n";
-				$xml .= "<title>".$this->get_time_string_formatted($page['modified'])."</title>\n";
-				$xml .= "<link>".$this->href('show')."</link>\n";
-				$xml .= "<guid isPermaLink=\"true\">".$this->href('', $etag)."</guid>\n";
-
 				$_GET['a'] = $_GET['b'];
 				$_GET['b'] = $page['revision_m_id'];
+				$_GET['c'] = ($_GET['d'] == '' ? $this->page['modified'] : $_GET['d']);
+				$_GET['d'] = $page['modified'];
+
+				$xml .= "<item>\n";
+				$xml .= "<title>".$this->get_time_string_formatted($_GET['c'])."</title>\n";
+				$xml .= "<link>".$this->href('show').($this->config['rewrite_mode'] ? "?" : "&amp;")."revision_id=".$_GET['a']."</link>\n";
+				$xml .= "<guid isPermaLink=\"true\">".$this->href('', $etag)."</guid>\n";
+
+
 				$diff = $this->include_buffered('handlers/page/diff.php', 'oops');
 
 				$xml .= "<description>".str_replace('<', "&lt;", str_replace('&', '&amp;', $diff))."</description>\n";
-				$xml .= "<pubDate>".date ('r', strtotime ($page['modified']))."</pubDate>\n";
+				$xml .= "<pubDate>".date ('r', strtotime ($_GET['c']))."</pubDate>\n";
 				$xml .= "</item>\n";
 			}
 		}
