@@ -73,7 +73,9 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	echo '<table cellspacing="1" cellpadding="4" class="forum">'.
 			'<tr>'.
 				'<th>'.$this->get_translation('ForumSubforums').'</th>'.
-				'<th colspan="2">'.$this->get_translation('ForumLastComment').'</th>'.
+				'<th>'.$this->get_translation('ForumTopics').'</th>'.
+				'<th>'.$this->get_translation('ForumPosts').'</th>'.
+				'<th>'.$this->get_translation('ForumLastComment').'</th>'.
 			'</tr>'."\n";
 
 	foreach ($forums as $forum)
@@ -81,12 +83,25 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		// show only those forums where user has read access
 		if ($this->has_access('read', $forum['page_id']))
 		{
+			// count total topics
+			$topics = $this->load_single(
+				"SELECT count(a.page_id) as total ".
+				"FROM {$this->config['table_prefix']}page a ".
+				"WHERE a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ", 1);
+
+			// count total posts
+			$posts = $this->load_single(
+				"SELECT sum(a.comments) as total ".
+				"FROM {$this->config['table_prefix']}page a ".
+				"WHERE a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ", 1);
+#$this->debug_print_r($posts);
+
 			// load latest comment
 			$comment = $this->load_single(
 				"SELECT a.tag, a.title, a.comment_on_id, a.user_id, a.owner_id, a.created, b.tag as comment_on, u.user_name AS user ".
 				"FROM {$this->config['table_prefix']}page a ".
-				"LEFT JOIN ".$this->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
-				"LEFT JOIN ".$this->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
+					"LEFT JOIN ".$this->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
+					"LEFT JOIN ".$this->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 				"WHERE b.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
 					"OR a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
 				"ORDER BY a.created DESC ".
@@ -94,13 +109,15 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 			// print
 			echo '<tr class="lined">'.
-					'<td style="width:70%" valign="top">'.
+					'<td style="width:60%" valign="top">'.
 						( $this->has_access('write', $forum['page_id'], '*') === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).
 						( $user['last_mark'] == true && $comment['user'] != $user['user_name'] && $comment['created'] > $user['last_mark'] ? '<strong class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</strong> ' : '' ).
 						'<strong>'.$this->link($forum['tag'], '', $forum['title'], '', 0).'</strong><br />'.
 						'<small>'.$forum['description'].'</small>'.
 					'</td>'.
-					'<td>&nbsp;&nbsp;&nbsp;</td>';
+					'<td style="text-align:center" >&nbsp;'.$topics['total'].'&nbsp;&nbsp;</td>'.
+					'<td style="text-align:center" >&nbsp;'.$posts['total'].'&nbsp;&nbsp;</td>';
+
 			if ($comment == true)
 			{
 				echo '<td style="text-align:left" valign="top">';

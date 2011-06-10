@@ -139,7 +139,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 	echo '<table cellspacing="1" cellpadding="4" class="forum">'.
 			'<tr>'.
-				'<th>'.$this->get_translation('ForumTopics').'</th>'.
+				'<th>'.$this->get_translation('ForumTopic').'</th>'.
 				'<th>'.$this->get_translation('ForumAuthor').'</th>'.
 				'<th>'.$this->get_translation('ForumReplies').'</th>'.
 				'<th>'.$this->get_translation('ForumViews').'</th>'.

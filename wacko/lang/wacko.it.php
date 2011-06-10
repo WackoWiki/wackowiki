@@ -888,7 +888,9 @@ $wacko_translation = array(
 
 	// forum
 	'ForumSubforums'	=> 'Forum Topics',
-	'ForumTopics'		=> 'Topic',
+	'ForumTopic'		=> 'Topic',
+	'ForumTopics'		=> 'Argomenti',
+	'ForumPosts'		=> 'Messaggi',
 	'ForumReplies'		=> 'Replies',
 	'ForumAuthor'		=> 'Author',
 	'ForumViews'		=> 'Views',

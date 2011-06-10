@@ -715,7 +715,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					'</td>'.
 				'</tr>'."\n".
 				'<tr class="formation">'.
-					'<th colspan="2">'.$this->get_translation('ForumTopics').'</th>'.
+					'<th colspan="2">'.$this->get_translation('ForumTopic').'</th>'.
 					'<th>'.$this->get_translation('ForumAuthor').'</th>'.
 					'<th>'.$this->get_translation('ForumReplies').'</th>'.
 					'<th>'.$this->get_translation('ForumCreated').'</th>'.
@@ -1245,7 +1245,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					'</td>'.
 				'</tr>'."\n".
 				'<tr class="formation">'.
-					'<th colspan="2">'.( $this->has_access('comment', $this->page['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).$this->get_translation('ForumTopics').'</th>'.
+					'<th colspan="2">'.( $this->has_access('comment', $this->page['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).$this->get_translation('ForumTopic').'</th>'.
 				'</tr>'."\n".
 				'<tr class="lined">'.
 					'<td colspan="2" style="padding-bottom:30px;">'.
