@@ -565,7 +565,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$pagination	= $this->pagination($count['n'], $limit, 'p', 'ids='.implode('-', $set), 'moderate');
 
 		// make collector query
-		$sql = "SELECT p.page_id, p.tag, title, p.owner_id, p.user_id, ip, comments, created, u.user_name AS user, o.user_name as owner ".
+		$sql = "SELECT p.page_id, p.tag, title, p.owner_id, p.user_id, ip, comments, created, u.user_name, o.user_name as owner_name ".
 			"FROM {$this->config['table_prefix']}page AS p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
@@ -623,7 +623,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					#"AND a.`comment` = '' ".
 					#"AND
 					"p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
-				"ORDER BY time ASC", 1);
+				"ORDER BY modified ASC", 1);
 
 			foreach ($sections as $section)
 			{
@@ -729,7 +729,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			echo '<tr class="lined">'.
 					'<td valign="middle" style="width:10px;" class="label"><input name="'.$topic['page_id'].'" type="checkbox" value="id" '.( in_array($topic['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
 					'<td align="left" style="padding-left:5px;">'.( $this->has_access('comment', $topic['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']).' <strong>'.$this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0).'</strong></td>'.
-					'<td align="center"'.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.( $topic['owner'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner'] ? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner']).'">'.$topic['owner'].'</a>' : $topic['user'] ) ).'&nbsp;&nbsp;</small></td>'.
+					'<td align="center"'.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.( $topic['owner_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_name'] ? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' : $topic['user_name'] ) ).'&nbsp;&nbsp;</small></td>'.
 					'<td align="center"><small>'.$topic['comments'].'</small></td>'.
 					'<td align="center" style="white-space:nowrap"><small>&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'</small></td>'.
 				'</tr>'."\n";
@@ -906,7 +906,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				{
 					$page = $this->load_page('', $id, '', LOAD_NOCACHE, LOAD_META);
 					moderate_delete_page($this, $page['tag']);
-					$this->log(1, str_replace('%3', $this->get_time_string_formatted($page['created']), str_replace('%2', $page['user'], str_replace('%1', $this->get_page_tag($page['comment_on_id']).' '.$this->get_page_title('', $page['comment_on_id']), $this->get_translation('LogRemovedComment', $this->config['language'])))));
+					$this->log(1, str_replace('%3', $this->get_time_string_formatted($page['created']), str_replace('%2', $page['user_name'], str_replace('%1', $this->get_page_tag($page['comment_on_id']).' '.$this->get_page_title('', $page['comment_on_id']), $this->get_translation('LogRemovedComment', $this->config['language'])))));
 				}
 
 				// recount comments for current topic
@@ -1084,7 +1084,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$pagination	= $this->pagination($count['n'], $limit, 'p', 'ids='.implode('-', $set), 'moderate');
 
 		// make collector query
-		$sql = "SELECT p.page_id, p.tag, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, created, u.user_name AS user, o.user_name as owner ".
+		$sql = "SELECT p.page_id, p.tag, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, created, u.user_name, o.user_name as owner_name ".
 			"FROM {$this->config['table_prefix']}page p ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 				"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
@@ -1139,7 +1139,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						#"AND a.`comment` = '' ".
 						#"AND
 						"p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
-					"ORDER BY time ASC", 1);
+					"ORDER BY modified ASC", 1);
 
 				foreach ($sections as $section)
 				{
@@ -1284,7 +1284,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				echo '<tr class="lined">'.
 						'<td valign="middle" style="width:10px;" class="label"><input name="'.$comment['page_id'].'" type="checkbox" value="id" '.( in_array($comment['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
-						'<td align="left" style="padding-left:5px;"><strong><small><span'.( $this->is_admin() ? ' title="'.$comment['ip'].'"' : '' ).'>'.( $comment['user'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user'] ).'</span> ('.$this->get_time_string_formatted($comment['created']).') &nbsp;&nbsp; '.$this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner'] != GUEST ? ' &nbsp;&nbsp; <a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['owner']).'">'.$this->get_translation('ModerateUserProfile').'</a>' : '' ).'</small></strong>'.
+						'<td align="left" style="padding-left:5px;"><strong><small><span'.( $this->is_admin() ? ' title="'.$comment['ip'].'"' : '' ).'>'.( $comment['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user_name'] ).'</span> ('.$this->get_time_string_formatted($comment['created']).') &nbsp;&nbsp; '.$this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_name'] != GUEST ? ' &nbsp;&nbsp; <a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name']).'">'.$this->get_translation('ModerateUserProfile').'</a>' : '' ).'</small></strong>'.
 							'<br />'.$desc.'</td>'.
 					'</tr>'."\n";
 			}
