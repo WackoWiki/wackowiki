@@ -14,7 +14,6 @@ if (!function_exists('load_recently_commented'))
 		$comments	= '';
 		$pagination	= '';
 
-		// NOTE: this is really stupid. Maybe my SQL-Fu is too weak, but apparently there is no easier way
 		if ($ids = $wacko->load_all(
 			"SELECT a.page_id ".
 			"FROM ".$wacko->config['table_prefix']."page a ".
