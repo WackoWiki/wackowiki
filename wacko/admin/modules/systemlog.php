@@ -108,7 +108,7 @@ function admin_systemlog(&$engine, &$module)
 	$pagination	= $engine->pagination($count['n'], $limit, 'p', 'mode=systemlog&order='.htmlspecialchars(isset($_GET['order']) && $_GET['order']), '', 'admin.php');
 
 	$log = $engine->load_all(
-		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name as user, l.ip ".
+		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip ".
 		"FROM {$engine->config['table_prefix']}log l ".
 			"LEFT JOIN {$engine->config['table_prefix']}user u ON (l.user_id = u.user_id) ".
 		( $where ? $where : 'WHERE l.level <= '.(int)$level.' ' ).
@@ -184,7 +184,7 @@ function admin_systemlog(&$engine, &$module)
 					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$row['level'].'</td>'.
 					'<td valign="top">'.$engine->format($row['message'], 'post_wacko').'</td>'.
 					'<td valign="top" align="center"><small>'.
-						'<a href="?mode=systemlog&user_id='.$row['user_id'].'">'.( $row['user'] == GUEST ? '<em>'.$engine->get_translation('Guest').'</em>' : $row['user'] ).'</a>'.
+						'<a href="?mode=systemlog&user_id='.$row['user_id'].'">'.( $row['user_name'] == GUEST ? '<em>'.$engine->get_translation('Guest').'</em>' : $row['user_name'] ).'</a>'.
 						'<br />'.'<a href="?mode=systemlog&ip='.$row['ip'].'">'.$row['ip'].'</a>'.
 					'</small></td>'.
 				'</tr>';

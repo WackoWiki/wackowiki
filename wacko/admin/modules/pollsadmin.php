@@ -179,7 +179,7 @@ function admin_pollsadmin(&$engine, &$module)
 					echo '<td style="text-align:left;width:95%;"><a href="'.
 						rawurldecode($engine->href('', $mode_file, $mode_http.'poll='.$row['poll_id'].'&amp;results=1')).'">'.
 						date('d/m', strtotime($row['start'])).': '.$row['text'].'</a></td>';
-					echo '<td>'.$row['user'].'</td>';
+					echo '<td>'.$row['user_name'].'</td>';
 					echo '<td style="white-space:nowrap;">'.$polls_obj->poll_time($row['start'], time()).'</td>';
 				echo '</tr>';
 			}
@@ -217,7 +217,7 @@ function admin_pollsadmin(&$engine, &$module)
 				echo '<tr>';
 					echo '<td class="label"><input name="id" type="radio" value="'.$row['poll_id'].'" /></td>';
 					echo '<td style="text-align:left;width:80%;">'.$row['text'].'</td>';
-					echo '<td valign="top">'.$row['user'].'</td>';
+					echo '<td valign="top">'.$row['user_name'].'</td>';
 				echo '</tr>';
 				echo '<tr>';
 					$vars	= $polls_obj->get_poll_vars($row['poll_id']);
@@ -272,7 +272,7 @@ function admin_pollsadmin(&$engine, &$module)
 					echo '<td style="text-align:left;width:95%;"><a href="'.
 						rawurldecode($engine->href('', $mode_file, $mode_http.'year='.$year.'&amp;poll='.$row['poll_id'].'&amp;results=1')).'">'.
 						date('d/m/y', strtotime($row['start'])).': '.$row['text'].'</a></td>';
-					echo '<td>'.$row['user'].'</td>';
+					echo '<td>'.$row['user_name'].'</td>';
 					echo '<td style="white-space:nowrap;">'.$polls_obj->poll_time($row['start'], $row['end']).'</td>';
 				echo '</tr>';
 			}

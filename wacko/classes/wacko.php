@@ -1848,7 +1848,7 @@ class Wacko
 					{
 						foreach ($watchers as $watcher)
 						{
-							if ($watcher['user_id'] != $user_id && $watcher['user'] != GUEST)
+							if ($watcher['user_id'] != $user_id && $watcher['user_name'] != GUEST)
 							{
 								// assert that user has no comments pending...
 								$pending = $this->load_single(
@@ -5569,7 +5569,7 @@ class Wacko
 
 			// saving updated for the current user
 			$page['modified']	= date(SQL_DATE_FORMAT);
-			$page['user']		= $this->get_user_name();
+			$page['user_name']	= $this->get_user_name();
 			$page['ip']			= $this->get_user_ip();
 			$this->save_revision($page);
 		}

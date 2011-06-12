@@ -58,7 +58,7 @@ if ($registered
 		}
 
 		$file = $this->load_all(
-			"SELECT f.user_id, u.user_name AS user, f.upload_id, f.file_name, f.file_size, f.description, f.uploaded_dt ".
+			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.description, f.uploaded_dt ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
@@ -80,7 +80,7 @@ if ($registered
 		<li><?php echo $this->link('file:'.$file[0]['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$file[0]['user'])."\">".$file[0]['user']."</a>"; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$file[0]['user_name'])."\">".$file[0]['user_name']."</a>"; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file[0]['uploaded_dt']); ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo "(".$this->binary_multiples($file[0]['file_size'], false, true, true).")"; ?></li>
 				<li><span>&nbsp;</span></li>
@@ -124,7 +124,7 @@ if ($registered
 			$page_id = $this->page['page_id'];
 		}
 				$file = $this->load_all(
-			"SELECT f.user_id, u.user_name AS user, f.upload_id, f.file_name, f.file_size, f.description, f.uploaded_dt ".
+			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.description, f.uploaded_dt ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
@@ -146,7 +146,7 @@ if ($registered
 		<li><?php echo $this->link('file:'.$file[0]['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$file[0]['user'])."\">".$file[0]['user']."</a>"; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$file[0]['user_name'])."\">".$file[0]['user_name']."</a>"; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file[0]['uploaded_dt']); ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo "(".$this->binary_multiples($file[0]['file_size'], false, true, true).")"; ?></li>
 				<li><span>&nbsp;</span></li>
@@ -196,7 +196,7 @@ if ($registered
 			}
 
 			$file = $this->load_all(
-				"SELECT f.user_id, u.user_name AS user, f.upload_id, f.file_name, f.file_size, f.description ".
+				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.description ".
 				"FROM ".$this->config['table_prefix']."upload f ".
 					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 				"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
@@ -262,7 +262,7 @@ if ($registered
 			}
 
 			$file = $this->load_all(
-				"SELECT f.user_id, u.user_name AS user, f.upload_id, f.file_name, f.file_size, f.description ".
+				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.description ".
 				"FROM ".$this->config['table_prefix']."upload f ".
 					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 				"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
