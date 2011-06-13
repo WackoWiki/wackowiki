@@ -100,9 +100,11 @@ else
 	{
 		echo '<table border="0" cellpadding="0" cellspacing="0">';
 		echo ($align == 'h' ? '<tr>' : '');
+
 		foreach ($polls as $poll)
 		{
 			echo ($align == 'v' ? '<tr>' : '').'<td valign="top">';
+
 			if ($results == 1 || $vote == $poll['poll_id'] || $polls_obj->poll_is_voted($poll['poll_id']))
 			{
 				echo $polls_obj->show_poll_results($poll['poll_id']);
@@ -111,8 +113,10 @@ else
 			{
 				echo $polls_obj->show_poll_vote($poll['poll_id']);
 			}
+
 			echo '</td>'.($align == 'v' ? '</tr>' : '');
 		}
+
 		echo ($align == 'h' ? '</tr>' : '');
 		echo '</table>';
 	}
