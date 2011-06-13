@@ -29,9 +29,16 @@ if (isset($_GET['poll']) && (isset($_GET['results']) && $_GET['results'] == 1))
 }
 
 // make list
-if ($year != 0)	$list	= $polls_obj->get_polls_list('archive', $year);
-else			$list	= $polls_obj->get_polls_list('all');
-				$years	= $polls_obj->poll_years();
+if ($year != 0)
+{
+	$list	= $polls_obj->get_polls_list('archive', $year);
+}
+else
+{
+	$list	= $polls_obj->get_polls_list('all');
+}
+
+$years	= $polls_obj->poll_years();
 
 
 // print list
@@ -43,10 +50,18 @@ if(!$nomark)
 	if ($list) // normal list
 	{
 		echo ($style == 'ul' ? '<ul>' : '');
+
 		foreach ($list as $row)
 		{
-			if ($year != 0) $date = date('d/m', strtotime($row['start']));
-			else			$date = date('d/m/y', strtotime($row['start']));
+			if ($year != 0)
+			{
+				$date = date('d/m', strtotime($row['start']));
+			}
+			else
+			{
+				$date = date('d/m/y', strtotime($row['start']));
+			}
+
 			echo ($style == 'ul' ? '<li>' : '');
 			echo '<a href="'.
 				$this->href('', '', 'year='.$year.'&amp;poll='.$row['id'].'&amp;results=1').'">'.
@@ -54,6 +69,7 @@ if(!$nomark)
 			echo ($style == 'br' ? '<br />' : '');
 			echo ($style == 'ul' ? '</li>' : '');
 		}
+
 		echo ($style == 'ul' ? '</ul>' : '');
 	}
 	else // empty list
@@ -63,13 +79,28 @@ if(!$nomark)
 
 	// pagination
 	echo '<small><strong>'.$this->get_translation('PollsShow').':</strong> ';
-	if ($year == 0) echo $this->get_translation('PollsAll').' ';
-	else echo '<a href="'.$this->href('', '', 'year=0').'">'.$this->get_translation('PollsAll').'</a> ';
+
+	if ($year == 0)
+	{
+		echo $this->get_translation('PollsAll').' ';
+	}
+	else
+	{
+		echo '<a href="'.$this->href('', '', 'year=0').'">'.$this->get_translation('PollsAll').'</a> ';
+	}
+
 	foreach ($years as $item)
 	{
-		if ($item == $year) echo $item.' ';
-		else echo '<a href="'.$this->href('', '', 'year='.$item).'">'.$item.'</a> ';
+		if ($item == $year)
+		{
+			echo $item.' ';
+		}
+		else
+		{
+			echo '<a href="'.$this->href('', '', 'year='.$item).'">'.$item.'</a> ';
+		}
 	}
+
 	echo '</small>';
 
 if(!$nomark)

@@ -29,7 +29,10 @@ $polls_obj = new Polls($this);
 $admin = $this->is_admin();
 
 // basic privilege check for moderation mode
-if ($moderation === true && !$admin) $moderation === false;
+if ($moderation === true && !$admin)
+{
+	$moderation === false;
+}
 
 // preloading poll data for moderation purposes
 if ($moderation === true)
@@ -45,13 +48,13 @@ if ($moderation === true)
 
 	if ($mode == true && $_REQUEST['mode'] == $mode)
 	{
-		$mode_http = 'mode='.$mode.'&amp;';
-		$mode_file = $_SERVER['PHP_SELF'];
+		$mode_http	= 'mode='.$mode.'&amp;';
+		$mode_file	= $_SERVER['PHP_SELF'];
 	}
 	else
 	{
-		$mode_http = '';
-		$mode_file = '';
+		$mode_http	= '';
+		$mode_file	= '';
 	}
 }
 
@@ -98,14 +101,22 @@ if (isset($_POST['submit_poll']))
 		else if ($key == 'startmod')	$startmod	= str_replace($strip, '', $value);
 		else if ($key == 'topic')		$topic		= str_replace($strip, '', $value);
 		else if (preg_match('/^[0-9]{1,2}$/', $key) && str_replace(' ', '', $value))
+		{
 			$answers[] = str_replace($strip, '', $value);
+		}
 	}
 
 	// missing poll topic
-	if ($topic == '') $error = $this->get_translation('PollsNeedTopic');
+	if ($topic == '')
+	{
+		$error = $this->get_translation('PollsNeedTopic');
+	}
 
 	// we need at least two alternate answers
-	if (count($answers) < 2) $error .= ' '.$this->get_translation('PollsNeedAnswers');
+	if (count($answers) < 2)
+	{
+		$error .= ' '.$this->get_translation('PollsNeedAnswers');
+	}
 
 	// captcha validation
 	#if (!$this->get_user() && $this->ValidateCAPTCHA() === false)
@@ -114,15 +125,33 @@ if (isset($_POST['submit_poll']))
 	// in case no errors found submit poll or changes to the db
 	if (!$error)
 	{
-		if (!isset($user_id))		$user_id		= $this->get_user_id();
-		#if (!$user)				$user		= $this->get_user_ip();
-		if (!isset($edit_id))	$edit_id	= $polls_obj->get_last_poll_id() + 1;
+		if (!isset($user_id))
+		{
+			$user_id	= $this->get_user_id();
+		}
+
+		#if (!$user)		$user		= $this->get_user_ip();
+
+		if (!isset($edit_id))
+		{
+			$edit_id	= $polls_obj->get_last_poll_id() + 1;
+		}
+
 		// remove moderated poll
-		if ($moderation === true)	$polls_obj->remove_poll($edit_id);
+		if ($moderation === true)
+		{
+			$polls_obj->remove_poll($edit_id);
+		}
+
 		// save new or update moderated poll
 		$polls_obj->submit_poll($edit_id, $topic, $plural, $answers, $user_id, ($startmod == 1 && $admin ? 1 : 0));
+
 		// update page cache
-		if ($this->tag) $this->cache->cache_invalidate($this->supertag);
+		if ($this->tag)
+		{
+			$this->cache->cache_invalidate($this->supertag);
+		}
+
 		// update news RSS feed
 		if ($startmod == 1)
 		{
@@ -132,12 +161,19 @@ if (isset($_POST['submit_poll']))
 			unset($xml);
 		}
 		// set confirmation message
-		if ($moderation !== true)	  $message = $this->get_translation('PollsSubmitted').
-									  ($startmod == 1 && $admin
-									  	? ''
-										: ' '.$this->get_translation('PollsSubmittedMod'));
+		if ($moderation !== true)
+		{
+			$message = $this->get_translation('PollsSubmitted').
+				($startmod == 1 && $admin
+					? ''
+					: ' '.$this->get_translation('PollsSubmittedMod'));
+		}
+
 		// stopping moderation
-		if ($moderation === true)	  $stop_mod = true;
+		if ($moderation === true)
+		{
+			$stop_mod = true;
+		}
 
 		// notify wiki owner & log event
 		if ($this->config['enable_email'] == true && $user != $this->config['admin_name'] && $moderation !== true)
@@ -170,6 +206,7 @@ if ($stop_mod !== true)
 {
 	// managing number of survey answers
 	$total_vars = count($vars);
+
 	if (isset($_POST['addvar']) && $total_vars < 20)
 	{
 		$vars[] = array('v_id' => $total_vars + 1, 'text' => '');
@@ -188,17 +225,22 @@ if ($stop_mod !== true)
 	if ($total_vars < 5)
 	{
 		$i = $total_vars + 1;
+
 		while ($i < 6)
 		{
 			$vars[] = array('v_id' => $i, 'text' => '');
 			$i++;
 		}
+
 		$total_vars = 5;
 	}
 }
 
 // print error message, if any
-if ($error) $this->set_message($error);
+if ($error)
+{
+	$this->set_message($error);
+}
 
 // for successful submit print a message
 // else show input form
@@ -218,6 +260,7 @@ else if ($stop_mod !== true)
 		echo '<th>'.$this->get_translation('PollsTopic').':</th>';
 		echo '<th style="text-align:left;"><input name="topic" type="text" size="70" maxlength="250" value="'.$topic.'" style="font-weight:normal;" /></th>';
 	echo '</tr>';
+
 	// fill out survey answers
 	foreach ($vars as $var)
 	{
@@ -226,13 +269,21 @@ else if ($stop_mod !== true)
 			echo '<td><input name="'.$var['v_id'].'" type="text" size="40" maxlength="250" value="'.htmlspecialchars($var['text']).'" /></td>';
 		echo '</tr>';
 	}
+
 	echo '<tr class="lined">';
 		echo '<td></td>';
 		echo '<td>';
+
 		if ($total_vars < 20)
+		{
 			echo '<input name="addvar" id="submit" type="submit" value="'.$this->get_translation('PollsAddVariant').'" /> ';
+		}
+
 		if ($total_vars > 5)
+		{
 			echo '<input name="delvar" id="submit" type="submit" value="'.$this->get_translation('PollsDelVariant').'" />';
+		}
+
 		echo '</td>';
 	echo '</tr>';
 	echo '<tr><td colspan="2">'.

@@ -21,6 +21,7 @@ if (empty($list))
 else
 {
 	echo '<tr><th colspan="3">'.$this->get_translation('PollsModeration').'</th></tr>';
+
 	foreach ($list as $row)
 	{
 		$user = ( strpos($row['user_name'], '.') ? '<em>'.$this->get_translation('PollsGuest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$row['user_name']).'">'.$row['user_name'].'</a>' );
