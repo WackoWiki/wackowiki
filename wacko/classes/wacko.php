@@ -3327,7 +3327,7 @@ class Wacko
 	}
 
 	// PLUGINS
-	function include_buffered($filename, $notfoundText = '', $vars = '', $path = '')
+	function include_buffered($filename, $notfound_text = '', $vars = '', $path = '')
 	{
 		if ($path)
 		{
@@ -3345,10 +3345,10 @@ class Wacko
 				$dir .= '/';
 			}
 
-			$fullfilename = $dir.$filename;
-			$fullfilename = trim($fullfilename, './');
+			$full_filename = $dir.$filename;
+			$full_filename = trim($full_filename, './');
 
-			if (@file_exists($fullfilename))
+			if (@file_exists($full_filename))
 			{
 				if (is_array($vars))
 				{
@@ -3356,15 +3356,17 @@ class Wacko
 				}
 
 				ob_start();
-				include($fullfilename);
+				include($full_filename);
 				$output = ob_get_contents();
 				ob_end_clean();
+
 				return $output;
 			}
 		}
-		if ($notfoundText)
+
+		if ($notfound_text)
 		{
-			return $notfoundText;
+			return $notfound_text;
 		}
 		else
 		{
@@ -5138,6 +5140,7 @@ class Wacko
 				{
 					$this->categories[$word['category_id']] = $word['category'];
 				}
+
 				unset($categories, $word);
 			#}
 		}
