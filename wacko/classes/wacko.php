@@ -3081,16 +3081,18 @@ class Wacko
 
 	function add_spaces_title($text)
 	{
-		$text = preg_replace('/('.$this->language['ALPHANUM'].')('.$this->language['UPPERNUM'].')/', '\\1 \\2', $text);
-		$text = preg_replace('/('.$this->language['UPPERNUM'].')('.$this->language['UPPERNUM'].')/', '\\1 \\2', $text);
-		$text = preg_replace('/('.$this->language['ALPHANUM'].')\//', '\\1 /', $text);
+		$text = preg_replace('/('.$this->language['ALPHANUM'].')('.$this->language['UPPERNUM'].')/', '\\1&nbsp;\\2', $text);
+		$text = preg_replace('/('.$this->language['UPPERNUM'].')('.$this->language['UPPERNUM'].')/', '\\1&nbsp;\\2', $text);
+		$text = preg_replace('/('.$this->language['ALPHANUM'].')\//', '\\1&nbsp;/', $text);
 		$text = preg_replace('/('.$this->language['UPPER'].')&nbsp;(?='.$this->language['UPPER'].'&nbsp;'.$this->language['UPPERNUM'].')/', '\\1', $text);
 		$text = preg_replace('/('.$this->language['UPPER'].')&nbsp;(?='.$this->language['UPPER'].'&nbsp;\/)/', '\\1', $text);
 		$text = preg_replace('/\/('.$this->language['ALPHANUM'].')/', '/&nbsp;\\1', $text);
 		$text = preg_replace('/('.$this->language['UPPERNUM'].')&nbsp;('.$this->language['UPPERNUM'].')($|\b)/', '\\1\\2', $text);
-		$text = preg_replace('/([0-9])('.$this->language['ALPHA'].')/', '\\1 \\2', $text);
-		$text = preg_replace('/('.$this->language['ALPHA'].')([0-9])/', '\\1 \\2', $text);
-		$text = preg_replace('/([0-9]) (?!'.$this->language['ALPHA'].')/', '\\1', $text);
+		$text = preg_replace('/([0-9])('.$this->language['ALPHA'].')/', '\\1&nbsp;\\2', $text);
+		$text = preg_replace('/('.$this->language['ALPHA'].')([0-9])/', '\\1&nbsp;\\2', $text);
+		#$text = preg_replace('/([0-9])&nbsp;(?=[0-9])/', '\\1', $text);
+		$text = preg_replace('/([0-9])&nbsp;(?!'.$this->language['ALPHA'].')/', '\\1', $text);
+		$text = preg_replace('/&nbsp;/', ' ', $text);
 
 		if (strpos($text, '/')   === 0)
 		{
