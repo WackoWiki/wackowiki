@@ -133,85 +133,92 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	// load topics data
 	$topics	= $this->load_all($sql);
 
-	// display list
-	echo '<table><tr><td>'.( $access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '' ).'</td>'.
-			'<td align="right">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</td></tr></table>'."\n";
+	//  display search
+	echo '<div style="float: right; clear: both; margin-bottom: 10px;">'.$this->action('search', array('for' => $this->tag, 'nomark' => 1, 'options' => 0)).'</div>';
 
-	echo '<table cellspacing="1" cellpadding="4" class="forum">'.
-			'<tr>'.
-				'<th>'.$this->get_translation('ForumTopic').'</th>'.
-				'<th>'.$this->get_translation('ForumAuthor').'</th>'.
-				'<th>'.$this->get_translation('ForumReplies').'</th>'.
-				'<th>'.$this->get_translation('ForumViews').'</th>'.
-				'<th colspan="2">'.$this->get_translation('ForumLastComment').'</th>'.
-			'</tr>'."\n";
-
-	foreach ($topics as $topic)
+	if (!isset($_GET['phrase']))
 	{
-		$comment = false;
-		$updated = false;
+		// display list
+		echo '<table><tr><td style="white-space: nowrap">'.( $access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '' ).'</td>'.
+				'<td align="right">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</td></tr></table>'."\n";
 
-		// load latest comment
-		if ($topic['comments'] > 0)
+		echo '<table cellspacing="1" cellpadding="4" class="forum">'.
+				'<tr>'.
+					'<th>'.$this->get_translation('ForumTopic').'</th>'.
+					'<th>'.$this->get_translation('ForumAuthor').'</th>'.
+					'<th>'.$this->get_translation('ForumReplies').'</th>'.
+					'<th>'.$this->get_translation('ForumViews').'</th>'.
+					'<th colspan="2">'.$this->get_translation('ForumLastComment').'</th>'.
+				'</tr>'."\n";
+
+		foreach ($topics as $topic)
 		{
-			$comment = $this->load_single(
-				"SELECT p.tag, p.ip, p.created, u.user_name, o.user_name AS owner_name ".
-				"FROM {$this->config['table_prefix']}page p ".
-				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-				"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
-				"WHERE p.comment_on_id = '".quote($this->dblink, $topic['page_id'])."' ".
-				"ORDER BY p.created DESC ".
-				"LIMIT 1");
+			$comment = false;
+			$updated = false;
+
+			// load latest comment
+			if ($topic['comments'] > 0)
+			{
+				$comment = $this->load_single(
+					"SELECT p.tag, p.ip, p.created, u.user_name, o.user_name AS owner_name ".
+					"FROM {$this->config['table_prefix']}page p ".
+					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
+					"WHERE p.comment_on_id = '".quote($this->dblink, $topic['page_id'])."' ".
+					"ORDER BY p.created DESC ".
+					"LIMIT 1");
+			}
+
+			// check new comments
+			if ($user['last_mark'] == true && ( ($comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']) || ($topic['owner_name'] != $user['user_name'] && $topic['created'] > $user['last_mark']) ))
+			{
+				$updated = true;
+			}
+
+			// print
+			echo '<tr>'.
+					'<td align="left">'.
+					( $this->has_access('comment', $topic['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).
+					( $updated === true
+						? '<strong><span class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</span> '.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
+						: $this->compose_link_to_page($topic['tag'], '', $topic['title'])
+					).
+					'</td>'.
+					'<td align="center" style="white-space: nowrap;"><small title="'.( $admin ? $topic['ip'] : '' ).'">'.
+						'&nbsp;&nbsp;'.( $topic['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_name'] == GUEST ? $topic['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['user_name']).'">'.$topic['user_name'].'</a>' ) ).'&nbsp;&nbsp;<br />'.
+						'&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'&nbsp;&nbsp;'.
+					'</small></td>'.
+					'<td align="center"><small>'.$topic['comments'].'</small></td>'.
+					'<td align="center"><small>'.$topic['hits'].'</small></td>'.
+					'<td>&nbsp;&nbsp;&nbsp;</td>'.
+					'<td align="center">';
+
+			if ($comment == true)
+			{
+				echo '<small'.( $updated === true ? ' style="font-weight:600;"' : '' ).' title="'.( $admin ? $comment['ip'] : '' ).'">'.
+					( $comment['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $comment['owner_name'] == GUEST ? $comment['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['user_name']).'">'.$comment['user_name'].'</a>' ) ).'<br />'.
+					'<a href="'.$this->href('', $topic['tag'], 'p=last').'#'.$comment['tag'].'">'.$this->get_time_string_formatted($comment['created']).'</a></small>';
+			}
+			else
+			{
+				echo '<small><em>('.$this->get_time_string_formatted($topic['created']).')</em></small>';
+			}
+
+			echo	'</td>'.
+				'</tr>'.
+				'<tr>'.
+					'<td colspan="6" class="description"><small>'.htmlspecialchars($topic['description']).'</small></td>'.
+				'</tr>'."\n".
+				'<tr class="lined">'.
+					'<td colspan="6"></td>'.
+				'</tr>'."\n";
 		}
 
-		// check new comments
-		if ($user['last_mark'] == true && ( ($comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']) || ($topic['owner_name'] != $user['user_name'] && $topic['created'] > $user['last_mark']) ))
-		{
-			$updated = true;
-		}
+		echo '</table>'."\n";
 
-		// print
-		echo '<tr>'.
-				'<td align="left">'.
-				( $this->has_access('comment', $topic['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).
-				( $updated === true
-					? '<strong><span class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</span> '.$this->compose_link_to_page($topic['tag'], '', $topic['title']).'</strong>'
-					: $this->compose_link_to_page($topic['tag'], '', $topic['title'])
-				).
-				'</td>'.
-				'<td align="center" style="white-space: nowrap;"><small title="'.( $admin ? $topic['ip'] : '' ).'">'.
-					'&nbsp;&nbsp;'.( $topic['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_name'] == GUEST ? $topic['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['user_name']).'">'.$topic['user_name'].'</a>' ) ).'&nbsp;&nbsp;<br />'.
-					'&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'&nbsp;&nbsp;'.
-				'</small></td>'.
-				'<td align="center"><small>'.$topic['comments'].'</small></td>'.
-				'<td align="center"><small>'.$topic['hits'].'</small></td>'.
-				'<td>&nbsp;&nbsp;&nbsp;</td>'.
-				'<td align="center">';
-
-		if ($comment == true)
-		{
-			echo '<small'.( $updated === true ? ' style="font-weight:600;"' : '' ).' title="'.( $admin ? $comment['ip'] : '' ).'">'.
-				( $comment['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $comment['owner_name'] == GUEST ? $comment['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$comment['user_name']).'">'.$comment['user_name'].'</a>' ) ).'<br />'.
-				'<a href="'.$this->href('', $topic['tag'], 'p=last').'#'.$comment['tag'].'">'.$this->get_time_string_formatted($comment['created']).'</a></small>';
-		}
-		else
-		{
-			echo '<small><em>('.$this->get_time_string_formatted($topic['created']).')</em></small>';
-		}
-		echo	'</td>'.
-			'</tr>'.
-			'<tr>'.
-				'<td colspan="6" class="description"><small>'.htmlspecialchars($topic['description']).'</small></td>'.
-			'</tr>'."\n".
-			'<tr class="lined">'.
-				'<td colspan="6"></td>'.
-			'</tr>'."\n";
+		echo '<table><tr><td>'.( $user == true ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>' : '' ).'</td>'.
+				'<td align="right">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</td></tr></table>'."\n";
 	}
-
-	echo '</table>'."\n";
-
-	echo '<table><tr><td>'.( $user == true ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>' : '' ).'</td>'.
-			'<td align="right">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</td></tr></table>'."\n";
 
 	// display new topic form when applicable
 	if ($access === true)
