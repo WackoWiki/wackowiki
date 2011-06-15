@@ -887,7 +887,7 @@ $wacko_translation = array(
 	'ModerateCommentsMoved'	=> 'Selected comments successfully migrated to a given page.',
 
 	// forum
-	'ForumSubforums'	=> 'Forum Topics',
+	'ForumSubforums'	=> 'Forum',
 	'ForumTopic'		=> 'Topic',
 	'ForumTopics'		=> 'Temas',
 	'ForumPosts'		=> 'Mensajes',

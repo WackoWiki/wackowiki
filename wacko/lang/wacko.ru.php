@@ -897,7 +897,7 @@ $wacko_translation = array(
 	'ModerateCommentsMoved'	=> 'Выбранные комментарии успешно перенесены в заданный документ.',
 
 	// forum
-	'ForumSubforums'	=> 'Разделы форума',
+	'ForumSubforums'	=> 'Разделы',
 	'ForumTopic'		=> 'Тема',
 	'ForumTopics'		=> 'Темы',
 	'ForumPosts'		=> 'Сообщения',

@@ -1606,7 +1606,7 @@ class Wacko
 			if (!$comment_on_id)
 			{
 				$desc = $this->format(substr($body, 0, 500), 'cleanwacko');
-				$desc = ( strlen($desc) > 240 ? substr($desc, 0, 240).'...' : $desc.' (-)' );
+				$desc = ( strlen($desc) > 240 ? substr($desc, 0, 240).'[..]' : $desc.' (-)' );
 			}
 
 			// preformatter (macros and such)
@@ -2328,6 +2328,7 @@ class Wacko
 		{
 			$params = 'add=1'.($params ? '&amp;'.$params : '');
 		}
+
 		if ($params)
 		{
 			$href .= ($this->config['rewrite_mode'] ? '?' : '&amp;').$params;
@@ -2361,6 +2362,7 @@ class Wacko
 		{
 			$text = $this->add_spaces($tag);
 		}
+
 		//$text = htmlentities($text);
 		if (isset($_SESSION[$this->config['session_prefix'].'_'.'linktracking']) && $track)
 		{
@@ -2382,6 +2384,7 @@ class Wacko
 				$this->track_link_to($this->unwrap_link( $tag ));
 			}
 		}
+
 		if ($imgurl == 1)
 		{
 			return '<!--imglink:begin-->'.str_replace(' ', '+', urldecode($tag)).' =='.$text.'<!--imglink:end-->';
@@ -2689,6 +2692,7 @@ class Wacko
 					$url	= '404';
 					$tpl	= 'wlocalfile';
 				}
+
 				unset($desc);
 			}
 			//forgot 'bout 403
@@ -4017,6 +4021,7 @@ class Wacko
 			"ORDER BY created DESC ".
 			"LIMIT 1");
 		}
+
 		return $latest['tag'];
 	}
 
@@ -4156,7 +4161,6 @@ class Wacko
 
 	function get_page_owner_id($page_id = '', $revision_id = '')
 	{
-
 		if (!$page_id = trim($page_id))
 		{
 			if (!$revision_id)
@@ -4208,8 +4212,6 @@ class Wacko
 					"list		= '".quote($this->dblink, trim(str_replace("\r", '', $list)))."', ".
 					"page_id	= '".quote($this->dblink, $page_id)."', ".
 					"privilege	= '".quote($this->dblink, $privilege)."'");
-
-
 		}
 	}
 
@@ -4500,8 +4502,10 @@ class Wacko
 					$list[] = $line;
 				}
 			}
+
 			$acl = join("\n", $list);
 		}
+
 		while ($replaced > 0);
 
 		return $acl;
