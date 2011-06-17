@@ -206,11 +206,8 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 			echo	'</td>'.
 				'</tr>'.
-				'<tr>'.
-					'<td colspan="6" class="description"><small>'.htmlspecialchars($topic['description']).'</small></td>'.
-				'</tr>'."\n".
 				'<tr class="lined">'.
-					'<td colspan="6"></td>'.
+					'<td colspan="6" class="description"><small>'.htmlspecialchars($topic['description']).'</small></td>'.
 				'</tr>'."\n";
 		}
 
