@@ -134,6 +134,11 @@ if ($this->has_access('read'))
 
 		$output .= "</ul>\n<br />\n";
 
+		if ($max && $a > $max)
+		{
+			$output .=  "<a href=\"".$this->href('revisions', '', 'show=all')."\">".$this->get_translation('RevisionsShowAll')."</a><br /><br />\n";
+		}
+
 		if (!$this->config['revisions_hide_cancel'])
 		{
 			$output .= "<input type=\"button\" value=\"".$this->get_translation('CancelDifferencesButton')."\" onclick=\"document.location='".addslashes($this->href(''))."';\" />\n";
@@ -144,11 +149,6 @@ if ($this->has_access('read'))
 
 	echo $output;
 	$this->current_context--;
-
-	if ($max && $a > $max)
-	{
-		echo "<a href=\"".$this->href('revisions', '', 'show=all')."\">".$this->get_translation('RevisionsShowAll')."</a>";
-	}
 }
 else
 {
