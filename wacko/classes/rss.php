@@ -117,22 +117,25 @@ class RSS
 				"AND tag REGEXP '^{$newscluster}{$newslevels}$' ".
 			"ORDER BY tag");
 
-		// build an array
-		foreach ($pages as $page)
+		if ($pages)
 		{
-			$news_pages[]	= array('page_id' => $page['page_id'], 'tag' => $page['tag'], 'title' => $page['title'], 'modified' => $page['created'],
-				'body_r' => $page['body_r'], 'comments' => $page['comments'], 'date' => date('Y/m-d', strtotime($page['created'])));
-		}
+			// build an array
+			foreach ($pages as $page)
+			{
+				$news_pages[]	= array('page_id' => $page['page_id'], 'tag' => $page['tag'], 'title' => $page['title'], 'modified' => $page['created'],
+					'body_r' => $page['body_r'], 'comments' => $page['comments'], 'date' => date('Y/m-d', strtotime($page['created'])));
+			}
 
-		// sorting function: sorts by dates
-		// in tag names in reverse order
-		$sort_dates = create_function(
-			'$a, $b',	// func params
-			'if ($a["date"] == $b["date"]) '.
-				'return 0;'.
-			'return ($a["date"] < $b["date"] ? 1 : -1);');
-		// sort pages array
-		usort($news_pages, $sort_dates);
+			// sorting function: sorts by dates
+			// in tag names in reverse order
+			$sort_dates = create_function(
+				'$a, $b',	// func params
+				'if ($a["date"] == $b["date"]) '.
+					'return 0;'.
+				'return ($a["date"] < $b["date"] ? 1 : -1);');
+			// sort pages array
+			usort($news_pages, $sort_dates);
+		}
 
 		// build output
 		$xml = '<?xml version="1.0" encoding="'.$this->charset.'"?>'."\n".
@@ -157,48 +160,51 @@ class RSS
 
 		$i = 0;
 
-		foreach ($news_pages as $page)
+		if ($news_pages)
 		{
-			$i++;
-
-			$categories	= $this->engine->load_all(
-				"SELECT
-					c.category_id, c.category
-				FROM
-					{$prefix}category_page p
-				INNER JOIN {$prefix}category c ON (p.category_id = c.category_id)
-				WHERE
-					p.page_id = '{$page['page_id']}'", 0);
-
-			// this is a news article
-			$title	= $page['title'];
-			$cat	= substr_replace ($page['tag'], '', 0, strlen ($newscluster) + 1); // removes news cluster name
-			$cat	= substr_replace ($cat, '', strpos ($cat, '/')); // removes news page name
-			$link	= $this->engine->href('', $page['tag']);
-			$pdate	= date('r', strtotime($page['modified']));
-			$coms	= $link.'?show_comments=1#commentsheader';
-			$body	= $this->engine->load_page($page['tag']);
-			$text	= $this->engine->format($page['body_r'], 'post_wacko');
-
-			$xml .= '<item>'."\n".
-						'<title>'.$title.'</title>'."\n".
-						'<link>'.$link.'</link>'."\n".
-						'<guid isPermaLink="true">'.$link.'</guid>'."\n".
-						'<description><![CDATA['.str_replace(']]>', ']]&gt;', $text).']]></description>'."\n".
-						'<pubDate>'.$pdate.'</pubDate>'."\n";
-
-			foreach ($categories as $id => $category)
+			foreach ($news_pages as $page)
 			{
-				$xml .= '<category>'.$category['category'].'</category>'."\n";
-			}
+				$i++;
 
-			$xml .= 	( $coms != '' ? '<comments>'.$coms.'</comments>'."\n" : '' );
-			$xml .= 	( $coms != '' ? '<slash:comments>'.$page['comments'].'</slash:comments>'."\n" : '' );
-			$xml .=  '</item>'."\n";
+				$categories	= $this->engine->load_all(
+					"SELECT
+						c.category_id, c.category
+					FROM
+						{$prefix}category_page p
+					INNER JOIN {$prefix}category c ON (p.category_id = c.category_id)
+					WHERE
+						p.page_id = '{$page['page_id']}'", 0);
 
-			if ($i >= $limit)
-			{
-				break;
+				// this is a news article
+				$title	= $page['title'];
+				$cat	= substr_replace ($page['tag'], '', 0, strlen ($newscluster) + 1); // removes news cluster name
+				$cat	= substr_replace ($cat, '', strpos ($cat, '/')); // removes news page name
+				$link	= $this->engine->href('', $page['tag']);
+				$pdate	= date('r', strtotime($page['modified']));
+				$coms	= $link.'?show_comments=1#commentsheader';
+				$body	= $this->engine->load_page($page['tag']);
+				$text	= $this->engine->format($page['body_r'], 'post_wacko');
+
+				$xml .= '<item>'."\n".
+							'<title>'.$title.'</title>'."\n".
+							'<link>'.$link.'</link>'."\n".
+							'<guid isPermaLink="true">'.$link.'</guid>'."\n".
+							'<description><![CDATA['.str_replace(']]>', ']]&gt;', $text).']]></description>'."\n".
+							'<pubDate>'.$pdate.'</pubDate>'."\n";
+
+				foreach ($categories as $id => $category)
+				{
+					$xml .= '<category>'.$category['category'].'</category>'."\n";
+				}
+
+				$xml .= 	( $coms != '' ? '<comments>'.$coms.'</comments>'."\n" : '' );
+				$xml .= 	( $coms != '' ? '<slash:comments>'.$page['comments'].'</slash:comments>'."\n" : '' );
+				$xml .=  '</item>'."\n";
+
+				if ($i >= $limit)
+				{
+					break;
+				}
 			}
 		}
 
