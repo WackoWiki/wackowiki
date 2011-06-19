@@ -158,19 +158,21 @@ class typografica
 		// 4. Short words and &nbsp;
 		if ($this->settings['wordglue'])
 		{
-			$data = " ".$data." ";
-			$_data = " ".$data." ";
+			$data	= " ".$data." ";
+			$_data	= " ".$data." ";
 
 			while ($_data != $data)
 			{
-				$_data = $data;
-				$data = preg_replace('/(\s+)([a-zà-ÿÀ-ß]{1,2})(\s+)([^\\s$])/i', '\\1\\2&nbsp;\\4', $data );
-				$data = preg_replace('/(\s+)([a-zà-ÿÀ-ß]{3})(\s+)([^\\s$])/i',   '\\1\\2&nbsp;\\4', $data );
+				$_data	= $data;
+				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{1,2})(\s+)([^\\s$])/i', '\\1\\2&nbsp;\\4', $data );
+				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{3})(\s+)([^\\s$])/i',   '\\1\\2&nbsp;\\4', $data );
 			}
+
 			foreach ($this->glueleft as $i)
 			{
 				$data = preg_replace('/([\\s]+)(".$i.")(\s+)/i', "\\1\\2&nbsp;", $data );
 			}
+
 			foreach ($this->glueright as $i)
 			{
 				$data = preg_replace('/([\\s]+)(".$i.")(\s+)/i', "&nbsp;\\2\\3", $data );
@@ -305,6 +307,7 @@ class typografica
 		{
 			$data = preg_replace("/(\s|;)\-(\s)/i", "\\1&ndash;\\2", $data);
 		}
+
 		// 3a. long dash
 		if ($this->settings['emdash'])
 		{
@@ -317,16 +320,19 @@ class typografica
 			$data = preg_replace("/\([cCñÑ]\)/i", "&copy;", $data);
 			# $data = preg_replace("/\([cCñÑ]\)((?=\w)|(?=\s[0-9]+))/i", "&copy;", $data); // not working (?)
 		}
+
 		// 4a. (r)
 		if ($this->settings['(r)'])
 		{
 			$data = preg_replace("/\(r\)/i", "<sup>&#174;</sup>", $data);
 		}
+
 		// 4b. (tm)
 		if ($this->settings['(tm)'])
 		{
 			$data = preg_replace("/\(tm\)|\(òì\)/i", "&#153;", $data);
 		}
+
 		// 4c. (p)
 		if ($this->settings['(p)'])
 		{
@@ -338,6 +344,7 @@ class typografica
 		{
 			$data = preg_replace("/\+\-/i", "&#177;", $data);
 		}
+
 		// 5a. 12^C
 		if ($this->settings['degrees'])
 		{

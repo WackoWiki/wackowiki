@@ -329,16 +329,19 @@ class WackoFormatter
 					}
 				}
 			}
+
 			$formatter = strtolower($formatter);
 
 			if ($formatter == "\xF1")
 			{
 				$formatter = 'c';
 			}
+
 			if ($formatter == 'c')
 			{
 				$formatter = 'comments';
 			}
+
 			if ($formatter == '')
 			{
 				$formatter = 'code';
@@ -553,6 +556,7 @@ class WackoFormatter
 				$output	.= $this->indent_close();
 				$output	.= '</td>';
 			}
+
 			if (($this->cols <> 0) and ($count < $this->cols))
 			{
 				$this->tdold_indent_level	= 0;
