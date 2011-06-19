@@ -46,6 +46,11 @@ function admin_configsystem(&$engine, &$module)
 		$config['paragrafica']				= (int)$_POST['paragrafica'];
 		$config['allow_rawhtml']			= (int)$_POST['allow_rawhtml'];
 		$config['disable_safehtml']			= (int)$_POST['disable_safehtml'];
+		$config['disable_tikilinks']		= (int)$_POST['disable_tikilinks'];
+		$config['disable_bracketslinks']	= (int)$_POST['disable_bracketslinks'];
+		$config['disable_wikilinks']		= (int)$_POST['disable_wikilinks'];
+		// $config['disable_npjlinks']			= (int)$_POST['disable_npjlinks'];
+		$config['disable_formatters']		= (int)$_POST['disable_formatters'];
 		$config['date_format']				= (string)$_POST['date_format'];
 		$config['time_format']				= (string)$_POST['time_format'];
 		$config['time_format_seconds']		= (string)$_POST['time_format_seconds'];
@@ -150,14 +155,6 @@ function admin_configsystem(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="allow_x11colors"><strong>X11 Colors Usage:</strong><br />
-				<small>Extents the available colors for <tt>??(color) background??</tt> and <tt>!!(color) text!!</tt> Unsetting slightly speed up the process of adding comments and save the page.</small></label></td>
-				<td><input type="checkbox" id="allow_x11colors" name="allow_x11colors" value="1"<?php echo ( $engine->config['allow_x11colors'] ? ' checked="checked"' : '' );?> /></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
 				<td class="label"><label for="default_typografica"><strong>Typographical Proofreader:</strong><br />
 				<small>Unsetting slightly speed up the process of adding comments and save the page.</small></label></td>
 				<td><input type="checkbox" id="default_typografica" name="default_typografica" value="1"<?php echo ( $engine->config['default_typografica'] ? ' checked="checked"' : '' );?> /></td>
@@ -188,6 +185,60 @@ function admin_configsystem(&$engine, &$module)
 					<input type="radio" id="disable_safehtml_on" name="disable_safehtml" value="0"<?php echo ( !$engine->config['disable_safehtml'] ? ' checked="checked"' : '' );?> /><label for="disable_safehtml_on">On.</label>
 					<input type="radio" id="disable_safehtml_off" name="disable_safehtml" value="1"<?php echo ( $engine->config['disable_safehtml'] ? ' checked="checked"' : '' );?> /><label for="disable_safehtml_off">Off.</label>
 				</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<br />
+					Wiki Text Formatter (Wacko Formatter)
+				</th>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="allow_x11colors"><strong>X11 Colors Usage:</strong><br />
+				<small>Extents the available colors for <tt>??(color) background??</tt> and <tt>!!(color) text!!</tt> Unsetting slightly speed up the process of adding comments and save the page.</small></label></td>
+				<td><input type="checkbox" id="allow_x11colors" name="allow_x11colors" value="1"<?php echo ( $engine->config['allow_x11colors'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="disable_tikilinks"><strong>Disable Tikilinks:</strong><br />
+				<small>Disables linking for <tt>Double.CamelCaseWords</tt>.</small></label></td>
+				<td><input type="checkbox" id="disable_tikilinks" name="disable_tikilinks" value="1"<?php echo ( $engine->config['disable_tikilinks'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="disable_wikilinks"><strong>Disable Wikilinks:</strong><br />
+				<small>Disables linking for <tt>CamelCaseWords</tt>, your CamelCase Words will no longer be linked directly to a new page </small></label></td>
+				<td><input type="checkbox" id="disable_wikilinks" name="disable_wikilinks" value="1"<?php echo ( $engine->config['disable_wikilinks'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="disable_bracketslinks"><strong>Disable bracketslinks:</strong><br />
+				<small>Disables <tt>[[link]]</tt> and <tt>((link))</tt> syntax.</small></label></td>
+				<td><input type="checkbox" id="disable_bracketslinks" name="disable_bracketslinks" value="1"<?php echo ( $engine->config['disable_bracketslinks'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<!--<tr class="hl_setting">
+				<td class="label"><label for="disable_npjlinks"><strong>Disable Npjlinks:</strong><br />
+				<small>Disables linking for <tt>See::Example</tt> and <tt>user@node:address</tt> links.</small></label></td>
+				<td><input type="checkbox" id="disable_npjlinks" name="disable_npjlinks" value="1"<?php echo ( $engine->config['disable_npjlinks'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>-->
+			<tr class="hl_setting">
+				<td class="label"><label for="disable_formatters"><strong>Disable Formatters:</strong><br />
+				<small>Disables <tt>%%code%%</tt> syntax, used for highlighters.</small></label></td>
+				<td><input type="checkbox" id="disable_formatters" name="disable_formatters" value="1"<?php echo ( $engine->config['disable_formatters'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr>
 				<th colspan="2">

@@ -19,7 +19,7 @@ $wacko_config_defaults = array(
 	'table_prefix' => 'wacko_',
 	'cookie_prefix' => 'wacko_',
 	'session_expiration' => 30, // cookie_expire_days
-	'session_prefix' => 'wacko44',
+	'session_prefix' => 'wacko5',
 
 	'root_page' => 'HomePage',
 	'site_name' => 'MyWackoSite',
@@ -92,7 +92,7 @@ $wacko_config_defaults = array(
 
 	'disable_tikilinks' => 0,
 	'disable_bracketslinks' => 0,
-	'disable_wikilinks' => 0,
+	'disable_wikilinks' => 1,
 	'disable_npjlinks' => 0,
 	'disable_formatters' => 0,
 
