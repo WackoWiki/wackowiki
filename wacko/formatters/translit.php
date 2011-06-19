@@ -11,10 +11,10 @@ $this->set_language($this->user_lang);
 #$this->set_language($this->config['language']);
 
 $TranslitLettersFrom	= $this->language['TranslitLettersFrom'];
-$TranslitLettersTo	= $this->language['TranslitLettersTo'];
-$TranslitCaps		= $this->language['TranslitCaps'];
-$TranslitSmall		= $this->language['TranslitSmall'];
-$TranslitBiLetters	= $this->language['TranslitBiLetters'];
+$TranslitLettersTo		= $this->language['TranslitLettersTo'];
+$TranslitCaps			= $this->language['TranslitCaps'];
+$TranslitSmall			= $this->language['TranslitSmall'];
+$TranslitBiLetters		= $this->language['TranslitBiLetters'];
 
 $tag = $text;
 //insert _ between words
