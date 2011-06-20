@@ -1,6 +1,7 @@
 <?php
 
 // bbcode parsing class
+
 class bbcode
 {
 	var $object;

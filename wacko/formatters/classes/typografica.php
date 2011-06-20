@@ -58,21 +58,26 @@ class typografica
 	var $glueleft = array( "ðèñ\.", "òàáë\.", "ñì\.", "èì\.", "óë\.", "ïåð\.", "êâ\.", "îôèñ", "îô\.", "ã\." ); // contains some Russian abberviations, also see below
 	var $glueright = array( "ðóá\.", "êîï\.", "ó\.å\.", "ìèí\." );
 
-	var $settings = array ( 'inches' => 1, // convert inches into &quot;
-							'apostroph' => 1, // apostroph convertor
-							'laquo' => 0,  // angle quotes
-							'farlaquo' => 0,  // angle quotes for FAR (greater&less characters)
-							'quotes' => 0, // English quotes
-							'dash' => 1,   // (150) - middle dash
-							'emdash' => 1, // (151) - long dash by two minus
-							'(c)' => 1, '(r)' => 1, '(tm)' => 1, '(p)' => 1, '+-' => 1, // special characters, as you know
-							'degrees' => 1, // degree character
-							'[--]' => 1,    // indents like $Indent*
-							'dashglue' => 1, 'wordglue' => 1, // dash and word glues
-							'spacing' => 1, // comma and spacing, exchange
-							'phones' => 0,  // phone number processing
-							'fixed' => 0,   // fit to fixed width
-							'html' => 0     // HTML tags ban
+	var $settings = array ( 'inches'	=> 1, // convert inches into &quot;
+							'apostroph'	=> 1, // apostroph convertor
+							'laquo'		=> 0, // angle quotes
+							'farlaquo'	=> 0, // angle quotes for FAR (greater&less characters)
+							'quotes'	=> 0, // English quotes
+							'dash'		=> 1, // (150) - middle dash
+							'emdash'	=> 1, // (151) - long dash by two minus
+							'(c)'		=> 1, // special characters, as you know
+							'(r)'		=> 1,
+							'(tm)'		=> 1,
+							'(p)'		=> 1,
+							'+-'		=> 1,
+							'degrees'	=> 1, // degree character
+							'[--]'		=> 1, // indents like $Indent*
+							'dashglue'	=> 1, // dash glue
+							'wordglue'	=> 1, // word glue
+							'spacing'	=> 1, // comma and spacing, exchange
+							'phones'	=> 0, // phone number processing
+							'fixed'		=> 0, // fit to fixed width
+							'html'		=> 0  // HTML tags ban
 	);
 
 	function __construct( &$wacko )
@@ -89,8 +94,8 @@ class typografica
 		// -2. ignoring a (or next?) regexp
 		$ignored = array();
 		{
-			$total = preg_match_all($this->ignore, $data, $matches);
-			$data = preg_replace($this->ignore, "{:typo:markup:2:}", $data);
+			$total	= preg_match_all($this->ignore, $data, $matches);
+			$data	= preg_replace($this->ignore, "{:typo:markup:2:}", $data);
 
 			for ($i = 0; $i < $total; $i++)
 			{
@@ -103,6 +108,7 @@ class typografica
 		{
 			$data = str_replace( "&", "&amp;", $data );
 		}
+
 		// 0. Stripping tags
 		// actulally, tag similarity is a problem.
 		//   case 1, simple (ending tag) </abcz>
@@ -120,15 +126,15 @@ class typografica
 
 		if ($this->skip_tags)
 		{
-			$re =  "/<\/?[a-z0-9]+(". // tag name
+			$re		=  "/<\/?[a-z0-9]+(". // tag name
 									"\s+(". // repeatable statement: if only one delimiter and little body
 									"[a-z]+(". // alpha-composed attribute, could be followed by equals character
 											"=((\'[^\']*\')|(\"[^\"]*\")|([0-9@\-_a-z:\/?&=\.]+))". //
 											")?".
 										")?".
 									")*\/?>|<\!--link:begin-->[^\n]*?==/i";
-			$total = preg_match_all($re, $data, $matches);
-			$data = preg_replace($re, "{:typo:markup:1:}", $data);
+			$total	= preg_match_all($re, $data, $matches);
+			$data	= preg_replace($re, "{:typo:markup:1:}", $data);
 
 			for ($i = 0; $i < $total; $i++)
 			{
@@ -261,34 +267,34 @@ class typografica
 		// 1. English quotes
 		if ($this->settings['quotes'])
 		{
-			$data = preg_replace('/\"\"/i', '&quot;&quot;', $data);
-			$data = preg_replace('/\"\.\"/i', '&quot;.&quot;', $data);
-			$_data = "\"\"";
+			$data	= preg_replace('/\"\"/i', '&quot;&quot;', $data);
+			$data	= preg_replace('/\"\.\"/i', '&quot;.&quot;', $data);
+			$_data	= "\"\"";
 
 			while ($_data != $data)
 			{
-				$_data = $data;
-				$data = preg_replace('/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>)\"([0-9A-Za-z\'\!\s\.\?\,\-\&\;\:\_{:typo:markup:1:}{:typo:markup:2:}]+(\"|&#148;))/i', "\\1&#147;\\2", $data);
-				$data = preg_replace('/(\&\#147\;([A-Za-z0-9\'\!\s\.\?\,\-\&\;\:{:typo:markup:1:}{:typo:markup:2:}\_]*).*[A-Za-z0-9][{:typo:markup:1:}{:typo:markup:2:}\?\.\!\,]*)\"/i', "\\1&#148;", $data);
+				$_data	= $data;
+				$data	= preg_replace('/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>)\"([0-9A-Za-z\'\!\s\.\?\,\-\&\;\:\_{:typo:markup:1:}{:typo:markup:2:}]+(\"|&#148;))/i', "\\1&#147;\\2", $data);
+				$data	= preg_replace('/(\&\#147\;([A-Za-z0-9\'\!\s\.\?\,\-\&\;\:{:typo:markup:1:}{:typo:markup:2:}\_]*).*[A-Za-z0-9][{:typo:markup:1:}{:typo:markup:2:}\?\.\!\,]*)\"/i', "\\1&#148;", $data);
 			}
 		}
 
 		// 2. angle quotes
 		if ($this->settings['laquo'])
 		{
-			$data = preg_replace('/\"\"/i', '&quot;&quot;', $data );
-			$data = preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
+			$data	= preg_replace('/\"\"/i', '&quot;&quot;', $data );
+			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
 			// nb: wacko only regexp follows:
-			$data = preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/&nbsp;|\/|\!)*[~0-9¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
-			$_data = "\"\"";
+			$data	= preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/&nbsp;|\/|\!)*[~0-9¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
+			$_data	= "\"\"";
 
 			while ($_data != $data)
 			{
-				$_data = $data;
-				$data = preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*)\"/si", "\\1&raquo;", $data);
+				$_data	= $data;
+				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*)\"/si", "\\1&raquo;", $data);
 				// nb: wacko only regexps follows:
-				$data = preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*\?({:typo:markup:2:}|{:typo:markup:1:})*)\"/si", "\\1&raquo;", $data);
-				$data = preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:}|\/|\!)*)\"/si", "\\1&raquo;", $data);
+				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*\?({:typo:markup:2:}|{:typo:markup:1:})*)\"/si", "\\1&raquo;", $data);
+				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:}|\/|\!)*)\"/si", "\\1&raquo;", $data);
 			}
 		}
 
@@ -371,16 +377,20 @@ class typografica
 	{
 		// 1. Paragraphs
 		// --- not ported to wacko ---
+
 		// 2. Paragpaph indent (indented line)
 		if ($this->settings['[--]'])
 		{
 			$data = preg_replace('/\[--\]/i', $this->indent1, $data);
 			$data = preg_replace('/\[---\]/i', $this->indent2, $data);
 		}
+
 		// 3. mailto:
 		// --- not ported to wacko ---
+
 		// 4. http://
 		// --- not ported to wacko ---
+
 		return $data;
 	}
 

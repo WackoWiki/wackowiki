@@ -6,9 +6,9 @@ class post_wacko
 
 	function __construct( &$object, &$options )
 	{
-		$this->object  = &$object;
-		$this->options = &$options;
-		$this->actions = explode(', ', ACTIONS4DIFF);
+		$this->object	= &$object;
+		$this->options	= &$options;
+		$this->actions	= explode(', ', ACTIONS4DIFF);
 	}
 
 	function postcallback($things)
@@ -22,6 +22,7 @@ class post_wacko
 		if (preg_match('/^<!--link:begin-->([^\n]+)==([^\n]*)<!--link:end-->$/', $thing, $matches))
 		{
 			list (, $url, $text) = $matches;
+
 			if ($url)
 			{
 				$url	= str_replace(' ', '%20', trim($url));
@@ -33,9 +34,13 @@ class post_wacko
 					$text	= $t[0];
 					$lang	= $t[1];
 				}
+
 				return $wacko->link($url, '', $text, '', 1, 1, $lang);
 			}
-			else return '';
+			else
+			{
+				return '';
+			}
 		}
 		// image link
 		else if (preg_match('/^<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->$/', $thing, $matches))
@@ -82,7 +87,7 @@ class post_wacko
 					$p			= ' '.substr( $matches[1], $sep ).' ';
 					$paramcount	= preg_match_all( "/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/", $p, $matches, PREG_SET_ORDER );
 					$params		= array();
-					$c = 0;
+					$c			= 0;
 
 					foreach( $matches as $m )
 					{
