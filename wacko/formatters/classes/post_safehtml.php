@@ -6,8 +6,8 @@ class post_safehtml
 
 	function __construct( &$object, &$options )
 	{
-		$this->object  = &$object;
-		$this->options = &$options;
+		$this->object	= &$object;
+		$this->options	= &$options;
 
 		if ($this->options['feed'])
 		{
@@ -30,6 +30,7 @@ class post_safehtml
 			{
 				$url	= str_replace(' ', '%20', trim($url));
 				$text	= trim(preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/', '', $text));
+
 				return $wacko->link($url, ($this->options["feed"] ? "no404" : ''), $text);
 			}
 			else
@@ -45,7 +46,7 @@ class post_safehtml
 			$p			= ' '.$matches[1].' ';
 			$paramcount	= preg_match_all( '/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p, $matches, PREG_SET_ORDER );
 			$params		= array();
-			$c			=0;
+			$c			= 0;
 
 			foreach( $matches as $m )
 			{

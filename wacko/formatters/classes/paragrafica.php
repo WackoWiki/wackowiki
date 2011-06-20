@@ -12,14 +12,14 @@ All rights reserved.
 
 class paragrafica
 {
-	var $ignore = "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex to be ignored
+	var $ignore			= "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex to be ignored
 	// paragpaph is a chicken-feed like this: <t->text, text, just text<-t>
 	var $wacko;
-	var $t0 = array( // terminators like <-t>$1<t->
+	var $t0 			= array( // terminators like <-t>$1<t->
 		"/(<br[^>]*>)(\s*<br[^>]*>)+/si",
 		"/(<hr[^>]*>)/si",
 	);
-	var $t1 = array( // terminators like <-t>$1
+	var $t1				= array( // terminators like <-t>$1
 		array( // rightinators
 			"!(<table)!si",
 			"!(<a[^>]*></a><h[1-9]>)!si",
@@ -40,7 +40,7 @@ class paragrafica
 		"!(</pre>)!si",
 		),
 	);
-	var $t2 = array( // terminators like $1<t->
+	var $t2				= array( // terminators like $1<t->
 		array( // rightinators
 			"!(</table>)!si",
 			"!(</h[1-9]>)!si",
@@ -154,12 +154,14 @@ class paragrafica
 		$what = preg_replace( "!(".$this->mark2.")((\s*<br[^>]*>)+)!si", '$2$1', $what );
 		// noneedin: > eliminating multiple breaks
 		$what = preg_replace( "!((<br[^>]*>\s*)+)(".$this->mark1.")!s", '$3', $what );
+
 		// 2. cleanup <t->\s<-t>
 		do
 		{
 			$_w		= $what;
 			$what	= preg_replace( "!(".$this->mark2.")((\s|(<br[^>]*>|".$this->mark3."|".$this->mark4."))*)(".$this->mark1.")!si", '$2', $what );
 		}
+
 		while ($_w != $what);
 
 		// 3. replace each <t->....<-t> to <p class="auto">....</p>

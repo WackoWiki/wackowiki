@@ -445,6 +445,7 @@ class WackoFormatter
 			$this->cols			= 0;
 			$this->intablebr	= true;
 			$this->table_scope	= true;
+
 			return '<table class="dtable" border="0">';
 		}
 		else if ($thing == '#|')
@@ -453,6 +454,7 @@ class WackoFormatter
 			$this->cols			= 0;
 			$this->intablebr	= true;
 			$this->table_scope	= true;
+
 			return '<table class="usertable" border="1">';
 		}
 		//table end
@@ -461,6 +463,7 @@ class WackoFormatter
 			$this->br			= 0;
 			$this->intablebr	= false;
 			$this->table_scope	= false;
+
 			return '</table>';
 		}
 		//table head
@@ -478,7 +481,7 @@ class WackoFormatter
 			for ($i = 0; $i < $count; $i++)
 			{
 				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers	= array();
+				$this->tdindent_closers		= array();
 
 				if ($cells[$i][0] == "\n")
 				{
@@ -492,7 +495,7 @@ class WackoFormatter
 			if (($this->cols <> 0) and ($count < $this->cols))
 			{
 				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers	= array();
+				$this->tdindent_closers		= array();
 
 				if ($cells[$i][0] == "\n")
 				{
@@ -506,7 +509,7 @@ class WackoFormatter
 			else
 			{
 				$this->tdold_indent_level	= 0;
-				$this->tdindent_closers	= array();
+				$this->tdindent_closers		= array();
 
 				if ($cells[$i][0] == "\n")
 				{
@@ -602,12 +605,14 @@ class WackoFormatter
 		else if (preg_match('/^<!--markup:1:begin-->((\S.*?\S)|(\S))<!--markup:1:end-->$/s', $thing, $matches))
 		{
 			$this->br = 0;
+
 			return '<del class="diff">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</del>';
 		}
 		// Inserted
 		else if (preg_match('/^<!--markup:2:begin-->((\S.*?\S)|(\S))<!--markup:2:end-->$/s', $thing, $matches))
 		{
 			$this->br = 0;
+
 			return '<ins class="diff">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</ins>';
 		}
 		// bold
@@ -679,6 +684,7 @@ class WackoFormatter
 			else if (strlen($url) > 55)
 			{
 				$url = substr($matches[1], 0, 30).'[...]'.substr($matches[1], -20);
+
 				return $wacko->pre_link($matches[1], $url).$matches[2];
 			}
 			else
@@ -731,6 +737,7 @@ class WackoFormatter
 			$result		= $this->indent_close();
 			$this->br	= 0;
 			$wacko->header_count++;
+
 			return $result.'<a name="h'.$this->page_id.'-'.$wacko->header_count.'"></a><h6>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h6>';
 		}
 		else if (preg_match('/\n[ \t]*======(.*?)={2,7}$/', $thing, $matches))
@@ -738,6 +745,7 @@ class WackoFormatter
 			$result		= $this->indent_close();
 			$this->br	= 0;
 			$wacko->header_count++;
+
 			return $result.'<a name="h'.$this->page_id.'-'.$wacko->header_count.'"></a><h5>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h5>';
 		}
 		else if (preg_match('/\n[ \t]*=====(.*?)={2,7}$/', $thing, $matches))
@@ -745,6 +753,7 @@ class WackoFormatter
 			$result		= $this->indent_close();
 			$this->br	= 0;
 			$wacko->header_count++;
+
 			return $result.'<a name="h'.$this->page_id.'-'.$wacko->header_count.'"></a><h4>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h4>';
 		}
 		else if (preg_match('/\n[ \t]*====(.*?)={2,7}$/', $thing, $matches))
@@ -752,6 +761,7 @@ class WackoFormatter
 			$result		= $this->indent_close();
 			$this->br	= 0;
 			$wacko->header_count++;
+
 			return $result.'<a name="h'.$this->page_id.'-'.$wacko->header_count.'"></a><h3>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h3>';
 		}
 		else if (preg_match('/\n[ \t]*===(.*?)={2,7}$/', $thing, $matches))
@@ -759,6 +769,7 @@ class WackoFormatter
 			$result		= $this->indent_close();
 			$this->br	= 0;
 			$wacko->header_count++;
+
 			return $result.'<a name="h'.$this->page_id.'-'.$wacko->header_count.'"></a><h2>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h2>';
 		}
 		else if (preg_match('/\n[ \t]*==(.*?)={2,7}$/', $thing, $matches))
@@ -766,12 +777,14 @@ class WackoFormatter
 			$result	= $this->indent_close();
 			$this->br	= 0;
 			$wacko->header_count++;
+
 			return $result.'<a name="h'.$this->page_id.'-'.$wacko->header_count.'"></a><h1>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</h1>';
 		}
 		// separators
 		else if (preg_match('/^[-]{4,}$/', $thing))
 		{
 			$this->br = 0;
+
 			return "<hr />";
 		}
 		// forced line breaks
@@ -950,13 +963,13 @@ class WackoFormatter
 				if ($url[0] == '(')
 				{
 					$url	= substr($url, 1);
-					$result.= '(';
+					$result	.= '(';
 				}
 
 				if ($url[0] == '[')
 				{
-					$url=substr($url, 1);
-					$result.= '[';
+					$url	= substr($url, 1);
+					$result	.= '[';
 				}
 
 				$img		= preg_replace('/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(|/', '', $img);
