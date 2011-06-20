@@ -150,10 +150,10 @@ function admin_configsystem(&$engine, &$module)
 			<!--<tr class="hl_setting">
 				<td class="label"><label for="bbcode"><strong>Parser BBCode:</strong></label></td>
 				<td><input type="checkbox" id="bbcode" name="bbcode" value="1" <?php #echo ( $engine->config['bbcode'] ? ' checked="checked"' : '' );?> /></td>
-			</tr>-->
+			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
-			</tr>
+			</tr>-->
 			<tr class="hl_setting">
 				<td class="label"><label for="default_typografica"><strong>Typographical Proofreader:</strong><br />
 				<small>Unsetting slightly speed up the process of adding comments and save the page.</small></label></td>
@@ -191,9 +191,6 @@ function admin_configsystem(&$engine, &$module)
 					<br />
 					Wiki Text Formatter (Wacko Formatter)
 				</th>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="allow_x11colors"><strong>X11 Colors Usage:</strong><br />

@@ -90,7 +90,7 @@ $wacko_config_defaults = array(
 	'default_typografica' => 1,
 	'paragrafica' => 1,
 
-	'disable_tikilinks' => 0,
+	'disable_tikilinks' => 1,
 	'disable_bracketslinks' => 0,
 	'disable_wikilinks' => 1,
 	'disable_npjlinks' => 0,
