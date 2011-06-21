@@ -128,7 +128,10 @@ if (!function_exists('preview_text'))
 		$text = trim($text);
 
 		// strip tags if preview is without HTML
-		if ($tags == 0) $text = preg_replace('/\s\s+/', ' ', strip_tags($text));
+		if ($tags == 0)
+		{
+			$text = preg_replace('/\s\s+/', ' ', strip_tags($text));
+		}
 
 		// if strlen is smaller than limit return
 		if (strlen($text) < $limit)
@@ -291,11 +294,13 @@ if ($form)
 	echo '<label for="searchfor">'.$this->get_translation('SearchFor').':</label><br />';
 	echo '<input name="phrase" id="searchfor" size="40" value="'.htmlspecialchars(isset($_GET['phrase'])? $_GET['phrase'] : '').'" />';
 	echo '<input type="submit" value="'.$this->get_translation('SearchButtonText').'" /><br />';
+
 	if ($options == 1)
 	{
 		echo '<input type="checkbox" name="topic" '.($mode == 'topic' ? 'checked="checked"' : '' ).' id="checkboxSearch" />';
 		echo '<label for="checkboxSearch">'.$this->get_translation('TopicSearchText').'</label>';
 	}
+
 	echo $this->form_close();
 }
 
@@ -343,7 +348,6 @@ if ($phrase)
 						// open item
 						if ($style == 'ul' || $style == 'ol')	$output .= "<li>";
 						if ($style == 'comma' && $i > 0)		$output .= ",\n";
-
 
 						// generate preview
 						if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
