@@ -145,21 +145,15 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	}
 
 	echo '</table>'."\n";
-	echo '<table>'.
-			'<tr>'.
-				'<td>'.
-					// mark all forums read
-					( $user == true ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>' : '' ).
-				'</td>'.
-				'<td align="right">'.
-					// XML button
-					'<a href="'.$this->config['base_url'].'xml/comments_'.
-					preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).
-					'.xml"><img src="'.$this->config['theme_url'].
-					'icons/xml.gif" alt="XML" /></a>'.
-				'</td>'.
-			'</tr>'.
-		'</table>'."\n";
+	echo '<br />'."\n";
+
+	// mark all forums read
+	if ($user == true)
+	{
+		echo '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>';
+	}
+
+	echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/comments_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RecentCommentsXMLTip')."\" alt=\"XML\" /></a></span><br />\n";
 }
 
 ?>
