@@ -122,6 +122,7 @@ if (!empty($this->config['news_cluster']))
 
 	// start output
 	echo "<div class=\"news\">";
+
 	if ($title == 1)
 	{
 		if (isset($category_title))
@@ -132,6 +133,7 @@ if (!empty($this->config['news_cluster']))
 		{
 			$_category_title = '';
 		}
+
 		if ($this->page['tag'] == $this->config['news_cluster'])
 		{
 			$_title = $this->get_translation('News').$_category_title;
@@ -181,6 +183,7 @@ if (!empty($this->config['news_cluster']))
 
 				$_category .= '<a href="'.$this->href('', '', 'category='.$category['category_id']).'">' .htmlspecialchars($category['category']).'</a>';
 			}
+
 			$_category = !empty($_category) ? $this->get_translation('Category').': '.$_category.' | ' : '';
 
 			echo "<div class=\"newsarticle\">";
@@ -203,6 +206,7 @@ if (!empty($this->config['news_cluster']))
 	{
 		echo "<br /><br />".$this->get_translation('NewsNotAvailable');
 	}
+
 	echo "</div>";
 }
 else

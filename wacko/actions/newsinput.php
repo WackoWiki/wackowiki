@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd')
 {
 	// checking user input
-	if ($_POST['title'])
+	if (isset($_POST['title']))
 	{
 		$name		= trim($_POST['title'], ". \t");
 		$namehead	= $name;
@@ -20,7 +20,10 @@ if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd')
 		$name		= preg_replace('/[^- \\w]/', '', $name);
 		$name		= str_replace(array(' ', "\t"), '', $name);
 
-		if ($name == '') $error = $this->get_translation('NewsNoName');
+		if ($name == '')
+		{
+			$error = $this->get_translation('NewsNoName');
+		}
 	}
 	else
 	{
@@ -44,6 +47,7 @@ if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd')
 		$this->redirect($this->href('edit', $this->config['news_cluster'].'/'.date('Y/').date('F/').$name, '', 1));
 	}
 }
+
 if (!empty($this->config['news_cluster']))
 {
 	echo $this->form_open();
