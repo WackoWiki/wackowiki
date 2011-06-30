@@ -22,7 +22,7 @@ if ($user = $this->get_user())
 {
 	if (isset($_GET['global']))
 	{
-		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('Referrers')."</h3>";
+		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersGlobal')."</h3>";
 		echo "<ul class=\"menu\">
 			<li><a href=\"".$this->href('referrers')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
 			<li><a href=\"".$this->href('referrers', '', 'perpage=1')."\">".$this->get_translation('ViewReferrersPerPage')."</a></li>
@@ -31,7 +31,7 @@ if ($user = $this->get_user())
 	}
 	else if (isset($_GET['perpage']))
 	{
-		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('Referrers')."</h3>";
+		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersPerPage')."</h3>";
 		echo "<ul class=\"menu\">
 			<li><a href=\"".$this->href('referrers')."\">".$this->get_translation('ViewReferrersPage')."</a></li>
 			<li class=\"active\">".$this->get_translation('ViewReferrersPerPage')."</li>
@@ -40,7 +40,7 @@ if ($user = $this->get_user())
 	}
 	else
 	{
-		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('Referrers')."</h3>";
+		echo "<h3>".$this->get_translation('ReferrersText')." &raquo; ".$this->get_translation('ViewReferrersPage')."</h3>";
 		echo "<ul class=\"menu\">
 			<li class=\"active\">".$this->get_translation('ViewReferrersPage')."</li>
 			<li><a href=\"".$this->href('referrers', '', 'perpage=1')."\">". $this->get_translation('ViewReferrersPerPage')."</a></li>
@@ -58,6 +58,12 @@ if ($user = $this->get_user())
 				: str_replace('%1', $this->config['referrers_purge_time'], $this->get_translation('LastDays')))
 			: ''),
 			$this->get_translation('ExternalPagesGlobal')));
+
+		$pages		= $this->load_all(
+			"SELECT count( r.referrer ) AS num
+			FROM ".$this->config['table_prefix']."referrer r
+			");
+
 		$referrers	= $this->load_referrers();
 	}
 	else if ($perpage = isset($_GET['perpage']))
@@ -86,6 +92,8 @@ if ($user = $this->get_user())
 		// show backlinks
 		if ($pages = $this->load_pages_linking_to($this->tag))
 		{
+			echo "<ol>";
+
 			foreach ($pages as $page)
 			{
 				if ($page['tag'])
@@ -98,14 +106,15 @@ if ($user = $this->get_user())
 					{
 						$access = true;
 					}
+
 					if ($access)
 					{
-						$links[] = $this->link('/'.$page['tag']);
+						echo '<li>'.$this->link('/'.$page['tag'])."</li>\n";
 					}
 				}
 			}
 
-			print(implode("<br />\n", $links)."<p></p>");
+			echo "</ol><p></p>";
 		}
 		else
 		{
