@@ -15,7 +15,7 @@ if (!function_exists('full_text_search'))
 		$count_results = $wacko->load_all(
 			"SELECT page_id ".
 			"FROM ".$wacko->config['table_prefix']."page ".
-			"WHERE (( match(body) against('".quote($wacko->dblink, $phrase)."') ".
+			"WHERE (( MATCH(body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) ".
 				"OR lower(title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
 				"OR lower(tag) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
 				($for
@@ -31,9 +31,9 @@ if (!function_exists('full_text_search'))
 
 		// load search results
 		$results = $wacko->load_all(
-			"SELECT page_id, title, tag, body, comment_on_id ".
+			"SELECT page_id, title, tag, body, comment_on_id, MATCH(body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) AS score ". //
 			"FROM ".$wacko->config['table_prefix']."page ".
-			"WHERE (( match(body) against('".quote($wacko->dblink, $phrase)."') ".
+			"WHERE (( MATCH(body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) ".
 				"OR lower(title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
 				"OR lower(tag) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
 				($for
@@ -43,6 +43,7 @@ if (!function_exists('full_text_search'))
 					? "AND comment_on_id = '0'"
 					: "").
 				" )".
+			"ORDER BY score DESC ".
 			"LIMIT {$pagination['offset']}, $limit");
 
 		return array($results, $pagination);
@@ -389,7 +390,7 @@ if ($phrase)
 			{
 				echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".
 					$this->get_translation(($mode == 'topic' ? 'Topic' : '')."SearchResults").
-					" \"$phrase\" (".$i."):</span></p>";
+					" \"$phrase\" (<b>".$i."</b>):</span></p>";
 			}
 
 			//show results
