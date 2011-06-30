@@ -133,6 +133,11 @@ del.diff {
   padding: 4px;
   vertical-align: top;
 }
+
+.usertable tr:hover {
+  background-color: #CCFFCC;
+}
+
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
 .dtable { width:100%; border: 0px none; border-collapse: collapse; }
 .dtable td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
