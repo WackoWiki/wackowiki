@@ -58,7 +58,7 @@ if (!empty($this->config['news_cluster']))
 				"AND c.category_id = '$category_id' ".
 				"AND p.comment_on_id = '0'", 1);
 
-		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=week');
+		$pagination = $this->pagination($count['n'], $limit, 'p', 'category='.$category_id);
 
 		$category_title	= $this->load_single(
 			"SELECT category ".
