@@ -16,17 +16,17 @@ class typografica
 {
 
 	var $wacko;
-	var $skip_tags = true;
-	var $p_prefix = "<p class=typo>";
-	var $p_postfix = "</p>";
-	var $asoft = true;
-	var $indent1 = "images/z.gif width=25 height=1 border=0 alt=\'\' align=top />"; // <->
-	var $indent2 = "images/z.gif width=50 height=1 border=0 alt=\'\' align=top />"; // <-->
-	var $fixed_size = 80; // maximum width
-	var $ignore = "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex to be ignored
-	var $de_nobr = true;
+	var $skip_tags	= true;
+	var $p_prefix	= "<p class=typo>";
+	var $p_postfix	= "</p>";
+	var $asoft		= true;
+	var $indent1	= "images/z.gif width=25 height=1 border=0 alt=\'\' align=top />"; // <->
+	var $indent2	= "images/z.gif width=50 height=1 border=0 alt=\'\' align=top />"; // <-->
+	var $fixed_size	= 80; // maximum width
+	var $ignore		= "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex to be ignored
+	var $de_nobr	= true;
 
-	var $phonemasks = array(
+	var $phonemasks	= array(
 						array(
 								"/([0-9]{4})\-([0-9]{2})\-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})/",
 								"/([0-9]{4})\-([0-9]{2})\-([0-9]{2})/",
@@ -55,10 +55,10 @@ class typografica
 							)
 						);
 
-	var $glueleft = array( "рис\.", "табл\.", "см\.", "им\.", "ул\.", "пер\.", "кв\.", "офис", "оф\.", "г\." ); // contains some Russian abberviations, also see below
-	var $glueright = array( "руб\.", "коп\.", "у\.е\.", "мин\." );
+	var $glueleft	= array( "рис\.", "табл\.", "см\.", "им\.", "ул\.", "пер\.", "кв\.", "офис", "оф\.", "г\." ); // contains some Russian abberviations, also see below
+	var $glueright	= array( "руб\.", "коп\.", "у\.е\.", "мин\." );
 
-	var $settings = array ( 'inches'	=> 1, // convert inches into &quot;
+	var $settings	= array ( 'inches'	=> 1, // convert inches into &quot;
 							'apostroph'	=> 1, // apostroph convertor
 							'laquo'		=> 0, // angle quotes
 							'farlaquo'	=> 0, // angle quotes for FAR (greater&less characters)
@@ -82,9 +82,9 @@ class typografica
 
 	function __construct( &$wacko )
 	{
-		$this->wacko = &$wacko;
-		$this->indent1 = "<img src=".$wacko->config['base_url'].$this->indent1;
-		$this->indent2 = "<img src=".$wacko->config['base_url'].$this->indent2;
+		$this->wacko	= &$wacko;
+		$this->indent1	= "<img src=".$wacko->config['base_url'].$this->indent1;
+		$this->indent2	= "<img src=".$wacko->config['base_url'].$this->indent2;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
