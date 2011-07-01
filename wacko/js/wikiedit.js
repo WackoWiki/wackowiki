@@ -9,7 +9,7 @@
 //   (c) Roman "Kukutz" Ivanov, Evgeny Nedelko, 2003                  //
 // Many thanks to Alexander Babaev, Sergey Kruglov, Evgeny Nedelko    //
 //             and Nikolay Jaremko                                    //
-// http://wackowiki.org/Dev/Projects/WikiEdit                                      //
+// http://wackowiki.org/Dev/Projects/WikiEdit                         //
 //                                                                    //
 ////////////////////////////////////////////////////////////////////////
 

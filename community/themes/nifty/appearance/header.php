@@ -50,11 +50,11 @@ if ($this->config['allow_swfobject'])
 {
 	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/swfobject.js\"></script>\n";
 }
-// autocomplete.js, protoedit & wikiedit2.js contain classes for WikiEdit editor. We include them only for pages in edit mode.
+// autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We include them only for pages in edit mode.
 if ($this->method == 'edit')
 {
 	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/protoedit.js\"></script>\n";
-	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/wikiedit2.js\"></script>\n";
+	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/wikiedit.js\"></script>\n";
 	echo "<script type=\"text/javascript\" src=\"".$this->config['base_url']."js/autocomplete.js\"></script>\n";
 }
 ?>
