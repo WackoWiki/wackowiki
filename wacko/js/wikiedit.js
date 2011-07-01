@@ -94,6 +94,8 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
  this.addButton("indent","Indent","'  ','',0,1");
  this.addButton("customhtml",'<li><div class="btn-separator"/></div></li>');
 // this.addButton("code","Code","'%% ',' %%',2");
+// this.addButton("html","HTML","'<# ',' #>',2");
+// this.addButton("action","Action","'{{ ',' }}',2");
  this.addButton("hr","Line","'','\\n----\\n',2");
 // this.addButton("signature","Signature","'::@::',' ',1");
  this.addButton("quote","Quote","'<[',']>',2");
@@ -670,7 +672,7 @@ WikiEdit.prototype.createLink = function (isAlt)
 WikiEdit.prototype.help = function ()
 {
  s =  "         WikiEdit 3.08 \n";
- s += "  (c) Roman Ivanov, 2003-2010   \n";
+ s += "  (c) Roman Ivanov, 2003-2011   \n";
  s += "  http://wackowiki.org/Dev/Projects/WikiEdit \n";
  s += "\n";
  s += " Shortcuts:\n";
