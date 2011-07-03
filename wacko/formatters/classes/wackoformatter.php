@@ -689,7 +689,7 @@ class WackoFormatter
 			}
 			else
 			{
-				return $wacko->pre_link($matches[1]).$matches[2];
+				return $wacko->pre_link($matches[1], $matches[1]).$matches[2];
 			}
 		}
 		// lan path

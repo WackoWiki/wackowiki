@@ -2385,13 +2385,15 @@ class Wacko
 			}
 		}
 
+		$text = str_replace('%20', ' ', urldecode($text));
+
 		if ($imgurl == 1)
 		{
-			return '<!--imglink:begin-->'.str_replace(' ', '+', urldecode($tag)).' =='.$text.'<!--imglink:end-->';
+			return '<!--imglink:begin-->'.str_replace(' ', '%20', urldecode($tag)).' =='.$text.'<!--imglink:end-->';
 		}
 		else
 		{
-			return '<!--link:begin-->'.str_replace(' ', '+', urldecode($tag))." ==".($this->format_safe ? str_replace('>', "&gt;", str_replace('<', "&lt;", $text)) : $text).'<!--link:end-->';
+			return '<!--link:begin-->'.str_replace(' ', '%20', urldecode($tag))." ==".($this->format_safe ? str_replace('>', "&gt;", str_replace('<', "&lt;", $text)) : $text).'<!--link:end-->';
 		}
 	}
 
@@ -3038,6 +3040,7 @@ class Wacko
 				return $res;
 			}
 		}
+
 		return $text;
 	}
 
