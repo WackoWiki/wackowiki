@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 ########################################################
-##   DB Optimization                                  ##
+##   DB Synchronization                               ##
 ########################################################
 
 $module['resync'] = array(
@@ -184,7 +184,7 @@ function admin_resync(&$engine, &$module)
 	<p>
 		User statistics (number of comments and pages owned)
 		in some situations may differ from actual data. This operation
-		allows pereschetat statistics on current actual data of the database.
+		allows updating statistics on current actual data of the database.
 	</p>
 	<br />
 	<form action="admin.php" method="post" name="usersupdate">
