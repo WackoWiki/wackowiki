@@ -121,7 +121,7 @@ function admin_resync(&$engine, &$module)
 				$engine->sql_query("DELETE FROM {$engine->config['table_prefix']}link");
 			}
 
-			$engine->set_user_setting('dont_redirect', '1', 1);
+			$engine->set_user_setting('dont_redirect', '1');
 
 			if ($pages = $engine->load_all("SELECT * FROM {$engine->config['table_prefix']}page LIMIT ".($i*$limit).", $limit"))
 			{
@@ -164,6 +164,7 @@ function admin_resync(&$engine, &$module)
 					$engine->clear_link_table();
 					$engine->current_context--;
 				}
+
 				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&action=wikilinks&i='.(++$i))));
 			}
 			else
@@ -212,7 +213,7 @@ function admin_resync(&$engine, &$module)
 	<br />
 	<p>
 		Performs re-rendering all intrasite links and restores
-		the contents of the table 'links' in the event of damage or injury (can take
+		the contents of the table 'links' in the event of damage or injury (this can take
 		considerable time).
 	</p>
 	<br />

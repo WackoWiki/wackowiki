@@ -3650,16 +3650,11 @@ class Wacko
 	// set/update specific element of user session array
 	// !!! BE CAREFUL NOT TO SAVE GUEST VALUES UNDER REGISTERED USER ARRAY !!!
 	// this poses a potential security threat
-	function set_user_setting($setting, $value, $option = 0, $guest = 0)
+	function set_user_setting($setting, $value, $guest = 0)
 	{
-		if (!$option)
-		{
-			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? 'user' : 'guest' )][$setting] = $value;
-		}
-		else
-		{
-			return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? 'user' : 'guest' )]['options'][$setting] = $value;
-		}
+
+		return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? 'user' : 'guest' )][$setting] = $value;
+
 	}
 
 	// insert user data into the session array
