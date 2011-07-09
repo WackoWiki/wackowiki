@@ -163,7 +163,6 @@ function admin_sysupdate(&$engine, &$module)
 	{
 ?>
 		<ol>
-			<li>unused</li>
 			<li>Transliterate field `to_supertag` in table `link`.</li>
 			<li>Transliterate field `supertag` in table `page`.</li>
 			<li>Transliterate field `supertag` in table `revision`.</li>
