@@ -297,13 +297,13 @@ class RSS
 					$xml .= "<loc>".$this->engine->href('', $page['tag'])."</loc>\n";
 					$xml .= "<lastmod>". substr($page['modified'], 0, 10) ."</lastmod>\n";
 
-					$daysSinceLastChanged = floor((time() - strtotime(substr($page['modified'], 0, 10)))/86400);
+					$days_since_last_changed = floor((time() - strtotime(substr($page['modified'], 0, 10)))/86400);
 
-					if($daysSinceLastChanged < 30)
+					if($days_since_last_changed < 30)
 					{
 						$xml .= "<changefreq>daily</changefreq>\n";
 					}
-					else if($daysSinceLastChanged < 60)
+					else if($days_since_last_changed < 60)
 					{
 						$xml .= "<changefreq>monthly</changefreq>\n";
 					}
