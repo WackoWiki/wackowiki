@@ -1513,40 +1513,40 @@ class Wacko
 	// $comment_on_id	- commented page id
 	// $lang			- page language
 	// $mute			- supress email reminders and xml rss recompilation
-	// $user			- attach guest pseudonym
-	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = false, $mute = false, $user = false, $user_page = false)
+	// $user_name		- attach guest pseudonym
+	// $user_page		-
+	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = false, $mute = false, $user_name = false, $user_page = false)
 	{
 		$desc = '';
 		// user data
 		$ip = $this->get_user_ip();
 
-		if ($user === '')
+		if ($user_name == '')
 		{
-			$user = GUEST;
+			$user_name = GUEST;
 		}
 
-		if ($user && $user != GUEST)
+		if ($user_name && $user_name != GUEST)
 		{
-			$owner		= $user;
-			$owner_id	= $user_id	= $this->get_user_id($user);
+			$owner_id	= $user_id	= $this->get_user_id($user_name);
 			$reg		= true;
 		}
 		// current user is owner; if user is logged in! otherwise, no owner.
 		else if ($this->get_user_name())
 		{
-			$owner		= $user		= $this->get_user_name();
+			$user_name	= $this->get_user_name();
 			$owner_id	= $user_id	= $this->get_user_id();
 			$reg		= true;
 		}
 		else if ($this->forum === true || $comment_on_id)
 		{
-			$owner	= GUEST;
-			$reg	= false;
+			$owner_id	= 0; // GUEST
+			$reg		= false;
 		}
 		else
 		{
-			$owner	= '';
-			$reg	= false;
+			$owner_id	= 0;
+			$reg		= false;
 		}
 
 		$page_id = $this->get_page_id($tag);
@@ -1555,7 +1555,7 @@ class Wacko
 			ANTISPAM
 
 			We load in the external antispam.conf file and then search the entire body content for each of the
-			words defined as spam.  If we find any then we return from the function, not saving the changes.
+			words defined as spam.  If we find any then we return from the function, not saving the changes. See bug#188 - Enhanced Spam filtering
 		*/
 		$this->spam = file('config/antispam.conf', 1);
 
@@ -1598,7 +1598,7 @@ class Wacko
 
 		// check privileges
 		if ( ($this->page && $this->has_access('write', $page_id))
-			|| (!$this->page && $this->has_access('create', '', $user)) // TODO: (!$this->page && $this->has_access('create', $tag))
+			|| (!$this->page && $this->has_access('create', '', $user_name)) // TODO: (!$this->page && $this->has_access('create', $tag))
 			|| ($comment_on_id && $this->has_access('comment', $comment_on_id))
 			|| $user_page == true)
 		{
@@ -1801,7 +1801,7 @@ class Wacko
 
 						if (!$mute) foreach ($moderators as $moderator)
 						{
-							if ($user != $moderator)
+							if ($user_name != $moderator)
 							{
 								$moderator_id = $this->get_user_id($moderator);
 
@@ -1816,7 +1816,7 @@ class Wacko
 								{
 									$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageCreatedSubj')." '$title'";
 									$body = $this->get_translation('EmailHello'). $this->get_translation('EmailModerator').$moderator.".\n\n".
-											str_replace('%1', ( $user == GUEST ? $this->get_translation('Guest') : $user ), $this->get_translation('NewPageCreatedBody'))."\n".
+											str_replace('%1', ( $user_name == GUEST ? $this->get_translation('Guest') : $user_name ), $this->get_translation('NewPageCreatedBody'))."\n".
 											"'$title'\n".
 											$this->href('', $tag)."\n\n".
 											$this->get_translation('EmailGoodbye')."\n".
@@ -1836,7 +1836,6 @@ class Wacko
 				if ($comment_on_id)
 				{
 					// notifying watchers
-					$user_name	= $user;
 					$title		= $this->get_page_title(0, $comment_on_id);
 					$watchers	= $this->load_all(
 									"SELECT DISTINCT w.user_id, u.user_name ".
@@ -1890,7 +1889,7 @@ class Wacko
 
 										$subject = '['.$this->config['site_name'].'] '.$this->get_translation('CommentForWatchedPage', $lang)."'".$title."'";
 										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
-												$user_name.
+												($user_name == GUEST ? $this->get_translation('Guest') : $user_name).
 												$this->get_translation('SomeoneCommented', $lang)."\n".
 												$this->href('', $this->get_page_tag($comment_on_id), '')."\n\n".
 												"----------------------------------------------------------------------\n\n".
@@ -1977,7 +1976,6 @@ class Wacko
 
 					// notifying watchers
 					$title				= $this->get_page_title(0, $page_id);
-					$user_name			= $user;
 
 					$watchers	= $this->load_all(
 						"SELECT DISTINCT w.user_id, u.user_name ".
@@ -2009,7 +2007,7 @@ class Wacko
 
 										$subject = '['.$this->config['site_name'].'] '.$this->get_translation('WatchedPageChanged', $lang)."'".$tag."'";
 										$body = $this->get_translation('EmailHello', $lang). $watcher['user_name'].",\n\n".
-												$user_name.
+												($user_name == GUEST ? $this->get_translation('Guest') : $user_name).
 												$this->get_translation('SomeoneChangedThisPage', $lang)."\n".
 												(isset($title) ? $title : $tag)."\n".
 												$this->href('', $tag)."\n\n".
@@ -3879,18 +3877,18 @@ class Wacko
 			"SELECT * FROM ".$this->config['user_table']." ORDER BY binary user_name");
 	}
 
-	function get_user_id($user = '')
+	function get_user_id($user_name = '')
 	{
-		if (!empty($user))
+		if (!empty($user_name))
 		{
 			$user = $this->load_single(
 					"SELECT user_id ".
 					"FROM ".$this->config['table_prefix']."user ".
-					"WHERE user_name = '".$user."' ".
+					"WHERE user_name = '".$user_name."' ".
 					"LIMIT 1");
 
-					// Get user value
-					$user_id = $user['user_id'];
+			// Get user value
+			$user_id = $user['user_id'];
 
 			return $user_id;
 		}
@@ -4311,21 +4309,18 @@ class Wacko
 		return $acl;
 	}
 
-	// returns true if $user (defaults to the current user) has access to $privilege on $page_tag (defaults to the current page)
-	function has_access($privilege, $page_id = '', $user = '', $use_parent = 1)
+	// returns true if $user_name (defaults to the current user) has access to $privilege on $page_tag (defaults to the current page)
+	function has_access($privilege, $page_id = '', $user_name = '', $use_parent = 1)
 	{
-		if ($user == '')
+		if ($user_name == '')
 		{
 			$user_name = strtolower($this->get_user_name());
 		}
-		else if ($user == GUEST)
+		else if ($user_name == GUEST)
 		{
 			$user_name = GUEST;
 		}
-		else
-		{
-			$user_name = $user;
-		}
+
 
 		if (!$page_id = trim($page_id))
 		{
@@ -4353,7 +4348,7 @@ class Wacko
 		$this->_acl	= $acl;
 
 		// if current user is owner or admin, return true. they can do anything!
-		if ($user == '' && $user_name != GUEST)
+		if ($user_name == '' && $user_name != GUEST)
 		{
 			if ($this->user_is_owner($page_id) || $this->is_admin())
 			{
@@ -4364,14 +4359,14 @@ class Wacko
 		return $this->check_acl($user_name, $acl['list'], true);
 	}
 
-	function check_acl($user, $acl_list, $copy_to_this_acl = false, $debug = 0)
+	function check_acl($user_name, $acl_list, $copy_to_this_acl = false, $debug = 0)
 	{
-		if (is_array($user))
+		if (is_array($user_name))
 		{
-			$user = $user['user_name'];
+			$user_name = $user_name['user_name'];
 		}
 
-		$user = strtolower($user);
+		$user_name = strtolower($user_name);
 
 		// replace groups
 		$acl = str_replace(' ', '', strtolower($this->replace_aliases($acl_list)));
@@ -4383,7 +4378,7 @@ class Wacko
 
 		$acls = "\n".$acl."\n";
 
-		if ($user == GUEST || $user == '')
+		if ($user_name == GUEST || $user_name == '')
 		{
 			if (($pos = strpos($acls, '*')) === false)
 			{
@@ -4398,8 +4393,8 @@ class Wacko
 			return false;
 		}
 
-		$upos	= strpos($acls, "\n".$user."\n");
-		$aupos	= strpos($acls, "\n!".$user."\n");
+		$upos	= strpos($acls, "\n".$user_name."\n");
+		$aupos	= strpos($acls, "\n!".$user_name."\n");
 		$spos	= strpos($acls, '*');
 		$bpos	= strpos($acls, '$');
 
@@ -4436,7 +4431,7 @@ class Wacko
 
 		if ($bpos !== false)
 		{
-			if ($user == GUEST || $user == '')
+			if ($user_name == GUEST || $user_name == '')
 			{
 				return false;
 			}
@@ -5500,7 +5495,7 @@ class Wacko
 
 		return
 			// save
-			$this->save_page($new, $title = $page['title'], $page['body'], $edit_note, $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = $page['lang'], $mute = false, $user = false);
+			$this->save_page($new, $title = $page['title'], $page['body'], $edit_note, $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = $page['lang'], $mute = false, $user_name = false);
 	}
 
 	function rename_page($tag, $new_tag, $new_supertag = '')
