@@ -683,7 +683,7 @@ class WackoFormatter
 			// shorten url name if too long
 			else if (strlen($url) > 55)
 			{
-				$url = substr($matches[1], 0, 30).'[...]'.substr($matches[1], -20);
+				$url = substr($matches[1], 0, 30).'[..]'.substr($matches[1], -20);
 
 				return $wacko->pre_link($matches[1], $url).$matches[2];
 			}
