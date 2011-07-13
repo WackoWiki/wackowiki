@@ -127,10 +127,10 @@ if ($this->get_user())
 
 	echo "</ul></div>";
 
-	echo "<hr noshade=\"noshade\" size=\"1\" />";
-	echo "<div class=\"credits\">";
-	echo $this->format( '{{hits}} Aufrufe' );
-	echo "</div>";
+	#echo "<hr noshade=\"noshade\" size=\"1\" />";
+	#echo "<div class=\"credits\">";
+	#echo $this->format( '{{hits}} Aufrufe' );
+	#echo "</div>";
 }
 else
 {
