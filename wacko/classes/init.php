@@ -186,8 +186,8 @@ class Init
 					{
 						require('wakka.config.php');
 						// merge with config defaults
-						$_wacko_config = array_merge($wacko_config_defaults, (array)$wakkaConfig);
-						$this->config = $_wacko_config;
+						$_wacko_config	= array_merge($wacko_config_defaults, (array)$wakkaConfig);
+						$this->config	= $_wacko_config;
 					}
 					else
 					{
@@ -201,9 +201,10 @@ class Init
 					if (@filesize('config/config.php') > 0)
 					{
 						require('config/config.php');
+
 						// merge with config defaults
-						$_wacko_config = array_merge($wacko_config_defaults, (array)$wacko_config);
-						$this->config = $_wacko_config;
+						$_wacko_config	= array_merge($wacko_config_defaults, (array)$wacko_config);
+						$this->config	= $_wacko_config;
 
 						if ($wacko_config['wacko_version'] != WACKO_VERSION && (!$wacko_config['system_seed'] || strlen($wacko_config['system_seed']) < 20))
 						{
@@ -292,8 +293,8 @@ class Init
 							// Finally we put the proper Group => UserName1\nUserName2\n to the config
 							// when we make trim($users, '\n') we get UserName1\nUserName2 without trailing '\n'
 							// Made so to prevent system from trimming 'n\n' (like TestMan\n ->  TestMa)
-							$trimone = rtrim($users, 'n');
-							$this->config['aliases'][$group] = trim($trimone, '\\');
+							$trimone							= rtrim($users, 'n');
+							$this->config['aliases'][$group]	= trim($trimone, '\\');
 						}
 					}
 				}
@@ -411,7 +412,7 @@ class Init
 		if ($this->config['tls'] == true && (( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' && !empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] == '443' ) ))
 		{
 			$this->config['base_url']	= str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->config['base_url']);
-			$_secure = true;
+			$_secure					= true;
 		}
 
 		$_cookie_path = preg_replace('|https?://[^/]+|i', '', $this->config['base_url'].'');
@@ -751,18 +752,26 @@ class Init
 					echo "</ul>\n";
 				}
 
-				$this->engine->debug_print_r($_SESSION);
-				#$this->engine->debug_print_r($this->config);
-				#$this->engine->debug_print_r($this->engine->page);
+				if ($this->config['debug'] >= 3)
+				{
+					$this->engine->debug_print_r($_SESSION);
+					#$this->engine->debug_print_r($this->config);
+					#$this->engine->debug_print_r($this->engine->page);
+				}
 
 				echo "</div >\n";
 			}
-
-			else return;
+			else
+			{
+				return;
+			}
 		}
-
-		else return;
+		else
+		{
+			return;
+		}
 	}
+
 }
 
 ?>
