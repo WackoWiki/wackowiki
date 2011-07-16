@@ -444,7 +444,9 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 				// preview
 				if (!empty($preview))
 				{
-					$preview = $this->Format($preview);
+					$preview = $this->format($preview, 'pre_wacko');
+					$preview = $this->format($preview, 'wacko');
+					$preview = $this->format($preview, 'post_wacko');
 
 					echo "<a name=\"preview\"></a><div class=\"preview\"><p class=\"preview\"><span>".$this->get_translation('EditPreviewSlim')."</span></p>\n".
 						 '<div class="commentpreview">'."\n".

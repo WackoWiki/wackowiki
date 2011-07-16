@@ -34,7 +34,7 @@ if ($this->user_is_owner() || $this->is_admin())
 		$_comment_acl	= isset($_POST['comment_acl']) ? $_POST['comment_acl'] : '';
 		$_create_acl	= isset($_POST['create_acl']) ? $_POST['create_acl'] : '';
 		$_upload_acl	= isset($_POST['upload_acl']) ? $_POST['upload_acl'] : '';
-		$_newowner		= isset($_POST['newowner']) ? $_POST['newowner'] : '';
+		$_new_owner		= isset($_POST['new_owner']) ? $_POST['new_owner'] : '';
 		// acls for page or entire cluster
 		$need_massacls	= 0;
 
@@ -59,25 +59,25 @@ if ($this->user_is_owner() || $this->is_admin())
 			$message = $this->get_translation('ACLUpdated');
 
 			// change owner?
-			if ($newowner = $_newowner)
+			if ($new_owner = $_new_owner)
 			{
 				// check user exists
 				$user = $this->load_single(
 						"SELECT user_id, user_name, email, email_confirm ".
 						"FROM {$this->config['user_table']} ".
-						"WHERE user_name = '".quote($this->dblink, $newowner)."' ".
+						"WHERE user_name = '".quote($this->dblink, $new_owner)."' ".
 						"LIMIT 1");
 
 				if ($user == true)
 				{
-					$newowner		= $user['user_name'];
-					$newowner_id	= $user['user_id'];
-					$this->set_page_owner($this->page['page_id'], $newowner_id);
+					$new_owner		= $user['user_name'];
+					$new_owner_id	= $user['user_id'];
+					$this->set_page_owner($this->page['page_id'], $new_owner_id);
 
 					if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')
 					{
 						$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageOwnership');
-						$body  = $this->get_translation('EmailHello').$newowner.".\n\n";
+						$body  = $this->get_translation('EmailHello').$new_owner.".\n\n";
 						$body .= str_replace('%2', $this->config['site_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
 						$body .= $this->href('', $this->tag, '')."\n\n";
 						$body .= $this->get_translation('PageOwnershipInfo')."\n";
@@ -87,14 +87,14 @@ if ($this->user_is_owner() || $this->is_admin())
 					}
 
 					// log event
-					$this->log(2, str_replace('%2', $newowner, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogOwnershipChanged', $this->config['language']))));
+					$this->log(2, str_replace('%2', $new_owner, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogOwnershipChanged', $this->config['language']))));
 
-					$message .= $this->get_translation('ACLGaveOwnership').$newowner;
+					$message .= $this->get_translation('ACLGaveOwnership').$new_owner;
 				}
 				else
 				{
 					// new owner doesn't exists
-					$message .= str_replace('%1', $newowner, $this->get_translation('ACLNoNewOwner'));
+					$message .= str_replace('%1', $new_owner, $this->get_translation('ACLNoNewOwner'));
 					$this->set_message($message);
 					$this->redirect($this->href('permissions'));
 				}
@@ -114,10 +114,10 @@ if ($this->user_is_owner() || $this->is_admin())
 				$this->save_acl($page['page_id'], 'comment', $_comment_acl);
 
 				// change owner?
-				if ($newowner = $_newowner)
+				if ($new_owner = $_new_owner)
 				{
-					$newowner_id = $this->get_user_id($newowner);
-					$this->set_page_owner($page['page_id'], $newowner_id);
+					$new_owner_id = $this->get_user_id($new_owner);
+					$this->set_page_owner($page['page_id'], $new_owner_id);
 				}
 			}
 		}
@@ -151,10 +151,10 @@ if ($this->user_is_owner() || $this->is_admin())
 				$this->log(2, str_replace('%1', $page['tag']." ".$page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
 
 				// change owner?
-				if ($newowner = $_newowner)
+				if ($new_owner = $_new_owner)
 				{
-					$newowner_id = $this->get_user_id($newowner);
-					$this->set_page_owner($page['page_id'], $newowner_id);
+					$new_owner_id = $this->get_user_id($new_owner);
+					$this->set_page_owner($page['page_id'], $new_owner_id);
 					$ownedpages .= $this->href('', $page['tag'])."\n";
 
 					// log event
@@ -164,20 +164,20 @@ if ($this->user_is_owner() || $this->is_admin())
 
 			$message = $this->get_translation('ACLUpdated');
 
-			if ($newowner = $_newowner)
+			if ($new_owner = $_new_owner)
 			{
-				$message .= $this->get_translation('ACLGaveOwnership').$newowner;
+				$message .= $this->get_translation('ACLGaveOwnership').$new_owner;
 
 				$user = $this->load_single(
 					"SELECT email, email_confirm ".
 					"FROM {$this->config['user_table']} ".
-					"WHERE user_name = '".quote($newowner)."' ".
+					"WHERE user_name = '".quote($this->dblink, $new_owner)."' ".
 					"LIMIT 1");
 
 				if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')
 				{
 					$subject = $this->config['site_name'].'. '.$this->get_translation('NewPageOwnership');
-					$body  = $this->get_translation('EmailHello').$newowner.".\n\n";
+					$body  = $this->get_translation('EmailHello').$new_owner.".\n\n";
 					$body .= str_replace('%2', $this->config['site_name'], str_replace('%1', $this->get_user_name(), $this->get_translation('YouAreNewOwner')))."\n";
 					$body .= $ownedpages."\n";
 					$body .= $this->get_translation('PageOwnershipInfo')."\n";
@@ -228,8 +228,8 @@ if ($this->user_is_owner() || $this->is_admin())
 <?php
 
 ?>
-<p><label for="newowner"><?php echo $this->get_translation('SetOwner'); ?></label>
-<select id="newowner" name="newowner">
+<p><label for="new_owner"><?php echo $this->get_translation('SetOwner'); ?></label>
+<select id="new_owner" name="new_owner">
 	<option value=""><?php echo $this->get_translation('OwnerDontChange'); ?></option>
 	<?php
 	if ($users = $this->load_users())
