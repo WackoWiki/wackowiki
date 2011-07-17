@@ -443,6 +443,7 @@ $wacko_translation = array(
 	'MassClone' => 'Clone entire cluster',
 
 	'RenameText' => 'Преименувай',
+	'RenameTextTip'			=> 'Rename page',
 	'NewName' => 'Въведете ново име за тази страница',
 	'RenameButton' => 'Преименувай',
 	'AlredyExists' => '<em>Страница с име <strong>%1</strong> вече съществува.</em>',

@@ -237,7 +237,7 @@ else
 	// rename tab
 	echo echo_tab(
 		$this->href('rename'),
-		$this->get_translation('RenameText'),
+		$this->get_translation('RenameTip'),
 		($this->page && ($this->is_admin() || $this->user_is_owner() && (
 			($this->forum === true && $this->user_is_owner() && (int)$this->page['comments'] == 0) ||
 			($this->forum === false && $this->user_is_owner()))))
