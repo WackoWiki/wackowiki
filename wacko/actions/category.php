@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // settings:
 //	root		- where to start counting from (defaults to current tag)
-//	list		- make categories a clickable links which display pages of a given category (1 (default) or 0)
+//	list		- make categories clickable links which display pages of a given category (1 (default) or 0)
 //	ids			- display pages which belong to these comma-separated categories ids (default none)
 //	lang		- categories language if necessary (defaults to current page lang)
 //	inline		- display all categories on one line and not emphisize main categories (1 or 0 (default))
@@ -73,7 +73,9 @@ if ($list && ($ids || isset($_GET['category'])))
 	"FROM {$this->config['table_prefix']}category_page AS k ".
 		"INNER JOIN {$this->config['table_prefix']}page AS p ON (k.page_id = p.page_id) ".
 	"WHERE k.category_id IN ( ".quote($this->dblink, $category)." ) AND k.page_id = p.page_id ".
-		( $root ? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) " : '' ).
+		($root
+			? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) "
+			: '' ).
 	"ORDER BY p.$order ", 1))
 	{
 		if ($_words = $this->load_all(
