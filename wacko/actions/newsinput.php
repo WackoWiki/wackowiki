@@ -44,7 +44,15 @@ if ((isset($_POST['action'])) && $_POST['action'] == 'newsadd')
 		// redirecting to the edit form
 		$_SESSION['body']	= $template;
 		$_SESSION['title']	= $namehead;
-		$this->redirect($this->href('edit', $this->config['news_cluster'].'/'.date('Y/').date('F/').$name, '', 1));
+
+		// needs to be numeric for ordering
+		// TODO: add this as config option to Admin panel
+		// .date('Y/')				- 2011
+		// .date('Y/').date('m/')	- 2011/07 (default)
+		// .date('Y/').date('W/')	- 2011/29
+		$news_cluster_structure = date('Y/').date('m/');
+
+		$this->redirect($this->href('edit', $this->config['news_cluster'].'/'.$news_cluster_structure.$name, '', 1));
 	}
 }
 
