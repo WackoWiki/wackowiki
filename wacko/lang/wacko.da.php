@@ -445,7 +445,7 @@ $wacko_translation = array(
 	'MassClone' => 'Clone entire cluster',
 
 	'RenameText' => 'Omdøb',
-	'RenameTextTip'			=> 'Rename page',
+	'RenameTip'			=> 'Rename page',
 	'NewName' => 'Skriv nyt navn for siden',
 	'RenameButton' => 'Omdøb',
 	'AlredyExists' => '<em>Siden <strong>%1</strong> findes allerede.</em>',

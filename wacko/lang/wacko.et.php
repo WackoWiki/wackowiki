@@ -445,7 +445,7 @@ $wacko_translation = array(
 	'MassClone'				=> 'Clone entire cluster',
 
 	'RenameText' => 'Nimeta ümber',
-	'RenameTextTip'			=> 'Rename page',
+	'RenameTip'			=> 'Rename page',
 	'NewName' => 'Anna lehele uus nimi',
 	'RenameButton' => 'Nimeta ümber',
 	'AlredyExists' => '<em>Lehekülg <strong>%1</strong> juba eksisteerib.</em>',
