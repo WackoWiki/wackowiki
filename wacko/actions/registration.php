@@ -208,8 +208,12 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 				// INSERT user menu items
 				#$this->convert_into_menu_table($this->get_default_menu($lang), $_user_id['user_id']);
 
+				// add your user page template here
+				$user_page_template	= '**((user:'.$user_name.' '.$user_name.'))** ('.$this->format('::+::', 'pre_wacko').')';
+				$change_summary		= 'auto created';
+
 				// add user page
-				$this->save_page($this->config['users_page'].'/'.$user_name, '', 'your page', 'auto created', '', '', '', ($lang ? $lang : $this->config['language']), '', $user_name, true);
+				$this->save_page($this->config['users_page'].'/'.$user_name, '', $user_page_template, $change_summary, '', '', '', ($lang ? $lang : $this->config['language']), '', $user_name, true);
 
 				// send email
 				if ($this->config['enable_email'] == true)
