@@ -444,7 +444,8 @@ $wacko_translation = array(
 	'ClonedRedirect' => 'Modifier après création',
 	'MassClone'				=> 'Cloner le groupe tout entier',
 
-	'RenameText' => 'Cliquer ici pour renommer cette page',
+	'RenameText' => 'Renommer',
+	'RenameTextTip'			=> 'Renommer cette page',
 	'NewName' => 'Donner un nouveau nom à cette page',
 	'RenameButton' => 'Renommer',
 	'AlredyExists' => '<em>La page <strong>%1</strong> existe déjà .</em>',
