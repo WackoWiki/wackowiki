@@ -195,11 +195,11 @@ if ($this->user_is_owner() || $this->is_admin())
 	else
 	{
 		// load acls
-		$read_acl	= $this->load_acl($this->page['page_id'], 'read', 1, 0);
-		$write_acl	= $this->load_acl($this->page['page_id'], 'write', 1, 0);
-		$comment_acl= $this->load_acl($this->page['page_id'], 'comment', 1, 0);
-		$create_acl	= $this->load_acl($this->page['page_id'], 'create', 1, 0);
-		$upload_acl	= $this->load_acl($this->page['page_id'], 'upload', 1, 0);
+		$read_acl		= $this->load_acl($this->page['page_id'], 'read', 1, 0);
+		$write_acl		= $this->load_acl($this->page['page_id'], 'write', 1, 0);
+		$comment_acl	= $this->load_acl($this->page['page_id'], 'comment', 1, 0);
+		$create_acl		= $this->load_acl($this->page['page_id'], 'create', 1, 0);
+		$upload_acl		= $this->load_acl($this->page['page_id'], 'upload', 1, 0);
 
 		// show form
 		?>

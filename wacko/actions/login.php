@@ -211,7 +211,7 @@ else
 	if ($error)
 	{
 		# $this->set_message($error);
-		echo '<div class="error">'.$this->Format($error).'</div>';
+		echo '<div class="error">'.$this->format($error).'</div>';
 	}
 
 	echo '<div class="cssform">'."\n";
