@@ -1003,10 +1003,11 @@ td.form_left, th.form_left {
 
 .page_settings {
 	float: left;
+	width: 60%;
 }
 .page_tools {
 	float: right;
-	padding: 0px 40px 10px 10px;
+	padding: 0px 10px 10px 10px;
 	
 }
 
@@ -1043,6 +1044,11 @@ div.newsarticle:hover {
 .newstitle {
 	font-size: 13px;
 	border: none;
+/*	background-color: #DDEEFF;
+	border-color: #CCCCAA -moz-use-text-color;
+	border-style: dashed none;
+	border-width: 1px 0;
+	padding: 3px 0 3px 10px;*/
 }
 
 .newsinfo {
