@@ -298,6 +298,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		if ($this->config['edit_summary'] != 0)
 		{
 			$output .= "<label for=\"edit_note\">".$this->get_translation('EditNote').":</label><br />";
+			// briefly describe your changes (corrected spelling, fixed grammar, improved formatting)
 			$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
 			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br />";
 		}
