@@ -77,50 +77,18 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		// Only show captcha if the admin enabled it in the config file
 		if ($this->config['captcha_new_comment'])
 		{
-			// Don't load the captcha at all if the GD extension isn't enabled
-			if (extension_loaded('gd'))
+			// captcha validation
+			if ($this->validate_captcha() === false)
 			{
-				//check whether anonymous user
-				//anonymous user has the IP or host name as name
-				//if name contains '.', we assume it's anonymous
-				#if (strpos($this->get_user_name(), '.'))
-				if ($this->get_user_name()== false)
-				{
-					//anonymous user, check the captcha
-					if (!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
-					{
-						#echo '++++TEST++++';
-
-						if ($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
-						{
-							// reset freecap session vars
-							// cannot stress enough how important it is to do this
-							// defeats re-use of known image with spoofed session id
-							$_SESSION['freecap_attempts'] = 0;
-							$_SESSION['freecap_word_hash'] = false;
-							$_SESSION['freecap_old_comment'] = '';
-
-							// now process form
-							$word_ok = true;
-						}
-						else
-						{
-							$word_ok = false;
-						}
-					}
-					else
-					{
-						$word_ok = false;
-					}
-
-					if (!$word_ok)
-					{
-						//not the right word
-						$error = $this->get_translation('SpamAlert');
-						$this->set_message($this->get_translation('SpamAlert'));
-						$_SESSION['freecap_old_comment'] = $body;
-					}
-				}
+				//not the right word
+				$error = $this->get_translation('CaptchaFailed');
+				$this->set_message($this->get_translation('CaptchaFailed'));
+				$_SESSION['freecap_old_comment'] = $body;
+			}
+			else
+			{
+				// captcha passed, empty session
+				$_SESSION['freecap_old_comment'] = '';
 			}
 		}
 

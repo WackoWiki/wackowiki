@@ -808,7 +808,7 @@ $wacko_translation = array(
 
 	// Captcha
 	'Captcha' => 'Merci de taper le mot que vous voyez dans l&rsquo;image',
-	'SpamAlert' => 'Le mot que vous avez tapé n&rsquo;est pas celui de l&rsquo;image',
+	'CaptchaFailed' => 'Le mot que vous avez tapé n&rsquo;est pas celui de l&rsquo;image. S&rsquo;il vous plaît essayez de nouveau.',
 	'CaptchaReload' => 'Nouveau mot dans une image',
 	'CaptchaReloadWarning' => 'Désolé, je ne peux pas ré-afficher l&rsquo;image contenant le mot. Vous devez rafraîchir la page pour ce faire',
 
