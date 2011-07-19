@@ -6051,6 +6051,80 @@ class Wacko
 		return $pagination;
 	}
 
+	// show captcha form on a page. must be incorporated as an input
+	// form component in every page that uses captcha testing
+	//		$inline	= adds <br /> between elements
+	function show_captcha($inline = true)
+	{
+		// Don't load the captcha at all if the GD extension isn't enabled
+		if (extension_loaded('gd'))
+		{
+			// check whether anonymous user
+			// anonymous user has no name
+			// if false, we assume it's anonymous
+			if ($this->get_user_name() == false)
+			{
+				echo $inline ? '' : '<br />';
+				echo '<label for="captcha">'.$this->get_translation('Captcha').':</label>';
+				echo $inline ? '' : '<br />';
+				echo '<img src="'.$this->config['base_url'].'lib/captcha/freecap.php?'.session_name().'='.session_id().'" id="freecap" alt="'.$this->get_translation('Captcha').'" />';
+				echo '<a href="" onclick="this.blur(); new_freecap(); return false;" title="'.$this->get_translation('CaptchaReload').'">';
+				echo '<img src="'.$this->config['base_url'].'images/reload.png" width="18" height="17" alt="'.$this->get_translation('CaptchaReload').'" /></a> <br />';
+				#echo $inline ? '' : '<br />';
+				echo '<input id="captcha" type="text" name="captcha" maxlength="6" style="width: 273px;" />';
+				echo $inline ? '' : '<br />';
+			}
+		}
+	}
+
+	// checks whether user's captcha solution was right. function
+	// takes no arguments, instead it recieves user input from
+	// HTTP-POST variable 'captcha', submitted through webform.
+	function validate_captcha()
+	{
+		// Don't load the captcha at all if the GD extension isn't enabled
+		if (extension_loaded('gd'))
+		{
+			// check whether anonymous user
+			// anonymous user has no name
+			// if false, we assume it's anonymous
+			if ($this->get_user_name() == false)
+			{
+				//anonymous user, check the captcha
+				if (!empty($_SESSION['freecap_word_hash']) && !empty($_POST['captcha']))
+				{
+					if ($_SESSION['hash_func'](strtolower($_POST['captcha'])) == $_SESSION['freecap_word_hash'])
+					{
+						// reset freecap session vars
+						// cannot stress enough how important it is to do this
+						// defeats re-use of known image with spoofed session id
+						$_SESSION['freecap_attempts'] = 0;
+						$_SESSION['freecap_word_hash'] = false;
+
+						// now process form
+						$word_ok = true;
+					}
+					else
+					{
+						$word_ok = false;
+					}
+				}
+				else
+				{
+					$word_ok = false;
+				}
+
+				if (!$word_ok)
+				{
+					//not the right word
+					#$this->set_message($this->get_translation('CaptchaFailed'));
+				}
+
+				return $word_ok;
+			}
+		}
+	}
+
 	// log event into the system journal. $message may use wiki
 	// syntax, however if used before locale translations registration,
 	// will be saved in plain text only.

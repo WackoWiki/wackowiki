@@ -90,44 +90,10 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 			// captcha code starts
 			if (($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
 			{
-				// Don't load the captcha at all if the GD extension isn't enabled
-				if (extension_loaded('gd'))
+				// captcha validation
+				if ($this->validate_captcha() === false)
 				{
-					// check whether anonymous user
-					// anonymous user has no name
-					// if false, we assume it's anonymous
-					if ($this->get_user_name() == false)
-					{
-						//anonymous user, check the captcha
-						if (!empty($_SESSION['freecap_word_hash']) && !empty($_POST['word']))
-						{
-							if ($_SESSION['hash_func'](strtolower($_POST['word'])) == $_SESSION['freecap_word_hash'])
-							{
-								// reset freecap session vars
-								// cannot stress enough how important it is to do this
-								// defeats re-use of known image with spoofed session id
-								$_SESSION['freecap_attempts'] = 0;
-								$_SESSION['freecap_word_hash'] = false;
-
-								// now process form
-								$word_ok = true;
-							}
-							else
-							{
-								$word_ok = false;
-							}
-						}
-						else
-						{
-							$word_ok = false;
-						}
-
-						if (!$word_ok)
-						{
-							//not the right word
-							$error = $this->get_translation('SpamAlert');
-						}
-					}
+					$error .= $this->get_translation('CaptchaFailed');
 				}
 			}
 
@@ -403,25 +369,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	// Only show captcha if the admin enabled it in the config file
 	if (($this->page && $this->config['captcha_edit_page']) || (!$this->page && $this->config['captcha_new_page']))
 	{
-		// Don't load the captcha at all if the GD extension isn't enabled
-		if (extension_loaded('gd'))
-		{
-			// check whether anonymous user
-			// anonymous user has no name
-			// if false, we assume it's anonymous
-			if ($this->get_user_name() == false)
-			{
-?>
-	<label for="captcha"><?php echo $this->get_translation('Captcha');?>:</label>
-	<br />
-	<img src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php?<?php echo session_name();?>=<?php echo session_id(); ?>" id="freecap" alt="<?php echo $this->get_translation('Captcha');?>" /> <a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->get_translation('CaptchaReload'); ?>"><img src="<?php echo $this->config['base_url'];?>images/reload.png" width="18" height="17" alt="<?php echo $this->get_translation('CaptchaReload'); ?>" /></a>
-	<br />
-	<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
-	<br />
-	<br />
-<?php
-			}
-		}
+		$this->show_captcha(false);
 	}
 	// end captcha
 ?>

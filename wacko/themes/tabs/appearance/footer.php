@@ -304,25 +304,7 @@ switch (count($files))
 				// Only show captcha if the admin enabled it in the config file
 				if ($this->config['captcha_new_comment'])
 				{
-					// Don't load the captcha at all if the GD extension isn't enabled
-					if (extension_loaded('gd'))
-					{
-						#if(strpos($this->get_user_name(), '.'))
-						if ($this->get_user_name()== false)
-						{
-							?>
-<label for="captcha"><?php echo $this->get_translation('Captcha');?>:</label>
-<br />
-<img src="<?php echo $this->config['base_url'];?>lib/captcha/freecap.php?<?php echo session_name();?>=<?php echo session_id(); ?>" id="freecap" alt="<?php echo $this->get_translation('Captcha');?>" />
-<a href="" onclick="this.blur(); new_freecap(); return false;" title="<?php echo $this->get_translation('CaptchaReload'); ?>">
-<img src="<?php echo $this->config['base_url'];?>images/reload.png" width="18" height="17" alt="<?php echo $this->get_translation('CaptchaReload'); ?>" /></a>
-<br />
-<input id="captcha" type="text" name="word" maxlength="6" style="width: 273px;" />
-<br />
-<br />
-							<?php
-						}
-					}
+					$this->show_captcha(false);
 				}
 				// end captcha
 				?>

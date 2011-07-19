@@ -808,7 +808,7 @@ $wacko_translation = array(
 
 	// Captcha
 	'Captcha' => 'Please type the word you read in the image',
-	'SpamAlert' => 'You have entered the captcha word incorrectly',
+	'CaptchaFailed' => 'You have entered the captcha word incorrectly. Por favor, tente novamente.',
 	'CaptchaReload' => 'New Captcha',
 	'CaptchaReloadWarning' => 'Sorry, cannot reload the captcha image, you will have to reload the page to do that',
 

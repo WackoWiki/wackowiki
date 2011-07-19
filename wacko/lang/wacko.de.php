@@ -809,7 +809,7 @@ $wacko_translation = array(
 
 	// Captcha
 	'Captcha'				=> 'Bitte schreibe das Wort welches du im Bild lesen kannst',
-	'SpamAlert'				=> 'Du hast das Captcha-Wort nicht korrekt eingegeben.',
+	'CaptchaFailed'				=> 'Du hast das Captcha-Wort nicht korrekt eingegeben. Bitte versuche es erneut.',
 	'CaptchaReload'			=> 'Neues Captcha',
 	'CaptchaReloadWarning'	=> 'Kann das Captcha Bild nicht neu laden, du musst die Seite neu laden um das zu tun.',
 
