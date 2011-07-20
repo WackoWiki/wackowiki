@@ -14,17 +14,20 @@ if (!function_exists('load_recently_commented'))
 		$comments	= '';
 		$pagination	= '';
 
+		// going around the limitations of GROUP BY when used along with ORDER BY
+		// http://dev.mysql.com/doc/refman/5.5/en/example-maximum-column-group-row.html
 		if ($ids = $wacko->load_all(
 			"SELECT a.page_id ".
 			"FROM ".$wacko->config['table_prefix']."page a ".
+				"LEFT JOIN ".$wacko->config['table_prefix']."page a2 ON (a.comment_on_id = a2.comment_on_id AND a.created < a2.created) ".
 			($for
-				? 	"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
-					"WHERE ".
-						"b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
-				: 	"WHERE a.comment_on_id <> '0' ").
+				? 	"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				:	"").
+			"WHERE ".
 			($for
-				? 	"GROUP BY a.comment_on_id ORDER BY a.created DESC"
-				:	"GROUP BY a.comment_on_id ORDER BY a.created DESC")
+				? 	"a2.page_id IS NULL AND b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
+				: 	"a2.page_id IS NULL AND a.comment_on_id <> '0' ").
+			"ORDER BY a.created DESC"
 			, 1));
 		{
 				if ($ids)
