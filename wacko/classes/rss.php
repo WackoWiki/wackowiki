@@ -42,7 +42,7 @@ class RSS
 		$name	= 'changes';
 		$count	= '';
 
-		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->get_charset()."\"?>\n";
+		$xml = "<?xml version=\"1.0\" encoding=\"".$this->charset."\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
 		$xml .= "<title>".$this->engine->config['site_name'].$this->engine->get_translation('RecentChangesTitleXML')."</title>\n";
@@ -222,7 +222,7 @@ class RSS
 		$access	= '';
 
 		// build output
-		$xml = "<?xml version=\"1.0\" encoding=\"".$this->engine->get_charset()."\"?>\n";
+		$xml = "<?xml version=\"1.0\" encoding=\"".$this->charset."\"?>\n";
 		$xml .= "<?xml-stylesheet type=\"text/css\" href=\"".$this->engine->config['theme_url']."css/wacko.css\" media=\"screen\"?>\n";
 		$xml .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 		$xml .= "<channel>\n";
