@@ -110,7 +110,7 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="disable_wikiname"><strong>Disable WikiName:</strong><br />
-				<small>Disable the the madatoty use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.</label></td>
+				<small>Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.</label></td>
 				<td><input type="checkbox" id="disable_wikiname" name="disable_wikiname" value="1"<?php echo ( $engine->config['antidupe'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr>
