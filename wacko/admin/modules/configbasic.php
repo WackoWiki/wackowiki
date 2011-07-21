@@ -189,6 +189,14 @@ function admin_configbasic(&$engine, &$module)
 				</th>
 			</tr>
 			<tr class="hl_setting">
+				<td class="label"><label for="upload"><strong>Right to the upload files:</strong><br />
+				<small><tt>"admins"</tt> means that only users belongig to admins group can upload the files. <tt>"1"</tt> means that uploading is opened to everybody. <tt>"0"</tt> means that upload disabled</small></label></td>
+				<td><input maxlength="7" style="width:200px;" id="upload" name="upload" value="<?php echo htmlspecialchars($engine->config['upload']);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
 				<td class="label"><label for="upload_images_only"><strong>Allow only upload of images:</strong><br />
 				<small>Allow only uploading of image files on the page.</small></label></td>
 				<td><input type="checkbox" id="upload_images_only" name="upload_images_only" value="1"<?php echo ( $engine->config['upload_images_only'] ? ' checked="checked"' : '' );?> /></td>
