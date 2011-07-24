@@ -47,7 +47,7 @@ if (!function_exists('load_recently_commented'))
 
 					// load complete comments
 					$comments = $wacko->load_all(
-						"SELECT b.tag as comment_on_tag, b.title as page_title, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.title AS comment_title, a.user_id, u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.modified AS comment_time ".
+						"SELECT b.tag as comment_on_tag, b.title as page_title, a.comment_on_id, b.supertag, a.tag AS comment_tag, a.title AS comment_title, a.user_id, u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.created AS comment_time ".
 						"FROM ".$wacko->config['table_prefix']."page a ".
 							"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 							"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
