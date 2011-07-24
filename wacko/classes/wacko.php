@@ -1603,7 +1603,7 @@ class Wacko
 			|| $user_page == true)
 		{
 			// for forum topic prepare description
-			if (!$comment_on_id)
+			if (!$comment_on_id && $this->forum)
 			{
 				$desc = $this->format(substr($body, 0, 500), 'cleanwacko');
 				$desc = ( strlen($desc) > 240 ? substr($desc, 0, 240).'[..]' : $desc.' (-)' );
