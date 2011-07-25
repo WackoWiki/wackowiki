@@ -1744,7 +1744,7 @@ class Wacko
 							:	"").
 						"lang			= '".quote($this->dblink, $lang)."', ".
 
-						"title			= '".quote($this->dblink, htmlspecialchars($title))."'");
+						"title			= '".quote($this->dblink, $title)."'");
 
 				// IMPORTANT! lookup newly created page_id
 				$page_id = $this->get_page_id($tag);
@@ -1953,7 +1953,7 @@ class Wacko
 									"reviewed_time	= NOW(), ".
 									"reviewer_id	= '".quote($this->dblink, $reviewer_id)."', "
 								:	"").
-							"title			= '".quote($this->dblink, htmlspecialchars($title))."' ".
+							"title			= '".quote($this->dblink, $title)."' ".
 						"WHERE tag = '".quote($this->dblink, $tag)."' ".
 						"LIMIT 1");
 				}
