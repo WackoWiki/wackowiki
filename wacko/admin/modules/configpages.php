@@ -158,7 +158,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="settings_page"><strong>Profile Settings:</strong><br />
-				<small>Page customize the user profile (action <tt>{{UserSettings}}</tt>).</small></label></td>
+				<small>Page customize the user profile (action <tt>{{usersettings}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="settings_page" name="settings_page" value="<?php echo htmlspecialchars($engine->config['settings_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
@@ -246,7 +246,7 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="todo_page"><strong>ToDo:</strong><br />
-				<small>Page with a list of To Do (constructed with the help of <tt>{{BackLinks}}</tt> and makro <tt>::*::</tt>).</small></label></td>
+				<small>Page with a list of To Do (constructed with the help of <tt>{{backlinks}}</tt> and makro <tt>::*::</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="todo_page" name="todo_page" value="<?php echo htmlspecialchars($engine->config['todo_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
