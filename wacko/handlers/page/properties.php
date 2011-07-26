@@ -185,14 +185,12 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 			echo "</td>";
 			echo "</tr>\n";
 			echo "<tr>";
-?>
-<th class="form_left"></th>
-<td class="form_right"><input type="submit" name="extended"
-	value="<?php echo $this->get_translation('MetaStoreButton'); ?>"
-	style="width: 120px" accesskey="s" /> &nbsp; <input type="button"
-	value="<?php echo $this->get_translation('MetaCancelButton'); ?>"
-	onclick="history.back();" style="width: 120px" /></td>
-			<?php
+
+			echo '<th class="form_left"></th>';
+			echo '<td class="form_right">';
+			echo '	<input type="submit" name="extended" value="'.$this->get_translation('MetaStoreButton').'" style="width: 120px" accesskey="s" /> &nbsp; <input type="button" value="'.$this->get_translation('MetaCancelButton').'" onclick="history.back();" style="width: 120px" />';
+			echo '</td>';
+
 			echo "</tr>\n</table>";
 			echo $this->form_close();
 			echo "</div>";
@@ -230,57 +228,52 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 			echo '<th class="form_left" scope="row"><label for="lang">'.$this->get_translation('SetLang').'</label></th>';
 			echo '<td class="form_right"><select id="lang" name="lang">';
 
-if (!($clang = $this->page['lang']))
-{
-	$clang = $this->config['language'];
-}
+			if (!($clang = $this->page['lang']))
+			{
+				$clang = $this->config['language'];
+			}
 
-if ($langs = $this->available_languages())
-{
-	foreach ($langs as $lang)
-	{
-		echo "<option value=\"".$lang."\" ".($clang==$lang ? "selected=\"selected\"" : "").">".$lang."</option>\n";
-	}
-}
-?>
-</select>
+			if ($langs = $this->available_languages())
+			{
+				foreach ($langs as $lang)
+				{
+					echo "<option value=\"".$lang."\" ".($clang==$lang ? "selected=\"selected\"" : "").">".$lang."</option>\n";
+				}
+			}
 
-<div class="BewareChangeLang"><?php echo $this->get_translation('BewareChangeLang'); ?></div>
-</td>
-</tr>
-<?php
-if ($this->config['allow_themes_per_page'] == true)
-{
-	echo "<tr class=\"lined\">\n";
-	echo "<th class=\"form_left\" scope=\"row\"><label for=\"theme\">".$this->get_translation('ChooseTheme')."</label></th>\n";
-	echo "<td class=\"form_right\"><select id=\"theme\" name=\"theme\">\n";
+			echo "</select>\n";
 
-	echo '<option value="">--</option>';
-	$themes = $this->available_themes();
+			echo '<div class="BewareChangeLang">'.$this->get_translation('BewareChangeLang').'</div>';
+			echo "</td>\n";
+			echo "</tr>\n";
 
-	for ($i = 0; $i < count($themes); $i++)
-	{
-		echo '<option value="'.$themes[$i].'" '.
-			(isset($this->page['theme']) && $this->page['theme'] == $themes[$i]
-				? "selected=\"selected\""
-				: ""
-			).">".$themes[$i]."</option>\n";
-	}
+			if ($this->config['allow_themes_per_page'] == true)
+			{
+				echo "<tr class=\"lined\">\n";
+				echo "<th class=\"form_left\" scope=\"row\"><label for=\"theme\">".$this->get_translation('ChooseTheme')."</label></th>\n";
+				echo "<td class=\"form_right\"><select id=\"theme\" name=\"theme\">\n";
 
-	echo "</select></td>\n";
-	echo "</tr>\n";
-}
+				echo '<option value="">--</option>';
+				$themes = $this->available_themes();
 
-echo "<tr>\n";
-?>
-<th class="form_left"></th>
-<td class="form_right"><input type="submit"
-	value="<?php echo $this->get_translation('MetaStoreButton'); ?>"
-	style="width: 120px" accesskey="s" /> &nbsp; <input type="button"
-	value="<?php echo $this->get_translation('MetaCancelButton'); ?>"
-	onclick="history.back();" style="width: 120px" /></td>
+				for ($i = 0; $i < count($themes); $i++)
+				{
+					echo '<option value="'.$themes[$i].'" '.
+						(isset($this->page['theme']) && $this->page['theme'] == $themes[$i]
+							? "selected=\"selected\""
+							: ""
+						).">".$themes[$i]."</option>\n";
+				}
 
-<?php
+				echo "</select></td>\n";
+				echo "</tr>\n";
+			}
+
+			echo "<tr>\n";
+			echo '<th class="form_left"></th>';
+			echo '<td class="form_right">';
+			echo '<input type="submit" value="'.$this->get_translation('MetaStoreButton').'" style="width: 120px" accesskey="s" /> &nbsp; <input type="button" value="'.$this->get_translation('MetaCancelButton').'" onclick="history.back();" style="width: 120px" />';
+			echo '</td>';
 		}
 		else
 		{
@@ -297,6 +290,7 @@ echo "<tr>\n";
 			echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SetLang')."</th>";
 			echo "<td class=\"form_right\">".$this->page['lang']."</td>";
 		}
+
 		echo "</tr>\n</table>";
 		echo $this->form_close();
 		echo "</div>";
@@ -330,6 +324,7 @@ echo "<tr>\n";
 	echo "<th class=\"form_left\" scope=\"row\">".$this->get_translation('SettingsHits')."</th>";
 	echo "<td class=\"form_right\">".number_format($this->page['hits'], 0, ',', '.')."</td>";
 	echo "</tr>\n";
+
 	if ($this->config['footer_rating'] != 0)
 	{
 		echo "<tr class=\"lined\">";
@@ -338,57 +333,52 @@ echo "<tr>\n";
 		unset($rating);
 		echo "</tr>\n";
 	}
+
 	echo "</tr>\n</table>";
 
-	?>
-	<br />
+	echo "<br />";
 
-<ul>
-	<li><a href="<?php echo $this->href('edit');?>"><?php echo $this->get_translation('SettingsEdit'); ?></a></li>
-	<li><a href="<?php echo $this->href('revisions');?>"><?php echo $this->get_translation('SettingsRevisions'); ?></a></li>
-	<li><a href="<?php echo $this->href('clone');?>"><?php echo $this->get_translation('SettingsClone'); ?></a></li>
-	<?php
+	echo "<ul>";
+	echo '<li><a href="'.$this->href('edit').'">'.$this->get_translation('SettingsEdit').'</a></li>';
+	echo '<li><a href="'.$this->href('revisions').'">'.$this->get_translation('SettingsRevisions').'</a></li>';
+	echo '<li><a href="'.$this->href('clone').'">'.$this->get_translation('SettingsClone').'</a></li>';
+
 	// Rename link (shows only if owner is current user or Admin)
 	if ($this->user_is_owner() || $this->is_admin())
 	{
-		echo("<li><a href=\"".$this->href('rename')."\">".$this->get_translation('SettingsRename')."</a>
-	</li>");
+		echo "<li><a href=\"".$this->href('rename')."\">".$this->get_translation('SettingsRename')."</a></li>";
 	}
-	?>
-	<?php // Remove link (shows only for page owner if allowed)
+
+	// Remove link (shows only for page owner if allowed)
 	if ($this->user_is_owner() && !$this->config['remove_onlyadmins'] || $this->is_admin())
 	{
-		echo("<li><a href=\"".$this->href('remove')."\">".$this->get_translation('SettingsRemove')."</a></li>\n");
-		echo("<li><a href=\"".$this->href('purge')."\">".$this->get_translation('SettingsPurge')."</a></li>\n");
+		echo "<li><a href=\"".$this->href('remove')."\">".$this->get_translation('SettingsRemove')."</a></li>\n";
+		echo "<li><a href=\"".$this->href('purge')."\">".$this->get_translation('SettingsPurge')."</a></li>\n";
 	}
-	?>
-	<?php
+
 	// Moderate link (shows only if current user is Moderator or Admin)
 	if ($this->is_moderator() || $this->is_admin())
 	{
-		echo("<li><a href=\"".$this->href('moderate')."\">".$this->get_translation('SettingsModerate')."</a></li>\n");
+		echo "<li><a href=\"".$this->href('moderate')."\">".$this->get_translation('SettingsModerate')."</a></li>\n";
 	}
-	?>
-	<?php
+
 	// ACL link (shows only if owner is current user or Admin)
 	if ($this->user_is_owner() || $this->is_admin())
 	{
-		echo("<li><a href=\"".$this->href('permissions')."\">".$this->get_translation('SettingsPermissions')."</a></li>\n");
+		echo "<li><a href=\"".$this->href('permissions')."\">".$this->get_translation('SettingsPermissions')."</a></li>\n";
 	}
-	?>
-	<li><a href="<?php echo $this->href('categories'); ?>"><?php echo $this->get_translation('SettingsCategories'); ?></a></li>
-	<li><a href="<?php echo $this->href('upload'); ?>"><?php echo $this->get_translation('SettingsUpload'); ?></a></li>
-	<li><a href="<?php echo $this->href('referrers'); ?>"><?php echo $this->get_translation('SettingsReferrers'); ?></a></li>
-	<li><a href="<?php echo $this->href('watch'); ?>"><?php echo ($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')); ?></a></li>
-	<li><a href="<?php echo $this->href('print');?>"><?php echo $this->get_translation('SettingsPrint'); ?></a></li>
-	<li><a href="<?php echo $this->href('msword');?>"><?php echo $this->get_translation('SettingsMsword'); ?></a></li>
-	<li><a href="<?php echo $this->href('latex');?>"><?php echo $this->get_translation('SettingsLatex'); ?></a></li>
-	<li><a href="<?php echo $this->href('export.xml');?>"><?php echo $this->get_translation('SettingsXML'); ?></a></li>
-</ul>
 
+	echo '<li><a href="'.$this->href('categories').'">'.$this->get_translation('SettingsCategories').'</a></li>';
+	echo '<li><a href="'.$this->href('upload').'">'.$this->get_translation('SettingsUpload').'</a></li>';
+	echo '<li><a href="'.$this->href('referrers').'">'.$this->get_translation('SettingsReferrers').'</a></li>';
+	echo '<li><a href="'.$this->href('watch').'">'.($this->iswatched === true ? $this->get_translation('RemoveWatch') : $this->get_translation('SetWatch')).'</a></li>';
+	echo '<li><a href="'.$this->href('print').'">'.$this->get_translation('SettingsPrint').'</a></li>';
+	# echo '<li><a href="'.$this->href('msword').'">'.$this->get_translation('SettingsMsword').'</a></li>';
+	# echo '<li><a href="'.$this->href('latex').'">'.$this->get_translation('SettingsLatex').'</a></li>';
+	echo '<li><a href="'.$this->href('export.xml').'">'.$this->get_translation('SettingsXML').'</a></li>';
 
-</div>
-	<?php
+	echo '</ul>';
+	echo '</div>';
 }
 
 else
