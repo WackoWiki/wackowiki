@@ -3383,12 +3383,12 @@ class Wacko
 
 	function header($mod = '')
 	{
-		return $this->include_buffered('header'.$mod.'.php', 'Theme is corrupt: '.$this->config['theme'], '', 'themes/'.$this->config['theme'].'/appearance');
+		return $this->include_buffered('header'.$mod.'.php', $this->get_translation('ThemeCorrupt').': '.$this->config['theme'], '', 'themes/'.$this->config['theme'].'/appearance');
 	}
 
 	function footer($mod = '')
 	{
-		return $this->include_buffered('footer'.$mod.'.php', 'Theme is corrupt: '.$this->config['theme'], '', 'themes/'.$this->config['theme'].'/appearance');
+		return $this->include_buffered('footer'.$mod.'.php', $this->get_translation('ThemeCorrupt').': '.$this->config['theme'], '', 'themes/'.$this->config['theme'].'/appearance');
 	}
 
 	function use_class($class_name, $class_dir = '', $file_name = '')

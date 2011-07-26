@@ -98,6 +98,7 @@ $wacko_translation = array(
 	'HereLink' => 'тук',
 	'PageHandlerMoreTip' => 'more',
 
+	'ThemeCorrupt' => 'Theme is corrupt',
 	'DoesNotExists' => 'Такава страница не съществува.',
 	'PromptCreate' => 'Искате ли <a href="%1">да я съзадете</a> ?',
 	'Revision' => 'Това е стара версия на <a href="%1">%2</a> от %3.',

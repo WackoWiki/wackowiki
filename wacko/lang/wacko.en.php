@@ -101,6 +101,7 @@ $wacko_translation = array(
 	'HereLink' => 'here',
 	'PageHandlerMoreTip' => 'more',
 
+	'ThemeCorrupt' => 'Theme is corrupt',
 	'DoesNotExists' => 'This page doesn\'t exist.',
 	'PromptCreate' => 'Maybe you want to <b><a href="%1">create</a></b> it?',
 	'Revision' => 'This is an old revision of <a href="%1">%2</a> from %3 edited by %4.',
