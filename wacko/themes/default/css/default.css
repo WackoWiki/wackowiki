@@ -1131,22 +1131,32 @@ table.formation th, tr.formation th {
 }
 
 #handler {
+	/* clear:both; */
 	float:right;
 	margin:0 auto;
-	position:relative;
 	text-align:left;
+	z-index:1000;
+	position:relative;
 }
 #handler ul {
 	list-style:none outside none;
+	float:right;
+	position:relative;
 	margin:0;
 	padding:0;
 }
 
-#handler li {
+#handler ul li {
+	display:block;
 	float:left;
+	position:relative;
 	margin:0;
 	padding:1px 0.5em 4px;
 	white-space:nowrap;
+}
+
+#handler ul li a {
+	display:block;
 }
 
 #handler li.search{
@@ -1154,7 +1164,7 @@ table.formation th, tr.formation th {
 }
 
 #handler li:hover {
-	background-color: #FFFFFF;
+	/* background-color: #FFFFFF; */
 }
 
 #handler li.active {
@@ -1164,17 +1174,24 @@ table.formation th, tr.formation th {
 	background-color: #FCFCFC;
 }
 
-#handler ul.dropdown_menu {
-	border-top: 0.5em solid transparent;
-}
-
-.dropdown_menu a {
-	background: none repeat scroll 0 0 transparent !important;
-	display: block;
-}
-
-.dropdown_menu ul {
+/* Submenu items */
+#handler ul ul {
+	display:none; /* Sub menus are hidden by default */
+	position:absolute;
+	/* top:0em; */
+	background: none repeat scroll 0 0 white;
 	padding-top: 4px !important;
+	left: -1px;
+	right:auto;
+	width:auto;
+	border-color: #CCCCCC;
+	border-style:solid;
+	border-width:0 1px 1px;
+
+}
+
+#handler ul ul a {
+	background: none repeat scroll 0 0 transparent;
 }
 
 .dropdown_arrow {
@@ -1182,43 +1199,34 @@ table.formation th, tr.formation th {
 	text-decoration: none;
 }
 
-.dropdown_menu li {
-	background: none repeat scroll 0 0 white;
-	float: none !important;
-	text-transform: none;
-	vertical-align: baseline;
-}
-
-#handler .dropdown_menu {
-	left: 0;
-	background: none repeat scroll 0 0 transparent;
-	top: 0;
-	display: none;
-	position: absolute;
+#handler ul ul li {
+	left:auto;  /*resets the left: on the parent li */
+	margin:0; /* Reset the 1px margin from the top menu */
+	clear:left;
+	width:100%;
+	margin: 0;
+	padding: 0;
+	/* background: none repeat scroll 0 0 white; */
 	white-space: nowrap;
-	z-index: 30;
-	border: 1px solid #CCCCCC;
+	vertical-align: baseline;
+
 }
 
-#handler ul.dropdown_menu {
-	display: none;
-	float: none;
-}
-
-#handler ul.dropdown_menu {
-	top: 1.42em;
-	left: 7em;
-}
-
-#handler li.dropdown_menu {
-	border: 1px solid #F2F2F2;
-	margin-left: 2px;
-	padding: 0 2px;
-}
-
-#handler  li:hover ul.dropdown_menu {
+#handler ul ul li a, #handler ul li.active li a, #handler ul li:hover ul li a {
+	background: none repeat scroll 0 0 transparent;
 	display: block;
-	float: none;
+	float: left;
+	font-weight: normal;
+	line-height: 1.4em;
+	width: 100%;
+	margin: 0;
+	padding: 0.25em 0.5em 0.2em;
+}
+
+
+/* Make the sub menus appear on hover */
+#handler ul li:hover ul {
+	display: block; /* Show the sub menus */
 }
 	
 #handler #more-icon {
