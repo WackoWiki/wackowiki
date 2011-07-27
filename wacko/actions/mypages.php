@@ -6,11 +6,12 @@ if (!defined('IN_WACKO'))
 }
 
 // actions/mypages.php
+if (!isset($title))		$title = '';
 if (!isset($bydate)) $bydate = '';
 if (!isset($max)) $max = '';
 if (!isset($bychange)) $bychange = '';
-$curChar = '';
-$curday = '';
+$cur_char = '';
+$cur_day = '';
 
 if ($user_id = $this->get_user_id())
 {
@@ -31,6 +32,7 @@ if ($user_id = $this->get_user_id())
 		echo "<br />[<a href=\"".$this->href('', '', 'mode=mypages')."#list"."\">".
 		$this->get_translation('OrderABC')."</a>] [<a href=\"".$this->href('', '', 'mode=mypages&amp;bychange=1')."".($this->config['rewrite_mode'] ? "?" : "&amp;")."#list"."\">".
 		$this->get_translation('OrderChange')."</a>] <br /><br />\n";
+
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$prefix}page ".
@@ -40,12 +42,12 @@ if ($user_id = $this->get_user_id())
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mypages&amp;bydate=1#list');
 
 		if ($pages = $this->load_all(
-		"SELECT tag, created ".
-		"FROM {$prefix}page ".
-		"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
-			"AND comment_on_id = '0' ".
-		"ORDER BY created DESC, tag ASC ".
-		"LIMIT {$pagination['offset']}, $limit", 1))
+			"SELECT tag, title, created ".
+			"FROM {$prefix}page ".
+			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
+				"AND comment_on_id = '0' ".
+			"ORDER BY created DESC, tag ASC ".
+			"LIMIT {$pagination['offset']}, $limit", 1))
 		{
 			echo "<ul class=\"ul_list\">\n";
 
@@ -54,15 +56,15 @@ if ($user_id = $this->get_user_id())
 				// day header
 				list($day, $time) = explode(' ', $page['created']);
 
-				if ($day != $curday)
+				if ($day != $cur_day)
 				{
-					if ($curday)
+					if ($cur_day)
 					{
 						echo "</ul>\n<br /></li>\n";
 					}
 
 					echo "<li><strong>$day:</strong><ul>\n";
-					$curday = $day;
+					$cur_day = $day;
 				}
 
 				// print entry
@@ -73,7 +75,9 @@ if ($user_id = $this->get_user_id())
 			echo "</ul>\n</li>\n</ul>\n";
 			// pagination
 			if (isset($pagination['text']))
+			{
 				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			}
 		}
 		else
 		{
@@ -100,7 +104,7 @@ if ($user_id = $this->get_user_id())
 			$this->get_translation('OrderDate')."</a>]<br /><br />\n";
 
 		if ($pages = $this->load_all(
-			"SELECT p.tag AS tag, p.modified AS modified ".
+			"SELECT p.tag, p.title, p.modified ".
 			"FROM {$prefix}page AS p ".
 			"LEFT JOIN {$prefix}revision AS r ".
 				"ON (p.page_id = r.page_id ".
@@ -117,24 +121,30 @@ if ($user_id = $this->get_user_id())
 			{
 				// day header
 				list($day, $time) = explode(' ', $page['modified']);
-				if ($day != $curday)
+
+				if ($day != $cur_day)
 				{
-					if ($curday)
+					if ($cur_day)
 					{
 						echo "</ul>\n<br /></li>\n";
 					}
+
 					echo "<li><strong>$day:</strong><ul>\n";
-					$curday = $day;
+					$cur_day = $day;
 				}
 
 				// print entry
 				echo "<li>".$this->get_time_string_formatted($time)." (".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
 
 			}
+
 			echo "</ul>\n</li>\n</ul>\n";
+
 			// pagination
 			if (isset($pagination['text']))
+			{
 				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			}
 		}
 		else
 		{
@@ -157,7 +167,7 @@ if ($user_id = $this->get_user_id())
 		$this->get_translation('OrderChange')."</a>] <br /><br />\n";
 
 		if ($pages = $this->load_all(
-			"SELECT tag, modified ".
+			"SELECT tag, title, modified ".
 			"FROM {$prefix}page ".
 			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0' ".
@@ -168,29 +178,34 @@ if ($user_id = $this->get_user_id())
 
 			foreach ($pages as $page)
 			{
-				$firstChar = strtoupper($page['tag'][0]);
+				$first_char = strtoupper($page['tag'][0]);
 
-				if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))
+				if (!preg_match('/'.$this->language['ALPHA'].'/', $first_char))
 				{
-					$firstChar = '#';
+					$first_char = '#';
 				}
 
-				if ($firstChar != $curChar)
+				if ($first_char != $cur_char)
 				{
-					if ($curChar)
+					if ($cur_char)
 					{
 						echo "</ul>\n<br /></li>\n";
 					}
-					echo "<li><strong>$firstChar</strong><ul>\n";
-					$curChar = $firstChar;
+
+					echo "<li><strong>$first_char</strong><ul>\n";
+					$cur_char = $first_char;
 				}
 
 				echo "<li>".$this->compose_link_to_page($page['tag'])."</li>\n";
 			}
+
 			echo "</ul>\n</li>\n</ul>\n";
+
 			// pagination
 			if (isset($pagination['text']))
+			{
 				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			}
 		}
 		else
 		{

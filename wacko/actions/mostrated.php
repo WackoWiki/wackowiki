@@ -27,20 +27,24 @@ if (isset($top))
 		"LIMIT ".(int)$top);
 
 	echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('RatingTopPages').":</span></p>\n";
+
 	if ($pages)
 	{
 		echo '<table>'."\n";
+
 		foreach ($pages as $page)
 		{
 			echo '<tr class="lined"><td>'.$this->compose_link_to_page($page['pagetag'], '', $page['title'], 0).'</td>'.
 				 '<td style="width:10px; white-space:nowrap;">&nbsp;<strong>+'.round($page['rate'] / $page['votes'], 2).'</strong></td></tr>'."\n";
 		}
+
 		echo '</table>'."\n";
 	}
 	else
 	{
 		echo '<em>'.$this->get_translation('RatingNoPagesRated').'</em>'."\n";
 	}
+
 	echo "</div>\n";
 }
 
@@ -59,20 +63,24 @@ if (isset($bottom))
 		"LIMIT ".(int)$bottom);
 
 	echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('RatingBottomPages').":</span></p>\n";
+
 	if ($pages)
 	{
 		echo '<table>'."\n";
+
 		foreach ($pages as $page)
 		{
 			echo '<tr class="lined"><td>'.$this->compose_link_to_page($page['pagetag'], '', $page['title'], 0).'</td>'.
 				 '<td style="width:10px; white-space:nowrap">&nbsp;<strong>'.round($page['rate'] / $page['votes'], 2).'</strong></td></tr>'."\n";
 		}
+
 		echo '</table>'."\n";
 	}
 	else
 	{
 		echo '<em>'.$this->get_translation('RatingNoPagesRated').'</em>'."\n";
 	}
+
 	echo "</div>\n";
 }
 
