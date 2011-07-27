@@ -197,7 +197,7 @@ else
 	// display more icon and text
 	# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"".$this->config['theme_url']."icons/more.png\" title=\"".$this->get_translation('PageHandlerMoreTip')."\" alt=\"".$this->get_translation('PageHandlerMoreTip')."\" /> ".$this->get_translation('PageHandlerMoreTip')."</a> \n";
 	// only display 'more' text that shows handler list on hover
-	echo '<li class=""><a href="#" id="more">'.$this->get_translation('PageHandlerMoreTip').'<span class="dropdown_arrow">&#9660;</span></a>'." \n";
+	echo '<li class="dropdown"><a href="#" id="more">'.$this->get_translation('PageHandlerMoreTip').'<span class="dropdown_arrow">&#9660;</span></a>'." \n";
 	echo '<ul class="dropdown_menu">'."\n";
 
 	// print tab
