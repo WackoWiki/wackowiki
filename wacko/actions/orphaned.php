@@ -5,12 +5,12 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!function_exists('LoadOrphanedPages'))
+if (!function_exists('load_orphaned_pages'))
 {
-	function LoadOrphanedPages(&$engine, $for = '')
+	function load_orphaned_pages(&$engine, $for = '')
 	{
 		$pref = $engine->config['table_prefix'];
-		$sql = "SELECT DISTINCT page_id, tag FROM ".$pref."page p ".
+		$sql = "SELECT DISTINCT page_id, tag, title FROM ".$pref."page p ".
 			"LEFT JOIN ".$pref."link l ON ".
 			"((l.to_tag = p.tag ".
 				"AND l.to_supertag = '') ".
@@ -28,19 +28,31 @@ if (!function_exists('LoadOrphanedPages'))
 	}
 }
 
-if (!isset($root)) $root = $this->page['tag'];
-else $root = $this->unwrap_link($root);
+if (!isset($root))
+{
+	$root = $this->page['tag'];
+}
+else
+{
+	$root = $this->unwrap_link($root);
+}
 
-if ($pages = LoadOrphanedPages($this, $root))
+if ($pages = load_orphaned_pages($this, $root))
 {
 	echo "<ol>\n";
+
 	//!!!! unoptimized
 	if (is_array($pages))
-	foreach ($pages as $page)
-	if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
 	{
-		echo "<li>".$this->link('/'.$page['tag'], '', '', '', 0)."</li>\n";
+		foreach ($pages as $page)
+		{
+			if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id']))
+			{
+				echo "<li>".$this->link('/'.$page['tag'], '', '', '', 0)."</li>\n";
+			}
+		}
 	}
+
 	echo "</ol>\n";
 }
 else

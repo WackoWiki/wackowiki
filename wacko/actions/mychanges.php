@@ -5,23 +5,31 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{MyChanges [max="Number"] [bydate="1"]}}
+// {{mychanges [max=Number] [bydate=1]}}
 
+if (!isset($title))		$title = '';
 if (!isset($bydate)) $bydate = '';
 if (!isset($max)) $max = '';
-$curChar = '';
-$curday = '';
+$cur_char = '';
+$cur_day = '';
 
 if ($user_id = $this->get_user_id())
 {
-	if ($max) $limit = $max;
-	else $limit	= 100;
+	if ($max)
+	{
+		$limit = $max;
+	}
+	else
+	{
+		$limit	= 100;
+	}
+
 	$prefix = $this->config['table_prefix'];
 
 	if(isset($_GET['bydate']) && $_GET['bydate'] == 1)
 	{
-		print($this->get_translation('MyChangesTitle1')." [<a href=\"".
-			$this->href('', '', 'mode=mychanges')."#list\">".$this->get_translation('OrderABC')."</a>].<br /><br />\n");
+		echo $this->get_translation('MyChangesTitle1')." [<a href=\"".
+			$this->href('', '', 'mode=mychanges')."#list\">".$this->get_translation('OrderABC')."</a>].<br /><br />\n";
 			#.($this->config['rewrite_mode'] ? "?" : "&amp;").
 
 		$count	= $this->load_single(
@@ -33,7 +41,7 @@ if ($user_id = $this->get_user_id())
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mychanges&amp;bydate=1#list');
 
 		if ($pages = $this->load_all(
-			"SELECT tag, modified, edit_note ".
+			"SELECT tag, title, modified, edit_note ".
 			"FROM {$prefix}page ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0' ".
@@ -46,14 +54,16 @@ if ($user_id = $this->get_user_id())
 			{
 				// day header
 				list($day, $time) = explode(" ", $page['modified']);
-				if ($day != $curday)
+
+				if ($day != $cur_day)
 				{
-					if ($curday)
+					if ($cur_day)
 					{
-						print("</ul>\n<br /></li>\n");
+						echo "</ul>\n<br /></li>\n";
 					}
-					print("<li><strong>$day:</strong><ul>\n");
-					$curday = $day;
+
+					echo "<li><strong>$day:</strong><ul>\n";
+					$cur_day = $day;
 				}
 
 				if ($page['edit_note'])
@@ -66,15 +76,18 @@ if ($user_id = $this->get_user_id())
 				}
 
 				// print entry
-				print("<li>$time (".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], '', '', 0).$edit_note."</li>\n");
+				echo "<li>$time (".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], '', '', 0).$edit_note."</li>\n";
 
 
 			}
+
 			echo "</ul>\n</li>\n</ul>\n";
 
 			// pagination
 			if (isset($pagination['text']))
+			{
 				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			}
 		}
 		else
 		{
@@ -83,9 +96,9 @@ if ($user_id = $this->get_user_id())
 	}
 	else
 	{
-		print($this->get_translation('MyChangesTitle2')." [<a href=\"".
+		echo $this->get_translation('MyChangesTitle2')." [<a href=\"".
 			$this->href('', '', 'mode=mychanges&amp;bydate=1')."#list\">". #($this->config['rewrite_mode'] ? "?" : "&amp;")."bydate=true\">".
-			$this->get_translation('OrderChange')."</a>].</strong><br /><br />\n");
+			$this->get_translation('OrderChange')."</a>].</strong><br /><br />\n";
 
 		$count	= $this->load_single(
 			"SELECT COUNT(tag) AS n ".
@@ -96,7 +109,7 @@ if ($user_id = $this->get_user_id())
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=mychanges#list');
 
 		if ($pages = $this->load_all(
-			"SELECT tag, modified ".
+			"SELECT tag, title, modified ".
 			"FROM {$prefix}page ".
 			"WHERE user_id = '".quote($this->dblink, $user_id)."' ".
 				"AND comment_on_id = '0' ".
@@ -107,33 +120,35 @@ if ($user_id = $this->get_user_id())
 
 			foreach ($pages as $page)
 			{
-				$firstChar = strtoupper($page['tag'][0]);
+				$first_char = strtoupper($page['tag'][0]);
 
-				if (!preg_match('/'.$this->language['ALPHA'].'/', $firstChar))
+				if (!preg_match('/'.$this->language['ALPHA'].'/', $first_char))
 				{
-					$firstChar = '#';
+					$first_char = '#';
 				}
 
-				if ($firstChar != $curChar)
+				if ($first_char != $cur_char)
 				{
-					if ($curChar)
+					if ($cur_char)
 					{
-						print("</ul>\n<br /></li>\n");
+						echo "</ul>\n<br /></li>\n";
 					}
-					print("<li><strong>$firstChar</strong><ul>\n");
-					$curChar = $firstChar;
+
+					echo "<li><strong>$first_char</strong><ul>\n";
+					$cur_char = $first_char;
 				}
 
 				// print entry
-				print("<li>".$this->get_time_string_formatted($page['modified'])." (".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n");
-
-
+				echo "<li>".$this->get_time_string_formatted($page['modified'])." (".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") ".$this->compose_link_to_page($page['tag'], '', '', 0)."</li>\n";
 			}
+
 			echo "</ul>\n</li>\n</ul>\n";
 
 			// pagination
 			if (isset($pagination['text']))
+			{
 				echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+			}
 		}
 		else
 		{

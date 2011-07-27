@@ -1324,7 +1324,7 @@ class Wacko
 		$pagination = $this->pagination($count, $limit);
 
 		if ($pages = $this->load_all(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.title, u.user_name ".
+		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, u.user_name ".
 		"FROM ".$this->config['table_prefix']."page p ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 		"WHERE p.comment_on_id = '0' ".

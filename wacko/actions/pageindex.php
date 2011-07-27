@@ -15,10 +15,10 @@ if (!defined('IN_WACKO'))
  }}
  */
 
-$cnt		= '';
-$first_char	= '';
-$cur_char	= '';
-$pages_to_display = '';
+$cnt				= '';
+$first_char			= '';
+$cur_char			= '';
+$pages_to_display	= '';
 
 if (!isset($title))		$title = '';
 if (!isset($letter))	$letter = '';
@@ -84,14 +84,13 @@ if ($pages = $this->load_all(
 		// Create alphabet links at top of page - Don't display this menu if the user specified a particluar letter
 		if($first_char != $cur_char)
 		{
-			$this->letter[] = $first_char;
-			$old_char = $cur_char;
-			$cur_char = $first_char;
+			$this->letter[]		= $first_char;
+			$old_char			= $cur_char;
+			$cur_char			= $first_char;
 		}
 	}
-	#$this->debug_print_r($this->letter);
+
 	$this->letters = array_combine( $this->letter, array_fill( 0, count( $this->letter ), 0 ) );
-	#$this->debug_print_r($this->letters);
 }
 
 // collect data for index
@@ -151,8 +150,6 @@ if ($pages = $this->load_all(
 
 		if ($cnt >= $limit) break;
 	}
-	#$this->debug_print_r($this->letters);
-	#$this->debug_print_r($pages_to_display);
 }
 
 // display navigation
@@ -239,7 +236,6 @@ if ($pages_to_display)
 		else
 		{
 			echo $this->link('/'.$page['tag'], '', $page['tag'], $page['title'], 0, 1, '', 0);
-			#echo $this->compose_link_to_page($page['tag'], '', $page['tag'], 0);
 		}
 
 		echo "</li>\n";
