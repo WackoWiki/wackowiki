@@ -99,7 +99,7 @@ $wacko_translation = array(
 	'AddCommentTitle'			=> 'Заголовок комментария:',
 	'AddCommentButton'			=> 'Отправить',
 	'HereLink'					=> 'здесь',
-	'PageHandlerMoreTip'		=> 'more',
+	'PageHandlerMoreTip'		=> 'еще',
 
 	'ThemeCorrupt'				=> 'Theme is corrupt',
 	'DoesNotExists'				=> 'Такой страницы не существует.',
@@ -439,17 +439,17 @@ $wacko_translation = array(
 	'SearchTitleTip'			=> 'Нажмите, чтобы вывести все страницы, имеющие данный заголовок.',
 
 	// clone handler
-	'ClonePage'					=> 'Clone page',
-	'CloneText'					=> 'Clone',
-	'CloneName'					=> 'Enter new name for a clone this page',
-	'CloneButton'				=> 'Clone',
+	'ClonePage'					=> 'Клон страницу',
+	'CloneText'					=> 'Клон',
+	'CloneName'					=> 'Enter new name for a clone of this page',
+	'CloneButton'				=> 'Клон',
 	'PageCloned'				=> '<em>Page %1 cloned.</em>',
 	'ClonedFrom'				=> 'Cloned from %1.',
-	'ClonedRedirect'			=> 'Edit after creation',
-	'MassClone'					=> 'Clone entire cluster',
+	'ClonedRedirect'			=> 'Изменить после создания',
+	'MassClone'					=> 'Клон весь кластер',
 
 	'RenameText'				=> 'Переименовать',
-	'RenameTip'					=> 'Rename page',
+	'RenameTip'					=> 'Переименовать страницу',
 	'NewName'					=> 'Введите новое имя для этой страницы',
 	'RenameButton'				=> 'Переименовать',
 	'AlredyExists'				=> '<em>Страница с именем <strong>%1</strong> уже существует.</em>',
@@ -461,10 +461,10 @@ $wacko_translation = array(
 	'RedirectCreated'			=> '<em>На странице %1 создано перенаправление на новую</em>',
 
 	'UserSettings'				=> 'Настройки пользователя',
-	'UserSettingsGeneral'		=> 'General',
-	'UserSettingsExtended'		=> 'Extended',
+	'UserSettingsGeneral'		=> 'Общие',
+	'UserSettingsExtended'		=> 'Расширенный',
 	'UserSettingsOther'			=> 'Прочие настройки',
-	'UserSpace'					=> 'User space',
+	'UserSpace'					=> 'Пользователь пространства',
 	'ChooseTheme'				=> 'Выберите тему',
 
 	'CreatePage'				=> 'Создать эту страницу',
