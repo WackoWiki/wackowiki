@@ -205,7 +205,7 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="upload_max_size"><strong>Maximum file size (Kb):</strong><br />
+				<td class="label"><label for="upload_max_size"><strong>Maximum file size (KiB):</strong><br />
 				<small>Maximum size of each file.</small></label></td>
 				<td><input maxlength="7" style="width:200px;" id="upload_max_size" name="upload_max_size" value="<?php echo htmlspecialchars($engine->config['upload_max_size']);?>" /></td>
 			</tr>
@@ -213,7 +213,7 @@ function admin_configbasic(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="upload_quota_per_user"><strong>Restricting quota of storage to a user:</strong><br />
+				<td class="label"><label for="upload_quota_per_user"><strong>Restricting quota of storage to a user (KiB):</strong><br />
 				<small>Restriction on the quota of storage that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
 				<td><input maxlength="9" style="width:200px;" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo htmlspecialchars($engine->config['upload_quota_per_user']);?>" /></td>
 			</tr>
