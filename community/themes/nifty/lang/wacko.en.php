@@ -9,7 +9,6 @@ $theme_translation = array(
 	'TreeClusterHeader' => 'Subpages',
 
 	// page handler
-	'PageHandlerMoreTip' => 'more',
 	'ReviewNoticeUserAttention' => 'not yet reviewed',
 
 );

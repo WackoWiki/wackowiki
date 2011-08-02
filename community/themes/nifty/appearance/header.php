@@ -360,7 +360,7 @@ if ($doubleclick == true)
 				<div id="sidebar-toc-list" class="sidebar-toc-list">
 				<?php
 				// display the page toc list, numerated, without labels and markup
-				echo $this->action('toc', array('numerate' => 1, 'nomark' => 1));
+				echo $this->action('toc', array('numerate' => 0, 'nomark' => 1));
 				?>
 				</div>
 			</div>
