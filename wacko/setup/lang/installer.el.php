@@ -79,9 +79,10 @@ $lang = array(
    Database Config Page
 */
 'database-config' => 'Ρυθμίσεις Βάσης',
-'DBDriverDesc' => '
-Ο οδηγός της βάσης που θέλετε να χρησιμοποιήσετε. Θα πρέπει να είναι ένας παραδοσιακός οδηγός εάν δεν έχετε PHP5.1 (ή μεγαλύτερη) και εγκατεστημένο <a href="http://gr.php.net/pdo" target="_blank">PDO</a>.',
 'DBDriver' => 'Οδηγός',
+'DBDriverDesc' => 'Ο οδηγός της βάσης που θέλετε να χρησιμοποιήσετε. Θα πρέπει να είναι ένας παραδοσιακός οδηγός εάν δεν έχετε PHP5.1 (ή μεγαλύτερη) και εγκατεστημένο <a href="http://gr.php.net/pdo" target="_blank">PDO</a>.',
+'DBEngine' => 'Engine',
+'DBEngineDesc' => 'The database engine you want to use.  You must choose MyISAM engine if you do not have MySql 5.6 (or greater) and InnoDB support available.',
 'DBHost' => 'Διακομιστής',
 'DBHostDesc' => 'Το όνομα του διακομιστή βάσεων δεδομένων που τρέχει σε αυτό. Συνήθως είναι "localhost" (π.χ., το ίδιο όνομα που είναι το WackoWiki site σας).',
 'DBPort' => 'Πόρτα (Προαιρετικό)',
