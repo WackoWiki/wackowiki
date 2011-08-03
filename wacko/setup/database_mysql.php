@@ -8,7 +8,7 @@
 
 $pref		= $config['table_prefix'];
 $charset	= 'DEFAULT CHARSET=utf8';
-$engine		= 'ENGINE=MyISAM';
+$engine		= 'ENGINE='.$config['database_engine'];
 
 $table_acl = "CREATE TABLE {$pref}acl (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -151,7 +151,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"PRIMARY KEY (page_id),".
 					"KEY idx_user_id (user_id),".
 					"KEY idx_owner_id (owner_id),".
-					"FULLTEXT KEY body (body),".
+					($config['database_engine'] == "MyISAM" ? "FULLTEXT KEY body (body)," : ""). // InnoDb up to MySql 5.6: #1214 - The used table type doesn't support FULLTEXT indexes
 					"UNIQUE KEY idx_tag (tag),".
 					"KEY idx_supertag (supertag),".
 					"KEY idx_depth(depth),".

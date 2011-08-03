@@ -77,8 +77,10 @@ $lang = array(
    Database Config Page
 */
 'database-config' => 'Настройки БД',
-'DBDriverDesc' => 'Драйвер базы данных, который вы хотите использовать. Нужно выбрать legacy-драйвер, если не используется PHP 5.1 (или старше) с установленным <a href="http://de2.php.net/pdo" target="_blank">PDO</a>.',
 'DBDriver' => 'Драйвер',
+'DBDriverDesc' => 'Драйвер базы данных, который вы хотите использовать. Нужно выбрать legacy-драйвер, если не используется PHP 5.1 (или старше) с установленным <a href="http://de2.php.net/pdo" target="_blank">PDO</a>.',
+'DBEngine' => 'Engine',
+'DBEngineDesc' => 'The database engine you want to use.  You must choose MyISAM engine if you do not have MySql 5.6 (or greater) and InnoDB support available.',
 'DBHost' => 'Имя сервера',
 'DBHostDesc' => 'Имя сервера, на котором запущена БД. Обычно "localhost" (т. е. та машина, на которую устанавливается WackoWiki).',
 'DBPort' => 'Порт (необязательно)',

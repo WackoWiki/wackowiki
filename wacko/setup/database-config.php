@@ -94,17 +94,18 @@ echo '   <input type="hidden" name="password" value="'.(isset($_POST['password']
  [2]   :  the name to display in the list here
  */
 
-$drivers = array();
-$drivers[] = array('mysql', 'mysql_legacy', 'MySQL');
-$drivers[] = array('mysqli', 'mysqli_legacy', 'MySQLi');
-$drivers[] = array('pdo', 'mysql_pdo', 'PDO MySQL');
-// $drivers[] = array('pdo', 'mssql', 'PDO MS SQL');
-// $drivers[] = array('pdo', 'pgsql', 'PDO PostgreSQL');
-// $drivers[] = array('pdo', 'sqlite', 'PDO SQLite');
-// $drivers[] = array('pdo', 'sqlite2', 'PDO SQLite2');
-// $drivers[] = array('pdo', 'oci', 'PDO Oracle');
+$drivers	= array();
+$drivers[]	= array('mysql',	'mysql_legacy',		'MySQL');
+$drivers[]	= array('mysqli',	'mysqli_legacy',	'MySQLi');
+$drivers[]	= array('pdo',		'mysql_pdo',		'PDO MySQL (recommended)');
+// $drivers[]	= array('pdo',		'mssql',		'PDO MS SQL');
+// $drivers[]	= array('pdo',		'pgsql',		'PDO PostgreSQL');
+// $drivers[]	= array('pdo',		'sqlite',		'PDO SQLite');
+// $drivers[]	= array('pdo',		'sqlite2',		'PDO SQLite2');
+// $drivers[]	= array('pdo',		'oci',			'PDO Oracle');
 
 $detected = 0;
+
 for($count = 0; $count < count($drivers); $count++)
 {
 	if(extension_loaded($drivers[$count][0]))
@@ -112,6 +113,35 @@ for($count = 0; $count < count($drivers); $count++)
 		echo "      <li><input type=\"radio\" id=\"db_driver_".$drivers[$count][0]."\" name=\"config[database_driver]\" value=\"".$drivers[$count][1]."\"".($detected == 0 ? "checked=\"checked\"" : "")."><label for=\"db_driver_".$drivers[$count][0]."\">".$drivers[$count][2]."</label></li>\n";
 		$detected++;
 	}
+}
+?>
+   </ul>
+   <br />
+   <div class="fake_hr_seperator">
+      <hr />
+   </div>
+   <h2><?php echo $lang['DBEngine'];?></h2>
+   <p class="notop"><?php echo $lang['DBEngineDesc']; ?></p>
+   <ul>
+<?php
+/*
+ Each time a new database engine is supported it needs to be added to this list
+
+ [0]   :  database engine name
+ [1]   :  database engine name to be stored in the config file
+ [2]   :  the name to display in the list here
+ */
+
+$engines	= array();
+$engines[]	= array('MyISAM', 'mysql_myisam', 'MyISAM (recommended)');
+$engines[]	= array('InnoDB', 'mysql_innodb', 'InnoDB');
+
+$detected = 0;
+
+for($count = 0; $count < count($engines); $count++)
+{
+	echo "      <li><input type=\"radio\" id=\"db_engine_".$engines[$count][0]."\" name=\"config[database_engine]\" value=\"".$engines[$count][1]."\"".($detected == 0 ? "checked=\"checked\"" : "")."><label for=\"db_engine_".$engines[$count][0]."\">".$engines[$count][2]."</label></li>\n";
+	$detected++;
 }
 ?>
    </ul>

@@ -77,8 +77,10 @@ $lang = array(
    Database Config Page
 */
 'database-config' => 'Configuration de la base de données',
-'DBDriverDesc' => 'Choisissez le pilote de base de données que vous souhaitez utiliser. Pour utiliser un pilote PDO vous devez avoir PHP version 5.1 (ou supérieure) et <a href="http://fr.php.net/pdo" target="_blank">PDO</a> installés.',
 'DBDriver' => 'Pilote',
+'DBDriverDesc' => 'Choisissez le pilote de base de données que vous souhaitez utiliser. Pour utiliser un pilote PDO vous devez avoir PHP version 5.1 (ou supérieure) et <a href="http://fr.php.net/pdo" target="_blank">PDO</a> installés.',
+'DBEngine' => 'Engine',
+'DBEngineDesc' => 'The database engine you want to use.  You must choose MyISAM engine if you do not have MySql 5.6 (or greater) and InnoDB support available.',
 'DBHost' => 'Hôte',
 'DBHostDesc' => 'Indiquez le nom de domaine de l&rsquo;hôte sur lequel votre serveur de base de données fonctionne. Le cas échéant, votre hébergeur peut vous l&rsquo;indiquer.',
 'DBPort' => 'Numéro de port (optionnel)',
