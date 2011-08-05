@@ -49,7 +49,7 @@ if (isset($_GET['confirm']))
 		echo "<div class=\"info\">".str_replace('%1', $this->compose_link_to_page('Settings', '', $this->get_translation('SettingsText'), 0), $this->get_translation('EmailNotConfirmed'))."</div><br />";
 	}
 }
-else if (isset($_POST['action']) && $_POST['action'] == 'login')
+else if (isset($_POST['action']) && $_POST['action'] == 'register')
 {
 	// create new account if possible
 	if ($this->config['allow_registration'] || $this->is_admin())
@@ -183,9 +183,9 @@ else if (isset($_POST['action']) && $_POST['action'] == 'login')
 				// send email
 				if ($this->config['enable_email'] == true)
 				{
-					$subject = 	$this->get_translation('EmailWelcome').
+					$subject =	$this->get_translation('EmailWelcome').
 								$this->config['site_name'];
-					$body = 	$this->get_translation('EmailHello'). $user_name.",\n\n".
+					$body =		$this->get_translation('EmailHello'). $user_name.",\n\n".
 								str_replace('%1', $this->config['site_name'],
 								str_replace('%2', $user_name,
 								str_replace('%3', $this->href().
@@ -224,7 +224,7 @@ if (!isset($_POST['confirm']))
 		echo '<div class="cssform">';
 		echo $this->form_open();
 
-		echo '<input type="hidden" name="action" value="login" />';
+		echo '<input type="hidden" name="action" value="register" />';
 
 		echo '<h3>'.$this->format_translation('RegistrationWelcome').'</h3>';
 
