@@ -229,6 +229,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 			// pages list itself
 			echo '<div>'."\n";
+
 			foreach ($pages as $page)
 			{
 				if (!$this->config['hide_locked'] || $this->has_access('read', $page['page_id'], $this->get_user_name()) === true)
@@ -411,8 +412,11 @@ else
 			'<th><a href="'.$this->href('', '', 'sort=pages'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersPages').( (isset($_GET['sort']) && $_GET['sort'] == 'pages') || (isset($_GET['sort']) && $_GET['sort'] == false) ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
 			'<th><a href="'.$this->href('', '', 'sort=comments'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersComments').( isset($_GET['sort']) && $_GET['sort'] == 'comments' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
 			'<th><a href="'.$this->href('', '', 'sort=revisions'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersRevisions').( isset($_GET['sort']) && $_GET['sort'] == 'revisions' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+		($this->get_user()
+			?
 			'<th><a href="'.$this->href('', '', 'sort=signup'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersSignup').( isset($_GET['sort']) && $_GET['sort'] == 'signup' ? (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
-			'<th><a href="'.$this->href('', '', 'sort=session'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersLastSession').( isset($_GET['sort']) && $_GET['sort'] == 'session' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=session'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersLastSession').( isset($_GET['sort']) && $_GET['sort'] == 'session' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'
+			: '').
 		"</tr>\n";
 
 	// list entries
@@ -433,13 +437,16 @@ else
 					'<td align="center">'.$user['total_pages'].'</td>'.
 					'<td align="center">'.$user['total_comments'].'</td>'.
 					'<td align="center">'.$user['total_revisions'].'</td>'.
+				($this->get_user()
+					?
 					'<td align="center">'.$this->get_time_string_formatted($user['signup_time']).'</td>'.
 					'<td align="center">'.( $user['hide_lastsession'] == 1
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
 					: ( !$user['session_time'] || $user['session_time'] == SQL_NULLDATE
 						? '<em>'.$this->get_translation('UsersSessionNA').'</em>'
 						: $this->get_time_string_formatted($user['session_time']) )
-					).'</td>'.
+					).'</td>'
+					: '').
 			"</tr>\n";
 		}
 	}
