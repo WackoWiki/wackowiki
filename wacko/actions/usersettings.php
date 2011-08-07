@@ -118,6 +118,7 @@ else if ($user = $this->get_user())
 					"send_watchmail		= '".quote($this->dblink, (int)$_POST['send_watchmail'])."', ".
 					"show_files			= '".quote($this->dblink, (int)$_POST['show_files'])."', ".
 					"allow_intercom		= '".quote($this->dblink, (int)$_POST['allow_intercom'])."', ".
+					"allow_massemail	= '".quote($this->dblink, (int)$_POST['allow_massemail'])."', ".
 					"hide_lastsession	= '".quote($this->dblink, (int)$_POST['hide_lastsession'])."', ".
 					"validate_ip		= '".quote($this->dblink, (int)$_POST['validate_ip'])."', ".
 					"noid_pubs			= '".quote($this->dblink, (int)$_POST['noid_pubs'])."', ".
@@ -274,6 +275,13 @@ else if ($user = $this->get_user())
 	<?php
 	}
 	?>
+	<tr class="lined">
+		<td class="form_left">&nbsp;</td>
+		<td class="form_right"><input type="hidden" name="allow_massemail" value="0" />
+			<input type="checkbox" id="allow_massemail" name="allow_massemail" value="1" <?php echo (isset($user['allow_massemail']) && $user['allow_massemail'] == 1) ? "checked=\"checked\"" : '' ?> />
+			<label for="allow_massemail"><?php echo $this->get_translation('AllowMassemail');?></label>
+		</td>
+	</tr>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right">
