@@ -13,6 +13,7 @@ if (!defined('IN_WACKO'))
 		[order="time|FILENAME|size|size_desc|ext"]
 		[owner="UserName"]
 		[pictures=1]
+		[max=number]
 	}}
  */
 
@@ -25,46 +26,48 @@ if (!isset($tag)) $tag = '';
 if (!isset($owner)) $owner = '';
 if (!isset($page)) $page = '';
 if (!isset($pictures)) $pictures = null;
+if (!isset($max)) $max = '';
 
-$orderby = "file_name ASC";
-if ($order == 'time')		$orderby = "uploaded_dt DESC";
-if ($order == 'size')		$orderby = "file_size ASC";
-if ($order == 'size_desc')	$orderby = "file_size DESC";
-if ($order == 'ext')		$orderby = "file_ext ASC";
-
-if ($owner)
+if ($max)
 {
-	$user_add = "AND u.user_name='".quote($this->dblink, $owner)."' ";
+	$limit = $max;
 }
 else
 {
-	$user_add = '';
+	$limit	= 50;
 }
+
+$order_by = "file_name ASC";
+if ($order == 'time')		$order_by = "uploaded_dt DESC";
+if ($order == 'size')		$order_by = "file_size ASC";
+if ($order == 'size_desc')	$order_by = "file_size DESC";
+if ($order == 'ext')		$order_by = "file_ext ASC";
 
 // do we allowed to see?
 if (!$global)
 {
 	if ($page == '')
 	{
-		$page = $this->tag;
-		$page_id = $this->page['page_id'];
+		$page		= $this->tag;
+		$page_id	= $this->page['page_id'];
 	}
 	else
 	{
 		$page = $this->unwrap_link($page);
+
 		if ($_page_id = $this->get_page_id($page))
 		{
-			$page_id = $_page_id;
+			$page_id	= $_page_id;
 		}
 	}
 
-	$can_view   = $this->has_access('read', $page_id) || $this->is_admin() || $this->user_is_owner($page_id);
-	$can_delete = $this->is_admin() || $this->user_is_owner($page_id);
+	$can_view	= $this->has_access('read', $page_id) || $this->is_admin() || $this->user_is_owner($page_id);
+	$can_delete	= $this->is_admin() || $this->user_is_owner($page_id);
 }
 else
 {
-	$can_view = 1;
-	$page = $this->tag;
+	$can_view	= 1;
+	$page		= $this->tag;
 }
 
 if ($can_view)
@@ -83,28 +86,38 @@ if ($can_view)
 		return;
 	}
 
+	$count = $this->load_all(
+			"SELECT f.upload_id ".
+			"FROM ".$this->config['table_prefix']."upload f ".
+				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+			"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
+				($owner
+					? "AND u.user_name='".quote($this->dblink, $owner)."' "
+				: ''), 1);
+
+	$count		= count($count);
+	$pagination = $this->pagination($count, $limit, 'f');
+
 	// load files list
 	$files = $this->load_all(
 		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_name, f.description, f.uploaded_dt, u.user_name AS user, f.hits ".
 		"FROM ".$this->config['table_prefix']."upload f ".
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".$user_add.
-		" ORDER BY f.".$orderby );
+		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
+			($owner
+				? "AND u.user_name='".quote($this->dblink, $owner)."' "
+				: '')." ".
+		"ORDER BY f.".$order_by." ".
+		"LIMIT {$pagination['offset']}, {$limit}");
 
 	if (!is_array($files))
 	{
 		$files = array();
 	}
 
-	if (!$nomark)
-	{
-		$title = $this->get_translation('UploadTitle'.($global ? 'Global' : ''));
-		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.": </span></p>\n";
-	}
-
 	// display
-	$del = $this->get_translation('UploadRemove');
-	$edit = $this->get_translation('UploadEdit');
+	$del	= $this->get_translation('UploadRemove');
+	$edit	= $this->get_translation('UploadEdit');
 
 	if (!$global)
 	{
@@ -128,6 +141,18 @@ if ($can_view)
 	if ($pictures == false)
 	{
 		$path2 = str_replace('file:', '_file:', $path2);
+	}
+
+	// pagination
+	if (isset($pagination['text']))
+	{
+		echo "<span class=\"pagination\">{$pagination['text']}</span><br />\n";
+	}
+
+	if (!$nomark)
+	{
+		$title = $this->get_translation('UploadTitle'.($global ? 'Global' : ''));
+		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$title.": </span></p>\n";
 	}
 
 	if (count($files))
@@ -201,7 +226,16 @@ if ($can_view)
 		echo '</table>';
 	}
 
-	if (!$nomark) echo "</div>\n";
+	if (!$nomark)
+	{
+		echo "</div>\n";
+	}
+
+	// pagination
+	if (isset($pagination['text']))
+	{
+		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
+	}
 }
 else
 {
