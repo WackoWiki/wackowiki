@@ -3465,6 +3465,23 @@ class Wacko
 		return $text;
 	}
 
+	// GROUPS
+	function load_group($group_name, $group_id = 0)
+	{
+		$fiels_default	= 'g.*, u.user_name AS moderator';
+
+		$group = $this->load_single(
+			"SELECT {$fiels_default} ".
+			"FROM ".$this->config['table_prefix']."group g ".
+				"LEFT JOIN ".$this->config['table_prefix']."user u ON (g.moderator = u.user_id) ".
+			"WHERE ".( $group_id != 0
+				? "g.group_id		= '".quote($this->dblink, $group_id)."' "
+				: "g.group_name		= '".quote($this->dblink, $group_name)."' ").
+			"LIMIT 1");
+
+		return $group;
+	}
+
 	// USERS
 	// check whether defined username is already registered.
 	// we add appropriate (but not thorough) transliterations
@@ -3556,6 +3573,33 @@ class Wacko
 		{
 			return false;
 		}
+	}
+
+	// check whether defined email is already in use.
+	// Allow e-mail address re-use:
+	// Different users can register with the same e-mail address.
+	function email_exists($email)
+	{
+		if ($email == '')
+		{
+			return false;
+		}
+
+		// checking identical name only?
+		#if (!$this->config['allow_email_reuse'])
+		#{
+			if ($this->load_single(
+				"SELECT user_id FROM {$this->config['user_table']} ".
+				"WHERE email = '".quote($this->dblink, $email)."' ".
+				"LIMIT 1"))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		#}
 	}
 
 	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false)

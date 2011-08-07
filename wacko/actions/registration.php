@@ -60,7 +60,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 		$email			= trim($_POST['email']);
 		$password		= $_POST['password'];
 		$confpassword	= $_POST['confpassword'];
-		$lang			= $_POST['lang'];
+		$lang			= (isset($_POST['lang']) ? $_POST['lang'] : '');
 		$complexity		= $this->password_complexity($user_name, $password);
 
 		// Start Registration Captcha
@@ -100,6 +100,11 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 			else if (!preg_match('/^.+?\@.+$/', $email))
 			{
 				$error .= $this->get_translation('NotAEmail')." ";
+			}
+			// no email reuse allowed
+			else if ($this->config['allow_email_reuse'] == 0 && $this->email_exists($email) === true)
+			{
+				$error .= $this->get_translation('EmailTaken')." ";
 			}
 			// confirmed password mismatch
 			else if ($confpassword != $password)

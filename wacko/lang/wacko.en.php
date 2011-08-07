@@ -406,6 +406,7 @@ $wacko_translation = array(
 	'MustBeWikiName'			=> 'User name must be ((WackoWiki:Doc/English/WikiName WikiName)) formatted!',
 	'SpecifyEmail'				=> 'You must specify an email address.',
 	'NotAEmail'					=> 'That doesn\'t look like a valid email address.',
+	'EmailTaken'				=> 'The entered email address is already in use.',
 	'PasswordsDidntMatch'		=> 'Passwords didn\'t match.',
 	'SpacesArentAllowed'		=> 'Spaces aren\'t allowed in passwords.',
 	'PasswordTooShort'			=> 'Password too short.',
@@ -487,6 +488,7 @@ $wacko_translation = array(
 	'DontRedirect'				=> 'Do not allow automatic redirection by action Redirect.',
 	'SendWatchEmail'			=> 'Send notifying email when someone (except you) change any page you are watching',
 	'AllowIntercom'				=> 'Allow private messages from users of the system',
+	'AllowMassemail'			=> 'Administrators can email me information',
 	'HideLastSession'			=> 'Hide last session',
 	'ValidateIP'				=> 'Tying session to IP',
 	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
@@ -591,6 +593,27 @@ $wacko_translation = array(
 								   'violates the rules of the site %2, please send it (using the button Forward /'.
 								   'Forward your mail program) to address %4.',
 	'UsersPMNotLoggedIn'		=> 'You are not registered in the system and can not send private messages to users.',
+
+	// Groups action
+	'GroupsSearch'				=> 'Find Groups',
+	'GroupsFilter'				=> 'Search',
+	'GroupsOpenProfile'			=> 'View Profile',
+	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
+	'GroupsName'				=> 'Name',
+	'GroupsMembers'				=> 'Members',
+	'GroupsSignup'				=> 'Created',
+	'GroupsLastSession'			=> 'Last session',
+	'GroupsNotFound'			=> 'Group <tt>%2</tt> not found. Click <a href="%1">here</a>, to go to the main list.',
+	'GroupsProfile'				=> 'Profile',
+	'GroupsContact'				=> 'Contact',
+	'GroupsList'				=> 'View the entire list of groups',
+	'GroupsSignupDate'			=> 'Created',
+	'GroupsOwnedPages'			=> 'Owned pages',
+	'GroupsMembersSortName'		=> '[Sort by name]',
+	'GroupsDocsSortDate'		=> '[Sort by creation date]',
+	'GroupsSessionNA'			=> '[not recorded]',
+	'GroupSpace'				=> 'Group space',
+
 
 	// rating handler
 	'RatingDenied'				=> 'You can not rate this page.',
