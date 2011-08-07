@@ -82,6 +82,7 @@ class Email
 			#$mail->AddReplyTo('name@yourdomain.com', 'First Last');
 			$mail->SetFrom($email_from, $name_from);
 			$mail->AddAddress($email_to, $name_to);
+			#$mail->AddBCC($email_to, $name_to);
 
 			$mail->IsHTML(false);		// set email format to HTML
 			$mail->ContentType	= 'text/plain';

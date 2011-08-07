@@ -305,6 +305,7 @@ $table_user_setting = "CREATE TABLE {$pref}user_setting (".
 					"autocomplete TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"numerate_links TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"allow_intercom TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"allow_massemail TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"hide_lastsession TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"validate_ip TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"noid_pubs TINYINT(1) UNSIGNED DEFAULT NULL,".
@@ -323,6 +324,13 @@ $table_watch = "CREATE TABLE {$pref}watch (".
 					"watch_time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (watch_id)".
 				") {$engine} COMMENT='' {$charset}";
+
+/* $table_word = "CREATE TABLE {$pref}word (".
+					"word_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"word VARCHAR(255) NOT NULL DEFAULT '',".
+					"replacement VARCHAR(255) NOT NULL DEFAULT '',".
+					"PRIMARY KEY (word_id)".
+				") {$engine} COMMENT='' {$charset}"; */
 
 /*
  Wacko Wiki MySQL Table Deletion Script
@@ -348,5 +356,6 @@ $table_upload_drop			= "DROP TABLE {$pref}upload";
 $table_user_drop			= "DROP TABLE {$pref}user";
 $table_user_setting_drop	= "DROP TABLE {$pref}user_setting";
 $table_watch_drop			= "DROP TABLE {$pref}watch";
+/* $table_word_drop			= "DROP TABLE {$pref}watch"; */
 
 ?>

@@ -404,7 +404,7 @@ $wacko_translation = array(
 	'MustBeWikiName' => 'Numele de utilizator trebuie sa fie ((WackoWiki:Doc/Документация/ВикиИмя ВикиИменем)) ',
 	'SpecifyEmail' => 'Trebuie sa indicati adresa e-mail.',
 	'NotAEmail' => 'Aceasta nu este o adresa e-mail.',
-
+	'EmailTaken'				=> 'The entered email address is already in use.',
 	'PasswordsDidntMatch' => 'Parolele nu coincid.',
 	'SpacesArentAllowed' => 'Nu se poate de folosit spatzii libere in parole.',
 	'PasswordTooShort' => 'Parola este prea skurta.',
@@ -485,6 +485,7 @@ $wacko_translation = array(
 	'DontRedirect' => 'Не давать действию Redirect автоматически перенаправлять',
 	'SendWatchEmail' => 'Отсылать уведомления при обновлении наблюдаемых Вами страниц',
 	'AllowIntercom' => 'Allow private messages from users of the system',
+	'AllowMassemail'			=> 'Administrators can email me information',
 	'HideLastSession' => 'Hide last session',
 	'ValidateIP' => 'Tying session to IP',
 	'ProfileAnonymousPub' => 'Preferably, published anonymously (to hide the name)',

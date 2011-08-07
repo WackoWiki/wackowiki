@@ -342,6 +342,7 @@ $table_user_setting_r4_3 = "CREATE TABLE {$pref}user_setting (".
 					"autocomplete TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"numerate_links TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"allow_intercom TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"allow_massemail TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"hide_lastsession TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"validate_ip TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"noid_pubs TINYINT(1) UNSIGNED DEFAULT NULL,".
@@ -367,5 +368,12 @@ $alter_watch_r4_3_8 = "ALTER TABLE {$pref}watch ADD comment_id INT(10) UNSIGNED 
 
 $update_watch_r4_3_1 = "UPDATE {$pref}watch AS watch, (SELECT user_id, user_name FROM {$pref}user) AS user SET watch.user_id = user.user_id WHERE watch.user = user.user_name";
 $update_watch_r4_3_2 = "UPDATE {$pref}watch AS watch, (SELECT page_id, tag FROM {$pref}page) AS page SET watch.page_id = page.page_id WHERE watch.tag = page.tag";
+
+/* $table_word_r4_3 = "CREATE TABLE {$pref}word (".
+					"word_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"word VARCHAR(255) NOT NULL DEFAULT '',".
+					"replacement VARCHAR(255) NOT NULL DEFAULT '',".
+					"PRIMARY KEY (word_id)".
+				") {$engine} COMMENT='' {$charset}"; */
 
 ?>

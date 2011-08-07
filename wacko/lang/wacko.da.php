@@ -402,6 +402,7 @@ $wacko_translation = array(
 	'MustBeWikiName' => 'Brugernavn skal være ((WackoWiki:Doc/English/WikiName WikiNavn)) formateret!',
 	'SpecifyEmail' => 'Du skal oplyse en emailadresse.',
 	'NotAEmail' => 'Det ligner ikke en rigtig adresse.',
+	'EmailTaken'				=> 'Den indtastede emailadresse er allerede i brug.',
 	'PasswordsDidntMatch' => 'Passwords stemmer ikke.',
 	'SpacesArentAllowed' => 'Ingen mellemrum!',
 	'PasswordTooShort' => 'Password for kort.',
@@ -481,7 +482,8 @@ $wacko_translation = array(
 
 	'DontRedirect' => 'Tillad ikke viderestilling ved handlingen Viderestil.',
 	'SendWatchEmail' => 'Send notifikationsmail når nogen ændrer en side du overvåger.',
-	'AllowIntercom' => 'Allow private messages from users of the system',
+	'AllowIntercom' => 'Jeg ønsker at modtage masse-emails afsendt fra administratorer',
+	'AllowMassemail'			=> 'Administrators can email me information',
 	'HideLastSession' => 'Hide last session',
 	'ValidateIP' => 'Tying session to IP',
 	'ProfileAnonymousPub' => 'Preferably, published anonymously (to hide the name)',

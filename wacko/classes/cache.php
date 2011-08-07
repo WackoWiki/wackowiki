@@ -66,10 +66,13 @@ class Cache
 
 	function sql_cache_id($query)
 	{
+		// Remove extra spaces and tabs
+		$query		= preg_replace('/[\n\r\s\t]+/', ' ', $query);
+
 		return $this->cache_dir.CACHE_SQL_DIR.hash('md5', $query);
 	}
 
-	//Get page content from cache
+	// Get page content from cache
 	function get_cached($page, $method, $query)
 	{
 		$filename = $this->construct_id($page, $method, $query);
@@ -301,7 +304,7 @@ class Cache
 				if ($this->debug >= 1 && strpos($method, '.xml') === false)
 				{
 					$ddd = $this->get_micro_time();
-					echo ("<div class=\"debug\">cache time: ".(number_format(($ddd-$this->timer),3))." s<br />");
+					echo "<div class=\"debug\">cache time: ".(number_format(($ddd-$this->timer),3))." s<br />";
 					echo "</div>";
 				}
 
