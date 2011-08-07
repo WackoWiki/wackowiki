@@ -118,6 +118,7 @@ function admin_configbasic(&$engine, &$module)
 					<select style="width:200px;" id="theme" name="theme">
 <?php
 						$themes = $engine->available_themes();
+
 						for ($i = 0; $i < count($themes); $i++)
 						{
 							echo '<option value="'.$themes[$i].'" '.($engine->config['theme'] == $themes[$i] ? 'selected="selected"' : '').'>'.$themes[$i].'</option>';
@@ -166,6 +167,7 @@ function admin_configbasic(&$engine, &$module)
 					<select style="width:200px;" id="language" name="language">
 <?php
 						$langs = $engine->available_languages();
+
 						for ($i = 0; $i < count($langs); $i++)
 						{
 							echo '<option value="'.$langs[$i].'" '.($engine->config['language'] == $langs[$i] ? 'selected="selected"' : '').'>'.$langs[$i].'</option>';

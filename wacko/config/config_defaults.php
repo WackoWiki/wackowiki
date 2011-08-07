@@ -54,6 +54,7 @@ $wacko_config_defaults = array(
 	'check_mx_record' => 0,
 	'validate_email' => 1,
 	'notify_new_user_created' => 1,
+	'allow_email_reuse' => 0,
 
 	'language' => 'en',
 	'multilanguage' => 0,
