@@ -77,6 +77,22 @@ function admin_resync(&$engine, &$module)
 					"LIMIT 1");
 			}
 
+			// total files uploaded
+			$users = $engine->load_all(
+							"SELECT u.user_id, COUNT(f.upload_id) AS n ".
+							"FROM {$engine->config['table_prefix']}upload f, {$engine->config['user_table']} AS u ".
+							"WHERE f.user_id = u.user_id ".
+							"GROUP BY f.user_id");
+
+			foreach ($users as $user)
+			{
+				$engine->sql_query(
+								"UPDATE {$engine->config['user_table']} ".
+								"SET total_uploads = ".(int)$user['n']." ".
+								"WHERE user_id = '".quote($engine->dblink, $user['user_id'])."' ".
+								"LIMIT 1");
+			}
+
 			$engine->log(1, 'Synchronized user statistics');
 ?>
 			<p>
