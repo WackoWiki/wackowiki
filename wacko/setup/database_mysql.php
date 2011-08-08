@@ -280,6 +280,7 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"total_pages INT(10) UNSIGNED NOT NULL,".
 					"total_revisions INT(10) UNSIGNED NOT NULL,".
 					"total_comments INT(10) UNSIGNED NOT NULL,".
+					"total_uploads INT(10) UNSIGNED NOT NULL,".
 					"fingerprint VARCHAR(40),".
 					"PRIMARY KEY (user_id),".
 					"UNIQUE KEY idx_user_name (user_name),".

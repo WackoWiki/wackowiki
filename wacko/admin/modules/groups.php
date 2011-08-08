@@ -334,7 +334,7 @@ function admin_groups(&$engine, &$module)
 			"WHERE group_id = '".quote($engine->dblink, $group_id)."' ".
 			"LIMIT 1");
 
-		echo "<h2>".$engine->get_translation('GroupsMembers').": ".$group['group_name']."</h2>";
+		echo "<h2>".$engine->get_translation('GroupsMembersFor').": ".$group['group_name']."</h2>";
 
 		$members = $engine->load_all(
 			"SELECT m.user_id, user_name FROM {$engine->config['table_prefix']}group g ".

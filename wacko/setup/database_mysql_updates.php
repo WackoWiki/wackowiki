@@ -306,6 +306,7 @@ $alter_user_r4_3_27 = "ALTER TABLE {$pref}user ADD lost_password_request_count S
 $alter_user_r4_3_28 = "ALTER TABLE {$pref}user ADD failed_login_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0' AFTER lost_password_request_count";
 $alter_user_r4_3_29 = "ALTER TABLE {$pref}user ADD fingerprint VARCHAR(40) AFTER total_comments";
 $alter_user_r4_3_30 = "ALTER TABLE {$pref}user CHANGE email email VARCHAR(100) NOT NULL DEFAULT ''";
+$alter_user_r4_3_31 = "ALTER TABLE {$pref}user ADD total_uploads INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER total_comments";
 
 // see adminupdate action which will do this after successful data migration
 #$alter_user_r4_3_31 = "ALTER TABLE {$pref}user DROP changes_count";
