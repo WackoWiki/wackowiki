@@ -410,6 +410,22 @@ function admin_groups(&$engine, &$module)
 			$ordergroup	= 'group_desc';
 		}
 
+		// set members ordering
+		if (isset($_GET['order']) && $_GET['order'] == 'members_asc')
+		{
+			$order			= 'ORDER BY members DESC ';
+			$ordermembers	= 'user_desc';
+		}
+		else if (isset($_GET['order']) && $_GET['order'] == 'members_desc')
+		{
+			$order			= 'ORDER BY members ASC ';
+			$ordermembers	= 'members_asc';
+		}
+		else
+		{
+			$ordermembers	= 'members_desc';
+		}
+
 		// filter by lang
 		if (isset($_GET['moderator']))
 		{
@@ -428,12 +444,13 @@ function admin_groups(&$engine, &$module)
 
 		$pagination	= $engine->pagination($count['n'], $limit, 'p', 'mode=groups&order='.htmlspecialchars(isset($_GET['order']) && $_GET['order']), '', 'admin.php');
 
-		$users = $engine->load_all(
-			"SELECT g.*, u.user_name ".
+		$groups = $engine->load_all(
+			"SELECT g.*, u.user_name, COUNT(m.user_id) AS members ".
 			"FROM {$engine->config['table_prefix']}group g ".
-				"LEFT OUTER JOIN {$engine->config['table_prefix']}user u ON (g.moderator = u.user_id) ".
-
+				"LEFT JOIN {$engine->config['table_prefix']}user u ON (g.moderator = u.user_id) ".
+				"LEFT JOIN ".$engine->config['table_prefix']."group_member m ON (m.group_id = g.group_id) ".
 			( $where ? $where : '' ).
+			"GROUP BY g.group_id ".
 			( $order ? $order : 'ORDER BY group_id DESC ' ).
 			"LIMIT {$pagination['offset']}, $limit");
 
@@ -452,21 +469,23 @@ function admin_groups(&$engine, &$module)
 					<th style="width:5px;">ID</th>
 					<th style="width:20px;"><a href="?mode=groups&order=<?php echo $ordergroup; ?>">Group</a></th>
 					<th>Description</th>
+					<th style="width:20px;"><a href="?mode=groups&order=<?php echo $ordermembers; ?>">Members</a></th>
 					<th style="width:20px;">Moderator</th>
 					<th style="width:20px;">Open</th>
 					<th style="width:20px;">Active</th>
 					<th style="width:20px;"><a href="?mode=groups&order=<?php echo $created; ?>">Created</a></th>
 				</tr>
 	<?php
-		if ($users)
+		if ($groups)
 		{
-			foreach ($users as $row)
+			foreach ($groups as $row)
 			{
 				echo '<tr class="lined">'."\n".
 						'<td valign="top" align="center"><input type="radio" name="change" value="'.$row['group_id'].'" /></td>'.
 						'<td valign="top" align="center">'.$row['group_id'].'</td>'.
 						'<td valign="top" align="left" style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=groups&group_id='.$row['group_id'].'">'.$row['group_name'].'</a></strong></td>'.
 						'<td valign="top">'.$row['description'].'</td>'.
+						'<td valign="top" align="center">'.$row['members'].'</td>'.
 						'<td valign="top" align="center"><small><a href="?mode=groups&moderator='.$row['moderator'].'">'.$row['user_name'].'</a></small></td>'.
 						'<td valign="top" align="center">'.$row['open'].'</td>'.
 						'<td valign="top" align="center">'.$row['active'].'</td>'.
