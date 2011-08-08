@@ -31,20 +31,20 @@ function admin_files(&$engine, &$module)
 
 	if (isset($_GET['remove'])) // show the form
 	{
-		$what = $engine->load_all(
+		$file = $engine->load_all(
 			"SELECT user_id, upload_id, file_name, file_size, description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
 				"AND upload_id = '".quote($engine->dblink, $_GET['file_id'])."'");
 
-		if (count($what) > 0)
+		if (count($file) > 0)
 		{
 			echo '<strong>'.$engine->get_translation('UploadRemoveConfirm').'</strong>';
 			echo $engine->form_open();
 ?>
 	<br />
 	<ul>
-		<li><?php echo $engine->link( 'file:'.$what[0]['file_name'] ); ?></li>
+		<li><?php echo $engine->link( 'file:'.$file[0]['file_name'] ); ?></li>
 	</ul>
 	<br />
 	<input type="hidden" name="remove" value="<?php echo $_GET['remove']?>" />
@@ -66,24 +66,31 @@ function admin_files(&$engine, &$module)
 	else if (isset($_POST['remove'])) // delete
 	{
 		// 1. where, existence
-		$what = $engine->load_all(
+		$file = $engine->load_all(
 			"SELECT user_id, upload_id, file_name, file_size, description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
 				"AND upload_id = '".quote($engine->dblink, $_POST['file_id'])."'");
 
-		if (count($what) > 0)
+		if (count($file) > 0)
 		{
 			// 2. remove from DB
 			$engine->sql_query(
 				"DELETE FROM ".$engine->config['table_prefix']."upload ".
-				"WHERE upload_id = '". quote($engine->dblink, $what[0]['upload_id'])."'");
+				"WHERE upload_id = '". quote($engine->dblink, $file[0]['upload_id'])."'");
+
+			// update user uploads count
+			$engine->sql_query(
+				"UPDATE {$engine->config['user_table']} ".
+				"SET total_uploads = total_uploads - 1 ".
+				"WHERE user_id = '".quote($engine->dblink, $file[0]['user_id'])."' ".
+				"LIMIT 1");
 
 			print('<br />');
 			print('<div><em>'.$engine->get_translation('UploadRemovedFromDB').'</em></div>');
 
 			// 3. remove from FS
-			$real_filename = $engine->config['upload_path'].'/'.$what[0]['file_name'];
+			$real_filename = $engine->config['upload_path'].'/'.$file[0]['file_name'];
 
 			if (@unlink($real_filename))
 			{
@@ -94,7 +101,7 @@ function admin_files(&$engine, &$module)
 				print('<div class="error">'.$engine->get_translation('UploadRemovedFromFSError').'</div><br /><br /> ');
 			}
 
-			$engine->log(1, str_replace('%2', $what[0]['file_name'], str_replace('%1', $engine->tag.' global storage', $engine->get_translation('LogRemovedFile', $engine->config['language']))));
+			$engine->log(1, str_replace('%2', $file[0]['file_name'], str_replace('%1', $engine->tag.' global storage', $engine->get_translation('LogRemovedFile', $engine->config['language']))));
 		}
 		else
 		{
