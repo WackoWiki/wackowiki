@@ -401,6 +401,22 @@ function admin_users(&$engine, &$module)
 			$orderrevisions	= 'total_revisions_asc';
 		}
 
+		// set total_uploads ordering
+		if (isset($_GET['order']) && $_GET['order'] == 'total_uploads_asc')
+		{
+			$order		= 'ORDER BY total_uploads ASC ';
+			$orderuploads	= 'total_uploads_desc';
+		}
+		else if (isset($_GET['order']) && $_GET['order'] == 'total_uploads_desc')
+		{
+			$order		= 'ORDER BY total_uploads DESC ';
+			$orderuploads	= 'total_uploads_asc';
+		}
+		else
+		{
+			$orderuploads	= 'total_uploads_asc';
+		}
+
 		// set user_name ordering
 		if (isset($_GET['order']) && $_GET['order'] == 'user_asc')
 		{
@@ -476,6 +492,7 @@ function admin_users(&$engine, &$module)
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderpages; ?>">Pages</a></th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $ordercomments; ?>">Comments</a></th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderrevisions; ?>">Revisions</a></th>
+					<th style="width:20px;"><a href="?mode=users&order=<?php echo $orderuploads; ?>">Uploads</a></th>
 					<th style="width:20px;">Language</th>
 					<th style="width:20px;">Enabled</th>
 					<th style="width:20px;"><a href="?mode=users&order=<?php echo $signup_time; ?>">Signuptime</a></th>
@@ -495,6 +512,7 @@ function admin_users(&$engine, &$module)
 						'<td valign="top" align="center">'.$row['total_pages'].'</td>'.
 						'<td valign="top" align="center">'.$row['total_comments'].'</td>'.
 						'<td valign="top" align="center">'.$row['total_revisions'].'</td>'.
+						'<td valign="top" align="center">'.$row['total_uploads'].'</td>'.
 						'<td valign="top" align="center"><small><a href="?mode=users&lang='.$row['lang'].'">'.$row['lang'].'</a></small></td>'.
 						'<td valign="top" align="center">'.$row['enabled'].'</td>'.
 						'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['signup_time'])).'</small></td>'.

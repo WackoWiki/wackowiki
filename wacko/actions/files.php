@@ -19,14 +19,14 @@ if (!defined('IN_WACKO'))
 
 $page_id = '';
 
-if (!isset($nomark)) $nomark = '';
-if (!isset($order)) $order = '';
-if (!isset($global)) $global = '';
-if (!isset($tag)) $tag = '';
-if (!isset($owner)) $owner = '';
-if (!isset($page)) $page = '';
-if (!isset($pictures)) $pictures = null;
-if (!isset($max)) $max = '';
+if (!isset($nomark))	$nomark = '';
+if (!isset($order))		$order = '';
+if (!isset($global))	$global = '';
+if (!isset($tag))		$tag = '';
+if (!isset($owner))		$owner = '';
+if (!isset($page))		$page = '';
+if (!isset($pictures))	$pictures = null;
+if (!isset($max))		$max = '';
 
 if ($max)
 {
@@ -87,13 +87,13 @@ if ($can_view)
 	}
 
 	$count = $this->load_all(
-			"SELECT f.upload_id ".
-			"FROM ".$this->config['table_prefix']."upload f ".
-				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
-			"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
-				($owner
-					? "AND u.user_name='".quote($this->dblink, $owner)."' "
-				: ''), 1);
+		"SELECT f.upload_id ".
+		"FROM ".$this->config['table_prefix']."upload f ".
+			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
+			($owner
+				? "AND u.user_name='".quote($this->dblink, $owner)."' "
+			: ''), 1);
 
 	$count		= count($count);
 	$pagination = $this->pagination($count, $limit, 'f');

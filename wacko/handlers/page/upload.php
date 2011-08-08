@@ -123,7 +123,8 @@ if ($registered
 		{
 			$page_id = $this->page['page_id'];
 		}
-				$file = $this->load_all(
+
+		$file = $this->load_all(
 			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.description, f.uploaded_dt ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
@@ -213,6 +214,13 @@ if ($registered
 					$this->sql_query(
 						"DELETE FROM ".$this->config['table_prefix']."upload ".
 						"WHERE upload_id = '". quote($this->dblink, $file[0]['upload_id'])."'" );
+
+					// update user uploads count
+					$this->sql_query(
+						"UPDATE {$this->config['user_table']} ".
+						"SET total_uploads = total_uploads - 1 ".
+						"WHERE user_id = '".quote($this->dblink, $file[0]['user_id'])."' ".
+						"LIMIT 1");
 
 					$message .= $this->get_translation('UploadRemovedFromDB')."<br />";
 
@@ -470,6 +478,13 @@ if ($registered
 									"picture_h		= '".quote($this->dblink, $size[1])."',".
 									"file_ext		= '".quote($this->dblink, substr($ext, 0, 10))."',".
 									"uploaded_dt	= '".quote($this->dblink, $uploaded_dt)."' ");
+
+							// update user uploads count
+							$this->sql_query(
+								"UPDATE {$this->config['user_table']} ".
+								"SET total_uploads = total_uploads + 1 ".
+								"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
+								"LIMIT 1");
 
 							// 4. output link to file
 							// !!!!! write after providing filelink syntax
