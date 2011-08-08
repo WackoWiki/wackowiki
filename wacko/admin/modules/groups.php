@@ -469,8 +469,8 @@ function admin_groups(&$engine, &$module)
 					<th style="width:5px;">ID</th>
 					<th style="width:20px;"><a href="?mode=groups&order=<?php echo $ordergroup; ?>">Group</a></th>
 					<th>Description</th>
-					<th style="width:20px;"><a href="?mode=groups&order=<?php echo $ordermembers; ?>">Members</a></th>
 					<th style="width:20px;">Moderator</th>
+					<th style="width:20px;"><a href="?mode=groups&order=<?php echo $ordermembers; ?>">Members</a></th>
 					<th style="width:20px;">Open</th>
 					<th style="width:20px;">Active</th>
 					<th style="width:20px;"><a href="?mode=groups&order=<?php echo $created; ?>">Created</a></th>
@@ -485,8 +485,8 @@ function admin_groups(&$engine, &$module)
 						'<td valign="top" align="center">'.$row['group_id'].'</td>'.
 						'<td valign="top" align="left" style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=groups&group_id='.$row['group_id'].'">'.$row['group_name'].'</a></strong></td>'.
 						'<td valign="top">'.$row['description'].'</td>'.
-						'<td valign="top" align="center">'.$row['members'].'</td>'.
 						'<td valign="top" align="center"><small><a href="?mode=groups&moderator='.$row['moderator'].'">'.$row['user_name'].'</a></small></td>'.
+						'<td valign="top" align="center">'.$row['members'].'</td>'.
 						'<td valign="top" align="center">'.$row['open'].'</td>'.
 						'<td valign="top" align="center">'.$row['active'].'</td>'.
 						'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['created'])).'</small></td>'.
