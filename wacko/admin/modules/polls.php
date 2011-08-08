@@ -12,14 +12,14 @@ if (!defined('IN_WACKO'))
 $module['pollsadmin'] = array(
 		'order'	=> 4,
 		'cat'	=> 'Content',
-		'mode'	=> 'pollsadmin',
+		'mode'	=> 'polls',
 		'name'	=> 'Polls',
 		'title'	=> 'Editing, start and stop polls',
 	);
 
 ########################################################
 
-function admin_pollsadmin(&$engine, &$module)
+function admin_polls(&$engine, &$module)
 {
 	$confirmation = '';
 	$moderation = '';

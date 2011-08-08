@@ -6,15 +6,15 @@ if (!defined('IN_WACKO'))
 }
 
 ########################################################
-##   Global Files                                     ##
+##   Uploaded Files                                   ##
 ########################################################
 
 $module['files'] = array(
 		'order'	=> 4,
 		'cat'	=> 'Content',
 		'mode'	=> 'files',
-		'name'	=> 'Global files',
-		'title'	=> 'Manage the global configuration file',
+		'name'	=> 'Files',
+		'title'	=> 'Manage uploaded files',
 	);
 
 ########################################################
