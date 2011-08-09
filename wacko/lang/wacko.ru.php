@@ -761,7 +761,7 @@ $wacko_translation = array(
 	'fileicon'					=> '<img src="{theme}icons/file.gif" alt="" />',
 	'pdficon'					=> '<img src="{theme}icons/pdf.gif" alt="Документ PDF" />',
 	'rdficon'					=> '<img src="{theme}icons/rdf.gif" alt="Документ RDF" />',
-	'emailicon'					=> '<img src="{theme}icons/mail.gif" alt="" />',
+	'emailicon'					=> '<img src="{theme}icons/mail.png" alt="" />',
 	'jabbericon'				=> '<img src="{theme}icons/jabber.png" alt="xmpp" />',
 	'lockicon'					=> '<img src="{theme}icons/lock.gif" alt="Доступ запрещён" />',
 	'keyicon'					=> '<img src="{theme}icons/key.gif" alt="Страница с ограниченным доступом" />',

@@ -216,7 +216,7 @@ $wacko_translation = array(
 	'SourceDesc'				=> 'the source will be shown with exception of those fragments which are hidden by formatters <nobr><tt>%%(comments)..%%</tt></nobr>',
 
 	// groups handler
-	'GroupsMembers'				=> 'Members for Group',
+	'GroupsMembersFor'			=> 'Members for Group',
 	'GroupsDescription'			=> 'Description',
 	'GroupsModerator'			=> 'Moderator',
 	'GroupsOpen'				=> 'Open',
@@ -244,6 +244,21 @@ $wacko_translation = array(
 	'MembersRemove'				=> 'Are you sure you want to remove member ',
 	'MembersRemoved'			=> 'The member was removed from the group.',
 	'MembersDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
+
+	// Groups action
+	'GroupsSearch'				=> 'Find Groups',
+	'GroupsFilter'				=> 'Search',
+	'GroupsOpenProfile'			=> 'View Profile',
+	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
+	'GroupsName'				=> 'Group',
+	'GroupsMembers'				=> 'Members',
+	'GroupsCreated'				=> 'Created',
+	'GroupsNotFound'			=> 'Group <tt>%2</tt> not found. Click <a href="%1">here</a>, to go to the main list.',
+	'GroupsProfile'				=> 'Profile',
+	'GroupsList'				=> 'View the entire list of groups',
+	'GroupsMembersSortName'		=> '[Sort by name]',
+	'GroupsMembersSortDate'		=> '[Sort by creation date]',
+	'GroupSpace'				=> 'Group space',
 
 	'UserEnabled'				=> 'Enabled',
 	'UsersAddNew'				=> 'Add new user',
@@ -594,26 +609,6 @@ $wacko_translation = array(
 								   'Forward your mail program) to address %4.',
 	'UsersPMNotLoggedIn'		=> 'You are not registered in the system and can not send private messages to users.',
 
-	// Groups action
-	'GroupsSearch'				=> 'Find Groups',
-	'GroupsFilter'				=> 'Search',
-	'GroupsOpenProfile'			=> 'View Profile',
-	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
-	'GroupsName'				=> 'Name',
-	'GroupsMembers'				=> 'Members',
-	'GroupsSignup'				=> 'Created',
-	'GroupsLastSession'			=> 'Last session',
-	'GroupsNotFound'			=> 'Group <tt>%2</tt> not found. Click <a href="%1">here</a>, to go to the main list.',
-	'GroupsProfile'				=> 'Profile',
-	'GroupsContact'				=> 'Contact',
-	'GroupsList'				=> 'View the entire list of groups',
-	'GroupsSignupDate'			=> 'Created',
-	'GroupsOwnedPages'			=> 'Owned pages',
-	'GroupsMembersSortName'		=> '[Sort by name]',
-	'GroupsDocsSortDate'		=> '[Sort by creation date]',
-	'GroupsSessionNA'			=> '[not recorded]',
-	'GroupSpace'				=> 'Group space',
-
 
 	// rating handler
 	'RatingDenied'				=> 'You can not rate this page.',
@@ -776,7 +771,7 @@ $wacko_translation = array(
 	'fileicon'					=> '<img src="{theme}icons/file.gif" alt="file" />',
 	'pdficon'					=> '<img src="{theme}icons/pdf.gif" alt="PDF" />',
 	'rdficon'					=> '<img src="{theme}icons/rdf.gif" alt="RDF" />',
-	'emailicon'					=> '<img src="{theme}icons/mail.gif" alt="email" />',
+	'emailicon'					=> '<img src="{theme}icons/mail.png" alt="email" />',
 	'jabbericon'				=> '<img src="{theme}icons/jabber.png" alt="xmpp" />',
 	'lockicon'					=> '<img src="{theme}icons/lock.gif" alt="denied" />',
 	'keyicon'					=> '<img src="{theme}icons/key.gif" alt="restricted" />',
