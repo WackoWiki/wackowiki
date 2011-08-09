@@ -659,6 +659,7 @@ $wacko_translation = array(
 	'BewareChangeLang' => 'Vær opmærksom på at ændring af sidens sprog vil ændre sprogformatet og eventuelt kan betyde at eksisterende tekst bliver noget rod.',
 	'SetLang' => 'Sidens sprog',
 	'SetMenuLabel' => 'Menu label',
+	'SetShowMenuLabel'			=> 'Show in navigation',
 
 	// upload
 	'UploadFor' => 'Filupload',

@@ -659,6 +659,7 @@ $wacko_translation = array(
 	'BewareChangeLang' => 'Don\'t change language, if you don\'t know exactly, what are you doing. Change of language setting will lead to renaming of the page according to transliteration rules of selected language. All non-english content will become unreadable also. You could turn those effects backward by returning language setting to its initial value.',
 	'SetLang' => 'Lingua di questa pagina',
 	'SetMenuLabel' => 'Menu label',
+	'SetShowMenuLabel'			=> 'Show in navigation',
 
 	// upload
 	'UploadFor' => 'Caricare file',

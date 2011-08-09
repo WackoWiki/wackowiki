@@ -659,6 +659,7 @@ $wacko_translation = array(
 	'BewareChangeLang' => 'Verander de taal van de pagina niet, tenzij u precies weet wat u aan het doen bent. Het hernoemen van deze pagina leidt ertoe dat links in de oorspronkelijke taal ongeldig worden. U kunt dit terugdraaien door de pagina in te stellen op de oorspronkelijke taal.',
 	'SetLang' => 'Taal van deze pagina',
 	'SetMenuLabel' => 'Menu label',
+	'SetShowMenuLabel'			=> 'Show in navigation',
 
 	// upload
 	'UploadFor' => 'Upload bestand',

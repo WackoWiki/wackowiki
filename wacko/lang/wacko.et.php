@@ -659,6 +659,7 @@ $wacko_translation = array(
 	'BewareChangeLang' => 'Ära muuda keelt, kui sa ei ole päris kindel selles, mida sa teed. Kogu mitte-inglisekeelne sisu võib muuta loetamatuks. Sa saad seda tegevust tagasi pöörata, kui muudad keeleseadistuse tagasi selle algolekusse. ',
 	'SetLang' => 'Selle lehe keel',
 	'SetMenuLabel' => 'Menu label',
+	'SetShowMenuLabel'			=> 'Show in navigation',
 
 	// upload
 	'UploadFor' => 'Faili üleslaadimine',
