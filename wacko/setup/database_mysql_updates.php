@@ -162,6 +162,7 @@ $alter_page_r4_3_35 = "ALTER TABLE {$pref}page ADD reviewed_time DATETIME NOT NU
 $alter_page_r4_3_36 = "ALTER TABLE {$pref}page ADD menu_tag VARCHAR(250) NOT NULL DEFAULT '' AFTER supertag";
 $alter_page_r4_3_37 = "ALTER TABLE {$pref}page ADD depth INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER menu_tag, ADD INDEX idx_depth(depth)";
 $alter_page_r4_3_38 = "ALTER TABLE {$pref}page ADD parent_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER depth";
+$alter_page_r4_3_39 = "ALTER TABLE {$pref}page ADD show_menu_tag TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER tree_level";
 
 $update_page_r4_3_1 = "UPDATE {$pref}page SET body_r=''";
 

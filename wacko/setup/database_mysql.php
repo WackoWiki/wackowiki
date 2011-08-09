@@ -145,6 +145,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"hide_toc TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"hide_index TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"tree_level TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
+					"show_menu_tag TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"allow_rawhtml TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"disable_safehtml TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"noindex TINYINT(1) UNSIGNED NULL DEFAULT NULL,".

@@ -659,6 +659,7 @@ $wacko_translation = array(
 	'BewareChangeLang'			=> 'Ne changez pas la langue de cette page si vous n&rsquo;êtes pas sûr de ce que vous faites. Changer de langue conduira à renommer la page conformément aux règles de translittération de la langue choisie. Les caractères propres à la langue précédente deviendront illisibles. Vous pourrez cependant revenir au réglage de langue initial.',
 	'SetLang'					=> 'Langue de cette page',
 	'SetMenuLabel'				=> 'Étiquette de Menu',
+	'SetShowMenuLabel'			=> 'Show in navigation',
 
 	// upload
 	'UploadFor'					=> 'Déposer un fichier ',

@@ -57,6 +57,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 				: 	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
 					"theme				= '".quote($this->dblink, (isset($_POST['theme']) ? $_POST['theme'] : ''))."', ".
 					"menu_tag			= '".quote($this->dblink, htmlspecialchars(trim($_POST['menu_tag'])))."', ".
+					"show_menu_tag		= '".quote($this->dblink, (int)$_POST['show_menu_tag'])."', ".
 					"title				= '".quote($this->dblink, htmlspecialchars(trim($_POST['title'])))."', ".
 					"keywords			= '".quote($this->dblink, htmlspecialchars(trim($_POST['keywords'])))."', ".
 					"description		= '".quote($this->dblink, htmlspecialchars(trim($_POST['description'])))."' "
@@ -223,6 +224,13 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 			echo '<tr class="lined">';
 			echo '<th class="form_left" scope="row"><label for="menu_tag">'.$this->get_translation('SetMenuLabel').'</label></th>';
 			echo '<td class="form_right"><input id="menu_tag" name="menu_tag" value="'.(isset($this->page['menu_tag']) ? $this->page['menu_tag'] : '').'" size="60" maxlength="100" /></td>';
+
+			/* echo '<tr class="lined">';
+			echo '<th class="form_left" scope="row"><label for="show_menu_tag">'.$this->get_translation('SetShowMenuLabel').'</label></th>';
+			echo '<td class="form_right">';
+			echo "<input type=\"radio\" id=\"menu_tag_on\" name=\"show_menu_tag\" value=\"1\" ".( $this->page['show_menu_tag'] ? "checked=\"checked\"" : "" )."/><label for=\"menu_tag_on\">".$this->get_translation('MetaOn')."</label>";
+			echo "<input type=\"radio\" id=\"menu_tag_off\" name=\"show_menu_tag\" value=\"0\" ".( !$this->page['show_menu_tag'] ? "checked=\"checked\"" : "" )."/><label for=\"menu_tag_off\">".$this->get_translation('MetaOff')."</label>";
+			echo "</td>"; */
 
 			echo "</tr>\n<tr class=\"lined\">";
 			echo '<th class="form_left" scope="row"><label for="lang">'.$this->get_translation('SetLang').'</label></th>';
