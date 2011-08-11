@@ -90,19 +90,19 @@ require_once('setup/lang/installer.'.$config['language'].'.php');
       <div class="installer">
          <h1><?php echo $lang['Title'];?></h1>
          <h1 class="white">&nbsp;:&nbsp;</h1>
-         <h1><?php echo $installAction == 'lang' ? $lang['Lang'] : $lang[$installAction]; ?></h1>
+         <h1><?php echo $install_action == 'lang' ? $lang['Lang'] : $lang[$install_action]; ?></h1>
          <ul class="menu">
-            <li class="<?php echo $installAction == 'lang' ? 'current' : 'item'; ?>"><?php echo $lang['Lang']; ?></li>
+            <li class="<?php echo $install_action == 'lang' ? 'current' : 'item'; ?>"><?php echo $lang['Lang']; ?></li>
             <li>&gt;</li>
-            <li class="<?php echo $installAction == 'version-check' ? 'current' : 'item'; ?>"><?php echo $lang['version-check']; ?></li>
+            <li class="<?php echo $install_action == 'version-check' ? 'current' : 'item'; ?>"><?php echo $lang['version-check']; ?></li>
             <li>&gt;</li>
-            <li class="<?php echo $installAction == 'site-config' ? 'current' : 'item'; ?>"><?php echo $lang['site-config']; ?></li>
+            <li class="<?php echo $install_action == 'site-config' ? 'current' : 'item'; ?>"><?php echo $lang['site-config']; ?></li>
             <li>&gt;</li>
-            <li class="<?php echo $installAction == 'database-config' ? 'current' : 'item'; ?>"><?php echo $lang['database-config']; ?></li>
+            <li class="<?php echo $install_action == 'database-config' ? 'current' : 'item'; ?>"><?php echo $lang['database-config']; ?></li>
             <li>&gt;</li>
-            <li class="<?php echo $installAction == 'database-install' ? 'current' : 'item'; ?>"><?php echo $lang['database-install']; ?></li>
+            <li class="<?php echo $install_action == 'database-install' ? 'current' : 'item'; ?>"><?php echo $lang['database-install']; ?></li>
             <li>&gt;</li>
-            <li class="<?php echo $installAction == 'write-config' ? 'current' : 'item'; ?>"><?php echo $lang['write-config']; ?></li>
+            <li class="<?php echo $install_action == 'write-config' ? 'current' : 'item'; ?>"><?php echo $lang['write-config']; ?></li>
          </ul>
          <div class="fake_hr">
             <hr />

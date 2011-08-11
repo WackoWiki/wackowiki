@@ -426,7 +426,7 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R4.3 to R5.0.rc1
+				// upgrade from R4.3 to R5.0.beta
 				case 'R4.3':
 					echo "         <h2>Wacko R4.3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
@@ -489,7 +489,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_28, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_29, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_30, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_31, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+
 
 					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_1, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_2, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
@@ -585,7 +585,6 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_36, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_37, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_38, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_39, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_11, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_12, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
@@ -655,7 +654,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_2, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_3, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 
-					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysql_query($table_user_setting_r4_3, $dblink), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysql_query($table_user_setting_r4_3_1, $dblink), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -670,6 +669,19 @@ switch($config['database_driver'])
 					test($lang['InstallingRegisteredGroup'], @mysql_query($insert_registered_group, $dblink), str_replace('%1', 'registered group', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingModeratorGroup'], @mysql_query($insert_moderator_group, $dblink), str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingReviewerGroup'], @mysql_query($insert_reviewer_group, $dblink), str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
+
+					echo "            </ol>\n";
+
+				// upgrade from 5.0.beta to R5.0.rc1
+				case '5.0.beta':
+					echo "         <h2>Wacko 5.0.beta ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_39, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_40, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_24, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_31, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysql_query($table_user_setting_r4_3_2, $dblink), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
 
 					echo "            </ol>\n";
 					echo "            <br />\n";
@@ -825,7 +837,7 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R4.3 to R5.0.rc1
+				// upgrade from R4.3 to R5.0.beta
 				case 'R4.3':
 					echo "         <h2>Wacko R4.3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
@@ -888,7 +900,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_28), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_29), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_30), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_31), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+
 
 					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_1), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_2), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
@@ -984,7 +996,6 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_36), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_37), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_38), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_39), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_11), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_12), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
@@ -1053,7 +1064,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_2), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_3), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 
-					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $table_user_setting_r4_3), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $table_user_setting_r4_3_1), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -1068,6 +1079,19 @@ switch($config['database_driver'])
 					test($lang['InstallingRegisteredGroup'], @mysqli_query($dblink, $insert_registered_group), str_replace('%1', 'registered group', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingModeratorGroup'], @mysqli_query($dblink, $insert_moderator_group), str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingReviewerGroup'], @mysqli_query($dblink, $insert_reviewer_group), str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
+
+					echo "            </ol>\n";
+
+				// upgrade from R5.0.beta to R5.0.rc1
+				case '5.0.beta':
+					echo "         <h2>Wacko 5.0.beta ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_39), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_40), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_24), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_31), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $table_user_setting_r4_3_2), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
 					echo "            </ol>\n";
 					echo "         <br />\n";
@@ -1088,7 +1112,7 @@ switch($config['database_driver'])
 		$dsn = '';
 		switch($config['database_driver'])
 		{
-			case 'firebird':
+			/* case 'firebird':
 				$dsn = $config['database_driver'].":dbname=".$config['database_host'].":".$config['database_database'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
 				break;
 			case 'ibm':
@@ -1102,14 +1126,19 @@ switch($config['database_driver'])
 				$dsn = $config['database_driver'].":dbname=".$config['database_database'];
 				break;
 			case 'sqlite':
-			case 'sqlite2':
+			case 'sqlite2': */
 			case 'mysql_pdo':
 				require_once('setup/database_mysql.php');
 				require_once('setup/database_mysql_updates.php'); // mysql only
-				if ($config['database_driver'] == 'mysql_pdo') $config['database_driver'] = 'mysql';
+
+				if ($config['database_driver'] == 'mysql_pdo')
+				{
+					$config['database_driver'] = 'mysql';
+				}
+
 				$dsn = $config['database_driver'].":dbname=".$config['database_database'].";host=".$config['database_host'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
 				break;
-			case 'mssql':
+			/* case 'mssql':
 				require_once('setup/database_mysql.php');
 				$dsn = $config['database_driver'].":host=".$config['database_host'].($config['database_port'] != "" ? ",".$config['database_port'] : "").";dbname=".$config['database_database'];
 				print($dsn);
@@ -1117,7 +1146,7 @@ switch($config['database_driver'])
 			case 'pgsql':
 				require_once('setup/database_pgsql.php');
 				$dsn = $config['database_driver'].":dbname=".$config['database_database'].";host=".$config['database_host'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
-				break;
+				break; */
 		}
 
 		echo "         <ul>\n";
@@ -1233,7 +1262,7 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R4.3 to R5.0.rc1
+				// upgrade from R4.3 to R5.0.beta
 				case 'R4.3':
 					echo "         <h2>Wacko R4.3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
@@ -1296,7 +1325,7 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_28, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_29, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_30, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_31, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+
 
 					test_pdo(str_replace('%1', 'acl', $lang['AlterTable']), $alter_acl_r4_3_1, str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'acl', $lang['AlterTable']), $alter_acl_r4_3_2, str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
@@ -1392,7 +1421,6 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_36, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_37, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_38, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_39, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 
 					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_11, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_12, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
@@ -1461,7 +1489,7 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_2, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_3, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 
-					test_pdo(str_replace('%1', 'user_setting', $lang['CreatingTable']), $table_user_setting_r4_3, str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'user_setting', $lang['CreatingTable']), $table_user_setting_r4_3_1, str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
 					// inserting config values
 					test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -1476,6 +1504,19 @@ switch($config['database_driver'])
 					test_pdo($lang['InstallingRegisteredGroup'], $insert_registered_group, str_replace('%1', 'registered group', $lang['ErrorAlreadyExists']));
 					test_pdo($lang['InstallingModeratorGroup'], $insert_moderator_group, str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
 					test_pdo($lang['InstallingReviewerGroup'], $insert_reviewer_group, str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
+
+					echo "            </ol>\n";
+
+				// upgrade from R5.0.beta to R5.0.rc1
+				case '5.0.beta':
+					echo "         <h2>Wacko 5.0.beta ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_39, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_40, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_24, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_31, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'user_setting', $lang['CreatingTable']), $table_user_setting_r4_3_2, str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
 					echo "            </ol>\n";
 					echo "         <br />\n";
