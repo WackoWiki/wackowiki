@@ -161,12 +161,12 @@ class Init
 			{
 				$found_rewrite_extension = function_exists('apache_get_modules') ? in_array('mod_rewrite', apache_get_modules()) : false;
 
-			/*
-				VERY IMPORTANT NOTE
+				/*
+					VERY IMPORTANT NOTE
 
-				The name of the array "wakkaConfig" is very important for backwards compatibility when we are upgrading an old Wacko install.
-				For that reason this can never change although internally the config data is referred to as $this->config
-			*/
+					The name of the array "wakkaConfig" is very important for backwards compatibility when we are upgrading an old Wacko install.
+					For that reason this can never change although internally the config data is referred to as $this->config
+				*/
 
 				// load default configuration values
 				if ( @file_exists('config/config_defaults.php') )
@@ -224,7 +224,7 @@ class Init
 					$this->config = $wacko_config_defaults;
 				}
 
-				$this->installer();
+				#$this->installer();
 			}
 			// secondary settings
 			else if ($this->config == true && !isset($this->dblink))
@@ -304,7 +304,10 @@ class Init
 				}
 
 				// saving to cache
-				$this->cache_settings('config', $this->config);
+				if ($this->config['wacko_version'] == WACKO_VERSION)
+				{
+					$this->cache_settings('config', $this->config);
+				}
 
 				return $this->config;
 			}
@@ -539,16 +542,16 @@ class Init
 			global $config;
 			$config = $this->config;
 
-			if (!$installAction = (isset($_REQUEST['installAction']) ? trim($_REQUEST['installAction']) : ''))
+			if (!$install_action = (isset($_REQUEST['installAction']) ? trim($_REQUEST['installAction']) : ''))
 			{
-				$installAction = 'lang';
+				$install_action = 'lang';
 			}
 
 			include('setup/header.php');
 
-			if (@file_exists('setup/'.$installAction.'.php'))
+			if (@file_exists('setup/'.$install_action.'.php'))
 			{
-				include('setup/'.$installAction.'.php');
+				include('setup/'.$install_action.'.php');
 			}
 			else
 			{

@@ -149,6 +149,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"allow_rawhtml TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"disable_safehtml TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"noindex TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"deleted TINYINT(1) UNSIGNED NULL DEFAULT '0',".
 					"PRIMARY KEY (page_id),".
 					"KEY idx_user_id (user_id),".
 					"KEY idx_owner_id (owner_id),".
@@ -222,6 +223,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"keywords VARCHAR(250) BINARY NOT NULL DEFAULT '',".
+					"deleted TINYINT(1) UNSIGNED NULL DEFAULT '0',".
 					"PRIMARY KEY (revision_id),".
 					"KEY idx_user_id (user_id),".
 					"KEY idx_owner_id (owner_id),".

@@ -163,6 +163,7 @@ $alter_page_r4_3_36 = "ALTER TABLE {$pref}page ADD menu_tag VARCHAR(250) NOT NUL
 $alter_page_r4_3_37 = "ALTER TABLE {$pref}page ADD depth INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER menu_tag, ADD INDEX idx_depth(depth)";
 $alter_page_r4_3_38 = "ALTER TABLE {$pref}page ADD parent_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER depth";
 $alter_page_r4_3_39 = "ALTER TABLE {$pref}page ADD show_menu_tag TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER tree_level";
+$alter_page_r4_3_40 = "ALTER TABLE {$pref}page ADD deleted TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER noindex";
 
 $update_page_r4_3_1 = "UPDATE {$pref}page SET body_r=''";
 
@@ -246,6 +247,7 @@ $alter_revision_r4_3_20 = "ALTER TABLE {$pref}revision ADD reviewer_id INT(10) U
 $alter_revision_r4_3_21 = "ALTER TABLE {$pref}revision ADD reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER reviewed";
 $alter_revision_r4_3_22 = "ALTER TABLE {$pref}revision ADD menu_tag VARCHAR(250) NOT NULL DEFAULT '' AFTER supertag";
 $alter_revision_r4_3_23 = "ALTER TABLE {$pref}revision ADD version_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER page_id";
+$alter_revision_r4_3_24 = "ALTER TABLE {$pref}revision ADD deleted TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER keywords";
 
 $update_revision_r4_3_1 = "UPDATE {$pref}revision AS revisions, (SELECT user_id, user_name FROM {$pref}user) AS users SET revisions.owner_id = users.user_id WHERE revisions.owner = users.user_name";
 $update_revision_r4_3_2 = "UPDATE {$pref}revision AS revisions, (SELECT user_id, user_name FROM {$pref}user) AS users SET revisions.user_id = users.user_id WHERE revisions.user = users.user_name";
@@ -327,7 +329,7 @@ $update_user_r4_3_3 = "UPDATE {$pref}user SET show_spaces = '0' WHERE show_space
 $update_user_r4_3_4 = "UPDATE {$pref}user SET typografica = '0' WHERE typografica = '2'";
 
 // USER SETTING
-$table_user_setting_r4_3 = "CREATE TABLE {$pref}user_setting (".
+$table_user_setting_r4_3_1 = "CREATE TABLE {$pref}user_setting (".
 					"setting_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL,".
 					"theme VARCHAR(20) DEFAULT NULL,".
@@ -344,7 +346,6 @@ $table_user_setting_r4_3 = "CREATE TABLE {$pref}user_setting (".
 					"autocomplete TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"numerate_links TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"allow_intercom TINYINT(1) UNSIGNED DEFAULT NULL,".
-					"allow_massemail TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"hide_lastsession TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"validate_ip TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"noid_pubs TINYINT(1) UNSIGNED DEFAULT NULL,".
@@ -354,6 +355,7 @@ $table_user_setting_r4_3 = "CREATE TABLE {$pref}user_setting (".
 					"UNIQUE KEY idx_user_id (user_id),".
 					"KEY idx_send_watchmail (send_watchmail)".
 				") {$engine} COMMENT='' {$charset}";
+$table_user_setting_r4_3_2 = "ALTER TABLE {$pref}user_setting ADD allow_massemail TINYINT(1) UNSIGNED DEFAULT '0' AFTER allow_intercom".
 
 // WATCH
 $rename_watch_r4_3_1 = "RENAME TABLE {$pref}pagewatches TO {$pref}watch";
