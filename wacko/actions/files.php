@@ -92,8 +92,8 @@ if ($can_view)
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
 			($owner
-				? "AND u.user_name='".quote($this->dblink, $owner)."' "
-			: ''), 1);
+				? "AND u.user_name = '".quote($this->dblink, $owner)."' "
+				: ''), 1);
 
 	$count		= count($count);
 	$pagination = $this->pagination($count, $limit, 'f');
@@ -105,7 +105,7 @@ if ($can_view)
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
 			($owner
-				? "AND u.user_name='".quote($this->dblink, $owner)."' "
+				? "AND u.user_name = '".quote($this->dblink, $owner)."' "
 				: '')." ".
 		"ORDER BY f.".$order_by." ".
 		"LIMIT {$pagination['offset']}, {$limit}");

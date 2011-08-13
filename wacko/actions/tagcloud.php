@@ -52,6 +52,7 @@ if (!function_exists('print_tag_cloud'))
 // settings:
 //	root		- where to start counting from (defaults to current tag)
 //	lang		- categories language if necessary (defaults to current page lang)
+//	owner		- page owner
 //	sort		- order pages alphabetically ('abc', default) or number ('number')
 //	nomark		- display header and fieldset (1) or 0 (default))
 
@@ -59,6 +60,7 @@ if (!function_exists('print_tag_cloud'))
 if (!isset($root))			$root	= '/';
 if (!isset($nomark))		$nomark = '';
 if (!isset($lang))			$lang	= $this->page['lang'];
+if (!isset($owner))			$owner = '';
 if (!isset($sort) || !in_array($sort, array('abc', 'number')))
 {
 	$sort = 'abc';
@@ -76,9 +78,17 @@ $sql = "SELECT
 		FROM
 			{$this->config['table_prefix']}category c
 			INNER JOIN {$this->config['table_prefix']}category_page cp ON (c.category_id = cp.category_id)
-			INNER JOIN {$this->config['table_prefix']}page p ON (cp.page_id = p.page_id)
-		WHERE c.lang = '{$lang}' ".
-			( $root ? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) " : '' ).
+			INNER JOIN {$this->config['table_prefix']}page p ON (cp.page_id = p.page_id) ".
+			($owner
+				? "INNER JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) "
+				: '' ).
+		"WHERE c.lang = '{$lang}' ".
+			($root
+				? "AND ( p.tag = '".quote($this->dblink, $root)."' OR p.tag LIKE '".quote($this->dblink, $root)."/%' ) "
+				: '' ).
+			($owner
+				? "AND u.user_name = '".quote($this->dblink, $owner)."' "
+				: '' ).
 		"GROUP BY
 			c.category
 		ORDER BY {$order}";
