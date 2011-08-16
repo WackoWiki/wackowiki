@@ -68,7 +68,7 @@ if ($this->page)
 
 if ($this->get_user())
 {
-	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki '.$this->get_wacko_version()).'<br />';
+	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki').'<br />';
 }
 
 // comment this out for not showing website policy link at the bottom of your pages

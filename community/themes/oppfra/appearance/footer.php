@@ -268,7 +268,7 @@ if ($this->config['policy_page']) echo '<a href="'.htmlspecialchars($this->href(
 
 if ($this->get_user())
 {
-	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki '.$this->get_wacko_version());
+	echo $this->get_translation('PoweredBy').' '.$this->link('WackoWiki:HomePage', '', 'WackoWiki');
 }
 ?></div>
 </div>
