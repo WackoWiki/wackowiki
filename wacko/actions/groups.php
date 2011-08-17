@@ -1,0 +1,233 @@
+<?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
+$where			= '';
+$order			= '';
+$param			= '';
+$groups			= '';
+$usergroups		= '';
+$error			= '';
+
+// display group profile
+if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
+{
+	// does requested group exists?
+	if (false == $group = $this->load_group($_REQUEST['profile']))
+	{
+		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_REQUEST['profile']), str_replace('%1', $this->supertag, $this->get_translation('GroupsNotFound'))).'</div>';
+	}
+	else
+	{
+		// header and profile data
+		echo '<h1>'.$group['group_name'].'</h1>';
+		echo '<small><a href="'.$this->href('', $this->tag).'">&laquo; '.$this->get_translation('GroupsList')."</a></small>\n";
+		echo '<h2>'.$this->get_translation('GroupsProfile').'</h2>'."\n";
+
+		// basic info
+?>
+		<table border="0" cellspacing="3">
+			<tr class="lined">
+				<td class="userprofil"><?php echo $this->get_translation('GroupsDescription'); ?></td>
+				<td><?php echo $group['description']; ?></td>
+			</tr>
+			<tr class="lined">
+				<td class="userprofil"><?php echo $this->get_translation('GroupsCreated'); ?></td>
+				<td><?php echo $this->get_time_string_formatted($group['created']); ?></td>
+			</tr>
+			<tr class="lined"><?php // Have all group pages as sub pages of the current Groups page. ?>
+				<td class="userprofil"><?php echo $this->get_translation('GroupSpace'); // TODO: this might be placed somewhere else, just put it here for testing ?></td>
+				<td><a href="<?php echo $this->href('', ($this->config['groups_page'].'/'.$group['group_name'])); ?>"><?php echo $this->config['groups_page'].'/'.$group['group_name']; ?></a></td>
+			</tr>
+		</table>
+
+<?php
+
+		// group members
+		$limit = 20;
+		$count = $this->load_single(
+						"SELECT COUNT(m.user_id) AS total_members ".
+						"FROM {$this->config['table_prefix']}group g ".
+							"LEFT JOIN ".$this->config['table_prefix']."group_member m ON (m.group_id = g.group_id) ".
+						"WHERE ".
+							"g.active = '1' ".
+							"AND g.group_id = '".quote($this->dblink, $group['group_id'])."' ".
+						"LIMIT 1", 1);
+
+		echo '<h2 id="pages">'.$this->get_translation('GroupsMembers').'</a></h2>'."\n";
+		echo '<div class="indent"><small>'.$this->get_translation('GroupTotalMembers').': '.$count['total_members']."</small></div><br />\n";
+
+
+
+		$pagination = $this->pagination($count['total_members'], $limit, 'd', 'profile='.$group['group_name'].'&amp;sort='.( isset($_GET['sort']) && $_GET['sort'] != 'name' ? 'date' : 'name' ).'#members');
+
+		if ($count['total_members'])
+		{
+			$members = $this->load_all(
+				"SELECT u.user_id, u.user_name, u.signup_time, u.total_pages ".
+				"FROM {$this->config['table_prefix']}user u ".
+					"LEFT JOIN {$this->config['table_prefix']}group_member m ON (u.user_id = m.user_id) ".
+				"WHERE m.group_id = '".quote($this->dblink, $group['group_id'])."' ".
+					#"AND comment_on_id = '0' ".
+				"ORDER BY ".( isset($_GET['sort']) && $_GET['sort'] == 'name' ? 'u.user_name ASC' : 'signup_time DESC' )." ".
+				"LIMIT {$pagination['offset']}, $limit");
+
+			// sorting and pagination
+			echo '<small>'.( isset($_GET['sort']) && $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$group['group_name'].'&amp;sort=date').'#members">'.$this->get_translation('GroupMembersSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$group['group_name'].'&amp;sort=name').'#members">'.$this->get_translation('GroupsMembersSortName').'</a>' ).'</small>';
+			if (isset($pagination['text']))
+				echo " <span class=\"pagination\">".$pagination['text']."</span>\n";
+
+			// pages list itself
+			echo '<div>'."\n";
+
+			foreach ($members as $member)
+			{
+				echo '<a href="'.$this->href('', ($this->config['users_page'].'/'.$member['user_name'])).'">'.$member['user_name'].'</a> &mdash; <small>'.$this->get_time_string_formatted($member['signup_time'])."</small><br />\n";
+
+				$i = 0;
+				if (++$i >= $limit) break 1;
+			}
+			echo "</div>\n";
+
+			unset($members, $member, $limit, $i);
+		}
+		else
+		{
+			echo '<em>'.$this->get_translation('GroupsNA2').'</em>';
+		}
+
+	}
+}
+// display whole group list instead of the particular profile
+else
+{
+	$limit = 50;
+
+	// defining WHERE and ORDER clauses
+	// $param is passed to the pagination links
+	if (isset($_GET['group']) && $_GET['group'] == true && strlen($_GET['group']) > 2)
+	{
+		// goto group profile directly if so desired
+		if (isset($_GET['gotoprofile']) && $this->load_group($_GET['group']) == true)
+		{
+			$this->redirect($this->href('', '', 'profile='.htmlspecialchars($_GET['group'])));
+		}
+		else
+		{
+			$where = "WHERE group_name LIKE '%".quote($this->dblink, $_GET['group'])."%' ";
+			$param = "group=".htmlspecialchars($_GET['group']);
+		}
+	}
+	else if (isset($_GET['sort']) && $_GET['sort'] == 'name')
+	{
+		$order = "ORDER BY group_name ";
+		$param = "sort=".$_GET['sort'];
+	}
+	else if (isset($_GET['sort']) && $_GET['sort'] == 'members')
+	{
+		$order = "ORDER BY members ";
+		$param = "sort=".$_GET['sort'];
+	}
+	else if (isset($_GET['sort']) && $_GET['sort'] == 'created')
+	{
+		$order = "ORDER BY created ";
+		$param = "sort=".$_GET['sort'];
+	}
+
+	if (isset($_GET['order']) && $_GET['order'] == 'asc')
+	{
+		$order .= "ASC ";
+		$param .= "&amp;order=asc";
+	}
+	else if (isset($_GET['order']) && $_GET['order'] == 'desc')
+	{
+		$order .= "DESC ";
+		$param .= "&amp;order=desc";
+	}
+
+	$count = $this->load_single(
+		"SELECT COUNT(group_name) AS n ".
+		"FROM {$this->config['table_prefix']}group ".
+		( $where == true ? $where : '' ));
+
+	$pagination = $this->pagination($count['n'], $limit, 'p', $param);
+
+	// collect data
+	$groups = $this->load_all(
+		"SELECT g.group_name, g.description, g.created, u.user_name AS moderator, COUNT(m.user_id) AS members ".
+		"FROM {$this->config['table_prefix']}group g ".
+			"LEFT JOIN ".$this->config['table_prefix']."user u ON (g.moderator = u.user_id) ".
+			"LEFT JOIN ".$this->config['table_prefix']."group_member m ON (m.group_id = g.group_id) ".
+		( $where == true ? $where : '' ).
+		( $where ? 'AND ' : "WHERE ").
+			"g.active = '1' ".
+		"GROUP BY g.group_id ".
+		( $order == true ? $order : "ORDER BY members DESC " ).
+		"LIMIT {$pagination['offset']}, $limit");
+
+	// group filter form
+	echo '<table border="0" cellspacing="3" class="formation"><tr><td class="label">';
+	echo $this->form_open('', '', 'get');
+	echo $this->get_translation('GroupsSearch').': </td><td>';
+	echo '<input name="group" maxchars="40" size="40" value="'.htmlspecialchars(isset($_GET['group']) ? $_GET['group'] : '').'" /> ';
+	echo '<input id="submit" type="submit" value="'.$this->get_translation('GroupsFilter').'" /> ';
+	echo '<input id="button" type="submit" value="'.$this->get_translation('GroupsOpenProfile').'" name="gotoprofile" />';
+	echo $this->form_close();
+	echo '</td></tr></table><br />'."\n";
+
+	// print list
+	echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;\">\n";
+
+	// pagination
+	if (isset($pagination['text']))
+	{
+		echo '<tr><td colspan="6"><span class="pagination">'.$pagination['text'].'</span></td></tr>'."\n";
+	}
+
+	// list header
+	echo '<tr>'.
+			'<th><a href="'.$this->href('', '', 'sort=name'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('GroupsName').( (isset($_GET['sort']) && $_GET['sort'] == 'name') || (isset($_REQUEST['group']) && $_REQUEST['group'] == true) ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+			'<th><a href="'.$this->href('', '', 'sort=members'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('GroupsMembers').( (isset($_GET['sort']) && $_GET['sort'] == 'members') || (isset($_GET['sort']) && $_GET['sort'] == false) ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+		($this->get_user()
+			?
+			'<th><a href="'.$this->href('', '', 'sort=created'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('GroupsCreated').( isset($_GET['sort']) && $_GET['sort'] == 'created' ? (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+			/* '<th><a href="'.$this->href('', '', 'sort=session'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('GroupsLastSession').( isset($_GET['sort']) && $_GET['sort'] == 'session' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>' */''
+			: '').
+		"</tr>\n";
+
+	// list entries
+	if ($groups == false)
+	{
+		echo '<tr class="lined"><td colspan="5" align="center" style="padding:10px;"><small><em>'.$this->get_translation('UsersNoMatching')."</em></small></td></tr>\n";
+	}
+	else
+	{
+		foreach ($groups as $group)
+		{
+			echo '<tr class="lined">';
+
+			echo	'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($group['group_name']).'').'">'.$group['group_name'].'</a></td>'.
+					'<td align="center">'.$group['members'].'</td>'.
+					/* '<td align="center">'.$group['total_comments'].'</td>'.
+					'<td align="center">'.$group['total_revisions'].'</td>'. */
+				($this->get_user()
+					?
+					'<td align="center">'.$this->get_time_string_formatted($group['created']).'</td>'
+					: '').
+			"</tr>\n";
+		}
+	}
+
+	// pagination
+	if (isset($pagination['text']))
+	{
+		echo '<tr><td colspan="6"><span class="pagination">'.$pagination['text'].'</span></td></tr>'."\n";
+	}
+
+	echo "</table>\n";
+}
+
+?>
