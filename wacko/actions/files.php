@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 		[page="PageName" or global=1]
 		[order="time|FILENAME|size|size_desc|ext"]
 		[owner="UserName"]
-		[pictures=1]
+		[picture=1]
 		[max=number]
 	}}
  */
@@ -25,7 +25,7 @@ if (!isset($global))	$global = '';
 if (!isset($tag))		$tag = '';
 if (!isset($owner))		$owner = '';
 if (!isset($page))		$page = '';
-if (!isset($pictures))	$pictures = null;
+if (!isset($picture))	$picture = null;
 if (!isset($max))		$max = '';
 
 if ($max)
@@ -138,7 +138,7 @@ if ($can_view)
 	}
 
 	// !!!!! patch link not to show pictures when not needed
-	if ($pictures == false)
+	if ($picture == false)
 	{
 		$path2 = str_replace('file:', '_file:', $path2);
 	}
@@ -171,7 +171,7 @@ if ($can_view)
 
 		$file_id	= $file['upload_id'];
 		$file_name	= $file['file_name'];
-		$text		= ($pictures == false) ? $file_name : '';
+		$text		= ($picture == false) ? $file_name : '';
 		$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
 		$file_ext	= substr($file_name, strrpos($file_name, ".") + 1);
 		$link		= $this->link($path2.$file_name, '', $text);

@@ -284,7 +284,7 @@ function admin_files(&$engine, &$module)
 	$path2	= 'file:';
 
 	// !!!!! patch link not to show pictures when not needed
-	if (!isset($pictures))	$path2 = str_replace('file:', '_file:', $path2);
+	if (!isset($picture))	$path2 = str_replace('file:', '_file:', $path2);
 
 	if (count($files))
 	{
