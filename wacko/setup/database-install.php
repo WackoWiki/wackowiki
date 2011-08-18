@@ -239,6 +239,7 @@ $config_db['spam_filter']					= $config['spam_filter'];
 $config_db['standard_handlers']				= $config['standard_handlers'];
 $config_db['store_deleted_pages']			= $config['store_deleted_pages'];
 $config_db['session_encrypt_cookie']		= $config['session_encrypt_cookie'];
+$config_db['tag_page']						= $config['tag_page'];
 $config_db['theme']							= $config['theme'];
 $config_db['time_format']					= $config['time_format'];
 $config_db['time_format_seconds']			= $config['time_format_seconds'];
@@ -344,6 +345,8 @@ switch($config['database_driver'])
 				test(str_replace('%1', 'rating', $lang['DeletingTable']), @mysql_query($table_rating_drop, $dblink), str_replace('%1', 'rating', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'referrer', $lang['DeletingTable']), @mysql_query($table_referrer_drop, $dblink), str_replace('%1', 'referrer', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'revision', $lang['DeletingTable']), @mysql_query($table_revision_drop, $dblink), str_replace('%1', 'revision', $lang['ErrorDeletingTable']));
+				test(str_replace('%1', 'tag', $lang['DeletingTable']), @mysql_query($table_tag_drop, $dblink), str_replace('%1', 'tag', $lang['ErrorDeletingTable']));
+				test(str_replace('%1', 'tag_page', $lang['DeletingTable']), @mysql_query($table_tag_page_drop, $dblink), str_replace('%1', 'tag_page', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'upload', $lang['DeletingTable']), @mysql_query($table_upload_drop, $dblink), str_replace('%1', 'upload', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'user', $lang['DeletingTable']), @mysql_query($table_user_drop, $dblink), str_replace('%1', 'user', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'user_setting', $lang['DeletingTable']), @mysql_query($table_user_setting_drop, $dblink), str_replace('%1', 'user_setting', $lang['ErrorDeletingTable']));
@@ -376,6 +379,8 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'rating', $lang['CreatingTable']), @mysql_query($table_rating, $dblink), str_replace('%1', 'rating', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'referrer', $lang['CreatingTable']), @mysql_query($table_referrer, $dblink), str_replace('%1', 'referrer', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'revision', $lang['CreatingTable']), @mysql_query($table_revision, $dblink), str_replace('%1', 'revision', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'tag', $lang['CreatingTable']), @mysql_query($table_tag, $dblink), str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'tag_page', $lang['CreatingTable']), @mysql_query($table_tag_page, $dblink), str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'upload', $lang['CreatingTable']), @mysql_query($table_upload, $dblink), str_replace('%1', 'upload', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'user', $lang['CreatingTable']), @mysql_query($table_user, $dblink), str_replace('%1', 'user', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysql_query($table_user_setting, $dblink), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
@@ -680,6 +685,8 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_39, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_40, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_24, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'tag', $lang['CreatingTable']), @mysql_query($table_tag_r4_3, $dblink), str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'tag_page', $lang['CreatingTable']), @mysql_query($table_tag_page_r4_3, $dblink), str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_31, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysql_query($table_user_setting_r4_3_2, $dblink), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
 
@@ -757,6 +764,8 @@ switch($config['database_driver'])
 				test(str_replace('%1', 'rating', $lang['DeletingTable']), @mysqli_query($dblink, $table_rating_drop), str_replace('%1', 'rating', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'referrer', $lang['DeletingTable']), @mysqli_query($dblink, $table_referrer_drop), str_replace('%1', 'referrer', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'revision', $lang['DeletingTable']), @mysqli_query($dblink, $table_revision_drop), str_replace('%1', 'revision', $lang['ErrorDeletingTable']));
+				test(str_replace('%1', 'tag', $lang['DeletingTable']), @mysqli_query($dblink, $table_tag_drop), str_replace('%1', 'tag', $lang['ErrorDeletingTable']));
+				test(str_replace('%1', 'tag_page', $lang['DeletingTable']), @mysqli_query($dblink, $table_tag_page_drop), str_replace('%1', 'tag_page', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'upload', $lang['DeletingTable']), @mysqli_query($dblink, $table_upload_drop), str_replace('%1', 'upload', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'user', $lang['DeletingTable']), @mysqli_query($dblink, $table_user_drop), str_replace('%1', 'user', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'user_setting', $lang['DeletingTable']), @mysqli_query($dblink, $table_user_setting_drop), str_replace('%1', 'user_setting', $lang['ErrorDeletingTable']));
@@ -789,6 +798,8 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'rating', $lang['CreatingTable']), @mysqli_query($dblink, $table_rating), str_replace('%1', 'rating', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'referrer', $lang['CreatingTable']), @mysqli_query($dblink, $table_referrer), str_replace('%1', 'referrer', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'revision', $lang['CreatingTable']), @mysqli_query($dblink, $table_revision), str_replace('%1', 'revision', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'tag', $lang['CreatingTable']), @mysqli_query($dblink, $table_tag), str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'tag_page', $lang['CreatingTable']), @mysqli_query($dblink, $table_tag_page), str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'upload', $lang['CreatingTable']), @mysqli_query($dblink, $table_upload), str_replace('%1', 'upload', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'user', $lang['CreatingTable']), @mysqli_query($dblink, $table_user), str_replace('%1', 'user', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $table_user_setting), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
@@ -1090,6 +1101,8 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_39), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_40), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_24), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'tag', $lang['CreatingTable']), @mysqli_query($dblink, $table_tag_r4_3), str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'tag_page', $lang['CreatingTable']), @mysqli_query($dblink, $table_tag_page_r4_3), str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_31), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $table_user_setting_r4_3_2), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
@@ -1180,6 +1193,8 @@ switch($config['database_driver'])
 				test_pdo(str_replace('%1', 'rating', $lang['DeletingTable']), $table_rating_drop, str_replace('%1', 'rating', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'referrer', $lang['DeletingTable']), $table_referrer_drop, str_replace('%1', 'referrer', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'revision', $lang['DeletingTable']), $table_revision_drop, str_replace('%1', 'revision', $lang['ErrorDeletingTable']));
+				test_pdo(str_replace('%1', 'tag', $lang['DeletingTable']), $table_tag_drop, str_replace('%1', 'tag', $lang['ErrorDeletingTable']));
+				test_pdo(str_replace('%1', 'tag_page', $lang['DeletingTable']), $table_tag_page_drop, str_replace('%1', 'tag_page', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'upload', $lang['DeletingTable']), $table_upload_drop, str_replace('%1', 'upload', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'user', $lang['DeletingTable']), $table_user_drop, str_replace('%1', 'user', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'user_setting', $lang['DeletingTable']), $table_user_setting_drop, str_replace('%1', 'user_setting', $lang['ErrorDeletingTable']));
@@ -1212,6 +1227,8 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'rating', $lang['CreatingTable']), $table_rating, str_replace('%1', 'rating', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'referrer', $lang['CreatingTable']), $table_referrer, str_replace('%1', 'referrer', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'revision', $lang['CreatingTable']), $table_revision, str_replace('%1', 'revision', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'tag', $lang['CreatingTable']), $table_tag, str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'tag_page', $lang['CreatingTable']), $table_tag_page, str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'upload', $lang['CreatingTable']), $table_upload, str_replace('%1', 'upload', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'user', $lang['CreatingTable']), $table_user, str_replace('%1', 'user', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'user_setting', $lang['CreatingTable']), $table_user_setting, str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
@@ -1515,6 +1532,8 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_39, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_40, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_24, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'tag', $lang['CreatingTable']), $table_tag_r4_3, str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'tag_page', $lang['CreatingTable']), $table_tag_page_r4_3, str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_31, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'user_setting', $lang['CreatingTable']), $table_user_setting_r4_3_2, str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 

@@ -14,8 +14,8 @@ if (!isset($list)) $list = 0;
 if (!isset($path)) $path = 'Category';
 if (!isset($nomark)) $nomark = '';
 
-$output = '';
-$i = '';
+$output	= '';
+$i		= '';
 
 if ($list)
 {
@@ -39,6 +39,7 @@ if (isset($this->categories))
 	foreach($this->categories as $id => $category)
 	{
 		$_category = '<a href="'.$this->href('', $path, 'category='.$id).'">'.htmlspecialchars($category).'</a>';
+
 		if ($list)
 		{
 			$output .= '<li>'.$_category.'</li>';
