@@ -3,7 +3,7 @@
 /*
 	Wacko Wiki MySQL Table Updates Script
 
-	These are all the updates that need to applied to earlier Wacko version to bring them up to 4.3 specs
+	These are all the updates that need to applied to earlier Wacko version to bring them up to 5.0 specs
 */
 
 $pref		= $config['table_prefix'];
@@ -256,6 +256,26 @@ $update_revision_r4_3_4 = "UPDATE {$pref}revision AS revisions, (SELECT page_id,
 # $update_revision_r4_3_x = "UPDATE {$pref}revision AS revisions, (SELECT page_id, tag FROM {$pref}page) AS pages2 SET revisions.comment_on_id = pages2.page_id WHERE revisions.comment_on = pages2.tag";
 $update_revision_r4_3_5 = "UPDATE {$pref}revision AS revisions SET minor_edit = '0' WHERE revisions.minor_edit IS NULL";
 $update_revision_r4_3_6 = "UPDATE {$pref}revision SET formatting = 'wacko' WHERE formatting IS NULL";
+
+// TAG
+$table_tag_r4_3 = "CREATE TABLE {$pref}tag (".
+						"tag_id INT(10) unsigned NOT NULL AUTO_INCREMENT,".
+						"user_id INT(10) unsigned NOT NULL DEFAULT '0',".
+						"tag_name VARCHAR(100) NOT NULL DEFAULT '',".
+						"date_created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+						"date_updated DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+						"PRIMARY KEY (tag_id),".
+						"KEY idx_tag_name (tag_name)".
+					") {$engine} COMMENT='' {$charset}";
+
+$table_tag_page_r4_3 = "CREATE TABLE {$pref}tag_page (".
+						"page_id INT(10) unsigned NOT NULL DEFAULT '0',".
+						"tag_id INT(10) unsigned NOT NULL DEFAULT '0',".
+						"user_id INT(10) unsigned NOT NULL DEFAULT '0',".
+						"date_attached DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+						"PRIMARY KEY (page_id, tag_id),".
+						"KEY idx_tag_id (tag_id)".
+					") {$engine} COMMENT='' {$charset}";
 
 // UPLOAD
 $alter_upload_r4_3_0 = "ALTER TABLE {$pref}upload CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";

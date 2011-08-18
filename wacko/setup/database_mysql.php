@@ -50,7 +50,7 @@ $table_category = "CREATE TABLE {$pref}category (".
 $table_category_page = "CREATE TABLE {$pref}category_page (".
 						"category_id INT(10) unsigned NOT NULL,".
 						"page_id INT(10) unsigned NOT NULL,".
-						"UNIQUE KEY idx_pageword (category_id,page_id)".
+						"UNIQUE KEY idx_pageword (category_id, page_id)".
 					") {$engine} COMMENT='' {$charset}";
 
 $table_config = "CREATE TABLE {$pref}config (".
@@ -236,13 +236,32 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 				") {$engine} COMMENT='' {$charset}";
 
 /*$table_session = "CREATE TABLE {$pref}session (".
-					"session_id varchar( 40 ) DEFAULT '0' NOT NULL ,".
-					"ip_address varchar( 16 ) DEFAULT '0' NOT NULL ,".
-					"user_agent varchar( 50 ) NOT NULL ,".
-					"last_activity int( 10 ) unsigned DEFAULT 0 NOT NULL ,".
+					"session_id VARCHAR( 40 ) DEFAULT '0' NOT NULL ,".
+					"ip_address VARCHAR( 16 ) DEFAULT '0' NOT NULL ,".
+					"user_agent VARCHAR( 50 ) NOT NULL ,".
+					"last_activity INT( 10 ) unsigned DEFAULT 0 NOT NULL ,".
 					"user_data text NOT NULL ,".
 					"PRIMARY KEY ( session_id )".
-					") {$engine} COMMENT='' {$charset}";*/
+				") {$engine} COMMENT='' {$charset}";*/
+
+$table_tag = "CREATE TABLE {$pref}tag (".
+					"tag_id INT(10) unsigned NOT NULL AUTO_INCREMENT,".
+					"user_id INT(10) unsigned NOT NULL DEFAULT '0',".
+					"tag_name VARCHAR(100) NOT NULL DEFAULT '',".
+					"date_created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"date_updated DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"PRIMARY KEY (tag_id),".
+					"KEY idx_tag_name (tag_name)".
+				") {$engine} COMMENT='' {$charset}";
+
+$table_tag_page = "CREATE TABLE {$pref}tag_page (".
+					"page_id INT(10) unsigned NOT NULL DEFAULT '0',".
+					"tag_id INT(10) unsigned NOT NULL DEFAULT '0',".
+					"user_id INT(10) unsigned NOT NULL DEFAULT '0',".
+					"date_attached DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
+					"PRIMARY KEY (page_id, tag_id),".
+					"KEY idx_tag_id (tag_id)".
+				") {$engine} COMMENT='' {$charset}";
 
 $table_upload = "CREATE TABLE {$pref}upload (".
 					"upload_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
@@ -356,10 +375,12 @@ $table_rating_drop			= "DROP TABLE {$pref}rating";
 $table_referrer_drop		= "DROP TABLE {$pref}referrer";
 $table_revision_drop		= "DROP TABLE {$pref}revision";
 /*$table_session_drop			= "DROP TABLE {$pref}session";*/
+$table_tag_drop				= "DROP TABLE {$pref}tag";
+$table_tag_page_drop		= "DROP TABLE {$pref}tag_page";
 $table_upload_drop			= "DROP TABLE {$pref}upload";
 $table_user_drop			= "DROP TABLE {$pref}user";
 $table_user_setting_drop	= "DROP TABLE {$pref}user_setting";
 $table_watch_drop			= "DROP TABLE {$pref}watch";
-/* $table_word_drop			= "DROP TABLE {$pref}watch"; */
+/* $table_word_drop			= "DROP TABLE {$pref}word"; */
 
 ?>

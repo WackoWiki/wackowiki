@@ -43,6 +43,7 @@ function admin_configpages(&$engine, &$module)
 		$config['users_page']			= trim((string)$_POST['users_page'], '/');
 		$config['permalink_page']		= trim((string)$_POST['permalink_page'], '/');
 		$config['category_page']		= trim((string)$_POST['category_page'], '/');
+		$config['tag_page']				= trim((string)$_POST['tag_page'], '/');
 		$config['groups_page']			= trim((string)$_POST['groups_page'], '/');
 		$config['changes_page']			= trim((string)$_POST['changes_page'], '/');
 		$config['comments_page']		= trim((string)$_POST['comments_page'], '/');
@@ -190,8 +191,16 @@ function admin_configpages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="category_page"><strong>Category :</strong><br />
-				<small>Page with a list of registered users (action <tt>{{category}}</tt>).</small></label></td>
+				<small>Page with a list of categorized pages (action <tt>{{category}}</tt>).</small></label></td>
 				<td><input maxlength="255" style="width:200px;" id="category_page" name="category_page" value="<?php echo htmlspecialchars($engine->config['category_page']);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="category_page"><strong>Tag :</strong><br />
+				<small>Page with a list of tagged pages (action <tt>{{tag}}</tt>).</small></label></td>
+				<td><input maxlength="255" style="width:200px;" id="category_page" name="category_page" value="<?php echo htmlspecialchars($engine->config['tag_page']);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
