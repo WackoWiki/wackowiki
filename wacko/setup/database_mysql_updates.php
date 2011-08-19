@@ -261,6 +261,7 @@ $update_revision_r4_3_6 = "UPDATE {$pref}revision SET formatting = 'wacko' WHERE
 $table_tag_r4_3 = "CREATE TABLE {$pref}tag (".
 						"tag_id INT(10) unsigned NOT NULL AUTO_INCREMENT,".
 						"user_id INT(10) unsigned NOT NULL DEFAULT '0',".
+						"lang VARCHAR(2) NOT NULL,".
 						"tag_name VARCHAR(100) NOT NULL DEFAULT '',".
 						"date_created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 						"date_updated DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
