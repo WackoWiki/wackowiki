@@ -247,6 +247,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 $table_tag = "CREATE TABLE {$pref}tag (".
 					"tag_id INT(10) unsigned NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) unsigned NOT NULL DEFAULT '0',".
+					"lang VARCHAR(2) NOT NULL,".
 					"tag_name VARCHAR(100) NOT NULL DEFAULT '',".
 					"date_created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"date_updated DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
