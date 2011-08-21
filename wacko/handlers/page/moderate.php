@@ -286,8 +286,8 @@ $forum_cluster = '';
 
 if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 {
-	$accept_action = '';
-	$error = '';
+	$accept_action	= '';
+	$error			= '';
 
 	if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->config['forum_cluster'])
 	{
@@ -430,12 +430,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				else
 				{
 					$i = 0;
+
 					foreach ($set as $id)
 					{
 						moderate_rename_topic($this, $old_tags[$i], $new_tags[$i]);
 						$this->log(3, str_replace('%2', $new_tags[$i], str_replace('%1', $old_tags[$i], $this->get_translation('LogRenamedPage', $this->config['language']))));
 						$i++;
 					}
+
 					unset($accept_action, $i, $old_tags, $new_tags);
 
 					if ($this->config['enable_feeds'])
@@ -723,16 +725,17 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// ...and topics list itself
 		foreach ($topics as $topic)
-
-		if ($this->has_access('read', $topic['page_id']))
 		{
-			echo '<tr class="lined">'.
-					'<td valign="middle" style="width:10px;" class="label"><input name="'.$topic['page_id'].'" type="checkbox" value="id" '.( in_array($topic['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
-					'<td align="left" style="padding-left:5px;">'.( $this->has_access('comment', $topic['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']).' <strong>'.$this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0).'</strong></td>'.
-					'<td align="center"'.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.( $topic['owner_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_name'] ? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' : $topic['user_name'] ) ).'&nbsp;&nbsp;</small></td>'.
-					'<td align="center"><small>'.$topic['comments'].'</small></td>'.
-					'<td align="center" style="white-space:nowrap"><small>&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'</small></td>'.
-				'</tr>'."\n";
+			if ($this->has_access('read', $topic['page_id']))
+			{
+				echo '<tr class="lined">'.
+						'<td valign="middle" style="width:10px;" class="label"><input name="'.$topic['page_id'].'" type="checkbox" value="id" '.( in_array($topic['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.
+						'<td align="left" style="padding-left:5px;">'.( $this->has_access('comment', $topic['page_id'], GUEST) === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']).' <strong>'.$this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0).'</strong></td>'.
+						'<td align="center"'.( $this->is_admin() ? ' title="'.$topic['ip'].'"' : '' ).'><small>&nbsp;&nbsp;'.( $topic['owner_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_name'] ? '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' : $topic['user_name'] ) ).'&nbsp;&nbsp;</small></td>'.
+						'<td align="center"><small>'.$topic['comments'].'</small></td>'.
+						'<td align="center" style="white-space:nowrap"><small>&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'</small></td>'.
+					'</tr>'."\n";
+			}
 		}
 
 		echo '</table>'."\n";
@@ -1019,6 +1022,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						{
 							$ids_str .= "'".quote($this->dblink, $id)."', ";
 						}
+
 						$ids_str = substr($ids_str, 0, strlen($ids_str)-2);
 
 						// move
