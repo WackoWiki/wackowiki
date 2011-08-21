@@ -3493,9 +3493,9 @@ class Wacko
 	// check whether defined username is already registered.
 	// we add appropriate (but not thorough) transliterations
 	// to not allow too similiar names.
-	function user_name_exists($name)
+	function user_name_exists($user_name)
 	{
-		if ($name == '')
+		if ($user_name == '')
 		{
 			return false;
 		}
@@ -3505,7 +3505,7 @@ class Wacko
 		{
 			if ($this->load_single(
 			"SELECT user_id FROM {$this->config['user_table']} ".
-			"WHERE user_name = '".quote($this->dblink, $name)."' ".
+			"WHERE user_name = '".quote($this->dblink, $user_name)."' ".
 			"LIMIT 1"))
 			{
 				return true;
@@ -3523,7 +3523,7 @@ class Wacko
 		);
 
 		// splitting input name into array
-		$name = preg_split('//', $name, -1, PREG_SPLIT_NO_EMPTY);
+		$user_name = preg_split('//', $user_name, -1, PREG_SPLIT_NO_EMPTY);
 
 		// let's define characters positions and corresponding substitutions.
 		// so we're constructing $p array with username chars needing
@@ -3531,7 +3531,7 @@ class Wacko
 		// as array values
 		$p = array();
 
-		foreach ($name as $pos => &$char)
+		foreach ($user_name as $pos => &$char)
 		{
 			if (isset($p[$pos]) === false)
 			{
@@ -3556,22 +3556,22 @@ class Wacko
 		foreach ($p as $pos => $sub)
 		{
 			// what substitution character we have to use?
-			if ($name[$pos] != $table['cyr'][$sub])
+			if ($user_name[$pos] != $table['cyr'][$sub])
 			{
 				// constructing cyrillic regexp addition
-				$name[$pos] = '['.$name[$pos].$table['cyr'][$sub].']';
+				$user_name[$pos] = '['.$user_name[$pos].$table['cyr'][$sub].']';
 			}
-			else if ($name[$pos] != $table['lat'][$sub])
+			else if ($user_name[$pos] != $table['lat'][$sub])
 			{
 				// constructing latin regexp addition
-				$name[$pos] = '['.$name[$pos].$table['lat'][$sub].']';
+				$user_name[$pos] = '['.$user_name[$pos].$table['lat'][$sub].']';
 			}
 		}
 
 		// checking database
 		if ($this->load_single(
 		"SELECT user_id FROM {$this->config['user_table']} ".
-		"WHERE user_name REGEXP '".quote($this->dblink, implode('', $name))."' ".
+		"WHERE user_name REGEXP '".quote($this->dblink, implode('', $user_name))."' ".
 		"LIMIT 1", 1))
 		{
 			return true;

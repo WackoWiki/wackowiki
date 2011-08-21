@@ -27,7 +27,7 @@ else if ($this->forum === true && !$this->is_admin())
 
 if ($user = $this->get_user())
 {
-	$user_name		= strtolower($this->get_user_name());
+	$user_name	= strtolower($this->get_user_name());
 	$user_id	= $this->get_user_id();
 	$registered	= true;
 }
@@ -68,7 +68,12 @@ if ($registered
 				echo "<b>".$this->tag."</b>\n";
 				echo "<ol>";
 
-				if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
+				// check if reserved word
+				if($result = $this->validate_reserved_words($new_name))
+				{
+					echo "<li>".str_replace('%1', $result, $this->get_translation('PageReservedWord'))."</li>\n";
+				}
+				else if (!preg_match('/^([\_\.\-'.$this->language['ALPHANUM_P'].']+)$/', $new_name))
 				{
 					echo "<li>".$this->get_translation('InvalidWikiName')."</li>\n";
 				}
