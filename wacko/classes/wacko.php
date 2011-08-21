@@ -1133,7 +1133,7 @@ class Wacko
 			$cl = 0;
 		}
 
-		$pages[$cl]		= $user['user_name'];
+		$pages[$cl]	= $user['user_name'];
 		$_menu		= $this->get_default_menu($user['lang'])."\n".
 					($user_menu
 						? $user_menu
@@ -1440,6 +1440,20 @@ class Wacko
 			"GROUP BY r.page_id ".
 			"ORDER BY date DESC, r.tag ASC ".
 			( $limit > 0 ? "LIMIT $limit" : '' ), $cache);
+	}
+
+	function load_categories($tag, $page_id = 0)
+	{
+		$categories = $this->load_all(
+						"SELECT c.category_id, c.category ".
+						"FROM {$this->config['table_prefix']}category c ".
+							"INNER JOIN {$this->config['table_prefix']}category_page cp ON (c.category_id = cp.category_id) ".
+						"WHERE ".( $page_id != 0
+							? "cp.page_id  = '".quote($this->dblink, $page_id)."' "
+							: "cp.supertag = '".quote($this->dblink, $supertag)."' " )
+							);
+
+		return $categories;
 	}
 
 	function get_parent_list()
@@ -2370,6 +2384,7 @@ class Wacko
 		return '<a href="'.$this->href($method, $tag).'"'.($title ? ' title="'.$title.'"' : '').'>'.$text.'</a>';
 	}
 
+	// preparing links to save them to body_r
 	function pre_link($tag, $text = '', $track = 1, $imgurl = 0)
 	{
 		// if (!$text) $text = $this->add_spaces($tag);
@@ -3121,28 +3136,20 @@ class Wacko
 		$_data = '/'.$_data.'/';
 
 		// Find the string of text
-		# $this->REGEX_WACKO_FUNCTIONS = '/^(.*?)\/'.STANDARD_HANDLERS.'\/(.*)$/i';
+		# $this->REGEX_WACKO_HANDLERS = '/^(.*?)\/'.STANDARD_HANDLERS.'\/(.*)$/i';
 		// Find the word
-		$this->REGEX_WACKO_FUNCTIONS = '/\b('.STANDARD_HANDLERS.')\b/i';
+		$this->REGEX_WACKO_HANDLERS = '/\b('.STANDARD_HANDLERS.')\b/i';
 
-		echo $this->REGEX_WACKO_FUNCTIONS;
-
-		if (preg_match( $this->REGEX_WACKO_FUNCTIONS, $_data, $match ))
+		if (preg_match( $this->REGEX_WACKO_HANDLERS, $_data, $match ))
 		{
-			return $message = "As the part of the address you used the reserved word, do not make thus.";
-			/// !!! to messageset, function found
+			return $message = $match[0];
 		}
+
 		/*
-		if (preg_match( $this->REGEX_WACKO_SPACES, $_data, $match ))
-		{
-		  return "As the part of the address you used the reserved word, do not make thus.";
-		  /// !!! to messageset, subspace found
-		}
-
 		if (preg_match( '/^\/[0-9]+/', $_data, $match ))
 		{
-		  return "It is not possible to create pages, whose name consists of numbers or begins on them.";
-		  /// !!! to messageset, begins with 0-9
+			return "It is not possible to create pages, whose name consists of numbers or begins on them.";
+			/// !!! to messageset, begins with 0-9
 		}
 		*/
 		return 0;
@@ -5173,11 +5180,7 @@ class Wacko
 			// set page categories. this defines $categories (array) object property
 			#if ($this->page['categories'])
 			#{
-				$categories = $this->load_all(
-					"SELECT k.category_id, k.category
-					FROM {$this->config['table_prefix']}category k
-						INNER JOIN {$this->config['table_prefix']}category_page kp ON (k.category_id = kp.category_id)
-					WHERE kp.page_id = '{$this->page['page_id']}' ");
+				$categories = $this->load_categories('', $this->page['page_id']);
 
 				foreach ($categories as $word)
 				{

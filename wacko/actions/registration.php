@@ -83,6 +83,11 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 			{
 				$error .= $this->get_translation('MustBeWikiName')." ";
 			}
+			// check if reserved word
+			else if($result = $this->validate_reserved_words($user_name))
+			{
+				$error .= str_replace('%1', $result, $this->get_translation('UserReservedWord'));;
+			}
 			// if user name already exists
 			else if ($this->user_name_exists($user_name) === true)
 			{

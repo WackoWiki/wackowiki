@@ -480,6 +480,9 @@ $wacko_translation = array(
 	'PageAlreadyExistsEdit2' => 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
 
+	'PageReservedWord'			=> 'You can\'t use <tt>%1</tt> as the part of the address as it\'s a reserved word.',
+	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
+
 	'DontRedirect' => 'Sta automatische doorverwijzing niet toe.',
 	'SendWatchEmail' => 'Stuur een e-mail wanneer iemand (behalve uzelf) een pagina die u in de gaten houdt verandert.',
 	'AllowIntercom' => 'Allow private messages from users of the system',

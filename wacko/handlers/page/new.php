@@ -26,8 +26,13 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 			$prefix = '';
 	}
 
+	// check if reserved word
+	if($result = $this->validate_reserved_words($new_tag))
+	{
+		$this->set_message(str_replace('%1', $result, $this->get_translation('PageReservedWord')));
+	}
 	// check target page existance
-	if ($page = $this->load_page($prefix.$new_tag, 0, '', LOAD_CACHE, LOAD_META))
+	else if ($page = $this->load_page($prefix.$new_tag, 0, '', LOAD_CACHE, LOAD_META))
 	{
 		$message = $this->get_translation('PageAlreadyExists')." &laquo;".$page['tag']."&raquo;. ";
 
