@@ -24,11 +24,20 @@ if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 
 if ($this->has_access('read') && (($this->page && $this->has_access('write')) || (!$this->page && $this->has_access('create'))))
 {
+	// check for reserved word
+	if ($result = $this->validate_reserved_words($this->tag))
+	{
+		$error = $result;
+		$this->set_message(str_replace('%1', $result, $this->get_translation('PageReservedWord')));
+		$this->redirect($this->href('new', $this->config['root_page'])); // $this->tag is reserved word
+
+	}
+
 	$user	= $this->get_user();
 
 	if (isset($_POST))
 	{
-		$_body	= isset($_POST['body']) ? $_POST['body'] : '';
+		$_body		= isset($_POST['body']) ? $_POST['body'] : '';
 		$textchars	= strlen($_body);
 
 		// watch page
@@ -61,6 +70,12 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 			if(isset($_POST['title']))
 			{
 				$title = trim($_POST['title']);
+			}
+
+			// check for reserved word
+			if ($result = $this->validate_reserved_words($this->tag))
+			{
+				$error = $result;
 			}
 
 			// check for overwriting
