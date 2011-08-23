@@ -782,7 +782,7 @@ $wacko_translation = array(
 	// Feed
 	'FeedTitle'					=> 'Titre du flux',
 	'FeedMulti'					=> 'Multi-flux',
-	'FeedNoURL'					=> 'Merci de spécifier un flux avec l&rsquo;url en paramètre (i.e. {{feed url="http://wackowiki.org/xml/comments_wackowiki.xml"}} )',
+	'FeedNoURL'					=> 'Merci de spécifier un flux avec l&rsquo;url en paramètre (i.e. {{feed url="http://example.com/xml/comments_wackowiki.xml"}} )',
 	'FeedError'					=> 'Impossible de charger ou d&rsquo;analyser le flux',
 	'FeedSource'				=> 'Source:',
 

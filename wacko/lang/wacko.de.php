@@ -798,7 +798,7 @@ $wacko_translation = array(
 	// Feed
 	'FeedTitle'					=> 'Feed Titel',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Bitte gib einen Feed mit dem Parameter url an. (z.B. {{feed url="http://wackowiki.org/xml/comments_wackowiki.xml"}}',
+	'FeedNoURL'					=> 'Bitte gib einen Feed mit dem Parameter url an. (z.B. {{feed url="http://example.com/xml/comments_wackowiki.xml"}}',
 	'FeedError'					=> 'Kann Feed nicht laden oder parsen',
 	'FeedSource'				=> 'Quelle:',
 
