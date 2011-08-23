@@ -9,7 +9,7 @@
 //   (c) Roman "Kukutz" Ivanov, Evgeny Nedelko, 2003                  //
 // Many thanks to Alexander Babaev, Sergey Kruglov, Evgeny Nedelko    //
 //             and Nikolay Jaremko                                    //
-// http://wackowiki.org/Dev/Projects/WikiEdit                         //
+// http://wackowiki.sourceforge.net/doc/Dev/Projects/WikiEdit                         //
 //                                                                    //
 ////////////////////////////////////////////////////////////////////////
 
@@ -110,7 +110,7 @@ WikiEdit.prototype.init = function(id, name, nameClass, imgPath) {
  this.addButton("help","Help & About","","document.getElementById('" + this.id + "')._owner.help");
  this.addButton("customhtml",'<li><div style="font:12px Arial;text-decoration:underline; padding: 3px 3px 4px 4px;" id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
             + 'onmouseout=\'this.className="btn-";\' class="btn-" '
-            + 'onclick="this.className=\'btn-pressed\';window.open(\'http://wackowiki.org/Doc/English/Formatting\');" '
+            + 'onclick="this.className=\'btn-pressed\';window.open(\'http://wackowiki.sourceforge.net/doc/Doc/English/Formatting\');" '
             + ' title="Help on Wiki-formatting">Help'
             + '</div></li>');
 
@@ -673,7 +673,7 @@ WikiEdit.prototype.help = function ()
 {
  s =  "         WikiEdit 3.08 \n";
  s += "  (c) Roman Ivanov, 2003-2011   \n";
- s += "  http://wackowiki.org/Dev/Projects/WikiEdit \n";
+ s += "  http://wackowiki.sourceforge.net/doc/Dev/Projects/WikiEdit \n";
  s += "\n";
  s += " Shortcuts:\n";
  s += " Ctrl+B - Bold\n";
