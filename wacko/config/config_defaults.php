@@ -182,6 +182,9 @@ $wacko_config_defaults = array(
 	'captcha_edit_page' => 1,
 	'captcha_registration' => 1,
 
+	'max_login_attempts' => 3,
+	'ip_login_limit_max' => 50,
+
 	'session_encrypt_cookie' => 0,
 	'antidupe' => 0,
 	'session_match_ip' => false,

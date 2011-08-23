@@ -49,6 +49,8 @@ $wacko_translation = array(
 	'SessionEnds' => 'The current session ends',
 	'LastVisit' => 'Last visit was recorded',
 
+	'LoginAttemtsExceeded'			=> 'Έχετε υπερβεί το μέγιστο αριθμό προσπαθειών σύνδεσης. Εκτός από το όνομα μέλους και τον κωδικό πρόσβασης σας τώρα επίσης πρέπει να εισαγάγετε και τον κώδικα επιβεβαίωσης από την εικόνα που βλέπετε ποιο κάτω.',
+
 	// other
 	'Guest' => 'Αποτελέσματα',
 	'Help' => 'Βοήθεια',

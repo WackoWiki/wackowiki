@@ -49,6 +49,8 @@ $wacko_translation = array(
 	'SessionEnds' => 'The current session ends',
 	'LastVisit' => 'Last visit was recorded',
 
+	'LoginAttemtsExceeded'			=> 'Sa ületasid sisselogimiskatsete arvu. Lisaks kasutajanimele ja paroolile pead nüüd ka sisestama kinnituskoodi, mida näed all.',
+
 	// other
 	'Guest' => 'Guest',
 	'Help' => 'Help',

@@ -49,6 +49,8 @@ $wacko_translation = array(
 	'SessionEnds'				=> 'The current session ends',
 	'LastVisit'					=> 'Last visit was recorded',
 
+	'LoginAttemtsExceeded'			=> 'Вы превысили максимально допустимое количество попыток входа. Теперь, кроме имени пользователя и пароля, вы должны ввести код подтверждения, показанный на картинке ниже.',
+
 	// other
 	'Guest'						=> 'Гость',
 	'Help'						=> 'Помощь',

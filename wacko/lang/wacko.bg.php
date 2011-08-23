@@ -49,6 +49,8 @@ $wacko_translation = array(
 	'SessionEnds' => 'The current session ends',
 	'LastVisit' => 'Last visit was recorded',
 
+	'LoginAttemtsExceeded'			=> 'Вие достигнахте максималните опити за вход. Вече ще трябва да въвеждате код за потвърждение.',
+
 	// other
 	'Guest' => 'Guest',
 	'Help' => 'Help',

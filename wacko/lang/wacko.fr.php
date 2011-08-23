@@ -49,6 +49,8 @@ $wacko_translation = array(
 	'SessionEnds'				=> 'La session en cours se termine',
 	'LastVisit'					=> 'La dernière visite a été enregistrée',
 
+	'LoginAttemtsExceeded'			=> 'Vous avez dépassé le nombre maximum de tentatives de connexions autorisées. En plus de votre nom d’utilisateur et de votre mot de passe, vous devez à présent saisir le code de confirmation visuelle que vous devriez voir ci-dessous.',
+
 	// other
 	'Guest'						=> 'Invité',
 	'Help'						=> 'Aide',
