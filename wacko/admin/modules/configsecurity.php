@@ -65,6 +65,8 @@ function admin_configsecurity(&$engine, &$module)
 		$config['comment_delay']				= (int)$_POST['comment_delay'];
 		$config['intercom_delay']				= (int)$_POST['intercom_delay'];
 		$config['enable_security_headers']		= (int)$_POST['enable_security_headers'];
+		$config['max_login_attempts']			= (int)$_POST['max_login_attempts'];
+		$config['ip_login_limit_max']			= (int)$_POST['ip_login_limit_max'];
 		#$config['x_frame_option']				= (int)$_POST['x_frame_option'];
 		#$config['x_csp']						= (int)$_POST['x_csp'];
 
@@ -345,6 +347,25 @@ function admin_configsecurity(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br />
+					Login
+				</th>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="max_login_attempts"><strong>Maximum number of login attempts per username::</strong><br />
+				<small>The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.</small></label></td>
+				<td><input maxlength="4" style="width:200px;" id="max_login_attempts" name="max_login_attempts" value="<?php echo htmlspecialchars($engine->config['max_login_attempts']);?>" /></td>
+			</tr>
+						<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="ip_login_limit_max"><strong>Maximum number of login attempts per IP address::</strong><br />
+				<small>The threshold of login attempts allowed from a single IP address before an anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered by IP addresses.</small></label></td>
+				<td><input maxlength="4" style="width:200px;" id="ip_login_limit_max" name="ip_login_limit_max" value="<?php echo htmlspecialchars($engine->config['ip_login_limit_max']);?>" /></td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<br />
 					Log settings
 				</th>
 			</tr>
@@ -406,8 +427,7 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="comment_delay"><strong>Anti-flood for comments:</strong><br />
-				<small>
-The minimum delay between the publication of the new user comments (in seconds).</small></label></td>
+				<small>The minimum delay between the publication of the new user comments (in seconds).</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="comment_delay" name="comment_delay" value="<?php echo htmlspecialchars($engine->config['comment_delay']);?>" /></td>
 			</tr>
 			<tr class="lined">

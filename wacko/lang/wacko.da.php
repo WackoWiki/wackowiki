@@ -49,6 +49,8 @@ $wacko_translation = array(
 	'SessionEnds' => 'The current session ends',
 	'LastVisit' => 'Last visit was recorded',
 
+	'LoginAttemtsExceeded'			=> 'Du har overskredet antallet af tilladte loginforsøg. Oven i at skulle angive dit brugernavn og dit kodeord igen skal du nu bekræfte billedet du ser herunder.',
+
 	// other
 	'Guest' => 'Guest',
 	'Help' => 'Help',

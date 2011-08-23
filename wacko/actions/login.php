@@ -119,99 +119,123 @@ else
 			}
 			else
 			{
-				// check for old md5 password
-				if (strlen($existing_user['password']) < 64)
+				// Start Login Captcha, if there are too much login attempts (max_login_attempts)
+
+				// Only show captcha if the admin enabled it in the config file
+				if($this->config['max_login_attempts'] && $existing_user['failed_login_count'] >= $this->config['max_login_attempts'])
 				{
-					if (strlen($existing_user['password']) == 32)
+					// captcha validation
+					if ($this->validate_captcha() === false)
 					{
-						$_processed_password = hash('md5', $_POST['password']);
+						$error = $this->get_translation('CaptchaFailed');
 					}
-					else if (strlen($existing_user['password']) == 40) // only for dev versions / can be removed after successful migration of all passwords
+				}
+				// End Registration Captcha
+
+				$_SESSION['failed_login_count'] = $existing_user['failed_login_count'];
+
+				if (!$error)
+				{
+					// check for old md5 password
+					if (strlen($existing_user['password']) < 64)
 					{
-						$_processed_password = hash('sha1', $_POST['user_name'].$existing_user['salt'].$_POST['password']);
+						if (strlen($existing_user['password']) == 32)
+						{
+							$_processed_password = hash('md5', $_POST['password']);
+						}
+						else if (strlen($existing_user['password']) == 40) // only for dev versions / can be removed after successful migration of all passwords
+						{
+							$_processed_password = hash('sha1', $_POST['user_name'].$existing_user['salt'].$_POST['password']);
+						}
+
+						if ($existing_user['password'] == $_processed_password)
+						{
+							$salt		= $this->random_password(10, 3);
+							$password	= hash('sha256', $_POST['user_name'].$salt.$_POST['password']);
+
+							// update database with the sha256 password for future logins
+							$this->sql_query(
+								"UPDATE ".$this->config['table_prefix']."user SET ".
+									"password	= '".$password."', ".
+									"salt		= '".$salt."' ".
+								"WHERE user_name = '".$_POST['user_name']."'");
+						}
+					}
+					else
+					{
+						$_processed_password = hash('sha256', $_POST['user_name'].$existing_user['salt'].$_POST['password']);
 					}
 
+					// check password
 					if ($existing_user['password'] == $_processed_password)
 					{
-						$salt		= $this->random_password(10, 3);
-						$password	= hash('sha256', $_POST['user_name'].$salt.$_POST['password']);
+						// define session duration in days
+						$_session = isset($_POST['session']) ? $_POST['session'] : null;
 
-						// update database with the sha256 password for future logins
-						$this->sql_query(
-							"UPDATE ".$this->config['table_prefix']."user SET ".
-								"password	= '".$password."', ".
-								"salt		= '".$salt."' ".
-							"WHERE user_name = '".$_POST['user_name']."'");
-					}
-				}
-				else
-				{
-					$_processed_password = hash('sha256', $_POST['user_name'].$existing_user['salt'].$_POST['password']);
-				}
+						if (!empty($existing_user['session_expiration']))
+						{
+							$session = $existing_user['session_expiration'];
+						}
+						else
+						{
+							$session = $this->config['session_expiration'];
+						}
 
-				// check password
-				if ($existing_user['password'] == $_processed_password)
-				{
-					// define session duration in days
-					$_session = isset($_POST['session']) ? $_POST['session'] : null;
+						$_persistent = isset($_POST['persistent']) ? $_POST['persistent'] : 0;
 
-					if (!empty($existing_user['session_expiration']))
-					{
-						$session = $existing_user['session_expiration'];
-					}
-					else
-					{
-						$session = $this->config['session_expiration'];
-					}
+						$this->log_user_in($existing_user, $_persistent, $session);
+						$this->set_user($existing_user, 1);
+						$this->update_session_time($existing_user);
+						$this->set_menu(MENU_USER);
+						$this->context[++$this->current_context] = '';
 
-					$_persistent = isset($_POST['persistent']) ? $_POST['persistent'] : 0;
+						$this->login_count($existing_user['user_id']);
+						$this->reset_failed_user_login_count($existing_user['user_id']);
+						$this->reset_lost_password_count($existing_user['user_id']);
 
-					$this->log_user_in($existing_user, $_persistent, $session);
-					$this->set_user($existing_user, 1);
-					$this->update_session_time($existing_user);
-					$this->set_menu(MENU_USER);
-					$this->context[++$this->current_context] = '';
+						$this->log(3, str_replace('%1', $existing_user['user_name'], $this->get_translation('LogUserLoginOK', $this->config['language'])));
 
-					$this->login_count($existing_user['user_id']);
-					$this->reset_failed_user_login_count($existing_user['user_id']);
-					$this->reset_lost_password_count($existing_user['user_id']);
+						// run in tls mode?
+						if ($this->config['tls'] == true)
+						{
+							$this->config['base_url'] = str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->config['base_url']);
+						}
 
-					$this->log(3, str_replace('%1', $existing_user['user_name'], $this->get_translation('LogUserLoginOK', $this->config['language'])));
-
-					// run in tls mode?
-					if ($this->config['tls'] == true)
-					{
-						$this->config['base_url'] = str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->config['base_url']);
-					}
-
-					if ($_POST['goback'] != '')
-					{
-						$this->redirect($this->href('', stripslashes($_POST['goback']), 'cache='.rand(0,1000)));
+						if ($_POST['goback'] != '')
+						{
+							$this->redirect($this->href('', stripslashes($_POST['goback']), 'cache='.rand(0,1000)));
+						}
+						else
+						{
+							$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
+						}
 					}
 					else
 					{
-						$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
+						$error		= $this->get_translation('WrongPassword');
+						$user_name	= $_POST['user_name'];
+						$focus		= 1;
+
+						$this->set_failed_user_login_count($existing_user['user_id']);
+
+						// log failed attempt
+						$this->log(2, str_replace('%1', $_POST['user_name'], $this->get_translation('LogUserLoginFailed', $this->config['language'])));
 					}
-				}
-				else
-				{
-					$error		= $this->get_translation('WrongPassword');
-					$user_name	= $_POST['user_name'];
-					$focus		= 1;
-
-					$this->set_failed_user_login_count($existing_user['user_id']);
-
-					// log failed attempt
-					$this->log(2, str_replace('%1', $_POST['user_name'], $this->get_translation('LogUserLoginFailed', $this->config['language'])));
 				}
 			}
 		}
 	}
 
+	$_failed_login_count = isset($_SESSION['failed_login_count']) ? $_SESSION['failed_login_count'] : 0;
+
 	if ($error)
 	{
 		# $this->set_message($error);
 		echo '<div class="error">'.$this->format($error).'</div>';
+	}
+	else if($this->config['max_login_attempts'] && $_failed_login_count >= $this->config['max_login_attempts'])
+	{
+		echo '<div class="error">'.$this->get_translation('LoginAttemtsExceeded').'</div>';
 	}
 
 	echo '<div class="cssform">'."\n";
@@ -232,6 +256,18 @@ else
 	echo '<input id="persistent" name="persistent" value="1" type="checkbox" tabindex="3"/>'."\n";
 	echo '<label for="persistent">'.$this->get_translation('PersistentCookie').'</label>'."\n";
 	echo '</p>'."\n";
+
+	// captcha code starts
+
+	// Only show captcha if the admin enabled it in the config file
+	if($this->config['max_login_attempts'] && $_failed_login_count >= $this->config['max_login_attempts'])
+	{
+		echo '<p>';
+		$this->show_captcha();
+		echo '</p>';
+	}
+	// end captcha
+
 	echo '<p>'."\n";
 	echo '<input type="submit" value="'.$this->get_translation('LoginButton').'" tabindex="4" />'."\n";
 	#echo '&nbsp;&nbsp;&nbsp;<small><a href="?action=clearcookies">Delete all cookies</a></small>';

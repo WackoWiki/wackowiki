@@ -49,6 +49,8 @@ $wacko_translation = array(
 	'SessionEnds' => 'The current session ends',
 	'LastVisit' => 'Last visit was recorded',
 
+	'LoginAttemtsExceeded'			=> 'Je overschreed het maximum aantal pogingen om in te loggen. Naast je gebruikersnaam en wachtwoord, moet je nu ook de code op de afbeelding opgeven.',
+
 	// other
 	'Guest' => 'Guest',
 	'Help' => 'Help',
