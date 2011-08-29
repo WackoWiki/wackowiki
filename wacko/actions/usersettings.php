@@ -298,6 +298,10 @@ else if ($user = $this->get_user())
 			<label for="hide_lastsession"><?php echo $this->get_translation('HideLastSession');?></label>
 		</td>
 	</tr>
+	<?php
+	if ($this->config['publish_anonymously'] == true)
+	{
+	?>
 	<tr class="lined">
 		<td class="form_left">&nbsp;</td>
 		<td class="form_right">
@@ -306,6 +310,9 @@ else if ($user = $this->get_user())
 			<label for="noid_pubs"><?php echo $this->get_translation('ProfileAnonymousPub');?></label>
 		</td>
 	</tr>
+	<?php
+	}
+	?>
 	<tr class="lined">
 		<th class="form_left"><label for="session_expiration"><?php echo $this->get_translation('SessionDuration');?></label></th>
 		<td class="form_right">

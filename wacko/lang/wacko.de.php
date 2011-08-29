@@ -49,7 +49,7 @@ $wacko_translation = array(
 	'SessionEnds'				=> 'Die aktuelle Sitzung endet',
 	'LastVisit'					=> 'Dein letzter Besuch',
 
-	'LoginAttemtsExceeded'		=> 'Du hast die maximal zulässige Zahl von Anmeldeversuchen überschritten. Du musst nun deinen Benutzernamen und dein Passwort erneut eingeben sowie eine Sicherheitsabfrage beantworten.',
+	'LoginAttemtsExceeded'		=> 'Du hast die maximal zulässige Zahl von Anmeldeversuchen überschritten.<br />Du musst nun deinen Benutzernamen und dein Passwort erneut eingeben sowie eine Sicherheitsabfrage beantworten.',
 
 	// other
 	'Guest'						=> 'Gast',
