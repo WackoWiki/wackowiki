@@ -49,7 +49,7 @@ $wacko_translation = array(
 	'SessionEnds'				=> 'The current session ends',
 	'LastVisit'					=> 'Last visit was recorded',
 
-	'LoginAttemtsExceeded'			=> 'Excedeu o número máximo de tentativas de login. Além do seu nome de Utilizador e Senha deverá confirmar adicionalmente o código indicado na imagem abaixo.',
+	'LoginAttemtsExceeded'			=> 'Excedeu o número máximo de tentativas de login.<br />Além do seu nome de Utilizador e Senha deverá confirmar adicionalmente o código indicado na imagem abaixo.',
 
 	// other
 	'Guest'						=> 'Clientes',
