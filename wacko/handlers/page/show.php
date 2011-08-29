@@ -358,14 +358,20 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 				$noid_protect	= $this->get_user_setting('noid_protect');
 
 				// clear new comments for watched page
-				if ($user && $comments && !$noid_protect) $this->sql_query(
-					"UPDATE {$this->config['table_prefix']}watch ".
-					"SET comment_id = '0' ".
-					"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
+				if ($user && $comments && !$noid_protect)
+				{
+					$this->sql_query(
+						"UPDATE {$this->config['table_prefix']}watch ".
+						"SET comment_id = '0' ".
+						"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."' ".
 						"AND user_id = '".quote($this->dblink, $user['user_id'])."'");
+				}
 
 				// clear anonymous publication uncorrelator
-				if ($noid_protect === true) $this->get_user_setting('noid_protect', false);
+				if ($noid_protect === true)
+				{
+					$this->get_user_setting('noid_protect', false);
+				}
 
 				// display comments header
 				echo '<div id="commentsheader">';
@@ -476,14 +482,14 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 						// publish anonymously
 						if (($this->page && $this->config['publish_anonymously'] != 0 && $this->has_access('comment', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 						{
-							$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".htmlspecialchars($this->tag)."\"".( $this->get_user_setting('noid_pubs', 1) == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">".$this->get_translation('PostAnonymously')."</label></small>";
+							$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".htmlspecialchars($this->tag)."\"".( $this->get_user_setting('noid_pubs') == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">".$this->get_translation('PostAnonymously')."</label></small>";
 							$output .= "<br />";
 						}
 
 						// watch a page
 						if ($this->page && $this->iswatched !== true)
 						{
-							$output .= "<input type=\"checkbox\" name=\"watchpage\" id=\"watchpage\" value=\"1\"".( $this->get_user_setting('send_watchmail', 1) == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"watchpage\">".$this->get_translation('NotifyMe')."</label></small>";
+							$output .= "<input type=\"checkbox\" name=\"watchpage\" id=\"watchpage\" value=\"1\"".( $this->get_user_setting('send_watchmail') == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"watchpage\">".$this->get_translation('NotifyMe')."</label></small>";
 							$output .= "<br />";
 						}
 

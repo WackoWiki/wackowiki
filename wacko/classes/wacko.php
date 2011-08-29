@@ -5057,7 +5057,7 @@ class Wacko
 		}
 
 		// check IP validity
-		if ($this->get_user_setting('validate_ip', 1) == 1 && $this->get_user_setting('ip') != (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['tls_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) )
+		if ($this->get_user_setting('validate_ip') == 1 && $this->get_user_setting('ip') != (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['tls_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) )
 		{
 			$this->log(1, '<strong><span class="cite">User in-session IP change detected</span></strong>');
 			$this->logout_user();

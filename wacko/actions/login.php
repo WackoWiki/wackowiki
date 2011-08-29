@@ -31,6 +31,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'clearcookies')
 	$_POST['action'] = 'logout';
 }
 
+// logout
 if (isset($_GET['action']) && $_GET['action'] == 'logout')
 {
 	$this->log(5, str_replace('%1', $this->get_user_name(), $this->get_translation('LogUserLoggedOut', $this->config['language'])));
@@ -48,6 +49,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 		$this->redirect($this->href('', '', 'cache='.rand(0,1000)));
 	}
 }
+// logged in
 else if ($user = $this->get_user())
 {
 	// user is logged in; display logout form
@@ -101,6 +103,7 @@ else if ($user = $this->get_user())
 
 	echo $this->form_close();
 }
+// login
 else
 {
 	// user is not logged in
@@ -122,7 +125,7 @@ else
 				// Start Login Captcha, if there are too much login attempts (max_login_attempts)
 
 				// Only show captcha if the admin enabled it in the config file
-				if($this->config['max_login_attempts'] && $existing_user['failed_login_count'] >= $this->config['max_login_attempts'])
+				if($this->config['max_login_attempts'] && $existing_user['failed_login_count'] >= $this->config['max_login_attempts'] + 1)
 				{
 					// captcha validation
 					if ($this->validate_captcha() === false)
