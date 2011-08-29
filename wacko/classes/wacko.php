@@ -992,6 +992,7 @@ class Wacko
 				}
 			}
 		}
+
 		// cache result
 		if (!$revision_id && !$cached_page)
 		{
