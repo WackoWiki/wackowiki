@@ -3678,20 +3678,13 @@ class Wacko
 	}
 
 	// extract specific element from user session array
-	function get_user_setting($setting, $option = 0, $guest = 0)
+	function get_user_setting($setting, $guest = 0)
 	{
 		if (!$option)
 		{
 			if (isset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? 'user' : 'guest' )][$setting]))
 			{
 				return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? 'user' : 'guest' )][$setting];
-			}
-		}
-		else
-		{
-			if (isset($_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? 'user' : 'guest' )]['options'][$setting]))
-			{
-				return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? 'user' : 'guest' )]['options'][$setting];
 			}
 		}
 	}
