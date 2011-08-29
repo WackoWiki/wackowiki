@@ -49,7 +49,7 @@ $wacko_translation = array(
 	'SessionEnds' => 'The current session ends',
 	'LastVisit' => 'Last visit was recorded',
 
-	'LoginAttemtsExceeded'			=> 'Przekroczy³e¶/a¶ limit b³êdnych prób zalogowania. Teraz, aby siê zalogowaæ, musisz dodatkowo przepisaæ kod z poni¿szego obrazka.',
+	'LoginAttemtsExceeded'			=> 'Przekroczy³e¶/a¶ limit b³êdnych prób zalogowania.<br />Teraz, aby siê zalogowaæ, musisz dodatkowo przepisaæ kod z poni¿szego obrazka.',
 
 	// other
 	'Guest' => 'Guest',
