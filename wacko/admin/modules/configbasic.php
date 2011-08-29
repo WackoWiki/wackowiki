@@ -51,6 +51,7 @@ function admin_configbasic(&$engine, &$module)
 		$config['edit_summary']				= (int)$_POST['edit_summary'];
 		$config['minor_edit']				= (int)$_POST['minor_edit'];
 		$config['review']					= (int)$_POST['review'];
+		$config['publish_anonymously']		= (int)$_POST['publish_anonymously'];
 		$config['disable_autosubscribe']	= (int)$_POST['disable_autosubscribe'];
 		$config['default_rename_redirect']	= (int)$_POST['default_rename_redirect'];
 		$config['store_deleted_pages']		= (int)$_POST['store_deleted_pages'];
@@ -379,6 +380,17 @@ function admin_configbasic(&$engine, &$module)
 				<td>
 					<input type="radio" id="disable_autosubscribe_on" name="disable_autosubscribe" value="0"<?php echo ( !$engine->config['disable_autosubscribe'] ? ' checked="checked"' : '' );?> /><label for="disable_autosubscribe_on">On.</label>
 					<input type="radio" id="disable_autosubscribe_off" name="disable_autosubscribe" value="1"<?php echo ( $engine->config['disable_autosubscribe'] ? ' checked="checked"' : '' );?> /><label for="disable_autosubscribe_off">Off.</label>
+				</td>
+			</tr>
+						<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><strong>Allow anonymous publishing:</strong><br />
+				<small>Allow users to published preferably anonymously (to hide the name).</small></td>
+				<td>
+					<input type="radio" id="publish_anonymously_on" name="publish_anonymously" value="1"<?php echo ( $engine->config['publish_anonymously'] ? ' checked="checked"' : '' );?> /><label for="publish_anonymously_on">On.</label>
+					<input type="radio" id="publish_anonymously_off" name="publish_anonymously" value="0"<?php echo ( !$engine->config['publish_anonymously'] ? ' checked="checked"' : '' );?> /><label for="publish_anonymously_off">Off.</label>
 				</td>
 			</tr>
 			<tr class="lined">
