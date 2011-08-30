@@ -370,7 +370,7 @@ if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['commen
 				// clear anonymous publication uncorrelator
 				if ($noid_protect === true)
 				{
-					$this->get_user_setting('noid_protect', false);
+					$this->set_user_setting('noid_protect', false);
 				}
 
 				// display comments header
