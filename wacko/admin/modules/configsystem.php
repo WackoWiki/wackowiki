@@ -60,6 +60,9 @@ function admin_configsystem(&$engine, &$module)
 		$config['cookie_prefix']			= (string)$_POST['cookie_prefix'];
 		$config['session_prefix']			= (string)$_POST['session_prefix'];
 		$config['rewrite_mode']				= (int)$_POST['rewrite_mode'];
+		$config['reverse_proxy']			= (int)$_POST['reverse_proxy'];
+		$config['reverse_proxy_header']		= (int)$_POST['reverse_proxy_header'];
+		$config['reverse_proxy_addresses']	= (int)$_POST['reverse_proxy_addresses'];
 
 		foreach($config as $key => $value)
 		{
@@ -281,6 +284,51 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="date_precise_format"><strong>The format of the exact time / date for a macro:</strong></label></td>
 				<td><input maxlength="50" style="width:200px;" id="date_precise_format" name="date_precise_format" value="<?php echo htmlspecialchars($engine->config['date_precise_format']);?>" /></td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<br />
+					Reverse Proxy
+				</th>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="reverse_proxy"><strong>Use Reverse proxy:</strong><br />
+				<small>Enable this setting to determine the correct IP address of the remote
+				 client by examining information stored in the X-Forwarded-For headers.
+				 X-Forwarded-For headers are a standard mechanism for identifying client
+				 systems connecting through a reverse proxy server, such as Squid or
+				 Pound. Reverse proxy servers are often used to enhance the performance
+				 of heavily visited sites and may also provide other site caching,
+				 security or encryption benefits. If this WackoWiki installation operates
+				 behind a reverse proxy, this setting should be enabled so that correct
+				 IP address information is captured in WackoWiki's session management,
+				 logging, statistics and access management systems; if you are unsure
+				 about this setting, do not have a reverse proxy, or WackoWiki operates in
+				 a shared hosting environment, this setting should remain disabled.</small></label></td>
+				<td><input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="1"<?php echo ( $engine->config['reverse_proxy'] == 1 ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="reverse_proxy_header"><strong>Reverse proxy header:</strong><br />
+				<small>Set this value if your proxy server sends the client IP in a header
+				 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
+				 addresses, only the last one (the left-most) will be used.</small></label></td>
+				<td><input maxlength="50" style="width:200px;" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo htmlspecialchars($engine->config['reverse_proxy_header']);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="reverse_proxy_addresses"><strong>reverse_proxy accepts an array of IP addresses:</strong><br />
+				<small>Each element of this array is the IP address of any of your reverse
+				 proxies. Filling this array WackoWiki will trust the information stored
+				 in the X-Forwarded-For headers only if Remote IP address is one of
+				 these, that is the request reaches the web server from one of your
+				 reverse proxies. Otherwise, the client could directly connect to
+				 your web server spoofing the X-Forwarded-For headers.</small></label></td>
+				<td><input maxlength="50" style="width:200px;" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->config['reverse_proxy_addresses']);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">

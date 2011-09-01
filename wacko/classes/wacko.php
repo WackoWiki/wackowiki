@@ -3652,6 +3652,42 @@ class Wacko
 		}
 	}
 
+	function ip_address()
+	{
+		$ip_address = $_SERVER['REMOTE_ADDR'];
+
+		//only accept http_x for reverse-proxy or tls-proxy
+		if ($this->config['reverse_proxy'] || ($_SERVER['HTTP_HOST'] == $this->config['tls_proxy']))
+		{
+			$reverse_proxy_header = 'HTTP_X_FORWARDED_FOR';
+
+			if (!empty($_SERVER[$reverse_proxy_header]))
+			{
+				// If an array of known reverse proxy IPs is provided, then trust
+				// the XFF header if request really comes from one of them.
+				$reverse_proxy_addresses = !empty($this->config['reverse_proxy_addresses']) ? $this->config['reverse_proxy_addresses'] : array();
+
+				// Turn XFF header into an array.
+				$forwarded = explode(',', $_SERVER[$reverse_proxy_header]);
+
+				// Trim the forwarded IPs; they may have been delimited by commas and spaces.
+				$forwarded = array_map('trim', $forwarded);
+
+				// Tack direct client IP onto end of forwarded array.
+				#$forwarded[] = $ip_address;
+
+				// Eliminate all trusted IPs.
+				$untrusted = array_diff($forwarded, $reverse_proxy_addresses);
+
+				// The right-most IP is the most specific we can trust.
+				#$ip_address = array_pop($untrusted);
+				$ip_address = $untrusted[0];
+			}
+		}
+
+		return $ip_address;
+	}
+
 	function get_user_ip()
 	{
 		if ($this->_userhost)
@@ -3660,8 +3696,7 @@ class Wacko
 		}
 		else
 		{
-			//only accept http_x for tls-proxy
-			return $this->_userhost = (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['tls_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
+			return $this->_userhost = $this->ip_address();
 		}
 	}
 
@@ -3705,7 +3740,7 @@ class Wacko
 		// define current IP for foregoing checks
 		if ($ip == true)
 		{
-			$this->set_user_setting('ip', (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['tls_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) );
+			$this->set_user_setting('ip', $this->get_user_ip() );
 		}
 
 		return true;
@@ -5048,9 +5083,9 @@ class Wacko
 		}
 
 		// check IP validity
-		if ($this->get_user_setting('validate_ip') == 1 && $this->get_user_setting('ip') != (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ($_SERVER['HTTP_HOST'] == $this->config['tls_proxy']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']) )
+		if ($this->get_user_setting('validate_ip') == 1 && $this->get_user_setting('ip') != $this->ip_address() )
 		{
-			$this->log(1, '<strong><span class="cite">User in-session IP change detected</span></strong>');
+			$this->log(1, '<strong><span class="cite">User in-session IP change detected '.$this->get_user_setting('ip').' to '.$this->ip_address().'</span></strong>');
 			$this->logout_user();
 			$this->redirect($this->config['base_url'].$this->config['login_page'].'?goback='.$tag);
 			$session = false;
