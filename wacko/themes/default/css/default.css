@@ -1174,6 +1174,16 @@ table.formation th, tr.formation th {
 	background-color: #FCFCFC;
 }
 
+#handler ul ul li.active {
+	border-top-color: #AAAAAA;
+	border-left-color: #AAAAAA;
+	border-style:solid;
+	border-width:1px 1px 0;
+	border-right-color: #CCCCCC;
+	border-bottom-color: #CCCCCC;
+	background-color: #FCFCFC;
+}
+
 /* Submenu items */
 #handler ul ul {
 	display:none; /* Sub menus are hidden by default */
@@ -1212,7 +1222,7 @@ table.formation th, tr.formation th {
 
 }
 
-#handler ul ul li a, #handler ul li.active li a, #handler ul li:hover ul li a {
+#handler ul ul li a, #handler ul li.active li a, #handler ul li:hover ul li a, #handler ul ul li span {
 	background: none repeat scroll 0 0 transparent;
 	display: block;
 	float: left;
@@ -1223,6 +1233,9 @@ table.formation th, tr.formation th {
 	padding: 0.25em 0.5em 0.2em;
 }
 
+#handler ul ul li.active {
+	margin-left: -1px;
+}
 
 /* Make the sub menus appear on hover */
 #handler ul li:hover ul {
@@ -1232,7 +1245,7 @@ table.formation th, tr.formation th {
 #handler #more-icon {
 }
 
-#handler img, #handler  a img {
+#handler img, #handler a img, #handler span img {
 	border:medium none;
 	height:16px;
 	width:16px;
@@ -1284,6 +1297,10 @@ table.formation th, tr.formation th {
 }
 #handler li.edit a:hover img {
 	background-image:url("./../icons/edit.png");
+	background-repeat: no-repeat;
+}
+#handler li.referrers img {
+	background-image:url("./../icons/referer.gif");
 	background-repeat: no-repeat;
 }
 #handler li.referrers a img {

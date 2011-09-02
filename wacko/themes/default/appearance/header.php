@@ -121,11 +121,11 @@ else
 					$_title = $title;
 				}
 
-				$tab = "<li class=\"$method active\"><img src=\"".$engine->config['theme_url']."icons/$_image\" alt=\"$title\" />".$_title."</li>\n";
+				$tab = "<li class=\"$method active\"><span><img src=\"".$engine->config['theme_url']."icons/$_image\" alt=\"$title\" />"." ".$_title."</span></li>\n";
 			}
 			else
 			{
-				$tab = "<li class=\"$method active\">$title</li>\n";
+				$tab = "<li class=\"$method active\"><span>"." ".$title."</span></li>\n";
 			}
 		}
 		else
