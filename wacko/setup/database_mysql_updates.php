@@ -350,7 +350,7 @@ $update_user_r4_3_3 = "UPDATE {$pref}user SET show_spaces = '0' WHERE show_space
 $update_user_r4_3_4 = "UPDATE {$pref}user SET typografica = '0' WHERE typografica = '2'";
 
 // USER SETTING
-$table_user_setting_r4_3_1 = "CREATE TABLE {$pref}user_setting (".
+$table_user_setting_r4_3 = "CREATE TABLE {$pref}user_setting (".
 					"setting_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL,".
 					"theme VARCHAR(20) DEFAULT NULL,".
@@ -376,7 +376,7 @@ $table_user_setting_r4_3_1 = "CREATE TABLE {$pref}user_setting (".
 					"UNIQUE KEY idx_user_id (user_id),".
 					"KEY idx_send_watchmail (send_watchmail)".
 				") {$engine} COMMENT='' {$charset}";
-$table_user_setting_r4_3_2 = "ALTER TABLE {$pref}user_setting ADD allow_massemail TINYINT(1) UNSIGNED DEFAULT '0' AFTER allow_intercom".
+$alter_user_setting_r4_3_1 = "ALTER TABLE {$pref}user_setting ADD allow_massemail TINYINT(1) UNSIGNED DEFAULT '0' AFTER allow_intercom".
 
 // WATCH
 $rename_watch_r4_3_1 = "RENAME TABLE {$pref}pagewatches TO {$pref}watch";
