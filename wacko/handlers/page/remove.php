@@ -27,7 +27,7 @@ if ($this->is_admin() ||
 {
 	if (!$this->page)
 	{
-		print(str_replace('%1', $this->href('edit'),$this->get_translation('DoesNotExists')));
+		echo str_replace('%1', $this->href('edit'),$this->get_translation('DoesNotExists'));
 	}
 	else
 	{
@@ -46,41 +46,41 @@ if ($this->is_admin() ||
 			// Remove page
 			if ($this->remove_referrers($this->tag))
 			{
-				print(str_replace('%1', $this->tag, $this->get_translation('ReferrersRemoved'))."<br />\n");
+				echo str_replace('%1', $this->tag, $this->get_translation('ReferrersRemoved'))."<br />\n";
 			}
 			if ($this->remove_links($this->tag))
 			{
-				print(str_replace('%1', $this->tag, $this->get_translation('LinksRemoved'))."<br />\n");
+				echo str_replace('%1', $this->tag, $this->get_translation('LinksRemoved'))."<br />\n";
 			}
 			if ($this->remove_categories($this->tag))
 			{
-				print($this->get_translation('CategoriesRemoved')."<br />\n");
+				echo $this->get_translation('CategoriesRemoved')."<br />\n";
 			}
 			if ($this->remove_acls($this->tag))
 			{
-				print(str_replace('%1', $this->tag, $this->get_translation('AclsRemoved'))."<br />\n");
+				echo str_replace('%1', $this->tag, $this->get_translation('AclsRemoved'))."<br />\n";
 			}
 			if (!$comment_on_id)
 			{
 				if ($this->remove_menu_items($this->tag))
 				{
-					print(str_replace('%1', $this->tag, $this->get_translation('BookmarksRemoved'))."<br />\n");
+					echo str_replace('%1', $this->tag, $this->get_translation('BookmarksRemoved'))."<br />\n";
 				}
 				if ($this->remove_watches($this->tag))
 				{
-					print(str_replace('%1', $this->tag, $this->get_translation('WatchesRemoved'))."<br />\n");
+					echo str_replace('%1', $this->tag, $this->get_translation('WatchesRemoved'))."<br />\n";
 				}
 				if ($this->remove_ratings($this->tag))
 				{
-					print($this->get_translation('RatingRemoved')."<br />\n");
+					echo $this->get_translation('RatingRemoved')."<br />\n";
 				}
 				if ($this->remove_comments($this->tag, false, $dontkeep))
 				{
-					print(str_replace('%1', $this->tag, $this->get_translation('CommentsRemoved'))."<br />\n");
+					echo str_replace('%1', $this->tag, $this->get_translation('CommentsRemoved'))."<br />\n";
 				}
 				if ($this->remove_files($this->tag))
 				{
-					print(str_replace('%1', $this->tag, $this->get_translation('FilesRemoved'))."<br />\n");
+					echo str_replace('%1', $this->tag, $this->get_translation('FilesRemoved'))."<br />\n";
 				}
 			}
 			if ($this->remove_page($this->tag, $comment_on_id, $dontkeep))
@@ -102,7 +102,7 @@ if ($this->is_admin() ||
 					}
 				}
 
-				print(str_replace('%1', $this->tag, $this->get_translation('PageRemoved'))."<br />\n");
+				echo str_replace('%1', $this->tag, $this->get_translation('PageRemoved'))."<br />\n";
 			}
 
 			if ($this->is_admin() && (isset($_POST['revisions']) && $_POST['revisions'] == 1) && !$comment_on_id)
