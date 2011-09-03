@@ -664,7 +664,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_2, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_3, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 
-					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysql_query($table_user_setting_r4_3_1, $dblink), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysql_query($table_user_setting_r4_3, $dblink), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -693,7 +693,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'tag', $lang['CreatingTable']), @mysql_query($table_tag_r4_3, $dblink), str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'tag_page', $lang['CreatingTable']), @mysql_query($table_tag_page_r4_3, $dblink), str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_31, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysql_query($table_user_setting_r4_3_2, $dblink), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysql_query($alter_user_setting_r4_3_1, $dblink), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
 
 					echo "            </ol>\n";
 					echo "            <br />\n";
@@ -1080,7 +1080,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_2), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_3), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 
-					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $table_user_setting_r4_3_1), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $table_user_setting_r4_3), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -1109,7 +1109,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'tag', $lang['CreatingTable']), @mysqli_query($dblink, $table_tag_r4_3), str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'tag_page', $lang['CreatingTable']), @mysqli_query($dblink, $table_tag_page_r4_3), str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_31), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $table_user_setting_r4_3_2), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $alter_user_setting_r4_3_1), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
 					echo "            </ol>\n";
 					echo "         <br />\n";
@@ -1511,7 +1511,7 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_2, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_3, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 
-					test_pdo(str_replace('%1', 'user_setting', $lang['CreatingTable']), $table_user_setting_r4_3_1, str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'user_setting', $lang['CreatingTable']), $table_user_setting_r4_3, str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
 					// inserting config values
 					test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -1540,7 +1540,7 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'tag', $lang['CreatingTable']), $table_tag_r4_3, str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'tag_page', $lang['CreatingTable']), $table_tag_page_r4_3, str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_31, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user_setting', $lang['CreatingTable']), $table_user_setting_r4_3_2, str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'user_setting', $lang['CreatingTable']), $alter_user_setting_r4_3_1, str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
 					echo "            </ol>\n";
 					echo "         <br />\n";
