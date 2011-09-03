@@ -351,7 +351,7 @@ function admin_configsecurity(&$engine, &$module)
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="max_login_attempts"><strong>Maximum number of login attempts per username::</strong><br />
+				<td class="label"><label for="max_login_attempts"><strong>Maximum number of login attempts per username:</strong><br />
 				<small>The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="max_login_attempts" name="max_login_attempts" value="<?php echo htmlspecialchars($engine->config['max_login_attempts']);?>" /></td>
 			</tr>
@@ -359,7 +359,7 @@ function admin_configsecurity(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="ip_login_limit_max"><strong>Maximum number of login attempts per IP address::</strong><br />
+				<td class="label"><label for="ip_login_limit_max"><strong>Maximum number of login attempts per IP address:</strong><br />
 				<small>The threshold of login attempts allowed from a single IP address before an anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered by IP addresses.</small></label></td>
 				<td><input maxlength="4" style="width:200px;" id="ip_login_limit_max" name="ip_login_limit_max" value="<?php echo htmlspecialchars($engine->config['ip_login_limit_max']);?>" /></td>
 			</tr>
