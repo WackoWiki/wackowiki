@@ -32,7 +32,7 @@ if (!function_exists('load_recent_comments'))
 				"SELECT b.tag as comment_on_tag, b.title as page_title, a.tag AS comment_tag, a.title AS comment_title, b.supertag, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id ".
 				"FROM ".$wacko->config['table_prefix']."page a ".
 					"INNER JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
-					"LEFT OUTER JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
+					"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
 				"WHERE ".
 				($for
 					? "b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
