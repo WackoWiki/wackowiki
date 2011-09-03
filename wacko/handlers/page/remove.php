@@ -108,7 +108,7 @@ if ($this->is_admin() ||
 			if ($this->is_admin() && (isset($_POST['revisions']) && $_POST['revisions'] == 1) && !$comment_on_id)
 			{
 				$this->remove_revisions($this->tag);
-				echo $this->get_translation('RevisionsRemoved')."<br />\n";
+				echo str_replace('%1', $this->tag, $this->get_translation('RevisionsRemoved'))."<br />\n";
 			}
 
 			if ($this->is_admin() && (isset($_POST['cluster']) && $_POST['cluster'] == 1))
