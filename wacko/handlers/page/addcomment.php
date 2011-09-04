@@ -11,7 +11,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	if ($latestComment = $this->load_single(
 	"SELECT tag, page_id
 	FROM ".$this->config['table_prefix']."page
-	WHERE comment_on_id != '0'
+	WHERE comment_on_id <> '0'
 	ORDER BY page_id DESC
 	LIMIT 1"))
 	{

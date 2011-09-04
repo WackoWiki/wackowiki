@@ -177,7 +177,7 @@ $update_page_r4_3_2_5 = "DELETE {$pref}page.* FROM {$pref}page WHERE {$pref}page
 $update_page_r4_3_4 = "UPDATE {$pref}page AS page, (SELECT user_id, user_name FROM {$pref}user) AS users SET page.owner_id = users.user_id WHERE page.owner = users.user_name";
 $update_page_r4_3_5 = "UPDATE {$pref}page AS page, (SELECT user_id, user_name FROM {$pref}user) AS users SET page.user_id = users.user_id WHERE page.user = users.user_name";
 $update_page_r4_3_6 = "UPDATE {$pref}page AS page, (SELECT id, tag FROM {$pref}page) AS pages2 SET page.comment_on_id = pages2.id WHERE page.comment_on = pages2.tag";
-$update_page_r4_3_7 = "UPDATE {$pref}page AS page, (SELECT comment_on_id, COUNT(comment_on_id) as n FROM {$pref}page WHERE comment_on_id != '0' GROUP BY comment_on_id) AS comments_on SET page.comments = comments_on.n WHERE page.id = comments_on.comment_on_id";
+$update_page_r4_3_7 = "UPDATE {$pref}page AS page, (SELECT comment_on_id, COUNT(comment_on_id) as n FROM {$pref}page WHERE comment_on_id <> '0' GROUP BY comment_on_id) AS comments_on SET page.comments = comments_on.n WHERE page.id = comments_on.comment_on_id";
 $update_page_r4_3_8 = "UPDATE {$pref}page AS page, (SELECT tag, MIN(time) AS oldest FROM {$pref}revision GROUP BY tag) AS revisions SET page.created = revisions.oldest WHERE page.tag = revisions.tag AND page.created IS NULL";
 $update_page_r4_3_9 = "UPDATE {$pref}page AS page SET page.created = page.time WHERE page.created IS NULL";
 $update_page_r4_3_10 = "UPDATE {$pref}page AS page SET minor_edit = '0' WHERE page.minor_edit IS NULL";
