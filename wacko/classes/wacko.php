@@ -2210,6 +2210,9 @@ class Wacko
 	{
 		if ( !headers_sent() )
 		{
+			// Make sure no &amp;'s are in, this will break the redirect
+			$url = str_replace('&amp;', '&', $url);
+
 			if($permanent)
 			{
 				header('HTTP/1.1 301 Moved Permanently');
