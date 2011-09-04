@@ -1381,7 +1381,7 @@ class Wacko
 		"FROM ".$this->config['table_prefix']."page c ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (c.user_id = u.user_id) ".
 			"LEFT JOIN ".$this->config['table_prefix']."page p ON (c.comment_on_id = p.page_id) ".
-		"WHERE c.comment_on_id != '0' ".
+		"WHERE c.comment_on_id <> '0' ".
 			($for
 				? "AND p.supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 				: "").

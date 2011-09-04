@@ -38,7 +38,7 @@ if ($this->is_admin())
 			"SELECT u.page_id, file_name, supertag ".
 			"FROM {$this->config['table_prefix']}upload u ".
 			"INNER JOIN ".$this->config['table_prefix']."page p ON (u.page_id = p.page_id) ".
-			"WHERE u.page_id != '0'");
+			"WHERE u.page_id <> '0'");
 
 		$dir = $this->config['upload_path_per_page']."/";
 		echo "<table><tr><th>old name</th><th></th><th>new name</th></tr>";

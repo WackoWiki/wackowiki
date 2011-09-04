@@ -255,7 +255,9 @@ if ($this->user_is_owner() || $this->is_admin())
 				$parents = $this->load_all(
 					"SELECT category_id, category ".
 					"FROM {$this->config['table_prefix']}category ".
-					"WHERE parent = 0 AND lang = '".$word['lang']."' AND category_id != '".$word['category_id']."' ".
+					"WHERE parent = 0 ".
+						"AND lang = '".$word['lang']."' ".
+						"AND category_id <> '".$word['category_id']."' ".
 					"ORDER BY category ASC");
 
 				foreach ($parents as $parent)
@@ -333,7 +335,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			{
 				echo "<br />\n";
 			}
-			
+
 			$i = 0;
 		}
 
