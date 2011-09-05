@@ -6,6 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_translation = array(
+	'FormInvalid'				=> 'Η υποβληθείσα μορφή ήταν άκυρη. Προσπαθήστε πάλι.',
 	// logged in panel
 	'YouAre'					=> 'Είσαι ο ',
 	'AccountLink'				=> 'Settings',

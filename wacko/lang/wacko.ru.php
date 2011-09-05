@@ -6,6 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_translation = array(
+	'FormInvalid'				=> 'Ошибка отправки формы. Попробуйте ещё раз.',
 	// logged in panel
 	'YouAre'					=> 'Вы ',
 	'AccountLink'				=> 'Настройки',
