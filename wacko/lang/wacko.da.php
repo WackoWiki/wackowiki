@@ -6,6 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_translation = array(
+	'FormInvalid'				=> 'Den indsendte formular var ugyldig. Prøv at indsende igen.',
 	// logged in panel
 	'YouAre' => 'Du er ',
 	'AccountLink' => 'Indstillinger',

@@ -6,6 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_translation = array(
+	'FormInvalid'				=> 'Esitatud avaldus oli ebakorrektne. Proovi see uuesti esitada.',
 	// logged in panel
 	'YouAre' => 'Tere tulemast, ',
 	'AccountLink' => 'Settings',

@@ -6,6 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_translation = array(
+	'FormInvalid'				=> 'El formulario enviado era no válido. Intente enviarlo de nuevo.',
 	// logged in panel
 	'YouAre' => 'Eres ',
 	'AccountLink' => 'Preferencias',

@@ -6,6 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_translation = array(
+	'FormInvalid'				=> 'Het verstuurde formulier is ongeldig. Probeer opnieuw te versturen.',
 	// logged in panel
 	'YouAre' => 'Jij bent ',
 	'AccountLink' => 'Instellingen',
