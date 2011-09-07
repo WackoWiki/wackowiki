@@ -186,6 +186,7 @@ $wacko_config_defaults = array(
 	'captcha_edit_page' => 1,
 	'captcha_registration' => 1,
 
+	'form_token_time' => 7200,
 	'max_login_attempts' => 3,
 	'ip_login_limit_max' => 50,
 
