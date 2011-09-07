@@ -14,8 +14,9 @@ if ($cached_config = $init->load_cached_settings('config'))
 else
 {
 	$init->settings();	// populate from config.php
+	$init->installer(); // install
 	$init->settings();	// initialize DBAL and populate from config table.
-	$init->installer();
+	$init->installer(); // upgrade R5 and on
 }
 $init->dbal();
 $init->settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');

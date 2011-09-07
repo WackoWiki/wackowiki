@@ -33,10 +33,8 @@ define('TRAN_LOWERCASE',				1);
 define('TRAN_LOAD',						0);
 define('TRAN_DONTLOAD',					1);
 
-define('STANDARD_HANDLERS',				'addcomment|categories|claim|diff|edit|latex|msword|new|permissions|print|properties|rate|referrers|referrers_sites|remove|rename|revisions|show|watch');
-
 // do not change this two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-define('WACKO_VERSION',					'5.0.beta');
+define('WACKO_VERSION',					'5.0.rc');
 define('XML_HTMLSAX3',					'lib/HTMLSax3/');
 #define('XML_HTMLSAX3',					dirname(__FILE__).'/lib/HTMLSax3/');
 define('ACTIONS4DIFF',					'a, anchor, toc'); //allowed actions in DIFF
