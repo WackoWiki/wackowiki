@@ -3140,9 +3140,9 @@ class Wacko
 		$_data = '/'.$_data.'/';
 
 		// Find the string of text
-		# $this->REGEX_WACKO_HANDLERS = '/^(.*?)\/'.STANDARD_HANDLERS.'\/(.*)$/i';
+		# $this->REGEX_WACKO_HANDLERS = '/^(.*?)\/'.$this->config['standard_handlers'].'\/(.*)$/i';
 		// Find the word
-		$this->REGEX_WACKO_HANDLERS = '/\b('.STANDARD_HANDLERS.')\b/i';
+		$this->REGEX_WACKO_HANDLERS = '/\b('.$this->config['standard_handlers'].')\b/i';
 
 		if (preg_match( $this->REGEX_WACKO_HANDLERS, $_data, $match ))
 		{
@@ -4679,8 +4679,6 @@ class Wacko
 			#$this->debug_print_r($default_menu);
 			return $default_menu_formatted;
 		}
-
-
 	}
 
 	function get_user_menu($user_id, $lang = '')
