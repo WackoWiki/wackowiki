@@ -1110,7 +1110,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'tag', $lang['CreatingTable']), @mysqli_query($dblink, $table_tag_r4_3), str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'tag_page', $lang['CreatingTable']), @mysqli_query($dblink, $table_tag_page_r4_3), str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_31), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $alter_user_setting_r4_3_1), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_setting_r4_3_1), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
 
 					echo "            </ol>\n";
 					echo "         <br />\n";
@@ -1541,7 +1541,7 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'tag', $lang['CreatingTable']), $table_tag_r4_3, str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'tag_page', $lang['CreatingTable']), $table_tag_page_r4_3, str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_31, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user_setting', $lang['CreatingTable']), $alter_user_setting_r4_3_1, str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'user_setting', $lang['AlterTable']), $alter_user_setting_r4_3_1, str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
 
 					echo "            </ol>\n";
 					echo "         <br />\n";

@@ -376,6 +376,7 @@ $table_user_setting_r4_3 = "CREATE TABLE {$pref}user_setting (".
 					"UNIQUE KEY idx_user_id (user_id),".
 					"KEY idx_send_watchmail (send_watchmail)".
 				") {$engine} COMMENT='' {$charset}";
+
 $alter_user_setting_r4_3_1 = "ALTER TABLE {$pref}user_setting ADD allow_massemail TINYINT(1) UNSIGNED DEFAULT '0' AFTER allow_intercom".
 
 // WATCH
