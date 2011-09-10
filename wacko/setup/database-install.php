@@ -214,7 +214,7 @@ $config_db['permalink_page']				= $config['permalink_page'];
 $config_db['phpmailer']						= $config['phpmailer'];
 $config_db['phpmailer_method']				= $config['phpmailer_method'];
 $config_db['policy_page']					= $config['policy_page'];
-$config_db['publish_anonymously']					= $config['publish_anonymously'];
+$config_db['publish_anonymously']			= $config['publish_anonymously'];
 $config_db['pwd_char_classes']				= $config['pwd_char_classes'];
 $config_db['pwd_min_chars']					= $config['pwd_min_chars'];
 $config_db['pwd_unlike_login']				= $config['pwd_unlike_login'];
@@ -249,6 +249,7 @@ $config_db['tag_page']						= $config['tag_page'];
 $config_db['theme']							= $config['theme'];
 $config_db['time_format']					= $config['time_format'];
 $config_db['time_format_seconds']			= $config['time_format_seconds'];
+$config_db['timezone']						= $config['timezone'];
 $config_db['tls']							= $config['tls'];
 $config_db['tls_implicit']					= $config['tls_implicit'];
 $config_db['tls_proxy']						= $config['tls_proxy'];
@@ -259,6 +260,8 @@ $config_db['upload_images_only']			= $config['upload_images_only'];
 $config_db['upload_quota_per_user']			= $config['upload_quota_per_user'];
 $config_db['upload_max_size']				= $config['upload_max_size'];
 $config_db['urls_underscores']				= $config['urls_underscores'];
+$config_db['username_chars_min']			= $config['username_chars_min'];
+$config_db['username_chars_max']			= $config['username_chars_max'];
 $config_db['users_page']					= $config['users_page'];
 $config_db['xml_sitemap']					= $config['xml_sitemap'];
 $config_db['youarehere_text']				= $config['youarehere_text'];
@@ -695,6 +698,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'tag_page', $lang['CreatingTable']), @mysql_query($table_tag_page_r4_3, $dblink), str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_31, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysql_query($alter_user_setting_r4_3_1, $dblink), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysql_query($alter_user_setting_r4_3_2, $dblink), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
 
 					echo "            </ol>\n";
 					echo "            <br />\n";
@@ -1111,6 +1115,7 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'tag_page', $lang['CreatingTable']), @mysqli_query($dblink, $table_tag_page_r4_3), str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_31), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_setting_r4_3_1), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_setting_r4_3_2), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
 
 					echo "            </ol>\n";
 					echo "         <br />\n";
@@ -1542,6 +1547,7 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'tag_page', $lang['CreatingTable']), $table_tag_page_r4_3, str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_31, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'user_setting', $lang['AlterTable']), $alter_user_setting_r4_3_1, str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'user_setting', $lang['AlterTable']), $alter_user_setting_r4_3_2, str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
 
 					echo "            </ol>\n";
 					echo "         <br />\n";

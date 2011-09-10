@@ -134,6 +134,8 @@ $wacko_config_defaults = array(
 	'allow_registration' => 1,
 	'disable_autosubscribe' => 0,
 	'disable_wikiname' => 1,
+	'username_chars_min' => 3,
+	'username_chars_max' => 20,
 
 	'standard_handlers' => 'addcomment|categories|claim|clone|diff|edit|latex|msword|new|permissions|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|show|source|watch',
 
@@ -210,6 +212,7 @@ $wacko_config_defaults = array(
 	'name_date_macro' => '%s (%s)',
 	'date_macro_format' => 'd.m.Y H:i',
 	'date_precise_format' => 'd.m.Y H:i:s',
+	'timezone' => 0.00,
 
 	'debug' => 0,
 	'debug_admin_only' => 0,
