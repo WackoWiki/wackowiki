@@ -631,15 +631,22 @@ class Wacko
 	{
 		// array used to figure what number to decrement from character order value
 		// according to number of characters used to map unicode to ascii by utf-8
-		$decrement[4] = 240; $decrement[3] = 224;
-		$decrement[2] = 192; $decrement[1] = 0;
+		$decrement[4] = 240;
+		$decrement[3] = 224;
+		$decrement[2] = 192;
+		$decrement[1] = 0;
 
 		// the number of bits to shift each char_num by
-		$shift[1][0] = 0;  $shift[2][0] = 6;
-		$shift[2][1] = 0;  $shift[3][0] = 12;
-		$shift[3][1] = 6;  $shift[3][2] = 0;
-		$shift[4][0] = 18; $shift[4][1] = 12;
-		$shift[4][2] = 6;  $shift[4][3] = 0;
+		$shift[1][0] = 0;
+		$shift[2][0] = 6;
+		$shift[2][1] = 0;
+		$shift[3][0] = 12;
+		$shift[3][1] = 6;
+		$shift[3][2] = 0;
+		$shift[4][0] = 18;
+		$shift[4][1] = 12;
+		$shift[4][2] = 6;
+		$shift[4][3] = 0;
 
 		$pos = 0;
 		$len = strlen ($source);

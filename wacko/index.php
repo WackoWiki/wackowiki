@@ -14,10 +14,20 @@ if ($cached_config = $init->load_cached_settings('config'))
 else
 {
 	$init->settings();	// populate from config.php
-	$init->installer(); // install
+
+	if ($init->config['wacko_version'][0] != 5)
+	{
+		$init->installer(); // install
+	}
+
 	$init->settings();	// initialize DBAL and populate from config table.
-	$init->installer(); // upgrade R5 and on
+
+	if ($init->config['wacko_version'][0] >= 5)
+	{
+		$init->installer(); // upgrade R5 and on
+	}
 }
+
 $init->dbal();
 $init->settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
 $init->settings('user_table',	$init->config['table_prefix'].'user');
