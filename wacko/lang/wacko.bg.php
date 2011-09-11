@@ -15,9 +15,9 @@ $wacko_translation = array(
 	'LogoutLink' => 'Изход',
 	'LogoutButton' => 'Изход от системата',
 	'LogoutAreYouSure' => 'Излизате ли от системата?',
+
 	// registration panel
 	'RegistrationWelcome' => 'Регистрация на нов потребител:',
-	'RegistrationUserName' => 'Задайте своето ((WackoWiki:Doc/English/WikiName NameSurname))',
 	'RegistrationRealName' => 'Show Name',
 	'RegistrationPassword' => 'Парола',
 	'RegistrationButton' => 'Карай нататък!',
@@ -26,6 +26,10 @@ $wacko_translation = array(
 	'SiteRegistered' => 'You have successfully registered on the site ',
 	'RegistrationEmailInfo'	=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
 	'SiteEmailConfirm' => 'Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',
+	'NameTooShort'				=> 'Потребителското име е прекалено късо, минимума е %2 букви.',
+	'NameTooLong'				=> 'Потребителското име е прекалено дълго, максимума е %2 букви.',
+	'NameAlphanumOnly'			=> 'Потребителското име трябва да е м/у %1 и %2 символа дълго и да използва само alphanumeric.',
+	'NameCamelCaseOnly'			=> 'Потребителското име трябва да е м/у %1 и %2 символа дълго and WikiName formatted.',
 
 	// login panel
 	'LoginWelcome' => 'Вход',

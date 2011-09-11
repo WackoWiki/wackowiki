@@ -67,6 +67,8 @@ function admin_configsecurity(&$engine, &$module)
 		$config['enable_security_headers']		= (int)$_POST['enable_security_headers'];
 		$config['max_login_attempts']			= (int)$_POST['max_login_attempts'];
 		$config['ip_login_limit_max']			= (int)$_POST['ip_login_limit_max'];
+		$config['username_chars_min']			= (int)$_POST['username_chars_min'];
+		$config['username_chars_max']			= (int)$_POST['username_chars_max'];
 		#$config['x_frame_option']				= (int)$_POST['x_frame_option'];
 		#$config['x_csp']						= (int)$_POST['x_csp'];
 
@@ -121,8 +123,16 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="allow_email_reuse"><strong>Allow email address re-use:</strong><br />
-				<small>Different users can register with the same e-mail address.</label></td>
+				<small>Different users can register with the same e-mail address.</small></label></td>
 				<td><input type="checkbox" id="allow_email_reuse" name="allow_email_reuse" value="1"<?php echo ( $engine->config['allow_email_reuse'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="username_chars_min"><strong>Username length:</strong><br />
+				<small>Minimum and maximum number of characters in usernames.</small></label></td>
+				<td><input maxlength="3" style="width:30px;" id="username_chars_min" name="username_chars_min" value="<?php echo htmlspecialchars($engine->config['username_chars_min']);?>" /> Min&nbsp;&nbsp;<input maxlength="3" style="width:30px;" id="username_chars_max" name="username_chars_max" value="<?php echo htmlspecialchars($engine->config['username_chars_max']);?>" /> Max</td>
 			</tr>
 			<tr>
 				<th colspan="2">

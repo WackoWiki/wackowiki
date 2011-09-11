@@ -15,9 +15,9 @@ $wacko_translation = array(
 	'LogoutLink' => 'Desconectar',
 	'LogoutButton' => 'Desconectar',
 	'LogoutAreYouSure' => 'Estás seguro de querer desconectarte?',
+
 	// registration panel
 	'RegistrationWelcome' => 'Nuevo usuario:',
-	'RegistrationUserName' => 'Date un ((WackoWiki:Doc/English/WikiName NombreDeUsuario))',
 	'RegistrationRealName' => 'Show Name',
 	'RegistrationPassword' => 'Contraseña',
 	'RegistrationButton' => 'Regístrate',
@@ -26,6 +26,10 @@ $wacko_translation = array(
 	'SiteRegistered' => 'You have successfully registered on the site ',
 	'RegistrationEmailInfo'	=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
 	'SiteEmailConfirm' => 'Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',
+	'NameTooShort'				=> 'El nombre de usuario es muy corto, se requiere un mínimo de %2 caracteres.',
+	'NameTooLong'				=> 'El nombre de usuario es muy largo, se permite un máximo de %2 caracteres.',
+	'NameAlphanumOnly'			=> 'El nombre de usuario debe tener entre %1 y %2 caracteres de longitud y ser solamente alfanuméricos',
+	'NameCamelCaseOnly'			=> 'El nombre de usuario debe tener entre %1 y %2 caracteres de longitud and WikiName formatted.',
 
 	// login panel
 	'LoginWelcome' => 'Conectar',

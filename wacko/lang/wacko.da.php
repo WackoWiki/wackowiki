@@ -15,9 +15,9 @@ $wacko_translation = array(
 	'LogoutLink' => 'Log af',
 	'LogoutButton' => 'Log af',
 	'LogoutAreYouSure' => 'Er du sikker på, at du vil logge af?',
+
 	// registration panel
 	'RegistrationWelcome' => 'Ny bruger registrering:',
-	'RegistrationUserName' => 'Vælg dit wikinavn ((WackoWiki:Doc/English/WikiName NameSurname))',
 	'RegistrationRealName' => 'Show Name',
 	'RegistrationPassword' => 'Password',
 	'RegistrationButton' => 'Registrer mig!',
@@ -26,6 +26,10 @@ $wacko_translation = array(
 	'SiteRegistered' => 'You have successfully registered on the site ',
 	'RegistrationEmailInfo'	=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
 	'SiteEmailConfirm' => 'Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',
+	'NameTooShort'				=> 'Brugernavn er for kort, et minimum på %2 tegn er påkrævet.',
+	'NameTooLong'				=> 'Brugernavn er for langt, et maksimum på %2 tegn er tilladt.',
+	'NameAlphanumOnly'			=> 'Brugernavn skal være mellem %1 og %2 tegn langt og brug kun alfanumeriske tegn.',
+	'NameCamelCaseOnly'			=> 'Brugernavn skal være mellem %1 og %2 tegn langt og WikiNavn formateret.',
 
 	// login panel
 	'LoginWelcome' => 'Log ind',
