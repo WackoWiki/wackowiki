@@ -15,9 +15,9 @@ $wacko_translation = array(
 	'LogoutLink' => 'Uitloggen',
 	'LogoutButton' => 'Log uit',
 	'LogoutAreYouSure' => 'Weet u zeker dat u wilt uitloggen ?',
+
 	// registration panel
 	'RegistrationWelcome' => 'Nieuwe gebruikers registratie:',
-	'RegistrationUserName' => 'Geef een ((WackoWiki:Doc/English/WikiName Wiki-naam)) op',
 	'RegistrationRealName' => 'Show Name',
 	'RegistrationPassword' => 'Wachtwoord',
 	'RegistrationButton' => 'Registreer mij!',
@@ -26,6 +26,10 @@ $wacko_translation = array(
 	'SiteRegistered' => 'You have successfully registered on the site ',
 	'RegistrationEmailInfo'	=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
 	'SiteEmailConfirm' => 'Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',
+	'NameTooShort'				=> 'Gebruikersnaam is te kort, een minimum van %2 tekens is vereist.',
+	'NameTooLong'				=> 'Gebruikersnaam is te lang, een maximum van %2 tekens is toegestaan.',
+	'NameAlphanumOnly'			=> 'Gebruikersnaam moet tussen %1 en %2 tekens lang zijn. Gebruik hierbij alleen letters en cijfers.',
+	'NameCamelCaseOnly'			=> 'Gebruikersnaam moet tussen %1 en %2 tekens lang zijn en een WikiNaam zijn.',
 
 	// login panel
 	'LoginWelcome' => 'Inloggen',

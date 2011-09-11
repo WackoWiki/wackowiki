@@ -61,6 +61,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 		$password		= $_POST['password'];
 		$confpassword	= $_POST['confpassword'];
 		$lang			= (isset($_POST['lang']) ? $_POST['lang'] : '');
+		#$timezone		= trim($_POST['timezone']);
 		$complexity		= $this->password_complexity($user_name, $password);
 
 		// Start Registration Captcha
@@ -78,10 +79,30 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 
 		if ((!$error) || $this->is_admin() || !$this->config['captcha_registration'])
 		{
+			// strip \-\_\'\.
+			$user_name	= str_replace('-',		'',		$user_name);
+			$user_name	= str_replace('.',		'',		$user_name);
+			$user_name = str_replace("'", '', str_replace('\\', '', str_replace('_', '', $user_name)));
+
 			// check if name is WikiName style
 			if (!$this->is_wiki_name($user_name) && $this->config['disable_wikiname'] === false)
 			{
 				$error .= $this->get_translation('MustBeWikiName')." ";
+			}
+			else if (strlen($user_name) < $this->config['username_chars_min'])
+			{
+				$error .= str_replace('%2', $this->config['username_chars_min'],
+						$this->get_translation('NameTooShort'))." ";
+			}
+			else if (strlen($user_name) > $this->config['username_chars_max'])
+			{
+				$error .= str_replace('%2', $this->config['username_chars_min'],
+						$this->get_translation('NameTooLong'))." ";
+			}
+			// check if valid user name
+			else if (!preg_match('/^(['.$this->language['ALPHANUM_P'].']+)$/', $user_name))
+			{
+				$error .= $this->get_translation('InvalidWikiName')." ";
 			}
 			// check if reserved word
 			else if($result = $this->validate_reserved_words($user_name))
@@ -178,6 +199,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						"typografica	= '".(($this->config['default_typografica'] == 1) ? 1 : 0)."', ".
 						"lang			= '".quote($this->dblink, ($lang ? $lang : $this->config['language']))."', ".
 						"theme			= '".quote($this->dblink, $this->config['theme'])."', ".
+						#"timezone		= '".quote($this->dblink, ($timezone ? $timezone : (float)$this->config['timezone']))."', ".
 						"send_watchmail	= '".quote($this->dblink, 1)."'");
 
 				// INSERT user menu items
@@ -261,7 +283,27 @@ if (!isset($_POST['confirm']))
 		}
 
 		echo '<p><label for="user_name">'.$this->format_translation('UserName').':</label>';
-		echo '<input id="user_name" name="user_name" size="27" value="'.htmlspecialchars($user_name).'" /></p>';
+		echo '<input id="user_name" name="user_name" size="27" value="'.htmlspecialchars($user_name).'" />';
+
+		if ($this->config['disable_wikiname'] === false)
+		{
+			echo "<br /><small>".
+			str_replace('%1', $this->config['username_chars_min'],
+			str_replace('%2', $this->config['username_chars_max'],
+			$this->get_translation('NameCamelCaseOnly'))).
+			"</small>";
+			echo '</p>';
+		}
+		else
+		{
+			echo "<br /><small>".
+			str_replace('%1', $this->config['username_chars_min'],
+			str_replace('%2', $this->config['username_chars_max'],
+			$this->get_translation('NameAlphanumOnly'))).
+			"</small>";
+			echo '</p>';
+		}
+
 		#echo '<p><label for="real_name">'.$this->format_translation('RegistrationRealName').':</label>';
 		#echo '<input id="real_name" name="real_name" size="27" value="'.htmlspecialchars($real_name).'" /></p>';
 		echo '<p><label for="password">'.$this->get_translation('RegistrationPassword').':</label>';

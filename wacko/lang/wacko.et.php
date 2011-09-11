@@ -15,9 +15,9 @@ $wacko_translation = array(
 	'LogoutLink' => 'Logout',
 	'LogoutButton' => 'Logi välja',
 	'LogoutAreYouSure' => 'Kas oled kindel, et tahad välja logida?',
+
 	// registration panel
 	'RegistrationWelcome' => 'Uue kasutaja registreerimine:',
-	'RegistrationUserName' => 'Omista ((WackoWiki:Doc/English/WikiName WikiNimi))',
 	'RegistrationRealName' => 'Show Name',
 	'RegistrationPassword' => 'Parool',
 	'RegistrationButton' => 'Registreerun',
@@ -26,6 +26,10 @@ $wacko_translation = array(
 	'SiteRegistered' => 'You have successfully registered on the site ',
 	'RegistrationEmailInfo'	=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
 	'SiteEmailConfirm' => 'Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',
+	'NameTooShort'				=> 'Kasutajanimi on liiga lühike, minimaalselt %2 sümbolit on nõutud.',
+	'NameTooLong'				=> 'Kasutajanimi on liiga pikk, maksimaalselt %2 sümbolit on lubatud.',
+	'NameAlphanumOnly'			=> 'Kasutajanimi peab olema vahemikus %1 ja %2 sümbolit pikk. Võid kasutada vaid kirjamärke.',
+	'NameCamelCaseOnly'			=> 'Kasutajanimi peab olema vahemikus %1 ja %2 sümbolit pikk. and WikiName formatted.',
 
 	// login panel
 	'LoginWelcome' => 'Logi sisse',

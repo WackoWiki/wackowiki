@@ -15,9 +15,9 @@ $wacko_translation = array(
 	'LogoutLink'  => 'Wyloguj',
 	'LogoutButton'  => 'Wyloguj',
 	'LogoutAreYouSure'  => 'Czy na pewno chcesz siê wylogowaæ?',
+
 	// registration panel
 	'RegistrationWelcome' => 'Rejestracja nowego u¿ytkownika:',
-	'RegistrationUserName' => 'Wprowad¼ swoje ((WackoWiki:Doc/English/WikiName ImiêNazwisko))',
 	'RegistrationRealName' => 'Show Name',
 	'RegistrationPassword' => 'Has³o',
 	'RegistrationButton' => 'Zarejestruj!',
@@ -26,6 +26,10 @@ $wacko_translation = array(
 	'SiteRegistered' => 'You have successfully registered on the site ',
 	'RegistrationEmailInfo'	=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
 	'SiteEmailConfirm' => 'Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',
+	'NameTooShort'				=> 'Login jest za krótkie, wymagane jest min. %2 znaków.',
+	'NameTooLong'				=> 'Login jest za d³ugie, wymagane jest maks. %2 znaków.',
+	'NameAlphanumOnly'			=> 'Login musi mieæ min. %1, a maks. %2 znaków i sk³adaæ siê tylko z liter alfabetu ³aciñskiego oraz cyfr.',
+	'NameCamelCaseOnly'			=> 'Login musi mieæ min. %1, a maks. %2 znaków i WikiName formatted.',
 
 	// login panel
 	'LoginWelcome' => 'Zaloguj siê',

@@ -15,9 +15,9 @@ $wacko_translation = array(
 	'LogoutLink'				=> 'Выход',
 	'LogoutButton'				=> 'Выйти из системы',
 	'LogoutAreYouSure'			=> 'Выйти из системы?',
+
 	// registration panel
 	'RegistrationWelcome'		=> 'Регистрация нового пользователя:',
-	'RegistrationUserName'		=> 'Придумайте себе ((WackoWiki:Doc/Russian/ЧтоТакоеИмяФамилия ИмяФамилию))',
 	'RegistrationRealName'		=> 'Show Name',
 	'RegistrationPassword'		=> 'Пароль',
 	'RegistrationButton'		=> 'Поехали',
@@ -26,6 +26,10 @@ $wacko_translation = array(
 	'SiteRegistered'			=> 'Вы успешно зарегистрировались на сайте ',
 	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
 	'SiteEmailConfirm'			=> 'Пожалуйста, подтвердите свой почтовый адрес согласно высланным инструкциям. <br />Обратите внимание, что, не подтвердив адрес, вы не сможете восстановить забытый пароль!',
+	'NameTooShort'				=> 'Имя пользователя слишком короткое, минимально допустимая длина составляет %2 символов.',
+	'NameTooLong'				=> 'Имя пользователя слишком длинное, максимально допустимая длина составляет %2 символов.',
+	'NameAlphanumOnly'			=> 'Имя пользователя должно быть от %1 до %2 знаков и должно содержать только буквы.',
+	'NameCamelCaseOnly'			=> 'Имя пользователя должно быть от %1 до %2 знаков и WikiName formatted.',
 
 	// login panel
 	'LoginWelcome'				=> 'Вход',

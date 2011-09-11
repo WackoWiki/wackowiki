@@ -15,9 +15,9 @@ $wacko_translation = array(
 	'LogoutLink'				=> 'Αποσύνδεση',
 	'LogoutButton'				=> 'Αποσύνδεση',
 	'LogoutAreYouSure'			=> 'Είσαι σίγουρος;',
+
 	// registration panel
 	'RegistrationWelcome'		=> 'Εγγραφή Νέου Χρήστη:',
-	'RegistrationUserName'		=> 'Δώσε ένα ((WackoWiki:Doc/English/WikiName NameSurname))',
 	'RegistrationRealName'		=> 'Show Name',
 	'RegistrationPassword'		=> 'Συνθηματικό',
 	'RegistrationButton'		=> 'Έγγραψέ με!',
@@ -26,6 +26,10 @@ $wacko_translation = array(
 	'SiteRegistered'			=> 'You have successfully registered on the site ',
 	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
 	'SiteEmailConfirm'			=> 'Please confirm your mailing address under instructions sent to you. <br />Notice that not verify the address, you can not retrieve password!',
+	'NameTooShort'				=> 'Το όνομα μέλους είναι πολύ μικρό, απαιτούνται τουλάχιστον %2 χαρακτήρες.',
+	'NameTooLong'				=> 'Το όνομα μέλους είναι πολύ μεγάλο, απαιτούνται το πολύ %2 χαρακτήρες.',
+	'NameAlphanumOnly'			=> 'Το όνομα μέλους πρέπει να είναι από %1 έως %2 χαρακτήρες μακρύ και να περιέχει μόνο αλφαριθμητικούς χαρακτήρες.',
+	'NameCamelCaseOnly'			=> 'Username must be between %1 and %2 chars long and WikiName formatted.',
 
 	// login panel
 	'LoginWelcome' => 'Σύνδεση',
