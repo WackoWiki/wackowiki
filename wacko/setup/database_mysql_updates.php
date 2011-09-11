@@ -378,7 +378,7 @@ $table_user_setting_r4_3 = "CREATE TABLE {$pref}user_setting (".
 				") {$engine} COMMENT='' {$charset}";
 
 $alter_user_setting_r4_3_1 = "ALTER TABLE {$pref}user_setting ADD allow_massemail TINYINT(1) UNSIGNED DEFAULT '0' AFTER allow_intercom";
-$alter_user_setting_r4_3_2 = "CHANGE timezone timezone DECIMAL(5,2) NOT NULL DEFAULT '0.00'";
+$alter_user_setting_r4_3_2 = "ALTER TABLE {$pref}user_setting CHANGE timezone timezone DECIMAL(5,2) NOT NULL DEFAULT '0.00'";
 
 // WATCH
 $rename_watch_r4_3_1 = "RENAME TABLE {$pref}pagewatches TO {$pref}watch";
