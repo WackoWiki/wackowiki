@@ -17,17 +17,6 @@ $table_acl = "CREATE TABLE {$pref}acl (".
 					"UNIQUE KEY idx_page_id (page_id,privilege)".
 				") {$engine} COMMENT='' {$charset}";
 
-$table_menu = "CREATE TABLE {$pref}menu (".
-					"menu_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"user_id INT(10) UNSIGNED NOT NULL,".
-					"page_id INT(10) UNSIGNED NOT NULL,".
-					"lang VARCHAR(2) NOT NULL,".
-					"menu_title VARCHAR(100) NOT NULL,".
-					"menu_position SMALLINT(2) UNSIGNED NOT NULL,".
-					"PRIMARY KEY (menu_id),".
-					"UNIQUE KEY idx_user_id (user_id,page_id)".
-				") {$engine} COMMENT='' {$charset}";
-
 $table_cache = "CREATE TABLE {$pref}cache (".
 					"name VARCHAR(32) NOT NULL,".
 					"method VARCHAR(20) NOT NULL,".
@@ -105,6 +94,17 @@ $table_log = "CREATE TABLE {$pref}log (".
 					"KEY idx_user_id (user_id),".
 					"KEY idx_ip (ip),".
 					"KEY idx_time (log_time)".
+				") {$engine} COMMENT='' {$charset}";
+
+$table_menu = "CREATE TABLE {$pref}menu (".
+					"menu_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"user_id INT(10) UNSIGNED NOT NULL,".
+					"page_id INT(10) UNSIGNED NOT NULL,".
+					"lang VARCHAR(2) NOT NULL,".
+					"menu_title VARCHAR(100) NOT NULL,".
+					"menu_position SMALLINT(2) UNSIGNED NOT NULL,".
+					"PRIMARY KEY (menu_id),".
+					"UNIQUE KEY idx_user_id (user_id,page_id)".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_page = "CREATE TABLE {$pref}page (".
