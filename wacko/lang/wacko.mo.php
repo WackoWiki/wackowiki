@@ -369,7 +369,7 @@ $wacko_translation = array(
 	'SearchFor' => 'A cauta',
 	'TopicSearchResults' => 'Rezultatul cautarii in anteturi ',
 	'NotFoundInTopics' => 'nu se intalneste in anteturi',
-	'TextSearchPage' => 'TextSearch',
+	'TextSearchPage' => 'Search',
 
 	'PostedBy'  => 'posted by',
 	'ThisIsCommentOn' => 'This is a comment on',

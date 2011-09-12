@@ -365,7 +365,7 @@ $wacko_translation = array(
 	'SearchFor' => 'Znajd¼',
 	'TopicSearchResults' => 'Tematy - wyniki wyszukiwania: ',
 	'NotFoundInTopics' => 'wyszukiwanego s³owa nie odnaleziono w tematach',
-	'TextSearchPage' => 'TextSearch',
+	'TextSearchPage' => 'Search',
 
 	'PostedBy'  => 'posted by',
 	'ThisIsCommentOn' => 'This is a comment on',
