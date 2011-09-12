@@ -172,7 +172,7 @@ else if ($user = $this->get_user())
 	if ( (isset($_POST['action']) && ($_POST['action'] == 'update' || $_POST['action'] == 'update_extended')) || (isset($_GET['resend_code']) && $_GET['resend_code'] == 1))
 	{
 		$_session_time = $user['session_time'];
-		$this->set_user($this->load_user($user['user_name']), 0, 1, true);
+		$this->set_user($this->load_user($user['user_name'], 0, 0, true), 1);
 		$this->set_menu(MENU_USER);
 		$this->set_user_setting('session_time', $_session_time);
 		$user = $this->get_user();
