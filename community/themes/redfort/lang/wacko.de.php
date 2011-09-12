@@ -1,7 +1,6 @@
-<?php                               
-$theme_translation = array(             
-  'TextSearchPage' => 'TextSuche',  
-  'LoginPage' => 'Anmeldung',       
+<?php
+$theme_translation = array(
+  'LoginPage' => 'Anmeldung',
   'SettingsPage' => 'Einstellungen',
-);                                  
+);
 ?>

@@ -17,7 +17,7 @@
 <!--BEGINN: SEITE-->
 <div id="page"><div class="header">
   <h1>
-  <?php echo file_exists("images/".$this->config['site_name'].".png")?"<img src='/images/".$this->config['site_name'].".png' alt='".$this->config['site_name']."' />":$this->config["site_name"] ?> : <a href="<?php echo $this->config["base_url"] ?>TextSearch?phrase=<?php echo urlencode($this->tag); ?>"><?php echo $this->tag ?></a>
+  <?php echo file_exists("images/".$this->config['site_name'].".png")?"<img src='/images/".$this->config['site_name'].".png' alt='".$this->config['site_name']."' />":$this->config["site_name"] ?> : <?php echo $this->tag ?>
   </h1>
 </div>
 

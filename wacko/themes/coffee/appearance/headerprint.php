@@ -20,6 +20,6 @@ echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
 <h1><?php echo file_exists("images/".$this->config['site_name'].".png")
 	? "<img src='/images/".$this->config['site_name'].".png' alt='".$this->config['site_name']."' />"
 	: $this->config['site_name'] ?>
-: <a href="<?php echo $this->config['base_url'] ?>TextSearch?phrase=<?php echo urlencode($this->tag); ?>"><?php echo (isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></a>
+: <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->tag); ?>
 </h1>
 </div>
