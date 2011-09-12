@@ -7,8 +7,8 @@ if ($config['language'] == $lng)
 {
 	if ($config['is_update'] == false)
 	{
-		insert_page($config['root_page'], '', "((file:wacko_logo.png WackoWiki))\n**Καλώς ήλθατε στο ((WackoWiki:Doc/English/WackoWiki WackoWiki)) site σας!**\n\nΠατήστε στον σύνδεμο \"Επεξεργασία Σελίδας\" στο κάτω μέρος της σελίδας για να ξεκινήσετε.\n\nΗ τεκμηρίωση μπορεί να βρεθεί στο WackoWiki:Doc/English.\n\nΧρήσιμες Σελίδες: ((WackoWiki:Doc/English/Formatting Formatting)), TextSearch.\n\n", $lng, 'Admins', true, false);
-		insert_page($config['users_page'].'/'.$config['admin_name'], $config['admin_name'], "::+::\n\n", $lng, $config['admin_name'], true, false);
+		insert_page($config['root_page'], '', "((file:wacko_logo.png WackoWiki))\n**Καλώς ήλθατε στο ((WackoWiki:Doc/English/WackoWiki WackoWiki)) site σας!**\n\nΠατήστε στον σύνδεμο \"Επεξεργασία Σελίδας\" στο κάτω μέρος της σελίδας για να ξεκινήσετε.\n\nΗ τεκμηρίωση μπορεί να βρεθεί στο WackoWiki:Doc/English.\n\nΧρήσιμες Σελίδες: ((WackoWiki:Doc/English/Formatting Formatting)), ((Search)).\n\n", $lng, 'Admins', true, false);
+		insert_page($config['users_page'].'/'.$config['admin_name'], $config['admin_name'], "::@::\n\n", $lng, $config['admin_name'], true, false);
 	}
 	else
 	{
@@ -33,7 +33,7 @@ insert_page('PageIndex', 'Page Index', '{{pageindex}}', $lng, 'Admins', false, t
 insert_page('Registration', 'Registration', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Password', 'Password', '{{changepassword}}', $lng, 'Admins', false, false);
-insert_page('TextSearch', 'Text Search', '{{search}}', $lng, 'Admins', false, false);
+insert_page('Search', 'Search', '{{search}}', $lng, 'Admins', false, false);
 insert_page('Login', 'Login', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Settings', 'Settings', '{{usersettings}}', $lng, 'Admins', false, false);
 
