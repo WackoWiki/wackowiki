@@ -7,8 +7,8 @@ if ($config['language'] == $lng)
 {
 	if ($config['is_update'] == false)
 	{
-		insert_page($config['root_page'], 'Home Page', "((file:wacko_logo.png WackoWiki))\n**Welcome to your ((WackoWiki:Doc/English/WackoWiki WackoWiki)) site!**\n\nClick after you have ((login logged in)) on the \"Edit this page\" link at the bottom to get started.\n\nDocumentation can be found at WackoWiki:Doc/English.\n\nUseful pages: ((WackoWiki:Doc/English/Formatting Formatting)), TextSearch.\n\n", $lng, 'Admins', true, false);
-		insert_page($config['users_page'].'/'.$config['admin_name'], $config['admin_name'], "::+::\n\n", $lng, $config['admin_name'], true, false);
+		insert_page($config['root_page'], 'Home Page', "((file:wacko_logo.png WackoWiki))\n**Welcome to your ((WackoWiki:Doc/English/WackoWiki WackoWiki)) site!**\n\nClick after you have ((login logged in)) on the \"Edit this page\" link at the bottom to get started.\n\nDocumentation can be found at WackoWiki:Doc/English.\n\nUseful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((Search)).\n\n", $lng, 'Admins', true, false);
+		insert_page($config['users_page'].'/'.$config['admin_name'], $config['admin_name'], "::@::\n\n", $lng, $config['admin_name'], true, false);
 	}
 	else
 	{
@@ -33,7 +33,7 @@ insert_page('SisuKord', 'Sisu Kord', '{{pageindex}}', $lng, 'Admins', false, tru
 insert_page('Registration', 'Registration', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Password', 'Password', '{{changepassword}}', $lng, 'Admins', false, false);
-insert_page('TextSearch', 'Text Search', '{{search}}', $lng, 'Admins', false, false);
+insert_page('Search', 'Search', '{{search}}', $lng, 'Admins', false, false);
 insert_page('Login', 'Login', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Settings', 'Settings', '{{usersettings}}', $lng, 'Admins', false, false);
 

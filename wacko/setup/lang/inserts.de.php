@@ -7,8 +7,8 @@ if ($config['language'] == $lng)
 {
 	if ($config['is_update'] == false)
 	{
-		insert_page($config['root_page'], '', "((file:wacko_logo.png WackoWiki))\n**Willkommen zu Deiner ((WackoWiki:Doc/Deutsch/WackoWiki WackoWiki)) Installation!**\n\nKlicke nach der ((Anmeldung)) unten auf den Punkt \"Editieren\" um zu beginnen.\n\nDie Dokumentation ist unter WackoWiki:Doc/Deutsch zu finden.\n\nNützliche Seiten: ((WackoWiki:Doc/Deutsch/Formatierung Formatierung)), TextSuche.\n\n", $lng, 'Admins', true, false);
-		insert_page($config['users_page'].'/'.$config['admin_name'], $config['admin_name'], "::+::\n\n", $lng, $config['admin_name'], true, false);
+		insert_page($config['root_page'], '', "((file:wacko_logo.png WackoWiki))\n**Willkommen zu Deiner ((WackoWiki:Doc/Deutsch/WackoWiki WackoWiki)) Installation!**\n\nKlicke nach der ((Anmeldung)) unten auf den Punkt \"Editieren\" um zu beginnen.\n\nDie Dokumentation ist unter WackoWiki:Doc/Deutsch zu finden.\n\nNützliche Seiten: ((WackoWiki:Doc/Deutsch/Formatierung Formatierung)), ((Suche)).\n\n", $lng, 'Admins', true, false);
+		insert_page($config['users_page'].'/'.$config['admin_name'], $config['admin_name'], "::@::\n\n", $lng, $config['admin_name'], true, false);
 	}
 	else
 	{
@@ -33,7 +33,7 @@ insert_page('SeitenIndex', 'Seiten Index', '{{pageindex}}', $lng, 'Admins', fals
 insert_page('Registrierung', 'Registrierung', '{{registration}}', $lng, 'Admins', false, false);
 
 insert_page('Passwort', 'Passwort', '{{changepassword}}', $lng, 'Admins', false, false);
-insert_page('TextSuche', 'TextSuche', '{{search}}\n\n\n  * ++4 Buchstaben Minimum für die Suche im Text der Seiten. Das ist eine ~MySQL Beschränkung.++\n  * ++3 Buchstaben Minimum für die Suche in Seitennamen.++\n  * ++Bei der Suche im Text wird die Volltextsuche Funktion von ~MySQL verwendet. Es wird nur nach ganzen Worten gesucht.++\n\n', $lng, 'Admins', false, false);
+insert_page('Suche', 'Suche', '{{search}}\n\n\n  * ++4 Buchstaben Minimum für die Suche im Text der Seiten. Das ist eine ~MySQL Beschränkung.++\n  * ++3 Buchstaben Minimum für die Suche in Seitennamen.++\n  * ++Bei der Suche im Text wird die Volltextsuche Funktion von ~MySQL verwendet. Es wird nur nach ganzen Worten gesucht.++\n\n', $lng, 'Admins', false, false);
 insert_page('Anmeldung', 'Anmeldung', '{{login}}', $lng, 'Admins', false, false);
 insert_page('Einstellungen', 'Einstellungen', '{{usersettings}}', $lng, 'Admins', false, false);
 
