@@ -135,9 +135,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 	width="16" height="16"
 	alt="<?php echo $this->get_translation('MsWordVersion') ?>" /></a></div>
 <div class="header">
-  <h1><span class="Main"><?php echo $this->config['site_name'] ?>:</span> <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path()); ?> <a class="Search"
-	title="<?php echo $this->get_translation('SearchTitleTip')?>"
-	href="<?php echo $this->config['base_url'] ?>TextSearch<?php echo ($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a> </h1>
+  <h1><span class="Main"><?php echo $this->config['site_name'] ?>:</span> <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path()); ?> </h1>
 <?php if (($this->method != 'edit') || !$this->has_access('write')) { ?>
   <div style="background-image:url(<?php echo $this->config['theme_url'] ?>icons/shade2.gif);" class="Shade"><img
 	src="<?php echo $this->config['theme_url'] ?>icons/shade1.gif"

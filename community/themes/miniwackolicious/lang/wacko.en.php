@@ -1,6 +1,6 @@
 <?php
 $theme_translation = array(
-    'TextSearchPage' => 'TextSearch',
+    'TextSearchPage' => 'Search',
     'LoginPage' => 'Login',
     'SettingsPage' => 'Settings',
     'LastModification' => 'Last Modification',

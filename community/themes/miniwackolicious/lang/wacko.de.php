@@ -1,10 +1,10 @@
-<?php                               
-$theme_translation = array(             
-    'TextSearchPage' => 'TextSuche',  
-    'LoginPage' => 'Anmeldung',       
+<?php
+$theme_translation = array(
+    'TextSearchPage' => 'Suche',
+    'LoginPage' => 'Anmeldung',
     'SettingsPage' => 'Einstellungen',
     'LastModification' => 'Letzte &Auml;nderung',
-    'by' => 'von',	
+    'by' => 'von',
     'YouAreHere' => 'Sie sind hier:',
     'SiteInformation' => 'Metadaten der Seite',
     'SiteTools' => 'Werkzeuge',
@@ -17,7 +17,7 @@ $theme_translation = array(
     'RecentChanges' => 'LetzteAenderungen',
     'Recent Changes' => 'Letzte Änderungen',
     'RecentlyCommented' => 'LetzteKommentare',
-    'Registration' => 'Registrierung'    
+    'Registration' => 'Registrierung'
 );
 
 // default icons
