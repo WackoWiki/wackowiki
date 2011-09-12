@@ -365,7 +365,7 @@ $wacko_translation = array(
 	'SearchFor' => 'Buscar',
 	'TopicSearchResults' => 'Resultado de búsqueda en los topicos para ',
 	'NotFoundInTopics' => 'no encontrado en los topicos',
-	'TextSearchPage' => 'BusquedaTextual',
+	'TextSearchPage' => 'Buscar',
 
 	'PostedBy'  => 'publicado por',
 	'ThisIsCommentOn' => 'Esto es un comentario sobre',
