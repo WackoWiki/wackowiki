@@ -276,7 +276,11 @@ else
 	#echo '&nbsp;&nbsp;&nbsp;<small><a href="?action=clearcookies">Delete all cookies</a></small>';
 	echo '</p>'."\n";
 	echo '<p>'.$this->format_translation('ForgotLink').'</p>'."\n";
-	echo '<p>'.$this->format_translation('LoginWelcome2').'</p>'."\n";
+
+	if ($this->config['allow_registration'] == true)
+	{
+		echo '<p>'.$this->format_translation('LoginWelcome2').'</p>'."\n";
+	}
 
 	echo '<script type="text/javascript">';
 	echo '	document.getElementById("f'.$focus.'").focus();';
