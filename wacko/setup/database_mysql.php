@@ -245,8 +245,8 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 				") {$engine} COMMENT='' {$charset}";*/
 
 $table_tag = "CREATE TABLE {$pref}tag (".
-					"tag_id INT(10) unsigned NOT NULL AUTO_INCREMENT,".
-					"user_id INT(10) unsigned NOT NULL DEFAULT '0',".
+					"tag_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"lang VARCHAR(2) NOT NULL,".
 					"tag_name VARCHAR(100) NOT NULL DEFAULT '',".
 					"date_created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
@@ -256,9 +256,9 @@ $table_tag = "CREATE TABLE {$pref}tag (".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_tag_page = "CREATE TABLE {$pref}tag_page (".
-					"page_id INT(10) unsigned NOT NULL DEFAULT '0',".
-					"tag_id INT(10) unsigned NOT NULL DEFAULT '0',".
-					"user_id INT(10) unsigned NOT NULL DEFAULT '0',".
+					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"tag_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"date_attached DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"PRIMARY KEY (page_id, tag_id),".
 					"KEY idx_tag_id (tag_id)".

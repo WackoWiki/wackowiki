@@ -27,6 +27,17 @@ function admin_pages(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 
+	TODO:<br />
+	filter pages<br />
+	all pages<br />
+	my pages<br />
+	published<br />
+	drafts<br />
+	with no title<br />
+	with no description<br />
+	with no keywords<br />
+	by date modified<br />
+	...
 
 <?php
 
