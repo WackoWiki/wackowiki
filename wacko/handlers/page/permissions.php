@@ -72,6 +72,23 @@ if ($this->user_is_owner() || $this->is_admin())
 				{
 					$new_owner		= $user['user_name'];
 					$new_owner_id	= $user['user_id'];
+
+					// update user statistics
+					if ($owner_id = $this->page['owner_id'])
+					{
+						$this->sql_query(
+						"UPDATE {$this->config['user_table']} ".
+						"SET total_pages	= total_pages		- 1 ".
+						"WHERE user_id		= '".quote($this->dblink, $owner_id)."' ".
+						"LIMIT 1");
+					}
+
+					$this->sql_query(
+						"UPDATE {$this->config['user_table']} ".
+						"SET total_pages	= total_pages		+ 1 ".
+						"WHERE user_id		= '".quote($this->dblink, $new_owner_id)."' ".
+						"LIMIT 1");
+
 					$this->set_page_owner($this->page['page_id'], $new_owner_id);
 
 					if ($this->config['enable_email'] == true && $this->config['enable_email_notification'] == true && $user['email_confirm'] == '')
