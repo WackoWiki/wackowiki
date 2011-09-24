@@ -79,18 +79,18 @@ function admin_resync(&$engine, &$module)
 
 			// total files uploaded
 			$users = $engine->load_all(
-							"SELECT u.user_id, COUNT(f.upload_id) AS n ".
-							"FROM {$engine->config['table_prefix']}upload f, {$engine->config['user_table']} AS u ".
-							"WHERE f.user_id = u.user_id ".
-							"GROUP BY f.user_id");
+					"SELECT u.user_id, COUNT(f.upload_id) AS n ".
+					"FROM {$engine->config['table_prefix']}upload f, {$engine->config['user_table']} AS u ".
+					"WHERE f.user_id = u.user_id ".
+					"GROUP BY f.user_id");
 
 			foreach ($users as $user)
 			{
 				$engine->sql_query(
-								"UPDATE {$engine->config['user_table']} ".
-								"SET total_uploads = ".(int)$user['n']." ".
-								"WHERE user_id = '".quote($engine->dblink, $user['user_id'])."' ".
-								"LIMIT 1");
+					"UPDATE {$engine->config['user_table']} ".
+					"SET total_uploads = ".(int)$user['n']." ".
+					"WHERE user_id = '".quote($engine->dblink, $user['user_id'])."' ".
+					"LIMIT 1");
 			}
 
 			$engine->log(1, 'Synchronized user statistics');
@@ -124,7 +124,7 @@ function admin_resync(&$engine, &$module)
 		}
 		else if ($_REQUEST['action'] == 'wikilinks')
 		{
-			$limit = 500;
+			$limit = 50;
 
 			if (isset($_REQUEST['i']))
 			{
@@ -139,18 +139,22 @@ function admin_resync(&$engine, &$module)
 
 			$engine->set_user_setting('dont_redirect', '1');
 
-			if ($pages = $engine->load_all("SELECT * FROM {$engine->config['table_prefix']}page LIMIT ".($i*$limit).", $limit"))
+			if ($pages = $engine->load_all(
+			"SELECT page_id, tag, body, body_r, body_toc, comment_on_id
+			FROM {$engine->config['table_prefix']}page
+			LIMIT ".($i * $limit).", $limit"))
 			{
 				foreach ($pages as $n => $page)
 				{
-					echo (($i*$limit)+$n+1).'. '.$page['tag']."<br />\n";
+					echo (($i * $limit) + $n + 1).'. '.$page['tag']."<br />\n";
 
 					// recompile if necessary
 					if ($page['body_r'] == '')
 					{
 
 						// build html body
-						$page['body_r'] = $engine->format($engine->format(( $body_t ? $body_t : $page['body'] ), 'bbcode'), 'wacko');
+						#$page['body_r'] = $engine->format($engine->format(( $body_t ? $body_t : $page['body'] ), 'bbcode'), 'wacko');
+						$page['body_r'] = $engine->format($page['body'], 'wacko');
 
 						// build toc
 						if ($engine->config['paragrafica'] && $page['comment_on_id'] == 0 && $page['body_toc'] == '')
@@ -167,7 +171,7 @@ function admin_resync(&$engine, &$module)
 							"WHERE page_id = '".quote($engine->dblink, $page['page_id'])."' ".
 							"LIMIT 1");
 
-						if ($body_t) unset($body_t);
+						#if ($body_t) unset($body_t);
 					}
 
 					// rendering links
