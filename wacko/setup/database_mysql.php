@@ -335,6 +335,7 @@ $table_user_setting = "CREATE TABLE {$pref}user_setting (".
 					"noid_pubs TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"session_expiration TINYINT(3) UNSIGNED DEFAULT NULL,".
 					"timezone DECIMAL(5,2) NOT NULL DEFAULT '0.00',".
+					"dst TINYINT(1) UNSIGNED DEFAULT '0' NOT NULL,".
 					"PRIMARY KEY (setting_id),".
 					"UNIQUE KEY idx_user_id (user_id),".
 					"KEY idx_send_watchmail (send_watchmail)".
