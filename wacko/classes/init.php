@@ -73,6 +73,13 @@ class Init
 			default:	error_reporting(E_ALL);
 		}
 
+		//  setting default timezone
+		if (function_exists('date_default_timezone_set') && function_exists('date_default_timezone_get'))
+		{
+			// Set the timezone to whatever date_default_timezone_get() returns.
+			date_default_timezone_set(@date_default_timezone_get());
+		}
+
 		// start execution timer
 		$this->timer = $this->get_micro_time();
 

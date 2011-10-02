@@ -299,16 +299,30 @@ class Wacko
 		return $themelist;
 	}
 
+	// TIME FUNCTIONS
+	function get_time_tz($time)
+	{
+		$user			= $this->get_user();
+		$zone_offset	= ($user['timezone'] * 3600) + ($user['dst'] * 3600);
+		$tz_time		= $time + $zone_offset - date('Z');
+
+		return $tz_time;
+	}
+
 	function get_time_string_formatted($time)
 	{
+		$tz_time = $this->get_time_tz( strtotime($time) );
+
 		return date($this->config['date_format'].' '.
-			$this->config['time_format_seconds'], strtotime($time));
+			$this->config['time_format_seconds'], $tz_time);
 	}
 
 	function get_unix_time_formatted($time)
 	{
+		$tz_time = $this->get_time_tz($time);
+
 		return date($this->config['date_format'].' '.
-			$this->config['time_format_seconds'], $time);
+			$this->config['time_format_seconds'], $tz_time);
 	}
 
 	function get_page_time_formatted()
@@ -3622,8 +3636,8 @@ class Wacko
 
 	function load_user($user_name, $user_id = 0, $password = 0, $session_data = false)
 	{
-		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration';
-		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.email_confirm, u.session_time, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration';
+		$fiels_default	= 'u.*, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration, s.timezone, s.dst';
+		$fields_session	= 'u.user_id, u.user_name, u.real_name, u.password, u.salt,u.email, u.enabled, u.email_confirm, u.session_time, u.session_expire, u.last_mark, s.doubleclick_edit, s.show_comments, s.revisions_count, s.changes_count, s.lang, s.show_spaces, s.typografica, s.theme, s.autocomplete, s.numerate_links, s.dont_redirect, s.send_watchmail, s.show_files, s.allow_intercom, s.hide_lastsession, s.validate_ip, s.noid_pubs, s.session_expiration, s.timezone, s.dst';
 
 		$user = $this->load_single(
 			"SELECT ".($session_data

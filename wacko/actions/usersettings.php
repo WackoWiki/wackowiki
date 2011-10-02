@@ -125,6 +125,8 @@ else if ($user = $this->get_user())
 					"session_expiration	= '".quote($this->dblink, (int)$_POST['session_expiration'])."' "
 				:	"lang				= '".quote($this->dblink, $_POST['lang'])."', ".
 					"theme				= '".quote($this->dblink, $_POST['theme'])."', ".
+					"timezone				= '".quote($this->dblink, (float)$_POST['timezone'])."', ".
+					"dst				= '".quote($this->dblink, (int)$_POST['dst'])."', ".
 					"revisions_count	= '".quote($this->dblink, (int)$_POST['revisions_count'])."', ".
 					"changes_count		= '".quote($this->dblink, (int)$_POST['changes_count'])."' "
 				).
@@ -434,6 +436,36 @@ else if ($user = $this->get_user())
 	}
 	?>
 		</select></td>
+	</tr>
+		<tr class="lined">
+		<th class="form_left" scope="row"><label for="timezone"><?php echo $this->get_translation('Timezone');?></label></th>
+		<td class="form_right"><select id="timezone" name="timezone">
+
+<?php
+	$timezones = $this->get_translation('TzZones');
+
+	foreach ($timezones as $offset => $timezones)
+	{
+
+		echo '<option value="'.$offset.'" '.
+			(isset($user['timezone']) && $user['timezone'] == $offset
+				? "selected=\"selected\""
+				: ($this->config['timezone'] == $offset
+					? "selected=\"selected\""
+					: "")
+			).">".$timezones."</option>\n";
+	}
+	?>
+		</select></td>
+	</tr>
+	<tr class="lined">
+		<th class="form_left"><label for="dst"><?php echo $this->get_translation('DST');?></label></th>
+		<td class="form_right">
+			<?php
+			echo "<input type=\"radio\" id=\"dst0\" name=\"dst\" value=\"0\" ".( $user['dst'] == 0 ? "checked=\"checked\"" : "" )."/><label for=\"dst0\">".$this->get_translation('MetaOff')."</label>";
+			echo "<input type=\"radio\" id=\"dst1\" name=\"dst\" value=\"1\" ".( $user['dst'] == 1 ? "checked=\"checked\"" : "" )."/><label for=\"dst1\">".$this->get_translation('MetaOn')."</label>";
+			?>
+		</td>
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="changes_count"><?php echo $this->get_translation('RecentChangesLimit');?></label></th>
