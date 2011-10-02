@@ -213,6 +213,7 @@ $wacko_config_defaults = array(
 	'date_macro_format' => 'd.m.Y H:i',
 	'date_precise_format' => 'd.m.Y H:i:s',
 	'timezone' => 0.00,
+	'dst' => 0,
 
 	'debug' => 0,
 	'debug_admin_only' => 0,
