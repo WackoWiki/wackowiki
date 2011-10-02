@@ -15,7 +15,7 @@ else
 {
 	$init->settings();	// populate from config.php
 
-	if ($init->config['wacko_version'][0] != 5)
+	if (!isset($init->config['wacko_version']) || (isset($init->config['wacko_version']) && $init->config['wacko_version'][0] != 5) )
 	{
 		$init->installer(); // install
 	}
