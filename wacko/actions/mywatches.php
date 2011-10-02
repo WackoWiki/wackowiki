@@ -93,6 +93,7 @@ if ($user_id = $this->get_user_id())
 			$this->get_translation('ViewUnwatchedPages').'</a>).<br /><br />';
 
 		$cnt = 0;
+
 		if ($pages = $this->load_all(
 			"SELECT w.page_id, p.tag AS tag ".
 			"FROM {$prefix}watch AS w ".
