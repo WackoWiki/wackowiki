@@ -133,8 +133,8 @@ for($count = 0; $count < count($drivers); $count++)
  */
 
 $engines	= array();
-$engines[]	= array('MyISAM', 'mysql_myisam', 'MyISAM (recommended)');
-$engines[]	= array('InnoDB', 'mysql_innodb', 'InnoDB');
+$engines[]	= array('mysql_myisam', 'MyISAM', 'MyISAM (recommended)');
+$engines[]	= array('mysql_innodb', 'InnoDB', 'InnoDB');
 
 $detected = 0;
 
