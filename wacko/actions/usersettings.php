@@ -444,8 +444,12 @@ else if ($user = $this->get_user())
 <?php
 	$timezones = $this->get_translation('TzZones');
 
-	foreach ($timezones as $offset => $timezones)
+	foreach ($timezones as $offset => $timezone)
 	{
+		if (strlen($timezone) > 50)
+		{
+			$timezone = substr($timezone, 0, 45 ).'...';
+		}
 
 		echo '<option value="'.$offset.'" '.
 			(isset($user['timezone']) && $user['timezone'] == $offset
@@ -453,7 +457,7 @@ else if ($user = $this->get_user())
 				: ($this->config['timezone'] == $offset
 					? "selected=\"selected\""
 					: "")
-			).">".$timezones."</option>\n";
+			).">".$timezone."</option>\n";
 	}
 	?>
 		</select></td>
