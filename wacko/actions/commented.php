@@ -135,8 +135,12 @@ if ($this->user_allowed_comments())
 
 				if ($access)
 				{
+					// tz offset
+					$time_tz = $this->get_time_tz( strtotime($page['comment_time']) );
+					$time_tz = date('Y-m-d H:i:s', $time_tz);
+
 					// day header
-					list($day, $time) = explode(' ', $page['comment_time']);
+					list($day, $time) = explode(' ', $time_tz);
 
 					if (!isset($curday))
 					{

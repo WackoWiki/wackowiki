@@ -98,8 +98,12 @@ if ($pages = array_merge($pages1, $pages2, $files))
 		{
 			$printed[$page['tag']] = $page['date'];	// ignore duplicates
 
+			// tz offset
+			$time_tz = $this->get_time_tz( strtotime($page['date']) );
+			$time_tz = date('Y-m-d H:i:s', $time_tz);
+
 			// day header
-			list($day, $time) = explode(' ', $page['date']);
+			list($day, $time) = explode(' ', $time_tz);
 
 			if ($day != $curday)
 			{

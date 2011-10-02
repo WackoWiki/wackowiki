@@ -52,8 +52,12 @@ if ($user_id = $this->get_user_id())
 
 			foreach ($pages as $page)
 			{
+				// tz offset
+				$time_tz = $this->get_time_tz( strtotime($page['modified']) );
+				$time_tz = date('Y-m-d H:i:s', $time_tz);
+
 				// day header
-				list($day, $time) = explode(" ", $page['modified']);
+				list($day, $time) = explode(" ", $time_tz);
 
 				if ($day != $cur_day)
 				{
