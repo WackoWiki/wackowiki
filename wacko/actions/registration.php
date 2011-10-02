@@ -282,6 +282,24 @@ if (!isset($_POST['confirm']))
 			echo '</select></p>';
 		}
 
+		/* echo '<p><label for="timezone">'.$this->format_translation('Timezone').':</label>';
+		echo '<select id="timezone" name="timezone">';
+
+		$timezones = $this->get_translation('TzZones');
+
+		foreach ($timezones as $offset => $timezones)
+		{
+
+			echo '<option value="'.$offset.'" '.
+			(isset($user['timezone']) && $user['timezone'] == $offset
+			? "selected=\"selected\""
+			: ($this->config['timezone'] == $offset
+			? "selected=\"selected\""
+			: "")
+			).">".$timezones."</option>\n";
+		}
+		echo '</select></p>'; */
+
 		echo '<p><label for="user_name">'.$this->format_translation('UserName').':</label>';
 		echo '<input id="user_name" name="user_name" size="27" value="'.htmlspecialchars($user_name).'" />';
 
