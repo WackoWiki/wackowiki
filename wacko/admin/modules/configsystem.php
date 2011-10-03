@@ -57,6 +57,8 @@ function admin_configsystem(&$engine, &$module)
 		$config['name_date_macro']			= (string)$_POST['name_date_macro'];
 		$config['date_macro_format']		= (string)$_POST['date_macro_format'];
 		$config['date_precise_format']		= (string)$_POST['date_precise_format'];
+		$config['timezone']					= (float)$_POST['timezone'];
+		$config['dst']						= (int)$_POST['dst'];
 		$config['cookie_prefix']			= (string)$_POST['cookie_prefix'];
 		$config['session_prefix']			= (string)$_POST['session_prefix'];
 		$config['rewrite_mode']				= (int)$_POST['rewrite_mode'];
@@ -284,6 +286,45 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="date_precise_format"><strong>The format of the exact time / date for a macro:</strong></label></td>
 				<td><input maxlength="50" style="width:200px;" id="date_precise_format" name="date_precise_format" value="<?php echo htmlspecialchars($engine->config['date_precise_format']);?>" /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label" scope="row"><label for="timezone"><strong><?php echo $engine->get_translation('Timezone');?></strong><br />
+				<small>Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.</small></label></td>
+				<td class="form_right"><select id="timezone" name="timezone">
+
+		<?php
+			$timezones = $engine->get_translation('TzZones');
+
+			foreach ($timezones as $offset => $timezone)
+			{
+				if (strlen($timezone) > 50)
+				{
+					$timezone = substr($timezone, 0, 45 ).'...';
+				}
+
+				echo '<option value="'.$offset.'" '.
+					($engine->config['timezone'] == $offset
+						? "selected=\"selected\""
+						: ""
+					).">".$timezone."</option>\n";
+			}
+			?>
+				</select></td>
+			</tr>
+
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><strong>Enable Summer Time/DST:</strong><br />
+				<small></small></td>
+				<td>
+					<input type="radio" id="dst_off" name="dst" value="0"<?php echo ( $engine->config['dst'] == 0 ? ' checked="checked"' : '' );?> /><label for="dst_off">Off.</label>
+					<input type="radio" id="dst_on" name="dst" value="1"<?php echo ( $engine->config['dst'] == 1 ? ' checked="checked"' : '' );?> /><label for="dst_on">On.</label>
+				</td>
 			</tr>
 			<tr>
 				<th colspan="2">
