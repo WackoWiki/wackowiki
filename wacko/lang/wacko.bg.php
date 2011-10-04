@@ -439,7 +439,6 @@ $wacko_translation = array(
 	'TreeSiteTitle' => 'Дърво на сайта',
 	'TreeEmpty' => '%1&nbsp;няма подстраници',
 	'TreeEmptyLevels' => '%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.',
-	'SearchTitleTip' => 'Click here to show all pages containing this page title.',
 
 	// clone handler
 	'ClonePage' => 'Clone page',

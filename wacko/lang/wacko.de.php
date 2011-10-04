@@ -382,7 +382,6 @@ $wacko_translation = array(
 	'TopicSearchResults'		=> 'Suchergebnisse in Titeln für ',
 	'NotFoundInTopics'			=> 'nicht in Titeln gefunden',
 	'TextSearchPage'			=> 'Suche',
-	'SearchTitleTip'			=> 'Alle Seiten zeigen, die diesen Seitentitel enthalten.',
 
 	'PostedBy'					=> 'eingetragen von',
 	'ThisIsCommentOn'			=> 'Das ist ein Kommentar zu',

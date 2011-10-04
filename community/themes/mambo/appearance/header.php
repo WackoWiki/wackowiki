@@ -11,7 +11,6 @@ require ('themes/_common/_header.php');
 	<tr>
 		<td>
 			<?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?>
-			<a class="Search" title="<?php echo $this->get_translation('SearchTitleTip')?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
 		</td>
 		<td class="searchArea" align="right" valign="bottom">
 			<?php echo $this->form_open('', $this->get_translation('TextSearchPage'), 'get'); ?>

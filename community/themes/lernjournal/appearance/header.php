@@ -162,7 +162,7 @@ echo"<a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url'
 ?>
 </div>
 <div id="content">
-<span class="loc"><strong><?php echo $this->config['site_name'] ?>:</strong> <?php echo $this->get_page_path(); ?><a title="<?php echo $this->get_translation('SearchTitleTip')?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;");?>phrase=<?php echo urlencode($this->tag); ?>">...</a></span> <?php # if (mysql_num_rows(mysql_query("SELECT status FROM ".$this->config['table_prefix']."mail where UserTo='".$this->get_user_name()."' and folder='inbox' and status='nicht gelesen' and viewrecipient='Y' LIMIT 1"))!=0) {echo "&nbsp;&nbsp;&nbsp;<img src=\"images/newmessage1.gif\" alt=\"Neue Nachricht\" width=\"18\" height=\"18\" /> <a href='index.php?page=WikiMessenger' title='Du hast mindestens eine neue Nachricht erhalten.'><font color=orangered><strong>&nbsp;Neue Nachricht</strong></font></a>";} ?>
+<span class="loc"><strong><?php echo $this->config['site_name'] ?>:</strong> <?php echo $this->get_page_path(); ?></span> <?php # if (mysql_num_rows(mysql_query("SELECT status FROM ".$this->config['table_prefix']."mail where UserTo='".$this->get_user_name()."' and folder='inbox' and status='nicht gelesen' and viewrecipient='Y' LIMIT 1"))!=0) {echo "&nbsp;&nbsp;&nbsp;<img src=\"images/newmessage1.gif\" alt=\"Neue Nachricht\" width=\"18\" height=\"18\" /> <a href='index.php?page=WikiMessenger' title='Du hast mindestens eine neue Nachricht erhalten.'><font color=orangered><strong>&nbsp;Neue Nachricht</strong></font></a>";} ?>
 
 <?php # if ($user = $this->get_user()) { include('actions/popupchat.php'); } ?>
 <?php

@@ -35,7 +35,7 @@ else
 }
 echo "\n";
 ?>
-							<?php echo $this->get_translation('CurrentTime').' '. date($this->config['time_format_seconds'].' '.$this->config['date_format'], time()); ?>
+							<?php echo $this->get_translation('CurrentTime').' '. date($this->config['time_format_seconds'].' '.$this->config['date_format'], $this->get_time_tz( time() ) ); ?>
 						</div>
 					</td>
 				</tr>
@@ -201,7 +201,7 @@ echo "\n";
 	}
 ?>
 								<div class="path" title="Path to current document">
-									<a href="/"><?php echo trim($this->config['base_url'], '/'); ?></a>/<?php echo $this->get_page_path() ?> <a title="<?php echo $this->get_translation('SearchTitleTip'); ?>" href="<?php echo $this->href('', $this->get_translation('TextSearchPage'), 'phrase='.urlencode($this->get_page_title())); ?>">&gt;&gt;&gt;</a>
+									<a href="<?php echo $this->config['base_url']; ?>"><?php echo $this->config['base_url']; ?></a><?php echo $this->get_page_path() ?>
 								</div>
 							</div>
 						</div>
