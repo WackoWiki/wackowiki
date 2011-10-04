@@ -86,8 +86,7 @@ else if($this->has_access('write'))
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
 			<b><?php echo ($this->page['tag'] == $this->config['root_page'] ? $this->config['site_name'] : "<a href=\"".$this->config['base_url']."\">".$this->config['site_name']."</a>") ?>:</b>
 			<?php echo $this->get_page_path(); ?>
-			<a title="<?php echo $this->get_translation('SearchTitleTip'); ?>" href="<?php echo $this->config['base_url'].$this->get_translation('TextSearchPage').($this->config['rewrite_mode'] ? "?" : "&amp;"); ?>phrase=<?php echo urlencode($this->tag); ?>">...</a>
-		</div>
+			</div>
 		<div id="quicklinks">
 			<div class="bookmarks">
 				<?php // Insert links to root page and personal bookmarks ?>

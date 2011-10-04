@@ -441,7 +441,6 @@ $wacko_translation = array(
 	'TreeSiteTitle'				=> 'Arbre du site',
 	'TreeEmpty'					=> '%1 n&rsquo;a pas de pages subordonnées ou sous-pages',
 	'TreeEmptyLevels'			=> '%1 n&rsquo;a pas de pages subordonnées pour les niveau de profondeur indiqué. Accroître le niveau de profondeur.',
-	'SearchTitleTip'			=> 'Cliquez ici pour voir toutes les pages avec ce titre.',
 
 	// clone handler
 	'ClonePage'					=> 'Cloner la page',
