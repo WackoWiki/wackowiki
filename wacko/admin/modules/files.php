@@ -261,20 +261,38 @@ function admin_files(&$engine, &$module)
 
 	echo '<br />';
 
-	$orderby = 'file_name ASC';
-	if ($order == 'time')		$orderby = 'uploaded_dt DESC';
-	if ($order == 'size')		$orderby = 'file_size ASC';
-	if ($order == 'size_desc')	$orderby = 'file_size DESC';
-	if ($order == 'ext')		$orderby = 'file_ext ASC';
+	$order_by = 'file_name ASC';
+	if ($order == 'time')		$order_by = 'uploaded_dt DESC';
+	if ($order == 'size')		$order_by = 'file_size ASC';
+	if ($order == 'size_desc')	$order_by = 'file_size DESC';
+	if ($order == 'ext')		$order_by = 'file_ext ASC';
+	$limit	= 50;
+	$global = true;
+
+	$count = $engine->load_all(
+			"SELECT f.upload_id ".
+			"FROM ".$engine->config['table_prefix']."upload f ".
+				"INNER JOIN ".$engine->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
+			"WHERE f.page_id = '". ($global ? 0 : '')."' ".
+	($owner
+	? "AND u.user_name = '".quote($engine->dblink, $owner)."' "
+	: ''), 1);
+
+	$count		= count($count);
+	$pagination = $engine->pagination($count, $limit, 'f','mode=files', '', 'admin.php');
 
 	// load files list
 	$files = $engine->load_all(
 		"SELECT upload_id, page_id, user_id, file_size, picture_w, picture_h, file_ext, file_name, description, uploaded_dt ".
 		"FROM {$engine->config['table_prefix']}upload ".
 		"WHERE page_id = 0 ".
-		"ORDER BY ".$orderby);
+		"ORDER BY ".$order_by." ".
+		"LIMIT {$pagination['offset']}, {$limit}");
 
-	if (!is_array($files)) $files = array();
+	if (!is_array($files))
+	{
+		$files = array();
+	}
 
 	print('<fieldset><legend>'.$engine->get_translation('UploadTitleGlobal').":</legend>\n");
 
@@ -285,6 +303,12 @@ function admin_files(&$engine, &$module)
 
 	// !!!!! patch link not to show pictures when not needed
 	if (!isset($picture))	$path2 = str_replace('file:', '_file:', $path2);
+
+	// pagination
+	if (isset($pagination['text']))
+	{
+		echo "<span class=\"pagination\">{$pagination['text']}</span><br />\n";
+	}
 
 	if (count($files))
 	{
@@ -327,6 +351,12 @@ function admin_files(&$engine, &$module)
 ?>
 		</table>
 <?php
+	}
+
+	// pagination
+	if (isset($pagination['text']))
+	{
+		echo "<br /><span class=\"pagination\">{$pagination['text']}</span>\n";
 	}
 
 	echo "</fieldset>\n";
