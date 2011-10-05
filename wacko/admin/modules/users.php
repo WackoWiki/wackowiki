@@ -452,7 +452,7 @@ function admin_users(&$engine, &$module)
 		// filter by lang
 		if (isset($_GET['lang']))
 		{
-			$where = "WHERE lang = '".quote($engine->dblink, $_GET['lang'])."' ";
+			$where = "WHERE p.lang = '".quote($engine->dblink, $_GET['lang'])."' ";
 		}
 
 		// entries to display
@@ -461,7 +461,8 @@ function admin_users(&$engine, &$module)
 		// collecting data
 		$count = $engine->load_single(
 			"SELECT COUNT(user_name) AS n ".
-			"FROM {$engine->config['table_prefix']}user ".
+			"FROM {$engine->config['table_prefix']}user u ".
+				"LEFT JOIN ".$engine->config['table_prefix']."user_setting p ON (u.user_id = p.user_id) ".
 			( $where ? $where : '' )
 			);
 
