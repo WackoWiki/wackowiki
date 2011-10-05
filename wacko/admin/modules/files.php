@@ -57,7 +57,7 @@ function admin_files(&$engine, &$module)
 		}
 		else
 		{
-			print($engine->get_translation('UploadFileNotFound'));
+			echo $engine->get_translation('UploadFileNotFound');
 		}
 
 		echo '</div>';
@@ -86,26 +86,26 @@ function admin_files(&$engine, &$module)
 				"WHERE user_id = '".quote($engine->dblink, $file[0]['user_id'])."' ".
 				"LIMIT 1");
 
-			print('<br />');
-			print('<div><em>'.$engine->get_translation('UploadRemovedFromDB').'</em></div>');
+			echo '<br />';
+			echo '<div><em>'.$engine->get_translation('UploadRemovedFromDB').'</em></div>';
 
 			// 3. remove from FS
 			$real_filename = $engine->config['upload_path'].'/'.$file[0]['file_name'];
 
 			if (@unlink($real_filename))
 			{
-				print('<div><em>'.$engine->get_translation('UploadRemovedFromFS').'</em></div><br /><br /> ');
+				echo '<div><em>'.$engine->get_translation('UploadRemovedFromFS').'</em></div><br /><br /> ';
 			}
 			else
 			{
-				print('<div class="error">'.$engine->get_translation('UploadRemovedFromFSError').'</div><br /><br /> ');
+				echo '<div class="error">'.$engine->get_translation('UploadRemovedFromFSError').'</div><br /><br /> ';
 			}
 
 			$engine->log(1, str_replace('%2', $file[0]['file_name'], str_replace('%1', $engine->tag.' global storage', $engine->get_translation('LogRemovedFile', $engine->config['language']))));
 		}
 		else
 		{
-			print($engine->get_translation('UploadRemoveNotFound'));
+			echo $engine->get_translation('UploadRemoveNotFound');
 		}
 
 	}
@@ -307,7 +307,7 @@ function admin_files(&$engine, &$module)
 	// pagination
 	if (isset($pagination['text']))
 	{
-		echo "<span class=\"pagination\">{$pagination['text']}</span><br />\n";
+		echo "<span class=\"pagination\">{$pagination['text']}</span><br /><br />\n";
 	}
 
 	if (count($files))
