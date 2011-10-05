@@ -474,7 +474,9 @@ div.menu {
 			border-bottom: 3px solid #FF0000;
 		}
 
-
+.pagination {
+	float: right;
+}
 
 
 /*	Footer layout	*/

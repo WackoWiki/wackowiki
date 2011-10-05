@@ -314,9 +314,13 @@ echo "\n";
 		$method = substr($link, strrpos($link, '/') + 1);
 
 		if ($active)
+		{
 			$tab = "<div class=\"$method\"><img src=\"".$engine->config['theme_url']."images/spacer.gif\" alt=\"$title\" /></div>\n";
+		}
 		else
+		{
 			$tab = "<div class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$bonus\"><img src=\"".$engine->config['theme_url']."images/spacer.gif\" alt=\"$title\" /></a></div>\n";
+		}
 
 		return $tab;
 	}
@@ -412,6 +416,9 @@ echo "\n";
 					<td height="321" valign="top" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_divider.png); background-repeat:no-repeat;">
 						<div id="body"><div id="content">
 <?php
-	if ($message = $this->get_message()) echo "<div class=\"info\">$message</div>";
+	if ($message = $this->get_message())
+	{
+		echo "<div class=\"info\">$message</div>";
+	}
 ?>
 <!-- begin page output -->
