@@ -3342,6 +3342,11 @@ class Wacko
 		// check if it's coming from another site
 		if ($referrer && !preg_match('/^'.preg_quote($this->config['base_url'], '/').'/', $referrer) && isset($_GET['sid']) === false) // TODO: isset($_GET['PHPSESSID']) === false
 		{
+			if (!preg_match('`^https?://`', $referrer))
+			{
+				return;
+			}
+
 			$this->sql_query(
 				"INSERT INTO ".$this->config['table_prefix']."referrer SET ".
 					"page_id		= '".quote($this->dblink, $page_id)."', ".
