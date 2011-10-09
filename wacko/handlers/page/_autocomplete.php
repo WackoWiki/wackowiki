@@ -160,7 +160,7 @@ foreach( $pages as $page )
 
 		if (strpos( $page['supertag'], $local_supertag ) === 0)
 		{
-			$out[] = "!/".implode('/', array_slice( $tag_sliced, count($local_supertag_sliced) ));
+			$out[] = '!/'.implode('/', array_slice( $tag_sliced, count($local_supertag_sliced) ));
 		}
 		else
 		{
