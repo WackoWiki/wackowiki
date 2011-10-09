@@ -5476,7 +5476,7 @@ class Wacko
 		$_root_page	= '';
 
 		// check if current page is home page
-		if ($this->config['root_page'] == $this->tag)
+		if (strtolower($this->config['root_page']) == strtolower($this->tag))
 		{
 			$_root_page = true;
 		}
