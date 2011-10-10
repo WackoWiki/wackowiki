@@ -48,41 +48,50 @@ if ($this->is_admin() ||
 			{
 				echo str_replace('%1', $this->tag, $this->get_translation('ReferrersRemoved'))."<br />\n";
 			}
+
 			if ($this->remove_links($this->tag))
 			{
 				echo str_replace('%1', $this->tag, $this->get_translation('LinksRemoved'))."<br />\n";
 			}
+
 			if ($this->remove_categories($this->tag))
 			{
 				echo $this->get_translation('CategoriesRemoved')."<br />\n";
 			}
+
 			if ($this->remove_acls($this->tag))
 			{
 				echo str_replace('%1', $this->tag, $this->get_translation('AclsRemoved'))."<br />\n";
 			}
+
 			if (!$comment_on_id)
 			{
 				if ($this->remove_menu_items($this->tag))
 				{
 					echo str_replace('%1', $this->tag, $this->get_translation('BookmarksRemoved'))."<br />\n";
 				}
+
 				if ($this->remove_watches($this->tag))
 				{
 					echo str_replace('%1', $this->tag, $this->get_translation('WatchesRemoved'))."<br />\n";
 				}
+
 				if ($this->remove_ratings($this->tag))
 				{
 					echo $this->get_translation('RatingRemoved')."<br />\n";
 				}
+
 				if ($this->remove_comments($this->tag, false, $dontkeep))
 				{
 					echo str_replace('%1', $this->tag, $this->get_translation('CommentsRemoved'))."<br />\n";
 				}
+
 				if ($this->remove_files($this->tag))
 				{
 					echo str_replace('%1', $this->tag, $this->get_translation('FilesRemoved'))."<br />\n";
 				}
 			}
+
 			if ($this->remove_page($this->tag, $comment_on_id, $dontkeep))
 			{
 				if ($this->config['enable_feeds'])
@@ -152,8 +161,8 @@ if ($this->is_admin() ||
 				$this->sql_query(
 					"UPDATE {$this->config['user_table']} ".
 					( $comment_on_id
-					? "SET total_comments	= total_comments	- 1 "
-					: "SET total_pages		= total_pages		- 1 "
+						? "SET total_comments	= total_comments	- 1 "
+						: "SET total_pages		= total_pages		- 1 "
 					).
 					"WHERE user_id = '".quote($this->dblink, $owner_id)."' ".
 					"LIMIT 1");
