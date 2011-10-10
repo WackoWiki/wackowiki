@@ -22,7 +22,7 @@ if ($config['language'] == $lng)
 
 	insert_page('Category', 'Kategorie', '{{category}}', $lng, 'Admins', false, false);
 	insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
-	insert_page('Groups', 'Gruppen', '{{usergroups}}', $lng, 'Admins', false, false);
+	insert_page('Groups', 'Gruppen', '{{groups}}', $lng, 'Admins', false, false);
 	insert_page('Users', 'Benutzer', '{{users}}', $lng, 'Admins', false, false);
 }
 
