@@ -403,6 +403,10 @@ fieldset {
 	visibility: hidden
 }
 
+.upload tr:hover {
+	background: #CCFFCC
+}
+
 .upload td {
 	padding: 2px 5px 2px 5px;
 	vertical-align: bottom
