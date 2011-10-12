@@ -1489,7 +1489,7 @@ class Wacko
 
 	// MAILER
 	// $email_to			- recipient address
-	// $subject, $message 	- self-explaining
+	// $subject, $message	- self-explaining
 	// $email_from			- place specific address into the 'From:' field
 	// $charset				- send message in specific charset (w/o actual re-encoding)
 	// $xtra_headers		- (array) insert additional mail headers
@@ -1550,7 +1550,7 @@ class Wacko
 	// $lang			- page language
 	// $mute			- supress email reminders and xml rss recompilation
 	// $user_name		- attach guest pseudonym
-	// $user_page		-
+	// $user_page		- user is page owner
 	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = false, $mute = false, $user_name = false, $user_page = false)
 	{
 		$desc = '';
@@ -1779,7 +1779,6 @@ class Wacko
 								"reviewer_id	= '".quote($this->dblink, $reviewer_id)."', "
 							:	"").
 						"lang			= '".quote($this->dblink, $lang)."', ".
-
 						"title			= '".quote($this->dblink, $title)."'");
 
 				// IMPORTANT! lookup newly created page_id
@@ -2435,7 +2434,7 @@ class Wacko
 		}
 	}
 
-	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $linklang = '', $anchorlink = 1)
+	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $link_lang = '', $anchorlink = 1)
 	{
 		$class	= '';
 		$icon	= '';
@@ -2450,9 +2449,9 @@ class Wacko
 			$text = htmlspecialchars($text, ENT_NOQUOTES);
 		}
 
-		if ($linklang)
+		if ($link_lang)
 		{
-			$this->set_language($linklang);
+			$this->set_language($link_lang);
 		}
 
 		if (preg_match('/^[\.\-'.$this->language['ALPHANUM_P'].']+\.(gif|jpg|jpe|jpeg|png)$/i', $text))
@@ -2762,9 +2761,9 @@ class Wacko
 				$parts[$i] = str_replace('%23', '#', urlencode($parts[$i]));
 			}
 
-			if ($linklang)
+			if ($link_lang)
 			{
-				$text	= $this->do_unicode_entities($text, $linklang);
+				$text	= $this->do_unicode_entities($text, $link_lang);
 			}
 
 			$url	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
@@ -2827,10 +2826,10 @@ class Wacko
 
 			$thispage		= $this->load_page($unwtag, 0, '', LOAD_CACHE, LOAD_META);
 
-			if (!$thispage && $linklang)
+			if (!$thispage && $link_lang)
 			{
-				$this->set_language($linklang);
-				$lang		= $linklang;
+				$this->set_language($link_lang);
+				$lang		= $link_lang;
 				$thispage	= $this->load_page($unwtag, 0, '', LOAD_CACHE, LOAD_META);
 			}
 
@@ -2957,7 +2956,7 @@ class Wacko
 					$accicon	= $this->get_translation('keyicon');
 				}
 
-				if ($text == trim($otag, '/') || $linklang)
+				if ($text == trim($otag, '/') || $link_lang)
 				{
 					$text = $this->do_unicode_entities($text, $lang);
 				}
@@ -2976,10 +2975,10 @@ class Wacko
 				$accicon	= $this->get_translation('wantedicon');
 				$title		= $this->get_translation('CreatePage');
 
-				if ($linklang)
+				if ($link_lang)
 				{
-					$text	= $this->do_unicode_entities($text, $linklang);
-					$page	= $this->do_unicode_entities($page, $linklang);
+					$text	= $this->do_unicode_entities($text, $link_lang);
+					$page	= $this->do_unicode_entities($page, $link_lang);
 				}
 			}
 
@@ -3227,9 +3226,9 @@ class Wacko
 			"DELETE FROM ".$this->config['table_prefix']."link ".
 			"WHERE from_page_id = '".quote($this->dblink, $from_page_id)."'");
 
-		if ($linktable = $this->get_link_table())
+		if ($link_table = $this->get_link_table())
 		{
-			foreach ($linktable as $to_tag)
+			foreach ($link_table as $to_tag)
 			{
 				$lower_to_tag = strtolower($to_tag);
 
@@ -3482,9 +3481,9 @@ class Wacko
 			$handler = 'page';
 		}
 
-		$methodLocation = $handler.'/'.$method.'.php';
+		$method_location = $handler.'/'.$method.'.php';
 
-		return $this->include_buffered($methodLocation, "<i>Unknown method \"$methodLocation\"</i>", '', $this->config['handler_path']);
+		return $this->include_buffered($method_location, "<i>Unknown method \"$method_location\"</i>", '', $this->config['handler_path']);
 	}
 
 	// wrapper for the next method
@@ -3759,9 +3758,7 @@ class Wacko
 	// this poses a potential security threat
 	function set_user_setting($setting, $value, $guest = 0)
 	{
-
 		return $_SESSION[$this->config['session_prefix'].'_'.$this->config['cookie_hash'].'_'.( !$guest ? 'user' : 'guest' )][$setting] = $value;
-
 	}
 
 	// insert user data into the session array
@@ -4925,7 +4922,6 @@ class Wacko
 				"WHERE referrer_time < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
 			$this->set_config('maint_last_refs', time(), '', true);
-
 			$this->log(7, 'Maintenance: referrers purged');
 		}
 
@@ -4937,7 +4933,6 @@ class Wacko
 				"WHERE modified < DATE_SUB(NOW(), INTERVAL '".quote($this->dblink, $days)."' DAY)");
 
 			$this->set_config('maint_last_oldpages', time(), '', true);
-
 			$this->log(7, 'Maintenance: outdated pages revisions purged');
 		}
 
@@ -4946,12 +4941,15 @@ class Wacko
 		($pages = $this->load_recently_deleted(1000, 0)))
 		{
 			// composing a list of candidates
-			if (is_array($pages)) foreach ($pages as $page)
+			if (is_array($pages))
 			{
-				// does the page has been deleted earlier than specified number of days ago?
-				if (strtotime($page['date']) < (time() - (3600 * 24 * $days)))
+				foreach ($pages as $page)
 				{
-					$remove[] = "'".quote($this->dblink, $page['tag'])."'";
+					// does the page has been deleted earlier than specified number of days ago?
+					if (strtotime($page['date']) < (time() - (3600 * 24 * $days)))
+					{
+						$remove[] = "'".quote($this->dblink, $page['tag'])."'";
+					}
 				}
 			}
 
@@ -4960,11 +4958,11 @@ class Wacko
 				$this->sql_query(
 					"DELETE FROM {$this->config['table_prefix']}revision ".
 					"WHERE tag IN ( ".implode(', ', $remove)." )");
+
 				unset($remove);
 			}
 
 			$this->set_config('maint_last_delpages', time(), '', true);
-
 			$this->log(7, 'Maintenance: deleted pages purged');
 		}
 
@@ -5234,17 +5232,14 @@ class Wacko
 			$this->config['theme_url']	= $this->config['base_url'].'themes/'.$this->config['theme'].'/';
 
 			// set page categories. this defines $categories (array) object property
-			#if ($this->page['categories'])
-			#{
-				$categories = $this->load_categories('', $this->page['page_id']);
+			$categories = $this->load_categories('', $this->page['page_id']);
 
-				foreach ($categories as $word)
-				{
-					$this->categories[$word['category_id']] = $word['category'];
-				}
+			foreach ($categories as $word)
+			{
+				$this->categories[$word['category_id']] = $word['category'];
+			}
 
-				unset($categories, $word);
-			#}
+			unset($categories, $word);
 		}
 
 		if (!$user && $this->page['modified'])
