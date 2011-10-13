@@ -987,6 +987,7 @@ td.form_left, th.form_left {
 }
 
 .tree {
+	text-align: left;
 	list-style: none outside none;
 	margin: 0;
 	padding: 0;
