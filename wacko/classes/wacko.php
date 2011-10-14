@@ -4615,7 +4615,8 @@ class Wacko
 	function is_watched($user_id, $page_id)
 	{
 		return $this->load_single(
-			"SELECT watch_id FROM ".$this->config['table_prefix']."watch ".
+			"SELECT watch_id ".
+			"FROM ".$this->config['table_prefix']."watch ".
 			"WHERE user_id		= '".quote($this->dblink, $user_id)."' ".
 				"AND page_id	= '".quote($this->dblink, $page_id)."' ".
 			"LIMIT 1");
