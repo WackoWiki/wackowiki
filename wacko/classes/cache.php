@@ -141,15 +141,15 @@ class Cache
 	{
 		if (!$page)
 		{
-			$page   = $this->page;
+			$page	= $this->page;
 		}
 		if (!$method)
 		{
-			$method = $this->method;
+			$method	= $this->method;
 		}
 		if (!$query)
 		{
-			$query  = $this->query;
+			$query	= $this->query;
 		}
 
 		$page		= strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
@@ -178,17 +178,13 @@ class Cache
 		if ($this->wacko)
 		{
 			$page = strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
+			$sql = "SELECT method, query ".
+					"FROM ".$this->wacko->config['table_prefix']."cache ".
+					"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'";
+			$params = $this->wacko->load_all($sql);
+
 			$this->log('cache_invalidate page='.$page);
-			$this->log('cache_invalidate query='.
-				"SELECT * ".
-				"FROM ".$this->wacko->config['table_prefix']."cache ".
-				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
-
-			$params = $this->wacko->load_all(
-				"SELECT * ".
-				"FROM ".$this->wacko->config['table_prefix']."cache ".
-				"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'");
-
+			$this->log('cache_invalidate query='.$sql);
 			$this->log('cache_invalidate count params='.count($params));
 
 			foreach ($params as $param)
