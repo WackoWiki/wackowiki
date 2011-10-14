@@ -20,10 +20,10 @@ $xml .= "\t\t<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
 if ($this->has_access('read'))
 {
-	$numOfSlashes = substr_count($this->tag, '/');
+	$num_slashes = substr_count($this->tag, '/');
 
 	$pages = $this->load_all(
-		"SELECT * FROM ".$this->config['table_prefix']."page ".
+		"SELECT page_id, owner_id, tag, supertag, title, created, body FROM ".$this->config['table_prefix']."page ".
 		"WHERE (supertag = '".quote($this->dblink, $this->supertag)."'".
 		" OR supertag LIKE '".quote($this->dblink, $this->supertag."/%")."')".
 		" AND comment_on_id = '0'");
@@ -38,7 +38,7 @@ if ($this->has_access('read'))
 		// output page
 		$tag = $page['tag'];
 
-		if ($numOfSlashes == substr_count($tag, '/'))
+		if ($num_slashes == substr_count($tag, '/'))
 		{
 			$tag = '';
 		}
@@ -49,7 +49,7 @@ if ($this->has_access('read'))
 
 			for ($i = 0; $i < count($_tag); $i++)
 			{
-				if ($i > $numOfSlashes) $tag .= $_tag[$i].'/';
+				if ($i > $num_slashes) $tag .= $_tag[$i].'/';
 			}
 		}
 

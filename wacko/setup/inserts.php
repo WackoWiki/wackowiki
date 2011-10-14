@@ -10,7 +10,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 {
 	global $config_global, $dblink_global, $lang_global;
 
-	$page_select			= "SELECT * FROM ".$config_global['table_prefix']."page WHERE tag='".$tag."'";
+	$page_select			= "SELECT page_id FROM ".$config_global['table_prefix']."page WHERE tag='".$tag."'";
 	$owner_id				= "SELECT user_id FROM ".$config_global['table_prefix']."user WHERE user_name = 'System' LIMIT 1";
 
 	// user_id for user System
@@ -144,6 +144,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 				{
 					@$dblink_global->query($page_insert);
 					$error = $dblink_global->errorInfo();
+
 					if($error[0] != "00000")
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPage'])." - ".($error[2]));
@@ -151,6 +152,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 
 					@$dblink_global->query($perm_read_insert);
 					$error = $dblink_global->errorInfo();
+
 					if($error[0] != "00000")
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageReadPermission'])." - ".($error[2]));
@@ -158,6 +160,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 
 					@$dblink_global->query($perm_write_insert);
 					$error = $dblink_global->errorInfo();
+
 					if($error[0] != "00000")
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageWritePermission'])." - ".($error[2]));
@@ -165,6 +168,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 
 					@$dblink_global->query($perm_comment_insert);
 					$error = $dblink_global->errorInfo();
+
 					if($error[0] != "00000")
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCommentPermission'])." - ".($error[2]));
@@ -172,6 +176,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 
 					@$dblink_global->query($perm_create_insert);
 					$error = $dblink_global->errorInfo();
+
 					if($error[0] != "00000")
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageCreatePermission'])." - ".($error[2]));
@@ -179,6 +184,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 
 					@$dblink_global->query($perm_upload_insert);
 					$error = $dblink_global->errorInfo();
+
 					if($error[0] != "00000")
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageUploadPermission'])." - ".($error[2]));
@@ -188,6 +194,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 					{
 						@$dblink_global->query($default_menu_item);
 						$error = $dblink_global->errorInfo();
+
 						if($error[0] != "00000")
 						{
 							output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingDefaultMenuItem'])." - ".($error[2]));
@@ -211,6 +218,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 					}
 				}
 			}
+
 			break;
 	}
 }
