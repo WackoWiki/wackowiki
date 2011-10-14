@@ -40,7 +40,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 	$this->set_message($this->get_translation('LoggedOut'));
 	$this->context[++$this->current_context] = '';
 
-	if ($_GET['goback'] != '')
+	if (!empty($_GET['goback']))
 	{
 		$this->redirect($this->href('', stripslashes(htmlspecialchars($_GET['goback'])), 'cache='.rand(0,1000)));
 	}
@@ -204,7 +204,7 @@ else
 							$this->config['base_url'] = str_replace('http://', 'https://'.($this->config['tls_proxy'] ? $this->config['tls_proxy'].'/' : ''), $this->config['base_url']);
 						}
 
-						if ($_POST['goback'] != '')
+						if (!empty($_POST['goback']))
 						{
 							$this->redirect($this->href('', stripslashes($_POST['goback']), 'cache='.rand(0,1000)));
 						}

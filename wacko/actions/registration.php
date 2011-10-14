@@ -39,6 +39,12 @@ if (isset($_GET['confirm']))
 
 		echo "<div class=\"info\">".$this->get_translation('EmailConfirmed')."</div><br />";
 
+		// cache handling
+		if ($this->config['cache'])
+		{
+			$this->cache->cache_invalidate($this->tag);
+			$this->cache->cache_invalidate($this->supertag);
+		}
 		// log event
 		$this->log(4, str_replace('%2', $temp['user_name'], str_replace('%1', $temp['email'], $this->get_translation('LogUserEmailActivated', $this->config['language']))));
 
@@ -170,7 +176,25 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				$salt_length		= 10;
 				$salt				= $this->random_password($salt_length, 3);
 				$confirm			= hash('sha256', $password.$salt.mt_rand().time().mt_rand().$email.mt_rand());
-				$password_encrypted	= hash('sha256', $user_name.$salt.$_POST['password']);
+				$password_encrypted	= hash('sha256', $user_name.$salt.$password);
+
+				/* $timezone			= date('Z') / 3600;
+				$is_dst				= date('I');
+
+				if ($this->config['timezone'] == $timezone || $this->config['timezone'] == ($timezone - 1))
+				{
+					$timezone = ($is_dst) ? $timezone - 1 : $timezone;
+
+					if (!isset($this->get_translation['TzZones'][(string) $timezone]))
+					{
+						$timezone = $this->config['timezone'];
+					}
+				}
+				else
+				{
+					$timezone	= $this->config['timezone'];
+					$is_dst		= $this->config['dst'];
+				} */
 
 				// INSERT user
 				$this->sql_query(
@@ -200,6 +224,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						"lang			= '".quote($this->dblink, ($lang ? $lang : $this->config['language']))."', ".
 						"theme			= '".quote($this->dblink, $this->config['theme'])."', ".
 						#"timezone		= '".quote($this->dblink, ($timezone ? $timezone : (float)$this->config['timezone']))."', ".
+						#"dst			= '".quote($this->dblink, ($dst ? $dst : (int)$this->config['dst']))."', ".
 						"send_watchmail	= '".quote($this->dblink, 1)."'");
 
 				// INSERT user menu items
@@ -238,7 +263,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				$this->config['site_name'].". <br />".
 				$this->get_translation('SiteEmailConfirm'));
 				$this->context[++$this->current_context] = '';
-				$this->redirect($this->href('', $this->get_translation('LoginPage')));
+				$this->redirect($this->href('', $this->get_translation('LoginPage'), 'cache='.rand(0,1000)));
 			}
 		}
 	}
@@ -281,24 +306,6 @@ if (!isset($_POST['confirm']))
 
 			echo '</select></p>';
 		}
-
-		/* echo '<p><label for="timezone">'.$this->format_translation('Timezone').':</label>';
-		echo '<select id="timezone" name="timezone">';
-
-		$timezones = $this->get_translation('TzZones');
-
-		foreach ($timezones as $offset => $timezones)
-		{
-
-			echo '<option value="'.$offset.'" '.
-			(isset($user['timezone']) && $user['timezone'] == $offset
-			? "selected=\"selected\""
-			: ($this->config['timezone'] == $offset
-			? "selected=\"selected\""
-			: "")
-			).">".$timezones."</option>\n";
-		}
-		echo '</select></p>'; */
 
 		echo '<p><label for="user_name">'.$this->format_translation('UserName').':</label>';
 		echo '<input id="user_name" name="user_name" size="27" value="'.htmlspecialchars($user_name).'" />';
