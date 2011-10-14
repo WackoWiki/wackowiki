@@ -8,14 +8,14 @@ if (!defined('IN_WACKO'))
 if ($this->has_access('comment') && $this->has_access('read'))
 {
 	// find number
-	if ($latestComment = $this->load_single(
+	if ($latest_comment = $this->load_single(
 	"SELECT tag, page_id
 	FROM ".$this->config['table_prefix']."page
 	WHERE comment_on_id <> '0'
 	ORDER BY page_id DESC
 	LIMIT 1"))
 	{
-		preg_match('/^Comment([0-9]+)$/', $latestComment['tag'], $matches);
+		preg_match('/^Comment([0-9]+)$/', $latest_comment['tag'], $matches);
 		$num = $matches[1] + 1;
 	}
 	else
@@ -135,7 +135,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$this->start_link_tracking();
 			$dummy = $this->format($body_r, 'post_wacko');
 			$this->stop_link_tracking();
-			$this->write_link_table('Comment'.$num);
+			$this->write_link_table($this->get_page_id('Comment'.$num));
 			$this->clear_link_table();
 
 			$this->set_message($this->get_translation('CommentAdded'));
