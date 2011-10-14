@@ -97,7 +97,7 @@ echo '   <input type="hidden" name="password" value="'.(isset($_POST['password']
 $drivers	= array();
 $drivers[]	= array('mysql',	'mysql_legacy',		'MySQL');
 $drivers[]	= array('mysqli',	'mysqli_legacy',	'MySQLi');
-$drivers[]	= array('pdo',		'mysql_pdo',		'PDO MySQL (recommended)');
+$drivers[]	= array('pdo',		'mysql_pdo',		'PDO MySQL ('.$lang['Recommended'].')');
 // $drivers[]	= array('pdo',		'mssql',		'PDO MS SQL');
 // $drivers[]	= array('pdo',		'pgsql',		'PDO PostgreSQL');
 // $drivers[]	= array('pdo',		'sqlite',		'PDO SQLite');
@@ -133,7 +133,7 @@ for($count = 0; $count < count($drivers); $count++)
  */
 
 $engines	= array();
-$engines[]	= array('mysql_myisam', 'MyISAM', 'MyISAM (recommended)');
+$engines[]	= array('mysql_myisam', 'MyISAM', 'MyISAM ('.$lang['Recommended'].')');
 $engines[]	= array('mysql_innodb', 'InnoDB', 'InnoDB');
 
 $detected = 0;

@@ -14,6 +14,7 @@ $lang = array(
 'Title' => 'Εγκατάσταση WackoWiki',
 'Continue' => 'Συνέχεια',
 'Back' => 'Επιστροφή',
+'Recommended' => 'Συνιστάται',
 
 /*
    Language Selection Page
