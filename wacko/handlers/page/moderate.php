@@ -73,7 +73,7 @@ function moderate_rename_topic(&$engine, $old_tag, $new_tag, $title = '')
 	$engine->start_link_tracking();
 	$dummy = $engine->format($page['body_r'], 'post_wacko');
 	$engine->stop_link_tracking();
-	$engine->write_link_table($new_tag);
+	$engine->write_link_table($page['page_id']);
 	$engine->clear_link_table();
 	$engine->current_context--;
 
@@ -161,7 +161,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 
 	// update link table
 	$comments = $engine->load_all(
-		"SELECT tag, body_r ".
+		"SELECT page_id, tag, body_r ".
 		"FROM {$engine->config['table_prefix']}page ".
 		"WHERE comment_on_id = '".quote($engine->dblink, $base_id)."'");
 
@@ -172,7 +172,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 		$engine->start_link_tracking();
 		$dummy = $engine->format($comment['body_r'], 'post_wacko');
 		$engine->stop_link_tracking();
-		$engine->write_link_table($comment['tag']);
+		$engine->write_link_table($comment['page_id']);
 		$engine->clear_link_table();
 		$engine->current_context--;
 	}
@@ -253,7 +253,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$engine->start_link_tracking();
 	$dummy = $engine->format($page['body_r'], 'post_wacko');
 	$engine->stop_link_tracking();
-	$engine->write_link_table($new_tag);
+	$engine->write_link_table($page['page_id']);
 	$engine->clear_link_table();
 	$engine->current_context--;
 
@@ -1033,7 +1033,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 						// update link table
 						$comments = $this->load_all(
-							"SELECT tag, body_r ".
+							"SELECT page_id, tag, body_r ".
 							"FROM {$this->config['table_prefix']}page ".
 							"WHERE page_id IN ( $ids_str )");
 
@@ -1044,7 +1044,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							$this->start_link_tracking();
 							$dummy = $this->format($comment['body_r'], 'post_wacko');
 							$this->stop_link_tracking();
-							$this->write_link_table($comment['tag']);
+							$this->write_link_table($comment['page_id']);
 							$this->clear_link_table();
 							$this->current_context--;
 						}
