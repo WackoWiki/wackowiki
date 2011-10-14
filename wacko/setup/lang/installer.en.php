@@ -14,6 +14,7 @@ $lang = array(
 'Title' => 'WackoWiki Installation',
 'Continue' => 'Continue',
 'Back' => 'Back',
+'Recommended' => 'recommended',
 
 /*
    Language Selection Page
