@@ -1129,53 +1129,55 @@ class Wacko
 
 	function cache_links()
 	{
-		if ($links = $this->load_all(
-			"SELECT * ".
-			"FROM ".$this->config['table_prefix']."link ".
-			"WHERE from_page_id = '".quote($this->dblink, $this->page['page_id'])."'"))
-		{
-			$cl = count($links);
-
-			if (!isset($cl))
-			{
-				$cl = 0;
-			}
-
-			for ($i = 0; $i < $cl; $i++)
-			{
-				$pages[$i] = $links[$i]['to_tag'];
-			}
-		}
-
-		$user			= $this->get_user();
-		$user_menu	= $this->get_user_menu($user['user_id']);
+		$pages	= '';
+		$acl	= '';
+		$lang	= '';
+		$user	= $this->get_user();
 
 		if (!isset($cl))
 		{
 			$cl = 0;
 		}
 
-		$pages[$cl]	= $user['user_name'];
-		$_menu		= $this->get_default_menu($user['lang'])."\n".
-					($user_menu
-						? $user_menu
-						: '');
-		$menu		= explode("\n", $_menu);
-
-		for ($i = 0; $i <= count($menu); $i++)
+		// get links
+		if ($links = $this->load_all(
+			"SELECT to_tag ".
+			"FROM ".$this->config['table_prefix']."link ".
+			"WHERE from_page_id = '".quote($this->dblink, $this->page['page_id'])."'"))
 		{
-			if (!isset($cl))
-			{
-				$cl = 0;
-			}
+			$cl = count($links);
 
-			if (preg_match('/^[\(\[]/', (isset($menu[$i])) ? ($menu[$i]) : '' ))
+			for ($i = 0; $i < $cl; $i++)
 			{
-				$pages[$cl + $i] = preg_replace('/^(.*?)\s.*$/', '\\1', preg_replace('/[\[\]\(\)]/', '', $menu[$i]));
+				$pages[] = $links[$i]['to_tag'];
 			}
 		}
+	$this->debug_print_r($pages);
 
+		// get menu items
+		if ($menu_items = $this->load_all(
+			"SELECT p.tag ".
+				"FROM ".$this->config['table_prefix']."menu b ".
+					"LEFT JOIN ".$this->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
+				"WHERE b.user_id IN ( '".quote($this->dblink, $user['user_id'])."', '".quote($this->dblink, $this->get_user_id('System'))."' ) ".
+					($lang
+						? "AND b.lang = '".quote($this->dblink, $lang)."' "
+						: "").
+				"ORDER BY b.menu_position", 1))
+		{
+			foreach ($menu_items as $item)
+			{
+				$pages[] = $item['tag'];
+
+			}
+		}
+	$this->debug_print_r($pages);
+		$pages[]	= $this->config['users_page'].'/'.$user['user_name'];
+		$pages[]	= $this->config['users_page'];
 		$pages[]	= $this->tag;
+
+	$this->debug_print_r($pages);
+
 		$spages		= $pages;
 		$spages_str	= '';
 		$pages_str	= '';
@@ -1205,11 +1207,6 @@ class Wacko
 		}
 
 		$notexists = @array_values(@array_diff($spages, $exists));
-
-		if (!isset($acl))
-		{
-			$acl = '';
-		}
 
 		for ($i = 0; $i < count($notexists); $i++)
 		{
@@ -1440,15 +1437,6 @@ class Wacko
 		}
 	}
 
-	function load_all_pages_by_time()
-	{
-		return $this->load_all(
-			"SELECT page_id, tag, modified ".
-			"FROM ".$this->config['table_prefix']."page ".
-			"WHERE comment_on_id = '0' ".
-			"ORDER BY modified DESC, BINARY tag");
-	}
-
 	function load_recently_deleted($limit = 1000, $cache = 1)
 	{
 		$meta = 'r.page_id, r.owner_id, r.user_id, r.tag, r.supertag, r.created, r.modified, r.edit_note, r.minor_edit, r.latest, r.handler, r.comment_on_id, r.lang, r.title, r.keywords, r.description';
@@ -1467,13 +1455,13 @@ class Wacko
 	function load_categories($tag, $page_id = 0)
 	{
 		$categories = $this->load_all(
-						"SELECT c.category_id, c.category ".
-						"FROM {$this->config['table_prefix']}category c ".
-							"INNER JOIN {$this->config['table_prefix']}category_page cp ON (c.category_id = cp.category_id) ".
-						"WHERE ".( $page_id != 0
-							? "cp.page_id  = '".quote($this->dblink, $page_id)."' "
-							: "cp.supertag = '".quote($this->dblink, $supertag)."' " )
-							);
+			"SELECT c.category_id, c.category ".
+			"FROM {$this->config['table_prefix']}category c ".
+				"INNER JOIN {$this->config['table_prefix']}category_page cp ON (c.category_id = cp.category_id) ".
+			"WHERE ".( $page_id != 0
+				? "cp.page_id  = '".quote($this->dblink, $page_id)."' "
+				: "cp.supertag = '".quote($this->dblink, $supertag)."' " )
+			);
 
 		return $categories;
 	}
@@ -3092,10 +3080,12 @@ class Wacko
 		{
 			$show = (isset($user['show_spaces']) ? $user['show_spaces'] : null);
 		}
+
 		if (!$show)
 		{
 			$show = $this->config['show_spaces'];
 		}
+
 		if ($show != 0)
 		{
 			$text = preg_replace('/('.$this->language['ALPHANUM'].')('.$this->language['UPPERNUM'].')/', '\\1&nbsp;\\2', $text);
@@ -3114,10 +3104,12 @@ class Wacko
 		{
 			$text = $this->get_translation('RootLinkIcon').substr($text, 1);
 		}
+
 		if (strpos($text, '!/')  === 0)
 		{
 			$text = $this->get_translation('SubLinkIcon').substr($text, 2);
 		}
+
 		if (strpos($text, '../') === 0)
 		{
 			$text = $this->get_translation('UpLinkIcon').substr($text, 3);
@@ -3145,10 +3137,12 @@ class Wacko
 		{
 			$text = $this->get_translation('RootLinkIcon').substr($text, 1);
 		}
+
 		if (strpos($text, '!/')  === 0)
 		{
 			$text = $this->get_translation('SubLinkIcon').substr($text, 2);
 		}
+
 		if (strpos($text, '../') === 0)
 		{
 			$text = $this->get_translation('UpLinkIcon').substr($text, 3);
@@ -3981,7 +3975,9 @@ class Wacko
 	function load_users()
 	{
 		return $this->load_all(
-			"SELECT * FROM ".$this->config['user_table']." ORDER BY binary user_name");
+			"SELECT user_id, user_name ".
+			"FROM ".$this->config['user_table']." ".
+			"ORDER BY BINARY user_name");
 	}
 
 	function get_user_id($user_name = '')
@@ -4134,13 +4130,13 @@ class Wacko
 		if ($page_id)
 		{
 			return $this->load_all(
-					"SELECT p.page_id, p.user_id, p.title, p.tag, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name ".
-					"FROM ".$this->config['table_prefix']."page p ".
-						"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-						"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
-					"WHERE p.comment_on_id = '".quote($this->dblink, $page_id)."' ".
-					"ORDER BY p.created ".
-					"LIMIT {$limit}, {$count}");
+				"SELECT p.page_id, p.user_id, p.title, p.tag, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name ".
+				"FROM ".$this->config['table_prefix']."page p ".
+					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
+				"WHERE p.comment_on_id = '".quote($this->dblink, $page_id)."' ".
+				"ORDER BY p.created ".
+				"LIMIT {$limit}, {$count}");
 		}
 	}
 
@@ -4717,14 +4713,14 @@ class Wacko
 		if ($user_id)
 		{
 			$_menu = $this->load_all(
-					"SELECT p.page_id, p.tag, p.title, b.menu_title, b.lang ".
-					"FROM ".$this->config['table_prefix']."menu b ".
-						"LEFT JOIN ".$this->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
-					"WHERE b.user_id = '".quote($this->dblink, $user_id)."' ".
-						($lang
-							? "AND b.lang = '".quote($this->dblink, $lang)."' "
-							: "").
-					"ORDER BY b.menu_position", 1);
+				"SELECT p.page_id, p.tag, p.title, b.menu_title, b.lang ".
+				"FROM ".$this->config['table_prefix']."menu b ".
+					"LEFT JOIN ".$this->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
+				"WHERE b.user_id = '".quote($this->dblink, $user_id)."' ".
+					($lang
+						? "AND b.lang = '".quote($this->dblink, $lang)."' "
+						: "").
+				"ORDER BY b.menu_position", 1);
 
 			if ($_menu)
 			{
@@ -4797,9 +4793,9 @@ class Wacko
 					);
 
 				$_menu_position = $this->load_all(
-					"SELECT b.menu_id ".
-					"FROM ".$this->config['table_prefix']."menu b ".
-					"WHERE b.user_id = '".quote($this->dblink, $user['user_id'])."' ", 0);
+					"SELECT m.menu_id ".
+					"FROM ".$this->config['table_prefix']."menu m ".
+					"WHERE m.user_id = '".quote($this->dblink, $user['user_id'])."' ", 0);
 
 				$_menu_item_count = count($_menu_position);
 

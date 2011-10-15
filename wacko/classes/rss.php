@@ -284,10 +284,17 @@ class RSS
 
 	function site_map()
 	{
+		//  collect data
+		$pages = $this->engine->load_all(
+			"SELECT page_id, tag, modified ".
+			"FROM {$prefix}page ".
+			"WHERE comment_on_id = '0' ".
+			"ORDER BY modified DESC, BINARY tag");
+
 		$xml = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n";
 		$xml .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 
-		if ($pages = $this->engine->load_all_pages_by_time())
+		if ($pages)
 		{
 			foreach ($pages as $i => $page)
 			{
