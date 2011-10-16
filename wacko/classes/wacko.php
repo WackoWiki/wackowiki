@@ -1133,11 +1133,7 @@ class Wacko
 		$acl	= '';
 		$lang	= '';
 		$user	= $this->get_user();
-
-		if (!isset($cl))
-		{
-			$cl = 0;
-		}
+		$cl		= 0;
 
 		// get links
 		if ($links = $this->load_all(
@@ -1152,18 +1148,35 @@ class Wacko
 				$pages[] = $links[$i]['to_tag'];
 			}
 		}
-	$this->debug_print_r($pages);
+
+		// get lang
+		if(isset($user['lang']))
+		{
+			$lang = $user['lang'];
+		}
+		else if (isset($this->config['multilanguage']))
+		{
+			$lang = $this->user_agent_language();
+		}
+		else
+		{
+			$lang = $this->config['language'];
+		}
 
 		// get menu items
 		if ($menu_items = $this->load_all(
-			"SELECT p.tag ".
-				"FROM ".$this->config['table_prefix']."menu b ".
-					"LEFT JOIN ".$this->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
-				"WHERE b.user_id IN ( '".quote($this->dblink, $user['user_id'])."', '".quote($this->dblink, $this->get_user_id('System'))."' ) ".
-					($lang
-						? "AND b.lang = '".quote($this->dblink, $lang)."' "
-						: "").
-				"ORDER BY b.menu_position", 1))
+			"SELECT DISTINCT p.tag ".
+			"FROM ".$this->config['table_prefix']."menu b ".
+				"LEFT JOIN ".$this->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
+			"WHERE (b.user_id IN ( '".quote($this->dblink, $this->get_user_id('System'))."' ) ".
+				($lang
+					? "AND b.lang = '".quote($this->dblink, $lang)."' "
+					: "").
+					") ".
+				($user
+					? "OR (b.user_id IN ( '".quote($this->dblink, $user['user_id'])."' )) "
+					: "").
+			"", 1))
 		{
 			foreach ($menu_items as $item)
 			{
@@ -1171,13 +1184,12 @@ class Wacko
 
 			}
 		}
-	$this->debug_print_r($pages);
+
 		$pages[]	= $this->config['users_page'].'/'.$user['user_name'];
 		$pages[]	= $this->config['users_page'];
 		$pages[]	= $this->tag;
 
-	$this->debug_print_r($pages);
-
+		$pages		= array_unique($pages);
 		$spages		= $pages;
 		$spages_str	= '';
 		$pages_str	= '';
@@ -4713,14 +4725,14 @@ class Wacko
 		if ($user_id)
 		{
 			$_menu = $this->load_all(
-				"SELECT p.page_id, p.tag, p.title, b.menu_title, b.lang ".
-				"FROM ".$this->config['table_prefix']."menu b ".
-					"LEFT JOIN ".$this->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
-				"WHERE b.user_id = '".quote($this->dblink, $user_id)."' ".
+				"SELECT p.page_id, p.tag, p.title, m.menu_title, m.lang ".
+				"FROM ".$this->config['table_prefix']."menu m ".
+					"LEFT JOIN ".$this->config['table_prefix']."page p ON (m.page_id = p.page_id) ".
+				"WHERE m.user_id = '".quote($this->dblink, $user_id)."' ".
 					($lang
-						? "AND b.lang = '".quote($this->dblink, $lang)."' "
+						? "AND m.lang = '".quote($this->dblink, $lang)."' "
 						: "").
-				"ORDER BY b.menu_position", 1);
+				"ORDER BY m.menu_position", 1);
 
 			if ($_menu)
 			{
