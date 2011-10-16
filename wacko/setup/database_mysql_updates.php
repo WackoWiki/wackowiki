@@ -385,12 +385,12 @@ $alter_user_setting_r4_3_3 = "ALTER TABLE {$pref}user_setting ADD dst TINYINT(1)
 $rename_watch_r4_3_1 = "RENAME TABLE {$pref}pagewatches TO {$pref}watch";
 
 $alter_watch_r4_3_0 = "ALTER TABLE {$pref}watch CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
-$alter_watch_r4_3_1 = "ALTER TABLE {$pref}watch CHANGE id id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
+$alter_watch_r4_3_1 = "ALTER TABLE {$pref}watch CHANGE id watch_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
 $alter_watch_r4_3_2 = "ALTER TABLE {$pref}watch ADD user_id INT(10) UNSIGNED NOT NULL AFTER user";
 $alter_watch_r4_3_3 = "ALTER TABLE {$pref}watch ADD page_id INT(10) UNSIGNED NOT NULL AFTER tag";
 $alter_watch_r4_3_4 = "ALTER TABLE {$pref}watch DROP user";
 $alter_watch_r4_3_5 = "ALTER TABLE {$pref}watch DROP tag";
-$alter_watch_r4_3_6 = "ALTER TABLE {$pref}watch CHANGE id watch_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
+#$alter_watch_r4_3_6 = "";
 $alter_watch_r4_3_7 = "ALTER TABLE {$pref}watch CHANGE time watch_time TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
 $alter_watch_r4_3_8 = "ALTER TABLE {$pref}watch ADD comment_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER page_id";
 
