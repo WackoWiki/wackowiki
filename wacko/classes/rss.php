@@ -284,6 +284,8 @@ class RSS
 
 	function site_map()
 	{
+		$prefix			= $this->engine->config['table_prefix'];
+
 		//  collect data
 		$pages = $this->engine->load_all(
 			"SELECT page_id, tag, modified ".
