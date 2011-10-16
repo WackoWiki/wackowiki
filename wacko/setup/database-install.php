@@ -617,7 +617,6 @@ switch($config['database_driver'])
 					// drop last!
 					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_4, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_5, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_6, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_7, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_8, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 
@@ -1044,7 +1043,6 @@ switch($config['database_driver'])
 					// drop last!
 					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_4), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_5), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_6), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_7), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_8), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 
@@ -1485,7 +1483,6 @@ switch($config['database_driver'])
 					// drop last!
 					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_4, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_5, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_6, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_7, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_8, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
 
