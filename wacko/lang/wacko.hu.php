@@ -19,7 +19,7 @@ $wacko_translation = array(
 	// registration panel
 	'RegistrationWelcome'		=> 'New user registration:',
 	'RegistrationRealName'		=> 'Show Name',
-	'RegistrationPassword'		=> 'Password',
+	'RegistrationPassword'		=> 'Jelszó',
 	'RegistrationButton'		=> 'Register me!',
 	'RegistrationUserNameOwned'	=> 'This username is already registered. Please choose another.',
 	'RegistrationPage'			=> 'Registration',
@@ -32,7 +32,7 @@ $wacko_translation = array(
 	'NameCamelCaseOnly'			=> 'Username must be between %1 and %2 chars long and WikiName formatted.',
 
 	// login panel
-	'LoginWelcome'				=> 'Login',
+	'LoginWelcome'				=> 'Bejelentkezés',
 	'LoginWelcome2'				=> '((/Registration Create new account))',
 	'LoginName'					=> 'Szerkesztõneved',
 	'LoginPassword'				=> 'Jelszavad',
@@ -118,7 +118,7 @@ $wacko_translation = array(
 	'Nobody'					=> 'Nobody',
 	'TakeOwnership'				=> 'Take Ownership',
 	'FilesTip'					=> 'Manage attached files',
-	'FilesText'					=> 'Files',
+	'FilesText'					=> 'Fájlok',
 	'DeleteConfirm'				=> 'Do you really want to DELETE page?'."\n".'There is no undo for this action!.',
 	'DeleteTip'					=> 'Delete page',
 	'DeleteCommentTip'			=> 'Delete comment',
@@ -997,8 +997,8 @@ $wacko_translation = array(
 	'PollsNotifyBody'			=> 'User %1 added a new poll. To view details, confirm or reject the poll go to this link:',
 	'PollsNone'					=> 'No active poll.',
 
-	'Timezone'					=> 'Timezone',
-	'DST'						=> 'Daylight saving time',
+	'Timezone'					=> 'Idõzóna',
+	'DST'						=> 'Nyári idõszámítás',
 	'TzZones'	=> array(
 		'-12'	=> '[UTC - 12] Baker Island Time',
 		'-11'	=> '[UTC - 11] Niue Time, Samoa Standard Time',
