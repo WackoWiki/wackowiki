@@ -86,6 +86,7 @@ $dirs = array(
 	'admin/common',
 	'admin/modules'
 );
+
 foreach ($dirs as $dir)
 {
 	if ($dh = opendir($dir))
@@ -206,8 +207,6 @@ else if (time() - $_SESSION['created'] > 1800)
 	//session_regenerate_id(true);    // change session ID for the current session an invalidate old session ID
 	$_SESSION['created'] = time();  // update creation time
 }
-
-
 
 ########################################################
 ##                     Page header                    ##
