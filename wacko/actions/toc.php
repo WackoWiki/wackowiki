@@ -30,7 +30,8 @@ if ($page)
 }
 else
 {
-	$page		= ''; $ppage = '';
+	$page		= '';
+	$ppage		= '';
 	$context	= $this->tag;
 	$_page		= $this->page;
 	$link		= '';

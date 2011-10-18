@@ -353,7 +353,7 @@ if ($phrase)
 						// generate preview
 						if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
 						{
-							$body = $this->format($page['body'], cleanwacko);
+							$body = $this->format($page['body'], 'cleanwacko');
 							$context = get_line_with_phrase($phrase, $body, $clean);
 							$context = preview_text($text = $context, $limit = 500, $tags = 0);
 							$context = highlight_this($text = $context, $words = $phrase, $the_place = 0);
