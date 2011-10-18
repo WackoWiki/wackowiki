@@ -20,17 +20,19 @@ if (!function_exists('handler_diff_load_page_by_id'))
 		if ($id != '-1')
 		{
 			return $wacko->load_single(
-				"SELECT page_id, revision_id, modified, body ".
-				"FROM ".$wacko->config['table_prefix']."revision ".
-				"WHERE revision_id = '".quote($wacko->dblink, $id)."' ".
+				"SELECT r.page_id, r.revision_id, r.modified, r.body, u.user_name ".
+				"FROM ".$wacko->config['table_prefix']."revision r ".
+					"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (r.user_id = u.user_id) ".
+				"WHERE r.revision_id = '".quote($wacko->dblink, $id)."' ".
 				"LIMIT 1");
 		}
 		else
 		{
 			return $wacko->load_single(
-				"SELECT page_id, page_id AS revision_id, modified, body ".
-				"FROM ".$wacko->config['table_prefix']."page ".
-				"WHERE page_id = '".quote($wacko->dblink, $wacko->get_page_id())."' ".
+				"SELECT p.page_id, p.page_id AS revision_id, p.modified, p.body, u.user_name ".
+				"FROM ".$wacko->config['table_prefix']."page p ".
+					"LEFT JOIN ".$wacko->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
+				"WHERE p.page_id = '".quote($wacko->dblink, $wacko->get_page_id())."' ".
 				"LIMIT 1");
 		}
 	}
