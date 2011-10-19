@@ -4049,45 +4049,6 @@ class Wacko
 	}
 
 	// COMMENTS AND COUNTS
-	// recount all user's comments
-	function count_user_comments($name)
-	{
-		$count = $this->load_single(
-			"SELECT COUNT(tag) AS n ".
-			"FROM {$this->config['table_prefix']}page ".
-			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
-				"AND comment_on_id <> '0' ".
-			"LIMIT 1");
-
-		return (int)$count['n'];
-	}
-
-	// recount all user's pages
-	function count_user_pages($name)
-	{
-		$count = $this->load_single(
-			"SELECT COUNT(tag) AS n ".
-			"FROM {$this->config['table_prefix']}page ".
-			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
-				"AND comment_on_id = '0' ".
-			"LIMIT 1");
-
-		return (int)$count['n'];
-	}
-
-	// recount all user's page revisions
-	function count_user_revisions($name)
-	{
-		$count = $this->load_single(
-			"SELECT COUNT(tag) AS n ".
-			"FROM {$this->config['table_prefix']}revision ".
-			"WHERE owner_id = '".quote($this->dblink, $user_id)."' ".
-				"AND comment_on_id = '0' ".
-			"LIMIT 1");
-
-		return (int)$count['n'];
-	}
-
 	// recount all comments for a given page
 	function count_comments($comment_on_id)
 	{
