@@ -110,7 +110,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	$pagination	= $this->pagination($count['n'], $this->config['forum_topics']);
 
 	// make collector query
-	$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, u.user_name, o.user_name as owner_name ".
+	$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.lang, u.user_name, o.user_name as owner_name ".
 		"FROM {$this->config['table_prefix']}page AS p ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 			"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id), ".
@@ -173,6 +173,11 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			if ($user['last_mark'] == true && ( ($comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']) || ($topic['owner_name'] != $user['user_name'] && $topic['created'] > $user['last_mark']) ))
 			{
 				$updated = true;
+			}
+
+			if ($this->page['lang'] != $topic['lang'])
+			{
+				$topic['title'] = $this->do_unicode_entities($topic['title'], $topic['lang']);
 			}
 
 			// print
