@@ -16,210 +16,27 @@ Updated by Pavel Fedotov.
 
 <!-- !! -->
 <?php
-  if ($this->method == 'show') {
-?>
-<?php
-if ($this->has_access('read') && $this->config['footer_files'] != 0 && ($this->config['footer_files'] != 2 || $this->get_user()))
-{
-  // store files display in session
-  if (!isset($_SESSION['show_files'][$this->page['page_id']]))
-    $_SESSION['show_files'][$this->page['page_id']] = ($this->user_wants_files() ? "1" : "0");
+if ($this->method == 'show') {
 
-  switch($_GET['show_files'])
-  {
-  case "0":
-    $_SESSION['show_files'][$this->page['page_id']] = 0;
-    break;
-  case "1":
-    $_SESSION['show_files'][$this->page['page_id']] = 1;
-    break;
-  }
+	// files code starts
+	if ($this->has_access('read') && $this->config['footer_files'] == 1 || ($this->config['footer_files'] == 2 && $this->get_user()))
+	{
+		require_once('handlers/page/_files.php');
+	}
 
-  // display files!
-  if ($this->page && $_SESSION['show_files'][$this->page['page_id']])
-  {
-    // display files header
-    ?>
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td height="29" bgcolor="#6E0000">
-    <div id="filesheader">
-      <?php echo $this->get_translation('Files_all') ?> [<a href="<?php echo $this->href('', '', 'show_files=0')."\">".$this->get_translation('HideFiles'); ?></a>]
-    </div>
-	</td>
-        </tr>
-        <tr>
-          <td height="1" align="left" valign="top" background="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>"><img src="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>" width="4" height="5"></td>
-        </tr>
-      </table>
-    <?php
+	// comments form output  starts
+	if ($this->has_access('read') && ($this->config['footer_comments'] == 1 || ($this->config['footer_comments'] == 2 && $this->get_user()) ) && $this->user_allowed_comments())
+	{
+		require_once('handlers/page/_comments.php');
+	}
 
-    echo "<div class=\"files\">";
-    echo $this->action('files', array('nomark' => 1));
-    echo "</div>";
-    // display form
-    print("<div class=\"filesform\">\n");
-    if ($user = $this->get_user())
-    {
-      $user = strtolower($this->get_user_name());
-      $registered = true;
-    }
-    else
-      $user = GUEST;
+	// rating form output begins
+	if ($this->has_access('read') && $this->page && $this->config['footer_rating'] == 1 || ($this->config['footer_rating'] == 2 && $this->get_user()))
+	{
+		require_once('handlers/page/_rating.php');
+	}
+} //end of $this->method==show
 
-    if ($registered
-        &&
-        (
-         ($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
-         ($this->check_acl($user,$this->config['upload']))
-        )
-       )
-    echo $this->action('upload', array('nomark' => 1));
-    print("</div>\n");
-  }
-  else
-  {
-    ?>
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td height="29" bgcolor="#6E0000">
-    <div id="filesheader">
-    <?php
-      if ($this->page['page_id'])
-       $files = $this->load_all( "SELECT upload_id FROM ".$this->config['table_prefix']."upload WHERE ".
-                             " page_id = '". quote($this->dblink, $this->page['page_id']) ."'");
-      else $files = array();
-
-      switch (count($files))
-      {
-      case 0:
-        echo $this->get_translation('Files_0');
-        break;
-      case 1:
-        echo $this->get_translation('Files_1');
-        break;
-      default:
-        print(str_replace('%1',count($files), $this->get_translation('Files_n')));
-      }
-    ?>
-
-    [<a href="<?php echo $this->href('', '', 'show_files=1#filesheader')."\">".$this->get_translation('ShowFiles'); ?></a>]
-
-    </div>	</td>
-        </tr>
-        <tr>
-          <td height="1" align="left" valign="top" background="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>"><img src="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>" width="4" height="5"></td>
-        </tr>
-      </table>
-    <?php
-  }
-}
-?>
-
-<?php
-if ($this->has_access('read') && $this->config['footer_comments'] != 0)
-{
-  // load comments for this page
-  $comments = $this->load_comments($this->page['page_id']);
-
-  // store comments display in session
-  if (!isset($_SESSION['show_comments'][$this->page['page_id']]))
-    $_SESSION['show_comments'][$this->page['page_id']] = ($this->user_wants_comments() ? "1" : "0");
-
-  switch($_GET['show_comments'])
-  {
-  case "0":
-    $_SESSION['show_comments'][$this->page['page_id']] = 0;
-    break;
-  case "1":
-    $_SESSION['show_comments'][$this->page['page_id']] = 1;
-    break;
-  }
-
-  // display comments!
-  if ($this->page && $_SESSION['show_comments'][$this->page['page_id']])
-  {
-    // display comments header
-    ?>
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td height="29" bgcolor="#6E0000">    <div id="commentsheader">
-      <?php echo $this->get_translation('Comments_all') ?> [<a href="<?php echo $this->href('', '', 'show_comments=0')."\">".$this->get_translation('HideComments'); ?></a>]
-    </div></td>
-        </tr>
-        <tr>
-          <td height="1" align="left" valign="top" background="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>"><img src="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>" width="4" height="5"></td>
-        </tr>
-      </table>
-    <?php
-
-    // display comments themselves
-    if ($comments)
-    {
-      foreach ($comments as $comment)
-      {
-        print("<a name=\"".$comment['tag']."\"></a>\n");
-        print("<div class=\"comment\">\n");
-        $del = '';
-        if ($this->is_admin() || $this->user_is_owner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->page['page_id'])))
-          print("<div style=\"float:right;\" style='background:#ffcfa8; border: solid 1px; border-color:#cccccc'>".
-          "<a href=\"".$this->href('remove', $comment['tag'])."\" title=\"".$this->get_translation('DeleteTip')."\">".
-          "<img src=\"".$this->config['theme_url']."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->get_translation('DeleteText')."\"  align=\"absmiddle\" border=\"0\" /></a>".
-          "</div>");
-        print($this->format($comment['body'])."\n");
-        print("<div class=\"commentinfo\">\n-- ".($this->is_wiki_name($comment['user_name']) ? $this->link('/'.$comment['user_name'], '', $comment['user_name']) : $comment['user_name'])." (".$comment['time'].")\n</div>\n");
-        print("</div>\n");
-      }
-    }
-
-    // display comment form
-    print("<div class=\"commentform\">\n");
-    if ($this->has_access('comment'))
-    {
-      ?>
-        <?php echo $this->get_translation('AddComment'); ?><br />
-        <?php echo $this->form_open('addcomment'); ?>
-          <textarea name="body" rows="6" style="width: 95%"></textarea><br />
-          <input type="submit" value="<?php echo $this->get_translation('AddCommentButton'); ?>" accesskey="s" />
-        <?php echo $this->form_close(); ?>
-      <?php
-    }
-    print("</div>\n");
-  }
-  else
-  {
-    ?>
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td height="29" bgcolor="#6E0000">    <div id="commentsheader">
-    <?php
-      switch (count($comments))
-      {
-      case 0:
-        print($this->get_translation('Comments_0'));
-        break;
-      case 1:
-        print($this->get_translation('Comments_1'));
-        break;
-      default:
-        print(str_replace('%1',count($comments), $this->get_translation('Comments_n')));
-      }
-    ?>
-
-    [<a href="<?php echo $this->href('', '', 'show_comments=1#commentsheader')."\">".$this->get_translation('ShowComments'); ?></a>]
-
-    </div></td>
-        </tr>
-        <tr>
-          <td height="1" align="left" valign="top" background="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>"><img src="<?php echo $this->config['theme_url']."icons/border_line.gif"; ?>" width="4" height="5"></td>
-        </tr>
-      </table>
-    <?php
-  }
-}
-?>
-
-<?php } //end of $this->method==show
 ?>
 <!-- !!! -->
 <?php
