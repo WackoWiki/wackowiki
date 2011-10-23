@@ -2709,15 +2709,19 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
+								return '<img src="'.$this->href('files', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$desc['picture_w'].'" height="'.$desc['picture_h'].'" />';
 							}
-
-							return '<img src="'.$this->href('files', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$desc['picture_w'].'" height="'.$desc['picture_h'].'" />';
+							else
+							{
+								return '<a href="'.$this->href('files', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" title="'.$title.'">'.$text.'</a>';
+							}
 						}
+						/*
 						else
 						{
 							return '<a href="'.$this->href('files', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" title="'.$title.'">'.$text.'</a>';
-						}
-						# $this->debug_print_r($desc);
+						} */
+
 					}
 					else //403
 					{
@@ -3032,6 +3036,7 @@ class Wacko
 
 				return $res;
 			}
+
 			die ("ERROR: no link template '$tpl' found.");
 		}
 
