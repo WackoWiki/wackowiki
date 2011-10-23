@@ -57,9 +57,11 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 							"AND g.group_id = '".quote($this->dblink, $group['group_id'])."' ".
 						"LIMIT 1", 1);
 
-		echo '<h2 id="pages">'.$this->get_translation('GroupsMembers').'</a></h2>'."\n";
-		echo '<div class="indent"><small>'.$this->get_translation('GroupTotalMembers').': '.$count['total_members']."</small></div><br />\n";
+		echo '<h2 id="pages">'.$count['total_members'].' '.$this->get_translation('GroupsMembers').'</a></h2>'."\n";
 
+
+		// print list
+		echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;\">\n";
 
 
 		$pagination = $this->pagination($count['total_members'], $limit, 'd', 'profile='.$group['group_name'].'&amp;sort='.( isset($_GET['sort']) && $_GET['sort'] != 'name' ? 'date' : 'name' ).'#members');
@@ -67,30 +69,60 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 		if ($count['total_members'])
 		{
 			$members = $this->load_all(
-				"SELECT u.user_id, u.user_name, u.signup_time, u.total_pages ".
+				"SELECT u.user_id, u.user_name, u.signup_time, u.total_pages, u.total_revisions, u.total_comments ".
 				"FROM {$this->config['table_prefix']}user u ".
 					"LEFT JOIN {$this->config['table_prefix']}group_member m ON (u.user_id = m.user_id) ".
 				"WHERE m.group_id = '".quote($this->dblink, $group['group_id'])."' ".
-					#"AND comment_on_id = '0' ".
 				"ORDER BY ".( isset($_GET['sort']) && $_GET['sort'] == 'name' ? 'u.user_name ASC' : 'signup_time DESC' )." ".
 				"LIMIT {$pagination['offset']}, $limit");
 
 			// sorting and pagination
-			echo '<small>'.( isset($_GET['sort']) && $_GET['sort'] == 'name' ? '<a href="'.$this->href('', '', 'profile='.$group['group_name'].'&amp;sort=date').'#members">'.$this->get_translation('GroupMembersSortDate').'</a>' : '<a href="'.$this->href('', '', 'profile='.$group['group_name'].'&amp;sort=name').'#members">'.$this->get_translation('GroupsMembersSortName').'</a>' ).'</small>';
+
 			if (isset($pagination['text']))
 				echo " <span class=\"pagination\">".$pagination['text']."</span>\n";
 
-			// pages list itself
-			echo '<div>'."\n";
+			// members list itself
+			#echo '<div>'."\n";
+
+			// list header
+			echo '<tr>'.
+				'<th><a href="'.$this->href('', '', 'sort=name'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersName').( (isset($_GET['sort']) && $_GET['sort'] == 'name') || (isset($_REQUEST['user']) && $_REQUEST['user'] == true) ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+				'<th><a href="'.$this->href('', '', 'sort=pages'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersPages').( (isset($_GET['sort']) && $_GET['sort'] == 'pages') || (isset($_GET['sort']) && $_GET['sort'] == false) ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+				'<th><a href="'.$this->href('', '', 'sort=comments'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersComments').( isset($_GET['sort']) && $_GET['sort'] == 'comments' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+				'<th><a href="'.$this->href('', '', 'sort=revisions'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersRevisions').( isset($_GET['sort']) && $_GET['sort'] == 'revisions' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+			($this->get_user()
+				?
+				'<th><a href="'.$this->href('', '', 'sort=signup'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersSignup').( isset($_GET['sort']) && $_GET['sort'] == 'signup' ? (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'.
+				'<th><a href="'.$this->href('', '', 'sort=session'.(isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ).'">'.$this->get_translation('UsersLastSession').( isset($_GET['sort']) && $_GET['sort'] == 'session' ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&nbsp;&uarr;' : '&nbsp;&darr;' ) : '').'</a></th>'
+				: '').
+			"</tr>\n";
+
 
 			foreach ($members as $member)
 			{
-				echo '<a href="'.$this->href('', ($this->config['users_page'].'/'.$member['user_name'])).'">'.$member['user_name'].'</a> &mdash; <small>'.$this->get_time_string_formatted($member['signup_time'])."</small><br />\n";
+				echo '<tr class="lined">';
+
+				echo	'<td style="padding-left:5px;"><a href="'.$this->href('', ($this->config['users_page'].'/'.$member['user_name']), 'profile='.htmlspecialchars($member['user_name']).'').'">'.$member['user_name'].'</a></td>'.
+									'<td align="center">'.$member['total_pages'].'</td>'.
+									'<td align="center">'.$member['total_comments'].'</td>'.
+									'<td align="center">'.$member['total_revisions'].'</td>'.
+				($this->get_user()
+				?
+									'<td align="center">'.$this->get_time_string_formatted($member['signup_time']).'</td>'.
+									'<td align="center">'.( $member['hide_lastsession'] == 1
+				? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
+				: ( !$member['session_time'] || $member['session_time'] == SQL_NULLDATE
+				? '<em>'.$this->get_translation('UsersSessionNA').'</em>'
+				: $this->get_time_string_formatted($member['session_time']) )
+				).'</td>'
+				: '').
+							"</tr>\n";
 
 				$i = 0;
 				if (++$i >= $limit) break 1;
 			}
-			echo "</div>\n";
+			#echo "</div>\n";
+			echo "</table>\n";
 
 			unset($members, $member, $limit, $i);
 		}
