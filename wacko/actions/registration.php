@@ -232,7 +232,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 
 				// add your user page template here
 				$user_page_template	= '**((user:'.$user_name.' '.$user_name.'))** ('.$this->format('::+::', 'pre_wacko').')';
-				$change_summary		= 'auto created';
+				$change_summary		= $this->get_translation('NewUserAccount'); //'auto created';
 
 				// add user page
 				$this->save_page($this->config['users_page'].'/'.$user_name, '', $user_page_template, $change_summary, '', '', '', ($lang ? $lang : $this->config['language']), '', $user_name, true);

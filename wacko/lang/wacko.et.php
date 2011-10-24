@@ -30,6 +30,7 @@ $wacko_translation = array(
 	'NameTooLong'				=> 'Kasutajanimi on liiga pikk, maksimaalselt %2 sümbolit on lubatud.',
 	'NameAlphanumOnly'			=> 'Kasutajanimi peab olema vahemikus %1 ja %2 sümbolit pikk. Võid kasutada vaid kirjamärke.',
 	'NameCamelCaseOnly'			=> 'Kasutajanimi peab olema vahemikus %1 ja %2 sümbolit pikk. and WikiName formatted.',
+	'NewUserAccount'			=> 'new user account',
 
 	// login panel
 	'LoginWelcome' => 'Logi sisse',

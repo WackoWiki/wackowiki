@@ -30,6 +30,7 @@ $wacko_translation = array(
 	'NameTooLong'				=> 'The Username is too long, a maximum of %2 characters is allowed.',
 	'NameAlphanumOnly'			=> 'Username must be between %1 and %2 chars long and use only alphanumeric characters.',
 	'NameCamelCaseOnly'			=> 'Username must be between %1 and %2 chars long and WikiName formatted.',
+	'NewUserAccount'			=> 'new user account',
 
 	// login panel
 	'LoginWelcome'				=> 'Bejelentkezés',
