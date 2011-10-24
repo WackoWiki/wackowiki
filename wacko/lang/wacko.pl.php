@@ -30,6 +30,7 @@ $wacko_translation = array(
 	'NameTooLong'				=> 'Login jest za d³ugie, wymagane jest maks. %2 znaków.',
 	'NameAlphanumOnly'			=> 'Login musi mieæ min. %1, a maks. %2 znaków i sk³adaæ siê tylko z liter alfabetu ³aciñskiego oraz cyfr.',
 	'NameCamelCaseOnly'			=> 'Login musi mieæ min. %1, a maks. %2 znaków i WikiName formatted.',
+	'NewUserAccount'			=> 'new user account',
 
 	// login panel
 	'LoginWelcome' => 'Zaloguj siê',

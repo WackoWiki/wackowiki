@@ -30,6 +30,7 @@ $wacko_translation = array(
 	'NameTooLong'				=> 'Имя пользователя слишком длинное, максимально допустимая длина составляет %2 символов.',
 	'NameAlphanumOnly'			=> 'Имя пользователя должно быть от %1 до %2 знаков и должно содержать только буквы.',
 	'NameCamelCaseOnly'			=> 'Имя пользователя должно быть от %1 до %2 знаков и WikiName formatted.',
+	'NewUserAccount'			=> 'new user account',
 
 	// login panel
 	'LoginWelcome'				=> 'Вход',

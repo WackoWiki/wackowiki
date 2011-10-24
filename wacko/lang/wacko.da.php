@@ -30,6 +30,7 @@ $wacko_translation = array(
 	'NameTooLong'				=> 'Brugernavn er for langt, et maksimum på %2 tegn er tilladt.',
 	'NameAlphanumOnly'			=> 'Brugernavn skal være mellem %1 og %2 tegn langt og brug kun alfanumeriske tegn.',
 	'NameCamelCaseOnly'			=> 'Brugernavn skal være mellem %1 og %2 tegn langt og WikiNavn formateret.',
+	'NewUserAccount'			=> 'new user account',
 
 	// login panel
 	'LoginWelcome' => 'Log ind',
