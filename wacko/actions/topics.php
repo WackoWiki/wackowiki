@@ -190,7 +190,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 					).
 					'</td>'.
 					'<td align="center" style="white-space: nowrap;"><small title="'.( $admin ? $topic['ip'] : '' ).'">'.
-						'&nbsp;&nbsp;'.( $topic['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_name'] == GUEST ? $topic['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['user_name']).'">'.$topic['user_name'].'</a>' ) ).'&nbsp;&nbsp;<br />'.
+						'&nbsp;&nbsp;'.( $topic['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : ( $topic['owner_name'] == GUEST ? $topic['user_name'] : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$topic['owner_name']).'">'.$topic['owner_name'].'</a>' ) ).'&nbsp;&nbsp;<br />'.
 						'&nbsp;&nbsp;'.$this->get_time_string_formatted($topic['created']).'&nbsp;&nbsp;'.
 					'</small></td>'.
 					'<td align="center"><small>'.$topic['comments'].'</small></td>'.
