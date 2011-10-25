@@ -1102,7 +1102,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$this->page['body'] = $this->format($this->page['body'], 'bbcode');
 
 		$body = $this->format($this->page['body'], 'cleanwacko');
-		$body = ( strlen($body) > 300 ? substr($body, 0, 300).'[..]' : $body.' (-)' );
+		$body = ( strlen($body) > 300 ? substr($body, 0, 300).'[..]' : $body.' [..]' );
 
 		// display list
 		echo $this->form_open('moderate');
@@ -1284,7 +1284,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$comment['body'] = $this->format($comment['body'], 'bbcode');
 
 				$desc = $this->format($comment['body'], 'cleanwacko');
-				$desc = ( strlen($desc) > 300 ? substr($desc, 0, 300).'[..]' : $desc.' (-)' );
+				$desc = ( strlen($desc) > 300 ? substr($desc, 0, 300).'[..]' : $desc.' [..]' );
 
 				echo '<tr class="lined">'.
 						'<td valign="middle" style="width:10px;" class="label"><input name="'.$comment['page_id'].'" type="checkbox" value="id" '.( in_array($comment['page_id'], $set) ? 'checked="checked "' : '' ).'/></td>'.

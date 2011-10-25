@@ -1642,7 +1642,7 @@ class Wacko
 			if (!$comment_on_id && $this->forum)
 			{
 				$desc = $this->format(substr($body, 0, 500), 'cleanwacko');
-				$desc = ( strlen($desc) > 240 ? substr($desc, 0, 240).'[..]' : $desc.' (-)' );
+				$desc = ( strlen($desc) > 240 ? substr($desc, 0, 240).'[..]' : $desc.' [..]' );
 			}
 
 			// preformatter (macros and such)
