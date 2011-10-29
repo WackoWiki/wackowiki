@@ -70,8 +70,12 @@ if (strpos($init->method, '.xml') === false)
 }
 
 // out
-header('Cache-Control: public');
-header('Pragma: cache');
+if ( !headers_sent() )
+{
+	header('Cache-Control: public');
+	header('Pragma: cache');
+}
+
 ob_end_flush();
 
 ?>
