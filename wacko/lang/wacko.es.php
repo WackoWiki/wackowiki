@@ -250,6 +250,21 @@ $wacko_translation = array(
 	'MembersRemoved'		=> 'The member was removed from the group.',
 	'MembersDeleteInfo'	=> '* Note: Change will affect all members that are assigned to that group.',
 
+	// Groups action
+	'GroupsSearch'				=> 'Find Groups',
+	'GroupsFilter'				=> 'Search',
+	'GroupsOpenProfile'			=> 'View Profile',
+	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
+	'GroupsName'				=> 'Group',
+	'GroupsMembers'				=> 'Members',
+	'GroupsCreated'				=> 'Created',
+	'GroupsNotFound'			=> 'Group <tt>%2</tt> not found. Click <a href="%1">here</a>, to go to the main list.',
+	'GroupsProfile'				=> 'Profile',
+	'GroupsList'				=> 'View the entire list of groups',
+	'GroupsMembersSortName'		=> '[Sort by name]',
+	'GroupsMembersSortDate'		=> '[Sort by creation date]',
+	'GroupSpace'				=> 'Group space',
+
 	'UserEnabled'		=> 'Enabled',
 	'UsersAddNew'		=> 'Add new user',
 	'UsersDelete'		=> 'Are you sure you want to remove user ',
