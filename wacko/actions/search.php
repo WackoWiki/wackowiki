@@ -35,7 +35,7 @@ if (!function_exists('full_text_search'))
 
 		// load search results
 		$results = $wacko->load_all(
-			"SELECT a.page_id, a.title, a.tag, a.body, a.comment_on_id, MATCH(a.body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) AS score ". //
+			"SELECT a.page_id, a.title, a.tag, a.body, a.comment_on_id, a.lang, MATCH(a.body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) AS score ". //
 			"FROM ".$wacko->config['table_prefix']."page a ".
 			($for
 				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
@@ -66,11 +66,16 @@ if (!function_exists('tag_search'))
 		$pagination	= '';
 
 		$count_results = $wacko->load_all(
-			"SELECT page_id ".
-			"FROM ".$wacko->config['table_prefix']."page ".
-			"WHERE lower(tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
+			"SELECT a.page_id ".
+			"FROM ".$wacko->config['table_prefix']."page a ".
 			($for
-				? "AND supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
+				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				: "").
+			"WHERE lower(a.tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
+				"OR lower(a.title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
+			($for
+				? "AND (a.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' ".
+					  "OR b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' )"
 				: "")
 			, 1);
 
@@ -79,13 +84,18 @@ if (!function_exists('tag_search'))
 
 		// load search results
 		$results = $wacko->load_all(
-			"SELECT page_id, tag, comment_on_id ".
-			"FROM ".$wacko->config['table_prefix']."page ".
-			"WHERE lower(tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
+			"SELECT a.page_id, a.tag, a.title, a.comment_on_id, a.lang ".
+			"FROM ".$wacko->config['table_prefix']."page a ".
 			($for
-				? "AND supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
+				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
 				: "").
-			"ORDER BY supertag".
+			"WHERE lower(a.tag) LIKE binary lower('%".quote($wacko->dblink, $phrase)."%') ".
+				"OR lower(a.title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
+			($for
+				? "AND (a.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' ".
+					  "OR b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' )"
+					: "").
+			"ORDER BY a.supertag ".
 			"LIMIT {$pagination['offset']}, $limit");
 
 		return array($results, $pagination);
@@ -358,6 +368,14 @@ if ($phrase)
 						if ($style == 'ul' || $style == 'ol')	$output .= "<li>";
 						if ($style == 'comma' && $i > 0)		$output .= ",\n";
 
+						$_lang = '';
+
+						if ($this->page['lang'] != $page['lang'])
+						{
+							#$page['title'] = $this->do_unicode_entities($page['title'], $page['lang']);
+							$_lang = $page['lang'];
+						}
+
 						// generate preview
 						if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
 						{
@@ -369,7 +387,7 @@ if ($phrase)
 							$preview = "<div>".str_replace("\n", '<br />', $context)."</div>";
 						}
 
-						$output .= '<h3 style="display: inline;">'.$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']) )."</h3>".' ('.$count.')';
+						$output .= '<h3 style="display: inline;">'.$this->link('/'.$page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang )."</h3>".' ('.$count.')';
 						$output .= $preview;
 
 						// close item
