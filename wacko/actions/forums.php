@@ -94,11 +94,11 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				"SELECT sum(a.comments) as total ".
 				"FROM {$this->config['table_prefix']}page a ".
 				"WHERE a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ", 1);
-#$this->debug_print_r($posts);
+	#$this->debug_print_r($posts);
 
 			// load latest comment
 			$comment = $this->load_single(
-				"SELECT a.tag, a.title, a.comment_on_id, a.user_id, a.owner_id, a.created, a.lang, b.tag as comment_on, u.user_name ".
+				"SELECT a.tag, a.title, a.comment_on_id, a.user_id, a.owner_id, a.created, a.lang, b.tag as comment_on, b.title as topic_title, b.lang as topic_lang, u.user_name ".
 				"FROM {$this->config['table_prefix']}page a ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (a.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
@@ -133,9 +133,12 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 				if ($comment['comment_on_id'] == true)
 				{
-					#if ($this->page['lang'] != $comment['lang'])
-					#	$comment['title']= $this->do_unicode_entities($comment['title'], $comment['lang']);
-					echo '<small><a href="'.$this->href('', $comment['comment_on'], 'p=last').'#'.$comment['tag'].'">'.$this->get_page_title($comment['comment_on']).'</a><br />'.
+					if ($this->page['lang'] != $comment['topic_lang'])
+					{
+						$comment['topic_title'] = $this->do_unicode_entities($comment['topic_title'], $comment['topic_lang']);
+					}
+
+					echo '<small><a href="'.$this->href('', $comment['comment_on'], 'p=last').'#'.$comment['tag'].'">'.$comment['topic_title'].'</a><br />'.
 						( $comment['user_name'] == GUEST ? '<em>'.$this->get_translation('Guest').'</em>' : $comment['user_name'] ).' ('.$this->get_time_string_formatted($comment['created']).')</small>';
 				}
 				else

@@ -175,9 +175,12 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				$updated = true;
 			}
 
+			$topic['description'] = htmlspecialchars($topic['description']);
+
 			if ($this->page['lang'] != $topic['lang'])
 			{
-				$topic['title'] = $this->do_unicode_entities($topic['title'], $topic['lang']);
+				$topic['title']			= $this->do_unicode_entities($topic['title'], $topic['lang']);
+				$topic['description']	= $this->do_unicode_entities($topic['description'], $topic['lang']);
 			}
 
 			// print
@@ -212,7 +215,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			echo	'</td>'.
 				'</tr>'.
 				'<tr>'.
-					'<td colspan="6" class="description"><small>'.htmlspecialchars($topic['description']).'</small></td>'.
+					'<td colspan="6" class="description"><small>'.$topic['description'].'</small></td>'.
 				'</tr>'."\n";
 		}
 
