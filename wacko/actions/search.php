@@ -13,16 +13,20 @@ if (!function_exists('full_text_search'))
 		$pagination	= '';
 
 		$count_results = $wacko->load_all(
-			"SELECT page_id ".
-			"FROM ".$wacko->config['table_prefix']."page ".
-			"WHERE (( MATCH(body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) ".
-				"OR lower(title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
-				"OR lower(tag) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
+			"SELECT a.page_id ".
+			"FROM ".$wacko->config['table_prefix']."page a ".
+			($for
+				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				: "").
+			"WHERE (( MATCH(a.body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) ".
+				"OR lower(a.title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
+				"OR lower(a.tag) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
 				($for
-					? "AND supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
+					? "AND (a.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' ".
+					  "OR b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' )"
 					: "").
 				($filter
-					? "AND comment_on_id = '0'"
+					? "AND a.comment_on_id = '0'"
 					: "").
 				" )", 1);
 
@@ -31,16 +35,20 @@ if (!function_exists('full_text_search'))
 
 		// load search results
 		$results = $wacko->load_all(
-			"SELECT page_id, title, tag, body, comment_on_id, MATCH(body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) AS score ". //
-			"FROM ".$wacko->config['table_prefix']."page ".
-			"WHERE (( MATCH(body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) ".
-				"OR lower(title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
-				"OR lower(tag) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
+			"SELECT a.page_id, a.title, a.tag, a.body, a.comment_on_id, MATCH(a.body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) AS score ". //
+			"FROM ".$wacko->config['table_prefix']."page a ".
+			($for
+				? "LEFT JOIN ".$wacko->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) "
+				: "").
+			"WHERE (( MATCH(a.body) AGAINST('".quote($wacko->dblink, $phrase)."' IN BOOLEAN MODE) ".
+				"OR lower(a.title) LIKE lower('%".quote($wacko->dblink, $phrase)."%') ".
+				"OR lower(a.tag) LIKE lower('%".quote($wacko->dblink, $phrase)."%')) ".
 				($for
-					? "AND supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
+					? "AND (a.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' ".
+					  "OR b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' )"
 					: "").
 				($filter
-					? "AND comment_on_id = '0'"
+					? "AND a.comment_on_id = '0'"
 					: "").
 				" )".
 			"ORDER BY score DESC ".
