@@ -509,9 +509,9 @@ class Init
 	{
 		clearstatcache();
 
-		if (@file_exists('lock'))
+		if (@file_exists('config/lock'))
 		{
-			$access = file('lock');
+			$access = file('config/lock');
 
 			if ($access[0] == '1')
 			{

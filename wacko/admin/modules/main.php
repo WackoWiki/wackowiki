@@ -32,7 +32,7 @@ function admin_lock(&$engine, &$module)
 	if (isset($_POST['action']) && $_POST['action'] == 'lock')
 	{
 		$access	= $init->is_locked();
-		$file	= fopen('lock', 'w');
+		$file	= fopen('config/lock', 'w');
 
 		if ($access === true)
 		{
