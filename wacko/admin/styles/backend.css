@@ -85,7 +85,6 @@ ul {
 }
 
 
-
 /*	Form elements	*/
 
 form, input, select {
@@ -245,6 +244,9 @@ textarea {
 		#tools form {
 			display: inline;
 		}
+			#tools span {
+				font-family: 'Lucida Console', 'Courier New', monospace;
+			}
 			#tools input {
 				margin-top: -12px;
 				border: none;
@@ -515,7 +517,18 @@ div.menu {
 	padding: 20px;
 	}
 
-.debug, #debug li {
+.debug, #debug li, #debug pre {
 	font-size: 11px;
 	color: #888888;
+}
+
+div#loginbox {
+	font-family: 'Lucida Console', 'Courier New', monospace;
+	color: #073D69;
+	font-size: 12px;
+	background-color: #F0F4F5;
+	width:500px;
+	margin:50px auto;
+	padding: 30px;
+	border: 1px dotted #CCCCCC;
 }

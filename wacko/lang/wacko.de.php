@@ -1065,6 +1065,7 @@ $wacko_translation = array(
 	'LogAdminLoginSuccess'		=> 'Erfolgreichen Anmeldung im Verwaltungs-Panel',
 	'LogAdminLogout'			=> 'Abmeldung aus dem Verwaltungs-Panel',
 	'LogAdminLoginFailed'		=> '!!Failure to authorize into the administrative panel!!',
+	'LogAdminLoginLocked'		=> 'Locked login into the administrative panel',
 	'LogUserCookieForged'		=> '!!**An attempt to login on a forged cookie with login ##%1##**!!',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
 	'LogRemovedCluster'			=> '!!Removed **cluster** ##%1## (user %2)!!',
