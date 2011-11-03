@@ -37,6 +37,13 @@ $init->settings('cookie_hash',	hash('md5', $init->config['base_url'].$init->conf
 
 $init->settings('cookie_path',	preg_replace('|https?://[^/]+|i', '', $init->config['base_url'].''));
 
+if ($init->is_locked('lock_ap') === true)
+{
+	header('HTTP/1.1 503 Service Temporarily Unavailable');
+	echo "The site is temporarily unavailable due to system maintenance. Please try again later.";
+	exit;
+}
+
 // misc
 $init->session();
 
@@ -128,11 +135,25 @@ if (isset($_POST['password']))
 		$engine->set_session_cookie('admin', hash('sha256', $_POST['password']), '', ( $engine->config['tls'] == true ? 1 : 0 ));
 		$_SESSION['created'] = time();
 		$_SESSION['last_activity'] = time();
+		$_SESSION['failed_login_count'] == 0;
 		$engine->log(1, $engine->get_translation('LogAdminLoginSuccess', $engine->config['language']));
 		$engine->redirect(( $engine->config['tls'] == true ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href('admin.php')) : $engine->href('admin.php') ));
 	}
 	else
 	{
+		if (!isset($_SESSION['failed_login_count']))
+		{
+			$_SESSION['failed_login_count'] = 0;
+		}
+
+		$_SESSION['failed_login_count'] = $_SESSION['failed_login_count'] + 1;
+
+		if ($_SESSION['failed_login_count'] >= 4)
+		{
+			$init->lock('lock_ap');
+			$_SESSION['failed_login_count'] == 0;
+		}
+
 		$engine->log(1, str_replace('%1', $_POST['password'], $engine->get_translation('LogAdminLoginFailed', $engine->config['language'])));
 	}
 }
