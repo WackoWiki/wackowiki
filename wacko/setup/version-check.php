@@ -76,6 +76,8 @@ write_config_hidden_nodes(array('none' => ''));
 	@chmod ('_cache/pages', 0777);
 	@chmod ('_cache/queries', 0777);
 	@chmod ('config/config.php', 0777);
+	@chmod ('config/lock', 0660);
+	@chmod ('config/lock_ap', 0660);
 	@chmod ('files/global', 0777);
 	@chmod ('files/perpage', 0777);
 	@chmod ('xml', 0777);
@@ -94,6 +96,8 @@ write_config_hidden_nodes(array('none' => ''));
 	<li>_cache/pages   <?php echo output_image(is__writable('_cache/pages/')); ?></li>
 	<li>_cache/queries   <?php echo output_image(is__writable('_cache/queries/')); ?></li>
 	<li>config/config.php   <?php echo output_image(is__writable('config/config.php')); ?></li>
+	<li>config/config.php   <?php echo output_image(is__writable('config/lock')); ?></li>
+	<li>config/config.php   <?php echo output_image(is__writable('config/lock_ap')); ?></li>
 	<li>files/global   <?php echo output_image(is__writable('files/global/')); ?></li>
 	<li>files/perpage   <?php echo output_image(is__writable('files/perpage/')); ?></li>
 	<li>xml   <?php echo output_image(is__writable('xml/')); ?></li>
