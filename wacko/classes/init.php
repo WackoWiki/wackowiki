@@ -505,13 +505,16 @@ class Init
 	}
 
 	// CHECK WEBSITE LOCKING
-	function is_locked()
+	function is_locked($file = 'lock')
 	{
+		$path = 'config/';
+		$lock_file = $path.$file;
+
 		clearstatcache();
 
-		if (@file_exists('config/lock'))
+		if (@file_exists($lock_file))
 		{
-			$access = file('config/lock');
+			$access = file($lock_file);
 
 			if ($access[0] == '1')
 			{
@@ -526,6 +529,29 @@ class Init
 		{
 			return false;
 		}
+	}
+
+	// lock / unlock
+	// writes value to lock file
+	//		file	= lock file in config folder
+	function lock($file = 'lock')
+	{
+		$path		= 'config/';
+		$lock_file	= $path.$file;
+		$access		= $this->is_locked();
+		$file		= fopen($lock_file, 'w');
+
+		if ($access === true)
+		{
+			fwrite($file, '0');
+		}
+		else
+		{
+			fwrite($file, '1');
+		}
+
+		fclose($file);
+		unset($access);
 	}
 
 	// INSTALLER

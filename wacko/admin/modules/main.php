@@ -31,7 +31,8 @@ function admin_lock(&$engine, &$module)
 	// (un)lock website
 	if (isset($_POST['action']) && $_POST['action'] == 'lock')
 	{
-		$access	= $init->is_locked();
+		$init->lock();
+		/* $access	= $init->is_locked();
 		$file	= fopen('config/lock', 'w');
 
 		if ($access === true)
@@ -44,7 +45,7 @@ function admin_lock(&$engine, &$module)
 		}
 
 		fclose($file);
-		unset($access);
+		unset($access); */
 		$engine->set_user($_user, 0);
 		$engine->redirect('admin.php');
 	}
