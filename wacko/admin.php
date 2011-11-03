@@ -151,7 +151,7 @@ if (isset($_POST['password']))
 		if ($_SESSION['failed_login_count'] >= 4)
 		{
 			$init->lock('lock_ap');
-			$_SESSION['failed_login_count'] == 0;
+			$_SESSION['failed_login_count'] = 0;
 		}
 
 		$engine->log(1, str_replace('%1', $_POST['password'], $engine->get_translation('LogAdminLoginFailed', $engine->config['language'])));
