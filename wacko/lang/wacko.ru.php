@@ -1073,6 +1073,7 @@ $wacko_translation = array(
 	'LogAdminLoginSuccess'		=> 'Успешный вход в административную панель',
 	'LogAdminLogout'			=> 'Завершение работы в административной панели',
 	'LogAdminLoginFailed'		=> '!!Неудачная попытка авторизации в административной панели!!',
+	'LogAdminLoginLocked'		=> 'Locked login into the administrative panel',
 	'LogUserCookieForged'		=> '!!**Попытка авторизации по поддельному cookie с логином ##%1##**!!',
 	'LogRemovedPage'			=> '!!Удалена страница ##%1## (автор %2)!!',
 	'LogRemovedCluster'			=> '!!Удален **кластер** ##%1## (автор %2)!!',

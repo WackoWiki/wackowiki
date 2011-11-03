@@ -1063,6 +1063,7 @@ $wacko_translation = array(
 	'LogAdminLoginSuccess'		=> 'Connexion réussie au panneau d&rsquo;administration',
 	'LogAdminLogout'			=> 'Déconnexion du panneau d&rsquo;administration',
 	'LogAdminLoginFailed'		=> '!!Échec de la connexion au panneau d&rsquo;administration!!',
+	'LogAdminLoginLocked'		=> 'Locked login into the administrative panel',
 	'LogUserCookieForged'		=> '!!**tentative de connexion avec un cookie piraté à ##%1##**!!',
 	'LogRemovedPage'			=> '!!page ##%1##  supprimée (utilisateur %2)!!',
 	'LogRemovedCluster'			=> '!!**Groupe** supprimé ##%1## (utilisateur %2)!!',

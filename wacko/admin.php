@@ -123,13 +123,26 @@ if ($engine->config['recovery_password'] == false)
 }
 else
 {
-	$pwd = hash('sha256', $engine->config['recovery_password']);
+	$_processed_password = hash('sha256', $engine->config['recovery_password']);
 }
 
 // recovery preauthorization
 if (isset($_POST['password']))
 {
-	if (hash('sha256', $_POST['password']) == $pwd)
+	// Start Login Captcha, if there are too much login attempts (max_login_attempts)
+
+	// Only show captcha if the admin enabled it in the config file
+	/* if($engine->config['max_login_attempts'] && $existing_user['failed_login_count'] >= $engine->config['max_login_attempts'] + 1)
+	{
+		// captcha validation
+		if ($engine->validate_captcha() === false)
+		{
+			$error = $engine->get_translation('CaptchaFailed');
+		}
+	} */
+	// End Registration Captcha
+
+	if (hash('sha256', $_POST['password']) == $_processed_password)
 	{
 		$engine->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $engine->config['base_url'].'');
 		$engine->set_session_cookie('admin', hash('sha256', $_POST['password']), '', ( $engine->config['tls'] == true ? 1 : 0 ));
@@ -146,22 +159,23 @@ if (isset($_POST['password']))
 			$_SESSION['failed_login_count'] = 0;
 		}
 
+		$engine->log(1, str_replace('%1', $_POST['password'], $engine->get_translation('LogAdminLoginFailed', $engine->config['language'])));
+
 		$_SESSION['failed_login_count'] = $_SESSION['failed_login_count'] + 1;
 
-		if ($_SESSION['failed_login_count'] >= 4)
+		if ($_SESSION['failed_login_count'] >= 3)
 		{
 			$init->lock('lock_ap');
+			$engine->log(1, $engine->get_translation('LogAdminLoginLocked', $engine->config['language']));
 			$_SESSION['failed_login_count'] = 0;
 		}
-
-		$engine->log(1, str_replace('%1', $_POST['password'], $engine->get_translation('LogAdminLoginFailed', $engine->config['language'])));
 	}
 }
 
 // check authorization
 $user = '';
 
-if (isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']]) && $_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']] == $pwd)
+if (isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']]) && $_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']] == $_processed_password)
 {
 	$user = array('user_name' => $engine->config['admin_name']);
 }
@@ -174,6 +188,7 @@ if ($user == false)
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	<title>Authorization Admin</title>
+	<meta name="robots" content="noindex, nofollow, noarchive" />
 	<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/styles/backend.css" rel="stylesheet" type="text/css" media="screen" />
 	</head>
 	<body>
@@ -184,19 +199,36 @@ if ($user == false)
 			echo "<div class=\"info\">$message</div>";
 		}
 		?>
-		<strong><?php echo $engine->get_translation('Authorization'); ?></strong><br />
-		<?php echo $engine->get_translation('AuthorizationTip'); ?>
-		<br /><br />
-		<form action="admin.php" method="post" name="emergency">
-			<tt><strong><?php echo $engine->get_translation('LoginPassword'); ?>:</strong> <input name="password" type="password" autocomplete="off" value="" />
-			<input id="submit" type="submit" value="ok" /></tt>
-		</form>
+		<div id="loginbox">
+			<strong><?php echo $engine->get_translation('Authorization'); ?></strong><br />
+			<?php echo $engine->get_translation('AuthorizationTip'); ?>
+			<br /><br />
+			<form action="admin.php" method="post" name="emergency">
+				<label for="password"><strong><?php echo $engine->get_translation('LoginPassword'); ?>:</strong></label>
+				<input name="password" id="password" type="password" autocomplete="off" value="" />
+<?php
+				// captcha code starts
+
+				// Only show captcha if the admin enabled it in the config file
+				#if($engine->config['max_login_attempts'] && $_failed_login_count >= $engine->config['max_login_attempts'])
+				#{
+					#echo '<p>';
+					#echo '<br />';
+					#$engine->show_captcha(false);
+					#echo '</p>';
+				#}
+				// end captcha
+?>
+				<input id="submit" type="submit" value="ok" />
+			</form>
+		</div>
 	</body>
 	</html>
 <?php
 	exit;
 }
-unset($pwd);
+
+unset($_processed_password);
 
 // setting temporary admin user context
 global $_user;
@@ -239,6 +271,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>WackoWiki Management System</title>
+<meta name="robots" content="noindex, nofollow, noarchive" />
 <meta http-equiv="Content-Type" content="text/html; "/>
 <link href="<?php echo rtrim($engine->config['base_url']); ?>admin/styles/atom.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo rtrim($engine->config['base_url']); ?>admin/styles/wiki.css" rel="stylesheet" type="text/css" media="screen" />
@@ -253,8 +286,7 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php"><img src="<?php echo rtrim($engine->config['base_url']).$engine->config['upload_path'].'/'; ?>wacko_logo.png" alt="WackoWiki" width="108" height="50"></a>
 		</div>
 		<div id="tools">
-			<span style="font-family: 'Lucida Console', 'Courier New', monospace;">
-
+			<span>
 				<?php $time_left = round((1800 - (time() - $_SESSION['created'])) / 60);
 				echo "Time left: ".$time_left." minutes"; ?>
 				&nbsp;&nbsp;
@@ -267,7 +299,8 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 		</div>
 		<br style="clear: right" />
 		<div id="sections">
-			<a href="<?php echo rtrim($engine->config['base_url']); ?>" title="open the home page, you do not quit administration">Home Page</a><a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php?action=logout" title="quit system administration">Log out</a>
+			<a href="<?php echo rtrim($engine->config['base_url']); ?>" title="open the home page, you do not quit administration">Home Page</a>
+			<a href="<?php echo rtrim($engine->config['base_url']); ?>admin.php?action=logout" title="quit system administration">Log out</a>
 		</div>
 	</div>
 </div>
@@ -320,8 +353,10 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 				{
 					continue;
 				}
+
 				$category = $row['cat'];
 			}
+
 			unset($category);
 
 ?>
