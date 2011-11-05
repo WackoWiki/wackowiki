@@ -245,7 +245,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 			{
 				foreach ($langs as $lang)
 				{
-					echo "<option value=\"".$lang."\" ".($clang==$lang ? "selected=\"selected\"" : "").">".$lang."</option>\n";
+					echo "<option value=\"".$lang."\" ".($clang == $lang ? "selected=\"selected\"" : "").">".$lang."</option>\n";
 				}
 			}
 
