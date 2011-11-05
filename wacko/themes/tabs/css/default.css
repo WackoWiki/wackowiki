@@ -91,6 +91,16 @@ del a.outerlink:HOVER { color:#cc3300 }
 .time{ color:#999999; font-size: 9px; margin:5px 20px;}
 .debug { font-size: 11px; color: #888888;}
 
+#debug {
+	padding: 0 20px 20px 20px;
+	float: left;
+}
+.debug, #debug li, #debug pre {
+	font-size: 11px;
+	color: #888888;
+	/* font-family:"Lucida Console","Courier New",monospace; */
+}
+
 #commentsheader, #filesheader, #rateheader {
 	background-color: #eeeeee;
 	padding: 2px 50px;
@@ -361,6 +371,7 @@ width:0;
 #usermenu li {
 	border-left: 1px dotted #aaa;
 	float: left;
+	font-size: 100%;
 	/*line-height: 1.2em;
 	*/margin: 0 .5em 0 -.5em;
 	padding: 0 .5em 0 .5em;

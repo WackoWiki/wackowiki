@@ -152,7 +152,7 @@ if ($this->page)
 		{
 			if ($owner == 'System')
 			{
-				echo "<li>".$this->get_translation('Owner').": ".$owner."</li>\n";
+				echo $this->get_translation('Owner').": ".$owner."\n";
 			}
 			else
 			{
@@ -174,205 +174,22 @@ if ($this->page)
 if ($this->method == 'show')
 {
 	// files code starts
-	if ($this->has_access('read') && $this->config['footer_files'] == 1 && ($this->config['footer_files'] == 2 || $this->get_user()))
+	if ($this->has_access('read') && $this->config['footer_files'] == 1 || ($this->config['footer_files'] == 2 && $this->get_user()))
 	{
-		// store files display in session
-		if (!isset($_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->page['page_id']]))
-		{
-			$_SESSION[$this->config['session_prefix'].'_'."show_files"][$this->page['page_id']] = ($this->user_wants_files() ? "1" : "0");
-		}
-
-		if(isset($_GET['show_files']))
-		{
-			switch($_GET['show_files'])
-			{
-				case "0":
-					$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->page['page_id']] = 0;
-					break;
-				case "1":
-					$_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->page['page_id']] = 1;
-					break;
-			}
-		}
-
-		// display files!
-		if ($this->page && $_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->page['page_id']])
-		{
-			// display files header
-			?>
-<div id="filesheader"><?php echo $this->get_translation('Files_all') ?> <?php echo "[<a href=\"".$this->href('', '', 'show_files=0')."\">".$this->get_translation('HideFiles')."</a>]"; ?>
-</div>
-			<?php
-
-			echo "<div class=\"files\">";
-			echo $this->action('files', array('nomark' => 1));
-			echo "</div>";
-			// display form
-			echo "<div class=\"filesform\">\n";
-
-			if ($user = $this->get_user())
-			{
-				$user_name	= strtolower($this->get_user_name());
-				$registered	= true;
-			}
-			else
-			{
-				$user_name = GUEST;
-			}
-
-			if ($registered
-				&&
-				(
-				($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
-				($this->check_acl($user_name, $this->config['upload']))
-				)
-			)
-			{
-				echo $this->action('upload', array('nomark' => 1));
-			}
-
-			echo "</div>\n";
-		}
-		else
-		{
-?>
-<div id="filesheader">
-<?php
-if ($this->page['page_id'])
-{
-	$files = $this->load_all(
-		"SELECT upload_id ".
-		"FROM ".$this->config['table_prefix']."upload ".
-		"WHERE page_id = '". quote($this->dblink, $this->page['page_id']) ."'");
-}
-else
-{
-	$files = array();
-}
-
-switch (count($files))
-{
-	case 0:
-		echo $this->get_translation('Files_0');
-		break;
-	case 1:
-		echo $this->get_translation('Files_1');
-		break;
-	default:
-		print(str_replace('%1',count($files), $this->get_translation('Files_n')));
-}
-
-echo "[<a href=\"".$this->href('', '', 'show_files=1#filesheader')."\">".$this->get_translation('ShowFiles')."</a>]"; ?>
-
-</div>
-<?php
-		}
+		require_once('handlers/page/_files.php');
 	}
-	// end files
-	// comments code starts
-	if ($this->has_access('read') && ( $this->config['footer_comments'] == 1 && ($this->config['footer_comments'] == 2 || $this->get_user()) ) && $this->user_allowed_comments() )
+
+	// comments form output  starts
+	if ($this->has_access('read') && ($this->config['footer_comments'] == 1 || ($this->config['footer_comments'] == 2 && $this->get_user()) ) && $this->user_allowed_comments())
 	{
-		// load comments for this page
-		$comments = $this->load_comments($this->page['page_id']);
-
-		// store comments display in session
-		if (!isset($_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->page['page_id']]))
-		{
-			$_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->page['page_id']] = ($this->user_wants_comments() ? "1" : "0");
-		}
-
-		switch(isset($_GET['show_comments']))
-		{
-			case "0":
-				$_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->page['page_id']] = 0;
-				break;
-			case "1":
-				$_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->page['page_id']] = 1;
-				break;
-		}
-
-		// display comments!
-		if ($this->page && $_SESSION[$this->config['session_prefix'].'_'.'show_comments'][$this->page['page_id']])
-		{
-			// display comments header
-			?>
-<div id="commentsheader"><?php echo $this->get_translation('Comments_all') ?>
-			<?php echo "[<a href=\"".$this->href('', '', 'show_comments=0')."\">".$this->get_translation('HideComments')."</a>]"; ?>
-</div>
-			<?php
-
-			// display comments themselves
-			if ($comments)
-			{
-				foreach ($comments as $comment)
-				{
-					echo "<a name=\"".$comment['tag']."\"></a>\n";
-					echo "<div class=\"comment\">\n";
-					$del = '';
-
-					if ($this->is_admin() || $this->user_is_owner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->page['page_id'])))
-					{
-						echo "<div style=\"float:right;\" style='background:#ffcfa8; border: solid 1px; border-color:#cccccc'>".
-							"<a href=\"".$this->href('remove', $comment['tag'])."\" title=\"".$this->get_translation('DeleteTip')."\">".
-							"<img src=\"".$this->config['theme_url']."icons/delete.gif\" hspace=4 vspace=4 title=\"".$this->get_translation('DeleteText')."\" /></a>".
-							"</div>";
-					}
-
-					echo $this->format($comment['body'])."\n";
-					echo "<div class=\"commentinfo\">\n-- <a href=\"".$this->href('', $this->config['users_page'], 'profile='.$comment['user_name'])."\">".$comment['user_name']."</a> (".$comment['modified'].")\n</div>\n";
-					echo "</div>\n";
-				}
-			}
-
-			// display comment form
-			if ($this->has_access('comment'))
-			{
-				echo "<div class=\"commentform\">\n";
-
-				echo $this->get_translation('AddComment'); ?>
-<br />
-				<?php echo $this->form_open('addcomment'); ?>
-<textarea name="body" rows="6" cols="7" style="width: 100%"><?php echo (isset($_SESSION[$this->config['session_prefix'].'_'.'freecap_old_comment']) ? $_SESSION[$this->config['session_prefix'].'_'.'freecap_old_comment'] : ''); ?></textarea>
-				<?php
-				// captcha code starts
-
-				// Only show captcha if the admin enabled it in the config file
-				if ($this->config['captcha_new_comment'])
-				{
-					$this->show_captcha(false);
-				}
-				// end captcha
-				?>
-<input type="submit" value="<?php echo $this->get_translation('AddCommentButton'); ?>" accesskey="s" />
-				<?php echo $this->form_close();
-
-				echo "</div>\n";
-			}
-			// end comment form
-		}
-		else
-		{
-			?>
-<div id="commentsheader"><?php
-switch (count($comments))
-{
-	case 0:
-		echo $this->get_translation('Comments_0');
-		break;
-	case 1:
-		echo $this->get_translation('Comments_1');
-		break;
-	default:
-		echo str_replace('%1',count($comments), $this->get_translation('Comments_n'));
-}
-
-echo "[<a href=\"".$this->href('', '', 'show_comments=1#commentsheader')."\">".$this->get_translation('ShowComments')."</a>]"; ?>
-
-</div>
-<?php
-		}
+		require_once('handlers/page/_comments.php');
 	}
-	// comments end
+
+	// rating form output begins
+	if ($this->has_access('read') && $this->page && $this->config['footer_rating'] == 1 || ($this->config['footer_rating'] == 2 && $this->get_user()))
+	{
+		require_once('handlers/page/_rating.php');
+	}
 
 } //end of $this->method==show
 ?>
