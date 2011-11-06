@@ -234,11 +234,11 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	if (isset($_POST['preview']))
 	{
 ?>
-		<input name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
+		<input class="OkBtn_Top" name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
 		&nbsp;
-		<input name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
+		<input class="OkBtn_Top" name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
 		&nbsp;
-		<input type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+		<input class="CancelBtn_Top" type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 <?php
 		$preview = $this->format($body, 'pre_wacko');
 		$preview = $this->format($preview, 'wacko');
@@ -281,11 +281,11 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		$title = $this->page['title'];
 	}
 ?>
-	<input name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
+	<input class="OkBtn_Top" name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
 	&nbsp;
-	<input name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
+	<input class="OkBtn_Top" name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
 	&nbsp;
-	<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href('', '', '', 1))?>';" />
+	<input class="CancelBtn_Top" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href('', '', '', 1))?>';" />
 	<br />
 	<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
 <?php
@@ -406,11 +406,11 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 ?>
 		wE.init('postText','WikiEdit','edname-w','<?php echo $this->config['base_url'];?>images/wikiedit/');
 	</script><br />
-	<input name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
+	<input class="OkBtn" name="save" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
 	&nbsp;
-	<input name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
+	<input class="OkBtn" name="preview" type="submit" value="<?php echo $this->get_translation('EditPreviewButton'); ?>" />
 	&nbsp;
-	<input type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+	<input class="CancelBtn" type="button" value="<?php echo $this->get_translation('EditCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 <?php
 	echo $this->form_close();
 }

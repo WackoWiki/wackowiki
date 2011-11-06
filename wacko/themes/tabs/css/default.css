@@ -36,33 +36,75 @@ dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; curso
 
 /* ??? */
 .Shade {  clear:all; background:#ffffff;
-          height:6px; border-top: 1px solid #444444; }
+	height:6px; border-top: 1px solid #444444; }
 #page { background:#ffffff; padding:9px 10px 30px 10px; }
 .TextArea { width:100%; height:450px; border: 3px ridge; }
 
 .TabText { padding:1px 5px 1px 5px; font-size:12px; }
 .TabSpace .TabText { padding:5px; }
 .Tab2, .Tab  { float:left; background: #fefbe6;
-                 background-repeat:repeat-x; background-position:bottom;
-                 color:#666666; border-top:1px solid #444444 }
+	background-repeat:repeat-x; background-position:bottom;
+	color:#666666; border-top:1px solid #444444 }
 .TabSelected2, .TabSelected
-               { float:left; background: #ffffff;
-                 background-repeat:repeat-x; background-position:bottom;
-                 color:#666666 }
+	{ float:left; background: #ffffff;
+	background-repeat:repeat-x; background-position:bottom;
+	color:#666666 }
 .Tab2a       { float:left; background: #ffcfa8;
-                 background-repeat:repeat-x; background-position:bottom;
-                 color:#666666; border-top:1px solid #444444 }
+	background-repeat:repeat-x; background-position:bottom;
+	color:#666666; border-top:1px solid #444444 }
 .TabSelected2a, .Tab2a, .TabSelected2, .Tab2         { float:right; }
 
 .TabSpace { color:#666666; border-top:1px solid #444444; }
 
-#credits {
-  font-size: 11px;
-  color: #AAAAAA;
-  text-align: right;
-  padding: 0px 25px ;
+.OkBtn {
+	background: none repeat scroll 0 0 #C9E3F2;
+	color: #002000;
+	height: 40px;
+}
+.OkBtn:hover {
+	background: none repeat scroll 0 0 #FFF6BC;
+	color: #002000;
+	height: 40px;
+}
+.CancelBtn {
+	background: none repeat scroll 0 0 #CCCCCC;
+	color: #666666;
+	font-size: 10px;
+}
+.CancelBtn:hover {
+	background: none repeat scroll 0 0 #DDDDDD;
+	color: #666666;
+	font-size: 10px;
+}
+.OkBtn_Top {
+	background: none repeat scroll 0 0 #C9E3F2;
+	color: #002000;
+}
+.OkBtn_Top:hover {
+	background: none repeat scroll 0 0 #FFF6BC;
+	color: #002000;
+}
+.CancelBtn_Top {
+	background: none repeat scroll 0 0 #CCCCCC;
+	color: #666666;
+	font-size: 10px;
+}
+.CancelBtn_Top:hover {
+	background: none repeat scroll 0 0 #DDDDDD;
+	color: #666666;
+	font-size: 10px;
 }
 
+#credits {
+	font-size: 11px;
+	color: #AAAAAA;
+	text-align: right;
+	padding: 0px 25px ;
+}
+
+#pageedit {
+	padding-bottom: 10px;
+}
 
 /* fonts */
 body, td, p, li, #page { font-family: Georgia, Verdana; font-size:95% }
@@ -70,7 +112,7 @@ body, td, p, li, #page { font-family: Georgia, Verdana; font-size:95% }
 
 /* colors */
 #page { color:#444444 }
-del a:HOVER { color:#cc3300 }
+del a:hover { color:#cc3300 }
 del a.outerlink:LINK { color:#999999 }
 del a.outerlink:VISITED { color:#999999 }
 del a.outerlink:HOVER { color:#cc3300 }
@@ -145,7 +187,7 @@ fieldset { padding: 10px; }
 a:link { color: #0020cc; }
 a:visited { color: #8020cc; }
 a:hover { color:#cc3300 }
-a:ACTIVE { color:#ff0000; }
+a:active { color:#ff0000; }
 a.denied:link, a.denied:visited { color: #666666; }
 a.denied:hover { color:#cc3300 }
 
@@ -204,38 +246,41 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	float:left;
 	padding:0 0 0 0;
 }
-
+ul#buttons_1 {
+	margin-bottom: 0;
+}
 #buttons_1 li {
 	float:left;
 	padding-right:0.3em;
 	white-space:nowrap;
 	list-style:none outside none;
+	margin-bottom: 0;
 }
 
 .toolbar li {
 	background: ButtonFace;
 }
- .toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
-  background: ButtonFace;
-  color: ButtonText;
-  border: 1px solid ButtonFace;
-  padding: 1px;  margin: 0px;
-  cursor: pointer; cursor: hand;
- }
- .toolbar img {
-  width: 20px;
-  height: 20px;
- }
- .toolbar .btn-hover {
-  border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
- }
- .toolbar .btn-active,  .toolbar .btn-pressed {
-  border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
- }
- .toolbar .btn-pressed {
-  background: ButtonHighlight;
- }
- .toolbar .btn-separator {
+.toolbar .btn-, .toolbar  .btn-hover,  .toolbar .btn-active,  .toolbar .btn-pressed {
+	background: ButtonFace;
+	color: ButtonText;
+	border: 1px solid ButtonFace;
+	padding: 1px;  margin: 0px;
+	cursor: pointer; cursor: hand;
+}
+.toolbar img {
+	width: 20px;
+	height: 20px;
+}
+.toolbar .btn-hover {
+	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+}
+.toolbar .btn-active,  .toolbar .btn-pressed {
+	border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+}
+.toolbar .btn-pressed {
+	background: ButtonHighlight;
+}
+.toolbar .btn-separator {
 border-left:1px solid buttonshadow;
 border-right:1px solid buttonhighlight;
 height:18px;
@@ -243,11 +288,11 @@ margin:3px;
 padding:0;
 width:0;
 }
- .edname-w, .edname-r, .edname-s
-            { font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
- .edname-w  { background: #1E9905; }
- .edname-r  { background: #2A45D0; }
- .edname-s  { background: #D08C2A; }
+.edname-w, .edname-r, .edname-s
+	{ font: bold 14px Arial; border: 3px solid #D4D0C8; padding: 0 7px; color:#ffffff; vertical-align: middle;}
+.edname-w  { background: #1E9905; }
+.edname-r  { background: #2A45D0; }
+.edname-s  { background: #D08C2A; }
 
 .autocomplete-inplace {
 	background: ButtonFace;
@@ -255,8 +300,8 @@ width:0;
 	padding: 2px;
 	font: 12px Arial;
 }
- .autocomplete-inplace div          { padding: 2px 5px; cursor: pointer; cursor: hand; }
- .autocomplete-inplace div.ac-over- { color:#ffffff; background: #1E9905; }
+.autocomplete-inplace div          { padding: 2px 5px; cursor: pointer; cursor: hand; }
+.autocomplete-inplace div.ac-over- { color:#ffffff; background: #1E9905; }
 
 
 /* CSS form formater */

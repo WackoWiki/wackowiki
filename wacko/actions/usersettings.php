@@ -339,9 +339,9 @@ else if ($user = $this->get_user())
 	<tr>
 	<td class="form_left">&nbsp;</td>
 	<td class="form_right">
-		<input id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
+		<input class="OkBtn" id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
 		&nbsp;
-		<input id="logout" name="logout" type="button" onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" value="<?php echo $this->get_translation('LogoutButton'); ?>" />
+		<input class="CancelBtn" id="logout" name="logout" type="button" onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" value="<?php echo $this->get_translation('LogoutButton'); ?>" />
 	</td>
 	</tr>
 	</tbody>
@@ -486,9 +486,9 @@ else if ($user = $this->get_user())
 	<tr>
 	<td class="form_left">&nbsp;</td>
 	<td class="form_right">
-		<input id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
+		<input class="OkBtn" id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('UpdateSettingsButton'); ?>" />
 		&nbsp;
-		<input id="logout" name="logout" type="button" onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" value="<?php echo $this->get_translation('LogoutButton'); ?>" />
+		<input class="CancelBtn" id="logout" name="logout" type="button" onclick="document.location='<?php echo $this->href('', '', 'action=logout'); ?>'" value="<?php echo $this->get_translation('LogoutButton'); ?>" />
 	</td>
 	</tr>
 	</tbody>

@@ -152,7 +152,7 @@ if (isset($_GET['secret_code']) || isset($_POST['secret_code']))
 					?>
 				</p>
 				<p>
-				<input type="submit" value="<?php echo $this->get_translation('RegistrationButton'); ?>" />
+				<input class="OkBtn" type="submit" value="<?php echo $this->get_translation('RegistrationButton'); ?>" />
 				</p>
 			</div>
 			<?php
@@ -298,7 +298,7 @@ else if (!isset($forgot) && $user = $this->get_user())
 			<input type="password" id="confpassword" name="confpassword" size="24" />
 		</p>
 		<p>
-			<input type="submit" value="<?php echo $this->get_translation('RegistrationButton'); ?>" />
+			<input class="OkBtn" type="submit" value="<?php echo $this->get_translation('RegistrationButton'); ?>" />
 		</p>
 	</div>
 <?php
@@ -390,7 +390,7 @@ else
 			<input type="text" id="email" name="email" size="24" />
 		</p>
 		<p>
-			<input type="submit" value="<?php echo $this->get_translation('SendButton'); ?>" />
+			<input class="OkBtn" type="submit" value="<?php echo $this->get_translation('SendButton'); ?>" />
 		</p>
 		</div>
 		<?php

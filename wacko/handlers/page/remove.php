@@ -218,16 +218,17 @@ if ($this->is_admin() ||
 				}
 			}
 
-		// show backlinks
-		echo "<br />";
-		echo $this->action('backlinks', array('nomark' => 0));
+			// show backlinks
+			echo "<br />";
+			echo $this->action('backlinks', array('nomark' => 0));
 ?>
-		<br /><br />
-		<input type="hidden" name="delete" value="1" />
-		<input id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />&nbsp;
-		<input id="button" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
-		<br />
-<?php echo $this->form_close();
+			<br /><br />
+			<input type="hidden" name="delete" value="1" />
+			<input class="OkBtn" id="submit" name="submit" type="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />&nbsp;
+			<input class="CancelBtn" id="button" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+			<br />
+<?php
+			echo $this->form_close();
 		}
 	}
 }

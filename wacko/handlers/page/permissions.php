@@ -63,10 +63,10 @@ if ($this->user_is_owner() || $this->is_admin())
 			{
 				// check user exists
 				$user = $this->load_single(
-						"SELECT user_id, user_name, email, email_confirm ".
-						"FROM {$this->config['user_table']} ".
-						"WHERE user_name = '".quote($this->dblink, $new_owner)."' ".
-						"LIMIT 1");
+					"SELECT user_id, user_name, email, email_confirm ".
+					"FROM {$this->config['user_table']} ".
+					"WHERE user_name = '".quote($this->dblink, $new_owner)."' ".
+					"LIMIT 1");
 
 				if ($user == true)
 				{
@@ -119,10 +119,10 @@ if ($this->user_is_owner() || $this->is_admin())
 
 			// Change permissions for all comments on this page
 			$comments = $this->load_all(
-					"SELECT page_id ".
-					"FROM ".$this->config['table_prefix']."page ".
-					"WHERE comment_on_id = '".$this->page['page_id']."' ".
-						"AND owner_id='".quote($this->dblink, $this->get_user_id())."'");
+				"SELECT page_id ".
+				"FROM ".$this->config['table_prefix']."page ".
+				"WHERE comment_on_id = '".$this->page['page_id']."' ".
+					"AND owner_id='".quote($this->dblink, $this->get_user_id())."'");
 
 			foreach ($comments as $num => $page)
 			{
@@ -258,11 +258,9 @@ if ($this->user_is_owner() || $this->is_admin())
 	}
 	?>
 </select></p>
-<p><input id="submit" type="submit"
-	value="<?php echo $this->get_translation('ACLStoreButton'); ?>"
-	accesskey="s" /> &nbsp; <input id="button" type="button"
-	value="<?php echo $this->get_translation('ACLCancelButton'); ?>"
-	onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+<p>
+	<input class="OkBtn" id="submit" type="submit" value="<?php echo $this->get_translation('ACLStoreButton'); ?>" accesskey="s" /> &nbsp;
+	<input class="CancelBtn" id="button" type="button" value="<?php echo $this->get_translation('ACLCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 </p>
 </div>
 	<?php
