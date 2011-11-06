@@ -97,7 +97,7 @@ else if ($user = $this->get_user())
 
 	$this->set_message($output);
 
-	echo "<p><input type=\"button\" value=\"".$this->get_translation('LogoutButton')."\" onclick=\"document.location='".$this->href('', '', 'action=logout')."'\" /></p>";
+	echo "<p><input class=\"CancelBtn\" type=\"button\" value=\"".$this->get_translation('LogoutButton')."\" onclick=\"document.location='".$this->href('', '', 'action=logout')."'\" /></p>";
 	echo '<p>'.$this->compose_link_to_page($this->get_translation('AccountLink'), '', $this->get_translation('AccountText'), 0).' | <a href="?action=clearcookies">'.$this->get_translation('ClearCookies').'</a></p>';
 	echo '</div>';
 
@@ -272,7 +272,7 @@ else
 	// end captcha
 
 	echo '<p>'."\n";
-	echo '<input type="submit" value="'.$this->get_translation('LoginButton').'" tabindex="4" />'."\n";
+	echo '<input class="OkBtn" type="submit" value="'.$this->get_translation('LoginButton').'" tabindex="4" />'."\n";
 	#echo '&nbsp;&nbsp;&nbsp;<small><a href="?action=clearcookies">Delete all cookies</a></small>';
 	echo '</p>'."\n";
 	echo '<p>'.$this->format_translation('ForgotLink').'</p>'."\n";

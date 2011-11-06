@@ -92,9 +92,9 @@ if ($registered
 	<br />
 	<input type="hidden" name="remove" value="<?php echo $_GET['remove']?>" />
 	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
-	<input name="submit" type="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />
+	<input class="OkBtn" name="submit" type="submit" value="<?php echo $this->get_translation('RemoveButton'); ?>" />
 	&nbsp;
-	<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+	<input class="CancelBtn" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 	<br />
 	<br />
 <?php
@@ -161,9 +161,9 @@ if ($registered
 
 	<input type="hidden" name="edit" value="<?php echo $_GET['edit']?>" />
 	<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
-	<input name="submit" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
+	<input class="OkBtn" name="submit" type="submit" value="<?php echo $this->get_translation('EditStoreButton'); ?>" />
 	&nbsp;
-	<input type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
+	<input class="CancelBtn" type="button" value="<?php echo str_replace("\n"," ",$this->get_translation('EditCancelButton')); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 	<br />
 	<br />
 <?php

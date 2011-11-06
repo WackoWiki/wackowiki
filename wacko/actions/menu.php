@@ -13,6 +13,7 @@ if (!function_exists('menu_sorting'))
 		{
 			return 0;
 		}
+
 		return ($a['menu_position'] < $b['menu_position'])
 			? -1
 			: 1;
@@ -36,7 +37,11 @@ if (!function_exists('load_user_menu'))
 
 // {{menu system=[0|1]}}
 
-if (!isset($system)) $system = 0;
+if (!isset($system))
+{
+	$system = 0;
+}
+
 $message	= '';
 
 // get default menu items
@@ -200,7 +205,8 @@ if (isset($_POST['_user_menu']))
 			if ($deletion != '')
 			{
 				$this->sql_query(
-					"DELETE FROM ".$this->config['table_prefix']."menu ".
+					"DELETE ".
+					"FROM ".$this->config['table_prefix']."menu ".
 					"WHERE menu_id IN (".$deletion.")");
 			}
 		}

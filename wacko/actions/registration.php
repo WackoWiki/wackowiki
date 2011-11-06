@@ -393,7 +393,7 @@ if (!isset($_POST['confirm']))
 		}
 		// end captcha
 
-		echo '<p><input type="submit" value="'.$this->get_translation('RegistrationButton').'" /></p>';
+		echo '<p><input class="OkBtn" type="submit" value="'.$this->get_translation('RegistrationButton').'" /></p>';
 
 		echo $this->form_close();
 		echo '</div>';
