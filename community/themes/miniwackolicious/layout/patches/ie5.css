@@ -1,9 +1,0 @@
-/* Patches for MS Internet Explorer 6
-   */
-
-@import url('ie6.css'); /* inherit IE6 + IE7 patches */
-
-body { text-align:center; }
-.sitewrapper { text-align:left; }
-
-div.nav-main { width:100%; }
