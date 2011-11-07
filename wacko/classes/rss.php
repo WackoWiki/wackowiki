@@ -242,13 +242,13 @@ class RSS
 		$xml .= "<docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 		#$xml .= "<generator>WackoWiki ".WACKO_VERSION."</generator>\n";//!!!
 
-		if ($pages = $this->engine->load_recently_comment())
+		if ($comments = $this->engine->load_recently_comment())
 		{
-			foreach ($pages as $i => $page)
+			foreach ($comments as $i => $comment)
 			{
 				if ($this->engine->config['hide_locked'])
 				{
-					$access = $this->engine->has_access('read', $page['page_id'], GUEST);
+					$access = $this->engine->has_access('read', $comment['page_id'], GUEST);
 				}
 				else
 				{
@@ -259,16 +259,16 @@ class RSS
 				{
 					$count++;
 					$xml .= "<item>\n";
-					$xml .= "<title>".$page['title']." ".$this->engine->get_translation('To')." ".$page['page_tag']." ".$this->engine->get_translation('From')." ".
-						($page['user_name']
-							? $page['user_name']
+					$xml .= "<title>".$comment['title']." ".$this->engine->get_translation('To')." ".$comment['page_title']." ".$this->engine->get_translation('From')." ".
+						($comment['user_name']
+							? $comment['user_name']
 							: $this->engine->get_translation('Guest')).
 						"</title>\n";
-					$xml .= "<link>".$this->engine->href('show', $page['tag'], '')."</link>\n";
-					$xml .= "<guid>".$this->engine->href('show', $page['tag'], '')."</guid>\n";
-					$xml .= "<pubDate>".date('r', strtotime($page['modified']))."</pubDate>\n";
-					$xml .= "<dc:creator>".$page['user_name']."</dc:creator>\n";
-					$text = $this->engine->format($page['body_r'], "post_wacko");
+					$xml .= "<link>".$this->engine->href('show', $comment['tag'], '')."</link>\n";
+					$xml .= "<guid>".$this->engine->href('show', $comment['tag'], '')."</guid>\n";
+					$xml .= "<pubDate>".date('r', strtotime($comment['modified']))."</pubDate>\n";
+					$xml .= "<dc:creator>".$comment['user_name']."</dc:creator>\n";
+					$text = $this->engine->format($comment['body_r'], "post_wacko");
 					$xml .= "<description><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></description>\n";
 					#$xml .= "<content:encoded><![CDATA[".str_replace("]]>", "]]&gt;", $text)."]]></content:encoded>\n";
 					$xml .= "</item>\n";
