@@ -10,18 +10,23 @@ if (!defined('IN_WACKO'))
 <?php
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href('show'));
+if (!$this->page)
+{
+	$this->redirect($this->href('show'));
+}
 
 // deny for comment
 if ($this->page['comment_on_id'])
+{
 	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1')."#".$this->page['tag']);
+}
 
 if ($user = $this->get_user())
 {
 	if ($global = isset($_GET['global']))
 	{
-		$title = str_replace('%1', $this->href('referrers', '', 'global=1'),$this->get_translation('DomainsSitesPagesGlobal'));
-		$referrers = $this->load_referrers();
+		$title		= str_replace('%1', $this->href('referrers', '', 'global=1'),$this->get_translation('DomainsSitesPagesGlobal'));
+		$referrers	= $this->load_referrers();
 	}
 	else
 	{
@@ -37,7 +42,8 @@ if ($user = $this->get_user())
 		$referrers = $this->load_referrers($this->page['page_id']);
 	}
 
-	print("<strong>$title</strong><br /><br />\n");
+	echo "<strong>$title</strong><br /><br />\n";
+
 	if ($referrers)
 	{
 		for ($a = 0; $a < count($referrers); $a++)
@@ -57,21 +63,20 @@ if ($user = $this->get_user())
 
 		array_multisort($referrer_sites, SORT_DESC, SORT_NUMERIC);
 		reset($referrer_sites);
-	?>
-	<div class="cssform3">
-		<?php
+
+		echo '<div class="cssform3">';
+
 		foreach ($referrer_sites as $site => $site_count)
-		{ ?>
-		<span class="site_count"><?php echo $site_count; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;<?php print((($site != 'unknown') ? "<a href=\"http://$site\">$site</a>" : $site)); ?><br />
-		<?php
+		{
+			echo '<span class="site_count">'.$site_count.'</span>&nbsp;&nbsp;&nbsp;&nbsp;'.((($site != 'unknown') ? '<a href="http://$site">$site</a>' : $site)).'<br />';
+
 		}
-		?>
-	</div>
-	<?php
+
+		echo '</div>';
 	}
 	else
 	{
-		print($this->get_translation('NoneReferrers')."<br />\n");
+		echo $this->get_translation('NoneReferrers')."<br />\n";
 	}
 
 	if ($global)
@@ -85,7 +90,8 @@ if ($user = $this->get_user())
 }
 else
 {
-	print($this->get_translation('ReadAccessDenied'));
+	echo $this->get_translation('ReadAccessDenied');
 }
+
 ?>
 </div>
