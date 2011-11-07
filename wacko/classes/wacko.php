@@ -1487,6 +1487,30 @@ class Wacko
 	function get_child_list()
 	{}
 
+	function bad_words($text)
+	{
+		/*
+		ANTISPAM
+
+		We load in the external antispam.conf file and then search the entire body content for each of the
+		words defined as spam.  If we find any then we return from the function, not saving the changes.
+		See bug#188 - Enhanced Spam filtering
+		*/
+		$this->spam = file('config/antispam.conf', 1);
+
+		if ($this->config['spam_filter'] && is_array($this->spam))
+		{
+			foreach ($this->spam as $spam)
+			{
+				if (strpos($text, trim($spam))!== false)
+				{
+					$this->set_message('Error: Identified Potential Spam: '.$spam) ; // TODO: localize
+					return true;
+				}
+			}
+		}
+	}
+
 	// MAILER
 	// $email_to			- recipient address
 	// $subject, $message	- self-explaining
@@ -1587,24 +1611,13 @@ class Wacko
 
 		$page_id = $this->get_page_id($tag);
 
-		/*
-			ANTISPAM
 
-			We load in the external antispam.conf file and then search the entire body content for each of the
-			words defined as spam.  If we find any then we return from the function, not saving the changes. See bug#188 - Enhanced Spam filtering
-		*/
-		$this->spam = file('config/antispam.conf', 1);
-
-		if ($this->config['spam_filter'] && is_array($this->spam))
+		//	Check for bad words.  If we find any then we return from the function, not saving the changes. See bug#188 - Enhanced Spam filtering
+		if ($this->bad_words($body))
 		{
-			foreach ($this->spam as $spam)
-			{
-				if (strpos($body, trim($spam))!== false)
-				{
-					return 'Error: Identified Potential Spam: '.$spam;
-				}
-			}
+			return;
 		}
+
 
 		// write tag
 		if(isset($_POST['tag']))
