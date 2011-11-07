@@ -125,7 +125,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 								: ''
 							);
 
-			echo '<li class="lined'.$viewed.'"><span class=\"dt\">'.date($this->config['time_format_seconds'], strtotime($time)).'&nbsp;&nbsp;</span>';
+			echo '<li class="lined'.$viewed.'"><span class="dt">'.date($this->config['time_format_seconds'], strtotime($time)).'&nbsp;&nbsp;</span>';
 
 			// new file
 			if ($page['ctype'] == 2)
