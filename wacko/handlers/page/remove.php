@@ -92,7 +92,7 @@ if ($this->is_admin() ||
 				}
 			}
 
-			if ($this->remove_page($this->tag, $comment_on_id, $dontkeep))
+			if ($this->remove_page($this->page['page_id'], $comment_on_id, $dontkeep))
 			{
 				if ($this->config['enable_feeds'])
 				{
@@ -134,14 +134,14 @@ if ($this->is_admin() ||
 
 				// get list of pages in the cluster
 				if ($list = $this->load_all(
-				"SELECT tag ".
+				"SELECT page_id ".
 				"FROM {$this->config['table_prefix']}page ".
 				"WHERE tag LIKE '".quote($this->dblink, $this->tag.'/%')."'"))
 				{
 					// remove by one page at a time
 					foreach ($list as $row)
 					{
-						$this->remove_page($row['tag'], '', $dontkeep);
+						$this->remove_page($row['page_id'], '', $dontkeep);
 					}
 
 					unset($list, $row);
