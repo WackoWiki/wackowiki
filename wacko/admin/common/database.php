@@ -20,12 +20,6 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'page_id',
 				'limit' => 1000
 			),
-			$engine->config['table_prefix'].'menu' => array(
-				'name'	=> $engine->config['table_prefix'].'menu',
-				'where'	=> false,
-				'order'	=> 'menu_id',
-				'limit' => 1000
-			),
 			$engine->config['table_prefix'].'cache' => array(
 				'name'	=> $engine->config['table_prefix'].'cache',
 				'where'	=> false,
@@ -74,17 +68,17 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'log_time',
 				'limit' => 1000
 			),
+			$engine->config['table_prefix'].'menu' => array(
+					'name'	=> $engine->config['table_prefix'].'menu',
+					'where'	=> false,
+					'order'	=> 'menu_id',
+					'limit' => 1000
+			),
 			$engine->config['table_prefix'].'page' => array(
 				'name'	=> $engine->config['table_prefix'].'page',
 				'where'	=> true,
 				'order'	=> 'tag',
 				'limit' => 500
-			),
-			$engine->config['table_prefix'].'watch' => array(
-				'name'	=> $engine->config['table_prefix'].'watch',
-				'where'	=> 'page_id',
-				'order'	=> 'page_id',
-				'limit' => 1000
 			),
 			$engine->config['table_prefix'].'poll' => array(
 				'name'	=> $engine->config['table_prefix'].'poll',
@@ -127,6 +121,12 @@ if (isset($tables, $directories) !== true)
 				'where'	=> false,
 				'order'	=> 'user_id',
 				'limit' => 1000
+			),
+			$engine->config['table_prefix'].'watch' => array(
+							'name'	=> $engine->config['table_prefix'].'watch',
+							'where'	=> 'page_id',
+							'order'	=> 'page_id',
+							'limit' => 1000
 			)
 		);
 
@@ -153,7 +153,9 @@ function SetPackDir(&$engine, $time)
 
 	clearstatcache();
 	if (is_dir($engine->config['upload_path_backup'].'/'.$pack) !== true)
-		 mkdir($engine->config['upload_path_backup'].'/'.$pack);
+	{
+		mkdir($engine->config['upload_path_backup'].'/'.$pack);
+	}
 
 	chmod($engine->config['upload_path_backup'].'/'.$pack, 0755);
 
@@ -182,7 +184,9 @@ function RemovePack(&$engine, $pack)
 			while (false !== ($file = readdir($dh)))
 			{
 				if (is_file($packdir.$subdir.'/'.$file) === true)
+				{
 					unlink($packdir.$subdir.'/'.$file);
+				}
 			}
 
 			closedir($dh);
@@ -223,7 +227,9 @@ function RemovePack(&$engine, $pack)
 		while (false !== ($file = readdir($dh)))
 		{
 			if (is_file($packdir.$file) === true)
+			{
 				unlink($packdir.$file);
+			}
 		}
 
 		closedir($dh);
@@ -366,7 +372,10 @@ function GetData(&$engine, &$tables, $pack, $table, $root = '')
 	$limit = "LIMIT %1, {$tables[$table]['limit']} ";
 
 	// tweak
-	if ($table == $engine->config['table_prefix'].'page') $tweak = true;
+	if ($table == $engine->config['table_prefix'].'page')
+	{
+		$tweak = true;
+	}
 
 	// check file existance
 	clearstatcache();
@@ -391,6 +400,7 @@ function GetData(&$engine, &$tables, $pack, $table, $root = '')
 	str_replace('%1', $r, $limit)))
 	{
 		$i = 0;
+
 		foreach ($data as $row)
 		{
 			$r++;	// count rows for LIMIT clause
@@ -429,7 +439,7 @@ function GetData(&$engine, &$tables, $pack, $table, $root = '')
 	return $t;
 }
 
-// store compressed openSpace data files into the backup pack
+// store compressed WackoWiki data files into the backup pack
 function GetFiles(&$engine, $pack, $dir, $root)
 {
 	// set file mask for cluster backup
@@ -467,6 +477,7 @@ function GetFiles(&$engine, $pack, $dir, $root)
 
 	// open read (data) dir and run through all files
 	$t = 0;
+
 	if ($dh = opendir($dir))
 	{
 		while (false !== ($filename = readdir($dh)))
@@ -501,7 +512,10 @@ function GetFiles(&$engine, $pack, $dir, $root)
 
 		return $t;
 	}
-	else return false;
+	else
+	{
+		return false;
+	}
 }
 
 // restore tables structure
@@ -656,7 +670,10 @@ function PutFiles(&$engine, $pack, $dir, $keep = false)
 
 		return $total;
 	}
-	else return false;
+	else
+	{
+		return false;
+	}
 }
 
 ?>

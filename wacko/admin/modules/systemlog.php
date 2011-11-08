@@ -182,9 +182,13 @@ function admin_systemlog(&$engine, &$module)
 				$row['level'] = '<small class="grey">'.$engine->get_translation('LogLevel'.$row['level']).'</small>';
 			}
 
+			// tz offset
+			$time_tz = $engine->get_time_tz( strtotime($row['log_time']) );
+			$time_tz = date($engine->config['date_precise_format'], $time_tz);
+
 			echo '<tr class="lined">'."\n".
 					'<td valign="top" align="center">'.$row['log_id'].'</td>'.
-					'<td valign="top" align="center"><small>'.date($engine->config['date_precise_format'], strtotime($row['log_time'])).'</small></td>'.
+					'<td valign="top" align="center"><small>'.$time_tz.'</small></td>'.
 					'<td valign="top" align="center" style="padding-left:5px; padding-right:5px;">'.$row['level'].'</td>'.
 					'<td valign="top">'.$engine->format($row['message'], 'post_wacko').'</td>'.
 					'<td valign="top" align="center"><small>'.
