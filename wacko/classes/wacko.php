@@ -5634,7 +5634,7 @@ class Wacko
 		return true;
 	}
 
-	function remove_page($tag, $comment_on_id = 0, $dontkeep = 0)
+	function remove_page($page_id, $comment_on_id = 0, $dontkeep = 0)
 	{
 		if (!$tag)
 		{
@@ -5645,7 +5645,7 @@ class Wacko
 		if ($this->config['store_deleted_pages'] && !$dontkeep)
 		{
 			// loading page
-			$page = $this->load_page($tag);
+			$page = $this->load_page('', $page_id);
 
 			// unlink comment tag
 			if ($page['comment_on_id'] != 0)
@@ -5666,7 +5666,7 @@ class Wacko
 		// delete page
 		$this->sql_query(
 			"DELETE FROM ".$this->config['table_prefix']."page ".
-			"WHERE tag = '".quote($this->dblink, $tag)."' ");
+			"WHERE page_id = '".quote($this->dblink, $page_id)."' ");
 
 		// for removed comment correct comments count and date on commented page
 		if ($comment_on_id)
@@ -5710,13 +5710,13 @@ class Wacko
 		}
 
 		if ($comments = $this->load_all(
-		"SELECT a.tag FROM ".$this->config['table_prefix']."page a ".
+		"SELECT a.page_id FROM ".$this->config['table_prefix']."page a ".
 			"INNER JOIN ".$this->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 		"WHERE b.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' "))
 		{
 			foreach ($comments as $comment)
 			{
-				$this->remove_page($comment['tag'], '', $dontkeep);
+				$this->remove_page($comment['page_id'], '', $dontkeep);
 			}
 		}
 
