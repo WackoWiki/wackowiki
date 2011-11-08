@@ -5636,7 +5636,7 @@ class Wacko
 
 	function remove_page($page_id, $comment_on_id = 0, $dontkeep = 0)
 	{
-		if (!$tag)
+		if (!$page_id)
 		{
 			return false;
 		}
@@ -5861,6 +5861,7 @@ class Wacko
 				"DELETE FROM {$this->config['table_prefix']}upload ".
 				"WHERE page_id = '".quote($this->dblink, $page['page_id'])."'");
 		}
+
 		return true;
 	}
 
