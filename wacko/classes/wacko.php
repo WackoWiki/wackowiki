@@ -178,7 +178,7 @@ class Wacko
 		$page = $this->load_single(
 			"SELECT tag ".
 			"FROM ".$this->config['table_prefix']."page ".
-			"WHERE page_id = '".$page_id."' ".
+			"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
 			"LIMIT 1");
 
 		return $page['tag'];;
@@ -4866,9 +4866,18 @@ class Wacko
 	// set config value
 	function set_config($config_name, $config_value, $is_dynamic = false, $delete_cache = false)
 	{
-		$sql = "UPDATE {$this->config['table_prefix']}config
-			SET config_value = '".quote($this->dblink, $config_value)."'
-			WHERE config_name = '" . quote($this->dblink, $config_name) . "'";
+		if (isset($this->config[$config_name]))
+		{
+			$sql = "UPDATE {$this->config['table_prefix']}config
+				SET config_value = '".quote($this->dblink, $config_value)."'
+				WHERE config_name = '" . quote($this->dblink, $config_name) . "'";
+		}
+		else
+		{
+			$sql = "INSERT INTO {$this->config['table_prefix']}config SET ".
+				"config_name	= '".quote($this->dblink, $config_name)."', ".
+				"config_value	= '".quote($this->dblink, $config_value)."' ";
+		}
 
 		$this->sql_query($sql);
 
