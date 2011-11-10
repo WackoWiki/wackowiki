@@ -177,9 +177,9 @@ if ($this->user_is_owner() || $this->is_admin())
 
 	// get currently selected category_ids
 	$_selected = $this->load_all(
-				"SELECT category_id ".
-				"FROM {$this->config['table_prefix']}category_page ".
-				"WHERE page_id = '".$this->page['page_id']."'");
+		"SELECT category_id ".
+		"FROM {$this->config['table_prefix']}category_page ".
+		"WHERE page_id = '".quote($this->dblink, $this->page['page_id'])."'");
 
 	// exploding categories into array
 	foreach ($_selected as $key => &$val)
@@ -256,7 +256,7 @@ if ($this->user_is_owner() || $this->is_admin())
 					"SELECT category_id, category ".
 					"FROM {$this->config['table_prefix']}category ".
 					"WHERE parent = 0 ".
-						"AND lang = '".$word['lang']."' ".
+						"AND lang = '".quote($this->dblink, $word['lang'])."' ".
 						"AND category_id <> '".$word['category_id']."' ".
 					"ORDER BY category ASC");
 

@@ -121,7 +121,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			$comments = $this->load_all(
 				"SELECT page_id ".
 				"FROM ".$this->config['table_prefix']."page ".
-				"WHERE comment_on_id = '".$this->page['page_id']."' ".
+				"WHERE comment_on_id = '".quote($this->dblink, $this->page['page_id'])."' ".
 					"AND owner_id='".quote($this->dblink, $this->get_user_id())."'");
 
 			foreach ($comments as $num => $page)
