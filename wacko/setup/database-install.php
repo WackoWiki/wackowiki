@@ -121,9 +121,12 @@ $insert_logo_image			= "INSERT INTO ".$config['table_prefix']."upload (page_id, 
 
 //
 $config['show_spaces']= ($config['show_spaces'] == 'N' ? 0 : 1);
-if (!isset($config['multilanguage'])) $config['multilanguage'] = 0;
+if (!isset($config['multilanguage']))
+{
+	$config['multilanguage'] = 0;
+}
 
-// inserting config values
+// inserting secondary config values
 $config_db['abuse_email']					= $config['admin_email'];
 $config_db['admin_email']					= $config['admin_email'];
 $config_db['admin_name']					= $config['admin_name'];
@@ -241,7 +244,7 @@ $config_db['smtp_host']						= $config['smtp_host'];
 $config_db['smtp_password']					= $config['smtp_password'];
 $config_db['smtp_port']						= $config['smtp_port'];
 $config_db['smtp_username']					= $config['smtp_username'];
-$config_db['show_spaces']					= $config['show_spaces']; // TODO: int -> Y
+$config_db['show_spaces']					= $config['show_spaces'];
 $config_db['spam_filter']					= $config['spam_filter'];
 $config_db['standard_handlers']				= $config['standard_handlers'];
 $config_db['store_deleted_pages']			= $config['store_deleted_pages'];
