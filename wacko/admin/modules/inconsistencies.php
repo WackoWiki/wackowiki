@@ -263,7 +263,7 @@ function admin_inconsistencies(&$engine, &$module)
 			$admin_id = $engine->load_single(
 				"SELECT user_id
 				FROM ".$engine->config['table_prefix']."user
-				WHERE user_name = '".$engine->config['admin_name']."'
+				WHERE user_name = '".quote($engine->dblink, $engine->config['admin_name'])."'
 				LIMIT 1");
 
 			$upload = $engine->sql_query(

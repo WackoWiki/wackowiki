@@ -41,8 +41,8 @@ function admin_sysupdate(&$engine, &$module)
 				{
 					$engine->sql_query(
 						"UPDATE {$engine->config['table_prefix']}link ".
-						"SET to_supertag = '".$engine->translit($page['to_tag'])."' ".
-						"WHERE to_tag = '".$page['to_tag']."'");
+						"SET to_supertag = '".quote($engine->dblink, $engine->translit($page['to_tag']))."' ".
+						"WHERE to_tag = '".quote($engine->dblink, $page['to_tag'])."'");
 				}
 
 				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i))));
@@ -71,8 +71,8 @@ function admin_sysupdate(&$engine, &$module)
 				{
 					$engine->sql_query(
 						"UPDATE {$engine->config['table_prefix']}page SET ".
-							"supertag = '".$engine->translit($page['tag'])."' ".
-						"WHERE page_id = ".$page['page_id']);
+							"supertag = '".quote($engine->dblink, $engine->translit($page['tag']))."' ".
+						"WHERE page_id = '".quote($engine->dblink, $page['page_id']))."'";
 				}
 
 				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i))));
@@ -101,8 +101,8 @@ function admin_sysupdate(&$engine, &$module)
 				{
 					$engine->sql_query(
 						"UPDATE {$engine->config['table_prefix']}revision ".
-						"SET supertag = '".$engine->translit($page['tag'])."' ".
-						"WHERE revision_id = ".$page['revision_id']);
+						"SET supertag = '".quote($engine->dblink, $engine->translit($page['tag']))."' ".
+						"WHERE revision_id = '".quote($engine->dblink, $page['revision_id']))."'";
 				}
 
 				$engine->redirect(rawurldecode($engine->href('', 'admin.php?mode='.$module['mode'].'&start=1&step='.$_REQUEST['step'].'&i='.(++$i))));
@@ -141,7 +141,7 @@ function admin_sysupdate(&$engine, &$module)
 				closedir($dh);
 			}
 
-			$version = '5.0.dev';
+			$version = WACKO_VERSION;
 
 			$engine->sql_query(
 				"UPDATE {$engine->config['table_prefix']}config ".
