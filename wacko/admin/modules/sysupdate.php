@@ -29,8 +29,14 @@ function admin_sysupdate(&$engine, &$module)
 	{
 		$limit = 1500;
 
-		if (isset($_REQUEST['i'])) $i = $_REQUEST['i'];
-		else $i = 0;
+		if (isset($_REQUEST['i']))
+		{
+			$i = $_REQUEST['i'];
+		}
+		else
+		{
+			$i = 0;
+		}
 
 		// links
 		if ((int)$_REQUEST['step'] === 1)

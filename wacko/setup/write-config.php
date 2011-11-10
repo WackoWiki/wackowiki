@@ -34,7 +34,10 @@ if ( ( $config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo') ) && empty
 $config['wacko_version'] = WACKO_VERSION;
 
 // reset old default upload path to new location
-if ($config['upload_path'] == 'files') $config['upload_path'] = 'files/global';
+if ($config['upload_path'] == 'files')
+{
+	$config['upload_path'] = 'files/global';
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //	BEGIN MANDATORY CONFIGURATION
@@ -97,6 +100,7 @@ else
 
 // try to delete wakka config file
 $deleted_old_wakka_config_file = true;
+
 if(is_file('wakka.config.php'))
 {
 	@chown('wakka.config.php', 666);
@@ -141,8 +145,7 @@ echo "         </ul>\n";
 	}
 	else
 	{
-		?> <input type="submit" value="<?php echo $lang['TryAgain'];?>"
-	class="next" /> <?php
+		?> <input type="submit" value="<?php echo $lang['TryAgain'];?>" class="next" /> <?php
 	}
 	?></form>
 	<?php
