@@ -159,9 +159,9 @@ else
 							// update database with the sha256 password for future logins
 							$this->sql_query(
 								"UPDATE ".$this->config['table_prefix']."user SET ".
-									"password	= '".$password."', ".
-									"salt		= '".$salt."' ".
-								"WHERE user_name = '".$_POST['user_name']."'");
+									"password	= '".quote($this->dblink, $password)."', ".
+									"salt		= '".quote($this->dblink, $salt)."' ".
+								"WHERE user_name = '".quote($this->dblink, $_POST['user_name'])."'");
 						}
 					}
 					else
