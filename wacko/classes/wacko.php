@@ -1990,7 +1990,7 @@ class Wacko
 							"user_id		= '".quote($this->dblink, $user_id)."', ".
 							"latest			= '2', ".
 							"description	= '".quote($this->dblink, ($old_page['comment_on_id'] || $old_page['description'] ? $old_page['description'] : $desc ))."', ".
-							"supertag		= '".$this->translit($tag)."', ".
+							"supertag		= '".quote($this->dblink, $this->translit($tag))."', ".
 							"body			= '".quote($this->dblink, $body)."', ".
 							"body_r			= '".quote($this->dblink, $body_r)."', ".
 							"body_toc		= '".quote($this->dblink, $body_toc)."', ".
@@ -4017,7 +4017,7 @@ class Wacko
 			$user = $this->load_single(
 					"SELECT user_id ".
 					"FROM ".$this->config['table_prefix']."user ".
-					"WHERE user_name = '".$user_name."' ".
+					"WHERE user_name = '".quote($this->dblink, $user_name)."' ".
 					"LIMIT 1");
 
 			// Get user value
@@ -4870,13 +4870,13 @@ class Wacko
 		{
 			$sql = "UPDATE {$this->config['table_prefix']}config
 				SET config_value = '".quote($this->dblink, $config_value)."'
-				WHERE config_name = '" . quote($this->dblink, $config_name) . "'";
+				WHERE config_name = '".quote($this->dblink, $config_name)."'";
 		}
 		else
 		{
 			$sql = "INSERT INTO {$this->config['table_prefix']}config SET ".
 				"config_name	= '".quote($this->dblink, $config_name)."', ".
-				"config_value	= '".quote($this->dblink, $config_value)."' ";
+				"config_value	= '".quote($this->dblink, $config_value)."'";
 		}
 
 		$this->sql_query($sql);

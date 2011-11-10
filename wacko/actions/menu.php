@@ -25,11 +25,11 @@ if (!function_exists('load_user_menu'))
 	function load_user_menu(&$wacko, $user_id)
 	{
 		$_menu = $wacko->load_all(
-							"SELECT p.tag, p.title, b.menu_id, b.user_id, b.menu_title, b.lang, b.menu_position ".
-							"FROM ".$wacko->config['table_prefix']."menu b ".
-								"LEFT JOIN ".$wacko->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
-							"WHERE b.user_id = '".quote($wacko->dblink, $user_id)."' ".
-							"ORDER BY b.menu_position", 0);
+			"SELECT p.tag, p.title, b.menu_id, b.user_id, b.menu_title, b.lang, b.menu_position ".
+			"FROM ".$wacko->config['table_prefix']."menu b ".
+				"LEFT JOIN ".$wacko->config['table_prefix']."page p ON (b.page_id = p.page_id) ".
+			"WHERE b.user_id = '".quote($wacko->dblink, $user_id)."' ".
+			"ORDER BY b.menu_position", 0);
 
 		return $_menu;
 	}
