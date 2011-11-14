@@ -96,7 +96,7 @@ else
 				"INNER JOIN ".$this->config['table_prefix']."page c ON (l.to_page_id = c.page_id) ".
 			"WHERE a.tag <> '".$for."' ".
 				"AND a.tag = c.tag ".
-				"AND b.tag = '"..quote($this->dblink, $for)."' ".
+				"AND b.tag = '".quote($this->dblink, $for)."' ".
 				"AND INSTR(c.tag, '".$for."') = 1 ".
 			"ORDER BY a.hits DESC ".
 			"LIMIT {$max}");
