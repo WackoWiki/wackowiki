@@ -1347,7 +1347,7 @@ class Wacko
 					? "AND p.minor_edit = '0' "
 					: "").
 				($default_pages == false
-					? "AND u.account_type = '0' "
+					? "AND (u.account_type = '0' OR p.user_id = '0') "
 					: "")
 			);
 
@@ -1435,7 +1435,7 @@ class Wacko
 					($for
 						? "AND p.supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 						: "").
-			"AND a.privilege = 'read' ".
+				"AND a.privilege = 'read' ".
 			"ORDER BY modified DESC ".
 			"LIMIT {$limit}"))
 			{
@@ -1456,8 +1456,7 @@ class Wacko
 		return $this->load_all(
 			"SELECT DISTINCT $meta, MAX(r.modified) AS date ".
 			"FROM {$this->config['table_prefix']}revision r ".
-			"LEFT JOIN {$this->config['table_prefix']}page p ON ".
-				"(r.page_id = p.page_id) ".
+				"LEFT JOIN {$this->config['table_prefix']}page p ON (r.page_id = p.page_id) ".
 			"WHERE p.page_id IS NULL ".
 			"GROUP BY r.page_id ".
 			"ORDER BY date DESC, r.tag ASC ".
@@ -1677,7 +1676,7 @@ class Wacko
 			}
 
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
-			if (!$old_page = $this->load_page($tag))
+			if (!$old_page = $this->load_page('', $page_id))
 			{
 				if (!isset($lang))
 				{
@@ -5831,8 +5830,7 @@ class Wacko
 		return $this->sql_query(
 			"DELETE ".
 				"r.* ".
-			"FROM ".
-				$this->config['table_prefix']."referrer r ".
+			"FROM ".$this->config['table_prefix']."referrer r ".
 				"INNER JOIN ".$this->config['table_prefix']."page p ON (r.page_id = p.page_id) ".
 			"WHERE ".
 				"p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
