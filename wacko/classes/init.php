@@ -231,7 +231,7 @@ class Init
 					$this->config = $wacko_config_defaults;
 				}
 
-				#$this->installer();
+				#$this->installer(); // depreciated
 			}
 			// secondary settings
 			else if ($this->config == true && !isset($this->dblink))

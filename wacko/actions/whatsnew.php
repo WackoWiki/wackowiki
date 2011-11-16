@@ -31,7 +31,7 @@ $pages1 = $this->load_all(
 	"FROM {$this->config['table_prefix']}page p ".
 		"LEFT JOIN {$this->config['table_prefix']}page c ON (p.comment_on_id = c.page_id) ".
 		"LEFT JOIN {$this->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
-	"WHERE u.account_type = '0' ".
+	"WHERE (u.account_type = '0' OR p.user_id = '0') ".
 	"ORDER BY p.created DESC ".
 	"LIMIT ".($max * 2), 1);
 
@@ -42,7 +42,7 @@ $pages2 = $this->load_all(
 		"LEFT JOIN {$this->config['table_prefix']}page c ON (p.comment_on_id = c.page_id) ".
 		"LEFT JOIN {$this->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
 	"WHERE p.comment_on_id = '0' ".
-	"AND u.account_type = '0' ".
+		"AND (u.account_type = '0' OR p.user_id = '0') ".
 	"ORDER BY modified DESC ".
 	"LIMIT ".($max * 2), 1);
 
@@ -92,7 +92,10 @@ if ($pages = array_merge($pages1, $pages2, $files))
 			$access = true;
 		}
 
-		if (!isset($printed[$page['tag']])) $printed[$page['tag']] = '';
+		if (!isset($printed[$page['tag']]))
+		{
+			$printed[$page['tag']] = '';
+		}
 
 		if ($access && ($printed[$page['tag']] != $page['date']) && ($count++ < $max))
 		{
@@ -118,7 +121,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 
 			// print entry
 			$separator	= ' . . . . . . . . . . . . . . . . ';
-			$author		= ( $page['user_name'] == GUEST ? '<em title="'.( $admin ? $page['ip'] : '' ).'">'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['user_name']).'" title="'.( $admin ? $page['ip'] : '' ).'">'.$page['user_name'].'</a>' );
+			$author		= ( !$page['user_name'] ? '<em title="'.( $admin ? $page['ip'] : '' ).'">'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['user_name']).'" title="'.( $admin ? $page['ip'] : '' ).'">'.$page['user_name'].'</a>' );
 			$viewed		= ( $user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['date'] > $user['last_mark'] ? ' viewed' : '' );
 			$revisions	= ($this->hide_revisions === false || $this->is_admin()
 								? ' ('.$this->link('/'.$page['tag'], 'revisions', $this->get_translation('History'), 0, 1).')'
