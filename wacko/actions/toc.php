@@ -103,11 +103,13 @@ if ($_page)
 
 			// not bad in a cache write similar version
 			$this->tocs[ $context ] = &$toc;
+
 			// it is now necessary to place flag about the fact that good to [iskurochit] in Post-[vake]
 			// the source page, adding there [tsyfirki]
 			if (!$ppage)
 			{
-				$this->post_wacko_toc = &$toc; $this->post_wacko_action['toc'] = 1;
+				$this->post_wacko_toc = &$toc;
+				$this->post_wacko_action['toc'] = 1;
 			}
 		} // --------------------------------------------------------------
 		// display!

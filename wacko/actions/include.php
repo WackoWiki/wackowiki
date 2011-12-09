@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 if (!isset($page))			$page = null;
-if (!isset($page)) 			return;
+if (!isset($page))			return;
 if (!isset($nomark))		$nomark = '';
 if (!isset($nowarning))		$nowarning = '';
 if (!isset($revision_id))	$revision_id = '';
