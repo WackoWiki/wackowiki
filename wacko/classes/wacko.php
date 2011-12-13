@@ -4440,6 +4440,12 @@ class Wacko
 		$acl		= $this->load_acl($page_id, $privilege, 1, 1, $use_parent, $new_tag);
 		$this->_acl	= $acl;
 
+		// lock down to read only
+		if ($this->config['acl_lock'] == true && $privilege != 'read')
+		{
+			return false;
+		}
+
 		// if current user is owner or admin, return true. they can do anything!
 		if ($user_name == '' && $user_name != GUEST)
 		{

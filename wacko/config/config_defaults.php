@@ -123,6 +123,7 @@ $wacko_config_defaults = array(
 	'default_upload_acl' => 'Admins',
 
 	'rename_globalacl' => 'Admins',
+	'acl_lock' => 0,
 	'owners_can_change_categories' => 1,
 	'remove_onlyadmins' => 0,
 	'owners_can_remove_comments' => 1,
@@ -179,7 +180,7 @@ $wacko_config_defaults = array(
 
 	'pwd_unlike_login' => 1,
 	'pwd_char_classes' => 0,
-	'pwd_min_chars' => 8,
+	'pwd_min_chars' => 9,
 
 	'max_failed_login_count' => 8,
 
