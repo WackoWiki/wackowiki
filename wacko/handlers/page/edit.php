@@ -167,6 +167,12 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 						}
 					}
 
+					// this is a new page, get page_id via tag for the new created page
+					if (!$this->page)
+					{
+						$this->page['page_id'] = $this->get_page_id($this->tag);
+					}
+
 					// now we render it internally so we can write the updated link table.
 					$this->clear_link_table();
 					$this->start_link_tracking();
