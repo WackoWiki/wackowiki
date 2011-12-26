@@ -226,7 +226,7 @@ echo '<br />';
 			if (!$this->config['hide_toc'])
 			{
 				// show table of content
-				echo $this->action('toc', array('from' => 'h2', 'to' => 'h3', 'numerate' => 1, 'nomark' => 0));
+				echo $this->action('toc', array('from' => 'h2', 'to' => 'h3', 'numerate' => 0, 'nomark' => 0));
 			}
 
 			// categories
