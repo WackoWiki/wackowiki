@@ -4,11 +4,9 @@
 /* Definitions: SYNTAX (?icq i seek you?) */
 dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
 
-
 /* Strike through text: SYNTAX --text-- */
 del { color:#999999 }
 del a:visited, del a:link { color:#999999 }
-
 
 cite {color:#888800;font-style:normal;}
 
@@ -27,10 +25,10 @@ border-width:1px 0 0;
 /* SYNTAX "  *", "  1.", etc. */
 
 ul, ol {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 /** Header related ***********************************************************/
@@ -38,8 +36,8 @@ ul, ol {
 /* SYNTAX ==, ===, ====, =====, ======, ======= */
 
 form, h1, h2, h3, h4, h5, h6 {
-  margin: 0px;
-  padding: 0px;
+	margin: 0px;
+	padding: 0px;
 }
 
 h1 {
@@ -66,8 +64,8 @@ h6 { font-family: Arial;   font-size: 12px; }
 
 /* Displays text: "This is an old revision of..." */
 .revisioninfo {
-  color: #AAAAAA;
-  padding-bottom: 20px;
+	color: #AAAAAA;
+	padding-bottom: 20px;
 }
 
 /* Displays text: "Comparison for..." */
@@ -102,40 +100,41 @@ del.diff {
 /* Code areas: SYNTAX %%code%% */
 
 .code {
-  background: #FFFFFF;
-  border: 1px #888888 solid;
-  font-family: "Courier New";
-  font-size: 10pt;
-  margin:1em 1.75em;
-  overflow:auto;
-  padding:0.25em;
+	background: #FFFFFF;
+	border: 1px #888888 solid;
+	/* border-radius: 5px; */
+	font-family: "Courier New";
+	font-size: 10pt;
+	margin:1em 1.75em;
+	overflow:auto;
+	padding:0.25em;
 }
 
-.notes {  color: #888800; }
+.notes { color: #888800; }
 
 /** Table-related ************************************************************/
 
 /* Bordered tables: SYNTAX #|| || Here | there || ||# */
 .usertable {
-  border: 1px none;
-  border-collapse: collapse;
+	border: 1px none;
+	border-collapse: collapse;
 }
 
 .usertable th {
-  background-color:#EEEEEE;
+	background-color:#EEEEEE;
 }
 
 .usertable td, .usertable th
 {
-  border-width: 1px;
-  border-color: #CCCCCC;
-  border-style: solid;
-  padding: 4px;
-  vertical-align: top;
+	border-width: 1px;
+	border-color: #CCCCCC;
+	border-style: solid;
+	padding: 4px;
+	vertical-align: top;
 }
 
 .usertable tr:hover {
-  background-color: #CCFFCC;
+	background-color: #CCFFCC;
 }
 
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
@@ -191,8 +190,12 @@ p.auto { margin:0px; padding:0px; font-size:100%; }
 /* SYNTAX %%(hl xyz)%% */
 
 .hl-main {font-family: monospace; font-size:13px;}
-.hl-gutter { background-color: #CCCCCC; padding-right: 10px;
-             font-family: monospace; font-size:13px;}
+.hl-gutter {
+	background-color: #CCCCCC;
+	padding-right: 10px;
+	font-family: monospace;
+	font-size:13px;
+}
 .hl-table {border: solid 1px #000000; }
 
 .hl-default { color: #000000; }
@@ -215,7 +218,7 @@ p.auto { margin:0px; padding:0px; font-size:100%; }
 
 /* SYNTAX %%(wrapper xyz)%% */
 
-div.action           {
+div.action {
 	margin:2px;
 	background: #f6f7ed;
 	border: 1px dotted #CCCCCC;
