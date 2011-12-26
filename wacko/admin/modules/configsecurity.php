@@ -40,13 +40,14 @@ function admin_configsecurity(&$engine, &$module)
 		$config['session_encrypt_cookie']		= (int)$_POST['session_encrypt_cookie'];
 		$config['antidupe']						= (int)$_POST['antidupe'];
 		$config['disable_wikiname']				= (int)$_POST['disable_wikiname'];
-		$config['allow_email_reuse']				= (int)$_POST['allow_email_reuse'];
+		$config['allow_email_reuse']			= (int)$_POST['allow_email_reuse'];
 		$config['default_read_acl']				= (string)$_POST['default_read_acl'];
 		$config['default_write_acl']			= (string)$_POST['default_write_acl'];
 		$config['default_comment_acl']			= (string)$_POST['default_comment_acl'];
 		$config['default_create_acl']			= (string)$_POST['default_create_acl'];
 		$config['default_upload_acl']			= (string)$_POST['default_upload_acl'];
 		$config['rename_globalacl']				= (string)$_POST['rename_globalacl'];
+		$config['acl_lock']						= (int)$_POST['acl_lock'];
 		$config['hide_locked']					= (int)$_POST['hide_locked'];
 		$config['remove_onlyadmins']			= (int)$_POST['remove_onlyadmins'];
 		$config['owners_can_remove_comments']	= (int)$_POST['owners_can_remove_comments'];
@@ -219,6 +220,14 @@ function admin_configsecurity(&$engine, &$module)
 				<td class="label" valign="top"><label for="rename_globalacl"><strong>Global rename right:</strong><br />
 				<small>List for admission to the possibility of free rename (move) pages.</small></label></td>
 				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="rename_globalacl" name="rename_globalacl"><?php echo htmlspecialchars($engine->config['rename_globalacl']);?></textarea></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="acl_lock"><strong>Lock all ACL to read only:</strong><br />
+				<small><span class="cite">Overwrites the acl settings for all pages to read only.</span></small></label></td>
+				<td><input type="checkbox" id="acl_lock" name="acl_lock" value="1"<?php echo ( $engine->config['acl_lock'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
