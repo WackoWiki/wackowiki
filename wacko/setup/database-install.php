@@ -11,7 +11,7 @@ function test($text, $condition, $error_text = '')
 	{
 		if($error_text)
 		{
-			echo "<ul class=\"install_error\"><li>".$error_text."</li></ul>";
+			echo "<ul class=\"install_error\"><li>".$error_text." <br />".mysql_error()."</li></ul>";
 		}
 
 		echo "</li>\n";
@@ -128,6 +128,7 @@ if (!isset($config['multilanguage']))
 
 // inserting secondary config values
 $config_db['abuse_email']					= $config['admin_email'];
+$config_db['acl_lock']						= $config['acl_lock'];
 $config_db['admin_email']					= $config['admin_email'];
 $config_db['admin_name']					= $config['admin_name'];
 $config_db['allow_email_reuse']				= $config['allow_email_reuse'];
@@ -199,6 +200,11 @@ $config_db['license']						= $config['license'];
 $config_db['log_default_show']				= $config['log_default_show'];
 $config_db['log_level']						= $config['log_level'];
 $config_db['log_purge_time']				= $config['log_purge_time'];
+$config_db['maint_last_cache']				= NULL; // $config['maint_last_cache'];
+$config_db['maint_last_log']				= NULL; // $config['maint_last_log'];
+$config_db['maint_last_refs']				= NULL; // $config['maint_last_refs'];
+$config_db['maint_last_delpages']			= NULL; // $config['maint_last_delpages'];
+$config_db['maint_last_oldpages']			= NULL; // $config['maint_last_oldpages'];
 $config_db['max_login_attempts']			= $config['max_login_attempts'];
 $config_db['meta_description']				= $config['meta_description'];
 $config_db['meta_keywords']					= $config['meta_keywords'];
@@ -276,13 +282,11 @@ foreach($config_db as $key => $value)
 	$config_insert .= "(0, '$key', '$value'),";
 }
 
-$insert_config = "INSERT INTO ".$config['table_prefix']."config (config_id, config_name, config_value) VALUES
-	".$config_insert."
-	(0, 'maint_last_cache', NULL),
-	(0, 'maint_last_log', NULL),
-	(0, 'maint_last_refs', NULL),
-	(0, 'maint_last_delpages', NULL),
-	(0, 'maint_last_oldpages', NULL);";
+// to update existing values we use INSERT ... ON DUPLICATE KEY UPDATE: http://dev.mysql.com/doc/refman/5.5/en/insert-on-duplicate.html
+$insert_config = "INSERT INTO ".$config['table_prefix']."config (config_id, config_name, config_value) VALUES ".
+				$config_insert."
+				(0, 'maint_last_update', NOW()) ".
+				"ON DUPLICATE KEY UPDATE config_name=VALUES(config_name),config_value=VALUES(config_value);";
 
 /*
  Setup the tables depending on which database we selected

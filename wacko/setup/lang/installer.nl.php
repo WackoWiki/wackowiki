@@ -58,7 +58,7 @@ $lang = array(
 'Admin' => 'Beheerders naam',
 'AdminDesc' => 'Geef de gebruikersnaam van de beheerder. Moet een <a href="http://wackowiki.sourceforge.net/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> zijn (e.g. WikiAdmin).',
 'Password' => 'Geef wachtwoord voor de beheerder',
-'PasswordDesc' => 'Kies een wachtwoord voor de beheerder (8+ tekens).',
+'PasswordDesc' => 'Kies een wachtwoord voor de beheerder (9+ tekens).',
 'Password2' => 'Herhaal wachtwoord:',
 'Mail' => 'Beheerders mailadres.',
 'MailDesc' => 'Enter the beheerders mailadres.',
@@ -70,7 +70,7 @@ $lang = array(
 'ErrorAdminName' => 'U moet een juiste WikiName invullen als gebruikersnaam voor de beheerder!',
 'ErrorAdminEmail' => 'U moet een juist beheerders emailadres invullen!',
 'ErrorAdminPasswordMismatch' => 'Wachtwoorden komen niet overeen, vul het wachtwoord opnieuw in!',
-'ErrorAdminPasswordShort' => 'The admin Wachtwoord is te kort, vul het wachtwoord opnieuw in, the minimum length is 8 characters!',
+'ErrorAdminPasswordShort' => 'The admin Wachtwoord is te kort, vul het wachtwoord opnieuw in, the minimum length is 9 characters!',
 'WarningRewriteMode' => 'LET OP!\nMogelijk zit er een fout in uw basis-URL en instellingen van de rewrite-modus. In een basis-URL hoort geen vraagteken te staan als de rewrite-modus is ingeschakeld. In uw instellingen is dat wel het geval.\n\nKlik OK om met deze instellingen door te gaan.\nKlik Annuleren om terug te gaan en de instellingen te veranderen.\n\nU kunt doorgaan met deze instellingen, maar het is mogelijk dat er dan problemen ontstaan.',
 'ModRewriteStatusUnknown' => 'The installer cannot veriry that mod_rewrite is enabled, however this does not mean it is disabled',
 

@@ -58,7 +58,7 @@ $lang = array(
 'Admin' => 'Adminni nimi',
 'AdminDesc' => 'Sisesta administraatori kasutajanimi. Peaks olema <a href="http://wackowiki.sourceforge.net/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiNimi</a> (e.g. WikiAdmin).',
 'Password' => 'Sisesta parool',
-'PasswordDesc' => 'Vali administraatorile parool (vähemalt 8 tähemärki)',
+'PasswordDesc' => 'Vali administraatorile parool (vähemalt 9 tähemärki)',
 'Password2' => 'Korda parooli:',
 'Mail' => 'Administraatori e-post',
 'MailDesc' => 'Enter the admins email address.',
@@ -70,7 +70,7 @@ $lang = array(
 'ErrorAdminName' => 'Sa peaksid valima korrektse WikiNime administraatori nimeks!',
 'ErrorAdminEmail' => 'Pead sisestama korrektse adminni e-posti aadressi!',
 'ErrorAdminPasswordMismatch' => 'Parool ei kõlba. Sisesta see uuesti!',
-'ErrorAdminPasswordShort' => 'The admin Parool on liiga lühike, sisesta uuesti, the minimum length is 8 characters!',
+'ErrorAdminPasswordShort' => 'The admin Parool on liiga lühike, sisesta uuesti, the minimum length is 9 characters!',
 'WarningRewriteMode' => 'ATTENTION!\nYour base URL and rewrite-mode settings looks suspicious. Usually there is no ? mark in the base URL if rewrite-mode is set - but in your case there is one.\n\nTo continue with these settings click OK.\nTo return to the form and change your settings click CANCEL.\n\nIf you are about to proceed with these settings, please note that they COULD cause problems with your WackoWiki installation.',
 'ModRewriteStatusUnknown' => 'The installer cannot veriry that mod_rewrite is enabled, however this does not mean it is disabled',
 

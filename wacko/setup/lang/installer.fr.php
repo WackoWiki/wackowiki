@@ -58,7 +58,7 @@ $lang = array(
 'Admin' => 'Nom de l&rsquo;administrateur',
 'AdminDesc' => 'Indiquez le nom de l&rsquo;administrateur, ce doit être un <a href="http://wackowiki.sourceforge.net/doc/Doc/Francophone/NomWiki" title="Voir l&rsquo;aide" target="_blank">Nom Wiki</a> (e.g. WikiAdmin).',
 'Password' => 'Mot de passe de l&rsquo;administrateur',
-'PasswordDesc' => 'Choisissez un mot de passe d&rsquo;au moins 8 caractères pour l&rsquo;administrateur.',
+'PasswordDesc' => 'Choisissez un mot de passe d&rsquo;au moins 9 caractères pour l&rsquo;administrateur.',
 'Password2' => 'Répétez le mot de passe :',
 'Mail' => 'Adresse de messagerie de l&rsquo;administrateur',
 'MailDesc' => 'Indiquez l&rsquo;adresse de messagerie de l&rsquo;administrateur.',
@@ -70,7 +70,7 @@ $lang = array(
 'ErrorAdminName' => 'Le nom d&rsquo;administrateur doit être un NomWiki !',
 'ErrorAdminEmail' => 'Vous avez indiqué une adresse de messagerie non conforme !',
 'ErrorAdminPasswordMismatch' => 'Les mots de passe ne coïncident pas !',
-'ErrorAdminPasswordShort' => 'Le mot de passe de l&rsquo;administrateur est trop court, il doit avoir au moins 8 caractères !',
+'ErrorAdminPasswordShort' => 'Le mot de passe de l&rsquo;administrateur est trop court, il doit avoir au moins 9 caractères !',
 'WarningRewriteMode' => 'ATTENTION!\nVotre URL de base comporte un point d&rsquo;interrogation alors que l&rsquo;extension "mod_rewrite") est activée, ceci nous semble incohérent.\n\nPour confirmer néanmoins ce réglage cliquez sur OK.\nPour revenir au formulaire et changer vos réglages cliquez sur CANCEL.\n\nSi vous vous apprêtez à confirmer ces réglages, veuillez noter que cela pourrait rendre problématique votre installation de WackoWiki.',
 'ModRewriteStatusUnknown' => 'L&rsquo;installeur ne peut pas confirmer que "mod_rewrite" soit activé, il est cependant possible qu&rsquo;il le soit.',
 
