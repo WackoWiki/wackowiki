@@ -2,16 +2,30 @@
 @set_time_limit(0);
 @ignore_user_abort(true);
 
-function test($text, $condition, $error_text = '')
+function test($text, $condition, $error_text = '', $dblink = '')
 {
 	global $lang;
+	global $config;
+
 	echo "            <li>".$text."   ".output_image($condition);
 
 	if(!$condition)
 	{
 		if($error_text)
 		{
-			echo "<ul class=\"install_error\"><li>".$error_text." <br />".mysql_error()."</li></ul>";
+			$error_output = "\n<ul class=\"install_error\"><li>".$error_text." <br />";
+
+			if ($config['database_driver'] == 'mysql_legacy')
+			{
+				$error_output .= mysql_error();
+			}
+			/* else if ($config['database_driver'] == 'mysqli_legacy')
+			{
+				$error_output .= mysqli_error($dblink);
+			} */
+
+			$error_output .= "</li></ul>";
+			echo $error_output;
 		}
 
 		echo "</li>\n";
