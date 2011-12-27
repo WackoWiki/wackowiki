@@ -11,7 +11,7 @@
 				return false;
 			}
 
-			if (f.elements['password'].value.length<8)
+			if (f.elements['password'].value.length<9)
 			{
 				alert('<?php echo $lang['ErrorAdminPasswordShort'];?>');
 				return false;
