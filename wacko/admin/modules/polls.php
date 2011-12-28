@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 ##   Polls Moderation                                 ##
 ########################################################
 
-$module['pollsadmin'] = array(
+$module['polls'] = array(
 		'order'	=> 4,
 		'cat'	=> 'Content',
 		'mode'	=> 'polls',
@@ -35,8 +35,8 @@ function admin_polls(&$engine, &$module)
 	// define context
 	$admin		= true; #$engine->is_admin();
 	$mode		= $module['mode'];
-	$mode_http	= 'mode='.$mode.'&amp;';
-	$mode_file	= $_SERVER['PHP_SELF'];
+	$mode_http	= ''; //'mode='.$mode.'&amp;';
+	$mode_file	= 'admin.php?mode='.$module['mode'];//$_SERVER['PHP_SELF']
 
 	// processing input
 	if ($admin === true)
@@ -135,7 +135,7 @@ function admin_polls(&$engine, &$module)
 			#echo $engine->form_open('', $mode_file);
 			#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 			echo '	<form action="admin.php" method="post" name="polls">';
-			echo '<input type="hidden" name="mode" value="pollsadmin" />';
+			echo '<input type="hidden" name="mode" value="polls" />';
 
 			echo '<input name="delete" type="hidden" value="'.$remove_id.'" />';
 			echo '<table cellspacing="3" class="formation">';
@@ -158,7 +158,7 @@ function admin_polls(&$engine, &$module)
 		#echo $engine->form_open('', $mode_file);
 		#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 		echo '	<form action="admin.php" method="post" name="polls">';
-		echo '<input type="hidden" name="mode" value="pollsadmin" />';
+		echo '<input type="hidden" name="mode" value="polls" />';
 
 		echo '<table cellspacing="3" class="formation">';
 		$list = $polls_obj->get_polls_list('current');
@@ -177,7 +177,7 @@ function admin_polls(&$engine, &$module)
 				echo '<tr class="lined">';
 					echo '<td class="label"><input name="id" type="radio" value="'.$row['poll_id'].'" /></td>';
 					echo '<td style="text-align:left;width:95%;"><a href="'.
-						rawurldecode($engine->href('', $mode_file, $mode_http.'poll='.$row['poll_id'].'&amp;results=1')).'">'.
+						rawurldecode($engine->href('', $mode_file.'&amp;poll='.$row['poll_id'].'&amp;results=1')).'">'.
 						date('d/m', strtotime($row['start'])).': '.$row['text'].'</a></td>';
 					echo '<td>'.$row['user_name'].'</td>';
 					echo '<td style="white-space:nowrap;">'.$polls_obj->poll_time($row['start'], time()).'</td>';
@@ -198,7 +198,7 @@ function admin_polls(&$engine, &$module)
 			#echo $engine->form_open('', $mode_file);
 			#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 			echo '	<form action="admin.php" method="post" name="polls">';
-			echo '<input type="hidden" name="mode" value="pollsadmin" />';
+			echo '<input type="hidden" name="mode" value="polls" />';
 
 		echo '<table cellspacing="3" class="formation">';
 		$list = $polls_obj->get_polls_list('moderation');
@@ -249,7 +249,7 @@ function admin_polls(&$engine, &$module)
 			#echo $engine->form_open('', $mode_file);
 			#echo '<input name="mode" type="hidden" value="'.$mode.'" />';
 			echo '	<form action="admin.php" method="post" name="polls">';
-			echo '<input type="hidden" name="mode" value="pollsadmin" />';
+			echo '<input type="hidden" name="mode" value="polls" />';
 
 		echo '<table cellspacing="3" class="formation">';
 		// make list
@@ -270,7 +270,7 @@ function admin_polls(&$engine, &$module)
 				echo '<tr class="lined">';
 					echo '<td class="label"><input name="id" type="radio" value="'.$row['poll_id'].'" /></td>';
 					echo '<td style="text-align:left;width:95%;"><a href="'.
-						rawurldecode($engine->href('', $mode_file, $mode_http.'year='.$year.'&amp;poll='.$row['poll_id'].'&amp;results=1')).'">'.
+						rawurldecode($engine->href('', $mode_file.'&amp;year='.$year.'&amp;poll='.$row['poll_id'].'&amp;results=1')).'">'.
 						date('d/m/y', strtotime($row['start'])).': '.$row['text'].'</a></td>';
 					echo '<td>'.$row['user_name'].'</td>';
 					echo '<td style="white-space:nowrap;">'.$polls_obj->poll_time($row['start'], $row['end']).'</td>';
@@ -288,7 +288,7 @@ function admin_polls(&$engine, &$module)
 		}
 		else
 		{
-			echo '<a href="'.rawurldecode($engine->href('', $mode_file, $mode_http.'year=0')).'">'.$engine->get_translation('PollsAll').'</a> ';
+			echo '<a href="'.rawurldecode($engine->href('', $mode_file.'&amp;year=0')).'">'.$engine->get_translation('PollsAll').'</a> ';
 		}
 
 		if (!empty($years))
@@ -296,7 +296,7 @@ function admin_polls(&$engine, &$module)
 			foreach ($years as $item)
 			{
 				if ($item == $year) echo $item.' ';
-				else echo '<a href="'.rawurldecode($engine->href('', $mode_file, $mode_http.'year='.$item)).'">'.$item.'</a> ';
+				else echo '<a href="'.rawurldecode($engine->href('', $mode_file.'&amp;year='.$item)).'">'.$item.'</a> ';
 			}
 		}
 		echo '</small>';
