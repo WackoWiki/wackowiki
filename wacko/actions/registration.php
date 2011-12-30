@@ -228,7 +228,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						"send_watchmail	= '".quote($this->dblink, 1)."'");
 
 				// INSERT user menu items
-				#$this->convert_into_menu_table($this->get_default_menu($lang), $_user_id['user_id']);
+
 
 				// add your user page template here
 				$user_page_template	= '**((user:'.$user_name.' '.$user_name.'))** ('.$this->format('::+::', 'pre_wacko').')';
@@ -240,6 +240,12 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				// send email
 				if ($this->config['enable_email'] == true)
 				{
+					// 1. Send signup email
+					/* TODO: set user language for email encoding */
+					$this->load_translation($lang);
+					$this->set_translation ($lang);
+					$this->set_language ($lang);
+
 					$subject =	$this->get_translation('EmailWelcome').
 								$this->config['site_name'];
 					$body =		$this->get_translation('EmailHello'). $user_name.",\n\n".
@@ -253,6 +259,32 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 								$this->config['base_url'];
 
 					$this->send_mail($email, $subject, $body);
+					unset($subject, $body);
+
+					// 2. notify admin a new user has signed-up
+					if ($this->config['notify_new_user_account'])
+					{
+						/* TODO: set user language for email encoding */
+						$lang_admin = $this->config['language'];
+						$this->load_translation($lang_admin);
+						$this->set_translation ($lang_admin);
+						$this->set_language ($lang_admin);
+
+						$subject =	'['.$this->config['site_name'].'] '.$this->get_translation('NewAccountSubject');
+						$body =		$this->get_translation('NewAccountSignupInfo')."\n\n".
+									$this->get_translation('NewAccountUsername').' '.$user_name."\n".
+									$this->get_translation( 'NewAccountEmail').' '.$email."\n".
+									$this->get_translation( 'NewAccountIP' ).' '.$this->ip_address()."\n\n".
+									$this->get_translation('NewAccountDoNotReply')."\n\n".
+									$this->config['site_name']."\n".
+									$this->config['base_url'];
+
+						$this->send_mail($this->config['admin_email'], $subject, $body);
+					}
+
+					$this->load_translation($this->user_lang);
+					$this->set_translation($this->user_lang);
+					$this->set_language($this->user_lang);
 				}
 
 				// log event
@@ -290,8 +322,8 @@ if (!isset($_POST['confirm']))
 			echo '<p><label for="lang">'.$this->format_translation('RegistrationLang').':</label>';
 			echo '<select id="lang" name="lang">';
 
-			$lang = $this->user_agent_language();
-			$langs = $this->available_languages();
+			$lang	= $this->user_agent_language();
+			$langs	= $this->available_languages();
 
 			for ($i = 0; $i < count($langs); $i++)
 			{

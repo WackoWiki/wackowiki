@@ -32,6 +32,14 @@ $wacko_translation = array(
 	'NameCamelCaseOnly'			=> 'Username must be between %1 and %2 chars long and WikiName formatted.',
 	'NewUserAccount'			=> 'new user account',
 
+	'NewAccountSubject'			=> 'Account registration',
+	'NewAccountAdminCreated'	=> 'The user %1 has created an account for you with username "%2". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:',
+	'NewAccountUsername'		=> 'Username:',
+	'NewAccountDoNotReply'		=> 'Do not reply to this message',
+	'NewAccountEmail'			=> 'E-mail:',
+	'NewAccountIP'				=> 'Remote IP address:',
+	'NewAccountSignupInfo'		=> 'The following account has been created:',
+
 	// login panel
 	'LoginWelcome' => 'Σύνδεση',
 	'LoginWelcome2' => '((/Registration Εγγραφή))',

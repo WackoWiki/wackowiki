@@ -32,6 +32,14 @@ $wacko_translation = array(
 	'NameCamelCaseOnly'			=> 'Kasutajanimi peab olema vahemikus %1 ja %2 sümbolit pikk. and WikiName formatted.',
 	'NewUserAccount'			=> 'new user account',
 
+	'NewAccountSubject'			=> 'Kasutajakonto registreerimine',
+	'NewAccountAdminCreated'	=> 'Kasutaja %1 tegi sulle konto kasutajanimega "%2". Et lõpetada sinu registreerimine, külasta järgmist veebiaadressi (jälgi, et see oleks sisestatud ühele reale) ja määra oma sisenemiseks parool:',
+	'NewAccountUsername'		=> 'Kasutaja:',
+	'NewAccountDoNotReply'		=> 'Ära vasta sellele teatele',
+	'NewAccountEmail'			=> 'E-post:',
+	'NewAccountIP'				=> 'IP aadress:',
+	'NewAccountSignupInfo'		=> 'Loodud on järgmine kasutajakonto:',
+
 	// login panel
 	'LoginWelcome' => 'Logi sisse',
 	'LoginWelcome2' => '[[/Registration Registereeri]]',
