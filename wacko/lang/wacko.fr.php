@@ -32,6 +32,14 @@ $wacko_translation = array(
 	'NameCamelCaseOnly'			=> 'Le nom d’utilisateur doit être compris entre %1 et %2 caractères de long et WikiName formatted.',
 	'NewUserAccount'			=> 'new user account',
 
+	'NewAccountSubject'			=> 'Enregistrement de compte',
+	'NewAccountAdminCreated'	=> 'L\'utilisateur %1 vous a créé un compte avec le nom d\'utilisateur « %2 ». Pour terminer la création, visitez l\'URL suivante (soyez sûr qu\'elle soit entrée comme une seule ligne) et définissez votre mot de passe :',
+	'NewAccountUsername'		=> 'Utilisateur :',
+	'NewAccountDoNotReply'		=> 'NE PAS RÉPONDRE À CE MESSAGE',
+	'NewAccountEmail'			=> 'Courriel :',
+	'NewAccountIP'				=> 'Adresse IP distante :',
+	'NewAccountSignupInfo'		=> 'Le compte suivant a été créé :',
+
 	// login panel
 	'LoginWelcome'				=> 'Connexion',
 	'LoginWelcome2'				=> '[[/Enregistrement Enregistrement]]',

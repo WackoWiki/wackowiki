@@ -41,6 +41,7 @@ function admin_configsecurity(&$engine, &$module)
 		$config['antidupe']						= (int)$_POST['antidupe'];
 		$config['disable_wikiname']				= (int)$_POST['disable_wikiname'];
 		$config['allow_email_reuse']			= (int)$_POST['allow_email_reuse'];
+		$config['notify_new_user_account']		= (int)$_POST['notify_new_user_account'];
 		$config['default_read_acl']				= (string)$_POST['default_read_acl'];
 		$config['default_write_acl']			= (string)$_POST['default_write_acl'];
 		$config['default_comment_acl']			= (string)$_POST['default_comment_acl'];
@@ -116,7 +117,7 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="disable_wikiname"><strong>Disable WikiName:</strong><br />
-				<small>Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.</label></td>
+				<small>Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.</small></label></td>
 				<td><input type="checkbox" id="disable_wikiname" name="disable_wikiname" value="1"<?php echo ( $engine->config['antidupe'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
@@ -126,6 +127,14 @@ function admin_configsecurity(&$engine, &$module)
 				<td class="label"><label for="allow_email_reuse"><strong>Allow email address re-use:</strong><br />
 				<small>Different users can register with the same e-mail address.</small></label></td>
 				<td><input type="checkbox" id="allow_email_reuse" name="allow_email_reuse" value="1"<?php echo ( $engine->config['allow_email_reuse'] ? ' checked="checked"' : '' );?> /></td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label"><label for="notify_new_user_account"><strong>Notify new user account:</strong><br />
+				<small>The Admin will to be notified when a new user has been created using the "signup form".</small></label></td>
+				<td><input type="checkbox" id="notify_new_user_account" name="allow_email_reuse" value="1"<?php echo ( $engine->config['notify_new_user_account'] ? ' checked="checked"' : '' );?> /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

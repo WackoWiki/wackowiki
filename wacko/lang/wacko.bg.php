@@ -32,6 +32,14 @@ $wacko_translation = array(
 	'NameCamelCaseOnly'			=> 'Потребителското име трябва да е м/у %1 и %2 символа дълго and WikiName formatted.',
 	'NewUserAccount'			=> 'new user account',
 
+	'NewAccountSubject'			=> 'Регистрация на нов профил',
+	'NewAccountAdminCreated'	=> 'The user %1 has created an account for you with username "%2". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:',
+	'NewAccountUsername'		=> 'Потребителско име:',
+	'NewAccountDoNotReply'		=> 'НЕ ОТГОВАРЯЙТЕ НА ТОВА СЪОБЩЕНИЕ',
+	'NewAccountEmail'			=> 'Email:',
+	'NewAccountIP'				=> 'IP адрес:',
+	'NewAccountSignupInfo'		=> 'Създаден е следният профил:',
+
 	// login panel
 	'LoginWelcome' => 'Вход',
 	'LoginWelcome2' => '[[/Регистрация Регистрация]]',

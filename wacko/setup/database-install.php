@@ -228,6 +228,7 @@ $config_db['name_date_macro']				= $config['name_date_macro'];
 $config_db['news_cluster']					= $config['news_cluster'];
 $config_db['news_levels']					= $config['news_levels'];
 $config_db['noindex']						= $config['noindex'];
+$config_db['notify_new_user_account']		= $config['notify_new_user_account'];
 $config_db['numerate_links']				= $config['numerate_links'];
 $config_db['outlook_workaround']			= $config['outlook_workaround'];
 $config_db['owners_can_change_categories']	= $config['owners_can_change_categories'];

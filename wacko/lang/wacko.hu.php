@@ -32,6 +32,14 @@ $wacko_translation = array(
 	'NameCamelCaseOnly'			=> 'Username must be between %1 and %2 chars long and WikiName formatted.',
 	'NewUserAccount'			=> 'new user account',
 
+	'NewAccountSubject'			=> 'Regisztráció',
+	'NewAccountAdminCreated'	=> '%1 felhasználó létrehozta a felhasználói fiókodat %2 felhasználónévvel. Hogy befejezd a regisztrációd, látogass el a következõ URL-re (figyelj hogy egyetlen sor legyen) és állítsd be a jelszavad:',
+	'NewAccountUsername'		=> 'Felhasználónév:',
+	'NewAccountDoNotReply'		=> 'NE VÁLASZOLJON ERRE A LEVÉLRE',
+	'NewAccountEmail'			=> 'E-mail cím:',
+	'NewAccountIP'				=> 'Távoli IP-cím:',
+	'NewAccountSignupInfo'		=> 'A következõ felhasználót hoztuk létre:',
+
 	// login panel
 	'LoginWelcome'				=> 'Bejelentkezés',
 	'LoginWelcome2'				=> '((/Registration Create new account))',

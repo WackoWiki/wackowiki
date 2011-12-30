@@ -32,6 +32,14 @@ $wacko_translation = array(
 	'NameCamelCaseOnly'			=> 'Login musi mieæ min. %1, a maks. %2 znaków i WikiName formatted.',
 	'NewUserAccount'			=> 'new user account',
 
+	'NewAccountSubject'			=> 'Rejestracja konta',
+	'NewAccountAdminCreated'	=> 'U¿ytkownik %1 stworzy³ dla Ciebie konto %2. W celu zakoñczenia rejestracji, odwied¼ nastêpuj±cy adres URL (sprawd¼, czy ca³y adres jest wpisany w jednej linii) i ustaw w³asne has³o dostêpu',
+	'NewAccountUsername'		=> 'Nazwa u¿ytkownika:',
+	'NewAccountDoNotReply'		=> 'NIE ODPOWIADAJ NA TÊ WIADOMO¦Æ',
+	'NewAccountEmail'			=> 'Email:',
+	'NewAccountIP'				=> 'Zdalny adres IP:',
+	'NewAccountSignupInfo'		=> 'Nastêpuj±ce konto zosta³o za³o¿one:',
+
 	// login panel
 	'LoginWelcome' => 'Zaloguj siê',
 	'LoginWelcome2' => 'a mo¿e potrzebujesz siê [[/Rejestracja zarejestrowaæ]]?',
