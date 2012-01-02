@@ -5325,10 +5325,10 @@ class Wacko
 
 		foreach ($toc as $k => $v)
 		{
-			$toc[$k] = implode('<poloskuns,col>', $v);
+			$toc[$k] = implode('<heading,col>', $v);
 		}
 
-		$this->body_toc = implode('<poloskuns,row>', $toc);
+		$this->body_toc = implode('<heading,row>', $toc);
 	}
 
 	function build_toc($tag, $from, $to, $num, $link = -1)
@@ -5349,11 +5349,11 @@ class Wacko
 			$_link = $link;
 		}
 
-		$toc = explode('<poloskuns,row>', $page['body_toc']);
+		$toc = explode('<heading,row>', $page['body_toc']);
 
 		foreach ($toc as $k => $v)
 		{
-			$toc[$k] = explode('<poloskuns,col>', $v);
+			$toc[$k] = explode('<heading,col>', $v);
 		}
 
 		$_toc = array();

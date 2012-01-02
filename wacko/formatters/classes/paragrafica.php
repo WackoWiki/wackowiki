@@ -285,7 +285,7 @@ class paragrafica
 			}
 			else
 			{
-				$this->toc[] = array($matches[2],$matches[4],$matches[3]);
+				$this->toc[] = array($matches[2], $matches[4], $matches[3]);
 			}
 		}
 
