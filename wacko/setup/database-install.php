@@ -731,6 +731,8 @@ switch($config['database_driver'])
 
 					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysql_query($alter_user_setting_r4_3_3, $dblink), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
 
+					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_2, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
+
 					echo "            </ol>\n";
 					echo "            <br />\n";
 					echo "            <h2>".$lang['InstallingDefaultData']."</h2>\n";
@@ -1155,6 +1157,8 @@ switch($config['database_driver'])
 					echo "         <ol>\n";
 
 					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_setting_r4_3_3), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
+
+					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_2), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 
 					echo "            </ol>\n";
 					echo "         <br />\n";
@@ -1595,6 +1599,8 @@ switch($config['database_driver'])
 					echo "         <ol>\n";
 
 					test_pdo(str_replace('%1', 'user_setting', $lang['AlterTable']), $alter_user_setting_r4_3_3, str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
+
+					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_2, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 
 					echo "            </ol>\n";
 					echo "         <br />\n";

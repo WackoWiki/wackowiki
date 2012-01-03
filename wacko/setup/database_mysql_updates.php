@@ -165,7 +165,8 @@ $alter_page_r4_3_38 = "ALTER TABLE {$pref}page ADD parent_id INT(10) UNSIGNED NO
 $alter_page_r4_3_39 = "ALTER TABLE {$pref}page ADD show_menu_tag TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER tree_level";
 $alter_page_r4_3_40 = "ALTER TABLE {$pref}page ADD deleted TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER noindex";
 
-$update_page_r4_3_1 = "UPDATE {$pref}page SET body_r=''";
+$update_page_r4_3_1 = "UPDATE {$pref}page SET body_r = ''";
+$update_page_r4_3_2 = "UPDATE {$pref}page SET body_toc = ''";
 
 // FIXME: breaks somewhat the naming rules
 $update_page_r4_3_2_1 = "DELETE {$pref}link.* FROM {$pref}link INNER JOIN {$pref}page ON ({$pref}link.to_tag = {$pref}page.tag) WHERE {$pref}page.user = 'WackoInstaller'";
