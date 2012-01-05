@@ -146,9 +146,9 @@ if (isset($_POST['password']))
 	{
 		$engine->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $engine->config['base_url'].'');
 		$engine->set_session_cookie('admin', hash('sha256', $_POST['password']), '', ( $engine->config['tls'] == true ? 1 : 0 ));
-		$_SESSION['created'] = time();
-		$_SESSION['last_activity'] = time();
-		$_SESSION['failed_login_count'] == 0;
+		$_SESSION['created']			= time();
+		$_SESSION['last_activity']		= time();
+		$_SESSION['failed_login_count']	= 0;
 		$engine->log(1, $engine->get_translation('LogAdminLoginSuccess', $engine->config['language']));
 		$engine->redirect(( $engine->config['tls'] == true ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href('admin.php')) : $engine->href('admin.php') ));
 	}
@@ -342,9 +342,9 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 				{
 					echo ( $row['cat'] != $category
 						? "</ul>\n</li>\n<li class=\"text submenu2\">".$row['cat']."<ul>\n"
-						: "");
+						: '');
 					echo ( isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode']
-						? "<li class=\"active\">"
+						? '<li class="active">'
 						: "<li>" ); ?>
 					<a href="?mode=<?php echo $row['mode']; ?>" title="<?php echo $row['title']; ?>"><?php echo $row['name']; ?></a>
 					<?php echo "</li>\n";
