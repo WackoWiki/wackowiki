@@ -692,8 +692,6 @@ switch($config['database_driver'])
 
 					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysql_query($table_user_setting_r4_3, $dblink), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
-					// inserting config values
-					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingSystemAccount'], @mysql_query($insert_system, $dblink), str_replace('%1', 'system account', $lang['ErrorAlreadyExists']));
 
 					#test($lang['InstallingAdmin'], @mysql_query($insert_admin, $dblink), str_replace('%1', 'admin user', $lang['ErrorAlreadyExists']));
@@ -732,6 +730,9 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysql_query($alter_user_setting_r4_3_3, $dblink), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_2, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
+
+					// inserting config values
+					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 
 					echo "            </ol>\n";
 					echo "            <br />\n";
@@ -1119,8 +1120,6 @@ switch($config['database_driver'])
 
 					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $table_user_setting_r4_3), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
-					// inserting config values
-					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 					test($lang['InstallingSystemAccount'], @mysqli_query($dblink, $insert_system), str_replace('%1', 'system account', $lang['ErrorAlreadyExists']));
 
 					#test($lang['InstallingAdmin'], @mysqli_query($dblink, $insert_admin), str_replace('%1', 'admin user', $lang['ErrorAlreadyExists']));
@@ -1159,6 +1158,9 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_setting_r4_3_3), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
 
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_2), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
+
+					// inserting config values
+					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 
 					echo "            </ol>\n";
 					echo "         <br />\n";
@@ -1561,8 +1563,6 @@ switch($config['database_driver'])
 
 					test_pdo(str_replace('%1', 'user_setting', $lang['CreatingTable']), $table_user_setting_r4_3, str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
 
-					// inserting config values
-					test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 					test_pdo($lang['InstallingSystemAccount'], $insert_system, str_replace('%1', 'system account', $lang['ErrorAlreadyExists']));
 
 					#test_pdo($lang['InstallingAdmin'], $insert_admin, str_replace('%1', 'admin user', $lang['ErrorAlreadyExists']));
@@ -1601,6 +1601,9 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'user_setting', $lang['AlterTable']), $alter_user_setting_r4_3_3, str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
 
 					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_2, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
+
+					// inserting config values
+					test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 
 					echo "            </ol>\n";
 					echo "         <br />\n";
