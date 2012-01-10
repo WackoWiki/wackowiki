@@ -219,7 +219,11 @@ function recursive_move(&$parent, $root)
 
 		// $new_name = str_replace( $root, $new_root, $page['tag'] );
 		$new_name = preg_replace('/'.preg_quote($root, '/').'/', preg_quote($new_root), $page['tag'], 1);
-		move( $parent, $page, $new_name );
+
+		// FIXME: preg_quote is not universally suitable for escaping the replacement string. A single . will become \. and the preg_replace call will not undo the escaping.
+		$new_name = stripslashes($new_name);
+
+		move($parent, $page, $new_name);
 
 		echo "</li>\n";
 	}
