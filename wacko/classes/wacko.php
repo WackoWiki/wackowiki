@@ -5591,12 +5591,12 @@ class Wacko
 		}
 
 		// load page and site information
-		$page	= $this->load_page($tag);
-		$new	= $clone_tag;
+		$page		= $this->load_page($tag);
+		$new_tag	= $clone_tag;
 
 		return
 			// save
-			$this->save_page($new, $title = $page['title'], $page['body'], $edit_note, $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = $page['lang'], $mute = false, $user_name = false);
+			$this->save_page($new_tag, $title = $page['title'], $page['body'], $edit_note, $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = $page['lang'], $mute = false, $user_name = false);
 	}
 
 	function rename_page($tag, $new_tag, $new_supertag = '')

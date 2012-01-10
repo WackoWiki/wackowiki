@@ -186,12 +186,16 @@ function recursive_clone(&$parent, $root)
 
 	echo "<ol>\n";
 
-	foreach( $pages as $page )
+	foreach($pages as $page)
 	{
 		echo "<li><b>".$page['tag']."</b>\n";
 
 		// $new_name = str_replace( $root, $new_root, $page['tag'] );
 		$new_name		= preg_replace('/'.preg_quote($root, '/').'/', preg_quote($new_root), $page['tag'], 1);
+
+		// FIXME: preg_quote is not universally suitable for escaping the replacement string. A single . will become \. and the preg_replace call will not undo the escaping.
+		$new_name = stripslashes($new_name);
+
 		$super_new_name	= $parent->translit($new_name);
 		$edit_note		= isset($_POST['edit_note']) ? $_POST['edit_note'] : $edit_note;
 
