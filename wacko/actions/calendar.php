@@ -9,11 +9,11 @@
 	.calendar tr td
 */
 
-if (!isset($year)) $year = "";
-if (!isset($month)) $month = "";
-if (!isset($highlight)) $highlight = "";
-if (!isset($daywidth)) $daywidth = "";
-if (!isset($days)) $days = "";
+if (!isset($year)) $year = '';
+if (!isset($month)) $month = '';
+if (!isset($highlight)) $highlight = '';
+if (!isset($daywidth)) $daywidth = '';
+if (!isset($days)) $days = '';
 
 
 $time			= time();
