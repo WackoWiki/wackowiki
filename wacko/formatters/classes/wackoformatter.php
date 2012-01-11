@@ -339,7 +339,7 @@ class WackoFormatter
 
 			if ($formatter == 'c')
 			{
-				$formatter = 'comments';
+				$formatter = 'comment';
 			}
 
 			if ($formatter == '')
