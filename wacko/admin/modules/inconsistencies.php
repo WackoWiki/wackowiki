@@ -31,17 +31,17 @@ function admin_inconsistencies(&$engine, &$module)
 		{
 			echo '<table>';
 
-			// 1.1 group_member without user
-			$group_member = $engine->load_all(
+			// 1.1 usergroup_member without user
+			$usergroup_member = $engine->load_all(
 				"SELECT
 					gm.*
 				FROM
-					{$engine->config['table_prefix']}group_member gm
+					{$engine->config['table_prefix']}usergroup_member gm
 					LEFT JOIN {$engine->config['table_prefix']}user u ON (gm.user_id = u.user_id)
 				WHERE
 					u.user_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>group_member without user </td><td>'.count($group_member).'</td></tr>';
+			echo '<tr class="hl_setting"><td>usergroup_member without user </td><td>'.count($usergroup_member).'</td></tr>';
 			// -> DELETE
 
 			// 1.2. menu without user
@@ -203,17 +203,17 @@ function admin_inconsistencies(&$engine, &$module)
 			echo '<tr class="hl_setting"><td>watch without page </td><td>'.count($watch2).'</td></tr>';
 				// -> DELETE
 
-			// 3.1. group_member without group
-			$group_member2 = $engine->load_all(
+			// 3.1. usergroup_member without group
+			$usergroup_member2 = $engine->load_all(
 				"SELECT
 					gm.*
 				FROM
-					{$engine->config['table_prefix']}group_member gm
-					LEFT JOIN {$engine->config['table_prefix']}group g ON (gm.group_id = g.group_id)
+					{$engine->config['table_prefix']}usergroup_member gm
+					LEFT JOIN {$engine->config['table_prefix']}usergroup g ON (gm.group_id = g.group_id)
 				WHERE
 					g.group_id IS NULL");;
 
-			echo '<tr class="hl_setting"><td>group_member without group </td><td>'.count($group_member2).'</td></tr>';
+			echo '<tr class="hl_setting"><td>usergroup_member without usergroup </td><td>'.count($usergroup_member2).'</td></tr>';
 			// -> DELETE
 
 			echo '</table>';
@@ -234,17 +234,17 @@ function admin_inconsistencies(&$engine, &$module)
 		{
 			echo '<table>';
 
-			// 1.1 group_member without user
-			$group_member = $engine->sql_query(
+			// 1.1 usergroup_member without user
+			$usergroup_member = $engine->sql_query(
 					"DELETE
 						gm.*
 					FROM
-			{$engine->config['table_prefix']}group_member gm
+			{$engine->config['table_prefix']}usergroup_member gm
 						LEFT JOIN {$engine->config['table_prefix']}user u ON (gm.user_id = u.user_id)
 					WHERE
 						u.user_id IS NULL");
 
-			echo '<tr class="hl_setting"><td>group_member without user </td><td>'.count($group_member).'</td></tr>';
+			echo '<tr class="hl_setting"><td>usergroup_member without user </td><td>'.count($usergroup_member).'</td></tr>';
 
 
 			// 1.2. menu without user
@@ -397,17 +397,17 @@ function admin_inconsistencies(&$engine, &$module)
 
 			echo '<tr class="hl_setting"><td>watch without page </td><td>'.count($watch2).'</td></tr>';
 
-			// 3.1. group_member without group
-			$group_member2 = $engine->sql_query(
+			// 3.1. usergroup_member without group
+			$usergroup_member2 = $engine->sql_query(
 					"DELETE
 						gm.*
 					FROM
-			{$engine->config['table_prefix']}group_member gm
-						LEFT JOIN {$engine->config['table_prefix']}group g ON (gm.group_id = g.group_id)
+			{$engine->config['table_prefix']}usergroup_member gm
+						LEFT JOIN {$engine->config['table_prefix']}usergroup g ON (gm.group_id = g.group_id)
 					WHERE
 						g.group_id IS NULL");;
 
-			echo '<tr class="hl_setting"><td>group_member without group </td><td>'.count($group_member2).'</td></tr>';
+			echo '<tr class="hl_setting"><td>usergroup_member without usergroup </td><td>'.count($usergroup_member2).'</td></tr>';
 
 
 			echo '</table>';

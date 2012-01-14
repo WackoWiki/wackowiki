@@ -261,9 +261,9 @@ class Init
 									g.group_name,
 									u.user_name
 								FROM
-									{$this->config['table_prefix']}group_member gm
+									{$this->config['table_prefix']}usergroup_member gm
 									INNER JOIN {$this->config['table_prefix']}user u ON (gm.user_id = u.user_id)
-									INNER JOIN {$this->config['table_prefix']}group g ON (gm.group_id = g.group_id)";
+									INNER JOIN {$this->config['table_prefix']}usergroup g ON (gm.group_id = g.group_id)";
 
 				$groups_array = array();
 
@@ -279,23 +279,23 @@ class Init
 
 					if (!empty($groups_array))
 					{
-						$_groups = array();
+						$_usergroups = array();
 
 						foreach ($groups_array as $user_group_pairs)
 						{
-							if (!isset($_groups[$user_group_pairs['group_name']]))
+							if (!isset($_usergroups[$user_group_pairs['group_name']]))
 							{
-								$_groups[$user_group_pairs['group_name']] = '';
+								$_usergroups[$user_group_pairs['group_name']] = '';
 							}
 
 							// Then we make old fashioned UserName1\nUserName2\n lines for each group
-							$_groups[$user_group_pairs['group_name']] .= $user_group_pairs['user_name'].'\n';
+							$_usergroups[$user_group_pairs['group_name']] .= $user_group_pairs['user_name'].'\n';
 						}
 					}
 
-					if (!empty($_groups))
+					if (!empty($_usergroups))
 					{
-						foreach ($_groups as $group => $users)
+						foreach ($_usergroups as $group => $users)
 						{
 							// Finally we put the proper Group => UserName1\nUserName2\n to the config
 							// when we make trim($users, '\n') we get UserName1\nUserName2 without trailing '\n'

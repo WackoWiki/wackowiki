@@ -3529,20 +3529,20 @@ class Wacko
 	}
 
 	// GROUPS
-	function load_group($group_name, $group_id = 0)
+	function load_usergroup($group_name, $group_id = 0)
 	{
 		$fiels_default	= 'g.*, u.user_name AS moderator';
 
-		$group = $this->load_single(
+		$usergroup = $this->load_single(
 			"SELECT {$fiels_default} ".
-			"FROM ".$this->config['table_prefix']."group g ".
+			"FROM ".$this->config['table_prefix']."usergroup g ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (g.moderator = u.user_id) ".
 			"WHERE ".( $group_id != 0
 				? "g.group_id		= '".quote($this->dblink, $group_id)."' "
 				: "g.group_name		= '".quote($this->dblink, $group_name)."' ").
 			"LIMIT 1");
 
-		return $group;
+		return $usergroup;
 	}
 
 	// USERS

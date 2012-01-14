@@ -51,25 +51,6 @@ $table_config = "CREATE TABLE {$pref}config (".
 					"UNIQUE KEY idx_config_name (config_name)".
 				") {$engine} COMMENT='' {$charset}";
 
-$table_group = "CREATE TABLE {$pref}group (".
-					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"group_name VARCHAR(100) NOT NULL,".
-					"description VARCHAR(255) NOT NULL,".
-					"moderator INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
-					"is_system TINYINT(1) UNSIGNED NOT NULL,".
-					"open TINYINT(1) UNSIGNED NOT NULL,".
-					"active TINYINT(1) UNSIGNED NOT NULL,".
-					"PRIMARY KEY (group_id),".
-					"UNIQUE KEY idx_name (group_name)".
-				") {$engine} COMMENT='' {$charset}";
-
-$table_group_member = "CREATE TABLE {$pref}group_member (".
-					"group_id INTEGER(10) UNSIGNED NOT NULL,".
-					"user_id INTEGER(10) UNSIGNED NOT NULL,".
-					"UNIQUE KEY idx_group_id (group_id, user_id)".
-				") {$engine} COMMENT='' {$charset}";
-
 $table_link = "CREATE TABLE {$pref}link (".
 					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,".
 					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -341,6 +322,25 @@ $table_user_setting = "CREATE TABLE {$pref}user_setting (".
 					"KEY idx_send_watchmail (send_watchmail)".
 				") {$engine} COMMENT='' {$charset}";
 
+$table_usergroup = "CREATE TABLE {$pref}usergroup (".
+					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"group_name VARCHAR(100) NOT NULL,".
+					"description VARCHAR(255) NOT NULL,".
+					"moderator INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
+					"is_system TINYINT(1) UNSIGNED NOT NULL,".
+					"open TINYINT(1) UNSIGNED NOT NULL,".
+					"active TINYINT(1) UNSIGNED NOT NULL,".
+					"PRIMARY KEY (group_id),".
+					"UNIQUE KEY idx_name (group_name)".
+				") {$engine} COMMENT='' {$charset}";
+
+$table_usergroup_member = "CREATE TABLE {$pref}usergroup_member (".
+					"group_id INTEGER(10) UNSIGNED NOT NULL,".
+					"user_id INTEGER(10) UNSIGNED NOT NULL,".
+					"UNIQUE KEY idx_group_id (group_id, user_id)".
+				") {$engine} COMMENT='' {$charset}";
+
 $table_watch = "CREATE TABLE {$pref}watch (".
 					"watch_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -361,28 +361,28 @@ $table_watch = "CREATE TABLE {$pref}watch (".
  Wacko Wiki MySQL Table Deletion Script
 */
 
-$table_acl_drop				= "DROP TABLE {$pref}acl";
-$table_menu_drop			= "DROP TABLE {$pref}menu";
-$table_cache_drop			= "DROP TABLE {$pref}cache";
-$table_config_drop			= "DROP TABLE {$pref}config";
-$table_group_drop			= "DROP TABLE {$pref}group";
-$table_group_member_drop	= "DROP TABLE {$pref}group_member";
-$table_category_drop		= "DROP TABLE {$pref}category";
-$table_category_page_drop	= "DROP TABLE {$pref}category_page";
-$table_link_drop			= "DROP TABLE {$pref}link";
-$table_log_drop				= "DROP TABLE {$pref}log";
-$table_page_drop			= "DROP TABLE {$pref}page";
-$table_poll_drop			= "DROP TABLE {$pref}poll";
-$table_rating_drop			= "DROP TABLE {$pref}rating";
-$table_referrer_drop		= "DROP TABLE {$pref}referrer";
-$table_revision_drop		= "DROP TABLE {$pref}revision";
+$table_acl_drop					= "DROP TABLE {$pref}acl";
+$table_menu_drop				= "DROP TABLE {$pref}menu";
+$table_cache_drop				= "DROP TABLE {$pref}cache";
+$table_config_drop				= "DROP TABLE {$pref}config";
+$table_category_drop			= "DROP TABLE {$pref}category";
+$table_category_page_drop		= "DROP TABLE {$pref}category_page";
+$table_link_drop				= "DROP TABLE {$pref}link";
+$table_log_drop					= "DROP TABLE {$pref}log";
+$table_page_drop				= "DROP TABLE {$pref}page";
+$table_poll_drop				= "DROP TABLE {$pref}poll";
+$table_rating_drop				= "DROP TABLE {$pref}rating";
+$table_referrer_drop			= "DROP TABLE {$pref}referrer";
+$table_revision_drop			= "DROP TABLE {$pref}revision";
 /*$table_session_drop			= "DROP TABLE {$pref}session";*/
-$table_tag_drop				= "DROP TABLE {$pref}tag";
-$table_tag_page_drop		= "DROP TABLE {$pref}tag_page";
-$table_upload_drop			= "DROP TABLE {$pref}upload";
-$table_user_drop			= "DROP TABLE {$pref}user";
-$table_user_setting_drop	= "DROP TABLE {$pref}user_setting";
-$table_watch_drop			= "DROP TABLE {$pref}watch";
-/* $table_word_drop			= "DROP TABLE {$pref}word"; */
+$table_tag_drop					= "DROP TABLE {$pref}tag";
+$table_tag_page_drop			= "DROP TABLE {$pref}tag_page";
+$table_upload_drop				= "DROP TABLE {$pref}upload";
+$table_user_drop				= "DROP TABLE {$pref}user";
+$table_user_setting_drop		= "DROP TABLE {$pref}user_setting";
+$table_usergroup_drop			= "DROP TABLE {$pref}group";
+$table_usergroup_member_drop	= "DROP TABLE {$pref}group_member";
+$table_watch_drop				= "DROP TABLE {$pref}watch";
+/* $table_word_drop				= "DROP TABLE {$pref}word"; */
 
 ?>

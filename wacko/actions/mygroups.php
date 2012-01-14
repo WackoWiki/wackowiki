@@ -11,15 +11,17 @@ if (!isset($nomark)) $nomark = '';
 
 if (!function_exists('MyGroups'))
 {
-	function MyGroups($user_name, $al)
+	function my_groups($user_name, $alias)
 	{
 		$my_groups_count = 0;
-		foreach($al as $group => $members)
+
+		foreach($alias as $usergroup => $members)
 		{
 			$groupmembers = explode("\\n", $members);
+
 			if(in_array ($user_name, $groupmembers))
 			{
-				echo $group.'<br />';
+				echo $usergroup.'<br />';
 				$my_groups_count++;
 			}
 		}
@@ -29,15 +31,19 @@ if (!function_exists('MyGroups'))
 
 if($user = $this->get_user())
 {
-	$al = $this->config['aliases'];
+	$alias = $this->config['aliases'];
 
 	if (!$nomark)
-	echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$user['user_name'].": ".$this->get_translation('MyGroups')."</span></p>\n";
+	{
+		echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$user['user_name'].": ".$this->get_translation('MyGroups')."</span></p>\n";
+	}
 
-	$groups_count = MyGroups($user['user_name'],$al);
+	$groups_count = my_groups($user['user_name'], $alias);
 	echo "<i>".$groups_count." ".($groups_count == 1 ? $this->get_translation('Group') : $this->get_translation('Groups'))."</i><br />\n";
 
 	if (!$nomark)
-	echo "</div>\n";
+	{
+		echo "</div>\n";
+	}
 }
 ?>

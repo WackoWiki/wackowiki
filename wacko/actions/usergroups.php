@@ -62,7 +62,7 @@ if($user = $this->get_user())
 
 				$group_members = implode('<br />', $allowed_groups);
 
-				// Print out the group name and then a list of the users under it
+				// Print out the usergroup name and then a list of the users under it
 				echo "<strong>$group_name</strong>:<br />".str_replace("\n","<br />",$group_members)."<br />";
 				echo "</td>";
 

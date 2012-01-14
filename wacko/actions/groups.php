@@ -12,18 +12,18 @@ $groups			= '';
 $usergroups		= '';
 $error			= '';
 
-// display group profile
+// display usergroup profile
 if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 {
-	// does requested group exists?
-	if (false == $group = $this->load_group($_REQUEST['profile']))
+	// does requested usergroup exists?
+	if (false == $usergroup = $this->load_usergroup($_REQUEST['profile']))
 	{
 		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_REQUEST['profile']), str_replace('%1', $this->supertag, $this->get_translation('GroupsNotFound'))).'</div>';
 	}
 	else
 	{
 		// header and profile data
-		echo '<h1>'.$group['group_name'].'</h1>';
+		echo '<h1>'.$usergroup['group_name'].'</h1>';
 		echo '<small><a href="'.$this->href('', $this->tag).'">&laquo; '.$this->get_translation('GroupsList')."</a></small>\n";
 		echo '<h2>'.$this->get_translation('GroupsProfile').'</h2>'."\n";
 
@@ -32,29 +32,29 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 		<table border="0" cellspacing="3">
 			<tr class="lined">
 				<td class="userprofil"><?php echo $this->get_translation('GroupsDescription'); ?></td>
-				<td><?php echo $group['description']; ?></td>
+				<td><?php echo $usergroup['description']; ?></td>
 			</tr>
 			<tr class="lined">
 				<td class="userprofil"><?php echo $this->get_translation('GroupsCreated'); ?></td>
-				<td><?php echo $this->get_time_string_formatted($group['created']); ?></td>
+				<td><?php echo $this->get_time_string_formatted($usergroup['created']); ?></td>
 			</tr>
-			<tr class="lined"><?php // Have all group pages as sub pages of the current Groups page. ?>
+			<tr class="lined"><?php // Have all usergroup pages as sub pages of the current Groups page. ?>
 				<td class="userprofil"><?php echo $this->get_translation('GroupSpace'); // TODO: this might be placed somewhere else, just put it here for testing ?></td>
-				<td><a href="<?php echo $this->href('', ($this->config['groups_page'].'/'.$group['group_name'])); ?>"><?php echo $this->config['groups_page'].'/'.$group['group_name']; ?></a></td>
+				<td><a href="<?php echo $this->href('', ($this->config['groups_page'].'/'.$usergroup['group_name'])); ?>"><?php echo $this->config['groups_page'].'/'.$usergroup['group_name']; ?></a></td>
 			</tr>
 		</table>
 
 <?php
 
-		// group members
+		// usergroup members
 		$limit = 20;
 		$count = $this->load_single(
 						"SELECT COUNT(m.user_id) AS total_members ".
-						"FROM {$this->config['table_prefix']}group g ".
-							"LEFT JOIN ".$this->config['table_prefix']."group_member m ON (m.group_id = g.group_id) ".
+						"FROM {$this->config['table_prefix']}usergroup g ".
+							"LEFT JOIN ".$this->config['table_prefix']."usergroup_member m ON (m.group_id = g.group_id) ".
 						"WHERE ".
 							"g.active = '1' ".
-							"AND g.group_id = '".quote($this->dblink, $group['group_id'])."' ".
+							"AND g.group_id = '".quote($this->dblink, $usergroup['group_id'])."' ".
 						"LIMIT 1", 1);
 
 		echo '<h2 id="pages">'.$count['total_members'].' '.$this->get_translation('GroupsMembers').'</a></h2>'."\n";
@@ -64,15 +64,15 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 		echo "<table style=\"width:100%; white-space:nowrap; padding-right:20px;\">\n";
 
 
-		$pagination = $this->pagination($count['total_members'], $limit, 'd', 'profile='.$group['group_name'].'&amp;sort='.( isset($_GET['sort']) && $_GET['sort'] != 'name' ? 'date' : 'name' ).'#members');
+		$pagination = $this->pagination($count['total_members'], $limit, 'd', 'profile='.$usergroup['group_name'].'&amp;sort='.( isset($_GET['sort']) && $_GET['sort'] != 'name' ? 'date' : 'name' ).'#members');
 
 		if ($count['total_members'])
 		{
 			$members = $this->load_all(
 				"SELECT u.user_id, u.user_name, u.signup_time, u.total_pages, u.total_revisions, u.total_comments ".
 				"FROM {$this->config['table_prefix']}user u ".
-					"LEFT JOIN {$this->config['table_prefix']}group_member m ON (u.user_id = m.user_id) ".
-				"WHERE m.group_id = '".quote($this->dblink, $group['group_id'])."' ".
+					"LEFT JOIN {$this->config['table_prefix']}usergroup_member m ON (u.user_id = m.user_id) ".
+				"WHERE m.group_id = '".quote($this->dblink, $usergroup['group_id'])."' ".
 				"ORDER BY ".( isset($_GET['sort']) && $_GET['sort'] == 'name' ? 'u.user_name ASC' : 'signup_time DESC' )." ".
 				"LIMIT {$pagination['offset']}, $limit");
 
@@ -133,7 +133,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 	}
 }
-// display whole group list instead of the particular profile
+// display whole usergroup list instead of the particular profile
 else
 {
 	$limit = 50;
@@ -142,8 +142,8 @@ else
 	// $param is passed to the pagination links
 	if (isset($_GET['group']) && $_GET['group'] == true && strlen($_GET['group']) > 2)
 	{
-		// goto group profile directly if so desired
-		if (isset($_GET['gotoprofile']) && $this->load_group($_GET['group']) == true)
+		// goto usergroup profile directly if so desired
+		if (isset($_GET['gotoprofile']) && $this->load_usergroup($_GET['group']) == true)
 		{
 			$this->redirect($this->href('', '', 'profile='.htmlspecialchars($_GET['group'])));
 		}
@@ -182,7 +182,7 @@ else
 
 	$count = $this->load_single(
 		"SELECT COUNT(group_name) AS n ".
-		"FROM {$this->config['table_prefix']}group ".
+		"FROM {$this->config['table_prefix']}usergroup ".
 		( $where == true ? $where : '' ));
 
 	$pagination = $this->pagination($count['n'], $limit, 'p', $param);
@@ -190,9 +190,9 @@ else
 	// collect data
 	$groups = $this->load_all(
 		"SELECT g.group_name, g.description, g.created, u.user_name AS moderator, COUNT(m.user_id) AS members ".
-		"FROM {$this->config['table_prefix']}group g ".
+		"FROM {$this->config['table_prefix']}usergroup g ".
 			"LEFT JOIN ".$this->config['table_prefix']."user u ON (g.moderator = u.user_id) ".
-			"LEFT JOIN ".$this->config['table_prefix']."group_member m ON (m.group_id = g.group_id) ".
+			"LEFT JOIN ".$this->config['table_prefix']."usergroup_member m ON (m.group_id = g.group_id) ".
 		( $where == true ? $where : '' ).
 		( $where ? 'AND ' : "WHERE ").
 			"g.active = '1' ".
@@ -200,7 +200,7 @@ else
 		( $order == true ? $order : "ORDER BY members DESC " ).
 		"LIMIT {$pagination['offset']}, $limit");
 
-	// group filter form
+	// usergroup filter form
 	echo '<table border="0" cellspacing="3" class="formation"><tr><td class="label">';
 	echo $this->form_open('', '', 'get');
 	echo $this->get_translation('GroupsSearch').': </td><td>';
@@ -241,13 +241,13 @@ else
 		{
 			echo '<tr class="lined">';
 
-			echo	'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($group['group_name']).'').'">'.$group['group_name'].'</a></td>'.
-					'<td align="center">'.$group['members'].'</td>'.
-					/* '<td align="center">'.$group['total_comments'].'</td>'.
-					'<td align="center">'.$group['total_revisions'].'</td>'. */
+			echo	'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($usergroup['group_name']).'').'">'.$usergroup['group_name'].'</a></td>'.
+					'<td align="center">'.$usergroup['members'].'</td>'.
+					/* '<td align="center">'.$usergroup['total_comments'].'</td>'.
+					'<td align="center">'.$usergroup['total_revisions'].'</td>'. */
 				($this->get_user()
 					?
-					'<td align="center">'.$this->get_time_string_formatted($group['created']).'</td>'
+					'<td align="center">'.$this->get_time_string_formatted($usergroup['created']).'</td>'
 					: '').
 			"</tr>\n";
 		}
