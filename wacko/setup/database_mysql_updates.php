@@ -54,27 +54,6 @@ $table_config_r4_3 = "CREATE TABLE {$pref}config (".
 					"UNIQUE KEY idx_config_name (config_name)".
 				") {$engine} COMMENT='' {$charset}";
 
-// GROUP
-$table_group_r4_3 = "CREATE TABLE {$pref}group (".
-					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"group_name VARCHAR(100) NOT NULL,".
-					"description VARCHAR(255) NOT NULL,".
-					"moderator INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
-					"is_system TINYINT(1) UNSIGNED NOT NULL,".
-					"open TINYINT(1) UNSIGNED NOT NULL,".
-					"active TINYINT(1) UNSIGNED NOT NULL,".
-					// "special TINYINT(1) UNSIGNED NOT NULL,".
-					"PRIMARY KEY (group_id),".
-					"UNIQUE KEY idx_name (group_name)".
-				") {$engine} COMMENT='' {$charset}";
-
-$table_group_member_r4_3 = "CREATE TABLE {$pref}group_member (".
-					"group_id INTEGER(10) UNSIGNED NOT NULL,".
-					"user_id INTEGER(10) UNSIGNED NOT NULL,".
-					"UNIQUE KEY idx_group_id (group_id, user_id)".
-				") {$engine} COMMENT='' {$charset}";
-
 // LINK
 $rename_link_r4_3_1 = "RENAME TABLE {$pref}links TO {$pref}link";
 
@@ -381,6 +360,30 @@ $table_user_setting_r4_3 = "CREATE TABLE {$pref}user_setting (".
 $alter_user_setting_r4_3_1 = "ALTER TABLE {$pref}user_setting ADD allow_massemail TINYINT(1) UNSIGNED DEFAULT '0' AFTER allow_intercom";
 $alter_user_setting_r4_3_2 = "ALTER TABLE {$pref}user_setting CHANGE timezone timezone DECIMAL(5,2) NOT NULL DEFAULT '0.00'";
 $alter_user_setting_r4_3_3 = "ALTER TABLE {$pref}user_setting ADD dst TINYINT(1) UNSIGNED DEFAULT '0' NOT NULL  AFTER timezone";
+
+// USERGROUP
+$rename_usergroup_r4_3_1 = "RENAME TABLE {$pref}group TO {$pref}usergroup";
+
+$table_usergroup_r4_3 = "CREATE TABLE {$pref}usergroup (".
+					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
+					"group_name VARCHAR(100) NOT NULL,".
+					"description VARCHAR(255) NOT NULL,".
+					"moderator INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
+					"is_system TINYINT(1) UNSIGNED NOT NULL,".
+					"open TINYINT(1) UNSIGNED NOT NULL,".
+					"active TINYINT(1) UNSIGNED NOT NULL,".
+					"PRIMARY KEY (group_id),".
+					"UNIQUE KEY idx_name (group_name)".
+				") {$engine} COMMENT='' {$charset}";
+
+$rename_usergroup_member_r4_3_1 = "RENAME TABLE {$pref}group_member TO {$pref}usergroup_member";
+
+$table_usergroup_member_r4_3 = "CREATE TABLE {$pref}usergroup_member (".
+					"group_id INTEGER(10) UNSIGNED NOT NULL,".
+					"user_id INTEGER(10) UNSIGNED NOT NULL,".
+					"UNIQUE KEY idx_group_id (group_id, user_id)".
+				") {$engine} COMMENT='' {$charset}";
 
 // WATCH
 $rename_watch_r4_3_1 = "RENAME TABLE {$pref}pagewatches TO {$pref}watch";

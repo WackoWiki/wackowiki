@@ -40,7 +40,7 @@ function admin_users(&$engine, &$module)
 	if (isset($_POST['save']))
 	{
 
-		#$engine->log(4, "Updated group members ");
+		#$engine->log(4, "Updated usergroup members ");
 		#$engine->set_message($engine->get_translation('GroupsUpdated'));
 
 	}
@@ -149,7 +149,7 @@ function admin_users(&$engine, &$module)
 				"DELETE FROM {$engine->config['table_prefix']}user_setting ".
 				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
 			$engine->sql_query(
-				"DELETE FROM {$engine->config['table_prefix']}group_member ".
+				"DELETE FROM {$engine->config['table_prefix']}usergroup_member ".
 				"WHERE user_id = '".quote($engine->dblink, $_POST['user_id'])."'");
 			$engine->sql_query(
 				"DELETE FROM {$engine->config['table_prefix']}menu ".

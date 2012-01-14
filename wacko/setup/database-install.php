@@ -119,17 +119,17 @@ $insert_system				= "INSERT INTO ".$config['table_prefix']."user (user_name, pas
 $insert_admin				= "INSERT INTO ".$config['table_prefix']."user (user_name, password, salt, email, signup_time) VALUES ('".$config['admin_name']."', '".$password_encrypted."', '".$salt."', '".$config['admin_email']."', NOW())";
 $insert_admin_setting		= "INSERT INTO ".$config['table_prefix']."user_setting (user_id, theme, lang) VALUES ((SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), '".$config['theme']."', '".$config['language']."')";
 
-// TODO: for Upgrade insert other aliases also in group table
+// TODO: for Upgrade insert other aliases also in usergroup table
 // $config['aliases'] = array('Admins' => $config['admin_name']);
 
 // default groups
-$insert_admin_group			= "INSERT INTO ".$config['table_prefix']."group (group_name, description, moderator, created) VALUES ('Admins', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
-$insert_admin_group_member	= "INSERT INTO ".$config['table_prefix']."group_member (group_id, user_id) VALUES ((SELECT group_id FROM ".$config['table_prefix']."group WHERE group_name = 'Admins' LIMIT 1), (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1))";
+$insert_admin_group			= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Admins', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
+$insert_admin_group_member	= "INSERT INTO ".$config['table_prefix']."usergroup_member (group_id, user_id) VALUES ((SELECT group_id FROM ".$config['table_prefix']."usergroup WHERE group_name = 'Admins' LIMIT 1), (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1))";
 
-$insert_everybody_group		= "INSERT INTO ".$config['table_prefix']."group (group_name, description, moderator, created) VALUES ('Everybody', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
-$insert_registered_group	= "INSERT INTO ".$config['table_prefix']."group (group_name, description, moderator, created) VALUES ('Registered', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
-$insert_moderator_group		= "INSERT INTO ".$config['table_prefix']."group (group_name, description, moderator, created) VALUES ('Moderator', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
-$insert_reviewer_group		= "INSERT INTO ".$config['table_prefix']."group (group_name, description, moderator, created) VALUES ('Reviewer', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
+$insert_everybody_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Everybody', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
+$insert_registered_group	= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Registered', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
+$insert_moderator_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Moderator', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
+$insert_reviewer_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Reviewer', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
 
 $insert_logo_image			= "INSERT INTO ".$config['table_prefix']."upload (page_id, user_id, file_name, description, uploaded_dt, file_size, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1),'wacko_logo.png', 'WackoWiki', NOW(), '1580', '108', '50', 'png')";
 
@@ -366,8 +366,8 @@ switch($config['database_driver'])
 				test(str_replace('%1', 'menu', $lang['DeletingTable']), @mysql_query($table_menu_drop, $dblink), str_replace('%1', 'menu', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'cache', $lang['DeletingTable']), @mysql_query($table_cache_drop, $dblink), str_replace('%1', 'cache', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'config', $lang['DeletingTable']), @mysql_query($table_config_drop, $dblink), str_replace('%1', 'config', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'group', $lang['DeletingTable']), @mysql_query($table_group_drop, $dblink), str_replace('%1', 'group', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'group_member', $lang['DeletingTable']), @mysql_query($table_group_member_drop, $dblink), str_replace('%1', 'group_member', $lang['ErrorDeletingTable']));
+				test(str_replace('%1', 'group', $lang['DeletingTable']), @mysql_query($table_usergroup_drop, $dblink), str_replace('%1', 'group', $lang['ErrorDeletingTable']));
+				test(str_replace('%1', 'group_member', $lang['DeletingTable']), @mysql_query($table_usergroup_member_drop, $dblink), str_replace('%1', 'group_member', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'category', $lang['DeletingTable']), @mysql_query($table_category_drop, $dblink), str_replace('%1', 'category', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'category_page', $lang['DeletingTable']), @mysql_query($table_category_page_drop, $dblink), str_replace('%1', 'category_page', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'link', $lang['DeletingTable']), @mysql_query($table_link_drop, $dblink), str_replace('%1', 'link', $lang['ErrorDeletingTable']));
@@ -400,8 +400,8 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'menu', $lang['CreatingTable']), @mysql_query($table_menu, $dblink), str_replace('%1', 'menu', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'cache', $lang['CreatingTable']), @mysql_query($table_cache, $dblink), str_replace('%1', 'cache', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'config', $lang['CreatingTable']), @mysql_query($table_config, $dblink), str_replace('%1', 'config', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'group', $lang['CreatingTable']), @mysql_query($table_group, $dblink), str_replace('%1', 'group', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'group_member', $lang['CreatingTable']), @mysql_query($table_group_member, $dblink), str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'group', $lang['CreatingTable']), @mysql_query($table_usergroup, $dblink), str_replace('%1', 'group', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'group_member', $lang['CreatingTable']), @mysql_query($table_usergroup_member, $dblink), str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'category', $lang['CreatingTable']), @mysql_query($table_category, $dblink), str_replace('%1', 'category', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'category_page', $lang['CreatingTable']), @mysql_query($table_category_page, $dblink), str_replace('%1', 'category_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'link', $lang['CreatingTable']), @mysql_query($table_link, $dblink), str_replace('%1', 'link', $lang['ErrorCreatingTable']));
@@ -546,8 +546,8 @@ switch($config['database_driver'])
 
 					test(str_replace('%1', 'config', $lang['CreatingTable']), @mysql_query($table_config_r4_3, $dblink), str_replace('%1', 'config', $lang['ErrorCreatingTable']));
 
-					test(str_replace('%1', 'group', $lang['CreatingTable']), @mysql_query($table_group_r4_3, $dblink), str_replace('%1', 'group', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'group_member', $lang['CreatingTable']), @mysql_query($table_group_member_r4_3, $dblink), str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'group', $lang['CreatingTable']), @mysql_query($table_usergroup_r4_3, $dblink), str_replace('%1', 'group', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'group_member', $lang['CreatingTable']), @mysql_query($table_usergroup_member_r4_3, $dblink), str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
 
 					test(str_replace('%1', 'category', $lang['CreatingTable']), @mysql_query($table_category_r4_3, $dblink), str_replace('%1', 'category', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'category_page', $lang['CreatingTable']), @mysql_query($table_category_page_r4_3, $dblink), str_replace('%1', 'category_page', $lang['ErrorCreatingTable']));
@@ -731,6 +731,13 @@ switch($config['database_driver'])
 
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_2, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 
+					// rename group table to usergroup
+					if ($version == '5.0.beta' || $version == '5.0.rc')
+					{
+						test(str_replace('%1', 'usergroup', $lang['RenameTable']), @mysql_query($rename_usergroup_r4_3_1, $dblink), str_replace('%1', 'usergroup', $lang['ErrorRenamingTable']));
+						test(str_replace('%1', 'usergroup_member', $lang['RenameTable']), @mysql_query($rename_usergroup_member_r4_3_1, $dblink), str_replace('%1', 'usergroup_member', $lang['ErrorRenamingTable']));
+					}
+
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 
@@ -797,8 +804,8 @@ switch($config['database_driver'])
 				test(str_replace('%1', 'menu', $lang['DeletingTable']), @mysqli_query($dblink, $table_menu_drop), str_replace('%1', 'menu', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'cache', $lang['DeletingTable']), @mysqli_query($dblink, $table_cache_drop), str_replace('%1', 'cache', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'config', $lang['DeletingTable']), @mysqli_query($dblink, $table_config_drop), str_replace('%1', 'config', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'group', $lang['DeletingTable']), @mysqli_query($dblink, $table_group_drop), str_replace('%1', 'group', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'group_member', $lang['DeletingTable']), @mysqli_query($dblink, $table_group_member_drop), str_replace('%1', 'group_member', $lang['ErrorDeletingTable']));
+				test(str_replace('%1', 'group', $lang['DeletingTable']), @mysqli_query($dblink, $table_usergroup_drop), str_replace('%1', 'group', $lang['ErrorDeletingTable']));
+				test(str_replace('%1', 'group_member', $lang['DeletingTable']), @mysqli_query($dblink, $table_usergroup_member_drop), str_replace('%1', 'group_member', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'category', $lang['DeletingTable']), @mysqli_query($dblink, $table_category_drop), str_replace('%1', 'category', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'category_page', $lang['DeletingTable']), @mysqli_query($dblink, $table_category_page_drop), str_replace('%1', 'category_page', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'link', $lang['DeletingTable']), @mysqli_query($dblink, $table_link_drop), str_replace('%1', 'link', $lang['ErrorDeletingTable']));
@@ -831,8 +838,8 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'menu', $lang['CreatingTable']), @mysqli_query($dblink, $table_menu), str_replace('%1', 'menu', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'cache', $lang['CreatingTable']), @mysqli_query($dblink, $table_cache), str_replace('%1', 'cache', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'config', $lang['CreatingTable']), @mysqli_query($dblink, $table_config), str_replace('%1', 'config', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'group', $lang['CreatingTable']), @mysqli_query($dblink, $table_group), str_replace('%1', 'group', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'group_member', $lang['CreatingTable']), @mysqli_query($dblink, $table_group_member), str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'group', $lang['CreatingTable']), @mysqli_query($dblink, $table_usergroup), str_replace('%1', 'group', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'group_member', $lang['CreatingTable']), @mysqli_query($dblink, $table_usergroup_member), str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'category', $lang['CreatingTable']), @mysqli_query($dblink, $table_category), str_replace('%1', 'category', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'category_page', $lang['CreatingTable']), @mysqli_query($dblink, $table_category_page), str_replace('%1', 'category_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'link', $lang['CreatingTable']), @mysqli_query($dblink, $table_link), str_replace('%1', 'link', $lang['ErrorCreatingTable']));
@@ -975,8 +982,8 @@ switch($config['database_driver'])
 
 					test(str_replace('%1', 'config', $lang['CreatingTable']), @mysqli_query($dblink, $table_config_r4_3), str_replace('%1', 'config', $lang['ErrorCreatingTable']));
 
-					test(str_replace('%1', 'group', $lang['CreatingTable']), @mysqli_query($dblink, $table_group_r4_3), str_replace('%1', 'group', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'group_member', $lang['CreatingTable']), @mysqli_query($dblink, $table_group_member_r4_3), str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'group', $lang['CreatingTable']), @mysqli_query($dblink, $table_usergroup_r4_3), str_replace('%1', 'group', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'group_member', $lang['CreatingTable']), @mysqli_query($dblink, $table_usergroup_member_r4_3), str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
 
 					test(str_replace('%1', 'category', $lang['CreatingTable']), @mysqli_query($dblink, $table_category_r4_3), str_replace('%1', 'category', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'category_page', $lang['CreatingTable']), @mysqli_query($dblink, $table_category_page_r4_3), str_replace('%1', 'category_page', $lang['ErrorCreatingTable']));
@@ -1159,6 +1166,13 @@ switch($config['database_driver'])
 
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_2), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 
+					// rename group table to usergroup
+					if ($version == '5.0.beta' || $version == '5.0.rc')
+					{
+						test(str_replace('%1', 'usergroup', $lang['RenameTable']), @mysqli_query($dblink, $rename_usergroup_r4_3_1), str_replace('%1', 'usergroup', $lang['ErrorRenamingTable']));
+						test(str_replace('%1', 'usergroup_member', $lang['RenameTable']), @mysqli_query($dblink, $rename_usergroup_member_r4_3_1), str_replace('%1', 'usergroup_member', $lang['ErrorRenamingTable']));
+					}
+
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 
@@ -1238,8 +1252,8 @@ switch($config['database_driver'])
 				test_pdo(str_replace('%1', 'menu', $lang['DeletingTable']), $table_menu_drop, str_replace('%1', 'menu', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'cache', $lang['DeletingTable']), $table_cache_drop, str_replace('%1', 'cache', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'config', $lang['DeletingTable']), $table_config_drop, str_replace('%1', 'config', $lang['ErrorDeletingTable']));
-				test_pdo(str_replace('%1', 'group', $lang['DeletingTable']), $table_group_drop, str_replace('%1', 'group', $lang['ErrorDeletingTable']));
-				test_pdo(str_replace('%1', 'group_member', $lang['DeletingTable']), $table_group_member_drop, str_replace('%1', 'group_member', $lang['ErrorDeletingTable']));
+				test_pdo(str_replace('%1', 'group', $lang['DeletingTable']), $table_usergroup_drop, str_replace('%1', 'group', $lang['ErrorDeletingTable']));
+				test_pdo(str_replace('%1', 'group_member', $lang['DeletingTable']), $table_usergroup_member_drop, str_replace('%1', 'group_member', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'category', $lang['DeletingTable']), $table_category_drop, str_replace('%1', 'category', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'category_page', $lang['DeletingTable']), $table_category_page_drop, str_replace('%1', 'category_page', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'link', $lang['DeletingTable']), $table_link_drop, str_replace('%1', 'link', $lang['ErrorDeletingTable']));
@@ -1272,8 +1286,8 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'menu', $lang['CreatingTable']), $table_menu, str_replace('%1', 'menu', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'cache', $lang['CreatingTable']), $table_cache, str_replace('%1', 'cache', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'config', $lang['CreatingTable']), $table_config, str_replace('%1', 'config', $lang['ErrorCreatingTable']));
-					test_pdo(str_replace('%1', 'group', $lang['CreatingTable']), $table_group, str_replace('%1', 'group', $lang['ErrorCreatingTable']));
-					test_pdo(str_replace('%1', 'group_member', $lang['CreatingTable']), $table_group_member, str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'group', $lang['CreatingTable']), $table_usergroup, str_replace('%1', 'group', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'group_member', $lang['CreatingTable']), $table_usergroup_member, str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'category', $lang['CreatingTable']), $table_category, str_replace('%1', 'category', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'category_page', $lang['CreatingTable']), $table_category_page, str_replace('%1', 'category_page', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'link', $lang['CreatingTable']), $table_link, str_replace('%1', 'link', $lang['ErrorCreatingTable']));
@@ -1418,8 +1432,8 @@ switch($config['database_driver'])
 
 					test_pdo(str_replace('%1', 'config', $lang['CreatingTable']), $table_config_r4_3, str_replace('%1', 'config', $lang['ErrorCreatingTable']));
 
-					test_pdo(str_replace('%1', 'group', $lang['CreatingTable']), $table_group_r4_3, str_replace('%1', 'group', $lang['ErrorCreatingTable']));
-					test_pdo(str_replace('%1', 'group_member', $lang['CreatingTable']), $table_group_member_r4_3, str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'group', $lang['CreatingTable']), $table_usergroup_r4_3, str_replace('%1', 'group', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'group_member', $lang['CreatingTable']), $table_usergroup_member_r4_3, str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
 
 					test_pdo(str_replace('%1', 'category', $lang['CreatingTable']), $table_category_r4_3, str_replace('%1', 'category', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'category_page', $lang['CreatingTable']), $table_category_page_r4_3, str_replace('%1', 'category_page', $lang['ErrorCreatingTable']));
@@ -1601,6 +1615,13 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'user_setting', $lang['AlterTable']), $alter_user_setting_r4_3_3, str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
 
 					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_2, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
+
+					// rename group table to usergroup
+					if ($version == '5.0.beta' || $version == '5.0.rc')
+					{
+						test_pdo(str_replace('%1', 'usergroup', $lang['RenameTable']), $rename_usergroup_r4_3_1, str_replace('%1', 'usergroup', $lang['ErrorRenamingTable']));
+						test_pdo(str_replace('%1', 'usergroup_member', $lang['RenameTable']), $rename_usergroup_member_r4_3_1, str_replace('%1', 'usergroup_member', $lang['ErrorRenamingTable']));
+					}
 
 					// inserting config values
 					test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));

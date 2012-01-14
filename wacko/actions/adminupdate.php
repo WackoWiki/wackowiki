@@ -776,7 +776,7 @@ if ($this->is_admin())
 				");
 			$acl_id = $acl_id['acl_id'];
 
-			// get user and group privileges
+			// get user and usergroup privileges
 			$privileges	= explode("\n", $_acl['list']);
 			$this->debug_print_r($privileges);
 
@@ -808,7 +808,7 @@ if ($this->is_admin())
 					{
 						$_grant_id = $this->load_single(
 							"SELECT group_id ".
-							"FROM {$this->config['table_prefix']}group ".
+							"FROM {$this->config['table_prefix']}usergroup ".
 							"WHERE group_name = 'Everybody'
 							");
 						$grant_id = $_grant_id['group_id'];
@@ -819,7 +819,7 @@ if ($this->is_admin())
 					{
 						$_grant_id = $this->load_single(
 							"SELECT group_id ".
-							"FROM {$this->config['table_prefix']}group ".
+							"FROM {$this->config['table_prefix']}usergroup ".
 							"WHERE group_name = 'Registered'
 							");
 						$grant_id = $_grant_id['group_id'];
@@ -830,7 +830,7 @@ if ($this->is_admin())
 					{
 						$_grant_id = $this->load_single(
 							"SELECT group_id ".
-							"FROM {$this->config['table_prefix']}group ".
+							"FROM {$this->config['table_prefix']}usergroup ".
 							"WHERE group_name = 'Admins'
 							");
 						$grant_id = $_grant_id['group_id'];
@@ -843,7 +843,7 @@ if ($this->is_admin())
 						{
 							$_groups = $this->load_all(
 								"SELECT group_name ".
-								"FROM {$this->config['table_prefix']}group ");
+								"FROM {$this->config['table_prefix']}usergroup ");
 
 							foreach ($_groups as $_group)
 							{
@@ -858,7 +858,7 @@ if ($this->is_admin())
 						{
 							$grant_id = $this->load_single(
 								"SELECT group_id ".
-								"FROM {$this->config['table_prefix']}group ".
+								"FROM {$this->config['table_prefix']}usergroup ".
 								"WHERE group_name = '{$privilege}'
 								");
 							$grant_id		= $grant_id['group_id'];
