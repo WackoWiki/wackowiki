@@ -257,13 +257,27 @@ class Init
 				}
 
 				// retrieving usergroups data from db
-				$wacko_db_query = "SELECT
-									g.group_name,
-									u.user_name
-								FROM
-									{$this->config['table_prefix']}usergroup_member gm
-									INNER JOIN {$this->config['table_prefix']}user u ON (gm.user_id = u.user_id)
-									INNER JOIN {$this->config['table_prefix']}usergroup g ON (gm.group_id = g.group_id)";
+				if (!isset($this->config['maint_last_update']) && ($this->config['wacko_version'] == '5.0.beta' || $this->config['wacko_version'] == '5.0.rc'))
+				{
+					// TODO: remove this workaround/case after 5.0 release
+					$wacko_db_query = "SELECT
+										g.group_name,
+										u.user_name
+									FROM
+										{$this->config['table_prefix']}group_member gm
+											INNER JOIN {$this->config['table_prefix']}user u ON (gm.user_id = u.user_id)
+											INNER JOIN {$this->config['table_prefix']}group g ON (gm.group_id = g.group_id)";
+				}
+				else
+				{
+					$wacko_db_query = "SELECT
+										g.group_name,
+										u.user_name
+									FROM
+										{$this->config['table_prefix']}usergroup_member gm
+											INNER JOIN {$this->config['table_prefix']}user u ON (gm.user_id = u.user_id)
+											INNER JOIN {$this->config['table_prefix']}usergroup g ON (gm.group_id = g.group_id)";
+				}
 
 				$groups_array = array();
 
