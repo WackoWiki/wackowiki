@@ -344,12 +344,12 @@ $table_user_setting_r4_3 = "CREATE TABLE {$pref}user_setting (".
 					"doubleclick_edit TINYINT(1) UNSIGNED  NOT NULL DEFAULT '1',".
 					"show_spaces TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"typografica TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
-					"autocomplete TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"autocomplete TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"numerate_links TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
-					"allow_intercom TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"allow_intercom TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"hide_lastsession TINYINT(1) UNSIGNED DEFAULT NULL,".
 					"validate_ip TINYINT(1) UNSIGNED DEFAULT NULL,".
-					"noid_pubs TINYINT(1) UNSIGNED DEFAULT NULL,".
+					"noid_pubs TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"session_expiration TINYINT(3) UNSIGNED DEFAULT NULL,".
 					"timezone VARCHAR(32) DEFAULT NULL,".
 					"PRIMARY KEY (setting_id),".
