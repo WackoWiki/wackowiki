@@ -10,10 +10,10 @@ if (!defined('IN_WACKO'))
 $text = preg_replace ('/ {2, }/', ' ', $text);
 
 $trans = array (
-        "\r" => '',
-        "\n" => '<br />',
-        '|' => '&#124;'
-         );
+	"\r" => '',
+	"\n" => '<br />',
+	'|' => '&#124;'
+	);
 
 $text = strtr ($text, $trans);
 /*
