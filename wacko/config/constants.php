@@ -34,7 +34,7 @@ define('TRAN_LOAD',						0);
 define('TRAN_DONTLOAD',					1);
 
 // do not change this two lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-define('WACKO_VERSION',					'5.0.rc');
+define('WACKO_VERSION',					'5.0.rc2');
 define('XML_HTMLSAX3',					'lib/HTMLSax3/');
 #define('XML_HTMLSAX3',					dirname(__FILE__).'/lib/HTMLSax3/');
 define('ACTIONS4DIFF',					'a, anchor, toc'); //allowed actions in DIFF
