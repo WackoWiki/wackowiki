@@ -1032,6 +1032,11 @@ td.form_left, th.form_left {
 	white-space:nowrap;
 }
 
+.menu li.active {
+	/* background: none repeat scroll 0 0 #CCFFCC; */
+	font-weight: bold;
+}
+
 /* news / blog extention ******************************************* */
 .news {
 	float: left;
