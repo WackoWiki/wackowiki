@@ -47,6 +47,7 @@ function admin_sysinfo(&$engine, &$module)
 
 	// Sysinfo in array
 	$sysinfo['app_version']			= array('Wacko version', $engine->config['wacko_version']);
+	$sysinfo['app_updated']			= array('Last update', $engine->config['maint_last_update']);
 	$sysinfo['os']					= array('OS', PHP_OS.' ('.@php_uname().')');
 	#$sysinfo['os_extended']		= array('OS extended', @php_uname());
 	$sysinfo['server_software']		= array('Web server', $_SERVER['SERVER_SOFTWARE']);
