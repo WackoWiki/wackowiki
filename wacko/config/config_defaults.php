@@ -193,6 +193,9 @@ $wacko_config_defaults = array(
 	'max_login_attempts' => 3,
 	'ip_login_limit_max' => 50,
 
+	'ap_failed_login_count' => 0,
+	'ap_max_login_attempts' => 3,
+
 	'session_encrypt_cookie' => 0,
 	'antidupe' => 0,
 	'session_match_ip' => false,
