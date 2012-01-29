@@ -32,20 +32,7 @@ function admin_lock(&$engine, &$module)
 	if (isset($_POST['action']) && $_POST['action'] == 'lock')
 	{
 		$init->lock();
-		/* $access	= $init->is_locked();
-		$file	= fopen('config/lock', 'w');
 
-		if ($access === true)
-		{
-			fwrite($file, '0');
-		}
-		else
-		{
-			fwrite($file, '1');
-		}
-
-		fclose($file);
-		unset($access); */
 		$engine->set_user($_user, 0);
 		$engine->redirect('admin.php');
 	}
@@ -215,6 +202,7 @@ function admin_lock(&$engine, &$module)
 					$tfiles++;
 				}
 			}
+
 			$tsize += $size;
 
 			echo '<tr>'.
@@ -224,6 +212,7 @@ function admin_lock(&$engine, &$module)
 				'</tr>'.
 				'<tr class="lined"><td colspan="3"></td></tr>'."\n";
 		}
+
 		@closedir($handle);
 	}
 ?>

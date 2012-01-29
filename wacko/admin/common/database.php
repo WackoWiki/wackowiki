@@ -32,18 +32,6 @@ if (isset($tables, $directories) !== true)
 				'order'	=> 'config_id',
 				'limit' => 500
 			),
-			$engine->config['table_prefix'].'group' => array(
-				'name'	=> $engine->config['table_prefix'].'group',
-				'where'	=> false,
-				'order'	=> 'group_name',
-				'limit' => 1000
-			),
-			$engine->config['table_prefix'].'group_member' => array(
-				'name'	=> $engine->config['table_prefix'].'group_member',
-				'where'	=> false,
-				'order'	=> 'group_id',
-				'limit' => 1000
-			),
 			$engine->config['table_prefix'].'category' => array(
 				'name'	=> $engine->config['table_prefix'].'category',
 				'where'	=> false,
@@ -121,6 +109,18 @@ if (isset($tables, $directories) !== true)
 				'where'	=> false,
 				'order'	=> 'user_id',
 				'limit' => 1000
+			),
+			$engine->config['table_prefix'].'usergroup' => array(
+							'name'	=> $engine->config['table_prefix'].'usergroup',
+							'where'	=> false,
+							'order'	=> 'group_name',
+							'limit' => 1000
+			),
+			$engine->config['table_prefix'].'usergroup_member' => array(
+							'name'	=> $engine->config['table_prefix'].'usergroup_member',
+							'where'	=> false,
+							'order'	=> 'group_id',
+							'limit' => 1000
 			),
 			$engine->config['table_prefix'].'watch' => array(
 							'name'	=> $engine->config['table_prefix'].'watch',
@@ -508,6 +508,7 @@ function GetFiles(&$engine, $pack, $dir, $root)
 				$t++;	// total files processed
 			}
 		}
+
 		closedir($dh);
 
 		return $t;
@@ -547,6 +548,7 @@ function PutData(&$engine, $pack, $table, $mode)
 
 	// read and process file in iterations to the end
 	$t = 0;
+
 	while (true == $data = gzread($file, BACKUP_MEMORY_STEP))
 	{
 		// determine length of the uncut data block
