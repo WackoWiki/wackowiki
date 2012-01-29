@@ -153,6 +153,9 @@ $config_db['allow_themes']					= $config['allow_themes'];
 $config_db['allow_themes_per_page']			= $config['allow_themes_per_page'];
 $config_db['allow_x11colors']				= $config['allow_x11colors'];
 $config_db['antidupe']						= $config['antidupe'];
+$config_db['ap_failed_login_count']			= $config['ap_failed_login_count'];
+$config_db['ap_max_login_attempts']			= $config['ap_max_login_attempts'];
+
 $config_db['cache']							= $config['cache'];
 $config_db['cache_sql']						= $config['cache_sql'];
 $config_db['cache_sql_ttl']					= $config['cache_sql_ttl'];

@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 
 <div id="page">
 <h3><?php echo $this->get_translation('Moderation').' '.( $this->forum === true ? $this->get_translation('Topics') : $this->get_translation('ModerateSection') ).' '.$this->compose_link_to_page($this->tag, '', $this->page['title'], 0);
-	echo ( $this->forum === true ? '<br />['.$this->compose_link_to_page(substr($this->tag, 0, strrpos($this->tag, '/')), 'moderate', $this->get_translation('ModerateSection2'), 0).']' : '' ) ?></h3>
+	echo ($this->forum === true ? '<br />['.$this->compose_link_to_page(substr($this->tag, 0, strrpos($this->tag, '/')), 'moderate', $this->get_translation('ModerateSection2'), 0).']' : '') ?></h3>
 
 <?php
 
@@ -82,13 +82,7 @@ function moderate_rename_topic(&$engine, $old_tag, $new_tag, $title = '')
 	{
 		// resave modified body
 		$page['body'] = preg_replace('/^==.*?==/', '=='.$title.'==', $page['body']);
-		$engine->save_page($new_tag, false, $page['body'], '', '', '', '', '', true, false);
-
-		$engine->sql_query(
-			"UPDATE {$engine->config['table_prefix']}page ".
-			"SET title = '".quote($engine->dblink, $title)."' ".
-			"WHERE tag = '".quote($engine->dblink, $new_tag)."' ".
-			"LIMIT 1");
+		$engine->save_page($new_tag, $title, $page['body'], '', '', '', '', '', true, false);
 	}
 
 	// restore forum context
@@ -97,7 +91,7 @@ function moderate_rename_topic(&$engine, $old_tag, $new_tag, $title = '')
 	return true;
 }
 
-function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
+function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 {
 	// set forum context
 	$forum_context	= $engine->forum;
@@ -124,10 +118,11 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 				"WHERE comment_on_id = '".quote($engine->dblink, $topic_id)."'");
 
 			// for the forum moderation only
-			if ($movetopics === true)
+			if ($move_topics === true)
 			{
 				// find latest number
 				$status	= $engine->load_all("SHOW TABLE STATUS");
+
 				foreach ($status as $row)
 				{
 					if ($row['Name'] == $engine->config['table_prefix'].'page')
@@ -182,7 +177,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $movetopics = true)
 		"UPDATE {$engine->config['table_prefix']}page SET ".
 			"comments	= '".(int)$engine->count_comments($base_id)."', ".
 			"commented	= NOW() ".
-		"WHERE tag = '".quote($engine->dblink, $base)."' ".
+		"WHERE page_id = '".quote($engine->dblink, $base_id)."' ".
 		"LIMIT 1");
 
 	// restore forum context
@@ -198,8 +193,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 		return false;
 	}
 
-	$old_tag_id		= $engine->get_page_id($old_tag);
-	$new_tag_id		= $engine->get_page_id($new_tag);
+	$old_page_id	= $engine->get_page_id($old_tag);
 	$title_id		= $engine->get_page_id($title);
 
 	// set forum context
@@ -214,10 +208,12 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$page['body']	= '=='.$title."==\n\n".$page['body'];
 	$engine->save_page($new_tag, false, $page['body'], '', '', '', $title_id, '', true);
 
+	$new_page_id		= $engine->get_page_id($new_tag);
+
 	// bug-resistent check: has page been really resaved?
 	if ($engine->load_single(
 	"SELECT page_id FROM {$engine->config['table_prefix']}page ".
-	"WHERE tag = '".quote($engine->dblink, $new_tag)."'") != true)
+	"WHERE page_id = '".quote($engine->dblink, $new_page_id)."'") != true)
 	{
 		$engine->forum = $forum_context;
 		return false;
@@ -231,22 +227,22 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 			"owner_id		= '".quote($engine->dblink, $page['owner_id'])."', ".
 			"user_id		= '".quote($engine->dblink, $page['user_id'])."', ".
 			"ip				= '".quote($engine->dblink, $page['ip'])."' ".
-		"WHERE tag = '".quote($engine->dblink, $new_tag)."'");
+		"WHERE page_id = '".quote($engine->dblink, $new_page_id)."'");
 
 	// move remaining comments to the new topic
-	foreach ($comment_ids as $id)
+	foreach ($comment_ids as $comment_id)
 	{
 		$engine->sql_query(
 			"UPDATE {$engine->config['table_prefix']}page SET ".
-				"comment_on_id = '".quote($engine->dblink, $new_tag_id)."' ".
-			"WHERE page_id = '".quote($engine->dblink, $id)."'");
+				"comment_on_id = '".quote($engine->dblink, $new_page_id)."' ".
+			"WHERE page_id = '".quote($engine->dblink, $comment_id)."'");
 	}
 
 	// remove old first comment
 	moderate_delete_page($engine, $first_tag);
 
 	// update link table
-	$page = $engine->load_page($new_tag);
+	$page = $engine->load_page('', $new_page_id);
 	$engine->current_context++;
 	$engine->context[$engine->current_context] = $new_tag;
 	$engine->clear_link_table();
@@ -260,14 +256,14 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	// recount comments for old and new topics
 	$engine->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
-			"comments	= '".(int)$engine->count_comments($new_tag_id)."', ".
+			"comments	= '".(int)$engine->count_comments($new_page_id)."', ".
 			"commented	= NOW() ".
-		"WHERE tag = '".quote($engine->dblink, $new_tag)."' ".
+		"WHERE page_id = '".quote($engine->dblink, $new_page_id)."' ".
 		"LIMIT 1");
 	$engine->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page ".
-		"SET comments = '".(int)$engine->count_comments($old_tag_id)."' ".
-		"WHERE tag = '".quote($engine->dblink, $old_tag)."' ".
+		"SET comments = '".(int)$engine->count_comments($old_page_id)."' ".
+		"WHERE page_id = '".quote($engine->dblink, $old_page_id)."' ".
 		"LIMIT 1");
 
 	// restore forum context
@@ -275,6 +271,8 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 
 	return true;
 }
+
+// END FUNCTIONS
 
 // redirect to show method if page doesn't exists
 if (!$this->page || $this->page['comment_on_id'] == true)
@@ -331,6 +329,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$set[] = $val;
 		}
 	}
+
 	unset($key, $val);
 
 	// save page ids for later operations (correct if needed)
@@ -362,6 +361,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			unset($set[$n]);
 		}
 	}
+
 	reset($set);
 	unset($n, $id);
 
@@ -390,6 +390,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					moderate_delete_page($this, $page['tag']);
 					$this->log(1, str_replace('%2', $page['user_id'], str_replace('%1', $page['tag'], $this->get_translation('LogRemovedPage', $this->config['language']))));
 				}
+
 				unset($accept_action);
 
 				if ($this->config['enable_feeds'])
@@ -411,6 +412,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			if (isset($_POST['accept']) && isset($_POST['section']))
 			{
 				$i = 0;
+
 				foreach ($set as $id)
 				{
 					$old_tags[] = $this->get_page_tag($id);
@@ -472,7 +474,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$error = $this->get_translation('ModerateRenameExists');
 				}
 
-				// okey, then rename page
+				// ok, then rename page
 				if ($tag != '' && $error != true)
 				{
 					moderate_rename_topic($this, $old_tag, $this->tag.'/'.$tag, $title);
@@ -553,7 +555,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		}
 
 		// make counter query
-		$sql = "SELECT COUNT(p.tag) AS n ".
+		$sql = "SELECT COUNT(p.page_id) AS n ".
 			"FROM {$this->config['table_prefix']}page AS p ".
 				#"{$this->config['table_prefix']}acl AS a ".
 			"WHERE ". # p.page_id = a.page_id ".
@@ -578,6 +580,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				"p.tag LIKE '{$this->tag}/%' ".
 			"ORDER BY commented DESC ".
 			"LIMIT {$pagination['offset']}, $limit";
+
+		// FORMS
 
 		// load topics data
 		$topics	= $this->load_all($sql);
@@ -788,7 +792,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$pos		= strrpos($this->tag, '/');
 				$sub_tag	= substr($this->tag, ( $pos ? $pos+1 : 0 ));
 				$old_tag	= $this->tag;
-				$new_tag	= ( $_POST['cluster'] ? ( $_POST['cluster'] == '/' ? '' : trim($_POST['cluster'], '/').'/' ) : $_POST['section'].'/' ).$sub_tag;
+				$new_tag	= ($_POST['cluster'] ? ( $_POST['cluster'] == '/' ? '' : trim($_POST['cluster'], '/').'/' ) : $_POST['section'].'/').$sub_tag;
 
 				if ($forum_cluster === true)
 				{
@@ -855,7 +859,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tag		= preg_replace('/[^- \\w]/', '', $tag);
 				$tag		= str_replace(array(' ', "\t"), '', $tag);
 				$old_tag	= $this->tag;
-				$new_tag	= ( $section ? $section.'/' : '' ).$tag;
+				$new_tag	= ($section ? $section.'/' : '').$tag;
 
 				// check new tag existance
 				if ($old_tag == $new_tag || moderate_page_exists($this, $new_tag) === true)
@@ -863,7 +867,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$error = $this->get_translation('ModerateRenameExists');
 				}
 
-				// okey, then rename page
+				// ok, then rename page
 				if ($tag != '' && $error != true)
 				{
 					moderate_rename_topic($this, $old_tag, $new_tag, $title);
@@ -1078,7 +1082,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		}
 
 		// make counter query
-		$sql = "SELECT COUNT(tag) AS n ".
+		$sql = "SELECT COUNT(page_id) AS n ".
 			"FROM {$this->config['table_prefix']}page ".
 			"WHERE comment_on_id = '{$this->page['page_id']}' ".
 			"LIMIT 1";
