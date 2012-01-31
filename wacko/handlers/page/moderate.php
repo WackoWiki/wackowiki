@@ -1009,6 +1009,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							"SELECT page_id ".
 							"FROM {$this->config['table_prefix']}page ".
 							"WHERE comment_on_id = '".quote($this->dblink, $first_comment['comment_on_id'])."' ".
+								"AND comment_on_id <> '0' ".
 								"AND created >= '".quote($this->dblink, $first_comment['created'])."' ".
 							"ORDER BY created ASC");
 
@@ -1116,7 +1117,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$pagination	= $this->pagination($count['n'], $limit, 'p', 'ids='.implode('-', $set), 'moderate');
 
 		// make collector query
-		$sql = "SELECT p.page_id, p.tag, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, created, u.user_name, o.user_name as owner_name ".
+		$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, created, u.user_name, o.user_name as owner_name ".
 			"FROM {$this->config['table_prefix']}page p ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 				"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
