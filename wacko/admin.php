@@ -30,6 +30,7 @@ else
 	$init->settings();	// populate from config.php
 	$init->settings();	// initialize DBAL and populate from config table.
 }
+
 $init->dbal();
 $init->settings('theme_url',	$init->config['base_url'].'themes/'.$init->config['theme'].'/');
 $init->settings('user_table',	$init->config['table_prefix'].'user');
@@ -123,7 +124,7 @@ if ($engine->config['recovery_password'] == false)
 }
 else
 {
-	$_processed_password = hash('sha256', $engine->config['recovery_password']);
+	$_processed_password = hash('sha256', $engine->config['system_seed'].$engine->config['recovery_password']);
 }
 
 // recovery preauthorization
@@ -142,10 +143,10 @@ if (isset($_POST['password']))
 	} */
 	// End Registration Captcha
 
-	if (hash('sha256', $_POST['password']) == $_processed_password)
+	if (hash('sha256', $engine->config['system_seed'].$_POST['password']) == $_processed_password)
 	{
 		$engine->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $engine->config['base_url'].'');
-		$engine->set_session_cookie('admin', hash('sha256', $_POST['password']), '', ( $engine->config['tls'] == true ? 1 : 0 ));
+		$engine->set_session_cookie('admin', hash('sha256', $engine->config['system_seed'].$_POST['password']), '', ( $engine->config['tls'] == true ? 1 : 0 ));
 		$_SESSION['created']			= time();
 		$_SESSION['last_activity']		= time();
 		$_SESSION['failed_login_count']	= 0;
@@ -210,7 +211,7 @@ if ($user == false)
 				// captcha code starts
 
 				// Only show captcha if the admin enabled it in the config file
-				#if($engine->config['max_login_attempts'] && $_failed_login_count >= $engine->config['max_login_attempts'])
+				#if($engine->config['ap_max_login_attempts'] && $_failed_login_count >= $engine->config['max_login_attempts'])
 				#{
 					#echo '<p>';
 					#echo '<br />';
