@@ -380,8 +380,8 @@ $table_tag_page_drop			= "DROP TABLE {$pref}tag_page";
 $table_upload_drop				= "DROP TABLE {$pref}upload";
 $table_user_drop				= "DROP TABLE {$pref}user";
 $table_user_setting_drop		= "DROP TABLE {$pref}user_setting";
-$table_usergroup_drop			= "DROP TABLE {$pref}group";
-$table_usergroup_member_drop	= "DROP TABLE {$pref}group_member";
+$table_usergroup_drop			= "DROP TABLE {$pref}usergroup";
+$table_usergroup_member_drop	= "DROP TABLE {$pref}usergroup_member";
 $table_watch_drop				= "DROP TABLE {$pref}watch";
 /* $table_word_drop				= "DROP TABLE {$pref}word"; */
 
