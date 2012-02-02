@@ -10,15 +10,16 @@ if (!defined('IN_WACKO'))
 // for testing and improvement - thought as upgrade routine for the installer
 
 echo '<h2>Upgrade Utilities</h2>';
-echo 'Recent Wacko version '.$this->format('**!!(green)'.$this->config['wacko_version'].'!!**', 'wacko');
-echo '<h3>Migration Routines for R4.3 to R5.0.rc1 Upgrade</h3>';
-
-########################################################
-##            RENAME files to @page_id@file_name      ##
-########################################################
 
 if ($this->is_admin())
 {
+	echo 'Recent Wacko version '.$this->format('**!!(green)'.$this->config['wacko_version'].'!!**', 'wacko');
+	echo '<h3>Migration Routines for R4.3 to R5.0.rc1 Upgrade</h3>';
+
+	########################################################
+	##            RENAME files to @page_id@file_name      ##
+	########################################################
+
 	echo "<h4>1. Renames files in \\files\perpage folder to @page_id@file_name:</h4>";
 
 	if (!isset($_POST['rename']))
