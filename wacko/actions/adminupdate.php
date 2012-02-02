@@ -14,7 +14,7 @@ echo '<h2>Upgrade Utilities</h2>';
 if ($this->is_admin())
 {
 	echo 'Recent Wacko version '.$this->format('**!!(green)'.$this->config['wacko_version'].'!!**', 'wacko');
-	echo '<h3>Migration Routines for R4.3 to R5.0.rc1 Upgrade</h3>';
+	echo '<h3>Migration Routines for R4.3 to R5.0.rc2 Upgrade</h3>';
 
 	########################################################
 	##            RENAME files to @page_id@file_name      ##
