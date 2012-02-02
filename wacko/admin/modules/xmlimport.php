@@ -14,7 +14,7 @@ $module['xmlimport'] = array(
 		'cat'	=> 'Content',
 		'mode'	=> 'xmlimport',
 		'name'	=> 'Import XML',
-		'title'	=> 'Import and re-establishment of the pages of the XML-document',
+		'title'	=> 'Import and restore of the pages of the XML-file',
 	);
 
 ########################################################
