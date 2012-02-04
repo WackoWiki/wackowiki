@@ -40,7 +40,10 @@ if ($this->has_access('read'))
 	{
 		// Not sure what the point of wrapping it in the conditional was
 		// if (function_exists('virtual')) header('HTTP/1.0 404 Not Found');
-		header('HTTP/1.0 404 Not Found');
+		if (!headers_sent())
+		{
+			header('HTTP/1.0 404 Not Found');
+		}
 
 		echo '<br /><div class="notice">'.
 			$this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
