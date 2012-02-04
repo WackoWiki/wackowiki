@@ -4,7 +4,9 @@ if ($this->HasAccess("read"))
 {
 	if (!$this->page)
 	{
-		if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
+		// Not sure what the point of wrapping it in the conditional was
+		# if (function_exists("virtual")) header("HTTP/1.0 404 Not Found");
+		if (!headers_sent()) header("HTTP/1.0 404 Not Found");
 		print(str_replace("%1",$this->href("edit","","",1),$this->GetResourceValue("DoesNotExists")));
 	}
 	else
@@ -107,7 +109,7 @@ if ($this->GetConfigValue("footer_files")) {
 [<a
 	href="<?php echo $this->href("", "", "show_files=0")."\">".$this->GetResourceValue("HideFiles"); ?></a>]
     </div>
-	
+
     <?php
     echo "<div class=\"files\">";
     echo $this->Action("files",array("nomark"=>1));
