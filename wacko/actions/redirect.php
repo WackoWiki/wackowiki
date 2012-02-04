@@ -19,7 +19,10 @@ if ($page)
 {
 	if ($is_permanent)
 	{
-		header('HTTP/1.0 301 Moved Permanently');
+		if (!headers_sent())
+		{
+			header('HTTP/1.0 301 Moved Permanently');
+		}
 	}
 
 	if ($this->load_page($page, 0, '', LOAD_CACHE, LOAD_META))
