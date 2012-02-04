@@ -137,7 +137,10 @@ else
 {
 	// Not sure what the point of wrapping it in the conditional was
 	// if (function_exists('virtual')) header('HTTP/1.0 403 Forbidden');
-	header('HTTP/1.0 403 Forbidden');
+	if (!headers_sent())
+	{
+		header('HTTP/1.0 403 Forbidden');
+	}
 
 	echo $this->get_translation('ReadAccessDenied');
 }
