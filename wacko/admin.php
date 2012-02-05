@@ -128,7 +128,7 @@ if ($engine->config['recovery_password'] == false)
 }
 else
 {
-	$_processed_password = hash('sha256', $engine->config['system_seed'].$engine->config['recovery_password']);
+	$_processed_password = $engine->config['recovery_password'];
 }
 
 // recovery preauthorization
@@ -137,7 +137,7 @@ if (isset($_POST['password']))
 	// Start Login Captcha, if there are too much login attempts (max_login_attempts)
 
 	// Only show captcha if the admin enabled it in the config file
-	/* if($engine->config['max_login_attempts'] && $existing_user['failed_login_count'] >= $engine->config['max_login_attempts'] + 1)
+	/* if($engine->config['ap_max_login_attempts'] && $engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts'] + 1)
 	{
 		// captcha validation
 		if ($engine->validate_captcha() === false)
@@ -154,6 +154,12 @@ if (isset($_POST['password']))
 		$_SESSION['created']			= time();
 		$_SESSION['last_activity']		= time();
 		$_SESSION['failed_login_count']	= 0;
+
+		if ($engine->config['ap_failed_login_count'] > 0)
+		{
+			$engine->set_config('ap_failed_login_count', 0, '', true);
+		}
+
 		$engine->log(1, $engine->get_translation('LogAdminLoginSuccess', $engine->config['language']));
 		$engine->redirect(( $engine->config['tls'] == true ? str_replace('http://', 'https://'.($engine->config['tls_proxy'] ? $engine->config['tls_proxy'].'/' : ''), $engine->href('admin.php')) : $engine->href('admin.php') ));
 	}
@@ -164,11 +170,13 @@ if (isset($_POST['password']))
 			$_SESSION['failed_login_count'] = 0;
 		}
 
+		$engine->set_config('ap_failed_login_count', $engine->config['ap_failed_login_count'] + 1, '', true);
+
 		$engine->log(1, str_replace('%1', $_POST['password'], $engine->get_translation('LogAdminLoginFailed', $engine->config['language'])));
 
 		$_SESSION['failed_login_count'] = $_SESSION['failed_login_count'] + 1;
 
-		if ($_SESSION['failed_login_count'] >= 3)
+		if (($_SESSION['failed_login_count'] >= 3) || ($engine->config['ap_failed_login_count'] >= $engine->config['ap_max_login_attempts']))
 		{
 			$init->lock('lock_ap');
 			$engine->log(1, $engine->get_translation('LogAdminLoginLocked', $engine->config['language']));
@@ -215,7 +223,7 @@ if ($user == false)
 				// captcha code starts
 
 				// Only show captcha if the admin enabled it in the config file
-				#if($engine->config['ap_max_login_attempts'] && $_failed_login_count >= $engine->config['max_login_attempts'])
+				#if($engine->config['ap_max_login_attempts'] && $engine->config['ap_failed_login_count'] >= $engine->config['max_login_attempts'])
 				#{
 					#echo '<p>';
 					#echo '<br />';

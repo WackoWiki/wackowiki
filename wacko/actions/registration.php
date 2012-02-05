@@ -273,8 +273,8 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 						$subject =	'['.$this->config['site_name'].'] '.$this->get_translation('NewAccountSubject');
 						$body =		$this->get_translation('NewAccountSignupInfo')."\n\n".
 									$this->get_translation('NewAccountUsername').' '.$user_name."\n".
-									$this->get_translation( 'NewAccountEmail').' '.$email."\n".
-									$this->get_translation( 'NewAccountIP' ).' '.$this->ip_address()."\n\n".
+									$this->get_translation('NewAccountEmail').' '.$email."\n".
+									$this->get_translation('NewAccountIP').' '.$this->ip_address()."\n\n".
 									$this->get_translation('NewAccountDoNotReply')."\n\n".
 									$this->config['site_name']."\n".
 									$this->config['base_url'];
