@@ -68,7 +68,7 @@ if ($user = $this->get_user())
 
 		foreach ($referrer_sites as $site => $site_count)
 		{
-			echo '<span class="site_count">'.$site_count.'</span>&nbsp;&nbsp;&nbsp;&nbsp;'.((($site != 'unknown') ? '<a href="http://$site">$site</a>' : $site)).'<br />';
+			echo '<span class="site_count">'.$site_count.'</span>&nbsp;&nbsp;&nbsp;&nbsp;'.((($site != 'unknown') ? '<a href="http://'.$site.'">'.$site.'</a>' : $site)).'<br />';
 
 		}
 
@@ -81,7 +81,7 @@ if ($user = $this->get_user())
 
 	if ($global)
 	{
-		print("<br />[".str_replace('%1',$this->href('referrers_sites'),str_replace('%2', $this->tag, $this->get_translation('ViewReferringSites')))." | ".str_replace('%1', $this->href('referrers'), str_replace('%2', $this->tag, $this->get_translation('ViewReferrersFor')))."]");
+		print("<br />[".str_replace('%1',$this->href('referrers_sites'), str_replace('%2', $this->tag, $this->get_translation('ViewReferringSites')))." | ".str_replace('%1', $this->href('referrers'), str_replace('%2', $this->tag, $this->get_translation('ViewReferrersFor')))."]");
 	}
 	else
 	{
