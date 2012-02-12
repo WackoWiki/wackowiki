@@ -150,7 +150,7 @@ if (isset($_POST['password']))
 	if (hash('sha256', $engine->config['system_seed'].$_POST['password']) == $_processed_password)
 	{
 		$engine->config['cookie_path']	= preg_replace('|https?://[^/]+|i', '', $engine->config['base_url'].'');
-		$engine->set_session_cookie('admin', hash('sha256', $engine->config['system_seed'].$_POST['password']), '', ( $engine->config['tls'] == true ? 1 : 0 ));
+		$engine->set_session_cookie('admin', hash('sha256', hash('sha256', $engine->config['system_seed'].$_POST['password']).$engine->config['base_url']), '', ( $engine->config['tls'] == true ? 1 : 0 ));
 		$_SESSION['created']			= time();
 		$_SESSION['last_activity']		= time();
 		$_SESSION['failed_login_count']	= 0;
@@ -188,7 +188,7 @@ if (isset($_POST['password']))
 // check authorization
 $user = '';
 
-if (isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']]) && $_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']] == $_processed_password)
+if (isset($_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']]) && $_COOKIE[$engine->config['cookie_prefix'].'admin'.'_'.$engine->config['cookie_hash']] == hash('sha256', $_processed_password.$engine->config['base_url']))
 {
 	$user = array('user_name' => $engine->config['admin_name']);
 }
@@ -205,13 +205,13 @@ if ($user == false)
 	<link href="<?php echo rtrim($engine->config['base_url']); ?>admin/styles/backend.css" rel="stylesheet" type="text/css" media="screen" />
 	</head>
 	<body>
-		<?php
+<?php
 		// here we show messages
 		if ($message = $engine->get_message())
 		{
 			echo "<div class=\"info\">$message</div>";
 		}
-		?>
+?>
 		<div id="loginbox">
 			<strong><?php echo $engine->get_translation('Authorization'); ?></strong><br />
 			<?php echo $engine->get_translation('AuthorizationTip'); ?>
