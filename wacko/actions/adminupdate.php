@@ -662,7 +662,7 @@ if ($this->is_admin())
 	{
 		echo $this->form_open();
 		?>
-		<input type="submit" name="set_version_id"  value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
+		<input type="submit" name="set_version_id" value="<?php echo $this->get_translation('CategoriesSaveButton');?>" />
 		<?php
 		echo $this->form_close();
 	}

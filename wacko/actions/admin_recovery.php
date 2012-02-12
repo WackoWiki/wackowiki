@@ -12,11 +12,11 @@ if ($this->is_admin())
 {
 	$output			= '';
 
-	if (isset($_POST))
+	if (isset($_POST['recovery_password']) && !empty($_POST['recovery_password']))
 	{
 		// passing vars from user input
 		$user_name		= $this->get_user_name();
-		$password		= $_POST['password'];
+		$password		= $_POST['recovery_password'];
 		$confpassword	= $_POST['confpassword'];
 		$lang			= (isset($_POST['lang']) ? $_POST['lang'] : '');
 		#$timezone		= trim($_POST['timezone']);
@@ -66,10 +66,12 @@ if ($this->is_admin())
 		$this->set_message($this->format($error));
 	}
 
+	echo '<h2>Generate the pasword hash for your recovery_password </h2>';
+
 	echo $this->form_open('', '', 'post');
 
 	echo '<p><label for="password">'.$this->get_translation('RegistrationPassword').':</label>';
-	echo '<input type="password" id="password" name="password" size="24" value="'.$password.'" />';
+	echo '<input type="password" id="recovery_password" name="recovery_password" size="24" value="'.$password.'" />';
 
 	if ($this->config['pwd_char_classes'] > 0)
 	{
@@ -96,11 +98,11 @@ if ($this->is_admin())
 		str_replace('%1', $this->config['pwd_min_chars'],
 		$this->get_translation('PwdCplxDesc2')).
 		($this->config['pwd_unlike_login'] > 0
-		? ", ".$this->get_translation('PwdCplxDesc3')
-		: "").
+			? ", ".$this->get_translation('PwdCplxDesc3')
+			: "").
 		($this->config['pwd_char_classes'] > 0
-		? ", ".$pwd_cplx_text
-		: "")."</small>";
+			? ", ".$pwd_cplx_text
+			: "")."</small>";
 	echo '</p>';
 
 	echo '<p><label for="confpassword">'.$this->get_translation('ConfirmPassword').':</label>';
