@@ -95,7 +95,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	// EXTENDED
 	if (isset($_GET['extended']) || isset($_POST['extended']))
 	{
-		echo "<ul class=\"menu\"><li><a href=\"".$this->href('properties', '', '')."\">".$this->get_translation('UserSettingsGeneral')."</a></li><li class=\"menu\">".$this->get_translation('UserSettingsExtended')."</li></ul><br /><br />\n";
+		echo "<ul class=\"menu\"><li><a href=\"".$this->href('properties', '', '')."\">".$this->get_translation('UserSettingsGeneral')."</a></li><li class=\"active\">".$this->get_translation('UserSettingsExtended')."</li></ul><br /><br />\n";
 
 		echo "<div class=\"page_settings\">";
 
@@ -201,7 +201,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 	// GENERAL
 	else
 	{
-		echo "<ul class=\"menu\"><li class=\"menu\">".$this->get_translation('UserSettingsGeneral')."</li><li><a href=\"".$this->href('properties', '', 'extended')."\">".$this->get_translation('UserSettingsExtended')."</a></li></ul><br /><br />\n";
+		echo "<ul class=\"menu\"><li class=\"active\">".$this->get_translation('UserSettingsGeneral')."</li><li><a href=\"".$this->href('properties', '', 'extended')."\">".$this->get_translation('UserSettingsExtended')."</a></li></ul><br /><br />\n";
 		echo "<div class=\"page_settings\">";
 		echo $this->form_open('properties');
 		echo "<table class=\"form_tbl\">";
