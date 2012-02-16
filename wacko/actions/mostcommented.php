@@ -11,9 +11,9 @@ if (!defined('IN_WACKO'))
  All arguments are optional, the "dontrecurse" argument is only used when the "for" argument is used and even then it's still optional
 
  {{mostcommented
- [max="50"] // maximum number of pages to retrieve
+ [max=50] // maximum number of pages to retrieve
  [for|page="PageName"] // page name to start from in the page hierarchy
- [nomark="1"] // makes it possible to hide frame around
+ [nomark=1] // makes it possible to hide frame around
  [dontrecurse="true|false"] // if set to true the list will only include pages that are direct children of the "for" page
  }}
  */

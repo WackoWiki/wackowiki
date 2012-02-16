@@ -8,9 +8,9 @@ if (!defined('IN_WACKO'))
 // Action parameters:
 // id=[id]			Only show given survey voting form.
 //					Default: null
-// results=[1,0]	Return poll results instead of voting form.
+// results=[1|0]	Return poll results instead of voting form.
 //					Default: 0
-// align=["h","v"]	Orientation of surveys table: horizontal
+// align=["h"|"v"]	Orientation of surveys table: horizontal
 //					or vertical.
 //					Default: "h"
 

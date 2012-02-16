@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{permalinkproxy page_id=[number] preview=[0|1] permanent="0 or 1"}}
+// {{permalinkproxy page_id=[number] preview=[0|1] permanent=[0|1]}}
 
 if (isset($_GET['page_id']))
 {

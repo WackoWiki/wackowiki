@@ -15,11 +15,11 @@ if (!defined('IN_WACKO'))
 			"text" - displayed as title
 			"no" - means show no title
 			empty title - title taken from feed
-		[max="x"]
+		[max=x]
 		[time=yes]
-		[nomark="1"]
-			"1" - makes feed header h3 and feed-items headers h4
-			"0" - makes it all default
+		[nomark=1]
+			1 - makes feed header h3 and feed-items headers h4
+			0 - makes it all default
 	}}
 
 */

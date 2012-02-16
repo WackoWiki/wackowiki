@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 /*
 	{{upload
 		[global=1]
-		[maxsize="200"]
+		[maxsize=200]
 		[hide_description=1]
 	}}
 */
