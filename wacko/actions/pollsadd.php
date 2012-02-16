@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 // Action parameters:
-// moderation=["true","false"]	Run action in moderation context.
+// moderation=["true"|"false"]	Run action in moderation context.
 //								Default: "false"
 // edit_id=[id]					Edit/moderate given poll. Only
 //								useful with "moderation='true'".

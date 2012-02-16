@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 // Action parameters:
-// nomark=[1,0]			Show legend and fieldset frame.
+// nomark=[1|0]			Show legend and fieldset frame.
 //						Default: 0
 // style=["ul","br"]	List markup style.
 //						Default: "ul"

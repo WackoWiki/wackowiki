@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 // generates the hash for a new recovery_password
 // {{admin_recovery}}
 // 'recovery_password' => 'add hash here',
+
 if ($this->is_admin())
 {
 	$output			= '';

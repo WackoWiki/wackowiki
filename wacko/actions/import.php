@@ -7,8 +7,8 @@ if (!defined('IN_WACKO'))
 
 /*
 	{{import}}
-	http://wackowiki.org/somecluster/import --> {{import}}, to = "Test".
-	Will be imported at: http://wackowiki.org/Test/*
+	http://example.com/somecluster/import --> {{import}}, to = "Test".
+	Will be imported at: http://example.com/Test/*
 
 	i.e. no relative addressing
 */
