@@ -10,7 +10,10 @@ if (!defined('IN_WACKO'))
 <?php
 
 // redirect to show method if page don't exists
-if (!$this->page) $this->redirect($this->href('show'));
+if (!$this->page)
+{
+	$this->redirect($this->href('show'));
+}
 
 if ($this->has_access('read'))
 {
@@ -38,10 +41,12 @@ if ($this->has_access('read'))
 		// display page
 		$this->context[++$this->current_context] = $this->tag;
 		$data = $this->format($this->page['body'], 'msword');
+
 		if ($this->tocAutoNumerate == 1)
 		{
 			$data = $this->tocEnumerate($data, 2); // TOC, Automatic numeration of headings
 		}
+
 		echo $data;
 		$this->current_context--;
 
