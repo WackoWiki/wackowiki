@@ -155,7 +155,6 @@ $config_db['allow_x11colors']				= $config['allow_x11colors'];
 $config_db['antidupe']						= $config['antidupe'];
 $config_db['ap_failed_login_count']			= $config['ap_failed_login_count'];
 $config_db['ap_max_login_attempts']			= $config['ap_max_login_attempts'];
-
 $config_db['cache']							= $config['cache'];
 $config_db['cache_sql']						= $config['cache_sql'];
 $config_db['cache_sql_ttl']					= $config['cache_sql_ttl'];
@@ -725,7 +724,7 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R5.0.rc1 to R5.0.0
+				// upgrade from R5.0.rc1 to R5.0.rc2
 				case '5.0.rc':
 					echo "         <h2>Wacko 5.0.rc ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
@@ -740,6 +739,15 @@ switch($config['database_driver'])
 						test(str_replace('%1', 'usergroup', $lang['RenameTable']), @mysql_query($rename_usergroup_r4_3_1, $dblink), str_replace('%1', 'usergroup', $lang['ErrorRenamingTable']));
 						test(str_replace('%1', 'usergroup_member', $lang['RenameTable']), @mysql_query($rename_usergroup_member_r4_3_1, $dblink), str_replace('%1', 'usergroup_member', $lang['ErrorRenamingTable']));
 					}
+
+					echo "            </ol>\n";
+
+				// upgrade from R5.0.rc2 to R5.0.0
+				case '5.0.rc2':
+					echo "         <h2>Wacko 5.0.rc2 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					test(str_replace('%1', 'acl', $lang['UpdateTable']), @mysql_query($update_acl_r4_3_2, $dblink), str_replace('%1', 'acl', $lang['ErrorUpdatingTable']));
 
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -1160,7 +1168,7 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R5.0.rc1 to R5.0.0
+				// upgrade from R5.0.rc1 to R5.0.rc2
 				case '5.0.rc':
 					echo "         <h2>Wacko 5.0.rc ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
@@ -1175,6 +1183,15 @@ switch($config['database_driver'])
 						test(str_replace('%1', 'usergroup', $lang['RenameTable']), @mysqli_query($dblink, $rename_usergroup_r4_3_1), str_replace('%1', 'usergroup', $lang['ErrorRenamingTable']));
 						test(str_replace('%1', 'usergroup_member', $lang['RenameTable']), @mysqli_query($dblink, $rename_usergroup_member_r4_3_1), str_replace('%1', 'usergroup_member', $lang['ErrorRenamingTable']));
 					}
+
+					echo "            </ol>\n";
+
+				// upgrade from R5.0.rc2 to R5.0.0
+				case '5.0.rc2':
+					echo "         <h2>Wacko 5.0.rc2 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					test(str_replace('%1', 'acl', $lang['UpdateTable']), @mysqli_query($dblink, $update_acl_r4_3_2), str_replace('%1', 'acl', $lang['ErrorUpdatingTable']));
 
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -1610,7 +1627,7 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R5.0.rc1 to R5.0.0
+				// upgrade from R5.0.rc1 to R5.0.rc2
 				case '5.0.rc':
 					echo "         <h2>Wacko 5.0.rc ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
@@ -1625,6 +1642,15 @@ switch($config['database_driver'])
 						test_pdo(str_replace('%1', 'usergroup', $lang['RenameTable']), $rename_usergroup_r4_3_1, str_replace('%1', 'usergroup', $lang['ErrorRenamingTable']));
 						test_pdo(str_replace('%1', 'usergroup_member', $lang['RenameTable']), $rename_usergroup_member_r4_3_1, str_replace('%1', 'usergroup_member', $lang['ErrorRenamingTable']));
 					}
+
+					echo "            </ol>\n";
+
+				// upgrade from R5.0.rc2 to R5.0.0
+				case '5.0.rc2':
+					echo "         <h2>Wacko 5.0.rc2 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					test_pdo(str_replace('%1', 'acl', $lang['UpdateTable']), $update_acl_r4_3_2, str_replace('%1', 'acl', $lang['ErrorUpdatingTable']));
 
 					// inserting config values
 					test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
