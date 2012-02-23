@@ -104,9 +104,15 @@ if ($this->has_access('read'))
 				echo "<li id=\"".$comment['tag']."\" class=\"comment\">\n";
 				$del = '';
 
+				// show remove comment button
 				if ($this->is_admin() || $this->user_is_owner($comment['page_id']) || ($this->config['owners_can_remove_comments'] && $this->user_is_owner($this->page['page_id'])))
 				{
 					echo "<a href=\"".$this->href('remove', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/delete_comment.gif\" title=\"".$this->get_translation('DeleteCommentTip')."\" alt=\"".$this->get_translation('DeleteText')."\" align=\"right\" border=\"0\" /></a>";
+				}
+
+				// show edit comment button
+				if ($this->is_admin() || $this->user_is_owner($comment['page_id']))
+				{
 					echo "<a href=\"".$this->href('edit', $comment['tag'])."\"><img src=\"".$this->config['theme_url']."icons/edit.gif\" title=\"".$this->get_translation('EditCommentTip')."\" alt=\"".$this->get_translation('EditComment')."\" align=\"right\" border=\"0\" /></a>";
 				}
 

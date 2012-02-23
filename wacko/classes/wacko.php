@@ -1654,7 +1654,7 @@ class Wacko
 			if (!$comment_on_id && $this->forum)
 			{
 				$desc = $this->format(substr($body, 0, 500), 'cleanwacko');
-				$desc = ( strlen($desc) > 240 ? substr($desc, 0, 240).'[..]' : $desc.' [..]' );
+				$desc = (strlen($desc) > 240 ? substr($desc, 0, 240).'[..]' : $desc.' [..]');
 			}
 
 			// preformatter (macros and such)
@@ -1742,16 +1742,29 @@ class Wacko
 					$create_acl		= $create_acl['list'];
 					$upload_acl		= $this->load_acl($root_id, 'upload');
 					$upload_acl		= $upload_acl['list'];
+
+					// forum topic privileges
+					if ($this->forum === true)
+					{
+						$write_acl		= '';
+						$comment_acl	= '*';
+						$create_acl		= '';
+						$upload_acl		= '';
+					}
 				}
 				else if ($comment_on_id)
 				{
-					// Give comments the same rights as their parent page
+					// Give comments the same read rights as their parent page
 					$read_acl		= $this->load_acl($comment_on_id, 'read');
 					$read_acl		= $read_acl['list'];
-					$write_acl		= $this->load_acl($comment_on_id, 'write');
-					$write_acl		= $write_acl['list'];
-					$comment_acl	= $this->load_acl($comment_on_id, 'comment');
-					$comment_acl	= $comment_acl['list'];
+					#$write_acl		= $this->load_acl($comment_on_id, 'write');
+					#$write_acl		= $write_acl['list'];
+					$write_acl		= '';
+					#$comment_acl	= $this->load_acl($comment_on_id, 'comment');
+					#$comment_acl	= $comment_acl['list'];
+					$comment_acl	= '';
+					$create_acl		= '';
+					$upload_acl		= '';
 				}
 				else
 				{
@@ -1797,11 +1810,11 @@ class Wacko
 				$page_id = $this->get_page_id($tag);
 
 				// saving acls
-				$this->save_acl($page_id, 'write', $write_acl);
-				$this->save_acl($page_id, 'read', $read_acl);
-				$this->save_acl($page_id, 'comment', $comment_acl);
-				$this->save_acl($page_id, 'create', $create_acl);
-				$this->save_acl($page_id, 'upload', $upload_acl);
+				$this->save_acl($page_id, 'write',		$write_acl);
+				$this->save_acl($page_id, 'read',		$read_acl);
+				$this->save_acl($page_id, 'comment',	$comment_acl);
+				$this->save_acl($page_id, 'create',		$create_acl);
+				$this->save_acl($page_id, 'upload',		$upload_acl);
 
 				// counters
 				if ($comment_on_id)
@@ -4402,7 +4415,7 @@ class Wacko
 		return $acl;
 	}
 
-	// returns true if $user_name (defaults to the current user) has access to $privilege on $page_tag (defaults to the current page)
+	// returns true if $user_name (defaults to the current user) has access to $privilege on $page_id (defaults to the current page)
 	function has_access($privilege, $page_id = '', $user_name = '', $use_parent = 1)
 	{
 		if ($user_name == '')

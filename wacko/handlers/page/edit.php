@@ -22,7 +22,7 @@ if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 <div id="pageedit">
 <?php
 
-if ($this->has_access('read') && (($this->page && $this->has_access('write')) || (!$this->page && $this->has_access('create'))))
+if ($this->has_access('read') && (($this->page && $this->has_access('write')) || ($this->page['comment_on_id'] && $this->user_is_owner()) || (!$this->page && $this->has_access('create'))))
 {
 	// check for reserved word
 	if ($result = $this->validate_reserved_words($this->tag))
