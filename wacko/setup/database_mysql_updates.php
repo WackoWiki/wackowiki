@@ -22,6 +22,7 @@ $alter_acl_r4_3_5 = "ALTER TABLE {$pref}acl DROP page_tag";
 $alter_acl_r4_3_6 = "ALTER TABLE {$pref}acl DROP supertag";
 
 $update_acl_r4_3_1 = "UPDATE {$pref}acl AS acl, (SELECT id, tag FROM {$pref}page) AS pages SET acl.page_id = pages.id WHERE acl.page_tag = pages.tag";
+$update_acl_r4_3_2 = "UPDATE {$pref}acl AS acl, (SELECT page_id, comment_on_id FROM {$pref}page) AS pages SET acl.list = '' WHERE acl.page_id = pages.page_id AND (acl.privilege <> 'read' AND pages.comment_on_id  <> '0')";
 
 // CACHE
 $alter_cache_r4_3_0 = "ALTER TABLE {$pref}cache CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
