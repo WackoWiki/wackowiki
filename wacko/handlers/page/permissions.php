@@ -6,7 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 ?>
-<div id="page"><?php
+<div id="page">
+<?php
 
 // redirect to show method if page don't exists
 if (!$this->page)
@@ -56,6 +57,28 @@ if ($this->user_is_owner() || $this->is_admin())
 			// log event
 			$this->log(2, str_replace('%1', $this->page['tag']." ".$this->page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
 
+			// Change permissions for all comments on this page
+			$comments = $this->load_all(
+				"SELECT page_id ".
+				"FROM ".$this->config['table_prefix']."page ".
+				"WHERE comment_on_id = '".quote($this->dblink, $this->page['page_id'])."' ".
+					"AND owner_id='".quote($this->dblink, $this->get_user_id())."'");
+
+			foreach ($comments as $num => $comment)
+			{
+				$this->save_acl($comment['page_id'], 'read', $_read_acl);
+				#$this->save_acl($comment['page_id'], 'write', $_write_acl);
+				#$this->save_acl($comment['page_id'], 'comment', $_comment_acl);
+
+				// change owner?
+				// TODO: set optional new owner but only if the comment belongs to selected old user
+				#if ($new_owner = $_new_owner)
+				#{
+				#	$new_owner_id = $this->get_user_id($new_owner);
+				#	$this->set_page_owner($comment['page_id'], $new_owner_id);
+				#}
+			}
+
 			$message = $this->get_translation('ACLUpdated');
 
 			// change owner?
@@ -77,10 +100,10 @@ if ($this->user_is_owner() || $this->is_admin())
 					if ($owner_id = $this->page['owner_id'])
 					{
 						$this->sql_query(
-						"UPDATE {$this->config['user_table']} ".
-						"SET total_pages	= total_pages		- 1 ".
-						"WHERE user_id		= '".quote($this->dblink, $owner_id)."' ".
-						"LIMIT 1");
+							"UPDATE {$this->config['user_table']} ".
+							"SET total_pages	= total_pages		- 1 ".
+							"WHERE user_id		= '".quote($this->dblink, $owner_id)."' ".
+							"LIMIT 1");
 					}
 
 					$this->sql_query(
@@ -116,40 +139,16 @@ if ($this->user_is_owner() || $this->is_admin())
 					$this->redirect($this->href('permissions'));
 				}
 			}
-
-			// Change permissions for all comments on this page
-			$comments = $this->load_all(
-				"SELECT page_id ".
-				"FROM ".$this->config['table_prefix']."page ".
-				"WHERE comment_on_id = '".quote($this->dblink, $this->page['page_id'])."' ".
-					"AND owner_id='".quote($this->dblink, $this->get_user_id())."'");
-
-			foreach ($comments as $num => $page)
-			{
-				$this->save_acl($page['page_id'], 'read', $_read_acl);
-				$this->save_acl($page['page_id'], 'write', $_write_acl);
-				$this->save_acl($page['page_id'], 'comment', $_comment_acl);
-
-				// change owner?
-				if ($new_owner = $_new_owner)
-				{
-					$new_owner_id = $this->get_user_id($new_owner);
-					$this->set_page_owner($page['page_id'], $new_owner_id);
-				}
-			}
 		}
 
 		// acls for entire cluster
-		if ($need_massacls == 1)
+		else if ($need_massacls == 1)
 		{
 			$pages = $this->load_all("
 				SELECT p.page_id, p.tag, p.title ".
 				"FROM ".$this->config['table_prefix']."page p ".
-					"LEFT JOIN ".$this->config['table_prefix']."page c ON (p.comment_on_id = c.page_id) ".
 				"WHERE (p.supertag = '".quote($this->dblink, $this->supertag)."'".
 				" OR p.supertag LIKE '".quote($this->dblink, $this->supertag."/%")."'".
-				" OR p.comment_on_id = '".quote($this->dblink, $this->page['page_id'])."'".
-				" OR c.supertag LIKE '".quote($this->dblink, $this->supertag."/%")."'".
 					") ".
 				($this->is_admin()
 					? ""
@@ -166,6 +165,28 @@ if ($this->user_is_owner() || $this->is_admin())
 
 				// log event
 				$this->log(2, str_replace('%1', $page['tag']." ".$page['title'], $this->get_translation('LogACLUpdated', $this->config['language'])));
+
+				// Change permissions for all comments on this page
+				$comments = $this->load_all(
+					"SELECT page_id ".
+					"FROM ".$this->config['table_prefix']."page ".
+					"WHERE comment_on_id = '".quote($this->dblink, $page['page_id'])."' ".
+						"AND owner_id='".quote($this->dblink, $this->get_user_id())."'");
+
+				foreach ($comments as $num => $comment)
+				{
+					$this->save_acl($comment['page_id'], 'read', $_read_acl);
+					#$this->save_acl($comment['page_id'], 'write', $_write_acl);
+					#$this->save_acl($comment['page_id'], 'comment', $_comment_acl);
+
+					// change owner?
+					// TODO: set optional new owner but only if the comment belongs to selected old user
+					#if ($new_owner = $_new_owner)
+					#{
+					#	$new_owner_id = $this->get_user_id($new_owner);
+					#	$this->set_page_owner($comment['page_id'], $new_owner_id);
+					#}
+				}
 
 				// change owner?
 				if ($new_owner = $_new_owner)
@@ -219,52 +240,54 @@ if ($this->user_is_owner() || $this->is_admin())
 		$upload_acl		= $this->load_acl($this->page['page_id'], 'upload', 1, 0);
 
 		// show form
-		?>
+?>
 <h3><?php echo str_replace('%1', $this->compose_link_to_page($this->tag, '', '', 0), $this->get_translation('ACLFor')); ?></h3>
 <?php echo $this->form_open('permissions') ?> <?php echo "<input type=\"checkbox\" id=\"massacls\" name=\"massacls\" "; echo " /> <label for=\"massacls\">".$this->get_translation('AclForEntireCluster')."</label>"; ?>
 <br />
 <div class="cssform">
-<p><label for="read_acl"><?php echo $this->get_translation('ACLRead'); ?></label>
-<textarea id="read_acl" name="read_acl" rows="4" cols="20"><?php echo $read_acl['list'] ?></textarea>
+<p>
+	<label for="read_acl"><?php echo $this->get_translation('ACLRead'); ?></label>
+	<textarea id="read_acl" name="read_acl" rows="4" cols="20"><?php echo $read_acl['list'] ?></textarea>
 </p>
-<p><label for="write_acl"><?php echo $this->get_translation('ACLWrite'); ?></label>
-<textarea id="write_acl" name="write_acl" rows="4" cols="20"><?php echo $write_acl['list'] ?></textarea>
+<p>
+	<label for="write_acl"><?php echo $this->get_translation('ACLWrite'); ?></label>
+	<textarea id="write_acl" name="write_acl" rows="4" cols="20"><?php echo $write_acl['list'] ?></textarea>
 </p>
-<p><label for="comment_acl"><?php echo $this->get_translation('ACLComment'); ?></label>
-<textarea id="comment_acl" name="comment_acl" rows="4" cols="20"><?php echo $comment_acl['list'] ?></textarea>
+<p>
+	<label for="comment_acl"><?php echo $this->get_translation('ACLComment'); ?></label>
+	<textarea id="comment_acl" name="comment_acl" rows="4" cols="20"><?php echo $comment_acl['list'] ?></textarea>
 </p>
-<p><label for="create_acl"><?php echo $this->get_translation('ACLCreate'); ?></label>
-<textarea id="create_acl" name="create_acl" rows="4" cols="20"><?php echo $create_acl['list'] ?></textarea>
+<p>
+	<label for="create_acl"><?php echo $this->get_translation('ACLCreate'); ?></label>
+	<textarea id="create_acl" name="create_acl" rows="4" cols="20"><?php echo $create_acl['list'] ?></textarea>
 </p>
-<?php
+<p>
+	<label for="upload_acl"><?php echo $this->get_translation('ACLUpload'); ?></label>
+	<textarea id="upload_acl" name="upload_acl" rows="4" cols="20"><?php echo $upload_acl['list'] ?></textarea>
+</p>
 
-?>
-<p><label for="upload_acl"><?php echo $this->get_translation('ACLUpload'); ?></label>
-<textarea id="upload_acl" name="upload_acl" rows="4" cols="20"><?php echo $upload_acl['list'] ?></textarea>
-</p>
-<?php
-
-?>
-<p><label for="new_owner"><?php echo $this->get_translation('SetOwner'); ?></label>
-<select id="new_owner" name="new_owner">
-	<option value=""><?php echo $this->get_translation('OwnerDontChange'); ?></option>
+<p>
+	<label for="new_owner"><?php echo $this->get_translation('SetOwner'); ?></label>
+	<select id="new_owner" name="new_owner">
+		<option value=""><?php echo $this->get_translation('OwnerDontChange'); ?></option>
 	<?php
-	if ($users = $this->load_users())
-	{
-		foreach($users as $user)
-		{
-			echo "<option value=\"".htmlspecialchars($user['user_name'])."\">".$user['user_name']."</option>\n";
-		}
-	}
+			if ($users = $this->load_users())
+			{
+				foreach($users as $user)
+				{
+					echo "<option value=\"".htmlspecialchars($user['user_name'])."\">".$user['user_name']."</option>\n";
+				}
+			}
 	?>
-</select></p>
+	</select>
+</p>
 <p>
 	<input class="OkBtn" id="submit" type="submit" value="<?php echo $this->get_translation('ACLStoreButton'); ?>" accesskey="s" /> &nbsp;
 	<input class="CancelBtn" id="button" type="button" value="<?php echo $this->get_translation('ACLCancelButton'); ?>" onclick="document.location='<?php echo addslashes($this->href(''))?>';" />
 </p>
 </div>
-	<?php
-	echo $this->form_close();
+<?php
+		echo $this->form_close();
 	}
 }
 else
