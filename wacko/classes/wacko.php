@@ -184,7 +184,7 @@ class Wacko
 		return $page['tag'];;
 	}
 
-	function get_page_id($tag = 0)
+	function get_page_id($tag = '')
 	{
 		if(!$tag)
 		{
