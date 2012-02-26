@@ -40,14 +40,16 @@ function moderate_delete_page(&$engine, $tag)
 	{
 		return false;
 	}
+
 	$engine->remove_referrers($tag);
 	$engine->remove_links($tag);
 	$engine->remove_acls($tag);
 	$engine->remove_watches($tag);
 	$engine->remove_ratings($tag);
+	$engine->remove_categories($tag);
 	$engine->remove_comments($tag);
 	$engine->remove_files($tag);
-	$engine->remove_page($tag);
+	$engine->remove_page($engine->get_page_id($tag));
 	return true;
 }
 
@@ -154,6 +156,19 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 		}
 	}
 
+	// update acl
+	// Give comments the same read rights as their parent page
+	$read_acl		= $engine->load_acl($base_id, 'read');
+	$read_acl		= $read_acl['list'];
+	#$write_acl		= $engine->load_acl($base_id, 'write');
+	#$write_acl		= $write_acl['list'];
+	$write_acl		= '';
+	#$comment_acl	= $engine->load_acl($base_id, 'comment');
+	#$comment_acl	= $comment_acl['list'];
+	$comment_acl	= '';
+	$create_acl		= '';
+	$upload_acl		= '';
+
 	// update link table
 	$comments = $engine->load_all(
 		"SELECT page_id, tag, body_r ".
@@ -170,6 +185,13 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 		$engine->write_link_table($comment['page_id']);
 		$engine->clear_link_table();
 		$engine->current_context--;
+
+		// saving acls
+		$engine->save_acl($comment['page_id'], 'write',		$write_acl);
+		$engine->save_acl($comment['page_id'], 'read',		$read_acl);
+		$engine->save_acl($comment['page_id'], 'comment',	$comment_acl);
+		$engine->save_acl($comment['page_id'], 'create',	$create_acl);
+		$engine->save_acl($comment['page_id'], 'upload',	$upload_acl);
 	}
 
 	// recount comments for the base topic
@@ -208,7 +230,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$page['body']	= '=='.$title."==\n\n".$page['body'];
 	$engine->save_page($new_tag, false, $page['body'], '', '', '', $title_id, '', true);
 
-	$new_page_id		= $engine->get_page_id($new_tag);
+	$new_page_id	= $engine->get_page_id($new_tag);
 
 	// bug-resistent check: has page been really resaved?
 	if ($new_page_id != true)
