@@ -380,6 +380,22 @@ if ($this->is_admin())
 				"LIMIT 1");
 		}
 
+		// total files uploaded
+		$users = $this->load_all(
+			"SELECT u.user_id, COUNT(f.upload_id) AS n ".
+			"FROM {$this->config['table_prefix']}upload f, {$this->config['user_table']} AS u ".
+			"WHERE f.user_id = u.user_id ".
+			"GROUP BY f.user_id");
+
+		foreach ($users as $user)
+		{
+			$this->sql_query(
+				"UPDATE {$this->config['user_table']} ".
+				"SET total_uploads = ".(int)$user['n']." ".
+				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
+				"LIMIT 1");
+		}
+
 		$this->log(1, 'Synchronized user statistics');
 
 		echo	'<p><em>User Statistics synchronized.</em></p><br />';
