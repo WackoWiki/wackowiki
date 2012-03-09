@@ -257,7 +257,7 @@ class Init
 				}
 
 				// retrieving usergroups data from db
-				if (!isset($this->config['maint_last_update']) && ($this->config['wacko_version'] == '5.0.beta' || $this->config['wacko_version'] == '5.0.rc'))
+				if (!isset($this->config['maint_last_update']) && ($this->config['wacko_version'] == 'R5.0.beta' || $this->config['wacko_version'] == '5.0.beta' || $this->config['wacko_version'] == '5.0.rc'))
 				{
 					// TODO: remove this workaround/case after 5.0 release
 					$wacko_db_query = "SELECT
