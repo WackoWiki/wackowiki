@@ -58,7 +58,7 @@ else
 /// Processing of our special form
 if (isset($_POST['_user_menu']))
 {
-	$_menu	= load_user_menu($this, $_user_id);
+	$_menu		= load_user_menu($this, $_user_id);
 	$a			= $_menu;
 	$b			= array();
 

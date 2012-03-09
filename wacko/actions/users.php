@@ -237,6 +237,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					echo '<small>'.$this->get_time_string_formatted($page['created']).'</small>  &mdash; '.$this->link('/'.$page['tag'], '', $page['title'], '', 0)."<br />\n";
 
 					$i = 0;
+
 					if (++$i >= $limit) break 1;
 				}
 			}
@@ -372,7 +373,7 @@ else
 	$count = $this->load_single(
 		"SELECT COUNT(user_name) AS n ".
 		"FROM {$this->config['user_table']} ".
-		( $where == true ? $where : '' ));
+		($where == true ? $where : ''));
 
 	$pagination = $this->pagination($count['n'], $limit, 'p', $param);
 
@@ -381,10 +382,10 @@ else
 		"SELECT u.user_name, u.signup_time, u.session_time, u.total_pages, u.total_revisions, u.total_comments, s.hide_lastsession ".
 		"FROM {$this->config['user_table']} u ".
 			"LEFT JOIN ".$this->config['table_prefix']."user_setting s ON (u.user_id = s.user_id) ".
-		( $where == true ? $where : '' ).
-		( $where ? 'AND ' : "WHERE ").
+		($where == true ? $where : '').
+		($where ? 'AND ' : "WHERE ").
 			"u.account_type = '0' ".
-		( $order == true ? $order : "ORDER BY u.total_pages DESC " ).
+		($order == true ? $order : "ORDER BY u.total_pages DESC ").
 		"LIMIT {$pagination['offset']}, $limit");
 
 	// user filter form
@@ -439,9 +440,9 @@ else
 					'<td align="center">'.$this->get_time_string_formatted($user['signup_time']).'</td>'.
 					'<td align="center">'.( $user['hide_lastsession'] == 1
 					? '<em>'.$this->get_translation('UsersSessionHidden').'</em>'
-					: ( !$user['session_time'] || $user['session_time'] == SQL_NULLDATE
+					: (!$user['session_time'] || $user['session_time'] == SQL_NULLDATE
 						? '<em>'.$this->get_translation('UsersSessionNA').'</em>'
-						: $this->get_time_string_formatted($user['session_time']) )
+						: $this->get_time_string_formatted($user['session_time']))
 					).'</td>'
 					: '').
 			"</tr>\n";
