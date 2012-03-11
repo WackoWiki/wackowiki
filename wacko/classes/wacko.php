@@ -1757,11 +1757,7 @@ class Wacko
 					// Give comments the same read rights as their parent page
 					$read_acl		= $this->load_acl($comment_on_id, 'read');
 					$read_acl		= $read_acl['list'];
-					#$write_acl		= $this->load_acl($comment_on_id, 'write');
-					#$write_acl		= $write_acl['list'];
 					$write_acl		= '';
-					#$comment_acl	= $this->load_acl($comment_on_id, 'comment');
-					#$comment_acl	= $comment_acl['list'];
 					$comment_acl	= '';
 					$create_acl		= '';
 					$upload_acl		= '';
