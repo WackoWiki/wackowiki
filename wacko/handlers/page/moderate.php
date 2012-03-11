@@ -160,11 +160,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 	// Give comments the same read rights as their parent page
 	$read_acl		= $engine->load_acl($base_id, 'read');
 	$read_acl		= $read_acl['list'];
-	#$write_acl		= $engine->load_acl($base_id, 'write');
-	#$write_acl		= $write_acl['list'];
 	$write_acl		= '';
-	#$comment_acl	= $engine->load_acl($base_id, 'comment');
-	#$comment_acl	= $comment_acl['list'];
 	$comment_acl	= '';
 	$create_acl		= '';
 	$upload_acl		= '';
@@ -239,6 +235,15 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 		return false;
 	}
 
+	// update acl
+	// Give comments the same read rights as their parent page
+	$read_acl		= $engine->load_acl($new_page_id, 'read');
+	$read_acl		= $read_acl['list'];
+	$write_acl		= '';
+	$comment_acl	= '';
+	$create_acl		= '';
+	$upload_acl		= '';
+
 	// restore original metadata
 	$engine->sql_query(
 		"UPDATE {$engine->config['table_prefix']}page SET ".
@@ -256,6 +261,13 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 			"UPDATE {$engine->config['table_prefix']}page SET ".
 				"comment_on_id = '".quote($engine->dblink, $new_page_id)."' ".
 			"WHERE page_id = '".quote($engine->dblink, $comment_id)."'");
+
+		// saving acls
+		$engine->save_acl($comment_id, 'write',		$write_acl);
+		$engine->save_acl($comment_id, 'read',		$read_acl);
+		$engine->save_acl($comment_id, 'comment',	$comment_acl);
+		$engine->save_acl($comment_id, 'create',	$create_acl);
+		$engine->save_acl($comment_id, 'upload',	$upload_acl);
 	}
 
 	// remove old first comment
@@ -1076,6 +1088,15 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 						$ids_str = substr($ids_str, 0, strlen($ids_str)-2);
 
+						// update acl
+						// Give comments the same read rights as their parent page
+						$read_acl		= $this->load_acl($page_id, 'read');
+						$read_acl		= $read_acl['list'];
+						$write_acl		= '';
+						$comment_acl	= '';
+						$create_acl		= '';
+						$upload_acl		= '';
+
 						// move
 						$this->sql_query(
 							"UPDATE {$this->config['table_prefix']}page SET ".
@@ -1098,6 +1119,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							$this->write_link_table($comment['page_id']);
 							$this->clear_link_table();
 							$this->current_context--;
+
+							// saving acls
+							$this->save_acl($comment['page_id'], 'write',	$write_acl);
+							$this->save_acl($comment['page_id'], 'read',	$read_acl);
+							$this->save_acl($comment['page_id'], 'comment',	$comment_acl);
+							$this->save_acl($comment['page_id'], 'create',	$create_acl);
+							$this->save_acl($comment['page_id'], 'upload',	$upload_acl);
 						}
 
 						// recount comments for the old and new page
