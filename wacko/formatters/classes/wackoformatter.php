@@ -601,14 +601,14 @@ class WackoFormatter
 
 			return $output;
 		}
-		// Deleted
+		// deleted
 		else if (preg_match('/^<!--markup:1:begin-->((\S.*?\S)|(\S))<!--markup:1:end-->$/s', $thing, $matches))
 		{
 			$this->br = 0;
 
 			return '<del class="diff">'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</del>';
 		}
-		// Inserted
+		// inserted
 		else if (preg_match('/^<!--markup:2:begin-->((\S.*?\S)|(\S))<!--markup:2:end-->$/s', $thing, $matches))
 		{
 			$this->br = 0;
