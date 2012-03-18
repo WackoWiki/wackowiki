@@ -43,7 +43,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		"FROM {$this->config['table_prefix']}page AS p, ".
 			"{$this->config['table_prefix']}acl AS a ".
 		"WHERE p.page_id = a.page_id ".
-		"AND a.privilege = 'comment' AND a.list = '*' ";
+		"AND a.privilege = 'comment' AND a.list = '' ";
 
 	if (!isset($pages))
 	{
