@@ -42,7 +42,10 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	}
 
 	// check privilege
-	if ($this->has_access('write') === true) $access = true;
+	if ($this->has_access('create') === true)
+	{
+		$access = true;
+	}
 
 	// checking new topic input if any
 	if (isset($_POST['action']) && $_POST['action'] == 'topicadd' && $access === true)
@@ -94,7 +97,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		"FROM {$this->config['table_prefix']}page AS p, ".
 			"{$this->config['table_prefix']}acl AS a ".
 		"WHERE p.page_id = a.page_id ".
-			"AND a.privilege = 'write' AND a.list = '$' ".
+			"AND a.privilege = 'create' AND a.list = '' ".
 			"AND p.tag LIKE '{$this->tag}/%' ";
 
 	if (isset($pages))
@@ -116,7 +119,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id), ".
 			"{$this->config['table_prefix']}acl AS a ".
 		"WHERE p.page_id = a.page_id ".
-			"AND a.privilege = 'write' AND a.list = '$' ".
+			"AND a.privilege = 'create' AND a.list = '' ".
 			"AND p.tag LIKE '{$this->tag}/%' ";
 
 	if (isset($pages))
