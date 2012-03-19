@@ -386,16 +386,16 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	}
 
 	// check moderator read access on passed ids
-	foreach ($set as $n => $id)
+	foreach ($set as $n => $page_id)
 	{
-		if ($this->has_access('read', $id) !== true)
+		if ($this->has_access('read', $page_id) !== true)
 		{
 			unset($set[$n]);
 		}
 	}
 
 	reset($set);
-	unset($n, $id);
+	unset($n, $page_id);
 
 	// creting rss object
 	$this->use_class('rss');
@@ -416,9 +416,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// actually remove topics
 			if (isset($_POST['accept']))
 			{
-				foreach ($set as $id)
+				foreach ($set as $page_id)
 				{
-					$page = $this->load_page('', $id, '', LOAD_NOCACHE, LOAD_META);
+					$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
 					moderate_delete_page($this, $page['tag']);
 					$this->log(1, str_replace('%2', $page['user_id'], str_replace('%1', $page['tag'], $this->get_translation('LogRemovedPage', $this->config['language']))));
 				}
@@ -445,14 +445,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				$i = 0;
 
-				foreach ($set as $id)
+				foreach ($set as $page_id)
 				{
-					$old_tags[] = $this->get_page_tag($id);
+					$old_tags[] = $this->get_page_tag($page_id);
 					$new_tags[] = $_POST['section'].substr($old_tags[$i], strrpos($old_tags[$i], '/'));
 
 					if (moderate_page_exists($this, $new_tags[$i++]) === true)
 					{
-						$error[] = '<u>&laquo;'.$this->get_page_title('', $id).'&raquo;</u>';
+						$error[] = '<u>&laquo;'.$this->get_page_title('', $page_id).'&raquo;</u>';
 					}
 				}
 
@@ -465,7 +465,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				{
 					$i = 0;
 
-					foreach ($set as $id)
+					foreach ($set as $page_id)
 					{
 						moderate_rename_topic($this, $old_tags[$i], $new_tags[$i]);
 						$this->log(3, str_replace('%2', $new_tags[$i], str_replace('%1', $old_tags[$i], $this->get_translation('LogRenamedPage', $this->config['language']))));
@@ -537,9 +537,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// perform accepted action
 			if (isset($_POST['accept']) && isset($_POST['base']) && !$error)
 			{
-				foreach ($set as $id)
+				foreach ($set as $page_id)
 				{
-					$topics[] = $this->get_page_tag($id);
+					$topics[] = $this->get_page_tag($page_id);
 				}
 
 				moderate_merge_topics($this, $_POST['base'], $topics);
@@ -559,12 +559,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// lock topics
 		else if (isset($_POST['lock']) && $set == true)
 		{
-			foreach ($set as $id)
+			foreach ($set as $page_id)
 			{
-				$page = $this->load_page('', $id, '', LOAD_NOCACHE, LOAD_META);
+				$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
 				$this->log(2, str_replace('%1', $page['tag'].' '.$page['title'], $this->get_translation('LogTopicLocked', $this->config['language'])));
 				// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
-				$this->save_acl($id, 'comment', '!*');
+				$this->save_acl($page_id, 'comment', '!*');
 			}
 
 			$set = array();
@@ -574,11 +574,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// unlock topics
 		else if (isset($_POST['unlock']) && $set == true)
 		{
-			foreach ($set as $id)
+			foreach ($set as $page_id)
 			{
-				$page = $this->load_page('', $id, '', LOAD_NOCACHE, LOAD_META);
+				$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
 				$this->log(2, str_replace('%1', $page['tag'].' '.$page['title'], $this->get_translation('LogTopicUnlocked', $this->config['language'])));
-				$this->save_acl($id, 'comment', '*');
+				$this->save_acl($page_id, 'comment', '*');
 			}
 
 			$set = array();
@@ -630,9 +630,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// confirm deletion
 		if ($accept_action == 'delete')
 		{
-			foreach ($set as $id)
+			foreach ($set as $page_id)
 			{
-				$accept_text[] = '&laquo;'.$this->get_page_title('', $id).'&raquo;';
+				$accept_text[] = '&laquo;'.$this->get_page_title('', $page_id).'&raquo;';
 			}
 
 			echo '<input name="'.$accept_action.'" type="hidden" value="1" />'.
@@ -648,9 +648,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// select target forum section
 		else if ($accept_action == 'move')
 		{
-			foreach ($set as $id)
+			foreach ($set as $page_id)
 			{
-				$accept_text[] = '&laquo;'.$this->get_page_title('', $id).'&raquo;';
+				$accept_text[] = '&laquo;'.$this->get_page_title('', $page_id).'&raquo;';
 			}
 
 			$sections = $this->load_all(
@@ -707,10 +707,10 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// select base for merging topics
 		else if ($accept_action == 'merge')
 		{
-			foreach ($set as $id)
+			foreach ($set as $page_id)
 			{
-				$accept_text[] = '&laquo;'.$this->get_page_title('', $id).'&raquo;';
-				$topics_list[] = $this->get_page_tag($id);
+				$accept_text[] = '&laquo;'.$this->get_page_title('', $page_id).'&raquo;';
+				$topics_list[] = $this->get_page_tag($page_id);
 			}
 
 			$list = '';
@@ -959,9 +959,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				if ($error != true)
 				{
 
-					foreach ($set as $id)
+					foreach ($set as $page_id)
 					{
-						$page = $this->load_page('', $id, '', LOAD_NOCACHE, LOAD_META);
+						$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
 						moderate_delete_page($this, $page['tag']);
 						$this->log(1, str_replace('%3', $this->get_time_string_formatted($page['created']), str_replace('%2', $page['user_name'], str_replace('%1', $this->get_page_tag($page['comment_on_id']).' '.$this->get_page_title('', $page['comment_on_id']), $this->get_translation('LogRemovedComment', $this->config['language'])))));
 					}
@@ -1081,9 +1081,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					}
 					else
 					{
-						foreach ($comment_ids as $id)
+						foreach ($comment_ids as $comment_id)
 						{
-							$ids_str .= "'".quote($this->dblink, $id)."', ";
+							$ids_str .= "'".quote($this->dblink, $comment_id)."', ";
 						}
 
 						$ids_str = substr($ids_str, 0, strlen($ids_str)-2);
