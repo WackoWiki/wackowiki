@@ -588,11 +588,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// make counter query
 		$sql = "SELECT COUNT(p.page_id) AS n ".
-			"FROM {$this->config['table_prefix']}page AS p ".
-				#"{$this->config['table_prefix']}acl AS a ".
-			"WHERE ". # p.page_id = a.page_id ".
-				#"AND a.`create` = '' ".
-				#"AND
+			"FROM {$this->config['table_prefix']}page AS p, ".
+				"{$this->config['table_prefix']}acl AS a ".
+			"WHERE p.page_id = a.page_id ".
+				"AND a.privilege = 'create' AND a.list = '' ".
+				"AND ".
 				"p.tag LIKE '{$this->tag}/%' ".
 			"LIMIT 1";
 
@@ -604,11 +604,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$sql = "SELECT p.page_id, p.tag, title, p.owner_id, p.user_id, ip, comments, created, u.user_name, o.user_name as owner_name ".
 			"FROM {$this->config['table_prefix']}page AS p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
-					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
-				#"{$this->config['table_prefix']}acl AS a ".
-			"WHERE ".// p.page_id = a.page_id ".
-				#"AND a.`create` = '' ".
-				#"AND
+					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id), ".
+				"{$this->config['table_prefix']}acl AS a ".
+			"WHERE p.page_id = a.page_id ".
+				"AND a.privilege = 'create' AND a.list = '' ".
+				"AND ".
 				"p.tag LIKE '{$this->tag}/%' ".
 			"ORDER BY commented DESC ".
 			"LIMIT {$pagination['offset']}, $limit";
@@ -655,11 +655,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			$sections = $this->load_all(
 				"SELECT p.tag, p.title ".
-				"FROM {$this->config['table_prefix']}page AS p ".
-					#"{$this->config['table_prefix']}acl AS a ".
-				"WHERE ". #p.page_id = a.page_id ".
-					#"AND a.`comment` = '' ".
-					#"AND
+				"FROM {$this->config['table_prefix']}page AS p, ".
+					"{$this->config['table_prefix']}acl AS a ".
+				"WHERE p.page_id = a.page_id ".
+					"AND a.privilege = 'comment' AND a.list = '' ".
+					"AND ".
 					"p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
 				"ORDER BY modified ASC", 1);
 
@@ -958,7 +958,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				if ($error != true)
 				{
-
 					foreach ($set as $page_id)
 					{
 						$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
@@ -1216,11 +1215,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				$sections = $this->load_all(
 					"SELECT p.tag, p.title ".
-					"FROM {$this->config['table_prefix']}page AS p ".
-						#"{$this->config['table_prefix']}acl AS a ".
-					"WHERE ". #p.page_id = a.page_id ".
-						#"AND a.`comment` = '' ".
-						#"AND
+					"FROM {$this->config['table_prefix']}page AS p, ".
+						"{$this->config['table_prefix']}acl AS a ".
+					"WHERE p.page_id = a.page_id ".
+						"AND a.privilege = 'comment' AND a.list = '' ".
+						"AND ".
 						"p.tag LIKE '".quote($this->dblink, $this->config['forum_cluster'])."/%' ".
 					"ORDER BY modified ASC", 1);
 
