@@ -78,7 +78,7 @@ if (isset($_POST['_user_menu']))
 		// repos
 		$data = array();
 
-		foreach( $object->data['user_menu'] as $k => $item )
+		foreach($object->data['user_menu'] as $k => $item)
 		{
 			$data[] = array(
 				'menu_id'		=> $item['menu_id'],
@@ -88,13 +88,13 @@ if (isset($_POST['_user_menu']))
 
 		usort ($data, "menu_sorting");
 
-		foreach( $data as $k => $item )
+		foreach($data as $k => $item)
 		{
 			$data[$k]['menu_position'] = $k + 1;
 		}
 
 		// save
-		foreach( $data as $item )
+		foreach($data as $item)
 		{
 			$this->sql_query(
 				"UPDATE ".$this->config['table_prefix']."menu SET ".
@@ -191,17 +191,18 @@ if (isset($_POST['_user_menu']))
 	{
 		$deletion = '';
 
-		foreach( $object->data['user_menu'] as $item )
+		foreach($object->data['user_menu'] as $item)
 		{
 			if (isset($_POST['delete_'.$item['menu_id']]))
 			{
 				if ($deletion != '')
 				{
-					$deletion .= ", ";
+					$deletion .= ', ';
 				}
 
-				$deletion.= quote($this->dblink, $item['menu_id']);
+				$deletion .= quote($this->dblink, $item['menu_id']);
 			}
+
 			if ($deletion != '')
 			{
 				$this->sql_query(
