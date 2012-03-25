@@ -24,18 +24,14 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	{
 		$this->update_last_mark($user);
 		$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
-		#$user = $this->get_user();
-		$user_id = $this->get_user_id(); //xxx
+		$user = $this->get_user();
 	}
 
 	// parse subforums list if any
 	if (!empty($pages))
 	{
 		#$pages = trim($pages, '/ ');
-		#$this->debug_print_r($pages);
 		$pages = explode(',', $pages);
-		#$this->debug_print_r($pages);
-
 	}
 
 	// make query
@@ -94,7 +90,6 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				"SELECT sum(a.comments) as total ".
 				"FROM {$this->config['table_prefix']}page a ".
 				"WHERE a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ", 1);
-	#$this->debug_print_r($posts);
 
 			// load latest comment
 			$comment = $this->load_single(
