@@ -121,7 +121,7 @@ form input.submitinput {
 #header {
 	padding: 0px;
 	float: left;
-	width: 100%;
+	width: 96%;
 }
 
 #header-main {
@@ -171,7 +171,7 @@ form input.submitinput {
 	background-color: #FFFFFF;
 	padding: 9px 20px 0px;
 	float: left;
-	width: 100%;
+	width: 96%;
 	clear: both;
 }
 
@@ -197,7 +197,7 @@ form input.submitinput {
 
 #footer {
 	float: left;
-	width: 100%;
+	width: 96%;
 }
 
 .footer {
