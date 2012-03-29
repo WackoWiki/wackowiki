@@ -24,7 +24,7 @@ if ($global) $global = 'global';
 // check who u are, can u upload?
 if ($user = $this->get_user())
 {
-	$user_name		= strtolower($this->get_user_name());
+	$user_name	= strtolower($this->get_user_name());
 	$registered	= true;
 }
 else

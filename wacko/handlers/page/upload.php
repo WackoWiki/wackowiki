@@ -71,7 +71,7 @@ if ($registered
 				$this->page['owner_id'] == $this->get_user_id())) || (
 				$file[0]['user_id'] == $this->get_user_id()))
 			{
-				echo "<strong>".$this->get_translation('UploadRemoveConfirm')."</strong>";
+				echo '<strong>'.$this->get_translation('UploadRemoveConfirm').'</strong>';
 				echo $this->form_open('upload');
 				// !!!!! place here a reference to delete files
 ?>
@@ -80,9 +80,9 @@ if ($registered
 		<li><?php echo $this->link('file:'.$file[0]['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$file[0]['user_name'])."\">".$file[0]['user_name']."</a>"; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file[0]['user_name']).'">'.$file[0]['user_name'].'</a>'; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file[0]['uploaded_dt']); ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo "(".$this->binary_multiples($file[0]['file_size'], false, true, true).")"; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$this->binary_multiples($file[0]['file_size'], false, true, true).')'; ?></li>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file[0]['file_name']; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $file[0]['description']; ?></li>
@@ -110,7 +110,7 @@ if ($registered
 			echo $this->get_translation('UploadFileNotFound');
 		}
 
-		echo "</div>";
+		echo '</div>';
 		return true;
 	}
 	else if (isset($_GET['edit'])) // show the form
@@ -138,7 +138,7 @@ if ($registered
 				$this->page['owner_id'] == $this->get_user_id())) || (
 				$file[0]['user_id'] == $this->get_user_id()))
 			{
-				echo "<strong>".$this->get_translation('UploadEditConfirm')."</strong>";
+				echo '<strong>'.$this->get_translation('UploadEditConfirm').'</strong>';
 				echo $this->form_open('upload');
 				// !!!!! place here a reference to delete files
 ?>
@@ -147,9 +147,9 @@ if ($registered
 		<li><?php echo $this->link('file:'.$file[0]['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$file[0]['user_name'])."\">".$file[0]['user_name']."</a>"; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file[0]['user_name']).'">'.$file[0]['user_name'].'</a>'; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file[0]['uploaded_dt']); ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo "(".$this->binary_multiples($file[0]['file_size'], false, true, true).")"; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$this->binary_multiples($file[0]['file_size'], false, true, true).')'; ?></li>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file[0]['file_name']; ?></li>
 				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input name="description" id="UploadDesc" type="text" size="80" value="<?php echo $file[0]['description']; ?>"/></li>
@@ -179,7 +179,7 @@ if ($registered
 			echo $this->get_translation('UploadFileNotFound');
 		}
 
-		echo "</div>";
+		echo '</div>';
 		return true;
 	}
 	else
@@ -222,7 +222,7 @@ if ($registered
 						"WHERE user_id = '".quote($this->dblink, $file[0]['user_id'])."' ".
 						"LIMIT 1");
 
-					$message .= $this->get_translation('UploadRemovedFromDB')."<br />";
+					$message .= $this->get_translation('UploadRemovedFromDB').'<br />';
 
 					// 3. remove from FS
 					$real_filename = ($page_id
@@ -236,7 +236,7 @@ if ($registered
 					}
 					else
 					{
-						$message .= "<div class=\"error\">".$this->get_translation('UploadRemovedFromFSError')."</div>";
+						$message .= '<div class="error">'.$this->get_translation('UploadRemovedFromFSError').'</div>';
 					}
 
 					if ($message)
@@ -283,7 +283,7 @@ if ($registered
 					$this->page['owner_id'] == $this->get_user_id())) || (
 					$file[0]['user_id'] == $this->get_user_id()))
 				{
-					$description = substr(quote($this->dblink, $_POST['description']),0,250);
+					$description = substr(quote($this->dblink, $_POST['description']), 0, 250);
 					$description = rtrim( $description, '\\' );
 
 					// Make HTML in the description redundant ;¬)
@@ -312,7 +312,7 @@ if ($registered
 					#}
 					#else
 					#{
-					#	$message .= "<div class=\"error\">".$this->get_translation('UploadRemovedFromFSError')."</div>";
+					#	$message .= '<div class="error">'.$this->get_translation('UploadRemovedFromFSError').'</div>';
 					#}
 
 					if ($message)
@@ -356,8 +356,8 @@ if ($registered
 				{
 					// 1. check out $data
 					$_data	= explode('.', $_FILES['file']['name']);
-					$ext	= $_data[ count($_data)-1 ];
-					unset($_data[ count($_data)-1 ]);
+					$ext	= $_data[count($_data) - 1];
+					unset($_data[count($_data) - 1]);
 
 					// 3. extensions
 					$ext	= strtolower($ext);
@@ -368,7 +368,7 @@ if ($registered
 						$ext = $ext.'.txt';
 					}
 
-					$name	= implode( '.', $_data );
+					$name	= implode('.', $_data);
 					$name	= str_replace('@', '_', $name);
 
 					// here would be place for translit
@@ -458,7 +458,7 @@ if ($registered
 							$file_size_kb	= ceil($file_size / 1024);
 							$uploaded_dt	= date('Y-m-d H:i:s');
 
-							$description = substr(quote($this->dblink, $_POST['description']),0,250);
+							$description = substr(quote($this->dblink, $_POST['description']), 0, 250);
 							$description = rtrim( $description, '\\' );
 
 							// Make HTML in the description redundant ;¬)
@@ -507,7 +507,7 @@ if ($registered
 					<li><span>&nbsp;</span></li>
 
 					<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($uploaded_dt); ?></li>
-					<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo "(".$file_size_kb." ".$this->get_translation('UploadKB').")"; ?></li>
+					<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$file_size_kb.' '.$this->get_translation('UploadKB').')'; ?></li>
 					<li><span>&nbsp;</span></li>
 					<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $small_name; ?></li>
 					<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $description; ?></li>
@@ -552,12 +552,12 @@ if ($registered
 
 		if ($error)
 		{
-			$this->set_message("<div class=\"error\">".$error."</div>");
+			$this->set_message('<div class="error">'.$error.'</div>');
 		}
 
-		echo $this->action('upload', array())."<br />";
+		echo $this->action('upload', array()).'<br />';
 
-	// if (!$error) echo "<br /><hr />".$this->action('upload', array())."<hr /><br />";
+	// if (!$error) echo '<br /><hr />'.$this->action('upload', array()).'<hr /><br />';
 	}
 }
 else
@@ -568,7 +568,7 @@ else
 // show uploaded files for current page
 if ($this->has_access('read'))
 {
-	echo $this->action('files', array())."<br />";
+	echo $this->action('files', array()).'<br />';
 }
 
 if (!$this->config['revisions_hide_cancel'])
