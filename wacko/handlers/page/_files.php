@@ -32,13 +32,13 @@ if ($this->has_access('read'))
 		// display files header
 		?>
 	<div id="filesheader">
-	<?php echo "<a href=\"".$this->href('', '', 'show_files=0')."\" title=\"".$this->get_translation('HideFiles')."\">".$this->get_translation('Files_all')."</a>"; ?>
+	<?php echo '<a href="'.$this->href('', '', 'show_files=0').'" title="'.$this->get_translation('HideFiles').'">'.$this->get_translation('Files_all').'</a>'; ?>
 	</div>
 
 		<?php
-		echo "<div class=\"files\">";
+		echo '<div class="files">'."\n";
 		echo $this->action('files', array('nomark' => 1));
-		echo "</div>";
+		echo '</div>';
 
 		// display form
 		if ($user = $this->get_user())
@@ -59,14 +59,14 @@ if ($this->has_access('read'))
 				)
 			)
 		{
-			echo "<div class=\"filesform\">\n";
+			echo '<div class="filesform">'."\n";
 			echo $this->action('upload', array('nomark' => 1));
-			echo "</div>\n";
+			echo '</div>'."\n";
 		}
 	}
 	else
 	{
-		echo "<div id=\"filesheader\">";
+		echo '<div id="filesheader">'."\n";
 
 		if ($this->page['page_id'])
 		{
@@ -93,8 +93,8 @@ if ($this->has_access('read'))
 				$show_files = str_replace('%1', $c, $this->get_translation('Files_n'));
 		}
 
-		echo "<a href=\"".$this->href('', '', 'show_files=1#filesheader')."\" title=\"".$this->get_translation('ShowFiles')."\">".$show_files."</a>";
-		echo "</div>\n";
+		echo '<a href="'.$this->href('', '', 'show_files=1#filesheader').'" title="'.$this->get_translation('ShowFiles').'">'.$show_files.'</a>';
+		echo '</div>'."\n";
 	}
 }
 
