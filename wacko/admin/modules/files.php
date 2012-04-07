@@ -177,6 +177,7 @@ function admin_files(&$engine, &$module)
 			$engine->sql_query("INSERT INTO {$engine->config['table_prefix']}upload SET ".
 				"page_id		= '".quote($engine->dblink, '0')."', ".
 				"file_name		= '".quote($engine->dblink, $small_name)."', ".
+				"lang			= '".quote($engine->dblink, $engine->config['language'])."', ".
 				"description	= '".quote($engine->dblink, $description)."', ".
 				"file_size		= '".quote($engine->dblink, $file_size)."',".
 				"picture_w		= '".quote($engine->dblink, $size[0])."',".
