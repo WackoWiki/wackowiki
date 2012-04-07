@@ -250,6 +250,7 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"file_name VARCHAR(250) NOT NULL DEFAULT '',".
+					"lang VARCHAR(2) NOT NULL,".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"uploaded_dt DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"file_size INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -257,6 +258,7 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"file_ext VARCHAR(10) NOT NULL DEFAULT '',".
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"deleted TINYINT(1) UNSIGNED NULL DEFAULT '0',".
 					"PRIMARY KEY (upload_id),".
 					"KEY page_id (page_id, file_name),".
 					"KEY page_id_2 (page_id, uploaded_dt),".
