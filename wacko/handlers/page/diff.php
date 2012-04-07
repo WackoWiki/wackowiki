@@ -69,11 +69,11 @@ if ($this->has_access('read'))
 			// This is a really cheap way to do it.
 
 			// prepare bodies
-			$body_a = explode("\n", $page_b['body']);
-			$body_b = explode("\n", $page_a['body']);
+			$body_a		= explode("\n", $page_b['body']);
+			$body_b		= explode("\n", $page_a['body']);
 
-			$added = array_diff($body_a, $body_b);
-			$deleted = array_diff($body_b, $body_a);
+			$added		= array_diff($body_a, $body_b);
+			$deleted	= array_diff($body_b, $body_a);
 
 			$output .=
 			str_replace('%1', "<a href=\"".$this->href('', '', ($b != -1 ? 'revision_id='.$page_a['revision_id'] : ''))."\">".$this->get_time_string_formatted($page_a['modified'])."</a>",
@@ -86,7 +86,7 @@ if ($this->has_access('read'))
 				// remove blank lines
 				$output .= "<br />\n".$this->get_translation('SimpleDiffAdditions')."<br />\n\n";
 				$output .= "<div class=\"additions\">".($source == 1
-															? '<pre>'.wordwrap(implode("\n", $added), 70, "\n", 1).'</pre>'
+															? '<pre>'.wordwrap(htmlentities(implode("\n", $added)), 70, "\n", 1).'</pre>'
 															: $this->format(implode("\n", $added))
 														)."</div>";
 			}
@@ -95,7 +95,7 @@ if ($this->has_access('read'))
 			{
 				$output .= "<br />\n\n".$this->get_translation('SimpleDiffDeletions')."<br />\n\n";
 				$output .= "<div class=\"deletions\">".($source == 1
-															? '<pre>'.wordwrap(implode("\n", $deleted), 70, "\n", 1).'</pre>'
+															? '<pre>'.wordwrap(htmlentities(implode("\n", $deleted)), 70, "\n", 1).'</pre>'
 															: $this->format(implode("\n", $deleted))
 														)."</div>";
 			}
