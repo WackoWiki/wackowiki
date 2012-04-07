@@ -274,8 +274,12 @@ $alter_upload_r4_3_1 = "ALTER TABLE {$pref}upload CHANGE id id INT(10) UNSIGNED 
 
 $alter_upload_r4_3_2 = "ALTER TABLE {$pref}upload DROP user";
 $alter_upload_r4_3_3 = "ALTER TABLE {$pref}upload CHANGE id upload_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT";
+$alter_upload_r4_3_4 = "ALTER TABLE {$pref}upload ADD lang VARCHAR(2) NOT NULL AFTER file_name";
+$alter_upload_r4_3_5 = "ALTER TABLE {$pref}upload ADD deleted TINYINT(1) UNSIGNED NULL DEFAULT '0' AFTER hits";
 
 $update_upload_r4_3_1 = "UPDATE {$pref}upload AS upload, (SELECT user_id, user_name FROM {$pref}user) AS users SET upload.user_id = users.user_id WHERE upload.user = users.user_name";
+$update_upload_r4_3_2 = "UPDATE {$pref}upload AS upload, (SELECT page_id, lang FROM {$pref}page) AS page SET upload.lang = page.lang WHERE upload.page_id = page.page_id AND upload.page_id <> '0'";
+$update_upload_r4_3_3 = "UPDATE {$pref}upload AS upload SET upload.lang = {$config['language']} WHERE upload.page_id = '0'";
 
 // USER
 $rename_user_r4_3_1 = "RENAME TABLE {$pref}users TO {$pref}user";

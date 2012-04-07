@@ -289,12 +289,14 @@ if ($registered
 					// Make HTML in the description redundant ;¬)
 					$description = $this->format($description, 'pre_wacko');
 					$description = $this->format($description, 'safehtml');
-					$description = htmlentities($description, ENT_COMPAT, $this->get_charset());
+					#$description = htmlentities($description, ENT_COMPAT, $this->get_charset());
+					$description = htmlspecialchars($description, ENT_COMPAT, $this->get_charset());
 
 					// 2. update file metadata
 					$this->sql_query(
-						"UPDATE ".$this->config['table_prefix']."upload ".
-						"SET description = '".quote($this->dblink, $description)."' ".
+						"UPDATE ".$this->config['table_prefix']."upload SET ".
+							"lang			= '".quote($this->dblink, $this->page['lang'])."', ".
+							"description	= '".quote($this->dblink, $description)."' ".
 						"WHERE upload_id = '". quote($this->dblink, $file[0]['upload_id'])."' ".
 						"LIMIT 1");
 
@@ -464,7 +466,8 @@ if ($registered
 							// Make HTML in the description redundant ;¬)
 							$description = $this->format($description, 'pre_wacko');
 							$description = $this->format($description, 'safehtml');
-							$description = htmlentities($description, ENT_COMPAT, $this->get_charset());
+							#$description = htmlentities($description, ENT_COMPAT, $this->get_charset());
+							$description = htmlspecialchars($description, ENT_COMPAT, $this->get_charset());
 
 							// 5. insert line into DB
 							$this->sql_query(
@@ -472,6 +475,7 @@ if ($registered
 									"page_id		= '".quote($this->dblink, $is_global ? "0" : $this->page['page_id'])."', ".
 									"user_id		= '".quote($this->dblink, $user['user_id'])."',".
 									"file_name		= '".quote($this->dblink, $small_name)."', ".
+									"lang			= '".quote($this->dblink, $this->page['lang'])."', ".
 									"description	= '".quote($this->dblink, $description)."', ".
 									"file_size		= '".quote($this->dblink, $file_size)."',".
 									"picture_w		= '".quote($this->dblink, $size[0])."',".

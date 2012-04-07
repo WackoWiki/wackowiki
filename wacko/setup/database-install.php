@@ -742,12 +742,25 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R5.0.rc2 to R5.0.0
+				// upgrade from R5.0.rc2 to R5.0.rc3
 				case '5.0.rc2':
 					echo "         <h2>Wacko 5.0.rc2 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
 					test(str_replace('%1', 'acl', $lang['UpdateTable']), @mysql_query($update_acl_r4_3_2, $dblink), str_replace('%1', 'acl', $lang['ErrorUpdatingTable']));
+
+					echo "            </ol>\n";
+
+				// upgrade from R5.0.rc3 to R5.0.0
+				case '5.0.rc3':
+					echo "         <h2>Wacko 5.0.rc3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_4, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_5, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+
+					test(str_replace('%1', 'upload', $lang['UpdateTable']), @mysql_query($update_upload_r4_3_2, $dblink), str_replace('%1', 'upload', $lang['ErrorUpdatingTable']));
+					test(str_replace('%1', 'upload', $lang['UpdateTable']), @mysql_query($update_upload_r4_3_3, $dblink), str_replace('%1', 'upload', $lang['ErrorUpdatingTable']));
 
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -1186,12 +1199,25 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R5.0.rc2 to R5.0.0
+				// upgrade from R5.0.rc2 to R5.0.rc3
 				case '5.0.rc2':
 					echo "         <h2>Wacko 5.0.rc2 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
 					test(str_replace('%1', 'acl', $lang['UpdateTable']), @mysqli_query($dblink, $update_acl_r4_3_2), str_replace('%1', 'acl', $lang['ErrorUpdatingTable']));
+
+					echo "            </ol>\n";
+
+				// upgrade from R5.0.rc3 to R5.0.0
+				case '5.0.rc3':
+					echo "         <h2>Wacko 5.0.rc3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_4), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_5), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+
+					test(str_replace('%1', 'upload', $lang['UpdateTable']), @mysqli_query($dblink, $update_upload_r4_3_2), str_replace('%1', 'upload', $lang['ErrorUpdatingTable']));
+					test(str_replace('%1', 'upload', $lang['UpdateTable']), @mysqli_query($dblink, $update_upload_r4_3_3), str_replace('%1', 'upload', $lang['ErrorUpdatingTable']));
 
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -1645,12 +1671,25 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R5.0.rc2 to R5.0.0
+				// upgrade from R5.0.rc2 to R5.0.rc3
 				case '5.0.rc2':
 					echo "         <h2>Wacko 5.0.rc2 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
 					test_pdo(str_replace('%1', 'acl', $lang['UpdateTable']), $update_acl_r4_3_2, str_replace('%1', 'acl', $lang['ErrorUpdatingTable']));
+
+					echo "            </ol>\n";
+
+				// upgrade from R5.0.rc3 to R5.0.0
+				case '5.0.rc3':
+					echo "         <h2>Wacko 5.0.rc3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_4, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_5, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+
+					test_pdo(str_replace('%1', 'upload', $lang['UpdateTable']), $update_upload_r4_3_2, str_replace('%1', 'upload', $lang['ErrorUpdatingTable']));
+					test_pdo(str_replace('%1', 'upload', $lang['UpdateTable']), $update_upload_r4_3_3, str_replace('%1', 'upload', $lang['ErrorUpdatingTable']));
 
 					// inserting config values
 					test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
