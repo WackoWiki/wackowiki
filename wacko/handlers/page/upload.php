@@ -57,19 +57,20 @@ if ($registered
 			$page_id = $this->page['page_id'];
 		}
 
-		$file = $this->load_all(
+		$file = $this->load_single(
 			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.description, f.uploaded_dt ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-				"AND f.upload_id ='".quote($this->dblink, $_GET['file_id'])."'");
+				"AND f.upload_id ='".quote($this->dblink, $_GET['file_id'])."' ".
+			"LIMIT 1");
 
 		if (count($file) > 0)
 		{
 			if ($this->is_admin() || (
 				$page_id && (
 				$this->page['owner_id'] == $this->get_user_id())) || (
-				$file[0]['user_id'] == $this->get_user_id()))
+				$file['user_id'] == $this->get_user_id()))
 			{
 				echo '<strong>'.$this->get_translation('UploadRemoveConfirm').'</strong>';
 				echo $this->form_open('upload');
@@ -77,15 +78,15 @@ if ($registered
 ?>
 	<br />
 	<ul class="upload">
-		<li><?php echo $this->link('file:'.$file[0]['file_name'] ); ?>
+		<li><?php echo $this->link('file:'.$file['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file[0]['user_name']).'">'.$file[0]['user_name'].'</a>'; ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file[0]['uploaded_dt']); ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$this->binary_multiples($file[0]['file_size'], false, true, true).')'; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file['user_name']).'">'.$file['user_name'].'</a>'; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file['uploaded_dt']); ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$this->binary_multiples($file['file_size'], false, true, true).')'; ?></li>
 				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file[0]['file_name']; ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $file[0]['description']; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $file['description']; ?></li>
 			</ul>
 		</li>
 	</ul>
@@ -124,19 +125,20 @@ if ($registered
 			$page_id = $this->page['page_id'];
 		}
 
-		$file = $this->load_all(
+		$file = $this->load_single(
 			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.description, f.uploaded_dt ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-				"AND f.upload_id ='".quote($this->dblink, $_GET['file_id'])."'");
+				"AND f.upload_id ='".quote($this->dblink, $_GET['file_id'])."' ".
+			"LIMIT 1");
 
 		if (count($file) > 0)
 		{
 			if ($this->is_admin() || (
 				$page_id && (
 				$this->page['owner_id'] == $this->get_user_id())) || (
-				$file[0]['user_id'] == $this->get_user_id()))
+				$file['user_id'] == $this->get_user_id()))
 			{
 				echo '<strong>'.$this->get_translation('UploadEditConfirm').'</strong>';
 				echo $this->form_open('upload');
@@ -144,15 +146,15 @@ if ($registered
 ?>
 	<br />
 	<ul class="upload">
-		<li><?php echo $this->link('file:'.$file[0]['file_name'] ); ?>
+		<li><?php echo $this->link('file:'.$file['file_name'] ); ?>
 			<ul>
 				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file[0]['user_name']).'">'.$file[0]['user_name'].'</a>'; ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file[0]['uploaded_dt']); ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$this->binary_multiples($file[0]['file_size'], false, true, true).')'; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadBy'); ?>:</span><?php echo '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$file['user_name']).'">'.$file['user_name'].'</a>'; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileAdded'); ?>:</span><?php echo $this->get_time_string_formatted($file['uploaded_dt']); ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$this->binary_multiples($file['file_size'], false, true, true).')'; ?></li>
 				<li><span>&nbsp;</span></li>
-				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file[0]['file_name']; ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input name="description" id="UploadDesc" type="text" size="80" value="<?php echo $file[0]['description']; ?>"/></li>
+				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input name="description" id="UploadDesc" type="text" size="80" value="<?php echo $file['description']; ?>"/></li>
 			</ul>
 		</li>
 	</ul>
@@ -196,30 +198,31 @@ if ($registered
 				$page_id = $this->page['page_id'];
 			}
 
-			$file = $this->load_all(
+			$file = $this->load_single(
 				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.description ".
 				"FROM ".$this->config['table_prefix']."upload f ".
 					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 				"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-					"AND f.upload_id ='".quote($this->dblink, $_POST['file_id'])."'");
+					"AND f.upload_id ='".quote($this->dblink, $_POST['file_id'])."' ".
+				"LIMIT 1");
 
 			if (count($file) > 0)
 			{
 				if ($this->is_admin() || (
 					$page_id && (
 					$this->page['owner_id'] == $this->get_user_id())) || (
-					$file[0]['user_id'] == $this->get_user_id()))
+					$file['user_id'] == $this->get_user_id()))
 				{
 					// 2. remove from DB
 					$this->sql_query(
 						"DELETE FROM ".$this->config['table_prefix']."upload ".
-						"WHERE upload_id = '". quote($this->dblink, $file[0]['upload_id'])."'" );
+						"WHERE upload_id = '". quote($this->dblink, $file['upload_id'])."'" );
 
 					// update user uploads count
 					$this->sql_query(
 						"UPDATE {$this->config['user_table']} ".
 						"SET total_uploads = total_uploads - 1 ".
-						"WHERE user_id = '".quote($this->dblink, $file[0]['user_id'])."' ".
+						"WHERE user_id = '".quote($this->dblink, $file['user_id'])."' ".
 						"LIMIT 1");
 
 					$message .= $this->get_translation('UploadRemovedFromDB').'<br />';
@@ -228,7 +231,7 @@ if ($registered
 					$real_filename = ($page_id
 						? ($this->config['upload_path_per_page'].'/@'.$page_id.'@')
 						: ($this->config['upload_path'].'/')).
-						$file[0]['file_name'];
+						$file['file_name'];
 
 					if (@unlink($real_filename))
 					{
@@ -245,7 +248,7 @@ if ($registered
 					}
 
 					// log event
-					$this->log(1, str_replace('%2', $file[0]['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogRemovedFile', $this->config['language']))));
+					$this->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogRemovedFile', $this->config['language']))));
 				}
 				else
 				{
@@ -269,19 +272,20 @@ if ($registered
 				$page_id = $this->page['page_id'];
 			}
 
-			$file = $this->load_all(
+			$file = $this->load_single(
 				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.description ".
 				"FROM ".$this->config['table_prefix']."upload f ".
 					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 				"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-					"AND f.upload_id ='".quote($this->dblink, $_POST['file_id'])."'");
+					"AND f.upload_id ='".quote($this->dblink, $_POST['file_id'])."' ".
+				"LIMIT 1");
 
 			if (count($file) > 0)
 			{
 				if ($this->is_admin() || (
 					$page_id && (
 					$this->page['owner_id'] == $this->get_user_id())) || (
-					$file[0]['user_id'] == $this->get_user_id()))
+					$file['user_id'] == $this->get_user_id()))
 				{
 					$description = substr(quote($this->dblink, $_POST['description']), 0, 250);
 					$description = rtrim( $description, '\\' );
@@ -289,7 +293,6 @@ if ($registered
 					// Make HTML in the description redundant ;¬)
 					$description = $this->format($description, 'pre_wacko');
 					$description = $this->format($description, 'safehtml');
-					#$description = htmlentities($description, ENT_COMPAT, $this->get_charset());
 					$description = htmlspecialchars($description, ENT_COMPAT, $this->get_charset());
 
 					// 2. update file metadata
@@ -297,7 +300,7 @@ if ($registered
 						"UPDATE ".$this->config['table_prefix']."upload SET ".
 							"lang			= '".quote($this->dblink, $this->page['lang'])."', ".
 							"description	= '".quote($this->dblink, $description)."' ".
-						"WHERE upload_id = '". quote($this->dblink, $file[0]['upload_id'])."' ".
+						"WHERE upload_id = '". quote($this->dblink, $file['upload_id'])."' ".
 						"LIMIT 1");
 
 					$message .= $this->get_translation('UploadEditedMeta')."<br />";
@@ -306,7 +309,7 @@ if ($registered
 					#$real_filename = ($page_id
 					#	? ($this->config['upload_path_per_page'].'/@'.$page_id.'@')
 					#	: ($this->config['upload_path'].'/')).
-					#	$file[0]['file_name'];
+					#	$file['file_name'];
 
 					#if (@unlink($real_filename))
 					#{
@@ -323,7 +326,7 @@ if ($registered
 					}
 
 					// log event
-					$this->log(1, str_replace('%2', $file[0]['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogUpdatedFileMeta', $this->config['language']))));
+					$this->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $this->tag.' '.$this->page['title'], $this->get_translation('LogUpdatedFileMeta', $this->config['language']))));
 				}
 				else
 				{
@@ -466,7 +469,6 @@ if ($registered
 							// Make HTML in the description redundant ;¬)
 							$description = $this->format($description, 'pre_wacko');
 							$description = $this->format($description, 'safehtml');
-							#$description = htmlentities($description, ENT_COMPAT, $this->get_charset());
 							$description = htmlspecialchars($description, ENT_COMPAT, $this->get_charset());
 
 							// 5. insert line into DB
