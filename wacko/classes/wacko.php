@@ -2699,7 +2699,7 @@ class Wacko
 					{
 						$title	= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
 						$alt	= $desc['description'];
-						$url	= $this->href('files', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
+						$url	= $this->href('file', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
 						$imlink	= false;
 
 						if ($desc['file_ext'] == 'pdf')
@@ -2730,23 +2730,23 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="'.$this->href('files', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$desc['picture_w'].'" height="'.$desc['picture_h'].'" />';
+								return '<img src="'.$this->href('file', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$desc['picture_w'].'" height="'.$desc['picture_h'].'" />';
 							}
 							else
 							{
-								return '<a href="'.$this->href('files', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" title="'.$title.'">'.$text.'</a>';
+								return '<a href="'.$this->href('file', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" title="'.$title.'">'.$text.'</a>';
 							}
 						}
 						/*
 						else
 						{
-							return '<a href="'.$this->href('files', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" title="'.$title.'">'.$text.'</a>';
+							return '<a href="'.$this->href('file', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" title="'.$title.'">'.$text.'</a>';
 						} */
 
 					}
 					else //403
 					{
-						$url	= $this->href('files', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
+						$url	= $this->href('file', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
 						$icon	= $this->get_translation('lockicon');
 						$imlink	= false;
 						$tpl	= 'localfile';
@@ -2755,7 +2755,7 @@ class Wacko
 				}
 				else //404
 				{
-					$title	= '404: /'.trim($pagetag, '/').'/files'.($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
+					$title	= '404: /'.trim($pagetag, '/').'/file'.($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
 					$url	= '404';
 					$tpl	= 'wlocalfile';
 				}
