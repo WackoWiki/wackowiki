@@ -97,7 +97,7 @@ if ($filepath)
 			"WHERE upload_id = '".quote($this->dblink, $file[0]['upload_id'])."'");
 	}
 
-	$f = @fopen( $filepath, 'rb' );
+	$f = @fopen($filepath, 'rb');
 	@fpassthru ($f);
 }
 else if ($error == 404)
