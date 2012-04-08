@@ -12,6 +12,9 @@ if (!defined('IN_WACKO'))
 if ($this->is_admin())
 {
 	$output			= '';
+	$error			= '';
+	$password		= '';
+	$confpassword	= '';
 
 	if (isset($_POST['recovery_password']) && !empty($_POST['recovery_password']))
 	{

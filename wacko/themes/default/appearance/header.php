@@ -71,7 +71,7 @@ else
 	if ($this->get_user())
 	{
 		// determines what it should show: "add to menu" or "remove from menu" icon
-		if (!in_array($this->page['page_id'], $this->get_menu_links()))
+		if (!in_array($this->page['page_id'], (array)$this->get_menu_links()))
 		{
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 				.'"><img src="'. $this->config['theme_url']

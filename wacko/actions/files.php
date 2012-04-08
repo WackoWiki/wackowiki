@@ -100,7 +100,7 @@ if ($can_view)
 
 	// load files list
 	$files = $this->load_all(
-		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_name, f.description, f.uploaded_dt, u.user_name AS user, f.hits ".
+		"SELECT f.upload_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.lang, f.file_name, f.description, f.uploaded_dt, u.user_name AS user, f.hits ".
 		"FROM ".$this->config['table_prefix']."upload f ".
 			"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 		"WHERE f.page_id = '". ($global ? 0 : $filepage['page_id'])."' ".
@@ -167,6 +167,11 @@ if ($can_view)
 		$dt			= $file['uploaded_dt'];
 		$desc		= $this->format($file['description'], 'typografica' );
 
+		if ($this->page['lang'] != $file['lang'])
+		{
+			$desc	= $this->do_unicode_entities($desc, $file['lang']);
+		}
+
 		if ($desc == '') $desc = "&nbsp;";
 
 		$file_id	= $file['upload_id'];
@@ -219,6 +224,7 @@ if ($can_view)
 <?php
 		unset($link);
 		unset($desc);
+		#unset($text);
 	}
 
 	if (count($files))
