@@ -95,7 +95,8 @@ if ($filepath)
 		$this->sql_query(
 			"UPDATE {$this->config['table_prefix']}upload ".
 			"SET hits = '".quote($this->dblink, $file['hits'] + 1)."' ".
-			"WHERE upload_id = '".quote($this->dblink, $file['upload_id'])."'");
+			"WHERE upload_id = '".quote($this->dblink, $file['upload_id'])."' ".
+			"LIMIT 1");
 	}
 
 	$f = @fopen($filepath, 'rb');
