@@ -232,3 +232,8 @@ ul.security li {
 	background-color: #EEEEEE;
 	overflow-x: scroll;
 }
+
+.version {
+	color: #008000;
+	font-weight: bold;
+}
