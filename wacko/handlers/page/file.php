@@ -22,12 +22,13 @@ else
 	$page_id = $this->page['page_id'];
 }
 
-$file = $this->load_all(
+$file = $this->load_single(
 	"SELECT u.user_name AS user, f.upload_id, f.file_name, f.file_ext, f.file_size, f.description, f.hits ".
 	"FROM ".$this->config['table_prefix']."upload f ".
 		"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 	"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
-		"AND f.file_name='".quote($this->dblink, $_GET['get'])."'");
+		"AND f.file_name='".quote($this->dblink, $_GET['get'])."' ".
+	"LIMIT 1");
 
 if (count($file) > 0)
 {
@@ -37,7 +38,7 @@ if (count($file) > 0)
 	{
 		$filepath = $this->config['upload_path'.($page_id ? '_per_page' : '')].'/'.
 		($page_id ? ('@'.$this->page['page_id'].'@') : '').
-		$file[0]['file_name'];
+		$file['file_name'];
 	}
 	else
 	{
@@ -50,7 +51,7 @@ else
 }
 
 // 3. passthru
-$extension = strtolower($file[0]['file_ext']);
+$extension = strtolower($file['file_ext']);
 
 if (($extension == 'gif') || ($extension == 'jpg') || ($extension == 'jpeg') || ($extension == 'png'))
 {
@@ -86,15 +87,15 @@ else
 
 if ($filepath)
 {
-	header('Content-Disposition:'.( $isimage || $isplain ? '' : ' attachment;' ).' filename="'.$file[0]['file_name'].'"');
+	header('Content-Disposition:'.($isimage || $isplain ? '' : ' attachment;').' filename="'.$file['file_name'].'"');
 
 	if ($isimage == false)
 	{
 		// count file download
 		$this->sql_query(
 			"UPDATE {$this->config['table_prefix']}upload ".
-			"SET hits = '".quote($this->dblink, $file[0]['hits'] + 1)."' ".
-			"WHERE upload_id = '".quote($this->dblink, $file[0]['upload_id'])."'");
+			"SET hits = '".quote($this->dblink, $file['hits'] + 1)."' ".
+			"WHERE upload_id = '".quote($this->dblink, $file['upload_id'])."'");
 	}
 
 	$f = @fopen($filepath, 'rb');
