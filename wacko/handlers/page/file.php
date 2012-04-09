@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 if (!isset($isimage)) $isimage = '';
 if (!isset($isplain)) $isplain = '';
-if (!isset($desc))$desc  = '';
+
 $error = '';
 $file404 = 'images/upload404.gif';
 $file403 = 'images/upload403.gif';
@@ -33,8 +33,8 @@ $file = $this->load_single(
 if (count($file) > 0)
 {
 	// 2. check rights
-	if ($this->is_admin() || (isset($desc['upload_id']) && ($this->page['owner_id'] == $this->get_user_id())) ||
-	($this->has_access('read')) || ($desc['user_id'] == $this->get_user_id()) )
+	if ($this->is_admin() || (isset($file['upload_id']) && ($this->page['owner_id'] == $this->get_user_id())) ||
+	($this->has_access('read')) || ($file['user_id'] == $this->get_user_id()) )
 	{
 		$filepath = $this->config['upload_path'.($page_id ? '_per_page' : '')].'/'.
 		($page_id ? ('@'.$this->page['page_id'].'@') : '').
