@@ -254,7 +254,7 @@ class Wacko
 		if (!$file)
 		{
 			$file = $this->load_single(
-				"SELECT upload_id, user_id, file_name, file_size, description, picture_w, picture_h, file_ext ".
+				"SELECT upload_id, user_id, file_name, file_size, lang, description, picture_w, picture_h, file_ext ".
 				"FROM ".$this->config['table_prefix']."upload ".
 				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
 					"AND file_name = '".quote($this->dblink, $file_name)."' ".
@@ -1271,7 +1271,7 @@ class Wacko
 	{
 		$page_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
 
-		$rev = $this->load_all(
+		$revisions = $this->load_all(
 			"SELECT p.revision_id AS revision_m_id, ".$page_meta." ".
 			"FROM ".$this->config['table_prefix']."revision p ".
 				"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
@@ -1282,7 +1282,7 @@ class Wacko
 					: "").
 			"ORDER BY p.modified DESC");
 
-		if ($rev == true)
+		if ($revisions == true)
 		{
 			if ($cur = $this->load_single(
 				"SELECT p.page_id AS revision_m_id, ".$page_meta." ".
@@ -1296,12 +1296,12 @@ class Wacko
 				"ORDER BY p.modified DESC ".
 				"LIMIT 1"))
 			{
-				array_unshift($rev, $cur);
+				array_unshift($revisions, $cur);
 			}
 		}
 		else
 		{
-			$rev = $this->load_all(
+			$revisions = $this->load_all(
 				"SELECT p.page_id AS revision_m_id, ".$page_meta." ".
 				"FROM ".$this->config['table_prefix']."page p ".
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
@@ -1311,7 +1311,7 @@ class Wacko
 				"LIMIT 1");
 		}
 
-		return $rev;
+		return $revisions;
 	}
 
 	function load_pages_linking_to($tag, $for = '')
