@@ -31,11 +31,12 @@ function admin_files(&$engine, &$module)
 
 	if (isset($_GET['remove'])) // show the form
 	{
-		$file = $engine->load_all(
-			"SELECT user_id, upload_id, file_name, file_size, description ".
+		$file = $engine->load_single(
+			"SELECT user_id, upload_id, file_name, file_size, lang, description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
-				"AND upload_id = '".quote($engine->dblink, $_GET['file_id'])."'");
+				"AND upload_id = '".quote($engine->dblink, $_GET['file_id'])."' ".
+			"LIMIT 1");
 
 		if (count($file) > 0)
 		{
@@ -44,7 +45,7 @@ function admin_files(&$engine, &$module)
 ?>
 	<br />
 	<ul>
-		<li><?php echo $engine->link( 'file:'.$file[0]['file_name'] ); ?></li>
+		<li><?php echo $engine->link( 'file:'.$file['file_name'] ); ?></li>
 	</ul>
 	<br />
 	<input type="hidden" name="remove" value="<?php echo $_GET['remove']?>" />
@@ -66,31 +67,32 @@ function admin_files(&$engine, &$module)
 	else if (isset($_POST['remove'])) // delete
 	{
 		// 1. where, existence
-		$file = $engine->load_all(
-			"SELECT user_id, upload_id, file_name, file_size, description ".
+		$file = $engine->load_single(
+			"SELECT user_id, upload_id, file_name, file_size, lang, description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
-				"AND upload_id = '".quote($engine->dblink, $_POST['file_id'])."'");
+				"AND upload_id = '".quote($engine->dblink, $_POST['file_id'])."' ".
+			"LIMIT 1");
 
 		if (count($file) > 0)
 		{
 			// 2. remove from DB
 			$engine->sql_query(
 				"DELETE FROM ".$engine->config['table_prefix']."upload ".
-				"WHERE upload_id = '". quote($engine->dblink, $file[0]['upload_id'])."'");
+				"WHERE upload_id = '". quote($engine->dblink, $file['upload_id'])."'");
 
 			// update user uploads count
 			$engine->sql_query(
 				"UPDATE {$engine->config['user_table']} ".
 				"SET total_uploads = total_uploads - 1 ".
-				"WHERE user_id = '".quote($engine->dblink, $file[0]['user_id'])."' ".
+				"WHERE user_id = '".quote($engine->dblink, $file['user_id'])."' ".
 				"LIMIT 1");
 
 			echo '<br />';
 			echo '<div><em>'.$engine->get_translation('UploadRemovedFromDB').'</em></div>';
 
 			// 3. remove from FS
-			$real_filename = $engine->config['upload_path'].'/'.$file[0]['file_name'];
+			$real_filename = $engine->config['upload_path'].'/'.$file['file_name'];
 
 			if (@unlink($real_filename))
 			{
@@ -101,7 +103,7 @@ function admin_files(&$engine, &$module)
 				echo '<div class="error">'.$engine->get_translation('UploadRemovedFromFSError').'</div><br /><br /> ';
 			}
 
-			$engine->log(1, str_replace('%2', $file[0]['file_name'], str_replace('%1', $engine->tag.' global storage', $engine->get_translation('LogRemovedFile', $engine->config['language']))));
+			$engine->log(1, str_replace('%2', $file['file_name'], str_replace('%1', $engine->tag.' global storage', $engine->get_translation('LogRemovedFile', $engine->config['language']))));
 		}
 		else
 		{
@@ -168,7 +170,7 @@ function admin_files(&$engine, &$module)
 			chmod( $dir.$result_name, 0744 );
 
 			$small_name  = $result_name;
-			$description = substr(quote($engine->dblink, $_POST['description']),0,250);
+			$description = substr(quote($engine->dblink, $_POST['description']), 0, 250);
 			$description = rtrim( $description, '\\' );
 			$description = str_replace(array('"', "'", '<', '>'), '', $description);
 			$description = htmlspecialchars($description);

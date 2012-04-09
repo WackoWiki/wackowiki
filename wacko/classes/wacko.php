@@ -662,9 +662,9 @@ class Wacko
 		$shift[4][2] = 6;
 		$shift[4][3] = 0;
 
-		$pos = 0;
-		$len = strlen ($source);
-		$encoded_string = '';
+		$pos			= 0;
+		$len			= strlen ($source);
+		$encoded_string	= '';
 
 		while ($pos < $len)
 		{
@@ -700,8 +700,8 @@ class Wacko
 
 			if ($this_len > 1)
 			{
-				$this_pos = 0;
-				$decimal_code = 0;
+				$this_pos		= 0;
+				$decimal_code	= 0;
 
 				while ($this_pos < $this_len)
 				{
