@@ -148,7 +148,6 @@ $alter_page_r4_3_40 = "ALTER TABLE {$pref}page ADD deleted TINYINT(1) UNSIGNED N
 $update_page_r4_3_1 = "UPDATE {$pref}page SET body_r = ''";
 $update_page_r4_3_2 = "UPDATE {$pref}page SET body_toc = ''";
 
-// FIXME: breaks somewhat the naming rules
 $update_page_r4_3_2_1 = "DELETE {$pref}link.* FROM {$pref}link INNER JOIN {$pref}page ON ({$pref}link.to_tag = {$pref}page.tag) WHERE {$pref}page.user = 'WackoInstaller'";
 $update_page_r4_3_2_2 = "DELETE {$pref}acl.* FROM {$pref}page INNER JOIN {$pref}acl ON ({$pref}page.id = {$pref}acl.page_id) WHERE {$pref}page.user = 'WackoInstaller'";
 $update_page_r4_3_2_3 = "DELETE {$pref}watch.* FROM {$pref}page INNER JOIN {$pref}watch ON ({$pref}page.tag = {$pref}watch.tag) WHERE {$pref}page.user = 'WackoInstaller'";
@@ -279,7 +278,7 @@ $alter_upload_r4_3_5 = "ALTER TABLE {$pref}upload ADD deleted TINYINT(1) UNSIGNE
 
 $update_upload_r4_3_1 = "UPDATE {$pref}upload AS upload, (SELECT user_id, user_name FROM {$pref}user) AS users SET upload.user_id = users.user_id WHERE upload.user = users.user_name";
 $update_upload_r4_3_2 = "UPDATE {$pref}upload AS upload, (SELECT page_id, lang FROM {$pref}page) AS page SET upload.lang = page.lang WHERE upload.page_id = page.page_id AND upload.page_id <> '0'";
-$update_upload_r4_3_3 = "UPDATE {$pref}upload AS upload SET upload.lang = {$config['language']} WHERE upload.page_id = '0'";
+$update_upload_r4_3_3 = "UPDATE {$pref}upload AS upload SET upload.lang = '{$config['language']}' WHERE upload.page_id = '0'";
 
 // USER
 $rename_user_r4_3_1 = "RENAME TABLE {$pref}users TO {$pref}user";
