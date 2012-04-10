@@ -133,8 +133,9 @@ $insert_reviewer_group		= "INSERT INTO ".$config['table_prefix']."usergroup (gro
 
 $insert_logo_image			= "INSERT INTO ".$config['table_prefix']."upload (page_id, user_id, file_name, description, uploaded_dt, file_size, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1),'wacko_logo.png', 'WackoWiki', NOW(), '1580', '108', '50', 'png')";
 
-//
+// UPGRADE from R4.x: convert ENUM value to TINYINT
 $config['show_spaces']= ($config['show_spaces'] == 'N' ? 0 : 1);
+
 if (!isset($config['multilanguage']))
 {
 	$config['multilanguage'] = 0;
