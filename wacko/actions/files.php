@@ -172,7 +172,10 @@ if ($can_view)
 			$desc	= $this->do_unicode_entities($desc, $file['lang']);
 		}
 
-		if ($desc == '') $desc = "&nbsp;";
+		if ($desc == '')
+		{
+			$desc = "&nbsp;";
+		}
 
 		$file_id	= $file['upload_id'];
 		$file_name	= $file['file_name'];
