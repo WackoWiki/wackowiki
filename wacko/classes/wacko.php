@@ -2455,15 +2455,15 @@ class Wacko
 		}
 	}
 
-	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $link_lang = '', $anchorlink = 1)
+	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $link_lang = '', $anchor_link = 1)
 	{
-		$class	= '';
-		$icon	= '';
-		$lang	= '';
-		$desc	= '';
-		$url	= '';
-		$imlink	= false;
-		$text	= str_replace('"', '&quot;', $text);
+		$class		= '';
+		$icon		= '';
+		$lang		= '';
+		$desc		= '';
+		$url		= '';
+		$img_link	= false;
+		$text		= str_replace('"', '&quot;', $text);
 
 		if (!$safe)
 		{
@@ -2477,11 +2477,11 @@ class Wacko
 
 		if (preg_match('/^[\.\-'.$this->language['ALPHANUM_P'].']+\.(gif|jpg|jpe|jpeg|png)$/i', $text))
 		{
-			$imlink = $this->config['base_url'].'/images/'.$text;
+			$img_link = $this->config['base_url'].'/images/'.$text;
 		}
 		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png)$/i', preg_replace('/<\/?nobr>/', '', $text)))
 		{
-			$imlink = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
+			$img_link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
 		}
 
 		if (preg_match('/^(mailto[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/', $tag, $matches))
@@ -2598,8 +2598,8 @@ class Wacko
 						$icon	= $this->get_translation('fileicon');
 					}
 
-					$imlink	= false;
-					$tpl	= 'localfile';
+					$img_link	= false;
+					$tpl		= 'localfile';
 
 					if ($desc['picture_w'] && !$noimg)
 					{
@@ -2647,8 +2647,8 @@ class Wacko
 						$icon	= $this->get_translation('fileicon');
 					}
 
-					$imlink	= false;
-					$tpl	= 'localfile';
+					$img_link	= false;
+					$tpl		= 'localfile';
 
 					if ($desc['picture_w'] && !$noimg)
 					{
@@ -2674,19 +2674,19 @@ class Wacko
 			{
 				$file		= $arr[count($arr) - 1];
 				unset($arr[count($arr) - 1]);
-				$_pagetag	= implode('/', $arr);
+				$_page_tag	= implode('/', $arr);
 
-				if ($_pagetag == '')
+				if ($_page_tag == '')
 				{
-					$_pagetag = '!/';
+					$_page_tag = '!/';
 				}
 
 				//unwrap tag (check !/, ../ cases)
-				$pagetag	= rtrim($this->translit($this->unwrap_link($_pagetag)), './');
-				$page_id	= $this->get_page_id($pagetag);
+				$page_tag	= rtrim($this->translit($this->unwrap_link($_page_tag)), './');
+				$page_id	= $this->get_page_id($page_tag);
 
 				//try to find in local $tag storage
-				$desc		= $this->check_file_exists($file, $pagetag);
+				$desc		= $this->check_file_exists($file, $page_tag);
 
 				if (is_array($desc))
 				{
@@ -2697,10 +2697,10 @@ class Wacko
 					$this->has_access('read', $page_id)) || (
 					$desc['user_id'] == $this->get_user_id()))
 					{
-						$title	= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
-						$alt	= $desc['description'];
-						$url	= $this->href('file', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
-						$imlink	= false;
+						$title		= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
+						$alt		= $desc['description'];
+						$url		= $this->href('file', trim($page_tag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
+						$img_link	= false;
 
 						if ($desc['file_ext'] == 'pdf')
 						{
@@ -2730,32 +2730,32 @@ class Wacko
 							if (!$text)
 							{
 								$text = $title;
-								return '<img src="'.$this->href('file', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$desc['picture_w'].'" height="'.$desc['picture_h'].'" />';
+								return '<img src="'.$this->href('file', trim($page_tag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" '.($text ? 'alt="'.$alt.'" title="'.$text.'"' : '').' width="'.$desc['picture_w'].'" height="'.$desc['picture_h'].'" />';
 							}
 							else
 							{
-								return '<a href="'.$this->href('file', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" title="'.$title.'">'.$text.'</a>';
+								return '<a href="'.$this->href('file', trim($page_tag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" title="'.$title.'">'.$text.'</a>';
 							}
 						}
 						/*
 						else
 						{
-							return '<a href="'.$this->href('file', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" title="'.$title.'">'.$text.'</a>';
+							return '<a href="'.$this->href('file', trim($page_tag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file.'" title="'.$title.'">'.$text.'</a>';
 						} */
 
 					}
 					else //403
 					{
-						$url	= $this->href('file', trim($pagetag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
-						$icon	= $this->get_translation('lockicon');
-						$imlink	= false;
-						$tpl	= 'localfile';
-						$class	= 'denied';
+						$url		= $this->href('file', trim($page_tag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
+						$icon		= $this->get_translation('lockicon');
+						$img_link	= false;
+						$tpl		= 'localfile';
+						$class		= 'denied';
 					}
 				}
 				else //404
 				{
-					$title	= '404: /'.trim($pagetag, '/').'/file'.($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
+					$title	= '404: /'.trim($page_tag, '/').'/file'.($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
 					$url	= '404';
 					$tpl	= 'wlocalfile';
 				}
@@ -2774,7 +2774,7 @@ class Wacko
 				$text = $this->add_spaces($tag);
 			}
 
-			return $this->link( $tag, $method, $text, $title, $track, 1);
+			return $this->link($tag, $method, $text, $title, $track, 1);
 		}
 		else if (preg_match('/^([[:alnum:]]+)[:](['.$this->language['ALPHANUM_P'].'\-\_\.\+\&\=\#]*)$/', $tag, $matches))
 		{
@@ -2910,9 +2910,9 @@ class Wacko
 				$tpl		= 'equalpage';
 			}
 
-			if ($imlink)
+			if ($img_link)
 			{
-				$text		= '<img src="'.$imlink.'" border="0" title="'.$text.'" />';
+				$text		= '<img src="'.$img_link.'" border="0" title="'.$text.'" />';
 			}
 
 			if ($text)
@@ -2931,7 +2931,7 @@ class Wacko
 				$icon		= '';
 			}
 
-			$pagepath		= substr($untag, 0, strlen($untag) - strlen($page0));
+			$page_path		= substr($untag, 0, strlen($untag) - strlen($page0));
 			$anchor			= isset($matches[2]) ? $matches[2] : '';
 			$tag			= $unwtag;
 
@@ -2940,7 +2940,7 @@ class Wacko
 				$this->track_link_to($tag);
 			}
 
-			if ($anchorlink && !isset($this->first_inclusion[$supertag]))
+			if ($anchor_link && !isset($this->first_inclusion[$supertag]))
 			{
 				$aname = 'name="'.$supertag.'"';
 				$this->first_inclusion[$supertag] = 1;
@@ -2948,7 +2948,7 @@ class Wacko
 
 			if ($thispage)
 			{
-				$pagelink	= $this->href($method, $thispage['tag']).($anchor ? $anchor : '');
+				$page_link	= $this->href($method, $thispage['tag']).($anchor ? $anchor : '');
 				$page_id	= $this->get_page_id($tag);
 
 				if ($this->config['hide_locked'])
@@ -2996,7 +2996,7 @@ class Wacko
 			else
 			{
 				$tpl		= (isset($this->method) && ($this->method == 'print' || $this->method == 'msword') ? 'p' : '') . 'w' . $tpl;
-				$pagelink	= $this->href('edit', $tag, $lang ? 'lang='.$lang : '', 1);
+				$page_link	= $this->href('edit', $tag, $lang ? 'lang='.$lang : '', 1);
 				$accicon	= $this->get_translation('wantedicon');
 				$title		= $this->get_translation('CreatePage');
 
@@ -3026,8 +3026,8 @@ class Wacko
 				$res		= str_replace('{accicon}',	$accicon,	$res);
 				$res		= str_replace('{class}',	$class,		$res);
 				$res		= str_replace('{title}',	$title,		$res);
-				$res		= str_replace('{pagelink}',	$pagelink,	$res);
-				$res		= str_replace('{pagepath}',	$pagepath,	$res);
+				$res		= str_replace('{pagelink}',	$page_link,	$res);
+				$res		= str_replace('{pagepath}',	$page_path,	$res);
 				$res		= str_replace('{page}',		$page,		$res);
 				$res		= str_replace('{text}',		$text,		$res);
 
@@ -3045,12 +3045,12 @@ class Wacko
 				}
 
 				// numerated wiki-links. initialize property as an array to make it work
-				if (is_array($this->numerate_links) && $pagelink != $text && $title != $this->get_translation('CreatePage'))
+				if (is_array($this->numerate_links) && $page_link != $text && $title != $this->get_translation('CreatePage'))
 				{
-					if (!$refnum = (isset($this->numerate_links[$pagelink]) ? $this->numerate_links[$pagelink] : ''))
+					if (!$refnum = (isset($this->numerate_links[$page_link]) ? $this->numerate_links[$page_link] : ''))
 					{
 						$refnum = '[link'.((string)count($this->numerate_links) + 1).']';
-						$this->numerate_links[$pagelink] = $refnum;
+						$this->numerate_links[$page_link] = $refnum;
 					}
 					$res .= '<sup class="refnum">'.$refnum.'</sup>';
 				}
@@ -3065,9 +3065,9 @@ class Wacko
 
 		if ($url)
 		{
-			if ($imlink)
+			if ($img_link)
 			{
-				$text		= '<img src="'.$imlink.'" border="0" title="'.$text.'" />';
+				$text		= '<img src="'.$img_link.'" border="0" title="'.$text.'" />';
 			}
 
 			$icon			= str_replace('{theme}', $this->config['theme_url'], $icon);
