@@ -7,9 +7,9 @@ A web-based installer will walk you through the rest.
 
 Example:
 
-If your website, say, http://www.mysite.com, is mapped to the directory /home/jdoe/www/,
+If your website, say, http://www.example.com, is mapped to the directory /home/jdoe/www/,
 and you place the Wacko distribution files into /home/jdoe/www/wacko/, you should go to
-http://www.mysite.com/wacko/.
+http://www.example.com/wacko/.
 
 Note that Wacko distributions normally unpack into directories that include the version
 in their name; you'll probably want to rename those to just "wacko" -- or, if you're
