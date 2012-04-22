@@ -186,23 +186,7 @@ class Init
 				}
 
 				// load primary config
-				if ( @file_exists('wakka.config.php') )
-				{
-					// It's an old WackoWiki install so load the data and start the upgrader.
-					if ( @filesize('wakka.config.php') > 0)
-					{
-						require('wakka.config.php');
-						// merge with config defaults
-						$_wacko_config	= array_merge($wacko_config_defaults, (array)$wakkaConfig);
-						$this->config	= $_wacko_config;
-					}
-					else
-					{
-						// Else it's an empty file so use the default settings, this is quite unlikely to occur.
-						$this->config = $wacko_config_defaults;
-					}
-				}
-				else if ( @file_exists('config/config.php') )
+				if ( @file_exists('config/config.php') )
 				{
 					// If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R5.0
 					if (@filesize('config/config.php') > 0)
@@ -255,27 +239,13 @@ class Init
 				}
 
 				// retrieving usergroups data from db
-				if (!isset($this->config['maint_last_update']) && ($this->config['wacko_version'] == 'R5.0.beta' || $this->config['wacko_version'] == '5.0.beta' || $this->config['wacko_version'] == '5.0.rc'))
-				{
-					// TODO: remove this workaround/case after 5.0 release
-					$wacko_db_query = "SELECT
-										g.group_name,
-										u.user_name
-									FROM
-										{$this->config['table_prefix']}group_member gm
-											INNER JOIN {$this->config['table_prefix']}user u ON (gm.user_id = u.user_id)
-											INNER JOIN {$this->config['table_prefix']}group g ON (gm.group_id = g.group_id)";
-				}
-				else
-				{
-					$wacko_db_query = "SELECT
+				$wacko_db_query = "SELECT
 										g.group_name,
 										u.user_name
 									FROM
 										{$this->config['table_prefix']}usergroup_member gm
 											INNER JOIN {$this->config['table_prefix']}user u ON (gm.user_id = u.user_id)
 											INNER JOIN {$this->config['table_prefix']}usergroup g ON (gm.group_id = g.group_id)";
-				}
 
 				$groups_array = array();
 
