@@ -53,7 +53,7 @@ write_config_hidden_nodes(array(
 ?>
    <h2><?php echo $lang['Name'];?></h2>
    <p class="notop"><?php echo $lang['NameDesc'];?></p>
-   <input type="text" maxlength="250" name="config[site_name]" value="<?php !isset ( $config['wakka_name'] ) ? print $config['site_name'] : print $config['wakka_name'] ; ?>" class="text_input" />
+   <input type="text" maxlength="250" name="config[site_name]" value="<?php echo $config['site_name']; ?>" class="text_input" />
    <div class="fake_hr_seperator">
       <hr />
    </div>
@@ -68,7 +68,7 @@ write_config_hidden_nodes(array(
    <h2><?php echo $lang['MultiLang'];?></h2>
    <p class="notop"><?php echo $lang['MultiLangDesc'];?></p>
    <label class="indented_label" for="wiki_multilanguage"><?php echo $lang['Enabled'];?></label>
-   <input type="checkbox" id="wiki_multilanguage" name="config[multilanguage]" value="1" <?php echo !empty($config['multilanguage']) ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
+   <input type="checkbox" id="wiki_multilanguage" name="config[multilanguage]" value="1" <?php echo !empty($config['multilanguage']) ? 'checked="checked"' : '' ?> class="checkbox_input" />
    <br />
 <?php
 if ($config['is_update'] == false)
@@ -123,7 +123,7 @@ $config['base_url'] = preg_replace('#/[^/]*$#', '/', $config['base_url']);
    <h2><?php echo $lang['Rewrite'];?></h2>
    <p class="notop"><?php echo $lang['RewriteDesc'];?></p>
    <label class="indented_label" for="wiki_rewrite"><?php echo $lang['Enabled'];?></label>
-   <input type="checkbox" id="wiki_rewrite" name="config[rewrite_mode]"  value="1" <?php echo isset($config['rewrite_mode']) ? "checked=\"checked\"" : "" ?> class="checkbox_input" />
+   <input type="checkbox" id="wiki_rewrite" name="config[rewrite_mode]"  value="1" <?php echo isset($config['rewrite_mode']) ? 'checked="checked"' : '' ?> class="checkbox_input" />
    <br />
    <div class="fake_hr_seperator">
       <hr />

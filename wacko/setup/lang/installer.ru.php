@@ -167,8 +167,6 @@ $lang = array(
 'DontChange' => 'не меняйте wacko_version вручную!',
 'ConfigDescription' => 'подробное описание http://wackowiki.sourceforge.net/doc/Doc/Russian/FajjlKonfiguracii',
 'TryAgain' => 'Попытаться снова',
-'RemoveWakkaConfigFile' => 'WackoWiki использует файл конфигурации более новой версии, чем предыдущая установка.  Старый файл не будет автоматически удалён из системы, рекомендуется удалить <tt>wakka.config.php</tt> вручную.',
-'DeletingWakkaConfigFile' => 'Удаление устаревшего файла настроек Wakka',
 
 );
 ?>

@@ -98,16 +98,6 @@ else
 	print(output_image(false)."</li>\n");
 }
 
-// try to delete wakka config file
-$deleted_old_wakka_config_file = true;
-
-if(is_file('wakka.config.php'))
-{
-	@chown('wakka.config.php', 666);
-	$deleted_old_wakka_config_file = unlink('wakka.config.php');
-	echo "            <li>".$lang['DeletingWakkaConfigFile']."   ".output_image($deleted_old_wakka_config_file)."</li>\n";
-}
-
 echo "         </ul>\n";
 
 echo "         <h2>".$lang['SecurityConsiderations']."</h2>\n";
@@ -119,11 +109,6 @@ if(!$perm_changed)
 }
 
 echo "            <li>".$lang['RemoveSetupDirectory']."</li>\n";
-
-if(!$deleted_old_wakka_config_file)
-{
-	echo "            <li>".$lang['RemoveWakkaConfigFile']."</li>\n";
-}
 
 if($write_file == false)
 {

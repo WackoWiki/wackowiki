@@ -167,8 +167,6 @@ $lang = array(
 'DontChange' => 'Wijzig de wacko_version niet handmatig!',
 'ConfigDescription' => 'detailed description http://wackowiki.sourceforge.net/doc/Doc/English/Configuration',
 'TryAgain' => 'Weer proberen',
-'RemoveWakkaConfigFile' => 'WackoWiki uses a newer config file than your previous WakkaWiki installation.  The old file could not be automatically removed by the system and so it is recommended that you manually delete the file <tt>wakka.config.php</tt>.',
-'DeletingWakkaConfigFile' => 'Deleting Obsolete Wakka Configuration File',
 
 );
 ?>
