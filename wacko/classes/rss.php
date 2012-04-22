@@ -122,8 +122,13 @@ class RSS
 			// build an array
 			foreach ($pages as $page)
 			{
-				$news_pages[]	= array('page_id' => $page['page_id'], 'tag' => $page['tag'], 'title' => $page['title'], 'modified' => $page['created'],
-					'body_r' => $page['body_r'], 'comments' => $page['comments'], 'date' => date('Y/m-d', strtotime($page['created'])));
+				$access = $this->engine->has_access('read', $page['page_id'], GUEST);
+
+				if ($access)
+				{
+					$news_pages[]	= array('page_id' => $page['page_id'], 'tag' => $page['tag'], 'title' => $page['title'], 'modified' => $page['created'],
+						'body_r' => $page['body_r'], 'comments' => $page['comments'], 'date' => date('Y/m-d', strtotime($page['created'])));
+				}
 			}
 
 			// sorting function: sorts by dates
