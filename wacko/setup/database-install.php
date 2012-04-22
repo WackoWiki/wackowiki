@@ -133,8 +133,6 @@ $insert_reviewer_group		= "INSERT INTO ".$config['table_prefix']."usergroup (gro
 
 $insert_logo_image			= "INSERT INTO ".$config['table_prefix']."upload (page_id, user_id, file_name, description, uploaded_dt, file_size, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1),'wacko_logo.png', 'WackoWiki', NOW(), '1580', '108', '50', 'png')";
 
-// UPGRADE from R4.x: convert ENUM value to TINYINT
-$config['show_spaces']= ($config['show_spaces'] == 'N' ? 0 : 1);
 
 if (!isset($config['multilanguage']))
 {
@@ -318,10 +316,23 @@ $port			= trim($config['database_port']);
 $fatal_error	= false;
 
 // check WackoWiki version
-if (!isset($config['wacko_version'])) $config['wacko_version'] = '';
-if (!$version = trim($config['wacko_version'])) $version = '0';
+if (!isset($config['wacko_version']))
+{
+	$config['wacko_version'] = '';
+}
+
+if (!$version = trim($config['wacko_version']))
+{
+	$version = '0';
+}
+
 if (isset($config['wacko_version']))
-if (trim($config['wacko_version'])) $version = trim($config['wacko_version']);
+{
+	if (trim($config['wacko_version']))
+	{
+		$version = trim($config['wacko_version']);
+	}
+}
 
 switch($config['database_driver'])
 {
@@ -610,9 +621,9 @@ switch($config['database_driver'])
 					 */
 
 
-				// upgrade from R5.0.rc3 to R5.0.0
+				// upgrade from R5.0.0 to R5.0.x
 				/* case '5.0.rc3':
-					echo "         <h2>Wacko 5.0.rc3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <h2>Wacko 5.0.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_4), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
@@ -783,9 +794,9 @@ switch($config['database_driver'])
 					 */
 
 
-				// upgrade from R5.0.rc3 to R5.0.0
+				// upgrade from R5.0.0 to R5.0.x
 				/* case '5.0.rc3':
-					echo "         <h2>Wacko 5.0.rc3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <h2>Wacko 5.0.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
 					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_4, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));

@@ -165,8 +165,6 @@ $lang = array(
 'DontChange' => 'ne modifiez pas le paramètre « wacko_version » !',
 'ConfigDescription' => 'pour une description détaillée de la configuration voir http://wackowiki.sourceforge.net/doc/Doc/Francophone/Configuration',
 'TryAgain' => 'Essayez encore',
-'RemoveWakkaConfigFile' => 'WackoWiki utilise un fichier de configuration plus récent que celui de votre installation précédente de  WakkaWiki  L&rsquo;ancien fichier n&rsquo;a pu être automatiquement supprimé par le système, aussi vous êtes il recommandé d&rsquo;effacer vous-même le fichier <tt>wakka.config.php</tt>.',
-'DeletingWakkaConfigFile' => 'Effacement du fichier de configuration Wakka obsolète',
 
 );
 ?>
