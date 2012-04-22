@@ -146,10 +146,6 @@ else
 						{
 							$_processed_password = hash('md5', $_POST['password']);
 						}
-						else if (strlen($existing_user['password']) == 40) // only for dev versions / can be removed after successful migration of all passwords
-						{
-							$_processed_password = hash('sha1', $_POST['user_name'].$existing_user['salt'].$_POST['password']);
-						}
 
 						if ($existing_user['password'] == $_processed_password)
 						{

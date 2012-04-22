@@ -369,8 +369,8 @@ switch($config['database_driver'])
 				test(str_replace('%1', 'menu', $lang['DeletingTable']), @mysql_query($table_menu_drop, $dblink), str_replace('%1', 'menu', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'cache', $lang['DeletingTable']), @mysql_query($table_cache_drop, $dblink), str_replace('%1', 'cache', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'config', $lang['DeletingTable']), @mysql_query($table_config_drop, $dblink), str_replace('%1', 'config', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'group', $lang['DeletingTable']), @mysql_query($table_usergroup_drop, $dblink), str_replace('%1', 'group', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'group_member', $lang['DeletingTable']), @mysql_query($table_usergroup_member_drop, $dblink), str_replace('%1', 'group_member', $lang['ErrorDeletingTable']));
+				test(str_replace('%1', 'usergroup', $lang['DeletingTable']), @mysql_query($table_usergroup_drop, $dblink), str_replace('%1', 'usergroup', $lang['ErrorDeletingTable']));
+				test(str_replace('%1', 'usergroup_member', $lang['DeletingTable']), @mysql_query($table_usergroup_member_drop, $dblink), str_replace('%1', 'usergroup_member', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'category', $lang['DeletingTable']), @mysql_query($table_category_drop, $dblink), str_replace('%1', 'category', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'category_page', $lang['DeletingTable']), @mysql_query($table_category_page_drop, $dblink), str_replace('%1', 'category_page', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'link', $lang['DeletingTable']), @mysql_query($table_link_drop, $dblink), str_replace('%1', 'link', $lang['ErrorDeletingTable']));
@@ -403,8 +403,8 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'menu', $lang['CreatingTable']), @mysql_query($table_menu, $dblink), str_replace('%1', 'menu', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'cache', $lang['CreatingTable']), @mysql_query($table_cache, $dblink), str_replace('%1', 'cache', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'config', $lang['CreatingTable']), @mysql_query($table_config, $dblink), str_replace('%1', 'config', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'group', $lang['CreatingTable']), @mysql_query($table_usergroup, $dblink), str_replace('%1', 'group', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'group_member', $lang['CreatingTable']), @mysql_query($table_usergroup_member, $dblink), str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'usergroup', $lang['CreatingTable']), @mysql_query($table_usergroup, $dblink), str_replace('%1', 'usergroup', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'usergroup_member', $lang['CreatingTable']), @mysql_query($table_usergroup_member, $dblink), str_replace('%1', 'usergroup_member', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'category', $lang['CreatingTable']), @mysql_query($table_category, $dblink), str_replace('%1', 'category', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'category_page', $lang['CreatingTable']), @mysql_query($table_category_page, $dblink), str_replace('%1', 'category_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'link', $lang['CreatingTable']), @mysql_query($table_link, $dblink), str_replace('%1', 'link', $lang['ErrorCreatingTable']));
@@ -451,310 +451,10 @@ switch($config['database_driver'])
 					 And yes, there are no (switch) breaks here. This is on purpose.
 					 */
 
-				// upgrade from R4.2 to R4.3
-				case 'R4.2':
-					echo "         <h2>Wacko R4.2 ".$lang['To']." R4.3</h2>\n";
-					echo "         <ol>\n";
 
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_2_1, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_2_2, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_2_1, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_2_2, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-
-					test($lang['InstallingLogoImage'], @mysql_query($insert_logo_image, $dblink), str_replace('%1',"logo image",$lang['ErrorAlreadyExists']));
-
-					echo "            </ol>\n";
-
-				// upgrade from R4.3 to R5.0.beta
-				case 'R4.3':
-					echo "         <h2>Wacko R4.3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					// rename tables
-					test(str_replace('%1', 'acl', $lang['RenameTable']), @mysql_query($rename_acl_r4_3_1, $dblink), str_replace('%1', 'acl', $lang['ErrorRenamingTable']));
-					test(str_replace('%1', 'link', $lang['RenameTable']), @mysql_query($rename_link_r4_3_1, $dblink), str_replace('%1', 'link', $lang['ErrorRenamingTable']));
-					test(str_replace('%1', 'page', $lang['RenameTable']), @mysql_query($rename_page_r4_3_1, $dblink), str_replace('%1', 'page', $lang['ErrorRenamingTable']));
-					test(str_replace('%1', 'referrer', $lang['RenameTable']), @mysql_query($rename_referrer_r4_3_1, $dblink), str_replace('%1', 'referrer', $lang['ErrorRenamingTable']));
-					test(str_replace('%1', 'revision', $lang['RenameTable']), @mysql_query($rename_revision_r4_3_1, $dblink), str_replace('%1', 'revision', $lang['ErrorRenamingTable']));
-					test(str_replace('%1', 'user', $lang['RenameTable']), @mysql_query($rename_user_r4_3_1, $dblink), str_replace('%1', 'user', $lang['ErrorRenamingTable']));
-					test(str_replace('%1', 'watch', $lang['RenameTable']), @mysql_query($rename_watch_r4_3_1, $dblink), str_replace('%1', 'watch', $lang['ErrorRenamingTable']));
-
-					// convert tables to utf8
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_0, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'cache', $lang['AlterTable']), @mysql_query($alter_cache_r4_3_0, $dblink), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysql_query($alter_link_r4_3_0, $dblink), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_0, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysql_query($alter_referrer_r4_3_0, $dblink), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_0, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_0, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_0, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_0, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-
-					// ! new user_id first
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_1, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_2, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_3, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_4, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_5, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_6, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_7, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_8, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_9, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_10, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_11, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_12, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_13, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_14, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'user', $lang['UpdateTable']), @mysql_query($update_user_r4_3_1, $dblink), str_replace('%1', 'user', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'user', $lang['UpdateTable']), @mysql_query($update_user_r4_3_2, $dblink), str_replace('%1', 'user', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'user', $lang['UpdateTable']), @mysql_query($update_user_r4_3_3, $dblink), str_replace('%1', 'user', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'user', $lang['UpdateTable']), @mysql_query($update_user_r4_3_4, $dblink), str_replace('%1', 'user', $lang['ErrorUpdatingTable']));
-
-					// rename id after upate!
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_15, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_16, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_17, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_18, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_19, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_20, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_21, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_22, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_23, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_24, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_25, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_26, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_27, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_28, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_29, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_30, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-
-
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_1, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_2, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'acl', $lang['UpdateTable']), @mysql_query($update_acl_r4_3_1, $dblink), str_replace('%1', 'acl', $lang['ErrorUpdatingTable']));
-
-					// Drop obsolete fields
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_3, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_4, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_5, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysql_query($alter_acl_r4_3_6, $dblink), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'menu', $lang['CreatingTable']), @mysql_query($table_menu_r4_3, $dblink), str_replace('%1', 'menu', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'cache', $lang['AlterTable']), @mysql_query($alter_cache_r4_3_1, $dblink), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'cache', $lang['AlterTable']), @mysql_query($alter_cache_r4_3_2, $dblink), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'config', $lang['CreatingTable']), @mysql_query($table_config_r4_3, $dblink), str_replace('%1', 'config', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'group', $lang['CreatingTable']), @mysql_query($table_usergroup_r4_3, $dblink), str_replace('%1', 'group', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'group_member', $lang['CreatingTable']), @mysql_query($table_usergroup_member_r4_3, $dblink), str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'category', $lang['CreatingTable']), @mysql_query($table_category_r4_3, $dblink), str_replace('%1', 'category', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'category_page', $lang['CreatingTable']), @mysql_query($table_category_page_r4_3, $dblink), str_replace('%1', 'category_page', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysql_query($alter_link_r4_3_1, $dblink), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysql_query($alter_link_r4_3_2, $dblink), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysql_query($alter_link_r4_3_3, $dblink), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'link', $lang['UpdateTable']), @mysql_query($update_link_r4_3_1, $dblink), str_replace('%1', 'link', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'link', $lang['UpdateTable']), @mysql_query($update_link_r4_3_2, $dblink), str_replace('%1', 'link', $lang['ErrorUpdatingTable']));
-
-					// drop last!
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysql_query($alter_link_r4_3_4, $dblink), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysql_query($alter_link_r4_3_5, $dblink), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysql_query($alter_link_r4_3_6, $dblink), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'log', $lang['CreatingTable']), @mysql_query($table_log_r4_3, $dblink), str_replace('%1', 'log', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_3, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_4, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_5, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_6, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_7, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_8, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_9, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_10, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_11, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_12, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_1, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					// removes old default pages
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_2_1, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_2_2, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_2_3, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_2_4, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_2_5, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					#test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_3, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_4, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_5, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_6, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_7, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_8, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_9, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_10, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					// drop last!
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_13, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_14, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_15, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_16, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_17, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_18, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_19, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_20, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_21, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_22, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_23, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_24, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_25, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_26, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_27, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_28, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_29, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_30, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_31, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_32, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_33, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_34, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_35, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_36, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_37, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_38, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_11, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_12, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_13, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					test(str_replace('%1', 'poll', $lang['CreatingTable']), @mysql_query($table_poll_r4_3, $dblink), str_replace('%1', 'poll', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_1, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_2, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_3, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'watch', $lang['UpdateTable']), @mysql_query($update_watch_r4_3_1, $dblink), str_replace('%1', 'watch', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'watch', $lang['UpdateTable']), @mysql_query($update_watch_r4_3_2, $dblink), str_replace('%1', 'watch', $lang['ErrorUpdatingTable']));
-
-					// drop last!
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_4, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_5, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_7, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysql_query($alter_watch_r4_3_8, $dblink), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'rating', $lang['CreatingTable']), @mysql_query($table_rating_r4_3, $dblink), str_replace('%1', 'rating', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysql_query($alter_referrer_r4_3_1, $dblink), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysql_query($alter_referrer_r4_3_2, $dblink), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysql_query($alter_referrer_r4_3_3, $dblink), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_1, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_2, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_3, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_4, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_5, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_6, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_7, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_8, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_11, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysql_query($update_revision_r4_3_1, $dblink), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysql_query($update_revision_r4_3_2, $dblink), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysql_query($update_revision_r4_3_3, $dblink), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysql_query($update_revision_r4_3_4, $dblink), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysql_query($update_revision_r4_3_5, $dblink), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-
-					// drop last!
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_9, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_10, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_12, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_13, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_14, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_15, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_16, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_17, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_18, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_19, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_20, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_21, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_22, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_23, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysql_query($update_revision_r4_3_6, $dblink), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_1, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'upload', $lang['UpdateTable']), @mysql_query($update_upload_r4_3_1, $dblink), str_replace('%1', 'upload', $lang['ErrorUpdatingTable']));
-
-					// drop last!
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_2, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_3, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysql_query($table_user_setting_r4_3, $dblink), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
-
-					test($lang['InstallingSystemAccount'], @mysql_query($insert_system, $dblink), str_replace('%1', 'system account', $lang['ErrorAlreadyExists']));
-
-					#test($lang['InstallingAdmin'], @mysql_query($insert_admin, $dblink), str_replace('%1', 'admin user', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingAdminSetting'], @mysql_query($insert_admin_setting, $dblink), str_replace('%1', 'admin user settings', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingAdminGroup'], @mysql_query($insert_admin_group, $dblink), str_replace('%1', 'admin group', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingAdminGroupMember'], @mysql_query($insert_admin_group_member, $dblink), str_replace('%1', 'admin group member', $lang['ErrorAlreadyExists']));
-
-					test($lang['InstallingEverybodyGroup'], @mysql_query($insert_everybody_group, $dblink), str_replace('%1', 'everybody group', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingRegisteredGroup'], @mysql_query($insert_registered_group, $dblink), str_replace('%1', 'registered group', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingModeratorGroup'], @mysql_query($insert_moderator_group, $dblink), str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingReviewerGroup'], @mysql_query($insert_reviewer_group, $dblink), str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
-
-					echo "            </ol>\n";
-
-				// upgrade from 5.0.beta to R5.0.rc1
-				case '5.0.beta':
-					echo "         <h2>Wacko 5.0.beta ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_39, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysql_query($alter_page_r4_3_40, $dblink), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysql_query($alter_revision_r4_3_24, $dblink), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'tag', $lang['CreatingTable']), @mysql_query($table_tag_r4_3, $dblink), str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'tag_page', $lang['CreatingTable']), @mysql_query($table_tag_page_r4_3, $dblink), str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysql_query($alter_user_r4_3_31, $dblink), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysql_query($alter_user_setting_r4_3_1, $dblink), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysql_query($alter_user_setting_r4_3_2, $dblink), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
-
-					echo "            </ol>\n";
-
-				// upgrade from R5.0.rc1 to R5.0.rc2
-				case '5.0.rc':
-					echo "         <h2>Wacko 5.0.rc ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysql_query($alter_user_setting_r4_3_3, $dblink), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r4_3_2, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					// rename group table to usergroup
-					if ($version == '5.0.beta' || $version == '5.0.rc')
-					{
-						test(str_replace('%1', 'usergroup', $lang['RenameTable']), @mysql_query($rename_usergroup_r4_3_1, $dblink), str_replace('%1', 'usergroup', $lang['ErrorRenamingTable']));
-						test(str_replace('%1', 'usergroup_member', $lang['RenameTable']), @mysql_query($rename_usergroup_member_r4_3_1, $dblink), str_replace('%1', 'usergroup_member', $lang['ErrorRenamingTable']));
-					}
-
-					echo "            </ol>\n";
-
-				// upgrade from R5.0.rc2 to R5.0.rc3
-				case '5.0.rc2':
-					echo "         <h2>Wacko 5.0.rc2 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					test(str_replace('%1', 'acl', $lang['UpdateTable']), @mysql_query($update_acl_r4_3_2, $dblink), str_replace('%1', 'acl', $lang['ErrorUpdatingTable']));
-
-					echo "            </ol>\n";
-
-				// upgrade from R5.0.rc3 to R5.0.0
-				case '5.0.rc3':
-					echo "         <h2>Wacko 5.0.rc3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+				// upgrade from R5.0.0 to R5.0.x
+				/* case '5.0.0':
+					echo "         <h2>Wacko 5.0.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
 					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_4, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
@@ -774,7 +474,7 @@ switch($config['database_driver'])
 					require_once('setup/inserts.php');
 					echo "</li>\n";
 					echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
-
+ */
 			}
 
 			echo "            </ul>\n";
@@ -829,8 +529,8 @@ switch($config['database_driver'])
 				test(str_replace('%1', 'menu', $lang['DeletingTable']), @mysqli_query($dblink, $table_menu_drop), str_replace('%1', 'menu', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'cache', $lang['DeletingTable']), @mysqli_query($dblink, $table_cache_drop), str_replace('%1', 'cache', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'config', $lang['DeletingTable']), @mysqli_query($dblink, $table_config_drop), str_replace('%1', 'config', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'group', $lang['DeletingTable']), @mysqli_query($dblink, $table_usergroup_drop), str_replace('%1', 'group', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'group_member', $lang['DeletingTable']), @mysqli_query($dblink, $table_usergroup_member_drop), str_replace('%1', 'group_member', $lang['ErrorDeletingTable']));
+				test(str_replace('%1', 'usergroup', $lang['DeletingTable']), @mysqli_query($dblink, $table_usergroup_drop), str_replace('%1', 'usergroup', $lang['ErrorDeletingTable']));
+				test(str_replace('%1', 'usergroup_member', $lang['DeletingTable']), @mysqli_query($dblink, $table_usergroup_member_drop), str_replace('%1', 'usergroup_member', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'category', $lang['DeletingTable']), @mysqli_query($dblink, $table_category_drop), str_replace('%1', 'category', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'category_page', $lang['DeletingTable']), @mysqli_query($dblink, $table_category_page_drop), str_replace('%1', 'category_page', $lang['ErrorDeletingTable']));
 				test(str_replace('%1', 'link', $lang['DeletingTable']), @mysqli_query($dblink, $table_link_drop), str_replace('%1', 'link', $lang['ErrorDeletingTable']));
@@ -863,8 +563,8 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'menu', $lang['CreatingTable']), @mysqli_query($dblink, $table_menu), str_replace('%1', 'menu', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'cache', $lang['CreatingTable']), @mysqli_query($dblink, $table_cache), str_replace('%1', 'cache', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'config', $lang['CreatingTable']), @mysqli_query($dblink, $table_config), str_replace('%1', 'config', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'group', $lang['CreatingTable']), @mysqli_query($dblink, $table_usergroup), str_replace('%1', 'group', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'group_member', $lang['CreatingTable']), @mysqli_query($dblink, $table_usergroup_member), str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'usergroup', $lang['CreatingTable']), @mysqli_query($dblink, $table_usergroup), str_replace('%1', 'usergroup', $lang['ErrorCreatingTable']));
+					test(str_replace('%1', 'usergroup_member', $lang['CreatingTable']), @mysqli_query($dblink, $table_usergroup_member), str_replace('%1', 'usergroup_member', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'category', $lang['CreatingTable']), @mysqli_query($dblink, $table_category), str_replace('%1', 'category', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'category_page', $lang['CreatingTable']), @mysqli_query($dblink, $table_category_page), str_replace('%1', 'category_page', $lang['ErrorCreatingTable']));
 					test(str_replace('%1', 'link', $lang['CreatingTable']), @mysqli_query($dblink, $table_link), str_replace('%1', 'link', $lang['ErrorCreatingTable']));
@@ -909,308 +609,9 @@ switch($config['database_driver'])
 					 And yes, there are no (switch) breaks here. This is on purpose.
 					 */
 
-				// upgrade from R4.2 to R4.3
-				case 'R4.2':
-					echo "         <h2>Wacko R4.2 ".$lang['To']." R4.3</h2>\n";
-					echo "         <ol>\n";
-
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_2_1), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_2_2), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_2_1), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_2_2), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-
-					test($lang['InstallingLogoImage'], @mysqli_query($dblink, $insert_logo_image), str_replace('%1',"logo image",$lang['ErrorAlreadyExists']));
-
-					echo "            </ol>\n";
-
-				// upgrade from R4.3 to R5.0.beta
-				case 'R4.3':
-					echo "         <h2>Wacko R4.3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					// rename tables
-					test(str_replace('%1', 'acl', $lang['RenameTable']), @mysqli_query($dblink, $rename_acl_r4_3_1), str_replace('%1', 'acl', $lang['ErrorRenamingTable']));
-					test(str_replace('%1', 'link', $lang['RenameTable']), @mysqli_query($dblink, $rename_link_r4_3_1), str_replace('%1', 'link', $lang['ErrorRenamingTable']));
-					test(str_replace('%1', 'page', $lang['RenameTable']), @mysqli_query($dblink, $rename_page_r4_3_1), str_replace('%1', 'page', $lang['ErrorRenamingTable']));
-					test(str_replace('%1', 'referrer', $lang['RenameTable']), @mysqli_query($dblink, $rename_referrer_r4_3_1), str_replace('%1', 'referrer', $lang['ErrorRenamingTable']));
-					test(str_replace('%1', 'revision', $lang['RenameTable']), @mysqli_query($dblink, $rename_revision_r4_3_1), str_replace('%1', 'revision', $lang['ErrorRenamingTable']));
-					test(str_replace('%1', 'user', $lang['RenameTable']), @mysqli_query($dblink, $rename_user_r4_3_1), str_replace('%1', 'user', $lang['ErrorRenamingTable']));
-					test(str_replace('%1', 'watch', $lang['RenameTable']), @mysqli_query($dblink, $rename_watch_r4_3_1), str_replace('%1', 'watch', $lang['ErrorRenamingTable']));
-
-					// convert tables to utf8
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_0), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'cache', $lang['AlterTable']), @mysqli_query($dblink, $alter_cache_r4_3_0), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysqli_query($dblink, $alter_link_r4_3_0), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_0), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysqli_query($dblink, $alter_referrer_r4_3_0), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_0), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_0), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_0), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_0), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-
-					// ! new user_id first
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_1), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_2), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_3), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_4), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_5), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_6), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_7), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_8), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_9), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_10), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_11), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_12), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_13), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_14), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'user', $lang['UpdateTable']), @mysqli_query($dblink, $update_user_r4_3_1), str_replace('%1', 'user', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'user', $lang['UpdateTable']), @mysqli_query($dblink, $update_user_r4_3_2), str_replace('%1', 'user', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'user', $lang['UpdateTable']), @mysqli_query($dblink, $update_user_r4_3_3), str_replace('%1', 'user', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'user', $lang['UpdateTable']), @mysqli_query($dblink, $update_user_r4_3_4), str_replace('%1', 'user', $lang['ErrorUpdatingTable']));
-
-					// rename id after upate!
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_15), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_16), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_17), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_18), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_19), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_20), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_21), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_22), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_23), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_24), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_25), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_26), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_27), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_28), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_29), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_30), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-
-
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_1), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_2), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'acl', $lang['UpdateTable']), @mysqli_query($dblink, $update_acl_r4_3_1), str_replace('%1', 'acl', $lang['ErrorUpdatingTable']));
-
-					// Drop obsolete fields
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_3), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_4), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_5), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'acl', $lang['AlterTable']), @mysqli_query($dblink, $alter_acl_r4_3_6), str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'menu', $lang['CreatingTable']), @mysqli_query($dblink, $table_menu_r4_3), str_replace('%1', 'menu', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'cache', $lang['AlterTable']), @mysqli_query($dblink, $alter_cache_r4_3_1), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'cache', $lang['AlterTable']), @mysqli_query($dblink, $alter_cache_r4_3_2), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'config', $lang['CreatingTable']), @mysqli_query($dblink, $table_config_r4_3), str_replace('%1', 'config', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'group', $lang['CreatingTable']), @mysqli_query($dblink, $table_usergroup_r4_3), str_replace('%1', 'group', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'group_member', $lang['CreatingTable']), @mysqli_query($dblink, $table_usergroup_member_r4_3), str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'category', $lang['CreatingTable']), @mysqli_query($dblink, $table_category_r4_3), str_replace('%1', 'category', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'category_page', $lang['CreatingTable']), @mysqli_query($dblink, $table_category_page_r4_3), str_replace('%1', 'category_page', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysqli_query($dblink, $alter_link_r4_3_1), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysqli_query($dblink, $alter_link_r4_3_2), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysqli_query($dblink, $alter_link_r4_3_3), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'link', $lang['UpdateTable']), @mysqli_query($dblink, $update_link_r4_3_1), str_replace('%1', 'link', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'link', $lang['UpdateTable']), @mysqli_query($dblink, $update_link_r4_3_2), str_replace('%1', 'link', $lang['ErrorUpdatingTable']));
-
-					// drop last!
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysqli_query($dblink, $alter_link_r4_3_4), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysqli_query($dblink, $alter_link_r4_3_5), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'link', $lang['AlterTable']), @mysqli_query($dblink, $alter_link_r4_3_6), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'log', $lang['CreatingTable']), @mysqli_query($dblink, $table_log_r4_3), str_replace('%1', 'log', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_3), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_4), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_5), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_6), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_7), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_8), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_9), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_10), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_11), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_12), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_1), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					// removes old default pages
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_2_1), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_2_2), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_2_3), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_2_4), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_2_5), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					#test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_3), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_4), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_5), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_6), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_7), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_8), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_9), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_10), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					// drop last!
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_13), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_14), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_15), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_16), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_17), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_18), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_19), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_20), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_21), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_22), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_23), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_24), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_25), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_26), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_27), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_28), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_29), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_30), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_31), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_32), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_33), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_34), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_35), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_36), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_37), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_38), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_11), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_12), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_13), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					test(str_replace('%1', 'poll', $lang['CreatingTable']), @mysqli_query($dblink, $table_poll_r4_3), str_replace('%1', 'poll', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_1), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_2), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_3), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'watch', $lang['UpdateTable']), @mysqli_query($dblink, $update_watch_r4_3_1), str_replace('%1', 'watch', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'watch', $lang['UpdateTable']), @mysqli_query($dblink, $update_watch_r4_3_2), str_replace('%1', 'watch', $lang['ErrorUpdatingTable']));
-
-					// drop last!
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_4), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_5), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_7), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'watch', $lang['AlterTable']), @mysqli_query($dblink, $alter_watch_r4_3_8), str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'rating', $lang['CreatingTable']), @mysqli_query($dblink, $table_rating_r4_3), str_replace('%1', 'rating', $lang['ErrorCreatingTable']));
-
-					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysqli_query($dblink, $alter_referrer_r4_3_1), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysqli_query($dblink, $alter_referrer_r4_3_2), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'referrer', $lang['AlterTable']), @mysqli_query($dblink, $alter_referrer_r4_3_3), str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_1), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_2), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_3), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_4), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_5), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_6), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_7), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_8), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_11), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_1), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_2), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_3), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_4), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_5), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-
-					// drop last!
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_9), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_10), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_12), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_13), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_14), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_15), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_16), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_17), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_18), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_19), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_20), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_21), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_22), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_23), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'revision', $lang['UpdateTable']), @mysqli_query($dblink, $update_revision_r4_3_6), str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_1), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'upload', $lang['UpdateTable']), @mysqli_query($dblink, $update_upload_r4_3_1), str_replace('%1', 'upload', $lang['ErrorUpdatingTable']));
-					// drop last!
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_2), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, $alter_upload_r4_3_3), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysqli_query($dblink, $table_user_setting_r4_3), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
-
-					test($lang['InstallingSystemAccount'], @mysqli_query($dblink, $insert_system), str_replace('%1', 'system account', $lang['ErrorAlreadyExists']));
-
-					#test($lang['InstallingAdmin'], @mysqli_query($dblink, $insert_admin), str_replace('%1', 'admin user', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingAdminSetting'], @mysqli_query($dblink, $insert_admin_setting), str_replace('%1', 'admin user settings', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingAdminGroup'], @mysqli_query($dblink, $insert_admin_group), str_replace('%1', 'admin group', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingAdminGroupMember'], @mysqli_query($dblink, $insert_admin_group_member), str_replace('%1', 'admin group member', $lang['ErrorAlreadyExists']));
-
-					test($lang['InstallingEverybodyGroup'], @mysqli_query($dblink, $insert_everybody_group), str_replace('%1', 'everybody group', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingRegisteredGroup'], @mysqli_query($dblink, $insert_registered_group), str_replace('%1', 'registered group', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingModeratorGroup'], @mysqli_query($dblink, $insert_moderator_group), str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingReviewerGroup'], @mysqli_query($dblink, $insert_reviewer_group), str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
-
-					echo "            </ol>\n";
-
-				// upgrade from R5.0.beta to R5.0.rc1
-				case '5.0.beta':
-					echo "         <h2>Wacko 5.0.beta ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_39), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r4_3_40), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r4_3_24), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'tag', $lang['CreatingTable']), @mysqli_query($dblink, $table_tag_r4_3), str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'tag_page', $lang['CreatingTable']), @mysqli_query($dblink, $table_tag_page_r4_3), str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'user', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_r4_3_31), str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_setting_r4_3_1), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_setting_r4_3_2), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
-
-					echo "            </ol>\n";
-
-				// upgrade from R5.0.rc1 to R5.0.rc2
-				case '5.0.rc':
-					echo "         <h2>Wacko 5.0.rc ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					test(str_replace('%1', 'user_setting', $lang['AlterTable']), @mysqli_query($dblink, $alter_user_setting_r4_3_3), str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
-
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r4_3_2), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					// rename group table to usergroup
-					if ($version == '5.0.beta' || $version == '5.0.rc')
-					{
-						test(str_replace('%1', 'usergroup', $lang['RenameTable']), @mysqli_query($dblink, $rename_usergroup_r4_3_1), str_replace('%1', 'usergroup', $lang['ErrorRenamingTable']));
-						test(str_replace('%1', 'usergroup_member', $lang['RenameTable']), @mysqli_query($dblink, $rename_usergroup_member_r4_3_1), str_replace('%1', 'usergroup_member', $lang['ErrorRenamingTable']));
-					}
-
-					echo "            </ol>\n";
-
-				// upgrade from R5.0.rc2 to R5.0.rc3
-				case '5.0.rc2':
-					echo "         <h2>Wacko 5.0.rc2 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					test(str_replace('%1', 'acl', $lang['UpdateTable']), @mysqli_query($dblink, $update_acl_r4_3_2), str_replace('%1', 'acl', $lang['ErrorUpdatingTable']));
-
-					echo "            </ol>\n";
 
 				// upgrade from R5.0.rc3 to R5.0.0
-				case '5.0.rc3':
+				/* case '5.0.rc3':
 					echo "         <h2>Wacko 5.0.rc3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
@@ -1230,7 +631,7 @@ switch($config['database_driver'])
 					echo "            <li>".$lang['InstallingPagesBegin'];
 					require_once('setup/inserts.php');
 					echo "</li>\n";
-					echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
+					echo "            <li>".$lang['InstallingPagesEnd']."</li>\n"; */
 			}
 
 			echo "         </ul>\n";
@@ -1299,8 +700,8 @@ switch($config['database_driver'])
 				test_pdo(str_replace('%1', 'menu', $lang['DeletingTable']), $table_menu_drop, str_replace('%1', 'menu', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'cache', $lang['DeletingTable']), $table_cache_drop, str_replace('%1', 'cache', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'config', $lang['DeletingTable']), $table_config_drop, str_replace('%1', 'config', $lang['ErrorDeletingTable']));
-				test_pdo(str_replace('%1', 'group', $lang['DeletingTable']), $table_usergroup_drop, str_replace('%1', 'group', $lang['ErrorDeletingTable']));
-				test_pdo(str_replace('%1', 'group_member', $lang['DeletingTable']), $table_usergroup_member_drop, str_replace('%1', 'group_member', $lang['ErrorDeletingTable']));
+				test_pdo(str_replace('%1', 'usergroup', $lang['DeletingTable']), $table_usergroup_drop, str_replace('%1', 'usergroup', $lang['ErrorDeletingTable']));
+				test_pdo(str_replace('%1', 'usergroup_member', $lang['DeletingTable']), $table_usergroup_member_drop, str_replace('%1', 'usergroup_member', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'category', $lang['DeletingTable']), $table_category_drop, str_replace('%1', 'category', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'category_page', $lang['DeletingTable']), $table_category_page_drop, str_replace('%1', 'category_page', $lang['ErrorDeletingTable']));
 				test_pdo(str_replace('%1', 'link', $lang['DeletingTable']), $table_link_drop, str_replace('%1', 'link', $lang['ErrorDeletingTable']));
@@ -1333,8 +734,8 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'menu', $lang['CreatingTable']), $table_menu, str_replace('%1', 'menu', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'cache', $lang['CreatingTable']), $table_cache, str_replace('%1', 'cache', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'config', $lang['CreatingTable']), $table_config, str_replace('%1', 'config', $lang['ErrorCreatingTable']));
-					test_pdo(str_replace('%1', 'group', $lang['CreatingTable']), $table_usergroup, str_replace('%1', 'group', $lang['ErrorCreatingTable']));
-					test_pdo(str_replace('%1', 'group_member', $lang['CreatingTable']), $table_usergroup_member, str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'usergroup', $lang['CreatingTable']), $table_usergroup, str_replace('%1', 'usergroup', $lang['ErrorCreatingTable']));
+					test_pdo(str_replace('%1', 'usergroup_member', $lang['CreatingTable']), $table_usergroup_member, str_replace('%1', 'usergroup_member', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'category', $lang['CreatingTable']), $table_category, str_replace('%1', 'category', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'category_page', $lang['CreatingTable']), $table_category_page, str_replace('%1', 'category_page', $lang['ErrorCreatingTable']));
 					test_pdo(str_replace('%1', 'link', $lang['CreatingTable']), $table_link, str_replace('%1', 'link', $lang['ErrorCreatingTable']));
@@ -1381,308 +782,9 @@ switch($config['database_driver'])
 					 And yes, there are no (switch) breaks here. This is on purpose.
 					 */
 
-				// upgrade from R4.2 to R4.3
-				case 'R4.2':
-					echo "         <h2>Wacko R4.2 ".$lang['To']." R4.3</h2>\n";
-					echo "         <ol>\n";
-
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_2_1, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_2_2, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_2_1, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_2_2, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-
-					test_pdo($lang['InstallingLogoImage'], $insert_logo_image, str_replace('%1',"logo image",$lang['ErrorAlreadyExists']));
-
-					echo "            </ol>\n";
-
-				// upgrade from R4.3 to R5.0.beta
-				case 'R4.3':
-					echo "         <h2>Wacko R4.3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					// rename tables
-					test_pdo(str_replace('%1', 'acl', $lang['RenameTable']), $rename_acl_r4_3_1, str_replace('%1', 'acl', $lang['ErrorRenamingTable']));
-					test_pdo(str_replace('%1', 'link', $lang['RenameTable']), $rename_link_r4_3_1, str_replace('%1', 'link', $lang['ErrorRenamingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['RenameTable']), $rename_page_r4_3_1, str_replace('%1', 'page', $lang['ErrorRenamingTable']));
-					test_pdo(str_replace('%1', 'referrer', $lang['RenameTable']), $rename_referrer_r4_3_1, str_replace('%1', 'referrer', $lang['ErrorRenamingTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['RenameTable']), $rename_revision_r4_3_1, str_replace('%1', 'revision', $lang['ErrorRenamingTable']));
-					test_pdo(str_replace('%1', 'user', $lang['RenameTable']), $rename_user_r4_3_1, str_replace('%1', 'user', $lang['ErrorRenamingTable']));
-					test_pdo(str_replace('%1', 'watch', $lang['RenameTable']), $rename_watch_r4_3_1, str_replace('%1', 'watch', $lang['ErrorRenamingTable']));
-
-					// convert tables to utf8
-					test_pdo(str_replace('%1', 'acl', $lang['AlterTable']), $alter_acl_r4_3_0, str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'cache', $lang['AlterTable']), $alter_cache_r4_3_0, str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'link', $lang['AlterTable']), $alter_link_r4_3_0, str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_0, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'referrer', $lang['AlterTable']), $alter_referrer_r4_3_0, str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_0, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_0, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_0, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_0, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-
-					// ! new user_id first
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_1, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_2, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_3, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_4, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_5, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_6, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_7, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_8, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_9, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_10, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_11, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_12, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_13, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_14, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'user', $lang['UpdateTable']), $update_user_r4_3_1, str_replace('%1', 'user', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'user', $lang['UpdateTable']), $update_user_r4_3_2, str_replace('%1', 'user', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'user', $lang['UpdateTable']), $update_user_r4_3_3, str_replace('%1', 'user', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'user', $lang['UpdateTable']), $update_user_r4_3_4, str_replace('%1', 'user', $lang['ErrorUpdatingTable']));
-
-					// rename id after upate!
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_15, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_16, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_17, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_18, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_19, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_20, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_21, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_22, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_23, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_24, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_25, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_26, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_27, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_28, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_29, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_30, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-
-
-					test_pdo(str_replace('%1', 'acl', $lang['AlterTable']), $alter_acl_r4_3_1, str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'acl', $lang['AlterTable']), $alter_acl_r4_3_2, str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'acl', $lang['UpdateTable']), $update_acl_r4_3_1, str_replace('%1', 'acl', $lang['ErrorUpdatingTable']));
-
-					// Drop obsolete fields
-					test_pdo(str_replace('%1', 'acl', $lang['AlterTable']), $alter_acl_r4_3_3, str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'acl', $lang['AlterTable']), $alter_acl_r4_3_4, str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'acl', $lang['AlterTable']), $alter_acl_r4_3_5, str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'acl', $lang['AlterTable']), $alter_acl_r4_3_6, str_replace('%1', 'acl', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'menu', $lang['CreatingTable']), $table_menu_r4_3, str_replace('%1', 'menu', $lang['ErrorCreatingTable']));
-
-					test_pdo(str_replace('%1', 'cache', $lang['AlterTable']), $alter_cache_r4_3_1, str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'cache', $lang['AlterTable']), $alter_cache_r4_3_2, str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'config', $lang['CreatingTable']), $table_config_r4_3, str_replace('%1', 'config', $lang['ErrorCreatingTable']));
-
-					test_pdo(str_replace('%1', 'group', $lang['CreatingTable']), $table_usergroup_r4_3, str_replace('%1', 'group', $lang['ErrorCreatingTable']));
-					test_pdo(str_replace('%1', 'group_member', $lang['CreatingTable']), $table_usergroup_member_r4_3, str_replace('%1', 'group_member', $lang['ErrorCreatingTable']));
-
-					test_pdo(str_replace('%1', 'category', $lang['CreatingTable']), $table_category_r4_3, str_replace('%1', 'category', $lang['ErrorCreatingTable']));
-					test_pdo(str_replace('%1', 'category_page', $lang['CreatingTable']), $table_category_page_r4_3, str_replace('%1', 'category_page', $lang['ErrorCreatingTable']));
-
-					test_pdo(str_replace('%1', 'link', $lang['AlterTable']), $alter_link_r4_3_1, str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'link', $lang['AlterTable']), $alter_link_r4_3_2, str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'link', $lang['AlterTable']), $alter_link_r4_3_3, str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'link', $lang['UpdateTable']), $update_link_r4_3_1, str_replace('%1', 'link', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'link', $lang['UpdateTable']), $update_link_r4_3_2, str_replace('%1', 'link', $lang['ErrorUpdatingTable']));
-
-					// drop last!
-					test_pdo(str_replace('%1', 'link', $lang['AlterTable']), $alter_link_r4_3_4, str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'link', $lang['AlterTable']), $alter_link_r4_3_5, str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'link', $lang['AlterTable']), $alter_link_r4_3_6, str_replace('%1', 'link', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'log', $lang['CreatingTable']), $table_log_r4_3, str_replace('%1', 'log', $lang['ErrorCreatingTable']));
-
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_3, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_4, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_5, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_6, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_7, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_8, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_9, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_10, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_11, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_12, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_1, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					// removes old default pages
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_2_1, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_2_2, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_2_3, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_2_4, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_2_5, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					#test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_3, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_4, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_5, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_6, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_7, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_8, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_9, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_10, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					// drop last!
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_13, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_14, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_15, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_16, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_17, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_18, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_19, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_20, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_21, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_22, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_23, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_24, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_25, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_26, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_27, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_28, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_29, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_30, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_31, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_32, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_33, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_34, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_35, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_36, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_37, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_38, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_11, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_12, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_13, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					test_pdo(str_replace('%1', 'poll', $lang['CreatingTable']), $table_poll_r4_3, str_replace('%1', 'poll', $lang['ErrorCreatingTable']));
-
-					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_1, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_2, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_3, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'watch', $lang['UpdateTable']), $update_watch_r4_3_1, str_replace('%1', 'watch', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'watch', $lang['UpdateTable']), $update_watch_r4_3_2, str_replace('%1', 'watch', $lang['ErrorUpdatingTable']));
-
-					// drop last!
-					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_4, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_5, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_7, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'watch', $lang['AlterTable']), $alter_watch_r4_3_8, str_replace('%1', 'watch', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'rating', $lang['CreatingTable']), $table_rating_r4_3, str_replace('%1', 'rating', $lang['ErrorCreatingTable']));
-
-					test_pdo(str_replace('%1', 'referrer', $lang['AlterTable']), $alter_referrer_r4_3_1, str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'referrer', $lang['AlterTable']), $alter_referrer_r4_3_2, str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'referrer', $lang['AlterTable']), $alter_referrer_r4_3_3, str_replace('%1', 'referrer', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_1, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_2, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_3, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_4, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_5, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_6, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_7, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_8, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_11, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'revision', $lang['UpdateTable']), $update_revision_r4_3_1, str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['UpdateTable']), $update_revision_r4_3_2, str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['UpdateTable']), $update_revision_r4_3_3, str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['UpdateTable']), $update_revision_r4_3_4, str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['UpdateTable']), $update_revision_r4_3_5, str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-
-					// drop last!
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_9, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_10, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_12, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_13, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_14, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_15, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_16, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_17, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_18, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_19, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_20, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_21, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_22, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_23, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'revision', $lang['UpdateTable']), $update_revision_r4_3_6, str_replace('%1', 'revision', $lang['ErrorUpdatingTable']));
-
-					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_1, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'upload', $lang['UpdateTable']), $update_upload_r4_3_1, str_replace('%1', 'upload', $lang['ErrorUpdatingTable']));
-					// drop last!
-					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_2, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r4_3_3, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'user_setting', $lang['CreatingTable']), $table_user_setting_r4_3, str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
-
-					test_pdo($lang['InstallingSystemAccount'], $insert_system, str_replace('%1', 'system account', $lang['ErrorAlreadyExists']));
-
-					#test_pdo($lang['InstallingAdmin'], $insert_admin, str_replace('%1', 'admin user', $lang['ErrorAlreadyExists']));
-					test_pdo($lang['InstallingAdminSetting'], $insert_admin_setting, str_replace('%1', 'admin user settings', $lang['ErrorAlreadyExists']));
-					test_pdo($lang['InstallingAdminGroup'], $insert_admin_group, str_replace('%1', 'admin group', $lang['ErrorAlreadyExists']));
-					test_pdo($lang['InstallingAdminGroupMember'], $insert_admin_group_member, str_replace('%1', 'admin group member', $lang['ErrorAlreadyExists']));
-
-					test_pdo($lang['InstallingEverybodyGroup'], $insert_everybody_group, str_replace('%1', 'everybody group', $lang['ErrorAlreadyExists']));
-					test_pdo($lang['InstallingRegisteredGroup'], $insert_registered_group, str_replace('%1', 'registered group', $lang['ErrorAlreadyExists']));
-					test_pdo($lang['InstallingModeratorGroup'], $insert_moderator_group, str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
-					test_pdo($lang['InstallingReviewerGroup'], $insert_reviewer_group, str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
-
-					echo "            </ol>\n";
-
-				// upgrade from R5.0.beta to R5.0.rc1
-				case '5.0.beta':
-					echo "         <h2>Wacko 5.0.beta ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_39, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r4_3_40, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r4_3_24, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'tag', $lang['CreatingTable']), $table_tag_r4_3, str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
-					test_pdo(str_replace('%1', 'tag_page', $lang['CreatingTable']), $table_tag_page_r4_3, str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
-					test_pdo(str_replace('%1', 'user', $lang['AlterTable']), $alter_user_r4_3_31, str_replace('%1', 'user', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user_setting', $lang['AlterTable']), $alter_user_setting_r4_3_1, str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
-					test_pdo(str_replace('%1', 'user_setting', $lang['AlterTable']), $alter_user_setting_r4_3_2, str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
-
-					echo "            </ol>\n";
-
-				// upgrade from R5.0.rc1 to R5.0.rc2
-				case '5.0.rc':
-					echo "         <h2>Wacko 5.0.rc ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					test_pdo(str_replace('%1', 'user_setting', $lang['AlterTable']), $alter_user_setting_r4_3_3, str_replace('%1', 'user_setting', $lang['ErrorAlteringTable']));
-
-					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r4_3_2, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					// rename group table to usergroup
-					if ($version == '5.0.beta' || $version == '5.0.rc')
-					{
-						test_pdo(str_replace('%1', 'usergroup', $lang['RenameTable']), $rename_usergroup_r4_3_1, str_replace('%1', 'usergroup', $lang['ErrorRenamingTable']));
-						test_pdo(str_replace('%1', 'usergroup_member', $lang['RenameTable']), $rename_usergroup_member_r4_3_1, str_replace('%1', 'usergroup_member', $lang['ErrorRenamingTable']));
-					}
-
-					echo "            </ol>\n";
-
-				// upgrade from R5.0.rc2 to R5.0.rc3
-				case '5.0.rc2':
-					echo "         <h2>Wacko 5.0.rc2 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					test_pdo(str_replace('%1', 'acl', $lang['UpdateTable']), $update_acl_r4_3_2, str_replace('%1', 'acl', $lang['ErrorUpdatingTable']));
-
-					echo "            </ol>\n";
 
 				// upgrade from R5.0.rc3 to R5.0.0
-				case '5.0.rc3':
+				/* case '5.0.rc3':
 					echo "         <h2>Wacko 5.0.rc3 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
@@ -1702,7 +804,7 @@ switch($config['database_driver'])
 					echo "            <li>".$lang['InstallingPagesBegin'];
 					require_once('setup/inserts.php');
 					echo "</li>\n";
-					echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
+					echo "            <li>".$lang['InstallingPagesEnd']."</li>\n"; */
 			}
 
 			echo "         </ul>\n";
