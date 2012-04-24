@@ -94,7 +94,7 @@ class Init
 
 		if (!isset($_REQUEST))
 		{
-			die('$_REQUEST[] not found. WackoWiki requires PHP 5.2.0 or higher!');
+			die('$_REQUEST[] not found. WackoWiki requires PHP_MIN_VERSION or higher!');
 		}
 
 		if (strstr($_SERVER['SERVER_SOFTWARE'], 'IIS'))
@@ -147,7 +147,7 @@ class Init
 				// load primary config
 				if ( @file_exists('config/config.php') )
 				{
-					// If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R5.0
+					// If the file exists and has some content then we assume it's a proper WackoWiki config file, as of R5.0 or higher
 					if (@filesize('config/config.php') > 0)
 					{
 						require('config/config.php');
