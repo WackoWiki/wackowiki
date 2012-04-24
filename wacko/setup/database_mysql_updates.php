@@ -3,7 +3,7 @@
 /*
 	Wacko Wiki MySQL Table Updates Script
 
-	These are all the updates that need to applied to earlier Wacko version to bring them up to 5.0 specs
+	These are all the updates that need to applied to earlier Wacko version to bring them up to 5.1 specs
 */
 
 $pref		= $config['table_prefix'];

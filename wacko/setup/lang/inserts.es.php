@@ -12,7 +12,7 @@ if ($config['language'] == $lng)
 	}
 	else
 	{
-		insert_page($config['users_page'].'/'.$config['admin_name'].'/MigrateDataToR50', 'Migrate Data to R5.0', "{{adminupdate}}\n\n", $lng, $config['admin_name'], true, false);
+		// ...
 	}
 
 	#insert_page('PaginasBuscadas', 'Paginas Buscadas', '{{wanted}}', $lng, 'Admins', true, false);
