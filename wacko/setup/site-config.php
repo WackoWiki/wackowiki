@@ -109,9 +109,6 @@ else
    </div>
 <?php
 
-// 4.3 -> 5.0: remove obsolete appendix 'index.php?page='
-$config['base_url'] = preg_replace('#/[^/]*$#', '/', $config['base_url']);
-
 ?>
    <h2><?php echo $lang['Base'];?></h2>
    <p class="notop"><?php echo $lang['BaseDesc'];?></p>
