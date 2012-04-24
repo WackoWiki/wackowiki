@@ -97,21 +97,6 @@ class Init
 			die('$_REQUEST[] not found. WackoWiki requires PHP 5.2.0 or higher!');
 		}
 
-		// Check for function because it is deprecated in PHP 5.3 and removed in PHP 6
-		if (function_exists('set_magic_quotes_runtime'))
-		{
-			@set_magic_quotes_runtime(false);
-		}
-
-		if (get_magic_quotes_gpc())
-		{
-			$this->parse_mq($_POST);
-			$this->parse_mq($_GET);
-			$this->parse_mq($_COOKIE);
-			$this->parse_mq($_SERVER);
-			$this->parse_mq($_REQUEST);
-		}
-
 		if (strstr($_SERVER['SERVER_SOFTWARE'], 'IIS'))
 		{
 			$_SERVER['REQUEST_URI'] = $_SERVER['PATH_INFO'];
@@ -123,25 +108,6 @@ class Init
 	{
 		list($usec, $sec) = explode(' ', microtime());
 		return ((float)$usec + (float)$sec);
-	}
-
-	// Workaround for the amazingly annoying magic quotes.
-	function parse_mq(&$a)
-	{
-		if (is_array($a))
-		{
-			foreach ($a as $k => $v)
-			{
-				if (is_array($v))
-				{
-					$this->parse_mq($a[$k]);
-				}
-				else
-				{
-					$a[$k] = stripslashes($v);
-				}
-			}
-		}
 	}
 
 	// DEFINE WACKO SETTINGS
