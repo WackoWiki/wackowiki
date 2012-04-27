@@ -71,7 +71,7 @@ if ($admin)
 }
 
 if (isset($_POST['plural']))				$plural		= $_POST['plural'];
-if (isset($_POST['topic']))					$topic		= $_POST['topic'];
+if (isset($_POST['topic']))					$topic		= htmlspecialchars($_POST['topic']);
 
 $i = 1;
 
@@ -79,7 +79,7 @@ foreach ($_POST as $key => $value)
 {
 	if (preg_match('/^[0-9]{1,2}$/', $key))
 	{
-		$vars[] = array('v_id' => $i, 'text' => $value);
+		$vars[] = array('v_id' => $i, 'text' => htmlspecialchars($value));
 		$i++;
 	}
 
