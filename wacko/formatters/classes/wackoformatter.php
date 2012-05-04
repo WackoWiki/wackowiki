@@ -634,7 +634,7 @@ class WackoFormatter
 		else if (preg_match('/^\#\#(.*?)\#\#$/', $thing, $matches) ||
 				 preg_match('/^\¹\¹(.*?)\¹\¹$/', $thing, $matches))
 		{
-			return '<tt>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</tt>';
+			return '<code>'.preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]).'</code>';
 		}
 		// small
 		else if (preg_match('/^\+\+(.*?)\+\+$/', $thing, $matches))

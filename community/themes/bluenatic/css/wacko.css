@@ -293,7 +293,7 @@ div .action-content {padding:7px;}
 .cl-yellow {background-color:transparent; color: #ffff00;}
 
 /* Fixed width text: SYNTAX ##monospace## */
-tt {
+code {
 	background-color:	transparent;
 	color:			#006;
 	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
