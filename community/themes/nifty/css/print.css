@@ -173,7 +173,7 @@ sup a:hover {
 }
 
 /* Fixed width text: SYNTAX ##monospace## */
-tt {
+code {
 	font-family:	"Bitstream Vera Sans Mono", "Courier New", monospace;
 	font-size:		0.9em;
 	padding:		2px 5px;
