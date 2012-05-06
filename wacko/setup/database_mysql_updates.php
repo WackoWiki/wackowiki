@@ -25,6 +25,8 @@ $engine		= 'ENGINE='.$config['database_engine'];
 // MENU
 
 // PAGE
+$update_page_r5_0_1 = "UPDATE {$pref}page SET body_r = ''";
+$update_page_r5_0_2 = "UPDATE {$pref}page SET body_toc = ''";
 
 // POLL
 
