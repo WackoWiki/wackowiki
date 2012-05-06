@@ -49,7 +49,7 @@ color:#C00;
 }
 .cl-yellow {color: #ffff00;}
 
-.code {
+.code, .tt {
 background:#FFF;
 border:solid #888 2px;
 color:#000;

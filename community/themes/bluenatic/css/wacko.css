@@ -117,7 +117,7 @@ del.diff {
 
 /* Code areas: SYNTAX %%code%% */
 
-.code {
+.code, .tt {
 	background-color:	#fafafa;
 	color:			#000;
 	border:			dashed 1px #999;
