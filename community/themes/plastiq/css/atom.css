@@ -146,7 +146,7 @@ textarea {
 .right {
 	text-align: right;
 }
-.code {
+.code, .tt {
 	letter-spacing: normal;
 	word-spacing: normal;
 	background: none repeat scroll 0 0 #EDEDED;

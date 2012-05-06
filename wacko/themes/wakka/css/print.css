@@ -157,7 +157,7 @@ code {
 	font-family:	"Bitstream Vera Sans Mono", "Courier New", monospace;
 	font-size:		0.9em;
 }
-.code {
+.code, .tt {
 	border:			dashed 1px #000;
 	font-family:	"Bitstream Vera Sans Mono", "Courier New", monospace;
 	font-size:		0.9em;

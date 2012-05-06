@@ -12,7 +12,7 @@ h1, h2, h3, h4, h5, h6 {
 p {
 	margin: 0px;
 }
-tt {
+code {
 	font-family: "Lucida Console", "Courier New", monospace;
 	text-align: left;
 	/*background-color: #EDEDED;
@@ -126,7 +126,6 @@ textarea {
 }
 
 
-
 /*	Layout styles	*/
 
 .center {
@@ -138,7 +137,7 @@ textarea {
 .right {
 	text-align: right;
 }
-.code {
+.code, .tt {
 	letter-spacing: normal;
 	word-spacing: normal;		
 	background-color: #EDEDED;
@@ -167,7 +166,6 @@ textarea {
 .nobr {
 	white-space: nowrap;
 }
-
 
 
 table.formation {
@@ -205,7 +203,6 @@ table.forum th {
 }
 
 
-
 #content fieldset {
 	font-size: 12px;
 	padding-top: 0px;
@@ -227,8 +224,3 @@ table.forum th {
 #content fieldset legend strong {
 	font-weight: normal;
 }
-
-
-
-
-

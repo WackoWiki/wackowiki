@@ -79,7 +79,7 @@ del.diff { font-style: italic; color:#c00; text-decoration: line-through; }
 
 /* Code areas: SYNTAX %%code%% */
 
-.code {
+.code, .tt {
   background: #FFFFFF;
   border: 1px #888888 solid;
   font-family: "Courier New";
