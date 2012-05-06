@@ -48,7 +48,7 @@ if ($init->is_locked() === true)
 		header('HTTP/1.1 503 Service Temporarily Unavailable');
 	}
 
-	echo "The site is temporarily unavailable due to system maintenance. Please try again later.";
+	echo 'The site is temporarily unavailable due to system maintenance. Please try again later.';
 	exit;
 }
 
