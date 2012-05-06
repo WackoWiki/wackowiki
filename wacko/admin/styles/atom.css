@@ -12,7 +12,7 @@ h1, h2, h3, h4, h5, h6 {
 p {
 	margin: 0px;
 }
-code {
+code, tt {
 	font-family: "Lucida Console", "Courier New", monospace;
 	text-align: left;
 	/*background-color: #EDEDED;
@@ -137,7 +137,7 @@ textarea {
 .right {
 	text-align: right;
 }
-.code, .tt {
+.code {
 	letter-spacing: normal;
 	word-spacing: normal;		
 	background-color: #EDEDED;

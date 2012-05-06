@@ -117,7 +117,7 @@ del.diff {
 
 /* Code areas: SYNTAX %%code%% */
 
-.code, .tt {
+.code {
 	background-color:	#fafafa;
 	color:			#000;
 	border:			dashed 1px #999;
@@ -293,7 +293,7 @@ div .action-content {padding:7px;}
 .cl-yellow {background-color:transparent; color: #ffff00;}
 
 /* Fixed width text: SYNTAX ##monospace## */
-code {
+code, tt {
 	background-color:	transparent;
 	color:			#006;
 	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
