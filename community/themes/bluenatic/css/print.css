@@ -136,7 +136,7 @@ sup a:hover {
 }
 
 /* Fixed width text: SYNTAX ##monospace## */
-code {
+code, tt {
 	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
 	font-size:		0.9em;
 	padding:		2px 5px;
@@ -148,11 +148,11 @@ code {
 /* Hyperlinks: SYNTAX ((HomePage)) */
 
 /* Code areas: SYNTAX %%code%% */
-code {
+code, tt {
 	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
 	font-size:		0.9em;
 }
-.code, .tt {
+.code {
 	border:			dashed 1px #000;
 	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
 	font-size:		0.9em;

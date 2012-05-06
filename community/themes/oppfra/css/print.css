@@ -47,7 +47,7 @@ table.usertable tr td
 }
 table.dtable { width:100%; border: 0px none; border-collapse: collapse; }
 table.dtable tr td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
-.code, .tt {
+.code, tt {
   background: #FFFFFF;
   border: solid #888888 2px;
   font-family: "Courier New";

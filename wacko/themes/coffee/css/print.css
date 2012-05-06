@@ -57,7 +57,7 @@ cite {color:#888800;font-style:normal;}
 }
 .dtable { width:100%; border: 0px none; border-collapse: collapse; }
 .dtable td { vertical-align:top; border-width: 0px;  border-color: #999999;  border-style: none;  padding: 4px; }
-.code, .tt {
+.code {
   background: #FFFFFF;
   border: 1px #888888 solid;
   font-family: "Courier New";

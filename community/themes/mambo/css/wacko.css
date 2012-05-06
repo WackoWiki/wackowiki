@@ -75,7 +75,7 @@ del.diff { color: #c00; font-style: italic; text-decoration: line-through }
 
 /* Code areas: SYNTAX %%code%% */
 
-.code, .tt { border: solid #888888 2px; width: 80%; padding: 3px; background: #FFFFFF; color: black; font: 10pt Lucida Console }
+.code { border: solid #888888 2px; width: 80%; padding: 3px; background: #FFFFFF; color: black; font: 10pt Lucida Console }
 
 
 .notes {  color: #888800; }
@@ -175,7 +175,7 @@ div.action-content   { padding:10px 10px 25px 10px; }
 .cl-yellow {color: #ffff00;}
  
 /* Fixed width text: SYNTAX ##monospace## */
-code { }
+code, tt { }
 
 /* Important text: SYNTAX !!text!! */
 .cite { color: #888800; font-style: normal }

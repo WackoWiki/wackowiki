@@ -79,7 +79,7 @@ del.diff { font-style: italic; color:#c00; text-decoration: line-through; }
 
 /* Code areas: SYNTAX %%code%% */
 
-.code, .tt {
+.code {
   background: #FFFFFF;
   border: 1px #888888 solid;
   font-family: "Courier New";
@@ -197,7 +197,7 @@ div.action-content   { padding:10px 10px 25px 10px; }
 .cl-yellow {color: #ffff00;}
 
 /* Fixed width text: SYNTAX ##monospace## */
-code { color:#666600; background:#ffffcc; padding: 0 2px }
+code, tt { color:#666600; background:#ffffcc; padding: 0 2px }
 
 /* Important text: SYNTAX !!text!! */
 .cite {color:#ff0000;font-style:normal;}

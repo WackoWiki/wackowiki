@@ -162,7 +162,7 @@ ul {
 	color: #666666;
 	border-bottom: 1px dashed #666666;
 }
-#print .code, .tt {
+#print .code {
 	background-color: #FFFFFF;
 	border: 2px solid #000000;
 	width: 100%;
