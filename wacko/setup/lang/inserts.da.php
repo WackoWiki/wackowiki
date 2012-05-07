@@ -1,6 +1,6 @@
 <?php
 
-$lng = "da";
+$lng = 'da';
 
 // insert these pages only for default language
 if ($config['language'] == $lng)

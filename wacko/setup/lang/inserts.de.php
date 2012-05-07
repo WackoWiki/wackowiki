@@ -1,6 +1,6 @@
 <?php
 
-$lng = "de";
+$lng = 'de';
 
 // insert these pages only for default language
 if ($config['language'] == $lng)
