@@ -58,10 +58,12 @@ function admin_sysinfo(&$engine, &$module)
 	$sysinfo['max_execution_time']	= array('Max execution time', get_cfg_var('max_execution_time').' seconds');
 	$sysinfo['session_save_path']	= array('Session path', get_cfg_var('session.save_path'));
 	$sysinfo['php_extentions']		= array('PHP extentions', implode(', ',get_loaded_extensions()));
+
 	if ( function_exists( 'apache_get_modules' ) )
 	{
 		$sysinfo['apache_modules']		= array('Apache modules', implode(', ',apache_get_modules()));
 	}
+
 	$sysinfo['server_name']			= array('Server name', $_SERVER['SERVER_NAME']);
 
 	// add additional system parameters
