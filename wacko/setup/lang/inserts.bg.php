@@ -1,6 +1,6 @@
 <?php
 
-$lng = "bg";
+$lng = 'bg';
 
 // insert these pages only for default language
 if ($config['language'] == $lng)
