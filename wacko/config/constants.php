@@ -38,7 +38,7 @@ define('WACKO_VERSION',					'5.1.0');
 define('XML_HTMLSAX3',					'lib/HTMLSax3/');
 #define('XML_HTMLSAX3',					dirname(__FILE__).'/lib/HTMLSax3/');
 define('ACTIONS4DIFF',					'anchor, toc'); //allowed actions in DIFF
-define('PHP_MIN_VERSION',				'5.3.0'); //minimum required PHP version
+define('PHP_MIN_VERSION',				'5.2.0'); //minimum required PHP version
 define('PHP_ERROR_REPORTING',			0); // PHP error reporting: 0 - off, 5 - all
 
 ?>

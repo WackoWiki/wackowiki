@@ -112,7 +112,7 @@ $password_encrypted		= hash('sha256', $config['admin_name'].$salt.$_POST['passwo
 
 $config_insert = '';
 // set back theme to default, just a precaution
-$config['theme'] = 'default';
+# $config['theme'] = 'default';
 
 // user 'system' holds all default pages
 $insert_system				= "INSERT INTO ".$config['table_prefix']."user (user_name, password, salt, email, account_type, signup_time) VALUES ('System', '', '', '', '1', '')";

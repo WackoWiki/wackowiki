@@ -84,8 +84,8 @@ echo '   <input type="hidden" name="password" value="'.(isset($_POST['password']
 
 $drivers	= array();
 $drivers[]	= array('mysql',	'mysql_legacy',		'MySQL');
-$drivers[]	= array('mysqli',	'mysqli_legacy',	'MySQLi');
-$drivers[]	= array('pdo',		'mysql_pdo',		'PDO MySQL ('.$lang['Recommended'].')');
+$drivers[]	= array('mysqli',	'mysqli_legacy',	'MySQLi ('.$lang['Recommended'].')');
+$drivers[]	= array('pdo',		'mysql_pdo',		'PDO MySQL');
 // $drivers[]	= array('pdo',		'mssql',		'PDO MS SQL');
 // $drivers[]	= array('pdo',		'pgsql',		'PDO PostgreSQL');
 // $drivers[]	= array('pdo',		'sqlite',		'PDO SQLite');
