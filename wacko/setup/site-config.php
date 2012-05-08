@@ -3,13 +3,13 @@
 		function check()
 		{
 			var f = document.forms.form1;
-			var re = new RegExp("^[A-Z][a-z]+[A-Z0-9][A-Za-z0-9]*$");
+			//var re = new RegExp("^[A-Z][a-z]+[A-Z0-9][A-Za-z0-9]*$");
 
-			if (f.elements["config[admin_name]"].value.search(re) == -1)
-			{
-				alert('<?php echo $lang['ErrorAdminName'];?>');
-				return false;
-			}
+			//if (f.elements["config[admin_name]"].value.search(re) == -1)
+			//{
+			//	alert('<?php echo $lang['ErrorAdminName'];?>');
+			//	return false;
+			//}
 
 			if (f.elements['password'].value.length<9)
 			{
@@ -40,20 +40,23 @@
 <?php
 
 write_config_hidden_nodes(array(
-	'site_name' => '',
-	'root_page' => '',
-	'multilanguage' => '',
-	'admin_name' => '',
-	'password' => '',
-	'admin_email' => '',
-	'base_url' => '',
-	'rewrite_mode' => '')
+	'site_name'		=> '',
+	'root_page'		=> '',
+	'multilanguage'	=> '',
+	'admin_name'	=> '',
+	'password'		=> '',
+	'admin_email'	=> '',
+	'base_url'		=> '',
+	'rewrite_mode'	=> '')
 );
 
 ?>
    <h2><?php echo $lang['Name'];?></h2>
    <p class="notop"><?php echo $lang['NameDesc'];?></p>
    <input type="text" maxlength="250" name="config[site_name]" value="<?php echo $config['site_name']; ?>" class="text_input" />
+   <?php
+if ($config['is_update'] == false)
+{?>
    <div class="fake_hr_seperator">
       <hr />
    </div>
@@ -61,6 +64,13 @@ write_config_hidden_nodes(array(
    <p class="notop"><?php echo $lang['HomeDesc'];?></p>
    <input type="text" maxlength="250" name="config[root_page]" value="<?php isset ( $lang['HomeDefault'] ) ? print $lang['HomeDefault'] : print $config['root_page'] ; ?>" class="text_input" />
    <br />
+<?php
+}
+else
+{
+	echo '<input type="hidden" value="'.$config['root_page'].'" name="config[root_page]">';
+}
+?>
    <div class="fake_hr_seperator">
       <hr />
    </div>
