@@ -98,7 +98,15 @@ for($count = 0; $count < count($drivers); $count++)
 {
 	if(extension_loaded($drivers[$count][0]))
 	{
-		echo "      <li><input type=\"radio\" id=\"db_driver_".$drivers[$count][0]."\" name=\"config[database_driver]\" value=\"".$drivers[$count][1]."\"".($detected == 0 ? "checked=\"checked\"" : "")."><label for=\"db_driver_".$drivers[$count][0]."\">".$drivers[$count][2]."</label></li>\n";
+		if ($config['is_update'] == false)
+		{
+			echo "      <li><input type=\"radio\" id=\"db_driver_".$drivers[$count][0]."\" name=\"config[database_driver]\" value=\"".$drivers[$count][1]."\" ".($detected == 0 ? "checked=\"checked\"" : "")."><label for=\"db_driver_".$drivers[$count][0]."\">".$drivers[$count][2]."</label></li>\n";
+		}
+		else
+		{
+			echo "      <li><input type=\"radio\" id=\"db_driver_".$drivers[$count][0]."\" name=\"config[database_driver]\" value=\"".$drivers[$count][1]."\" ".($config['database_driver'] == $drivers[$count][1] ? "checked=\"checked\"" : "")."><label for=\"db_driver_".$drivers[$count][0]."\">".$drivers[$count][2]."</label></li>\n";
+		}
+
 		$detected++;
 	}
 }
@@ -128,7 +136,7 @@ $detected = 0;
 
 for($count = 0; $count < count($engines); $count++)
 {
-	echo "      <li><input type=\"radio\" id=\"db_engine_".$engines[$count][0]."\" name=\"config[database_engine]\" value=\"".$engines[$count][1]."\"".($detected == 0 ? "checked=\"checked\"" : "")."><label for=\"db_engine_".$engines[$count][0]."\">".$engines[$count][2]."</label></li>\n";
+	echo "      <li><input type=\"radio\" id=\"db_engine_".$engines[$count][0]."\" name=\"config[database_engine]\" value=\"".$engines[$count][1]."\" ".($detected == 0 ? "checked=\"checked\"" : "")."><label for=\"db_engine_".$engines[$count][0]."\">".$engines[$count][2]."</label></li>\n";
 	$detected++;
 }
 ?>
