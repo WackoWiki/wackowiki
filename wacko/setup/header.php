@@ -81,7 +81,7 @@ require_once('setup/lang/installer.'.$config['language'].'.php');
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $config['language']; ?>" lang="<?php echo $config['language']; ?>">
    <head>
-      <title><?php echo $lang['Title'].' - '.WACKO_VERSION.' - '.$lang[$install_action]; ?></title>
+      <title><?php echo $lang['Title'].': '.WACKO_VERSION.' - '.$lang[$install_action]; ?></title>
       <meta name="robots" content="noindex, nofollow, noarchive" />
       <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $lang['Charset']; ?>" />
       <link rel="stylesheet" href="<?php echo my_location() ?>setup/css/installer.css" type="text/css" />
