@@ -383,9 +383,9 @@ class Init
 
 	// DATABASE ABSTRACT LAYER
 	// Initialize DBAL for basic DB operations and connect to selected DB.
-	// Default DB is 'mysql_database' config value, however any other value may
+	// Default DB is 'database_database' config value, however any other value may
 	// be passed. All DBs must be on the server specified in the config file.
-	function dbal($dbname = '')
+	function dbal($db_name = '')
 	{
 		if (isset($this->dblink))
 		{
@@ -407,30 +407,30 @@ class Init
 		switch($this->config['database_driver'])
 		{
 			case 'mysql_pdo':
-				$dbfile = 'db/pdo.php';
+				$db_file = 'db/pdo.php';
 				break;
 			case 'mysqli_legacy':
-				$dbfile = 'db/mysqli.php';
+				$db_file = 'db/mysqli.php';
 				break;
 			default:
-				$dbfile = 'db/mysql.php';
+				$db_file = 'db/mysql.php';
 				break;
 		}
 
 		// load DBAL
-		if (@file_exists($dbfile))
+		if (@file_exists($db_file))
 		{
-			require($dbfile);
+			require($db_file);
 		}
 		else
 		{
-			die("Error loading WackoWiki DBAL: file ".$dbfile." not found.");
+			die("Error loading WackoWiki DBAL: file ".$db_file." not found.");
 		}
 
 		// connect to DB
-		if ($dbname == false)
+		if ($db_name == false)
 		{
-			$dbname = $this->config['database_database'];
+			$db_name = $this->config['database_database'];
 		}
 
 		$this->dblink = connect($this->config['database_host'], $this->config['database_user'], $this->config['database_password'], $this->config['database_database'], $this->config['database_collation'], $this->config['database_driver'], $this->config['database_port']);
@@ -599,6 +599,12 @@ class Init
 		{
 			die("Error starting WackoWiki engine: config data must be initialized.");
 		}
+
+		// terminate for banned IPs
+		/* if (in_array($_SERVER['REMOTE_ADDR'], $this->config['bans']))
+		{
+			die();
+		} */
 
 		if ($this->engine == false || $op == false)
 		{
