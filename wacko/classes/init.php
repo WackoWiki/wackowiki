@@ -529,7 +529,7 @@ class Init
 			}
 			else
 			{
-				echo "<em>Invalid action</em>";
+				echo '<em>Invalid action</em>';
 			}
 
 			include('setup/footer.php');
@@ -590,7 +590,7 @@ class Init
 	// First must be initialized without parameters. Then
 	// can be used with these values:
 	//		run		= Main execution routine (open start page)
-	//		res		= Load and register locale string resources
+	//		lang	= Load and register locale string resources
 	//				  only (for $lang or for default language)
 	function engine($op = '', $lang = '')
 	{
@@ -639,8 +639,8 @@ class Init
 
 			$this->engine->load_all_languages();
 			$this->engine->load_translation($lang);
-			$this->engine->set_translation ($lang);
-			$this->engine->set_language ($lang);
+			$this->engine->set_translation($lang);
+			$this->engine->set_language($lang);
 			return true;
 		}
 		else
