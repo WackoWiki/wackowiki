@@ -91,7 +91,7 @@ if ($this->has_access('read'))
 			echo '<div class="pagination"><small>'.$pagination['text'].'</small></div>';
 		}
 
-		echo "<a href=\"".$this->href('', '', 'show_comments=0')."\" title=\"".$this->get_translation('HideComments')."\">".$this->get_translation('Comments_all')."</a>";
+		echo '<a href="'.$this->href('', '', 'show_comments=0').'" title="'.$this->get_translation('HideComments').'">'.$this->get_translation('Comments_all').'</a>';
 		echo "</div>\n";
 
 		// display comments themselves
@@ -259,7 +259,7 @@ if ($this->has_access('read'))
 		if (!empty($show_comments))
 		{
 			echo '<div id="commentsheader">';
-			echo "<a href=\"".$this->href('', '', 'show_comments=1#commentsheader')."\" title=\"".$this->get_translation('ShowComments')."\">".$show_comments."</a>";
+			echo '<a href="'.$this->href('', '', 'show_comments=1#commentsheader').'" title="'.$this->get_translation('ShowComments').'">'.$show_comments.'</a>';
 			echo '</div>'."\n";
 		}
 		else
