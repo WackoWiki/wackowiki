@@ -66,8 +66,6 @@ if ($this->has_access('read'))
 	}
 	else
 	{
-		echo '<div id="filesheader">'."\n";
-
 		if ($this->page['page_id'])
 		{
 			// load files for this page
@@ -84,7 +82,13 @@ if ($this->has_access('read'))
 		switch ($c = count($files))
 		{
 			case 0:
-				$show_files = $this->get_translation('Files_0');
+				if ($this->get_user() &&
+					($this->config['upload'] === true) || ($this->config['upload'] == 1) ||
+					($this->check_acl($user_name, $this->config['upload']))
+				)
+				{
+					$show_files = $this->get_translation('Files_0');
+				}
 				break;
 			case 1:
 				$show_files = $this->get_translation('Files_1');
@@ -92,9 +96,18 @@ if ($this->has_access('read'))
 			default:
 				$show_files = str_replace('%1', $c, $this->get_translation('Files_n'));
 		}
-
-		echo '<a href="'.$this->href('', '', 'show_files=1#filesheader').'" title="'.$this->get_translation('ShowFiles').'">'.$show_files.'</a>';
-		echo '</div>'."\n";
+		// show link to show files only if there is one or/and user has the right to add a new one
+		if (!empty($show_files))
+		{
+			echo '<div id="filesheader">'."\n";
+			echo '<a href="'.$this->href('', '', 'show_files=1#filesheader').'" title="'.$this->get_translation('ShowFiles').'">'.$show_files.'</a>';
+			echo '</div>'."\n";
+		}
+		else
+		{
+			// TODO: add message if registered users can upload files on this page
+			// e.g. 'Log in or create an account to attach files to this page.'
+		}
 	}
 }
 
