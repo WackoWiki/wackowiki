@@ -243,16 +243,30 @@ if ($this->has_access('read'))
 	}
 	else
 	{
-		echo '<div id="commentsheader">';
-
 		$c = (int)$this->page['comments'];
 
-		if		($c  <  1)	$show_comments = $this->get_translation('Comments_0');
+		if		($c  <  1)
+		{
+			if ($this->has_access('comment'))
+			{
+				$show_comments = $this->get_translation('Comments_0');
+			}
+		}
 		else if	($c === 1)	$show_comments = $this->get_translation('Comments_1');
 		else if	($c  >  1)	$show_comments = str_replace('%1', $c, $this->get_translation('Comments_n'));
 
-		//TODO: show link to show comment only if there is one or/and user has the right to add a new one
-		echo "<a href=\"".$this->href('', '', 'show_comments=1#commentsheader')."\" title=\"".$this->get_translation('ShowComments')."\">".$show_comments."</a></div>";
+		// show link to show comment only if there is one or/and user has the right to add a new one
+		if (!empty($show_comments))
+		{
+			echo '<div id="commentsheader">';
+			echo "<a href=\"".$this->href('', '', 'show_comments=1#commentsheader')."\" title=\"".$this->get_translation('ShowComments')."\">".$show_comments."</a>";
+			echo '</div>'."\n";
+		}
+		else
+		{
+			// TODO: add message if registered users can comment this page
+			// e.g. 'Log in or create an account to post a comment.'
+		}
 	}
 }
 
