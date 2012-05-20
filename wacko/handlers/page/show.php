@@ -54,13 +54,13 @@ if ($this->has_access('read'))
 		// comment header?
 		if ($this->page['comment_on_id'])
 		{
-			echo "<div class=\"commentinfo\">".$this->get_translation('ThisIsCommentOn')." ".$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', '', 0).", ".$this->get_translation('PostedBy')." ".($this->is_wiki_name($this->page['user_name']) ? $this->link($this->page['user_name']) : $this->page['user_name'])." ".$this->get_translation('At')." ".$this->get_time_string_formatted($this->page['modified'])."</div>";
+			echo '<div class="commentinfo">'.$this->get_translation('ThisIsCommentOn').' '.$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', '', 0).', '.$this->get_translation('PostedBy').' '.($this->is_wiki_name($this->page['user_name']) ? $this->link($this->page['user_name']) : $this->page['user_name']).' '.$this->get_translation('At').' '.$this->get_time_string_formatted($this->page['modified']).'</div>';
 		}
 
 		// revision header
 		if ($this->page['latest'] == 0)
 		{
-			echo "<div class=\"revisioninfo\">".
+			echo '<div class="revisioninfo">'.
 			str_replace('%1', $this->href(),
 			str_replace('%2', $this->tag,
 			str_replace('%3', $this->get_page_time_formatted(),
@@ -123,7 +123,10 @@ if ($this->has_access('read'))
 			}
 		}
 
-		// display page
+		// display page title (usually displayed in theme header)
+		# echo '<h1>'.$this->page['title'].'</h1>';
+
+		// display page body
 		$data = $this->format($this->page['body_r'], 'post_wacko', array('bad' => 'good'));
 		$data = $this->numerate_toc( $data ); //  numerate toc if needed
 		echo $data;
