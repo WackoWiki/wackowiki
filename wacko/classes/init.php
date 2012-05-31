@@ -454,7 +454,7 @@ class Init
 
 	// DATABASE ABSTRACT LAYER
 	// Initialize DBAL for basic DB operations and connect to selected DB.
-	// Default DB is 'mysql_database' config value, however any other value may
+	// Default DB is 'database_database' config value, however any other value may
 	// be passed. All DBs must be on the server specified in the config file.
 	function dbal($dbname = '')
 	{
@@ -661,7 +661,7 @@ class Init
 	// First must be initialized without parameters. Then
 	// can be used with these values:
 	//		run		= Main execution routine (open start page)
-	//		res		= Load and register locale string resources
+	//		lang	= Load and register locale string resources
 	//				  only (for $lang or for default language)
 	function engine($op = '', $lang = '')
 	{
@@ -704,8 +704,8 @@ class Init
 
 			$this->engine->load_all_languages();
 			$this->engine->load_translation($lang);
-			$this->engine->set_translation ($lang);
-			$this->engine->set_language ($lang);
+			$this->engine->set_translation($lang);
+			$this->engine->set_language($lang);
 			return true;
 		}
 		else
