@@ -22,7 +22,7 @@ if (!empty($this->config['news_cluster']))
 	if (!isset($limit))	$limit = 10;
 	else				$limit = (int)$limit;
 
-	$pages = '';
+	$pages			= '';
 	$prefix			= $this->config['table_prefix'];
 	$newscluster	= $this->config['news_cluster'];
 	$newslevels		= $this->config['news_levels'];
@@ -32,10 +32,10 @@ if (!empty($this->config['news_cluster']))
 	if ($mode == 'latest')
 	{
 		$count	= $this->load_single(
-				"SELECT COUNT(tag) AS n ".
-				"FROM {$prefix}page ".
-				"WHERE tag REGEXP '^{$newscluster}{$newslevels}$' ".
-					"AND comment_on_id = '0'", 1);
+			"SELECT COUNT(tag) AS n ".
+			"FROM {$prefix}page ".
+			"WHERE tag REGEXP '^{$newscluster}{$newslevels}$' ".
+				"AND comment_on_id = '0'", 1);
 
 		$pagination = $this->pagination($count['n'], $limit, 'p', 'mode=latest');
 
