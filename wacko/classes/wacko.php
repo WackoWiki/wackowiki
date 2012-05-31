@@ -6059,6 +6059,11 @@ class Wacko
 						: (int)$_GET[$name])
 					: 1);
 
+		if ($page <= 0)
+		{
+			$page = 1;
+		}
+
 		$pagination['offset'] = $perpage * ($page - 1);
 
 		// display navigation if there are pages to navigate in
