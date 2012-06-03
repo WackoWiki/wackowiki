@@ -190,13 +190,13 @@ hr {
 /*
    Write Config Specific
 */
-ul.security, .warning {
+ul.security {
 	padding: 10px;
 	border: 1px solid #d893a1;
 	background: #fbe6f2;
 }
 
-ul.security li, .warning {
+ul.security li {
 	min-height: 23px;
 	padding: 3px 0px 0px 35px;
 	background: url(../images/warning.png) no-repeat scroll 0% 0%;
