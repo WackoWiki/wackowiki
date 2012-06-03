@@ -19,6 +19,7 @@ $lang = array(
 /*
    Language Selection Page
 */
+'PleaseUpgradeToR5' => 'You aware to be running an old (pre 5.0.0) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to <tt class="version">5.0.x</tt>.',
 'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <tt class="version">%1</tt> to <tt class="version">%2</tt>.  The next few pages will guide you through the upgrade process.',
 'FreshInstall' => 'Welcome to WackoWiki, you are about to install WackoWiki <tt class="version">%1</tt>.  The next few pages will guide you through the installation process.',
 'PleaseBackup' => 'Enne, kui alustad versioonit‰ienduse sisseviimist, tee tagavarakoopia oma andmebaasist, konfiguratsioonidefailist ja kıikidest muudetud failidest. See vıib sind s‰‰sta suurest peavalust!',
