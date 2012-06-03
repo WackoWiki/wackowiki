@@ -66,6 +66,11 @@ foreach($lang_codes as $key => $value)
 	echo " onClick=\"this.form.action='?installAction=lang'; submit(); \"";
 	echo " class=\"input_lang\"><label for=\"lang_".$key."\" class=\"label_lang\">".$value." (".$key.")</label><br />\n";
 }
+
+if (isset($config['is_update']))
+{
 ?>
 	<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" />
+<?php
+}?>
 </form>
