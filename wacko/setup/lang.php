@@ -11,7 +11,7 @@ if(array_key_exists('wacko_version', $config))
 {
 	if ($config['wacko_version'][0] < 5)
 	{
-		echo '<p>'.preg_replace(array('/%1/', '/%2/'), array($config['wacko_version'], WACKO_VERSION), $lang['PleaseUpgradeToR5'])."</p>\n";
+		echo '<p class="warning">'.preg_replace(array('/%1/', '/%2/'), array($config['wacko_version'], WACKO_VERSION), $lang['PleaseUpgradeToR5'])."</p>\n";
 	}
 	else
 	{
