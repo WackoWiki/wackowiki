@@ -19,11 +19,11 @@ $lang = array(
 /*
    Language Selection Page
 */
+'lang' => 'Configuration de la langue',
 'PleaseUpgradeToR5' => 'You aware to be running an old (pre 5.0.0) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to <tt class="version">5.0.x</tt>.',
 'UpgradeFromWacko' => 'Bienvenue à bord de WackoWiki, vous semblez passer de WackoWiki <tt class="version">%1</tt> à <tt class="version">%2</tt>.  Les quelques pages qui suivent vous guideront dans le processus de mise à niveau.',
 'FreshInstall' => 'Bienvenue à bord de WackoWiki, vous vous apprêtez à installer WackoWiki <tt class="version">%1</tt>.  Les quelques pages qui suivent vous guideront dans le processus d&rsquo;installation.',
 'PleaseBackup' => 'Merci de sauvegarder votre base de données, le fichier de configuration et tous les fichiers modifiés, tels que ceux qui auxquels des rustines auraient été appliquées, avant de commencer le processus de mise à niveau. Cela peut vous éviter une bonne migraine.',
-'Lang' => 'Configuration de la langue',
 'LangDesc' => 'Merci de choisir une langue pour le processus d&rsquo;installation. Ce sera aussi la langue par défaut de votre installation WackoWiki.',
 
 /*
