@@ -196,7 +196,7 @@ ul.security, .warning {
 	background: #fbe6f2;
 }
 
-ul.security li {
+ul.security li, .warning {
 	min-height: 23px;
 	padding: 3px 0px 0px 35px;
 	background: url(../images/warning.png) no-repeat scroll 0% 0%;
