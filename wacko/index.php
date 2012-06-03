@@ -22,9 +22,9 @@ else
 
 	$init->settings();	// initialize DBAL and populate from config table.
 
-	if ($init->config['wacko_version'][0] >= 5)
+	if (!empty($init->config['wacko_version']))
 	{
-		$init->installer(); // upgrade R5 and on
+		$init->installer(); // upgrade R5 and on or show reminder to upgrade to 5.0.x first
 	}
 }
 
