@@ -67,7 +67,7 @@ foreach($lang_codes as $key => $value)
 	echo " class=\"input_lang\"><label for=\"lang_".$key."\" class=\"label_lang\">".$value." (".$key.")</label><br />\n";
 }
 
-if (isset($config['is_update']))
+if (!empty($config['is_update']))
 {
 ?>
 	<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" />
