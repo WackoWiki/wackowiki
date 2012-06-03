@@ -190,7 +190,7 @@ hr {
 /*
    Write Config Specific
 */
-ul.security {
+ul.security, .warning {
 	padding: 10px;
 	border: 1px solid #d893a1;
 	background: #fbe6f2;
