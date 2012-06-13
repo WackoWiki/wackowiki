@@ -83,7 +83,7 @@ $wacko_translation = array(
 	'RDFLink'					=> 'Document RDF',
 	'EmailLink'					=> 'Écrire un courriel (lancement du programme de courriel)',
 	'JabberLink'				=> 'Discussion via XMPP (lancement du client Jabber)',
-	'PermaLink'					=> 'Adresse de cette version',
+	'PermaLink'					=> 'Lien permanent vers cette page ou permalien',
 	'PermaLinkTip'				=> 'Lien permanent de la page',
 	'PermaLinkRedirected'		=> 'Redirigé par un lien permanent',
 	'PermaLinkEmpty'			=> 'Pas  de référence fournie pour la redirection (p.ex. ?page_id=506).',
