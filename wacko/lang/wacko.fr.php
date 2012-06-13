@@ -63,7 +63,7 @@ $wacko_translation = array(
 	'SessionEnds'				=> 'La session en cours se termine',
 	'LastVisit'					=> 'La dernière visite a été enregistrée',
 
-	'LoginAttemtsExceeded'			=> 'Vous avez dépassé le nombre maximum de tentatives de connexions autorisées.<br />En plus de votre nom d&rsquo;utilisateur et de votre mot de passe, vous devez à présent saisir le code de confirmation visuelle que vous devriez voir ci-dessous.',
+	'LoginAttemtsExceeded'		=> 'Vous avez dépassé le nombre maximum de tentatives de connexions autorisées.<br />En plus de votre nom d&rsquo;utilisateur et de votre mot de passe, vous devez à présent saisir le code de confirmation visuelle que vous devriez voir ci-dessous.',
 
 	// other
 	'Guest'						=> 'Invité',
@@ -579,9 +579,9 @@ $wacko_translation = array(
 	'UsersOpenProfile'			=> 'Voir le profil',
 	'UsersNoMatching'			=> 'Pas d&rsquo;utilisateurs trouvés. Utilisez des critères de recherche moins stricts',
 	'UsersName'					=> 'Nom',
-	'UsersPages'					=> 'Pages',
+	'UsersPages'				=> 'Pages',
 	'UsersComments'				=> 'Commentaires',
-	'UsersRevisions'				=> 'Révisions',
+	'UsersRevisions'			=> 'Révisions',
 	'UsersSignup'				=> 'Inscription',
 	'UsersLastSession'			=> 'Dernière session',
 	'UsersNotFound'				=> 'Utilisateur <tt>%2</tt> non trouvé. Cliquez <a href="%1">ici</a>, to gafficher la liste principale.',
@@ -595,10 +595,10 @@ $wacko_translation = array(
 	'UsersPersonalInfo'			=> 'Informations personnelles',
 	'UsersOwnedPages'			=> 'Pages dont l&rsquo;utilisateur est propriétaire',
 	'UsersCommentsPosted'		=> 'Commentaires postés',
-	'UsersRevisionsMade'			=> 'Révisions effectuées',
+	'UsersRevisionsMade'		=> 'Révisions effectuées',
 	'UsersDocsSortName'			=> '[Trier par nom]',
 	'UsersDocsSortDate'			=> '[Trier par date de création]',
-	'UsersSessionNA'				=> '[non enregistré]',
+	'UsersSessionNA'			=> '[non enregistré]',
 	'UsersSessionHidden'		=> '[caché]',
 	'UsersIntercomSubject'		=> 'Sujet',
 	'UsersIntercomSubjectN'		=> '[commencer un nouveau sujet]',
@@ -608,7 +608,7 @@ $wacko_translation = array(
 								   'sans dévoiler votre adresse. Le destinataire pourra vous répondre en utilisant '.
 								   'un formulaire similaire sur votre page de profil. ',
 	'UsersPMOversized'			=> 'The taille de votre message excède le maximum autorisé de %1 caractères. '. 'Merci de raccourcir votre le message et de le soumettre à nouveau.',
-	'UsersPMFlooded'				=> 'L&rsquo;intervalle séparant l&rsquo;envoi de messages personnels doit être d&rsquo;au moins %1 secondes.',
+	'UsersPMFlooded'			=> 'L&rsquo;intervalle séparant l&rsquo;envoi de messages personnels doit être d&rsquo;au moins %1 secondes.',
 	'UsersPMSent'				=> 'le message personnel a été transmis à l&rsquo;utilisateur.',
 	'UsersPMPlnSent'			=> 'Le message personnel a été transmis à l&rsquo;utilisateur en texte brut.',
 	'UsersPMBody'				=> 'Ce message vous a été envoyé par l&rsquo;utilisateur %1 de %2. Pour répondre à ce courriel, '.
@@ -853,7 +853,7 @@ $wacko_translation = array(
 	'News'						=> 'Nouvelles',
 	'NewsName'					=> 'Titre',
 	'NewsSubmit'				=> 'Ajouter',
-	'NewsNoName'					=> 'Vous avez oublié d&rsquo;ajouter la manchette des nouvelles.',
+	'NewsNoName'				=> 'Vous avez oublié d&rsquo;ajouter la manchette des nouvelles.',
 	'NewsNotAvailable'			=> 'Pas de nouvelles disponibles.',
 	'NewsNoClusterDefined'		=> 'Pas de groupes de nouvelles définis.',
 	'NewsDiscuss'				=> 'Discuter cet article ...',
@@ -977,7 +977,7 @@ $wacko_translation = array(
 	'PollsError'				=> 'Erreur',
 	'PollsStartMod'				=> 'Sondage actif',
 	'PollsEmptyList'			=> 'La liste des sondages est vide.',
-	'PollsNotExists'				=> 'L&rsquo;enquête demandée n&rsquo;existe pas.',
+	'PollsNotExists'			=> 'L&rsquo;enquête demandée n&rsquo;existe pas.',
 	'PollsAlreadyVoted'			=> 'Vous avez déjà répondu à cette enquête.',
 	'PollsAlreadyEnded'			=> 'L&rsquo;enquête est terminée.',
 	'PollsDone'					=> 'Merci de votre participation ! Votre vote a été pris en compte.',
@@ -1047,7 +1047,7 @@ $wacko_translation = array(
 	// Admin panel
 	'Authorization'				=> 'Autorisation',
 	'AuthorizationTip'			=> 'Merci d&rsquo;indiquer le mot de passe d&rsquo;administration (assurez-vous également que les cookies soient autorisés par votre navigateur).',
-	'NoRecoceryPassword'			=> 'le mot de passe d&rsquo;administration n&rsquo;est pas spécifié !',
+	'NoRecoceryPassword'		=> 'le mot de passe d&rsquo;administration n&rsquo;est pas spécifié !',
 	'NoRecoceryPasswordTip'		=> 'Note&nbsp;: l&rsquo; absence de mot de passe d&rsquo;administration constitue une menace pour la sécurité ! Saisissez votre mot de passe dans le fichier de configuration et exécutez le programme de nouveau.',
 
 	'LogFilterTip'				=> 'Filtrer les événements par critère',
