@@ -11,7 +11,10 @@ if(array_key_exists('wacko_version', $config))
 {
 	if ($config['wacko_version'][0] < 5)
 	{
+		$config['is_update'] = null;
 		echo '<ul class="security"><li>'.preg_replace(array('/%1/', '/%2/'), array($config['wacko_version'], WACKO_VERSION), $lang['PleaseUpgradeToR5'])."</li></ul>\n";
+		// http://sourceforge.net/projects/wackowiki/files/
+		// http://wackowiki.sourceforge.net/doc/Dev/Release/R50/Upgrade
 	}
 	else
 	{
@@ -67,7 +70,7 @@ foreach($lang_codes as $key => $value)
 	echo " class=\"input_lang\"><label for=\"lang_".$key."\" class=\"label_lang\">".$value." (".$key.")</label><br />\n";
 }
 
-if (!empty($config['is_update']))
+if (isset($config['is_update']))
 {
 ?>
 	<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" />
