@@ -20,10 +20,10 @@ if ($config['language'] == $lng)
 	#insert_page('MesPages', 'Mes Pages', '{{mypages}}', $lng, 'Admins', true, false);
 	#insert_page('MesModifications', 'Mes Modifications', '{{mychanges}}', $lng, 'Admins', true, false);
 
-	insert_page('Category', 'Category', '{{category}}', $lng, 'Admins', false, false);
-	insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
+	insert_page('Catégories', 'Catégories', '{{category}}', $lng, 'Admins', false, false);
+	insert_page('Permaliens', 'Liens permanents', '{{permalinkproxy}}', $lng, 'Admins', false, false);
 	insert_page('Groups', 'Groups', '{{groups}}', $lng, 'Admins', false, false);
-	insert_page('Users', 'Utilisateurs', '{{users}}', $lng, 'Admins', false, false);
+	insert_page('Utilisateurs', 'Utilisateurs', '{{users}}', $lng, 'Admins', false, false);
 }
 
 insert_page('Modifications', 'Modifications', '{{changes}}', $lng, 'Admins', false, true, 'Modifications');
