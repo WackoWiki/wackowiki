@@ -269,13 +269,13 @@ if ( isset($config['multilanguage']) && $config['multilanguage'] == 1)
 	{
 		if(1 == preg_match('/^inserts\.(.*?)\.php$/', $file, $match))
 		{
-			$langlist[] = $match[1];
+			$lang_list[] = $match[1];
 		}
 	}
 
 	closedir($handle);
 
-	foreach ($langlist as $_lang)
+	foreach ($lang_list as $_lang)
 	{
 		unset($lng);
 		unset($languages);
