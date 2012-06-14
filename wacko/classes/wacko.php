@@ -1574,7 +1574,7 @@ class Wacko
 	// $mute			- supress email reminders and xml rss recompilation
 	// $user_name		- attach guest pseudonym
 	// $user_page		- user is page owner
-	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = false, $mute = false, $user_name = false, $user_page = false)
+	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $lang = '', $mute = false, $user_name = false, $user_page = false)
 	{
 		$desc = '';
 		// user data
@@ -1678,7 +1678,7 @@ class Wacko
 			// PAGE DOESN'T EXISTS, SAVING A NEW PAGE
 			if (!$old_page = $this->load_page('', $page_id))
 			{
-				if (!isset($lang))
+				if (empty($lang))
 				{
 					$lang_list = $this->available_languages();
 
