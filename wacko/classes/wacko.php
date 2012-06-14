@@ -31,7 +31,7 @@ class Wacko
 	var $timer;
 	var $toc_context			= array();
 	var $search_engines			= array('bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider', );
-	var $_langlist				= null;
+	var $_lang_list				= null;
 	var $languages				= null;
 	var $translations			= null;
 	var $wanted_cache			= null;
@@ -456,7 +456,7 @@ class Wacko
 
 	function available_languages()
 	{
-		if (!$this->_langlist)
+		if (!$this->_lang_list)
 		{
 			$handle = opendir('lang');
 
@@ -468,16 +468,16 @@ class Wacko
 				&& !is_dir('lang/'.$file)
 				&& 1 == preg_match('/^wacko\.(.*?)\.php$/', $file, $match))
 				{
-					$langlist[] = $match[1];
+					$lang_list[] = $match[1];
 				}
 			}
 
 			closedir($handle);
-			sort($langlist, SORT_STRING);
-			$this->_langlist = $langlist;
+			sort($lang_list, SORT_STRING);
+			$this->_lang_list = $lang_list;
 		}
 
-		return $this->_langlist;
+		return $this->_lang_list;
 	}
 
 	function user_agent_language()
@@ -553,12 +553,12 @@ class Wacko
 
 	function determine_lang()
 	{
-		$langlist = $this->available_languages();
+		$lang_list = $this->available_languages();
 
 		//!!!! wrong code, maybe!
 		if ((isset($this->method) && $this->method == 'edit') && (isset($_GET['add']) && $_GET['add'] == 1))
 		{
-			if (isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], $langlist))
+			if (isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], $lang_list))
 			{
 				$lang = $_REQUEST['lang'];
 			}
@@ -1240,7 +1240,7 @@ class Wacko
 
 	function set_page($page)
 	{
-		$langlist	= $this->available_languages();
+		$lang_list	= $this->available_languages();
 		$this->page	= $page;
 
 		if ($this->page['tag'])
@@ -1252,7 +1252,7 @@ class Wacko
 		{
 			$this->page_lang = $page['lang'];
 		}
-		else if (isset($_REQUEST['add']) && isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], $langlist))
+		else if (isset($_REQUEST['add']) && isset($_REQUEST['lang']) && in_array($_REQUEST['lang'], $lang_list))
 		{
 			$this->page_lang = $_REQUEST['lang'];
 		}
@@ -1680,9 +1680,9 @@ class Wacko
 			{
 				if (!isset($lang))
 				{
-					$langlist = $this->available_languages();
+					$lang_list = $this->available_languages();
 
-					if ($_REQUEST['lang'] && in_array($_REQUEST['lang'], $langlist))
+					if ($_REQUEST['lang'] && in_array($_REQUEST['lang'], $lang_list))
 					{
 						$lang = $_REQUEST['lang'];
 					}
