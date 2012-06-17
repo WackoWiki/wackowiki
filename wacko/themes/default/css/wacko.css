@@ -110,6 +110,10 @@ del.diff {
 	padding:0.25em;
 }
 
+.code code{
+	background: #FFFFFF;
+}
+
 .notes { color: #888800; }
 
 /** Table-related ************************************************************/
