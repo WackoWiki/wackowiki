@@ -26,6 +26,16 @@ if ($this->has_access('read'))
 		}
 	}
 
+	if ($user = $this->get_user())
+	{
+		$user_name = strtolower($this->get_user_name());
+		$registered = true;
+	}
+	else
+	{
+		$user_name = GUEST;
+	}
+
 	// display files!
 	if ($this->page && $_SESSION[$this->config['session_prefix'].'_'.'show_files'][$this->page['page_id']])
 	{
@@ -41,16 +51,6 @@ if ($this->has_access('read'))
 		echo '</div>';
 
 		// display form
-		if ($user = $this->get_user())
-		{
-			$user_name = strtolower($this->get_user_name());
-			$registered = true;
-		}
-		else
-		{
-			$user_name = GUEST;
-		}
-
 		if (isset($registered)
 			&&
 				(
