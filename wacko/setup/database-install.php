@@ -198,6 +198,7 @@ $config_db['enable_comments']				= $config['enable_comments'];
 $config_db['enable_email']					= $config['enable_email'];
 $config_db['enable_email_notification']		= $config['enable_email_notification'];
 $config_db['enable_feeds']					= $config['enable_feeds'];
+$config_db['enable_security_headers']		= $config['enable_security_headers'];
 $config_db['footer_comments']				= $config['footer_comments'];
 $config_db['footer_files']					= $config['footer_files'];
 $config_db['footer_rating']					= $config['footer_rating'];
