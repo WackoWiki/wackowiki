@@ -261,7 +261,7 @@ class paragrafica
 									"|".
 		"<\!--action:begin-->include\s+[^=]+=([^\xA1 ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->".
 		// {{include xxxx="TAG" notoc="1"}}
-									"!si", array( &$this, 'add_toc_entry' ), $what );
+									"!i", array( &$this, 'add_toc_entry' ), $what );
 
 		return $what;
 	}
@@ -269,9 +269,12 @@ class paragrafica
 	// for further TOC creation routines
 	function add_toc_entry($matches)
 	{
+		if (!isset($matches[6])) $matches[6] = '';
+		if (!isset($matches[8])) $matches[8] = '';
+
 		if ((isset($matches[7])) && $matches[7] != '')
 		{
-			if (isset($matches[8]) && $matches[8] == '')
+			if ($matches[8] == '')
 			{
 				$this->toc[] = array($this->wacko->unwrap_link(trim($matches[7],'"')), '(include)', 99999);
 			}
@@ -279,7 +282,7 @@ class paragrafica
 		else
 		{
 			// id, text, depth
-			if ((isset($matches[6])) && $matches[6] != '')
+			if ($matches[6] != '')
 			{
 				$this->toc[] = array($matches[6], '(p)', 77777);
 			}
