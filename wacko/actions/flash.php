@@ -60,6 +60,7 @@ if (!isset($allowscriptaccess)) $allowscriptaccess = '';
 if (!isset($seamlesstabbing)) $seamlesstabbing = '';
 if (!isset($allowfullscreen)) $allowfullscreen = '';
 if (!isset($allownetworking)) $allownetworking = '';
+if (!isset($flashvars)) $flashvars = '';
 
 if (!isset($url)) $url = '';
 if (!isset($width)) $width = '';
