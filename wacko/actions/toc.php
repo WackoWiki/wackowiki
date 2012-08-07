@@ -10,23 +10,24 @@ if (!defined('IN_WACKO'))
 */
 // 1. check for first param (for what TOC is built)
 
-if (!isset($nomark)) $nomark = '';
-if (!isset($for)) $for = '';
-if (!isset($from)) $from = '';
-if (!isset($page)) $page = '';
-if (!isset($numerate)) $numerate = '';
-if (!isset($to)) $to = '';
-if (!isset($legend)) $legend = '';
+if (!isset($nomark))	$nomark = '';
+if (!isset($for))		$for = '';
+if (!isset($from))		$from = '';
+if (!isset($page))		$page = '';
+if (!isset($numerate))	$numerate = '';
+if (!isset($to))		$to = '';
+if (!isset($legend))	$legend = '';
 
-if ($for) $page = $for;
+if ($for)				$page = $for;
 if ($page)
 {
 	$page		= $this->unwrap_link($page);
 	$ppage		= '/'.$page;
 	$context	= $page;
 	$_page		= $this->load_page($page);
-	if (!$legend) $legend = $page;
-	if ($_page) $link		= $this->href('', $_page['tag']);
+
+	if (!$legend)	$legend = $page;
+	if ($_page)		$link	= $this->href('', $_page['tag']);
 }
 else
 {
@@ -46,7 +47,7 @@ $end_depth		= $to[1];
 // 3. output
 if (!$nomark)
 {
-	echo "<div class=\"layout-box\"><p class=\"layout-box\"><span> ".$this->get_translation('TOCTitle')." ".$this->link($ppage, '', $legend)." </span></p>";
+	echo '<div class="layout-box"><p class="layout-box"><span> '.$this->get_translation('TOCTitle').' '.$this->link($ppage, '', $legend).' </span></p>';
 }
 
 if ($_page)
@@ -108,8 +109,8 @@ if ($_page)
 			// the source page, adding there [tsyfirki]
 			if (!$ppage)
 			{
-				$this->post_wacko_toc = &$toc;
-				$this->post_wacko_action['toc'] = 1;
+				$this->post_wacko_toc			= &$toc;
+				$this->post_wacko_action['toc']	= 1;
 			}
 		} // --------------------------------------------------------------
 		// display!
@@ -132,7 +133,7 @@ else
 
 if (!$nomark)
 {
-	echo "</div>";
+	echo '</div>';
 }
 
 ?>
