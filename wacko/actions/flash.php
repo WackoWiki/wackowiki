@@ -70,7 +70,7 @@ if (!isset($id)) $id = '';
 if (!isset($styleclass)) $styleclass = '';
 if (!isset($align)) $align = '';
 
-if (!$url) $url = isset($vars['url']) ? $vars['url'] : "";
+if (!$url) $url = isset($vars['url']) ? $vars['url'] : '';
 $url = htmlspecialchars($url);
 
 if(!$width) $width = 550;
@@ -80,7 +80,7 @@ if(!$version) $version = '10.0.0';
 
 if (!$url)
 {
-	echo "<p><i>".$this->get_translation('FlashNoURL')."</i></p>\n";
+	echo '<p><i>'.$this->get_translation('FlashNoURL')."</i></p>\n";
 }
 else if($url)
 {
@@ -93,7 +93,7 @@ else if($url)
 
 	// Write Params
 	$written = 0;
-	$params = array('play', 'loop', 'menu', 'quality', 'scale', 'salign', 'wmode', 'bgcolor', 'base', 'quality', 'swliveconnect', 'devicefont', 'allowscriptaccess', 'seamlesstabbing', 'allowfullscreen', 'allownetworking');
+	$params = array('play', 'loop', 'menu', 'quality', 'scale', 'salign', 'wmode', 'bgcolor', 'base', 'quality', 'swliveconnect', 'devicefont', 'allowscriptaccess', 'seamlesstabbing', 'allowfullscreen', 'allownetworking', 'flashvars');
 
 	for($i = 0; $i < count($params); $i++)
 	{
@@ -112,8 +112,8 @@ else if($url)
 	echo '}, {';
 
 	// Write Attributes
-	$written = 0;
-	$attributes = array('id', 'name', 'styleclass', 'align');
+	$written	= 0;
+	$attributes	= array('id', 'name', 'styleclass', 'align');
 
 	for($i = 0; $i < count($attributes); $i++)
 	{
