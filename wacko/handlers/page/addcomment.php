@@ -33,7 +33,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	}
 
 	// watch page
-	if ($this->page && isset($_POST['watchpage']) && (isset($_POST['noid_publication']) && $_POST['noid_publication'] != $this->tag) && $user && $this->iswatched !== true)
+	if ($this->page && isset($_POST['watchpage']) && (isset($_POST['noid_publication']) && $_POST['noid_publication'] != $this->page['page_id']) && $user && $this->iswatched !== true)
 	{
 		$this->set_watch($user['user_id'], $this->page['page_id']);
 	}
@@ -100,7 +100,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$_SESSION['comment_delay']	= time();
 
 		// publish anonymously
-		if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->tag)
+		if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])
 		{
 			// undefine username
 			$remember_name = $this->get_user_name();
@@ -119,7 +119,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$this->log(5, str_replace('%2', $this->tag.' '.$this->page['title'], str_replace('%1', 'Comment'.$num, $this->get_translation('LogCommentPosted', $this->config['language']))));
 
 			// restore username after anonymous publication
-			if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->tag)
+			if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])
 			{
 				$this->set_user_setting('user_name', $remember_name);
 				unset($remember_name);
