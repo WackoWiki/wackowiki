@@ -41,7 +41,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		$textchars	= strlen($_body);
 
 		// watch page
-		if ($this->page && isset($_POST['watchpage']) && $_POST['noid_publication'] != $this->tag && $user && $this->iswatched !== true)
+		if ($this->page && isset($_POST['watchpage']) && $_POST['noid_publication'] != $this->page['page_id'] && $user && $this->iswatched !== true)
 		{
 			$this->set_watch($user['user_id'], $this->page['page_id']);
 			$this->iswatched = true;
@@ -124,7 +124,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 			if (!$error)
 			{
 				// publish anonymously
-				if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->tag)
+				if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])
 				{
 					// undefine username
 					$remember_name = $this->get_user_name();
@@ -156,7 +156,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 					}
 
 					// restore username after anonymous publication
-					if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->tag)
+					if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])
 					{
 						$this->set_user_setting('user_name', $remember_name);
 						unset($remember_name);
@@ -349,7 +349,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 			// publish anonymously
 			if (($this->page && $this->config['publish_anonymously'] != 0 && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 			{
-				$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".htmlspecialchars($this->tag)."\"".( $this->get_user_setting('noid_pubs') == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">".$this->get_translation('PostAnonymously')."</label></small>";
+				$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".$this->page['page_id']."\"".( $this->get_user_setting('noid_pubs') == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">".$this->get_translation('PostAnonymously')."</label></small>";
 				$output .= "<br />";
 			}
 
