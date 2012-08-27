@@ -104,7 +104,7 @@ if (!function_exists('tag_search'))
 
 if (!function_exists('get_line_with_phrase'))
 {
-	function get_line_with_phrase($phrase, $string, $insensitive = true, $cleanup)
+	function get_line_with_phrase($phrase, $string, $insensitive = true, $cleanup = '')
 	{
 		$lines	= explode("\n", $string);
 		$result	= '';
@@ -131,7 +131,7 @@ if (!function_exists('get_line_with_phrase'))
 					}
 				}
 
-				$result .= $cleanup ? str_replace("$phrase", '', $line) : $line;
+				$result .= $cleanup ? str_replace('$phrase', '', $line) : $line;
 			}
 		}
 
@@ -243,6 +243,7 @@ if (!isset($nomark))	$nomark = '';
 if (!isset($for))		$for = '';
 if (!isset($term))		$term = '';
 if (!isset($options))	$options = 1;
+$output = '';
 
 if ($user = $this->get_user())
 {
