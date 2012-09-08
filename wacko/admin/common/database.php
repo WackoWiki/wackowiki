@@ -568,10 +568,16 @@ function PutData(&$engine, $pack, $table, $mode)
 			$data[$i++] = '';
 
 			$row = explode("\t", $row);
+
 			// unescape divider chars
-			$row = str_replace('\\\\', "\\", $row);
-			$row = str_replace('\\n',  "\n", $row);
-			$row = str_replace('\\t',  "\t", $row);
+			foreach($row as &$rstr)
+			{
+				$rstr = strtr($rstr, array(
+					"\\\\" => "\\",
+					'\\n' => "\n",
+					'\\t' => "\t"
+					));
+			}
 
 			// prepare data
 			$j = 0;
