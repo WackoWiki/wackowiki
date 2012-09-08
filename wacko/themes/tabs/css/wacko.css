@@ -85,7 +85,7 @@ del.diff {
 
 /* Code areas: SYNTAX %%code%% */
 
-.code {
+.code, .code-break {
   background: #FFFFFF;
   border: 1px #888888 solid;
   font-family: "Courier New";
@@ -94,6 +94,11 @@ del.diff {
   overflow:auto;
   padding:0.25em;
   line-height: 1.2em;
+}
+
+.code-break {
+	white-space: pre;           /* CSS 2.0 */
+	white-space: pre-wrap;      /* CSS 2.1 */
 }
 
 .notes {  color: #888800; }
