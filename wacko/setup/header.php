@@ -66,7 +66,7 @@ function write_config_hidden_nodes($skip_values)
 global $config;
 
 // If we have any config data in the _POST then it means they have somehow navigated backwards so we should preserve their updated values.
-if ( isset ( $_POST['config'] ) )
+if (isset($_POST['config']))
 {
 	$config = $_POST['config'];
 }

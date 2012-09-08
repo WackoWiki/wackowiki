@@ -46,6 +46,7 @@ $config_file['base_url']				= $config['base_url'];
 // database connection
 $config_file['database_collation']		= $config['database_collation'];
 $config_file['database_driver']			= $config['database_driver'];
+$config_file['database_engine']			= $config['database_engine'];
 $config_file['database_host']			= $config['database_host'];
 $config_file['database_port']			= $config['database_port'];
 $config_file['database_database']		= $config['database_database'];

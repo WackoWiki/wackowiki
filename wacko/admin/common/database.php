@@ -277,7 +277,7 @@ function GetTable(&$engine, $table, $drop = true)
 	$key_query		= "SHOW KEYS FROM $table";
 	$collation_db	= $engine->load_single("SELECT @@collation_database");
 
-	if ($drop == true) $schema_create .= "DROP TABLE IF EXISTS $table;\n";
+	if ($drop == true) $schema_create .= "DROP TABLE IF EXISTS `$table`;\n";
 
 	$schema_create .= "CREATE TABLE IF NOT EXISTS `$table` (\n";
 
@@ -340,7 +340,7 @@ function GetTable(&$engine, $table, $drop = true)
 			$schema_create .= "	KEY `$x` (" . implode($columns, ', ') . ')';
 	}
 
-	$schema_create .= "\n) ENGINE=MyISAM DEFAULT CHARSET={$collation_db['@@collation_database']};"; // TODO: CHARSET per table
+	$schema_create .= "\n) ENGINE={$engine->config['database_engine']} CHARSET={$collation_db['@@collation_database']};"; // TODO: CHARSET per table
 
 	if (get_magic_quotes_runtime())
 		return (stripslashes($schema_create));
@@ -525,6 +525,8 @@ function PutTable(&$engine, $pack)
 	// read sql data
 	$dir = $engine->config['upload_path_backup'].'/'.$pack.'/';
 	$sql = explode(';', file_get_contents($dir.BACKUP_FILE_STRUCTURE));
+
+	array_pop($sql);
 
 	// perform
 	$t = 0;

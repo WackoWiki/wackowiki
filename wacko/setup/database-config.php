@@ -49,6 +49,7 @@
 
 write_config_hidden_nodes(array(
 	'database_driver' => '',
+	'database_engine' => '',
 	'database_host' => '',
 	'database_port' => '',
 	'database_database' => '',
