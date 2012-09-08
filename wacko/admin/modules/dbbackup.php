@@ -128,7 +128,7 @@ function admin_dbbackup(&$engine, &$module)
 
 			// write data (strip last semicolon
 			// off the sql) and close file
-			fwrite($file, substr($sql, 0, strrpos($sql, ';')));
+			fwrite($file, $sql); // see array_pop($sql); on database.php
 			fclose($file);
 			chmod($filename, 0644);
 		}
