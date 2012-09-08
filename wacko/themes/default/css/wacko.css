@@ -99,7 +99,7 @@ del.diff {
 
 /* Code areas: SYNTAX %%code%% */
 
-.code {
+.code, .code-break {
 	background: #FFFFFF;
 	border: 1px #888888 solid;
 	/* border-radius: 5px; */
@@ -108,6 +108,11 @@ del.diff {
 	margin:1em 1.75em;
 	overflow:auto;
 	padding:0.25em;
+}
+
+.code-break {
+	white-space: pre;           /* CSS 2.0 */
+	white-space: pre-wrap;      /* CSS 2.1 */
 }
 
 .code code{

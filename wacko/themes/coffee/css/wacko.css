@@ -71,8 +71,11 @@ del.diff { color: #c00; font-style: italic; text-decoration: line-through }
 
 /* Code areas: SYNTAX %%code%% */
 
-.code { border: solid #888888 2px; width: 80%; padding: 3px; background: #FFFFFF; color: black; font: 10pt Lucida Console }
-
+.code, .code-break { border: solid #888888 2px; width: 80%; padding: 3px; background: #FFFFFF; color: black; font: 10pt Lucida Console }
+.code-break {
+	white-space: pre;           /* CSS 2.0 */
+	white-space: pre-wrap;      /* CSS 2.1 */
+}
 .notes { color: #888800 }
 
 
