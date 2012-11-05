@@ -129,7 +129,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"show_menu_tag TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"allow_rawhtml TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
 					"disable_safehtml TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
-					"noindex TINYINT(1) UNSIGNED NULL DEFAULT NULL,".
+					"noindex TINYINT(1) UNSIGNED NULL DEFAULT '0',".
 					"deleted TINYINT(1) UNSIGNED NULL DEFAULT '0',".
 					"PRIMARY KEY (page_id),".
 					"KEY idx_user_id (user_id),".
