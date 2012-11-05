@@ -48,7 +48,7 @@ $update_page_r5_0_2 = "UPDATE {$pref}page SET body_toc = ''";
 
 // WATCH
 
-/* $table_word_r4_3 = "CREATE TABLE {$pref}word (".
+/* $table_word_r5_0 = "CREATE TABLE {$pref}word (".
 					"word_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"word VARCHAR(255) NOT NULL DEFAULT '',".
 					"replacement VARCHAR(255) NOT NULL DEFAULT '',".

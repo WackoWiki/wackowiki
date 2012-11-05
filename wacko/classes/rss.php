@@ -296,6 +296,7 @@ class RSS
 			"SELECT page_id, tag, modified ".
 			"FROM {$prefix}page ".
 			"WHERE comment_on_id = '0' ".
+				"AND noindex <> '1' ".
 			"ORDER BY modified DESC, BINARY tag");
 
 		$xml = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n";
