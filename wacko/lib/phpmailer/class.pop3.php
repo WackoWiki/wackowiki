@@ -2,7 +2,7 @@
 /*~ class.pop3.php
 .---------------------------------------------------------------------------.
 |  Software: PHPMailer - PHP email class                                    |
-|   Version: 5.2.1                                                          |
+|   Version: 5.2.2                                                          |
 |      Site: https://code.google.com/a/apache-extras.org/p/phpmailer/       |
 | ------------------------------------------------------------------------- |
 |     Admin: Jim Jagielski (project admininistrator)                        |
@@ -32,19 +32,19 @@
  * @copyright 2010 - 2012 Jim Jagielski
  * @copyright 2004 - 2009 Andy Prevost
  * @license http://www.gnu.org/copyleft/lesser.html Distributed under the Lesser General Public License (LGPL)
- * @version $Id: class.pop3.php 450 2010-06-23 16:46:33Z coolbru $
  */
 
 /**
  * POP Before SMTP Authentication Class
- * Version 5.2.1
+ * Version 5.2.2
  *
- * Author: Richard Davey (rich@corephp.co.uk)
+ * Orig Author: Richard Davey (rich@corephp.co.uk)
  * Modifications: Andy Prevost
+ * Modifications: Jim Jagielski
  * License: LGPL, see PHPMailer License
  *
  * Specifically for PHPMailer to allow POP before SMTP authentication.
- * Does not yet work with APOP - if you have an APOP account, contact Richard Davey
+ * Does not yet work with APOP - if you have an APOP account, contact Jim Jagielski
  * and we can test changes to this script.
  *
  * This class is based on the structure of the SMTP class originally authored by Chris Ryan
@@ -53,7 +53,9 @@
  * required for POP3 connection, authentication and disconnection.
  *
  * @package PHPMailer
- * @author Richard Davey
+ * @author Richard Davey (orig)
+ * @author Andy Prevost
+ * @author Jim Jagielski
  */
 
 class POP3 {
@@ -115,7 +117,7 @@ class POP3 {
    * Sets the POP3 PHPMailer Version number
    * @var string
    */
-  public $Version         = '5.2.1';
+  public $Version         = '5.2.2-rc1';
 
   /////////////////////////////////////////////////
   // PROPERTIES, PRIVATE AND PROTECTED
