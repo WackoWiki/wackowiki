@@ -27,6 +27,8 @@ $engine		= 'ENGINE='.$config['database_engine'];
 // PAGE
 $update_page_r5_0_1 = "UPDATE {$pref}page SET body_r = ''";
 $update_page_r5_0_2 = "UPDATE {$pref}page SET body_toc = ''";
+$update_page_r5_1_0 = "UPDATE {$pref}page AS page SET noindex = '0' WHERE page.noindex IS NULL";
+
 
 // POLL
 

@@ -477,6 +477,15 @@ switch($config['database_driver'])
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r5_0_1, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r5_0_2, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 
+					echo "            </ol>\n";
+
+				// upgrade from R5.1.0 to R5.1.x
+				case '5.1.0':
+					echo "         <h2>Wacko 5.1.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r5_1_0, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
+
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
 
@@ -634,6 +643,15 @@ switch($config['database_driver'])
  */
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r5_0_1), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r5_0_2), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
+
+					echo "            </ol>\n";
+
+				// upgrade from R5.1.0 to R5.1.x
+				case '5.1.0':
+					echo "         <h2>Wacko 5.1.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r5_1_0), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -808,8 +826,18 @@ switch($config['database_driver'])
 					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r5_0_1, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r5_0_2, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
 
+					echo "            </ol>\n";
+
+				// upgrade from R5.1.0 to R5.1.x
+				case '5.1.0':
+					echo "         <h2>Wacko 5.1.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
+					echo "         <ol>\n";
+
+					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r5_1_0, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
+
 					// inserting config values
 					test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
+
 
 					echo "            </ol>\n";
 					echo "         <br />\n";
