@@ -142,8 +142,8 @@ if ($pages = array_merge($pages1, $pages2, $files))
 				}
 				else
 				{
-					$path2 = '_file:';
-					$on_page	= '&rarr; '.'global';
+					$path2		= '_file:';
+					$on_page	= '<span title="">&rarr; '.'global';
 				}
 
 				echo "<img src=\"".$this->config['theme_url']."icons/attachment.png"."\" title=\"".$this->get_translation('NewFileAdded')."\" alt=\"[file]\" /> ".''.$this->link($path2.$page['title'], '', $page['title'], '', 0, 1).' '.$on_page.$separator.$author.'</span>';
