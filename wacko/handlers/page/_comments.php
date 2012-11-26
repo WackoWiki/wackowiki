@@ -134,17 +134,20 @@ if ($this->has_access('read'))
 				echo $this->format($strings, 'post_wacko')."\n";
 				echo "</div>\n";
 				echo "<ul class=\"commentinfo\">\n".
-				"<li>".($comment['owner_name']
-				? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name'])."\">".$comment['owner_name']."</a>"
-										: $this->get_translation('Guest')).
-								"<li>".$this->get_time_string_formatted($comment['created'])."</li>\n".
-								($comment['modified'] != $comment['created']
-									? "<li>".$this->get_time_string_formatted($comment['modified'])." ".$this->get_translation('CommentEdited')."</li>\n"
-									: '').
-								/*($user_stats == true
-				? "<li>".$this->get_translation('UsersComments').': '.$user_stats['comments'].'&nbsp;&nbsp; '.$this->get_translation('UsersPages').': '.$user_stats['pages'].'&nbsp;&nbsp; '.$this->get_translation('UsersRevisions').': '.$user_stats['revisions']."</li>\n"
-				: '').*/
-				"</ul>\n";
+						"<li>".
+						($comment['owner_name']
+							? "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$comment['owner_name'])."\">".$comment['owner_name']."</a>"
+							: $this->get_translation('Guest')
+						).
+						"</li>".
+						"<li>".$this->get_time_string_formatted($comment['created'])."</li>\n".
+						($comment['modified'] != $comment['created']
+							? "<li>".$this->get_time_string_formatted($comment['modified'])." ".$this->get_translation('CommentEdited')."</li>\n"
+							: '').
+						/*($user_stats == true
+							? "<li>".$this->get_translation('UsersComments').': '.$user_stats['comments'].'&nbsp;&nbsp; '.$this->get_translation('UsersPages').': '.$user_stats['pages'].'&nbsp;&nbsp; '.$this->get_translation('UsersRevisions').': '.$user_stats['revisions']."</li>\n"
+							: '').*/
+					"</ul>\n";
 				echo "</li>";
 			}
 
@@ -188,7 +191,7 @@ if ($this->has_access('read'))
 				<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?><?php if (isset($payload)) echo htmlspecialchars($payload) ?></textarea>
 
 				<label for="addcomment_title"><?php echo $this->get_translation('AddCommentTitle');?></label><br />
-				<input id="addcomment_title" name="title" size="60" maxlength="100" value="<?php if (isset($title)) echo $title; ?>" ><br />
+				<input id="addcomment_title" name="title" size="60" maxlength="100" value="<?php if (isset($title)) echo $title; ?>" /><br />
 
 			<?php
 			if ($user)
