@@ -207,7 +207,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 		// user-owned pages
 		$limit = 20;
-		echo '<h2 id="pages">'.$this->get_translation('UsersPages').'</a></h2>'."\n";
+		echo '<h2 id="pages">'.$this->get_translation('UsersPages').'</h2>'."\n";
 		echo '<div class="indent"><small>'.$this->get_translation('UsersOwnedPages').': '.$user['total_pages'].'&nbsp;&nbsp;&nbsp; '.$this->get_translation('UsersRevisionsMade').': '.$user['total_revisions']."</small></div><br />\n";
 
 		$pagination = $this->pagination($user['total_pages'], $limit, 'd', 'profile='.$user['user_name'].'&amp;sort='.( isset($_GET['sort']) && $_GET['sort'] != 'name' ? 'date' : 'name' ).'#pages');
