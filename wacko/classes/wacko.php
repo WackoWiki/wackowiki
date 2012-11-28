@@ -859,7 +859,7 @@ class Wacko
 	}
 
 	// wrapper for old_load_page
-	function load_page($tag, $page_id = 0, $revision_id = '', $cache = LOAD_CACHE, $metadataonly = LOAD_ALL)
+	function load_page($tag, $page_id = 0, $revision_id = '', $cache = LOAD_CACHE, $metadata_only = LOAD_ALL)
 	{
 		$page = '';
 
@@ -881,19 +881,19 @@ class Wacko
 		// 1. search for page_id (... is preferred, $supertag next)
 		if ($page_id != 0)
 		{
-			$page = $this->old_load_page('', $page_id, $revision_id, $cache, false, $metadataonly);
+			$page = $this->old_load_page('', $page_id, $revision_id, $cache, false, $metadata_only);
 		}
 
 		// 2. search for supertag
 		if (!$page)
 		{
-			$page = $this->old_load_page($this->translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), 0, $revision_id, $cache, true, $metadataonly);
+			$page = $this->old_load_page($this->translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), 0, $revision_id, $cache, true, $metadata_only);
 		}
 
 		// 3. if not found, search for tag
 		if (!$page)
 		{
-			$page = $this->old_load_page($tag, 0, $revision_id, $cache, false, $metadataonly);
+			$page = $this->old_load_page($tag, 0, $revision_id, $cache, false, $metadata_only);
 		}
 
 		// 4. still nothing? file under wanted
@@ -908,7 +908,7 @@ class Wacko
 		return $page;
 	}
 
-	function old_load_page($tag, $page_id = 0, $revision_id = '', $cache = 1, $supertagged = false, $metadataonly = 0)
+	function old_load_page($tag, $page_id = 0, $revision_id = '', $cache = 1, $supertagged = false, $metadata_only = 0)
 	{
 		$supertag = '';
 
@@ -928,13 +928,13 @@ class Wacko
 		}
 
 		// retrieve from cache
-		if (!$revision_id && $cache && ($cached_page = $this->get_cached_page($supertag, $page_id, $metadataonly)))
+		if (!$revision_id && $cache && ($cached_page = $this->get_cached_page($supertag, $page_id, $metadata_only)))
 		{
 			$page = $cached_page;
 		}
 
 		// load page
-		if ($metadataonly)
+		if ($metadata_only)
 		{
 			$what_p = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.keywords, p.description, p.noindex, u.user_name, o.user_name AS owner_name';
 			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.keywords, p.description, s.noindex, u.user_name, o.user_name AS owner_name';
@@ -966,7 +966,7 @@ class Wacko
 
 				if ($revision_id && $revision_id != $page['page_id'])
 				{
-					$this->cache_page($page, $page_id, $metadataonly);
+					$this->cache_page($page, $page_id, $metadata_only);
 
 					$page = $this->load_single(
 						"SELECT p.revision_id, ".$what_r." ".
@@ -997,7 +997,7 @@ class Wacko
 
 				if ($revision_id && $revision_id != $page['page_id'])
 				{
-					$this->cache_page($page, $page_id, $metadataonly);
+					$this->cache_page($page, $page_id, $metadata_only);
 
 					$page = $this->load_single(
 						"SELECT ".$what_r." ".
@@ -1017,19 +1017,19 @@ class Wacko
 		// cache result
 		if (!$revision_id && !$cached_page)
 		{
-			$this->cache_page($page, $page_id, $metadataonly);
+			$this->cache_page($page, $page_id, $metadata_only);
 		}
 
 		return $page;
 	}
 
-	function get_cached_page($supertag, $page_id = 0, $metadataonly = 0)
+	function get_cached_page($supertag, $page_id = 0, $metadata_only = 0)
 	{
 		if ($page_id != 0)
 		{
 			if (isset($this->page_cache['page_id'][$page_id]))
 			{
-				if ($this->page_cache['page_id'][$page_id]['mdonly'] == 0 || $metadataonly == $this->page_cache['page_id'][$page_id]['mdonly'])
+				if ($this->page_cache['page_id'][$page_id]['mdonly'] == 0 || $metadata_only == $this->page_cache['page_id'][$page_id]['mdonly'])
 				{
 					return $this->page_cache['page_id'][$page_id];
 				}
@@ -1043,7 +1043,7 @@ class Wacko
 		{
 			if (isset($this->page_cache['supertag'][$supertag]))
 			{
-				if ($this->page_cache['supertag'][$supertag]['mdonly'] == 0 || $metadataonly == $this->page_cache['supertag'][$supertag]['mdonly'])
+				if ($this->page_cache['supertag'][$supertag]['mdonly'] == 0 || $metadata_only == $this->page_cache['supertag'][$supertag]['mdonly'])
 				{
 					return $this->page_cache['supertag'][$supertag];
 				}
@@ -1055,12 +1055,12 @@ class Wacko
 		}
 	}
 
-	function cache_page($page, $page_id = 0, $metadataonly = 0)
+	function cache_page($page, $page_id = 0, $metadata_only = 0)
 	{
 		if ($page_id != 0)
 		{
 			$this->page_cache['page_id'][$page['page_id']]				= $page;
-			$this->page_cache['page_id'][$page['page_id']]['mdonly']	= $metadataonly;
+			$this->page_cache['page_id'][$page['page_id']]['mdonly']	= $metadata_only;
 		}
 		else
 		{
@@ -1070,7 +1070,7 @@ class Wacko
 			}
 
 			$this->page_cache['supertag'][$page['supertag']]			= $page;
-			$this->page_cache['supertag'][$page['supertag']]['mdonly']	= $metadataonly;
+			$this->page_cache['supertag'][$page['supertag']]['mdonly']	= $metadata_only;
 		}
 	}
 
@@ -2110,6 +2110,7 @@ class Wacko
 					}
 				}
 
+				// TODO: add time parameter as config value xml_sitemap_ttl
 				if($this->config['xml_sitemap'])
 				{
 					$xml->site_map();
@@ -5042,6 +5043,18 @@ class Wacko
 
 			$this->set_config('maint_last_cache', time(), '', true);
 		}
+
+		// write xml_sitemap
+		if (($days = $this->config['xml_sitemap_ttl']) && (time() > ($this->config['maint_last_xml_sitemap'] + 3 * 86400)))
+		{
+			if($this->config['xml_sitemap'])
+			{
+				$xml->site_map();
+			}
+
+			//$this->log(7, 'Maintenance: wrote XML Sitemap');
+		}
+
 	}
 
 	// MAIN EXECUTION ROUTINE
