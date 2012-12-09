@@ -3,6 +3,16 @@ ChangeLog
 NOTE: THIS VERSION OF PHPMAILER IS DESIGNED FOR PHP5/PHP6.
       IT WILL NOT WORK WITH PHP4.
   
+Version 5.2.2 (December 3, 2012)
+  * Some fixes and syncs from https://github.com/Synchro/PHPMailer
+
+Version 5.2.2-rc2 (November 6, 2012)
+  * Fix SMTP server rotation (Bugz: 118)
+  * Allow override of autogen'ed 'Date' header (for Drupal's
+    og_mailinglist module)
+  * No whitespace after '-f' option (Bugz: 116)
+  * Work around potential warning (Bugz: 114)
+
 Version 5.2.2-rc1 (September 28, 2012)
   * Header encoding works with long lines (Bugz: 93)
   * Turkish language update (Bugz: 94)
