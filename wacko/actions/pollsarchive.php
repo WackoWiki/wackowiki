@@ -59,13 +59,13 @@ if(!$nomark)
 			}
 			else
 			{
-				$date = date('d/m/y', strtotime($row['start']));
+				$date = $this->get_time_string_formatted($row['start']);
 			}
 
 			echo ($style == 'ul' ? '<li>' : '');
 			echo '<a href="'.
 				$this->href('', '', 'year='.$year.'&amp;poll='.$row['poll_id'].'&amp;results=1').'">'.
-				$date.' (id'.$row['poll_id'].'): '.$row['text'].'</a>';
+				$date.' (#'.$row['poll_id'].'): '.$row['text'].'</a>';
 			echo ($style == 'br' ? '<br />' : '');
 			echo ($style == 'ul' ? '</li>' : '');
 		}

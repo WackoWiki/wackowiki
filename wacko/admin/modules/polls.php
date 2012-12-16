@@ -151,6 +151,7 @@ function admin_polls(&$engine, &$module)
 		// poll moderation
 		else if ($moderation === true)
 		{
+			// TODO: broken redirect #pollsadd_form with embedded action
 			echo $engine->action('pollsadd', array('moderation' => true, 'edit_id' => $edit_id, 'mode' => $mode));
 		}
 
