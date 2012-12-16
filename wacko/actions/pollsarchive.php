@@ -64,8 +64,8 @@ if(!$nomark)
 
 			echo ($style == 'ul' ? '<li>' : '');
 			echo '<a href="'.
-				$this->href('', '', 'year='.$year.'&amp;poll='.$row['id'].'&amp;results=1').'">'.
-				$date.' (id'.$row['id'].'): '.$row['text'].'</a>';
+				$this->href('', '', 'year='.$year.'&amp;poll='.$row['poll_id'].'&amp;results=1').'">'.
+				$date.' (id'.$row['poll_id'].'): '.$row['text'].'</a>';
 			echo ($style == 'br' ? '<br />' : '');
 			echo ($style == 'ul' ? '</li>' : '');
 		}
