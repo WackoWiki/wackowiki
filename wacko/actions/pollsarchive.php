@@ -78,7 +78,7 @@ if(!$nomark)
 	}
 
 	// pagination
-	echo '<small><strong>'.$this->get_translation('PollsShow').':</strong> ';
+	echo '<br /><small><strong>'.$this->get_translation('PollsShow').':</strong> ';
 
 	if ($year == 0)
 	{
