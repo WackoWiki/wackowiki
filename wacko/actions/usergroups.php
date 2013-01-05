@@ -25,10 +25,10 @@ if($user = $this->get_user())
 	{
 		if (!$nomark)
 		{
-			echo "<div class=\"layout-box\"><p class=\"layout-box\"><span>".$this->get_translation('UserGroups').":</span></p>";
+			echo '<div class="layout-box"><p class="layout-box"><span>".$this->get_translation('UserGroups').":</span></p>';
 		}
 
-		echo "<table border=\"0\" cellspacing=\"5\" cellpadding=\"5\"><tr>";
+		echo '<table border="0" cellspacing="5" cellpadding="5"><tr>';
 
 		$i = 1;
 
@@ -51,7 +51,7 @@ if($user = $this->get_user())
 			 */
 			if($this->is_admin() || in_array($user['user_name'], $arr))
 			{
-				echo "<td valign=\"top\">";
+				echo '<td valign="top">';
 
 				foreach ($arr as $k => $user_name)
 				{

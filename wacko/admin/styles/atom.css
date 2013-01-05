@@ -170,8 +170,8 @@ textarea {
 
 table.formation {
 	font-size: 12px;
-	/*border: 1px dotted #CCCCCC;
-	*/padding: 3px;
+	/*border: 1px dotted #CCCCCC;*/
+	padding: 3px;
 }
 table.formation th, tr.formation th, table.forum th {
 	color: #333333;

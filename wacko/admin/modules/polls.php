@@ -138,7 +138,7 @@ function admin_polls(&$engine, &$module)
 			echo '<input type="hidden" name="mode" value="polls" />';
 
 			echo '<input name="delete" type="hidden" value="'.$remove_id.'" />';
-			echo '<table cellspacing="3" class="formation">';
+			echo '<table class="formation">';
 			echo '<tr><th>'.$engine->get_translation('PollsConfirmDelete').'</th></tr>';
 			echo '<tr><td><em>&quot;'.$title.'&quot;</em></td></tr>';
 			echo '<tr><td>'.
@@ -161,7 +161,7 @@ function admin_polls(&$engine, &$module)
 		echo '	<form action="admin.php" method="post" name="polls">';
 		echo '<input type="hidden" name="mode" value="polls" />';
 
-		echo '<table cellspacing="3" class="formation">';
+		echo '<table class="formation">';
 		$list = $polls_obj->get_polls_list('current');
 
 		if (empty($list))
@@ -201,7 +201,7 @@ function admin_polls(&$engine, &$module)
 			echo '	<form action="admin.php" method="post" name="polls">';
 			echo '<input type="hidden" name="mode" value="polls" />';
 
-		echo '<table cellspacing="3" class="formation">';
+		echo '<table class="formation">';
 		$list = $polls_obj->get_polls_list('moderation');
 
 		if (empty($list))
@@ -252,7 +252,7 @@ function admin_polls(&$engine, &$module)
 			echo '	<form action="admin.php" method="post" name="polls">';
 			echo '<input type="hidden" name="mode" value="polls" />';
 
-		echo '<table cellspacing="3" class="formation">';
+		echo '<table class="formation">';
 		// make list
 		if ($year != 0)	$list	= $polls_obj->get_polls_list('archive', $year);
 		else			$list	= $polls_obj->get_polls_list('ended');

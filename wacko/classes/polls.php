@@ -208,7 +208,7 @@ class Polls
 
 		if ($header['start'] == SQL_NULLDATE)
 		{	// non-existent or not moderated poll
-			$poll	= '<table cellspacing="3" class="formation">'.
+			$poll	= '<table class="formation">'.
 					'<tr><th>'.$this->engine->get_translation('PollsError').'</th></tr>'.
 					'<tr><td align="center"><em>'.$this->engine->get_translation('PollsNotExists').'</em></td></tr>'.
 					'</table>';
@@ -219,7 +219,7 @@ class Polls
 					'<a name="p'.date('dm', strtotime($header['start'])).'"></a>'.
 					'<a name="poll'.$id.'_form"></a>'.
 					'<input name="poll" type="hidden" value="'.$id.'" />'.
-					'<table cellspacing="3" class="formation">'.
+					'<table class="formation">'.
 					'<tr><th colspan="2" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int)$id).'): '.$header['text'].'</th></tr>';
 
 			foreach ($vars as $var)
@@ -262,7 +262,7 @@ class Polls
 
 		if ($header['start'] == SQL_NULLDATE)
 		{	// non-existent or not moderated poll
-			$poll	= '<table cellspacing="3" class="formation">'.
+			$poll	= '<table class="formation">'.
 					'<tr><th>'.$this->engine->get_translation('PollsError').'</th></tr>'.
 					'<tr><td align="center"><em>'.$this->engine->get_translation('PollsNotExists').'</em></td></tr>'.
 					'</table>';
@@ -272,7 +272,7 @@ class Polls
 			$poll	= $this->engine->form_open().
 					'<a name="p'.date('dm', strtotime($header['start'])).'"></a>'.
 					'<a name="poll'.$id.'_form"></a>'.
-					'<table cellspacing="3" class="formation">'.
+					'<table class="formation">'.
 					'<tr><th colspan="3" style="text-align:left;">'.date('d/m', strtotime($header['start'])).' (#'.((int)$id).'): '.$header['text'].'</th></tr>';
 
 			foreach ($vars as $var)

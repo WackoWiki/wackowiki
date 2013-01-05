@@ -1091,11 +1091,16 @@ div.newsarticle:hover {
 table.formation {
 	background-color: #EDEDED;
 	border: 1px solid #CDCDCD;
+	border-collapse: collapse;
 }
 table.formation th, tr.formation th {
 	background-color: #DDDDDD;
 	letter-spacing: normal;
 	border: 1px solid #CDCDCD;
+}
+
+table.formation td {
+	padding: 3px;
 }
 
 .nb td, .fyi td, .inf td {

@@ -143,7 +143,7 @@ function admin_systemlog(&$engine, &$module)
 			echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n";
 		}
 		?>
-		<table border="0" cellspacing="5" cellpadding="3" class="formation">
+		<table border="0" cellpadding="3" class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>
 				<th style="width:20px;"><a href="?mode=systemlog&order=<?php echo $ordertime;  ?>"><?php echo $engine->get_translation('LogDate'); ?></a></th>

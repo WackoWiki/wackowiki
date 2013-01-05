@@ -58,7 +58,7 @@ function admin_configemail(&$engine, &$module)
 	<form action="admin.php" method="post" name="email">
 		<input type="hidden" name="mode" value="configemail" />
 		<input type="hidden" name="action" value="update" />
-		<table cellspacing="3" class="formation">
+		<table class="formation">
 			<tr>
 				<th colspan="2">Basic parameters</th>
 			</tr>

@@ -76,7 +76,7 @@ function admin_configbasic(&$engine, &$module)
 	<form action="admin.php" method="post" name="basic">
 		<input type="hidden" name="mode" value="configbasic" />
 		<input type="hidden" name="action" value="update" />
-		<table cellspacing="3" class="formation">
+		<table class="formation">
 			<tr>
 				<th colspan="2">Basic parameters</th>
 			</tr>

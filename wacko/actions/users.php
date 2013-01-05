@@ -164,7 +164,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 		<?php echo $this->form_open(); ?>
 		<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['user_name']); ?>" />
 		<?php if (isset($_POST['ref'])) echo '<input type="hidden" name="ref" value="'.htmlspecialchars($_POST['ref']).'" />'; ?>
-		<table cellspacing="3" class="formation">
+		<table class="formation">
 <?php
 			// user must allow incoming messages, and needs confirmed email address set
 			if ($this->config['enable_email'] == true && $user['allow_intercom'] == 1 && $user['email'] && !$user['email_confirm'])
@@ -202,7 +202,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 		}
 		else
 		{
-			echo '<table cellspacing="3" class="formation"><tr><td colspan="2" align="center"><em>'.$this->get_translation('UsersPMNotLoggedIn').'</em></td></tr></table>';
+			echo '<table class="formation"><tr><td colspan="2" align="center"><em>'.$this->get_translation('UsersPMNotLoggedIn').'</em></td></tr></table>';
 		}
 
 		// user-owned pages
@@ -389,7 +389,7 @@ else
 		"LIMIT {$pagination['offset']}, $limit");
 
 	// user filter form
-	echo '<table border="0" cellspacing="3" class="formation"><tr><td class="label">';
+	echo '<table border="0" class="formation"><tr><td class="label">';
 	echo $this->form_open('', '', 'get');
 	echo $this->get_translation('UsersSearch').': </td><td>';
 	echo '<input name="user" maxchars="40" size="40" value="'.htmlspecialchars(isset($_GET['user']) ? $_GET['user'] : '').'" /> ';
