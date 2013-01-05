@@ -60,7 +60,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 		$sql .= "AND p.tag IN ('".$_pages."') ";
 	}
 
-	$sql .= "ORDER BY p.modified ASC";
+	$sql .= "ORDER BY p.created ASC";
 
 	// load subforums data
 	$forums	= $this->load_all($sql, 1);
