@@ -103,6 +103,7 @@ ul {
 table.formation {
 	background-color: #EDEDED;
 	border: 1px solid #CDCDCD;
+	border-collapse: collapse;
 }
 table.formation th, tr.formation th {
 	background-color: #DDDDDD;
@@ -110,7 +111,9 @@ table.formation th, tr.formation th {
 	border: 1px solid #CDCDCD;
 }
 
-
+table.formation td {
+	padding: 3px;
+}
 
 .nb td, .fyi td, .inf td {
 	padding: 5px;

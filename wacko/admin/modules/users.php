@@ -276,7 +276,7 @@ function admin_users(&$engine, &$module)
 		<input type="hidden" name="mode" value="users" />
 		<input type="hidden" name="user_id" value="<?php echo $group_id; ?>" />
 
-		<table border="0" cellspacing="5" cellpadding="3" class="formation">
+		<table border="0" cellpadding="3" class="formation">
 		<?php
 
 			echo '<tr class="lined">'."\n".
@@ -483,7 +483,7 @@ function admin_users(&$engine, &$module)
 
 			<?php if (isset($pagination['text']))
 			echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n"; ?>
-			<table border="0" cellspacing="5" cellpadding="3" class="formation">
+			<table border="0" cellpadding="3" class="formation">
 				<tr>
 					<th style="width:5px;"></th>
 					<th style="width:5px;">ID</th>

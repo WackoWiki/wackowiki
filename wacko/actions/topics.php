@@ -137,13 +137,13 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	$topics	= $this->load_all($sql);
 
 	//  display search
-	echo '<div style="float: right; clear: both; margin-bottom: 10px;">'.$this->action('search', array('for' => $this->tag, 'nomark' => 1, 'options' => 0)).'</div>';
+	echo '<div style="float: right; clear: both; margin-bottom: 10px;">'.$this->action('search', array('for' => $this->tag, 'nomark' => 1, 'options' => 0)).'</div>'.'<div style="clear: both;"></div>'."\n";
 
 	if (!isset($_GET['phrase']))
 	{
 		// display list
-		echo '<table><tr><td style="white-space: nowrap">'.( $access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '' ).'</td>'.
-				'<td align="right">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</td></tr></table>'."\n";
+		echo '<div><p style="float: left">'.($access === true ? '<strong><small class="cite"><a href="#newtopic">'.$this->get_translation('ForumNewTopic').'</a></small></strong>' : '').'</p>'.
+				'<p style="float: right">'.(isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '').'</p></div>'."\n";
 
 		echo '<table cellspacing="1" cellpadding="4" class="forum">'.
 				'<tr>'.
@@ -224,8 +224,9 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 
 		echo '</table>'."\n";
 
-		echo '<table><tr><td>'.( $user == true ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>' : '' ).'</td>'.
-				'<td align="right">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</td></tr></table>'."\n";
+		echo '<div><p style="float: left">'.( $user == true ? '<small><a href="'.$this->href('', '', 'markread=yes').'">'.$this->get_translation('MarkRead').'</a></small>' : '' ).'</p>'.
+				'<p style="float: right">'.( isset($pagination['text']) && $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</p></div>'."\n".
+				'<div style="clear: both;"></div>'."\n";
 	}
 
 	// display new topic form when applicable
@@ -233,9 +234,9 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 	{
 		echo $this->form_open();
 		?>
-		<a name="newtopic"></a><br />
+		<a id="newtopic"></a><br />
 		<input type="hidden" name="action" value="topicadd" />
-		<table cellspacing="3" class="formation">
+		<table class="formation">
 			<tr>
 				<td class="label"><?php echo $this->get_translation('ForumTopicName'); ?>:</td>
 				<td>

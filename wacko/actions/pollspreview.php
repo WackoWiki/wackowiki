@@ -10,7 +10,7 @@ $this->use_class('polls');
 $polls_obj = new Polls($this);
 
 // polls for moderation
-echo '<table cellspacing="3" class="formation">';
+echo '<table class="formation">';
 $list = $polls_obj->get_polls_list('moderation');
 
 if (empty($list))

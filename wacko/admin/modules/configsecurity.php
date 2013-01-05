@@ -87,7 +87,7 @@ function admin_configsecurity(&$engine, &$module)
 	<form action="admin.php" method="post" name="security">
 		<input type="hidden" name="mode" value="configsecurity" />
 		<input type="hidden" name="action" value="update" />
-		<table cellspacing="3" class="formation">
+		<table class="formation">
 			<tr>
 				<th colspan="2">Basic parameters</th>
 			</tr>

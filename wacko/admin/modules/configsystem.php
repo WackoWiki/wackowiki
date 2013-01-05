@@ -79,7 +79,7 @@ function admin_configsystem(&$engine, &$module)
 	<form action="admin.php" method="post" name="system">
 		<input type="hidden" name="mode" value="configsystem" />
 		<input type="hidden" name="action" value="update" />
-		<table cellspacing="3" class="formation">
+		<table class="formation">
 			<tr>
 				<th colspan="2">Debug mode</th>
 			</tr>

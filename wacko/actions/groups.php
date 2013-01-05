@@ -201,7 +201,7 @@ else
 		"LIMIT {$pagination['offset']}, $limit");
 
 	// usergroup filter form
-	echo '<table border="0" cellspacing="3" class="formation"><tr><td class="label">';
+	echo '<table border="0" class="formation"><tr><td class="label">';
 	echo $this->form_open('', '', 'get');
 	echo $this->get_translation('GroupsSearch').': </td><td>';
 	echo '<input name="group" maxchars="40" size="40" value="'.htmlspecialchars(isset($_GET['group']) ? $_GET['group'] : '').'" /> ';

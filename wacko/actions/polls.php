@@ -122,7 +122,7 @@ else
 	}
 	else
 	{
-		echo '<table cellspacing="3" class="formation"><tr><td align="center"><em>';
+		echo '<table class="formation"><tr><td align="center"><em>';
 		echo $this->get_translation('PollsNone');
 		echo '</em></td></tr></table>';
 	}
