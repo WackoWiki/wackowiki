@@ -211,10 +211,24 @@ function admin_inconsistencies(&$engine, &$module)
 					{$engine->config['table_prefix']}usergroup_member gm
 					LEFT JOIN {$engine->config['table_prefix']}usergroup g ON (gm.group_id = g.group_id)
 				WHERE
-					g.group_id IS NULL");;
+					g.group_id IS NULL");
 
 			echo '<tr class="hl_setting"><td>usergroup_member without usergroup </td><td>'.count($usergroup_member2).'</td></tr>';
 			// -> DELETE
+
+			// 3.2. page without valid user_id (e.g. deleted user)
+			$page_user = $engine->load_all(
+					"SELECT
+					p.*
+					FROM
+					{$engine->config['table_prefix']}page p
+					LEFT JOIN {$engine->config['table_prefix']}user u ON (p.user_id = u.user_id)
+					WHERE
+					u.user_id IS NULL");
+
+					echo '<tr class="hl_setting"><td>page without valid user_id </td><td>'.count($page_user).'</td></tr>';
+					// -> DELETE
+
 
 			echo '</table>';
 
@@ -405,7 +419,7 @@ function admin_inconsistencies(&$engine, &$module)
 			{$engine->config['table_prefix']}usergroup_member gm
 						LEFT JOIN {$engine->config['table_prefix']}usergroup g ON (gm.group_id = g.group_id)
 					WHERE
-						g.group_id IS NULL");;
+						g.group_id IS NULL");
 
 			echo '<tr class="hl_setting"><td>usergroup_member without usergroup </td><td>'.count($usergroup_member2).'</td></tr>';
 

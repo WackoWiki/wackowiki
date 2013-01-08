@@ -1155,7 +1155,7 @@ CODE;
 				$re[] = '(' . $block['match'] . ')';
 				$ce[] = $this->_countSubpatterns($block['match']);
 				$rd[] = '';
-				$sb[] = false;;
+				$sb[] = false;
 				$st[] = -1;
 				foreach ($syntax['keywords'] as $kwname => $kwgroup) {
 					if ($kwgroup['inherits'] != $name) {
@@ -1212,7 +1212,7 @@ CODE;
 					$pc[] = NULL;
 				}
 				if ($block['type'] == 'block') {
-					$kwm = array();;
+					$kwm = array();
 					$re[] = '(' . $block['match'] . ')';
 					$ce[] = $this->_countSubpatterns($block['match']);
 					$rd[] = '';

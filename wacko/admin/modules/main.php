@@ -161,7 +161,7 @@ function admin_lock(&$engine, &$module)
 		}
 	}
 ?>
-		<tr>
+		<tr class="lined">
 			<td class="label"><strong>Total:</strong></td>
 			<td></td>
 			<td><strong><?php echo round($tdata / 1000000, 2); ?> MB</strong></td>
@@ -205,7 +205,7 @@ function admin_lock(&$engine, &$module)
 
 			$tsize += $size;
 
-			echo '<tr>'.
+			echo '<tr class="lined">'.
 					'<td class="label"><strong>'.$dir.'</strong></td>'.
 					'<td>&nbsp;&nbsp;&nbsp;'.$files.'</td>'.
 					'<td>'.ceil($size / 1000).' kB</td>'.
@@ -216,7 +216,7 @@ function admin_lock(&$engine, &$module)
 		@closedir($handle);
 	}
 ?>
-		<tr>
+		<tr class="lined">
 			<td class="label"><strong>Total:</strong></td>
 			<td>&nbsp;&nbsp;&nbsp;<strong><?php echo $tfiles; ?></strong></td>
 			<td><strong><?php echo round($tsize / 1000000, 2); ?> MB</strong></td>
