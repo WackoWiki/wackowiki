@@ -40,7 +40,6 @@ function admin_configsystem(&$engine, &$module)
 		$config['cache_ttl']				= (int)$_POST['cache_ttl'];
 		$config['cache_sql']				= (int)$_POST['cache_sql'];
 		$config['cache_sql_ttl']			= (int)$_POST['cache_sql_ttl'];
-		// $config['bbcode']				= (int)$_POST['bbcode'];
 		$config['allow_x11colors']			= (int)$_POST['allow_x11colors'];
 		$config['default_typografica']		= (int)$_POST['default_typografica'];
 		$config['paragrafica']				= (int)$_POST['paragrafica'];
@@ -49,7 +48,6 @@ function admin_configsystem(&$engine, &$module)
 		$config['disable_tikilinks']		= (int)$_POST['disable_tikilinks'];
 		$config['disable_bracketslinks']	= (int)$_POST['disable_bracketslinks'];
 		$config['disable_wikilinks']		= (int)$_POST['disable_wikilinks'];
-		// $config['disable_npjlinks']			= (int)$_POST['disable_npjlinks'];
 		$config['disable_formatters']		= (int)$_POST['disable_formatters'];
 		$config['date_format']				= (string)$_POST['date_format'];
 		$config['time_format']				= (string)$_POST['time_format'];
