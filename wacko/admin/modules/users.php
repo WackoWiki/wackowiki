@@ -140,6 +140,7 @@ function admin_users(&$engine, &$module)
 			}
 		}
 		// delete user
+		// TODO: reassign acls pages and revisions, delete user page
 		else if (isset($_POST['delete']) && isset($_POST['user_id']))
 		{
 			$engine->sql_query(
@@ -170,9 +171,9 @@ function admin_users(&$engine, &$module)
 	// add new user
 	if (isset($_POST['create']))
 	{
-		echo "<form action=\"admin.php\" method=\"post\" name=\"users\">";
-		echo "<input type=\"hidden\" name=\"mode\" value=\"users\" />";
-		echo "<h2>".$engine->get_translation('UsersAddNew')."</h2>";
+		echo '<form action="admin.php" method="post" name="users">';
+		echo '<input type="hidden" name="mode" value="users" />';
+		echo '<h2>'.$engine->get_translation('UsersAddNew').'</h2>';
 		echo '<table class="formation">';
 		echo '<tr><td><label for="newname">'.$engine->get_translation('UserName').'</label></td>'.
 			'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : '' ).'" size="20" maxlength="100" /></td></tr>'.
@@ -199,7 +200,7 @@ function admin_users(&$engine, &$module)
 			'<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 			'</td></tr>';
 		echo '</table><br />';
-		echo "</form>";
+		echo '</form>';
 	}
 	// edit user
 	else if (isset($_POST['edit']) && isset($_POST['change']))
@@ -212,8 +213,8 @@ function admin_users(&$engine, &$module)
 				"AND u.account_type = '0' ".
 			"LIMIT 1"))
 		{
-			echo "<form action=\"admin.php\" method=\"post\" name=\"users\">";
-			echo "<input type=\"hidden\" name=\"mode\" value=\"users\" />";
+			echo '<form action="admin.php" method="post" name="users">';
+			echo '<input type="hidden" name="mode" value="users" />';
 			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
 			echo '<table class="formation">';
 			echo '<tr><td><label for="newname">'.$engine->get_translation('UsersRename').' \'<tt>'.htmlspecialchars($user['user_name']).'</tt>\' in</label></td>'.
@@ -243,7 +244,7 @@ function admin_users(&$engine, &$module)
 				'<br /><small>'.$engine->get_translation('UsersRenameInfo').'</small>'.
 				'</td></tr>';
 			echo '</table><br />';
-			echo "</form>";
+			echo '</form>';
 		}
 	}
 
@@ -252,8 +253,8 @@ function admin_users(&$engine, &$module)
 	{
 		if ($user = $engine->load_single("SELECT user_name FROM {$engine->config['table_prefix']}user WHERE user_id = '".quote($engine->dblink, $_POST['change'])."' LIMIT 1"))
 		{
-			echo "<form action=\"admin.php\" method=\"post\" name=\"users\">";
-			echo "<input type=\"hidden\" name=\"mode\" value=\"users\" />";
+			echo '<form action="admin.php" method="post" name="users">';
+			echo '<input type="hidden" name="mode" value="users" />';
 			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
 			echo '<table class="formation">';
 			echo '<tr><td><label for="">'.$engine->get_translation('UsersDelete').' \'<tt>'.htmlspecialchars($user['user_name']).'</tt>\'?</label> '.
@@ -262,7 +263,7 @@ function admin_users(&$engine, &$module)
 				'<br /><small>'.$engine->get_translation('UsersDeleteInfo').'</small>'.
 				'</td></tr>';
 			echo '</table><br />';
-			echo "</form>";
+			echo '</form>';
 		}
 	}
 
@@ -466,7 +467,7 @@ function admin_users(&$engine, &$module)
 			( $where ? $where : '' )
 			);
 
-		$pagination	= $engine->pagination($count['n'], $limit, 'p', 'mode=users&order='.htmlspecialchars(isset($_GET['order']) && $_GET['order']), '', 'admin.php');
+		$pagination	= $engine->pagination($count['n'], $limit, 'p', 'mode=users&order='.htmlspecialchars(isset($_GET['order']) ? $_GET['order'] : ''), '', 'admin.php');
 
 		$users = $engine->load_all(
 			"SELECT u.*, p.lang ".

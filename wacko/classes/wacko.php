@@ -181,7 +181,7 @@ class Wacko
 			"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
 			"LIMIT 1");
 
-		return $page['tag'];;
+		return $page['tag'];
 	}
 
 	function get_page_id($tag = '')
