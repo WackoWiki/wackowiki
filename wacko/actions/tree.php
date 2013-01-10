@@ -157,7 +157,7 @@ if ($pages = $this->load_all(
 					{
 						while ($diff > 0)
 						{
-							echo "<ul>\n";	// open indent
+							echo "\n<ul>\n";	// open indent
 							$diff--;
 							$ul++;
 						}
@@ -166,10 +166,14 @@ if ($pages = $this->load_all(
 					{
 						while ($diff < 0)
 						{
-							echo "</ul>\n";	// close indent
+							echo "\n</ul>\n</li>\n";	// close indent
 							$diff++;
 							$ul--;
 						}
+					}
+					else
+					{
+						echo "</li>\n";
 					}
 				}
 
@@ -191,7 +195,6 @@ if ($pages = $this->load_all(
 
 				# if ($curlevel == $rootlevel && $curlevel < 2)	echo '</strong>';
 
-				echo "</li>\n";
 
 				// recheck page level
 				$prevlevel	= substr_count($page['tag'], '/');
@@ -204,9 +207,13 @@ if ($pages = $this->load_all(
 			{
 				while ($ul > 0)
 				{
-					echo "</ul>\n";
+					echo "</ul>\n</li>\n";
 					$ul--;
 				}
+			}
+			else
+			{
+				echo "</li>\n";
 			}
 
 			// end list
