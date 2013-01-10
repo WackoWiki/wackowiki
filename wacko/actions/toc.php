@@ -97,7 +97,7 @@ if ($_page)
 						}
 
 						// Human content TOC
-						$toc[$i][1] = $num.' '.$toc[$i][1];
+						$toc[$i][5] = $num;
 					}
 				}
 			}
@@ -113,17 +113,94 @@ if ($_page)
 				$this->post_wacko_action['toc']	= 1;
 			}
 		} // --------------------------------------------------------------
+
+		#$this->debug_print_r($toc);
+
 		// display!
-		foreach( $toc as $v )
+
+		// XXX: only for reference
+		/* foreach($toc as $toc_item)
 		{
-			if (isset($v[4]) && $v[4])
+			if (isset($toc_item[4]) && $toc_item[4])
 			{
-				echo '<div class="toc'.$v[4].'">';
-				echo '<a href="'.$v[3].'#'.$v[0].'">'.strip_tags($v[1]).'</a>';
+				echo '<div class="toc'.$toc_item[4].'">';
+				echo '<a href="'.$toc_item[3].'#'.$toc_item[0].'">'.$toc_item[5].' '.strip_tags($toc_item[1]).'</a>';
 				echo '</div>';
 			}
-		}
+		} */
 		//$this->tocRecursion( ($ppage ? $this->href('', $ppage) : ''), $toc_body, 2 );
+
+		// begin list
+		echo "\n<ul id=\"toc\">\n";
+
+		$i	= 0;
+		$ul	= 0;
+
+		foreach ($toc as $toc_item)
+		{
+			if (isset($toc_item[4]) && $toc_item[4])
+			{
+				// check page level
+				$curlevel	= $toc_item[4];
+
+				// indents (sublevels)
+				if ($i > 0)
+				{
+					// levels difference
+					$diff = $curlevel - $prevlevel;
+
+					if ($diff > 0)
+					{
+						while ($diff > 0)
+						{
+							echo "\n<ul>\n";	// open nested list
+							$diff--;
+							$ul++;
+						}
+					}
+					else if ($diff < 0)
+					{
+						while ($diff < 0)
+						{
+							echo "\n</ul>\n</li>\n";	// close nested list
+							$diff++;
+							$ul--;
+						}
+					}
+					else
+					{
+						echo "</li>\n";
+					}
+				}
+
+				// begin element
+				echo '<li>';
+
+					echo '<a href="'.$toc_item[3].'#'.$toc_item[0].'"><span class="tocnumber">'.$toc_item[5].'</span><span class="toctext">'.strip_tags($toc_item[1]).'</span></a>';
+
+				// recheck page level
+				$prevlevel	= $toc_item[4];
+
+				$i++;
+			}
+		}
+
+		// close all opened <ul> tags
+		if ($ul > 0)
+		{
+			while ($ul > 0)
+			{
+				echo "</ul>\n</li>\n";
+				$ul--;
+			}
+		}
+		else
+		{
+			echo "</li>\n";
+		}
+
+		// end list
+		echo "</ul>\n";
 	}
 }
 else

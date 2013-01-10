@@ -45,11 +45,6 @@ sup, sub {
 .underline {
 	text-decoration:underline;
 }
-#content fieldset .toc1, #content fieldset .toc2, #content fieldset .toc3,
-#content fieldset .toc4, #content fieldset .toc5, #content fieldset .toc6,
-ul {
-	
-}
 
 .banner {
 	border: 1px dashed #B00202;
@@ -350,27 +345,20 @@ div.menu {
 	div.menu div.sub {
 		padding: 1px;
 	}
-	div.menu .toc4 a, div.menu .toc5 a, div.menu .toc6 a {
-		font-size: 10px;
-	}
-	div.menu .toc1 a {
-		font-weight: bold;
-	}
-	div.menu .toc2 a {
-		padding-left: 15px;
-	}
-	div.menu .toc3 a {
-		padding-left: 30px;
-	}
-	div.menu .toc4 a {
-		padding-left: 45px;
-	}
-	div.menu .toc5 a {
-		padding-left: 60px;
-	}
-	div.menu .toc6 a {
-		padding-left: 75px;
-	}
+#toc {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+}
+#toc li {
+	list-style: none;
+}
+#toc li ul {
+	padding-left: 15px;
+}
+span.tocnumber {
+	margin-right: 0.3em;
+}
 	div.menu ul, div.menu ol {
 		padding-left: 0px;
 		list-style: none;
