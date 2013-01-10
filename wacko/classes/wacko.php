@@ -5045,7 +5045,7 @@ class Wacko
 		}
 
 		// write xml_sitemap
-		if (($days = $this->config['xml_sitemap_ttl']) && (time() > ($this->config['maint_last_xml_sitemap'] + 3 * 86400)))
+		/*if (($days = $this->config['xml_sitemap_ttl']) && (time() > ($this->config['maint_last_xml_sitemap'] + 3 * 86400)))
 		{
 			if($this->config['xml_sitemap'])
 			{
@@ -5053,7 +5053,7 @@ class Wacko
 			}
 
 			//$this->log(7, 'Maintenance: wrote XML Sitemap');
-		}
+		}*/
 
 	}
 
@@ -5353,7 +5353,7 @@ class Wacko
 		$this->body_toc = implode('<heading,row>', $toc);
 	}
 
-	function build_toc($tag, $from, $to, $num, $link = -1)
+	function build_toc($tag, $from, $to, $numerate, $link = -1)
 	{
 		if (isset($this->tocs[$tag]))
 		{
@@ -5373,39 +5373,39 @@ class Wacko
 
 		$toc = explode('<heading,row>', $page['body_toc']);
 
-		foreach ($toc as $k => $v)
+		foreach ($toc as $k => $toc_item)
 		{
-			$toc[$k] = explode('<heading,col>', $v);
+			$toc[$k] = explode('<heading,col>', $toc_item);
 		}
 
 		$_toc = array();
 
-		foreach ($toc as $k => $v)
+		foreach ($toc as $k => $toc_item)
 		{
-			if (isset($v[2]))
+			if (isset($toc_item[2]))
 			{
-				if ($v[2] == 99999)
+				if ($toc_item[2] == 99999)
 				{
-					if (!in_array($v[0], $this->toc_context))
+					if (!in_array($toc_item[0], $this->toc_context))
 					{
-						if (!($v[0] == $this->tag))
+						if (!($toc_item[0] == $this->tag))
 						{
-							array_push($this->toc_context, $v[0]);
-							$_toc = array_merge($_toc, $this->build_toc($v[0], $from, $to, $num, $link));
+							array_push($this->toc_context, $toc_item[0]);
+							$_toc = array_merge($_toc, $this->build_toc($toc_item[0], $from, $to, $numerate, $link));
 							array_pop($this->toc_context);
 						}
 					}
 				}
 				else
 				{
-					if ($v[2] == 77777)
+					if ($toc_item[2] == 77777)
 					{
 						$toc[$k][3]	= $_link;
 						$_toc[]		= &$toc[$k];
 					}
 					else
 					{
-						if (($v[2] >= $from) && ($v[2] <= $to))
+						if (($toc_item[2] >= $from) && ($toc_item[2] <= $to))
 						{
 							$toc[$k][3]	= $_link;
 							$_toc[]		= &$toc[$k];

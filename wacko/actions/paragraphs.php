@@ -44,7 +44,7 @@ if (!$style) $style = 'before';
 		$toc_len	= count($toc);
 		$numbers	= array();
 		$depth		= 0;
-		$pnum		=0;
+		$pnum		= 0;
 
 		for($i = 0; $i < $toc_len; $i++)
 
@@ -68,13 +68,12 @@ if (!$style) $style = 'before';
 		}
 
 		// page was changed a little - writing it to the cache is not a bad idea
-		$this->tocs[ $context ] = &$toc;
+		$this->tocs[$context] = &$toc;
 		// now we need to set up a (small) flag, that's page source should be
-		// twisty-beasty changed in post-wacko and some dygits could be added
-		// (dygits -> digits, here is a misspell in Russian source - I don't know
-		// is it a typo or next joke :) twisty-beasty™ change - Russian "êóðî÷èòü" :)
-		$this->post_wacko_toc	= &$toc; $this->post_wacko_action['p'] = $style;
-		$this->post_wacko_maxp	= $pnum;
+		// twisty-beasty changed in post-wacko and some digits could be added
+		$this->post_wacko_toc			= &$toc;
+		$this->post_wacko_action['p']	= $style;
+		$this->post_wacko_maxp			= $pnum;
 	} // --------------------------------------------------------------
 }
 
