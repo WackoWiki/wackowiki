@@ -353,12 +353,12 @@ header('Content-Type: text/html; charset='.$engine->get_charset());
 			{
 				if ($row['mode'] != 'lock')
 				{
-					echo ( $row['cat'] != $category
+					echo ($row['cat'] != $category
 						? "</ul>\n</li>\n<li class=\"text submenu2\">".$row['cat']."<ul>\n"
 						: '');
-					echo ( isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode']
+					echo (isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode']
 						? '<li class="active">'
-						: "<li>" ); ?>
+						: "<li>"); ?>
 					<a href="?mode=<?php echo $row['mode']; ?>" title="<?php echo $row['title']; ?>"><?php echo $row['name']; ?></a>
 					<?php echo "</li>\n";
 				}
