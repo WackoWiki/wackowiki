@@ -157,7 +157,7 @@ if ($pages = $this->load_all(
 					{
 						while ($diff > 0)
 						{
-							echo "\n<ul>\n";	// open indent
+							echo "\n<ul>\n";	// open nested list
 							$diff--;
 							$ul++;
 						}
@@ -166,7 +166,7 @@ if ($pages = $this->load_all(
 					{
 						while ($diff < 0)
 						{
-							echo "\n</ul>\n</li>\n";	// close indent
+							echo "\n</ul>\n</li>\n";	// close nested list
 							$diff++;
 							$ul--;
 						}
