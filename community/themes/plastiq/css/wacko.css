@@ -130,37 +130,25 @@ table.upload img {
 
 /*	Table of contents	*/
 
-#content fieldset .toc1, #content fieldset .toc2, #content fieldset .toc3,
-#content fieldset .toc4, #content fieldset .toc5, #content fieldset .toc6 {
-	display: list-item;
-	list-style: square;
+#toc {
+	margin: 0;
+	padding: 0;
+	text-align: left;
 }
-#content fieldset .toc1 {
-	font-weight: 600;
+#toc li {
+	list-style: none;
+	font-weight: bold;
 }
-#content fieldset .toc2 {
-	margin-left: 20px;
+#toc li ul {
+	padding-left: 15px;
 }
-#content fieldset .toc3 {
-	font-size: 12px;
-	margin-left: 40px;
+#toc li li {
+	list-style: none;
+	font-weight: normal;
 }
-#content fieldset .toc4 {
-	font-size: 12px;
-	margin-left: 60px;
+span.tocnumber {
+	margin-right: 0.3em;
 }
-#content fieldset .toc5 {
-	font-size: 10px;
-	margin-left: 80px;
-}
-#content fieldset .toc6 {
-	font-size: 10px;
-	margin-left: 100px;
-}
-#content fieldset ul, #content fieldset ol {
-	padding-left: 20px;
-}
-
 
 
 /*	Document editing	*/

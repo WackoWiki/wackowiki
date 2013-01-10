@@ -29,15 +29,20 @@ cite {color:#888800;font-style:normal;}
 .center { text-align: center; }
 .indent { margin-left: 40px; }
 
-.toc1 { margin-left:0px; padding-left:0px; font-weight:bold; list-style-type:none;  } 
-.toc2 { margin-left:0px; padding-left:15px; list-style-type:none;  } 
-.toc3 { margin-left:0px; padding-left:30px; list-style-type:none;  } 
-.toc4 { margin-left:0px; padding-left:45px; list-style-type:none;  } 
-.toc5 { margin-left:0px; padding-left:60px; list-style-type:none;  } 
-.toc6 { margin-left:0px; padding-left:75px; list-style-type:none;  }
-
-.Toc1 A, .Toc2 A, .Toc3 A, .Toc4 A, .Toc5 A, .Toc6 A
- { text-decoration:none; color:#000000 }
+#toc {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+}
+#toc li {
+	list-style: none;
+}
+#toc li ul {
+	padding-left: 15px;
+}
+span.tocnumber {
+	margin-right: 0.3em;
+}
 
 .usertable {
         border: 1px none;

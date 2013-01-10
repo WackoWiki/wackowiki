@@ -366,43 +366,25 @@ font-family:Tahoma, Arial, Verdana;
 font-size:9px;
 }
 
-.toc1 {
-font-weight:700;
-list-style-type:none;
-margin-left:0;
-padding-left:0;
+#toc {
+	margin: 0;
+	padding: 0;
+	text-align: left;
 }
-
-.toc2 {
-list-style-type:none;
-margin-left:0;
-padding-left:15px;
+#toc li {
+	list-style: none;
+	font-weight: bold;
 }
-
-.toc3 {
-list-style-type:none;
-margin-left:0;
-padding-left:30px;
+#toc li ul {
+	padding-left: 15px;
 }
-
-.toc4 {
-list-style-type:none;
-margin-left:0;
-padding-left:45px;
+#toc li li {
+	list-style: none;
+	font-weight: normal;
 }
-
-.toc5 {
-list-style-type:none;
-margin-left:0;
-padding-left:60px;
+span.tocnumber {
+	margin-right: 0.3em;
 }
-
-.toc6 {
-list-style-type:none;
-margin-left:0;
-padding-left:75px;
-}
-
 
 #buttons_1 {
 	clear:none;

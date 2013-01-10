@@ -166,23 +166,19 @@ code, tt {
 }
 
 /* Inside the table of content: SYNTAX {{toc}} */
-fieldset .toc1 {
-	margin-left:		5px;
+#toc {
+	margin: 0;
+	padding: 0;
+	text-align: left;
 }
-fieldset .toc2 {
-	margin-left:		20px;
+#toc li {
+	list-style: none;
 }
-fieldset .toc3 {
-	margin-left:		35px;
+#toc li ul {
+	padding-left: 15px;
 }
-fieldset .toc4 {
-	margin-left:		50px;
-}
-fieldset .toc5 {
-	margin-left:		65px;
-}
-fieldset .toc6 {
-	margin-left:		80px;
+span.tocnumber {
+	margin-right: 0.3em;
 }
 
 

@@ -91,12 +91,25 @@ del.diff { color: #c00; font-style: italic; text-decoration: line-through }
 .dtable td { border-width: 0px; border-color: #999999; border-style: none; padding: 4px; vertical-align: top }
 
 /* Inside the table of content: SYNTAX {{toc}} */
-div.toc1 { margin-left: 0px; padding-left: 0px; list-style-type: none; font-weight: bold }
-div.toc2 { margin-left: 0px; padding-left: 15px; list-style-type: none }
-div.toc3 { margin-left: 0px; padding-left: 30px; list-style-type: none }
-div.toc4 { margin-left: 0px; padding-left: 45px; list-style-type: none }
-div.toc5 { margin-left: 0px; padding-left: 60px; list-style-type: none }
-div.toc6 { margin-left: 0px; padding-left: 75px; list-style-type: none }
+#toc {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+}
+#toc li {
+	list-style: none;
+	font-weight: bold;
+}
+#toc li ul {
+	padding-left: 15px;
+}
+#toc li li {
+	list-style: none;
+	font-weight: normal;
+}
+span.tocnumber {
+	margin-right: 0.3em;
+}
 
 /** Chat-related *************************************************************/
 
