@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 /*
 	{{toc page|for="!/SubTag" from="h2" to="h4" numerate=[0|1] legend="alternate legend" nomark=[0|1] }}
 */
-// 1. check for first param (for what TOC is built)
+// 1. check for first param (for what ToC is built)
 
 if (!isset($nomark))	$nomark = '';
 if (!isset($for))		$for = '';
@@ -98,12 +98,14 @@ if ($_page)
 
 						// Human content TOC
 						$toc[$i][5] = $num;
+						$toc[$i][6] = $toc[$i][1];
+						$toc[$i][1] = $num.' '.$toc[$i][1];
 					}
 				}
 			}
 
 			// not bad in a cache write similar version
-			$this->tocs[ $context ] = &$toc;
+			$this->tocs[$context] = &$toc;
 
 			// it is now necessary to place flag about the fact that good to [iskurochit] in Post-[vake]
 			// the source page, adding there [tsyfirki]
@@ -176,7 +178,7 @@ if ($_page)
 				// begin element
 				echo '<li>';
 
-					echo '<a href="'.$toc_item[3].'#'.$toc_item[0].'"><span class="tocnumber">'.$toc_item[5].'</span><span class="toctext">'.strip_tags($toc_item[1]).'</span></a>';
+					echo '<a href="'.$toc_item[3].'#'.$toc_item[0].'"><span class="tocnumber">'.$toc_item[5].'</span><span class="toctext">'.strip_tags($toc_item[6]).'</span></a>';
 
 				// recheck page level
 				$prevlevel	= $toc_item[4];
