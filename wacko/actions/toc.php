@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 /*
 	{{toc page|for="!/SubTag" from="h2" to="h4" numerate=[0|1] legend="alternate legend" nomark=[0|1] }}
 */
-// 1. check for first param (for what ToC is built)
+// 1. check for first param (for what table of content is built)
 
 if (!isset($nomark))	$nomark = '';
 if (!isset($for))		$for = '';
@@ -119,18 +119,6 @@ if ($_page)
 		#$this->debug_print_r($toc);
 
 		// display!
-
-		// XXX: only for reference
-		/* foreach($toc as $toc_item)
-		{
-			if (isset($toc_item[4]) && $toc_item[4])
-			{
-				echo '<div class="toc'.$toc_item[4].'">';
-				echo '<a href="'.$toc_item[3].'#'.$toc_item[0].'">'.$toc_item[5].' '.strip_tags($toc_item[1]).'</a>';
-				echo '</div>';
-			}
-		} */
-		//$this->tocRecursion( ($ppage ? $this->href('', $ppage) : ''), $toc_body, 2 );
 
 		// begin list
 		echo "\n<ul id=\"toc\">\n";
