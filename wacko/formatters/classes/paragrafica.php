@@ -177,7 +177,7 @@ class paragrafica
 			$sizeof_mark1 = null;
 		}
 
-		foreach( $pieces as $k=>$v )
+		foreach( $pieces as $k => $v )
 		{
 			if ($k > 0)
 			{
@@ -216,7 +216,7 @@ class paragrafica
 										$page_id.'-'.$pcount.
 										$this->prefix2.
 										$inside.
-										$this->postfix.substr($v,$pos+$sizeof_mark1);
+										$this->postfix.substr($v, $pos + $sizeof_mark1);
 						}
 					}
 				}
