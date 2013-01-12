@@ -63,7 +63,7 @@ else
 		}
 
 		// cleaning up
-		$strings = preg_replace('/<!--action:begin-->toc<!--action:end-->/i', '', $strings);
+		$strings = preg_replace('/<!--action:begin-->toc(.*?)<!--action:end-->/i', '', $strings);
 		$strings = preg_replace('/<!--action:begin-->paragraphs<!--action:end-->/i', '', $strings);
 		$strings = preg_replace('/<!--action:begin-->redirect<!--action:end-->/i', '', $strings);
 		$strings = preg_replace("/.*<!--action:begin-->anchor name=\"?$first_anchor\"?<!--action:end-->(.*)<!--action:begin-->anchor name=\"?$last_anchor\"?<!--action:end-->.*$/is", "\$1", $strings);
