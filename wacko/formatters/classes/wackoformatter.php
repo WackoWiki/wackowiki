@@ -291,6 +291,7 @@ class WackoFormatter
 		{
 			// check if a formatter has been specified
 			$code = $matches[1];
+
 			if (preg_match('/^\(([^\n]+?)\)(.*)$/s', $code, $matches))
 			{
 				$code = $matches[2];
