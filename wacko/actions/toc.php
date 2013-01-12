@@ -12,9 +12,9 @@ if (!defined('IN_WACKO'))
 
 if (!isset($nomark))	$nomark = '';
 if (!isset($for))		$for = '';
-if (!isset($from))		$from = '';
 if (!isset($page))		$page = '';
 if (!isset($numerate))	$numerate = '';
+if (!isset($from))		$from = '';
 if (!isset($to))		$to = '';
 if (!isset($legend))	$legend = '';
 
@@ -84,7 +84,7 @@ if ($_page)
 						// if left lower level, nothing else to do.
 						// store and increase the depth meter item
 						$depth = $toc[$i][2];
-						$numbers[ $depth ]++;
+						$numbers[$depth]++;
 						// collect numbering on the array of $ numbers from start to the current depth, allowing zero
 						$num = '';
 
@@ -97,8 +97,8 @@ if ($_page)
 						}
 
 						// Human content TOC
-						$toc[$i][5] = $num;
-						$toc[$i][6] = $toc[$i][1];
+						$toc[$i][5] = $num; // toc number
+						$toc[$i][6] = $toc[$i][1]; // toc text
 						$toc[$i][1] = $num.' '.$toc[$i][1];
 					}
 				}
@@ -107,8 +107,8 @@ if ($_page)
 			// not bad in a cache write similar version
 			$this->tocs[$context] = &$toc;
 
-			// it is now necessary to place flag about the fact that good to [iskurochit] in Post-[vake]
-			// the source page, adding there [tsyfirki]
+			// it is now necessary to place flag about the fact that good to in post_wacko
+			// the source page, adding there
 			if (!$ppage)
 			{
 				$this->post_wacko_toc			= &$toc;
@@ -116,7 +116,7 @@ if ($_page)
 			}
 		} // --------------------------------------------------------------
 
-		#$this->debug_print_r($toc);
+		$this->debug_print_r($toc);
 
 		// display!
 
