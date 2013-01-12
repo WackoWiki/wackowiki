@@ -243,7 +243,7 @@ class paragrafica
 
 				for ($i = 1; $i < $size; $i++)
 				{
-					$what= $what.$ignored[$i-1].$a[$i];
+					$what= $what.$ignored[$i - 1].$a[$i];
 				}
 			}
 		}

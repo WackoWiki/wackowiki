@@ -97,9 +97,14 @@ if ($_page)
 						}
 
 						// Human content TOC
+						$toc[$i][1] = $num.' '.$toc[$i][1];
 						$toc[$i][5] = $num; // toc number
 						$toc[$i][6] = $toc[$i][1]; // toc text
-						$toc[$i][1] = $num.' '.$toc[$i][1];
+
+					}
+					else
+					{
+						$toc[$i][6] = $toc[$i][1];
 					}
 				}
 			}
@@ -116,7 +121,7 @@ if ($_page)
 			}
 		} // --------------------------------------------------------------
 
-		$this->debug_print_r($toc);
+		#$this->debug_print_r($toc);
 
 		// display!
 
