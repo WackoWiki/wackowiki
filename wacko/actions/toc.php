@@ -97,9 +97,10 @@ if ($_page)
 						}
 
 						// Human content TOC
-						$toc[$i][1] = $num.' '.$toc[$i][1];
 						$toc[$i][5] = $num; // toc number
 						$toc[$i][6] = $toc[$i][1]; // toc text
+
+						$toc[$i][1] = $num.' '.$toc[$i][1];
 
 					}
 					else
@@ -171,7 +172,11 @@ if ($_page)
 				// begin element
 				echo '<li>';
 
-					echo '<a href="'.$toc_item[3].'#'.$toc_item[0].'"><span class="tocnumber">'.$toc_item[5].'</span><span class="toctext">'.strip_tags($toc_item[6]).'</span></a>';
+					echo '<a href="'.$toc_item[3].'#'.$toc_item[0].'">'.
+							(!empty($numerate)
+								?	'<span class="tocnumber">'.$toc_item[5].'</span>'
+								:	'').
+							'<span class="toctext">'.strip_tags($toc_item[6]).'</span></a>';
 
 				// recheck page level
 				$prevlevel	= $toc_item[4];
