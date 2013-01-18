@@ -6,8 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 $edit_note		= '';
-$minor_edit		= '';
-$reviewed		= '';
+$minor_edit		= 0;
+$reviewed		= 0;
 $error			= '';
 $output			= '';
 
