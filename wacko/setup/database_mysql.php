@@ -18,10 +18,10 @@ $table_acl = "CREATE TABLE {$pref}acl (".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_cache = "CREATE TABLE {$pref}cache (".
-					"name VARCHAR(32) NOT NULL,".
-					"method VARCHAR(20) NOT NULL,".
-					"query VARCHAR(100) NOT NULL,".
-					"lang VARCHAR(2) NOT NULL,".
+					"name VARCHAR(32) NOT NULL DEFAULT '',".
+					"method VARCHAR(20) NOT NULL DEFAULT '',".
+					"query VARCHAR(100) NOT NULL DEFAULT '',".
+					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"cache_time TIMESTAMP NOT NULL,".
 					"INDEX (name),".
 					"KEY timestamp (cache_time)".
@@ -29,16 +29,16 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 
 $table_category = "CREATE TABLE {$pref}category (".
 					"category_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"parent INT(10) UNSIGNED NOT NULL,".
-					"lang VARCHAR(2) NOT NULL,".
-					"category VARCHAR(100) NOT NULL,".
+					"parent INT(10) UNSIGNED NOT NULL DEFAULT 0,".
+					"lang VARCHAR(2) NOT NULL DEFAULT '',".
+					"category VARCHAR(100) NOT NULL DEFAULT '',".
 					"PRIMARY KEY (category_id),".
 					"UNIQUE KEY idx_category (lang,category)".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_category_page = "CREATE TABLE {$pref}category_page (".
-						"category_id INT(10) unsigned NOT NULL,".
-						"page_id INT(10) unsigned NOT NULL,".
+						"category_id INT(10) unsigned NOT NULL DEFAULT 0,".
+						"page_id INT(10) unsigned NOT NULL DEFAULT 0,".
 						"UNIQUE KEY idx_pageword (category_id, page_id)".
 					") {$engine} COMMENT='' {$charset}";
 
@@ -56,7 +56,7 @@ $table_link = "CREATE TABLE {$pref}link (".
 					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"to_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
-					"to_supertag VARCHAR(250) NOT NULL,".
+					"to_supertag VARCHAR(250) NOT NULL DEFAULT '',".
 					"PRIMARY KEY (link_id),".
 					"KEY from_tag (from_page_id,to_tag(78)),".
 					"KEY idx_from_page_id (from_page_id),".
@@ -66,9 +66,9 @@ $table_link = "CREATE TABLE {$pref}link (".
 $table_log = "CREATE TABLE {$pref}log (".
 					"log_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"log_time TIMESTAMP NOT NULL,".
-					"level TINYINT(1) UNSIGNED NOT NULL,".
+					"level TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"ip VARCHAR(15) NOT NULL,".
+					"ip VARCHAR(15) NOT NULL DEFAULT '',".
 					"message TEXT NOT NULL,".
 					"PRIMARY KEY (log_id),".
 					"KEY idx_level (level),".
@@ -79,11 +79,11 @@ $table_log = "CREATE TABLE {$pref}log (".
 
 $table_menu = "CREATE TABLE {$pref}menu (".
 					"menu_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"user_id INT(10) UNSIGNED NOT NULL,".
-					"page_id INT(10) UNSIGNED NOT NULL,".
-					"lang VARCHAR(2) NOT NULL,".
-					"menu_title VARCHAR(100) NOT NULL,".
-					"menu_position SMALLINT(2) UNSIGNED NOT NULL,".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"lang VARCHAR(2) NOT NULL DEFAULT '',".
+					"menu_title VARCHAR(100) NOT NULL DEFAULT '',".
+					"menu_position SMALLINT(2) UNSIGNED NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (menu_id),".
 					"UNIQUE KEY idx_user_id (user_id,page_id)".
 				") {$engine} COMMENT='' {$charset}";
@@ -109,7 +109,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"ip VARCHAR(15) NOT NULL,".
+					"ip VARCHAR(15) NOT NULL DEFAULT '',".
 					"latest TINYINT(1) UNSIGNED DEFAULT '1',".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 					"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -148,12 +148,12 @@ $table_page = "CREATE TABLE {$pref}page (".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_poll = "CREATE TABLE {$pref}poll (".
-					"poll_id INT(10) UNSIGNED NOT NULL,".
-					"v_id TINYINT(3) UNSIGNED NOT NULL,".
-					"text VARCHAR(255) NOT NULL,".
-					"user_id INT(10) UNSIGNED NOT NULL,".
-					"plural TINYINT(1) NOT NULL,".
-					"votes SMALLINT(5) UNSIGNED NOT NULL,".
+					"poll_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"v_id TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',".
+					"text VARCHAR(255) NOT NULL DEFAULT '',".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"plural TINYINT(1) NOT NULL DEFAULT '0',".
+					"votes SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',".
 					"start DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"end DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"KEY idx_poll_id (poll_id),".
@@ -161,9 +161,9 @@ $table_poll = "CREATE TABLE {$pref}poll (".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_rating = "CREATE TABLE {$pref}rating (".
-					"page_id INT(10) UNSIGNED NOT NULL,".
-					"value INT(11) NOT NULL,".
-					"voters INT(10) UNSIGNED NOT NULL,".
+					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"value INT(11) NOT NULL DEFAULT '0',".
+					"voters INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"rating_time TIMESTAMP NOT NULL,".
 					"PRIMARY KEY (page_id),".
 					"KEY idx_voters_rate (voters)".
@@ -191,14 +191,14 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"body MEDIUMTEXT NOT NULL,".
 					"body_r MEDIUMTEXT NOT NULL,".
-					"formatting VARCHAR(20) DEFAULT NULL,".
+					"formatting VARCHAR(20) DEFAULT NULL DEFAULT '',".
 					"edit_note VARCHAR(100) NOT NULL DEFAULT '',".
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0',".
 					"reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"reviewed_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"latest TINYINT(1) UNSIGNED DEFAULT '0',".
-					"ip VARCHAR(15) NOT NULL,".
+					"ip VARCHAR(15) NOT NULL DEFAULT '',".
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page',".
 					"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
@@ -221,14 +221,14 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"ip_address VARCHAR( 16 ) DEFAULT '0' NOT NULL ,".
 					"user_agent VARCHAR( 50 ) NOT NULL ,".
 					"last_activity INT( 10 ) unsigned DEFAULT 0 NOT NULL ,".
-					"user_data text NOT NULL ,".
+					"user_data text NOT NULL,".
 					"PRIMARY KEY ( session_id )".
 				") {$engine} COMMENT='' {$charset}";*/
 
 $table_tag = "CREATE TABLE {$pref}tag (".
 					"tag_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
-					"lang VARCHAR(2) NOT NULL,".
+					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"tag_name VARCHAR(100) NOT NULL DEFAULT '',".
 					"date_created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"date_updated DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
@@ -250,7 +250,7 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"file_name VARCHAR(250) NOT NULL DEFAULT '',".
-					"lang VARCHAR(2) NOT NULL,".
+					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"description VARCHAR(250) NOT NULL DEFAULT '',".
 					"uploaded_dt DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"file_size INT(10) UNSIGNED NOT NULL DEFAULT '0',".
@@ -275,18 +275,18 @@ $table_user = "CREATE TABLE {$pref}user (".
 					"account_type TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',".
 					"signup_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"change_password VARCHAR(64) NOT NULL,".
+					"change_password VARCHAR(64) NOT NULL DEFAULT '',".
 					"email_confirm VARCHAR(64) NOT NULL DEFAULT '',".
 					"session_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
-					"session_expire INT(10) UNSIGNED NOT NULL,".
+					"session_expire INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"last_mark DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"login_count INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"lost_password_request_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',".
 					"failed_login_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',".
-					"total_pages INT(10) UNSIGNED NOT NULL,".
-					"total_revisions INT(10) UNSIGNED NOT NULL,".
-					"total_comments INT(10) UNSIGNED NOT NULL,".
-					"total_uploads INT(10) UNSIGNED NOT NULL,".
+					"total_pages INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"total_revisions INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"total_comments INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"total_uploads INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"fingerprint VARCHAR(40),".
 					"PRIMARY KEY (user_id),".
 					"UNIQUE KEY idx_user_name (user_name),".
@@ -297,9 +297,9 @@ $table_user = "CREATE TABLE {$pref}user (".
 
 $table_user_setting = "CREATE TABLE {$pref}user_setting (".
 					"setting_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"user_id INT(10) UNSIGNED NOT NULL,".
-					"theme VARCHAR(20) DEFAULT NULL,".
-					"lang VARCHAR(2) DEFAULT NULL,".
+					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"theme VARCHAR(20) DEFAULT NULL DEFAULT '',".
+					"lang VARCHAR(2) DEFAULT NULL DEFAULT '',".
 					"changes_count INT(10) UNSIGNED NOT NULL DEFAULT '50',".
 					"revisions_count INT(10) UNSIGNED NOT NULL DEFAULT '20',".
 					"dont_redirect TINYINT(1) UNSIGNED DEFAULT NULL,".
@@ -326,20 +326,20 @@ $table_user_setting = "CREATE TABLE {$pref}user_setting (".
 
 $table_usergroup = "CREATE TABLE {$pref}usergroup (".
 					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-					"group_name VARCHAR(100) NOT NULL,".
-					"description VARCHAR(255) NOT NULL,".
+					"group_name VARCHAR(100) NOT NULL DEFAULT '',".
+					"description VARCHAR(255) NOT NULL DEFAULT '',".
 					"moderator INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,".
-					"is_system TINYINT(1) UNSIGNED NOT NULL,".
-					"open TINYINT(1) UNSIGNED NOT NULL,".
-					"active TINYINT(1) UNSIGNED NOT NULL,".
+					"is_system TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
+					"open TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
+					"active TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (group_id),".
 					"UNIQUE KEY idx_name (group_name)".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_usergroup_member = "CREATE TABLE {$pref}usergroup_member (".
-					"group_id INTEGER(10) UNSIGNED NOT NULL,".
-					"user_id INTEGER(10) UNSIGNED NOT NULL,".
+					"group_id INTEGER(10) UNSIGNED NOT NULL DEFAULT '0',".
+					"user_id INTEGER(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"UNIQUE KEY idx_group_id (group_id, user_id)".
 				") {$engine} COMMENT='' {$charset}";
 
