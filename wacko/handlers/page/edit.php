@@ -6,10 +6,10 @@ if (!defined('IN_WACKO'))
 }
 
 $edit_note		= '';
-$minor_edit		= 0;
-$reviewed		= 0;
 $error			= '';
+$minor_edit		= 0;
 $output			= '';
+$reviewed		= 0;
 
 // invoke autocomplete if needed
 if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
@@ -250,11 +250,11 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		$preview = $this->format($preview, 'wacko');
 		$preview = $this->format($preview, 'post_wacko');
 
-		$output = "<div class=\"preview\"><p class=\"preview\"><span>".$this->get_translation('EditPreview')." (".$textchars." ".$this->get_translation('Chars').")</span></p>\n";
+		$output = '<div class="preview"><p class="preview"><span>'.$this->get_translation('EditPreview').' ('.$textchars.' '.$this->get_translation('Chars').")</span></p>\n";
 
 		if ($this->config['edit_summary'] != 0)
 		{
-			$output .= "<div class=\"commenttitle\">\n<a href=\"#\">".$title."</a>\n</div>\n";
+			$output .= '<div class="commenttitle">'."\n".'<a href="#">'.$title."</a>\n</div>\n";
 		}
 
 		$output .= $preview;
@@ -295,45 +295,45 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	<br />
 	<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
 <?php
-	$output .= "<input type=\"hidden\" name=\"previous\" value=\"".htmlspecialchars($previous)."\" /><br />";
-	$output .= "<textarea id=\"postText\" name=\"body\" rows=\"40\" cols=\"60\" class=\"TextArea\">";
+	$output .= '<input type="hidden" name="previous" value="'.htmlspecialchars($previous).'" /><br />';
+	$output .= '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">';
 	$output .= htmlspecialchars($body)."</textarea><br />\n";
 
 	// comment title
 	if ($this->page['comment_on_id'] != 0)
 	{
-		$output .= "<label for=\"addcomment_title\">".$this->get_translation('AddCommentTitle')."</label><br />";
-		$output .= "<input id=\"addcomment_title\" maxlength=\"100\" value=\"".htmlspecialchars($title)."\" size=\"60\" name=\"title\" />";
-		$output .= "<br />";
+		$output .= '<label for="addcomment_title">'.$this->get_translation('AddCommentTitle').'</label><br />';
+		$output .= '<input id="addcomment_title" maxlength="100" value="'.htmlspecialchars($title).'" size="60" name="title" />';
+		$output .= '<br />';
 	}
 	else
 	{
 		if (!$this->page)
 		{
 			// new page title field
-			$output .= "<label for=\"addpage_title\">".$this->get_translation('MetaTitle').":</label><br />";
-			$output .= "<input id=\"addpage_title\" value=\"".htmlspecialchars($title)."\" size=\"60\" maxlength=\"100\" name=\"title\" /><br />";
+			$output .= '<label for="addpage_title">'.$this->get_translation('MetaTitle').':</label><br />';
+			$output .= '<input id="addpage_title" value="'.htmlspecialchars($title).'" size="60" maxlength="100" name="title" /><br />';
 		}
 
 		// edit note
 		if ($this->config['edit_summary'] != 0)
 		{
-			$output .= "<label for=\"edit_note\">".$this->get_translation('EditNote').":</label><br />";
+			$output .= '<label for="edit_note">'.$this->get_translation('EditNote').':</label><br />';
 			// briefly describe your changes (corrected spelling, fixed grammar, improved formatting)
-			$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note)."\" size=\"60\" name=\"edit_note\"/>";
+			$output .= '<input id="edit_note" maxlength="200" value="'.htmlspecialchars($edit_note).'" size="60" name="edit_note"/>';
 			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br />";
 		}
 
 		// minor edit
 		if ($this->page && $this->config['minor_edit'] != 0)
 		{
-			$output .= "<input id=\"minor_edit\" type=\"checkbox\" value=\"1\" name=\"minor_edit\"/>";
-			$output .= "<label for=\"minor_edit\">".$this->get_translation('EditMinor')."</label>";
-			$output .= "<br />";
+			$output .= '<input id="minor_edit" type="checkbox" value="1" name="minor_edit"/>';
+			$output .= '<label for="minor_edit">'.$this->get_translation('EditMinor').'</label>';
+			$output .= '<br />';
 		}
 		else
 		{
-			$output .= "<br />";
+			$output .= '<br />';
 		}
 
 		if ($user)
@@ -341,28 +341,30 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 			// reviewed
 			if ($this->page && $this->config['review'] != 0 && $this->is_reviewer())
 			{
-				$output .= "<input id=\"reviewed\" type=\"checkbox\" value=\"1\" name=\"reviewed\"/>";
-				$output .= "<label for=\"reviewed\">".$this->get_translation('Reviewed')."</label>";
-				$output .= "<br />";
+				$output .= '<input id="reviewed" type="checkbox" value="1" name="reviewed"/>';
+				$output .= '<label for="reviewed">'.$this->get_translation('Reviewed').'</label>';
+				$output .= '<br />';
 			}
 
 			// publish anonymously
 			if (($this->page && $this->config['publish_anonymously'] != 0 && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 			{
-				$output .= "<input type=\"checkbox\" name=\"noid_publication\" id=\"noid_publication\" value=\"".$this->page['page_id']."\"".( $this->get_user_setting('noid_pubs') == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"noid_publication\">".$this->get_translation('PostAnonymously')."</label></small>";
-				$output .= "<br />";
+				$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="'.$this->page['page_id'].'"'.( $this->get_user_setting('noid_pubs') == 1 ? ' checked="checked"' : '' ).' />';
+				$output .= '<small><label for="noid_publication">'.$this->get_translation('PostAnonymously').'</label></small>';
+				$output .= '<br />';
 			}
 
 			// watch a page
 			if ($this->page && $this->iswatched !== true)
 			{
-				$output .= "<input type=\"checkbox\" name=\"watchpage\" id=\"watchpage\" value=\"1\"".( $this->get_user_setting('send_watchmail') == 1 ? "checked=\"checked\"" : "" )." /> <small><label for=\"watchpage\">".$this->get_translation('NotifyMe')."</label></small>";
-				$output .= "<br />";
+				$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"'.( $this->get_user_setting('send_watchmail') == 1 ? ' checked="checked"' : '' ).' />';
+				$output .= '<small><label for="watchpage">'.$this->get_translation('NotifyMe').'</label></small>';
+				$output .= '<br />';
 			}
 		}
 		else
 		{
-			$output .= "<br />";
+			$output .= '<br />';
 		}
 	}
 
@@ -370,18 +372,20 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	{
 		foreach ($words as $id => $word)
 		{
-			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="category'.$id.'"><strong>'.htmlspecialchars($word['category']).'</strong></label></span> ';
+			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' />'.
+						'<label for="category'.$id.'"><strong>'.htmlspecialchars($word['category']).'</strong></label></span> ';
 
 			if (isset($word['childs']) && $word['childs'] == true)
 			{
 				foreach ($word['childs'] as $id => $word)
 				{
-					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' /><label for="category'.$id.'">'.htmlspecialchars($word['category']).'</label></span> ';
+					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' />'.
+								'<label for="category'.$id.'">'.htmlspecialchars($word['category']).'</label></span> ';
 				}
 			}
 		}
 
-		$output .= "<br />".$this->get_translation('Categories').':<div class="setcategory"><small><br /><br />'.substr(implode(' ', $_words), 6).'</small></div><br /><br />';
+		$output .= '<br />'.$this->get_translation('Categories').':<div class="setcategory"><small><br /><br />'.substr(implode(' ', $_words), 6).'</small></div><br /><br />';
 	}
 
 	echo $output;
@@ -422,9 +426,9 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 }
 else
 {
-	echo "<div id=\"page\">";
+	echo '<div id="page">';
 	echo $this->get_translation('WriteAccessDenied');
-	echo "</div>";
+	echo '</div>'';
 }
 
 ?>
