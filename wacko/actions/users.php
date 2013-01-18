@@ -147,62 +147,66 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			</tr>
 		</table>
 <?php
-		// contact form
-		echo '<h2>'.$this->get_translation('UsersContact').'</h2>'."\n";
-
-		// only registered users can send PMs
-		if ($this->get_user())
+		// hide contact form if profil is equal with user
+		if ($user['user_id'] != $this->get_user_id())
 		{
-			// decompose reply referrer
-			if (isset($_GET['ref']) && $_GET['ref'] == true)
+			// contact form
+			echo '<h2>'.$this->get_translation('UsersContact').'</h2>'."\n";
+
+			// only registered users can send PMs
+			if ($this->get_user())
 			{
-				list($_POST['ref'], $_POST['mail_subject']) = explode('@@', base64_decode(rawurldecode($_GET['ref'])), 2);
-				if (substr($_POST['mail_subject'], 0, 3) != 'Re:') $_POST['mail_subject'] = 'Re: '.$_POST['mail_subject'];
-			}
+				// decompose reply referrer
+				if (isset($_GET['ref']) && $_GET['ref'] == true)
+				{
+					list($_POST['ref'], $_POST['mail_subject']) = explode('@@', base64_decode(rawurldecode($_GET['ref'])), 2);
+					if (substr($_POST['mail_subject'], 0, 3) != 'Re:') $_POST['mail_subject'] = 'Re: '.$_POST['mail_subject'];
+				}
 ?>
-		<br />
-		<?php echo $this->form_open(); ?>
-		<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['user_name']); ?>" />
-		<?php if (isset($_POST['ref'])) echo '<input type="hidden" name="ref" value="'.htmlspecialchars($_POST['ref']).'" />'; ?>
-		<table class="formation">
+			<br />
+			<?php echo $this->form_open(); ?>
+			<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['user_name']); ?>" />
+			<?php if (isset($_POST['ref'])) echo '<input type="hidden" name="ref" value="'.htmlspecialchars($_POST['ref']).'" />'; ?>
+			<table class="formation">
 <?php
-			// user must allow incoming messages, and needs confirmed email address set
-			if ($this->config['enable_email'] == true && $user['allow_intercom'] == 1 && $user['email'] && !$user['email_confirm'])
-			{
+				// user must allow incoming messages, and needs confirmed email address set
+				if ($this->config['enable_email'] == true && $user['allow_intercom'] == 1 && $user['email'] && !$user['email_confirm'])
+				{
 ?>
-			<tr>
-				<td class="label" style="width:50px; white-space:nowrap;"><?php echo $this->get_translation('UsersIntercomSubject'); ?>:</td>
-				<td>
-					<input name="mail_subject" value="<?php echo (isset($_POST['mail_subject']) ? htmlspecialchars($_POST['mail_subject']) : ""); ?>" size="60" maxlength="200" />
-					<?php if (isset($_POST['ref'])) echo '&nbsp;&nbsp; <a href="'.$this->href('', '', 'profile='.$user['user_name'].'#contacts').'">'.$this->get_translation('UsersIntercomSubjectN').'</a>'; ?>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><textarea name="mail_body" cols="80" rows="15"><?php echo (isset($_POST['mail_body']) ? htmlspecialchars($_POST['mail_body']) : ""); ?></textarea></td>
-			</tr>
-			<tr>
-				<td><input id="submit" type="submit" name="send_pm" value="<?php echo $this->get_translation('UsersIntercomSend'); ?>" /></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<small><?php echo $this->get_translation('UsersIntercomDesc');
-					?></small>
-				</td>
-			</tr>
+				<tr>
+					<td class="label" style="width:50px; white-space:nowrap;"><?php echo $this->get_translation('UsersIntercomSubject'); ?>:</td>
+					<td>
+						<input name="mail_subject" value="<?php echo (isset($_POST['mail_subject']) ? htmlspecialchars($_POST['mail_subject']) : ""); ?>" size="60" maxlength="200" />
+						<?php if (isset($_POST['ref'])) echo '&nbsp;&nbsp; <a href="'.$this->href('', '', 'profile='.$user['user_name'].'#contacts').'">'.$this->get_translation('UsersIntercomSubjectN').'</a>'; ?>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><textarea name="mail_body" cols="80" rows="15"><?php echo (isset($_POST['mail_body']) ? htmlspecialchars($_POST['mail_body']) : ""); ?></textarea></td>
+				</tr>
+				<tr>
+					<td><input id="submit" type="submit" name="send_pm" value="<?php echo $this->get_translation('UsersIntercomSend'); ?>" /></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<small><?php echo $this->get_translation('UsersIntercomDesc');
+						?></small>
+					</td>
+				</tr>
+<?php
+				}
+				else
+				{
+					echo '<tr><td colspan="2" align="center"><strong><em>'.$this->get_translation('UsersIntercomDisabled').'</em></strong></td></tr>';
+				}
+?>
+			</table>
+			<?php echo $this->form_close(); ?>
 <?php
 			}
 			else
 			{
-				echo '<tr><td colspan="2" align="center"><strong><em>'.$this->get_translation('UsersIntercomDisabled').'</em></strong></td></tr>';
+				echo '<table class="formation"><tr><td colspan="2" align="center"><em>'.$this->get_translation('UsersPMNotLoggedIn').'</em></td></tr></table>';
 			}
-?>
-		</table>
-		<?php echo $this->form_close(); ?>
-<?php
-		}
-		else
-		{
-			echo '<table class="formation"><tr><td colspan="2" align="center"><em>'.$this->get_translation('UsersPMNotLoggedIn').'</em></td></tr></table>';
 		}
 
 		// user-owned pages
