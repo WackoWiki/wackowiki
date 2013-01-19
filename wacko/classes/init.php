@@ -573,7 +573,11 @@ class Init
 			if ($this->cacheval == true)
 			{
 				$data = ob_get_contents();
-				return $this->cache->store_to_cache($data);
+
+				if (!empty($data))
+				{
+					return $this->cache->store_to_cache($data);
+				}
 			}
 		}
 		else if ($this->cache == true && $op == 'log')
