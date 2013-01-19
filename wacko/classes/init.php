@@ -578,6 +578,10 @@ class Init
 				{
 					return $this->cache->store_to_cache($data);
 				}
+				else
+				{
+					// FALSE, then output buffering is not active
+				}
 			}
 		}
 		else if ($this->cache == true && $op == 'log')
