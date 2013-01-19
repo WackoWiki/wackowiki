@@ -428,7 +428,7 @@ else
 {
 	echo '<div id="page">';
 	echo $this->get_translation('WriteAccessDenied');
-	echo '</div>'';
+	echo '</div>';
 }
 
 ?>
