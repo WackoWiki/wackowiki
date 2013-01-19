@@ -84,6 +84,7 @@ class Cache
 
 		if ((time() - ($timestamp = @filemtime($filename))) > $this->cache_ttl)
 		{
+			unlink($filename);
 			return false;
 		}
 
@@ -92,12 +93,14 @@ class Cache
 
 		if (empty($size))
 		{
+			unlink($filename);
 			return false;
 		}
 
 		// check for false and empty strings
 		if(($contents = fread($fp, $size)) === '')
 		{
+			unlink($filename);
 			return false;
 		}
 
@@ -177,11 +180,11 @@ class Cache
 	{
 		if ($this->wacko)
 		{
-			$page = strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
-			$sql = "SELECT method, query ".
-					"FROM ".$this->wacko->config['table_prefix']."cache ".
-					"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'";
-			$params = $this->wacko->load_all($sql);
+			$page	= strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
+			$sql	= "SELECT method, query ".
+						"FROM ".$this->wacko->config['table_prefix']."cache ".
+						"WHERE name ='".quote($this->wacko->dblink, hash('md5', $page))."'";
+			$params	= $this->wacko->load_all($sql);
 
 			$this->log('cache_invalidate page='.$page);
 			$this->log('cache_invalidate query='.$sql);
@@ -271,7 +274,7 @@ class Cache
 			$etag	= (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? $_SERVER['HTTP_IF_NONE_MATCH'] : '');
 			$lastm	= (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : '');
 
-			if ($p = strpos($lastm, ";"))
+			if ($p = strpos($lastm, ';'))
 			{
 				$lastm = substr($lastm, 0, $p);
 			}
@@ -300,13 +303,13 @@ class Cache
 				if ($this->debug >= 1 && strpos($method, '.xml') === false)
 				{
 					$ddd = $this->get_micro_time();
-					echo "<div class=\"debug\">cache time: ".(number_format(($ddd-$this->timer),3))." s<br />";
-					echo "</div>";
+					echo '<div class="debug">cache time: '.(number_format(($ddd-$this->timer),3)).' s<br />';
+					echo '</div>';
 				}
 
 				if (strpos($method, '.xml') === false)
 				{
-					echo "</body></html>";
+					echo '</body></html>';
 				}
 
 				die();
