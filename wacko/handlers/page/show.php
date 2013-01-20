@@ -38,8 +38,6 @@ if ($this->has_access('read'))
 {
 	if (!$this->page)
 	{
-		// Not sure what the point of wrapping it in the conditional was
-		// if (function_exists('virtual')) header('HTTP/1.0 404 Not Found');
 		if (!headers_sent())
 		{
 			header('HTTP/1.0 404 Not Found');
@@ -141,8 +139,6 @@ if ($this->has_access('read'))
 }
 else
 {
-	// Not sure what the point of wrapping it in the conditional was
-	// if (function_exists('virtual')) header('HTTP/1.0 403 Forbidden');
 	if (!headers_sent())
 	{
 		header('HTTP/1.0 403 Forbidden');
