@@ -104,8 +104,6 @@ if ($filepath)
 }
 else if ($error == 404)
 {
-	// Not sure what the point of wrapping it in the conditional was
-	// if (function_exists('virtual')) header('HTTP/1.0 404 Not Found');
 	if (!headers_sent())
 	{
 		header('HTTP/1.0 404 Not Found');
@@ -115,8 +113,6 @@ else if ($error == 404)
 }
 else
 {
-	// Not sure what the point of wrapping it in the conditional was
-	// if (function_exists('virtual')) header('HTTP/1.0 403 Forbidden');
 	if (!headers_sent())
 	{
 		header('HTTP/1.0 403 Forbidden');

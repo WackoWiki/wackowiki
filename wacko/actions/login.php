@@ -61,7 +61,7 @@ else if ($user = $this->get_user())
 
 	if ($user['session_time'] == true)
 	{
-		$output .= $this->get_translation('LastVisit').' <tt>'. $this->get_time_string_formatted($user['session_time'])."</tt>.<br />";
+		$output .= $this->get_translation('LastVisit').' <tt>'. $this->get_time_string_formatted($user['session_time']).'</tt>.<br />';
 	}
 
 	$output .= $this->get_translation('SessionEnds').' <tt>';
@@ -88,11 +88,11 @@ else if ($user = $this->get_user())
 	$output .= '<br />';
 
 	// Only allow your session to be used from this IP address.
-	$output .= $this->get_translation('BindSessionIp').' '. ( $user['validate_ip'] == 1 ? $this->get_translation('BindSessionIpOn').' <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).".<br />";
+	$output .= $this->get_translation('BindSessionIp').' '. ( $user['validate_ip'] == 1 ? $this->get_translation('BindSessionIpOn').' <tt>'.$user['ip'].'</tt>)' : '<tt>Off</tt>' ).'.<br />';
 
 	if ($this->config['tls'] == true || $this->config['tls_proxy'] == true)
 	{
-		$output .= $this->get_translation('TrafficProtection').' <tt>'. ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' )."</tt>.";
+		$output .= $this->get_translation('TrafficProtection').' <tt>'. ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'].' ('.$_SERVER['SSL_PROTOCOL'].')' : 'no' ).'</tt>.';
 	}
 
 	$this->set_message($output);
