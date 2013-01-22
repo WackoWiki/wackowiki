@@ -89,7 +89,10 @@ class Init
 		}
 		else
 		{
-			ob_start('ob_gzhandler');
+			if (function_exists('ob_gzhandler'))
+			{
+				ob_start('ob_gzhandler');
+			}
 		}
 
 		if (!isset($_REQUEST))
