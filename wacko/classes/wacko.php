@@ -1279,7 +1279,7 @@ class Wacko
 	}
 
 	// STANDARD QUERIES
-	function load_revisions($page_id, $minor_edit = '')
+	function load_revisions($page_id, $minor_edit = '', $deleted = 0)
 	{
 		$page_meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
 
@@ -1291,6 +1291,9 @@ class Wacko
 			"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
 				($minor_edit
 					? "AND p.minor_edit = '0' "
+					: "").
+				($deleted != 1
+					? "AND p.deleted <> '1' "
 					: "").
 			"ORDER BY p.modified DESC");
 
@@ -1304,6 +1307,9 @@ class Wacko
 				"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
 					($minor_edit
 						? "AND p.minor_edit = '0' "
+						: "").
+					($deleted != 1
+						? "AND p.deleted <> '1' "
 						: "").
 				"ORDER BY p.modified DESC ".
 				"LIMIT 1"))
@@ -1319,6 +1325,9 @@ class Wacko
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.reviewer_id = o.user_id) ".
 				"WHERE p.page_id = '".quote($this->dblink, $page_id)."' ".
+					($deleted != 1
+						? "AND p.deleted <> '1' "
+						: "").
 				"ORDER BY p.modified DESC ".
 				"LIMIT 1");
 		}
@@ -1339,7 +1348,7 @@ class Wacko
 			" ORDER BY tag", 1);
 	}
 
-	function load_recently_changed($limit = 100, $for = '', $from = '', $minor_edit = '', $default_pages = false)
+	function load_recently_changed($limit = 100, $for = '', $from = '', $minor_edit = '', $default_pages = false, $deleted = 0)
 	{
 		$limit = (int)$limit;
 
@@ -1357,6 +1366,9 @@ class Wacko
 					: "").
 				($minor_edit
 					? "AND p.minor_edit = '0' "
+					: "").
+				($deleted != 1
+					? "AND p.deleted <> '1' "
 					: "").
 				($default_pages == false
 					? "AND (u.account_type = '0' OR p.user_id = '0') "
@@ -1427,6 +1439,9 @@ class Wacko
 			($for
 				? "AND p.supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 				: "").
+			($deleted != 1
+				? "AND p.deleted <> '1' "
+				: "").
 		"ORDER BY c.modified DESC ".
 		"LIMIT ".$limit))
 		{
@@ -1463,10 +1478,10 @@ class Wacko
 
 	function load_recently_deleted($limit = 1000, $cache = 1)
 	{
-		$meta = 'r.page_id, r.owner_id, r.user_id, r.tag, r.supertag, r.created, r.modified, r.edit_note, r.minor_edit, r.latest, r.handler, r.comment_on_id, r.lang, r.title, r.keywords, r.description';
+		$meta = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note, p.minor_edit, p.latest, p.handler, p.comment_on_id, p.lang, p.title, p.keywords, p.description';
 
 		return $this->load_all(
-			"SELECT DISTINCT {$meta} ".
+			"SELECT {$meta} ".
 			"FROM {$this->config['table_prefix']}page p ".
 			"WHERE p.deleted = '1' ".
 			"ORDER BY p.modified DESC, p.tag ASC ".
