@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 if (!function_exists('load_recent_comments'))
 {
-	function load_recent_comments(&$wacko, $for = '', $limit = 50)
+	function load_recent_comments(&$wacko, $for = '', $limit = 50, $deleted = 0)
 	{
 		$limit		= (int) $limit;
 		$pagination	= '';
@@ -20,7 +20,10 @@ if (!function_exists('load_recent_comments'))
 			"WHERE ".
 			($for
 				? "b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
-				: "a.comment_on_id <> '0' ")
+				: "a.comment_on_id <> '0' ").
+			($deleted != 1
+				? "AND a.deleted <> '1' "
+				: "")
 			, 1));
 
 		if ($count_pages)
@@ -37,6 +40,9 @@ if (!function_exists('load_recent_comments'))
 				($for
 					? "b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
 					: "a.comment_on_id <> '0' ").
+				($deleted != 1
+					? "AND a.deleted <> '1' "
+					: "").
 				"ORDER BY a.modified DESC ".
 				"LIMIT {$pagination['offset']}, {$limit}");
 

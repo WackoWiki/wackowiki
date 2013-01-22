@@ -4152,7 +4152,7 @@ class Wacko
 		return $latest['tag'];
 	}
 
-	function load_comments($page_id, $limit = 0, $count = 30)
+	function load_comments($page_id, $limit = 0, $count = 30, $deleted = 0)
 	{
 		// avoid results if $page_id is 0 (page does not exists)
 		if ($page_id)
@@ -4163,6 +4163,9 @@ class Wacko
 					"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 				"WHERE p.comment_on_id = '".quote($this->dblink, $page_id)."' ".
+					($deleted != 1
+						? "AND p.deleted <> '1' "
+						: "").
 				"ORDER BY p.created ".
 				"LIMIT {$limit}, {$count}");
 		}
