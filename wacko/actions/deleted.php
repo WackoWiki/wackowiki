@@ -31,7 +31,7 @@ if ($pages == true)
 		if ($access === true)
 		{
 			// day header
-			list($day, $time) = explode(' ', $page['date']);
+			list($day, $time) = explode(' ', $page['modified']);
 
 			if (!isset($curday)) $curday = '';
 
