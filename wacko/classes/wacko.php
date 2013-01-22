@@ -936,13 +936,13 @@ class Wacko
 		// load page
 		if ($metadata_only)
 		{
-			$what_p = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.keywords, p.description, p.noindex, u.user_name, o.user_name AS owner_name';
-			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.keywords, p.description, s.noindex, u.user_name, o.user_name AS owner_name';
+			$what_p = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.keywords, p.description, p.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
+			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.lang, p.keywords, p.description, s.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
 		}
 		else
 		{
 			$what_p = 'p.*, u.user_name, o.user_name AS owner_name';
-			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.reviewed_time, p.reviewer_id, p.ip, p.latest, p.handler, p.comment_on_id, p.lang, p.description, p.keywords, s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, s.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, u.user_name, o.user_name AS owner_name';
+			$what_r = 'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.reviewed, p.reviewed_time, p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.lang, p.description, p.keywords, s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, s.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, u.user_name, o.user_name AS owner_name';
 		}
 
 		//

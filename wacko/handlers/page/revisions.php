@@ -33,9 +33,9 @@ if (!isset($hide_minor_edit))
 }
 
 // get page_id for deleted but stored page
-if (!isset($this->page['page_id']))
+if ($this->page['deleted'] == 1)
 {
-	$tag = trim($_GET['page'], '/revisions'); //
+/*	$tag = trim($_GET['page'], '/revisions'); //
 	// Returns Array ( [id] => Value )
 	$get_page_id = $this->load_single(
 		"SELECT page_id ".
@@ -44,7 +44,7 @@ if (!isset($this->page['page_id']))
 		"LIMIT 1");
 
 	// Get the_ID value
-	$this->page['page_id'] = $get_page_id['page_id'];
+	$this->page['page_id'] = $get_page_id['page_id']; */
 	echo "BACKUP of deleted page!"; // TODO: localize and add description: to restore the page you ...
 }
 
@@ -90,7 +90,7 @@ if ($this->has_access('read'))
 		{
 			if ($page['edit_note'])
 			{
-				$edit_note = " <span class=\"editnote\">[".$page['edit_note']."]</span>";
+				$edit_note = ' <span class="editnote">['.$page['edit_note'].']</span>';
 			}
 			else
 			{
