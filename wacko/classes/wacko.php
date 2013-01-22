@@ -1426,7 +1426,7 @@ class Wacko
 		}
 	}
 
-	function load_recently_comment($limit = 100, $for = '')
+	function load_recently_comment($limit = 100, $for = '', $deleted = 0)
 	{
 		$limit = (int) $limit;
 
