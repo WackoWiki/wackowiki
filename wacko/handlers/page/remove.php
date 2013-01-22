@@ -152,7 +152,7 @@ if ($this->is_admin() ||
 					$this->remove_revisions($this->tag, true);
 				}
 
-				echo "<em>".$this->get_translation('ClusterRemoved')."</em><br />\n";
+				echo '<em>'.$this->get_translation('ClusterRemoved')."</em><br />\n";
 			}
 
 			// update user statistics
@@ -183,13 +183,13 @@ if ($this->is_admin() ||
 			// return to commented page
 			if ($comment_on_id)
 			{
-				echo "<br />".$this->compose_link_to_page($this->get_page_tag($comment_on_id)."#commentsheader", "", "&laquo; ".$this->get_translation('ReturnToCommented'), 0);
+				echo '<br />'.$this->compose_link_to_page($this->get_page_tag($comment_on_id).'#commentsheader', '', '&laquo; '.$this->get_translation('ReturnToCommented'), 0);
 			}
 		}
 		else
 		{
 			// show warning
-			echo "<div class=\"warning\">";
+			echo '<div class="warning">';
 
 			if ($comment_on_id)
 			{
@@ -200,7 +200,7 @@ if ($this->is_admin() ||
 				echo $this->get_translation('ReallyDelete');
 			}
 
-			echo "</div>";
+			echo '</div>';
 
 			echo $this->form_open('remove');
 
@@ -209,17 +209,17 @@ if ($this->is_admin() ||
 			{
 				if (!$comment_on_id)
 				{
-					echo "<input id=\"removerevisions\" type=\"checkbox\" name=\"revisions\" value=\"1\" />";
-					echo "<label for=\"removerevisions\">".$this->get_translation('RemoveRevisions')."</label><br />";
-					echo "<input id=\"removecluster\" type=\"checkbox\" name=\"cluster\" value=\"1\" />";
-					echo "<label for=\"removecluster\">".$this->get_translation('RemoveCluster')."</label><br />";
-					echo "<input id=\"dontkeep\" type=\"checkbox\" name=\"dontkeep\" value=\"1\" />";
-					echo "<label for=\"dontkeep\">".$this->get_translation('RemoveDontKeep')."</label><br />";
+					echo '<input id="removerevisions" type="checkbox" name="revisions" value="1" />';
+					echo '<label for="removerevisions">'.$this->get_translation('RemoveRevisions').'</label><br />';
+					echo '<input id="removecluster" type="checkbox" name="cluster" value="1" />';
+					echo '<label for="removecluster">'.$this->get_translation('RemoveCluster').'</label><br />';
+					echo '<input id="dontkeep" type="checkbox" name="dontkeep" value="1" />';
+					echo '<label for="dontkeep">'.$this->get_translation('RemoveDontKeep').'</label><br />';
 				}
 			}
 
 			// show backlinks
-			echo "<br />";
+			echo '<br />';
 			echo $this->action('backlinks', array('nomark' => 0));
 ?>
 			<br /><br />
