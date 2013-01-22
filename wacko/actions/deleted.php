@@ -18,20 +18,30 @@ if ($pages == true)
 	foreach ($pages as $page)
 	{
 		$i++;
+
 		if ($this->config['hide_locked'])
+		{
 			$access = $this->has_access('read', $page['page_id']);
+		}
 		else
+		{
 			$access = true;
+		}
 
 		if ($access === true)
 		{
 			// day header
 			list($day, $time) = explode(' ', $page['date']);
+
 			if (!isset($curday)) $curday = '';
 
 			if ($day != $curday)
 			{
-				if ($curday) echo "</ul>\n<br /></li>\n";
+				if ($curday)
+				{
+					echo "</ul>\n<br /></li>\n";
+				}
+
 				echo "<li><strong>".date($this->config['date_format'], strtotime($day)).":</strong>\n<ul>\n";
 				$curday = $day;
 			}
@@ -44,8 +54,10 @@ if ($pages == true)
 					"</span>".
 				"</li>\n";
 		}
+
 		if ($i >= $max) break;
 	}
+
 	echo "</ul>\n</li>\n</ul>";
 }
 else
