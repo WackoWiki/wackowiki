@@ -1392,6 +1392,9 @@ class Wacko
 			($minor_edit
 				? "AND p.minor_edit = '0' "
 				: "").
+			($deleted != 1
+				? "AND p.deleted <> '1' "
+				: "").
 			($default_pages == false
 				? "AND (u.account_type = '0' OR p.user_id = '0') "
 				: "").
@@ -5724,19 +5727,15 @@ class Wacko
 			$this->save_revision($page);
 
 			// saving updated for the current user
-			$page['modified']	= date(SQL_DATE_FORMAT);
-			$page['user_id']	= $this->get_user_name();
-			$page['ip']			= $this->get_user_ip();
-
 			$this->sql_query(
 				"UPDATE {$this->config['table_prefix']}page SET ".
 				"modified	= '".date(SQL_DATE_FORMAT)."', ".
 				"ip			= '".$this->get_user_ip()."', ".
 				"deleted	= '1', ".
-				"user_id	= '".quote($this->dblink, $comment['created'])."' ".
+				#"edit_note	= '".$this->get_user_ip()."', ".
+				"user_id	= '".$this->get_user_id()."' ".
 				"WHERE page_id	= '".quote($this->dblink, $page_id)."' ".
 				"LIMIT 1");
-			#$this->save_revision($page);
 		}
 		else
 		{
