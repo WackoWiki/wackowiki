@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 if (!function_exists('load_recently_commented'))
 {
-	function load_recently_commented(&$wacko, $for = '', $limit = 50)
+	function load_recently_commented(&$wacko, $for = '', $limit = 50, $deleted = 0)
 	{
 		$_ids		= '';
 		$limit		= (int) $limit;
@@ -27,6 +27,9 @@ if (!function_exists('load_recently_commented'))
 			($for
 				? 	"a2.page_id IS NULL AND b.supertag LIKE '".quote($wacko->dblink, $wacko->translit($for))."/%' "
 				: 	"a2.page_id IS NULL AND a.comment_on_id <> '0' ").
+			($deleted != 1
+				? "AND p.deleted <> '1' "
+				: "").
 			"ORDER BY a.created DESC"
 			, 1));
 		{
