@@ -908,7 +908,7 @@ class Wacko
 		return $page;
 	}
 
-	function old_load_page($tag, $page_id = 0, $revision_id = '', $cache = 1, $supertagged = false, $metadata_only = 0)
+	function old_load_page($tag, $page_id = 0, $revision_id = '', $cache = 1, $supertagged = false, $metadata_only = 0, $deleted = 0)
 	{
 		$supertag = '';
 
@@ -960,6 +960,9 @@ class Wacko
 					"WHERE ".( $page_id != 0
 						? "page_id  = '".quote($this->dblink, $page_id)."' "
 						: "supertag = '".quote($this->dblink, $supertag)."' " ).
+						( $deleted != 1
+							? "AND p.deleted <> '1' "
+							: "").
 					"LIMIT 1");
 
 				$owner_id = $page['owner_id'];
@@ -977,6 +980,9 @@ class Wacko
 						"WHERE ".( $page_id != 0
 							? "p.page_id  = '".quote($this->dblink, $page_id)."' "
 							: "p.supertag = '".quote($this->dblink, $supertag)."' " ).
+							( $deleted != 1
+								? "AND p.deleted <> '1' "
+								: "").
 							"AND revision_id = '".quote($this->dblink, $revision_id)."' ".
 						"LIMIT 1");
 
@@ -991,6 +997,9 @@ class Wacko
 						"LEFT JOIN ".$this->config['table_prefix']."user o ON (p.owner_id = o.user_id) ".
 						"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 					"WHERE tag = '".quote($this->dblink, $tag)."' ".
+						( $deleted != 1
+							? "AND p.deleted <> '1' "
+							: "").
 					"LIMIT 1");
 
 				$owner_id = $page['owner_id'];
@@ -1006,6 +1015,9 @@ class Wacko
 							"LEFT JOIN ".$this->config['table_prefix']."user u ON (p.user_id = u.user_id) ".
 							"LEFT JOIN ".$this->config['table_prefix']."page s ON (p.page_id = s.page_id) ".
 						"WHERE p.tag = '".quote($this->dblink, $tag)."' ".
+							( $deleted != 1
+								? "AND p.deleted <> '1' "
+								: "").
 							"AND revision_id = '".quote($this->dblink, $revision_id)."' ".
 						"LIMIT 1");
 
@@ -1454,13 +1466,14 @@ class Wacko
 		$meta = 'r.page_id, r.owner_id, r.user_id, r.tag, r.supertag, r.created, r.modified, r.edit_note, r.minor_edit, r.latest, r.handler, r.comment_on_id, r.lang, r.title, r.keywords, r.description';
 
 		return $this->load_all(
-			"SELECT DISTINCT $meta, MAX(r.modified) AS date ".
-			"FROM {$this->config['table_prefix']}revision r ".
-				"LEFT JOIN {$this->config['table_prefix']}page p ON (r.page_id = p.page_id) ".
-			"WHERE p.page_id IS NULL ".
-			"GROUP BY r.page_id ".
-			"ORDER BY date DESC, r.tag ASC ".
-			( $limit > 0 ? "LIMIT $limit" : '' ), $cache);
+			"SELECT DISTINCT {$meta} ".
+			"FROM {$this->config['table_prefix']}page p ".
+			"WHERE p.deleted = '1' ".
+			"ORDER BY p.modified DESC, p.tag ASC ".
+			( $limit > 0
+				? "LIMIT $limit"
+				: ''
+			), $cache);
 	}
 
 	function load_categories($tag, $page_id = 0)
@@ -2178,7 +2191,7 @@ class Wacko
 			$this->sql_query(
 				"UPDATE {$this->config['user_table']} ".
 				"SET total_revisions = total_revisions + 1 ".
-				"WHERE user_name = '".quote($this->dblink, $user['user_name'])."' ".
+				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."' ".
 				"LIMIT 1");
 		}
 	}
@@ -5694,15 +5707,26 @@ class Wacko
 
 			// saving updated for the current user
 			$page['modified']	= date(SQL_DATE_FORMAT);
-			$page['user_name']	= $this->get_user_name();
+			$page['user_id']	= $this->get_user_name();
 			$page['ip']			= $this->get_user_ip();
-			$this->save_revision($page);
-		}
 
-		// delete page
-		$this->sql_query(
-			"DELETE FROM ".$this->config['table_prefix']."page ".
-			"WHERE page_id = '".quote($this->dblink, $page_id)."' ");
+			$this->sql_query(
+				"UPDATE {$this->config['table_prefix']}page SET ".
+				"modified	= '".date(SQL_DATE_FORMAT)."', ".
+				"ip			= '".$this->get_user_ip()."', ".
+				"deleted	= '1', ".
+				"user_id	= '".quote($this->dblink, $comment['created'])."' ".
+				"WHERE page_id	= '".quote($this->dblink, $page_id)."' ".
+				"LIMIT 1");
+			#$this->save_revision($page);
+		}
+		else
+		{
+			// delete page
+			$this->sql_query(
+				"DELETE FROM ".$this->config['table_prefix']."page ".
+				"WHERE page_id = '".quote($this->dblink, $page_id)."' ");
+		}
 
 		// for removed comment correct comments count and date on commented page
 		if ($comment_on_id)
