@@ -859,7 +859,7 @@ class Wacko
 	}
 
 	// wrapper for old_load_page
-	function load_page($tag, $page_id = 0, $revision_id = '', $cache = LOAD_CACHE, $metadata_only = LOAD_ALL)
+	function load_page($tag, $page_id = 0, $revision_id = '', $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = 0)
 	{
 		$page = '';
 
@@ -881,19 +881,19 @@ class Wacko
 		// 1. search for page_id (... is preferred, $supertag next)
 		if ($page_id != 0)
 		{
-			$page = $this->old_load_page('', $page_id, $revision_id, $cache, false, $metadata_only);
+			$page = $this->old_load_page('', $page_id, $revision_id, $cache, false, $metadata_only, $deleted);
 		}
 
 		// 2. search for supertag
 		if (!$page)
 		{
-			$page = $this->old_load_page($this->translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), 0, $revision_id, $cache, true, $metadata_only);
+			$page = $this->old_load_page($this->translit($tag, TRAN_LOWERCASE, TRAN_DONTLOAD), 0, $revision_id, $cache, true, $metadata_only, $deleted);
 		}
 
 		// 3. if not found, search for tag
 		if (!$page)
 		{
-			$page = $this->old_load_page($tag, 0, $revision_id, $cache, false, $metadata_only);
+			$page = $this->old_load_page($tag, 0, $revision_id, $cache, false, $metadata_only, $deleted);
 		}
 
 		// 4. still nothing? file under wanted
@@ -5253,8 +5253,18 @@ class Wacko
 		$this->supertag	= $this->translit($tag);
 
 		$revision_id	= isset($_GET['revision_id']) ? (int)$_GET['revision_id'] : '';
-		$page			= $this->load_page($this->tag, 0, $revision_id);
 
+		// show also $deleted = 1
+		if ($this->is_admin())
+		{
+			$page		= $this->load_page($this->tag, 0, $revision_id, '', '', $deleted = 1);
+		}
+		else
+		{
+			$page		= $this->load_page($this->tag, 0, $revision_id);
+		}
+
+		// TODO: obsolete?
 		if ($this->config['outlook_workaround'] && !$page)
 		{
 			$page = $this->load_page($this->supertag."'", 0, $revision_id);

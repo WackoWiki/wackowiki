@@ -5,64 +5,68 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($max) || $max > 1000) $max = 1000;
-
-$pages = $this->load_recently_deleted($max);
-
-if ($pages == true)
+if ($this->is_admin())
 {
-	$i = 0;
+	if (!isset($max) || $max > 1000) $max = 1000;
 
-	echo "<ul class=\"ul_list\">\n";
+	$pages = $this->load_recently_deleted($max);
 
-	foreach ($pages as $page)
+	if ($pages == true)
 	{
-		$i++;
+		$i = 0;
 
-		if ($this->config['hide_locked'])
+		echo "<ul class=\"ul_list\">\n";
+
+		foreach ($pages as $page)
 		{
-			$access = $this->has_access('read', $page['page_id']);
-		}
-		else
-		{
-			$access = true;
-		}
+			$i++;
 
-		if ($access === true)
-		{
-			// day header
-			list($day, $time) = explode(' ', $page['modified']);
-
-			if (!isset($curday)) $curday = '';
-
-			if ($day != $curday)
+			if ($this->config['hide_locked'])
 			{
-				if ($curday)
-				{
-					echo "</ul>\n<br /></li>\n";
-				}
-
-				echo "<li><strong>".date($this->config['date_format'], strtotime($day)).":</strong>\n<ul>\n";
-				$curday = $day;
+				$access = $this->has_access('read', $page['page_id']);
+			}
+			else
+			{
+				$access = true;
 			}
 
-			// print entry
-			echo "<li>".
-					"<span style=\"text-align:left\">".
-						"<small>".date($this->config['time_format_seconds'], strtotime($time))."</small>  &mdash; ".
-						$this->compose_link_to_page($page['tag'], 'revisions', '', 0).
-					"</span>".
-				"</li>\n";
+			if ($access === true)
+			{
+				// day header
+				list($day, $time) = explode(' ', $page['modified']);
+
+				if (!isset($curday)) $curday = '';
+
+				if ($day != $curday)
+				{
+					if ($curday)
+					{
+						echo "</ul>\n<br /></li>\n";
+					}
+
+					echo "<li><strong>".date($this->config['date_format'], strtotime($day)).":</strong>\n<ul>\n";
+					$curday = $day;
+				}
+
+				// print entry
+				echo "<li>".
+						"<span style=\"text-align:left\">".
+							"<small>".date($this->config['time_format_seconds'], strtotime($time))."</small>  &mdash; ".
+							#$this->compose_link_to_page($page['tag'], 'revisions', '', 0).
+							$this->compose_link_to_page($page['tag'], '', '', 0).
+						"</span>".
+					"</li>\n";
+			}
+
+			if ($i >= $max) break;
 		}
 
-		if ($i >= $max) break;
+		echo "</ul>\n</li>\n</ul>";
 	}
-
-	echo "</ul>\n</li>\n</ul>";
-}
-else
-{
-	echo $this->get_translation('NoRecentlyDeleted');
+	else
+	{
+		echo $this->get_translation('NoRecentlyDeleted');
+	}
 }
 
 ?>
