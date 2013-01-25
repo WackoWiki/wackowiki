@@ -9,8 +9,9 @@ if (!defined('IN_WACKO'))
 <div id="page">
 <?php
 
-$max	= '';
-$output	= '';
+$max		= '';
+$output		= '';
+$deleted	= 1;
 
 // redirect to show method if hide_revisions is true
 if ($this->hide_revisions === true)
@@ -27,9 +28,16 @@ if ($this->page['comment_on_id'])
 	$this->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), 'show_comments=1')."#".$this->page['tag']);
 }
 
+// show minor edits
 if (!isset($hide_minor_edit))
 {
 	$hide_minor_edit = isset($_GET['minor_edit']) ? $_GET['minor_edit'] :"";
+}
+
+// show deleted pages
+if ($this->is_admin())
+{
+	$deleted = 1;
 }
 
 // get page_id for deleted but stored page
@@ -44,7 +52,7 @@ if ($this->page['deleted'] == 1)
 if ($this->has_access('read'))
 {
 	// load revisions for this page
-	if ($revisions = $this->load_revisions($this->page['page_id'], $hide_minor_edit))
+	if ($revisions = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $deleted))
 	{
 		$this->context[++$this->current_context] = '';
 		$output .= $this->form_open('diff', '', 'get');
