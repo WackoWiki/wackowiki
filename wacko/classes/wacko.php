@@ -4993,18 +4993,24 @@ class Wacko
 				foreach ($pages as $page)
 				{
 					// does the page has been deleted earlier than specified number of days ago?
-					if (strtotime($page['date']) < (time() - (3600 * 24 * $days)))
+					if (strtotime($page['modified']) < (time() - (3600 * 24 * $days)))
 					{
-						$remove[] = "'".quote($this->dblink, $page['tag'])."'";
+						$remove[] = "'".quote($this->dblink, $page['page_id'])."'";
 					}
 				}
 			}
 
 			if ($remove)
 			{
+				// deleted pages
+				$this->sql_query(
+					"DELETE FROM {$this->config['table_prefix']}page ".
+					"WHERE page_id IN ( ".implode(', ', $remove)." )");
+
+				// revisions of deleted pages
 				$this->sql_query(
 					"DELETE FROM {$this->config['table_prefix']}revision ".
-					"WHERE tag IN ( ".implode(', ', $remove)." )");
+					"WHERE page_id IN ( ".implode(', ', $remove)." )");
 
 				unset($remove);
 			}
