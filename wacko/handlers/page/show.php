@@ -49,6 +49,14 @@ if ($this->has_access('read'))
 	}
 	else
 	{
+		if ($this->page['deleted'] == 1)
+		{
+			echo '<br /><div class="notice">'.
+					#$this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
+			'BACKUP of deleted page!'; // TODO: localize and add description: to restore the page you ...
+			'</div>';
+		}
+
 		// comment header?
 		if ($this->page['comment_on_id'])
 		{
