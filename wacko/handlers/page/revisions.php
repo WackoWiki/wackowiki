@@ -35,17 +35,10 @@ if (!isset($hide_minor_edit))
 // get page_id for deleted but stored page
 if ($this->page['deleted'] == 1)
 {
-/*	$tag = trim($_GET['page'], '/revisions'); //
-	// Returns Array ( [id] => Value )
-	$get_page_id = $this->load_single(
-		"SELECT page_id ".
-		"FROM ".$this->config['table_prefix']."revision ".
-		"WHERE tag = '".quote($this->dblink, $tag)."' ".
-		"LIMIT 1");
-
-	// Get the_ID value
-	$this->page['page_id'] = $get_page_id['page_id']; */
-	echo "BACKUP of deleted page!"; // TODO: localize and add description: to restore the page you ...
+	echo '<br /><div class="notice">'.
+			#$this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
+			'BACKUP of deleted page!'; // TODO: localize and add description: to restore the page you ...
+			'</div>';
 }
 
 if ($this->has_access('read'))
