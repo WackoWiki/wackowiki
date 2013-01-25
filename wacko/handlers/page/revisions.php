@@ -43,7 +43,7 @@ if ($this->is_admin())
 // get page_id for deleted but stored page
 if ($this->page['deleted'] == 1)
 {
-	echo '<br /><div class="notice">'.
+	echo '<div class="info">'.
 			#$this->get_translation('DoesNotExists') ." ".( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->get_translation('PromptCreate')) : '').
 			'BACKUP of deleted page!'. // TODO: localize and add description: to restore the page you ...
 			'</div>';
