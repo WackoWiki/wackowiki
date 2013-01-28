@@ -911,6 +911,7 @@ class Wacko
 	function old_load_page($tag, $page_id = 0, $revision_id = '', $cache = 1, $supertagged = false, $metadata_only = 0, $deleted = 0)
 	{
 		$supertag = '';
+		$cached_page = '';
 
 		if ($page_id == 0 && $tag == '')
 		{
