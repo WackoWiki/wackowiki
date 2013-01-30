@@ -5947,8 +5947,10 @@ class Wacko
 				// remove from FS
 				$file_name = $this->config['upload_path_per_page'].'/@'.
 					$page['page_id'].'@'.$file['file_name'];
+
 				@unlink($file_name);
 			}
+
 			// remove from DB
 			$this->sql_query(
 				"DELETE FROM {$this->config['table_prefix']}upload ".
@@ -6235,6 +6237,12 @@ class Wacko
 		}
 
 		return $pagination;
+	}
+
+	function show_message($message, $type)
+	{
+		// TODO: filter and sanitize ..
+		echo '<div class="'.$type.'">'.$message.'</div>';
 	}
 
 	// show captcha form on a page. must be incorporated as an input
