@@ -11,6 +11,7 @@ if (!defined('IN_WACKO'))
 
 $comment_on_id	= '';
 $dontkeep		= '';
+$message		= '';
 
 // obviously do not allow to remove non-existent pages
 if (!$this->page)
@@ -180,7 +181,7 @@ if ($this->is_admin() ||
 
 			$message .= "<br />".$this->get_translation('ThisActionHavenotUndo')."<br />\n";
 
-			echo $message;
+			$this->show_message($message, 'info');
 
 			// return to commented page
 			if ($comment_on_id)
