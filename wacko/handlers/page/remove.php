@@ -46,49 +46,49 @@ if ($this->is_admin() ||
 			// Remove page
 			if ($this->remove_referrers($this->tag))
 			{
-				echo str_replace('%1', $this->tag, $this->get_translation('ReferrersRemoved'))."<br />\n";
+				$message .= str_replace('%1', $this->tag, $this->get_translation('ReferrersRemoved'))."<br />\n";
 			}
 
 			if ($this->remove_links($this->tag))
 			{
-				echo str_replace('%1', $this->tag, $this->get_translation('LinksRemoved'))."<br />\n";
+				$message .= str_replace('%1', $this->tag, $this->get_translation('LinksRemoved'))."<br />\n";
 			}
 
 			if ($this->remove_categories($this->tag))
 			{
-				echo $this->get_translation('CategoriesRemoved')."<br />\n";
+				$message .= $this->get_translation('CategoriesRemoved')."<br />\n";
 			}
 
 			if ($this->remove_acls($this->tag))
 			{
-				echo str_replace('%1', $this->tag, $this->get_translation('AclsRemoved'))."<br />\n";
+				$message .= str_replace('%1', $this->tag, $this->get_translation('AclsRemoved'))."<br />\n";
 			}
 
 			if (!$comment_on_id)
 			{
 				if ($this->remove_menu_items($this->tag))
 				{
-					echo str_replace('%1', $this->tag, $this->get_translation('BookmarksRemoved'))."<br />\n";
+					$message .= str_replace('%1', $this->tag, $this->get_translation('BookmarksRemoved'))."<br />\n";
 				}
 
 				if ($this->remove_watches($this->tag))
 				{
-					echo str_replace('%1', $this->tag, $this->get_translation('WatchesRemoved'))."<br />\n";
+					$message .= str_replace('%1', $this->tag, $this->get_translation('WatchesRemoved'))."<br />\n";
 				}
 
 				if ($this->remove_ratings($this->tag))
 				{
-					echo $this->get_translation('RatingRemoved')."<br />\n";
+					$message .= $this->get_translation('RatingRemoved')."<br />\n";
 				}
 
 				if ($this->remove_comments($this->tag, false, $dontkeep))
 				{
-					echo str_replace('%1', $this->tag, $this->get_translation('CommentsRemoved'))."<br />\n";
+					$message .= str_replace('%1', $this->tag, $this->get_translation('CommentsRemoved'))."<br />\n";
 				}
 
 				if ($this->remove_files($this->tag))
 				{
-					echo str_replace('%1', $this->tag, $this->get_translation('FilesRemoved'))."<br />\n";
+					$message .= str_replace('%1', $this->tag, $this->get_translation('FilesRemoved'))."<br />\n";
 				}
 			}
 
@@ -111,13 +111,13 @@ if ($this->is_admin() ||
 					}
 				}
 
-				echo str_replace('%1', $this->tag, $this->get_translation('PageRemoved'))."<br />\n";
+				$message .= str_replace('%1', $this->tag, $this->get_translation('PageRemoved'))."<br />\n";
 			}
 
 			if ($this->is_admin() && (isset($_POST['revisions']) && $_POST['revisions'] == 1) && !$comment_on_id)
 			{
 				$this->remove_revisions($this->tag);
-				echo str_replace('%1', $this->tag, $this->get_translation('RevisionsRemoved'))."<br />\n";
+				$message .= str_replace('%1', $this->tag, $this->get_translation('RevisionsRemoved'))."<br />\n";
 			}
 
 			if ($this->is_admin() && (isset($_POST['cluster']) && $_POST['cluster'] == 1))
@@ -152,7 +152,7 @@ if ($this->is_admin() ||
 					$this->remove_revisions($this->tag, true);
 				}
 
-				echo '<em>'.$this->get_translation('ClusterRemoved')."</em><br />\n";
+				$message .= '<em>'.$this->get_translation('ClusterRemoved')."</em><br />\n";
 			}
 
 			// update user statistics
@@ -178,7 +178,9 @@ if ($this->is_admin() ||
 				$this->log(1, str_replace('%3', $this->get_time_string_formatted($this->page['created']), str_replace('%2', $this->page['user_name'], str_replace('%1', $this->get_page_tag($comment_on_id)." ".$this->get_page_title('', $comment_on_id), $this->get_translation('LogRemovedComment', $this->config['language'])))));
 			}
 
-			echo "<br />".$this->get_translation('ThisActionHavenotUndo')."<br />\n";
+			$message .= "<br />".$this->get_translation('ThisActionHavenotUndo')."<br />\n";
+
+			echo $message;
 
 			// return to commented page
 			if ($comment_on_id)
@@ -189,18 +191,16 @@ if ($this->is_admin() ||
 		else
 		{
 			// show warning
-			echo '<div class="warning">';
-
 			if ($comment_on_id)
 			{
-				echo $this->get_translation('ReallyDeleteComment');
+				$message = $this->get_translation('ReallyDeleteComment');
 			}
 			else
 			{
-				echo $this->get_translation('ReallyDelete');
+				$message = $this->get_translation('ReallyDelete');
 			}
 
-			echo '</div>';
+			$this->show_message($message, 'warning');
 
 			echo $this->form_open('remove');
 

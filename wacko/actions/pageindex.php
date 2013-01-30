@@ -34,6 +34,7 @@ $count = $this->load_single(
 	"SELECT COUNT(tag) AS n ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
+		"AND deleted = '0' ".
 		($for
 			? "AND supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 			: "").
@@ -53,6 +54,7 @@ if ($pages = $this->load_all(
 	"SELECT page_id, tag, title ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
+		"AND deleted = '0' ".
 		($for
 			? "AND supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 			: "").
@@ -98,6 +100,7 @@ if ($pages = $this->load_all(
 	"SELECT page_id, tag, title ".
 	"FROM {$this->config['table_prefix']}page ".
 	"WHERE comment_on_id = '0' ".
+		"AND deleted = '0' ".
 		($for
 			? "AND supertag LIKE '".quote($this->dblink, $this->translit($for))."/%' "
 			: "").

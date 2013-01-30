@@ -111,7 +111,7 @@ if ($registered
 			echo $this->get_translation('UploadFileNotFound');
 		}
 
-		echo '</div>';
+		echo '</div>'; // ???
 		return true;
 	}
 	else if (isset($_GET['edit'])) // show the form
