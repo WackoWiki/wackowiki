@@ -36,6 +36,8 @@ else
 	$user_name		= GUEST;
 }
 
+$message = '';
+
 if ($registered
 &&
 ($this->check_acl($user_name, $this->config['rename_globalacl']) || $this->get_page_owner_id($this->page['page_id']) == $user_id)
@@ -203,6 +205,7 @@ function recursive_move(&$parent, $root)
 	}
 
 	// FIXME: missing $owner_id
+	$owner_id = '';
 	$query = "'".quote($parent->dblink, $parent->translit($root))."%'";
 	$pages = $parent->load_all(
 		"SELECT page_id, tag, supertag ".
@@ -213,11 +216,11 @@ function recursive_move(&$parent, $root)
 			: "").
 		" AND comment_on_id = '0'");
 
-	echo "<ol>\n";
+	$message .= "<ol>\n";
 
-	foreach( $pages as $page )
+	foreach($pages as $page)
 	{
-		echo "<li><b>".$page['tag']."</b>\n";
+		$message .= "<li><b>".$page['tag']."</b>\n";
 
 		// $new_name = str_replace( $root, $new_root, $page['tag'] );
 		$new_name = preg_replace('/'.preg_quote($root, '/').'/', preg_quote($new_root), $page['tag'], 1);
@@ -227,10 +230,12 @@ function recursive_move(&$parent, $root)
 
 		move($parent, $page, $new_name);
 
-		echo "</li>\n";
+		$message .= "</li>\n";
 	}
 
-	echo "</ol>\n";
+	$message .= "</ol>\n";
+
+	return $message;
 }
 
 function move(&$parent, $old_page, $new_name )
