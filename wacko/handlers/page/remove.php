@@ -44,6 +44,7 @@ if ($this->is_admin() ||
 				$dontkeep = 1;
 			}
 
+			$message .= '<b>'.$this->tag."</b>\n";
 			$message .= '<ol>';
 
 			// Remove page

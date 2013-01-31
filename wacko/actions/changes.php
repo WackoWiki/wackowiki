@@ -31,7 +31,7 @@ if (!isset($max) || $usermax < $max)
 	$max = $usermax;
 }
 
-$admin	= ( $this->is_admin() ? true : false );
+$admin	= ($this->is_admin() ? true : false);
 
 // process 'mark read' - reset session time
 if (isset($_GET['markread']) && $user == true)
@@ -121,14 +121,14 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 
 			if ($page['edit_note'])
 			{
-				$edit_note = " <span class=\"editnote\">[".$page['edit_note']."]</span>";
+				$edit_note = '<span class="editnote">['.$page['edit_note'].']</span>';
 			}
 			else
 			{
 				$edit_note = '';
 			}
 
-			$viewed = ( $user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' viewed' : '' );
+			$viewed = ($user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' viewed' : '');
 
 			// print entry
 			echo "<li class=\"lined".$viewed."\"><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; ".

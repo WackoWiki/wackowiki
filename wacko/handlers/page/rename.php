@@ -144,7 +144,7 @@ if ($registered
 			//massrename
 			if ($need_massrename == 1)
 			{
-				$message .= "<p><b>".$this->get_translation('MassRenaming')."</b><p>";   //!!!
+				$message .= '<p><b>'.$this->get_translation('MassRenaming').'</b><p>';   //!!!
 				recursive_move($this, $this->tag);
 			}
 
@@ -158,20 +158,20 @@ if ($registered
 			?> <input type="hidden" name="rename" value="1" /><input type="text" name="newname" value="<?php echo $this->tag;?>" size="40" /><br />
 <br />
 			<?php
-			echo "<input type=\"checkbox\" id=\"redirect\" name=\"redirect\" ";
+			echo '<input type="checkbox" id="redirect" name="redirect" ';
 
 			if ($this->config['default_rename_redirect'] == 1)
 			{
-				echo "checked=\"checked\"";
+				echo 'checked="checked"';
 			};
 
-			echo " /> <label for=\"redirect\">".$this->get_translation('NeedRedirect')."</label>"; ?>
+			echo ' /> <label for="redirect">'.$this->get_translation('NeedRedirect').'</label>'; ?>
 <br />
 			<?php
 			if ($this->check_acl($user_name, $this->config['rename_globalacl']))
 			{
-				echo "<input type=\"checkbox\" id=\"massrename\" name=\"massrename\" />";
-				echo "<label for=\"massrename\">".$this->get_translation('MassRename')."</label>";
+				echo '<input type="checkbox" id="massrename" name="massrename" />';
+				echo '<label for="massrename">'.$this->get_translation('MassRename').'</label>';
 			}
 			?> <br />
 <br />
