@@ -138,7 +138,7 @@ if ($registered
 					}
 				}
 
-				$message .= "<ol>\n";
+				$message .= "</ol>\n";
 			}
 
 			//massrename
