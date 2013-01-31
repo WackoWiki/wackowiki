@@ -67,8 +67,8 @@ if ($registered
 				$new_name		= trim($new_name, '/');
 				$super_new_name	= $this->translit($new_name);
 
-				$message .= "<b>".$this->tag."</b>\n";
-				$message .= "<ol>";
+				$message .= '<b>'.$this->tag."</b>\n";
+				$message .= '<ol>';
 
 				// check if reserved word
 				if($result = $this->validate_reserved_words($new_name))
@@ -138,7 +138,7 @@ if ($registered
 					}
 				}
 
-				$message .= "</ol>";
+				$message .= "<ol>\n";
 			}
 
 			//massrename
@@ -197,7 +197,8 @@ else
 
 function recursive_move(&$parent, $root)
 {
-	$new_root = trim($_POST['newname'], '/');
+	$message	= '';
+	$new_root	= trim($_POST['newname'], '/');
 
 	if($root == '/')
 	{
@@ -240,6 +241,7 @@ function recursive_move(&$parent, $root)
 
 function move(&$parent, $old_page, $new_name )
 {
+	$message	= '';
 	// $new_name = trim($_POST['newname'], '/');
 	$user		= $parent->get_user();
 	$user_id	= $parent->get_user_id();
