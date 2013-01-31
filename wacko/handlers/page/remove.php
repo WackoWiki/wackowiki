@@ -59,7 +59,7 @@ if ($this->is_admin() ||
 
 			if ($this->remove_categories($this->tag))
 			{
-				$message .= $this->get_translation('CategoriesRemoved')."<br />\n";
+				$message .= "<li>".$this->get_translation('CategoriesRemoved')."</li>\n";
 			}
 
 			if ($this->remove_acls($this->tag))
@@ -81,7 +81,7 @@ if ($this->is_admin() ||
 
 				if ($this->remove_ratings($this->tag))
 				{
-					$message .= $this->get_translation('RatingRemoved')."</li>\n";
+					$message .= "<li>".$this->get_translation('RatingRemoved')."</li>\n";
 				}
 
 				if ($this->remove_comments($this->tag, false, $dontkeep))
@@ -158,7 +158,7 @@ if ($this->is_admin() ||
 				$message .= "<li>".$this->get_translation('ClusterRemoved')."</li>\n";
 			}
 
-			$message .= "<ol>\n";
+			$message .= "</ol>\n";
 
 			// update user statistics
 			if ($owner_id = $this->page['owner_id'])
