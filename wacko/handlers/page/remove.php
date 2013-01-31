@@ -44,15 +44,17 @@ if ($this->is_admin() ||
 				$dontkeep = 1;
 			}
 
+			$message .= '<ol>';
+
 			// Remove page
 			if ($this->remove_referrers($this->tag))
 			{
-				$message .= str_replace('%1', $this->tag, $this->get_translation('ReferrersRemoved'))."<br />\n";
+				$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('ReferrersRemoved'))."</li>\n";
 			}
 
 			if ($this->remove_links($this->tag))
 			{
-				$message .= str_replace('%1', $this->tag, $this->get_translation('LinksRemoved'))."<br />\n";
+				$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('LinksRemoved'))."</li>\n";
 			}
 
 			if ($this->remove_categories($this->tag))
@@ -62,34 +64,34 @@ if ($this->is_admin() ||
 
 			if ($this->remove_acls($this->tag))
 			{
-				$message .= str_replace('%1', $this->tag, $this->get_translation('AclsRemoved'))."<br />\n";
+				$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('AclsRemoved'))."</li>\n";
 			}
 
 			if (!$comment_on_id)
 			{
 				if ($this->remove_menu_items($this->tag))
 				{
-					$message .= str_replace('%1', $this->tag, $this->get_translation('BookmarksRemoved'))."<br />\n";
+					$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('BookmarksRemoved'))."</li>\n";
 				}
 
 				if ($this->remove_watches($this->tag))
 				{
-					$message .= str_replace('%1', $this->tag, $this->get_translation('WatchesRemoved'))."<br />\n";
+					$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('WatchesRemoved'))."</li>\n";
 				}
 
 				if ($this->remove_ratings($this->tag))
 				{
-					$message .= $this->get_translation('RatingRemoved')."<br />\n";
+					$message .= $this->get_translation('RatingRemoved')."</li>\n";
 				}
 
 				if ($this->remove_comments($this->tag, false, $dontkeep))
 				{
-					$message .= str_replace('%1', $this->tag, $this->get_translation('CommentsRemoved'))."<br />\n";
+					$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('CommentsRemoved'))."</li>\n";
 				}
 
 				if ($this->remove_files($this->tag))
 				{
-					$message .= str_replace('%1', $this->tag, $this->get_translation('FilesRemoved'))."<br />\n";
+					$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('FilesRemoved'))."</li>\n";
 				}
 			}
 
@@ -112,13 +114,13 @@ if ($this->is_admin() ||
 					}
 				}
 
-				$message .= str_replace('%1', $this->tag, $this->get_translation('PageRemoved'))."<br />\n";
+				$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('PageRemoved'))."</li>\n";
 			}
 
 			if ($this->is_admin() && (isset($_POST['revisions']) && $_POST['revisions'] == 1) && !$comment_on_id)
 			{
 				$this->remove_revisions($this->tag);
-				$message .= str_replace('%1', $this->tag, $this->get_translation('RevisionsRemoved'))."<br />\n";
+				$message .= "<li>".str_replace('%1', $this->tag, $this->get_translation('RevisionsRemoved'))."</li>\n";
 			}
 
 			if ($this->is_admin() && (isset($_POST['cluster']) && $_POST['cluster'] == 1))
@@ -153,8 +155,10 @@ if ($this->is_admin() ||
 					$this->remove_revisions($this->tag, true);
 				}
 
-				$message .= '<em>'.$this->get_translation('ClusterRemoved')."</em><br />\n";
+				$message .= "<li>".$this->get_translation('ClusterRemoved')."</li>\n";
 			}
+
+			$message .= "<ol>\n";
 
 			// update user statistics
 			if ($owner_id = $this->page['owner_id'])
