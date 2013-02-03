@@ -230,7 +230,7 @@ function recursive_move(&$parent, $root, $new_root)
 		// FIXME: preg_quote is not universally suitable for escaping the replacement string. A single . will become \. and the preg_replace call will not undo the escaping.
 		$new_name = stripslashes($new_name);
 
-		move($parent, $page, $new_name);
+		$message .= move($parent, $page, $new_name);
 
 		$message .= "</li>\n";
 	}
