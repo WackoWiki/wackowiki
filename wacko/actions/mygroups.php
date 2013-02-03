@@ -39,7 +39,7 @@ if($user = $this->get_user())
 	}
 
 	$groups_count = my_groups($user['user_name'], $alias);
-	echo "<i>".$groups_count." ".($groups_count == 1 ? $this->get_translation('Group') : $this->get_translation('Groups'))."</i><br />\n";
+	echo "<em>".$groups_count." ".($groups_count == 1 ? $this->get_translation('Group') : $this->get_translation('Groups'))."</em><br />\n";
 
 	if (!$nomark)
 	{

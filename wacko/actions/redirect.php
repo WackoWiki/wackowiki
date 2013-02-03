@@ -45,7 +45,7 @@ if ($page)
 	}
 	else
 	{
-		echo '<div class="info"><i>'.$this->get_translation('WrongPage4Redirect').'</i></div>';
+		echo '<div class="info"><em>'.$this->get_translation('WrongPage4Redirect').'</em></div>';
 	}
 };
 ?>

@@ -84,7 +84,7 @@ if (!function_exists('intervalCalc'))
 
 if (!$url)
 {
-	echo "<p><i>".$this->get_translation('FeedNoURL')."</i></p>\n";
+	echo "<p><em>".$this->get_translation('FeedNoURL')."</em></p>\n";
 }
 else
 {
@@ -127,7 +127,7 @@ else
 
 	if (!$feed->get_title() && $counturlset == 1)
 	{
-		echo "<p><i>".$this->get_translation('FeedError')."</i></p>\n";
+		echo "<p><em>".$this->get_translation('FeedError')."</em></p>\n";
 		#break;
 	}
 	else
