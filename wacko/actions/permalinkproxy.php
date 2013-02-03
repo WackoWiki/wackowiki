@@ -80,12 +80,12 @@ if ( isset($page_id) )
 		}
 		else
 		{
-			echo '<div class="info"><i>'.$this->get_translation('WrongPage4Redirect').'</i></div>';
+			echo '<div class="info"><em>'.$this->get_translation('WrongPage4Redirect').'</em></div>';
 		}
 	}
 	else
 	{
-		echo '<div class="info"><i>'.$this->get_translation('WrongPage4Redirect').'</i></div>';
+		echo '<div class="info"><em>'.$this->get_translation('WrongPage4Redirect').'</em></div>';
 	}
 }
 else
