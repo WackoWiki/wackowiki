@@ -160,18 +160,18 @@ if ($this->has_access('read'))
 					switch ($letter)
 					{
 						case 'a':
-							$resync_left = $argument[0];
-							$resync_right = $argument[2] - 1;
+							$resync_left	= $argument[0];
+							$resync_right	= $argument[2] - 1;
 							break;
 
 						case 'd':
-							$resync_left = $argument[0] - 1;
-							$resync_right = $argument[2];
+							$resync_left	= $argument[0] - 1;
+							$resync_right	= $argument[2];
 							break;
 
 						case 'c':
-							$resync_left = $argument[0] - 1;
-							$resync_right = $argument[2] - 1;
+							$resync_left	= $argument[0] - 1;
+							$resync_right	= $argument[2] - 1;
 							break;
 					}
 
