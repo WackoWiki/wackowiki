@@ -146,7 +146,7 @@ if ($registered
 			if ($need_massrename == 1)
 			{
 				$message .= '<p><b>'.$this->get_translation('MassRenaming').'</b><p>';   //!!!
-				recursive_move($this, $this->tag, $new_root);
+				$message .= recursive_move($this, $this->tag, $new_root);
 			}
 
 			$this->show_message($message, 'info');
