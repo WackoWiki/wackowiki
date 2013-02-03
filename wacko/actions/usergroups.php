@@ -25,7 +25,7 @@ if($user = $this->get_user())
 	{
 		if (!$nomark)
 		{
-			echo '<div class="layout-box"><p class="layout-box"><span>".$this->get_translation('UserGroups').":</span></p>';
+			echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('UserGroups').':</span></p>';
 		}
 
 		echo '<table border="0" cellspacing="5" cellpadding="5"><tr>';
@@ -55,7 +55,7 @@ if($user = $this->get_user())
 
 				foreach ($arr as $k => $user_name)
 				{
-					$allowed_groups[] = "<a href=\"".$this->href('', $this->config['users_page'], 'profile='.$user_name)."\">".$user_name."</a>";
+					$allowed_groups[] = '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$user_name).'">'.$user_name.'</a>';
 				}
 
 				sort($allowed_groups);
@@ -63,18 +63,18 @@ if($user = $this->get_user())
 				$group_members = implode('<br />', $allowed_groups);
 
 				// Print out the usergroup name and then a list of the users under it
-				echo "<strong>$group_name</strong>:<br />".str_replace("\n","<br />",$group_members)."<br />";
-				echo "</td>";
+				echo '<strong>$group_name</strong>:<br />'.str_replace("\n","<br />",$group_members).'<br />';
+				echo '</td>';
 
 				$i++;
 			}
 		}
 
-		echo "</tr></table>";
+		echo '</tr></table>';
 
 		if(!$nomark)
 		{
-			echo "</div>";
+			echo '</div>';
 		}
 	}
 }
