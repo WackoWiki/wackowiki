@@ -51,6 +51,7 @@ if ($registered
 	{
 		if (isset($_POST['newname']) && $_POST['rename'] == 1)
 		{
+			$new_root		= $_POST['newname'];
 			// rename or massrename
 			$need_massrename = 0;
 
@@ -63,7 +64,7 @@ if ($registered
 			if ($need_massrename == 0)
 			{
 				// strip whitespaces
-				$new_name		= preg_replace('/\s+/', '', $_POST['newname']);
+				$new_name		= preg_replace('/\s+/', '', $new_root);
 				$new_name		= trim($new_name, '/');
 				$super_new_name	= $this->translit($new_name);
 
@@ -145,7 +146,7 @@ if ($registered
 			if ($need_massrename == 1)
 			{
 				$message .= '<p><b>'.$this->get_translation('MassRenaming').'</b><p>';   //!!!
-				recursive_move($this, $this->tag);
+				recursive_move($this, $this->tag, $new_root);
 			}
 
 			$this->show_message($message, 'info');
@@ -195,17 +196,17 @@ else
 ?></div>
 <?php
 
-function recursive_move(&$parent, $root)
+function recursive_move(&$parent, $root, $new_root)
 {
 	$message	= '';
-	$new_root	= trim($_POST['newname'], '/');
+	$new_root	= trim($new_root, '/');
 
 	if($root == '/')
 	{
 		exit; // who and where did intend to move root???
 	}
 
-	// FIXME: missing $owner_id
+	// FIXME: missing $owner_id -> rename_globalacl || owner
 	$owner_id = '';
 	$query = "'".quote($parent->dblink, $parent->translit($root))."%'";
 	$pages = $parent->load_all(
@@ -239,10 +240,9 @@ function recursive_move(&$parent, $root)
 	return $message;
 }
 
-function move(&$parent, $old_page, $new_name )
+function move(&$parent, $old_page, $new_name)
 {
 	$message	= '';
-	// $new_name = trim($_POST['newname'], '/');
 	$user		= $parent->get_user();
 	$user_id	= $parent->get_user_id();
 
