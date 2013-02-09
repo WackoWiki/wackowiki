@@ -462,7 +462,21 @@ function admin_groups(&$engine, &$module)
 		<form action="admin.php" method="post" name="groups">
 		<input type="hidden" name="mode" value="groups" />
 
-			<?php if (isset($pagination['text'])) echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n"; ?>
+			<?php
+			/////////////////////////////////////////////
+			//   control buttons
+			/////////////////////////////////////////////
+
+			$control_buttons = '<br /><input id="button" type="submit" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
+			$control_buttons .= '<input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
+			$control_buttons .= '<input id="button" type="submit" name="delete" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
+
+			echo $control_buttons;
+
+			if (isset($pagination['text']))
+			{
+				echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n";
+			} ?>
 			<table border="0" cellpadding="3" class="formation">
 				<tr>
 					<th style="width:5px;"></th>
@@ -475,7 +489,7 @@ function admin_groups(&$engine, &$module)
 					<th style="width:20px;">Active</th>
 					<th style="width:20px;"><a href="?mode=groups&order=<?php echo $created; ?>">Created</a></th>
 				</tr>
-	<?php
+<?php
 		if ($groups)
 		{
 			foreach ($groups as $row)
@@ -497,7 +511,7 @@ function admin_groups(&$engine, &$module)
 		{
 			echo '<tr><td colspan="5" align="center"><br /><em>No groups that meet the criteria</em></td></tr>';
 		}
-	?>
+?>
 			</table>
 			<?php if (isset($pagination['text'])) echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</div>'."\n";
 
@@ -505,10 +519,8 @@ function admin_groups(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-			echo '<br /><input id="button" type="submit" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
-			echo '<input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
-			echo '<input id="button" type="submit" name="delete" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
-		 ?>
+		echo $control_buttons;
+?>
 		</form>
 
 <?php
