@@ -313,7 +313,7 @@ function admin_users(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		echo '<br /><input id="button" type="submit" name="addmember" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
+		echo '<br /><input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
 		echo '<input id="button" type="submit" name="removemember" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
 		echo '<input id="button" type="button" value="'.$engine->get_translation('GroupsCancelButton').'" onclick="document.location=\''.addslashes($engine->href()).'\';" />';
 ?>
@@ -482,8 +482,22 @@ function admin_users(&$engine, &$module)
 		<form action="admin.php" method="post" name="users">
 		<input type="hidden" name="mode" value="users" />
 
-			<?php if (isset($pagination['text']))
-			echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n"; ?>
+			<?php
+
+			/////////////////////////////////////////////
+			//   control buttons
+			/////////////////////////////////////////////
+
+			$control_buttons = '<br /><input id="button" type="submit" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
+			$control_buttons .=  '<input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
+			$control_buttons .=  '<input id="button" type="submit" name="delete" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
+
+			echo $control_buttons;
+
+			if (isset($pagination['text']))
+			{
+				echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n";
+			} ?>
 			<table border="0" cellpadding="3" class="formation">
 				<tr>
 					<th style="width:5px;"></th>
@@ -528,15 +542,16 @@ function admin_users(&$engine, &$module)
 		}
 ?>
 			</table>
-			<?php if (isset($pagination['text'])) echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</div>'."\n";
+			<?php if (isset($pagination['text']))
+			{
+				echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '' ).'</div>'."\n";
+			}
 
 		/////////////////////////////////////////////
 		//   control buttons
 		/////////////////////////////////////////////
 
-			echo '<br /><input id="button" type="submit" name="create" value="'.$engine->get_translation('GroupsAddButton').'" /> ';
-			echo '<input id="button" type="submit" name="edit" value="'.$engine->get_translation('GroupsEditButton').'" /> ';
-			echo '<input id="button" type="submit" name="delete" value="'.$engine->get_translation('GroupsRemoveButton').'" /> ';
+		echo $control_buttons;
 ?>
 		</form>
 

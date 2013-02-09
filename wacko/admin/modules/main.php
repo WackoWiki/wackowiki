@@ -209,8 +209,7 @@ function admin_lock(&$engine, &$module)
 					'<td class="label"><strong>'.$dir.'</strong></td>'.
 					'<td>&nbsp;&nbsp;&nbsp;'.$files.'</td>'.
 					'<td>'.ceil($size / 1000).' kB</td>'.
-				'</tr>'.
-				'<tr class="lined"><td colspan="3"></td></tr>'."\n";
+				'</tr>'."\n";
 		}
 
 		@closedir($handle);
