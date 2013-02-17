@@ -31,7 +31,11 @@ function admin_deletedpages(&$engine, &$module)
 	{
 		$engine->sql_query(
 			"DELETE FROM {$engine->config['table_prefix']}revision ".
-			"WHERE tag = '".quote($engine->dblink, $_GET['remove'])."'");
+			"WHERE page_id = '".quote($engine->dblink, $_GET['remove'])."'");
+
+		$engine->sql_query(
+			"DELETE FROM {$engine->config['table_prefix']}page ".
+			"WHERE page_id = '".quote($engine->dblink, $_GET['remove'])."'");
 	}
 
 	$pages = $engine->load_recently_deleted(100000, 0);
@@ -53,7 +57,11 @@ function admin_deletedpages(&$engine, &$module)
 
 			if ($day != $curday)
 			{
-				if ($curday) echo "\n";
+				if ($curday)
+				{
+					echo "\n";
+				}
+
 				echo '<tr class="lined"><td colspan="2"><br /><strong>'.date($engine->config['date_format'],strtotime($day)).":</strong></td></tr>\n";
 				$curday = $day;
 			}
@@ -61,7 +69,7 @@ function admin_deletedpages(&$engine, &$module)
 			// print entry
 			echo '<tr>'.
 					'<td style="text-align:left">'.
-						'<small>('.date($engine->config['time_format_seconds'], strtotime($time)).' - <a href="'.rawurldecode($engine->href()).'&amp;remove='.$page['tag'].'">'.$engine->get_translation('RemoveButton').'</a>)</small> '.
+						'<small>('.date($engine->config['time_format_seconds'], strtotime($time)).' - <a href="'.rawurldecode($engine->href()).'&amp;remove='.$page['page_id'].'">'.$engine->get_translation('RemoveButton').'</a>)</small> '.
 						$engine->compose_link_to_page($page['tag'], 'revisions', '', 0).
 					'</td>'.
 				"</tr>\n";
