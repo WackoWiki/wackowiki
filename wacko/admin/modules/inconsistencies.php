@@ -423,7 +423,7 @@ function admin_inconsistencies(&$engine, &$module)
 
 			echo '<tr class="hl_setting"><td>usergroup_member without usergroup </td><td>'.count($usergroup_member2).'</td></tr>';
 
-
+			// TODO: // 3.2. page without valid user_id (e.g. deleted user)
 			echo '</table>';
 
 			$engine->log(1, 'Removed inconsistencies');
