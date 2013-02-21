@@ -88,7 +88,7 @@ if ($this->user_is_owner() || $this->is_admin())
 				$user = $this->load_single(
 					"SELECT user_id, user_name, email, email_confirm ".
 					"FROM {$this->config['user_table']} ".
-					"WHERE user_name = '".quote($this->dblink, $new_owner)."' ".
+					"WHERE user_id = '".quote($this->dblink, $new_owner)."' ".
 					"LIMIT 1");
 
 				if ($user == true)
@@ -275,7 +275,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			{
 				foreach($users as $user)
 				{
-					echo "<option value=\"".htmlspecialchars($user['user_name'])."\">".$user['user_name']."</option>\n";
+					echo "<option value=\"".htmlspecialchars($user['user_id'])."\">".$user['user_name']."</option>\n";
 				}
 			}
 	?>
