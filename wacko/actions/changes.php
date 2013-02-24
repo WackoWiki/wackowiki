@@ -131,11 +131,12 @@ if (list ($pages, $pagination) = $this->load_recently_changed((int)$max, $root, 
 			$viewed = ($user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['modified'] > $user['last_mark'] ? ' viewed' : '');
 
 			// print entry
-			echo "<li class=\"lined".$viewed."\"><span class=\"dt\">".date($this->config['time_format_seconds'], strtotime( $time ))."</span> &mdash; ".
+			echo "<li class=\"lined".$viewed."\"><span class=\"dt\">".
 			($this->hide_revisions === false || $this->is_admin()
-				? "(".$this->compose_link_to_page($page['tag'], 'revisions', $this->get_translation('History'), 0).") "
-				: ""
+				? "".$this->compose_link_to_page($page['tag'], 'revisions', date($this->config['time_format_seconds'], strtotime( $time )), 0, $this->get_translation('RevisionTip'))." "
+				: date($this->config['time_format_seconds'], strtotime( $time ))
 			).
+			"</span> &mdash; ".
 			($title == 1
 				? $this->link('/'.$page['tag'], '', $page['title'], '', 0, 1, '', 0)
 				: $this->link('/'.$page['tag'], '', $page['tag'], $page['title'])
