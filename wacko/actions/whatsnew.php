@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// TODO: per cluster, pagination
+// TODO: per cluster, pagination, hard coded icons
 
 if (!isset($max)) $max = '';
 if (!isset($noxml)) $noxml = '';
@@ -27,7 +27,7 @@ if (isset($_GET['markread']) && $user == true)
 
 // loading new pages/comments
 $pages1 = $this->load_all(
-	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, c.tag as comment_on_page, user_name, 1 AS ctype ".
+	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, c.tag as comment_on_page, user_name, 1 AS ctype, p.deleted ".
 	"FROM {$this->config['table_prefix']}page p ".
 		"LEFT JOIN {$this->config['table_prefix']}page c ON (p.comment_on_id = c.page_id) ".
 		"LEFT JOIN {$this->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
@@ -37,22 +37,24 @@ $pages1 = $this->load_all(
 
 // loading revisions
 $pages2 = $this->load_all(
-	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, c.tag as comment_on_page, user_name, 1 AS ctype ".
+	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, c.tag as comment_on_page, user_name, 1 AS ctype, p.deleted ".
 	"FROM {$this->config['table_prefix']}page p ".
 		"LEFT JOIN {$this->config['table_prefix']}page c ON (p.comment_on_id = c.page_id) ".
 		"LEFT JOIN {$this->config['table_prefix']}user u ON (p.user_id = u.user_id) ".
 	"WHERE p.comment_on_id = '0' ".
+		"AND p.deleted = '0' ".
 		"AND (u.account_type = '0' OR p.user_id = '0') ".
 	"ORDER BY modified DESC ".
 	"LIMIT ".($max * 2), 1);
 
 // loading uloads
 $files = $this->load_all(
-	"SELECT f.page_id, c.tag, f.uploaded_dt as created, f.uploaded_dt as modified, f.file_name as title, f.page_id as comment_on_id, f.hits as ip, f.uploaded_dt AS date, c.tag as comment_on_page, user_name, 2 AS ctype ".
+	"SELECT f.page_id, c.tag, f.uploaded_dt as created, f.uploaded_dt as modified, f.file_name as title, 0 as comment_on_id, f.hits as ip, f.uploaded_dt AS date, c.tag as comment_on_page, user_name, 2 AS ctype, f.deleted ".
 	"FROM {$this->config['table_prefix']}upload f ".
 		"LEFT JOIN {$this->config['table_prefix']}page c ON (f.page_id = c.page_id) ".
 		"LEFT JOIN {$this->config['table_prefix']}user u ON (f.user_id = u.user_id) ".
 	"WHERE u.account_type = '0' ".
+		"AND f.deleted = '0' ".
 	"ORDER BY f.uploaded_dt DESC ".
 	"LIMIT ".($max * 2), 1);
 
@@ -115,7 +117,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 					echo "</ul>\n<br /></li>\n";
 				}
 
-				echo '<li><strong>'.date($this->config['date_format'],strtotime($day)).":</strong>\n<ul>\n";
+				echo '<li><strong>'.date($this->config['date_format'],strtotime($day))."</strong>\n<ul>\n";
 				$curday = $day;
 			}
 
@@ -123,12 +125,13 @@ if ($pages = array_merge($pages1, $pages2, $files))
 			$separator	= ' . . . . . . . . . . . . . . . . ';
 			$author		= ( !$page['user_name'] ? '<em title="'.( $admin ? $page['ip'] : '' ).'">'.$this->get_translation('Guest').'</em>' : '<a href="'.$this->href('', $this->config['users_page'], 'profile='.$page['user_name']).'" title="'.( $admin ? $page['ip'] : '' ).'">'.$page['user_name'].'</a>' );
 			$viewed		= ( $user['last_mark'] == true && $page['user_name'] != $user['user_name'] && $page['date'] > $user['last_mark'] ? ' viewed' : '' );
-			$revisions	= ($this->hide_revisions === false || $this->is_admin()
-								? ' ('.$this->link('/'.$page['tag'], 'revisions', $this->get_translation('History'), 0, 1).')'
-								: ''
+			$time_modified	= (($this->hide_revisions === false || $this->is_admin()) && ($page['ctype'] != 2 || $page['comment_on_id'] === 0)
+								? $this->compose_link_to_page($page['tag'], 'revisions', date($this->config['time_format_seconds'], strtotime($time)), 0, $this->get_translation('RevisionTip'))
+								: date($this->config['time_format_seconds'], strtotime($time))
 							);
 
-			echo '<li class="lined'.$viewed.'"><span class="dt">'.date($this->config['time_format_seconds'], strtotime($time)).'&nbsp;&nbsp;</span>';
+			// time
+			echo '<li class="lined'.$viewed.'"><span class="dt">'.$time_modified.'&nbsp;&nbsp;</span>';
 
 			// new file
 			if ($page['ctype'] == 2)
@@ -138,7 +141,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 				if ($page['page_id']) // !$global
 				{
 					$path2		= '_file:/'.($this->slim_url($page['tag'])).'/';
-					$on_page	= $this->get_translation('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['comment_on_id']), '', 0, 1).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0];
+					$on_page	= $this->get_translation('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['page_id']), '', 0, 1).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0];
 				}
 				else
 				{
@@ -147,6 +150,12 @@ if ($pages = array_merge($pages1, $pages2, $files))
 				}
 
 				echo "<img src=\"".$this->config['theme_url']."icons/attachment.png"."\" title=\"".$this->get_translation('NewFileAdded')."\" alt=\"[file]\" /> ".''.$this->link($path2.$page['title'], '', $page['title'], '', 0, 1).' '.$on_page.$separator.$author.'</span>';
+			}
+			// deleted
+			else if ($page['deleted'])
+			{
+				preg_match('/^[^\/]+/', $page['comment_on_page'], $sub_tag);
+				echo "<img src=\"".$this->config['theme_url']."icons/delete.gif"."\" title=\"".$this->get_translation('NewCommentAdded')."\" alt=\"[deleted]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1).' '.$this->get_translation('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['comment_on_id']), '', 0, 1).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>';
 			}
 			// new comment
 			else if ($page['comment_on_id'])
@@ -164,7 +173,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 			else
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
-				echo "<img src=\"".$this->config['theme_url']."icons/edit.png"."\" title=\"".$this->get_translation('NewRevisionAdded')."\" alt=\"[changed]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1).$revisions.' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>';
+				echo "<img src=\"".$this->config['theme_url']."icons/edit.png"."\" title=\"".$this->get_translation('NewRevisionAdded')."\" alt=\"[changed]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>';
 			}
 
 			echo "</li>\n";
