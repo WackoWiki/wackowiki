@@ -5,12 +5,16 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-function quote($dblink, $string)
+function connect($db_host, $db_user, $db_pass, $db_name, $collation = false, $driver, $db_port = '')
 {
-	if (!empty ($dblink))
+	$dblink = mysqli_connect($db_host, $db_user, $db_pass, $db_name, $db_port);
+
+	if ($collation)
 	{
-		return mysqli_real_escape_string($dblink, $string);
+		mysqli_query($dblink, "SET NAMES '".$collation."'");
 	}
+
+	return $dblink;
 }
 
 function sql_query($dblink, $query, $debug)
@@ -34,9 +38,12 @@ function sql_query($dblink, $query, $debug)
 	return $result;
 }
 
-function fetch_assoc($rs)
+function quote($dblink, $string)
 {
-	return mysqli_fetch_assoc($rs);
+	if (!empty ($dblink))
+	{
+		return mysqli_real_escape_string($dblink, $string);
+	}
 }
 
 function free_result($rs)
@@ -44,20 +51,9 @@ function free_result($rs)
 	return mysqli_free_result($rs);
 }
 
-function connect($host, $user, $passw, $db, $collation = false, $driver, $port = '')
+function fetch_assoc($rs)
 {
-	$dblink = mysqli_connect($host, $user, $passw, $db, $port);
-
-	if ($collation)
-	{
-		mysqli_query($dblink, "SET NAMES '".$collation."'");
-	}
-
-	return $dblink;
+	return mysqli_fetch_assoc($rs);
 }
 
-function last_insert_id($dblink)
-{
-	return mysqli_insert_id($dblink);
-}
 ?>
