@@ -35,6 +35,7 @@ function sql_query($dblink, $query, $debug)
 			die("DBAL error: SQL query failed.");
 		}
 	}
+
 	return $result;
 }
 
@@ -50,7 +51,10 @@ function free_result($rs)
 
 function connect($host, $user, $passw, $db, $collation = false, $driver, $port = '')
 {
-	if(!extension_loaded("mysql")) dl("mysql.so");
+	if(!extension_loaded("mysql"))
+	{
+		dl("mysql.so");
+	}
 
 	$dblink = mysql_connect($host.($port == '' ? '' : ':'.$port), $user, $passw);
 	mysql_select_db($db, $dblink);
