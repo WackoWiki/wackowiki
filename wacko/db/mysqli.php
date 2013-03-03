@@ -8,7 +8,9 @@ if (!defined('IN_WACKO'))
 function quote($dblink, $string)
 {
 	if (!empty ($dblink))
+	{
 		return mysqli_real_escape_string($dblink, $string);
+	}
 }
 
 function sql_query($dblink, $query, $debug)
@@ -28,6 +30,7 @@ function sql_query($dblink, $query, $debug)
 			die("DBAL error: SQL query failed.");
 		}
 	}
+
 	return $result;
 }
 
