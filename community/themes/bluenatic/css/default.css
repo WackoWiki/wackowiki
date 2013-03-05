@@ -51,6 +51,16 @@ p {
 	padding:		0;
 }
 
+/* cellspacing */
+table {
+	border-collapse:collapse;
+	border-spacing: 0;
+	
+}
+/* cellpadding */
+th, td {
+	padding: 0px;
+}
 /* Table content: Content is always aligned to top */
 td, tr {
 	vertical-align:		top;

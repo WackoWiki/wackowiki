@@ -15,6 +15,18 @@ img {
 body {color: black; background: white; font: 10pt Trebuchet MS }
 body {padding: 0; margin: 0}
 p, td, li, select, textarea, legend { font: 10pt Trebuchet MS }
+
+/* cellspacing */
+table {
+	border-collapse:collapse;
+	border-spacing: 0;
+	
+}
+/* cellpadding */
+th, td {
+	padding: 0px;
+}
+
 td {vertical-align: top }
 
 /*  Page title*/

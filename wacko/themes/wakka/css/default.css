@@ -6,7 +6,16 @@ p, td, li, select, textarea {
 	font-size: 13px;
 	line-height: 1.3em;
 }
-
+/* cellspacing */
+table {
+	border-collapse:collapse;
+	border-spacing: 0;
+	
+}
+/* cellpadding */
+th, td {
+	padding: 0px;
+}
 label {
 	cursor: pointer;
 }

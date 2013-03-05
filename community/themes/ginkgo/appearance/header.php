@@ -8,7 +8,7 @@ require ('themes/_common/_header.php');
 
 ?>
 <body onload="all_init();">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<table width="100%" border="0" >
 	<tr>
 		<td width="100%" valign="bottom" style="white-space: nowrap;"><span class="main"><a href="<?php echo $this->config['base_url']?>"class="main"><?php echo $this->config['site_name'] ?></a></span></td>
 		<td width="100%"><div align="right"><?php
@@ -36,7 +36,7 @@ echo $this->form_close();
 		<td colspan="2" bgcolor="#85a43c"></td>
 	</tr>
 	<tr bgcolor="#85a43c">
-		<td height="20" colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<td height="20" colspan="2"><table width="100%" border="0" >
 	<tr>
 		<td><div class="navText">
 <?php
@@ -79,9 +79,9 @@ else
 		<td colspan="2" bgcolor="#5C743D"></td>
 	</tr>
 </table>
-<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<table align="center" border="0"   width="100%">
 <tr>
-	<td valign="top" class="left" width="185" style="white-space: nowrap;"><table width="185" border="0" align="left" cellpadding="0" cellspacing="0">
+	<td valign="top" class="left" width="185" style="white-space: nowrap;"><table width="185" border="0" align="left"  >
 		<tr align="left">
 			<td><div>
 <?php

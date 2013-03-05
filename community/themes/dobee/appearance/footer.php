@@ -8,8 +8,8 @@
 </tr>
 </table>
 
-<table class="bottom" align="center" border="0" cellpadding="0"
-	cellspacing="0" width="100%">
+<table class="bottom" align="center" border="0" 
+	 width="100%">
 	<tr>
 		<td id="credits"><?php 
 		if ($this->get_user()){

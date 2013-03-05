@@ -4,6 +4,16 @@ body{ padding:0; margin:0; background:#eeeeee; line-height: 130%; }
 img {
 	border-width: 0px;
 }
+/* cellspacing */
+table {
+	border-collapse:collapse;
+	border-spacing: 0;
+	
+}
+/* cellpadding */
+th, td {
+	padding: 0px;
+}
 /* Textareas */
 textarea { font-size:100%; font-family: Georgia, Courier New; color:#222222;   line-height: 1.5em;  }
 small { font-size:80% }
