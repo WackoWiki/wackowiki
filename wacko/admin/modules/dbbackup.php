@@ -186,7 +186,7 @@ function admin_dbbackup(&$engine, &$module)
 		<br />
 		<form action="admin.php" method="post" name="backup">
 			<input type="hidden" name="mode" value="dbbackup" />
-			<table border="0" cellspacing="1" cellpadding="4" style="max-width:350px" class="formation">
+			<table cellspacing="1" cellpadding="4" style="max-width:350px" class="formation">
 				<tr>
 					<th style="text-align:right">Cluster:</th>
 					<th colspan="2"><input name="root" size="30" value="" /></th>

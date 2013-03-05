@@ -231,7 +231,7 @@ function admin_files(&$engine, &$module)
 
 ?>
 	<input type="hidden" name="MAX_FILE_SIZE" value="999999999" />
-	<table border="0" >
+	<table >
 		<tr>
 			<td><?php echo $engine->get_translation('UploadFor');?>:&nbsp;</td>
 			<td nowrap="nowrap"><input name="file" type="file"  />&nbsp;(Unlimited)</td>
@@ -316,7 +316,7 @@ function admin_files(&$engine, &$module)
 	if (count($files))
 	{
 ?>
-		<table class="upload" border="0">
+		<table class="upload" >
 <?php
 	}
 

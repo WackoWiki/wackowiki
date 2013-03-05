@@ -24,7 +24,7 @@ $table_cache = "CREATE TABLE {$pref}cache (".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"cache_time TIMESTAMP NOT NULL,".
 					"INDEX (name),".
-					"KEY timestamp (cache_time)".
+					"KEY idx_cache_time (cache_time)".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_category = "CREATE TABLE {$pref}category (".
@@ -33,7 +33,7 @@ $table_category = "CREATE TABLE {$pref}category (".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
 					"category VARCHAR(100) NOT NULL DEFAULT '',".
 					"PRIMARY KEY (category_id),".
-					"UNIQUE KEY idx_category (lang,category)".
+					"UNIQUE KEY idx_category (lang, category)".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_category_page = "CREATE TABLE {$pref}category_page (".
@@ -58,7 +58,7 @@ $table_link = "CREATE TABLE {$pref}link (".
 					"to_tag VARCHAR(250) BINARY NOT NULL DEFAULT '',".
 					"to_supertag VARCHAR(250) NOT NULL DEFAULT '',".
 					"PRIMARY KEY (link_id),".
-					"KEY from_tag (from_page_id,to_tag(78)),".
+					"KEY idx_from_tag (from_page_id, to_tag(78)),".
 					"KEY idx_from_page_id (from_page_id),".
 					"KEY idx_to (to_tag)".
 				") {$engine} COMMENT='' {$charset}";
@@ -85,7 +85,7 @@ $table_menu = "CREATE TABLE {$pref}menu (".
 					"menu_title VARCHAR(100) NOT NULL DEFAULT '',".
 					"menu_position SMALLINT(2) UNSIGNED NOT NULL DEFAULT '0',".
 					"PRIMARY KEY (menu_id),".
-					"UNIQUE KEY idx_user_id (user_id,page_id)".
+					"UNIQUE KEY idx_user_id (user_id, page_id)".
 				") {$engine} COMMENT='' {$charset}";
 
 $table_page = "CREATE TABLE {$pref}page (".
@@ -141,6 +141,7 @@ $table_page = "CREATE TABLE {$pref}page (".
 					"KEY idx_created (created),".
 					"KEY idx_modified (modified),".
 					"KEY idx_minor_edit (minor_edit),".
+					"KEY idx_deleted (deleted),".
 					"KEY idx_reviewed (reviewed),".
 					"KEY idx_comment_on_id (comment_on_id),".
 					"KEY idx_commented (commented),".
@@ -212,6 +213,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"KEY idx_supertag (supertag),".
 					"KEY idx_modified (modified),".
 					"KEY idx_minor_edit (minor_edit),".
+					"KEY idx_deleted (deleted),".
 					"KEY idx_reviewed (reviewed),".
 					"KEY idx_comment_on_id (comment_on_id)".
 				") {$engine} COMMENT='' {$charset}";
@@ -221,7 +223,7 @@ $table_revision = "CREATE TABLE {$pref}revision (".
 					"ip_address VARCHAR( 16 ) DEFAULT '0' NOT NULL ,".
 					"user_agent VARCHAR( 50 ) NOT NULL ,".
 					"last_activity INT( 10 ) unsigned DEFAULT 0 NOT NULL ,".
-					"user_data text NOT NULL,".
+					"user_data text NOT NULL ,".
 					"PRIMARY KEY ( session_id )".
 				") {$engine} COMMENT='' {$charset}";*/
 
@@ -260,8 +262,9 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"deleted TINYINT(1) UNSIGNED NULL DEFAULT '0',".
 					"PRIMARY KEY (upload_id),".
-					"KEY page_id (page_id, file_name),".
-					"KEY page_id_2 (page_id, uploaded_dt),".
+					"KEY idx_page_id (page_id, file_name),".
+					"KEY idx_page_id_2 (page_id, uploaded_dt),".
+					"KEY idx_deleted (deleted),".
 					"KEY idx_user_id (user_id)".
 				") {$engine} COMMENT='' {$charset}";
 

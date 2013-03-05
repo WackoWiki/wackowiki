@@ -119,7 +119,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 		// basic info
 ?>
-		<table border="0" cellspacing="3">
+		<table cellspacing="3">
 			<tr class="lined">
 				<td class="userprofil"><?php echo $this->get_translation('RealName'); ?></td>
 				<td><?php echo $user['real_name']; ?></td>
@@ -393,7 +393,7 @@ else
 		"LIMIT {$pagination['offset']}, $limit");
 
 	// user filter form
-	echo '<table border="0" class="formation"><tr><td class="label">';
+	echo '<table class="formation"><tr><td class="label">';
 	echo $this->form_open('', '', 'get');
 	echo $this->get_translation('UsersSearch').': </td><td>';
 	echo '<input name="user" maxchars="40" size="40" value="'.htmlspecialchars(isset($_GET['user']) ? $_GET['user'] : '').'" /> ';

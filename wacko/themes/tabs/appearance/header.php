@@ -57,7 +57,7 @@ require ('themes/_common/_header.php');
 echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
 		| <a onclick="return confirm('<?php echo $this->get_translation('LogoutAreYouSure');?>');" href="<?php echo $this->href('', 'Login').($this->config['rewrite_mode'] ? "?" : "&amp;");?>action=logout&amp;goback=<?php echo $this->slim_url($this->tag);?>"><?php echo $this->get_translation('LogoutLink'); ?></a></span> )</small>
 		<?php } else { ?>
-		<table border="0">
+		<table >
 			<tr>
 				<td>
 			<?php echo $this->form_open('', 'Login', 'post'); ?>
@@ -79,7 +79,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 	<br clear="all" />
 	<img src="<?php echo $this->config['base_url'] ?>images/z.gif" width="1" height="1" alt="" /></div>
 <div class="TopDiv"><img src="<?php echo $this->config['base_url'];?>images/z.gif" width="1" height="1" alt="" /></div>
-<table border="0" width="100%">
+<table width="100%">
 	<tr>
 		<td valign="top" class="Bookmarks">&nbsp;&nbsp;<strong><?php echo $this->get_translation('Bookmarks') ?>:</strong>&nbsp;&nbsp;</td>
 		<td width="100%" class="Bookmarks">

@@ -5,11 +5,11 @@ require ('themes/_common/_header.php');
 ?>
 </head>
 <body onload="all_init();">
-<table width="100%" border="0" >
+<table width="100%" >
 	<tr>
 		<td width="50" height="64" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_1.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.gif" width="50" height="1" /></td>
 		<td style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_3.png); background-repeat:repeat-x;">
-			<table width="100%" border="0" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_2.png); background-repeat:no-repeat;">
+			<table width="100%" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_2.png); background-repeat:no-repeat;">
 				<tr>
 					<td>
 						<div id="title" style="padding-top:5px;">
@@ -47,10 +47,10 @@ echo "\n";
 	<tr>
 		<td height="315" valign="top" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_left_2.png); background-repeat:repeat-y;"><div style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_left_1.png); background-repeat:no-repeat; height:311px;"></div></td>
 		<td colspan="2" rowspan="2">
-			<table width="100%" border="0" style="background-color:#FFFFFF;">
+			<table width="100%" style="background-color:#FFFFFF;">
 				<tr>
 					<td height="25" colspan="3">
-						<table width="100%" border="0" style="background-color:#646464;">
+						<table width="100%" style="background-color:#646464;">
 							<tr>
 								<td width="25" height="25" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/panel_left.png);"></td>
 								<td style="background-image:url(<?php echo $this->config['theme_url'] ?>images/panel_mid.png); background-repeat:repeat-x;">
@@ -117,7 +117,7 @@ echo "\n";
 					<td colspan="2" valign="top" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_leftmid.png); background-repeat:repeat-y; <?php echo $wordsHeight; ?>">
 						<div style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_topmid.png); background-repeat:repeat-x; <?php echo $wordsHeight; ?>">
 							<div id="meta" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_topleft.png); background-repeat:no-repeat; <?php echo $wordsHeight; ?>">
-								<table width="100%" border="0" >
+								<table width="100%" >
 									<tr>
 										<td>
 <?php
@@ -207,7 +207,7 @@ echo "\n";
 						</div>
 					</td>
 					<td width="210" rowspan="2" valign="top" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_rightmid.png); background-position:right; background-repeat:repeat-y;">
-						<table width="100%" border="0" >
+						<table width="100%" >
 							<tr>
 								<td height="348" valign="top" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_right.png); background-position:top right; background-repeat:no-repeat;">
 									<div id="sidepanel">

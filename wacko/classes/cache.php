@@ -17,6 +17,8 @@ class Cache
 		$this->cache_dir	= $cache_dir;
 		$this->cache_ttl	= $cache_ttl;
 		$this->timer		= $this->get_micro_time();
+		#$this->charset		= $this->engine->languages[$this->engine->config['language']]['charset'];
+		#$this->lang			= $this->engine->languages[$this->engine->config['language']]['charset'];
 
 		if (isset($this->wacko->config['debug']))
 		{
@@ -117,8 +119,9 @@ class Cache
 		$this->log('construct_id page='.$page);
 		$this->log('construct_id md5='.hash('md5', $page.'_'.$method.'_'.$query));
 
-		$filename = $this->cache_dir.CACHE_PAGE_DIR.hash('md5', $page.'_'.$method.'_'.$query);
-		return $filename;
+		$file_name = $this->cache_dir.CACHE_PAGE_DIR.hash('md5', $page.'_'.$method.'_'.$query);
+
+		return $file_name;
 	}
 
 	//Get timestamp of content from cache

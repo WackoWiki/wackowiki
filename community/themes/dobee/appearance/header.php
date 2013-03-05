@@ -8,7 +8,7 @@ require ('themes/_common/_header.php');
 <body
 	onload="all_init();">
 
-<table class="topbody" align="center" border="0" 
+<table class="topbody" align="center"
 	 width="100%">
 	<tr>
 		<td><?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?>
@@ -20,20 +20,20 @@ require ('themes/_common/_header.php');
 	</tr>
 </table>
 
-<table align="center" border="0"  
+<table align="center"
 	width="100%">
 	<tr>
 		<td valign="top" class="left" width="185" style="white-space: nowrap;">
-		<table width="185" border="0" align="left" 
+		<table width="185" align="left"
 			>
 			<tr align="left">
 				<td>
-				<table class="navOpened" id="sw_n0" align="left" 
+				<table class="navOpened" id="sw_n0" align="left"
 					 width="100%">
 					<tr>
 						<th onclick="opentree('sw_n0')" valign="top">
 						<table class="navTitle" onmouseover="mover(this)"
-							onmouseout="mout(this)" border="0" 
+							onmouseout="mout(this)"
 							 width="100%">
 							<tr>
 								<td class="titleLeft"><img
@@ -101,12 +101,12 @@ require ('themes/_common/_header.php');
 			</tr>
 			<tr align="left">
 				<td>
-				<table class="navOpened" id="sw_n1" align="center" 
+				<table class="navOpened" id="sw_n1" align="center"
 					 width="100%">
 					<tr>
 						<th onclick="opentree('sw_n1')" valign="top">
 						<table class="navTitle" onmouseover="mover(this)"
-							onmouseout="mout(this)" border="0" 
+							onmouseout="mout(this)"
 							 width="100%">
 							<tr>
 								<td class="titleLeft"><img
@@ -189,14 +189,14 @@ require ('themes/_common/_header.php');
 		<input type="hidden" name="action" value="login" />
 
 		<div class="header"><?php echo ($this->iswatched === true
-		? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\"  align=\"absmiddle\" border=\"0\" /></a>"
-		: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?>
-		| <?php echo "<a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\"  align=\"absmiddle\" border=\"0\" /></a>";?>
+		? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\" /></a>"
+		: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\" /></a>" ) ?>
+		| <?php echo "<a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a>";?>
 		| <?php
 		if ($this->get_user()) { ?> <span class="nobr"> <?php echo $this->get_translation('YouAre'); ?>
 		<img
 			src="<?php echo $this->config['theme_url'] ?>icons/user.gif"
-			alt="" width="16" height="16" border="0" align="middle"
+			alt="" width="16" height="16" align="middle"
 			style="vertical-align: baseline;" /> <?php echo $this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?>
 		</span> <small> ( <span class="nobr Tune"> <?php echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $this->get_translation('AccountText'), 0); ?>
 		| <a

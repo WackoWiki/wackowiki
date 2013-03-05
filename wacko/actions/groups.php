@@ -29,7 +29,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 		// basic info
 ?>
-		<table border="0" cellspacing="3">
+		<table cellspacing="3">
 			<tr class="lined">
 				<td class="userprofil"><?php echo $this->get_translation('GroupsDescription'); ?></td>
 				<td><?php echo $usergroup['description']; ?></td>
@@ -201,7 +201,7 @@ else
 		"LIMIT {$pagination['offset']}, $limit");
 
 	// usergroup filter form
-	echo '<table border="0" class="formation"><tr><td class="label">';
+	echo '<table class="formation"><tr><td class="label">';
 	echo $this->form_open('', '', 'get');
 	echo $this->get_translation('GroupsSearch').': </td><td>';
 	echo '<input name="group" maxchars="40" size="40" value="'.htmlspecialchars(isset($_GET['group']) ? $_GET['group'] : '').'" /> ';

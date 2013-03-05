@@ -780,8 +780,8 @@ $wacko_translation = array(
 	'Any'					=> 'Any',
 
 	//icons
-	'outericon' => '<img src="{theme}icons/web.gif" alt="" border="0" />',
-	'fileicon' => '<img src="{theme}icons/file.gif" alt="" border="0" />',
+	'outericon' => '<img src="{theme}icons/web.gif" alt="" />',
+	'fileicon' => '<img src="{theme}icons/file.gif" alt="" />',
 	'pdficon'  => '<img src="{theme}icons/pdf.gif" alt="PDF Document" />',
 	'rdficon'  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',
 	'emailicon' => '<img src="{theme}icons/mail.png" alt="" />',

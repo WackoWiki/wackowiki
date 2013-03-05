@@ -7,7 +7,7 @@ require ('themes/_common/_header.php');
 
 <body onload="all_init();">
 
-<table class="topbody" align="center" border="0"   width="100%">
+<table class="topbody" align="center"   width="100%">
 	<tr>
 		<td>
 			<?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?>
@@ -21,13 +21,13 @@ require ('themes/_common/_header.php');
 	</tr>
 </table>
 
-<table align="center" border="0"   width="100%">
+<table align="center"   width="100%">
 	<tr>
 		<td class="left" valign="top">
 			<table class="navOpened" id="sw_n0" align="center"   width="100%">
 				<tr>
 					<th onclick="opentree('sw_n0')" valign="top">
-						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)" border="0"   width="100%">
+						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)"   width="100%">
 							<tr>
 								<td class="titleLeft"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.gif" alt="" height="1" width="14"/></td>
 								<td class="titleText" width="100%">
@@ -97,9 +97,9 @@ require ('themes/_common/_header.php');
 			<table class="navOpened" id="sw_n1" align="center"   width="100%">
 				<tr>
 					<th onclick="opentree('sw_n1')" valign="top">
-						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)" border="0"   width="100%">
+						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)"   width="100%">
 							<tr>
-								<td class="titleLeft"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.gif" alt="" height="1" border="0" width="14"/></td>
+								<td class="titleLeft"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.gif" alt="" height="1" width="14"/></td>
 								<td class="titleText" width="100%">This Page</td>
 								<td class="titleHandle"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.gif" alt="" height="1" width="20"/></td>
 								<td class="titleRight"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.gif" alt="" height="1" width="3"/></td>
@@ -191,14 +191,14 @@ require ('themes/_common/_header.php');
 
 <div class="header">
 	<?php echo ($this->iswatched === true
-			? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\"  align=\"absmiddle\" border=\"0\" /></a>"
-			: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\"  align=\"absmiddle\" border=\"0\" /></a>" ) ?> |
-	<?php echo "<a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\"  align=\"absmiddle\" border=\"0\" /></a>";?> |
+			? "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/unwatch.gif\" title=\"".$this->get_translation('RemoveWatch')."\" alt=\"".$this->get_translation('RemoveWatch')."\" /></a>"
+			: "<a href=\"".$this->href('watch')."\"><img src=\"".$this->config['theme_url']."icons/watch.gif\" title=\"".$this->get_translation('SetWatch')."\" alt=\"".$this->get_translation('SetWatch')."\" /></a>" ) ?> |
+	<?php echo "<a href=\"".$this->href('print')."\"><img src=\"".$this->config['theme_url']."icons/print.gif\" title=\"".$this->get_translation('PrintVersion')."\" alt=\"".$this->get_translation('PrintVersion')."\" /></a>";?> |
 	<?php
 		if ($this->get_user()) { ?>
 		<span class="nobr">
 				<?php echo $this->get_translation('YouAre'); ?>
-				<img src="<?php echo $this->config['theme_url'] ?>icons/user.gif" width="12" height="12" border="0" style="vertical-align: baseline; " alt=""/>
+				<img src="<?php echo $this->config['theme_url'] ?>icons/user.gif" width="12" height="12" style="vertical-align: baseline; " alt=""/>
 				<?php echo $this->link($this->config['users_page'].'/'.$this->get_user_name(), '', $this->get_user_name()) ?>
 			</span>
 			<small>
