@@ -346,7 +346,7 @@ function admin_groups(&$engine, &$module)
 		<input type="hidden" name="mode" value="groups" />
 		<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 
-		<table border="0" cellpadding="3" class="formation">
+		<table cellpadding="3" class="formation">
 		<tr>
 			<th style="width:5px;"></th>
 			<th style="width:5px;">ID</th>
@@ -477,7 +477,7 @@ function admin_groups(&$engine, &$module)
 			{
 				echo '<div class="right">'.( $pagination['text'] == true ? '<small>'.$pagination['text'].'</small>' : '&nbsp;' ).'</div>'."\n";
 			} ?>
-			<table border="0" cellpadding="3" class="formation">
+			<table cellpadding="3" class="formation">
 				<tr>
 					<th style="width:5px;"></th>
 					<th style="width:5px;">ID</th>

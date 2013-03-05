@@ -8,7 +8,7 @@
 </tr>
 </table>
 
-<table class="bottom" align="center" border="0" 
+<table class="bottom" align="center" 
 	 width="100%">
 	<tr>
 		<td id="credits"><?php 

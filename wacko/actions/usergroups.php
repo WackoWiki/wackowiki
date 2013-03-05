@@ -28,7 +28,7 @@ if($user = $this->get_user())
 			echo '<div class="layout-box"><p class="layout-box"><span>'.$this->get_translation('UserGroups').':</span></p>';
 		}
 
-		echo '<table border="0" cellspacing="5" cellpadding="5"><tr>';
+		echo '<table cellspacing="5" cellpadding="5"><tr>';
 
 		$i = 1;
 

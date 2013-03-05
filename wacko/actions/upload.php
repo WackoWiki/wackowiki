@@ -70,7 +70,7 @@ if ($registered
 
 	$maxfilesize *= 1024;
 ?>
-<table border="0" >
+<table >
 	<tr>
 		<td><label for="FileUpload"><?php echo $this->get_translation('UploadFor');?>:&nbsp;</label>
 		<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize;?>" /></td>

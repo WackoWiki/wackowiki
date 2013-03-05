@@ -31,8 +31,8 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 
 	$bonus2 = $bonus=="2a"?"del":"";
 
-	echo '<table border="0" ><tr>';
-	echo "<td><img src='".$engine->config['theme_url']."icons/tabr$selected".$bonus2.".gif' width='$xsize' align='top' hspace='0' vspace='0' height='$ysize' alt='' border='0' /></td>";
+	echo '<table ><tr>';
+	echo "<td><img src='".$engine->config['theme_url']."icons/tabr$selected".$bonus2.".gif' width='$xsize' align='top' height='$ysize' alt='' /></td>";
 
 	if (!$selected)
 	{
@@ -45,15 +45,15 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 
 	echo "<div class='TabText'>".$text."</div>";
 	echo "</td>";
-	echo "<td><img src='".$engine->config['theme_url']."icons/tabl$selected".$bonus2.".gif' width='$xsize' align='top' hspace='0' vspace='0' height='$ysize' alt='' border='0' /></td>";
+	echo "<td><img src='".$engine->config['theme_url']."icons/tabl$selected".$bonus2.".gif' width='$xsize' align='top' height='$ysize' alt='' /></td>";
 	echo '</tr></table>';
 	echo "</div>";
 }
 
 ?>
 <div class="Footer">
-<img src="<?php echo $this->config['base_url'];?>images/z.gif" width="5" height="1" alt="" align="left" border="0" />
-<img src="<?php echo $this->config['base_url'];?>images/z.gif" width="5" height="1" alt="" align="right" border="0" />
+<img src="<?php echo $this->config['base_url'];?>images/z.gif" width="5" height="1" alt="" align="left" />
+<img src="<?php echo $this->config['base_url'];?>images/z.gif" width="5" height="1" alt="" align="right" />
 <?php
 	echo_tab(
 	$this->href('show'),

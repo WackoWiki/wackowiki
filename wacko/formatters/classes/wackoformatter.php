@@ -447,7 +447,7 @@ class WackoFormatter
 			$this->intablebr	= true;
 			$this->table_scope	= true;
 
-			return '<table class="dtable" border="0">';
+			return '<table class="dtable" >';
 		}
 		else if ($thing == '#|')
 		{

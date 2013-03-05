@@ -2945,7 +2945,7 @@ class Wacko
 
 			if ($img_link)
 			{
-				$text		= '<img src="'.$img_link.'" border="0" title="'.$text.'" />';
+				$text		= '<img src="'.$img_link.'" title="'.$text.'" />';
 			}
 
 			if ($text)
@@ -3100,7 +3100,7 @@ class Wacko
 		{
 			if ($img_link)
 			{
-				$text		= '<img src="'.$img_link.'" border="0" title="'.$text.'" />';
+				$text		= '<img src="'.$img_link.'" title="'.$text.'" />';
 			}
 
 			$icon			= str_replace('{theme}', $this->config['theme_url'], $icon);
@@ -3304,6 +3304,7 @@ class Wacko
 					$written[$lower_to_tag] = 1;
 				}
 			}
+
 			$this->sql_query(
 				"INSERT INTO ".$this->config['table_prefix']."link ".
 					"(from_page_id, to_page_id, to_tag, to_supertag) ".
@@ -3533,7 +3534,7 @@ class Wacko
 			$this->stop_link_tracking();
 		}
 
-		$result = $this->include_buffered(strtolower($action).'.php', "<i>".$this->get_translation('UnknownAction')." \"$action\"</i>", $params, $this->config['action_path']);
+		$result = $this->include_buffered(strtolower($action).'.php', "<em>".$this->get_translation('UnknownAction')." \"$action\"</em>", $params, $this->config['action_path']);
 
 		$this->start_link_tracking();
 		$this->no_cache();
@@ -3549,7 +3550,7 @@ class Wacko
 
 		$method_location = $handler.'/'.$method.'.php';
 
-		return $this->include_buffered($method_location, "<i>Unknown method \"$method_location\"</i>", '', $this->config['handler_path']);
+		return $this->include_buffered($method_location, "<em>Unknown method \"$method_location\"</em>", '', $this->config['handler_path']);
 	}
 
 	// wrapper for the next method
@@ -3560,11 +3561,11 @@ class Wacko
 
 	function _format($text, $formatter, &$options)
 	{
-		$text = $this->include_buffered('formatters/'.$formatter.'.php', "<i>Formatter \"$formatter\" not found</i>", compact('text', 'options'));
+		$text = $this->include_buffered('formatters/'.$formatter.'.php', "<em>Formatter \"$formatter\" not found</em>", compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->config['default_typografica'])
 		{
-			$text = $this->include_buffered('formatters/typografica.php', "<i>Formatter \"$formatter\" not found</i>", compact('text'));
+			$text = $this->include_buffered('formatters/typografica.php', "<em>Formatter \"$formatter\" not found</em>", compact('text'));
 		}
 
 		return $text;
@@ -5922,7 +5923,7 @@ class Wacko
 				"p.tag ".($cluster === true ? "LIKE" : "=")." '".quote($this->dblink, $tag.($cluster === true ? "/%" : ""))."' ");
 	}
 
-	function remove_files($tag, $cluster = false)
+	function remove_files($tag, $cluster = false, $dontkeep = 0)
 	{
 		if (!$tag)
 		{
@@ -5942,19 +5943,41 @@ class Wacko
 				"FROM {$this->config['table_prefix']}upload ".
 				"WHERE page_id = '".quote($this->dblink, $page['page_id'])."'");
 
-			foreach ($files as $file)
+			// store a copy in ...
+			if ($this->config['store_deleted_pages'] && !$dontkeep)
 			{
-				// remove from FS
-				$file_name = $this->config['upload_path_per_page'].'/@'.
-					$page['page_id'].'@'.$file['file_name'];
+				// TODO: moved to backup folder
+				/*foreach ($files as $file)
+				{
+					// remove from FS
+					$file_name = $this->config['upload_path_per_page'].'/@'.
+							$page['page_id'].'@'.$file['file_name'];
 
-				@unlink($file_name);
+					@unlink($file_name);
+				}*/
+
+				// flag record as deleted in DB
+				$this->sql_query(
+					"UPDATE {$this->config['table_prefix']}upload SET ".
+					"deleted	= '1' ".
+					"WHERE page_id = '".quote($this->dblink, $page['page_id'])."'");
 			}
+			else
+			{
+				foreach ($files as $file)
+				{
+					// remove from FS
+					$file_name = $this->config['upload_path_per_page'].'/@'.
+						$page['page_id'].'@'.$file['file_name'];
 
-			// remove from DB
-			$this->sql_query(
-				"DELETE FROM {$this->config['table_prefix']}upload ".
-				"WHERE page_id = '".quote($this->dblink, $page['page_id'])."'");
+					@unlink($file_name);
+				}
+
+				// remove from DB
+				$this->sql_query(
+					"DELETE FROM {$this->config['table_prefix']}upload ".
+					"WHERE page_id = '".quote($this->dblink, $page['page_id'])."'");
+			}
 		}
 
 		return true;

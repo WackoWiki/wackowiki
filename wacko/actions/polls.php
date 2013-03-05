@@ -98,7 +98,7 @@ else
 
 	if ($polls = $polls_obj->get_polls_list('active'))
 	{
-		echo '<table border="0"  >';
+		echo '<table  >';
 		echo ($align == 'h' ? '<tr>' : '');
 
 		foreach ($polls as $poll)

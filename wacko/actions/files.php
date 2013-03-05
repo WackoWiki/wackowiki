@@ -157,7 +157,7 @@ if ($can_view)
 
 	if (count($files))
 	{
-		echo '<table class="upload" border="0">';
+		echo '<table class="upload" >';
 	}
 
 	foreach($files as $file)
