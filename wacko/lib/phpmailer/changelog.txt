@@ -3,6 +3,14 @@ ChangeLog
 NOTE: THIS VERSION OF PHPMAILER IS DESIGNED FOR PHP5/PHP6.
       IT WILL NOT WORK WITH PHP4.
   
+Version 5.2.4 (February 19, 2013)
+  * Fix tag and version bug.
+  * un-deprecate isSMTP(), isMail(), IsSendmail() and
+    isQmail().
+
+Version 5.2.3 (February 8, 2013)
+  * Fix issue with older PCREs and ValidateAddress() (Bugz: 124)
+
 Version 5.2.2 (December 3, 2012)
   * Some fixes and syncs from https://github.com/Synchro/PHPMailer
 
