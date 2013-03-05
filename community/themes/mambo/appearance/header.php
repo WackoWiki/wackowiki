@@ -7,7 +7,7 @@ require ('themes/_common/_header.php');
 
 <body onload="all_init();">
 
-<table class="topbody" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<table class="topbody" align="center" border="0"   width="100%">
 	<tr>
 		<td>
 			<?php echo $this->config['site_name'] ?>: <?php echo $this->get_page_path(); ?>
@@ -21,13 +21,13 @@ require ('themes/_common/_header.php');
 	</tr>
 </table>
 
-<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<table align="center" border="0"   width="100%">
 	<tr>
 		<td class="left" valign="top">
-			<table class="navOpened" id="sw_n0" align="center" cellpadding="0" cellspacing="0" width="100%">
+			<table class="navOpened" id="sw_n0" align="center"   width="100%">
 				<tr>
 					<th onclick="opentree('sw_n0')" valign="top">
-						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)" border="0"   width="100%">
 							<tr>
 								<td class="titleLeft"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.gif" alt="" height="1" width="14"/></td>
 								<td class="titleText" width="100%">
@@ -94,10 +94,10 @@ require ('themes/_common/_header.php');
 				</tr>
 			</table>
 
-			<table class="navOpened" id="sw_n1" align="center" cellpadding="0" cellspacing="0" width="100%">
+			<table class="navOpened" id="sw_n1" align="center"   width="100%">
 				<tr>
 					<th onclick="opentree('sw_n1')" valign="top">
-						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)" border="0" cellpadding="0" cellspacing="0" width="100%">
+						<table class="navTitle" onmouseover="mover(this)" onmouseout="mout(this)" border="0"   width="100%">
 							<tr>
 								<td class="titleLeft"><img src="<?php echo $this->config['theme_url'] ?>images/1x1.gif" alt="" height="1" border="0" width="14"/></td>
 								<td class="titleText" width="100%">This Page</td>

@@ -54,6 +54,16 @@ span.missingpage {background-color: #FFFACD;}
 body {color: black; background: white; font: 10pt Trebuchet MS }
 body, h1, h2, h3, h4, h5, h6 {padding: 0; margin: 0}
 p, td, li, select, textarea, legend { font: 10pt Trebuchet MS }
+/* cellspacing */
+table {
+	border-collapse:collapse;
+	border-spacing: 0;
+	
+}
+/* cellpadding */
+th, td {
+	padding: 0px;
+}
 td {vertical-align: top }
 
 /* Page header */

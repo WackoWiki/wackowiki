@@ -193,7 +193,7 @@ if ($user = $this->get_user())
 		}
 		else
 		{
-			echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
+			echo "<table border=\"0\">\n";
 
 			foreach ($referrers as $referrer)
 			{

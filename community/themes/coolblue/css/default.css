@@ -2,6 +2,16 @@
 @import "layout.css";
 @import "fontdesign.css";
 
+/* cellspacing */
+table {
+	border-collapse:collapse;
+	border-spacing: 0;
+	
+}
+/* cellpadding */
+th, td {
+	padding: 0px;
+}
 img {
 	border-width: 0px;
 	vertical-align: middle;

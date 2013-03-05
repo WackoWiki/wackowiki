@@ -14,7 +14,16 @@ p, td, li, select, textarea {
 	text-align:left;
 	white-space:pre;
 } */
-
+/* cellspacing */
+table {
+	border-collapse:collapse;
+	border-spacing: 0;
+	
+}
+/* cellpadding */
+th, td {
+	padding: 0px;
+}
 label {
 	cursor: pointer;
 }

@@ -5,7 +5,7 @@
 				</tr>
 				<tr>
 					<td height="25" colspan="3">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<table width="100%" border="0" >
 							<tr>
 								<td width="25" height="25" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_botleft.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.gif" width="25" height="1" /></td>
 								<td width="100%" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_botmid.png); background-repeat:repeat-x;"></td>
@@ -24,7 +24,7 @@
 	<tr>
 		<td style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_bottom_0.png); background-repeat:no-repeat;"></td>
 		<td colspan="2" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_bottom_2.png); background-repeat:repeat-x;">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<table width="100%" border="0" >
 				<tr>
 					<td width="25" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_bottom_1.png); background-repeat:no-repeat;"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.gif" width="25" height="1" /></td>
 					<td>

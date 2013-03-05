@@ -31,7 +31,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 
 	$bonus2 = $bonus=="2a"?"del":"";
 
-	echo '<table cellspacing="0" cellpadding="0" border="0" ><tr>';
+	echo '<table border="0" ><tr>';
 	echo "<td><img src='".$engine->config['theme_url']."icons/tabr$selected".$bonus2.".gif' width='$xsize' align='top' hspace='0' vspace='0' height='$ysize' alt='' border='0' /></td>";
 
 	if (!$selected)
