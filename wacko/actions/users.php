@@ -69,16 +69,16 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			{
 				// compose message
 				$prefix		= rtrim(str_replace(array('https://www.', 'https://', 'http://www.', 'http://'), '', $this->config['base_url']), '/');
-				$msgID		= date('ymdHi').'.'.mt_rand(100000, 999999).'@'.$prefix;
+				$msg_id		= date('ymdHi').'.'.mt_rand(100000, 999999).'@'.$prefix;
 				$subject	= ( strpos($_POST['mail_subject'], '['.$prefix.'] ') === false ? '['.$prefix.'] ' : '' ).( $_POST['mail_subject'] ? $_POST['mail_subject'] : '(no subject)' );
 				$body		= str_replace('%1', $this->get_user_name(), $this->get_translation('UsersPMBody'));
 				$body		= str_replace('%2', rtrim($this->config['base_url'], '/'), $body);
-				$body		= str_replace('%3', $this->href('', $this->tag, 'profile='.$this->get_user_name().'&ref='.rawurlencode(base64_encode($msgID.'@@'.$subject)).'#contacts'), $body);
+				$body		= str_replace('%3', $this->href('', $this->tag, 'profile='.$this->get_user_name().'&ref='.rawurlencode(base64_encode($msg_id.'@@'.$subject)).'#contacts'), $body);
 				$body		= str_replace('%4', $this->config['abuse_email'], $body);
 				$body		= str_replace('%5', $_POST['mail_body'], $body);
 
 				// compose headers
-				$headers	= array('Message-ID: <$msgID>');
+				$headers	= array('Message-ID: <$msg_id>');
 
 				if (isset($_POST['ref']) && $_POST['ref'] == true)
 				{
@@ -109,7 +109,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				}
 			}
 
-			unset($error, $notice, $body, $subject, $referrer, $prefix, $headers, $msgID);
+			unset($error, $notice, $body, $subject, $referrer, $prefix, $headers, $msg_id);
 		}
 
 		// header and profile data
@@ -160,13 +160,21 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				if (isset($_GET['ref']) && $_GET['ref'] == true)
 				{
 					list($_POST['ref'], $_POST['mail_subject']) = explode('@@', base64_decode(rawurldecode($_GET['ref'])), 2);
-					if (substr($_POST['mail_subject'], 0, 3) != 'Re:') $_POST['mail_subject'] = 'Re: '.$_POST['mail_subject'];
+
+					if (substr($_POST['mail_subject'], 0, 3) != 'Re:')
+					{
+						$_POST['mail_subject'] = 'Re: '.$_POST['mail_subject'];
+					}
 				}
 ?>
 			<br />
 			<?php echo $this->form_open(); ?>
 			<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['user_name']); ?>" />
-			<?php if (isset($_POST['ref'])) echo '<input type="hidden" name="ref" value="'.htmlspecialchars($_POST['ref']).'" />'; ?>
+			<?php
+			if (isset($_POST['ref']))
+			{
+				echo '<input type="hidden" name="ref" value="'.htmlspecialchars($_POST['ref']).'" />';
+			}?>
 			<table class="formation">
 <?php
 				// user must allow incoming messages, and needs confirmed email address set
@@ -177,7 +185,11 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					<td class="label" style="width:50px; white-space:nowrap;"><?php echo $this->get_translation('UsersIntercomSubject'); ?>:</td>
 					<td>
 						<input name="mail_subject" value="<?php echo (isset($_POST['mail_subject']) ? htmlspecialchars($_POST['mail_subject']) : ""); ?>" size="60" maxlength="200" />
-						<?php if (isset($_POST['ref'])) echo '&nbsp;&nbsp; <a href="'.$this->href('', '', 'profile='.$user['user_name'].'#contacts').'">'.$this->get_translation('UsersIntercomSubjectN').'</a>'; ?>
+						<?php
+						if (isset($_POST['ref']))
+						{
+							echo '&nbsp;&nbsp; <a href="'.$this->href('', '', 'profile='.$user['user_name'].'#contacts').'">'.$this->get_translation('UsersIntercomSubjectN').'</a>';
+						} ?>
 					</td>
 				</tr>
 				<tr>
@@ -223,6 +235,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				"FROM {$this->config['table_prefix']}page ".
 				"WHERE owner_id = '".quote($this->dblink, $user['user_id'])."' ".
 					"AND comment_on_id = '0' ".
+					"AND deleted <> '1' ".
 				"ORDER BY ".( isset($_GET['sort']) && $_GET['sort'] == 'name' ? 'tag ASC' : 'created DESC' )." ".
 				"LIMIT {$pagination['offset']}, $limit");
 
@@ -273,6 +286,8 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 						"LEFT JOIN ".$this->config['table_prefix']."page p ON (c.comment_on_id = p.page_id) ".
 					"WHERE c.owner_id = '".quote($this->dblink, $user['user_id'])."' ".
 						"AND c.comment_on_id <> '0' ".
+						"AND c.deleted <> '1' ".
+						"AND p.deleted <> '1' ".
 					"ORDER BY c.created DESC ".
 					"LIMIT {$pagination['offset']}, $limit");
 
