@@ -5,8 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($isimage)) $isimage = '';
-if (!isset($isplain)) $isplain = '';
+if (!isset($is_image)) $is_image = '';
+if (!isset($is_plain)) $is_plain = '';
 
 $error = '';
 $file404 = 'images/upload404.gif';
@@ -55,7 +55,7 @@ $extension = strtolower($file['file_ext']);
 
 if (($extension == 'gif') || ($extension == 'jpg') || ($extension == 'jpeg') || ($extension == 'png'))
 {
-	$isimage = true;
+	$is_image = true;
 	header('Content-Type: image/'.$extension);
 
 	if ($error)
@@ -71,7 +71,7 @@ if (($extension == 'gif') || ($extension == 'jpg') || ($extension == 'jpeg') || 
 }
 else if ($extension == 'txt')
 {
-	$isplain = true;
+	$is_plain = true;
 	header('Content-Type: text/plain');
 }
 else if ($extension == 'pdf')
@@ -87,9 +87,9 @@ else
 
 if ($filepath)
 {
-	header('Content-Disposition:'.($isimage || $isplain ? '' : ' attachment;').' filename="'.$file['file_name'].'"');
+	header('Content-Disposition:'.($is_image || $is_plain ? '' : ' attachment;').' filename="'.$file['file_name'].'"');
 
-	if ($isimage == false)
+	if ($is_image == false)
 	{
 		// count file download
 		$this->sql_query(
