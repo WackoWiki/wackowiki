@@ -463,7 +463,7 @@ if ($registered
 							$file_size_kb	= ceil($file_size / 1024);
 							$uploaded_dt	= date('Y-m-d H:i:s');
 
-							$description = substr(quote($this->dblink, $_POST['description']), 0, 250);
+							$description = substr(quote($this->dblink, $_POST['file_description']), 0, 250);
 							$description = rtrim( $description, '\\' );
 
 							// Make HTML in the description redundant ;¬)
