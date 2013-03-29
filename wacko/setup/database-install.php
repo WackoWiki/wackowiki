@@ -131,7 +131,7 @@ $insert_registered_group	= "INSERT INTO ".$config['table_prefix']."usergroup (gr
 $insert_moderator_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Moderator', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
 $insert_reviewer_group		= "INSERT INTO ".$config['table_prefix']."usergroup (group_name, description, moderator, created) VALUES ('Reviewer', '', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1), NOW())";
 
-$insert_logo_image			= "INSERT INTO ".$config['table_prefix']."upload (page_id, user_id, file_name, description, uploaded_dt, file_size, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1),'wacko_logo.png', 'WackoWiki', NOW(), '1580', '108', '50', 'png')";
+$insert_logo_image			= "INSERT INTO ".$config['table_prefix']."upload (page_id, user_id, file_name, file_description, uploaded_dt, file_size, picture_w, picture_h, file_ext) VALUES ('0', (SELECT user_id FROM ".$config['table_prefix']."user WHERE user_name = '".$config['admin_name']."' LIMIT 1),'wacko_logo.png', 'WackoWiki', NOW(), '1580', '108', '50', 'png')";
 
 
 if (!isset($config['multilanguage']))
@@ -713,12 +713,9 @@ switch($config['database_driver'])
 		}
 
 		echo "         <ul>\n";
-		/*
-			PHP4 doesn't support try/catch blocks so we put the PDO code in a seperate file.
-			Since we don't support PDO in PHP4 they can never come down this route without PHP5.
-			i.e. they don't see this as a selection on the previous page.
-		*/
+
 		require_once('setup/database-install-pdo.php');
+
 		echo "         </ul>\n";
 		echo "         <br />\n";
 

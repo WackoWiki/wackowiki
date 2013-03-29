@@ -23,7 +23,7 @@ else
 }
 
 $file = $this->load_single(
-	"SELECT u.user_name AS user, f.upload_id, f.file_name, f.file_ext, f.file_size, f.description, f.hits ".
+	"SELECT u.user_name AS user, f.upload_id, f.file_name, f.file_ext, f.file_size, f.file_description, f.hits ".
 	"FROM ".$this->config['table_prefix']."upload f ".
 		"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 	"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".

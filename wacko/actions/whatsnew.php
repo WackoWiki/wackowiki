@@ -49,7 +49,7 @@ $pages2 = $this->load_all(
 
 // loading uloads
 $files = $this->load_all(
-	"SELECT f.page_id, c.tag, f.uploaded_dt as created, f.uploaded_dt as modified, f.file_name as title, 0 as comment_on_id, f.hits as ip, f.uploaded_dt AS date, f.description AS edit_note, c.tag as comment_on_page, user_name, 2 AS ctype, f.deleted ".
+	"SELECT f.page_id, c.tag, f.uploaded_dt as created, f.uploaded_dt as modified, f.file_name as title, 0 as comment_on_id, f.hits as ip, f.uploaded_dt AS date, f.file_description AS edit_note, c.tag as comment_on_page, user_name, 2 AS ctype, f.deleted ".
 	"FROM {$this->config['table_prefix']}upload f ".
 		"LEFT JOIN {$this->config['table_prefix']}page c ON (f.page_id = c.page_id) ".
 		"LEFT JOIN {$this->config['table_prefix']}user u ON (f.user_id = u.user_id) ".

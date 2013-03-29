@@ -32,7 +32,7 @@ function admin_files(&$engine, &$module)
 	if (isset($_GET['remove'])) // show the form
 	{
 		$file = $engine->load_single(
-			"SELECT user_id, upload_id, file_name, file_size, lang, description ".
+			"SELECT user_id, upload_id, file_name, file_size, lang, file_description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
 				"AND upload_id = '".quote($engine->dblink, $_GET['file_id'])."' ".
@@ -68,7 +68,7 @@ function admin_files(&$engine, &$module)
 	{
 		// 1. where, existence
 		$file = $engine->load_single(
-			"SELECT user_id, upload_id, file_name, file_size, lang, description ".
+			"SELECT user_id, upload_id, file_name, file_size, lang, file_description ".
 			"FROM {$engine->config['table_prefix']}upload ".
 			"WHERE page_id = 0 ".
 				"AND upload_id = '".quote($engine->dblink, $_POST['file_id'])."' ".
@@ -170,23 +170,23 @@ function admin_files(&$engine, &$module)
 			chmod( $dir.$result_name, 0744 );
 
 			$small_name  = $result_name;
-			$description = substr(quote($engine->dblink, $_POST['description']), 0, 250);
+			$description = substr(quote($engine->dblink, $_POST['file_description']), 0, 250);
 			$description = rtrim( $description, '\\' );
 			$description = str_replace(array('"', "'", '<', '>'), '', $description);
 			$description = htmlspecialchars($description);
 
 			// 5. insert line into DB
 			$engine->sql_query("INSERT INTO {$engine->config['table_prefix']}upload SET ".
-				"page_id		= '".quote($engine->dblink, '0')."', ".
-				"file_name		= '".quote($engine->dblink, $small_name)."', ".
-				"lang			= '".quote($engine->dblink, $engine->config['language'])."', ".
-				"description	= '".quote($engine->dblink, $description)."', ".
-				"file_size		= '".quote($engine->dblink, $file_size)."',".
-				"picture_w		= '".quote($engine->dblink, $size[0])."',".
-				"picture_h		= '".quote($engine->dblink, $size[1])."',".
-				"file_ext		= '".quote($engine->dblink, substr($ext, 0, 10))."',".
-				"user_id		= '".quote($engine->dblink, $user['user_id'])."',".
-				"uploaded_dt	= '".quote($engine->dblink, date('Y-m-d H:i:s'))."' ");
+				"page_id			= '".quote($engine->dblink, '0')."', ".
+				"file_name			= '".quote($engine->dblink, $small_name)."', ".
+				"lang				= '".quote($engine->dblink, $engine->config['language'])."', ".
+				"file_description	= '".quote($engine->dblink, $description)."', ".
+				"file_size			= '".quote($engine->dblink, $file_size)."',".
+				"picture_w			= '".quote($engine->dblink, $size[0])."',".
+				"picture_h			= '".quote($engine->dblink, $size[1])."',".
+				"file_ext			= '".quote($engine->dblink, substr($ext, 0, 10))."',".
+				"user_id			= '".quote($engine->dblink, $user['user_id'])."',".
+				"uploaded_dt		= '".quote($engine->dblink, date('Y-m-d H:i:s'))."' ");
 
 			// 4. output link to file
 			// !!!!! write after providing filelink syntax
@@ -248,7 +248,7 @@ function admin_files(&$engine, &$module)
 		</tr>
 		<tr>
 			<td><?php echo $engine->get_translation('UploadDesc');?>:&nbsp;</td>
-			<td><input name="description" type="text" size="40" /></td>
+			<td><input name="file_description" type="text" size="40" /></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
@@ -286,7 +286,7 @@ function admin_files(&$engine, &$module)
 
 	// load files list
 	$files = $engine->load_all(
-		"SELECT upload_id, page_id, user_id, file_size, picture_w, picture_h, file_ext, file_name, description, uploaded_dt ".
+		"SELECT upload_id, page_id, user_id, file_size, picture_w, picture_h, file_ext, file_name, file_description, uploaded_dt ".
 		"FROM {$engine->config['table_prefix']}upload ".
 		"WHERE page_id = 0 ".
 		"ORDER BY ".$order_by." ".
@@ -325,7 +325,7 @@ function admin_files(&$engine, &$module)
 		$engine->files_cache[$file['page_id']][$file['file_name']] = &$file;
 
 		$dt		= $file['uploaded_dt'];
-		$desc	= $engine->format($file['description'], 'typografica');
+		$desc	= $engine->format($file['file_description'], 'typografica');
 
 		if ($desc == '') $desc = '&nbsp;';
 

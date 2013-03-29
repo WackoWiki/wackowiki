@@ -58,7 +58,7 @@ if ($registered
 		}
 
 		$file = $this->load_single(
-			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.description, f.uploaded_dt ".
+			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
@@ -86,7 +86,7 @@ if ($registered
 				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$this->binary_multiples($file['file_size'], false, true, true).')'; ?></li>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $file['description']; ?></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><?php echo $file['file_description']; ?></li>
 			</ul>
 		</li>
 	</ul>
@@ -126,7 +126,7 @@ if ($registered
 		}
 
 		$file = $this->load_single(
-			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.description, f.uploaded_dt ".
+			"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description, f.uploaded_dt ".
 			"FROM ".$this->config['table_prefix']."upload f ".
 				"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 			"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
@@ -154,7 +154,7 @@ if ($registered
 				<li><span class="info_title"><?php echo $this->get_translation('FileSize'); ?>:</span><?php echo '('.$this->binary_multiples($file['file_size'], false, true, true).')'; ?></li>
 				<li><span>&nbsp;</span></li>
 				<li><span class="info_title"><?php echo $this->get_translation('FileName'); ?>:</span><?php echo $file['file_name']; ?></li>
-				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input name="description" id="UploadDesc" type="text" size="80" value="<?php echo $file['description']; ?>"/></li>
+				<li><span class="info_title"><?php echo $this->get_translation('UploadDesc'); ?>:</span><input name="file_description" id="UploadDesc" type="text" size="80" value="<?php echo $file['file_description']; ?>"/></li>
 			</ul>
 		</li>
 	</ul>
@@ -199,7 +199,7 @@ if ($registered
 			}
 
 			$file = $this->load_single(
-				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.description ".
+				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
 				"FROM ".$this->config['table_prefix']."upload f ".
 					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 				"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
@@ -273,7 +273,7 @@ if ($registered
 			}
 
 			$file = $this->load_single(
-				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.description ".
+				"SELECT f.user_id, u.user_name, f.upload_id, f.file_name, f.file_size, f.file_description ".
 				"FROM ".$this->config['table_prefix']."upload f ".
 					"INNER JOIN ".$this->config['table_prefix']."user u ON (f.user_id = u.user_id) ".
 				"WHERE f.page_id = '".quote($this->dblink, $page_id)."'".
@@ -287,7 +287,7 @@ if ($registered
 					$this->page['owner_id'] == $this->get_user_id())) || (
 					$file['user_id'] == $this->get_user_id()))
 				{
-					$description = substr(quote($this->dblink, $_POST['description']), 0, 250);
+					$description = substr(quote($this->dblink, $_POST['file_description']), 0, 250);
 					$description = rtrim( $description, '\\' );
 
 					// Make HTML in the description redundant ;¬)
@@ -298,8 +298,8 @@ if ($registered
 					// 2. update file metadata
 					$this->sql_query(
 						"UPDATE ".$this->config['table_prefix']."upload SET ".
-							"lang			= '".quote($this->dblink, $this->page['lang'])."', ".
-							"description	= '".quote($this->dblink, $description)."' ".
+							"lang				= '".quote($this->dblink, $this->page['lang'])."', ".
+							"file_description	= '".quote($this->dblink, $description)."' ".
 						"WHERE upload_id = '". quote($this->dblink, $file['upload_id'])."' ".
 						"LIMIT 1");
 
@@ -474,16 +474,16 @@ if ($registered
 							// 5. insert line into DB
 							$this->sql_query(
 								"INSERT INTO ".$this->config['table_prefix']."upload SET ".
-									"page_id		= '".quote($this->dblink, $is_global ? "0" : $this->page['page_id'])."', ".
-									"user_id		= '".quote($this->dblink, $user['user_id'])."',".
-									"file_name		= '".quote($this->dblink, $small_name)."', ".
-									"lang			= '".quote($this->dblink, $this->page['lang'])."', ".
-									"description	= '".quote($this->dblink, $description)."', ".
-									"file_size		= '".quote($this->dblink, $file_size)."',".
-									"picture_w		= '".quote($this->dblink, $size[0])."',".
-									"picture_h		= '".quote($this->dblink, $size[1])."',".
-									"file_ext		= '".quote($this->dblink, substr($ext, 0, 10))."',".
-									"uploaded_dt	= '".quote($this->dblink, $uploaded_dt)."' ");
+									"page_id			= '".quote($this->dblink, $is_global ? "0" : $this->page['page_id'])."', ".
+									"user_id			= '".quote($this->dblink, $user['user_id'])."',".
+									"file_name			= '".quote($this->dblink, $small_name)."', ".
+									"lang				= '".quote($this->dblink, $this->page['lang'])."', ".
+									"file_description	= '".quote($this->dblink, $description)."', ".
+									"file_size			= '".quote($this->dblink, $file_size)."',".
+									"picture_w			= '".quote($this->dblink, $size[0])."',".
+									"picture_h			= '".quote($this->dblink, $size[1])."',".
+									"file_ext			= '".quote($this->dblink, substr($ext, 0, 10))."',".
+									"uploaded_dt		= '".quote($this->dblink, $uploaded_dt)."' ");
 
 							// update user uploads count
 							$this->sql_query(

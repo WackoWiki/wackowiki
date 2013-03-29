@@ -110,7 +110,7 @@ if ($registered
 	{ ?>
 	<tr>
 		<td style="text-align: right"><label for="UploadDesc"><?php echo $this->get_translation('UploadDesc');?>:&nbsp;</label></td>
-		<td><input name="description" id="UploadDesc" type="text" size="40" /></td>
+		<td><input name="file_description" id="UploadDesc" type="text" size="40" /></td>
 	</tr>
 	<?php } ?>
 	<tr>

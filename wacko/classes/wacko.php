@@ -254,7 +254,7 @@ class Wacko
 		if (!$file)
 		{
 			$file = $this->load_single(
-				"SELECT upload_id, user_id, file_name, file_size, lang, description, picture_w, picture_h, file_ext ".
+				"SELECT upload_id, user_id, file_name, file_size, lang, file_description, picture_w, picture_h, file_ext ".
 				"FROM ".$this->config['table_prefix']."upload ".
 				"WHERE page_id = '".quote($this->dblink, $page_id)."' ".
 					"AND file_name = '".quote($this->dblink, $file_name)."' ".
@@ -2606,8 +2606,8 @@ class Wacko
 
 				if (is_array($desc))
 				{
-					$title	= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
-					$alt	= $desc['description'];
+					$title	= $desc['file_description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
+					$alt	= $desc['file_description'];
 					$url	= $this->config['base_url'].$this->config['upload_path'].'/'.$thing;
 
 					if ($desc['file_ext'] == 'pdf')
@@ -2655,8 +2655,8 @@ class Wacko
 
 				if (is_array($desc))
 				{
-					$title	= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
-					$alt	= $desc['description'];
+					$title	= $desc['file_description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
+					$alt	= $desc['file_description'];
 					$url	= $this->config['base_url'].$this->config['upload_path'].$thing;
 
 					if ($desc['file_ext'] == 'pdf')
@@ -2730,8 +2730,8 @@ class Wacko
 					$this->has_access('read', $page_id)) || (
 					$desc['user_id'] == $this->get_user_id()))
 					{
-						$title		= $desc['description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
-						$alt		= $desc['description'];
+						$title		= $desc['file_description'].' ('.$this->binary_multiples($desc['file_size'], false, true, true).')';
+						$alt		= $desc['file_description'];
 						$url		= $this->href('file', trim($page_tag, '/')).($this->config['rewrite_mode'] ? '?' : '&amp;').'get='.$file;
 						$img_link	= false;
 
