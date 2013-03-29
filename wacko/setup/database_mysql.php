@@ -253,7 +253,7 @@ $table_upload = "CREATE TABLE {$pref}upload (".
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"file_name VARCHAR(250) NOT NULL DEFAULT '',".
 					"lang VARCHAR(2) NOT NULL DEFAULT '',".
-					"description VARCHAR(250) NOT NULL DEFAULT '',".
+					"file_description VARCHAR(250) NOT NULL DEFAULT '',".
 					"uploaded_dt DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',".
 					"file_size INT(10) UNSIGNED NOT NULL DEFAULT '0',".
 					"picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0',".
