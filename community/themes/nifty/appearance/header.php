@@ -169,16 +169,16 @@ if ($doubleclick == true)
 						{
 							if (in_array($this->page['page_id'], $this->get_menu_links()))
 							{
-								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->get_translation('RemoveFromBookmarks')."\" src=\"".$this->config['theme_url']."icons/spacer.gif\" /></a></div>";
+								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->get_translation('RemoveFromBookmarks')."\" src=\"".$this->config['theme_url']."icons/spacer.png\" /></a></div>";
 							}
 							else
 							{
-								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'icons/spacer.gif" /></a></div>';
+								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'icons/spacer.png" /></a></div>';
 							}
 						}
 						else
 						{
-							echo '<div class="bookmark_add"><img src="'.$this->config['theme_url'].'icons/spacer.gif" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
+							echo '<div class="bookmark_add"><img src="'.$this->config['theme_url'].'icons/spacer.png" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
 						}
 						echo "\n";
 
@@ -437,16 +437,16 @@ if ($doubleclick == true)
 						{
 							if (in_array($this->page['page_id'], $this->get_menu_links()))
 							{
-								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->get_translation('RemoveFromBookmarks')."\" src=\"".$this->config['theme_url']."icons/spacer.gif\" /></a></div>";
+								echo "<div class=\"bookmark_remove\"><a href=\"".$this->href('', '', 'removebookmark=yes')."\"><img title=\"".$this->get_translation('RemoveFromBookmarks')."\" src=\"".$this->config['theme_url']."icons/spacer.png\" /></a></div>";
 							}
 							else
 							{
-								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'icons/spacer.gif" /></a></div>';
+								echo '<div class="bookmark_add"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'icons/spacer.png" /></a></div>';
 							}
 						}
 						else
 						{
-							echo '<div class="bookmark_add"><img src="'.$this->config['theme_url'].'icons/spacer.gif" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
+							echo '<div class="bookmark_add"><img src="'.$this->config['theme_url'].'icons/spacer.png" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
 						}
 						echo "\n";
 
@@ -549,7 +549,7 @@ if ($doubleclick == true)
 					// tabs constructor
 					// TODO: shouldn't this function become part of some wacko class ?
 					// display_option - 2 image and text, 1 image only, 0 text only
-					// image_name: optional, if spacer.gif and img display via css is not used
+					// image_name: optional, if spacer.png and img display via css is not used
 					function echo_tab($link, $hint, $title, $active = false, $display_option, $image_name = false, $accesskey = '')
 					{
 						global $engine;
@@ -558,7 +558,7 @@ if ($doubleclick == true)
 						#$_title = '';
 
 						if ($title == '') return; // no tab;
-						if (!$image_name) $image_name = 'spacer.gif';
+						if (!$image_name) $image_name = 'spacer.png';
 
 						$method = substr($link, strrpos($link, '/') + 1);
 

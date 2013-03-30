@@ -7,9 +7,9 @@
 					<td height="25" colspan="3">
 						<table width="100%" >
 							<tr>
-								<td width="25" height="25" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_botleft.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.gif" width="25" height="1" /></td>
+								<td width="25" height="25" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_botleft.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.png" width="25" height="1" /></td>
 								<td width="100%" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_botmid.png); background-repeat:repeat-x;"></td>
-								<td width="60" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_botright.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.gif" width="50" height="1" /></td>
+								<td width="60" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/body_botright.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.png" width="50" height="1" /></td>
 							</tr>
 						</table>
 					</td>
@@ -26,7 +26,7 @@
 		<td colspan="2" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_bottom_2.png); background-repeat:repeat-x;">
 			<table width="100%" >
 				<tr>
-					<td width="25" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_bottom_1.png); background-repeat:no-repeat;"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.gif" width="25" height="1" /></td>
+					<td width="25" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_bottom_1.png); background-repeat:no-repeat;"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.png" width="25" height="1" /></td>
 					<td>
 						<div id="credits">
 <?php
@@ -35,7 +35,7 @@
 							 ?>
 						</div>
 					</td>
-					<td width="50" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_bottom_3.png); background-repeat:no-repeat;"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.gif" width="25" height="1" /></td>
+					<td width="50" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_bottom_3.png); background-repeat:no-repeat;"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.png" width="25" height="1" /></td>
 				</tr>
 			</table>
 		</td>
