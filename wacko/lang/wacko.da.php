@@ -780,14 +780,14 @@ $wacko_translation = array(
 	'Any'					=> 'Any',
 
 	//icons
-	'outericon' => '<img src="{theme}icons/web.gif" alt="" />',
-	'fileicon' => '<img src="{theme}icons/file.gif" alt="" />',
-	'pdficon'  => '<img src="{theme}icons/pdf.gif" alt="PDF Document" />',
-	'rdficon'  => '<img src="{theme}icons/rdf.gif" alt="RDF Document" />',
+	'outericon' => '<img src="{theme}icons/web.png" alt="" />',
+	'fileicon' => '<img src="{theme}icons/file.png" alt="" />',
+	'pdficon'  => '<img src="{theme}icons/pdf.png" alt="PDF Document" />',
+	'rdficon'  => '<img src="{theme}icons/rdf.png" alt="RDF Document" />',
 	'emailicon' => '<img src="{theme}icons/mail.png" alt="" />',
 	'jabbericon' => '<img src="{theme}icons/jabber.png" alt="xmpp" />',
-	'lockicon' => '<img src="{theme}icons/lock.gif" alt="Access denied" />',
-	'keyicon' => '<img src="{theme}icons/key.gif" alt="Page with custom access" />',
+	'lockicon' => '<img src="{theme}icons/lock.png" alt="Access denied" />',
+	'keyicon' => '<img src="{theme}icons/key.png" alt="Page with custom access" />',
 	'wantedicon' => '?',
 
 	// My Groups

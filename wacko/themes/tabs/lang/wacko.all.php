@@ -4,7 +4,7 @@
 	$this->config['footer_inside'] = 0;
 // ============================
 $theme_translation = array(
-	'EditIcon' => '<img src="'.$this->config['theme_url'].'icons/edit.gif" alt="Edit included page" />',
+	'EditIcon' => '<img src="'.$this->config['theme_url'].'icons/edit.png" alt="Edit included page" />',
 	'' => '',
 );
 ?>

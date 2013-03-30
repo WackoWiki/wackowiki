@@ -77,7 +77,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 
 	if (!(int)$noxml)
 	{
-		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/changes_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RecentChangesXMLTip')."\" alt=\"XML\" /></a></span><br /><br />\n";
+		echo "<span class=\"desc_rss_feed\"><a href=\"".$this->config['base_url']."xml/changes_".preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name'])).".xml\"><img src=\"".$this->config['theme_url']."icons/xml.png"."\" title=\"".$this->get_translation('RecentChangesXMLTip')."\" alt=\"XML\" /></a></span><br /><br />\n";
 	}
 #$this->debug_print_r($pages);
 #echo count($pages);
@@ -164,7 +164,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 			else if ($page['deleted'])
 			{
 				preg_match('/^[^\/]+/', $page['comment_on_page'], $sub_tag);
-				echo "<img src=\"".$this->config['theme_url']."icons/delete.gif"."\" title=\"".$this->get_translation('NewCommentAdded')."\" alt=\"[deleted]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1).' '.$this->get_translation('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['comment_on_id']), '', 0, 1).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>'.$edit_note;
+				echo "<img src=\"".$this->config['theme_url']."icons/delete.png"."\" title=\"".$this->get_translation('NewCommentAdded')."\" alt=\"[deleted]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1).' '.$this->get_translation('To').' '.$this->link('/'.$page['comment_on_page'], '', $this->get_page_title('', $page['comment_on_id']), '', 0, 1).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>'.$edit_note;
 			}
 			// new comment
 			else if ($page['comment_on_id'])
@@ -176,7 +176,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 			else if ($page['created'] == $page['modified'])
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
-				echo "<img src=\"".$this->config['theme_url']."icons/add_page.gif"."\" title=\"".$this->get_translation('NewPageCreated')."\" alt=\"[new]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>'.$edit_note;
+				echo "<img src=\"".$this->config['theme_url']."icons/add_page.png"."\" title=\"".$this->get_translation('NewPageCreated')."\" alt=\"[new]\" /> ".''.$this->link('/'.$page['tag'], '', $page['title'], '', 0, 1).' &nbsp;&nbsp;<span title="'.$this->get_translation("Cluster").'">&rarr; '.$sub_tag[0].$separator.$author.'</span>'.$edit_note;
 			}
 			// new revision
 			else

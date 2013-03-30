@@ -781,15 +781,15 @@ $wacko_translation = array(
 	'Any'						=> 'Alle',
 
 	//icons
-	'outericon'					=> '<img src="{theme}icons/web.gif" alt="externer Link" />',
-	'fileicon'					=> '<img src="{theme}icons/file.gif" alt="Datei" />',
-	'xmlicon'					=> '<img src="{theme}icons/xml.gif" alt="XML" />',
-	'pdficon'					=> '<img src="{theme}icons/pdf.gif" alt="PDF" />',
-	'rdficon'					=> '<img src="{theme}icons/rdf.gif" alt="RDF" />',
+	'outericon'					=> '<img src="{theme}icons/web.png" alt="externer Link" />',
+	'fileicon'					=> '<img src="{theme}icons/file.png" alt="Datei" />',
+	'xmlicon'					=> '<img src="{theme}icons/xml.png" alt="XML" />',
+	'pdficon'					=> '<img src="{theme}icons/pdf.png" alt="PDF" />',
+	'rdficon'					=> '<img src="{theme}icons/rdf.png" alt="RDF" />',
 	'emailicon'					=> '<img src="{theme}icons/mail.png" alt="E-Mail" />',
 	'jabbericon'				=> '<img src="{theme}icons/jabber.png" alt="XMPP" />',
-	'lockicon'					=> '<img src="{theme}icons/lock.gif" alt="Zugriff verweigert" />',
-	'keyicon'					=> '<img src="{theme}icons/key.gif" alt="Zugriff eingeschränkt" />',
+	'lockicon'					=> '<img src="{theme}icons/lock.png" alt="Zugriff verweigert" />',
+	'keyicon'					=> '<img src="{theme}icons/key.png" alt="Zugriff eingeschränkt" />',
 	'wantedicon'				=> '?',
 
 	// My Groups

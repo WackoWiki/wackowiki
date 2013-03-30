@@ -9,8 +9,8 @@ if (!isset($is_image)) $is_image = '';
 if (!isset($is_plain)) $is_plain = '';
 
 $error = '';
-$file404 = 'images/upload404.gif';
-$file403 = 'images/upload403.gif';
+$file404 = 'images/upload404.png';
+$file403 = 'images/upload403.png';
 
 // 1. check existence
 if (isset($_GET['global']))

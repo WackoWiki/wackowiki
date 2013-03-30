@@ -619,7 +619,7 @@ p.layout-box span {
 	font-weight: bold;
 	/*background-color: #fbe6f2;*/
 	background-color: #fcfcfc;
-	background-image: url(../../../images/warning.gif);
+	background-image: url(../../../images/warning.png);
 	background-repeat: no-repeat;
 	background-attachment: scroll;
 	background-position: 10px 10px;
@@ -678,7 +678,7 @@ p.layout-box span {
 	border: 1px solid #ffee66;
 	width: 400px;
 	background-color: #ffffdd;
-	background-image: url(../../../images/warning.gif);
+	background-image: url(../../../images/warning.png);
 	background-repeat: no-repeat;
 	background-attachment: scroll;
 	background-position: 10px 10px;
@@ -1278,15 +1278,15 @@ table.formation td {
 }
 
 #handler li.new img {
-	background-image:url("./../icons/add_page.gif");
+	background-image:url("./../icons/add_page.png");
 	background-repeat: no-repeat;
 }
 #handler li.new a img {
-	background-image:url("./../icons/add_page.gif");
+	background-image:url("./../icons/add_page.png");
 	background-repeat: no-repeat;
 }
 #handler li.new a:hover img {
-	background-image:url("./../icons/add_page.gif");
+	background-image:url("./../icons/add_page.png");
 	background-repeat: no-repeat;
 }
 #handler li.categories img {
@@ -1326,15 +1326,15 @@ table.formation td {
 	background-repeat: no-repeat;
 }
 #handler li.referrers img {
-	background-image:url("./../icons/referer.gif");
+	background-image:url("./../icons/referrer.png");
 	background-repeat: no-repeat;
 }
 #handler li.referrers a img {
-	background-image:url("./../icons/referer.gif");
+	background-image:url("./../icons/referrer.png");
 	background-repeat: no-repeat;
 }
 #handler li.referrers a:hover img {
-	background-image:url("./../icons/referer.gif");
+	background-image:url("./../icons/referrer.png");
 	background-repeat: no-repeat;
 }
 #handler li.revisions img {
@@ -1350,27 +1350,27 @@ table.formation td {
 	background-repeat: no-repeat;
 }
 #handler li.remove img {
-	background-image: url("./../icons/delete.gif");
+	background-image: url("./../icons/delete.png");
 	background-repeat: no-repeat;
 }
 #handler li.remove a img {
-	background-image: url("./../icons/delete.gif");
+	background-image: url("./../icons/delete.png");
 	background-repeat: no-repeat;
 }
 #handler li.remove a:hover img {
-	background-image: url("./../icons/delete.gif");
+	background-image: url("./../icons/delete.png");
 	background-repeat: no-repeat;
 }
 #handler li.rename img {
-	background-image: url("./../icons/rename.gif");
+	background-image: url("./../icons/rename.png");
 	background-repeat: no-repeat;
 }
 #handler li.rename a img {
-	background-image: url("./../icons/rename.gif");
+	background-image: url("./../icons/rename.png");
 	background-repeat: no-repeat;
 }
 #handler li.rename a:hover img {
-	background-image: url("./../icons/rename.gif");
+	background-image: url("./../icons/rename.png");
 	background-repeat: no-repeat;
 }
 #handler li.moderate img {
@@ -1418,7 +1418,7 @@ table.formation td {
 	background-repeat: no-repeat;
 }
 #handler li.print img {
-	background-image:url("./../icons/print.gif");
+	background-image:url("./../icons/print.png");
 	background-repeat: no-repeat;
 }
 

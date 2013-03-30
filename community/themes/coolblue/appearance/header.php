@@ -54,14 +54,14 @@ echo $this->form_close();
 		{
 			echo '<li><a href="'. $this->href('', '', 'addbookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
-				.'icons/bookmark1.gif" alt="+" title="'.
+				.'icons/bookmark1.png" alt="+" title="'.
 				$this->get_translation('AddToBookmarks') .'"/></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="'. $this->href('', '', 'removebookmark=yes')
 				.'"><img src="'. $this->config['theme_url']
-				.'icons/bookmark2.gif" alt="-" title="'.
+				.'icons/bookmark2.png" alt="-" title="'.
 				$this->get_translation('RemoveFromBookmarks') .'"/></a></li>';
 		}
 	}
