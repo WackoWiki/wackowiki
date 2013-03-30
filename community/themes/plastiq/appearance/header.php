@@ -7,7 +7,7 @@ require ('themes/_common/_header.php');
 <body onload="all_init();">
 <table width="100%" >
 	<tr>
-		<td width="50" height="64" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_1.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.gif" width="50" height="1" /></td>
+		<td width="50" height="64" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_1.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.png" width="50" height="1" /></td>
 		<td style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_3.png); background-repeat:repeat-x;">
 			<table width="100%" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_2.png); background-repeat:no-repeat;">
 				<tr>
@@ -41,8 +41,8 @@ echo "\n";
 				</tr>
 			</table>
 		</td>
-		<td width="25" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_4.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.gif" width="25" height="1" /></td>
-		<td width="25" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_5.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.gif" width="25" height="1" /></td>
+		<td width="25" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_4.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.png" width="25" height="1" /></td>
+		<td width="25" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_top_5.png);"><img src="<?php echo $this->config['theme_url'] ?>images/spacer.png" width="25" height="1" /></td>
 	</tr>
 	<tr>
 		<td height="315" valign="top" style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_left_2.png); background-repeat:repeat-y;"><div style="background-image:url(<?php echo $this->config['theme_url'] ?>images/back_left_1.png); background-repeat:no-repeat; height:311px;"></div></td>
@@ -92,16 +92,16 @@ echo "\n";
 	{
 		if (in_array($this->tag, $this->get_menu_links()))
 		{
-			echo '<div class="bookmark_out"><a href="'.$this->href('', '', 'removebookmark=yes').'" title="'.$this->get_translation('RemoveFromBookmarks').'"><img src="'.$this->config['theme_url'].'images/spacer.gif" /></a></div>';
+			echo '<div class="bookmark_out"><a href="'.$this->href('', '', 'removebookmark=yes').'" title="'.$this->get_translation('RemoveFromBookmarks').'"><img src="'.$this->config['theme_url'].'images/spacer.png" /></a></div>';
 		}
 		else
 		{
-			echo '<div class="bookmark_in"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'images/spacer.gif" /></a></div>';
+			echo '<div class="bookmark_in"><a href="'.$this->href('', '', 'addbookmark=yes').'" title="'.$this->get_translation('AddToBookmarks').'"><img src="'.$this->config['theme_url'].'images/spacer.png" /></a></div>';
 		}
 	}
 	else
 	{
-		echo '<div class="bookmark_in"><img src="'.$this->config['theme_url'].'images/spacer.gif" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
+		echo '<div class="bookmark_in"><img src="'.$this->config['theme_url'].'images/spacer.png" title="'.$this->get_translation('CantAddBookmarks').'" /></div>';
 	}
 	echo "\n";
 
@@ -315,11 +315,11 @@ echo "\n";
 
 		if ($active)
 		{
-			$tab = "<div class=\"$method\"><img src=\"".$engine->config['theme_url']."images/spacer.gif\" alt=\"$title\" /></div>\n";
+			$tab = "<div class=\"$method\"><img src=\"".$engine->config['theme_url']."images/spacer.png\" alt=\"$title\" /></div>\n";
 		}
 		else
 		{
-			$tab = "<div class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$bonus\"><img src=\"".$engine->config['theme_url']."images/spacer.gif\" alt=\"$title\" /></a></div>\n";
+			$tab = "<div class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$bonus\"><img src=\"".$engine->config['theme_url']."images/spacer.png\" alt=\"$title\" /></a></div>\n";
 		}
 
 		return $tab;

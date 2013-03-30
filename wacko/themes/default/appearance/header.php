@@ -107,7 +107,7 @@ else
 
 		if ($image <> 0)
 		{
-			$_image = 'spacer.gif';
+			$_image = 'spacer.png';
 		}
 		else
 		{
