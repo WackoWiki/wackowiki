@@ -20,8 +20,8 @@ class typografica
 	var $p_prefix	= "<p class=typo>";
 	var $p_postfix	= "</p>";
 	var $asoft		= true;
-	var $indent1	= "images/z.gif width=25 height=1 border=0 alt=\'\' align=top />"; // <->
-	var $indent2	= "images/z.gif width=50 height=1 border=0 alt=\'\' align=top />"; // <-->
+	var $indent1	= "images/z.png width=25 height=1 border=0 alt=\'\' align=top />"; // <->
+	var $indent2	= "images/z.png width=50 height=1 border=0 alt=\'\' align=top />"; // <-->
 	var $fixed_size	= 80; // maximum width
 	var $ignore		= "/(<!--notypo-->.*?<!--\/notypo-->)/si"; // regex to be ignored
 	var $de_nobr	= true;

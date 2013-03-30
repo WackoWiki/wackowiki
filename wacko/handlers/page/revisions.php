@@ -62,7 +62,7 @@ if ($this->has_access('read'))
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" id=\"fulldiff\" name=\"diffmode\" value=\"0\" checked=\"checked\" />\n <label for=\"fulldiff\">".$this->get_translation('FullDiff')."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" id=\"fastdiff\" name=\"diffmode\" value=\"1\" />\n <label for=\"fastdiff\">".$this->get_translation('SimpleDiff')."</label>";
 		$output .= "&nbsp;&nbsp;&nbsp;<input type=\"radio\" id=\"source\" name=\"diffmode\" value=\"2\" />\n <label for=\"source\">".$this->get_translation('SourceDiff')."</label>";
-		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href('revisions.xml')."\"><img src=\"".$this->config['theme_url']."icons/xml.gif"."\" title=\"".$this->get_translation('RevisionXMLTip')."\" alt=\"XML\" /></a>";
+		$output .= "&nbsp;&nbsp;&nbsp;<a href=\"".$this->href('revisions.xml')."\"><img src=\"".$this->config['theme_url']."icons/xml.png"."\" title=\"".$this->get_translation('RevisionXMLTip')."\" alt=\"XML\" /></a>";
 
 		if ($this->config['minor_edit'])
 		{

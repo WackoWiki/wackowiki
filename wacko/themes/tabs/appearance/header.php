@@ -77,8 +77,8 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 		<?php } ?>
 	</div>
 	<br clear="all" />
-	<img src="<?php echo $this->config['base_url'] ?>images/z.gif" width="1" height="1" alt="" /></div>
-<div class="TopDiv"><img src="<?php echo $this->config['base_url'];?>images/z.gif" width="1" height="1" alt="" /></div>
+	<img src="<?php echo $this->config['base_url'] ?>images/z.png" width="1" height="1" alt="" /></div>
+<div class="TopDiv"><img src="<?php echo $this->config['base_url'];?>images/z.png" width="1" height="1" alt="" /></div>
 <table width="100%">
 	<tr>
 		<td valign="top" class="Bookmarks">&nbsp;&nbsp;<strong><?php echo $this->get_translation('Bookmarks') ?>:</strong>&nbsp;&nbsp;</td>
@@ -113,7 +113,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 		</td>
 	</tr>
 </table>
-<div class="TopDiv2"><img src="<?php echo $this->config['base_url'];?>images/z.gif" width="1" height="1" alt="" /></div>
+<div class="TopDiv2"><img src="<?php echo $this->config['base_url'];?>images/z.png" width="1" height="1" alt="" /></div>
 <div class="Wrapper"
 <?php if ($this->method == 'edit') echo "style=\"margin-bottom:0;padding-bottom:0\""?>>
 <div class="Print">
@@ -129,7 +129,7 @@ echo $this->compose_link_to_page($this->get_translation('AccountLink'), "", $thi
 <?php } }
 ?>
 <?php echo"<a href=\"".$this->href('print')."\">" ?><img
-	src="<?php echo $this->config['theme_url'] ?>icons/print.gif"
+	src="<?php echo $this->config['theme_url'] ?>icons/print.png"
 	width="21" height="20"
 	alt="<?php echo $this->get_translation('PrintVersion') ?>" /></a> :: <?php echo"<a href=\"".$this->href('msword')."\">" ?><img
 	src="<?php echo $this->config['theme_url'] ?>icons/msword.gif"

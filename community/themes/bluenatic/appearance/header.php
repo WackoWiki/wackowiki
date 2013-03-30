@@ -152,7 +152,7 @@ else if($this->has_access('write'))
 			<?php // Show edit button only if user has privileges ?>
 			<?php if($this->has_access('write')) { ?>
 			<a href="<?php echo $this->href('edit'); ?>" accesskey="E">
-				<img src="<?php echo $this->config['theme_url']; ?>images/qa-edit.gif" alt="<?php echo $this->get_translation('EditTip'); ?>" title="<?php echo $this->get_translation('EditTip'); ?>" />
+				<img src="<?php echo $this->config['theme_url']; ?>images/qa-edit.png" alt="<?php echo $this->get_translation('EditTip'); ?>" title="<?php echo $this->get_translation('EditTip'); ?>" />
 			</a>&nbsp;&nbsp;&nbsp;
 			<?php } ?>
 			<?php // Show ACL button only if user has privileges (or is admin) and if the page exists ?>
@@ -162,7 +162,7 @@ else if($this->has_access('write'))
 			</a>
 			<?php } ?>
 			<a href="<?php echo $this->href('print'); ?>">
-				<img src="<?php echo $this->config['theme_url']; ?>images/qa-print.gif" alt="<?php echo $this->get_translation('PrintVersion'); ?>" title="<?php echo $this->get_translation('PrintVersion'); ?>" />
+				<img src="<?php echo $this->config['theme_url']; ?>images/qa-print.png" alt="<?php echo $this->get_translation('PrintVersion'); ?>" title="<?php echo $this->get_translation('PrintVersion'); ?>" />
 			</a>
 			<?php } else { ?>
 			<div class="loginbox">

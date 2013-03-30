@@ -780,14 +780,14 @@ $wacko_translation = array(
 	'Any'					=> 'Todos',
 
 	//icons
-	'outericon' => '<img src="{theme}icons/web.gif" alt="sitio web" />',
-	'fileicon' => '<img src="{theme}icons/file.gif" alt="Archivo" />',
-	'pdficon'  => '<img src="{theme}icons/pdf.gif" alt="Documento PDF" />',
-	'rdficon'  => '<img src="{theme}icons/rdf.gif" alt="Documento RDF" />',
+	'outericon' => '<img src="{theme}icons/web.png" alt="sitio web" />',
+	'fileicon' => '<img src="{theme}icons/file.png" alt="Archivo" />',
+	'pdficon'  => '<img src="{theme}icons/pdf.png" alt="Documento PDF" />',
+	'rdficon'  => '<img src="{theme}icons/rdf.png" alt="Documento RDF" />',
 	'emailicon' => '<img src="{theme}icons/mail.png" alt="email" />',
 	'jabbericon' => '<img src="{theme}icons/jabber.png" alt="xmpp - jabber" />',
-	'lockicon' => '<img src="{theme}icons/lock.gif" alt="Accesso denegado" />',
-	'keyicon' => '<img src="{theme}icons/key.gif" alt="Página con acceso especial" />',
+	'lockicon' => '<img src="{theme}icons/lock.png" alt="Accesso denegado" />',
+	'keyicon' => '<img src="{theme}icons/key.png" alt="Página con acceso especial" />',
 	'wantedicon' => '?',
 
 	// My Groups
