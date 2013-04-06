@@ -29,11 +29,11 @@ class Cache
 	// save serialized sql results
 	function save_sql($query, $data)
 	{
-		$filename	= $this->sql_cache_id($query);
+		$file_name	= $this->sql_cache_id($query);
 		$sqldata	= serialize($data);
 
-		file_put_contents($filename, $sqldata);
-		chmod($filename, 0644);
+		file_put_contents($file_name, $sqldata);
+		chmod($file_name, 0644);
 
 		return true;
 	}
@@ -41,22 +41,22 @@ class Cache
 	// retrieve and unserialize cached sql data
 	function load_sql($query)
 	{
-		$filename = $this->sql_cache_id($query);
+		$file_name = $this->sql_cache_id($query);
 
-		if (!@file_exists($filename))
+		if (!@file_exists($file_name))
 		{
 			return false;
 		}
 
-		if ((time() - @filemtime($filename)) > $this->wacko->config['cache_sql_ttl'])
+		if ((time() - @filemtime($file_name)) > $this->wacko->config['cache_sql_ttl'])
 		{
 			return false;
 		}
 
-		$fp		= fopen($filename, 'r');
+		$fp		= fopen($file_name, 'r');
 
 		// check for false and empty strings
-		if(($data	= fread($fp, filesize($filename))) === '')
+		if(($data	= fread($fp, filesize($file_name))) === '')
 		{
 			return false;
 		}
@@ -77,32 +77,32 @@ class Cache
 	// Get page content from cache
 	function get_cached($page, $method, $query)
 	{
-		$filename = $this->construct_id($page, $method, $query);
+		$file_name = $this->construct_id($page, $method, $query);
 
-		if (!@file_exists($filename))
+		if (!@file_exists($file_name))
 		{
 			return false;
 		}
 
-		if ((time() - ($timestamp = @filemtime($filename))) > $this->cache_ttl)
+		if ((time() - ($timestamp = @filemtime($file_name))) > $this->cache_ttl)
 		{
-			unlink($filename);
+			unlink($file_name);
 			return false;
 		}
 
-		$fp			= fopen($filename, 'r');
-		$size		= filesize($filename);
+		$fp			= fopen($file_name, 'r');
+		$size		= filesize($file_name);
 
 		if (empty($size))
 		{
-			unlink($filename);
+			unlink($file_name);
 			return false;
 		}
 
 		// check for false and empty strings
 		if(($contents = fread($fp, $size)) === '')
 		{
-			unlink($filename);
+			unlink($file_name);
 			return false;
 		}
 
@@ -127,19 +127,19 @@ class Cache
 	//Get timestamp of content from cache
 	function get_cached_time($page, $method, $query)
 	{
-		$filename = $this->construct_id($page, $method, $query);
+		$file_name = $this->construct_id($page, $method, $query);
 
-		if (!@file_exists($filename))
+		if (!@file_exists($file_name))
 		{
 			return false;
 		}
 
-		if ((time() - @filemtime($filename)) > $this->cache_ttl)
+		if ((time() - @filemtime($file_name)) > $this->cache_ttl)
 		{
 			return false;
 		}
 
-		return @filemtime($filename);
+		return @filemtime($file_name);
 	}
 
 	//Store content to cache
@@ -159,9 +159,9 @@ class Cache
 		}
 
 		$page		= strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
-		$filename	= $this->construct_id($page, $method, $query);
+		$file_name	= $this->construct_id($page, $method, $query);
 
-		file_put_contents($filename, $data);
+		file_put_contents($file_name, $data);
 
 		if ($this->wacko)
 		{
@@ -173,7 +173,7 @@ class Cache
 				// TIMESTAMP type is filled automatically by MySQL
 		}
 
-		@chmod($filename, octdec('0644'));
+		@chmod($file_name, octdec('0644'));
 
 		return true;
 	}
@@ -195,13 +195,13 @@ class Cache
 
 			foreach ($params as $param)
 			{
-				$filename = $this->construct_id($page, $param['method'], $param['query']);
+				$file_name = $this->construct_id($page, $param['method'], $param['query']);
 
-				$this->log('cache_invalidate delete='.$filename);
+				$this->log('cache_invalidate delete='.$file_name);
 
-				if (@file_exists($filename))
+				if (@file_exists($file_name))
 				{
-					@unlink($filename);
+					@unlink($file_name);
 				}
 			}
 
@@ -223,9 +223,9 @@ class Cache
 	{
 		if ($this->debug > 1)
 		{
-			$filename = $this->cache_dir.'log';
+			$file_name = $this->cache_dir.'log';
 
-			file_put_contents($filename, $msg."\n", FILE_APPEND);
+			file_put_contents($file_name, $msg."\n", FILE_APPEND);
 		}
 	}
 
