@@ -71,7 +71,7 @@ function admin_sysinfo(&$engine, &$module)
 
 	foreach ($sysinfo as $param => $value)
 	{
-		echo '<tr>'.
+		echo '<tr class="hl_setting">'.
 				'<td class="label"><strong>'.$value[0].'</strong></td>'.
 				'<td> </td>'.
 				'<td>'.$value[1].'</td>'.
