@@ -340,11 +340,18 @@ if ($registered
 		}
 		else // process upload
 		{
-			$user	= $this->get_user();
-			$files	= $this->load_all(
+			$user		= $this->get_user();
+			// TODO: Set user used_quota in user table (?)
+			$user_files	= $this->load_single(
+				"SELECT SUM(file_size) AS used_user_quota ".
+				"FROM ".$this->config['table_prefix']."upload ".
+				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."'".
+				"LIMIT 1");
+			// TODO: Set used_quota in config table (?)
+			$files	= $this->load_single(
 				"SELECT SUM(file_size) AS used_quota ".
 				"FROM ".$this->config['table_prefix']."upload ".
-				"WHERE user_id = '".quote($this->dblink, $user['user_id'])."'");
+				"LIMIT 1");
 
 			// Checks
 			if (!isset($this->config['upload_path_per_page']))
@@ -355,7 +362,10 @@ if ($registered
 			}
 
 			// 1. upload quota
-			if (!$this->config['upload_quota_per_user'] || ($files[0]['used_quota'] < $this->config['upload_quota_per_user'] * 1024))
+			if ( (!$this->config['upload_quota_per_user'] ||
+				 ($user_files['used_user_quota'] < $this->config['upload_quota_per_user'] * 1024)) &&
+				 (!$this->config['upload_quota'] ||
+				 ($files['used_quota'] < $this->config['upload_quota'] * 1024)) )
 			{
 				if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) // there is file
 				{
@@ -552,7 +562,9 @@ if ($registered
 			}
 			else
 			{
-				$error = $this->get_translation('UploadMaxFileQuota').'. <br />Storage in use '.$this->binary_multiples($files[0]['used_quota'], false, true, true).' ('.round(($files[0]['used_quota']/$this->config['upload_quota_per_user']*100), 2).'%) of '.$this->binary_multiples($this->config['upload_quota_per_user'], true, true, true);
+				// TODO: we use KiB for quota in config -> * 1024 which is error prone
+				$error = $this->get_translation('UploadMaxFileQuota').'. <br />Storage in use '.$this->binary_multiples($user_files['used_user_quota'], false, true, true).' ('.round(($user_files['used_user_quota']/($this->config['upload_quota_per_user']* 1024) * 100), 2).'%) of '.$this->binary_multiples(($this->config['upload_quota_per_user'] * 1024), true, true, true);
+				$error .= '<br />'.$this->get_translation('UploadMaxFileQuota').'. <br />Storage in use '.$this->binary_multiples($files['used_quota'], false, true, true).' ('.round(($files['used_quota']/($this->config['upload_quota'] * 1024) * 100), 2).'%) of '.$this->binary_multiples(($this->config['upload_quota'] * 1024), true, true, true);
 			}
 		}
 
