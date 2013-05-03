@@ -152,12 +152,16 @@ $wacko_config_defaults = array(
 	'upload' => 'admins',
 	'upload_images_only' => 0,
 	'upload_max_size' => 256,
+	'upload_quota' => 0,
 	'upload_quota_per_user' => 500000,
 	'upload_path' => 'files/global',
 	'upload_path_per_page' => 'files/perpage',
 	'upload_banned_exts' => 'php|cgi|js|php|php3|php4|php5|pl|ssi|jsp|phtm|phtml|shtm|shtml|xhtm|xht|asp|aspx|htw|ida|idq|cer|cdx|asa|htr|idc|stm|printer|asax|ascx|ashx|asmx|axd|vdisco|rem|soap|config|cs|csproj|vb|vbproj|webinfo|licx|resx|resources',
 
 	'upload_path_backup'	=> 'files/backup',
+
+	'img_create_thumbnail'	=> 0,
+	'img_max_thumb_width'	=> 150,
 
 	'outlook_workaround' => 1,
 	'enable_feeds' => 1,
