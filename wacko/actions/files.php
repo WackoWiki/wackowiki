@@ -22,9 +22,10 @@ $page_id = '';
 if (!isset($nomark))	$nomark = '';
 if (!isset($order))		$order = '';
 if (!isset($global))	$global = '';
-if (!isset($tag))		$tag = '';
+if (!isset($tag))		$tag = ''; // FIXME: $tag == $page
 if (!isset($owner))		$owner = '';
 if (!isset($page))		$page = '';
+if (!isset($legend))	$legend = '';
 if (!isset($picture))	$picture = null;
 if (!isset($max))		$max = '';
 
@@ -53,7 +54,8 @@ if (!$global)
 	}
 	else
 	{
-		$page = $this->unwrap_link($page);
+		$page	= $this->unwrap_link($page);
+		$ppage	= '/'.$page;
 
 		if ($_page_id = $this->get_page_id($page))
 		{
@@ -151,7 +153,7 @@ if ($can_view)
 
 	if (!$nomark)
 	{
-		$title = $this->get_translation('UploadTitle'.($global ? 'Global' : ''));
+		$title = $this->get_translation('UploadTitle'.($global ? 'Global' : '') ).' '.($page ? $this->link($ppage, '', $legend) : '');
 		echo '<div class="layout-box"><p class="layout-box"><span>'.$title.": </span></p>\n";
 	}
 
