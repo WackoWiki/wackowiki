@@ -2410,7 +2410,7 @@ class Wacko
 	}
 
 	// returns the full url to a page/method.
-	function href($method = '', $tag = '', $params = '', $addpage = 0)
+	function href($method = '', $tag = '', $params = '', $addpage = 0, $anchor = '')
 	{
 		$href = $this->config['base_url'].( $this->config['rewrite_mode'] ? '' : '?page=' ).$this->mini_href($method, $tag, $addpage);
 
@@ -2422,6 +2422,11 @@ class Wacko
 		if ($params)
 		{
 			$href .= ($this->config['rewrite_mode'] ? '?' : '&amp;').$params;
+		}
+
+		if ($anchor)
+		{
+			$href .= '#'.$anchor;
 		}
 
 		return $href;
