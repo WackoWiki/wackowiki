@@ -80,7 +80,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="site_name"><strong>Site Name:</strong><br />
 					<small>The title that appears on this site, email-notification, etc.</small></label></td>
-				<td style="width:40%;"><input maxlength="255" style="width:200px;" id="site_name" name="site_name" value="<?php echo htmlspecialchars($engine->config['site_name']);?>" /></td>
+				<td style="width:40%;"><input maxlength="255" style="width:200px;" id="site_name" name="site_name" value="<?php echo htmlspecialchars($engine->config['site_name'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -88,7 +88,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="site_desc"><strong>Site Description:</strong><br />
 					<small>Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.</small></label></td>
-				<td><input maxlength="255" style="width:200px;" id="site_desc" name="site_desc" value="<?php echo htmlspecialchars($engine->config['site_desc']);?>" /></td>
+				<td><input maxlength="255" style="width:200px;" id="site_desc" name="site_desc" value="<?php echo htmlspecialchars($engine->config['site_desc'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -96,7 +96,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label" valign="top"><label for="meta_description"><strong>Description of the document by default:</strong><br />
 					<small>The text used by default for meta-tags <tt>description</tt> (maximum of 255 characters).</small></label></td>
-				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="meta_description" name="meta_description"><?php echo htmlspecialchars($engine->config['meta_description']);?></textarea></td>
+				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="meta_description" name="meta_description"><?php echo htmlspecialchars($engine->config['meta_description'], ENT_COMPAT | ENT_HTML401, $engine->charset);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -104,7 +104,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label" valign="top"><label for="meta_keywords"><strong>Keywords page default:</strong><br />
 					<small>Key words used by default for meta-tags <tt>keywords</tt> (maximum of 255 characters).</small></label></td>
-				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="meta_keywords" name="meta_keywords"><?php echo htmlspecialchars($engine->config['meta_keywords']);?></textarea></td>
+				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:100px;" id="meta_keywords" name="meta_keywords"><?php echo htmlspecialchars($engine->config['meta_keywords'], ENT_COMPAT | ENT_HTML401, $engine->charset);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -131,7 +131,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="allow_themes"><strong>Allowed Themes:</strong><br />
 					<small>Allowed themes, which the user can choose: "0" – all available themes are allowed (default), <br />"default,coffee" – here only these both themes are allowed.</small></label></td>
-				<td><input maxlength="25" style="width:200px;" id="allow_themes" name="allow_themes" value="<?php echo htmlspecialchars($engine->config['allow_themes']);?>" /></td>
+				<td><input maxlength="25" style="width:200px;" id="allow_themes" name="allow_themes" value="<?php echo htmlspecialchars($engine->config['allow_themes'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -150,7 +150,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="admin_name"><strong>Admin of Site:</strong><br />
 					<small>User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.</small></label></td>
-				<td><input maxlength="25" style="width:200px;" id="admin_name" name="admin_name" value="<?php echo htmlspecialchars($engine->config['admin_name']);?>" /></td>
+				<td><input maxlength="25" style="width:200px;" id="admin_name" name="admin_name" value="<?php echo htmlspecialchars($engine->config['admin_name'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -377,7 +377,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="keep_deleted_time"><strong>Storage time of deleted pages:</strong><br />
 					<small>The period in days. It makes sense only if the previous option. Zero indicates the eternal possession (in this case the administrator can clear the "cart" manually).</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="keep_deleted_time" name="keep_deleted_time" value="<?php echo htmlspecialchars($engine->config['keep_deleted_time']);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="keep_deleted_time" name="keep_deleted_time" value="<?php echo htmlspecialchars($engine->config['keep_deleted_time'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -385,7 +385,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="pages_purge_time"><strong>Storage time of page revisions:</strong><br />
 					<small>Automatically delete the older edition of the number of days. If you enter zero, the old edition will not be removed.</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="pages_purge_time" name="pages_purge_time" value="<?php echo htmlspecialchars($engine->config['pages_purge_time']);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="pages_purge_time" name="pages_purge_time" value="<?php echo htmlspecialchars($engine->config['pages_purge_time'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -393,7 +393,7 @@ function admin_configbasic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="referrers_purge_time"><strong>Storage time of referrers:</strong><br />
 					<small>Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="referrers_purge_time" name="referrers_purge_time" value="<?php echo htmlspecialchars($engine->config['referrers_purge_time']);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="referrers_purge_time" name="referrers_purge_time" value="<?php echo htmlspecialchars($engine->config['referrers_purge_time'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

@@ -1,5 +1,5 @@
 <?php
 
-echo "<small>".htmlspecialchars($text)."</small>";
+echo "<small>".htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, $this->charset)."</small>";
 
 ?>

@@ -15,5 +15,5 @@ else
 	$wrap = 'on';
 }
 
-echo "<!--notypo--><pre class=\"code\">".htmlspecialchars($text)."</pre><!--/notypo-->";
+echo "<!--notypo--><pre class=\"code\">".htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, $this->charset)."</pre><!--/notypo-->";
 ?>

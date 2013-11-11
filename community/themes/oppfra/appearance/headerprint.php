@@ -5,7 +5,7 @@
 
 <html>
 <head>
-  <title><?php echo htmlspecialchars($this->config['site_name'])." : ".(isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></title>
+  <title><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, $this->charset)." : ".(isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></title>
 <meta name="robots" content="noindex, nofollow" />
   <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
   <meta name="keywords" content="<?php echo $this->config['meta_keywords'] ?>" />

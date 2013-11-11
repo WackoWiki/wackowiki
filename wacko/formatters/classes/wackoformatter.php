@@ -226,6 +226,9 @@ class WackoFormatter
 			"~([^ \t\n]+)|".
 			"<!--escaped-->.*?<!--escaped-->".
 			")/sm";
+
+		// charset
+		$this->charset = $object->language['charset'];
 	}
 
 	function indent_close()
@@ -284,7 +287,7 @@ class WackoFormatter
 		// escaped text
 		else if (preg_match('/^\"\"(.*)\"\"$/s', $thing, $matches))
 		{
-			return '<!--escaped--><!--notypo-->'.str_replace("\n", '<br />', htmlspecialchars($matches[1])).'<!--/notypo--><!--escaped-->';
+			return '<!--escaped--><!--notypo-->'.str_replace("\n", '<br />', htmlspecialchars($matches[1], ENT_COMPAT | ENT_HTML401, $this->charset)).'<!--/notypo--><!--escaped-->';
 		}
 		// code text
 		else if (preg_match('/^\%\%(.*)\%\%$/s', $thing, $matches))
@@ -701,7 +704,7 @@ class WackoFormatter
 		// citated
 		else if (preg_match('/^\n[ \t]*(>+)(.*)$/s', $thing, $matches))
 		{
-			return '<div class="email'.strlen($matches[1]).' email-'.(strlen($matches[1]) % 2 ? 'odd' : 'even').'">'.htmlspecialchars($matches[1]).preg_replace_callback($this->LONGREGEXP, $callback, $matches[2]).'</div>';
+			return '<div class="email'.strlen($matches[1]).' email-'.(strlen($matches[1]) % 2 ? 'odd' : 'even').'">'.htmlspecialchars($matches[1], ENT_COMPAT | ENT_HTML401, $this->charset).preg_replace_callback($this->LONGREGEXP, $callback, $matches[2]).'</div>';
 		}
 		// blockquote
 		else if (preg_match('/^<\[(.*)\]>$/s', $thing, $matches))
@@ -813,7 +816,7 @@ class WackoFormatter
 
 				$text = preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/', '', $text);
 
-				return '<dfn title="'.htmlspecialchars($text).'">'.$def.'</dfn>';
+				return '<dfn title="'.htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, $this->charset).'">'.$def.'</dfn>';
 			}
 
 			return '';
@@ -849,7 +852,7 @@ class WackoFormatter
 					}
 					else
 					{
-						$aname	= htmlspecialchars(substr($url, 1));
+						$aname	= htmlspecialchars(substr($url, 1), ENT_COMPAT | ENT_HTML401, $this->charset);
 						$sup	= 0;
 					}
 
@@ -876,7 +879,7 @@ class WackoFormatter
 					}
 					else
 					{
-						$ahref	= htmlspecialchars($anchor);
+						$ahref	= htmlspecialchars($anchor, ENT_COMPAT | ENT_HTML401, $this->charset);
 						$sup	= 0;
 					}
 
@@ -1146,7 +1149,7 @@ class WackoFormatter
 		}
 
 		// if we reach this point, it must have been an accident.
-		return htmlspecialchars($thing);
+		return htmlspecialchars($thing, ENT_COMPAT | ENT_HTML401, $this->charset);
 	}
 
 }

@@ -6,7 +6,7 @@ header('Content-Type: text/html; charset='.$this->get_charset());
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page['lang'] ?>" lang="<?php echo $this->page['lang'] ?>">
 <head>
-	<title><?php echo htmlspecialchars($this->config['site_name']).' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '');?></title>
+	<title><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, $this->charset).' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '');?></title>
 <?php
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noindex'] == 1 || $this->page['noindex'] == 1)
@@ -14,8 +14,8 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 	echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 }
 ?>
-	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords()); ?>" />
-	<meta name="description" content="<?php echo htmlspecialchars($this->get_description()); ?>" />
+	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords(), ENT_COMPAT | ENT_HTML401, $this->charset); ?>" />
+	<meta name="description" content="<?php echo htmlspecialchars($this->get_description(), ENT_COMPAT | ENT_HTML401, $this->charset); ?>" />
 	<meta name="language" content="<?php echo $this->page['lang'] ?>" />
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 
@@ -27,7 +27,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->config['noin
 	<link rel="shortcut icon" href="<?php echo $this->config['theme_url'] ?>icons/favicon.ico" type="image/x-icon" />
 	<link  rel="start" title="<?php echo $this->config['root_page'];?>" href="<?php echo $this->config['base_url'];?>"/>
 <?php if ($this->config['policy_page']) {?>
-	<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page'])); ?>" title="Copyright" />
+	<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, $this->charset); ?>" title="Copyright" />
 <?php } ?>
 <?php if ($this->config['enable_feeds']) {?>
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->get_translation('RecentChangesRSS');?>" href="<?php echo $this->config['base_url'];?>xml/changes_<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->config['site_name']));?>.xml" />

@@ -176,11 +176,11 @@ function admin_users(&$engine, &$module)
 		echo '<h2>'.$engine->get_translation('UsersAddNew').'</h2>';
 		echo '<table class="formation">';
 		echo '<tr><td><label for="newname">'.$engine->get_translation('UserName').'</label></td>'.
-			'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : '' ).'" size="20" maxlength="100" /></td></tr>'.
+			'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, $engine->charset) : '' ).'" size="20" maxlength="100" /></td></tr>'.
 			'<tr><td><label for="newrealname">'.$engine->get_translation('RealName').'</label></td>'.
-			'<td><input id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname']) : '' ).'" size="20" maxlength="100" /></td></tr>'.
+			'<td><input id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML401, $engine->charset) : '' ).'" size="20" maxlength="100" /></td></tr>'.
 			'<tr><td><label for="email">'.$engine->get_translation('Email').'</label></td>'.
-			'<td><input id="email" name="email" value="'.( isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ).'" size="50" maxlength="100" /></td></tr>'.
+			'<td><input id="email" name="email" value="'.( isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_COMPAT | ENT_HTML401, $engine->charset) : '' ).'" size="50" maxlength="100" /></td></tr>'.
 			'<tr><td><label for="lang">'.$engine->get_translation('YourLanguage').'</label></td>'.
 			'<td><select id="lang" name="lang">';?>
 				<option value=""></option>
@@ -215,15 +215,15 @@ function admin_users(&$engine, &$module)
 		{
 			echo '<form action="admin.php" method="post" name="users">';
 			echo '<input type="hidden" name="mode" value="users" />';
-			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
+			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, $engine->charset).'" />'."\n";
 			echo '<table class="formation">';
-			echo '<tr><td><label for="newname">'.$engine->get_translation('UsersRename').' \'<tt>'.htmlspecialchars($user['user_name']).'</tt>\' in</label></td>'.
-				'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : htmlspecialchars($user['user_name']) ).'" size="20" maxlength="100" /></td></tr>'.
+			echo '<tr><td><label for="newname">'.$engine->get_translation('UsersRename').' \'<tt>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, $engine->charset).'</tt>\' in</label></td>'.
+				'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, $engine->charset) : htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, $engine->charset) ).'" size="20" maxlength="100" /></td></tr>'.
 				'<tr><td><label for="newrealname">'.$engine->get_translation('RealName').'</label> '.
-				'<td><input id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname']) : htmlspecialchars($user['real_name']) ).'" size="50" maxlength="100" /></td></tr>'.
+				'<td><input id="newrealname" name="newrealname" value="'.( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML401, $engine->charset) : htmlspecialchars($user['real_name'], ENT_COMPAT | ENT_HTML401, $engine->charset) ).'" size="50" maxlength="100" /></td></tr>'.
 				'</td></tr>'.
 				'<tr><td><label for="newemail">'.$engine->get_translation('Email').'</label> '.
-				'<td><input id="newemail" name="newemail" value="'.( isset($_POST['newdescription']) ? htmlspecialchars($_POST['newemail']) : htmlspecialchars($user['email']) ).'" size="50" maxlength="100" /></td></tr>'.
+				'<td><input id="newemail" name="newemail" value="'.( isset($_POST['newdescription']) ? htmlspecialchars($_POST['newemail'], ENT_COMPAT | ENT_HTML401, $engine->charset) : htmlspecialchars($user['email'], ENT_COMPAT | ENT_HTML401, $engine->charset) ).'" size="50" maxlength="100" /></td></tr>'.
 				'<tr><td><label for="lang">'.$engine->get_translation('YourLanguage').'</label></td>'.
 				'<td><select id="lang" name="lang">';?>
 					<option value=""></option>
@@ -255,9 +255,9 @@ function admin_users(&$engine, &$module)
 		{
 			echo '<form action="admin.php" method="post" name="users">';
 			echo '<input type="hidden" name="mode" value="users" />';
-			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
+			echo '<input type="hidden" name="user_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, $engine->charset).'" />'."\n";
 			echo '<table class="formation">';
-			echo '<tr><td><label for="">'.$engine->get_translation('UsersDelete').' \'<tt>'.htmlspecialchars($user['user_name']).'</tt>\'?</label> '.
+			echo '<tr><td><label for="">'.$engine->get_translation('UsersDelete').' \'<tt>'.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, $engine->charset).'</tt>\'?</label> '.
 				'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
 				'<input id="button" type="button" value="no" style="width:40px;" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 				'<br /><small>'.$engine->get_translation('UsersDeleteInfo').'</small>'.
@@ -467,7 +467,7 @@ function admin_users(&$engine, &$module)
 			( $where ? $where : '' )
 			);
 
-		$pagination	= $engine->pagination($count['n'], $limit, 'p', 'mode=users&order='.htmlspecialchars(isset($_GET['order']) ? $_GET['order'] : ''), '', 'admin.php');
+		$pagination	= $engine->pagination($count['n'], $limit, 'p', 'mode=users&order='.isset($_GET['order']) ? htmlspecialchars($_GET['order'], ENT_COMPAT | ENT_HTML401, $engine->charset) : '', '', 'admin.php');
 
 		$users = $engine->load_all(
 			"SELECT u.*, p.lang ".

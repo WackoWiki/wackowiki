@@ -99,7 +99,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="debug_sql_threshold"><strong>Threshold performance RDBMS:</strong><br />
 				<small>In the detailed debug mode to record only the queries take longer than the number of seconds.</small></label></td>
-				<td><input maxlength="10" style="width:200px;" id="debug_sql_threshold" name="debug_sql_threshold" value="<?php echo htmlspecialchars($engine->config['debug_sql_threshold']);?>" /></td>
+				<td><input maxlength="10" style="width:200px;" id="debug_sql_threshold" name="debug_sql_threshold" value="<?php echo htmlspecialchars($engine->config['debug_sql_threshold'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -126,7 +126,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="cache_ttl"><strong>Term relevance cached pages:</strong><br />
 				<small>Cache pages no more than a specified number of seconds.</small></label></td>
-				<td><input maxlength="5" style="width:200px;" id="cache_ttl" name="cache_ttl" value="<?php echo htmlspecialchars($engine->config['cache_ttl']);?>" /></td>
+				<td><input maxlength="5" style="width:200px;" id="cache_ttl" name="cache_ttl" value="<?php echo htmlspecialchars($engine->config['cache_ttl'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -142,7 +142,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="cache_sql_ttl"><strong>Term relevance Cache Database:</strong><br />
 				<small>Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.</small></label></td>
-				<td><input maxlength="5" style="width:200px;" id="cache_sql_ttl" name="cache_sql_ttl" value="<?php echo htmlspecialchars($engine->config['cache_sql_ttl']);?>" /></td>
+				<td><input maxlength="5" style="width:200px;" id="cache_sql_ttl" name="cache_sql_ttl" value="<?php echo htmlspecialchars($engine->config['cache_sql_ttl'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -248,42 +248,42 @@ function admin_configsystem(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="date_format"><strong>The format of the date (day, month, year):</strong></label></td>
-				<td><input maxlength="50" style="width:200px;" id="date_format" name="date_format" value="<?php echo htmlspecialchars($engine->config['date_format']);?>" /></td>
+				<td><input maxlength="50" style="width:200px;" id="date_format" name="date_format" value="<?php echo htmlspecialchars($engine->config['date_format'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="time_format"><strong>The format of time (hour, minute):</strong></label></td>
-				<td><input maxlength="50" style="width:200px;" id="time_format" name="time_format" value="<?php echo htmlspecialchars($engine->config['time_format']);?>" /></td>
+				<td><input maxlength="50" style="width:200px;" id="time_format" name="time_format" value="<?php echo htmlspecialchars($engine->config['time_format'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="time_format_seconds"><strong>The format of the exact time (hours, minutes, seconds):</strong></label></td>
-				<td><input maxlength="50" style="width:200px;" id="time_format_seconds" name="time_format_seconds" value="<?php echo htmlspecialchars($engine->config['time_format_seconds']);?>" /></td>
+				<td><input maxlength="50" style="width:200px;" id="time_format_seconds" name="time_format_seconds" value="<?php echo htmlspecialchars($engine->config['time_format_seconds'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="name_date_macro"><strong>The format of a macro (name, time):</strong></label></td>
-				<td><input maxlength="50" style="width:200px;" id="name_date_macro" name="name_date_macro" value="<?php echo htmlspecialchars($engine->config['name_date_macro']);?>" /></td>
+				<td><input maxlength="50" style="width:200px;" id="name_date_macro" name="name_date_macro" value="<?php echo htmlspecialchars($engine->config['name_date_macro'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="date_macro_format"><strong>Format Date / Time for a macro:</strong></label></td>
-				<td><input maxlength="50" style="width:200px;" id="date_macro_format" name="date_macro_format" value="<?php echo htmlspecialchars($engine->config['date_macro_format']);?>" /></td>
+				<td><input maxlength="50" style="width:200px;" id="date_macro_format" name="date_macro_format" value="<?php echo htmlspecialchars($engine->config['date_macro_format'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="date_precise_format"><strong>The format of the exact time / date for a macro:</strong></label></td>
-				<td><input maxlength="50" style="width:200px;" id="date_precise_format" name="date_precise_format" value="<?php echo htmlspecialchars($engine->config['date_precise_format']);?>" /></td>
+				<td><input maxlength="50" style="width:200px;" id="date_precise_format" name="date_precise_format" value="<?php echo htmlspecialchars($engine->config['date_precise_format'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -354,7 +354,7 @@ function admin_configsystem(&$engine, &$module)
 				<small>Set this value if your proxy server sends the client IP in a header
 				 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
 				 addresses, only the last one (the left-most) will be used.</small></label></td>
-				<td><input maxlength="50" style="width:200px;" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo htmlspecialchars($engine->config['reverse_proxy_header']);?>" /></td>
+				<td><input maxlength="50" style="width:200px;" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo htmlspecialchars($engine->config['reverse_proxy_header'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -367,7 +367,7 @@ function admin_configsystem(&$engine, &$module)
 				 these, that is the request reaches the web server from one of your
 				 reverse proxies. Otherwise, the client could directly connect to
 				 your web server spoofing the X-Forwarded-For headers.</small></label></td>
-				<td><input maxlength="50" style="width:200px;" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->config['reverse_proxy_addresses']);?>" /></td>
+				<td><input maxlength="50" style="width:200px;" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->config['reverse_proxy_addresses'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -378,7 +378,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="cookie_prefix"><strong>The prefix for the names of cookies:</strong><br />
 				<small>Special prefix used for all the cookies platform.</small></label></td>
-				<td><input maxlength="50" style="width:200px;" id="cookie_prefix" name="cookie_prefix" value="<?php echo htmlspecialchars($engine->config['cookie_prefix']);?>" /></td>
+				<td><input maxlength="50" style="width:200px;" id="cookie_prefix" name="cookie_prefix" value="<?php echo htmlspecialchars($engine->config['cookie_prefix'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -386,7 +386,7 @@ function admin_configsystem(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="session_prefix"><strong>The prefix for the names of session:</strong><br />
 				<small>Special prefix used for all the session platform.</small></label></td>
-				<td><input maxlength="50" style="width:200px;" id="session_prefix" name="session_prefix" value="<?php echo htmlspecialchars($engine->config['session_prefix']);?>" /></td>
+				<td><input maxlength="50" style="width:200px;" id="session_prefix" name="session_prefix" value="<?php echo htmlspecialchars($engine->config['session_prefix'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

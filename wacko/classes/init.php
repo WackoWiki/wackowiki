@@ -652,6 +652,9 @@ class Init
 			$this->engine->load_translation($lang);
 			$this->engine->set_translation($lang);
 			$this->engine->set_language($lang);
+			// set charset
+			$this->engine->charset = $this->engine->languages[$lang]['charset'];
+
 			return true;
 		}
 		else
