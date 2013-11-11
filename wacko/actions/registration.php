@@ -340,7 +340,7 @@ if (!isset($_POST['confirm']))
 		}
 
 		echo '<p><label for="user_name">'.$this->format_translation('UserName').':</label>';
-		echo '<input id="user_name" name="user_name" size="27" value="'.htmlspecialchars($user_name).'" />';
+		echo '<input id="user_name" name="user_name" size="27" value="'.htmlspecialchars($user_name, ENT_COMPAT | ENT_HTML401, $this->charset).'" />';
 
 		if ($this->config['disable_wikiname'] === false)
 		{
@@ -362,7 +362,7 @@ if (!isset($_POST['confirm']))
 		}
 
 		#echo '<p><label for="real_name">'.$this->format_translation('RegistrationRealName').':</label>';
-		#echo '<input id="real_name" name="real_name" size="27" value="'.htmlspecialchars($real_name).'" /></p>';
+		#echo '<input id="real_name" name="real_name" size="27" value="'.htmlspecialchars($real_name, ENT_COMPAT | ENT_HTML401, $this->charset).'" /></p>';
 		echo '<p><label for="password">'.$this->get_translation('RegistrationPassword').':</label>';
 		echo '<input type="password" id="password" name="password" size="24" value="'.$password.'" />';
 
@@ -403,7 +403,7 @@ if (!isset($_POST['confirm']))
 
 		echo '<p>';
 		echo '<label for="email">'.$this->get_translation('Email').':</label>';
-		echo '<input id="email" name="email" size="30" value="'.htmlspecialchars($email).'" />';
+		echo '<input id="email" name="email" size="30" value="'.htmlspecialchars($email, ENT_COMPAT | ENT_HTML401, $this->charset).'" />';
 		echo '<small> <a title="'.$this->get_translation('RegistrationEmailInfo').'">(?)</a></small></p>';
 
 		/*if ($this->config['policy_page'])
@@ -411,7 +411,7 @@ if (!isset($_POST['confirm']))
 			echo '<p>';
 			echo '<label for="terms_of_use">'.$this->get_translation('TermsOfUse').':</label>';
 			echo '<input id="terms_of_use" name="terms_of_use" type="checkbox" value="1" />';
-			echo '<small> '.$this->get_translation('AcceptTermsOfUse').' '.$this->config['site_name'].' <a href="'.htmlspecialchars($this->href('', $this->config['policy_page'])).'">'.$this->get_translation('TermsOfUse').'</a><br /></small></p>';
+			echo '<small> '.$this->get_translation('AcceptTermsOfUse').' '.$this->config['site_name'].' <a href="'.htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, $this->charset).'">'.$this->get_translation('TermsOfUse').'</a><br /></small></p>';
 		}*/
 
 		// captcha code starts

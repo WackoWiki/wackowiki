@@ -29,7 +29,7 @@ $text = preg_replace('/<\/?[a-z][a-z0-9]*[^<>]*?>|<!--.*?-->/', '', $text);
 //$text = preg_replace('/(?:\\n){2,}/', '\n', $text);
 
 // convert html-entities in plain text
-$text = html_entity_decode($text);
+$text = html_entity_decode($text, ENT_COMPAT | ENT_HTML401, $this->charset);
 $text = str_replace('&ndash;', '-', $text);
 $text = str_replace('&mdash;', '--', $text);
 

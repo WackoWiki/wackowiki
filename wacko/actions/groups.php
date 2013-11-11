@@ -18,7 +18,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 	// does requested usergroup exists?
 	if (false == $usergroup = $this->load_usergroup($_REQUEST['profile']))
 	{
-		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_REQUEST['profile']), str_replace('%1', $this->supertag, $this->get_translation('GroupsNotFound'))).'</div>';
+		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_REQUEST['profile'], ENT_COMPAT | ENT_HTML401, $this->charset), str_replace('%1', $this->supertag, $this->get_translation('GroupsNotFound'))).'</div>';
 	}
 	else
 	{
@@ -102,7 +102,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 			{
 				echo '<tr class="lined">';
 
-				echo	'<td style="padding-left:5px;"><a href="'.$this->href('', ($this->config['users_page'].'/'.$member['user_name']), 'profile='.htmlspecialchars($member['user_name']).'').'">'.$member['user_name'].'</a></td>'.
+				echo	'<td style="padding-left:5px;"><a href="'.$this->href('', ($this->config['users_page'].'/'.$member['user_name']), 'profile='.htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, $this->charset).'').'">'.$member['user_name'].'</a></td>'.
 									'<td align="center">'.$member['total_pages'].'</td>'.
 									'<td align="center">'.$member['total_comments'].'</td>'.
 									'<td align="center">'.$member['total_revisions'].'</td>'.
@@ -145,12 +145,12 @@ else
 		// goto usergroup profile directly if so desired
 		if (isset($_GET['gotoprofile']) && $this->load_usergroup($_GET['group']) == true)
 		{
-			$this->redirect($this->href('', '', 'profile='.htmlspecialchars($_GET['group'])));
+			$this->redirect($this->href('', '', 'profile='.htmlspecialchars($_GET['group'], ENT_COMPAT | ENT_HTML401, $this->charset)));
 		}
 		else
 		{
 			$where = "WHERE group_name LIKE '%".quote($this->dblink, $_GET['group'])."%' ";
-			$param = "group=".htmlspecialchars($_GET['group']);
+			$param = "group=".htmlspecialchars($_GET['group'], ENT_COMPAT | ENT_HTML401, $this->charset);
 		}
 	}
 	else if (isset($_GET['sort']) && $_GET['sort'] == 'name')
@@ -204,7 +204,7 @@ else
 	echo '<table class="formation"><tr><td class="label">';
 	echo $this->form_open('', '', 'get');
 	echo $this->get_translation('GroupsSearch').': </td><td>';
-	echo '<input name="group" maxchars="40" size="40" value="'.htmlspecialchars(isset($_GET['group']) ? $_GET['group'] : '').'" /> ';
+	echo '<input name="group" maxchars="40" size="40" value="'.isset($_GET['group']) ? htmlspecialchars($_GET['group'], ENT_COMPAT | ENT_HTML401, $this->charset) : ''.'" /> ';
 	echo '<input id="submit" type="submit" value="'.$this->get_translation('GroupsFilter').'" /> ';
 	echo '<input id="button" type="submit" value="'.$this->get_translation('GroupsOpenProfile').'" name="gotoprofile" />';
 	echo $this->form_close();
@@ -241,7 +241,7 @@ else
 		{
 			echo '<tr class="lined">';
 
-			echo	'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($usergroup['group_name']).'').'">'.$usergroup['group_name'].'</a></td>'.
+			echo	'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, $this->charset).'').'">'.$usergroup['group_name'].'</a></td>'.
 					'<td align="center">'.$usergroup['members'].'</td>'.
 					/* '<td align="center">'.$usergroup['total_comments'].'</td>'.
 					'<td align="center">'.$usergroup['total_revisions'].'</td>'. */

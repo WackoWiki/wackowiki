@@ -179,7 +179,7 @@ if ($user = $this->get_user())
 						{
 							echo "<li class=\"lined\">";
 							echo "<span class=\"\">".$referrer['num']."</span> &nbsp; ";
-							echo "<span class=\"\"><a href=\"".htmlspecialchars($referrer['referrer'])."\">".htmlspecialchars($referrer['referrer'])."</a></span >";
+							echo "<span class=\"\"><a href=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, $this->charset)."\">".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, $this->charset)."</a></span >";
 							echo "</li>\n";
 						}
 
@@ -199,7 +199,7 @@ if ($user = $this->get_user())
 			{
 				echo "<tr>";
 				echo "<td width=\"30\" align=\"right\" valign=\"top\" style=\"padding-right: 10px\">".$referrer['num']."</td>";
-				echo "<td valign=\"top\"><a href=\"".htmlspecialchars($referrer['referrer'])."\">".htmlspecialchars($referrer['referrer'])."</a></td>";
+				echo "<td valign=\"top\"><a href=\"".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, $this->charset)."\">".htmlspecialchars($referrer['referrer'], ENT_COMPAT | ENT_HTML401, $this->charset)."</a></td>";
 				echo "</tr>\n";
 			}
 

@@ -173,7 +173,7 @@ function admin_files(&$engine, &$module)
 			$description = substr(quote($engine->dblink, $_POST['file_description']), 0, 250);
 			$description = rtrim( $description, '\\' );
 			$description = str_replace(array('"', "'", '<', '>'), '', $description);
-			$description = htmlspecialchars($description);
+			$description = htmlspecialchars($description, ENT_COMPAT | ENT_HTML401, $engine->charset);
 
 			// 5. insert line into DB
 			$engine->sql_query("INSERT INTO {$engine->config['table_prefix']}upload SET ".

@@ -56,7 +56,7 @@ if ($this->has_access('read'))
 
 		$xml .= "\t\t<item>\n";
 		$xml .= "\t\t\t<guid>".rtrim($tag, '/')."</guid>\n";
-		$xml .= "\t\t\t<title>".htmlspecialchars($page['title'])."</title>\n";
+		$xml .= "\t\t\t<title>".htmlspecialchars($page['title'], ENT_COMPAT | ENT_HTML401, $this->charset)."</title>\n";
 		$xml .= "\t\t\t<link>".$this->config['base_url'].$page['supertag']."</link>\n";
 		$xml .= "\t\t\t<description><![CDATA[".str_replace(']]>', ']]&gt;', $page['body'])."]]></description>\n";
 		$xml .= "\t\t\t<author>".$page['owner_id']."</author>\n";

@@ -38,7 +38,7 @@ if (isset($this->categories))
 {
 	foreach($this->categories as $id => $category)
 	{
-		$_category = '<a href="'.$this->href('', $path, 'category='.$id).'">'.htmlspecialchars($category).'</a>';
+		$_category = '<a href="'.$this->href('', $path, 'category='.$id).'">'.htmlspecialchars($category, ENT_COMPAT | ENT_HTML401, $this->charset).'</a>';
 
 		if ($list)
 		{

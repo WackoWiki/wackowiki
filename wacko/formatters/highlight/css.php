@@ -16,7 +16,7 @@ $options['line_numbers'] = false;
 
 if (isset($options['notypo']) && $options['notypo'] !== false) $options['notypo'] = true;
 
-$css = htmlspecialchars($text);
+$css = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, $this->charset);
 $keywords = array(
 	'azimuth',
 	'background-attachment',

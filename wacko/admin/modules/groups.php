@@ -118,7 +118,7 @@ function admin_groups(&$engine, &$module)
 						{
 							foreach($users as $user)
 							{
-								echo "<option value=\"".htmlspecialchars($user['user_id'])."\">".$user['user_name']."</option>\n";
+								echo "<option value=\"".$user['user_id']."\">".htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, $engine->charset)."</option>\n";
 							}
 						}
 
@@ -138,9 +138,9 @@ function admin_groups(&$engine, &$module)
 					echo '<form action="admin.php" method="post" name="groups">';
 					echo '<input type="hidden" name="group_id" value="$group_id" />';
 					echo '<input type="hidden" name="mode" value="'.groups.'" />';
-					echo '<input type="hidden" name="member_id" value="'.htmlspecialchars($_POST['changemember']).'" />'."\n";
+					echo '<input type="hidden" name="member_id" value="'.htmlspecialchars($_POST['changemember'], ENT_COMPAT | ENT_HTML401, $engine->charset).'" />'."\n";
 					echo '<table class="formation">';
-					echo '<tr><td><label for="">'.$engine->get_translation('MembersRemove').' \'<tt>'.htmlspecialchars($member['user_name']).'</tt>\'?</label> '.
+					echo '<tr><td><label for="">'.$engine->get_translation('MembersRemove').' \'<tt>'.htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML401, $engine->charset).'</tt>\'?</label> '.
 						'<input id="submit" type="submit" name="removemember" value="yes" style="width:40px;" /> '.
 						'<input id="button" type="button" value="no" style="width:40px;" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 						'<br /><small>'.$engine->get_translation('MembersDeleteInfo').'</small>'.
@@ -237,9 +237,9 @@ function admin_groups(&$engine, &$module)
 			echo '<input type="hidden" name="mode" value="groups" />';
 			echo '<table class="formation">';
 			echo '<tr><td><label for="newname">'.$engine->get_translation('GroupsAdd').'</label></td>'.
-				'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : '' ).'" size="20" maxlength="100" /></td></tr>'.
+				'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, $engine->charset) : '' ).'" size="20" maxlength="100" /></td></tr>'.
 				'<tr><td><label for="description">'.$engine->get_translation('GroupsDescription').'</label></td>'.
-				'<td><input id="description" name="description" value="'.( isset($_POST['description']) ? htmlspecialchars($_POST['description']) : '' ).'" size="50" maxlength="100" /></td></tr>'.
+				'<td><input id="description" name="description" value="'.( isset($_POST['description']) ? htmlspecialchars($_POST['description'], ENT_COMPAT | ENT_HTML401, $engine->charset) : '' ).'" size="50" maxlength="100" /></td></tr>'.
 				'<tr><td><label for="moderator">'.$engine->get_translation('GroupsModerator').'</label></td>'.
 				'<td><select id="moderator" name="moderator">';?>
 					<option value=""></option>
@@ -248,7 +248,7 @@ function admin_groups(&$engine, &$module)
 					{
 						foreach($users as $user)
 						{
-							echo "<option value=\"".htmlspecialchars($user['user_id'])."\">".$user['user_name']."</option>\n";
+							echo "<option value=\"".$user['user_id']."\">".htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, $engine->charset)."</option>\n";
 						}
 					}
 
@@ -270,12 +270,12 @@ function admin_groups(&$engine, &$module)
 			{
 				echo '<form action="admin.php" method="post" name="groups">';
 				echo '<input type="hidden" name="mode" value="groups" />';
-				echo '<input type="hidden" name="group_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
+				echo '<input type="hidden" name="group_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, $engine->charset).'" />'."\n";
 				echo '<table class="formation">';
-				echo '<tr><td><label for="newname">'.$engine->get_translation('GroupsRename').' \'<tt>'.htmlspecialchars($usergroup['group_name']).'</tt>\' in</label></td>'.
-					'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname']) : htmlspecialchars($usergroup['group_name']) ).'" size="20" maxlength="100" /></td></tr>'.
+				echo '<tr><td><label for="newname">'.$engine->get_translation('GroupsRename').' \'<tt>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, $engine->charset).'</tt>\' in</label></td>'.
+					'<td><input id="newname" name="newname" value="'.( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML401, $engine->charset) : htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, $engine->charset) ).'" size="20" maxlength="100" /></td></tr>'.
 					'<tr><td><label for="newdescription">'.$engine->get_translation('GroupsDescription').'</label></td>'.
-					'<td><input id="newdescription" name="newdescription" value="'.( isset($_POST['newdescription']) ? htmlspecialchars($_POST['newdescription']) : htmlspecialchars($usergroup['description']) ).'" size="50" maxlength="100" /></td></tr>'.
+					'<td><input id="newdescription" name="newdescription" value="'.( isset($_POST['newdescription']) ? htmlspecialchars($_POST['newdescription'], ENT_COMPAT | ENT_HTML401, $engine->charset) : htmlspecialchars($usergroup['description'], ENT_COMPAT | ENT_HTML401, $engine->charset) ).'" size="50" maxlength="100" /></td></tr>'.
 					'<tr><td><label for="moderator">'.$engine->get_translation('GroupsModerator').'</label></td>'.
 					'<td><select id="moderator" name="moderator">'.
 					'<option value=""></option> ';
@@ -308,9 +308,9 @@ function admin_groups(&$engine, &$module)
 			{
 				echo '<form action="admin.php" method="post" name="groups">';
 				echo '<input type="hidden" name="mode" value="groups" />';
-				echo '<input type="hidden" name="group_id" value="'.htmlspecialchars($_POST['change']).'" />'."\n";
+				echo '<input type="hidden" name="group_id" value="'.htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML401, $engine->charset).'" />'."\n";
 				echo '<table class="formation">';
-				echo '<tr><td><label for="">'.$engine->get_translation('GroupsDelete').' \'<tt>'.htmlspecialchars($usergroup['group_name']).'</tt>\'?</label> '.
+				echo '<tr><td><label for="">'.$engine->get_translation('GroupsDelete').' \'<tt>'.htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML401, $engine->charset).'</tt>\'?</label> '.
 					'<input id="submit" type="submit" name="delete" value="yes" style="width:40px;" /> '.
 					'<input id="button" type="button" value="no" style="width:40px;" onclick="document.location=\''.addslashes($engine->href()).'\';" />'.
 					'<br /><small>'.$engine->get_translation('GroupsDeleteInfo').'</small>'.
@@ -442,7 +442,7 @@ function admin_groups(&$engine, &$module)
 			( $where ? $where : '' )
 			);
 
-		$pagination	= $engine->pagination($count['n'], $limit, 'p', 'mode=groups&order='.htmlspecialchars(isset($_GET['order']) ? $_GET['order'] : ''), '', 'admin.php');
+		$pagination	= $engine->pagination($count['n'], $limit, 'p', 'mode=groups&order='.isset($_GET['order']) ? htmlspecialchars($_GET['order'], ENT_COMPAT | ENT_HTML401, $engine->charset) : '', '', 'admin.php');
 
 		$groups = $engine->load_all(
 			"SELECT g.*, u.user_name, COUNT(m.user_id) AS members ".

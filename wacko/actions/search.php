@@ -312,7 +312,7 @@ if ($form)
 	echo $this->form_open('', '', 'get');
 
 	echo '<label for="searchfor">'.$this->get_translation('SearchFor').':</label><br />';
-	echo '<input name="phrase" id="searchfor" size="40" value="'.htmlspecialchars(isset($_GET['phrase'])? $_GET['phrase'] : '').'" />';
+	echo '<input name="phrase" id="searchfor" size="40" value="'.isset($_GET['phrase']) ? htmlspecialchars($_GET['phrase'], ENT_COMPAT | ENT_HTML401, $this->charset) : ''.'" />';
 	echo '<input type="submit" value="'.$this->get_translation('SearchButtonText').'" /><br />';
 
 	if ($options == 1)
@@ -347,7 +347,7 @@ if ($phrase)
 			$results = full_text_search($this, $phrase, $for, (int)$max ,($filter == 'all' ? 0 : 1));
 		}
 
-		$phrase = htmlspecialchars($phrase);
+		$phrase = htmlspecialchars($phrase, ENT_COMPAT | ENT_HTML401, $this->charset);
 
 		// make and display results
 		if (list ($pages, $pagination) = $results)

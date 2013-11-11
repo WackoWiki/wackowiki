@@ -72,7 +72,7 @@ if (!isset($styleclass)) $styleclass = '';
 if (!isset($align)) $align = '';
 
 if (!$url) $url = isset($vars['url']) ? $vars['url'] : '';
-$url = htmlspecialchars($url);
+$url = htmlspecialchars($url, ENT_COMPAT | ENT_HTML401, $this->charset);
 
 if(!$width) $width = 550;
 if(!$height) $height = 100;

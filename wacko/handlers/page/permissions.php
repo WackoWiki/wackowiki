@@ -275,7 +275,7 @@ if ($this->user_is_owner() || $this->is_admin())
 			{
 				foreach($users as $user)
 				{
-					echo "<option value=\"".htmlspecialchars($user['user_id'])."\">".$user['user_name']."</option>\n";
+					echo "<option value=\"".$user['user_id']."\">".htmlspecialchars($user['user_name'])."</option>\n";
 				}
 			}
 	?>

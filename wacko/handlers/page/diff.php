@@ -86,7 +86,7 @@ if ($this->has_access('read'))
 				// remove blank lines
 				$output .= "<br />\n".$this->get_translation('SimpleDiffAdditions')."<br />\n\n";
 				$output .= "<div class=\"additions\">".($source == 1
-															? '<pre>'.wordwrap(htmlentities(implode("\n", $added)), 70, "\n", 1).'</pre>'
+															? '<pre>'.wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML401, $this->charset), 70, "\n", 1).'</pre>'
 															: $this->format(implode("\n", $added))
 														)."</div>";
 			}
@@ -95,7 +95,7 @@ if ($this->has_access('read'))
 			{
 				$output .= "<br />\n\n".$this->get_translation('SimpleDiffDeletions')."<br />\n\n";
 				$output .= "<div class=\"deletions\">".($source == 1
-															? '<pre>'.wordwrap(htmlentities(implode("\n", $deleted)), 70, "\n", 1).'</pre>'
+															? '<pre>'.wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML401, $this->charset), 70, "\n", 1).'</pre>'
 															: $this->format(implode("\n", $deleted))
 														)."</div>";
 			}

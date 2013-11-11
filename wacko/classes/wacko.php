@@ -13,6 +13,7 @@ class Wacko
 	var $dblink;
 	var $page;
 	var $tag;
+	var $charset;
 	var $supertag;
 	var $forum;
 	var $categories;
@@ -78,6 +79,9 @@ class Wacko
 		$this->timer	= $this->get_micro_time();
 		$this->config	= $config;
 		$this->dblink	= $dblink;
+
+		$this->charset	= $this->get_charset();
+		#$this->charset	= $this->engine->languages[$lang]['charset'];
 	}
 
 	// DATABASE
@@ -350,6 +354,9 @@ class Wacko
 		$this->language['ALPHA']		= '['.$this->language['ALPHA_P'].']';
 		$this->language['ALPHANUM']		= '[0-9'.$this->language['ALPHA_P'].']';
 		$this->language['ALPHANUM_P']	= '0-9'.$this->language['ALPHA_P'];
+
+		// set charset
+		#$this->charset = $this->language['charset'];
 	}
 
 	function load_translation($lang)
@@ -594,6 +601,7 @@ class Wacko
 
 		if (isset($this->languages[$lang]['charset']))
 		{
+			#$this->charset	= $this->languages[$lang]['charset'];
 			return $this->languages[$lang]['charset'];
 		}
 		else
@@ -839,7 +847,7 @@ class Wacko
 			$meta_keywords .= strtolower(implode(', ', $this->categories));
 		}
 
-		return htmlspecialchars($meta_keywords);
+		return htmlspecialchars($meta_keywords, ENT_COMPAT | ENT_HTML401, $this->charset);
 	}
 
 	function get_description()
@@ -855,7 +863,7 @@ class Wacko
 			$meta_description = $this->config['meta_description'];
 		}
 
-		return htmlspecialchars($meta_description);
+		return htmlspecialchars($meta_description, ENT_COMPAT | ENT_HTML401, $this->charset);
 	}
 
 	// wrapper for old_load_page
@@ -2458,7 +2466,7 @@ class Wacko
 			$text = $this->add_spaces($tag);
 		}
 
-		//$text = htmlentities($text);
+		//$text = htmlentities($text, ENT_COMPAT | ENT_HTML401, $this->charset);
 		if (isset($_SESSION[$this->config['session_prefix'].'_'.'linktracking']) && $track)
 		{
 			$this->track_link_to($tag);
@@ -2505,7 +2513,7 @@ class Wacko
 
 		if (!$safe)
 		{
-			$text = htmlspecialchars($text, ENT_NOQUOTES);
+			$text = htmlspecialchars($text, ENT_NOQUOTES, $this->charset);
 		}
 
 		if ($link_lang)
@@ -3071,7 +3079,7 @@ class Wacko
 
 				if (!$text)
 				{
-					$text	= htmlspecialchars($tag, ENT_NOQUOTES);
+					$text	= htmlspecialchars($tag, ENT_NOQUOTES, ENT_COMPAT | ENT_HTML401, $this->charset);
 				}
 
 				if ($this->config['youarehere_text'])
@@ -3099,7 +3107,7 @@ class Wacko
 			die ("ERROR: no link template '$tpl' found.");
 		}
 
-		if (!$text) $text	= htmlspecialchars($tag, ENT_NOQUOTES);
+		if (!$text) $text	= htmlspecialchars($tag, ENT_NOQUOTES, $this->charset);
 
 		if ($url)
 		{
@@ -4114,6 +4122,7 @@ class Wacko
 	}
 
 	// COMMENTS AND COUNTS
+	// TODO: "AND p.deleted <> '1' "
 	// recount all comments for a given page
 	function count_comments($comment_on_id)
 	{
@@ -5286,6 +5295,9 @@ class Wacko
 		$this->set_page($page);
 		$this->log_referrer();
 		$this->set_menu();
+
+		// charset
+		$this->charset	= $this->get_charset();
 
 		if ($this->page)
 		{

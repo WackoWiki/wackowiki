@@ -178,7 +178,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 				$updated = true;
 			}
 
-			$topic['description'] = htmlspecialchars($topic['description']);
+			$topic['description'] = htmlspecialchars($topic['description'], ENT_COMPAT | ENT_HTML401, $this->charset);
 
 			if ($this->page['lang'] != $topic['lang'])
 			{

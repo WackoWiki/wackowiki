@@ -126,7 +126,7 @@ $xhtml_tags = array(
   "xmp"
   );
 
-  $source = htmlspecialchars($text);
+  $source = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, $this->charset);
 
   $source = preg_replace(
              '/&lt;!--(.*?)--&gt;/es',

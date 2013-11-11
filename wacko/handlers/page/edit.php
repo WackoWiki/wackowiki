@@ -208,9 +208,9 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	// fetch fields
 	$previous	= isset($_POST['previous']) ? $_POST['previous'] : $this->page['modified'];
 	$body		= isset($_POST['body']) ? $_POST['body'] : $this->page['body'];
-	$body		= html_entity_decode($body);
+	$body		= html_entity_decode($body, ENT_COMPAT | ENT_HTML401, $this->charset);
 	$title		= isset($_POST['title']) ? $_POST['title'] : $this->page['title'];
-	$title		= html_entity_decode($title);
+	$title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML401, $this->charset);
 
 	if (isset($_POST['edit_note']))		$edit_note	= $_POST['edit_note'];
 	if (isset($_POST['minor_edit']))	$minor_edit	= $_POST['minor_edit'];
@@ -295,15 +295,15 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 	<br />
 	<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
 <?php
-	$output .= '<input type="hidden" name="previous" value="'.htmlspecialchars($previous).'" /><br />';
+	$output .= '<input type="hidden" name="previous" value="'.htmlspecialchars($previous, ENT_COMPAT | ENT_HTML401, $this->charset).'" /><br />';
 	$output .= '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">';
-	$output .= htmlspecialchars($body)."</textarea><br />\n";
+	$output .= htmlspecialchars($body, ENT_COMPAT | ENT_HTML401, $this->charset)."</textarea><br />\n";
 
 	// comment title
 	if ($this->page['comment_on_id'] != 0)
 	{
 		$output .= '<label for="addcomment_title">'.$this->get_translation('AddCommentTitle').'</label><br />';
-		$output .= '<input id="addcomment_title" maxlength="100" value="'.htmlspecialchars($title).'" size="60" name="title" />';
+		$output .= '<input id="addcomment_title" maxlength="100" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, $this->charset).'" size="60" name="title" />';
 		$output .= '<br />';
 	}
 	else
@@ -312,7 +312,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		{
 			// new page title field
 			$output .= '<label for="addpage_title">'.$this->get_translation('MetaTitle').':</label><br />';
-			$output .= '<input id="addpage_title" value="'.htmlspecialchars($title).'" size="60" maxlength="100" name="title" /><br />';
+			$output .= '<input id="addpage_title" value="'.htmlspecialchars($title, ENT_COMPAT | ENT_HTML401, $this->charset).'" size="60" maxlength="100" name="title" /><br />';
 		}
 
 		// edit note
@@ -320,7 +320,7 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		{
 			$output .= '<label for="edit_note">'.$this->get_translation('EditNote').':</label><br />';
 			// briefly describe your changes (corrected spelling, fixed grammar, improved formatting)
-			$output .= '<input id="edit_note" maxlength="200" value="'.htmlspecialchars($edit_note).'" size="60" name="edit_note"/>';
+			$output .= '<input id="edit_note" maxlength="200" value="'.htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, $this->charset).'" size="60" name="edit_note"/>';
 			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br />";
 		}
 
@@ -373,14 +373,14 @@ if ($this->has_access('read') && (($this->page && $this->has_access('write')) ||
 		foreach ($words as $id => $word)
 		{
 			$_words[] = '<br /><span class="nobr">&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' />'.
-						'<label for="category'.$id.'"><strong>'.htmlspecialchars($word['category']).'</strong></label></span> ';
+						'<label for="category'.$id.'"><strong>'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, $this->charset).'</strong></label></span> ';
 
 			if (isset($word['childs']) && $word['childs'] == true)
 			{
 				foreach ($word['childs'] as $id => $word)
 				{
 					$_words[] = '<span class="nobr">&nbsp;&nbsp;&nbsp;<input type="checkbox" id="category'.$id.'" name="category'.$id.'|'.$word['parent'].'" value="set"'.( isset($_POST['category'.$id.'|'.$word['parent']]) && $_POST['category'.$id.'|'.$word['parent']] == 'set' ? ' checked="checked"' : '' ).' />'.
-								'<label for="category'.$id.'">'.htmlspecialchars($word['category']).'</label></span> ';
+								'<label for="category'.$id.'">'.htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, $this->charset).'</label></span> ';
 				}
 			}
 		}

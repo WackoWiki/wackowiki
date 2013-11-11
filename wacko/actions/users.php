@@ -18,7 +18,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 	// does requested user exists?
 	if (false == $user = $this->load_user($_REQUEST['profile']))
 	{
-		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_REQUEST['profile']), str_replace('%1', $this->supertag, $this->get_translation('UsersNotFound'))).'</div>';
+		echo '<div class="info">'.str_replace('%2', htmlspecialchars($_REQUEST['profile'], ENT_COMPAT | ENT_HTML401, $this->charset), str_replace('%1', $this->supertag, $this->get_translation('UsersNotFound'))).'</div>';
 	}
 	else
 	{
@@ -169,11 +169,11 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 ?>
 			<br />
 			<?php echo $this->form_open(); ?>
-			<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['user_name']); ?>" />
+			<input type="hidden" name="profile" value="<?php echo htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, $this->charset); ?>" />
 			<?php
 			if (isset($_POST['ref']))
 			{
-				echo '<input type="hidden" name="ref" value="'.htmlspecialchars($_POST['ref']).'" />';
+				echo '<input type="hidden" name="ref" value="'.htmlspecialchars($_POST['ref'], ENT_COMPAT | ENT_HTML401, $this->charset).'" />';
 			}?>
 			<table class="formation">
 <?php
@@ -184,7 +184,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 				<tr>
 					<td class="label" style="width:50px; white-space:nowrap;"><?php echo $this->get_translation('UsersIntercomSubject'); ?>:</td>
 					<td>
-						<input name="mail_subject" value="<?php echo (isset($_POST['mail_subject']) ? htmlspecialchars($_POST['mail_subject']) : ""); ?>" size="60" maxlength="200" />
+						<input name="mail_subject" value="<?php echo (isset($_POST['mail_subject']) ? htmlspecialchars($_POST['mail_subject'], ENT_COMPAT | ENT_HTML401, $this->charset) : ""); ?>" size="60" maxlength="200" />
 						<?php
 						if (isset($_POST['ref']))
 						{
@@ -193,7 +193,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><textarea name="mail_body" cols="80" rows="15"><?php echo (isset($_POST['mail_body']) ? htmlspecialchars($_POST['mail_body']) : ""); ?></textarea></td>
+					<td colspan="2"><textarea name="mail_body" cols="80" rows="15"><?php echo (isset($_POST['mail_body']) ? htmlspecialchars($_POST['mail_body'], ENT_COMPAT | ENT_HTML401, $this->charset) : ""); ?></textarea></td>
 				</tr>
 				<tr>
 					<td><input id="submit" type="submit" name="send_pm" value="<?php echo $this->get_translation('UsersIntercomSend'); ?>" /></td>
@@ -339,12 +339,12 @@ else
 		// goto user profile directly if so desired
 		if (isset($_GET['gotoprofile']) && $this->load_user($_GET['user']) == true)
 		{
-			$this->redirect($this->href('', '', 'profile='.htmlspecialchars($_GET['user'])));
+			$this->redirect($this->href('', '', 'profile='.htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, $this->charset)));
 		}
 		else
 		{
 			$where = "WHERE user_name LIKE '%".quote($this->dblink, $_GET['user'])."%' ";
-			$param = "user=".htmlspecialchars($_GET['user']);
+			$param = "user=".htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, $this->charset);
 		}
 	}
 	else if (isset($_GET['sort']) && $_GET['sort'] == 'name')
@@ -411,7 +411,7 @@ else
 	echo '<table class="formation"><tr><td class="label">';
 	echo $this->form_open('', '', 'get');
 	echo $this->get_translation('UsersSearch').': </td><td>';
-	echo '<input name="user" maxchars="40" size="40" value="'.htmlspecialchars(isset($_GET['user']) ? $_GET['user'] : '').'" /> ';
+	echo '<input name="user" maxchars="40" size="40" value="'.isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, $this->charset) : ''.'" /> ';
 	echo '<input id="submit" type="submit" value="'.$this->get_translation('UsersFilter').'" /> ';
 	echo '<input id="button" type="submit" value="'.$this->get_translation('UsersOpenProfile').'" name="gotoprofile" />';
 	echo $this->form_close();
@@ -450,7 +450,7 @@ else
 		{
 			echo '<tr class="lined">';
 
-			echo	'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($user['user_name']).'').'">'.$user['user_name'].'</a></td>'.
+			echo	'<td style="padding-left:5px;"><a href="'.$this->href('', '', 'profile='.htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML401, $this->charset).'').'">'.$user['user_name'].'</a></td>'.
 					'<td align="center">'.$user['total_pages'].'</td>'.
 					'<td align="center">'.$user['total_comments'].'</td>'.
 					'<td align="center">'.$user['total_revisions'].'</td>'.
