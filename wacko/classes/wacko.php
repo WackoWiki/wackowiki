@@ -4124,12 +4124,15 @@ class Wacko
 	// COMMENTS AND COUNTS
 	// TODO: "AND p.deleted <> '1' "
 	// recount all comments for a given page
-	function count_comments($comment_on_id)
+	function count_comments($comment_on_id, $deleted = 0)
 	{
 		$count = $this->load_single(
 			"SELECT COUNT(tag) AS n ".
 			"FROM {$this->config['table_prefix']}page ".
 			"WHERE comment_on_id = '".quote($this->dblink, $comment_on_id)."' ".
+				($deleted != 1
+					? "AND deleted <> '1' "
+					: "").
 			"LIMIT 1");
 
 		return (int)$count['n'];
@@ -4152,23 +4155,8 @@ class Wacko
 
 			return $count['comments'];
 		}
+
 		return false;
-	}
-
-	// returns latest comment tag for a given page
-	function latest_comment($comment_on_id)
-	{
-		if (comment_on_id) // XXX: for moderation or obsolete function?
-		{
-			$latest = $this->load_single(
-			"SELECT tag ".
-			"FROM {$this->config['table_prefix']}page ".
-			"WHERE comment_on_id = '".quote($this->dblink, $comment_on_id)."' ".
-			"ORDER BY created DESC ".
-			"LIMIT 1");
-		}
-
-		return $latest['tag'];
 	}
 
 	function load_comments($page_id, $limit = 0, $count = 30, $deleted = 0)
