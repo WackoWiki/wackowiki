@@ -83,13 +83,15 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 			$topics = $this->load_single(
 				"SELECT count(a.page_id) as total ".
 				"FROM {$this->config['table_prefix']}page a ".
-				"WHERE a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ", 1);
+				"WHERE a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
+					"AND a.deleted <> '1' ", 1);
 
 			// count total posts
 			$posts = $this->load_single(
 				"SELECT sum(a.comments) as total ".
 				"FROM {$this->config['table_prefix']}page a ".
-				"WHERE a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ", 1);
+				"WHERE a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
+					"AND a.deleted <> '1' ", 1);
 
 			// load latest comment
 			$comment = $this->load_single(
@@ -99,6 +101,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 					"LEFT JOIN ".$this->config['table_prefix']."page b ON (a.comment_on_id = b.page_id) ".
 				"WHERE b.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
 					"OR a.tag LIKE '".quote($this->dblink, $forum['tag'])."/%' ".
+					"AND a.deleted <> '1' ".
 				"ORDER BY a.created DESC ".
 				"LIMIT 1", 1);
 
