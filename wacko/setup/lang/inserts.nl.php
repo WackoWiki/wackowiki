@@ -15,11 +15,6 @@ if ($config['language'] == $lng)
 		// ...
 	}
 
-	#insert_page('GewenstePaginas', 'Gewenste Paginas', '{{wanted}}', $lng, 'Admins', true, false);
-	#insert_page('AlleenstaandePaginas', 'Alleenstaande Paginas', '{{orphaned}}', $lng, 'Admins', true, false);
-	#insert_page('MijnPaginas', 'Mijn Paginas', '{{mypages}}', $lng, 'Admins', true, false);
-	#insert_page('MijnWijzigingen', 'Mijn Wijzigingen', '{{mychanges}}', $lng, 'Admins', true, false);
-
 	insert_page('Category', 'Category', '{{category}}', $lng, 'Admins', false, false);
 	insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
 	insert_page('Groups', 'Groups', '{{groups}}', $lng, 'Admins', false, false);

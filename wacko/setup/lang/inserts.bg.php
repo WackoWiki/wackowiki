@@ -15,11 +15,6 @@ if ($config['language'] == $lng)
 		// ...
 	}
 
-	#insert_page('ПропуснатиСтраници', 'Пропуснати Страници', '{{wanted}}', $lng, 'Admins', true, false);
-	#insert_page('ЗабравениСтраници', 'Забравени Страници', '{{orphaned}}', $lng, 'Admins', true, false);
-	#insert_page('МоиСтраници', 'Мои Страници', '{{mypages}}', $lng, 'Admins', true, false);
-	#insert_page('МоиПромени', 'Мои Промени', '{{mychanges}}', $lng, 'Admins', true, false);
-
 	insert_page('Category', 'Category', '{{category}}', $lng, 'Admins', false, false);
 	insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
 	insert_page('Groups', 'Groups', '{{groups}}', $lng, 'Admins', false, false);
