@@ -15,11 +15,6 @@ if ($config['language'] == $lng)
 		//...
 	}
 
-	#insert_page('WantedPages', 'Wanted Pages', '{{wanted}}', $lng, 'Admins', true, false);
-	#insert_page('OrphanedPages', 'Orphaned Pages', '{{orphaned}}', $lng, 'Admins', true, false);
-	#insert_page('MyPages', 'My Pages', '{{mypages}}', $lng, 'Admins', true, false);
-	#insert_page('MyChanges', 'My Changes', '{{mychanges}}', $lng, 'Admins', true, false);
-
 	insert_page('Category', 'Category', '{{category}}', $lng, 'Admins', false, false);
 	insert_page('Permalink', 'Permalink', '{{permalinkproxy}}', $lng, 'Admins', false, false);
 	insert_page('Groups', 'Groups', '{{groups}}', $lng, 'Admins', false, false);
