@@ -5,13 +5,13 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-function connect($db_host, $db_user, $db_pass, $db_name, $collation = false, $driver, $db_port = '')
+function connect($db_host, $db_user, $db_pass, $db_name, $db_charset = false, $driver, $db_port = '')
 {
 	$dblink = mysqli_connect($db_host, $db_user, $db_pass, $db_name, $db_port);
 
-	if ($collation)
+	if ($db_charset)
 	{
-		mysqli_query($dblink, "SET NAMES '".$collation."'");
+		mysqli_set_charset($dblink, $db_charset);
 	}
 
 	return $dblink;

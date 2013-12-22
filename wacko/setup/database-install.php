@@ -15,11 +15,7 @@ function test($text, $condition, $error_text = '', $dblink = '')
 		{
 			$error_output = "\n<ul class=\"install_error\"><li>".$error_text." <br />";
 
-			if ($config['database_driver'] == 'mysql_legacy')
-			{
-				$error_output .= mysql_error();
-			}
-			/* else if ($config['database_driver'] == 'mysqli_legacy')
+			/* if ($config['database_driver'] == 'mysqli_legacy')
 			{
 				$error_output .= mysqli_error($dblink);
 			} */
@@ -311,7 +307,6 @@ $insert_config = "INSERT INTO ".$config['table_prefix']."config (config_id, conf
 /*
  Setup the tables depending on which database we selected
 
- mysql_legacy
  mysqli_legacy
  or pdo which is the default clause
  */
@@ -341,173 +336,6 @@ if (isset($config['wacko_version']))
 //TODO: if (preg_match('/5\.0\.\d+/i', $version) || $continue == true)
 switch($config['database_driver'])
 {
-	case 'mysql_legacy':
-		require_once('setup/database_mysql.php');
-		require_once('setup/database_mysql_updates.php');
-
-		echo "         <ul>\n";
-
-		if(!test($lang['TestConnectionString'], $dblink = @mysql_connect($config['database_host'].($port == '' ? '' : ':'.$port), $config['database_user'], $config['database_password']), $lang['ErrorDBConnection']))
-		{
-			/*
-			 There was a problem with the connection string
-			 */
-
-			echo "         </ul>\n";
-			echo "         <br />\n";
-
-			$fatal_error = true;
-		}
-		else if(!test($lang['TestDatabaseExists'], @mysql_select_db($config['database_database'], $dblink), $lang['ErrorDBExists']))
-		{
-			/*
-			 There was a problem with the specified database name
-			 */
-
-			echo "         </ul>\n";
-			echo "         <br />\n";
-
-			$fatal_error = true;
-		}
-		else
-		{
-			/*
-			 The connection string and the database name are ok, proceed
-			 */
-			echo "         </ul>\n";
-			echo "         <br />\n";
-
-			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
-			{
-				echo "<h2>".$lang['DeletingTables']."</h2>\n";
-				echo "            <ol>\n";
-				test(str_replace('%1', 'acl', $lang['DeletingTable']), @mysql_query($table_acl_drop, $dblink), str_replace('%1', 'acl', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'menu', $lang['DeletingTable']), @mysql_query($table_menu_drop, $dblink), str_replace('%1', 'menu', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'cache', $lang['DeletingTable']), @mysql_query($table_cache_drop, $dblink), str_replace('%1', 'cache', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'config', $lang['DeletingTable']), @mysql_query($table_config_drop, $dblink), str_replace('%1', 'config', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'usergroup', $lang['DeletingTable']), @mysql_query($table_usergroup_drop, $dblink), str_replace('%1', 'usergroup', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'usergroup_member', $lang['DeletingTable']), @mysql_query($table_usergroup_member_drop, $dblink), str_replace('%1', 'usergroup_member', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'category', $lang['DeletingTable']), @mysql_query($table_category_drop, $dblink), str_replace('%1', 'category', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'category_page', $lang['DeletingTable']), @mysql_query($table_category_page_drop, $dblink), str_replace('%1', 'category_page', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'link', $lang['DeletingTable']), @mysql_query($table_link_drop, $dblink), str_replace('%1', 'link', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'log', $lang['DeletingTable']), @mysql_query($table_log_drop, $dblink), str_replace('%1', 'log', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'page', $lang['DeletingTable']), @mysql_query($table_page_drop, $dblink), str_replace('%1', 'page', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'poll', $lang['DeletingTable']), @mysql_query($table_poll_drop, $dblink), str_replace('%1', 'poll', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'rating', $lang['DeletingTable']), @mysql_query($table_rating_drop, $dblink), str_replace('%1', 'rating', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'referrer', $lang['DeletingTable']), @mysql_query($table_referrer_drop, $dblink), str_replace('%1', 'referrer', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'revision', $lang['DeletingTable']), @mysql_query($table_revision_drop, $dblink), str_replace('%1', 'revision', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'tag', $lang['DeletingTable']), @mysql_query($table_tag_drop, $dblink), str_replace('%1', 'tag', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'tag_page', $lang['DeletingTable']), @mysql_query($table_tag_page_drop, $dblink), str_replace('%1', 'tag_page', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'upload', $lang['DeletingTable']), @mysql_query($table_upload_drop, $dblink), str_replace('%1', 'upload', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'user', $lang['DeletingTable']), @mysql_query($table_user_drop, $dblink), str_replace('%1', 'user', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'user_setting', $lang['DeletingTable']), @mysql_query($table_user_setting_drop, $dblink), str_replace('%1', 'user_setting', $lang['ErrorDeletingTable']));
-				test(str_replace('%1', 'watch', $lang['DeletingTable']), @mysql_query($table_watch_drop, $dblink), str_replace('%1', 'watch', $lang['ErrorDeletingTable']));
-				echo "            <li>".$lang['DeletingTablesEnd']."</li>\n";
-				echo "         </ol>\n";
-				echo "         <br />\n";
-
-				$version = 0;
-			}
-
-			switch ($version)
-			{
-				// new installation
-				case '0':
-					echo "<h2>".$lang['InstallingTables']."</h2>\n";
-					echo "            <ol>\n";
-					test(str_replace('%1', 'acl', $lang['CreatingTable']), @mysql_query($table_acl, $dblink), str_replace('%1', 'acl', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'menu', $lang['CreatingTable']), @mysql_query($table_menu, $dblink), str_replace('%1', 'menu', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'cache', $lang['CreatingTable']), @mysql_query($table_cache, $dblink), str_replace('%1', 'cache', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'config', $lang['CreatingTable']), @mysql_query($table_config, $dblink), str_replace('%1', 'config', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'usergroup', $lang['CreatingTable']), @mysql_query($table_usergroup, $dblink), str_replace('%1', 'usergroup', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'usergroup_member', $lang['CreatingTable']), @mysql_query($table_usergroup_member, $dblink), str_replace('%1', 'usergroup_member', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'category', $lang['CreatingTable']), @mysql_query($table_category, $dblink), str_replace('%1', 'category', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'category_page', $lang['CreatingTable']), @mysql_query($table_category_page, $dblink), str_replace('%1', 'category_page', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'link', $lang['CreatingTable']), @mysql_query($table_link, $dblink), str_replace('%1', 'link', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'log', $lang['CreatingTable']), @mysql_query($table_log, $dblink), str_replace('%1', 'log', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'page', $lang['CreatingTable']), @mysql_query($table_page, $dblink), str_replace('%1', 'page', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'poll', $lang['CreatingTable']), @mysql_query($table_poll, $dblink), str_replace('%1', 'poll', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'rating', $lang['CreatingTable']), @mysql_query($table_rating, $dblink), str_replace('%1', 'rating', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'referrer', $lang['CreatingTable']), @mysql_query($table_referrer, $dblink), str_replace('%1', 'referrer', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'revision', $lang['CreatingTable']), @mysql_query($table_revision, $dblink), str_replace('%1', 'revision', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'tag', $lang['CreatingTable']), @mysql_query($table_tag, $dblink), str_replace('%1', 'tag', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'tag_page', $lang['CreatingTable']), @mysql_query($table_tag_page, $dblink), str_replace('%1', 'tag_page', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'upload', $lang['CreatingTable']), @mysql_query($table_upload, $dblink), str_replace('%1', 'upload', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'user', $lang['CreatingTable']), @mysql_query($table_user, $dblink), str_replace('%1', 'user', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'user_setting', $lang['CreatingTable']), @mysql_query($table_user_setting, $dblink), str_replace('%1', 'user_setting', $lang['ErrorCreatingTable']));
-					test(str_replace('%1', 'watch', $lang['CreatingTable']), @mysql_query($table_watch, $dblink), str_replace('%1', 'watch', $lang['ErrorCreatingTable']));
-
-					test($lang['InstallingSystemAccount'], @mysql_query($insert_system, $dblink), str_replace('%1', 'system account', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingAdmin'], @mysql_query($insert_admin, $dblink), str_replace('%1', 'admin user', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingAdminSetting'], @mysql_query($insert_admin_setting, $dblink), str_replace('%1', 'admin user settings', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingAdminGroup'], @mysql_query($insert_admin_group, $dblink), str_replace('%1', 'admin group', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingAdminGroupMember'], @mysql_query($insert_admin_group_member, $dblink), str_replace('%1', 'admin group member', $lang['ErrorAlreadyExists']));
-
-					test($lang['InstallingEverybodyGroup'], @mysql_query($insert_everybody_group, $dblink), str_replace('%1', 'everybody group', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingRegisteredGroup'], @mysql_query($insert_registered_group, $dblink), str_replace('%1', 'registered group', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingModeratorGroup'], @mysql_query($insert_moderator_group, $dblink), str_replace('%1', 'moderator group', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingReviewerGroup'], @mysql_query($insert_reviewer_group, $dblink), str_replace('%1', 'reviewer group', $lang['ErrorAlreadyExists']));
-
-					echo "            </ol>\n";
-					echo "            <br />\n";
-					echo "            <h2>".$lang['InstallingDefaultData']."</h2>\n";
-					echo "            <ul>\n";
-					echo "               <li>".$lang['InstallingPagesBegin'];
-					require_once('setup/inserts.php');
-					echo "</li>\n";
-					echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
-
-					test($lang['InstallingLogoImage'], @mysql_query($insert_logo_image, $dblink), str_replace('%1', 'logo image', $lang['ErrorAlreadyExists']));
-					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
-
-					break;
-
-					/*
-					 The funny upgrading stuff. Make sure these are in order!
-					 And yes, there are no (switch) breaks here. This is on purpose.
-					 */
-
-
-				// upgrade from R5.0.0 to R5.1.x
-				case '5.0.0':
-					echo "         <h2>Wacko 5.0.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-
-					/* test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_4, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
-					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysql_query($alter_upload_r4_3_5, $dblink), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
- */
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r5_0_1, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r5_0_2, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					echo "            </ol>\n";
-
-				// upgrade from R5.1.0 to R5.1.x
-				case '5.1.0':
-					echo "         <h2>Wacko 5.1.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
-					echo "         <ol>\n";
-
-					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysql_query($update_page_r5_1_0, $dblink), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
-
-					// inserting config values
-					test($lang['InstallingConfigValues'], @mysql_query($insert_config, $dblink), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
-
-					echo "            </ol>\n";
-					echo "            <br />\n";
-					echo "            <h2>".$lang['InstallingDefaultData']."</h2>\n";
-					echo "            <ul>\n";
-					echo "               <li>".$lang['InstallingPagesBegin'];
-					require_once('setup/inserts.php');
-					echo "</li>\n";
-					echo "            <li>".$lang['InstallingPagesEnd']."</li>\n";
-
-			}
-
-			echo "            </ul>\n";
-		}
-
-		break;
-
 	case 'mysqli_legacy':
 		require_once('setup/database_mysql.php');
 		require_once('setup/database_mysql_updates.php');
@@ -681,17 +509,6 @@ switch($config['database_driver'])
 			/* case 'firebird':
 				$dsn = $config['database_driver'].":dbname=".$config['database_host'].":".$config['database_database'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
 				break;
-			case 'ibm':
-				$dsn = $config['database_driver'].":DATABASE=".$config['database_host'].";HOSTNAME=".$config['database_database'].($config['database_port'] != "" ? ";PORT=".$config['database_port'] : "");
-				break;
-			case 'informix':
-				$dsn = $config['database_driver'].":database=".$config['database_host'].";host=".$config['database_database'].($config['database_port'] != "" ? ";service=".$config['database_port'] : "");
-				break;
-			case 'oci':
-				require_once('setup/database_oracle.php');
-				$dsn = $config['database_driver'].":dbname=".$config['database_database'];
-				break;
-			case 'sqlite':
 			case 'sqlite2': */
 			case 'mysql_pdo':
 				require_once('setup/database_mysql.php');
@@ -699,17 +516,12 @@ switch($config['database_driver'])
 
 				if ($config['database_driver'] == 'mysql_pdo')
 				{
-					$config['database_driver'] = 'mysql';
+					#$config['database_driver'] = 'mysql';
 				}
 
-				$dsn = $config['database_driver'].":dbname=".$config['database_database'].";host=".$config['database_host'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
+				$dsn = "mysql:host=".$config['database_host'].($config['database_port'] != '' ? ";port=".$config['database_port'] : '').";dbname=".$config['database_database'].($config['database_charset'] != '' ? ";charset=".$config['database_charset'] : '');
 				break;
-			/* case 'mssql':
-				require_once('setup/database_mysql.php');
-				$dsn = $config['database_driver'].":host=".$config['database_host'].($config['database_port'] != "" ? ",".$config['database_port'] : "").";dbname=".$config['database_database'];
-				print($dsn);
-				break;
-			case 'pgsql':
+			/* case 'pgsql':
 				require_once('setup/database_pgsql.php');
 				$dsn = $config['database_driver'].":dbname=".$config['database_database'].";host=".$config['database_host'].($config['database_port'] != "" ? ";port=".$config['database_port'] : "");
 				break; */

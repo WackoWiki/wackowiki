@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-function connect($db_host, $db_user, $db_pass, $db_name, $collation = false, $driver, $db_port)
+function connect($db_host, $db_user, $db_pass, $db_name, $db_charset = false, $driver, $db_port)
 {
 	$dsn = '';
 
@@ -19,17 +19,8 @@ function connect($db_host, $db_user, $db_pass, $db_name, $collation = false, $dr
 		case "firebird":
 			$dsn = $driver.":dbname=".$db_host.":".$db_name.($db_port != '' ? ";port=".$db_port : '');
 			break;
-		case "ibm":
-			$dsn = $driver.":DATABASE=".$db_host.";HOSTNAME=".$db_name.($db_port != '' ? ";PORT=".$db_port : '');
-			break;
-		case "informix":
-			$dsn = $driver.":database=".$db_host.";host=".$db_name.($db_port != '' ? ";service=".$db_port : '');
-			break;
-		case "oci":
-			$dsn = $driver.":dbname=//".$db_host.($db_port != '' ? ":".$db_port : '')."/".$db_name;
-			break;
 		default:
-			$dsn = $driver.":dbname=".$db_name.";host=".$db_host.($db_port != '' ? ";port=".$db_port : '');
+			$dsn = $driver.":host=".$db_host.($db_port != '' ? ";port=".$db_port : '').";dbname=".$db_name.($db_charset != '' ? ";charset=".$db_charset : '');
 			break;
 	}
 
@@ -40,11 +31,6 @@ function connect($db_host, $db_user, $db_pass, $db_name, $collation = false, $dr
 	catch(PDOException $e)
 	{
 		die('PDO DSN Error: '.$e->getMessage());
-	}
-
-	if ($collation)
-	{
-		$dblink->query("SET NAMES '".$collation."'");
 	}
 
 	return $dblink;

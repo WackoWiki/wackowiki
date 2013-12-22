@@ -15,6 +15,7 @@ $wacko_config_defaults = array(
 	'database_user' => '',
 	'database_password' => '',
 	'database_collation' => 0,
+	'database_charset' => '',
 
 	'table_prefix' => 'wacko_',
 	'cookie_prefix' => 'wacko_',

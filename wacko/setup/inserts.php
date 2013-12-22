@@ -6,6 +6,15 @@ $config_global	= $config;
 $dblink_global	= $dblink;
 $lang_global	= $lang;
 
+// TODO: mysql / mysqli / pdo
+// indicate what character set the client will use to send SQL statements to the server
+switch($config_global['database_driver'])
+{
+	case "mysqli_legacy":
+		mysqli_set_charset($dblink, $config['database_charset']);
+		break;
+}
+
 function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $critical = false, $is_menu = false, $menu_title = false)
 {
 	global $config_global, $dblink_global, $lang_global;
@@ -29,24 +38,6 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 
 	switch($config_global['database_driver'])
 	{
-		case "mysql_legacy":
-			if (0 == mysql_num_rows(mysql_query($page_select, $dblink_global)))
-			{
-				// page
-				mysql_query($page_insert, $dblink_global);
-				// rights
-				mysql_query($perm_read_insert, $dblink_global);
-				mysql_query($perm_write_insert, $dblink_global);
-				mysql_query($perm_comment_insert, $dblink_global);
-				mysql_query($perm_create_insert, $dblink_global);
-				mysql_query($perm_upload_insert, $dblink_global);
-
-				if($is_menu)
-				{
-					mysql_query($default_menu_item, $dblink_global);
-				}
-			}
-			break;
 		case "mysqli_legacy":
 			if (0 == mysqli_num_rows(mysqli_query($dblink_global, $page_select)))
 			{
@@ -88,6 +79,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 					}
 
 					mysqli_query($dblink_global, $perm_upload_insert);
+
 					if(mysqli_errno($dblink_global) != 0)
 					{
 						output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingPageUploadPermission'])." - ".mysqli_error($dblink_global));
@@ -96,6 +88,7 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 					if($is_menu)
 					{
 						mysqli_query($dblink_global, $default_menu_item);
+
 						if(mysqli_errno($dblink_global) != 0)
 						{
 							output_error(str_replace('%1', $tag, $lang_global['ErrorInsertingDefaultMenuItem'])." - ".mysqli_error($dblink_global));
@@ -123,7 +116,9 @@ function insert_page($tag, $title = false, $body, $lng, $rights = 'Admins', $cri
 			{
 				output_error(str_replace('%1', $tag, $lang_global['ErrorPageAlreadyExists']));
 			}
+
 			break;
+
 		default:
 			$page_exists = false;
 

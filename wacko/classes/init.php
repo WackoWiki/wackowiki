@@ -404,7 +404,7 @@ class Init
 		// Load the correct database connector
 		if (!isset( $this->config['database_driver'] ))
 		{
-			$this->settings('database_driver', 'mysql_legacy');
+			$this->settings('database_driver', 'mysqli_legacy');
 		}
 
 		switch($this->config['database_driver'])
@@ -416,7 +416,7 @@ class Init
 				$db_file = 'db/mysqli.php';
 				break;
 			default:
-				$db_file = 'db/mysql.php';
+				$db_file = 'db/mysqli.php';
 				break;
 		}
 
@@ -436,7 +436,7 @@ class Init
 			$db_name = $this->config['database_database'];
 		}
 
-		$this->dblink = connect($this->config['database_host'], $this->config['database_user'], $this->config['database_password'], $this->config['database_database'], $this->config['database_collation'], $this->config['database_driver'], $this->config['database_port']);
+		$this->dblink = connect($this->config['database_host'], $this->config['database_user'], $this->config['database_password'], $this->config['database_database'], $this->config['database_charset'], $this->config['database_driver'], $this->config['database_port']);
 
 		if ($this->dblink)
 		{
