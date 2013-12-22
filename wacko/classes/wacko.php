@@ -81,7 +81,7 @@ class Wacko
 		$this->dblink	= $dblink;
 
 		$this->charset	= $this->get_charset();
-		#$this->charset	= $this->engine->languages[$lang]['charset'];
+		#$this->charset	= "cp1251";
 	}
 
 	// DATABASE
@@ -602,6 +602,7 @@ class Wacko
 		if (isset($this->languages[$lang]['charset']))
 		{
 			#$this->charset	= $this->languages[$lang]['charset'];
+			#$this->debug_print_r($this->languages[$lang]['charset']);
 			return $this->languages[$lang]['charset'];
 		}
 		else
@@ -3079,7 +3080,7 @@ class Wacko
 
 				if (!$text)
 				{
-					$text	= htmlspecialchars($tag, ENT_NOQUOTES, ENT_COMPAT | ENT_HTML401, $this->charset);
+					$text	= htmlspecialchars($tag, ENT_NOQUOTES, $this->charset);
 				}
 
 				if ($this->config['youarehere_text'])

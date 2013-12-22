@@ -48,6 +48,7 @@
 <?php
 
 write_config_hidden_nodes(array(
+	'database_charset' => '',
 	'database_driver' => '',
 	'database_engine' => '',
 	'database_host' => '',
@@ -84,14 +85,11 @@ echo '   <input type="hidden" name="password" value="'.(isset($_POST['password']
  */
 
 $drivers	= array();
-$drivers[]	= array('mysql',	'mysql_legacy',		'MySQL');
+#$drivers[]	= array('mysql',	'mysql_legacy',		'MySQL'); // The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead
 $drivers[]	= array('mysqli',	'mysqli_legacy',	'MySQLi ('.$lang['Recommended'].')');
 $drivers[]	= array('pdo',		'mysql_pdo',		'PDO MySQL');
-// $drivers[]	= array('pdo',		'mssql',		'PDO MS SQL');
 // $drivers[]	= array('pdo',		'pgsql',		'PDO PostgreSQL');
-// $drivers[]	= array('pdo',		'sqlite',		'PDO SQLite');
 // $drivers[]	= array('pdo',		'sqlite2',		'PDO SQLite2');
-// $drivers[]	= array('pdo',		'oci',			'PDO Oracle');
 
 $detected = 0;
 
@@ -117,6 +115,43 @@ for($count = 0; $count < count($drivers); $count++)
    <div class="fake_hr_seperator">
       <hr />
    </div>
+   <h2><?php echo $lang['DBCharset'];?></h2>
+   <p class="notop"><?php echo $lang['DBCharsetDesc']; ?></p>
+   <ul>
+<?php
+/*
+ Each time a new database charset is supported it needs to be added to this list
+ https://dev.mysql.com/doc/refman/5.6/en/charset-charsets.html
+
+ [0]   :  database charset name
+ [1]   :  database charset name to be stored in the config file
+ [2]   :  the name to display in the list here
+ */
+
+$charset	= array();
+$charset[]	= array('utf8', 'utf8', 'UTF-8 Unicode ('.$lang['Recommended'].')');
+$charset[]	= array('cp1251', 'cp1251', 'Windows Cyrillic');
+$charset[]	= array('latin2', 'latin2', 'ISO 8859-2 Central European');
+$charset[]	= array('greek', 'greek', 'ISO 8859-7 Greek');
+
+
+$detected = 0;
+
+echo '    <select id="config[database_charset]" name="config[database_charset]">';
+
+for($count = 0; $count < count($charset); $count++)
+{
+	echo "      <li><option value=\"".$charset[$count][1]."\" ".($config['database_charset'] == $charset[$count][1] ? "selected=\"selected\"" : "").">".$charset[$count][2]."</option></li>\n";
+	$detected++;
+}
+
+echo "    </select>\n";
+?>
+   </ul>
+   <br />
+   <div class="fake_hr_seperator">
+      <hr />
+   </div>
    <h2><?php echo $lang['DBEngine'];?></h2>
    <p class="notop"><?php echo $lang['DBEngineDesc']; ?></p>
    <ul>
@@ -130,8 +165,8 @@ for($count = 0; $count < count($drivers); $count++)
  */
 
 $engines	= array();
-$engines[]	= array('mysql_myisam', 'MyISAM', 'MyISAM ('.$lang['Recommended'].')');
-$engines[]	= array('mysql_innodb', 'InnoDB', 'InnoDB');
+$engines[]	= array('mysql_myisam', 'MyISAM', 'MyISAM');
+$engines[]	= array('mysql_innodb', 'InnoDB', 'InnoDB ('.$lang['Recommended'].')');
 
 $detected = 0;
 

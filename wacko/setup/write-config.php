@@ -44,6 +44,7 @@ if ($config['upload_path'] == 'files')
 ///////////////////////////////////////////////////////////////////////////////////////////
 $config_file['base_url']				= $config['base_url'];
 // database connection
+$config_file['database_charset']		= $config['database_charset'];
 $config_file['database_collation']		= $config['database_collation'];
 $config_file['database_driver']			= $config['database_driver'];
 $config_file['database_engine']			= $config['database_engine'];
