@@ -735,6 +735,23 @@ class Init
 
 				if ($this->config['debug'] >= 3)
 				{
+					$query = 'SHOW VARIABLES LIKE "%character_set%";';
+
+					if ($r = $this->engine->load_all($query))
+					{
+						echo "<p class=\"debug\">MySQL character set</p>\n<ul>\n";
+
+						foreach ($r as $k => $charset_item)
+						{
+							echo "<li>".$charset_item['Variable_name'].": ".$charset_item['Value']."</li>\n";
+						}
+
+						echo "</ul>\n";
+					}
+				}
+
+				if ($this->config['debug'] >= 3)
+				{
 					echo "<p class=\"debug\">Session data</p>\n<ul>\n";
 					echo "<li>session_id(): ".session_id()."</li>\n";
 					echo "<li>Base URL: ".$this->config['base_url']."</li>\n";
