@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, $this->charset); ?> / <?php echo $this->get_page_path(true) ?> (<?php echo $this->get_translation('PrintVersion');?>)</title>
+<title><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?> / <?php echo $this->get_page_path(true) ?> (<?php echo $this->get_translation('PrintVersion');?>)</title>
 <meta name="robots" content="noindex, nofollow" />
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 <meta http-equiv="imagetoolbar" content="no" />
@@ -14,7 +14,7 @@
 <link href="<?php echo $this->config['theme_url'] ?>css/print.css" rel="stylesheet" type="text/css" media="screen, print" />
 <!-- nav destinations -->
 <link rel="start" href="/" />
-<link rel="credits" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, $this->charset); ?>" />
+<link rel="credits" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
 <link rel="prev" href="<?php echo $this->href() ?>" />
 </head>
 <body id="print">

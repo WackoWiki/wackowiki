@@ -82,7 +82,7 @@ if (function_exists('generate_calendar') == false)
 		list($month, $year, $month_name, $weekday) = explode(',', gmstrftime('%m,%Y,%B,%w', $first_of_month));
 
 		$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
-		$title		= htmlentities(ucfirst($month_name), ENT_COMPAT | ENT_HTML401, $this->charset).'&nbsp;'.$year;  // note that some locales don't capitalize month and day names
+		$title		= htmlentities(ucfirst($month_name), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'&nbsp;'.$year;  // note that some locales don't capitalize month and day names
 
 		// Begin calendar. Uses a real <caption>.
 		@list($p, $pl) = each($pn);
@@ -90,15 +90,15 @@ if (function_exists('generate_calendar') == false)
 
 		if($p)
 		{
-			$p = '<span class="calendar-prev">'.($pl ? '<a href="'.htmlspecialchars($pl, ENT_COMPAT | ENT_HTML401, $this->charset).'">'.$p.'</a>' : $p).'</span>&nbsp;';
+			$p = '<span class="calendar-prev">'.($pl ? '<a href="'.htmlspecialchars($pl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$p.'</a>' : $p).'</span>&nbsp;';
 		}
 
 		if($n)
 		{
-			$n = '&nbsp;<span class="calendar-next">'.($nl ? '<a href="'.htmlspecialchars($nl, ENT_COMPAT | ENT_HTML401, $this->charset).'">'.$n.'</a>' : $n).'</span>';
+			$n = '&nbsp;<span class="calendar-next">'.($nl ? '<a href="'.htmlspecialchars($nl, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$n.'</a>' : $n).'</span>';
 		}
 		$calendar = '<table class="calendar">'."\n".
-			'<caption class="calendar-month">'.$p.($month_href ? '<a href="'.htmlspecialchars($month_href, ENT_COMPAT | ENT_HTML401, $this->charset).'">'.$title.'</a>' : $title).$n."</caption>\n<tr>";
+			'<caption class="calendar-month">'.$p.($month_href ? '<a href="'.htmlspecialchars($month_href, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$title.'</a>' : $title).$n."</caption>\n<tr>";
 
 		if($day_name_length)
 		{
@@ -106,7 +106,7 @@ if (function_exists('generate_calendar') == false)
 			// if day_name_length is >3, the full name of the day will be printed
 			foreach($day_names as $d)
 			{
-				$calendar .= '<th abbr="'.htmlentities($d, ENT_COMPAT | ENT_HTML401, $this->charset).'">'.htmlentities(($day_name_length < 4 ? substr($d, 0, $day_name_length) : $d), ENT_COMPAT | ENT_HTML401, $this->charset).'</th>';
+				$calendar .= '<th abbr="'.htmlentities($d, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.htmlentities(($day_name_length < 4 ? substr($d, 0, $day_name_length) : $d), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</th>';
 			}
 
 			$calendar .= "</tr>\n<tr>";
@@ -134,9 +134,9 @@ if (function_exists('generate_calendar') == false)
 					$content  = $day;
 				}
 
-				$calendar .= '<td'.($classes ? ' class="'.htmlspecialchars($classes, ENT_COMPAT | ENT_HTML401, $this->charset).'">' : '>').
+				$calendar .= '<td'.($classes ? ' class="'.htmlspecialchars($classes, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">' : '>').
 					($link
-						? '<a href="'.htmlspecialchars($link, ENT_COMPAT | ENT_HTML401, $this->charset).'">'.$content.'</a>'
+						? '<a href="'.htmlspecialchars($link, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'">'.$content.'</a>'
 						: $content).'</td>';
 			}
 			else

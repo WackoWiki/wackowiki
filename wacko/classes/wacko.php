@@ -848,7 +848,7 @@ class Wacko
 			$meta_keywords .= strtolower(implode(', ', $this->categories));
 		}
 
-		return htmlspecialchars($meta_keywords, ENT_COMPAT | ENT_HTML401, $this->charset);
+		return htmlspecialchars($meta_keywords, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 	}
 
 	function get_description()
@@ -864,7 +864,7 @@ class Wacko
 			$meta_description = $this->config['meta_description'];
 		}
 
-		return htmlspecialchars($meta_description, ENT_COMPAT | ENT_HTML401, $this->charset);
+		return htmlspecialchars($meta_description, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 	}
 
 	// wrapper for old_load_page
@@ -2467,7 +2467,7 @@ class Wacko
 			$text = $this->add_spaces($tag);
 		}
 
-		//$text = htmlentities($text, ENT_COMPAT | ENT_HTML401, $this->charset);
+		//$text = htmlentities($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 		if (isset($_SESSION[$this->config['session_prefix'].'_'.'linktracking']) && $track)
 		{
 			$this->track_link_to($tag);
@@ -2514,7 +2514,7 @@ class Wacko
 
 		if (!$safe)
 		{
-			$text = htmlspecialchars($text, ENT_NOQUOTES, $this->charset);
+			$text = htmlspecialchars($text, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 		}
 
 		if ($link_lang)
@@ -3080,7 +3080,7 @@ class Wacko
 
 				if (!$text)
 				{
-					$text	= htmlspecialchars($tag, ENT_NOQUOTES, $this->charset);
+					$text	= htmlspecialchars($tag, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 				}
 
 				if ($this->config['youarehere_text'])
@@ -3108,7 +3108,7 @@ class Wacko
 			die ("ERROR: no link template '$tpl' found.");
 		}
 
-		if (!$text) $text	= htmlspecialchars($tag, ENT_NOQUOTES, $this->charset);
+		if (!$text) $text	= htmlspecialchars($tag, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 
 		if ($url)
 		{

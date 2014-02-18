@@ -5,7 +5,7 @@
 
 <html>
 <head>
-  <title><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, $this->charset)." : ".(isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></title>
+  <title><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)." : ".(isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></title>
 <?php // do not index alternative print pages
   echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
   <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />

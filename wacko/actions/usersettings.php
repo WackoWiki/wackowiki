@@ -377,7 +377,7 @@ else if ($user = $this->get_user())
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="real_name"><?php echo $this->get_translation('RealName');?></label></th>
-		<td><input id="real_name" name="real_name" value="<?php echo htmlentities($user['real_name'], ENT_COMPAT | ENT_HTML401, $this->charset) ?>" size="40" />
+		<td><input id="real_name" name="real_name" value="<?php echo htmlentities($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />
 		</td>
 	</tr>
 	<tr class="lined">
@@ -386,7 +386,7 @@ else if ($user = $this->get_user())
 	</tr>
 	<tr class="lined">
 		<th class="form_left" scope="row"><label for="email"><?php echo $this->get_translation('YourEmail');?></label></th>
-		<td><input id="email" name="email" value="<?php echo htmlentities($user['email'], ENT_COMPAT | ENT_HTML401, $this->charset) ?>" size="40" />&nbsp;<?php echo $user['email_confirm'] == '' ? '<img src="'.$this->config['base_url'].'images/tick.png" alt="'.$this->get_translation('EmailConfirmed').'" title="'.$this->get_translation('EmailConfirmed').'" width="20" height="20" />' : '<img src="'.$this->config['base_url'].'images/warning.png" alt="'.$this->get_translation('EmailConfirm').'" title="'.$this->get_translation('EmailConfirm').'" width="16" height="16" />' ?>
+		<td><input id="email" name="email" value="<?php echo htmlentities($user['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />&nbsp;<?php echo $user['email_confirm'] == '' ? '<img src="'.$this->config['base_url'].'images/tick.png" alt="'.$this->get_translation('EmailConfirmed').'" title="'.$this->get_translation('EmailConfirmed').'" width="20" height="20" />' : '<img src="'.$this->config['base_url'].'images/warning.png" alt="'.$this->get_translation('EmailConfirm').'" title="'.$this->get_translation('EmailConfirm').'" width="16" height="16" />' ?>
 <?php
 		if (!$user['email'] || $code['email_confirm'])
 			echo "<div class=\"BewareChangeLang\"><strong class=\"cite\">".

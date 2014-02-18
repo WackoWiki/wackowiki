@@ -42,7 +42,7 @@ if ($options['default'] == 'wacko')
 	$text = $text.="\n\n----\n".$this->get_translation('SourceFrom')."((".$options['source']."))";
 
 	// prepare a text to the conclusion
-	$output = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, $this->charset);
+	$output = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 	$output = preg_replace_callback("/^( +)/mi", "formatter_source_callback", $output);
 	$output = $this->format( $output, 'simplebr', null, 0, array('no<p>' => 1) );
 }
@@ -56,7 +56,7 @@ else
 				$this->link($options['source'], '', $this->get_translation('SourceFromLink')).
 				"</p>";
 
-		$output = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, $this->charset);
+		$output = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 		$output = str_replace("\n", "<br />", $output);
 	}
 	else if ($options['default'] == 'simplebr')
@@ -65,7 +65,7 @@ else
 		$text = $text.="\n\n<hr />\n".$this->get_translation('SourceFrom').
 		$this->href($options['source']);
 
-		$output = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, $this->charset);
+		$output = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 	}
 }
 

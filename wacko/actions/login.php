@@ -17,7 +17,7 @@ $user_name = '';
 #if ($this->config['tls'] == true && $this->config['tls_implicit'] == true && ( ($_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || $_SERVER['SERVER_PORT'] != '443' ))
 if ($this->config['tls'] == true && ( (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && empty($this->config['tls_proxy'])) || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '443' ) ))
 {
-	$this->redirect(str_replace('http://', 'https://'.(!empty($this->config['tls_proxy']) ? $this->config['tls_proxy'].'/' : ''), $this->href('', $this->get_translation('LoginPage'), "goback=".stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, $this->charset) )) ));
+	$this->redirect(str_replace('http://', 'https://'.(!empty($this->config['tls_proxy']) ? $this->config['tls_proxy'].'/' : ''), $this->href('', $this->get_translation('LoginPage'), "goback=".stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) )) ));
 }
 
 // actions
@@ -42,7 +42,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout')
 
 	if (!empty($_GET['goback']))
 	{
-		$this->redirect($this->href('', stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, $this->charset)), 'cache='.rand(0,1000)));
+		$this->redirect($this->href('', stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)), 'cache='.rand(0,1000)));
 	}
 	else
 	{
@@ -242,7 +242,7 @@ else
 
 	echo $this->form_open();
 	echo '<input type="hidden" name="action" value="login" />'."\n";
-	echo '<input type="hidden" name="goback" value="'.(isset($_GET['goback']) ? stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, $this->charset)) : '').'" />'."\n";
+	echo '<input type="hidden" name="goback" value="'.(isset($_GET['goback']) ? stripslashes(htmlspecialchars($_GET['goback'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)) : '').'" />'."\n";
 	echo '<p>';
 	echo '<label for="user_name">'.$this->format_translation('LoginName').':</label>';
 	echo '<input id="user_name" name="user_name" size="25" maxlength="25" value="'.(isset($user_name) ? $user_name : '').'" tabindex="1" />'."\n";

@@ -18,17 +18,17 @@ if(isset($vars[0]))
 			$vars['text'] = str_replace('~', $href, $vars['text']);
 		}
 
-		$text = htmlspecialchars($vars['text'], ENT_COMPAT | ENT_HTML401, $this->charset);
+		$text = htmlspecialchars($vars['text'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 	}
 
 	$title = '';
 
 	if(isset($vars['title']))
 	{
-		$title = htmlspecialchars($vars['title'], ENT_COMPAT | ENT_HTML401, $this->charset);
+		$title = htmlspecialchars($vars['title'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 	}
 
-	$href = htmlspecialchars($href, ENT_COMPAT | ENT_HTML401, $this->charset);
+	$href = htmlspecialchars($href, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 	echo "<a name=\"$href\" href=\"#$href\" title=\"$title\">$text</a>\n";
 }
 

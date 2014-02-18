@@ -139,7 +139,7 @@ class GPG
 	// to allow arbitrary commands execution, right?
 	function prepare_input($str, $len = 255)
 	{
-		if (!$str = trim(html_entity_decode($str), ' -')) return '';
+		if (!$str = trim(html_entity_decode($str, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), ' -')) return '';
 		else if (strpos($str, "\n")) return '';
 		else if ($sp = strpos($str, ' ')) $str = substr($str, 0, $sp);
 

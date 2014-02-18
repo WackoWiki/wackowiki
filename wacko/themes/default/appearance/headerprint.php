@@ -4,13 +4,13 @@ header('Content-Type: text/html; charset='.$this->get_charset());
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->page['lang'] ?>" lang="<?php echo $this->page['lang'] ?>">
 <head>
-<title><?php echo htmlspecialchars(($this->config['site_name']).' : '.(isset($this->page['title']) ? $this->page['title'] : $this->tag), ENT_COMPAT | ENT_HTML401, $this->charset); ?></title>
+<title><?php echo htmlspecialchars(($this->config['site_name']).' : '.(isset($this->page['title']) ? $this->page['title'] : $this->tag), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?></title>
 <meta name="robots" content="noindex, nofollow" />
 <meta http-equiv="content-type" content="text/html; charset=<?php echo $this->get_charset(); ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo $this->config['theme_url'] ?>css/print.css" />
 
 <link rel="start" href="/" />
-<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, $this->charset); ?>" />
+<link rel="copyright" href="<?php echo htmlspecialchars($this->href('', $this->config['policy_page']), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
 <link rel="prev" href="<?php echo $this->href() ?>" />
 </head>
 <body id="print">

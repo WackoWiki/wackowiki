@@ -247,7 +247,7 @@ class XML_HTMLSax3_Entities_Parsed {
 	function breakData(&$parser, $data) {
 		$data = preg_split('/(&.+?;)/',$data,-1,PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 		foreach ( $data as $chunk ) {
-			$chunk = html_entity_decode($chunk,ENT_NOQUOTES);
+			$chunk = html_entity_decode($chunk, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 			$this->orig_obj->{$this->orig_method}($this, $chunk);
 		}
 	}

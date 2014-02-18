@@ -3,7 +3,7 @@
  INI formatter by NonTroppo (originally by Rijk van Geijtenbeek)
  */
 
-$text = htmlspecialchars($text, ENT_QUOTES, $this->charset);
+$text = htmlspecialchars($text, ENT_QUOTES, HTML_ENTITIES_CHARSET);
 
 $text = preg_replace("/([=,\|]+)/m","<span style=\"color:#4400DD\">\\1</span>",$text);
 $text = preg_replace("/^([;#].+)$/m","<span style=\"color:#226622\">\\1</span>",$text);

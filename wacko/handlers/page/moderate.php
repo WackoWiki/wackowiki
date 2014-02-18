@@ -331,7 +331,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	// simple and rude input sanitization
 	foreach ($_POST as $key => $val)
 	{
-		$_POST[$key] = htmlspecialchars($val, ENT_COMPAT | ENT_HTML401, $this->charset);
+		$_POST[$key] = htmlspecialchars($val, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 	}
 
 	// IDs PROCESSING (COMMON PROCEDURES)

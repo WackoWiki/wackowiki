@@ -27,7 +27,7 @@ http://openwebdesign.org/userinfo.phtml?user=kpgururaja
 		echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 	}
 	?>
-	<title><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, $this->charset)." : ".(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : ''); ?></title>
+	<title><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)." : ".(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : ''); ?></title>
 	<!-- JavaScript used by WackoWiki -->
 	<?php
 // JS files.
