@@ -114,7 +114,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="email_from"><strong>Sender name of the site owner:</strong><br />
 				<small>The sender name, part of <tt>"From:"</tt> header in emails for all the email-notification site.</small></label></td>
-				<td><input maxlength="100" style="width:200px;" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->config['email_from'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="100" style="width:200px;" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->config['email_from'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -122,7 +122,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="admin_email"><strong>Email of the site owner:</strong><br />
 				<small>This address will appear as the<tt>"From:"</tt> all the email-notification site.</small></label></td>
-				<td><input maxlength="100" style="width:200px;" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->config['admin_email'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="100" style="width:200px;" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->config['admin_email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -130,7 +130,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="abuse_email"><strong>Email service abuse:</strong><br />
 				<small>Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.</small></label></td>
-				<td><input maxlength="100" style="width:200px;" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->config['abuse_email'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="100" style="width:200px;" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->config['abuse_email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -140,7 +140,7 @@ function admin_configemail(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="smtp_host"><strong>SMTP server address:</strong></label></td>
-				<td><input maxlength="50" style="width:200px;" id="smtp_host" name="smtp_host" value="<?php echo htmlspecialchars($engine->config['smtp_host'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="50" style="width:200px;" id="smtp_host" name="smtp_host" value="<?php echo htmlspecialchars($engine->config['smtp_host'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -148,7 +148,7 @@ function admin_configemail(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="smtp_port"><strong>SMTP server port:</strong><br />
 				<small>Only change this if you know your SMTP server is on a different port. (default 25 or 587)</small></label></td>
-				<td><input maxlength="5" style="width:200px;" id="smtp_port" name="smtp_port" value="<?php echo htmlspecialchars($engine->config['smtp_port'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="5" style="width:200px;" id="smtp_port" name="smtp_port" value="<?php echo htmlspecialchars($engine->config['smtp_port'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -170,7 +170,7 @@ function admin_configemail(&$engine, &$module)
 				<td class="label"><label for="smtp_username"><strong>SMTP username:</strong><br />
 				<small>Only enter a username if your SMTP server requires it.</small></label></td>
 				<td>
-					<input maxlength="255" style="width:200px;" id="smtp_username" name="smtp_username" value="<?php echo htmlspecialchars($engine->config['smtp_username'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" />
+					<input maxlength="255" style="width:200px;" id="smtp_username" name="smtp_username" value="<?php echo htmlspecialchars($engine->config['smtp_username'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -181,7 +181,7 @@ function admin_configemail(&$engine, &$module)
 				<small>Only enter a password if your SMTP server requires it.<br />
 				<b>Warning:</b> <em>This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em></small></label></td>
 				<td>
-					<input maxlength="255" style="width:200px;" type="password" id="smtp_password" name="smtp_password" value="<?php echo htmlspecialchars($engine->config['smtp_password'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" />
+					<input maxlength="255" style="width:200px;" type="password" id="smtp_password" name="smtp_password" value="<?php echo htmlspecialchars($engine->config['smtp_password'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
 				</td>
 			</tr>
 

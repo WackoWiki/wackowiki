@@ -142,7 +142,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="username_chars_min"><strong>Username length:</strong><br />
 					<small>Minimum and maximum number of characters in usernames.</small></label></td>
-				<td><input maxlength="3" style="width:30px;" id="username_chars_min" name="username_chars_min" value="<?php echo htmlspecialchars($engine->config['username_chars_min'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /> Min&nbsp;&nbsp;<input maxlength="3" style="width:30px;" id="username_chars_max" name="username_chars_max" value="<?php echo htmlspecialchars($engine->config['username_chars_max'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /> Max</td>
+				<td><input maxlength="3" style="width:30px;" id="username_chars_min" name="username_chars_min" value="<?php echo htmlspecialchars($engine->config['username_chars_min'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /> Min&nbsp;&nbsp;<input maxlength="3" style="width:30px;" id="username_chars_max" name="username_chars_max" value="<?php echo htmlspecialchars($engine->config['username_chars_max'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /> Max</td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -188,7 +188,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label" valign="top"><label for="default_read_acl"><strong>Read rights by default:</strong><br />
 					<small>Typically used for putting the root pages, and pages for which we can not determine parental rights.</small></label></td>
-				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_read_acl" name="default_read_acl"><?php echo htmlspecialchars($engine->config['default_read_acl'], ENT_COMPAT | ENT_HTML401, $engine->charset);?></textarea></td>
+				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_read_acl" name="default_read_acl"><?php echo htmlspecialchars($engine->config['default_read_acl'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -196,7 +196,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label" valign="top"><label for="default_write_acl"><strong>Write rights by default:</strong><br />
 					<small>Typically used for putting the root pages, and pages for which we can not determine the parental rights.</small></label></td>
-				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_write_acl" name="default_write_acl"><?php echo htmlspecialchars($engine->config['default_write_acl'], ENT_COMPAT | ENT_HTML401, $engine->charset);?></textarea></td>
+				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_write_acl" name="default_write_acl"><?php echo htmlspecialchars($engine->config['default_write_acl'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -204,7 +204,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label" valign="top"><label for="default_comment_acl"><strong>Comment rights by default:</strong><br />
 					<small>Typically used for putting the root pages, and pages for which we can not determine the parental rights.</small></label></td>
-				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_comment_acl" name="default_comment_acl"><?php echo htmlspecialchars($engine->config['default_comment_acl'], ENT_COMPAT | ENT_HTML401, $engine->charset);?></textarea></td>
+				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_comment_acl" name="default_comment_acl"><?php echo htmlspecialchars($engine->config['default_comment_acl'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -212,7 +212,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label" valign="top"><label for="default_create_acl"><strong>Create rights of a sub page by default:</strong><br />
 					<small>Define the tolerance for the establishment of root pages and assign pages for which we can not determine the parental rights.</small></label></td>
-				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_create_acl" name="default_create_acl"><?php echo htmlspecialchars($engine->config['default_create_acl'], ENT_COMPAT | ENT_HTML401, $engine->charset);?></textarea></td>
+				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_create_acl" name="default_create_acl"><?php echo htmlspecialchars($engine->config['default_create_acl'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -220,7 +220,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label" valign="top"><label for="default_upload_acl"><strong>Upload rights by default:</strong><br />
 					<small>Typically used for putting the root pages, and pages for which we can not determine parental rights.</small></label></td>
-				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_upload_acl" name="default_upload_acl"><?php echo htmlspecialchars($engine->config['default_upload_acl'], ENT_COMPAT | ENT_HTML401, $engine->charset);?></textarea></td>
+				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="default_upload_acl" name="default_upload_acl"><?php echo htmlspecialchars($engine->config['default_upload_acl'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -228,7 +228,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label" valign="top"><label for="rename_globalacl"><strong>Global rename right:</strong><br />
 					<small>List for admission to the possibility of free rename (move) pages.</small></label></td>
-				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="rename_globalacl" name="rename_globalacl"><?php echo htmlspecialchars($engine->config['rename_globalacl'], ENT_COMPAT | ENT_HTML401, $engine->charset);?></textarea></td>
+				<td><textarea style="font-size:12px; letter-spacing:normal; width:200px; height:50px;" id="rename_globalacl" name="rename_globalacl"><?php echo htmlspecialchars($engine->config['rename_globalacl'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -276,7 +276,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="moders_can_edit"><strong>Term human moderation:</strong><br />
 					<small>Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="moders_can_edit" name="moders_can_edit" value="<?php echo htmlspecialchars($engine->config['moders_can_edit'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="moders_can_edit" name="moders_can_edit" value="<?php echo htmlspecialchars($engine->config['moders_can_edit'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -303,7 +303,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="tls_proxy"><strong>TLS Proxy:</strong><br />
 					<small>Uses the provided TLS Proxy inplace of TLS. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash.</small></label></td>
-				<td><input maxlength="100" style="width:200px;" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->config['tls_proxy'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="100" style="width:200px;" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->config['tls_proxy'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="hl_setting">
 				<th colspan="2">
@@ -325,7 +325,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="x_frame_option"><strong>X-Frame-Options:</strong><br />
 					<small>The X-Frame-Options HTTP response header can be used to indicate whether or not a browser should be allowed to render a page in a &lt;frame&gt; or &lt;iframe&gt;. Use this to avoid clickjacking attacks, by ensuring that the content is not embedded into other sites. frame busting (DENY or SAMEORIGIN).</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="x_frame_option" name="x_frame_option" value="<?php echo htmlspecialchars($engine->config['x_frame_option'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="x_frame_option" name="x_frame_option" value="<?php echo htmlspecialchars($engine->config['x_frame_option'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -333,7 +333,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="x_csp"><strong>X-Content-Security-Policy (CSP):</strong><br />
 					<small>Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using X-Content-Security-Policy to establish your policy.</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="x_csp" name="x_csp" value="<?php echo htmlspecialchars($engine->config['x_csp'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="x_csp" name="x_csp" value="<?php echo htmlspecialchars($engine->config['x_csp'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -343,7 +343,7 @@ function admin_configsecurity(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label"><label for="pwd_min_chars"><strong>Minimum password length:</strong></label></td>
-				<td><input maxlength="3" style="width:200px;" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo htmlspecialchars($engine->config['pwd_min_chars'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="3" style="width:200px;" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo htmlspecialchars($engine->config['pwd_min_chars'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -381,7 +381,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="max_login_attempts"><strong>Maximum number of login attempts per username:</strong><br />
 					<small>The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="max_login_attempts" name="max_login_attempts" value="<?php echo htmlspecialchars($engine->config['max_login_attempts'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="max_login_attempts" name="max_login_attempts" value="<?php echo htmlspecialchars($engine->config['max_login_attempts'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 						<tr class="lined">
 				<td colspan="2"></td>
@@ -389,7 +389,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="ip_login_limit_max"><strong>Maximum number of login attempts per IP address:</strong><br />
 					<small>The threshold of login attempts allowed from a single IP address before an anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered by IP addresses.</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="ip_login_limit_max" name="ip_login_limit_max" value="<?php echo htmlspecialchars($engine->config['ip_login_limit_max'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="ip_login_limit_max" name="ip_login_limit_max" value="<?php echo htmlspecialchars($engine->config['ip_login_limit_max'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -437,7 +437,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="log_purge_time"><strong>Storage time of Log:</strong><br />
 					<small>Remove event log over a given number of days.</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="log_purge_time" name="log_purge_time" value="<?php echo htmlspecialchars($engine->config['log_purge_time'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="log_purge_time" name="log_purge_time" value="<?php echo htmlspecialchars($engine->config['log_purge_time'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="hl_setting">
 				<th colspan="2">
@@ -448,7 +448,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="session_expiration"><strong>Term login cookie:</strong><br />
 					<small>The lifetime of the user cookie login by default (in days).</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="session_expiration" name="session_expiration" value="<?php echo htmlspecialchars($engine->config['session_expiration'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="session_expiration" name="session_expiration" value="<?php echo htmlspecialchars($engine->config['session_expiration'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -456,7 +456,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="comment_delay"><strong>Anti-flood for comments:</strong><br />
 					<small>The minimum delay between the publication of the new user comments (in seconds).</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="comment_delay" name="comment_delay" value="<?php echo htmlspecialchars($engine->config['comment_delay'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="comment_delay" name="comment_delay" value="<?php echo htmlspecialchars($engine->config['comment_delay'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -464,7 +464,7 @@ function admin_configsecurity(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="intercom_delay"><strong>Anti-flood for personal communications:</strong><br />
 					<small>The minimum delay between sending a private message user connection (in seconds).</small></label></td>
-				<td><input maxlength="4" style="width:200px;" id="intercom_delay" name="intercom_delay" value="<?php echo htmlspecialchars($engine->config['intercom_delay'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td><input maxlength="4" style="width:200px;" id="intercom_delay" name="intercom_delay" value="<?php echo htmlspecialchars($engine->config['intercom_delay'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 		</table>
 		<br />

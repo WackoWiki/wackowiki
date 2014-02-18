@@ -64,7 +64,7 @@ function admin_configuploads(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload"><strong>Right to the upload files:</strong><br />
 					<small><tt>"admins"</tt> means that only users belongig to admins group can upload the files. <tt>"1"</tt> means that uploading is opened to everybody. <tt>"0"</tt> means that upload disabled</small></label></td>
-				<td style="width:40%;"><input maxlength="7" style="width:200px;" id="upload" name="upload" value="<?php echo htmlspecialchars($engine->config['upload'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" /></td>
+				<td style="width:40%;"><input maxlength="7" style="width:200px;" id="upload" name="upload" value="<?php echo htmlspecialchars($engine->config['upload'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -80,7 +80,7 @@ function admin_configuploads(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_max_size"><strong>Maximum file size (KiB):</strong><br />
 					<small>Maximum size of each file.</small></label></td>
-				<td><input maxlength="15" size="8" id="upload_max_size" name="upload_max_size" value="<?php echo htmlspecialchars($engine->config['upload_max_size'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" />KiB</td>
+				<td><input maxlength="15" size="8" id="upload_max_size" name="upload_max_size" value="<?php echo htmlspecialchars($engine->config['upload_max_size'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />KiB</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -88,7 +88,7 @@ function admin_configuploads(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_quota"><strong>Total upload quota: (KiB):</strong><br />
 					<small>Maximum drive space available for attachments for the whole engine, with 0 being unlimited.</small></label></td>
-				<td><input maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo htmlspecialchars($engine->config['upload_quota'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" />KiB</td>
+				<td><input maxlength="15" size="8" id="upload_quota" name="upload_quota" value="<?php echo htmlspecialchars($engine->config['upload_quota'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />KiB</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -96,7 +96,7 @@ function admin_configuploads(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="upload_quota_per_user"><strong>Restricting quota of storage per user (KiB):</strong><br />
 					<small>Restriction on the quota of storage that can be uploaded by one user. Zero indicates the absence of restrictions.</small></label></td>
-				<td><input maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo htmlspecialchars($engine->config['upload_quota_per_user'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" />KiB</td>
+				<td><input maxlength="15" size="8" id="upload_quota_per_user" name="upload_quota_per_user" value="<?php echo htmlspecialchars($engine->config['upload_quota_per_user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />KiB</td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -118,7 +118,7 @@ function admin_configuploads(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><strong>Maximum thumbnail width in pixel:</strong><br />
 					<small>A generated thumbnail will not exceed the width set here.</small></td>
-				<td><input maxlength="15" size="7" id="img_max_thumb_width" name="img_max_thumb_width" value="<?php echo htmlspecialchars($engine->config['img_max_thumb_width'], ENT_COMPAT | ENT_HTML401, $engine->charset);?>" />px</td>
+				<td><input maxlength="15" size="7" id="img_max_thumb_width" name="img_max_thumb_width" value="<?php echo htmlspecialchars($engine->config['img_max_thumb_width'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />px</td>
 			</tr>
 
 		</table>
