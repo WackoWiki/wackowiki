@@ -57,9 +57,12 @@ function write_config_hidden_nodes($skip_values)
 
 	$config_parameters = array_diff_key($config, $skip_values, array('aliases' => ''));
 
-	foreach ($config_parameters as $key => $value)
+	if (is_array($config_parameters))
 	{
-		echo '   <input type="hidden" name="config['.$key.']" value="'.$value.'" />' . "\n";
+		foreach ($config_parameters as $key => $value)
+		{
+			echo '   <input type="hidden" name="config['.$key.']" value="'.$value.'" />' . "\n";
+		}
 	}
 }
 
