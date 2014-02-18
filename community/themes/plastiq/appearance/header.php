@@ -13,8 +13,8 @@ require ('themes/_common/_header.php');
 				<tr>
 					<td>
 						<div id="title" style="padding-top:5px;">
-							<h1><a href="<?php echo $this->href('', $this->config['root_page']); ?>"><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, $this->charset); ?></a></h1>
-							<h2><a href="<?php echo $this->href('', $this->config['root_page']); ?>"><?php echo htmlspecialchars($this->config['site_desc'], ENT_COMPAT | ENT_HTML401, $this->charset); ?></a></h2>
+							<h1><a href="<?php echo $this->href('', $this->config['root_page']); ?>"><?php echo htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?></a></h1>
+							<h2><a href="<?php echo $this->href('', $this->config['root_page']); ?>"><?php echo htmlspecialchars($this->config['site_desc'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?></a></h2>
 						</div>
 					</td>
 					<td valign="top">

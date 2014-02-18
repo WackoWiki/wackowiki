@@ -128,7 +128,7 @@ if ($this->user_is_owner() || $this->is_admin() || $this->has_access('write', $t
 		if ($this->config['edit_summary'] != 0)
 		{
 			$output .= "<label for=\"edit_note\">".$this->get_translation('EditNote').":</label><br />";
-			$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, $this->charset)."\" size=\"60\" name=\"edit_note\"/>";
+			$output .= "<input id=\"edit_note\" maxlength=\"200\" value=\"".htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."\" size=\"60\" name=\"edit_note\"/>";
 
 			echo $output;
 		}

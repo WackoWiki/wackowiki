@@ -5,7 +5,7 @@
 */
 
 // TODO: isset($meta_title) ... else ... in common _header.php
-#$meta_title = (isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '')." (@".htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, $this->charset).")";
+#$meta_title = (isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' ('.$this->method.')' : '')." (@".htmlspecialchars($this->config['site_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).")";
 
 require ('themes/_common/_header.php');
 

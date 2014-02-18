@@ -71,7 +71,7 @@ if ($admin)
 }
 
 if (isset($_POST['plural']))				$plural		= $_POST['plural'];
-if (isset($_POST['topic']))					$topic		= htmlspecialchars($_POST['topic'], ENT_COMPAT | ENT_HTML401, $this->charset);
+if (isset($_POST['topic']))					$topic		= htmlspecialchars($_POST['topic'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
 $i = 1;
 
@@ -79,7 +79,7 @@ foreach ($_POST as $key => $value)
 {
 	if (preg_match('/^[0-9]{1,2}$/', $key))
 	{
-		$vars[] = array('v_id' => $i, 'text' => htmlspecialchars($value, ENT_COMPAT | ENT_HTML401, $this->charset));
+		$vars[] = array('v_id' => $i, 'text' => htmlspecialchars($value, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET));
 		$i++;
 	}
 
@@ -266,7 +266,7 @@ else if ($stop_mod !== true)
 	{
 		echo '<tr>';
 			echo '<td class="label">'.$this->get_translation('PollsVariant').' '.$var['v_id'].':</td>';
-			echo '<td><input name="'.$var['v_id'].'" type="text" size="40" maxlength="250" value="'.htmlspecialchars($var['text'], ENT_COMPAT | ENT_HTML401, $this->charset).'" /></td>';
+			echo '<td><input name="'.$var['v_id'].'" type="text" size="40" maxlength="250" value="'.htmlspecialchars($var['text'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'" /></td>';
 		echo '</tr>';
 	}
 

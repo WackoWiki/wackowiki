@@ -129,11 +129,11 @@ for($count = 0; $count < count($drivers); $count++)
  */
 
 $charset	= array();
-$charset[]	= array('utf8', 'utf8', 'UTF-8 Unicode ('.$lang['Recommended'].')');
+# $charset[]	= array('utf8', 'utf8', 'UTF-8 Unicode ('.$lang['Recommended'].')'); // requires unicode ready wiki engine! -> Version 5.5
 $charset[]	= array('cp1251', 'cp1251', 'Windows Cyrillic');
 $charset[]	= array('latin1', 'latin1', 'cp1252 West European');
-$charset[]	= array('latin2', 'latin2', 'ISO 8859-2 Central European');
-$charset[]	= array('greek', 'greek', 'ISO 8859-7 Greek');
+$charset[]	= array('latin2', 'latin2', 'ISO 8859-2 Central European'); // not tested
+$charset[]	= array('greek', 'greek', 'ISO 8859-7 Greek'); // not tested
 
 
 $detected = 0;

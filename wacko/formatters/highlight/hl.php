@@ -18,6 +18,6 @@ if ($options['_default'])
 }
 else
 {
-	echo htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, $this->charset);
+	echo htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 }
 ?>

@@ -120,7 +120,7 @@ if (substr($this->tag, 0, strlen($this->config['forum_cluster'])) == $this->conf
 						( $this->has_access('write', $forum['page_id'], '*') === false ? str_replace('{theme}', $this->config['theme_url'], $this->get_translation('lockicon')) : '' ).
 						( $user['last_mark'] == true && $comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark'] ? '<strong class="cite" title="'.$this->get_translation('ForumNewPosts').'">[updated]</strong> ' : '' ).
 						'<strong>'.$this->link('/'.$forum['tag'], '', $forum['title'], '', 0, '', $_lang).'</strong><br />'.
-						'<small>'.htmlspecialchars($forum['description'], ENT_COMPAT | ENT_HTML401, $this->charset).'</small>'.
+						'<small>'.htmlspecialchars($forum['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</small>'.
 					'</td>'.
 					'<td style="text-align:center" >&nbsp;'.$topics['total'].'&nbsp;&nbsp;</td>'.
 					'<td style="text-align:center" >&nbsp;'.$posts['total'].'&nbsp;&nbsp;</td>';

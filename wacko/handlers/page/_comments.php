@@ -188,7 +188,7 @@ if ($this->has_access('read'))
 				<noscript><div class="errorbox_js"><?php echo $this->get_translation('WikiEditInactiveJs'); ?></div></noscript>
 
 				<label for="addcomment"><?php echo $this->get_translation('AddComment');?></label><br />
-				<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?><?php if (isset($payload)) echo htmlspecialchars($payload, ENT_COMPAT | ENT_HTML401, $this->charset) ?></textarea>
+				<textarea id="addcomment" name="body" rows="6" cols="7" style="width: 100%"><?php if (isset($_SESSION['freecap_old_comment'])) echo $_SESSION['freecap_old_comment']; ?><?php if (isset($payload)) echo htmlspecialchars($payload, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?></textarea>
 
 				<label for="addcomment_title"><?php echo $this->get_translation('AddCommentTitle');?></label><br />
 				<input id="addcomment_title" name="title" size="60" maxlength="100" value="<?php if (isset($title)) echo $title; ?>" /><br />

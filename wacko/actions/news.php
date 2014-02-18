@@ -181,7 +181,7 @@ if (!empty($this->config['news_cluster']))
 					$_category .= ', ';
 				}
 
-				$_category .= '<a href="'.$this->href('', '', 'category='.$category['category_id']).'">' .htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, $this->charset).'</a>';
+				$_category .= '<a href="'.$this->href('', '', 'category='.$category['category_id']).'">' .htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET).'</a>';
 			}
 
 			$_category = !empty($_category) ? $this->get_translation('Category').': '.$_category.' | ' : '';

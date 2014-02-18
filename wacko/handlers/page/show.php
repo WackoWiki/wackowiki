@@ -82,7 +82,7 @@ if ($this->has_access('read'))
 				<?php echo $this->form_open('edit') ?>
 				<input type="hidden" name="previous" value="<?php echo $latest['modified'] ?>" />
 				<input type="hidden" name="id" value="<?php echo $this->page['page_id'] ?>" />
-				<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, $this->charset) ?>" />
+				<input type="hidden" name="body" value="<?php echo htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" />
 				<input type="submit" value="<?php echo $this->get_translation('ReEditOldRevision') ?>" />
 				<input name="cancel" id="button" type="button" value="<?php echo $this->get_translation('EditCancelButton') ?>" onclick="document.location='<?php echo addslashes($this->href()) ?>';" />
 				<?php echo $this->form_close(); ?>

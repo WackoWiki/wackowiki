@@ -138,7 +138,7 @@ echo "         </ul>\n";
 	<?php
 	if($write_file = false)
 	{
-		echo "         <div id=\"config_code\" class=\"config_code\"><pre>".htmlentities($config_code, ENT_COMPAT | ENT_HTML401, $this->charset)."</pre></div>\n";
+		echo "         <div id=\"config_code\" class=\"config_code\"><pre>".htmlentities($config_code, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)."</pre></div>\n";
 	}
 	?>
 <br />
