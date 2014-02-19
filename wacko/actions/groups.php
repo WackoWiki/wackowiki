@@ -29,7 +29,7 @@ if (isset($_REQUEST['profile']) && $_REQUEST['profile'] == true)
 
 		// basic info
 ?>
-		<table cellspacing="3">
+		<table>
 			<tr class="lined">
 				<td class="userprofil"><?php echo $this->get_translation('GroupsDescription'); ?></td>
 				<td><?php echo $usergroup['description']; ?></td>
@@ -204,7 +204,7 @@ else
 	echo '<table class="formation"><tr><td class="label">';
 	echo $this->form_open('', '', 'get');
 	echo $this->get_translation('GroupsSearch').': </td><td>';
-	echo '<input name="group" maxchars="40" size="40" value="'.isset($_GET['group']) ? htmlspecialchars($_GET['group'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''.'" /> ';
+	echo '<input name="group" maxchars="40" size="40" value="'.(isset($_GET['group']) ? htmlspecialchars($_GET['group'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> ';
 	echo '<input id="submit" type="submit" value="'.$this->get_translation('GroupsFilter').'" /> ';
 	echo '<input id="button" type="submit" value="'.$this->get_translation('GroupsOpenProfile').'" name="gotoprofile" />';
 	echo $this->form_close();
