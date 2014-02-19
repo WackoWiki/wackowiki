@@ -411,7 +411,7 @@ else
 	echo '<table class="formation"><tr><td class="label">';
 	echo $this->form_open('', '', 'get');
 	echo $this->get_translation('UsersSearch').': </td><td>';
-	echo '<input name="user" maxchars="40" size="40" value="'.isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''.'" /> ';
+	echo '<input name="user" maxchars="40" size="40" value="'.(isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" /> ';
 	echo '<input id="submit" type="submit" value="'.$this->get_translation('UsersFilter').'" /> ';
 	echo '<input id="button" type="submit" value="'.$this->get_translation('UsersOpenProfile').'" name="gotoprofile" />';
 	echo $this->form_close();
