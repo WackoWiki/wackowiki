@@ -312,7 +312,7 @@ if ($form)
 	echo $this->form_open('', '', 'get');
 
 	echo '<label for="searchfor">'.$this->get_translation('SearchFor').':</label><br />';
-	echo '<input name="phrase" id="searchfor" size="40" value="'.isset($_GET['phrase']) ? htmlspecialchars($_GET['phrase'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ''.'" />';
+	echo '<input name="phrase" id="searchfor" size="40" value="'.(isset($_GET['phrase']) ? htmlspecialchars($_GET['phrase'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '').'" />';
 	echo '<input type="submit" value="'.$this->get_translation('SearchButtonText').'" /><br />';
 
 	if ($options == 1)
