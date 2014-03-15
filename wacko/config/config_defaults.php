@@ -34,9 +34,6 @@ $wacko_config_defaults = array(
 						? ':'.$_SERVER['SERVER_PORT']
 						: ''
 					).
-					// XXX: old version
-					#preg_replace('/(\?|&)installAction=site-config/', '', $_SERVER['REQUEST_URI']),
-					// Fix for bugs#259 and #399 incorrect Path in installer
 					'/'.preg_replace('/\/\//', '\/', trim(strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/'), '/')).'/' ,
 	'rewrite_mode' => ($found_rewrite_extension ? '1' : '0'),
 	'tls' => 0,
