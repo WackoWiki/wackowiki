@@ -350,10 +350,10 @@ class SafeHTML
                     }
                 }
 
-                $tempval = preg_replace('/&#(\d+);?/me', "chr('\\1')", $value); //"'
-                $tempval = preg_replace(
-                    '/&#x([0-9a-f]+);?/mei',
-                    "chr(hexdec('\\1'))",
+                $tempval = preg_replace_callback('/&#(\d+);?/m', function ($matches) { return chr($matches[1]); }, $value); //"'
+                $tempval = preg_replace_callback(
+                	'/&#x([0-9a-f]+);?/mi',
+                	function ($matches) { return chr(hexdec($matches[1])); },
                     $tempval
                 );
 
