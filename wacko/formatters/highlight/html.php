@@ -128,20 +128,28 @@ $xhtml_tags = array(
 
   $source = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
 
-  $source = preg_replace(
-             '/&lt;!--(.*?)--&gt;/es',
-             '"<span style=\"color: ".$options["color"]["comment"].";\">&lt;!--".
-             str_replace("&lt;","&lt;<!-- -->",
-             str_replace("=","=<!-- -->",
-             "$1")).
-             "--&gt;</span>"',
+  $source = preg_replace_callback(
+             '/&lt;!--(.*?)--&gt;/s',
+			function ($matches)
+			{
+				return
+				'"<span style=\"color: ".$options["color"]["comment"].";\">&lt;!--".
+				str_replace("&lt;","&lt;<!-- -->",
+				str_replace("=","=<!-- -->",
+				$matches[1])).
+				"--&gt;</span>"';
+  			},
   $source);
 
-  $source = preg_replace(
-             '/(&lt;style.*?&gt;)(.*?)&lt;\/style&gt;/es',
-             '"$1".
-             $this->format("$2", "highlight/css", array("nopre" => true, "notypo" => false)).
-             "&lt;/style&gt;"',
+  $source = preg_replace_callback(
+             '/(&lt;style.*?&gt;)(.*?)&lt;\/style&gt;/s',
+			function ($matches)
+			{
+				return
+				'$matches[1].
+				$this->format($matches[2], "highlight/css", array("nopre" => true, "notypo" => false)).
+				"&lt;/style&gt;"';
+			},
   $source);
 
   foreach($xhtml_tags as $i)

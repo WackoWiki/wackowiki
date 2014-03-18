@@ -172,7 +172,7 @@ $special_keywords = array(	'color',
 	$css = str_replace("{", "<span style=\"color: ".$options['color']['attributes']."; font-weight: bold;\">{</span>", $css);
 	$css = str_replace("}", "<span style=\"color: ".$options['color']['attributes']."; font-weight: bold;\">}</span>", $css);
 
-	$css = preg_replace('!/\*(.*?)\*/!es', '"<span style=\"color: '.$options['color']['comment'].';\">/*".strip_tags("$1")."*/</span>"', $css);
+	$css = preg_replace_callback('!/\*(.*?)\*/!s', function ($matches) { '"<span style=\"color: '.$options['color']['comment'].';\">/*".strip_tags($matches[1])."*/</span>"'; }, $css);
 
 	$css = str_replace("##oct##", $options['color']['tags'], $css);
 	$css = str_replace("##ocv##", $options['color']['attributevalues'], $css);
