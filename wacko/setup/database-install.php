@@ -477,12 +477,30 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R5.1.0 to R5.1.x
+				// upgrade from R5.1.0 to R5.4.x
 				case '5.1.0':
 					echo "         <h2>Wacko 5.1.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
+					// cache
+					test(str_replace('%1', 'cache', $lang['AlterTable']), @mysqli_query($dblink, $alter_cache_r5_1_0), str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
+
+					// link
+					test(str_replace('%1', 'link', $lang['AlterTable']), @mysqli_query($dblink, $alter_link_r5_1_0), str_replace('%1', 'link', $lang['ErrorAlteringTable']));
+
+					// page
+					test(str_replace('%1', 'page', $lang['AlterTable']), @mysqli_query($dblink, $alter_page_r5_1_0), str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+
 					test(str_replace('%1', 'page', $lang['UpdateTable']), @mysqli_query($dblink, $update_page_r5_1_0), str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
+
+					// revision
+					test(str_replace('%1', 'revision', $lang['AlterTable']), @mysqli_query($dblink, $alter_revision_r5_1_0), str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+
+					// upload
+					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, alter_upload_r5_1_0), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, alter_upload_r5_1_1), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, alter_upload_r5_1_2), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					test(str_replace('%1', 'upload', $lang['AlterTable']), @mysqli_query($dblink, alter_upload_r5_1_3), str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 
 					// inserting config values
 					test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
@@ -640,12 +658,30 @@ switch($config['database_driver'])
 
 					echo "            </ol>\n";
 
-				// upgrade from R5.1.0 to R5.1.x
+				// upgrade from R5.1.0 to R5.4.x
 				case '5.1.0':
 					echo "         <h2>Wacko 5.1.0 ".$lang['To']." ".WACKO_VERSION."</h2>\n";
 					echo "         <ol>\n";
 
+					// cache
+					test_pdo(str_replace('%1', 'cache', $lang['AlterTable']), $alter_cache_r5_1_0, str_replace('%1', 'cache', $lang['ErrorAlteringTable']));
+
+					// link
+					test_pdo(str_replace('%1', 'link', $lang['AlterTable']), $alter_link_r5_1_0, str_replace('%1', 'link', $lang['ErrorAlteringTable']));
+
+					// page
+					test_pdo(str_replace('%1', 'page', $lang['AlterTable']), $alter_page_r5_1_0, str_replace('%1', 'page', $lang['ErrorAlteringTable']));
+
 					test_pdo(str_replace('%1', 'page', $lang['UpdateTable']), $update_page_r5_1_0, str_replace('%1', 'page', $lang['ErrorUpdatingTable']));
+
+					// revision
+					test_pdo(str_replace('%1', 'revision', $lang['AlterTable']), $alter_revision_r5_1_0, str_replace('%1', 'revision', $lang['ErrorAlteringTable']));
+
+					// upload
+					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r5_1_0, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r5_1_1, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r5_1_2, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
+					test_pdo(str_replace('%1', 'upload', $lang['AlterTable']), $alter_upload_r5_1_3, str_replace('%1', 'upload', $lang['ErrorAlteringTable']));
 
 					// inserting config values
 					test_pdo($lang['InstallingConfigValues'], $insert_config, str_replace('%1', 'config values', $lang['ErrorAlreadyExists']));
