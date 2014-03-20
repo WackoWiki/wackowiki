@@ -739,11 +739,12 @@ $wacko_translation = array(
 
 	'RegistrationLang' => 'Dit sprog',
 	'InvalidWikiName' => 'Valgt navn er desværre ikke tilladt',
+	'InvalidUserName' => 'Valgt navn er desværre ikke tilladt',
 	'PleaseLogin' => '((login))',
 	'Bookmarks' => 'Bookmarks',
 	'ReallyDeleteComment' => 'Er du sikker på, at du vil slette kommentaren?',
 	'ForgotLink' => '((/Password Glemt dit password?))',
-	'RegistrationClosed' => 'Registrering ikke mulig. Kontakt JohnGotze.',
+	'RegistrationClosed' => 'Registrering ikke mulig. Kontakt Administrator.',
 	'ACLForCluster' => 'Tilladelser for %1',
 	'ACLAreYouSure' => 'Du ændrer nu adgangstilladelser for denne side og alle dens undersider. Vil du fortsætte?',
 

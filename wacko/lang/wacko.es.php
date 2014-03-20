@@ -739,6 +739,7 @@ $wacko_translation = array(
 
 	'RegistrationLang' => 'Tu idioma',
 	'InvalidWikiName' => 'Este nombre no es válido',
+	'InvalidUserName' => 'Este nombre no es válido',
 	'PleaseLogin' => '((Settings Conectate aqui, por favor))',
 	'Bookmarks' => 'Favoritos',
 	'ReallyDeleteComment' => 'Estás seguro de querer BORRAR el comentario?<br />Esta acción no se puede deshacer!',

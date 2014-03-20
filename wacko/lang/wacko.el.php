@@ -739,6 +739,7 @@ $wacko_translation = array(
 
 	'RegistrationLang' => 'Η γλώσσα σας ',
 	'InvalidWikiName' => 'Το επιλεγμένο όνομα είναι άκυρο',
+	'InvalidUserName' => 'Το επιλεγμένο όνομα είναι άκυρο',
 	'PleaseLogin' => '((Settings Login here,please))',
 	'Bookmarks' => 'Σύνδεσμοι',
 	'ReallyDeleteComment' => 'Θέλετε σίγουρα να διαγράψετε αυτό το σχόλιο;<br />Δεν υπάρχει ενέργεια αναίρεσης για αυτό!',
