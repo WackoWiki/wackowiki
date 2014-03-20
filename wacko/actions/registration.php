@@ -85,9 +85,10 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 
 		if ((!$error) || $this->is_admin() || !$this->config['captcha_registration'])
 		{
-			// strip \-\_\'\.
+			// strip \-\_\'\.\/\\
 			$user_name	= str_replace('-',		'',		$user_name);
 			$user_name	= str_replace('.',		'',		$user_name);
+			#$user_name	= str_replace('/',		'',		$user_name); // TODO: check with valid user name vs strip -> usabilitiy?
 			$user_name = str_replace("'", '', str_replace('\\', '', str_replace('_', '', $user_name)));
 
 			// check if name is WikiName style
@@ -105,10 +106,10 @@ else if (isset($_POST['action']) && $_POST['action'] == 'register')
 				$error .= str_replace('%2', $this->config['username_chars_min'],
 						$this->get_translation('NameTooLong'))." ";
 			}
-			// check if valid user name
-			else if (!preg_match('/^(['.$this->language['ALPHANUM_P'].']+)$/', $user_name))
+			// check if valid user name (and disallow '/')
+			else if (!preg_match('/^(['.$this->language['ALPHANUM_P'].']+)$/', $user_name) || preg_match('/\//', $user_name))
 			{
-				$error .= $this->get_translation('InvalidWikiName')." ";
+				$error .= $this->get_translation('InvalidUserName')." ";
 			}
 			// check if reserved word
 			else if($result = $this->validate_reserved_words($user_name))

@@ -739,7 +739,8 @@ $wacko_translation = array(
 	'ShowFiles?'				=> 'Zeige Dateiliste',
 
 	'RegistrationLang'			=> 'Sprachauswahl',
-	'InvalidWikiName'			=> 'Benutzername ist ungültig',
+	'InvalidWikiName'			=> 'Seitenname ist ungültig',
+	'InvalidUserName'			=> 'Benutzername ist ungültig',
 	'PleaseLogin'				=> '((Einstellungen Bitte hier registrieren))',
 	'Bookmarks'					=> 'Lesezeichen',
 	'ReallyDeleteComment'		=> 'Willst du den Kommentar wirklich löschen?<br />Diese Aktion kann nicht rückgängig gemacht werden!',

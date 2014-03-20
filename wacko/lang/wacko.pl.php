@@ -739,6 +739,7 @@ $wacko_translation = array(
 
 	'RegistrationLang' => 'Twój jêzyk',
 	'InvalidWikiName' => 'Wybrane imiê jest niepoprawne',
+	'InvalidUserName' => 'Wybrane imiê jest niepoprawne',
 	'PleaseLogin' => '((Settings Zaloguj tutaj))',
 	'Bookmarks' => 'Zak³adki',
 	'ReallyDeleteComment' => 'Czy na pewno chcesz USUN¡Æ komentarz??<br />Nie mo¿na tego cofn±æ!',

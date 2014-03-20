@@ -739,6 +739,7 @@ $wacko_translation = array(
 
 	'RegistrationLang'			=> 'O seu idioma',
 	'InvalidWikiName'			=> 'Nome escolhido não é válido',
+	'InvalidUserName'			=> 'Nome escolhido não é válido',
 	'PleaseLogin'				=> '((Settings Login aqui))',
 	'Bookmarks'					=> 'Favoritos',
 	'ReallyDeleteComment'		=> 'Quer mesmo apagar comentário?<br />Depois não poderá voltar atrás!',
